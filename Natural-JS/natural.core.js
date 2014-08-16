@@ -429,6 +429,18 @@
 		            browser: match[ 1 ] || "",
 		            version: match[ 2 ] || "0"
 		        };
+			},
+			scrollbarWidth : function() {
+				var div = $('<div class="antiscroll-inner" style="width:50px;height:50px;overflow-y:scroll;'
+					+ 'position:absolute;top:-200px;left:-200px;"><div style="height:100px;width:100%"/>'
+					+ '</div>');
+
+				$("body").append(div);
+				var w1 = $(div).innerWidth();
+				var w2 = $("div", div).innerWidth();
+				$(div).remove();
+
+				return w1 - w2;
 			}
 		},
 		"message" : {

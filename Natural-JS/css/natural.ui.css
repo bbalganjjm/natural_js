@@ -186,25 +186,39 @@ a.btn_big__, input[type='button'].btn_big__, button.btn_big__ {
 }
 
 /* Grid */
-table.grid thead, table.grid tfoot{
+table.grid__ thead, table.grid__ tfoot{
 	background-color: #efefef;
 }
 
-table.grid tbody{
+table.grid__ tbody{
 	background-color: #ffffff;
 }
 
-table.grid th, table.grid td {
+table.grid__ th, table.grid__ td {
 	border: 1px solid #333333;
 }
 
-table.grid tbody td input[type='text'], table.grid tbody td select, table.grid tbody td textarea {
+table.grid__ tbody td input[type='text'], table.grid__ tbody td select, table.grid__ tbody td textarea {
 	width: 100%;
    	padding-left: 0;
    	padding-right: 0;
+   	border-color: #ffffff;
 }
 
-div.gridWrap div.vResizable {
+table.grid__ tbody td input[type='text']:hover, table.grid__ tbody td select:hover, table.grid__ tbody td textarea:hover,
+table.grid__ tbody td input[type='text']:focus, table.grid__ tbody td select:focus, table.grid__ tbody td textarea:focus {
+	border-color: inherit;
+}
+
+div.grid_wrap__ div.v_resizable__ {
 	height: 3px;
 	border-bottom: 2px double #333333;
+}
+
+div.thead_wrap__ thead th .asc__ {
+	color: blue;
+}
+
+div.thead_wrap__ thead th .desc__ {
+	color: red;
 }

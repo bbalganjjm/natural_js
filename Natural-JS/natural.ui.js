@@ -488,6 +488,7 @@
 				this.options.row = 0;
 				this.options.context = N(opts);
 			}
+			this.options.context.addClass("form__");
 
 			this.revertData = $.extend({}, this.options.data[this.options.row]);
 
@@ -859,6 +860,8 @@
 			} else {
 				this.options.context = N(opts);
 			}
+			this.options.context.addClass("grid__");
+
 			this.revertData = $.extend({}, this.options.data[this.options.row]);
 			this.tbodyTemp = this.options.context.find("> tbody").clone(true, true);
 			this.cellCnt = Grid.cellCnt(this.tbodyTemp);
@@ -868,6 +871,7 @@
 				Grid.fixHeader.call(this);
 			}
 
+			//sortable
 			if (this.options.sortable) {
 				Grid.sort.call(this);
 			}
@@ -924,7 +928,7 @@
 				} else {
 					opts.context.find("tbody").remove();
 					tbodyTempClone = this.tbodyTemp.clone();
-					tbodyTempClone.html('<tr><td class="empty__" align="center" colspan="' + this.cellCnt + '">' + N.message.get(NTR.context.attr("ui")["grid"]["message"], "empty") + '</td></tr>');
+					tbodyTempClone.html('<tr><td class="empty__" align="center" colspan="' + this.cellCnt + '">' + N.message.get(opts.message, "empty") + '</td></tr>');
 					opts.context.append(tbodyTempClone);
 				}
 
@@ -971,11 +975,12 @@
 		        var gridWrap = opts.context.wrap('<div class="grid_wrap__"/>').parent();
 
 		        //Create grid header
+		        var scrollbarWidth = N.browser.scrollbarWidth();
 		        var thead = opts.context.clone(true, true);
 		        thead.find("tbody").remove();
 		        thead.find("tfoot").remove();
 		        var theadWrap = thead.wrap('<div class="thead_wrap__"/>').parent().css({
-		        	"overflow-y" : "scroll"
+		        	"padding-right" : scrollbarWidth + "px"
 		        });
 		        gridWrap.prepend(theadWrap);
 
@@ -1035,7 +1040,7 @@
 			        tfoot.find("thead").remove();
 			        tfoot.find("tbody").remove();
 			        tfootWrap = tfoot.wrap('<div class="tfoot_wrap__"/>').parent().css({
-			        	"overflow-y" : "scroll"
+			        	"padding-right" : scrollbarWidth + "px"
 			        });
 			        gridWrap.append(tfootWrap);
 		        }
@@ -1082,6 +1087,51 @@
         	},
         	sort : function() {
     	        var opts = this.options;
+    	        var thead;
+    	        if (this.options.height > 0) {
+    	        	thead = opts.context.closest("div.grid_wrap__").find("> div.thead_wrap__ thead");
+    	        } else {
+    	        	thead = opts.context.find("thead");
+    	        }
+    	        var theadCells = thead.find("> tr th");
+    	        theadCells.css("cursor", "pointer");
+    	        theadCells.bind("click.grid.sort", function(e) {
+    	        	var currEle = $(this);
+    	        	if (opts.data.length > 0) {
+    	        		if(N.string.trimToNull($(this).text()) != null && $(this).find("input[type='checkbox']").length == 0) {
+    	        			var isAsc = false;
+    	        			if (currEle.find("span.sortable__").hasClass("asc__")) {
+    	        				isAsc = true;
+    	        			}
+    	        			thead.find("span.sortable__").remove();
+    	                    if (isAsc) {
+    	                    	currEle.append('<span class="sortable__ desc__">' + opts.sortableItem.asc + '</span>')
+    	                    } else {
+    	                    	currEle.append('<span class="sortable__ asc__">' + opts.sortableItem.desc + '</span>')
+    	                    }
+
+    	                    /*
+    	                    var fieldName = null;
+    	                    var currCellIndex = $(this).cellPos().left;
+    	                    if($($tbodyTr[currCellIndex]).attr("id")) {
+    	                        fieldName = $($tbodyTr[currCellIndex]).attr("id");
+    	                    } else {
+    	                        if($($tbodyTr[currCellIndex]).children().is(":input")) {
+    	                            fieldName = $($tbodyTr[currCellIndex]).find("*").attr("name");
+    	                        } else {
+    	                            fieldName = $($tbodyTr[currCellIndex]).find("*").attr("id");
+    	                        }
+    	                    }
+    	                    opts.dataList.sort(JSONUtils.sortBy(fieldName, $(this).data("reverse")));
+    	                    currCellIndex = null;
+    	                    fieldName = null;
+
+    	                    $(this).data("reverse", !$(this).data("reverse"));
+    	                    this_.bindDataList({ action : "sortable" });
+    	                    */
+    	        		}
+    	        	}
+    	        });
 
     	        /*
     	        var $tbodyTr = opts.container.find("tbody").find("tr").children();
@@ -1094,7 +1144,7 @@
 
     	        $theadCells.click(function(e) {
     	            if (opts.dataList != null && opts.dataList.length > 0) {
-    	                if(StringUtils.trimToNull($(this).text()) != null && $(this).find("input[type='checkbox']").size() == 0) {
+    	                if(N.string.trimToNull($(this).text()) != null && $(this).find("input[type='checkbox']").size() == 0) {
     	                    $thead.find("span.sortableAsc, span.sortableDesc").remove();
     	                    var $titleBox = $(this);
     	                    if($(this).find("div.resizeText").size() > 0) {

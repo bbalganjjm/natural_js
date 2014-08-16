@@ -317,6 +317,24 @@
 			"scrollPaging" : {
 				"size" : 100
 			},
+			/**
+			 * 세로 길이조절 기능 활성화 여부
+			 */
+			"vResizable" : false,
+			/**
+			 * 소트 기능 활성화 여부
+			 */
+			"sortable" : false,
+			/**
+			 * 소트기능 활설화 시 표시 구분자(html 태그 가능)
+			 */
+			"sortableItem" : {
+				"asc" : "▼",
+				"desc" : "▲"
+			},
+			/**
+			 * Grid 에서 사용 할 메시지 다국어 처리
+			 */
 			"message" : {
 				"ko_KR" : {
 					"empty" : "조회를 하지 않았거나 조회된 데이터가 없습니다.",
