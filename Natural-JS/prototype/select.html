@@ -1,0 +1,124 @@
+<div id="select">
+	<div class="divBar">DATA</div>
+	<div class="dataBox">
+		<table>
+			<tr>
+				<td width="70"><label for="data">Data</label></td>
+				<td width="*">
+					<textarea id="data" class="data">
+[
+    {
+        "numeric": 266734.12,
+        "generic": "abcDefGh",
+        "limit": "안녕하세요. 반가워요. 저는 Natural-JS 입니다.",
+        "etc": 20140626121212
+    },
+    {
+        "numeric": 123334424.3533,
+        "generic": "ijkLMNop",
+        "limit": "Natural-JS 좋아요?",
+        "etc": 20140626121212
+    },
+    {
+        "numeric": 32434.423,
+        "generic": "lkjfkweisc",
+        "limit": "음.....",
+        "etc": 2453532
+    }
+]
+					</textarea>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div class="divBar">DEMO</div>
+	<div class="demoBox">
+		<div class="btnBox">
+			<a id="btnSelect" href="#" class='{ "size": "small" }'>Select</a>
+			<a id="btnSelectMulty" href="#" class='{ "size": "small" }'>Multy Select</a>
+			<a id="btnRadio" href="#" class='{ "size": "small" }'>Radio</a>
+			<a id="btnCheckBox" href="#" class='{ "size": "small" }'>CheckBox</a>
+		</div>
+		<table id="inputBox">
+			<tr>
+				<td width="70"><label for="select">Select</label></td>
+				<td width="*">
+					<select id="select">
+						<option>선택</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td><label for="selectMulty">Select Multy</label></td>
+				<td>
+					<select id="selectMulty" multiple="multiple"></select>
+				</td>
+			</tr>
+			<tr>
+				<td><label for="radio">Radio</label></td>
+				<td>
+					<input id="radio" type="radio" />
+				</td>
+			</tr>
+			<tr>
+				<td><label for="checkbox">Checkbox</label></td>
+				<td>
+					<input id="checkbox" type="checkbox" />
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<div class="divBar">SOURCE</div>
+	<div class="sourceBox">
+	</div>
+</div>
+
+<script type="text/javascript">
+
+N("div#select").service({
+    init : function() {
+    	var vc = this.view.context;
+
+    	this.initButton();
+
+    	var data = eval(N("textarea.data").val());
+		var select = $(data).select("select#select");
+		var selectMulty = $(data).select("select#selectMulty");
+		var radio = $(data).select({
+			context : "input#radio",
+			direction : "v"
+		});
+		var checkbox = $(data).select({
+			context : "input#checkbox",
+			key : "limit"
+		});
+
+        N("a#btnSelect", vc).click(function(e) {
+            e.preventDefault();
+            select.bind().val("266734.12");
+        });
+
+        N("a#btnSelectMulty", vc).click(function(e) {
+        	e.preventDefault();
+        	selectMulty.bind();
+        });
+
+        N("a#btnRadio", vc).click(function(e) {
+        	e.preventDefault();
+        	radio.bind();
+        });
+
+        N("a#btnCheckBox", vc).click(function(e) {
+        	e.preventDefault();
+        	checkbox.bind();
+        });
+
+        return this;
+    },
+    initButton : function() {
+    	N("div.btnBox").button();
+    }
+}).init();
+
+</script>

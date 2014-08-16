@@ -1,0 +1,119 @@
+<div id="grid">
+	<div class="divBar">DATA</div>
+	<div class="dataBox">
+		<table>
+			<tr>
+				<td width="70"><label for="data">Data</label></td>
+				<td width="*">
+					<textarea id="data" class="data">
+[
+  {
+    "_id": "53e21cba9f982281b3459438",
+    "index": 0,
+    "guid": "1a9e5450-c664-4bfd-8174-d03005eca08d",
+    "isActive": "Y",
+    "balance": "$1,284.38",
+    "picture": "http://placehold.it/32x32",
+    "age": 26,
+    "eyeColor": "green",
+    "name": "Dean Stanley",
+    "gender": "male",
+    "company": "ZENTIA",
+    "email": "deanstanley@zentia.com",
+    "phone": "+1 (920) 409-2680",
+    "address": "936 Meserole Street, Vicksburg, Massachusetts, 1198",
+    "about": "Mollit elit qui reprehenderit fugiat excepteur adipisicing sunt id proident laborum sint proident. Amet cupidatat ipsum do irure qui magna sunt pariatur commodo eiusmod ipsum qui ad culpa. Nisi tempor cupidatat do tempor reprehenderit irure consectetur cupidatat deserunt fugiat. Ipsum sint id ipsum voluptate duis laboris esse sunt nisi mollit dolore cupidatat.\r\n",
+    "registered": "2014-02-20T03:58:09 -09:00",
+    "latitude": 81.131606,
+    "longitude": 87.110498,
+    "greeting": "Hello, Dean Stanley! You have 1 unread messages.",
+    "favoriteFruit": "strawberry"
+  },.............
+					</textarea>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div class="divBar">DEMO</div>
+	<div class="demoBox">
+		<div class="btnBox">
+			<a id="btnGridBind" href="#" class='{ "color": "skyblue", "size": "small" }'>Grid Bind</a>
+		</div>
+		<table id="grid" class="grid">
+			<thead>
+				<tr>
+					<th width="30">index</th>
+					<th width="40">picture</th>
+					<th width="100">name</th>
+					<th width="120">email</th>
+					<th width="40">gender</th>
+					<th width="30">age</th>
+					<th width="50">eyeColor</th>
+					<th width="*">company</th>
+					<th width="40">isActive</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td id="index"></td>
+					<td align="center"><img id="picture" height="30" /></td>
+					<td id="name"></td>
+					<td><input id="email" type="text" class='{ "validate" : [["required"], ["email"]] }' /></td>
+					<td id="gender" align="center"></td>
+					<td><input id="age" type="text" class='{ "validate" : [["required"], ["integer"]] }' /></td>
+					<td><input id="eyeColor" type="text" /></td>
+					<td><input id="company" type="text" /></td>
+					<td align="center"><input id="isActive" type="checkbox" /></td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="9" align="center"></td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+
+	<div class="divBar">SOURCE</div>
+	<div class="sourceBox">
+	</div>
+</div>
+
+<script type="text/javascript">
+
+N("div#grid").service({
+	grid : null,
+    init : function() {
+    	var vc = this.view.context;
+
+    	this.initButton();
+    	//this.createSelect(data);
+
+    	this.grid = N([]).grid({
+    		context : N("table#grid"),
+    		height : 300,
+    		vResizable : true,
+    		sortable : true
+    	}).bind();
+
+    	this.setEvents();
+        return this;
+    },
+    createSelect : function(data) {
+    	// $(data).select("select#select").bind();
+    },
+    initButton : function() {
+    	N("div.btnBox").button();
+    },
+    setEvents : function() {
+    	var this_ = this;
+    	N("a#btnGridBind").click(function(e) {
+            e.preventDefault();
+            N.controller("prototype/grid_big.json").submit(function(data) {
+        		this_.grid.bind(data);
+        	});
+        });
+    }
+}).init();
+
+</script>

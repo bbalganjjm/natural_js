@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge; text/html; charset=utf-8" />
+<title>Natual-JS</title>
+<link rel="stylesheet" type="text/css" href="css/demo.common.css" />
+<script type="text/javascript" charset="utf-8" src="lib/jquery-1.11.1.js"></script>
+<script type="text/javascript" charset="utf-8" src="natural.core.js"></script>
+<script type="text/javascript" charset="utf-8" src="natural.architecture.js"></script>
+<script type="text/javascript" charset="utf-8" src="natural.data.js"></script>
+<script type="text/javascript" charset="utf-8" src="natural.ui.js"></script>
+<link rel="stylesheet" type="text/css" href="css/natural.ui.css" />
+<script type="text/javascript" charset="utf-8" src="natural.config.js"></script>
+
+<script type="text/javascript">
+var IndexServiceController = {
+    init : function() {
+    	NTR("a#btnController").click(function(e) {
+		    e.preventDefault();
+		    NTR("div#contents").controller("prototype/controller.html").submit();
+	    });
+
+	    NTR("a#btnFormater").click(function(e) {
+		    e.preventDefault();
+		    NTR("div#contents").controller("prototype/formater.html").request.attr("aa", [{}, {}, {}]).submit();
+	    });
+
+	    NTR("a#btnValidator").click(function(e) {
+            e.preventDefault();
+            NTR("div#contents").controller("prototype/validator.html").submit();
+        });
+
+	    NTR("a#btnAlert").click(function(e) {
+		   e.preventDefault();
+		   NTR("div#contents").controller("prototype/alert.html").submit();
+	    });
+
+	    NTR("a#btnButton").click(function(e) {
+		   e.preventDefault();
+		   NTR("div#contents").controller("prototype/button.html").submit();
+	    });
+
+	    NTR("a#btnSelect").click(function(e) {
+		   e.preventDefault();
+		   NTR("div#contents").controller("prototype/select.html").submit();
+	    });
+
+	    NTR("a#btnForm").click(function(e) {
+		   e.preventDefault();
+		   NTR("div#contents").controller("prototype/form.html").submit();
+	    });
+
+	    NTR("a#btnGrid").click(function(e) {
+		   e.preventDefault();
+		   NTR("div#contents").controller("prototype/grid.html").submit();
+	    });
+    }
+}
+$(document).ready(function() {
+    IndexServiceController.init();
+});
+</script>
+
+</head>
+<body>
+<div id="header">
+	<span id="logo">Natural-JS</span>
+</div>
+<div id="bottom">
+	<div id="lnb">
+		<div class="bar">Natural-ARCHITECTUR</div>
+		<ul>
+			<li><a id="btnController" href="#">@ Controller</a></li>
+	    </ul>
+		<div class="bar">Natural-DATA</div>
+		<ul>
+			<li><a id="btnFormater" href="#">@ Formater</a></li>
+	    	<li><a id="btnValidator" href="#">@ Validator</a></li>
+	    </ul>
+	    <div class="bar">Natural-UI</div>
+		<ul>
+			<li><a id="btnAlert" href="#">@ Alert</a></li>
+	    	<li><a id="btnButton" href="#">@ Button</a></li>
+	    	<li><a id="btnSelect" href="#">@ Select</a></li>
+	    	<li><a id="btnForm" href="#">@ Form</a></li>
+	    	<li><a id="btnGrid" href="#">@ Grid</a></li>
+	    	<li><a id="btnPopup" href="#">@ Popup</a></li>
+	    	<li><a id="btnTab" href="#">@ Tab</a></li>
+	    	<li><a id="btnDate" href="#">@ Date</a></li>
+	    	<li><a id="btnMonth" href="#">@ Month</a></li>
+	    </ul>
+	</div>
+	<div id="main"><div id="contents"></div></div>
+</div>
+</body>
+</html>

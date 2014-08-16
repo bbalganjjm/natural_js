@@ -1,0 +1,183 @@
+@charset "utf-8";
+
+html, body {
+	height: 100%;
+	background-color: #006600;
+}
+
+body, pre, textarea, select {
+    margin: 0;
+    font-size: 12px;
+	font-family: "맑은 고딕", "dotum", "Segoe UI", sans-serif;
+	color: #002200;
+}
+
+input, select, textarea, pre.data, div.data {
+	border-radius: 3px;
+	padding: 3px 3px;
+	border: 1px solid #555555;
+	font-size: 12px;
+	font-family: "맑은 고딕", "dotum", "Segoe UI", sans-serif;
+	color: #002200;
+}
+
+a {
+	font-size: 12px;
+	text-decoration: none;
+}
+
+pre {
+	margin-bottom: 15px;
+}
+
+pre, textarea {
+	margin-left: 2px;
+}
+
+div.data {
+	margin-bottom: 15px;
+}
+
+input[type='text'], input[type='password']  {
+	height: 18px;
+	line-height: 16px;
+	vertical-align: middle;
+}
+
+div#header {
+    margin-left: auto;
+    margin-right: auto;
+    width: 95%;
+	max-width: 1200px;
+    padding: 10px;
+}
+
+div#header span#logo {
+	font-size: 32px;
+	color: #99cc66;
+	font-weight: bold;
+}
+
+div#bottom {
+	padding: 5px;
+	margin: 0 auto 5px auto;
+	width: 95%;
+	max-width: 1200px;
+	background-color: #99ff99;
+	border-radius : 7px;
+	box-shadow: 3px 3px 1px #336600;
+	behavior: url("/lib/PIE_uncompressed.htc")\9;
+}
+
+div#bottom div#lnb {
+	float: left;
+	height: 100%;
+	width: 120px;
+	height: 100%;
+	border-radius : 7px 0 0 7px;
+	behavior: url("/lib/PIE_uncompressed.htc")\9;
+}
+
+div#bottom div#lnb .bar {
+	background-color: #00cc66;
+	color: #99ff99;
+	margin-right: 5px;
+	padding: 5px;
+	border-radius : 3px;
+	behavior: url("/lib/PIE_uncompressed.htc")\9;
+}
+
+div#bottom div#lnb ul {
+	margin: 5px;
+	padding: 0;
+	overflow: hidden;
+}
+
+div#bottom div#lnb ul li {
+	margin: 1px 0 1px 0;
+	padding: 0;
+}
+
+div#bottom div#lnb ul a {
+	text-decoration: none;
+	font-size: 15px;
+	color: #006600;
+	font-weight: bold;
+	line-height: 28px;
+}
+
+div#main {
+	margin-left: 120px;
+	height: 100%;
+    min-height: 300px;
+    border-radius : 0 7px 7px 0;
+	behavior: url("/lib/PIE_uncompressed.htc")\9;
+}
+
+div#main div#contents {
+	min-height: 480px;
+	padding: 1px 0 1px 0;
+	height: 100%;
+	background-color: #ffffff;
+	border-radius : 0 5px 5px 0;
+	behavior: url("/lib/PIE_uncompressed.htc")\9;
+	line-height: 20px;
+}
+
+table {
+	width: 100%;
+	padding: 0;
+	margin: 0 0 15px 0;
+	border-collapse: collapse;
+}
+
+table td, table th {
+	padding: 5px;
+}
+
+label {
+	color: #006600;
+	font-weight: bold;
+}
+
+.data {
+	width: 100%;
+	height: 200px;
+}
+
+.btnBox {
+	margin: 0 0 15px 0;
+}
+
+.btnBox a {
+	margin: 0 10px;
+}
+
+.divBar {
+	background: linear-gradient(left, #99ff99, #ffffff);
+	background: -ms-linear-gradient(left, #99ff99, #ffffff);
+	background: -moz-linear-gradient(left, #99ff99, #ffffff);
+	background: -o-linear-gradient(left, #99ff99, #ffffff);
+	background: -webkit-linear-gradient(left, #99ff99, #ffffff);
+	background-color : #ffffff;
+	color: #007700;
+	font-weight: bold;
+	margin: 0 0 15px 0;
+	border-left: 5px solid #555555;
+	padding: 1px 5px;
+}
+
+.dataBox {
+	padding: 10px;
+	width: 97%;
+}
+
+.demoBox {
+	padding: 10px;
+	width: 97%;
+}
+
+.sourceBox {
+	padding: 10px;
+	width: 97%;
+}

@@ -1,0 +1,74 @@
+<div id="button">
+	<div class="divBar">DEMO</div>
+	<div class="demoBox">
+		<div class="btnBox">
+			<a id="btnDeclarative" href="#" class='{ "color": "gray", "size": "small" }'>버튼(명령형)</a>
+			<a id="btnCommand" href="#" class='{ "color": "skyblue", "size": "small" }'>버튼(실행형)</a>
+			<a id="btnDisable" href="#" class='{ "color": "white", "size": "small" }'>비활성</a>
+			<a id="btnEnable" href="#" class='{ "color": "white", "size": "small" }'>활성</a>
+		</div>
+		<div class="data">
+			<input id="btn1" type="button" value="INPUT BUTTON" class='{ "color" : "blue", "size" : "big" }' /> &lt;input type=button/&gt;
+			<br/><br/>
+			<button id="btn2" class='{ "color" : "white", "size" : "large", "disable": true }'>BUTTON</button> &lt;button disable/&gt;
+			<br/><br/>
+			<a id="btn3"class='{ "color" : "skyblue", "size" : "smaller" }'>A TAG</a> &lt;a/&gt;
+		</div>
+	</div>
+
+	<div class="divBar">SOURCE</div>
+	<div class="sourceBox">
+	</div>
+</div>
+
+<script type="text/javascript">
+
+N("div#button").service({
+    init : function() {
+    	var vc = this.view.context;
+
+    	this.initButton();
+
+        N("a#btnDeclarative", vc).click(function(e) {
+            e.preventDefault();
+			N("div.data").button();
+        });
+
+        N("a#btnCommand", vc).click(function(e) {
+            e.preventDefault();
+			N("#btn1").button({
+				color : "skyblue",
+				size : "medium"
+			});
+			N("#btn2").button({
+				color : "gray",
+				size : "small"
+			});
+			N("#btn3").button({
+				color : "blue",
+				size : "large"
+			});
+        });
+
+        N("a#btnDisable", vc).click(function(e) {
+            e.preventDefault();
+            N("div.data").find("a, button, input[type='button']").instance("button", function(u) {
+            	this.disable();
+            });
+        });
+
+        N("a#btnEnable", vc).click(function(e) {
+            e.preventDefault();
+            N("div.data").find("a, button, input[type='button']").instance("button", function() {
+            	this.enable();
+            });
+        });
+
+        return this;
+    },
+    initButton : function() {
+    	N("div.btnBox").button();
+    }
+}).init();
+
+</script>

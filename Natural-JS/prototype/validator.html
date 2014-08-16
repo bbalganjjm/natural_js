@@ -1,0 +1,104 @@
+<div id="validator">
+	<div class="divBar">DATA</div>
+	<div class="dataBox">
+		<table>
+			<tr>
+				<td width="70"><label for="data">Data</label></td>
+				<td width="*">
+					<textarea id="data" class="data">
+[
+    {
+        "numeric": 266734.12,
+        "generic": "abcDefGh",
+        "limit": "안녕하세요. 반가워요. 저는 Natural-JS 입니다.",
+        "etc": null
+    },
+    {
+        "numeric": 123334424.3533,
+        "generic": "ijkLMNop",
+        "limit": "Natural-JS 좋아요?",
+        "etc": 1
+    }
+]
+					</textarea>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<div class="divBar">DEMO</div>
+	<div class="demoBox">
+		<div class="btnBox">
+			<a id="btnValidateCommand" href="#" class='{ "color": "gray", "size": "small" }'>Validate(명령형)</a>
+			<a id="btnValidateDeclarative" href="#" class='{ "color": "skyblue", "size": "small" }'>Validate(선언형)</a>
+		</div>
+
+		<table id="inputBox">
+			<tr>
+				<td width="70"><label for="numeric">Input 1</label></td>
+				<td width="*">
+					<input id="numeric" type="text" class='{ "validate" : [["required"], ["number"]] }' /> class='{ "validate" : [["required"], ["integer+commas"]] }'
+				</td>
+			</tr>
+			<tr>
+				<td><label for="generic">Input 2</label></td>
+				<td>
+					<input id="generic" type="text" class='{ "validate" : [["required"], ["korean"]] }' /> class='{ "validate" : [["required"], ["korean"]] }'
+				</td>
+			</tr>
+			<tr>
+				<td><label for="limit">Input 3</label></td>
+				<td>
+					<textarea id="limit" rows="5" cols="40" class='{ "validate" : [["required"], ["alphabet"]] }'></textarea>
+					class='{ "validate" : [["required"], ["alphabet"]] }'
+				</td>
+			</tr>
+			<tr>
+				<td><label for="etc">etc</label></td>
+				<td>
+					<input id="etc" type="text" />
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<div class="divBar">SOURCE</div>
+	<div class="sourceBox">
+	</div>
+</div>
+
+<script type="text/javascript">
+
+N("div#validator").service({
+    init : function() {
+    	var vc = this.view.context;
+
+    	this.initButton();
+
+        N("a#btnValidateCommand", vc).click(function(e) {
+            e.preventDefault();
+
+            var data = eval(N("textarea.data").val());
+
+            var pData = JSON.stringify(N(data).validator({
+                "numeric" : [ [ "required" ], [ "integer+commas" ] ],
+                "generic" : [ [ "required" ], [ "korean" ] ],
+                "limit" : [ [ "required" ], [ "alphabet" ] ]
+            }).validate());
+
+            N("textarea.data", vc).val(N.json.format(pData));
+        });
+
+        N("a#btnValidateDeclarative", vc).click(function(e) {
+            e.preventDefault();
+            N().validator(N("#inputBox", vc)).validate();
+        });
+
+        return this;
+    },
+    initButton : function() {
+    	N("div.btnBox").button();
+    }
+}).init();
+
+</script>

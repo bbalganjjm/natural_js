@@ -1,0 +1,210 @@
+@charset "utf-8";
+/* Alert global message */
+div.block_overlay__ {
+	background-color: #000000 !important;
+	opacity: 0.75;
+	filter: alpha(opacity=65)\9;
+}
+
+span.block_overlay_msg__ {
+	background-image: -ms-linear-gradient(top, #FFFFFF 0%, #D7FFFF 100%);
+	background-image: -moz-linear-gradient(top, #FFFFFF 0%, #D7FFFF 100%);
+	background-image: -o-linear-gradient(top, #FFFFFF 0%, #D7FFFF 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FFFFFF), color-stop(1, #D7FFFF));
+	background-image: -webkit-linear-gradient(top, #FFFFFF 0%, #D7FFFF 100%);
+	background-image: linear-gradient(to bottom, #FFFFFF 0%, #D7FFFF 100%);
+	opacity: 1;
+	border: 1px solid #777777;
+	border-radius: 5px;
+	box-shadow: 0px 1px 15px #777777;
+	behavior: url("/lib/PIE_uncompressed.htc")\9;
+}
+
+span.block_overlay_msg__ ul {
+    margin: -1px 0 0 0;
+    padding: 0;
+    float: left;
+    overflow: hidden;
+}
+
+span.block_overlay_msg__ ul li {
+    margin: 1px 0 1px 0;
+}
+
+span.block_overlay_msg__ li.msg_title_box__ {
+    padding: 6px;
+    color: #4f535c;
+    font-weight: bold;
+    border-bottom: 1px solid #cccccc;
+    background-color: #dddddd;
+    border-radius: 5px 5px 0 0;
+	behavior: url("/lib/PIE_uncompressed.htc")\9;
+}
+
+span.block_overlay_msg__ li.msg_box__ {
+    padding: 10px;
+    color: #4f535c;
+}
+
+span.block_overlay_msg__ li.buttonBox__ {
+	padding: 10px;
+    text-align: center;
+}
+
+span.block_overlay_msg__ li.buttonBox__ a.cancel__ {
+	margin-left: 8px;
+}
+
+/* Alert input message */
+span.msg__ {
+	display: none;
+	font-size: 11px !important;
+	line-height: 12px !important;
+	background-color: #666666;
+	border: 1px solid #555555;
+	border-radius: 3px;
+	padding: 2px !important;
+	position: absolute;
+	margin-left: 1px;
+	opacity: 0.8;
+	filter: alpha(opacity=80)\9;
+	behavior: url("/lib/PIE_uncompressed.htc")\9;
+}
+
+span.msg__ ul {
+	margin: 0;
+	padding: 0;
+	float: left;
+	overflow: hidden;
+}
+
+span.msg__ ul li {
+	margin: 1px 0 1px 0;
+	padding: 0;
+	color: #FFFFFF
+}
+
+span.msg__ a {
+	text-decoration: none;
+	float: right;
+	margin-left: 3px;
+	color: #000000;
+}
+
+/* Button */
+a.btn_common__, input[type='button'].btn_common__, button.btn_common__  {
+	display: inline-block;
+	border: 1px ;
+	overflow: visible;
+	cursor: pointer;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	margin: 0px;
+	border-radius : 5px;
+	behavior: url("/lib/PIE_uncompressed.htc")\9;
+}
+
+a.btn_white__, input[type='button'].btn_white__, button.btn_white__ {
+	background: -ms-linear-gradient(top, #ffffff, #eeeeee);
+	background: -moz-linear-gradient(top, #ffffff, #eeeeee);
+	background: -o-linear-gradient(top, #ffffff, #eeeeee);
+	background: -webkit-linear-gradient(top, #ffffff, #eeeeee);
+	background: linear-gradient(top, #ffffff, #eeeeee);
+	color: #4f535c !important;
+	background-color: #ffffff;
+	border: 1px solid #808080;
+}
+a.btn_gray__, input[type='button'].btn_gray__, button.btn_gray__ {
+	background: -ms-linear-gradient(top, #a2a2a2, #808080);
+	background: -moz-linear-gradient(top, #a2a2a2, #808080);
+	background: -o-linear-gradient(top, #a2a2a2, #808080);
+	background: -webkit-linear-gradient(top, #a2a2a2, #808080);
+	background: linear-gradient(top, #a2a2a2, #808080);
+	color: #ffffff !important;
+	background-color: #a2a2a2;
+	border: 1px solid #707070;
+}
+a.btn_blue__, input[type='button'].btn_blue__, button.btn_blue__ {
+	background: -ms-linear-gradient(top, #6666ff, #2a2aff);
+	background: -moz-linear-gradient(top, #6666ff, #2a2aff);
+	background: -o-linear-gradient(top, #6666ff, #2a2aff);
+	background: -webkit-linear-gradient(top, #6666ff, #2a2aff);
+	background: linear-gradient(top, #6666ff, #2a2aff);
+	color: #ffffff !important;
+	background-color: #6666ff;
+	border: 1px solid #2727ff;
+}
+a.btn_skyblue__, input[type='button'].btn_skyblue__, button.btn_skyblue__ {
+	background: -ms-linear-gradient(top, #1fbaff, #009fff);
+	background: -moz-linear-gradient(top, #1fbaff, #009fff);
+	background: -o-linear-gradient(top, #1fbaff, #009fff);
+	background: -webkit-linear-gradient(top, #1fbaff, #009fff);
+	background: linear-gradient(top, #1fbaff, #009fff);
+	color: #ffffff !important;
+	background-color: #3cc3ff;
+	border: 1px solid #0071eb;
+}
+
+a.btn_smaller__, input[type='button'].btn_smaller__, button.btn_smaller__
+	{
+	padding: 0 8px 0 8px;
+	font-size: 11px;
+	height: 16px;
+	line-height: 16px;
+}
+a.btn_small__, input[type='button'].btn_small__, button.btn_small__ {
+	padding: 0px 8px 0px 8px;
+	font-size: 11px;
+	height: 21px;
+	line-height: 21px;
+}
+a.btn_medium__, input[type='button'].btn_medium__, button.btn_medium__ {
+	padding: 0px 10px 0px 10px;
+	font-size: 12px;
+	height: 27px;
+	line-height: 27px;
+}
+a.btn_large__, input[type='button'].btn_large__, button.btn_large__ {
+	padding: 0px 10px 0px 10px;
+	font-size: 14px;
+	height: 33px;
+	line-height: 33px;
+	font-weight: bold;
+}
+a.btn_big__, input[type='button'].btn_big__, button.btn_big__ {
+	padding: 0px 10px 0px 10px;
+	font-size: 16px;
+	height: 45px;
+	line-height: 45px;
+	font-weight: bold;
+}
+
+/* Form */
+.validate_false__ {
+	border-style: dashed !important;
+}
+
+/* Grid */
+table.grid thead, table.grid tfoot{
+	background-color: #efefef;
+}
+
+table.grid tbody{
+	background-color: #ffffff;
+}
+
+table.grid th, table.grid td {
+	border: 1px solid #333333;
+}
+
+table.grid tbody td input[type='text'], table.grid tbody td select, table.grid tbody td textarea {
+	width: 100%;
+   	padding-left: 0;
+   	padding-right: 0;
+}
+
+div.gridWrap div.vResizable {
+	height: 3px;
+	border-bottom: 2px double #333333;
+}

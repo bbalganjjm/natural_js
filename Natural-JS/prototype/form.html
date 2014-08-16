@@ -1,0 +1,187 @@
+<div id="form">
+	<div class="divBar">DATA</div>
+	<div class="dataBox">
+		<table>
+			<tr>
+				<td width="70"><label for="data">Data</label></td>
+				<td width="*">
+					<textarea id="data" class="data">
+[
+    {
+        "numeric": 266734.12,
+        "generic": "abcDefGh",
+        "limit": "안녕하세요. 저는 Natural-JS 입니다.",
+        "plain": "plain",
+        "password": "password",
+        "readonly": "readonly",
+        "disabled": "disabled",
+        "hidden": "hidden",
+        "select" : 123334424.3533,
+        "selectMulty" : [266734.12, 32434.423],
+        "radio" : 123334424.3533,
+        "checkbox" : [266734.12, 32434.423],
+        "singleCheckbox" : "Y",
+        "etc": 20140626121212,
+        "etc2": "테스트 입니다."
+    },
+    {
+        "numeric": 123334424.3533,
+        "generic": "ijkLMNop",
+        "limit": "Natural-JS 좋아요?",
+        "plain": "plain",
+        "password": "password",
+        "readonly": "readonly",
+        "disabled": "disabled",
+        "hidden": "hidden",
+        "select" : 123334424.3533,
+        "selectMulty" : 32434.423,
+        "radio" : 123334424.3533,
+        "checkbox" : 266734.12,
+        "singleCheckbox" : "N",
+        "etc": 20140626121212,
+        "etc2": "테스트 입니다."
+    },
+    {
+        "numeric": 32434.423,
+        "generic": "lkjfkweisc",
+        "limit": "반가워요.",
+        "plain": "plain",
+        "password": "password",
+        "readonly": "readonly",
+        "disabled": "disabled",
+        "hidden": "hidden",
+        "select" : 123334424.3533,
+        "selectMulty" : 32434.423,
+        "radio" : 123334424.3533,
+        "checkbox" : 266734.12,
+        "singleCheckbox" : "Y",
+        "etc": 2453532,
+        "etc2": "테스트 입니다."
+    }
+]
+					</textarea>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div class="divBar">DEMO</div>
+	<div class="demoBox">
+		<div class="btnBox">
+			<a id="btnFormBind" href="#" class='{ "color": "skyblue", "size": "small" }'>Form Bind</a>
+			<a id="btnFormValidate" href="#" class='{ "color": "white", "size": "small" }'>Form Validate</a>
+		</div>
+		<table id="inputBox">
+			<tr>
+				<td width="70"><label for="numeric">Input 1</label></td>
+				<td width="*">
+					<input id="numeric" type="text" class='{ "format" : [["trimtoempty"], ["numeric", "#,###.##0000"]], "validate" : [["required"], ["decimal"]] }' />
+				</td>
+			</tr>
+			<tr>
+				<td><label for="generic">Input 2</label></td>
+				<td>
+					<input id="generic" type="text" class='{ "format" : [["trimtoempty"], ["generic", "@@ABCD"]], "validate" : [["required"], ["alphabet"]] }' />
+				</td>
+			</tr>
+			<tr>
+				<td><label for="limit">Input 3</label></td>
+				<td>
+					<textarea id="limit" rows="5" cols="40" class='{ "format" : [["trimtoempty"], ["limit", "13", "..."]], "validate" : [["required"], ["korean"]] }'></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td><label>Input ETC</label></td>
+				<td>
+					<label for="plain">plain</label><input id="plain" type="text" />&nbsp;
+					<label for="password">password</label><input id="password" type="password" />&nbsp;
+					<label for="readonly">readonly</label><input id="readonly" type="text" readonly="readonly" /><br /><br />
+					<label for="disabled">disabled</label><input id="disabled" type="text" disabled="disabled" />&nbsp;
+					<label for="hidden">hidden</label><input id="hidden" type="hidden" />
+				</td>
+			</tr>
+			<tr>
+				<td><label for="select">Select</label></td>
+				<td>
+					<select id="select" class='{ "validate" : [["required"]] }'>
+						<option>선택</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td><label for="selectMulty">Select Multy</label></td>
+				<td>
+					<select id="selectMulty" multiple="multiple"></select>
+				</td>
+			</tr>
+			<tr>
+				<td><label for="radio">Radio</label></td>
+				<td>
+					<input id="radio" type="radio" />
+				</td>
+			</tr>
+			<tr>
+				<td><label for="checkbox">Checkbox</label></td>
+				<td>
+					<input id="checkbox" type="checkbox" />
+				</td>
+			</tr>
+			<tr>
+				<td><label for="checkbox">Single Checkbox</label></td>
+				<td>
+					<input id="singleCheckbox" type="checkbox" />
+				</td>
+			</tr>
+			<tr>
+				<td><label for="etc">ETC</label></td>
+				<td><span id="etc" class='{ "format" : [["date", 12]] }'></span></td>
+			</tr>
+			<tr>
+				<td><label for="etc2">ETC2</label></td>
+				<td><span id="etc2"></span></td>
+			</tr>
+		</table>
+	</div>
+
+	<div class="divBar">SOURCE</div>
+	<div class="sourceBox">
+	</div>
+</div>
+
+<script type="text/javascript">
+
+N("div#form").service({
+    init : function() {
+    	var vc = this.view.context;
+
+    	this.initButton();
+
+    	var data = eval(N("textarea.data").val());
+
+    	this.createSelect(data);
+
+    	var form = N(data).form("table#inputBox");
+
+        N("a#btnFormBind", vc).click(function(e) {
+            e.preventDefault();
+            form.bind();
+        });
+
+        N("a#btnFormValidate", vc).click(function(e) {
+            e.preventDefault();
+            N(window).alert("전체검증 결과 : " + form.validate()).show()
+        });
+
+        return this;
+    },
+    createSelect : function(data) {
+    	$(data).select("select#select").bind();
+		$(data).select("select#selectMulty").bind();
+		$(data).select("input#radio").bind();
+		$(data).select("input#checkbox").bind();
+    },
+    initButton : function() {
+    	N("div.btnBox").button();
+    }
+}).init();
+
+</script>

@@ -1,0 +1,85 @@
+<div id="alert">
+	<div class="divBar">DEMO</div>
+	<div class="demoBox">
+		<div class="btnBox">
+			<a id="btnAlertArea" href="#" class='{ "color": "gray", "size": "small" }'>Alert(영역지정)</a>
+			<a id="btnAlertCallback" href="#" class='{ "color": "gray", "size": "small" }'>Alert(콜백, 타이틀바)</a>
+			<a id="btnAlertWindow" href="#" class='{ "color": "skyblue", "size": "small" }'>Alert(전체)</a>
+			<a id="btnAlertWindowTitle" href="#" class='{ "color": "skyblue", "size": "small" }'>Alert(버튼바X, 타이틀바)</a>
+			<a id="btnConfirm" href="#" class='{ "color": "gray", "size": "small" }'>Confirm</a>
+			<a id="btnConfirmWindow" href="#" class='{ "color": "skyblue", "size": "small" }'>Confirm(전체)</a>
+		</div>
+	    <pre class="data">
+	부분 가리기
+	부분 가리기
+	부분 가리기
+	부분 가리기
+	부분 가리기
+	부분 가리기
+	    </pre>
+	</div>
+    <div class="divBar">SOURCE</div>
+    <div class="sourceBox">
+	</div>
+</div>
+<script type="text/javascript">
+
+N("div#alert").service({
+    init : function() {
+    	var vc = this.view.context;
+
+    	this.initButton();
+
+        N("a#btnAlertArea", vc).click(function(e) {
+            e.preventDefault();
+            N("pre.data").alert("특정 영역 메시지 처리").show()
+        });
+
+        N("a#btnAlertCallback", vc).click(function(e) {
+            e.preventDefault();
+            N("pre.data").alert({
+                msg : "특정 영역 메시지 처리<br />확인 버튼 누르면 지정한 콜백 실행",
+                title : "시스템 메시지",
+                vars : [],
+                callback : function(msgContext, msgContents) {
+                    alert("콜백 실행");
+                }
+            }).show()
+        });
+
+        N("a#btnAlertWindowTitle", vc).click(function(e) {
+            e.preventDefault();
+            N(window).alert({
+                msg : "전체 영역 메시지 처리<br />전체 영역 메시지 처리.. 전체 영역 메시지 처리..<br />전체 영역 메시지 처리<br /><br />전체 영역 메시지 처리",
+                title : "메시지 제목",
+                button : false
+            }).show()
+        });
+        
+        N("a#btnAlertWindow", vc).click(function(e) {
+            e.preventDefault();
+            N(window).alert("전체 영역 메시지 처리").show();
+		});
+
+        N("a#btnConfirm", vc).click(function(e) {
+            e.preventDefault();
+            N("pre.data").confirm(function(msgContext, msgContents) {
+                confirm("콜백 실행");
+            }, "특정 영역 메시지 처리<br />확인 버튼 누르면 지정한 콜백 실행").show()
+        });
+
+        N("a#btnConfirmWindow", vc).click(function(e) {
+            e.preventDefault();
+            N(window).confirm(function(msgContext, msgContents) {
+                confirm("콜백 실행");
+            }, "전체 영역 메시지 처리").show();
+		});
+
+        return this;
+	},
+    initButton : function() {
+    	N("div.btnBox").button();
+    }
+}).init();
+
+</script>
