@@ -37,7 +37,12 @@
 	<div class="divBar">DEMO</div>
 	<div class="demoBox">
 		<div class="btnBox">
-			<a id="btnGridBind" href="#" class='{ "color": "skyblue", "size": "small" }'>Grid Bind</a>
+			<a id="btnGridBind" href="#" class='{ "color": "skyblue", "size": "small" }'>grid bind</a>
+			<a id="btnGetData" href="#" class='{ "color": "skyblue", "size": "small" }'>get data</a>
+			<a id="btnRevert" href="#" class='{ "color": "skyblue", "size": "small" }'>data revert</a>
+			<a id="btnGetVal" href="#" class='{ "color": "skyblue", "size": "small" }'>get value</a>
+			<a id="btnChangeVal" href="#" class='{ "color": "skyblue", "size": "small" }'>change value</a>
+			<a id="btnAdd" href="#" class='{ "color": "skyblue", "size": "small" }'>add new row</a>
 		</div>
 		<table id="grid">
 			<thead>
@@ -47,8 +52,8 @@
 					<th width="110">name</th>
 					<th width="130">email</th>
 					<th width="50">gender</th>
-					<th width="40">age</th>
 					<th width="60">eyeColor</th>
+					<th width="40">age</th>
 					<th width="*">company</th>
 					<th width="60">isActive</th>
 				</tr>
@@ -60,19 +65,50 @@
 					<td id="name"></td>
 					<td><input id="email" type="text" class='{ "validate" : [["required"], ["email"]] }' /></td>
 					<td id="gender" align="center"></td>
-					<td><input id="age" type="text" class='{ "validate" : [["required"], ["integer"]] }' /></td>
 					<td><input id="eyeColor" type="text" /></td>
+					<td><input id="age" type="text" class='{ "validate" : [["required"], ["integer"]] }' /></td>
 					<td><input id="company" type="text" /></td>
 					<td align="center"><input id="isActive" type="checkbox" /></td>
 				</tr>
 			</tbody>
-			<!--
-			<tfoot>
+		</table>
+		
+		<br />
+		
+		<div class="btnBox">
+			<a id="btnGridBind2" href="#" class='{ "color": "skyblue", "size": "small" }'>Grid Bind2</a>
+		</div>
+		<table id="grid2">
+			<thead>
 				<tr>
-					<td colspan="9" align="center"></td>
+					<th width="40" rowspan="2">index</th>
+					<th width="50">picture</th>
+					<th width="110">name</th>
+					<th width="130">email</th>
+					<th width="50">gender</th>
 				</tr>
-			</tfoot>
-			-->
+				<tr>
+					<th width="60">eyeColor</th>
+					<th width="40">age</th>
+					<th width="*">company</th>
+					<th width="60">isActive</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td id="index" rowspan="2"></td>
+					<td align="center"><img id="picture" height="30" /></td>
+					<td id="name"></td>
+					<td><input id="email" type="text" class='{ "validate" : [["required"], ["email"]] }' /></td>
+					<td id="gender" align="center"></td>
+				</tr>
+				<tr>
+					<td><input id="eyeColor" type="text" /></td>
+					<td><input id="age" type="text" class='{ "validate" : [["required"], ["integer"]] }' /></td>
+					<td><input id="company" type="text" /></td>
+					<td align="center"><input id="isActive" type="checkbox" /></td>
+				</tr>
+			</tbody>
 		</table>
 	</div>
 
@@ -98,6 +134,13 @@ N("div#grid").service({
     		sortable : true
     	}).bind();
 
+    	this.grid2 = N([]).grid({
+    		context : N("table#grid2"),
+    		height : 300,
+    		vResizable : true,
+    		sortable : true
+    	}).bind();
+    	
     	this.setEvents();
         return this;
     },
@@ -113,6 +156,38 @@ N("div#grid").service({
             e.preventDefault();
             N.controller("prototype/grid_big.json").submit(function(data) {
         		this_.grid.bind(data);
+        	});
+        });
+    	
+    	N("a#btnGetData").click(function(e) {
+            e.preventDefault();
+           	N(window).alert(JSON.stringify(this_.grid.data()[0])).show();
+        });
+    	
+    	N("a#btnRevert").click(function(e) {
+            e.preventDefault();
+       		this_.grid.revert();
+        });
+    	
+    	N("a#btnGetVal").click(function(e) {
+            e.preventDefault();
+            this_.grid.context().parent().alert(this_.grid.val(1, "name")).show();
+        });
+    	
+    	N("a#btnChangeVal").click(function(e) {
+            e.preventDefault();
+       		this_.grid.val(1, "name", "빨간짜장면");
+        });
+    	
+    	N("a#btnAdd").click(function(e) {
+            e.preventDefault();
+        	this_.grid.add();
+        });
+    	
+    	N("a#btnGridBind2").click(function(e) {
+            e.preventDefault();
+            N.controller("prototype/grid_big.json").submit(function(data) {
+        		this_.grid2.bind(data);
         	});
         });
     }

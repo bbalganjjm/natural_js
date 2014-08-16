@@ -58,17 +58,7 @@ span.block_overlay_msg__ li.buttonBox__ a.cancel__ {
 /* Alert input message */
 span.msg__ {
 	display: none;
-	font-size: 11px !important;
-	line-height: 12px !important;
-	background-color: #666666;
-	border: 1px solid #555555;
-	border-radius: 3px;
-	padding: 2px !important;
 	position: absolute;
-	margin-left: 1px;
-	opacity: 0.8;
-	filter: alpha(opacity=80)\9;
-	behavior: url("/lib/PIE_uncompressed.htc")\9;
 }
 
 span.msg__ ul {
@@ -76,19 +66,41 @@ span.msg__ ul {
 	padding: 0;
 	float: left;
 	overflow: hidden;
+	background-color: #777777;
+	opacity: 0.9;
+	filter: alpha(opacity=90)\9;
 }
 
-span.msg__ ul li {
-	margin: 1px 0 1px 0;
-	padding: 0;
+span.msg__ ul.msg_arrow__ {
+	margin-top: 5px;
+	border-top: 3px solid transparent;
+	border-bottom: 5px solid transparent; 
+	border-right: 5px solid #777777;
+	background: none; 
+	opacity: 0.9;
+	filter: alpha(opacity=90)\9;
+}
+
+span.msg__ ul.msg_line_box__ {
+	padding: 3px 2px 2px 2px;
+	border-radius: 3px;
+	behavior: url("/lib/PIE_uncompressed.htc")\9;
+}
+
+span.msg__ ul.msg_line_box__ li {
+	font-size: 11px;
+	line-height: 12px;
+	padding: 1px;
 	color: #FFFFFF
 }
 
-span.msg__ a {
+span.msg__ a.msg_close__ {
 	text-decoration: none;
 	float: right;
-	margin-left: 3px;
+	margin-left: 2px;
+	margin-top: -3px;
 	color: #000000;
+	font-weight: bold;
 }
 
 /* Button */
@@ -182,6 +194,7 @@ a.btn_big__, input[type='button'].btn_big__, button.btn_big__ {
 
 /* Form */
 .validate_false__ {
+	border-color: red !important;
 	border-style: dashed !important;
 }
 
@@ -195,7 +208,7 @@ table.grid__ tbody{
 }
 
 table.grid__ th, table.grid__ td {
-	border: 1px solid #333333;
+	border: 1px solid #cccccc;
 }
 
 table.grid__ tbody td input[type='text'], table.grid__ tbody td select, table.grid__ tbody td textarea {
@@ -207,12 +220,14 @@ table.grid__ tbody td input[type='text'], table.grid__ tbody td select, table.gr
 
 table.grid__ tbody td input[type='text']:hover, table.grid__ tbody td select:hover, table.grid__ tbody td textarea:hover,
 table.grid__ tbody td input[type='text']:focus, table.grid__ tbody td select:focus, table.grid__ tbody td textarea:focus {
-	border-color: inherit;
+	border-color: #cccccc;
+	background-color: #fefefe;
 }
 
-div.grid_wrap__ div.v_resizable__ {
-	height: 3px;
-	border-bottom: 2px double #333333;
+div.v_resizable__ {
+	height: 2px;
+	margin-right: 18px;
+	border-bottom: 3px double #dddddd;
 }
 
 div.thead_wrap__ thead th .asc__ {

@@ -174,22 +174,23 @@
 				}
 				opts.msgContext = opts.context.next("span.msg__");
 				if (opts.msgContext.length == 0) {
-					opts.msgContext = opts.context.after('<span class="msg__"><ul></ul><a href="#" id="msgClose__">' + N.context.attr("ui")["alert"]["input"]["closeBtn"] + '</a></span>')
+					opts.msgContext = opts.context.after('<span class="msg__"><ul class="msg_line_box__"></ul><a href="#" class="msg_close__">' + N.context.attr("ui")["alert"]["input"]["closeBtn"] + '</a></span>')
 										.next("span.msg__");
+					opts.msgContext.prepend('<ul class="msg_arrow__"></ul>');
 				}
 				if (N.isEmptyObject(opts.msg)) {
 					this.remove();
 				}
 
 				var this_ = this;
-				opts.msgContext.find("a#msgClose__").click(function(e) {
+				opts.msgContext.find("a.msg_close__").click(function(e) {
 					e.preventDefault();
 					this_.remove();
 				});
 
-				var ul_ = opts.msgContext.find("ul");
+				var ul_ = opts.msgContext.find("ul.msg_line_box__");
 				if (N.isArray(opts.msg)) {
-					opts.msgContext.find("ul").empty();
+					opts.msgContext.find("ul.msg_line_box__").empty();
 					$(opts.msg).each(function(i, msg_) {
 						if (vars !== undefined) {
 							opts.msg[i] = N.message.replaceMsgVars(msg_, vars);
@@ -233,19 +234,19 @@
 							}
 							opts.msgContext.offset({
 								left : opts.context.offset().left - opts.msgContext.outerWidth() - 1,
-								top : opts.context.offset().top
+								top : opts.context.offset().top + 1
 							});
 						} else {
 							opts.msgContext.offset({
 								left : opts.context.offset().left + opts.context.outerWidth(),
-								top : opts.context.offset().top
+								top : opts.context.offset().top + 1
 							});
 						}
 						opts.msgContext.css("z-index", N.element.maxZindex(opts.context) + 1);
 						opts.msgContext.show(0, function() {
 							setTimeout(function() {
 								opts.msgContext.fadeOut(150, function() {
-									opts.msgContext.find("a#msgClose__").click();
+									opts.msgContext.find("a.msg_close__").click();
 								});
 							}, NTR.context.attr("ui")["alert"]["input"]["displayTimeout"]);
 						});
@@ -675,7 +676,7 @@
 
 				return this;
 			},
-			add : function(addTop) {
+			add : function() {
 				var opts = this.options;
 		        if (opts.data == null) {
 		            throw new Error("[Form.add]data is null. you must input data(Array)");
@@ -862,7 +863,6 @@
 			}
 			this.options.context.addClass("grid__");
 
-			this.revertData = $.extend({}, this.options.data[this.options.row]);
 			this.tbodyTemp = this.options.context.find("> tbody").clone(true, true);
 
 			this.cellCnt = Grid.cellCnt(this.tbodyTemp);
@@ -886,8 +886,7 @@
 		Grid.fn = Grid.prototype;
 		$.extend(Grid.fn, {
 			data : function(rowStatus) {
-				var opts = this.options;
-				return opts.data
+				return this.options.data
 			},
 			context : function(sel) {
 				return sel !== undefined ? this.options.context.find(sel) : this.options.context;
@@ -900,8 +899,8 @@
 				}
 				var tbodyTempClone;
 
-				// Clean rows
 				if (opts.data.length > 0) {
+					//clean body
 					opts.context.find("tbody").clearQueue().stop();
 					if(!interCall) {
 						opts.scrollPaging.idx = 0;
@@ -909,15 +908,16 @@
 					if(opts.scrollPaging.idx === 0) {
 						opts.context.find("tbody").remove();
 					}
+					
 					var i = opts.scrollPaging.idx;
 					var this_ = this;
 					var limit = opts.scrollPaging.size;
 					var render = function() {
 						tbodyTempClone = this_.tbodyTemp.clone(true, true).hide();
 						opts.context.append(tbodyTempClone);
-						N(opts.data).form({
+						N(opts.data[i]).form({
 							context : tbodyTempClone
-						}).bind(i);
+						}).bind();
 						tbodyTempClone.show(opts.createRowDelay, function() {
 							i++;
 							if(i < opts.scrollPaging.idx + opts.scrollPaging.size) {
@@ -929,39 +929,89 @@
 				} else {
 					opts.context.find("tbody").remove();
 					tbodyTempClone = this.tbodyTemp.clone();
-					tbodyTempClone.html('<tr><td class="empty__" align="center" colspan="' + this.cellCnt + '">' + N.message.get(opts.message, "empty") + '</td></tr>');
+					tbodyTempClone.html('<tr><td class="empty__" align="center" colspan="' + this.cellCnt + '">' 
+							+ N.message.get(opts.message, "empty") + '</td></tr>');
 					opts.context.append(tbodyTempClone);
 				}
 
 				return this;
 			},
-			add : function(addTop) {
-				//TODO Form instance after add new row element
+			add : function() {
+				var opts = this.options;
+				if (opts.context.find("td.empty__").length > 0) {
+					opts.context.find("tbody").remove();
+				}
+				var tbodyTempClone = this.tbodyTemp.clone(true, true);
+				
+				if(opts.addTop) {
+					opts.context.find("thead").after(tbodyTempClone);
+				} else {
+					opts.context.append(tbodyTempClone);
+				}
+				
+				//TODO 데이터가 안생김
+				//TODO 여기서 ds.noty, form 에서는 noty 하면 안됨...이 그리드가 업뎃되어버릴꺼임
+				N(opts.data).form({
+					context : tbodyTempClone,
+					addTop : opts.addTop
+				}).add();
+				
+				//focus to first input element
+				tbodyTempClone.find(":input:eq(0)").get(0).focus();
+				
 				return this;
 			},
 			revert : function(row) {
-				//TODO Form instance
+				var opts = this.options;
+				if(row !== undefined) {
+					opts.context.find("tbody:eq(" + String(row) + ")").instance("form").revert();					
+				} else {
+					opts.context.find("tbody").instance("form", function(i) {
+						if(this.options.data[0].rowStatus === "update") {
+							this.revert();
+						}
+					});
+				}
 				return this;
 			},
-			validate : function() {
-				//TODO Form instance
-				return false;
+			validate : function(row) {
+				var opts = this.options;
+				var valiRslt = true;
+				if(row !== undefined) {
+					opts.context.find("tbody:eq(" + String(row) + ")").instance("form").validate();					
+				} else {
+					var rowStatus;
+					opts.context.find("tbody").instance("form", function(i) {
+						rowStatus = this.options.data[0].rowStatus;
+						if(rowStatus === "update" || rowStatus === "insert") {
+							if(!this.validate()) {
+								valiRslt = false;			
+							}
+						}
+					});
+				}
+				return valiRslt;
 			},
-			val : function(row, key, val, notify) {
-				//TODO Form instance
+			val : function(row, key, val) {
+				if(val === undefined) {
+					return this.options.context.find("tbody:eq(" + String(row) + ")").instance("form").val(key);
+				}
+				this.options.context.find("tbody:eq(" + String(row) + ")").instance("form").val(key, val);
 				return this;
 			},
 			update : function(row, key) {
-				//TODO Form instance
+				this.options.context.find("tbody:eq(" + String(row) + ")").instance("form").update(row, key);
 				return this;
 			}
 		});
 
 		$.extend(Grid, {
-			//TODO Correct the crashed grid layout every browsers
 			fixHeader : function() {
 				var opts = this.options;
 
+				//헤더 고정형에서는 add 했을때 새로운 라인 element가 무조건 위에 생김
+				opts.addTop = true;
+				
 				opts.context.css({
 					"table-layout" : "fixed",
 					"margin" : "0"
@@ -972,16 +1022,24 @@
 		        	opts.context.css("width", "100%");
 		        }
 
+		        var sampleCell = opts.context.find("tbody td:eq(0)");
+		        var borderLeft = sampleCell.css("border-left-width") + " " + sampleCell.css("border-left-style") + " " + sampleCell.css("border-left-color");
+		        var borderBottom = sampleCell.css("border-bottom-width") + " " + sampleCell.css("border-bottom-style") + " " + sampleCell.css("border-bottom-color");
+		        
 		        // Root grid container
 		        var gridWrap = opts.context.wrap('<div class="grid_wrap__"/>').parent();
-
+		        gridWrap.css({
+		        	"border-left" : borderLeft,
+		        });
+		        
 		        //Create grid header
 		        var scrollbarWidth = N.browser.scrollbarWidth();
 		        var thead = opts.context.clone(true, true);
 		        thead.find("tbody").remove();
 		        thead.find("tfoot").remove();
 		        var theadWrap = thead.wrap('<div class="thead_wrap__"/>').parent().css({
-		        	"padding-right" : scrollbarWidth + "px"
+		        	"padding-right" : scrollbarWidth + "px",
+		        	"margin-left" : "-1px",
 		        });
 		        gridWrap.prepend(theadWrap);
 
@@ -1000,8 +1058,10 @@
 	                "border-top" : "none",
 		        });
 		        var tbodyWrap = opts.context.wrap('<div class="tbody_wrap__"/>').parent().css({
-		        	"max-height" : String(opts.height) + "px",
-		        	"overflow-y" : "scroll"
+		        	"height" : String(opts.height) + "px",
+		        	"overflow-y" : "scroll",
+		        	"margin-left" : "-1px",
+		        	"border-bottom" : borderBottom,
 		        });
 
 		        //Scroll paging
@@ -1041,7 +1101,8 @@
 			        tfoot.find("thead").remove();
 			        tfoot.find("tbody").remove();
 			        tfootWrap = tfoot.wrap('<div class="tfoot_wrap__"/>').parent().css({
-			        	"padding-right" : scrollbarWidth + "px"
+			        	"padding-right" : scrollbarWidth + "px",
+			        	"margin-left" : "-1px",
 			        });
 			        gridWrap.append(tfootWrap);
 		        }
@@ -1084,7 +1145,7 @@
 	        		pressed = false;
 	        	});
 
-	        	gridWrap.append(vResizable);
+	        	gridWrap.after(vResizable);
         	},
         	sort : function() {
     	        var opts = this.options;

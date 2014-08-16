@@ -263,9 +263,18 @@
 				}
 			},
 			"input" : {
-				displayTimeout : 10000, // ms
+				/**
+				 * 메시지 표시시간(ms)
+				 */
+				displayTimeout : 10000,
+				/**
+				 * 메시지 글머리 기호
+				 */
 				bullets : "*&nbsp;",
-				closeBtn : "<span style='color:#FFFFFF;'>X</span>"
+				/**
+				 * 닫기 버튼 디자인(html 태그 입력 가능)
+				 */
+				closeBtn : "X"
 			},
 			"message" : {
 				"ko_KR" : {
@@ -310,7 +319,7 @@
 			/**
 			 * bind 시 row 생성 delay(ms)
 			 */
-			"createRowDelay" : 15,
+			"createRowDelay" : 1,
 			/**
 			 * 헤더픽스형일 경우 스크롤 페이징 사이즈(대용량 데이터 처리)
 			 */

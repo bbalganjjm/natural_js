@@ -508,12 +508,14 @@
 	    instance : function(name, instance) {
 	    	if(instance !== undefined) {
 	    		if(NTR.type(instance) === "function") {
+	    			//instance is callback function
 	    			var inst;
 	    			this.each(function(i) {
 	    				inst = $(this).data(name + "__");
 	    				instance.call(inst, i, inst);
 	    			});
 	    		} else {
+	    			//set instance
 	    			this.data(name + "__", instance);
 	    		}
 	    	}

@@ -15,7 +15,7 @@ body, pre, textarea, select {
 input, select, textarea, pre.data, div.data {
 	border-radius: 3px;
 	padding: 3px 3px;
-	border: 1px solid #555555;
+	border: 1px solid #cccccc;
 	font-size: 12px;
 	font-family: "맑은 고딕", "dotum", "Segoe UI", sans-serif;
 	color: #002200;
