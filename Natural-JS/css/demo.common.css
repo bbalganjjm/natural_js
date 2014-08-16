@@ -63,6 +63,7 @@ div#bottom {
 	margin: 0 auto 5px auto;
 	width: 95%;
 	max-width: 1200px;
+	min-width: 900px;
 	background-color: #99ff99;
 	border-radius : 7px;
 	box-shadow: 3px 3px 1px #336600;

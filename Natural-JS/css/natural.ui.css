@@ -216,6 +216,8 @@ table.grid__ tbody td input[type='text'], table.grid__ tbody td select, table.gr
    	padding-left: 0;
    	padding-right: 0;
    	border-color: #ffffff;
+   	height: 14px;
+   	line-height: 14px;
 }
 
 table.grid__ tbody td input[type='text']:hover, table.grid__ tbody td select:hover, table.grid__ tbody td textarea:hover,
@@ -228,6 +230,10 @@ div.v_resizable__ {
 	height: 2px;
 	margin-right: 18px;
 	border-bottom: 3px double #dddddd;
+}
+
+div.grid_wrap__ {
+	min-width: 700px;	
 }
 
 div.thead_wrap__ thead th .asc__ {
