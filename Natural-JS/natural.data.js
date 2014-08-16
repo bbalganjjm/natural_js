@@ -57,10 +57,16 @@
 			});
 		},
 		sortBy : function(key, reverse) {
-			// reverse : 1 = asc, -1 = desc
 			if (reverse === undefined) {
 				reverse = 1;
+			} else {
+				if(reverse) {
+					reverse = -1;
+				} else {
+					reverse = 1;
+				}
 			}
+
 			return function(a, b) {
 				a = NTR.string.trimToEmpty(String(a[key])).replace(/-|\./g, "");
 				b = NTR.string.trimToEmpty(String(b[key])).replace(/-|\./g, "");

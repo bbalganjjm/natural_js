@@ -864,6 +864,7 @@
 
 			this.revertData = $.extend({}, this.options.data[this.options.row]);
 			this.tbodyTemp = this.options.context.find("> tbody").clone(true, true);
+
 			this.cellCnt = Grid.cellCnt(this.tbodyTemp);
 
 			//Fixed header
@@ -1093,8 +1094,19 @@
     	        } else {
     	        	thead = opts.context.find("thead");
     	        }
+
+				var id;
+				this.tbodyTemp.find("> tr td").each(function(i) {
+					id = $(this).attr("id");
+					if(id === undefined) {
+						id = $(this).find("*").attr("id");
+					}
+					thead.find("> tr th:eq(" + i + ")").data("id", id);
+	            });
+
     	        var theadCells = thead.find("> tr th");
     	        theadCells.css("cursor", "pointer");
+    	        var this_ = this;
     	        theadCells.bind("click.grid.sort", function(e) {
     	        	var currEle = $(this);
     	        	if (opts.data.length > 0) {
@@ -1106,78 +1118,14 @@
     	        			thead.find("span.sortable__").remove();
     	                    if (isAsc) {
     	                    	currEle.append('<span class="sortable__ desc__">' + opts.sortableItem.asc + '</span>')
+    	                    	this_.bind(N(opts.data).datasort($(this).data("id"), true));
     	                    } else {
     	                    	currEle.append('<span class="sortable__ asc__">' + opts.sortableItem.desc + '</span>')
+    	                    	this_.bind(N(opts.data).datasort($(this).data("id")));
     	                    }
-
-    	                    /*
-    	                    var fieldName = null;
-    	                    var currCellIndex = $(this).cellPos().left;
-    	                    if($($tbodyTr[currCellIndex]).attr("id")) {
-    	                        fieldName = $($tbodyTr[currCellIndex]).attr("id");
-    	                    } else {
-    	                        if($($tbodyTr[currCellIndex]).children().is(":input")) {
-    	                            fieldName = $($tbodyTr[currCellIndex]).find("*").attr("name");
-    	                        } else {
-    	                            fieldName = $($tbodyTr[currCellIndex]).find("*").attr("id");
-    	                        }
-    	                    }
-    	                    opts.dataList.sort(JSONUtils.sortBy(fieldName, $(this).data("reverse")));
-    	                    currCellIndex = null;
-    	                    fieldName = null;
-
-    	                    $(this).data("reverse", !$(this).data("reverse"));
-    	                    this_.bindDataList({ action : "sortable" });
-    	                    */
     	        		}
     	        	}
     	        });
-
-    	        /*
-    	        var $tbodyTr = opts.container.find("tbody").find("tr").children();
-    	        var $theadCells = $thead.find("tr").children();
-    	        $theadCells.css("cursor", "pointer");
-    	        $theadCells.addClass("sortable");
-    	        $theadCells.data("reverse", false);
-
-    	        var this_ = this;
-
-    	        $theadCells.click(function(e) {
-    	            if (opts.dataList != null && opts.dataList.length > 0) {
-    	                if(N.string.trimToNull($(this).text()) != null && $(this).find("input[type='checkbox']").size() == 0) {
-    	                    $thead.find("span.sortableAsc, span.sortableDesc").remove();
-    	                    var $titleBox = $(this);
-    	                    if($(this).find("div.resizeText").size() > 0) {
-    	                        $titleBox = $(this).find("div.resizeText");
-    	                    }
-    	                    if ($(this).data("reverse") == true) {
-    	                        $titleBox.append("<span class='sortable_desc__'>▲</span>");
-    	                    } else {
-    	                        $titleBox.append("<span class='sortable_asc__'>▼</span>");
-    	                    }
-    	                    $titleBox = null;
-
-    	                    var fieldName = null;
-    	                    var currCellIndex = $(this).cellPos().left;
-    	                    if($($tbodyTr[currCellIndex]).attr("id")) {
-    	                        fieldName = $($tbodyTr[currCellIndex]).attr("id");
-    	                    } else {
-    	                        if($($tbodyTr[currCellIndex]).children().is(":input")) {
-    	                            fieldName = $($tbodyTr[currCellIndex]).find("*").attr("name");
-    	                        } else {
-    	                            fieldName = $($tbodyTr[currCellIndex]).find("*").attr("id");
-    	                        }
-    	                    }
-    	                    opts.dataList.sort(JSONUtils.sortBy(fieldName, $(this).data("reverse")));
-    	                    currCellIndex = null;
-    	                    fieldName = null;
-
-    	                    $(this).data("reverse", !$(this).data("reverse"));
-    	                    this_.bindDataList({ action : "sortable" });
-    	                }
-    	            }
-    	        });
-    	        */
         	},
 			cellCnt : function(ele) {
 		        return Math.max.apply(null, $.map(ele.find("tr"), function(el) {
