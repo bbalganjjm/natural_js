@@ -43,6 +43,7 @@
 			<a id="btnGetVal" href="#" class='{ "color": "skyblue", "size": "small" }'>get value</a>
 			<a id="btnChangeVal" href="#" class='{ "color": "skyblue", "size": "small" }'>change value</a>
 			<a id="btnAdd" href="#" class='{ "color": "skyblue", "size": "small" }'>add new row</a>
+			<a id="btnValidate" href="#" class='{ "color": "skyblue", "size": "small" }'>all row data validate</a>
 		</div>
 		<table id="grid">
 			<thead>
@@ -182,6 +183,11 @@ N("div#grid").service({
     	N("a#btnAdd").click(function(e) {
             e.preventDefault();
         	this_.grid.add();
+        });
+    	
+    	N("a#btnValidate").click(function(e) {
+            e.preventDefault();
+            this_.grid.context().parent().alert(String(this_.grid.validate()));
         });
     	
     	N("a#btnGridBind2").click(function(e) {

@@ -174,8 +174,9 @@
 				}
 				opts.msgContext = opts.context.next("span.msg__");
 				if (opts.msgContext.length == 0) {
-					opts.msgContext = opts.context.after('<span class="msg__"><ul class="msg_line_box__"></ul><a href="#" class="msg_close__">' + N.context.attr("ui")["alert"]["input"]["closeBtn"] + '</a></span>')
+					opts.msgContext = opts.context.after('<span class="msg__"><ul class="msg_line_box__"></ul></span>')
 										.next("span.msg__");
+					opts.msgContext.append('<a href="#" class="msg_close__">' + N.context.attr("ui")["alert"]["input"]["closeBtn"] + '</a>');
 					opts.msgContext.prepend('<ul class="msg_arrow__"></ul>');
 				}
 				if (N.isEmptyObject(opts.msg)) {
@@ -221,17 +222,24 @@
 						"left" : ((opts.msgContext.width() / 2 + opts.context.offset().left) - opts.msgContents.width() / 2) + "px",
 					}).fadeIn(150);
 				} else {
+					//TODO window resize 할때 좌표 다시 맞춰주기
 					if (!N.isEmptyObject(opts.msg)) {
 						var position = "left";
 						if ((opts.context.offset().left + opts.context.outerWidth() + 200) > $(window).width()) {
 							position = "right";
 						}
-						if (position == "right") {
+						if (position === "right") {
 							var msgBoxWidth = opts.msgContext.outerWidth();
 							var leftPos = opts.context.offset().left - msgBoxWidth;
 							if (leftPos < 0) {
 								opts.msgContext.width((msgBoxWidth + leftPos) - 2);
 							}
+							
+							/* TODO 닫기하고 화살표 바꾸기
+							opts.msgContext.find("a.msg_close__").detach().prependTo(opts.msgContext);
+							opts.msgContext.find("a.msg_arrow__").detach().appendTo(opts.msgContext);
+							*/
+							
 							opts.msgContext.offset({
 								left : opts.context.offset().left - opts.msgContext.outerWidth() - 1,
 								top : opts.context.offset().top + 1
@@ -967,7 +975,7 @@
 					opts.context.find("tbody:eq(" + String(row) + ")").instance("form").revert();					
 				} else {
 					opts.context.find("tbody").instance("form", function(i) {
-						if(this.options.data[0].rowStatus === "update") {
+						if(this.options !== undefined && this.options.data[0].rowStatus === "update") {
 							this.revert();
 						}
 					});
@@ -982,10 +990,12 @@
 				} else {
 					var rowStatus;
 					opts.context.find("tbody").instance("form", function(i) {
-						rowStatus = this.options.data[0].rowStatus;
-						if(rowStatus === "update" || rowStatus === "insert") {
-							if(!this.validate()) {
-								valiRslt = false;			
+						if(this.options !== undefined && this.options.data.length > 0) {
+							rowStatus = this.options.data[0].rowStatus;
+							if(rowStatus === "update" || rowStatus === "insert") {
+								if(!this.validate()) {
+									valiRslt = false;			
+								}
 							}
 						}
 					});
