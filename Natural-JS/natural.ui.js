@@ -860,7 +860,7 @@
 			try {
 				$.extend(this.options, N.context.attr("ui")["grid"]);
 
-				//object 에 object 가 포함되어 있으면 해당오브젝트 객체로 단순 덮어쓰기가 되어서 처리
+				//$.extend 시 object 에 object 가 포함되어 있으면 해당오브젝트 객체로 단순 덮어쓰기가 되어서 처리
 				this.options.scrollPaging.idx = 0;
 			} catch (e) { }
 
@@ -894,7 +894,13 @@
 		Grid.fn = Grid.prototype;
 		$.extend(Grid.fn, {
 			data : function(rowStatus) {
-				return this.options.data
+				if(rowStatus === undefined) {
+					return this.options.data;
+				} else if(rowStatus === "modified") {
+					this.options.data.datafilter("data.rowStatus !== undefined");
+				} else {
+					this.options.data.datafilter("data.rowStatus === '" + rowStatus + "'");
+				}
 			},
 			context : function(sel) {
 				return sel !== undefined ? this.options.context.find(sel) : this.options.context;
@@ -1012,6 +1018,9 @@
 			update : function(row, key) {
 				this.options.context.find("tbody:eq(" + String(row) + ")").instance("form").update(row, key);
 				return this;
+			},
+			remove : function(row) {
+				// TODO
 			}
 		});
 

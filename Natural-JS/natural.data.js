@@ -52,7 +52,7 @@
 			if (queryString == null) {
 				return arr;
 			}
-			return NTR.isWrappedSet(arr) ? NTR(this.filter(arr.toArray(), queryString)) : $.grep(arr, function(list) {
+			return NTR.isWrappedSet(arr) ? NTR(this.filter(arr.toArray(), queryString)) : $.grep(arr, function(data) {
 				return eval(queryString);
 			});
 		},
