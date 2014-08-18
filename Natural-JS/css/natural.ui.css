@@ -74,9 +74,9 @@ span.msg__ ul {
 span.msg__ ul.msg_arrow__ {
 	margin-top: 5px;
 	border-top: 3px solid transparent;
-	border-bottom: 5px solid transparent; 
+	border-bottom: 5px solid transparent;
 	border-right: 5px solid #777777;
-	background: none; 
+	background: none;
 	opacity: 0.9;
 	filter: alpha(opacity=90)\9;
 }
@@ -84,6 +84,7 @@ span.msg__ ul.msg_arrow__ {
 span.msg__ ul.msg_line_box__ {
 	padding: 3px 2px 2px 2px;
 	border-radius: 3px;
+	box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.4);
 	behavior: url("/lib/PIE_uncompressed.htc")\9;
 }
 
@@ -97,10 +98,16 @@ span.msg__ ul.msg_line_box__ li {
 span.msg__ a.msg_close__ {
 	text-decoration: none;
 	float: right;
-	margin-left: 2px;
-	margin-top: -3px;
 	color: #000000;
 	font-weight: bold;
+	border-radius: 50%;
+	border: 1px solid #777777;
+	font-size: 16px;
+	line-height: 8px;
+	padding: 1px 0 3px 0;
+	margin: -6px 0 0 -1px;
+	background-color: #efefee;
+	box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.4);
 }
 
 /* Button */
@@ -218,14 +225,14 @@ table.grid__ tbody td input[type='text'], table.grid__ tbody td select, table.gr
    	border-color: #ffffff;
    	height: 14px;
    	line-height: 14px;
+   	box-shadow: none;
 }
 
 table.grid__ tbody td input[type='text']:hover, table.grid__ tbody td select:hover, table.grid__ tbody td textarea:hover,
 table.grid__ tbody td input[type='text']:focus, table.grid__ tbody td select:focus, table.grid__ tbody td textarea:focus {
 	border-color: #faaeae;
 	background-color: #ffe5e5;
-	box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
-	transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+	box-shadow: inset 1px 1px 1px rgba(0,0,0,0.075);
 }
 
 div.v_resizable__ {
@@ -235,7 +242,7 @@ div.v_resizable__ {
 }
 
 div.grid_wrap__ {
-	min-width: 700px;	
+	min-width: 700px;
 }
 
 div.thead_wrap__ thead th .asc__ {

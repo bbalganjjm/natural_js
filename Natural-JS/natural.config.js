@@ -274,7 +274,7 @@
 				/**
 				 * 닫기 버튼 디자인(html 태그 입력 가능)
 				 */
-				closeBtn : "X"
+				closeBtn : "&times;"
 			},
 			"message" : {
 				"ko_KR" : {
