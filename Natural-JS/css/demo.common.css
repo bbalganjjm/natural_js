@@ -119,6 +119,8 @@ div#main {
 
 div#main div#contents {
 	line-height: 20px;
+	border: 1px solid #cdcdcd\9;
+	background-color: #ffffff\9;
 }
 
 .divBar {
