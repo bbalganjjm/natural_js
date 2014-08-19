@@ -19,6 +19,12 @@ input[type='text'], input[type='password'], select, textarea, pre.data, div.data
 	font-family: "맑은 고딕", "dotum", "Segoe UI", sans-serif;
 	color: #002200;
 	box-shadow: inset 1px 1px 1px rgba(0,0,0,0.075);
+	vertical-align: middle;
+}
+
+input[type='text'], input[type='password'] {
+	height: 20px;
+	line-height: 20px;
 }
 
 input[type='text']:hover, input[type='password']:hover, select:hover, textarea:hover,
@@ -33,6 +39,22 @@ a {
 	font-size: 12px;
 	font-family: "맑은 고딕", "dotum", "Segoe UI", sans-serif;
 	color: #002200;
+}
+
+table {
+	width: 100%;
+	padding: 0;
+	margin: 0 0 15px 0;
+	border-collapse: collapse;
+}
+
+table td, table th {
+	padding: 5px;
+}
+
+label {
+	color: #006600;
+	font-weight: bold;
 }
 
 /* demo page layout */
@@ -92,6 +114,7 @@ div#main {
 	min-width: 800px;
 	border: 1px solid #cccccc;
     border-radius : 0 0 10px 10px;
+    behavior: url("/lib/PIE_uncompressed.htc")\9;
 }
 
 div#main div#contents {
@@ -109,41 +132,14 @@ div#main div#contents {
 }
 
 
-
-
-
-
-
-
-div.data {
-	margin-bottom: 15px;
-}
-
-input[type='text'], input[type='password']  {
-	height: 18px;
-	line-height: 16px;
-	vertical-align: middle;
-}
-
-table {
-	width: 100%;
-	padding: 0;
-	margin: 0 0 15px 0;
-	border-collapse: collapse;
-}
-
-table td, table th {
-	padding: 5px;
-}
-
-label {
-	color: #006600;
-	font-weight: bold;
+.demoBox {
+	padding: 10px;
 }
 
 .data {
 	width: 100%;
 	height: 200px;
+	margin-bottom: 15px;
 }
 
 .btnBox {
@@ -156,15 +152,8 @@ label {
 
 .dataBox {
 	padding: 10px;
-	width: 97%;
-}
-
-.demoBox {
-	padding: 10px;
-	width: 97%;
 }
 
 .sourceBox {
 	padding: 10px;
-	width: 97%;
 }

@@ -17,7 +17,6 @@ span.block_overlay_msg__ {
 	border: 1px solid #777777;
 	border-radius: 5px;
 	box-shadow: 0px 1px 15px #777777;
-	behavior: url("/lib/PIE_uncompressed.htc")\9;
 }
 
 span.block_overlay_msg__ ul {
@@ -38,7 +37,6 @@ span.block_overlay_msg__ li.msg_title_box__ {
     border-bottom: 1px solid #cccccc;
     background-color: #dddddd;
     border-radius: 5px 5px 0 0;
-	behavior: url("/lib/PIE_uncompressed.htc")\9;
 }
 
 span.block_overlay_msg__ li.msg_box__ {
@@ -85,7 +83,6 @@ span.msg__ ul.msg_line_box__ {
 	padding: 3px 2px 2px 2px;
 	border-radius: 3px;
 	box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.4);
-	behavior: url("/lib/PIE_uncompressed.htc")\9;
 }
 
 span.msg__ ul.msg_line_box__ li {
@@ -121,7 +118,6 @@ a.btn_common__, input[type='button'].btn_common__, button.btn_common__  {
 	vertical-align: middle;
 	margin: 0px;
 	border-radius : 5px;
-	behavior: url("/lib/PIE_uncompressed.htc")\9;
 }
 
 a.btn_white__, input[type='button'].btn_white__, button.btn_white__ {
