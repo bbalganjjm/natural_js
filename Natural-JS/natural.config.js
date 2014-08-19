@@ -74,7 +74,7 @@
 					 * 특정 영역에 html 페이지를 불러올때 전환 효과 지정, false 이면 효과 없음.
 					 * ex) ["fadeIn", 300, null], 적용안할때는 false
 					 */
-					"effect" : [ "fadeIn", 300, null ]
+					"effect" : [ "slideDown", 300, null ]
 				}
 			}
 		}

@@ -224,38 +224,48 @@
 				} else {
 					//TODO window resize 할때 좌표 다시 맞춰주기
 					if (!N.isEmptyObject(opts.msg)) {
-						var position = "left";
-						if ((opts.context.offset().left + opts.context.outerWidth() + 200) > $(window).width()) {
-							position = "right";
-						}
-						if (position === "right") {
-							var msgBoxWidth = opts.msgContext.outerWidth();
-							var leftPos = opts.context.offset().left - msgBoxWidth;
-							if (leftPos < 0) {
-								opts.msgContext.width((msgBoxWidth + leftPos) - 2);
+						var setOffset = function() {
+							var position = "left";
+							if ((opts.context.offset().left + opts.context.outerWidth() + 200) > $(window).width()) {
+								position = "right";
 							}
-							
-							/* TODO 닫기하고 화살표 바꾸기
-							opts.msgContext.find("a.msg_close__").detach().prependTo(opts.msgContext);
-							opts.msgContext.find("a.msg_arrow__").detach().appendTo(opts.msgContext);
-							*/
-							
-							opts.msgContext.offset({
-								left : opts.context.offset().left - opts.msgContext.outerWidth() - 1,
-								top : opts.context.offset().top + 1
-							});
-						} else {
-							opts.msgContext.offset({
-								left : opts.context.offset().left + opts.context.outerWidth(),
-								top : opts.context.offset().top + 1
-							});
+							if (position === "right") {
+								var msgBoxWidth = opts.msgContext.outerWidth();
+								var leftPos = opts.context.offset().left - msgBoxWidth;
+								if (leftPos < 0) {
+									opts.msgContext.width((msgBoxWidth + leftPos) - 2);
+								}
+
+								/* TODO 닫기하고 화살표 바꾸기
+								opts.msgContext.find("a.msg_close__").detach().prependTo(opts.msgContext);
+								opts.msgContext.find("a.msg_arrow__").detach().appendTo(opts.msgContext);
+								*/
+
+								opts.msgContext.offset({
+									left : opts.context.offset().left - opts.msgContext.outerWidth() - 1,
+									top : opts.context.offset().top + 1
+								});
+							} else {
+								opts.msgContext.offset({
+									left : opts.context.offset().left + opts.context.outerWidth(),
+									top : opts.context.offset().top + 1
+								});
+							}
 						}
+						setOffset();
+
+						// sync msgContext offset
+						var time = setInterval(function() {
+							setOffset();
+						}, 100);
+
 						opts.msgContext.css("z-index", N.element.maxZindex(opts.context) + 1);
 						opts.msgContext.show(0, function() {
 							setTimeout(function() {
 								opts.msgContext.fadeOut(150, function() {
 									opts.msgContext.find("a.msg_close__").click();
 								});
+								clearInterval(time);
 							}, NTR.context.attr("ui")["alert"]["input"]["displayTimeout"]);
 						});
 					}
@@ -922,7 +932,7 @@
 					if(opts.scrollPaging.idx === 0) {
 						opts.context.find("tbody").remove();
 					}
-					
+
 					var i = opts.scrollPaging.idx;
 					var this_ = this;
 					var limit = opts.scrollPaging.size;
@@ -943,7 +953,7 @@
 				} else {
 					opts.context.find("tbody").remove();
 					tbodyTempClone = this.tbodyTemp.clone();
-					tbodyTempClone.html('<tr><td class="empty__" align="center" colspan="' + this.cellCnt + '">' 
+					tbodyTempClone.html('<tr><td class="empty__" align="center" colspan="' + this.cellCnt + '">'
 							+ N.message.get(opts.message, "empty") + '</td></tr>');
 					opts.context.append(tbodyTempClone);
 				}
@@ -956,29 +966,29 @@
 					opts.context.find("tbody").remove();
 				}
 				var tbodyTempClone = this.tbodyTemp.clone(true, true);
-				
+
 				if(opts.addTop) {
 					opts.context.find("thead").after(tbodyTempClone);
 				} else {
 					opts.context.append(tbodyTempClone);
 				}
-				
+
 				//TODO 데이터가 안생김
 				//TODO 여기서 ds.noty, form 에서는 noty 하면 안됨...이 그리드가 업뎃되어버릴꺼임
 				N(opts.data).form({
 					context : tbodyTempClone,
 					addTop : opts.addTop
 				}).add();
-				
+
 				//focus to first input element
 				tbodyTempClone.find(":input:eq(0)").get(0).focus();
-				
+
 				return this;
 			},
 			revert : function(row) {
 				var opts = this.options;
 				if(row !== undefined) {
-					opts.context.find("tbody:eq(" + String(row) + ")").instance("form").revert();					
+					opts.context.find("tbody:eq(" + String(row) + ")").instance("form").revert();
 				} else {
 					opts.context.find("tbody").instance("form", function(i) {
 						if(this.options !== undefined && this.options.data[0].rowStatus === "update") {
@@ -992,7 +1002,7 @@
 				var opts = this.options;
 				var valiRslt = true;
 				if(row !== undefined) {
-					opts.context.find("tbody:eq(" + String(row) + ")").instance("form").validate();					
+					opts.context.find("tbody:eq(" + String(row) + ")").instance("form").validate();
 				} else {
 					var rowStatus;
 					opts.context.find("tbody").instance("form", function(i) {
@@ -1000,7 +1010,7 @@
 							rowStatus = this.options.data[0].rowStatus;
 							if(rowStatus === "update" || rowStatus === "insert") {
 								if(!this.validate()) {
-									valiRslt = false;			
+									valiRslt = false;
 								}
 							}
 						}
@@ -1030,7 +1040,7 @@
 
 				//헤더 고정형에서는 add 했을때 새로운 라인 element가 무조건 위에 생김
 				opts.addTop = true;
-				
+
 				opts.context.css({
 					"table-layout" : "fixed",
 					"margin" : "0"
@@ -1044,13 +1054,13 @@
 		        var sampleCell = opts.context.find("tbody td:eq(0)");
 		        var borderLeft = sampleCell.css("border-left-width") + " " + sampleCell.css("border-left-style") + " " + sampleCell.css("border-left-color");
 		        var borderBottom = sampleCell.css("border-bottom-width") + " " + sampleCell.css("border-bottom-style") + " " + sampleCell.css("border-bottom-color");
-		        
+
 		        // Root grid container
 		        var gridWrap = opts.context.wrap('<div class="grid_wrap__"/>').parent();
 		        gridWrap.css({
 		        	"border-left" : borderLeft,
 		        });
-		        
+
 		        //Create grid header
 		        var scrollbarWidth = N.browser.scrollbarWidth();
 		        var thead = opts.context.clone(true, true);

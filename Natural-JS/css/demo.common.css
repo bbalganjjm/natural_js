@@ -25,7 +25,6 @@ input[type='text']:hover, input[type='password']:hover, select:hover, textarea:h
 input[type='text']:focus, input[type='password']:hover, select:focus, textarea:focus {
 	border-color: #faaeae;
 	background-color: #ffe5e5;
-	transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 }
 
 a {
@@ -40,7 +39,7 @@ a {
 div#header {
 	margin: 0 auto;
 	max-width: 1200px;
-	min-width: 900px;
+	min-width: 800px;
 	padding-bottom: 5px;
 }
 
@@ -65,7 +64,7 @@ div#top {
 div#top div#gnb {
 	margin: 0 auto;
 	max-width: 1200px;
-	min-width: 900px;
+	min-width: 800px;
 }
 
 div#top div#gnb ul.item {
@@ -87,11 +86,10 @@ div#top div#gnb ul.item:hover li {
 }
 
 div#main {
-	min-height: 480px;
 	background-color: #ffffff;
 	margin: 43px auto;
 	max-width: 1200px;
-	min-width: 900px;
+	min-width: 800px;
 	border: 1px solid #cccccc;
     border-radius : 0 0 10px 10px;
 }

@@ -232,6 +232,7 @@ table.grid__ tbody td input[type='text']:hover, table.grid__ tbody td select:hov
 table.grid__ tbody td input[type='text']:focus, table.grid__ tbody td select:focus, table.grid__ tbody td textarea:focus {
 	border-color: #faaeae;
 	background-color: #ffe5e5;
+	transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 	box-shadow: inset 1px 1px 1px rgba(0,0,0,0.075);
 }
 
