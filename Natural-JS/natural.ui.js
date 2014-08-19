@@ -1,5 +1,5 @@
 (function(window, $) {
-	var version = "0.5.1.6";
+	var version = "0.5.1.7";
 
 	// NTR local variables
 	$.fn.extend(NTR, {
