@@ -484,7 +484,7 @@
 		// Form
 		var Form = N.form = function(obj, opts) {
 			this.options = {
-				data : obj,
+				data : N.type(obj) === "array" ? N(obj) : obj,
 				row : -1,
 				context : null,
 				html : false,
@@ -696,12 +696,11 @@
 			},
 			add : function() {
 				var opts = this.options;
-		        if (opts.data == null) {
-		            throw new Error("[Form.add]data is null. you must input data(Array)");
+		        if (opts.data === null) {
+		            throw new Error("[Form.add]data is null. you must input data");
 		        }
 
-		        //FormUtils.reset(opts.context, false);
-
+		        // set default values
 		        var vals = N.element.toData(opts.context.find(":input"));
 		        if (vals == null) {
 		            vals = {};
@@ -712,7 +711,7 @@
 	        		opts.data.push(vals);
 	        		this.options.row = opts.data.length - 1;
 	        	} else {
-	        		opts.data.splice(0, 0, vals);
+        			opts.data.splice(0, 0, vals);
 	        		this.options.row = 0;
 	        	}
 
@@ -849,7 +848,8 @@
 		// Grid
 		var Grid = N.grid = function(obj, opts) {
 			this.options = {
-				data : obj,
+				data : N.type(obj) === "array" ? N(obj) : obj,
+				removedData : [],
 				row : -1,
 				context : null,
 				html : false,
@@ -863,6 +863,10 @@
 					idx : 0,
 					size : 100
 				},
+				serverPaging : {
+					// TODO
+				},
+				resizable : false,
 				vResizable : false,
 				sortable : false
 			};
@@ -870,7 +874,7 @@
 			try {
 				$.extend(this.options, N.context.attr("ui")["grid"]);
 
-				//$.extend 시 object 에 object 가 포함되어 있으면 해당오브젝트 객체로 단순 덮어쓰기가 되어서 처리
+				//because $.extend method is not extend object type value
 				this.options.scrollPaging.idx = 0;
 			} catch (e) { }
 
@@ -879,6 +883,7 @@
 			} else {
 				this.options.context = N(opts);
 			}
+
 			this.options.context.addClass("grid__");
 
 			this.tbodyTemp = this.options.context.find("> tbody").clone(true, true);
@@ -905,11 +910,13 @@
 		$.extend(Grid.fn, {
 			data : function(rowStatus) {
 				if(rowStatus === undefined) {
-					return this.options.data;
+					return this.options.data.get();
 				} else if(rowStatus === "modified") {
-					this.options.data.datafilter("data.rowStatus !== undefined");
+					return this.options.data.datafilter("data.rowStatus !== undefined").get().concat(this.options.removedData);
+				} else if(rowStatus === "delete") {
+					return this.options.removedData;
 				} else {
-					this.options.data.datafilter("data.rowStatus === '" + rowStatus + "'");
+					return this.options.data.datafilter("data.rowStatus === '" + rowStatus + "'").get();
 				}
 			},
 			context : function(sel) {
@@ -917,19 +924,24 @@
 			},
 			bind : function(data) {
 				var opts = this.options;
+				//empty removedData;
+				opts.removedData = [];
+				//for internal call bind method by scrollPaging
 				var interCall = arguments[1] !== undefined && arguments[1] === true ? true : false;
+				//for rebind new data
 				if(data !== undefined) {
-					opts.data = data;
+					opts.data = N.type(data) === "array" ? N(data) : data;
 				}
 				var tbodyTempClone;
 
 				if (opts.data.length > 0) {
-					//clean body
+					//clear tbody visual effect
 					opts.context.find("tbody").clearQueue().stop();
 					if(!interCall) {
 						opts.scrollPaging.idx = 0;
 					}
 					if(opts.scrollPaging.idx === 0) {
+						//remove tbodys in grid body area
 						opts.context.find("tbody").remove();
 					}
 
@@ -937,6 +949,7 @@
 					var this_ = this;
 					var limit = opts.scrollPaging.size;
 					var render = function() {
+						// clone tbody for create new line
 						tbodyTempClone = this_.tbodyTemp.clone(true, true).hide();
 						opts.context.append(tbodyTempClone);
 						N(opts.data[i]).form({
@@ -951,7 +964,9 @@
 					};
 					render();
 				} else {
+					//remove tbodys in grid body area
 					opts.context.find("tbody").remove();
+					// clone tbody for create empty new line
 					tbodyTempClone = this.tbodyTemp.clone();
 					tbodyTempClone.html('<tr><td class="empty__" align="center" colspan="' + this.cellCnt + '">'
 							+ N.message.get(opts.message, "empty") + '</td></tr>');
@@ -973,9 +988,8 @@
 					opts.context.append(tbodyTempClone);
 				}
 
-				//TODO 데이터가 안생김
 				//TODO 여기서 ds.noty, form 에서는 noty 하면 안됨...이 그리드가 업뎃되어버릴꺼임
-				N(opts.data).form({
+				opts.data.form({
 					context : tbodyTempClone,
 					addTop : opts.addTop
 				}).add();
@@ -984,6 +998,24 @@
 				tbodyTempClone.find(":input:eq(0)").get(0).focus();
 
 				return this;
+			},
+			remove : function(row) {
+				var opts = this.options;
+				if(row === undefined || row > opts.data.length - 1) {
+		        	N.error("[N.grid.remove]Row index out of range");
+		        }
+
+				opts.context.find("tbody:eq(" + row + ")").remove();
+
+				if (opts.data[row].rowStatus === "insert") {
+		            opts.data.splice(row, 1);
+		        } else {
+		        	var removedData = opts.data.splice(row, 1)[0];
+		        	removedData["rowStatus"] = "delete";
+		            opts.removedData.push(removedData);
+		        }
+
+				N.ds.instance(this).notify();
 			},
 			revert : function(row) {
 				var opts = this.options;
@@ -1026,11 +1058,12 @@
 				return this;
 			},
 			update : function(row, key) {
-				this.options.context.find("tbody:eq(" + String(row) + ")").instance("form").update(row, key);
+				if(row === undefined && row === undefined) {
+					this.bind();
+				} else {
+					this.options.context.find("tbody:eq(" + String(row) + ")").instance("form").update(row, key);
+				}
 				return this;
-			},
-			remove : function(row) {
-				// TODO
 			}
 		});
 
@@ -1038,7 +1071,7 @@
 			fixHeader : function() {
 				var opts = this.options;
 
-				//헤더 고정형에서는 add 했을때 새로운 라인 element가 무조건 위에 생김
+				// addTop option is unconditional [true] when fixed header mode
 				opts.addTop = true;
 
 				opts.context.css({
@@ -1141,6 +1174,9 @@
 		        	Grid.vResize.call(this, gridWrap, tbodyWrap, tfootWrap);
 		        }
 			},
+			resize : function() {
+				// TODO
+			},
 			vResize : function(gridWrap, tbodyWrap, tfootWrap) {
         		var pressed = false;
 	        	var vResizable = $('<div class="v_resizable__" align="center"></div>');
@@ -1216,6 +1252,9 @@
     	        		}
     	        	}
     	        });
+        	},
+        	serverPaging : function() {
+        		//TODO
         	},
 			cellCnt : function(ele) {
 		        return Math.max.apply(null, $.map(ele.find("tr"), function(el) {

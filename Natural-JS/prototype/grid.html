@@ -43,6 +43,7 @@
 			<a id="btnGetVal" href="#" class='{ "color": "skyblue", "size": "small" }'>get value</a>
 			<a id="btnChangeVal" href="#" class='{ "color": "skyblue", "size": "small" }'>change value</a>
 			<a id="btnAdd" href="#" class='{ "color": "skyblue", "size": "small" }'>add new row</a>
+			<a id="btnDelete" href="#" class='{ "color": "skyblue", "size": "small" }'>delete 4th row</a>
 			<a id="btnValidate" href="#" class='{ "color": "skyblue", "size": "small" }'>all row data validate</a>
 		</div>
 		<table id="grid">
@@ -73,9 +74,9 @@
 				</tr>
 			</tbody>
 		</table>
-		
+
 		<br />
-		
+
 		<div class="btnBox">
 			<a id="btnGridBind2" href="#" class='{ "color": "skyblue", "size": "small" }'>Grid Bind2</a>
 		</div>
@@ -141,7 +142,7 @@ N("div#grid").service({
     		vResizable : true,
     		sortable : true
     	}).bind();
-    	
+
     	this.setEvents();
         return this;
     },
@@ -159,37 +160,42 @@ N("div#grid").service({
         		this_.grid.bind(data);
         	});
         });
-    	
+
     	N("a#btnGetData").click(function(e) {
             e.preventDefault();
            	N(window).alert(JSON.stringify(this_.grid.data()[0])).show();
         });
-    	
+
     	N("a#btnRevert").click(function(e) {
             e.preventDefault();
        		this_.grid.revert();
         });
-    	
+
     	N("a#btnGetVal").click(function(e) {
             e.preventDefault();
             this_.grid.context().parent().alert(this_.grid.val(1, "name")).show();
         });
-    	
+
     	N("a#btnChangeVal").click(function(e) {
             e.preventDefault();
        		this_.grid.val(1, "name", "빨간짜장면");
         });
-    	
+
     	N("a#btnAdd").click(function(e) {
             e.preventDefault();
         	this_.grid.add();
         });
-    	
+
+    	N("a#btnDelete").click(function(e) {
+            e.preventDefault();
+        	this_.grid.remove(3);
+        });
+
     	N("a#btnValidate").click(function(e) {
             e.preventDefault();
             this_.grid.context().parent().alert(String(this_.grid.validate()));
         });
-    	
+
     	N("a#btnGridBind2").click(function(e) {
             e.preventDefault();
             N.controller("prototype/grid_big.json").submit(function(data) {
