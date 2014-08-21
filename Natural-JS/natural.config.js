@@ -38,6 +38,24 @@
 					afterInit : function(request) {
 					},
 					beforeSend : function(request, xhr, settings) {
+						if(request.options.dataType === "html") {
+							request.obj.html('<div align="center" style="margin-top: 140px;margin-bottom: 140px;">페이지를 불러오는 중...</div>');
+						}
+					},
+					success : function(request, data, textStatus, xhr) {
+					},
+					error : function(request, xhr, textStatus, errorThrown) {
+						if(request.options.dataType === "html") {
+							request.obj.html('<div align="center" style="margin-top: 140px;margin-bottom: 140px;">페이지를 불러오는 도중 에러가 발생 했습니다.</div>');
+						}
+					},
+					complete : function(request, xhr, textStatus) {
+					}
+				},
+				"dataFilter" : {
+					afterInit : function(request) {
+					},
+					beforeSend : function(request, xhr, settings) {
 					},
 					success : function(request, data, textStatus, xhr) {
 					},
@@ -74,7 +92,7 @@
 					 * 특정 영역에 html 페이지를 불러올때 전환 효과 지정, false 이면 효과 없음.
 					 * ex) ["fadeIn", 300, null], 적용안할때는 false
 					 */
-					"effect" : [ "slideDown", 300, null ]
+					"effect" : ["slideDown", 300, null]
 				}
 			}
 		}

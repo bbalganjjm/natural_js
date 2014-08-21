@@ -125,15 +125,13 @@
 								N.error("[Controller.submit.success.callback]" + e);
 							}
 						} else {
-							if (obj.request.options.effect) {
-								obj.hide();
-							}
 							if (obj.request.options.overwrite) {
-								obj.empty();
+								obj.html(data);
+							} else {
+								obj.append(data);
 							}
-							obj.append(data);
 							if (obj.request.options.effect) {
-								obj[obj.request.options.effect[0]](obj.request.options.effect[1], obj.request.options.effect[2]);
+								obj.hide()[obj.request.options.effect[0]](obj.request.options.effect[1], obj.request.options.effect[2]);
 							}
 							if(obj.children(":first").length > 0) {
 								obj.children(":first").service().request = obj.request;

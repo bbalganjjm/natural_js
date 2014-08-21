@@ -130,15 +130,17 @@ N("div#grid").service({
     	//this.createSelect(data);
 
     	this.grid = N([]).grid({
-    		context : N("table#grid"),
+    		context :"table#grid",
     		height : 300,
+    		resizable : true,
     		vResizable : true,
     		sortable : true
     	}).bind();
 
     	this.grid2 = N([]).grid({
-    		context : N("table#grid2"),
+    		context : "table#grid2",
     		height : 300,
+    		resizable : true,
     		vResizable : true,
     		sortable : true
     	}).bind();

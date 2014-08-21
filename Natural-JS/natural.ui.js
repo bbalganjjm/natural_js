@@ -58,23 +58,30 @@
 		var Alert = N.alert = function(obj, msg, vars) {
 			this.options = {
 				obj : obj,
-				context : obj.get(0) === window || obj.get(0) === window.document ? N("body") : obj,
+				context : obj,
 				msgContext : N(),
 				msgContents : null,
-				msg : N.isPlainObject(msg) && msg.msg !== undefined ? msg.msg : msg,
-				vars : N.isPlainObject(msg) && msg.vars !== undefined ? msg.vars : vars,
+				msg : msg,
+				vars : vars,
 				isInput : false,
 				isWindow : obj.get(0) === window || obj.get(0) === window.document,
-				//TODO 여기밑으로 extend 처리, 위로는 extend 한 후 대입
-				title : N.isPlainObject(msg) && msg.title !== undefined ? msg.title : null,
-				button : N.isPlainObject(msg) && msg.button !== undefined ? msg.button : true,
-				"callback" : N.isPlainObject(msg) && msg.callback !== undefined ? msg.callback : null,
-				overlayColor : N.isPlainObject(msg) && msg.overlayColor !== undefined ? msg.overlayColor : null,
-				"confirm" : N.isPlainObject(msg) && msg.confirm !== undefined ? msg.confirm : false
+				title : null,
+				button : true,
+				"callback" : null,
+				overlayColor : null,
+				"confirm" : false
 			};
 
 			if (obj.is(":input")) {
 				this.options.isInput = true;
+			}
+
+			if(msg !== undefined && N.isPlainObject(msg)) {
+				$.extend(this.options, msg);
+			}
+
+			if(obj.get(0) === window || obj.get(0) === window.document) {
+				this.options.context = N("body");
 			}
 
 			var opts = this.options;
@@ -220,9 +227,9 @@
 					opts.msgContents.css({
 						"top" : ((opts.msgContext.height() / 2 + opts.context.offset().top) - opts.msgContents.height() / 2) + "px",
 						"left" : ((opts.msgContext.width() / 2 + opts.context.offset().left) - opts.msgContents.width() / 2) + "px",
-					}).fadeIn(150);
+					})
+					opts.msgContents.fadeIn(150);
 				} else {
-					//TODO window resize 할때 좌표 다시 맞춰주기
 					if (!N.isEmptyObject(opts.msg)) {
 						var setOffset = function() {
 							var position = "left";
@@ -500,6 +507,9 @@
 
 			if (N.isPlainObject(opts)) {
 				$.extend(this.options, opts);
+				if(N.type(this.options.context) === "string") {
+					this.options.context = N(this.options.context);
+				}
 				if(opts.row === undefined) {
 					this.options.row = 0;
 				}
@@ -866,7 +876,7 @@
 				serverPaging : {
 					// TODO
 				},
-				resizable : false,
+				resizable : true,
 				vResizable : false,
 				sortable : false
 			};
@@ -880,24 +890,37 @@
 
 			if (N.isPlainObject(opts)) {
 				$.extend(this.options, opts);
+				if(N.type(this.options.context) === "string") {
+					this.options.context = N(this.options.context);
+				}
 			} else {
 				this.options.context = N(opts);
 			}
 
 			this.options.context.addClass("grid__");
 
+			// set tbody template
 			this.tbodyTemp = this.options.context.find("> tbody").clone(true, true);
 
+			// set cell count in tbody
 			this.cellCnt = Grid.cellCnt(this.tbodyTemp);
 
-			//Fixed header
-			if (this.options.height > 0) {
+			// fixed header
+			if(this.options.height > 0) {
 				Grid.fixHeader.call(this);
 			}
 
-			//sortable
-			if (this.options.sortable) {
+			// set tbody cell id info into th cell in thead
+			this.thead = Grid.setTheadCellInfo.call(this);
+
+			// sortable, v(ertical)Resizable
+			if(this.options.sortable) {
 				Grid.sort.call(this);
+			}
+
+			// resizable column width
+			if(this.options.resizable) {
+				Grid.resize.call(this);
 			}
 
 			this.options.context.instance("grid", this);
@@ -1174,61 +1197,102 @@
 		        	Grid.vResize.call(this, gridWrap, tbodyWrap, tfootWrap);
 		        }
 			},
-			resize : function() {
-				// TODO
-			},
 			vResize : function(gridWrap, tbodyWrap, tfootWrap) {
         		var pressed = false;
 	        	var vResizable = $('<div class="v_resizable__" align="center"></div>');
 	        	vResizable.css("cursor", "n-resize");
 
 	        	var currHeight, tbodyOffset, tfootHeight = 0;
-	        	vResizable.bind("mousedown.grid.vResizable", function() {
+	        	vResizable.bind("mousedown.grid.vResize", function() {
 	        		if(tfootWrap !== undefined) {
 		        		tfootHeight = tfootWrap.height();
 		        	}
 		        	tbodyOffset = tbodyWrap.offset();
 
-	        		$(document).bind("dragstart.grid.vResizable, selectstart.grid.vResizable", function() {
+	        		$(document).bind("dragstart.grid.vResize, selectstart.grid.vResize", function() {
 	                    return false;
 	                });
 	        		pressed = true;
-	        	});
 
-	        	$(window.document).bind("mousemove.grid.vResizable", function(e) {
-	        		if(pressed) {
-	        			currHeight = (e.pageY - tbodyOffset.top - tfootHeight) + "px";
-	        			tbodyWrap.css({
-	        				"height" : currHeight,
-	        				"max-height" : currHeight
-	        			});
-	        		}
-		        });
+		        	$(window.document).bind("mousemove.grid.vResize", function(e) {
+		        		if(pressed) {
+		        			currHeight = (e.pageY - tbodyOffset.top - tfootHeight) + "px";
+		        			tbodyWrap.css({
+		        				"height" : currHeight,
+		        				"max-height" : currHeight
+		        			});
+		        		}
+			        });
 
-	        	$(window.document).bind("mouseup.grid.vResizable", function() {
-	        		$(document).unbind("dragstart.grid.vResizable, selectstart.grid.vResizable");
-	        		pressed = false;
+		        	$(window.document).bind("mouseup.grid.vResize", function() {
+		        		$(document).unbind("dragstart.grid.vResize, selectstart.grid.vResize, mousemove.grid.vResize, mouseup.grid.vResize");
+		        		pressed = false;
+		        	});
 	        	});
 
 	        	gridWrap.after(vResizable);
         	},
+			resize : function() {
+				var opts = this.options;
+				var theadCells = this.thead.find("> tr th");
+				var resizeBar;
+				var ele;
+
+				var pressed = false;
+				var defWidth;
+				var currWidth;
+				var currCellEle;
+				var currResizeBarEle;
+				var startOffsetX;
+				theadCells.each(function() {
+					cellEle = $(this);
+		            resizeBar = cellEle.append('<span class="resize_bar__"></span>').find("span.resize_bar__");
+		            var resizeBarWidth = 6;
+		            resizeBar.css({
+		            	"padding": "0px",
+		            	"margin": "-" + cellEle.css("padding-top") + " -" + (resizeBarWidth/2 + parseInt(cellEle.css("padding-right"))) + "px -" + cellEle.css("padding-bottom") + " 0",
+		            	"height" : String(cellEle.innerHeight() + 1) + "px",
+		            	"float" : "right",
+		            	"width" : resizeBarWidth + "px",
+		            	"background-color" : "#000000",
+		            	"cursor": "e-resize"
+		            });
+
+		            resizeBar.bind("mousedown.grid.resize", function(e) {
+		            	startOffsetX = e.pageX;
+		            	currResizeBarEle = $(e.target);
+
+		            	//cell 안의 text 와 float 속성이 먹은 resizeBar 가 줄넘김 되어 cell 의 높이가 변하는것 방지
+		            	currResizeBarEle.css("float", "none");
+
+		            	currCellEle = currResizeBarEle.parent("th");
+		            	defWidth = currCellEle.innerWidth();
+
+		        		$(document).bind("dragstart.grid.resize, selectstart.grid.resize", function() {
+		                    return false;
+		                });
+		        		pressed = true;
+
+		        		$(window.document).bind("mousemove.grid.resize", function(e) {
+			        		if(pressed) {
+			        			currWidth = defWidth + (e.pageX - startOffsetX);
+			        			if(currWidth > 0) {
+			        				currCellEle.css("width", currWidth + "px");
+			        			}
+			        		}
+				        });
+
+			        	$(window.document).bind("mouseup.grid.resize", function(e) {
+			        		$(document).unbind("dragstart.grid.resize, selectstart.grid.resize, mousemove.grid.resize, mouseup.grid.resize");
+			        		currResizeBarEle.css("float", "right");
+			        		pressed = false;
+			        	});
+		        	});
+				});
+			},
         	sort : function() {
     	        var opts = this.options;
-    	        var thead;
-    	        if (this.options.height > 0) {
-    	        	thead = opts.context.closest("div.grid_wrap__").find("> div.thead_wrap__ thead");
-    	        } else {
-    	        	thead = opts.context.find("thead");
-    	        }
-
-				var id;
-				this.tbodyTemp.find("> tr td").each(function(i) {
-					id = $(this).attr("id");
-					if(id === undefined) {
-						id = $(this).find("*").attr("id");
-					}
-					thead.find("> tr th:eq(" + i + ")").data("id", id);
-	            });
+    	        var thead = this.thead;
 
     	        var theadCells = thead.find("> tr th");
     	        theadCells.css("cursor", "pointer");
@@ -1255,6 +1319,24 @@
         	},
         	serverPaging : function() {
         		//TODO
+        	},
+        	setTheadCellInfo : function() {
+        		var opts = this.options;
+        		var thead;
+    			if (opts.height > 0) {
+    	        	thead = opts.context.closest("div.grid_wrap__").find("> div.thead_wrap__ thead");
+    	        } else {
+    	        	thead = opts.context.find("thead");
+    	        }
+    			var id;
+    			this.tbodyTemp.find("> tr td").each(function(i) {
+    				id = $(this).attr("id");
+    				if(id === undefined) {
+    					id = $(this).find("*").attr("id");
+    				}
+    				thead.find("> tr th:eq(" + i + ")").data("id", id);
+                });
+    			return thead;
         	},
 			cellCnt : function(ele) {
 		        return Math.max.apply(null, $.map(ele.find("tr"), function(el) {
