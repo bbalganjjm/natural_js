@@ -1,9 +1,10 @@
 @charset "utf-8";
 /* Alert global message */
 div.block_overlay__ {
-	background-color: #000000 !important;
+	background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAIklEQVQIW2NkQAIf7n/4zwjjgzgCigKMYAEYB8RmROaABAAQCg/DqNBm8AAAAABJRU5ErkJggg==") repeat;
+	background-color: #555555 !important;
 	opacity: 0.75;
-	filter: alpha(opacity=65)\9;
+	filter: alpha(opacity=75)\9;
 }
 
 span.block_overlay_msg__ {
@@ -202,8 +203,12 @@ a.btn_big__, input[type='button'].btn_big__, button.btn_big__ {
 }
 
 /* Grid */
-div.thead_wrap__ table.grid__ th {
+div.tbody_wrap__ {
+	background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAIklEQVQIW2NkQAIf7n/4zwjjgzgCigKMYAEYB8RmROaABAAQCg/DqNBm8AAAAABJRU5ErkJggg==") repeat;
+}
 
+table.grid__ tbody{
+	background-color: #ffffff;
 }
 
 div.tbody_wrap__ table.grid__ td {
@@ -214,11 +219,12 @@ div.tbody_wrap__ table.grid__ td {
 }
 
 table.grid__ thead, table.grid__ tfoot{
+	background: linear-gradient(top, #efefef, #effeee);
+	background: -ms-linear-gradient(top, #efefef, #effeee);
+	background: -moz-linear-gradient(top, #efefef, #effeee);
+	background: -o-linear-gradient(top, #efefef, #effeee);
+	background: -webkit-linear-gradient(top, #efefef, #effeee);
 	background-color: #efefef;
-}
-
-table.grid__ tbody{
-	background-color: #ffffff;
 }
 
 table.grid__ th, table.grid__ td {
@@ -226,6 +232,7 @@ table.grid__ th, table.grid__ td {
 }
 
 table.grid__ tbody td input[type='text'], table.grid__ tbody td select, table.grid__ tbody td textarea {
+	width: 100%;
    	padding-left: 0;
    	padding-right: 0;
    	border-color: #ffffff;

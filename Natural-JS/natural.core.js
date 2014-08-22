@@ -390,7 +390,7 @@
 				var msie = ua.indexOf("MSIE ");
 				var trident = ua.match(/Trident\/(\d.\d)/i);
 				if (msie < 0) {
-					return -1;
+					return 0;
 				} else {
 					if (trident == null) {
 						return parseInt(ua.substring(msie + 5, ua.indexOf(".", msie)));

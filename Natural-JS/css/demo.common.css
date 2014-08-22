@@ -33,6 +33,20 @@ input[type='text']:focus, input[type='password']:hover, select:focus, textarea:f
 	background-color: #ffe5e5;
 }
 
+input[disabled='disabled'], input[readonly='readonly'] {
+	box-shadow: inset 0 0 0 rgba(0,0,0,0.0);
+}
+
+input[disabled='disabled'], input[disabled='disabled']:hover, input[disabled='disabled']:focus {
+	border-color: #cccccc;
+	background-color: #eeeeee;
+}
+
+input[readonly='readonly'], input[readonly='readonly']:hover, input[readonly='readonly']:focus {
+	border-color: #cccccc;
+	background-color: #ffffff;
+}
+
 a {
 	text-decoration: none;
 	font-weight: normal;
@@ -72,15 +86,15 @@ div#header span#logo {
 }
 
 div#top {
-	background: linear-gradient(top, #fefeee, #ffffff);
-	background: -ms-linear-gradient(top, #fefeee, #ffffff);
-	background: -moz-linear-gradient(top, #fefeee, #ffffff);
-	background: -o-linear-gradient(top, #fefeee, #ffffff);
-	background: -webkit-linear-gradient(top, #fefeee, #ffffff);
+	background: linear-gradient(top, #efefef, #ffffff);
+	background: -ms-linear-gradient(top, #efefef, #ffffff);
+	background: -moz-linear-gradient(top, #efefef, #ffffff);
+	background: -o-linear-gradient(top, #efefef, #ffffff);
+	background: -webkit-linear-gradient(top, #efefef, #ffffff);
+	background-color: #ffffff;
 	position: absolute;
 	width: 100%;
-	background-color: #ffffff;
-	box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.4);
+	box-shadow: 0 2px 3px 0 rgba(0,0,0,0.3);
 }
 
 div#top div#gnb {
@@ -118,6 +132,7 @@ div#main {
 }
 
 div#main div#contents {
+	min-height: 300px;
 	line-height: 20px;
 	border: 1px solid #cdcdcd\9;
 	background-color: #ffffff\9;

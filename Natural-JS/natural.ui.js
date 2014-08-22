@@ -392,7 +392,7 @@
 			};
 
 			try {
-				$.extend(this.options, N.context.attr("ui")["select"]);
+				this.options = $.extend({}, this.options, N.context.attr("ui")["select"]);
 			} catch (e) { }
 
 			$.extend(this.options, N.element.toOpts(this.options.context));
@@ -502,7 +502,7 @@
 			};
 
 			try {
-				$.extend(this.options, N.context.attr("ui")["form"]);
+				this.options = $.extend({}, this.options, N.context.attr("ui")["form"]);
 			} catch (e) { }
 
 			if (N.isPlainObject(opts)) {
@@ -882,10 +882,10 @@
 			};
 
 			try {
-				$.extend(this.options, N.context.attr("ui")["grid"]);
+				this.options = $.extend({}, this.options, N.context.attr("ui")["grid"]);
 
 				//because $.extend method is not extend object type value
-				this.options.scrollPaging.idx = 0;
+				this.options.scrollPaging = $.extend({}, this.options.scrollPaging, N.context.attr("ui")["grid"]["scrollPaging"]);
 			} catch (e) { }
 
 			if (N.isPlainObject(opts)) {
@@ -970,7 +970,12 @@
 
 					var i = opts.scrollPaging.idx;
 					var this_ = this;
-					var limit = opts.scrollPaging.size;
+					var limit;
+					if(opts.height > 0) {
+						limit = opts.scrollPaging.size;
+					} else {
+						limit = opts.data.length
+					}
 					var render = function() {
 						// clone tbody for create new line
 						tbodyTempClone = this_.tbodyTemp.clone(true, true).hide();
@@ -980,7 +985,7 @@
 						}).bind();
 						tbodyTempClone.show(opts.createRowDelay, function() {
 							i++;
-							if(i < opts.scrollPaging.idx + opts.scrollPaging.size) {
+							if(i < opts.scrollPaging.idx + limit) {
 								render();
 							}
 						});
@@ -1149,15 +1154,14 @@
 
 		        //Scroll paging
 		        var this_ = this;
+		        var defSPSize = N.context.attr("ui")["grid"]["scrollPaging"]["size"];
+		        var tbodyLength;
 		        tbodyWrap.scroll(function() {
 		        	var thisWrap = $(this);
-		        	var tbodyLength = opts.context.find("> tbody").length;
-		        	var defSPSize = N.context.attr("ui")["grid"]["scrollPaging"]["size"];
                     if (thisWrap.scrollTop() >= opts.context.height() - thisWrap.height()) {
+                    	tbodyLength = opts.context.find("> tbody").length;
                     	if (tbodyLength === opts.scrollPaging.idx + defSPSize) {
-	                    	thisWrap.css("cursor", "wait");
-
-	                        if (tbodyLength > 1 && tbodyLength <= opts.data.length) {
+	                        if (tbodyLength > 0 && tbodyLength <= opts.data.length) {
 	                            opts.scrollPaging.idx += defSPSize;
 	                        }
 
@@ -1170,8 +1174,6 @@
 	                        if(opts.scrollPaging.idx < opts.data.length) {
 	                        	this_.bind(undefined, true);
 	                        }
-
-	                        thisWrap.css("cursor", "default");
 	                    }
 	                }
 	            });
@@ -1240,21 +1242,30 @@
 				var defWidth;
 				var currWidth;
 				var currCellEle;
+				var currCellEleTable;
 				var targetCellEle;
+				var targetCellEleWrap;
 				var currResizeBarEle;
 				var startOffsetX;
 				var initHeight;
+				var innerHeight;
+				var scrollbarWidth = N.browser.scrollbarWidth();
 				theadCells.each(function() {
 					cellEle = $(this);
 		            resizeBar = cellEle.append('<span class="resize_bar__"></span>').find("span.resize_bar__");
 		            var resizeBarWidth = 6;
+
+		            if(N.browser.msieVersion() > 0) {
+		            	 innerHeight = String(cellEle.innerHeight());
+		            } else {
+		            	 innerHeight = String(cellEle.innerHeight() + 1);
+		            }
 		            resizeBar.css({
 		            	"padding": "0px",
 		            	"margin": "-" + cellEle.css("padding-top") + " -" + (resizeBarWidth/2 + parseInt(cellEle.css("padding-right"))) + "px -" + cellEle.css("padding-bottom") + " 0",
-		            	"height" : String(cellEle.innerHeight() + 1) + "px",
+		            	"height" : innerHeight + "px",
 		            	"float" : "right",
 		            	"width" : resizeBarWidth + "px",
-		            	"background-color" : "#000000",
 		            	"cursor": "e-resize"
 		            });
 
@@ -1263,12 +1274,14 @@
 		            	currResizeBarEle = $(e.target);
 
 		            	// cell 안의 text 와 float 속성이 먹은 resizeBar 가 줄넘김 되어 cell 의 높이가 변하는것 방지
-		            	currResizeBarEle.css("float", "none");
+		            	theadCells.find("span.resize_bar__").css("float", "none");
 
 		            	currCellEle = currResizeBarEle.parent("th");
 
 		            	if(opts.height > 0) {
 		            		targetCellEle = opts.context.find("thead th:eq(" + theadCells.index(currCellEle) + ")");
+		            		currCellEleTable = currCellEle.parents("table.grid__");
+		            		targetCellEleWrap = targetCellEle.parents("div.tbody_wrap__");
 		            	}
 
 		            	// for prevent sort event
@@ -1288,19 +1301,23 @@
 			        			currWidth = defWidth + (e.pageX - startOffsetX);
 			        			if(currWidth > 0) {
 			        				currCellEle.css("width", currWidth + "px");
-			        				targetCellEle.css("width", currWidth + "px");
+			        				if(targetCellEle !== undefined) {
+			        					targetCellEle.css("width", currWidth + "px");
+			        					targetCellEleWrap.width(currCellEleTable.width() + scrollbarWidth);
+			        				}
 			        			}
 			        		}
 				        });
 
 			        	$(window.document).bind("mouseup.grid.resize", function(e) {
 			        		$(document).unbind("dragstart.grid.resize, selectstart.grid.resize, mousemove.grid.resize, mouseup.grid.resize");
-			        		currResizeBarEle.css("float", "right");
+			        		theadCells.find("span.resize_bar__").css("float", "right");
 
 			        		// for keeping table layout
 			        		if(currCellEle.innerHeight() + 1 > initHeight) {
 			        			currCellEle.css("width", "");
 			        			targetCellEle.css("width", "");
+			        			targetCellEleWrap.width(currCellEleTable.width() + scrollbarWidth);
 			        		}
 
 			        		pressed = false;
@@ -1368,6 +1385,9 @@
 		            });
 		            return cellCnt;
 		        }));
+		    },
+		    rowSpan : function() {
+		    	//TODO
 		    }
 		});
 

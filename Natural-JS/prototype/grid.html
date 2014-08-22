@@ -83,8 +83,8 @@
 		<table id="grid2">
 			<thead>
 				<tr>
-					<th width="60" rowspan="2">picture</th>
-					<th width="50">index</th>
+					<th width="70" rowspan="2">picture</th>
+					<th width="70">index</th>
 					<th width="120">name</th>
 					<th width="*">email</th>
 					<th width="60">gender</th>
@@ -158,7 +158,7 @@ N("div#grid").service({
     	var this_ = this;
     	N("a#btnGridBind").click(function(e) {
             e.preventDefault();
-            N.controller("prototype/grid_big.json").submit(function(data) {
+            N.controller("prototype/grid.json").submit(function(data) {
         		this_.grid.bind(data);
         	});
         });
