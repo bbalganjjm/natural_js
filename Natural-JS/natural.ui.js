@@ -879,6 +879,7 @@
 				resizable : true,
 				vResizable : false,
 				sortable : false
+				//TODO onBind 추가
 			};
 
 			try {
@@ -976,10 +977,17 @@
 					} else {
 						limit = opts.data.length
 					}
+					var classOpts;
 					var render = function() {
 						// clone tbody for create new line
 						tbodyTempClone = this_.tbodyTemp.clone(true, true).hide();
 						opts.context.append(tbodyTempClone);
+
+						classOpts = N.element.toOpts(tbodyTempClone);
+						if(classOpts !== undefined && classOpts.rowHandler !== undefined) {
+							(new Function("return " + classOpts.rowHandler))()(i, tbodyTempClone, opts.data[i]);
+						}
+
 						N(opts.data[i]).form({
 							context : tbodyTempClone
 						}).bind();
@@ -1385,9 +1393,6 @@
 		            });
 		            return cellCnt;
 		        }));
-		    },
-		    rowSpan : function() {
-		    	//TODO
 		    }
 		});
 
