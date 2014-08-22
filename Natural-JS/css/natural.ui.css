@@ -231,14 +231,17 @@ table.grid__ th, table.grid__ td {
 	border: 1px solid #cccccc;
 }
 
-table.grid__ tbody td input[type='text'], table.grid__ tbody td select, table.grid__ tbody td textarea {
+table.grid__ tbody td input[type='text'], table.grid__ tbody td input[type='password'], table.grid__ tbody td select, table.grid__ tbody td textarea {
 	width: 100%;
    	padding-left: 0;
    	padding-right: 0;
    	border-color: #ffffff;
-   	height: 14px;
-   	line-height: 14px;
    	box-shadow: none;
+}
+
+table.grid__ tbody td input[type='text'], table.grid__ tbody td input[type='password'] {
+	height: 14px;
+   	line-height: 14px;
 }
 
 table.grid__ tbody td input[type='text']:hover, table.grid__ tbody td select:hover, table.grid__ tbody td textarea:hover,

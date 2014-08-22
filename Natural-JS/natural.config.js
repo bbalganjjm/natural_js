@@ -346,7 +346,7 @@
 			 */
 			"addTop" : false,
 			"scrollPaging" : {
-				"size" : 100
+				"size" : 50
 			},
 			/**
 			 * 세로 길이조절 기능 활성화 여부

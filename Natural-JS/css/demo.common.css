@@ -148,7 +148,6 @@ div#main div#contents {
 	font-weight: bold;
 }
 
-
 .demoBox {
 	padding: 10px;
 }
@@ -173,4 +172,27 @@ div#main div#contents {
 
 .sourceBox {
 	padding: 10px;
+}
+
+
+/* form example */
+table.form th {
+	background: linear-gradient(left, #efefef, #effeee);
+	background: -ms-linear-gradient(left, #efefef, #effeee);
+	background: -moz-linear-gradient(left, #efefef, #effeee);
+	background: -o-linear-gradient(left, #efefef, #effeee);
+	background: -webkit-linear-gradient(left, #efefef, #effeee);
+	background-color: #efefef;
+}
+
+table.form th, table.form td {
+	border: 1px solid #cccccc;
+}
+
+table.form tbody td input[type='text']:hover, table.form tbody td select:hover, table.form tbody td textarea:hover,
+table.form tbody td input[type='text']:focus, table.form tbody td select:focus, table.form tbody td textarea:focus {
+	border-color: #faaeae;
+	background-color: #ffe5e5;s
+	transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+	box-shadow: inset 1px 1px 1px rgba(0,0,0,0.075);
 }

@@ -1280,11 +1280,10 @@
 		            resizeBar.bind("mousedown.grid.resize", function(e) {
 		            	startOffsetX = e.pageX;
 		            	currResizeBarEle = $(e.target);
+		            	currCellEle = currResizeBarEle.parent("th");
 
 		            	// cell 안의 text 와 float 속성이 먹은 resizeBar 가 줄넘김 되어 cell 의 높이가 변하는것 방지
 		            	theadCells.find("span.resize_bar__").css("float", "none");
-
-		            	currCellEle = currResizeBarEle.parent("th");
 
 		            	if(opts.height > 0) {
 		            		targetCellEle = opts.context.find("thead th:eq(" + theadCells.index(currCellEle) + ")");

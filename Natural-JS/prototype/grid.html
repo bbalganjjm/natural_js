@@ -36,6 +36,40 @@
 	</div>
 	<div class="divBar">DEMO</div>
 	<div class="demoBox">
+		<div id="defBtnBox" class="btnBox">
+			<a id="btnInitDefGrid" href="#" class='{ "color": "skyblue", "size": "small" }'>init grid2</a>
+			<a id="btnBindDataDef" href="#" class='{ "color": "skyblue", "size": "small", "disable": true }'>bind data</a>
+		</div>
+		<table id="defGrid" class="grid__">
+			<thead>
+				<tr>
+					<th width="40">index</th>
+					<th width="50">picture</th>
+					<th width="110">name</th>
+					<th width="130">email</th>
+					<th width="50">gender</th>
+					<th width="60">eyeColor</th>
+					<th width="40">age</th>
+					<th width="*">company</th>
+					<th width="60">isActive</th>
+				</tr>
+			</thead>
+			<tbody class='{ "rowHandler" : "N(\"div#grid\").instance(\"service\").rowHandler" }'>
+				<tr>
+					<td id="index"></td>
+					<td align="center"><img id="picture" height="16" /></td>
+					<td id="name"></td>
+					<td id="email"></td>
+					<td id="gender" align="center"></td>
+					<td id="eyeColor"></td>
+					<td id="age"></td>
+					<td id="company"></td>
+					<td id="isActive" align="center"></td>
+				</tr>
+			</tbody>
+		</table>
+
+		<br />
 		<div id="firstBtnBox" class="btnBox">
 			<a id="btnInitGrid" href="#" class='{ "color": "skyblue", "size": "small" }'>init grid</a>
 			<a id="btnBindData" href="#" class='{ "color": "skyblue", "size": "small", "disable": true }'>bind data</a>
@@ -126,6 +160,7 @@
 N("div#grid").service({
 	grid : undefined,
 	grid2 : undefined,
+	defGrid : undefined,
     init : function() {
     	var vc = this.view.context;
 
@@ -143,6 +178,30 @@ N("div#grid").service({
     },
     setEvents : function() {
     	var this_ = this;
+
+    	N("a#btnInitDefGrid").click(function(e) {
+            e.preventDefault();
+            if(this_.defGrid === undefined) {
+            	this_.defGrid = N([]).grid({
+            		context :"table#defGrid",
+            		height : 300,
+            		resizable : true,
+            		vResizable : true,
+            		sortable : true
+            	}).bind();
+
+				N("div#defBtnBox").find("a").instance("button", function(u) {
+                 	this.enable();
+				});
+            }
+        });
+
+    	N("a#btnBindDataDef").click(function(e) {
+            e.preventDefault();
+            N.controller("prototype/grid_big.json").submit(function(data) {
+        		this_.defGrid.bind(data);
+        	});
+        });
 
     	N("a#btnInitGrid").click(function(e) {
             e.preventDefault();
