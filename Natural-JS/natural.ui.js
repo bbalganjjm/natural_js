@@ -989,10 +989,8 @@
 				} else {
 					//remove tbodys in grid body area
 					opts.context.find("tbody").remove();
-					// clone tbody for create empty new line
-					tbodyTempClone = this.tbodyTemp.clone();
-					tbodyTempClone.html('<tr><td class="empty__" align="center" colspan="' + this.cellCnt + '">'
-							+ N.message.get(opts.message, "empty") + '</td></tr>');
+					opts.context.append('<tbody><tr><td class="empty__" align="center" colspan="' + this.cellCnt + '">'
+							+ N.message.get(opts.message, "empty") + '</td></tr></tbody>');
 					opts.context.append(tbodyTempClone);
 				}
 
@@ -1242,8 +1240,10 @@
 				var defWidth;
 				var currWidth;
 				var currCellEle;
+				var targetCellEle;
 				var currResizeBarEle;
 				var startOffsetX;
+				var initHeight;
 				theadCells.each(function() {
 					cellEle = $(this);
 		            resizeBar = cellEle.append('<span class="resize_bar__"></span>').find("span.resize_bar__");
@@ -1262,11 +1262,21 @@
 		            	startOffsetX = e.pageX;
 		            	currResizeBarEle = $(e.target);
 
-		            	//cell 안의 text 와 float 속성이 먹은 resizeBar 가 줄넘김 되어 cell 의 높이가 변하는것 방지
+		            	// cell 안의 text 와 float 속성이 먹은 resizeBar 가 줄넘김 되어 cell 의 높이가 변하는것 방지
 		            	currResizeBarEle.css("float", "none");
 
 		            	currCellEle = currResizeBarEle.parent("th");
+
+		            	if(opts.height > 0) {
+		            		targetCellEle = opts.context.find("thead th:eq(" + theadCells.index(currCellEle) + ")");
+		            	}
+
+		            	// for prevent sort event
+		            	currCellEle.data("sortLock", true);
+
 		            	defWidth = currCellEle.innerWidth();
+
+		            	initHeight = currCellEle.innerHeight() + 1;
 
 		        		$(document).bind("dragstart.grid.resize, selectstart.grid.resize", function() {
 		                    return false;
@@ -1278,6 +1288,7 @@
 			        			currWidth = defWidth + (e.pageX - startOffsetX);
 			        			if(currWidth > 0) {
 			        				currCellEle.css("width", currWidth + "px");
+			        				targetCellEle.css("width", currWidth + "px");
 			        			}
 			        		}
 				        });
@@ -1285,6 +1296,13 @@
 			        	$(window.document).bind("mouseup.grid.resize", function(e) {
 			        		$(document).unbind("dragstart.grid.resize, selectstart.grid.resize, mousemove.grid.resize, mouseup.grid.resize");
 			        		currResizeBarEle.css("float", "right");
+
+			        		// for keeping table layout
+			        		if(currCellEle.innerHeight() + 1 > initHeight) {
+			        			currCellEle.css("width", "");
+			        			targetCellEle.css("width", "");
+			        		}
+
 			        		pressed = false;
 			        	});
 		        	});
@@ -1299,6 +1317,10 @@
     	        var this_ = this;
     	        theadCells.bind("click.grid.sort", function(e) {
     	        	var currEle = $(this);
+    	        	if(currEle.data("sortLock")) {
+    	        		currEle.data("sortLock", false);
+    	        		return false;
+    	        	}
     	        	if (opts.data.length > 0) {
     	        		if(N.string.trimToNull($(this).text()) != null && $(this).find("input[type='checkbox']").length == 0) {
     	        			var isAsc = false;

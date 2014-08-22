@@ -202,6 +202,17 @@ a.btn_big__, input[type='button'].btn_big__, button.btn_big__ {
 }
 
 /* Grid */
+div.thead_wrap__ table.grid__ th {
+
+}
+
+div.tbody_wrap__ table.grid__ td {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+}
+
 table.grid__ thead, table.grid__ tfoot{
 	background-color: #efefef;
 }
@@ -215,7 +226,6 @@ table.grid__ th, table.grid__ td {
 }
 
 table.grid__ tbody td input[type='text'], table.grid__ tbody td select, table.grid__ tbody td textarea {
-	width: 100%;
    	padding-left: 0;
    	padding-right: 0;
    	border-color: #ffffff;
