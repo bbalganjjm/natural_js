@@ -2,7 +2,8 @@
 	<div class="divBar">DEMO</div>
 	<div class="demoBox">
 		<div class="btnBox">
-			<a id="btnAlertArea" href="#" class='{ "color": "gray", "size": "small" }'>Alert(영역지정)</a>
+			<a id="btnAlertAreaModal" href="#" class='{ "color": "gray", "size": "small" }'>Alert(영역지정, 모달)</a>
+			<a id="btnAlertArea" href="#" class='{ "color": "gray", "size": "small" }'>Alert(영역지정,모달 해제)</a>
 			<a id="btnAlertCallback" href="#" class='{ "color": "gray", "size": "small" }'>Alert(콜백, 타이틀바)</a>
 			<a id="btnAlertWindow" href="#" class='{ "color": "skyblue", "size": "small" }'>Alert(전체)</a>
 			<a id="btnAlertWindowTitle" href="#" class='{ "color": "skyblue", "size": "small" }'>Alert(버튼바X, 타이틀바)</a>
@@ -32,7 +33,15 @@ N("div#alert").service({
 
         N("a#btnAlertArea", vc).click(function(e) {
             e.preventDefault();
-            N("pre.data").alert("특정 영역 메시지 처리").show()
+            N("pre.data").alert({
+                msg : "특정 영역 메시지 처리",
+				modal : false
+            }).show()
+        });
+        
+        N("a#btnAlertAreaModal", vc).click(function(e) {
+            e.preventDefault();
+            N("pre.data").alert("모달<br />특정 영역 메시지 처리").show()
         });
 
         N("a#btnAlertCallback", vc).click(function(e) {
@@ -63,16 +72,30 @@ N("div#alert").service({
 
         N("a#btnConfirm", vc).click(function(e) {
             e.preventDefault();
-            N("pre.data").confirm(function(msgContext, msgContents) {
-                confirm("콜백 실행");
-            }, "특정 영역 메시지 처리<br />확인 버튼 누르면 지정한 콜백 실행").show()
+            N("pre.data").alert({
+            	confirm : true,
+                msg : "특정 영역 메시지 처리<br />확인 버튼 누르면 지정한 콜백 실행",
+                callback : function(msgContext, msgContents) {
+                    confirm("확인 콜백 실행");
+                },
+                callbackX : function(msgContext, msgContents) {
+                    confirm("취소 콜백 실행");
+                }
+            }).show()
         });
 
         N("a#btnConfirmWindow", vc).click(function(e) {
             e.preventDefault();
-            N(window).confirm(function(msgContext, msgContents) {
-                confirm("콜백 실행");
-            }, "전체 영역 메시지 처리").show();
+            N(window).alert({
+            	confirm : true,
+                msg : "전체 영역 메시지 처리",
+                callback : function(msgContext, msgContents) {
+                    confirm("확인 콜백 실행");
+                },
+                callbackX : function(msgContext, msgContents) {
+                    confirm("취소 콜백 실행");
+                }
+            }).show();
 		});
 
         return this;

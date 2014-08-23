@@ -1,5 +1,5 @@
 (function(window, $) {
-	var version = "0.5.1.7";
+	var version = "0.5.1.8";
 
 	// NTR local variables
 	$.fn.extend(NTR, {
@@ -10,14 +10,6 @@
 		constructor : NTR,
 		alert : function(msg, vars) {
 			return new NTR.alert(this, msg, vars);
-		},
-		confirm : function(callback, msg, vars) {
-			return new NTR.alert(this, {
-				"msg" : msg,
-				"vars" : vars,
-				"confirm" : true,
-				"callback" : callback
-			});
 		},
 		button : function(opts) {
 			if(this.is("input[type='button'], button, a")) {
@@ -38,7 +30,7 @@
 			return new NTR.grid(this, opts);
 		},
 		popup : function() {
-			//TODO
+			return new NTR.popup(this, opts);
 		},
 		tab : function() {
 			//TODO integration jquery plugin
@@ -67,7 +59,9 @@
 				isWindow : obj.get(0) === window || obj.get(0) === window.document,
 				title : null,
 				button : true,
+				modal : true,
 				"callback" : null,
+				callbackX : null,
 				overlayColor : null,
 				"confirm" : false
 			};
@@ -75,145 +69,16 @@
 			if (obj.is(":input")) {
 				this.options.isInput = true;
 			}
-
 			if(msg !== undefined && N.isPlainObject(msg)) {
 				$.extend(this.options, msg);
 			}
-
 			if(obj.get(0) === window || obj.get(0) === window.document) {
 				this.options.context = N("body");
 			}
 
-			var opts = this.options;
-			if (!opts.isInput) {
-				var blockOverlayCss = {
-					"display" : "none",
-					"position" : opts.isWindow ? "fixed" : "absolute",
-					"left" : opts.context.offset().left + "px",
-					"top" : opts.context.offset().top + "px",
-					"cursor" : "not-allowed",
-					"height" : opts.isWindow ? (obj).outerHeight() : opts.context.outerHeight() + "px",
-					"width" : opts.context.outerWidth() + "px",
-					"padding" : 0,
-					"border-radius" : opts.context.css("border-radius") != "0px" ? opts.context.css("border-radius") : "0px",
-					"z-index" : N.element.maxZindex(opts.context.find("div, span, ul, p")) + 1
-				};
-				if (opts.overlayColor !== null) {
-					blockOverlayCss["background-color"] = opts.overlayColor;
-				}
-
-				opts.msgContext = opts.context.append(N('<div class="block_overlay__" onselectstart="return false;"></div>')
-						.css(blockOverlayCss)).find("div.block_overlay__:last");
-				if (vars !== undefined) {
-					opts.msg = N.message.replaceMsgVars(opts.msg, vars);
-				}
-
-				var blockOverlayMsgCss = {
-					"display" : "none",
-					"position" : opts.isWindow ? "fixed" : "absolute",
-					"top" : opts.context.offset().top + "px",
-					"left" : opts.context.offset().left + "px",
-					"z-index" : N.element.maxZindex(opts.context.find("div, span, ul, p")) + 1
-				};
-				var titleBox = '';
-				if(opts.title !== null) {
-					titleBox = '<li class="msg_title_box__">' + opts.title + '</li>';
-				}
-				var buttonBox = '';
-				if(opts.button) {
-					buttonBox = '<li class="buttonBox__">'
-						+ '<a href="#" class="confirm__">' + N.message.get(NTR.context.attr("ui")["alert"]["message"], "confirm") + '</a>'
-						+ '<a href="#" class="cancel__">' + N.message.get(NTR.context.attr("ui")["alert"]["message"], "cancel") + '</a>'
-						+ '</li>';
-				}
-				opts.msgContents = opts.msgContext.after(
-						N('<span class="block_overlay_msg__"><ul>'
-								+ titleBox
-								+ '<li class="msg_box__">' + opts.msg + '</li>'
-								+ buttonBox
-								+ '</ul></span>').css(blockOverlayMsgCss)).next("span.block_overlay_msg__:last");
-				var this_ = this;
-				opts.msgContents.find("li.buttonBox__ a.confirm__").button(NTR.context.attr("ui")["alert"]["global"]["okBtnStyle"]).click(function(e) {
-					e.preventDefault();
-					if (opts.callback !== null) {
-						opts.callback(opts.msgContext, opts.msgContents);
-					}
-					this_.remove();
-				});
-
-				if(opts.confirm) {
-					opts.msgContents.find("li.buttonBox__ a.cancel__").button(NTR.context.attr("ui")["alert"]["global"]["cancelBtnStyle"]).click(function(e) {
-						e.preventDefault();
-						this_.remove();
-					});
-				} else {
-					opts.msgContents.find("a.cancel__").hide();
-				}
-
-				$(document).unbind("keyup.alert");
-		        $(document).bind("keyup.alert", function(e) {
-		        	if (e.keyCode == 27) {
-		        		this_.remove();
-		        	}
-				});
-
-				$(window).resize(function() {
-					opts.msgContext.css({
-						"width" : opts.context.width() + "px"
-					});
-					if (opts.isWindow) {
-						opts.msgContext.css({
-							"height" : (obj).height() + "px"
-						});
-					}
-					opts.msgContents.css({
-						"left" : (((opts.msgContext.width() / 2) + opts.context.offset().left) - (opts.msgContents.width() / 2)) + "px"
-					});
-					if (opts.isWindow) {
-						opts.msgContents.css({
-							"top" : (((opts.msgContext.height() / 2) + opts.context.offset().top) - opts.msgContents.height()) + "px"
-						});
-					}
-				});
-			} else {
-				if(opts.context.instance("alert") !== undefined) {
-					opts.context.instance("alert").remove();
-				}
-				opts.msgContext = opts.context.next("span.msg__");
-				if (opts.msgContext.length == 0) {
-					opts.msgContext = opts.context.after('<span class="msg__"><ul class="msg_line_box__"></ul></span>')
-										.next("span.msg__");
-					opts.msgContext.append('<a href="#" class="msg_close__">' + N.context.attr("ui")["alert"]["input"]["closeBtn"] + '</a>');
-					opts.msgContext.prepend('<ul class="msg_arrow__"></ul>');
-				}
-				if (N.isEmptyObject(opts.msg)) {
-					this.remove();
-				}
-
-				var this_ = this;
-				opts.msgContext.find("a.msg_close__").click(function(e) {
-					e.preventDefault();
-					this_.remove();
-				});
-
-				var ul_ = opts.msgContext.find("ul.msg_line_box__");
-				if (N.isArray(opts.msg)) {
-					opts.msgContext.find("ul.msg_line_box__").empty();
-					$(opts.msg).each(function(i, msg_) {
-						if (vars !== undefined) {
-							opts.msg[i] = N.message.replaceMsgVars(msg_, vars);
-						}
-						ul_.append('<li>' + N.context.attr("ui")["alert"]["input"]["bullets"] + opts.msg[i] + '</li>');
-					});
-				} else {
-					if (vars !== undefined) {
-						opts.msg = N.message.replaceMsgVars(msg, vars);
-					}
-					ul_.append('<li>' + N.context.attr("ui")["alert"]["input"]["bullets"] + opts.msg + '</li>');
-				}
-			}
-
-			opts.context.instance("alert", this);
+			Alert.initElement.call(this);
+			
+			this.options.context.instance("alert", this);
 
 			return this;
 		};
@@ -292,6 +157,148 @@
 			}
 		});
 
+		$.extend(Alert, {
+			initElement : function() {
+				var opts = this.options;
+				if (!opts.isInput) {
+					var blockOverlayCss = {
+						"display" : "none",
+						"position" : opts.isWindow ? "fixed" : "absolute",
+						"left" : opts.context.offset().left + "px",
+						"top" : opts.context.offset().top + "px",
+						"cursor" : "not-allowed",
+						"height" : opts.isWindow ? this.options.obj.outerHeight() : opts.context.outerHeight() + "px",
+						"width" : opts.context.outerWidth() + "px",
+						"padding" : 0,
+						"border-radius" : opts.context.css("border-radius") != "0px" ? opts.context.css("border-radius") : "0px",
+						"z-index" : N.element.maxZindex(opts.context.find("div, span, ul, p")) + 1
+					};
+					if (opts.overlayColor !== null) {
+						blockOverlayCss["background-color"] = opts.overlayColor;
+					}
+
+					opts.msgContext = opts.context.append(N('<div class="block_overlay__" onselectstart="return false;"></div>')
+							.css(blockOverlayCss)).find("div.block_overlay__:last");
+					if (opts.vars !== undefined) {
+						opts.msg = N.message.replaceMsgVars(opts.msg, opts.vars);
+					}
+
+					var blockOverlayMsgCss = {
+						"display" : "none",
+						"position" : opts.isWindow ? "fixed" : "absolute",
+						"top" : opts.context.offset().top + "px",
+						"left" : opts.context.offset().left + "px",
+						"z-index" : N.element.maxZindex(opts.context.find("div, span, ul, p")) + 1
+					};
+					var titleBox = '';
+					if(opts.title !== null) {
+						titleBox = '<li class="msg_title_box__">' + opts.title + '</li>';
+					}
+					var buttonBox = '';
+					if(opts.button) {
+						buttonBox = '<li class="buttonBox__">'
+							+ '<a href="#" class="confirm__">' + N.message.get(NTR.context.attr("ui")["alert"]["message"], "confirm") + '</a>'
+							+ '<a href="#" class="cancel__">' + N.message.get(NTR.context.attr("ui")["alert"]["message"], "cancel") + '</a>'
+							+ '</li>';
+					}
+					opts.msgContents = opts.msgContext.after(
+							N('<span class="block_overlay_msg__"><ul>'
+									+ titleBox
+									+ '<li class="msg_box__">' + opts.msg + '</li>'
+									+ buttonBox
+									+ '</ul></span>').css(blockOverlayMsgCss)).next("span.block_overlay_msg__:last");
+					var this_ = this;
+					opts.msgContents.find("li.buttonBox__ a.confirm__").button(NTR.context.attr("ui")["alert"]["global"]["okBtnStyle"]);
+					opts.msgContents.find("li.buttonBox__ a.confirm__").click(function(e) {
+						e.preventDefault();
+						if (opts.callback !== null) {
+							opts.callback(opts.msgContext, opts.msgContents);
+						}
+						this_.remove();
+					});
+					
+					if(!opts.modal) {
+						opts.msgContext.remove();
+					}
+					
+					if(opts.confirm) {
+						opts.msgContents.find("li.buttonBox__ a.cancel__").button(NTR.context.attr("ui")["alert"]["global"]["cancelBtnStyle"])
+						opts.msgContents.find("li.buttonBox__ a.cancel__").click(function(e) {
+							e.preventDefault();
+							if (opts.callbackX !== null) {
+								opts.callbackX(opts.msgContext, opts.msgContents);
+							}
+							this_.remove();
+						});
+					} else {
+						opts.msgContents.find("a.cancel__").hide();
+					}
+
+					$(document).unbind("keyup.alert");
+			        $(document).bind("keyup.alert", function(e) {
+			        	if (e.keyCode == 27) {
+			        		this_.remove();
+			        	}
+					});
+
+					$(window).resize(function() {
+						opts.msgContext.css({
+							"width" : opts.context.width() + "px"
+						});
+						if (opts.isWindow) {
+							opts.msgContext.css({
+								"height" : (obj).height() + "px"
+							});
+						}
+						opts.msgContents.css({
+							"left" : (((opts.msgContext.width() / 2) + opts.context.offset().left) - (opts.msgContents.width() / 2)) + "px"
+						});
+						if (opts.isWindow) {
+							opts.msgContents.css({
+								"top" : (((opts.msgContext.height() / 2) + opts.context.offset().top) - opts.msgContents.height()) + "px"
+							});
+						}
+					});
+				} else {
+					if(opts.context.instance("alert") !== undefined) {
+						opts.context.instance("alert").remove();
+					}
+					opts.msgContext = opts.context.next("span.msg__");
+					if (opts.msgContext.length == 0) {
+						opts.msgContext = opts.context.after('<span class="msg__"><ul class="msg_line_box__"></ul></span>')
+											.next("span.msg__");
+						opts.msgContext.append('<a href="#" class="msg_close__">' + N.context.attr("ui")["alert"]["input"]["closeBtn"] + '</a>');
+						opts.msgContext.prepend('<ul class="msg_arrow__"></ul>');
+					}
+					if (N.isEmptyObject(opts.msg)) {
+						this.remove();
+					}
+
+					var this_ = this;
+					opts.msgContext.find("a.msg_close__").click(function(e) {
+						e.preventDefault();
+						this_.remove();
+					});
+
+					var ul_ = opts.msgContext.find("ul.msg_line_box__");
+					if (N.isArray(opts.msg)) {
+						opts.msgContext.find("ul.msg_line_box__").empty();
+						$(opts.msg).each(function(i, msg_) {
+							if (opts.vars !== undefined) {
+								opts.msg[i] = N.message.replaceMsgVars(msg_, opts.vars);
+							}
+							ul_.append('<li>' + N.context.attr("ui")["alert"]["input"]["bullets"] + opts.msg[i] + '</li>');
+						});
+					} else {
+						if (opts.vars !== undefined) {
+							opts.msg = N.message.replaceMsgVars(msg, opts.vars);
+						}
+						ul_.append('<li>' + N.context.attr("ui")["alert"]["input"]["bullets"] + opts.msg + '</li>');
+					}
+				}
+			}
+		});
+		
 		// Button
 		var Button = N.button = function(obj, opts) {
 			this.options = {
@@ -308,50 +315,14 @@
 				$.extend(this.options, opts);
 			}
 
-			opts = this.options;
+			Button.initElement.call(this);
+			
+			this.options.context.instance("button", this);
 
-			if(opts.disable) {
-				this.disable();
-			} else {
-				this.enable();
-			}
-
-			if(opts.context.is("a")) {
-				opts.context.attr("onselectstart", "return false;");
-            }
-	        if (opts.context.is("a") || opts.context.is("button") || opts.context.is("input[type='button']")) {
-	        	opts.context.removeClass("btn_common__ btn_white__ btn_blue__ btn_skyblue__ btn_gray__ btn_smaller__ btn_small__ btn_medium__ btn_large__ btn_big__");
-                opts.context.addClass("btn_common__ btn_" + opts.color + "__ btn_" + opts.size + "__");
-
-                opts.context.unbind("mouseover.button mousedown.button mouseup.button mouseout.button");
-                opts.context.bind("mouseover.button", function() {
-                    if (!opts.context.hasClass("disabled")) {
-                    	$(this).css("opacity", "0.9");
-                    }
-                });
-                opts.context.bind("mousedown.button", function() {
-                    if (!opts.context.hasClass("disabled")) {
-                        $(this).css("opacity", "0.7");
-                    }
-                });
-                opts.context.bind("mouseup.button", function() {
-                    if (!opts.context.hasClass("disabled")) {
-                        $(this).css("opacity", "1");
-                    }
-                });
-                opts.context.bind("mouseout.button", function() {
-                    if (!opts.context.hasClass("disabled")) {
-                        $(this).css("opacity", "1");
-                    }
-                });
-            }
-
-	        opts.context.instance("button", this);
-
-	        return opts.context;
+			return this;
 		};
+		
 		Button.fn = Button.prototype;
-
 		$.extend(Button.fn, {
 			disable : function() {
 				var context = this.options.context;
@@ -378,6 +349,64 @@
 			}
 		});
 
+		$.extend(Button, {
+			initElement : function() {
+				var opts = this.options;
+
+				if(opts.disable) {
+					this.disable();
+				} else {
+					this.enable();
+				}
+
+				if(opts.context.is("a")) {
+					opts.context.attr("onselectstart", "return false;");
+	            }
+		        if (opts.context.is("a") || opts.context.is("button") || opts.context.is("input[type='button']")) {
+		        	opts.context.removeClass("btn_common__ btn_white__ btn_blue__ btn_skyblue__ btn_gray__ btn_smaller__ btn_small__ btn_medium__ btn_large__ btn_big__");
+	                opts.context.addClass("btn_common__ btn_" + opts.color + "__ btn_" + opts.size + "__");
+
+	                opts.context.unbind("mouseover.button mousedown.button mouseup.button mouseout.button");
+	                opts.context.bind("mouseover.button", function() {
+	                    if (!opts.context.hasClass("disabled")) {
+	                    	if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {
+	                    		$(this).css("box-shadow", "rgba(0, 0, 0, 0.2) 1px 1px 1px inset");	
+	                    	} else {
+	                    		$(this).css("opacity", "0.9");
+	                    	}
+	                    }
+	                });
+	                opts.context.bind("mousedown.button", function() {
+	                    if (!opts.context.hasClass("disabled")) {
+	                    	if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {
+	                    		$(this).css("box-shadow", "rgba(0, 0, 0, 0.2) 3px 3px 3px inset");	
+	                    	} else {
+	                    		$(this).css("opacity", "0.7");
+	                    	}
+	                    }
+	                });
+	                opts.context.bind("mouseup.button", function() {
+	                    if (!opts.context.hasClass("disabled")) {
+	                    	if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {
+	                    		$(this).css("box-shadow", "none");	
+	                    	} else {
+	                    		$(this).css("opacity", "1");
+	                    	}
+	                    }
+	                });
+	                opts.context.bind("mouseout.button", function() {
+	                    if (!opts.context.hasClass("disabled")) {
+	                    	if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {
+	                    		$(this).css("box-shadow", "none");	
+	                    	} else {
+	                    		$(this).css("opacity", "1");
+	                    	}
+	                    }
+	                });
+	            }
+			}
+		});
+		
 		// Select
 		var Select = N.select = function(obj, opts) {
 			this.options = {
@@ -404,20 +433,9 @@
 			}
 			this.options.template = this.options.context;
 
-			opts = this.options;
-			if (opts.context.is("select") && opts.context.attr("multiple") != "multiple") {
-				this.options.context.find("option").addClass("select_default__");
-				opts.type = 1;
-            } else if (opts.context.is("select") && opts.context.attr("multiple") == "multiple") {
-            	this.options.context.find("option").addClass("select_default__");
-            	opts.type = 2;
-            } else if (opts.context.is("input:radio")) {
-            	opts.type = 3;
-            } else if (opts.context.is("input:checkbox")) {
-            	opts.type = 4;
-            }
+			Select.initElement.call(this);
 
-			opts.context.instance("select", this);
+			this.options.context.instance("select", this);
 
 			return this;
 		};
@@ -488,6 +506,23 @@
 		    }
 		});
 
+		$.extend(Select, {
+			initElement : function() {
+				var opts = this.options;
+				if (opts.context.is("select") && opts.context.attr("multiple") != "multiple") {
+					this.options.context.find("option").addClass("select_default__");
+					opts.type = 1;
+	            } else if (opts.context.is("select") && opts.context.attr("multiple") == "multiple") {
+	            	this.options.context.find("option").addClass("select_default__");
+	            	opts.type = 2;
+	            } else if (opts.context.is("input:radio")) {
+	            	opts.type = 3;
+	            } else if (opts.context.is("input:checkbox")) {
+	            	opts.type = 4;
+	            }
+			}
+		});
+		
 		// Form
 		var Form = N.form = function(obj, opts) {
 			this.options = {
@@ -1395,6 +1430,39 @@
 		    }
 		});
 
+		// Popup
+		var Popup = N.popup = function(obj, opts) {
+			this.options = {
+					context : obj,
+					width : 38,
+					height : 20,
+					size : "medium", // smaller, small, medium, large, big
+					color : "white", // white, blue, skyblue, gray
+					disable : false
+				};
+
+				$.extend(this.options, N.element.toOpts(this.options.context));
+				if(opts !== undefined) {
+					$.extend(this.options, opts);
+				}
+
+				Popup.initElement.call(this);
+				
+				this.options.context.instance("popup", this);
+
+		        return this.options.context;
+		};
+		Popup.fn = Popup.prototype;
+		$.extend(Popup.fn, {
+			
+		});
+		
+		$.extend(Popup, {
+			initElement : function() {
+				
+			}
+		});
+	
 	})(NTR);
 
 })(window, jQuery);
