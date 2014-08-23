@@ -25,11 +25,15 @@
 
 N("div#button").service({
     init : function() {
-    	var vc = this.view.context;
-
-    	this.initButton();
-
-        N("a#btnDeclarative", vc).click(function(e) {
+    	this.initButton(this.view.context);
+        this.setEvents(this.view.context);
+        return this;
+    },
+    initButton : function(vc) {
+    	N("div.btnBox", vc).button();
+    },
+    setEvents : function(vc) {
+    	N("a#btnDeclarative", vc).click(function(e) {
             e.preventDefault();
 			N("div.data").button();
         });
@@ -63,11 +67,6 @@ N("div#button").service({
             	this.enable();
             });
         });
-
-        return this;
-    },
-    initButton : function() {
-    	N("div.btnBox").button();
     }
 }).init();
 

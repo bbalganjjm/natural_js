@@ -374,6 +374,9 @@
 					"empty" : "No inquired data or no data available.",
 				}
 			}
+		},
+		"popup" : {
+			
 		}
 	});
 

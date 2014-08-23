@@ -54,6 +54,11 @@ var IndexServiceController = {
 		   e.preventDefault();
 		   NTR("div#contents").controller("prototype/grid.html").submit();
 	    });
+	    
+	    NTR("a#btnPopup").click(function(e) {
+		   e.preventDefault();
+		   NTR("div#contents").controller("prototype/popup.html").submit();
+	    });
     }
 }
 $(document).ready(function() {

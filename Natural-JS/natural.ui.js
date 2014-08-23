@@ -29,7 +29,7 @@
 		grid : function(opts) {
 			return new NTR.grid(this, opts);
 		},
-		popup : function() {
+		popup : function(opts) {
 			return new NTR.popup(this, opts);
 		},
 		tab : function() {
@@ -1441,6 +1441,10 @@
 					disable : false
 				};
 
+				try {
+					this.options = $.extend({}, this.options, N.context.attr("ui")["popup"]);
+				} catch (e) { }
+			
 				$.extend(this.options, N.element.toOpts(this.options.context));
 				if(opts !== undefined) {
 					$.extend(this.options, opts);
@@ -1454,7 +1458,9 @@
 		};
 		Popup.fn = Popup.prototype;
 		$.extend(Popup.fn, {
-			
+			open : function() {
+				
+			}
 		});
 		
 		$.extend(Popup, {

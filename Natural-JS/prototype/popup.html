@@ -1,0 +1,65 @@
+<div id="popup">
+	<div class="divBar">DEMO</div>
+	<div class="demoBox">
+		<div class="btnBox">
+			<a id="btnInitPopup" href="#" class='{ "color": "gray", "size": "small" }'>init popup</a>
+			<a id="btnOpenPopup" href="#" class='{ "color": "skyblue", "size": "small" }'>open popup</a>
+			<a id="btnOtherPage" href="#" class='{ "color": "white", "size": "small" }'>다른페이지 불러오기</a>
+			<a id="btnOnOpen" href="#" class='{ "color": "white", "size": "small" }'>onOpen Callback</a>
+			<a id="btnOnClose" href="#" class='{ "color": "white", "size": "small" }'>onClose Callback</a>
+		</div>
+		<div class="data">
+			<div id="popupTemp">
+				팝업 템플릿(TODO) 아이디 페스워드 입력같은거로
+			</div>
+		</div>
+	</div>
+
+	<div class="divBar">SOURCE</div>
+	<div class="sourceBox">
+	</div>
+</div>
+
+<script type="text/javascript">
+
+N("div#popup").service({
+	localPopup : null,
+    init : function() {
+    	this.initButton(this.view.context);
+    	this.setEvents(this.view.context);
+        return this;
+    },
+    initButton : function(vc) {
+    	N("div.btnBox", vc).button();
+    },
+    setEvents : function(vc) {
+    	var this_ = this;
+    	
+    	N("a#btnInitPopup", vc).click(function(e) {
+            e.preventDefault();
+            this_.localPopup = N("#popupTemp").popup();
+        });
+
+        N("a#btnOpenPopup", vc).click(function(e) {
+            e.preventDefault();
+            this_.localPopup.open();
+        });
+
+        N("a#btnOtherPage", vc).click(function(e) {
+            e.preventDefault();
+            N.popup().open();
+        });
+
+        N("a#btnOnOpen", vc).click(function(e) {
+            e.preventDefault();
+            
+        });
+
+        N("a#btnOnClose", vc).click(function(e) {
+            e.preventDefault();
+            
+        });
+    }
+}).init();
+
+</script>
