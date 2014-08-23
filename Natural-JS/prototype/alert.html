@@ -50,7 +50,7 @@ N("div#alert").service({
                 msg : "특정 영역 메시지 처리<br />확인 버튼 누르면 지정한 콜백 실행",
                 title : "시스템 메시지",
                 vars : [],
-                callback : function(msgContext, msgContents) {
+                onOk : function(msgContext, msgContents) {
                     alert("콜백 실행");
                 }
             }).show()
@@ -75,10 +75,10 @@ N("div#alert").service({
             N("pre.data").alert({
             	confirm : true,
                 msg : "특정 영역 메시지 처리<br />확인 버튼 누르면 지정한 콜백 실행",
-                callback : function(msgContext, msgContents) {
+                onOk : function(msgContext, msgContents) {
                     confirm("확인 콜백 실행");
                 },
-                callbackX : function(msgContext, msgContents) {
+                onCancel : function(msgContext, msgContents) {
                     confirm("취소 콜백 실행");
                 }
             }).show()
@@ -89,10 +89,10 @@ N("div#alert").service({
             N(window).alert({
             	confirm : true,
                 msg : "전체 영역 메시지 처리",
-                callback : function(msgContext, msgContents) {
+                onOk : function(msgContext, msgContents) {
                     confirm("확인 콜백 실행");
                 },
-                callbackX : function(msgContext, msgContents) {
+                onCancel : function(msgContext, msgContents) {
                     confirm("취소 콜백 실행");
                 }
             }).show();

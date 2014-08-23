@@ -60,8 +60,8 @@
 				title : null,
 				button : true,
 				modal : true,
-				"callback" : null,
-				callbackX : null,
+				onOk : null,
+				onCancel : null,
 				overlayColor : null,
 				"confirm" : false
 			};
@@ -211,8 +211,8 @@
 					opts.msgContents.find("li.buttonBox__ a.confirm__").button(NTR.context.attr("ui")["alert"]["global"]["okBtnStyle"]);
 					opts.msgContents.find("li.buttonBox__ a.confirm__").click(function(e) {
 						e.preventDefault();
-						if (opts.callback !== null) {
-							opts.callback(opts.msgContext, opts.msgContents);
+						if (opts.onOk !== null) {
+							opts.onOk(opts.msgContext, opts.msgContents);
 						}
 						this_.remove();
 					});
@@ -225,8 +225,8 @@
 						opts.msgContents.find("li.buttonBox__ a.cancel__").button(NTR.context.attr("ui")["alert"]["global"]["cancelBtnStyle"])
 						opts.msgContents.find("li.buttonBox__ a.cancel__").click(function(e) {
 							e.preventDefault();
-							if (opts.callbackX !== null) {
-								opts.callbackX(opts.msgContext, opts.msgContents);
+							if (opts.onCancel !== null) {
+								opts.onCancel(opts.msgContext, opts.msgContents);
 							}
 							this_.remove();
 						});
@@ -1434,11 +1434,12 @@
 		var Popup = N.popup = function(obj, opts) {
 			this.options = {
 					context : obj,
-					width : 38,
-					height : 20,
-					size : "medium", // smaller, small, medium, large, big
-					color : "white", // white, blue, skyblue, gray
-					disable : false
+					title : null,
+					button : true,
+					modal : true,
+					onOk : null,
+					onCancel : null,
+					"confirm" : true
 				};
 
 				try {
