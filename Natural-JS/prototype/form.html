@@ -168,7 +168,7 @@ N("div#form").service({
 
         N("a#btnFormValidate", vc).click(function(e) {
             e.preventDefault();
-            N(window).alert("전체검증 결과 : " + form.validate()).show()
+            N("table#inputBox").alert("전체검증 결과 : " + form.validate()).show()
         });
 
         return this;
