@@ -6,7 +6,8 @@
 			<a id="btnAlertArea" href="#" class='{ "color": "gray", "size": "small" }'>Alert(영역지정,모달 해제)</a>
 			<a id="btnAlertCallback" href="#" class='{ "color": "gray", "size": "small" }'>Alert(콜백, 타이틀바)</a>
 			<a id="btnAlertWindow" href="#" class='{ "color": "skyblue", "size": "small" }'>Alert(전체)</a>
-			<a id="btnAlertWindowTitle" href="#" class='{ "color": "skyblue", "size": "small" }'>Alert(버튼바X, 타이틀바)</a>
+			<a id="btnAlertWindowTitle" href="#" class='{ "color": "skyblue", "size": "small" }'>Alert(버튼바제거, 타이틀바)</a>
+			<a id="btnConfirmSize" href="#" class='{ "color": "skyblue", "size": "small" }'>Alert(넓이, 높이 지정)</a>
 			<a id="btnConfirm" href="#" class='{ "color": "gray", "size": "small" }'>Confirm</a>
 			<a id="btnConfirmWindow" href="#" class='{ "color": "skyblue", "size": "small" }'>Confirm(전체)</a>
 		</div>
@@ -38,7 +39,7 @@ N("div#alert").service({
 				modal : false
             }).show()
         });
-        
+
         N("a#btnAlertAreaModal", vc).click(function(e) {
             e.preventDefault();
             N("pre.data").alert("모달<br />특정 영역 메시지 처리").show()
@@ -64,10 +65,19 @@ N("div#alert").service({
                 button : false
             }).show()
         });
-        
+
         N("a#btnAlertWindow", vc).click(function(e) {
             e.preventDefault();
             N(window).alert("전체 영역 메시지 처리").show();
+		});
+
+        N("a#btnConfirmSize", vc).click(function(e) {
+            e.preventDefault();
+            N(window).alert({
+            	msg : "넓이 : 200px<br />높이 : 100px<br />메시지가 길어요~~.메시지가 길어요~~.메시지가 길어요~~.<br />메시지가 길어요~~.<br />메시지가 길어요~~.<br />메시지가 길어요~~.<br />메시지가 길어요~~.<br />메시지가 길어요~~.<br />메시지가 길어요~~.",
+            	width : 200,
+            	height : 100
+            }).show();
 		});
 
         N("a#btnConfirm", vc).click(function(e) {

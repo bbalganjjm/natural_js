@@ -176,6 +176,10 @@ div#main div#contents {
 
 
 /* form example */
+table.form {
+	width: auto;
+}
+
 table.form th {
 	background: linear-gradient(left, #efefef, #effeee);
 	background: -ms-linear-gradient(left, #efefef, #effeee);
@@ -195,4 +199,9 @@ table.form tbody td input[type='text']:focus, table.form tbody td select:focus, 
 	background-color: #ffe5e5;s
 	transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 	box-shadow: inset 1px 1px 1px rgba(0,0,0,0.075);
+}
+
+/* popup example */
+div#popupTemp {
+	padding: 20px;
 }

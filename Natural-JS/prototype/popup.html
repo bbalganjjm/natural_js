@@ -10,7 +10,23 @@
 		</div>
 		<div class="data">
 			<div id="popupTemp">
-				팝업 템플릿(TODO) 아이디 페스워드 입력같은거로
+				<table id="loginForm" class='form' title="로그인">
+					<tr>
+						<th width="70"><label for="numeric">아이디</label></th>
+						<td width="100">
+							<input id="userId" type="text" maxlength="10" class='{ "validate" : [["required"], ["maxbyte", 10]] }' />
+						</td>
+						<td width="50" rowspan="2">
+							<a id="btnLogin" class='{ "color": "skyblue", "size": "large" }'>로그인</a>
+						</td>
+					</tr>
+					<tr>
+						<th><label for="generic">패스워드</label></th>
+						<td>
+							<input id="userPw" type="password" maxlength="16" class='{ "validate" : [["required"]] }' />
+						</td>
+					</tr>
+				</table>
 			</div>
 		</div>
 	</div>
@@ -31,13 +47,17 @@ N("div#popup").service({
     },
     initButton : function(vc) {
     	N("div.btnBox", vc).button();
+
+    	N("a#btnLogin", vc).button();
+    	N("a#btnLogin", vc).css("padding-top", "15px");
+    	N("a#btnLogin", vc).css("padding-bottom", "15px");
     },
     setEvents : function(vc) {
     	var this_ = this;
-    	
+
     	N("a#btnInitPopup", vc).click(function(e) {
             e.preventDefault();
-            this_.localPopup = N("#popupTemp").popup();
+            this_.localPopup = N("table#loginForm").popup();
         });
 
         N("a#btnOpenPopup", vc).click(function(e) {
@@ -52,12 +72,12 @@ N("div#popup").service({
 
         N("a#btnOnOpen", vc).click(function(e) {
             e.preventDefault();
-            
+
         });
 
         N("a#btnOnClose", vc).click(function(e) {
             e.preventDefault();
-            
+
         });
     }
 }).init();

@@ -55,9 +55,11 @@
 				msgContents : null,
 				msg : msg,
 				vars : vars,
+				width : 0,
+		        height : 0,
 				isInput : false,
 				isWindow : obj.get(0) === window || obj.get(0) === window.document,
-				title : null,
+				title : obj.attr("title"),
 				button : true,
 				modal : true,
 				onOk : null,
@@ -72,6 +74,7 @@
 			if(msg !== undefined && N.isPlainObject(msg)) {
 				$.extend(this.options, msg);
 			}
+
 			if(obj.get(0) === window || obj.get(0) === window.document) {
 				this.options.context = N("body");
 			}
@@ -165,6 +168,7 @@
 			wrapEle : function() {
 				var opts = this.options;
 
+				// set style message overlay
 				var blockOverlayCss = {
 					"display" : "none",
 					"position" : opts.isWindow ? "fixed" : "absolute",
@@ -181,12 +185,14 @@
 					blockOverlayCss["background-color"] = opts.overlayColor;
 				}
 
+				// make message overlay
 				opts.msgContext = opts.context.append(N('<div class="block_overlay__" onselectstart="return false;"></div>')
 						.css(blockOverlayCss)).find("div.block_overlay__:last");
 				if (opts.vars !== undefined) {
 					opts.msg = N.message.replaceMsgVars(opts.msg, opts.vars);
 				}
 
+				// set style message box
 				var blockOverlayMsgCss = {
 					"display" : "none",
 					"position" : opts.isWindow ? "fixed" : "absolute",
@@ -194,10 +200,14 @@
 					"left" : opts.context.offset().left + "px",
 					"z-index" : N.element.maxZindex(opts.context.find("div, span, ul, p")) + 1
 				};
+
+				// set title
 				var titleBox = '';
-				if(opts.title !== null) {
+				if(opts.title !== undefined) {
 					titleBox = '<li class="msg_title_box__">' + opts.title + '</li>';
 				}
+
+				// set button box
 				var buttonBox = '';
 				if(opts.button) {
 					buttonBox = '<li class="buttonBox__">'
@@ -205,13 +215,31 @@
 						+ '<a href="#" class="cancel__">' + N.message.get(NTR.context.attr("ui")["alert"]["message"], "cancel") + '</a>'
 						+ '</li>';
 				}
+
+				// make message box
 				opts.msgContents = opts.msgContext.after(
 						N('<span class="block_overlay_msg__"><ul>'
 								+ titleBox
-								+ '<li class="msg_box__">' + opts.msg + '</li>'
+								+ '<li class="msg_box__"></li>'
 								+ buttonBox
 								+ '</ul></span>').css(blockOverlayMsgCss)).next("span.block_overlay_msg__:last");
+
+				// set message
+				opts.msgContents.find("li.msg_box__").html(opts.msg);
+
+				// set width
+				if(opts.width > 0) {
+					opts.msgContents.find("li.msg_box__").width(opts.width);
+				}
+
+				// set height
+				if(opts.height > 0) {
+					opts.msgContents.find("li.msg_box__").height(opts.height);
+					opts.msgContents.find("li.msg_box__").css("overflow-y", "auto");
+				}
+
 				var this_ = this;
+				//set confirm button style and bind click event
 				opts.msgContents.find("li.buttonBox__ a.confirm__").button(NTR.context.attr("ui")["alert"]["global"]["okBtnStyle"]);
 				opts.msgContents.find("li.buttonBox__ a.confirm__").click(function(e) {
 					e.preventDefault();
@@ -221,10 +249,12 @@
 					this_.remove();
 				});
 
+				// remove message overlay for modal(false)
 				if(!opts.modal) {
 					opts.msgContext.remove();
 				}
 
+				// set cancel button style and bind click event
 				if(opts.confirm) {
 					opts.msgContents.find("li.buttonBox__ a.cancel__").button(NTR.context.attr("ui")["alert"]["global"]["cancelBtnStyle"])
 					opts.msgContents.find("li.buttonBox__ a.cancel__").click(function(e) {
@@ -238,6 +268,8 @@
 					opts.msgContents.find("a.cancel__").hide();
 				}
 
+				// bind "ESC" key event
+				// if press the "ESC" key, then alert dialog is remove
 				$(document).unbind("keyup.alert");
 		        $(document).bind("keyup.alert", function(e) {
 		        	if (e.keyCode == 27) {
@@ -321,7 +353,7 @@
 				$.extend(this.options, opts);
 			}
 
-			Button.initElement.call(this);
+			Button.wrapEle.call(this);
 
 			this.options.context.instance("button", this);
 
@@ -356,7 +388,7 @@
 		});
 
 		$.extend(Button, {
-			initElement : function() {
+			wrapEle : function() {
 				var opts = this.options;
 
 				if(opts.disable) {
@@ -439,7 +471,7 @@
 			}
 			this.options.template = this.options.context;
 
-			Select.initElement.call(this);
+			Select.wrapEle.call(this);
 
 			this.options.context.instance("select", this);
 
@@ -513,7 +545,7 @@
 		});
 
 		$.extend(Select, {
-			initElement : function() {
+			wrapEle : function() {
 				var opts = this.options;
 				if (opts.context.is("select") && opts.context.attr("multiple") != "multiple") {
 					this.options.context.find("option").addClass("select_default__");
@@ -1439,40 +1471,63 @@
 		// Popup
 		var Popup = N.popup = function(obj, opts) {
 			this.options = {
-					context : obj,
-					title : null,
-					button : true,
-					modal : true,
-					onOk : null,
-					onCancel : null,
-					"confirm" : true
-				};
+				context : obj,
+				title : obj.attr("title"),
+				button : true,
+				modal : true,
+				onOk : null,
+				onCancel : null,
+				"confirm" : true,
+				preLoad : false,
+			};
 
-				try {
-					this.options = $.extend({}, this.options, N.context.attr("ui")["popup"]);
-				} catch (e) { }
+			try {
+				this.options = $.extend({}, this.options, N.context.attr("ui")["popup"]);
+			} catch (e) { }
 
-				$.extend(this.options, N.element.toOpts(this.options.context));
-				if(opts !== undefined) {
+			if(opts !== undefined) {
+				if(arguments.length === 1 && N.isPlainObject(obj)) {
+					$.extend(this.options, obj);
+				} else {
 					$.extend(this.options, opts);
 				}
+				if(N.type(this.options.context) === "string") {
+					this.options.context = N(this.options.context);
+				}
+			}
 
-				Popup.initElement.call(this);
+			Popup.wrapEle.call(this);
 
-				this.options.context.instance("popup", this);
+			this.options.context.instance("popup", this);
 
-		        return this.options.context;
+	        return this;
 		};
 		Popup.fn = Popup.prototype;
 		$.extend(Popup.fn, {
 			open : function() {
-
+				var opts = this.options;
+				opts.context.show();
+				this.alert.show();
+			},
+			close : function() {
+				//취소확인 버튼 TODO romove 해버리는거 hide 하도록 처리
+				this.alert.options.msgContext.hide()
+				this.alert.options.msgContents.fadeOut(150);
+			},
+			remove : function() {
+				this.alert.remove();
 			}
 		});
 
 		$.extend(Popup, {
-			initElement : function() {
+			wrapEle : function() {
+				var opts = this.options;
+				opts.context.hide();
 
+				// use alert
+				// opts.context is alert message
+				opts.msg = opts.context;
+				this.alert = N(window).alert(opts);
 			}
 		});
 
