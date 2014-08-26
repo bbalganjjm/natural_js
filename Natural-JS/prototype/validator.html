@@ -70,12 +70,10 @@
 <script type="text/javascript">
 
 N("div#validator").service({
-    init : function() {
-    	var vc = this.view.context;
-
+    init : function(view) {
     	this.initButton();
 
-        N("a#btnValidateCommand", vc).click(function(e) {
+        N("a#btnValidateCommand", view).click(function(e) {
             e.preventDefault();
 
             var data = eval(N("textarea.data").val());
@@ -86,19 +84,17 @@ N("div#validator").service({
                 "limit" : [ [ "required" ], [ "alphabet" ] ]
             }).validate());
 
-            N("textarea.data", vc).val(N.json.format(pData));
+            N("textarea.data", view).val(N.json.format(pData));
         });
 
-        N("a#btnValidateDeclarative", vc).click(function(e) {
+        N("a#btnValidateDeclarative", view).click(function(e) {
             e.preventDefault();
-            N().validator(N("#inputBox", vc)).validate();
+            N().validator(N("#inputBox", view)).validate();
         });
-
-        return this;
     },
     initButton : function() {
     	N("div.btnBox").button();
     }
-}).init();
+});
 
 </script>

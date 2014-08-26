@@ -161,14 +161,11 @@ N("div#grid").service({
 	grid : undefined,
 	grid2 : undefined,
 	defGrid : undefined,
-    init : function() {
-    	var vc = this.view.context;
-
+    init : function(view) {
     	this.initButton();
     	//this.createSelect(data);
 
     	this.setEvents();
-        return this;
     },
     createSelect : function(data) {
     	// $(data).select("select#select").bind();
@@ -198,7 +195,7 @@ N("div#grid").service({
 
     	N("a#btnBindDataDef").click(function(e) {
             e.preventDefault();
-            N.controller("prototype/grid_big.json").submit(function(data) {
+            N.controller("prototype/data/grid_big.json").submit(function(data) {
         		this_.defGrid.bind(data);
         	});
         });
@@ -222,7 +219,7 @@ N("div#grid").service({
 
     	N("a#btnBindData").click(function(e) {
             e.preventDefault();
-            N.controller("prototype/grid.json").submit(function(data) {
+            N.controller("prototype/data/grid.json").submit(function(data) {
         		this_.grid.bind(data);
         	});
         });
@@ -281,7 +278,7 @@ N("div#grid").service({
 
     	N("a#btnBindData2").click(function(e) {
             e.preventDefault();
-            N.controller("prototype/grid_big.json").submit(function(data) {
+            N.controller("prototype/data/grid_big.json").submit(function(data) {
         		this_.grid2.bind(data);
         	});
         });
@@ -303,6 +300,6 @@ N("div#grid").service({
     		});
     	}
     }
-}).init();
+});
 
 </script>

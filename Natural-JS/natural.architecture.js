@@ -122,10 +122,10 @@
 							try {
 								callback(data, obj.request);
 							} catch (e) {
-								N.error("[Controller.submit.success.callback]" + e);
+								N.error("[Controller.submit.success.callback]" + e, e);
 							}
 						} else {
-							if (obj.request.options.overwrite) {
+							if (!obj.request.options.append) {
 								obj.html(data);
 							} else {
 								obj.append(data);
@@ -169,8 +169,8 @@
 				dataType : "json",
 				urlSync : true,
 				crossDomain : false,
-				overwrite : true,
 				browserHistory : true, // TODO To do
+				append : false,
 				effect : false
 			};
 
@@ -247,10 +247,12 @@
 				obj = N($.grep(obj, function(ele) { return !$(ele).hasClass(obj.attr("id") + "__ view_context__"); }));
 			}
 			obj.addClass(obj.attr("id") + "__ view_context__");
-			callback.view = {};
-			callback.view.context = obj;
 
 			obj.instance("service", callback);
+
+			if(callback.init !== undefined) {
+				callback.init(obj);
+			}
 			return callback;
 		};
 

@@ -27,12 +27,10 @@
 <script type="text/javascript">
 
 N("div#alert").service({
-    init : function() {
-    	var vc = this.view.context;
-
+    init : function(view) {
     	this.initButton();
 
-        N("a#btnAlertArea", vc).click(function(e) {
+        N("a#btnAlertArea", view).click(function(e) {
             e.preventDefault();
             N("pre.data").alert({
                 msg : "특정 영역 메시지 처리",
@@ -40,12 +38,12 @@ N("div#alert").service({
             }).show()
         });
 
-        N("a#btnAlertAreaModal", vc).click(function(e) {
+        N("a#btnAlertAreaModal", view).click(function(e) {
             e.preventDefault();
             N("pre.data").alert("모달<br />특정 영역 메시지 처리").show()
         });
 
-        N("a#btnAlertCallback", vc).click(function(e) {
+        N("a#btnAlertCallback", view).click(function(e) {
             e.preventDefault();
             N("pre.data").alert({
                 msg : "특정 영역 메시지 처리<br />확인 버튼 누르면 지정한 콜백 실행",
@@ -57,7 +55,7 @@ N("div#alert").service({
             }).show()
         });
 
-        N("a#btnAlertWindowTitle", vc).click(function(e) {
+        N("a#btnAlertWindowTitle", view).click(function(e) {
             e.preventDefault();
             N(window).alert({
                 msg : "전체 영역 메시지 처리<br />전체 영역 메시지 처리.. 전체 영역 메시지 처리..<br />전체 영역 메시지 처리<br /><br />전체 영역 메시지 처리",
@@ -66,12 +64,12 @@ N("div#alert").service({
             }).show()
         });
 
-        N("a#btnAlertWindow", vc).click(function(e) {
+        N("a#btnAlertWindow", view).click(function(e) {
             e.preventDefault();
             N(window).alert("전체 영역 메시지 처리").show();
 		});
 
-        N("a#btnConfirmSize", vc).click(function(e) {
+        N("a#btnConfirmSize", view).click(function(e) {
             e.preventDefault();
             N(window).alert({
             	msg : "넓이 : 200px<br />높이 : 100px<br />메시지가 길어요~~.메시지가 길어요~~.메시지가 길어요~~.<br />메시지가 길어요~~.<br />메시지가 길어요~~.<br />메시지가 길어요~~.<br />메시지가 길어요~~.<br />메시지가 길어요~~.<br />메시지가 길어요~~.",
@@ -80,39 +78,37 @@ N("div#alert").service({
             }).show();
 		});
 
-        N("a#btnConfirm", vc).click(function(e) {
+        N("a#btnConfirm", view).click(function(e) {
             e.preventDefault();
             N("pre.data").alert({
             	confirm : true,
                 msg : "특정 영역 메시지 처리<br />확인 버튼 누르면 지정한 콜백 실행",
                 onOk : function(msgContext, msgContents) {
-                    confirm("확인 콜백 실행");
+                    alert("확인 콜백 실행");
                 },
                 onCancel : function(msgContext, msgContents) {
-                    confirm("취소 콜백 실행");
+                	alert("취소 콜백 실행");
                 }
             }).show()
         });
 
-        N("a#btnConfirmWindow", vc).click(function(e) {
+        N("a#btnConfirmWindow", view).click(function(e) {
             e.preventDefault();
             N(window).alert({
             	confirm : true,
                 msg : "전체 영역 메시지 처리",
                 onOk : function(msgContext, msgContents) {
-                    confirm("확인 콜백 실행");
+                	alert("확인 콜백 실행");
                 },
                 onCancel : function(msgContext, msgContents) {
-                    confirm("취소 콜백 실행");
+                	alert("취소 콜백 실행");
                 }
             }).show();
 		});
-
-        return this;
 	},
     initButton : function() {
     	N("div.btnBox").button();
     }
-}).init();
+});
 
 </script>

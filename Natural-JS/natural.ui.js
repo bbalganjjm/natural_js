@@ -61,6 +61,7 @@
 				isWindow : obj.get(0) === window || obj.get(0) === window.document,
 				title : obj.attr("title"),
 				button : true,
+				closeMode : "remove", //hide : keep element, remove : remove element
 				modal : true,
 				onOk : null,
 				onCancel : null,
@@ -95,11 +96,7 @@
 			"show" : function() {
 				var opts = this.options;
 				if (!opts.isInput) {
-					opts.msgContext.show();
-					opts.msgContents.css({
-						"top" : ((opts.msgContext.height() / 2 + opts.context.offset().top) - opts.msgContents.height() / 2) + "px",
-						"left" : ((opts.msgContext.width() / 2 + opts.context.offset().left) - opts.msgContents.width() / 2) + "px",
-					})
+					Alert.resetOffSetWrapEle(opts);
 					opts.msgContents.fadeIn(150);
 				} else {
 					if (!N.isEmptyObject(opts.msg)) {
@@ -145,13 +142,22 @@
 									opts.msgContext.find("a.msg_close__").click();
 								});
 								clearInterval(time);
-							}, NTR.context.attr("ui")["alert"]["input"]["displayTimeout"]);
+							}, N.context.attr("ui")["alert"]["input"]["displayTimeout"]);
 						});
 					}
 				}
-				return opts.obj;
+				return this;
 			},
-			"hide" : this.remove,
+			"hide" : function() {
+				var opts = this.options;
+				if (!opts.isInput) {
+					opts.msgContext.hide();
+					opts.msgContents.hide();
+				} else {
+					opts.msgContext.remove();
+				}
+				return this;
+			},
 			"remove" : function() {
 				var opts = this.options;
 				if (!opts.isInput) {
@@ -160,7 +166,7 @@
 				} else {
 					opts.msgContext.remove();
 				}
-				return opts.obj;
+				return this;
 			}
 		});
 
@@ -172,14 +178,9 @@
 				var blockOverlayCss = {
 					"display" : "none",
 					"position" : opts.isWindow ? "fixed" : "absolute",
-					"left" : opts.context.offset().left + "px",
-					"top" : opts.context.offset().top + "px",
 					"cursor" : "not-allowed",
-					"height" : opts.isWindow ? this.options.obj.outerHeight() : opts.context.outerHeight() + "px",
-					"width" : opts.context.outerWidth() + "px",
 					"padding" : 0,
-					"border-radius" : opts.context.css("border-radius") != "0px" ? opts.context.css("border-radius") : "0px",
-					"z-index" : N.element.maxZindex(opts.context.find("div, span, ul, p")) + 1
+					"border-radius" : opts.context.css("border-radius") != "0px" ? opts.context.css("border-radius") : "0px"
 				};
 				if (opts.overlayColor !== null) {
 					blockOverlayCss["background-color"] = opts.overlayColor;
@@ -195,10 +196,7 @@
 				// set style message box
 				var blockOverlayMsgCss = {
 					"display" : "none",
-					"position" : opts.isWindow ? "fixed" : "absolute",
-					"top" : opts.context.offset().top + "px",
-					"left" : opts.context.offset().left + "px",
-					"z-index" : N.element.maxZindex(opts.context.find("div, span, ul, p")) + 1
+					"position" : opts.isWindow ? "fixed" : "absolute"
 				};
 
 				// set title
@@ -211,8 +209,8 @@
 				var buttonBox = '';
 				if(opts.button) {
 					buttonBox = '<li class="buttonBox__">'
-						+ '<a href="#" class="confirm__">' + N.message.get(NTR.context.attr("ui")["alert"]["message"], "confirm") + '</a>'
-						+ '<a href="#" class="cancel__">' + N.message.get(NTR.context.attr("ui")["alert"]["message"], "cancel") + '</a>'
+						+ '<a href="#" class="confirm__">' + N.message.get(N.context.attr("ui")["alert"]["message"], "confirm") + '</a>'
+						+ '<a href="#" class="cancel__">' + N.message.get(N.context.attr("ui")["alert"]["message"], "cancel") + '</a>'
 						+ '</li>';
 				}
 
@@ -240,13 +238,13 @@
 
 				var this_ = this;
 				//set confirm button style and bind click event
-				opts.msgContents.find("li.buttonBox__ a.confirm__").button(NTR.context.attr("ui")["alert"]["global"]["okBtnStyle"]);
+				opts.msgContents.find("li.buttonBox__ a.confirm__").button(N.context.attr("ui")["alert"]["global"]["okBtnStyle"]);
 				opts.msgContents.find("li.buttonBox__ a.confirm__").click(function(e) {
 					e.preventDefault();
 					if (opts.onOk !== null) {
 						opts.onOk(opts.msgContext, opts.msgContents);
 					}
-					this_.remove();
+					this_[opts.closeMode]();
 				});
 
 				// remove message overlay for modal(false)
@@ -256,16 +254,16 @@
 
 				// set cancel button style and bind click event
 				if(opts.confirm) {
-					opts.msgContents.find("li.buttonBox__ a.cancel__").button(NTR.context.attr("ui")["alert"]["global"]["cancelBtnStyle"])
+					opts.msgContents.find("li.buttonBox__ a.cancel__").button(N.context.attr("ui")["alert"]["global"]["cancelBtnStyle"])
 					opts.msgContents.find("li.buttonBox__ a.cancel__").click(function(e) {
 						e.preventDefault();
 						if (opts.onCancel !== null) {
 							opts.onCancel(opts.msgContext, opts.msgContents);
 						}
-						this_.remove();
+						this_[opts.closeMode]();
 					});
 				} else {
-					opts.msgContents.find("a.cancel__").hide();
+					opts.msgContents.find("a.cancel__").remove();
 				}
 
 				// bind "ESC" key event
@@ -273,28 +271,28 @@
 				$(document).unbind("keyup.alert");
 		        $(document).bind("keyup.alert", function(e) {
 		        	if (e.keyCode == 27) {
-		        		this_.remove();
+		        		this_[opts.closeMode]();
 		        	}
 				});
 
 				$(window).resize(function() {
-					opts.msgContext.css({
-						"width" : opts.context.width() + "px"
-					});
-					if (opts.isWindow) {
-						opts.msgContext.css({
-							"height" : (obj).height() + "px"
-						});
-					}
-					opts.msgContents.css({
-						"left" : (((opts.msgContext.width() / 2) + opts.context.offset().left) - (opts.msgContents.width() / 2)) + "px"
-					});
-					if (opts.isWindow) {
-						opts.msgContents.css({
-							"top" : (((opts.msgContext.height() / 2) + opts.context.offset().top) - opts.msgContents.height()) + "px"
-						});
-					}
+					Alert.resetOffSetWrapEle(opts);
 				});
+			},
+			resetOffSetWrapEle : function(opts) {
+				var maxZindex = N.element.maxZindex(opts.context.find("div, span, ul, p")) + 1;
+				opts.msgContext.css({
+					"top" : opts.context.offset().top + "px",
+					"left" : opts.context.offset().left + "px",
+					"height" : opts.isWindow ? this.options.obj.outerHeight() : opts.context.outerHeight() + "px",
+					"width" : opts.context.outerWidth() + "px",
+					"z-index" : maxZindex
+				}).show();
+				opts.msgContents.css({
+					"top" : ((opts.msgContext.height() / 2 + opts.context.offset().top) - opts.msgContents.height() / 2) + "px",
+					"left" : ((opts.msgContext.width() / 2 + opts.context.offset().left) - opts.msgContents.width() / 2) + "px",
+					"z-index" : maxZindex + 1
+				})
 			},
 			wrapInputEle : function() {
 				var opts = this.options;
@@ -596,7 +594,7 @@
 
 			this.options.context.instance("form", this);
 
-			NTR.ds.instance(this, true);
+			N.ds.instance(this, true);
 
 			return this;
 		};
@@ -999,7 +997,7 @@
 
 			this.options.context.instance("grid", this);
 
-			NTR.ds.instance(this, true);
+			N.ds.instance(this, true);
 
 			return this;
 		};
@@ -1472,9 +1470,13 @@
 		var Popup = N.popup = function(obj, opts) {
 			this.options = {
 				context : obj,
-				title : obj.attr("title"),
+				url : null,
+				title : null,
 				button : true,
 				modal : true,
+				height : 0,
+				width : 0,
+				closeMode : "hide",
 				onOk : null,
 				onCancel : null,
 				"confirm" : true,
@@ -1486,33 +1488,41 @@
 			} catch (e) { }
 
 			if(opts !== undefined) {
-				if(arguments.length === 1 && N.isPlainObject(obj)) {
-					$.extend(this.options, obj);
+				if(N.type(opts) === "string") {
+					this.options.url = opts;
 				} else {
-					$.extend(this.options, opts);
-				}
-				if(N.type(this.options.context) === "string") {
-					this.options.context = N(this.options.context);
+					if(arguments.length === 1 && N.isPlainObject(obj)) {
+						$.extend(this.options, obj);
+					} else {
+						$.extend(this.options, opts);
+					}
+					if(N.type(this.options.context) === "string") {
+						this.options.context = N(this.options.context);
+					}
 				}
 			}
 
-			Popup.wrapEle.call(this);
-
-			this.options.context.instance("popup", this);
+			if(this.options.url !== null) {
+				Popup.loadEle.call(this, function(context) {
+					// this callback function is for async page load
+					this.options.context = context;
+					this.options.context.instance("popup", this);
+				});
+			} else {
+				Popup.wrapEle.call(this);
+				this.options.context.instance("popup", this);
+			}
 
 	        return this;
 		};
 		Popup.fn = Popup.prototype;
 		$.extend(Popup.fn, {
 			open : function() {
-				var opts = this.options;
-				opts.context.show();
+				this.options.context.show();
 				this.alert.show();
 			},
 			close : function() {
-				//취소확인 버튼 TODO romove 해버리는거 hide 하도록 처리
-				this.alert.options.msgContext.hide()
-				this.alert.options.msgContents.fadeOut(150);
+				this.alert.hide();
 			},
 			remove : function() {
 				this.alert.remove();
@@ -1527,7 +1537,33 @@
 				// use alert
 				// opts.context is alert message
 				opts.msg = opts.context;
+				if(opts.title === null) {
+					opts.title = opts.context.attr("title");
+					opts.context.removeAttr("title");
+				}
+
 				this.alert = N(window).alert(opts);
+			},
+			loadEle : function(callback) {
+				var opts = this.options;
+				var this_ = this;
+				N.controller({
+					url : opts.url,
+					contentType : "application/x-www-form-urlencoded",
+					dataType : "html"
+				}).submit(function(page) {
+					opts.context = $(page);
+					if(opts.title === null) {
+						opts.title = opts.context.attr("title");
+						opts.context.removeAttr("title");
+					}
+
+					// opts.context is alert message;
+					opts.msg = opts.context;
+					this_.alert = N(window).alert(opts);
+
+					callback.call(this_, opts.context);
+	        	});
 			}
 		});
 

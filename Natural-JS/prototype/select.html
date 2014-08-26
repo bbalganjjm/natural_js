@@ -77,9 +77,7 @@
 <script type="text/javascript">
 
 N("div#select").service({
-    init : function() {
-    	var vc = this.view.context;
-
+    init : function(view) {
     	this.initButton();
 
     	var data = eval(N("textarea.data").val());
@@ -94,31 +92,29 @@ N("div#select").service({
 			key : "limit"
 		});
 
-        N("a#btnSelect", vc).click(function(e) {
+        N("a#btnSelect", view).click(function(e) {
             e.preventDefault();
             select.bind().val("266734.12");
         });
 
-        N("a#btnSelectMulty", vc).click(function(e) {
+        N("a#btnSelectMulty", view).click(function(e) {
         	e.preventDefault();
         	selectMulty.bind();
         });
 
-        N("a#btnRadio", vc).click(function(e) {
+        N("a#btnRadio", view).click(function(e) {
         	e.preventDefault();
         	radio.bind();
         });
 
-        N("a#btnCheckBox", vc).click(function(e) {
+        N("a#btnCheckBox", view).click(function(e) {
         	e.preventDefault();
         	checkbox.bind();
         });
-
-        return this;
     },
     initButton : function() {
     	N("div.btnBox").button();
     }
-}).init();
+});
 
 </script>

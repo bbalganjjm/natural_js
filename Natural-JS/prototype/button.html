@@ -24,21 +24,20 @@
 <script type="text/javascript">
 
 N("div#button").service({
-    init : function() {
-    	this.initButton(this.view.context);
-        this.setEvents(this.view.context);
-        return this;
+    init : function(view) {
+    	this.initButton(view);
+        this.setEvents(view);
     },
-    initButton : function(vc) {
-    	N("div.btnBox", vc).button();
+    initButton : function(view) {
+    	N("div.btnBox", view).button();
     },
-    setEvents : function(vc) {
-    	N("a#btnDeclarative", vc).click(function(e) {
+    setEvents : function(view) {
+    	N("a#btnDeclarative", view).click(function(e) {
             e.preventDefault();
 			N("div.data").button();
         });
 
-        N("a#btnCommand", vc).click(function(e) {
+        N("a#btnCommand", view).click(function(e) {
             e.preventDefault();
 			N("#btn1").button({
 				color : "skyblue",
@@ -54,20 +53,20 @@ N("div#button").service({
 			});
         });
 
-        N("a#btnDisable", vc).click(function(e) {
+        N("a#btnDisable", view).click(function(e) {
             e.preventDefault();
             N("div.data").find("a, button, input[type='button']").instance("button", function(u) {
             	this.disable();
             });
         });
 
-        N("a#btnEnable", vc).click(function(e) {
+        N("a#btnEnable", view).click(function(e) {
             e.preventDefault();
             N("div.data").find("a, button, input[type='button']").instance("button", function() {
             	this.enable();
             });
         });
     }
-}).init();
+});
 
 </script>

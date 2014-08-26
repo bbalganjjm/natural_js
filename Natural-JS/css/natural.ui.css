@@ -41,8 +41,8 @@ span.block_overlay_msg__ li.msg_title_box__ {
 }
 
 span.block_overlay_msg__ li.msg_box__ {
-    margin: 10px 0 0 0;
-    padding: 0 10px 0 10px;
+    margin: 10px 10px 0 10px;
+    padding: 0;
     color: #4f535c;
 }
 

@@ -40,46 +40,50 @@
 
 N("div#popup").service({
 	localPopup : null,
-    init : function() {
-    	this.initButton(this.view.context);
-    	this.setEvents(this.view.context);
-        return this;
+    init : function(view) {
+    	this.initButton(view);
+    	this.setEvents(view);
     },
-    initButton : function(vc) {
-    	N("div.btnBox", vc).button();
+    initButton : function(view) {
+    	N("div.btnBox", view).button();
 
-    	N("a#btnLogin", vc).button();
-    	N("a#btnLogin", vc).css("padding-top", "15px");
-    	N("a#btnLogin", vc).css("padding-bottom", "15px");
+    	N("a#btnLogin", view).button();
+    	N("a#btnLogin", view).css("padding-top", "15px");
+    	N("a#btnLogin", view).css("padding-bottom", "15px");
+
+    	this.otherPagePopup = N().popup({
+    		url : "prototype/form.html",
+    		height : 450
+    	});
     },
-    setEvents : function(vc) {
+    setEvents : function(view) {
     	var this_ = this;
 
-    	N("a#btnInitPopup", vc).click(function(e) {
+    	N("a#btnInitPopup", view).click(function(e) {
             e.preventDefault();
             this_.localPopup = N("table#loginForm").popup();
         });
 
-        N("a#btnOpenPopup", vc).click(function(e) {
+        N("a#btnOpenPopup", view).click(function(e) {
             e.preventDefault();
             this_.localPopup.open();
         });
 
-        N("a#btnOtherPage", vc).click(function(e) {
+        N("a#btnOtherPage", view).click(function(e) {
             e.preventDefault();
-            N.popup().open();
+            this_.otherPagePopup.open();
         });
 
-        N("a#btnOnOpen", vc).click(function(e) {
+        N("a#btnOnOpen", view).click(function(e) {
             e.preventDefault();
 
         });
 
-        N("a#btnOnClose", vc).click(function(e) {
+        N("a#btnOnClose", view).click(function(e) {
             e.preventDefault();
 
         });
     }
-}).init();
+});
 
 </script>

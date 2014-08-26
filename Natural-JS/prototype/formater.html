@@ -68,12 +68,10 @@
 <script type="text/javascript">
 
 N("div#formater").service({
-    init : function() {
-    	var vc = this.view.context;
-
+    init : function(view) {
     	this.initButton();
 
-        N("a#btnFormatCommand", vc).click(function(e) {
+        N("a#btnFormatCommand", view).click(function(e) {
             e.preventDefault();
 
             var data = eval(N("textarea.data").val());
@@ -85,30 +83,28 @@ N("div#formater").service({
                 "etc" : [["date", 12]]
             }).format();
 
-            N("textarea.data", vc).val(N.json.format(pData));
+            N("textarea.data", view).val(N.json.format(pData));
         });
 
-        N("a#btnFormatDeclarative", vc).click(function(e) {
+        N("a#btnFormatDeclarative", view).click(function(e) {
             e.preventDefault();
             var data = eval(N("textarea.data").val());
             N(data).formater("#inputBox").format();
         });
 
-        N("a#btnUnFormatEvent", vc).click(function(e) {
+        N("a#btnUnFormatEvent", view).click(function(e) {
             e.preventDefault();
-            N("#inputBox :input", vc).trigger("unformat");
+            N("#inputBox :input", view).trigger("unformat");
         });
 
-        N("a#btnFormatEvent", vc).click(function(e) {
+        N("a#btnFormatEvent", view).click(function(e) {
             e.preventDefault();
-            N("#inputBox :input", vc).trigger("format");
+            N("#inputBox :input", view).trigger("format");
         });
-
-        return this;
     },
     initButton : function() {
     	N("div.btnBox").button();
     }
-}).init();
+});
 
 </script>

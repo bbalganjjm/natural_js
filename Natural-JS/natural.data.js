@@ -28,9 +28,9 @@
 
 	NTR.data = {
 		refine : function(obj, listId) {
-			if (NTR.isWrappedSet(obj)) {
+			if (N.isWrappedSet(obj)) {
 				if (obj.length == 1) {
-					if (NTR.isPlainObject(obj.get(0))) {
+					if (N.isPlainObject(obj.get(0))) {
 						return NTR(this.refine(obj.get(0), listId));
 					} else {
 						return obj;
@@ -43,7 +43,7 @@
 					return obj[listId] || [];
 				} else {
 					for ( var key in obj) {
-						return NTR.isNumeric(key) ? obj : obj[key];
+						return N.isNumeric(key) ? obj : obj[key];
 					}
 				}
 			}
@@ -52,7 +52,7 @@
 			if (queryString == null) {
 				return arr;
 			}
-			return NTR.isWrappedSet(arr) ? NTR(this.filter(arr.toArray(), queryString)) : $.grep(arr, function(data) {
+			return N.isWrappedSet(arr) ? NTR(this.filter(arr.toArray(), queryString)) : $.grep(arr, function(data) {
 				return eval(queryString);
 			});
 		},
@@ -68,8 +68,8 @@
 			}
 
 			return function(a, b) {
-				a = NTR.string.trimToEmpty(String(a[key])).replace(/-|\./g, "");
-				b = NTR.string.trimToEmpty(String(b[key])).replace(/-|\./g, "");
+				a = N.string.trimToEmpty(String(a[key])).replace(/-|\./g, "");
+				b = N.string.trimToEmpty(String(b[key])).replace(/-|\./g, "");
 				if (parseInt(a) && parseInt(b)) {
 					a = parseInt(a);
 					b = parseInt(b);
@@ -84,7 +84,7 @@
 			};
 		},
 		sort : function(arr, key, reverse) {
-			return NTR.isWrappedSet(arr) ? NTR(arr.sort(this.sortBy(key, reverse))) : arr.sort(this.sortBy(key, reverse));
+			return N.isWrappedSet(arr) ? NTR(arr.sort(this.sortBy(key, reverse))) : arr.sort(this.sortBy(key, reverse));
 		}
 	};
 
@@ -92,7 +92,7 @@
 		//DataSync
 		var DataSync = N.ds = function(instance, addFlag) {
 			if (N.ds.caller != N.ds.instance) {
-				throw new Error("[NTR.datasync]There is no public constructor for NTR.ds, use instance method");
+				throw new Error("[N.datasync]There is no public constructor for N.ds, use instance method");
 			}
 
 			this.obserable = new Array();
@@ -210,7 +210,7 @@
 								if (e.toString().indexOf("is not a function") > -1) {
 									N.error("[Formater.fn.format]\"" + this[0] + "\" is invalid format rule");
 								} else {
-									N.error(e);
+									N.error(e, e);
 								}
 							}
 						});
@@ -639,14 +639,14 @@
 								if (e.toString().indexOf("is not a function") > -1) {
 									N.error("[Validator.fn.validate]\"" + this[0] + "\" is invalid format rule");
 								} else {
-									N.error(e);
+									N.error(e, e);
 								}
 							}
 							retTempObj["msg"] = null;
 							if (!retTempObj["result"]) {
 								var valiMsg;
-								if (!(valiMsg = NTR.context.attr("data")["validator"]["message"][NTR.locale()][rule])) {
-									valiMsg = NTR.context.attr("data")["validator"]["message"][NTR.locale()]["global"];
+								if (!(valiMsg = N.context.attr("data")["validator"]["message"][N.locale()][rule])) {
+									valiMsg = N.context.attr("data")["validator"]["message"][N.locale()]["global"];
 								}
 								retTempObj["msg"] = N.message.replaceMsgVars(valiMsg, args);
 

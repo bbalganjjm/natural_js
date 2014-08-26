@@ -1,4 +1,4 @@
-<div id="form">
+<div id="form" title="Form 예제">
 	<div class="divBar">DATA</div>
 	<div class="dataBox">
 		<table>
@@ -150,9 +150,7 @@
 <script type="text/javascript">
 
 N("div#form").service({
-    init : function() {
-    	var vc = this.view.context;
-
+    init : function(view) {
     	this.initButton();
 
     	var data = eval(N("textarea.data").val());
@@ -161,12 +159,12 @@ N("div#form").service({
 
     	var form = N(data).form("table#inputBox");
 
-        N("a#btnFormBind", vc).click(function(e) {
+        N("a#btnFormBind", view).click(function(e) {
             e.preventDefault();
             form.bind();
         });
 
-        N("a#btnFormValidate", vc).click(function(e) {
+        N("a#btnFormValidate", view).click(function(e) {
             e.preventDefault();
             N("table#inputBox").alert("전체검증 결과 : " + form.validate()).show()
         });
@@ -182,6 +180,6 @@ N("div#form").service({
     initButton : function() {
     	N("div.btnBox").button();
     }
-}).init();
+});
 
 </script>

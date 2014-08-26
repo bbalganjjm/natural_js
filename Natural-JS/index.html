@@ -15,49 +15,49 @@
 <script type="text/javascript">
 var IndexServiceController = {
     init : function() {
-    	NTR("a#btnController").click(function(e) {
+    	N("a#btnController").click(function(e) {
 		    e.preventDefault();
-		    NTR("div#contents").controller("prototype/controller.html").submit();
+		    N(N.context.attr("architecture")["page"]["context"]).controller("prototype/controller.html").submit();
 	    });
 
-	    NTR("a#btnFormater").click(function(e) {
+	    N("a#btnFormater").click(function(e) {
 		    e.preventDefault();
-		    NTR("div#contents").controller("prototype/formater.html").request.attr("aa", [{}, {}, {}]).submit();
+		    N(N.context.attr("architecture")["page"]["context"]).controller("prototype/formater.html").request.attr("aa", [{}, {}, {}]).submit();
 	    });
 
-	    NTR("a#btnValidator").click(function(e) {
+	    N("a#btnValidator").click(function(e) {
             e.preventDefault();
-            NTR("div#contents").controller("prototype/validator.html").submit();
+            N(N.context.attr("architecture")["page"]["context"]).controller("prototype/validator.html").submit();
         });
 
-	    NTR("a#btnAlert").click(function(e) {
+	    N("a#btnAlert").click(function(e) {
 		   e.preventDefault();
-		   NTR("div#contents").controller("prototype/alert.html").submit();
+		   N(N.context.attr("architecture")["page"]["context"]).controller("prototype/alert.html").submit();
 	    });
 
-	    NTR("a#btnButton").click(function(e) {
+	    N("a#btnButton").click(function(e) {
 		   e.preventDefault();
-		   NTR("div#contents").controller("prototype/button.html").submit();
+		   N(N.context.attr("architecture")["page"]["context"]).controller("prototype/button.html").submit();
 	    });
 
-	    NTR("a#btnSelect").click(function(e) {
+	    N("a#btnSelect").click(function(e) {
 		   e.preventDefault();
-		   NTR("div#contents").controller("prototype/select.html").submit();
+		   N(N.context.attr("architecture")["page"]["context"]).controller("prototype/select.html").submit();
 	    });
 
-	    NTR("a#btnForm").click(function(e) {
+	    N("a#btnForm").click(function(e) {
 		   e.preventDefault();
-		   NTR("div#contents").controller("prototype/form.html").submit();
+		   N(N.context.attr("architecture")["page"]["context"]).controller("prototype/form.html").submit();
 	    });
 
-	    NTR("a#btnGrid").click(function(e) {
+	    N("a#btnGrid").click(function(e) {
 		   e.preventDefault();
-		   NTR("div#contents").controller("prototype/grid.html").submit();
+		   N(N.context.attr("architecture")["page"]["context"]).controller("prototype/grid.html").submit();
 	    });
-	    
-	    NTR("a#btnPopup").click(function(e) {
+
+	    N("a#btnPopup").click(function(e) {
 		   e.preventDefault();
-		   NTR("div#contents").controller("prototype/popup.html").submit();
+		   N(N.context.attr("architecture")["page"]["context"]).controller("prototype/popup.html").submit();
 	    });
     }
 }

@@ -38,7 +38,7 @@
 					afterInit : function(request) {
 					},
 					beforeSend : function(request, xhr, settings) {
-						if(request.options.dataType === "html") {
+						if(request.options.dataType === "html" && request.obj.length > 0) {
 							request.obj.html('<div align="center" style="margin-top: 140px;margin-bottom: 140px;">페이지를 불러오는 중...</div>');
 						}
 					},
@@ -376,7 +376,7 @@
 			}
 		},
 		"popup" : {
-			
+
 		}
 	});
 

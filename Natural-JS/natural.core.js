@@ -16,7 +16,10 @@
 				N.context.attr("core")["locale"] = str;
 			}
 		},
-		error : function(msg) {
+		error : function(msg, e) {
+			if (e !== undefined && e.stack !== undefined && console.error !== undefined) {
+				console.error(e.stack);
+			}
 			throw new Error(msg);
 		},
 		isFunction : $.isFunction,
@@ -191,10 +194,10 @@
 			 * 두 날짜의 차수를 리턴한다.
 			 */
 			diff : function(str1, str2) {
-				if (NTR.type(str1) == "string") {
+				if (N.type(str1) == "string") {
 					str1 = this.stringToDateObj(str1).obj;
 				}
-				if (NTR.type(str2) == "string") {
+				if (N.type(str2) == "string") {
 					str2 = this.stringToDateObj(str2).obj;
 				}
 				return Math.ceil((str2 - str1) / 1000 / 24 / 60 / 60);
@@ -203,34 +206,34 @@
 			 * 날짜스트링을 Date Object와 기본 데이트포멧이 담긴 dateInfo 오브젝트 반환
 			 */
 			strToDate : function(str) {
-				str = NTR.string.trimToEmpty(str).replace(/\s/g, "").replace(/-/g, "").replace(/\//g, "").replace(/:/g, "");
+				str = N.string.trimToEmpty(str).replace(/\s/g, "").replace(/-/g, "").replace(/\//g, "").replace(/:/g, "");
 				var dateInfo = null;
 				if (str.length == 6) {
 					dateInfo = {
 						obj : new Date(str.substring(0, 4), Number(str.substring(4, 6)), 0, 0, 0, 0),
-						format : NTR.context.attr("data")["formater"]["date"]["Ym"]()
+						format : N.context.attr("data")["formater"]["date"]["Ym"]()
 					};
 				} else if (str.length == 8) {
 					dateInfo = {
 						obj : new Date(str.substring(0, 4), Number(str.substring(4, 6)) - 1, str.substring(6, 8), 0, 0, 0),
-						format : NTR.context.attr("data")["formater"]["date"]["Ymd"]()
+						format : N.context.attr("data")["formater"]["date"]["Ymd"]()
 					};
 				} else if (str.length == 10) {
 					dateInfo = {
 						obj : new Date(str.substring(0, 4), Number(str.substring(4, 6)) - 1, str.substring(6, 8), str.substring(8, 10), 0, 0),
-						format : NTR.context.attr("data")["formater"]["date"]["YmdH"]()
+						format : N.context.attr("data")["formater"]["date"]["YmdH"]()
 					};
 				} else if (str.length == 12) {
 					dateInfo = {
 						obj : new Date(str.substring(0, 4), Number(str.substring(4, 6)) - 1, str.substring(6, 8), str.substring(8, 10), str.substring(10, 12),
 								0),
-						format : NTR.context.attr("data")["formater"]["date"]["YmdHi"]()
+						format : N.context.attr("data")["formater"]["date"]["YmdHi"]()
 					};
 				} else if (str.length >= 14) {
 					dateInfo = {
 						obj : new Date(str.substring(0, 4), Number(str.substring(4, 6)) - 1, str.substring(6, 8), str.substring(8, 10), str.substring(10, 12),
 								str.substring(12, 14)),
-						format : NTR.context.attr("data")["formater"]["date"]["YmdHis"]()
+						format : N.context.attr("data")["formater"]["date"]["YmdHis"]()
 					};
 				}
 				return dateInfo;
@@ -265,7 +268,7 @@
 			 * make options object from class attribute
 			 */
 			toOpts : function(ele) {
-				var opts = NTR.string.trimToNull(NTR(ele).attr("class"));
+				var opts = N.string.trimToNull(NTR(ele).attr("class"));
 				if (opts != null && opts.indexOf("{") > -1 && opts.indexOf("}") > -1) {
 					return JSON.parse(opts.substring(opts.indexOf("{"), opts.indexOf("}") + 1));
 				}
@@ -453,14 +456,14 @@
 				return msg;
 			},
 			get : function(resource, k, vars) {
-				var msg = resource[NTR.locale()][k];
+				var msg = resource[N.locale()][k];
 				return msg !== undefined ? N.message.replaceMsgVars(msg, vars) : k;
 			}
 		},
 		"json" : {
 			"format" : function(oData, sIndent) {
-				if (oData != null && !NTR.isEmptyObject(oData)) {
-					if (NTR.isString(oData)) {
+				if (oData != null && !N.isEmptyObject(oData)) {
+					if (N.isString(oData)) {
 						oData = JSON.parse(oData);
 					}
 					if(sIndent === undefined) {
@@ -480,7 +483,7 @@
 		get : $.fn.get,
 		"remove_" : function(idx, length) {
 			if (idx !== undefined) {
-				if (!NTR.isNumeric(idx)) {
+				if (!N.isNumeric(idx)) {
 					idx = this.toArray().indexOf(idx);
 				}
 				if (length === undefined) {
@@ -507,7 +510,7 @@
 	    },
 	    instance : function(name, instance) {
 	    	if(instance !== undefined) {
-	    		if(NTR.type(instance) === "function") {
+	    		if(N.type(instance) === "function") {
 	    			//instance is callback function
 	    			var inst;
 	    			this.each(function(i) {
@@ -526,15 +529,15 @@
 	    	var type = N.string.trimToEmpty(this.attr("type")).toLowerCase();
 	    	var selEle;
 	    	//TODO function 쪽 다시 테스트 바람
-	    	if(vals !== undefined && NTR.type(vals) !== "function") {
+	    	if(vals !== undefined && N.type(vals) !== "function") {
 	    		if (tagName === "select") {
-	    			if(NTR.string.trimToNull(vals) == null && !this.is("select[multiple='multiple']")) {
+	    			if(N.string.trimToNull(vals) == null && !this.is("select[multiple='multiple']")) {
 	    				opts.context.get(0).selectedIndex = 0;
 	    			} else {
 	    				this.val(vals);
 	    			}
 		        } else if (type === "checkbox") {
-		        	if(NTR.type(vals) === "string") {
+		        	if(N.type(vals) === "string") {
 		        		vals = [ vals ];
 		        	}
 		        	if(this.length > 1) {
@@ -545,9 +548,9 @@
 		        		});
 		        	} else if(this.length === 1) {
 		        		//TODO test 해야됨
-		        		if(NTR.context.attr("core")["sgChkdVal"] === vals[0]) {
+		        		if(N.context.attr("core")["sgChkdVal"] === vals[0]) {
 		        			this.prop("checked", true);
-		        		} else if (NTR.context.attr("core")["sgUnChkdVal"] === vals[0]) {
+		        		} else if (N.context.attr("core")["sgUnChkdVal"] === vals[0]) {
 		        			this.prop("checked", false);
 		        		} else {
 		        			this.filter("[value='" + String(vals[0]) + "']").prop("checked", true);
@@ -562,7 +565,7 @@
 		        if (tagName === "select") {
 		        	selEle = this.find("> option:selected");
 		        	if(selEle.length > 1) {
-		        		if(NTR.type(vals) !== "function") {
+		        		if(N.type(vals) !== "function") {
 		        			return selEle.map(function() {
 			                    return $(this).val();
 				            });
@@ -573,7 +576,7 @@
 		        			});
 		        		}
 		        	} else if(selEle.length === 1) {
-	        			if(NTR.type(vals) !== "function") {
+	        			if(N.type(vals) !== "function") {
 	        				if(selEle.attr("value") !== undefined) {
 	        					return selEle.val();
 	        				} else {
@@ -586,8 +589,8 @@
 		        	}
 		        } else if (type === "radio") {
 		        	selEle = this.filter("[name='" + this.attr("name") + "']:checked");
-		        	if(NTR.type(vals) !== "function") {
-		        		return NTR.string.trimToNull(selEle.val());
+		        	if(N.type(vals) !== "function") {
+		        		return N.string.trimToNull(selEle.val());
 		        	} else {
 		        		vals.call(selEle, this.filter("[name='" + this.attr("name") + "']").index(selEle), selEle);
         				return selEle;
@@ -595,7 +598,7 @@
 		        } else if (type === "checkbox") {
 		        	selEle = this.filter("[name='" + this.attr("name") + "']:checked");
 		        	if(this.length > 1) {
-		        		if(NTR.type(vals) !== "function") {
+		        		if(N.type(vals) !== "function") {
 		        			return selEle.length === 1 ? $(selEle).val() : selEle.map(function() {
 			                    return $(this).val();
 				            });
@@ -609,15 +612,15 @@
 		        		if(selEle.length === 0) {
 		        			selEle = this.filter("[id='" + this.attr("id") + "']");
 		        		}
-	        			if(NTR.type(vals) !== "function") {
+	        			if(N.type(vals) !== "function") {
 	        				var val = selEle.val();
-	        				if(NTR.context.attr("core")["sgChkdVal"] === val || NTR.context.attr("core")["sgUnChkdVal"] === val || selEle.attr("value") === undefined) {
+	        				if(N.context.attr("core")["sgChkdVal"] === val || N.context.attr("core")["sgUnChkdVal"] === val || selEle.attr("value") === undefined) {
 	        					if(selEle.prop("checked")) {
-	        						val = NTR.context.attr("core")["sgChkdVal"];
+	        						val = N.context.attr("core")["sgChkdVal"];
 	        						selEle.val(val);
 		        					return val;
 				        		} else if (!selEle.prop("checked")) {
-				        			val = NTR.context.attr("core")["sgUnChkdVal"];
+				        			val = N.context.attr("core")["sgUnChkdVal"];
 	        						selEle.val(val);
 		        					return val;
 				        		}
