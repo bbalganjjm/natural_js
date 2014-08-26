@@ -280,11 +280,12 @@
 				});
 			},
 			resetOffSetWrapEle : function(opts) {
+				//TODO 팝업에서 할때 잘 안됨.
 				var maxZindex = N.element.maxZindex(opts.context.find("div, span, ul, p")) + 1;
 				opts.msgContext.css({
 					"top" : opts.context.offset().top + "px",
 					"left" : opts.context.offset().left + "px",
-					"height" : opts.isWindow ? this.options.obj.outerHeight() : opts.context.outerHeight() + "px",
+					"height" : opts.isWindow ? opts.obj.outerHeight() : opts.context.outerHeight() + "px",
 					"width" : opts.context.outerWidth() + "px",
 					"z-index" : maxZindex
 				}).show();
