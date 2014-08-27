@@ -251,7 +251,8 @@
 			obj.instance("service", callback);
 
 			if(callback.init !== undefined) {
-				callback.init(obj);
+				callback.view = obj;
+				callback.init(callback.view);
 			}
 			return callback;
 		};

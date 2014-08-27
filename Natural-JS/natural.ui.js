@@ -76,8 +76,18 @@
 				$.extend(this.options, msg);
 			}
 
-			if(obj.get(0) === window || obj.get(0) === window.document) {
+			if(this.options.isWindow) {
 				this.options.context = N("body");
+			} else {
+				/**
+				 *  popup 안에서 alert 호출 시 팝업이 position:absolute 인에 여기에 alert 의 overlay 가 absolute 여서
+				 *  위치계산이 어렵고 매끄럽지 않아 popup 안에서만 영역지정하여 alert 하는것을 허용하지 않음.
+				 */
+				if(this.options.obj.parents("span.block_overlay_msg__").length > 0) {
+					this.options.obj = $(window);
+					this.options.context = N("body");
+					this.options.isWindow = true;
+				}
 			}
 
 			if (!this.options.isInput) {
@@ -97,6 +107,9 @@
 				var opts = this.options;
 				if (!opts.isInput) {
 					Alert.resetOffSetWrapEle(opts);
+					this.time = setInterval(function() {
+						Alert.resetOffSetWrapEle(opts);
+					}, 100);
 					opts.msgContents.fadeIn(150);
 				} else {
 					if (!N.isEmptyObject(opts.msg)) {
@@ -151,6 +164,7 @@
 			"hide" : function() {
 				var opts = this.options;
 				if (!opts.isInput) {
+					clearInterval(this.time);
 					opts.msgContext.hide();
 					opts.msgContents.hide();
 				} else {
@@ -174,13 +188,17 @@
 			wrapEle : function() {
 				var opts = this.options;
 
+				// get max index among page elements
+				var maxZindex = N.element.maxZindex(opts.context.find("div, span, ul, p")) + 1;
+
 				// set style message overlay
 				var blockOverlayCss = {
 					"display" : "none",
 					"position" : opts.isWindow ? "fixed" : "absolute",
 					"cursor" : "not-allowed",
 					"padding" : 0,
-					"border-radius" : opts.context.css("border-radius") != "0px" ? opts.context.css("border-radius") : "0px"
+					"border-radius" : opts.context.css("border-radius") != "0px" ? opts.context.css("border-radius") : "0px",
+					"z-index" : maxZindex
 				};
 				if (opts.overlayColor !== null) {
 					blockOverlayCss["background-color"] = opts.overlayColor;
@@ -196,7 +214,8 @@
 				// set style message box
 				var blockOverlayMsgCss = {
 					"display" : "none",
-					"position" : opts.isWindow ? "fixed" : "absolute"
+					"position" : opts.isWindow ? "fixed" : "absolute",
+					"z-index" : maxZindex + 1
 				};
 
 				// set title
@@ -274,25 +293,17 @@
 		        		this_[opts.closeMode]();
 		        	}
 				});
-
-				$(window).resize(function() {
-					Alert.resetOffSetWrapEle(opts);
-				});
 			},
 			resetOffSetWrapEle : function(opts) {
-				//TODO 팝업에서 할때 잘 안됨.
-				var maxZindex = N.element.maxZindex(opts.context.find("div, span, ul, p")) + 1;
 				opts.msgContext.css({
-					"top" : opts.context.offset().top + "px",
-					"left" : opts.context.offset().left + "px",
+					"top" : opts.isWindow ? 0 : opts.context.offset().top + "px",
+					"left" : opts.isWindow ? 0 : opts.context.offset().left + "px",
 					"height" : opts.isWindow ? opts.obj.outerHeight() : opts.context.outerHeight() + "px",
-					"width" : opts.context.outerWidth() + "px",
-					"z-index" : maxZindex
+					"width" : opts.context.outerWidth() + "px"
 				}).show();
 				opts.msgContents.css({
 					"top" : ((opts.msgContext.height() / 2 + opts.context.offset().top) - opts.msgContents.height() / 2) + "px",
-					"left" : ((opts.msgContext.width() / 2 + opts.context.offset().left) - opts.msgContents.width() / 2) + "px",
-					"z-index" : maxZindex + 1
+					"left" : ((opts.msgContext.width() / 2 + opts.context.offset().left) - opts.msgContents.width() / 2) + "px"
 				})
 			},
 			wrapInputEle : function() {
@@ -1478,9 +1489,13 @@
 				height : 0,
 				width : 0,
 				closeMode : "hide",
+				"confirm" : true,
 				onOk : null,
 				onCancel : null,
-				"confirm" : true,
+				onOpen : null,
+				onOpenData : null,
+				onClose : null,
+				onCloseData : null,
 				preLoad : false,
 			};
 
@@ -1503,6 +1518,13 @@
 				}
 			}
 
+			//set opener(parent page's service controller)
+			try {
+				this.opener = arguments.callee.caller.arguments.callee.caller.arguments[0].instance("service");				
+			} catch(e) {
+				console.warn("Don't set opener object in popup's service controller")
+			}
+
 			if(this.options.url !== null) {
 				Popup.loadEle.call(this, function(context) {
 					// this callback function is for async page load
@@ -1516,13 +1538,37 @@
 
 	        return this;
 		};
+
 		Popup.fn = Popup.prototype;
 		$.extend(Popup.fn, {
-			open : function() {
-				this.options.context.show();
+			open : function(onOpenData) {
+				var opts = this.options;
+				
+				if(this.options.url === null) {
+					this.options.context.show();
+				}
 				this.alert.show();
+				
+				// "onOpen" event execute
+				if(opts.onOpen !== null) {
+					if(onOpenData !== undefined) {
+						opts.onOpenData = onOpenData;
+					}
+					opts.context.instance("service")[opts.onOpen](opts.onOpenData);					
+				}
 			},
-			close : function() {
+			close : function(onCloseData) {
+				//TODO popup init 할때 onClose 지정할때 onCloseData 문제 더 생각바람.
+				//TODO 기본확인버튼은 onOk, 팝업안에서는 onClose?
+				var opts = this.options;
+				
+				// "onClose" event execute
+				if(opts.onClose !== null) {
+					if(onCloseData !== undefined) {
+						opts.onCloseData = onCloseData;
+					}
+					opts.onClose(opts.onCloseData);
+				}
 				this.alert.hide();
 			},
 			remove : function() {
@@ -1544,6 +1590,13 @@
 				}
 
 				this.alert = N(window).alert(opts);
+				this.alert.options.msgContext.addClass("popup_overlay__");
+				this.alert.options.msgContents.addClass("popup__");
+
+				//set opener into popup's service controller
+				if(this.opener !== undefined) {
+					opts.context.instance("service")["opener"] = this.opener;
+				}
 			},
 			loadEle : function(callback) {
 				var opts = this.options;
@@ -1562,7 +1615,13 @@
 					// opts.context is alert message;
 					opts.msg = opts.context;
 					this_.alert = N(window).alert(opts);
+					this_.alert.options.msgContext.addClass("popup_overlay__");
+					this_.alert.options.msgContents.addClass("popup__");
 
+					//set opener into popup's service controller
+					if(this_.opener !== undefined) {
+						opts.context.instance("service")["opener"] = this_.opener;
+					}
 					callback.call(this_, opts.context);
 	        	});
 			}

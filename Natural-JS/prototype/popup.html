@@ -5,8 +5,6 @@
 			<a id="btnInitPopup" href="#" class='{ "color": "gray", "size": "small" }'>init popup</a>
 			<a id="btnOpenPopup" href="#" class='{ "color": "skyblue", "size": "small" }'>open popup</a>
 			<a id="btnOtherPage" href="#" class='{ "color": "white", "size": "small" }'>다른페이지 불러오기</a>
-			<a id="btnOnOpen" href="#" class='{ "color": "white", "size": "small" }'>onOpen Callback</a>
-			<a id="btnOnClose" href="#" class='{ "color": "white", "size": "small" }'>onClose Callback</a>
 		</div>
 		<div class="data">
 			<div id="popupTemp">
@@ -53,7 +51,11 @@ N("div#popup").service({
 
     	this.otherPagePopup = N().popup({
     		url : "prototype/form.html",
-    		height : 450
+    		height : 450,
+    		onOpen : "onOpen",
+    		onClose : function(onCloseData) {
+    			alert("onClose 콜백 실행\nonCloseData :\n" + JSON.stringify(onCloseData));
+    		}
     	});
     },
     setEvents : function(view) {
@@ -71,17 +73,9 @@ N("div#popup").service({
 
         N("a#btnOtherPage", view).click(function(e) {
             e.preventDefault();
-            this_.otherPagePopup.open();
-        });
-
-        N("a#btnOnOpen", view).click(function(e) {
-            e.preventDefault();
-
-        });
-
-        N("a#btnOnClose", view).click(function(e) {
-            e.preventDefault();
-
+            this_.otherPagePopup.open({
+            	onOpenData : "onOpen 할때 팝업으로 값 전송"
+            });
         });
     }
 });
