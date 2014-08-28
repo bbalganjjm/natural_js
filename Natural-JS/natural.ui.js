@@ -1,5 +1,5 @@
 (function(window, $) {
-	var version = "0.5.1.8";
+	var version = "0.6.0.0";
 
 	// NTR local variables
 	$.fn.extend(NTR, {
@@ -1520,7 +1520,7 @@
 
 			//set opener(parent page's service controller)
 			try {
-				this.opener = arguments.callee.caller.arguments.callee.caller.arguments[0].instance("service");				
+				this.opener = arguments.callee.caller.arguments.callee.caller.arguments[0].instance("service");
 			} catch(e) {
 				console.warn("Don't set opener object in popup's service controller")
 			}
@@ -1543,25 +1543,25 @@
 		$.extend(Popup.fn, {
 			open : function(onOpenData) {
 				var opts = this.options;
-				
+
 				if(this.options.url === null) {
 					this.options.context.show();
 				}
 				this.alert.show();
-				
+
 				// "onOpen" event execute
 				if(opts.onOpen !== null) {
 					if(onOpenData !== undefined) {
 						opts.onOpenData = onOpenData;
 					}
-					opts.context.instance("service")[opts.onOpen](opts.onOpenData);					
+					opts.context.instance("service")[opts.onOpen](opts.onOpenData);
 				}
 			},
 			close : function(onCloseData) {
 				//TODO popup init 할때 onClose 지정할때 onCloseData 문제 더 생각바람.
 				//TODO 기본확인버튼은 onOk, 팝업안에서는 onClose?
 				var opts = this.options;
-				
+
 				// "onClose" event execute
 				if(opts.onClose !== null) {
 					if(onCloseData !== undefined) {
@@ -1570,6 +1570,10 @@
 					opts.onClose(opts.onCloseData);
 				}
 				this.alert.hide();
+			},
+			changeEvent : function(name, callback) {
+				this.options[name] = callback;
+				this.alert.options[name] = this.options[name];
 			},
 			remove : function() {
 				this.alert.remove();
@@ -1592,11 +1596,6 @@
 				this.alert = N(window).alert(opts);
 				this.alert.options.msgContext.addClass("popup_overlay__");
 				this.alert.options.msgContents.addClass("popup__");
-
-				//set opener into popup's service controller
-				if(this.opener !== undefined) {
-					opts.context.instance("service")["opener"] = this.opener;
-				}
 			},
 			loadEle : function(callback) {
 				var opts = this.options;
@@ -1606,7 +1605,11 @@
 					contentType : "application/x-www-form-urlencoded",
 					dataType : "html"
 				}).submit(function(page) {
+					// block serviceController init;
+					N.service.init = false;
 					opts.context = $(page);
+
+					// set title
 					if(opts.title === null) {
 						opts.title = opts.context.attr("title");
 						opts.context.removeAttr("title");
@@ -1618,10 +1621,23 @@
 					this_.alert.options.msgContext.addClass("popup_overlay__");
 					this_.alert.options.msgContents.addClass("popup__");
 
-					//set opener into popup's service controller
+					var serviceController = opts.context.instance("service");
+
+					// set popup instance to popup's service controller
+					serviceController.caller = this_;
+
+					// set opener to popup's service controller
 					if(this_.opener !== undefined) {
-						opts.context.instance("service")["opener"] = this_.opener;
+						serviceController["opener"] = this_.opener;
 					}
+
+					if(serviceController.init !== undefined) {
+						serviceController.init(serviceController.view);
+					}
+
+					// restore serviceController init;
+					N.service.init = true;
+
 					callback.call(this_, opts.context);
 	        	});
 			}

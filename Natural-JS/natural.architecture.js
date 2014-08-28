@@ -1,5 +1,5 @@
 (function(window, $) {
-	var version = "0.5.1.0";
+	var version = "0.6.0.0";
 
 	// NTR local variables
 	$.fn.extend(NTR, {
@@ -250,12 +250,13 @@
 
 			obj.instance("service", callback);
 
-			if(callback.init !== undefined) {
-				callback.view = obj;
+			callback.view = obj;
+			if(N.service.init && callback.init !== undefined) {
 				callback.init(callback.view);
 			}
 			return callback;
 		};
+		N.service.init = true;
 
 		// Context Object
 		N.context = {

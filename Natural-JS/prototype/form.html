@@ -151,7 +151,7 @@
 
 N("div#form").service({
     init : function(view) {
-    	this.initButton();
+    	this.initButton(view);
 
     	var data = eval(N("textarea.data").val());
 
@@ -169,6 +169,12 @@ N("div#form").service({
             N("table#inputBox").alert("전체검증 결과 : " + form.validate()).show()
         });
 
+        // for popup onClose exemple
+        var popupCaller = this.caller;
+        popupCaller.changeEvent("onOk", function() {
+        	popupCaller.close(form.data());
+        });
+
         return this;
     },
     createSelect : function(data) {
@@ -177,14 +183,13 @@ N("div#form").service({
 		$(data).select("input#radio").bind();
 		$(data).select("input#checkbox").bind();
     },
-    initButton : function() {
-    	N("div.btnBox").button();
+    initButton : function(view) {
+    	N("div.btnBox", view).button();
     },
-    // for popup onOpen exemple
+    /**
+     * for popup onOpen exemple
+     */
     onOpen : function(onOpenData) {
-    	// opener
-    	console.log(this.opener);
-
 		alert("onOpen 콜백 실행\nonOpenData :\n" + JSON.stringify(onOpenData));
     }
 });
