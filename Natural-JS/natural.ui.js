@@ -151,7 +151,7 @@
 						opts.msgContext.css("z-index", N.element.maxZindex(opts.context) + 1);
 						opts.msgContext.show(0, function() {
 							setTimeout(function() {
-								opts.msgContext.fadeOut(150, function() {
+								opts.msgContext.fadeOut(1500, function() {
 									opts.msgContext.find("a.msg_close__").click();
 								});
 								clearInterval(time);
@@ -1522,15 +1522,19 @@
 			try {
 				this.opener = arguments.callee.caller.arguments.callee.caller.arguments[0].instance("service");
 			} catch(e) {
-				console.warn("Don't set opener object in popup's service controller")
+				if(this.options.url !== null && console !== undefined && console.warn !== undefined) {
+					console.warn("Don't set opener object in popup's service controller")
+				}
 			}
 
 			if(this.options.url !== null) {
-				Popup.loadEle.call(this, function(context) {
-					// this callback function is for async page load
-					this.options.context = context;
-					this.options.context.instance("popup", this);
-				});
+				if(this.options.preLoad) {
+					Popup.loadEle.call(this, function(context) {
+						// this callback function is for async page load
+						this.options.context = context;
+						this.options.context.instance("popup", this);
+					});
+				}
 			} else {
 				Popup.wrapEle.call(this);
 				this.options.context.instance("popup", this);
@@ -1543,18 +1547,19 @@
 		$.extend(Popup.fn, {
 			open : function(onOpenData) {
 				var opts = this.options;
+				var this_ = this;
 
-				if(this.options.url === null) {
-					this.options.context.show();
-				}
-				this.alert.show();
+				if(this.options.url !== null && !opts.preLoad) {
+					Popup.loadEle.call(this, function(context) {
+						// this callback function is for async page load
+						opts.context = context;
+						opts.context.instance("popup", this);
 
-				// "onOpen" event execute
-				if(opts.onOpen !== null) {
-					if(onOpenData !== undefined) {
-						opts.onOpenData = onOpenData;
-					}
-					opts.context.instance("service")[opts.onOpen](opts.onOpenData);
+						Popup.popOpen.call(this_, onOpenData);
+					});
+					opts.preLoad = true;
+				} else {
+					Popup.popOpen.call(this, onOpenData);
 				}
 			},
 			close : function(onCloseData) {
@@ -1607,6 +1612,8 @@
 				}).submit(function(page) {
 					// block serviceController init;
 					N.service.init = false;
+
+					// set loaded page instance to options.context
 					opts.context = $(page);
 
 					// set title
@@ -1624,22 +1631,41 @@
 					var serviceController = opts.context.instance("service");
 
 					// set popup instance to popup's service controller
-					serviceController.caller = this_;
+					if(serviceController !== undefined) {
+						serviceController.caller = this_;
 
-					// set opener to popup's service controller
-					if(this_.opener !== undefined) {
-						serviceController["opener"] = this_.opener;
+						// set opener to popup's service controller
+						if(this_.opener !== undefined) {
+							serviceController["opener"] = this_.opener;
+						}
+
+						if(serviceController.init !== undefined) {
+							serviceController.init(serviceController.view);
+						}
 					}
 
-					if(serviceController.init !== undefined) {
-						serviceController.init(serviceController.view);
-					}
-
-					// restore serviceController init;
+					// restore serviceController init flag;
 					N.service.init = true;
 
 					callback.call(this_, opts.context);
 	        	});
+			},
+			popOpen : function(onOpenData) {
+				var opts = this.options;
+				var this_ = this;
+
+				if(opts.url === null) {
+					opts.context.show();
+				}
+				this_.alert.show();
+
+				// "onOpen" event execute
+				if(opts.onOpen !== null) {
+					if(onOpenData !== undefined) {
+						opts.onOpenData = onOpenData;
+					}
+					opts.context.instance("service")[opts.onOpen](opts.onOpenData);
+				}
 			}
 		});
 

@@ -284,7 +284,7 @@
 				/**
 				 * 메시지 표시시간(ms)
 				 */
-				displayTimeout : 10000,
+				displayTimeout : 5000,
 				/**
 				 * 메시지 글머리 기호
 				 */
