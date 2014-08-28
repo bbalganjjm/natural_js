@@ -1686,6 +1686,7 @@
 				context : obj,
 				onOpen : null,
 				links : obj.find("li"),
+				classOpts : {},
 				contens : obj.find("div")
 			};
 
@@ -1693,8 +1694,15 @@
 				this.options = $.extend({}, this.options, N.context.attr("ui")["tab"]);
 			} catch (e) { }
 
-			//TODO li class 옵션 처리
-			//$.extend(this.options, N.element.toOpts(this.options.context));
+			//TODO 안됨...손보시오.
+			var this_ = this;
+			this.options.links.each(function() {
+				var thisEle = $(this);
+				this_.options.classOpts[thisEle.attr("id")] = N.element.toOpts(thisEle);
+			});
+
+			console.log(this.options.classOpts);
+
 			if(opts !== undefined) {
 				$.extend(this.options, opts);
 			}
