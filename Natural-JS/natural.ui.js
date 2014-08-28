@@ -1693,7 +1693,8 @@
 				this.options = $.extend({}, this.options, N.context.attr("ui")["tab"]);
 			} catch (e) { }
 
-			$.extend(this.options, N.element.toOpts(this.options.context));
+			//TODO li class 옵션 처리
+			//$.extend(this.options, N.element.toOpts(this.options.context));
 			if(opts !== undefined) {
 				$.extend(this.options, opts);
 			}
@@ -1717,7 +1718,7 @@
 					var thisEle = $(this);
 					opts.links.removeClass("tab_active__");
 					thisEle.addClass("tab_active__");
-					//TODO
+					//TODO active남기고 div 숨기기, url 처리
 				});
 				//opts.context.find("div").hide();
 			}
