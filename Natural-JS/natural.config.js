@@ -271,6 +271,9 @@
 	 */
 	N.context.attr("ui", {
 		"alert" : {
+			/**
+			 * 필수 값
+			 */
 			"global" : {
 				"okBtnStyle" : {
 					color : "skyblue",
@@ -280,6 +283,9 @@
 					size : "small"
 				}
 			},
+			/**
+			 * 필수 값
+			 */
 			"input" : {
 				/**
 				 * 메시지 표시시간(ms)
@@ -294,6 +300,9 @@
 				 */
 				closeBtn : "&times;"
 			},
+			/**
+			 * 필수 값
+			 */
 			"message" : {
 				"ko_KR" : {
 					"confirm" : "확인",

@@ -1,17 +1,17 @@
-<div id="tab">
+<div id="tabExam">
 	<div class="divBar">DEMO</div>
 	<div class="demoBox">
 		<div class="btnBox">
 			<a id="btnInitTab" href="#" class='{ "color": "gray", "size": "small" }'>init tab</a>
 		</div>
-		<div id="tabs">
+		<div id="tab">
 			<ul>
-				<li id="#tab-1">Nunc tincidunt</li>
-				<li id="#tab-2" class='{ "src" : "prototype/button.html" }'>Proin dolor</li>
-				<li id="#tab-3" class='{ "src" : "prototype/form.html" }'>Aenean lacinia</li>
+				<li id="tab1" class='{ "url" : "prototype/form.html", "width": "20px", "active" : true }'>Nunc tincidunt</li>
+				<li id="tab2" class='{ "url" : "prototype/button.html", width: "20px" }'>Proin dolor</li>
+				<li id="tab3" class='{ "url" : "prototype/form.html", width: "20px" }'>Aenean lacinia</li>
 			</ul>
-			<div id="tab-1">
-				<p>Proin elit arcu, rutrum commodo, vehicula tempus, commodo a,
+			<div id="tab1">
+				Proin elit arcu, rutrum commodo, vehicula tempus, commodo a,
 					risus. Curabitur nec arcu. Donec sollicitudin mi sit amet mauris.
 					Nam elementum quam ullamcorper ante. Etiam aliquet massa et lorem.
 					Mauris dapibus lacus auctor risus. Aenean tempor ullamcorper leo.
@@ -19,10 +19,10 @@
 					Aliquam sodales tortor vitae ipsum. Aliquam nulla. Duis aliquam
 					molestie erat. Ut et mauris vel pede varius sollicitudin. Sed ut
 					dolor nec orci tincidunt interdum. Phasellus ipsum. Nunc tristique
-					tempus lectus.</p>
+					tempus lectus.
 			</div>
-			<div id="tab-2"></div>
-			<div id="tab-3"></div>
+			<div id="tab2"></div>
+			<div id="tab3"></div>
 		</div>
 	</div>
 
@@ -33,7 +33,7 @@
 
 <script type="text/javascript">
 
-N("div#tab").service({
+N("div#tabExam").service({
 	localTab : null,
     init : function(view) {
     	this.initButton(view);
@@ -48,7 +48,7 @@ N("div#tab").service({
 
     	N("a#btnInitTab", view).click(function(e) {
             e.preventDefault();
-            this_.localTab = N("table#loginForm").tab();
+            this_.localTab = N("div#tab").tab();
         });
     }
 });

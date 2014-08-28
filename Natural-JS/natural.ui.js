@@ -32,12 +32,8 @@
 		popup : function(opts) {
 			return new NTR.popup(this, opts);
 		},
-		tab : function() {
-			if($.tabs !== undefined) {
-				//TODO integration jquery plugin
-			} else {
-				N.error("jQuery.tabs is undefined. please import jQuery UI tabs library");
-			}
+		tab : function(opts) {
+			return new NTR.tab(this, opts);
 		},
 		date : function() {
 			if($.tabs !== undefined) {
@@ -76,6 +72,10 @@
 				overlayColor : null,
 				"confirm" : false
 			};
+
+			try {
+				this.options = $.extend({}, this.options, N.context.attr("ui")["alert"]);
+			} catch (e) { }
 
 			if (obj.is(":input")) {
 				this.options.isInput = true;
@@ -163,7 +163,7 @@
 									opts.msgContext.find("a.msg_close__").click();
 								});
 								clearInterval(time);
-							}, N.context.attr("ui")["alert"]["input"]["displayTimeout"]);
+							}, opts.input.displayTimeout);
 						});
 					}
 				}
@@ -236,8 +236,8 @@
 				var buttonBox = '';
 				if(opts.button) {
 					buttonBox = '<li class="buttonBox__">'
-						+ '<a href="#" class="confirm__">' + N.message.get(N.context.attr("ui")["alert"]["message"], "confirm") + '</a>'
-						+ '<a href="#" class="cancel__">' + N.message.get(N.context.attr("ui")["alert"]["message"], "cancel") + '</a>'
+						+ '<a href="#" class="confirm__">' + N.message.get(opts.message, "confirm") + '</a>'
+						+ '<a href="#" class="cancel__">' + N.message.get(opts.message, "cancel") + '</a>'
 						+ '</li>';
 				}
 
@@ -265,7 +265,7 @@
 
 				var this_ = this;
 				//set confirm button style and bind click event
-				opts.msgContents.find("li.buttonBox__ a.confirm__").button(N.context.attr("ui")["alert"]["global"]["okBtnStyle"]);
+				opts.msgContents.find("li.buttonBox__ a.confirm__").button(opts.global.okBtnStyle);
 				opts.msgContents.find("li.buttonBox__ a.confirm__").click(function(e) {
 					e.preventDefault();
 					if (opts.onOk !== null) {
@@ -281,7 +281,7 @@
 
 				// set cancel button style and bind click event
 				if(opts.confirm) {
-					opts.msgContents.find("li.buttonBox__ a.cancel__").button(N.context.attr("ui")["alert"]["global"]["cancelBtnStyle"])
+					opts.msgContents.find("li.buttonBox__ a.cancel__").button(opts.global.cancelBtnStyle)
 					opts.msgContents.find("li.buttonBox__ a.cancel__").click(function(e) {
 						e.preventDefault();
 						if (opts.onCancel !== null) {
@@ -324,7 +324,7 @@
 				if (opts.msgContext.length == 0) {
 					opts.msgContext = opts.context.after('<span class="msg__"><ul class="msg_line_box__"></ul></span>')
 										.next("span.msg__");
-					opts.msgContext.append('<a href="#" class="msg_close__">' + N.context.attr("ui")["alert"]["input"]["closeBtn"] + '</a>');
+					opts.msgContext.append('<a href="#" class="msg_close__">' + opts.input.closeBtn + '</a>');
 					opts.msgContext.prepend('<ul class="msg_arrow__"></ul>');
 				}
 				if (N.isEmptyObject(opts.msg)) {
@@ -344,13 +344,13 @@
 						if (opts.vars !== undefined) {
 							opts.msg[i] = N.message.replaceMsgVars(msg_, opts.vars);
 						}
-						ul_.append('<li>' + N.context.attr("ui")["alert"]["input"]["bullets"] + opts.msg[i] + '</li>');
+						ul_.append('<li>' + opts.input.bullets + opts.msg[i] + '</li>');
 					});
 				} else {
 					if (opts.vars !== undefined) {
 						opts.msg = N.message.replaceMsgVars(msg, opts.vars);
 					}
-					ul_.append('<li>' + N.context.attr("ui")["alert"]["input"]["bullets"] + opts.msg + '</li>');
+					ul_.append('<li>' + opts.input.bullets + opts.msg + '</li>');
 				}
 			}
 		});
@@ -366,6 +366,9 @@
 				disable : false
 			};
 
+			try {
+				this.options = $.extend({}, this.options, N.context.attr("ui")["button"]);
+			} catch (e) { }
 			$.extend(this.options, N.element.toOpts(this.options.context));
 			if(opts !== undefined) {
 				$.extend(this.options, opts);
@@ -479,8 +482,8 @@
 			try {
 				this.options = $.extend({}, this.options, N.context.attr("ui")["select"]);
 			} catch (e) { }
-
 			$.extend(this.options, N.element.toOpts(this.options.context));
+
 			if (N.isPlainObject(opts)) {
 				$.extend(this.options, opts);
 				this.options.context = N(opts.context);
@@ -1677,19 +1680,68 @@
 			}
 		});
 
+		// Tab
+		var Tab = N.tab = function(obj, opts) {
+			this.options = {
+				context : obj,
+				onOpen : null,
+				links : obj.find("li"),
+				contens : obj.find("div")
+			};
+
+			try {
+				this.options = $.extend({}, this.options, N.context.attr("ui")["tab"]);
+			} catch (e) { }
+
+			$.extend(this.options, N.element.toOpts(this.options.context));
+			if(opts !== undefined) {
+				$.extend(this.options, opts);
+			}
+
+			this.options.context.addClass("tab__");
+
+			Tab.wrapEle.call(this);
+
+			this.options.context.instance("tab", this);
+		};
+
+		Tab.fn = Tab.prototype;
+		$.extend(Tab.fn, {
+
+		});
+
+		$.extend(Tab, {
+			wrapEle : function() {
+				var opts = this.options;
+				opts.links.bind("click.tab", function() {
+					var thisEle = $(this);
+					opts.links.removeClass("tab_active__");
+					thisEle.addClass("tab_active__");
+					//TODO
+				});
+				//opts.context.find("div").hide();
+			}
+		});
+
 		// MonthPicker
 		var MonthPicker = N.monthpicker = function(obj, opts) {
 			this.options = {
-					context : obj
-				};
+				context : obj
+			};
 
-				try {
-					this.options = $.extend({}, this.options, N.context.attr("ui")["monthpicker"]);
-				} catch (e) { }
+			try {
+				this.options = $.extend({}, this.options, N.context.attr("ui")["monthpicker"]);
+			} catch (e) { }
 
-				MonthPicker.wrapEle.call(this);
+			//set class options
+			//$.extend(this.options, N.element.toOpts(this.options.context));
+			if(opts !== undefined) {
+				$.extend(this.options, opts);
+			}
 
-				this.options.context.instance("monthpicker", this);
+			MonthPicker.wrapEle.call(this);
+
+			this.options.context.instance("monthpicker", this);
 		};
 
 		MonthPicker.fn = MonthPicker.prototype;
@@ -1699,7 +1751,7 @@
 
 		$.extend(MonthPicker, {
 			wrapEle : function() {
-
+				var opts = this.options;
 			}
 		});
 

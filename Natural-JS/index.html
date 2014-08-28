@@ -61,6 +61,11 @@ var IndexServiceController = {
 		   e.preventDefault();
 		   N(N.context.attr("architecture")["page"]["context"]).controller("prototype/popup.html").submit();
 	    });
+
+	    N("a#btnTab").click(function(e) {
+		   e.preventDefault();
+		   N(N.context.attr("architecture")["page"]["context"]).controller("prototype/tab.html").submit();
+	    });
     }
 }
 $(document).ready(function() {
