@@ -33,10 +33,18 @@
 			return new NTR.popup(this, opts);
 		},
 		tab : function() {
-			//TODO integration jquery plugin
+			if($.tabs !== undefined) {
+				//TODO integration jquery plugin
+			} else {
+				N.error("jQuery.tabs is undefined. please import jQuery UI tabs library");
+			}
 		},
 		date : function() {
-			//TODO integration jquery plugin
+			if($.tabs !== undefined) {
+				//TODO integration jquery plugin
+			} else {
+				N.error("jQuery.tabs is undefined. please import jQuery UI datepicker library");
+			}
 		},
 		month : function() {
 			//TODO integration jquery plugin
@@ -1666,6 +1674,32 @@
 					}
 					opts.context.instance("service")[opts.onOpen](opts.onOpenData);
 				}
+			}
+		});
+
+		// MonthPicker
+		var MonthPicker = N.monthpicker = function(obj, opts) {
+			this.options = {
+					context : obj
+				};
+
+				try {
+					this.options = $.extend({}, this.options, N.context.attr("ui")["monthpicker"]);
+				} catch (e) { }
+
+				MonthPicker.wrapEle.call(this);
+
+				this.options.context.instance("monthpicker", this);
+		};
+
+		MonthPicker.fn = MonthPicker.prototype;
+		$.extend(MonthPicker.fn, {
+
+		});
+
+		$.extend(MonthPicker, {
+			wrapEle : function() {
+
 			}
 		});
 
