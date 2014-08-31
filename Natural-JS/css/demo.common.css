@@ -47,6 +47,12 @@ input[readonly='readonly'], input[readonly='readonly']:hover, input[readonly='re
 	background-color: #ffffff;
 }
 
+input[type='radio'], input[type='checkbox'] {
+	margin:0 3px 0 0;
+	vertical-align:middle;
+	border:none;
+}
+
 a {
 	text-decoration: none;
 	font-weight: normal;

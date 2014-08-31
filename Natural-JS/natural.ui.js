@@ -1341,6 +1341,7 @@
 				var ele;
 
 				var pressed = false;
+				var cellEle;
 				var defWidth;
 				var currWidth;
 				var currCellEle;
