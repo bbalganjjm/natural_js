@@ -1687,8 +1687,9 @@
 				context : obj,
 				onOpen : null,
 				links : obj.find("li"),
-				classOpts : {},
-				contens : obj.find("div")
+				classOpts : [],
+				contens : obj.find("div"),
+				randomSel : false
 			};
 
 			try {
@@ -1697,12 +1698,12 @@
 
 			//TODO 안됨...손보시오.
 			var this_ = this;
-			this.options.links.each(function() {
+			var opt;
+			this.options.links.each(function(i) {
 				var thisEle = $(this);
-				this_.options.classOpts[thisEle.attr("id")] = N.element.toOpts(thisEle);
+				opt = {};
+				this_.options.classOpts[thisEle.find("a").attr("href")] = N.element.toOpts(thisEle);
 			});
-
-			console.log(this.options.classOpts);
 
 			if(opts !== undefined) {
 				$.extend(this.options, opts);
@@ -1723,6 +1724,20 @@
 		$.extend(Tab, {
 			wrapEle : function() {
 				var opts = this.options;
+				var selId;
+				var i = 0;
+				for(var k in opts.classOpts) {
+					if(opts.classOpts["active"] !== undefined && opts.classOpts["active"]) {
+						selId = k;
+					} else {
+						if(i === 0) {
+							selId = k;
+						}
+					}
+					i++;
+				}
+				console.log(selId);
+				//randomSel
 				opts.links.bind("click.tab", function() {
 					var thisEle = $(this);
 					opts.links.removeClass("tab_active__");

@@ -270,7 +270,13 @@
 			toOpts : function(ele) {
 				var opts = N.string.trimToNull(NTR(ele).attr("class"));
 				if (opts != null && opts.indexOf("{") > -1 && opts.indexOf("}") > -1) {
-					return JSON.parse(opts.substring(opts.indexOf("{"), opts.indexOf("}") + 1));
+					var optsStr;
+					try {
+						optsStr = opts.substring(opts.indexOf("{"), opts.indexOf("}") + 1);
+						return JSON.parse(optsStr);
+					} catch(e) {
+						N.error("invalid class options : " + optsStr, e);
+					}
 				}
 			},
 			/**

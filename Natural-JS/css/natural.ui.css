@@ -285,22 +285,22 @@ div.thead_wrap__ thead th .desc__ {
 	margin-right: 1px;
 	padding: 0;
 	padding: 6px 5px 8px 5px;
-	border: 1px solid #efefef;
+	border: 1px solid #dddddd;
 	cursor: pointer;
 }
 
 .tab__ ul li.tab_active__ {
-	background-image: -ms-linear-gradient(top, #fefefe 0%, #eeeeee 100%);
-	background-image: -moz-linear-gradient(top, #fefefe 0%, #eeeeee 100%);
-	background-image: -o-linear-gradient(top, #fefefe 0%, #eeeeee 100%);
-	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #fefefe), color-stop(1, #eeeeee));
-	background-image: -webkit-linear-gradient(top, #fefefe 0%, #eeeeee 100%);
-	background-image: linear-gradient(to bottom, #fefefe 0%, #eeeeee 100%);
-	background-color: #eeeeee;
+	background-image: -ms-linear-gradient(top, #efefef 0%, #dddddd 100%);
+	background-image: -moz-linear-gradient(top, #efefef 0%, #dddddd 100%);
+	background-image: -o-linear-gradient(top, #efefef 0%, #dddddd 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #efefef), color-stop(1, #dddddd));
+	background-image: -webkit-linear-gradient(top, #efefef 0%, #dddddd 100%);
+	background-image: linear-gradient(to bottom, #efefef 0%, #dddddd 100%);
+	background-color: #dddddd;
 }
 
 .tab__ div {
-	border: 1px solid #eeeeee;
+	border: 1px solid #dddddd;
 	border-top-width: 5px;
 	padding: 5px;
 }
