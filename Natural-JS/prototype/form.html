@@ -189,10 +189,10 @@ N("div#form").service({
     	N("div.btnBox", view).button();
     },
     /**
-     * for popup onOpen exemple
+     * for popup & tab onOpen exemple
      */
     onOpen : function(onOpenData) {
-		alert("onOpen 콜백 실행\nonOpenData :\n" + JSON.stringify(onOpenData));
+    	N("table#inputBox", this.view).alert("onOpen 콜백 실행\nonOpenData :\n" + JSON.stringify(onOpenData)).show();
     }
 });
 

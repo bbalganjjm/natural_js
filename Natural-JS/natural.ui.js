@@ -1868,15 +1868,13 @@
 		// MonthPicker
 		var MonthPicker = N.monthpicker = function(obj, opts) {
 			this.options = {
-				context : obj
+				context : $('<div class="monthpicker__"></div>')
 			};
 
 			try {
 				this.options = $.extend({}, this.options, N.context.attr("ui")["monthpicker"]);
 			} catch (e) { }
 
-			//set class options
-			//$.extend(this.options, N.element.toOpts(this.options.context));
 			if(opts !== undefined) {
 				$.extend(this.options, opts);
 			}
@@ -1894,6 +1892,10 @@
 		$.extend(MonthPicker, {
 			wrapEle : function() {
 				var opts = this.options;
+				for(var i=1;i<=12;i++) {
+					opts.context.append('<div class="monthpicker__">' + String(i) + '</div>');
+				}
+
 			}
 		});
 

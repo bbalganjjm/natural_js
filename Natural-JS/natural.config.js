@@ -388,7 +388,7 @@
 
 		},
 		"tab" : {
-			"effect" : ["fadeIn", 150, undefined]
+			"effect" : ["fadeIn", 300, undefined]
 		}
 	});
 

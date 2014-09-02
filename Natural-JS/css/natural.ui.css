@@ -272,7 +272,7 @@ div.thead_wrap__ thead th .desc__ {
 }
 
 /* Tab */
-.tab__ > ul {
+div.tab__ > ul {
 	display: inline-table;
 	list-style: none;
 	overflow: hidden;
@@ -280,7 +280,7 @@ div.thead_wrap__ thead th .desc__ {
 	padding: 0;
 }
 
-.tab__ > ul li {
+div.tab__ > ul li {
 	float: left;
 	margin-right: 1px;
 	padding: 0;
@@ -289,7 +289,7 @@ div.thead_wrap__ thead th .desc__ {
 	cursor: pointer;
 }
 
-.tab__ > ul li.tab_active__ {
+div.tab__ > ul li.tab_active__ {
 	background-image: -ms-linear-gradient(top, #efefef 0%, #dddddd 100%);
 	background-image: -moz-linear-gradient(top, #efefef 0%, #dddddd 100%);
 	background-image: -o-linear-gradient(top, #efefef 0%, #dddddd 100%);
@@ -299,8 +299,20 @@ div.thead_wrap__ thead th .desc__ {
 	background-color: #dddddd;
 }
 
-.tab__ > div {
+div.tab__ > div {
 	border: 1px solid #dddddd;
 	border-top-width: 5px;
 	padding: 5px;
+}
+
+/* Monthpicker */
+div.monthpicker__ {
+	width: 300px;
+}
+
+div.monthpicker__ div.item_month__ {
+	width: 33.3%;
+	height: 30px;
+	text-align: center;
+	float: left;
 }
