@@ -20,14 +20,14 @@ span.block_overlay_msg__ {
 	box-shadow: 0px 1px 15px #777777;
 }
 
-span.block_overlay_msg__ ul {
+span.block_overlay_msg__ > ul {
     margin: -1px 0 0 0;
     padding: 0;
     float: left;
     overflow: hidden;
 }
 
-span.block_overlay_msg__ ul li {
+span.block_overlay_msg__ > ul li {
     margin: 1px 0 1px 0;
 }
 
@@ -61,7 +61,7 @@ span.msg__ {
 	position: absolute;
 }
 
-span.msg__ ul {
+span.msg__ > ul {
 	margin: 0;
 	padding: 0;
 	float: left;
@@ -272,7 +272,7 @@ div.thead_wrap__ thead th .desc__ {
 }
 
 /* Tab */
-.tab__ ul {
+.tab__ > ul {
 	display: inline-table;
 	list-style: none;
 	overflow: hidden;
@@ -280,7 +280,7 @@ div.thead_wrap__ thead th .desc__ {
 	padding: 0;
 }
 
-.tab__ ul li {
+.tab__ > ul li {
 	float: left;
 	margin-right: 1px;
 	padding: 0;
@@ -289,7 +289,7 @@ div.thead_wrap__ thead th .desc__ {
 	cursor: pointer;
 }
 
-.tab__ ul li.tab_active__ {
+.tab__ > ul li.tab_active__ {
 	background-image: -ms-linear-gradient(top, #efefef 0%, #dddddd 100%);
 	background-image: -moz-linear-gradient(top, #efefef 0%, #dddddd 100%);
 	background-image: -o-linear-gradient(top, #efefef 0%, #dddddd 100%);
@@ -299,7 +299,7 @@ div.thead_wrap__ thead th .desc__ {
 	background-color: #dddddd;
 }
 
-.tab__ div {
+.tab__ > div {
 	border: 1px solid #dddddd;
 	border-top-width: 5px;
 	padding: 5px;

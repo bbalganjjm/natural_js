@@ -386,6 +386,9 @@
 		},
 		"popup" : {
 
+		},
+		"tab" : {
+			"effect" : ["fadeIn", 150, undefined]
 		}
 	});
 

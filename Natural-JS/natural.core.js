@@ -18,9 +18,16 @@
 		},
 		error : function(msg, e) {
 			if (e !== undefined && e.stack !== undefined && console.error !== undefined) {
-				console.error(e.stack);
+				if(console !== undefined && console.error !== undefined) {
+					console.error(e.stack);
+				}
 			}
 			throw new Error(msg);
+		},
+		warn : function(msg) {
+			if(console !== undefined && console.warn !== undefined) {
+				console.warn(msg);
+			}
 		},
 		isFunction : $.isFunction,
 		isArray : $.isArray,

@@ -1504,7 +1504,7 @@
 				"confirm" : true,
 				onOk : null,
 				onCancel : null,
-				onOpen : null,
+				onOpen : null, //TODO onLoad 도 필요한지 고민 해 보기
 				onOpenData : null,
 				onClose : null,
 				onCloseData : null,
@@ -1534,8 +1534,8 @@
 			try {
 				this.opener = arguments.callee.caller.arguments.callee.caller.arguments[0].instance("service");
 			} catch(e) {
-				if(this.options.url !== null && console !== undefined && console.warn !== undefined) {
-					console.warn("Don't set opener object in popup's service controller")
+				if(this.options.url !== null) {
+					N.warn("Don't set opener object in popup's service controller")
 				}
 			}
 
@@ -1617,6 +1617,8 @@
 			loadEle : function(callback) {
 				var opts = this.options;
 				var this_ = this;
+
+				// TODO show loading bar
 				N.controller({
 					url : opts.url,
 					contentType : "application/x-www-form-urlencoded",
@@ -1644,6 +1646,7 @@
 
 					// set popup instance to popup's service controller
 					if(serviceController !== undefined) {
+						// set caller attribute in Service Conteroller in tab content that is Popup instance
 						serviceController.caller = this_;
 
 						// set opener to popup's service controller
@@ -1660,6 +1663,8 @@
 					N.service.init = true;
 
 					callback.call(this_, opts.context);
+
+					// TODO hide loading bar
 	        	});
 			},
 			popOpen : function(onOpenData) {
@@ -1676,7 +1681,11 @@
 					if(onOpenData !== undefined) {
 						opts.onOpenData = onOpenData;
 					}
-					opts.context.instance("service")[opts.onOpen](opts.onOpenData);
+					if(opts.context.instance("service")[opts.onOpen] !== undefined) {
+						opts.context.instance("service")[opts.onOpen](opts.onOpenData);
+					} else {
+						N.warn("onOpen callback function \"" + opts.onOpen + "\" is undefined in popup content's Service Controller");
+					}
 				}
 			}
 		});
@@ -1685,24 +1694,28 @@
 		var Tab = N.tab = function(obj, opts) {
 			this.options = {
 				context : obj,
-				onOpen : null,
+				onActive : null,
 				links : obj.find("li"),
-				classOpts : [],
-				contens : obj.find("div"),
-				randomSel : false
+				classOpts : [], // [{ width: "auto", url: undefined, preLoad: false, active: false, onOpen: undefined }], TODO onLoad 도 필요한지 고민 해 보기
+				contents : obj.find("div"),
+				randomSel : false,
+				effect : false
 			};
 
 			try {
 				this.options = $.extend({}, this.options, N.context.attr("ui")["tab"]);
 			} catch (e) { }
 
-			//TODO 안됨...손보시오.
 			var this_ = this;
 			var opt;
 			this.options.links.each(function(i) {
 				var thisEle = $(this);
-				opt = {};
-				this_.options.classOpts[thisEle.find("a").attr("href")] = N.element.toOpts(thisEle);
+				opt = N.element.toOpts(thisEle);
+				if(opt === undefined) {
+					opt = {};
+				}
+				opt.target = thisEle.find("a").attr("href");
+				this_.options.classOpts.push(opt);
 			});
 
 			if(opts !== undefined) {
@@ -1724,27 +1737,131 @@
 		$.extend(Tab, {
 			wrapEle : function() {
 				var opts = this.options;
-				var selId;
-				var i = 0;
-				for(var k in opts.classOpts) {
-					if(opts.classOpts["active"] !== undefined && opts.classOpts["active"]) {
-						selId = k;
+				// hide div contents
+				opts.contents.hide();
+
+				var this_ = this;
+
+				var defSelIdx;
+				$(opts.classOpts).each(function(i) {
+					// set default select index
+					if(this["active"] !== undefined && this["active"]) {
+						// active option select
+						defSelIdx = i;
 					} else {
-						if(i === 0) {
-							selId = k;
+						if(opts.randomSel) {
+							// random select
+							defSelIdx = Math.floor(Math.random() * opts.links.length);
+						} else {
+							// default select
+							if(i === 0) {
+								defSelIdx = i;
+							}
 						}
 					}
-					i++;
-				}
-				console.log(selId);
-				//randomSel
-				opts.links.bind("click.tab", function() {
+
+					if(this.preLoad !== undefined && this.preLoad === true) {
+						if(this.url !== undefined) {
+							Tab.loadContent.call(this_, this.url, i);
+						}
+					}
+				});
+
+				opts.links.bind("click.tab", function(e) {
+					e.preventDefault();
 					var thisEle = $(this);
+					var thisIdx = opts.links.index(this);
+					var thisClassOpts = opts.classOpts[thisIdx];
+
+					// hide tab contents
+					opts.contents.hide();
+					var content = opts.contents.eq(thisIdx).show();
+
 					opts.links.removeClass("tab_active__");
 					thisEle.addClass("tab_active__");
-					//TODO active남기고 div 숨기기, url 처리
+
+					if(thisClassOpts.preLoad === undefined || thisClassOpts.preLoad === false) {
+						// load content
+						if(thisClassOpts.url !== undefined && thisEle.data("loaded") === undefined) {
+							Tab.loadContent.call(this_, thisClassOpts.url, thisIdx);
+						}
+					}
+
+					// run "onActive" event
+					// onActive이벤트는 탭이 활성화 될때 발생함.
+					if(opts.onActive !== undefined) {
+						opts.onActive.call(this, this, opts.links, opts.contents);
+					}
+
+					// run "onOpen"(class option) event
+					// onOpen 이벤트는 탭의 class option에 url 이 지정되어있고 탭이 활성화 됐을때만 발생함.
+					if(thisClassOpts.onOpen !== undefined && thisEle.data("loaded")) {
+						var serviceController = content.find(">").instance("service");
+						if(serviceController[thisClassOpts.onOpen] !== undefined) {
+							//thisClassOpts.onOpen
+							serviceController[thisClassOpts.onOpen]();
+						} else {
+							N.warn("onOpen callback function \"" + thisClassOpts.onOpen + "\" is undefined in tab content's Service Controller");
+						}
+					}
+
+					if (opts.effect) {
+						content.find(">").hide()[opts.effect[0]](opts.effect[1], opts.effect[2]);
+					}
 				});
-				//opts.context.find("div").hide();
+
+				// select tab
+				$(opts.links.get(defSelIdx)).click();
+			},
+			loadContent : function(url, targetIdx) {
+				var opts = this.options;
+				var this_ = this;
+
+				// TODO show loading bar
+				N.controller({
+					url : url,
+					contentType : "application/x-www-form-urlencoded",
+					dataType : "html"
+				}).submit(function(page) {
+					// block serviceController init;
+					N.service.init = false;
+
+					var innerContent = opts.contents.eq(targetIdx).html(page).find(">");
+					var activeTabEle = opts.links.eq(targetIdx);
+
+					var serviceController = innerContent.instance("service");
+
+					// set caller attribute in Service Conteroller in tab content that is Tab instance
+					serviceController.caller = this_;
+
+					// set tab instance to tab contents service controller
+					if(serviceController !== undefined) {
+						if(serviceController.init !== undefined) {
+							serviceController.init(serviceController.view);
+						}
+					}
+
+					// restore serviceController init flag;
+					N.service.init = true;
+
+					// run "onOpen" event
+					if(activeTabEle.hasClass("tab_active__")) {
+						var classOpts = opts.classOpts[targetIdx];
+						if(classOpts.onOpen !== undefined) {
+							if(serviceController[classOpts.onOpen] !== undefined) {
+								//TODO onOpenData 는 어떻게 할지 더 고민 해 보기.
+								serviceController[classOpts.onOpen]();
+							} else {
+								N.warn("\"" + classOpts.onOpen + "\" onOpen callback function is undefined in tab content's Service Controller");
+							}
+						}
+					}
+
+					// set load status
+					activeTabEle.data("loaded", true);
+
+					// TODO hide loading bar
+	        	});
 			}
 		});
 

@@ -170,10 +170,12 @@ N("div#form").service({
         });
 
         // for popup onClose exemple
-        var popupCaller = this.caller;
-        popupCaller.changeEvent("onOk", function() {
-        	popupCaller.close(form.data());
-        });
+        if(this.caller !== undefined && this.caller.changeEvent !== undefined) {
+        	var popupCaller = this.caller;
+            popupCaller.changeEvent("onOk", function() {
+            	popupCaller.close(form.data());
+            });
+        }
 
         return this;
     },
