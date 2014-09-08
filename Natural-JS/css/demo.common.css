@@ -110,7 +110,7 @@ div#top div#gnb {
 }
 
 div#top div#gnb ul.item {
-	display: inline-table;
+	float: left;
 	padding: 0 10px;
 	font-size: 13px;
 	font-weight: bold;
@@ -138,7 +138,6 @@ div#main {
 }
 
 div#main div#contents {
-	min-height: 300px;
 	line-height: 20px;
 	border: 1px solid #cdcdcd\9;
 	background-color: #ffffff\9;

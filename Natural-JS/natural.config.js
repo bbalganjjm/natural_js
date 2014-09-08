@@ -272,6 +272,10 @@
 	N.context.attr("ui", {
 		"alert" : {
 			/**
+			 * Popup Element 가 담길 영역
+			 */
+			"container" : "div#contents",
+			/**
 			 * 필수 값
 			 */
 			"global" : {

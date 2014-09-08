@@ -273,7 +273,6 @@ div.thead_wrap__ thead th .desc__ {
 
 /* Tab */
 div.tab__ > ul {
-	display: inline-table;
 	list-style: none;
 	overflow: hidden;
 	margin: 0;

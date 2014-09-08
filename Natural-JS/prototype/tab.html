@@ -54,10 +54,8 @@ N("div#tabExam").service({
             	randomSel : true,
             	onActive : function(link, links, contents) {
 					if(console !== undefined) {
-						//this === link
-						console.log(this);
-						console.log(links);
-						console.log(contents);
+						//this === link(arguments[0]);
+						N.log(this);
 					}
             	}
             });

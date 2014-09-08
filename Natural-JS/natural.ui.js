@@ -35,15 +35,11 @@
 		tab : function(opts) {
 			return new NTR.tab(this, opts);
 		},
-		date : function() {
-			if($.tabs !== undefined) {
-				//TODO integration jquery plugin
-			} else {
-				N.error("jQuery.tabs is undefined. please import jQuery UI datepicker library");
-			}
+		datepicker : function() {
+			//TODO integration datepicker library
 		},
-		month : function() {
-			//TODO integration jquery plugin
+		monthpicker : function(opts) {
+			return new NTR.monthpicker(this, opts);
 		}
 	};
 	$.fn.extend(NTR.fn);
@@ -55,6 +51,7 @@
 			this.options = {
 				obj : obj,
 				context : obj,
+				container : null,
 				msgContext : N(),
 				msgContents : null,
 				msg : msg,
@@ -74,8 +71,12 @@
 			};
 
 			try {
+				this.options.container = N.context.attr("architecture").page.context;
 				this.options = $.extend({}, this.options, N.context.attr("ui")["alert"]);
-			} catch (e) { }
+				this.options.container = $(this.options.container);
+			} catch (e) { 
+				N.error(e, e);
+			}
 
 			if (obj.is(":input")) {
 				this.options.isInput = true;
@@ -86,16 +87,6 @@
 
 			if(this.options.isWindow) {
 				this.options.context = N("body");
-			} else {
-				/**
-				 *  popup 안에서 alert 호출 시 팝업이 position:absolute 인에 여기에 alert 의 overlay 가 absolute 여서
-				 *  위치계산이 어렵고 매끄럽지 않아 popup 안에서만 영역지정하여 alert 하는것을 허용하지 않음.
-				 */
-				if(this.options.obj.parents("span.block_overlay_msg__").length > 0) {
-					this.options.obj = $(window);
-					this.options.context = N("body");
-					this.options.isWindow = true;
-				}
 			}
 
 			if (!this.options.isInput) {
@@ -115,10 +106,10 @@
 				var opts = this.options;
 				if (!opts.isInput) {
 					Alert.resetOffSetWrapEle(opts);
-					this.time = setInterval(function() {
-						Alert.resetOffSetWrapEle(opts);
+					opts.time = setInterval(function() {
+						Alert.resetOffSetWrapEle(opts);							
 					}, 100);
-					opts.msgContents.fadeIn(150);
+					opts.msgContents.show();
 				} else {
 					if (!N.isEmptyObject(opts.msg)) {
 						var setOffset = function() {
@@ -152,17 +143,16 @@
 						setOffset();
 
 						// sync msgContext offset
-						var time = setInterval(function() {
+						opts.time = setInterval(function() {
 							setOffset();
 						}, 100);
 
-						opts.msgContext.css("z-index", N.element.maxZindex(opts.context) + 1);
-						opts.msgContext.show(0, function() {
+						opts.msgContext.fadeIn(150, function() {
 							setTimeout(function() {
 								opts.msgContext.fadeOut(1500, function() {
 									opts.msgContext.find("a.msg_close__").click();
 								});
-								clearInterval(time);
+								clearInterval(opts.time);
 							}, opts.input.displayTimeout);
 						});
 					}
@@ -171,8 +161,8 @@
 			},
 			"hide" : function() {
 				var opts = this.options;
+				clearInterval(opts.time);
 				if (!opts.isInput) {
-					clearInterval(this.time);
 					opts.msgContext.hide();
 					opts.msgContents.hide();
 				} else {
@@ -182,6 +172,7 @@
 			},
 			"remove" : function() {
 				var opts = this.options;
+				clearInterval(opts.time);
 				if (!opts.isInput) {
 					opts.msgContext.remove();
 					opts.msgContents.remove();
@@ -197,8 +188,8 @@
 				var opts = this.options;
 
 				// get max index among page elements
-				var maxZindex = N.element.maxZindex(opts.context.find("div, span, ul, p")) + 1;
-
+				var maxZindex = N.element.maxZindex(opts.container.find("div, span, ul, p")) + 1;
+				
 				// set style message overlay
 				var blockOverlayCss = {
 					"display" : "none",
@@ -206,14 +197,14 @@
 					"cursor" : "not-allowed",
 					"padding" : 0,
 					"border-radius" : opts.context.css("border-radius") != "0px" ? opts.context.css("border-radius") : "0px",
-					"z-index" : maxZindex
+					"z-index" : String(maxZindex)
 				};
 				if (opts.overlayColor !== null) {
 					blockOverlayCss["background-color"] = opts.overlayColor;
 				}
 
 				// make message overlay
-				opts.msgContext = opts.context.append(N('<div class="block_overlay__" onselectstart="return false;"></div>')
+				opts.msgContext = opts.container.append(N('<div class="block_overlay__" onselectstart="return false;"></div>')
 						.css(blockOverlayCss)).find("div.block_overlay__:last");
 				if (opts.vars !== undefined) {
 					opts.msg = N.message.replaceMsgVars(opts.msg, opts.vars);
@@ -223,7 +214,7 @@
 				var blockOverlayMsgCss = {
 					"display" : "none",
 					"position" : opts.isWindow ? "fixed" : "absolute",
-					"z-index" : maxZindex + 1
+					"z-index" : String(maxZindex + 1)
 				};
 
 				// set title
@@ -303,16 +294,22 @@
 				});
 			},
 			resetOffSetWrapEle : function(opts) {
-				opts.msgContext.css({
-					"top" : opts.isWindow ? 0 : opts.context.offset().top + "px",
-					"left" : opts.isWindow ? 0 : opts.context.offset().left + "px",
-					"height" : opts.isWindow ? opts.obj.outerHeight() : opts.context.outerHeight() + "px",
-					"width" : opts.context.outerWidth() + "px"
-				}).show();
-				opts.msgContents.css({
-					"top" : ((opts.msgContext.height() / 2 + opts.context.offset().top) - opts.msgContents.height() / 2) + "px",
-					"left" : ((opts.msgContext.width() / 2 + opts.context.offset().left) - opts.msgContents.width() / 2) + "px"
-				})
+				if(opts.context.outerWidth() > 0) {
+					opts.msgContext.css({
+						"top" : opts.isWindow ? 0 : opts.context.offset().top + "px",
+						"left" : opts.isWindow ? 0 : opts.context.offset().left + "px",
+						"height" : opts.isWindow ? opts.obj.outerHeight() : opts.context.outerHeight() + "px",
+						"width" : opts.context.outerWidth() + "px"
+					}).show();
+					opts.msgContents.css({
+						"top" : ((opts.msgContext.height() / 2 + opts.context.offset().top) - opts.msgContents.height() / 2) + "px",
+						"left" : ((opts.msgContext.width() / 2 + opts.context.offset().left) - parseInt(opts.msgContents.width() / 2)) + "px"
+					}).show();					
+				} else {
+					// for non-active tab
+					opts.msgContext.hide();
+					opts.msgContents.hide();
+				}
 			},
 			wrapInputEle : function() {
 				var opts = this.options;
@@ -322,11 +319,13 @@
 				}
 				opts.msgContext = opts.context.next("span.msg__");
 				if (opts.msgContext.length == 0) {
-					opts.msgContext = opts.context.after('<span class="msg__"><ul class="msg_line_box__"></ul></span>')
-										.next("span.msg__");
+					opts.msgContext = opts.container.append('<span class="msg__"><ul class="msg_line_box__"></ul></span>')
+										.find("span.msg__");
 					opts.msgContext.append('<a href="#" class="msg_close__">' + opts.input.closeBtn + '</a>');
 					opts.msgContext.prepend('<ul class="msg_arrow__"></ul>');
 				}
+				opts.msgContext.css("z-index", N.element.maxZindex(opts.container.find("div, span, ul, p")) + 1);
+				
 				if (N.isEmptyObject(opts.msg)) {
 					this.remove();
 				}
@@ -368,7 +367,9 @@
 
 			try {
 				this.options = $.extend({}, this.options, N.context.attr("ui")["button"]);
-			} catch (e) { }
+			} catch (e) { 
+				N.error(e, e);
+			}
 			$.extend(this.options, N.element.toOpts(this.options.context));
 			if(opts !== undefined) {
 				$.extend(this.options, opts);
@@ -481,7 +482,9 @@
 
 			try {
 				this.options = $.extend({}, this.options, N.context.attr("ui")["select"]);
-			} catch (e) { }
+			} catch (e) { 
+				N.error(e, e);
+			}
 			$.extend(this.options, N.element.toOpts(this.options.context));
 
 			if (N.isPlainObject(opts)) {
@@ -597,7 +600,9 @@
 
 			try {
 				this.options = $.extend({}, this.options, N.context.attr("ui")["form"]);
-			} catch (e) { }
+			} catch (e) { 
+				N.error(e, e);
+			}
 
 			if (N.isPlainObject(opts)) {
 				$.extend(this.options, opts);
@@ -981,7 +986,9 @@
 
 				//because $.extend method is not extend object type value
 				this.options.scrollPaging = $.extend({}, this.options.scrollPaging, N.context.attr("ui")["grid"]["scrollPaging"]);
-			} catch (e) { }
+			} catch (e) { 
+				N.error(e, e);
+			}
 
 			if (N.isPlainObject(opts)) {
 				$.extend(this.options, opts);
@@ -1513,7 +1520,9 @@
 
 			try {
 				this.options = $.extend({}, this.options, N.context.attr("ui")["popup"]);
-			} catch (e) { }
+			} catch (e) { 
+				N.error(e, e);
+			}
 
 			if(opts !== undefined) {
 				if(N.type(opts) === "string") {
@@ -1704,7 +1713,9 @@
 
 			try {
 				this.options = $.extend({}, this.options, N.context.attr("ui")["tab"]);
-			} catch (e) { }
+			} catch (e) { 
+				N.error(e, e);
+			}
 
 			var this_ = this;
 			var opt;
@@ -1873,7 +1884,9 @@
 
 			try {
 				this.options = $.extend({}, this.options, N.context.attr("ui")["monthpicker"]);
-			} catch (e) { }
+			} catch (e) { 
+				N.error(e, e);
+			}
 
 			if(opts !== undefined) {
 				$.extend(this.options, opts);
@@ -1895,7 +1908,6 @@
 				for(var i=1;i<=12;i++) {
 					opts.context.append('<div class="monthpicker__">' + String(i) + '</div>');
 				}
-
 			}
 		});
 

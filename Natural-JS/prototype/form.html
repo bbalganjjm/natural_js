@@ -192,7 +192,7 @@ N("div#form").service({
      * for popup & tab onOpen exemple
      */
     onOpen : function(onOpenData) {
-    	N("table#inputBox", this.view).alert("onOpen 콜백 실행\nonOpenData :\n" + JSON.stringify(onOpenData)).show();
+    	N.log("onOpen 콜백 실행\nonOpenData :\n" + JSON.stringify(onOpenData));
     }
 });
 

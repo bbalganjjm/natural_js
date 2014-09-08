@@ -29,6 +29,11 @@
 				console.warn(msg);
 			}
 		},
+		log : function(msg) {
+			if(console !== undefined && console.log !== undefined) {
+				console.log(msg);
+			}
+		},
 		isFunction : $.isFunction,
 		isArray : $.isArray,
 		isWindow : $.isWindow,
@@ -341,11 +346,12 @@
 					nContext = $("div, span");
 				}
 				return Math.max.apply(null, $.map(nContext, function(e, n) {
-					if ($(e).css("z-index") >= parseInt("2147483647")) {
-						$(e).css("z-index", String(parseInt("2147483647") - 999));
+					var zIndex = parseInt($(e).css("z-index"));
+					if (zIndex >= 2147483647) {
+						$(e).css("z-index", String(2147483647 - 999));
 						$(e).attr("fixed", "[Natural-JS]limited_z-index_value(-999)");
 					}
-					return parseInt($(e).css("z-index")) || 1;
+					return zIndex || 0;
 				}));
 			},
 			disable : function(e) {
