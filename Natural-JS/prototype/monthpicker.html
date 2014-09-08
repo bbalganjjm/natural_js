@@ -1,0 +1,22 @@
+<div id="monthpickerSample">
+	<div class="divBar">DEMO</div>
+	<div class="demoBox">
+		<table id="inputBox">
+			<input id="month" type="text" />
+		</table>
+	</div>
+
+	<div class="divBar">SOURCE</div>
+	<div class="sourceBox">
+	</div>
+</div>
+
+<script type="text/javascript">
+
+N("div#monthpickerSample").service({
+    init : function(view) {
+		var monthpicker = $("input#month").monthpicker();
+    }
+});
+
+</script>
