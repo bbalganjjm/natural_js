@@ -1,4 +1,4 @@
-<div id="select">
+<div id="select" title="Select 예제">
 	<div class="divBar">DATA</div>
 	<div class="dataBox">
 		<table>
@@ -111,9 +111,23 @@ N("div#select").service({
         	e.preventDefault();
         	checkbox.bind();
         });
+        
+     	// for popup onClose exemple
+        if(this.caller !== undefined && this.caller.changeEvent !== undefined) {
+        	var popupCaller = this.caller;
+            popupCaller.changeEvent("onOk", function() {
+            	popupCaller.close(selectMulty.data());
+            });
+        }
     },
     initButton : function() {
     	N("div.btnBox").button();
+    },
+    /**
+     * for popup exemple
+     */
+    onOpen : function(onOpenData) {
+    	N.log("onOpen 콜백 실행\nonOpenData :\n" + JSON.stringify(onOpenData));
     }
 });
 

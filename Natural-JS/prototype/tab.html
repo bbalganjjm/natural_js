@@ -53,10 +53,8 @@ N("div#tabExam").service({
             this_.localTab = N("div#tab").tab({
             	randomSel : true,
             	onActive : function(link, links, contents) {
-					if(console !== undefined) {
-						//this === link(arguments[0]);
-						N.log(this);
-					}
+					//this === link(arguments[0]);
+					N.log(this);
             	}
             });
         });

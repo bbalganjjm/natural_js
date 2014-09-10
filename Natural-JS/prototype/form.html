@@ -1,4 +1,4 @@
-<div id="form" title="Form 예제">
+<div id="form">
 	<div class="divBar">DATA</div>
 	<div class="dataBox">
 		<table>
@@ -169,15 +169,6 @@ N("div#form").service({
             N("table#inputBox").alert("전체검증 결과 : " + form.validate()).show()
         });
 
-        // for popup onClose exemple
-        if(this.caller !== undefined && this.caller.changeEvent !== undefined) {
-        	var popupCaller = this.caller;
-            popupCaller.changeEvent("onOk", function() {
-            	popupCaller.close(form.data());
-            });
-        }
-
-        return this;
     },
     createSelect : function(data) {
     	$(data).select("select#select").bind();
@@ -189,7 +180,7 @@ N("div#form").service({
     	N("div.btnBox", view).button();
     },
     /**
-     * for popup & tab onOpen exemple
+     * for tab onOpen exemple
      */
     onOpen : function(onOpenData) {
     	N.log("onOpen 콜백 실행\nonOpenData :\n" + JSON.stringify(onOpenData));

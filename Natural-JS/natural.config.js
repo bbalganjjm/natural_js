@@ -287,6 +287,7 @@
 					size : "small"
 				}
 			},
+			"alwaysOnTop" : false,
 			/**
 			 * 필수 값
 			 */

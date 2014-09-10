@@ -3,7 +3,7 @@
 	<div class="demoBox">
 		<div class="btnBox">
 			<a id="btnInitPopup" href="#" class='{ "color": "gray", "size": "small" }'>init popup</a>
-			<a id="btnOpenPopup" href="#" class='{ "color": "skyblue", "size": "small" }'>open popup</a>
+			<a id="btnOpenPopup" href="#" class='{ "color": "skyblue", "size": "small", "disable": true }'>open popup</a>
 			<a id="btnOtherPage" href="#" class='{ "color": "white", "size": "small" }'>다른페이지 불러오기</a>
 		</div>
 		<div class="data">
@@ -50,7 +50,8 @@ N("div#popup").service({
     	N("a#btnLogin", view).css("padding-bottom", "15px");
 
     	this.otherPagePopup = N().popup({
-    		url : "prototype/form.html",
+    		url : "prototype/select.html",
+    		width: 800,
     		height : 450,
     		onOpen : "onOpen",
     		onClose : function(onCloseData) {
@@ -64,6 +65,9 @@ N("div#popup").service({
     	N("a#btnInitPopup", view).click(function(e) {
             e.preventDefault();
             this_.localPopup = N("table#loginForm").popup();
+            
+            N("a#btnOpenPopup", view).instance("button").enable();
+            N(this).instance("button").disable();
         });
 
         N("a#btnOpenPopup", view).click(function(e) {

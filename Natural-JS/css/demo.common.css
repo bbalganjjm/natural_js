@@ -97,7 +97,7 @@ div#top {
 	background: -moz-linear-gradient(top, #efefef, #ffffff);
 	background: -o-linear-gradient(top, #efefef, #ffffff);
 	background: -webkit-linear-gradient(top, #efefef, #ffffff);
-	background-color: #ffffff;
+	background-color: #dddddd;
 	position: absolute;
 	width: 100%;
 	box-shadow: 0 2px 3px 0 rgba(0,0,0,0.3);

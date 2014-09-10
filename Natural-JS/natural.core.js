@@ -18,19 +18,19 @@
 		},
 		error : function(msg, e) {
 			if (e !== undefined && e.stack !== undefined && console.error !== undefined) {
-				if(console !== undefined && console.error !== undefined) {
+				if(typeof console !== "undefined" && typeof console.error !== "undefined") {
 					console.error(e.stack);
 				}
 			}
 			throw new Error(msg);
 		},
 		warn : function(msg) {
-			if(console !== undefined && console.warn !== undefined) {
+			if(typeof console !== "undefined" && typeof console.warn !== "undefined") {
 				console.warn(msg);
 			}
 		},
 		log : function(msg) {
-			if(console !== undefined && console.log !== undefined) {
+			if(typeof console !== "undefined" && typeof console.log !== "undefined") {
 				console.log(msg);
 			}
 		},

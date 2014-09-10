@@ -67,6 +67,7 @@
 				onOk : null,
 				onCancel : null,
 				overlayColor : null,
+				alwaysOnTop : false,
 				"confirm" : false
 			};
 
@@ -187,18 +188,22 @@
 			wrapEle : function() {
 				var opts = this.options;
 
-				// get max index among page elements
-				var maxZindex = N.element.maxZindex(opts.container.find("div, span, ul, p")) + 1;
-				
 				// set style message overlay
 				var blockOverlayCss = {
 					"display" : "none",
 					"position" : opts.isWindow ? "fixed" : "absolute",
 					"cursor" : "not-allowed",
 					"padding" : 0,
-					"border-radius" : opts.context.css("border-radius") != "0px" ? opts.context.css("border-radius") : "0px",
-					"z-index" : String(maxZindex)
+					"border-radius" : opts.context.css("border-radius") != "0px" ? opts.context.css("border-radius") : "0px"
 				};
+				
+				var maxZindex = 0;
+				if(opts.alwaysOnTop) {
+					// get max index among page elements
+					maxZindex = N.element.maxZindex(opts.container.find("div, span, ul, p"));
+					blockOverlayCss["z-index"] = String(maxZindex + 1);
+				}
+				
 				if (opts.overlayColor !== null) {
 					blockOverlayCss["background-color"] = opts.overlayColor;
 				}
@@ -213,10 +218,13 @@
 				// set style message box
 				var blockOverlayMsgCss = {
 					"display" : "none",
-					"position" : opts.isWindow ? "fixed" : "absolute",
-					"z-index" : String(maxZindex + 1)
+					"position" : opts.isWindow ? "fixed" : "absolute"
 				};
 
+				if(opts.alwaysOnTop) {
+					blockOverlayMsgCss["z-index"] = String(maxZindex + 2);
+				}
+				
 				// set title
 				var titleBox = '';
 				if(opts.title !== undefined) {
@@ -324,7 +332,9 @@
 					opts.msgContext.append('<a href="#" class="msg_close__">' + opts.input.closeBtn + '</a>');
 					opts.msgContext.prepend('<ul class="msg_arrow__"></ul>');
 				}
-				opts.msgContext.css("z-index", N.element.maxZindex(opts.container.find("div, span, ul, p")) + 1);
+				if(opts.alwaysOnTop) {
+					opts.msgContext.css("z-index", N.element.maxZindex(opts.container.find("div, span, ul, p")) + 1);
+				}
 				
 				if (N.isEmptyObject(opts.msg)) {
 					this.remove();
@@ -1798,13 +1808,13 @@
 						}
 					}
 
-					// run "onActive" event
+					// excute "onActive" event
 					// onActive이벤트는 탭이 활성화 될때 발생함.
 					if(opts.onActive !== undefined) {
 						opts.onActive.call(this, this, opts.links, opts.contents);
 					}
 
-					// run "onOpen"(class option) event
+					// excute "onOpen"(class option) event
 					// onOpen 이벤트는 탭의 class option에 url 이 지정되어있고 탭이 활성화 됐을때만 발생함.
 					if(thisClassOpts.onOpen !== undefined && thisEle.data("loaded")) {
 						var serviceController = content.find(">").instance("service");
@@ -1879,7 +1889,8 @@
 		// MonthPicker
 		var MonthPicker = N.monthpicker = function(obj, opts) {
 			this.options = {
-				context : $('<div class="monthpicker__"></div>')
+				context : obj,
+				contents : $('<div class="monthpicker__"></div>') 
 			};
 
 			try {
@@ -1905,9 +1916,92 @@
 		$.extend(MonthPicker, {
 			wrapEle : function() {
 				var opts = this.options;
-				for(var i=1;i<=12;i++) {
-					opts.context.append('<div class="monthpicker__">' + String(i) + '</div>');
+				var d = new Date();
+				var currYear = parseInt(d.formatDate("Y"));
+				
+				opts.contents = $('<div class="monthpicker__"></div>');
+				opts.contents.css({
+					width: "100px",
+					display: "none",
+					position: "absolute"
+				});
+				
+				// create year items
+				var yearsBox = $('<div class="monthpicker_years_box__"></div>');
+				yearsBox.css({
+					width: "40px",
+					float: "left"
+				});
+				var yearItem = $('<div class="monthpicker_year_item__" align="center"></div>');
+				yearItem.css({
+					"line-height": "25px"
+				}).click(function() {
+					yearsBox.find("div.monthpicker_year_item__").removeClass("monthpicker_selected");
+					$(this).addClass("monthpicker_selected");
+				});
+				var yearItemClone;
+				for(var i=currYear-2;i<=currYear+2;i++) {
+					yearItemClone = yearItem.clone(true);
+					if(i === currYear) {
+						yearItemClone.addClass("monthpicker_curr_year");
+						yearItemClone.addClass("monthpicker_selected");
+					}
+					yearsBox.append(yearItemClone.text(String(i)));
 				}
+				
+				var yearPaging = $('<div class="monthpicker_year_paging__" align="center"><a href="#" class="monthpicker_year_prev__" title="이전">◀</a> <a href="#" class="monthpicker_year_next__" title="다음">▶</a></div>');
+				yearPaging.css({
+					"line-height": "25px"
+				});
+				yearPaging.find("a.monthpicker_year_prev__").click(function() {
+					MonthPicker.yearPaging(yearsBox.find("div.monthpicker_year_item__"), currYear, -5);
+				});
+				yearPaging.find("a.monthpicker_year_next__").click(function() {
+					MonthPicker.yearPaging(yearsBox.find("div.monthpicker_year_item__"), currYear, 5);
+				});
+				yearsBox.append(yearPaging);
+				opts.contents.append(yearsBox);
+
+				// create month items
+				var monthsBox = $('<div class="monthpicker_months_box__"></div>');
+				monthsBox.css({
+					width: "60px",
+					float: "left"
+				});
+				var monthItem = $('<div class="monthpicker_month_item__" align="center"></div>');
+				monthItem.css({
+					"line-height": "25px",
+					width: "28px",
+					float: "left"
+				}).click(function() {
+					var selDate = N.date.strToDate(yearsBox.find("div.monthpicker_selected").text() +  N.string.lpad($(this).text(), 2, "0"));
+					opts.context.val(selDate.obj.formatDate(selDate.format));
+					opts.contents.fadeOut(150);
+				});
+				for(var i=1;i<=12;i++) {
+					monthsBox.append(monthItem.clone(true).text(String(i)));
+				}
+				opts.contents.append(monthsBox);
+
+				// clear float
+				opts.contents.append('<div style="clear: both;"></div>');
+				
+				// append monthpicker panel after context
+				opts.context.after(opts.contents);
+				
+				opts.context.bind("focusin.monthpicker", function() {
+					opts.contents.fadeIn(150);
+				});
+			},
+			yearPaging : function(yearItems, currYear, addCnt) {
+				yearItems.removeClass("monthpicker_curr_year");
+				yearItems.each(function() {
+					var thisEle = $(this);
+					thisEle.text(String(parseInt(thisEle.text()) + addCnt));
+					if(thisEle.text() === String(currYear)) {
+						thisEle.addClass("monthpicker_curr_year");
+					}
+				});
 			}
 		});
 
