@@ -1,7 +1,8 @@
 <div id="datepickerSample">
 	<div class="divBar">DEMO</div>
 	<div class="demoBox">
-		<input id="date" type="text" />
+		<label for="month">월 선택</label><input id="month" type="text" />
+		<label for="date">일 선택</label><input id="date" type="text" />
 	</div>
 
 	<div class="divBar">SOURCE</div>
@@ -13,6 +14,14 @@
 
 N("div#datepickerSample").service({
     init : function(view) {
+    	var monthpicker = $("input#month").datepicker({
+    		onlyMonth : true,
+			onSelect : function(context, selDate) {
+				console.log(context);
+				console.log(selDate);
+			}
+		});
+    	
 		var datepicker = $("input#date").datepicker({
 			onSelect : function(context, selDate) {
 				console.log(context);

@@ -394,6 +394,20 @@
 		},
 		"tab" : {
 			"effect" : ["fadeIn", 300, undefined]
+		},
+		"datepicker" : {
+			"message" : {
+				"ko_KR" : {
+					"year" : "년",
+					"month" : "월",
+					"days" : "일,월,화,수,목,금,토",
+				},
+				"en_US" : {
+					"year" : "Year",
+					"month" : "Month",
+					"days" : "Sun,Mon,Tue,Wed,Thu,Fri,Sat"
+				}
+			}
 		}
 	});
 
