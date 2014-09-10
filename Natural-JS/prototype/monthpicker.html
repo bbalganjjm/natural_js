@@ -13,7 +13,12 @@
 
 N("div#monthpickerSample").service({
     init : function(view) {
-		var monthpicker = $("input#month").monthpicker();
+		var monthpicker = $("input#month").monthpicker({
+			onSelect : function(context, selDate) {
+				console.log(context);
+				console.log(selDate);
+			}
+		});
     }
 });
 

@@ -1890,7 +1890,8 @@
 		var MonthPicker = N.monthpicker = function(obj, opts) {
 			this.options = {
 				context : obj,
-				contents : $('<div class="monthpicker__"></div>') 
+				contents : $('<div class="monthpicker__"></div>'),
+				onSelect : null
 			};
 
 			try {
@@ -1903,6 +1904,8 @@
 				$.extend(this.options, opts);
 			}
 
+			this.options.context.addClass("monthpicker__");
+			
 			MonthPicker.wrapEle.call(this);
 
 			this.options.context.instance("monthpicker", this);
@@ -1919,7 +1922,7 @@
 				var d = new Date();
 				var currYear = parseInt(d.formatDate("Y"));
 				
-				opts.contents = $('<div class="monthpicker__"></div>');
+				opts.contents = $('<div class="monthpicker_contents__"></div>');
 				opts.contents.css({
 					width: "100px",
 					display: "none",
@@ -1976,6 +1979,9 @@
 				}).click(function() {
 					var selDate = N.date.strToDate(yearsBox.find("div.monthpicker_selected").text() +  N.string.lpad($(this).text(), 2, "0"));
 					opts.context.val(selDate.obj.formatDate(selDate.format));
+					if(opts.onSelect !== null) {
+						opts.onSelect(opts.context, selDate);
+					}
 					opts.contents.fadeOut(150);
 				});
 				for(var i=1;i<=12;i++) {
@@ -1989,6 +1995,7 @@
 				// append monthpicker panel after context
 				opts.context.after(opts.contents);
 				
+				// show monthpicker
 				opts.context.bind("focusin.monthpicker", function() {
 					opts.contents.fadeIn(150);
 				});
