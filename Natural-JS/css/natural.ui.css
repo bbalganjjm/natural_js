@@ -305,37 +305,37 @@ div.tab__ > div {
 	padding: 5px;
 }
 
-/* Monthpicker */
-div.monthpicker_contents__ {
+/* DatePicker */
+div.datepicker_contents__ {
 	border: 1px solid #777777;
 	box-shadow: 0px 1px 15px #777777;
 }
-div.monthpicker_contents__ div.monthpicker_year_item__, div.monthpicker_contents__ div.monthpicker_year_paging__ {
+div.datepicker_contents__ div.datepicker_year_item__, div.datepicker_contents__ div.datepicker_year_paging__ {
 	border: 1px solid #efefef;
 	cursor: pointer;
 	background-color: #feeeee;	
 }
 
-div.monthpicker_contents__ div.monthpicker_year_item__:hover {
+div.datepicker_contents__ div.datepicker_year_item__:hover {
 	background-color: #cccccc;
 }
 
-div.monthpicker_contents__ div.monthpicker_curr_year {
+div.datepicker_contents__ div.datepicker_curr_year {
 	border-color: #cccccc;
 	background-color: #deeeee;
 }
 
-div.monthpicker_contents__ div.monthpicker_selected {
+div.datepicker_contents__ div.datepicker_selected {
 	background-color: #777777;
 	color: #ffffff;
 }
 
-div.monthpicker_contents__ div.monthpicker_month_item__ {
+div.datepicker_contents__ div.datepicker_month_item__ {
 	border: 1px solid #efefef;
 	cursor: pointer;
 	background-color: #ffffff;
 }
 
-div.monthpicker_contents__ div.monthpicker_month_item__:hover {
+div.datepicker_contents__ div.datepicker_month_item__:hover {
 	background-color: #efefef;
 }

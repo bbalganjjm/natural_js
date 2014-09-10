@@ -67,9 +67,9 @@ var IndexServiceController = {
 		   N(N.context.attr("architecture")["page"]["context"]).controller("prototype/tab.html").submit();
 	    });
 	    
-	    N("a#btnMonth").click(function(e) {
+	    N("a#btnDate").click(function(e) {
 		   e.preventDefault();
-		   N(N.context.attr("architecture")["page"]["context"]).controller("prototype/monthpicker.html").submit();
+		   N(N.context.attr("architecture")["page"]["context"]).controller("prototype/datepicker.html").submit();
 	    });
     }
 }
@@ -103,8 +103,7 @@ $(document).ready(function() {
 		    	<li><a id="btnGrid" href="#">Grid</a></li>
 		    	<li><a id="btnPopup" href="#">Popup</a></li>
 		    	<li><a id="btnTab" href="#">Tab</a></li>
-		    	<li><a id="btnDate" href="#">Date</a></li>
-		    	<li><a id="btnMonth" href="#">Month</a></li>
+		    	<li><a id="btnDate" href="#">DatePicker</a></li>
 		    </ul>
 	</div>
 </div>

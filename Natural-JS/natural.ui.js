@@ -36,7 +36,7 @@
 			return new NTR.tab(this, opts);
 		},
 		datepicker : function() {
-			//TODO integration datepicker library
+			return new NTR.datepicker(this, opts);
 		},
 		monthpicker : function(opts) {
 			return new NTR.monthpicker(this, opts);
@@ -1886,8 +1886,8 @@
 			}
 		});
 
-		// MonthPicker
-		var MonthPicker = N.monthpicker = function(obj, opts) {
+		// DatePicker
+		var DatePicker = N.monthpicker = function(obj, opts) {
 			this.options = {
 				context : obj,
 				contents : $('<div class="monthpicker__"></div>'),
@@ -1906,23 +1906,23 @@
 
 			this.options.context.addClass("monthpicker__");
 			
-			MonthPicker.wrapEle.call(this);
+			DatePicker.wrapEle.call(this);
 
 			this.options.context.instance("monthpicker", this);
 		};
 
-		MonthPicker.fn = MonthPicker.prototype;
-		$.extend(MonthPicker.fn, {
+		DatePicker.fn = DatePicker.prototype;
+		$.extend(DatePicker.fn, {
 
 		});
 
-		$.extend(MonthPicker, {
+		$.extend(DatePicker, {
 			wrapEle : function() {
 				var opts = this.options;
 				var d = new Date();
 				var currYear = parseInt(d.formatDate("Y"));
 				
-				opts.contents = $('<div class="monthpicker_contents__"></div>');
+				opts.contents = $('<div class="datepicker_contents__"></div>');
 				opts.contents.css({
 					width: "100px",
 					display: "none",
@@ -1930,54 +1930,54 @@
 				});
 				
 				// create year items
-				var yearsBox = $('<div class="monthpicker_years_box__"></div>');
+				var yearsBox = $('<div class="datepicker_years_box__"></div>');
 				yearsBox.css({
 					width: "40px",
 					float: "left"
 				});
-				var yearItem = $('<div class="monthpicker_year_item__" align="center"></div>');
+				var yearItem = $('<div class="datepicker_year_item__" align="center"></div>');
 				yearItem.css({
 					"line-height": "25px"
 				}).click(function() {
-					yearsBox.find("div.monthpicker_year_item__").removeClass("monthpicker_selected");
-					$(this).addClass("monthpicker_selected");
+					yearsBox.find("div.datepicker_year_item__").removeClass("datepicker_selected");
+					$(this).addClass("datepicker_selected");
 				});
 				var yearItemClone;
 				for(var i=currYear-2;i<=currYear+2;i++) {
 					yearItemClone = yearItem.clone(true);
 					if(i === currYear) {
-						yearItemClone.addClass("monthpicker_curr_year");
-						yearItemClone.addClass("monthpicker_selected");
+						yearItemClone.addClass("datepicker_curr_year");
+						yearItemClone.addClass("datepicker_selected");
 					}
 					yearsBox.append(yearItemClone.text(String(i)));
 				}
 				
-				var yearPaging = $('<div class="monthpicker_year_paging__" align="center"><a href="#" class="monthpicker_year_prev__" title="이전">◀</a> <a href="#" class="monthpicker_year_next__" title="다음">▶</a></div>');
+				var yearPaging = $('<div class="datepicker_year_paging__" align="center"><a href="#" class="datepicker_year_prev__" title="이전">◀</a> <a href="#" class="datepicker_year_next__" title="다음">▶</a></div>');
 				yearPaging.css({
 					"line-height": "25px"
 				});
-				yearPaging.find("a.monthpicker_year_prev__").click(function() {
-					MonthPicker.yearPaging(yearsBox.find("div.monthpicker_year_item__"), currYear, -5);
+				yearPaging.find("a.datepicker_year_prev__").click(function() {
+					DatePicker.yearPaging(yearsBox.find("div.datepicker_year_item__"), currYear, -5);
 				});
-				yearPaging.find("a.monthpicker_year_next__").click(function() {
-					MonthPicker.yearPaging(yearsBox.find("div.monthpicker_year_item__"), currYear, 5);
+				yearPaging.find("a.datepicker_year_next__").click(function() {
+					DatePicker.yearPaging(yearsBox.find("div.datepicker_year_item__"), currYear, 5);
 				});
 				yearsBox.append(yearPaging);
 				opts.contents.append(yearsBox);
 
 				// create month items
-				var monthsBox = $('<div class="monthpicker_months_box__"></div>');
+				var monthsBox = $('<div class="datepicker_months_box__"></div>');
 				monthsBox.css({
 					width: "60px",
 					float: "left"
 				});
-				var monthItem = $('<div class="monthpicker_month_item__" align="center"></div>');
+				var monthItem = $('<div class="datepicker_month_item__" align="center"></div>');
 				monthItem.css({
 					"line-height": "25px",
 					width: "28px",
 					float: "left"
 				}).click(function() {
-					var selDate = N.date.strToDate(yearsBox.find("div.monthpicker_selected").text() +  N.string.lpad($(this).text(), 2, "0"));
+					var selDate = N.date.strToDate(yearsBox.find("div.datepicker_selected").text() +  N.string.lpad($(this).text(), 2, "0"));
 					opts.context.val(selDate.obj.formatDate(selDate.format));
 					if(opts.onSelect !== null) {
 						opts.onSelect(opts.context, selDate);
@@ -1992,21 +1992,21 @@
 				// clear float
 				opts.contents.append('<div style="clear: both;"></div>');
 				
-				// append monthpicker panel after context
+				// append datepicker panel after context
 				opts.context.after(opts.contents);
 				
-				// show monthpicker
-				opts.context.bind("focusin.monthpicker", function() {
+				// show datepicker
+				opts.context.bind("focusin.datepicker", function() {
 					opts.contents.fadeIn(150);
 				});
 			},
 			yearPaging : function(yearItems, currYear, addCnt) {
-				yearItems.removeClass("monthpicker_curr_year");
+				yearItems.removeClass("datepicker_curr_year");
 				yearItems.each(function() {
 					var thisEle = $(this);
 					thisEle.text(String(parseInt(thisEle.text()) + addCnt));
 					if(thisEle.text() === String(currYear)) {
-						thisEle.addClass("monthpicker_curr_year");
+						thisEle.addClass("datepicker_curr_year");
 					}
 				});
 			}
