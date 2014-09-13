@@ -93,21 +93,21 @@
 				}
 
 				// request filter
-				N(afterInitFilters).each(function(i) {
+				$(afterInitFilters).each(function(i) {
 					this(obj.request);
 				});
 
 				$.extend(obj.request.options, {
 					beforeSend : function(xhr, settings) {
 						// request filter
-						N(beforeSendFilters).each(function(i) {
+						$(beforeSendFilters).each(function(i) {
 							this(obj.request, xhr, settings);
 						});
 
 					},
 					success : function(data, textStatus, xhr) {
 						// request filter
-						N(successFilters).each(function(i) {
+						$(successFilters).each(function(i) {
 							this(obj.request, data, textStatus, xhr);
 						});
 
@@ -140,7 +140,7 @@
 					},
 					error : function(xhr, textStatus, errorThrown) {
 						// request filter
-						N(errorFilters).each(function(i) {
+						$(errorFilters).each(function(i) {
 							this(obj.request, xhr, textStatus, errorThrown);
 						});
 
@@ -148,7 +148,7 @@
 					},
 					complete : function(xhr, textStatus) {
 						// request filter
-						N(completeFilters).each(function(i) {
+						$(completeFilters).each(function(i) {
 							this(obj.request, xhr, textStatus);
 						});
 					}

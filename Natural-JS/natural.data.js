@@ -98,11 +98,11 @@
 			this.obserable = new Array();
 			this.instance = instance;
 
-			var viewContext = N(instance.options.context).closest(".view_context__");
+			var viewContext = $(instance.options.context).closest(".view_context__");
 			if(viewContext.length == 0) {
-				var dataSyncTemp = N(N.context.attr("architecture")["page"]["context"]).find("var#data_sync_temp__");
+				var dataSyncTemp = $(N.context.attr("architecture")["page"]["context"]).find("var#data_sync_temp__");
 				if(dataSyncTemp.length == 0) {
-					dataSyncTemp = N(N.context.attr("architecture")["page"]["context"]).append('<var id="data_sync_temp__"></var>').find("var#data_sync_temp__");
+					dataSyncTemp = $(N.context.attr("architecture")["page"]["context"]).append('<var id="data_sync_temp__"></var>').find("var#data_sync_temp__");
 				}
 				viewContext = dataSyncTemp;
 			}
@@ -199,11 +199,11 @@
 						opts.data = [ opts.data[row] ];
 					}
 				}
-				N(opts.data).each(function(i, obj) {
+				$(opts.data).each(function(i, obj) {
 					retObj = new Object();
 					for ( var k in opts.rules ) {
 						tempValue = String(obj[k]);
-						N(opts.rules[k]).each(function() {
+						$(opts.rules[k]).each(function() {
 							if (opts.isElement) {
 								ele = opts.targetEle.filter("#" + k);			
 								if(ele.length === 0) {
@@ -232,9 +232,9 @@
 										if(ele.length === 0) {
 											ele = opts.context.find("#" + $(this).attr("id"));
 										}
-										N(this).val(this_.format()[row][$(this).attr("id")]);
+										$(this).val(this_.format()[row][$(this).attr("id")]);
 									}).bind("unformat.formater", function() {
-										N(this).val(this_.unformat(row, $(this).attr("id")));
+										$(this).val(this_.unformat(row, $(this).attr("id")));
 									});
 								}
 							} else {
@@ -548,12 +548,12 @@
 				var args;
 				var alert;
 				var rule;
-				N(data).each(function(i, obj) {
+				$(data).each(function(i, obj) {
 					retObj = new Object();
 					for ( var k in opts.rules ) {
 						retTempArr = new Array();
 						var pass = true;
-						N(opts.rules[k]).each(function() {
+						$(opts.rules[k]).each(function() {
 							retTempObj = new Object();
 							retTempObj["rule"] = this.toString();
 							args = N(this).remove_(0).toArray();
@@ -590,7 +590,7 @@
 								ele.removeClass("validate_false__");
 							}
 							if (N().alert !== undefined) {
-								alert = N(opts.targetEle != null ? ele : undefined).alert(N(retTempArr).map(function() {
+								alert = N(opts.targetEle != null ? ele : undefined).alert($(retTempArr).map(function() {
 									if (this.msg != null) {
 										return this.msg;
 									}

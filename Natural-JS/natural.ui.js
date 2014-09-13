@@ -71,7 +71,7 @@
 			try {
 				this.options.container = N.context.attr("architecture").page.context;
 				this.options = $.extend({}, this.options, N.context.attr("ui")["alert"]);
-				this.options.container = $(this.options.container);
+				this.options.container = N(this.options.container);
 			} catch (e) { 
 				N.error(e, e);
 			}
@@ -192,7 +192,7 @@
 				}
 
 				// make message overlay
-				opts.msgContext = opts.container.append(N('<div class="block_overlay__" onselectstart="return false;"></div>')
+				opts.msgContext = opts.container.append($('<div class="block_overlay__" onselectstart="return false;"></div>')
 						.css(blockOverlayCss)).find("div.block_overlay__:last");
 				if (opts.vars !== undefined) {
 					opts.msg = N.message.replaceMsgVars(opts.msg, opts.vars);
@@ -225,7 +225,7 @@
 
 				// make message box
 				opts.msgContents = opts.msgContext.after(
-						N('<span class="block_overlay_msg__"><ul>'
+						$('<span class="block_overlay_msg__"><ul>'
 								+ titleBox
 								+ '<li class="msg_box__"></li>'
 								+ buttonBox
@@ -532,14 +532,14 @@
 			    				opts.context.attr("name", id).attr("id", id + "_" + String(i)).attr("value", data[opts.val])
 			    					.addClass("select_input__ select_template__");
 			    			} else {
-			    				opts.context.push(N(opts.template.filter("input:eq(0)")).clone(true).attr("name", id).attr("id", id + "_" + String(i)).attr("value", data[opts.val]).removeClass("select_template__").get(0));
+			    				opts.context.push($(opts.template.filter("input:eq(0)")).clone(true).attr("name", id).attr("id", id + "_" + String(i)).attr("value", data[opts.val]).removeClass("select_template__").get(0));
 			    			}
-			    			opts.context.push(N('<label class="select_input_label__" for="' + id + "_" + String(i) + '">' + data[opts.key] + '</label>').get(0));
+			    			opts.context.push($('<label class="select_input_label__" for="' + id + "_" + String(i) + '">' + data[opts.key] + '</label>').get(0));
 			    			if (opts.direction === "v" && opts.data.length - 1 != i) {
-			    				opts.context.push(N('<br class="select_input_br__" />').get(0));
+			    				opts.context.push($('<br class="select_input_br__" />').get(0));
 			    			}
 			    		});
-			    		N(opts.template.filter("input:eq(0)")).after(opts.context);
+			    		$(opts.template.filter("input:eq(0)")).after(opts.context);
 		    		}
 		    	}
 		    	return this;
