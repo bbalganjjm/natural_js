@@ -15,7 +15,7 @@
 N("div#datepickerSample").service({
     init : function(view) {
     	var monthpicker = $("input#month").datepicker({
-    		onlyMonth : true,
+    		monthonly : true,
 			onSelect : function(context, selDate) {
 				console.log(context);
 				console.log(selDate);

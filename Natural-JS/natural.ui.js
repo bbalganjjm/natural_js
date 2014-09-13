@@ -1889,12 +1889,12 @@
 		});
 
 		// DatePicker
-		// TODO formater 와 연계
 		var DatePicker = N.datepicker = function(obj, opts) {
 			this.options = {
 				context : obj,
 				contents : $('<div class="datepicker__"></div>'),
-				onlyMonth : false,
+				monthonly : false,
+				mouseonly : true, //TODO 키보드로 입력할수 있도록 기능 개선
 				onSelect : null
 			};
 
@@ -1909,6 +1909,10 @@
 			}
 
 			this.options.context.addClass("datepicker__");
+			if(this.options.mouseonly) {
+				this.options.context.css("cursor", "pointer");
+				this.options.context.prop("readonly", true);
+			}
 			
 			DatePicker.wrapEle.call(this);
 
@@ -1946,12 +1950,14 @@
 				var yearItem = $('<div align="center"></div>');
 				yearItem.css({
 					"line-height": "25px"
-				}).click(function() {
+				}).click(function(e) {
+					e.preventDefault();
 					yearsPanel.find("div.datepicker_year_item__").removeClass("datepicker_year_selected__");
 					$(this).addClass("datepicker_year_selected__");
 				});
 				var yearItemClone;
 				yearsPanel.append(yearItem.clone(true).addClass("datepicker_year_title__").text(N.message.get(opts.message, "year")));
+				// render year items
 				for(var i=currYear-2;i<=currYear+2;i++) {
 					yearItemClone = yearItem.clone(true).addClass("datepicker_year_item__");
 					if(i === currYear) {
@@ -1965,10 +1971,12 @@
 				yearPaging.css({
 					"line-height": "25px"
 				});
-				yearPaging.find("a.datepicker_year_prev__").click(function() {
+				yearPaging.find("a.datepicker_year_prev__").click(function(e) {
+					e.preventDefault();
 					DatePicker.yearPaging(yearsPanel.find("div.datepicker_year_item__"), currYear, -5);
 				});
-				yearPaging.find("a.datepicker_year_next__").click(function() {
+				yearPaging.find("a.datepicker_year_next__").click(function(e) {
+					e.preventDefault();
 					DatePicker.yearPaging(yearsPanel.find("div.datepicker_year_item__"), currYear, 5);
 				});
 				yearsPanel.append(yearPaging);
@@ -1986,14 +1994,18 @@
 					"line-height": "25px",
 					width: "28px",
 					float: "left"
-				}).click(function() {
+				}).click(function(e) {
+					e.preventDefault();
 					monthsPanel.find("div.datepicker_month_item__").removeClass("datepicker_month_selected__");
 					$(this).addClass("datepicker_month_selected__");
-					if(opts.onlyMonth) {
+					if(opts.monthonly) {
 						var selDate = N.date.strToDate(yearsPanel.find("div.datepicker_year_selected__").text() +  N.string.lpad($(this).text(), 2, "0"));
-						opts.context.val(selDate.obj.formatDate(selDate.format));
+						var onSelectContinue;
 						if(opts.onSelect !== null) {
-							opts.onSelect(opts.context, selDate);
+							onSelectContinue = opts.onSelect(opts.context, selDate);
+						}
+						if(onSelectContinue === undefined || onSelectContinue === true) {
+							opts.context.val(selDate.obj.formatDate(selDate.format));
 						}
 						opts.contents.fadeOut(150);
 					} else {
@@ -2002,6 +2014,7 @@
 						var endDate = endDateCls.obj.getDate();
 						endDateCls.obj.setDate(1)
 						var startDay = endDateCls.obj.getDay();
+						//render week
 						for(var i=0;i<days.length;i++) {
 							daysPanel.append(dayItem.clone(true).addClass("datepicker_day__").text(days[i]));
 						}
@@ -2010,6 +2023,7 @@
 						var prevEndDate = prevEndDateCls.obj.getDate();
 						var date;
 						var dateItem;
+						//render date items
 						for(var i=1-startDay;i<=42-startDay;i++) {
 							date = String(i);
 							dateItem = dayItem.clone(true);
@@ -2028,12 +2042,13 @@
 				});
 				monthsPanel.append(monthItem.clone(true).css("width", "58px").addClass("datepicker_month_title__").text(N.message.get(opts.message, "month")));
 				
+				// render month items
 				for(var i=1;i<=12;i++) {
 					monthsPanel.append(monthItem.clone(true).addClass("datepicker_month_item__").text(String(i)));
 				}
 				opts.contents.append(monthsPanel);
 
-				if(!opts.onlyMonth) {
+				if(!opts.monthonly) {
 					// create day items
 					var days = N.message.get(opts.message, "days").split(",");
 					var daysPanel = $('<div class="datepicker_days_panel__"></div>');
@@ -2047,7 +2062,8 @@
 						"line-height": "25px",
 						width: "28px",
 						float: "left"
-					}).click(function() {
+					}).click(function(e) {
+						e.preventDefault();
 						var thisEle = $(this);
 						daysPanel.find("div.datepicker_prev_day_item__, div.datepicker_day_item__, div.datepicker_next_day_item__").removeClass("datepicker_day_selected__");
 						thisEle.addClass("datepicker_day_selected__");
@@ -2062,9 +2078,12 @@
 						var selDate = N.date.strToDate(yearsPanel.find("div.datepicker_year_selected__").text() 
 								+ N.string.lpad(selMonth, 2, "0") 
 								+  N.string.lpad(thisEle.text(), 2, "0"));
-						opts.context.val(selDate.obj.formatDate(selDate.format));
+						var onSelectContinue;
 						if(opts.onSelect !== null) {
-							opts.onSelect(opts.context, selDate);
+							onSelectContinue = opts.onSelect(opts.context, selDate);
+						}
+						if(onSelectContinue === undefined || onSelectContinue === true) {
+							opts.context.val(selDate.obj.formatDate(selDate.format));							
 						}
 						opts.contents.fadeOut(150);
 						$(document).unbind("keyup.datepicker");

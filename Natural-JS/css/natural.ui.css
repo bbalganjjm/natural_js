@@ -42,7 +42,7 @@ span.block_overlay_msg__ li.msg_title_box__ {
 }
 
 span.block_overlay_msg__ li.msg_box__ {
-    margin: 10px 10px 0 10px;
+    margin: 5px;
     padding: 0;
     color: #4f535c;
 }
@@ -272,6 +272,11 @@ div.thead_wrap__ thead th .desc__ {
 	color: red;
 }
 
+/* Popup */
+span.popup__ li.msg_box__ {
+	background-color: #ffffff;
+}
+
 /* Tab */
 div.tab__ > ul {
 	list-style: none;
@@ -309,7 +314,14 @@ div.tab__ > div {
 div.datepicker_contents__ {
 	border: 1px solid #777777;
 	box-shadow: 0px 1px 15px #777777;
+	background-image: -ms-linear-gradient(top, #c9c9c9 0%, #999999 100%);
+	background-image: -moz-linear-gradient(top, #c9c9c9 0%, #999999 100%);
+	background-image: -o-linear-gradient(top, #c9c9c9 0%, #999999 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #c9c9c9), color-stop(1, #999999));
+	background-image: -webkit-linear-gradient(top, #c9c9c9 0%, #999999 100%);
+	background-image: linear-gradient(to bottom, #c9c9c9 0%, #999999 100%);
 	background-color: #999999;
+	padding: 3px;
 }
 
 div.datepicker_contents__ div.datepicker_year_item__, div.datepicker_contents__ div.datepicker_year_paging__ {

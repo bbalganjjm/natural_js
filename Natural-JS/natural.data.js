@@ -204,11 +204,17 @@
 					for ( var k in opts.rules ) {
 						tempValue = String(obj[k]);
 						N(opts.rules[k]).each(function() {
+							if (opts.isElement) {
+								ele = opts.targetEle.filter("#" + k);			
+								if(ele.length === 0) {
+									ele === undefined;
+								}
+							}
 							try {
-								tempValue = Formater[N.string.trimToEmpty(this[0]).toLowerCase()](tempValue, N(this).remove_(0).toArray());
+								tempValue = Formater[N.string.trimToEmpty(this[0]).toLowerCase()](tempValue, N(this).remove_(0).toArray(), ele);
 							} catch (e) {
 								if (e.toString().indexOf("is not a function") > -1) {
-									N.error("[Formater.fn.format]\"" + this[0] + "\" is invalid format rule");
+									N.error("[Formater.fn.format]\"" + this[0] + "\" is invalid format rule", e);
 								} else {
 									N.error(e, e);
 								}
@@ -216,7 +222,7 @@
 						});
 						retObj[k] = tempValue;
 						if (opts.isElement) {
-							var ele = opts.targetEle.filter("#" + k);
+							ele = opts.targetEle.filter("#" + k);
 							if (ele.is("input:text, textarea")) {
 								ele.val(tempValue);
 								if(opts.createEvent) {
@@ -348,128 +354,50 @@
 				}
 				return N.string.trimToVal(str, args[0]);
 			},
-			"date" : function(str, args) {
-				str = N.string.trimToEmpty(str);
-				var format = N.context.attr("data")["formater"]["date"]["Ymd"]();
-				if (args != null && args[0] != null) {
-					if (args[0] == "day" && this.$input != null) {
-						// TODO
-						var $input = this.$input;
-						$input.css("cursor", "pointer");
-						var thisInputFocusout = null;
-
-						var numberOfMonths = 1;
-						if (typeof args[1] != "undefined" && args[1] != null) {
-							numberOfMonths = Number(args[1]);
-						}
-
-						$input.datepicker({
-							yearRange : "-100:+50",
-							showOtherMonths : true,
-							selectOtherMonths : true,
-							showButtonPanel : true,
-							showMonthAfterYear : true,
-							changeMonth : true,
-							changeYear : true,
-							numberOfMonths : numberOfMonths,
-							dateFormat : Config.datepickerServerDateFormat,
-							duration : 0,
-							beforeShow : function(event, ui) {
-								setTimeout(function() {
-									ui.dpDiv.css("z-index", LayerUtils.maxZindex());
-								}, 30);
-								if ($input.prop("readonly")) {
-									return false;
-								}
-								if ($(this).data("events") != null && $(this).data("events")["focusout"] != null) {
-									thisInputFocusout = $(this).data("events")["focusout"];
-									try {
-										delete $(this).data("events").focusout;
-									} catch (e) {
-										$(this).data("events").focusout = undefined;
-									}
-								}
-								$(this).unbind("keydown");
-								if (Config.datePickerUnloadKeyEvents) {
-									$(this).unbind("keypress");
-									$(this).unbind("keyup");
-								}
-							},
-							onClose : function(dateText, inst) {
-								$this = $(this);
-								if ($this.data("events") != null) {
-									$this.data("events").focusout = thisInputFocusout;
-								}
-								thisInputFocusout = null;
-
-								// document 영역 클릭시 input의 focusout 보다 먼저 실행되어 포멧팅이 풀림.
-								// 나중에 실행되게 처리
-								setTimeout(function() {
-									if (N.string.trimToNull($this.val()) != null) {
-										$this.val($this.val().replace(new RegExp(N.context.attr("data")["formater"]["date"]["dateSepa"], "gi"), "").substring(0, 8));
-									}
-									$this.trigger("focusout.BindFields.bindDataList");
-									$this.trigger("focusout.format");
-
-									// for HYIN
-									$this.removeClass("txt_on");
-								}, 120);
-							},
-							onChangeMonthYear : function(year, month, inst) {
-								setTimeout(function() {
-									inst.dpDiv.find("a:not('.ui-priority-secondary')").each(function() {
-										if (Number($(this).text()) == inst.selectedDay) {
-											$(this).addClass("ui-state-active");
-										}
-									});
-								}, 30);
-							}
-						});
-						$input.addClass("calendarField");
-						format = N.context.attr("data")["formater"]["date"]["Ymd"]();
-					} else if (args[0] == "month" && this.$input != null) {
-						// TODO
-						var thisInputFocusout = null;
-						this.$input.monthpicker({
-							beforeShow : function($input) {
-								if ($input.prop("readonly")) {
-									return false;
-								}
-								if ($input.data("events") != null && $input.data("events")["focusout"] != null) {
-									thisInputFocusout = $input.data("events")["focusout"];
-									try {
-										delete $input.data("events").focusout;
-									} catch (e) {
-										$input.data("events").focusout = undefined;
-									}
-								}
-							},
-							onClose : function($input, container) {
-								if ($input.data("events") != null) {
-									$input.data("events").focusout = thisInputFocusout;
-								}
-								thisInputFocusout = null;
-
-								$input.focusout();
-							}
-						});
-						this.$input.addClass("calendarField");
-						format = N.context.attr("data")["formater"]["date"]["Ym"]();
-					} else if (args[0] == '6') {
-						format = N.context.attr("data")["formater"]["date"]["Ym"]();
-					} else if (args[0] == '8') {
-						format = N.context.attr("data")["formater"]["date"]["Ymd"]();
-					} else if (args[0] == '10') {
-						format = N.context.attr("data")["formater"]["date"]["YmdH"]();
-					} else if (args[0] == '12') {
-						format = N.context.attr("data")["formater"]["date"]["YmdHi"]();
-					} else if (args[0] == '14') {
-						format = N.context.attr("data")["formater"]["date"]["YmdHis"]();
-					} else {
-						format = args[0];
-					}
+			"date" : function(str, args, ele) {
+				if(args === undefined) {
+					return str;
 				}
-				return Number(str) != 0 ? N.date.format(str, format) : "";
+				str = N.string.trimToEmpty(str);
+				
+				//use datepicker, monthpicker
+				if(N.datepicker !== undefined) {
+					if(args[1] !== undefined && (args[1] === "date" || args[1] === "month") && ele !== undefined && !ele.hasClass("datepicker__")) {
+						var isMonth = args[1] === "month" ? true : false;
+						ele.datepicker({
+							monthonly : isMonth,
+							onSelect : function(context, date) {
+								context.prop("readonly", false);
+								context.val(date.obj.formatDate(isMonth ? "Ym" : "Ymd")).trigger("focusout.dataSync.form").trigger("focusout.form.format");
+								context.prop("readonly", true);
+								return false;
+							}
+						});
+					}					
+				} else {
+					N.warn("if use date & month options, load Natural-UI datepicker library");
+				}
+
+				if (args[0] !== undefined) {
+					var formats = N.context.attr("data")["formater"]["date"];
+					var val;
+					if (args[0] === 4) {
+						val = N.date.format(str, "Y");
+					} else if (args[0] === 6) {
+						val = N.date.format(str, formats["Ym"]());
+					} else if (args[0] === 8) {
+						val = N.date.format(str, formats["Ymd"]());
+					} else if (args[0] === 10) {
+						val = N.date.format(str, formats["YmdH"]());
+					} else if (args[0] === 12) {
+						val = N.date.format(str, formats["YmdHi"]());
+					} else if (args[0] === 14) {
+						val = N.date.format(str, formats["YmdHis"]());
+					} else {
+						val = N.date.format(str, formats["Ymd"]());
+					}
+					return Number(str) > 0 ? val : "";
+				}
 			},
 			"time" : function(str, args) {
 				str = str.replace(/:/g, "");
@@ -491,13 +419,13 @@
 
 				return str;
 			},
-			"limit" : function(str, args) {
+			"limit" : function(str, args, ele) {
 				if (args == null || args[0] == null) {
 					N.error("[Formater.limit]You must input args[0](cut length)");
 				}
 				if(str.substr(str.length - args[1].length, args[1].length) !== args[1]) {
-					if (this.$input) {
-						this.$input.attr("title", str);
+					if (ele !== undefined) {
+						ele.attr("title", str);
 					}
 					var l = 0;
 					for (var i = 0; i < str.length; i++) {
@@ -513,7 +441,7 @@
 				}
 				return str;
 			},
-			"replace" : function(str, args) {
+			"replace" : function(str, args, ele) {
 				if (args == null || args[0] == null) {
 					N.error("[Formater.replace]You must input args[0](target string)");
 				}
@@ -522,7 +450,7 @@
 				}
 				var replaceStr = str.split(String(args[0])).join(String(args[1]));
 				if (typeof args[2] != "undefined" && String(args[2]) == "true") {
-					this.vo[this.$input.attr("name")] = replaceStr;
+					this.vo[ele.attr("name")] = replaceStr;
 				}
 				return replaceStr;
 			},

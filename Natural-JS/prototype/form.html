@@ -16,6 +16,8 @@
         "readonly": "readonly",
         "disabled": "disabled",
         "hidden": "hidden",
+        "date" : 20140913,
+        "month" : 201409,
         "select" : 123334424.3533,
         "selectMulty" : [266734.12, 32434.423],
         "radio" : 123334424.3533,
@@ -33,6 +35,8 @@
         "readonly": "readonly",
         "disabled": "disabled",
         "hidden": "hidden",
+        "date" : 20140913,
+        "month" : 201409,
         "select" : 123334424.3533,
         "selectMulty" : 32434.423,
         "radio" : 123334424.3533,
@@ -50,6 +54,8 @@
         "readonly": "readonly",
         "disabled": "disabled",
         "hidden": "hidden",
+        "date" : 20140913,
+        "month" : 201409,
         "select" : 123334424.3533,
         "selectMulty" : 32434.423,
         "radio" : 123334424.3533,
@@ -92,11 +98,13 @@
 			<tr>
 				<th><label for="plain">Input ETC</label></th>
 				<td>
-					<label for="plain">plain</label><input id="plain" type="text" />&nbsp;
-					<label for="password">password</label><input id="password" type="password" />&nbsp;
-					<label for="readonly">readonly</label><input id="readonly" type="text" readonly="readonly" /><br /><br />
-					<label for="disabled">disabled</label><input id="disabled" type="text" disabled="disabled" />&nbsp;
-					<label for="hidden">hidden</label><input id="hidden" type="hidden" />
+					<label for="plain">plain</label> <input id="plain" type="text" />&nbsp;
+					<label for="password">password</label> <input id="password" type="password" />&nbsp;
+					<label for="readonly">readonly</label> <input id="readonly" type="text" readonly="readonly" /><br /><br />
+					<label for="disabled">disabled</label> <input id="disabled" type="text" disabled="disabled" />&nbsp;
+					<label for="hidden">hidden</label> <input id="hidden" type="hidden" /><br /><br />
+					<label for="date">Date</label> <input id="date" type="text" class='{ "format": [["date", 8, "date"]] }' />&nbsp;
+					<label for="month">Month</label> <input id="month" type="text" class='{ "format": [["date", 6, "month"]] }' />
 				</td>
 			</tr>
 			<tr>
