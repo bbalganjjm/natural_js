@@ -103,46 +103,18 @@
 			"show" : function() {
 				var opts = this.options;
 				if (!opts.isInput) {
-					Alert.resetOffSetWrapEle(opts);
+					Alert.resetOffSetEle(opts);
 					opts.time = setInterval(function() {
-						Alert.resetOffSetWrapEle(opts);							
+						Alert.resetOffSetEle(opts);							
 					}, 100);
 					opts.msgContents.show();
 				} else {
 					if (!N.isEmptyObject(opts.msg)) {
-						var setOffset = function() {
-							var position = "left";
-							if ((opts.context.offset().left + opts.context.outerWidth() + 200) > $(window).width()) {
-								position = "right";
-							}
-							if (position === "right") {
-								var msgBoxWidth = opts.msgContext.outerWidth();
-								var leftPos = opts.context.offset().left - msgBoxWidth;
-								if (leftPos < 0) {
-									opts.msgContext.width((msgBoxWidth + leftPos) - 2);
-								}
-
-								/* TODO 닫기하고 화살표 바꾸기
-								opts.msgContext.find("a.msg_close__").detach().prependTo(opts.msgContext);
-								opts.msgContext.find("a.msg_arrow__").detach().appendTo(opts.msgContext);
-								*/
-
-								opts.msgContext.offset({
-									left : opts.context.offset().left - opts.msgContext.outerWidth() - 1,
-									top : opts.context.offset().top + 1
-								});
-							} else {
-								opts.msgContext.offset({
-									left : opts.context.offset().left + opts.context.outerWidth(),
-									top : opts.context.offset().top + 1
-								});
-							}
-						}
-						setOffset();
+						Alert.resetOffSetInputEle(opts);
 
 						// sync msgContext offset
 						opts.time = setInterval(function() {
-							setOffset();
+							Alert.resetOffSetInputEle(opts);
 						}, 100);
 
 						opts.msgContext.fadeIn(150, function() {
@@ -303,7 +275,7 @@
 					opts.msgContents.find("a.cancel__").remove();
 				}
 			},
-			resetOffSetWrapEle : function(opts) {
+			resetOffSetEle : function(opts) {
 				if(opts.context.outerWidth() > 0) {
 					opts.msgContext.css({
 						"top" : opts.isWindow ? 0 : opts.context.offset().top + "px",
@@ -329,8 +301,11 @@
 				}
 				opts.msgContext = opts.context.next("span.msg__");
 				if (opts.msgContext.length == 0) {
-					opts.msgContext = opts.container.append('<span class="msg__"><ul class="msg_line_box__"></ul></span>')
-										.find("span.msg__");
+					opts.msgContext = opts.context.after('<span class="msg__"><ul class="msg_line_box__"></ul></span>')
+										.next("span.msg__").css({
+											"display" : "none",
+											"position": "fixed" //not absolute, because not equal message context offset and input element offset in popup
+										});
 					opts.msgContext.append('<a href="#" class="msg_close__">' + opts.input.closeBtn + '</a>');
 					opts.msgContext.prepend('<ul class="msg_arrow__"></ul>');
 				}
@@ -363,6 +338,13 @@
 					}
 					ul_.append('<li>' + opts.input.bullets + opts.msg + '</li>');
 				}
+			},
+			resetOffSetInputEle : function(opts) {
+				//TODO how solution when input element's right margin smaller than message context width
+				opts.msgContext.offset({
+					left : opts.context.offset().left + opts.context.outerWidth(),
+					top : opts.context.offset().top + 1
+				});
 			}
 		});
 

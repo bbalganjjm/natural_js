@@ -58,8 +58,6 @@ span.block_overlay_msg__ li.buttonBox__ a.cancel__ {
 
 /* Alert input message */
 span.msg__ {
-	display: none;
-	position: absolute;
 }
 
 span.msg__ > ul {
