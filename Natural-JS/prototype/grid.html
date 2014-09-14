@@ -37,7 +37,7 @@
 	<div class="divBar">DEMO</div>
 	<div class="demoBox">
 		<div id="defBtnBox" class="btnBox">
-			<a id="btnInitDefGrid" href="#" class='{ "color": "skyblue", "size": "small" }'>init grid2</a>
+			<a id="btnInitDefGrid" href="#" class='{ "color": "skyblue", "size": "small" }'>init defGrid</a>
 			<a id="btnBindDataDef" href="#" class='{ "color": "skyblue", "size": "small", "disable": true }'>bind data</a>
 		</div>
 		<table id="defGrid" class="grid__">
@@ -161,10 +161,20 @@ N("div#grid").service({
 	grid : undefined,
 	grid2 : undefined,
 	defGrid : undefined,
+	gridData : undefined,
     init : function(view) {
     	this.initButton();
     	//this.createSelect(data);
 
+    	// data load
+    	var this_ = this;
+    	N.controller({
+    		url : "prototype/data/grid.json",
+    		async : false
+    	}).submit(function(data) {
+    		this_.gridData = data;
+    	});
+    	
     	this.setEvents();
     },
     createSelect : function(data) {
@@ -181,11 +191,12 @@ N("div#grid").service({
             if(this_.defGrid === undefined) {
             	this_.defGrid = N([]).grid({
             		context :"table#defGrid",
+            		data : this_.gridData,
             		height : 300,
             		resizable : true,
             		vResizable : true,
             		sortable : true
-            	}).bind();
+            	});
 
 				N("div#defBtnBox").find("a").instance("button", function(u) {
                  	this.enable();
@@ -195,9 +206,7 @@ N("div#grid").service({
 
     	N("a#btnBindDataDef").click(function(e) {
             e.preventDefault();
-            N.controller("prototype/data/grid_big.json").submit(function(data) {
-        		this_.defGrid.bind(data);
-        	});
+            this_.defGrid.bind();
         });
 
     	N("a#btnInitGrid").click(function(e) {
@@ -205,11 +214,12 @@ N("div#grid").service({
             if(this_.grid === undefined) {
             	this_.grid = N([]).grid({
             		context :"table#grid",
+            		data : this_.gridData,
             		height : 300,
             		resizable : true,
             		vResizable : true,
             		sortable : true
-            	}).bind();
+            	});
 
                 N("div#firstBtnBox").find("a").instance("button", function(u) {
                 	this.enable();
@@ -219,9 +229,7 @@ N("div#grid").service({
 
     	N("a#btnBindData").click(function(e) {
             e.preventDefault();
-            N.controller("prototype/data/grid.json").submit(function(data) {
-        		this_.grid.bind(data);
-        	});
+            this_.grid.bind();
         });
 
     	N("a#btnGetData").click(function(e) {
@@ -264,11 +272,12 @@ N("div#grid").service({
             if(this_.grid2 === undefined) {
             	this_.grid2 = N([]).grid({
             		context :"table#grid2",
+            		data : this_.gridData,
             		height : 300,
             		resizable : true,
             		vResizable : true,
             		sortable : true
-            	}).bind();
+            	});
 
 				N("div#secondBtnBox").find("a").instance("button", function(u) {
                  	this.enable();
@@ -278,9 +287,7 @@ N("div#grid").service({
 
     	N("a#btnBindData2").click(function(e) {
             e.preventDefault();
-            N.controller("prototype/data/grid_big.json").submit(function(data) {
-        		this_.grid2.bind(data);
-        	});
+       		this_.grid2.bind();
         });
     },
     rowHandler : function(i, tbody, vals) {

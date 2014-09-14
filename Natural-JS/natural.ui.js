@@ -589,7 +589,9 @@
 				addTop : false,
 				validate : true,
 				fRules : null, //TODO test
-				vRules : null //TODO test
+				vRules : null, //TODO test
+				extObj : null, // for N.grid,
+				extRow : -1  // for N.grid
 			};
 
 			try {
@@ -616,7 +618,9 @@
 
 			this.options.context.instance("form", this);
 
-			N.ds.instance(this, true);
+			if(this.options.extObj === null) {
+				N.ds.instance(this, true);				
+			}
 
 			return this;
 		};
@@ -679,7 +683,7 @@
 	                                                vals["rowStatus"] = "update";
 	                                            }
 	                                            currEle.addClass("data_changed__");
-	                                            N.ds.instance(this_).notify(opts.row, currEle.attr("id"));
+	                                            N.ds.instance(opts.extObj !== null ? opts.extObj : this_).notify(opts.extRow > -1 ? opts.extRow : opts.row, currEle.attr("id"));
 											}
                                         }
 									});
@@ -738,7 +742,7 @@
 	                                                vals["rowStatus"] = "update";
 	                                            }
 	                                            currEle.addClass("data_changed__");
-	                                            N.ds.instance(this_).notify(opts.row, currEle.attr("id"));
+	                                            N.ds.instance(opts.extObj !== null ? opts.extObj : this_).notify(opts.extRow > -1 ? opts.extRow : opts.row, currEle.attr("id"));
 											}
                                         }
 									});
@@ -785,7 +789,7 @@
 	                                            vals["rowStatus"] = "update";
 	                                        }
 	                                        currEles.addClass("data_changed__");
-	                                        N.ds.instance(this_).notify(opts.row, currKey);
+	                                        N.ds.instance(opts.extObj !== null ? opts.extObj : this_).notify(opts.extRow > -1 ? opts.extRow : opts.row, currKey);
 										}
 	                                }
 								});
@@ -813,20 +817,24 @@
 	        	if(!opts.addTop) {
 	        		opts.data.push(vals);
 	        		this.options.row = opts.data.length - 1;
+	        		if(opts.extObj !== null) {
+	        			opts.extRow = opts.extObj.data().length - 1;
+	        		}
 	        	} else {
         			opts.data.splice(0, 0, vals);
 	        		this.options.row = 0;
+	        		opts.extRow = 0;
 	        	}
 
 	        	//TODO opts.row만 들어왔을때 그리드에서 어떻게 update 할건지 고민
-		        N.ds.instance(this).notify(opts.row);
+		        N.ds.instance(opts.extObj !== null ? opts.extObj : this).notify(opts.extRow > -1 ? opts.extRow : opts.row);
 		        this.update(opts.row);
 				return this;
 			},
 			revert : function() {
 				var opts = this.options;
 				opts.data[opts.row] = $.extend({}, this.revertData);
-				N.ds.instance(this).notify(opts.row);
+				N.ds.instance(opts.extObj !== null ? opts.extObj : this).notify(opts.extRow > -1 ? opts.extRow : opts.row);
 				this.update(opts.row);
 				return this;
 			},
@@ -895,8 +903,9 @@
                                 vals["rowStatus"] = "update";
                             }
                             ele.addClass("data_changed__");
-                            N.ds.instance(this_).notify(opts.row, ele.attr("id"));
-
+                            if(notify === undefined || (notify !== undefined && notify === true)) {
+                            	N.ds.instance(opts.extObj !== null ? opts.extObj : this_).notify(opts.extRow > -1 ? opts.extRow : opts.row, ele.attr("id"));                            	
+                            }
 							ele.attr("src", currVal);
 						} else {
 							var currVal = String(val);
@@ -905,7 +914,9 @@
                                 vals["rowStatus"] = "update";
                             }
                             ele.addClass("data_changed__");
-                            N.ds.instance(this_).notify(opts.row, ele.attr("id"));
+                            if(notify === undefined || (notify !== undefined && notify === true)) {
+                            	N.ds.instance(opts.extObj !== null ? opts.extObj : this_).notify(opts.extRow > -1 ? opts.extRow : opts.row, ele.attr("id"));
+                            }
 
 							if(ele.attr("class") !== undefined && ele.attr("class").indexOf("\"format\"") > -1) {
 								N(opts.data).formater(opts.fRules !== null ? opts.fRules : ele).format(opts.row);
@@ -1073,6 +1084,7 @@
 						limit = opts.data.length
 					}
 					var classOpts;
+					var this_ = this;
 					var render = function() {
 						// clone tbody for create new line
 						tbodyTempClone = this_.tbodyTemp.clone(true, true).hide();
@@ -1083,8 +1095,11 @@
 							(new Function("return " + classOpts.rowHandler))()(i, tbodyTempClone, opts.data[i]);
 						}
 
+						// for row data bind, use N.form
 						N(opts.data[i]).form({
-							context : tbodyTempClone
+							context : tbodyTempClone,
+							extObj : this_,
+							extRow : i
 						}).bind();
 						tbodyTempClone.show(opts.createRowDelay, function() {
 							i++;
@@ -1117,9 +1132,11 @@
 					opts.context.append(tbodyTempClone);
 				}
 
-				//TODO 여기서 ds.noty, form 에서는 noty 하면 안됨...이 그리드가 업뎃되어버릴꺼임
+				// for new row data bind, use N.form
 				opts.data.form({
 					context : tbodyTempClone,
+					extObj : this_,
+					extRow : opts.addTop ? 0 : opts.data.length,
 					addTop : opts.addTop
 				}).add();
 
@@ -1187,10 +1204,10 @@
 				return this;
 			},
 			update : function(row, key) {
-				if(row === undefined && row === undefined) {
+				if(row === undefined) {
 					this.bind();
 				} else {
-					this.options.context.find("tbody:eq(" + String(row) + ")").instance("form").update(row, key);
+					this.options.context.find("tbody:eq(" + String(row) + ")").instance("form").update(0, key);
 				}
 				return this;
 			}

@@ -90,52 +90,58 @@
 
 	(function(N) {
 		//DataSync
-		var DataSync = N.ds = function(instance, addFlag) {
+		var DataSync = N.ds = function(inst, isReg) {
 			if (N.ds.caller != N.ds.instance) {
 				throw new Error("[N.datasync]There is no public constructor for N.ds, use instance method");
 			}
 
-			this.obserable = new Array();
-			this.instance = instance;
-
-			var viewContext = $(instance.options.context).closest(".view_context__");
-			if(viewContext.length == 0) {
-				var dataSyncTemp = $(N.context.attr("architecture")["page"]["context"]).find("var#data_sync_temp__");
+			this.viewContext = $(inst.options.context).closest(".view_context__");
+			if(this.viewContext.length == 0) {
+				var pageContext = $(N.context.attr("architecture")["page"]["context"]);
+				var dataSyncTemp = pageContext.find("var#data_sync_temp__");
 				if(dataSyncTemp.length == 0) {
-					dataSyncTemp = $(N.context.attr("architecture")["page"]["context"]).append('<var id="data_sync_temp__"></var>').find("var#data_sync_temp__");
+					dataSyncTemp = pageContext.append('<var id="data_sync_temp__"></var>').find("var#data_sync_temp__");
 				}
-				viewContext = dataSyncTemp;
+				this.viewContext = dataSyncTemp;
 			}
-			if (viewContext.data("ds_instance__") !== undefined) {
-				if(addFlag !== undefined && addFlag) {
-					viewContext.data("ds_instance__").obserable.push(instance);
+			
+			var siglInst = this.viewContext.instance("ds");
+			if (siglInst !== undefined) {
+				siglInst.inst = inst;
+				if(isReg !== undefined && isReg === true) {
+					siglInst.obserable.push(inst);
 				}
-				return viewContext.data("ds_instance__");
+			} else {
+				siglInst = this;
+				siglInst.inst = inst;
+				siglInst.obserable = new Array();
+				siglInst.obserable.push(inst);
+				this.viewContext.instance("ds", siglInst);
 			}
 
-			this.obserable.push(instance);
-			viewContext.data("ds_instance__", this);
-
-			return this;
+			return siglInst;
 		}
 		DataSync.fn = DataSync.prototype;
 
 		$.extend(DataSync.fn, {
 			"remove" : function() {
-				var instance = this.instance;
-				for (var i = 0; i < this.obserable.length; i++) {
-					if (this.obserable[i] == instance) {
-						this.obserable.splice(i, 1);
+				var inst = this.inst;
+				var obserable = this.obserable;
+				for (var i = 0; i < obserable.length; i++) {
+					if (obserable[i] == inst) {
+						obserable.splice(i, 1);
 					}
 				}
 				return this;
 			},
 			"notify" : function(row, key) {
-				var instance = this.instance;
-				if (instance != null) {
-					for (var i = 0; i < this.obserable.length; i++) {
-						if (instance !== this.obserable[i] && instance.options.data === this.obserable[i].options.data) {
-							this.obserable[i].update(row, key);
+				var inst = this.inst;
+				var obserable = this.obserable;
+				if (inst !== null) {
+					for (var i = 0; i < obserable.length; i++) {
+						if (inst !== obserable[i] && inst.options.data === obserable[i].options.data) {
+							console.log(obserable[i].options.context[0]);
+							obserable[i].update(row, key);
 						}
 					}
 				}
@@ -144,8 +150,8 @@
 		});
 		$.extend(DataSync, {
 			//singleton
-			"instance" : function(instance) {
-				return new N.ds(instance);
+			"instance" : function(inst, isReg) {
+				return new N.ds(inst, isReg);
 			}
 		});
 

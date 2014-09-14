@@ -361,7 +361,7 @@
 		        return false;
 		    },
 		    dataChanged : function(ele) {
-		    	ele.animate({"opacity": "0.5"}, "fast").animate({"opacity": "1"}, "slow");
+		    	ele.fadeOut(150).fadeIn(300);
 		    }
 		},
 		"browser" : {
