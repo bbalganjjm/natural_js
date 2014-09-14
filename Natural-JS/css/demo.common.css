@@ -134,7 +134,6 @@ div#main {
 	min-width: 800px;
 	border: 1px solid #cccccc;
     border-radius : 0 0 10px 10px;
-    behavior: url("/lib/PIE_uncompressed.htc")\9;
 }
 
 div#main div#contents {
