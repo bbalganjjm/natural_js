@@ -33,28 +33,28 @@
 			<a id="btnFormatEvent" href="#" class='{ "size": "small" }'>format 이벤트 실행</a>
 			<a id="btnFormatCommand" href="#" class='{ "color": "gray", "size": "small" }'>Format(명령형)</a>
 		</div>
-		<table id="inputBox">
+		<table id="inputBox" class='form'>
 			<tr>
-				<td width="70"><label for="numeric">Input 1</label></td>
+				<th align="right" width="70"><label for="numeric">Input 1</label></th>
 				<td width="*">
 					<input id="numeric" type="text" class='{ "format" : [["trimtoempty"], ["numeric", "#,###.##0000"]] }' /> class='{ "format" : [["trimtoempty"], ["numeric", "#,###.##0000"]] }'
 				</td>
 			</tr>
 			<tr>
-				<td><label for="generic">Input 2</label></td>
+				<th align="right"><label for="generic">Input 2</label></th>
 				<td>
 					<input id="generic" type="text" class='{ "format" : [["trimtoempty"], ["generic", "@@ABCD"]] }' /> class='{ "format" : [["trimtoempty"], ["generic", "@@ABCD"]] }'
 				</td>
 			</tr>
 			<tr>
-				<td><label for="limit">Input 3</label></td>
+				<th align="right"><label for="limit">Input 3</label></th>
 				<td>
 					<textarea id="limit" rows="5" cols="40" class='{ "format" : [["trimtoempty"], ["limit", "13", "..."]] }'></textarea>
 					class='{ "format" : [["trimtoempty"], ["limit", "13", "..."]] }'
 				</td>
 			</tr>
 			<tr>
-				<td><label for="etc">ETC</label></td>
+				<th align="right"><label for="etc">ETC</label></th>
 				<td><span id="etc" class='{ "format" : [["date", 12]] }'></span> class='{ "format" : [["date", 12]] }'</td>
 			</tr>
 		</table>
