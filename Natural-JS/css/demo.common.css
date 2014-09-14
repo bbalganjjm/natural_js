@@ -48,7 +48,7 @@ input[readonly='readonly'], input[readonly='readonly']:hover, input[readonly='re
 }
 
 input[type='radio'], input[type='checkbox'] {
-	margin:0 3px 0 0;
+	margin:0 3px 0 10px;
 	vertical-align:middle;
 	border:none;
 }

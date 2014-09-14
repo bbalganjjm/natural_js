@@ -6,26 +6,66 @@
 				<td width="70"><label for="data">Data</label></td>
 				<td width="*">
 					<textarea id="data" class="data">
-[
-    {
-        "numeric": 266734.12,
-        "generic": "abcDefGh",
-        "limit": "안녕하세요. 반가워요. 저는 Natural-JS 입니다.",
-        "etc": 20140626121212
-    },
-    {
-        "numeric": 123334424.3533,
-        "generic": "ijkLMNop",
-        "limit": "Natural-JS 좋아요?",
-        "etc": 20140626121212
-    },
-    {
-        "numeric": 32434.423,
-        "generic": "lkjfkweisc",
-        "limit": "음.....",
-        "etc": 2453532
-    }
-]
+[{
+    "gender": [{
+     	"key" : "male",
+     	"val" : "male"
+     },{
+     	"key" : "female",
+     	"val" : "female"
+    }],
+    "eyeColor": [{
+     	"key" : "blue",
+     	"val" : "blue"
+     },{
+     	"key" : "brown",
+     	"val" : "brown"
+     },{
+     	"key" : "green",
+     	"val" : "green"
+    }],
+    "company": [{
+     	"key" : "PROSELY",
+     	"val" : "PROSELY"
+     },{
+     	"key" : "ASSISTIX",
+     	"val" : "ASSISTIX"
+     },{
+     	"key" : "VORATAK",
+     	"val" : "VORATAK"
+     },{
+     	"key" : "CANDECOR",
+     	"val" : "CANDECOR"
+     },{
+     	"key" : "BARKARAMA",
+     	"val" : "BARKARAMA"
+     },{
+     	"key" : "STOCKPOST",
+     	"val" : "STOCKPOST"
+     },{
+     	"key" : "MICROLUXE",
+     	"val" : "MICROLUXE"
+     },{
+     	"key" : "SHADEASE",
+     	"val" : "SHADEASE"
+     },{
+     	"key" : "ZENTIA",
+     	"val" : "ZENTIA"
+    	},{
+     	"key" : "INTRADISK",
+     	"val" : "INTRADISK"
+    }],
+    "favoriteFruit": [{
+     	"key" : "apple",
+     	"val" : "apple"
+     },{
+     	"key" : "strawberry",
+     	"val" : "strawberry"
+     },{
+     	"key" : "banana",
+     	"val" : "banana"
+    }]
+}]
 					</textarea>
 				</td>
 			</tr>
@@ -34,36 +74,36 @@
 	<div class="divBar">DEMO</div>
 	<div class="demoBox">
 		<div class="btnBox">
-			<a id="btnSelect" href="#" class='{ "size": "small" }'>Select</a>
-			<a id="btnSelectMulty" href="#" class='{ "size": "small" }'>Multy Select</a>
-			<a id="btnRadio" href="#" class='{ "size": "small" }'>Radio</a>
-			<a id="btnCheckBox" href="#" class='{ "size": "small" }'>CheckBox</a>
+			<a id="btnSelect" href="#" class='{ "color": "skyblue", "size": "small" }'>Select</a>
+			<a id="btnSelectMulty" href="#" class='{ "color": "skyblue", "size": "small" }'>Multy Select</a>
+			<a id="btnRadio" href="#" class='{ "color": "skyblue", "size": "small" }'>Radio</a>
+			<a id="btnCheckBox" href="#" class='{ "color": "skyblue", "size": "small" }'>CheckBox</a>
 		</div>
-		<table id="inputBox">
+		<table id="inputBox" class='form'>
 			<tr>
-				<td width="70"><label for="select">Select</label></td>
-				<td width="*">
-					<select id="select">
+				<th align="right" width="85"><label for="eyeColor">eye color</label></th>
+				<td width="300">
+					<select id="eyeColor">
 						<option>선택</option>
 					</select>
 				</td>
 			</tr>
 			<tr>
-				<td><label for="selectMulty">Select Multy</label></td>
+				<th align="right"><label for="company">company</label></th>
 				<td>
-					<select id="selectMulty" multiple="multiple"></select>
+					<select id="company" multiple="multiple"></select>
 				</td>
 			</tr>
 			<tr>
-				<td><label for="radio">Radio</label></td>
+				<th align="right"><label for="gender">gender</label></th>
 				<td>
-					<input id="radio" type="radio" />
+					<input id="gender" type="radio" />
 				</td>
 			</tr>
 			<tr>
-				<td><label for="checkbox">Checkbox</label></td>
+				<th align="right"><label for="favoriteFruit">favorite fruit</label></th>
 				<td>
-					<input id="checkbox" type="checkbox" />
+					<input id="favoriteFruit" type="checkbox" />
 				</td>
 			</tr>
 		</table>
@@ -78,50 +118,51 @@
 
 N("div#select").service({
     init : function(view) {
-    	this.initButton();
+    	this.initButton(view);
 
-    	var data = eval(N("textarea.data").val());
-		var select = $(data).select("select#select");
-		var selectMulty = $(data).select("select#selectMulty");
-		var radio = $(data).select({
-			context : "input#radio",
-			direction : "v"
-		});
-		var checkbox = $(data).select({
-			context : "input#checkbox",
-			key : "limit"
-		});
-
-        N("a#btnSelect", view).click(function(e) {
+    	var data = eval(N("textarea.data").val())[0];
+		
+        this.setEvent(view, {
+        	"select" : $(data.eyeColor).select("select#eyeColor"),
+        	"selectMulty" : $(data.company).select("select#company"),
+        	"radio" : $(data.gender).select("input#gender"),
+        	"checkbox" : $(data.favoriteFruit).select({
+    			context : "input#favoriteFruit",
+    			direction : "v"
+    		})
+        });
+    },
+    initButton : function(view) {
+    	N("div.btnBox", view).button();
+    },
+    setEvent : function(view, objs) {
+    	N("a#btnSelect", view).click(function(e) {
             e.preventDefault();
-            select.bind().val("266734.12");
+            objs.select.bind().val("brown");
         });
 
         N("a#btnSelectMulty", view).click(function(e) {
         	e.preventDefault();
-        	selectMulty.bind();
+        	objs.selectMulty.bind();
         });
 
         N("a#btnRadio", view).click(function(e) {
         	e.preventDefault();
-        	radio.bind();
+        	objs.radio.bind();
         });
 
         N("a#btnCheckBox", view).click(function(e) {
         	e.preventDefault();
-        	checkbox.bind();
+        	objs.checkbox.bind();
         });
         
      	// for popup onClose exemple
         if(this.caller !== undefined && this.caller.changeEvent !== undefined) {
         	var popupCaller = this.caller;
             popupCaller.changeEvent("onOk", function() {
-            	popupCaller.close(selectMulty.data());
+            	popupCaller.close(objs.select.data());
             });
         }
-    },
-    initButton : function() {
-    	N("div.btnBox").button();
     },
     /**
      * for popup exemple

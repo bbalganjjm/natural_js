@@ -7,62 +7,88 @@
 				<td width="*">
 					<textarea id="data" class="data">
 [
+	{
+	    "_id": "53e21cba9f982281b3459438",
+	    "index": 0,
+	    "guid": "1a9e5450-c664-4bfd-8174-d03005eca08d",
+	    "isActive": "Y",
+	    "balance": "1284.38",
+	    "picture": "http://placehold.it/32x32",
+	    "age": 26,
+	    "eyeColor": "green",
+	    "name": "Dean Stanley",
+	    "gender": "male",
+	    "company": ["ASSISTIX", "CANDECOR"],
+	    "email": "deanstanley@zentia.com",
+	    "phone": "+1 (920) 409-2680",
+	    "address": "936 Meserole Street, Vicksburg, Massachusetts, 1198",
+	    "about": "Mollit elit qui reprehenderit fugiat excepteur adipisicing sunt id proident laborum sint proident.\r\nAmet cupidatat ipsum do irure qui magna sunt pariatur commodo eiusmod ipsum qui ad culpa.",
+	    "registered": "2014-02-20T03:58:09 -09:00",
+	    "registered2": "2014-07-20T03:58:09 -09:00",
+	    "latitude": 81.131606,
+	    "longitude": 87.110498,
+	    "greeting": "Hello, Dean Stanley! You have 1 unread messages.",
+	    "favoriteFruit": ["strawberry", "banana"]
+	},
     {
-        "numeric": 266734.12,
-        "generic": "abcDefGh",
-        "limit": "안녕하세요. 저는 Natural-JS 입니다.",
-        "plain": "plain",
-        "password": "password",
-        "readonly": "readonly",
-        "disabled": "disabled",
-        "hidden": "hidden",
-        "date" : 20140913,
-        "month" : 201409,
-        "select" : 123334424.3533,
-        "selectMulty" : [266734.12, 32434.423],
-        "radio" : 123334424.3533,
-        "checkbox" : [266734.12, 32434.423],
-        "singleCheckbox" : "Y",
-        "etc": 20140626121212,
-        "etc2": "테스트 입니다."
-    },
-    {
-        "numeric": 123334424.3533,
-        "generic": "ijkLMNop",
-        "limit": "Natural-JS 좋아요?",
-        "plain": "plain",
-        "password": "password",
-        "readonly": "readonly",
-        "disabled": "disabled",
-        "hidden": "hidden",
-        "date" : 20140913,
-        "month" : 201409,
-        "select" : 123334424.3533,
-        "selectMulty" : 32434.423,
-        "radio" : 123334424.3533,
-        "checkbox" : 266734.12,
-        "singleCheckbox" : "N",
-        "etc": 20140626121212,
-        "etc2": "테스트 입니다."
-    },
-    {
-        "numeric": 32434.423,
-        "generic": "lkjfkweisc",
-        "limit": "반가워요.",
-        "plain": "plain",
-        "password": "password",
-        "readonly": "readonly",
-        "disabled": "disabled",
-        "hidden": "hidden",
-        "date" : 20140913,
-        "month" : 201409,
-        "select" : 123334424.3533,
-        "selectMulty" : 32434.423,
-        "radio" : 123334424.3533,
-        "checkbox" : 266734.12,
-        "singleCheckbox" : "Y",
-        "etc": 2453532,
-        "etc2": "테스트 입니다."
+        "gender": [{
+	        	"key" : "male",
+	        	"val" : "male"
+	        },{
+	        	"key" : "female",
+	        	"val" : "female"
+        }],
+        "eyeColor": [{
+	        	"key" : "blue",
+	        	"val" : "blue"
+	        },{
+	        	"key" : "brown",
+	        	"val" : "brown"
+	        },{
+	        	"key" : "green",
+	        	"val" : "green"
+        }],
+        "company": [{
+	        	"key" : "PROSELY",
+	        	"val" : "PROSELY"
+	        },{
+	        	"key" : "ASSISTIX",
+	        	"val" : "ASSISTIX"
+	        },{
+	        	"key" : "VORATAK",
+	        	"val" : "VORATAK"
+	        },{
+	        	"key" : "CANDECOR",
+	        	"val" : "CANDECOR"
+	        },{
+	        	"key" : "BARKARAMA",
+	        	"val" : "BARKARAMA"
+	        },{
+	        	"key" : "STOCKPOST",
+	        	"val" : "STOCKPOST"
+	        },{
+	        	"key" : "MICROLUXE",
+	        	"val" : "MICROLUXE"
+	        },{
+	        	"key" : "SHADEASE",
+	        	"val" : "SHADEASE"
+	        },{
+	        	"key" : "ZENTIA",
+	        	"val" : "ZENTIA"
+        	},{
+	        	"key" : "INTRADISK",
+	        	"val" : "INTRADISK"
+        }],
+        "favoriteFruit": [{
+	        	"key" : "apple",
+	        	"val" : "apple"
+	        },{
+	        	"key" : "strawberry",
+	        	"val" : "strawberry"
+	        },{
+	        	"key" : "banana",
+	        	"val" : "banana"
+        }]
     }
 ]
 					</textarea>
@@ -73,79 +99,106 @@
 	<div class="divBar">DEMO</div>
 	<div class="demoBox">
 		<div class="btnBox">
-			<a id="btnFormBind" href="#" class='{ "color": "skyblue", "size": "small" }'>Form Bind</a>
-			<a id="btnFormValidate" href="#" class='{ "color": "white", "size": "small" }'>Form Validate</a>
+			<a id="btnInitForm" href="#" class='{ "color": "skyblue", "size": "small" }'>Init Form</a>
+			<a id="btnFormBind" href="#" class='{ "color": "white", "size": "small", "disable": true }'>Form Bind</a>
+			<a id="btnGetData" href="#" class='{ "color": "white", "size": "small", "disable": true }'>Get Data</a>
+			<a id="btnFormValidate" href="#" class='{ "color": "white", "size": "small", "disable": true }'>Form Validate</a>
 		</div>
 		<table id="inputBox" class='form'>
 			<tr>
-				<th width="70"><label for="numeric">Input 1</label></th>
-				<td width="*">
-					<input id="numeric" type="text" class='{ "format" : [["trimtoempty"], ["numeric", "#,###.##0000"]], "validate" : [["required"], ["decimal"]] }' />
+				<th width="85" align="right"><label for="picture">picture</label></th>
+				<td width="*"><img id="picture" /></td>
+			</tr>
+			<tr>
+				<th align="right"><label for="name">name</label></th>
+				<td>
+					<input id="name" type="text" class='{ "validate" : [["required"]] }' />
 				</td>
 			</tr>
 			<tr>
-				<th><label for="generic">Input 2</label></th>
+				<th align="right"><label for="email">email</label></th>
 				<td>
-					<input id="generic" type="text" class='{ "format" : [["trimtoempty"], ["generic", "@@ABCD"]], "validate" : [["required"], ["alphabet"]] }' />
+					<input id="email" type="text" class='{ "format" : [["trimtoempty"], ["generic", "@@@@@@＊＊＊"]], "validate" : [["required"], ["email"]] }' />
 				</td>
 			</tr>
 			<tr>
-				<th><label for="limit">Input 3</label></th>
+				<th align="right"><label for="_id">password</label></th>
 				<td>
-					<textarea id="limit" rows="5" cols="40" class='{ "format" : [["trimtoempty"], ["limit", "13", "..."]], "validate" : [["required"], ["korean"]] }'></textarea>
+					<input id="_id" type="password" class='{ "validate" : [["required"]] }' />
 				</td>
 			</tr>
 			<tr>
-				<th><label for="plain">Input ETC</label></th>
+				<th align="right"><label for="balance">balance</label></th>
 				<td>
-					<label for="plain">plain</label> <input id="plain" type="text" />&nbsp;
-					<label for="password">password</label> <input id="password" type="password" />&nbsp;
-					<label for="readonly">readonly</label> <input id="readonly" type="text" readonly="readonly" /><br /><br />
-					<label for="disabled">disabled</label> <input id="disabled" type="text" disabled="disabled" />&nbsp;
-					<label for="hidden">hidden</label> <input id="hidden" type="hidden" /><br /><br />
-					<label for="date">Date</label> <input id="date" type="text" class='{ "format": [["date", 8, "date"]] }' />&nbsp;
-					<label for="month">Month</label> <input id="month" type="text" class='{ "format": [["date", 6, "month"]] }' />
+					<input id="balance" type="text" class='{ "format" : [["trimtoempty"], ["numeric", "$#,###.##0"]], "validate" : [["required"], ["decimal"]] }' />
 				</td>
 			</tr>
 			<tr>
-				<th><label for="select">Select</label></th>
+				<th align="right"><label for="phone">phone</label></th>
 				<td>
-					<select id="select" class='{ "validate" : [["required"]] }'>
+					<input id="phone" type="text" readonly="readonly" />
+				</td>
+			</tr>
+			<tr>
+				<th align="right"><label for="age">age</label></th>
+				<td>
+					<input id="age" type="text" disabled="disabled" />
+					<input id="index" type="hidden" />
+				</td>
+			</tr>
+			<tr>
+				<th align="right"><label for="eyeColor">eye color</label></th>
+				<td>
+					<select id="eyeColor" class='{ "validate" : [["required"]] }'>
 						<option>선택</option>
 					</select>
 				</td>
 			</tr>
 			<tr>
-				<th><label for="selectMulty">Select Multy</label></th>
+				<th align="right"><label for="company">company</label></th>
 				<td>
-					<select id="selectMulty" multiple="multiple"></select>
+					<select id="company" multiple="multiple"></select>
 				</td>
 			</tr>
 			<tr>
-				<th><label for="radio">Radio</label></th>
+				<th align="right"><label for="gender">gender</label></th>
 				<td>
-					<input id="radio" type="radio" />
+					<input id="gender" type="radio" />
 				</td>
 			</tr>
 			<tr>
-				<th><label for="checkbox">Checkbox</label></th>
+				<th align="right"><label for="favoriteFruit">favorite fruit</label></th>
 				<td>
-					<input id="checkbox" type="checkbox" />
+					<input id="favoriteFruit" type="checkbox" />
 				</td>
 			</tr>
 			<tr>
-				<th><label for="checkbox">Single Checkbox</label></th>
+				<th align="right"><label for="registered">registered</label></th>
 				<td>
-					<input id="singleCheckbox" type="checkbox" />
+					<input id="registered" type="text" class='{ "format": [["date", 8, "date"]], "validate" : [["required"]] }' />
 				</td>
 			</tr>
 			<tr>
-				<th><label for="etc">ETC</label></th>
-				<td><span id="etc" class='{ "format" : [["date", 12]] }'></span></td>
+				<th align="right"><label for="registered2">registered m</label></th>
+				<td>
+					<input id="registered2" type="text" class='{ "format": [["date", 6, "month"]], "validate" : [["required"]] }' />
+				</td>
 			</tr>
 			<tr>
-				<th><label for="etc2">ETC2</label></th>
-				<td><span id="etc2"></span></td>
+				<th align="right"><label for="about">about</label></th>
+				<td>
+					<textarea id="about" rows="5" cols="80" class='{ "format" : [["trimtoempty"], ["limit", "50", "..."]], "validate" : [["required"], ["korean"]] }'></textarea>
+				</td>
+			</tr>
+			<tr>
+				<th align="right"><label for="greeting">about</label></th>
+				<td id="greeting"></td>
+			</tr>
+			<tr>
+				<th align="right"><label for="isActive">isActive</label></th>
+				<td>
+					<input id="isActive" type="checkbox" />
+				</td>
 			</tr>
 		</table>
 	</div>
@@ -160,32 +213,45 @@
 N("div#form").service({
     init : function(view) {
     	this.initButton(view);
-
     	var data = eval(N("textarea.data").val());
-
     	this.createSelect(data);
-
-    	var form = N(data).form("table#inputBox");
-
-        N("a#btnFormBind", view).click(function(e) {
-            e.preventDefault();
-            form.bind();
-        });
-
-        N("a#btnFormValidate", view).click(function(e) {
-            e.preventDefault();
-            N("table#inputBox").alert("전체검증 결과 : " + form.validate()).show()
-        });
-
+    	this.setEvent(view, data)
     },
     createSelect : function(data) {
-    	$(data).select("select#select").bind();
-		$(data).select("select#selectMulty").bind();
-		$(data).select("input#radio").bind();
-		$(data).select("input#checkbox").bind();
+    	$(data[1].eyeColor).select("select#eyeColor").bind();
+		$(data[1].company).select("select#company").bind();
+		$(data[1].gender).select("input#gender").bind();
+		$(data[1].favoriteFruit).select("input#favoriteFruit").bind();
     },
     initButton : function(view) {
     	N("div.btnBox", view).button();
+    },
+    setEvent : function(view, data) {
+    	var form;
+    	N("a#btnInitForm", view).click(function(e) {
+    		form = N(data).form("table#inputBox");
+    		N("div.btnBox", view).find("a").instance("button", function(u) {
+            	this.enable();
+            });
+    	});
+    	
+        N("a#btnFormBind", view).click(function(e) {
+            e.preventDefault();
+            form.bind(0);
+        });
+
+        N("a#btnGetData", view).click(function(e) {
+            e.preventDefault();
+            N("table#inputBox").alert({
+            	width: 500,
+            	msg: '<div style="white-space: pre;word-break: break-word;">' + N.json.format(form.data()[0]) + '</div>'
+            }).show()
+        });
+        
+        N("a#btnFormValidate", view).click(function(e) {
+            e.preventDefault();
+            N("table#inputBox").alert('<b>전체검증 결과 : ' + form.validate() + '</b>').show()
+        });
     },
     /**
      * for tab onOpen exemple

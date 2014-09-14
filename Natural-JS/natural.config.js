@@ -323,11 +323,11 @@
 			/**
 			 * 기본 key 값
 			 */
-			"key" : "generic",
+			"key" : "key",
 			/**
 			 * 기본 value 값
 			 */
-			"val" : "numeric",
+			"val" : "val",
 			/**
 			 * select 요소에 option 을 덮어쓸건지 더할건지 지정
 			 */

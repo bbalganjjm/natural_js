@@ -364,7 +364,7 @@
 				if(args === undefined) {
 					return str;
 				}
-				str = N.string.trimToEmpty(str);
+				str = str.replace(/\s+|T|-|:|\./g, "");
 				
 				//use datepicker, monthpicker
 				if(N.datepicker !== undefined) {
