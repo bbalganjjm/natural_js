@@ -17,15 +17,15 @@ N("div#datepickerSample").service({
     	var monthpicker = $("input#month").datepicker({
     		monthonly : true,
 			onSelect : function(context, selDate) {
-				console.log(context);
-				console.log(selDate);
+				N.log(context);
+				N.log(selDate);
 			}
 		});
     	
 		var datepicker = $("input#date").datepicker({
 			onSelect : function(context, selDate) {
-				console.log(context);
-				console.log(selDate);
+				N.log(context);
+				N.log(selDate);
 			}
 		});
     }

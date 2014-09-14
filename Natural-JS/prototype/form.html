@@ -100,7 +100,8 @@
 	<div class="demoBox">
 		<div class="btnBox">
 			<a id="btnInitForm" href="#" class='{ "color": "skyblue", "size": "small" }'>Init Form</a>
-			<a id="btnFormBind" href="#" class='{ "color": "white", "size": "small", "disable": true }'>Form Bind</a>
+			<a id="btnFormBind" href="#" class='{ "color": "gray", "size": "small", "disable": true }'>Form Bind</a>
+			<a id="btnCreateNewData" href="#" class='{ "color": "gray", "size": "small", "disable": true }'>Create New Row Data</a>
 			<a id="btnGetData" href="#" class='{ "color": "white", "size": "small", "disable": true }'>Get Data</a>
 			<a id="btnFormValidate" href="#" class='{ "color": "white", "size": "small", "disable": true }'>Form Validate</a>
 		</div>
@@ -214,8 +215,7 @@ N("div#form").service({
     init : function(view) {
     	this.initButton(view);
     	var data = eval(N("textarea.data").val());
-    	this.createSelect(data);
-    	this.setEvent(view, data)
+    	this.setEvent(view, data, this)
     },
     createSelect : function(data) {
     	$(data[1].eyeColor).select("select#eyeColor").bind();
@@ -226,12 +226,20 @@ N("div#form").service({
     initButton : function(view) {
     	N("div.btnBox", view).button();
     },
-    setEvent : function(view, data) {
+    setEvent : function(view, data, this_) {
     	var form;
     	N("a#btnInitForm", view).click(function(e) {
+    		e.preventDefault();
+    		this_.createSelect(data);
+    		
     		form = N(data).form("table#inputBox");
-    		N("div.btnBox", view).find("a").instance("button", function(u) {
-            	this.enable();
+    		
+    		N("div.btnBox", view).find("a").instance("button", function() {
+    			if(this.context().is("a#btnInitForm")) {
+    				this.disable();    				
+    			} else {
+	            	this.enable();
+    			}
             });
     	});
     	
@@ -240,11 +248,16 @@ N("div#form").service({
             form.bind(0);
         });
 
+        N("a#btnCreateNewData", view).click(function(e) {
+            e.preventDefault();
+            form.add(0);
+        });
+        
         N("a#btnGetData", view).click(function(e) {
             e.preventDefault();
             N("table#inputBox").alert({
             	width: 500,
-            	msg: '<div style="white-space: pre;word-break: break-word;">' + N.json.format(form.data()[0]) + '</div>'
+            	msg: '<div style="white-space: pre;word-break: break-word;">' + N.json.format(form.data()[form.row()]) + '</div>'
             }).show()
         });
         

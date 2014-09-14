@@ -199,7 +199,11 @@ N("div#grid").service({
             	});
 
 				N("div#defBtnBox").find("a").instance("button", function(u) {
-                 	this.enable();
+					if(this.context().is("a#btnInitDefGrid")) {
+	    				this.disable();    				
+	    			} else {
+	                 	this.enable();
+	    			}
 				});
             }
         });
@@ -222,7 +226,11 @@ N("div#grid").service({
             	});
 
                 N("div#firstBtnBox").find("a").instance("button", function(u) {
-                	this.enable();
+                	if(this.context().is("a#btnInitGrid")) {
+	    				this.disable();    				
+	    			} else {
+	                 	this.enable();
+	    			}
                 });
             }
         });
@@ -280,7 +288,11 @@ N("div#grid").service({
             	});
 
 				N("div#secondBtnBox").find("a").instance("button", function(u) {
-                 	this.enable();
+					if(this.context().is("a#btnInitGrid2")) {
+	    				this.disable();    				
+	    			} else {
+	                 	this.enable();
+	    			}
 				});
             }
         });

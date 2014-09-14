@@ -100,6 +100,9 @@
 
 		Alert.fn = Alert.prototype;
 		$.extend(Alert.fn, {
+			"context" : function(sel) {
+				return sel !== undefined ? this.options.context.find(sel) : this.options.context;
+			},
 			"show" : function() {
 				var opts = this.options;
 				if (!opts.isInput) {
@@ -378,6 +381,9 @@
 
 		Button.fn = Button.prototype;
 		$.extend(Button.fn, {
+			context : function(sel) {
+				return sel !== undefined ? this.options.context.find(sel) : this.options.context;
+			},
 			disable : function() {
 				var context = this.options.context;
 				context.css("opacity", "0.6");
@@ -633,6 +639,9 @@
 				} else {
 					return opts.data;
 				}
+			},
+			row : function() {
+				return this.options.row;
 			},
 			context : function(sel) {
 				return sel !== undefined ? this.options.context.find(sel) : this.options.context;
@@ -1577,6 +1586,9 @@
 
 		Popup.fn = Popup.prototype;
 		$.extend(Popup.fn, {
+			context : function(sel) {
+				return sel !== undefined ? this.options.context.find(sel) : this.options.context;
+			},
 			open : function(onOpenData) {
 				var opts = this.options;
 				var this_ = this;
@@ -1757,6 +1769,9 @@
 		});
 
 		$.extend(Tab, {
+			context : function(sel) {
+				return sel !== undefined ? this.options.context.find(sel) : this.options.context;
+			},
 			wrapEle : function() {
 				var opts = this.options;
 				// hide div contents
@@ -1924,6 +1939,9 @@
 		});
 
 		$.extend(DatePicker, {
+			context : function() {
+				return this.options.context;
+			},
 			wrapEle : function() {
 				var opts = this.options;
 				var d = new Date();

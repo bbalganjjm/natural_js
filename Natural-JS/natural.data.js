@@ -140,7 +140,6 @@
 				if (inst !== null) {
 					for (var i = 0; i < obserable.length; i++) {
 						if (inst !== obserable[i] && inst.options.data === obserable[i].options.data) {
-							console.log(obserable[i].options.context[0]);
 							obserable[i].update(row, key);
 						}
 					}
@@ -238,8 +237,20 @@
 										if(ele.length === 0) {
 											ele = opts.context.find("#" + $(this).attr("id"));
 										}
-										$(this).val(this_.format()[row][$(this).attr("id")]);
+										
+										// TODO 임시처리, 더 생각해보기
+										var fmdVals = this_.format(); 
+										if(fmdVals.length === 1) {
+											row = 0;
+										}
+										
+										$(this).val(fmdVals[row][$(this).attr("id")]);
 									}).bind("unformat.formater", function() {
+										// TODO 임시처리, 더 생각해보기
+										if(opts.data.length === 1) {
+											row = 0;
+										}
+										
 										$(this).val(this_.unformat(row, $(this).attr("id")));
 									});
 								}

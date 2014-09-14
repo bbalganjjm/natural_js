@@ -587,7 +587,7 @@
 		        		if(N.type(vals) !== "function") {
 		        			return selEle.map(function() {
 			                    return $(this).val();
-				            });
+				            }).toArray();
 		        		} else {
 		        			var ele = this.find("> option");
 		        			return selEle.each(function() {
@@ -618,9 +618,10 @@
 		        	selEle = this.filter("[name='" + this.attr("name") + "']:checked");
 		        	if(this.length > 1) {
 		        		if(N.type(vals) !== "function") {
-		        			return selEle.length === 1 ? $(selEle).val() : selEle.map(function() {
+		        			var chkedVals = selEle.map(function() {
 			                    return $(this).val();
-				            });
+				            }).toArray();
+		        			return selEle.length === 1 ? $(selEle).val() : chkedVals.length === 0 ? null : chkedVals;
 		        		} else {
 		        			var ele = this.filter("[name='" + this.attr("name") + "']");
 		        			return selEle.each(function() {
