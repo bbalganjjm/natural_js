@@ -1,5 +1,5 @@
 (function(window, $) {
-	var version = "0.6.0.0", NTR;
+	var version = "0.7.0.0", NTR;
 
 	// Define a local copy of jQuery
 	NTR = function(selector, context) {
