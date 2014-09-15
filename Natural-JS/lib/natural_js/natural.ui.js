@@ -2048,9 +2048,9 @@
 		            var resizeBarWidth = 6;
 
 		            if(N.browser.is("ie") || N.browser.is("firefox")) {
-		            	 innerHeight = String(cellEle.innerHeight());
+		            	innerHeight = String(cellEle.innerHeight());
 		            } else {
-		            	 innerHeight = String(cellEle.innerHeight() + 1);
+		            	innerHeight = String(cellEle.innerHeight() + 1);
 		            }
 		            resizeBar.css({
 		            	"padding": "0px",

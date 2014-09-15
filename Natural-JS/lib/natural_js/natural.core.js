@@ -410,6 +410,10 @@
 			msieVersion : function() {
 				var ua = window.navigator.userAgent;
 				var msie = ua.indexOf("MSIE ");
+				// for IE11
+				if(msie < 0) {
+					msie = ua.indexOf(".NET ");
+				}
 				var trident = ua.match(/Trident\/(\d.\d)/i);
 				if (msie < 0) {
 					return 0;
