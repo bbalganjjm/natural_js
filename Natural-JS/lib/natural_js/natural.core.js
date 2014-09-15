@@ -421,6 +421,9 @@
 					}
 				}
 			},
+			"is" : function(name) {
+				return window.navigator.userAgent.indexOf(name) > -1 ? true : false;
+			},
 			documentHeight : function() {
 				return Math.max(Math.max(document.body.scrollHeight, document.documentElement.scrollHeight), Math.max(document.body.offsetHeight,
 						document.documentElement.offsetHeight), Math.max(document.body.clientHeight, document.documentElement.clientHeight));

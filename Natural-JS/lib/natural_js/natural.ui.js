@@ -72,7 +72,7 @@
 				this.options.container = N.context.attr("architecture").page.context;
 				this.options = $.extend({}, this.options, N.context.attr("ui")["alert"]);
 				this.options.container = N(this.options.container);
-			} catch (e) { 
+			} catch (e) {
 				N.error(e, e);
 			}
 
@@ -108,7 +108,7 @@
 				if (!opts.isInput) {
 					Alert.resetOffSetEle(opts);
 					opts.time = setInterval(function() {
-						Alert.resetOffSetEle(opts);							
+						Alert.resetOffSetEle(opts);
 					}, 100);
 					opts.msgContents.show();
 				} else {
@@ -130,7 +130,7 @@
 						});
 					}
 				}
-				
+
 				// bind "ESC" key event
 				// if press the "ESC" key, then remove alert dialog
 				var this_ = this;
@@ -139,7 +139,7 @@
 		        		this_[opts.closeMode]();
 		        	}
 				});
-		        
+
 				return this;
 			},
 			"hide" : function() {
@@ -151,7 +151,7 @@
 				} else {
 					opts.msgContext.remove();
 				}
-				
+
 				$(document).unbind("keyup.alert");
 				return this;
 			},
@@ -164,7 +164,7 @@
 				} else {
 					opts.msgContext.remove();
 				}
-				
+
 				$(document).unbind("keyup.alert");
 				return this;
 			}
@@ -182,14 +182,14 @@
 					"padding" : 0,
 					"border-radius" : opts.context.css("border-radius") != "0px" ? opts.context.css("border-radius") : "0px"
 				};
-				
+
 				var maxZindex = 0;
 				if(opts.alwaysOnTop) {
 					// get max index among page elements
 					maxZindex = N.element.maxZindex(opts.container.find("div, span, ul, p"));
 					blockOverlayCss["z-index"] = String(maxZindex + 1);
 				}
-				
+
 				if (opts.overlayColor !== null) {
 					blockOverlayCss["background-color"] = opts.overlayColor;
 				}
@@ -210,7 +210,7 @@
 				if(opts.alwaysOnTop) {
 					blockOverlayMsgCss["z-index"] = String(maxZindex + 2);
 				}
-				
+
 				// set title
 				var titleBox = '';
 				if(opts.title !== undefined) {
@@ -289,7 +289,7 @@
 					opts.msgContents.css({
 						"top" : ((opts.msgContext.height() / 2 + opts.context.offset().top) - opts.msgContents.height() / 2) + "px",
 						"left" : ((opts.msgContext.width() / 2 + opts.context.offset().left) - parseInt(opts.msgContents.width() / 2)) + "px"
-					}).show();					
+					}).show();
 				} else {
 					// for non-active tab
 					opts.msgContext.hide();
@@ -315,7 +315,7 @@
 				if(opts.alwaysOnTop) {
 					opts.msgContext.css("z-index", N.element.maxZindex(opts.container.find("div, span, ul, p")) + 1);
 				}
-				
+
 				if (N.isEmptyObject(opts.msg)) {
 					this.remove();
 				}
@@ -364,7 +364,7 @@
 
 			try {
 				this.options = $.extend({}, this.options, N.context.attr("ui")["button"]);
-			} catch (e) { 
+			} catch (e) {
 				N.error(e, e);
 			}
 			$.extend(this.options, N.element.toOpts(this.options.context));
@@ -482,7 +482,7 @@
 
 			try {
 				this.options = $.extend({}, this.options, N.context.attr("ui")["select"]);
-			} catch (e) { 
+			} catch (e) {
 				N.error(e, e);
 			}
 			$.extend(this.options, N.element.toOpts(this.options.context));
@@ -602,7 +602,7 @@
 
 			try {
 				this.options = $.extend({}, this.options, N.context.attr("ui")["form"]);
-			} catch (e) { 
+			} catch (e) {
 				N.error(e, e);
 			}
 
@@ -625,7 +625,7 @@
 			this.options.context.instance("form", this);
 
 			if(this.options.extObj === null) {
-				N.ds.instance(this, true);				
+				N.ds.instance(this, true);
 			}
 
 			return this;
@@ -913,7 +913,7 @@
                             }
                             ele.addClass("data_changed__");
                             if(notify === undefined || (notify !== undefined && notify === true)) {
-                            	N.ds.instance(opts.extObj !== null ? opts.extObj : this_).notify(opts.extRow > -1 ? opts.extRow : opts.row, ele.attr("id"));                            	
+                            	N.ds.instance(opts.extObj !== null ? opts.extObj : this_).notify(opts.extRow > -1 ? opts.extRow : opts.row, ele.attr("id"));
                             }
 							ele.attr("src", currVal);
 						} else {
@@ -998,9 +998,9 @@
 			try {
 				this.options = $.extend({}, this.options, N.context.attr("ui")["grid"]);
 
-				//because $.extend method is not extend object type value
+				//because $.extend method is don't extend object type
 				this.options.scrollPaging = $.extend({}, this.options.scrollPaging, N.context.attr("ui")["grid"]["scrollPaging"]);
-			} catch (e) { 
+			} catch (e) {
 				N.error(e, e);
 			}
 
@@ -1380,12 +1380,16 @@
 				var initHeight;
 				var innerHeight;
 				var scrollbarWidth = N.browser.scrollbarWidth();
+				if(N.browser.is("Safari")){
+					theadCells.css("padding-left", "0");
+					theadCells.css("padding-right", "0");
+				}
 				theadCells.each(function() {
 					cellEle = $(this);
 		            resizeBar = cellEle.append('<span class="resize_bar__"></span>').find("span.resize_bar__");
 		            var resizeBarWidth = 6;
 
-		            if(N.browser.msieVersion() > 0) {
+		            if(N.browser.msieVersion() > 0 || N.browser.is("Mozilla")) {
 		            	 innerHeight = String(cellEle.innerHeight());
 		            } else {
 		            	 innerHeight = String(cellEle.innerHeight() + 1);
@@ -1396,7 +1400,8 @@
 		            	"height" : innerHeight + "px",
 		            	"float" : "right",
 		            	"width" : resizeBarWidth + "px",
-		            	"cursor": "e-resize"
+		            	"cursor": "e-resize",
+		            	"background-color" : "#000000"
 		            });
 
 		            resizeBar.bind("mousedown.grid.resize", function(e) {
@@ -1540,7 +1545,7 @@
 
 			try {
 				this.options = $.extend({}, this.options, N.context.attr("ui")["popup"]);
-			} catch (e) { 
+			} catch (e) {
 				N.error(e, e);
 			}
 
@@ -1736,7 +1741,7 @@
 
 			try {
 				this.options = $.extend({}, this.options, N.context.attr("ui")["tab"]);
-			} catch (e) { 
+			} catch (e) {
 				N.error(e, e);
 			}
 
@@ -1914,7 +1919,7 @@
 
 			try {
 				this.options = $.extend({}, this.options, N.context.attr("ui")["datepicker"]);
-			} catch (e) { 
+			} catch (e) {
 				N.error(e, e);
 			}
 
@@ -1927,7 +1932,7 @@
 				this.options.context.css("cursor", "pointer");
 				this.options.context.prop("readonly", true);
 			}
-			
+
 			DatePicker.wrapEle.call(this);
 
 			this.options.context.instance("datepicker", this);
@@ -1946,18 +1951,18 @@
 				var opts = this.options;
 				var d = new Date();
 				var currYear = parseInt(d.formatDate("Y"));
-				
+
 				opts.contents = $('<div class="datepicker_contents__"></div>');
 				opts.contents.css({
 					display: "none",
 					position: "absolute"
 				});
-				
+
 				$(window).bind("resize.datepicker", function() {
 					opts.contents.css("left", opts.context.offset().left + "px");
 				});
 				$(window).trigger("resize.datepicker");
-				
+
 				// create year items
 				var yearsPanel = $('<div class="datepicker_years_panel__"></div>');
 				yearsPanel.css({
@@ -1983,7 +1988,7 @@
 					}
 					yearsPanel.append(yearItemClone.text(String(i)));
 				}
-				
+
 				var yearPaging = $('<div class="datepicker_year_paging__" align="center"><a href="#" class="datepicker_year_prev__" title="이전">◀</a> <a href="#" class="datepicker_year_next__" title="다음">▶</a></div>');
 				yearPaging.css({
 					"line-height": "25px"
@@ -2035,7 +2040,7 @@
 						for(var i=0;i<days.length;i++) {
 							daysPanel.append(dayItem.clone(true).addClass("datepicker_day__").text(days[i]));
 						}
-						
+
 						var prevEndDateCls = N.date.strToDate(yearsPanel.find("div.datepicker_year_selected__").text() +  N.string.lpad(String(parseInt($(this).text())-1), 2, "0"));
 						var prevEndDate = prevEndDateCls.obj.getDate();
 						var date;
@@ -2058,7 +2063,7 @@
 					}
 				});
 				monthsPanel.append(monthItem.clone(true).css("width", "58px").addClass("datepicker_month_title__").text(N.message.get(opts.message, "month")));
-				
+
 				// render month items
 				for(var i=1;i<=12;i++) {
 					monthsPanel.append(monthItem.clone(true).addClass("datepicker_month_item__").text(String(i)));
@@ -2090,37 +2095,37 @@
 						} else if(thisEle.hasClass("datepicker_next_day_item__")) {
 							selMonth = String(parseInt(monthsPanel.find("div.datepicker_month_selected__").text()) + 1);
 						} else {
-							selMonth = monthsPanel.find("div.datepicker_month_selected__").text();							
+							selMonth = monthsPanel.find("div.datepicker_month_selected__").text();
 						}
-						var selDate = N.date.strToDate(yearsPanel.find("div.datepicker_year_selected__").text() 
-								+ N.string.lpad(selMonth, 2, "0") 
+						var selDate = N.date.strToDate(yearsPanel.find("div.datepicker_year_selected__").text()
+								+ N.string.lpad(selMonth, 2, "0")
 								+  N.string.lpad(thisEle.text(), 2, "0"));
 						var onSelectContinue;
 						if(opts.onSelect !== null) {
 							onSelectContinue = opts.onSelect(opts.context, selDate);
 						}
 						if(onSelectContinue === undefined || onSelectContinue === true) {
-							opts.context.val(selDate.obj.formatDate(selDate.format));							
+							opts.context.val(selDate.obj.formatDate(selDate.format));
 						}
 						opts.contents.fadeOut(150);
 						$(document).unbind("keyup.datepicker");
 					});
 					opts.contents.append(daysPanel);
-					
+
 					// click current month
 					monthsPanel.find("div:contains(" + String(parseInt(d.formatDate("m"))) + ")").click();
 				}
-				
+
 				// clear float
 				opts.contents.append('<div style="clear: both;"></div>');
-				
+
 				// append datepicker panel after context
 				opts.context.after(opts.contents);
-				
+
 				// show datepicker
 				opts.context.bind("focusin.datepicker", function() {
 					opts.contents.fadeIn(150);
-					
+
 					// bind "ESC" key event
 					// if press the "ESC" key, then hide datepicker
 			        $(document).bind("keyup.datepicker", function(e) {
