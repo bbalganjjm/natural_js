@@ -211,6 +211,19 @@ table.grid__ tbody{
 	background-color: #ffffff;
 }
 
+table.grid__.grid_hover__ tbody:hover, table.grid__.grid_hover__ tbody:hover input, select, textarea {
+	background-color: #efefef;
+}
+
+table.grid__.grid_select__ tbody {
+	cursor: pointer;
+}
+
+table.grid__.grid_select__ tbody.grid_selected__ {
+	background-color: #999999;
+	color: #ffffff;
+}
+
 div.tbody_wrap__ table.grid__ td {
 	white-space: nowrap;
 	overflow: hidden;

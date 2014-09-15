@@ -42,6 +42,21 @@ var IndexServiceController = {
 		   N(N.context.attr("architecture")["page"]["context"]).controller("prototype/button.html").submit();
 	    });
 
+	    N("a#btnDate").click(function(e) {
+		   e.preventDefault();
+		   N(N.context.attr("architecture")["page"]["context"]).controller("prototype/datepicker.html").submit();
+	    });
+
+	    N("a#btnPopup").click(function(e) {
+		   e.preventDefault();
+		   N(N.context.attr("architecture")["page"]["context"]).controller("prototype/popup.html").submit();
+	    });
+
+	    N("a#btnTab").click(function(e) {
+		   e.preventDefault();
+		   N(N.context.attr("architecture")["page"]["context"]).controller("prototype/tab.html").submit();
+	    });
+
 	    N("a#btnSelect").click(function(e) {
 		   e.preventDefault();
 		   N(N.context.attr("architecture")["page"]["context"]).controller("prototype/select.html").submit();
@@ -57,19 +72,9 @@ var IndexServiceController = {
 		   N(N.context.attr("architecture")["page"]["context"]).controller("prototype/grid.html").submit();
 	    });
 
-	    N("a#btnPopup").click(function(e) {
+	    N("a#btnGridFormPopup").click(function(e) {
 		   e.preventDefault();
-		   N(N.context.attr("architecture")["page"]["context"]).controller("prototype/popup.html").submit();
-	    });
-
-	    N("a#btnTab").click(function(e) {
-		   e.preventDefault();
-		   N(N.context.attr("architecture")["page"]["context"]).controller("prototype/tab.html").submit();
-	    });
-	    
-	    N("a#btnDate").click(function(e) {
-		   e.preventDefault();
-		   N(N.context.attr("architecture")["page"]["context"]).controller("prototype/datepicker.html").submit();
+		   N(N.context.attr("architecture")["page"]["context"]).controller("prototype/grid_form_popup.html").submit();
 	    });
     }
 }
@@ -98,12 +103,13 @@ $(document).ready(function() {
 				Natural-UI
 				<li><a id="btnAlert" href="#">Alert</a></li>
 		    	<li><a id="btnButton" href="#">Button</a></li>
+		    	<li><a id="btnDate" href="#">DatePicker</a></li>
+		    	<li><a id="btnPopup" href="#">Popup</a></li>
+		    	<li><a id="btnTab" href="#">Tab</a></li>
 		    	<li><a id="btnSelect" href="#">Select</a></li>
 		    	<li><a id="btnForm" href="#">Form</a></li>
 		    	<li><a id="btnGrid" href="#">Grid</a></li>
-		    	<li><a id="btnPopup" href="#">Popup</a></li>
-		    	<li><a id="btnTab" href="#">Tab</a></li>
-		    	<li><a id="btnDate" href="#">DatePicker</a></li>
+		    	<li><a id="btnGridFormPopup" href="#">Grid+Form+Popup</a></li>
 		    </ul>
 	</div>
 </div>

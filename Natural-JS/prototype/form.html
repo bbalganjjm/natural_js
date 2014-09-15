@@ -105,7 +105,7 @@
 			<a id="btnGetData" href="#" class='{ "color": "white", "size": "small", "disable": true }'>Get Data</a>
 			<a id="btnFormValidate" href="#" class='{ "color": "white", "size": "small", "disable": true }'>Form Validate</a>
 		</div>
-		<table id="inputBox" class='form'>
+		<table id="form" class='form'>
 			<tr>
 				<th width="85" align="right"><label for="picture">picture</label></th>
 				<td width="*"><img id="picture" /></td>
@@ -231,18 +231,18 @@ N("div#form").service({
     	N("a#btnInitForm", view).click(function(e) {
     		e.preventDefault();
     		this_.createSelect(data);
-    		
-    		form = N(data).form("table#inputBox");
-    		
+
+    		form = N(data).form("table#form");
+
     		N("div.btnBox", view).find("a").instance("button", function() {
     			if(this.context().is("a#btnInitForm")) {
-    				this.disable();    				
+    				this.disable();
     			} else {
 	            	this.enable();
     			}
             });
     	});
-    	
+
         N("a#btnFormBind", view).click(function(e) {
             e.preventDefault();
             form.bind(0);
@@ -252,18 +252,18 @@ N("div#form").service({
             e.preventDefault();
             form.add(0);
         });
-        
+
         N("a#btnGetData", view).click(function(e) {
             e.preventDefault();
-            N("table#inputBox").alert({
+            N("table#form").alert({
             	width: 500,
             	msg: '<div style="white-space: pre;word-break: break-word;">' + N.json.format(form.data()[form.row()]) + '</div>'
             }).show()
         });
-        
+
         N("a#btnFormValidate", view).click(function(e) {
             e.preventDefault();
-            N("table#inputBox").alert('<b>전체검증 결과 : ' + form.validate() + '</b>').show()
+            N("table#form").alert('<b>전체검증 결과 : ' + form.validate() + '</b>').show()
         });
     },
     /**

@@ -422,7 +422,18 @@
 				}
 			},
 			"is" : function(name) {
-				return window.navigator.userAgent.indexOf(name) > -1 ? true : false;
+				if(!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0) {
+					return name === "opera" ? true : false;
+				} else if(typeof InstallTrigger !== 'undefined') {
+					return name === "firefox" ? true : false;
+				} else if(Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0) {
+					return name === "safari" ? true : false;
+				} else if(!!window.chrome && !(!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0)) {
+					return name === "chrome" ? true : false;
+				} else if(N.browser.msieVersion() > 0) {
+					return name === "ie" ? true : false;
+				}
+				return false;
 			},
 			documentHeight : function() {
 				return Math.max(Math.max(document.body.scrollHeight, document.documentElement.scrollHeight), Math.max(document.body.offsetHeight,

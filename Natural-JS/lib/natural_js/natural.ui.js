@@ -467,1060 +467,247 @@
 			}
 		});
 
-		// Select
-		var Select = N.select = function(obj, opts) {
+		// DatePicker
+		var DatePicker = N.datepicker = function(obj, opts) {
 			this.options = {
-				data : obj,
-				context : null,
-				key : null,
-				val : null,
-				append : true,
-				direction : "h", //h(orizontal), v(ertical)
-				type : 0, // 1: select, 2: select[multiple='multiple'], 3: radio, 4: checkbox
-				template : null
+				context : obj,
+				contents : $('<div class="datepicker__"></div>'),
+				monthonly : false,
+				mouseonly : true, //TODO 키보드로 입력할수 있도록 기능 개선
+				onSelect : null
 			};
 
 			try {
-				this.options = $.extend({}, this.options, N.context.attr("ui")["select"]);
+				this.options = $.extend({}, this.options, N.context.attr("ui")["datepicker"]);
 			} catch (e) {
 				N.error(e, e);
 			}
-			$.extend(this.options, N.element.toOpts(this.options.context));
 
-			if (N.isPlainObject(opts)) {
+			if(opts !== undefined) {
 				$.extend(this.options, opts);
-				this.options.context = N(opts.context);
-			} else {
-				this.options.context = N(opts);
 			}
-			this.options.template = this.options.context;
 
-			Select.wrapEle.call(this);
+			this.options.context.addClass("datepicker__");
+			if(this.options.mouseonly) {
+				this.options.context.css("cursor", "pointer");
+				this.options.context.prop("readonly", true);
+			}
 
-			this.options.context.instance("select", this);
+			DatePicker.wrapEle.call(this);
 
-			return this;
+			this.options.context.instance("datepicker", this);
 		};
 
-		Select.fn = Select.prototype;
-		$.extend(Select.fn, {
-			data : function(selFlag) {
-				var opts = this.options;
-				if(selFlag !== undefined && selFlag === true) {
-					var rtnData = [];
-					$(opts.context).vals(function(i) {
-						rtnData.push(opts.data[i]);
-					});
-					return rtnData.length === 1 ? rtnData[0] : rtnData;
-				} else {
-					return opts.data;
-				}
-			},
-			context : function(sel) {
-				return sel !== undefined ? this.options.context.find(sel) : this.options.context;
-			},
-		    bind : function() {
-		    	opts = this.options;
-		    	if(opts.type === 1 || opts.type === 2) {
-		    		var defaultSelectEle = opts.template.find("option.select_default__").clone(true);
-	    			opts.context.addClass("select_template__").empty();
-					if(opts.append) {
-	    				opts.context.append(defaultSelectEle);
-	    			}
-					opts.data.each(function(i, data) {
-						opts.context.append("<option value='" + data[opts.val] + "'>" + data[opts.key] + "</option>");
-					});
-		    	} else if(opts.type === 3 || opts.type === 4) {
-		    		if(opts.context.filter(".select_template__").length == 0) {
-		    			var id = opts.context.attr("id");
-			    		opts.data.each(function(i, data) {
-			    			if(i === 0) {
-			    				opts.context.attr("name", id).attr("id", id + "_" + String(i)).attr("value", data[opts.val])
-			    					.addClass("select_input__ select_template__");
-			    			} else {
-			    				opts.context.push($(opts.template.filter("input:eq(0)")).clone(true).attr("name", id).attr("id", id + "_" + String(i)).attr("value", data[opts.val]).removeClass("select_template__").get(0));
-			    			}
-			    			opts.context.push($('<label class="select_input_label__" for="' + id + "_" + String(i) + '">' + data[opts.key] + '</label>').get(0));
-			    			if (opts.direction === "v" && opts.data.length - 1 != i) {
-			    				opts.context.push($('<br class="select_input_br__" />').get(0));
-			    			}
-			    		});
-			    		$(opts.template.filter("input:eq(0)")).after(opts.context);
-		    		}
-		    	}
-		    	return this;
-		    },
-		    val : function(val) {
-		    	return $(this.options.context).vals(val);
-		    },
-		    reset : function(selFlag) {
-		    	opts = this.options;
-		    	if(opts.type === 1 || opts.type === 2) {
-		    		if(selFlag !== undefined && selFlag === true) {
-		    			opts.context.get(0).selectedIndex = 0;
-		    		} else {
-		    			opts.context.val(opts.context.prop("defaultSelected"));
-		    		}
-		    	} else if(opts.type === 3 || opts.type === 4) {
-		    		opts.context.prop("checked", false)
-		    	}
-		    	return this;
-		    }
+		DatePicker.fn = DatePicker.prototype;
+		$.extend(DatePicker.fn, {
+
 		});
 
-		$.extend(Select, {
+		$.extend(DatePicker, {
+			context : function() {
+				return this.options.context;
+			},
 			wrapEle : function() {
 				var opts = this.options;
-				if (opts.context.is("select") && opts.context.attr("multiple") != "multiple") {
-					this.options.context.find("option").addClass("select_default__");
-					opts.type = 1;
-	            } else if (opts.context.is("select") && opts.context.attr("multiple") == "multiple") {
-	            	this.options.context.find("option").addClass("select_default__");
-	            	opts.type = 2;
-	            } else if (opts.context.is("input:radio")) {
-	            	opts.type = 3;
-	            } else if (opts.context.is("input:checkbox")) {
-	            	opts.type = 4;
-	            }
-			}
-		});
+				var d = new Date();
+				var currYear = parseInt(d.formatDate("Y"));
 
-		// Form
-		var Form = N.form = function(obj, opts) {
-			this.options = {
-				data : N.type(obj) === "array" ? N(obj) : obj,
-				row : -1,
-				context : null,
-				html : false,
-				addTop : false,
-				validate : true,
-				fRules : null, //TODO test
-				vRules : null, //TODO test
-				extObj : null, // for N.grid,
-				extRow : -1  // for N.grid
-			};
+				opts.contents = $('<div class="datepicker_contents__"></div>');
+				opts.contents.css({
+					display: "none",
+					position: "absolute"
+				});
 
-			try {
-				this.options = $.extend({}, this.options, N.context.attr("ui")["form"]);
-			} catch (e) {
-				N.error(e, e);
-			}
+				$(window).bind("resize.datepicker", function() {
+					opts.contents.css("left", opts.context.offset().left + "px");
+				});
+				$(window).trigger("resize.datepicker");
 
-			if (N.isPlainObject(opts)) {
-				$.extend(this.options, opts);
-				if(N.type(this.options.context) === "string") {
-					this.options.context = N(this.options.context);
+				// create year items
+				var yearsPanel = $('<div class="datepicker_years_panel__"></div>');
+				yearsPanel.css({
+					width: "40px",
+					float: "left"
+				});
+				var yearItem = $('<div align="center"></div>');
+				yearItem.css({
+					"line-height": "25px"
+				}).click(function(e) {
+					e.preventDefault();
+					yearsPanel.find("div.datepicker_year_item__").removeClass("datepicker_year_selected__");
+					$(this).addClass("datepicker_year_selected__");
+				});
+				var yearItemClone;
+				yearsPanel.append(yearItem.clone(true).addClass("datepicker_year_title__").text(N.message.get(opts.message, "year")));
+				// render year items
+				for(var i=currYear-2;i<=currYear+2;i++) {
+					yearItemClone = yearItem.clone(true).addClass("datepicker_year_item__");
+					if(i === currYear) {
+						yearItemClone.addClass("datepicker_curr_year__");
+						yearItemClone.addClass("datepicker_year_selected__");
+					}
+					yearsPanel.append(yearItemClone.text(String(i)));
 				}
-				if(opts.row === undefined) {
-					this.options.row = 0;
-				}
-			} else {
-				this.options.row = 0;
-				this.options.context = N(opts);
-			}
-			this.options.context.addClass("form__");
 
-			this.revertData = $.extend({}, this.options.data[this.options.row]);
+				var yearPaging = $('<div class="datepicker_year_paging__" align="center"><a href="#" class="datepicker_year_prev__" title="이전">◀</a> <a href="#" class="datepicker_year_next__" title="다음">▶</a></div>');
+				yearPaging.css({
+					"line-height": "25px"
+				});
+				yearPaging.find("a.datepicker_year_prev__").click(function(e) {
+					e.preventDefault();
+					DatePicker.yearPaging(yearsPanel.find("div.datepicker_year_item__"), currYear, -5);
+				});
+				yearPaging.find("a.datepicker_year_next__").click(function(e) {
+					e.preventDefault();
+					DatePicker.yearPaging(yearsPanel.find("div.datepicker_year_item__"), currYear, 5);
+				});
+				yearsPanel.append(yearPaging);
+				opts.contents.append(yearsPanel);
 
-			this.options.context.instance("form", this);
-
-			if(this.options.extObj === null) {
-				N.ds.instance(this, true);
-			}
-
-			return this;
-		};
-		Form.fn = Form.prototype;
-		$.extend(Form.fn, {
-			data : function(selFlag) {
-				var opts = this.options;
-				if(selFlag !== undefined && selFlag === true) {
-					return opts.data[opts.row];
-				} else {
-					return opts.data;
-				}
-			},
-			row : function() {
-				return this.options.row;
-			},
-			context : function(sel) {
-				return sel !== undefined ? this.options.context.find(sel) : this.options.context;
-			},
-			bind : function(row) {
-				var opts = this.options;
-				if(row !== undefined) {
-					opts.row = row;
-				}
-				var this_ = this;
-				var vals;
-				if (!N.isEmptyObject(opts.data) && !N.isEmptyObject(vals = opts.data[opts.row])) {
-					var eles, ele, val, tagName, type;
-					for ( var key in vals ) {
-						eles = $("#" + key, opts.context);
-						type = N.string.trimToEmpty(eles.attr("type")).toLowerCase();
-						if (eles.length > 0 && type !== "radio" && type !== "checkbox") {
-							eles.each(function() {
-								ele = $(this);
-								ele.removeClass("data_changed__");
-								tagName = this.tagName.toLowerCase();
-								type = N.string.trimToEmpty(ele.attr("type")).toLowerCase();
-								if (tagName === "textarea" || type === "text" || type === "password" || type === "hidden" || type === "file") {
-									//validate
-									if(ele.attr("class") !== undefined && ele.attr("class").indexOf("\"validate\"") > -1) {
-										if (type !== "hidden") {
-											N().validator(opts.fRules !== null ? opts.fRules : ele);
-
-											ele.unbind("focusout.form.validate");
-											ele.bind("focusout.form.validate", function() {
-												var currEle = $(this);
-					                            if (!currEle.prop("disabled") && !currEle.prop("readonly")) {
-					                                currEle.trigger("validate");
-					                            }
-					                        });
-										}
-									}
-
-									//dataSync
-									ele.unbind("focusout.form.dataSync");
-									ele.bind("focusout.form.dataSync", function() {
-										var currEle = $(this);
-										var currVal = currEle.val();
-										if (String(vals[currEle.attr("id")]) !== currVal) {
-											if (!currEle.prop("disabled") && !currEle.prop("readonly") && !currEle.hasClass("validate_false__")) {
-												vals[currEle.attr("id")] = currVal;
-	                                            if (vals["rowStatus"] != "insert") {
-	                                                vals["rowStatus"] = "update";
-	                                            }
-	                                            currEle.addClass("data_changed__");
-	                                            N.ds.instance(opts.extObj !== null ? opts.extObj : this_).notify(opts.extRow > -1 ? opts.extRow : opts.row, currEle.attr("id"));
-											}
-                                        }
-									});
-									//Enter key event
-									ele.unbind("keyup.form.dataSync");
-			                        ele.bind("keyup.form.dataSync", function(e) {
-			                            if (e.which == 13) {
-			                            	e.preventDefault();
-			                            	$(this).trigger("focusout.form.validate");
-			                            	$(this).trigger("focusout.form.dataSync");
-			                            }
-			                        });
-
-				                    //format
-			                        if(ele.attr("class") !== undefined && ele.attr("class").indexOf("\"format\"") > -1) {
-										if (type !== "password" && type !== "hidden" && type !== "file") {
-											N(opts.data).formater(opts.fRules !== null ? opts.fRules : ele).format(opts.row);
-
-											ele.unbind("focusin.form.unformat");
-											ele.bind("focusin.form.unformat", function() {
-												var currEle = $(this);
-					                            if (!currEle.prop("disabled") && !currEle.prop("readonly") && !currEle.hasClass("validate_false__")) {
-					                                currEle.trigger("unformat");
-					                            }
-					                        });
-
-											ele.unbind("focusout.form.format");
-											ele.bind("focusout.form.format", function() {
-												var currEle = $(this);
-					                            if (!currEle.prop("disabled") && !currEle.prop("readonly") && !currEle.hasClass("validate_false__")) {
-					                                currEle.trigger("format");
-					                            }
-					                        });
-										}
-									} else {
-										ele.val(N.string.nullToEmpty(String(vals[key])));
-									}
-								} else if(tagName === "select") {
-									//validate
-									if(ele.attr("class") !== undefined
-											&& ele.attr("class").indexOf("\"validate\"") > -1) {
-										if (opts.validate) {
-											N().validator(opts.fRules !== null ? opts.fRules : ele);
-										}
-									}
-
-									//dataSync
-									ele.unbind("change.form.dataSync");
-									ele.bind("change.form.dataSync", function() {
-										var currEle = $(this);
-										var currVals = currEle.vals();
-										if (vals[currEle.attr("id")] !== currVals) {
-											if (!currEle.prop("disabled") && !currEle.prop("readonly") && !currEle.hasClass("validate_false__")) {
-												vals[currEle.attr("id")] = currVals;
-	                                            if (vals["rowStatus"] != "insert") {
-	                                                vals["rowStatus"] = "update";
-	                                            }
-	                                            currEle.addClass("data_changed__");
-	                                            N.ds.instance(opts.extObj !== null ? opts.extObj : this_).notify(opts.extRow > -1 ? opts.extRow : opts.row, currEle.attr("id"));
-											}
-                                        }
-									});
-
-									//Data bind
-									ele.vals(vals[key]);
-								} else if(tagName === "img") {
-									ele.attr("src", N.string.nullToEmpty(String(vals[key])));
-								} else {
-									if(ele.attr("class") !== undefined && ele.attr("class").indexOf("\"format\"") > -1) {
-										N(opts.data).formater(opts.fRules !== null ? opts.fRules : ele).format(opts.row);
-									} else {
-										val = N.string.nullToEmpty(String(vals[key]));
-										if(!opts.html) {
-											ele.text(val);
-										} else {
-											ele.html(val);
-										}
-									}
-								}
-							});
-						} else {
-							//radio, checkbox
-							eles = $(opts.context).find("input:radio[id^='" + key + "'], input:checkbox[id^='" + key + "']");
-							eles.removeClass("data_changed__");
-							if(eles.length > 0) {
-								eles.vals(vals[key]);
-
-								//dataSync
-								eles.unbind("click.form.dataSync select.form.dataSync");
-								eles.bind("click.form.dataSync select.form.dataSync", function() {
-									var currEle = $(this);
-									var currKey = currEle.attr("name");
-									if(currKey === undefined) {
-										currKey = currEle.attr("id");
-									}
-									var currEles = currEle.siblings("input:" + currEle.attr("type") + "[id^='" + currEle.attr("name") + "']");
-									currEles.push(this);
-									var currVals = currEles.vals();
-									if (vals[currKey] !== currVals) {
-										if (!currEle.prop("disabled") && !currEle.prop("readonly")) {
-											vals[currKey] = currVals;
-	                                        if (vals["rowStatus"] != "insert") {
-	                                            vals["rowStatus"] = "update";
-	                                        }
-	                                        currEles.addClass("data_changed__");
-	                                        N.ds.instance(opts.extObj !== null ? opts.extObj : this_).notify(opts.extRow > -1 ? opts.extRow : opts.row, currKey);
-										}
-	                                }
-								});
-							}
+				// create month items
+				var monthsPanel = $('<div class="datepicker_months_panel__"></div>');
+				monthsPanel.css({
+					width: "60px",
+					float: "left",
+					"margin-left": "3px"
+				});
+				var monthItem = $('<div align="center"></div>');
+				monthItem.css({
+					"line-height": "25px",
+					width: "28px",
+					float: "left"
+				}).click(function(e) {
+					e.preventDefault();
+					monthsPanel.find("div.datepicker_month_item__").removeClass("datepicker_month_selected__");
+					$(this).addClass("datepicker_month_selected__");
+					if(opts.monthonly) {
+						var selDate = N.date.strToDate(yearsPanel.find("div.datepicker_year_selected__").text() +  N.string.lpad($(this).text(), 2, "0"));
+						var onSelectContinue;
+						if(opts.onSelect !== null) {
+							onSelectContinue = opts.onSelect(opts.context, selDate);
 						}
-					}
-					eles = val = undefined;
-				}
-
-				return this;
-			},
-			add : function() {
-				var opts = this.options;
-		        if (opts.data === null) {
-		            throw new Error("[Form.add]data is null. you must input data");
-		        }
-
-		        // set default values
-		        var vals = N.element.toData(opts.context.find(":input"));
-		        if (vals == null) {
-		            vals = {};
-		        }
-		        vals.rowStatus = "insert";
-
-	        	if(!opts.addTop) {
-	        		opts.data.push(vals);
-	        		this.options.row = opts.data.length - 1;
-	        		if(opts.extObj !== null) {
-	        			opts.extRow = opts.extObj.data().length - 1;
-	        		}
-	        	} else {
-        			opts.data.splice(0, 0, vals);
-	        		this.options.row = 0;
-	        		opts.extRow = 0;
-	        	}
-
-	        	//TODO opts.row만 들어왔을때 그리드에서 어떻게 update 할건지 고민
-		        N.ds.instance(opts.extObj !== null ? opts.extObj : this).notify(opts.extRow > -1 ? opts.extRow : opts.row);
-		        this.update(opts.row);
-				return this;
-			},
-			revert : function() {
-				var opts = this.options;
-				opts.data[opts.row] = $.extend({}, this.revertData);
-				N.ds.instance(opts.extObj !== null ? opts.extObj : this).notify(opts.extRow > -1 ? opts.extRow : opts.row);
-				this.update(opts.row);
-				return this;
-			},
-			validate : function() {
-				var opts = this.options;
-				var eles = opts.context.find(":input");
-				eles.trigger("unformat.formater");
-				eles.trigger("validate.validator");
-				eles.not(".validate_false__").trigger("format.formater");
-				return eles.filter(".validate_false__").length > 0 ? false : true;
-			},
-			val : function(key, val, notify) {
-				if(val === undefined) {
-					return this.options.data[this.options.row][key];
-				}
-				var opts = this.options;
-				var vals = opts.data[opts.row];
-				var eles, ele;
-				var this_ = this;
-				var rdonyFg = false;
-				var dsabdFg = false;
-				eles = $(opts.context).find("#" + key);
-				var tagName = eles.get(0).tagName.toLowerCase();
-				var type = N.string.trimToEmpty(eles.attr("type")).toLowerCase();
-				if (eles.length > 0 && type !== "radio" && type !== "checkbox") {
-					eles.each(function() {
-						ele = $(this);
-
-		                if(ele.prop("readonly")) {
-		                	ele.removeAttr("readonly");
-		                    rdonyFg = true;
-		                }
-		                if(ele.prop("disabled")) {
-		                	ele.removeAttr("disabled");
-		                	dsabdFg = true;
-		                }
-
-						if (tagName === "textarea" || type === "text" || type === "password" || type === "hidden" || type === "file") {
-							if(ele.attr("class") !== undefined
-									&& (ele.attr("class").indexOf("\"format\"") > -1 || ele.attr("class").indexOf("\"validate\"") > -1)) {
-								ele.val(String(val));
-								//validate
-								if (type !== "hidden") {
-									ele.trigger("focusout.form.validate");
-								}
-								//dataSync
-								ele.trigger("focusout.form.dataSync");
-								//format
-								if (!ele.is("input:password, input:hidden, input:file")) {
-									ele.trigger("focusin.form.format");
-									ele.trigger("focusout.form.unformat");
-								}
-							} else {
-								ele.val(String(val));
-								//dataSync
-								ele.trigger("focusout.form.dataSync");
-							}
-						} else if(tagName === "select") {
-							ele.vals(val);
-							//dataSync
-							ele.trigger("change.form.dataSync");
-						} else if(tagName === "img") {
-							var currVal = String(val);
-							vals[ele.attr("id")] = currVal;
-                            if (vals["rowStatus"] != "insert") {
-                                vals["rowStatus"] = "update";
-                            }
-                            ele.addClass("data_changed__");
-                            if(notify === undefined || (notify !== undefined && notify === true)) {
-                            	N.ds.instance(opts.extObj !== null ? opts.extObj : this_).notify(opts.extRow > -1 ? opts.extRow : opts.row, ele.attr("id"));
-                            }
-							ele.attr("src", currVal);
-						} else {
-							var currVal = String(val);
-							vals[ele.attr("id")] = currVal;
-                            if (vals["rowStatus"] != "insert") {
-                                vals["rowStatus"] = "update";
-                            }
-                            ele.addClass("data_changed__");
-                            if(notify === undefined || (notify !== undefined && notify === true)) {
-                            	N.ds.instance(opts.extObj !== null ? opts.extObj : this_).notify(opts.extRow > -1 ? opts.extRow : opts.row, ele.attr("id"));
-                            }
-
-							if(ele.attr("class") !== undefined && ele.attr("class").indexOf("\"format\"") > -1) {
-								N(opts.data).formater(opts.fRules !== null ? opts.fRules : ele).format(opts.row);
-							} else {
-								if(!opts.html) {
-									ele.text(currVal);
-								} else {
-									ele.html(currVal);
-								}
-							}
+						if(onSelectContinue === undefined || onSelectContinue === true) {
+							opts.context.val(selDate.obj.formatDate(selDate.format));
 						}
-
-						if(rdonyFg) {
-							ele.prop("readonly", true);
-		                }
-		                if(dsabdFg) {
-		                	ele.prop("disabled", true);
-		                }
-					});
-				} else {
-					//radio, checkbox
-					eles = $(opts.context).find("input:radio[id^='" + key + "'], input:checkbox[id^='" + key + "']");
-					if(eles.length > 0) {
-						eles.vals(val);
-						//dataSync
-						$(eles.get(0)).trigger("select.form.dataSync");
-					}
-				}
-				return this;
-			},
-			update : function(row, key) {
-				var opts = this.options;
-				if (key === undefined) {
-					this.bind(row);
-				} else {
-					this.val(key, opts.data[row][key], false);
-				}
-				N.element.dataChanged(opts.context.find("#" + key + ", input:radio[id='" + key + "'][name='" + key + "'], input:checkbox[id='" + key + "'][name='" + key + "']"));
-				return this;
-			}
-		});
-
-		// Grid
-		var Grid = N.grid = function(obj, opts) {
-			this.options = {
-				data : N.type(obj) === "array" ? N(obj) : obj,
-				removedData : [],
-				row : -1,
-				context : null,
-				html : false,
-				addTop : false,
-				validate : true,
-				fRules : null,
-				vRules : null,
-				createRowDelay : 0,
-				heigth : 0,
-				scrollPaging : {
-					idx : 0,
-					size : 100
-				},
-				serverPaging : {
-					// TODO
-				},
-				resizable : true,
-				vResizable : false,
-				sortable : false
-				//TODO onBind 추가
-			};
-
-			try {
-				this.options = $.extend({}, this.options, N.context.attr("ui")["grid"]);
-
-				//because $.extend method is don't extend object type
-				this.options.scrollPaging = $.extend({}, this.options.scrollPaging, N.context.attr("ui")["grid"]["scrollPaging"]);
-			} catch (e) {
-				N.error(e, e);
-			}
-
-			if (N.isPlainObject(opts)) {
-				$.extend(this.options, opts);
-				if(N.type(this.options.context) === "string") {
-					this.options.context = N(this.options.context);
-				}
-			} else {
-				this.options.context = N(opts);
-			}
-
-			this.options.context.addClass("grid__");
-
-			// set tbody template
-			this.tbodyTemp = this.options.context.find("> tbody").clone(true, true);
-
-			// set cell count in tbody
-			this.cellCnt = Grid.cellCnt(this.tbodyTemp);
-
-			// fixed header
-			if(this.options.height > 0) {
-				Grid.fixHeader.call(this);
-			}
-
-			// set tbody cell id info into th cell in thead
-			this.thead = Grid.setTheadCellInfo.call(this);
-
-			// sortable, v(ertical)Resizable
-			if(this.options.sortable) {
-				Grid.sort.call(this);
-			}
-
-			// resizable column width
-			if(this.options.resizable) {
-				Grid.resize.call(this);
-			}
-
-			this.options.context.instance("grid", this);
-
-			N.ds.instance(this, true);
-
-			return this;
-		};
-		Grid.fn = Grid.prototype;
-		$.extend(Grid.fn, {
-			data : function(rowStatus) {
-				if(rowStatus === undefined) {
-					return this.options.data.get();
-				} else if(rowStatus === "modified") {
-					return this.options.data.datafilter("data.rowStatus !== undefined").get().concat(this.options.removedData);
-				} else if(rowStatus === "delete") {
-					return this.options.removedData;
-				} else {
-					return this.options.data.datafilter("data.rowStatus === '" + rowStatus + "'").get();
-				}
-			},
-			context : function(sel) {
-				return sel !== undefined ? this.options.context.find(sel) : this.options.context;
-			},
-			bind : function(data) {
-				var opts = this.options;
-				//empty removedData;
-				opts.removedData = [];
-				//for internal call bind method by scrollPaging
-				var interCall = arguments[1] !== undefined && arguments[1] === true ? true : false;
-				//for rebind new data
-				if(data !== undefined) {
-					opts.data = N.type(data) === "array" ? N(data) : data;
-				}
-				var tbodyTempClone;
-
-				if (opts.data.length > 0) {
-					//clear tbody visual effect
-					opts.context.find("tbody").clearQueue().stop();
-					if(!interCall) {
-						opts.scrollPaging.idx = 0;
-					}
-					if(opts.scrollPaging.idx === 0) {
-						//remove tbodys in grid body area
-						opts.context.find("tbody").remove();
-					}
-
-					var i = opts.scrollPaging.idx;
-					var this_ = this;
-					var limit;
-					if(opts.height > 0) {
-						limit = opts.scrollPaging.size;
+						opts.contents.fadeOut(150);
 					} else {
-						limit = opts.data.length
+						daysPanel.empty();
+						var endDateCls = N.date.strToDate(yearsPanel.find("div.datepicker_year_selected__").text() +  N.string.lpad($(this).text(), 2, "0"));
+						var endDate = endDateCls.obj.getDate();
+						endDateCls.obj.setDate(1)
+						var startDay = endDateCls.obj.getDay();
+						//render week
+						for(var i=0;i<days.length;i++) {
+							daysPanel.append(dayItem.clone(true).addClass("datepicker_day__").text(days[i]));
+						}
+
+						var prevEndDateCls = N.date.strToDate(yearsPanel.find("div.datepicker_year_selected__").text() +  N.string.lpad(String(parseInt($(this).text())-1), 2, "0"));
+						var prevEndDate = prevEndDateCls.obj.getDate();
+						var date;
+						var dateItem;
+						//render date items
+						for(var i=1-startDay;i<=42-startDay;i++) {
+							date = String(i);
+							dateItem = dayItem.clone(true);
+							if(i<=0) {
+								dateItem.addClass("datepicker_prev_day_item__");
+								date = String(prevEndDate + i);
+							} else if(i > endDate) {
+								dateItem.addClass("datepicker_next_day_item__");
+								date = String(i-endDate);
+							} else {
+								dateItem.addClass("datepicker_day_item__");
+							}
+							daysPanel.append(dateItem.text(date));
+						}
 					}
-					var classOpts;
-					var this_ = this;
-					var render = function() {
-						// clone tbody for create new line
-						tbodyTempClone = this_.tbodyTemp.clone(true, true).hide();
-						opts.context.append(tbodyTempClone);
+				});
+				monthsPanel.append(monthItem.clone(true).css("width", "58px").addClass("datepicker_month_title__").text(N.message.get(opts.message, "month")));
 
-						classOpts = N.element.toOpts(tbodyTempClone);
-						if(classOpts !== undefined && classOpts.rowHandler !== undefined) {
-							(new Function("return " + classOpts.rowHandler))()(i, tbodyTempClone, opts.data[i]);
-						}
-
-						// for row data bind, use N.form
-						N(opts.data[i]).form({
-							context : tbodyTempClone,
-							extObj : this_,
-							extRow : i
-						}).bind();
-						tbodyTempClone.show(opts.createRowDelay, function() {
-							i++;
-							if(i < opts.scrollPaging.idx + limit) {
-								render();
-							}
-						});
-					};
-					render();
-				} else {
-					//remove tbodys in grid body area
-					opts.context.find("tbody").remove();
-					opts.context.append('<tbody><tr><td class="empty__" align="center" colspan="' + this.cellCnt + '">'
-							+ N.message.get(opts.message, "empty") + '</td></tr></tbody>');
-					opts.context.append(tbodyTempClone);
+				// render month items
+				for(var i=1;i<=12;i++) {
+					monthsPanel.append(monthItem.clone(true).addClass("datepicker_month_item__").text(String(i)));
 				}
+				opts.contents.append(monthsPanel);
 
-				return this;
-			},
-			add : function() {
-				var opts = this.options;
-				if (opts.context.find("td.empty__").length > 0) {
-					opts.context.find("tbody").remove();
-				}
-				var tbodyTempClone = this.tbodyTemp.clone(true, true);
-
-				if(opts.addTop) {
-					opts.context.find("thead").after(tbodyTempClone);
-				} else {
-					opts.context.append(tbodyTempClone);
-				}
-
-				// for new row data bind, use N.form
-				opts.data.form({
-					context : tbodyTempClone,
-					extObj : this_,
-					extRow : opts.addTop ? 0 : opts.data.length,
-					addTop : opts.addTop
-				}).add();
-
-				//focus to first input element
-				tbodyTempClone.find(":input:eq(0)").get(0).focus();
-
-				return this;
-			},
-			remove : function(row) {
-				var opts = this.options;
-				if(row === undefined || row > opts.data.length - 1) {
-		        	N.error("[N.grid.remove]Row index out of range");
-		        }
-
-				opts.context.find("tbody:eq(" + row + ")").remove();
-
-				if (opts.data[row].rowStatus === "insert") {
-		            opts.data.splice(row, 1);
-		        } else {
-		        	var removedData = opts.data.splice(row, 1)[0];
-		        	removedData["rowStatus"] = "delete";
-		            opts.removedData.push(removedData);
-		        }
-
-				N.ds.instance(this).notify();
-			},
-			revert : function(row) {
-				var opts = this.options;
-				if(row !== undefined) {
-					opts.context.find("tbody:eq(" + String(row) + ")").instance("form").revert();
-				} else {
-					opts.context.find("tbody").instance("form", function(i) {
-						if(this.options !== undefined && this.options.data[0].rowStatus === "update") {
-							this.revert();
-						}
+				if(!opts.monthonly) {
+					// create day items
+					var days = N.message.get(opts.message, "days").split(",");
+					var daysPanel = $('<div class="datepicker_days_panel__"></div>');
+					daysPanel.css({
+						width: "210px",
+						float: "left",
+						"margin-left": "3px"
 					});
-				}
-				return this;
-			},
-			validate : function(row) {
-				var opts = this.options;
-				var valiRslt = true;
-				if(row !== undefined) {
-					opts.context.find("tbody:eq(" + String(row) + ")").instance("form").validate();
-				} else {
-					var rowStatus;
-					opts.context.find("tbody").instance("form", function(i) {
-						if(this.options !== undefined && this.options.data.length > 0) {
-							rowStatus = this.options.data[0].rowStatus;
-							if(rowStatus === "update" || rowStatus === "insert") {
-								if(!this.validate()) {
-									valiRslt = false;
-								}
-							}
+					var dayItem = $('<div align="center"></div>');
+					dayItem.css({
+						"line-height": "25px",
+						width: "28px",
+						float: "left"
+					}).click(function(e) {
+						e.preventDefault();
+						var thisEle = $(this);
+						daysPanel.find("div.datepicker_prev_day_item__, div.datepicker_day_item__, div.datepicker_next_day_item__").removeClass("datepicker_day_selected__");
+						thisEle.addClass("datepicker_day_selected__");
+						var selMonth;
+						if(thisEle.hasClass("datepicker_prev_day_item__")) {
+							selMonth = String(parseInt(monthsPanel.find("div.datepicker_month_selected__").text()) - 1);
+						} else if(thisEle.hasClass("datepicker_next_day_item__")) {
+							selMonth = String(parseInt(monthsPanel.find("div.datepicker_month_selected__").text()) + 1);
+						} else {
+							selMonth = monthsPanel.find("div.datepicker_month_selected__").text();
 						}
+						var selDate = N.date.strToDate(yearsPanel.find("div.datepicker_year_selected__").text()
+								+ N.string.lpad(selMonth, 2, "0")
+								+  N.string.lpad(thisEle.text(), 2, "0"));
+						var onSelectContinue;
+						if(opts.onSelect !== null) {
+							onSelectContinue = opts.onSelect(opts.context, selDate);
+						}
+						if(onSelectContinue === undefined || onSelectContinue === true) {
+							opts.context.val(selDate.obj.formatDate(selDate.format));
+						}
+						opts.contents.fadeOut(150);
+						$(document).unbind("keyup.datepicker");
 					});
+					opts.contents.append(daysPanel);
+
+					// click current month
+					monthsPanel.find("div:contains(" + String(parseInt(d.formatDate("m"))) + ")").click();
 				}
-				return valiRslt;
+
+				// clear float
+				opts.contents.append('<div style="clear: both;"></div>');
+
+				// append datepicker panel after context
+				opts.context.after(opts.contents);
+
+				// show datepicker
+				opts.context.bind("focusin.datepicker", function() {
+					opts.contents.fadeIn(150);
+
+					// bind "ESC" key event
+					// if press the "ESC" key, then hide datepicker
+			        $(document).bind("keyup.datepicker", function(e) {
+			        	if (e.keyCode == 27) {
+			        		opts.contents.fadeOut(150);
+			        		$(document).unbind("keyup.datepicker");
+			        	}
+					});
+				});
 			},
-			val : function(row, key, val) {
-				if(val === undefined) {
-					return this.options.context.find("tbody:eq(" + String(row) + ")").instance("form").val(key);
-				}
-				this.options.context.find("tbody:eq(" + String(row) + ")").instance("form").val(key, val);
-				return this;
-			},
-			update : function(row, key) {
-				if(row === undefined) {
-					this.bind();
-				} else {
-					this.options.context.find("tbody:eq(" + String(row) + ")").instance("form").update(0, key);
-				}
-				return this;
+			yearPaging : function(yearItems, currYear, addCnt) {
+				yearItems.removeClass("datepicker_curr_year__");
+				yearItems.each(function() {
+					var thisEle = $(this);
+					thisEle.text(String(parseInt(thisEle.text()) + addCnt));
+					if(thisEle.text() === String(currYear)) {
+						thisEle.addClass("datepicker_curr_year__");
+					}
+				});
 			}
 		});
 
-		$.extend(Grid, {
-			fixHeader : function() {
-				var opts = this.options;
-
-				// addTop option is unconditional [true] when fixed header mode
-				opts.addTop = true;
-
-				opts.context.css({
-					"table-layout" : "fixed",
-					"margin" : "0"
-				});
-
-				var width = opts.context.attr("width");
-		        if (N.string.trimToNull(width) === null || width.indexOf("100%") < 0) {
-		        	opts.context.css("width", "100%");
-		        }
-
-		        var sampleCell = opts.context.find("tbody td:eq(0)");
-		        var borderLeft = sampleCell.css("border-left-width") + " " + sampleCell.css("border-left-style") + " " + sampleCell.css("border-left-color");
-		        var borderBottom = sampleCell.css("border-bottom-width") + " " + sampleCell.css("border-bottom-style") + " " + sampleCell.css("border-bottom-color");
-
-		        // Root grid container
-		        var gridWrap = opts.context.wrap('<div class="grid_wrap__"/>').parent();
-		        gridWrap.css({
-		        	"border-left" : borderLeft,
-		        });
-
-		        //Create grid header
-		        var scrollbarWidth = N.browser.scrollbarWidth();
-		        var thead = opts.context.clone(true, true);
-		        thead.find("tbody").remove();
-		        thead.find("tfoot").remove();
-		        var theadWrap = thead.wrap('<div class="thead_wrap__"/>').parent().css({
-		        	"padding-right" : scrollbarWidth + "px",
-		        	"margin-left" : "-1px",
-		        });
-		        gridWrap.prepend(theadWrap);
-
-		        //Create grid body
-		        opts.context.find("> thead th").empty().css({
-		        	"height" : "0",
-	                "padding-top" : "0",
-	                "padding-bottom" : "0",
-	                "border-top" : "none",
-	                "border-bottom" : "none"
-		        });
-		        opts.context.find("> tbody td").css({
-	                "border-top" : "none",
-		        });
-		        this.tbodyTemp.find("td").css({
-	                "border-top" : "none",
-		        });
-		        var tbodyWrap = opts.context.wrap('<div class="tbody_wrap__"/>').parent().css({
-		        	"height" : String(opts.height) + "px",
-		        	"overflow-y" : "scroll",
-		        	"margin-left" : "-1px",
-		        	"border-bottom" : borderBottom,
-		        });
-
-		        //Scroll paging
-		        var this_ = this;
-		        var defSPSize = N.context.attr("ui")["grid"]["scrollPaging"]["size"];
-		        var tbodyLength;
-		        tbodyWrap.scroll(function() {
-		        	var thisWrap = $(this);
-                    if (thisWrap.scrollTop() >= opts.context.height() - thisWrap.height()) {
-                    	tbodyLength = opts.context.find("> tbody").length;
-                    	if (tbodyLength === opts.scrollPaging.idx + defSPSize) {
-	                        if (tbodyLength > 0 && tbodyLength <= opts.data.length) {
-	                            opts.scrollPaging.idx += defSPSize;
-	                        }
-
-	                        if (opts.scrollPaging.idx + opts.scrollPaging.size >= opts.data.length) {
-	                        	opts.scrollPaging.size = opts.data.length - opts.scrollPaging.idx;
-	                        } else {
-	                        	opts.scrollPaging.size = defSPSize;
-	                        }
-
-	                        if(opts.scrollPaging.idx < opts.data.length) {
-	                        	this_.bind(undefined, true);
-	                        }
-	                    }
-	                }
-	            });
-
-		        // Create grid footer
-		        var tfootWrap;
-		        if(opts.context.find("> tfoot").length > 0) {
-		        	var tfoot = opts.context.clone(true, true);
-			        opts.context.find("> tfoot").remove();
-			        tfoot.find("thead").remove();
-			        tfoot.find("tbody").remove();
-			        tfootWrap = tfoot.wrap('<div class="tfoot_wrap__"/>').parent().css({
-			        	"padding-right" : scrollbarWidth + "px",
-			        	"margin-left" : "-1px",
-			        });
-			        gridWrap.append(tfootWrap);
-		        }
-
-		        // Vertical height resizing
-		        if(opts.vResizable) {
-		        	Grid.vResize.call(this, gridWrap, tbodyWrap, tfootWrap);
-		        }
-			},
-			vResize : function(gridWrap, tbodyWrap, tfootWrap) {
-        		var pressed = false;
-	        	var vResizable = $('<div class="v_resizable__" align="center"></div>');
-	        	vResizable.css("cursor", "n-resize");
-
-	        	var currHeight, tbodyOffset, tfootHeight = 0;
-	        	vResizable.bind("mousedown.grid.vResize", function() {
-	        		if(tfootWrap !== undefined) {
-		        		tfootHeight = tfootWrap.height();
-		        	}
-		        	tbodyOffset = tbodyWrap.offset();
-
-	        		$(document).bind("dragstart.grid.vResize, selectstart.grid.vResize", function() {
-	                    return false;
-	                });
-	        		pressed = true;
-
-		        	$(window.document).bind("mousemove.grid.vResize", function(e) {
-		        		if(pressed) {
-		        			currHeight = (e.pageY - tbodyOffset.top - tfootHeight) + "px";
-		        			tbodyWrap.css({
-		        				"height" : currHeight,
-		        				"max-height" : currHeight
-		        			});
-		        		}
-			        });
-
-		        	$(window.document).bind("mouseup.grid.vResize", function() {
-		        		$(document).unbind("dragstart.grid.vResize, selectstart.grid.vResize, mousemove.grid.vResize, mouseup.grid.vResize");
-		        		pressed = false;
-		        	});
-	        	});
-
-	        	gridWrap.after(vResizable);
-        	},
-			resize : function() {
-				var opts = this.options;
-				var theadCells = this.thead.find("> tr th");
-				var resizeBar;
-				var ele;
-
-				var pressed = false;
-				var cellEle;
-				var defWidth;
-				var currWidth;
-				var currCellEle;
-				var currCellEleTable;
-				var targetCellEle;
-				var targetCellEleWrap;
-				var currResizeBarEle;
-				var startOffsetX;
-				var initHeight;
-				var innerHeight;
-				var scrollbarWidth = N.browser.scrollbarWidth();
-				if(N.browser.is("Safari")){
-					theadCells.css("padding-left", "0");
-					theadCells.css("padding-right", "0");
-				}
-				theadCells.each(function() {
-					cellEle = $(this);
-		            resizeBar = cellEle.append('<span class="resize_bar__"></span>').find("span.resize_bar__");
-		            var resizeBarWidth = 6;
-
-		            if(N.browser.msieVersion() > 0 || N.browser.is("Mozilla")) {
-		            	 innerHeight = String(cellEle.innerHeight());
-		            } else {
-		            	 innerHeight = String(cellEle.innerHeight() + 1);
-		            }
-		            resizeBar.css({
-		            	"padding": "0px",
-		            	"margin": "-" + cellEle.css("padding-top") + " -" + (resizeBarWidth/2 + parseInt(cellEle.css("padding-right"))) + "px -" + cellEle.css("padding-bottom") + " 0",
-		            	"height" : innerHeight + "px",
-		            	"float" : "right",
-		            	"width" : resizeBarWidth + "px",
-		            	"cursor": "e-resize",
-		            	"background-color" : "#000000"
-		            });
-
-		            resizeBar.bind("mousedown.grid.resize", function(e) {
-		            	startOffsetX = e.pageX;
-		            	currResizeBarEle = $(e.target);
-		            	currCellEle = currResizeBarEle.parent("th");
-
-		            	// cell 안의 text 와 float 속성이 먹은 resizeBar 가 줄넘김 되어 cell 의 높이가 변하는것 방지
-		            	theadCells.find("span.resize_bar__").css("float", "none");
-
-		            	if(opts.height > 0) {
-		            		targetCellEle = opts.context.find("thead th:eq(" + theadCells.index(currCellEle) + ")");
-		            		currCellEleTable = currCellEle.parents("table.grid__");
-		            		targetCellEleWrap = targetCellEle.parents("div.tbody_wrap__");
-		            	}
-
-		            	// for prevent sort event
-		            	currCellEle.data("sortLock", true);
-
-		            	defWidth = currCellEle.innerWidth();
-
-		            	initHeight = currCellEle.innerHeight() + 1;
-
-		        		$(document).bind("dragstart.grid.resize, selectstart.grid.resize", function() {
-		                    return false;
-		                });
-		        		pressed = true;
-
-		        		$(window.document).bind("mousemove.grid.resize", function(e) {
-			        		if(pressed) {
-			        			currWidth = defWidth + (e.pageX - startOffsetX);
-			        			if(currWidth > 0) {
-			        				currCellEle.css("width", currWidth + "px");
-			        				if(targetCellEle !== undefined) {
-			        					targetCellEle.css("width", currWidth + "px");
-			        					targetCellEleWrap.width(currCellEleTable.width() + scrollbarWidth);
-			        				}
-			        			}
-			        		}
-				        });
-
-			        	$(window.document).bind("mouseup.grid.resize", function(e) {
-			        		$(document).unbind("dragstart.grid.resize, selectstart.grid.resize, mousemove.grid.resize, mouseup.grid.resize");
-			        		theadCells.find("span.resize_bar__").css("float", "right");
-
-			        		// for keeping table layout
-			        		if(currCellEle.innerHeight() + 1 > initHeight) {
-			        			currCellEle.css("width", "");
-			        			targetCellEle.css("width", "");
-			        			targetCellEleWrap.width(currCellEleTable.width() + scrollbarWidth);
-			        		}
-
-			        		pressed = false;
-			        	});
-		        	});
-				});
-			},
-        	sort : function() {
-    	        var opts = this.options;
-    	        var thead = this.thead;
-
-    	        var theadCells = thead.find("> tr th");
-    	        theadCells.css("cursor", "pointer");
-    	        var this_ = this;
-    	        theadCells.bind("click.grid.sort", function(e) {
-    	        	var currEle = $(this);
-    	        	if(currEle.data("sortLock")) {
-    	        		currEle.data("sortLock", false);
-    	        		return false;
-    	        	}
-    	        	if (opts.data.length > 0) {
-    	        		if(N.string.trimToNull($(this).text()) != null && $(this).find("input[type='checkbox']").length == 0) {
-    	        			var isAsc = false;
-    	        			if (currEle.find("span.sortable__").hasClass("asc__")) {
-    	        				isAsc = true;
-    	        			}
-    	        			thead.find("span.sortable__").remove();
-    	                    if (isAsc) {
-    	                    	currEle.append('<span class="sortable__ desc__">' + opts.sortableItem.asc + '</span>')
-    	                    	this_.bind(N(opts.data).datasort($(this).data("id"), true));
-    	                    } else {
-    	                    	currEle.append('<span class="sortable__ asc__">' + opts.sortableItem.desc + '</span>')
-    	                    	this_.bind(N(opts.data).datasort($(this).data("id")));
-    	                    }
-    	        		}
-    	        	}
-    	        });
-        	},
-        	serverPaging : function() {
-        		//TODO
-        	},
-        	setTheadCellInfo : function() {
-        		var opts = this.options;
-        		var thead;
-    			if (opts.height > 0) {
-    	        	thead = opts.context.closest("div.grid_wrap__").find("> div.thead_wrap__ thead");
-    	        } else {
-    	        	thead = opts.context.find("thead");
-    	        }
-    			var id;
-    			this.tbodyTemp.find("> tr td").each(function(i) {
-    				id = $(this).attr("id");
-    				if(id === undefined) {
-    					id = $(this).find("*").attr("id");
-    				}
-    				thead.find("> tr th:eq(" + i + ")").data("id", id);
-                });
-    			return thead;
-        	},
-			cellCnt : function(ele) {
-		        return Math.max.apply(null, $.map(ele.find("tr"), function(el) {
-		            var cellCnt = 0;
-		            $(el).find("td, th").each(function() {
-		                cellCnt += N.string.trimToZero($(this).attr("colspan")) == "0" ? 1 : Number(N.string.trimToZero($(this).attr("colspan")));
-		            });
-		            return cellCnt;
-		        }));
-		    }
-		});
 
 		// Popup
 		var Popup = N.popup = function(obj, opts) {
@@ -1907,245 +1094,1089 @@
 			}
 		});
 
-		// DatePicker
-		var DatePicker = N.datepicker = function(obj, opts) {
+		// Select
+		var Select = N.select = function(obj, opts) {
 			this.options = {
-				context : obj,
-				contents : $('<div class="datepicker__"></div>'),
-				monthonly : false,
-				mouseonly : true, //TODO 키보드로 입력할수 있도록 기능 개선
-				onSelect : null
+				data : obj,
+				context : null,
+				key : null,
+				val : null,
+				append : true,
+				direction : "h", //h(orizontal), v(ertical)
+				type : 0, // 1: select, 2: select[multiple='multiple'], 3: radio, 4: checkbox
+				template : null
 			};
 
 			try {
-				this.options = $.extend({}, this.options, N.context.attr("ui")["datepicker"]);
+				this.options = $.extend({}, this.options, N.context.attr("ui")["select"]);
+			} catch (e) {
+				N.error(e, e);
+			}
+			$.extend(this.options, N.element.toOpts(this.options.context));
+
+			if (N.isPlainObject(opts)) {
+				$.extend(this.options, opts);
+				this.options.context = N(opts.context);
+			} else {
+				this.options.context = N(opts);
+			}
+			this.options.template = this.options.context;
+
+			Select.wrapEle.call(this);
+
+			this.options.context.instance("select", this);
+
+			return this;
+		};
+
+		Select.fn = Select.prototype;
+		$.extend(Select.fn, {
+			data : function(selFlag) {
+				var opts = this.options;
+				if(selFlag !== undefined && selFlag === true) {
+					var rtnData = [];
+					$(opts.context).vals(function(i) {
+						rtnData.push(opts.data[i]);
+					});
+					return rtnData.length === 1 ? rtnData[0] : rtnData;
+				} else {
+					return opts.data;
+				}
+			},
+			context : function(sel) {
+				return sel !== undefined ? this.options.context.find(sel) : this.options.context;
+			},
+		    bind : function() {
+		    	opts = this.options;
+		    	if(opts.type === 1 || opts.type === 2) {
+		    		var defaultSelectEle = opts.template.find("option.select_default__").clone(true);
+	    			opts.context.addClass("select_template__").empty();
+					if(opts.append) {
+	    				opts.context.append(defaultSelectEle);
+	    			}
+					opts.data.each(function(i, data) {
+						opts.context.append("<option value='" + data[opts.val] + "'>" + data[opts.key] + "</option>");
+					});
+		    	} else if(opts.type === 3 || opts.type === 4) {
+		    		if(opts.context.filter(".select_template__").length == 0) {
+		    			var id = opts.context.attr("id");
+			    		opts.data.each(function(i, data) {
+			    			if(i === 0) {
+			    				opts.context.attr("name", id).attr("id", id + "_" + String(i)).attr("value", data[opts.val])
+			    					.addClass("select_input__ select_template__");
+			    			} else {
+			    				opts.context.push($(opts.template.filter("input:eq(0)")).clone(true).attr("name", id).attr("id", id + "_" + String(i)).attr("value", data[opts.val]).removeClass("select_template__").get(0));
+			    			}
+			    			opts.context.push($('<label class="select_input_label__" for="' + id + "_" + String(i) + '">' + data[opts.key] + '</label>').get(0));
+			    			if (opts.direction === "v" && opts.data.length - 1 != i) {
+			    				opts.context.push($('<br class="select_input_br__" />').get(0));
+			    			}
+			    		});
+			    		$(opts.template.filter("input:eq(0)")).after(opts.context);
+		    		}
+		    	}
+		    	return this;
+		    },
+		    val : function(val) {
+		    	return $(this.options.context).vals(val);
+		    },
+		    reset : function(selFlag) {
+		    	opts = this.options;
+		    	if(opts.type === 1 || opts.type === 2) {
+		    		if(selFlag !== undefined && selFlag === true) {
+		    			opts.context.get(0).selectedIndex = 0;
+		    		} else {
+		    			opts.context.val(opts.context.prop("defaultSelected"));
+		    		}
+		    	} else if(opts.type === 3 || opts.type === 4) {
+		    		opts.context.prop("checked", false)
+		    	}
+		    	return this;
+		    }
+		});
+
+		$.extend(Select, {
+			wrapEle : function() {
+				var opts = this.options;
+				if (opts.context.is("select") && opts.context.attr("multiple") != "multiple") {
+					this.options.context.find("option").addClass("select_default__");
+					opts.type = 1;
+	            } else if (opts.context.is("select") && opts.context.attr("multiple") == "multiple") {
+	            	this.options.context.find("option").addClass("select_default__");
+	            	opts.type = 2;
+	            } else if (opts.context.is("input:radio")) {
+	            	opts.type = 3;
+	            } else if (opts.context.is("input:checkbox")) {
+	            	opts.type = 4;
+	            }
+			}
+		});
+
+		// Form
+		var Form = N.form = function(obj, opts) {
+			this.options = {
+				data : N.type(obj) === "array" ? N(obj) : obj,
+				row : -1,
+				context : null,
+				html : false,
+				addTop : false,
+				validate : true,
+				fRules : null, //TODO test
+				vRules : null, //TODO test
+				extObj : null, // for N.grid,
+				extRow : -1  // for N.grid
+			};
+
+			try {
+				this.options = $.extend({}, this.options, N.context.attr("ui")["form"]);
 			} catch (e) {
 				N.error(e, e);
 			}
 
-			if(opts !== undefined) {
+			if (N.isPlainObject(opts)) {
 				$.extend(this.options, opts);
+				if(N.type(this.options.context) === "string") {
+					this.options.context = N(this.options.context);
+				}
+				if(opts.row === undefined) {
+					this.options.row = 0;
+				}
+			} else {
+				this.options.row = 0;
+				this.options.context = N(opts);
+			}
+			this.options.context.addClass("form__");
+
+			this.revertData = $.extend({}, this.options.data[this.options.row]);
+
+			this.options.context.instance("form", this);
+
+			if(this.options.extObj === null) {
+				N.ds.instance(this, true);
 			}
 
-			this.options.context.addClass("datepicker__");
-			if(this.options.mouseonly) {
-				this.options.context.css("cursor", "pointer");
-				this.options.context.prop("readonly", true);
-			}
-
-			DatePicker.wrapEle.call(this);
-
-			this.options.context.instance("datepicker", this);
+			return this;
 		};
+		Form.fn = Form.prototype;
+		$.extend(Form.fn, {
+			data : function(selFlag) {
+				var opts = this.options;
+				if(selFlag !== undefined && selFlag === true) {
+					return opts.data[opts.row];
+				} else {
+					return opts.data;
+				}
+			},
+			row : function() {
+				return this.options.row;
+			},
+			context : function(sel) {
+				return sel !== undefined ? this.options.context.find(sel) : this.options.context;
+			},
+			bind : function(row, data) {
+				var opts = this.options;
+				if(row !== undefined) {
+					opts.row = row;
+				}
+				if(data !== undefined) {
+					opts.data = data;
+				}
+				var this_ = this;
+				var vals;
+				if (!N.isEmptyObject(opts.data) && !N.isEmptyObject(vals = opts.data[opts.row])) {
+					var eles, ele, val, tagName, type;
+					for ( var key in vals ) {
+						eles = $("#" + key, opts.context);
+						type = N.string.trimToEmpty(eles.attr("type")).toLowerCase();
+						if (eles.length > 0 && type !== "radio" && type !== "checkbox") {
+							eles.each(function() {
+								ele = $(this);
+								ele.removeClass("data_changed__");
+								tagName = this.tagName.toLowerCase();
+								type = N.string.trimToEmpty(ele.attr("type")).toLowerCase();
+								if (tagName === "textarea" || type === "text" || type === "password" || type === "hidden" || type === "file") {
+									//validate
+									if(ele.attr("class") !== undefined && ele.attr("class").indexOf("\"validate\"") > -1) {
+										if (type !== "hidden") {
+											N().validator(opts.fRules !== null ? opts.fRules : ele);
 
-		DatePicker.fn = DatePicker.prototype;
-		$.extend(DatePicker.fn, {
+											ele.unbind("focusout.form.validate");
+											ele.bind("focusout.form.validate", function() {
+												var currEle = $(this);
+					                            if (!currEle.prop("disabled") && !currEle.prop("readonly")) {
+					                                currEle.trigger("validate");
+					                            }
+					                        });
+										}
+									}
 
+									//dataSync
+									ele.unbind("focusout.form.dataSync");
+									ele.bind("focusout.form.dataSync", function() {
+										var currEle = $(this);
+										var currVal = currEle.val();
+										if (String(vals[currEle.attr("id")]) !== currVal) {
+											if (!currEle.prop("disabled") && !currEle.prop("readonly") && !currEle.hasClass("validate_false__")) {
+												vals[currEle.attr("id")] = currVal;
+	                                            if (vals["rowStatus"] != "insert") {
+	                                                vals["rowStatus"] = "update";
+	                                            }
+	                                            currEle.addClass("data_changed__");
+	                                            N.ds.instance(opts.extObj !== null ? opts.extObj : this_).notify(opts.extRow > -1 ? opts.extRow : opts.row, currEle.attr("id"));
+											}
+                                        }
+									});
+									//Enter key event
+									ele.unbind("keyup.form.dataSync");
+			                        ele.bind("keyup.form.dataSync", function(e) {
+			                            if (e.which == 13) {
+			                            	e.preventDefault();
+			                            	$(this).trigger("focusout.form.validate");
+			                            	$(this).trigger("focusout.form.dataSync");
+			                            }
+			                        });
+
+				                    //format
+			                        if(ele.attr("class") !== undefined && ele.attr("class").indexOf("\"format\"") > -1) {
+										if (type !== "password" && type !== "hidden" && type !== "file") {
+											N(opts.data).formater(opts.fRules !== null ? opts.fRules : ele).format(opts.row);
+
+											ele.unbind("focusin.form.unformat");
+											ele.bind("focusin.form.unformat", function() {
+												var currEle = $(this);
+					                            if (!currEle.prop("disabled") && !currEle.prop("readonly") && !currEle.hasClass("validate_false__")) {
+					                                currEle.trigger("unformat");
+					                            }
+					                        });
+
+											ele.unbind("focusout.form.format");
+											ele.bind("focusout.form.format", function() {
+												var currEle = $(this);
+					                            if (!currEle.prop("disabled") && !currEle.prop("readonly") && !currEle.hasClass("validate_false__")) {
+					                                currEle.trigger("format");
+					                            }
+					                        });
+										}
+									} else {
+										ele.val(N.string.nullToEmpty(String(vals[key])));
+									}
+								} else if(tagName === "select") {
+									//validate
+									if(ele.attr("class") !== undefined
+											&& ele.attr("class").indexOf("\"validate\"") > -1) {
+										if (opts.validate) {
+											N().validator(opts.fRules !== null ? opts.fRules : ele);
+										}
+									}
+
+									//dataSync
+									ele.unbind("change.form.dataSync");
+									ele.bind("change.form.dataSync", function() {
+										var currEle = $(this);
+										var currVals = currEle.vals();
+										if (vals[currEle.attr("id")] !== currVals) {
+											if (!currEle.prop("disabled") && !currEle.prop("readonly") && !currEle.hasClass("validate_false__")) {
+												vals[currEle.attr("id")] = currVals;
+	                                            if (vals["rowStatus"] != "insert") {
+	                                                vals["rowStatus"] = "update";
+	                                            }
+	                                            currEle.addClass("data_changed__");
+	                                            N.ds.instance(opts.extObj !== null ? opts.extObj : this_).notify(opts.extRow > -1 ? opts.extRow : opts.row, currEle.attr("id"));
+											}
+                                        }
+									});
+
+									//Data bind
+									ele.vals(vals[key]);
+								} else if(tagName === "img") {
+									ele.attr("src", N.string.nullToEmpty(String(vals[key])));
+								} else {
+									if(ele.attr("class") !== undefined && ele.attr("class").indexOf("\"format\"") > -1) {
+										N(opts.data).formater(opts.fRules !== null ? opts.fRules : ele).format(opts.row);
+									} else {
+										val = N.string.nullToEmpty(String(vals[key]));
+										if(!opts.html) {
+											ele.text(val);
+										} else {
+											ele.html(val);
+										}
+									}
+								}
+							});
+						} else {
+							//radio, checkbox
+							eles = $(opts.context).find("input:radio[id^='" + key + "'], input:checkbox[id^='" + key + "']");
+							eles.removeClass("data_changed__");
+							if(eles.length > 0) {
+								eles.vals(vals[key]);
+
+								//dataSync
+								eles.unbind("click.form.dataSync select.form.dataSync");
+								eles.bind("click.form.dataSync select.form.dataSync", function() {
+									var currEle = $(this);
+									var currKey = currEle.attr("name");
+									if(currKey === undefined) {
+										currKey = currEle.attr("id");
+									}
+									var currEles = currEle.siblings("input:" + currEle.attr("type") + "[id^='" + currEle.attr("name") + "']");
+									currEles.push(this);
+									var currVals = currEles.vals();
+									if (vals[currKey] !== currVals) {
+										if (!currEle.prop("disabled") && !currEle.prop("readonly")) {
+											vals[currKey] = currVals;
+	                                        if (vals["rowStatus"] != "insert") {
+	                                            vals["rowStatus"] = "update";
+	                                        }
+	                                        currEles.addClass("data_changed__");
+	                                        N.ds.instance(opts.extObj !== null ? opts.extObj : this_).notify(opts.extRow > -1 ? opts.extRow : opts.row, currKey);
+										}
+	                                }
+								});
+							}
+						}
+					}
+					eles = val = undefined;
+				}
+
+				return this;
+			},
+			add : function() {
+				var opts = this.options;
+		        if (opts.data === null) {
+		            throw new Error("[Form.add]data is null. you must input data");
+		        }
+
+		        // set default values
+		        var vals = N.element.toData(opts.context.find(":input"));
+		        if (vals == null) {
+		            vals = {};
+		        }
+		        vals.rowStatus = "insert";
+
+	        	if(!opts.addTop) {
+	        		opts.data.push(vals);
+	        		this.options.row = opts.data.length - 1;
+	        		if(opts.extObj !== null) {
+	        			opts.extRow = opts.extObj.data().length - 1;
+	        		}
+	        	} else {
+        			opts.data.splice(0, 0, vals);
+	        		this.options.row = 0;
+	        		opts.extRow = 0;
+	        	}
+
+	        	//TODO opts.row만 들어왔을때 그리드에서 어떻게 update 할건지 고민
+		        N.ds.instance(opts.extObj !== null ? opts.extObj : this).notify(opts.extRow > -1 ? opts.extRow : opts.row);
+		        this.update(opts.row);
+				return this;
+			},
+			revert : function() {
+				var opts = this.options;
+				opts.data[opts.row] = $.extend({}, this.revertData);
+				N.ds.instance(opts.extObj !== null ? opts.extObj : this).notify(opts.extRow > -1 ? opts.extRow : opts.row);
+				this.update(opts.row);
+				return this;
+			},
+			validate : function() {
+				var opts = this.options;
+				var eles = opts.context.find(":input");
+				eles.trigger("unformat.formater");
+				eles.trigger("validate.validator");
+				eles.not(".validate_false__").trigger("format.formater");
+				return eles.filter(".validate_false__").length > 0 ? false : true;
+			},
+			val : function(key, val, notify) {
+				if(val === undefined) {
+					return this.options.data[this.options.row][key];
+				}
+				var opts = this.options;
+				var vals = opts.data[opts.row];
+				var eles, ele;
+				var this_ = this;
+				var rdonyFg = false;
+				var dsabdFg = false;
+				eles = $(opts.context).find("#" + key);
+				var tagName = eles.get(0).tagName.toLowerCase();
+				var type = N.string.trimToEmpty(eles.attr("type")).toLowerCase();
+				if (eles.length > 0 && type !== "radio" && type !== "checkbox") {
+					eles.each(function() {
+						ele = $(this);
+
+		                if(ele.prop("readonly")) {
+		                	ele.removeAttr("readonly");
+		                    rdonyFg = true;
+		                }
+		                if(ele.prop("disabled")) {
+		                	ele.removeAttr("disabled");
+		                	dsabdFg = true;
+		                }
+
+						if (tagName === "textarea" || type === "text" || type === "password" || type === "hidden" || type === "file") {
+							if(ele.attr("class") !== undefined
+									&& (ele.attr("class").indexOf("\"format\"") > -1 || ele.attr("class").indexOf("\"validate\"") > -1)) {
+								ele.val(String(val));
+								//validate
+								if (type !== "hidden") {
+									ele.trigger("focusout.form.validate");
+								}
+								//dataSync
+								ele.trigger("focusout.form.dataSync");
+								//format
+								if (!ele.is("input:password, input:hidden, input:file")) {
+									ele.trigger("focusin.form.format");
+									ele.trigger("focusout.form.unformat");
+								}
+							} else {
+								ele.val(String(val));
+								//dataSync
+								ele.trigger("focusout.form.dataSync");
+							}
+						} else if(tagName === "select") {
+							ele.vals(val);
+							//dataSync
+							ele.trigger("change.form.dataSync");
+						} else if(tagName === "img") {
+							var currVal = String(val);
+							vals[ele.attr("id")] = currVal;
+                            if (vals["rowStatus"] != "insert") {
+                                vals["rowStatus"] = "update";
+                            }
+                            ele.addClass("data_changed__");
+                            if(notify === undefined || (notify !== undefined && notify === true)) {
+                            	N.ds.instance(opts.extObj !== null ? opts.extObj : this_).notify(opts.extRow > -1 ? opts.extRow : opts.row, ele.attr("id"));
+                            }
+							ele.attr("src", currVal);
+						} else {
+							var currVal = String(val);
+							vals[ele.attr("id")] = currVal;
+                            if (vals["rowStatus"] != "insert") {
+                                vals["rowStatus"] = "update";
+                            }
+                            ele.addClass("data_changed__");
+                            if(notify === undefined || (notify !== undefined && notify === true)) {
+                            	N.ds.instance(opts.extObj !== null ? opts.extObj : this_).notify(opts.extRow > -1 ? opts.extRow : opts.row, ele.attr("id"));
+                            }
+
+							if(ele.attr("class") !== undefined && ele.attr("class").indexOf("\"format\"") > -1) {
+								N(opts.data).formater(opts.fRules !== null ? opts.fRules : ele).format(opts.row);
+							} else {
+								if(!opts.html) {
+									ele.text(currVal);
+								} else {
+									ele.html(currVal);
+								}
+							}
+						}
+
+						if(rdonyFg) {
+							ele.prop("readonly", true);
+		                }
+		                if(dsabdFg) {
+		                	ele.prop("disabled", true);
+		                }
+					});
+				} else {
+					//radio, checkbox
+					eles = $(opts.context).find("input:radio[id^='" + key + "'], input:checkbox[id^='" + key + "']");
+					if(eles.length > 0) {
+						eles.vals(val);
+						//dataSync
+						$(eles.get(0)).trigger("select.form.dataSync");
+					}
+				}
+				return this;
+			},
+			update : function(row, key) {
+				var opts = this.options;
+				if (key === undefined) {
+					this.bind(row);
+				} else {
+					this.val(key, opts.data[row][key], false);
+				}
+				N.element.dataChanged(opts.context.find("#" + key + ", input:radio[id='" + key + "'][name='" + key + "'], input:checkbox[id='" + key + "'][name='" + key + "']"));
+				return this;
+			}
 		});
 
-		$.extend(DatePicker, {
-			context : function() {
-				return this.options.context;
-			},
-			wrapEle : function() {
-				var opts = this.options;
-				var d = new Date();
-				var currYear = parseInt(d.formatDate("Y"));
+		// Grid
+		var Grid = N.grid = function(obj, opts) {
+			this.options = {
+				data : N.type(obj) === "array" ? N(obj) : obj,
+				removedData : [],
+				row : -1,
+				context : null,
+				html : false,
+				addTop : false,
+				validate : true,
+				fRules : null,
+				vRules : null,
+				createRowDelay : 0,
+				heigth : 0,
+				scrollPaging : {
+					idx : 0,
+					size : 100
+				},
+				serverPaging : {
+					// TODO
+				},
+				resizable : false,
+				vResizable : false,
+				sortable : false,
+				select : false,
+				multiselect : false,
+				hover : false,
+				onSelect : null
+			};
 
-				opts.contents = $('<div class="datepicker_contents__"></div>');
-				opts.contents.css({
-					display: "none",
-					position: "absolute"
-				});
+			try {
+				this.options = $.extend({}, this.options, N.context.attr("ui")["grid"]);
 
-				$(window).bind("resize.datepicker", function() {
-					opts.contents.css("left", opts.context.offset().left + "px");
-				});
-				$(window).trigger("resize.datepicker");
+				//because $.extend method is don't extend object type
+				this.options.scrollPaging = $.extend({}, this.options.scrollPaging, N.context.attr("ui")["grid"]["scrollPaging"]);
+			} catch (e) {
+				N.error(e, e);
+			}
 
-				// create year items
-				var yearsPanel = $('<div class="datepicker_years_panel__"></div>');
-				yearsPanel.css({
-					width: "40px",
-					float: "left"
-				});
-				var yearItem = $('<div align="center"></div>');
-				yearItem.css({
-					"line-height": "25px"
-				}).click(function(e) {
-					e.preventDefault();
-					yearsPanel.find("div.datepicker_year_item__").removeClass("datepicker_year_selected__");
-					$(this).addClass("datepicker_year_selected__");
-				});
-				var yearItemClone;
-				yearsPanel.append(yearItem.clone(true).addClass("datepicker_year_title__").text(N.message.get(opts.message, "year")));
-				// render year items
-				for(var i=currYear-2;i<=currYear+2;i++) {
-					yearItemClone = yearItem.clone(true).addClass("datepicker_year_item__");
-					if(i === currYear) {
-						yearItemClone.addClass("datepicker_curr_year__");
-						yearItemClone.addClass("datepicker_year_selected__");
-					}
-					yearsPanel.append(yearItemClone.text(String(i)));
+			if (N.isPlainObject(opts)) {
+				$.extend(this.options, opts);
+				if(N.type(this.options.context) === "string") {
+					this.options.context = N(this.options.context);
 				}
+			} else {
+				this.options.context = N(opts);
+			}
 
-				var yearPaging = $('<div class="datepicker_year_paging__" align="center"><a href="#" class="datepicker_year_prev__" title="이전">◀</a> <a href="#" class="datepicker_year_next__" title="다음">▶</a></div>');
-				yearPaging.css({
-					"line-height": "25px"
-				});
-				yearPaging.find("a.datepicker_year_prev__").click(function(e) {
-					e.preventDefault();
-					DatePicker.yearPaging(yearsPanel.find("div.datepicker_year_item__"), currYear, -5);
-				});
-				yearPaging.find("a.datepicker_year_next__").click(function(e) {
-					e.preventDefault();
-					DatePicker.yearPaging(yearsPanel.find("div.datepicker_year_item__"), currYear, 5);
-				});
-				yearsPanel.append(yearPaging);
-				opts.contents.append(yearsPanel);
+			// set tbody template
+			this.tbodyTemp = this.options.context.find("> tbody").clone(true, true);
 
-				// create month items
-				var monthsPanel = $('<div class="datepicker_months_panel__"></div>');
-				monthsPanel.css({
-					width: "60px",
-					float: "left",
-					"margin-left": "3px"
-				});
-				var monthItem = $('<div align="center"></div>');
-				monthItem.css({
-					"line-height": "25px",
-					width: "28px",
-					float: "left"
-				}).click(function(e) {
-					e.preventDefault();
-					monthsPanel.find("div.datepicker_month_item__").removeClass("datepicker_month_selected__");
-					$(this).addClass("datepicker_month_selected__");
-					if(opts.monthonly) {
-						var selDate = N.date.strToDate(yearsPanel.find("div.datepicker_year_selected__").text() +  N.string.lpad($(this).text(), 2, "0"));
-						var onSelectContinue;
-						if(opts.onSelect !== null) {
-							onSelectContinue = opts.onSelect(opts.context, selDate);
-						}
-						if(onSelectContinue === undefined || onSelectContinue === true) {
-							opts.context.val(selDate.obj.formatDate(selDate.format));
-						}
-						opts.contents.fadeOut(150);
+			// set context style class
+			this.options.context.addClass("grid__");
+			// set context style class for hover option
+			if(this.options.hover) {
+				this.options.context.addClass("grid_hover__");
+			}
+			if(this.options.select || this.options.multiselect) {
+				// set context style class for select, multiselect options
+				this.options.context.addClass("grid_select__");
+
+				var this_ = this;
+				// bind tbody click event for select, multiselect options
+				this.tbodyTemp.bind("click.grid.tbody", function() {
+					if($(this).hasClass("grid_selected__")) {
+						$(this).removeClass("grid_selected__");
 					} else {
-						daysPanel.empty();
-						var endDateCls = N.date.strToDate(yearsPanel.find("div.datepicker_year_selected__").text() +  N.string.lpad($(this).text(), 2, "0"));
-						var endDate = endDateCls.obj.getDate();
-						endDateCls.obj.setDate(1)
-						var startDay = endDateCls.obj.getDay();
-						//render week
-						for(var i=0;i<days.length;i++) {
-							daysPanel.append(dayItem.clone(true).addClass("datepicker_day__").text(days[i]));
+						if(!this_.options.multiselect) {
+							this_.options.context.find("> tbody").removeClass("grid_selected__");
 						}
-
-						var prevEndDateCls = N.date.strToDate(yearsPanel.find("div.datepicker_year_selected__").text() +  N.string.lpad(String(parseInt($(this).text())-1), 2, "0"));
-						var prevEndDate = prevEndDateCls.obj.getDate();
-						var date;
-						var dateItem;
-						//render date items
-						for(var i=1-startDay;i<=42-startDay;i++) {
-							date = String(i);
-							dateItem = dayItem.clone(true);
-							if(i<=0) {
-								dateItem.addClass("datepicker_prev_day_item__");
-								date = String(prevEndDate + i);
-							} else if(i > endDate) {
-								dateItem.addClass("datepicker_next_day_item__");
-								date = String(i-endDate);
-							} else {
-								dateItem.addClass("datepicker_day_item__");
-							}
-							daysPanel.append(dateItem.text(date));
+						$(this).addClass("grid_selected__");
+						if(this_.options.onSelect !== null) {
+							this_.options.onSelect($(this).index()-1, $(this), this_.options.data);
 						}
-					}
-				});
-				monthsPanel.append(monthItem.clone(true).css("width", "58px").addClass("datepicker_month_title__").text(N.message.get(opts.message, "month")));
-
-				// render month items
-				for(var i=1;i<=12;i++) {
-					monthsPanel.append(monthItem.clone(true).addClass("datepicker_month_item__").text(String(i)));
-				}
-				opts.contents.append(monthsPanel);
-
-				if(!opts.monthonly) {
-					// create day items
-					var days = N.message.get(opts.message, "days").split(",");
-					var daysPanel = $('<div class="datepicker_days_panel__"></div>');
-					daysPanel.css({
-						width: "210px",
-						float: "left",
-						"margin-left": "3px"
-					});
-					var dayItem = $('<div align="center"></div>');
-					dayItem.css({
-						"line-height": "25px",
-						width: "28px",
-						float: "left"
-					}).click(function(e) {
-						e.preventDefault();
-						var thisEle = $(this);
-						daysPanel.find("div.datepicker_prev_day_item__, div.datepicker_day_item__, div.datepicker_next_day_item__").removeClass("datepicker_day_selected__");
-						thisEle.addClass("datepicker_day_selected__");
-						var selMonth;
-						if(thisEle.hasClass("datepicker_prev_day_item__")) {
-							selMonth = String(parseInt(monthsPanel.find("div.datepicker_month_selected__").text()) - 1);
-						} else if(thisEle.hasClass("datepicker_next_day_item__")) {
-							selMonth = String(parseInt(monthsPanel.find("div.datepicker_month_selected__").text()) + 1);
-						} else {
-							selMonth = monthsPanel.find("div.datepicker_month_selected__").text();
-						}
-						var selDate = N.date.strToDate(yearsPanel.find("div.datepicker_year_selected__").text()
-								+ N.string.lpad(selMonth, 2, "0")
-								+  N.string.lpad(thisEle.text(), 2, "0"));
-						var onSelectContinue;
-						if(opts.onSelect !== null) {
-							onSelectContinue = opts.onSelect(opts.context, selDate);
-						}
-						if(onSelectContinue === undefined || onSelectContinue === true) {
-							opts.context.val(selDate.obj.formatDate(selDate.format));
-						}
-						opts.contents.fadeOut(150);
-						$(document).unbind("keyup.datepicker");
-					});
-					opts.contents.append(daysPanel);
-
-					// click current month
-					monthsPanel.find("div:contains(" + String(parseInt(d.formatDate("m"))) + ")").click();
-				}
-
-				// clear float
-				opts.contents.append('<div style="clear: both;"></div>');
-
-				// append datepicker panel after context
-				opts.context.after(opts.contents);
-
-				// show datepicker
-				opts.context.bind("focusin.datepicker", function() {
-					opts.contents.fadeIn(150);
-
-					// bind "ESC" key event
-					// if press the "ESC" key, then hide datepicker
-			        $(document).bind("keyup.datepicker", function(e) {
-			        	if (e.keyCode == 27) {
-			        		opts.contents.fadeOut(150);
-			        		$(document).unbind("keyup.datepicker");
-			        	}
-					});
-				});
-			},
-			yearPaging : function(yearItems, currYear, addCnt) {
-				yearItems.removeClass("datepicker_curr_year__");
-				yearItems.each(function() {
-					var thisEle = $(this);
-					thisEle.text(String(parseInt(thisEle.text()) + addCnt));
-					if(thisEle.text() === String(currYear)) {
-						thisEle.addClass("datepicker_curr_year__");
 					}
 				});
 			}
+
+			// set cell count in tbody
+			this.cellCnt = Grid.cellCnt(this.tbodyTemp);
+
+			// fixed header
+			if(this.options.height > 0) {
+				Grid.fixHeader.call(this);
+			}
+
+			// set tbody cell id info into th cell in thead
+			this.thead = Grid.setTheadCellInfo.call(this);
+
+			// sortable, v(ertical)Resizable
+			if(this.options.sortable) {
+				Grid.sort.call(this);
+			}
+
+			// resizable column width
+			if(this.options.resizable) {
+				Grid.resize.call(this);
+			}
+
+			this.options.context.instance("grid", this);
+
+			N.ds.instance(this, true);
+
+			return this;
+		};
+		Grid.fn = Grid.prototype;
+		$.extend(Grid.fn, {
+			data : function(rowStatus) {
+				if(rowStatus === undefined) {
+					return this.options.data.get();
+				} else if(rowStatus === "modified") {
+					return this.options.data.datafilter("data.rowStatus !== undefined").get().concat(this.options.removedData);
+				} else if(rowStatus === "delete") {
+					return this.options.removedData;
+				} else {
+					return this.options.data.datafilter("data.rowStatus === '" + rowStatus + "'").get();
+				}
+			},
+			context : function(sel) {
+				return sel !== undefined ? this.options.context.find(sel) : this.options.context;
+			},
+			bind : function(data) {
+				var opts = this.options;
+				//empty removedData;
+				opts.removedData = [];
+				//for internal call bind method by scrollPaging
+				var interCall = arguments[1] !== undefined && arguments[1] === true ? true : false;
+				//for rebind new data
+				if(data !== undefined) {
+					opts.data = N.type(data) === "array" ? N(data) : data;
+				}
+				var tbodyTempClone;
+
+				if (opts.data.length > 0) {
+					//clear tbody visual effect
+					opts.context.find("tbody").clearQueue().stop();
+					if(!interCall) {
+						opts.scrollPaging.idx = 0;
+					}
+					if(opts.scrollPaging.idx === 0) {
+						//remove tbodys in grid body area
+						opts.context.find("tbody").remove();
+					}
+
+					var i = opts.scrollPaging.idx;
+					var this_ = this;
+					var limit;
+					if(opts.height > 0) {
+						limit = opts.scrollPaging.size;
+					} else {
+						limit = opts.data.length
+					}
+					var classOpts;
+					var this_ = this;
+					var render = function() {
+						// clone tbody for create new line
+						tbodyTempClone = this_.tbodyTemp.clone(true, true).hide();
+						opts.context.append(tbodyTempClone);
+
+						classOpts = N.element.toOpts(tbodyTempClone);
+						if(classOpts !== undefined && classOpts.rowHandler !== undefined) {
+							(new Function("return " + classOpts.rowHandler))()(i, tbodyTempClone, opts.data[i]);
+						}
+
+						// for row data bind, use N.form
+						N(opts.data[i]).form({
+							context : tbodyTempClone,
+							extObj : this_,
+							extRow : i
+						}).bind();
+						tbodyTempClone.show(opts.createRowDelay, function() {
+							i++;
+							if(i < opts.scrollPaging.idx + limit) {
+								render();
+							}
+						});
+					};
+					render();
+				} else {
+					//remove tbodys in grid body area
+					opts.context.find("tbody").remove();
+					opts.context.append('<tbody><tr><td class="empty__" align="center" colspan="' + this.cellCnt + '">'
+							+ N.message.get(opts.message, "empty") + '</td></tr></tbody>');
+					opts.context.append(tbodyTempClone);
+				}
+
+				return this;
+			},
+			add : function() {
+				var opts = this.options;
+				if (opts.context.find("td.empty__").length > 0) {
+					opts.context.find("tbody").remove();
+				}
+				var tbodyTempClone = this.tbodyTemp.clone(true, true);
+
+				if(opts.addTop) {
+					opts.context.find("thead").after(tbodyTempClone);
+				} else {
+					opts.context.append(tbodyTempClone);
+				}
+
+				// for new row data bind, use N.form
+				opts.data.form({
+					context : tbodyTempClone,
+					extObj : this_,
+					extRow : opts.addTop ? 0 : opts.data.length,
+					addTop : opts.addTop
+				}).add();
+
+				//focus to first input element
+				tbodyTempClone.find(":input:eq(0)").get(0).focus();
+
+				return this;
+			},
+			remove : function(row) {
+				var opts = this.options;
+				if(row === undefined || row > opts.data.length - 1) {
+		        	N.error("[N.grid.remove]Row index out of range");
+		        }
+
+				opts.context.find("tbody:eq(" + row + ")").remove();
+
+				if (opts.data[row].rowStatus === "insert") {
+		            opts.data.splice(row, 1);
+		        } else {
+		        	var removedData = opts.data.splice(row, 1)[0];
+		        	removedData["rowStatus"] = "delete";
+		            opts.removedData.push(removedData);
+		        }
+
+				N.ds.instance(this).notify();
+			},
+			revert : function(row) {
+				var opts = this.options;
+				if(row !== undefined) {
+					opts.context.find("tbody:eq(" + String(row) + ")").instance("form").revert();
+				} else {
+					opts.context.find("tbody").instance("form", function(i) {
+						if(this.options !== undefined && this.options.data[0].rowStatus === "update") {
+							this.revert();
+						}
+					});
+				}
+				return this;
+			},
+			validate : function(row) {
+				var opts = this.options;
+				var valiRslt = true;
+				if(row !== undefined) {
+					opts.context.find("tbody:eq(" + String(row) + ")").instance("form").validate();
+				} else {
+					var rowStatus;
+					opts.context.find("tbody").instance("form", function(i) {
+						if(this.options !== undefined && this.options.data.length > 0) {
+							rowStatus = this.options.data[0].rowStatus;
+							if(rowStatus === "update" || rowStatus === "insert") {
+								if(!this.validate()) {
+									valiRslt = false;
+								}
+							}
+						}
+					});
+				}
+				return valiRslt;
+			},
+			val : function(row, key, val) {
+				if(val === undefined) {
+					return this.options.context.find("tbody:eq(" + String(row) + ")").instance("form").val(key);
+				}
+				this.options.context.find("tbody:eq(" + String(row) + ")").instance("form").val(key, val);
+				return this;
+			},
+			update : function(row, key) {
+				if(row === undefined) {
+					this.bind();
+				} else {
+					this.options.context.find("tbody:eq(" + String(row) + ")").instance("form").update(0, key);
+				}
+				return this;
+			}
+		});
+
+		$.extend(Grid, {
+			fixHeader : function() {
+				var opts = this.options;
+
+				// addTop option is unconditional [true] when fixed header mode
+				opts.addTop = true;
+
+				opts.context.css({
+					"table-layout" : "fixed",
+					"margin" : "0"
+				});
+
+				var width = opts.context.attr("width");
+		        if (N.string.trimToNull(width) === null || width.indexOf("100%") < 0) {
+		        	opts.context.css("width", "100%");
+		        }
+
+		        var sampleCell = opts.context.find("tbody td:eq(0)");
+		        var borderLeft = sampleCell.css("border-left-width") + " " + sampleCell.css("border-left-style") + " " + sampleCell.css("border-left-color");
+		        var borderBottom = sampleCell.css("border-bottom-width") + " " + sampleCell.css("border-bottom-style") + " " + sampleCell.css("border-bottom-color");
+
+		        // Root grid container
+		        var gridWrap = opts.context.wrap('<div class="grid_wrap__"/>').parent();
+		        gridWrap.css({
+		        	"border-left" : borderLeft,
+		        });
+
+		        //Create grid header
+		        var scrollbarWidth = N.browser.scrollbarWidth();
+		        var thead = opts.context.clone(true, true);
+		        thead.find("tbody").remove();
+		        thead.find("tfoot").remove();
+		        var theadWrap = thead.wrap('<div class="thead_wrap__"/>').parent().css({
+		        	"padding-right" : scrollbarWidth + "px",
+		        	"margin-left" : "-1px",
+		        });
+		        gridWrap.prepend(theadWrap);
+
+		        //Create grid body
+		        opts.context.find("> thead th").empty().css({
+		        	"height" : "0",
+	                "padding-top" : "0",
+	                "padding-bottom" : "0",
+	                "border-top" : "none",
+	                "border-bottom" : "none"
+		        });
+		        opts.context.find("> tbody td").css({
+	                "border-top" : "none",
+		        });
+		        this.tbodyTemp.find("td").css({
+	                "border-top" : "none",
+		        });
+		        var tbodyWrap = opts.context.wrap('<div class="tbody_wrap__"/>').parent().css({
+		        	"height" : String(opts.height) + "px",
+		        	"overflow-y" : "scroll",
+		        	"margin-left" : "-1px",
+		        	"border-bottom" : borderBottom,
+		        });
+
+		        //Scroll paging
+		        var this_ = this;
+		        var defSPSize = N.context.attr("ui")["grid"]["scrollPaging"]["size"];
+		        var tbodyLength;
+		        tbodyWrap.scroll(function() {
+		        	var thisWrap = $(this);
+                    if (thisWrap.scrollTop() >= opts.context.height() - thisWrap.height()) {
+                    	tbodyLength = opts.context.find("> tbody").length;
+                    	if (tbodyLength === opts.scrollPaging.idx + defSPSize) {
+	                        if (tbodyLength > 0 && tbodyLength <= opts.data.length) {
+	                            opts.scrollPaging.idx += defSPSize;
+	                        }
+
+	                        if (opts.scrollPaging.idx + opts.scrollPaging.size >= opts.data.length) {
+	                        	opts.scrollPaging.size = opts.data.length - opts.scrollPaging.idx;
+	                        } else {
+	                        	opts.scrollPaging.size = defSPSize;
+	                        }
+
+	                        if(opts.scrollPaging.idx < opts.data.length) {
+	                        	this_.bind(undefined, true);
+	                        }
+	                    }
+	                }
+	            });
+
+		        // Create grid footer
+		        var tfootWrap;
+		        if(opts.context.find("> tfoot").length > 0) {
+		        	var tfoot = opts.context.clone(true, true);
+			        opts.context.find("> tfoot").remove();
+			        tfoot.find("thead").remove();
+			        tfoot.find("tbody").remove();
+			        tfootWrap = tfoot.wrap('<div class="tfoot_wrap__"/>').parent().css({
+			        	"padding-right" : scrollbarWidth + "px",
+			        	"margin-left" : "-1px",
+			        });
+			        gridWrap.append(tfootWrap);
+		        }
+
+		        // Vertical height resizing
+		        if(opts.vResizable) {
+		        	Grid.vResize.call(this, gridWrap, tbodyWrap, tfootWrap);
+		        }
+			},
+			vResize : function(gridWrap, tbodyWrap, tfootWrap) {
+        		var pressed = false;
+	        	var vResizable = $('<div class="v_resizable__" align="center"></div>');
+	        	vResizable.css("cursor", "n-resize");
+
+	        	var currHeight, tbodyOffset, tfootHeight = 0;
+	        	vResizable.bind("mousedown.grid.vResize", function() {
+	        		if(tfootWrap !== undefined) {
+		        		tfootHeight = tfootWrap.height();
+		        	}
+		        	tbodyOffset = tbodyWrap.offset();
+
+	        		$(document).bind("dragstart.grid.vResize, selectstart.grid.vResize", function() {
+	                    return false;
+	                });
+	        		pressed = true;
+
+		        	$(window.document).bind("mousemove.grid.vResize", function(e) {
+		        		if(pressed) {
+		        			currHeight = (e.pageY - tbodyOffset.top - tfootHeight) + "px";
+		        			tbodyWrap.css({
+		        				"height" : currHeight,
+		        				"max-height" : currHeight
+		        			});
+		        		}
+			        });
+
+		        	$(window.document).bind("mouseup.grid.vResize", function() {
+		        		$(document).unbind("dragstart.grid.vResize, selectstart.grid.vResize, mousemove.grid.vResize, mouseup.grid.vResize");
+		        		pressed = false;
+		        	});
+	        	});
+
+	        	gridWrap.after(vResizable);
+        	},
+			resize : function() {
+				var opts = this.options;
+				var theadCells = this.thead.find("> tr th");
+				var resizeBar;
+				var ele;
+
+				var pressed = false;
+				var cellEle;
+				var defWidth;
+				var currWidth;
+				var currCellEle;
+				var currCellEleTable;
+				var targetCellEle;
+				var targetCellEleWrap;
+				var currResizeBarEle;
+				var startOffsetX;
+				var initHeight;
+				var innerHeight;
+				var scrollbarWidth = N.browser.scrollbarWidth();
+				if(N.browser.is("safari")){
+					theadCells.css("padding-left", "0");
+					theadCells.css("padding-right", "0");
+				}
+				theadCells.each(function() {
+					cellEle = $(this);
+		            resizeBar = cellEle.append('<span class="resize_bar__"></span>').find("span.resize_bar__");
+		            var resizeBarWidth = 6;
+
+		            if(N.browser.is("ie") || N.browser.is("firefox")) {
+		            	 innerHeight = String(cellEle.innerHeight());
+		            } else {
+		            	 innerHeight = String(cellEle.innerHeight() + 1);
+		            }
+		            resizeBar.css({
+		            	"padding": "0px",
+		            	"margin": "-" + cellEle.css("padding-top") + " -" + (resizeBarWidth/2 + parseInt(cellEle.css("padding-right"))) + "px -" + cellEle.css("padding-bottom") + " 0",
+		            	"height" : innerHeight + "px",
+		            	"float" : "right",
+		            	"width" : resizeBarWidth + "px",
+		            	"cursor": "e-resize"
+		            });
+
+		            resizeBar.bind("mousedown.grid.resize", function(e) {
+		            	startOffsetX = e.pageX;
+		            	currResizeBarEle = $(e.target);
+		            	currCellEle = currResizeBarEle.parent("th");
+
+		            	// cell 안의 text 와 float 속성이 먹은 resizeBar 가 줄넘김 되어 cell 의 높이가 변하는것 방지
+		            	theadCells.find("span.resize_bar__").css("float", "none");
+
+		            	if(opts.height > 0) {
+		            		targetCellEle = opts.context.find("thead th:eq(" + theadCells.index(currCellEle) + ")");
+		            		currCellEleTable = currCellEle.parents("table.grid__");
+		            		targetCellEleWrap = targetCellEle.parents("div.tbody_wrap__");
+		            	}
+
+		            	// for prevent sort event
+		            	currCellEle.data("sortLock", true);
+
+		            	defWidth = currCellEle.innerWidth();
+
+		            	initHeight = currCellEle.innerHeight() + 1;
+
+		        		$(document).bind("dragstart.grid.resize, selectstart.grid.resize", function() {
+		                    return false;
+		                });
+		        		pressed = true;
+
+		        		$(window.document).bind("mousemove.grid.resize", function(e) {
+			        		if(pressed) {
+			        			currWidth = defWidth + (e.pageX - startOffsetX);
+			        			if(currWidth > 0) {
+			        				currCellEle.css("width", currWidth + "px");
+			        				if(targetCellEle !== undefined) {
+			        					targetCellEle.css("width", currWidth + "px");
+			        					targetCellEleWrap.width(currCellEleTable.width() + scrollbarWidth);
+			        				}
+			        			}
+			        		}
+				        });
+
+			        	$(window.document).bind("mouseup.grid.resize", function(e) {
+			        		$(document).unbind("dragstart.grid.resize, selectstart.grid.resize, mousemove.grid.resize, mouseup.grid.resize");
+			        		theadCells.find("span.resize_bar__").css("float", "right");
+
+			        		// for keeping table layout
+			        		if(currCellEle.innerHeight() + 1 > initHeight) {
+			        			currCellEle.css("width", "");
+			        			targetCellEle.css("width", "");
+			        			targetCellEleWrap.width(currCellEleTable.width() + scrollbarWidth);
+			        		}
+
+			        		pressed = false;
+			        	});
+		        	});
+				});
+			},
+        	sort : function() {
+    	        var opts = this.options;
+    	        var thead = this.thead;
+
+    	        var theadCells = thead.find("> tr th");
+    	        theadCells.css("cursor", "pointer");
+    	        var this_ = this;
+    	        theadCells.bind("click.grid.sort", function(e) {
+    	        	var currEle = $(this);
+    	        	if(currEle.data("sortLock")) {
+    	        		currEle.data("sortLock", false);
+    	        		return false;
+    	        	}
+    	        	if (opts.data.length > 0) {
+    	        		if(N.string.trimToNull($(this).text()) != null && $(this).find("input[type='checkbox']").length == 0) {
+    	        			var isAsc = false;
+    	        			if (currEle.find("span.sortable__").hasClass("asc__")) {
+    	        				isAsc = true;
+    	        			}
+    	        			thead.find("span.sortable__").remove();
+    	                    if (isAsc) {
+    	                    	currEle.append('<span class="sortable__ desc__">' + opts.sortableItem.asc + '</span>')
+    	                    	this_.bind(N(opts.data).datasort($(this).data("id"), true));
+    	                    } else {
+    	                    	currEle.append('<span class="sortable__ asc__">' + opts.sortableItem.desc + '</span>')
+    	                    	this_.bind(N(opts.data).datasort($(this).data("id")));
+    	                    }
+    	        		}
+    	        	}
+    	        });
+        	},
+        	serverPaging : function() {
+        		//TODO
+        	},
+        	setTheadCellInfo : function() {
+        		var opts = this.options;
+        		var thead;
+    			if (opts.height > 0) {
+    	        	thead = opts.context.closest("div.grid_wrap__").find("> div.thead_wrap__ thead");
+    	        } else {
+    	        	thead = opts.context.find("thead");
+    	        }
+    			var id;
+    			this.tbodyTemp.find("> tr td").each(function(i) {
+    				id = $(this).attr("id");
+    				if(id === undefined) {
+    					id = $(this).find("*").attr("id");
+    				}
+    				thead.find("> tr th:eq(" + i + ")").data("id", id);
+                });
+    			return thead;
+        	},
+			cellCnt : function(ele) {
+		        return Math.max.apply(null, $.map(ele.find("tr"), function(el) {
+		            var cellCnt = 0;
+		            $(el).find("td, th").each(function() {
+		                cellCnt += N.string.trimToZero($(this).attr("colspan")) == "0" ? 1 : Number(N.string.trimToZero($(this).attr("colspan")));
+		            });
+		            return cellCnt;
+		        }));
+		    }
 		});
 
 	})(NTR);

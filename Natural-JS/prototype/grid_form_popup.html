@@ -1,0 +1,187 @@
+<div id="gridFormPopup">
+	<div class="divBar">DATA</div>
+	<div class="dataBox">
+		<table>
+			<tr>
+				<td width="70"><label for="data">Data</label></td>
+				<td width="*">
+					<textarea id="data" class="data">
+[
+  {
+    "_id": "53e21cba9f982281b3459438",
+    "index": 0,
+    "guid": "1a9e5450-c664-4bfd-8174-d03005eca08d",
+    "isActive": "Y",
+    "balance": "$1,284.38",
+    "picture": "http://placehold.it/32x32",
+    "age": 26,
+    "eyeColor": "green",
+    "name": "Dean Stanley",
+    "gender": "male",
+    "company": "ZENTIA",
+    "email": "deanstanley@zentia.com",
+    "phone": "+1 (920) 409-2680",
+    "address": "936 Meserole Street, Vicksburg, Massachusetts, 1198",
+    "about": "Mollit elit qui reprehenderit fugiat excepteur adipisicing sunt id proident laborum sint proident. Amet cupidatat ipsum do irure qui magna sunt pariatur commodo eiusmod ipsum qui ad culpa. Nisi tempor cupidatat do tempor reprehenderit irure consectetur cupidatat deserunt fugiat. Ipsum sint id ipsum voluptate duis laboris esse sunt nisi mollit dolore cupidatat.\r\n",
+    "registered": "2014-02-20T03:58:09 -09:00",
+    "latitude": 81.131606,
+    "longitude": 87.110498,
+    "greeting": "Hello, Dean Stanley! You have 1 unread messages.",
+    "favoriteFruit": "strawberry"
+  },.............
+					</textarea>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div class="divBar">DEMO</div>
+	<div class="demoBox">
+		<div id="defBtnBox" class="btnBox">
+			<a id="btnBindDataDef" href="#" class='{ "color": "skyblue", "size": "small" }'>bind data</a>
+		</div>
+		<table id="grid" class="grid__">
+			<thead>
+				<tr>
+					<th width="40">index</th>
+					<th width="50">picture</th>
+					<th width="110">name</th>
+					<th width="130">email</th>
+					<th width="50">gender</th>
+					<th width="60">eyeColor</th>
+					<th width="40">age</th>
+					<th width="*">company</th>
+					<th width="60">isActive</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td id="index"></td>
+					<td align="center"><img id="picture" height="16" /></td>
+					<td id="name"></td>
+					<td id="email"></td>
+					<td id="gender" align="center"></td>
+					<td id="eyeColor"></td>
+					<td id="age"></td>
+					<td id="company"></td>
+					<td id="isActive" align="center"></td>
+				</tr>
+			</tbody>
+		</table>
+
+		<table id="form" class='form' title="입력양식">
+			<tr>
+				<th width="85" align="right"><label for="picture">picture</label></th>
+				<td width="*"><img id="picture" /></td>
+			</tr>
+			<tr>
+				<th align="right"><label for="name">name</label></th>
+				<td>
+					<input id="name" type="text" class='{ "validate" : [["required"]] }' />
+				</td>
+			</tr>
+			<tr>
+				<th align="right"><label for="email">email</label></th>
+				<td>
+					<input id="email" type="text" class='{ "format" : [["trimtoempty"], ["generic", "@@@@@@＊＊＊"]], "validate" : [["required"], ["email"]] }' />
+				</td>
+			</tr>
+			<tr>
+				<th align="right"><label for="_id">password</label></th>
+				<td>
+					<input id="_id" type="password" class='{ "validate" : [["required"]] }' />
+				</td>
+			</tr>
+			<tr>
+				<th align="right"><label for="balance">balance</label></th>
+				<td>
+					<input id="balance" type="text" class='{ "format" : [["trimtoempty"], ["numeric", "$#,###.##0"]], "validate" : [["required"], ["decimal"]] }' />
+				</td>
+			</tr>
+			<tr>
+				<th align="right"><label for="phone">phone</label></th>
+				<td>
+					<input id="phone" type="text" readonly="readonly" />
+				</td>
+			</tr>
+			<tr>
+				<th align="right"><label for="age">age</label></th>
+				<td>
+					<input id="age" type="text" disabled="disabled" />
+					<input id="index" type="hidden" />
+				</td>
+			</tr>
+			<tr>
+				<th align="right"><label for="registered">registered</label></th>
+				<td>
+					<input id="registered" type="text" class='{ "format": [["date", 8, "date"]], "validate" : [["required"]] }' />
+				</td>
+			</tr>
+			<tr>
+				<th align="right"><label for="about">about</label></th>
+				<td>
+					<textarea id="about" rows="5" cols="80" class='{ "format" : [["trimtoempty"], ["limit", "50", "..."]], "validate" : [["required"], ["korean"]] }'></textarea>
+				</td>
+			</tr>
+			<tr>
+				<th align="right"><label for="greeting">about</label></th>
+				<td id="greeting"></td>
+			</tr>
+			<tr>
+				<th align="right"><label for="isActive">isActive</label></th>
+				<td>
+					<input id="isActive" type="checkbox" />
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<div class="divBar">SOURCE</div>
+	<div class="sourceBox">
+	</div>
+</div>
+
+<script type="text/javascript">
+
+N("div#gridFormPopup").service({
+	grid : undefined,
+    init : function(view) {
+    	this.initButton();
+    	//this.createSelect(data);
+
+    	var popup = N("table#form").popup();
+
+    	var form = N([]).form("table#form");
+
+    	this.grid = N([]).grid({
+       		context :"table#grid",
+       		height : 350,
+       		resizable : true,
+       		sortable : true,
+       		select : true,
+       		hover : true,
+       		onSelect : function(i, ele, data) {
+       			form.bind(i, data);
+       			popup.open();
+       		}
+       	});
+
+    	this.setEvents(this);
+
+    	N("a#btnBindDataDef").click();
+    },
+    initButton : function() {
+    	N("div.btnBox").button();
+    },
+    setEvents : function(this_) {
+    	N("a#btnBindDataDef").click(function(e) {
+            e.preventDefault();
+            N.controller({
+        		url : "prototype/data/grid_big.json",
+        		async : false
+        	}).submit(function(data) {
+        		this_.grid.bind(data);
+        	});
+        });
+    }
+});
+</script>
