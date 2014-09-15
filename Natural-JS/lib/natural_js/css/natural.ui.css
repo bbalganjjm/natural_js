@@ -211,7 +211,7 @@ table.grid__ tbody{
 	background-color: #ffffff;
 }
 
-table.grid__.grid_hover__ tbody:hover, table.grid__.grid_hover__ tbody:hover input, select, textarea {
+table.grid__.grid_hover__ tbody:hover, table.grid__.grid_hover__ tbody:hover input, table.grid__.grid_hover__ tbody:hover select, table.grid__.grid_hover__ tbody:hover textarea {
 	background-color: #efefef;
 }
 

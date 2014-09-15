@@ -83,7 +83,7 @@ var IndexServiceController = {
     		contentType : "application/x-www-form-urlencoded",
     		dataType : "html"
     	}).submit(function(html) {
-    		target.text(html);
+    		target.text(html.replace(/\t/g, "    "));
     	});
     }
 }

@@ -1,11 +1,7 @@
 <div id="form">
 	<div class="divBar">DATA</div>
 	<div class="dataBox">
-		<table>
-			<tr>
-				<td width="70"><label for="data">Data</label></td>
-				<td width="*">
-					<textarea id="data" class="data">
+		<textarea id="data" class="data">
 [
 	{
 	    "_id": "53e21cba9f982281b3459438",
@@ -91,16 +87,13 @@
         }]
     }
 ]
-					</textarea>
-				</td>
-			</tr>
-		</table>
+		</textarea>
 	</div>
 	<div class="divBar">DEMO</div>
 	<div class="demoBox">
 		<div class="btnBox">
 			<a id="btnInitForm" href="#" class='{ "color": "skyblue", "size": "small" }'>Init Form</a>
-			<a id="btnFormBind" href="#" class='{ "color": "gray", "size": "small", "disable": true }'>Form Bind</a>
+			<a id="btnDataBind" href="#" class='{ "color": "gray", "size": "small", "disable": true }'>Data Bind</a>
 			<a id="btnCreateNewData" href="#" class='{ "color": "gray", "size": "small", "disable": true }'>Create New Row Data</a>
 			<a id="btnGetData" href="#" class='{ "color": "white", "size": "small", "disable": true }'>Get Data</a>
 			<a id="btnFormValidate" href="#" class='{ "color": "white", "size": "small", "disable": true }'>Form Validate</a>
@@ -246,7 +239,7 @@ N("div#form").service({
             });
     	});
 
-        N("a#btnFormBind", view).click(function(e) {
+        N("a#btnDataBind", view).click(function(e) {
             e.preventDefault();
             form.bind(0);
         });
