@@ -109,7 +109,7 @@
 		</table>
 	</div>
 
-	<div class="divBar">SOURCE</div>
+	<div class="divBar">SOURCE CODE</div>
 	<div class="sourceBox">
 	</div>
 </div>
@@ -118,6 +118,9 @@
 
 N("div#select").service({
     init : function(view) {
+    	// put source code
+    	IndexServiceController.getSourceCode("prototype/select.html", N("div.sourceBox"));
+    	
     	this.initButton(view);
 
     	var data = eval(N("textarea.data").val())[0];

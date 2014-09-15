@@ -6,29 +6,22 @@
 		</div>
 		<div id="tab" class="tab__">
 			<ul>
-				<li><a href="#tab1">Nunc tincidunt</a></li>
+				<li><a href="#tab1">삼고초려</a></li>
 				<li class='{ "onOpen" : "onOpen", "preLoad" : true, "url" : "prototype/form.html" }'><a href="#tab2">폼 예제</a></li>
 				<li class='{ "preLoad" : false, "url" : "prototype/button.html", "*active" : true }'><a href="#tab3">버튼 예제</a></li>
 			</ul>
-			<div id="tab1">
-				<pre>
-Proin elit arcu, rutrum commodo, vehicula tempus, commodo a,
-risus. Curabitur nec arcu. Donec sollicitudin mi sit amet mauris.
-Nam elementum quam ullamcorper ante. Etiam aliquet massa et lorem.
-Mauris dapibus lacus auctor risus. Aenean tempor ullamcorper leo.
-Vivamus sed magna quis ligula eleifend adipiscing. Duis orci.
-Aliquam sodales tortor vitae ipsum. Aliquam nulla. Duis aliquam
-molestie erat. Ut et mauris vel pede varius sollicitudin. Sed ut
-dolor nec orci tincidunt interdum. Phasellus ipsum. Nunc tristique
-tempus lectus.
-				</pre>
+			<div id="tab1" style="white-space: pre;word-break: break-word;">
+삼고초려
+위키백과, 우리 모두의 백과사전.
+명말의 삼고초려도
+삼고초려(三顧草廬)는 후한 말, 삼국 시대에 촉한의 유비가 융중에 기거하던 제갈량을 얻기 위해 몸소 제갈량의 초가집으로 세 번이나 찾아갔던 일화를 일컫는다. 삼고지례, 초려삼고(草廬三顧)라고도 한다.
 			</div>
 			<div id="tab2"></div>
 			<div id="tab3"></div>
 		</div>
 	</div>
 
-	<div class="divBar">SOURCE</div>
+	<div class="divBar">SOURCE CODE</div>
 	<div class="sourceBox">
 	</div>
 </div>
@@ -38,6 +31,9 @@ tempus lectus.
 N("div#tabExam").service({
 	localTab : null,
     init : function(view) {
+    	// put source code
+    	IndexServiceController.getSourceCode("prototype/tab.html", N("div.sourceBox"));
+    	
     	this.initButton(view);
     	this.setEvents(view);
     },

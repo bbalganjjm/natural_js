@@ -20,7 +20,7 @@
 	부분 가리기
 	    </pre>
 	</div>
-    <div class="divBar">SOURCE</div>
+    <div class="divBar">SOURCE CODE</div>
     <div class="sourceBox">
 	</div>
 </div>
@@ -28,6 +28,9 @@
 
 N("div#alert").service({
     init : function(view) {
+    	// put source code
+    	IndexServiceController.getSourceCode("prototype/alert.html", N("div.sourceBox"));
+    	
     	this.initButton();
 
         N("a#btnAlertArea", view).click(function(e) {

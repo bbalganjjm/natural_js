@@ -152,8 +152,35 @@ div#main div#contents {
 	font-weight: bold;
 }
 
+.intro {
+	padding: 10px;
+}
+
+.intro h1 {
+	padding-left: 7px;
+	line-height: 14px;
+	border-left: 5px solid blue;
+	font-size: 12px;
+	font-weight: normal;
+}
+
+.intro h2 {
+	padding-left: 6px;
+	line-height: 8px;
+	border-left: 5px solid red;
+	font-size: 12px;
+	font-weight: normal;
+	margin-left: 15px;
+}
+
 .demoBox {
 	padding: 10px;
+}
+
+.demoBox .result {
+	border: 1px solid #cccccc;
+	min-height: 300px;
+	border-radius: 3px;
 }
 
 .data {
@@ -175,7 +202,20 @@ div#main div#contents {
 }
 
 .sourceBox {
+	white-space: pre;
+	word-break: break-word;
+	overflow-x: auto;
 	padding: 10px;
+	background-color: #efefef;
+	color: #999999;
+	font-family: "Courier New";
+	margin-top: -15px;
+	
+}
+
+.sourceBox:hover {
+	color: inherit;
+	background-color: inherit;
 }
 
 

@@ -1496,92 +1496,94 @@
 				var rdonyFg = false;
 				var dsabdFg = false;
 				eles = $(opts.context).find("#" + key);
-				var tagName = eles.get(0).tagName.toLowerCase();
-				var type = N.string.trimToEmpty(eles.attr("type")).toLowerCase();
-				if (eles.length > 0 && type !== "radio" && type !== "checkbox") {
-					eles.each(function() {
-						ele = $(this);
+				if (eles.length > 0) {
+					var tagName = eles.get(0).tagName.toLowerCase();
+					var type = N.string.trimToEmpty(eles.attr("type")).toLowerCase();
+					if (type !== "radio" && type !== "checkbox") {
+						eles.each(function() {
+							ele = $(this);
 
-		                if(ele.prop("readonly")) {
-		                	ele.removeAttr("readonly");
-		                    rdonyFg = true;
-		                }
-		                if(ele.prop("disabled")) {
-		                	ele.removeAttr("disabled");
-		                	dsabdFg = true;
-		                }
+			                if(ele.prop("readonly")) {
+			                	ele.removeAttr("readonly");
+			                    rdonyFg = true;
+			                }
+			                if(ele.prop("disabled")) {
+			                	ele.removeAttr("disabled");
+			                	dsabdFg = true;
+			                }
 
-						if (tagName === "textarea" || type === "text" || type === "password" || type === "hidden" || type === "file") {
-							if(ele.attr("class") !== undefined
-									&& (ele.attr("class").indexOf("\"format\"") > -1 || ele.attr("class").indexOf("\"validate\"") > -1)) {
-								ele.val(String(val));
-								//validate
-								if (type !== "hidden") {
-									ele.trigger("focusout.form.validate");
-								}
-								//dataSync
-								ele.trigger("focusout.form.dataSync");
-								//format
-								if (!ele.is("input:password, input:hidden, input:file")) {
-									ele.trigger("focusin.form.format");
-									ele.trigger("focusout.form.unformat");
-								}
-							} else {
-								ele.val(String(val));
-								//dataSync
-								ele.trigger("focusout.form.dataSync");
-							}
-						} else if(tagName === "select") {
-							ele.vals(val);
-							//dataSync
-							ele.trigger("change.form.dataSync");
-						} else if(tagName === "img") {
-							var currVal = String(val);
-							vals[ele.attr("id")] = currVal;
-                            if (vals["rowStatus"] != "insert") {
-                                vals["rowStatus"] = "update";
-                            }
-                            ele.addClass("data_changed__");
-                            if(notify === undefined || (notify !== undefined && notify === true)) {
-                            	N.ds.instance(opts.extObj !== null ? opts.extObj : this_).notify(opts.extRow > -1 ? opts.extRow : opts.row, ele.attr("id"));
-                            }
-							ele.attr("src", currVal);
-						} else {
-							var currVal = String(val);
-							vals[ele.attr("id")] = currVal;
-                            if (vals["rowStatus"] != "insert") {
-                                vals["rowStatus"] = "update";
-                            }
-                            ele.addClass("data_changed__");
-                            if(notify === undefined || (notify !== undefined && notify === true)) {
-                            	N.ds.instance(opts.extObj !== null ? opts.extObj : this_).notify(opts.extRow > -1 ? opts.extRow : opts.row, ele.attr("id"));
-                            }
-
-							if(ele.attr("class") !== undefined && ele.attr("class").indexOf("\"format\"") > -1) {
-								N(opts.data).formater(opts.fRules !== null ? opts.fRules : ele).format(opts.row);
-							} else {
-								if(!opts.html) {
-									ele.text(currVal);
+							if (tagName === "textarea" || type === "text" || type === "password" || type === "hidden" || type === "file") {
+								if(ele.attr("class") !== undefined
+										&& (ele.attr("class").indexOf("\"format\"") > -1 || ele.attr("class").indexOf("\"validate\"") > -1)) {
+									ele.val(String(val));
+									//validate
+									if (type !== "hidden") {
+										ele.trigger("focusout.form.validate");
+									}
+									//dataSync
+									ele.trigger("focusout.form.dataSync");
+									//format
+									if (!ele.is("input:password, input:hidden, input:file")) {
+										ele.trigger("focusin.form.format");
+										ele.trigger("focusout.form.unformat");
+									}
 								} else {
-									ele.html(currVal);
+									ele.val(String(val));
+									//dataSync
+									ele.trigger("focusout.form.dataSync");
+								}
+							} else if(tagName === "select") {
+								ele.vals(val);
+								//dataSync
+								ele.trigger("change.form.dataSync");
+							} else if(tagName === "img") {
+								var currVal = String(val);
+								vals[ele.attr("id")] = currVal;
+	                            if (vals["rowStatus"] != "insert") {
+	                                vals["rowStatus"] = "update";
+	                            }
+	                            ele.addClass("data_changed__");
+	                            if(notify === undefined || (notify !== undefined && notify === true)) {
+	                            	N.ds.instance(opts.extObj !== null ? opts.extObj : this_).notify(opts.extRow > -1 ? opts.extRow : opts.row, ele.attr("id"));
+	                            }
+								ele.attr("src", currVal);
+							} else {
+								var currVal = String(val);
+								vals[ele.attr("id")] = currVal;
+	                            if (vals["rowStatus"] != "insert") {
+	                                vals["rowStatus"] = "update";
+	                            }
+	                            ele.addClass("data_changed__");
+	                            if(notify === undefined || (notify !== undefined && notify === true)) {
+	                            	N.ds.instance(opts.extObj !== null ? opts.extObj : this_).notify(opts.extRow > -1 ? opts.extRow : opts.row, ele.attr("id"));
+	                            }
+
+								if(ele.attr("class") !== undefined && ele.attr("class").indexOf("\"format\"") > -1) {
+									N(opts.data).formater(opts.fRules !== null ? opts.fRules : ele).format(opts.row);
+								} else {
+									if(!opts.html) {
+										ele.text(currVal);
+									} else {
+										ele.html(currVal);
+									}
 								}
 							}
-						}
 
-						if(rdonyFg) {
-							ele.prop("readonly", true);
-		                }
-		                if(dsabdFg) {
-		                	ele.prop("disabled", true);
-		                }
-					});
-				} else {
-					//radio, checkbox
-					eles = $(opts.context).find("input:radio[id^='" + key + "'], input:checkbox[id^='" + key + "']");
-					if(eles.length > 0) {
-						eles.vals(val);
-						//dataSync
-						$(eles.get(0)).trigger("select.form.dataSync");
+							if(rdonyFg) {
+								ele.prop("readonly", true);
+			                }
+			                if(dsabdFg) {
+			                	ele.prop("disabled", true);
+			                }
+						});
+					} else {
+						//radio, checkbox
+						eles = $(opts.context).find("input:radio[id^='" + key + "'], input:checkbox[id^='" + key + "']");
+						if(eles.length > 0) {
+							eles.vals(val);
+							//dataSync
+							$(eles.get(0)).trigger("select.form.dataSync");
+						}
 					}
 				}
 				return this;

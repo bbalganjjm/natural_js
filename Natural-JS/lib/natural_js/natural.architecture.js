@@ -144,7 +144,7 @@
 							this(obj.request, xhr, textStatus, errorThrown);
 						});
 
-						N.error("[N.communicator." + textStatus + "]" + errorThrown);
+						N.error("[N.communicator." + textStatus + "]" + errorThrown, errorThrown);
 					},
 					complete : function(xhr, textStatus) {
 						// request filter

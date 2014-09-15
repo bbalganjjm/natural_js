@@ -96,10 +96,13 @@
 			}
 
 			this.viewContext = $(inst.options.context).closest(".view_context__");
-			if(this.viewContext.length == 0) {
+			if(this.viewContext.length === 0) {
+				this.viewContext = $(inst.options.context).closest("span.block_overlay_msg__").siblings(".view_context__");				
+			}
+			if(this.viewContext.length === 0) {
 				var pageContext = $(N.context.attr("architecture")["page"]["context"]);
 				var dataSyncTemp = pageContext.find("var#data_sync_temp__");
-				if(dataSyncTemp.length == 0) {
+				if(dataSyncTemp.length === 0) {
 					dataSyncTemp = pageContext.append('<var id="data_sync_temp__"></var>').find("var#data_sync_temp__");
 				}
 				this.viewContext = dataSyncTemp;

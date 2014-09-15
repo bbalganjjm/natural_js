@@ -37,7 +37,8 @@
 	<div class="divBar">DEMO</div>
 	<div class="demoBox">
 		<div id="defBtnBox" class="btnBox">
-			<a id="btnBindDataDef" href="#" class='{ "color": "skyblue", "size": "small" }'>bind data</a>
+			<a id="btnBind" href="#" class='{ "color": "skyblue", "size": "small" }'>bind data</a>
+			<a id="btnGetChengedRowData" href="#" class='{ "color": "skyblue", "size": "small" }'>get changed row data</a>
 		</div>
 		<table id="grid" class="grid__">
 			<thead>
@@ -68,7 +69,7 @@
 			</tbody>
 		</table>
 
-		<table id="form" class='form' title="입력양식">
+		<table id="form" class='form' title="입력 폼">
 			<tr>
 				<th width="85" align="right"><label for="picture">picture</label></th>
 				<td width="*"><img id="picture" /></td>
@@ -135,7 +136,7 @@
 		</table>
 	</div>
 
-	<div class="divBar">SOURCE</div>
+	<div class="divBar">SOURCE CODE</div>
 	<div class="sourceBox">
 	</div>
 </div>
@@ -145,12 +146,15 @@
 N("div#gridFormPopup").service({
 	grid : undefined,
     init : function(view) {
+    	// put source code
+    	IndexServiceController.getSourceCode("prototype/grid_form_popup.html", N("div.sourceBox"));
+    	
     	this.initButton();
     	//this.createSelect(data);
 
     	var popup = N("table#form").popup();
 
-    	var form = N([]).form("table#form");
+    	var form = N([]).form("table#form").bind();
 
     	this.grid = N([]).grid({
        		context :"table#grid",
@@ -167,13 +171,13 @@ N("div#gridFormPopup").service({
 
     	this.setEvents(this);
 
-    	N("a#btnBindDataDef").click();
+    	N("a#btnBind").click();
     },
     initButton : function() {
     	N("div.btnBox").button();
     },
     setEvents : function(this_) {
-    	N("a#btnBindDataDef").click(function(e) {
+    	N("a#btnBind").click(function(e) {
             e.preventDefault();
             N.controller({
         		url : "prototype/data/grid_big.json",
@@ -182,6 +186,16 @@ N("div#gridFormPopup").service({
         		this_.grid.bind(data);
         	});
         });
+    	
+    	N("a#btnGetChengedRowData").click(function(e) {
+    		e.preventDefault();
+    		N("div.demoBox").alert({
+    			title : "수정된 ROW DATA",
+    			msg : '<div style="white-space: pre;word-break: break-word;">' + N.json.format(this_.grid.data("modified")) + '</div>',
+    			width : 550,
+    			height : 300
+    		}).show();
+    	});
     }
 });
 </script>

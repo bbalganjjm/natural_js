@@ -76,6 +76,15 @@ var IndexServiceController = {
 		   e.preventDefault();
 		   N(N.context.attr("architecture")["page"]["context"]).controller("prototype/grid_form_popup.html").submit();
 	    });
+    },
+    getSourceCode : function(url, target) {
+    	N.controller({
+    		url : url,
+    		contentType : "application/x-www-form-urlencoded",
+    		dataType : "html"
+    	}).submit(function(html) {
+    		target.text(html);
+    	});
     }
 }
 $(document).ready(function() {
@@ -92,7 +101,7 @@ $(document).ready(function() {
 	<div id="gnb">
 			<ul class="item">
 				Natural-ARCHITECTUR
-				<li><a id="btnController" href="#">Controller</a></li>
+				<li><a id="btnController" href="#">Common Controller</a></li>
 		    </ul>
 			<ul class="item">
 				Natural-DATA

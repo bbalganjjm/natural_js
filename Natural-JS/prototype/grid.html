@@ -116,7 +116,7 @@
 		</table>
 	</div>
 
-	<div class="divBar">SOURCE</div>
+	<div class="divBar">SOURCE CODE</div>
 	<div class="sourceBox">
 	</div>
 </div>
@@ -128,6 +128,9 @@ N("div#grid").service({
 	grid2 : undefined,
 	gridData : undefined,
     init : function(view) {
+    	// put source code
+    	IndexServiceController.getSourceCode("prototype/grid.html", N("div.sourceBox"));
+    	
     	this.initButton();
     	//this.createSelect(data);
 

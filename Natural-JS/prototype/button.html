@@ -16,7 +16,7 @@
 		</div>
 	</div>
 
-	<div class="divBar">SOURCE</div>
+	<div class="divBar">SOURCE CODE</div>
 	<div class="sourceBox">
 	</div>
 </div>
@@ -25,6 +25,9 @@
 
 N("div#button").service({
     init : function(view) {
+    	// put source code
+    	IndexServiceController.getSourceCode("prototype/button.html", N("div.sourceBox"));
+    	
     	this.initButton(view);
         this.setEvents(view);
     },

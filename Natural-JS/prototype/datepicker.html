@@ -5,7 +5,7 @@
 		<label for="date">일 선택</label> <input id="date" type="text" />
 	</div>
 
-	<div class="divBar">SOURCE</div>
+	<div class="divBar">SOURCE CODE</div>
 	<div class="sourceBox">
 	</div>
 </div>
@@ -14,6 +14,9 @@
 
 N("div#datepickerSample").service({
     init : function(view) {
+    	// put source code
+    	IndexServiceController.getSourceCode("prototype/datepicker.html", N("div.sourceBox"));
+    	
     	var monthpicker = $("input#month").datepicker({
     		monthonly : true,
 			onSelect : function(context, selDate) {

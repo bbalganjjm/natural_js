@@ -29,7 +29,7 @@
 		</div>
 	</div>
 
-	<div class="divBar">SOURCE</div>
+	<div class="divBar">SOURCE CODE</div>
 	<div class="sourceBox">
 	</div>
 </div>
@@ -43,6 +43,9 @@ N("div#popup").service({
     	this.setEvents(view);
     },
     initButton : function(view) {
+    	// put source code
+    	IndexServiceController.getSourceCode("prototype/popup.html", N("div.sourceBox"));
+    	
     	N("div.btnBox", view).button();
 
     	N("a#btnLogin", view).button();
