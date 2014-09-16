@@ -141,7 +141,7 @@ N("div#gridFormPopup").service({
     init : function(view) {
     	// put source code
     	IndexServiceController.getSourceCode("prototype/grid_form_popup.html", N("div.sourceBox"));
-    	
+
     	this.initButton();
     	//this.createSelect(data);
 
@@ -179,12 +179,12 @@ N("div#gridFormPopup").service({
         		this_.grid.bind(data);
         	});
         });
-    	
+
     	N("a#btnGetChengedRowData").click(function(e) {
     		e.preventDefault();
     		N("div.demoBox").alert({
     			title : "수정된 ROW DATA",
-    			msg : '<div style="white-space: pre;word-break: break-word;">' + N.json.format(this_.grid.data("modified")) + '</div>',
+    			msg : '<div class="pre">' + N.json.format(this_.grid.data("modified")) + '</div>',
     			width : 550,
     			height : 300
     		}).show();

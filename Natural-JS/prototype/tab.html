@@ -10,7 +10,7 @@
 				<li class='{ "onOpen" : "onOpen", "preLoad" : true, "url" : "prototype/form.html" }'><a href="#tab2">폼 예제</a></li>
 				<li class='{ "preLoad" : false, "url" : "prototype/button.html", "*active" : true }'><a href="#tab3">버튼 예제</a></li>
 			</ul>
-			<div id="tab1" style="white-space: pre;word-break: break-word;">
+			<div id="tab1" class="pre">
 삼고초려
 위키백과, 우리 모두의 백과사전.
 명말의 삼고초려도
@@ -33,7 +33,7 @@ N("div#tabExam").service({
     init : function(view) {
     	// put source code
     	IndexServiceController.getSourceCode("prototype/tab.html", N("div.sourceBox"));
-    	
+
     	this.initButton(view);
     	this.setEvents(view);
     },

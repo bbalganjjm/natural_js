@@ -1,24 +1,62 @@
 <div id="alert">
+	<div class="intro">
+		<h1><b>Alert</b> : Alert(N.alert)는 text 나 html 을 표시 해주는 메시지 다이얼로그를 간편하게 만들어 줍니다.</h1>
+		<h2>Javascript의 alert 나 confirm 과 같은 역할을 수행 합니다.</h2>
+		<h2>[Show alert] 버튼을 누르면 지정한 옵션이 반영된 메시지 다이얼로그을 볼 수 있습니다.</h2>
+		<h2>ESC 키를 누르면 다이얼로그가 닫힙니다.</h2>
+	</div>
 	<div class="divBar">DEMO</div>
 	<div class="demoBox">
-		<div class="btnBox">
-			<a id="btnAlertAreaModal" href="#" class='{ "color": "gray", "size": "small" }'>Alert(영역지정, 모달)</a>
-			<a id="btnAlertArea" href="#" class='{ "color": "gray", "size": "small" }'>Alert(영역지정,모달 해제)</a>
-			<a id="btnAlertCallback" href="#" class='{ "color": "gray", "size": "small" }'>Alert(콜백, 타이틀바)</a>
-			<a id="btnAlertWindow" href="#" class='{ "color": "skyblue", "size": "small" }'>Alert(전체)</a>
-			<a id="btnAlertWindowTitle" href="#" class='{ "color": "skyblue", "size": "small" }'>Alert(버튼바제거, 타이틀바)</a>
-			<a id="btnConfirmSize" href="#" class='{ "color": "skyblue", "size": "small" }'>Alert(넓이, 높이 지정)</a>
-			<a id="btnConfirm" href="#" class='{ "color": "gray", "size": "small" }'>Confirm</a>
-			<a id="btnConfirmWindow" href="#" class='{ "color": "skyblue", "size": "small" }'>Confirm(전체)</a>
+		<p>Options : </p>
+		<table class="form" style="width: 100%;">
+			<tr>
+				<th align="right" width="85">Message Context</th>
+				<td><input id="messageContext" type="text" value="div.result" /> window or jQuery selector</td>
+				<th align="right" width="85">msg</th>
+				<td><textarea id="msg" rows="3" cols="60">
+ Mollit elit qui reprehenderit fugiat excepteur adipisicing sunt id proident laborum sint proident. Amet cupidatat ipsum do irure qui magna sunt pariatur commodo eiusmod ipsum qui ad culpa.
+				</textarea></td>
+			</tr>
+			<tr>
+				<th align="right">confirm</th>
+				<td><input id="confirm" type="checkbox" /></td>
+				<th align="right">title</th>
+				<td><input id="title" type="text" value="Alert test" /></td>
+			</tr>
+			<tr>
+				<th align="right">modal</th>
+				<td><input id="modal" type="checkbox" checked="checked" /></td>
+				<th align="right">button</th>
+				<td><input id="button" type="checkbox" checked="checked" /></td>
+			</tr>
+			<tr>
+				<th align="right" width="85">width</th>
+				<td width="*"><input id="width" type="text" value="300" /> Message contents width</td>
+				<th align="right" width="85">height</th>
+				<td width="*"><input id="height" type="text" value="100" /> Message contents height</td>
+			</tr>
+			<tr>
+				<th align="right" width="85">onOk</th>
+				<td><textarea id="onOk" rows="3" cols="60">
+function() {
+	alert("Ok");
+}
+				</textarea><br />ok button event callback function</td>
+				<th align="right" width="85">onCancel</th>
+				<td><textarea id="onCancel" rows="3" cols="60">
+function() {
+	alert("Cancel");
+}
+				</textarea><br />cancel button event callback function</td>
+			</tr>
+		</table>
+
+		<div align="center" class="btnBox">
+			<a id="btnShow" href="#" class='{ "color": "skyblue", "size": "big" }'>Show alert</a>
 		</div>
-	    <pre class="data">
-	부분 가리기
-	부분 가리기
-	부분 가리기
-	부분 가리기
-	부분 가리기
-	부분 가리기
-	    </pre>
+
+		<p>Result : </p>
+	    <div align="center" class="result pre"></div>
 	</div>
     <div class="divBar">SOURCE CODE</div>
     <div class="sourceBox">
@@ -30,87 +68,37 @@ N("div#alert").service({
     init : function(view) {
     	// put source code
     	IndexServiceController.getSourceCode("prototype/alert.html", N("div.sourceBox"));
-    	
-    	this.initButton();
 
-        N("a#btnAlertArea", view).click(function(e) {
-            e.preventDefault();
-            N("pre.data").alert({
-                msg : "특정 영역 메시지 처리",
-				modal : false
-            }).show()
-        });
+    	// make button
+    	this.initButton(view);
 
-        N("a#btnAlertAreaModal", view).click(function(e) {
-            e.preventDefault();
-            N("pre.data").alert("모달<br />특정 영역 메시지 처리").show()
-        });
-
-        N("a#btnAlertCallback", view).click(function(e) {
-            e.preventDefault();
-            N("pre.data").alert({
-                msg : "특정 영역 메시지 처리<br />확인 버튼 누르면 지정한 콜백 실행",
-                title : "시스템 메시지",
-                vars : [],
-                onOk : function(msgContext, msgContents) {
-                    alert("콜백 실행");
-                }
-            }).show()
-        });
-
-        N("a#btnAlertWindowTitle", view).click(function(e) {
-            e.preventDefault();
-            N(window).alert({
-                msg : "전체 영역 메시지 처리<br />전체 영역 메시지 처리.. 전체 영역 메시지 처리..<br />전체 영역 메시지 처리<br /><br />전체 영역 메시지 처리",
-                title : "메시지 제목",
-                button : false
-            }).show()
-        });
-
-        N("a#btnAlertWindow", view).click(function(e) {
-            e.preventDefault();
-            N(window).alert("전체 영역 메시지 처리").show();
-		});
-
-        N("a#btnConfirmSize", view).click(function(e) {
-            e.preventDefault();
-            N(window).alert({
-            	msg : "넓이 : 200px<br />높이 : 100px<br />메시지가 길어요~~.메시지가 길어요~~.메시지가 길어요~~.<br />메시지가 길어요~~.<br />메시지가 길어요~~.<br />메시지가 길어요~~.<br />메시지가 길어요~~.<br />메시지가 길어요~~.<br />메시지가 길어요~~.",
-            	width : 200,
-            	height : 100
-            }).show();
-		});
-
-        N("a#btnConfirm", view).click(function(e) {
-            e.preventDefault();
-            N("pre.data").alert({
-            	confirm : true,
-                msg : "특정 영역 메시지 처리<br />확인 버튼 누르면 지정한 콜백 실행",
-                onOk : function(msgContext, msgContents) {
-                    alert("확인 콜백 실행");
-                },
-                onCancel : function(msgContext, msgContents) {
-                	alert("취소 콜백 실행");
-                }
-            }).show()
-        });
-
-        N("a#btnConfirmWindow", view).click(function(e) {
-            e.preventDefault();
-            N(window).alert({
-            	confirm : true,
-                msg : "전체 영역 메시지 처리",
-                onOk : function(msgContext, msgContents) {
-                	alert("확인 콜백 실행");
-                },
-                onCancel : function(msgContext, msgContents) {
-                	alert("취소 콜백 실행");
-                }
-            }).show();
-		});
+    	// event bind
+    	this.setEvent(this, view);
 	},
-    initButton : function() {
-    	N("div.btnBox").button();
+    initButton : function(view) {
+    	N("div.btnBox", view).button();
+    },
+    setEvent : function(this_, view) {
+        N("a#btnShow", view).click(function(e) {
+            e.preventDefault();
+
+            var messageContext = N("input#messageContext", view).val();
+            if(messageContext === "window") {
+            	messageContext = window;
+            }
+            var opts = {
+            	msg : N("textarea#msg", view).val(),
+            	confirm : N("input#confirm", view).is(":checked"),
+            	title : N("input#title", view).val(),
+            	modal : N("input#modal", view).is(":checked"),
+            	button : N("input#button", view).is(":checked"),
+            	width : Number(N("input#width", view).val()),
+            	height : Number(N("input#height", view).val()),
+            	onOk : eval("(" + N("textarea#onOk", view).val() + ")"),
+            	onCancel : eval("(" + N("textarea#onCancel", view).val() + ")")
+            };
+            N(messageContext).alert(opts).show()
+        });
     }
 });
 

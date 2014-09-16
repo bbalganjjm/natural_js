@@ -1,4 +1,11 @@
 <div id="formater">
+	<div class="intro">
+		<h1><b>Formater</b> : Formater(N.format)는 </h1>
+		<h2>[Format(Command)] 버튼을 누르면</h2>
+		<h2>[Format] 버튼을 누르면</h2>
+		<h2>[Run unformat event] 버튼을 누르면</h2>
+		<h2>[Run format event] 버튼을 누르면</h2>
+	</div>
 	<div class="divBar">DATA</div>
 	<div class="dataBox">
 		<textarea id="data" class="data">
@@ -20,12 +27,6 @@
 	</div>
 	<div class="divBar">DEMO</div>
 	<div class="demoBox">
-		<div class="btnBox">
-			<a id="btnFormatDeclarative" href="#" class='{ "color": "skyblue", "size": "small" }'>Format(선언형)</a>
-			<a id="btnUnFormatEvent" href="#" class='{ "size": "small" }'>unformat 이벤트 실행</a>
-			<a id="btnFormatEvent" href="#" class='{ "size": "small" }'>format 이벤트 실행</a>
-			<a id="btnFormatCommand" href="#" class='{ "color": "gray", "size": "small" }'>Format(명령형)</a>
-		</div>
 		<table id="inputBox" class='form'>
 			<tr>
 				<th align="right" width="70"><label for="numeric">Input 1</label></th>
@@ -51,6 +52,16 @@
 				<td><span id="etc" class='{ "format" : [["date", 12]] }'></span> class='{ "format" : [["date", 12]] }'</td>
 			</tr>
 		</table>
+
+		<div align="center" class="btnBox">
+			<a id="btnFormatCommand" href="#" class='{ "color": "gray", "size": "big" }'>Format(Command)</a>
+			<a id="btnFormatDeclarative" href="#" class='{ "color": "skyblue", "size": "big" }'>Format</a>
+			<a id="btnUnFormatEvent" href="#" class='{ "size": "big" }'>Run unformat event</a>
+			<a id="btnFormatEvent" href="#" class='{ "size": "big" }'>Run format event</a>
+		</div>
+
+		<p>Command Result : </p>
+		<div class="result pre"></div>
 	</div>
 
 	<div class="divBar">SOURCE CODE</div>
@@ -64,7 +75,7 @@ N("div#formater").service({
     init : function(view) {
     	// put source code
     	IndexServiceController.getSourceCode("prototype/formater.html", N("div.sourceBox"));
-    	
+
     	this.initButton();
 
         N("a#btnFormatCommand", view).click(function(e) {
@@ -79,7 +90,7 @@ N("div#formater").service({
                 "etc" : [["date", 12]]
             }).format();
 
-            N("textarea.data", view).val(N.json.format(pData));
+            N("div.result", view).text(N.json.format(pData));
         });
 
         N("a#btnFormatDeclarative", view).click(function(e) {

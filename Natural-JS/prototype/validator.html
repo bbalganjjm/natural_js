@@ -1,4 +1,9 @@
 <div id="validator">
+	<div class="intro">
+		<h1><b>Validator</b> : Validator(N.validator)는 </h1>
+		<h2>[Validate(Command)] 버튼을 누르면</h2>
+		<h2>[Validate] 버튼을 누르면</h2>
+	</div>
 	<div class="divBar">DATA</div>
 	<div class="dataBox">
 		<textarea id="data" class="data">
@@ -21,11 +26,6 @@
 
 	<div class="divBar">DEMO</div>
 	<div class="demoBox">
-		<div class="btnBox">
-			<a id="btnValidateCommand" href="#" class='{ "color": "gray", "size": "small" }'>Validate(명령형)</a>
-			<a id="btnValidateDeclarative" href="#" class='{ "color": "skyblue", "size": "small" }'>Validate(선언형)</a>
-		</div>
-
 		<table id="inputBox" class='form'>
 			<tr>
 				<th align="right" width="70"><label for="numeric">Input 1</label></th>
@@ -53,6 +53,14 @@
 				</td>
 			</tr>
 		</table>
+
+		<div align="center" class="btnBox">
+			<a id="btnValidateCommand" href="#" class='{ "color": "gray", "size": "big" }'>Validate(Command)</a>
+			<a id="btnValidateDeclarative" href="#" class='{ "color": "skyblue", "size": "big" }'>Validate</a>
+		</div>
+
+		<p>Command Result : </p>
+		<div class="result pre"></div>
 	</div>
 
 	<div class="divBar">SOURCE CODE</div>
@@ -66,7 +74,7 @@ N("div#validator").service({
     init : function(view) {
     	// put source code
     	IndexServiceController.getSourceCode("prototype/validator.html", N("div.sourceBox"));
-    	
+
     	this.initButton();
 
         N("a#btnValidateCommand", view).click(function(e) {
@@ -80,7 +88,7 @@ N("div#validator").service({
                 "limit" : [ [ "required" ], [ "alphabet" ] ]
             }).validate());
 
-            N("textarea.data", view).val(N.json.format(pData));
+            N("div.result", view).text(N.json.format(pData));
         });
 
         N("a#btnValidateDeclarative", view).click(function(e) {

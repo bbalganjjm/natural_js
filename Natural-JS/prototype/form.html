@@ -253,7 +253,7 @@ N("div#form").service({
             e.preventDefault();
             N("table#form").alert({
             	width: 500,
-            	msg: '<div style="white-space: pre;word-break: break-word;">' + N.json.format(form.data()[form.row()]) + '</div>'
+            	msg: '<div class="pre">' + N.json.format(form.data()[form.row()]) + '</div>'
             }).show()
         });
 

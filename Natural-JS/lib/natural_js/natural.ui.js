@@ -355,8 +355,6 @@
 		var Button = N.button = function(obj, opts) {
 			this.options = {
 				context : obj,
-				width : 38,
-				height : 20,
 				size : "medium", // smaller, small, medium, large, big
 				color : "white", // white, blue, skyblue, gray
 				disable : false
@@ -425,6 +423,21 @@
 		        if (opts.context.is("a") || opts.context.is("button") || opts.context.is("input[type='button']")) {
 		        	opts.context.removeClass("btn_common__ btn_white__ btn_blue__ btn_skyblue__ btn_gray__ btn_smaller__ btn_small__ btn_medium__ btn_large__ btn_big__");
 	                opts.context.addClass("btn_common__ btn_" + opts.color + "__ btn_" + opts.size + "__");
+
+	                // for ie8
+	                if(N.browser.msieVersion() === 8 && opts.context.is("a")) {
+	                	if(opts.size === "smaller") {
+	                		opts.context.css("line-height", "15px");
+	                	} else if(opts.size === "small") {
+	                		opts.context.css("line-height", "19px");
+	                	} else if(opts.size === "medium") {
+	                		opts.context.css("line-height", "24px");
+	                	} else if(opts.size === "large") {
+	                		opts.context.css("line-height", "32px");
+	                	} else if(opts.size === "big") {
+	                		opts.context.css("line-height", "46px");
+	                	}
+	                }
 
 	                opts.context.unbind("mouseover.button mousedown.button mouseup.button mouseout.button");
 	                opts.context.bind("mouseover.button", function() {

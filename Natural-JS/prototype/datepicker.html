@@ -1,8 +1,8 @@
 <div id="datepickerSample">
 	<div class="divBar">DEMO</div>
 	<div class="demoBox">
-		<label for="month">월 선택</label> <input id="month" type="text" />
-		<label for="date">일 선택</label> <input id="date" type="text" />
+		<label for="month">Month</label> <input id="month" type="text" />
+		<label for="date">Date</label> <input id="date" type="text" />
 	</div>
 
 	<div class="divBar">SOURCE CODE</div>
@@ -16,7 +16,7 @@ N("div#datepickerSample").service({
     init : function(view) {
     	// put source code
     	IndexServiceController.getSourceCode("prototype/datepicker.html", N("div.sourceBox"));
-    	
+
     	var monthpicker = $("input#month").datepicker({
     		monthonly : true,
 			onSelect : function(context, selDate) {
@@ -24,7 +24,7 @@ N("div#datepickerSample").service({
 				N.log(selDate);
 			}
 		});
-    	
+
 		var datepicker = $("input#date").datepicker({
 			onSelect : function(context, selDate) {
 				N.log(context);

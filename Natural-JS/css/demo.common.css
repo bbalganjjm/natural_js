@@ -142,13 +142,17 @@ div#main div#contents {
 	background-color: #ffffff\9;
 }
 
+.pre {
+	white-space: pre;
+	word-break: break-word;
+}
+
 .divBar {
 	background-color : #efffff;
 	color: #007700;
 	padding: 5px 5px 5px 10px;
 	border-top: 1px solid #cccccc;
 	border-bottom: 1px solid #cccccc;
-	margin: 0 0 15px 0;
 	font-weight: bold;
 }
 
@@ -179,8 +183,9 @@ div#main div#contents {
 
 .demoBox .result {
 	border: 1px solid #cccccc;
-	min-height: 300px;
+	height: 300px;
 	border-radius: 3px;
+	overflow: auto;
 }
 
 .data {
@@ -209,8 +214,7 @@ div#main div#contents {
 	background-color: #efefef;
 	color: #999999;
 	font-family: "Courier New";
-	margin-top: -15px;
-	
+
 }
 
 .sourceBox:hover {

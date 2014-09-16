@@ -1,19 +1,46 @@
 <div id="button">
+	<div class="intro">
+		<h1><b>Button</b> : Button(N.button)은 a , input button , button 요소들을 옵션으로 지정한 모양으로 버튼을 만들어 줍니다.</h1>
+		<h2>버튼의 옵션은 해당 요소의 class attribute에 JSON 형태의 텍스트로 선언하여 지정 할 수 있고 버튼을 초기화 할 때 직접 JSON Object 형태로 지정 할 수 있습니다.</h2>
+		<h2>[Make Button] 버튼을 누르면 지정한 옵션이 반영된 버튼을 볼 수 있습니다.</h2>
+	</div>
 	<div class="divBar">DEMO</div>
 	<div class="demoBox">
-		<div class="btnBox">
-			<a id="btnDeclarative" href="#" class='{ "color": "gray", "size": "small" }'>버튼(명령형)</a>
-			<a id="btnCommand" href="#" class='{ "color": "skyblue", "size": "small" }'>버튼(실행형)</a>
-			<a id="btnDisable" href="#" class='{ "color": "white", "size": "small" }'>비활성</a>
-			<a id="btnEnable" href="#" class='{ "color": "white", "size": "small" }'>활성</a>
+		<p>Options : </p>
+		<table class="form" style="width: 100%;">
+			<tr>
+				<th align="right" width="85">size</th>
+				<td width="*"><select id="size">
+					<option value="smaller">smaller</option>
+					<option value="small">small</option>
+					<option value="medium">medium</option>
+					<option value="large">large</option>
+					<option value="big">big</option>
+				</select></td>
+				<th align="right" width="85">color</th>
+				<td width="*"><select id="color">
+					<option value="white">white</option>
+					<option value="blue">blue</option>
+					<option value="skyblue">skyblue</option>
+					<option value="gray">gray</option>
+				</select></td>
+				<th align="right" width="85">disable</th>
+				<td width="*" colspan="3"><input id="disable" type="checkbox" /></td>
+			</tr>
+		</table>
+
+		<div align="center" class="btnBox">
+			<a id="btnMake" href="#" class='{ "color": "skyblue", "size": "big" }'>Make Button</a>
+			<a id="btnDisable" href="#" class='{ "color": "white", "size": "big", "disable": true }'>Button Disable</a>
+			<a id="btnEnable" href="#" class='{ "color": "white", "size": "big", "disable": true }'>Button Enable</a>
 		</div>
-		<div class="data">
-			<input id="btn1" type="button" value="INPUT BUTTON" class='{ "color" : "blue", "size" : "big" }' /> &lt;input type=button/&gt;
-			<br/><br/>
-			<button id="btn2" class='{ "color" : "white", "size" : "large", "disable": true }'>BUTTON</button> &lt;button disable/&gt;
-			<br/><br/>
-			<a id="btn3"class='{ "color" : "skyblue", "size" : "smaller" }'>A TAG</a> &lt;a/&gt;
-		</div>
+
+		<p>Result : </p>
+	    <div align="center" class="result" style="height: 70px;padding-top: 30px;">
+	    	<a id="btnA"class='{ "color" : "skyblue", "size" : "smaller" }'>a</a>
+	    	<input id="btnInputButton" type="button" value="input button" />
+	    	<button id="btnButton">button</button>
+	    </div>
 	</div>
 
 	<div class="divBar">SOURCE CODE</div>
@@ -27,7 +54,7 @@ N("div#button").service({
     init : function(view) {
     	// put source code
     	IndexServiceController.getSourceCode("prototype/button.html", N("div.sourceBox"));
-    	
+
     	this.initButton(view);
         this.setEvents(view);
     },
@@ -35,37 +62,30 @@ N("div#button").service({
     	N("div.btnBox", view).button();
     },
     setEvents : function(view) {
-    	N("a#btnDeclarative", view).click(function(e) {
+        N("a#btnMake", view).click(function(e) {
             e.preventDefault();
-			N("div.data").button();
-        });
+            var opts = {
+              	color : N("select#color", view).val(),
+              	size : N("select#size", view).val(),
+              	disable : N("input#disable", view).is(":checked")
+            };
+            N("div.result").find("a, button, input[type='button']").button(opts);
 
-        N("a#btnCommand", view).click(function(e) {
-            e.preventDefault();
-			N("#btn1").button({
-				color : "skyblue",
-				size : "medium"
-			});
-			N("#btn2").button({
-				color : "gray",
-				size : "small"
-			});
-			N("#btn3").button({
-				color : "blue",
-				size : "large"
-			});
+            N("div.btnBox", view).find("a").instance("button", function() {
+            	this.enable();
+            });
         });
 
         N("a#btnDisable", view).click(function(e) {
             e.preventDefault();
-            N("div.data").find("a, button, input[type='button']").instance("button", function(u) {
+            N("div.result").find("a, button, input[type='button']").instance("button", function(u) {
             	this.disable();
             });
         });
 
         N("a#btnEnable", view).click(function(e) {
             e.preventDefault();
-            N("div.data").find("a, button, input[type='button']").instance("button", function() {
+            N("div.result").find("a, button, input[type='button']").instance("button", function() {
             	this.enable();
             });
         });

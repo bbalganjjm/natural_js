@@ -111,6 +111,7 @@ span.msg__ a.msg_close__ {
 /* Button */
 a.btn_common__, input[type='button'].btn_common__, button.btn_common__  {
 	display: inline-block;
+	margin-bottom: 2px 0 2px 0 !important;
 	border: 1px ;
 	overflow: visible;
 	cursor: pointer;
@@ -162,38 +163,75 @@ a.btn_skyblue__, input[type='button'].btn_skyblue__, button.btn_skyblue__ {
 	border: 1px solid #0071eb;
 }
 
-a.btn_smaller__, input[type='button'].btn_smaller__, button.btn_smaller__
-	{
+a.btn_smaller__, input[type='button'].btn_smaller__, button.btn_smaller__ {
 	padding: 0 8px 0 8px;
 	font-size: 11px;
 	height: 16px;
-	line-height: 16px;
+	line-height: 12px;
 }
+a.btn_smaller__ {
+	height: 14px;
+	line-height: 12px;
+}
+
+input[type='button'].btn_smaller__, button.btn_smaller__ {
+	line-height: 17px\0; /* for ie 8+ */
+}
+
 a.btn_small__, input[type='button'].btn_small__, button.btn_small__ {
 	padding: 0px 8px 0px 8px;
 	font-size: 11px;
-	height: 21px;
-	line-height: 21px;
+	height: 20px;
+	line-height: 16px;
 }
+a.btn_small__ {
+	height: 18px;
+}
+input[type='button'].btn_small__, button.btn_small__ {
+	line-height: 22px\0; /* for ie 8+ */
+}
+
 a.btn_medium__, input[type='button'].btn_medium__, button.btn_medium__ {
 	padding: 0px 10px 0px 10px;
 	font-size: 12px;
-	height: 27px;
-	line-height: 27px;
+	height: 25px;
+	line-height: 21px;
 }
+a.btn_medium__ {
+	height: 23px;
+}
+input[type='button'].btn_medium__, button.btn_medium__ {
+	line-height: 27px\0; /* for ie 8+ */
+}
+
 a.btn_large__, input[type='button'].btn_large__, button.btn_large__ {
 	padding: 0px 10px 0px 10px;
 	font-size: 14px;
 	height: 33px;
-	line-height: 33px;
+	line-height: 29px;
 	font-weight: bold;
 }
+a.btn_large__ {
+	line-height: 28px\0; /* for ie 8+ */
+	height: 31px;
+}
+input[type='button'].btn_large__, button.btn_large__  {
+	line-height: 34px\0; /* for ie 8+ */
+}
+
 a.btn_big__, input[type='button'].btn_big__, button.btn_big__ {
 	padding: 0px 10px 0px 10px;
 	font-size: 16px;
-	height: 45px;
-	line-height: 45px;
+	height: 46px;
+	line-height: 42px;
 	font-weight: bold;
+}
+a.btn_big__ {
+	line-height: 40px\0; /* for ie 8+ */
+	height: 44px;
+}
+input[type='button'].btn_big__, button.btn_big__  {
+	line-height: 37px\0; /* for ie 8+ */
 }
 
 /* Form */
