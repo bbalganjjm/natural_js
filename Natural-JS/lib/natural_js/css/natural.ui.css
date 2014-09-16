@@ -167,71 +167,71 @@ a.btn_smaller__, input[type='button'].btn_smaller__, button.btn_smaller__ {
 	padding: 0 8px 0 8px;
 	font-size: 11px;
 	height: 16px;
-	line-height: 12px;
+	line-height: 14px;
 }
 a.btn_smaller__ {
 	height: 14px;
-	line-height: 12px;
+	line-height: 14px;
 }
 
 input[type='button'].btn_smaller__, button.btn_smaller__ {
-	line-height: 17px\0; /* for ie 8+ */
+	line-height: 19px\0; /* for ie 8+ */
 }
 
 a.btn_small__, input[type='button'].btn_small__, button.btn_small__ {
 	padding: 0px 8px 0px 8px;
 	font-size: 11px;
 	height: 20px;
-	line-height: 16px;
+	line-height: 18px;
 }
 a.btn_small__ {
 	height: 18px;
 }
 input[type='button'].btn_small__, button.btn_small__ {
-	line-height: 22px\0; /* for ie 8+ */
+	line-height: 24px\0; /* for ie 8+ */
 }
 
 a.btn_medium__, input[type='button'].btn_medium__, button.btn_medium__ {
 	padding: 0px 10px 0px 10px;
 	font-size: 12px;
 	height: 25px;
-	line-height: 21px;
+	line-height: 23px;
 }
 a.btn_medium__ {
 	height: 23px;
 }
 input[type='button'].btn_medium__, button.btn_medium__ {
-	line-height: 27px\0; /* for ie 8+ */
+	line-height: 29px\0; /* for ie 8+ */
 }
 
 a.btn_large__, input[type='button'].btn_large__, button.btn_large__ {
 	padding: 0px 10px 0px 10px;
 	font-size: 14px;
 	height: 33px;
-	line-height: 29px;
+	line-height: 31px;
 	font-weight: bold;
 }
 a.btn_large__ {
-	line-height: 28px\0; /* for ie 8+ */
+	line-height: 30px\0; /* for ie 8+ */
 	height: 31px;
 }
 input[type='button'].btn_large__, button.btn_large__  {
-	line-height: 34px\0; /* for ie 8+ */
+	line-height: 36px\0; /* for ie 8+ */
 }
 
 a.btn_big__, input[type='button'].btn_big__, button.btn_big__ {
 	padding: 0px 10px 0px 10px;
 	font-size: 16px;
 	height: 46px;
-	line-height: 42px;
+	line-height: 44px;
 	font-weight: bold;
 }
 a.btn_big__ {
-	line-height: 40px\0; /* for ie 8+ */
+	line-height: 42px\0; /* for ie 8+ */
 	height: 44px;
 }
 input[type='button'].btn_big__, button.btn_big__  {
-	line-height: 37px\0; /* for ie 8+ */
+	line-height: 39px\0; /* for ie 8+ */
 }
 
 /* Form */

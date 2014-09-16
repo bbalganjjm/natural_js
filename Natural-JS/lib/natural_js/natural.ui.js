@@ -427,15 +427,15 @@
 	                // for ie8
 	                if(N.browser.msieVersion() === 8 && opts.context.is("a")) {
 	                	if(opts.size === "smaller") {
-	                		opts.context.css("line-height", "15px");
+	                		opts.context.css("line-height", "17px");
 	                	} else if(opts.size === "small") {
-	                		opts.context.css("line-height", "19px");
+	                		opts.context.css("line-height", "21px");
 	                	} else if(opts.size === "medium") {
-	                		opts.context.css("line-height", "24px");
+	                		opts.context.css("line-height", "26px");
 	                	} else if(opts.size === "large") {
-	                		opts.context.css("line-height", "32px");
+	                		opts.context.css("line-height", "34px");
 	                	} else if(opts.size === "big") {
-	                		opts.context.css("line-height", "46px");
+	                		opts.context.css("line-height", "48px");
 	                	}
 	                }
 
@@ -736,11 +736,12 @@
 				"confirm" : true,
 				onOk : null,
 				onCancel : null,
-				onOpen : null, //TODO onLoad 도 필요한지 고민 해 보기
+				onOpen : null,
 				onOpenData : null,
 				onClose : null,
 				onCloseData : null,
 				preLoad : false,
+				//TODO onLoad 도 필요한지 고민 해 보기
 			};
 
 			try {
