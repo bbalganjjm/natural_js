@@ -138,9 +138,9 @@
 
 N("div#gridFormPopup").service({
 	grid : undefined,
-    init : function(view) {
+    init : function(view, request) {
     	// put source code
-    	IndexServiceController.getSourceCode("prototype/grid_form_popup.html", N("div.sourceBox"));
+    	IndexServiceController.getSourceCode(request.get("url"), N("div.sourceBox"));
 
     	this.initButton();
     	//this.createSelect(data);

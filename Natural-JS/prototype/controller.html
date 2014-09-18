@@ -21,9 +21,9 @@
 <script type="text/javascript">
 
 N("div#controller").service({
-    init : function(view) {
+    init : function(view, request) {
     	// put source code
-    	IndexServiceController.getSourceCode("prototype/controller.html", N("div.sourceBox"));
+    	IndexServiceController.getSourceCode(request.get("url"), N("div.sourceBox"));
 
     	// initialize buttons in div.btnBox
     	this.initButton(view);

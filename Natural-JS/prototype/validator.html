@@ -3,6 +3,7 @@
 		<h1><b>Validator</b> : Validator(N.validator)는 </h1>
 		<h2>[Validate(Command)] 버튼을 누르면</h2>
 		<h2>[Validate] 버튼을 누르면</h2>
+		<h2>//TODO 보완</h2>
 	</div>
 	<div class="divBar">DATA</div>
 	<div class="dataBox">
@@ -55,8 +56,8 @@
 		</table>
 
 		<div align="center" class="btnBox">
-			<a id="btnValidateCommand" href="#" class='{ "color": "gray", "size": "big" }'>Validate(Command)</a>
-			<a id="btnValidateDeclarative" href="#" class='{ "color": "skyblue", "size": "big" }'>Validate</a>
+			<a id="btnValidateCommand" href="#" class='{ "color": "gray", "size": "large" }'>Validate(Command)</a>
+			<a id="btnValidateDeclarative" href="#" class='{ "color": "skyblue", "size": "large" }'>Validate</a>
 		</div>
 
 		<p>Command Result : </p>
@@ -71,9 +72,9 @@
 <script type="text/javascript">
 
 N("div#validator").service({
-    init : function(view) {
+    init : function(view, request) {
     	// put source code
-    	IndexServiceController.getSourceCode("prototype/validator.html", N("div.sourceBox"));
+    	IndexServiceController.getSourceCode(request.get("url"), N("div.sourceBox"));
 
     	// make button
     	this.initButton(view);

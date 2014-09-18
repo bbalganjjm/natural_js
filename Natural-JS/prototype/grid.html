@@ -120,10 +120,10 @@ N("div#grid").service({
 	grid : undefined,
 	grid2 : undefined,
 	gridData : undefined,
-    init : function(view) {
+    init : function(view, request) {
     	// put source code
-    	IndexServiceController.getSourceCode("prototype/grid.html", N("div.sourceBox"));
-    	
+    	IndexServiceController.getSourceCode(request.get("url"), N("div.sourceBox"));
+
     	this.initButton();
     	//this.createSelect(data);
 

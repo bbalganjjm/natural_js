@@ -137,7 +137,7 @@
 								var serviceController = obj.children(":first").instance("service");
 								serviceController.request = obj.request;
 								if(serviceController !== undefined && serviceController.init !== undefined) {
-									serviceController.init(serviceController.view);
+									serviceController.init(serviceController.view, obj.request);
 								}
 							}
 						}
@@ -237,12 +237,16 @@
 				} else {
 					return this.param()[name];
 				}
+			},
+			get : function(key) {
+				if(key !== undefined) {
+					return this.options[key];
+				} else {
+					return this.options;
+				}
 			}
 		});
 
-		/**
-		 * TODO ServiceController 의 생명주기는 view 엘레먼트가 없어지면 같이 없어져야 한다. 옵져버 싱글톤도 함께.
-		 */
 		var ServiceController = N.service = function(obj, callback) {
 			if(callback === undefined) {
 				return obj.data(obj.attr("id"));
@@ -257,7 +261,6 @@
 			callback.view = obj;
 			return callback;
 		};
-		N.service.init = true;
 
 		// Context Object
 		N.context = {

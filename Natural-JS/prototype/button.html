@@ -10,7 +10,7 @@
 		<table class="form" style="width: 100%;">
 			<tr>
 				<th align="right" width="10%">size</th>
-				<td width="23%"><select id="size">
+				<td width="40%"><select id="size">
 					<option value="smaller">smaller</option>
 					<option value="small">small</option>
 					<option value="medium">medium</option>
@@ -18,21 +18,25 @@
 					<option value="big">big</option>
 				</select></td>
 				<th align="right" width="10%">color</th>
-				<td width="23%" width="*"><select id="color">
+				<td width="40%"><select id="color">
 					<option value="white">white</option>
 					<option value="blue">blue</option>
 					<option value="skyblue">skyblue</option>
 					<option value="gray">gray</option>
 				</select></td>
+			</tr>
+			<tr>
 				<th align="right" width="10%">disable</th>
-				<td width="24%" width="*" colspan="3"><input id="disable" type="checkbox" /></td>
+				<td width="40%"><input id="disable" type="checkbox" /></td>
+				<th align="right" width="10%">effect</th>
+				<td width="40%"><input id="effect" type="checkbox" checked="checked" /></td>
 			</tr>
 		</table>
 
 		<div align="center" class="btnBox">
-			<a id="btnMake" href="#" class='{ "color": "skyblue", "size": "big" }'>Make Button</a>
-			<a id="btnDisable" href="#" class='{ "color": "white", "size": "big", "disable": true }'>Button Disable</a>
-			<a id="btnEnable" href="#" class='{ "color": "white", "size": "big", "disable": true }'>Button Enable</a>
+			<a id="btnMake" href="#" class='{ "color": "gray", "size": "large" }'>Make Button</a>
+			<a id="btnDisable" href="#" class='{ "color": "skyblue", "size": "medium", "disable": true }'>disable</a>
+			<a id="btnEnable" href="#" class='{ "color": "skyblue", "size": "medium", "disable": true }'>enable</a>
 		</div>
 
 		<p>Result : </p>
@@ -51,9 +55,9 @@
 <script type="text/javascript">
 
 N("div#button").service({
-    init : function(view) {
+    init : function(view, request) {
     	// put source code
-    	IndexServiceController.getSourceCode("prototype/button.html", N("div.sourceBox"));
+    	IndexServiceController.getSourceCode(request.get("url"), N("div.sourceBox"));
 
     	// make button
     	this.initButton(view);
@@ -70,7 +74,8 @@ N("div#button").service({
             var opts = {
               	color : N("select#color", view).val(),
               	size : N("select#size", view).val(),
-              	disable : N("input#disable", view).is(":checked")
+              	disable : N("input#disable", view).is(":checked"),
+              	effect : N("input#effect", view).is(":checked")
             };
             N("div.result").find("a, button, input[type='button']").button(opts);
 

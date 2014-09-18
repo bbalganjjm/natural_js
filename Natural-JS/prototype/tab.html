@@ -2,6 +2,7 @@
 	<div class="intro">
 		<h1><b>Tab</b> : Tab(N.tab)은  지정한 HTML 템플릿을 기반으로 탭을 만들어 줍니다.</h1>
 		<h2>[Initialize tab] 버튼을 누르면 탭이 생성 됩니다.</h2>
+		<h2>[open] 버튼을 누르면 지정한 탭 을 선택합니다. 탭의 선택은 몇번째 탭인가를 숫자(index(0부터 시작))로 지정합니다.</h2>
 		<h2>아래의 기본옵션 외에 탭마다 지정할 수 있는 서브 옵션은 class 속성에 JSON text 형태로 다음과 같이 정의 합니다.<br/>
 		{<br/>
 		&nbsp;&nbsp;width: "auto", // 탭의 넓이, 숫자로 지정할 수 있고 auto 이면 탭안의 내용에따라 길이가 자동으로 조절 된다.<br/>
@@ -10,6 +11,7 @@
 		&nbsp;&nbsp;active: false, // 탭이 초기화 될때 처음 활성화 하고 싶은 탭에 true로 지정<br/>
 		&nbsp;&nbsp;onOpen: undefined // 탭과 연결된 컨텐츠가 열릴 때마다 해당컨텐츠의 service controller 의 onOpen 값으로 지정한 함수를 실행 시킴<br/>
 		}</h2>
+		<h2>Tab은 한번만 초기화 할 수 있습니다. 옵션을 변경하려면 [Reload this page] 버튼을 누른 후 다시 설정 하기 바랍니다.</h2>
 	</div>
 	<div class="divBar">DEMO</div>
 	<div class="demoBox">
@@ -17,17 +19,45 @@
 		<table class="form" style="width: 100%;">
 			<tr>
 				<th align="right" width="10%">randomSel</th>
-				<td width="40%" colspan="3"><input id="randomSel" type="checkbox" /> If check(true) this checkbox, random select tab after tab initialize</td>
+				<td width="40%"><input id="randomSel" type="checkbox" /> If check(true) this checkbox, random select tab after tab initialize</td>
 				<th align="right" width="10%">onActive</th>
-				<td width="40%" colspan="3"><textarea id="onActive" rows="3" cols="60">
+				<td width="40%"><textarea id="onActive" rows="3" cols="60">
 function(activeLinkEle, allLinksEle, tabContentsEle) {
-	alert("active");
+	N.log(activeLinkEle);
+	N.log(allLinksEle);
+	N.log(tabContentsEle);
 }
 				</textarea><br />Callback function for tab active event</td>
 			</tr>
+			<tr>
+				<th align="right" width="10%">effect<br />[effect, duration, callback]</th>
+				<td width="40%" colspan="3">[<input id="effect" type="text" value="fadeIn" style="width: 50px;" />,
+					<input id="duration" type="text" value="300" style="width: 50px;" />,
+					<textarea id="callback" rows="3" cols="30">
+function() {
+	N.log("Effect end");
+}
+					</textarea>
+					 * effects : show, hide, slideUp, slideDown, fadeIn, fadeOut
+				</td>
+			</tr>
 		</table>
+
+		<p>Method options : </p>
+		<table class="form" style="width: 100%;">
+			<tr>
+				<th align="right" width="10%">open</th>
+				<th align="right" width="10%">arguments[0]</th>
+				<td width="80%" colspan="3">
+					<input id="idx" type="text" value="2" /> Select tab index
+				</td>
+			</tr>
+		</table>
+
 		<div align="center" class="btnBox">
-			<a id="btnInitTab" href="#" class='{ "color": "gray", "size": "big" }'>Initialize tab</a>
+			<a id="btnInitTab" href="#" class='{ "color": "gray", "size": "large" }'>Initialize tab</a>
+			<a id="btnOpen" href="#" class='{ "color": "skyblue", "size": "large", "disable": true }'>open</a>
+			<a id="btnReload" href="#" class='{ "color": "white", "size": "large" }'>Reload this page</a>
 		</div>
 		<p>Result : </p>
 	    <div id="tab">
@@ -55,10 +85,10 @@ function(activeLinkEle, allLinksEle, tabContentsEle) {
 <script type="text/javascript">
 
 N("div#tabExam").service({
-	localTab : null,
-    init : function(view) {
+	tab : null,
+    init : function(view, request) {
     	// put source code
-    	IndexServiceController.getSourceCode(this.request.options.url, N("div.sourceBox"));
+    	IndexServiceController.getSourceCode(request.get("url"), N("div.sourceBox"));
 
     	// make button
     	this.initButton(view);
@@ -76,9 +106,27 @@ N("div#tabExam").service({
             var opts = {
             	randomSel : N("input#randomSel", view).is(":checked"),
             	onActive : N.string.trimToNull(N("textarea#onActive", view).val()) !== null ?
-          				eval("(" + N("textarea#onActive", view).val() + ")") : null
+          				eval("(" + N("textarea#onActive", view).val() + ")") : null,
+          		effect : N.string.trimToNull(N("input#effect", view).val()) === null ? false :
+          				[N("input#effect", view).val(),
+          		        parseInt(N("input#duration", view).val()),
+          		        N.string.trimToNull(N("textarea#callback", view).val()) !== null ?
+							eval("(" + N("textarea#callback", view).val() + ")") : undefined ]
       		};
-            this_.localTab = N("div#tab").tab(opts);
+            this_.tab = N("div#tab").tab(opts);
+
+            N(this).instance("button").disable();
+            N("a#btnOpen").instance("button").enable();
+        });
+
+    	N("a#btnReload", view).click(function(e) {
+        	e.preventDefault();
+        	N(view.parent()).controller(this_.request.get("url")).submit();
+        });
+
+    	N("a#btnOpen", view).click(function(e) {
+        	e.preventDefault();
+        	this_.tab.open(N("input#idx", view).val());
         });
     }
 });

@@ -21,8 +21,8 @@ function() {
 		</table>
 
 		<div align="center" class="btnBox">
-			<a id="btnApply" href="#" class='{ "color": "skyblue", "size": "big" }'>Apply Datepicker</a>
-			<a id="btnReload" href="#" class='{ "color": "white", "size": "big" }'>Reload this page</a>
+			<a id="btnApply" href="#" class='{ "color": "skyblue", "size": "large" }'>Apply Datepicker</a>
+			<a id="btnReload" href="#" class='{ "color": "white", "size": "large" }'>Reload this page</a>
 		</div>
 
 		<p>Result : </p>
@@ -39,9 +39,9 @@ function() {
 <script type="text/javascript">
 
 N("div#datepickerSample").service({
-    init : function(view) {
+    init : function(view, request) {
     	// put source code
-    	IndexServiceController.getSourceCode("prototype/datepicker.html", N("div.sourceBox"));
+    	IndexServiceController.getSourceCode(request.get("url"), N("div.sourceBox"));
 
     	// make button
        	this.initButton(view);
@@ -69,7 +69,7 @@ N("div#datepickerSample").service({
 
         N("a#btnReload", view).click(function(e) {
         	e.preventDefault();
-        	N(view.parent()).controller(this_.request.options.url).submit();
+        	N(view.parent()).controller(this_.request.get("url")).submit();
         });
     }
 });

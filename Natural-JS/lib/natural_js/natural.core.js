@@ -106,13 +106,13 @@
 				if (this.isEmpty(str) || this.isEmpty(postfix)) {
 					return false;
 				}
-				return str.lastIndexOf(postfix) == str.length - postfix.length;
+				return str.lastIndexOf(postfix) === str.length - postfix.length;
 			},
 			startsWith : function(str, prefix) {
 				if (this.isEmpty(str)) {
 					return false;
 				}
-				return str.indexOf(prefix) == 0;
+				return str.indexOf(prefix) === 0;
 			},
 			insertAt : function(str, strToInsert, index) {
 				return str.substring(0, index) + strToInsert + str.substring(index);
@@ -151,7 +151,7 @@
 				var byteLength = 0;
 				for (var inx = 0; inx < str.length; inx++) {
 					var oneChar = escape(str.charAt(inx));
-					if (oneChar.length == 1) {
+					if (oneChar.length === 1) {
 						byteLength++;
 					} else if (oneChar.indexOf("%u") != -1) {
 						byteLength += 2;
@@ -168,7 +168,7 @@
 			 * 값이 비어 있는지 체크
 			 */
 			isEmpty : function(str) {
-				return this.trimToNull(str) == null ? true : false;
+				return this.trimToNull(str) === null ? true : false;
 			},
 			/**
 			 * null이나 스트링을 트림 하여 스트링으로 반환
@@ -187,6 +187,12 @@
 			 */
 			trimToNull : function(str) {
 				return (str != null && typeof str != "undefined" && this.trim(str).length > 0) ? this.trim(str) : null;
+			},
+			/**
+			 * null이나 스트링을 트림하여 값이 없으면 undefined 반환
+			 */
+			trimToUndefined : function(str) {
+				return  this.trimToNull(str) === null ? undefined : str;
 			},
 			/**
 			 * null이나 스트링을 트림하여 값이 없으면 0을 반환
@@ -220,22 +226,22 @@
 			strToDate : function(str) {
 				str = N.string.trimToEmpty(str).replace(/\s/g, "").replace(/-/g, "").replace(/\//g, "").replace(/:/g, "");
 				var dateInfo = null;
-				if (str.length == 6) {
+				if (str.length === 6) {
 					dateInfo = {
 						obj : new Date(str.substring(0, 4), Number(str.substring(4, 6)), 0, 0, 0, 0),
 						format : N.context.attr("data")["formater"]["date"]["Ym"]()
 					};
-				} else if (str.length == 8) {
+				} else if (str.length === 8) {
 					dateInfo = {
 						obj : new Date(str.substring(0, 4), Number(str.substring(4, 6)) - 1, str.substring(6, 8), 0, 0, 0),
 						format : N.context.attr("data")["formater"]["date"]["Ymd"]()
 					};
-				} else if (str.length == 10) {
+				} else if (str.length === 10) {
 					dateInfo = {
 						obj : new Date(str.substring(0, 4), Number(str.substring(4, 6)) - 1, str.substring(6, 8), str.substring(8, 10), 0, 0),
 						format : N.context.attr("data")["formater"]["date"]["YmdH"]()
 					};
-				} else if (str.length == 12) {
+				} else if (str.length === 12) {
 					dateInfo = {
 						obj : new Date(str.substring(0, 4), Number(str.substring(4, 6)) - 1, str.substring(6, 8), str.substring(8, 10), str.substring(10, 12),
 								0),

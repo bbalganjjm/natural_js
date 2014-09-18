@@ -132,7 +132,7 @@
 				}
 
 				// bind "ESC" key event
-				// if press the "ESC" key, alert dialog will be remove
+				// if press the "ESC" key, alert dialog will be removed
 				var this_ = this;
 		        $(document).bind("keyup.alert", function(e) {
 		        	if (e.keyCode == 27) {
@@ -357,7 +357,8 @@
 				context : obj,
 				size : "medium", // smaller, small, medium, large, big
 				color : "white", // white, blue, skyblue, gray
-				disable : false
+				disable : false,
+				effect : true
 			};
 
 			try {
@@ -384,7 +385,11 @@
 			},
 			disable : function() {
 				var context = this.options.context;
-				context.css("opacity", "0.6");
+				if(this.options.effect) {
+					context.fadeTo(150, "0.6");
+				} else {
+					context.css("opacity", "0.6");
+				}
 		        if (context.is("a")) {
 		        	context.unbind("click.button");
 		            context.tpBind("click.button", N.element.disable);
@@ -396,7 +401,11 @@
 			},
 			enable : function() {
 				var context = this.options.context;
-				context.css("opacity", "1");
+				if(this.options.effect) {
+					context.fadeTo(150, "1");
+				} else {
+					context.css("opacity", "1");
+				}
 		        if (context.is("a")) {
 		            context.unbind("click", N.element.disable);
 		        } else {
@@ -445,7 +454,11 @@
 	                    	if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {
 	                    		$(this).css("box-shadow", "rgba(0, 0, 0, 0.2) 1px 1px 1px inset");
 	                    	} else {
-	                    		$(this).css("opacity", "0.9");
+	                    		if(opts.effect) {
+	            					context.fadeTo(100, "0.9");
+	            				} else {
+	            					context.css("opacity", "0.9");
+	            				}
 	                    	}
 	                    }
 	                });
@@ -454,7 +467,11 @@
 	                    	if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {
 	                    		$(this).css("box-shadow", "rgba(0, 0, 0, 0.2) 3px 3px 3px inset");
 	                    	} else {
-	                    		$(this).css("opacity", "0.7");
+	                    		if(opts.effect) {
+	            					context.fadeTo(100, "0.7");
+	            				} else {
+	            					context.css("opacity", "0.7");
+	            				}
 	                    	}
 	                    }
 	                });
@@ -463,7 +480,11 @@
 	                    	if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {
 	                    		$(this).css("box-shadow", "none");
 	                    	} else {
-	                    		$(this).css("opacity", "1");
+	                    		if(opts.effect) {
+	            					context.fadeTo(100, "1");
+	            				} else {
+	            					context.css("opacity", "1");
+	            				}
 	                    	}
 	                    }
 	                });
@@ -472,7 +493,11 @@
 	                    	if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {
 	                    		$(this).css("box-shadow", "none");
 	                    	} else {
-	                    		$(this).css("opacity", "1");
+	                    		if(opts.effect) {
+	            					context.fadeTo(100, "1");
+	            				} else {
+	            					context.css("opacity", "1");
+	            				}
 	                    	}
 	                    }
 	                });
@@ -700,7 +725,7 @@
 					opts.contents.fadeIn(150);
 
 					// bind "ESC" key event
-					// if press the "ESC" key, datepicker will be hide
+					// if press the "ESC" key, datepicker will be hidden
 			        $(document).bind("keyup.datepicker", function(e) {
 			        	if (e.keyCode == 27) {
 			        		opts.contents.fadeOut(150);
@@ -896,7 +921,7 @@
 						}
 
 						if(serviceController.init !== undefined) {
-							serviceController.init(serviceController.view);
+							serviceController.init(serviceController.view, this.request);
 						}
 					}
 
@@ -972,7 +997,11 @@
 
 		Tab.fn = Tab.prototype;
 		$.extend(Tab.fn, {
-
+			open : function(idx) {
+				if(idx !== undefined) {
+					$(this.options.links.get(idx)).click();
+				}
+			}
 		});
 
 		$.extend(Tab, {
@@ -1071,13 +1100,16 @@
 
 					var serviceController = innerContent.instance("service");
 
+					// set Controller.request
+					serviceController.request = this.request;
+
 					// set caller attribute in Service Conteroller in tab content that is Tab instance
 					serviceController.caller = this_;
 
 					// set tab instance to tab contents service controller
 					if(serviceController !== undefined) {
 						if(serviceController.init !== undefined) {
-							serviceController.init(serviceController.view);
+							serviceController.init(serviceController.view, this.request);
 						}
 					}
 
@@ -1226,9 +1258,9 @@
 				data : N.type(obj) === "array" ? N(obj) : obj,
 				row : -1,
 				context : null,
+				validate : true,
 				html : false,
 				addTop : false,
-				validate : true,
 				fRules : null, //TODO test
 				vRules : null, //TODO test
 				extObj : null, // for N.grid,
@@ -1312,7 +1344,9 @@
 											ele.bind("focusout.form.validate", function() {
 												var currEle = $(this);
 					                            if (!currEle.prop("disabled") && !currEle.prop("readonly")) {
-					                                currEle.trigger("validate");
+					                            	if (opts.validate) {
+					                            		currEle.trigger("validate");
+					                            	}
 					                            }
 					                        });
 										}

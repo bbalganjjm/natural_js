@@ -52,7 +52,7 @@ function() {
 		</table>
 
 		<div align="center" class="btnBox">
-			<a id="btnShow" href="#" class='{ "color": "skyblue", "size": "big" }'>Show alert</a>
+			<a id="btnShow" href="#" class='{ "color": "skyblue", "size": "large" }'>Show alert</a>
 		</div>
 
 		<p>Result : </p>
@@ -65,9 +65,9 @@ function() {
 <script type="text/javascript">
 
 N("div#alert").service({
-    init : function(view) {
+    init : function(view, request) {
     	// put source code
-    	IndexServiceController.getSourceCode("prototype/alert.html", N("div.sourceBox"));
+    	IndexServiceController.getSourceCode(request.get("url"), N("div.sourceBox"));
 
     	// make button
     	this.initButton(view);

@@ -92,7 +92,7 @@
 					 * 특정 영역에 html 페이지를 불러올때 전환 효과 지정, false 이면 효과 없음.
 					 * ex) ["fadeIn", 300, null], 적용안할때는 false
 					 */
-					"effect" : ["fadeIn", 300, null]
+					"effect" : ["slideDown", 300, null]
 				}
 			}
 		}
@@ -319,6 +319,37 @@
 				}
 			}
 		},
+		"popup" : {
+			/**
+			 * 버튼 상태 변경에 따른 fade 효과 적용 유무
+			 */
+			"button" : {
+				"effect" : true
+			}
+		},
+		"popup" : {
+
+		},
+		"tab" : {
+			/**
+			 * 탭 컨텐츠 표시할때 효과
+			 */
+			"effect" : ["fadeIn", 300, undefined]
+		},
+		"datepicker" : {
+			"message" : {
+				"ko_KR" : {
+					"year" : "년",
+					"month" : "월",
+					"days" : "일,월,화,수,목,금,토",
+				},
+				"en_US" : {
+					"year" : "Year",
+					"month" : "Month",
+					"days" : "Sun,Mon,Tue,Wed,Thu,Fri,Sat"
+				}
+			}
+		},
 		"select" : {
 			/**
 			 * 기본 key 값
@@ -386,26 +417,6 @@
 				},
 				"en_US" : {
 					"empty" : "No inquired data or no data available.",
-				}
-			}
-		},
-		"popup" : {
-
-		},
-		"tab" : {
-			"effect" : ["fadeIn", 300, undefined]
-		},
-		"datepicker" : {
-			"message" : {
-				"ko_KR" : {
-					"year" : "년",
-					"month" : "월",
-					"days" : "일,월,화,수,목,금,토",
-				},
-				"en_US" : {
-					"year" : "Year",
-					"month" : "Month",
-					"days" : "Sun,Mon,Tue,Wed,Thu,Fri,Sat"
 				}
 			}
 		}
