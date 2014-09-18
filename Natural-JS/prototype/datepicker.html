@@ -1,10 +1,36 @@
 <div id="datepickerSample">
+	<div class="intro">
+		<h1><b>Datepicker</b> : Datepicker(N.datepicker)는  텍스트 입력요소에 년월일 또는 년월을 선택하여 입력 할 수 있는 기능을 제공 합니다.</h1>
+		<h2>[Apply Datepicker] 버튼을 누르고 텍스트 입력요소를 클릭하면 지정한 옵션이 반영된 버튼을 볼 수 있습니다.</h2>
+		<h2>Datepicker는 한번만 초기화 할 수 있습니다. 옵션을 변경하려면 [Reload this page] 버튼을 누른 후 다시 설정 하기 바랍니다.</h2>
+	</div>
 	<div class="divBar">DEMO</div>
 	<div class="demoBox">
-		<label for="month">Month</label> <input id="month" type="text" />
-		<label for="date">Date</label> <input id="date" type="text" />
-	</div>
+		<p>Default options : </p>
+		<table class="form" style="width: 100%;">
+			<tr>
+				<th align="right" width="10%">monthonly</th>
+				<td width="40%" colspan="3"><input id="monthonly" type="checkbox" /></td>
+				<th align="right" width="10%">onSelect</th>
+				<td width="40%" colspan="3"><textarea id="onSelect" rows="3" cols="60">
+function() {
+	alert("select");
+}
+				</textarea><br />Callback function for date select event</td>
+			</tr>
+		</table>
 
+		<div align="center" class="btnBox">
+			<a id="btnApply" href="#" class='{ "color": "skyblue", "size": "big" }'>Apply Datepicker</a>
+			<a id="btnReload" href="#" class='{ "color": "white", "size": "big" }'>Reload this page</a>
+		</div>
+
+		<p>Result : </p>
+	    <div align="center" class="result" style="height: 70px;padding-top: 30px;">
+	    	<label for="datepicker">Datepicker</label> <input id="datepicker" type="text" />
+	    	Click! this text input element <b>after press the [Apply Datepicker] button</b>
+	    </div>
+	</div>
 	<div class="divBar">SOURCE CODE</div>
 	<div class="sourceBox">
 	</div>
@@ -17,20 +43,34 @@ N("div#datepickerSample").service({
     	// put source code
     	IndexServiceController.getSourceCode("prototype/datepicker.html", N("div.sourceBox"));
 
-    	var monthpicker = $("input#month").datepicker({
-    		monthonly : true,
-			onSelect : function(context, selDate) {
-				N.log(context);
-				N.log(selDate);
-			}
-		});
+    	// make button
+       	this.initButton(view);
 
-		var datepicker = $("input#date").datepicker({
-			onSelect : function(context, selDate) {
-				N.log(context);
-				N.log(selDate);
-			}
-		});
+     	// event bind
+    	this.setEvent(view, this);
+    },
+    initButton : function(view) {
+    	N("div.btnBox", view).button();
+    },
+    setEvent : function(view, this_) {
+        N("a#btnApply", view).click(function(e) {
+        	e.preventDefault();
+
+        	var opts = {
+           		monthonly : N("input#monthonly", view).is(":checked"),
+           		onSelect : N.string.trimToNull(N("textarea#onSelect", view).val()) !== null ?
+           				eval("(" + N("textarea#onSelect", view).val() + ")") : null
+       		};
+
+        	$("input#datepicker", view).datepicker(opts);
+
+           	N(this).instance("button").disable();
+        });
+
+        N("a#btnReload", view).click(function(e) {
+        	e.preventDefault();
+        	N(view.parent()).controller(this_.request.options.url).submit();
+        });
     }
 });
 

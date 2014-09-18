@@ -78,13 +78,16 @@ var IndexServiceController = {
 	    });
     },
     getSourceCode : function(url, target) {
-    	N.controller({
-    		url : url,
-    		contentType : "application/x-www-form-urlencoded",
-    		dataType : "html"
-    	}).submit(function(html) {
-    		target.text(html.replace(/\t/g, "    "));
-    	});
+    	var isEmbed = target.parents(".popup__, .tab__, .result").length > 0 ? true : false;
+    	if(!isEmbed) {
+    		N.controller({
+        		url : url,
+        		contentType : "application/x-www-form-urlencoded",
+        		dataType : "html"
+        	}).submit(function(html) {
+        		target.text(html.replace(/\t/g, "    "));
+        	});
+    	}
     }
 }
 $(document).ready(function() {

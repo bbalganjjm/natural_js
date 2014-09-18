@@ -156,13 +156,19 @@ div#main div#contents {
 	font-weight: bold;
 }
 
+.section {
+	color: #000080;
+	font-weight: bold;
+	border-bottom: 1px solid #cccccc;
+}
+
 .intro {
 	padding: 10px;
 }
 
 .intro h1 {
 	padding-left: 7px;
-	line-height: 14px;
+	line-height: 15px;
 	border-left: 5px solid blue;
 	font-size: 12px;
 	font-weight: normal;
@@ -170,7 +176,7 @@ div#main div#contents {
 
 .intro h2 {
 	padding-left: 6px;
-	line-height: 8px;
+	line-height: 13px;
 	border-left: 5px solid red;
 	font-size: 12px;
 	font-weight: normal;

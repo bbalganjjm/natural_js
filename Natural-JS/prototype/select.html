@@ -113,11 +113,11 @@ N("div#select").service({
     init : function(view) {
     	// put source code
     	IndexServiceController.getSourceCode("prototype/select.html", N("div.sourceBox"));
-    	
+
     	this.initButton(view);
 
     	var data = eval(N("textarea.data").val())[0];
-		
+
         this.setEvent(view, {
         	"select" : $(data.eyeColor).select("select#eyeColor"),
         	"selectMulty" : $(data.company).select("select#company"),
@@ -151,20 +151,22 @@ N("div#select").service({
         	e.preventDefault();
         	objs.checkbox.bind();
         });
-        
+
      	// for popup onClose exemple
         if(this.caller !== undefined && this.caller.changeEvent !== undefined) {
         	var popupCaller = this.caller;
-            popupCaller.changeEvent("onOk", function() {
-            	popupCaller.close(objs.select.data());
-            });
+        	if(popupCaller.options.onOk === null) {
+        		popupCaller.changeEvent("onOk", function() {
+                	popupCaller.close(objs.select.data());
+                });
+        	}
         }
     },
     /**
      * for popup exemple
      */
     onOpen : function(onOpenData) {
-    	N.log("onOpen 콜백 실행\nonOpenData :\n" + JSON.stringify(onOpenData));
+    	N(window).alert("onOpen 콜백 실행<br />onOpenData :<br />" + onOpenData).show();
     }
 });
 

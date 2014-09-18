@@ -6,26 +6,26 @@
 	</div>
 	<div class="divBar">DEMO</div>
 	<div class="demoBox">
-		<p>Options : </p>
+		<p>Default options : </p>
 		<table class="form" style="width: 100%;">
 			<tr>
-				<th align="right" width="85">size</th>
-				<td width="*"><select id="size">
+				<th align="right" width="10%">size</th>
+				<td width="23%"><select id="size">
 					<option value="smaller">smaller</option>
 					<option value="small">small</option>
 					<option value="medium">medium</option>
 					<option value="large">large</option>
 					<option value="big">big</option>
 				</select></td>
-				<th align="right" width="85">color</th>
-				<td width="*"><select id="color">
+				<th align="right" width="10%">color</th>
+				<td width="23%" width="*"><select id="color">
 					<option value="white">white</option>
 					<option value="blue">blue</option>
 					<option value="skyblue">skyblue</option>
 					<option value="gray">gray</option>
 				</select></td>
-				<th align="right" width="85">disable</th>
-				<td width="*" colspan="3"><input id="disable" type="checkbox" /></td>
+				<th align="right" width="10%">disable</th>
+				<td width="24%" width="*" colspan="3"><input id="disable" type="checkbox" /></td>
 			</tr>
 		</table>
 
@@ -55,7 +55,10 @@ N("div#button").service({
     	// put source code
     	IndexServiceController.getSourceCode("prototype/button.html", N("div.sourceBox"));
 
+    	// make button
     	this.initButton(view);
+
+    	// event bind
         this.setEvents(view);
     },
     initButton : function(view) {

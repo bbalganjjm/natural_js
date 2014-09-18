@@ -7,33 +7,33 @@
 	</div>
 	<div class="divBar">DEMO</div>
 	<div class="demoBox">
-		<p>Options : </p>
+		<p>Default options : </p>
 		<table class="form" style="width: 100%;">
 			<tr>
-				<th align="right" width="85">Message Context</th>
-				<td><input id="messageContext" type="text" value="div.result" /> window or jQuery selector</td>
-				<th align="right" width="85">msg</th>
-				<td><textarea id="msg" rows="3" cols="60">
+				<th align="right" width="10%">context</th>
+				<td width="40%"><input id="context" type="text" value="div.result" /> window or jQuery selector</td>
+				<th align="right" width="10%">msg</th>
+				<td width="40%"><textarea id="msg" rows="3" cols="60">
  Mollit elit qui reprehenderit fugiat excepteur adipisicing sunt id proident laborum sint proident. Amet cupidatat ipsum do irure qui magna sunt pariatur commodo eiusmod ipsum qui ad culpa.
 				</textarea></td>
 			</tr>
 			<tr>
 				<th align="right">confirm</th>
-				<td><input id="confirm" type="checkbox" /></td>
+				<td><input id="confirm" type="checkbox" />If uncheck(false) this checkbox, display OK button only</td>
 				<th align="right">title</th>
 				<td><input id="title" type="text" value="Alert test" /></td>
 			</tr>
 			<tr>
 				<th align="right">modal</th>
-				<td><input id="modal" type="checkbox" checked="checked" /></td>
+				<td><input id="modal" type="checkbox" checked="checked" />If uncheck(false) this checkbox, hide modal overlay layer</td>
 				<th align="right">button</th>
-				<td><input id="button" type="checkbox" checked="checked" /></td>
+				<td><input id="button" type="checkbox" checked="checked" />If uncheck(false) this checkbox, hide button bar</td>
 			</tr>
 			<tr>
 				<th align="right" width="85">width</th>
-				<td width="*"><input id="width" type="text" value="300" /> Message contents width</td>
+				<td width="*"><input id="width" type="text" value="300" /> Message contents width, 0 is auto width</td>
 				<th align="right" width="85">height</th>
-				<td width="*"><input id="height" type="text" value="100" /> Message contents height</td>
+				<td width="*"><input id="height" type="text" value="100" /> Message contents height, 0 is auto height</td>
 			</tr>
 			<tr>
 				<th align="right" width="85">onOk</th>
@@ -41,13 +41,13 @@
 function() {
 	alert("Ok");
 }
-				</textarea><br />ok button event callback function</td>
+				</textarea><br />Callback function for ok button event</td>
 				<th align="right" width="85">onCancel</th>
 				<td><textarea id="onCancel" rows="3" cols="60">
 function() {
 	alert("Cancel");
 }
-				</textarea><br />cancel button event callback function</td>
+				</textarea><br />Callback function for cancel button event</td>
 			</tr>
 		</table>
 
@@ -73,31 +73,34 @@ N("div#alert").service({
     	this.initButton(view);
 
     	// event bind
-    	this.setEvent(this, view);
+    	this.setEvent(view, this);
 	},
     initButton : function(view) {
     	N("div.btnBox", view).button();
     },
-    setEvent : function(this_, view) {
+    setEvent : function(view, this_) {
         N("a#btnShow", view).click(function(e) {
             e.preventDefault();
 
-            var messageContext = N("input#messageContext", view).val();
-            if(messageContext === "window") {
-            	messageContext = window;
+            var context = N("input#context", view).val();
+            if(context === "window") {
+            	context = window;
             }
             var opts = {
             	msg : N("textarea#msg", view).val(),
             	confirm : N("input#confirm", view).is(":checked"),
-            	title : N("input#title", view).val(),
+            	title : N.string.trimToNull(N("input#title", view).val()) !== null ?
+            			N("input#title", view).val() : undefined,
             	modal : N("input#modal", view).is(":checked"),
             	button : N("input#button", view).is(":checked"),
             	width : Number(N("input#width", view).val()),
             	height : Number(N("input#height", view).val()),
-            	onOk : eval("(" + N("textarea#onOk", view).val() + ")"),
-            	onCancel : eval("(" + N("textarea#onCancel", view).val() + ")")
+            	onOk : N.string.trimToNull(N("textarea#onOk", view).val()) !== null ?
+            			eval("(" + N("textarea#onOk", view).val() + ")") : null,
+            	onCancel : N.string.trimToNull(N("textarea#onCancel", view).val()) !== null ?
+            			eval("(" + N("textarea#onCancel", view).val() + ")") : null
             };
-            N(messageContext).alert(opts).show()
+            N(context).alert(opts).show()
         });
     }
 });

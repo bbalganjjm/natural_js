@@ -1016,11 +1016,9 @@
 			for (var i = 0; i < m.length; i++) {
 				// grab the current character
 				x = m.charAt(i);
-				// check to see if current character is a mask, escape commands are
-				// not a mask character
+				// check to see if current character is a mask, escape commands are not a mask character
 				t = (r.indexOf(x) > -1);
-				// if the current character is an escape command, then grab the next
-				// character
+				// if the current character is an escape command, then grab the next character
 				if (x == "!") {
 					x = m.charAt(i++);
 				}
@@ -1140,8 +1138,7 @@
 				// find the last zero, which indicates the minimum number
 				// of decimal places to show
 				var md = dm.lastIndexOf("0") + 1;
-				// if the number of decimal places is greater than the mask, then
-				// round off
+				// if the number of decimal places is greater than the mask, then round off
 				if (vd.length > dm.length) {
 					if (_p != null && _p == "round") {
 						vd = String(Math.round(Number(vd.substring(0, dm.length + 1)) / 10));

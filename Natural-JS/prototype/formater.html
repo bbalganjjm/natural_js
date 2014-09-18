@@ -27,10 +27,10 @@
 	</div>
 	<div class="divBar">DEMO</div>
 	<div class="demoBox">
-		<table id="inputBox" class='form'>
+		<table id="inputBox" class='form' style="width: 100%;">
 			<tr>
-				<th align="right" width="70"><label for="numeric">Input 1</label></th>
-				<td width="*">
+				<th align="right" width="10%"><label for="numeric">Input 1</label></th>
+				<td width="90%">
 					<input id="numeric" type="text" class='{ "format" : [["trimtoempty"], ["numeric", "#,###.##0000"]] }' /> class='{ "format" : [["trimtoempty"], ["numeric", "#,###.##0000"]] }'
 				</td>
 			</tr>
@@ -76,9 +76,17 @@ N("div#formater").service({
     	// put source code
     	IndexServiceController.getSourceCode("prototype/formater.html", N("div.sourceBox"));
 
-    	this.initButton();
+    	// make button
+    	this.initButton(view);
 
-        N("a#btnFormatCommand", view).click(function(e) {
+    	// event bind
+        this.setEvents(view);
+    },
+    initButton : function(view) {
+    	N("div.btnBox", view).button();
+    },
+    setEvents : function(view) {
+    	N("a#btnFormatCommand", view).click(function(e) {
             e.preventDefault();
 
             var data = eval(N("textarea.data").val());
@@ -108,9 +116,6 @@ N("div#formater").service({
             e.preventDefault();
             N("#inputBox :input", view).trigger("format");
         });
-    },
-    initButton : function() {
-    	N("div.btnBox").button();
     }
 });
 

@@ -120,7 +120,7 @@
 								return false;
 							}
 							try {
-								callback(data, obj.request);
+								callback.call(obj, data, obj.request);
 							} catch (e) {
 								N.error("[Controller.submit.success.callback]" + e, e);
 							}
@@ -134,7 +134,11 @@
 								obj.hide()[obj.request.options.effect[0]](obj.request.options.effect[1], obj.request.options.effect[2]);
 							}
 							if(obj.children(":first").length > 0) {
-								obj.children(":first").service().request = obj.request;
+								var serviceController = obj.children(":first").instance("service");
+								serviceController.request = obj.request;
+								if(serviceController !== undefined && serviceController.init !== undefined) {
+									serviceController.init(serviceController.view);
+								}
 							}
 						}
 					},
@@ -251,9 +255,6 @@
 			obj.instance("service", callback);
 
 			callback.view = obj;
-			if(N.service.init && callback.init !== undefined) {
-				callback.init(callback.view);
-			}
 			return callback;
 		};
 		N.service.init = true;

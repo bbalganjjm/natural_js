@@ -26,10 +26,10 @@
 
 	<div class="divBar">DEMO</div>
 	<div class="demoBox">
-		<table id="inputBox" class='form'>
+		<table id="inputBox" class='form' style="width: 100%;">
 			<tr>
-				<th align="right" width="70"><label for="numeric">Input 1</label></th>
-				<td width="*">
+				<th align="right" width="10%"><label for="numeric">Input 1</label></th>
+				<td width="90%">
 					<input id="numeric" type="text" class='{ "validate" : [["required"], ["number"]] }' /> class='{ "validate" : [["required"], ["integer+commas"]] }'
 				</td>
 			</tr>
@@ -75,9 +75,17 @@ N("div#validator").service({
     	// put source code
     	IndexServiceController.getSourceCode("prototype/validator.html", N("div.sourceBox"));
 
-    	this.initButton();
+    	// make button
+    	this.initButton(view);
 
-        N("a#btnValidateCommand", view).click(function(e) {
+    	// event bind
+        this.setEvents(view);
+    },
+    initButton : function(view) {
+    	N("div.btnBox", view).button();
+    },
+    setEvents : function(view) {
+    	N("a#btnValidateCommand", view).click(function(e) {
             e.preventDefault();
 
             var data = eval(N("textarea.data").val());
@@ -95,9 +103,6 @@ N("div#validator").service({
             e.preventDefault();
             N().validator(N("#inputBox", view)).validate();
         });
-    },
-    initButton : function() {
-    	N("div.btnBox").button();
     }
 });
 

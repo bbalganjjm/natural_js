@@ -29,12 +29,12 @@ N("div#controller").service({
     	this.initButton(view);
 
     	// bind events
-    	this.setEvent(this, view);
+    	this.setEvent(view, this);
     },
     initButton : function(view) {
     	N("div.btnBox", view).button();
     },
-    setEvent : function(this_, view) {
+    setEvent : function(view, this_) {
     	N("a#btnGetJson", view).click(function(e) {
             e.preventDefault();
             N.controller({

@@ -57,7 +57,7 @@
 		        height : 0,
 				isInput : false,
 				isWindow : obj.get(0) === window || obj.get(0) === window.document,
-				title : obj.attr("title"),
+				title : obj.get(0) === window || obj.get(0) === window.document ? undefined : obj.attr("title"),
 				button : true,
 				closeMode : "remove", //hide : keep element, remove : remove element
 				modal : true,
@@ -73,7 +73,7 @@
 				this.options = $.extend({}, this.options, N.context.attr("ui")["alert"]);
 				this.options.container = N(this.options.container);
 			} catch (e) {
-				N.error(e, e);
+				N.error("[N.alert]" + e, e);
 			}
 
 			if (obj.is(":input")) {
@@ -132,7 +132,7 @@
 				}
 
 				// bind "ESC" key event
-				// if press the "ESC" key, then remove alert dialog
+				// if press the "ESC" key, alert dialog will be remove
 				var this_ = this;
 		        $(document).bind("keyup.alert", function(e) {
 		        	if (e.keyCode == 27) {
@@ -254,7 +254,7 @@
 				opts.msgContents.find("li.buttonBox__ a.confirm__").click(function(e) {
 					e.preventDefault();
 					if (opts.onOk !== null) {
-						opts.onOk(opts.msgContext, opts.msgContents);
+						opts.onOk.call(this_, opts.msgContext, opts.msgContents);
 					}
 					this_[opts.closeMode]();
 				});
@@ -363,7 +363,7 @@
 			try {
 				this.options = $.extend({}, this.options, N.context.attr("ui")["button"]);
 			} catch (e) {
-				N.error(e, e);
+				N.error("[N.button]" + e, e);
 			}
 			$.extend(this.options, N.element.toOpts(this.options.context));
 			if(opts !== undefined) {
@@ -493,7 +493,7 @@
 			try {
 				this.options = $.extend({}, this.options, N.context.attr("ui")["datepicker"]);
 			} catch (e) {
-				N.error(e, e);
+				N.error("[N.datepicker]" + e, e);
 			}
 
 			if(opts !== undefined) {
@@ -700,7 +700,7 @@
 					opts.contents.fadeIn(150);
 
 					// bind "ESC" key event
-					// if press the "ESC" key, then hide datepicker
+					// if press the "ESC" key, datepicker will be hide
 			        $(document).bind("keyup.datepicker", function(e) {
 			        	if (e.keyCode == 27) {
 			        		opts.contents.fadeOut(150);
@@ -747,7 +747,7 @@
 			try {
 				this.options = $.extend({}, this.options, N.context.attr("ui")["popup"]);
 			} catch (e) {
-				N.error(e, e);
+				N.error("[N.popup]" + e, e);
 			}
 
 			if(opts !== undefined) {
@@ -767,10 +767,15 @@
 
 			//set opener(parent page's service controller)
 			try {
-				this.opener = arguments.callee.caller.arguments.callee.caller.arguments[0].instance("service");
+				var viewContext = arguments.callee.caller.arguments.callee.caller.arguments[0];
+				if(viewContext.instance !== undefined) {
+					this.opener = viewContext.instance("service");
+				} else {
+					this.opener = $(viewContext.target).closest(".view_context__").instance("service");
+				}
 			} catch(e) {
 				if(this.options.url !== null) {
-					N.warn("Don't set opener object in popup's service controller")
+					N.warn("[N.popup][" + e + "] Don't set opener object in popup's service controller")
 				}
 			}
 
@@ -813,8 +818,6 @@
 				}
 			},
 			close : function(onCloseData) {
-				//TODO popup init 할때 onClose 지정할때 onCloseData 문제 더 생각바람.
-				//TODO 기본확인버튼은 onOk, 팝업안에서는 onClose?
 				var opts = this.options;
 
 				// "onClose" event execute
@@ -822,7 +825,7 @@
 					if(onCloseData !== undefined) {
 						opts.onCloseData = onCloseData;
 					}
-					opts.onClose(opts.onCloseData);
+					opts.onClose.call(this, opts.onCloseData);
 				}
 				this.alert.hide();
 			},
@@ -862,9 +865,6 @@
 					contentType : "application/x-www-form-urlencoded",
 					dataType : "html"
 				}).submit(function(page) {
-					// block serviceController init;
-					N.service.init = false;
-
 					// set loaded page instance to options.context
 					opts.context = $(page);
 
@@ -884,6 +884,9 @@
 
 					// set popup instance to popup's service controller
 					if(serviceController !== undefined) {
+						// set Controller.request
+						serviceController.request = this.request;
+
 						// set caller attribute in Service Conteroller in tab content that is Popup instance
 						serviceController.caller = this_;
 
@@ -896,9 +899,6 @@
 							serviceController.init(serviceController.view);
 						}
 					}
-
-					// restore serviceController init flag;
-					N.service.init = true;
 
 					callback.call(this_, opts.context);
 
@@ -922,7 +922,7 @@
 					if(opts.context.instance("service")[opts.onOpen] !== undefined) {
 						opts.context.instance("service")[opts.onOpen](opts.onOpenData);
 					} else {
-						N.warn("onOpen callback function \"" + opts.onOpen + "\" is undefined in popup content's Service Controller");
+						N.warn("[N.popup.popOpen]onOpen callback function \"" + opts.onOpen + "\" is undefined in popup content's Service Controller");
 					}
 				}
 			}
@@ -932,18 +932,19 @@
 		var Tab = N.tab = function(obj, opts) {
 			this.options = {
 				context : obj,
-				onActive : null,
 				links : obj.find("li"),
-				classOpts : [], // [{ width: "auto", url: undefined, preLoad: false, active: false, onOpen: undefined }], TODO onLoad 도 필요한지 고민 해 보기
-				contents : obj.find("div"),
+				classOpts : [], // [{ width: "auto", url: undefined, preLoad: false, active: false, onOpen: undefined }]
 				randomSel : false,
+				onActive : null,
+				contents : obj.find("div"),
 				effect : false
+				// TODO onLoad 도 필요한지 고민 해 보기
 			};
 
 			try {
 				this.options = $.extend({}, this.options, N.context.attr("ui")["tab"]);
 			} catch (e) {
-				N.error(e, e);
+				N.error("[N.tab]" + e, e);
 			}
 
 			var this_ = this;
@@ -1030,13 +1031,12 @@
 						}
 					}
 
-					// excute "onActive" event
-					// onActive이벤트는 탭이 활성화 될때 발생함.
+					// run "onActive" event
 					if(opts.onActive !== undefined) {
 						opts.onActive.call(this, this, opts.links, opts.contents);
 					}
 
-					// excute "onOpen"(class option) event
+					// run "onOpen"(class option) event
 					// onOpen 이벤트는 탭의 class option에 url 이 지정되어있고 탭이 활성화 됐을때만 발생함.
 					if(thisClassOpts.onOpen !== undefined && thisEle.data("loaded")) {
 						var serviceController = content.find(">").instance("service");
@@ -1044,7 +1044,7 @@
 							//thisClassOpts.onOpen
 							serviceController[thisClassOpts.onOpen]();
 						} else {
-							N.warn("onOpen callback function \"" + thisClassOpts.onOpen + "\" is undefined in tab content's Service Controller");
+							N.warn("[N.tab.wrapEle]onOpen callback function \"" + thisClassOpts.onOpen + "\" is undefined in tab content's Service Controller");
 						}
 					}
 
@@ -1066,9 +1066,6 @@
 					contentType : "application/x-www-form-urlencoded",
 					dataType : "html"
 				}).submit(function(page) {
-					// block serviceController init;
-					N.service.init = false;
-
 					var innerContent = opts.contents.eq(targetIdx).html(page).find(">");
 					var activeTabEle = opts.links.eq(targetIdx);
 
@@ -1084,9 +1081,6 @@
 						}
 					}
 
-					// restore serviceController init flag;
-					N.service.init = true;
-
 					// run "onOpen" event
 					if(activeTabEle.hasClass("tab_active__")) {
 						var classOpts = opts.classOpts[targetIdx];
@@ -1095,7 +1089,7 @@
 								//TODO onOpenData 는 어떻게 할지 더 고민 해 보기.
 								serviceController[classOpts.onOpen]();
 							} else {
-								N.warn("\"" + classOpts.onOpen + "\" onOpen callback function is undefined in tab content's Service Controller");
+								N.warn("[N.tab.loadContent]\"" + classOpts.onOpen + "\" onOpen callback function is undefined in tab content's Service Controller");
 							}
 						}
 					}
@@ -1124,7 +1118,7 @@
 			try {
 				this.options = $.extend({}, this.options, N.context.attr("ui")["select"]);
 			} catch (e) {
-				N.error(e, e);
+				N.error("[N.select]" + e, e);
 			}
 			$.extend(this.options, N.element.toOpts(this.options.context));
 
@@ -1244,7 +1238,7 @@
 			try {
 				this.options = $.extend({}, this.options, N.context.attr("ui")["form"]);
 			} catch (e) {
-				N.error(e, e);
+				N.error("[N.form]" + e, e);
 			}
 
 			if (N.isPlainObject(opts)) {
@@ -1650,7 +1644,7 @@
 				//because $.extend method is don't extend object type
 				this.options.scrollPaging = $.extend({}, this.options.scrollPaging, N.context.attr("ui")["grid"]["scrollPaging"]);
 			} catch (e) {
-				N.error(e, e);
+				N.error("[N.grid]" + e, e);
 			}
 
 			if (N.isPlainObject(opts)) {
