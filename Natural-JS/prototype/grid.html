@@ -1,14 +1,15 @@
 <div id="gridEx">
 	<div class="intro">
-		<h1><b>Grid</b> : Grid(N.grid)은  </h1>
+		<h1><b>Grid</b> : Grid(N.grid)은 //TODO 전체 메시지 검토바람, 이건 폼꺼임 </h1>
 		<h2>[Initialize tab] 버튼을 누르면 지정한 선택입력요소가 Select 컴포넌트화 됩니다.</h2>
 		<h2>[add] 버튼을 누르면 새로운 폼요소 안에 있는 입력요소를 기반으로 새로운 data 를 생성하고 생성된 data 를 바인드 합니다.</h2>
 		<h2>[bind] 버튼을 누르면 DATA 영역에 있는 JSON 데이터를 지정한 요소에 폼을 바인드 합니다.</h2>
-		<h2>[revert] 버튼을 누르면 처음 데이터 바인드 한 상태로 돌려 줍니다.</h2>
-		<h2>[validate] 버튼을 누르면 폼요소 안에 입력된 값 전체에 대한 데이터 검증을 실행하고 성공하면 true 를 반환하고 실해하면 false 와 검증오류 메시지를 보여줍니다.</h2>
+		<h2>[revert] 버튼을 누르면 처음 데이터 바인드 한 상태로 돌려 줍니다. 특정 row 를 지정할 수 있습니다.</h2>
+		<h2>[remove] 버튼을 누르면 지정한 row가 삭제 됩니다.</h2>
 		<h2>[val] 버튼을 누르면 입력된 key 컬럼에 지정한 값이 있다면 지정한 값을 적용하고 지정한 값이 없다면 선택된 key 컬럼의 값을 가져옵니다.</h2>
-		<h2>[data] 버튼을 누르면 Grid에 바인드되어 있는 데이터를 가져옵니다. 인자로 true를 지정하면 현제 선택되어 있는 data만 가져옵니다.</h2>
+		<h2>[data] 버튼을 누르면 Grid에 바인드되어 있는 데이터를 가져옵니다. 인자로 row의 상태를 지정하면 현제 선택되어 있는 해당상태의 row만 가져옵니다.</h2>
 		<h2>Grid은 한번만 초기화 할 수 있습니다. 옵션을 변경하려면 [Reload this page] 버튼을 누른 후 다시 설정 하기 바랍니다.</h2>
+		<h2>[validate] 버튼을 누르면 폼요소 안에 입력된 값 전체에 대한 데이터 검증을 실행하고 성공하면 true 를 반환하고 실해하면 false 와 검증오류 메시지를 보여줍니다.</h2>
 	</div>
 	<div class="divBar">DATA</div>
 	<div class="dataBox">
@@ -44,57 +45,133 @@
 		<p>Default options : </p>
 		<table class="form" style="width: 100%;">
 			<tr>
-				<th align="right">context</th>
-				<td><input id="context" type="text" value="table#form" readonly="readonly" /> Target element</td>
-				<th align="right">validate</th>
-				<td><input id="validate" type="checkbox" checked="checked" /> If uncheck(false) this checkbox, disable realtime validation check</td>
+				<th width="10%" align="right">context</th>
+				<td width="40%"><input id="context" type="text" value="table#grid" readonly="readonly" /> Target element</td>
+				<th width="10%" align="right">height</th>
+				<td width="40%" style="background-color: #efffff;"><input id="height" type="text" value="395" /> </td>
 			</tr>
 			<tr>
+				<th align="right">validate</th>
+				<td><input id="validate" type="checkbox" checked="checked" /> If uncheck(false) this checkbox, disable realtime validation check</td>
 				<th align="right">html</th>
-				<td colspan="3"><input id="html" type="checkbox" /> If check(true) this checkbox, don't recognize HTML tags</td>
+				<td><input id="html" type="checkbox" /> If check(true) this checkbox, don't recognize HTML tags</td>
+			</tr>
+			<tr>
+				<th align="right">addTop</th>
+				<td><input id="addTop" type="checkbox" /> If check(true) this checkbox, create top to new row by add method
+					<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">* If height is great then 0, addTop options always set true</font>
+				</td>
+				<th align="right">resizable</th>
+				<td><input id="resizable" type="checkbox" /> </td>
+			</tr>
+			<tr>
+				<th align="right">vResizable</th>
+				<td style="background-color: #efffff;"><input id="vResizable" type="checkbox" /> </td>
+				<th align="right">sortable</th>
+				<td><input id="sortable" type="checkbox" /> </td>
+			</tr>
+			<tr>
+				<th align="right">select</th>
+				<td><input id="select" type="checkbox" /> </td>
+				<th align="right">multiselect</th>
+				<td><input id="multiselect" type="checkbox" /> </td>
+			</tr>
+			<tr>
+				<th align="right">hover</th>
+				<td><input id="hover" type="checkbox" /> </td>
+				<th align="right">createRowDelay</th>
+				<td><input id="createRowDelay" type="text" value="1" /> </td>
+			</tr>
+			<tr>
+				<th align="right">scrollPaging.size</th>
+				<td><input id="scrollPagingSize" type="text" value="100" /> </td>
+				<th align="right">rowHandler</th>
+				<td><textarea id="rowHandler" rows="5" cols="60">
+function(index, row, data) {
+	N.log(index);
+	N.log(row);
+	N.log(data);
+}
+				</textarea><br /> Callback function for tab active event</td>
+			</tr>
+			<tr>
+				<th align="right">onSelect</th>
+				<td><textarea id="onSelect" rows="5" cols="60">
+function(index, row, data) {
+	N.log(index);
+	N.log(row);
+	N.log(data);
+}
+				</textarea><br /> Callback function for tab active event</td>
+				<th align="right">onBind</th>
+				<td><textarea id="onBind" rows="4" cols="60">
+function(context, data) {
+	N.log(context);
+	N.log(data);
+}
+				</textarea><br /> Callback function for tab active event</td>
 			</tr>
 		</table>
 
 		<p>Method options : </p>
 		<table class="form" style="width: 100%;">
 			<tr>
-				<th align="right" width="10%">bind</th>
+				<th align="right" width="10%" rowspan="3">val</th>
 				<th align="right" width="10%">arguments[0]</th>
 				<td width="80%" colspan="3">
-					<input id="row" type="text" value="0" /> Row index for bind(default : 0)
-				</td>
-			</tr>
-			<tr>
-				<th align="right" width="10%" rowspan="2">val</th>
-				<th align="right" width="10%">arguments[0]</th>
-				<td width="80%" colspan="3">
-					<input id="key" type="text" value="name" /> key name
+					<input id="row" type="text" value="0" /> Target row
 				</td>
 			</tr>
 			<tr>
 				<th align="right" width="10%">arguments[1]</th>
 				<td width="80%" colspan="3">
-					<input id="val" type="text" value="jeff beck" /> If set empty value, get key value
+					<input id="key" type="text" value="company" /> Target key name
+				</td>
+			</tr>
+			<tr>
+				<th align="right" width="10%">arguments[2]</th>
+				<td width="80%" colspan="3">
+					<input id="val" type="text" value="NATURAL COMPANY" /> If set empty value, get key value
 				</td>
 			</tr>
 			<tr>
 				<th align="right" width="10%">data</th>
 				<th align="right" width="10%">arguments[0]</th>
 				<td width="80%" colspan="3">
-					<input id="data" type="checkbox" checked="checked" /> If uncheck(false) this checkbox, get all data
+					<select id="data">
+						<option value="modified">modified</option>
+						<option value="insert">insert</option>
+						<option value="update">update</option>
+						<option value="delete">delete</option>
+					</select> row status
+				</td>
+			</tr>
+			<tr>
+				<th align="right" width="10%">revert</th>
+				<th align="right" width="10%">arguments[0]</th>
+				<td width="80%" colspan="3">
+					<input id="rvtRow" type="text" value="0" /> Revert row index, if set empty value, revert all row data
+				</td>
+			</tr>
+			<tr>
+				<th align="right" width="10%">remove</th>
+				<th align="right" width="10%">arguments[0]</th>
+				<td width="80%" colspan="3">
+					<input id="rmvRow" type="text" value="0" /> Remove row index
 				</td>
 			</tr>
 		</table>
 
 		<div align="center" class="btnBox">
-			<a id="btnInit" href="#" class='{ "color": "gray", "size": "large" }'>Initialize grid</a>
-			<a id="btnAdd" href="#" class='{ "color": "skyblue", "size": "large", "disable": true }'>add</a>
-			<a id="btnBind" href="#" class='{ "color": "skyblue", "size": "large", "disable": true }'>bind</a>
+			<a id="btnInit" href="#" class='{ "color": "gray", "size": "large" }'>Initialize grid</a> |
+			<a id="btnAdd" href="#" class='{ "color": "skyblue", "size": "large", "disable": true }'>add</a> | or |
+			<a id="btnBind" href="#" class='{ "color": "skyblue", "size": "large", "disable": true }'>bind</a> |
 			<a id="btnRevert" href="#" class='{ "color": "skyblue", "size": "large", "disable": true }'>revert</a>
 			<a id="btnRemove" href="#" class='{ "color": "skyblue", "size": "large", "disable": true }'>remove</a>
 			<a id="btnVal" href="#" class='{ "color": "skyblue", "size": "large", "disable": true }'>val</a>
 			<a id="btnData" href="#" class='{ "color": "skyblue", "size": "large", "disable": true }'>data</a>
 			<a id="btnValidate" href="#" class='{ "color": "skyblue", "size": "large", "disable": true }'>validate</a>
+			<a id="btnReload" href="#" class='{ "color": "white", "size": "large" }'>Reload this page</a>
 		</div>
 
 		<p>Result : </p>
@@ -146,99 +223,120 @@ N("div#gridEx").sc({
     	// put source code
     	IndexServiceController.getSourceCode(request.get("url"), N("div.sourceBox"));
 
-    	this.initButton();
-    	//this.createSelect(data);
+    	this.initButton(view);
 
-    	// data load
-    	var this_ = this;
-    	N.controller({
-    		url : "prototype/data/grid.json",
-    		async : false
-    	}).submit(function(data) {
-    		this_.gridData = data;
-    	});
-
-    	this.setEvents();
+    	this.setEvents(view, this);
     },
-    createSelect : function(data) {
-    	// $(data).select("select#select").bind();
+    initButton : function(view) {
+    	N("div.btnBox", view).button();
     },
-    initButton : function() {
-    	N("div.btnBox").button();
-    },
-    setEvents : function() {
-    	var this_ = this;
-
+    setEvents : function(view, this_) {
+    	var grid;
     	N("a#btnInit").click(function(e) {
             e.preventDefault();
-           	this_.grid = N([]).grid({
-           		context :"table#grid",
-           		data : this_.gridData,
-           		height : 395,
-           		resizable : true,
-           		vResizable : true,
-           		sortable : true,
-           		rowHandler : function(i, tbody, vals) {
-           	    	if(i%2 === 1){
-           	    		tbody.find("td#index").css("cursor", "pointer").click(function() {
-           	    			tbody.alert({
-           	    				title : "홀수 인덱스",
-           	    				msg : '<textarea class="data" style="width:300px;height:150px;margin:0;">' + N.json.format(JSON.stringify(vals)) + '</textarea>'
-           	    			}).show();
-           	    		});
-           	    	} else {
-           	    		tbody.find("td#index").css("cursor", "pointer").click(function() {
-           	    			tbody.alert({
-           	    				title : "짝수 인덱스",
-           	    				msg : '<textarea class="data" style="width:300px;height:150px;margin:0;">' + N.json.format(JSON.stringify(vals)) + '</textarea>'
-           	    			}).show();
-           	    		});
-           	    	}
-           	    }
-           	});
+       		var opts = {
+       			context : N("input#context", view).val(),
+       			height : parseInt(N.string.trimToZero(N("input#height", view).val())),
+       			validate : N("input#validate", view).is(":checked"),
+       			html : N("input#html", view).is(":checked"),
+       			addTop : N("input#addTop", view).is(":checked"),
+       			resizable : N("input#resizable", view).is(":checked"),
+       			vResizable : N("input#vResizable", view).is(":checked"),
+       			sortable : N("input#sortable", view).is(":checked"),
+       			select : N("input#select", view).is(":checked"),
+       			multiselect : N("input#multiselect", view).is(":checked"),
+       			hover : N("input#hover", view).is(":checked"),
+       			createRowDelay : N.string.trimToNull(N("input#createRowDelay", view).val()) !== null ?
+       				parseInt(N("input#createRowDelay", view).val()) : 1,
+       			scrollPaging : {
+       				size : N.string.trimToNull(N("input#scrollPagingSize", view).val()) !== null ?
+       					parseInt(N("input#scrollPagingSize", view).val()) : 100
+       			},
+       			rowHandler : N.string.trimToNull(N("textarea#rowHandler", view).val()) !== null ?
+       				eval("(" + N("textarea#rowHandler", view).val() + ")") : null,
+    				onSelect : N.string.trimToNull(N("textarea#onSelect", view).val()) !== null ?
+        				eval("(" + N("textarea#onSelect", view).val() + ")") : null,
+        			onBind : N.string.trimToNull(N("textarea#onBind", view).val()) !== null ?
+        				eval("(" + N("textarea#onBind", view).val() + ")") : null
+       		}
 
-            N("div.btnBox").find("a").instance("button", function(u) {
-            	if(this.context().is("a#btnInit")) {
-	 				this.disable();
-	 			} else {
-	              	this.enable();
-	 			}
-            });
+       		grid = N([]).grid(opts).bind();
+
+       		N("a#btnAdd", view).instance("button").enable();
+            N("a#btnBind", view).instance("button").enable();
         });
 
-    	N("a#btnAdd").click(function(e) {
+    	N("a#btnAdd", view).click(function(e) {
             e.preventDefault();
-        	this_.grid.add();
+        	grid.add();
+
+        	N("div.btnBox", view).find("a").instance("button", function(u) {
+            	if(!this.context().is("a#btnAdd") && !this.context().is("a#btnBind")) {
+            		if(this.context().is("a#btnInit")) {
+    					this.disable();
+    				} else {
+    					this.enable();
+    				}
+            	}
+			});
         });
 
-    	N("a#btnBind").click(function(e) {
+    	N("a#btnBind", view).click(function(e) {
             e.preventDefault();
-            this_.grid.bind();
+            N.c("prototype/data/grid.json").submit(function(data) {
+            	grid.bind(data);
+	       	});
+
+            N("div.btnBox", view).find("a").instance("button", function(u) {
+            	if(!this.context().is("a#btnAdd") && !this.context().is("a#btnBind")) {
+            		if(this.context().is("a#btnInit")) {
+    					this.disable();
+    				} else {
+    					this.enable();
+    				}
+            	}
+			});
         });
 
-    	N("a#btnRevert").click(function(e) {
+    	N("a#btnRevert", view).click(function(e) {
             e.preventDefault();
-       		this_.grid.revert();
+       		grid.revert(N.string.trimToUndefined(N("input#rvtRow", view).val()));
         });
 
-    	N("a#btnRemove").click(function(e) {
+    	N("a#btnRemove", view).click(function(e) {
             e.preventDefault();
-        	this_.grid.remove(3);
+        	grid.remove(parseInt(N.string.trimToZero(N("input#rmvRow", view).val())));
         });
 
-    	N("a#btnVal").click(function(e) {
+    	N("a#btnVal", view).click(function(e) {
             e.preventDefault();
-            this_.grid.context().parent().alert(this_.grid.val(1, "name")).show();
+            var row = N.string.trimToZero(N("input#row", view).val());
+            var key = N.string.trimToNull(N("input#key", view).val());
+            var value = N.string.trimToNull(N("input#val", view).val());
+        	if(value !== null) {
+        		grid.val(row, key, value);
+        	} else {
+        		grid.context().parent().alert(grid.val(row, key)).show();
+        	}
         });
 
-    	N("a#btnData").click(function(e) {
-            e.preventDefault();
-           	N(window).alert(JSON.stringify(this_.grid.data()[0])).show();
+    	N("a#btnData", view).click(function(e) {
+    		e.preventDefault();
+    		grid.context().parent().alert({
+        		msg : '<div class="pre">' + N.json.format(grid.data(N("select#data", view).val())) + '</div>',
+        		width : 400,
+        		height : 250
+        	}).show();
         });
 
-    	N("a#btnValidate").click(function(e) {
+    	N("a#btnValidate", view).click(function(e) {
             e.preventDefault();
-            this_.grid.context().parent().alert(String(this_.grid.validate()));
+            grid.context().parent().alert(String(grid.validate())).show();
+        });
+
+    	N("a#btnReload", view).click(function(e) {
+        	e.preventDefault();
+        	N(view.parent()).c(this_.request.get("url")).submit();
         });
     }
 });

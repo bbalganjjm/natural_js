@@ -885,7 +885,7 @@
 				var this_ = this;
 
 				// TODO show loading bar
-				N.controller({
+				N.c({
 					url : opts.url,
 					contentType : "application/x-www-form-urlencoded",
 					dataType : "html"
@@ -1090,7 +1090,7 @@
 				var this_ = this;
 
 				// TODO show loading bar
-				N.controller({
+				N.c({
 					url : url,
 					contentType : "application/x-www-form-urlencoded",
 					dataType : "html"
@@ -1647,26 +1647,25 @@
 			this.options = {
 				data : N.type(obj) === "array" ? N(obj) : obj,
 				removedData : [],
-				row : -1,
 				context : null,
+				heigth : 0,
 				html : false,
 				validate : true,
 				addTop : false,
-				createRowDelay : 1,
-				heigth : 0,
-				scrollPaging : {
-					idx : 0,
-					size : 100
-				},
 				resizable : false,
 				vResizable : false,
 				sortable : false,
 				select : false,
 				multiselect : false,
 				hover : false,
+				createRowDelay : 1,
+				scrollPaging : {
+					idx : 0,
+					size : 100
+				},
+				rowHandler : null,
 				onSelect : null,
 				onBind : null,
-				rowHandler : null,
 				fRules : null,
 				vRules : null,
 			};
@@ -1682,6 +1681,9 @@
 
 			if (N.isPlainObject(opts)) {
 				$.extend(this.options, opts);
+				if(opts.scrollPaging !== undefined) {
+					$.extend(this.options.scrollPaging, opts.scrollPaging);
+				}
 				if(N.type(this.options.context) === "string") {
 					this.options.context = N(this.options.context);
 				}
@@ -1812,6 +1814,8 @@
 						// for row data bind, use N.form
 						N(opts.data[i]).form({
 							context : tbodyTempClone,
+							html: opts.html,
+							validate : opts.validate,
 							extObj : this_,
 							extRow : i
 						}).bind();
@@ -1828,7 +1832,7 @@
 								render();
 								if(i === lastIdx) {
 									if(opts.onBind !== null) {
-										opts.onBind.call(this, opts.context);
+										opts.onBind.call(this, opts.context, opts.data);
 									}
 								}
 							}
@@ -1861,7 +1865,9 @@
 				// for new row data bind, use N.form
 				opts.data.form({
 					context : tbodyTempClone,
-					extObj : this_,
+					html: opts.html,
+					validate : opts.validate,
+					extObj : this,
 					extRow : opts.addTop ? 0 : opts.data.length,
 					addTop : opts.addTop
 				}).add();

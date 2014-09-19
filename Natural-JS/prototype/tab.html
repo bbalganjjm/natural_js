@@ -27,7 +27,7 @@ function(activeLinkEle, allLinksEle, tabContentsEle) {
 	N.log(allLinksEle);
 	N.log(tabContentsEle);
 }
-				</textarea><br />Callback function for tab active event</td>
+				</textarea><br /> Callback function for tab active event</td>
 			</tr>
 			<tr>
 				<th align="right" width="10%">effect<br />[effect, duration, callback]</th>
@@ -121,7 +121,7 @@ N("div#tabExam").sc({
 
     	N("a#btnReload", view).click(function(e) {
         	e.preventDefault();
-        	N(view.parent()).controller(this_.request.get("url")).submit();
+        	N(view.parent()).c(this_.request.get("url")).submit();
         });
 
     	N("a#btnOpen", view).click(function(e) {

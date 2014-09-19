@@ -69,7 +69,7 @@ N("div#datepickerSample").sc({
 
         N("a#btnReload", view).click(function(e) {
         	e.preventDefault();
-        	N(view.parent()).controller(this_.request.get("url")).submit();
+        	N(view.parent()).c(this_.request.get("url")).submit();
         });
     }
 });

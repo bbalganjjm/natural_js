@@ -11,8 +11,8 @@
 		communicator : function(opts) {
 			return NTR.communicator(opts);
 		},
-		controller : function(url) {
-			return new NTR.controller(this, url);
+		c : function(url) {
+			return new NTR.c(this, url);
 		},
 		request : function() {
 			return this.get(0).request;
@@ -35,7 +35,7 @@
 
 		// Common Controller
 		// TODO demo 페이지 만들어야 함. html 불러올경우 ServiceController 에 request 객체 넣어줌
-		var Controller = N.controller = function(obj, url) {
+		var Controller = N.c = function(obj, url) {
 			if (obj === undefined) {
 				N.error("[Controller]You must input arguments[0]");
 			} else {
@@ -75,7 +75,7 @@
 				var successFilters = new Array();
 				var errorFilters = new Array();
 				var completeFilters = new Array();
-				var filters = N.context.attr("architecture")["controller"]["filters"];
+				var filters = N.context.attr("architecture")["c"]["filters"];
 				for ( var key in filters) {
 					for ( var filterKey in filters[key]) {
 						if (filterKey === "afterInit") {
@@ -180,7 +180,7 @@
 
 			// global config
 			try {
-				$.extend(this.options, N.context.attr("architecture")["controller"]["request"]["options"]);
+				$.extend(this.options, N.context.attr("architecture")["c"]["request"]["options"]);
 			} catch (e) {
 			}
 			$.extend(this.options, opts);

@@ -8,7 +8,7 @@
     "picture": "http://placehold.it/32x32",
     "age": 26,
     "eyeColor": "green",
-    "name": "Dean Stanley",
+    "name": "<font color='red'>Dean Stanley</font>",
     "gender": "male",
     "company": "ZENTIA",
     "email": "deanstanley@zentia.com",

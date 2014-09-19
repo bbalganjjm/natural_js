@@ -19,68 +19,68 @@ var IndexServiceController = {
     init : function() {
     	N("a#btnController").click(function(e) {
 		    e.preventDefault();
-		    N(N.context.attr("architecture")["page"]["context"]).controller("prototype/controller.html").submit();
+		    N(N.context.attr("architecture")["page"]["context"]).c("prototype/controller.html").submit();
 	    });
 
 	    N("a#btnFormater").click(function(e) {
 		    e.preventDefault();
-		    N(N.context.attr("architecture")["page"]["context"]).controller("prototype/formater.html").request.attr("aa", [{}, {}, {}]).submit();
+		    N(N.context.attr("architecture")["page"]["context"]).c("prototype/formater.html").request.attr("aa", [{}, {}, {}]).submit();
 	    });
 
 	    N("a#btnValidator").click(function(e) {
             e.preventDefault();
-            N(N.context.attr("architecture")["page"]["context"]).controller("prototype/validator.html").submit();
+            N(N.context.attr("architecture")["page"]["context"]).c("prototype/validator.html").submit();
         });
 
 	    N("a#btnAlert").click(function(e) {
 		   e.preventDefault();
-		   N(N.context.attr("architecture")["page"]["context"]).controller("prototype/alert.html").submit();
+		   N(N.context.attr("architecture")["page"]["context"]).c("prototype/alert.html").submit();
 	    });
 
 	    N("a#btnButton").click(function(e) {
 		   e.preventDefault();
-		   N(N.context.attr("architecture")["page"]["context"]).controller("prototype/button.html").submit();
+		   N(N.context.attr("architecture")["page"]["context"]).c("prototype/button.html").submit();
 	    });
 
 	    N("a#btnDate").click(function(e) {
 		   e.preventDefault();
-		   N(N.context.attr("architecture")["page"]["context"]).controller("prototype/datepicker.html").submit();
+		   N(N.context.attr("architecture")["page"]["context"]).c("prototype/datepicker.html").submit();
 	    });
 
 	    N("a#btnPopup").click(function(e) {
 		   e.preventDefault();
-		   N(N.context.attr("architecture")["page"]["context"]).controller("prototype/popup.html").submit();
+		   N(N.context.attr("architecture")["page"]["context"]).c("prototype/popup.html").submit();
 	    });
 
 	    N("a#btnTab").click(function(e) {
 		   e.preventDefault();
-		   N(N.context.attr("architecture")["page"]["context"]).controller("prototype/tab.html").submit();
+		   N(N.context.attr("architecture")["page"]["context"]).c("prototype/tab.html").submit();
 	    });
 
 	    N("a#btnSelect").click(function(e) {
 		   e.preventDefault();
-		   N(N.context.attr("architecture")["page"]["context"]).controller("prototype/select.html").submit();
+		   N(N.context.attr("architecture")["page"]["context"]).c("prototype/select.html").submit();
 	    });
 
 	    N("a#btnForm").click(function(e) {
 		   e.preventDefault();
-		   N(N.context.attr("architecture")["page"]["context"]).controller("prototype/form.html").submit();
+		   N(N.context.attr("architecture")["page"]["context"]).c("prototype/form.html").submit();
 	    });
 
 	    N("a#btnGrid").click(function(e) {
 		   e.preventDefault();
-		   N(N.context.attr("architecture")["page"]["context"]).controller("prototype/grid.html").submit();
+		   N(N.context.attr("architecture")["page"]["context"]).c("prototype/grid.html").submit();
 	    });
 
 	    N("a#btnGridFormPopup").click(function(e) {
 		   e.preventDefault();
-		   N(N.context.attr("architecture")["page"]["context"]).controller("prototype/grid_form_popup.html").submit();
+		   N(N.context.attr("architecture")["page"]["context"]).c("prototype/grid_form_popup.html").submit();
 	    });
     },
     getSourceCode : function(url, target) {
     	var isEmbed = target.parents(".popup__, .tab__, .result").length > 0 ? true : false;
     	if(!isEmbed) {
-    		N.controller({
+    		N.c({
         		url : url,
         		contentType : "application/x-www-form-urlencoded",
         		dataType : "html"

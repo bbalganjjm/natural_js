@@ -257,7 +257,10 @@ table.grid__.grid_select__ tbody {
 	cursor: pointer;
 }
 
-table.grid__.grid_select__ tbody.grid_selected__ {
+table.grid__.grid_select__ tbody.grid_selected__,
+table.grid__.grid_select__ tbody.grid_selected__ input,
+table.grid__.grid_select__ tbody.grid_selected__ select,
+table.grid__.grid_select__ tbody.grid_selected__ textarea {
 	background-color: #999999;
 	color: #ffffff;
 }
@@ -305,6 +308,7 @@ table.grid__ tbody td input[type='text']:focus, table.grid__ tbody td input[type
 	transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 	box-shadow: inset 1px 1px 1px rgba(0,0,0,0.075);
 	width: 100%;
+	color: #002200;
 }
 
 div.v_resizable__ {

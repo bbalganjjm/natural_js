@@ -26,7 +26,7 @@
 		"page" : {
 			"context" : "div#contents"
 		},
-		"controller" : {
+		"c" : {
 			/**
 			* Global ajax request filter
 			*/

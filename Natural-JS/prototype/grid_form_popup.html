@@ -172,7 +172,7 @@ N("div#gridFormPopup").sc({
     setEvents : function(this_) {
     	N("a#btnBind").click(function(e) {
             e.preventDefault();
-            N.controller({
+            N.c({
         		url : "prototype/data/grid_big.json",
         		async : false
         	}).submit(function(data) {
