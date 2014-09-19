@@ -1,5 +1,5 @@
 (function(window, $) {
-	var version = "0.7.0.0";
+	var version = "0.7.5.0";
 
 	// NTR local variables
 	$.fn.extend(NTR, {
@@ -17,8 +17,8 @@
 		request : function() {
 			return this.get(0).request;
 		},
-		service : function(callback) {
-			return new NTR.service(this, callback);
+		sc : function(callback) {
+			return new NTR.sc(this, callback);
 		}
 	});
 	$.fn.extend(NTR.fn);
@@ -134,10 +134,10 @@
 								obj.hide()[obj.request.options.effect[0]](obj.request.options.effect[1], obj.request.options.effect[2]);
 							}
 							if(obj.children(":first").length > 0) {
-								var serviceController = obj.children(":first").instance("service");
-								serviceController.request = obj.request;
-								if(serviceController !== undefined && serviceController.init !== undefined) {
-									serviceController.init(serviceController.view, obj.request);
+								var sc = obj.children(":first").instance("sc");
+								sc.request = obj.request;
+								if(sc !== undefined && sc.init !== undefined) {
+									sc.init(sc.view, obj.request);
 								}
 							}
 						}
@@ -247,7 +247,7 @@
 			}
 		});
 
-		var ServiceController = N.service = function(obj, callback) {
+		var ServiceController = N.sc = function(obj, callback) {
 			if(callback === undefined) {
 				return obj.data(obj.attr("id"));
 			}
@@ -256,7 +256,7 @@
 			}
 			obj.addClass(obj.attr("id") + "__ view_context__");
 
-			obj.instance("service", callback);
+			obj.instance("sc", callback);
 
 			callback.view = obj;
 			return callback;

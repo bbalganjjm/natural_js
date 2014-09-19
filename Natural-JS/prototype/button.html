@@ -35,8 +35,8 @@
 
 		<div align="center" class="btnBox">
 			<a id="btnMake" href="#" class='{ "color": "gray", "size": "large" }'>Make Button</a>
-			<a id="btnDisable" href="#" class='{ "color": "skyblue", "size": "medium", "disable": true }'>disable</a>
-			<a id="btnEnable" href="#" class='{ "color": "skyblue", "size": "medium", "disable": true }'>enable</a>
+			<a id="btnDisable" href="#" class='{ "color": "skyblue", "size": "large", "disable": true }'>disable</a>
+			<a id="btnEnable" href="#" class='{ "color": "skyblue", "size": "large", "disable": true }'>enable</a>
 		</div>
 
 		<p>Result : </p>
@@ -54,7 +54,7 @@
 
 <script type="text/javascript">
 
-N("div#button").service({
+N("div#button").sc({
     init : function(view, request) {
     	// put source code
     	IndexServiceController.getSourceCode(request.get("url"), N("div.sourceBox"));

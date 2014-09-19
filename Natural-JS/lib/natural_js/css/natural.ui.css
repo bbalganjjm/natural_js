@@ -283,7 +283,6 @@ table.grid__ th, table.grid__ td {
 }
 
 table.grid__ tbody td input[type='text'], table.grid__ tbody td input[type='password'], table.grid__ tbody td select, table.grid__ tbody td textarea {
-	width: 100%;
    	padding-left: 0;
    	padding-right: 0;
    	border-color: #ffffff;
@@ -295,12 +294,17 @@ table.grid__ tbody td input[type='text'], table.grid__ tbody td input[type='pass
    	line-height: 14px;
 }
 
-table.grid__ tbody td input[type='text']:hover, table.grid__ tbody td select:hover, table.grid__ tbody td textarea:hover,
-table.grid__ tbody td input[type='text']:focus, table.grid__ tbody td select:focus, table.grid__ tbody td textarea:focus {
+table.grid__ tbody td input[type='text'], table.grid__ tbody td input[type='password'], table.grid__ tbody td textarea {
+	width: 100%;
+}
+
+table.grid__ tbody td input[type='text']:hover, table.grid__ tbody td input[type='password']:hover, table.grid__ tbody td select:hover, table.grid__ tbody td textarea:hover,
+table.grid__ tbody td input[type='text']:focus, table.grid__ tbody td input[type='password']:focus, table.grid__ tbody td select:focus, table.grid__ tbody td textarea:focus {
 	border-color: #faaeae;
 	background-color: #ffe5e5;
 	transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 	box-shadow: inset 1px 1px 1px rgba(0,0,0,0.075);
+	width: 100%;
 }
 
 div.v_resizable__ {

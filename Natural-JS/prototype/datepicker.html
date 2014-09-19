@@ -28,7 +28,7 @@ function() {
 		<p>Result : </p>
 	    <div align="center" class="result" style="height: 70px;padding-top: 30px;">
 	    	<label for="datepicker">Datepicker</label> <input id="datepicker" type="text" />
-	    	Click! this text input element <b>after press the [Apply Datepicker] button</b>
+	    	Click! this text input element <b>after click the [Apply Datepicker] button</b>
 	    </div>
 	</div>
 	<div class="divBar">SOURCE CODE</div>
@@ -38,7 +38,7 @@ function() {
 
 <script type="text/javascript">
 
-N("div#datepickerSample").service({
+N("div#datepickerSample").sc({
     init : function(view, request) {
     	// put source code
     	IndexServiceController.getSourceCode(request.get("url"), N("div.sourceBox"));

@@ -1,4 +1,15 @@
-<div id="grid">
+<div id="gridEx">
+	<div class="intro">
+		<h1><b>Grid</b> : Grid(N.grid)은  </h1>
+		<h2>[Initialize tab] 버튼을 누르면 지정한 선택입력요소가 Select 컴포넌트화 됩니다.</h2>
+		<h2>[add] 버튼을 누르면 새로운 폼요소 안에 있는 입력요소를 기반으로 새로운 data 를 생성하고 생성된 data 를 바인드 합니다.</h2>
+		<h2>[bind] 버튼을 누르면 DATA 영역에 있는 JSON 데이터를 지정한 요소에 폼을 바인드 합니다.</h2>
+		<h2>[revert] 버튼을 누르면 처음 데이터 바인드 한 상태로 돌려 줍니다.</h2>
+		<h2>[validate] 버튼을 누르면 폼요소 안에 입력된 값 전체에 대한 데이터 검증을 실행하고 성공하면 true 를 반환하고 실해하면 false 와 검증오류 메시지를 보여줍니다.</h2>
+		<h2>[val] 버튼을 누르면 입력된 key 컬럼에 지정한 값이 있다면 지정한 값을 적용하고 지정한 값이 없다면 선택된 key 컬럼의 값을 가져옵니다.</h2>
+		<h2>[data] 버튼을 누르면 Grid에 바인드되어 있는 데이터를 가져옵니다. 인자로 true를 지정하면 현제 선택되어 있는 data만 가져옵니다.</h2>
+		<h2>Grid은 한번만 초기화 할 수 있습니다. 옵션을 변경하려면 [Reload this page] 버튼을 누른 후 다시 설정 하기 바랍니다.</h2>
+	</div>
 	<div class="divBar">DATA</div>
 	<div class="dataBox">
 		<textarea id="data" class="data">
@@ -25,84 +36,96 @@
     "greeting": "Hello, Dean Stanley! You have 1 unread messages.",
     "favoriteFruit": "strawberry"
   },.............
+]
 		</textarea>
 	</div>
 	<div class="divBar">DEMO</div>
 	<div class="demoBox">
-		<div id="firstBtnBox" class="btnBox">
-			<a id="btnInitGrid" href="#" class='{ "color": "skyblue", "size": "small" }'>init grid</a>
-			<a id="btnBindData" href="#" class='{ "color": "skyblue", "size": "small", "disable": true }'>bind data</a>
-			<a id="btnGetData" href="#" class='{ "color": "skyblue", "size": "small", "disable": true }'>get data</a>
-			<a id="btnRevert" href="#" class='{ "color": "skyblue", "size": "small", "disable": true }'>data revert</a>
-			<a id="btnGetVal" href="#" class='{ "color": "skyblue", "size": "small", "disable": true }'>get value</a>
-			<a id="btnChangeVal" href="#" class='{ "color": "skyblue", "size": "small", "disable": true }'>change value</a>
-			<a id="btnAdd" href="#" class='{ "color": "skyblue", "size": "small", "disable": true }'>add new row</a>
-			<a id="btnDelete" href="#" class='{ "color": "skyblue", "size": "small", "disable": true }'>delete 4th row</a>
-			<a id="btnValidate" href="#" class='{ "color": "skyblue", "size": "small", "disable": true }'>all row data validate</a>
+		<p>Default options : </p>
+		<table class="form" style="width: 100%;">
+			<tr>
+				<th align="right">context</th>
+				<td><input id="context" type="text" value="table#form" readonly="readonly" /> Target element</td>
+				<th align="right">validate</th>
+				<td><input id="validate" type="checkbox" checked="checked" /> If uncheck(false) this checkbox, disable realtime validation check</td>
+			</tr>
+			<tr>
+				<th align="right">html</th>
+				<td colspan="3"><input id="html" type="checkbox" /> If check(true) this checkbox, don't recognize HTML tags</td>
+			</tr>
+		</table>
+
+		<p>Method options : </p>
+		<table class="form" style="width: 100%;">
+			<tr>
+				<th align="right" width="10%">bind</th>
+				<th align="right" width="10%">arguments[0]</th>
+				<td width="80%" colspan="3">
+					<input id="row" type="text" value="0" /> Row index for bind(default : 0)
+				</td>
+			</tr>
+			<tr>
+				<th align="right" width="10%" rowspan="2">val</th>
+				<th align="right" width="10%">arguments[0]</th>
+				<td width="80%" colspan="3">
+					<input id="key" type="text" value="name" /> key name
+				</td>
+			</tr>
+			<tr>
+				<th align="right" width="10%">arguments[1]</th>
+				<td width="80%" colspan="3">
+					<input id="val" type="text" value="jeff beck" /> If set empty value, get key value
+				</td>
+			</tr>
+			<tr>
+				<th align="right" width="10%">data</th>
+				<th align="right" width="10%">arguments[0]</th>
+				<td width="80%" colspan="3">
+					<input id="data" type="checkbox" checked="checked" /> If uncheck(false) this checkbox, get all data
+				</td>
+			</tr>
+		</table>
+
+		<div align="center" class="btnBox">
+			<a id="btnInit" href="#" class='{ "color": "gray", "size": "large" }'>Initialize grid</a>
+			<a id="btnAdd" href="#" class='{ "color": "skyblue", "size": "large", "disable": true }'>add</a>
+			<a id="btnBind" href="#" class='{ "color": "skyblue", "size": "large", "disable": true }'>bind</a>
+			<a id="btnRevert" href="#" class='{ "color": "skyblue", "size": "large", "disable": true }'>revert</a>
+			<a id="btnRemove" href="#" class='{ "color": "skyblue", "size": "large", "disable": true }'>remove</a>
+			<a id="btnVal" href="#" class='{ "color": "skyblue", "size": "large", "disable": true }'>val</a>
+			<a id="btnData" href="#" class='{ "color": "skyblue", "size": "large", "disable": true }'>data</a>
+			<a id="btnValidate" href="#" class='{ "color": "skyblue", "size": "large", "disable": true }'>validate</a>
 		</div>
+
+		<p>Result : </p>
 		<table id="grid" class="grid__">
 			<thead>
 				<tr>
-					<th width="40">index</th>
-					<th width="50">picture</th>
-					<th width="110">name</th>
-					<th width="130">email</th>
-					<th width="50">gender</th>
-					<th width="60">eyeColor</th>
-					<th width="40">age</th>
+					<th width="100" rowspan="2">picture</th>
+					<th width="100">eyeColor</th>
+					<th width="200">name</th>
 					<th width="*">company</th>
-					<th width="60">isActive</th>
-				</tr>
-			</thead>
-			<tbody class='{ "rowHandler" : "N(\"div#grid\").instance(\"service\").rowHandler" }'>
-				<tr>
-					<td id="index" align="center"></td>
-					<td align="center"><img id="picture" height="16" /></td>
-					<td id="name"></td>
-					<td><input id="email" type="text" class='{ "validate" : [["required"], ["email"]] }' /></td>
-					<td id="gender" align="center"></td>
-					<td><input id="eyeColor" type="text" /></td>
-					<td><input id="age" type="text" class='{ "validate" : [["required"], ["integer"]] }' /></td>
-					<td><input id="company" type="text" /></td>
-					<td align="center"><input id="isActive" type="checkbox" /></td>
-				</tr>
-			</tbody>
-		</table>
-
-		<br />
-
-		<div id="secondBtnBox" class="btnBox">
-			<a id="btnInitGrid2" href="#" class='{ "color": "skyblue", "size": "small" }'>init grid2</a>
-			<a id="btnBindData2" href="#" class='{ "color": "skyblue", "size": "small", "disable": true }'>bind data</a>
-		</div>
-		<table id="grid2" class="grid__">
-			<thead>
-				<tr>
-					<th width="70" rowspan="2">picture</th>
-					<th width="70">index</th>
-					<th width="120">name</th>
-					<th width="*">email</th>
-					<th width="60">gender</th>
+					<th width="100">gender</th>
 				</tr>
 				<tr>
-					<th>eyeColor</th>
+					<th>index</th>
 					<th>age</th>
-					<th>company</th>
+					<th>email</th>
 					<th>isActive</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
-					<td align="center" rowspan="2"><img id="picture" height="32" /></td>
-					<td id="index" align="center"></td>
+					<td align="center" rowspan="2"><img id="picture" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D" height="32" /></td>
+					<td><input id="eyeColor" type="text" /></td>
 					<td id="name"></td>
-					<td><input id="email" type="text" class='{ "validate" : [["required"], ["email"]] }' /></td>
+					<td><input id="company" type="text" /></td>
 					<td id="gender" align="center"></td>
 				</tr>
 				<tr>
-					<td><input id="eyeColor" type="text" /></td>
+					<td id="index" align="center"></td>
 					<td><input id="age" type="text" class='{ "validate" : [["required"], ["integer"]] }' /></td>
-					<td><input id="company" type="text" /></td>
+					<td><input id="email" type="text" class='{ "validate" : [["required"], ["email"]] }' /></td>
 					<td align="center"><input id="isActive" type="checkbox" /></td>
 				</tr>
 			</tbody>
@@ -116,9 +139,8 @@
 
 <script type="text/javascript">
 
-N("div#grid").service({
+N("div#gridEx").sc({
 	grid : undefined,
-	grid2 : undefined,
 	gridData : undefined,
     init : function(view, request) {
     	// put source code
@@ -147,51 +169,41 @@ N("div#grid").service({
     setEvents : function() {
     	var this_ = this;
 
-    	N("a#btnInitGrid").click(function(e) {
+    	N("a#btnInit").click(function(e) {
             e.preventDefault();
-            if(this_.grid === undefined) {
-            	this_.grid = N([]).grid({
-            		context :"table#grid",
-            		data : this_.gridData,
-            		height : 300,
-            		resizable : true,
-            		vResizable : true,
-            		sortable : true
-            	});
+           	this_.grid = N([]).grid({
+           		context :"table#grid",
+           		data : this_.gridData,
+           		height : 400,
+           		resizable : true,
+           		vResizable : true,
+           		sortable : true,
+           		rowHandler : function(i, tbody, vals) {
+           	    	if(i%2 === 1){
+           	    		tbody.find("td#index").css("cursor", "pointer").click(function() {
+           	    			tbody.alert({
+           	    				title : "홀수 인덱스",
+           	    				msg : '<textarea class="data" style="width:300px;height:150px;margin:0;">' + N.json.format(JSON.stringify(vals)) + '</textarea>'
+           	    			}).show();
+           	    		});
+           	    	} else {
+           	    		tbody.find("td#index").css("cursor", "pointer").click(function() {
+           	    			tbody.alert({
+           	    				title : "짝수 인덱스",
+           	    				msg : '<textarea class="data" style="width:300px;height:150px;margin:0;">' + N.json.format(JSON.stringify(vals)) + '</textarea>'
+           	    			}).show();
+           	    		});
+           	    	}
+           	    }
+           	});
 
-                N("div#firstBtnBox").find("a").instance("button", function(u) {
-                	if(this.context().is("a#btnInitGrid")) {
-	    				this.disable();
-	    			} else {
-	                 	this.enable();
-	    			}
-                });
-            }
-        });
-
-    	N("a#btnBindData").click(function(e) {
-            e.preventDefault();
-            this_.grid.bind();
-        });
-
-    	N("a#btnGetData").click(function(e) {
-            e.preventDefault();
-           	N(window).alert(JSON.stringify(this_.grid.data()[0])).show();
-        });
-
-    	N("a#btnRevert").click(function(e) {
-            e.preventDefault();
-       		this_.grid.revert();
-        });
-
-    	N("a#btnGetVal").click(function(e) {
-            e.preventDefault();
-            this_.grid.context().parent().alert(this_.grid.val(1, "name")).show();
-        });
-
-    	N("a#btnChangeVal").click(function(e) {
-            e.preventDefault();
-       		this_.grid.val(1, "name", "빨간짜장면");
+            N("div.btnBox").find("a").instance("button", function(u) {
+            	if(this.context().is("a#btnInit")) {
+	 				this.disable();
+	 			} else {
+	              	this.enable();
+	 			}
+            });
         });
 
     	N("a#btnAdd").click(function(e) {
@@ -199,59 +211,35 @@ N("div#grid").service({
         	this_.grid.add();
         });
 
-    	N("a#btnDelete").click(function(e) {
+    	N("a#btnBind").click(function(e) {
+            e.preventDefault();
+            this_.grid.bind();
+        });
+
+    	N("a#btnRevert").click(function(e) {
+            e.preventDefault();
+       		this_.grid.revert();
+        });
+
+    	N("a#btnRemove").click(function(e) {
             e.preventDefault();
         	this_.grid.remove(3);
+        });
+
+    	N("a#btnVal").click(function(e) {
+            e.preventDefault();
+            this_.grid.context().parent().alert(this_.grid.val(1, "name")).show();
+        });
+
+    	N("a#btnData").click(function(e) {
+            e.preventDefault();
+           	N(window).alert(JSON.stringify(this_.grid.data()[0])).show();
         });
 
     	N("a#btnValidate").click(function(e) {
             e.preventDefault();
             this_.grid.context().parent().alert(String(this_.grid.validate()));
         });
-
-    	N("a#btnInitGrid2").click(function(e) {
-            e.preventDefault();
-            if(this_.grid2 === undefined) {
-            	this_.grid2 = N([]).grid({
-            		context :"table#grid2",
-            		data : this_.gridData,
-            		height : 300,
-            		resizable : true,
-            		vResizable : true,
-            		sortable : true
-            	});
-
-				N("div#secondBtnBox").find("a").instance("button", function(u) {
-					if(this.context().is("a#btnInitGrid2")) {
-	    				this.disable();
-	    			} else {
-	                 	this.enable();
-	    			}
-				});
-            }
-        });
-
-    	N("a#btnBindData2").click(function(e) {
-            e.preventDefault();
-       		this_.grid2.bind();
-        });
-    },
-    rowHandler : function(i, tbody, vals) {
-    	if(i%2 === 1){
-    		tbody.find("td#index").css("cursor", "pointer").click(function() {
-    			tbody.alert({
-    				title : "홀수 인덱스",
-    				msg : '<textarea class="data" style="width:300px;height:150px;margin:0;">' + N.json.format(JSON.stringify(vals)) + '</textarea>'
-    			}).show();
-    		});
-    	} else {
-    		tbody.find("td#index").css("cursor", "pointer").click(function() {
-    			tbody.alert({
-    				title : "짝수 인덱스",
-    				msg : '<textarea class="data" style="width:300px;height:150px;margin:0;">' + N.json.format(JSON.stringify(vals)) + '</textarea>'
-    			}).show();
-    		});
-    	}
     }
 });
 

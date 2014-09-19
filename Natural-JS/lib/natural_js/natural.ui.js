@@ -1,5 +1,5 @@
 (function(window, $) {
-	var version = "0.7.0.0";
+	var version = "0.7.5.0";
 
 	// NTR local variables
 	$.fn.extend(NTR, {
@@ -794,9 +794,9 @@
 			try {
 				var viewContext = arguments.callee.caller.arguments.callee.caller.arguments[0];
 				if(viewContext.instance !== undefined) {
-					this.opener = viewContext.instance("service");
+					this.opener = viewContext.instance("sc");
 				} else {
-					this.opener = $(viewContext.target).closest(".view_context__").instance("service");
+					this.opener = $(viewContext.target).closest(".view_context__").instance("sc");
 				}
 			} catch(e) {
 				if(this.options.url !== null) {
@@ -905,23 +905,23 @@
 					this_.alert.options.msgContext.addClass("popup_overlay__");
 					this_.alert.options.msgContents.addClass("popup__");
 
-					var serviceController = opts.context.instance("service");
+					var sc = opts.context.instance("sc");
 
 					// set popup instance to popup's service controller
-					if(serviceController !== undefined) {
+					if(sc !== undefined) {
 						// set Controller.request
-						serviceController.request = this.request;
+						sc.request = this.request;
 
 						// set caller attribute in Service Conteroller in tab content that is Popup instance
-						serviceController.caller = this_;
+						sc.caller = this_;
 
 						// set opener to popup's service controller
 						if(this_.opener !== undefined) {
-							serviceController["opener"] = this_.opener;
+							sc["opener"] = this_.opener;
 						}
 
-						if(serviceController.init !== undefined) {
-							serviceController.init(serviceController.view, this.request);
+						if(sc.init !== undefined) {
+							sc.init(sc.view, this.request);
 						}
 					}
 
@@ -944,8 +944,8 @@
 					if(onOpenData !== undefined) {
 						opts.onOpenData = onOpenData;
 					}
-					if(opts.context.instance("service")[opts.onOpen] !== undefined) {
-						opts.context.instance("service")[opts.onOpen](opts.onOpenData);
+					if(opts.context.instance("sc")[opts.onOpen] !== undefined) {
+						opts.context.instance("sc")[opts.onOpen](opts.onOpenData);
 					} else {
 						N.warn("[N.popup.popOpen]onOpen callback function \"" + opts.onOpen + "\" is undefined in popup content's Service Controller");
 					}
@@ -1068,10 +1068,10 @@
 					// run "onOpen"(class option) event
 					// onOpen 이벤트는 탭의 class option에 url 이 지정되어있고 탭이 활성화 됐을때만 발생함.
 					if(thisClassOpts.onOpen !== undefined && thisEle.data("loaded")) {
-						var serviceController = content.find(">").instance("service");
-						if(serviceController[thisClassOpts.onOpen] !== undefined) {
+						var sc = content.find(">").instance("sc");
+						if(sc[thisClassOpts.onOpen] !== undefined) {
 							//thisClassOpts.onOpen
-							serviceController[thisClassOpts.onOpen]();
+							sc[thisClassOpts.onOpen]();
 						} else {
 							N.warn("[N.tab.wrapEle]onOpen callback function \"" + thisClassOpts.onOpen + "\" is undefined in tab content's Service Controller");
 						}
@@ -1098,18 +1098,18 @@
 					var innerContent = opts.contents.eq(targetIdx).html(page).find(">");
 					var activeTabEle = opts.links.eq(targetIdx);
 
-					var serviceController = innerContent.instance("service");
+					var sc = innerContent.instance("sc");
 
 					// set Controller.request
-					serviceController.request = this.request;
+					sc.request = this.request;
 
 					// set caller attribute in Service Conteroller in tab content that is Tab instance
-					serviceController.caller = this_;
+					sc.caller = this_;
 
 					// set tab instance to tab contents service controller
-					if(serviceController !== undefined) {
-						if(serviceController.init !== undefined) {
-							serviceController.init(serviceController.view, this.request);
+					if(sc !== undefined) {
+						if(sc.init !== undefined) {
+							sc.init(sc.view, this.request);
 						}
 					}
 
@@ -1117,9 +1117,9 @@
 					if(activeTabEle.hasClass("tab_active__")) {
 						var classOpts = opts.classOpts[targetIdx];
 						if(classOpts.onOpen !== undefined) {
-							if(serviceController[classOpts.onOpen] !== undefined) {
+							if(sc[classOpts.onOpen] !== undefined) {
 								//TODO onOpenData 는 어떻게 할지 더 고민 해 보기.
-								serviceController[classOpts.onOpen]();
+								sc[classOpts.onOpen]();
 							} else {
 								N.warn("[N.tab.loadContent]\"" + classOpts.onOpen + "\" onOpen callback function is undefined in tab content's Service Controller");
 							}
@@ -1650,18 +1650,13 @@
 				row : -1,
 				context : null,
 				html : false,
-				addTop : false,
 				validate : true,
-				fRules : null,
-				vRules : null,
-				createRowDelay : 0,
+				addTop : false,
+				createRowDelay : 1,
 				heigth : 0,
 				scrollPaging : {
 					idx : 0,
 					size : 100
-				},
-				serverPaging : {
-					// TODO
 				},
 				resizable : false,
 				vResizable : false,
@@ -1669,7 +1664,11 @@
 				select : false,
 				multiselect : false,
 				hover : false,
-				onSelect : null
+				onSelect : null,
+				onBind : null,
+				rowHandler : null,
+				fRules : null,
+				vRules : null,
 			};
 
 			try {
@@ -1765,6 +1764,9 @@
 			},
 			bind : function(data) {
 				var opts = this.options;
+				// remove all sort status
+				this.thead.find("span.sortable__").remove();
+
 				//empty removedData;
 				opts.removedData = [];
 				//for internal call bind method by scrollPaging
@@ -1796,14 +1798,15 @@
 					}
 					var classOpts;
 					var this_ = this;
+					var delay = opts.createRowDelay;
+					var lastIdx;
 					var render = function() {
 						// clone tbody for create new line
 						tbodyTempClone = this_.tbodyTemp.clone(true, true).hide();
 						opts.context.append(tbodyTempClone);
 
-						classOpts = N.element.toOpts(tbodyTempClone);
-						if(classOpts !== undefined && classOpts.rowHandler !== undefined) {
-							(new Function("return " + classOpts.rowHandler))()(i, tbodyTempClone, opts.data[i]);
+						if(opts.rowHandler !== null) {
+							opts.rowHandler.call(this_, i, tbodyTempClone, opts.data[i]);
 						}
 
 						// for row data bind, use N.form
@@ -1812,10 +1815,22 @@
 							extObj : this_,
 							extRow : i
 						}).bind();
-						tbodyTempClone.show(opts.createRowDelay, function() {
+
+						tbodyTempClone.show(delay, function() {
 							i++;
-							if(i < opts.scrollPaging.idx + limit) {
+							lastIdx = opts.scrollPaging.idx + limit - 1;
+							if(i === lastIdx) {
+								delay = 0;
+							} else {
+								delay = opts.createRowDelay;
+							}
+							if(i <= lastIdx) {
 								render();
+								if(i === lastIdx) {
+									if(opts.onBind !== null) {
+										opts.onBind.call(this, opts.context);
+									}
+								}
 							}
 						});
 					};
@@ -1936,11 +1951,6 @@
 					"margin" : "0"
 				});
 
-				var width = opts.context.attr("width");
-		        if (N.string.trimToNull(width) === null || width.indexOf("100%") < 0) {
-		        	opts.context.css("width", "100%");
-		        }
-
 		        var sampleCell = opts.context.find("tbody td:eq(0)");
 		        var borderLeft = sampleCell.css("border-left-width") + " " + sampleCell.css("border-left-style") + " " + sampleCell.css("border-left-color");
 		        var borderBottom = sampleCell.css("border-bottom-width") + " " + sampleCell.css("border-bottom-style") + " " + sampleCell.css("border-bottom-color");
@@ -1948,7 +1958,7 @@
 		        // Root grid container
 		        var gridWrap = opts.context.wrap('<div class="grid_wrap__"/>').parent();
 		        gridWrap.css({
-		        	"border-left" : borderLeft,
+		        	"border-left" : borderLeft
 		        });
 
 		        //Create grid header
@@ -1982,6 +1992,11 @@
 		        	"margin-left" : "-1px",
 		        	"border-bottom" : borderBottom,
 		        });
+		        // for IE
+		        if(N.browser.is("ie")) {
+		        	tbodyWrap.css("overflow-x", "hidden");
+		        }
+
 
 		        //Scroll paging
 		        var this_ = this;
@@ -2109,12 +2124,11 @@
 		            	startOffsetX = e.pageX;
 		            	currResizeBarEle = $(e.target);
 		            	currCellEle = currResizeBarEle.parent("th");
-
-		            	// cell 안의 text 와 float 속성이 먹은 resizeBar 가 줄넘김 되어 cell 의 높이가 변하는것 방지
-		            	theadCells.find("span.resize_bar__").css("float", "none");
+		            	currNextCellEle = currResizeBarEle.parent("th").next();
 
 		            	if(opts.height > 0) {
 		            		targetCellEle = opts.context.find("thead th:eq(" + theadCells.index(currCellEle) + ")");
+		            		targetNextCellEle = opts.context.find("thead th:eq(" + (theadCells.index(currCellEle) + 1) + ")");
 		            		currCellEleTable = currCellEle.parents("table.grid__");
 		            		targetCellEleWrap = targetCellEle.parents("div.tbody_wrap__");
 		            	}
@@ -2123,6 +2137,7 @@
 		            	currCellEle.data("sortLock", true);
 
 		            	defWidth = currCellEle.innerWidth();
+		            	nextDefWidth = targetNextCellEle.innerWidth();
 
 		            	initHeight = currCellEle.innerHeight() + 1;
 
@@ -2131,30 +2146,44 @@
 		                });
 		        		pressed = true;
 
+		        		var moveedPx;
+		        		var correction = scrollbarWidth + 1;
+		        		if(N.browser.is("ie")) {
+		        			correction = scrollbarWidth + 3;
+	        			} else if(N.browser.is("safari")) {
+		        			correction = scrollbarWidth;
+	        			}
 		        		$(window.document).bind("mousemove.grid.resize", function(e) {
 			        		if(pressed) {
-			        			currWidth = defWidth + (e.pageX - startOffsetX);
+			        			moveedPx = e.pageX - startOffsetX;
+			        			currWidth = defWidth + moveedPx;
+			        			nextCurrWidth = nextDefWidth - moveedPx - correction;
 			        			if(currWidth > 0) {
-			        				currCellEle.css("width", currWidth + "px");
-			        				if(targetCellEle !== undefined) {
-			        					targetCellEle.css("width", currWidth + "px");
-			        					targetCellEleWrap.width(currCellEleTable.width() + scrollbarWidth);
-			        				}
+					        		if(currCellEle.innerHeight() + 1 === initHeight) {
+					        			currCellEle.css("width", currWidth + "px");
+				        				currNextCellEle.css("width", nextCurrWidth + "px");
+				        				if(targetCellEle !== undefined) {
+				        					targetCellEle.css("width", currWidth + "px");
+				        					targetNextCellEle.css("width", nextCurrWidth + "px");
+				        					targetCellEleWrap.width(currCellEleTable.width() + scrollbarWidth);
+				        				}
+					        		} else {
+					        			// for keeping table layout
+					        			currCellEle.css("width", "");
+				        				currNextCellEle.css("width", "");
+				        				if(targetCellEle !== undefined) {
+				        					targetCellEle.css("width", "");
+				        					targetNextCellEle.css("width", "");
+				        					targetCellEleWrap.width(currCellEleTable.width() + scrollbarWidth);
+				        				}
+				        				pressed = false;
+					        		}
 			        			}
 			        		}
 				        });
 
 			        	$(window.document).bind("mouseup.grid.resize", function(e) {
 			        		$(document).unbind("dragstart.grid.resize, selectstart.grid.resize, mousemove.grid.resize, mouseup.grid.resize");
-			        		theadCells.find("span.resize_bar__").css("float", "right");
-
-			        		// for keeping table layout
-			        		if(currCellEle.innerHeight() + 1 > initHeight) {
-			        			currCellEle.css("width", "");
-			        			targetCellEle.css("width", "");
-			        			targetCellEleWrap.width(currCellEleTable.width() + scrollbarWidth);
-			        		}
-
 			        		pressed = false;
 			        	});
 		        	});
@@ -2179,13 +2208,12 @@
     	        			if (currEle.find("span.sortable__").hasClass("asc__")) {
     	        				isAsc = true;
     	        			}
-    	        			thead.find("span.sortable__").remove();
     	                    if (isAsc) {
-    	                    	currEle.append('<span class="sortable__ desc__">' + opts.sortableItem.asc + '</span>')
     	                    	this_.bind(N(opts.data).datasort($(this).data("id"), true));
+    	                    	currEle.append('<span class="sortable__ desc__">' + opts.sortableItem.asc + '</span>')
     	                    } else {
-    	                    	currEle.append('<span class="sortable__ asc__">' + opts.sortableItem.desc + '</span>')
     	                    	this_.bind(N(opts.data).datasort($(this).data("id")));
+    	                    	currEle.append('<span class="sortable__ asc__">' + opts.sortableItem.desc + '</span>')
     	                    }
     	        		}
     	        	}

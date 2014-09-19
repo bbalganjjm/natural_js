@@ -2,8 +2,12 @@
 	<div class="intro">
 		<h1><b>Form</b> : Form(N.form)은  </h1>
 		<h2>[Initialize tab] 버튼을 누르면 지정한 선택입력요소가 Select 컴포넌트화 됩니다.</h2>
-		<h2>[bind] 버튼을 누르면 DATA 영역에 있는 JSON 데이터를 지정한 요소에 바인드 합니다.</h2>
-		<h2>//TODO 보완</h2>
+		<h2>[add] 버튼을 누르면 새로운 폼요소 안에 있는 입력요소를 기반으로 새로운 data 를 생성하고 생성된 data 를 바인드 합니다.</h2>
+		<h2>[bind] 버튼을 누르면 DATA 영역에 있는 JSON 데이터를 지정한 요소에 폼을 바인드 합니다.</h2>
+		<h2>[revert] 버튼을 누르면 처음 데이터 바인드 한 상태로 돌려 줍니다.</h2>
+		<h2>[validate] 버튼을 누르면 폼요소 안에 입력된 값 전체에 대한 데이터 검증을 실행하고 성공하면 true 를 반환하고 실해하면 false 와 검증오류 메시지를 보여줍니다.</h2>
+		<h2>[val] 버튼을 누르면 입력된 key 컬럼에 지정한 값이 있다면 지정한 값을 적용하고 지정한 값이 없다면 선택된 key 컬럼의 값을 가져옵니다.</h2>
+		<h2>[data] 버튼을 누르면 Form에 바인드되어 있는 데이터를 가져옵니다. 인자로 true를 지정하면 현제 선택되어 있는 data만 가져옵니다.</h2>
 		<h2>Form은 한번만 초기화 할 수 있습니다. 옵션을 변경하려면 [Reload this page] 버튼을 누른 후 다시 설정 하기 바랍니다.</h2>
 	</div>
 	<div class="divBar">DATA</div>
@@ -285,7 +289,7 @@
 
 <script type="text/javascript">
 
-N("div#form").service({
+N("div#form").sc({
     init : function(view, request) {
     	// put source code
     	IndexServiceController.getSourceCode(request.get("url"), N("div.sourceBox"));

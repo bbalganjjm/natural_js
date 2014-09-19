@@ -1,5 +1,5 @@
 (function(window, $) {
-	var version = "0.7.0.0";
+	var version = "0.7.5.0";
 
 	// NTR local variables
 	$.fn.extend(NTR, {
@@ -97,7 +97,7 @@
 
 			this.viewContext = $(inst.options.context).closest(".view_context__");
 			if(this.viewContext.length === 0) {
-				this.viewContext = $(inst.options.context).closest("span.block_overlay_msg__").siblings(".view_context__");				
+				this.viewContext = $(inst.options.context).closest("span.block_overlay_msg__").siblings(".view_context__");
 			}
 			if(this.viewContext.length === 0) {
 				var pageContext = $(N.context.attr("architecture")["page"]["context"]);
@@ -107,7 +107,7 @@
 				}
 				this.viewContext = dataSyncTemp;
 			}
-			
+
 			var siglInst = this.viewContext.instance("ds");
 			if (siglInst !== undefined) {
 				siglInst.inst = inst;
@@ -213,7 +213,7 @@
 						tempValue = String(obj[k]);
 						$(opts.rules[k]).each(function() {
 							if (opts.isElement) {
-								ele = opts.targetEle.filter("#" + k);			
+								ele = opts.targetEle.filter("#" + k);
 								if(ele.length === 0) {
 									ele === undefined;
 								}
@@ -240,20 +240,20 @@
 										if(ele.length === 0) {
 											ele = opts.context.find("#" + $(this).attr("id"));
 										}
-										
+
 										// TODO 임시처리, 더 생각해보기
-										var fmdVals = this_.format(); 
+										var fmdVals = this_.format();
 										if(fmdVals.length === 1) {
 											row = 0;
 										}
-										
+
 										$(this).val(fmdVals[row][$(this).attr("id")]);
 									}).bind("unformat.formater", function() {
 										// TODO 임시처리, 더 생각해보기
 										if(opts.data.length === 1) {
 											row = 0;
 										}
-										
+
 										$(this).val(this_.unformat(row, $(this).attr("id")));
 									});
 								}
@@ -379,7 +379,7 @@
 					return str;
 				}
 				str = str.replace(/\s+|T|-|:|\./g, "");
-				
+
 				//use datepicker, monthpicker
 				if(N.datepicker !== undefined) {
 					if(args[1] !== undefined && (args[1] === "date" || args[1] === "month") && ele !== undefined && !ele.hasClass("datepicker__")) {
@@ -393,7 +393,7 @@
 								return false;
 							}
 						});
-					}					
+					}
 				} else {
 					N.warn("if use date & month options, load Natural-UI datepicker library");
 				}
