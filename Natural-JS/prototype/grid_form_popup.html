@@ -2,6 +2,7 @@
 	<div class="intro">
 		<h1>Grid 와 Form, Popup 이 결합된 형태의 예제 입니다.</h1>
 		<h2>그리드의 행을 클릭하면 클릭한 행의 데이터가 바인드된 폼이 팝업 으로 표시 됩니다.</h2>
+		<h2>폼과 그리드는 같은 데이터를 참고하고 있으므로 둘중 한쪽에서 데이터 변동이 있을 시 나머지 한쪽도 실시간으로 변경된 데이터가 동기화 됩니다.</h2>
 	</div>
 	<div class="divBar">DATA</div>
 	<div class="dataBox">
@@ -9,7 +10,7 @@
 	</div>
 	<div class="divBar">DEMO</div>
 	<div class="demoBox">
-		<div id="defBtnBox" class="btnBox" align="right">
+		<div id="defBtnBox" class="btnBox" align="center">
 			<a id="btnBind" href="#" class='{ "color": "skyblue", "size": "large" }'>bind</a>
 			<a id="btnModifiedData" href="#" class='{ "color": "skyblue", "size": "large" }'>get modified data</a>
 		</div>
@@ -42,7 +43,7 @@
 			</tbody>
 		</table>
 
-		<table id="form" class='form' title="입력 폼">
+		<table id="form" class='form' title="폼">
 			<tr>
 				<th width="85" align="right"><label for="picture">picture</label></th>
 				<td width="*"><img id="picture" /></td>
@@ -85,10 +86,14 @@
 				</td>
 			</tr>
 			<tr>
-				<th align="right"><label for="registered">registered</label></th>
+				<th align="right"><label for="company">company</label></th>
 				<td>
-					<input id="registered" type="text" class='{ "format": [["date", 8, "date"]], "validate" : [["required"]] }' />
+					<input id="company" type="text" class='{ "validate" : [["required"]] }' />
 				</td>
+			</tr>
+			<tr>
+				<th align="right"><label for="registered">registered</label></th>
+				<td id="registered" class='{ "format": [["date", 8]] }'></td>
 			</tr>
 			<tr>
 				<th align="right"><label for="about">about</label></th>
@@ -125,7 +130,9 @@ N("div#gridFormPopup").sc({
     	this.initButton();
     	//this.createSelect(data);
 
-    	var popup = N("table#form").popup();
+    	var popup = N("table#form").popup({
+    		modal: false
+    	});
 
     	var form = N([]).form("table#form").bind();
 
