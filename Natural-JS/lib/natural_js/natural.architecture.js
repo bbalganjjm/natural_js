@@ -11,8 +11,8 @@
 		communicator : function(opts) {
 			return NTR.communicator(opts);
 		},
-		cc : function(url) {
-			return new NTR.cc(this, url);
+		comm : function(url) {
+			return new NTR.comm(this, url);
 		},
 		request : function() {
 			return this.get(0).request;
@@ -29,15 +29,13 @@
 			//TODO
 		};
 
-		// Comunicator
-		var Comunicator = $.ajax;
-		N.communicator = Comunicator;
+		// Ajax
+		var Ajax = N.ajax = $.ajax;
 
-		// Common Controller
-		// TODO demo 페이지 만들어야 함. html 불러올경우 ServiceController 에 request 객체 넣어줌
-		var Controller = N.cc = function(obj, url) {
+		// Communicator
+		var Communicator = N.comm = function(obj, url) {
 			if (obj === undefined) {
-				N.error("[Controller]You must input arguments[0]");
+				N.error("[Communicator]You must input arguments[0]");
 			} else {
 				if ((N.isPlainObject(obj) || N.isString(obj)) && url == undefined) {
 					url = obj;
@@ -49,17 +47,17 @@
 				}
 			}
 
-			obj.request = new Controller.request(obj, N.isString(url) ? {
+			obj.request = new Communicator.request(obj, N.isString(url) ? {
 				"url" : url
 			} : url);
 
 			obj.submit = function(callback) {
-				return Controller.submit.call(obj, callback);
+				return Communicator.submit.call(obj, callback);
 			};
 			return obj;
 		};
 
-		$.extend(Controller, {
+		$.extend(Communicator, {
 			xhr : null,
 			submit : function(callback) {
 				var obj = this;
@@ -113,7 +111,7 @@
 
 						if (!N.isElement(obj)) {
 							if (callback === undefined) {
-								N.error("[Controller.submit]You must input callback function to arguments[0]");
+								N.error("[Communicator.submit]You must input callback function to arguments[0]");
 							}
 							if (obj.request.options.urlSync && obj.request.options.referrer.replace(/!/g, "") != window.location.href.replace(/!/g, "")) {
 								xhr.abort();
@@ -122,7 +120,7 @@
 							try {
 								callback.call(obj, data, obj.request);
 							} catch (e) {
-								N.error("[Controller.submit.success.callback]" + e, e);
+								N.error("[Communicator.submit.success.callback]" + e, e);
 							}
 						} else {
 							if (!obj.request.options.append) {
@@ -148,7 +146,7 @@
 							this(obj.request, xhr, textStatus, errorThrown);
 						});
 
-						N.error("[N.communicator." + textStatus + "]" + errorThrown, errorThrown);
+						N.error("[N.ajax." + textStatus + "]" + errorThrown, errorThrown);
 					},
 					complete : function(xhr, textStatus) {
 						// request filter
@@ -157,12 +155,12 @@
 						});
 					}
 				});
-				this.xhr = N.communicator(obj.request.options);
+				this.xhr = N.ajax(obj.request.options);
 				return obj;
 			}
 		});
 
-		Controller.request = function(obj, opts) {
+		Communicator.request = function(obj, opts) {
 			this.options = {
 				referrer : window.location.href,
 				contentType : "application/json; charset=utf-8",
@@ -195,9 +193,9 @@
 			}
 		};
 
-		Controller.request.fn = Controller.request.prototype;
-		// Controller.request local variable;
-		$.fn.extend(Controller.request.fn, {
+		Communicator.request.fn = Communicator.request.prototype;
+		// Communicator.request local variable;
+		$.fn.extend(Communicator.request.fn, {
 			/**
 			 * get request attribute
 			 */
@@ -212,7 +210,7 @@
 						this.attrObj = {};
 					}
 					this.attrObj[name] = obj_;
-					// this.obj : Defined from Controller.request constructor;
+					// this.obj : Defined from Communicator.request constructor;
 					return this.obj;
 				}
 			},
@@ -247,7 +245,7 @@
 			}
 		});
 
-		var ServiceController = N.sc = function(obj, callback) {
+		var ServiceCommunicator = N.sc = function(obj, callback) {
 			if(callback === undefined) {
 				return obj.data(obj.attr("id"));
 			}
@@ -265,7 +263,7 @@
 		// Context Object
 		N.context = {
 			attrObj : {},
-			attr : Controller.request.fn.attr
+			attr : Communicator.request.fn.attr
 		};
 
 	})(NTR);

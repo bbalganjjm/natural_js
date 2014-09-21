@@ -248,7 +248,7 @@ N("div#select").sc({
 
         N("a#btnReload", view).click(function(e) {
         	e.preventDefault();
-        	N(view.parent()).cc(this_.request.get("url")).submit();
+        	N(view.parent()).comm(this_.request.get("url")).submit();
         });
     },
     /**

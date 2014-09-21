@@ -885,7 +885,7 @@
 				var this_ = this;
 
 				// TODO show loading bar
-				N.cc({
+				N.comm({
 					url : opts.url,
 					contentType : "application/x-www-form-urlencoded",
 					dataType : "html"
@@ -909,7 +909,7 @@
 
 					// set popup instance to popup's service controller
 					if(sc !== undefined) {
-						// set Controller.request
+						// set Communicator.request
 						sc.request = this.request;
 
 						// set caller attribute in Service Conteroller in tab content that is Popup instance
@@ -1090,7 +1090,7 @@
 				var this_ = this;
 
 				// TODO show loading bar
-				N.cc({
+				N.comm({
 					url : url,
 					contentType : "application/x-www-form-urlencoded",
 					dataType : "html"
@@ -1100,7 +1100,7 @@
 
 					var sc = innerContent.instance("sc");
 
-					// set Controller.request
+					// set Communicator.request
 					sc.request = this.request;
 
 					// set caller attribute in Service Conteroller in tab content that is Tab instance
