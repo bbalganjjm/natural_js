@@ -47,6 +47,11 @@ N("div#datepickerSample").cont({
 
      	// event bind
     	this.setEvent(view, this);
+     	
+     	//for communicator example
+     	if(request.attr("hello")) {
+     		view.alert('request.attr("hello") : <br/>' + request.attr("hello")).show();
+     	}
     },
     initButton : function(view) {
     	N("div.btnBox", view).button();

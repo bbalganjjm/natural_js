@@ -63,11 +63,16 @@ function() {
 			<tr>
 				<th align="right" width="10%">submit</th>
 				<th align="right" width="10%">arguments[0]</th>
-				<td width="80%" colspan="3"><textarea id="jsonCallback" rows="5" cols="60">
+				<td width="80%" colspan="3"><textarea id="jsonCallback" rows="3" cols="60">
 function(data) {
 	N("div.result:eq(0)", view).text(JSON.stringify(data));
 }
 				</textarea><br /> Success callback function</td>
+			</tr>
+			<tr>
+				<th align="right" width="10%">request</th>
+				<th align="right" width="10%">arguments[0]</th>
+				<td width="80%" colspan="3"><textarea id="request" rows="2" cols="60">Hello datepicker~!</textarea><br /> Request attribute</td>
 			</tr>
 		</table>
 		
@@ -76,7 +81,7 @@ function(data) {
 		</div>
 		
 		<p>Result : </p>
-		<div class="result" style="height: 600px;"></div>
+		<div class="result" style="height: 552px;"></div>
 	</div>
 
 	<div class="divBar">SOURCE CODE</div>
@@ -120,7 +125,7 @@ N("div#comm").cont({
       		        N.string.trimToNull(N("textarea#callback", view).val()) !== null ?
 						eval("(" + N("textarea#callback", view).val() + ")") : undefined ]
             }
-            N(N("input#context", view).val(), view).comm(opts).submit();
+            N(N("input#context", view).val(), view).comm(opts).request.attr("hello", N("textarea#request", view).val()).submit();
         });
     }
 });
