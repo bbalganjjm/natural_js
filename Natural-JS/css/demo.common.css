@@ -81,7 +81,7 @@ div#header {
 	padding-bottom: 5px;
 }
 
-div#header span#logo {
+div#header a#logo {
 	font-size: 32px;
 	color: #008000;
 	font-weight: bold;

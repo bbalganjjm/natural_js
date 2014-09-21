@@ -385,6 +385,7 @@
 			},
 			disable : function() {
 				var context = this.options.context;
+				// fade effect
 				if(this.options.effect) {
 					context.fadeTo(150, "0.6");
 				} else {
@@ -401,6 +402,7 @@
 			},
 			enable : function() {
 				var context = this.options.context;
+				// fade effect
 				if(this.options.effect) {
 					context.fadeTo(150, "1");
 				} else {
@@ -454,6 +456,7 @@
 	                    	if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {
 	                    		$(this).css("box-shadow", "rgba(0, 0, 0, 0.2) 1px 1px 1px inset");
 	                    	} else {
+	                    		// fade effect
 	                    		if(opts.effect) {
 	                    			$(this).fadeTo(100, "0.9");
 	            				} else {
@@ -467,6 +470,7 @@
 	                    	if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {
 	                    		$(this).css("box-shadow", "rgba(0, 0, 0, 0.2) 3px 3px 3px inset");
 	                    	} else {
+	                    		// fade effect
 	                    		if(opts.effect) {
 	                    			$(this).fadeTo(100, "0.7");
 	            				} else {
@@ -480,6 +484,7 @@
 	                    	if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {
 	                    		$(this).css("box-shadow", "none");
 	                    	} else {
+	                    		// fade effect
 	                    		if(opts.effect) {
 	                    			$(this).fadeTo(100, "1");
 	            				} else {
@@ -493,6 +498,7 @@
 	                    	if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {
 	                    		$(this).css("box-shadow", "none");
 	                    	} else {
+	                    		// fade effect
 	                    		if(opts.effect) {
 	                    			$(this).fadeTo(100, "1");
 	            				} else {
@@ -1673,7 +1679,7 @@
 			try {
 				this.options = $.extend({}, this.options, N.context.attr("ui")["grid"]);
 
-				//because $.extend method is don't extend object type
+				//$.extend method is don't extend object type
 				this.options.scrollPaging = $.extend({}, this.options.scrollPaging, N.context.attr("ui")["grid"]["scrollPaging"]);
 			} catch (e) {
 				N.error("[N.grid]" + e, e);
@@ -1681,6 +1687,7 @@
 
 			if (N.isPlainObject(opts)) {
 				$.extend(this.options, opts);
+				//$.extend method is don't extend object type
 				if(opts.scrollPaging !== undefined) {
 					$.extend(this.options.scrollPaging, opts.scrollPaging);
 				}
@@ -2006,7 +2013,7 @@
 
 		        //Scroll paging
 		        var this_ = this;
-		        var defSPSize = N.context.attr("ui")["grid"]["scrollPaging"]["size"];
+		        var defSPSize = opts.scrollPaging.size;
 		        var tbodyLength;
 		        tbodyWrap.scroll(function() {
 		        	var thisWrap = $(this);

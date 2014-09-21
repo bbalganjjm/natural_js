@@ -298,7 +298,7 @@ table.grid__ tbody td input[type='text'], table.grid__ tbody td input[type='pass
 }
 
 table.grid__ tbody td input[type='text'], table.grid__ tbody td input[type='password'], table.grid__ tbody td textarea {
-	width: 100%;
+	width: 98%;
 }
 
 table.grid__ tbody td input[type='text']:hover, table.grid__ tbody td input[type='password']:hover, table.grid__ tbody td select:hover, table.grid__ tbody td textarea:hover,
@@ -307,7 +307,7 @@ table.grid__ tbody td input[type='text']:focus, table.grid__ tbody td input[type
 	background-color: #ffe5e5;
 	transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 	box-shadow: inset 1px 1px 1px rgba(0,0,0,0.075);
-	width: 100%;
+	width: 98%;
 	color: #002200;
 }
 

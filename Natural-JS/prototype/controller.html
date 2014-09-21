@@ -2,14 +2,14 @@
 	<div class="intro">
 		<h1><b>Controller</b> : Controller(N.cont)는 View 와 Communicator를 연결해주고 View 영역의 요소들을 제어(Control) 합니다.</h1>
 		<h2>Controller 는 N("view").cont() 로 실행하며 cont 의 인자로 각 페이지별 Controller를 구현하면 됩니다.</h2>
-		<h2>모든 컨트롤러의 시작점은 cont메서드의 인자로 들어가는 Controller 클래스의 init 메서드 이고 init 메서드의 인자로는 다음과 같은 값이 전달 됩니다.</h2>
-		<h2> * view : Controller 에서 컨트롤한 View 영역안의 HTML Elements</h2>
-		<h2> * request : 현재 페이지를 호출한 페이지의 요청 정보 및 이전 페이지로부터 전달된 데이터</h2>
-		<h2>Controller 에는 기본적으로 다음과 같은 멤버변수가 자동으로 세팅 됩니다.</h2>
-		<h2> * view : Controller 에서 컨트롤한 View 영역안의 HTML Elements</h2>
-		<h2> * request : 현재 페이지를 호출한 페이지의 요청 정보 및 이전 페이지로부터 전달된 데이터</h2>
-		<h2> * opener : Popup 에서 팝업을 호출한 페이지(부모페이지)의 Controller, Popup 페이지에서만 생성됨</h2>
-		<h2> * caller : Popup 에서 팝업을 호출한 Popup instance(부모페이지의 팝업객체), Popup 페이지에서만 생성됨</h2>
+		<h2>모든 컨트롤러의 시작점은 cont메서드의 인자로 들어가는 Controller 클래스의 init 메서드 이고 init 메서드의 인자로는 다음과 같은 값이 전달 됩니다.<br />
+		* view : Controller 에서 컨트롤한 View 영역안의 HTML Elements<br />
+		* request : 현재 페이지를 호출한 페이지의 요청 정보 및 이전 페이지로부터 전달된 데이터</h2>
+		<h2>Controller 에는 기본적으로 다음과 같은 멤버변수가 자동으로 세팅 됩니다.<br />
+		* view : Controller 에서 컨트롤한 View 영역안의 HTML Elements<br />
+		* request : 현재 페이지를 호출한 페이지의 요청 정보 및 이전 페이지로부터 전달된 데이터<br />
+		* opener : Popup 에서 팝업을 호출한 페이지(부모페이지)의 Controller, Popup 페이지에서만 생성됨<br />
+		* caller : Popup 에서 팝업을 호출한 Popup instance(부모페이지의 팝업객체), Popup 페이지에서만 생성됨</h2>
 	</div>
 	<div class="divBar">DEMO</div>
 	<div class="demoBox">
