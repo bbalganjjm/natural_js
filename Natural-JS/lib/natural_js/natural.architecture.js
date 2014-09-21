@@ -8,8 +8,8 @@
 
 	$.extend(N.fn, {
 		constructor : N,
-		communicator : function(opts) {
-			return N.communicator(opts);
+		ajax : function(opts) {
+			return N.ajax(opts);
 		},
 		comm : function(url) {
 			return new N.comm(this, url);
@@ -73,7 +73,7 @@
 				var successFilters = new Array();
 				var errorFilters = new Array();
 				var completeFilters = new Array();
-				var filters = N.context.attr("architecture")["c"]["filters"];
+				var filters = N.context.attr("architecture")["comm"]["filters"];
 				for ( var key in filters) {
 					for ( var filterKey in filters[key]) {
 						if (filterKey === "afterInit") {
@@ -132,7 +132,7 @@
 								obj.hide()[obj.request.options.effect[0]](obj.request.options.effect[1], obj.request.options.effect[2]);
 							}
 							if(obj.children(":first").length > 0) {
-								var sc = obj.children(":first").instance("sc");
+								var sc = obj.children(":first").instance("cont");
 								sc.request = obj.request;
 								if(sc !== undefined && sc.init !== undefined) {
 									sc.init(sc.view, obj.request);
@@ -178,7 +178,7 @@
 
 			// global config
 			try {
-				$.extend(this.options, N.context.attr("architecture")["c"]["request"]["options"]);
+				$.extend(this.options, N.context.attr("architecture")["comm"]["request"]["options"]);
 			} catch (e) {
 			}
 			$.extend(this.options, opts);
@@ -254,7 +254,7 @@
 			}
 			obj.addClass(obj.attr("id") + "__ view_context__");
 
-			obj.instance("sc", callback);
+			obj.instance("cont", callback);
 
 			callback.view = obj;
 			return callback;

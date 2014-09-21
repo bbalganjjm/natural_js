@@ -1,4 +1,4 @@
-<div id="c">
+<div id="comm">
 	<div class="intro">
 		<h1><b>Communicator</b> : Communicator(N.comm)는 Communicator 를 이용하여 서버로 부터 JSON 데이터를 가져오고 컴포넌트의 데이터나 파라미터를 서버로 다시 보내는 등의 역할을 수행 합니다.</h1>
 		<h2>[Get json data from server or file] 버튼을 클릭하면 서버로 부터 JSON 데이터(/Natural-JS/prototype/data/grid.json)를 가져옵니다</h2>
@@ -19,12 +19,16 @@
 	</div>
 	<div class="divBar">DEMO</div>
 	<div class="demoBox">
+		<p class="section">1. Get json data from server or file</p>
+		
 		<div class="btnBox" align="center">
-			<a id="btnGetJson" href="#" class='{ "color": "skyblue", "size": "large" }'>Get json data from server or file</a>
+			<a id="btnGetJson" href="#" class='{ "color": "skyblue", "size": "large" }'>Submit</a>
 		</div>
 		
 		<p>Result : </p>
 		<div class="result" style="height: 100px;"></div>
+		
+		<p class="section">2. Get html page(view & controller) from server or file</p>
 		
 		<p>Default options : </p>
 		<table class="form" style="width: 100%;">
@@ -68,7 +72,7 @@ function(data) {
 		</table>
 		
 		<div class="btnBox" align="center">
-			<a id="btnGetPage" href="#" class='{ "color": "skyblue", "size": "large" }'>Page embed</a>
+			<a id="btnGetPage" href="#" class='{ "color": "skyblue", "size": "large" }'>Submit</a>
 		</div>
 		
 		<p>Result : </p>
@@ -82,7 +86,7 @@ function(data) {
 
 <script type="text/javascript">
 
-N("div#c").cont({
+N("div#comm").cont({
     init : function(view, request) {
     	// put source code
     	IndexController.getSourceCode(request.get("url"), N("div.sourceBox"));

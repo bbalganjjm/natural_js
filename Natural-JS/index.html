@@ -21,6 +21,11 @@ var IndexController = {
 		    e.preventDefault();
 		    N(N.context.attr("architecture")["page"]["context"]).comm("prototype/communicator.html").submit();
 	    });
+    	
+    	N("a#btnController").click(function(e) {
+		    e.preventDefault();
+		    N(N.context.attr("architecture")["page"]["context"]).comm("prototype/controller.html").submit();
+	    });
 
 	    N("a#btnFormater").click(function(e) {
 		    e.preventDefault();
@@ -105,6 +110,7 @@ $(document).ready(function() {
 			<ul class="item">
 				Natural-ARCHITECTUR
 				<li><a id="btnCommunicator" href="#">Communicator</a></li>
+				<li><a id="btnController" href="#">Controller</a></li>
 		    </ul>
 			<ul class="item">
 				Natural-DATA

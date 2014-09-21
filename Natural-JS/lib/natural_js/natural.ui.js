@@ -790,17 +790,17 @@
 				}
 			}
 
-			//set opener(parent page's service controller)
+			//set opener(parent page's controller)
 			try {
 				var viewContext = arguments.callee.caller.arguments.callee.caller.arguments[0];
 				if(viewContext.instance !== undefined) {
-					this.opener = viewContext.instance("sc");
+					this.opener = viewContext.instance("cont");
 				} else {
-					this.opener = $(viewContext.target).closest(".view_context__").instance("sc");
+					this.opener = $(viewContext.target).closest(".view_context__").instance("cont");
 				}
 			} catch(e) {
 				if(this.options.url !== null) {
-					N.warn("[N.popup][" + e + "] Don't set opener object in popup's service controller")
+					N.warn("[N.popup][" + e + "] Don't set opener object in popup's controller")
 				}
 			}
 
@@ -905,9 +905,9 @@
 					this_.alert.options.msgContext.addClass("popup_overlay__");
 					this_.alert.options.msgContents.addClass("popup__");
 
-					var sc = opts.context.instance("sc");
+					var sc = opts.context.instance("cont");
 
-					// set popup instance to popup's service controller
+					// set popup instance to popup's controller
 					if(sc !== undefined) {
 						// set Communicator.request
 						sc.request = this.request;
@@ -915,7 +915,7 @@
 						// set caller attribute in Service Conteroller in tab content that is Popup instance
 						sc.caller = this_;
 
-						// set opener to popup's service controller
+						// set opener to popup's controller
 						if(this_.opener !== undefined) {
 							sc["opener"] = this_.opener;
 						}
@@ -944,8 +944,8 @@
 					if(onOpenData !== undefined) {
 						opts.onOpenData = onOpenData;
 					}
-					if(opts.context.instance("sc")[opts.onOpen] !== undefined) {
-						opts.context.instance("sc")[opts.onOpen](opts.onOpenData);
+					if(opts.context.instance("cont")[opts.onOpen] !== undefined) {
+						opts.context.instance("cont")[opts.onOpen](opts.onOpenData);
 					} else {
 						N.warn("[N.popup.popOpen]onOpen callback function \"" + opts.onOpen + "\" is undefined in popup content's Service Controller");
 					}
@@ -1068,7 +1068,7 @@
 					// run "onOpen"(class option) event
 					// onOpen 이벤트는 탭의 class option에 url 이 지정되어있고 탭이 활성화 됐을때만 발생함.
 					if(thisClassOpts.onOpen !== undefined && thisEle.data("loaded")) {
-						var sc = content.find(">").instance("sc");
+						var sc = content.find(">").instance("cont");
 						if(sc[thisClassOpts.onOpen] !== undefined) {
 							//thisClassOpts.onOpen
 							sc[thisClassOpts.onOpen]();
@@ -1098,7 +1098,7 @@
 					var innerContent = opts.contents.eq(targetIdx).html(page).find(">");
 					var activeTabEle = opts.links.eq(targetIdx);
 
-					var sc = innerContent.instance("sc");
+					var sc = innerContent.instance("cont");
 
 					// set Communicator.request
 					sc.request = this.request;
@@ -1106,7 +1106,7 @@
 					// set caller attribute in Service Conteroller in tab content that is Tab instance
 					sc.caller = this_;
 
-					// set tab instance to tab contents service controller
+					// set tab instance to tab contents controller
 					if(sc !== undefined) {
 						if(sc.init !== undefined) {
 							sc.init(sc.view, this.request);

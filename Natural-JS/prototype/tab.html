@@ -9,7 +9,7 @@
 		&nbsp;&nbsp;url: undefined, // 불러올 페이지의 URL<br/>
 		&nbsp;&nbsp;preLoad: false, // 탭이 초기화 될때 탭과 연결되어 있는 컨텐츠를 미리 불러올건지 탭이 최초 열릴때 불러올건지 선택<br/>
 		&nbsp;&nbsp;active: false, // 탭이 초기화 될때 처음 활성화 하고 싶은 탭에 true로 지정<br/>
-		&nbsp;&nbsp;onOpen: undefined // 탭과 연결된 컨텐츠가 열릴 때마다 해당컨텐츠의 service controller 의 onOpen 값으로 지정한 함수를 실행 시킴<br/>
+		&nbsp;&nbsp;onOpen: undefined // 탭과 연결된 컨텐츠가 열릴 때마다 해당컨텐츠의 controller 의 onOpen 값으로 지정한 함수를 실행 시킴<br/>
 		}</h2>
 		<h2>Tab은 한번만 초기화 할 수 있습니다. 옵션을 변경하려면 [Reload this page] 버튼을 누른 후 다시 설정 하기 바랍니다.</h2>
 	</div>
@@ -60,18 +60,19 @@ function() {
 			<a id="btnReload" href="#" class='{ "color": "white", "size": "large" }'>Reload this page</a>
 		</div>
 		<p>Result : </p>
-	    <div id="tab">
+	    <div id="tab" class="tab__">
 			<ul>
-				<li><a href="#tab1">삼고초려</a></li>
-				<li class='{ "onOpen" : "onOpen", "preLoad" : true, "url" : "prototype/form.html" }'><a href="#tab2">폼 예제</a></li>
-				<li class='{ "preLoad" : false, "url" : "prototype/button.html", "*active" : true }'><a href="#tab3">버튼 예제</a></li>
+				<li><a href="#tab1">Jeff Beck</a></li>
+				<li class='{ "onOpen" : "onOpen", "preLoad" : true, "url" : "prototype/form.html" }'><a href="#tab2">Form</a></li>
+				<li class='{ "preLoad" : false, "url" : "prototype/button.html", "*active" : true }'><a href="#tab3">Button</a></li>
 			</ul>
-			<div id="tab1" class="pre">
-삼고초려
-위키백과, 우리 모두의 백과사전.
-명말의 삼고초려도
-삼고초려(三顧草廬)는 후한 말, 삼국 시대에 촉한의 유비가 융중에 기거하던 제갈량을 얻기 위해 몸소 제갈량의 초가집으로 세 번이나 찾아갔던 일화를 일컫는다. 삼고지례, 초려삼고(草廬三顧)라고도 한다.
-			</div>
+			<div id="tab1" class="pre">Geoffrey Arnold "Jeff" Beck (born 24 June 1944) is an English rock guitarist. He is one of the three noted guitarists to have played with The Yardbirds (the other two being Eric Clapton and Jimmy Page). Beck also formed The Jeff Beck Group and Beck, Bogert & Appice.
+
+Much of Beck's recorded output has been instrumental, with a focus on innovative sound, and his releases have spanned genres ranging from blues rock, heavy metal, jazz fusion and an additional blend of guitar-rock and electronica. Although he recorded two hit albums (in 1975 and 1976) as a solo act, Beck has not established or maintained the sustained commercial success of many of his contemporaries and bandmates.[1][2] Beck appears on albums by Mick Jagger, Tina Turner, Morrissey, Jon Bon Jovi, Malcolm McLaren, Kate Bush, Roger Waters, Donovan, Stevie Wonder, Les Paul, Zucchero, Cyndi Lauper, Brian May, Stanley Clarke and ZZ Top.
+
+He was ranked 5th in Rolling Stone's list of the "100 Greatest Guitarists of All Time" and the magazine, upon whose cover Beck has appeared three times, has described him as "one of the most influential lead guitarists in rock".[3] MSNBC has called him a "guitarist's guitarist".[1] Beck has earned wide critical praise and received the Grammy Award for Best Rock Instrumental Performance six times and Best Pop Instrumental Performance once. He has been inducted into the Rock and Roll Hall of Fame twice: as a member of the Yardbirds (1992) and as a solo artist (2009).
+
+- from WIKIPEDIA</div>
 			<div id="tab2"></div>
 			<div id="tab3"></div>
 		</div>

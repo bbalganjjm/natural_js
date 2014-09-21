@@ -145,6 +145,7 @@ N("div#gridFormPopup").cont({
        		hover : true,
        		onSelect : function(i, ele, data) {
        			form.bind(i, data);
+       			popup.close();
        			popup.open();
        		}
        	});
