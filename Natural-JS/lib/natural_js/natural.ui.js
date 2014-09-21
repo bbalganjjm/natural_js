@@ -1,45 +1,45 @@
 (function(window, $) {
 	var version = "0.8.0.0";
 
-	// NTR local variables
-	$.fn.extend(NTR, {
+	// N local variables
+	$.fn.extend(N, {
 		"Natural-UI" : version
 	});
 
-	NTR.fn = NTR.prototype = {
-		constructor : NTR,
+	N.fn = N.prototype = {
+		constructor : N,
 		alert : function(msg, vars) {
-			return new NTR.alert(this, msg, vars);
+			return new N.alert(this, msg, vars);
 		},
 		button : function(opts) {
 			if(this.is("input[type='button'], button, a")) {
-				return new NTR.button(this, opts);
+				return new N.button(this, opts);
 			} else {
 				return this.find("input[type='button'], button, a").each(function() {
-					return new NTR.button(N(this), opts);
+					return new N.button(N(this), opts);
 				});
 			}
 		},
 		select : function(opts) {
-			return new NTR.select(this, opts);
+			return new N.select(this, opts);
 		},
 		form : function(opts) {
-			return new NTR.form(this, opts);
+			return new N.form(this, opts);
 		},
 		grid : function(opts) {
-			return new NTR.grid(this, opts);
+			return new N.grid(this, opts);
 		},
 		popup : function(opts) {
-			return new NTR.popup(this, opts);
+			return new N.popup(this, opts);
 		},
 		tab : function(opts) {
-			return new NTR.tab(this, opts);
+			return new N.tab(this, opts);
 		},
 		datepicker : function(opts) {
-			return new NTR.datepicker(this, opts);
+			return new N.datepicker(this, opts);
 		}
 	};
-	$.fn.extend(NTR.fn);
+	$.fn.extend(N.fn);
 
 	(function(N) {
 
@@ -2257,6 +2257,6 @@
 		    }
 		});
 
-	})(NTR);
+	})(N);
 
 })(window, jQuery);

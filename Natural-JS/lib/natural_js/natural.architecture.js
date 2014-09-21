@@ -1,27 +1,27 @@
 (function(window, $) {
 	var version = "0.8.0.0";
 
-	// NTR local variables
-	$.fn.extend(NTR, {
+	// N local variables
+	$.fn.extend(N, {
 		"Natural-ARCHITECTURE" : version
 	});
 
-	$.extend(NTR.fn, {
-		constructor : NTR,
+	$.extend(N.fn, {
+		constructor : N,
 		communicator : function(opts) {
-			return NTR.communicator(opts);
+			return N.communicator(opts);
 		},
 		comm : function(url) {
-			return new NTR.comm(this, url);
+			return new N.comm(this, url);
 		},
 		request : function() {
 			return this.get(0).request;
 		},
-		sc : function(callback) {
-			return new NTR.sc(this, callback);
+		cont : function(callback) {
+			return new N.cont(this, callback);
 		}
 	});
-	$.fn.extend(NTR.fn);
+	$.fn.extend(N.fn);
 
 	(function(N) {
 		// Config
@@ -245,7 +245,7 @@
 			}
 		});
 
-		var ServiceCommunicator = N.sc = function(obj, callback) {
+		var Controller = N.cont = function(obj, callback) {
 			if(callback === undefined) {
 				return obj.data(obj.attr("id"));
 			}
@@ -266,6 +266,6 @@
 			attr : Communicator.request.fn.attr
 		};
 
-	})(NTR);
+	})(N);
 
 })(window, jQuery);

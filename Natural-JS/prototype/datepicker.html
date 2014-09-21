@@ -37,10 +37,10 @@ function() {
 
 <script type="text/javascript">
 
-N("div#datepickerSample").sc({
+N("div#datepickerSample").cont({
     init : function(view, request) {
     	// put source code
-    	IndexServiceController.getSourceCode(request.get("url"), N("div.sourceBox"));
+    	IndexController.getSourceCode(request.get("url"), N("div.sourceBox"));
 
     	// make button
        	this.initButton(view);

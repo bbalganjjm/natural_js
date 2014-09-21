@@ -123,7 +123,7 @@ function() {
 			<tr>
 				<th align="right">onOpen</th>
 				<td><input id="onOpen" type="text" value="onOpen" /><br />
-				This value is run with whenever you open the popup that must be defined in ServiceController's method in the be loaded page</td>
+				This value is run with whenever you open the popup that must be defined in Controller's method in the be loaded page</td>
 				<th align="right">onOpenData</th>
 				<td><textarea id="onOpenData" rows="3" cols="60">This value is sent to onOpen callback functions argument of popup's service controller</textarea></td>
 			</tr>
@@ -152,12 +152,12 @@ function(onCloseData) {
 
 <script type="text/javascript">
 
-N("div#popupEx").sc({
+N("div#popupEx").cont({
 	localPopup : null,
 	otherPopup : null,
     init : function(view, request) {
     	// put source code
-    	IndexServiceController.getSourceCode(request.get("url"), N("div.sourceBox"));
+    	IndexController.getSourceCode(request.get("url"), N("div.sourceBox"));
 
     	// make button
     	this.initButton(view);

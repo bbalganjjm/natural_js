@@ -15,9 +15,9 @@
 <script type="text/javascript">
 //TODO 팝업, 페이지 로딩바 표시
 
-var IndexServiceController = {
+var IndexController = {
     init : function() {
-    	N("a#btnController").click(function(e) {
+    	N("a#btnCommunicator").click(function(e) {
 		    e.preventDefault();
 		    N(N.context.attr("architecture")["page"]["context"]).comm("prototype/communicator.html").submit();
 	    });
@@ -91,7 +91,7 @@ var IndexServiceController = {
     }
 }
 $(document).ready(function() {
-    IndexServiceController.init();
+    IndexController.init();
 });
 </script>
 

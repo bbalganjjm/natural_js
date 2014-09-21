@@ -1,42 +1,42 @@
 (function(window, $) {
 	var version = "0.8.0.0";
 
-	// NTR local variables
-	$.fn.extend(NTR, {
+	// N local variables
+	$.fn.extend(N, {
 		"Natural-DATA" : version
 	});
 
-	$.extend(NTR.fn, {
-		constructor : NTR,
+	$.extend(N.fn, {
+		constructor : N,
 		datafilter : function(queryString) {
-			return NTR.data.filter(this, queryString);
+			return N.data.filter(this, queryString);
 		},
 		datarefine : function(listId) {
-			return NTR.data.refine(this, listId);
+			return N.data.refine(this, listId);
 		},
 		datasort : function(key, reverse) {
-			return NTR.data.sort(this, key, reverse);
+			return N.data.sort(this, key, reverse);
 		},
 		formater : function(row) {
-			return new NTR.formater(this, row);
+			return new N.formater(this, row);
 		},
 		validator : function(row) {
-			return new NTR.validator(this, row);
+			return new N.validator(this, row);
 		}
 	});
-	$.fn.extend(NTR.fn);
+	$.fn.extend(N.fn);
 
-	NTR.data = {
+	N.data = {
 		refine : function(obj, listId) {
 			if (N.isWrappedSet(obj)) {
 				if (obj.length == 1) {
 					if (N.isPlainObject(obj.get(0))) {
-						return NTR(this.refine(obj.get(0), listId));
+						return N(this.refine(obj.get(0), listId));
 					} else {
 						return obj;
 					}
 				} else {
-					return NTR(this.refine(obj.toArray(), listId));
+					return N(this.refine(obj.toArray(), listId));
 				}
 			} else {
 				if (listId != null) {
@@ -52,7 +52,7 @@
 			if (queryString == null) {
 				return arr;
 			}
-			return N.isWrappedSet(arr) ? NTR(this.filter(arr.toArray(), queryString)) : $.grep(arr, function(data) {
+			return N.isWrappedSet(arr) ? N(this.filter(arr.toArray(), queryString)) : $.grep(arr, function(data) {
 				return eval(queryString);
 			});
 		},
@@ -84,7 +84,7 @@
 			};
 		},
 		sort : function(arr, key, reverse) {
-			return N.isWrappedSet(arr) ? NTR(arr.sort(this.sortBy(key, reverse))) : arr.sort(this.sortBy(key, reverse));
+			return N.isWrappedSet(arr) ? N(arr.sort(this.sortBy(key, reverse))) : arr.sort(this.sortBy(key, reverse));
 		}
 	};
 
@@ -988,6 +988,6 @@
 			}
 		});
 
-	})(NTR);
+	})(N);
 
 })(window, jQuery);

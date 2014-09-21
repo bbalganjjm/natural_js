@@ -64,10 +64,10 @@ function() {
 </div>
 <script type="text/javascript">
 
-N("div#alert").sc({
+N("div#alert").cont({
     init : function(view, request) {
     	// put source code
-    	IndexServiceController.getSourceCode(request.get("url"), N("div.sourceBox"));
+    	IndexController.getSourceCode(request.get("url"), N("div.sourceBox"));
 
     	// make button
     	this.initButton(view);

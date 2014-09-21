@@ -183,11 +183,11 @@
 
 <script type="text/javascript">
 
-N("div#select").sc({
+N("div#select").cont({
 	"select" : null,
     init : function(view, request) {
     	// put source code
-    	IndexServiceController.getSourceCode(request.get("url"), N("div.sourceBox"));
+    	IndexController.getSourceCode(request.get("url"), N("div.sourceBox"));
 
     	// make button
     	this.initButton(view);

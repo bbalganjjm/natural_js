@@ -191,12 +191,12 @@ function(context, data) {
 
 <script type="text/javascript">
 
-N("div#gridEx").sc({
+N("div#gridEx").cont({
 	grid : undefined,
 	gridData : undefined,
     init : function(view, request) {
     	// put source code
-    	IndexServiceController.getSourceCode(request.get("url"), N("div.sourceBox"));
+    	IndexController.getSourceCode(request.get("url"), N("div.sourceBox"));
 
     	this.initButton(view);
 

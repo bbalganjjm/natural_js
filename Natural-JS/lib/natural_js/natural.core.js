@@ -1,13 +1,13 @@
 (function(window, $) {
-	var version = "0.8.0.0", NTR;
+	var version = "0.8.0.0", N;
 
 	// Define a local copy of jQuery
-	NTR = function(selector, context) {
+	N = function(selector, context) {
 		return new $.fn.init(selector, context);
 	};
 
-	// NTR local variables
-	$.fn.extend(NTR, {
+	// N local variables
+	$.fn.extend(N, {
 		"Natural-CORE" : version,
 		locale : function(str) {
 			if(str === undefined) {
@@ -86,8 +86,8 @@
 			return obj !== undefined && obj.length > 0 && obj.get(0).getElementsByTagName ? true : false;
 		},
 		isArraylike : function(obj) {
-			var length = obj.length, type = NTR.type(obj);
-			if (type === "function" || NTR.isWindow(obj)) {
+			var length = obj.length, type = N.type(obj);
+			if (type === "function" || N.isWindow(obj)) {
 				return false;
 			}
 			if (obj.nodeType === 1 && length) {
@@ -286,7 +286,7 @@
 			 * make options object from class attribute
 			 */
 			toOpts : function(ele) {
-				var opts = N.string.trimToNull(NTR(ele).attr("class"));
+				var opts = N.string.trimToNull(N(ele).attr("class"));
 				if (opts != null && opts.indexOf("{") > -1 && opts.indexOf("}") > -1) {
 					var optsStr;
 					try {
@@ -519,10 +519,10 @@
 			}
 		}
 	});
-	$.fn.extend(NTR.fn);
+	$.fn.extend(N.fn);
 
-	NTR.fn = NTR.prototype = {
-		constructor : NTR,
+	N.fn = N.prototype = {
+		constructor : N,
 		get : $.fn.get,
 		"remove_" : function(idx, length) {
 			if (idx !== undefined) {
@@ -586,7 +586,7 @@
 		        	if(this.length > 1) {
 		        		this.prop("checked", false);
 		        		var this_ = this;
-		        		NTR(vals).each(function() {
+		        		N(vals).each(function() {
 		        			this_.filter("[value='" + String(this) + "']").prop("checked", true);
 		        		});
 		        	} else if(this.length === 1) {
@@ -684,7 +684,7 @@
 
 	(function(N) {
 
-	})(NTR);
+	})(N);
 
 	// formatDate :
 	// a PHP date like function, for formatting date strings
@@ -988,7 +988,7 @@
 	 * @reference Mask JavaScript API(http://www.pengoworks.com/workshop/js/mask/,
 	 *            dswitzer@pengoworks.com)
 	 */
-	NTR.Mask = function(m) {
+	N.Mask = function(m) {
 		this.format = m;
 		this.error = [];
 		this.errorCodes = [];
@@ -1555,6 +1555,6 @@
 		}
 	}());
 
-	window.$.NTR = window.N = window.NTR = NTR;
+	window.$.N = window.N = N;
 
 })(window, jQuery);
