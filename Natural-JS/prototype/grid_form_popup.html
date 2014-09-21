@@ -1,37 +1,17 @@
 <div id="gridFormPopup">
+	<div class="intro">
+		<h1>Grid 와 Form, Popup 이 결합된 형태의 예제 입니다.</h1>
+		<h2>그리드의 행을 클릭하면 클릭한 행의 데이터가 바인드된 폼이 팝업 으로 표시 됩니다.</h2>
+	</div>
 	<div class="divBar">DATA</div>
 	<div class="dataBox">
-		<textarea id="data" class="data">
-[
-  {
-    "_id": "53e21cba9f982281b3459438",
-    "index": 0,
-    "guid": "1a9e5450-c664-4bfd-8174-d03005eca08d",
-    "isActive": "Y",
-    "balance": "$1,284.38",
-    "picture": "http://placehold.it/32x32",
-    "age": 26,
-    "eyeColor": "green",
-    "name": "Dean Stanley",
-    "gender": "male",
-    "company": "ZENTIA",
-    "email": "deanstanley@zentia.com",
-    "phone": "+1 (920) 409-2680",
-    "address": "936 Meserole Street, Vicksburg, Massachusetts, 1198",
-    "about": "Mollit elit qui reprehenderit fugiat excepteur adipisicing sunt id proident laborum sint proident. Amet cupidatat ipsum do irure qui magna sunt pariatur commodo eiusmod ipsum qui ad culpa. Nisi tempor cupidatat do tempor reprehenderit irure consectetur cupidatat deserunt fugiat. Ipsum sint id ipsum voluptate duis laboris esse sunt nisi mollit dolore cupidatat.\r\n",
-    "registered": "2014-02-20T03:58:09 -09:00",
-    "latitude": 81.131606,
-    "longitude": 87.110498,
-    "greeting": "Hello, Dean Stanley! You have 1 unread messages.",
-    "favoriteFruit": "strawberry"
-  },.............
-		</textarea>
+		/Natural-JS/prototype/data/grid_big.json
 	</div>
 	<div class="divBar">DEMO</div>
 	<div class="demoBox">
-		<div id="defBtnBox" class="btnBox">
-			<a id="btnBind" href="#" class='{ "color": "skyblue", "size": "small" }'>bind data</a>
-			<a id="btnGetChengedRowData" href="#" class='{ "color": "skyblue", "size": "small" }'>get changed row data</a>
+		<div id="defBtnBox" class="btnBox" align="right">
+			<a id="btnBind" href="#" class='{ "color": "skyblue", "size": "large" }'>bind</a>
+			<a id="btnModifiedData" href="#" class='{ "color": "skyblue", "size": "large" }'>get modified data</a>
 		</div>
 		<table id="grid" class="grid__">
 			<thead>
@@ -180,7 +160,7 @@ N("div#gridFormPopup").sc({
         	});
         });
 
-    	N("a#btnGetChengedRowData").click(function(e) {
+    	N("a#btnModifiedData").click(function(e) {
     		e.preventDefault();
     		N("div.demoBox").alert({
     			title : "수정된 ROW DATA",
