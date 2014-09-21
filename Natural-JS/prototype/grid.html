@@ -258,7 +258,7 @@ N("div#gridEx").sc({
 
     	N("a#btnBind", view).click(function(e) {
             e.preventDefault();
-            N.c("prototype/data/grid.json").submit(function(data) {
+            N.cc("prototype/data/grid.json").submit(function(data) {
             	grid.bind(data);
 	       	});
 
@@ -311,7 +311,7 @@ N("div#gridEx").sc({
 
     	N("a#btnReload", view).click(function(e) {
         	e.preventDefault();
-        	N(view.parent()).c(this_.request.get("url")).submit();
+        	N(view.parent()).cc(this_.request.get("url")).submit();
         });
     }
 });

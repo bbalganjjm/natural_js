@@ -1,5 +1,5 @@
 (function(window, $) {
-	var version = "0.7.5.0";
+	var version = "0.8.0.0";
 
 	// NTR local variables
 	$.fn.extend(NTR, {
@@ -885,7 +885,7 @@
 				var this_ = this;
 
 				// TODO show loading bar
-				N.c({
+				N.cc({
 					url : opts.url,
 					contentType : "application/x-www-form-urlencoded",
 					dataType : "html"
@@ -1090,7 +1090,7 @@
 				var this_ = this;
 
 				// TODO show loading bar
-				N.c({
+				N.cc({
 					url : url,
 					contentType : "application/x-www-form-urlencoded",
 					dataType : "html"

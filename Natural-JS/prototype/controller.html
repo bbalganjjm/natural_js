@@ -1,6 +1,6 @@
 <div id="c">
 	<div class="intro">
-		<h1><b>Common Controller</b> : Common Controller(N.c)는 Communicator 를 이용하여 서버로 부터 JSON 데이터를 가져오고 컴포넌트의 데이터나 파라미터를 서보로 다시 보내는 역할을 수행 합니다.</h1>
+		<h1><b>Common Controller</b> : Common Controller(N.cc)는 Communicator 를 이용하여 서버로 부터 JSON 데이터를 가져오고 컴포넌트의 데이터나 파라미터를 서보로 다시 보내는 역할을 수행 합니다.</h1>
 		<h2>[Get json data from server or file] 버튼을 클릭하면 서버로 부터 JSON 데이터(/Natural-JS/prototype/data/grid.json)를 가져옵니다</h2>
 		<h2>[Page embed] 버튼을 클릭하면 서버로 지정한 페이지를 가져와 지정한 영역에 표시 해 줍니다.</h2>
 		<h2>Common Controller 로 JSON 데이터가 아닌 HTML 페이지를 불러올경우 불러온 페이지의 Service Controller(N.sc) 의 멤버변수로 request(this.request) 객체를 자동으로 지정 해 줍니다. 
@@ -99,7 +99,7 @@ N("div#c").sc({
     setEvent : function(view, this_) {
     	N("a#btnGetJson", view).click(function(e) {
             e.preventDefault();
-            N.c({
+            N.cc({
         		url : "prototype/data/grid.json"
         	}).submit(eval("(" + N("textarea#jsonCallback", view).val() + ")"));
         });
@@ -116,7 +116,7 @@ N("div#c").sc({
       		        N.string.trimToNull(N("textarea#callback", view).val()) !== null ?
 						eval("(" + N("textarea#callback", view).val() + ")") : undefined ]
             }
-            N(N("input#context", view).val(), view).c(opts).submit();
+            N(N("input#context", view).val(), view).cc(opts).submit();
         });
     }
 });

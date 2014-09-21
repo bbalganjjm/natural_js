@@ -1,5 +1,5 @@
 (function(window, $) {
-	var version = "0.7.5.0";
+	var version = "0.8.0.0";
 
 	// NTR local variables
 	$.fn.extend(NTR, {
@@ -11,8 +11,8 @@
 		communicator : function(opts) {
 			return NTR.communicator(opts);
 		},
-		c : function(url) {
-			return new NTR.c(this, url);
+		cc : function(url) {
+			return new NTR.cc(this, url);
 		},
 		request : function() {
 			return this.get(0).request;
@@ -35,7 +35,7 @@
 
 		// Common Controller
 		// TODO demo 페이지 만들어야 함. html 불러올경우 ServiceController 에 request 객체 넣어줌
-		var Controller = N.c = function(obj, url) {
+		var Controller = N.cc = function(obj, url) {
 			if (obj === undefined) {
 				N.error("[Controller]You must input arguments[0]");
 			} else {
