@@ -571,7 +571,6 @@
 	    	var tagName = this.get(0).tagName.toLowerCase();
 	    	var type = N.string.trimToEmpty(this.attr("type")).toLowerCase();
 	    	var selEle;
-	    	//TODO function 쪽 다시 테스트 바람
 	    	if(vals !== undefined && N.type(vals) !== "function") {
 	    		if (tagName === "select") {
 	    			if(N.string.trimToNull(vals) == null && !this.is("select[multiple='multiple']")) {
@@ -590,7 +589,6 @@
 		        			this_.filter("[value='" + String(this) + "']").prop("checked", true);
 		        		});
 		        	} else if(this.length === 1) {
-		        		//TODO test 해야됨
 		        		if(N.context.attr("core")["sgChkdVal"] === vals[0]) {
 		        			this.prop("checked", true);
 		        		} else if (N.context.attr("core")["sgUnChkdVal"] === vals[0]) {

@@ -509,7 +509,6 @@
 		});
 
 		// Validator
-		// TODO 전체 validation 룰 테스트 해봐야 함.
 		var Validator = N.validator = function(obj, rules) {
 			this.options = {
 				data : N.isPlainObject(obj) ? N(obj) : obj,
