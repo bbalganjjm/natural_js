@@ -437,6 +437,7 @@
 
 	                // for ie8
 	                if(N.browser.msieVersion() === 8 && opts.context.is("a")) {
+	                	opts.context.css("line-height", "");
 	                	if(opts.size === "smaller") {
 	                		opts.context.css("line-height", "17px");
 	                	} else if(opts.size === "small") {
@@ -450,6 +451,13 @@
 	                	}
 	                }
 
+	                if(N.browser.msieVersion() === 9) {
+	                	if(opts.context.is("a")) {
+	                		opts.context.css("line-height", "");
+	                	}
+            			opts.context.css("line-height", (parseInt(opts.context.css("line-height")) - 3) + "px");
+            		}
+	                
 	                opts.context.unbind("mouseover.button mousedown.button mouseup.button mouseout.button");
 	                opts.context.bind("mouseover.button", function() {
 	                    if (!opts.context.hasClass("disabled")) {

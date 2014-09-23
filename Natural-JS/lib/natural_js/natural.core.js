@@ -489,7 +489,7 @@
 				return msg;
 			},
 			get : function(resource, key, vars) {
-				var msg = resource[N.locale()][Key];
+				var msg = resource[N.locale()][key];
 				return msg !== undefined ? N.message.replaceMsgVars(msg, vars) : key;
 			}
 		},
