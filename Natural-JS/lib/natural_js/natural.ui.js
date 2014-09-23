@@ -1663,6 +1663,7 @@
 				removedData : [],
 				context : null,
 				heigth : 0,
+				windowScrollLock : true,
 				html : false,
 				validate : true,
 				addTop : false,
@@ -2018,8 +2019,27 @@
 		        	tbodyWrap.css("overflow-x", "hidden");
 		        }
 
-
-		        //Scroll paging
+		        if(opts.windowScrollLock) {
+		        	opts.context.bind("mouseenter.grid.fixHeader", function() {
+						// lock scroll position
+						var scrollPosition = [ self.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft,
+								self.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop ];
+						var html = jQuery('html');
+						html.data('scroll-position', scrollPosition);
+						html.data('previous-overflow', html.css('overflow'));
+						html.css('overflow', 'hidden');
+						window.scrollTo(scrollPosition[0], scrollPosition[1]);
+					});
+					opts.context.bind("mouseleave.grid.fixHeader", function() {
+						// un-lock scroll position
+						var html = jQuery('html');
+						var scrollPosition = html.data('scroll-position');
+						html.css('overflow', html.data('previous-overflow'));
+						window.scrollTo(scrollPosition[0], scrollPosition[1])
+					});
+		        }
+		        
+		        // Scroll paging
 		        var this_ = this;
 		        var defSPSize = opts.scrollPaging.size;
 		        var tbodyLength;

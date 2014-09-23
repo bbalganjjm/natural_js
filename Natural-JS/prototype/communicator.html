@@ -110,7 +110,9 @@ N("div#comm").cont({
             e.preventDefault();
             N.comm({
         		url : "prototype/data/grid.json"
-        	}).submit(eval("(" + N("textarea#jsonCallback", view).val() + ")"));
+        	}).submit(N.browser.msieVersion() !== 8 ? eval("(" + N("textarea#jsonCallback", view).val() + ")") : function(data) {
+        		N("div.result:eq(0)", view).text(JSON.stringify(data));
+        	});
         });
 
     	N("a#btnGetPage", view).click(function(e) {

@@ -86,6 +86,10 @@ function(context, data) {
 }
 				</textarea><br /> Callback function for tab active event</td>
 			</tr>
+			<tr>
+				<th align="right">windowScrollLock</th>
+				<td colspan="3"><input id="windowScrollLock" type="checkbox" checked="checked" />  If uncheck(false) this checkbox, don't block window scroll when mouse scrolling in grid</td>
+			</tr>
 		</table>
 
 		<p>Method options : </p>
@@ -232,7 +236,8 @@ N("div#gridEx").cont({
     				onSelect : N.string.trimToNull(N("textarea#onSelect", view).val()) !== null ?
         				eval("(" + N("textarea#onSelect", view).val() + ")") : null,
         			onBind : N.string.trimToNull(N("textarea#onBind", view).val()) !== null ?
-        				eval("(" + N("textarea#onBind", view).val() + ")") : null
+        				eval("(" + N("textarea#onBind", view).val() + ")") : null,
+        		windowScrollLock : N("input#windowScrollLock", view).is(":checked")
        		}
 
        		grid = N([]).grid(opts).bind();
