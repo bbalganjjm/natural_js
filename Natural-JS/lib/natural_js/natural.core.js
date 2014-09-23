@@ -395,7 +395,6 @@
 							break;
 						}
 					}
-					return null;
 				} else {
 					var expires = -1;
 					if (expiredays != null) {
