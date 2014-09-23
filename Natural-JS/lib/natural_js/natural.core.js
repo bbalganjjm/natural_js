@@ -371,7 +371,7 @@
 		    }
 		},
 		"browser" : {
-			"cookie" : function(name, value, expiredays) {
+			"cookie" : function(name, value, expiredays, domain) {
 				if (value === undefined) {
 					var getCookieVar = function(offset) {
 						var endstr = document.cookie.indexOf(";", offset);
@@ -403,11 +403,15 @@
 						today.setDate(today.getDate() + expiredays);
 						expires = today.toGMTString();
 					}
-					document.cookie = name + "=" + escape(value) + "; path=/; expires=" + expires + ";";
+					if (domain !== undefined) {
+						document.cookie = name + "=" + escape(value) + "; path=/; expires=" + expires + "; domain=" + domain;
+					} else {
+						document.cookie = name + "=" + escape(value) + "; path=/; expires=" + expires + ";";
+					}
 				}
 			},
 			removeCookie : function(name, domain) {
-				if (domain) {
+				if (domain !== undefined) {
 					document.cookie = name + "=; path=/; expires=" + (new Date(1)) + "; domain=" + domain;
 				} else {
 					document.cookie = name + "=; path=/; expires=" + (new Date(1)) + ";";
@@ -462,19 +466,6 @@
 					totalHeight = document.body.scrollHeight;
 				}
 				return totalHeight;
-			},
-			type : function() {
-				var ua = navigator.userAgent.toLowerCase();
-		        var match = /(chrome)[ \/]([\w.]+)/.exec( ua ) ||
-		            /(webkit)[ \/]([\w.]+)/.exec( ua ) ||
-		            /(opera)(?:.*version|)[ \/]([\w.]+)/.exec( ua ) ||
-		            /(msie) ([\w.]+)/.exec( ua ) ||
-		            ua.indexOf("compatible") < 0 && /(mozilla)(?:.*? rv:([\w.]+)|)/.exec( ua ) ||
-		            [];
-		        return {
-		            browser: match[ 1 ] || "",
-		            version: match[ 2 ] || "0"
-		        };
 			},
 			scrollbarWidth : function() {
 				var div = $('<div class="antiscroll-inner" style="width:50px;height:50px;overflow-y:scroll;'
