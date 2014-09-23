@@ -489,9 +489,9 @@
 				}
 				return msg;
 			},
-			get : function(resource, k, vars) {
-				var msg = resource[N.locale()][k];
-				return msg !== undefined ? N.message.replaceMsgVars(msg, vars) : k;
+			get : function(resource, key, vars) {
+				var msg = resource[N.locale()][Key];
+				return msg !== undefined ? N.message.replaceMsgVars(msg, vars) : key;
 			}
 		},
 		"json" : {
