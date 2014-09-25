@@ -22,13 +22,13 @@
 					<br />&nbsp;this is also possible to title attribute of context element
 				</td>
 				<th align="right" width="10%">confirm</th>
-				<td width="40%"><input id="confirm" type="checkbox" checked="checked" />If uncheck(false) this checkbox, display OK button only</td>
+				<td width="40%"><input id="confirm" type="checkbox" checked="checked" />If this checkbox with uncheck(false), display OK button only</td>
 			</tr>
 			<tr>
 				<th align="right">modal</th>
-				<td><input id="modal" type="checkbox" checked="checked" />If uncheck(false) this checkbox, don't display modal overlay layer</td>
+				<td><input id="modal" type="checkbox" checked="checked" />If this checkbox with uncheck(false), do not display modal overlay layer</td>
 				<th align="right">button</th>
-				<td><input id="button" type="checkbox" checked="checked" />If uncheck(false) this checkbox, don't display button bar</td>
+				<td><input id="button" type="checkbox" checked="checked" />If this checkbox with uncheck(false), do not display button bar</td>
 			</tr>
 			<tr>
 				<th align="right">width</th>
@@ -92,13 +92,13 @@ function() {
 					<br />&nbsp;this is also possible to title attribute of context element
 				</td>
 				<th align="right" width="10%">confirm</th>
-				<td width="40%"><input id="confirm" type="checkbox" checked="checked" />If uncheck(false) this checkbox, display OK button only</td>
+				<td width="40%"><input id="confirm" type="checkbox" checked="checked" />If this checkbox with uncheck(false), display OK button only</td>
 			</tr>
 			<tr>
 				<th align="right">modal</th>
-				<td><input id="modal" type="checkbox" checked="checked" />If uncheck(false) this checkbox, don't display modal overlay layer</td>
+				<td><input id="modal" type="checkbox" checked="checked" />If this checkbox with uncheck(false), do not display modal overlay layer</td>
 				<th align="right">button</th>
-				<td><input id="button" type="checkbox" checked="checked" />If uncheck(false) this checkbox, don't display button bar</td>
+				<td><input id="button" type="checkbox" checked="checked" />If this checkbox with uncheck(false), do not display button bar</td>
 			</tr>
 			<tr>
 				<th align="right">width</th>
@@ -107,12 +107,12 @@ function() {
 				<td><input id="height" type="text" value="400" /> Popup contents height, 0 is auto height</td>
 			</tr>
 			<tr>
-				<th align="right">preLoad</th>
-				<td colspan="3"><input id="preLoad" type="checkbox" /> If check(true) this checkbox, pre load popup contents when initialize popup but unchecked(false) is load popup contens when first open</td>
+				<th align="right">preload</th>
+				<td colspan="3"><input id="preload" type="checkbox" /> If this checkbox with check(true), load popup contents when popup is initialized, but with unchecked(false), load popup contens when first open</td>
 			</tr>
 			<tr>
 				<th align="right">onOk</th>
-				<td><textarea id="onOk" rows="3" cols="60"></textarea><br />Callback function for Ok button event, if undefine onOk callback function, N.popup is bind onCloseData event</td>
+				<td><textarea id="onOk" rows="3" cols="60"></textarea><br />Callback function for Ok button event</td>
 				<th align="right">onCancel</th>
 				<td><textarea id="onCancel" rows="3" cols="60">
 function() {
@@ -123,7 +123,7 @@ function() {
 			<tr>
 				<th align="right">onOpen</th>
 				<td><input id="onOpen" type="text" value="onOpen" /><br />
-				This value is run with whenever you open the popup that must be defined in Controller's method in the be loaded page</td>
+				The method of this value is run whenever open the popup, that must be defined in Controller's method in loaded popup contens</td>
 				<th align="right">onOpenData</th>
 				<td><textarea id="onOpenData" rows="3" cols="60">This value is sent to onOpen callback functions argument of popup's controller</textarea></td>
 			</tr>
@@ -216,7 +216,7 @@ N("div#popupEx").cont({
             			eval("(" + N("table#otherPage textarea#onOk", view).val() + ")") : null,
             	onCancel : N.string.trimToNull(N("table#otherPage textarea#onCancel", view).val()) !== null ?
             			eval("(" + N("table#otherPage textarea#onCancel", view).val() + ")") : null,
-       			preLoad : N("table#otherPage input#preLoad", view).is(":checked"),
+       			preload : N("table#otherPage input#preload", view).is(":checked"),
        			onOpen : N.string.trimToNull(N("table#otherPage input#onOpen", view).val()),
        			onOpenData : N.string.trimToNull(N("table#otherPage textarea#onOpenData", view).val()),
             	onClose : N.string.trimToNull(N("textarea#onClose", view).val()) !== null ?

@@ -241,7 +241,7 @@
 											ele = opts.context.find("#" + $(this).attr("id"));
 										}
 
-										// TODO 임시처리, 더 생각해보기
+										// TODO Temporary code, think more
 										var fmdVals = this_.format();
 										if(fmdVals.length === 1) {
 											row = 0;
@@ -249,7 +249,7 @@
 
 										$(this).val(fmdVals[row][$(this).attr("id")]);
 									}).bind("unformat.formater", function() {
-										// TODO 임시처리, 더 생각해보기
+										// TODO Temporary code, think more
 										if(opts.data.length === 1) {
 											row = 0;
 										}

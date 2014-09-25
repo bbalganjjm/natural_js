@@ -171,7 +171,7 @@
 				dataType : "json",
 				urlSync : true,
 				crossDomain : false,
-				browserHistory : true, // TODO To do
+				browserHistory : true, // TODO
 				append : false,
 				effect : false
 			};
@@ -210,7 +210,7 @@
 						this.attrObj = {};
 					}
 					this.attrObj[name] = obj_;
-					// this.obj : Defined from Communicator.request constructor;
+					// this.obj : Defined by Communicator.request constructor;
 					return this.obj;
 				}
 			},

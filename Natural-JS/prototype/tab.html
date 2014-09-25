@@ -7,7 +7,7 @@
 		{<br/>
 		&nbsp;&nbsp;width: "auto", // 탭의 넓이, 숫자로 지정할 수 있고 auto 이면 탭안의 내용에따라 길이가 자동으로 조절 된다.<br/>
 		&nbsp;&nbsp;url: undefined, // 불러올 페이지의 URL<br/>
-		&nbsp;&nbsp;preLoad: false, // 탭이 초기화 될때 탭과 연결되어 있는 컨텐츠를 미리 불러올건지 탭이 최초 열릴때 불러올건지 선택<br/>
+		&nbsp;&nbsp;preload: false, // 탭이 초기화 될때 탭과 연결되어 있는 컨텐츠를 미리 불러올건지 탭이 최초 열릴때 불러올건지 선택<br/>
 		&nbsp;&nbsp;active: false, // 탭이 초기화 될때 처음 활성화 하고 싶은 탭에 true로 지정<br/>
 		&nbsp;&nbsp;onOpen: undefined // 탭과 연결된 컨텐츠가 열릴 때마다 해당컨텐츠의 controller 의 onOpen 값으로 지정한 함수를 실행 시킴<br/>
 		}</h2>
@@ -19,7 +19,7 @@
 		<table class="form" style="width: 100%;">
 			<tr>
 				<th align="right" width="10%">randomSel</th>
-				<td width="40%"><input id="randomSel" type="checkbox" /> If check(true) this checkbox, random select tab after tab initialize</td>
+				<td width="40%"><input id="randomSel" type="checkbox" /> If this checkbox with check(true), random select tab after tab initialize</td>
 				<th align="right" width="10%">onActive</th>
 				<td width="40%"><textarea id="onActive" rows="3" cols="60">
 function(activeLinkEle, allLinksEle, tabContentsEle) {
@@ -63,8 +63,8 @@ function() {
 	    <div id="tab" class="tab__">
 			<ul>
 				<li><a href="#tab1">Jeff Beck</a></li>
-				<li class='{ "onOpen" : "onOpen", "preLoad" : true, "url" : "prototype/form.html" }'><a href="#tab2">Form</a></li>
-				<li class='{ "preLoad" : false, "url" : "prototype/button.html", "*active" : true }'><a href="#tab3">Button</a></li>
+				<li class='{ "onOpen" : "onOpen", "preload" : true, "url" : "prototype/form.html" }'><a href="#tab2">Form</a></li>
+				<li class='{ "preload" : false, "url" : "prototype/button.html", "*active" : true }'><a href="#tab3">Button</a></li>
 			</ul>
 			<div id="tab1" class="pre">Geoffrey Arnold "Jeff" Beck (born 24 June 1944) is an English rock guitarist. He is one of the three noted guitarists to have played with The Yardbirds (the other two being Eric Clapton and Jimmy Page). Beck also formed The Jeff Beck Group and Beck, Bogert & Appice.
 

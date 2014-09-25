@@ -1,7 +1,7 @@
 (function(window, $) {
 	var version = "0.8.0.0", N;
 
-	// Define a local copy of jQuery
+	// Use jQuery init
 	N = function(selector, context) {
 		return new $.fn.init(selector, context);
 	};

@@ -259,7 +259,7 @@
 					this_[opts.closeMode]();
 				});
 
-				// remove message overlay for modal(false)
+				// remove modal overlay layer for (opts.modal = false)
 				if(!opts.modal) {
 					opts.msgContext.remove();
 				}
@@ -307,7 +307,7 @@
 					opts.msgContext = opts.context.after('<span class="msg__"><ul class="msg_line_box__"></ul></span>')
 										.next("span.msg__").css({
 											"display" : "none",
-											"position": "fixed" //not absolute, because not equal message context offset and input element offset in popup
+											"position": "fixed" //not absolute, because they are not equal message context offset and input element offset in popup
 										});
 					opts.msgContext.append('<a href="#" class="msg_close__">' + opts.input.closeBtn + '</a>');
 					opts.msgContext.prepend('<ul class="msg_arrow__"></ul>');
@@ -343,7 +343,7 @@
 				}
 			},
 			resetOffSetInputEle : function(opts) {
-				//TODO how solution when input element's right margin smaller than message context width
+				//TODO how to solution when input element's right margin smaller than message context width
 				opts.msgContext.offset({
 					left : opts.context.offset().left + opts.context.outerWidth(),
 					top : opts.context.offset().top + 1
@@ -525,7 +525,7 @@
 				context : obj,
 				contents : $('<div class="datepicker__"></div>'),
 				monthonly : false,
-				mouseonly : true, //TODO 키보드로 입력할수 있도록 기능 개선
+				mouseonly : true, //TODO improve to input keyboard
 				onSelect : null
 			};
 
@@ -779,8 +779,8 @@
 				onOpenData : null,
 				onClose : null,
 				onCloseData : null,
-				preLoad : false,
-				//TODO onLoad 도 필요한지 고민 해 보기
+				preload : false,
+				//TODO think more whether "onLoad event" needs or not
 			};
 
 			try {
@@ -819,7 +819,7 @@
 			}
 
 			if(this.options.url !== null) {
-				if(this.options.preLoad) {
+				if(this.options.preload) {
 					Popup.loadEle.call(this, function(context) {
 						// this callback function is for async page load
 						this.options.context = context;
@@ -843,7 +843,7 @@
 				var opts = this.options;
 				var this_ = this;
 
-				if(this.options.url !== null && !opts.preLoad) {
+				if(this.options.url !== null && !opts.preload) {
 					Popup.loadEle.call(this, function(context) {
 						// this callback function is for async page load
 						opts.context = context;
@@ -851,7 +851,7 @@
 
 						Popup.popOpen.call(this_, onOpenData);
 					});
-					opts.preLoad = true;
+					opts.preload = true;
 				} else {
 					Popup.popOpen.call(this, onOpenData);
 				}
@@ -926,7 +926,7 @@
 						// set Communicator.request
 						sc.request = this.request;
 
-						// set caller attribute in Service Conteroller in tab content that is Popup instance
+						// set caller attribute in Conteroller in tab content, that is Popup instance
 						sc.caller = this_;
 
 						// set opener to popup's controller
@@ -953,7 +953,7 @@
 				}
 				this_.alert.show();
 
-				// "onOpen" event execute
+				// execute "onOpen" event
 				if(opts.onOpen !== null) {
 					if(onOpenData !== undefined) {
 						opts.onOpenData = onOpenData;
@@ -972,12 +972,12 @@
 			this.options = {
 				context : obj,
 				links : obj.find("li"),
-				classOpts : [], // [{ width: "auto", url: undefined, preLoad: false, active: false, onOpen: undefined }]
+				classOpts : [], // [{ width: "auto", url: undefined, preload: false, active: false, onOpen: undefined }]
 				randomSel : false,
 				onActive : null,
 				contents : obj.find("div"),
 				effect : false
-				// TODO onLoad 도 필요한지 고민 해 보기
+				//TODO think more whether "onLoad event" needs or not
 			};
 
 			try {
@@ -1047,7 +1047,7 @@
 						}
 					}
 
-					if(this.preLoad !== undefined && this.preLoad === true) {
+					if(this.preload !== undefined && this.preload === true) {
 						if(this.url !== undefined) {
 							Tab.loadContent.call(this_, this.url, i);
 						}
@@ -1067,7 +1067,7 @@
 					opts.links.removeClass("tab_active__");
 					thisEle.addClass("tab_active__");
 
-					if(thisClassOpts.preLoad === undefined || thisClassOpts.preLoad === false) {
+					if(thisClassOpts.preload === undefined || thisClassOpts.preload === false) {
 						// load content
 						if(thisClassOpts.url !== undefined && thisEle.data("loaded") === undefined) {
 							Tab.loadContent.call(this_, thisClassOpts.url, thisIdx);
@@ -1079,8 +1079,8 @@
 						opts.onActive.call(this, this, opts.links, opts.contents);
 					}
 
-					// run "onOpen"(class option) event
-					// onOpen 이벤트는 탭의 class option에 url 이 지정되어있고 탭이 활성화 됐을때만 발생함.
+					// excute "onOpen"(class option) event
+					// excuted only when defined url with class(inline) option and tab is active
 					if(thisClassOpts.onOpen !== undefined && thisEle.data("loaded")) {
 						var sc = content.find(">").instance("cont");
 						if(sc[thisClassOpts.onOpen] !== undefined) {
@@ -1117,7 +1117,7 @@
 					// set Communicator.request
 					sc.request = this.request;
 
-					// set caller attribute in Service Conteroller in tab content that is Tab instance
+					// set caller attribute in conteroller in tab content that is Tab instance
 					sc.caller = this_;
 
 					// set tab instance to tab contents controller
@@ -1132,7 +1132,7 @@
 						var classOpts = opts.classOpts[targetIdx];
 						if(classOpts.onOpen !== undefined) {
 							if(sc[classOpts.onOpen] !== undefined) {
-								//TODO onOpenData 는 어떻게 할지 더 고민 해 보기.
+								//TODO think more how to work "onOpenData"
 								sc[classOpts.onOpen]();
 							} else {
 								N.warn("[N.tab.loadContent]\"" + classOpts.onOpen + "\" onOpen callback function is undefined in tab content's Service Controller");
@@ -1521,7 +1521,7 @@
 	        		opts.extRow = 0;
 	        	}
 
-	        	//TODO opts.row만 들어왔을때 그리드에서 어떻게 update 할건지 고민
+	        	//TODO think more how to [update] when be set only opts.row value
 		        N.ds.instance(opts.extObj !== null ? opts.extObj : this).notify(opts.extRow > -1 ? opts.extRow : opts.row);
 		        this.update(opts.row);
 				return this;
@@ -1688,7 +1688,7 @@
 			try {
 				this.options = $.extend({}, this.options, N.context.attr("ui")["grid"]);
 
-				//$.extend method is don't extend object type
+				//For $.extend method does not extend object type
 				this.options.scrollPaging = $.extend({}, this.options.scrollPaging, N.context.attr("ui")["grid"]["scrollPaging"]);
 			} catch (e) {
 				N.error("[N.grid]" + e, e);
@@ -1696,7 +1696,7 @@
 
 			if (N.isPlainObject(opts)) {
 				$.extend(this.options, opts);
-				//$.extend method is don't extend object type
+				//For $.extend method does not extend object type
 				if(opts.scrollPaging !== undefined) {
 					$.extend(this.options.scrollPaging, opts.scrollPaging);
 				}
@@ -1745,7 +1745,7 @@
 				Grid.fixHeader.call(this);
 			}
 
-			// set tbody cell id info into th cell in thead
+			// set tbody cell's id attribute into th cell in thead
 			this.thead = Grid.setTheadCellInfo.call(this);
 
 			// sortable, v(ertical)Resizable
@@ -1787,9 +1787,9 @@
 
 				//empty removedData;
 				opts.removedData = [];
-				//for internal call bind method by scrollPaging
+				//for internal call by scrollPaging
 				var interCall = arguments[1] !== undefined && arguments[1] === true ? true : false;
-				//for rebind new data
+				//to rebind new data
 				if(data !== undefined) {
 					opts.data = N.type(data) === "array" ? N(data) : data;
 				}
@@ -1819,7 +1819,7 @@
 					var delay = opts.createRowDelay;
 					var lastIdx;
 					var render = function() {
-						// clone tbody for create new line
+						// clone tbody for create new row
 						tbodyTempClone = this_.tbodyTemp.clone(true, true).hide();
 						opts.context.append(tbodyTempClone);
 
@@ -1965,7 +1965,7 @@
 			fixHeader : function() {
 				var opts = this.options;
 
-				// addTop option is unconditional [true] when fixed header mode
+				// addTop option is asolute true when fixed header mode
 				opts.addTop = true;
 
 				opts.context.css({
@@ -2174,7 +2174,7 @@
 		            		targetCellEleWrap = targetCellEle.parents("div.tbody_wrap__");
 		            	}
 
-		            	// for prevent sort event
+		            	// to block sort event
 		            	currCellEle.data("sortLock", true);
 
 		            	defWidth = currCellEle.innerWidth();
@@ -2209,7 +2209,7 @@
 				        					targetCellEleWrap.width(currCellEleTable.width() + scrollbarWidth);
 				        				}
 					        		} else {
-					        			// for keeping table layout
+					        			// to keep the table layout
 					        			currCellEle.css("width", "");
 				        				currNextCellEle.css("width", "");
 				        				if(targetCellEle !== undefined) {
