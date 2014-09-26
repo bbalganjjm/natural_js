@@ -457,7 +457,7 @@
 	                	}
             			opts.context.css("line-height", (parseInt(opts.context.css("line-height")) - 3) + "px");
             		}
-	                
+
 	                opts.context.unbind("mouseover.button mousedown.button mouseup.button mouseout.button");
 	                opts.context.bind("mouseover.button", function() {
 	                    if (!opts.context.hasClass("disabled")) {
@@ -804,7 +804,7 @@
 				}
 			}
 
-			//set opener(parent page's controller)
+			//set opener(parent page's Controller)
 			try {
 				var viewContext = arguments.callee.caller.arguments.callee.caller.arguments[0];
 				if(viewContext.instance !== undefined) {
@@ -814,7 +814,7 @@
 				}
 			} catch(e) {
 				if(this.options.url !== null) {
-					N.warn("[N.popup][" + e + "] Don't set opener object in popup's controller")
+					N.warn("[N.popup][" + e + "] Don't set opener object in popup's Controller")
 				}
 			}
 
@@ -921,7 +921,7 @@
 
 					var sc = opts.context.instance("cont");
 
-					// set popup instance to popup's controller
+					// set popup instance to popup's Controller
 					if(sc !== undefined) {
 						// set Communicator.request
 						sc.request = this.request;
@@ -929,7 +929,7 @@
 						// set caller attribute in Conteroller in tab content, that is Popup instance
 						sc.caller = this_;
 
-						// set opener to popup's controller
+						// set opener to popup's Controller
 						if(this_.opener !== undefined) {
 							sc["opener"] = this_.opener;
 						}
@@ -1120,7 +1120,7 @@
 					// set caller attribute in conteroller in tab content that is Tab instance
 					sc.caller = this_;
 
-					// set tab instance to tab contents controller
+					// set tab instance to tab contents Controller
 					if(sc !== undefined) {
 						if(sc.init !== undefined) {
 							sc.init(sc.view, this.request);
@@ -2038,7 +2038,7 @@
 						window.scrollTo(scrollPosition[0], scrollPosition[1])
 					});
 		        }
-		        
+
 		        // Scroll paging
 		        var this_ = this;
 		        var defSPSize = opts.scrollPaging.size;

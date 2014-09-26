@@ -3,7 +3,7 @@
 		<h1><b>Communicator</b> : Communicator(N.comm)는 Communicator 를 이용하여 서버로 부터 JSON 데이터를 가져오고 컴포넌트의 데이터나 파라미터를 서버로 다시 보내는 등의 역할을 수행 합니다.</h1>
 		<h2>[Get json data from server or file] 버튼을 클릭하면 서버로 부터 JSON 데이터(/Natural-JS/prototype/data/grid.json)를 가져옵니다</h2>
 		<h2>[Page embed] 버튼을 클릭하면 서버로 지정한 페이지를 가져와 지정한 영역에 표시 해 줍니다.</h2>
-		<h2>Communicator 로 JSON 데이터가 아닌 HTML 페이지를 불러올경우 불러온 페이지의 Controller(N.cont) 의 멤버변수로 request(this.request) 객체를 자동으로 지정 해 줍니다. 
+		<h2>Communicator 로 JSON 데이터가 아닌 HTML 페이지를 불러올경우 불러온 페이지의 Controller(N.cont) 의 멤버변수로 request(this.request) 객체를 자동으로 지정 해 줍니다.
 		<br />request 객체는 다음과 같은 기능을 제공 해 줍니다.<br />
 			 + attr(name, obj) : obj인자를 입력하면 obj<br />
 			 + param(name) : obj인자를 입력하면 obj<br />
@@ -20,23 +20,23 @@
 	<div class="divBar">DEMO</div>
 	<div class="demoBox">
 		<p class="section">1. Get json data from server or file</p>
-		
+
 		<div class="btnBox" align="center">
 			<a id="btnGetJson" href="#" class='{ "color": "skyblue", "size": "large" }'>Submit</a>
 		</div>
-		
+
 		<p>Result : </p>
 		<div class="result" style="height: 100px;"></div>
-		
-		<p class="section">2. Get html page(view & controller) from server or file</p>
-		
+
+		<p class="section">2. Get html page(View & Controller) from server or file</p>
+
 		<p>Default options : </p>
 		<table class="form" style="width: 100%;">
 			<tr>
 				<th width="10%" align="right">context</th>
-				<td width="40%"><input id="context" type="text" value="div.result:eq(1)" readonly="readonly" /> Target context</td>	
+				<td width="40%"><input id="context" type="text" value="div.result:eq(1)" readonly="readonly" /> Target context</td>
 				<th width="10%" align="right">url</th>
-				<td width="40%"><input id="url" type="text" value="prototype/datepicker.html" /> Target url</td>			
+				<td width="40%"><input id="url" type="text" value="prototype/datepicker.html" /> Target url</td>
 			</tr>
 			<tr>
 				<th align="right">async</th>
@@ -57,7 +57,7 @@ function() {
 				</td>
 			</tr>
 		</table>
-		
+
 		<p>Method options : </p>
 		<table class="form" style="width: 100%;">
 			<tr>
@@ -75,11 +75,11 @@ function(data) {
 				<td width="80%" colspan="3"><textarea id="request" rows="2" cols="60">Hello datepicker~!</textarea><br /> Request attribute</td>
 			</tr>
 		</table>
-		
+
 		<div class="btnBox" align="center">
 			<a id="btnGetPage" href="#" class='{ "color": "skyblue", "size": "large" }'>Submit</a>
 		</div>
-		
+
 		<p>Result : </p>
 		<div class="result" style="height: 552px;"></div>
 	</div>
