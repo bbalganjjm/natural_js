@@ -1,3 +1,12 @@
+/*!
+ * Natural-UI v0.8.0.0
+ * bbalganjjm@gmail.com
+ *
+ * Copyright 2014 KIM HWANG MAN
+ * Released under the GPL license
+ *
+ * Date: 2014-09-26T11:11Z
+ */
 (function(window, $) {
 	var version = "0.8.0.0";
 

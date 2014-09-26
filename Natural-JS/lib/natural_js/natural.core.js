@@ -1,3 +1,16 @@
+/*!
+ * Natural-CORE v0.8.0.0
+ * bbalganjjm@gmail.com
+ *
+ * Includes json2.js & formatdate.js
+ * json2.js : http://javascript.crockford.com/jsmin.html
+ * formatdate.js : http://www.svendtofte.com/javascript/javascript-date-string-formatting/
+ *
+ * Copyright 2014 KIM HWANG MAN
+ * Released under the GPL license
+ *
+ * Date: 2014-09-26T11:11Z
+ */
 (function(window, $) {
 	var version = "0.8.0.0", N;
 
