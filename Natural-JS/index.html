@@ -83,16 +83,21 @@ var IndexController = {
 	    });
     },
     getSourceCode : function(url, target) {
-    	var isEmbed = target.parents(".popup__, .tab__, .result").length > 0 ? true : false;
-    	if(!isEmbed) {
-    		N.comm({
-        		url : url,
-        		contentType : "application/x-www-form-urlencoded",
-        		dataType : "html"
-        	}).submit(function(html) {
-        		target.text(html.replace(/\t/g, "    "));
-        	});
-    	}
+    	target.prev("div.divBar").append(" [ Click! this bar ]").css("cursor", "pointer").click(function() {
+    		if(target.is(":visible")) {
+    			target.slideUp(300);
+    		} else {
+    			target.slideDown(500);
+    		}
+    		
+    	});
+   		N.comm({
+       		url : url,
+       		contentType : "application/x-www-form-urlencoded",
+       		dataType : "html"
+       	}).submit(function(html) {
+       		target.text(html.replace(/\t/g, "    "));
+       	});
     }
 }
 $(document).ready(function() {

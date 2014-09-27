@@ -209,21 +209,14 @@ div#main div#contents {
 }
 
 .sourceBox {
+	display: none;
 	white-space: pre;
 	word-break: break-word;
 	overflow-x: auto;
 	padding: 10px;
 	background-color: #efefef;
-	color: #999999;
 	font-family: "Courier New";
-
 }
-
-.sourceBox:hover {
-	color: inherit;
-	background-color: inherit;
-}
-
 
 /* form example */
 table.form {
