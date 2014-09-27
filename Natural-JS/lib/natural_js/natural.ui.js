@@ -1163,9 +1163,9 @@
 		});
 
 		// Select
-		var Select = N.select = function(obj, opts) {
+		var Select = N.select = function(data, opts) {
 			this.options = {
-				data : obj,
+				data : data,
 				context : null,
 				key : null,
 				val : null,
@@ -1206,9 +1206,9 @@
 					$(opts.context).vals(function(i) {
 						rtnData.push(opts.data[i]);
 					});
-					return rtnData.length === 1 ? rtnData[0] : rtnData;
+					return rtnData;
 				} else {
-					return opts.data;
+					return opts.data.get();
 				}
 			},
 			context : function(sel) {
@@ -1281,9 +1281,9 @@
 		});
 
 		// Form
-		var Form = N.form = function(obj, opts) {
+		var Form = N.form = function(data, opts) {
 			this.options = {
-				data : N.type(obj) === "array" ? N(obj) : obj,
+				data : N.type(data) === "array" ? N(data) : data,
 				row : -1,
 				context : null,
 				validate : true,
@@ -1332,7 +1332,7 @@
 				if(selFlag !== undefined && selFlag === true) {
 					return opts.data[opts.row];
 				} else {
-					return opts.data;
+					return opts.data.get();
 				}
 			},
 			row : function() {
@@ -1671,9 +1671,9 @@
 		});
 
 		// Grid
-		var Grid = N.grid = function(obj, opts) {
+		var Grid = N.grid = function(data, opts) {
 			this.options = {
-				data : N.type(obj) === "array" ? N(obj) : obj,
+				data : N.type(data) === "array" ? N(data) : data,
 				removedData : [],
 				context : null,
 				heigth : 0,
@@ -2039,18 +2039,25 @@
 						// lock scroll position
 						var scrollPosition = [ self.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft,
 								self.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop ];
-						var html = jQuery('html');
+						var html = $('html');
 						html.data('scroll-position', scrollPosition);
 						html.data('previous-overflow', html.css('overflow'));
 						html.css('overflow', 'hidden');
 						window.scrollTo(scrollPosition[0], scrollPosition[1]);
+						
+						if($(window.document).height() > $(window).height()) {
+							$("body").css("margin-right", "+=" + scrollbarWidth + "px");							
+						}
 					});
 					opts.context.bind("mouseleave.grid.fixHeader", function() {
 						// un-lock scroll position
-						var html = jQuery('html');
+						var html = $('html');
 						var scrollPosition = html.data('scroll-position');
 						html.css('overflow', html.data('previous-overflow'));
 						window.scrollTo(scrollPosition[0], scrollPosition[1])
+						if($(window.document).height() > $(window).height()) {
+							$("body").css("margin-right", "-=" + scrollbarWidth + "px");							
+						}
 					});
 		        }
 

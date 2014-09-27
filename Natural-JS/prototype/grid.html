@@ -122,6 +122,7 @@ function(context, data) {
 						<option value="insert">insert</option>
 						<option value="update">update</option>
 						<option value="delete">delete</option>
+						<option value="">all</option>
 					</select> row status
 				</td>
 			</tr>
@@ -303,7 +304,7 @@ N("div#gridEx").cont({
     	N("a#btnData", view).click(function(e) {
     		e.preventDefault();
     		grid.context().parent().alert({
-        		msg : '<div class="pre">' + N.json.format(grid.data(N("select#data", view).val())) + '</div>',
+        		msg : '<div class="pre">' + N.json.format(grid.data(N.string.trimToUndefined(N("select#data", view).val()))) + '</div>',
         		width : 400,
         		height : 250
         	}).show();
