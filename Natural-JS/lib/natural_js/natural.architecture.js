@@ -222,6 +222,7 @@
 					// this.obj : Defined by Communicator.request constructor;
 					return this.obj;
 				}
+				return this;
 			},
 			/**
 			 * get query parmas from request url
