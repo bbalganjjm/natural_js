@@ -781,6 +781,7 @@
 				height : 0,
 				width : 0,
 				closeMode : "hide",
+				alwaysOnTop : false,
 				"confirm" : true,
 				onOk : null,
 				onCancel : null,
@@ -864,6 +865,7 @@
 				} else {
 					Popup.popOpen.call(this, onOpenData);
 				}
+				return this;
 			},
 			close : function(onCloseData) {
 				var opts = this.options;
@@ -876,6 +878,7 @@
 					opts.onClose.call(this, opts.onCloseData);
 				}
 				this.alert.hide();
+				return this;
 			},
 			changeEvent : function(name, callback) {
 				this.options[name] = callback;
@@ -883,6 +886,7 @@
 			},
 			remove : function() {
 				this.alert.remove();
+				return this;
 			}
 		});
 
@@ -981,7 +985,7 @@
 			this.options = {
 				context : obj,
 				links : obj.find("li"),
-				classOpts : [], // [{ width: "auto", url: undefined, preload: false, active: false, onOpen: undefined }]
+				classOpts : [], // [{ url: undefined, width: "auto", active: false, preload: false, onOpen: undefined }]
 				randomSel : false,
 				onActive : null,
 				contents : obj.find("div"),
@@ -1024,6 +1028,7 @@
 				if(idx !== undefined) {
 					$(this.options.links.get(idx)).click();
 				}
+				return this;
 			}
 		});
 
@@ -1919,6 +1924,7 @@
 		        }
 
 				N.ds.instance(this).notify();
+				return this;
 			},
 			revert : function(row) {
 				var opts = this.options;
