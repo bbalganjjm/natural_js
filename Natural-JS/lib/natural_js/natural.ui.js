@@ -1289,8 +1289,8 @@
 				validate : true,
 				html : false,
 				addTop : false,
-				fRules : null, //TODO test
-				vRules : null, //TODO test
+				fRules : null,
+				vRules : null,
 				extObj : null, // for N.grid,
 				extRow : -1  // for N.grid
 			};
@@ -1330,7 +1330,7 @@
 			data : function(selFlag) {
 				var opts = this.options;
 				if(selFlag !== undefined && selFlag === true) {
-					return opts.data[opts.row];
+					return [ opts.data[opts.row] ];
 				} else {
 					return opts.data.get();
 				}
@@ -1655,6 +1655,8 @@
 							$(eles.get(0)).trigger("select.form.dataSync");
 						}
 					}
+				} else {
+					this.options.data[this.options.row][key] = val;
 				}
 				return this;
 			},
@@ -1677,13 +1679,13 @@
 				removedData : [],
 				context : null,
 				heigth : 0,
-				windowScrollLock : true,
-				html : false,
 				validate : true,
+				html : false,
 				addTop : false,
 				resizable : false,
 				vResizable : false,
 				sortable : false,
+				windowScrollLock : true,
 				select : false,
 				multiselect : false,
 				hover : false,
@@ -1692,11 +1694,11 @@
 					idx : 0,
 					size : 100
 				},
-				rowHandler : null,
-				onSelect : null,
-				onBind : null,
 				fRules : null,
 				vRules : null,
+				rowHandler : null,
+				onSelect : null,
+				onBind : null
 			};
 
 			try {
@@ -1737,15 +1739,16 @@
 				var this_ = this;
 				// bind tbody click event for select, multiselect options
 				this.tbodyTemp.bind("click.grid.tbody", function() {
-					if($(this).hasClass("grid_selected__")) {
-						$(this).removeClass("grid_selected__");
+					var thisEle = $(this);
+					if(thisEle.hasClass("grid_selected__")) {
+						thisEle.removeClass("grid_selected__");
 					} else {
 						if(!this_.options.multiselect) {
 							this_.options.context.find("> tbody").removeClass("grid_selected__");
 						}
-						$(this).addClass("grid_selected__");
+						thisEle.addClass("grid_selected__");
 						if(this_.options.onSelect !== null) {
-							this_.options.onSelect($(this).index()-1, $(this), this_.options.data);
+							this_.options.onSelect.call(thisEle, thisEle.index()-1, thisEle, this_.options.data);
 						}
 					}
 				});
@@ -1838,7 +1841,7 @@
 						opts.context.append(tbodyTempClone);
 
 						if(opts.rowHandler !== null) {
-							opts.rowHandler.call(this_, i, tbodyTempClone, opts.data[i]);
+							opts.rowHandler.call(tbodyTempClone, i, tbodyTempClone, opts.data[i]);
 						}
 
 						// for row data bind, use N.form
@@ -1862,7 +1865,7 @@
 								render();
 								if(i === lastIdx) {
 									if(opts.onBind !== null) {
-										opts.onBind.call(this, opts.context, opts.data);
+										opts.onBind.call(opts.context, opts.context, opts.data);
 									}
 								}
 							}
