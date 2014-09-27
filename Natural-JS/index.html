@@ -83,7 +83,7 @@ var IndexController = {
 	    });
     },
     getSourceCode : function(url, target) {
-    	target.prev("div.divBar").append(" [ Click! this bar ]").css("cursor", "pointer").click(function() {
+    	target.prev("div.divBar").css("cursor", "pointer")unbind("click").bind("click", function() {
     		if(target.is(":visible")) {
     			target.slideUp(300);
     		} else {
