@@ -125,7 +125,7 @@ N("div#gridFormPopup").cont({
 	grid : undefined,
     init : function(view, request) {
     	// put source code
-    	IndexController.getSourceCode(request.get("url"), N("div.sourceBox"));
+    	IndexController.getSourceCode(request.get("url"), N("div.sourceBox", view));
 
     	this.initButton();
     	//this.createSelect(data);

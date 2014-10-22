@@ -56,7 +56,7 @@
 N("div#button").cont({
     init : function(view, request) {
     	// put source code
-    	IndexController.getSourceCode(request.get("url"), N("div.sourceBox"));
+    	IndexController.getSourceCode(request.get("url"), N("div.sourceBox", view));
 
     	// make button
     	this.initButton(view);

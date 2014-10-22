@@ -3,7 +3,7 @@
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
- * Released under the GPL license
+ * Released under the LGPL license
  *
  * Date: 2014-09-26T11:11Z
  */
@@ -1685,7 +1685,7 @@
 				resizable : false,
 				vResizable : false,
 				sortable : false,
-				windowScrollLock : true,
+				windowScrollLock : false,
 				select : false,
 				multiselect : false,
 				hover : false,
