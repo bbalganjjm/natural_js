@@ -382,7 +382,7 @@
 			/**
 			 * 그리드에서 스크롤할때 위, 아래 끝에 다다르면 페이지가 스크롤 되는것을 방지하기 위해 true 로 지정하면 window의 스크롤을 감췄다가 그리드 영역을 벗어나면 다시 보여줌
 			 */
-			"windowScrollLock" : true,
+			"windowScrollLock" : false,
 			/**
 			 * bind 시 row 생성 delay(ms)
 			 */
