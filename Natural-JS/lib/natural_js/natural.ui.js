@@ -587,8 +587,8 @@
 				// create year items
 				var yearsPanel = $('<div class="datepicker_years_panel__"></div>');
 				yearsPanel.css({
-					width: "40px",
-					float: "left"
+					"width": "40px",
+					"float": "left"
 				});
 				var yearItem = $('<div align="center"></div>');
 				yearItem.css({
@@ -628,15 +628,15 @@
 				// create month items
 				var monthsPanel = $('<div class="datepicker_months_panel__"></div>');
 				monthsPanel.css({
-					width: "60px",
-					float: "left",
+					"width": "60px",
+					"float": "left",
 					"margin-left": "3px"
 				});
 				var monthItem = $('<div align="center"></div>');
 				monthItem.css({
 					"line-height": "25px",
-					width: "28px",
-					float: "left"
+					"width": "28px",
+					"float": "left"
 				}).click(function(e) {
 					e.preventDefault();
 					monthsPanel.find("div.datepicker_month_item__").removeClass("datepicker_month_selected__");
@@ -696,15 +696,15 @@
 					var days = N.message.get(opts.message, "days").split(",");
 					var daysPanel = $('<div class="datepicker_days_panel__"></div>');
 					daysPanel.css({
-						width: "210px",
-						float: "left",
+						"width": "210px",
+						"float": "left",
 						"margin-left": "3px"
 					});
 					var dayItem = $('<div align="center"></div>');
 					dayItem.css({
 						"line-height": "25px",
-						width: "28px",
-						float: "left"
+						"width": "28px",
+						"float": "left"
 					}).click(function(e) {
 						e.preventDefault();
 						var thisEle = $(this);
@@ -789,7 +789,7 @@
 				onOpenData : null,
 				onClose : null,
 				onCloseData : null,
-				preload : false,
+				preload : false
 				//TODO think more whether "onLoad event" needs or not
 			};
 
@@ -2008,7 +2008,7 @@
 		        thead.find("tfoot").remove();
 		        var theadWrap = thead.wrap('<div class="thead_wrap__"/>').parent().css({
 		        	"padding-right" : scrollbarWidth + "px",
-		        	"margin-left" : "-1px",
+		        	"margin-left" : "-1px"
 		        });
 		        gridWrap.prepend(theadWrap);
 
@@ -2021,16 +2021,16 @@
 	                "border-bottom" : "none"
 		        });
 		        opts.context.find("> tbody td").css({
-	                "border-top" : "none",
+	                "border-top" : "none"
 		        });
 		        this.tbodyTemp.find("td").css({
-	                "border-top" : "none",
+	                "border-top" : "none"
 		        });
 		        var tbodyWrap = opts.context.wrap('<div class="tbody_wrap__"/>').parent().css({
 		        	"height" : String(opts.height) + "px",
 		        	"overflow-y" : "scroll",
 		        	"margin-left" : "-1px",
-		        	"border-bottom" : borderBottom,
+		        	"border-bottom" : borderBottom
 		        });
 		        // for IE
 		        if(N.browser.is("ie")) {
@@ -2047,9 +2047,9 @@
 						html.data('previous-overflow', html.css('overflow'));
 						html.css('overflow', 'hidden');
 						window.scrollTo(scrollPosition[0], scrollPosition[1]);
-						
+
 						if($(window.document).height() > $(window).height()) {
-							$("body").css("margin-right", "+=" + scrollbarWidth + "px");							
+							$("body").css("margin-right", "+=" + scrollbarWidth + "px");
 						}
 					});
 					opts.context.bind("mouseleave.grid.fixHeader", function() {
@@ -2059,7 +2059,7 @@
 						html.css('overflow', html.data('previous-overflow'));
 						window.scrollTo(scrollPosition[0], scrollPosition[1])
 						if($(window.document).height() > $(window).height()) {
-							$("body").css("margin-right", "-=" + scrollbarWidth + "px");							
+							$("body").css("margin-right", "-=" + scrollbarWidth + "px");
 						}
 					});
 		        }
@@ -2099,7 +2099,7 @@
 			        tfoot.find("tbody").remove();
 			        tfootWrap = tfoot.wrap('<div class="tfoot_wrap__"/>').parent().css({
 			        	"padding-right" : scrollbarWidth + "px",
-			        	"margin-left" : "-1px",
+			        	"margin-left" : "-1px"
 			        });
 			        gridWrap.append(tfootWrap);
 		        }
