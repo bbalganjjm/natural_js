@@ -6,7 +6,7 @@ Reference
 =========
 Natural-JS Libraries Directory : /lib/natural_js/<br/>
 DEMO : http://211.110.5.41/naturaljs/index.html<br/>
-Basic Documents : /docs/Natural-JS_Basic.pdf<br/>
+Basic Document : /docs/Natural-JS_Basic.pdf<br/>
 API Document : /docs/Natural-JS_API_Document.pdf<br/>
 
 License
