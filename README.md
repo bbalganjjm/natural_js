@@ -6,9 +6,9 @@ Reference
 ==========
 DEMO : http://211.110.5.41/naturaljs/index.html
 
-Basic Documents : /Natural-JS/docs/Natural-JS_Basic.pdf
+Basic Documents : /docs/Natural-JS_Basic.pdf
 
-API Document : /Natural-JS/docs/Natural-JS_API_Document.pdf
+API Document : /docs/Natural-JS_API_Document.pdf
 
 License
 =======
