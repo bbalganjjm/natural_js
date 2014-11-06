@@ -4,6 +4,8 @@ Natural-JS 는 Natural-CORE, Natural-ARCHITECTURE, Natural-DATA, Natural-UI 로 
 
 Reference
 ==========
+Natural-JS Libraries Directory : /lib/natural_js/
+
 DEMO : http://211.110.5.41/naturaljs/index.html
 
 Basic Documents : /docs/Natural-JS_Basic.pdf
