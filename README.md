@@ -5,7 +5,6 @@ Natural-CORE is CORE library package that is used internally by the framework.<b
 Natural-ARCHITECTURE is CVC Architecture Pattern based Architecture Framework. it makes structured and simplifies a complex web UI environment.<br/>
 Natural-DATA provides a module for Data processing and data synchronization.<br/>
 Natural-UI provides a variety of components such as HTML-based Grid, Form, Popup that help improve the user experience and web development productivity.<br/>
-<br/>
 
 Reference
 =========
