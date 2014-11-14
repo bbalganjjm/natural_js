@@ -12,9 +12,8 @@ Features
 2. Provide UI-Architecture that resembling servlet mvc model.<br/>
 3. Provide various UI-Components.<br/>
 &nbsp;- Formater, Validator<br/>
-&nbsp;- Grid, Form<br/>
-&nbsp;- Alert, Popup, Tab<br/>
-&nbsp;- Select, Button, Datepicker<br/>
+&nbsp;- Grid, Form, Select<br/>
+&nbsp;- Alert, Popup, Tab, Button, Datepicker<br/>
 4. Real-time data synchronization and interaction for each ui-component.<br/>
 
 Reference
