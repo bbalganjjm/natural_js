@@ -9,7 +9,7 @@ Natural-UI provides a variety of components such as HTML-based Grid, Form, Popup
 Features
 ========
 1. Complete separation of the design area and development areas.<br/>
-2. Provide UI-Architecture that resembling servlet mvc model.<br/>
+2. Provide UI-Architecture that resembling java servlet architecture.<br/>
 3. Provide various UI-Components.<br/>
 &nbsp;- Formater, Validator<br/>
 &nbsp;- Grid, Form, Select<br/>
