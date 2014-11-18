@@ -11,8 +11,8 @@
 	<div class="divBar">DEMO</div>
 	<div class="demoBox">
 		<div id="defBtnBox" class="btnBox" align="center">
-			<a id="btnBind" href="#" class='{ "color": "skyblue", "size": "large" }'>bind</a>
-			<a id="btnModifiedData" href="#" class='{ "color": "skyblue", "size": "large" }'>get modified data</a>
+			<a id="btnBind" href="#" data-opts='{ "color": "skyblue", "size": "large" }'>bind</a>
+			<a id="btnModifiedData" href="#" data-opts='{ "color": "skyblue", "size": "large" }'>get modified data</a>
 		</div>
 		<table id="grid" class="grid__">
 			<thead>
@@ -43,7 +43,7 @@
 			</tbody>
 		</table>
 
-		<table id="form" class='form' title="폼">
+		<table id="form" class="form" title="폼">
 			<tr>
 				<th width="85" align="right"><label for="picture">picture</label></th>
 				<td width="*"><img id="picture" /></td>
@@ -51,25 +51,25 @@
 			<tr>
 				<th align="right"><label for="name">name</label></th>
 				<td>
-					<input id="name" type="text" class='{ "validate" : [["required"]] }' />
+					<input id="name" type="text" data-validate='[["required"]]' />
 				</td>
 			</tr>
 			<tr>
 				<th align="right"><label for="email">email</label></th>
 				<td>
-					<input id="email" type="text" class='{ "format" : [["trimtoempty"], ["generic", "@@@@@@＊＊＊"]], "validate" : [["required"], ["email"]] }' />
+					<input id="email" type="text" data-format='[["trimtoempty"], ["generic", "@@@@@@＊＊＊"]]' data-validate='[["required"], ["email"]]' />
 				</td>
 			</tr>
 			<tr>
 				<th align="right"><label for="_id">password</label></th>
 				<td>
-					<input id="_id" type="password" class='{ "validate" : [["required"]] }' />
+					<input id="_id" type="password" data-validate='[["required"]]' />
 				</td>
 			</tr>
 			<tr>
 				<th align="right"><label for="balance">balance</label></th>
 				<td>
-					<input id="balance" type="text" class='{ "format" : [["trimtoempty"], ["numeric", "$#,###.##0"]], "validate" : [["required"], ["decimal"]] }' />
+					<input id="balance" type="text" data-format='[["trimtoempty"], ["numeric", "$#,###.##0"]]' data-validate='[["required"], ["decimal"]]' />
 				</td>
 			</tr>
 			<tr>
@@ -88,17 +88,17 @@
 			<tr>
 				<th align="right"><label for="company">company</label></th>
 				<td>
-					<input id="company" type="text" class='{ "validate" : [["required"]] }' />
+					<input id="company" type="text" data-validate='[["required"]]' />
 				</td>
 			</tr>
 			<tr>
 				<th align="right"><label for="registered">registered</label></th>
-				<td id="registered" class='{ "format": [["date", 8]] }'></td>
+				<td id="registered" data-format='[["date", 8]]'></td>
 			</tr>
 			<tr>
 				<th align="right"><label for="about">about</label></th>
 				<td>
-					<textarea id="about" rows="5" cols="80" class='{ "format" : [["trimtoempty"], ["limit", "50", "..."]], "validate" : [["required"], ["korean"]] }'></textarea>
+					<textarea id="about" rows="5" cols="80" data-format='[["trimtoempty"], ["limit", "50", "..."]]' data-validate='[["required"], ["korean"]]'></textarea>
 				</td>
 			</tr>
 			<tr>

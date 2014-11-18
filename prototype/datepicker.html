@@ -21,8 +21,8 @@ function() {
 		</table>
 
 		<div align="center" class="btnBox">
-			<a id="btnApply" href="#" class='{ "color": "skyblue", "size": "large" }'>Apply Datepicker</a>
-			<a id="btnReload" href="#" class='{ "color": "white", "size": "large" }'>Reload this page</a>
+			<a id="btnApply" href="#" data-opts='{ "color": "skyblue", "size": "large" }'>Apply Datepicker</a>
+			<a id="btnReload" href="#" data-opts='{ "color": "white", "size": "large" }'>Reload this page</a>
 		</div>
 
 		<p>Result : </p>
@@ -47,7 +47,7 @@ N("div#datepickerSample").cont({
 
      	// event bind
     	this.setEvent(view, this);
-     	
+
      	//for communicator example
      	if(request.attr("hello")) {
      		view.alert('request.attr("hello") : <br/>' + request.attr("hello")).show();

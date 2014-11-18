@@ -143,15 +143,15 @@ function(context, data) {
 		</table>
 
 		<div align="center" class="btnBox">
-			<a id="btnInit" href="#" class='{ "color": "gray", "size": "large" }'>Initialize grid</a>
-			<a id="btnAdd" href="#" class='{ "color": "skyblue", "size": "large", "disable": true }'>add</a>
-			<a id="btnBind" href="#" class='{ "color": "skyblue", "size": "large", "disable": true }'>bind</a>
-			<a id="btnRevert" href="#" class='{ "color": "skyblue", "size": "large", "disable": true }'>revert</a>
-			<a id="btnRemove" href="#" class='{ "color": "skyblue", "size": "large", "disable": true }'>remove</a>
-			<a id="btnVal" href="#" class='{ "color": "skyblue", "size": "large", "disable": true }'>val</a>
-			<a id="btnData" href="#" class='{ "color": "skyblue", "size": "large", "disable": true }'>data</a>
-			<a id="btnValidate" href="#" class='{ "color": "skyblue", "size": "large", "disable": true }'>validate</a>
-			<a id="btnReload" href="#" class='{ "color": "white", "size": "large" }'>Reload this page</a>
+			<a id="btnInit" href="#" data-opts='{ "color": "gray", "size": "large" }'>Initialize grid</a>
+			<a id="btnAdd" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>add</a>
+			<a id="btnBind" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>bind</a>
+			<a id="btnRevert" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>revert</a>
+			<a id="btnRemove" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>remove</a>
+			<a id="btnVal" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>val</a>
+			<a id="btnData" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>data</a>
+			<a id="btnValidate" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>validate</a>
+			<a id="btnReload" href="#" data-opts='{ "color": "white", "size": "large" }'>Reload this page</a>
 		</div>
 
 		<p>Result : </p>
@@ -181,8 +181,8 @@ function(context, data) {
 				</tr>
 				<tr>
 					<td id="index" align="center"></td>
-					<td><input id="age" type="text" class='{ "validate" : [["required"], ["integer"]] }' /></td>
-					<td><input id="email" type="text" class='{ "validate" : [["required"], ["email"]] }' /></td>
+					<td><input id="age" type="text" data-validate='[["required"], ["integer"]]' /></td>
+					<td><input id="email" type="text" data-validate='[["required"], ["email"]]' /></td>
 					<td align="center"><input id="isActive" type="checkbox" /></td>
 				</tr>
 			</tbody>

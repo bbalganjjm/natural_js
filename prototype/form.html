@@ -170,14 +170,14 @@
 		</table>
 
 		<div align="center" class="btnBox">
-			<a id="btnInit" href="#" class='{ "color": "gray", "size": "large" }'>Initialize form</a> |
-			<a id="btnAdd" href="#" class='{ "color": "skyblue", "size": "large", "disable": true }'>add</a> | or |
-			<a id="btnBind" href="#" class='{ "color": "skyblue", "size": "large", "disable": true }'>bind</a>
-			<a id="btnRevert" href="#" class='{ "color": "skyblue", "size": "large", "disable": true }'>revert</a> |
-			<a id="btnVal" href="#" class='{ "color": "skyblue", "size": "large", "disable": true }'>val</a>
-			<a id="btnData" href="#" class='{ "color": "skyblue", "size": "large", "disable": true }'>data</a>
-			<a id="btnValidate" href="#" class='{ "color": "skyblue", "size": "large", "disable": true }'>validate</a>
-			<a id="btnReload" href="#" class='{ "color": "white", "size": "large" }'>Reload this page</a>
+			<a id="btnInit" href="#" data-opts='{ "color": "gray", "size": "large" }'>Initialize form</a> |
+			<a id="btnAdd" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>add</a> | or |
+			<a id="btnBind" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>bind</a>
+			<a id="btnRevert" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>revert</a> |
+			<a id="btnVal" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>val</a>
+			<a id="btnData" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>data</a>
+			<a id="btnValidate" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>validate</a>
+			<a id="btnReload" href="#" data-opts='{ "color": "white", "size": "large" }'>Reload this page</a>
 		</div>
 
 		<p>Result : </p>
@@ -190,25 +190,25 @@
 				<tr>
 					<th align="right"><label for="name">name</label></th>
 					<td>
-						<input id="name" type="text" class='{ "validate" : [["required"]] }' />
+						<input id="name" type="text" data-validate='[["required"]]' />
 					</td>
 				</tr>
 				<tr>
 					<th align="right"><label for="email">email</label></th>
 					<td>
-						<input id="email" type="text" class='{ "format" : [["trimtoempty"], ["generic", "@@@@@@＊＊＊"]], "validate" : [["required"], ["email"]] }' />
+						<input id="email" type="text" data-format='[["trimtoempty"], ["generic", "@@@@@@＊＊＊"]]' data-validate='[["required"], ["email"]]' />
 					</td>
 				</tr>
 				<tr>
 					<th align="right"><label for="_id">password</label></th>
 					<td>
-						<input id="_id" type="password" class='{ "validate" : [["required"]] }' />
+						<input id="_id" type="password" data-validate='[["required"]]' />
 					</td>
 				</tr>
 				<tr>
 					<th align="right"><label for="balance">balance</label></th>
 					<td>
-						<input id="balance" type="text" class='{ "format" : [["trimtoempty"], ["numeric", "$#,###.##0"]], "validate" : [["required"], ["decimal"]] }' />
+						<input id="balance" type="text" data-format='[["trimtoempty"], ["numeric", "$#,###.##0"]]' data-validate='[["required"], ["decimal"]]' />
 					</td>
 				</tr>
 				<tr>
@@ -227,7 +227,7 @@
 				<tr>
 					<th align="right"><label for="eyeColor">eye color</label></th>
 					<td>
-						<select id="eyeColor" class='{ "validate" : [["required"]] }'>
+						<select id="eyeColor" data-validate='[["required"]]'>
 							<option>선택</option>
 						</select>
 					</td>
@@ -253,19 +253,19 @@
 				<tr>
 					<th align="right"><label for="registered">registered</label></th>
 					<td>
-						<input id="registered" type="text" class='{ "format": [["date", 8, "date"]], "validate" : [["required"]] }' />
+						<input id="registered" type="text" data-format='[["date", 8, "date"]]' data-validate='[["required"]]' />
 					</td>
 				</tr>
 				<tr>
 					<th align="right"><label for="registered2">registered m</label></th>
 					<td>
-						<input id="registered2" type="text" class='{ "format": [["date", 6, "month"]], "validate" : [["required"]] }' />
+						<input id="registered2" type="text" data-format='[["date", 6, "month"]]' data-validate='[["required"]]' />
 					</td>
 				</tr>
 				<tr>
 					<th align="right"><label for="about">about</label></th>
 					<td>
-						<textarea id="about" rows="5" cols="80" class='{ "format" : [["trimtoempty"], ["limit", "50", "..."]], "validate" : [["required"], ["korean"]] }'></textarea>
+						<textarea id="about" rows="5" cols="80" data-format='[["trimtoempty"], ["limit", "50", "..."]]' data-validate='[["required"], ["korean"]]'></textarea>
 					</td>
 				</tr>
 				<tr>
@@ -380,7 +380,7 @@ N("div#form").cont({
             e.preventDefault();
             N("table#form").alert('<b>전체검증 결과 : ' + form.validate() + '</b>').show()
         });
-        
+
         N("a#btnReload", view).click(function(e) {
         	e.preventDefault();
         	N(view.parent()).comm(this_.request.get("url")).submit();
