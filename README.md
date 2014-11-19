@@ -20,8 +20,8 @@ Reference
 =========
 Natural-JS Libraries Directory : /lib/natural_js/<br/>
 DEMO : http://211.110.5.41/naturaljs/index.html<br/>
-Basic Document : /docs/Natural-JS_Basic.pdf<br/>
-API Document : /docs/Natural-JS_API_Document.pdf<br/>
+Basic Document : /docs/Natural-JS_Basic.pdf(Korean)<br/>
+API Document : /docs/Natural-JS_API_Document.pdf(Korean)<br/>
 
 License
 =======
