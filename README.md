@@ -5,7 +5,7 @@ Natural-CORE is CORE library package that is used internally by the framework.<b
 Natural-ARCHITECTURE is CVC Architecture Pattern based Architecture Framework. it makes structured and simplifies a complex web UI environment.<br/>
 Natural-DATA provides a module for Data processing and data synchronization.<br/>
 Natural-UI provides a variety of components such as HTML-based Grid, Form, Popup that help improve the user experience and web development productivity.<br/><br/>
-자세한 내용은 Wiki(https://github.com/bbalganjjm/natural_js/wiki) 나 doc 퐅더의 문서들을 참고 하세요.
+자세한 내용은 Wiki(https://github.com/bbalganjjm/natural_js/wiki) 나 doc 폴더의 문서들을 참고 하세요.
 
 
 Features
