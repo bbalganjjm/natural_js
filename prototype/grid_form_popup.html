@@ -127,7 +127,7 @@ N("div#gridFormPopup").cont({
     	// put source code
     	IndexController.getSourceCode(request.get("url"), N("div.sourceBox", view));
 
-    	this.initButton();
+    	this.initButton(view);
     	//this.createSelect(data);
 
     	var popup = N("table#form").popup({
@@ -152,8 +152,8 @@ N("div#gridFormPopup").cont({
 
     	this.setEvents(this);
     },
-    initButton : function() {
-    	N("div.btnBox").button();
+    initButton : function(view) {
+    	N("div.btnBox a", view).button();
     },
     setEvents : function(this_) {
     	N("a#btnBind").click(function(e) {
