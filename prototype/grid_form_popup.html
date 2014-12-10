@@ -6,7 +6,7 @@
 	</div>
 	<div class="divBar">DATA</div>
 	<div class="dataBox">
-		/Natural-JS/prototype/data/grid_big.json
+		/Natural-JS/prototype/data/grid.json
 	</div>
 	<div class="divBar">DEMO</div>
 	<div class="demoBox">
@@ -159,7 +159,7 @@ N("div#gridFormPopup").cont({
     	N("a#btnBind").click(function(e) {
             e.preventDefault();
             N.comm({
-        		url : "prototype/data/grid_big.json",
+        		url : "prototype/data/grid.json",
         		async : false
         	}).submit(function(data) {
         		this_.grid.bind(data);
