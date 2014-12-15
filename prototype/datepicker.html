@@ -10,18 +10,24 @@
 		<table class="form" style="width: 100%;">
 			<tr>
 				<th align="right" width="10%">monthonly</th>
-				<td width="40%" colspan="3"><input id="monthonly" type="checkbox" />If this checkbox with check(true), display Monthpicker</td>
+				<td width="40%"><input id="monthonly" type="checkbox" />If this checkbox with check(true), display Monthpicker</td>
 				<th align="right" width="10%">onSelect</th>
-				<td width="40%" colspan="3"><textarea id="onSelect" rows="3" cols="60">
+				<td width="40%"><textarea id="onSelect" rows="3" cols="60">
 function() {
 	alert("select");
 }
 				</textarea><br />Callback function for date select event</td>
 			</tr>
+			<tr>
+				<th align="right" width="10%">focusin</th>
+				<td width="40%" colspan="3"><input id="focusin" type="checkbox" checked="checked" />If this checkbox with uncheck(false), disable focusin event to date input element</td>
+			</tr>
 		</table>
 
 		<div align="center" class="btnBox">
-			<a id="btnApply" href="#" data-opts='{ "color": "skyblue", "size": "large" }'>Apply Datepicker</a>
+			<a id="btnApply" href="#" data-opts='{ "color": "gray", "size": "large" }'>Apply Datepicker</a>
+			<a id="btnShow" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>Show</a>
+			<a id="btnHide" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>Hide</a>
 			<a id="btnReload" href="#" data-opts='{ "color": "white", "size": "large" }'>Reload this page</a>
 		</div>
 
@@ -38,6 +44,7 @@ function() {
 <script type="text/javascript">
 
 N("div#datepickerSample").cont({
+	datepicker : undefined,
     init : function(view, request) {
     	// put source code
     	IndexController.getSourceCode(request.get("url"), N("div.sourceBox", view));
@@ -63,12 +70,25 @@ N("div#datepickerSample").cont({
         	var opts = {
            		monthonly : N("input#monthonly", view).is(":checked"),
            		onSelect : N.string.trimToNull(N("textarea#onSelect", view).val()) !== null ?
-           				eval("(" + N("textarea#onSelect", view).val() + ")") : null
+           				eval("(" + N("textarea#onSelect", view).val() + ")") : null,
+           		focusin : N("input#focusin", view).is(":checked")
        		};
 
-        	$("input#datepicker", view).datepicker(opts);
+        	this_.datepicker = $("input#datepicker", view).datepicker(opts);
 
            	N(this).instance("button").disable();
+           	N("a#btnShow", view).instance("button").enable();
+           	N("a#btnHide", view).instance("button").enable();
+        });
+
+        N("a#btnShow", view).click(function(e) {
+        	e.preventDefault();
+        	this_.datepicker.show();
+        });
+
+        N("a#btnHide", view).click(function(e) {
+        	e.preventDefault();
+        	this_.datepicker.hide();
         });
 
         N("a#btnReload", view).click(function(e) {
