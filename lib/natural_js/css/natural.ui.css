@@ -371,6 +371,7 @@ div.tab__ > div {
 div.datepicker_contents__ {
 	border: 1px solid #777777;
 	box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+	border-radius : 3px;
 	background-image: -ms-linear-gradient(top, #c9c9c9 0%, #999999 100%);
 	background-image: -moz-linear-gradient(top, #c9c9c9 0%, #999999 100%);
 	background-image: -o-linear-gradient(top, #c9c9c9 0%, #999999 100%);
