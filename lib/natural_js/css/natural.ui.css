@@ -18,7 +18,7 @@ span.block_overlay_msg__ {
 	opacity: 1;
 	border: 1px solid #777777;
 	border-radius: 5px;
-	box-shadow: 0px 1px 15px #777777;
+	box-shadow: 0 3px 12px rgba(0,0,0,0.15);
 }
 
 span.block_overlay_msg__ > ul {
@@ -83,7 +83,7 @@ span.msg__ ul.msg_arrow__ {
 span.msg__ ul.msg_line_box__ {
 	padding: 3px 2px 2px 2px;
 	border-radius: 3px;
-	box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.4);
+	box-shadow: 0 3px 12px rgba(0,0,0,0.15);;
 }
 
 span.msg__ ul.msg_line_box__ li {
@@ -105,7 +105,7 @@ span.msg__ a.msg_close__ {
 	padding: 1px 0 3px 0;
 	margin: -6px 0 0 -1px;
 	background-color: #efefee;
-	box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.4);
+	box-shadow: 0 3px 12px rgba(0,0,0,0.15);;
 }
 
 /* Button */
@@ -370,7 +370,7 @@ div.tab__ > div {
 /* DatePicker */
 div.datepicker_contents__ {
 	border: 1px solid #777777;
-	box-shadow: 0px 1px 15px #777777;
+	box-shadow: 0 3px 12px rgba(0,0,0,0.15);
 	background-image: -ms-linear-gradient(top, #c9c9c9 0%, #999999 100%);
 	background-image: -moz-linear-gradient(top, #c9c9c9 0%, #999999 100%);
 	background-image: -o-linear-gradient(top, #c9c9c9 0%, #999999 100%);
