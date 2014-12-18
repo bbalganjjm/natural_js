@@ -314,7 +314,7 @@ c:/test_data.json<code>[
 				<pre><code>...
 N({ param1 : "파라메터 애요" }).comm("c:/test_data.json").submit(function(data) {
 	//data 는 서버로 부터 수신된 데이터
-	console.log(data);
+	N("#result", view).text(JSON.stringify(data));
 ...
 })</code></pre>
 				<p>
