@@ -57,7 +57,7 @@
 					Natural-DATA는 Data 처리 및 데이터 동기화에 대한 모듈들을 제공 하며
 					Natural-UI 는 HTML 기반의 Grid, Form, Popup등 여러 가지 컴포넌트를 제공 합니다.<br/>
 					<br/>
-					자세한 아키텍처 구조와 설명은 밑에 링크를 참조해 보세요.
+					자세한 아키텍처 구조와 설명은 아래 URL을 클릭하여 내용을 참조 해 보세요.
 				</p>
 				<p><a href="https://github.com/bbalganjjm/natural_js/wiki">https://github.com/bbalganjjm/natural_js/wiki</a></p>
 				<h3>
@@ -77,18 +77,18 @@
 				</h3>
 				<p>
 					Natural-JS 의 필수 라이브러리 파일은 다음과 같습니다.<br><br>
-					1. jquery-1.11.1.min.js - Natural-JS 는 jQuery 를 기반으로 동작 하므로 반드시 임포트 해야합니다.<br>
+					&nbsp;&nbsp;1. jquery-1.11.1.min.js - Natural-JS 는 jQuery 를 기반으로 동작 하므로 반드시 임포트 해야합니다.<br>
 					<br>
-					2. natural.core.js - Natural-CORE 라이브러리 패키지 입니다.<br>
-					3. natural.architecture.js - Natural-ARCHITECTURE 라이브러리 패키지 입니다.<br>
-					4. natural.data.js - Natural-DATA 라이브러리 패키지 입니다.<br>
-					5. natural.ui.js - Natural-UI 라이브러리 패키지 입니다.<br>
+					&nbsp;&nbsp;2. natural.core.js - Natural-CORE 라이브러리 패키지 입니다.<br>
+					&nbsp;&nbsp;3. natural.architecture.js - Natural-ARCHITECTURE 라이브러리 패키지 입니다.<br>
+					&nbsp;&nbsp;4. natural.data.js - Natural-DATA 라이브러리 패키지 입니다.<br>
+					&nbsp;&nbsp;5. natural.ui.js - Natural-UI 라이브러리 패키지 입니다.<br>
 					<br>
-					6. natural.ui.css - Natural-UI 디자인 관련 스타일시트 입니다.<br>
+					&nbsp;&nbsp;6. natural.ui.css - Natural-UI 디자인 관련 스타일시트 입니다.<br>
 					<br>
-					7. natural.config.js - Natural-JS 의 환경설정 파일 입니다.<br>
+					&nbsp;&nbsp;7. natural.config.js - Natural-JS 의 환경설정 파일 입니다.<br>
 					<br>
-					기본 HTML 파일을 만들고 위 파일들을 아래와 같은 순서로 페이지에 Import 해 줍니다.
+					먼저 기본 HTML 파일을 만들고 위 파일들을 아래와 같은 순서로 페이지에 Import 해 줍니다.
 				</p>
 				<pre>
 					<code>
@@ -104,31 +104,35 @@
 &lt;script type="text/javascript" src="lib/natural_js/natural.config.js"&gt;&lt;/script&gt;</code>
 				</pre>
 
-				<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
-
-				<h3>
-					<a id="designer-templates" class="anchor" href="#designer-templates" aria-hidden="true"><span
-						class="octicon octicon-link"></span></a>Designer Templates
-				</h3>
-
-				<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through
-					them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the
-					page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
-
-				<h3>
-					<a id="rather-drive-stick" class="anchor" href="#rather-drive-stick" aria-hidden="true"><span
-						class="octicon octicon-link"></span></a>Rather Drive Stick?
-				</h3>
-
 				<p>
-					If you prefer to not use the automatic generator, push a branch named
-					<code>gh-pages</code>
-					to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support
-					Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to
-					create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog
-					support and other advanced templating features.
+				그다음 Natural-JS 의 구동 환경을 설정 합니다.<br>
+				Natural-JS 의 환경설정 파일인 natural.architecture.js 파일을 열어보세요.<br>
+				</p>
+				<pre>
+					<code>
+/**
+ * Natural-ARCHITECTURE Config
+ */
+N.context.attr("architecture", {
+	"page" : {
+		"context" : "div#contents"
+	},
+	...
+					</code>
+				</pre>
+				<p>위와 같은 구문이 보일겁니다. JSON 이 뭔지는 아시죠? 아주 쉬워요. 모르시면 아래 URL 을 클릭 해서 참고 하시구요.</p>
+				<p><a href="http://www.json.org/json-ko.html">http://www.json.org/json-ko.html</a></p>
+				<p>Natrual-JS 에서 JSON 포멧은 아주 중요 합니다.
+				서버와 송수신하는 데이터 형식도 JSON 형태로 되어 있고 이후 나올 Controller(N.cont) 에서 클래스를 지정하는 방식도 JSON 형태 입니다.</p>
+				<p>다시 본론으로 돌아갈께요. Natural-JS의 환경설정값은 Context(N.context) 객체에 저장 됩니다. 위 값중 <br>
+				N.context.attr("architecture").page.context 값은 아주 중요한 값입니다.
+				Natural-JS 을 이용해서 구현된 페이지 들이 표시될 최상위 요소(Element)를 jQuery Selector 형식으로 지정 해 주면 됩니다.
+				다시말해 싸이트의 본문(Body)프레임을 지정 해 주면 됩니다.
+				Tab(N.tab) 이나 Popup(N.popup), Datepicker(N.datepicker) 등 Natural-UI 쪽 컴포넌트의 자원들이 여기에서 지정한 영역에 생성되고 페이지가 전환 될때 이 영역에 다시 덮어 씌움으로서
+				브라우저의 자원을 반납하게 됩니다.
 				</p>
 
+				<!--
 				<h3>
 					<a id="authors-and-contributors" class="anchor" href="#authors-and-contributors" aria-hidden="true"><span
 						class="octicon octicon-link"></span></a>Authors and Contributors
@@ -153,6 +157,7 @@
 					Having trouble with Pages? Check out the documentation at <a href="https://help.github.com/pages">https://help.github.com/pages</a>
 					or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.
 				</p>
+				 -->
 			</section>
 
 			<aside id="sidebar">
