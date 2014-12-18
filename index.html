@@ -151,10 +151,8 @@ N.context.attr("architecture", {
 				<p>"..." 은 생략 기호이니 그대로 넣지 마세요. ^^<br>
 				자~ 그럼 이제 환경설정은 끝났으니 본격적으로 개발을 시작 해 볼까요?
 				</p>
-
-				<p>Natural-JS는 페이지내에서 개발영역과 디자인영역을 구분하고 요소(Element)간 스코프(scope)를 보장해주고 스크립트
-				영역의 스코프를 보장 해 주기위한 간단한 소스코드의 구성 규칙이 있습니다. 이는 반드시 지켜줘야 하는 부분이니 숙지 하시기 바랍니다.<br>
-				별로 어렵지 않습니다. 다음과 같이 View 영역과 Controller 영역만 구분하고 순서대로 배치해 주면 됩니다.
+				<p>Natural-JS는 페이지내에서 개발영역과 디자인영역을 구분하고 요소(Element)간, 스크립트 간 영역(scope)을 보장 해 주기위한
+				간단한 소스코드의 구성 규칙이 있습니다. 별로 어렵지 않습니다. 다음과 같이 View 영역과 Controller 영역만 구분하고 순서대로 배치해 주면 됩니다.
 				</p>
 				<pre><code>&lt;!-- View 영역 --&gt;
 &lt;div id="viewCont"&gt;
@@ -173,18 +171,16 @@ N("#viewCont").cont({
 /* Controller 영역 */
 &lt;/script&gt;</code></pre>
 				<p>
-					각각의 페이지의 단위 조각들은 위와 같은 형식의 파일로 분할 할 수 있습니다. 이 분할 된 파일들은 N.comm 이나 Tab, Popup 등으로  으로 불러와 페이지에 포함 시켜주면
+					각각의 페이지의 단위 조각들은 위와 같은 형식의 파일로 분할 할 수 있습니다. 이 분할 된 파일들은 N.comm 이나 Tab, Popup 등으로 불러와 페이지에 포함 시켜주면
 					물리적인 요소나 스크립트는 같은 페이지 안에 있지만 Natural 아키텍처 프레임웍이 논리적으로 구분을 시켜 줍니다. 말이 어렵죠? 그냥 같은 페이지에 다른 페이지를
-					마구 때려 넣어도 스크립트 겹치거나 요소의 틀이 흔들리지 않는 다는 말입니다. ^^
-					위 소스를 본문 페이지로 활욜할 경우에는 index 페이를 따로 만들고 index 페이지에 Natural-JS 의 스크립트를 로딩하고 본문영역에만 위 내용이 담긴 파일을 Communicator(N.comm)을
-					통해서 꼽아 주기만 하면 되겠지요?<br>
+					마구 때려 넣어도 스크립트 겹치거나 요소의 구분이 흔들리지 않는 다는 말입니다. ^^
+					위 소스를 본문 컨텐츠 페이지로 활욜할 경우에는 index 페이를 따로 만들고 index 페이지에 Natural-JS 의 스크립트를 로딩하고 본문영역에만 위 내용이 담긴 파일을 Communicator(N.comm)을
+					통해서 꼽아? 주기만 하면 되겠지요?<br>
 					위 내용을  "c:/test_html.html" 파일로 저장하고 이 내용을 index 페이지에서 불러 보겠습니다.
 					먼저 다음 내용을 참고 해서 "c:/index.html" 파일로 저장 해 주세요.
 				</p>
-				<pre>
-index.html
-<code>
-&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+				<pre>index.html
+<code>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
 &lt;html&gt;
 &lt;head&gt;
 &lt;meta http-equiv="X-UA-Compatible" content="IE=Edge; text/html; charset=utf-8" /&gt;
@@ -228,7 +224,7 @@ $(document).ready(function() {
 </code></pre>
 				<p>
 					위와 같이 실행하면 config 에서 정의한 N.context.attr("architecture").page.context 의 값
-					"#natural_contents" div 요소에 가져온 HTML 의 내용을 넣어 줍니다.</p>
+					"#natural_contents" div 요소에 N.comm을 통해 가져온 HTML파일의 내용을 넣어 줍니다.</p>
 				<p>페이지를 불러왔으니 이제는 N.comm 으로 데이터를 불러와 보겠습니다.</p>
 				<p>
 					Natural-JS 의 송수신 데이터 형식은 JSON 이라고 했죠? 먼저 json 형태로 데이터를 서비스 해 주는 서버가 필요합니다.
@@ -335,8 +331,7 @@ N({ param1 : "파라메터 애요" }).comm("c:/test_data.json").submit(function(
 				</p>
 				<p>N.comm 과 N.cont 에서 제공하는 상세 기능 목록을 확인 하려면 API 문서를 참고 하세요.</p>
 				<br><br>
-				<h3>2. Grid(N.grid) 기반의 CRUD 페이지 만들기</h3>
-				<p>작업중...</p>
+				<h4>이제 기본 구조를 알았으니 DEMO 페이지 소스를 참고하여 실무에 적용해 보아요~ 예제는 시간나는대로 계속 추가할 예정입니다.</h4>
 
 
 				<!--
