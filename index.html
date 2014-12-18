@@ -134,7 +134,7 @@ N.context.attr("architecture", {
 				&nbsp;&nbsp;1. 컴포넌트 초기화시 지정한 옵션 값<br>
 				&nbsp;&nbsp;2. 환경설정에서 지정한 옵션 값<br>
 				&nbsp;&nbsp;3. 컴포넌트 클래스의 기본 옵션 값<br>
-				<br><br>
+				<br>
 				컴포넌트 클래스의 기본 옶션값중 환경설정파일에 지정되지 않은 옵션값은 컴포넌트 초기화시 따로 옵션을 지정하지 않았다면 컴포넌트 클래스의 기본옵션값으로 동작 됩니다.
 				기본 환경설정 파일에 정의되지 않은 컴포넌트 클래스의 기본 옵션값을 사이트 전역 옵션값으로 설정하고 싶다면 환경설정 파일의 해당 컴포넌트 부분에 추가 하면 됩니다.
 				예를 들어 사이트내에서 동작되는 모든 그리드 컴포넌트 Body영역의 높이를 300 픽셀로 기본값을 설정하고 싶다면 N.context.attr("ui").grid 부분에 다음과 같이 추가하면 됩니다.
@@ -172,20 +172,72 @@ N("#viewCont").cont({
     }
 });
 /* 스크립트 영역 */
+&lt;/script&gt;</code></pre>
+				<p>
+					각각의 페이지의 단위 조각들은 위와 같은 형식의 파일로 분할 할 수 있습니다. 이 분할 된 파일들은 N.comm 이나 Tab, Popup 등으로  으로 불러와 페이지에 포함 시켜주면
+					물리적인 요소나 스크립트는 같은 페이지 안에 있지만 Natural 아키텍처 프레임웍이 논리적으로 구분을 시켜 줍니다. 말이 어렵죠? 그냥 같은 페이지에 다른 페이지를
+					마구 때려 넣어도 스크립트 겹치거나 요소의 틀이 흔들리지 않는 다는 말입니다. ^^
+					위 소스를 본문 페이지로 활욜할 경우에는 index 페이를 따로 만들고 index 페이지에 Natural-JS 의 스크립트를 로딩하고 본문영역에만 위 내용이 담긴 파일을 Communicator(N.comm)을
+					통해서 꼽아 주기만 하면 되겠지요?<br>
+					위 내용을  "c:/test_html.html" 파일로 저장하고 이 내용을 index 페이지에서 불러 보겠습니다.
+					먼저 다음 내용을 참고 해서 "c:/index.html" 파일로 저장 해 주세요.
+				</p>
+				<pre>
+index.html
+<code>
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv="X-UA-Compatible" content="IE=Edge; text/html; charset=utf-8" /&gt;
+&lt;title&gt;Natural-JS&lt;/title&gt;
+&lt;script type="text/javascript" src="lib/jquery-1.11.1.min.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="lib/natural_js/natural.core.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="lib/natural_js/natural.architecture.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="lib/natural_js/natural.data.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="lib/natural_js/natural.ui.js"&gt;&lt;/script&gt;
+&lt;link rel="stylesheet" type="text/css" href="lib/natural_js/css/natural.ui.css" /&gt;
+&lt;script type="text/javascript" src="lib/natural_js/natural.config.js"&gt;&lt;/script&gt;
+
+&lt;script type="text/javascript"&gt;
+$(document).ready(function() {
+    ...
+});
 &lt;/script&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id="header"&gt;
+	&lt;a id="logo" href="index.html"&gt;Natural-JS&lt;/a&gt;
+&lt;/div&gt;
+&lt;div id="natural_contents"&gt;
+	&lt;!-- 이부분에 각각의 컨텐츠가 표시 됩니다. --&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+				<p>
+					$(document).ready() 메서드 아시죠? 화면의 HTML 요소들이 브라우저에 로딩이 완료된 다음에 수행되는, document.body의
+					onload 이벤트와 같은  역할을 수행 하는 jQuery 에서 제공하는 기능 입니다.<br>
+					서버에 데이터를 보내고 가져오는 역할을 수행하는 모듈은 Communicator(N.comm)(이하 N.comm) 입니다.<br>
+					$(document).ready() 부분을 밑에 구문으로 바꿔 주세요.
+				</p>
+				<pre><code>
+...
+$(document).ready(function() {
+	N(N.context.attr("architecture").page.context).comm("c:/test_html.html").submit()
+})
+...
 </code></pre>
 				<p>
-					....
-				</p>
-
+					위와 같이 실행하면 config 에서 정의한 N.context.attr("architecture").page.context 의 값
+					"#natural_contents" div 요소에 가져온 HTML 의 내용을 넣어 줍니다.</p>
+				<p>페이지를 불러왔으니 이제는 N.comm 으로 데이터를 불러와 보겠습니다.</p>
 				<p>
-					위에서 예기한 기본 구조에서 서버에 있는 데이터를 한번 가져와 봅시다.
-					서버에 데이터를 보내고 가져오는 역할을 수행하는 모듈은 Communicator(N.comm)(이하 N.comm) 입니다.
 					Natural-JS 의 송수신 데이터 형식은 JSON 이라고 했죠? 먼저 json 형태로 데이터를 서비스 해 주는 서버가 필요합니다.
 					여기서 서버단의 작업에 대해서는 생략할께요. Spring MVC 이나 PHP 로 간단하게 LIST 나 Map 형태의 객체를 JSON 형태로 변환해주는 모듈들이 어마무지하게 많이 있습니다.
-					아래 URL을 클릭하여 들어가면 언어별 변환모듈에 대한 링크가 많이 있습니다. 좋은거 골라서 하나 쓰시면 됩니다.</p>
+					아래 URL을 클릭하여 들어가면 언어별 변환모듈에 대한 링크가 많이 있습니다. 좋은거 골라서 하나 쓰시면 됩니다.
+				</p>
 				<p><a href="http://www.json.org/json-ko.html">http://www.json.org/json-ko.html</a></p>
-				<p>일단, 서버없이 스터디 차원에서 한번 해보고 싶다면 다음과 같이 로컬에 JSON 형태의 Text 를 담은 파일을 하나 생성해 주세요</p>
+				<p>일단, 서버없이 한번 해보고 싶다면 다음과 같이 로컬에 JSON 형태의 Text 를 담은 파일을 하나 생성해 주세요</p>
 				<pre>
 c:/test_data.json
 <code>
@@ -258,38 +310,37 @@ c:/test_data.json
   }
 ]</code></pre>
 				<p>
-					대부분의 브라우저는 Ajax로 로컬파일을 참조할 수 없게 막혀 있습니다. 그러나 파이어폭스는 그냥 열려있네요. IE 도 보안경고 메시지가 뜨면 허용 해 주면 됩니다. 크롬도 이걸 해제시키는 방법이 있는데 구글링해서 찾아보세요. ^^ 일단 파이어폭스로 해 보겠습니다.
-					위에서 말한 N().cont 로 감싸는 부분은 생략 할께요.
+					대부분의 브라우저는 Ajax로 로컬파일을 참조할 수 없게 막혀 있습니다. 그러나 파이어폭스는 그냥 열려있네요? IE 도 보안경고 메시지가 뜨면 허용 해 주면 됩니다. 크롬도 이걸 해제시키는 방법이 있는데 구글링해서 찾아보세요. ^^ 일단 파이어폭스로 해 보겠습니다.
 				</p>
 				<pre><code>
 N.comm("c:/test_data.json").submit(function(data) {
 	//data 는 서버로 부터 수신된 데이터
-	console.log(data);
-})</code></pre>
+	N("#result", view).text(JSON.stringify(data));
+});</code></pre>
 				<p>
-					F12 를 눌러 개발자도구가 열리면 콘솔 탭을 선택해서 c:/test_data.json 파일의 내용이 콘솔에 프린트 되나 확인 해 보세요.
-					잘 나오죠? 서버가 있다면 c:/test_data.json 대신 데이터를 서비스 해 주는 URL 을 입력 하면 됩니다.<br>
-					이제 서버에 파라메터를 보내고 싶다면 다음과 같이 실행 해 주세요.
+					index 페이지에 의해 "c:/test_html.html" 파일이 로딩되고 N.cont의 콜백함수의 init 함수가 최초 실행 됩니다.
+					위 로직이 실행되면 id 가  result 인 div 요소안에 불러온 파일의 내용이 표시 될 겁니다.
+					서버가 있다면 c:/test_data.json 대신 데이터를 서비스 해 주는 URL 을 입력 하면 됩니다.<br>
+					서버에 파라메터를 보내고 싶다면 다음과 같이 실행 해 주세요.
 				</p>
 				<pre><code>
+...
 N({ param1 : "파라메터 애요" }).comm("c:/test_data.json").submit(function(data) {
 	//data 는 서버로 부터 수신된 데이터
 	console.log(data);
+...
 })</code></pre>
 				<p>
 					피들러나 브라우저의 개발자 도구에서 network 탭에 가서 확인 해 보면 '{ param1 : "파라메터 애요" }' 라는 텍스트가
 					해당 URL 로 전송되는것을 확인 할 수 있습니다.
 				</p>
-				<p>
-					그럼 이번에는 html 페이지를 불러 볼까요?<br>
-					우선 테스트 할 수 있는 HTML 파일을 만들어 보세요. 이건 따로 설명 안드릴께요.<br>
-					파일명은 "c:/test_html.html" 로 할께요.
-				</p>
-				<pre><code>
-N(N.context.attr("architecture").page.context).comm("c:/test_html.html").submit()
-</code></pre>
-				<p>위와 같이 실행하면 config 에서 정의한 N.context.attr("architecture").page.context 로 컨텐츠 영역의 프레임 값 "#natural_contents" 영역에 가져온 HTML 의 내용을 넣어 줍니다.
-				</p>
+				<p>N.comm 과 N.cont 에서 제공하는 상세 기능 목록을 확인 하려면 API 문서를 참고 하세요.</p>
+
+
+
+
+
+
 
 				<!--
 				<h3>
