@@ -302,8 +302,7 @@ $(document).ready(function() {
 					대부분의 브라우저는 Ajax로 로컬파일을 참조할 수 없게 막혀 있습니다. 그러나 파이어폭스는 그냥 열려있네요? IE 도 보안경고 메시지가 뜨면 허용 해 주면 됩니다. 크롬도 이걸 해제시키는 방법이 있는데 구글링해서 찾아보세요.
 					^^ 일단 파이어폭스로 해 보겠습니다.
 				</p>
-				<pre><code>
-...
+				<pre><code>...
 N("#viewCont").cont({
 	init : function(view, request) {
     	N.comm("c:/test_data.json").submit(function(data) {
@@ -321,7 +320,6 @@ N("#viewCont").cont({
 					JSON 형태의 파라메터를 서버에서 받으려면 서버에 JSON String 을 Map 객체로 변환 해 주는 모듈이 있어야 겠죠?
 				</p>
 				<pre><code>...
-...
 N("#viewCont").cont({
 	init : function(view, request) {
     	N({ param1 : "파라메터 애요" }).comm("c:/test_data.json").submit(function(data) {
