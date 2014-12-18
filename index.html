@@ -114,7 +114,7 @@
  */
 N.context.attr("architecture", {
 	"page" : {
-		"context" : "div#contents"
+		"context" : "#natural_contents"
 	},
 	...</code></pre>
 				<p>위와 같은 JSON 형식의 구문이 보일겁니다. JSON 이 뭔지는 아시죠? 아주 쉬워요. 모르시면 아래 URL 을 클릭 해서 참고 하시구요.</p>
@@ -151,8 +151,35 @@ N.context.attr("ui", {
 				<p>"..." 은 생략 기호이니 그대로 넣지 마세요. ^^<br>
 				자~ 그럼 이제 환경설정은 끝났으니 본격적으로 개발을 시작 해 볼까요?
 				</p>
+
+				<p>Natural-JS는 페이지내에서 개발영역과 디자인영역을 구분하고 요소(Element)간 스코프(scope)를 보장해주고 스크립트
+				영역의 스코프를 보장 해 주기위한 간단한 소스코드의 구성 규칙이 있습니다. 이는 반드시 지켜줘야 하는 부분이니 숙지 하시기 바랍니다.<br>
+				별로 어렵지 않습니다. 일단 말로 설명하는것 보다는 소스코드를 보고 예기 할까요?
+				</p>
+				<pre><code>
+&lt;!-- View 영역 --&gt;
+&lt;div id="viewCont"&gt;
+	&lt;div id="result"&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+&lt;!-- View 영역 --&gt;
+
+&lt;script type="text/javascript"&gt;
+/* 스크립트 영역 */
+N("#viewCont").cont({
+	init : function(view, request) {
+    	//여기서 부터 시작하면 됩니다.
+    }
+});
+/* 스크립트 영역 */
+&lt;/script&gt;
+</code></pre>
 				<p>
-					먼저 서버에 있는 데이터를 한번 가져와 봅시다.
+					....
+				</p>
+
+				<p>
+					위에서 예기한 기본 구조에서 서버에 있는 데이터를 한번 가져와 봅시다.
 					서버에 데이터를 보내고 가져오는 역할을 수행하는 모듈은 Communicator(N.comm)(이하 N.comm) 입니다.
 					Natural-JS 의 송수신 데이터 형식은 JSON 이라고 했죠? 먼저 json 형태로 데이터를 서비스 해 주는 서버가 필요합니다.
 					여기서 서버단의 작업에 대해서는 생략할께요. Spring MVC 이나 PHP 로 간단하게 LIST 나 Map 형태의 객체를 JSON 형태로 변환해주는 모듈들이 어마무지하게 많이 있습니다.
@@ -230,7 +257,10 @@ c:/test_data.json
     "favoriteFruit": "strawberry"
   }
 ]</code></pre>
-				<p>대부분의 브라우저는 Ajax로 로컬파일을 참조할 수 없게 막혀 있습니다. 그러나 파이어폭스는 그냥 열려있네요. IE 도 보안경고 메시지가 뜨면 허용 해 주면 됩니다. 크롬도 이걸 해제시키는 방법이 있는데 구글링해서 찾아보세요. ^^ 일단 파이어폭스로 해 보겠습니다.</p>
+				<p>
+					대부분의 브라우저는 Ajax로 로컬파일을 참조할 수 없게 막혀 있습니다. 그러나 파이어폭스는 그냥 열려있네요. IE 도 보안경고 메시지가 뜨면 허용 해 주면 됩니다. 크롬도 이걸 해제시키는 방법이 있는데 구글링해서 찾아보세요. ^^ 일단 파이어폭스로 해 보겠습니다.
+					위에서 말한 N().cont 로 감싸는 부분은 생략 할께요.
+				</p>
 				<pre><code>
 N.comm("c:/test_data.json").submit(function(data) {
 	//data 는 서버로 부터 수신된 데이터
@@ -251,12 +281,15 @@ N({ param1 : "파라메터 애요" }).comm("c:/test_data.json").submit(function(
 					해당 URL 로 전송되는것을 확인 할 수 있습니다.
 				</p>
 				<p>
-					그럼 이번에는 html 페이지를 불러 볼까요?
+					그럼 이번에는 html 페이지를 불러 볼까요?<br>
+					우선 테스트 할 수 있는 HTML 파일을 만들어 보세요. 이건 따로 설명 안드릴께요.<br>
+					파일명은 "c:/test_html.html" 로 할께요.
 				</p>
-
-
-
-
+				<pre><code>
+N(N.context.attr("architecture").page.context).comm("c:/test_html.html").submit()
+</code></pre>
+				<p>위와 같이 실행하면 config 에서 정의한 N.context.attr("architecture").page.context 로 컨텐츠 영역의 프레임 값 "#natural_contents" 영역에 가져온 HTML 의 내용을 넣어 줍니다.
+				</p>
 
 				<!--
 				<h3>
