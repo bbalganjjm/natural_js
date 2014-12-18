@@ -75,14 +75,32 @@
 					Natural-JS 시작하기
 				</h3>
 				<p>
-					Natural-JS 의 라이브러리 파일은 총 5개 입니다. 여기에 jQuery 기반이기 때문에 jQuery 라이브러리를 Import 헤
+					Natural-JS 의 필수 라이브러리 파일은 다음과 같습니다.<br><br>
+					1. jquery-1.11.1.min.js - Natural-JS 는 jQuery 를 기반으로 동작 하므로 반드시 임포트 해야합니다.<br>
+					<br>
+					2. natural.core.js - Natural-CORE 라이브러리 패키지 입니다.<br>
+					3. natural.architecture.js - Natural-ARCHITECTURE 라이브러리 패키지 입니다.<br>
+					4. natural.data.js - Natural-DATA 라이브러리 패키지 입니다.<br>
+					5. natural.ui.js - Natural-UI 라이브러리 패키지 입니다.<br>
+					<br>
+					6. natural.ui.css - Natural-UI 디자인 관련 스타일시트 입니다.<br>
+					<br>
+					7. natural.config.js - Natural-JS 의 환경설정 파일 입니다.<br>
+					<br>
+					위 파일을 아래와 같은 순서로 페이지에 Import 해 줍니다.
 				</p>
-
 				<pre>
 					<code>
-$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
+<script type="text/javascript" charset="utf-8" src="lib/jquery-1.11.1.min.js"></script>
+
+<script type="text/javascript" charset="utf-8" src="lib/natural_js/natural.core.js"></script>
+<script type="text/javascript" charset="utf-8" src="lib/natural_js/natural.architecture.js"></script>
+<script type="text/javascript" charset="utf-8" src="lib/natural_js/natural.data.js"></script>
+<script type="text/javascript" charset="utf-8" src="lib/natural_js/natural.ui.js"></script>
+
+<link rel="stylesheet" type="text/css" href="lib/natural_js/css/natural.ui.css" />
+
+<script type="text/javascript" charset="utf-8" src="lib/natural_js/natural.config.js"></script>
 					</code>
 				</pre>
 
