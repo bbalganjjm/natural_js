@@ -140,8 +140,7 @@ N.context.attr("architecture", {
 				기본 환경설정 파일에 정의되지 않은 컴포넌트 클래스의 기본 옵션값을 사이트 전역 옵션값으로 설정하고 싶다면 환경설정 파일의 해당 컴포넌트 부분에 추가 하면 됩니다.
 				예를 들어 사이트내에서 동작되는 모든 그리드 컴포넌트 Body영역의 높이를 300 픽셀로 기본값을 설정하고 싶다면 N.context.attr("ui").grid 부분에 다음과 같이 추가하면 됩니다.
 				</p>
-				<pre><code>
-N.context.attr("ui", {
+				<pre><code>N.context.attr("ui", {
 	...
 	"grid" : {
 		...
@@ -155,10 +154,9 @@ N.context.attr("ui", {
 
 				<p>Natural-JS는 페이지내에서 개발영역과 디자인영역을 구분하고 요소(Element)간 스코프(scope)를 보장해주고 스크립트
 				영역의 스코프를 보장 해 주기위한 간단한 소스코드의 구성 규칙이 있습니다. 이는 반드시 지켜줘야 하는 부분이니 숙지 하시기 바랍니다.<br>
-				별로 어렵지 않습니다. 일단 말로 설명하는것 보다는 소스코드를 보고 예기 할까요?
+				별로 어렵지 않습니다. 다음과 같이 View 영역과 Controller 영역만 구분하고 순서대로 배치해 주면 됩니다.
 				</p>
-				<pre><code>
-&lt;!-- View 영역 --&gt;
+				<pre><code>&lt;!-- View 영역 --&gt;
 &lt;div id="viewCont"&gt;
 	&lt;div id="result"&gt;
 	&lt;/div&gt;
@@ -166,13 +164,13 @@ N.context.attr("ui", {
 &lt;!-- View 영역 --&gt;
 
 &lt;script type="text/javascript"&gt;
-/* 스크립트 영역 */
+/* Controller 영역 */
 N("#viewCont").cont({
 	init : function(view, request) {
     	//여기서 부터 시작하면 됩니다.
     }
 });
-/* 스크립트 영역 */
+/* Controller 영역 */
 &lt;/script&gt;</code></pre>
 				<p>
 					각각의 페이지의 단위 조각들은 위와 같은 형식의 파일로 분할 할 수 있습니다. 이 분할 된 파일들은 N.comm 이나 Tab, Popup 등으로  으로 불러와 페이지에 포함 시켜주면
