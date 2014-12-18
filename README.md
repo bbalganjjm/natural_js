@@ -6,7 +6,7 @@ Natural-ARCHITECTURE is CVC Architecture Pattern based Architecture Framework. i
 Natural-DATA provides a module for Data processing and data synchronization.<br/>
 Natural-UI provides a variety of components such as HTML-based Grid, Form, Popup that help improve the user experience and web development productivity.<br/><br/>
 프레임워크에 대한 자세한 내용은 Wiki(https://github.com/bbalganjjm/natural_js/wiki) 나 doc 폴더의 문서들을 참고 하세요.<br/>
-급조한? 시작하기 문서는 http://bbalganjjm.github.io/natural_js/ 에 있습니다. 문서의 보완과 추가 예제는 시간나는대로 계속 채워 나갈 계획 입니다.<br/>
+시작하기 문서는 http://bbalganjjm.github.io/natural_js/ 에 있습니다. 문서의 보완과 추가 예제는 시간나는대로 계속 채워 나갈 계획 입니다.<br/>
 
 Features
 ========
