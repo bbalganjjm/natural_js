@@ -10,21 +10,21 @@ Natural-JS 는 Natural-CORE, Natural-ARCHITECTURE, Natural-DATA, Natural-UI 로 
 
 Reference(참고)
 =========
-Natural-JS Libraries Directory : /lib/natural_js/<br/>
-Basic Document :
- - /docs/Natural-JS_Basic.pdf(Korean)<br/>
- - https://github.com/bbalganjjm/natural_js/wiki<br/>
-API Document : /docs/Natural-JS_API_Document.pdf(Korean)<br/>
-DEMO : http://211.110.5.41/naturaljs/index.html<br/>
-Getting Start : http://bbalganjjm.github.io/natural_js
+- Natural-JS Libraries Directory : /lib/natural_js/<br/>
+- Basic Document :
+ * /docs/Natural-JS_Basic.pdf(Korean)<br/>
+ * https://github.com/bbalganjjm/natural_js/wiki<br/>
+- API Document : /docs/Natural-JS_API_Document.pdf(Korean)<br/>
+- DEMO : http://211.110.5.41/naturaljs/index.html<br/>
+- Getting Start : http://bbalganjjm.github.io/natural_js
 
-Natural-JS 라이브러리 디렉토리 : /lib/natural_js/<br/>
-기본문서 :
- - /docs/Natural-JS_Basic.pdf<br/>
- - https://github.com/bbalganjjm/natural_js/wiki<br/>
-API 문서 : /docs/Natural-JS_API_Document.pdf<br/>
-데모 : http://211.110.5.41/naturaljs/index.html<br/>
-시작하기 : http://bbalganjjm.github.io/natural_js
+- Natural-JS 라이브러리 디렉토리 : /lib/natural_js/<br/>
+- 기본문서 :
+ * /docs/Natural-JS_Basic.pdf<br/>
+ * https://github.com/bbalganjjm/natural_js/wiki<br/>
+- API 문서 : /docs/Natural-JS_API_Document.pdf<br/>
+- 데모 : http://211.110.5.41/naturaljs/index.html<br/>
+- 시작하기 : http://bbalganjjm.github.io/natural_js
 
 Features(특징)
 ========
