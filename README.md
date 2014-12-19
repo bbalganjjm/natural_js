@@ -28,7 +28,7 @@ Reference(참고)
  * https://github.com/bbalganjjm/natural_js/wiki
 - API 문서 : /docs/Natural-JS_API_Document.pdf
 - 데모 : http://211.110.5.41/naturaljs/index.html
-- 시작하기 문서 : http://bbalganjjm.github.io/natural_js<br/><br/>
+- 시작하기 문서 : http://bbalganjjm.github.io/natural_js
 
 Features(특징)
 ========
