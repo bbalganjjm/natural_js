@@ -18,31 +18,23 @@ Reference(참고)
 - DEMO : http://211.110.5.41/naturaljs/index.html
 - Getting Start : http://bbalganjjm.github.io/natural_js<br/><br/>
 
-- Natural-JS 라이브러리 디렉토리 : /lib/natural_js/
-- 기본문서 :
- * /docs/Natural-JS_Basic.pdf<br/>
- * https://github.com/bbalganjjm/natural_js/wiki
-- API 문서 : /docs/Natural-JS_API_Document.pdf
-- 데모 : http://211.110.5.41/naturaljs/index.html
-- 시작하기 : http://bbalganjjm.github.io/natural_js
-
 Features(특징)
 ========
-1. Complete separation of the design area and development areas.<br/>
-2. Provide UI-Architecture that resembling java servlet architecture.<br/>
-3. Provide various UI-Components.<br/>
-&nbsp;- Formater, Validator<br/>
-&nbsp;- Grid, Form, Select<br/>
-&nbsp;- Alert, Popup, Tab, Button, Datepicker<br/>
-4. Real-time data synchronization and interaction for each ui-component.<br/>
+- Complete separation of the design area and development areas.
+- Provide UI-Architecture that resembling java servlet architecture.
+- Provide various UI-Components.
+ * Formater, Validator
+ * Grid, Form, Select
+ * Alert, Popup, Tab, Button, Datepicker
+- Real-time data synchronization and interaction for each ui-component.<br/><br/>
 
-1. 디자인 영역과 개발영역을 완벽하게 분리 해 줍니다.
-2. 자바 서블릿 아키텍처와 비슷한 UI 아키텍처를 제공합니다.
-3. 다양한 UI 컴포넌트와 라이브러리를 제공 합니다.
-&nbsp;- Formater, Validator<br/>
-&nbsp;- Grid, Form, Select<br/>
-&nbsp;- Alert, Popup, Tab, Button, Datepicker<br/>
-4. 각각의 UI 컴포넌트들은 실시간으로 데이터가 동기화되고 상호작용을 합니다.
+- 디자인 영역과 개발영역을 완벽하게 분리 해 줍니다.
+- 자바 서블릿 아키텍처와 비슷한 UI 아키텍처를 제공합니다.
+- 다양한 UI 컴포넌트와 라이브러리를 제공 합니다.
+ * Formater, Validator
+ * Grid, Form, Select
+ * Alert, Popup, Tab, Button, Datepicker
+- 각각의 UI 컴포넌트들은 실시간으로 데이터가 동기화되고 상호작용을 합니다.
 
 License(저작권)
 =======
