@@ -26,7 +26,8 @@ Features(특징)
  * Formater, Validator
  * Grid, Form, Select
  * Alert, Popup, Tab, Button, Datepicker
-- Real-time data synchronization and interaction for each ui-component.<br/><br/>
+- Real-time data synchronization and interaction for each ui-component.
+
 
 - 디자인 영역과 개발영역을 완벽하게 분리 해 줍니다.
 - 자바 서블릿 아키텍처와 비슷한 UI 아키텍처를 제공합니다.
