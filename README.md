@@ -18,7 +18,7 @@ Reference(참고)
  * https://github.com/bbalganjjm/natural_js/wiki
 - API Document : /docs/Natural-JS_API_Document.pdf(Korean)
 - DEMO : http://211.110.5.41/naturaljs/index.html
-- Getting Start : http://bbalganjjm.github.io/natural_js<br/><br/>
+- Getting Start : http://bbalganjjm.github.io/natural_js
 
 ----------------------------------------------
 
