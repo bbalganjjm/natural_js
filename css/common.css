@@ -8,7 +8,7 @@ body, pre, textarea, select {
     margin: 0;
     font-size: 14px;
 	font-family: "Nanum Gothic", "맑은 고딕", "dotum", "Segoe UI", sans-serif;
-	color: #002200;
+	color: #004a00;
 }
 
 input[type='text'], input[type='password'], select, textarea, pre.data, div.data {
@@ -17,7 +17,7 @@ input[type='text'], input[type='password'], select, textarea, pre.data, div.data
 	border: 1px solid #cccccc;
 	font-size: 14px;
 	font-family: "Nanum Gothic", "맑은 고딕", "dotum", "Segoe UI", sans-serif;
-	color: #002200;
+	color: #004a00;
 	box-shadow: inset 1px 1px 1px rgba(0,0,0,0.075);
 	vertical-align: middle;
 }
@@ -54,7 +54,7 @@ a {
 	font-weight: normal;
 	font-size: 14px;
 	font-family: "Nanum Gothic", "맑은 고딕", "dotum", "Segoe UI", sans-serif;
-	color: #002200;
+	color: #004a00;
 }
 
 table {
@@ -97,9 +97,9 @@ header hgroup h1 {
 }
 
 header hgroup h2 {
-	color: #008000;
+	color: #005100;
 	margin: 0 0 0 50px;
-	text-shadow: -1px -1px #005100;
+	text-shadow: -1px -1px #008000;
 }
 
 header nav {
