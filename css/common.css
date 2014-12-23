@@ -83,7 +83,7 @@ header {
 }
 
 header hgroup h1 {
-	color: #ffffff;
+	color: #00d000;
 	margin: 0;
 	padding: 15px;
 	text-shadow: 1px 1px #008000;
@@ -91,7 +91,7 @@ header hgroup h1 {
 }
 
 header hgroup h2 {
-	color: #003000;
+	color: #005000;
 	margin: 0 0 0 50px;
 	text-shadow: -1px -1px #008000;
 }
