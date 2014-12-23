@@ -127,6 +127,7 @@ header nav > ul > li > a {
 	color: #ffffff;
 	font-size: 15px;
 	text-shadow: -1px -1px #008000;
+	font-weight: bold;
 }
 
 header nav > ul > li > ul {
