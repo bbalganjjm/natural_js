@@ -68,6 +68,10 @@
 			"request" : {
 				"options" : {
 					/**
+					 * 기본 Method
+					 */
+					"type" : "GET",
+					/**
 					 * 기본 contentType
 					 */
 					"contentType" : "application/json; charset=utf-8",
