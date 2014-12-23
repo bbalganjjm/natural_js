@@ -91,7 +91,7 @@ header hgroup h1 {
 }
 
 header hgroup h2 {
-	margin-left: 0 0 0 50px;
+	margin: 0 0 0 50px;
 	text-shadow: -1px -1px #008000;
 }
 
