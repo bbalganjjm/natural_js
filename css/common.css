@@ -143,8 +143,8 @@ header nav > ul > li:hover > ul {
 	border-radius: 3px;
 }
 
-header nav > ul > li:hover > ul > li > a {
-	line-height: 20px;
+header nav > ul > li:hover > ul > li {
+	height: 20px;
 }
 
 section {
