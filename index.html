@@ -4,10 +4,6 @@
 <meta charset='utf-8'>
 <meta http-equiv="X-UA-Compatible" content="chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-<link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
-<link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
 
 <script type="text/javascript" charset="utf-8" src="lib/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="lib/natural_js/natural.core.js"></script>
@@ -20,6 +16,30 @@
 <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+
+<style type="text/css">
+body {
+    font-family: "Nanum Gothic", sans-serif;
+}
+</style>
+
+<script type="text/javascript">
+	WebFontConfig = {
+		custom : {
+			families : [ 'Nanum Gothic' ],
+			urls : [ 'http://fonts.googleapis.com/earlyaccess/nanumgothic.css' ]
+		}
+	};
+	(function() {
+		var wf = document.createElement('script');
+		wf.src = ('https:' == document.location.protocol ? 'https' : 'http')
+				+ '://ajax.googleapis.com/ajax/libs/webfont/1.4.10/webfont.js';
+		wf.type = 'text/javascript';
+		wf.async = 'true';
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(wf, s);
+	})();
+</script>
 
 <title>Natural-JS by bbalganjjm</title>
 </head>
