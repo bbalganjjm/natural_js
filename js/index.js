@@ -15,6 +15,9 @@ var IndexController = {
 		s.parentNode.insertBefore(wf, s);
 	},
 	init : function() {
-
+		this.loadMainContents();
+	},
+	loadMainContents : function() {
+		N(N.context.attr("architecture")["page"]["context"]).comm("html/gtst/gtst0100.html").submit();
 	}
 }

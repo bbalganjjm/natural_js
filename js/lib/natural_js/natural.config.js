@@ -24,7 +24,7 @@
 	 */
 	N.context.attr("architecture", {
 		"page" : {
-			"context" : "div#contents"
+			"context" : "#naturalJsContents"
 		},
 		"comm" : {
 			/**
