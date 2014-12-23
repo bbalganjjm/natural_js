@@ -6,7 +6,7 @@ html, body {
 
 body, pre, textarea, select {
     margin: 0;
-    font-size: 13px;
+    font-size: 14px;
 	font-family: "Nanum Gothic", "맑은 고딕", "dotum", "Segoe UI", sans-serif;
 	color: #002200;
 }
@@ -15,7 +15,7 @@ input[type='text'], input[type='password'], select, textarea, pre.data, div.data
 	border-radius: 3px;
 	padding: 3px 3px;
 	border: 1px solid #cccccc;
-	font-size: 13px;
+	font-size: 14px;
 	font-family: "Nanum Gothic", "맑은 고딕", "dotum", "Segoe UI", sans-serif;
 	color: #002200;
 	box-shadow: inset 1px 1px 1px rgba(0,0,0,0.075);
@@ -52,7 +52,7 @@ input[type='radio'], input[type='checkbox'] {
 a {
 	text-decoration: none;
 	font-weight: normal;
-	font-size: 13px;
+	font-size: 14px;
 	font-family: "Nanum Gothic", "맑은 고딕", "dotum", "Segoe UI", sans-serif;
 	color: #002200;
 }
@@ -108,7 +108,7 @@ div#top div#gnb {
 div#top div#gnb ul.item {
 	float: left;
 	padding: 0 10px;
-	font-size: 13px;
+	font-size: 14px;
 	font-weight: bold;
 	cursor: pointer;
 }
@@ -166,15 +166,15 @@ div#main div#contents {
 	padding-left: 7px;
 	line-height: 15px;
 	border-left: 5px solid blue;
-	font-size: 13px;
+	font-size: 14px;
 	font-weight: normal;
 }
 
 .intro h2 {
 	padding-left: 6px;
-	line-height: 13px;
+	line-height: 14px;
 	border-left: 5px solid red;
-	font-size: 13px;
+	font-size: 14px;
 	font-weight: normal;
 	margin-left: 15px;
 }
