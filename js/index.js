@@ -15,7 +15,7 @@ var IndexController = {
 		s.parentNode.insertBefore(wf, s);
 	},
 	init : function() {
-		N.alert("홈페이지 작업 중 입니다.");
+		N(window).alert("홈페이지 작업 중 입니다.");
 
 		this.loadMainContents();
 	},
