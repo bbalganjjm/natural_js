@@ -75,11 +75,11 @@ label {
 
 /* demo page layout */
 header {
-	background: linear-gradient(top, #009000, #008000);
-	background: -ms-linear-gradient(top, #009000, #008000);
-	background: -moz-linear-gradient(top, #009000, #008000);
-	background: -o-linear-gradient(top, #009000, #008000);
-	background: -webkit-linear-gradient(top, #009000, #008000);
+	background: linear-gradient(top, #005100, #008000);
+	background: -ms-linear-gradient(top, #005100, #008000);
+	background: -moz-linear-gradient(top, #005100, #008000);
+	background: -o-linear-gradient(top, #005100, #008000);
+	background: -webkit-linear-gradient(top, #005100, #008000);
 }
 
 header hgroup {
@@ -129,7 +129,7 @@ section {
 	min-width: 779px;
 	word-break: break-all;
 	border-radius: 3px;
-	background-color: #fffeff;
+	background-color: #35ba35;
 }
 
 section pre {
