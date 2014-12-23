@@ -108,13 +108,13 @@ header nav {
 	min-width: 779px;
 }
 
-header nav ul {
+header nav > ul {
 	list-style:none;
     margin:0;
     padding:0;
 }
 
-header nav ul > li {
+header nav > ul > li {
 	margin: 0 0 0 0;
     padding: 0 0 0 0;
     border : 0;
