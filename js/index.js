@@ -16,10 +16,12 @@ var IndexController = {
 	},
 	init : function(window) {
 		this.loadMainContents();
+
+		setTimeout(function() {
+			N(window).alert("홈페이지 작업 중 입니다.").show();
+		}, 2000);
 	},
 	loadMainContents : function() {
-		N(N.context.attr("architecture").page.context).comm("html/gtst/gtst0100.html").submit(function() {
-			N(window).alert("홈페이지 작업 중 입니다.").show();
-		});
+		N(N.context.attr("architecture").page.context).comm("html/gtst/gtst0100.html").submit();
 	}
 }
