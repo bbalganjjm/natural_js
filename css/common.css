@@ -122,6 +122,15 @@ header nav > ul > li {
     float: left;
 }
 
+header nav > ul > li > ul {
+	list-style:none;
+	display: none;
+}
+
+header nav > ul > li:hover > ul {
+	display: block;
+}
+
 section {
 	clear: both;
 	padding: 15px;
