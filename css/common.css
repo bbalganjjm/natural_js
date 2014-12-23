@@ -145,11 +145,12 @@ header nav > ul > li:hover > ul {
 }
 
 header nav > ul > li > ul > li {
-	height: 20px;
+	padding: 5px 0 5px 0;
 }
 
 header nav > ul > li > ul > li.nav-saction {
-	color: #eeeeee;
+	padding: 0;
+	color: #99e999;
 }
 
 section {
