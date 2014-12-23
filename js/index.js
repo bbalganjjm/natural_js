@@ -13,10 +13,10 @@ var IndexController = {
 		wf.async = 'true';
 		var s = document.getElementsByTagName('script')[0];
 		s.parentNode.insertBefore(wf, s);
-
-		N.alert("홈페이지 작업 중 입니다.");
 	},
 	init : function() {
+		N.alert("홈페이지 작업 중 입니다.");
+
 		this.loadMainContents();
 	},
 	loadMainContents : function() {
