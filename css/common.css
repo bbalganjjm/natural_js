@@ -141,10 +141,15 @@ header nav > ul > li:hover > ul {
 	background: #fff;
 	width: 200px;
 	border-radius: 3px;
+	margin-top: 5px;
 }
 
-header nav > ul > li:hover > ul > li {
+header nav > ul > li > ul > li {
 	height: 20px;
+}
+
+header nav > ul > li > ul > li.nav-saction {
+	color: #eeeeee;
 }
 
 section {
