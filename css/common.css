@@ -115,6 +115,10 @@ section {
 	word-break: break-all;
 }
 
+section pre > code {
+	overflow-x: auto;
+}
+
 footer {
 	margin: 0 auto;
 	max-width: 1003px;
