@@ -90,10 +90,11 @@ header hgroup {
 }
 
 header hgroup h1 {
-	color: #35ba35;
+	color: #004a00;
 	margin: 0;
 	padding: 15px;
 	font-weight: bold;
+	text-shadow: -1px -1px #008000;
 }
 
 header hgroup h2 {
