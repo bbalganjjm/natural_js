@@ -112,6 +112,7 @@ section {
 	margin: 0 auto;
 	max-width: 1003px;
 	min-width: 779px;
+	word-break: break-all;
 }
 
 footer {
