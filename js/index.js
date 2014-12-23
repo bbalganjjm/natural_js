@@ -14,10 +14,9 @@ var IndexController = {
 		var s = document.getElementsByTagName('script')[0];
 		s.parentNode.insertBefore(wf, s);
 	},
-	init : function() {
-		N(window).alert("홈페이지 작업 중 입니다.");
-
+	init : function(window) {
 		this.loadMainContents();
+		N(window).alert("홈페이지 작업 중 입니다.");
 	},
 	loadMainContents : function() {
 		N(N.context.attr("architecture").page.context).comm("html/gtst/gtst0100.html").submit();
