@@ -188,9 +188,11 @@
 							}
 							if(obj.children(":first").length > 0) {
 								var sc = obj.children(":first").instance("cont");
-								sc.request = obj.request;
-								if(sc !== undefined && sc.init !== undefined) {
-									sc.init(sc.view, obj.request);
+								if(sc !== undefined) {
+									sc.request = obj.request;
+									if(sc.init !== undefined) {
+										sc.init(sc.view, obj.request);
+									}
 								}
 							}
 						}
