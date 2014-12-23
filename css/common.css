@@ -135,6 +135,7 @@ header nav > ul > li:hover > ul {
 	position: absolute;
 	background: #fff;
 	box-shadow: 0 0 4px rgba(0,0,0,.5);
+	transition: all .2s .1s;
 	border-radius: 3px;
 }
 
