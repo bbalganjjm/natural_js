@@ -108,6 +108,7 @@ header nav {
 	max-width: 1003px;
 	min-width: 779px;
 	height: 60px;
+	padding-left: 10px;
 	background: url(../images/menu_bg.jpg) top left repeat-x;
 }
 
@@ -118,9 +119,9 @@ header nav > ul {
 }
 
 header nav > ul > li {
-	margin: 0 0 0 0;
+	margin: 0;
     padding: 20px 20px;
-    width: 100px;
+    width: 80px;
     float: left;
 }
 
@@ -137,10 +138,13 @@ header nav > ul > li > ul {
 
 header nav > ul > li:hover > ul {
 	display: block;
-	width: 312px;
 	position: absolute;
 	background: #fff;
 	border-radius: 3px;
+}
+
+header nav > ul > li > ul > li {
+	line-height: 20px;
 }
 
 section {
