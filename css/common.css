@@ -88,6 +88,12 @@ header hgroup {
 	min-width: 779px;
 }
 
+header nav {
+	margin: 0 auto;
+	max-width: 1003px;
+	min-width: 779px;
+}
+
 header hgroup h1 {
 	color: #55e555;
 	margin: 0;
