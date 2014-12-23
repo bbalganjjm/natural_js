@@ -82,6 +82,12 @@ header {
 	background: -webkit-linear-gradient(top, #009000, #008000);
 }
 
+header hgroup {
+	margin: 0 auto;
+	max-width: 1003px;
+	min-width: 779px;
+}
+
 header hgroup h1 {
 	color: #55e555;
 	margin: 0;
@@ -91,7 +97,7 @@ header hgroup h1 {
 }
 
 header hgroup h2 {
-	color: #006000;
+	color: #005000;
 	margin: 0 0 0 50px;
 	text-shadow: -1px -1px #008000;
 }
