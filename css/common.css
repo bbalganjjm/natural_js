@@ -86,6 +86,7 @@ header hgroup {
 	margin: 0 auto;
 	max-width: 1003px;
 	min-width: 779px;
+	padding-bottom: 20px;
 }
 
 header hgroup h1 {
