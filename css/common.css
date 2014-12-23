@@ -84,10 +84,13 @@ header {
 
 header hgroup h1 {
 	color: #ffffff;
+	margin: 0;
+	padding: 15px;
 	font-weight: bold;
 }
 
 header hgroup h2 {
+	margin: 10px 10px 10px 50px;
 }
 
 section {
@@ -95,6 +98,12 @@ section {
 	max-width: 1003px;
 	min-width: 779px;
 }
+
+
+
+
+
+
 
 div#header a#logo {
 	font-size: 32px;
