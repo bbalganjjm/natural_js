@@ -18,7 +18,7 @@ var IndexController = {
 		this.loadMainContents();
 	},
 	loadMainContents : function() {
-		N.comm(N.context.attr("architecture").page.context, {
+		N(N.context.attr("architecture").page.context).comm({
 			url: "html/gtst/gtst0100.html",
 			type: "GET"
 		}).submit();
