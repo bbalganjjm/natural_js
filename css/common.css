@@ -120,8 +120,12 @@ header nav > ul > li {
 	margin: 0 0 0 0;
     padding: 15px 15px;
     width: 100px;
-    border : 1px solid #27a827;
     float: left;
+}
+
+header nav > ul > li > a {
+	color: #ffffff;
+	font-size: 15px;
 }
 
 header nav > ul > li > ul {
