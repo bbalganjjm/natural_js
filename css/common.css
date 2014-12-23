@@ -7,7 +7,7 @@ html, body {
 body, pre, textarea, select {
     margin: 0;
     font-size: 12px;
-	font-family: "맑은 고딕", "dotum", "Segoe UI", sans-serif;
+	font-family: "Nanum Gothic", "맑은 고딕", "dotum", "Segoe UI", sans-serif;
 	color: #002200;
 }
 
@@ -16,7 +16,7 @@ input[type='text'], input[type='password'], select, textarea, pre.data, div.data
 	padding: 3px 3px;
 	border: 1px solid #cccccc;
 	font-size: 12px;
-	font-family: "맑은 고딕", "dotum", "Segoe UI", sans-serif;
+	font-family: "Nanum Gothic", "맑은 고딕", "dotum", "Segoe UI", sans-serif;
 	color: #002200;
 	box-shadow: inset 1px 1px 1px rgba(0,0,0,0.075);
 	vertical-align: middle;
@@ -53,7 +53,7 @@ a {
 	text-decoration: none;
 	font-weight: normal;
 	font-size: 12px;
-	font-family: "맑은 고딕", "dotum", "Segoe UI", sans-serif;
+	font-family: "Nanum Gothic", "맑은 고딕", "dotum", "Segoe UI", sans-serif;
 	color: #002200;
 }
 
