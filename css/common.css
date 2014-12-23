@@ -123,6 +123,7 @@ header nav > ul > li {
 }
 
 header nav > ul > li > ul {
+	clear: both;
 	list-style:none;
 	display: none;
 }
