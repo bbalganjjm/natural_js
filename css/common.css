@@ -135,7 +135,6 @@ header nav > ul > li:hover > ul {
 
 section {
 	clear: both;
-	padding: 15px;
 	margin: 0 auto;
 	max-width: 1003px;
 	min-width: 779px;
@@ -145,7 +144,11 @@ section {
 	background-color: #35ba35;
 }
 
-section pre {
+section article {
+	padding: 15px;
+}
+
+section article pre {
 	padding: 16px;
 	overflow: auto;
 	font-size: 85%;
@@ -154,7 +157,7 @@ section pre {
 	border-radius: 3px;
 }
 
-section pre > code {
+section article pre > code {
 	display: inline;
 	max-width: initial;
 	padding: 0;
