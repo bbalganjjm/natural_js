@@ -76,9 +76,17 @@ label {
 /* demo page layout */
 header {
 	margin: 0 auto;
-	max-width: 1200px;
-	min-width: 800px;
+	max-width: 1003px;
+	min-width: 779px;
 	padding-bottom: 5px;
+}
+
+header hgroup h1 {
+	color: #ffffff;
+}
+
+header hgroup h2 {
+	margin-left: 50px;
 }
 
 div#header a#logo {
