@@ -83,7 +83,6 @@ header {
 }
 
 header hgroup h1 {
-	color: #ffffff;
 	margin: 0;
 	padding: 15px;
 	text-shadow: 1px 1px #005000;
@@ -92,7 +91,7 @@ header hgroup h1 {
 
 header hgroup h2 {
 	margin-left: 0 0 0 50px;
-	text-shadow: -1px -1px #008000;
+	text-shadow: -1px -1px #005000;
 }
 
 section {
