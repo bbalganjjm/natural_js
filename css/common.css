@@ -1,7 +1,7 @@
 @charset "utf-8";
 
 html, body {
-	background-color : 008000;
+	background-color : #008000;
 }
 
 body, pre, textarea, select {
@@ -80,10 +80,6 @@ header {
 	background: -moz-linear-gradient(top, #009000, #008000);
 	background: -o-linear-gradient(top, #009000, #008000);
 	background: -webkit-linear-gradient(top, #009000, #008000);
-	margin: 0 auto;
-	max-width: 1003px;
-	min-width: 779px;
-	padding-bottom: 5px;
 }
 
 header hgroup h1 {
@@ -94,6 +90,12 @@ header hgroup h1 {
 
 header hgroup h2 {
 	margin: 10px 10px 10px 50px;
+}
+
+section {
+	margin: 0 auto;
+	max-width: 1003px;
+	min-width: 779px;
 }
 
 div#header a#logo {
