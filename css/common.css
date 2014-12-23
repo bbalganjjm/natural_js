@@ -126,6 +126,7 @@ section {
 	margin: 0 auto;
 	max-width: 1003px;
 	min-width: 779px;
+	min-height: 500px;
 	word-break: break-all;
 	border-radius: 3px;
 	background-color: #35ba35;
