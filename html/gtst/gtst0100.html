@@ -1,0 +1,302 @@
+<h3>
+					<a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true">
+						<span class="octicon octicon-link"></span>
+					</a>
+					Natural-JS 는 뭔가요? 먹는거애요?
+				</h3>
+				<p>먹는건 아니고 표준웹 기반의 RIA 웹 사이트를 쉽고 빠르게 구현할 수 있는  Javascript 라이브러리 입니다. </p>
+				<h3>
+					<a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true">
+						<span class="octicon octicon-link"></span>
+					</a>
+					Natural-JS 는 어떻게 생겼나요? 잘 생겼나요?
+				</h3>
+				<p>
+					Natural-JS 는 Natural-CORE, Natural-ARCHITECTURE, Natural-DATA, Natural-UI 로 구성 됩니다.<br>
+					<b>Natural-CORE</b>는 프레임워크에서 내부적으로 사용하는 CORE 라이브러리 패키지이고<br>
+					<b>Natural-ARCHITECTURE</b>는 복잡한 웹 UI 환경을 구조화, 단순화 시켜주는 CVC Architecture Pattern 기반의 Architecture Framework를 제공 합니다.<br>
+					<b>Natural-DATA</b>는 Data 처리 및 데이터 동기화에 대한 모듈들을 제공 하며<br>
+					<b>Natural-UI</b> 는 HTML 기반의 Grid, Form, Popup등 여러 가지 컴포넌트를 제공 합니다.<br/>
+					<br/>
+					자세한 아키텍처 구조와 설명은 아래 URL을 클릭하여 내용을 참조 해 보세요.
+				</p>
+				<p><a target="blank_" href="https://github.com/bbalganjjm/natural_js/wiki">https://github.com/bbalganjjm/natural_js/wiki</a></p>
+				<h3>
+					<a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true">
+						<span class="octicon octicon-link"></span>
+					</a>
+					이건 뭐지? 뭔말인지 하나도 모르겠네요. 저는 영업이 아니애요. 소스코드로 얘기해 줄 수 있나요?
+				</h3>
+				<p>
+					네. 그럼 Natural-JS에 대해서 천천히 한번 살펴 볼까요?
+				</p>
+				<br><br><br>
+				<h1>
+					<a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true">
+						<span class="octicon octicon-link"></span>
+					</a>
+					Natural-JS 시작하기
+				</h1>
+				<h3>1. Natural-JS 환경설정과 Communicator(N.comm), Controller(N.cont)</h3>
+				<p>
+					Natural-JS 의 필수 라이브러리 파일은 다음과 같습니다.<br><br>
+					&nbsp;&nbsp;1. <b>jquery-1.11.1.min.js</b> - Natural-JS 는 jQuery 를 기반으로 동작 하므로 반드시 임포트 해야합니다.<br>
+					<br>
+					&nbsp;&nbsp;2. <b>natural.core.js</b> - Natural-CORE 라이브러리 패키지 입니다.<br>
+					&nbsp;&nbsp;3. <b>natural.architecture.js</b> - Natural-ARCHITECTURE 라이브러리 패키지 입니다.<br>
+					&nbsp;&nbsp;4. <b>natural.data.js</b> - Natural-DATA 라이브러리 패키지 입니다.<br>
+					&nbsp;&nbsp;5. <b>natural.ui.js</b> - Natural-UI 라이브러리 패키지 입니다.<br>
+					<br>
+					&nbsp;&nbsp;6. <b>natural.ui.css</b> - Natural-UI 디자인 관련 스타일시트 입니다.<br>
+					<br>
+					&nbsp;&nbsp;7. <b>natural.config.js</b> - Natural-JS 의 환경설정 파일 입니다.<br>
+					<br>
+					먼저 기본 HTML 파일을 만들고 위 파일들을 아래와 같은 순서로 페이지에 Import 해 줍니다.
+				</p>
+				<pre><code>&lt;script type="text/javascript" src="lib/jquery-1.11.1.min.js"&gt;&lt;/script&gt;
+
+&lt;script type="text/javascript" src="lib/natural_js/natural.core.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="lib/natural_js/natural.architecture.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="lib/natural_js/natural.data.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="lib/natural_js/natural.ui.js"&gt;&lt;/script&gt;
+
+&lt;link rel="stylesheet" type="text/css" href="lib/natural_js/css/natural.ui.css" /&gt;
+
+&lt;script type="text/javascript" src="lib/natural_js/natural.config.js"&gt;&lt;/script&gt;</code></pre>
+
+				<p>
+				그다음 Natural-JS 의 구동 환경을 설정 합니다.<br>
+				Natural-JS 의 환경설정 파일인 natural.architecture.js 파일을 열어보세요.<br>
+				</p>
+				<pre><code>/**
+ * Natural-ARCHITECTURE Config
+ */
+N.context.attr("architecture", {
+	"page" : {
+		"context" : "#natural_contents"
+	},
+	...</code></pre>
+				<p>위와 같은 JSON 형식의 구문이 보일겁니다. JSON 이 뭔지는 아시죠? 아주 쉬워요. 모르시면 아래 URL 을 클릭 해서 참고 하시구요.</p>
+				<p><a target="blank_" href="http://www.json.org/json-ko.html">http://www.json.org/json-ko.html</a></p>
+				<p>Natrual-JS 에서 JSON 포멧은 아주 중요 합니다.
+				서버와 송수신하는 데이터 형식도 JSON 형태로 되어 있고 이후 나올 Controller(N.cont) 에서 클래스를 생성하는 방식도 JSON 형태 입니다.</p>
+				<p>다시 본론으로... Natural-JS의 환경설정값은 Context(N.context) 객체에 저장 됩니다. 환경설정값중 위 구문에 해당하는
+				N.context.attr("architecture").page.context 값은 아주 중요한 값입니다.
+				Natural-JS 을 이용해서 구현된 단위 페이지들이 표시될 최상위 요소(Element)를 jQuery Selector 문자열로 지정 해 주면 됩니다.
+				쉽게말해 싸이트의 본문(Body)영역이 표시 될 프레임을 지정 해 주면 됩니다.
+				Tab(N.tab) 이나 Popup(N.popup), Datepicker(N.datepicker) 등 Natural-UI에서 지원하는 컴포넌트들의 자원이 여기에서 지정한 영역에 생성되고
+				페이지가 전환 될때 이 영역에 다시 덮어 씌움으로서 브라우저의 자원을 반납하게 됩니다. 웹기반의 페이지 전환 없는(Ajax로 페이지를 불러오는) 사이트를
+				구축할때 브라우저 리소스 관리를 따로 해 주지 않아도 되어서 편하겠죠?
+				그외 환경설정 값들은 주석을 참고 하세요. natural.config.js에는 대부분 UI 컴포넌트들의 전역 설정값들이 지정 되어 있습니다. 모든 컴포넌트들은 여기에서 설정한 옵션값들을 기본으로 동작 됩니다.
+				UI 컴포넌트의 옵션 적용에 대한 우선순위는 다음과 같습니다.<br>
+				<br>
+				&nbsp;&nbsp;1. 컴포넌트 초기화시 지정한 옵션 값<br>
+				&nbsp;&nbsp;2. 환경설정에서 지정한 옵션 값<br>
+				&nbsp;&nbsp;3. 컴포넌트 클래스의 기본 옵션 값<br>
+				<br>
+				컴포넌트 클래스의 기본 옵션값중 환경설정파일에 지정되지 않은 옵션값은 컴포넌트 초기화시 따로 옵션을 지정하지 않았다면 컴포넌트 클래스의 기본옵션값으로 동작 됩니다.
+				기본 환경설정 파일에 정의되지 않은 컴포넌트 클래스의 기본 옵션값을 사이트 전역 옵션값으로 설정하고 싶다면 환경설정 파일의 해당 컴포넌트 부분에 추가 하면 됩니다.
+				예를 들어 사이트내에서 동작되는 모든 그리드 컴포넌트 Body영역의 높이를 300 픽셀로 기본값을 설정하고 싶다면 N.context.attr("ui").grid 부분에 다음과 같이 추가하면 됩니다.
+				</p>
+				<pre><code>N.context.attr("ui", {
+	...
+	"grid" : {
+		...
+		"height" : 300,
+		...
+	}
+	...</code></pre>
+				<p>"..." 은 생략 기호이니 그대로 넣지 마세요. ^^<br>
+				자~ 그럼 이제 환경설정은 끝났으니 본격적으로 개발을 시작 해 볼까요?
+				</p>
+				<p>Natural-JS는 페이지내에서 개발영역과 디자인영역을 구분하고 요소(Element)간, 스크립트 간 영역(scope)을 보장 해 주기위한
+				간단한 소스코드의 구성 규칙이 있습니다. 별로 어렵지 않습니다. 다음과 같이 View 영역과 Controller 영역만 구분하고 순서대로 배치해 주면 됩니다.
+				</p>
+				test_html.html
+				<pre><code>&lt;!-- View 영역 --&gt;
+&lt;div id="viewCont"&gt;
+	&lt;div id="result"&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+&lt;!-- View 영역 --&gt;
+
+&lt;script type="text/javascript"&gt;
+/* Controller 영역 */
+N("#viewCont").cont({
+	init : function(view, request) {
+    	//여기서 부터 시작하면 됩니다.
+    }
+});
+/* Controller 영역 */
+&lt;/script&gt;</code></pre>
+				<p>
+					각각의 페이지의 단위 조각들은 위와 같은 형식의 파일로 분할 할 수 있습니다. 이 분할 된 파일들은 N.comm 이나 Tab, Popup 등으로 불러와 페이지에 포함 시켜주면
+					물리적인 요소나 스크립트는 같은 페이지 안에 있지만 Controller(N.cont)가 논리적으로 구분을 시켜 줍니다. 말이 어렵죠? 그냥 같은 페이지에 다른 페이지를
+					마구 때려 넣어도 스크립트 겹치거나 요소의 구분이 흔들리지 않는 다는 말입니다. ^^
+					위 소스를 본문 컨텐츠 페이지로 활용할 경우에는 index 페이지를 따로 만들고 index 페이지에 Natural-JS 의 스크립트를 로딩하고 본문영역에만 위 내용이 담긴 파일을 Communicator(N.comm)을
+					통해서 index페이지의 본문 컨텐츠 영역에 넣어 주기만 하면 되겠지요? Communicator에 대한 설명은 이후에 나옵니다.<br>
+					위 내용을  "c:/natural_js/test_html.html" 파일로 저장하고 이 내용을 index 페이지에서 불러 보겠습니다.
+					먼저 다음 내용을 참고 해서 "c:/natural_js/index.html" 파일로 저장 해 주세요.
+				</p>
+index.html
+				<pre><code>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv="X-UA-Compatible" content="IE=Edge; text/html; charset=utf-8" /&gt;
+&lt;title&gt;Natural-JS&lt;/title&gt;
+&lt;script type="text/javascript" src="lib/jquery-1.11.1.min.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="lib/natural_js/natural.core.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="lib/natural_js/natural.architecture.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="lib/natural_js/natural.data.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="lib/natural_js/natural.ui.js"&gt;&lt;/script&gt;
+&lt;link rel="stylesheet" type="text/css" href="lib/natural_js/css/natural.ui.css" /&gt;
+&lt;script type="text/javascript" src="lib/natural_js/natural.config.js"&gt;&lt;/script&gt;
+
+&lt;script type="text/javascript"&gt;
+$(document).ready(function() {
+    ...
+});
+&lt;/script&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id="header"&gt;
+	&lt;a id="logo" href="index.html"&gt;Natural-JS&lt;/a&gt;
+&lt;/div&gt;
+&lt;div id="natural_contents"&gt;
+	&lt;!-- 이부분에 각각의 컨텐츠가 표시 됩니다. --&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+				<p>
+					$(document).ready() 메서드 아시죠? 화면의 HTML 요소들이 브라우저에 로딩이 완료된 다음에 수행되는, document.body의
+					onload 이벤트와 같은  역할을 수행 하는 jQuery 에서 제공하는 기능 입니다.<br>
+					서버에 데이터를 보내고 가져오는 역할을 수행하는 모듈은 Communicator(N.comm)(이하 N.comm) 입니다.<br>
+					$(document).ready() 부분을 밑에 구문으로 바꿔 주세요.
+				</p>
+				<pre><code>...
+$(document).ready(function() {
+	N(N.context.attr("architecture").page.context).comm("test_html.html").submit()
+})
+...
+</code></pre>
+				<p>
+					위와 같이 실행하면 config 에서 정의한 N.context.attr("architecture").page.context 의 값
+					"#natural_contents" div 요소에 N.comm을 통해 가져온 HTML파일의 내용을 넣어 줍니다.</p>
+				<p>페이지를 불러왔으니 이제는 N.comm 으로 데이터를 불러와 보겠습니다.</p>
+				<p>
+					Natural-JS 의 송수신 데이터 형식은 JSON 이라고 했죠? 먼저 json 형태로 데이터를 서비스 해 주는 서버가 필요합니다.
+					여기서 서버단의 작업에 대해서는 생략할께요. Spring MVC 이나 PHP 로 간단하게 LIST 나 Map 형태의 객체를 JSON 형태로 변환해주는 모듈들이 어마무지하게 많이 있습니다.
+					아래 URL을 클릭하여 들어가면 언어별 변환모듈에 대한 링크가 많이 있습니다. 좋은거 골라서 하나 쓰면 됩니다.
+				</p>
+				<p><a target="blank_" href="http://www.json.org/json-ko.html">http://www.json.org/json-ko.html</a></p>
+				<p>일단, 서버없이 한번 해보고 싶다면 다음과 같이 로컬에 JSON 형태의 Text 를 담은 파일을 하나 생성해 주세요</p>
+				c:/natural_js/test_data.json
+				<pre><code>[
+  {
+    "_id": "53e21cba9f982281b3459438",
+    "index": 0,
+    "guid": "1a9e5450-c664-4bfd-8174-d03005eca08d",
+    "isActive": "Y",
+    "balance": "$1,284.38",
+    "picture": "http://placehold.it/32x32",
+    "age": 26,
+    "eyeColor": "green",
+    "name": "Dean Stanley",
+    "gender": "male",
+    "company": "ZENTIA",
+    "email": "deanstanley@zentia.com",
+    "phone": "+1 (920) 409-2680",
+    "address": "936 Meserole Street, Vicksburg, Massachusetts, 1198",
+    "about": "Mollit elit qui reprehenderit fugiat excepteur adipisicing sunt id proident laborum sint proident.\r\nAmet cupidatat ipsum do irure qui magna sunt pariatur commodo eiusmod ipsum qui ad culpa.\r\nNisi tempor cupidatat do tempor reprehenderit irure consectetur cupidatat deserunt fugiat.\r\nIpsum sint id ipsum voluptate duis laboris esse sunt nisi mollit dolore cupidatat.\r\n",
+    "registered": "2014-02-20T03:58:09 -09:00",
+    "latitude": 81.131606,
+    "longitude": 87.110498,
+    "greeting": "Hello, Dean Stanley! You have 1 unread messages.",
+    "favoriteFruit": "strawberry"
+  },
+  {
+    "_id": "53e21cba47868d69889d7910",
+    "index": 1,
+    "guid": "9b855e26-2903-4b9a-b04a-e96544db2543",
+    "isActive": "N",
+    "balance": "$1,461.27",
+    "picture": "http://placehold.it/32x32",
+    "age": 31,
+    "eyeColor": "green",
+    "name": "Howard Kramer",
+    "gender": "male",
+    "company": "ASSISTIX",
+    "email": "howardkramer@assistix.com",
+    "phone": "+1 (806) 435-3679",
+    "address": "173 Harwood Place, Yonah, Guam, 8467",
+    "about": "Nisi velit eu non in dolor in. Qui aliquip sunt sit ut reprehenderit exercitation deserunt do. Sit voluptate officia qui fugiat qui dolor exercitation proident. Deserunt aliqua eiusmod eu magna dolor nostrud adipisicing excepteur.\r\n",
+    "registered": "2014-03-24T22:55:08 -09:00",
+    "latitude": -80.020226,
+    "longitude": -153.640872,
+    "greeting": "Hello, Howard Kramer! You have 9 unread messages.",
+    "favoriteFruit": "apple"
+  },
+  {
+    "_id": "53e21cba7a3cbdd773b7449d",
+    "index": 2,
+    "guid": "95b45a67-64ae-4bd6-a61f-c9226cfdf5af",
+    "isActive": "Y",
+    "balance": "$2,923.03",
+    "picture": "http://placehold.it/32x32",
+    "age": 26,
+    "eyeColor": "green",
+    "name": "Grace Hardy",
+    "gender": "female",
+    "company": "PROSELY",
+    "email": "gracehardy@prosely.com",
+    "phone": "+1 (872) 553-3815",
+    "address": "526 Havemeyer Street, Holtville, Puerto Rico, 6513",
+    "about": "Cillum incididunt reprehenderit elit laborum et sunt veniam. Velit pariatur id velit id occaecat. Anim magna veniam consequat ullamco in labore ullamco sit. Aliquip nisi duis dolore ad id id sunt veniam nulla quis aliquip. Adipisicing minim reprehenderit eiusmod sunt culpa incididunt minim adipisicing. Est commodo sunt Lorem in id esse nisi. Commodo labore deserunt nostrud consequat enim voluptate eu id incididunt tempor aliquip nulla.\r\n",
+    "registered": "2014-03-13T16:54:10 -09:00",
+    "latitude": 17.758973,
+    "longitude": -112.334365,
+    "greeting": "Hello, Grace Hardy! You have 8 unread messages.",
+    "favoriteFruit": "strawberry"
+  }
+]</code></pre>
+				<p>
+					대부분의 브라우저는 Ajax로 로컬파일을 참조할 수 없게 막혀 있습니다. 그러나 파이어폭스는 그냥 열려있네요? IE 도 보안경고 메시지가 뜨면 허용 해 주면 됩니다. 크롬도 이걸 해제시키는 방법이 있는데 구글링해서 찾아보세요.
+					^^ 일단 파이어폭스로 해 보겠습니다.
+				</p>
+				<pre><code>...
+N("#viewCont").cont({
+	init : function(view, request) {
+    	N.comm("test_data.json").submit(function(data) {
+			//data 는 서버로 부터 수신된 데이터
+			N("#result", view).text(JSON.stringify(data));
+		});
+    }
+});</code></pre>
+				<p>
+					미리 만들어 놓은 "c:/natural_js/index.html" 파일을 파폭으로 열어 보세요.
+					index 페이지에 의해 "c:/natural_js/test_html.html" 파일이 로딩되고 N.cont의 콜백함수의 init 함수가 최초 실행 됩니다.
+					위 로직이 실행되면 id 가  result 인 div 요소안에 불러온 파일의 내용이 표시 될 겁니다.
+					서버가 있다면 c:/natural_js/test_data.json 대신 데이터를 서비스 해 주는 URL 을 입력 하면 됩니다.<br>
+					서버에 파라메터를 보내고 싶다면 다음과 같이 N() 함수의 Argument로 파라메터를 넣고 실행 해 주세요.
+					JSON 형태의 파라메터를 서버에서 받으려면 서버에 JSON String 을 Map 객체로 변환 해 주는 모듈이 있어야 겠죠?
+				</p>
+				<pre><code>...
+N("#viewCont").cont({
+	init : function(view, request) {
+    	N({ param1 : "파라메터 애요" }).comm("test_data.json").submit(function(data) {
+			//data 는 서버로 부터 수신된 데이터
+			N("#result", view).text(JSON.stringify(data));
+		});
+    }
+});</code></pre>
+				<p>
+					피들러나 브라우저의 개발자 도구에서 network 탭에 가서 확인 해 보면 '{ param1 : "파라메터 애요" }' 라는 텍스트가
+					해당 URL 로 전송되는것을 확인 할 수 있습니다.
+				</p>
+				<p>
+				N().comm 에서 N() 의 Argument 로 HTML 요소나 jQuery select 가 지정되면 지정된 영역에 HTML 을 표시 해 주고 JSON 오브젝트를 지정하고 comm() 의 Argument로 데이터를 서비스하는 URL을 지정하면 요청한 URL의 파라메터가 됩니다.<br>
+				<br>
+				N.comm 과 N.cont 에서 제공하는 상세 기능을 확인 하려면 API 문서를 참고 하세요.
+				</p>
+				<h4>이제 기본 구조를 알았으니 Natural-JS 배포 소스에 첨부되어 있는 DEMO 페이지 소스를 참고하여 신나게 개발 해 볼까요?</h4>
