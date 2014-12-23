@@ -90,7 +90,7 @@ header hgroup h1 {
 }
 
 header hgroup h2 {
-	margin: 10px 10px 10px 50px;
+	margin-left: 50px;
 }
 
 section {
