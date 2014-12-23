@@ -140,10 +140,11 @@ header nav > ul > li:hover > ul {
 	display: block;
 	position: absolute;
 	background: #fff;
+	width: 200px;
 	border-radius: 3px;
 }
 
-header nav > ul > li > ul > li {
+header nav > ul > li:hover > ul > li > a {
 	line-height: 20px;
 }
 
