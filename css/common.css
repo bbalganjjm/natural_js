@@ -264,7 +264,7 @@ section {
 }
 
 section article {
-	margin: 15px;
+	padding: 1px 15px 15px 15px;
 }
 
 section article pre {
