@@ -182,6 +182,7 @@ header hgroup h2 {
 }
 
 header nav {
+	clear: both;
 	margin: 0 auto;
 	max-width: 1003px;
 	min-width: 560px;
