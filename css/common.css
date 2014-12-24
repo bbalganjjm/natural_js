@@ -172,10 +172,11 @@ header hgroup {
 header hgroup h1 {
 	float: left;
 	margin: 0;
-	padding: 10px;
+	padding: 20px;
 }
 
 header hgroup h2 {
+	padding: 20px;
 	float: right;
 	color: #009000;
 	text-shadow: -1px -1px #008000;
