@@ -211,9 +211,9 @@ header nav > ul > li {
 }
 
 header nav > ul > li > a {
-	color: #ffffff;
+	color: #99f999;
 	font-size: 15px;
-	text-shadow: -1px -1px #005000;
+	text-shadow: -1px -1px #004000;
 }
 
 header nav > ul > li > ul {
@@ -245,7 +245,7 @@ header nav > ul > li > ul > li.nav-saction {
 }
 
 header nav > ul > li > ul > li a {
-	color: #ffffff;
+	color: #99f999;
 	font-size: 14px;
 	text-shadow: -1px -1px #005000;
 }
