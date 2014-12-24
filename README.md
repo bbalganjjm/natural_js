@@ -22,7 +22,7 @@ Reference(참고)
  * https://github.com/bbalganjjm/natural_js/wiki
 - API Document(Korean) : /docs/Natural-JS_API_Document.pdf
 - DEMO : http://211.110.5.41/naturaljs/index.html
-- Getting Start(Korean) : https://github.com/bbalganjjm/natural_js/wiki/%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0
+- Getting Start(Korean) : http://bbalganjjm.github.io/natural_js
 
 ----------------------------------------------
 
@@ -32,7 +32,7 @@ Reference(참고)
  * https://github.com/bbalganjjm/natural_js/wiki
 - API 문서 : /docs/Natural-JS_API_Document.pdf
 - 데모 : http://211.110.5.41/naturaljs/index.html
-- 시작하기 문서 : https://github.com/bbalganjjm/natural_js/wiki/%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0
+- 시작하기 문서 : http://bbalganjjm.github.io/natural_js
 
 Features(특징)
 ========
