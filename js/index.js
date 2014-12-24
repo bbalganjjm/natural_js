@@ -21,8 +21,7 @@ var IndexController = {
 	setMenuEvent : function() {
 		$("nav > ul > li > ul a").click(function(e) {
 			e.preventDefault();
-			console.log(this.href);
-			if(this.href !== "#" && N.string.trimToNull(this.href) !== null) {
+			if(N.string.trimToEmpty(this.href).indexOf("#") < 0 && N.string.trimToNull(this.href) !== null) {
 				N(N.context.attr("architecture").page.context).comm(this.href).submit();
 			}
 		});
