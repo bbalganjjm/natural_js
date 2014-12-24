@@ -230,6 +230,7 @@ header nav > ul > li:hover > ul {
 
 header nav > ul > li > ul > li {
 	padding: 5px 0 5px 0;
+	text-align: left;
 }
 
 header nav > ul > li > ul > li.nav-saction {
