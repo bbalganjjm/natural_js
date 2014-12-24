@@ -15,10 +15,8 @@ var IndexController = {
 		s.parentNode.insertBefore(wf, s);
 	},
 	init : function(window) {
+		this.setMenuEvent();
 		this.loadMainContents();
-	},
-	loadMainContents : function() {
-		N(N.context.attr("architecture").page.context).comm("html/gtst/gtst0100.html").submit();
 	},
 	setMenuEvent : function() {
 		$("nav > ul > li > ul a").click(function(e) {
@@ -27,5 +25,8 @@ var IndexController = {
 				N(N.context.attr("architecture").page.context).comm(this.href).submit();
 			}
 		});
+	},
+	loadMainContents : function() {
+		N(N.context.attr("architecture").page.context).comm("html/gtst/gtst0100.html").submit();
 	}
 }
