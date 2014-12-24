@@ -166,7 +166,7 @@ header {
 header hgroup {
 	margin: 0 auto;
 	max-width: 1003px;
-	min-width: 560px;
+	min-width: 600px;
 	padding-bottom: 20px;
 }
 
@@ -188,7 +188,7 @@ header nav {
 	clear: both;
 	margin: 0 auto;
 	max-width: 1003px;
-	min-width: 560px;
+	min-width: 600px;
 	height: 60px;
 	background: linear-gradient(top, #007000, #005000);
 	background: -ms-linear-gradient(top, #007000, #005000);
@@ -207,8 +207,8 @@ header nav > ul {
 
 header nav > ul > li {
 	margin: 0;
-    padding: 20px 20px;
-    width: 70px;
+    padding: 20px 0 0 0;
+    width: 120px;
     text-align: center;
     float: left;
 }
@@ -257,7 +257,7 @@ section {
 	clear: both;
 	margin: 0 auto;
 	max-width: 1003px;
-	min-width: 560px;
+	min-width: 600px;
 	min-height: 350px;
 	word-break: break-all;
 	border-radius: 0 0 3px 3px;
@@ -292,7 +292,7 @@ section article pre > code {
 footer {
 	margin: 0 auto;
 	max-width: 1003px;
-	min-width: 560px;
+	min-width: 600px;
 }
 
 
