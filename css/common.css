@@ -254,7 +254,6 @@ header nav > ul > li > ul > li a {
 }
 
 section {
-	clear: both;
 	margin: 0 auto;
 	max-width: 1003px;
 	min-width: 560px;
@@ -265,6 +264,7 @@ section {
 }
 
 section article {
+	margin: 15px;
 }
 
 section article pre {
