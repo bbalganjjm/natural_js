@@ -203,7 +203,7 @@ header nav > ul > li {
     float: left;
 }
 
-header nav > ul > li > a {
+header nav > ul > li a {
 	color: #ffffff;
 	font-size: 15px;
 	text-shadow: -1px -1px #008000;
@@ -211,8 +211,6 @@ header nav > ul > li > a {
 
 header nav > ul > li > ul {
 	clear: both;
-	color: #ffffff;
-	text-shadow: -1px -1px #008000;
 	list-style:none;
 	display: none;
 	position: absolute;
