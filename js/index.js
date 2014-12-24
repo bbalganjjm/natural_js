@@ -16,10 +16,6 @@ var IndexController = {
 	},
 	init : function(window) {
 		this.loadMainContents();
-
-		setTimeout(function() {
-			N(window).alert("홈페이지 작업 중 입니다.<br>예제, 참고문서 작업 해야함.").show();
-		}, 1000);
 	},
 	loadMainContents : function() {
 		N(N.context.attr("architecture").page.context).comm("html/gtst/gtst0100.html").submit();
