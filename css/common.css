@@ -165,7 +165,7 @@ header {
 header hgroup {
 	margin: 0 auto;
 	max-width: 1003px;
-	min-width: 779px;
+	min-width: 560px;
 	padding-bottom: 20px;
 }
 
@@ -183,7 +183,7 @@ header hgroup h2 {
 header nav {
 	margin: 0 auto;
 	max-width: 1003px;
-	min-width: 779px;
+	min-width: 560px;
 	height: 60px;
 	background: url(../images/menu_bg.jpg) top left repeat-x;
 }
@@ -245,7 +245,7 @@ section {
 	clear: both;
 	margin: 0 auto;
 	max-width: 1003px;
-	min-width: 779px;
+	min-width: 560px;
 	min-height: 350px;
 	word-break: break-all;
 	border-radius: 0 0 3px 3px;
@@ -280,7 +280,7 @@ section article pre > code {
 footer {
 	margin: 0 auto;
 	max-width: 1003px;
-	min-width: 779px;
+	min-width: 560px;
 }
 
 
