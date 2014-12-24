@@ -175,8 +175,8 @@ header hgroup h1 {
 }
 
 header hgroup h2 {
+	float: right;
 	color: #009000;
-	margin: 0 0 0 220px;
 	text-shadow: -1px -1px #008000;
 }
 
