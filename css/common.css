@@ -190,12 +190,12 @@ header nav {
 	max-width: 1003px;
 	min-width: 560px;
 	height: 60px;
-	background: linear-gradient(top, #008000, #008900);
-	background: -ms-linear-gradient(top, #008000, #008900);
-	background: -moz-linear-gradient(top, #008000, #008900);
-	background: -o-linear-gradient(top, #008000, #008900);
-	background: -webkit-linear-gradient(top, #008000, #008900);
-	background-color: #008900;
+	background: linear-gradient(top, #009000, #008000);
+	background: -ms-linear-gradient(top, #009000, #008000);
+	background: -moz-linear-gradient(top, #009000, #008000);
+	background: -o-linear-gradient(top, #009000, #008000);
+	background: -webkit-linear-gradient(top, #009000, #008000);
+	background-color: #008000;
 }
 
 header nav > ul {
