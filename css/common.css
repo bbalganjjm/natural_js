@@ -214,6 +214,7 @@ header nav > ul > li {
 
 header nav > ul > li > a {
 	color: #99f999;
+	font-weight: bold;
 	font-size: 15px;
 	text-shadow: -1px -1px #004000;
 }
