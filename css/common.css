@@ -171,13 +171,15 @@ header hgroup {
 }
 
 header hgroup h1 {
+	float: left;
 	margin: 0;
 	padding: 20px;
 }
 
 header hgroup h2 {
+	float: right;
 	margin: 0;
-	padding: 0 0 0 210px;
+	padding: 0;
 	color: #27a827;
 	text-shadow: -1px -1px #008000;
 }
