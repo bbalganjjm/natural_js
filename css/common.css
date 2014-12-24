@@ -176,6 +176,7 @@ header hgroup h1 {
 }
 
 header hgroup h2 {
+	margin: 0;
 	padding: 20px;
 	float: right;
 	color: #009000;
