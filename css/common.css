@@ -153,7 +153,7 @@ label {
 	font-weight: bold;
 }
 
-/* demo page layout */
+/* page layout */
 header {
 	background: linear-gradient(top, #27a827, #008000);
 	background: -ms-linear-gradient(top, #27a827, #008000);
@@ -179,7 +179,7 @@ header hgroup h1 {
 
 header hgroup h2 {
 	float: right;
-	margin: 32px 0 9px 0;
+	margin: 32px 9px 9px 0;
 	padding: 0;
 	color: #27a827;
 	text-shadow: -1px -1px #008000;
