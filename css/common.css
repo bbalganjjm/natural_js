@@ -169,6 +169,11 @@ header hgroup {
 	padding-bottom: 20px;
 }
 
+header hgroup h1 {
+	margin: 0;
+	padding: 5px;
+}
+
 header hgroup h2 {
 	color: #27a827;
 	margin: 0 0 0 50px;
