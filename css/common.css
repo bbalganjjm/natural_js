@@ -231,15 +231,15 @@ header nav > ul > li > ul > li {
 
 header nav > ul > li > ul > li.nav-saction {
 	padding: 0;
-	color: #27a827;
+	color: #009000;
 	font-size: 14px;
-	text-shadow: -1px -1px #009000;
+	text-shadow: -1px -1px #007000;
 }
 
 header nav > ul > li > ul > li a {
 	color: #ffffff;
 	font-size: 14px;
-	text-shadow: -1px -1px #009000;
+	text-shadow: -1px -1px #007000;
 }
 
 section {
