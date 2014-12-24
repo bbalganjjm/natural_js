@@ -419,10 +419,10 @@
 			 */
 			"message" : {
 				"ko_KR" : {
-					"empty" : "조회를 하지 않았거나 조회된 데이터가 없습니다.",
+					"empty" : "조회를 하지 않았거나 조회된 데이터가 없습니다."
 				},
 				"en_US" : {
-					"empty" : "No inquired data or no data available.",
+					"empty" : "No inquired data or no data available."
 				}
 			}
 		}
