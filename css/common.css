@@ -172,8 +172,10 @@ header hgroup {
 header hgroup h1 {
 	color: #99f999;
 	margin: 0;
-	padding: 15px;
+	padding: 5px;
+	font-size: 25px;
 	font-weight: bold;
+	text-shadow: -2px -2px #008000;
 }
 
 header hgroup h2 {
