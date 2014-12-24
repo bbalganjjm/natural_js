@@ -231,9 +231,9 @@ header nav > ul > li > ul > li {
 
 header nav > ul > li > ul > li.nav-saction {
 	padding: 0;
-	color: #339333;
+	color: #99e999;
 	font-size: 14px;
-	text-shadow: -1px -1px #007000;
+	text-shadow: -1px -1px #005000;
 }
 
 header nav > ul > li > ul > li a {
