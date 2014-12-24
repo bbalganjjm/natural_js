@@ -170,6 +170,7 @@ header hgroup {
 }
 
 header hgroup h1 {
+	float: left;
 	margin: 0;
 	padding: 10px;
 }
