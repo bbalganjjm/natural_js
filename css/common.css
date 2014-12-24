@@ -161,6 +161,7 @@ header {
 	background: -o-linear-gradient(top, #27a827, #008000);
 	background: -webkit-linear-gradient(top, #27a827, #008000);
 	background-color: #008000;
+	min-width: 560px;
 }
 
 header hgroup {
