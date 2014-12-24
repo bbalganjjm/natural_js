@@ -223,7 +223,6 @@ header nav > ul > li > ul {
 	position: absolute;
 	background: #007000;
 	border-radius: 3px;
-	margin-top: 5px;
 	padding: 5px 10px 5px 10px;
 	box-shadow: 0 2px 3px 0 rgba(0,0,0,0.3);
 }
