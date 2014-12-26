@@ -296,11 +296,11 @@ footer {
 }
 
 
-dl.qna {
+article dl.qna {
 
 }
 
-dl.qna dt {
+article dl.qna dt {
 	font-size: 15px;
 	font-weight: bold;
 	padding: 10px 0 10px 20px;
@@ -308,26 +308,26 @@ dl.qna dt {
 	background: url("../images/icon/dt_leaf.png") no-repeat 0 50%;
 }
 
-dl.qna dd {
+article dl.qna dd {
 	line-height: 150%;
 }
 
-h1 {
+article h1 {
 	padding: 10px 0 10px 35px;
 	border-bottom: 1px solid #009000;
 	font-size: 18px;
 	background: url("../images/icon/h1_leaf.png") no-repeat 0 50%;
 }
 
-h2 {
+article h2 {
 	font-size: 16px;
 }
 
-ol li {
+article ol li {
 	line-height: 150%;
 }
 
-p {
+article p {
 	line-height: 150%;
 }
 
