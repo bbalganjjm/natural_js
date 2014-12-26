@@ -149,7 +149,7 @@ $(document).ready(function() {
 	&lt;a id="logo" href="index.html"&gt;Natural-JS&lt;/a&gt;
 &lt;/div&gt;
 &lt;div id="natural_contents"&gt;
-	&lt;!-- 이부분에 각각의 컨텐츠가 표시 됩니다. --&gt;
+	&lt;!-- 이부분에 페이지 컨텐츠가 표시 됩니다. --&gt;
 &lt;/div&gt;
 &lt;/body&gt;
 &lt;/html&gt;</code>
@@ -251,7 +251,7 @@ $(document).ready(function() {
 	<pre><code>...
 N("#viewCont").cont({
 	init : function(view, request) {
-    	N.comm("test_data.json").submit(function(data) {
+		N.comm("test_data.json").submit(function(data) {
 			//data 는 서버로 부터 수신된 데이터
 			N("#result", view).text(JSON.stringify(data));
 		});
@@ -267,7 +267,7 @@ N("#viewCont").cont({
 	<pre><code>...
 N("#viewCont").cont({
 	init : function(view, request) {
-    	N({ param1 : "파라메터 애요" }).comm("test_data.json").submit(function(data) {
+		N({ param1 : "파라메터 애요" }).comm("test_data.json").submit(function(data) {
 			//data 는 서버로 부터 수신된 데이터
 			N("#result", view).text(JSON.stringify(data));
 		});
