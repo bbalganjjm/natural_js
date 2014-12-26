@@ -273,7 +273,7 @@ section article pre {
 	overflow: auto;
 	font-size: 85%;
 	line-height: 1.45;
-	background-color: #35ba35;
+	background-color: #ddfddd;
 	border-radius: 3px;
 }
 
@@ -326,6 +326,16 @@ h2 {
 ol li {
 	line-height: 150%;
 }
+
+p {
+	line-height: 150%;
+}
+
+
+
+
+
+
 
 /* form example */
 table.form {
