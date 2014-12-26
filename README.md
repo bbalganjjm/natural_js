@@ -17,7 +17,7 @@ Natural-JS 는 Natural-CORE, Natural-ARCHITECTURE, Natural-DATA, Natural-UI 로 
 Reference(참고)
 =========
 - Natural-JS Libraries Directory : /lib/natural_js/
-- Home page
+- Home page : http://bbalganjjm.github.io/natural_js
  * Basic Document(Korean) : http://bbalganjjm.github.io/natural_js/#refr/refr0100
  * Getting Start(Korean) : http://bbalganjjm.github.io/natural_js
 - API Document(Korean) : /docs/Natural-JS_API_Document.pdf
@@ -26,7 +26,7 @@ Reference(참고)
 ----------------------------------------------
 
 - Natural-JS 라이브러리 디렉토리 : /lib/natural_js/
-- 홈페이지
+- 홈페이지 : http://bbalganjjm.github.io/natural_js
  * 기본문서 : http://bbalganjjm.github.io/natural_js/#refr/refr0100
  * 시작하기 문서 : http://bbalganjjm.github.io/natural_js
 - API 문서 : /docs/Natural-JS_API_Document.pdf
