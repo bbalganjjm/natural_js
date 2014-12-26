@@ -319,6 +319,11 @@ h1 {
 	background: url("../images/icon/h1_leaf.png") no-repeat 0 50%;
 }
 
+h2 {
+	font-size: 16px;
+	padding-left: 10px;
+}
+
 /* form example */
 table.form {
 	width: auto;
