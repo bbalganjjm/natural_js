@@ -334,6 +334,7 @@ article a.link {
 	background: url("../images/icon/link.png") no-repeat 0 50%;
 	text-decoration: underline;
 	color: #00c000;
+	margin-left: 15px;
 }
 
 /* form example */
