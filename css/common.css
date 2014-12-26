@@ -296,9 +296,18 @@ footer {
 }
 
 
+dl.qna {
 
+}
 
+dl.qna dt {
+	font-size: 18px;
+	padding: 10px 0 10px 0;
+}
 
+dl.qna dt {
+	line-height: 20px;
+}
 
 
 
