@@ -330,7 +330,7 @@ article h4 {
 }
 
 article a.link {
-	padding-left: 16px;
+	padding-left: 20px;
 	background: url("../images/icon/link.png") no-repeat 0 50%;
 	border-bottom: 1px solid #00c000;
 	color: #00c000;
