@@ -33,6 +33,10 @@ var IndexController = {
 		});
 	},
 	loadMainContents : function() {
-		N(N.context.attr("architecture").page.context).comm("html/gtst/gtst0100.html").submit();
+		if(N.string.trimToNull(location.hash) !== null) {
+			N(N.context.attr("architecture").page.context).comm("location.hash").submit();
+		} else {
+			N(N.context.attr("architecture").page.context).comm("html/gtst/gtst0100.html").submit();
+		}
 	}
 }
