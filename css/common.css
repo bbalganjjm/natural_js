@@ -301,7 +301,7 @@ dl.qna {
 }
 
 dl.qna dt {
-	font-size: 16px;
+	font-size: 15px;
 	font-weight: bold;
 	padding: 10px 0 10px 20px;
 	line-height: 150%;
@@ -312,7 +312,11 @@ dl.qna dd {
 	line-height: 150%;
 }
 
-
+h1 {
+	padding: 20px 0 20px 35px;
+	font-size: 18px;
+	background: url("../images/icon/h1_leaf.png") no-repeat 0 50%;
+}
 
 /* form example */
 table.form {
