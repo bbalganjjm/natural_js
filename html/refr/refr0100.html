@@ -35,4 +35,87 @@
 	<p>Natural-JS 는 크게 Natural-CORE, Natural-ARCHITECTURE 와 Natural-DATA, Natural-UI 로 나눠집니다. Natural-CORE는 프레임워크에서
 		전반적으로 사용되어 지는 라이브러리의 패키지이고 Natural-ARCHITECTURE는 웹 어플리케이션 UI 개발에 대한 아키텍처를 제공 해 주고 Natural-DATA는 Data 처리 및 데이터 동기화에 대한
 		모듈들을 제공 하며 Natural-UI 는 HTML 기반의 Grid, Form, Popup등 여러 가지 컴포넌트를 제공 합니다.</p>
+	<p align="center">
+		<img src="images/refr/pic3.png" />
+	</p>
+	<p align="center">[그림3] Natural-JS 구성도</p>
+
+	<h3>가. Natural-CORE</h3>
+	<p>Natural-CORE는 Natural-JS에서 전역으로 사용하는 라이브러리 패키지입니다. Natural-Core는 다음과 같은 기능들로 구성 되어 있습니다.</p>
+	<ul>
+		<li>Core Utitlities : Locale 설정, 로깅등의 코어 유틸리티들입니다.</li>
+		<li>N.string : 문자열 조작 관련 메서드 집합 클래스</li>
+		<li>N.date : 날짜 관련 메서드 집합 클래스</li>
+		<li>N.element : HTML 요소 제어에 관련된 메서드 집합 클래스</li>
+		<li>N.browser : 웹 브라우저와 관련된 메서드 집합 클래스</li>
+		<li>N.message : 메시지 처리 관련 메서드 집합 클래스, 메시지 리소스의 데이터 처리 및 다국어 처리등의 역할을 수행</li>
+		<li>N.json : JSON 데이터 가공에 관련된 메서드 집합 클래스</li>
+	</ul>
+
+	<h3>나. Natural-ARCHITECTURE</h3>
+	<p>Natural-JS 는 CVC 아키텍처 패턴 기반의 Natural-Architecture Framework 를 제공하여 웹 어플리케이션 UI 개발의 복잡성을 해결하고 개발생산성을 향상 시켜줍니다.
+		Natural-ARCHITECTURE 는 다음 다이어그램과 같이 구성되어 있습니다.</p>
+	<p align="center">
+		<img src="images/refr/pic4.png" />
+	</p>
+	<p align="center">[그림4] Natural-ARCHITECTURE</p>
+	<h4>1) CVC Architecture Pattern</h4>
+	<p>CVC 아키텍처 패턴은 기존 MVC로 구현된 서버중심 웹 어플리케이션에서 단순 뷰(View) 영역을 표현하던 클라이언트 브라우저를 [그림5]와 같이 클라이언트중심의 MVC로 구성하고 서버를 데이터만
+		서비스해주는 단순 Model 영역으로 정의하여 MVC를 바라보는 관점을 서버중심에서 클라이언트 중심으로 이동 하는것이 CVC아키텍처 패턴의 핵심이론입니다. 이로서 클라이언트 브라우저를 웹 어플리케이션 서버와
+		서버기술의 종속성으로부터 탈피시킬 수 있고 디자인영역과 개발영역을 완벽하게 분리하여 개발의 복잡도를 낮출 수 있습니다.</p>
+	<p align="center">
+		<img src="images/refr/pic5.png" />
+	</p>
+	<p align="center">[그림5] CVC Architecture Pattern</p>
+	<h4>2) Natural Architecture Framework</h4>
+	<p>Natural Architecture Framework는 CVC Architecture Pattern(이하 CVC 패턴)의 Communicator영역은 N.comm 클래스로 구현하였고,
+		Controller 영역은 N.cont 라는 클래스로 구현되어 있습니다. 각 페이지별로 구현되는 N.cont 는 데이터를 가져와 가공하거나 View 에 데이터를 뿌려주거나 View로부터 데이터를 가져와
+		N.comm 에 전달 해 주는 역할을 수행 합니다. N.cont 는 페이지 별로 구현된 Controller 들의 라이프사이클과 Scope을 관리 해 줍니다. View 영역은 CVC 패턴에 정의된바 와같이
+		개발스크립트가 첨가되지 않은 순수 HTML만으로 구현하는 방법을 프레임워크에서 제공하고 있습니다. 특히 N.comm 는 논리페이지(물리적으로는 같이 있지만 논리적 Scope에 의해 분리된 페이지(팝업, 탭등))
+		간 데이터를 전송하고 요청 정보등을 가져올 수 있는 N.comm.request 객체를 제공 합니다. 또한 N.comm에서는 서버에 요청(Request)과 응답(Response)의 각 단계별로 공통된 기능을
+		수행시킬 수 있는 Java Servlet Filter나 Spring의 Interceptor와 같은 기능을 수행하는 Natural Filter 기능을 제공 합니다.</p>
+	<p align="center">
+		<img src="images/refr/pic6.png" />
+	</p>
+	<p align="center">[그림6] Natural Architecture Framework</p>
+	<p>Natural Application Context(N.context)는 Natural-JS 의 생명주기(Life-Cycle) 안의 데이터 저장소 역할을 수행 하며 설정 데이터, 메시지 리소스 등을 저장
+		하고 관리할 수 있는 기능을 제공 합니다.</p>
+
+	<h3>다. Natural-DATA</h3>
+	<p>Natural-DATA는 서버에서 가져온 데이터나 직접 작성한 JSON 데이터를 가공(정제, 조작)할 수 있는 기능과 데이터를 양식화(Formatting), 검증(Validate)을 할 수 있는 기능과
+		동일한 데이터를 사용하는 컴포넌트나 라이브러리 간 실시간 데이터 동기화(Synchronous)를 보장 해 주는 기능을 수행합니다. Natural-JS 는 데이터와 데이터가 표현될 HTML 요소(Element)의
+		값이 분리되어 있습니다. 원(元) 데이터는 메모리에 저장되고 HTML 요소에 표시되는 값들은 단지 보여주는 값들로만 처리될 뿐 표시되어 있는 데이터는 참고하지 않습니다(입력요소에 의한 입력 값 제외). HTML
+		입력 요소를 통한 입력 값이 수정되거나 생성되면 이와 연결되어 있는 메모리의 데이터(이하 DataSet)도 자동으로 수정 생성 됩니다. 때문에 서버와의 데이터 송수신시 메모리의 DataSet 만 다루면 되어
+		개발이 깔끔해지고 간단(Simple)해 집니다. 다음은 Natural-DATA 패키지의 각각의 모듈에 대한 설명입니다.</p>
+	<h4>1) DataSync</h4>
+	<p>DataSync는 동일한 데이터를 사용하는 컴포넌트나 라이브러리간 데이터 동기화를 보장 해주는 Data Observer 역할을 수행하는 모듈 입니다.</p>
+	<h4>2) Formater</h4>
+	<p>Formater는 주어진 데이터를 양식화된 데이터로 변환하거나 HTML 입력요소에 양식화된 데이터를 표시 해 줍니다. 제공되는 이벤트들을 활용하면 입력요소(Input Element)에 사용자가 입력한
+		값에 대한 실시간 Formatting 기능도 간단하게 구현 할 수 있습니다. 또한 유용한 Formatting Rule 들이 기본으로 탑재 되어 있어 있습니다. 물론 사용자 정의 Rule 들도 손쉽게 추가 할 수
+		있습니다.</p>
+	<h4>3) Validator</h4>
+	<p>Validator는 주어진 데이터나 HTML 입력요소의 값을 검증하여 결과 데이터를 반환하거나 HTML 입력요소에 메시지를 표시 해 줍니다. 또한 유용한 Validation Rule 들이 기본으로 탑재
+		되어 있습니다. 물론 사용자 정의 Rule 들도 손쉽게 추가 할 수 있습니다.</p>
+	<h4>4) Utilities</h4>
+	<p>Natural-JS는 어플리케이션 개발의 편의성을 제공하기 위한 여러 가지 유틸리티를 제공합니다.</p>
+	<ul>
+		<li>N.refine : 서버에서 가져온 데이터를 Natural-JS UI 컴포넌트들에서 쓸 수 있도록 데이터 정제</li>
+		<li>N.filter : 조건에 의한 JSON Array 데이터 필터링</li>
+		<li>N.sort : JSON Array 데이터의 컬럼별 정렬</li>
+	</ul>
+
+	<h3>라. Natural-UI</h3>
+	<p>Natural-JS는 표준웹 기반의 RIA를 손쉽게 구현 할 수 있도록 필수 컴포넌트를 제공 합니다. 모든 컴포넌트는 개개별로 사용할수도 있지만 결합되어 사용되어질 경우 Natural-CORE와
+		Natural-DATA 기반하에 모두 유기적으로 연동되어 좀더 편리하고 강력한 개발 환경을 제공 해 줍니다. 또한 컴포넌트들에 대한 기본 옵션을 Global Config 에 지정할 수 있어 통일된 UI 환경을
+		손쉽게 구성 할 수 있습니다. 물론 컴포넌트 생성 시 컴포넌트 옵션을 따로 지정 할 수 있습니다. Data 와 관련된 컴포넌트들(Select, Form, Grid)은 실제 데이터(메모리에 저장)와 HTML 요소로
+		보여지는 데이터가 따로 관리 되어 집니다. Grid를 예를 들면 화면에서 새로운 행을 생성하면 메모리의 데이터도 새로운 행이 생성되고 값을 수정하면 메모리의 값도 실시간으로 수정됩니다. Formatting,
+		Validate 등 Data 조작과 검증에 관련된 라이브러리들도 이 메모리의 데이터를 기반으로 동작 됩니다. 수정, 입력, 삭제된 데이터를 서버로 보낼때는 화면의 입력요소에서 가져올 필요 없이 자동으로
+		동기화되어진 메모리의 데이터만 보내면 되어서 UI 개발이 단순 해 집니다. 또한 UI 컴포넌트들은 Controller 영역에서 컴포넌트의 기본 옵션을 직접 적용할 수 있는 명령형 옵션과 컴포넌트의 기본옵션과
+		서브옵션을 view 영역의 HTML 요소의 data 속성에 JSON Text 형태로 지정할 수 있는 선언형 옵션을 지원합니다. 선언형 옵션과 명령형 옵션의 지원 항목은 컴포넌트 기능의 속성에 따라 일치 하지 않을
+		수 있습니다.</p>
+	<p>Natural-UI는 다음과 같은 컴포넌트들과 구조로 구성 되어 있습니다.</p>
+	<p align="center">
+		<img src="images/refr/pic7.png" />
+	</p>
+	<p align="center">[그림7] Natural-UI</p>
 </article>
