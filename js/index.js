@@ -27,6 +27,7 @@ var IndexController = {
 				N(N.context.attr("architecture").page.context).comm(this.href).submit();
 
 				// Google Analytics
+				ga('create', 'UA-58001949-1', 'auto');
 				ga('send', 'pageview');
 			}
 		});
