@@ -332,7 +332,8 @@ article h4 {
 article a.link {
 	padding-left: 16px;
 	background: url("../images/icon/link.png") no-repeat 0 50%;
-	text-decoration: overline;
+	text-decoration: underline;
+	color: #00c000;
 }
 
 /* form example */
