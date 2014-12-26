@@ -7,8 +7,7 @@
 			Natural-JS 는 Natural-CORE, Natural-ARCHITECTURE, Natural-DATA, Natural-UI 로 구성 됩니다.<br> <b>Natural-CORE</b>는
 			프레임워크에서 내부적으로 사용하는 CORE 라이브러리 패키지이고<br> <b>Natural-ARCHITECTURE</b>는 복잡한 웹 UI 환경을 구조화, 단순화 시켜주는 CVC Architecture
 			Pattern 기반의 Architecture Framework를 제공 합니다.<br> <b>Natural-DATA</b>는 Data 처리 및 데이터 동기화에 대한 모듈들을 제공 하며<br> <b>Natural-UI</b>
-			는 HTML 기반의 Grid, Form, Popup등 여러 가지 컴포넌트를 제공 합니다.<br>
-			자세한 아키텍처 구조와 설명은 아래 URL을 클릭하여 내용을 참조 해 보세요. <br><br>
+			는 HTML 기반의 Grid, Form, Popup등 여러 가지 컴포넌트를 제공 합니다.<br> 자세한 아키텍처 구조와 설명은 아래 URL을 클릭하여 내용을 참조 해 보세요. <br> <br>
 			<a target="blank_" href="https://github.com/bbalganjjm/natural_js/wiki">https://github.com/bbalganjjm/natural_js/wiki</a>
 		</dd>
 		<dt>이건 뭐지? 뭔말인지 하나도 모르겠네요. 소스코드로 얘기해 줄 수 있나요?</dt>
@@ -20,7 +19,7 @@
 	<p>Natural-JS 의 필수 라이브러리 파일은 다음과 같습니다.</p>
 	<ol>
 		<li><b>jquery-1.11.1.min.js</b> - Natural-JS 는 jQuery 를 기반으로 동작 하므로 반드시 임포트 해야합니다.</li>
-		<li><b>natural.core.js</b> - Natural-CORE 라이브러리 패키지	입니다.</li>
+		<li><b>natural.core.js</b> - Natural-CORE 라이브러리 패키지 입니다.</li>
 		<li><b>natural.architecture.js</b> - Natural-ARCHITECTURE 라이브러리 패키지 입니다.</li>
 		<li><b>natural.data.js</b> - Natural-DATA 라이브러리 패키지 입니다.</li>
 		<li><b>natural.ui.js</b> - Natural-UI 라이브러리 패키지 입니다.</li>
@@ -29,7 +28,8 @@
 	</ol>
 	<p>먼저 기본 HTML 파일을 만들고 위 파일들을 아래와 같은 순서로 페이지에 Import 해 줍니다.</p>
 
-	<pre><code>&lt;script type="text/javascript" src="lib/jquery-1.11.1.min.js"&gt;&lt;/script&gt;
+	<pre>
+		<code>&lt;script type="text/javascript" src="lib/jquery-1.11.1.min.js"&gt;&lt;/script&gt;
 
 &lt;script type="text/javascript" src="lib/natural_js/natural.core.js"&gt;&lt;/script&gt;
 &lt;script type="text/javascript" src="lib/natural_js/natural.architecture.js"&gt;&lt;/script&gt;
@@ -44,7 +44,9 @@
 	<p>
 		그다음 Natural-JS 의 구동 환경을 설정 합니다.<br> Natural-JS 의 환경설정 파일인 natural.architecture.js 파일을 열어보세요.<br>
 	</p>
-	<pre><code>/**
+
+	<pre>
+		<code>/**
  * Natural-ARCHITECTURE Config
  */
 N.context.attr("architecture", {
@@ -60,25 +62,30 @@ N.context.attr("ui", {
 		"container" : "#natural_contents"
 	...</code>
 </pre>
+
 	<p>위와 같은 JSON 형식의 구문이 보일겁니다. JSON 이 뭔지는 아시죠? 아주 쉬워요. 모르시면 아래 URL 을 클릭 해서 참고 하시구요.</p>
-	<p>
-		<a target="blank_" href="http://www.json.org/json-ko.html">http://www.json.org/json-ko.html</a>
-	</p>
+
+	<a target="blank_" href="http://www.json.org/json-ko.html">http://www.json.org/json-ko.html</a>
+
 	<p>Natrual-JS 에서 JSON 포멧은 아주 중요 합니다. 서버와 송수신하는 데이터 형식도 JSON 형태로 되어 있고 이후 나올 Controller(N.cont) 에서 클래스를 생성하는 방식도
 		JSON 형태 입니다.</p>
-	<p>
-		다시 본론으로... Natural-JS의 환경설정값은 Context(N.context) 객체에 저장 됩니다. 환경설정값중 위 구문에 해당하는
+	<p>다시 본론으로... Natural-JS의 환경설정값은 Context(N.context) 객체에 저장 됩니다. 환경설정값중 위 구문에 해당하는
 		N.context.attr("architecture").page.context 값은 아주 중요한 값입니다. Natural-JS 을 이용해서 구현된 단위 페이지들이 표시될 최상위 요소(Element)를 jQuery
-		Selector 문자열로 지정 해 주면 됩니다. 쉽게말해 싸이트의 본문(Body)영역이 표시 될 프레임을 지정 해 주면 됩니다. 더불어 N.alert 의 HTML 요소를 저장하는 위치도 N.context.attr("ui").alert.context 에 같이 지정 해 주세요. Tab(N.tab) 이나 Popup(N.popup),
-		Datepicker(N.datepicker) 등 Natural-UI에서 지원하는 컴포넌트들의 자원이 여기에서 지정한 영역에 생성되고 페이지가 전환 될때 이 영역에 다시 덮어 씌움으로서 브라우저의 자원을 반납하게
-		됩니다. 웹기반의 페이지 전환 없는(Ajax로 페이지를 불러오는) 사이트를 구축할때 브라우저 리소스 관리를 따로 해 주지 않아도 되어서 편하겠죠? 그외 환경설정 값들은 주석을 참고 하세요.
-		natural.config.js에는 대부분 UI 컴포넌트들의 전역 설정값들이 지정 되어 있습니다. 모든 컴포넌트들은 여기에서 설정한 옵션값들을 기본으로 동작 됩니다. UI 컴포넌트의 옵션 적용에 대한 우선순위는
-		다음과 같습니다.<br> <br> &nbsp;&nbsp;1. 컴포넌트 초기화시 지정한 옵션 값<br> &nbsp;&nbsp;2. 환경설정에서 지정한 옵션 값<br>
-		&nbsp;&nbsp;3. 컴포넌트 클래스의 기본 옵션 값<br> <br> 컴포넌트 클래스의 기본 옵션값중 환경설정파일에 지정되지 않은 옵션값은 컴포넌트 초기화시 따로 옵션을 지정하지 않았다면
-		컴포넌트 클래스의 기본옵션값으로 동작 됩니다. 기본 환경설정 파일에 정의되지 않은 컴포넌트 클래스의 기본 옵션값을 사이트 전역 옵션값으로 설정하고 싶다면 환경설정 파일의 해당 컴포넌트 부분에 추가 하면 됩니다.
-		예를 들어 사이트내에서 동작되는 모든 그리드 컴포넌트 Body영역의 높이를 300 픽셀로 기본값을 설정하고 싶다면 N.context.attr("ui").grid 부분에 다음과 같이 추가하면 됩니다.
-	</p>
-	<pre><code>N.context.attr("ui", {
+		Selector 문자열로 지정 해 주면 됩니다. 쉽게말해 싸이트의 본문(Body)영역이 표시 될 프레임을 지정 해 주면 됩니다. 더불어 N.alert 의 HTML 요소를 저장하는 위치도
+		N.context.attr("ui").alert.context 에 같이 지정 해 주세요. Tab(N.tab) 이나 Popup(N.popup), Datepicker(N.datepicker) 등
+		Natural-UI에서 지원하는 컴포넌트들의 자원이 여기에서 지정한 영역에 생성되고 페이지가 전환 될때 이 영역에 다시 덮어 씌움으로서 브라우저의 자원을 반납하게 됩니다. 웹기반의 페이지 전환 없는(Ajax로
+		페이지를 불러오는) 사이트를 구축할때 브라우저 리소스 관리를 따로 해 주지 않아도 되어서 편하겠죠? 그외 환경설정 값들은 주석을 참고 하세요. natural.config.js에는 대부분 UI 컴포넌트들의 전역
+		설정값들이 지정 되어 있습니다. 모든 컴포넌트들은 여기에서 설정한 옵션값들을 기본으로 동작 됩니다. UI 컴포넌트의 옵션 적용에 대한 우선순위는 다음과 같습니다.</p>
+	<ol>
+		<li>컴포넌트 초기화시 지정한 옵션 값</li>
+		<li>환경설정에서 지정한 옵션 값</li>
+		<li>컴포넌트 클래스의 기본 옵션 값</li>
+	</ol>
+	<p>컴포넌트 클래스의 기본 옵션값중 환경설정파일에 지정되지 않은 옵션값은 컴포넌트 초기화시 따로 옵션을 지정하지 않았다면 컴포넌트 클래스의 기본옵션값으로 동작 됩니다. 기본 환경설정 파일에 정의되지 않은
+		컴포넌트 클래스의 기본 옵션값을 사이트 전역 옵션값으로 설정하고 싶다면 환경설정 파일의 해당 컴포넌트 부분에 추가 하면 됩니다. 예를 들어 사이트내에서 동작되는 모든 그리드 컴포넌트 Body영역의 높이를 300
+		픽셀로 기본값을 설정하고 싶다면 N.context.attr("ui").grid 부분에 다음과 같이 추가하면 됩니다.</p>
+	<pre>
+		<code>N.context.attr("ui", {
 	...
 	"grid" : {
 		...
@@ -93,7 +100,8 @@ N.context.attr("ui", {
 	<p>Natural-JS는 페이지내에서 개발영역과 디자인영역을 구분하고 요소(Element)간, 스크립트 간 영역(scope)을 보장 해 주기위한 간단한 소스코드의 구성 규칙이 있습니다. 별로 어렵지
 		않습니다. 다음과 같이 View 영역과 Controller 영역만 구분하고 순서대로 배치해 주면 됩니다.</p>
 	test_html.html
-	<pre><code>&lt;!-- View 영역 --&gt;
+	<pre>
+		<code>&lt;!-- View 영역 --&gt;
 &lt;div id="viewCont"&gt;
 	&lt;div id="result"&gt;
 	&lt;/div&gt;
@@ -119,7 +127,8 @@ N("#viewCont").cont({
 		해 주세요.
 	</p>
 	index.html
-	<pre><code>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+	<pre>
+		<code>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
 &lt;html&gt;
 &lt;head&gt;
 &lt;meta http-equiv="X-UA-Compatible" content="IE=Edge; text/html; charset=utf-8" /&gt;
@@ -154,7 +163,8 @@ $(document).ready(function() {
 		제공하는 기능 입니다.<br> 서버에 데이터를 보내고 가져오는 역할을 수행하는 모듈은 Communicator(N.comm)(이하 N.comm) 입니다.<br> $(document).ready()
 		부분을 밑에 구문으로 바꿔 주세요.
 	</p>
-	<pre><code>...
+	<pre>
+		<code>...
 $(document).ready(function() {
 	N(N.context.attr("architecture").page.context).comm("test_html.html").submit()
 })
@@ -172,7 +182,8 @@ $(document).ready(function() {
 	</p>
 	<p>일단, 서버없이 한번 해보고 싶다면 다음과 같이 로컬에 JSON 형태의 Text 를 담은 파일을 하나 생성해 주세요</p>
 	c:/natural_js/test_data.json
-	<pre><code>[
+	<pre>
+		<code>[
   {
     "_id": "53e21cba9f982281b3459438",
     "index": 0,
@@ -243,7 +254,8 @@ $(document).ready(function() {
 </pre>
 	<p>대부분의 브라우저는 Ajax로 로컬파일을 참조할 수 없게 막혀 있습니다. 그러나 파이어폭스는 그냥 열려있네요? IE 도 보안경고 메시지가 뜨면 허용 해 주면 됩니다. 크롬도 이걸 해제시키는 방법이
 		있는데 구글링해서 찾아보세요. ^^ 일단 파이어폭스로 해 보겠습니다.</p>
-	<pre><code>...
+	<pre>
+		<code>...
 N("#viewCont").cont({
 	init : function(view, request) {
     	N.comm("test_data.json").submit(function(data) {
@@ -259,7 +271,8 @@ N("#viewCont").cont({
 		대신 데이터를 서비스 해 주는 URL 을 입력 하면 됩니다.<br> 서버에 파라메터를 보내고 싶다면 다음과 같이 N() 함수의 Argument로 파라메터를 넣고 실행 해 주세요. JSON 형태의
 		파라메터를 서버에서 받으려면 서버에 JSON String 을 Map 객체로 변환 해 주는 모듈이 있어야 겠죠?
 	</p>
-	<pre><code>...
+	<pre>
+		<code>...
 N("#viewCont").cont({
 	init : function(view, request) {
     	N({ param1 : "파라메터 애요" }).comm("test_data.json").submit(function(data) {
