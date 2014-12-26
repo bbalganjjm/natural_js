@@ -25,6 +25,9 @@ var IndexController = {
 					&& N.string.trimToNull(this.href) !== null) {
 				e.preventDefault();
 				N(N.context.attr("architecture").page.context).comm(this.href).submit();
+
+				// Google Analytics
+				ga('send', 'pageview');
 			}
 		});
 	},
