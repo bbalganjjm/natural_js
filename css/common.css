@@ -301,12 +301,13 @@ dl.qna {
 }
 
 dl.qna dt {
-	font-size: 18px;
-	padding: 10px 0 10px 0;
+	font-size: 16px;
+	font-weight: bold;
+	padding: 10px 0;
 }
 
 dl.qna dt {
-	line-height: 20px;
+	padding: 5px 0;
 }
 
 
