@@ -321,7 +321,10 @@ h1 {
 
 h2 {
 	font-size: 16px;
-	padding-left: 10px;
+}
+
+ol li {
+	line-height: 150%;
 }
 
 /* form example */
