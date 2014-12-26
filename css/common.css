@@ -261,7 +261,7 @@ section {
 	min-height: 350px;
 	word-break: break-all;
 	border-radius: 0 0 3px 3px;
-	background-color: #35ba35;
+	background-color: #ffffff;
 }
 
 section article {
@@ -273,7 +273,7 @@ section article pre {
 	overflow: auto;
 	font-size: 85%;
 	line-height: 1.45;
-	background-color: #27a827;
+	background-color: #35ba35;
 	border-radius: 3px;
 }
 
@@ -303,11 +303,11 @@ dl.qna {
 dl.qna dt {
 	font-size: 16px;
 	font-weight: bold;
-	padding: 10px 0;
+	padding: 10px 0 10px 0;
 }
 
 dl.qna dt {
-	padding: 5px 0;
+	padding: 5px 0 5px 0;
 }
 
 
