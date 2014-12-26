@@ -91,6 +91,10 @@ body, pre, textarea, select {
 	color: #004a00;
 }
 
+img {
+	border: none;
+}
+
 input[type='text'], input[type='password'], select, textarea, pre.data, div.data {
 	border-radius: 3px;
 	padding: 3px 3px;
