@@ -295,21 +295,19 @@ footer {
 	min-width: 560px;
 }
 
-
-article dl.qna {
-
+article p,
+article ol li,
+article ul li,
+article dl.qna dt,
+article dl.qna dd {
+	line-height: 150%;
 }
 
 article dl.qna dt {
 	font-size: 15px;
 	font-weight: bold;
 	padding: 10px 0 10px 20px;
-	line-height: 150%;
 	background: url("../images/icon/dt_leaf.png") no-repeat 0 9px;
-}
-
-article dl.qna dd {
-	line-height: 150%;
 }
 
 article h1 {
@@ -330,15 +328,6 @@ article h3 {
 article h4 {
 	font-size: 14px;
 }
-
-article ol li {
-	line-height: 150%;
-}
-
-article p {
-	line-height: 150%;
-}
-
 
 
 
