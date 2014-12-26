@@ -20,10 +20,10 @@ var IndexController = {
 	},
 	setMenuEvent : function() {
 		$("nav > ul > li > ul a").click(function(e) {
-			e.preventDefault();
 			if(N.string.trimToEmpty(this.href).indexOf("#") < 0
 					&& N.string.trimToEmpty(this.href).indexOf(".html") > -1
 					&& N.string.trimToNull(this.href) !== null) {
+				e.preventDefault();
 				N(N.context.attr("architecture").page.context).comm(this.href).submit();
 			}
 		});
