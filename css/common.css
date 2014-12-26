@@ -303,8 +303,9 @@ dl.qna {
 dl.qna dt {
 	font-size: 16px;
 	font-weight: bold;
-	padding: 10px 0;
+	padding: 10px 0 10px 20px;
 	line-height: 150%;
+	background: url("../images/icon/dt_leaf.png") no-repeat 0 50%;
 }
 
 dl.qna dd {
