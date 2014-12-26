@@ -305,7 +305,7 @@ article dl.qna dt {
 	font-weight: bold;
 	padding: 10px 0 10px 20px;
 	line-height: 150%;
-	background: url("../images/icon/dt_leaf.png") no-repeat 0 50%;
+	background: url("../images/icon/dt_leaf.png") no-repeat 0 0;
 }
 
 article dl.qna dd {
@@ -316,7 +316,7 @@ article h1 {
 	padding: 10px 0 10px 35px;
 	border-bottom: 1px solid #009000;
 	font-size: 18px;
-	background: url("../images/icon/h1_leaf.png") no-repeat 0 50%;
+	background: url("../images/icon/h1_leaf.png") no-repeat 0 0;
 }
 
 article h2 {
