@@ -329,10 +329,11 @@ article h4 {
 	font-size: 14px;
 }
 
-
-
-
-
+article a.link {
+	padding-left: 16px;
+	background: url("../images/icon/link.png") no-repeat 0 50%;
+	text-decoration: overline;
+}
 
 /* form example */
 table.form {
