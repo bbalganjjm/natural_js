@@ -108,8 +108,7 @@ article#api div.HStyle18 {
 }
 
 article#api table.form {
-	margin-left: 50px;
-	font-size: 12px;
+	margin-left: 50px; font-size: 12px;
 }
 
 article#api table.form tbody td {
@@ -117,26 +116,28 @@ article#api table.form tbody td {
 }
 
 article#api p {
-	word-break: break-word;
-	margin: 0;
+	word-break: break-word; margin: 0;
 }
 
 article#api ul.list li {
-	word-break: break-word;
-	padding-top: 5px;
-	padding-bottom: 5px;
+	word-break: break-word; padding-top: 5px; padding-bottom: 5px;
 }
 
 article#api ul.footnotes {
-	overflow: hidden;
-	list-style: none;
+	overflow: hidden; list-style: none;
 }
 
 article#api ul.footnotes li {
-	float: left;
-	margin-left: 20px;
+	float: left; margin-left: 20px;
 }
 
+article#api .bu {
+	font-weight: bold; text-decoration: underline;
+}
+
+article#api .bui {
+	font-weight: bold; text-decoration: underline; font-style: italic;
+}
 </style>
 
 <article id="api">
@@ -145,18 +146,21 @@ article#api ul.footnotes li {
 	<p>문서의 큰 단락은 ≪ 컴포넌트 나 라이브러리 ≫ 와 같이 구분 되어 있으며 단락안의 설명은 다음과 같이 구성 되어 있습니다.</p>
 	<ul class="list">
 		<li>개요 : 컴포넌트나 라이브러리에 대한 개요.</li>
-		<li><span>생성자(Constructor) : 컴포넌트나 라이브러리를 생성할 때 실행되는 기능과 생성자 arguments 에 대한 설명<br>ex)
-		</span><span style='font-weight: bold; text-decoration: underline'>N.grid <sup>1)</sup>(
-		</span><span style='font-weight: bold; font-style: italic; text-decoration: underline'>argument[0] <sup>2)</sup></span><span style='font-weight: bold; text-decoration: underline'>)</span><span style='font-weight: bold'>,</span><span> </span><span
-			style='font-weight: bold; text-decoration: underline'>N().grid(</span><span style='font-weight: bold; font-style: italic; text-decoration: underline'>argument[0]</span><span style='font-weight: bold; text-decoration: underline'>)</span></li>
+		<li>
+			생성자(Constructor) : 컴포넌트나 라이브러리를 생성할 때 실행되는 기능과 생성자 arguments 에 대한 설명<br>
+			ex)
+			<span class="bu">N.grid</span><sup>1)</sup>
+			(<span class="bui">argument[0]</span><sup>2)</sup>),
+			<span class="bu">N().grid</span>(<span class="bui">argument[0]</span>)
+		</li>
 		<li><span>기본옵션(Default Options) : 컴포넌트나 라이브러리를 생성할 때 생성자 argument로 지정되는 옵션에 대한 설명<br>ex) N([]).grid(
-		</span><span style='font-weight: bold; text-decoration: underline'>{ resizeable : true } <sup>3)</sup></span><span> )</span></li>
-		<li><span>선언형옵션(Declarative Options) : 컴포넌트나 라이브러리에서 사용하는 HTML 요소(Element)들의 data-* 속성에 정의되는 JSON Text 양식의 옵션<br>ex) &lt;input id=”date” type=”text” data-format='[[”date”, 8]]' <sup>4)</sup> /&gt;
+		</span><span class="bu">{ resizeable : true }<sup>3)</sup></span><span> )</span></li>
+		<li><span>선언형옵션(Declarative Options) : 컴포넌트나 라이브러리에서 사용하는 HTML 요소(Element)들의 data-* 속성에 정의되는 JSON Text 양식의 옵션<br>ex) &lt;input id=”date” type=”text” data-format='[[”date”, 8]]'<sup>4)</sup> /&gt;
 		</span></li>
 		<li><img src="images/icon/alert.png" alt="" />&nbsp;선언형 옵션은 JSON 표준양식을 정확히 지켜줘야 합니다. 예를 들면 key 값에도 큰따옴표(")로 무조건 감싸줘야 하는 등 JSON 표준양식을 지키지 않으면 선언형 옵션이 인식되지 않거나 오류가 발생합니다.</li>
 		<li><img src="images/icon/alert.png" alt="" />&nbsp;format이나 validate등 선언형 옵션으로 실행되는 룰 들의 인자들(arguments)는 배열(Array) 형태(type)으로 정의하고 인자 순서대로 나열합니다.</li>
 		<li><span>함수(Methods) : 컴포넌트나 라이브러리 인스턴스에서 제공하는 기능과 arguments 에 대한 설명<br>ex) N([]).grid( { resizeable : true } ).
-		</span><span style='font-weight: bold; text-decoration: underline; background-color: #e8f2fe;'>revert <sup>5)</sup></span><span style='font-weight: bold; text-decoration: underline'>(3 <sup>6)</sup>)
+		</span><span class="bui">revert<sup>5)</sup></span><span class="bu">(3<sup>6)</sup>)
 		</span></li>
 	</ul>
 	<hr />
