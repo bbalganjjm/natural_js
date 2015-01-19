@@ -187,7 +187,7 @@
 								obj.hide()[obj.request.options.effect[0]](obj.request.options.effect[1], obj.request.options.effect[2]);
 							}
 							if(obj.children(":first").length > 0) {
-								var sc = obj.children(":first").instance("cont");
+								var sc = obj.children("[id]:first").instance("cont");
 								if(sc !== undefined) {
 									sc.request = obj.request;
 									if(sc.init !== undefined) {
