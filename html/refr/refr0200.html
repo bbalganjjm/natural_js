@@ -375,15 +375,15 @@ article#api h4 {
 					<p>메시지 리소스</p>
 					<p>메시지 리소스는 JSON Object 형태로 만들면 되고 하위에 메시지 세트를 구성해야 함.</p>
 					<pre><code>var message = {
-&quot;ko_KR&quot; : {
-	key : ＂메시지{0}＂
-},
-&quot;en_US&quot; : {
-	key : ＂message{0}＂
-}
-					}</code></pre>
-					<pre><code>var msg = N.message.get(message, "key”, [" 입니다”]);
-					msg의 값 : "메시지 입니다"</code></pre>
+	&quot;ko_KR&quot; : {
+		key : ＂메시지{0}＂
+	},
+	&quot;en_US&quot; : {
+		key : ＂message{0}＂
+	}
+}</code></pre>
+					<pre><code>var msg = N.message.get(message, "key”, [" 입니다”]);</code></pre>
+					<p>msg 변수의 값 : "메시지 입니다"</p>
 				</td>
 			</tr>
 			<tr>
