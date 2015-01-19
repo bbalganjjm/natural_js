@@ -148,12 +148,10 @@
 				<p>JWS(selector or element) 형태의 인자로 지정하고 두 번째인자로 특정 페이지의 URL을 지정하면 가져온 HTML 컨텐츠를 지정한 요소 안에 넣어줍니다.</p>
 				<p>Object(JSON)  형태의 인자로 지정하면 Communicator.request 의 옵션으로 지정 됩니다.</p>
 				<p>JWS(Object(JSON)) 형태의 인자로 지정하면 지정한 값을 서버로 전송한 파라미터로 인식하여 서버에 요청을 보낼 때 전송 해 줍니다.</p>
-
-				<p>ex)</p>
-				<p>PAGE: N.comm(N("#contents"), "page.html")</p>
-				<p>.submit()</p>
-				<p>DATA: N.comm("data.json")</p>
-				<p>.submit(function(data) {})</p>
+				<p>PAGE: </p>
+				<pre><code>N.comm(N("#contents"), "page.html").submit()</code></pre>
+				<p>DATA: </p>
+				<pre><code>N.comm("data.json").submit(function(data) {})</code></pre>
 			</td>
 		</tr>
 		<tr>
@@ -318,14 +316,13 @@
 			<td>attr</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
-			<td>Controller.request or  Value object</td>
+			<td>Controller.request or Value object</td>
 			<td colspan="2">
 				<p>호출한 페이지에 값을 전달할 때 사용합니다.</p>
-				<p>ex)</p>
-				<p>* 값전달 : N(selector).comm(url).request</p>
-				<p>.attr("param", { paramA : "A" }).submit()</p>
-				<p>* 전달된 값 참고 : (불려진 페이지의 Controller)</p>
-				<p>.request.attr("param")</p>
+				<p>* 값전달 : </p>
+				<pre><code>N(selector).comm(url).request.attr("param", { paramA : "A" }).submit()</code></pre>
+				<p>* 전달된 값 참고 : </p>
+				<pre><code>(호출된 페이지의 Controller).request.attr("param")</code></pre>
 			</td>
 		</tr>
 		<tr>
