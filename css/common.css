@@ -409,7 +409,7 @@ article.apiDoc table.form th, article.apiDoc table.form td {
 }
 
 article.apiDoc p {
-	word-break: break-word; margin: 0;
+	word-break: break-word; margin: 5px 0 5px 0;
 }
 
 article.apiDoc ul.list li {
