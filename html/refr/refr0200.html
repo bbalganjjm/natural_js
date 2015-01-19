@@ -472,23 +472,19 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 		}
 	});
 &lt;/script&gt;</code></pre>
-
-	<p>위와 같이 N.cont 를 선언하면 View 영역의 Load 가 완료된 후 N.cont의 인자로 들어온 Controller 클래스에 init 메서드가 정의 되어 있다면 init 메서드를 프레임워크에서 실행 시켜 줍니다. init 의 인자(Arguments)로는 View영역의 HTML 요소들이 담긴 JWS 객체와 Communicator.request(Communicator 참조) 객체를 넣어 줍니다. 또한 Controller Class 의 초기화(Initialize)가 완료되면 View영역의 최상위 Element 에 해당 Controller
-			인스턴스(instance)를 넣어줘 N("페이지 최상위 Element").instance("cont") 로 View 영역에서 참조 할 수 있습니다.
+	<p>
+		위와 같이 N.cont 를 선언하면 View 영역의 Load 가 완료된 후 N.cont의 인자로 들어온 Controller 클래스에 init 메서드가 정의 되어 있다면 init 메서드를 프레임워크에서 실행 시켜 줍니다.
+		init 의 인자(Arguments)로는 View영역의 HTML 요소들이 담긴 JWS 객체와 Communicator.request(Communicator 참조) 객체를 넣어 줍니다.
+		또한 Controller Class 의 초기화(Initialize)가 완료되면 View영역의 최상위 Element 에 해당 Controller 인스턴스(instance)를 넣어줘 N("페이지 최상위 Element").instance("cont") 로 View 영역에서 참조 할 수 있습니다.
 	</p>
-
-	<p><br></p>
-
 	<h3>나. 생성자(Constructor)</h3>
-
-	<p></p>
 	<table class="form">
 		<tr>
-			<td>Name</td>
-			<td>Arguments</td>
-			<td>Type</td>
-			<td>Return</td>
-			<td>Description</td>
+			<th>Name</th>
+			<th>Arguments</th>
+			<th>Type</th>
+			<th>Return</th>
+			<th style="width: auto;">Description</th>
 		</tr>
 		<tr>
 			<td>N.cont</td>
