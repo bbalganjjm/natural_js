@@ -28,7 +28,7 @@ Reference(참고)
 - Natural-JS 라이브러리 디렉토리 : /lib/natural_js/
 - 홈페이지 : http://bbalganjjm.github.io/natural_js
  * 시작하기 문서 : http://bbalganjjm.github.io/natural_js
- * 기본문서 : http://bbalganjjm.github.io/natural_js/#refr/refr0100
+ * 기본문서 : http://bbalganjjm.github.io/natural_js/#intr/intr0100
  * API 문서 : http://bbalganjjm.github.io/natural_js/#refr/refr0101
 - 데모 : http://211.110.5.41/naturaljs
 
