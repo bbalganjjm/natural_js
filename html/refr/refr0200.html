@@ -1,9 +1,9 @@
 <style type="text/css">
-article#api table.form {
+article#apiDoc table.form {
 	background-color: #ffffff;
 }
 
-article#api table.form th {
+article#apiDoc table.form th {
 	background: linear-gradient(top, #ddfddd, #effeee);
 	background: -ms-linear-gradient(top, #ddfddd, #effeee);
 	background: -moz-linear-gradient(top, #ddfddd, #effeee);
@@ -14,78 +14,78 @@ article#api table.form th {
 	min-width: 90px;
 }
 
-article#api table.form td {
+article#apiDoc table.form td {
 	font-size: 12px;
 }
 
-article#api table.form td pre {
+article#apiDoc table.form td pre {
 	font-size: 11px;
 	margin: 5px;
 }
 
-article#api pre {
+article#apiDoc pre {
 	margin: 10px 0;
 }
 
-article#api table.form th, article#api table.form td {
+article#apiDoc table.form th, article#apiDoc table.form td {
 	word-break: break-word;
 }
 
-article#api p {
+article#apiDoc p {
 	word-break: break-word; margin: 0;
 }
 
-article#api ul.list li {
+article#apiDoc ul.list li {
 	word-break: break-word; padding-top: 15px; padding-bottom: 15px;
 }
 
-article#api fieldset {
+article#apiDoc fieldset {
 	display: inline-block;
 	border: 1px dotted #77c777;
 	border-radius: 5px;
 	padding: 0 0 0 10px;
 }
 
-article#api fieldset legend {
+article#apiDoc fieldset legend {
 	font-size: 12px;
 	color: #009000;
 }
 
-article#api ul.footnotes {
+article#apiDoc ul.footnotes {
 	padding-left: 5px; overflow: hidden; list-style: none;
 }
 
-article#api ul.footnotes li {
+article#apiDoc ul.footnotes li {
 	float: left; margin-right: 20px; font-size: 12px; color: #009000;
 }
 
-article#api .b {
+article#apiDoc .b {
 	font-weight: bold;
 }
 
-article#api .bi {
+article#apiDoc .bi {
 	font-weight: bold; font-style: italic;
 }
 
-article#api .alert {
+article#apiDoc .alert {
 	background: url("images/icon/alert.png") no-repeat 0 50%;
 	font-size: 88%;
 	padding: 5px 0 5px 22px;
 }
 
-article#api h2 {
+article#apiDoc h2 {
 	font-weight: bold;
 	padding: 10px 0 10px 20px;
 	background: url("images/icon/dt_leaf.png") no-repeat 0 9px;
 }
 
-article#api h4 {
+article#apiDoc h4 {
 	font-weight: bold;
 	margin: 10px 0 10px 0;
 }
 </style>
 
-<article id="api">
+<article id="apiDoc">
 	<h1>Natural-JS API Document</h1>
 	<p>Natural-JS API Document 는 Natural-JS 의 컴포넌트와 라이브러리에서 제공하는 기능과 옵션에 대한 사용법과 설명을 제공하는 문서입니다.</p>
 	<p>문서의 큰 단락은 패키지 라이브러리 별로 구분 되어 있으며 단락안의 설명은 다음과 같이 구성 되어 있습니다.</p>
@@ -3586,7 +3586,7 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 
 <script type="text/javascript">
 
-N("div#tabExam").cont({
+N("article#apiDoc").cont({
     init : function(view, request) {
     	N("div#naTab").tab();
     }
