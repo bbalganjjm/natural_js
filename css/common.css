@@ -442,7 +442,7 @@ article.apiDoc .bi {
 }
 
 article.apiDoc .alert {
-	background: url("images/icon/alert.png") no-repeat 0 50%;
+	background: url("../images/icon/alert.png") no-repeat 0 50%;
 	font-size: 88%;
 	padding: 5px 0 5px 22px;
 }
@@ -450,7 +450,7 @@ article.apiDoc .alert {
 article.apiDoc h2 {
 	font-weight: bold;
 	padding: 10px 0 10px 20px;
-	background: url("images/icon/dt_leaf.png") no-repeat 0 9px;
+	background: url("../images/icon/dt_leaf.png") no-repeat 0 9px;
 }
 
 article.apiDoc h4 {
