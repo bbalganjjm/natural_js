@@ -1,0 +1,267 @@
+<article id="refr0202">
+	<h1>Natural-CORE</h1>
+	<h2>N</h2>
+	<h3>가. 개요</h3>
+	<p>N은 Natural-JS를 처음 시작하는 함수 입니다. jQuery 의 $와 같은 역할을 수행하며 Natural-JS 의 N() 처럼 N 함수로 초기화하고 이후 실행되는 메서드들은 jQuery 의 $ 함수 로 실행해도 됩니다. 반대로 jQuery 의 기능들은 모두 N() 에 상속되어 있으므로 jQuery 메서드를 호출할 때 $() 대신 N()을 사용해도 됩니다. Natural-CORE 의 함수들은 기본적으로 Natural-JS 만을 위해서 제작 되었으나 개발할 때 공통적으로 사용되어져야할 함수들은 다음과 같이 사용할 수 있습니다.</p>
+	<p><br></p>
+	<h3>나. 함수(Methods)</h3>
+
+	<table class="form">
+			<tr>
+				<th>Name</th>
+				<th>Arguments</th>
+				<th>Type</th>
+				<th>Return</th>
+				<th style="width: auto;">Description</th>
+			</tr>
+			<tr>
+				<td>N</td>
+				<td align="center">-</td>
+				<td align="center">-</td>
+				<td>JWS<sup>7)</sup></td>
+				<td>
+					<p>Natural 의 플러그인 형태로 제공되는 라이브러리들과 N클래스의 멤버변수(함수)가 정의 되어있는 핵심 클래스입니다.</p>
+					<p>N(selector<sup>8)</sup> or function, object, HTML Element(이하 element))를 호출하면 jQuery 의 init 메서드가 호출되어 Naturl-JS 와 jQuery가 동시에 초기화(Initialize) 됩니다.</p>
+					<pre><code>var divs = N("div");</code></pre>
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>selector</td>
+				<td>JWS, selector or function, object, element</td>
+				<td align="center">-</td>
+				<td>JSON data나 selector 등.</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>context</td>
+				<td>JWS</td>
+				<td align="center">-</td>
+				<td>element를 지정할 때 지정된 element 가 속해있는 element 영역을 지정할 수 있습니다.</td>
+			</tr>
+			<tr>
+				<td>N.locale</td>
+				<td align="center">-</td>
+				<td align="center">-</td>
+				<td>undefined</td>
+				<td>Natural-JS 의 현제 로케일을 설정 합니다. 설정한 로케일에 따라 프레임워크에서 사용자에게 보여주는 메시지들도 다국어처리가 됩니다. 현제 등록된 다국어 메시지 리소스는 en_US, ko_KR 만 있습니다. 메시지 세트는 config에서 손쉽게 추가 할 수 있습니다.</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>str</td>
+				<td>String</td>
+				<td></td>
+				<td>"en_US", "ko_KR" 등의 로케일 문자열</td>
+			</tr>
+			<tr>
+				<td>N.error</td>
+				<td align="center">-</td>
+				<td align="center">-</td>
+				<td>ErrorThrown</td>
+				<td>에러를 발생 시키고 에러 메시지를 브라우저 콘솔창에 보여줍니다.</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>msg</td>
+				<td>String</td>
+				<td></td>
+				<td>에러 텍스트 메시지</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>e</td>
+				<td>ErrorThrown</td>
+				<td align="center">-</td>
+				<td>에러 발생시 생성되는 ErrorThrown 객체를 입력 하면 Error Stack Trace 로그를 브라우저 콘솔창에 보여 줍니다. (Chrome 에서만 지원)</td>
+			</tr>
+			<tr>
+				<td>N.warn</td>
+				<td align="center">-</td>
+				<td align="center">-</td>
+				<td>undefined</td>
+				<td>
+					<p>콘솔창에 Warnning 메시지를 보여 줍니다</p>
+					<p>주) 브라우저에서 console.warn을 지원하지 않으면 메시지가 표시되지 않습니다.</p>
+				</td>
+			</tr>
+			<tr>
+				<td>N.log</td>
+				<td align="center">-</td>
+				<td align="center">-</td>
+				<td>undefined</td>
+				<td>
+					<p>콘솔창에 로깅(Logging) 메시지를 보여 줍니다</p>
+					<p>주) 브라우저에서 console.log를 지원하지 않으면 메시지가 표시되지 않습니다.</p>
+				</td>
+			</tr>
+			<tr>
+				<td>N.browser<br>.cookie</td>
+				<td align="center">-</td>
+				<td align="center">-</td>
+				<td>undefined</td>
+				<td>쿠키를 생성 합니다.</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>name</td>
+				<td>String</td>
+				<td align="center">-</td>
+				<td>쿠키명</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>value</td>
+				<td>String</td>
+				<td align="center">-</td>
+				<td>쿠키값</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>expiredays</td>
+				<td>int</td>
+				<td align="center">-</td>
+				<td>만료일</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>domain</td>
+				<td>String</td>
+				<td align="center">-</td>
+				<td>쿠키가 생성될 도메인</td>
+			</tr>
+			<tr>
+				<td>
+					N.browser<br>.removeCookie
+				</td>
+				<td align="center">-</td>
+				<td align="center">-</td>
+				<td>undefined</td>
+				<td>생성된 쿠키를 제거 합니다.</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>name</td>
+				<td>String</td>
+				<td align="center">-</td>
+				<td>쿠키명</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>domain</td>
+				<td>String</td>
+				<td align="center">-</td>
+				<td>해당 쿠키가 생성된 도메인</td>
+			</tr>
+			<tr>
+				<td>N.browser<br>.msieVersion</td>
+				<td align="center">-</td>
+				<td align="center">-</td>
+				<td>int</td>
+				<td>현재 접속한 Microsoft Internet Explorer(이하 MSIE)의 버전을 가져옵니다. MSIE가 아닐 경우 0을 반환 합니다.</td>
+			</tr>
+			<tr>
+				<td>N.browser<br>.is</td>
+				<td></td>
+				<td></td>
+				<td>boolean</td>
+				<td>입력한 브라우저명과 현재 접속한 브라우저가 일치하면 true를 반환 합니다.</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>name</td>
+				<td>String</td>
+				<td align="center">-</td>
+				<td>브라우저명(opera, firefox, safari, chrome, ie)</td>
+			</tr>
+			<tr>
+				<td>N.message<br>.get</td>
+				<td align="center">-</td>
+				<td align="center">-</td>
+				<td align="center">-</td>
+				<td>메시지 리소스(config 에 정의)에서 현재 로케일에 맞게 메시지를 가져옵니다.</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>resource</td>
+				<td>JSON Object</td>
+				<td align="center">-</td>
+				<td>
+					<p>메시지 리소스</p>
+					<p>메시지 리소스는 JSON Object 형태로 만들면 되고 하위에 메시지 세트를 구성해야 함.</p>
+					<pre><code>var message = {
+	&quot;ko_KR&quot; : {
+		key : ＂메시지{0}＂
+	},
+	&quot;en_US&quot; : {
+		key : ＂message{0}＂
+	}
+}
+
+var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
+					<p>결과 : msg = "메시지 입니다"
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>key</td>
+			<td>String</td>
+			<td align="center">-</td>
+			<td>메시지 키</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>vars</td>
+			<td>Array</td>
+			<td align="center">-</td>
+			<td>메시지 변수를 치환할 값</td>
+		</tr>
+		<tr>
+			<td>N().toArray</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>Array</td>
+			<td>JWS를 순수한 Array 객체로 반환 합니다.</td>
+		</tr>
+		<tr>
+			<td>N().instance</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>Object</td>
+			<td>
+				<p>Natural-JS 는 기본적으로 컴포넌트나 라이브러리들에 의해 생성된 인스턴스를 대상 HTML element(이하 요소)가 있다면 대상요소에 인스턴스를 저장 합니다.</p>
+				<p>N().instance 메서드는 이 인스턴스를 요소에 저장하고 가져오는 역할을 수행 합니다.</p>
+				<p>arguments 중에 name만 입력하면 인스턴스를 가져오고 name, instance를 같이 입력하면 해당이름으로 해당요소에 instance를 저장 합니다. instance 인자로 callback function 이 입력되면 여러 인스턴스를 한번에 가져올 수 있습니다. </p>
+				<pre><code>var single = ("div#sample").instance("grid");</code></pre>
+				<pre><code>var multy = ("div.sample").instance("form", function(i, inst) {
+   //inst와 this 는 각각의 instance
+   //i 는 index
+});</code></pre>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>name</td>
+			<td>String</td>
+			<td align="center">-</td>
+			<td>인스턴스 명</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>instance</td>
+			<td>Object or callback function(이하 callback)</td>
+			<td align="center">-</td>
+			<td>
+				<p>인스턴스 or 인스턴스를 가져올 callback</p>
+				<p class="alert">callback의 인자는 index(arguments[0])와 각각의 instance(arguments[1])가 들어옵니다. 이 callback 안의 this 는 각각의 instance를 가리킵니다.</p>
+			</td>
+		</tr>
+	</table>
+
+	<fieldset>
+		<legend>주석</legend>
+		<ul class="footnotes">
+			<li>7) JWS : jQuery Wraped Set(jQuery()를 실행하면 반환되는 jQuery 확장 객체) or jQuery selector</li>
+			<li>8) selector : jQuery에서 CS selector 형식으로 지정하는 String 형태의 문자열이나 JSON Object, Aray, HTML Element, Function 등의 Object</li>
+		</ul>
+	</fieldset>
+</article>
