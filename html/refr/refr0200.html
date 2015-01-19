@@ -1,16 +1,4 @@
 <style type="text/css">
-p.HStyle0 {
-	style-name: "바탕글"; margin-top: 0.0pt; margin-bottom: 0.0pt; text-align: justify; text-indent: 0.0pt; font-size: 10.0pt letter-spacing: 0;
-}
-
-li.HStyle0 {
-	style-name: "바탕글"; margin-top: 0.0pt; margin-bottom: 0.0pt; text-align: justify; text-indent: 0.0pt; font-size: 10.0pt letter-spacing: 0;
-}
-
-div.HStyle0 {
-	style-name: "바탕글"; margin-top: 0.0pt; margin-bottom: 0.0pt; text-align: justify; text-indent: 0.0pt; font-size: 10.0pt letter-spacing: 0;
-}
-
 p.HStyle1 {
 	style-name: "단락"; margin-top: 0.0pt; margin-bottom: 0.0pt; text-align: justify; text-indent: 0.0pt; font-size: 12.0pt letter-spacing: 0; font-weight: "bold";
 }
@@ -235,8 +223,8 @@ table.form {
 
 <article id="api">
 	<h1>Natural-JS API Document 개요</h1>
-	<p class="HStyle0">Natural-JS API Document 는 Natural-JS 의 컴포넌트와 라이브러리에서 제공하는 기능과 옵션에 대한 사용법과 설명을 제공하는 문서입니다.</p>
-	<p class="HStyle0">문서의 큰 단락은 ≪ 컴포넌트 나 라이브러리 ≫ 와 같이 구분 되어 있으며 단락안의 설명은 다음과 같이 구성 되어 있습니다.</p>
+	<p>Natural-JS API Document 는 Natural-JS 의 컴포넌트와 라이브러리에서 제공하는 기능과 옵션에 대한 사용법과 설명을 제공하는 문서입니다.</p>
+	<p>문서의 큰 단락은 ≪ 컴포넌트 나 라이브러리 ≫ 와 같이 구분 되어 있으며 단락안의 설명은 다음과 같이 구성 되어 있습니다.</p>
 	<ul>
 		<li>개요 : 컴포넌트나 라이브러리에 대한 개요.</li>
 		<li><span>생성자(Constructor) : 컴포넌트나 라이브러리를 생성할 때 실행되는 기능과 생성자 arguments 에 대한 설명<br>ex)
@@ -261,16 +249,16 @@ table.form {
 	<p class="HStyle4">
 		가. <span>개요</span>
 	</p>
-	<p class="HStyle0" style='margin-left: 36.7pt;'>
+	<p style='margin-left: 36.7pt;'>
 		<span>N은 Natural-JS를 처음 시작하는 함수 입니다. jQuery 의 $와 같은 역할을 수행하며 Natural-JS 의 N() 처럼 N 함수로 초기화하고 이후 실행되는 메서드들은 jQuery 의 $ 함수 로 실행해도 됩니다. 반대로 jQuery 의 기능들은 모두 N() 에 상속되어 있으므로 jQuery 메서드를 호출할 때 $() 대신 N()을 사용해도 됩니다. Natural-CORE 의 함수들은 기본적으로 Natural-JS 만을 위해서 제작 되었으나 개발할 때 공통적으로 사용되어져야할 함수들은 다음과 같이 사용할 수 있습니다.</span>
 	</p>
-	<p class="HStyle0" style='margin-left: 36.7pt;'>
+	<p style='margin-left: 36.7pt;'>
 		<span><br></span>
 	</p>
 	<p class="HStyle4">
 		나. <span>함수(Methods)</span>
 	</p>
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 	<table class="form">
 		<thead>
 			<tr>
@@ -287,21 +275,21 @@ table.form {
 				<td>-</td>
 				<td>-</td>
 				<td>
-					<p class="HStyle0">
+					<p>
 						<span>JWS</span><span><a href="#FOOTNOTE1"><sup>1)</sup></a></span>
 					</p>
 				</td>
 				<td>
-					<p class="HStyle0">
+					<p>
 						<span>Natural 의 플러그인 형태로 제공되는 라이브러리들과 N클래스의 멤버변수(함수)가 정의 되어있는 핵심 클래스입니다.</span>
 					</p>
-					<p class="HStyle0">
+					<p>
 						<span>N(selector</span><span style='font-family: "맑은 고딕"'><a href="#FOOTNOTE2"><sup>2)</sup></a></span><span style='font-size: 9.0pt;'> or function, object, HTML Element(이하 element))를 호출하면 jQuery 의 init 메서드가 호출되어 Naturl-JS 와 jQuery가 동시에 초기화(Initialize) 됩니다.</span>
 					</p>
-					<p class="HStyle0">
+					<p>
 						<span>ex)</span>
 					</p>
-					<p class="HStyle0">
+					<p>
 						<span>var divs = N(“div”);</span>
 					</p>
 				</td>
@@ -310,7 +298,7 @@ table.form {
 				<td>&nbsp;</td>
 				<td>selector</td>
 				<td>
-					<p class="HStyle0">
+					<p>
 						<span>JWS, selector or function, object, element</span>
 					</p>
 				</td>
@@ -323,7 +311,7 @@ table.form {
 				<td>JWS</td>
 				<td>-</td>
 				<td>
-					<p class="HStyle0">
+					<p>
 						<span>element를 지정할 때 지정된 element 가 속해있는 element 영역을 지정할 수 있습니다.</span>
 					</p>
 				</td>
@@ -334,7 +322,7 @@ table.form {
 				<td>-</td>
 				<td>undefined</td>
 				<td>
-					<p class="HStyle0">
+					<p>
 						<span>Natural-JS 의 현제 로케일을 설정 합니다. 설정한 로케일에 따라 프레임워크에서 사용자에게 보여주는 메시지들도 다국어처리가 됩니다. 현제 등록된 다국어 메시지 리소스는 en_US, ko_KR 만 있습니다. 메시지 세트는 config에서 손쉽게 추가 할 수 있습니다.</span>
 					</p>
 				</td>
@@ -366,7 +354,7 @@ table.form {
 				<td>ErrorThrown</td>
 				<td>-</td>
 				<td>
-					<p class="HStyle0">
+					<p>
 						<span>에러 발생시 생성되는 ErrorThrown 객체를 입력 하면 Error Stack Trace 로그를 브라우저 콘솔창에 보여 줍니다. (Chrome 에서만 지원)</span>
 					</p>
 				</td>
@@ -377,10 +365,10 @@ table.form {
 				<td>-</td>
 				<td>undefined</td>
 				<td>
-					<p class="HStyle0">
+					<p>
 						<span>콘솔창에 Warnning 메시지를 보여 줍니다</span>
 					</p>
-					<p class="HStyle0" style='margin-left: 22.4pt; text-align: left; text-indent: -15.0pt;'>
+					<p style='margin-left: 22.4pt; text-align: left; text-indent: -15.0pt;'>
 						<span style='font-size: 8.0pt;'>주) 브라우저에서 console.warn을 지원하지 않으면 메시지가 표시되지 않습니다.</span>
 					</p>
 				</td>
@@ -391,20 +379,20 @@ table.form {
 				<td>-</td>
 				<td>undefined</td>
 				<td>
-					<p class="HStyle0">
+					<p>
 						<span>콘솔창에 로깅(Logging) 메시지를 보여 줍니다</span>
 					</p>
-					<p class="HStyle0" style='margin-left: 22.4pt; text-align: left; text-indent: -15.0pt;'>
+					<p style='margin-left: 22.4pt; text-align: left; text-indent: -15.0pt;'>
 						<span style='font-size: 8.0pt;'>주) 브라우저에서 console.log를 지원하지 않으면 메시지가 표시되지 않습니다.</span>
 					</p>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<p class="HStyle0">
+					<p>
 						<span>N.browser</span>
 					</p>
-					<p class="HStyle0">
+					<p>
 						<span>.cookie</span>
 					</p>
 				</td>
@@ -443,10 +431,10 @@ table.form {
 			</tr>
 			<tr>
 				<td>
-					<p class="HStyle0">
+					<p>
 						<span>N.browser</span>
 					</p>
-					<p class="HStyle0">
+					<p>
 						<span>.removeCookie</span>
 					</p>
 				</td>
@@ -471,10 +459,10 @@ table.form {
 			</tr>
 			<tr>
 				<td>
-					<p class="HStyle0">
+					<p>
 						<span>N.browser</span>
 					</p>
-					<p class="HStyle0">
+					<p>
 						<span>.msieVersion</span>
 					</p>
 				</td>
@@ -482,17 +470,17 @@ table.form {
 				<td>-</td>
 				<td>int</td>
 				<td>
-					<p class="HStyle0">
+					<p>
 						<span>현재 접속한 Microsoft Internet Explorer(이하 MSIE)의 버전을 가져옵니다. MSIE가 아닐 경우 0을 반환 합니다.</span>
 					</p>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<p class="HStyle0">
+					<p>
 						<span>N.browser</span>
 					</p>
-					<p class="HStyle0">
+					<p>
 						<span>.is</span>
 					</p>
 				</td>
@@ -500,7 +488,7 @@ table.form {
 				<td>&nbsp;</td>
 				<td>boolean</td>
 				<td>
-					<p class="HStyle0">
+					<p>
 						<span>입력한 브라우저명과 현재 접속한 브라우저가 일치하면 true를 반환 합니다.</span>
 					</p>
 				</td>
@@ -511,17 +499,17 @@ table.form {
 				<td>String</td>
 				<td>-</td>
 				<td>
-					<p class="HStyle0">
+					<p>
 						<span>브라우저명(opera, firefox, safari, chrome, ie)</span>
 					</p>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<p class="HStyle0">
+					<p>
 						<span>N.message</span>
 					</p>
-					<p class="HStyle0">
+					<p>
 						<span>.get</span>
 					</p>
 				</td>
@@ -529,7 +517,7 @@ table.form {
 				<td>-</td>
 				<td>-</td>
 				<td>
-					<p class="HStyle0">
+					<p>
 						<span>메시지 리소스(config 에 정의)에서 현재 로케일에 맞게 메시지를 가져옵니다.</span>
 					</p>
 				</td>
@@ -540,49 +528,49 @@ table.form {
 				<td>JSON Object</td>
 				<td>-</td>
 				<td>
-					<p class="HStyle0">
+					<p>
 						<span>메시지 리소스</span>
 					</p>
-					<p class="HStyle0">
+					<p>
 						<span>메시지 리소스는 JSON Object 형태로 만들면 되고 하위에 메시지 세트를 구성해야 함.</span>
 					</p>
-					<p class="HStyle0">
+					<p>
 						<span>ex)</span>
 					</p>
-					<p class="HStyle0">
+					<p>
 						<span>var message = {</span>
 					</p>
-					<p class="HStyle0">
+					<p>
 						<span>&nbsp;&nbsp;&quot;ko_KR&quot; : {</span>
 					</p>
-					<p class="HStyle0">
+					<p>
 						<span>&nbsp;&nbsp;&nbsp;&nbsp;key : ＂메시지{0}＂</span>
 					</p>
-					<p class="HStyle0">
+					<p>
 						<span>&nbsp;&nbsp;},</span>
 					</p>
-					<p class="HStyle0">
+					<p>
 						<span>&nbsp;&nbsp;&quot;en_US&quot; : {</span>
 					</p>
-					<p class="HStyle0">
+					<p>
 						<span>&nbsp;&nbsp;&nbsp;&nbsp;key : ＂message{0}＂</span>
 					</p>
-					<p class="HStyle0">
+					<p>
 						<span>&nbsp;&nbsp;}</span>
 					</p>
-					<p class="HStyle0">
+					<p>
 						<span>}<span style='HWP-TAB: 1;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style='HWP-TAB: 1;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
 					</p>
-					<p class="HStyle0">
+					<p>
 						<span>ex)</span>
 					</p>
-					<p class="HStyle0">
+					<p>
 						<span>var msg </span>
 					</p>
-					<p class="HStyle0">
+					<p>
 						<span>&nbsp;&nbsp;&nbsp;&nbsp;= N.message.get(message, “key”, [“ 입니다”]);</span>
 					</p>
-					<p class="HStyle0">
+					<p>
 						<span>msg의 값 : “메시지 입니다“</span>
 					</p>
 				</td>
@@ -610,10 +598,10 @@ table.form {
 			</tr>
 			<tr>
 				<td>
-					<p class="HStyle0">
+					<p>
 						<span>N()</span>
 					</p>
-					<p class="HStyle0">
+					<p>
 						<span>.instance</span>
 					</p>
 				</td>
@@ -621,34 +609,34 @@ table.form {
 				<td>-</td>
 				<td>Object</td>
 				<td>
-					<p class="HStyle0">
+					<p>
 						<span>Natural-JS 는 기본적으로 컴포넌트나 라이브러리들에 의해 생성된 인스턴스를 대상 HTML element(이하 요소)가 있다면 대상요소에 인스턴스를 저장 합니다.</span>
 					</p>
-					<p class="HStyle0">
+					<p>
 						<span>N().instance 메서드는 이 인스턴스를 요소에 저장하고 가져오는 역할을 수행 합니다.</span>
 					</p>
-					<p class="HStyle0">
+					<p>
 						<span>인자중에 name만 입력하면 인스턴스를 가져오고 name, instance를 같이 입력하면 해당이름으로 해당요소에 instance를 저장 합니다. instance 인자로 callback function 이 입력되면 여러 인스턴스를 한번에 가져올 수 있습니다. </span>
 					</p>
-					<p class="HStyle0">
+					<p>
 						<span>ex)&nbsp;</span>
 					</p>
-					<p class="HStyle0">
+					<p>
 						<span>var single = (“div#sample”).instance(“grid”);</span>
 					</p>
-					<p class="HStyle0">
+					<p>
 						<span>var multy = (“div.sample”).instance(“form”, </span>
 					</p>
-					<p class="HStyle0">
+					<p>
 						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function(i, inst) {</span>
 					</p>
-					<p class="HStyle0">
+					<p>
 						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//this 는 각각의 instance</span>
 					</p>
-					<p class="HStyle0">
+					<p>
 						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var insts = inst;</span>
 					</p>
-					<p class="HStyle0">
+					<p>
 						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});</span>
 					</p>
 				</td>
@@ -664,29 +652,29 @@ table.form {
 				<td>&nbsp;</td>
 				<td>instance</td>
 				<td>
-					<p class="HStyle0">
+					<p>
 						<span>Object or callback function(이하 callback)</span>
 					</p>
 				</td>
 				<td>-</td>
 				<td>
-					<p class="HStyle0">
+					<p>
 						<span>인스턴스 or 인스턴스를 가져올 callback</span>
 					</p>
-					<p class="HStyle0" style='margin-left: 22.4pt; text-align: left; text-indent: -15.0pt;'>
+					<p style='margin-left: 22.4pt; text-align: left; text-indent: -15.0pt;'>
 						<span style='font-size: 8.0pt;'>주) callback의 인자는 index(arguments[0])와 각각의 instance(arguments[1])가 들어옵니다. 이 callback 안의 this 는 각각의 instance를 가리킵니다.</span>
 					</p>
 				</td>
 			</tr>
 		</tbody>
 	</table>
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 
-	<p class="HStyle0">
+	<p>
 		<span style='font-size: 12.0pt; font-weight: "bold";'><br></span>
 	</p>
 
-	<p class="HStyle0">
+	<p>
 		<span style='font-size: 12.0pt; font-weight: "bold";'><br></span>
 	</p>
 
@@ -702,64 +690,64 @@ table.form {
 		가. <span>개요</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 36.7pt;'>
+	<p style='margin-left: 36.7pt;'>
 		<span>Controller(이하 N.cont) 는 CVC Architecture Pattern(이하 CVC 패턴)의 Controller 영역을 구현한 클래스로서 Communicator 와 View 를 연결 해 주고 View 의 HTML 요소(element)들을 제어하는 역할을 합니다.</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 36.7pt;'>
+	<p style='margin-left: 36.7pt;'>
 		<span>N.cont 는 다음과 같이 페이지의 View 영역 바로 아래 선언되어야 합니다.</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 36.7pt;'>
+	<p style='margin-left: 36.7pt;'>
 		<span>ex)</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 36.7pt;'>
+	<p style='margin-left: 36.7pt;'>
 		<span>&lt;div id=“view”&gt;</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 36.7pt;'>
+	<p style='margin-left: 36.7pt;'>
 		<span>&nbsp;&nbsp;View 영역</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 36.7pt;'>
+	<p style='margin-left: 36.7pt;'>
 		<span>&lt;/div&gt; </span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 36.7pt;'>
+	<p style='margin-left: 36.7pt;'>
 		<span>&lt;script type=&quot;text/javascript&quot;&gt;</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 36.7pt;'>
+	<p style='margin-left: 36.7pt;'>
 		<span>&nbsp;&nbsp;N(&quot;div#view&quot;).cont({</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 36.7pt;'>
+	<p style='margin-left: 36.7pt;'>
 		<span>&nbsp;&nbsp;&nbsp;&nbsp;init : function(view, request) {</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 36.7pt;'>
+	<p style='margin-left: 36.7pt;'>
 		<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//JSON 형태의 Class 로 정의</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 36.7pt;'>
+	<p style='margin-left: 36.7pt;'>
 		<span>&nbsp;&nbsp;&nbsp;&nbsp;}</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 36.7pt;'>
+	<p style='margin-left: 36.7pt;'>
 		<span>&nbsp;&nbsp;});</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 36.7pt;'>
+	<p style='margin-left: 36.7pt;'>
 		<span>&lt;/script&gt;</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'>
+	<p style='margin-left: 40.0pt;'>
 		<span>위와 같이 N.cont 를 선언하면 View 영역의 Load 가 완료된 후 N.cont의 인자로 들어온 Controller 클래스에 init 메서드가 정의 되어 있다면 init 메서드를 프레임워크에서 실행 시켜 줍니다. init 의 인자(Arguments)로는 View영역의 HTML 요소들이 담긴 JWS 객체와 Communicator.request(Communicator 참조) 객체를 넣어 줍니다. 또한 Controller Class 의 초기화(Initialize)가 완료되면 View영역의 최상위 Element 에 해당 Controller
 			인스턴스(instance)를 넣어줘 N(“페이지 최상위 Element”).instance(“cont”) 로 View 영역에서 참조 할 수 있습니다. </span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'>
+	<p style='margin-left: 40.0pt;'>
 		<span><br></span>
 	</p>
 
@@ -767,7 +755,7 @@ table.form {
 		나. <span>생성자(Constructor)</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -833,9 +821,9 @@ table.form {
 			</td>
 		</tr>
 	</table>
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 
-	<p class="HStyle0">
+	<p>
 		<span><br></span>
 	</p>
 
@@ -843,7 +831,7 @@ table.form {
 		다. <span>Controller 기본 함수(callback default method)</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -858,7 +846,7 @@ table.form {
 			<td>-</td>
 			<td>User define</td>
 			<td colspan="2">
-				<p class="HStyle0">
+				<p>
 					<span>N.cont 에 의해 등록된 callback 이 초기화 된 후 최초 실행 되는 함수입니다.</span>
 				</p>
 			</td>
@@ -882,13 +870,13 @@ table.form {
 			</td>
 		</tr>
 	</table>
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 
-	<p class="HStyle0">
+	<p>
 		<span><br></span>
 	</p>
 
-	<p class="HStyle0">
+	<p>
 		<span><br></span>
 	</p>
 
@@ -900,11 +888,11 @@ table.form {
 		가. <span>개요</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 36.7pt;'>
+	<p style='margin-left: 36.7pt;'>
 		<span>Communicator(이하 N.comm) 는 CVC 패턴의 Communicator 영역을 구현한 클래스로서 서버와의 통신을 담당하는 Natural-JS의 공통모듈입니다. Communicator 는 jQuery,ajax 모듈을 사용해서 Ajax로 서버와의 통신을 합니다. Ajax 통신외에 요청마다 Communicator.request 객체가 생성되어 웹 UI 안의 논리적인 페이지(탭, 임베드, 팝업등)의 Controller간 데이터를 송·수신 할 수 있고 불러온 페이지의 Controller 에서 요청정보를 확인 할 수 있습니다. </span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'>
+	<p style='margin-left: 40.0pt;'>
 		<span><br></span>
 	</p>
 
@@ -912,7 +900,7 @@ table.form {
 		나. <span>생성자(Constructor)</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -976,10 +964,10 @@ table.form {
 		</tr>
 		<tr>
 			<td>
-				<p class="HStyle0">
+				<p>
 					<span>N(obj)</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>.comm</span>
 				</p>
 			</td>
@@ -1003,9 +991,9 @@ table.form {
 			<td>N.comm 의 url 인자 와 같습니다.</td>
 		</tr>
 	</table>
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'>
+	<p style='margin-left: 40.0pt;'>
 		<span><br></span>
 	</p>
 
@@ -1013,11 +1001,11 @@ table.form {
 		다. <span>기본옵션(Default options)</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'>
+	<p style='margin-left: 40.0pt;'>
 		<span>obj(arguments[0])가 JSON 오브젝트 타입의 옵션이면 Communicator.request(이하 request) 가 생성되어서 request 의 옵션으로 지정 됩니다. request 의 기본옵션 부분을과 동일하므로 “마. Communicator.request”의 기본옵션 부분을 참고하기 바랍니다.</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'>
+	<p style='margin-left: 40.0pt;'>
 		<span><br></span>
 	</p>
 
@@ -1025,7 +1013,7 @@ table.form {
 		라. <span>함수(Methods)</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -1040,7 +1028,7 @@ table.form {
 			<td>-</td>
 			<td>N.comm</td>
 			<td colspan="2">
-				<p class="HStyle0">
+				<p>
 					<span>컨트롤러의 실행정보가 정의되어 초기화 된 다음 서버에 요청을 보내는 메서드입니다.</span>
 				</p>
 			</td>
@@ -1057,9 +1045,9 @@ table.form {
 			</td>
 		</tr>
 	</table>
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 
-	<p class="HStyle0">
+	<p>
 		<span><br></span>
 	</p>
 
@@ -1071,11 +1059,11 @@ table.form {
 		1) <span>개요</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 46.7pt;'>
+	<p style='margin-left: 46.7pt;'>
 		<span>Communicator.request(이하 request) 는 단독으로 사용될 수 없고 N.comm 으로 요청을 보낼때마다 N.comm 에 의해서 생성 되는 모듈입니다. request는 요청에 대한 옵션을 지정 할 수 있고 요청정보를 가지고 있고 페이지간 데이터 전달을 위한 attr 메서드가 구현 되어 있습니다. </span>
 	</p>
 
-	<p class="HStyle0">
+	<p>
 		<span><br></span>
 	</p>
 
@@ -1083,11 +1071,11 @@ table.form {
 		2) <span>생성자(Constructor)</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 46.7pt;'>
+	<p style='margin-left: 46.7pt;'>
 		<span>개발시 직접 컨트롤 할 수 없고 Communicator 에 의해 생성되므로 설명을 생략 합니다.</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'>
+	<p style='margin-left: 40.0pt;'>
 		<span><br></span>
 	</p>
 
@@ -1095,7 +1083,7 @@ table.form {
 		3) <span>기본옵션(Default options)</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -1223,17 +1211,17 @@ table.form {
 			</td>
 		</tr>
 	</table>
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'>
+	<p style='margin-left: 40.0pt;'>
 		<span>※ 위 기본옵션 외에 N.comm은 jQuery $.ajax 모듈을 사용하여 $.ajax에서 제공하는 옵션중 이벤트콜백 관련 부분(beforeSend, success, error, complete)을 제외한 모든 옵션을 그대로 제공합니다.</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'>
+	<p style='margin-left: 40.0pt;'>
 		<span>&nbsp;</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'>
+	<p style='margin-left: 40.0pt;'>
 		<span><br></span>
 	</p>
 
@@ -1241,7 +1229,7 @@ table.form {
 		4) <span>함수(Methods)</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -1255,27 +1243,27 @@ table.form {
 			<td>-</td>
 			<td>-</td>
 			<td colspan="2">
-				<p class="HStyle0">
+				<p>
 					<span>Controller.request or&nbsp; Value object</span>
 				</p>
 			</td>
 			<td colspan="2">
-				<p class="HStyle0">
+				<p>
 					<span>호출한 페이지에 값을 전달할 때 사용합니다.</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>ex)</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>* 값전달 : N(selector).comm(url).request</span>
 				</p>
-				<p class="HStyle0" style='margin-left: 47.4pt; text-align: left; text-indent: -10.0pt;'>
+				<p style='margin-left: 47.4pt; text-align: left; text-indent: -10.0pt;'>
 					<span>.attr(“param”, { paramA : “A” }).submit()</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>* 전달된 값 참고 : (불려진 페이지의 Controller)</span>
 				</p>
-				<p class="HStyle0" style='margin-left: 37.4pt; text-align: left;'>
+				<p style='margin-left: 37.4pt; text-align: left;'>
 					<span>.request.attr(“param”)</span>
 				</p>
 			</td>
@@ -1293,7 +1281,7 @@ table.form {
 			<td>Object</td>
 			<td>-</td>
 			<td colspan="2">
-				<p class="HStyle0">
+				<p>
 					<span>전달할 값에 해당하는 object를 지정 한다. obj 인자를 지정하지 않으면 값을 가져오고 지정하면 해당 값으로 저장합니다.</span>
 				</p>
 			</td>
@@ -1304,7 +1292,7 @@ table.form {
 			<td>-</td>
 			<td>String</td>
 			<td colspan="2">
-				<p class="HStyle0">
+				<p>
 					<span>현재 페이지의 URL에 표출된 GET 파라미터에서 값을 추출 합니다.</span>
 				</p>
 			</td>
@@ -1315,7 +1303,7 @@ table.form {
 			<td>String</td>
 			<td>-</td>
 			<td colspan="2">
-				<p class="HStyle0">
+				<p>
 					<span>GET 파라미터의 name을 지정한다. 지정하지 않으면 GET 파라미터 전체 값을 JSON Object 형태로 반환 합니다.</span>
 				</p>
 			</td>
@@ -1333,15 +1321,15 @@ table.form {
 			<td>String</td>
 			<td>-</td>
 			<td colspan="2">
-				<p class="HStyle0">
+				<p>
 					<span>key를 지정하지 않으면 전체 요청정보를 가져오고 key 값을 지정하면 해당 정보만 가져옵니다. key 값은 기본옵션과 같고 referrer(호출한 페이지 URL) 값만 추가 됩니다.</span>
 				</p>
 			</td>
 		</tr>
 	</table>
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'>
+	<p style='margin-left: 40.0pt;'>
 		<span><br></span>
 	</p>
 
@@ -1353,11 +1341,11 @@ table.form {
 		가. <span>개요</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 36.7pt;'>
+	<p style='margin-left: 36.7pt;'>
 		<span>Context(이하 N.context)는 Natural-JS 의 생명주기(Life-Cycle, 페이지가 표시되고 다른페이지로 redirect 되기 전까지) 안 에서의 데이터 저장소 역할을 한다. Natural-JS 의 환경설정 값(Config)과 메시지등이 N.context 객체에 저장 된다.</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 36.7pt;'>
+	<p style='margin-left: 36.7pt;'>
 		<span><br></span>
 	</p>
 
@@ -1365,7 +1353,7 @@ table.form {
 		나. <span>함수(Methods)</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -1394,19 +1382,19 @@ table.form {
 			<td>Object</td>
 			<td>-</td>
 			<td colspan="2">
-				<p class="HStyle0">
+				<p>
 					<span>저장할 값에 해당하는 object를 지정 한다. obj 인자를 지정하지 않으면 값을 가져오고 지정하면 해당 값으로 저장합니다.</span>
 				</p>
 			</td>
 		</tr>
 	</table>
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 
-	<p class="HStyle0" style='margin-left: 36.7pt;'>
+	<p style='margin-left: 36.7pt;'>
 		<span><br></span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 10.0pt;'>
+	<p style='margin-left: 10.0pt;'>
 		5. <span>natural.config.js</span>
 	</p>
 
@@ -1414,39 +1402,39 @@ table.form {
 		가. <span>개요</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 36.7pt;'>
+	<p style='margin-left: 36.7pt;'>
 		<span>Natural-JS 의 환경설정 파일입니다. 설정값은 N.context 에 저장 되며 각 패키지 별로 따로 저장 됩니다. </span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 36.7pt;'>
+	<p style='margin-left: 36.7pt;'>
 		<span><br></span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 36.7pt;'>
+	<p style='margin-left: 36.7pt;'>
 		<span>N.context.attr(&quot;core&quot;) : Natural-CORE 패키지에 속한 라이브러리들의 기본 설정 값.</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 36.7pt;'>
+	<p style='margin-left: 36.7pt;'>
 		<span>N.context.attr(&quot;architecture&quot;) : Natural-ARCHITECTURE 패키지에 속한 라이브러리들의 기본 설정 값. </span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 36.7pt;'>
+	<p style='margin-left: 36.7pt;'>
 		<span>N.context.attr(&quot;data&quot;) : Natural-DATA 패키지에 속한 라이브러리들의 기본 설정 값.</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 36.7pt;'>
+	<p style='margin-left: 36.7pt;'>
 		<span>N.context.attr(&quot;ui&quot;) : Natural-UI 패키지에 속한 라이브러리들의 기본 설정 값.</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 36.7pt;'>
+	<p style='margin-left: 36.7pt;'>
 		<span><br></span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 36.7pt;'>
+	<p style='margin-left: 36.7pt;'>
 		<span>세부 설정값에 대한 내용은 각 컴포넌트와 라이브러리별 기본옵션과 natural.config.js 파일 안의 설명을 참고하기 바랍니다. </span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 36.7pt;'>
+	<p style='margin-left: 36.7pt;'>
 		<span><br></span>
 	</p>
 
@@ -1462,19 +1450,19 @@ table.form {
 		가. <span>개요</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 36.7pt;'>
+	<p style='margin-left: 36.7pt;'>
 		<span>Formater 는 지정한 데이터세트를 정의한 룰을 기반으로 데이터세트 전체를 양식화하여 반환 합니다. 룰(rules) 대신 입력요소가 담겨있는 블록요소(Block element)를 지정하면 입력요소에 선언형 옵션으로 지정된 룰을 기반으로 양식화하여 반환 해 주는 라이브러리입니다.</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 36.7pt;'>
+	<p style='margin-left: 36.7pt;'>
 		<span><br></span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 51.7pt; text-indent: -15.0pt;'>
+	<p style='margin-left: 51.7pt; text-indent: -15.0pt;'>
 		<span><img src="images/icon/alert.png" alt="" />&nbsp;룰 대신 입력요소를 지정하면 해당 입력요소들마다 “format“, “unformat“ 이벤트를 바인드(bind) 해 줍니다. 해당 입력요소를 가져다가 jQuery 의 trigger 메서드로 실행하면 해당입력요소에 입력된 값을 실시간으로 format, unformat 할 수 있습니다.<br>ex) N(”input[name=’formatEx’]”).trigger(”format or unformat”);</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 36.7pt; text-indent: -15.0pt;'>
+	<p style='margin-left: 36.7pt; text-indent: -15.0pt;'>
 		<span><br></span>
 	</p>
 
@@ -1482,7 +1470,7 @@ table.form {
 		나. <span>생성자(Constructor)</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -1497,7 +1485,7 @@ table.form {
 			<td>-</td>
 			<td>N.formater</td>
 			<td>
-				<p class="HStyle0">
+				<p>
 					<span>N.formater </span><span style='font-family: "맑은 고딕"'>객체를 생성 합니다.</span>
 				</p>
 			</td>
@@ -1525,22 +1513,22 @@ table.form {
 				<p class="HStyle17">
 					<span>JSON룰 ex)</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span style='font-size: 7.0pt;'>{</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span style='font-size: 7.0pt;'>&nbsp;&nbsp;&quot;numeric&quot; : [[&quot;trimtoempty&quot;], [&quot;numeric&quot;, &quot;#,###.##0000&quot;]],</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span style='font-size: 7.0pt;'>&nbsp;&nbsp;&quot;generic&quot; : [[&quot;trimtoempty&quot;], [&quot;generic&quot;, &quot;@@ABCD&quot;]],</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span style='font-size: 7.0pt;'>&nbsp;&nbsp;&quot;limit&quot; : [[&quot;trimtoempty&quot;], [&quot;limit&quot;, &quot;13&quot;, &quot;...&quot;]],</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span style='font-size: 7.0pt;'>&nbsp;&nbsp;&quot;etc&quot; : [[&quot;date&quot;, 12]]</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span style='font-size: 7.0pt;'>}</span>
 				</p>
 				<p class="HStyle17">
@@ -1558,7 +1546,7 @@ table.form {
 				<p class="HStyle17">
 					<span>&nbsp;</span>
 				</p>
-				<p class="HStyle0" style='margin-left: 17.4pt; text-indent: -15.0pt;'>
+				<p style='margin-left: 17.4pt; text-indent: -15.0pt;'>
 					<span style='font-size: 8.0pt;'><img src="images/icon/alert.png" alt="" />&nbsp;룰 속성은 다음과 같이 정의 합니다.<br>[ [“룰명”, “룰arguments[0]”, “룰 arguments[1]”], ... ]</span>
 				</p>
 			</td>
@@ -1585,9 +1573,9 @@ table.form {
 			<td>N.formater의 rules 인자 와 같습니다.</td>
 		</tr>
 	</table>
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'>
+	<p style='margin-left: 40.0pt;'>
 		<span><br></span>
 	</p>
 
@@ -1595,7 +1583,7 @@ table.form {
 		다. <span>함수(Methods)</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -1617,10 +1605,10 @@ table.form {
 			<td>int</td>
 			<td>-</td>
 			<td colspan="2">
-				<p class="HStyle0">
+				<p>
 					<span>양식화할 데이터의 row, </span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>입력하지 않으면 무조건 첫 번째 데이터를 양식화 합니다.</span>
 				</p>
 			</td>
@@ -1647,9 +1635,9 @@ table.form {
 			<td>양식화 되지않은 원데이터(JSON Object)의 key 값</td>
 		</tr>
 	</table>
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 
-	<p class="HStyle0" style='margin-left: 36.7pt;'>
+	<p style='margin-left: 36.7pt;'>
 		<span><br></span>
 	</p>
 
@@ -1657,7 +1645,7 @@ table.form {
 		라. <span>포맷 룰(Format rules)</span>
 	</p>
 
-	<p class="HStyle0"></p>
+	<p></p>
 	<table class="form">
 		<tr>
 			<td>옵션명</td>
@@ -1832,9 +1820,9 @@ table.form {
 			</td>
 		</tr>
 	</table>
-	<p class="HStyle0"></p>
+	<p></p>
 
-	<p class="HStyle0">
+	<p>
 		<span><br></span>
 	</p>
 
@@ -1846,11 +1834,11 @@ table.form {
 		가. <span>개요</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 36.7pt;'>
+	<p style='margin-left: 36.7pt;'>
 		<span>Validator 는 지정한 데이터세트를 정의한 룰을 기반으로 데이터세트 전체를 검증하여 검증 데이터 세트를 반환해 주는 라이브러리입니다. 룰(rules) 대신 입력요소가 담겨있는 블록요소(Block element)를 지정하면 입력요소에 선언형옵션으로 지정된 룰을 기반으로 검증을 하여 검증에 통과하지 못했다면 입력요소 바로옆에 툴팁으로 검증 메시지를 보여줍니다.</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'>
+	<p style='margin-left: 40.0pt;'>
 		<span><br></span>
 	</p>
 
@@ -1858,7 +1846,7 @@ table.form {
 		나. <span>생성자(Constructor)</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -1897,19 +1885,19 @@ table.form {
 				<p class="HStyle17">
 					<span>ex)</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span style='font-size: 7.0pt;'>{</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span style='font-size: 7.0pt;'>&nbsp;&nbsp;&quot;numeric&quot; : [[&quot;required&quot;], [&quot;integer+commas&quot;]],</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span style='font-size: 7.0pt;'>&nbsp;&nbsp;&quot;generic&quot; : [[&quot;required&quot;], [&quot;korean&quot;]],</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span style='font-size: 7.0pt;'>&nbsp;&nbsp;&quot;limit&quot; : [[&quot;required&quot;], [&quot;alphabet&quot;]]</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span style='font-size: 7.0pt;'>}</span>
 				</p>
 				<p class="HStyle17">
@@ -1924,7 +1912,7 @@ table.form {
 				<p class="HStyle17">
 					<span>&nbsp;</span>
 				</p>
-				<p class="HStyle0" style='margin-left: 17.4pt; text-indent: -15.0pt;'>
+				<p style='margin-left: 17.4pt; text-indent: -15.0pt;'>
 					<span style='font-size: 8.0pt;'><img src="images/icon/alert.png" alt="" />&nbsp;룰 속성은 다음과 같이 정의 합니다.<br>[ [“룰명”, “룰arguments[0]”, “룰 arguments[1]”], ... ]</span>
 				</p>
 			</td>
@@ -1951,9 +1939,9 @@ table.form {
 			<td>N.validator의 rules 인자 와 같습니다.</td>
 		</tr>
 	</table>
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'>
+	<p style='margin-left: 40.0pt;'>
 		<span><br></span>
 	</p>
 
@@ -1961,7 +1949,7 @@ table.form {
 		다. <span>함수(Methods)</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -1983,18 +1971,18 @@ table.form {
 			<td>int</td>
 			<td>-</td>
 			<td colspan="2">
-				<p class="HStyle0">
+				<p>
 					<span>검증할 데이터의 row, </span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>입력하지 않으면 무조건 첫 번째 데이터를 양식화 합니다.</span>
 				</p>
 			</td>
 		</tr>
 	</table>
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 
-	<p class="HStyle0" style='margin-left: 36.7pt;'>
+	<p style='margin-left: 36.7pt;'>
 		<span><br></span>
 	</p>
 
@@ -2002,7 +1990,7 @@ table.form {
 		라. <span>검증 룰(Validate rules)</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 36.7pt;'></p>
+	<p style='margin-left: 36.7pt;'></p>
 	<table class="form">
 		<tr>
 			<td>옵션명</td>
@@ -2185,9 +2173,9 @@ table.form {
 			<td>입력한 regexp 의 조건으로 검사 후 message 값 표시</td>
 		</tr>
 	</table>
-	<p class="HStyle0" style='margin-left: 36.7pt;'></p>
+	<p style='margin-left: 36.7pt;'></p>
 
-	<p class="HStyle0" style='margin-left: 36.7pt;'>
+	<p style='margin-left: 36.7pt;'>
 		<span><br></span>
 	</p>
 
@@ -2199,11 +2187,11 @@ table.form {
 		가. <span>개요</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 36.7pt;'>
+	<p style='margin-left: 36.7pt;'>
 		<span>Natural-DATA 패키지에는 JSON Array 타입의 데이터를 조작하고 정령할 수 있는 기능을 제공 합니다.</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'>
+	<p style='margin-left: 40.0pt;'>
 		<span><br></span>
 	</p>
 
@@ -2211,7 +2199,7 @@ table.form {
 		나. <span>함수(Methods)</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -2222,10 +2210,10 @@ table.form {
 		</tr>
 		<tr>
 			<td>
-				<p class="HStyle0">
+				<p>
 					<span>N.data</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>.refine</span>
 				</p>
 			</td>
@@ -2233,7 +2221,7 @@ table.form {
 			<td>-</td>
 			<td>정제된 JSON Array</td>
 			<td colspan="2">
-				<p class="HStyle0">
+				<p>
 					<span>서버나 JSON 데이터가 담긴 파일에서 가져온 JSON 데이터를 Natural-JS에서 사용할수 있는 형태의 JSON 형태로 만들어 줍니다.</span>
 				</p>
 			</td>
@@ -2251,35 +2239,35 @@ table.form {
 			<td>String</td>
 			<td>-</td>
 			<td colspan="2">
-				<p class="HStyle0">
+				<p>
 					<span>서버나 JSON 데이터가 담긴 파일에서 여러개의 리스트를 반환했을경우의 해당 리스트의 ID 값</span>
 				</p>
 			</td>
 		</tr>
 		<tr>
 			<td>
-				<p class="HStyle0">
+				<p>
 					<span>N.data</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>.filter</span>
 				</p>
 			</td>
 			<td>-</td>
 			<td>-</td>
 			<td colspan="2">
-				<p class="HStyle0">
+				<p>
 					<span>필터링된</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>JSON Array</span>
 				</p>
 			</td>
 			<td colspan="2">
-				<p class="HStyle0">
+				<p>
 					<span>지정한 조건으로 JSON Array를 필터링 합니다.</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>&nbsp;</span>
 				</p>
 			</td>
@@ -2297,51 +2285,51 @@ table.form {
 			<td>String</td>
 			<td>-</td>
 			<td colspan="2">
-				<p class="HStyle0">
+				<p>
 					<span>필터링 조건을 입력 합니다.</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>조건은 다음과 같이 자바스크립트 비교 문법으로 지정 합니다.</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>ex)</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>* queryString = ‘data.키명 == “비교값”’;</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>N.data.filter([</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>&nbsp;&nbsp;{ name : “홍길동” }, </span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>&nbsp;&nbsp;{ name : “Mike” }</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>], ‘</span><span style='font-size: 9.0pt; font-weight: "bold"; text-decoration: "underline";'>data.name == “홍길동”‘</span><span>);</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>쉽게 생각하면 queryString 바깥에 if() 문이 감싸져있고 data 라고 이름지어진 row data를 가지고 비교한다고 생각 하면 됩니다.</span>
 				</p>
 			</td>
 		</tr>
 		<tr>
 			<td>
-				<p class="HStyle0">
+				<p>
 					<span>N.data</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>.sort</span>
 				</p>
 			</td>
 			<td>-</td>
 			<td>-</td>
 			<td colspan="2">
-				<p class="HStyle0">
+				<p>
 					<span>정렬된</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>JSON Array</span>
 				</p>
 			</td>
@@ -2370,10 +2358,10 @@ table.form {
 		</tr>
 		<tr>
 			<td>
-				<p class="HStyle0">
+				<p>
 					<span>N(obj)</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>.datarefine</span>
 				</p>
 			</td>
@@ -2381,10 +2369,10 @@ table.form {
 			<td>-</td>
 			<td>정제된 JSON Array</td>
 			<td colspan="2">
-				<p class="HStyle0">
+				<p>
 					<span>N.data.refine을 플러그인 방식으로 초기화 하는 방식입니다.</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>N.data.refine과 동작되는 로직은 같으며 실제 N() 의 인자로 들어온 값이 N.data.refine()의 첫 번째 인자로 지정 됩니다.</span>
 				</p>
 			</td>
@@ -2398,28 +2386,28 @@ table.form {
 		</tr>
 		<tr>
 			<td>
-				<p class="HStyle0">
+				<p>
 					<span>N(obj)</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>.datafilter</span>
 				</p>
 			</td>
 			<td>-</td>
 			<td>-</td>
 			<td colspan="2">
-				<p class="HStyle0">
+				<p>
 					<span>필터링된</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>JSON Array</span>
 				</p>
 			</td>
 			<td colspan="2">
-				<p class="HStyle0">
+				<p>
 					<span>N.data.filter를 플러그인 방식으로 초기화 하는 방식입니다.</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>N.data.filter와 동작되는 로직은 같으며 실제 N() 의 인자로 들어온 값이 N.data.filter()의 첫 번째 인자로 지정 됩니다.</span>
 				</p>
 			</td>
@@ -2433,28 +2421,28 @@ table.form {
 		</tr>
 		<tr>
 			<td>
-				<p class="HStyle0">
+				<p>
 					<span>N(obj)</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>.datasort</span>
 				</p>
 			</td>
 			<td>-</td>
 			<td>-</td>
 			<td colspan="2">
-				<p class="HStyle0">
+				<p>
 					<span>정렬된</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>JSON Array</span>
 				</p>
 			</td>
 			<td colspan="2">
-				<p class="HStyle0">
+				<p>
 					<span>N.data.sort를 플러그인 방식으로 초기화 하는 방식입니다.</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>N.data.sort와 동작되는 로직은 같으며 실제 N() 의 인자로 들어온 값이 N.data.sort()의 첫 번째 인자로 지정 됩니다.</span>
 				</p>
 			</td>
@@ -2474,9 +2462,9 @@ table.form {
 			<td>N.data.sort의 reverse 인자 와 같습니다.</td>
 		</tr>
 	</table>
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 
-	<p class="HStyle0" style='margin-left: 36.7pt;'>
+	<p style='margin-left: 36.7pt;'>
 		<span><br></span>
 	</p>
 
@@ -2492,11 +2480,11 @@ table.form {
 		가. <span>개요</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 36.7pt;'>
+	<p style='margin-left: 36.7pt;'>
 		<span>Alert(이하 N.alert) 는 window.alert 이나 window.confirm과 같이 메세지를 다이얼로그로 표현하기 위한 컴포넌트 입니다.</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'>
+	<p style='margin-left: 40.0pt;'>
 		<span><br></span>
 	</p>
 
@@ -2504,7 +2492,7 @@ table.form {
 		나. <span>생성자(Constructor)</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -2603,9 +2591,9 @@ table.form {
 			<td>N.alert의 var 옵션과 같습니다.</td>
 		</tr>
 	</table>
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'>
+	<p style='margin-left: 40.0pt;'>
 		<span><br></span>
 	</p>
 
@@ -2613,7 +2601,7 @@ table.form {
 		다. <span>기본옵션(Default options)</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -2768,9 +2756,9 @@ table.form {
 			</td>
 		</tr>
 	</table>
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'>
+	<p style='margin-left: 40.0pt;'>
 		<span><br></span>
 	</p>
 
@@ -2778,7 +2766,7 @@ table.form {
 		라. <span>함수(Methods)</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -2809,13 +2797,13 @@ table.form {
 			<td>메시지 다이얼로그를 표현하는 HTML Element들을 제거합니다.</td>
 		</tr>
 	</table>
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'>
+	<p style='margin-left: 40.0pt;'>
 		<span><br></span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 10.0pt;'>
+	<p style='margin-left: 10.0pt;'>
 		10. <span>Button(N.button)</span>
 	</p>
 
@@ -2823,11 +2811,11 @@ table.form {
 		가. <span>개요</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 36.7pt;'>
+	<p style='margin-left: 36.7pt;'>
 		<span>Button(이하 N.button) 은 a , input button , button 과 같은 버튼 요소들을 공통된 모양과 공통된 동작을 가진 버튼을 만들어 컴포넌트입니다.</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'>
+	<p style='margin-left: 40.0pt;'>
 		<span><br></span>
 	</p>
 
@@ -2835,7 +2823,7 @@ table.form {
 		나. <span>생성자(Constructor)</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -2894,9 +2882,9 @@ table.form {
 			<td>N.button의 opts 옵션과 같습니다.</td>
 		</tr>
 	</table>
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'>
+	<p style='margin-left: 40.0pt;'>
 		<span><br></span>
 	</p>
 
@@ -2904,7 +2892,7 @@ table.form {
 		다. <span>기본옵션(Default options)</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -2929,7 +2917,7 @@ table.form {
 				<p class="HStyle17">
 					<span>크기</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>smaller, small, medium, large, big</span>
 				</p>
 			</td>
@@ -2943,7 +2931,7 @@ table.form {
 				<p class="HStyle17">
 					<span>색깔</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>white, blue, skyblue, gray</span>
 				</p>
 			</td>
@@ -2963,9 +2951,9 @@ table.form {
 			<td>활성, 비활성 시 Fade 효과 적용 유무</td>
 		</tr>
 	</table>
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'>
+	<p style='margin-left: 40.0pt;'>
 		<span><br></span>
 	</p>
 
@@ -2973,7 +2961,7 @@ table.form {
 		라. <span>선언형옵션(Declarative options)</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -2989,7 +2977,7 @@ table.form {
 				<p class="HStyle17">
 					<span>크기</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>smaller, small, medium, large, big</span>
 				</p>
 			</td>
@@ -3002,7 +2990,7 @@ table.form {
 				<p class="HStyle17">
 					<span>색깔</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>white, blue, skyblue, gray</span>
 				</p>
 			</td>
@@ -3020,9 +3008,9 @@ table.form {
 			<td>활성, 비활성 시 Fade 효과 적용 유무</td>
 		</tr>
 	</table>
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'>
+	<p style='margin-left: 40.0pt;'>
 		<span><br></span>
 	</p>
 
@@ -3030,7 +3018,7 @@ table.form {
 		마. <span>함수(Methods)</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -3054,13 +3042,13 @@ table.form {
 			<td>버턴을 비활성화 합니다.</td>
 		</tr>
 	</table>
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'>
+	<p style='margin-left: 40.0pt;'>
 		<span><br></span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 10.0pt;'>
+	<p style='margin-left: 10.0pt;'>
 		11. <span>DatePicker(N.datepicker)</span>
 	</p>
 
@@ -3068,11 +3056,11 @@ table.form {
 		가. <span>개요</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 36.7pt;'>
+	<p style='margin-left: 36.7pt;'>
 		<span>Datepicker(이하 N.datepicker)는 달력 다이얼로그를 입력요소 주변에 표시하여 마우스를 이용하여 날짜를 입력할 수 있게 해주는 컴포넌트입니다.</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'>
+	<p style='margin-left: 40.0pt;'>
 		<span><br></span>
 	</p>
 
@@ -3080,7 +3068,7 @@ table.form {
 		나. <span>생성자(Constructor)</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -3139,9 +3127,9 @@ table.form {
 			<td>N.datepicker의 opts 옵션과 같습니다.</td>
 		</tr>
 	</table>
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'>
+	<p style='margin-left: 40.0pt;'>
 		<span><br></span>
 	</p>
 
@@ -3149,7 +3137,7 @@ table.form {
 		다. <span>기본옵션(Default options)</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -3195,9 +3183,9 @@ table.form {
 			</td>
 		</tr>
 	</table>
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 
-	<p class="HStyle0">
+	<p>
 		<span><br></span>
 	</p>
 
@@ -3205,7 +3193,7 @@ table.form {
 		라. <span>함수(Methods)</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -3229,9 +3217,9 @@ table.form {
 			<td>Datepicker를 감춥니다.</td>
 		</tr>
 	</table>
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'>
+	<p style='margin-left: 40.0pt;'>
 		<span><br></span>
 	</p>
 
@@ -3243,15 +3231,15 @@ table.form {
 		가. <span>개요</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 36.7pt;'>
+	<p style='margin-left: 36.7pt;'>
 		<span>Popup(이하 N.popup) 은 지정한 요소나 다른페이지를 레이어팝업 형태로 만들어 주는 컴포넌트입니다.</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 36.7pt;'>
+	<p style='margin-left: 36.7pt;'>
 		<span>url 옵션으로 지정한 페이지를 가져올때 가져온 페이지의 Controller 에는 caller(호출한&nbsp; 팝업의 instance(N.popup)) 와 opener(팝업을 호출한 페이지(부모페이지)의 Controller) 속성이 추가 되어 부모 페이지와 자신을 호출한 팝업 객체를 직접 제어할 수 있습니다.</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 36.7pt;'>
+	<p style='margin-left: 36.7pt;'>
 		<span><br></span>
 	</p>
 
@@ -3259,7 +3247,7 @@ table.form {
 		나. <span>생성자(Constructor)</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -3318,9 +3306,9 @@ table.form {
 			<td>N.popup의 opts 옵션과 같습니다.</td>
 		</tr>
 	</table>
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'>
+	<p style='margin-left: 40.0pt;'>
 		<span><br></span>
 	</p>
 
@@ -3328,7 +3316,7 @@ table.form {
 		다. <span>기본옵션(Default options)</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -3504,9 +3492,9 @@ table.form {
 			</td>
 		</tr>
 	</table>
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'>
+	<p style='margin-left: 40.0pt;'>
 		<span><br></span>
 	</p>
 
@@ -3514,7 +3502,7 @@ table.form {
 		라. <span>함수(Methods)</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -3545,13 +3533,13 @@ table.form {
 			<td>팝업을 표현하는 HTML Element들을 제거합니다.</td>
 		</tr>
 	</table>
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'>
+	<p style='margin-left: 40.0pt;'>
 		<span><br></span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 10.0pt;'>
+	<p style='margin-left: 10.0pt;'>
 		13. <span>Tab(N.tab)</span>
 	</p>
 
@@ -3559,11 +3547,11 @@ table.form {
 		가. <span>개요</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 36.7pt;'>
+	<p style='margin-left: 36.7pt;'>
 		<span>Tab(이하 N.tab) 지정한 HTML 탭 템플릿을 기반으로 탭을 만들어 주는 컴포넌트입니다.</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'>
+	<p style='margin-left: 40.0pt;'>
 		<span><br></span>
 	</p>
 
@@ -3571,7 +3559,7 @@ table.form {
 		나. <span>생성자(Constructor)</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -3630,9 +3618,9 @@ table.form {
 			<td>N.tab의 opts 옵션과 같습니다.</td>
 		</tr>
 	</table>
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'>
+	<p style='margin-left: 40.0pt;'>
 		<span><br></span>
 	</p>
 
@@ -3640,7 +3628,7 @@ table.form {
 		다. <span>기본옵션(Default options)</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -3664,61 +3652,61 @@ table.form {
 				<p class="HStyle17" style='line-height: 130%;'>
 					<span style='font-size: 8.0pt; line-height: 130%'>ex)</span>
 				</p>
-				<p class="HStyle0" style='text-align: left; line-height: 130%;'>
+				<p style='text-align: left; line-height: 130%;'>
 					<span style='font-size: 8.0pt; line-height: 130%'>&lt;div id=&quot;tab&quot;&gt;</span>
 				</p>
-				<p class="HStyle0" style='text-align: left; line-height: 130%;'>
+				<p style='text-align: left; line-height: 130%;'>
 					<span style='font-size: 8.0pt; line-height: 130%'>&nbsp;&nbsp;&lt;ul&gt;</span>
 				</p>
-				<p class="HStyle0" style='text-align: left; line-height: 130%;'>
+				<p style='text-align: left; line-height: 130%;'>
 					<span style='font-size: 8.0pt; line-height: 130%'>&nbsp;&nbsp;&nbsp;&nbsp;&lt;!-- 탭요소는&nbsp; li 태그 로 표현 --&gt;</span>
 				</p>
-				<p class="HStyle0" style='text-align: left; line-height: 130%;'>
+				<p style='text-align: left; line-height: 130%;'>
 					<span style='font-size: 8.0pt; line-height: 130%'>&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;a href=&quot;#tab1&quot;&gt;Tab1&lt;/a&gt;&lt;/li&gt; </span>
 				</p>
-				<p class="HStyle0" style='text-align: left; line-height: 130%;'>
+				<p style='text-align: left; line-height: 130%;'>
 					<span style='font-size: 8.0pt; line-height: 130%'>&nbsp;&nbsp;&nbsp;&nbsp;&lt;li data-opts='{ &quot;url&quot; : &quot;prototype/tab1.html&quot; }'&gt;</span>
 				</p>
-				<p class="HStyle0" style='text-align: left; line-height: 130%;'>
+				<p style='text-align: left; line-height: 130%;'>
 					<span style='font-size: 8.0pt; line-height: 130%'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;!-- 탭 컨텐츠와의 연결은 a TAG 로 표현 </span>
 				</p>
-				<p class="HStyle0" style='text-align: left; line-height: 130%;'>
+				<p style='text-align: left; line-height: 130%;'>
 					<span style='font-size: 8.0pt; line-height: 130%'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;href 속성에 해당 컨텐츠의 #id 입력 --&gt;</span>
 				</p>
-				<p class="HStyle0" style='text-align: left; line-height: 130%;'>
+				<p style='text-align: left; line-height: 130%;'>
 					<span style='font-size: 8.0pt; line-height: 130%'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;a href=&quot;#tab2&quot;&gt;Tab2&lt;/a&gt;</span>
 				</p>
-				<p class="HStyle0" style='text-align: left; line-height: 130%;'>
+				<p style='text-align: left; line-height: 130%;'>
 					<span style='font-size: 8.0pt; line-height: 130%'>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/li&gt;</span>
 				</p>
-				<p class="HStyle0" style='text-align: left; line-height: 130%;'>
+				<p style='text-align: left; line-height: 130%;'>
 					<span style='font-size: 8.0pt; line-height: 130%'>&nbsp;&nbsp;&nbsp;&nbsp;&lt;li data-opts='{ &quot;url&quot; : &quot;prototype/tab2.html&quot;}'&gt;</span>
 				</p>
-				<p class="HStyle0" style='text-align: left; line-height: 130%;'>
+				<p style='text-align: left; line-height: 130%;'>
 					<span style='font-size: 8.0pt; line-height: 130%'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;a href=&quot;#tab3&quot;&gt;Tab3&lt;/a&gt;&lt;/li&gt;</span>
 				</p>
-				<p class="HStyle0" style='text-align: left; line-height: 130%;'>
+				<p style='text-align: left; line-height: 130%;'>
 					<span style='font-size: 8.0pt; line-height: 130%'>&nbsp;&nbsp;&lt;/ul&gt;</span>
 				</p>
-				<p class="HStyle0" style='text-align: left; line-height: 130%;'>
+				<p style='text-align: left; line-height: 130%;'>
 					<span style='font-size: 8.0pt; line-height: 130%'>&nbsp;&nbsp;&lt;!-- 탭컨텐츠는&nbsp; div 태그 로 표현 --&gt;</span>
 				</p>
-				<p class="HStyle0" style='text-align: left; line-height: 130%;'>
+				<p style='text-align: left; line-height: 130%;'>
 					<span style='font-size: 8.0pt; line-height: 130%'>&nbsp;&nbsp;&lt;div id=&quot;tab1&quot;&gt;</span>
 				</p>
-				<p class="HStyle0" style='text-align: left; line-height: 130%;'>
+				<p style='text-align: left; line-height: 130%;'>
 					<span style='font-size: 8.0pt; line-height: 130%'>&nbsp;&nbsp;&nbsp;&nbsp;Tab1</span>
 				</p>
-				<p class="HStyle0" style='text-align: left; line-height: 130%;'>
+				<p style='text-align: left; line-height: 130%;'>
 					<span style='font-size: 8.0pt; line-height: 130%'>&nbsp;&nbsp;&lt;/div&gt;</span>
 				</p>
-				<p class="HStyle0" style='text-align: left; line-height: 130%;'>
+				<p style='text-align: left; line-height: 130%;'>
 					<span style='font-size: 8.0pt; line-height: 130%'>&nbsp;&nbsp;&lt;div id=&quot;tab2&quot;&gt;&lt;/div&gt;</span>
 				</p>
-				<p class="HStyle0" style='text-align: left; line-height: 130%;'>
+				<p style='text-align: left; line-height: 130%;'>
 					<span style='font-size: 8.0pt; line-height: 130%'>&nbsp;&nbsp;&lt;div id=&quot;tab3&quot;&gt;&lt;/div&gt;</span>
 				</p>
-				<p class="HStyle0" style='text-align: left; line-height: 130%;'>
+				<p style='text-align: left; line-height: 130%;'>
 					<span style='font-size: 8.0pt; line-height: 130%'>&lt;/div&gt;</span>
 				</p>
 			</td>
@@ -3834,13 +3822,13 @@ table.form {
 			</td>
 		</tr>
 	</table>
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'>
+	<p style='margin-left: 40.0pt;'>
 		<span><br></span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'>
+	<p style='margin-left: 40.0pt;'>
 		<span><br></span>
 	</p>
 
@@ -3848,7 +3836,7 @@ table.form {
 		라. <span>선언형옵션(Declarative options)</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -3861,7 +3849,7 @@ table.form {
 			<td>String</td>
 			<td>undefined</td>
 			<td colspan="3">
-				<p class="HStyle0">
+				<p>
 					<span>특정 페이지를 탭컨텐츠로 만들경우 해당 페이지의 URL을 지정 합니다.</span>
 				</p>
 			</td>
@@ -3902,13 +3890,13 @@ table.form {
 			</td>
 		</tr>
 	</table>
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 
 	<p class="HStyle4">
 		마. <span>함수(Methods)</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -3925,9 +3913,9 @@ table.form {
 			<td>지정한 index 번째 탭과 컨텐츠를 표시한다.</td>
 		</tr>
 	</table>
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'>
+	<p style='margin-left: 40.0pt;'>
 		<span><br></span>
 	</p>
 
@@ -3939,11 +3927,11 @@ table.form {
 		가. <span>개요</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 36.7pt;'>
+	<p style='margin-left: 36.7pt;'>
 		<span>Select(이하 N.select) 는 SELECT, INPUT[TYPE=CHECKBOX], INPUT[TYPE=RADIO] 에 데이터를 주입하여 선택요소를 만들어 주고 기능을 확장시켜주는 컴포넌트입니다.</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'>
+	<p style='margin-left: 40.0pt;'>
 		<span><br></span>
 	</p>
 
@@ -3951,7 +3939,7 @@ table.form {
 		나. <span>생성자(Constructor)</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -4003,9 +3991,9 @@ table.form {
 			<td>N.select의 opts 옵션과 같습니다.</td>
 		</tr>
 	</table>
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'>
+	<p style='margin-left: 40.0pt;'>
 		<span><br></span>
 	</p>
 
@@ -4013,7 +4001,7 @@ table.form {
 		다. <span>기본옵션(Default options)</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -4087,9 +4075,9 @@ table.form {
 			</td>
 		</tr>
 	</table>
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'>
+	<p style='margin-left: 40.0pt;'>
 		<span><br></span>
 	</p>
 
@@ -4097,7 +4085,7 @@ table.form {
 		라. <span>함수(Methods)</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -4119,7 +4107,7 @@ table.form {
 			<td>boolean</td>
 			<td>-</td>
 			<td colspan="2">
-				<p class="HStyle0">
+				<p>
 					<span>true 이면 현재 선택된 값에 해당하는 데이터만 가져오고 false 이면 바인드 되어 있는 전체 데이터를 가져 옵니다.</span>
 				</p>
 			</td>
@@ -4137,7 +4125,7 @@ table.form {
 			<td>String</td>
 			<td>-</td>
 			<td colspan="2">
-				<p class="HStyle0">
+				<p>
 					<span>jQuery selector를 입력하면 해당 context 하위 요소에서 선택된 요소를 반환 합니다.</span>
 				</p>
 			</td>
@@ -4162,7 +4150,7 @@ table.form {
 			<td>String</td>
 			<td>-</td>
 			<td colspan="2">
-				<p class="HStyle0">
+				<p>
 					<span>val 인자가 undefined 가 아니면 val 값에 해당하는 요소를 선택해 줍니다.</span>
 				</p>
 			</td>
@@ -4180,15 +4168,15 @@ table.form {
 			<td>boolean</td>
 			<td>-</td>
 			<td colspan="2">
-				<p class="HStyle0">
+				<p>
 					<span>true 이면 아무것 선택하지 않고 false 이면 SELECT 요소의 경우 기본 입력값으로 선택 됩니다.</span>
 				</p>
 			</td>
 		</tr>
 	</table>
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'>
+	<p style='margin-left: 40.0pt;'>
 		<span><br></span>
 	</p>
 
@@ -4200,11 +4188,11 @@ table.form {
 		가. <span>개요</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 36.7pt;'>
+	<p style='margin-left: 36.7pt;'>
 		<span>Form(이하 N.form)은 폼 입력, 조회 양식을 구성하는 폼 블록(Block)요소(DIV, TABLE, SPAN 등)에 데이터를 바인드(bind)하여 폼을 간단하게 구현할 수 있도록 지원하는 컴포넌트입니다.</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'>
+	<p style='margin-left: 40.0pt;'>
 		<span><br></span>
 	</p>
 
@@ -4212,7 +4200,7 @@ table.form {
 		나. <span>생성자(Constructor)</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -4264,9 +4252,9 @@ table.form {
 			<td>N.form의 opts 옵션과 같습니다.</td>
 		</tr>
 	</table>
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'>
+	<p style='margin-left: 40.0pt;'>
 		<span><br></span>
 	</p>
 
@@ -4274,7 +4262,7 @@ table.form {
 		다. <span>기본옵션(Default options)</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -4358,9 +4346,9 @@ table.form {
 			<td>검증룰을 지정 합니다. 7. Validator 참고</td>
 		</tr>
 	</table>
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'>
+	<p style='margin-left: 40.0pt;'>
 		<span><br></span>
 	</p>
 
@@ -4368,7 +4356,7 @@ table.form {
 		라. <span>선언형옵션(Declarative options)</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -4389,9 +4377,9 @@ table.form {
 			<td>검증룰을 지정 합니다. 7. Validator 참고</td>
 		</tr>
 	</table>
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'>
+	<p style='margin-left: 40.0pt;'>
 		<span><br></span>
 	</p>
 
@@ -4399,7 +4387,7 @@ table.form {
 		마. <span>함수(Methods)</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -4421,7 +4409,7 @@ table.form {
 			<td>boolean</td>
 			<td>-</td>
 			<td colspan="2">
-				<p class="HStyle0">
+				<p>
 					<span>true 이면 현재 바인드되어있는 데이터만 가져오고 false 이면 바인드 되어 있는 전체 데이터를 가져 옵니다.</span>
 				</p>
 			</td>
@@ -4446,7 +4434,7 @@ table.form {
 			<td>String</td>
 			<td>-</td>
 			<td colspan="2">
-				<p class="HStyle0">
+				<p>
 					<span>jQuery selector를 입력하면 해당 context 하위 요소에서 선택된 요소를 반환 합니다.</span>
 				</p>
 			</td>
@@ -4464,7 +4452,7 @@ table.form {
 			<td>int</td>
 			<td>-</td>
 			<td colspan="2">
-				<p class="HStyle0">
+				<p>
 					<span>row를 지정하면 입력된 데이터의 지정한 row index 의 데이터로 바인드 합니다.</span>
 				</p>
 			</td>
@@ -4482,19 +4470,19 @@ table.form {
 			<td>-</td>
 			<td>N.form</td>
 			<td colspan="2">
-				<p class="HStyle0">
+				<p>
 					<span>새로운 로우 데이터를 생성 합니다.</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>로우 데이터 생성 시 폼요소안의 입력요소의 id 와 값들로 데이터를 생성합니다.</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>&nbsp;</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span style='font-size: 8.0pt;'>신규입력 페이지와 같이 입력된 데이터를 서버에 보낼 때 사용 하면 됩니다.</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span style='font-size: 8.0pt;'>N.form 초기화 후 add 메서를 호출하기만 하면 폼요소의 값들이 새로 생성된 데이터와 연동되므로 저장 버튼에 data 메서드를 호출하여 서버로 보내기만 하면 됩니다.</span>
 				</p>
 			</td>
@@ -4512,7 +4500,7 @@ table.form {
 			<td>-</td>
 			<td>N.form</td>
 			<td colspan="2">
-				<p class="HStyle0">
+				<p>
 					<span>수정되거나 입력된 데이터 전체를 검증하여 검증결과를 반환 합니다. 검증 메시지는 입력요소 옆에 툴팁으로 표시 됩니다.</span>
 				</p>
 			</td>
@@ -4523,13 +4511,13 @@ table.form {
 			<td>-</td>
 			<td>Value object or N.form</td>
 			<td colspan="2">
-				<p class="HStyle0">
+				<p>
 					<span>선택한 값을 가져오거나 입력 합니다.</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>val 인자를 입력하지 않으면 선택한 값을 반환하고 입력하면 선택한 컬럼의 값을 입력한 값으로 바꿔준다.</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>&nbsp;</span>
 				</p>
 				<p class="HStyle17">
@@ -4552,9 +4540,9 @@ table.form {
 			<td>저장할 값</td>
 		</tr>
 	</table>
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'>
+	<p style='margin-left: 40.0pt;'>
 		<span><br></span>
 	</p>
 
@@ -4566,11 +4554,11 @@ table.form {
 		가. <span>개요</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 36.7pt;'>
+	<p style='margin-left: 36.7pt;'>
 		<span>Grid(이하 N.grid)는 테이블(TABLE) 요소에 데이터를 바인드하여 그리드형태로 데이터를 표현해 주는 컴포넌트입니다. 헤더고정형, 리스트형의 두 가지 타입을 제공 합니다.</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'>
+	<p style='margin-left: 40.0pt;'>
 		<span><br></span>
 	</p>
 
@@ -4578,7 +4566,7 @@ table.form {
 		나. <span>생성자(Constructor)</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -4630,9 +4618,9 @@ table.form {
 			<td>N.grid의 opts 옵션과 같습니다.</td>
 		</tr>
 	</table>
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'>
+	<p style='margin-left: 40.0pt;'>
 		<span><br></span>
 	</p>
 
@@ -4640,7 +4628,7 @@ table.form {
 		다. <span>기본옵션(Default options)</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -4846,19 +4834,19 @@ table.form {
 			<td>null</td>
 			<td>&nbsp;</td>
 			<td>
-				<p class="HStyle0">
+				<p>
 					<span>그리드 데이터가 바인드될때 로우가 생성될때마다 발생하는 이벤트입니다. 이벤트 콜백 메서드의 인자로 생성될 당시의 row index, 로우 요소, 로우 데이터를 넣어줍니다.</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>ex)&nbsp;</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>rowHandler : function(index, rowEle, rowData) { </span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>&nbsp;&nbsp;// this 는 rowEle</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>}</span>
 				</p>
 			</td>
@@ -4869,22 +4857,22 @@ table.form {
 			<td>null</td>
 			<td>&nbsp;</td>
 			<td>
-				<p class="HStyle0">
+				<p>
 					<span>그리드의 행이 선택될때마다 발생되는 이벤트입니다. 이벤트 콜백 메서드의 인자로 생성될 당시의 row index, 로우 요소, 로우 데이터를 넣어줍니다.</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>ex)&nbsp;</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>onSelect : function(index, rowEle, rowData) { </span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>&nbsp;&nbsp;// this 는 rowEle</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>}</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>&nbsp;</span>
 				</p>
 				<p class="HStyle17">
@@ -4898,22 +4886,22 @@ table.form {
 			<td>null</td>
 			<td>&nbsp;</td>
 			<td>
-				<p class="HStyle0">
+				<p>
 					<span>그리드의 데이터가 바인드 될 때마다 발생되는 이벤트입니다. 이벤트 콜백 메서드의 인자로 context, data를 넣어줍니다.</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>ex)&nbsp;</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>onBind : function(context, data) { </span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>&nbsp;&nbsp;// this 는 context</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>}</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>&nbsp;</span>
 				</p>
 				<p class="HStyle17">
@@ -4922,9 +4910,9 @@ table.form {
 			</td>
 		</tr>
 	</table>
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'>
+	<p style='margin-left: 40.0pt;'>
 		<span><br></span>
 	</p>
 
@@ -4932,7 +4920,7 @@ table.form {
 		라. <span>선언형옵션(Declarative options)</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -4953,13 +4941,13 @@ table.form {
 			<td>검증룰을 지정 합니다. 7. Validator 참고</td>
 		</tr>
 	</table>
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 
 	<p class="HStyle4">
 		마. <span>함수(Methods)</span>
 	</p>
 
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -4981,13 +4969,13 @@ table.form {
 			<td>String</td>
 			<td>-</td>
 			<td>
-				<p class="HStyle0">
+				<p>
 					<span>undefined 이면 전체 데이터를 가져오고</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>modified 이면 추가, 수정, 삭제 된 데이터를 가져옵니다.</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>delete 이면 삭제된 데이터, update 이면 수정된 데이터, insert 이면 추가된 데이터를 가져옵니다.</span>
 				</p>
 			</td>
@@ -5005,7 +4993,7 @@ table.form {
 			<td>String</td>
 			<td>-</td>
 			<td>
-				<p class="HStyle0">
+				<p>
 					<span>jQuery selector를 입력하면 해당 context 하위 요소에서 선택된 요소를 반환 합니다.</span>
 				</p>
 			</td>
@@ -5030,10 +5018,10 @@ table.form {
 			<td>-</td>
 			<td>N.grid</td>
 			<td>
-				<p class="HStyle0">
+				<p>
 					<span>새로운 로우 데이터를 생성 합니다.</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>로우 데이터 생성 시 그리드요소안의 입력요소의 id 와 값들로 데이터를 생성합니다.</span>
 				</p>
 			</td>
@@ -5065,7 +5053,7 @@ table.form {
 			<td>int</td>
 			<td>-</td>
 			<td>
-				<p class="HStyle0">
+				<p>
 					<span>row index를 입력하면 해당 로우만 되돌려 주고 입력하지 않으면 전체다 되돌려 줍니다.</span>
 				</p>
 			</td>
@@ -5076,7 +5064,7 @@ table.form {
 			<td>-</td>
 			<td>N.grid</td>
 			<td>
-				<p class="HStyle0">
+				<p>
 					<span>수정되거나 입력된 데이터 전체를 검증하여 검증결과를 반환 합니다. 검증 메시지는 입력요소 옆에 툴팁으로 표시 됩니다.</span>
 				</p>
 			</td>
@@ -5087,7 +5075,7 @@ table.form {
 			<td>int</td>
 			<td>-</td>
 			<td>
-				<p class="HStyle0">
+				<p>
 					<span>row index를 입력하면 해당 로우데이터만 검증하고 입력하지 않으면 전체 데이터를 검증합니다.</span>
 				</p>
 			</td>
@@ -5098,13 +5086,13 @@ table.form {
 			<td>-</td>
 			<td>Value object or N.grid</td>
 			<td>
-				<p class="HStyle0">
+				<p>
 					<span>선택한 값을 가져오거나 입력 한다.</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>val 인자를 입력하지 않으면 선택한 값을 반환하고 입력하면 선택한 컬럼의 값을 입력한 값으로 바꿔준다.</span>
 				</p>
-				<p class="HStyle0">
+				<p>
 					<span>&nbsp;</span>
 				</p>
 				<p class="HStyle17">
@@ -5134,7 +5122,7 @@ table.form {
 			<td>저장할 값</td>
 		</tr>
 	</table>
-	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
+	<p style='margin-left: 40.0pt;'></p>
 	<hr style="width: 300px; text-align: left; margin-left: 0" />
 	<a id="FOOTNOTE1">
 		<p class="HStyle12">
