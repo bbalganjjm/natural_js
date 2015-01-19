@@ -294,11 +294,12 @@ section article pre > code {
 }
 
 footer {
-	margin: 0 auto;
+	margin: 10px auto;
 	max-width: 1003px;
 	min-width: 560px;
 	color: #ddfeee;
 	text-shadow: -1px -1px #008000;
+	font-size: 13px;
 }
 
 article p,
