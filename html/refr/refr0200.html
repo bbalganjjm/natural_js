@@ -140,7 +140,7 @@ article#api h4 {
 			ex) N([]).grid(<span class="b">{ resizeable : true }</span><sup>3)</sup>)</li>
 		<li>
 			<span class="b">선언형옵션</span>(Declarative Options) : 컴포넌트나 라이브러리에서 사용하는 HTML 요소(Element)들의 data-* 속성에 정의되는 JSON Text 양식의 옵션<br>
-			ex) &lt;input id=”date” type=”text” <span class="b">data-format='[[”date”, 8]]'</span><sup>4)</sup> /&gt;
+			ex) &lt;input id="date" type="text" <span class="b">data-format='[["date", 8]]'</span><sup>4)</sup> /&gt;
 			<p class="alert">
 				선언형 옵션은 JSON 표준양식을 정확히 지켜줘야 합니다. 예를 들면 key 값에도 큰따옴표(")로 무조건 감싸줘야 하는 등 JSON 표준양식을 지키지 않으면 선언형 옵션이 인식되지 않거나 오류가 발생합니다.
 			</p>
@@ -193,7 +193,7 @@ article#api h4 {
 				<td>
 					<p>Natural 의 플러그인 형태로 제공되는 라이브러리들과 N클래스의 멤버변수(함수)가 정의 되어있는 핵심 클래스입니다.</p>
 					<p>N(selector<sup>8)</sup> or function, object, HTML Element(이하 element))를 호출하면 jQuery 의 init 메서드가 호출되어 Naturl-JS 와 jQuery가 동시에 초기화(Initialize) 됩니다.</p>
-					<pre><code>var divs = N("div”);</code></pre>
+					<pre><code>var divs = N("div");</code></pre>
 				</td>
 			</tr>
 			<tr>
@@ -228,7 +228,7 @@ article#api h4 {
 				<td>str</td>
 				<td>String</td>
 				<td> </td>
-				<td>"en_US”, "ko_KR” 등의 로케일 문자열</td>
+				<td>"en_US", "ko_KR" 등의 로케일 문자열</td>
 			</tr>
 			<tr>
 				<td>N.error</td>
@@ -397,7 +397,7 @@ article#api h4 {
 	}
 }
 
-var msg = N.message.get(message, "key”, [" 입니다”]);</code></pre>
+var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 					<p>결과 : msg = "메시지 입니다"
 				</td>
 			</tr>
@@ -434,8 +434,8 @@ var msg = N.message.get(message, "key”, [" 입니다”]);</code></pre>
 					<p>Natural-JS 는 기본적으로 컴포넌트나 라이브러리들에 의해 생성된 인스턴스를 대상 HTML element(이하 요소)가 있다면 대상요소에 인스턴스를 저장 합니다.</p>
 					<p>N().instance 메서드는 이 인스턴스를 요소에 저장하고 가져오는 역할을 수행 합니다.</p>
 					<p>arguments 중에 name만 입력하면 인스턴스를 가져오고 name, instance를 같이 입력하면 해당이름으로 해당요소에 instance를 저장 합니다. instance 인자로 callback function 이 입력되면 여러 인스턴스를 한번에 가져올 수 있습니다. </p>
-					<pre><code>var single = ("div#sample”).instance("grid”);</code></pre>
-					<pre><code>var multy = ("div.sample”).instance("form”, function(i, inst) {
+					<pre><code>var single = ("div#sample").instance("grid");</code></pre>
+					<pre><code>var multy = ("div.sample").instance("form", function(i, inst) {
    //inst와 this 는 각각의 instance
    //i 는 index
 });</code></pre>
@@ -482,7 +482,7 @@ var msg = N.message.get(message, "key”, [" 입니다”]);</code></pre>
 
 	<p>ex)</p>
 
-	<p>&lt;div id="view”&gt;</p>
+	<p>&lt;div id="view"&gt;</p>
 
 	<p>  View 영역</p>
 
@@ -503,7 +503,7 @@ var msg = N.message.get(message, "key”, [" 입니다”]);</code></pre>
 	<p>&lt;/script&gt;</p>
 
 	<p>위와 같이 N.cont 를 선언하면 View 영역의 Load 가 완료된 후 N.cont의 인자로 들어온 Controller 클래스에 init 메서드가 정의 되어 있다면 init 메서드를 프레임워크에서 실행 시켜 줍니다. init 의 인자(Arguments)로는 View영역의 HTML 요소들이 담긴 JWS 객체와 Communicator.request(Communicator 참조) 객체를 넣어 줍니다. 또한 Controller Class 의 초기화(Initialize)가 완료되면 View영역의 최상위 Element 에 해당 Controller
-			인스턴스(instance)를 넣어줘 N("페이지 최상위 Element”).instance("cont”) 로 View 영역에서 참조 할 수 있습니다.
+			인스턴스(instance)를 넣어줘 N("페이지 최상위 Element").instance("cont") 로 View 영역에서 참조 할 수 있습니다.
 	</p>
 
 	<p><br></p>
@@ -677,13 +677,13 @@ var msg = N.message.get(message, "key”, [" 입니다”]);</code></pre>
 					<span>ex)</span>
 				</p>
 				<p class="HStyle17" style='margin-left: 32.4pt; text-indent: -32.4pt;'>
-					<span>PAGE: N.comm(N("#contents”), "page.html”)</span>
+					<span>PAGE: N.comm(N("#contents"), "page.html")</span>
 				</p>
 				<p class="HStyle17" style='margin-left: 37.4pt;'>
 					<span>.submit()</span>
 				</p>
 				<p class="HStyle17">
-					<span>DATA: N.comm("data.json”)</span>
+					<span>DATA: N.comm("data.json")</span>
 				</p>
 				<p class="HStyle17" style='margin-left: 37.4pt;'>
 					<span>.submit(function(data) {})</span>
@@ -728,7 +728,7 @@ var msg = N.message.get(message, "key”, [" 입니다”]);</code></pre>
 
 	<h3>다. <span>기본옵션(Default options)</span></h3>
 
-	<p>obj(arguments[0])가 JSON 오브젝트 타입의 옵션이면 Communicator.request(이하 request) 가 생성되어서 request 의 옵션으로 지정 됩니다. request 의 기본옵션 부분을과 동일하므로 "마. Communicator.request”의 기본옵션 부분을 참고하기 바랍니다.</p>
+	<p>obj(arguments[0])가 JSON 오브젝트 타입의 옵션이면 Communicator.request(이하 request) 가 생성되어서 request 의 옵션으로 지정 됩니다. request 의 기본옵션 부분을과 동일하므로 "마. Communicator.request"의 기본옵션 부분을 참고하기 바랍니다.</p>
 
 	<p><br></p>
 
@@ -845,7 +845,7 @@ var msg = N.message.get(message, "key”, [" 입니다”]);</code></pre>
 		<tr>
 			<td>dataType</td>
 			<td>String</td>
-			<td>"json”</td>
+			<td>"json"</td>
 			<td> </td>
 			<td>응답받을 데이터의 형태를 지정합니다(jQuery.ajax 의 옵션)</td>
 		</tr>
@@ -895,16 +895,16 @@ var msg = N.message.get(message, "key”, [" 입니다”]);</code></pre>
 					<span>효과를 적용하지 않으려면 false를 입력하고 효과를 입력하려면 다음과 같이 입력합니다.</span>
 				</p>
 				<p class="HStyle17">
-					<span>["효과명”</span>
+					<span>["효과명"</span>
 				</p>
 				<p class="HStyle17">
-					<span>  , "시간(ms)”</span>
+					<span>  , "시간(ms)"</span>
 				</p>
 				<p class="HStyle17">
-					<span>  , "효과가 끝날 때 마다 실행될 콜백함수”]</span>
+					<span>  , "효과가 끝날 때 마다 실행될 콜백함수"]</span>
 				</p>
 				<p class="HStyle17">
-					<span>ex) ["slideDown”, 300, null]</span>
+					<span>ex) ["slideDown", 300, null]</span>
 				</p>
 			</td>
 		</tr>
@@ -939,9 +939,9 @@ var msg = N.message.get(message, "key”, [" 입니다”]);</code></pre>
 				<p>호출한 페이지에 값을 전달할 때 사용합니다.</p>
 				<p>ex)</p>
 				<p>* 값전달 : N(selector).comm(url).request</p>
-				<p>.attr("param”, { paramA : "A” }).submit()</p>
+				<p>.attr("param", { paramA : "A" }).submit()</p>
 				<p>* 전달된 값 참고 : (불려진 페이지의 Controller)</p>
-				<p>.request.attr("param”)</p>
+				<p>.request.attr("param")</p>
 			</td>
 		</tr>
 		<tr>
@@ -1084,7 +1084,7 @@ var msg = N.message.get(message, "key”, [" 입니다”]);</code></pre>
 
 	<p><br></p>
 
-	<p><img src="images/icon/alert.png" alt="" /> 룰 대신 입력요소를 지정하면 해당 입력요소들마다 "format", "unformat" 이벤트를 바인드(bind) 해 줍니다. 해당 입력요소를 가져다가 jQuery 의 trigger 메서드로 실행하면 해당입력요소에 입력된 값을 실시간으로 format, unformat 할 수 있습니다.<br>ex) N(”input[name='formatEx']”).trigger(”format or unformat”);</p>
+	<p><img src="images/icon/alert.png" alt="" /> 룰 대신 입력요소를 지정하면 해당 입력요소들마다 "format", "unformat" 이벤트를 바인드(bind) 해 줍니다. 해당 입력요소를 가져다가 jQuery 의 trigger 메서드로 실행하면 해당입력요소에 입력된 값을 실시간으로 format, unformat 할 수 있습니다.<br>ex) N("input[name='formatEx']").trigger("format or unformat");</p>
 
 	<p><br></p>
 
@@ -1144,7 +1144,7 @@ var msg = N.message.get(message, "key”, [" 입니다”]);</code></pre>
 					<span>입력요소룰 ex)</span>
 				</p>
 				<p class="HStyle17">
-					<span style='font-size: 7.0pt;'>&lt;input id="limit” type="text” data-format='[[&quot;trimtoempty&quot;], </span>
+					<span style='font-size: 7.0pt;'>&lt;input id="limit" type="text" data-format='[[&quot;trimtoempty&quot;], </span>
 				</p>
 				<p class="HStyle17">
 					<span style='font-size: 7.0pt;'>[&quot;limit&quot;, &quot;13&quot;, &quot;...&quot; ]]' /&gt;</span>
@@ -1152,7 +1152,7 @@ var msg = N.message.get(message, "key”, [" 입니다”]);</code></pre>
 				<p class="HStyle17">
 					<span> </span>
 				</p>
-				<p>[ ["룰명”, "룰arguments[0]”, "룰 arguments[1]”], ... ]</p>
+				<p>[ ["룰명", "룰arguments[0]", "룰 arguments[1]"], ... ]</p>
 			</td>
 		</tr>
 		<tr>
@@ -1244,35 +1244,35 @@ var msg = N.message.get(message, "key”, [" 입니다”]);</code></pre>
 			<td>설명</td>
 		</tr>
 		<tr>
-			<td>["ssn”]</td>
+			<td>["ssn"]</td>
 			<td>주민등록번호 형식으로 변경</td>
 		</tr>
 		<tr>
-			<td>["cno”]</td>
+			<td>["cno"]</td>
 			<td>사업자등록번호 형식으로 변경</td>
 		</tr>
 		<tr>
-			<td>["upper”]</td>
+			<td>["upper"]</td>
 			<td>대문자로 변경</td>
 		</tr>
 		<tr>
-			<td>["lower”]</td>
+			<td>["lower"]</td>
 			<td>소문자로 변경</td>
 		</tr>
 		<tr>
-			<td>["capitalize”]</td>
+			<td>["capitalize"]</td>
 			<td>첫번째 영문자를 대문자로 변경</td>
 		</tr>
 		<tr>
-			<td>["zipcode”]</td>
+			<td>["zipcode"]</td>
 			<td>우편번호 형식으로 변경</td>
 		</tr>
 		<tr>
-			<td>["phoneNum”]</td>
+			<td>["phoneNum"]</td>
 			<td>전화번호 형식으로 변경</td>
 		</tr>
 		<tr>
-			<td>["realnum”]</td>
+			<td>["realnum"]</td>
 			<td>
 				<p class="HStyle18" style='margin-top: 0.0pt; margin-bottom: 0.0pt;'>
 					<span>의미없는 0 제거</span>
@@ -1289,21 +1289,21 @@ var msg = N.message.get(message, "key”, [" 입니다”]);</code></pre>
 			</td>
 		</tr>
 		<tr>
-			<td>["trimToEmpty”]</td>
+			<td>["trimToEmpty"]</td>
 			<td>trim 후 값이 없으면 공백으로 표시</td>
 		</tr>
 		<tr>
-			<td>["trimToZero”]</td>
+			<td>["trimToZero"]</td>
 			<td>trim 후 값이 없으면 0 으로 표시</td>
 		</tr>
 		<tr>
-			<td>["trimToVal”, "valStr”]</td>
+			<td>["trimToVal", "valStr"]</td>
 			<td>trim 후 값이 없으면 valStr 값으로 표시</td>
 		</tr>
 		<tr>
 			<td>
 				<p class="HStyle18" style='margin-top: 0.0pt; margin-bottom: 0.0pt;'>
-					<span>["date”,  4|6|8|10|12|14|"month”|"date”]</span>
+					<span>["date",  4|6|8|10|12|14|"month"|"date"]</span>
 				</p>
 			</td>
 			<td>
@@ -1343,27 +1343,27 @@ var msg = N.message.get(message, "key”, [" 입니다”]);</code></pre>
 			</td>
 		</tr>
 		<tr>
-			<td>["limit, cutLength, ”replaceStr”]</td>
+			<td>["limit, cutLength, "replaceStr"]</td>
 			<td>문자열을 cutLength 만큼 자르고 replaceStr로 치환</td>
 		</tr>
 		<tr>
 			<td>
 				<p class="HStyle18" style='margin-top: 0.0pt; margin-bottom: 0.0pt;'>
-					<span>["replace”, ”targetStr”, ”replaceStr”]</span>
+					<span>["replace", "targetStr", "replaceStr"]</span>
 				</p>
 			</td>
 			<td>targetStr을 replaceStr로 치환</td>
 		</tr>
 		<tr>
-			<td>["lpad”, length "fillStr”]</td>
+			<td>["lpad", length "fillStr"]</td>
 			<td>length만큼 왼쪽부터 replaceStr문자로 채움</td>
 		</tr>
 		<tr>
-			<td>["rpad”, length "fillStr”]</td>
+			<td>["rpad", length "fillStr"]</td>
 			<td>length만큼 오른쪽부터 replaceStr문자로 채움</td>
 		</tr>
 		<tr>
-			<td>["generic”, "사용자서식”]</td>
+			<td>["generic", "사용자서식"]</td>
 			<td>
 				<p class="HStyle18" style='margin-top: 0.0pt; margin-bottom: 0.0pt;'>
 					<span>엑셀 사용자지정 서식과 같이 사용자 서식을 이용하여 문자열을 양식화</span>
@@ -1383,7 +1383,7 @@ var msg = N.message.get(message, "key”, [" 입니다”]);</code></pre>
 			</td>
 		</tr>
 		<tr>
-			<td>["numeric” "사용자서식”, "option”]</td>
+			<td>["numeric" "사용자서식", "option"]</td>
 			<td>
 				<p class="HStyle18" style='margin-top: 0.0pt; margin-bottom: 0.0pt;'>
 					<span>엑셀 사용자지정 서식과 같이 사용자 서식을 이용하여 숫자를 양식화</span>
@@ -1477,12 +1477,12 @@ var msg = N.message.get(message, "key”, [" 입니다”]);</code></pre>
 					<span>ex)</span>
 				</p>
 				<p class="HStyle17">
-					<span style='font-size: 7.0pt;'>&lt;input id="numeric” type="text” data-validate='[[&quot;required&quot;], [&quot;integer+commas&quot;]]'/&gt;</span>
+					<span style='font-size: 7.0pt;'>&lt;input id="numeric" type="text" data-validate='[[&quot;required&quot;], [&quot;integer+commas&quot;]]'/&gt;</span>
 				</p>
 				<p class="HStyle17">
 					<span> </span>
 				</p>
-				<p>[ ["룰명”, "룰arguments[0]”, "룰 arguments[1]”], ... ]</p>
+				<p>[ ["룰명", "룰arguments[0]", "룰 arguments[1]"], ... ]</p>
 			</td>
 		</tr>
 		<tr>
@@ -1553,35 +1553,35 @@ var msg = N.message.get(message, "key”, [" 입니다”]);</code></pre>
 			<td>설명</td>
 		</tr>
 		<tr>
-			<td>["required”]</td>
+			<td>["required"]</td>
 			<td>필수입력</td>
 		</tr>
 		<tr>
-			<td>["alphabet”]</td>
+			<td>["alphabet"]</td>
 			<td>영문자만 입력 가능</td>
 		</tr>
 		<tr>
-			<td>["integer”]</td>
+			<td>["integer"]</td>
 			<td>숫자(정수)만 입력가능</td>
 		</tr>
 		<tr>
-			<td>["Korean”]</td>
+			<td>["Korean"]</td>
 			<td>한글만 입력 가능</td>
 		</tr>
 		<tr>
-			<td>["alphabet+integer”]</td>
+			<td>["alphabet+integer"]</td>
 			<td>영문자와 숫자(정수)만 입력 가능(+로 구분하고 순서는 관계없음)</td>
 		</tr>
 		<tr>
-			<td>["integer+korean”]</td>
+			<td>["integer+korean"]</td>
 			<td>숫자(정수)와 한글만 입력 가능(+로 구분하고 순서는 관계없음)</td>
 		</tr>
 		<tr>
-			<td>["alphabet+korean”]</td>
+			<td>["alphabet+korean"]</td>
 			<td>영문자와 한글만 입력 가능(+로 구분하고 순서는 관계없음)</td>
 		</tr>
 		<tr>
-			<td>["alphabet+integer+korean”]</td>
+			<td>["alphabet+integer+korean"]</td>
 			<td>
 				<p class="HStyle18" style='margin-top: 0.0pt; margin-bottom: 0.0pt;'>
 					<span>영문자, 숫자(정수), 한글만 입력 가능(+로 구분하고 순서는 관계없음)</span>
@@ -1589,97 +1589,97 @@ var msg = N.message.get(message, "key”, [" 입니다”]);</code></pre>
 			</td>
 		</tr>
 		<tr>
-			<td>["integer+dash”]</td>
+			<td>["integer+dash"]</td>
 			<td>숫자(정수), 대시(-)만 입력가능(+로 구분하고 순서는 관계없음)</td>
 		</tr>
 		<tr>
-			<td>["integer+commas”]</td>
+			<td>["integer+commas"]</td>
 			<td>숫자(정수), 콤마(,)만 입력가능(+로 구분하고 순서는 관계없음)</td>
 		</tr>
 		<tr>
-			<td>["number”]</td>
+			<td>["number"]</td>
 			<td>숫자(정수), 대시(,), 점(.)만 입력가능</td>
 		</tr>
 		<tr>
-			<td>["decimal(length)”]</td>
+			<td>["decimal(length)"]</td>
 			<td>(유한)소수 length 번째 자리까지 입력 가능</td>
 		</tr>
 		<tr>
-			<td>["email”]</td>
+			<td>["email"]</td>
 			<td>e-mail 형식에 맞는지 검사</td>
 		</tr>
 		<tr>
-			<td>["url”]</td>
+			<td>["url"]</td>
 			<td>URL 형식에 맞는지 검사</td>
 		</tr>
 		<tr>
-			<td>["zipcode”]</td>
+			<td>["zipcode"]</td>
 			<td>우편번호 형식에 맞는지 검사</td>
 		</tr>
 		<tr>
-			<td>["frn”]</td>
+			<td>["frn"]</td>
 			<td>외국인등록번호 형식에 맞지 검사</td>
 		</tr>
 		<tr>
-			<td>["ssn”]</td>
+			<td>["ssn"]</td>
 			<td>주민등록번호 형식에 맞지 검사</td>
 		</tr>
 		<tr>
-			<td>["cno”]</td>
+			<td>["cno"]</td>
 			<td>사업자등록번호 형식에 맞는지 검사</td>
 		</tr>
 		<tr>
-			<td>["cpno”]</td>
+			<td>["cpno"]</td>
 			<td>법인번호 형식에 맞는지 검사</td>
 		</tr>
 		<tr>
-			<td>["date”]</td>
+			<td>["date"]</td>
 			<td>날짜 형식에 맞는지 검사</td>
 		</tr>
 		<tr>
-			<td>["time”]</td>
+			<td>["time"]</td>
 			<td>시간 형식에 맞는지 검사</td>
 		</tr>
 		<tr>
-			<td>["accept”, "word”]</td>
+			<td>["accept", "word"]</td>
 			<td>word 값만 입력 가능</td>
 		</tr>
 		<tr>
-			<td>["match”, "word”]</td>
+			<td>["match", "word"]</td>
 			<td>word 값이 포함된 값만 입력 가능</td>
 		</tr>
 		<tr>
-			<td>["acceptFileExt”, "ext”]</td>
+			<td>["acceptFileExt", "ext"]</td>
 			<td>ext 값이 포함된 확장자만 입력 가능</td>
 		</tr>
 		<tr>
-			<td>["notAccept”, "word””]</td>
+			<td>["notAccept", "word""]</td>
 			<td>word 값만 입력 불가능</td>
 		</tr>
 		<tr>
-			<td>["notMatch”, "word”]</td>
+			<td>["notMatch", "word"]</td>
 			<td>word 가 포함된 값은 입력 불가능</td>
 		</tr>
 		<tr>
-			<td>["notAcceptFileExt”, "ext”]</td>
+			<td>["notAcceptFileExt", "ext"]</td>
 			<td>ext 가 포함된 확장자는 입력 불가능</td>
 		</tr>
 		<tr>
-			<td>["equalTo”, "input”]</td>
+			<td>["equalTo", "input"]</td>
 			<td>input 의 값과 같아야 함</td>
 		</tr>
 		<tr>
-			<td>["maxlength”, "length”]</td>
+			<td>["maxlength", "length"]</td>
 			<td>length 글자 이하만 입력 가능</td>
 		</tr>
 		<tr>
-			<td>["minlength”, "length”]</td>
+			<td>["minlength", "length"]</td>
 			<td>length 글자 이상만 입력 가능</td>
 		</tr>
 		<tr>
 			<td>
 				<p class="HStyle18" style='margin-top: 0.0pt; margin-bottom: 0.0pt;'>
-					<span>["rangelength”, "startLength”, "endLength”]</span>
+					<span>["rangelength", "startLength", "endLength"]</span>
 				</p>
 			</td>
 			<td>
@@ -1689,17 +1689,17 @@ var msg = N.message.get(message, "key”, [" 입니다”]);</code></pre>
 			</td>
 		</tr>
 		<tr>
-			<td>["maxbyte”, "byteLength”]</td>
+			<td>["maxbyte", "byteLength"]</td>
 			<td>length 바이트 이하만 입력 가능</td>
 		</tr>
 		<tr>
-			<td>["minbyte”, "byteLength”]</td>
+			<td>["minbyte", "byteLength"]</td>
 			<td>length 바이트 이상만 입력 가능</td>
 		</tr>
 		<tr>
 			<td>
 				<p class="HStyle18" style='margin-top: 0.0pt; margin-bottom: 0.0pt;'>
-					<span>["rangebyte”, "startByteLength”, "endByteLength”]</span>
+					<span>["rangebyte", "startByteLength", "endByteLength"]</span>
 				</p>
 			</td>
 			<td>
@@ -1709,15 +1709,15 @@ var msg = N.message.get(message, "key”, [" 입니다”]);</code></pre>
 			</td>
 		</tr>
 		<tr>
-			<td>["maxvalue”, "value”]</td>
+			<td>["maxvalue", "value"]</td>
 			<td>value 이하의 값만 입력 가능</td>
 		</tr>
 		<tr>
-			<td>["minvalue”, "value”]</td>
+			<td>["minvalue", "value"]</td>
 			<td>value 이상의 값만 입력 가능</td>
 		</tr>
 		<tr>
-			<td>["rangevalue”, "stratValue,endValue”]</td>
+			<td>["rangevalue", "stratValue,endValue"]</td>
 			<td>
 				<p class="HStyle18" style='margin-top: 0.0pt; margin-bottom: 0.0pt;'>
 					<span>stratValue 값 에서   endValue 값 까지만 입력 가능</span>
@@ -1725,7 +1725,7 @@ var msg = N.message.get(message, "key”, [" 입니다”]);</code></pre>
 			</td>
 		</tr>
 		<tr>
-			<td>["regexp”, "regexp”, "message”]</td>
+			<td>["regexp", "regexp", "message"]</td>
 			<td>입력한 regexp 의 조건으로 검사 후 message 값 표시</td>
 		</tr>
 	</table>
@@ -1812,10 +1812,10 @@ var msg = N.message.get(message, "key”, [" 입니다”]);</code></pre>
 				<p>필터링 조건을 입력 합니다.</p>
 				<p>조건은 다음과 같이 자바스크립트 비교 문법으로 지정 합니다.</p>
 				<p>ex)</p>
-				<p>* queryString = 'data.키명 == "비교값”';</p>
+				<p>* queryString = 'data.키명 == "비교값"';</p>
 				<p>N.data.filter([</p>
-				<p>  { name : "홍길동” }, </p>
-				<p>  { name : "Mike” }</p>
+				<p>  { name : "홍길동" }, </p>
+				<p>  { name : "Mike" }</p>
 				<p>);</p>
 				<p>쉽게 생각하면 queryString 바깥에 if() 문이 감싸져있고 data 라고 이름지어진 row data를 가지고 비교한다고 생각 하면 됩니다.</p>
 			</td>
@@ -2998,7 +2998,7 @@ var msg = N.message.get(message, "key”, [" 입니다”]);</code></pre>
 			<td>○</td>
 			<td>
 				<p class="HStyle17">
-					<span>같은 페이지 내에 있는 탭과 탭 컨텐츠를 감싸고 있는 "DIV” 요소를 지정 합니다.</span>
+					<span>같은 페이지 내에 있는 탭과 탭 컨텐츠를 감싸고 있는 "DIV" 요소를 지정 합니다.</span>
 				</p>
 				<p class="HStyle17">
 					<span>탭플릿 요소는 다음과 같이 작성 합니다.</span>
@@ -3043,19 +3043,19 @@ var msg = N.message.get(message, "key”, [" 입니다”]);</code></pre>
 					<span>[ </span>
 				</p>
 				<p class="HStyle17">
-					<span>  { width: &quot;auto&quot;, url: "tab1.html”, preload: false, </span>
+					<span>  { width: &quot;auto&quot;, url: "tab1.html", preload: false, </span>
 				</p>
 				<p class="HStyle17">
 					<span>    active: false, onOpen: undefined }, //Tab1,</span>
 				</p>
 				<p class="HStyle17">
-					<span>  { width: &quot;auto&quot;, url: "tab2.html”, preload: false, </span>
+					<span>  { width: &quot;auto&quot;, url: "tab2.html", preload: false, </span>
 				</p>
 				<p class="HStyle17">
 					<span>    active: false, onOpen: undefined }, //Tab2</span>
 				</p>
 				<p class="HStyle17">
-					<span>  { width: &quot;auto&quot;, url: "tab3.html”, preload: false, </span>
+					<span>  { width: &quot;auto&quot;, url: "tab3.html", preload: false, </span>
 				</p>
 				<p class="HStyle17">
 					<span>    active: false, onOpen: function() { } }  //Tab3</span>
@@ -3101,16 +3101,16 @@ var msg = N.message.get(message, "key”, [" 입니다”]);</code></pre>
 					<span>효과를 적용하지 않으려면 false를 입력하고 효과를 입력하려면 다음과 같이 입력합니다.</span>
 				</p>
 				<p class="HStyle17">
-					<span>["효과명”</span>
+					<span>["효과명"</span>
 				</p>
 				<p class="HStyle17">
-					<span>  , "시간(ms)”</span>
+					<span>  , "시간(ms)"</span>
 				</p>
 				<p class="HStyle17">
-					<span>  , "효과가 끝날 때 마다 실행될 콜백함수”]</span>
+					<span>  , "효과가 끝날 때 마다 실행될 콜백함수"]</span>
 				</p>
 				<p class="HStyle17">
-					<span>ex) ["slideDown”, 300, null]</span>
+					<span>ex) ["slideDown", 300, null]</span>
 				</p>
 			</td>
 		</tr>
@@ -3164,7 +3164,7 @@ var msg = N.message.get(message, "key”, [" 입니다”]);</code></pre>
 		</tr>
 		<tr>
 			<td>width</td>
-			<td>int or "auto”</td>
+			<td>int or "auto"</td>
 			<td>auto</td>
 			<td>탭의 넓이를 지정 합니다.,</td>
 		</tr>
@@ -3966,7 +3966,7 @@ var msg = N.message.get(message, "key”, [" 입니다”]);</code></pre>
 					<span> </span>
 				</p>
 				<p class="HStyle17">
-					<span style='font-size: 8.0pt;'><img src="images/icon/alert.png" alt="" /> 로우 선택시 해당로우의 TBODY요소에 "grid_selected__” 스타일클래스가 생성되고 선택이 해제되면 생성된 스타일클래스가 제거 됩니다.</span>
+					<span style='font-size: 8.0pt;'><img src="images/icon/alert.png" alt="" /> 로우 선택시 해당로우의 TBODY요소에 "grid_selected__" 스타일클래스가 생성되고 선택이 해제되면 생성된 스타일클래스가 제거 됩니다.</span>
 				</p>
 			</td>
 		</tr>
@@ -3983,7 +3983,7 @@ var msg = N.message.get(message, "key”, [" 입니다”]);</code></pre>
 					<span> </span>
 				</p>
 				<p class="HStyle17">
-					<span style='font-size: 8.0pt;'><img src="images/icon/alert.png" alt="" /> 로우 선택시 해당로우의 TBODY요소에 "grid_selected__” 스타일클래스가 생성되고 선택이 해제되면 생성된 스타일클래스가 제거 됩니다.</span>
+					<span style='font-size: 8.0pt;'><img src="images/icon/alert.png" alt="" /> 로우 선택시 해당로우의 TBODY요소에 "grid_selected__" 스타일클래스가 생성되고 선택이 해제되면 생성된 스타일클래스가 제거 됩니다.</span>
 				</p>
 			</td>
 		</tr>
