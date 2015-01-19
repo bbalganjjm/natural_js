@@ -297,6 +297,8 @@ footer {
 	margin: 0 auto;
 	max-width: 1003px;
 	min-width: 560px;
+	color: #ddfeee;
+	text-shadow: -1px -1px #008000;
 }
 
 article p,
