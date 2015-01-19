@@ -27,7 +27,7 @@ article#api pre {
 	margin: 10px 0;
 }
 
-article#api table.form tbody th, article#api table.form tbody td {
+article#api table.form th, article#api table.form td {
 	word-break: break-word;
 }
 
@@ -133,9 +133,8 @@ article#api h4 {
 	<p>N은 Natural-JS를 처음 시작하는 함수 입니다. jQuery 의 $와 같은 역할을 수행하며 Natural-JS 의 N() 처럼 N 함수로 초기화하고 이후 실행되는 메서드들은 jQuery 의 $ 함수 로 실행해도 됩니다. 반대로 jQuery 의 기능들은 모두 N() 에 상속되어 있으므로 jQuery 메서드를 호출할 때 $() 대신 N()을 사용해도 됩니다. Natural-CORE 의 함수들은 기본적으로 Natural-JS 만을 위해서 제작 되었으나 개발할 때 공통적으로 사용되어져야할 함수들은 다음과 같이 사용할 수 있습니다.</p>
 	<p><br></p>
 	<h3>나. 함수(Methods)</h3>
-	<p></p>
+
 	<table class="form">
-		<thead>
 			<tr>
 				<th>Name</th>
 				<th>Arguments</th>
@@ -143,8 +142,6 @@ article#api h4 {
 				<th>Return</th>
 				<th style="width: auto;">Description</th>
 			</tr>
-		</thead>
-		<tbody>
 			<tr>
 				<td>N</td>
 				<td align="center">-</td>
@@ -346,64 +343,64 @@ article#api h4 {
 
 var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 					<p>결과 : msg = "메시지 입니다"
-				</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td>key</td>
-				<td>String</td>
-				<td align="center">-</td>
-				<td>메시지 키</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td>vars</td>
-				<td>Array</td>
-				<td align="center">-</td>
-				<td>메시지 변수를 치환할 값</td>
-			</tr>
-			<tr>
-				<td>N().toArray</td>
-				<td align="center">-</td>
-				<td align="center">-</td>
-				<td>Array</td>
-				<td>JWS를 순수한 Array 객체로 반환 합니다.</td>
-			</tr>
-			<tr>
-				<td>N().instance</td>
-				<td align="center">-</td>
-				<td align="center">-</td>
-				<td>Object</td>
-				<td>
-					<p>Natural-JS 는 기본적으로 컴포넌트나 라이브러리들에 의해 생성된 인스턴스를 대상 HTML element(이하 요소)가 있다면 대상요소에 인스턴스를 저장 합니다.</p>
-					<p>N().instance 메서드는 이 인스턴스를 요소에 저장하고 가져오는 역할을 수행 합니다.</p>
-					<p>arguments 중에 name만 입력하면 인스턴스를 가져오고 name, instance를 같이 입력하면 해당이름으로 해당요소에 instance를 저장 합니다. instance 인자로 callback function 이 입력되면 여러 인스턴스를 한번에 가져올 수 있습니다. </p>
-					<pre><code>var single = ("div#sample").instance("grid");</code></pre>
-					<pre><code>var multy = ("div.sample").instance("form", function(i, inst) {
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>key</td>
+			<td>String</td>
+			<td align="center">-</td>
+			<td>메시지 키</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>vars</td>
+			<td>Array</td>
+			<td align="center">-</td>
+			<td>메시지 변수를 치환할 값</td>
+		</tr>
+		<tr>
+			<td>N().toArray</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>Array</td>
+			<td>JWS를 순수한 Array 객체로 반환 합니다.</td>
+		</tr>
+		<tr>
+			<td>N().instance</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>Object</td>
+			<td>
+				<p>Natural-JS 는 기본적으로 컴포넌트나 라이브러리들에 의해 생성된 인스턴스를 대상 HTML element(이하 요소)가 있다면 대상요소에 인스턴스를 저장 합니다.</p>
+				<p>N().instance 메서드는 이 인스턴스를 요소에 저장하고 가져오는 역할을 수행 합니다.</p>
+				<p>arguments 중에 name만 입력하면 인스턴스를 가져오고 name, instance를 같이 입력하면 해당이름으로 해당요소에 instance를 저장 합니다. instance 인자로 callback function 이 입력되면 여러 인스턴스를 한번에 가져올 수 있습니다. </p>
+				<pre><code>var single = ("div#sample").instance("grid");</code></pre>
+				<pre><code>var multy = ("div.sample").instance("form", function(i, inst) {
    //inst와 this 는 각각의 instance
    //i 는 index
 });</code></pre>
-				</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td>name</td>
-				<td>String</td>
-				<td align="center">-</td>
-				<td>인스턴스 명</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td>instance</td>
-				<td>Object or callback function(이하 callback)</td>
-				<td align="center">-</td>
-				<td>
-					<p>인스턴스 or 인스턴스를 가져올 callback</p>
-					<p class="alert">callback의 인자는 index(arguments[0])와 각각의 instance(arguments[1])가 들어옵니다. 이 callback 안의 this 는 각각의 instance를 가리킵니다.</p>
-				</td>
-			</tr>
-		</tbody>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>name</td>
+			<td>String</td>
+			<td align="center">-</td>
+			<td>인스턴스 명</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>instance</td>
+			<td>Object or callback function(이하 callback)</td>
+			<td align="center">-</td>
+			<td>
+				<p>인스턴스 or 인스턴스를 가져올 callback</p>
+				<p class="alert">callback의 인자는 index(arguments[0])와 각각의 instance(arguments[1])가 들어옵니다. 이 callback 안의 this 는 각각의 instance를 가리킵니다.</p>
+			</td>
+		</tr>
 	</table>
+
 	<fieldset>
 		<legend>주석</legend>
 		<ul class="footnotes">
@@ -411,9 +408,6 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 			<li>8) selector : jQuery에서 CS selector 형식으로 지정하는 String 형태의 문자열이나 JSON Object, Aray, HTML Element, Function 등의 Object</li>
 		</ul>
 	</fieldset>
-
-
-
 
 
 
@@ -449,6 +443,7 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 		init 의 인자(Arguments)로는 View영역의 HTML 요소들이 담긴 JWS 객체와 Communicator.request(Communicator 참조) 객체를 넣어 줍니다.
 		또한 Controller Class 의 초기화(Initialize)가 완료되면 View영역의 최상위 Element 에 해당 Controller 인스턴스(instance)를 넣어줘 N("페이지 최상위 Element").instance("cont") 로 View 영역에서 참조 할 수 있습니다.
 	</p>
+
 	<h3>나. 생성자(Constructor)</h3>
 	<table class="form">
 		<tr>
@@ -498,25 +493,18 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 			<td>callback</td>
 			<td>JSON Object Class</td>
 			<td align="center">-</td>
-			<td>
-				<p>N.cont 의 callback 인자(argument) 와 같습니다.</p>
-			</td>
+			<td>N.cont 의 callback 인자(argument) 와 같습니다.</td>
 		</tr>
 	</table>
-	<p></p>
-
-	<p><br></p>
 
 	<h3>다. Controller 기본 함수(callback default method)</h3>
-
-	<p></p>
 	<table class="form">
 		<tr>
-			<td>Name</td>
-			<td>Arguments</td>
-			<td>Type</td>
-			<td>Return</td>
-			<td>Description</td>
+			<th>Name</th>
+			<th>Arguments</th>
+			<th>Type</th>
+			<th>Return</th>
+			<th style="width: auto;">Description</th>
 		</tr>
 		<tr>
 			<td>init</td>
@@ -542,7 +530,7 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 			<td colspan="2">Communicator.request 인스턴스를 반환하여 현재 페이지의 요청 정보를 볼 수 있습니다.</td>
 		</tr>
 	</table>
-	<p></p>
+
 
 	<p><br></p>
 
@@ -558,7 +546,7 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 
 	<h3>나. 생성자(Constructor)</h3>
 
-	<p></p>
+
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -599,10 +587,7 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 			<td>호출할 URL을 지정 합니다.</td>
 		</tr>
 		<tr>
-			<td>
-				<p>N(obj)</p>
-				<p>.comm</p>
-			</td>
+			<td>N(obj).comm</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
 			<td>N.comm</td>
@@ -619,7 +604,7 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 			<td>N.comm 의 url 인자 와 같습니다.</td>
 		</tr>
 	</table>
-	<p></p>
+
 
 	<p><br></p>
 
@@ -631,7 +616,7 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 
 	<h3>라. 함수(Methods)</h3>
 
-	<p></p>
+
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -659,7 +644,7 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 			</td>
 		</tr>
 	</table>
-	<p></p>
+
 
 	<p><br></p>
 
@@ -679,7 +664,7 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 
 	<h4>3) 기본옵션(Default options)</h4>
 
-	<p></p>
+
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -780,7 +765,7 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 			</td>
 		</tr>
 	</table>
-	<p></p>
+
 
 	<p>※ 위 기본옵션 외에 N.comm은 jQuery $.ajax 모듈을 사용하여 $.ajax에서 제공하는 옵션중 이벤트콜백 관련 부분(beforeSend, success, error, complete)을 제외한 모든 옵션을 그대로 제공합니다.</p>
 
@@ -790,7 +775,7 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 
 	<h4>4) 함수(Methods)</h4>
 
-	<p></p>
+
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -886,7 +871,7 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 
 	<h3>나. 함수(Methods)</h3>
 
-	<p></p>
+
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -919,7 +904,7 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 			</td>
 		</tr>
 	</table>
-	<p></p>
+
 
 	<p><br></p>
 
@@ -961,7 +946,7 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 
 	<h3>나. 생성자(Constructor)</h3>
 
-	<p></p>
+
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -1028,13 +1013,13 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 			<td>N.formater의 rules 인자 와 같습니다.</td>
 		</tr>
 	</table>
-	<p></p>
+
 
 	<p><br></p>
 
 	<h3>다. 함수(Methods)</h3>
 
-	<p></p>
+
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -1082,13 +1067,13 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 			<td>양식화 되지않은 원데이터(JSON Object)의 key 값</td>
 		</tr>
 	</table>
-	<p></p>
+
 
 	<p><br></p>
 
 	<h3>라. 포맷 룰(Format rules)</h3>
 
-	<p></p>
+
 	<table class="form">
 		<tr>
 			<td>옵션명</td>
@@ -1203,7 +1188,7 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 			</td>
 		</tr>
 	</table>
-	<p></p>
+
 
 	<p><br></p>
 
@@ -1217,7 +1202,7 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 
 	<h3>나. 생성자(Constructor)</h3>
 
-	<p></p>
+
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -1280,13 +1265,13 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 			<td>N.validator의 rules 인자 와 같습니다.</td>
 		</tr>
 	</table>
-	<p></p>
+
 
 	<p><br></p>
 
 	<h3>다. 함수(Methods)</h3>
 
-	<p></p>
+
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -1313,13 +1298,13 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 			</td>
 		</tr>
 	</table>
-	<p></p>
+
 
 	<p><br></p>
 
 	<h3>라. 검증 룰(Validate rules)</h3>
 
-	<p></p>
+
 	<table class="form">
 		<tr>
 			<td>옵션명</td>
@@ -1490,7 +1475,7 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 			<td>입력한 regexp 의 조건으로 검사 후 message 값 표시</td>
 		</tr>
 	</table>
-	<p></p>
+
 
 	<p><br></p>
 
@@ -1504,7 +1489,7 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 
 	<h3>나. 함수(Methods)</h3>
 
-	<p></p>
+
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -1689,7 +1674,7 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 			<td>N.data.sort의 reverse 인자 와 같습니다.</td>
 		</tr>
 	</table>
-	<p></p>
+
 
 	<p><br></p>
 
@@ -1705,7 +1690,7 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 
 	<h3>나. 생성자(Constructor)</h3>
 
-	<p></p>
+
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -1780,13 +1765,13 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 			<td>N.alert의 var 옵션과 같습니다.</td>
 		</tr>
 	</table>
-	<p></p>
+
 
 	<p><br></p>
 
 	<h3>다. 기본옵션(Default options)</h3>
 
-	<p></p>
+
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -1905,13 +1890,13 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 			</td>
 		</tr>
 	</table>
-	<p></p>
+
 
 	<p><br></p>
 
 	<h3>라. 함수(Methods)</h3>
 
-	<p></p>
+
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -1942,7 +1927,7 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 			<td>메시지 다이얼로그를 표현하는 HTML Element들을 제거합니다.</td>
 		</tr>
 	</table>
-	<p></p>
+
 
 	<p><br></p>
 
@@ -1956,7 +1941,7 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 
 	<h3>나. 생성자(Constructor)</h3>
 
-	<p></p>
+
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -2007,13 +1992,13 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 			<td>N.button의 opts 옵션과 같습니다.</td>
 		</tr>
 	</table>
-	<p></p>
+
 
 	<p><br></p>
 
 	<h3>다. 기본옵션(Default options)</h3>
 
-	<p></p>
+
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -2064,13 +2049,13 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 			<td>활성, 비활성 시 Fade 효과 적용 유무</td>
 		</tr>
 	</table>
-	<p></p>
+
 
 	<p><br></p>
 
 	<h3>라. 선언형옵션(Declarative options)</h3>
 
-	<p></p>
+
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -2109,13 +2094,13 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 			<td>활성, 비활성 시 Fade 효과 적용 유무</td>
 		</tr>
 	</table>
-	<p></p>
+
 
 	<p><br></p>
 
 	<h3>마. 함수(Methods)</h3>
 
-	<p></p>
+
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -2139,7 +2124,7 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 			<td>버턴을 비활성화 합니다.</td>
 		</tr>
 	</table>
-	<p></p>
+
 
 	<p><br></p>
 
@@ -2153,7 +2138,7 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 
 	<h3>나. 생성자(Constructor)</h3>
 
-	<p></p>
+
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -2204,13 +2189,13 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 			<td>N.datepicker의 opts 옵션과 같습니다.</td>
 		</tr>
 	</table>
-	<p></p>
+
 
 	<p><br></p>
 
 	<h3>다. 기본옵션(Default options)</h3>
 
-	<p></p>
+
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -2252,13 +2237,13 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 			</td>
 		</tr>
 	</table>
-	<p></p>
+
 
 	<p><br></p>
 
 	<h3>라. 함수(Methods)</h3>
 
-	<p></p>
+
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -2282,7 +2267,7 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 			<td>Datepicker를 감춥니다.</td>
 		</tr>
 	</table>
-	<p></p>
+
 
 	<p><br></p>
 
@@ -2298,7 +2283,7 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 
 	<h3>나. 생성자(Constructor)</h3>
 
-	<p></p>
+
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -2349,13 +2334,13 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 			<td>N.popup의 opts 옵션과 같습니다.</td>
 		</tr>
 	</table>
-	<p></p>
+
 
 	<p><br></p>
 
 	<h3>다. 기본옵션(Default options)</h3>
 
-	<p></p>
+
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -2489,13 +2474,13 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 			</td>
 		</tr>
 	</table>
-	<p></p>
+
 
 	<p><br></p>
 
 	<h3>라. 함수(Methods)</h3>
 
-	<p></p>
+
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -2526,7 +2511,7 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 			<td>팝업을 표현하는 HTML Element들을 제거합니다.</td>
 		</tr>
 	</table>
-	<p></p>
+
 
 	<p><br></p>
 
@@ -2540,7 +2525,7 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 
 	<h3>나. 생성자(Constructor)</h3>
 
-	<p></p>
+
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -2591,13 +2576,13 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 			<td>N.tab의 opts 옵션과 같습니다.</td>
 		</tr>
 	</table>
-	<p></p>
+
 
 	<p><br></p>
 
 	<h3>다. 기본옵션(Default options)</h3>
 
-	<p></p>
+
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -2695,7 +2680,7 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 			</td>
 		</tr>
 	</table>
-	<p></p>
+
 
 	<p><br></p>
 
@@ -2703,7 +2688,7 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 
 	<h3>라. 선언형옵션(Declarative options)</h3>
 
-	<p></p>
+
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -2749,11 +2734,11 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 			</td>
 		</tr>
 	</table>
-	<p></p>
+
 
 	<h3>마. 함수(Methods)</h3>
 
-	<p></p>
+
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -2770,7 +2755,7 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 			<td>지정한 index 번째 탭과 컨텐츠를 표시한다.</td>
 		</tr>
 	</table>
-	<p></p>
+
 
 	<p><br></p>
 
@@ -2784,7 +2769,7 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 
 	<h3>나. 생성자(Constructor)</h3>
 
-	<p></p>
+
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -2832,13 +2817,13 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 			<td>N.select의 opts 옵션과 같습니다.</td>
 		</tr>
 	</table>
-	<p></p>
+
 
 	<p><br></p>
 
 	<h3>다. 기본옵션(Default options)</h3>
 
-	<p></p>
+
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -2900,13 +2885,13 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 			</td>
 		</tr>
 	</table>
-	<p></p>
+
 
 	<p><br></p>
 
 	<h3>라. 함수(Methods)</h3>
 
-	<p></p>
+
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -2987,7 +2972,7 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 			</td>
 		</tr>
 	</table>
-	<p></p>
+
 
 	<p><br></p>
 
@@ -3001,7 +2986,7 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 
 	<h3>나. 생성자(Constructor)</h3>
 
-	<p></p>
+
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -3049,13 +3034,13 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 			<td>N.form의 opts 옵션과 같습니다.</td>
 		</tr>
 	</table>
-	<p></p>
+
 
 	<p><br></p>
 
 	<h3>다. 기본옵션(Default options)</h3>
 
-	<p></p>
+
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -3129,13 +3114,13 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 			<td>검증룰을 지정 합니다. 7. Validator 참고</td>
 		</tr>
 	</table>
-	<p></p>
+
 
 	<p><br></p>
 
 	<h3>라. 선언형옵션(Declarative options)</h3>
 
-	<p></p>
+
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -3156,13 +3141,13 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 			<td>검증룰을 지정 합니다. 7. Validator 참고</td>
 		</tr>
 	</table>
-	<p></p>
+
 
 	<p><br></p>
 
 	<h3>마. 함수(Methods)</h3>
 
-	<p></p>
+
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -3289,7 +3274,7 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 			<td>저장할 값</td>
 		</tr>
 	</table>
-	<p></p>
+
 
 	<p><br></p>
 
@@ -3303,7 +3288,7 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 
 	<h3>나. 생성자(Constructor)</h3>
 
-	<p></p>
+
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -3351,13 +3336,13 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 			<td>N.grid의 opts 옵션과 같습니다.</td>
 		</tr>
 	</table>
-	<p></p>
+
 
 	<p><br></p>
 
 	<h3>다. 기본옵션(Default options)</h3>
 
-	<p></p>
+
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -3559,13 +3544,13 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 			</td>
 		</tr>
 	</table>
-	<p></p>
+
 
 	<p><br></p>
 
 	<h3>라. 선언형옵션(Declarative options)</h3>
 
-	<p></p>
+
 	<table class="form">
 		<tr>
 			<td>Name</td>
@@ -3586,11 +3571,9 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 			<td>검증룰을 지정 합니다. 7. Validator 참고</td>
 		</tr>
 	</table>
-	<p></p>
 
 	<h3>마. 함수(Methods)</h3>
 
-	<p></p>
 	<table class="form">
 		<tr>
 			<td>Name</td>
