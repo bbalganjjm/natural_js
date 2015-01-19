@@ -234,29 +234,29 @@
 				if (str.length === 6) {
 					dateInfo = {
 						obj : new Date(str.substring(0, 4), Number(str.substring(4, 6)), 0, 0, 0, 0),
-						format : N.context.attr("data")["formater"]["date"]["Ym"]()
+						format : N.context.attr("data")["formatter"]["date"]["Ym"]()
 					};
 				} else if (str.length === 8) {
 					dateInfo = {
 						obj : new Date(str.substring(0, 4), Number(str.substring(4, 6)) - 1, str.substring(6, 8), 0, 0, 0),
-						format : N.context.attr("data")["formater"]["date"]["Ymd"]()
+						format : N.context.attr("data")["formatter"]["date"]["Ymd"]()
 					};
 				} else if (str.length === 10) {
 					dateInfo = {
 						obj : new Date(str.substring(0, 4), Number(str.substring(4, 6)) - 1, str.substring(6, 8), str.substring(8, 10), 0, 0),
-						format : N.context.attr("data")["formater"]["date"]["YmdH"]()
+						format : N.context.attr("data")["formatter"]["date"]["YmdH"]()
 					};
 				} else if (str.length === 12) {
 					dateInfo = {
 						obj : new Date(str.substring(0, 4), Number(str.substring(4, 6)) - 1, str.substring(6, 8), str.substring(8, 10), str.substring(10, 12),
 								0),
-						format : N.context.attr("data")["formater"]["date"]["YmdHi"]()
+						format : N.context.attr("data")["formatter"]["date"]["YmdHi"]()
 					};
 				} else if (str.length >= 14) {
 					dateInfo = {
 						obj : new Date(str.substring(0, 4), Number(str.substring(4, 6)) - 1, str.substring(6, 8), str.substring(8, 10), str.substring(10, 12),
 								str.substring(12, 14)),
-						format : N.context.attr("data")["formater"]["date"]["YmdHis"]()
+						format : N.context.attr("data")["formatter"]["date"]["YmdHis"]()
 					};
 				}
 				return dateInfo;

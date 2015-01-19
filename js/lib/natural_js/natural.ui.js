@@ -1425,7 +1425,7 @@
 				                    //format
 			                        if(ele.data("format") !== undefined) {
 										if (type !== "password" && type !== "hidden" && type !== "file") {
-											N(opts.data).formater(opts.fRules !== null ? opts.fRules : ele).format(opts.row);
+											N(opts.data).formatter(opts.fRules !== null ? opts.fRules : ele).format(opts.row);
 
 											ele.unbind("focusin.form.unformat");
 											ele.bind("focusin.form.unformat", function() {
@@ -1477,7 +1477,7 @@
 									ele.attr("src", N.string.nullToEmpty(String(vals[key])));
 								} else {
 									if(ele.data("format") !== undefined) {
-										N(opts.data).formater(opts.fRules !== null ? opts.fRules : ele).format(opts.row);
+										N(opts.data).formatter(opts.fRules !== null ? opts.fRules : ele).format(opts.row);
 									} else {
 										val = N.string.nullToEmpty(String(vals[key]));
 										if(!opts.html) {
@@ -1565,9 +1565,9 @@
 			validate : function() {
 				var opts = this.options;
 				var eles = opts.context.find(":input");
-				eles.trigger("unformat.formater");
+				eles.trigger("unformat.formatter");
 				eles.trigger("validate.validator");
-				eles.not(".validate_false__").trigger("format.formater");
+				eles.not(".validate_false__").trigger("format.formatter");
 				return eles.filter(".validate_false__").length > 0 ? false : true;
 			},
 			val : function(key, val, notify) {
@@ -1643,7 +1643,7 @@
 	                            }
 
 	                            if(ele.data("format") !== undefined) {
-									N(opts.data).formater(opts.fRules !== null ? opts.fRules : ele).format(opts.row);
+									N(opts.data).formatter(opts.fRules !== null ? opts.fRules : ele).format(opts.row);
 								} else {
 									if(!opts.html) {
 										ele.text(currVal);
