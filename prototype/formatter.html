@@ -1,11 +1,11 @@
-<div id="formater">
+<div id="formatter">
 	<div class="intro">
-		<h1><b>Formater</b> : Formater(N.format)는 입력한 값들을 지정한 포멧 룰대로 양식화(formatting)한 값을 반환하거나 입력요소에 표시 해 줍니다.</h1>
+		<h1><b>Formatter</b> : Formatter(N.format)는 입력한 값들을 지정한 포멧 룰대로 양식화(formatting)한 값을 반환하거나 입력요소에 표시 해 줍니다.</h1>
 		<h2>[Format(Command)] 버튼을 클릭하면 Data 영역에 있는 JSON 데이터를 지정한룰(소스 참고)대로 포멧팅하여 Command Result 부분에 표시 해 줍니다.</h2>
 		<h2>[Format] 버튼을 클릭하면 데모영역에 있는 HTML 요소들에  각 요소들의 class 속성에 정의된  포멧룰을 기반으로 데이터를 양식화 하여 해당요소에 표시 해 줍니다.</h2>
-		<h2>입력요소에 Formater 가 바인드 되면 format 과 unformat 이벤트를 생성합니다.</h2>
-		<h2>[Run unformat event] 버튼을 클릭하면 Formater 가 적용된 입력요소의 format 이벤트를 실행 합니다. format 이벤트는 해당입력요소에 입력된 값을 양식화 해 줍니다.</h2>
-		<h2>[Run format event] 버튼을 클릭하면 Formater 가 적용된 입력요소의 unformat 이벤트를 실행 합니다. unformat 이벤트는 해당입력요소에 입력된 값을 원래 바인드 되어 있는 값으로 돌려 줍니다.</h2>
+		<h2>입력요소에 Formatter 가 바인드 되면 format 과 unformat 이벤트를 생성합니다.</h2>
+		<h2>[Run unformat event] 버튼을 클릭하면 Formatter 가 적용된 입력요소의 format 이벤트를 실행 합니다. format 이벤트는 해당입력요소에 입력된 값을 양식화 해 줍니다.</h2>
+		<h2>[Run format event] 버튼을 클릭하면 Formatter 가 적용된 입력요소의 unformat 이벤트를 실행 합니다. unformat 이벤트는 해당입력요소에 입력된 값을 원래 바인드 되어 있는 값으로 돌려 줍니다.</h2>
 	</div>
 	<div class="divBar">DATA</div>
 	<div class="dataBox">
@@ -72,7 +72,7 @@
 
 <script type="text/javascript">
 
-N("div#formater").cont({
+N("div#formatter").cont({
     init : function(view, request) {
     	// put source code
     	IndexController.getSourceCode(request.get("url"), N("div.sourceBox", view));
@@ -92,7 +92,7 @@ N("div#formater").cont({
 
             var data = eval(N("textarea.data").val());
 
-            var pData = N(data).formater({
+            var pData = N(data).formatter({
                 "numeric" : [ [ "trimtoempty" ], [ "numeric", "#,###.##0000" ] ],
                 "generic" : [ [ "trimtoempty" ], [ "generic", "@@ABCD" ] ],
                 "limit" : [ [ "trimtoempty" ], [ "limit", "13", "..." ] ],
@@ -105,7 +105,7 @@ N("div#formater").cont({
         N("a#btnFormatDeclarative", view).click(function(e) {
             e.preventDefault();
             var data = eval(N("textarea.data").val());
-            N(data).formater("#inputBox").format();
+            N(data).formatter("#inputBox").format();
         });
 
         N("a#btnUnFormatEvent", view).click(function(e) {
