@@ -1,5 +1,5 @@
 /*!
- * Natural-CORE v0.8.1.2
+ * Natural-CORE v0.8.1.3
  * bbalganjjm@gmail.com
  *
  * Includes json2.js & formatdate.js
@@ -12,7 +12,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	var version = "0.8.1.2", N;
+	var version = "0.8.1.3", N;
 
 	// Use jQuery init
 	N = function(selector, context) {
@@ -161,18 +161,10 @@
 			 * 문자열의 바이트 길이를 반환
 			 */
 			byteLength : function(str) {
-				var byteLength = 0;
-				for (var inx = 0; inx < str.length; inx++) {
-					var oneChar = escape(str.charAt(inx));
-					if (oneChar.length === 1) {
-						byteLength++;
-					} else if (oneChar.indexOf("%u") != -1) {
-						byteLength += 2;
-					} else if (oneChar.indexOf("%") != -1) {
-						byteLength += oneChar.length / 3;
-					}
-				}
-				return byteLength;
+				return (function(s,b,i,c){
+		        	for(b=i=0;c=s.charCodeAt(i++);b+=c>>11?3:c>>7?2:1);
+		        	return b;
+		        })(str);
 			},
 			trim : function(str) {
 				return String(str).replace(/^\s*/, "").replace(/\s*$/, "");
