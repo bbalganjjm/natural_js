@@ -249,7 +249,7 @@ table.form {
 		<li><img src="images/icon/alert.png" alt="" />&nbsp;선언형 옵션은 JSON 표준양식을 정확히 지켜줘야 합니다. 예를 들면 key 값에도 큰따옴표(“)로 무조건 감싸줘야 하는 등 JSON 표준양식을 지키지 않으면 선언형 옵션이 인식되지 않거나 오류가 발생합니다.</li>
 		<li><img src="images/icon/alert.png" alt="" />&nbsp;format이나 validate등 선언형 옵션으로 실행되는 룰 들의 인자들(arguments)는 배열(Array) 형태(type)으로 정의하고 인자 순서대로 나열합니다.</li>
 		<li><span>함수(Methods) : 컴포넌트나 라이브러리 인스턴스에서 제공하는 기능과 arguments 에 대한 설명<br>ex) N([]).grid( { resizeable : true } ).
-		</span><span style='font-size: 9.0pt; font-weight: "bold"; text-decoration: "underline"; background-color: #e8f2fe; line-height: 160%'>revert<a href="#FOOTNOTE5"><sup>5)</sup></a></span><span style='font-weight: "bold"; text-decoration: "underline"'>(3<a href="#FOOTNOTE6"><sup>6)</sup></a>)
+		</span><span style='font-size: 9.0pt; font-weight: "bold"; text-decoration: "underline"; background-color: #e8f2fe;'>revert<a href="#FOOTNOTE5"><sup>5)</sup></a></span><span style='font-weight: "bold"; text-decoration: "underline"'>(3<a href="#FOOTNOTE6"><sup>6)</sup></a>)
 		</span></li>
 	</ul>
 
@@ -271,418 +271,422 @@ table.form {
 	</p>
 	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
 	<table class="form">
-		<tr>
-			<td>Name</td>
-			<td>Arguments</td>
-			<td>Type</td>
-			<td>Return</td>
-			<td>Description</td>
-		</tr>
-		<tr>
-			<td>N</td>
-			<td>-</td>
-			<td>-</td>
-			<td>
-				<p class="HStyle0">
-					<span>JWS</span><span><a href="#FOOTNOTE1"><sup>1)</sup></a></span>
-				</p>
-			</td>
-			<td>
-				<p class="HStyle0">
-					<span>Natural 의 플러그인 형태로 제공되는 라이브러리들과 N클래스의 멤버변수(함수)가 정의 되어있는 핵심 클래스입니다.</span>
-				</p>
-				<p class="HStyle0">
-					<span>N(selector</span><span style='font-family: "맑은 고딕"'><a href="#FOOTNOTE2"><sup>2)</sup></a></span><span style='font-size: 9.0pt; line-height: 160%'> or function, object, HTML Element(이하 element))를 호출하면 jQuery 의 init 메서드가 호출되어 Naturl-JS 와 jQuery가 동시에 초기화(Initialize) 됩니다.</span>
-				</p>
-				<p class="HStyle0">
-					<span>ex)</span>
-				</p>
-				<p class="HStyle0">
-					<span>var divs = N(“div”);</span>
-				</p>
-			</td>
-		</tr>
-		<tr>
-			<td>&nbsp;</td>
-			<td>selector</td>
-			<td>
-				<p class="HStyle0">
-					<span>JWS, selector or function, object, element</span>
-				</p>
-			</td>
-			<td>-</td>
-			<td>JSON data나 selector 등.</td>
-		</tr>
-		<tr>
-			<td>&nbsp;</td>
-			<td>context</td>
-			<td>JWS</td>
-			<td>-</td>
-			<td>
-				<p class="HStyle0">
-					<span>element를 지정할 때 지정된 element 가 속해있는 element 영역을 지정할 수 있습니다.</span>
-				</p>
-			</td>
-		</tr>
-		<tr>
-			<td>N.locale</td>
-			<td>-</td>
-			<td>-</td>
-			<td>undefined</td>
-			<td>
-				<p class="HStyle0">
-					<span>Natural-JS 의 현제 로케일을 설정 합니다. 설정한 로케일에 따라 프레임워크에서 사용자에게 보여주는 메시지들도 다국어처리가 됩니다. 현제 등록된 다국어 메시지 리소스는 en_US, ko_KR 만 있습니다. 메시지 세트는 config에서 손쉽게 추가 할 수 있습니다.</span>
-				</p>
-			</td>
-		</tr>
-		<tr>
-			<td>&nbsp;</td>
-			<td>str</td>
-			<td>String</td>
-			<td>&nbsp;</td>
-			<td>“en_US”, “ko_KR” 등의 로케일 문자열</td>
-		</tr>
-		<tr>
-			<td>N.error</td>
-			<td>-</td>
-			<td>-</td>
-			<td>ErrorThrown</td>
-			<td>에러를 발생 시키고 에러 메시지를 브라우저 콘솔창에 보여줍니다.</td>
-		</tr>
-		<tr>
-			<td>&nbsp;</td>
-			<td>msg</td>
-			<td>String</td>
-			<td>&nbsp;</td>
-			<td>에러 텍스트 메시지</td>
-		</tr>
-		<tr>
-			<td>&nbsp;</td>
-			<td>e</td>
-			<td>ErrorThrown</td>
-			<td>-</td>
-			<td>
-				<p class="HStyle0">
-					<span>에러 발생시 생성되는 ErrorThrown 객체를 입력 하면 Error Stack Trace 로그를 브라우저 콘솔창에 보여 줍니다. (Chrome 에서만 지원)</span>
-				</p>
-			</td>
-		</tr>
-		<tr>
-			<td>N.warn</td>
-			<td>-</td>
-			<td>-</td>
-			<td>undefined</td>
-			<td>
-				<p class="HStyle0">
-					<span>콘솔창에 Warnning 메시지를 보여 줍니다</span>
-				</p>
-				<p class="HStyle0" style='margin-left: 22.4pt; text-align: left; text-indent: -15.0pt;'>
-					<span style='font-size: 8.0pt; line-height: 160%'>주) 브라우저에서 console.warn을 지원하지 않으면 메시지가 표시되지 않습니다.</span>
-				</p>
-			</td>
-		</tr>
-		<tr>
-			<td>N.log</td>
-			<td>-</td>
-			<td>-</td>
-			<td>undefined</td>
-			<td>
-				<p class="HStyle0">
-					<span>콘솔창에 로깅(Logging) 메시지를 보여 줍니다</span>
-				</p>
-				<p class="HStyle0" style='margin-left: 22.4pt; text-align: left; text-indent: -15.0pt;'>
-					<span style='font-size: 8.0pt; line-height: 160%'>주) 브라우저에서 console.log를 지원하지 않으면 메시지가 표시되지 않습니다.</span>
-				</p>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<p class="HStyle0">
-					<span>N.browser</span>
-				</p>
-				<p class="HStyle0">
-					<span>.cookie</span>
-				</p>
-			</td>
-			<td>-</td>
-			<td>-</td>
-			<td>undefined</td>
-			<td>쿠키를 생성 합니다.</td>
-		</tr>
-		<tr>
-			<td>&nbsp;</td>
-			<td>name</td>
-			<td>String</td>
-			<td>-</td>
-			<td>쿠키명</td>
-		</tr>
-		<tr>
-			<td>&nbsp;</td>
-			<td>value</td>
-			<td>String</td>
-			<td>-</td>
-			<td>쿠키값</td>
-		</tr>
-		<tr>
-			<td>&nbsp;</td>
-			<td>expiredays</td>
-			<td>int</td>
-			<td>-</td>
-			<td>만료일</td>
-		</tr>
-		<tr>
-			<td>&nbsp;</td>
-			<td>domain</td>
-			<td>String</td>
-			<td>-</td>
-			<td>쿠키가 생성될 도메인</td>
-		</tr>
-		<tr>
-			<td>
-				<p class="HStyle0">
-					<span>N.browser</span>
-				</p>
-				<p class="HStyle0">
-					<span>.removeCookie</span>
-				</p>
-			</td>
-			<td>-</td>
-			<td>-</td>
-			<td>undefined</td>
-			<td>생성된 쿠키를 제거 합니다.</td>
-		</tr>
-		<tr>
-			<td>&nbsp;</td>
-			<td>name</td>
-			<td>String</td>
-			<td>-</td>
-			<td>쿠키명</td>
-		</tr>
-		<tr>
-			<td>&nbsp;</td>
-			<td>domain</td>
-			<td>String</td>
-			<td>-</td>
-			<td>해당 쿠키가 생성된 도메인</td>
-		</tr>
-		<tr>
-			<td>
-				<p class="HStyle0">
-					<span>N.browser</span>
-				</p>
-				<p class="HStyle0">
-					<span>.msieVersion</span>
-				</p>
-			</td>
-			<td>-</td>
-			<td>-</td>
-			<td>int</td>
-			<td>
-				<p class="HStyle0">
-					<span>현재 접속한 Microsoft Internet Explorer(이하 MSIE)의 버전을 가져옵니다. MSIE가 아닐 경우 0을 반환 합니다.</span>
-				</p>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<p class="HStyle0">
-					<span>N.browser</span>
-				</p>
-				<p class="HStyle0">
-					<span>.is</span>
-				</p>
-			</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>boolean</td>
-			<td>
-				<p class="HStyle0">
-					<span>입력한 브라우저명과 현재 접속한 브라우저가 일치하면 true를 반환 합니다.</span>
-				</p>
-			</td>
-		</tr>
-		<tr>
-			<td>&nbsp;</td>
-			<td>name</td>
-			<td>String</td>
-			<td>-</td>
-			<td>
-				<p class="HStyle0">
-					<span>브라우저명(opera, firefox, safari, chrome, ie)</span>
-				</p>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<p class="HStyle0">
-					<span>N.message</span>
-				</p>
-				<p class="HStyle0">
-					<span>.get</span>
-				</p>
-			</td>
-			<td>-</td>
-			<td>-</td>
-			<td>-</td>
-			<td>
-				<p class="HStyle0">
-					<span>메시지 리소스(config 에 정의)에서 현재 로케일에 맞게 메시지를 가져옵니다.</span>
-				</p>
-			</td>
-		</tr>
-		<tr>
-			<td>&nbsp;</td>
-			<td>resource</td>
-			<td>JSON Object</td>
-			<td>-</td>
-			<td>
-				<p class="HStyle0">
-					<span>메시지 리소스</span>
-				</p>
-				<p class="HStyle0">
-					<span>메시지 리소스는 JSON Object 형태로 만들면 되고 하위에 메시지 세트를 구성해야 함.</span>
-				</p>
-				<p class="HStyle0">
-					<span>ex)</span>
-				</p>
-				<p class="HStyle0">
-					<span>var message = {</span>
-				</p>
-				<p class="HStyle0">
-					<span>&nbsp;&nbsp;&quot;ko_KR&quot; : {</span>
-				</p>
-				<p class="HStyle0">
-					<span>&nbsp;&nbsp;&nbsp;&nbsp;key : ＂메시지{0}＂</span>
-				</p>
-				<p class="HStyle0">
-					<span>&nbsp;&nbsp;},</span>
-				</p>
-				<p class="HStyle0">
-					<span>&nbsp;&nbsp;&quot;en_US&quot; : {</span>
-				</p>
-				<p class="HStyle0">
-					<span>&nbsp;&nbsp;&nbsp;&nbsp;key : ＂message{0}＂</span>
-				</p>
-				<p class="HStyle0">
-					<span>&nbsp;&nbsp;}</span>
-				</p>
-				<p class="HStyle0">
-					<span>}<span style='HWP-TAB: 1;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style='HWP-TAB: 1;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
-				</p>
-				<p class="HStyle0">
-					<span>ex)</span>
-				</p>
-				<p class="HStyle0">
-					<span>var msg </span>
-				</p>
-				<p class="HStyle0">
-					<span>&nbsp;&nbsp;&nbsp;&nbsp;= N.message.get(message, “key”, [“ 입니다”]);</span>
-				</p>
-				<p class="HStyle0">
-					<span>msg의 값 : “메시지 입니다“</span>
-				</p>
-			</td>
-		</tr>
-		<tr>
-			<td>&nbsp;</td>
-			<td>key</td>
-			<td>String</td>
-			<td>-</td>
-			<td>메시지 키</td>
-		</tr>
-		<tr>
-			<td>&nbsp;</td>
-			<td>vars</td>
-			<td>Array</td>
-			<td>-</td>
-			<td>메시지 변수를 치환할 값</td>
-		</tr>
-		<tr>
-			<td>N().toArray</td>
-			<td>-</td>
-			<td>-</td>
-			<td>Array</td>
-			<td>JWS를 순수한 Array 객체로 반환 합니다.</td>
-		</tr>
-		<tr>
-			<td>
-				<p class="HStyle0">
-					<span>N()</span>
-				</p>
-				<p class="HStyle0">
-					<span>.instance</span>
-				</p>
-			</td>
-			<td>-</td>
-			<td>-</td>
-			<td>Object</td>
-			<td>
-				<p class="HStyle0">
-					<span>Natural-JS 는 기본적으로 컴포넌트나 라이브러리들에 의해 생성된 인스턴스를 대상 HTML element(이하 요소)가 있다면 대상요소에 인스턴스를 저장 합니다.</span>
-				</p>
-				<p class="HStyle0">
-					<span>N().instance 메서드는 이 인스턴스를 요소에 저장하고 가져오는 역할을 수행 합니다.</span>
-				</p>
-				<p class="HStyle0">
-					<span>인자중에 name만 입력하면 인스턴스를 가져오고 name, instance를 같이 입력하면 해당이름으로 해당요소에 instance를 저장 합니다. instance 인자로 callback function 이 입력되면 여러 인스턴스를 한번에 가져올 수 있습니다. </span>
-				</p>
-				<p class="HStyle0">
-					<span>ex)&nbsp;</span>
-				</p>
-				<p class="HStyle0">
-					<span>var single = (“div#sample”).instance(“grid”);</span>
-				</p>
-				<p class="HStyle0">
-					<span>var multy = (“div.sample”).instance(“form”, </span>
-				</p>
-				<p class="HStyle0">
-					<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function(i, inst) {</span>
-				</p>
-				<p class="HStyle0">
-					<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//this 는 각각의 instance</span>
-				</p>
-				<p class="HStyle0">
-					<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var insts = inst;</span>
-				</p>
-				<p class="HStyle0">
-					<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});</span>
-				</p>
-			</td>
-		</tr>
-		<tr>
-			<td>&nbsp;</td>
-			<td>name</td>
-			<td>String</td>
-			<td>-</td>
-			<td>인스턴스 명</td>
-		</tr>
-		<tr>
-			<td>&nbsp;</td>
-			<td>instance</td>
-			<td>
-				<p class="HStyle0">
-					<span>Object or callback function(이하 callback)</span>
-				</p>
-			</td>
-			<td>-</td>
-			<td>
-				<p class="HStyle0">
-					<span>인스턴스 or 인스턴스를 가져올 callback</span>
-				</p>
-				<p class="HStyle0" style='margin-left: 22.4pt; text-align: left; text-indent: -15.0pt;'>
-					<span style='font-size: 8.0pt; line-height: 160%'>주) callback의 인자는 index(arguments[0])와 각각의 instance(arguments[1])가 들어옵니다. 이 callback 안의 this 는 각각의 instance를 가리킵니다.</span>
-				</p>
-			</td>
-		</tr>
+		<thead>
+			<tr>
+				<th width="100">Name</th>
+				<th width="100">Arguments</th>
+				<th width="100">Type</th>
+				<th width="100">Return</th>
+				<th width="*">Description</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>N</td>
+				<td>-</td>
+				<td>-</td>
+				<td>
+					<p class="HStyle0">
+						<span>JWS</span><span><a href="#FOOTNOTE1"><sup>1)</sup></a></span>
+					</p>
+				</td>
+				<td>
+					<p class="HStyle0">
+						<span>Natural 의 플러그인 형태로 제공되는 라이브러리들과 N클래스의 멤버변수(함수)가 정의 되어있는 핵심 클래스입니다.</span>
+					</p>
+					<p class="HStyle0">
+						<span>N(selector</span><span style='font-family: "맑은 고딕"'><a href="#FOOTNOTE2"><sup>2)</sup></a></span><span style='font-size: 9.0pt;'> or function, object, HTML Element(이하 element))를 호출하면 jQuery 의 init 메서드가 호출되어 Naturl-JS 와 jQuery가 동시에 초기화(Initialize) 됩니다.</span>
+					</p>
+					<p class="HStyle0">
+						<span>ex)</span>
+					</p>
+					<p class="HStyle0">
+						<span>var divs = N(“div”);</span>
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td>selector</td>
+				<td>
+					<p class="HStyle0">
+						<span>JWS, selector or function, object, element</span>
+					</p>
+				</td>
+				<td>-</td>
+				<td>JSON data나 selector 등.</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td>context</td>
+				<td>JWS</td>
+				<td>-</td>
+				<td>
+					<p class="HStyle0">
+						<span>element를 지정할 때 지정된 element 가 속해있는 element 영역을 지정할 수 있습니다.</span>
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>N.locale</td>
+				<td>-</td>
+				<td>-</td>
+				<td>undefined</td>
+				<td>
+					<p class="HStyle0">
+						<span>Natural-JS 의 현제 로케일을 설정 합니다. 설정한 로케일에 따라 프레임워크에서 사용자에게 보여주는 메시지들도 다국어처리가 됩니다. 현제 등록된 다국어 메시지 리소스는 en_US, ko_KR 만 있습니다. 메시지 세트는 config에서 손쉽게 추가 할 수 있습니다.</span>
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td>str</td>
+				<td>String</td>
+				<td>&nbsp;</td>
+				<td>“en_US”, “ko_KR” 등의 로케일 문자열</td>
+			</tr>
+			<tr>
+				<td>N.error</td>
+				<td>-</td>
+				<td>-</td>
+				<td>ErrorThrown</td>
+				<td>에러를 발생 시키고 에러 메시지를 브라우저 콘솔창에 보여줍니다.</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td>msg</td>
+				<td>String</td>
+				<td>&nbsp;</td>
+				<td>에러 텍스트 메시지</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td>e</td>
+				<td>ErrorThrown</td>
+				<td>-</td>
+				<td>
+					<p class="HStyle0">
+						<span>에러 발생시 생성되는 ErrorThrown 객체를 입력 하면 Error Stack Trace 로그를 브라우저 콘솔창에 보여 줍니다. (Chrome 에서만 지원)</span>
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>N.warn</td>
+				<td>-</td>
+				<td>-</td>
+				<td>undefined</td>
+				<td>
+					<p class="HStyle0">
+						<span>콘솔창에 Warnning 메시지를 보여 줍니다</span>
+					</p>
+					<p class="HStyle0" style='margin-left: 22.4pt; text-align: left; text-indent: -15.0pt;'>
+						<span style='font-size: 8.0pt;'>주) 브라우저에서 console.warn을 지원하지 않으면 메시지가 표시되지 않습니다.</span>
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>N.log</td>
+				<td>-</td>
+				<td>-</td>
+				<td>undefined</td>
+				<td>
+					<p class="HStyle0">
+						<span>콘솔창에 로깅(Logging) 메시지를 보여 줍니다</span>
+					</p>
+					<p class="HStyle0" style='margin-left: 22.4pt; text-align: left; text-indent: -15.0pt;'>
+						<span style='font-size: 8.0pt;'>주) 브라우저에서 console.log를 지원하지 않으면 메시지가 표시되지 않습니다.</span>
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p class="HStyle0">
+						<span>N.browser</span>
+					</p>
+					<p class="HStyle0">
+						<span>.cookie</span>
+					</p>
+				</td>
+				<td>-</td>
+				<td>-</td>
+				<td>undefined</td>
+				<td>쿠키를 생성 합니다.</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td>name</td>
+				<td>String</td>
+				<td>-</td>
+				<td>쿠키명</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td>value</td>
+				<td>String</td>
+				<td>-</td>
+				<td>쿠키값</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td>expiredays</td>
+				<td>int</td>
+				<td>-</td>
+				<td>만료일</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td>domain</td>
+				<td>String</td>
+				<td>-</td>
+				<td>쿠키가 생성될 도메인</td>
+			</tr>
+			<tr>
+				<td>
+					<p class="HStyle0">
+						<span>N.browser</span>
+					</p>
+					<p class="HStyle0">
+						<span>.removeCookie</span>
+					</p>
+				</td>
+				<td>-</td>
+				<td>-</td>
+				<td>undefined</td>
+				<td>생성된 쿠키를 제거 합니다.</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td>name</td>
+				<td>String</td>
+				<td>-</td>
+				<td>쿠키명</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td>domain</td>
+				<td>String</td>
+				<td>-</td>
+				<td>해당 쿠키가 생성된 도메인</td>
+			</tr>
+			<tr>
+				<td>
+					<p class="HStyle0">
+						<span>N.browser</span>
+					</p>
+					<p class="HStyle0">
+						<span>.msieVersion</span>
+					</p>
+				</td>
+				<td>-</td>
+				<td>-</td>
+				<td>int</td>
+				<td>
+					<p class="HStyle0">
+						<span>현재 접속한 Microsoft Internet Explorer(이하 MSIE)의 버전을 가져옵니다. MSIE가 아닐 경우 0을 반환 합니다.</span>
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p class="HStyle0">
+						<span>N.browser</span>
+					</p>
+					<p class="HStyle0">
+						<span>.is</span>
+					</p>
+				</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>boolean</td>
+				<td>
+					<p class="HStyle0">
+						<span>입력한 브라우저명과 현재 접속한 브라우저가 일치하면 true를 반환 합니다.</span>
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td>name</td>
+				<td>String</td>
+				<td>-</td>
+				<td>
+					<p class="HStyle0">
+						<span>브라우저명(opera, firefox, safari, chrome, ie)</span>
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p class="HStyle0">
+						<span>N.message</span>
+					</p>
+					<p class="HStyle0">
+						<span>.get</span>
+					</p>
+				</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>
+					<p class="HStyle0">
+						<span>메시지 리소스(config 에 정의)에서 현재 로케일에 맞게 메시지를 가져옵니다.</span>
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td>resource</td>
+				<td>JSON Object</td>
+				<td>-</td>
+				<td>
+					<p class="HStyle0">
+						<span>메시지 리소스</span>
+					</p>
+					<p class="HStyle0">
+						<span>메시지 리소스는 JSON Object 형태로 만들면 되고 하위에 메시지 세트를 구성해야 함.</span>
+					</p>
+					<p class="HStyle0">
+						<span>ex)</span>
+					</p>
+					<p class="HStyle0">
+						<span>var message = {</span>
+					</p>
+					<p class="HStyle0">
+						<span>&nbsp;&nbsp;&quot;ko_KR&quot; : {</span>
+					</p>
+					<p class="HStyle0">
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;key : ＂메시지{0}＂</span>
+					</p>
+					<p class="HStyle0">
+						<span>&nbsp;&nbsp;},</span>
+					</p>
+					<p class="HStyle0">
+						<span>&nbsp;&nbsp;&quot;en_US&quot; : {</span>
+					</p>
+					<p class="HStyle0">
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;key : ＂message{0}＂</span>
+					</p>
+					<p class="HStyle0">
+						<span>&nbsp;&nbsp;}</span>
+					</p>
+					<p class="HStyle0">
+						<span>}<span style='HWP-TAB: 1;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style='HWP-TAB: 1;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
+					</p>
+					<p class="HStyle0">
+						<span>ex)</span>
+					</p>
+					<p class="HStyle0">
+						<span>var msg </span>
+					</p>
+					<p class="HStyle0">
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;= N.message.get(message, “key”, [“ 입니다”]);</span>
+					</p>
+					<p class="HStyle0">
+						<span>msg의 값 : “메시지 입니다“</span>
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td>key</td>
+				<td>String</td>
+				<td>-</td>
+				<td>메시지 키</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td>vars</td>
+				<td>Array</td>
+				<td>-</td>
+				<td>메시지 변수를 치환할 값</td>
+			</tr>
+			<tr>
+				<td>N().toArray</td>
+				<td>-</td>
+				<td>-</td>
+				<td>Array</td>
+				<td>JWS를 순수한 Array 객체로 반환 합니다.</td>
+			</tr>
+			<tr>
+				<td>
+					<p class="HStyle0">
+						<span>N()</span>
+					</p>
+					<p class="HStyle0">
+						<span>.instance</span>
+					</p>
+				</td>
+				<td>-</td>
+				<td>-</td>
+				<td>Object</td>
+				<td>
+					<p class="HStyle0">
+						<span>Natural-JS 는 기본적으로 컴포넌트나 라이브러리들에 의해 생성된 인스턴스를 대상 HTML element(이하 요소)가 있다면 대상요소에 인스턴스를 저장 합니다.</span>
+					</p>
+					<p class="HStyle0">
+						<span>N().instance 메서드는 이 인스턴스를 요소에 저장하고 가져오는 역할을 수행 합니다.</span>
+					</p>
+					<p class="HStyle0">
+						<span>인자중에 name만 입력하면 인스턴스를 가져오고 name, instance를 같이 입력하면 해당이름으로 해당요소에 instance를 저장 합니다. instance 인자로 callback function 이 입력되면 여러 인스턴스를 한번에 가져올 수 있습니다. </span>
+					</p>
+					<p class="HStyle0">
+						<span>ex)&nbsp;</span>
+					</p>
+					<p class="HStyle0">
+						<span>var single = (“div#sample”).instance(“grid”);</span>
+					</p>
+					<p class="HStyle0">
+						<span>var multy = (“div.sample”).instance(“form”, </span>
+					</p>
+					<p class="HStyle0">
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function(i, inst) {</span>
+					</p>
+					<p class="HStyle0">
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//this 는 각각의 instance</span>
+					</p>
+					<p class="HStyle0">
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var insts = inst;</span>
+					</p>
+					<p class="HStyle0">
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});</span>
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td>name</td>
+				<td>String</td>
+				<td>-</td>
+				<td>인스턴스 명</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td>instance</td>
+				<td>
+					<p class="HStyle0">
+						<span>Object or callback function(이하 callback)</span>
+					</p>
+				</td>
+				<td>-</td>
+				<td>
+					<p class="HStyle0">
+						<span>인스턴스 or 인스턴스를 가져올 callback</span>
+					</p>
+					<p class="HStyle0" style='margin-left: 22.4pt; text-align: left; text-indent: -15.0pt;'>
+						<span style='font-size: 8.0pt;'>주) callback의 인자는 index(arguments[0])와 각각의 instance(arguments[1])가 들어옵니다. 이 callback 안의 this 는 각각의 instance를 가리킵니다.</span>
+					</p>
+				</td>
+			</tr>
+		</tbody>
 	</table>
 	<p class="HStyle0" style='margin-left: 40.0pt;'></p>
 
 	<p class="HStyle0">
-		<span style='font-size: 12.0pt; font-weight: "bold"; line-height: 160%'><br></span>
+		<span style='font-size: 12.0pt; font-weight: "bold";'><br></span>
 	</p>
 
 	<p class="HStyle0">
-		<span style='font-size: 12.0pt; font-weight: "bold"; line-height: 160%'><br></span>
+		<span style='font-size: 12.0pt; font-weight: "bold";'><br></span>
 	</p>
 
 	<p class="HStyle1">
@@ -1521,22 +1525,22 @@ table.form {
 					<span>JSON룰 ex)</span>
 				</p>
 				<p class="HStyle0">
-					<span style='font-size: 7.0pt; line-height: 160%'>{</span>
+					<span style='font-size: 7.0pt;'>{</span>
 				</p>
 				<p class="HStyle0">
-					<span style='font-size: 7.0pt; line-height: 160%'>&nbsp;&nbsp;&quot;numeric&quot; : [[&quot;trimtoempty&quot;], [&quot;numeric&quot;, &quot;#,###.##0000&quot;]],</span>
+					<span style='font-size: 7.0pt;'>&nbsp;&nbsp;&quot;numeric&quot; : [[&quot;trimtoempty&quot;], [&quot;numeric&quot;, &quot;#,###.##0000&quot;]],</span>
 				</p>
 				<p class="HStyle0">
-					<span style='font-size: 7.0pt; line-height: 160%'>&nbsp;&nbsp;&quot;generic&quot; : [[&quot;trimtoempty&quot;], [&quot;generic&quot;, &quot;@@ABCD&quot;]],</span>
+					<span style='font-size: 7.0pt;'>&nbsp;&nbsp;&quot;generic&quot; : [[&quot;trimtoempty&quot;], [&quot;generic&quot;, &quot;@@ABCD&quot;]],</span>
 				</p>
 				<p class="HStyle0">
-					<span style='font-size: 7.0pt; line-height: 160%'>&nbsp;&nbsp;&quot;limit&quot; : [[&quot;trimtoempty&quot;], [&quot;limit&quot;, &quot;13&quot;, &quot;...&quot;]],</span>
+					<span style='font-size: 7.0pt;'>&nbsp;&nbsp;&quot;limit&quot; : [[&quot;trimtoempty&quot;], [&quot;limit&quot;, &quot;13&quot;, &quot;...&quot;]],</span>
 				</p>
 				<p class="HStyle0">
-					<span style='font-size: 7.0pt; line-height: 160%'>&nbsp;&nbsp;&quot;etc&quot; : [[&quot;date&quot;, 12]]</span>
+					<span style='font-size: 7.0pt;'>&nbsp;&nbsp;&quot;etc&quot; : [[&quot;date&quot;, 12]]</span>
 				</p>
 				<p class="HStyle0">
-					<span style='font-size: 7.0pt; line-height: 160%'>}</span>
+					<span style='font-size: 7.0pt;'>}</span>
 				</p>
 				<p class="HStyle17">
 					<span>선언형옵션으로 룰이 지정된 입력요소나 입력요소 블록을 지정 합니다.</span>
@@ -1545,16 +1549,16 @@ table.form {
 					<span>입력요소룰 ex)</span>
 				</p>
 				<p class="HStyle17">
-					<span style='font-size: 7.0pt; line-height: 160%'>&lt;input id=“limit” type=“text” data-format=’[[&quot;trimtoempty&quot;], </span>
+					<span style='font-size: 7.0pt;'>&lt;input id=“limit” type=“text” data-format=’[[&quot;trimtoempty&quot;], </span>
 				</p>
 				<p class="HStyle17">
-					<span style='font-size: 7.0pt; line-height: 160%'>[&quot;limit&quot;, &quot;13&quot;, &quot;...&quot; ]]‘ /&gt;</span>
+					<span style='font-size: 7.0pt;'>[&quot;limit&quot;, &quot;13&quot;, &quot;...&quot; ]]‘ /&gt;</span>
 				</p>
 				<p class="HStyle17">
 					<span>&nbsp;</span>
 				</p>
 				<p class="HStyle0" style='margin-left: 17.4pt; text-indent: -15.0pt;'>
-					<span style='font-size: 8.0pt; line-height: 160%'><img src="images/icon/alert.png" alt="" />&nbsp;룰 속성은 다음과 같이 정의 합니다.<br>[ [“룰명”, “룰arguments[0]”, “룰 arguments[1]”], ... ]</span>
+					<span style='font-size: 8.0pt;'><img src="images/icon/alert.png" alt="" />&nbsp;룰 속성은 다음과 같이 정의 합니다.<br>[ [“룰명”, “룰arguments[0]”, “룰 arguments[1]”], ... ]</span>
 				</p>
 			</td>
 		</tr>
@@ -1893,19 +1897,19 @@ table.form {
 					<span>ex)</span>
 				</p>
 				<p class="HStyle0">
-					<span style='font-size: 7.0pt; line-height: 160%'>{</span>
+					<span style='font-size: 7.0pt;'>{</span>
 				</p>
 				<p class="HStyle0">
-					<span style='font-size: 7.0pt; line-height: 160%'>&nbsp;&nbsp;&quot;numeric&quot; : [[&quot;required&quot;], [&quot;integer+commas&quot;]],</span>
+					<span style='font-size: 7.0pt;'>&nbsp;&nbsp;&quot;numeric&quot; : [[&quot;required&quot;], [&quot;integer+commas&quot;]],</span>
 				</p>
 				<p class="HStyle0">
-					<span style='font-size: 7.0pt; line-height: 160%'>&nbsp;&nbsp;&quot;generic&quot; : [[&quot;required&quot;], [&quot;korean&quot;]],</span>
+					<span style='font-size: 7.0pt;'>&nbsp;&nbsp;&quot;generic&quot; : [[&quot;required&quot;], [&quot;korean&quot;]],</span>
 				</p>
 				<p class="HStyle0">
-					<span style='font-size: 7.0pt; line-height: 160%'>&nbsp;&nbsp;&quot;limit&quot; : [[&quot;required&quot;], [&quot;alphabet&quot;]]</span>
+					<span style='font-size: 7.0pt;'>&nbsp;&nbsp;&quot;limit&quot; : [[&quot;required&quot;], [&quot;alphabet&quot;]]</span>
 				</p>
 				<p class="HStyle0">
-					<span style='font-size: 7.0pt; line-height: 160%'>}</span>
+					<span style='font-size: 7.0pt;'>}</span>
 				</p>
 				<p class="HStyle17">
 					<span>선언형옵션으로 룰이 지정된 입력요소나 입력요소 블록을 지정 합니다.</span>
@@ -1914,13 +1918,13 @@ table.form {
 					<span>ex)</span>
 				</p>
 				<p class="HStyle17">
-					<span style='font-size: 7.0pt; line-height: 160%'>&lt;input id=“numeric” type=“text” data-validate=’[[&quot;required&quot;], [&quot;integer+commas&quot;]]‘/&gt;</span>
+					<span style='font-size: 7.0pt;'>&lt;input id=“numeric” type=“text” data-validate=’[[&quot;required&quot;], [&quot;integer+commas&quot;]]‘/&gt;</span>
 				</p>
 				<p class="HStyle17">
 					<span>&nbsp;</span>
 				</p>
 				<p class="HStyle0" style='margin-left: 17.4pt; text-indent: -15.0pt;'>
-					<span style='font-size: 8.0pt; line-height: 160%'><img src="images/icon/alert.png" alt="" />&nbsp;룰 속성은 다음과 같이 정의 합니다.<br>[ [“룰명”, “룰arguments[0]”, “룰 arguments[1]”], ... ]</span>
+					<span style='font-size: 8.0pt;'><img src="images/icon/alert.png" alt="" />&nbsp;룰 속성은 다음과 같이 정의 합니다.<br>[ [“룰명”, “룰arguments[0]”, “룰 arguments[1]”], ... ]</span>
 				</p>
 			</td>
 		</tr>
@@ -2314,7 +2318,7 @@ table.form {
 					<span>&nbsp;&nbsp;{ name : “Mike” }</span>
 				</p>
 				<p class="HStyle0">
-					<span>], ‘</span><span style='font-size: 9.0pt; font-weight: "bold"; text-decoration: "underline"; line-height: 160%'>data.name == “홍길동”‘</span><span>);</span>
+					<span>], ‘</span><span style='font-size: 9.0pt; font-weight: "bold"; text-decoration: "underline";'>data.name == “홍길동”‘</span><span>);</span>
 				</p>
 				<p class="HStyle0">
 					<span>쉽게 생각하면 queryString 바깥에 if() 문이 감싸져있고 data 라고 이름지어진 row data를 가지고 비교한다고 생각 하면 됩니다.</span>
@@ -3428,10 +3432,10 @@ table.form {
 					<span>이벤트 콜백의 메서드는 인자로 onOpenData 가 들어옵니다.</span>
 				</p>
 				<p class="HStyle17">
-					<span style='font-size: 8.0pt; line-height: 160%'>&nbsp;</span>
+					<span style='font-size: 8.0pt;'>&nbsp;</span>
 				</p>
 				<p class="HStyle17">
-					<span style='font-size: 8.0pt; line-height: 160%'><img src="images/icon/alert.png" alt="" />&nbsp;url을 지정하여 다른 페이지를 가져왔을때만 사용가능</span>
+					<span style='font-size: 8.0pt;'><img src="images/icon/alert.png" alt="" />&nbsp;url을 지정하여 다른 페이지를 가져왔을때만 사용가능</span>
 				</p>
 			</td>
 		</tr>
@@ -3445,10 +3449,10 @@ table.form {
 					<span>onOpen 이벤트의 인자로 들어가 팝업에 전달될 데이터</span>
 				</p>
 				<p class="HStyle17">
-					<span style='font-size: 8.0pt; line-height: 160%'>&nbsp;</span>
+					<span style='font-size: 8.0pt;'>&nbsp;</span>
 				</p>
 				<p class="HStyle17">
-					<span style='font-size: 8.0pt; line-height: 160%'><img src="images/icon/alert.png" alt="" />&nbsp;url을 지정하여 다른 페이지를 가져왔을때만 사용가능</span>
+					<span style='font-size: 8.0pt;'><img src="images/icon/alert.png" alt="" />&nbsp;url을 지정하여 다른 페이지를 가져왔을때만 사용가능</span>
 				</p>
 			</td>
 		</tr>
@@ -3477,7 +3481,7 @@ table.form {
 					<span>&nbsp;</span>
 				</p>
 				<p class="HStyle17">
-					<span style='font-size: 8.0pt; line-height: 160%'><img src="images/icon/alert.png" alt="" />&nbsp;url을 지정하여 다른 페이지를 가져왔을때만 사용가능</span>
+					<span style='font-size: 8.0pt;'><img src="images/icon/alert.png" alt="" />&nbsp;url을 지정하여 다른 페이지를 가져왔을때만 사용가능</span>
 				</p>
 			</td>
 		</tr>
@@ -3491,10 +3495,10 @@ table.form {
 					<span>onClose 이벤트의 인자로 들어가 팝업의 부모페이지에 전달될 데이터</span>
 				</p>
 				<p class="HStyle17">
-					<span style='font-size: 8.0pt; line-height: 160%'>&nbsp;</span>
+					<span style='font-size: 8.0pt;'>&nbsp;</span>
 				</p>
 				<p class="HStyle17">
-					<span style='font-size: 8.0pt; line-height: 160%'><img src="images/icon/alert.png" alt="" />&nbsp;url을 지정하여 다른 페이지를 가져왔을때만 사용가능</span>
+					<span style='font-size: 8.0pt;'><img src="images/icon/alert.png" alt="" />&nbsp;url을 지정하여 다른 페이지를 가져왔을때만 사용가능</span>
 				</p>
 			</td>
 		</tr>
@@ -3758,7 +3762,7 @@ table.form {
 					<span>&nbsp;</span>
 				</p>
 				<p class="HStyle17">
-					<span style='font-size: 8.0pt; line-height: 160%'><img src="images/icon/alert.png" alt="" />&nbsp;선언형옵션은 탭요소(LI 태그)에 지정한다.</span>
+					<span style='font-size: 8.0pt;'><img src="images/icon/alert.png" alt="" />&nbsp;선언형옵션은 탭요소(LI 태그)에 지정한다.</span>
 				</p>
 			</td>
 		</tr>
@@ -3775,7 +3779,7 @@ table.form {
 					<span>&nbsp;</span>
 				</p>
 				<p class="HStyle17">
-					<span style='font-size: 8.0pt; line-height: 160%'><img src="images/icon/alert.png" alt="" />&nbsp;탭에 선언형옵션으로 active 가 true 로 설정되어있으면 해당 옵션이 적용 됩니다. </span>
+					<span style='font-size: 8.0pt;'><img src="images/icon/alert.png" alt="" />&nbsp;탭에 선언형옵션으로 active 가 true 로 설정되어있으면 해당 옵션이 적용 됩니다. </span>
 				</p>
 			</td>
 		</tr>
@@ -4487,10 +4491,10 @@ table.form {
 					<span>&nbsp;</span>
 				</p>
 				<p class="HStyle0">
-					<span style='font-size: 8.0pt; line-height: 160%'>신규입력 페이지와 같이 입력된 데이터를 서버에 보낼 때 사용 하면 됩니다.</span>
+					<span style='font-size: 8.0pt;'>신규입력 페이지와 같이 입력된 데이터를 서버에 보낼 때 사용 하면 됩니다.</span>
 				</p>
 				<p class="HStyle0">
-					<span style='font-size: 8.0pt; line-height: 160%'>N.form 초기화 후 add 메서를 호출하기만 하면 폼요소의 값들이 새로 생성된 데이터와 연동되므로 저장 버튼에 data 메서드를 호출하여 서버로 보내기만 하면 됩니다.</span>
+					<span style='font-size: 8.0pt;'>N.form 초기화 후 add 메서를 호출하기만 하면 폼요소의 값들이 새로 생성된 데이터와 연동되므로 저장 버튼에 data 메서드를 호출하여 서버로 보내기만 하면 됩니다.</span>
 				</p>
 			</td>
 		</tr>
@@ -4528,7 +4532,7 @@ table.form {
 					<span>&nbsp;</span>
 				</p>
 				<p class="HStyle17">
-					<span style='font-size: 8.0pt; line-height: 160%'><img src="images/icon/alert.png" alt="" />&nbsp;값 입력 시 key 에 해당하는 HTML 요소가 없으면 데이터만 생성한다.</span>
+					<span style='font-size: 8.0pt;'><img src="images/icon/alert.png" alt="" />&nbsp;값 입력 시 key 에 해당하는 HTML 요소가 없으면 데이터만 생성한다.</span>
 				</p>
 			</td>
 		</tr>
@@ -4742,7 +4746,7 @@ table.form {
 					<span>&nbsp;</span>
 				</p>
 				<p class="HStyle17">
-					<span style='font-size: 8.0pt; line-height: 160%'><img src="images/icon/alert.png" alt="" />&nbsp;그리드안에서 마우스 스크롤 시 그리드의 끝 영역이나 시작영역에 가면 브라우저 윈도우 스크롤이 자동으로 올라가거나 내려가서 그리드가 표시된 부분이 넘어가게 됩니다. 때문에 그리드 바디영역에 마우스가 올라가면 브라우저 윈도우 스크롤을 감춥니다. false로 지정하면 브라우저 기본모드로 동작 됩니다.</span>
+					<span style='font-size: 8.0pt;'><img src="images/icon/alert.png" alt="" />&nbsp;그리드안에서 마우스 스크롤 시 그리드의 끝 영역이나 시작영역에 가면 브라우저 윈도우 스크롤이 자동으로 올라가거나 내려가서 그리드가 표시된 부분이 넘어가게 됩니다. 때문에 그리드 바디영역에 마우스가 올라가면 브라우저 윈도우 스크롤을 감춥니다. false로 지정하면 브라우저 기본모드로 동작 됩니다.</span>
 				</p>
 			</td>
 		</tr>
@@ -4759,7 +4763,7 @@ table.form {
 					<span>&nbsp;</span>
 				</p>
 				<p class="HStyle17">
-					<span style='font-size: 8.0pt; line-height: 160%'><img src="images/icon/alert.png" alt="" />&nbsp;로우 선택시 해당로우의 TBODY요소에 “grid_selected__” 스타일클래스가 생성되고 선택이 해제되면 생성된 스타일클래스가 제거 됩니다.</span>
+					<span style='font-size: 8.0pt;'><img src="images/icon/alert.png" alt="" />&nbsp;로우 선택시 해당로우의 TBODY요소에 “grid_selected__” 스타일클래스가 생성되고 선택이 해제되면 생성된 스타일클래스가 제거 됩니다.</span>
 				</p>
 			</td>
 		</tr>
@@ -4776,7 +4780,7 @@ table.form {
 					<span>&nbsp;</span>
 				</p>
 				<p class="HStyle17">
-					<span style='font-size: 8.0pt; line-height: 160%'><img src="images/icon/alert.png" alt="" />&nbsp;로우 선택시 해당로우의 TBODY요소에 “grid_selected__” 스타일클래스가 생성되고 선택이 해제되면 생성된 스타일클래스가 제거 됩니다.</span>
+					<span style='font-size: 8.0pt;'><img src="images/icon/alert.png" alt="" />&nbsp;로우 선택시 해당로우의 TBODY요소에 “grid_selected__” 스타일클래스가 생성되고 선택이 해제되면 생성된 스타일클래스가 제거 됩니다.</span>
 				</p>
 			</td>
 		</tr>
@@ -4800,7 +4804,7 @@ table.form {
 					<span>&nbsp;</span>
 				</p>
 				<p class="HStyle17">
-					<span style='font-size: 8.0pt; line-height: 160%'><img src="images/icon/alert.png" alt="" />&nbsp;0지정시 모든로우를 한번에 만들어 표현 합니다. 이렇게 되면 브라우저는 모든로우가 생성될때까지 멈춰있게 됩니다.</span>
+					<span style='font-size: 8.0pt;'><img src="images/icon/alert.png" alt="" />&nbsp;0지정시 모든로우를 한번에 만들어 표현 합니다. 이렇게 되면 브라우저는 모든로우가 생성될때까지 멈춰있게 됩니다.</span>
 				</p>
 			</td>
 		</tr>
@@ -4817,7 +4821,7 @@ table.form {
 					<span>&nbsp;</span>
 				</p>
 				<p class="HStyle17">
-					<span style='font-size: 8.0pt; line-height: 160%'><img src="images/icon/alert.png" alt="" />&nbsp;너무 크게 지정하면 스크롤 페이징이 작동될때 브라우저에 부하가 발생되므로 그리드에 입력요소나 이미지가 들어 있다면 200 이하로 그렇지 않다면 1000 이하로 설정하는 것을 권장합니다.</span>
+					<span style='font-size: 8.0pt;'><img src="images/icon/alert.png" alt="" />&nbsp;너무 크게 지정하면 스크롤 페이징이 작동될때 브라우저에 부하가 발생되므로 그리드에 입력요소나 이미지가 들어 있다면 200 이하로 그렇지 않다면 1000 이하로 설정하는 것을 권장합니다.</span>
 				</p>
 			</td>
 		</tr>
@@ -4883,7 +4887,7 @@ table.form {
 					<span>&nbsp;</span>
 				</p>
 				<p class="HStyle17">
-					<span style='font-size: 8.0pt; line-height: 160%'><img src="images/icon/alert.png" alt="" />&nbsp;select 옵션이 true 일 때만 발생됩니다.</span>
+					<span style='font-size: 8.0pt;'><img src="images/icon/alert.png" alt="" />&nbsp;select 옵션이 true 일 때만 발생됩니다.</span>
 				</p>
 			</td>
 		</tr>
@@ -4912,7 +4916,7 @@ table.form {
 					<span>&nbsp;</span>
 				</p>
 				<p class="HStyle17">
-					<span style='font-size: 8.0pt; line-height: 160%'><img src="images/icon/alert.png" alt="" />&nbsp;스크롤페이징에 의해 페이징 될 때도 페이지가 완성 될 때마다 발생합니다.</span>
+					<span style='font-size: 8.0pt;'><img src="images/icon/alert.png" alt="" />&nbsp;스크롤페이징에 의해 페이징 될 때도 페이지가 완성 될 때마다 발생합니다.</span>
 				</p>
 			</td>
 		</tr>
@@ -5103,7 +5107,7 @@ table.form {
 					<span>&nbsp;</span>
 				</p>
 				<p class="HStyle17">
-					<span style='font-size: 8.0pt; line-height: 160%'><img src="images/icon/alert.png" alt="" />&nbsp;값 입력 시 지정한 로우의 key 에 해당하는 HTML 요소가 없으면 데이터만 생성한다.</span>
+					<span style='font-size: 8.0pt;'><img src="images/icon/alert.png" alt="" />&nbsp;값 입력 시 지정한 로우의 key 에 해당하는 HTML 요소가 없으면 데이터만 생성한다.</span>
 				</p>
 			</td>
 		</tr>
@@ -5156,3 +5160,4 @@ table.form {
 			<span>6)&nbsp;함수 arguments</span>
 		</p>
 	</a>
+</article>
