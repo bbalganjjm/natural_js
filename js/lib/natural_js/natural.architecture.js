@@ -304,7 +304,6 @@
 		});
 
 		var Controller = N.cont = function(obj, callback) {
-			debugger;
 			if(callback === undefined) {
 				return obj.data(obj.attr("id"));
 			}
