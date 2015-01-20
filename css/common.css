@@ -456,6 +456,10 @@ article.apiDoc h4 {
 	margin: 10px 0 10px 0;
 }
 
+article.apiDoc hr {
+	border: 1px dotted #00c000;
+}
+
 article.apiDoc ul.links p {
 	margin: 0;
 }
