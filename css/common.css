@@ -383,6 +383,7 @@ article.apiDoc table.form th {
 	background: -o-linear-gradient(top, #ddfddd, #effeee);
 	background: -webkit-linear-gradient(top, #ddfddd, #effeee);
 	background-color: #ccfccc;
+	width: 90px;
 	max-width: 90px;
 }
 
