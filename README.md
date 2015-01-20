@@ -35,7 +35,7 @@ Reference(참고)
 Features(특징)
 ========
 - Complete separation of the design area and development areas.
-- Provide UI-Architecture that resembling java servlet architecture.
+- Provide CVC architecture pattern based UI-Architecture.
 - Provide various UI-Components.
  * Controller, Communicator
  * Formatter, Validator
@@ -46,7 +46,7 @@ Features(특징)
 ----------------------------------------------
 
 - 디자인 영역과 개발영역을 완벽하게 분리 해 줍니다.
-- 자바 서블릿 아키텍처와 비슷한 UI 아키텍처를 제공합니다.
+- CVC 아키텍처 패턴 기반의 UI 아키텍처를 제공합니다.
 - 다양한 UI 컴포넌트와 라이브러리를 제공 합니다.
  * Controller, Communicator
  * Formatter, Validator
