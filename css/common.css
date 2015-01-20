@@ -457,9 +457,9 @@ article.apiDoc h4 {
 }
 
 article.apiDoc hr {
+	border: none;
 	border-bottom: 1px dotted #00c000;
-	margin-top: 10px;
-	margin-bottom: 5px;
+	padding-top: 10px;
 }
 
 article.apiDoc ul.links p {
