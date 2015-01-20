@@ -340,6 +340,7 @@ div.tab__ > ul {
 	overflow: hidden;
 	margin: 0;
 	padding: 0;
+	border-bottom: 1px solid #44f444;
 }
 
 div.tab__ > ul li {
@@ -347,7 +348,9 @@ div.tab__ > ul li {
 	margin-right: 1px;
 	padding: 0;
 	padding: 6px 5px 8px 5px;
-	border: 1px solid #44f444;
+	border-top: 1px solid #44f444;
+	border-left: 1px solid #44f444;
+	border-right: 1px solid #44f444;
 	cursor: pointer;
 	min-width: 80px;
 	border-radius: 3px 3px 0 0;
