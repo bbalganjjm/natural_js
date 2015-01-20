@@ -343,11 +343,6 @@ article a.link {
 	color: #00c000;
 }
 
-/* form example */
-table.form {
-	width: auto;
-}
-
 table.form th {
 	background: linear-gradient(left, #efefef, #effeee);
 	background: -ms-linear-gradient(left, #efefef, #effeee);
