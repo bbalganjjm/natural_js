@@ -347,22 +347,22 @@ div.tab__ > ul li {
 	margin-right: 1px;
 	padding: 0;
 	padding: 6px 5px 8px 5px;
-	border: 1px solid #dddddd;
+	border: 1px solid #008000;
 	cursor: pointer;
 }
 
 div.tab__ > ul li.tab_active__ {
-	background-image: -ms-linear-gradient(top, #efefef 0%, #dddddd 100%);
-	background-image: -moz-linear-gradient(top, #efefef 0%, #dddddd 100%);
-	background-image: -o-linear-gradient(top, #efefef 0%, #dddddd 100%);
-	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #efefef), color-stop(1, #dddddd));
-	background-image: -webkit-linear-gradient(top, #efefef 0%, #dddddd 100%);
-	background-image: linear-gradient(to bottom, #efefef 0%, #dddddd 100%);
-	background-color: #dddddd;
+	background-image: -ms-linear-gradient(top, #33c333 0%, #008000 100%);
+	background-image: -moz-linear-gradient(top, #33c333 0%, #008000 100%);
+	background-image: -o-linear-gradient(top, #33c333 0%, #008000 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #33c333), color-stop(1, #008000));
+	background-image: -webkit-linear-gradient(top, #33c333 0%, #008000 100%);
+	background-image: linear-gradient(to bottom, #33c333 0%, #008000 100%);
+	background-color: #008000;
 }
 
 div.tab__ > div {
-	border: 1px solid #dddddd;
+	border: 1px solid #008000;
 	border-top-width: 5px;
 	padding: 5px;
 }
