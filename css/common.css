@@ -272,6 +272,26 @@ section article {
 	word-break: break-word;
 }
 
+section article pre {
+	padding: 10px;
+	overflow: auto;
+	font-size: 85%;
+	line-height: 1.45;
+	background-color: #ddfddd;
+	border-radius: 3px;
+}
+
+section article pre > code {
+	display: inline;
+	max-width: initial;
+	padding: 0;
+	margin: 0;
+	overflow: initial;
+	line-height: inherit;
+	word-wrap: normal;
+	background-color: transparent;
+	border: 0;
+}
 
 footer {
 	margin: 10px auto;
