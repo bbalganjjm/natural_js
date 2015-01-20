@@ -93,10 +93,7 @@
 		</tr>
 		<tr>
 			<td>context</td>
-			<td>
-				<p>window</p>
-				<p>or JWS</p>
-			</td>
+			<td>window or JWS</td>
 			<td>obj</td>
 			<td>○</td>
 			<td>
@@ -106,12 +103,7 @@
 		</tr>
 		<tr>
 			<td>msg</td>
-			<td>
-				<p>(JWS,</p>
-				<p>HTML Tag</p>
-				<p>String) or</p>
-				<p>Object</p>
-			</td>
+			<td>(JWS, HTML Tag String) or Object</td>
 			<td>undefined</td>
 			<td>○</td>
 			<td>
@@ -126,10 +118,14 @@
 			<td></td>
 			<td>
 				<p>메시지의 변수를 vars로 지정한 값으로 치환 해줍니다.</p>
-				<p>ex)</p>
-				<p>msg : &quot;{0} 저는 {1}입니다."</p>
-				<p>vars : [&quot;안녕하세요&quot;, &quot;홍길동&quot;]</p>
-				<p>     -&gt;&quot;안녕하세요 저는 홍길동 입니다&quot;</p>
+				<pre><code>N(window).alert({
+	msg : &quot;{0} 저는 {1}입니다.&quot;,
+	vars : [&quot;안녕하세요&quot;, &quot;홍길동&quot;]
+}).show();
+
+/*
+	결과 메시지 : "안녕하세요 저는 홍길동 입니다."
+*/</code></pre>
 			</td>
 		</tr>
 		<tr>
@@ -258,10 +254,7 @@
 		<tr>
 			<td></td>
 			<td>context</td>
-			<td>
-				<p>window</p>
-				<p>or JWS</p>
-			</td>
+			<td>window or JWS</td>
 			<td align="center">-</td>
 			<td>기본옵션의 context 옵션과 같습니다.</td>
 		</tr>
@@ -434,10 +427,7 @@
 		<tr>
 			<td></td>
 			<td>context</td>
-			<td>
-				<p>window</p>
-				<p>or JWS</p>
-			</td>
+			<td>window or JWS</td>
 			<td align="center">-</td>
 			<td>기본옵션의 context 옵션과 같습니다.</td>
 		</tr>
@@ -559,10 +549,7 @@
 		<tr>
 			<td></td>
 			<td>context</td>
-			<td>
-				<p>window</p>
-				<p>or JWS</p>
-			</td>
+			<td>window or JWS</td>
 			<td align="center">-</td>
 			<td>기본옵션의 context 옵션과 같습니다.</td>
 		</tr>
@@ -681,10 +668,8 @@
 			<td></td>
 			<td>
 				<p>팝업이 열릴 때마다 발생되는 이벤트</p>
-
 				<p>이벤트 콜백 메서드는 팝업페이지의 Controller 에 구현되어야 합니다. 메서드면은 Controller 에 정의한 메서드명칭만 String 으로 지정 합니다.</p>
 				<p>이벤트 콜백의 메서드는 인자로 onOpenData 가 들어옵니다.</p>
-
 				<p> url을 지정하여 다른 페이지를 가져왔을때만 사용가능</p>
 			</td>
 		</tr>
@@ -695,7 +680,6 @@
 			<td></td>
 			<td>
 				<p>onOpen 이벤트의 인자로 들어가 팝업에 전달될 데이터</p>
-
 				<p> url을 지정하여 다른 페이지를 가져왔을때만 사용가능</p>
 			</td>
 		</tr>
@@ -707,10 +691,8 @@
 			<td>
 				<p>팝업이 닫힐 때마다 발생되는 이벤트.</p>
 				<p>이벤트 콜백의 메서드는 인자로 onCloseData 가 들어옵니다.</p>
-
 				<p>팝업 페이지에서 자신을 닫을때는 Controller에서 다음과 같이 처리 합니다.</p>
 				<p>this.caller.colse(onCloseData)</p>
-
 				<p> url을 지정하여 다른 페이지를 가져왔을때만 사용가능</p>
 			</td>
 		</tr>
@@ -721,7 +703,6 @@
 			<td></td>
 			<td>
 				<p>onClose 이벤트의 인자로 들어가 팝업의 부모페이지에 전달될 데이터</p>
-
 				<p> url을 지정하여 다른 페이지를 가져왔을때만 사용가능</p>
 			</td>
 		</tr>
@@ -785,10 +766,7 @@
 		<tr>
 			<td></td>
 			<td>context</td>
-			<td>
-				<p>window</p>
-				<p>or JWS</p>
-			</td>
+			<td>window or JWS</td>
 			<td align="center">-</td>
 			<td>기본옵션의 context 옵션과 같습니다.</td>
 		</tr>
@@ -835,26 +813,25 @@
 			<td>
 				<p>같은 페이지 내에 있는 탭과 탭 컨텐츠를 감싸고 있는 "DIV" 요소를 지정 합니다.</p>
 				<p>탭플릿 요소는 다음과 같이 작성 합니다.</p>
-				<p>ex)</p>
-				<p>&lt;div id=&quot;tab&quot;&gt;</p>
-				<p>  &lt;ul&gt;</p>
-				<p>    &lt;!-- 탭요소는  li 태그 로 표현 --&gt;</p>
-				<p>    &lt;li&gt;&lt;a href=&quot;#tab1&quot;&gt;Tab1&lt;/a&gt;&lt;/li&gt; </p>
-				<p>    &lt;li data-opts='{ &quot;url&quot; : &quot;prototype/tab1.html&quot; }'&gt;</p>
-				<p>      &lt;!-- 탭 컨텐츠와의 연결은 a TAG 로 표현 </p>
-				<p>           href 속성에 해당 컨텐츠의 #id 입력 --&gt;</p>
-				<p>      &lt;a href=&quot;#tab2&quot;&gt;Tab2&lt;/a&gt;</p>
-				<p>    &lt;/li&gt;</p>
-				<p>    &lt;li data-opts='{ &quot;url&quot; : &quot;prototype/tab2.html&quot;}'&gt;</p>
-				<p>      &lt;a href=&quot;#tab3&quot;&gt;Tab3&lt;/a&gt;&lt;/li&gt;</p>
-				<p>  &lt;/ul&gt;</p>
-				<p>  &lt;!-- 탭컨텐츠는  div 태그 로 표현 --&gt;</p>
-				<p>  &lt;div id=&quot;tab1&quot;&gt;</p>
-				<p>    Tab1</p>
-				<p>  &lt;/div&gt;</p>
-				<p>  &lt;div id=&quot;tab2&quot;&gt;&lt;/div&gt;</p>
-				<p>  &lt;div id=&quot;tab3&quot;&gt;&lt;/div&gt;</p>
-				<p>&lt;/div&gt;</p>
+				<pre><code>&lt;div id=&quot;tab&quot;&gt;
+	&lt;ul&gt;
+		&lt;!-- 탭요소는  li 태그 로 표현 --&gt;
+		&lt;li&gt;&lt;a href=&quot;#tab1&quot;&gt;Tab1&lt;/a&gt;&lt;/li&gt;
+		&lt;li data-opts='{ &quot;url&quot; : &quot;prototype/tab1.html&quot; }'&gt;
+			&lt;!-- 탭 컨텐츠와의 연결은 a TAG 로 표현 href 속성에 해당 컨텐츠의 #id 입력 --&gt;
+			&lt;a href=&quot;#tab2&quot;&gt;Tab2&lt;/a&gt;
+		&lt;/li&gt;
+		&lt;li data-opts='{ &quot;url&quot; : &quot;prototype/tab2.html&quot;}'&gt;
+			&lt;a href=&quot;#tab3&quot;&gt;Tab3&lt;/a&gt;
+		&lt;/li&gt;
+	&lt;/ul&gt;
+	&lt;!-- 탭컨텐츠는  div 태그 로 표현 --&gt;
+	&lt;div id=&quot;tab1&quot;&gt;
+		Tab1
+	&lt;/div&gt;
+	&lt;div id=&quot;tab2&quot;&gt;&lt;/div&gt;
+	&lt;div id=&quot;tab3&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
 			</td>
 		</tr>
 		<tr>
@@ -1283,14 +1260,14 @@
 			<td>Array</td>
 			<td>null</td>
 			<td></td>
-			<td>포맷룰을 지정 합니다. 6. Formater 참고</td>
+			<td>포맷룰을 지정 합니다. Natural-DATA - 포멧 룰 참고</td>
 		</tr>
 		<tr>
 			<td>vRules</td>
 			<td>Array</td>
 			<td>null</td>
 			<td></td>
-			<td>검증룰을 지정 합니다. 7. Validator 참고</td>
+			<td>검증룰을 지정 합니다. Natural-DATA - 검증 룰 참고</td>
 		</tr>
 	</table>
 
@@ -1306,13 +1283,13 @@
 			<td>format</td>
 			<td>Array[Array]</td>
 			<td>undefined</td>
-			<td>포맷룰을 지정 합니다. 6. Formater 참고</td>
+			<td>포맷룰을 지정 합니다. Natural-DATA - 포멧 룰 참고</td>
 		</tr>
 		<tr>
 			<td>validate</td>
 			<td>Array[Array]</td>
 			<td>undefined</td>
-			<td>검증룰을 지정 합니다. 7. Validator 참고</td>
+			<td>검증룰을 지정 합니다. Natural-DATA - 검증 룰 참고</td>
 		</tr>
 	</table>
 
@@ -1637,14 +1614,14 @@
 			<td>Array</td>
 			<td>null</td>
 			<td></td>
-			<td>포맷룰을 지정 합니다. 6. Formater 참고</td>
+			<td>포맷룰을 지정 합니다. Natural-DATA - 포멧 룰 참고</td>
 		</tr>
 		<tr>
 			<td>vRules</td>
 			<td>Array</td>
 			<td>null</td>
 			<td></td>
-			<td>검증룰을 지정 합니다. 7. Validator 참고</td>
+			<td>검증룰을 지정 합니다. Natural-DATA - 검증 룰 참고</td>
 		</tr>
 		<tr>
 			<td>rowHandler</td>
@@ -1703,13 +1680,13 @@
 			<td>format</td>
 			<td>Array[Array]</td>
 			<td>undefined</td>
-			<td>포맷룰을 지정 합니다. 6. Formater 참고</td>
+			<td>포맷룰을 지정 합니다. Natural-DATA - 포멧 룰 참고</td>
 		</tr>
 		<tr>
 			<td>validate</td>
 			<td>Array[Array]</td>
 			<td>undefined</td>
-			<td>검증룰을 지정 합니다. 7. Validator 참고</td>
+			<td>검증룰을 지정 합니다. Natural-DATA - 검증 룰 참고</td>
 		</tr>
 	</table>
 
