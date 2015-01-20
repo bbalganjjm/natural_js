@@ -340,7 +340,7 @@ div.tab__ > ul {
 	overflow: hidden;
 	margin: 0;
 	padding: 0;
-	border-bottom: 1px solid #44F470;
+	border-bottom: 2px solid #44F470;
 }
 
 div.tab__ > ul li {
@@ -360,6 +360,8 @@ div.tab__ > ul li {
 
 div.tab__ > ul li > a {
 	font-weight: bold;
+	color: #009000;
+	text-shadow: -1px -1px #44F470;
 }
 
 div.tab__ > ul li.tab_active__ {
@@ -370,7 +372,10 @@ div.tab__ > ul li.tab_active__ {
 	background-image: -webkit-linear-gradient(top, #77F470 0%, #44F470 100%);
 	background-image: linear-gradient(to bottom, #77F470 0%, #44F470 100%);
 	background-color: #44F470;
-	text-shadow: -1px -1px #44F470;
+}
+
+div.tab__ > ul li.tab_active__ > a {
+	color: #005000;
 }
 
 div.tab__ > div {
