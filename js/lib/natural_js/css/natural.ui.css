@@ -351,6 +351,11 @@ div.tab__ > ul li {
 	cursor: pointer;
 	min-width: 80px;
 	border-radius: 3px 3px 0 0;
+	text-align: center;
+}
+
+div.tab__ > ul li > a {
+	font-weight: bold;
 }
 
 div.tab__ > ul li.tab_active__ {
@@ -362,10 +367,6 @@ div.tab__ > ul li.tab_active__ {
 	background-image: linear-gradient(to bottom, #55f555 0%, #44f444 100%);
 	background-color: #44f444;
 	text-shadow: -1px -1px #44f444;
-}
-
-div.tab__ > ul li.tab_active__ > a {
-	color: cceccc;
 }
 
 div.tab__ > div {
