@@ -564,15 +564,17 @@
 				<p>필터링 조건을 입력 합니다.</p>
 				<p>조건은 다음과 같이 자바스크립트 비교 문법으로 지정 합니다.</p>
 				<p>* queryString : 'data.키명 == "비교값"';</p>
-				<pre><code>N.data.filter([
+				<pre><code>var fData = N.data.filter([
 	{ name : "홍길동" },
 	{ name : "Mike" }
 ], 'data.name == "Mike"');
 
-결과값 :
+/*
+fData의 값(결과값) :
 [
 	{ name : "Mike" }
-]</code></pre>
+]
+*/</code></pre>
 				<p>쉽게 생각하면 queryString 바깥에 if() 문이 감싸져있고 data 라고 이름지어진 row data를 가지고 비교한다고 생각 하면 됩니다.</p>
 			</td>
 		</tr>
