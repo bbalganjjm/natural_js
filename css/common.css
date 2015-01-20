@@ -308,6 +308,7 @@ article ul li,
 article dl.qna dt,
 article dl.qna dd {
 	line-height: 150%;
+	word-break: break-word;
 }
 
 article dl.qna dt {
