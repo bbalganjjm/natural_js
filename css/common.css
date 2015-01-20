@@ -456,7 +456,6 @@ article.apiDoc h4 {
 	margin: 10px 0 10px 0;
 }
 
-article.apiDoc ul.links > li > a {
-	padding-top: 5px;
-	padding-bottom: 5px;
+article.apiDoc ul.links p {
+	padding: 0;
 }
