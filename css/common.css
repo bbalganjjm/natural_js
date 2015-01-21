@@ -441,8 +441,8 @@ article.apiDoc .bi {
 }
 
 article.apiDoc .alert {
-	background: url("../images/icon/alert.png") no-repeat 0 50%;
-	font-size: 88%;
+	background: url("../images/icon/alert.png") no-repeat 0 5px;
+	font-size: 89%;
 	padding: 5px 0 5px 22px;
 }
 
