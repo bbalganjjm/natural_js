@@ -1,13 +1,6 @@
-<div id="validator">
-	<div class="intro">
-		<h1><b>Validator</b> : Validator(N.format)는 입력한 값들을 지정한 검증(Validate) 룰대로 검증한 결과 값을 반환하거나 해당 입력요소 주변에 표시 해 줍니다.</h1>
-		<h2>[Validate(Command)] 버튼을 클릭하면 Data 영역에 있는 JSON 데이터를 지정한룰(소스 참고)대로 검증하여 Command Result 부분에 검증 결과값을 표시 해 줍니다.</h2>
-		<h2>[Validate] 버튼을 클릭하면 데모영역에 있는 HTML 요소들에  각 요소들의 class 속성에 정의된  검증룰을 기반으로 데이터를 검증 하여 해당요소에 주변에 검증 메시지를 표시 해 줍니다.</h2>
-	</div>
-	<div class="divBar">DATA</div>
-	<div class="dataBox">
-		<textarea id="data" class="data">
-[
+<article id="validator">
+	<p class="smallContTit">DATA :</p>
+	<pre><code id="data">[
     {
         "numeric": 266734.12,
         "generic": "abcDefGh",
@@ -20,75 +13,72 @@
         "limit": "Natural-JS 좋아요?",
         "etc": 1
     }
-]
-		</textarea>
+]</code></pre>
+
+	<p class="smallContTit">Declarative Result : </p>
+	<table id="inputBox" class='form' style="width: 100%;">
+		<tr>
+			<th align="right" width="10%"><label for="numeric">Input 1</label></th>
+			<td width="90%">
+				<input id="numeric" type="text" data-validate='[["required"], ["number"]]' /> data-validate='[["required"], ["integer+commas"]]'
+			</td>
+		</tr>
+		<tr>
+			<th align="right"><label for="generic">Input 2</label></th>
+			<td>
+				<input id="generic" type="text" data-validate='[["required"], ["korean"]]' /> data-validate='[["required"], ["korean"]]'
+			</td>
+		</tr>
+		<tr>
+			<th align="right"><label for="limit">Input 3</label></th>
+			<td>
+				<textarea id="limit" rows="5" cols="40" data-validate='[["required"], ["alphabet"]]'></textarea>
+				data-validate='[["required"], ["alphabet"]]'
+			</td>
+		</tr>
+		<tr>
+			<th align="right"><label for="etc">etc</label></th>
+			<td>
+				<input id="etc" type="text" />
+			</td>
+		</tr>
+	</table>
+
+	<div align="center" class="btnBox">
+		<a id="btnValidateCommand" href="#" data-opts='{ "color": "gray", "size": "large" }'>Validate(Command)</a>
+		<a id="btnValidateDeclarative" href="#" data-opts='{ "color": "skyblue", "size": "large" }'>Validate</a>
 	</div>
 
-	<div class="divBar">DEMO</div>
-	<div class="demoBox">
-		<table id="inputBox" class='form' style="width: 100%;">
-			<tr>
-				<th align="right" width="10%"><label for="numeric">Input 1</label></th>
-				<td width="90%">
-					<input id="numeric" type="text" data-validate='[["required"], ["number"]]' /> data-validate='[["required"], ["integer+commas"]]'
-				</td>
-			</tr>
-			<tr>
-				<th align="right"><label for="generic">Input 2</label></th>
-				<td>
-					<input id="generic" type="text" data-validate='[["required"], ["korean"]]' /> data-validate='[["required"], ["korean"]]'
-				</td>
-			</tr>
-			<tr>
-				<th align="right"><label for="limit">Input 3</label></th>
-				<td>
-					<textarea id="limit" rows="5" cols="40" data-validate='[["required"], ["alphabet"]]'></textarea>
-					data-validate='[["required"], ["alphabet"]]'
-				</td>
-			</tr>
-			<tr>
-				<th align="right"><label for="etc">etc</label></th>
-				<td>
-					<input id="etc" type="text" />
-				</td>
-			</tr>
-		</table>
+	<p class="smallContTit">Command Result : </p>
+	<pre><code id="result"></code></pre>
 
-		<div align="center" class="btnBox">
-			<a id="btnValidateCommand" href="#" data-opts='{ "color": "gray", "size": "large" }'>Validate(Command)</a>
-			<a id="btnValidateDeclarative" href="#" data-opts='{ "color": "skyblue", "size": "large" }'>Validate</a>
-		</div>
-
-		<p>Command Result : </p>
-		<div class="result pre"></div>
-	</div>
-
-	<div class="divBar">SOURCE CODE [ Click! this bar ]</div>
-	<div class="sourceBox">
-	</div>
-</div>
+	<p class="smallContTit">Source Code :</p>
+	<pre><code id="sourceCode"></code></pre>
+</article>
 
 <script type="text/javascript">
 
-N("div#validator").cont({
+N("article#validator").cont({
     init : function(view, request) {
-    	// put source code
-    	IndexController.getSourceCode(request.get("url"), N("div.sourceBox", view));
+    	// source Code
+    	N.comm({
+       		url : "html/apid/" + view.attr("id") + ".html",
+       		dataType : "html"
+       	}).submit(function(html) {
+       		$("#sourceCode", view).text(html);
+       	});
 
-    	// make button
-    	this.initButton(view);
-
-    	// event bind
-        this.setEvents(view);
-    },
-    initButton : function(view) {
+    	// initialize buttons in div.btnBox
     	N("div.btnBox a", view).button();
+
+    	// bind events
+        this.setEvents(view);
     },
     setEvents : function(view) {
     	N("a#btnValidateCommand", view).click(function(e) {
             e.preventDefault();
 
-            var data = eval(N("textarea.data").val());
+            var data = eval(N("code#data").text());
 
             var pData = JSON.stringify(N(data).validator({
                 "numeric" : [ [ "required" ], [ "integer+commas" ] ],
@@ -96,7 +86,7 @@ N("div#validator").cont({
                 "limit" : [ [ "required" ], [ "alphabet" ] ]
             }).validate());
 
-            N("div.result", view).text(N.json.format(pData));
+            N("#result", view).text(N.json.format(pData));
         });
 
         N("a#btnValidateDeclarative", view).click(function(e) {
