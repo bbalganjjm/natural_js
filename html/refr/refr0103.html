@@ -463,6 +463,7 @@ N("article#refr0103").cont({
     	//load api demo page
     	N(".apidemo", view).each(function() {
     		var thisEle = N(this);
+    		console.log("html/apid/" + thisEle.data("page") + ".html");
     		thisEle.comm("html/apid/" + thisEle.data("page") + ".html").submit();
     	});
     }
