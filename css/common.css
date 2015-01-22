@@ -331,11 +331,20 @@ article h2 {
 }
 
 article h3 {
+	margin-top: 30px;
 	font-size: 15px;
 }
 
 article h4 {
 	font-size: 14px;
+}
+
+.smallContTit {
+	padding-left: 16px;
+	font-size: 13px;
+	font-weight: bold;
+	background: url("../images/icon/sct_leaf.gif") no-repeat 0 2px;
+	margin-top: 20px;
 }
 
 article a.link {
@@ -377,14 +386,6 @@ table.form td input[type='text']:focus, table.form td select:focus, table.form t
 div#popupTemp {
 	padding: 20px;
 }
-
-.smallContTit {
-	padding-left: 16px;
-	font-size: 13px;
-	font-weight: bold;
-	background: url("../images/icon/sct_leaf.gif") no-repeat 0 2px;
-}
-
 
 /* API Document */
 article.apiDoc table.form {
