@@ -357,13 +357,17 @@ table.form th, table.form td {
 	border: 1px solid #cceccc;
 }
 
-table.form td input[type='text']:hover, table.form td select:hover, table.form td textarea:hover,
-table.form td input[type='text']:focus, table.form td select:focus, table.form td textarea:focus {
+table.form td input[type='text'], table.form td select, table.form td textarea,
+table.form td input[type='text'], table.form td select, table.form td textarea {
 	border-color: #faaeae;
 	background-color: #ffe5e5;s
-	transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 	box-shadow: inset 1px 1px 1px rgba(0,0,0,0.075);
 	font-size: 12px;
+}
+
+table.form td input[type='text']:hover, table.form td select:hover, table.form td textarea:hover,
+table.form td input[type='text']:focus, table.form td select:focus, table.form td textarea:focus {
+	transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 }
 
 /* popup example */
