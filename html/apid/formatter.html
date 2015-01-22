@@ -1,8 +1,6 @@
 <article id="formatter">
 	<p class="smallContTit">DATA :</p>
-	<div class="dataBox">
-		<pre><code id="data">
-[
+	<pre><code id="data">[
     {
         "numeric": 266734.12,
         "generic": "abcDefGh",
@@ -16,49 +14,47 @@
         "etc": 20140626121212
     }
 ]
-		</code></pre>
+	</code></pre>
+
+	<p class="smallContTit">Declarative Result : </p>
+	<table id="inputBox" class='form' style="width: 100%;">
+		<tr>
+			<th align="right" width="10%"><label for="numeric">Input 1</label></th>
+			<td width="90%">
+				<input id="numeric" type="text" data-format='[["trimtoempty"], ["numeric", "#,###.##0000"]]' /> data-format='[["trimtoempty"], ["numeric", "#,###.##0000"]]'
+			</td>
+		</tr>
+		<tr>
+			<th align="right"><label for="generic">Input 2</label></th>
+			<td>
+				<input id="generic" type="text" data-format='[["trimtoempty"], ["generic", "@@ABCD"]]' /> data-format='[["trimtoempty"], ["generic", "@@ABCD"]]'
+			</td>
+		</tr>
+		<tr>
+			<th align="right"><label for="limit">Input 3</label></th>
+			<td>
+				<textarea id="limit" rows="5" cols="40" data-format='[["trimtoempty"], ["limit", "13", "..."]]'></textarea>
+				data-format='[["trimtoempty"], ["limit", "13", "..."]]'
+			</td>
+		</tr>
+		<tr>
+			<th align="right"><label for="etc">ETC</label></th>
+			<td><span id="etc" data-format='[["date", 12]]'></span> data-format='[["date", 12]]'</td>
+		</tr>
+	</table>
+
+	<div align="center" class="btnBox">
+		<a id="btnFormatCommand" href="#" data-opts='{ "color": "gray", "size": "large" }'>Format(Command)</a>
+		<a id="btnFormatDeclarative" href="#" data-opts='{ "color": "skyblue", "size": "large" }'>Format</a>
+		<a id="btnUnFormatEvent" href="#" data-opts='{ "size": "large" }'>Run unformat event</a>
+		<a id="btnFormatEvent" href="#" data-opts='{ "size": "large" }'>Run format event</a>
 	</div>
-	<div class="demoBox">
-		<p class="smallContTit">Declarative Result : </p>
-		<table id="inputBox" class='form' style="width: 100%;">
-			<tr>
-				<th align="right" width="10%"><label for="numeric">Input 1</label></th>
-				<td width="90%">
-					<input id="numeric" type="text" data-format='[["trimtoempty"], ["numeric", "#,###.##0000"]]' /> data-format='[["trimtoempty"], ["numeric", "#,###.##0000"]]'
-				</td>
-			</tr>
-			<tr>
-				<th align="right"><label for="generic">Input 2</label></th>
-				<td>
-					<input id="generic" type="text" data-format='[["trimtoempty"], ["generic", "@@ABCD"]]' /> data-format='[["trimtoempty"], ["generic", "@@ABCD"]]'
-				</td>
-			</tr>
-			<tr>
-				<th align="right"><label for="limit">Input 3</label></th>
-				<td>
-					<textarea id="limit" rows="5" cols="40" data-format='[["trimtoempty"], ["limit", "13", "..."]]'></textarea>
-					data-format='[["trimtoempty"], ["limit", "13", "..."]]'
-				</td>
-			</tr>
-			<tr>
-				<th align="right"><label for="etc">ETC</label></th>
-				<td><span id="etc" data-format='[["date", 12]]'></span> data-format='[["date", 12]]'</td>
-			</tr>
-		</table>
 
-		<div align="center" class="btnBox">
-			<a id="btnFormatCommand" href="#" data-opts='{ "color": "gray", "size": "large" }'>Format(Command)</a>
-			<a id="btnFormatDeclarative" href="#" data-opts='{ "color": "skyblue", "size": "large" }'>Format</a>
-			<a id="btnUnFormatEvent" href="#" data-opts='{ "size": "large" }'>Run unformat event</a>
-			<a id="btnFormatEvent" href="#" data-opts='{ "size": "large" }'>Run format event</a>
-		</div>
+	<p class="smallContTit">Command Result : </p>
+	<pre><code id="result"></code></pre>
 
-		<p class="smallContTit">Command Result : </p>
-		<pre><code id="result"></code></pre>
-
-		<p class="smallContTit">Source Code :</p>
-		<pre><code id="sourceCode"></code></pre>
-	</div>
+	<p class="smallContTit">Source Code :</p>
+	<pre><code id="sourceCode"></code></pre>
 </article>
 
 <script type="text/javascript">
