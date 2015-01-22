@@ -387,16 +387,6 @@ article.apiDoc table.form th {
 	max-width: 90px;
 }
 
-
-article.apiDoc table.api th {
-	background: linear-gradient(left, #efefef, #effeee);
-	background: -ms-linear-gradient(left, #efefef, #effeee);
-	background: -moz-linear-gradient(left, #efefef, #effeee);
-	background: -o-linear-gradient(left, #efefef, #effeee);
-	background: -webkit-linear-gradient(left, #efefef, #effeee);
-	background-color: #efefef;
-}
-
 article.apiDoc table.form td {
 	font-size: 12px;
 }
