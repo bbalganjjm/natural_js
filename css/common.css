@@ -359,8 +359,8 @@ table.form th, table.form td {
 
 table.form td input[type='text'], table.form td select, table.form td textarea,
 table.form td input[type='text'], table.form td select, table.form td textarea {
-	border-color: #faaeae;
-	background-color: #ffe5e5;s
+	border-color: #cceccc;
+	background-color: #ffe5e5;
 	font-size: 12px;
 }
 
