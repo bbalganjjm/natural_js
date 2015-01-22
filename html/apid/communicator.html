@@ -1,4 +1,4 @@
-<article id="comm">
+<article id="communicator">
 	<div class="demoBox">
 		<p class="section">1. Get json data from server or file</p>
 
@@ -63,18 +63,30 @@ function(data) {
 
 		<p>Result : </p>
 		<div class="result" style="height: 552px;"></div>
+
+		<p class="smallContTit">Source Code :</p>
+		<pre><code id="sourceCode"></code></pre>
 	</div>
 </article>
 
 <script type="text/javascript">
 
-N("div#article").cont({
+N("article#communicator").cont({
     init : function(view, request) {
     	// initialize buttons in div.btnBox
     	this.initButton(view);
 
     	// bind events
     	this.setEvent(view, this);
+
+    	// source Code
+    	N.comm({
+       		url : "html/apid/" + view.attr("id") + ".html",
+       		contentType : "application/x-www-form-urlencoded",
+       		dataType : "html"
+       	}).submit(function(html) {
+       		$("#sourceCode", view).text(html);
+       	});
     },
     initButton : function(view) {
     	N("div.btnBox a", view).button();
