@@ -47,6 +47,7 @@ span.block_overlay_msg__ li.msg_box__ {
     padding: 0;
     color: #4f535c;
     font-size: 12px;
+    line-height: 20px;
 }
 
 span.block_overlay_msg__ li.buttonBox__ {
