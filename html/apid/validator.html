@@ -78,7 +78,7 @@ N("article#validator").cont({
     	N("a#btnValidateCommand", view).click(function(e) {
             e.preventDefault();
 
-            var data = eval(N("code#data").text());
+            var data = eval(N("code#data", view).text());
 
             var pData = JSON.stringify(N(data).validator({
                 "numeric" : [ [ "required" ], [ "integer+commas" ] ],
