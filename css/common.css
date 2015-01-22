@@ -492,3 +492,8 @@ article.apiDoc .apidemo {
 	border: 1px solid #77f777;
 	margin-bottom: 15px;
 }
+
+article.apiDoc .apidemo .result {
+	background-color: #ddfddd;
+	border-radius: 3px;
+}
