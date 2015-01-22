@@ -81,7 +81,7 @@
 	    	N("a#btnFormatCommand", view).click(function(e) {
 	            e.preventDefault();
 
-	            var data = eval(N("code.data").val());
+	            var data = eval(N("code#data").val());
 
 	            var pData = N(data).formatter({
 	                "numeric" : [ [ "trimtoempty" ], [ "numeric", "#,###.##0000" ] ],
@@ -95,7 +95,7 @@
 
 	        N("a#btnFormatDeclarative", view).click(function(e) {
 	            e.preventDefault();
-	            var data = eval(N("code.data").val());
+	            var data = eval(N("code#data").val());
 	            N(data).formatter("#inputBox").format();
 	        });
 
