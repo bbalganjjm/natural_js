@@ -13,7 +13,7 @@
 N("article#controller").cont({
     init : function(view, request) {
     	// view info
-    	N("#view", view).text(view);
+    	N("#view", view).text('<article id="controller">\n' + view.html() + "\n</article>");
 
     	// request info
     	N("#request", view).text(N.json.format(request.get()));
