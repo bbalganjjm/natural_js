@@ -1,0 +1,108 @@
+<div id="alert">
+	<div class="intro">
+		<h1><b>Alert</b> : Alert(N.alert)는 text 나 html 을 표시 해주는 메시지 다이얼로그를 간편하게 만들어 줍니다.</h1>
+		<h2>Javascript의 alert 나 confirm 과 같은 역할을 수행 합니다.</h2>
+		<h2>[Show alert] 버튼을 클릭하면 지정한 옵션이 반영된 메시지 다이얼로그을 볼 수 있습니다.</h2>
+		<h2>ESC 키를 누르면 다이얼로그가 닫힙니다.</h2>
+	</div>
+	<div class="divBar">DEMO</div>
+	<div class="demoBox">
+		<p>Default options : </p>
+		<table class="form" style="width: 100%;">
+			<tr>
+				<th align="right" width="10%">context</th>
+				<td width="40%"><input id="context" type="text" value="div.result" /> window or jQuery selector</td>
+				<th align="right" width="10%">msg</th>
+				<td width="40%"><textarea id="msg" rows="3" cols="60">
+ Mollit elit qui reprehenderit fugiat excepteur adipisicing sunt id proident laborum sint proident. Amet cupidatat ipsum do irure qui magna sunt pariatur commodo eiusmod ipsum qui ad culpa.
+				</textarea></td>
+			</tr>
+			<tr>
+				<th align="right">confirm</th>
+				<td><input id="confirm" type="checkbox" />If this checkbox with check(true), display "OK" and "Cancel" button</td>
+				<th align="right">title</th>
+				<td><input id="title" type="text" value="Alert test" /></td>
+			</tr>
+			<tr>
+				<th align="right">modal</th>
+				<td><input id="modal" type="checkbox" checked="checked" />If this checkbox with uncheck(false), hide modal overlay layer</td>
+				<th align="right">button</th>
+				<td><input id="button" type="checkbox" checked="checked" />If this checkbox with uncheck(false), hide button bar</td>
+			</tr>
+			<tr>
+				<th align="right" width="85">width</th>
+				<td width="*"><input id="width" type="text" value="300" /> Message contents width, 0 is auto width</td>
+				<th align="right" width="85">height</th>
+				<td width="*"><input id="height" type="text" value="100" /> Message contents height, 0 is auto height</td>
+			</tr>
+			<tr>
+				<th align="right" width="85">onOk</th>
+				<td><textarea id="onOk" rows="3" cols="60">
+function() {
+	alert("Ok");
+}
+				</textarea><br />Callback function for ok button event</td>
+				<th align="right" width="85">onCancel</th>
+				<td><textarea id="onCancel" rows="3" cols="60">
+function() {
+	alert("Cancel");
+}
+				</textarea><br />Callback function for cancel button event</td>
+			</tr>
+		</table>
+
+		<div align="center" class="btnBox">
+			<a id="btnShow" href="#" data-opts='{ "color": "skyblue", "size": "large" }'>Show alert</a>
+		</div>
+
+		<p>Result : </p>
+	    <div align="center" class="result pre"></div>
+	</div>
+    <div class="divBar">SOURCE CODE [ Click! this bar ]</div>
+    <div class="sourceBox">
+	</div>
+</div>
+<script type="text/javascript">
+
+N("div#alert").cont({
+    init : function(view, request) {
+    	// put source code
+    	IndexController.getSourceCode(request.get("url"), N("div.sourceBox", view));
+
+    	// make button
+    	this.initButton(view);
+
+    	// event bind
+    	this.setEvent(view, this);
+	},
+    initButton : function(view) {
+    	N("div.btnBox a", view).button();
+    },
+    setEvent : function(view, this_) {
+        N("a#btnShow", view).click(function(e) {
+            e.preventDefault();
+
+            var context = N("input#context", view).val();
+            if(context === "window") {
+            	context = window;
+            }
+            var opts = {
+            	msg : N("textarea#msg", view).val(),
+            	confirm : N("input#confirm", view).is(":checked"),
+            	title : N.string.trimToNull(N("input#title", view).val()) !== null ?
+            			N("input#title", view).val() : undefined,
+            	modal : N("input#modal", view).is(":checked"),
+            	button : N("input#button", view).is(":checked"),
+            	width : Number(N("input#width", view).val()),
+            	height : Number(N("input#height", view).val()),
+            	onOk : N.string.trimToNull(N("textarea#onOk", view).val()) !== null ?
+            			eval("(" + N("textarea#onOk", view).val() + ")") : null,
+            	onCancel : N.string.trimToNull(N("textarea#onCancel", view).val()) !== null ?
+            			eval("(" + N("textarea#onCancel", view).val() + ")") : null
+            };
+            N(context).alert(opts).show()
+        });
+    }
+});
+
+</script>

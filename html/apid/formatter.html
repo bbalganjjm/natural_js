@@ -1,0 +1,123 @@
+<div id="formatter">
+	<div class="intro">
+		<h1><b>Formatter</b> : Formatter(N.format)는 입력한 값들을 지정한 포멧 룰대로 양식화(formatting)한 값을 반환하거나 입력요소에 표시 해 줍니다.</h1>
+		<h2>[Format(Command)] 버튼을 클릭하면 Data 영역에 있는 JSON 데이터를 지정한룰(소스 참고)대로 포멧팅하여 Command Result 부분에 표시 해 줍니다.</h2>
+		<h2>[Format] 버튼을 클릭하면 데모영역에 있는 HTML 요소들에  각 요소들의 class 속성에 정의된  포멧룰을 기반으로 데이터를 양식화 하여 해당요소에 표시 해 줍니다.</h2>
+		<h2>입력요소에 Formatter 가 바인드 되면 format 과 unformat 이벤트를 생성합니다.</h2>
+		<h2>[Run unformat event] 버튼을 클릭하면 Formatter 가 적용된 입력요소의 format 이벤트를 실행 합니다. format 이벤트는 해당입력요소에 입력된 값을 양식화 해 줍니다.</h2>
+		<h2>[Run format event] 버튼을 클릭하면 Formatter 가 적용된 입력요소의 unformat 이벤트를 실행 합니다. unformat 이벤트는 해당입력요소에 입력된 값을 원래 바인드 되어 있는 값으로 돌려 줍니다.</h2>
+	</div>
+	<div class="divBar">DATA</div>
+	<div class="dataBox">
+		<textarea id="data" class="data">
+[
+    {
+        "numeric": 266734.12,
+        "generic": "abcDefGh",
+        "limit": "안녕하세요. 반가워요. 저는 Natural-JS 입니다.",
+        "etc": 20140626121212
+    },
+    {
+        "numeric": 123334424.3533,
+        "generic": "ijkLMNop",
+        "limit": "Natural-JS 좋아요?",
+        "etc": 20140626121212
+    }
+]
+		</textarea>
+	</div>
+	<div class="divBar">DEMO</div>
+	<div class="demoBox">
+		<table id="inputBox" class='form' style="width: 100%;">
+			<tr>
+				<th align="right" width="10%"><label for="numeric">Input 1</label></th>
+				<td width="90%">
+					<input id="numeric" type="text" data-format='[["trimtoempty"], ["numeric", "#,###.##0000"]]' /> data-format='[["trimtoempty"], ["numeric", "#,###.##0000"]]'
+				</td>
+			</tr>
+			<tr>
+				<th align="right"><label for="generic">Input 2</label></th>
+				<td>
+					<input id="generic" type="text" data-format='[["trimtoempty"], ["generic", "@@ABCD"]]' /> data-format='[["trimtoempty"], ["generic", "@@ABCD"]]'
+				</td>
+			</tr>
+			<tr>
+				<th align="right"><label for="limit">Input 3</label></th>
+				<td>
+					<textarea id="limit" rows="5" cols="40" data-format='[["trimtoempty"], ["limit", "13", "..."]]'></textarea>
+					data-format='[["trimtoempty"], ["limit", "13", "..."]]'
+				</td>
+			</tr>
+			<tr>
+				<th align="right"><label for="etc">ETC</label></th>
+				<td><span id="etc" data-format='[["date", 12]]'></span> data-format='[["date", 12]]'</td>
+			</tr>
+		</table>
+
+		<div align="center" class="btnBox">
+			<a id="btnFormatCommand" href="#" data-opts='{ "color": "gray", "size": "large" }'>Format(Command)</a>
+			<a id="btnFormatDeclarative" href="#" data-opts='{ "color": "skyblue", "size": "large" }'>Format</a>
+			<a id="btnUnFormatEvent" href="#" data-opts='{ "size": "large" }'>Run unformat event</a>
+			<a id="btnFormatEvent" href="#" data-opts='{ "size": "large" }'>Run format event</a>
+		</div>
+
+		<p>Command Result : </p>
+		<div class="result pre"></div>
+	</div>
+
+	<div class="divBar">SOURCE CODE [ Click! this bar ]</div>
+	<div class="sourceBox">
+	</div>
+</div>
+
+<script type="text/javascript">
+
+N("div#formatter").cont({
+    init : function(view, request) {
+    	// put source code
+    	IndexController.getSourceCode(request.get("url"), N("div.sourceBox", view));
+
+    	// make button
+    	this.initButton(view);
+
+    	// event bind
+        this.setEvents(view);
+    },
+    initButton : function(view) {
+    	N("div.btnBox a", view).button();
+    },
+    setEvents : function(view) {
+    	N("a#btnFormatCommand", view).click(function(e) {
+            e.preventDefault();
+
+            var data = eval(N("textarea.data").val());
+
+            var pData = N(data).formatter({
+                "numeric" : [ [ "trimtoempty" ], [ "numeric", "#,###.##0000" ] ],
+                "generic" : [ [ "trimtoempty" ], [ "generic", "@@ABCD" ] ],
+                "limit" : [ [ "trimtoempty" ], [ "limit", "13", "..." ] ],
+                "etc" : [["date", 12]]
+            }).format();
+
+            N("div.result", view).text(N.json.format(pData));
+        });
+
+        N("a#btnFormatDeclarative", view).click(function(e) {
+            e.preventDefault();
+            var data = eval(N("textarea.data").val());
+            N(data).formatter("#inputBox").format();
+        });
+
+        N("a#btnUnFormatEvent", view).click(function(e) {
+            e.preventDefault();
+            N("#inputBox :input", view).trigger("unformat");
+        });
+
+        N("a#btnFormatEvent", view).click(function(e) {
+            e.preventDefault();
+            N("#inputBox :input", view).trigger("format");
+        });
+    }
+});
+
+</script>
