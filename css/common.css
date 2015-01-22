@@ -363,6 +363,7 @@ table.form tbody td input[type='text']:focus, table.form tbody td select:focus, 
 	background-color: #ffe5e5;s
 	transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 	box-shadow: inset 1px 1px 1px rgba(0,0,0,0.075);
+	font-size: 12px;
 }
 
 /* popup example */
