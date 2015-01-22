@@ -13,8 +13,7 @@
         "limit": "Natural-JS 좋아요?",
         "etc": 20140626121212
     }
-]
-	</code></pre>
+]</code></pre>
 
 	<p class="smallContTit">Declarative Result : </p>
 	<table id="inputBox" class='form' style="width: 100%;">
@@ -68,9 +67,10 @@
 	       		$("#sourceCode", view).text(html);
 	       	});
 
+	    	// initialize buttons in div.btnBox
 	    	N("div.btnBox a", view).button();
 
-	    	// event bind
+	    	// bind events
 	        this.setEvents(view);
 	    },
 	    setEvents : function(view) {
