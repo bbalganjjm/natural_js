@@ -227,6 +227,9 @@
 			<td>메시지 다이얼로그를 표현하는 HTML Element들을 제거합니다.</td>
 		</tr>
 	</table>
+
+	<h3>바. API DEMO</h3>
+	<div data-page="alert" class="apidemo"></div>
 </div>
 
 <div id="tab2">
@@ -400,6 +403,9 @@
 			<td>버턴을 비활성화 합니다.</td>
 		</tr>
 	</table>
+
+	<h3>바. API DEMO</h3>
+	<div data-page="button" class="apidemo"></div>
 </div>
 
 <div id="tab3">
@@ -520,6 +526,9 @@
 			<td>Datepicker를 감춥니다.</td>
 		</tr>
 	</table>
+
+	<h3>마. API DEMO</h3>
+	<div data-page="datepicker" class="apidemo"></div>
 </div>
 
 <div id="tab4">
@@ -957,6 +966,9 @@
 			<td>지정한 index 번째 탭과 컨텐츠를 표시한다.</td>
 		</tr>
 	</table>
+
+	<h3>바. API DEMO</h3>
+	<div data-page="popup" class="apidemo"></div>
 </div>
 
 <div id="tab6">
@@ -1144,6 +1156,9 @@
 			<td>true 이면 아무것 선택하지 않고 false 이면 SELECT 요소의 경우 기본 입력값으로 선택 됩니다.</td>
 		</tr>
 	</table>
+
+	<h3>마. API DEMO</h3>
+	<div data-page="select" class="apidemo"></div>
 </div>
 
 <div id="tab7">
@@ -1415,6 +1430,9 @@
 			<td>저장할 값</td>
 		</tr>
 	</table>
+
+	<h3>바. API DEMO</h3>
+	<div data-page="form" class="apidemo"></div>
 </div>
 
 <div id="tab8">
@@ -1834,6 +1852,9 @@
 			<td>저장할 값</td>
 		</tr>
 	</table>
+
+	<h3>바. API DEMO</h3>
+	<div data-page="grid" class="apidemo"></div>
 </div>
 
 </div>
@@ -1855,6 +1876,11 @@
 N("article#refr0105").cont({
     init : function(view, request) {
     	N("div#nuTab", view).tab();
+
+    	//load api demo page
+    	N(".apidemo", view).each(function() {
+    		N(this).comm("html/apid/" + N(this).data("page") + ".html").submit();
+    	});
     }
 });
 </script>
