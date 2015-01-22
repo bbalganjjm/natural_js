@@ -92,7 +92,7 @@
 	        N("a#btnFormatDeclarative", view).click(function(e) {
 	            e.preventDefault();
 	            var data = eval(N("code#data", view).text());
-	            N(data).formatter("#inputBox", view).format();
+	            N(data).formatter(N("#inputBox", view)).format();
 	        });
 
 	        N("a#btnUnFormatEvent", view).click(function(e) {
