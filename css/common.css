@@ -86,8 +86,9 @@ html, body {
 
 body, pre, textarea, select {
     margin: 0;
-    font-size: 13px;
+    font-size: 14px;
 	font-family: "Nanum Gothic", "맑은 고딕", "dotum", "Segoe UI", sans-serif;
+	color: #004a00;
 }
 
 img {
@@ -98,8 +99,9 @@ input[type='text'], input[type='password'], select, textarea, pre.data, div.data
 	border-radius: 3px;
 	padding: 3px 3px;
 	border: 1px solid #cccccc;
-	font-size: 13px;
+	font-size: 14px;
 	font-family: "Nanum Gothic", "맑은 고딕", "dotum", "Segoe UI", sans-serif;
+	color: #004a00;
 	vertical-align: middle;
 }
 
