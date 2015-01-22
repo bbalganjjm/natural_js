@@ -102,7 +102,6 @@ input[type='text'], input[type='password'], select, textarea, pre.data, div.data
 	font-size: 14px;
 	font-family: "Nanum Gothic", "맑은 고딕", "dotum", "Segoe UI", sans-serif;
 	color: #004a00;
-	box-shadow: inset 1px 1px 1px rgba(0,0,0,0.075);
 	vertical-align: middle;
 }
 
@@ -494,6 +493,6 @@ article.apiDoc .apidemo {
 }
 
 article.apiDoc .apidemo div.result {
-	border: 1px solid #ddfddd;
+	border: 1px solid #99d999;
 	border-radius: 3px;
 }
