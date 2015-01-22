@@ -380,7 +380,6 @@
 	</fieldset>
 
 	<h3>바. API DEMO</h3>
-	<div data-page="communicator" class="apidemo"></div>
 </div>
 
 <div id="tab3">
@@ -462,9 +461,7 @@ N("article#refr0103").cont({
 
     	//load api demo page
     	N(".apidemo", view).each(function() {
-    		var thisEle = N(this);
-    		console.log("html/apid/" + thisEle.data("page") + ".html");
-    		thisEle.comm("html/apid/" + thisEle.data("page") + ".html").submit();
+    		N(this).comm("html/apid/" + N(this).data("page") + ".html").submit();
     	});
     }
 });
