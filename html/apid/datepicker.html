@@ -1,4 +1,4 @@
-<article id="datepickerSample">
+<article id="datepicker">
 	<p class="smallContTit">Default options : </p>
 	<table class="form" style="width: 100%;">
 		<tr>
@@ -32,7 +32,7 @@ function() {
 </article>
 
 <script type="text/javascript">
-	N("article#datepickerSample").cont({
+	N("article#datepicker").cont({
 		datepicker : undefined,
 	    init : function(view, request) {
 	    	// source Code
@@ -44,10 +44,10 @@ function() {
 	       	});
 
 	    	// initialize buttons in div.btnBox
-	       	this.initButton(view);
+	       	N("div.btnBox a", view).button();
 
 	     	// bind events
-	    	N("div.btnBox a", view).button();
+	    	this.setEvents(view, this);
 
 	     	//for communicator example
 	     	if(request.attr("hello")) {
