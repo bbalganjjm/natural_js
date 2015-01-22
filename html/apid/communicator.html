@@ -73,25 +73,21 @@ function(data) {
 
 N("article#communicator").cont({
     init : function(view, request) {
-    	// initialize buttons in div.btnBox
-    	this.initButton(view);
-
-    	// bind events
-    	this.setEvent(view, this);
-
     	// source Code
     	N.comm({
        		url : "html/apid/" + view.attr("id") + ".html",
-       		contentType : "application/x-www-form-urlencoded",
        		dataType : "html"
        	}).submit(function(html) {
        		$("#sourceCode", view).text(html);
        	});
-    },
-    initButton : function(view) {
+
+    	// initialize buttons in div.btnBox
     	N("div.btnBox a", view).button();
+
+    	// bind events
+    	this.setEvents(view, this);
     },
-    setEvent : function(view, this_) {
+    setEvents : function(view, this_) {
     	N("a#btnGetJson", view).click(function(e) {
             e.preventDefault();
             N.comm({
