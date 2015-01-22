@@ -1,17 +1,19 @@
-<article id="cont">
+<article id="controller">
 	<div class="demoBox">
-		<p class="smallContTit">View Info</p>
+		<p class="smallContTit">View Info :</p>
 		<pre><code id="view"></code></pre>
-		<p class="smallContTit">Request Info</p>
+		<p class="smallContTit">Request Info :</p>
 		<pre><code id="request"></code></pre>
+		<p class="smallContTit">Source Code :</p>
+		<pre><code id="sourceCode"></code></pre>
 	</div>
 </article>
 
 <script type="text/javascript">
-N("article#cont").cont({
+N("article#controller").cont({
     init : function(view, request) {
     	// view info
-    	N("#view", view).text(view.html());
+    	N("#view", view).text(view);
 
     	// request info
     	N("#request", view).text(N.json.format(request.get()));
