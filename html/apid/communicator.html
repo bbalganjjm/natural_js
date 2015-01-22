@@ -7,7 +7,7 @@
 		</div>
 
 		<p class="smallContTit">Result : </p>
-		<div class="result" style="height: 100px;"></div>
+		<pre style="height: 100px;overflow: auto;"><code id="jsonResult"></code></pre>
 
 		<h4>2. Get html page(View & Controller) from server or file</h4>
 
@@ -93,7 +93,7 @@ N("article#communicator").cont({
             N.comm({
         		url : "html/apid/data/grid.json"
         	}).submit(N.browser.msieVersion() !== 8 ? eval("(" + N("textarea#jsonCallback", view).val() + ")") : function(data) {
-        		N("div.result:eq(0)", view).text(JSON.stringify(data));
+        		N("#jsonResult", view).text(JSON.stringify(data));
         	});
         });
 
