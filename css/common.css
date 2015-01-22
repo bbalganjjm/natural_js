@@ -378,6 +378,13 @@ div#popupTemp {
 	padding: 20px;
 }
 
+.smallContTit {
+	padding-left: 16px;
+	font-size: 13px;
+	font-weight: bold;
+	background: url("../images/icon/sct_leaf.gif") no-repeat 0 2px;
+}
+
 
 /* API Document */
 article.apiDoc table.form {
@@ -484,13 +491,6 @@ article.apiDoc hr {
 
 article.apiDoc ul.links p {
 	margin: 0;
-}
-
-article.apiDoc .smallContTit {
-	padding-left: 16px;
-	font-size: 13px;
-	font-weight: bold;
-	background: url("../images/icon/sct_leaf.gif") no-repeat 0 2px;
 }
 
 article.apiDoc .apidemo {
