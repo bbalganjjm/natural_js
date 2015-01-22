@@ -39,6 +39,7 @@ span.block_overlay_msg__ li.msg_title_box__ {
     border-bottom: 1px solid #cccccc;
     background-color: #dddddd;
     border-radius: 5px 5px 0 0;
+    font-size: 12px;
 }
 
 span.block_overlay_msg__ li.msg_box__ {
