@@ -285,7 +285,7 @@
 	    	N("div.btnBox a", view).button();
 
 	    	// data
-	    	var data = eval(N("textarea.data").val());
+	    	var data = eval(N("textarea.data").val(), view);
 
 	    	// create selects
 	    	this.createSelects(data);
