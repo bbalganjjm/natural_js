@@ -349,13 +349,13 @@ N("div#form").cont({
         	if(value !== null) {
         		form.val(key, value);
         	} else {
-        		N("div.result").alert(form.val(key)).show();
+        		N("div.result", view).alert(form.val(key)).show();
         	}
         });
 
         N("a#btnData", view).click(function(e) {
         	e.preventDefault();
-        	N("div.result").alert({
+        	N("div.result", view).alert({
         		msg : '<div class="pre">' + N.json.format(form.data(N("input#data", view).is(":checked"))) + '</div>',
         		width : 400,
         		height : 250
