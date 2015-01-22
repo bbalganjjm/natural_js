@@ -20,8 +20,7 @@ Reference(참고)
 - Home page : http://bbalganjjm.github.io/natural_js
  * Getting Start(Korean) : http://bbalganjjm.github.io/natural_js
  * Basic Document(Korean) : http://bbalganjjm.github.io/natural_js/#intr/intr0100
- * API Document(Korean) : http://bbalganjjm.github.io/natural_js/#refr/refr0101
-- DEMO : http://211.110.5.41/naturaljs
+ * API Document(Korean) & DEMO : http://bbalganjjm.github.io/natural_js/#refr/refr0101
 
 ----------------------------------------------
 
@@ -29,8 +28,7 @@ Reference(참고)
 - 홈페이지 : http://bbalganjjm.github.io/natural_js
  * 시작하기 문서 : http://bbalganjjm.github.io/natural_js
  * 기본문서 : http://bbalganjjm.github.io/natural_js/#intr/intr0100
- * API 문서 : http://bbalganjjm.github.io/natural_js/#refr/refr0101
-- 데모 : http://211.110.5.41/naturaljs
+ * API 문서와 데모 : http://bbalganjjm.github.io/natural_js/#refr/refr0101
 
 Features(특징)
 ========
