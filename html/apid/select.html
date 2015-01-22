@@ -214,13 +214,13 @@
 	        	if(value !== null) {
 	        		this_.select.val(value);
 	        	} else {
-	        		N("div.result").alert(this_.select.val()).show();
+	        		N("div.result", view).alert(this_.select.val()).show();
 	        	}
 	        });
 
 	        N("a#btnData", view).click(function(e) {
 	        	e.preventDefault();
-	        	N("div.result").alert({
+	        	N("div.result", view).alert({
 	        		msg : '<div class="pre">' + N.json.format(this_.select.data(N("input#data", view).is(":checked"))) + '</div>',
 	        		width : 400,
 	        		height : 250
