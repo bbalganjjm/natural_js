@@ -398,6 +398,7 @@ div.datepicker_contents__ {
 	background-image: linear-gradient(to bottom, #c9c9c9 0%, #999999 100%);
 	background-color: #999999;
 	padding: 3px;
+	font-size: 12px;
 }
 
 div.datepicker_contents__ div.datepicker_year_item__, div.datepicker_contents__ div.datepicker_year_paging__ {
