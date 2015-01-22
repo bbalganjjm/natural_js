@@ -168,7 +168,7 @@ N("article#grid_form_popup").cont({
 
     	N("a#btnModifiedData", view).click(function(e) {
     		e.preventDefault();
-    		N("#grid", view).alert({
+    		N(window).alert({
     			title : "수정된 ROW DATA",
     			msg : '<div class="pre">' + N.json.format(this_.grid.data("modified")) + '</div>',
     			width : 550,
