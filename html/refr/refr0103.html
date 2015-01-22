@@ -457,7 +457,13 @@
 <script type="text/javascript">
 N("article#refr0103").cont({
     init : function(view, request) {
+    	// init tab
     	N("div#naTab", view).tab();
+
+    	//load api demo page
+    	N(".apidemo", view).each(function() {
+    		N(this).comm("html/apid/" + N(this).data("page") + ".html").submit();
+    	});
     }
 });
 </script>
