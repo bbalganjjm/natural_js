@@ -344,21 +344,12 @@ article a.link {
 	color: #00c000;
 }
 
-table.form th {
-	background: linear-gradient(left, #efefef, #effeee);
-	background: -ms-linear-gradient(left, #efefef, #effeee);
-	background: -moz-linear-gradient(left, #efefef, #effeee);
-	background: -o-linear-gradient(left, #efefef, #effeee);
-	background: -webkit-linear-gradient(left, #efefef, #effeee);
-	background-color: #efefef;
-}
-
 table.form th, table.form td {
 	border: 1px solid #cccccc;
 }
 
-table.form tbody td input[type='text']:hover, table.form tbody td select:hover, table.form tbody td textarea:hover,
-table.form tbody td input[type='text']:focus, table.form tbody td select:focus, table.form tbody td textarea:focus {
+table.form td input[type='text']:hover, table.form td select:hover, table.form td textarea:hover,
+table.form td input[type='text']:focus, table.form td select:focus, table.form td textarea:focus {
 	border-color: #faaeae;
 	background-color: #ffe5e5;s
 	transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
@@ -386,6 +377,16 @@ article.apiDoc table.form th {
 	background-color: #ccfccc;
 	width: 90px;
 	max-width: 90px;
+}
+
+
+article.apiDoc div.apidemo table.form th {
+	background: linear-gradient(left, #efefef, #effeee);
+	background: -ms-linear-gradient(left, #efefef, #effeee);
+	background: -moz-linear-gradient(left, #efefef, #effeee);
+	background: -o-linear-gradient(left, #efefef, #effeee);
+	background: -webkit-linear-gradient(left, #efefef, #effeee);
+	background-color: #efefef;
 }
 
 article.apiDoc table.form td {
