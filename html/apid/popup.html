@@ -1,245 +1,234 @@
-<div id="popupEx">
-	<div class="intro">
-		<h1><b>Popup</b> : Popup(N.popup)은  지정한 요소(div, span, table 등)를 레이어 팝업으로 만들어 줍니다.</h1>
-		<h2>[Initialize popup] 버튼을 클릭하면 팝업이 초기화 됩니다.</h2>
-		<h2>[open] 버튼을 클릭하면 팝업이 표시 됩니다.</h2>
-		<h2>url 옵션으로 지정한 페이지를 가져올때 가져온 페이지의 Controller 에는 caller(호출한  팝업의 instance(N.popup)) 와 opener(팝업을 호출한 페이지(부모페이지)의 Controller) 속성이 추가 되어 부모 페이지와 자신을 호출한 팝업 객체를 직접 제어할 수 있습니다.</h2>
-		<h2>Datepicker는 한번만 초기화 할 수 있습니다. 옵션을 변경하려면 [Reload this page] 버튼을 누른 후 다시 설정 하기 바랍니다.</h2>
-	</div>
-	<div class="divBar">DEMO</div>
-	<div class="demoBox">
-		<p class="section">1. Create popup in this page element</p>
+<article id="popup">
+	<h4>1) Create popup in this page element</h4>
 
-		<p>Default options : </p>
-		<table id="localPage" class="form" style="width: 100%;">
-			<tr>
-				<th align="right">context</th>
-				<td colspan="3"><input id="context" type="text" value="table#loginForm" /> jQuery selector</td>
-			</tr>
-			<tr>
-				<th align="right" width="10%">title</th>
-				<td width="40%"><input id="title" type="text" value="Popup test" />
-					<br />&nbsp;this is also possible to title attribute of context element
-				</td>
-				<th align="right" width="10%">confirm</th>
-				<td width="40%"><input id="confirm" type="checkbox" checked="checked" />If this checkbox with uncheck(false), display OK button only</td>
-			</tr>
-			<tr>
-				<th align="right">modal</th>
-				<td><input id="modal" type="checkbox" checked="checked" />If this checkbox with uncheck(false), do not display modal overlay layer</td>
-				<th align="right">button</th>
-				<td><input id="button" type="checkbox" checked="checked" />If this checkbox with uncheck(false), do not display button bar</td>
-			</tr>
-			<tr>
-				<th align="right">width</th>
-				<td><input id="width" type="text" value="0" /> Popup contents width, 0 is auto width</td>
-				<th align="right">height</th>
-				<td><input id="height" type="text" value="0" /> Popup contents height, 0 is auto height</td>
-			</tr>
-			<tr>
-				<th align="right">onOk</th>
-				<td><textarea id="onOk" rows="3" cols="60">
+	<p class="smallContTit">Default options : </p>
+	<table id="localPage" class="form" style="width: 100%;">
+		<tr>
+			<th align="right">context</th>
+			<td colspan="3"><input id="context" type="text" value="table#loginForm" /> jQuery selector</td>
+		</tr>
+		<tr>
+			<th align="right" width="10%">title</th>
+			<td width="40%"><input id="title" type="text" value="Popup test" />
+				<br />&nbsp;this is also possible to title attribute of context element
+			</td>
+			<th align="right" width="10%">confirm</th>
+			<td width="40%"><input id="confirm" type="checkbox" checked="checked" />If this checkbox with uncheck(false), display OK button only</td>
+		</tr>
+		<tr>
+			<th align="right">modal</th>
+			<td><input id="modal" type="checkbox" checked="checked" />If this checkbox with uncheck(false), do not display modal overlay layer</td>
+			<th align="right">button</th>
+			<td><input id="button" type="checkbox" checked="checked" />If this checkbox with uncheck(false), do not display button bar</td>
+		</tr>
+		<tr>
+			<th align="right">width</th>
+			<td><input id="width" type="text" value="0" /> Popup contents width, 0 is auto width</td>
+			<th align="right">height</th>
+			<td><input id="height" type="text" value="0" /> Popup contents height, 0 is auto height</td>
+		</tr>
+		<tr>
+			<th align="right">onOk</th>
+			<td><textarea id="onOk" rows="3" cols="60">
 function() {
 	alert("Ok");
 }
-				</textarea><br />Callback function for Ok button event</td>
-				<th align="right">onCancel</th>
-				<td><textarea id="onCancel" rows="3" cols="60">
+			</textarea><br />Callback function for Ok button event</td>
+			<th align="right">onCancel</th>
+			<td><textarea id="onCancel" rows="3" cols="60">
 function() {
 	alert("Cancel");
 }
-				</textarea><br />callback function for Cancel button event</td>
+			</textarea><br />callback function for Cancel button event</td>
+		</tr>
+	</table>
+
+	<div class="btnBox" align="center">
+		<a id="btnInitLocal" href="#" data-opts='{ "color": "gray", "size": "large" }'>Initialize popup</a>
+		<a id="btnOpenLocal" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>open</a>
+		<a id="btnReload" href="#" data-opts='{ "color": "white", "size": "large" }'>Reload this page</a>
+	</div>
+
+	<p class="smallContTit">Target Element : </p>
+    <div align="center" class="result" style="height: 120px;padding-top: 30px;">
+		<table id="loginForm" class="form" title="로그인">
+			<tr>
+				<th width="70"><label for="numeric">아이디</label></th>
+				<td width="100">
+					<input id="userId" type="text" maxlength="10" />
+				</td>
+				<td width="50" rowspan="2">
+					<a id="btnLogin" data-opts='{ "color": "skyblue", "size": "large"'>로그인</a>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="generic">패스워드</label></th>
+				<td>
+					<input id="userPw" type="password" maxlength="16" />
+				</td>
 			</tr>
 		</table>
+    </div>
 
-		<div class="btnBox" align="center">
-			<a id="btnInitLocal" href="#" data-opts='{ "color": "gray", "size": "large" }'>Initialize popup</a>
-			<a id="btnOpenLocal" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>open</a>
-			<a id="btnReload" href="#" data-opts='{ "color": "white", "size": "large" }'>Reload this page</a>
-		</div>
-
-		<p>Target Element : </p>
-	    <div align="center" class="result" style="height: 120px;padding-top: 30px;">
-			<table id="loginForm" class="form" title="로그인">
-				<tr>
-					<th width="70"><label for="numeric">아이디</label></th>
-					<td width="100">
-						<input id="userId" type="text" maxlength="10" />
-					</td>
-					<td width="50" rowspan="2">
-						<a id="btnLogin" data-opts='{ "color": "skyblue", "size": "large"'>로그인</a>
-					</td>
-				</tr>
-				<tr>
-					<th><label for="generic">패스워드</label></th>
-					<td>
-						<input id="userPw" type="password" maxlength="16" />
-					</td>
-				</tr>
-			</table>
-	    </div>
-
-		<p class="section">2. Create popup with other page load</p>
-		<p>Default options : </p>
-		<table id="otherPage" class="form" style="width: 100%;">
-			<tr>
-				<th align="right">url</th>
-				<td colspan="3"><input id="url" type="text" value="html/apid/select.html" /></td>
-			</tr>
-			<tr>
-				<th align="right" width="10%">title</th>
-				<td width="40%"><input id="title" type="text" value="Popup test" />
-					<br />&nbsp;this is also possible to title attribute of context element
-				</td>
-				<th align="right" width="10%">confirm</th>
-				<td width="40%"><input id="confirm" type="checkbox" checked="checked" />If this checkbox with uncheck(false), display OK button only</td>
-			</tr>
-			<tr>
-				<th align="right">modal</th>
-				<td><input id="modal" type="checkbox" checked="checked" />If this checkbox with uncheck(false), do not display modal overlay layer</td>
-				<th align="right">button</th>
-				<td><input id="button" type="checkbox" checked="checked" />If this checkbox with uncheck(false), do not display button bar</td>
-			</tr>
-			<tr>
-				<th align="right">width</th>
-				<td><input id="width" type="text" value="970" /> Popup contents width, 0 is auto width</td>
-				<th align="right">height</th>
-				<td><input id="height" type="text" value="400" /> Popup contents height, 0 is auto height</td>
-			</tr>
-			<tr>
-				<th align="right">preload</th>
-				<td colspan="3"><input id="preload" type="checkbox" /> If this checkbox with check(true), load popup contents when popup is initialized, but with unchecked(false), load popup contens when first open</td>
-			</tr>
-			<tr>
-				<th align="right">onOk</th>
-				<td><textarea id="onOk" rows="3" cols="60"></textarea><br />Callback function for Ok button event</td>
-				<th align="right">onCancel</th>
-				<td><textarea id="onCancel" rows="3" cols="60">
+	<h4>2) Create popup with other page load</h4>
+	<p class="smallContTit">Default options : </p>
+	<table id="otherPage" class="form" style="width: 100%;">
+		<tr>
+			<th align="right">url</th>
+			<td colspan="3"><input id="url" type="text" value="html/apid/select.html" /></td>
+		</tr>
+		<tr>
+			<th align="right" width="10%">title</th>
+			<td width="40%"><input id="title" type="text" value="Popup test" />
+				<br />&nbsp;this is also possible to title attribute of context element
+			</td>
+			<th align="right" width="10%">confirm</th>
+			<td width="40%"><input id="confirm" type="checkbox" checked="checked" />If this checkbox with uncheck(false), display OK button only</td>
+		</tr>
+		<tr>
+			<th align="right">modal</th>
+			<td><input id="modal" type="checkbox" checked="checked" />If this checkbox with uncheck(false), do not display modal overlay layer</td>
+			<th align="right">button</th>
+			<td><input id="button" type="checkbox" checked="checked" />If this checkbox with uncheck(false), do not display button bar</td>
+		</tr>
+		<tr>
+			<th align="right">width</th>
+			<td><input id="width" type="text" value="970" /> Popup contents width, 0 is auto width</td>
+			<th align="right">height</th>
+			<td><input id="height" type="text" value="400" /> Popup contents height, 0 is auto height</td>
+		</tr>
+		<tr>
+			<th align="right">preload</th>
+			<td colspan="3"><input id="preload" type="checkbox" /> If this checkbox with check(true), load popup contents when popup is initialized, but with unchecked(false), load popup contens when first open</td>
+		</tr>
+		<tr>
+			<th align="right">onOk</th>
+			<td><textarea id="onOk" rows="3" cols="60"></textarea><br />Callback function for Ok button event</td>
+			<th align="right">onCancel</th>
+			<td><textarea id="onCancel" rows="3" cols="60">
 function() {
 	alert("Cancel");
 }
-				</textarea><br />callback function for Cancel button event</td>
-			</tr>
-			<tr>
-				<th align="right">onOpen</th>
-				<td><input id="onOpen" type="text" value="onOpen" /><br />
-				The method of this value is run whenever open the popup, that must be defined in Controller's method in loaded popup contens</td>
-				<th align="right">onOpenData</th>
-				<td><textarea id="onOpenData" rows="3" cols="60">This value is sent to onOpen callback functions argument of popup's Controller</textarea></td>
-			</tr>
-			<tr>
-				<th align="right">onClose</th>
-				<td><textarea id="onClose" rows="3" cols="60">
+			</textarea><br />callback function for Cancel button event</td>
+		</tr>
+		<tr>
+			<th align="right">onOpen</th>
+			<td><input id="onOpen" type="text" value="onOpen" /><br />
+			The method of this value is run whenever open the popup, that must be defined in Controller's method in loaded popup contens</td>
+			<th align="right">onOpenData</th>
+			<td><textarea id="onOpenData" rows="3" cols="60">This value is sent to onOpen callback functions argument of popup's Controller</textarea></td>
+		</tr>
+		<tr>
+			<th align="right">onClose</th>
+			<td><textarea id="onClose" rows="3" cols="60">
 function(onCloseData) {
 	alert(N.json.format(onCloseData));
 }
-				</textarea><br /></td>
-				<th align="right">onCloseData</th>
-				<td><textarea id="onCloseData" rows="3" cols="60">This value is sent to onClose callback functions argument of parent page</textarea><br /></td>
-			</tr>
-		</table>
-	    <div class="btnBox" align="center">
-			<a id="btnInitOther" href="#" data-opts='{ "color": "gray", "size": "large" }'>Initialize popup</a>
-			<a id="btnOpenOther" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>open</a>
-			<a id="btnReload" href="#" data-opts='{ "color": "white", "size": "large" }'>Reload this page</a>
-		</div>
+			</textarea><br /></td>
+			<th align="right">onCloseData</th>
+			<td><textarea id="onCloseData" rows="3" cols="60">This value is sent to onClose callback functions argument of parent page</textarea><br /></td>
+		</tr>
+	</table>
+    <div class="btnBox" align="center">
+		<a id="btnInitOther" href="#" data-opts='{ "color": "gray", "size": "large" }'>Initialize popup</a>
+		<a id="btnOpenOther" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>open</a>
+		<a id="btnReload" href="#" data-opts='{ "color": "white", "size": "large" }'>Reload this page</a>
 	</div>
-
-	<div class="divBar">SOURCE CODE [ Click! this bar ]</div>
-	<div class="sourceBox">
-	</div>
-</div>
+</article>
 
 <script type="text/javascript">
+	N("article#popup").cont({
+		localPopup : null,
+		otherPopup : null,
+	    init : function(view, request) {
+	    	// source Code
+	    	N.comm({
+	       		url : "html/apid/" + view.attr("id") + ".html",
+	       		dataType : "html"
+	       	}).submit(function(html) {
+	       		$("#sourceCode", view).text(html);
+	       	});
 
-N("div#popupEx").cont({
-	localPopup : null,
-	otherPopup : null,
-    init : function(view, request) {
-    	// put source code
-    	IndexController.getSourceCode(request.get("url"), N("div.sourceBox", view));
+	    	// initialize buttons in div.btnBox
+	    	this.initButton(view);
 
-    	// make button
-    	this.initButton(view);
+	    	// bind events
+	    	this.setEvents(view, this);
+	    },
+	    initButton : function(view) {
+	    	N("div.btnBox a", view).button();
+	    	N("a#btnLogin", view).button();
+	    	N("a#btnLogin", view).css("padding-top", "15px");
+	    	N("a#btnLogin", view).css("padding-bottom", "15px");
+	    },
+	    setEvents : function(view, this_) {
+	    	N("a#btnInitLocal", view).click(function(e) {
+	            e.preventDefault();
 
-    	// event bind
-    	this.setEvents(view, this);
-    },
-    initButton : function(view) {
-    	N("div.btnBox a", view).button();
-    	N("a#btnLogin", view).button();
-    	N("a#btnLogin", view).css("padding-top", "15px");
-    	N("a#btnLogin", view).css("padding-bottom", "15px");
-    },
-    setEvents : function(view, this_) {
-    	N("a#btnInitLocal", view).click(function(e) {
-            e.preventDefault();
+	            var opts = {
+	            	title : N.string.trimToNull(N("table#localPage input#title", view).val()) !== null ?
+	            			N("table#localPage input#title", view).val() : undefined,
+	       			confirm : N("table#localPage input#confirm", view).is(":checked"),
+	            	modal : N("table#localPage input#modal", view).is(":checked"),
+	            	button : N("table#localPage input#button", view).is(":checked"),
+	            	width : Number(N("table#localPage input#width", view).val()),
+	            	height : Number(N("table#localPage input#height", view).val()),
+	            	onOk : N.string.trimToNull(N("table#localPage textarea#onOk", view).val()) !== null ?
+	            			eval("(" + N("table#localPage textarea#onOk", view).val() + ")") : null,
+	            	onCancel : N.string.trimToNull(N("table#localPage textarea#onCancel", view).val()) !== null ?
+	            			eval("(" + N("table#localPage textarea#onCancel", view).val() + ")") : null
+	            };
 
-            var opts = {
-            	title : N.string.trimToNull(N("table#localPage input#title", view).val()) !== null ?
-            			N("table#localPage input#title", view).val() : undefined,
-       			confirm : N("table#localPage input#confirm", view).is(":checked"),
-            	modal : N("table#localPage input#modal", view).is(":checked"),
-            	button : N("table#localPage input#button", view).is(":checked"),
-            	width : Number(N("table#localPage input#width", view).val()),
-            	height : Number(N("table#localPage input#height", view).val()),
-            	onOk : N.string.trimToNull(N("table#localPage textarea#onOk", view).val()) !== null ?
-            			eval("(" + N("table#localPage textarea#onOk", view).val() + ")") : null,
-            	onCancel : N.string.trimToNull(N("table#localPage textarea#onCancel", view).val()) !== null ?
-            			eval("(" + N("table#localPage textarea#onCancel", view).val() + ")") : null
-            };
+	            this_.localPopup = N(N("input#context", view).val()).popup(opts);
 
-            this_.localPopup = N(N("input#context", view).val()).popup(opts);
+	            N("a#btnOpenLocal", view).instance("button").enable();
+	            N(this).instance("button").disable();
+	        });
 
-            N("a#btnOpenLocal", view).instance("button").enable();
-            N(this).instance("button").disable();
-        });
+	        N("a#btnOpenLocal", view).click(function(e) {
+	            e.preventDefault();
+	            this_.localPopup.open();
+	        });
 
-        N("a#btnOpenLocal", view).click(function(e) {
-            e.preventDefault();
-            this_.localPopup.open();
-        });
+	        N("a#btnInitOther", view).click(function(e) {
+	            e.preventDefault();
 
-        N("a#btnInitOther", view).click(function(e) {
-            e.preventDefault();
+	            var opts = {
+	            	url : N("table#otherPage input#url", view).val(),
+	            	title : N.string.trimToNull(N("table#otherPage input#title", view).val()) !== null ?
+	            			N("table#otherPage input#title", view).val() : undefined,
+	       			confirm : N("table#otherPage input#confirm", view).is(":checked"),
+	            	modal : N("table#otherPage input#modal", view).is(":checked"),
+	            	button : N("table#otherPage input#button", view).is(":checked"),
+	            	width : Number(N("table#otherPage input#width", view).val()),
+	            	height : Number(N("table#otherPage input#height", view).val()),
+	            	onOk : N.string.trimToNull(N("table#otherPage textarea#onOk", view).val()) !== null ?
+	            			eval("(" + N("table#otherPage textarea#onOk", view).val() + ")") : null,
+	            	onCancel : N.string.trimToNull(N("table#otherPage textarea#onCancel", view).val()) !== null ?
+	            			eval("(" + N("table#otherPage textarea#onCancel", view).val() + ")") : null,
+	       			preload : N("table#otherPage input#preload", view).is(":checked"),
+	       			onOpen : N.string.trimToNull(N("table#otherPage input#onOpen", view).val()),
+	       			onOpenData : N.string.trimToNull(N("table#otherPage textarea#onOpenData", view).val()),
+	            	onClose : N.string.trimToNull(N("textarea#onClose", view).val()) !== null ?
+	            			eval("(" + N("table#otherPage textarea#onClose", view).val() + ")") : null,
+	            	onCloseData : N.string.trimToNull(N("table#otherPage textarea#onCloseData", view).val())
+	            };
 
-            var opts = {
-            	url : N("table#otherPage input#url", view).val(),
-            	title : N.string.trimToNull(N("table#otherPage input#title", view).val()) !== null ?
-            			N("table#otherPage input#title", view).val() : undefined,
-       			confirm : N("table#otherPage input#confirm", view).is(":checked"),
-            	modal : N("table#otherPage input#modal", view).is(":checked"),
-            	button : N("table#otherPage input#button", view).is(":checked"),
-            	width : Number(N("table#otherPage input#width", view).val()),
-            	height : Number(N("table#otherPage input#height", view).val()),
-            	onOk : N.string.trimToNull(N("table#otherPage textarea#onOk", view).val()) !== null ?
-            			eval("(" + N("table#otherPage textarea#onOk", view).val() + ")") : null,
-            	onCancel : N.string.trimToNull(N("table#otherPage textarea#onCancel", view).val()) !== null ?
-            			eval("(" + N("table#otherPage textarea#onCancel", view).val() + ")") : null,
-       			preload : N("table#otherPage input#preload", view).is(":checked"),
-       			onOpen : N.string.trimToNull(N("table#otherPage input#onOpen", view).val()),
-       			onOpenData : N.string.trimToNull(N("table#otherPage textarea#onOpenData", view).val()),
-            	onClose : N.string.trimToNull(N("textarea#onClose", view).val()) !== null ?
-            			eval("(" + N("table#otherPage textarea#onClose", view).val() + ")") : null,
-            	onCloseData : N.string.trimToNull(N("table#otherPage textarea#onCloseData", view).val())
-            };
+	            this_.otherPopup = N().popup(opts);
 
-            this_.otherPopup = N().popup(opts);
+	            N("a#btnOpenOther", view).instance("button").enable();
+	            N(this).instance("button").disable();
+	        });
 
-            N("a#btnOpenOther", view).instance("button").enable();
-            N(this).instance("button").disable();
-        });
+	        N("a#btnOpenOther", view).click(function(e) {
+	            e.preventDefault();
+	            this_.otherPopup.open();
+	        });
 
-        N("a#btnOpenOther", view).click(function(e) {
-            e.preventDefault();
-            this_.otherPopup.open();
-        });
-
-        N("a[id='btnReload']", view).click(function(e) {
-        	e.preventDefault();
-        	N(view.parent()).comm(this_.request.get("url")).submit();
-        });
-    }
-});
-
+	        N("a[id='btnReload']", view).click(function(e) {
+	        	e.preventDefault();
+	        	N(view.parent()).comm(this_.request.get("url")).submit();
+	        });
+	    }
+	});
 </script>

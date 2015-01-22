@@ -1,14 +1,5 @@
-<div id="select" title="Select 예제">
-	<div class="intro">
-		<h1><b>Select</b> : Select(N.select)은  지정한 선택입력요소(select, radio, checkbox)에 JSON array 형태의 데이터를 바인드하여 선택요소를 생성 합니다.</h1>
-		<h2>[Initialize tab] 버튼을 클릭하면 지정한 선택입력요소를 기반으로 Select 객체를 생성 합니다.</h2>
-		<h2>[bind] 버튼을 클릭하면 DATA 영역에 있는 JSON 데이터를 지정한 선택요소에 바인드 합니다.</h2>
-		<h2>[val] 버튼을 클릭하면 지정한 값이 있다면 지정한 값을 가진 선택요소를 선택하고 지정한 값이 없다면 선택된 요소의 value 값을 가져옵니다.</h2>
-		<h2>[data] 버튼을 클릭하면 선택입력요소에 바인드되어 있는 데이터를 가져옵니다. 인자로 true를 지정하면 현제 선택되어 있는 data만 가져옵니다.</h2>
-		<h2>[reset] 버튼을 클릭하면 초기화 될때의 기본 선택값을 선택합니다. 인자로 false 를 지정하면 무조건 선택요소의 0번째 인덱스 값을 선택합니다.</h2>
-		<h2>Select는 한번만 초기화 할 수 있습니다. 옵션을 변경하려면 [Reload this page] 버튼을 누른 후 다시 설정 하기 바랍니다.</h2>
-	</div>
-	<div class="divBar">DATA</div>
+<article id="select" title="Select 예제">
+	<p class="smallContTit">Data :</p>
 	<div class="dataBox">
 		<textarea id="data" class="data">
 [{
@@ -73,190 +64,184 @@
 }]
 		</textarea>
 	</div>
-	<div class="divBar">DEMO</div>
-	<div class="demoBox">
-		<p>Default options : </p>
-		<table class="form" style="width: 100%;">
-			<tr>
-				<th align="right" width="10%">context</th>
-				<td width="40%"><select id="context">
-					<option value="select#eyeColor">select#eyeColor</option>
-					<option value="select#company" selected="selected">select#company</option>
-					<option value="input#gender">input#gender</option>
-					<option value="input#favoriteFruit">input#favoriteFruit</option>
-				</select> Target element</td>
-				<th align="right" width="10%">data</th>
-				<td width="40%"><select id="data">
-					<option value="eyeColor">eye color</option>
-					<option value="company" selected="selected">company</option>
-					<option value="gender">gender</option>
-					<option value="favoriteFruit">favorite fruit</option>
-				</select> Data set key</td>
-			</tr>
-			<tr>
-				<th align="right">key</th>
-				<td><input id="key" type="text" value="key" /> name column</td>
-				<th align="right">val</th>
-				<td><input id="val" type="text" value="val" /> value column</td>
-			</tr>
-			<tr>
-				<th align="right">append</th>
-				<td><input id="append" type="checkbox" checked="checked" /> If this checkbox with uncheck(false), empty select element before bind</td>
-				<th align="right">direction</th>
-				<td><select id="direction">
-					<option value="h">h</option>
-					<option value="v">v</option>
-				</select> h : display horizontal, v : display vertical</td>
-			</tr>
-		</table>
+	<p class="smallContTit">Default options : </p>
+	<table class="form" style="width: 100%;">
+		<tr>
+			<th align="right" width="10%">context</th>
+			<td width="40%"><select id="context">
+				<option value="select#eyeColor">select#eyeColor</option>
+				<option value="select#company" selected="selected">select#company</option>
+				<option value="input#gender">input#gender</option>
+				<option value="input#favoriteFruit">input#favoriteFruit</option>
+			</select> Target element</td>
+			<th align="right" width="10%">data</th>
+			<td width="40%"><select id="data">
+				<option value="eyeColor">eye color</option>
+				<option value="company" selected="selected">company</option>
+				<option value="gender">gender</option>
+				<option value="favoriteFruit">favorite fruit</option>
+			</select> Data set key</td>
+		</tr>
+		<tr>
+			<th align="right">key</th>
+			<td><input id="key" type="text" value="key" /> name column</td>
+			<th align="right">val</th>
+			<td><input id="val" type="text" value="val" /> value column</td>
+		</tr>
+		<tr>
+			<th align="right">append</th>
+			<td><input id="append" type="checkbox" checked="checked" /> If this checkbox with uncheck(false), empty select element before bind</td>
+			<th align="right">direction</th>
+			<td><select id="direction">
+				<option value="h">h</option>
+				<option value="v">v</option>
+			</select> h : display horizontal, v : display vertical</td>
+		</tr>
+	</table>
 
-		<p>Method options : </p>
-		<table class="form" style="width: 100%;">
-			<tr>
-				<th align="right" width="10%">val</th>
-				<th align="right" width="10%">arguments[0]</th>
-				<td width="80%" colspan="3">
-					<input id="val" type="text" value="STOCKPOST" /> If empty value set, get selected value, otherwise selected with this value
-				</td>
-			</tr>
-			<tr>
-				<th align="right" width="10%">data</th>
-				<th align="right" width="10%">arguments[0]</th>
-				<td width="80%" colspan="3">
-					<input id="data" type="checkbox" checked="checked" /> If this checkbox with uncheck(false), get all data
-				</td>
-			</tr>
-			<tr>
-				<th align="right" width="10%">reset</th>
-				<th align="right" width="10%">arguments[0]</th>
-				<td width="80%" colspan="3">
-					<input id="reset" type="checkbox" checked="checked" /> If this checkbox with uncheck(false), absolute select 0 index
-				</td>
-			</tr>
-		</table>
+	<p class="smallContTit">Method options : </p>
+	<table class="form" style="width: 100%;">
+		<tr>
+			<th align="right" width="10%">val</th>
+			<th align="right" width="10%">arguments[0]</th>
+			<td width="80%" colspan="3">
+				<input id="val" type="text" value="STOCKPOST" /> If empty value set, get selected value, otherwise selected with this value
+			</td>
+		</tr>
+		<tr>
+			<th align="right" width="10%">data</th>
+			<th align="right" width="10%">arguments[0]</th>
+			<td width="80%" colspan="3">
+				<input id="data" type="checkbox" checked="checked" /> If this checkbox with uncheck(false), get all data
+			</td>
+		</tr>
+		<tr>
+			<th align="right" width="10%">reset</th>
+			<th align="right" width="10%">arguments[0]</th>
+			<td width="80%" colspan="3">
+				<input id="reset" type="checkbox" checked="checked" /> If this checkbox with uncheck(false), absolute select 0 index
+			</td>
+		</tr>
+	</table>
 
-		<div align="center" class="btnBox">
-			<a id="btnInit" href="#" data-opts='{ "color": "gray", "size": "large" }'>Initialize select</a>
-			<a id="btnBind" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>bind</a>
-			<a id="btnVal" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>val</a>
-			<a id="btnData" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>data</a>
-			<a id="btnReset" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>reset</a>
-			<a id="btnReload" href="#" data-opts='{ "color": "white", "size": "large" }'>Reload this page</a>
-		</div>
-
-		<p>Result : </p>
-		<div class="result" align="center" style="padding: 15px;">
-			<table id="inputBox" class="form">
-				<tr>
-					<th align="right" width="85"><label for="eyeColor">eye color</label></th>
-					<td width="300">
-						<select id="eyeColor">
-							<option>선택</option>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<th align="right"><label for="company">company</label></th>
-					<td>
-						<select id="company" multiple="multiple"></select>
-					</td>
-				</tr>
-				<tr>
-					<th align="right"><label for="gender">gender</label></th>
-					<td>
-						<input id="gender" type="radio" />
-					</td>
-				</tr>
-				<tr>
-					<th align="right"><label for="favoriteFruit">favorite fruit</label></th>
-					<td>
-						<input id="favoriteFruit" type="checkbox" />
-					</td>
-				</tr>
-			</table>
-		</div>
+	<div align="center" class="btnBox">
+		<a id="btnInit" href="#" data-opts='{ "color": "gray", "size": "large" }'>Initialize select</a>
+		<a id="btnBind" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>bind</a>
+		<a id="btnVal" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>val</a>
+		<a id="btnData" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>data</a>
+		<a id="btnReset" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>reset</a>
+		<a id="btnReload" href="#" data-opts='{ "color": "white", "size": "large" }'>Reload this page</a>
 	</div>
 
-	<div class="divBar">SOURCE CODE [ Click! this bar ]</div>
-	<div class="sourceBox">Omitted</div>
-</div>
+	<p class="smallContTit">Result : </p>
+	<div class="result" align="center" style="padding: 15px;">
+		<table id="inputBox" class="form">
+			<tr>
+				<th align="right" width="85"><label for="eyeColor">eye color</label></th>
+				<td width="300">
+					<select id="eyeColor">
+						<option>선택</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th align="right"><label for="company">company</label></th>
+				<td>
+					<select id="company" multiple="multiple"></select>
+				</td>
+			</tr>
+			<tr>
+				<th align="right"><label for="gender">gender</label></th>
+				<td>
+					<input id="gender" type="radio" />
+				</td>
+			</tr>
+			<tr>
+				<th align="right"><label for="favoriteFruit">favorite fruit</label></th>
+				<td>
+					<input id="favoriteFruit" type="checkbox" />
+				</td>
+			</tr>
+		</table>
+	</div>
+</article>
 
 <script type="text/javascript">
+	N("article#select").cont({
+		"select" : null,
+	    init : function(view, request) {
+	    	// source Code
+	    	N.comm({
+	       		url : "html/apid/" + view.attr("id") + ".html",
+	       		dataType : "html"
+	       	}).submit(function(html) {
+	       		$("#sourceCode", view).text(html);
+	       	});
 
-N("div#select").cont({
-	"select" : null,
-    init : function(view, request) {
-    	// put source code
-    	IndexController.getSourceCode(request.get("url"), N("div.sourceBox", view));
+	    	// initialize buttons in div.btnBox
+	    	N("div.btnBox a", view).button();
 
-    	// make button
-    	this.initButton(view);
+	    	// bind events
+	    	this.setEvents(view, this);
+	    },
+	    setEvents : function(view, this_) {
+	    	N("a#btnInit", view).click(function(e) {
+	            e.preventDefault();
+	            var data = eval(N("textarea.data", view).val())[0][N("select#data", view).val()];
+	            var opts = {
+	            	context : N("select#context", view).val(),
+					key : N("input#key", view).val(),
+					val : N("input#val", view).val(),
+					append : N("input#append", view).is(":checked"),
+					direction : N("select#direction", view).val(),
+	            }
+	            this_.select = $(data).select(opts);
 
-    	// event bind
-    	this.setEvents(view, this);
-    },
-    initButton : function(view) {
-    	N("div.btnBox a", view).button();
-    },
-    setEvents : function(view, this_) {
-    	N("a#btnInit", view).click(function(e) {
-            e.preventDefault();
-            var data = eval(N("textarea.data", view).val())[0][N("select#data", view).val()];
-            var opts = {
-            	context : N("select#context", view).val(),
-				key : N("input#key", view).val(),
-				val : N("input#val", view).val(),
-				append : N("input#append", view).is(":checked"),
-				direction : N("select#direction", view).val(),
-            }
-            this_.select = $(data).select(opts);
+	           	N("a#btnBind", view).instance("button").enable();
+	           	N("a#btnVal", view).instance("button").enable();
+	           	N("a#btnData", view).instance("button").enable();
+	           	N("a#btnReset", view).instance("button").enable();
+	        });
 
-           	N("a#btnBind", view).instance("button").enable();
-           	N("a#btnVal", view).instance("button").enable();
-           	N("a#btnData", view).instance("button").enable();
-           	N("a#btnReset", view).instance("button").enable();
-        });
+	        N("a#btnBind", view).click(function(e) {
+	        	e.preventDefault();
+	        	this_.select.bind();
+	        });
 
-        N("a#btnBind", view).click(function(e) {
-        	e.preventDefault();
-        	this_.select.bind();
-        });
+	        N("a#btnVal", view).click(function(e) {
+	        	e.preventDefault();
+	        	var value = N.string.trimToNull(N("input#val:eq(1)", view).val());
+	        	if(value !== null) {
+	        		this_.select.val(value);
+	        	} else {
+	        		N("div.result").alert(this_.select.val()).show();
+	        	}
+	        });
 
-        N("a#btnVal", view).click(function(e) {
-        	e.preventDefault();
-        	var value = N.string.trimToNull(N("input#val:eq(1)", view).val());
-        	if(value !== null) {
-        		this_.select.val(value);
-        	} else {
-        		N("div.result").alert(this_.select.val()).show();
-        	}
-        });
+	        N("a#btnData", view).click(function(e) {
+	        	e.preventDefault();
+	        	N("div.result").alert({
+	        		msg : '<div class="pre">' + N.json.format(this_.select.data(N("input#data", view).is(":checked"))) + '</div>',
+	        		width : 400,
+	        		height : 250
+	        	}).show();
+	        });
 
-        N("a#btnData", view).click(function(e) {
-        	e.preventDefault();
-        	N("div.result").alert({
-        		msg : '<div class="pre">' + N.json.format(this_.select.data(N("input#data", view).is(":checked"))) + '</div>',
-        		width : 400,
-        		height : 250
-        	}).show();
-        });
+	        N("a#btnReset", view).click(function(e) {
+	        	e.preventDefault();
+	        	this_.select.reset(N("input#reset", view).is(":checked"));
+	        });
 
-        N("a#btnReset", view).click(function(e) {
-        	e.preventDefault();
-        	this_.select.reset(N("input#reset", view).is(":checked"));
-        });
-
-        N("a#btnReload", view).click(function(e) {
-        	e.preventDefault();
-        	N(view.parent()).comm(this_.request.get("url")).submit();
-        });
-    },
-    /**
-     * for popup exemple
-     */
-    onOpen : function(onOpenData) {
-    	N(window).alert("onOpen 콜백 실행<br />onOpenData :<br />" + onOpenData).show();
-    }
-});
-
+	        N("a#btnReload", view).click(function(e) {
+	        	e.preventDefault();
+	        	N(view.parent()).comm(this_.request.get("url")).submit();
+	        });
+	    },
+	    /**
+	     * for popup exemple
+	     */
+	    onOpen : function(onOpenData) {
+	    	N(window).alert("onOpen 콜백 실행<br />onOpenData :<br />" + onOpenData).show();
+	    }
+	});
 </script>

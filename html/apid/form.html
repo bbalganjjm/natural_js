@@ -1,16 +1,5 @@
-<div id="form">
-	<div class="intro">
-		<h1><b>Form</b> : Form(N.form)은 지정한 영역에 Row 데이터를 바인드하고 연결 해 폼을 만듭니다.</h1>
-		<h2>[Initialize form] 버튼을 클릭하면 지정한 데이터와 영역을 기반으로 폼 객체를 생성 합니다.</h2>
-		<h2>[add] 버튼을 클릭하면 폼 안에 있는 입력요소(HTML Input element)를 기반으로 새로운 data 를 생성하고 생성된 data 를 바인드 합니다.</h2>
-		<h2>[bind] 버튼을 클릭하면 DATA 영역에 있는 JSON 데이터를 지정한 요소에 폼을 바인드 합니다.</h2>
-		<h2>[revert] 버튼을 클릭하면 처음 바인드 한 상태로 돌려 줍니다.</h2>
-		<h2>[val] 버튼을 클릭하면 key 만 함수의 인자로 입력하면 해당 값을 가져오고 key, val 을 지정하면 마지막 인자값인 val 값으로 값을 바꿔줍니다.</h2>
-		<h2>[data] 버튼을 클릭하면 Form에 바인드되어 있는 데이터를 가져옵니다. 인자로 true를 지정하면 현제 선택되어 있는 data만 가져옵니다.</h2>
-		<h2>[validate] 버튼을 클릭하면 폼 안에 입력된 값 전체에 대한 데이터 검증을 실행하고 성공하면 true 를 반환하고 실해하면 false 와 검증오류 메시지를 보여줍니다.</h2>
-		<h2>Form은 한번만 초기화 할 수 있습니다. 옵션을 변경하려면 [Reload this page] 버튼을 누른 후 다시 설정 하기 바랍니다.</h2>
-	</div>
-	<div class="divBar">DATA</div>
+<article id="form">
+	<p class="smallContTit">Data : </p>
 	<div class="dataBox">
 		<textarea id="data" class="data">
 [
@@ -122,179 +111,179 @@
 ]
 		</textarea>
 	</div>
-	<div class="divBar">DEMO</div>
-	<div class="demoBox">
-		<p>Default options : </p>
-		<table class="form" style="width: 100%;">
-			<tr>
-				<th width="10%" align="right">context</th>
-				<td width="40%"><input id="context" type="text" value="table#form" readonly="readonly" /> Target element</td>
-				<th width="10%" align="right">validate</th>
-				<td width="40%"><input id="validate" type="checkbox" checked="checked" /> If this checkbox with uncheck(false), disable realtime validation check</td>
-			</tr>
-			<tr>
-				<th align="right">html</th>
-				<td colspan="3"><input id="html" type="checkbox" /> If this checkbox with check(true), do not recognize HTML tags</td>
-			</tr>
-		</table>
 
-		<p>Method options : </p>
-		<table class="form" style="width: 100%;">
-			<tr>
-				<th align="right" width="10%">bind</th>
-				<th align="right" width="10%">arguments[0]</th>
-				<td width="80%" colspan="3">
-					<input id="row" type="text" value="0" /> Row index for bind(default : 0)
-				</td>
-			</tr>
-			<tr>
-				<th align="right" width="10%" rowspan="2">val</th>
-				<th align="right" width="10%">arguments[0]</th>
-				<td width="80%" colspan="3">
-					<input id="key" type="text" value="name" /> key name
-				</td>
-			</tr>
-			<tr>
-				<th align="right" width="10%">arguments[1]</th>
-				<td width="80%" colspan="3">
-					<input id="val" type="text" value="jeff beck" /> If empty value set, get value of key, otherwise set with this value
-				</td>
-			</tr>
-			<tr>
-				<th align="right" width="10%">data</th>
-				<th align="right" width="10%">arguments[0]</th>
-				<td width="80%" colspan="3">
-					<input id="data" type="checkbox" checked="checked" /> If this checkbox with uncheck(false), get all data
-				</td>
-			</tr>
-		</table>
+	<p class="smallContTit">Default options : </p>
+	<table class="form" style="width: 100%;">
+		<tr>
+			<th width="10%" align="right">context</th>
+			<td width="40%"><input id="context" type="text" value="table#form" readonly="readonly" /> Target element</td>
+			<th width="10%" align="right">validate</th>
+			<td width="40%"><input id="validate" type="checkbox" checked="checked" /> If this checkbox with uncheck(false), disable realtime validation check</td>
+		</tr>
+		<tr>
+			<th align="right">html</th>
+			<td colspan="3"><input id="html" type="checkbox" /> If this checkbox with check(true), do not recognize HTML tags</td>
+		</tr>
+	</table>
 
-		<div align="center" class="btnBox">
-			<a id="btnInit" href="#" data-opts='{ "color": "gray", "size": "large" }'>Initialize form</a> |
-			<a id="btnAdd" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>add</a> | or |
-			<a id="btnBind" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>bind</a>
-			<a id="btnRevert" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>revert</a> |
-			<a id="btnVal" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>val</a>
-			<a id="btnData" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>data</a>
-			<a id="btnValidate" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>validate</a>
-			<a id="btnReload" href="#" data-opts='{ "color": "white", "size": "large" }'>Reload this page</a>
-		</div>
+	<p class="smallContTit">Method options : </p>
+	<table class="form" style="width: 100%;">
+		<tr>
+			<th align="right" width="10%">bind</th>
+			<th align="right" width="10%">arguments[0]</th>
+			<td width="80%" colspan="3">
+				<input id="row" type="text" value="0" /> Row index for bind(default : 0)
+			</td>
+		</tr>
+		<tr>
+			<th align="right" width="10%" rowspan="2">val</th>
+			<th align="right" width="10%">arguments[0]</th>
+			<td width="80%" colspan="3">
+				<input id="key" type="text" value="name" /> key name
+			</td>
+		</tr>
+		<tr>
+			<th align="right" width="10%">arguments[1]</th>
+			<td width="80%" colspan="3">
+				<input id="val" type="text" value="jeff beck" /> If empty value set, get value of key, otherwise set with this value
+			</td>
+		</tr>
+		<tr>
+			<th align="right" width="10%">data</th>
+			<th align="right" width="10%">arguments[0]</th>
+			<td width="80%" colspan="3">
+				<input id="data" type="checkbox" checked="checked" /> If this checkbox with uncheck(false), get all data
+			</td>
+		</tr>
+	</table>
 
-		<p>Result : </p>
-		<div class="result" style="height: 720px; padding: 15px;">
-			<table id="form" class="form">
-				<tr height="43">
-					<th width="85" align="right"><label for="picture">picture</label></th>
-					<td width="*"><img id="picture" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D" /></td>
-				</tr>
-				<tr>
-					<th align="right"><label for="name">name</label></th>
-					<td>
-						<input id="name" type="text" data-validate='[["required"]]' />
-					</td>
-				</tr>
-				<tr>
-					<th align="right"><label for="email">email</label></th>
-					<td>
-						<input id="email" type="text" data-format='[["trimtoempty"], ["generic", "@@@@@@＊＊＊"]]' data-validate='[["required"], ["email"]]' />
-					</td>
-				</tr>
-				<tr>
-					<th align="right"><label for="_id">password</label></th>
-					<td>
-						<input id="_id" type="password" data-validate='[["required"]]' />
-					</td>
-				</tr>
-				<tr>
-					<th align="right"><label for="balance">balance</label></th>
-					<td>
-						<input id="balance" type="text" data-format='[["trimtoempty"], ["numeric", "$#,###.##0"]]' data-validate='[["required"], ["decimal"]]' />
-					</td>
-				</tr>
-				<tr>
-					<th align="right"><label for="phone">phone</label></th>
-					<td>
-						<input id="phone" type="text" readonly="readonly" />
-					</td>
-				</tr>
-				<tr>
-					<th align="right"><label for="age">age</label></th>
-					<td>
-						<input id="age" type="text" disabled="disabled" />
-						<input id="index" type="hidden" />
-					</td>
-				</tr>
-				<tr>
-					<th align="right"><label for="eyeColor">eye color</label></th>
-					<td>
-						<select id="eyeColor" data-validate='[["required"]]'>
-							<option>선택</option>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<th align="right"><label for="company">company</label></th>
-					<td>
-						<select id="company" multiple="multiple"></select>
-					</td>
-				</tr>
-				<tr>
-					<th align="right"><label for="gender">gender</label></th>
-					<td>
-						<input id="gender" type="radio" />
-					</td>
-				</tr>
-				<tr>
-					<th align="right"><label for="favoriteFruit">favorite fruit</label></th>
-					<td>
-						<input id="favoriteFruit" type="checkbox" />
-					</td>
-				</tr>
-				<tr>
-					<th align="right"><label for="registered">registered</label></th>
-					<td>
-						<input id="registered" type="text" data-format='[["date", 8, "date"]]' data-validate='[["required"]]' />
-					</td>
-				</tr>
-				<tr>
-					<th align="right"><label for="registered2">registered m</label></th>
-					<td>
-						<input id="registered2" type="text" data-format='[["date", 6, "month"]]' data-validate='[["required"]]' />
-					</td>
-				</tr>
-				<tr>
-					<th align="right"><label for="about">about</label></th>
-					<td>
-						<textarea id="about" rows="5" cols="80" data-format='[["trimtoempty"], ["limit", "50", "..."]]' data-validate='[["required"], ["korean"]]'></textarea>
-					</td>
-				</tr>
-				<tr>
-					<th align="right"><label for="greeting">about</label></th>
-					<td id="greeting"></td>
-				</tr>
-				<tr>
-					<th align="right"><label for="isActive">isActive</label></th>
-					<td>
-						<input id="isActive" type="checkbox" />
-					</td>
-				</tr>
-			</table>
-		</div>
+	<div align="center" class="btnBox">
+		<a id="btnInit" href="#" data-opts='{ "color": "gray", "size": "large" }'>Initialize form</a> |
+		<a id="btnAdd" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>add</a> | or |
+		<a id="btnBind" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>bind</a>
+		<a id="btnRevert" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>revert</a> |
+		<a id="btnVal" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>val</a>
+		<a id="btnData" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>data</a>
+		<a id="btnValidate" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>validate</a>
+		<a id="btnReload" href="#" data-opts='{ "color": "white", "size": "large" }'>Reload this page</a>
 	</div>
 
-	<div class="divBar">SOURCE CODE [ Click! this bar ]</div>
-	<div class="sourceBox">Omitted</div>
-</div>
+	<p class="smallContTit">Result : </p>
+	<div class="result" style="height: 720px; padding: 15px;">
+		<table id="form" class="form">
+			<tr height="43">
+				<th width="85" align="right"><label for="picture">picture</label></th>
+				<td width="*"><img id="picture" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D" /></td>
+			</tr>
+			<tr>
+				<th align="right"><label for="name">name</label></th>
+				<td>
+					<input id="name" type="text" data-validate='[["required"]]' />
+				</td>
+			</tr>
+			<tr>
+				<th align="right"><label for="email">email</label></th>
+				<td>
+					<input id="email" type="text" data-format='[["trimtoempty"], ["generic", "@@@@@@＊＊＊"]]' data-validate='[["required"], ["email"]]' />
+				</td>
+			</tr>
+			<tr>
+				<th align="right"><label for="_id">password</label></th>
+				<td>
+					<input id="_id" type="password" data-validate='[["required"]]' />
+				</td>
+			</tr>
+			<tr>
+				<th align="right"><label for="balance">balance</label></th>
+				<td>
+					<input id="balance" type="text" data-format='[["trimtoempty"], ["numeric", "$#,###.##0"]]' data-validate='[["required"], ["decimal"]]' />
+				</td>
+			</tr>
+			<tr>
+				<th align="right"><label for="phone">phone</label></th>
+				<td>
+					<input id="phone" type="text" readonly="readonly" />
+				</td>
+			</tr>
+			<tr>
+				<th align="right"><label for="age">age</label></th>
+				<td>
+					<input id="age" type="text" disabled="disabled" />
+					<input id="index" type="hidden" />
+				</td>
+			</tr>
+			<tr>
+				<th align="right"><label for="eyeColor">eye color</label></th>
+				<td>
+					<select id="eyeColor" data-validate='[["required"]]'>
+						<option>선택</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th align="right"><label for="company">company</label></th>
+				<td>
+					<select id="company" multiple="multiple"></select>
+				</td>
+			</tr>
+			<tr>
+				<th align="right"><label for="gender">gender</label></th>
+				<td>
+					<input id="gender" type="radio" />
+				</td>
+			</tr>
+			<tr>
+				<th align="right"><label for="favoriteFruit">favorite fruit</label></th>
+				<td>
+					<input id="favoriteFruit" type="checkbox" />
+				</td>
+			</tr>
+			<tr>
+				<th align="right"><label for="registered">registered</label></th>
+				<td>
+					<input id="registered" type="text" data-format='[["date", 8, "date"]]' data-validate='[["required"]]' />
+				</td>
+			</tr>
+			<tr>
+				<th align="right"><label for="registered2">registered m</label></th>
+				<td>
+					<input id="registered2" type="text" data-format='[["date", 6, "month"]]' data-validate='[["required"]]' />
+				</td>
+			</tr>
+			<tr>
+				<th align="right"><label for="about">about</label></th>
+				<td>
+					<textarea id="about" rows="5" cols="80" data-format='[["trimtoempty"], ["limit", "50", "..."]]' data-validate='[["required"], ["korean"]]'></textarea>
+				</td>
+			</tr>
+			<tr>
+				<th align="right"><label for="greeting">about</label></th>
+				<td id="greeting"></td>
+			</tr>
+			<tr>
+				<th align="right"><label for="isActive">isActive</label></th>
+				<td>
+					<input id="isActive" type="checkbox" />
+				</td>
+			</tr>
+		</table>
+	</div>
+</article>
 
 <script type="text/javascript">
 
 N("div#form").cont({
     init : function(view, request) {
-    	// put source code
-    	IndexController.getSourceCode(request.get("url"), N("div.sourceBox", view));
+    	// source Code
+    	N.comm({
+       		url : "html/apid/" + view.attr("id") + ".html",
+       		dataType : "html"
+       	}).submit(function(html) {
+       		$("#sourceCode", view).text(html);
+       	});
 
-    	// make button
-    	this.initButton(view);
+    	// initialize buttons in div.btnBox
+    	N("div.btnBox a", view).button();
 
     	// data
     	var data = eval(N("textarea.data").val());
@@ -302,7 +291,7 @@ N("div#form").cont({
     	// create selects
     	this.createSelects(data);
 
-    	// event bind
+    	// bind events
     	this.setEvents(view, this, data)
     },
     createSelects : function(data) {
@@ -310,9 +299,6 @@ N("div#form").cont({
 		$(data[2].company).select("select#company").bind();
 		$(data[2].gender).select("input#gender").bind();
 		$(data[2].favoriteFruit).select("input#favoriteFruit").bind();
-    },
-    initButton : function(view) {
-    	N("div.btnBox a", view).button();
     },
     setEvents : function(view, this_, data) {
     	var form;

@@ -1,95 +1,91 @@
-<div id="datepickerSample">
-	<div class="demoBox">
-		<p>Default options : </p>
-		<table class="form" style="width: 100%;">
-			<tr>
-				<th align="right" width="10%">monthonly</th>
-				<td width="40%"><input id="monthonly" type="checkbox" />If this checkbox with check(true), display Monthpicker</td>
-				<th align="right" width="10%">focusin</th>
-				<td width="40%"><input id="focusin" type="checkbox" checked="checked" />If this checkbox with uncheck(false), disable to focusin event of date input element</td>
-			</tr>
-			<tr>
-				<th align="right" width="10%">onSelect</th>
-				<td width="40%" colspan="3"><textarea id="onSelect" rows="3" cols="60">
+<article id="datepickerSample">
+	<p class="smallContTit">Default options : </p>
+	<table class="form" style="width: 100%;">
+		<tr>
+			<th align="right" width="10%">monthonly</th>
+			<td width="40%"><input id="monthonly" type="checkbox" />If this checkbox with check(true), display Monthpicker</td>
+			<th align="right" width="10%">focusin</th>
+			<td width="40%"><input id="focusin" type="checkbox" checked="checked" />If this checkbox with uncheck(false), disable to focusin event of date input element</td>
+		</tr>
+		<tr>
+			<th align="right" width="10%">onSelect</th>
+			<td width="40%" colspan="3"><textarea id="onSelect" rows="3" cols="60">
 function() {
 	alert("select");
 }
-				</textarea><br />Callback function for date select event</td>
-			</tr>
-		</table>
+			</textarea><br />Callback function for date select event</td>
+		</tr>
+	</table>
 
-		<div align="center" class="btnBox">
-			<a id="btnApply" href="#" data-opts='{ "color": "gray", "size": "large" }'>Apply Datepicker</a>
-			<a id="btnShow" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>Show</a>
-			<a id="btnHide" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>Hide</a>
-			<a id="btnReload" href="#" data-opts='{ "color": "white", "size": "large" }'>Reload this page</a>
-		</div>
-
-		<p>Result : </p>
-	    <div align="center" class="result" style="height: 70px;padding-top: 30px;">
-	    	<label for="datepicker">Datepicker</label> <input id="datepicker" type="text" />
-	    	Click! this text input element <b>after click the [Apply Datepicker] button</b>
-	    </div>
+	<div align="center" class="btnBox">
+		<a id="btnApply" href="#" data-opts='{ "color": "gray", "size": "large" }'>Apply Datepicker</a>
+		<a id="btnShow" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>Show</a>
+		<a id="btnHide" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>Hide</a>
+		<a id="btnReload" href="#" data-opts='{ "color": "white", "size": "large" }'>Reload this page</a>
 	</div>
-	<div class="divBar">SOURCE CODE [ Click! this bar ]</div>
-	<div class="sourceBox">Omitted</div>
-</div>
+
+	<p class="smallContTit">Result : </p>
+    <div align="center" class="result" style="height: 70px;padding-top: 30px;">
+    	<label for="datepicker">Datepicker</label> <input id="datepicker" type="text" />
+    	Click! this text input element <b>after click the [Apply Datepicker] button</b>
+    </div>
+</article>
 
 <script type="text/javascript">
+	N("article#datepickerSample").cont({
+		datepicker : undefined,
+	    init : function(view, request) {
+	    	// source Code
+	    	N.comm({
+	       		url : "html/apid/" + view.attr("id") + ".html",
+	       		dataType : "html"
+	       	}).submit(function(html) {
+	       		$("#sourceCode", view).text(html);
+	       	});
 
-N("div#datepickerSample").cont({
-	datepicker : undefined,
-    init : function(view, request) {
-    	// put source code
-    	IndexController.getSourceCode(request.get("url"), N("div.sourceBox", view));
+	    	// initialize buttons in div.btnBox
+	       	this.initButton(view);
 
-    	// make button
-       	this.initButton(view);
+	     	// bind events
+	    	N("div.btnBox a", view).button();
 
-     	// event bind
-    	this.setEvent(view, this);
+	     	//for communicator example
+	     	if(request.attr("hello")) {
+	     		view.alert('request.attr("hello") : <br/>' + request.attr("hello")).show();
+	     	}
+	    },
+	    setEvent : function(view, this_) {
+	        N("a#btnApply", view).click(function(e) {
+	        	e.preventDefault();
 
-     	//for communicator example
-     	if(request.attr("hello")) {
-     		view.alert('request.attr("hello") : <br/>' + request.attr("hello")).show();
-     	}
-    },
-    initButton : function(view) {
-    	N("div.btnBox a", view).button();
-    },
-    setEvent : function(view, this_) {
-        N("a#btnApply", view).click(function(e) {
-        	e.preventDefault();
+	        	var opts = {
+	           		monthonly : N("input#monthonly", view).is(":checked"),
+	           		onSelect : N.string.trimToNull(N("textarea#onSelect", view).val()) !== null ?
+	           				eval("(" + N("textarea#onSelect", view).val() + ")") : null,
+	           		focusin : N("input#focusin", view).is(":checked")
+	       		};
 
-        	var opts = {
-           		monthonly : N("input#monthonly", view).is(":checked"),
-           		onSelect : N.string.trimToNull(N("textarea#onSelect", view).val()) !== null ?
-           				eval("(" + N("textarea#onSelect", view).val() + ")") : null,
-           		focusin : N("input#focusin", view).is(":checked")
-       		};
+	        	this_.datepicker = $("input#datepicker", view).datepicker(opts);
 
-        	this_.datepicker = $("input#datepicker", view).datepicker(opts);
+	           	N(this).instance("button").disable();
+	           	N("a#btnShow", view).instance("button").enable();
+	           	N("a#btnHide", view).instance("button").enable();
+	        });
 
-           	N(this).instance("button").disable();
-           	N("a#btnShow", view).instance("button").enable();
-           	N("a#btnHide", view).instance("button").enable();
-        });
+	        N("a#btnShow", view).click(function(e) {
+	        	e.preventDefault();
+	        	this_.datepicker.show();
+	        });
 
-        N("a#btnShow", view).click(function(e) {
-        	e.preventDefault();
-        	this_.datepicker.show();
-        });
+	        N("a#btnHide", view).click(function(e) {
+	        	e.preventDefault();
+	        	this_.datepicker.hide();
+	        });
 
-        N("a#btnHide", view).click(function(e) {
-        	e.preventDefault();
-        	this_.datepicker.hide();
-        });
-
-        N("a#btnReload", view).click(function(e) {
-        	e.preventDefault();
-        	N(view.parent()).comm(this_.request.get("url")).submit();
-        });
-    }
-});
-
+	        N("a#btnReload", view).click(function(e) {
+	        	e.preventDefault();
+	        	N(view.parent()).comm(this_.request.get("url")).submit();
+	        });
+	    }
+	});
 </script>
