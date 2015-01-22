@@ -354,7 +354,7 @@ table.form th {
 }
 
 table.form th, table.form td {
-	border: 1px solid #ddfddd;
+	border: 1px solid #9dd999;
 }
 
 table.form td input[type='text']:hover, table.form td select:hover, table.form td textarea:hover,
