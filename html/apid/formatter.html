@@ -1,7 +1,7 @@
 <article id="formatter">
 	<p class="smallContTit">DATA :</p>
 	<div class="dataBox">
-		<textarea id="data" class="data">
+		<pre><code id="data">
 [
     {
         "numeric": 266734.12,
@@ -16,7 +16,7 @@
         "etc": 20140626121212
     }
 ]
-		</textarea>
+		</code></pre>
 	</div>
 	<div class="demoBox">
 		<p class="smallContTit">Declarative Result : </p>
@@ -81,7 +81,7 @@
 	    	N("a#btnFormatCommand", view).click(function(e) {
 	            e.preventDefault();
 
-	            var data = eval(N("textarea.data").val());
+	            var data = eval(N("code.data").val());
 
 	            var pData = N(data).formatter({
 	                "numeric" : [ [ "trimtoempty" ], [ "numeric", "#,###.##0000" ] ],
@@ -95,7 +95,7 @@
 
 	        N("a#btnFormatDeclarative", view).click(function(e) {
 	            e.preventDefault();
-	            var data = eval(N("textarea.data").val());
+	            var data = eval(N("code.data").val());
 	            N(data).formatter("#inputBox").format();
 	        });
 
