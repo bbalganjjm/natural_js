@@ -103,6 +103,7 @@ input[type='text'], input[type='password'], select, textarea, pre.data, div.data
 	font-family: "Nanum Gothic", "맑은 고딕", "dotum", "Segoe UI", sans-serif;
 	color: #004a00;
 	vertical-align: middle;
+	font-size: 12px;
 }
 
 input[type='text'], input[type='password'] {
