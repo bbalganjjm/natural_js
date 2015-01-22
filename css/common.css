@@ -486,6 +486,8 @@ article.apiDoc ul.links p {
 
 article.apiDoc .smallContTit {
 	padding-left: 16px;
+	font-size: 13px;
+	font-weight: bold;
 	background: url("../images/icon/sct_leaf.gif") no-repeat 0 2px;
 }
 
