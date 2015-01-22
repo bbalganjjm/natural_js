@@ -3,7 +3,7 @@
 	<table class="form" style="width: 100%;">
 		<tr>
 			<th align="right" width="10%">context</th>
-			<td width="40%"><input id="context" type="text" value="div.result" /> window or jQuery selector</td>
+			<td width="40%"><input id="context" type="text" value="#result" /> window or jQuery selector</td>
 			<th align="right" width="10%">msg</th>
 			<td width="40%"><textarea id="msg" rows="3" cols="60">
  Mollit elit qui reprehenderit fugiat excepteur adipisicing sunt id proident laborum sint proident. Amet cupidatat ipsum do irure qui magna sunt pariatur commodo eiusmod ipsum qui ad culpa.
@@ -48,7 +48,7 @@ function() {
 	</div>
 
 	<p class="smallContTit">Result : </p>
-    <div align="center" class="result pre"></div>
+    <div id="result"></div>
 </article>
 
 <script type="text/javascript">
@@ -90,7 +90,7 @@ function() {
 	            	onCancel : N.string.trimToNull(N("textarea#onCancel", view).val()) !== null ?
 	            			eval("(" + N("textarea#onCancel", view).val() + ")") : null
 	            };
-	            N(context).alert(opts).show()
+	            N(context, view).alert(opts).show()
 	        });
 	    }
 	});
