@@ -1,18 +1,18 @@
 <article id="validator">
 	<p class="smallContTit">DATA :</p>
 	<pre><code id="data">[
-    {
-        "numeric": 266734.12,
-        "generic": "abcDefGh",
-        "limit": "안녕하세요. 반가워요. 저는 Natural-JS 입니다.",
-        "etc": null
-    },
-    {
-        "numeric": 123334424.3533,
-        "generic": "ijkLMNop",
-        "limit": "Natural-JS 좋아요?",
-        "etc": 1
-    }
+	{
+		"numeric": 266734.12,
+		"generic": "abcDefGh",
+		"limit": "안녕하세요. 반가워요. 저는 Natural-JS 입니다.",
+		"etc": null
+	},
+	{
+		"numeric": 123334424.3533,
+		"generic": "ijkLMNop",
+		"limit": "Natural-JS 좋아요?",
+		"etc": 1
+	}
 ]</code></pre>
 
 	<p class="smallContTit">Declarative Result : </p>
@@ -79,7 +79,7 @@ N("article#validator").cont({
             e.preventDefault();
 
             var data = eval(N("code#data").text());
-console.log(data);
+
             var pData = JSON.stringify(N(data).validator({
                 "numeric" : [ [ "required" ], [ "integer+commas" ] ],
                 "generic" : [ [ "required" ], [ "korean" ] ],
