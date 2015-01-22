@@ -84,7 +84,7 @@ html, body {
 	background-color : #008000;
 }
 
-body, pre, textarea, select {
+body, textarea, select {
     margin: 0;
     font-size: 14px;
 	font-family: "Nanum Gothic", "맑은 고딕", "dotum", "Segoe UI", sans-serif;
@@ -95,7 +95,7 @@ img {
 	border: none;
 }
 
-input[type='text'], input[type='password'], select, textarea, pre.data, div.data {
+input[type='text'], input[type='password'], select, textarea {
 	border-radius: 3px;
 	padding: 3px 3px;
 	border: 1px solid #cccccc;
@@ -109,6 +109,7 @@ input[type='text'], input[type='password'], select, textarea, pre.data, div.data
 input[type='text'], input[type='password'] {
 	height: 20px;
 	line-height: 20px;
+	font-size: 12px;
 }
 
 input[type='text']:hover, input[type='password']:hover, select:hover, textarea:hover,
