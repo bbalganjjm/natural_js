@@ -46,7 +46,7 @@
 
 	<div align="center" class="btnBox">
 		<a id="btnValidateCommand" href="#" data-opts='{ "color": "gray", "size": "large" }'>Validate(Command)</a>
-		<a id="btnValidateDeclarative" href="#" data-opts='{ "color": "skyblue", "size": "large" }'>Validate</a>
+		<a id="btnValidateDeclarative" href="#" data-opts='{ "color": "skyblue", "size": "large" }'>Validate(Declarative)</a>
 	</div>
 
 	<p class="smallContTit">Command Result : </p>
@@ -78,6 +78,7 @@ N("article#validator").cont({
     	N("a#btnValidateCommand", view).click(function(e) {
             e.preventDefault();
 
+            debugger;
             var data = eval(N("code#data").text());
 
             var pData = JSON.stringify(N(data).validator({
