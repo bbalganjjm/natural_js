@@ -78,9 +78,8 @@ N("article#validator").cont({
     	N("a#btnValidateCommand", view).click(function(e) {
             e.preventDefault();
 
-            debugger;
             var data = eval(N("code#data").text());
-
+console.log(data);
             var pData = JSON.stringify(N(data).validator({
                 "numeric" : [ [ "required" ], [ "integer+commas" ] ],
                 "generic" : [ [ "required" ], [ "korean" ] ],
