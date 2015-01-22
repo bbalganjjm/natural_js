@@ -10,22 +10,22 @@
 </article>
 
 <script type="text/javascript">
-N("article#controller").cont({
-    init : function(view, request) {
-    	// view info
-    	N("#view", view).text('<article id="controller">' + view.html() + "</article>");
+	N("article#controller").cont({
+	    init : function(view, request) {
+	    	// view info
+	    	N("#view", view).text('<article id="controller">' + view.html() + "</article>");
 
-    	// request info
-    	N("#request", view).text(N.json.format(request.get()));
+	    	// request info
+	    	N("#request", view).text(N.json.format(request.get()));
 
-    	// source Code
-    	N.comm({
-       		url : "html/apid/" + view.attr("id") + ".html",
-       		contentType : "application/x-www-form-urlencoded",
-       		dataType : "html"
-       	}).submit(function(html) {
-       		$("#sourceCode", view).text(html);
-       	});
-    }
-});
+	    	// source Code
+	    	N.comm({
+	       		url : "html/apid/" + view.attr("id") + ".html",
+	       		contentType : "application/x-www-form-urlencoded",
+	       		dataType : "html"
+	       	}).submit(function(html) {
+	       		$("#sourceCode", view).text(html);
+	       	});
+	    }
+	});
 </script>
