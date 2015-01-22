@@ -6,8 +6,8 @@
 	</div>
 	<br>
 	<div id="defBtnBox" class="btnBox" align="center">
-		<a id="btnBind" href="#" data-opts='{ "color": "skyblue", "size": "large" }'>bind</a>
-		<a id="btnModifiedData" href="#" data-opts='{ "color": "skyblue", "size": "large" }'>get modified data</a>
+		<a id="btnBind" href="#" data-opts='{ "color": "skyblue", "size": "large" }'>데이터 바인드</a>
+		<a id="btnModifiedData" href="#" data-opts='{ "color": "skyblue", "size": "large" }'>수정된 데이터 가져오기</a>
 	</div>
 	<br>
 	<table id="grid" class="grid__ grid">
@@ -130,14 +130,16 @@ N("article#grid_form_popup").cont({
     	N("div.btnBox a", view).button();
 
     	// initialize popup
-    	var popup = N("table#form").popup({
+    	var popup = N("table#form", view).popup({
     		modal: false
     	});
 
-    	var form = N([]).form("table#form").bind();
+    	// initialize form
+    	var form = N([]).form("table#form", view).bind();
 
+    	// initialize grid
     	this.grid = N([]).grid({
-       		context :"table#grid",
+       		context :N("table#grid", view),
        		height : 350,
        		resizable : true,
        		sortable : true,
@@ -151,10 +153,10 @@ N("article#grid_form_popup").cont({
        	});
 
     	// bind events
-    	this.setEvents(this);
+    	this.setEvents(this, view);
     },
-    setEvents : function(this_) {
-    	N("a#btnBind").click(function(e) {
+    setEvents : function(this_, view) {
+    	N("a#btnBind", view).click(function(e) {
             e.preventDefault();
             N.comm({
         		url : "html/apid/data/grid.json",
@@ -164,9 +166,9 @@ N("article#grid_form_popup").cont({
         	});
         });
 
-    	N("a#btnModifiedData").click(function(e) {
+    	N("a#btnModifiedData", view).click(function(e) {
     		e.preventDefault();
-    		N("div.demoBox").alert({
+    		N("#grid", view).alert({
     			title : "수정된 ROW DATA",
     			msg : '<div class="pre">' + N.json.format(this_.grid.data("modified")) + '</div>',
     			width : 550,
