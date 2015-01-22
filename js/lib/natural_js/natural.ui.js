@@ -1004,7 +1004,7 @@
 				classOpts : [], // [{ url: undefined, width: "auto", active: false, preload: false, onOpen: undefined }]
 				randomSel : false,
 				onActive : null,
-				contents : obj.find("div"),
+				contents : obj.find("> div"),
 				effect : false
 				//TODO think more whether "onLoad event" needs or not
 			};
