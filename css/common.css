@@ -384,7 +384,7 @@ article.apiDoc table.form {
 	background-color: #ffffff;
 }
 
-article.apiDoc table.form th, article.apiDoc table.grid th {
+article.apiDoc table.form th, table.grid th {
 	background: linear-gradient(top, #ddfddd, #effeee);
 	background: -ms-linear-gradient(top, #ddfddd, #effeee);
 	background: -moz-linear-gradient(top, #ddfddd, #effeee);
@@ -406,7 +406,7 @@ article.apiDoc div.apidemo table.form th {
 	background-color: #ddfddd;
 }
 
-article.apiDoc table.form td, article.apiDoc table.grid td {
+article.apiDoc table.form td, table.grid td {
 	font-size: 12px;
 }
 
