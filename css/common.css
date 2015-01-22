@@ -374,19 +374,19 @@ article.apiDoc table.form th {
 	background: -moz-linear-gradient(top, #ddfddd, #effeee);
 	background: -o-linear-gradient(top, #ddfddd, #effeee);
 	background: -webkit-linear-gradient(top, #ddfddd, #effeee);
-	background-color: #ccfccc;
+	background-color: #ddfddd;
 	width: 90px;
 	max-width: 90px;
 }
 
 
 article.apiDoc div.apidemo table.form th {
-	background: linear-gradient(left, #efefef, #effeee);
-	background: -ms-linear-gradient(left, #efefef, #effeee);
-	background: -moz-linear-gradient(left, #efefef, #effeee);
-	background: -o-linear-gradient(left, #efefef, #effeee);
-	background: -webkit-linear-gradient(left, #efefef, #effeee);
-	background-color: #efefef;
+	background: linear-gradient(left, #ddfddd, #effeee);
+	background: -ms-linear-gradient(left, #ddfddd, #effeee);
+	background: -moz-linear-gradient(left, #ddfddd, #effeee);
+	background: -o-linear-gradient(left, #ddfddd, #effeee);
+	background: -webkit-linear-gradient(left, #ddfddd, #effeee);
+	background-color: #ddfddd;
 }
 
 article.apiDoc table.form td {
