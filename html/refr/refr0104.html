@@ -132,10 +132,13 @@
 			<td>양식화 되지않은 원(元)데이터(JSON Object)의 key 값</td>
 		</tr>
 	</table>
+
+	<h3>라. API DEMO</h3>
+	<div data-page="formatter" class="apidemo"></div>
 </div>
 
 <div id="tab2">
-	<h3>라. 포맷 룰(Format rules)</h3>
+	<h3>마. 포맷 룰(Format rules)</h3>
 	<table class="form">
 		<tr>
 			<th style="width: 200px;">옵션명</th>
@@ -343,10 +346,13 @@
 			</td>
 		</tr>
 	</table>
+
+	<h3>라. API DEMO</h3>
+	<div data-page="validator" class="apidemo"></div>
 </div>
 
 <div id="tab4">
-	<h3>라. 검증 룰(Validate rules)</h3>
+	<h3>마. 검증 룰(Validate rules)</h3>
 	<table class="form">
 		<tr>
 			<th style="width: 200px;">옵션명</th>
@@ -514,8 +520,6 @@
 	<p>Natural-DATA 패키지에는 JSON Array 타입의 데이터를 조작하고 정령할 수 있는 기능을 제공 합니다.</p>
 
 	<h3>나. 함수(Methods)</h3>
-
-
 	<table class="form">
 		<tr>
 			<th>Name</th>
@@ -689,7 +693,13 @@ fData의 값(결과값) :
 <script type="text/javascript">
 N("article#refr0104").cont({
     init : function(view, request) {
+    	// init tab
     	N("div#ndTab", view).tab();
+
+    	//load api demo page
+    	N(".apidemo", view).each(function() {
+    		N(this).comm("html/apid/" + N(this).data("page") + ".html").submit();
+    	});
     }
 });
 </script>

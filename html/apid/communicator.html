@@ -73,49 +73,47 @@ function(data) {
 </article>
 
 <script type="text/javascript">
+	N("article#communicator").cont({
+	    init : function(view, request) {
+	    	// source Code
+	    	N.comm({
+	       		url : "html/apid/" + view.attr("id") + ".html",
+	       		dataType : "html"
+	       	}).submit(function(html) {
+	       		$("#sourceCode", view).text(html);
+	       	});
 
-N("article#communicator").cont({
-    init : function(view, request) {
-    	// source Code
-    	N.comm({
-       		url : "html/apid/" + view.attr("id") + ".html",
-       		dataType : "html"
-       	}).submit(function(html) {
-       		$("#sourceCode", view).text(html);
-       	});
+	    	// initialize buttons in div.btnBox
+	    	N("div.btnBox a", view).button();
 
-    	// initialize buttons in div.btnBox
-    	N("div.btnBox a", view).button();
+	    	// bind events
+	    	this.setEvents(view, this);
+	    },
+	    setEvents : function(view, this_) {
+	    	N("a#btnGetJson", view).click(function(e) {
+	            e.preventDefault();
+	            N.comm({
+	        		url : "html/apid/data/grid.json"
+	        	}).submit(N.browser.msieVersion() !== 8 ? eval("(" + N("textarea#jsonCallback", view).val() + ")") : function(data) {
+	        		N("#jsonResult", view).text(JSON.stringify(data));
+	        	});
+	        });
 
-    	// bind events
-    	this.setEvents(view, this);
-    },
-    setEvents : function(view, this_) {
-    	N("a#btnGetJson", view).click(function(e) {
-            e.preventDefault();
-            N.comm({
-        		url : "html/apid/data/grid.json"
-        	}).submit(N.browser.msieVersion() !== 8 ? eval("(" + N("textarea#jsonCallback", view).val() + ")") : function(data) {
-        		N("#jsonResult", view).text(JSON.stringify(data));
-        	});
-        });
-
-    	N("a#btnGetPage", view).click(function(e) {
-            e.preventDefault();
-            var opts = {
-            	url : N("input#url", view).val(),
-            	async : N("input#async", view).is(":checked"),
-            	type : N("input#type", view).val(),
-            	dataType : N("input#dataType", view).val(),
-        		effect : N.string.trimToNull(N("input#effect", view).val()) === null ? false :
-      				[N("input#effect", view).val(),
-      		        parseInt(N("input#duration", view).val()),
-      		        N.string.trimToNull(N("textarea#callback", view).val()) !== null ?
-						eval("(" + N("textarea#callback", view).val() + ")") : undefined ]
-            }
-            N(N("input#context", view).val(), view).comm(opts).request.attr("hello", N("textarea#request", view).val()).submit();
-        });
-    }
-});
-
+	    	N("a#btnGetPage", view).click(function(e) {
+	            e.preventDefault();
+	            var opts = {
+	            	url : N("input#url", view).val(),
+	            	async : N("input#async", view).is(":checked"),
+	            	type : N("input#type", view).val(),
+	            	dataType : N("input#dataType", view).val(),
+	        		effect : N.string.trimToNull(N("input#effect", view).val()) === null ? false :
+	      				[N("input#effect", view).val(),
+	      		        parseInt(N("input#duration", view).val()),
+	      		        N.string.trimToNull(N("textarea#callback", view).val()) !== null ?
+							eval("(" + N("textarea#callback", view).val() + ")") : undefined ]
+	            }
+	            N(N("input#context", view).val(), view).comm(opts).request.attr("hello", N("textarea#request", view).val()).submit();
+	        });
+	    }
+	});
 </script>
