@@ -54,7 +54,7 @@
 		</div>
 
 		<p class="smallContTit">Command Result : </p>
-		<div class="result"></div>
+		<pre><code id="request"></code></pre>
 
 		<p class="smallContTit">Source Code :</p>
 		<pre><code id="sourceCode"></code></pre>
@@ -90,7 +90,7 @@
 	                "etc" : [["date", 12]]
 	            }).format();
 
-	            N("div.result", view).text(N.json.format(pData));
+	            N("#result", view).text(N.json.format(pData));
 	        });
 
 	        N("a#btnFormatDeclarative", view).click(function(e) {
