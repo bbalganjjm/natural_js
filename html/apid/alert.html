@@ -90,7 +90,7 @@ function() {
 	            	onCancel : N.string.trimToNull(N("textarea#onCancel", view).val()) !== null ?
 	            			eval("(" + N("textarea#onCancel", view).val() + ")") : null
 	            };
-	            N(context, view).alert(opts).show()
+	            N(context, view).alert(opts).show();
 	        });
 	    }
 	});

@@ -278,7 +278,7 @@
 			/**
 			 * Popup Element 가 담길 영역
 			 */
-			"container" : "div#contents",
+			"container" : "#naturalJsContents",
 			/**
 			 * 필수 값
 			 */
