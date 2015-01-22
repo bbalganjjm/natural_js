@@ -344,8 +344,17 @@ article a.link {
 	color: #00c000;
 }
 
+table.form th {
+	background: linear-gradient(left, #ddfddd, #effeee);
+	background: -ms-linear-gradient(left, #ddfddd, #effeee);
+	background: -moz-linear-gradient(left, #ddfddd, #effeee);
+	background: -o-linear-gradient(left, #ddfddd, #effeee);
+	background: -webkit-linear-gradient(left, #ddfddd, #effeee);
+	background-color: #ddfddd;
+}
+
 table.form th, table.form td {
-	border: 1px solid #cccccc;
+	border: 1px solid #effeee;
 }
 
 table.form td input[type='text']:hover, table.form td select:hover, table.form td textarea:hover,
