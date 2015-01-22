@@ -271,113 +271,111 @@
 </article>
 
 <script type="text/javascript">
+	N("article#form").cont({
+	    init : function(view, request) {
+	    	// source Code
+	    	N.comm({
+	       		url : "html/apid/" + view.attr("id") + ".html",
+	       		dataType : "html"
+	       	}).submit(function(html) {
+	       		$("#sourceCode", view).text(html);
+	       	});
 
-N("div#form").cont({
-    init : function(view, request) {
-    	// source Code
-    	N.comm({
-       		url : "html/apid/" + view.attr("id") + ".html",
-       		dataType : "html"
-       	}).submit(function(html) {
-       		$("#sourceCode", view).text(html);
-       	});
+	    	// initialize buttons in div.btnBox
+	    	N("div.btnBox a", view).button();
 
-    	// initialize buttons in div.btnBox
-    	N("div.btnBox a", view).button();
+	    	// data
+	    	var data = eval(N("textarea.data").val());
 
-    	// data
-    	var data = eval(N("textarea.data").val());
+	    	// create selects
+	    	this.createSelects(data);
 
-    	// create selects
-    	this.createSelects(data);
+	    	// bind events
+	    	this.setEvents(view, this, data)
+	    },
+	    createSelects : function(data) {
+	    	$(data[2].eyeColor).select("select#eyeColor").bind();
+			$(data[2].company).select("select#company").bind();
+			$(data[2].gender).select("input#gender").bind();
+			$(data[2].favoriteFruit).select("input#favoriteFruit").bind();
+	    },
+	    setEvents : function(view, this_, data) {
+	    	var form;
+	    	N("a#btnInit", view).click(function(e) {
+	    		e.preventDefault();
 
-    	// bind events
-    	this.setEvents(view, this, data)
-    },
-    createSelects : function(data) {
-    	$(data[2].eyeColor).select("select#eyeColor").bind();
-		$(data[2].company).select("select#company").bind();
-		$(data[2].gender).select("input#gender").bind();
-		$(data[2].favoriteFruit).select("input#favoriteFruit").bind();
-    },
-    setEvents : function(view, this_, data) {
-    	var form;
-    	N("a#btnInit", view).click(function(e) {
-    		e.preventDefault();
+	    		var opts = {
+	    			context : N("input#context", view).val(),
+	    			validate : N("input#validate", view).is(":checked"),
+	    			html : N("input#html", view).is(":checked")
+	    		}
 
-    		var opts = {
-    			context : N("input#context", view).val(),
-    			validate : N("input#validate", view).is(":checked"),
-    			html : N("input#html", view).is(":checked")
-    		}
+	    		form = N(data).form(opts);
 
-    		form = N(data).form(opts);
+	    		N("div.btnBox", view).find("a").instance("button", function() {
+	    			if(this.context().is("a#btnInit") || this.context().is("a#btnRevert")) {
+	    				this.disable();
+	    			} else {
+		            	this.enable();
+	    			}
+	            });
+	    	});
 
-    		N("div.btnBox", view).find("a").instance("button", function() {
-    			if(this.context().is("a#btnInit") || this.context().is("a#btnRevert")) {
-    				this.disable();
-    			} else {
-	            	this.enable();
-    			}
-            });
-    	});
+	        N("a#btnBind", view).click(function(e) {
+	            e.preventDefault();
+	            form.bind(parseInt($("input#row").val()));
 
-        N("a#btnBind", view).click(function(e) {
-            e.preventDefault();
-            form.bind(parseInt($("input#row").val()));
+	            N("a#btnAdd", view).instance("button").disable();
+	            N("a#btnRevert", view).instance("button").enable();
+	        });
 
-            N("a#btnAdd", view).instance("button").disable();
-            N("a#btnRevert", view).instance("button").enable();
-        });
+	        N("a#btnAdd", view).click(function(e) {
+	            e.preventDefault();
+	            form.add();
 
-        N("a#btnAdd", view).click(function(e) {
-            e.preventDefault();
-            form.add();
+	            N("a#btnBind", view).instance("button").disable();
+	        });
 
-            N("a#btnBind", view).instance("button").disable();
-        });
+	        N("a#btnRevert", view).click(function(e) {
+	            e.preventDefault();
+	            form.revert();
+	        });
 
-        N("a#btnRevert", view).click(function(e) {
-            e.preventDefault();
-            form.revert();
-        });
+	        N("a#btnVal", view).click(function(e) {
+	            e.preventDefault();
+	            var key = N.string.trimToNull(N("input#key", view).val());
+	            var value = N.string.trimToNull(N("input#val", view).val());
+	        	if(value !== null) {
+	        		form.val(key, value);
+	        	} else {
+	        		N("div.result", view).alert(form.val(key)).show();
+	        	}
+	        });
 
-        N("a#btnVal", view).click(function(e) {
-            e.preventDefault();
-            var key = N.string.trimToNull(N("input#key", view).val());
-            var value = N.string.trimToNull(N("input#val", view).val());
-        	if(value !== null) {
-        		form.val(key, value);
-        	} else {
-        		N("div.result", view).alert(form.val(key)).show();
-        	}
-        });
+	        N("a#btnData", view).click(function(e) {
+	        	e.preventDefault();
+	        	N("div.result", view).alert({
+	        		msg : '<div class="pre">' + N.json.format(form.data(N("input#data", view).is(":checked"))) + '</div>',
+	        		width : 400,
+	        		height : 250
+	        	}).show();
+	        });
 
-        N("a#btnData", view).click(function(e) {
-        	e.preventDefault();
-        	N("div.result", view).alert({
-        		msg : '<div class="pre">' + N.json.format(form.data(N("input#data", view).is(":checked"))) + '</div>',
-        		width : 400,
-        		height : 250
-        	}).show();
-        });
+	        N("a#btnValidate", view).click(function(e) {
+	            e.preventDefault();
+	            N("table#form").alert('<b>전체검증 결과 : ' + form.validate() + '</b>').show()
+	        });
 
-        N("a#btnValidate", view).click(function(e) {
-            e.preventDefault();
-            N("table#form").alert('<b>전체검증 결과 : ' + form.validate() + '</b>').show()
-        });
-
-        N("a#btnReload", view).click(function(e) {
-        	e.preventDefault();
-        	N(view.parent()).comm(this_.request.get("url")).submit();
-        });
-    },
-    /**
-     * for tab onOpen exemple
-     */
-    onOpen : function(onOpenData) {
-    	N.log("onOpen 콜백 실행\nonOpenData :\n" + JSON.stringify(onOpenData));
-    }
-});
-
+	        N("a#btnReload", view).click(function(e) {
+	        	e.preventDefault();
+	        	N(view.parent()).comm(this_.request.get("url")).submit();
+	        });
+	    },
+	    /**
+	     * for tab onOpen exemple
+	     */
+	    onOpen : function(onOpenData) {
+	    	N.log("onOpen 콜백 실행\nonOpenData :\n" + JSON.stringify(onOpenData));
+	    }
+	});
 </script>
