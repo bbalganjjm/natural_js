@@ -494,6 +494,6 @@ article.apiDoc .apidemo {
 }
 
 article.apiDoc .apidemo div.result {
-	background-color: #ddfddd;
+	border: 1px solid #ddfddd;
 	border-radius: 3px;
 }
