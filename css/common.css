@@ -471,3 +471,7 @@ article.apiDoc .smallContTit {
 	padding-left: 16px;
 	background: url("../images/icon/sct_leaf.gif") no-repeat 0 2px;
 }
+
+article.apiDoc .apidemo {
+	border: 1px dotted #00c000;
+}
