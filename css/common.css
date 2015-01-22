@@ -391,7 +391,7 @@ article.apiDoc table.form th {
 	background-color: #ddfddd;
 	width: 90px;
 	max-width: 90px;
-	font-size: 13px;
+	font-size: 12px;
 }
 
 
@@ -497,4 +497,5 @@ article.apiDoc .apidemo {
 article.apiDoc .apidemo div.result {
 	border: 1px solid #99d999;
 	border-radius: 3px;
+	padding: 10px;
 }
