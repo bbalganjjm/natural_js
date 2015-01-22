@@ -1,14 +1,14 @@
-<div id="cont">
+<article id="cont">
 	<div class="demoBox">
-		<p>View Info : </p>
+		<p class="smallContTit">View Info</p>
 		<pre><code id="view"></code></pre>
-		<p>Request Info : </p>
+		<p class="smallContTit">Request Info</p>
 		<pre><code id="request"></code></pre>
 	</div>
-</div>
+</article>
 
 <script type="text/javascript">
-N("div#cont").cont({
+N("article#cont").cont({
     init : function(view, request) {
     	// view info
     	N("#view", view).text(view.html());

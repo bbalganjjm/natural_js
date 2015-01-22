@@ -466,3 +466,8 @@ article.apiDoc hr {
 article.apiDoc ul.links p {
 	margin: 0;
 }
+
+article.apiDoc .smallContTit {
+	padding: 10px 0 10px 20px;
+	background: url("../images/icon/sct_leaf.gif") no-repeat 0 9px;
+}
