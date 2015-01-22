@@ -493,7 +493,7 @@ article.apiDoc .apidemo {
 	margin-bottom: 15px;
 }
 
-article.apiDoc .apidemo .result {
+article.apiDoc .apidemo div.result {
 	background-color: #ddfddd;
 	border-radius: 3px;
 }
