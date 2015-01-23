@@ -379,6 +379,10 @@ article.apiDoc table th {
 	width: 90px;
 }
 
+article.apiDoc table td p {
+	margin: 0;
+}
+
 article.apiDoc ul.list li {
 	padding-top: 15px; padding-bottom: 15px;
 }
