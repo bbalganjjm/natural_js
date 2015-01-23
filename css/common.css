@@ -88,7 +88,6 @@ body {
     margin: 0;
     font-size: 14px;
 	font-family: "Nanum Gothic", "맑은 고딕", "dotum", "Segoe UI", sans-serif;
-	word-break: break-word;
 	color: #004a00;
 }
 
@@ -377,7 +376,7 @@ article hr {
 
 /* API Document */
 article.apiDoc ul.list li {
-	word-break: break-word; padding-top: 15px; padding-bottom: 15px;
+	padding-top: 15px; padding-bottom: 15px;
 }
 
 article.apiDoc fieldset {
