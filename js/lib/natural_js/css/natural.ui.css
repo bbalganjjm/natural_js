@@ -311,6 +311,7 @@ div.v_resizable__ {
 
 div.grid_wrap__,
 div.thead_wrap__,
+div.tbody_wrap__,
 div.tfoot_wrap__ {
 	display: inline-block;
 }
