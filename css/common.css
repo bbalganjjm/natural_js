@@ -434,7 +434,7 @@ article.apiDoc .apidemo pre > code {
 	font-size: 12px;
 }
 
-article.apiDoc .apidemo > article table th {
+article.apiDoc .apidemo > article table.form th {
 	min-width: 10%;
 }
 
