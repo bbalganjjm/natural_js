@@ -26,6 +26,7 @@ var IndexController = {
 
 				e.preventDefault();
 				N(N.context.attr("architecture").page.context).comm(this.href).submit();
+				location.hash = this.href.replace(/\.html/g, "").replace(/html\//g, "");
 
 				// Google Analytics
 				ga('create', 'UA-58001949-1', 'auto');
@@ -39,5 +40,9 @@ var IndexController = {
 		} else {
 			N(N.context.attr("architecture").page.context).comm("html/gtst/gtst0100.html").submit();
 		}
+
+		// Google Analytics
+		ga('create', 'UA-58001949-1', 'auto');
+		ga('send', 'pageview');
 	}
 }
