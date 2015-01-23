@@ -434,6 +434,10 @@ article.apiDoc .apidemo pre > code {
 	font-size: 12px;
 }
 
+article.apiDoc .apidemo > article table th {
+	width: auto;
+}
+
 article.apiDoc .apidemo > article div.result {
 	border: 1px solid #99d999;
 	border-radius: 3px;
