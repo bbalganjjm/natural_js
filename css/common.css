@@ -375,6 +375,11 @@ article hr {
 }
 
 /* API Document */
+article.apiDoc table th {
+	max-width: 80px;
+	width: 100%;
+}
+
 article.apiDoc ul.list li {
 	padding-top: 15px; padding-bottom: 15px;
 }
