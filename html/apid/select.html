@@ -1,7 +1,7 @@
 <article id="select" title="Select 예제">
 	<p class="smallContTit">Data :</p>
 	<div class="dataBox">
-		<pre><code id="data" class="data">[{
+		<pre class="data"><code id="data">[{
     "gender": [{
 	     	"key" : "male",
 	     	"val" : "male"
@@ -188,7 +188,6 @@
 	    setEvents : function(view, this_) {
 	    	N("a#btnInit", view).click(function(e) {
 	            e.preventDefault();
-	            console.log(N("code#data", view));
 	            var data = eval(N("code#data", view).val())[0][N("select#data", view).val()];
 	            var opts = {
 	            	context : N("select#context", view).val(),
