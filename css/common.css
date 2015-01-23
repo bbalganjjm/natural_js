@@ -421,20 +421,20 @@ article.apiDoc .alert {
 	padding: 5px 0 5px 22px;
 }
 
-article.apiDoc .apidemo {
+article.apiDoc .apidemo > article {
 	border: 1px solid #77f777;
 	margin-bottom: 15px;
 	margin: 0 0 15px 0;
 }
 
-article.apiDoc .apidemo div.result {
+article.apiDoc .apidemo > article div.result {
 	border: 1px solid #99d999;
 	border-radius: 3px;
 	padding: 10px;
 	margin: 0 0 15px 0;
 }
 
-article.apiDoc .apidemo textarea {
+article.apiDoc .apidemo > article textarea {
 	width: 100%;
 	max-width: 357px;
 	height: 42px;
