@@ -435,7 +435,6 @@ article.apiDoc .apidemo pre > code {
 }
 
 article.apiDoc .apidemo > article table th {
-	width: inherit;
 	min-width: 10%;
 }
 
