@@ -5,24 +5,21 @@
 			<th align="right" width="10%">randomSel</th>
 			<td width="40%"><input id="randomSel" type="checkbox" /> If this checkbox with check(true), random select tab after tab initialize</td>
 			<th align="right" width="10%">onActive</th>
-			<td width="40%"><textarea id="onActive">
-function(activeLinkEle, allLinksEle, tabContentsEle) {
+			<td width="40%"><textarea id="onActive" style="height: 68px;">function(activeLinkEle, allLinksEle, tabContentsEle) {
 	N.log(activeLinkEle);
 	N.log(allLinksEle);
 	N.log(tabContentsEle);
-}
-			</textarea><br /> Callback function for tab active event</td>
+}</textarea><br /> Callback function for tab active event</td>
 		</tr>
 		<tr>
-			<th align="right" width="10%">effect<br />[effect, duration, callback]</th>
-			<td width="40%" colspan="3">[ <input id="effect" type="text" value="fadeIn" style="width: 50px;" />,
-				<input id="duration" type="text" value="300" style="width: 50px;" />,
+			<th align="right">effect<br />[effect, duration, callback]</th>
+			<td colspan="3">[ <input id="effect" type="text" value="fadeIn" style="width: 50px;" />,
+				<input id="duration" type="text" value="300" style="width: 40px;" />,
 				<textarea id="callback">
 function() {
 	N.log("Effect end");
-}
-				</textarea> ]
-				 * effects : show, hide, slideUp, slideDown, fadeIn, fadeOut
+}</textarea> ]<br>
+			* effects : show, hide, slideUp, slideDown, fadeIn, fadeOut
 			</td>
 		</tr>
 	</table>
