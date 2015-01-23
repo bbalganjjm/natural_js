@@ -170,18 +170,6 @@ table.form th {
 	background-color: #ddfddd;
 }
 
-article .apidemo table th,
-article .apidemo table td {
-	font-size: 12px;
-}
-
-article .apidemo input[type='text'],
-article .apidemo input[type='password'],
-article .apidemo select,
-article .apidemo textarea {
-	font-size: 12px;
-}
-
 /* page layout */
 header {
 	background: linear-gradient(top, #27a827, #008000);
@@ -421,11 +409,27 @@ article.apiDoc .alert {
 	padding: 5px 0 5px 22px;
 }
 
-article.apiDoc .apidemo > article {
+article.apiDoc .apidemo {
 	border: 1px solid #77f777;
 	margin-bottom: 15px;
 	margin: 0 0 15px 0;
+	font-size: 12px;
 }
+
+/*
+article .apidemo table th,
+article .apidemo table td {
+	font-size: 12px;
+}
+
+article .apidemo input[type='text'],
+article .apidemo input[type='password'],
+article .apidemo select,
+article .apidemo textarea {
+	font-size: 12px;
+}
+*/
+
 
 article.apiDoc .apidemo > article div.result {
 	border: 1px solid #99d999;
