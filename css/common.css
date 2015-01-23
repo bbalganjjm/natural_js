@@ -376,7 +376,7 @@ article hr {
 
 /* API Document */
 article.apiDoc table th {
-	max-width: 100px;
+	width: 90px;
 }
 
 article.apiDoc ul.list li {
