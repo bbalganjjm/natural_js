@@ -88,6 +88,7 @@ body {
     margin: 0;
     font-size: 14px;
 	font-family: "Nanum Gothic", "맑은 고딕", "dotum", "Segoe UI", sans-serif;
+	word-break: break-word;
 	color: #004a00;
 }
 
@@ -331,23 +332,30 @@ article dl.qna dt {
 }
 
 article h1 {
-	padding: 10px 0 10px 35px;
+	padding: 15px 0 10px 35px;
 	border-bottom: 1px solid #009000;
 	font-size: 18px;
 	background: url("../images/icon/h1_leaf.png") no-repeat 0 8px;
+	margin: 0 0 20px 0;
 }
 
 article h2 {
+	font-weight: bold;
+	padding: 10px 0 10px 20px;
+	background: url("../images/icon/dt_leaf.png") no-repeat 0 9px;
 	font-size: 16px;
+	margin: 0 0 18px 0;
 }
 
 article h3 {
 	margin-top: 30px;
 	font-size: 15px;
+	margin: 0 0 16px 0;
 }
 
 article h4 {
 	font-size: 14px;
+	margin: 0 0 15px 0;
 }
 
 .smallContTit {
@@ -355,7 +363,7 @@ article h4 {
 	font-size: 13px;
 	font-weight: bold;
 	background: url("../images/icon/sct_leaf.gif") no-repeat 0 2px;
-	margin-top: 20px !important;
+	margin: 0 0 15px 0;
 }
 
 article a.link {
@@ -373,23 +381,6 @@ div#popupTemp {
 /* API Document */
 article.apiDoc table.form td, table.grid td {
 	font-size: 12px;
-}
-
-article.apiDoc table.form td pre {
-	font-size: 11px;
-	margin: 5px;
-}
-
-article.apiDoc pre {
-	margin: 10px 0;
-}
-
-article.apiDoc table.form th, article.apiDoc table.form td {
-	word-break: break-word;
-}
-
-article.apiDoc p {
-	word-break: break-word; margin: 5px 0 5px 0;
 }
 
 article.apiDoc ul.list li {
@@ -428,17 +419,6 @@ article.apiDoc .alert {
 	background: url("../images/icon/alert.png") no-repeat 0 5px;
 	font-size: 89%;
 	padding: 5px 0 5px 22px;
-}
-
-article.apiDoc h2 {
-	font-weight: bold;
-	padding: 10px 0 10px 20px;
-	background: url("../images/icon/dt_leaf.png") no-repeat 0 9px;
-}
-
-article.apiDoc h4 {
-	font-weight: bold;
-	margin: 10px 0 10px 0;
 }
 
 article.apiDoc hr {
