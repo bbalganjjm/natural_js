@@ -2014,7 +2014,7 @@
 		        var borderBottom = sampleCell.css("border-bottom-width") + " " + sampleCell.css("border-bottom-style") + " " + sampleCell.css("border-bottom-color");
 
 		        // Root grid container
-		        var gridWrap = opts.context.wrap('<div class="grid_wrap__"/>').parent();
+		        var gridWrap = opts.context.wrap('<span class="grid_wrap__"/>').parent();
 		        gridWrap.css({
 		        	"border-left" : borderLeft
 		        });
@@ -2024,7 +2024,7 @@
 		        var thead = opts.context.clone(true, true);
 		        thead.find("tbody").remove();
 		        thead.find("tfoot").remove();
-		        var theadWrap = thead.wrap('<div class="thead_wrap__"/>').parent().css({
+		        var theadWrap = thead.wrap('<span class="thead_wrap__"/>').parent().css({
 		        	"padding-right" : scrollbarWidth + "px",
 		        	"margin-left" : "-1px"
 		        });
@@ -2044,7 +2044,7 @@
 		        this.tbodyTemp.find("td").css({
 	                "border-top" : "none"
 		        });
-		        var tbodyWrap = opts.context.wrap('<div class="tbody_wrap__"/>').parent().css({
+		        var tbodyWrap = opts.context.wrap('<span class="tbody_wrap__"/>').parent().css({
 		        	"height" : String(opts.height) + "px",
 		        	"overflow-y" : "scroll",
 		        	"margin-left" : "-1px",
@@ -2115,7 +2115,7 @@
 			        opts.context.find("> tfoot").remove();
 			        tfoot.find("thead").remove();
 			        tfoot.find("tbody").remove();
-			        tfootWrap = tfoot.wrap('<div class="tfoot_wrap__"/>').parent().css({
+			        tfootWrap = tfoot.wrap('<span class="tfoot_wrap__"/>').parent().css({
 			        	"padding-right" : scrollbarWidth + "px",
 			        	"margin-left" : "-1px"
 			        });
@@ -2129,7 +2129,7 @@
 			},
 			vResize : function(gridWrap, tbodyWrap, tfootWrap) {
         		var pressed = false;
-	        	var vResizable = $('<div class="v_resizable__" align="center"></div>');
+	        	var vResizable = $('<span class="v_resizable__" align="center"></span>');
 	        	vResizable.css("cursor", "n-resize");
 
 	        	var currHeight, tbodyOffset, tfootHeight = 0;
@@ -2214,7 +2214,7 @@
 		            		targetCellEle = opts.context.find("thead th:eq(" + theadCells.index(currCellEle) + ")");
 		            		targetNextCellEle = opts.context.find("thead th:eq(" + (theadCells.index(currCellEle) + 1) + ")");
 		            		currCellEleTable = currCellEle.parents("table.grid__");
-		            		targetCellEleWrap = targetCellEle.parents("div.tbody_wrap__");
+		            		targetCellEleWrap = targetCellEle.parents("span.tbody_wrap__");
 		            	}
 
 		            	// to block sort event
@@ -2310,7 +2310,7 @@
         		var opts = this.options;
         		var thead;
     			if (opts.height > 0) {
-    	        	thead = opts.context.closest("div.grid_wrap__").find("> div.thead_wrap__ thead");
+    	        	thead = opts.context.closest("span.grid_wrap__").find("> span.thead_wrap__ thead");
     	        } else {
     	        	thead = opts.context.find("thead");
     	        }

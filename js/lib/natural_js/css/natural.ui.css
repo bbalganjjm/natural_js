@@ -309,22 +309,21 @@ div.v_resizable__ {
 	border-bottom: 3px double #dddddd;
 }
 
-div.grid_wrap__,
-div.thead_wrap__,
-div.tbody_wrap__,
-div.tfoot_wrap__ {
-	display: inline-block;
+span.grid_wrap__,
+span.thead_wrap__,
+span.tbody_wrap__,
+span.tfoot_wrap__ {
 }
 
-div.thead_wrap__ thead th .asc__ {
+span.thead_wrap__ thead th .asc__ {
 	color: blue;
 }
 
-div.thead_wrap__ thead th .desc__ {
+span.thead_wrap__ thead th .desc__ {
 	color: red;
 }
 
-div.tbody_wrap__ {
+span.tbody_wrap__ {
 	background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAIklEQVQIW2NkQAIf7n/4zwjjgzgCigKMYAEYB8RmROaABAAQCg/DqNBm8AAAAABJRU5ErkJggg==") repeat;
 }
 
