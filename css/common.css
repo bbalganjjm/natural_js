@@ -420,14 +420,12 @@ article.apiDoc .apidemo {
 }
 
 article.apiDoc .apidemo table th,
-article.apiDoc .apidemo table td {
-	font-size: 12px;
-}
-
+article.apiDoc .apidemo table td,
 article.apiDoc .apidemo input[type='text'],
 article.apiDoc .apidemo input[type='password'],
 article.apiDoc .apidemo select,
-article.apiDoc .apidemo textarea {
+article.apiDoc .apidemo textarea,
+article.apiDoc .apidemo pre > code {
 	font-size: 12px;
 }
 
