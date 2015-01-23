@@ -309,11 +309,13 @@ div.v_resizable__ {
 	border-bottom: 3px double #dddddd;
 }
 
-div.grid_wrap__,
-div.thead_wrap__,
-div.tbody_wrap__,
-div.tfoot_wrap__ {
-	display: block;
+div.grid_wrap__ {
+	display: inline-block;
+}
+
+div.thead_wrap__ > table,
+div.body_wrap__ > table {
+	min-width: 100%;
 }
 
 div.thead_wrap__ thead th .asc__ {
