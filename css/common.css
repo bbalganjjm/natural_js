@@ -159,6 +159,7 @@ table th, table td {
 	border: 1px solid #99d999;
 	padding: 5px;
 	font-size: 13px;
+	word-break: break-word;
 }
 
 table.form th {
@@ -170,10 +171,17 @@ table.form th {
 	background-color: #ddfddd;
 }
 
-article .apidemo table th, article .apidemo table td {
+article .apidemo table th,
+article .apidemo table td {
 	font-size: 12px;
 }
 
+article .apidemo input[type='text'],
+article .apidemo input[type='password'],
+article .apidemo select,
+article .apidemo textarea {
+	font-size: 12px;
+}
 
 /* page layout */
 header {
@@ -288,7 +296,6 @@ section {
 section article {
 	padding: 1px 15px 15px 15px;
 	word-break: break-word;
-	word-break: break-all;
 	line-height: 160%;
 }
 
