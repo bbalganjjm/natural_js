@@ -1,8 +1,7 @@
 <article id="select" title="Select 예제">
 	<p class="smallContTit">Data :</p>
 	<div class="dataBox">
-		<textarea id="data" class="data">
-[{
+		<pre><code id="data">[{
     "gender": [{
 	     	"key" : "male",
 	     	"val" : "male"
@@ -61,8 +60,7 @@
 	     	"key" : "banana",
 	     	"val" : "banana"
     }]
-}]
-		</textarea>
+}]</code></pre>
 	</div>
 	<p class="smallContTit">Default options : </p>
 	<table class="form">
@@ -190,7 +188,7 @@
 	    setEvents : function(view, this_) {
 	    	N("a#btnInit", view).click(function(e) {
 	            e.preventDefault();
-	            var data = eval(N("textarea.data", view).val())[0][N("select#data", view).val()];
+	            var data = eval(N("code#data", view).val())[0][N("select#data", view).val()];
 	            var opts = {
 	            	context : N("select#context", view).val(),
 					key : N("input#key", view).val(),
