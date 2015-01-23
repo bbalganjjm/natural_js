@@ -29,13 +29,13 @@
 		</tr>
 		<tr>
 			<th align="right">onOk</th>
-			<td><textarea id="onOk" rows="3" cols="60">
+			<td><textarea id="onOk">
 function() {
 	alert("Ok");
 }
 			</textarea><br />Callback function for Ok button event</td>
 			<th align="right">onCancel</th>
-			<td><textarea id="onCancel" rows="3" cols="60">
+			<td><textarea id="onCancel">
 function() {
 	alert("Cancel");
 }
@@ -103,9 +103,9 @@ function() {
 		</tr>
 		<tr>
 			<th align="right">onOk</th>
-			<td><textarea id="onOk" rows="3" cols="60"></textarea><br />Callback function for Ok button event</td>
+			<td><textarea id="onOk"></textarea><br />Callback function for Ok button event</td>
 			<th align="right">onCancel</th>
-			<td><textarea id="onCancel" rows="3" cols="60">
+			<td><textarea id="onCancel">
 function() {
 	alert("Cancel");
 }
@@ -116,17 +116,17 @@ function() {
 			<td><input id="onOpen" type="text" value="onOpen" /><br />
 			The method of this value is run whenever open the popup, that must be defined in Controller's method in loaded popup contens</td>
 			<th align="right">onOpenData</th>
-			<td><textarea id="onOpenData" rows="3" cols="60">This value is sent to onOpen callback functions argument of popup's Controller</textarea></td>
+			<td><textarea id="onOpenData">This value is sent to onOpen callback functions argument of popup's Controller</textarea></td>
 		</tr>
 		<tr>
 			<th align="right">onClose</th>
-			<td><textarea id="onClose" rows="3" cols="60">
+			<td><textarea id="onClose">
 function(onCloseData) {
 	alert(N.json.format(onCloseData));
 }
 			</textarea><br /></td>
 			<th align="right">onCloseData</th>
-			<td><textarea id="onCloseData" rows="3" cols="60">This value is sent to onClose callback functions argument of parent page</textarea><br /></td>
+			<td><textarea id="onCloseData">This value is sent to onClose callback functions argument of parent page</textarea><br /></td>
 		</tr>
 	</table>
     <div class="btnBox" align="center">

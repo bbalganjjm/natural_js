@@ -47,7 +47,7 @@
 			<th align="right">scrollPaging.size</th>
 			<td><input id="scrollPagingSize" type="text" value="100" /> scroll paging size</td>
 			<th align="right">rowHandler</th>
-			<td><textarea id="rowHandler" rows="5" cols="60">
+			<td><textarea id="rowHandler">
 function(index, row, data) {
 	N.log(index);
 	N.log(row);
@@ -57,7 +57,7 @@ function(index, row, data) {
 		</tr>
 		<tr>
 			<th align="right">onSelect</th>
-			<td><textarea id="onSelect" rows="5" cols="60">
+			<td><textarea id="onSelect">
 function(index, row, data) {
 	N.log(index);
 	N.log(row);
@@ -65,7 +65,7 @@ function(index, row, data) {
 }
 			</textarea><br /> Callback function for tab active event</td>
 			<th align="right">onBind</th>
-			<td><textarea id="onBind" rows="4" cols="60">
+			<td><textarea id="onBind">
 function(context, data) {
 	N.log(context);
 	N.log(data);

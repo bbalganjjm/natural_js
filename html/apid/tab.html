@@ -5,7 +5,7 @@
 			<th align="right" width="10%">randomSel</th>
 			<td width="40%"><input id="randomSel" type="checkbox" /> If this checkbox with check(true), random select tab after tab initialize</td>
 			<th align="right" width="10%">onActive</th>
-			<td width="40%"><textarea id="onActive" rows="3" cols="60">
+			<td width="40%"><textarea id="onActive">
 function(activeLinkEle, allLinksEle, tabContentsEle) {
 	N.log(activeLinkEle);
 	N.log(allLinksEle);
@@ -17,7 +17,7 @@ function(activeLinkEle, allLinksEle, tabContentsEle) {
 			<th align="right" width="10%">effect<br />[effect, duration, callback]</th>
 			<td width="40%" colspan="3">[ <input id="effect" type="text" value="fadeIn" style="width: 50px;" />,
 				<input id="duration" type="text" value="300" style="width: 50px;" />,
-				<textarea id="callback" rows="3" cols="30">
+				<textarea id="callback">
 function() {
 	N.log("Effect end");
 }

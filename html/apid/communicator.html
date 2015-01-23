@@ -32,7 +32,7 @@
 				<th align="right">effect<br />[effect, duration, callback]</th>
 				<td>[ <input id="effect" type="text" value="fadeIn" style="width: 50px;" />,
 					<input id="duration" type="text" value="300" style="width: 50px;" />,
-					<textarea id="callback" rows="3" cols="30">
+					<textarea id="callback">
 function() {
 	N.log("Effect end");
 }
@@ -47,7 +47,7 @@ function() {
 			<tr>
 				<th align="right" width="10%">submit</th>
 				<th align="right" width="10%">arguments[0]</th>
-				<td width="80%" colspan="3"><textarea id="jsonCallback" rows="3" cols="60">
+				<td width="80%" colspan="3"><textarea id="jsonCallback">
 function(data) {
 	N("#jsonResult", view).text(JSON.stringify(data));
 }
@@ -56,7 +56,7 @@ function(data) {
 			<tr>
 				<th align="right" width="10%">request</th>
 				<th align="right" width="10%">arguments[0]</th>
-				<td width="80%" colspan="3"><textarea id="request" rows="2" cols="60">Hello datepicker~!</textarea><br /> Request attribute</td>
+				<td width="80%" colspan="3"><textarea id="request">Hello datepicker~!</textarea><br /> Request attribute</td>
 			</tr>
 		</table>
 
