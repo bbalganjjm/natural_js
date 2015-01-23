@@ -316,6 +316,10 @@ footer {
 	font-size: 13px;
 }
 
+article dl.qna {
+	margin: 0;
+}
+
 article dl.qna dt {
 	font-size: 15px;
 	font-weight: bold;
