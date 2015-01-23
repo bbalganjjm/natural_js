@@ -143,6 +143,7 @@ a {
 table {
 	margin: 0 0 15px 0;
 	border-collapse: collapse;
+	table-layout: fixed;
 }
 
 table th {
@@ -282,6 +283,8 @@ section {
 section article {
 	padding: 1px 15px 15px 15px;
 	word-break: break-word;
+	word-break: break-all;
+	line-height: 160%;
 }
 
 section article pre {
@@ -312,15 +315,6 @@ footer {
 	color: #cceccc;
 	text-shadow: -1px -1px #008000;
 	font-size: 13px;
-}
-
-article p,
-article ol li,
-article ul li,
-article dl.qna dt,
-article dl.qna dd {
-	line-height: 160%;
-	word-break: break-word;
 }
 
 article dl.qna dt {
