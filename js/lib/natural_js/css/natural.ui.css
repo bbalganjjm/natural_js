@@ -244,10 +244,6 @@ input[type='button'].btn_big__, button.btn_big__  {
 }
 
 /* Grid */
-div.tbody_wrap__ {
-	background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAIklEQVQIW2NkQAIf7n/4zwjjgzgCigKMYAEYB8RmROaABAAQCg/DqNBm8AAAAABJRU5ErkJggg==") repeat;
-}
-
 table.grid__ tbody{
 	background-color: #ffffff;
 }
@@ -266,13 +262,6 @@ table.grid__.grid_select__ tbody.grid_selected__ select,
 table.grid__.grid_select__ tbody.grid_selected__ textarea {
 	background-color: #999999;
 	color: #ffffff;
-}
-
-div.tbody_wrap__ table.grid__ td {
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	-o-text-overflow: ellipsis;
 }
 
 table.grid__ thead, table.grid__ tfoot{
@@ -320,8 +309,10 @@ div.v_resizable__ {
 	border-bottom: 3px double #dddddd;
 }
 
-div.grid_wrap__ {
-	min-width: 700px;
+div.grid_wrap__,
+div.thead_wrap__,
+div.tfoot_wrap__ {
+	display: inline-block;
 }
 
 div.thead_wrap__ thead th .asc__ {
@@ -330,6 +321,17 @@ div.thead_wrap__ thead th .asc__ {
 
 div.thead_wrap__ thead th .desc__ {
 	color: red;
+}
+
+div.tbody_wrap__ {
+	background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAIklEQVQIW2NkQAIf7n/4zwjjgzgCigKMYAEYB8RmROaABAAQCg/DqNBm8AAAAABJRU5ErkJggg==") repeat;
+}
+
+div.tbody_wrap__ table.grid__ td {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
 }
 
 /* Popup */
