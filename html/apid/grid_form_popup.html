@@ -110,7 +110,7 @@
 	</table>
 
 	<p class="smallContTit">Source Code :</p>
-	<pre><code id="sourceCode"></code></pre>
+	<script src="https://gist.github.com/bbalganjjm/3a0888384b802376501e.js"></script>
 </article>
 
 <script type="text/javascript">
@@ -118,14 +118,6 @@
 N("article#grid_form_popup").cont({
 	grid : undefined,
     init : function(view, request) {
-    	// source Code
-    	N.comm({
-       		url : "html/apid/" + view.attr("id") + ".html",
-       		dataType : "html"
-       	}).submit(function(html) {
-       		$("#sourceCode", view).text(html);
-       	});
-
     	// initialize buttons in div.btnBox
     	N("div.btnBox a", view).button();
 
