@@ -106,8 +106,7 @@ input[type='text'], input[type='password'], select, textarea {
 	vertical-align: middle;
 	background-color: #ffffff;
 	font-size: 13px;
-	height: 24px;
-	line-height: 24px;
+	line-height: 16px;
 	border-color: #cceccc;
 }
 
