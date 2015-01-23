@@ -188,8 +188,7 @@
 	    setEvents : function(view, this_) {
 	    	N("a#btnInit", view).click(function(e) {
 	            e.preventDefault();
-	            console.log(N("code#data", view));
-	            var data = eval(N("code#data", view).val())[0][N("select#data", view).val()];
+	            var data = eval(N("code#data", view).text())[0][N("select#data", view).val()];
 	            var opts = {
 	            	context : N("select#context", view).val(),
 					key : N("input#key", view).val(),
