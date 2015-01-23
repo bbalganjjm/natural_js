@@ -506,6 +506,7 @@ article.apiDoc .apidemo div.result {
 }
 
 article.apiDoc .apidemo textarea {
-	width: 95%;
+	width: 100%;
+	max-width: 358px;
 	height: 50px;
 }
