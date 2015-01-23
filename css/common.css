@@ -435,7 +435,7 @@ article.apiDoc .apidemo pre > code {
 }
 
 article.apiDoc .apidemo > article table th {
-	width: auto;
+	width: 10%;
 }
 
 article.apiDoc .apidemo > article div.result {
