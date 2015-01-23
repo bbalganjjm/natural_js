@@ -170,6 +170,11 @@ table.form th {
 	background-color: #ddfddd;
 }
 
+article .apidemo table th, article .apidemo table td {
+	font-size: 12px;
+}
+
+
 /* page layout */
 header {
 	background: linear-gradient(top, #27a827, #008000);
