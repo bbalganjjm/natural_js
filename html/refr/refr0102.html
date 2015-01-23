@@ -6,189 +6,189 @@
 	<p><br></p>
 	<h3>나. 함수(Methods)</h3>
 
-	<table class="form">
-			<tr>
-				<th>Name</th>
-				<th>Arguments</th>
-				<th>Type</th>
-				<th>Return</th>
-				<th style="width: auto;">Description</th>
-			</tr>
-			<tr>
-				<td>N</td>
-				<td align="center">-</td>
-				<td align="center">-</td>
-				<td>JWS<sup>7)</sup></td>
-				<td>
-					<p>Natural 의 플러그인 형태로 제공되는 라이브러리들과 N클래스의 멤버변수(함수)가 정의 되어있는 핵심 클래스입니다.</p>
-					<p>N(selector<sup>8)</sup> or function, object, HTML Element(이하 element))를 호출하면 jQuery 의 init 메서드가 호출되어 Naturl-JS 와 jQuery가 동시에 초기화(Initialize) 됩니다.</p>
-					<pre><code>var divs = N("div");</code></pre>
-				</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td>selector</td>
-				<td>JWS, selector or function, object, element</td>
-				<td align="center">-</td>
-				<td>JSON data나 selector 등.</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td>context</td>
-				<td>JWS</td>
-				<td align="center">-</td>
-				<td>element를 지정할 때 지정된 element 가 속해있는 element 영역을 지정할 수 있습니다.</td>
-			</tr>
-			<tr>
-				<td>N.locale</td>
-				<td align="center">-</td>
-				<td align="center">-</td>
-				<td>undefined</td>
-				<td>Natural-JS 의 현제 로케일을 설정 합니다. 설정한 로케일에 따라 프레임워크에서 사용자에게 보여주는 메시지들도 다국어처리가 됩니다. 현제 등록된 다국어 메시지 리소스는 en_US, ko_KR 만 있습니다. 메시지 세트는 config에서 손쉽게 추가 할 수 있습니다.</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td>str</td>
-				<td>String</td>
-				<td></td>
-				<td>"en_US", "ko_KR" 등의 로케일 문자열</td>
-			</tr>
-			<tr>
-				<td>N.error</td>
-				<td align="center">-</td>
-				<td align="center">-</td>
-				<td>ErrorThrown</td>
-				<td>에러를 발생 시키고 에러 메시지를 브라우저 콘솔창에 보여줍니다.</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td>msg</td>
-				<td>String</td>
-				<td></td>
-				<td>에러 텍스트 메시지</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td>e</td>
-				<td>ErrorThrown</td>
-				<td align="center">-</td>
-				<td>에러 발생시 생성되는 ErrorThrown 객체를 입력 하면 Error Stack Trace 로그를 브라우저 콘솔창에 보여 줍니다. (Chrome 에서만 지원)</td>
-			</tr>
-			<tr>
-				<td>N.warn</td>
-				<td align="center">-</td>
-				<td align="center">-</td>
-				<td>undefined</td>
-				<td>
-					<p>콘솔창에 Warnning 메시지를 보여 줍니다</p>
-					<p>주) 브라우저에서 console.warn을 지원하지 않으면 메시지가 표시되지 않습니다.</p>
-				</td>
-			</tr>
-			<tr>
-				<td>N.log</td>
-				<td align="center">-</td>
-				<td align="center">-</td>
-				<td>undefined</td>
-				<td>
-					<p>콘솔창에 로깅(Logging) 메시지를 보여 줍니다</p>
-					<p>주) 브라우저에서 console.log를 지원하지 않으면 메시지가 표시되지 않습니다.</p>
-				</td>
-			</tr>
-			<tr>
-				<td>N.browser<br>.cookie</td>
-				<td align="center">-</td>
-				<td align="center">-</td>
-				<td>undefined</td>
-				<td>쿠키를 생성 합니다.</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td>name</td>
-				<td>String</td>
-				<td align="center">-</td>
-				<td>쿠키명</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td>value</td>
-				<td>String</td>
-				<td align="center">-</td>
-				<td>쿠키값</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td>expiredays</td>
-				<td>int</td>
-				<td align="center">-</td>
-				<td>만료일</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td>domain</td>
-				<td>String</td>
-				<td align="center">-</td>
-				<td>쿠키가 생성될 도메인</td>
-			</tr>
-			<tr>
-				<td>
-					N.browser<br>.removeCookie
-				</td>
-				<td align="center">-</td>
-				<td align="center">-</td>
-				<td>undefined</td>
-				<td>생성된 쿠키를 제거 합니다.</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td>name</td>
-				<td>String</td>
-				<td align="center">-</td>
-				<td>쿠키명</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td>domain</td>
-				<td>String</td>
-				<td align="center">-</td>
-				<td>해당 쿠키가 생성된 도메인</td>
-			</tr>
-			<tr>
-				<td>N.browser<br>.msieVersion</td>
-				<td align="center">-</td>
-				<td align="center">-</td>
-				<td>int</td>
-				<td>현재 접속한 Microsoft Internet Explorer(이하 MSIE)의 버전을 가져옵니다. MSIE가 아닐 경우 0을 반환 합니다.</td>
-			</tr>
-			<tr>
-				<td>N.browser<br>.is</td>
-				<td></td>
-				<td></td>
-				<td>boolean</td>
-				<td>입력한 브라우저명과 현재 접속한 브라우저가 일치하면 true를 반환 합니다.</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td>name</td>
-				<td>String</td>
-				<td align="center">-</td>
-				<td>브라우저명(opera, firefox, safari, chrome, ie)</td>
-			</tr>
-			<tr>
-				<td>N.message<br>.get</td>
-				<td align="center">-</td>
-				<td align="center">-</td>
-				<td align="center">-</td>
-				<td>메시지 리소스(config 에 정의)에서 현재 로케일에 맞게 메시지를 가져옵니다.</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td>resource</td>
-				<td>JSON Object</td>
-				<td align="center">-</td>
-				<td>
-					<p>메시지 리소스</p>
-					<p>메시지 리소스는 JSON Object 형태로 만들면 되고 하위에 메시지 세트를 구성해야 함.</p>
-					<pre><code>var message = {
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Arguments</th>
+			<th>Type</th>
+			<th>Return</th>
+			<th style="width: auto;">Description</th>
+		</tr>
+		<tr>
+			<td>N</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>JWS<sup>7)</sup></td>
+			<td>
+				<p>Natural 의 플러그인 형태로 제공되는 라이브러리들과 N클래스의 멤버변수(함수)가 정의 되어있는 핵심 클래스입니다.</p>
+				<p>N(selector<sup>8)</sup> or function, object, HTML Element(이하 element))를 호출하면 jQuery 의 init 메서드가 호출되어 Naturl-JS 와 jQuery가 동시에 초기화(Initialize) 됩니다.</p>
+				<pre><code>var divs = N("div");</code></pre>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>selector</td>
+			<td>JWS, selector or function, object, element</td>
+			<td align="center">-</td>
+			<td>JSON data나 selector 등.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>context</td>
+			<td>JWS</td>
+			<td align="center">-</td>
+			<td>element를 지정할 때 지정된 element 가 속해있는 element 영역을 지정할 수 있습니다.</td>
+		</tr>
+		<tr>
+			<td>N.locale</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>undefined</td>
+			<td>Natural-JS 의 현제 로케일을 설정 합니다. 설정한 로케일에 따라 프레임워크에서 사용자에게 보여주는 메시지들도 다국어처리가 됩니다. 현제 등록된 다국어 메시지 리소스는 en_US, ko_KR 만 있습니다. 메시지 세트는 config에서 손쉽게 추가 할 수 있습니다.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>str</td>
+			<td>String</td>
+			<td></td>
+			<td>"en_US", "ko_KR" 등의 로케일 문자열</td>
+		</tr>
+		<tr>
+			<td>N.error</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>ErrorThrown</td>
+			<td>에러를 발생 시키고 에러 메시지를 브라우저 콘솔창에 보여줍니다.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>msg</td>
+			<td>String</td>
+			<td></td>
+			<td>에러 텍스트 메시지</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>e</td>
+			<td>ErrorThrown</td>
+			<td align="center">-</td>
+			<td>에러 발생시 생성되는 ErrorThrown 객체를 입력 하면 Error Stack Trace 로그를 브라우저 콘솔창에 보여 줍니다. (Chrome 에서만 지원)</td>
+		</tr>
+		<tr>
+			<td>N.warn</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>undefined</td>
+			<td>
+				<p>콘솔창에 Warnning 메시지를 보여 줍니다</p>
+				<p>주) 브라우저에서 console.warn을 지원하지 않으면 메시지가 표시되지 않습니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>N.log</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>undefined</td>
+			<td>
+				<p>콘솔창에 로깅(Logging) 메시지를 보여 줍니다</p>
+				<p>주) 브라우저에서 console.log를 지원하지 않으면 메시지가 표시되지 않습니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>N.browser<br>.cookie</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>undefined</td>
+			<td>쿠키를 생성 합니다.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>name</td>
+			<td>String</td>
+			<td align="center">-</td>
+			<td>쿠키명</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>value</td>
+			<td>String</td>
+			<td align="center">-</td>
+			<td>쿠키값</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>expiredays</td>
+			<td>int</td>
+			<td align="center">-</td>
+			<td>만료일</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>domain</td>
+			<td>String</td>
+			<td align="center">-</td>
+			<td>쿠키가 생성될 도메인</td>
+		</tr>
+		<tr>
+			<td>
+				N.browser<br>.removeCookie
+			</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>undefined</td>
+			<td>생성된 쿠키를 제거 합니다.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>name</td>
+			<td>String</td>
+			<td align="center">-</td>
+			<td>쿠키명</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>domain</td>
+			<td>String</td>
+			<td align="center">-</td>
+			<td>해당 쿠키가 생성된 도메인</td>
+		</tr>
+		<tr>
+			<td>N.browser<br>.msieVersion</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>int</td>
+			<td>현재 접속한 Microsoft Internet Explorer(이하 MSIE)의 버전을 가져옵니다. MSIE가 아닐 경우 0을 반환 합니다.</td>
+		</tr>
+		<tr>
+			<td>N.browser<br>.is</td>
+			<td></td>
+			<td></td>
+			<td>boolean</td>
+			<td>입력한 브라우저명과 현재 접속한 브라우저가 일치하면 true를 반환 합니다.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>name</td>
+			<td>String</td>
+			<td align="center">-</td>
+			<td>브라우저명(opera, firefox, safari, chrome, ie)</td>
+		</tr>
+		<tr>
+			<td>N.message<br>.get</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>메시지 리소스(config 에 정의)에서 현재 로케일에 맞게 메시지를 가져옵니다.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>resource</td>
+			<td>JSON Object</td>
+			<td align="center">-</td>
+			<td>
+				<p>메시지 리소스</p>
+				<p>메시지 리소스는 JSON Object 형태로 만들면 되고 하위에 메시지 세트를 구성해야 함.</p>
+				<pre><code>var message = {
 	&quot;ko_KR&quot; : {
 		key : ＂메시지{0}＂
 	},
@@ -198,7 +198,7 @@
 }
 
 var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
-					<p>결과 : msg = "메시지 입니다"
+				<p>결과 : msg = "메시지 입니다"
 			</td>
 		</tr>
 		<tr>
