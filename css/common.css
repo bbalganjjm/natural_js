@@ -426,7 +426,7 @@ article.apiDoc .apidemo input[type='password'],
 article.apiDoc .apidemo select,
 article.apiDoc .apidemo textarea,
 article.apiDoc .apidemo pre > code {
-	font-size: 11px;
+	font-size: 12px;
 }
 
 article.apiDoc .apidemo > article div.result {
