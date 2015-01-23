@@ -26,6 +26,7 @@ var IndexController = {
 
 				e.preventDefault();
 				N(N.context.attr("architecture").page.context).comm(this.href).submit();
+				console.log(this.href);
 				location.hash = this.href.replace(/\.html/g, "").replace(/html\//g, "");
 
 				// Google Analytics
