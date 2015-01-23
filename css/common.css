@@ -152,6 +152,10 @@ table th {
 	background: -o-linear-gradient(top, #ddfddd, #effeee);
 	background: -webkit-linear-gradient(top, #ddfddd, #effeee);
 	background-color: #ddfddd;
+}
+
+table th, table td {
+	border: 1px solid #99d999;
 	padding: 5px;
 }
 
@@ -164,11 +168,9 @@ table.form th {
 	background-color: #ddfddd;
 }
 
-table th, table td {
-	border: 1px solid #99d999;
-	padding: 5px;
+table.form th, td {
+	font-size: 13px;
 }
-
 
 /* page layout */
 header {
@@ -335,7 +337,7 @@ article h1 {
 	padding: 15px 0 10px 35px;
 	border-bottom: 1px solid #009000;
 	font-size: 18px;
-	background: url("../images/icon/h1_leaf.png") no-repeat 0 8px;
+	background: url("../images/icon/h1_leaf.png") no-repeat 0 10px;
 	margin: 0 0 20px 0;
 }
 
@@ -372,16 +374,7 @@ article a.link {
 	color: #00c000;
 }
 
-/* popup example */
-div#popupTemp {
-	padding: 20px;
-}
-
 /* API Document */
-article.apiDoc table.form td, table.grid td {
-	font-size: 12px;
-}
-
 article.apiDoc ul.list li {
 	word-break: break-word; padding-top: 15px; padding-bottom: 15px;
 }
