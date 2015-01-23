@@ -375,11 +375,11 @@ article hr {
 }
 
 /* API Document */
-article.apiDoc table.form th {
+article.apiDoc table th {
 	width: 90px;
 }
 
-article.apiDoc table.form td p {
+article.apiDoc table td p {
 	margin: 0;
 }
 
