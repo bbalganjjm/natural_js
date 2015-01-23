@@ -416,20 +416,17 @@ article.apiDoc .apidemo {
 	font-size: 12px;
 }
 
-/*
-article .apidemo table th,
-article .apidemo table td {
+article.apiDoc .apidemo table th,
+article.apiDoc .apidemo table td {
 	font-size: 12px;
 }
 
-article .apidemo input[type='text'],
-article .apidemo input[type='password'],
-article .apidemo select,
-article .apidemo textarea {
+article.apiDoc .apidemo input[type='text'],
+article.apiDoc .apidemo input[type='password'],
+article.apiDoc .apidemo select,
+article.apiDoc .apidemo textarea {
 	font-size: 12px;
 }
-*/
-
 
 article.apiDoc .apidemo > article div.result {
 	border: 1px solid #99d999;
