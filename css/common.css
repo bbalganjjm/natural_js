@@ -90,6 +90,7 @@ body {
 	font-family: "Nanum Gothic", "맑은 고딕", "dotum", "Segoe UI", sans-serif;
 	word-break: break-word;
 	color: #004a00;
+	line-height: 160%;
 }
 
 img {
@@ -319,7 +320,7 @@ article ol li,
 article ul li,
 article dl.qna dt,
 article dl.qna dd {
-	line-height: 150%;
+	line-height: 160%;
 	word-break: break-word;
 }
 
@@ -356,7 +357,7 @@ article h4 {
 	margin: 0 0 15px 0;
 }
 
-.smallContTit {
+article .smallContTit {
 	padding-left: 16px;
 	font-size: 13px;
 	font-weight: bold;
@@ -369,6 +370,12 @@ article a.link {
 	background: url("../images/icon/link.png") no-repeat 0 50%;
 	border-bottom: 1px solid #00c000;
 	color: #00c000;
+}
+
+article hr {
+	border: none;
+	border-bottom: 1px dotted #00c000;
+	padding-top: 10px;
 }
 
 /* API Document */
@@ -408,16 +415,6 @@ article.apiDoc .alert {
 	background: url("../images/icon/alert.png") no-repeat 0 5px;
 	font-size: 89%;
 	padding: 5px 0 5px 22px;
-}
-
-article.apiDoc hr {
-	border: none;
-	border-bottom: 1px dotted #00c000;
-	padding-top: 10px;
-}
-
-article.apiDoc ul.links p {
-	margin: 0;
 }
 
 article.apiDoc .apidemo {
