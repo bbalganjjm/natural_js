@@ -351,6 +351,15 @@ article pre {
 	font-size: 12px;
 }
 
+article div.grid_wrap__ {
+	margin-bottom: 15px;
+}
+
+
+article .btnBox {
+	margin-bottom: 15px;
+}
+
 article hr {
 	border: none;
 	border-bottom: 1px dotted #00c000;
@@ -448,8 +457,4 @@ article.apiDoc .apidemo > article textarea {
 	width: 95%;
 	max-width: 345px;
 	height: 49px;
-}
-
-article.apiDoc .apidemo > article .btnBox {
-	margin-bottom: 15px;
 }
