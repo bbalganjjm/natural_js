@@ -7,7 +7,7 @@
 		</div>
 
 		<p class="smallContTit">Result : </p>
-		<pre style="height: 100px;overflow: auto;"><code id="jsonResult" class="language-markup"></code></pre>
+		<pre style="height: 100px;overflow: auto;" class="result"><code id="jsonResult"></code></pre>
 
 		<br />
 		<h4>2) Get html page(Natural-JS page) from server</h4>
@@ -95,7 +95,7 @@ function(data) {
 	            N.comm({
 	        		url : "html/apid/data/grid.json"
 	        	}).submit(N.browser.msieVersion() !== 8 ? eval("(" + N("textarea#jsonCallback", view).val() + ")") : function(data) {
-	        		N("#jsonResult", view).text(N.json.format(data));
+	        		N("#jsonResult", view).text(JSON.stringify(data));
 	        	});
 	        });
 
