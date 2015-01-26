@@ -14,7 +14,7 @@
 	<h3>가. 개요</h3>
 	<p>Controller(이하 N.cont) 는 CVC Architecture Pattern(이하 CVC 패턴)의 Controller 영역을 구현한 클래스로서 Communicator 와 View 를 연결 해 주고 View 의 HTML 요소(element)들을 제어하는 역할을 합니다.</p>
 	<p>N.cont 는 다음과 같이 페이지의 View 영역 바로 아래 선언 되어야 합니다.</p>
-	<pre><code>&lt;div id="view"&gt;
+	<pre><code class="language-markup">&lt;div id="view"&gt;
 	&lt;p&gt;View 영역&lt;/p&gt;
 &lt;/div&gt;
 
@@ -152,9 +152,9 @@
 				<p>Object(JSON)  형태의 인자로 지정하면 Communicator.request 의 옵션으로 지정 됩니다.</p>
 				<p>JWS(Object(JSON)) 형태의 인자로 지정하면 지정한 값을 서버로 전송한 파라미터로 인식하여 서버에 요청을 보낼 때 전송 해 줍니다.</p>
 				<p>* PAGE: </p>
-				<pre><code>N.comm(N("#contents"), "page.html").submit()</code></pre>
+				<pre><code class="language-javascript">N.comm(N("#contents"), "page.html").submit()</code></pre>
 				<p>* DATA: </p>
-				<pre><code>N.comm("data.json").submit(function(data) {})</code></pre>
+				<pre><code class="language-javascript">N.comm("data.json").submit(function(data) {})</code></pre>
 			</td>
 		</tr>
 		<tr>
@@ -300,7 +300,7 @@
 				<p>HTML 컨텐츠를 가져올 때 전환 효과를 보여줄지 여부를 설정 합니다.</p>
 				<p>효과를 적용하지 않으려면 false를 입력하고 효과를 입력하려면 다음과 같이 입력합니다.</p>
 				<p>["효과명", "시간(ms)", "효과가 끝날 때 마다 실행될 콜백함수"]</p>
-				<pre><code>["slideDown", 300, null]</code></pre>
+				<pre><code class="language-javascript">["slideDown", 300, null]</code></pre>
 			</td>
 		</tr>
 	</table>
@@ -323,9 +323,9 @@
 			<td colspan="2">
 				<p>호출한 페이지에 값을 전달할 때 사용합니다.</p>
 				<p>* 값전달 : </p>
-				<pre><code>N(selector).comm(url).request.attr("param", { paramA : "A" }).submit()</code></pre>
+				<pre><code class="language-javascript">N(selector).comm(url).request.attr("param", { paramA : "A" }).submit()</code></pre>
 				<p>* 전달된 값 참고 : </p>
-				<pre><code>(호출된 페이지의 Controller).request.attr("param")</code></pre>
+				<pre><code class="language-javascript">(호출된 페이지의 Controller).request.attr("param")</code></pre>
 			</td>
 		</tr>
 		<tr>
