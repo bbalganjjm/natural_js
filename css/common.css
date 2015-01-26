@@ -361,14 +361,6 @@ article .alert {
 	border-radius: 3px;
 }
 
-article pre {
-	border-radius: 3px;
-}
-
-article pre > code {
-	font-size: 12px;
-}
-
 /* API Document */
 article.apiDoc table th {
 	width: 90px;
