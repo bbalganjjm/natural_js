@@ -50,7 +50,9 @@
 						}
 					},
 					complete : function(request, xhr, textStatus) {
-						Prism.highlightAll(true);
+						if(request.options.dataType === "html") {
+							Prism.highlightAll(true);
+						}
 					}
 				},
 				"dataFilter" : {
