@@ -356,9 +356,9 @@ div.tab__ > ul li {
 	margin-right: 1px;
 	padding: 0;
 	padding: 6px 5px 8px 5px;
-	border-top: 1px solid #33c333;
-	border-left: 1px solid #33c333;
-	border-right: 1px solid #33c333;
+	border-top: 1px solid #55d555;
+	border-left: 1px solid #55d555;
+	border-right: 1px solid #55d555;
 	cursor: pointer;
 	min-width: 80px;
 	border-radius: 3px 3px 0 0;
@@ -389,7 +389,7 @@ div.tab__ > ul li.tab_active__ > a {
 
 div.tab__ > div {
 	padding: 15px;
-	border: 1px solid #33c333;
+	border: 1px solid #55d555;
 	box-shadow: inset 0px 0px 10px rgba(0,0,0,0.1);
 }
 
