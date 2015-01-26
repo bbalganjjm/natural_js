@@ -422,6 +422,10 @@ article.apiDoc .apidemo textarea {
 	font-size: 12px;
 }
 
+article.apiDoc .apidemo table.grid {
+	margin-bottom: 15px;
+}
+
 article.apiDoc .apidemo table.grid th {
 	width: auto;
 }
@@ -448,4 +452,8 @@ article.apiDoc .apidemo > article textarea {
 	width: 95%;
 	max-width: 345px;
 	height: 49px;
+}
+
+article.apiDoc .apidemo > article .btnBox {
+	margin-bottom: 15px;
 }

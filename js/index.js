@@ -26,9 +26,7 @@ var IndexController = {
 					&& N.string.trimToNull(href) !== null) {
 
 				e.preventDefault();
-				N(N.context.attr("architecture").page.context).comm(href).submit(function() {
-					alert(1);
-				});
+				N(N.context.attr("architecture").page.context).comm(href).submit();
 				location.hash = href.replace("http://bbalganjjm.github.io/natural_js/", "").replace(/\.html/g, "").replace(/html\//g, "");
 
 				// Google Analytics
