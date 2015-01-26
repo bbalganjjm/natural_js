@@ -88,7 +88,7 @@
 
 	            N("#result", view).text(N.json.format(pData));
 	            // code highlighter
-	            Prism.highlightAll();
+	            Prism.highlightElement(N("#result", view).get(0));
 	        });
 
 	        N("a#btnFormatDeclarative", view).click(function(e) {
