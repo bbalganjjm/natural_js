@@ -422,6 +422,17 @@ article.apiDoc .apidemo textarea {
 	font-size: 12px;
 }
 
+article.apiDoc .apidemo table.grid th {
+	width: auto;
+}
+
+article.apiDoc .apidemo .grid input[type='text'],
+article.apiDoc .apidemo .grid input[type='password'],
+article.apiDoc .apidemo .grid select,
+article.apiDoc .apidemo .grid textarea {
+	width: 95%;
+}
+
 article.apiDoc .apidemo > article table.form th {
 	min-width: 10%;
 }
