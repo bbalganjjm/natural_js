@@ -270,7 +270,8 @@ $(document).ready(function() {
 ]</code></pre>
 	<p>대부분의 브라우저는 Ajax로 로컬파일을 참조할 수 없게 막혀 있습니다. 그러나 파이어폭스는 그냥 열려있네요? IE 도 보안경고 메시지가 뜨면 허용 해 주면 됩니다. 크롬도 이걸 해제시키는 방법이
 		있는데 구글링해서 찾아보세요. ^^ 일단 파이어폭스로 해 보겠습니다.</p>
-	<pre class="line-numbers">...<code class="language-javascript">
+	<pre class="line-numbers"><code class="language-javascript">
+...
 N("#viewCont").cont({
 	init : function(view, request) {
 		N.comm("test_data.json").submit(function(data) {
@@ -285,7 +286,8 @@ N("#viewCont").cont({
 		대신 데이터를 서비스 해 주는 URL 을 입력 하면 됩니다.<br> 서버에 파라메터를 보내고 싶다면 다음과 같이 N() 함수의 Argument로 파라메터를 넣고 실행 해 주세요. JSON 형태의
 		파라메터를 서버에서 받으려면 서버에 JSON String 을 Map 객체로 변환 해 주는 모듈이 있어야 겠죠?
 	</p>
-	<pre class="line-numbers">...<code class="language-javascript">
+	<pre class="line-numbers"><code class="language-javascript">
+...
 N("#viewCont").cont({
 	init : function(view, request) {
 		N({ param1 : "파라메터 애요" }).comm("test_data.json").submit(function(data) {
@@ -293,7 +295,8 @@ N("#viewCont").cont({
 			N("#result", view).text(JSON.stringify(data));
 		});
     }
-});</code></pre>
+});
+</code></pre>
 	<p>피들러나 브라우저의 개발자 도구에서 network 탭에 가서 확인 해 보면 '{ param1 : "파라메터 애요" }' 라는 텍스트가 해당 URL 로 전송되는것을 확인 할 수 있습니다.</p>
 	<p>
 		N().comm 에서 N() 의 Argument 로 HTML 요소나 jQuery select 가 지정되면 지정된 영역에 HTML 을 표시 해 주고 JSON 오브젝트를 지정하고 comm() 의 Argument로
