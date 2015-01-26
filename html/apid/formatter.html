@@ -87,6 +87,8 @@
 	            }).format();
 
 	            N("#result", view).text(N.json.format(pData));
+	            // code highlighter
+	            Prism.highlightAll();
 	        });
 
 	        N("a#btnFormatDeclarative", view).click(function(e) {
