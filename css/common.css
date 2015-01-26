@@ -426,7 +426,7 @@ article.apiDoc .apidemo > article table.form th {
 	min-width: 10%;
 }
 
-article.apiDoc .apidemo > article div.result {
+article.apiDoc .apidemo > article .result {
 	border: 1px solid #99d999;
 	border-radius: 3px;
 	padding: 10px;
