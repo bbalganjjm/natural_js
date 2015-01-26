@@ -286,27 +286,6 @@ section article {
 	line-height: 160%;
 }
 
-section article pre {
-	padding: 10px;
-	overflow: auto;
-	font-size: 85%;
-	line-height: 1.45;
-	background-color: #ddfddd;
-	border-radius: 3px;
-}
-
-section article pre > code {
-	display: inline;
-	max-width: initial;
-	padding: 0;
-	margin: 0;
-	overflow: initial;
-	line-height: inherit;
-	word-wrap: normal;
-	background-color: transparent;
-	border: 0;
-}
-
 footer {
 	margin: 10px auto;
 	max-width: 1003px;
@@ -433,10 +412,7 @@ article.apiDoc .apidemo table td,
 article.apiDoc .apidemo input[type='text'],
 article.apiDoc .apidemo input[type='password'],
 article.apiDoc .apidemo select,
-article.apiDoc .apidemo textarea,
-article.apiDoc .apidemo pre > code {
-	font-size: 12px;
-}
+article.apiDoc .apidemo textarea
 
 article.apiDoc .apidemo > article table.form th {
 	min-width: 10%;
