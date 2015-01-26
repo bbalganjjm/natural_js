@@ -379,6 +379,7 @@ div.tab__ > ul li > a {
 
 div.tab__ > ul li.tab_active__ {
 	background-color: #ffffd0;
+	background-image: none;
 }
 
 div.tab__ > ul li.tab_active__ > a {
