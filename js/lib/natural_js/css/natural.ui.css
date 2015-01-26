@@ -349,7 +349,7 @@ div.tab__ > ul {
 	overflow: hidden;
 	margin: 0;
 	padding: 0;
-	border-bottom: 2px solid #44F470;
+	border-bottom: 1px solid #ccfccc;
 }
 
 div.tab__ > ul li {
@@ -357,9 +357,9 @@ div.tab__ > ul li {
 	margin-right: 1px;
 	padding: 0;
 	padding: 6px 5px 8px 5px;
-	border-top: 1px solid #44F470;
-	border-left: 1px solid #44F470;
-	border-right: 1px solid #44F470;
+	border-top: 1px solid #ccfccc;
+	border-left: 1px solid #ccfccc;
+	border-right: 1px solid #ccfccc;
 	cursor: pointer;
 	min-width: 80px;
 	border-radius: 3px 3px 0 0;
@@ -388,7 +388,8 @@ div.tab__ > ul li.tab_active__ > a {
 }
 
 div.tab__ > div {
-
+	padding: 10px;
+	border: 1px solid #ccfccc;
 }
 
 /* DatePicker */
