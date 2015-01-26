@@ -18,7 +18,7 @@
 	<p class="alert">
 		룰 대신 입력요소를 지정하면 해당 입력요소들마다 "format", "unformat" 이벤트를 바인드(bind) 해 줍니다.
 		해당 입력요소를 가져다가 jQuery 의 trigger 메서드로 실행하면 해당입력요소에 입력된 값을 실시간으로 format, unformat 할 수 있습니다.
-		<pre><code>N("input[name='formatEx']").trigger("format or unformat");</code></pre>
+		<pre><code class="language-javascript">N("input[name='formatEx']").trigger("format or unformat");</code></pre>
 	</p>
 
 	<h3>나. 생성자(Constructor)</h3>
@@ -52,7 +52,7 @@
 			<td>
 				<p>룰은 다음과 같이 두가지 형태로 지정 가능 합니다.</p>
 				<p>* 라이브러리 초기화 시 명령형 옵션으로 지정 : </p>
-				<pre><code>// { "컬럼명" : [[룰명, arg0, arg1...], [룰명, arg0, arg1...]] }
+				<pre><code class="language-javascript">// { "컬럼명" : [[룰명, arg0, arg1...], [룰명, arg0, arg1...]] }
 {
 	&quot;numeric&quot; : [[&quot;trimtoempty&quot;], [&quot;numeric&quot;, &quot;#,###.##0000&quot;]],
 	&quot;generic&quot; : [[&quot;trimtoempty&quot;], [&quot;generic&quot;, &quot;@@ABCD&quot;]],
@@ -288,14 +288,14 @@
 			<td>
 				<p>룰은 다음과 같이 두가지 형태로 지정 가능 합니다.</p>
 				<p>* 라이브러리 초기화 시 명령형 옵션으로 지정 : </p>
-				<pre><code>// { "컬럼명" : [[룰명, arg0, arg1...], [룰명, arg0, arg1...]] }
+				<pre><code>// { "컬럼명" : [[룰명<pre><code class="language-markup">1...], [룰명, arg0, arg1...]] }
 {
 	&quot;numeric&quot; : [[&quot;required&quot;], [&quot;integer+commas&quot;]],
 	&quot;generic&quot; : [[&quot;required&quot;], [&quot;korean&quot;]],
 	&quot;limit&quot; : [[&quot;required&quot;], [&quot;alphabet&quot;]]
 }</code></pre>
 				<p>* data-validate 속성에 선언형 옵션으로 지정 : </p>
-				<pre><code>&lt;input id="numeric" type="text"
+				<pre><code class="language-markup">&lt;input id="numeric" type="text"
 	data-validate='[[&quot;required&quot;], [&quot;integer+commas&quot;]]'/&gt;</code></pre>
 [ ["룰명", "룰arguments[0]", "룰 arguments[1]"], ... ]
 			</td>
@@ -572,7 +572,7 @@
 				<p>필터링 조건을 입력 합니다.</p>
 				<p>조건은 다음과 같이 자바스크립트 비교 문법으로 지정 합니다.</p>
 				<p>* queryString : 'data.키명 == "비교값"';</p>
-				<pre><code>var fData = N.data.filter([
+				<pre><code class="language-javascript">var fData = N.data.filter([
 	{ name : "홍길동" },
 	{ name : "Mike" }
 ], 'data.name == "Mike"');
