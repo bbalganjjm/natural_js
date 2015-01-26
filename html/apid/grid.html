@@ -236,7 +236,11 @@
 
 	        	N("div.btnBox", view).find("a").instance("button", function(u) {
 	            	if(!this.context().is("#btnAdd") && !this.context().is("#btnBind")) {
-	            		this.enable();
+	            		if(this.context().is("a#btnInit")) {
+	    					this.disable();
+	    				} else {
+	    					this.enable();
+	    				}
 	            	}
 				});
 	        });
@@ -249,7 +253,11 @@
 
 	            N("div.btnBox", view).find("a").instance("button", function(u) {
 	            	if(!this.context().is("#btnAdd") && !this.context().is("#btnBind")) {
-	            		this.enable();
+	            		if(this.context().is("a#btnInit")) {
+	    					this.disable();
+	    				} else {
+	    					this.enable();
+	    				}
 	            	}
 				});
 	        });
