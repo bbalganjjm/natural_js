@@ -363,12 +363,10 @@ article .alert {
 
 article pre {
 	border-radius: 3px;
-	line-height: 100%;
 }
 
 article pre > code {
 	font-size: 12px;
-	line-height: 100%;
 }
 
 /* API Document */
