@@ -355,7 +355,7 @@ article hr {
 
 article .alert {
 	background: url("../images/icon/alert.png") no-repeat 7px 10px;
-	font-size: 89%;
+	font-size: 12px;
 	padding: 5px 5px 5px 25px;
 	background-color: #ffdddd;
 	border-radius: 3px;
