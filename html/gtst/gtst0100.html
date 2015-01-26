@@ -267,8 +267,7 @@ $(document).ready(function() {
     "greeting": "Hello, Grace Hardy! You have 8 unread messages.",
     "favoriteFruit": "strawberry"
   }
-]
-</code></pre>
+]</code></pre>
 	<p>대부분의 브라우저는 Ajax로 로컬파일을 참조할 수 없게 막혀 있습니다. 그러나 파이어폭스는 그냥 열려있네요? IE 도 보안경고 메시지가 뜨면 허용 해 주면 됩니다. 크롬도 이걸 해제시키는 방법이
 		있는데 구글링해서 찾아보세요. ^^ 일단 파이어폭스로 해 보겠습니다.</p>
 	<pre class="line-numbers"><code class="language-javascript">
@@ -280,8 +279,7 @@ N("#viewCont").cont({
 			N("#result", view).text(JSON.stringify(data));
 		});
     }
-});
-</code></pre>
+});</code></pre>
 	<p>
 		미리 만들어 놓은 "c:/natural_js/index.html" 파일을 파폭으로 열어 보세요. index 페이지에 의해 "c:/natural_js/test_html.html" 파일이 로딩되고 N.cont의
 		콜백함수의 init 함수가 최초 실행 됩니다. 위 로직이 실행되면 id 가 result 인 div 요소안에 불러온 파일의 내용이 표시 될 겁니다. 서버가 있다면 c:/natural_js/test_data.json
@@ -297,8 +295,7 @@ N("#viewCont").cont({
 			N("#result", view).text(JSON.stringify(data));
 		});
     }
-});
-</code></pre>
+});</code></pre>
 	<p>피들러나 브라우저의 개발자 도구에서 network 탭에 가서 확인 해 보면 '{ param1 : "파라메터 애요" }' 라는 텍스트가 해당 URL 로 전송되는것을 확인 할 수 있습니다.</p>
 	<p>
 		N().comm 에서 N() 의 Argument 로 HTML 요소나 jQuery select 가 지정되면 지정된 영역에 HTML 을 표시 해 주고 JSON 오브젝트를 지정하고 comm() 의 Argument로
