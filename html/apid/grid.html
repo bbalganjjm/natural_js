@@ -226,6 +226,8 @@
 
 	       		N("a#btnAdd", view).instance("button").enable();
 	            N("a#btnBind", view).instance("button").enable();
+
+	            this.disable();
 	        });
 
 	    	N("a#btnAdd", view).click(function(e) {
@@ -234,11 +236,7 @@
 
 	        	N("div.btnBox", view).find("a").instance("button", function(u) {
 	            	if(!this.context().is("a#btnAdd") && !this.context().is("a#btnBind")) {
-	            		if(this.context().is("a#btnInit")) {
-	    					this.disable();
-	    				} else {
-	    					this.enable();
-	    				}
+	            		this.enable();
 	            	}
 				});
 	        });
@@ -251,11 +249,7 @@
 
 	            N("div.btnBox", view).find("a").instance("button", function(u) {
 	            	if(!this.context().is("a#btnAdd") && !this.context().is("a#btnBind")) {
-	            		if(this.context().is("a#btnInit")) {
-	    					this.disable();
-	    				} else {
-	    					this.enable();
-	    				}
+	            		this.enable();
 	            	}
 				});
 	        });
