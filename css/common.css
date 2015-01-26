@@ -353,6 +353,22 @@ article hr {
 	padding-top: 10px;
 }
 
+article .alert {
+	background: url("../images/icon/alert.png") no-repeat 0 5px;
+	font-size: 89%;
+	padding: 5px 5px 5px 22px;
+	background-color: #ffd0d1;
+	border-radius: 3px;
+}
+
+article pre {
+	border-radius: 3px;
+}
+
+article pre > code {
+	font-size: 12px;
+}
+
 /* API Document */
 article.apiDoc table th {
 	width: 90px;
@@ -394,12 +410,6 @@ article.apiDoc .bi {
 	font-weight: bold; font-style: italic;
 }
 
-article.apiDoc .alert {
-	background: url("../images/icon/alert.png") no-repeat 0 5px;
-	font-size: 89%;
-	padding: 5px 0 5px 22px;
-}
-
 article.apiDoc .apidemo {
 	border: 1px solid #77f777;
 	font-size: 12px;
@@ -412,8 +422,7 @@ article.apiDoc .apidemo table td,
 article.apiDoc .apidemo input[type='text'],
 article.apiDoc .apidemo input[type='password'],
 article.apiDoc .apidemo select,
-article.apiDoc .apidemo textarea,
-article pre > code {
+article.apiDoc .apidemo textarea {
 	font-size: 12px;
 }
 
