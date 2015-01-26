@@ -349,6 +349,7 @@ article a.link {
 
 article pre {
 	font-size: 12px;
+	margin-bottom: 15px;
 }
 
 article div.grid_wrap__ {
@@ -457,4 +458,8 @@ article.apiDoc .apidemo > article textarea {
 	width: 95%;
 	max-width: 345px;
 	height: 49px;
+}
+
+article.apiDoc .apidemo > article .dataBox {
+	margin-bottom: 15px;
 }
