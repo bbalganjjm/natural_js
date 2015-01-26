@@ -193,7 +193,7 @@
 	    },
 	    setEvents : function(view, this_) {
 	    	var grid;
-	    	N("#btnInit").click(function(e) {
+	    	N("#btnInit", view).click(function(e) {
 	            e.preventDefault();
 	       		var opts = {
 	       			context : N("input#context", view).val(),
