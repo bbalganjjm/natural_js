@@ -354,9 +354,9 @@ article hr {
 }
 
 article .alert {
-	background: url("../images/icon/alert.png") no-repeat 5px 10px;
+	background: url("../images/icon/alert.png") no-repeat 7px 10px;
 	font-size: 89%;
-	padding: 5px 5px 5px 22px;
+	padding: 5px 5px 5px 25px;
 	background-color: #ffdddd;
 	border-radius: 3px;
 }
