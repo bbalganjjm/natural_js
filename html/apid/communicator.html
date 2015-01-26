@@ -95,7 +95,7 @@ function(data) {
 	            N.comm({
 	        		url : "html/apid/data/grid.json"
 	        	}).submit(N.browser.msieVersion() !== 8 ? eval("(" + N("textarea#jsonCallback", view).val() + ")") : function(data) {
-	        		N("#jsonResult", view).text(JSON.stringify(data));
+	        		N("#jsonResult", view).text(N.json.format(data));
 	        	});
 	        });
 
