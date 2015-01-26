@@ -50,6 +50,7 @@
 						}
 					},
 					complete : function(request, xhr, textStatus) {
+						Prism.highlightAll(true);
 					}
 				},
 				"dataFilter" : {
