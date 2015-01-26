@@ -422,10 +422,6 @@ article.apiDoc .apidemo textarea {
 	font-size: 12px;
 }
 
-article.apiDoc .apidemo table.grid {
-	margin-bottom: 15px;
-}
-
 article.apiDoc .apidemo table.grid th {
 	width: auto;
 }
