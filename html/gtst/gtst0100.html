@@ -199,7 +199,7 @@ $(document).ready(function() {
 
 	<p>일단, 서버없이 한번 해보고 싶다면 다음과 같이 로컬에 JSON 형태의 Text 를 담은 파일을 하나 생성해 주세요</p>
 	c:/natural_js/test_data.json
-	<pre class="line-numbers"><code class="language-javascript">
+	<pre><code class="language-javascript">
 [
   {
     "_id": "53e21cba9f982281b3459438",
@@ -267,16 +267,7 @@ $(document).ready(function() {
     "greeting": "Hello, Grace Hardy! You have 8 unread messages.",
     "favoriteFruit": "strawberry"
   }
-]
-
-
-
-
-
-
-
-
-</code></pre>
+]</code></pre>
 	<p>대부분의 브라우저는 Ajax로 로컬파일을 참조할 수 없게 막혀 있습니다. 그러나 파이어폭스는 그냥 열려있네요? IE 도 보안경고 메시지가 뜨면 허용 해 주면 됩니다. 크롬도 이걸 해제시키는 방법이
 		있는데 구글링해서 찾아보세요. ^^ 일단 파이어폭스로 해 보겠습니다.</p>
 	<pre class="line-numbers"><code class="language-javascript">
@@ -289,7 +280,6 @@ N("#viewCont").cont({
 		});
     }
 });
-
 </code></pre>
 	<p>
 		미리 만들어 놓은 "c:/natural_js/index.html" 파일을 파폭으로 열어 보세요. index 페이지에 의해 "c:/natural_js/test_html.html" 파일이 로딩되고 N.cont의
