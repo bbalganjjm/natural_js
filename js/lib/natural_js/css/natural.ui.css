@@ -363,7 +363,13 @@ div.tab__ > ul li {
 	min-width: 80px;
 	border-radius: 3px 3px 0 0;
 	text-align: center;
-	background-color: #ffffd0;
+	background-image: -ms-linear-gradient(top, #77F470 0%, #44F470 100%);
+	background-image: -moz-linear-gradient(top, #77F470 0%, #44F470 100%);
+	background-image: -o-linear-gradient(top, #77F470 0%, #44F470 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #77F470), color-stop(1, #44F470));
+	background-image: -webkit-linear-gradient(top, #77F470 0%, #44F470 100%);
+	background-image: linear-gradient(to bottom, #77F470 0%, #44F470 100%);
+	background-color: #44F470;
 }
 
 div.tab__ > ul li > a {
@@ -372,13 +378,7 @@ div.tab__ > ul li > a {
 }
 
 div.tab__ > ul li.tab_active__ {
-	background-image: -ms-linear-gradient(top, #77F470 0%, #44F470 100%);
-	background-image: -moz-linear-gradient(top, #77F470 0%, #44F470 100%);
-	background-image: -o-linear-gradient(top, #77F470 0%, #44F470 100%);
-	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #77F470), color-stop(1, #44F470));
-	background-image: -webkit-linear-gradient(top, #77F470 0%, #44F470 100%);
-	background-image: linear-gradient(to bottom, #77F470 0%, #44F470 100%);
-	background-color: #44F470;
+	background-color: #ffffd0;
 }
 
 div.tab__ > ul li.tab_active__ > a {
