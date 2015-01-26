@@ -118,7 +118,7 @@
 			<td></td>
 			<td>
 				<p>메시지의 변수를 vars로 지정한 값으로 치환 해줍니다.</p>
-				<pre><code>N(window).alert({
+				<pre><code class="language-javascript">N(window).alert({
 	msg : &quot;{0} 저는 {1}입니다.&quot;,
 	vars : [&quot;안녕하세요&quot;, &quot;홍길동&quot;]
 }).show();
@@ -825,7 +825,7 @@
 			<td>
 				<p>같은 페이지 내에 있는 탭과 탭 컨텐츠를 감싸고 있는 "DIV" 요소를 지정 합니다.</p>
 				<p>탭플릿 요소는 다음과 같이 작성 합니다.</p>
-				<pre><code>&lt;div id=&quot;tab&quot;&gt;
+				<pre><code class="language-markup">&lt;div id=&quot;tab&quot;&gt;
 	&lt;ul&gt;
 		&lt;!-- 탭요소는  li 태그 로 표현 --&gt;
 		&lt;li&gt;&lt;a href=&quot;#tab1&quot;&gt;Tab1&lt;/a&gt;&lt;/li&gt;
@@ -854,7 +854,7 @@
 			<td></td>
 			<td>
 				<p>선언형옵션을 명령형으로 지정할때 탭별로 탭의 순서대로 JSON Obejct 형태로 서브옵션을 지정 합니다.</p>
-				<pre><code>N("#tab").tab({
+				<pre><code class="language-javascript">N("#tab").tab({
 	dataOpts : [
 		{ width: &quot;auto&quot;, url: "tab1.html", preload: false,
 		  active: false, onOpen: undefined }, //Tab1,
@@ -889,7 +889,7 @@
 				<p>["효과명"</p>
 				<p>  , "시간(ms)"</p>
 				<p>  , "효과가 끝날 때 마다 실행될 콜백함수"]</p>
-								<pre><code>N("#tab").tab({
+								<pre><code class="language-javascript">N("#tab").tab({
 	effect : ["slideDown", 300, null]
 });</code></pre>
 			</td>
@@ -1649,7 +1649,7 @@
 			<td></td>
 			<td>
 				<p>그리드 데이터가 바인드될때 로우가 생성될때마다 발생하는 이벤트입니다. 이벤트 콜백 메서드의 인자로 생성될 당시의 row index, 로우 요소, 로우 데이터를 넣어줍니다.</p>
-				<pre><code>rowHandler : function(index, rowEle, rowData) {
+				<pre><code class="language-javascript">rowHandler : function(index, rowEle, rowData) {
 	// this 는 rowEle
 }</code></pre>
 			</td>
@@ -1661,7 +1661,7 @@
 			<td></td>
 			<td>
 				<p>그리드의 행이 선택될때마다 발생되는 이벤트입니다. 이벤트 콜백 메서드의 인자로 생성될 당시의 row index, 로우 요소, 로우 데이터를 넣어줍니다.</p>
-				<pre><code>onSelect : function(index, rowEle, rowData) {
+				<pre><code class="language-javascript">onSelect : function(index, rowEle, rowData) {
 	// this 는 rowEle
 }</code></pre>
 
@@ -1675,7 +1675,7 @@
 			<td></td>
 			<td>
 				<p>그리드의 데이터가 바인드 될 때마다 발생되는 이벤트입니다. 이벤트 콜백 메서드의 인자로 context, data를 넣어줍니다.</p>
-				<pre><code>onBind : function(context, data) {
+				<pre><code class="language-javascript">onBind : function(context, data) {
 	// this 는 context
 }</code></pre>
 				<p> 스크롤페이징에 의해 페이징 될 때도 페이지가 완성 될 때마다 발생합니다.</p>
