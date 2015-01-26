@@ -138,8 +138,7 @@ N("#viewCont").cont({
     }
 });
 /* Controller 영역 */
-&lt;/script&gt;
-</code></pre>
+&lt;/script&gt;</code></pre>
 	<p>
 		각각의 페이지의 단위 조각들은 위와 같은 형식의 파일로 분할 할 수 있습니다. 이 분할 된 파일들은 N.comm 이나 Tab, Popup 등으로 불러와 페이지에 포함 시켜주면 물리적인 요소나 스크립트는 같은
 		페이지 안에 있지만 Controller(N.cont)가 논리적으로 구분을 시켜 줍니다. 말이 어렵죠? 그냥 같은 페이지에 다른 페이지를 마구 때려 넣어도 스크립트 겹치거나 요소의 구분이 흔들리지 않는 다는
@@ -271,8 +270,7 @@ $(document).ready(function() {
 ]</code></pre>
 	<p>대부분의 브라우저는 Ajax로 로컬파일을 참조할 수 없게 막혀 있습니다. 그러나 파이어폭스는 그냥 열려있네요? IE 도 보안경고 메시지가 뜨면 허용 해 주면 됩니다. 크롬도 이걸 해제시키는 방법이
 		있는데 구글링해서 찾아보세요. ^^ 일단 파이어폭스로 해 보겠습니다.</p>
-	<pre class="line-numbers"><code class="language-javascript">
-...
+	<pre class="line-numbers">...<code class="language-javascript">
 N("#viewCont").cont({
 	init : function(view, request) {
 		N.comm("test_data.json").submit(function(data) {
@@ -287,8 +285,7 @@ N("#viewCont").cont({
 		대신 데이터를 서비스 해 주는 URL 을 입력 하면 됩니다.<br> 서버에 파라메터를 보내고 싶다면 다음과 같이 N() 함수의 Argument로 파라메터를 넣고 실행 해 주세요. JSON 형태의
 		파라메터를 서버에서 받으려면 서버에 JSON String 을 Map 객체로 변환 해 주는 모듈이 있어야 겠죠?
 	</p>
-	<pre class="line-numbers"><code class="language-javascript">
-...
+	<pre class="line-numbers">...<code class="language-javascript">
 N("#viewCont").cont({
 	init : function(view, request) {
 		N({ param1 : "파라메터 애요" }).comm("test_data.json").submit(function(data) {
