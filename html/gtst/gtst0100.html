@@ -73,7 +73,7 @@
 		그다음 Natural-JS 의 구동 환경을 설정 합니다.<br> Natural-JS 의 환경설정 파일인 natural.architecture.js 파일을 열어보세요.<br>
 	</p>
 
-	<pre class="line-numbers"><code class="language-javascript">/**
+	<pre><code class="language-javascript">/**
  * Natural-ARCHITECTURE Config
  */
 N.context.attr("architecture", {
@@ -111,7 +111,7 @@ N.context.attr("ui", {
 	<p>컴포넌트 클래스의 기본 옵션값중 환경설정파일에 지정되지 않은 옵션값은 컴포넌트 초기화시 따로 옵션을 지정하지 않았다면 컴포넌트 클래스의 기본옵션값으로 동작 됩니다. 기본 환경설정 파일에 정의되지 않은
 		컴포넌트 클래스의 기본 옵션값을 사이트 전역 옵션값으로 설정하고 싶다면 환경설정 파일의 해당 컴포넌트 부분에 추가 하면 됩니다. 예를 들어 사이트내에서 동작되는 모든 그리드 컴포넌트 Body영역의 높이를 300
 		픽셀로 기본값을 설정하고 싶다면 N.context.attr("ui").grid 부분에 다음과 같이 추가하면 됩니다.</p>
-	<pre class="line-numbers"><code class="language-javascript">N.context.attr("ui", {
+	<pre><code class="language-javascript">N.context.attr("ui", {
 	...
 	"grid" : {
 		...
@@ -126,7 +126,8 @@ N.context.attr("ui", {
 	<p>Natural-JS는 페이지내에서 개발영역과 디자인영역을 구분하고 요소(Element)간, 스크립트 간 영역(scope)을 보장 해 주기위한 간단한 소스코드의 구성 규칙이 있습니다. 별로 어렵지
 		않습니다. 다음과 같이 View 영역과 Controller 영역만 구분하고 순서대로 배치해 주면 됩니다.</p>
 	test_html.html
-	<pre class="line-numbers"><code class="language-markup">&lt;!-- View 영역 --&gt;
+<pre class="line-numbers"><code class="language-markup">
+&lt;!-- View 영역 --&gt;
 &lt;div id="viewCont"&gt;
 	&lt;div id="result"&gt;
 	&lt;/div&gt;
@@ -141,8 +142,8 @@ N("#viewCont").cont({
     }
 });
 /* Controller 영역 */
-&lt;/script&gt;</code>
-</pre>
+&lt;/script&gt;
+</code></pre>
 	<p>
 		각각의 페이지의 단위 조각들은 위와 같은 형식의 파일로 분할 할 수 있습니다. 이 분할 된 파일들은 N.comm 이나 Tab, Popup 등으로 불러와 페이지에 포함 시켜주면 물리적인 요소나 스크립트는 같은
 		페이지 안에 있지만 Controller(N.cont)가 논리적으로 구분을 시켜 줍니다. 말이 어렵죠? 그냥 같은 페이지에 다른 페이지를 마구 때려 넣어도 스크립트 겹치거나 요소의 구분이 흔들리지 않는 다는
@@ -152,7 +153,8 @@ N("#viewCont").cont({
 		해 주세요.
 	</p>
 	index.html
-	<pre class="line-numbers"><code class="language-markup">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+	<pre class="line-numbers"><code class="language-markup">
+&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
 &lt;meta http-equiv="X-UA-Compatible" content="IE=Edge; text/html; charset=utf-8" /&gt;
@@ -180,8 +182,8 @@ $(document).ready(function() {
 		&lt;!-- 이부분에 페이지 컨텐츠가 표시 됩니다. --&gt;
 	&lt;/div&gt;
 &lt;/body&gt;
-&lt;/html&gt;</code>
-</pre>
+&lt;/html&gt;
+</code></pre>
 	<p>
 		$(document).ready() 메서드 아시죠? 화면의 HTML 요소들이 브라우저에 로딩이 완료된 다음에 수행되는, document.body의 onload 이벤트와 같은 역할을 수행 하는 jQuery 에서
 		제공하는 기능 입니다.<br> 서버에 데이터를 보내고 가져오는 역할을 수행하는 모듈은 Communicator(N.comm)(이하 N.comm) 입니다.<br> $(document).ready()
@@ -205,7 +207,8 @@ $(document).ready(function() {
 
 	<p>일단, 서버없이 한번 해보고 싶다면 다음과 같이 로컬에 JSON 형태의 Text 를 담은 파일을 하나 생성해 주세요</p>
 	c:/natural_js/test_data.json
-	<pre class="line-numbers"><code class="language-javascript">[
+	<pre class="line-numbers"><code class="language-javascript">
+[
   {
     "_id": "53e21cba9f982281b3459438",
     "index": 0,
@@ -272,11 +275,12 @@ $(document).ready(function() {
     "greeting": "Hello, Grace Hardy! You have 8 unread messages.",
     "favoriteFruit": "strawberry"
   }
-]</code>
-</pre>
+]
+</code></pre>
 	<p>대부분의 브라우저는 Ajax로 로컬파일을 참조할 수 없게 막혀 있습니다. 그러나 파이어폭스는 그냥 열려있네요? IE 도 보안경고 메시지가 뜨면 허용 해 주면 됩니다. 크롬도 이걸 해제시키는 방법이
 		있는데 구글링해서 찾아보세요. ^^ 일단 파이어폭스로 해 보겠습니다.</p>
-	<pre class="line-numbers"><code class="language-javascript">...
+	<pre class="line-numbers"><code class="language-javascript">
+...
 N("#viewCont").cont({
 	init : function(view, request) {
 		N.comm("test_data.json").submit(function(data) {
@@ -284,15 +288,16 @@ N("#viewCont").cont({
 			N("#result", view).text(JSON.stringify(data));
 		});
     }
-});</code>
-</pre>
+});
+</code></pre>
 	<p>
 		미리 만들어 놓은 "c:/natural_js/index.html" 파일을 파폭으로 열어 보세요. index 페이지에 의해 "c:/natural_js/test_html.html" 파일이 로딩되고 N.cont의
 		콜백함수의 init 함수가 최초 실행 됩니다. 위 로직이 실행되면 id 가 result 인 div 요소안에 불러온 파일의 내용이 표시 될 겁니다. 서버가 있다면 c:/natural_js/test_data.json
 		대신 데이터를 서비스 해 주는 URL 을 입력 하면 됩니다.<br> 서버에 파라메터를 보내고 싶다면 다음과 같이 N() 함수의 Argument로 파라메터를 넣고 실행 해 주세요. JSON 형태의
 		파라메터를 서버에서 받으려면 서버에 JSON String 을 Map 객체로 변환 해 주는 모듈이 있어야 겠죠?
 	</p>
-	<pre class="line-numbers"><code class="language-javascript">...
+	<pre class="line-numbers"><code class="language-javascript">
+...
 N("#viewCont").cont({
 	init : function(view, request) {
 		N({ param1 : "파라메터 애요" }).comm("test_data.json").submit(function(data) {
@@ -300,8 +305,8 @@ N("#viewCont").cont({
 			N("#result", view).text(JSON.stringify(data));
 		});
     }
-});</code>
-</pre>
+});
+</code></pre>
 	<p>피들러나 브라우저의 개발자 도구에서 network 탭에 가서 확인 해 보면 '{ param1 : "파라메터 애요" }' 라는 텍스트가 해당 URL 로 전송되는것을 확인 할 수 있습니다.</p>
 	<p>
 		N().comm 에서 N() 의 Argument 로 HTML 요소나 jQuery select 가 지정되면 지정된 영역에 HTML 을 표시 해 주고 JSON 오브젝트를 지정하고 comm() 의 Argument로
