@@ -438,8 +438,3 @@ article.apiDoc .apidemo > article textarea {
 	max-width: 357px;
 	height: 49px;
 }
-
-article.apiDoc .apidemo > article .data {
-	max-height: 200px;
-	overflow: auto;
-}
