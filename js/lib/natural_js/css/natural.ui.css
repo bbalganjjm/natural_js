@@ -378,13 +378,13 @@ div.tab__ > ul li > a {
 }
 
 div.tab__ > ul li.tab_active__ {
-	background-color: #ffffd0;
+	background-color: #008000;
 	background-image: none;
 }
 
 div.tab__ > ul li.tab_active__ > a {
-	color: #005000;
-	text-shadow: 1px 1px #ffffc0;
+	color: #ffffc0;
+	text-shadow: 1px 1px #005000;
 }
 
 div.tab__ > div {
