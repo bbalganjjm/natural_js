@@ -74,13 +74,11 @@
 	</p>
 
 	<pre class="line-numbers"><code class="language-javascript">
-/* Natural-ARCHITECTURE Config */
 N.context.attr("architecture", {
 	"page" : {
 		"context" : "#natural_contents"
 	},
 	...
-/* Natural-UI Config */
 N.context.attr("ui", {
 	"alert" : {
 		"container" : "#natural_contents"
@@ -276,7 +274,7 @@ $(document).ready(function() {
 N("#viewCont").cont({
 	init : function(view, request) {
 		N.comm("test_data.json").submit(function(data) {
-			//data 는 서버로 부터 수신된 데이터
+			// data 는 서버로 부터 수신된 데이터
 			N("#result", view).text(JSON.stringify(data));
 		});
     }
