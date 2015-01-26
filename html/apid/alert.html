@@ -72,7 +72,7 @@ function() {
 	    	this.setEvent(view, this);
 		},
 	    setEvent : function(view, this_) {
-	        N("a#btnShow", view).click(function(e) {
+	        N("#btnShow", view).click(function(e) {
 	            e.preventDefault();
 
 	            var context = N("input#context", view).val();

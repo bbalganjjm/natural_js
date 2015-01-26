@@ -152,12 +152,12 @@
 	    },
 	    initButton : function(view) {
 	    	N("div.btnBox a", view).button();
-	    	N("a#btnLogin", view).button();
-	    	N("a#btnLogin", view).css("padding-top", "15px");
-	    	N("a#btnLogin", view).css("padding-bottom", "15px");
+	    	N("#btnLogin", view).button();
+	    	N("#btnLogin", view).css("padding-top", "15px");
+	    	N("#btnLogin", view).css("padding-bottom", "15px");
 	    },
 	    setEvents : function(view, this_) {
-	    	N("a#btnInitLocal", view).click(function(e) {
+	    	N("#btnInitLocal", view).click(function(e) {
 	            e.preventDefault();
 
 	            var opts = {
@@ -176,16 +176,16 @@
 
 	            this_.localPopup = N(N("input#context", view).val()).popup(opts);
 
-	            N("a#btnOpenLocal", view).instance("button").enable();
+	            N("#btnOpenLocal", view).instance("button").enable();
 	            N(this).instance("button").disable();
 	        });
 
-	        N("a#btnOpenLocal", view).click(function(e) {
+	        N("#btnOpenLocal", view).click(function(e) {
 	            e.preventDefault();
 	            this_.localPopup.open();
 	        });
 
-	        N("a#btnInitOther", view).click(function(e) {
+	        N("#btnInitOther", view).click(function(e) {
 	            e.preventDefault();
 
 	            var opts = {
@@ -211,11 +211,11 @@
 
 	            this_.otherPopup = N().popup(opts);
 
-	            N("a#btnOpenOther", view).instance("button").enable();
+	            N("#btnOpenOther", view).instance("button").enable();
 	            N(this).instance("button").disable();
 	        });
 
-	        N("a#btnOpenOther", view).click(function(e) {
+	        N("#btnOpenOther", view).click(function(e) {
 	            e.preventDefault();
 	            this_.otherPopup.open();
 	        });

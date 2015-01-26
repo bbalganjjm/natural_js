@@ -75,7 +75,7 @@ N("article#validator").cont({
         this.setEvents(view);
     },
     setEvents : function(view) {
-    	N("a#btnValidateCommand", view).click(function(e) {
+    	N("#btnValidateCommand", view).click(function(e) {
             e.preventDefault();
 
             var data = eval(N("code#data", view).text());
@@ -92,7 +92,7 @@ N("article#validator").cont({
             Prism.highlightElement(N("#result", view).get(0));
         });
 
-        N("a#btnValidateDeclarative", view).click(function(e) {
+        N("#btnValidateDeclarative", view).click(function(e) {
             e.preventDefault();
             N().validator(N("#inputBox", view)).validate();
         });

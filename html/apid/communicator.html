@@ -90,7 +90,7 @@ function(data) {
 	    	this.setEvents(view, this);
 	    },
 	    setEvents : function(view, this_) {
-	    	N("a#btnGetJson", view).click(function(e) {
+	    	N("#btnGetJson", view).click(function(e) {
 	            e.preventDefault();
 	            N.comm({
 	        		url : "html/apid/data/grid.json"
@@ -99,7 +99,7 @@ function(data) {
 	        	});
 	        });
 
-	    	N("a#btnGetPage", view).click(function(e) {
+	    	N("#btnGetPage", view).click(function(e) {
 	            e.preventDefault();
 	            var opts = {
 	            	url : N("input#url", view).val(),

@@ -193,7 +193,7 @@
 	    },
 	    setEvents : function(view, this_) {
 	    	var grid;
-	    	N("a#btnInit").click(function(e) {
+	    	N("#btnInit").click(function(e) {
 	            e.preventDefault();
 	       		var opts = {
 	       			context : N("input#context", view).val(),
@@ -224,47 +224,47 @@
 
 	       		grid = N([]).grid(opts).bind();
 
-	       		N("a#btnAdd", view).instance("button").enable();
-	            N("a#btnBind", view).instance("button").enable();
+	       		N("#btnAdd", view).instance("button").enable();
+	            N("#btnBind", view).instance("button").enable();
 
-	            this.disable();
+	            N("#btnInit", view).instance("button").enable();
 	        });
 
-	    	N("a#btnAdd", view).click(function(e) {
+	    	N("#btnAdd", view).click(function(e) {
 	            e.preventDefault();
 	        	grid.add();
 
 	        	N("div.btnBox", view).find("a").instance("button", function(u) {
-	            	if(!this.context().is("a#btnAdd") && !this.context().is("a#btnBind")) {
+	            	if(!this.context().is("#btnAdd") && !this.context().is("#btnBind")) {
 	            		this.enable();
 	            	}
 				});
 	        });
 
-	    	N("a#btnBind", view).click(function(e) {
+	    	N("#btnBind", view).click(function(e) {
 	            e.preventDefault();
 	            N.comm("html/apid/data/grid.json").submit(function(data) {
 	            	grid.bind(data);
 		       	});
 
 	            N("div.btnBox", view).find("a").instance("button", function(u) {
-	            	if(!this.context().is("a#btnAdd") && !this.context().is("a#btnBind")) {
+	            	if(!this.context().is("#btnAdd") && !this.context().is("#btnBind")) {
 	            		this.enable();
 	            	}
 				});
 	        });
 
-	    	N("a#btnRevert", view).click(function(e) {
+	    	N("#btnRevert", view).click(function(e) {
 	            e.preventDefault();
 	       		grid.revert(N.string.trimToUndefined(N("input#rvtRow", view).val()));
 	        });
 
-	    	N("a#btnRemove", view).click(function(e) {
+	    	N("#btnRemove", view).click(function(e) {
 	            e.preventDefault();
 	        	grid.remove(parseInt(N.string.trimToZero(N("input#rmvRow", view).val())));
 	        });
 
-	    	N("a#btnVal", view).click(function(e) {
+	    	N("#btnVal", view).click(function(e) {
 	            e.preventDefault();
 	            var row = N.string.trimToZero(N("input#row", view).val());
 	            var key = N.string.trimToNull(N("input#key", view).val());
@@ -276,7 +276,7 @@
 	        	}
 	        });
 
-	    	N("a#btnData", view).click(function(e) {
+	    	N("#btnData", view).click(function(e) {
 	    		e.preventDefault();
 	    		grid.context().parent().alert({
 	        		msg : '<div class="pre">' + N.json.format(grid.data(N.string.trimToUndefined(N("select#data", view).val()))) + '</div>',
@@ -285,12 +285,12 @@
 	        	}).show();
 	        });
 
-	    	N("a#btnValidate", view).click(function(e) {
+	    	N("#btnValidate", view).click(function(e) {
 	            e.preventDefault();
 	            grid.context().parent().alert(String(grid.validate())).show();
 	        });
 
-	    	N("a#btnReload", view).click(function(e) {
+	    	N("#btnReload", view).click(function(e) {
 	        	e.preventDefault();
 	        	N(view.parent()).comm(this_.request.get("url")).submit();
 	        });

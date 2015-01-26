@@ -74,7 +74,7 @@
 	        this.setEvents(view);
 	    },
 	    setEvents : function(view) {
-	    	N("a#btnFormatCommand", view).click(function(e) {
+	    	N("#btnFormatCommand", view).click(function(e) {
 	            e.preventDefault();
 
 	            var data = eval(N("code#data", view).text());
@@ -92,18 +92,18 @@
 	            Prism.highlightElement(N("#result", view).get(0));
 	        });
 
-	        N("a#btnFormatDeclarative", view).click(function(e) {
+	        N("#btnFormatDeclarative", view).click(function(e) {
 	            e.preventDefault();
 	            var data = eval(N("code#data", view).text());
 	            N(data).formatter(N("#inputBox", view)).format();
 	        });
 
-	        N("a#btnUnFormatEvent", view).click(function(e) {
+	        N("#btnUnFormatEvent", view).click(function(e) {
 	            e.preventDefault();
 	            N("#inputBox :input", view).trigger("unformat");
 	        });
 
-	        N("a#btnFormatEvent", view).click(function(e) {
+	        N("#btnFormatEvent", view).click(function(e) {
 	            e.preventDefault();
 	            N("#inputBox :input", view).trigger("format");
 	        });

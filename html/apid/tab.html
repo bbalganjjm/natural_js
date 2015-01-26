@@ -78,7 +78,7 @@ He was ranked 5th in Rolling Stone's list of the "100 Greatest Guitarists of All
 	    	this.setEvents(view, this);
 	    },
 	    setEvents : function(view, this_) {
-	    	N("a#btnInitTab", view).click(function(e) {
+	    	N("#btnInitTab", view).click(function(e) {
 	            e.preventDefault();
 	            var opts = {
 	            	randomSel : N("input#randomSel", view).is(":checked"),
@@ -93,15 +93,15 @@ He was ranked 5th in Rolling Stone's list of the "100 Greatest Guitarists of All
 	            this_.tab = N("div#tab").tab(opts);
 
 	            N(this).instance("button").disable();
-	            N("a#btnOpen").instance("button").enable();
+	            N("#btnOpen").instance("button").enable();
 	        });
 
-	    	N("a#btnReload", view).click(function(e) {
+	    	N("#btnReload", view).click(function(e) {
 	        	e.preventDefault();
 	        	N(view.parent()).comm(this_.request.get("url")).submit();
 	        });
 
-	    	N("a#btnOpen", view).click(function(e) {
+	    	N("#btnOpen", view).click(function(e) {
 	        	e.preventDefault();
 	        	this_.tab.open(N("input#idx", view).val());
 	        });

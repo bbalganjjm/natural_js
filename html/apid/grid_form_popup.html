@@ -157,7 +157,7 @@ N("article#grid_form_popup").cont({
     	this.setEvents(this, view);
     },
     setEvents : function(this_, view) {
-    	N("a#btnBind", view).click(function(e) {
+    	N("#btnBind", view).click(function(e) {
             e.preventDefault();
             N.comm({
         		url : "html/apid/data/grid.json",
@@ -167,7 +167,7 @@ N("article#grid_form_popup").cont({
         	});
         });
 
-    	N("a#btnModifiedData", view).click(function(e) {
+    	N("#btnModifiedData", view).click(function(e) {
     		e.preventDefault();
     		N(window).alert({
     			title : "수정된 ROW DATA",

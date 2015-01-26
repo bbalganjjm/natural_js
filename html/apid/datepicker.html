@@ -56,7 +56,7 @@
 	     	}
 	    },
 	    setEvents : function(view, this_) {
-	        N("a#btnApply", view).click(function(e) {
+	        N("#btnApply", view).click(function(e) {
 	        	e.preventDefault();
 
 	        	var opts = {
@@ -69,21 +69,21 @@
 	        	this_.datepicker = $("input#datepicker", view).datepicker(opts);
 
 	           	N(this).instance("button").disable();
-	           	N("a#btnShow", view).instance("button").enable();
-	           	N("a#btnHide", view).instance("button").enable();
+	           	N("#btnShow", view).instance("button").enable();
+	           	N("#btnHide", view).instance("button").enable();
 	        });
 
-	        N("a#btnShow", view).click(function(e) {
+	        N("#btnShow", view).click(function(e) {
 	        	e.preventDefault();
 	        	this_.datepicker.show();
 	        });
 
-	        N("a#btnHide", view).click(function(e) {
+	        N("#btnHide", view).click(function(e) {
 	        	e.preventDefault();
 	        	this_.datepicker.hide();
 	        });
 
-	        N("a#btnReload", view).click(function(e) {
+	        N("#btnReload", view).click(function(e) {
 	        	e.preventDefault();
 	        	N(view.parent()).comm(this_.request.get("url")).submit();
 	        });

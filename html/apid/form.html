@@ -302,7 +302,7 @@
 	    },
 	    setEvents : function(view, this_, data) {
 	    	var form;
-	    	N("a#btnInit", view).click(function(e) {
+	    	N("#btnInit", view).click(function(e) {
 	    		e.preventDefault();
 
 	    		var opts = {
@@ -314,7 +314,7 @@
 	    		form = N(data).form(opts);
 
 	    		N("div.btnBox", view).find("a").instance("button", function() {
-	    			if(this.context().is("a#btnInit") || this.context().is("a#btnRevert")) {
+	    			if(this.context().is("#btnInit") || this.context().is("#btnRevert")) {
 	    				this.disable();
 	    			} else {
 		            	this.enable();
@@ -322,27 +322,27 @@
 	            });
 	    	});
 
-	        N("a#btnBind", view).click(function(e) {
+	        N("#btnBind", view).click(function(e) {
 	            e.preventDefault();
 	            form.bind(parseInt($("input#row").val()));
 
-	            N("a#btnAdd", view).instance("button").disable();
-	            N("a#btnRevert", view).instance("button").enable();
+	            N("#btnAdd", view).instance("button").disable();
+	            N("#btnRevert", view).instance("button").enable();
 	        });
 
-	        N("a#btnAdd", view).click(function(e) {
+	        N("#btnAdd", view).click(function(e) {
 	            e.preventDefault();
 	            form.add();
 
-	            N("a#btnBind", view).instance("button").disable();
+	            N("#btnBind", view).instance("button").disable();
 	        });
 
-	        N("a#btnRevert", view).click(function(e) {
+	        N("#btnRevert", view).click(function(e) {
 	            e.preventDefault();
 	            form.revert();
 	        });
 
-	        N("a#btnVal", view).click(function(e) {
+	        N("#btnVal", view).click(function(e) {
 	            e.preventDefault();
 	            var key = N.string.trimToNull(N("input#key", view).val());
 	            var value = N.string.trimToNull(N("input#val", view).val());
@@ -353,7 +353,7 @@
 	        	}
 	        });
 
-	        N("a#btnData", view).click(function(e) {
+	        N("#btnData", view).click(function(e) {
 	        	e.preventDefault();
 	        	N("div.result", view).alert({
 	        		msg : '<div class="pre">' + N.json.format(form.data(N("input#data", view).is(":checked"))) + '</div>',
@@ -362,12 +362,12 @@
 	        	}).show();
 	        });
 
-	        N("a#btnValidate", view).click(function(e) {
+	        N("#btnValidate", view).click(function(e) {
 	            e.preventDefault();
 	            N("table#form").alert('<b>전체검증 결과 : ' + form.validate() + '</b>').show()
 	        });
 
-	        N("a#btnReload", view).click(function(e) {
+	        N("#btnReload", view).click(function(e) {
 	        	e.preventDefault();
 	        	N(view.parent()).comm(this_.request.get("url")).submit();
 	        });
