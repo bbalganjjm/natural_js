@@ -1368,7 +1368,7 @@
 				}
 				var this_ = this;
 				var vals;
-				console.log(opts.data);
+				console.log(opts.data[opts.row]);
 				if (!N.isEmptyObject(opts.data) && !N.isEmptyObject(vals = opts.data[opts.row])) {
 					var eles, ele, val, tagName, type;
 					for ( var key in vals ) {
