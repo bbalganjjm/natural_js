@@ -41,7 +41,7 @@
 	       		url : "html/apid/" + view.attr("id") + ".html",
 	       		dataType : "html"
 	       	}).submit(function(html) {
-	       		$("#sourceCode", view).text(html);
+	       		N("#sourceCode", view).text(html);
 	       	});
 
 	    	// initialize buttons in div.btnBox
@@ -66,7 +66,7 @@
 	           		focusin : N("input#focusin", view).is(":checked")
 	       		};
 
-	        	this_.datepicker = $("input#datepicker", view).datepicker(opts);
+	        	this_.datepicker = N("input#datepicker", view).datepicker(opts);
 
 	           	N(this).instance("button").disable();
 	           	N("#btnShow", view).instance("button").enable();

@@ -19,7 +19,7 @@ var IndexController = {
 		this.loadMainContents();
 	},
 	setMenuEvent : function() {
-		$("nav > ul > li > ul a").click(function(e) {
+		N("nav > ul > li > ul a").click(function(e) {
 			var href = N(this).attr("href");
 			if(N.string.trimToEmpty(href).indexOf("#") < 0
 					&& N.string.trimToEmpty(href).indexOf(".html") > -1

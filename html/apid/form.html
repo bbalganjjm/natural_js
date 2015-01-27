@@ -279,7 +279,7 @@
 	       		url : "html/apid/" + view.attr("id") + ".html",
 	       		dataType : "html"
 	       	}).submit(function(html) {
-	       		$("#sourceCode", view).text(html);
+	       		N("#sourceCode", view).text(html);
 	       	});
 
 	    	// initialize buttons in div.btnBox
@@ -295,10 +295,10 @@
 	    	this.setEvents(view, this, data)
 	    },
 	    createSelects : function(data, view) {
-	    	$(data[2].eyeColor, view).select("select#eyeColor").bind();
-			$(data[2].company, view).select("select#company").bind();
-			$(data[2].gender, view).select("input#gender").bind();
-			$(data[2].favoriteFruit, view).select("input#favoriteFruit").bind();
+	    	N(data[2].eyeColor).select("select#eyeColor", view).bind();
+			N(data[2].company).select("select#company", view).bind();
+			N(data[2].gender).select("input#gender", view).bind();
+			N(data[2].favoriteFruit).select("input#favoriteFruit", view).bind();
 	    },
 	    setEvents : function(view, this_, data) {
 	    	var form;
@@ -324,7 +324,7 @@
 
 	        N("#btnBind", view).click(function(e) {
 	            e.preventDefault();
-	            form.bind(parseInt($("input#row").val()));
+	            form.bind(parseInt(N("input#row").val()));
 
 	            N("#btnAdd", view).instance("button").disable();
 	            N("#btnRevert", view).instance("button").enable();
