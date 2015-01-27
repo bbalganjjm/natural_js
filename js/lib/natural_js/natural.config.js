@@ -56,9 +56,9 @@
 					complete : function(request, xhr, textStatus) {
 						// code highlight
 				    	$("code").each(function() {
-				    		if(N.string.trimToEmpty(N(this).parent().attr("class")).indexOf("language-") < 0) {
-				    			console.log(N(this).parent());
+				    		if(!N(this).hasClass("code_highlighter__")) {
 				    			Prism.highlightElement(this);
+				    			N(this).addClass("code_highlighter__");
 				    		}
 				    	});
 					}
