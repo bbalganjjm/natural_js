@@ -1564,7 +1564,7 @@
 			revert : function() {
 				var opts = this.options;
 				if(!opts.revert) {
-					N.error("[N.form.revert]Can not revert. N.form.options.revert value is false");
+					N.error("[N.form.revert]Can not revert. N.form's revert option value is false");
 				}
 				opts.data[opts.row] = $.extend({}, this.revertData);
 				this.update(opts.row);
