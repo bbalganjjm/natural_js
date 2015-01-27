@@ -462,9 +462,7 @@ N("article#refr0103").cont({
 
     	//load api demo page
     	N(".apidemo", view).each(function() {
-    		N(this).comm("html/apid/" + N(this).data("page") + ".html").submit(function() {
-    			console.log(1111111);
-    		});
+    		N(this).comm("html/apid/" + N(this).data("page") + ".html").submit();
     	});
     }
 });

@@ -123,9 +123,6 @@ N("article#exap0100").cont({
        		dataType : "html"
        	}).submit(function(html) {
        		$("#sourceCode", view).text(html);
-       		$("code", view).each(function() {
-    			Prism.highlightElement(this);
-        	});
        	});
 
     	// initialize buttons in div.btnBox

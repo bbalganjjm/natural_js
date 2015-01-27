@@ -54,7 +54,12 @@
 						}
 					},
 					complete : function(request, xhr, textStatus) {
-
+						// code highlight
+				    	$("code", view).each(function() {
+				    		if(N.string.trimToEmpty(N(this).parent().attr("class")).indexOf("language-") < 0) {
+				    			Prism.highlightElement(this);
+				    		}
+				    	});
 					}
 				},
 				"dataFilter" : {
