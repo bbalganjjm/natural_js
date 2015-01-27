@@ -135,8 +135,7 @@ N("article#exap0100").cont({
     	var popup = N("table#form", view).popup({
     		modal: false,
     		onCancel : function() {
-    			alert(1);
-    			//cont.form.revert();
+    			cont.form.revert();
     		}
     	});
 
@@ -153,7 +152,7 @@ N("article#exap0100").cont({
        		hover : true,
        		windowScrollLock : true,
        		onSelect : function(i, ele, data) {
-       			form.bind(i, data);
+       			cont.form.bind(i, data);
        			popup.close();
        			popup.open();
        		}
