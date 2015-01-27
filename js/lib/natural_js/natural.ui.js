@@ -1560,7 +1560,7 @@
 				var opts = this.options;
 				opts.data[opts.row] = $.extend({}, this.revertData);
 				N.ds.instance(opts.extObj !== null ? opts.extObj : this).notify(opts.extRow > -1 ? opts.extRow : opts.row);
-				N.ds.instance(this).notify(opts.row);
+				this.update(opts.row);
 				return this;
 			},
 			validate : function() {
@@ -1678,7 +1678,6 @@
 			update : function(row, key) {
 				var opts = this.options;
 				if (key === undefined) {
-					alert(1);
 					this.bind(row);
 				} else {
 					this.val(key, opts.data[row][key], false);
