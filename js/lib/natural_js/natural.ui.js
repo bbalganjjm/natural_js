@@ -1557,6 +1557,8 @@
 			},
 			revert : function() {
 				var opts = this.options;
+				console.log(opts.data[opts.row]);
+				console.log(this.revertData);
 				opts.data[opts.row] = $.extend({}, this.revertData);
 				N.ds.instance(opts.extObj !== null ? opts.extObj : this).notify(opts.extRow > -1 ? opts.extRow : opts.row);
 				this.update(opts.row);
