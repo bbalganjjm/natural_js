@@ -1,9 +1,9 @@
 <article id="exap0100">
 	<h1>Grid 와 Form, Popup 이 결합된 형태의 예제</h1>
 	<div class="intro">
-		<p class="smallContTit">그리드에 9018건의 대용량 데이터를 바인딩 입니다.</p>
 		<p class="smallContTit">그리드의 행을 클릭하면 클릭한 행의 데이터가 바인드된 폼이 팝업 으로 표시 됩니다.</p>
 		<p class="smallContTit">폼과 그리드는 같은 데이터를 참고하고 있으므로 둘중 한쪽에서 데이터 변동이 있을 시 나머지 한쪽도 실시간으로 변경된 데이터가 동기화 됩니다.</p>
+		<p id="progress"></p>
 	</div>
 	<br>
 	<div id="defBtnBox" class="btnBox" align="center">
@@ -164,11 +164,12 @@ N("article#exap0100").cont({
     setEvents : function(this_, view) {
     	N("#btnBind", view).click(function(e) {
             e.preventDefault();
+            N("#progress", view).text("서버에서 데이터를 가져오는 중....");
             N.comm({
         		url : "html/apid/data/grid_big.json",
         		async : false
         	}).submit(function(data) {
-        		console.log(data.length + " 건 조회");
+        		N("#progress", view).text("조회된 전체 데이터 건수 : " + data.length + " 건");
         		this_.grid.bind(data);
         	});
         });
