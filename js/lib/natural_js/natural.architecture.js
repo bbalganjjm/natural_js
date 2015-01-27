@@ -165,17 +165,9 @@
 						});
 
 						if (!N.isElement(obj)) {
-							if (callback === undefined) {
-								N.error("[Communicator.submit]You must input callback function to arguments[0]");
-							}
 							if (obj.request.options.urlSync && obj.request.options.referrer.replace(/!/g, "") != window.location.href.replace(/!/g, "")) {
 								xhr.abort();
 								return false;
-							}
-							try {
-								callback.call(obj, data, obj.request);
-							} catch (e) {
-								N.error("[Communicator.submit.success.callback]" + e, e);
 							}
 						} else {
 							if (!obj.request.options.append) {
@@ -194,6 +186,14 @@
 										sc.init(sc.view, obj.request);
 									}
 								}
+							}
+						}
+
+						if (callback !== undefined) {
+							try {
+								callback.call(obj, data, obj.request);
+							} catch (e) {
+								N.error("[Communicator.submit.success.callback]" + e, e);
 							}
 						}
 					},

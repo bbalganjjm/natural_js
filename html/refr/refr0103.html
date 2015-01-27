@@ -207,7 +207,7 @@
 			<td>callback</td>
 			<td>Function</td>
 			<td align="center">-</td>
-			<td>서버에서 요청이 처리되고 응답이 완료된 다음 실행되는 콜백 함수입니다.</td>
+			<td>서버에서 요청이 처리되고 응답이 완료된 다음 실행되는 콜백 함수입니다. 콜백함수의 첫번째 인자(arguments[0])에는 서버에서 가져온 data 를 넣어 주고 두번째 인자(arguments[1])에는 요청정보가 담긴 Communicator.request 객체를 넣어줍니다.</td>
 		</tr>
 	</table>
 
@@ -462,7 +462,9 @@ N("article#refr0103").cont({
 
     	//load api demo page
     	N(".apidemo", view).each(function() {
-    		N(this).comm("html/apid/" + N(this).data("page") + ".html").submit();
+    		N(this).comm("html/apid/" + N(this).data("page") + ".html").submit(function() {
+    			console.log(1111111);
+    		});
     	});
     }
 });
