@@ -1308,7 +1308,8 @@
 				fRules : null,
 				vRules : null,
 				extObj : null, // for N.grid,
-				extRow : -1  // for N.grid
+				extRow : -1  // for N.grid,
+				revert : false
 			};
 
 			try {
@@ -1331,7 +1332,9 @@
 			}
 			this.options.context.addClass("form__");
 
-			this.revertData = $.extend({}, this.options.data[this.options.row]);
+			if(this.options.revert) {
+				this.revertData = $.extend({}, this.options.data[this.options.row]);
+			}
 
 			this.options.context.instance("form", this);
 
@@ -1364,7 +1367,9 @@
 				}
 				if(data !== undefined) {
 					opts.data = data;
-					this.revertData = $.extend({}, data[row]);
+					if(opts.revert) {
+						this.revertData = $.extend({}, data[row]);
+					}
 				}
 				var this_ = this;
 				var vals;
@@ -1558,6 +1563,9 @@
 			},
 			revert : function() {
 				var opts = this.options;
+				if(!opts.revert) {
+					N.error("[N.form.revert]Can not revert. N.form.options.revert value is false");
+				}
 				opts.data[opts.row] = $.extend({}, this.revertData);
 				this.update(opts.row);
 				N.ds.instance(opts.extObj !== null ? opts.extObj : this).notify(opts.extRow > -1 ? opts.extRow : opts.row);
