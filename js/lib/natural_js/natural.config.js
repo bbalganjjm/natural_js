@@ -46,6 +46,7 @@
 					},
 					error : function(request, xhr, textStatus, errorThrown) {
 						if(request.options.dataType === "html") {
+							console.log(request.obj);
 							request.obj.html('<div align="center" style="margin-top: 140px;margin-bottom: 140px;">페이지를 불러오는 도중 에러가 발생 했습니다.</div>');
 						}
 					},
