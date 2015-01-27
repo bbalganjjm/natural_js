@@ -58,7 +58,7 @@
 						var nCodeEle;
 				    	$("code").each(function() {
 				    		nCodeEle = N(this);
-				    		if(!nCodeEle.hasClass("code_highlighter__") && !N.string.isEmpty(nCodeEle.text())) {
+				    		if(!nCodeEle.hasClass("code_highlighter__")) {
 				    			Prism.highlightElement(this);
 				    			nCodeEle.addClass("code_highlighter__");
 				    		}
