@@ -171,19 +171,7 @@
 	N("article#select").cont({
 		"select" : null,
 	    init : function(view, request) {
-	    	// source Code
-	    	N.comm({
-	       		url : "html/apid/" + view.attr("id") + ".html",
-	       		dataType : "html"
-	       	}).submit(function(html) {
-	       		$("#sourceCode", view).text(html);
-	       	});
 
-	    	// initialize buttons in div.btnBox
-	    	N("div.btnBox a", view).button();
-
-	    	// bind events
-	    	this.setEvents(view, this);
 	    },
 	    setEvents : function(view, this_) {
 	    	N("#btnInit", view).click(function(e) {
@@ -196,6 +184,7 @@
 					append : N("input#append", view).is(":checked"),
 					direction : N("select#direction", view).val(),
 	            }
+	            this_.select = $(data).select(opts);
 
 	           	N("#btnBind", view).instance("button").enable();
 	           	N("#btnVal", view).instance("button").enable();
