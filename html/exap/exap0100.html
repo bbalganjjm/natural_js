@@ -140,6 +140,7 @@ N("article#exap0100").cont({
     	// initialize grid
     	this.grid = N([]).grid({
        		context : N("table#grid", view),
+       		data : [],
        		height : 350,
        		resizable : true,
        		sortable : true,
@@ -154,7 +155,7 @@ N("article#exap0100").cont({
        		rowHandler : function(i, nTbody, rowData) {
        			N("#idx", nTbody).text(String(i));
        		}
-       	});
+       	}).bind();
 
     	// bind events
     	this.setEvents(this, view);
