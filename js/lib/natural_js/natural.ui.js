@@ -1559,8 +1559,8 @@
 			revert : function() {
 				var opts = this.options;
 				opts.data[opts.row] = $.extend({}, this.revertData);
+				this.update(opts.row);
 				N.ds.instance(opts.extObj !== null ? opts.extObj : this).notify(opts.extRow > -1 ? opts.extRow : opts.row);
-				//this.update(opts.row);
 				return this;
 			},
 			validate : function() {
@@ -1682,7 +1682,6 @@
 				} else {
 					this.val(key, opts.data[row][key], false);
 				}
-				console.log(row);
 				N.element.dataChanged(opts.context.find("#" + key + ", input:radio[id='" + key + "'][name='" + key + "'], input:checkbox[id='" + key + "'][name='" + key + "']"));
 				return this;
 			}
