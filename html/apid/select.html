@@ -145,7 +145,6 @@
 			<tr>
 				<th><label for="company">company</label></th>
 				<td>
-					<select id="company" multiple="multiple"></select>
 				</td>
 			</tr>
 			<tr>
@@ -171,7 +170,19 @@
 	N("article#select").cont({
 		"select" : null,
 	    init : function(view, request) {
+	    	// source Code
+	    	N.comm({
+	       		url : "html/apid/" + view.attr("id") + ".html",
+	       		dataType : "html"
+	       	}).submit(function(html) {
+	       		$("#sourceCode", view).text(html);
+	       	});
 
+	    	// initialize buttons in div.btnBox
+	    	N("div.btnBox a", view).button();
+
+	    	// bind events
+	    	this.setEvents(view, this);
 	    },
 	    setEvents : function(view, this_) {
 	    	N("#btnInit", view).click(function(e) {
