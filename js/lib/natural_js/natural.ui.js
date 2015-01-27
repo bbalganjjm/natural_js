@@ -1368,6 +1368,7 @@
 				}
 				var this_ = this;
 				var vals;
+				console.log(opts.data);
 				if (!N.isEmptyObject(opts.data) && !N.isEmptyObject(vals = opts.data[opts.row])) {
 					var eles, ele, val, tagName, type;
 					for ( var key in vals ) {
@@ -1678,7 +1679,6 @@
 			update : function(row, key) {
 				var opts = this.options;
 				if (key === undefined) {
-					console.log(row);
 					this.bind(row);
 				} else {
 					this.val(key, opts.data[row][key], false);
