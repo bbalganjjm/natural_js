@@ -120,7 +120,9 @@
 		</tr>
 		<tr>
 			<th>html</th>
-			<td colspan="3"><input id="html" type="checkbox" /> If this checkbox with check(true), do not recognize HTML tags</td>
+			<td><input id="html" type="checkbox" /> If this checkbox with check(true), do not recognize HTML tags</td>
+			<th>revert</th>
+			<td><input id="revert" type="checkbox" checked="checked" /> If this checkbox with check(true), activate the revert function(default value is false)</td>
 		</tr>
 	</table>
 
@@ -308,7 +310,8 @@
 	    		var opts = {
 	    			context : view.find(N("input#context", view).val()),
 	    			validate : N("input#validate", view).is(":checked"),
-	    			html : N("input#html", view).is(":checked")
+	    			html : N("input#html", view).is(":checked"),
+	        		revert : N("input#revert", view).is(":checked")
 	    		}
 
 	    		form = N(data).form(opts);

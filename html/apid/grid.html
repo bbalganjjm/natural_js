@@ -67,8 +67,10 @@
 }</textarea><br /> Callback function for tab active event</td>
 		</tr>
 		<tr>
-			<th>windowScroll<br>Lock</th>
-			<td colspan="3"><input id="windowScrollLock" type="checkbox" />  If this checkbox with check(true), block window scroll when mouse scrolling in grid</td>
+			<th>windowScroll Lock</th>
+			<td><input id="windowScrollLock" type="checkbox" /> If this checkbox with check(true), block window scroll when mouse scrolling in grid</td>
+			<th>revert</th>
+			<td><input id="revert" type="checkbox" checked="checked" /> If this checkbox with check(true), activate the revert function(default value is false)</td>
 		</tr>
 	</table>
 
@@ -219,7 +221,8 @@
 	        				eval("(" + N("textarea#onSelect", view).val() + ")") : null,
 	        			onBind : N.string.trimToNull(N("textarea#onBind", view).val()) !== null ?
 	        				eval("(" + N("textarea#onBind", view).val() + ")") : null,
-	        		windowScrollLock : N("input#windowScrollLock", view).is(":checked")
+	        		windowScrollLock : N("input#windowScrollLock", view).is(":checked"),
+	        		revert : N("input#revert", view).is(":checked")
 	       		}
 
 	       		grid = N([]).grid(opts).bind();
