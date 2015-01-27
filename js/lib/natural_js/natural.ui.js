@@ -1560,8 +1560,7 @@
 				var opts = this.options;
 				opts.data[opts.row] = $.extend({}, this.revertData);
 				this.update(opts.row);
-				console.log(opts.extRow > -1 ? opts.extRow : opts.row);
-				N.ds.instance(opts.extObj !== null ? opts.extObj : this).notify(opts.extRow > -1 ? opts.extRow : opts.row);
+				N.ds.instance(this).notify(opts.extRow > -1 ? opts.extRow : opts.row);
 				return this;
 			},
 			validate : function() {
