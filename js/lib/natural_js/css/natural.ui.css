@@ -407,6 +407,7 @@ div.datepicker_contents__ {
 	background-color: #999999;
 	padding: 3px;
 	font-size: 12px;
+	z-index: 1;
 }
 
 div.datepicker_contents__ div.datepicker_year_item__, div.datepicker_contents__ div.datepicker_year_paging__ {
