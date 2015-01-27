@@ -306,7 +306,7 @@
 	    		e.preventDefault();
 
 	    		var opts = {
-	    			context : N("input#context", view).val(),
+	    			context : view.find(N("input#context", view).val()),
 	    			validate : N("input#validate", view).is(":checked"),
 	    			html : N("input#html", view).is(":checked")
 	    		}

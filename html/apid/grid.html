@@ -196,7 +196,7 @@
 	    	N("#btnInit", view).click(function(e) {
 	            e.preventDefault();
 	       		var opts = {
-	       			context : N("input#context", view).val(),
+	       			context : view.find(N("input#context", view).val()),
 	       			height : parseInt(N.string.trimToZero(N("input#height", view).val())),
 	       			validate : N("input#validate", view).is(":checked"),
 	       			html : N("input#html", view).is(":checked"),
