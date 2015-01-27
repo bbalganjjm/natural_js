@@ -1307,8 +1307,8 @@
 				addTop : false,
 				fRules : null,
 				vRules : null,
-				extObj : null, // for N.grid,
-				extRow : -1  // for N.grid,
+				extObj : null, // for N.grid
+				extRow : -1,  // for N.grid
 				revert : false
 			};
 
