@@ -1878,7 +1878,8 @@
 							html: opts.html,
 							validate : opts.validate,
 							extObj : this_,
-							extRow : i
+							extRow : i,
+							revert : opts.revert
 						}).bind();
 
 						tbodyTempClone.show(delay, function() {
