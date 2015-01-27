@@ -1682,6 +1682,7 @@
 				} else {
 					this.val(key, opts.data[row][key], false);
 				}
+				console.log(row);
 				N.element.dataChanged(opts.context.find("#" + key + ", input:radio[id='" + key + "'][name='" + key + "'], input:checkbox[id='" + key + "'][name='" + key + "']"));
 				return this;
 			}
