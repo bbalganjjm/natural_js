@@ -1992,6 +1992,7 @@
 				if(row === undefined) {
 					this.bind();
 				} else {
+					console.log(this.options.context.find("tbody:eq(" + String(row) + ")").instance("form"));
 					this.options.context.find("tbody:eq(" + String(row) + ")").instance("form").update(0, key);
 				}
 				return this;

@@ -152,7 +152,6 @@
 				if (inst !== null) {
 					for (var i = 0; i < obserable.length; i++) {
 						if (inst !== obserable[i] && inst.options.data === obserable[i].options.data) {
-							console.log(obserable[i]);
 							obserable[i].update(row, key);
 						}
 					}
