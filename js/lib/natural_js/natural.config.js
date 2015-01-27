@@ -56,7 +56,7 @@
 					complete : function(request, xhr, textStatus) {
 						// code highlight
 				    	$("code").each(function() {
-				    		console.log(N.string.trimToEmpty(N(this).parent().attr("class")).indexOf("language-"));
+				    		console.log(N.string.trimToEmpty(N(this).parent().attr("class")));
 				    		if(N.string.trimToEmpty(N(this).parent().attr("class")).indexOf("language-") < 0) {
 				    			Prism.highlightElement(this);
 				    		}
