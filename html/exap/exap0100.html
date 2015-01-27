@@ -158,7 +158,7 @@ N("article#exap0100").cont({
     	N("#btnBind", view).click(function(e) {
             e.preventDefault();
             N.comm({
-        		url : "html/apid/data/grid.json",
+        		url : "html/apid/data/grid_big.json",
         		async : false
         	}).submit(function(data) {
         		this_.grid.bind(data);
