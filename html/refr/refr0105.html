@@ -116,7 +116,7 @@
 			<td>Array</td>
 			<td>undefined</td>
 			<td></td>
-			<td>
+			<td style="max-width: 299px;">
 				<p>메시지의 변수를 vars로 지정한 값으로 치환 해줍니다.</p>
 				<pre><code class="language-javascript">N(window).alert({
 	msg : &quot;{0} 저는 {1}입니다.&quot;,
@@ -351,7 +351,7 @@
 			<td>size</td>
 			<td>String</td>
 			<td>&quot;medium&quot;</td>
-			<td colspan="3">
+			<td>
 				<p>크기</p>
 				<p>smaller, small, medium, large, big</p>
 			</td>
@@ -360,7 +360,7 @@
 			<td>color</td>
 			<td>String</td>
 			<td>&quot;white&quot;</td>
-			<td colspan="3">
+			<td>
 				<p>색깔</p>
 				<p>white, blue, skyblue, gray</p>
 			</td>
@@ -822,7 +822,7 @@
 			<td>JWS</td>
 			<td>obj</td>
 			<td align="center">○</td>
-			<td>
+			<td style="max-width: 299px;">
 				<p>같은 페이지 내에 있는 탭과 탭 컨텐츠를 감싸고 있는 "DIV" 요소를 지정 합니다.</p>
 				<p>탭플릿 요소는 다음과 같이 작성 합니다.</p>
 				<pre><code class="language-markup">&lt;div id=&quot;tab&quot;&gt;
@@ -852,7 +852,7 @@
 			<td>Array</td>
 			<td>[]</td>
 			<td></td>
-			<td>
+			<td style="max-width: 299px;">
 				<p>선언형옵션을 명령형으로 지정할때 탭별로 탭의 순서대로 JSON Obejct 형태로 서브옵션을 지정 합니다.</p>
 				<pre><code class="language-javascript">N("#tab").tab({
 	dataOpts : [
@@ -883,7 +883,7 @@
 			<td>boolean or Array</td>
 			<td>false</td>
 			<td></td>
-			<td>
+			<td style="max-width: 299px;">
 				<p>탭 컨텐츠가 표시될때 전환 효과를 보여줄지 여부를 설정 합니다.</p>
 				<p>효과를 적용하지 않으려면 false를 입력하고 효과를 입력하려면 다음과 같이 입력합니다.</p>
 				<p>["효과명"</p>
@@ -945,7 +945,7 @@
 			<td>onOpen</td>
 			<td>String</td>
 			<td>undefined</td>
-			<td colspan="3">
+			<td>
 				<p>onOpen 이벤트를 지정한 탭이 열릴때마다 불러온 컨텐츠에서 실행될 콜백 펑션의 이름을 문자열로 지정 합니다.</p>
 				<p>콜백펑션은 불러올 페이지의 Controller 에 지정한 이름으로 정의 되어 있어야 합니다.</p>
 			</td>
@@ -1647,7 +1647,7 @@
 			<td>Function</td>
 			<td>null</td>
 			<td></td>
-			<td>
+			<td style="max-width: 299px;">
 				<p>그리드 데이터가 바인드될때 로우가 생성될때마다 발생하는 이벤트입니다. 이벤트 콜백 메서드의 인자로 생성될 당시의 row index, 로우 요소, 로우 데이터를 넣어줍니다.</p>
 				<pre><code class="language-javascript">rowHandler : function(index, rowEle, rowData) {
 	// this 는 rowEle
@@ -1659,7 +1659,7 @@
 			<td>Function</td>
 			<td>null</td>
 			<td></td>
-			<td>
+			<td style="max-width: 299px;">
 				<p>그리드의 행이 선택될때마다 발생되는 이벤트입니다. 이벤트 콜백 메서드의 인자로 생성될 당시의 row index, 로우 요소, 로우 데이터를 넣어줍니다.</p>
 				<pre><code class="language-javascript">onSelect : function(index, rowEle, rowData) {
 	// this 는 rowEle
@@ -1673,7 +1673,7 @@
 			<td>Function</td>
 			<td>null</td>
 			<td></td>
-			<td>
+			<td style="max-width: 299px;">
 				<p>그리드의 데이터가 바인드 될 때마다 발생되는 이벤트입니다. 이벤트 콜백 메서드의 인자로 context, data를 넣어줍니다.</p>
 				<pre><code class="language-javascript">onBind : function(context, data) {
 	// this 는 context

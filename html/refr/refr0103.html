@@ -112,7 +112,7 @@
 			<td>request</td>
 			<td>Communicator.request instance</td>
 			<td align="center">-</td>
-			<td colspan="2">Communicator.request 인스턴스를 반환하여 현재 페이지의 요청 정보를 볼 수 있습니다.</td>
+			<td>Communicator.request 인스턴스를 반환하여 현재 페이지의 요청 정보를 볼 수 있습니다.</td>
 		</tr>
 	</table>
 
@@ -147,7 +147,7 @@
 			<td>obj</td>
 			<td>JWS(selector or element) or Object(JSON) or  JWS(Object(JSON))</td>
 			<td align="center">-</td>
-			<td>
+			<td style="max-width: 299px;">
 				<p>JWS(selector or element) 형태의 인자로 지정하고 두 번째인자로 특정 페이지의 URL을 지정하면 가져온 HTML 컨텐츠를 지정한 요소 안에 넣어줍니다.</p>
 				<p>Object(JSON)  형태의 인자로 지정하면 Communicator.request 의 옵션으로 지정 됩니다.</p>
 				<p>JWS(Object(JSON)) 형태의 인자로 지정하면 지정한 값을 서버로 전송한 파라미터로 인식하여 서버에 요청을 보낼 때 전송 해 줍니다.</p>
@@ -296,7 +296,7 @@
 			<td>boolean or Array</td>
 			<td>false</td>
 			<td></td>
-			<td>
+			<td style="max-width: 299px;">
 				<p>HTML 컨텐츠를 가져올 때 전환 효과를 보여줄지 여부를 설정 합니다.</p>
 				<p>효과를 적용하지 않으려면 false를 입력하고 효과를 입력하려면 다음과 같이 입력합니다.</p>
 				<p>["효과명", "시간(ms)", "효과가 끝날 때 마다 실행될 콜백함수"]</p>
@@ -320,7 +320,7 @@
 			<td align="center">-</td>
 			<td align="center">-</td>
 			<td>Controller.request or Value object</td>
-			<td colspan="2">
+			<td style="max-width: 299px;">
 				<p>호출한 페이지에 값을 전달할 때 사용합니다.</p>
 				<p>* 값전달 : </p>
 				<pre><code class="language-javascript">N(selector).comm(url).request.attr("param", { paramA : "A" }).submit()</code></pre>
