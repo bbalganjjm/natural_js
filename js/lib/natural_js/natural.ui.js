@@ -1712,6 +1712,7 @@
 				select : false,
 				multiselect : false,
 				hover : false,
+				revert : false,
 				createRowDelay : 1,
 				scrollPaging : {
 					idx : 0,
@@ -1958,6 +1959,9 @@
 			},
 			revert : function(row) {
 				var opts = this.options;
+				if(!opts.revert) {
+					N.error("[N.form.revert]Can not revert. N.form's revert option value is false");
+				}
 				if(row !== undefined) {
 					opts.context.find("tbody:eq(" + String(row) + ")").instance("form").revert();
 				} else {
