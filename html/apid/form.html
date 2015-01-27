@@ -289,16 +289,16 @@
 	    	var data = eval(N("code#data", view).text());
 
 	    	// create selects
-	    	this.createSelects(data);
+	    	this.createSelects(data, view);
 
 	    	// bind events
 	    	this.setEvents(view, this, data)
 	    },
-	    createSelects : function(data) {
-	    	$(data[2].eyeColor).select("select#eyeColor").bind();
-			$(data[2].company).select("select#company").bind();
-			$(data[2].gender).select("input#gender").bind();
-			$(data[2].favoriteFruit).select("input#favoriteFruit").bind();
+	    createSelects : function(data, view) {
+	    	$(data[2].eyeColor, view).select("select#eyeColor").bind();
+			$(data[2].company, view).select("select#company").bind();
+			$(data[2].gender, view).select("input#gender").bind();
+			$(data[2].favoriteFruit, view).select("input#favoriteFruit").bind();
 	    },
 	    setEvents : function(view, this_, data) {
 	    	var form;
