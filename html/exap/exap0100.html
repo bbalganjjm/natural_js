@@ -116,7 +116,10 @@
 
 N("article#exap0100").cont({
 	grid : undefined,
+	form : undefined,
     init : function(view, request) {
+    	var cont = this;
+
     	// source Code
     	N.comm({
        		url : "html/exap/" + view.attr("id") + ".html",
@@ -130,11 +133,14 @@ N("article#exap0100").cont({
 
     	// initialize popup
     	var popup = N("table#form", view).popup({
-    		modal: false
+    		modal: false,
+    		onClose : function() {
+    			cont.form.revert();
+    		}
     	});
 
     	// initialize form
-    	var form = N([]).form("table#form", view).bind();
+    	this.form = N([]).form("table#form", view).bind();
 
     	// initialize grid
     	this.grid = N([]).grid({
