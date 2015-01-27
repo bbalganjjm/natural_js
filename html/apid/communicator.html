@@ -112,7 +112,7 @@ function(data) {
 	      		        N.string.trimToNull(N("textarea#callback", view).val()) !== null ?
 							eval("(" + N("textarea#callback", view).val() + ")") : undefined ]
 	            }
-	            N(N("input#context", view).val(), view).comm(opts).request.attr("hello", N("textarea#request", view).val()).submit();
+	            view.find(N("input#context", view).val()).comm(opts).request.attr("hello", N("textarea#request", view).val()).submit();
 	        });
 	    }
 	});

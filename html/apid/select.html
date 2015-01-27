@@ -191,10 +191,10 @@
 	            var data = eval(N("code#data", view).text())[0][N("select#data", view).val()];
 	            var opts = {
 	            	context : view.find(N("select#context", view).val()),
-					key : view.find(N("input#key", view).val()),
-					val : view.find(N("input#val", view).val()),
-					append : view.find(N("input#append", view).is(":checked")),
-					direction : view.find(N("select#direction", view).val()),
+					key : N("input#key", view).val(),
+					val : N("input#val", view).val(),
+					append : N("input#append", view).is(":checked"),
+					direction : N("select#direction", view).val(),
 	            }
 	            this_.select = N(data).select(opts);
 
