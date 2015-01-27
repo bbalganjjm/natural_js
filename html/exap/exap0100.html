@@ -136,9 +136,6 @@ N("article#exap0100").cont({
     		modal: false,
     		onCancel : function() {
     			cont.form.revert();
-    			// TODO 같은 data를 참고하고 이싿면 그리드든 폼이든 한쪽에서 revert 하면 나머지 컴포넌트에서도 동기화 되어야 함.
-    			// Bug 이지만 임시로 그리드에서 한번 더 처리함. 이건 시간날때 꼭 수정해야함.
-    			cont.grid.revert(cont.form.row());
     		}
     	});
 
