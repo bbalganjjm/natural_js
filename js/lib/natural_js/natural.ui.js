@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.2.2
+ * Natural-UI v0.8.2.3
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	var version = "0.8.2.2";
+	var version = "0.8.2.3";
 
 	// N local variables
 	$.fn.extend(N, {
