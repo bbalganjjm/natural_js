@@ -1678,6 +1678,7 @@
 			update : function(row, key) {
 				var opts = this.options;
 				if (key === undefined) {
+					console.log(row);
 					this.bind(row);
 				} else {
 					this.val(key, opts.data[row][key], false);
@@ -1992,7 +1993,6 @@
 				if(row === undefined) {
 					this.bind();
 				} else {
-					console.log(this.options.context.find("tbody:eq(" + String(row) + ")").instance("form"));
 					this.options.context.find("tbody:eq(" + String(row) + ")").instance("form").update(0, key);
 				}
 				return this;
