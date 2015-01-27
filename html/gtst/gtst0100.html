@@ -1,4 +1,4 @@
-<article>
+<article id="gtst0100">
 	<dl class="qna">
 		<dt>Natural-JS 가 뭔가요? 먹는거애요?</dt>
 		<dd>Natural-JS 는 표준웹 기반의 RIA 웹 사이트를 쉽고 빠르게 구현할 수 있는 Javascript 라이브러리 입니다.</dd>
@@ -304,3 +304,16 @@ N("#viewCont").cont({
 	<p>이제 기본 구조를 알았으니 API 문서 참고해서 신나게 개발 해 볼까요?</p>
 	<p><a class="link" href="/natural_js#refr/refr0101">API 문서 및 API 데모 바로가기</a></p>
 </article>
+
+<script type="text/javascript">
+
+N("article#gtst0100").cont({
+	grid : undefined,
+    init : function(view, request) {
+    	$("code", view).each(function() {
+			Prism.highlightElement(this);
+    	});
+    }
+});
+
+</script>
