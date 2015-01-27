@@ -377,7 +377,7 @@ article .alert {
 
 /* API Document */
 article.apiDoc table th {
-	width: 90px;
+	width: 10%;
 }
 
 article.apiDoc table td p {
