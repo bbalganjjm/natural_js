@@ -55,10 +55,12 @@
 					},
 					complete : function(request, xhr, textStatus) {
 						// code highlight
+						var nCodeEle;
 				    	$("code").each(function() {
-				    		if(!N(this).hasClass("code_highlighter__")) {
+				    		nCodeEle = N(this);
+				    		if(!nCodeEle.hasClass("code_highlighter__") && !N.string.isEmpty(nCodeEle.text())) {
 				    			Prism.highlightElement(this);
-				    			N(this).addClass("code_highlighter__");
+				    			nCodeEle.addClass("code_highlighter__");
 				    		}
 				    	});
 					}
