@@ -12,8 +12,9 @@
 	<table id="grid" class="grid" style="width: 100%;">
 		<thead>
 			<tr>
-				<th width="21%">name</th>
-				<th width="23%">email</th>
+				<th width="9%">index</th>
+				<th width="17%">name</th>
+				<th width="18%">email</th>
 				<th width="11%">gender</th>
 				<th width="13%">eyeColor</th>
 				<th width="7%">age</th>
@@ -23,6 +24,7 @@
 		</thead>
 		<tbody>
 			<tr>
+				<td id="idx"></td>
 				<td id="name"></td>
 				<td id="email"></td>
 				<td id="gender" align="center"></td>
@@ -148,6 +150,9 @@ N("article#exap0100").cont({
        			cont.form.bind(i, data);
        			popup.close();
        			popup.open();
+       		},
+       		rowHandler : fcuntion(i, nTbody, rowData) {
+       			N("#idx", nTbody).text(String(i));
        		}
        	});
 
