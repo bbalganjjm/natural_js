@@ -167,6 +167,11 @@ table.form th {
 	background: -o-linear-gradient(left, #ddfddd, #effeee);
 	background: -webkit-linear-gradient(left, #ddfddd, #effeee);
 	background-color: #ddfddd;
+	text-align: right;
+}
+
+table.form td {
+	text-align: left;
 }
 
 /* page layout */

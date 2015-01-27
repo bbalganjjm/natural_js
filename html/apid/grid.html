@@ -12,41 +12,41 @@
 			<td width="40%" style="background-color: #efffff;"><input id="height" type="text" value="395" /> </td>
 		</tr>
 		<tr>
-			<th align="right">validate</th>
+			<th>validate</th>
 			<td><input id="validate" type="checkbox" checked="checked" /> If this checkbox with uncheck(false), disable realtime validation check</td>
-			<th align="right">html</th>
+			<th>html</th>
 			<td><input id="html" type="checkbox" /> If this checkbox with check(true), do not recognize HTML tags</td>
 		</tr>
 		<tr>
-			<th align="right">addTop</th>
+			<th>addTop</th>
 			<td><input id="addTop" type="checkbox" /> If this checkbox with check(true), create new row on the top by add method
 				<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">* If height is greater than 0, addTop option is always set with "true"</font>
 			</td>
-			<th align="right">resizable</th>
+			<th>resizable</th>
 			<td><input id="resizable" type="checkbox" /> If this checkbox with check(true), can resize column of grid</td>
 		</tr>
 		<tr>
-			<th align="right">vResizable</th>
+			<th>vResizable</th>
 			<td style="background-color: #efffff;"><input id="vResizable" type="checkbox" /> If this checkbox with check(true), can resize height of grid body</td>
-			<th align="right">sortable</th>
+			<th>sortable</th>
 			<td><input id="sortable" type="checkbox" /> If this checkbox with check(true), enable column sort</td>
 		</tr>
 		<tr>
-			<th align="right">select</th>
+			<th>select</th>
 			<td><input id="select" type="checkbox" /> If this checkbox with check(true), can select only 1 row in grid body</td>
-			<th align="right">multiselect</th>
+			<th>multiselect</th>
 			<td><input id="multiselect" type="checkbox" /> If this checkbox with check(true), can select multy row in grid body</td>
 		</tr>
 		<tr>
-			<th align="right">hover</th>
+			<th>hover</th>
 			<td><input id="hover" type="checkbox" /> If this checkbox with check(true), display hover effect</td>
-			<th align="right">createRow<br>Delay</th>
+			<th>createRow<br>Delay</th>
 			<td><input id="createRowDelay" type="text" value="1" /> delay whenever created row element</td>
 		</tr>
 		<tr>
-			<th align="right">scrollPaging<br>.size</th>
+			<th>scrollPaging<br>.size</th>
 			<td><input id="scrollPagingSize" type="text" value="100" /> scroll paging size</td>
-			<th align="right">rowHandler</th>
+			<th>rowHandler</th>
 			<td><textarea id="rowHandler" style="height: 82px;">function(index, row, data) {
 	N.log(index);
 	N.log(row);
@@ -54,20 +54,20 @@
 }</textarea><br /> Callback function for tab active event</td>
 		</tr>
 		<tr>
-			<th align="right">onSelect</th>
+			<th>onSelect</th>
 			<td><textarea id="onSelect" style="height: 82px;">function(index, row, data) {
 	N.log(index);
 	N.log(row);
 	N.log(data);
 }</textarea><br /> Callback function for tab active event</td>
-			<th align="right">onBind</th>
+			<th>onBind</th>
 			<td><textarea id="onBind" style="height: 64px;">function(context, data) {
 	N.log(context);
 	N.log(data);
 }</textarea><br /> Callback function for tab active event</td>
 		</tr>
 		<tr>
-			<th align="right">windowScroll<br>Lock</th>
+			<th>windowScroll<br>Lock</th>
 			<td colspan="3"><input id="windowScrollLock" type="checkbox" />  If this checkbox with check(true), block window scroll when mouse scrolling in grid</td>
 		</tr>
 	</table>
@@ -75,27 +75,27 @@
 	<p class="smallContTit">Method options : </p>
 	<table class="form">
 		<tr>
-			<th align="right" width="10%" rowspan="3">val</th>
-			<th align="right" width="10%">arguments[0]</th>
+			<th width="10%" rowspan="3">val</th>
+			<th width="10%">arguments[0]</th>
 			<td width="80%" colspan="3">
 				<input id="row" type="text" value="0" /> Target row
 			</td>
 		</tr>
 		<tr>
-			<th align="right" width="10%">arguments[1]</th>
+			<th width="10%">arguments[1]</th>
 			<td width="80%" colspan="3">
 				<input id="key" type="text" value="company" /> Target key name
 			</td>
 		</tr>
 		<tr>
-			<th align="right" width="10%">arguments[2]</th>
+			<th width="10%">arguments[2]</th>
 			<td width="80%" colspan="3">
 				<input id="val" type="text" value="NATURAL COMPANY" /> If empty value set, get value of key, otherwise set with this value
 			</td>
 		</tr>
 		<tr>
-			<th align="right" width="10%">data</th>
-			<th align="right" width="10%">arguments[0]</th>
+			<th width="10%">data</th>
+			<th width="10%">arguments[0]</th>
 			<td width="80%" colspan="3">
 				<select id="data">
 					<option value="modified">modified</option>
@@ -107,15 +107,15 @@
 			</td>
 		</tr>
 		<tr>
-			<th align="right" width="10%">revert</th>
-			<th align="right" width="10%">arguments[0]</th>
+			<th width="10%">revert</th>
+			<th width="10%">arguments[0]</th>
 			<td width="80%" colspan="3">
 				<input id="rvtRow" type="text" value="0" /> Revert row index, if set empty value, revert all row data
 			</td>
 		</tr>
 		<tr>
-			<th align="right" width="10%">remove</th>
-			<th align="right" width="10%">arguments[0]</th>
+			<th width="10%">remove</th>
+			<th width="10%">arguments[0]</th>
 			<td width="80%" colspan="3">
 				<input id="rmvRow" type="text" value="0" /> Remove row index
 			</td>

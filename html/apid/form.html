@@ -119,7 +119,7 @@
 			<td width="40%"><input id="validate" type="checkbox" checked="checked" /> If this checkbox with uncheck(false), disable realtime validation check</td>
 		</tr>
 		<tr>
-			<th align="right">html</th>
+			<th>html</th>
 			<td colspan="3"><input id="html" type="checkbox" /> If this checkbox with check(true), do not recognize HTML tags</td>
 		</tr>
 	</table>
@@ -127,28 +127,28 @@
 	<p class="smallContTit">Method options : </p>
 	<table class="form">
 		<tr>
-			<th align="right" width="10%">bind</th>
-			<th align="right" width="10%">arguments[0]</th>
+			<th width="10%">bind</th>
+			<th width="10%">arguments[0]</th>
 			<td width="80%" colspan="3">
 				<input id="row" type="text" value="0" /> Row index for bind(default : 0)
 			</td>
 		</tr>
 		<tr>
-			<th align="right" width="10%" rowspan="2">val</th>
-			<th align="right" width="10%">arguments[0]</th>
+			<th width="10%" rowspan="2">val</th>
+			<th width="10%">arguments[0]</th>
 			<td width="80%" colspan="3">
 				<input id="key" type="text" value="name" /> key name
 			</td>
 		</tr>
 		<tr>
-			<th align="right" width="10%">arguments[1]</th>
+			<th width="10%">arguments[1]</th>
 			<td width="80%" colspan="3">
 				<input id="val" type="text" value="jeff beck" /> If empty value set, get value of key, otherwise set with this value
 			</td>
 		</tr>
 		<tr>
-			<th align="right" width="10%">data</th>
-			<th align="right" width="10%">arguments[0]</th>
+			<th width="10%">data</th>
+			<th width="10%">arguments[0]</th>
 			<td width="80%" colspan="3">
 				<input id="data" type="checkbox" checked="checked" /> If this checkbox with uncheck(false), get all data
 			</td>
@@ -174,44 +174,44 @@
 				<td width="*"><img id="picture" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D" /></td>
 			</tr>
 			<tr>
-				<th align="right"><label for="name">name</label></th>
+				<th><label for="name">name</label></th>
 				<td>
 					<input id="name" type="text" data-validate='[["required"]]' />
 				</td>
 			</tr>
 			<tr>
-				<th align="right"><label for="email">email</label></th>
+				<th><label for="email">email</label></th>
 				<td>
 					<input id="email" type="text" data-format='[["trimtoempty"], ["generic", "@@@@@@＊＊＊"]]' data-validate='[["required"], ["email"]]' />
 				</td>
 			</tr>
 			<tr>
-				<th align="right"><label for="_id">password</label></th>
+				<th><label for="_id">password</label></th>
 				<td>
 					<input id="_id" type="password" data-validate='[["required"]]' />
 				</td>
 			</tr>
 			<tr>
-				<th align="right"><label for="balance">balance</label></th>
+				<th><label for="balance">balance</label></th>
 				<td>
 					<input id="balance" type="text" data-format='[["trimtoempty"], ["numeric", "$#,###.##0"]]' data-validate='[["required"], ["decimal"]]' />
 				</td>
 			</tr>
 			<tr>
-				<th align="right"><label for="phone">phone</label></th>
+				<th><label for="phone">phone</label></th>
 				<td>
 					<input id="phone" type="text" readonly="readonly" />
 				</td>
 			</tr>
 			<tr>
-				<th align="right"><label for="age">age</label></th>
+				<th><label for="age">age</label></th>
 				<td>
 					<input id="age" type="text" disabled="disabled" />
 					<input id="index" type="hidden" />
 				</td>
 			</tr>
 			<tr>
-				<th align="right"><label for="eyeColor">eye color</label></th>
+				<th><label for="eyeColor">eye color</label></th>
 				<td>
 					<select id="eyeColor" data-validate='[["required"]]'>
 						<option>선택</option>
@@ -219,47 +219,47 @@
 				</td>
 			</tr>
 			<tr>
-				<th align="right"><label for="company">company</label></th>
+				<th><label for="company">company</label></th>
 				<td>
 					<select id="company" multiple="multiple"></select>
 				</td>
 			</tr>
 			<tr>
-				<th align="right"><label for="gender">gender</label></th>
+				<th><label for="gender">gender</label></th>
 				<td>
 					<input id="gender" type="radio" />
 				</td>
 			</tr>
 			<tr>
-				<th align="right"><label for="favoriteFruit">favorite fruit</label></th>
+				<th><label for="favoriteFruit">favorite fruit</label></th>
 				<td>
 					<input id="favoriteFruit" type="checkbox" />
 				</td>
 			</tr>
 			<tr>
-				<th align="right"><label for="registered">registered</label></th>
+				<th><label for="registered">registered</label></th>
 				<td>
 					<input id="registered" type="text" data-format='[["date", 8, "date"]]' data-validate='[["required"]]' />
 				</td>
 			</tr>
 			<tr>
-				<th align="right"><label for="registered2">registered m</label></th>
+				<th><label for="registered2">registered m</label></th>
 				<td>
 					<input id="registered2" type="text" data-format='[["date", 6, "month"]]' data-validate='[["required"]]' />
 				</td>
 			</tr>
 			<tr>
-				<th align="right"><label for="about">about</label></th>
+				<th><label for="about">about</label></th>
 				<td>
 					<textarea id="about" data-format='[["trimtoempty"], ["limit", "50", "..."]]' data-validate='[["required"], ["korean"]]'></textarea>
 				</td>
 			</tr>
 			<tr>
-				<th align="right"><label for="greeting">about</label></th>
+				<th><label for="greeting">about</label></th>
 				<td id="greeting"></td>
 			</tr>
 			<tr>
-				<th align="right"><label for="isActive">isActive</label></th>
+				<th><label for="isActive">isActive</label></th>
 				<td>
 					<input id="isActive" type="checkbox" />
 				</td>

@@ -4,35 +4,35 @@
 	<p class="smallContTit">Default options : </p>
 	<table id="localPage" class="form">
 		<tr>
-			<th align="right">context</th>
+			<th>context</th>
 			<td colspan="3"><input id="context" type="text" value="table#loginForm" /> jQuery selector</td>
 		</tr>
 		<tr>
-			<th align="right" width="10%">title</th>
+			<th width="10%">title</th>
 			<td width="40%"><input id="title" type="text" value="Popup test" />
 				<br />&nbsp;this is also possible to title attribute of context element
 			</td>
-			<th align="right" width="10%">confirm</th>
+			<th width="10%">confirm</th>
 			<td width="40%"><input id="confirm" type="checkbox" checked="checked" />If this checkbox with uncheck(false), display OK button only</td>
 		</tr>
 		<tr>
-			<th align="right">modal</th>
+			<th>modal</th>
 			<td><input id="modal" type="checkbox" checked="checked" />If this checkbox with uncheck(false), do not display modal overlay layer</td>
-			<th align="right">button</th>
+			<th>button</th>
 			<td><input id="button" type="checkbox" checked="checked" />If this checkbox with uncheck(false), do not display button bar</td>
 		</tr>
 		<tr>
-			<th align="right">width</th>
+			<th>width</th>
 			<td><input id="width" type="text" value="0" /> Popup contents width, 0 is auto width</td>
-			<th align="right">height</th>
+			<th>height</th>
 			<td><input id="height" type="text" value="0" /> Popup contents height, 0 is auto height</td>
 		</tr>
 		<tr>
-			<th align="right">onOk</th>
+			<th>onOk</th>
 			<td><textarea id="onOk">function() {
 	alert("Ok");
 }</textarea><br />Callback function for Ok button event</td>
-			<th align="right">onCancel</th>
+			<th>onCancel</th>
 			<td><textarea id="onCancel">function() {
 	alert("Cancel");
 }</textarea><br />callback function for Cancel button event</td>
@@ -70,54 +70,54 @@
 	<p class="smallContTit">Default options : </p>
 	<table id="otherPage" class="form">
 		<tr>
-			<th align="right">url</th>
+			<th>url</th>
 			<td colspan="3"><input id="url" type="text" value="html/apid/select.html" /></td>
 		</tr>
 		<tr>
-			<th align="right" width="10%">title</th>
+			<th width="10%">title</th>
 			<td width="40%"><input id="title" type="text" value="Popup test" />
 				<br />&nbsp;this is also possible to title attribute of context element
 			</td>
-			<th align="right" width="10%">confirm</th>
+			<th width="10%">confirm</th>
 			<td width="40%"><input id="confirm" type="checkbox" checked="checked" />If this checkbox with uncheck(false), display OK button only</td>
 		</tr>
 		<tr>
-			<th align="right">modal</th>
+			<th>modal</th>
 			<td><input id="modal" type="checkbox" checked="checked" />If this checkbox with uncheck(false), do not display modal overlay layer</td>
-			<th align="right">button</th>
+			<th>button</th>
 			<td><input id="button" type="checkbox" checked="checked" />If this checkbox with uncheck(false), do not display button bar</td>
 		</tr>
 		<tr>
-			<th align="right">width</th>
+			<th>width</th>
 			<td><input id="width" type="text" value="500" /> Popup contents width, 0 is auto width(default)</td>
-			<th align="right">height</th>
+			<th>height</th>
 			<td><input id="height" type="text" value="400" /> Popup contents height, 0 is auto height(default)</td>
 		</tr>
 		<tr>
-			<th align="right">preload</th>
+			<th>preload</th>
 			<td colspan="3"><input id="preload" type="checkbox" /> If this checkbox with check(true), load popup contents when popup is initialized, but with unchecked(false), load popup contens when first open</td>
 		</tr>
 		<tr>
-			<th align="right">onOk</th>
+			<th>onOk</th>
 			<td><textarea id="onOk"></textarea><br />Callback function for Ok button event</td>
-			<th align="right">onCancel</th>
+			<th>onCancel</th>
 			<td><textarea id="onCancel">function() {
 	alert("Cancel");
 }</textarea><br />callback function for Cancel button event</td>
 		</tr>
 		<tr>
-			<th align="right">onOpen</th>
+			<th>onOpen</th>
 			<td><input id="onOpen" type="text" value="onOpen" /><br />
 			The method of this value is run whenever open the popup, that must be defined in Controller's method in loaded popup contens</td>
-			<th align="right">onOpenData</th>
+			<th>onOpenData</th>
 			<td><textarea id="onOpenData">This value is sent to onOpen callback functions argument of popup's Controller</textarea></td>
 		</tr>
 		<tr>
-			<th align="right">onClose</th>
+			<th>onClose</th>
 			<td><textarea id="onClose">function(onCloseData) {
 	alert(N.json.format(onCloseData));
 }</textarea><br /></td>
-			<th align="right">onCloseData</th>
+			<th>onCloseData</th>
 			<td><textarea id="onCloseData">This value is sent to onClose callback functions argument of parent page</textarea><br /></td>
 		</tr>
 	</table>
