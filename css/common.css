@@ -248,9 +248,11 @@ header nav > ul > li > ul {
 	display: none;
 	position: absolute;
 	background: #007000;
-	border-radius: 3px;
+	border-radius: 0 0 3px 3px;
 	padding: 5px 10px 5px 10px;
 	box-shadow: 0 2px 3px 0 rgba(0,0,0,0.3);
+	margin-left: -30px
+
 }
 
 header nav > ul > li:hover {
