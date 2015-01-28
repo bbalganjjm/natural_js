@@ -253,6 +253,10 @@ header nav > ul > li > ul {
 	box-shadow: 0 2px 3px 0 rgba(0,0,0,0.3);
 }
 
+header nav > ul > li:hover {
+	background-color: #007000;
+}
+
 header nav > ul > li:hover > ul {
 	display: block;
 }
