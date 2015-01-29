@@ -226,11 +226,12 @@ header nav > ul {
 	list-style:none;
     margin: 0 0 0 10px;
     padding: 0;
+    height: 81px;
 }
 
 header nav > ul > li {
 	margin: 0;
-    padding: 20px 30px 20px 30px;
+    padding: 19px 30px 20px 30px;
     text-align: center;
     float: left;
 }
@@ -238,7 +239,7 @@ header nav > ul > li {
 header nav > ul > li > a {
 	color: #99f999;
 	font-weight: bold;
-	font-size: 15px;
+	font-size: 16px;
 	text-shadow: -1px -1px #004000;
 }
 
