@@ -30,7 +30,10 @@ var IndexController = {
 				N(N.context.attr("architecture").page.context).comm(href).submit(function() {
 					// Google Analytics
 					ga('create', 'UA-58001949-2', 'auto');
-					ga('send', hash_);
+					ga('send',  {
+						  'hitType': 'pageview',
+						  'page': hash_
+						});
 				});
 				location.hash = hash_;
 			}
@@ -41,7 +44,10 @@ var IndexController = {
 			N(N.context.attr("architecture").page.context).comm("html/" + N.string.trimToEmpty(location.hash).replace("#", "") + ".html").submit(function() {
 				// Google Analytics
 				ga('create', 'UA-58001949-2', 'auto');
-				ga('send', location.hash);
+				ga('send', {
+					  'hitType': 'pageview',
+					  'page': location.hash
+					});
 			});
 		} else {
 			N(N.context.attr("architecture").page.context).comm("html/gtst/gtst0100.html").submit();
