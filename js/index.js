@@ -26,12 +26,13 @@ var IndexController = {
 					&& N.string.trimToNull(href) !== null) {
 
 				e.preventDefault();
+				var hash_ = href.replace("http://bbalganjjm.github.io/natural_js/", "").replace(/\.html/g, "").replace(/html\//g, "");
 				N(N.context.attr("architecture").page.context).comm(href).submit(function() {
 					// Google Analytics
 					ga('create', 'UA-58001949-2', 'auto');
-					ga('send', href);
+					ga('send', hash_);
 				});
-				location.hash = href.replace("http://bbalganjjm.github.io/natural_js/", "").replace(/\.html/g, "").replace(/html\//g, "");
+				location.hash = hash_;
 			}
 		});
 	},
