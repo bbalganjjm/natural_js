@@ -28,8 +28,8 @@ var IndexController = {
 				e.preventDefault();
 				N(N.context.attr("architecture").page.context).comm(href).submit(function() {
 					// Google Analytics
-					ga('create', 'UA-58001949-2', href);
-					ga('send', 'pageview');
+					ga('create', 'UA-58001949-2', 'auto');
+					ga('send', href);
 				});
 				location.hash = href.replace("http://bbalganjjm.github.io/natural_js/", "").replace(/\.html/g, "").replace(/html\//g, "");
 			}
@@ -39,8 +39,8 @@ var IndexController = {
 		if(N.string.trimToNull(location.hash) !== null) {
 			N(N.context.attr("architecture").page.context).comm("html/" + N.string.trimToEmpty(location.hash).replace("#", "") + ".html").submit(function() {
 				// Google Analytics
-				ga('create', 'UA-58001949-2', location.hash);
-				ga('send', 'pageview');
+				ga('create', 'UA-58001949-2', 'auto');
+				ga('send', location.hash);
 			});
 		} else {
 			N(N.context.attr("architecture").page.context).comm("html/gtst/gtst0100.html").submit();
