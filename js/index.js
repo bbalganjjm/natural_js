@@ -29,7 +29,6 @@ var IndexController = {
 				N(N.context.attr("architecture").page.context).comm(href).submit(function() {
 					// Google Analytics
 					ga('create', 'UA-58001949-1', 'auto');
-					console.log(href);
 					ga('require', href, 'linkid.js');
 					ga('send', 'pageview');
 				});
