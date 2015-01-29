@@ -26,7 +26,13 @@ var IndexController = {
 					&& N.string.trimToNull(href) !== null) {
 
 				e.preventDefault();
-				N(N.context.attr("architecture").page.context).comm(href).submit();
+				N(N.context.attr("architecture").page.context).comm(href).submit(function() {
+					// Google Analytics
+					ga('create', 'UA-58001949-1', 'auto');
+					ga('require', href, 'linkid.js');
+					ga('send', 'pageview');
+					console.log(1)
+				});
 				location.hash = href.replace("http://bbalganjjm.github.io/natural_js/", "").replace(/\.html/g, "").replace(/html\//g, "");
 			}
 		});
@@ -34,18 +40,19 @@ var IndexController = {
 	loadMainContents : function() {
 		if(N.string.trimToNull(location.hash) !== null) {
 			N(N.context.attr("architecture").page.context).comm("html/" + N.string.trimToEmpty(location.hash).replace("#", "") + ".html").submit(function() {
-				(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-					(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-					m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-					})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-console.log(1);
 				// Google Analytics
 				ga('create', 'UA-58001949-1', 'auto');
 				ga('require', location.hash, 'linkid.js');
 				ga('send', 'pageview');
+				console.log(2)
 			});
 		} else {
-			N(N.context.attr("architecture").page.context).comm("html/gtst/gtst0100.html").submit();
+			N(N.context.attr("architecture").page.context).comm("html/gtst/gtst0100.html").submit(function() {
+				// Google Analytics
+				ga('create', 'UA-58001949-1', 'auto');
+				ga('send', 'pageview');
+				console.log(3)
+			});
 		}
 	}
 }
