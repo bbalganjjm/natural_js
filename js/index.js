@@ -45,11 +45,7 @@ var IndexController = {
 				ga('send', 'pageview');
 			});
 		} else {
-			N(N.context.attr("architecture").page.context).comm("html/gtst/gtst0100.html").submit(function() {
-				// Google Analytics
-				ga('create', 'UA-58001949-1', 'auto');
-				ga('send', 'pageview');
-			});
+			N(N.context.attr("architecture").page.context).comm("html/gtst/gtst0100.html").submit();
 		}
 	}
 }
