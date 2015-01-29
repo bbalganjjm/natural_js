@@ -31,9 +31,9 @@ var IndexController = {
 					// Google Analytics
 					ga('create', 'UA-58001949-2', 'auto');
 					ga('send',  {
-						  'hitType': 'pageview',
-						  'page': hash_
-						});
+						'hitType': 'pageview',
+						'page': "#" + hash_
+					});
 				});
 				location.hash = hash_;
 			}
@@ -45,12 +45,19 @@ var IndexController = {
 				// Google Analytics
 				ga('create', 'UA-58001949-2', 'auto');
 				ga('send', {
-					  'hitType': 'pageview',
-					  'page': location.hash
-					});
+					'hitType': 'pageview',
+					'page': location.hash
+				});
 			});
 		} else {
-			N(N.context.attr("architecture").page.context).comm("html/gtst/gtst0100.html").submit();
+			N(N.context.attr("architecture").page.context).comm("html/gtst/gtst0100.html").submit(function() {
+				// Google Analytics
+				ga('create', 'UA-58001949-2', 'auto');
+				ga('send', {
+					'hitType': 'pageview',
+					'page': '#gtst/gtst0100'
+				});
+			});
 		}
 	}
 }
