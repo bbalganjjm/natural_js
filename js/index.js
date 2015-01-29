@@ -29,7 +29,6 @@ var IndexController = {
 				N(N.context.attr("architecture").page.context).comm(href).submit(function() {
 					// Google Analytics
 					ga('create', 'UA-58001949-1', 'auto');
-					ga('require', href, 'linkid.js');
 					ga('send', 'pageview');
 				});
 				location.hash = href.replace("http://bbalganjjm.github.io/natural_js/", "").replace(/\.html/g, "").replace(/html\//g, "");
@@ -41,7 +40,6 @@ var IndexController = {
 			N(N.context.attr("architecture").page.context).comm("html/" + N.string.trimToEmpty(location.hash).replace("#", "") + ".html").submit(function() {
 				// Google Analytics
 				ga('create', 'UA-58001949-1', 'auto');
-				ga('require', location.hash, 'linkid.js');
 				ga('send', 'pageview');
 			});
 		} else {
