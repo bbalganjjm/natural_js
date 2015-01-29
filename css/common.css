@@ -87,7 +87,7 @@ html, body {
 body {
     margin: 0;
     font-size: 14px;
-	font-family: "Nanum Gothic", "맑은 고딕", "dotum", "Segoe UI", sans-serif;
+	font-family: "Nanum Gothic", "Malgun Gothic", "dotum", "Segoe UI", sans-serif;
 	color: #004a00;
 }
 
@@ -100,7 +100,7 @@ input[type='text'], input[type='password'], select, textarea {
 	padding: 3px 3px;
 	border: 1px solid #cccccc;
 	font-size: 14px;
-	font-family: "Nanum Gothic", "맑은 고딕", "dotum", "Segoe UI", sans-serif;
+	font-family: "Nanum Gothic", "Malgun Gothic", "dotum", "Segoe UI", sans-serif;
 	color: #004a00;
 	vertical-align: middle;
 	background-color: #ffffff;
@@ -134,7 +134,7 @@ a {
 	text-decoration: none;
 	font-weight: normal;
 	font-size: 14px;
-	font-family: "Nanum Gothic", "맑은 고딕", "dotum", "Segoe UI", sans-serif;
+	font-family: "Nanum Gothic", "Malgun Gothic", "dotum", "Segoe UI", sans-serif;
 	color: #004a00;
 }
 

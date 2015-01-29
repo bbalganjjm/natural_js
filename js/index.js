@@ -28,22 +28,24 @@ var IndexController = {
 				e.preventDefault();
 				N(N.context.attr("architecture").page.context).comm(href).submit();
 				location.hash = href.replace("http://bbalganjjm.github.io/natural_js/", "").replace(/\.html/g, "").replace(/html\//g, "");
-
-				// Google Analytics
-				ga('create', 'UA-58001949-1', 'auto');
-				ga('send', 'pageview');
 			}
 		});
 	},
 	loadMainContents : function() {
 		if(N.string.trimToNull(location.hash) !== null) {
-			N(N.context.attr("architecture").page.context).comm("html/" + N.string.trimToEmpty(location.hash).replace("#", "") + ".html").submit();
+			N(N.context.attr("architecture").page.context).comm("html/" + N.string.trimToEmpty(location.hash).replace("#", "") + ".html").submit(function() {
+				// Google Analytics
+				ga('create', 'UA-58001949-1', 'auto');
+				ga('require', location.hash, 'linkid.js');
+				ga('send', 'pageview');
+			});
 		} else {
-			N(N.context.attr("architecture").page.context).comm("html/gtst/gtst0100.html").submit();
+			N(N.context.attr("architecture").page.context).comm("html/gtst/gtst0100.html").submit(function() {
+				// Google Analytics
+				ga('create', 'UA-58001949-1', 'auto');
+				ga('require', location.hash, 'linkid.js');
+				ga('send', 'pageview');
+			});
 		}
-
-		// Google Analytics
-		ga('create', 'UA-58001949-1', 'auto');
-		ga('send', 'pageview');
 	}
 }
