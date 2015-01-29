@@ -31,7 +31,6 @@ var IndexController = {
 					ga('create', 'UA-58001949-1', 'auto');
 					ga('require', href, 'linkid.js');
 					ga('send', 'pageview');
-					console.log(1)
 				});
 				location.hash = href.replace("http://bbalganjjm.github.io/natural_js/", "").replace(/\.html/g, "").replace(/html\//g, "");
 			}
@@ -44,14 +43,12 @@ var IndexController = {
 				ga('create', 'UA-58001949-1', 'auto');
 				ga('require', location.hash, 'linkid.js');
 				ga('send', 'pageview');
-				console.log(2)
 			});
 		} else {
 			N(N.context.attr("architecture").page.context).comm("html/gtst/gtst0100.html").submit(function() {
 				// Google Analytics
 				ga('create', 'UA-58001949-1', 'auto');
 				ga('send', 'pageview');
-				console.log(3)
 			});
 		}
 	}
