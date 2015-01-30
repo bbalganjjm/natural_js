@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.2.3
+ * Natural-UI v0.8.2.4
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	var version = "0.8.2.3";
+	var version = "0.8.2.4";
 
 	// N local variables
 	$.fn.extend(N, {
@@ -123,9 +123,9 @@
 						Alert.resetOffSetInputEle(opts);
 
 						// sync msgContext offset
-						opts.time = setInterval(function() {
+						$(window).bind("scroll.alert.show, resize.alert.show", function() {
 							Alert.resetOffSetInputEle(opts);
-						}, 100);
+						});
 
 						opts.msgContext.fadeIn(150, function() {
 							setTimeout(function() {
@@ -160,6 +160,7 @@
 				}
 
 				$(document).unbind("keyup.alert");
+				$(window).unbind("scroll.alert.show, resize.alert.show");
 				return this;
 			},
 			"remove" : function() {
@@ -173,6 +174,7 @@
 				}
 
 				$(document).unbind("keyup.alert");
+				$(window).unbind("scroll.alert.show, resize.alert.show");
 				return this;
 			}
 		});
@@ -315,7 +317,7 @@
 					opts.msgContext = opts.context.after('<span class="msg__"><ul class="msg_line_box__"></ul></span>')
 										.next("span.msg__").css({
 											"display" : "none",
-											"position": "fixed" //not absolute, because they are not equal message context offset and input element offset in popup
+											"position" : "fixed" //not absolute, because they are not equal message context offset and input element offset in popup
 										});
 					opts.msgContext.append('<a href="#" class="msg_close__">' + opts.input.closeBtn + '</a>');
 					opts.msgContext.prepend('<ul class="msg_arrow__"></ul>');
@@ -352,10 +354,20 @@
 			},
 			resetOffSetInputEle : function(opts) {
 				//TODO how to solution when input element's right margin smaller than message context width
-				opts.msgContext.offset({
-					left : opts.context.offset().left + opts.context.outerWidth(),
-					top : opts.context.offset().top + 1
-				});
+				var cLeft = opts.context.offset().left;
+				var mcLeft = cLeft + opts.context.outerWidth();
+				if(mcLeft + 14 < $(window).width()) {
+					opts.msgContext.offset({
+						left : mcLeft,
+						top : opts.context.offset().top + 1
+					});
+				} else {
+					opts.msgContext.offset({
+						left : cLeft,
+						top : opts.context.offset().top + 1
+					});
+				}
+
 			}
 		});
 
@@ -578,6 +590,7 @@
 			},
 			hide : function() {
 				$(document).unbind("keyup.datepicker");
+				$(window).unbind("resize.datepicker");
 				this.options.contents.fadeOut(150);
 				this.options.context.get(0).blur();
 				return this;
@@ -1566,7 +1579,7 @@
 				if(!opts.revert) {
 					N.error("[N.form.revert]Can not revert. N.form's revert option value is false");
 				}
-				opts.data[opts.row] = $.extend({}, this.revertData);
+				$.extend(opts.data[opts.row], opts.data[opts.row], this.revertData);
 				this.update(opts.row);
 				N.ds.instance(opts.extObj !== null ? opts.extObj : this).notify(opts.extRow > -1 ? opts.extRow : opts.row);
 				return this;

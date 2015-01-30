@@ -130,13 +130,19 @@ N("article#exap0100").cont({
     	// initialize buttons in div.btnBox
     	N("div.btnBox a", view).button();
 
+    	// initialize form
+    	var form = this.form = N([]).form({
+    		context : N("table#form", view),
+    		revert : true
+    	}).bind();
+
     	// initialize popup
     	var popup = N("table#form", view).popup({
-    		modal: false
+    		modal: false,
+    		onCancel : function() {
+    			form.revert();
+    		}
     	});
-
-    	// initialize form
-    	this.form = N([]).form("table#form", view).bind();
 
     	// initialize grid
     	this.grid = N([]).grid({
