@@ -52,6 +52,7 @@
 
 		// Alert(Confirm)
 		var Alert = N.alert = function(obj, msg, vars) {
+			// closeMode : hide : keep element, remove : remove element
 			this.options = {
 				obj : obj,
 				context : obj,
@@ -66,7 +67,7 @@
 				isWindow : obj.get(0) === window || obj.get(0) === window.document,
 				title : obj.get(0) === window || obj.get(0) === window.document ? undefined : obj.attr("title"),
 				button : true,
-				closeMode : "remove", //hide : keep element, remove : remove element
+				closeMode : "remove",
 				modal : true,
 				onOk : null,
 				onCancel : null,
@@ -314,10 +315,11 @@
 				}
 				opts.msgContext = opts.context.next("span.msg__");
 				if (opts.msgContext.length == 0) {
+					// position : not absolute, because they are not equal message context offset and input element offset in popup
 					opts.msgContext = opts.context.after('<span class="msg__"><ul class="msg_line_box__"></ul></span>')
 										.next("span.msg__").css({
 											"display" : "none",
-											"position" : "fixed" //not absolute, because they are not equal message context offset and input element offset in popup
+											"position" : "fixed"
 										});
 					opts.msgContext.append('<a href="#" class="msg_close__">' + opts.input.closeBtn + '</a>');
 					opts.msgContext.prepend('<ul class="msg_arrow__"></ul>');
@@ -353,7 +355,6 @@
 				}
 			},
 			resetOffSetInputEle : function(opts) {
-				//TODO how to solution when input element's right margin smaller than message context width
 				var cLeft = opts.context.offset().left;
 				var mcLeft = cLeft + opts.context.outerWidth();
 				if(mcLeft + 14 < $(window).width()) {
@@ -373,10 +374,12 @@
 
 		// Button
 		var Button = N.button = function(obj, opts) {
+			// size : smaller, small, medium, large, big
+			// color : white, blue, skyblue, gray
 			this.options = {
 				context : obj,
-				size : "medium", // smaller, small, medium, large, big
-				color : "white", // white, blue, skyblue, gray
+				size : "medium",
+				color : "white",
 				disable : false,
 				effect : true
 			};
@@ -541,11 +544,12 @@
 
 		// DatePicker
 		var DatePicker = N.datepicker = function(obj, opts) {
+			// mouseonly : TODO for add feature direct input keyboard
 			this.options = {
 				context : obj,
 				contents : $('<div class="datepicker__"></div>'),
 				monthonly : false,
-				mouseonly : true, //TODO improve to input keyboard
+				mouseonly : true,
 				focusin : true,
 				onSelect : null
 			};
@@ -801,6 +805,7 @@
 
 		// Popup
 		var Popup = N.popup = function(obj, opts) {
+			//TODO think more whether "onLoad event" needs or not
 			this.options = {
 				context : obj,
 				url : null,
@@ -819,7 +824,6 @@
 				onClose : null,
 				onCloseData : null,
 				preload : false
-				//TODO think more whether "onLoad event" needs or not
 			};
 
 			try {
@@ -1011,15 +1015,16 @@
 
 		// Tab
 		var Tab = N.tab = function(obj, opts) {
+			// classOpts : [{ url: undefined, width: "auto", active: false, preload: false, onOpen: undefined }]
+			//TODO think more whether "onLoad event" needs or not
 			this.options = {
 				context : obj,
 				links : obj.find("li"),
-				classOpts : [], // [{ url: undefined, width: "auto", active: false, preload: false, onOpen: undefined }]
+				classOpts : [],
 				randomSel : false,
 				onActive : null,
 				contents : obj.find("> div"),
 				effect : false
-				//TODO think more whether "onLoad event" needs or not
 			};
 
 			try {
@@ -1193,14 +1198,16 @@
 
 		// Select
 		var Select = N.select = function(data, opts) {
+			// direction : h(orizontal), v(ertical)
+			// type : 1: select, 2: select[multiple='multiple'], 3: radio, 4: checkbox
 			this.options = {
 				data : data,
 				context : null,
 				key : null,
 				val : null,
 				append : true,
-				direction : "h", //h(orizontal), v(ertical)
-				type : 0, // 1: select, 2: select[multiple='multiple'], 3: radio, 4: checkbox
+				direction : "h",
+				type : 0,
 				template : null
 			};
 
@@ -1311,6 +1318,8 @@
 
 		// Form
 		var Form = N.form = function(data, opts) {
+			// extObj : for N.grid
+			// extRow : for N.grid
 			this.options = {
 				data : N.type(data) === "array" ? N(data) : data,
 				row : -1,
@@ -1320,8 +1329,8 @@
 				addTop : false,
 				fRules : null,
 				vRules : null,
-				extObj : null, // for N.grid
-				extRow : -1,  // for N.grid
+				extObj : null,
+				extRow : -1,
 				revert : false
 			};
 
