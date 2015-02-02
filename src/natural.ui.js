@@ -188,9 +188,12 @@
 					"display" : "none",
 					"position" : opts.isWindow ? "fixed" : "absolute",
 					"cursor" : "not-allowed",
-					"padding" : 0,
-					"border-radius" : opts.context.css("border-radius") != "0px" ? opts.context.css("border-radius") : "0px"
+					"padding" : 0
 				};
+
+				if(!opts.isWindow) {
+					blockOverlayCss["border-radius"] = opts.context.css("border-radius") != "0px" ? opts.context.css("border-radius") : "0px";
+				}
 
 				var maxZindex = 0;
 				if(opts.alwaysOnTop) {
@@ -213,7 +216,7 @@
 				// set style message box
 				var blockOverlayMsgCss = {
 					"display" : "none",
-					"position" : opts.isWindow ? "fixed" : "absolute"
+					"position" : "absolute"
 				};
 
 				if(opts.alwaysOnTop) {
@@ -293,8 +296,8 @@
 					opts.msgContext.css({
 						"top" : opts.isWindow ? 0 : position.top + "px",
 						"left" : opts.isWindow ? 0 : position.left + "px",
-						"height" : opts.isWindow ? opts.obj.outerHeight() : opts.context.outerHeight() + "px",
-						"width" : opts.context.outerWidth() + "px"
+						"height" : opts.isWindow ? N(window.document).height() : opts.context.outerHeight() + "px",
+						"width" : opts.isWindow ? N(window.document).width() : opts.context.outerWidth() + "px"
 					}).show();
 					opts.msgContents.css({
 						"top" : ((opts.msgContext.height() / 2 + position.top) - opts.msgContents.height() / 2) + "px",
