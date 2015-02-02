@@ -132,7 +132,7 @@
 			}
 
 			return siglInst;
-		}
+		};
 		DataSync.fn = DataSync.prototype;
 
 		$.extend(DataSync.fn, {
@@ -160,8 +160,8 @@
 			}
 		});
 		$.extend(DataSync, {
+			//singleton
 			"instance" : function(inst, isReg) {
-				//singleton
 				return new N.ds(inst, isReg);
 			}
 		});

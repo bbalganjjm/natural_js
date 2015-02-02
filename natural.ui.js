@@ -66,7 +66,7 @@
 				isWindow : obj.get(0) === window || obj.get(0) === window.document,
 				title : obj.get(0) === window || obj.get(0) === window.document ? undefined : obj.attr("title"),
 				button : true,
-				closeMode : "remove", //hide : keep element, remove : remove element
+				closeMode : "remove", // closeMode : hide : keep element, remove : remove element
 				modal : true,
 				onOk : null,
 				onCancel : null,
@@ -275,7 +275,7 @@
 
 				// set cancel button style and bind click event
 				if(opts.confirm) {
-					opts.msgContents.find("li.buttonBox__ a.cancel__").button(opts.global.cancelBtnStyle)
+					opts.msgContents.find("li.buttonBox__ a.cancel__").button(opts.global.cancelBtnStyle);
 					opts.msgContents.find("li.buttonBox__ a.cancel__").click(function(e) {
 						e.preventDefault();
 						if (opts.onCancel !== null) {
@@ -317,7 +317,7 @@
 					opts.msgContext = opts.context.after('<span class="msg__"><ul class="msg_line_box__"></ul></span>')
 										.next("span.msg__").css({
 											"display" : "none",
-											"position" : "fixed" //not absolute, because they are not equal message context offset and input element offset in popup
+											"position" : "fixed" // position : not absolute, because they are not equal message context offset and input element offset in popup
 										});
 					opts.msgContext.append('<a href="#" class="msg_close__">' + opts.input.closeBtn + '</a>');
 					opts.msgContext.prepend('<ul class="msg_arrow__"></ul>');
@@ -353,7 +353,6 @@
 				}
 			},
 			resetOffSetInputEle : function(opts) {
-				//TODO how to solution when input element's right margin smaller than message context width
 				var cLeft = opts.context.offset().left;
 				var mcLeft = cLeft + opts.context.outerWidth();
 				if(mcLeft + 14 < $(window).width()) {
@@ -375,8 +374,8 @@
 		var Button = N.button = function(obj, opts) {
 			this.options = {
 				context : obj,
-				size : "medium", // smaller, small, medium, large, big
-				color : "white", // white, blue, skyblue, gray
+				size : "medium", // size : smaller, small, medium, large, big
+				color : "white", // color : white, blue, skyblue, gray
 				disable : false,
 				effect : true
 			};
@@ -545,7 +544,7 @@
 				context : obj,
 				contents : $('<div class="datepicker__"></div>'),
 				monthonly : false,
-				mouseonly : true, //TODO improve to input keyboard
+				mouseonly : true, // mouseonly : TODO for add feature direct input keyboard
 				focusin : true,
 				onSelect : null
 			};
@@ -685,7 +684,7 @@
 						daysPanel.empty();
 						var endDateCls = N.date.strToDate(yearsPanel.find("div.datepicker_year_selected__").text() +  N.string.lpad($(this).text(), 2, "0"));
 						var endDate = endDateCls.obj.getDate();
-						endDateCls.obj.setDate(1)
+						endDateCls.obj.setDate(1);
 						var startDay = endDateCls.obj.getDay();
 						//render week
 						for(var i=0;i<days.length;i++) {
@@ -801,6 +800,7 @@
 
 		// Popup
 		var Popup = N.popup = function(obj, opts) {
+			//TODO think more whether "onLoad event" needs or not
 			this.options = {
 				context : obj,
 				url : null,
@@ -819,7 +819,6 @@
 				onClose : null,
 				onCloseData : null,
 				preload : false
-				//TODO think more whether "onLoad event" needs or not
 			};
 
 			try {
@@ -1011,15 +1010,15 @@
 
 		// Tab
 		var Tab = N.tab = function(obj, opts) {
+			//TODO think more whether "onLoad event" needs or not
 			this.options = {
 				context : obj,
 				links : obj.find("li"),
-				classOpts : [], // [{ url: undefined, width: "auto", active: false, preload: false, onOpen: undefined }]
+				classOpts : [], // classOpts : [{ url: undefined, width: "auto", active: false, preload: false, onOpen: undefined }]
 				randomSel : false,
 				onActive : null,
 				contents : obj.find("> div"),
 				effect : false
-				//TODO think more whether "onLoad event" needs or not
 			};
 
 			try {
@@ -1199,8 +1198,8 @@
 				key : null,
 				val : null,
 				append : true,
-				direction : "h", //h(orizontal), v(ertical)
-				type : 0, // 1: select, 2: select[multiple='multiple'], 3: radio, 4: checkbox
+				direction : "h", // direction : h(orizontal), v(ertical)
+				type : 0, // type : 1: select, 2: select[multiple='multiple'], 3: radio, 4: checkbox
 				template : null
 			};
 
@@ -1320,8 +1319,8 @@
 				addTop : false,
 				fRules : null,
 				vRules : null,
-				extObj : null, // for N.grid
-				extRow : -1,  // for N.grid
+				extObj : null, // extObj : for N.grid
+				extRow : -1, // extRow : for N.grid
 				revert : false
 			};
 
@@ -2102,7 +2101,7 @@
 						var html = $('html');
 						var scrollPosition = html.data('scroll-position');
 						html.css('overflow', html.data('previous-overflow'));
-						window.scrollTo(scrollPosition[0], scrollPosition[1])
+						window.scrollTo(scrollPosition[0], scrollPosition[1]);
 						if($(window.document).height() > $(window).height()) {
 							$("body").css("margin-right", "-=" + scrollbarWidth + "px");
 						}
