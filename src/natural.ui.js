@@ -295,11 +295,7 @@
 				}
 			},
 			resetOffSetEle : function(opts) {
-				var tabEle = opts.context.closest(".tab__");
-				// if N.alert is in tab contents, no reset element position
-				if(opts.context.outerWidth() > 0
-					&& (tabEle.length > 0
-						&& tabEle.find(tabEle.find("> ul > li.tab_active__ > a").attr("href")).is(":visible"))) {
+				if(opts.context.outerWidth() > 0) {
 					var position = opts.context.position();
 					var context = opts.context;
 					var msgContext = opts.msgContext;
