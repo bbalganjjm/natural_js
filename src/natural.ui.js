@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.2.5
+ * Natural-UI v0.8.2.6
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	var version = "0.8.2.5";
+	var version = "0.8.2.6";
 
 	// N local variables
 	$.fn.extend(N, {
@@ -160,7 +160,9 @@
 				}
 
 				$(document).unbind("keyup.alert");
-				$(window).unbind("scroll.alert.show, resize.alert.show");
+				if (opts.isInput) {
+					$(window).unbind("scroll.alert.show, resize.alert.show");
+				}
 				return this;
 			},
 			"remove" : function() {
@@ -174,7 +176,9 @@
 				}
 
 				$(document).unbind("keyup.alert");
-				$(window).unbind("scroll.alert.show, resize.alert.show");
+				if (opts.isInput) {
+					$(window).unbind("scroll.alert.show, resize.alert.show");
+				}
 				return this;
 			}
 		});
@@ -291,18 +295,30 @@
 				}
 			},
 			resetOffSetEle : function(opts) {
-				if(opts.context.outerWidth() > 0) {
+				var tabEle = opts.context.closest(".tab__");
+				// if N.alert is in tab contents, no reset element position
+				if(opts.context.outerWidth() > 0
+					&& (tabEle.length > 0
+						&& tabEle.find(tabEle.find("> ul > li.tab_active__ > a").attr("href")).is(":visible"))) {
 					var position = opts.context.position();
+					var context = opts.context;
+					var msgContext = opts.msgContext;
+					// reset message context(overlay) position
 					opts.msgContext.css({
 						"top" : opts.isWindow ? 0 : position.top + "px",
 						"left" : opts.isWindow ? 0 : position.left + "px",
 						"height" : opts.isWindow ? N(window.document).height() : opts.context.outerHeight() + "px",
 						"width" : opts.isWindow ? N(window.document).width() : opts.context.outerWidth() + "px"
 					}).show();
-					opts.msgContents.css({
-						"top" : ((opts.msgContext.height() / 2 + position.top) - opts.msgContents.height() / 2) + "px",
+					// reset message contents position
+					var msgContentsCss = {
+						"top" : (((opts.isWindow ? N(opts.obj).height() : opts.msgContext.height()) / 2 + position.top) - opts.msgContents.height() / 2) + "px",
 						"left" : ((opts.msgContext.width() / 2 + position.left) - parseInt(opts.msgContents.width() / 2)) + "px"
-					}).show();
+					};
+					if(opts.isWindow) {
+						msgContentsCss.position = "fixed";
+					}
+					opts.msgContents.css(msgContentsCss).show();
 				} else {
 					// for non-active tab
 					opts.msgContext.hide();
