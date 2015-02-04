@@ -43,7 +43,7 @@
 
 		// TODO
 		// for json big data stream
-		var AjaxStream = N.ajaxs = function(opts) {
+		var SAjax = N.sajax = function(opts) {
 			this.options = {
 				url : null,
 				method : "POST",
