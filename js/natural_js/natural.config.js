@@ -16,7 +16,11 @@
 	     * 체크박스 선택 안됐을때 기본 값
 	     */
 	    sgUnChkdVal : "N", //N, 0, off
-	    spltSepa : "$@^"
+	    spltSepa : "$@^",
+	    /**
+	     * N.context.attr("architecture").page.context 로 페이지가 전환될때 마다 실행될 가비지 컬렉터의 모드
+	     */
+	    gcMode : "full" //minimum, full
 	});
 
 	/**
