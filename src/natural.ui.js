@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.2.6
+ * Natural-UI v0.8.2.7
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	var version = "0.8.2.6";
+	var version = "0.8.2.7";
 
 	// N local variables
 	$.fn.extend(N, {
@@ -127,9 +127,10 @@
 						Alert.resetOffSetInputEle(opts);
 
 						// sync msgContext offset
-						$(window).bind("scroll.alert.show, resize.alert.show", function() {
+						opts.onScrollNOnResize = function() {
 							Alert.resetOffSetInputEle(opts);
-						});
+						};
+						$(window).bind("scroll.alert.show, resize.alert.show", opts.onScrollNOnResize);
 
 						opts.msgContext.fadeIn(150, function() {
 							setTimeout(function() {
@@ -145,11 +146,12 @@
 				// bind "ESC" key event
 				// if press the "ESC" key, alert dialog will be removed
 				var this_ = this;
-		        $(document).bind("keyup.alert", function(e) {
+				opts.onKeyup = function(e) {
 		        	if (e.keyCode == 27) {
 		        		this_[opts.closeMode]();
 		        	}
-				});
+				};
+		        $(document).bind("keyup.alert", opts.onKeyup);
 
 				return this;
 			},
@@ -160,13 +162,13 @@
 					opts.msgContext.hide();
 					opts.msgContents.hide();
 				} else {
+					if (opts.isInput) {
+						$(window).unbind("scroll.alert.show, resize.alert.show", opts.onScrollNOnResize);
+					}
 					opts.msgContext.remove();
 				}
 
-				$(document).unbind("keyup.alert");
-				if (opts.isInput) {
-					$(window).unbind("scroll.alert.show, resize.alert.show");
-				}
+				$(document).unbind("keyup.alert", opts.onKeyup);
 				return this;
 			},
 			"remove" : function() {
@@ -176,13 +178,13 @@
 					opts.msgContext.remove();
 					opts.msgContents.remove();
 				} else {
+					if (opts.isInput) {
+						$(window).unbind("scroll.alert.show, resize.alert.show", opts.onScrollNOnResize);
+					}
 					opts.msgContext.remove();
 				}
 
-				$(document).unbind("keyup.alert");
-				if (opts.isInput) {
-					$(window).unbind("scroll.alert.show, resize.alert.show");
-				}
+				$(document).unbind("keyup.alert", opts.onKeyup);
 				return this;
 			}
 		});
@@ -374,7 +376,7 @@
 			resetOffSetInputEle : function(opts) {
 				var cLeft = opts.context.offset().left;
 				var mcLeft = cLeft + opts.context.outerWidth();
-				if(mcLeft + 14 < $(window).width()) {
+				if(mcLeft + 56 < $(window).width()) {
 					opts.msgContext.offset({
 						left : mcLeft,
 						top : opts.context.offset().top + 1
@@ -604,6 +606,17 @@
 		        		this_.hide();
 		        	}
 				});
+
+		        // set datapicker position
+				$(window).bind("resize.datepicker", function() {
+					var leftOfs = opts.context.offset().left;
+					if(leftOfs + opts.contents.width() > $(window).width()) {
+						opts.contents.css("right", ($(window).width() - (leftOfs + opts.context.outerWidth())) + "px");
+					} else {
+						opts.contents.css("left", leftOfs + "px");
+					}
+				}).trigger("resize.datepicker");
+
 				return this;
 			},
 			hide : function() {
@@ -786,16 +799,6 @@
 
 				// append datepicker panel after context
 				opts.context.after(opts.contents);
-
-				// set datapicker position
-				$(window).bind("resize.datepicker", function() {
-					var leftOfs = opts.context.offset().left;
-					if(leftOfs + opts.contents.width() > $(window).width()) {
-						opts.contents.css("right", ($(window).width() - (leftOfs + opts.context.outerWidth())) + "px");
-					} else {
-						opts.contents.css("left", leftOfs + "px");
-					}
-				}).trigger("resize.datepicker");
 
 				// bind focusin event
 				if(opts.focusin) {
@@ -1570,9 +1573,6 @@
 
 		        // set default values
 		        var vals = N.element.toData(opts.context.find(":input").not(":button"));
-		        if (vals == null) {
-		            vals = {};
-		        }
 		        vals.rowStatus = "insert";
 
 	        	if(!opts.addTop) {

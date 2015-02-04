@@ -1,5 +1,5 @@
 /*!
- * Natural-CORE v0.8.1.4
+ * Natural-CORE v0.8.2.0
  * bbalganjjm@gmail.com
  *
  * Includes json2.js & formatdate.js
@@ -12,7 +12,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	var version = "0.8.1.4", N;
+	var version = "0.8.2.0", N;
 
 	// Use jQuery init
 	N = function(selector, context) {
@@ -45,6 +45,33 @@
 		log : function() {
 			if(typeof console !== "undefined" && typeof console.log !== "undefined") {
 				console.log.apply(console, arguments);
+			}
+		},
+		/**
+		 * Natural-JS resource garbage collector
+		 */
+		gc : {
+			minimum : function() {
+				$(window).unbind("resize.datepicker");
+				return {
+					"window" : "event:resize.datepicker"
+				}
+			},
+			full : function() {
+				$(window).unbind("resize.datepicker");
+				$(window).unbind("scroll.alert.show, resize.alert.show");
+				$(document).unbind("keyup.alert");
+				$(document).unbind("keyup.datepicker");
+				$(document).unbind("dragstart.grid.vResize, selectstart.grid.vResize, mousemove.grid.vResize, mouseup.grid.vResize");
+				$(document).unbind("dragstart.grid.resize, selectstart.grid.resize, mousemove.grid.resize, mouseup.grid.resize");
+				return {
+					"window" : "event:resize.datepicker",
+					"window" : "event:scroll.alert.show, resize.alert.show",
+					"document" : "event:keyup.alert",
+					"document" : "event:keyup.datepicker",
+					"document" : "event:dragstart.grid.vResize, selectstart.grid.vResize, mousemove.grid.vResize, mouseup.grid.vResize",
+					"document" : "event:dragstart.grid.resize, selectstart.grid.resize, mousemove.grid.resize, mouseup.grid.resize",
+				}
 			}
 		},
 		isFunction : $.isFunction,
@@ -167,49 +194,49 @@
 		        })(str);
 			},
 			trim : function(str) {
-				return String(str).replace(/^\s*/, "").replace(/\s*$/, "");
+				return $.trim(str);
 			},
 			/**
 			 * 값이 비어 있는지 체크
 			 */
 			isEmpty : function(str) {
-				return this.trimToNull(str) === null ? true : false;
+				return $.trim(str).length === 0 ? true : false;
 			},
 			/**
 			 * null이나 스트링을 트림 하여 스트링으로 반환
 			 */
 			trimToEmpty : function(str) {
-				return (str != null && typeof str != "undefined" && this.trim(str).length > 0) ? this.trim(str) : "";
+				return $.trim(str);
 			},
 			/**
 			 * null이나 스트링을 트림 하여 스트링으로 반환
 			 */
 			nullToEmpty : function(str) {
-				return (str == null || typeof str == "undefined") ? "" : str;
+				return str === null || str === undefined ? "" : str;
 			},
 			/**
 			 * null이나 스트링을 트림하여 값이 없으면 null 반환
 			 */
 			trimToNull : function(str) {
-				return (str != null && typeof str != "undefined" && this.trim(str).length > 0) ? this.trim(str) : null;
+				return $.trim(str).length === 0 ? null : $.trim(str);
 			},
 			/**
 			 * null이나 스트링을 트림하여 값이 없으면 undefined 반환
 			 */
 			trimToUndefined : function(str) {
-				return  this.trimToNull(str) === null ? undefined : str;
+				return $.trim(str).length === 0 ? undefined : $.trim(str);
 			},
 			/**
 			 * null이나 스트링을 트림하여 값이 없으면 0을 반환
 			 */
 			trimToZero : function(str) {
-				return (str != null && typeof str != "undefined" && this.trim(str).length > 0) ? this.trim(str) : "0";
+				return $.trim(str).length === 0 ? "0" : $.trim(str);
 			},
 			/**
 			 * null이나 스트링을 트림하여 값이 없으면 valStr 을 반환
 			 */
 			trimToVal : function(str, valStr) {
-				return (str != null && typeof str != "undefined" && this.trim(str).length > 0) ? this.trim(str) : valStr;
+				return $.trim(str).length === 0 ? valStr : $.trim(str);
 			}
 		},
 		"date" : {
@@ -332,7 +359,7 @@
 					} else {
 						if(key !== undefined) {
 							if(!ele.is("select")) {
-								retData[key] = ele.val();
+								retData[key] = N.string.trimToEmpty(ele.val());
 							} else {
 								retData[key] = ele.vals();
 							}
@@ -561,8 +588,10 @@
 	    	var selEle;
 	    	if(vals !== undefined && N.type(vals) !== "function") {
 	    		if (tagName === "select") {
-	    			if(N.string.trimToNull(vals) == null && !this.is("select[multiple='multiple']")) {
-	    				opts.context.get(0).selectedIndex = 0;
+	    			if(N.string.trimToNull(vals) === null && !this.is("select[multiple='multiple']")) {
+	    				if(this.length > 0) {
+	    					this.get(0).selectedIndex = 0;
+	    				}
 	    			} else {
 	    				this.val(vals);
 	    			}
@@ -596,7 +625,7 @@
 		        	if(selEle.length > 1) {
 		        		if(N.type(vals) !== "function") {
 		        			return selEle.map(function() {
-			                    return $(this).val();
+			                    return N.string.trimToEmpty($(this).val());
 				            }).toArray();
 		        		} else {
 		        			var ele = this.find("> option");
@@ -607,7 +636,7 @@
 		        	} else if(selEle.length === 1) {
 	        			if(N.type(vals) !== "function") {
 	        				if(selEle.attr("value") !== undefined) {
-	        					return selEle.val();
+	        					return N.string.trimToEmpty(selEle.val());
 	        				} else {
 	        					return "";
 	        				}
@@ -615,11 +644,13 @@
 	        				vals.call(selEle, this.find("> option:not(.select_default__)").index(selEle), selEle);
 	        				return selEle;
 	        			}
+		        	} else if(selEle.length === 0 && this.is("[multiple]")) {
+		        		return [];
 		        	}
 		        } else if (type === "radio") {
 		        	selEle = this.filter("[name='" + this.attr("name") + "']:checked");
 		        	if(N.type(vals) !== "function") {
-		        		return N.string.trimToNull(selEle.val());
+		        		return N.string.trimToEmpty(selEle.val());
 		        	} else {
 		        		vals.call(selEle, this.filter("[name='" + this.attr("name") + "']").index(selEle), selEle);
         				return selEle;
@@ -629,9 +660,9 @@
 		        	if(this.length > 1) {
 		        		if(N.type(vals) !== "function") {
 		        			var chkedVals = selEle.map(function() {
-			                    return $(this).val();
+			                    return N.string.trimToEmpty($(this).val());
 				            }).toArray();
-		        			return selEle.length === 1 ? $(selEle).val() : chkedVals.length === 0 ? null : chkedVals;
+		        			return selEle.length === 1 ? N.string.trimToEmpty($(selEle).val()) : chkedVals.length === 0 ? [] : chkedVals;
 		        		} else {
 		        			var ele = this.filter("[name='" + this.attr("name") + "']");
 		        			return selEle.each(function() {
@@ -643,7 +674,7 @@
 		        			selEle = this.filter("[id='" + this.attr("id") + "']");
 		        		}
 	        			if(N.type(vals) !== "function") {
-	        				var val = selEle.val();
+	        				var val = N.string.trimToEmpty(selEle.val());
 	        				if(N.context.attr("core")["sgChkdVal"] === val || N.context.attr("core")["sgUnChkdVal"] === val || selEle.attr("value") === undefined) {
 	        					if(selEle.prop("checked")) {
 	        						val = N.context.attr("core")["sgChkdVal"];
@@ -664,7 +695,7 @@
 	        		}
 	        	}
 	    	}
-	    	return null;
+	    	return "";
 	    }
 	};
 
