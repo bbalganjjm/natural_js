@@ -115,9 +115,12 @@
 				if (!opts.isInput) {
 					Alert.resetOffSetEle(opts);
 					opts.time = setInterval(function() {
-						Alert.resetOffSetEle(opts);
-					}, 100);
-					opts.msgContents.show();
+						if(opts.context.outerWidth() > 0) {
+							Alert.resetOffSetEle(opts);
+						} else {
+							clearInterval(opts.time);
+						}
+					}, 500);
 				} else {
 					if (!N.isEmptyObject(opts.msg)) {
 						Alert.resetOffSetInputEle(opts);
@@ -295,8 +298,8 @@
 				}
 			},
 			resetOffSetEle : function(opts) {
-				if(opts.context.outerWidth() > 0) {
-					var position = opts.context.position();
+				var position = opts.context.position();
+				if(opts.context.outerWidth() > 0 && (!opts.isWindow && (parseInt(position.top) > 0 && parseInt(position.left) > 0))) {
 					var context = opts.context;
 					var msgContext = opts.msgContext;
 					// reset message context(overlay) position
@@ -1258,7 +1261,7 @@
 				return sel !== undefined ? this.options.context.find(sel) : this.options.context;
 			},
 		    bind : function() {
-		    	opts = this.options;
+		    	var opts = this.options;
 		    	if(opts.type === 1 || opts.type === 2) {
 		    		var defaultSelectEle = opts.template.find("option.select_default__").clone(true);
 	    			opts.context.addClass("select_template__").empty();
@@ -1292,7 +1295,7 @@
 		    	return $(this.options.context).vals(val);
 		    },
 		    reset : function(selFlag) {
-		    	opts = this.options;
+		    	var opts = this.options;
 		    	if(opts.type === 1 || opts.type === 2) {
 		    		if(selFlag !== undefined && selFlag === true) {
 		    			opts.context.get(0).selectedIndex = 0;
@@ -2212,8 +2215,12 @@
 				var pressed = false;
 				var cellEle;
 				var defWidth;
+				var nextDefWidth;
 				var currWidth;
+				var nextCurrWidth;
 				var currCellEle;
+				var currNextCellEle;
+				var targetNextCellEle;
 				var currCellEleTable;
 				var targetCellEle;
 				var targetCellEleWrap;
