@@ -109,6 +109,7 @@
 							eval("(" + N("textarea#callback", view).val() + ")") : undefined ]
 	            }
 	            N(N("#context", view).val(), view).comm(opts).request.attr("hello", N("textarea#request", view).val()).submit();
+	            N("#btnGetPage", view).instance("button").disable();
 	        });
 	    }
 	});
