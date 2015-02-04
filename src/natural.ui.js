@@ -118,6 +118,7 @@
 						if(opts.context.outerWidth() > 0) {
 							Alert.resetOffSetEle(opts);
 						} else {
+							// for the page change
 							clearInterval(opts.time);
 						}
 					}, 500);
