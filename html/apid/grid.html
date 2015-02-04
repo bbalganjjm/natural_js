@@ -112,14 +112,21 @@
 			<th width="10%">revert</th>
 			<th width="10%">arguments[0]</th>
 			<td width="80%" colspan="3">
-				<input id="rvtRow" type="text" value="0" /> Revert row index, if set empty value, revert all row data
+				<input id="rvtRow" type="text" value="0" /> Row index to revert, if set empty value, revert all row data
 			</td>
 		</tr>
 		<tr>
 			<th width="10%">remove</th>
 			<th width="10%">arguments[0]</th>
 			<td width="80%" colspan="3">
-				<input id="rmvRow" type="text" value="0" /> Remove row index
+				<input id="rmvRow" type="text" value="0" /> Row index of to remove
+			</td>
+		</tr>
+		<tr>
+			<th width="10%">validate</th>
+			<th width="10%">arguments[0]</th>
+			<td width="80%" colspan="3">
+				<input id="vldRow" type="text" value="0" /> Row index of to validate, if set empty value, validate all row data
 			</td>
 		</tr>
 	</table>
@@ -298,7 +305,7 @@
 
 	    	N("#btnValidate", view).click(function(e) {
 	            e.preventDefault();
-	            grid.context().parent().alert(String(grid.validate())).show();
+	            grid.context().parent().alert(String(grid.validate(N.string.trimToUndefined(N("input#vldRow", view).val())))).show();
 	        });
 
 	    	N("#btnReload", view).click(function(e) {
