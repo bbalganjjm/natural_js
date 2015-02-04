@@ -10,7 +10,7 @@
 		<pre style="height: 100px;overflow: auto;" class="result"><code id="jsonResult"></code></pre>
 
 		<br />
-		<h4>2) Get html page(Natural-JS page) from server</h4>
+		<h4>2) Get html page from server</h4>
 
 		<p class="smallContTit">Default options : </p>
 		<table class="form">
@@ -108,7 +108,7 @@
 	      		        N.string.trimToNull(N("textarea#callback", view).val()) !== null ?
 							eval("(" + N("textarea#callback", view).val() + ")") : undefined ]
 	            }
-	            N(N("input#context", view).val(), view).comm(opts).request.attr("hello", N("textarea#request", view).val()).submit();
+	            N(N("#context", view).val(), view).comm(opts).request.attr("hello", N("textarea#request", view).val()).submit();
 	        });
 	    }
 	});
