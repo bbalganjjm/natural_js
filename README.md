@@ -37,7 +37,7 @@ Features(특징)
  * Formatter, Validator
  * Grid, Form, Select
  * Alert, Popup, Tab, Button, Datepicker
-- Real-time data synchronization and interaction for each ui-component.
+- Data of the each UI-Components are synchronized on real time basis and that is interacted each other.
 
 ----------------------------------------------
 
