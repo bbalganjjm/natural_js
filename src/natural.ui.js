@@ -73,7 +73,7 @@
 				overlayColor : null,
 				"confirm" : false,
 				alwaysOnTop : false,
-				dynPos : false // dynamic positioning for massage context and message overlay
+				dynPos : true // dynamic positioning for massage context and message overlay
 			};
 
 			try {
