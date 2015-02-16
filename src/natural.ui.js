@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.2.8
+ * Natural-UI v0.8.2.9
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	var version = "0.8.2.8";
+	var version = "0.8.2.9";
 
 	// N local variables
 	$.fn.extend(N, {
@@ -71,8 +71,9 @@
 				onOk : null,
 				onCancel : null,
 				overlayColor : null,
+				"confirm" : false,
 				alwaysOnTop : false,
-				"confirm" : false
+				dynPos : false // dynamic positioning for massage context and message overlay
 			};
 
 			try {
@@ -114,14 +115,17 @@
 				var opts = this.options;
 				if (!opts.isInput) {
 					Alert.resetOffSetEle(opts);
-					opts.time = setInterval(function() {
-						if(opts.context.outerWidth() > 0) {
-							Alert.resetOffSetEle(opts);
-						} else {
-							// for the page change
-							clearInterval(opts.time);
-						}
-					}, 500);
+					var position = opts.context.position();
+					if(opts.dynPos && !opts.isWindow) {
+						opts.time = setInterval(function() {
+							if(opts.context.outerWidth() > 0) {
+								Alert.resetOffSetEle(opts);
+							} else {
+								// for the page change
+								clearInterval(opts.time);
+							}
+						}, 500);
+					}
 				} else {
 					if (!N.isEmptyObject(opts.msg)) {
 						Alert.resetOffSetInputEle(opts);
@@ -137,7 +141,6 @@
 								opts.msgContext.fadeOut(1500, function() {
 									opts.msgContext.find("a.msg_close__").click();
 								});
-								clearInterval(opts.time);
 							}, opts.input.displayTimeout);
 						});
 					}
@@ -302,7 +305,7 @@
 			},
 			resetOffSetEle : function(opts) {
 				var position = opts.context.position();
-				if(opts.context.outerWidth() > 0 && (!opts.isWindow && (parseInt(position.top) > 0 && parseInt(position.left) > 0))) {
+				if(opts.context.outerWidth() > 0 && ((position.top > 0 && position.left > 0) || opts.isWindow)) {
 					var context = opts.context;
 					var msgContext = opts.msgContext;
 					// reset message context(overlay) position
@@ -311,7 +314,7 @@
 						"left" : opts.isWindow ? 0 : position.left + "px",
 						"height" : opts.isWindow ? N(window.document).height() : opts.context.outerHeight() + "px",
 						"width" : opts.isWindow ? N(window.document).width() : opts.context.outerWidth() + "px"
-					}).show();
+					}).hide().show();
 					// reset message contents position
 					var msgContentsCss = {
 						"top" : (((opts.isWindow ? N(opts.obj).height() : opts.msgContext.height()) / 2 + position.top) - opts.msgContents.height() / 2) + "px",
