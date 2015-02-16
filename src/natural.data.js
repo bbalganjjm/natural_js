@@ -1,5 +1,5 @@
 /*!
- * Natural-DATA v0.8.1.2
+ * Natural-DATA v0.8.1.3
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	var version = "0.8.1.2";
+	var version = "0.8.1.3";
 
 	// N local variables
 	$.fn.extend(N, {
@@ -17,8 +17,8 @@
 
 	$.extend(N.fn, {
 		constructor : N,
-		datafilter : function(queryString) {
-			return N.data.filter(this, queryString);
+		datafilter : function(callBack) {
+			return N.data.filter(this, callBack);
 		},
 		datarefine : function(listId) {
 			return N.data.refine(this, listId);
@@ -57,13 +57,11 @@
 				}
 			}
 		},
-		filter : function(arr, queryString) {
-			if (queryString == null) {
+		filter : function(arr, callBack) {
+			if (callBack === undefined) {
 				return arr;
 			}
-			return N.isWrappedSet(arr) ? N(this.filter(arr.toArray(), queryString)) : $.grep(arr, function(data) {
-				return eval(queryString);
-			});
+			return N.isWrappedSet(arr) ? N(this.filter(arr.toArray(), callBack)) : $.grep(arr, callBack);
 		},
 		sortBy : function(key, reverse) {
 			if (reverse === undefined) {

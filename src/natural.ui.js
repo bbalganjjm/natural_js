@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.2.7
+ * Natural-UI v0.8.2.8
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	var version = "0.8.2.7";
+	var version = "0.8.2.8";
 
 	// N local variables
 	$.fn.extend(N, {
@@ -1846,11 +1846,15 @@
 				if(rowStatus === undefined) {
 					return this.options.data.get();
 				} else if(rowStatus === "modified") {
-					return this.options.data.datafilter("data.rowStatus !== undefined").get().concat(this.options.removedData);
+					return this.options.data.datafilter(function(data) {
+						return data.rowStatus !== undefined;
+					}).get().concat(this.options.removedData);
 				} else if(rowStatus === "delete") {
 					return this.options.removedData;
 				} else {
-					return this.options.data.datafilter("data.rowStatus === '" + rowStatus + "'").get();
+					return this.options.data.datafilter(function(data) {
+						return data.rowStatus === rowStatus;
+					}).get();
 				}
 			},
 			context : function(sel) {
