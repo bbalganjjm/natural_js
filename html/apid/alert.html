@@ -28,6 +28,12 @@
 			<td width="*"><input id="height" type="text" value="100" /><br>Message contents height, 0 is auto height</td>
 		</tr>
 		<tr>
+			<th width="85">alwaysOnTop</th>
+			<td width="*"><input id="alwaysOnTop" type="checkbox" /><br>If this checkbox with check(true), z-index of N.alert's elements are defined alway max value</td>
+			<th width="85">dynPos</th>
+			<td width="*"><input id="dynPos" type="checkbox" checked="checked" /><br>If this checkbox with uncheck(false), do not dynamic positioning N.alert's elements(Message overlay and message box)</td>
+		</tr>
+		<tr>
 			<th width="85">onOk</th>
 			<td><textarea id="onOk">
 function() {
@@ -88,6 +94,8 @@ function() {
 	            	button : N("input#button", view).is(":checked"),
 	            	width : Number(N("input#width", view).val()),
 	            	height : Number(N("input#height", view).val()),
+	            	alwaysOnTop : N("input#alwaysOnTop", view).is(":checked"),
+	            	dynPos : N("input#dynPos", view).is(":checked"),
 	            	onOk : N.string.trimToNull(N("textarea#onOk", view).val()) !== null ?
 	            			eval("(" + N("textarea#onOk", view).val() + ")") : null,
 	            	onCancel : N.string.trimToNull(N("textarea#onCancel", view).val()) !== null ?
