@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.2.9
+ * Natural-UI v0.8.2.11
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	var version = "0.8.2.9";
+	var version = "0.8.2.11";
 
 	// N local variables
 	$.fn.extend(N, {
@@ -78,7 +78,7 @@
 
 			try {
 				this.options.container = N.context.attr("architecture").page.context;
-				this.options = $.extend({}, this.options, N.context.attr("ui")["alert"]);
+				this.options = $.extend({}, this.options, N.context.attr("ui").alert);
 				this.options.container = N(this.options.container);
 			} catch (e) {
 				N.error("[N.alert]" + e, e);
@@ -130,6 +130,18 @@
 					if (!N.isEmptyObject(opts.msg)) {
 						Alert.resetOffSetInputEle(opts);
 
+						var gridTbodyWrap = opts.msgContext.closest("div.tbody_wrap__");
+						if(gridTbodyWrap.css("overflow-y") === "scroll") {
+							var this_ = this;
+							var isRemoved = false;
+							gridTbodyWrap.bind("scroll.alert.show", function() {
+								if(!isRemoved) {
+									this_.remove();
+									isRemoved = true;
+								}
+							});
+						}
+
 						// sync msgContext offset
 						opts.onScrollNOnResize = function() {
 							Alert.resetOffSetInputEle(opts);
@@ -172,6 +184,7 @@
 				}
 
 				$(document).unbind("keyup.alert", opts.onKeyup);
+				opts.msgContext.closest("div.tbody_wrap__").unbind("scroll.alert.show");
 				return this;
 			},
 			"remove" : function() {
@@ -188,6 +201,7 @@
 				}
 
 				$(document).unbind("keyup.alert", opts.onKeyup);
+				opts.msgContext.closest("div.tbody_wrap__").unbind("scroll.alert.show");
 				return this;
 			}
 		});
@@ -245,10 +259,10 @@
 				// set button box
 				var buttonBox = '';
 				if(opts.button) {
-					buttonBox = '<li class="buttonBox__">'
-						+ '<a href="#" class="confirm__">' + N.message.get(opts.message, "confirm") + '</a>'
-						+ '<a href="#" class="cancel__">' + N.message.get(opts.message, "cancel") + '</a>'
-						+ '</li>';
+					buttonBox = '<li class="buttonBox__">' +
+						'<a href="#" class="confirm__">' + N.message.get(opts.message, "confirm") + '</a>' +
+						'<a href="#" class="cancel__">' + N.message.get(opts.message, "cancel") + '</a>' +
+						'</li>';
 				}
 
 				// make message box
@@ -340,8 +354,8 @@
 				if (opts.msgContext.length == 0) {
 					opts.msgContext = opts.context.after('<span class="msg__"><ul class="msg_line_box__"></ul></span>')
 										.next("span.msg__").css({
-											"display" : "none",
-											"position" : "fixed" // position : not absolute, because they are not equal message context offset and input element offset in popup
+											"display" : "inline-block",
+											"position" : "absolute"
 										});
 					opts.msgContext.append('<a href="#" class="msg_close__">' + opts.input.closeBtn + '</a>');
 					opts.msgContext.prepend('<ul class="msg_arrow__"></ul>');
@@ -375,22 +389,16 @@
 					}
 					ul_.append('<li>' + opts.input.bullets + opts.msg + '</li>');
 				}
+
+				var ml = parseInt(opts.msgContext.find("a.msg_close__").css("margin-left"));
+				if(isNaN(ml)) { ml = 0; }
+				opts.msgContext.css("min-width", opts.msgContext.outerWidth() + 1 + ((ml) * -1));
 			},
 			resetOffSetInputEle : function(opts) {
-				var cLeft = opts.context.offset().left;
-				var mcLeft = cLeft + opts.context.outerWidth();
-				if(mcLeft + 56 < $(window).width()) {
-					opts.msgContext.offset({
-						left : mcLeft,
-						top : opts.context.offset().top + 1
-					});
-				} else {
-					opts.msgContext.offset({
-						left : cLeft,
-						top : opts.context.offset().top + 1
-					});
-				}
-
+				opts.msgContext.offset({
+					left : opts.context.offset().left + opts.context.outerWidth(),
+					top : opts.context.offset().top + 1
+				});
 			}
 		});
 
@@ -2350,10 +2358,10 @@
     	        			}
     	                    if (isAsc) {
     	                    	this_.bind(N(opts.data).datasort($(this).data("id"), true));
-    	                    	currEle.append('<span class="sortable__ desc__">' + opts.sortableItem.asc + '</span>')
+    	                    	currEle.append('<span class="sortable__ desc__">' + opts.sortableItem.asc + '</span>');
     	                    } else {
     	                    	this_.bind(N(opts.data).datasort($(this).data("id")));
-    	                    	currEle.append('<span class="sortable__ asc__">' + opts.sortableItem.desc + '</span>')
+    	                    	currEle.append('<span class="sortable__ asc__">' + opts.sortableItem.desc + '</span>');
     	                    }
     	        		}
     	        	}
