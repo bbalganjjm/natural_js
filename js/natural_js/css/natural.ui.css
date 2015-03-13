@@ -265,6 +265,13 @@ table.grid__.grid_select__ tbody.grid_selected__ textarea {
 	color: #ffffff;
 }
 
+div.tbody_wrap__ table.grid__ td {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+}
+
 table.grid__ thead, table.grid__ tfoot{
 	background: linear-gradient(top, #efefef, #effeee);
 	background: -ms-linear-gradient(top, #efefef, #effeee);
