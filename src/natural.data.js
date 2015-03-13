@@ -1,5 +1,5 @@
 /*!
- * Natural-DATA v0.8.1.3
+ * Natural-DATA v0.8.1.4
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	var version = "0.8.1.3";
+	var version = "0.8.1.4";
 
 	// N local variables
 	$.fn.extend(N, {
@@ -107,7 +107,7 @@
 				this.viewContext = $(inst.options.context).closest("span.block_overlay_msg__").siblings(".view_context__");
 			}
 			if(this.viewContext.length === 0) {
-				var pageContext = $(N.context.attr("architecture")["page"]["context"]);
+				var pageContext = $(N.context.attr("architecture").page.context);
 				var dataSyncTemp = pageContext.find("var#data_sync_temp__");
 				if(dataSyncTemp.length === 0) {
 					dataSyncTemp = pageContext.append('<var id="data_sync_temp__"></var>').find("var#data_sync_temp__");
@@ -124,7 +124,7 @@
 			} else {
 				siglInst = this;
 				siglInst.inst = inst;
-				siglInst.obserable = new Array();
+				siglInst.obserable = [];
 				siglInst.obserable.push(inst);
 				this.viewContext.instance("ds", siglInst);
 			}
@@ -198,7 +198,7 @@
 			"format" : function(row) {
 				var opts = this.options;
 				var this_ = this;
-				var retArr = new Array();
+				var retArr = [];
 				var retObj;
 				var tempValue;
 				var ele;
@@ -215,14 +215,14 @@
 					}
 				}
 				$(opts.data).each(function(i, obj) {
-					retObj = new Object();
+					retObj = {};
 					for ( var k in opts.rules ) {
 						tempValue = String(obj[k]);
 						$(opts.rules[k]).each(function() {
 							if (opts.isElement) {
 								ele = opts.targetEle.filter("#" + k);
 								if(ele.length === 0) {
-									ele === undefined;
+									ele = undefined;
 								}
 							}
 							try {
@@ -406,22 +406,22 @@
 				}
 
 				if (args[0] !== undefined) {
-					var formats = N.context.attr("data")["formatter"]["date"];
+					var formats = N.context.attr("data").formatter.date;
 					var val;
 					if (args[0] === 4) {
 						val = N.date.format(str, "Y");
 					} else if (args[0] === 6) {
-						val = N.date.format(str, formats["Ym"]());
+						val = N.date.format(str, formats.Ym());
 					} else if (args[0] === 8) {
-						val = N.date.format(str, formats["Ymd"]());
+						val = N.date.format(str, formats.Ymd());
 					} else if (args[0] === 10) {
-						val = N.date.format(str, formats["YmdH"]());
+						val = N.date.format(str, formats.YmdH());
 					} else if (args[0] === 12) {
-						val = N.date.format(str, formats["YmdHi"]());
+						val = N.date.format(str, formats.YmdHi());
 					} else if (args[0] === 14) {
-						val = N.date.format(str, formats["YmdHis"]());
+						val = N.date.format(str, formats.YmdHis());
 					} else {
-						val = N.date.format(str, formats["Ymd"]());
+						val = N.date.format(str, formats.Ymd());
 					}
 					return Number(str) > 0 ? val : "";
 				}
@@ -436,12 +436,12 @@
 				if (args != null && args[0] != null && args[0] == '2') {
 					str = str.substring(0, 2);
 				} else if (args != null && args[0] != null && args[0] == '4') {
-					str = str.substring(0, 2) + N.context.attr("data")["formatter"]["date"]["timeSepa"] + str.substring(2, 4);
+					str = str.substring(0, 2) + N.context.attr("data").formatter.date.timeSepa + str.substring(2, 4);
 				} else if (args != null && args[0] != null && args[0] == '6') {
-					str = str.substring(0, 2) + N.context.attr("data")["formatter"]["date"]["timeSepa"] + str.substring(2, 4)
-							+ N.context.attr("data")["formatter"]["date"]["timeSepa"] + str.substring(4, 6);
+					str = str.substring(0, 2) + N.context.attr("data").formatter.date.timeSepa + str.substring(2, 4)
+							+ N.context.attr("data").formatter.date.timeSepa + str.substring(4, 6);
 				} else {
-					str = str.substring(0, 2) + N.context.attr("data")["formatter"]["date"]["timeSepa"] + str.substring(2, 4);
+					str = str.substring(0, 2) + N.context.attr("data").formatter.date.timeSepa + str.substring(2, 4);
 				}
 
 				return str;
@@ -500,14 +500,14 @@
 				return N.string.rpad(str, Number(args[0]), args[1]);
 			},
 			"generic" : function(str, args) {
-				if (args == null || args[0] == null) {
+				if (args === undefined || args[0] == null) {
 					N.error("[Formatter.generic]You must input args[0](user format rule)");
 				}
 				var mask = new N.Mask(args[0]);
 				return mask.setGeneric(String(str));
 			},
 			"numeric" : function(str, args) {
-				if (args == null || args[0] == null) {
+				if (args === undefined || args[0] == null) {
 					N.error("[Formatter.numeric]You must input args[0](user format rule)");
 				}
 				var mask = new N.Mask(args[0]);
@@ -553,7 +553,7 @@
 		$.extend(Validator.fn, {
 			"validate" : function(row) {
 				var opts = this.options;
-				var retArr = new Array();
+				var retArr = [];
 				var retObj;
 				var retTempObj;
 				var retTempArr;
@@ -575,20 +575,20 @@
 				var alert;
 				var rule;
 				$(data).each(function(i, obj) {
-					retObj = new Object();
+					retObj = {};
 					for ( var k in opts.rules ) {
-						retTempArr = new Array();
+						retTempArr = [];
 						var pass = true;
 						$(opts.rules[k]).each(function() {
-							retTempObj = new Object();
-							retTempObj["rule"] = this.toString();
+							retTempObj = {};
+							retTempObj.rule = this.toString();
 							args = N(this).remove_(0).toArray();
 							rule = N.string.trimToEmpty(this[0]).toLowerCase();
 							if (rule.indexOf("+") > -1) {
 								rule = rule.split("+").sort().toString().replace(/\,/g, "_");
 							}
 							try {
-								retTempObj["result"] = Validator[rule](String(obj[k]), args);
+								retTempObj.result = Validator[rule](String(obj[k]), args);
 							} catch (e) {
 								if (e.toString().indexOf("is not a function") > -1) {
 									N.error("[Validator.fn.validate]\"" + this[0] + "\" is invalid format rule");
@@ -596,13 +596,13 @@
 									N.error(e, e);
 								}
 							}
-							retTempObj["msg"] = null;
-							if (!retTempObj["result"]) {
+							retTempObj.msg = null;
+							if (!retTempObj.result) {
 								var valiMsg;
-								if (!(valiMsg = N.context.attr("data")["validator"]["message"][N.locale()][rule])) {
-									valiMsg = N.context.attr("data")["validator"]["message"][N.locale()]["global"];
+								if (!(valiMsg = N.context.attr("data").validator.message[N.locale()][rule])) {
+									valiMsg = N.context.attr("data").validator.message[N.locale()].global;
 								}
-								retTempObj["msg"] = N.message.replaceMsgVars(valiMsg, args);
+								retTempObj.msg = N.message.replaceMsgVars(valiMsg, args);
 
 								pass = false;
 							}
@@ -836,7 +836,7 @@
 					return leaf;
 				};
 
-				var d = str.replace(new RegExp(N.context.attr("data")["formatter"]["date"]["dateSepa"], "gi"), '');
+				var d = str.replace(new RegExp(N.context.attr("data").formatter.date.dateSepa, "gi"), '');
 				if (!isDateFormat(d)) {
 					return false;
 				}

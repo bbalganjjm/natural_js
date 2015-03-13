@@ -269,8 +269,8 @@
 			}
 		}
 	});
-	$.extend(N.formatter, N.context.attr("data")["formatter"]["userRules"]);
-	$.extend(N.validator, N.context.attr("data")["validator"]["userRules"]);
+	$.extend(N.formatter, N.context.attr("data").formatter.userRules);
+	$.extend(N.validator, N.context.attr("data").validator.userRules);
 
 	/**
 	 * Natural-UI Config

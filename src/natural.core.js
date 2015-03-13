@@ -1,5 +1,5 @@
 /*!
- * Natural-CORE v0.8.2.0
+ * Natural-CORE v0.8.2.2
  * bbalganjjm@gmail.com
  *
  * Includes json2.js & formatdate.js
@@ -12,7 +12,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	var version = "0.8.2.0", N;
+	var version = "0.8.2.2", N;
 
 	// Use jQuery init
 	N = function(selector, context) {
@@ -24,9 +24,9 @@
 		"Natural-CORE" : version,
 		locale : function(str) {
 			if(str === undefined) {
-				return N.context.attr("core")["locale"];
+				return N.context.attr("core").locale;
 			} else {
-				N.context.attr("core")["locale"] = str;
+				N.context.attr("core").locale = str;
 			}
 		},
 		error : function(msg, e) {
@@ -53,25 +53,17 @@
 		gc : {
 			minimum : function() {
 				$(window).unbind("resize.datepicker");
-				return {
-					"window" : "event:resize.datepicker"
-				}
+				return true;
 			},
 			full : function() {
 				$(window).unbind("resize.datepicker");
 				$(window).unbind("scroll.alert.show, resize.alert.show");
+				$("div.tbody_wrap__").unbind("scroll.alert.show");
 				$(document).unbind("keyup.alert");
 				$(document).unbind("keyup.datepicker");
 				$(document).unbind("dragstart.grid.vResize, selectstart.grid.vResize, mousemove.grid.vResize, mouseup.grid.vResize");
 				$(document).unbind("dragstart.grid.resize, selectstart.grid.resize, mousemove.grid.resize, mouseup.grid.resize");
-				return {
-					"window" : "event:resize.datepicker",
-					"window" : "event:scroll.alert.show, resize.alert.show",
-					"document" : "event:keyup.alert",
-					"document" : "event:keyup.datepicker",
-					"document" : "event:dragstart.grid.vResize, selectstart.grid.vResize, mousemove.grid.vResize, mouseup.grid.vResize",
-					"document" : "event:dragstart.grid.resize, selectstart.grid.resize, mousemove.grid.resize, mouseup.grid.resize",
-				}
+				return true;
 			}
 		},
 		isFunction : $.isFunction,
@@ -261,29 +253,29 @@
 				if (str.length === 6) {
 					dateInfo = {
 						obj : new Date(str.substring(0, 4), Number(str.substring(4, 6)), 0, 0, 0, 0),
-						format : N.context.attr("data")["formatter"]["date"]["Ym"]()
+						format : N.context.attr("data").formatter.date.Ym()
 					};
 				} else if (str.length === 8) {
 					dateInfo = {
 						obj : new Date(str.substring(0, 4), Number(str.substring(4, 6)) - 1, str.substring(6, 8), 0, 0, 0),
-						format : N.context.attr("data")["formatter"]["date"]["Ymd"]()
+						format : N.context.attr("data").formatter.date.Ymd()
 					};
 				} else if (str.length === 10) {
 					dateInfo = {
 						obj : new Date(str.substring(0, 4), Number(str.substring(4, 6)) - 1, str.substring(6, 8), str.substring(8, 10), 0, 0),
-						format : N.context.attr("data")["formatter"]["date"]["YmdH"]()
+						format : N.context.attr("data").formatter.date.YmdH()
 					};
 				} else if (str.length === 12) {
 					dateInfo = {
 						obj : new Date(str.substring(0, 4), Number(str.substring(4, 6)) - 1, str.substring(6, 8), str.substring(8, 10), str.substring(10, 12),
 								0),
-						format : N.context.attr("data")["formatter"]["date"]["YmdHi"]()
+						format : N.context.attr("data").formatter.date.YmdHi()
 					};
 				} else if (str.length >= 14) {
 					dateInfo = {
 						obj : new Date(str.substring(0, 4), Number(str.substring(4, 6)) - 1, str.substring(6, 8), str.substring(8, 10), str.substring(10, 12),
 								str.substring(12, 14)),
-						format : N.context.attr("data")["formatter"]["date"]["YmdHis"]()
+						format : N.context.attr("data").formatter.date.YmdHis()
 					};
 				}
 				return dateInfo;
@@ -425,13 +417,13 @@
 					} else {
 						expires = "";
 					}
-					var domain;
+					var domain_;
 					if (domain !== undefined) {
-						domain = "; domain=" + domain;
+						domain_ = "; domain=" + domain;
 					} else {
-						domain = ""
+						domain_ = "";
 					}
-					document.cookie = name + "=" + escape(value) + "; path=/" + expires + domain;
+					document.cookie = name + "=" + escape(value) + "; path=/" + expires + domain_;
 				}
 			},
 			removeCookie : function(name, domain) {
@@ -492,9 +484,9 @@
 				return totalHeight;
 			},
 			scrollbarWidth : function() {
-				var div = $('<div class="antiscroll-inner" style="width:50px;height:50px;overflow-y:scroll;'
-					+ 'position:absolute;top:-200px;left:-200px;"><div style="height:100px;width:100%"/>'
-					+ '</div>');
+				var div = $('<div class="antiscroll-inner" style="width:50px;height:50px;overflow-y:scroll;' +
+					'position:absolute;top:-200px;left:-200px;"><div style="height:100px;width:100%"/>' +
+					'</div>');
 
 				$("body").append(div);
 				var w1 = $(div).innerWidth();
@@ -606,9 +598,9 @@
 		        			this_.filter("[value='" + String(this) + "']").prop("checked", true);
 		        		});
 		        	} else if(this.length === 1) {
-		        		if(N.context.attr("core")["sgChkdVal"] === vals[0]) {
+		        		if(N.context.attr("core").sgChkdVal === vals[0]) {
 		        			this.prop("checked", true);
-		        		} else if (N.context.attr("core")["sgUnChkdVal"] === vals[0]) {
+		        		} else if (N.context.attr("core").sgUnChkdVal === vals[0]) {
 		        			this.prop("checked", false);
 		        		} else {
 		        			this.filter("[value='" + String(vals[0]) + "']").prop("checked", true);
@@ -675,13 +667,13 @@
 		        		}
 	        			if(N.type(vals) !== "function") {
 	        				var val = N.string.trimToEmpty(selEle.val());
-	        				if(N.context.attr("core")["sgChkdVal"] === val || N.context.attr("core")["sgUnChkdVal"] === val || selEle.attr("value") === undefined) {
+	        				if(N.context.attr("core").sgChkdVal === val || N.context.attr("core").sgUnChkdVal === val || selEle.attr("value") === undefined) {
 	        					if(selEle.prop("checked")) {
-	        						val = N.context.attr("core")["sgChkdVal"];
+	        						val = N.context.attr("core").sgChkdVal;
 	        						selEle.val(val);
 		        					return val;
 				        		} else if (!selEle.prop("checked")) {
-				        			val = N.context.attr("core")["sgUnChkdVal"];
+				        			val = N.context.attr("core").sgUnChkdVal;
 	        						selEle.val(val);
 		        					return val;
 				        		}
@@ -1296,8 +1288,8 @@
 
 			Date.prototype.toJSON = function() {
 
-				return isFinite(this.valueOf()) ? this.getUTCFullYear() + '-' + f(this.getUTCMonth() + 1) + '-' + f(this.getUTCDate()) + 'T'
-						+ f(this.getUTCHours()) + ':' + f(this.getUTCMinutes()) + ':' + f(this.getUTCSeconds()) + 'Z' : null;
+				return isFinite(this.valueOf()) ? this.getUTCFullYear() + '-' + f(this.getUTCMonth() + 1) + '-' + f(this.getUTCDate()) + 'T' +
+						f(this.getUTCHours()) + ':' + f(this.getUTCMinutes()) + ':' + f(this.getUTCSeconds()) + 'Z' : null;
 			};
 
 			String.prototype.toJSON = Number.prototype.toJSON = Boolean.prototype.toJSON = function() {

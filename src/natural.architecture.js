@@ -1,5 +1,5 @@
 /*!
- * Natural-ARCHITECTURE v0.8.0.5
+ * Natural-ARCHITECTURE v0.8.0.6
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	var version = "0.8.0.5";
+	var version = "0.8.0.6";
 
 	// N local variables
 	$.fn.extend(N, {
@@ -92,7 +92,7 @@
 			if (obj === undefined) {
 				N.error("[Communicator]You must input arguments[0]");
 			} else {
-				if ((N.isPlainObject(obj) || N.isString(obj)) && url == undefined) {
+				if ((N.isPlainObject(obj) || N.isString(obj)) && url === undefined) {
 					url = obj;
 					obj = [];
 				} else {
@@ -123,12 +123,12 @@
 					});
 				}
 
-				var afterInitFilters = new Array();
-				var beforeSendFilters = new Array();
-				var successFilters = new Array();
-				var errorFilters = new Array();
-				var completeFilters = new Array();
-				var filters = N.context.attr("architecture")["comm"]["filters"];
+				var afterInitFilters = [];
+				var beforeSendFilters = [];
+				var successFilters = [];
+				var errorFilters = [];
+				var completeFilters = [];
+				var filters = N.context.attr("architecture").comm.filters;
 				for ( var key in filters) {
 					for ( var filterKey in filters[key]) {
 						if (filterKey === "afterInit") {
@@ -238,7 +238,7 @@
 
 			// global config
 			try {
-				$.extend(this.options, N.context.attr("architecture")["comm"]["request"]["options"]);
+				$.extend(this.options, N.context.attr("architecture").comm.request.options);
 			} catch (e) {
 			}
 			$.extend(this.options, opts);
