@@ -1985,23 +1985,25 @@
 			validate : function(row) {
 				var opts = this.options;
 				var valiRslt = true;
-				if(this.options.context.find(".validate_false__").length > 0) {
-					valiRslt = false;
+				if(row !== undefined) {
+					valiRslt = opts.context.find("tbody:eq(" + String(row) + ")").instance("form").validate();
 				} else {
-					if(row !== undefined) {
-						valiRslt = opts.context.find("tbody:eq(" + String(row) + ")").instance("form").validate();
-					} else {
-						var rowStatus;
-						opts.context.find("tbody").instance("form", function(i) {
-							if(this.options !== undefined && this.options.data.length > 0) {
-								rowStatus = this.options.data[0].rowStatus;
-								if(rowStatus === "update" || rowStatus === "insert") {
-									if(!this.validate()) {
-										valiRslt = false;
-									}
+					var rowStatus;
+					opts.context.find("tbody").instance("form", function(i) {
+						if(this.options !== undefined && this.options.data.length > 0) {
+							rowStatus = this.options.data[0].rowStatus;
+							if(rowStatus === "update" || rowStatus === "insert") {
+								if(!this.validate()) {
+									valiRslt = false;
 								}
 							}
-						});
+						}
+					});
+				}
+
+				if(valiRslt) {
+					if(this.options.context.find(".validate_false__").length > 0) {
+						valiRslt = false;
 					}
 				}
 
