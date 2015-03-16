@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.2.11
+ * Natural-UI v0.8.3.0
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	var version = "0.8.2.11";
+	var version = "0.8.3.0";
 
 	// N local variables
 	$.fn.extend(N, {
@@ -113,6 +113,8 @@
 			},
 			"show" : function() {
 				var opts = this.options;
+				var this_ = this;
+
 				if (!opts.isInput) {
 					Alert.resetOffSetEle(opts);
 					var position = opts.context.position();
@@ -128,31 +130,18 @@
 					}
 				} else {
 					if (!N.isEmptyObject(opts.msg)) {
-						Alert.resetOffSetInputEle(opts);
-
-						var gridTbodyWrap = opts.msgContext.closest("div.tbody_wrap__");
-						if(gridTbodyWrap.css("overflow-y") === "scroll") {
-							var this_ = this;
-							var isRemoved = false;
-							gridTbodyWrap.bind("scroll.alert.show", function() {
-								if(!isRemoved) {
-									this_.remove();
-									isRemoved = true;
-								}
-							});
-						}
-
-						// sync msgContext offset
-						opts.onScrollNOnResize = function() {
-							Alert.resetOffSetInputEle(opts);
-						};
-						$(window).bind("scroll.alert.show, resize.alert.show", opts.onScrollNOnResize);
-
-						opts.msgContext.fadeIn(150, function() {
-							setTimeout(function() {
-								opts.msgContext.fadeOut(1500, function() {
-									opts.msgContext.find("a.msg_close__").click();
+						opts.context.parent().css({
+							"white-space": "normal",
+							"vertical-align": "top"
+						});
+						opts.msgContext.show(function() {
+							opts.iTime = setTimeout(function() {
+								clearTimeout(opts.iTime);
+								opts.context.parent().css({
+									"white-space": "",
+									"vertical-align": ""
 								});
+								this_[opts.closeMode]();
 							}, opts.input.displayTimeout);
 						});
 					}
@@ -160,7 +149,6 @@
 
 				// bind "ESC" key event
 				// if press the "ESC" key, alert dialog will be removed
-				var this_ = this;
 				opts.onKeyup = function(e) {
 		        	if (e.keyCode == 27) {
 		        		this_[opts.closeMode]();
@@ -172,36 +160,30 @@
 			},
 			"hide" : function() {
 				var opts = this.options;
-				clearInterval(opts.time);
 				if (!opts.isInput) {
+					clearInterval(opts.time);
 					opts.msgContext.hide();
 					opts.msgContents.hide();
 				} else {
-					if (opts.isInput) {
-						$(window).unbind("scroll.alert.show, resize.alert.show", opts.onScrollNOnResize);
-					}
+					clearTimeout(opts.iTime);
 					opts.msgContext.remove();
 				}
 
 				$(document).unbind("keyup.alert", opts.onKeyup);
-				opts.msgContext.closest("div.tbody_wrap__").unbind("scroll.alert.show");
 				return this;
 			},
 			"remove" : function() {
 				var opts = this.options;
-				clearInterval(opts.time);
 				if (!opts.isInput) {
+					clearInterval(opts.time);
 					opts.msgContext.remove();
 					opts.msgContents.remove();
 				} else {
-					if (opts.isInput) {
-						$(window).unbind("scroll.alert.show, resize.alert.show", opts.onScrollNOnResize);
-					}
+					clearTimeout(opts.iTime);
 					opts.msgContext.remove();
 				}
 
 				$(document).unbind("keyup.alert", opts.onKeyup);
-				opts.msgContext.closest("div.tbody_wrap__").unbind("scroll.alert.show");
 				return this;
 			}
 		});
@@ -352,13 +334,7 @@
 				}
 				opts.msgContext = opts.context.next("span.msg__");
 				if (opts.msgContext.length == 0) {
-					opts.msgContext = opts.context.after('<span class="msg__"><ul class="msg_line_box__"></ul></span>')
-										.next("span.msg__").css({
-											"display" : "inline-block",
-											"position" : "absolute"
-										});
-					opts.msgContext.append('<a href="#" class="msg_close__">' + opts.input.closeBtn + '</a>');
-					opts.msgContext.prepend('<ul class="msg_arrow__"></ul>');
+					opts.msgContext = opts.context.after('<span class="msg__"><ul class="msg_line_box__"></ul></span>').next("span.msg__");
 				}
 				if(opts.alwaysOnTop) {
 					opts.msgContext.css("z-index", N.element.maxZindex(opts.container.find("div, span, ul, p")) + 1);
@@ -368,12 +344,6 @@
 					this.remove();
 				}
 
-				var this_ = this;
-				opts.msgContext.find("a.msg_close__").click(function(e) {
-					e.preventDefault();
-					this_.remove();
-				});
-
 				var ul_ = opts.msgContext.find("ul.msg_line_box__");
 				if (N.isArray(opts.msg)) {
 					opts.msgContext.find("ul.msg_line_box__").empty();
@@ -381,24 +351,14 @@
 						if (opts.vars !== undefined) {
 							opts.msg[i] = N.message.replaceMsgVars(msg_, opts.vars);
 						}
-						ul_.append('<li>' + opts.input.bullets + opts.msg[i] + '</li>');
+						ul_.append('<li>' + opts.msg[i] + '</li>');
 					});
 				} else {
 					if (opts.vars !== undefined) {
 						opts.msg = N.message.replaceMsgVars(msg, opts.vars);
 					}
-					ul_.append('<li>' + opts.input.bullets + opts.msg + '</li>');
+					ul_.append('<li>' + opts.msg + '</li>');
 				}
-
-				var ml = parseInt(opts.msgContext.find("a.msg_close__").css("margin-left"));
-				if(isNaN(ml)) { ml = 0; }
-				opts.msgContext.css("min-width", opts.msgContext.outerWidth() + 1 + ((ml) * -1));
-			},
-			resetOffSetInputEle : function(opts) {
-				opts.msgContext.offset({
-					left : opts.context.offset().left + opts.context.outerWidth(),
-					top : opts.context.offset().top + 1
-				});
 			}
 		});
 
@@ -1438,10 +1398,8 @@
 											ele.unbind("focusout.form.validate");
 											ele.bind("focusout.form.validate", function() {
 												var currEle = $(this);
-					                            if (!currEle.prop("disabled") && !currEle.prop("readonly")) {
-					                            	if (opts.validate) {
-					                            		currEle.trigger("validate");
-					                            	}
+					                            if (!currEle.prop("disabled") && !currEle.prop("readonly") && opts.validate) {
+				                            		currEle.trigger("validate");
 					                            }
 					                        });
 										}
@@ -1453,13 +1411,13 @@
 										var currEle = $(this);
 										var currVal = currEle.val();
 										if (String(vals[currEle.attr("id")]) !== currVal) {
-											if (!currEle.prop("disabled") && !currEle.prop("readonly") && !currEle.hasClass("validate_false__")) {
+											if (!currEle.prop("disabled") && !currEle.prop("readonly") && (!opts.validate || (opts.validate && !currEle.hasClass("validate_false__")))) {
 												vals[currEle.attr("id")] = currVal;
-	                                            if (vals["rowStatus"] != "insert") {
-	                                                vals["rowStatus"] = "update";
-	                                            }
-	                                            currEle.addClass("data_changed__");
-	                                            N.ds.instance(opts.extObj !== null ? opts.extObj : this_).notify(opts.extRow > -1 ? opts.extRow : opts.row, currEle.attr("id"));
+												if (vals["rowStatus"] != "insert") {
+													vals["rowStatus"] = "update";
+												}
+												currEle.addClass("data_changed__");
+												N.ds.instance(opts.extObj !== null ? opts.extObj : this_).notify(opts.extRow > -1 ? opts.extRow : opts.row, currEle.attr("id"));
 											}
                                         }
 									});
@@ -1481,7 +1439,7 @@
 											ele.unbind("focusin.form.unformat");
 											ele.bind("focusin.form.unformat", function() {
 												var currEle = $(this);
-					                            if (!currEle.prop("disabled") && !currEle.prop("readonly") && !currEle.hasClass("validate_false__")) {
+					                            if (!currEle.prop("disabled") && !currEle.prop("readonly") && (!opts.validate || (opts.validate && !currEle.hasClass("validate_false__")))) {
 					                                currEle.trigger("unformat");
 					                            }
 					                        });
@@ -1489,7 +1447,7 @@
 											ele.unbind("focusout.form.format");
 											ele.bind("focusout.form.format", function() {
 												var currEle = $(this);
-					                            if (!currEle.prop("disabled") && !currEle.prop("readonly") && !currEle.hasClass("validate_false__")) {
+					                            if (!currEle.prop("disabled") && !currEle.prop("readonly") && (!opts.validate || (opts.validate && !currEle.hasClass("validate_false__")))) {
 					                                currEle.trigger("format");
 					                            }
 					                        });
@@ -1511,7 +1469,7 @@
 										var currEle = $(this);
 										var currVals = currEle.vals();
 										if (vals[currEle.attr("id")] !== currVals) {
-											if (!currEle.prop("disabled") && !currEle.prop("readonly") && !currEle.hasClass("validate_false__")) {
+											if (!currEle.prop("disabled") && !currEle.prop("readonly") && (!opts.validate || (opts.validate && !currEle.hasClass("validate_false__")))) {
 												vals[currEle.attr("id")] = currVals;
 	                                            if (vals["rowStatus"] != "insert") {
 	                                                vals["rowStatus"] = "update";
@@ -1616,7 +1574,11 @@
 			validate : function() {
 				var opts = this.options;
 				var eles = opts.context.find(":input");
-				eles.trigger("unformat.formatter");
+				if(opts.validate) {
+					eles.not(".validate_false__").trigger("unformat.formatter");
+				} else {
+					eles.trigger("unformat.formatter");
+				}
 				eles.trigger("validate.validator");
 				eles.not(".validate_false__").trigger("format.formatter");
 				return eles.filter(".validate_false__").length > 0 ? false : true;
@@ -2023,20 +1985,29 @@
 			validate : function(row) {
 				var opts = this.options;
 				var valiRslt = true;
-				if(row !== undefined) {
-					opts.context.find("tbody:eq(" + String(row) + ")").instance("form").validate();
+				if(this.options.context.find(".validate_false__").length > 0) {
+					valiRslt = false;
 				} else {
-					var rowStatus;
-					opts.context.find("tbody").instance("form", function(i) {
-						if(this.options !== undefined && this.options.data.length > 0) {
-							rowStatus = this.options.data[0].rowStatus;
-							if(rowStatus === "update" || rowStatus === "insert") {
-								if(!this.validate()) {
-									valiRslt = false;
+					if(row !== undefined) {
+						valiRslt = opts.context.find("tbody:eq(" + String(row) + ")").instance("form").validate();
+					} else {
+						var rowStatus;
+						opts.context.find("tbody").instance("form", function(i) {
+							if(this.options !== undefined && this.options.data.length > 0) {
+								rowStatus = this.options.data[0].rowStatus;
+								if(rowStatus === "update" || rowStatus === "insert") {
+									if(!this.validate()) {
+										valiRslt = false;
+									}
 								}
 							}
-						}
-					});
+						});
+					}
+				}
+
+				// Focus on the first input element of not passed input elements
+				if(!valiRslt) {
+					this.options.context.find(".validate_false__:first").focus();
 				}
 				return valiRslt;
 			},
