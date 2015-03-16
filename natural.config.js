@@ -306,11 +306,7 @@
 				/**
 				 * 메시지 표시시간(ms)
 				 */
-				displayTimeout : 5000,
-				/**
-				 * 메시지 글머리 기호
-				 */
-				bullets : "*&nbsp;",
+				displayTimeout : 7000,
 				/**
 				 * 닫기 버튼 디자인(html 태그 입력 가능)
 				 */
