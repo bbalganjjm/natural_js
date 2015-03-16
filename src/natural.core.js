@@ -1,5 +1,5 @@
 /*!
- * Natural-CORE v0.8.2.2
+ * Natural-CORE v0.8.2.3
  * bbalganjjm@gmail.com
  *
  * Includes json2.js & formatdate.js
@@ -12,7 +12,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	var version = "0.8.2.2", N;
+	var version = "0.8.2.3", N;
 
 	// Use jQuery init
 	N = function(selector, context) {
@@ -57,8 +57,6 @@
 			},
 			full : function() {
 				$(window).unbind("resize.datepicker");
-				$(window).unbind("scroll.alert.show, resize.alert.show");
-				$("div.tbody_wrap__").unbind("scroll.alert.show");
 				$(document).unbind("keyup.alert");
 				$(document).unbind("keyup.datepicker");
 				$(document).unbind("dragstart.grid.vResize, selectstart.grid.vResize, mousemove.grid.vResize, mouseup.grid.vResize");
