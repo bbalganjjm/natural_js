@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.3.0
+ * Natural-UI v0.8.3.3
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	var version = "0.8.3.0";
+	var version = "0.8.3.3";
 
 	// N local variables
 	$.fn.extend(N, {
@@ -131,15 +131,13 @@
 				} else {
 					if (!N.isEmptyObject(opts.msg)) {
 						opts.context.parent().css({
-							"white-space": "normal",
-							"vertical-align": "top"
+							"white-space": "normal"
 						});
 						opts.msgContext.show(function() {
 							opts.iTime = setTimeout(function() {
 								clearTimeout(opts.iTime);
 								opts.context.parent().css({
-									"white-space": "",
-									"vertical-align": ""
+									"white-space": ""
 								});
 								this_[opts.closeMode]();
 							}, opts.input.displayTimeout);
@@ -335,6 +333,7 @@
 				opts.msgContext = opts.context.next("span.msg__");
 				if (opts.msgContext.length == 0) {
 					opts.msgContext = opts.context.after('<span class="msg__"><ul class="msg_line_box__"></ul></span>').next("span.msg__");
+					opts.msgContext.append('<a href="#" class="msg_close__"></a>');
 				}
 				if(opts.alwaysOnTop) {
 					opts.msgContext.css("z-index", N.element.maxZindex(opts.container.find("div, span, ul, p")) + 1);
@@ -343,6 +342,12 @@
 				if (N.isEmptyObject(opts.msg)) {
 					this.remove();
 				}
+
+				var this_ = this;
+				opts.msgContext.find("a.msg_close__").click(function(e) {
+					e.preventDefault();
+					this_.remove();
+				});
 
 				var ul_ = opts.msgContext.find("ul.msg_line_box__");
 				if (N.isArray(opts.msg)) {
@@ -1730,10 +1735,10 @@
 			};
 
 			try {
-				this.options = $.extend({}, this.options, N.context.attr("ui")["grid"]);
+				this.options = $.extend({}, this.options, N.context.attr("ui").grid);
 
 				//For $.extend method does not extend object type
-				this.options.scrollPaging = $.extend({}, this.options.scrollPaging, N.context.attr("ui")["grid"]["scrollPaging"]);
+				this.options.scrollPaging = $.extend({}, this.options.scrollPaging, N.context.attr("ui").grid.scrollPaging);
 			} catch (e) {
 				N.error("[N.grid]" + e, e);
 			}
@@ -2001,10 +2006,9 @@
 					});
 				}
 
-				if(valiRslt) {
-					if(this.options.context.find(".validate_false__").length > 0) {
-						valiRslt = false;
-					}
+				if(this.options.context.find(".validate_false__").length > 0) {
+					this.options.context.find(".validate_false__").focusout();
+					valiRslt = false;
 				}
 
 				// Focus on the first input element of not passed input elements
@@ -2195,7 +2199,7 @@
 
 	        	gridWrap.after(vResizable);
         	},
-			resize : function() {
+        	resize : function() {
 				var opts = this.options;
 				var theadCells = this.thead.find("> tr th");
 				var resizeBar;
@@ -2226,6 +2230,12 @@
 					cellEle = $(this);
 		            resizeBar = cellEle.append('<span class="resize_bar__"></span>').find("span.resize_bar__");
 		            var resizeBarWidth = 6;
+		            var resizeBarRightMargin = resizeBarWidth + (resizeBarWidth/2);
+		            if(N.browser.is("safari")) {
+		            	resizeBarRightMargin = 0;
+		            } else if(N.browser.is("firefox")) {
+		            	resizeBarRightMargin -= 1;
+		            }
 
 		            if(N.browser.is("ie") || N.browser.is("firefox")) {
 		            	innerHeight = String(cellEle.innerHeight());
@@ -2235,10 +2245,11 @@
 		            resizeBar.css({
 		            	"padding": "0px",
 		            	"margin": "-" + cellEle.css("padding-top") + " -" + (resizeBarWidth/2 + parseInt(cellEle.css("padding-right"))) + "px -" + cellEle.css("padding-bottom") + " 0",
-		            	"height" : innerHeight + "px",
-		            	"float" : "right",
-		            	"width" : resizeBarWidth + "px",
-		            	"cursor": "e-resize"
+		            	"height": innerHeight + "px",
+		            	"position": "absolute",
+		            	"width": resizeBarWidth + "px",
+		            	"cursor": "e-resize",
+		            	"left": ((cellEle.offset().left + cellEle.width()) + resizeBarRightMargin) + "px"
 		            });
 
 		            resizeBar.bind("mousedown.grid.resize", function(e) {
@@ -2267,43 +2278,37 @@
 		                });
 		        		pressed = true;
 
-		        		var moveedPx;
+		        		var movedPx;
 		        		var correction = scrollbarWidth + 1;
 		        		if(N.browser.is("ie")) {
 		        			correction = scrollbarWidth + 3;
 	        			} else if(N.browser.is("safari")) {
-		        			correction = scrollbarWidth;
+		        			correction = scrollbarWidth - 21;
+	        			} else if(N.browser.is("firefox")) {
+		        			correction = scrollbarWidth + 3;
 	        			}
 		        		$(window.document).bind("mousemove.grid.resize", function(e) {
 			        		if(pressed) {
-			        			moveedPx = e.pageX - startOffsetX;
-			        			currWidth = defWidth + moveedPx;
-			        			nextCurrWidth = nextDefWidth - moveedPx - correction;
-			        			if(currWidth > 0) {
-					        		if(currCellEle.innerHeight() + 1 === initHeight) {
-					        			currCellEle.css("width", currWidth + "px");
-				        				currNextCellEle.css("width", nextCurrWidth + "px");
-				        				if(targetCellEle !== undefined) {
-				        					targetCellEle.css("width", currWidth + "px");
-				        					targetNextCellEle.css("width", nextCurrWidth + "px");
-				        					targetCellEleWrap.width(currCellEleTable.width() + scrollbarWidth);
-				        				}
-					        		} else {
-					        			// to keep the table layout
-					        			currCellEle.css("width", "");
-				        				currNextCellEle.css("width", "");
-				        				if(targetCellEle !== undefined) {
-				        					targetCellEle.css("width", "");
-				        					targetNextCellEle.css("width", "");
-				        					targetCellEleWrap.width(currCellEleTable.width() + scrollbarWidth);
-				        				}
-				        				pressed = false;
-					        		}
+			        			movedPx = e.pageX - startOffsetX;
+			        			currWidth = defWidth + movedPx;
+			        			nextCurrWidth = nextDefWidth - movedPx - correction;
+			        			if(currWidth > 0 && nextCurrWidth > 0) {
+				        			currCellEle.css("width", currWidth + "px");
+			        				currNextCellEle.css("width", nextCurrWidth + "px");
+			        				if(targetCellEle !== undefined) {
+			        					targetCellEle.css("width", currWidth + "px");
+			        					targetNextCellEle.css("width", nextCurrWidth + "px");
+			        					targetCellEleWrap.width(currCellEleTable.width() + scrollbarWidth);
+			        				}
 			        			}
 			        		}
 				        });
 
-			        	$(window.document).bind("mouseup.grid.resize", function(e) {
+			        	$(window.document).bind("mouseup.grid.resize", function(se) {
+			        		theadCells.each(function() {
+			        			var cellEle = $(this);
+			        			cellEle.find("> span.resize_bar__").css("left", ((cellEle.offset().left + cellEle.width()) + resizeBarRightMargin) + "px");
+			        		});
 			        		$(document).unbind("dragstart.grid.resize, selectstart.grid.resize, mousemove.grid.resize, mouseup.grid.resize");
 			        		pressed = false;
 			        	});
