@@ -61,7 +61,13 @@ span.block_overlay_msg__ li.buttonBox__ a.cancel__ {
 
 /* Alert input message */
 span.msg__ {
-	display: inline-block;
+	position: absolute;
+	background-color: #ffffdd;
+	padding: 5px;
+	border-radius: 0 10px 0 10px;
+	border: 1px solid #c9c9c9;
+	box-shadow: 1px 1px 5px #cccccc;
+	margin-right: 5px;
 }
 
 span.msg__ > ul {
@@ -81,6 +87,15 @@ span.msg__ ul.msg_line_box__ li {
 	color: #f90000;
 	margin-right: 5px;
 	font-style: italic;
+}
+
+span.msg__ a.msg_close__ {
+	position: absolute;
+	top: -4px;
+	right: -4px;
+	height: 14px;
+	width: 14px;
+	background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9sKHAwzE52da0AAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAB+UlEQVQoz22Sz2pTYRDFf/PdFJq2uEgQd6EEhIuYEKKrvoGbm68LEYt/HkDBZ/ERrJJNNzcfAV9AXIUSaFIKJjaFLgoWWtw0Se+dcdGkVPHsBs5w5vwYAQghkCQJIYR7ZrYjIjvAU27UM7O2iLSTJPm99EqapnjvCSE8Az6KyEP+IzP7AXxIkuRrp9NBANI0fRVF0WfAFiYRkbtLtpglz/PX3vsv0ul0HjjnhkBpc3NTzIzxeEwURYgIWZZRqVRYW1tjNBqZmZ2r6mPnnHtpZmVA1tfXqdVqxHG8TKJardJsNtnY2AAQ4H4URTsFM3suIpgZBwcHrKysEMcxs9mM+XxOvV7n7OyMfr+PmbHwvigAjwCWnfr9PtPplFqthplxcnLCYDC4XVqo4e6SWyZfXl4C4Jzj4uICVf0X8rwAHAJbAFmWUa1WqdfrTCYTrq+vaTQarK6ucnR0dAsMGBREZM/MtgAqlcptp+FwiJlRLBaJ45gsy5hMJsuT91ye523gl4hYuVzm9PSUXq+HqmJm7O/vc3x8TKlUQkQMOM/zvL18gDdRFH0SETOzvx5gkWCL/pLn+Vvv/a4LIeC931XVbVUd3zC6gXSXm6r+VNVt7/1uCAF3dXVFt9ul1WqlwBNVfW9m30RkBsxE5LuqvgOarVYr7Xa7TKdT/gAYixUp5DPw5wAAAABJRU5ErkJggg==");
 }
 
 /* Button */
@@ -236,7 +251,7 @@ table.grid__.grid_select__ tbody.grid_selected__ textarea {
 	color: #ffffff;
 }
 
-div.tbody_wrap__ table.grid__ td {
+table.grid__ thead th, table.grid__ tbody td {
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -289,7 +304,7 @@ div.v_resizable__ {
 }
 
 div.grid_wrap__ {
-	display: inline-block;
+
 }
 
 div.thead_wrap__ > table,
@@ -308,6 +323,7 @@ div.thead_wrap__ thead th .desc__ {
 
 div.tbody_wrap__ {
 	background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAIklEQVQIW2NkQAIf7n/4zwjjgzgCigKMYAEYB8RmROaABAAQCg/DqNBm8AAAAABJRU5ErkJggg==") repeat;
+	position: relative;
 }
 
 div.tbody_wrap__ table.grid__ td {
