@@ -36,11 +36,11 @@
 		var logo = $("#SvgjsSvg70206");
 		var i=0;
 		var time= setInterval(function() {
-		  if(i>360) {
+		  if(i>720) {
 		    clearInterval(time);
 		    logo.css("transform", "");
 		  } else {
-		    logo.css("transform", "rotate3d(180, " + i + ", 0, " + i/2 + "deg)");
+		    logo.css("transform", "rotate3d(180, " + i*2 + ", 0, " + i/2 + "deg)");
 		    i++;
 		  }
 		}, 15);
