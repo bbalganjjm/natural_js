@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.3.3
+ * Natural-UI v0.8.3.4
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	var version = "0.8.3.3";
+	var version = "0.8.3.4";
 
 	// N local variables
 	$.fn.extend(N, {
@@ -2269,7 +2269,7 @@
 		            	currCellEle.data("sortLock", true);
 
 		            	defWidth = currCellEle.innerWidth();
-		            	nextDefWidth = targetNextCellEle.innerWidth();
+		            	nextDefWidth = currNextCellEle.innerWidth();
 
 		            	initHeight = currCellEle.innerHeight() + 1;
 
