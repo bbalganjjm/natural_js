@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.3.4
+ * Natural-UI v0.8.3.6
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	var version = "0.8.3.4";
+	var version = "0.8.3.6";
 
 	// N local variables
 	$.fn.extend(N, {
@@ -1717,7 +1717,7 @@
 				resizable : false,
 				vResizable : false,
 				sortable : false,
-				windowScrollLock : false,
+				windowScrollLock : true,
 				select : false,
 				multiselect : false,
 				hover : false,
@@ -2087,36 +2087,19 @@
 		        	"margin-left" : "-1px",
 		        	"border-bottom" : borderBottom
 		        });
+
 		        // for IE
 		        if(N.browser.is("ie")) {
 		        	tbodyWrap.css("overflow-x", "hidden");
 		        }
 
 		        if(opts.windowScrollLock) {
-		        	opts.context.bind("mouseenter.grid.fixHeader", function() {
-						// lock scroll position
-						var scrollPosition = [ self.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft,
-								self.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop ];
-						var html = $('html');
-						html.data('scroll-position', scrollPosition);
-						html.data('previous-overflow', html.css('overflow'));
-						html.css('overflow', 'hidden');
-						window.scrollTo(scrollPosition[0], scrollPosition[1]);
-
-						if($(window.document).height() > $(window).height()) {
-							$("body").css("margin-right", "+=" + scrollbarWidth + "px");
-						}
-					});
-					opts.context.bind("mouseleave.grid.fixHeader", function() {
-						// un-lock scroll position
-						var html = $('html');
-						var scrollPosition = html.data('scroll-position');
-						html.css('overflow', html.data('previous-overflow'));
-						window.scrollTo(scrollPosition[0], scrollPosition[1]);
-						if($(window.document).height() > $(window).height()) {
-							$("body").css("margin-right", "-=" + scrollbarWidth + "px");
-						}
-					});
+		        	tbodyWrap.bind('mousewheel.grid.fixHeader DOMMouseScroll.grid.fixHeader',function(e) {
+        		        var delta = e.originalEvent.wheelDelta || -e.originalEvent.detail;
+        		        if (delta > 0 && $(this).scrollTop() <= 0) return false;
+        		        if (delta < 0 && $(this).scrollTop() >= this.scrollHeight - $(this).height()) return false;
+        		        return true;
+        		    });
 		        }
 
 		        // Scroll paging
@@ -2168,6 +2151,8 @@
         		var pressed = false;
 	        	var vResizable = $('<div class="v_resizable__" align="center"></div>');
 	        	vResizable.css("cursor", "n-resize");
+	        	vResizable.css("margin-bottom", gridWrap.css("margin-bottom"));
+	        	gridWrap.css("margin-bottom", "0");
 
 	        	var currHeight, tbodyOffset, tfootHeight = 0;
 	        	vResizable.bind("mousedown.grid.vResize", function() {
