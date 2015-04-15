@@ -141,12 +141,12 @@ header hgroup h1 {
 }
 
 header hgroup h1 #logo {
-	font-size: 42px; font-style: normal; font-weight: bold; display: inline-block; font-family: sans-serif; text-shadow: 1.2px 2px #4FA52B;
+	font-size: 56px; font-style: normal; font-weight: bold; display: inline-block; font-family: sans-serif; text-shadow: 1.2px 2px #4FA52B;
 	color: #005000;
 }
 
 header hgroup h1 span#desc {
-	font-size: 18px; margin: 0 9px 0 0; padding: 0; color: #A6CD59; 
+	font-size: 22px; margin: 0 9px 0 0; padding: 0; color: #A6CD59; 
 	text-shadow: -1px -0.8px #005000;
 }
 
