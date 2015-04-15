@@ -119,15 +119,25 @@ header hgroup {
 }
 
 header hgroup h1 {
-	float: left; margin: 0; padding: 9px 9px 0 9px;
+	float: left; margin: 0; 
+	padding: 0 9px 4px 9px;
 }
 
-header hgroup h2 {
-	float: right; margin: 0 9px 0 0; padding: 0; color: #EEEE80; text-shadow: -1px -1px #008000;
+header hgroup h1 #logo {
+	font-size: 48px;
+	font-style: normal;
+	font-weight: bold;
+	display: inline-block;
+}
+
+header hgroup h1 span#desc { font-size: 21px; margin: 0 9px 0 0; padding: 0;
+	 color: #BED866;
+	 text-shadow: -1px -0.8px #004A00;
 }
 
 header hgroup #google_translate_element {
-	float: right; margin: 6px 9px 0 0;
+	float: right; 
+	margin-top: 43px;
 }
 
 header nav {
@@ -147,7 +157,7 @@ header nav>ul>li>a {
 }
 
 header nav>ul>li>ul {
-	clear: both; list-style: none; display: none; position: absolute; background: #007000; border-radius: 0 0 3px 3px; padding: 5px 10px 5px 10px; box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.3); margin-left: -30px
+	clear: both; list-style: none; display: none; position: absolute; background: #007000; border-radius: 0 0 3px 3px; padding: 5px 10px 5px 10px; box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.3); margin-left: -30px;transform: rotate3d(90, 0, -40, 10deg);
 }
 
 header nav>ul>li:hover {
@@ -277,7 +287,7 @@ article.apiDoc .apidemo {
 
 article.apiDoc .apidemo table th, article.apiDoc .apidemo table td, article.apiDoc .apidemo input[type='text'], article.apiDoc .apidemo input[type='password'], article.apiDoc .apidemo select, article.apiDoc .apidemo textarea {
 	font-size: 12px;
-	vertical-align: top;        
+	vertical-align: top;
 }
 
 article.apiDoc .apidemo table.grid th {
