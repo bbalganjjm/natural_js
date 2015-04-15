@@ -37,7 +37,7 @@
 			프레임워크에서 내부적으로 사용하는 CORE 라이브러리 패키지이고<br> <b>Natural-ARCHITECTURE</b>는 복잡한 웹 UI 환경을 구조화, 단순화 시켜주는 CVC Architecture
 			Pattern 기반의 Architecture Framework를 제공 합니다.<br> <b>Natural-DATA</b>는 Data 처리 및 데이터 동기화에 대한 모듈들을 제공 하며<br> <b>Natural-UI</b>
 			는 HTML 기반의 Grid, Form, Popup등 여러 가지 컴포넌트를 제공 합니다.</p>
-			<p>자세한 아키텍처 구조와 설명은 [ 참고문서 > <a class="link" href="/natural_js/#intr/intr0100">기본 문서</a> ] 페이지의 내용을 참조해 보세요.</p>
+			<p>자세한 아키텍처 구조와 설명은 [ 참고문서 > <a class="link" href="html/intr/intr0100.html">기본 문서</a> ] 페이지의 내용을 참조해 보세요.</p>
 		</dd>
 		<dt>이건 뭐지? 뭔말인지 하나도 모르겠네요. 소스코드로 얘기해 줄 수 있나요?</dt>
 		<dd>네. 그럼 Natural-JS에 대해서 천천히 한번 살펴 볼까요?</dd>
@@ -302,15 +302,13 @@ N("#viewCont").cont({
 		데이터를 서비스하는 URL을 지정하면 요청한 URL의 파라메터가 됩니다.<br> <br> N.comm 과 N.cont 에서 제공하는 상세 기능을 확인 하려면 API 문서를 참고 하세요.
 	</p>
 	<p>이제 기본 구조를 알았으니 API 문서 참고해서 신나게 개발 해 볼까요?</p>
-	<p><a class="link" href="/natural_js/#refr/refr0101">API 문서 및 API 데모 바로가기</a></p>
+	<p><a class="link" href="html/refr/refr0101.html">API 문서 및 API 데모 바로가기</a></p>
 </article>
 
 <script type="text/javascript">
-
-N("article#gtst0100").cont({
-	grid : undefined,
-    init : function(view, request) {
-    }
-});
-
+	N("article#gtst0100").cont({
+	    init : function(view, request) {
+	    	CommonUtilController.setPageLinks(N("a.link", view));
+	    }
+	});
 </script>

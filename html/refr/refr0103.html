@@ -446,11 +446,11 @@
 
 <h2>문서 바로가기</h2>
 <ul class="links">
-	<li><a class="link" href="/natural_js#refr/refr0101">API 문서 개요</a></li>
-	<li><a class="link" href="/natural_js#refr/refr0102">Natural-CORE</a></li>
+	<li><a class="link" href="html/refr/refr0101.html">API 문서 개요</a></li>
+	<li><a class="link" href="html/refr/refr0102.html">Natural-CORE</a></li>
 	<li><p>Natural-ARCHITECTURE</p></li>
-	<li><a class="link" href="/natural_js#refr/refr0104">Natural-DATA</a></li>
-	<li><a class="link" href="/natural_js#refr/refr0105">Natural-UI</a></li>
+	<li><a class="link" href="html/refr/refr0104.html">Natural-DATA</a></li>
+	<li><a class="link" href="html/refr/refr0105.html">Natural-UI</a></li>
 </ul>
 
 </article>
@@ -458,6 +458,8 @@
 <script type="text/javascript">
 N("article#refr0103").cont({
     init : function(view, request) {
+    	CommonUtilController.setPageLinks(N("a.link", view));
+
     	// init tab
     	N("div#naTab", view).tab();
 

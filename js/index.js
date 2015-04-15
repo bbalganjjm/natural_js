@@ -19,25 +19,7 @@ var IndexController = {
 		this.loadMainContents();
 	},
 	setMenuEvent : function() {
-		N("nav > ul > li > ul a").click(function(e) {
-			var href = N(this).attr("href");
-			if(N.string.trimToEmpty(href).indexOf("#") < 0
-					&& N.string.trimToEmpty(href).indexOf(".html") > -1
-					&& N.string.trimToNull(href) !== null) {
-
-				e.preventDefault();
-				var hash_ = href.replace("http://bbalganjjm.github.io/natural_js/", "").replace(/\.html/g, "").replace(/html\//g, "");
-				N(N.context.attr("architecture").page.context).comm(href).submit(function() {
-					// Google Analytics
-					ga('create', 'UA-58001949-2', 'auto');
-					ga('send',  {
-						'hitType': 'pageview',
-						'page': "#" + hash_
-					});
-				});
-				location.hash = hash_;
-			}
-		});
+		CommonUtilController.setPageLinks("nav > ul > li > ul a");
 	},
 	loadMainContents : function() {
 		if(N.string.trimToNull(location.hash) !== null) {
@@ -59,5 +41,28 @@ var IndexController = {
 				});
 			});
 		}
+	}
+}
+
+var CommonUtilController = {
+	setPageLinks : function(eles) {
+		N(eles).click(function(e) {
+			var href = N(this).attr("href");
+			if(N.string.trimToEmpty(href).indexOf("#") < 0
+					&& N.string.trimToEmpty(href).indexOf(".html") > -1
+					&& N.string.trimToNull(href) !== null) {
+				e.preventDefault();
+				var hash_ = href.replace("http://bbalganjjm.github.io/natural_js/", "").replace(/\.html/g, "").replace(/html\//g, "");
+				N(N.context.attr("architecture").page.context).comm(href).submit(function() {
+					// Google Analytics
+					ga('create', 'UA-58001949-2', 'auto');
+					ga('send',  {
+						'hitType': 'pageview',
+						'page': "#" + hash_
+					});
+				});
+				location.hash = hash_;
+			}
+		});
 	}
 }
