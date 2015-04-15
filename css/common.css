@@ -119,7 +119,7 @@ header hgroup {
 }
 
 header hgroup h1 {
-	float: left; margin: 0; 
+	float: left; margin: 0;
 	padding: 0 9px 0px 9px;
 }
 
@@ -135,9 +135,9 @@ header hgroup h1 span#desc { font-size: 18px; margin: 0 9px 0 0; padding: 0;
 	 text-shadow: -1px -0.8px #004A00;
 }
 
-header hgroup #google_translate_element {
-	float: right; 
-	margin-top: 29px;
+footer #google_translate_element {
+	float: right;
+	margin-top: -4px;
 }
 
 header nav {
