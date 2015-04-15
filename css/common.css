@@ -128,6 +128,7 @@ header hgroup h1 #logo {
 	font-style: normal;
 	font-weight: bold;
 	display: inline-block;
+	font-family: sans-serif;
 }
 
 header hgroup h1 span#desc { font-size: 18px; margin: 0 9px 0 0; padding: 0;
