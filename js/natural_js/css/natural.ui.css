@@ -406,6 +406,10 @@ div.datepicker_contents__ {
 	z-index: 1;
 }
 
+div.datepicker_monthonly__ {
+	width: 103px;
+}
+
 div.datepicker_contents__ div.datepicker_year_item__, div.datepicker_contents__ div.datepicker_year_paging__ {
 	border: 1px solid #efefef;
 	cursor: pointer;
