@@ -304,7 +304,7 @@ div.v_resizable__ {
 }
 
 div.grid_wrap__ {
-	display: inline-block;
+
 }
 
 div.thead_wrap__ > table,
@@ -384,8 +384,13 @@ div.datepicker_contents__ {
 	background-image: linear-gradient(to bottom, #c9c9c9 0%, #999999 100%);
 	background-color: #999999;
 	padding: 3px;
-	width: 316px;
 	font-size: 12px;
+	width: 316px;
+	z-index: 1;
+}
+
+div.datepicker_monthonly__ {
+	width: 103px;
 }
 
 div.datepicker_contents__ div.datepicker_year_item__, div.datepicker_contents__ div.datepicker_year_paging__ {
