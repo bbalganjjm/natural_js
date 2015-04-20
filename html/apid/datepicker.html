@@ -9,9 +9,26 @@
 		</tr>
 		<tr>
 			<th width="10%">onSelect</th>
-			<td colspan="3"><textarea id="onSelect">function() {
-	alert("select");
+			<td colspan="3"><textarea id="onSelect" style="height: 96px;">function(context, selDate, monthonly) {
+	console.log("onSelect");
+	console.log(context);
+	console.log(selDate);
+	console.log(monthonly);
 }</textarea><br /><br>Callback function for date select event</td>
+		</tr>
+		<tr>
+			<th>onBeforeShow</th>
+			<td><textarea id="onBeforeShow" style="height: 80px;">function(context, contents) {
+	console.log("onBeforeShow");
+	console.log(context);
+	console.log(contents);
+}</textarea><br /><br>Callback function for date onBeforeShow event</td>
+			<th>onBeforeHide</th>
+			<td><textarea id="onBeforeHide" style="height: 80px;">function(context, contents) {
+	console.log("onBeforeHide");
+	console.log(context);
+	console.log(contents);
+}</textarea><br /><br>Callback function for date onBeforeHide event</td>
 		</tr>
 	</table>
 
@@ -63,6 +80,10 @@
 	           		monthonly : N("input#monthonly", view).is(":checked"),
 	           		onSelect : N.string.trimToNull(N("textarea#onSelect", view).val()) !== null ?
 	           				eval("(" + N("textarea#onSelect", view).val() + ")") : null,
+      				onBeforeShow : N.string.trimToNull(N("textarea#onBeforeShow", view).val()) !== null ?
+           				eval("(" + N("textarea#onBeforeShow", view).val() + ")") : null,
+      				onBeforeHide : N.string.trimToNull(N("textarea#onBeforeHide", view).val()) !== null ?
+           				eval("(" + N("textarea#onBeforeHide", view).val() + ")") : null,
 	           		focusin : N("input#focusin", view).is(":checked")
 	       		};
 
