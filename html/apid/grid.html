@@ -155,7 +155,7 @@
 			</tr>
 			<tr>
 				<th>index</th>
-				<th>age</th>
+				<th>registered</th>
 				<th>email</th>
 				<th>isActive</th>
 			</tr>
@@ -170,7 +170,7 @@
 			</tr>
 			<tr>
 				<td id="index" align="center"></td>
-				<td><input id="age" type="text" data-validate='[["required"], ["integer"]]' /></td>
+				<td><input id="registered" type="text" data-format='[["date", 8, "date"]]' /></td>
 				<td><input id="email" type="text" data-validate='[["required"], ["email"]]' /></td>
 				<td align="center"><input id="isActive" type="checkbox" /></td>
 			</tr>
