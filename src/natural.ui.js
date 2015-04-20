@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.4.0
+ * Natural-UI v0.8.4.1
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	var version = "0.8.4.0";
+	var version = "0.8.4.1";
 
 	// N local variables
 	$.fn.extend(N, {
@@ -605,7 +605,7 @@
 
 		        // set datapicker position
 				$(window).bind("resize.datepicker", function() {
-					var leftOfs = opts.context.offset().left;
+					var leftOfs = opts.context.position().left;
 					if(leftOfs + opts.contents.width() > $(window).width()) {
 						opts.contents.css("right", ($(window).width() - (leftOfs + opts.context.outerWidth())) + "px");
 					} else {
