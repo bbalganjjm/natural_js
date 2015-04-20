@@ -1,5 +1,5 @@
 /*!
- * Natural-CORE v0.8.2.3
+ * Natural-CORE v0.8.2.4
  * bbalganjjm@gmail.com
  *
  * Includes json2.js & formatdate.js
@@ -12,7 +12,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	var version = "0.8.2.3", N;
+	var version = "0.8.2.4", N;
 
 	// Use jQuery init
 	N = function(selector, context) {
@@ -53,14 +53,16 @@
 		gc : {
 			minimum : function() {
 				$(window).unbind("resize.datepicker");
+				$(document).unbind("keyup.datepicker");
+				$(document).unbind("keyup.alert");
 				return true;
 			},
 			full : function() {
 				$(window).unbind("resize.datepicker");
-				$(document).unbind("keyup.alert");
 				$(document).unbind("keyup.datepicker");
-				$(document).unbind("dragstart.grid.vResize, selectstart.grid.vResize, mousemove.grid.vResize, mouseup.grid.vResize");
-				$(document).unbind("dragstart.grid.resize, selectstart.grid.resize, mousemove.grid.resize, mouseup.grid.resize");
+				$(document).unbind("keyup.alert");
+				$(document).unbind("dragstart.grid.vResize").unbind("selectstart.grid.vResize").unbind("mousemove.grid.vResize").unbind("mouseup.grid.vResize");
+				$(document).unbind("dragstart.grid.resize").unbind("selectstart.grid.resize").unbind("mousemove.grid.resize").unbind("mouseup.grid.resize");
 				return true;
 			}
 		},
@@ -243,37 +245,100 @@
 				return Math.ceil((str2 - str1) / 1000 / 24 / 60 / 60);
 			},
 			/**
+			 * 날짜 문자열을 주어진 포멧에 맞게 재 배치하여 반환한다.
+			 */
+			strToDateStrArr : function(str, format, isString) {
+				var dateStrArr = [];
+				var fixNum = 0;
+				if(format.length === 3 && str.length === 7 || format.length === 2 && str.length === 5) {
+					fixNum = -1;
+				}
+				if(N.string.startsWith(format, "Ymd")) {
+					dateStrArr.push(str.substring(0, 4 + fixNum)); //year
+					dateStrArr.push(str.substring(4 + fixNum, 6 + fixNum)); //month
+					dateStrArr.push(str.substring(6 + fixNum, 8 + fixNum)); //day
+        		} else if(N.string.startsWith(format, "mdY")) {
+        			dateStrArr.push(str.substring(4, 8 + fixNum)); //year
+        			dateStrArr.push(str.substring(0, 2)); //month
+        			dateStrArr.push(str.substring(2, 4)); //day
+        		} else if(N.string.startsWith(format, "dmY")) {
+        			dateStrArr.push(str.substring(4, 8 + fixNum)); //year
+        			dateStrArr.push(str.substring(2, 4)); //month
+        			dateStrArr.push(str.substring(0, 2)); //day
+        		} else if(N.string.startsWith(format, "Ym")) {
+        			dateStrArr.push(str.substring(0, 4 + fixNum)); //year
+					dateStrArr.push(str.substring(4 + fixNum, 6 + fixNum)); //month
+        		} else if(N.string.startsWith(format, "mY")) {
+        			dateStrArr.push(str.substring(2, 6 + fixNum)); //year
+					dateStrArr.push(str.substring(0, 2)); //month
+        		} else {
+        			N.error("\"" + format + "\" date format is not support. please change return value of N.context.attr(\"data\").formatter.date's functions");
+        		}
+				if(isString === undefined || isString === false) {
+					$(dateStrArr).each(function(i) {
+						dateStrArr[i] = parseInt(this);
+					});
+				}
+				return dateStrArr;
+			},
+			/**
 			 * 날짜스트링을 Date Object와 기본 데이트포멧이 담긴 dateInfo 오브젝트 반환
 			 */
-			strToDate : function(str) {
-				str = N.string.trimToEmpty(str).replace(/\s/g, "").replace(/-/g, "").replace(/\//g, "").replace(/:/g, "");
+			strToDate : function(str, format) {
+				str = N.string.trimToEmpty(str).replace(/[^0-9]/g, "");
 				var dateInfo = null;
-				if (str.length === 6) {
+				var dateStrArr;
+				if (str.length > 2 && str.length <= 4) {
 					dateInfo = {
-						obj : new Date(str.substring(0, 4), Number(str.substring(4, 6)), 0, 0, 0, 0),
-						format : N.context.attr("data").formatter.date.Ym()
+						obj : new Date(str, 1, 1, 0, 0, 0),
+						format : "Y"
+					};
+				} else if (str.length === 6) {
+					if(format === undefined) {
+						format = N.context.attr("data").formatter.date.Ym();
+					}
+					dateStrArr = N.date.strToDateStrArr(str, format.replace(/[^Y|^m|^d]/g, ""));
+					dateInfo = {
+						obj : new Date(dateStrArr[0], dateStrArr[1]-1, 1, 0, 0, 0),
+						format : format
 					};
 				} else if (str.length === 8) {
+					if(format === undefined) {
+						format = N.context.attr("data").formatter.date.Ymd();
+					}
+					dateStrArr = N.date.strToDateStrArr(str, format.replace(/[^Y|^m|^d]/g, ""));
 					dateInfo = {
-						obj : new Date(str.substring(0, 4), Number(str.substring(4, 6)) - 1, str.substring(6, 8), 0, 0, 0),
-						format : N.context.attr("data").formatter.date.Ymd()
+						obj : new Date(dateStrArr[0], dateStrArr[1]-1, dateStrArr[2], 0, 0, 0),
+						format : format
 					};
 				} else if (str.length === 10) {
+					if(format === undefined) {
+						format = N.context.attr("data").formatter.date.YmdH();
+					}
+					dateStrArr = N.date.strToDateStrArr(str, format.replace(/[^Y|^m|^d]/g, ""));
 					dateInfo = {
-						obj : new Date(str.substring(0, 4), Number(str.substring(4, 6)) - 1, str.substring(6, 8), str.substring(8, 10), 0, 0),
-						format : N.context.attr("data").formatter.date.YmdH()
+						obj : new Date(dateStrArr[0], dateStrArr[1]-1, dateStrArr[2], str.substring(8, 10), 0, 0),
+						format : format
 					};
 				} else if (str.length === 12) {
+					if(format === undefined) {
+						format = N.context.attr("data").formatter.date.YmdHi();
+					}
+					dateStrArr = N.date.strToDateStrArr(str, format.replace(/[^Y|^m|^d]/g, ""));
 					dateInfo = {
-						obj : new Date(str.substring(0, 4), Number(str.substring(4, 6)) - 1, str.substring(6, 8), str.substring(8, 10), str.substring(10, 12),
+						obj : new Date(dateStrArr[0], dateStrArr[1]-1, dateStrArr[2], str.substring(8, 10), str.substring(10, 12),
 								0),
-						format : N.context.attr("data").formatter.date.YmdHi()
+						format : format
 					};
 				} else if (str.length >= 14) {
+					if(format === undefined) {
+						format = N.context.attr("data").formatter.date.YmdHis();
+					}
+					dateStrArr = N.date.strToDateStrArr(str, format.replace(/[^Y|^m|^d]/g, ""));
 					dateInfo = {
-						obj : new Date(str.substring(0, 4), Number(str.substring(4, 6)) - 1, str.substring(6, 8), str.substring(8, 10), str.substring(10, 12),
+						obj : new Date(dateStrArr[0], dateStrArr[1]-1, dateStrArr[2], str.substring(8, 10), str.substring(10, 12),
 								str.substring(12, 14)),
-						format : N.context.attr("data").formatter.date.YmdHis()
+						format : format
 					};
 				}
 				return dateInfo;
@@ -991,6 +1056,19 @@
 		return formatString.join("");
 	};
 
+	// Some (not all) predefined format strings from PHP 5.1.1, which
+	// offer standard date representations.
+	// See: http://www.php.net/manual/en/ref.datetime.php#datetime.constants
+
+	// Atom "2005-08-15T15:52:01+00:00"
+	Date.DATE_ATOM = "Y-m-d%TH:i:sP";
+	// ISO-8601 "2005-08-15T15:52:01+0000"
+	Date.DATE_ISO8601 = "Y-m-d%TH:i:sO";
+	// RFC 2822 "Mon, 15 Aug 2005 15:52:01 +0000"
+	Date.DATE_RFC2822 = "D, d M Y H:i:s O";
+	// W3C "2005-08-15 15:52:01+00:00"
+	Date.DATE_W3C = "Y-m-d%TH:i:sP";
+
 	/**
 	 * @reference Mask JavaScript API(http://www.pengoworks.com/workshop/js/mask/,
 	 *            dswitzer@pengoworks.com)
@@ -1224,19 +1302,6 @@
 		};
 
 	};
-
-	// Some (not all) predefined format strings from PHP 5.1.1, which
-	// offer standard date representations.
-	// See: http://www.php.net/manual/en/ref.datetime.php#datetime.constants
-
-	// Atom "2005-08-15T15:52:01+00:00"
-	Date.DATE_ATOM = "Y-m-d%TH:i:sP";
-	// ISO-8601 "2005-08-15T15:52:01+0000"
-	Date.DATE_ISO8601 = "Y-m-d%TH:i:sO";
-	// RFC 2822 "Mon, 15 Aug 2005 15:52:01 +0000"
-	Date.DATE_RFC2822 = "D, d M Y H:i:s O";
-	// W3C "2005-08-15 15:52:01+00:00"
-	Date.DATE_W3C = "Y-m-d%TH:i:sP";
 
 	/*
 	 * json2.js 2013-05-26 Public Domain. NO WARRANTY EXPRESSED OR IMPLIED. USE AT YOUR OWN RISK. See http://www.JSON.org/js.html
