@@ -606,8 +606,15 @@
 		        // set datapicker position
 				$(window).bind("resize.datepicker", function() {
 					var leftOfs = opts.context.position().left;
-					if(leftOfs + opts.contents.width() > $(window).width()) {
-						opts.contents.css("right", ($(window).width() - (leftOfs + opts.context.outerWidth())) + "px");
+					var parentEle = opts.contents.closest("tbody.form__");
+					var limitWidth;
+					if(parentEle.length > 0) {
+						limitWidth = parentEle.position().left + parentEle.width();
+					} else {
+						limitWidth = $(window).width();
+					}
+					if(leftOfs + opts.contents.width() > limitWidth) {
+						opts.contents.css("right", (limitWidth - (leftOfs + opts.context.outerWidth())) + "px");
 					} else {
 						opts.contents.css("left", leftOfs + "px");
 					}
