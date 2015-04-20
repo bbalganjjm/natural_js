@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.3.6
+ * Natural-UI v0.8.4.0
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	var version = "0.8.3.6";
+	var version = "0.8.4.0";
 
 	// N local variables
 	$.fn.extend(N, {
@@ -133,7 +133,7 @@
 						opts.context.parent().css({
 							"white-space": "normal"
 						});
-						opts.msgContext.show(function() {
+						opts.msgContext.fadeIn(150, function() {
 							opts.iTime = setTimeout(function() {
 								clearTimeout(opts.iTime);
 								opts.context.parent().css({
@@ -332,7 +332,7 @@
 				}
 				opts.msgContext = opts.context.next("span.msg__");
 				if (opts.msgContext.length == 0) {
-					opts.msgContext = opts.context.after('<span class="msg__"><ul class="msg_line_box__"></ul></span>').next("span.msg__");
+					opts.msgContext = opts.context.after('<span class="msg__" style="display: none;"><ul class="msg_line_box__"></ul></span>').next("span.msg__");
 					opts.msgContext.append('<a href="#" class="msg_close__"></a>');
 				}
 				if(opts.alwaysOnTop) {
@@ -541,9 +541,10 @@
 				context : obj,
 				contents : $('<div class="datepicker__"></div>'),
 				monthonly : false,
-				mouseonly : true, // mouseonly : TODO for add feature direct input keyboard
 				focusin : true,
-				onSelect : null
+				onSelect : null,
+				onBeforeShow : null,
+				onBeforeHide : null
 			};
 
 			try {
@@ -557,10 +558,6 @@
 			}
 
 			this.options.context.addClass("datepicker__");
-			if(this.options.mouseonly) {
-				this.options.context.css("cursor", "pointer");
-				this.options.context.prop("readonly", true);
-			}
 
 			DatePicker.wrapEle.call(this);
 
@@ -571,6 +568,24 @@
 		$.extend(DatePicker.fn, {
 			show : function() {
 				var opts = this.options;
+
+				// auto select datepicker items from before input value
+				if(!N.string.isEmpty(opts.context.val())) {
+					DatePicker.selectItems(opts,
+							opts.context.val().replace(/[^0-9]/g, ""),
+							(!opts.monthonly ? N.context.attr("data").formatter.date.Ymd() : N.context.attr("data").formatter.date.Ym()).replace(/[^Y|^m|^d]/g, ""),
+							opts.contents.find("div.datepicker_years_panel__"),
+							opts.contents.find("div.datepicker_months_panel__"),
+							opts.contents.find("div.datepicker_days_panel__"));
+				}
+
+				if(opts.onBeforeShow !== null) {
+					var result = opts.onBeforeShow.call(this, opts.context, opts.contents);
+					if(result !== undefined && result === false) {
+						return this;
+					};
+				}
+
 				var this_ = this;
 
 				opts.contents.fadeIn(150);
@@ -582,6 +597,11 @@
 		        		this_.hide();
 		        	}
 				});
+
+		        // when the context(input) is focused out, close the datepicker panel
+		        opts.context.bind("blur.datepicker", function() {
+		        	this_.hide();
+		        });
 
 		        // set datapicker position
 				$(window).bind("resize.datepicker", function() {
@@ -596,10 +616,20 @@
 				return this;
 			},
 			hide : function() {
+				var opts = this.options;
+
+				if(opts.onBeforeHide !== null) {
+					var result = opts.onBeforeHide.call(this, opts.context, opts.contents);
+					if(result !== undefined && result === false) {
+						return this;
+					};
+				}
+
+				 opts.context.unbind("blur.datepicker");
 				$(document).unbind("keyup.datepicker");
 				$(window).unbind("resize.datepicker");
-				this.options.contents.fadeOut(150);
-				this.options.context.get(0).blur();
+				opts.contents.fadeOut(150);
+				opts.context.get(0).blur();
 				return this;
 			}
 		});
@@ -614,8 +644,15 @@
 
 				var d = new Date();
 				var currYear = parseInt(d.formatDate("Y"));
+				var format = (!opts.monthonly ? N.context.attr("data").formatter.date.Ymd() : N.context.attr("data").formatter.date.Ym()).replace(/[^Y|^m|^d]/g, "");
 
 				opts.contents = $('<div class="datepicker_contents__"></div>');
+				if(opts.monthonly) {
+					opts.context.attr("maxlength", "6");
+					opts.contents.addClass("datepicker_monthonly__");
+				} else {
+					opts.context.attr("maxlength", "8");
+				}
 				opts.contents.css({
 					display: "none",
 					position: "absolute"
@@ -670,6 +707,7 @@
 					"margin-left": "3px"
 				});
 				var monthItem = $('<div align="center"></div>');
+				var gEndDate;
 				monthItem.css({
 					"line-height": "25px",
 					"width": "28px",
@@ -679,19 +717,25 @@
 					monthsPanel.find("div.datepicker_month_item__").removeClass("datepicker_month_selected__");
 					$(this).addClass("datepicker_month_selected__");
 					if(opts.monthonly) {
-						var selDate = N.date.strToDate(yearsPanel.find("div.datepicker_year_selected__").text() +  N.string.lpad($(this).text(), 2, "0"));
+						var selDate = N.date.strToDate(N.string.lpad(yearsPanel.find("div.datepicker_year_selected__").text(), 4, "0") + N.string.lpad($(this).text(), 2, "0"), "Ym");
+						// set date format of global config
+						selDate.format = N.context.attr("data").formatter.date.Ym().replace(/[^Y|^m|^d]/g, "");
+
 						var onSelectContinue;
 						if(opts.onSelect !== null) {
-							onSelectContinue = opts.onSelect(opts.context, selDate);
+							onSelectContinue = opts.onSelect.call(this, opts.context, selDate, opts.monthonly);
 						}
 						if(onSelectContinue === undefined || onSelectContinue === true) {
-							opts.context.val(selDate.obj.formatDate(selDate.format));
+							opts.context.val(selDate.obj.formatDate(selDate.format.replace(/[^Y|^m|^d]/g, "")));
 						}
 						this_.hide();
 					} else {
 						daysPanel.empty();
-						var endDateCls = N.date.strToDate(yearsPanel.find("div.datepicker_year_selected__").text() +  N.string.lpad($(this).text(), 2, "0"));
-						var endDate = endDateCls.obj.getDate();
+						var endDateCls = N.date.strToDate(N.string.lpad(yearsPanel.find("div.datepicker_year_selected__").text(), 4, "0") +  N.string.lpad(String(parseInt($(this).text())+1), 2, "0") + "00", "Ymd");
+						var endDate = gEndDate = endDateCls.obj.getDate();
+						if(format !== "Ymd") {
+							gEndDate = 31;
+						}
 						endDateCls.obj.setDate(1);
 						var startDay = endDateCls.obj.getDay();
 						//render week
@@ -699,7 +743,7 @@
 							daysPanel.append(dayItem.clone().addClass("datepicker_day__").text(days[i]));
 						}
 
-						var prevEndDateCls = N.date.strToDate(yearsPanel.find("div.datepicker_year_selected__").text() +  N.string.lpad(String(parseInt($(this).text())-1), 2, "0"));
+						var prevEndDateCls = N.date.strToDate(N.string.lpad(yearsPanel.find("div.datepicker_year_selected__").text(), 4, "0") +  N.string.lpad($(this).text(), 2, "0") + "00", "Ymd");
 						var prevEndDate = prevEndDateCls.obj.getDate();
 						var date;
 						var dateItem;
@@ -718,6 +762,10 @@
 							}
 							daysPanel.append(dateItem.text(date));
 						}
+
+						if(daysPanel.find("div.datepicker_day_item__.datepicker_day_selected__").length === 0) {
+							daysPanel.find("div.datepicker_day_item__:contains(" + String(parseInt(d.formatDate("d"))) + "):eq(0)").addClass("datepicker_day_selected__");
+						}
 					}
 				});
 				monthsPanel.append(monthItem.clone().css("width", "58px").addClass("datepicker_month_title__").text(N.message.get(opts.message, "month")));
@@ -725,6 +773,9 @@
 				// render month items
 				for(var i=1;i<=12;i++) {
 					monthsPanel.append(monthItem.clone(true).addClass("datepicker_month_item__").text(String(i)));
+					if(monthsPanel.find("div.datepicker_month_item__ .datepicker_month_selected__").length === 0) {
+						monthsPanel.find("div.datepicker_month_item__:contains(" + String(parseInt(d.formatDate("m"))) + "):eq(0)").addClass("datepicker_month_selected__");
+					}
 				}
 				opts.contents.append(monthsPanel);
 
@@ -755,22 +806,25 @@
 						} else {
 							selMonth = monthsPanel.find("div.datepicker_month_selected__").text();
 						}
-						var selDate = N.date.strToDate(yearsPanel.find("div.datepicker_year_selected__").text()
+						var selDate = N.date.strToDate(N.string.lpad(yearsPanel.find("div.datepicker_year_selected__").text(), 4, "0")
 								+ N.string.lpad(selMonth, 2, "0")
-								+  N.string.lpad(thisEle.text(), 2, "0"));
+								+ N.string.lpad(thisEle.text(), 2, "0"), "Ymd");
+						// set date format of global config
+						selDate.format = N.context.attr("data").formatter.date.Ymd().replace(/[^Y|^m|^d]/g, "");
+
 						var onSelectContinue;
 						if(opts.onSelect !== null) {
-							onSelectContinue = opts.onSelect(opts.context, selDate);
+							onSelectContinue = opts.onSelect.call(this, opts.context, selDate, opts.monthonly);
 						}
 						if(onSelectContinue === undefined || onSelectContinue === true) {
-							opts.context.val(selDate.obj.formatDate(selDate.format));
+							opts.context.val(selDate.obj.formatDate(selDate.format.replace(/[^Y|^m|^d]/g, "")));
 						}
 						this_.hide();
 					});
 					opts.contents.append(daysPanel);
 
 					// click current month
-					monthsPanel.find("div:contains(" + String(parseInt(d.formatDate("m"))) + ")").click();
+					monthsPanel.find("div.datepicker_month_item__:contains(" + String(parseInt(d.formatDate("m"))) + ")").click();
 				}
 
 				// append datepicker panel after context
@@ -782,16 +836,106 @@
 						this_.show();
 					});
 				}
+
+				// bind key event
+				opts.context.bind("keyup.datepicker", function(e) {
+					e.preventDefault();
+					var value = opts.context.val().replace(/[^0-9]/g, "");
+
+					// when press the number keys
+					if (e.keyCode >= 48 && e.keyCode <= 57 && value.length <= 8 && value.length%2 === 0) {
+		        		var dateStrArr = N.date.strToDateStrArr(value, format);
+		        		var dateStrStrArr = N.date.strToDateStrArr(value, format, true);
+
+        				// validate input value
+	        			if(!isNaN(dateStrArr[0]) && dateStrStrArr[0].length === 4 && dateStrArr[0] < 100) {
+        					opts.context.alert(N.message.get(opts.message, "yearNaN")).show();
+    						opts.context.val(value.replace(dateStrStrArr[0], ""));
+        					return false;
+        				} else if(!isNaN(dateStrArr[1]) && dateStrStrArr[1].length === 2 && (dateStrArr[1] < 1 || dateStrArr[1] > 12)) {
+        					opts.context.alert(N.message.get(opts.message, "monthNaN")).show();
+    						opts.context.val(value.replace(dateStrStrArr[1], ""));
+        					return false;
+        				} else if(!opts.monthonly && !isNaN(dateStrArr[2]) && dateStrStrArr[2].length === 2 && (dateStrArr[2] < 1 || dateStrArr[2] > parseInt(gEndDate))) {
+        					opts.context.alert(N.message.get(opts.message, "dayNaN", [String(parseInt(gEndDate))])).show();
+    						opts.context.val(value.replace(dateStrStrArr[2], ""));
+        					return false;
+        				}
+	        			if((format.length === 3 && format.indexOf("md") > -1) || format.length === 2) {
+	        				DatePicker.selectItems(opts, value, format, yearsPanel, monthsPanel, daysPanel);
+	        			} else {
+	        				if(!opts.monthonly) {
+	        					if(value.length === 8) {
+	        						DatePicker.selectItems(opts, value, format, yearsPanel, monthsPanel, daysPanel);
+	        					}
+	        				} else {
+	        					if(value.length === 6) {
+	        						DatePicker.selectItems(opts, value, format, yearsPanel, monthsPanel, daysPanel);
+	        					}
+	        				}
+	        			}
+
+	        		// when press the enter key
+					} else if (e.keyCode == 13) {
+		        		if(!opts.monthonly) {
+		        			daysPanel.find("div.datepicker_day_selected__").click();
+		        		} else {
+		        			monthsPanel.find("div.datepicker_month_selected__").click();
+		        		}
+
+		        		// Temporary measures, I dont't know why into formated data to only data set of memory when press the enter key
+		        		if(!N.string.isEmpty(value)) {
+		        			opts.context.val(value).focusout();
+		        		}
+		        	}
+				});
 			},
-			yearPaging : function(yearItems, currYear, addCnt) {
+			yearPaging : function(yearItems, currYear, addCnt, absolute) {
+				// Date Object's year value must be greater 2 digits
 				yearItems.removeClass("datepicker_curr_year__");
-				yearItems.each(function() {
-					var thisEle = $(this);
-					thisEle.text(String(parseInt(thisEle.text()) + addCnt));
+				var thisEle;
+				var yearNum;
+				yearItems.each(function(i) {
+					thisEle = $(this);
+					if(absolute !== undefined && absolute === true) {
+						yearNum = parseInt(currYear) + i;
+					} else {
+						yearNum = parseInt(thisEle.text());
+					}
+					if(yearNum <= 100 - addCnt) {
+						thisEle.text(100 + i);
+					} else {
+						thisEle.text(String(yearNum + addCnt));
+					}
 					if(thisEle.text() === String(currYear)) {
 						thisEle.addClass("datepicker_curr_year__");
 					}
 				});
+			},
+			selectItems : function(opts, value, format, yearsPanel, monthsPanel, daysPanel) {
+				var dateStrArr = N.date.strToDateStrArr(value, format);
+        		var dateStrStrArr = N.date.strToDateStrArr(value, format, true);
+
+				// year item selection
+    			if(!isNaN(dateStrStrArr[0]) && dateStrStrArr[0].length === 4) {
+    				yearsPanel.find("div.datepicker_year_item__").removeClass("datepicker_year_selected__");
+					DatePicker.yearPaging(yearsPanel.find("div.datepicker_year_item__"), dateStrArr[0], -2, true);
+					yearsPanel.find("div.datepicker_year_item__:contains('" + String(dateStrArr[0]) + "')").click();
+    			}
+    			// month item selection
+    			if(!isNaN(dateStrStrArr[1]) && dateStrStrArr[1].length === 2) {
+					monthsPanel.find("div.datepicker_month_item__").removeClass("datepicker_month_selected__");
+					if(!opts.monthonly) {
+						monthsPanel.find("div.datepicker_month_item__:contains(" + String(dateStrArr[1]) + "):eq(0)").click();
+					} else {
+						monthsPanel.find("div.datepicker_month_item__:contains(" + String(dateStrArr[1]) + "):eq(0)").addClass("datepicker_month_selected__");
+					}
+				}
+    			// day item selection
+    			if(!isNaN(dateStrStrArr[2]) && dateStrStrArr[2].length === 2) {
+					daysPanel.find("div.datepicker_prev_day_item__, div.datepicker_day_item__, div.datepicker_next_day_item__").removeClass("datepicker_day_selected__");
+					daysPanel.find("div.datepicker_day_item__:contains(" + String(dateStrArr[2]) + "):eq(0)").addClass("datepicker_day_selected__");
+				}
 			}
 		});
 
@@ -2177,7 +2321,7 @@
 			        });
 
 		        	$(window.document).bind("mouseup.grid.vResize", function() {
-		        		$(document).unbind("dragstart.grid.vResize, selectstart.grid.vResize, mousemove.grid.vResize, mouseup.grid.vResize");
+		        		$(document).unbind("dragstart.grid.vResize").unbind("selectstart.grid.vResize").unbind("mousemove.grid.vResize").unbind("mouseup.grid.vResize");
 		        		pressed = false;
 		        	});
 	        	});
@@ -2294,7 +2438,7 @@
 			        			var cellEle = $(this);
 			        			cellEle.find("> span.resize_bar__").css("left", ((cellEle.offset().left + cellEle.width()) + resizeBarRightMargin) + "px");
 			        		});
-			        		$(document).unbind("dragstart.grid.resize, selectstart.grid.resize, mousemove.grid.resize, mouseup.grid.resize");
+			        		$(document).unbind("dragstart.grid.resize").unbind("selectstart.grid.resize").unbind("mousemove.grid.resize").unbind("mouseup.grid.resize");
 			        		pressed = false;
 			        	});
 		        	});
