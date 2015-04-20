@@ -44,7 +44,11 @@ audio, canvas, progress, video {
 audio
 
 
+
+
 :not
+
+
 
 
 
@@ -55,23 +59,35 @@ controls
 
 
 
+
+
 )
 {
 display
 
 
+
+
 :
+
+
 
 
 
 none
 
 
+
+
 ;
 height
 
 
+
+
 :
+
+
 
 
 
@@ -236,7 +252,7 @@ article h2 {
 }
 
 article h3 {
-	font-size: 15px; margin: 0 0 16px 0;
+	font-size: 16px; margin: 40px 0 16px 0; color: #050; padding-left: 22px; background: url("../images/icon/h3_leaf.gif") no-repeat 5px 4px;
 }
 
 article h4 {

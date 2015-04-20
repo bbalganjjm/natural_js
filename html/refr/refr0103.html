@@ -11,7 +11,7 @@
 <div id="tab1">
 	<h2>Controller(N.cont)</h2>
 
-	<h3>가. 개요</h3>
+	<h3>개요</h3>
 	<p>Controller(이하 N.cont) 는 CVC Architecture Pattern(이하 CVC 패턴)의 Controller 영역을 구현한 클래스로서 Communicator 와 View 를 연결 해 주고 View 의 HTML 요소(element)들을 제어하는 역할을 합니다.</p>
 	<p>N.cont 는 다음과 같이 페이지의 View 영역 바로 아래 선언 되어야 합니다.</p>
 	<pre class="line-numbers"><code class="language-markup">&lt;div id="view"&gt;
@@ -31,7 +31,10 @@
 		또한 Controller Class 의 초기화(Initialize)가 완료되면 View영역의 최상위 Element 에 해당 Controller 인스턴스(instance)를 넣어줘 N("페이지 최상위 Element").instance("cont") 로 View 영역에서 참조 할 수 있습니다.
 	</p>
 
-	<h3>나. 생성자(Constructor)</h3>
+	<h3>API DEMO</h3>
+	<div data-page="controller" class="apidemo"></div>
+
+	<h3>생성자(Constructor)</h3>
 	<table>
 		<tr>
 			<th>Name</th>
@@ -84,7 +87,7 @@
 		</tr>
 	</table>
 
-	<h3>다. Controller 기본 함수(callback default method)</h3>
+	<h3>Controller(N.cont) 기본 클래스(N.cont's default callback)</h3>
 	<table>
 		<tr>
 			<th>Name</th>
@@ -115,18 +118,18 @@
 			<td>Communicator.request 인스턴스를 반환하여 현재 페이지의 요청 정보를 볼 수 있습니다.</td>
 		</tr>
 	</table>
-
-	<h3>라. API DEMO</h3>
-	<div data-page="controller" class="apidemo"></div>
 </div>
 
 <div id="tab2">
 	<h2>Communicator(N.comm)</h2>
 
-	<h3>가. 개요</h3>
+	<h3>개요</h3>
 	<p>Communicator(이하 N.comm) 는 CVC 패턴의 Communicator 영역을 구현한 클래스로서 서버와의 통신을 담당하는 Natural-JS의 공통모듈입니다. Communicator 는 jQuery,ajax 모듈을 사용해서 Ajax로 서버와의 통신을 합니다. Ajax 통신외에 요청마다 Communicator.request 객체가 생성되어 웹 UI 안의 논리적인 페이지(탭, 임베드, 팝업등)의 Controller간 데이터를 송·수신 할 수 있고 불러온 페이지의 Controller 에서 요청정보를 확인 할 수 있습니다.</p>
 
-	<h3>나. 생성자(Constructor)</h3>
+	<h3>API DEMO</h3>
+	<div data-page="communicator" class="apidemo"></div>
+
+	<h3>생성자(Constructor)</h3>
 	<table>
 		<tr>
 			<th>Name</th>
@@ -183,10 +186,10 @@
 		</tr>
 	</table>
 
-	<h3>다. 기본옵션(Default options)</h3>
+	<h3>기본옵션(Default options)</h3>
 	<p>obj(arguments[0])가 JSON 오브젝트 타입의 옵션이면 Communicator.request(이하 request) 가 생성되어서 request 의 옵션으로 지정 됩니다. request 의 기본옵션 부분을과 동일하므로 "마. Communicator.request"의 기본옵션 부분을 참고하기 바랍니다.</p>
 
-	<h3>라. 함수(Methods)</h3>
+	<h3>함수(Methods)</h3>
 	<table>
 		<tr>
 			<th>Name</th>
@@ -211,7 +214,7 @@
 		</tr>
 	</table>
 
-	<h3>마. Communicator.request</h3>
+	<h3>Communicator.request</h3>
 
 	<h4>1) 개요</h4>
 	<p>Communicator.request(이하 request) 는 단독으로 사용될 수 없고 N.comm 으로 요청을 보낼때마다 N.comm 에 의해서 생성 되는 모듈입니다. request는 요청에 대한 옵션을 지정 할 수 있고 요청정보를 가지고 있고 페이지간 데이터 전달을 위한 attr 메서드가 구현 되어 있습니다. </p>
@@ -373,9 +376,6 @@
 		</tr>
 	</table>
 
-	<h3>바. API DEMO</h3>
-	<div data-page="communicator" class="apidemo"></div>
-
 	<fieldset>
 		<legend>주석</legend>
 		<ul class="footnotes">
@@ -387,10 +387,10 @@
 <div id="tab3">
 	<h2>Context(N.context)</h2>
 
-	<h3>가. 개요</h3>
+	<h3>개요</h3>
 	<p>Context(이하 N.context)는 Natural-JS 의 생명주기(Life-Cycle, 페이지가 표시되고 다른페이지로 redirect 되기 전까지) 안 에서의 데이터 저장소 역할을 합니다. Natural-JS 의 환경설정 값(Config)과 메시지등이 N.context 객체에 저장 됩니다.</p>
 
-	<h3>나. 함수(Methods)</h3>
+	<h3>함수(Methods)</h3>
 	<table>
 		<tr>
 			<th>Name</th>
@@ -426,7 +426,7 @@
 <div id="tab4">
 	<h2>Config(natural.config.js)</h2>
 
-	<h3>가. 개요</h3>
+	<h3>개요</h3>
 	<p>Natural-JS 의 환경설정 파일입니다. 설정값은 N.context 에 저장 되며 각 패키지 별로 따로 저장 됩니다. </p>
 
 	<ul>

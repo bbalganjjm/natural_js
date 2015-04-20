@@ -7,6 +7,14 @@
 			<span class="b">개요</span> : 컴포넌트나 라이브러리에 대한 개요.
 		</li>
 		<li>
+			<span class="b">API DEMO</span> : 해당 라이브러리나 컴포넌트를 Test 해 볼 수 있는 데모 프로그램
+			<p class="alert">
+				Grid 나 Form, Popup 등의 컴포넌트 디자인은 사이트에서 전역으로 정의한 table, div, input 등 각 <b>컴포넌트의 생성을 위한 템플릿 요소에 정의된 Style 속성에 따라 UI 컴포넌트의 모양 및 색상이 결정</b> 됩니다.<br>
+				UI 컴포넌트들의 상세 디자인을 변경하려면 <b>"natural_js/css/natural.ui.css"</b> 파일을 수정하기 바랍니다.<br>
+			</p>
+			<p class="alert">Internet Explorer 8 브라우저에서만 textarea에 text로 지정된 구문이 실제 Function객체로 인스턴스화 되지않아 오류가 발생합니다. 이는 데모페이지안에서 컴포넌트들의 이벤트 콜백을 지정하는 부분에서만 발생하는 오류이므로 안심하고 사용해도 됩니다. 실제 개발에서는 이런오류가 발생하지 않습니다.</p>
+		</li>
+		<li>
 			<span class="b">생성자</span>(Constructor) : 컴포넌트나 라이브러리를 생성할 때 실행되는 기능과 생성자 arguments 에 대한 설명<br>
 			예) <span class="b">N.grid</span><sup>1)</sup>(<span class="bi">argument[0]</span><sup>2)</sup>), <span class="b">N().grid</span>(<span class="bi">argument[0]</span>)
 		</li>
@@ -34,14 +42,6 @@
 		<li>
 			<span class="b">함수</span>(Methods) : 컴포넌트나 라이브러리 인스턴스에서 제공하는 기능과 arguments 에 대한 설명<br>
 			예) N([]).grid( { resizeable : true } ).<span class="bi">revert</span><sup>5)</sup>(<span class="b">3</span><sup>6)</sup>)
-		</li>
-		<li>
-			<span class="b">API DEMO</span> : 해당 라이브러리나 컴포넌트를 Test 해 볼 수 있는 데모 프로그램
-			<p class="alert">
-				Grid 나 Form, Popup 등의 컴포넌트 디자인은 사이트에서 전역으로 정의한 table, div, input 등 각 <b>컴포넌트의 생성을 위한 템플릿 요소에 정의된 Style 속성에 따라 UI 컴포넌트의 모양 및 색상이 결정</b> 됩니다.<br>
-				UI 컴포넌트들의 상세 디자인을 변경하려면 <b>"natural_js/css/natural.ui.css"</b> 파일을 수정하기 바랍니다.<br>
-			</p>
-			<p class="alert">Internet Explorer 8 브라우저에서만 textarea에 text로 지정된 구문이 실제 Function객체로 인스턴스화 되지않아 오류가 발생합니다. 이는 데모페이지안에서 컴포넌트들의 이벤트 콜백을 지정하는 부분에서만 발생하는 오류이므로 안심하고 사용해도 됩니다. 실제 개발에서는 이런오류가 발생하지 않습니다.</p>
 		</li>
 	</ul>
 	<fieldset>
