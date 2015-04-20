@@ -1,5 +1,5 @@
 /*!
- * Natural-DATA v0.8.1.4
+ * Natural-DATA v0.8.1.6
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	var version = "0.8.1.4";
+	var version = "0.8.1.6";
 
 	// N local variables
 	$.fn.extend(N, {
@@ -385,7 +385,7 @@
 				if(args === undefined) {
 					return str;
 				}
-				str = str.replace(/\s+|T|-|:|\./g, "");
+				str = str.replace(/[^0-9]/g, "");
 
 				//use datepicker, monthpicker
 				if(N.datepicker !== undefined) {
@@ -393,16 +393,41 @@
 						var isMonth = args[1] === "month" ? true : false;
 						ele.datepicker({
 							monthonly : isMonth,
-							onSelect : function(context, date) {
-								context.prop("readonly", false);
-								context.val(date.obj.formatDate(isMonth ? "Ym" : "Ymd")).trigger("focusout.dataSync.form").trigger("focusout.form.format");
-								context.prop("readonly", true);
+							onBeforeShow : function(context, contents) {
+								context.unbind("focusout.prevent.format.date", N.element.disable);
+					            context.tpBind("focusout.prevent.format.date", N.element.disable);
+							},
+							onSelect : function(context, date, monthonly) {
+								var formats = N.context.attr("data").formatter.date;
+								var isReadonly = false;
+								if(context.prop("readonly")) {
+									context.prop("readonly", false);
+									isReadonly = true;
+								}
+								var val = date.obj.formatDate(date.format);
+								if(date.obj.formatDate("Y").length <= 3) {
+									val = val.replace(date.obj.formatDate("Y"), N.string.lpad(date.obj.formatDate("Y"), 4, "0"));
+								}
+
+								if(!monthonly && val.length === 7) {
+									val = "0" + val;
+								} else if(monthonly && val.length === 5) {
+									val = "0" + val;
+								}
+								context.val(val);
+
+								if(isReadonly) {
+									context.prop("readonly", true);
+								}
 								return false;
+							},
+							onBeforeHide : function(context, contents) {
+								context.unbind("focusout.prevent.format.date", N.element.disable).trigger("focusout.form.dataSync").trigger("focusout.form.format");
 							}
 						});
 					}
 				} else {
-					N.warn("if use date & month options, load Natural-UI datepicker library");
+					N.warn("if use date & month options, load Natural-UI library");
 				}
 
 				if (args[0] !== undefined) {
