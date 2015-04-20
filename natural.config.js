@@ -98,7 +98,7 @@
 					 * 특정 영역에 html 페이지를 불러올때 전환 효과 지정, false 이면 효과 없음.
 					 * ex) ["fadeIn", 300, null], 적용안할때는 false
 					 */
-					"effect" : ["slideDown", 300, null]
+					"effect" : ["fadeIn", 300, null]
 				}
 			}
 		}
@@ -149,19 +149,19 @@
 				 * 년월일 시 날짜포멧
 				 */
 				YmdH : function() {
-					return "Y" + this.dateSepa + "m" + this.dateSepa + "d H";
+					return this.Ymd() + " H";
 				},
 				/**
 				 * 년월일 시분 날짜포멧
 				 */
 				YmdHi : function() {
-					return "Y" + this.dateSepa + "m" + this.dateSepa + "d H" + this.timeSepa + "i";
+					return this.Ymd() + " H" + this.timeSepa + "i";
 				},
 				/**
 				 * 년월일 시분초 날짜포멧
 				 */
 				YmdHis : function() {
-					return "Y" + this.dateSepa + "m" + this.dateSepa + "d H" + this.timeSepa + "i" + this.timeSepa + "s";
+					return this.Ymd() + " H" + this.timeSepa + "i" + this.timeSepa + "s";
 				}
 			}
 		},
@@ -346,12 +346,18 @@
 				"ko_KR" : {
 					"year" : "년",
 					"month" : "월",
-					"days" : "일,월,화,수,목,금,토"
+					"days" : "일,월,화,수,목,금,토",
+					"yearNaN" : "년도는 서기 100년 이하는 입력 할 수 없습니다.",
+					"monthNaN" : "월은 1월 부터 12월 까지 입력 할 수 있습니다.",
+					"dayNaN" : "일은 1일부터 {0}일 까지 입력 할 수 있습니다."
 				},
 				"en_US" : {
 					"year" : "Year",
 					"month" : "Month",
-					"days" : "Sun,Mon,Tue,Wed,Thu,Fri,Sat"
+					"days" : "Sun,Mon,Tue,Wed,Thu,Fri,Sat",
+					"yearNaN" : "You can not enter less AD 100 years",
+					"monthNaN" : "You can enter 1 to 12 months value",
+					"dayNaN" : "You can enter 1 to {0} days value"
 				}
 			}
 		},
