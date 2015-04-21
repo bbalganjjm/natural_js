@@ -87,6 +87,7 @@ span.msg__ ul.msg_line_box__ li {
 	color: #f90000;
 	margin-right: 5px;
 	font-style: italic;
+	font-weight: normal;
 }
 
 span.msg__ a.msg_close__ {
