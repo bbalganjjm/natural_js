@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.4.1
+ * Natural-UI v0.8.4.2
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	var version = "0.8.4.1";
+	var version = "0.8.4.2";
 
 	// N local variables
 	$.fn.extend(N, {
@@ -598,9 +598,22 @@
 		        	}
 				});
 
+		        // lock for when the click datepicker panel
+		        // prevent blur event of opts.context
+		        var lock;
+	        	$(window.document).bind("mousedown.datepicker", function(e) {
+	        		if($(e.target).closest(opts.contents).length > 0) {
+	        			lock = true;
+					} else {
+						lock = false;
+					}
+	        	});
+
 		        // when the context(input) is focused out, close the datepicker panel
 		        opts.context.bind("blur.datepicker", function() {
-		        	this_.hide();
+		        	if(!lock) {
+		        		this_.hide();
+		        	}
 		        });
 
 		        // set datapicker position
@@ -632,8 +645,9 @@
 					};
 				}
 
-				 opts.context.unbind("blur.datepicker");
-				$(document).unbind("keyup.datepicker");
+				$(window.document).unbind("mousedown.datepicker");
+				opts.context.unbind("blur.datepicker");
+				$(window.document).unbind("keyup.datepicker");
 				$(window).unbind("resize.datepicker");
 				opts.contents.fadeOut(150);
 				opts.context.get(0).blur();
@@ -840,7 +854,9 @@
 				// bind focusin event
 				if(opts.focusin) {
 					opts.context.bind("focusin.datepicker", function() {
-						this_.show();
+						if(!opts.contents.is(":visible")) {
+							this_.show();
+						}
 					});
 				}
 
