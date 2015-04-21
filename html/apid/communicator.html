@@ -1,4 +1,4 @@
-<article id="communicator">
+<article id="communicator" class="view-code">
 	<div class="demoBox">
 		<h4>1) Get json data from server(html/apid/data/grid.json)</h4>
 
@@ -62,23 +62,12 @@
 
 		<p class="smallContTit">Result : </p>
 		<div class="result" style="min-height: 400px;"></div>
-
-		<p class="smallContTit">Source Code :</p>
-		<pre class="line-numbers"><code id="sourceCode" class="language-markup"></code></pre>
 	</div>
 </article>
 
 <script type="text/javascript">
 	N("article#communicator").cont({
 	    init : function(view, request) {
-	    	// source Code
-	    	N.comm({
-	       		url : "html/apid/" + view.attr("id") + ".html",
-	       		dataType : "html"
-	       	}).submit(function(html) {
-	       		N("#sourceCode", view).text(html);
-	       	});
-
 	    	// initialize buttons in div.btnBox
 	    	N("div.btnBox a", view).button();
 

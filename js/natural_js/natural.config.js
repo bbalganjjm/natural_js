@@ -47,6 +47,11 @@
 						}
 					},
 					success : function(request, data, textStatus, xhr) {
+						if(request.options.dataType === "html" && N(data).hasClass("view-code")) {
+							this.pageId = N(data).attr("id");
+						} else {
+							this.pageId = undefined;
+						}
 					},
 					error : function(request, xhr, textStatus, errorThrown) {
 						if(request.options.dataType === "html") {
@@ -58,15 +63,9 @@
 						}
 					},
 					complete : function(request, xhr, textStatus) {
-						// code highlight
-						var nCodeEle;
-				    	$("code").each(function() {
-				    		nCodeEle = N(this);
-				    		if(!nCodeEle.hasClass("code_highlighter__") && !N.string.isEmpty(nCodeEle.text())) {
-				    			Prism.highlightElement(this);
-				    			nCodeEle.addClass("code_highlighter__");
-				    		}
-				    	});
+						if(this.pageId !== undefined) {
+							CommonUtilController.sourceCode(N("article#" + this.pageId + ".view-code"), request.get("url"));
+						}
 					}
 				},
 				"dataFilter" : {

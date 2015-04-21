@@ -46,7 +46,11 @@ audio
 
 
 
+
+
 :not
+
+
 
 
 
@@ -61,6 +65,8 @@ controls
 
 
 
+
+
 )
 {
 display
@@ -68,7 +74,11 @@ display
 
 
 
+
+
 :
+
+
 
 
 
@@ -79,13 +89,19 @@ none
 
 
 
+
+
 ;
 height
 
 
 
 
+
+
 :
+
+
 
 
 
@@ -259,10 +275,6 @@ article h4 {
 	font-size: 14px; margin: 0 0 15px 0;
 }
 
-article .smallContTit {
-	padding-left: 16px; font-size: 13px; font-weight: bold; background: url("../images/icon/sct_leaf.gif") no-repeat 0 2px; margin: 0 0 15px 0;
-}
-
 article a.link {
 	padding-left: 18px; background: url("../images/icon/link.png") no-repeat 0 50%; border-bottom: 1px solid #00c000; color: #00c000;
 }
@@ -354,4 +366,69 @@ article.apiDoc .apidemo>article textarea {
 
 article.apiDoc .apidemo>article .dataBox {
 	margin-bottom: 15px;
+}
+
+/* Examples */
+article .intro {
+	padding: 10px; background-color: #ffeeee; border-radius: 3px; margin-bottom: 20px;
+}
+
+article .smallContTit {
+	padding-left: 15px; font-size: 12px; font-weight: normal; background: url("../images/icon/sct_leaf.gif") no-repeat 0 3px; margin: 0 0 0px 0;
+}
+
+article .searchBox {
+	border: 1px solid #cccccc;
+	box-shadow: inset 1px 1px 3px #eeeeee;
+	background-color: #fefefe;
+	border-radius: 3px;
+	margin-bottom: 15px;
+}
+
+article .searchBox ul {
+	list-style: none; margin: 0; padding: 0;
+}
+
+article .searchBox ul li {
+	font-size: 12px;
+	margin: 0;
+	padding: 10px;
+}
+
+article .searchBox ul li.inputs {
+	border: 1px dotted #eeeeee;
+}
+
+article .searchBox ul li.buttons {
+	text-align: right;
+}
+
+article .searchBox li > label {
+	margin: 0 15px 0 10px;
+	font-weight: bold;
+}
+
+article .searchBox li > label label {
+	font-weight: normal;
+}
+
+article .searchBox label input, article .searchBox label select{
+	margin-left: 15px;
+	box-shadow: 1px 1px 2px #EEE;
+	border-color: #cccccc;
+}
+
+article .click {
+	margin-top: 30px;
+	padding: 5px 44px 5px 15px;
+	background: url("../images/icon/click.png") no-repeat 136px 6px;
+	display: inline-block;
+	height: 35px;
+	font-weight: bold;
+	color: #008800;
+	border: 1px dotted #008800;
+	border-radius: 3px;
+	box-shadow: 1px 1px 3px #ccffcc;
+	background-color: #efe;
+	cursor: pointer;
 }

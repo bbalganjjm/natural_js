@@ -64,5 +64,31 @@ var CommonUtilController = {
 				location.hash = hash_;
 			}
 		});
+	},
+	sourceCode : function(view, url) {
+		var btnEle = N('<a class="click">View Source Code</a>');
+		if(view.find(btnEle).length === 0) {
+			view.append(btnEle);
+			view.append('<pre id="sourceCodeBox" class="line-numbers" style="display: none;"><code id="sourceCode" class="language-markup"></code></pre>');
+			btnEle.click(function() {
+				var sourceCodeBox = view.find("#sourceCodeBox");
+				if(!sourceCodeBox.is(":visible")) {
+					view.find("#sourceCodeBox").slideDown();
+				} else {
+					view.find("#sourceCodeBox").slideUp();
+				}
+			});
+	    	N.comm({
+	       		url : url,
+	       		dataType : "text"
+	       	}).submit(function(html) {
+	       		N("#sourceCode", view).text(html);
+
+	       		// code highlight
+				view.find("code").each(function() {
+					Prism.highlightElement(this);
+		    	});
+	       	});
+		}
 	}
 }

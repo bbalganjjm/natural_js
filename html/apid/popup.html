@@ -1,4 +1,4 @@
-<article id="popup">
+<article id="popup" class="view-code">
 	<h4>1) Create popup in this page element</h4>
 
 	<p class="smallContTit">Default options : </p>
@@ -126,9 +126,6 @@
 		<a id="btnOpenOther" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>open</a>
 		<a id="btnReload" href="#" data-opts='{ "color": "white", "size": "large" }'>Reload this block page</a>
 	</div>
-
-	<p class="smallContTit">Source Code :</p>
-	<pre class="line-numbers"><code id="sourceCode" class="language-markup"></code></pre>
 </article>
 
 <script type="text/javascript">
@@ -136,14 +133,6 @@
 		localPopup : null,
 		otherPopup : null,
 	    init : function(view, request) {
-	    	// source Code
-	    	N.comm({
-	       		url : "html/apid/" + view.attr("id") + ".html",
-	       		dataType : "html"
-	       	}).submit(function(html) {
-	       		N("#sourceCode", view).text(html);
-	       	});
-
 	    	// initialize buttons in div.btnBox
 	    	this.initButton(view);
 

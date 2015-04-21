@@ -1,4 +1,4 @@
-<article id="grid">
+<article id="grid" class="view-code">
 	<p class="smallContTit">Data :</p>
 	<div class="dataBox">
 		/natural_js/html/apid/data/grid.json
@@ -176,9 +176,6 @@
 			</tr>
 		</tbody>
 	</table>
-
-	<p class="smallContTit">Source Code :</p>
-	<pre class="line-numbers"><code id="sourceCode" class="language-markup"></code></pre>
 </article>
 
 <script type="text/javascript">
@@ -186,14 +183,6 @@
 		grid : undefined,
 		gridData : undefined,
 	    init : function(view, request) {
-	    	// source Code
-	    	N.comm({
-	       		url : "html/apid/" + view.attr("id") + ".html",
-	       		dataType : "html"
-	       	}).submit(function(html) {
-	       		N("#sourceCode", view).text(html);
-	       	});
-
 	    	// initialize buttons in div.btnBox
 	    	N("div.btnBox a", view).button();
 

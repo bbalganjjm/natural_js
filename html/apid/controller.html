@@ -1,25 +1,15 @@
-<article id="controller">
+<article id="controller" class="view-code">
 	<div class="demoBox">
 		<p class="smallContTit">View Info :</p>
 		<pre class="line-numbers"><code id="view" class="language-javascript"></code></pre>
 		<p class="smallContTit">Request Info :</p>
 		<pre><code id="request" class="language-javascript"></code></pre>
-		<p class="smallContTit">Source Code :</p>
-		<pre class="line-numbers"><code id="sourceCode" class="language-markup"></code></pre>
 	</div>
 </article>
 
 <script type="text/javascript">
 	N("article#controller").cont({
 	    init : function(view, request) {
-	    	// source Code
-	    	N.comm({
-	       		url : "html/apid/" + view.attr("id") + ".html",
-	       		dataType : "html"
-	       	}).submit(function(html) {
-	       		N("#sourceCode", view).text(html);
-	       	});
-
 	    	// view info
 	    	N("#view", view).text('<article id="controller">' + view.html() + "</article>");
 

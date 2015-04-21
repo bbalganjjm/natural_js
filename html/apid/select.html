@@ -1,4 +1,4 @@
-<article id="select" title="Select 예제">
+<article id="select" class="view-code" title="Select 예제">
 	<p class="smallContTit">Data :</p>
 	<div class="dataBox">
 		<pre class="data" class="line-numbers"><code id="data" class="language-javascript">[{
@@ -162,23 +162,12 @@
 			</tr>
 		</table>
 	</div>
-
-	<p class="smallContTit">Source Code :</p>
-	<pre class="line-numbers"><code id="sourceCode" class="language-markup"></code></pre>
 </article>
 
 <script type="text/javascript">
 	N("article#select").cont({
 		"select" : null,
 	    init : function(view, request) {
-	    	// source Code
-	    	N.comm({
-	       		url : "html/apid/" + view.attr("id") + ".html",
-	       		dataType : "html"
-	       	}).submit(function(html) {
-	       		N("#sourceCode", view).text(html);
-	       	});
-
 	    	// initialize buttons in div.btnBox
 	    	N("div.btnBox a", view).button();
 

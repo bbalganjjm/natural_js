@@ -1,4 +1,4 @@
-<article id="formatter">
+<article id="formatter" class="view-code">
 	<p class="smallContTit">Data :</p>
 	<pre class="line-numbers"><code id="data" class="language-javascript">[
     {
@@ -51,22 +51,11 @@
 
 	<p class="smallContTit">Command Result : </p>
 	<pre class="line-numbers"><code id="result" class="language-javascript"></code></pre>
-
-	<p class="smallContTit">Source Code :</p>
-	<pre class="line-numbers"><code id="sourceCode" class="language-markup"></code></pre>
 </article>
 
 <script type="text/javascript">
 	N("article#formatter").cont({
 	    init : function(view, request) {
-	    	// source Code
-	    	N.comm({
-	       		url : "html/apid/" + view.attr("id") + ".html",
-	       		dataType : "html"
-	       	}).submit(function(html) {
-	       		N("#sourceCode", view).text(html);
-	       	});
-
 	    	// initialize buttons in div.btnBox
 	    	N("div.btnBox a", view).button();
 

@@ -1,4 +1,4 @@
-<article id="form">
+<article id="form" class="view-code">
 	<p class="smallContTit">Data : </p>
 	<div class="dataBox">
 		<pre class="data" class="line-numbers"><code id="data" class="language-javascript">[
@@ -269,22 +269,11 @@
 			</tr>
 		</table>
 	</div>
-
-	<p class="smallContTit">Source Code :</p>
-	<pre class="line-numbers"><code id="sourceCode" class="language-markup"></code></pre>
 </article>
 
 <script type="text/javascript">
 	N("article#form").cont({
 	    init : function(view, request) {
-	    	// source Code
-	    	N.comm({
-	       		url : "html/apid/" + view.attr("id") + ".html",
-	       		dataType : "html"
-	       	}).submit(function(html) {
-	       		N("#sourceCode", view).text(html);
-	       	});
-
 	    	// initialize buttons in div.btnBox
 	    	N("div.btnBox a", view).button();
 

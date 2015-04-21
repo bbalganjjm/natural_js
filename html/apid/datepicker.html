@@ -1,4 +1,4 @@
-<article id="datepicker">
+<article id="datepicker" class="view-code">
 	<p class="smallContTit">Default options : </p>
 	<table class="form">
 		<tr>
@@ -44,23 +44,12 @@
     	<label for="datepicker">Datepicker</label> <input id="datepicker" type="text" />
     	Click! this text input element <b>after click the [Apply Datepicker] button</b>
     </div>
-
-	<p class="smallContTit">Source Code :</p>
-	<pre class="line-numbers"><code id="sourceCode" class="language-markup"></code></pre>
 </article>
 
 <script type="text/javascript">
 	N("article#datepicker").cont({
 		datepicker : undefined,
 	    init : function(view, request) {
-	    	// source Code
-	    	N.comm({
-	       		url : "html/apid/" + view.attr("id") + ".html",
-	       		dataType : "html"
-	       	}).submit(function(html) {
-	       		N("#sourceCode", view).text(html);
-	       	});
-
 	    	// initialize buttons in div.btnBox
 	       	N("div.btnBox a", view).button();
 
