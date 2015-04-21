@@ -1,5 +1,5 @@
 /*!
- * Natural-CORE v0.8.2.4
+ * Natural-CORE v0.8.2.5
  * bbalganjjm@gmail.com
  *
  * Includes json2.js & formatdate.js
@@ -12,7 +12,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	var version = "0.8.2.4", N;
+	var version = "0.8.2.5", N;
 
 	// Use jQuery init
 	N = function(selector, context) {
@@ -53,16 +53,18 @@
 		gc : {
 			minimum : function() {
 				$(window).unbind("resize.datepicker");
-				$(document).unbind("keyup.datepicker");
-				$(document).unbind("keyup.alert");
+				$(window.document).unbind("mousedown.datepicker");
+				$(window.document).unbind("keyup.datepicker");
+				$(window.document).unbind("keyup.alert");
 				return true;
 			},
 			full : function() {
 				$(window).unbind("resize.datepicker");
-				$(document).unbind("keyup.datepicker");
-				$(document).unbind("keyup.alert");
-				$(document).unbind("dragstart.grid.vResize").unbind("selectstart.grid.vResize").unbind("mousemove.grid.vResize").unbind("mouseup.grid.vResize");
-				$(document).unbind("dragstart.grid.resize").unbind("selectstart.grid.resize").unbind("mousemove.grid.resize").unbind("mouseup.grid.resize");
+				$(window.document).unbind("mousedown.datepicker");
+				$(window.document).unbind("keyup.datepicker");
+				$(window.document).unbind("keyup.alert");
+				$(window.document).unbind("dragstart.grid.vResize").unbind("selectstart.grid.vResize").unbind("mousemove.grid.vResize").unbind("mouseup.grid.vResize");
+				$(window.document).unbind("dragstart.grid.resize").unbind("selectstart.grid.resize").unbind("mousemove.grid.resize").unbind("mouseup.grid.resize");
 				return true;
 			}
 		},
