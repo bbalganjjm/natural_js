@@ -30,11 +30,11 @@
 		<tr>
 			<th>onOk</th>
 			<td><textarea id="onOk">function() {
-	alert("Ok");
+	N.log("Ok");
 }</textarea><br />Callback function for Ok button event</td>
 			<th>onCancel</th>
 			<td><textarea id="onCancel">function() {
-	alert("Cancel");
+	N.log("Cancel");
 }</textarea><br />callback function for Cancel button event</td>
 		</tr>
 	</table>
@@ -102,7 +102,7 @@
 			<td><textarea id="onOk"></textarea><br />Callback function for Ok button event</td>
 			<th>onCancel</th>
 			<td><textarea id="onCancel">function() {
-	alert("Cancel");
+	N.log("Cancel");
 }</textarea><br />callback function for Cancel button event</td>
 		</tr>
 		<tr>
@@ -115,7 +115,7 @@
 		<tr>
 			<th>onClose</th>
 			<td><textarea id="onClose">function(onCloseData) {
-	alert(N.json.format(onCloseData));
+	N.log(N.json.format(onCloseData));
 }</textarea><br /></td>
 			<th>onCloseData</th>
 			<td><textarea id="onCloseData">This value is sent to onClose callback functions argument of parent page</textarea><br /></td>
