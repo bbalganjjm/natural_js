@@ -3,13 +3,14 @@
 	<div class="intro">
 		<p class="smallContTit">검색박스와 그리드가 조합된 일반적인 데이터 목록 화면 입니다.</p>
 		<p class="smallContTit">서버와 연계되지 않은 UI 쪽 코딩 예제 입니다. 때문에 검색 조건으로 입력한 데이터는 그리드에 적용되지 않습니다. 서버쪽으로 전달되는 파라미터만 확인 바랍니다.</p>
+		<p class="smallContTit">서버에서는 브라우저에서 POST로 전달된 JSON 문자열 데이터를 변환하여 파라미터로 사용하면 됩니다.</p>
 		<p class="smallContTit">검색박스에는 Form(N.form) 컴포넌트와 Select(N.select) 컴포넌트가 목록에는 Grid(N.grid) 컴포넌트가 사용되었습니다.</p>
 	</div>
 
 	<div class="searchBox">
 		<ul>
 			<li class="inputs">
-				<label>Name<input id="name" type="text" data-validate='[["required"]]' /></label>
+				<label>Name<input id="name" type="text" data-validate='[["required"], ["alphabet+integer"]]' /></label>
 				<label>Gender<input id="gender" type="radio" /></label>
 				<label>Eye Color<select id="eyeColor"><option>선택</option></select></label>
 			</li>
@@ -49,30 +50,32 @@
 
 <script type="text/javascript">
 N("article#exap0100").cont({
+	genderCodes : [{
+     	"key" : "male",
+     	"val" : "male"
+     },{
+     	"key" : "female",
+     	"val" : "female"
+    }],
+	eyeColorCodes : [{
+     	"key" : "blue",
+     	"val" : "blue"
+     },{
+     	"key" : "brown",
+     	"val" : "brown"
+     },{
+     	"key" : "green",
+     	"val" : "green"
+	}],
     init : function(view, request) {
     	// 1. initialize buttons
     	N(".buttons a", view).button();
 
     	// 2. initialize N.select and bind data for search box inputs
     	// 2-1. create #gender select
-		N([{
-	     	"key" : "male",
-	     	"val" : "male"
-	     },{
-	     	"key" : "female",
-	     	"val" : "female"
-	    }]).select(N("div.searchBox li.inputs #gender", view)).bind();
+		N(this.genderCodes).select(N("div.searchBox li.inputs #gender", view)).bind();
 		// 2-2. create #eyeColor select
-		N([{
-	     	"key" : "blue",
-	     	"val" : "blue"
-	     },{
-	     	"key" : "brown",
-	     	"val" : "brown"
-	     },{
-	     	"key" : "green",
-	     	"val" : "green"
-		}]).select(N("div.searchBox li.inputs #eyeColor", view)).bind();
+		N(this.eyeColorCodes).select(N("div.searchBox li.inputs #eyeColor", view)).bind();
 
     	// 3. initialize N.form and add new row data for search box
     	var form = N([]).form({
@@ -92,7 +95,6 @@ N("article#exap0100").cont({
        	}).bind();
 
     	// 5. bind events
-    	var this_ = this;
     	N("#btnSearch", view).click(function(e) {
             e.preventDefault();
             if(form.validate()) {
@@ -103,8 +105,8 @@ N("article#exap0100").cont({
              	}).submit(function(data, request) {
              		grid.bind(data);
              		N(window).alert({
-             			msg : "<pre>" + N.json.format(request.get()).replace(/\\/g, "") + "</pre>",
-             			title : "서버 요청정보"
+             			title : "서버 요청정보",
+             			msg : "<pre>" + N.json.format(request.get()).replace(/\\/g, "") + "</pre>"
              		}).show();
              	});
             }
