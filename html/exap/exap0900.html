@@ -1,0 +1,185 @@
+<article id="exap0900" class="view-code">
+	<h1>Grid 와 Form, Popup 이 결합된 형태의 예제</h1>
+	<div class="intro">
+		<p class="smallContTit">그리드의 행을 클릭하면 클릭한 행의 데이터가 바인드된 폼이 팝업 으로 표시 됩니다.</p>
+		<p class="smallContTit">폼과 그리드는 같은 데이터를 참고하고 있으므로 둘중 한쪽에서 데이터 변동이 있을 시 나머지 한쪽도 실시간으로 변경된 데이터가 동기화 됩니다.</p>
+		<p id="progress" class="smallContTit">github.io 의 네트워크 속도가 느려 데이터가 서버에서 브라우저까지 전송되는 시간이 조금 걸립니다.</p>
+	</div>
+
+	<div class="searchBox">
+		<ul>
+			<li class="buttons">
+				<a id="btnSearch" href="#">조회</a>
+				<a id="btnSave" href="#" data-opts='{ "color": "skyblue" }'>저장</a>
+			</li>
+		</ul>
+	</div>
+
+	<table id="grid" class="grid" style="width: 100%;">
+		<thead>
+			<tr>
+				<th width="9%">index</th>
+				<th width="17%">name</th>
+				<th width="*">email</th>
+				<th width="11%">gender</th>
+				<th width="13%">eyeColor</th>
+				<th width="7%">age</th>
+				<th width="13%">company</th>
+				<th width="12%">isActive</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td id="idx" align="center"></td>
+				<td id="name"></td>
+				<td id="email"></td>
+				<td id="gender" align="center"></td>
+				<td id="eyeColor" align="center"></td>
+				<td id="age"></td>
+				<td id="company"></td>
+				<td id="isActive" align="center"></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<table id="form" class="form" title="폼">
+		<tr>
+			<th width="85" align="right"><label for="picture">picture</label></th>
+			<td width="*"><img id="picture" /></td>
+		</tr>
+		<tr>
+			<th><label for="name">name</label></th>
+			<td>
+				<input id="name" type="text" data-validate='[["required"]]' />
+			</td>
+		</tr>
+		<tr>
+			<th><label for="email">email</label></th>
+			<td>
+				<input id="email" type="text" data-format='[["trimtoempty"], ["generic", "@@@@@@＊＊＊"]]' data-validate='[["required"], ["email"]]' />
+			</td>
+		</tr>
+		<tr>
+			<th><label for="_id">password</label></th>
+			<td>
+				<input id="_id" type="password" data-validate='[["required"]]' />
+			</td>
+		</tr>
+		<tr>
+			<th><label for="balance">balance</label></th>
+			<td>
+				<input id="balance" type="text" data-format='[["trimtoempty"], ["numeric", "$#,###.##0"]]' data-validate='[["required"], ["decimal"]]' />
+			</td>
+		</tr>
+		<tr>
+			<th><label for="phone">phone</label></th>
+			<td>
+				<input id="phone" type="text" readonly="readonly" />
+			</td>
+		</tr>
+		<tr>
+			<th><label for="age">age</label></th>
+			<td>
+				<input id="age" type="text" disabled="disabled" />
+				<input id="index" type="hidden" />
+			</td>
+		</tr>
+		<tr>
+			<th><label for="company">company</label></th>
+			<td>
+				<input id="company" type="text" data-validate='[["required"]]' />
+			</td>
+		</tr>
+		<tr>
+			<th><label for="registered">registered</label></th>
+			<td id="registered" data-format='[["date", 8]]'></td>
+		</tr>
+		<tr>
+			<th><label for="about">about</label></th>
+			<td>
+				<textarea id="about" data-format='[["trimtoempty"], ["limit", "50", "..."]]' data-validate='[["required"], ["korean"]]'></textarea>
+			</td>
+		</tr>
+		<tr>
+			<th><label for="greeting">about</label></th>
+			<td id="greeting"></td>
+		</tr>
+		<tr>
+			<th><label for="isActive">isActive</label></th>
+			<td>
+				<input id="isActive" type="checkbox" />
+			</td>
+		</tr>
+	</table>
+</article>
+
+<script type="text/javascript">
+
+N("article#exap0900").cont({
+	grid : undefined,
+	form : undefined,
+    init : function(view, request) {
+    	var cont = this;
+    	// 1. initialize buttons
+    	N(".buttons a", view).button();
+
+    	// 2. initialize form
+    	var form = this.form = N([]).form({
+    		context : N("table#form", view),
+    		revert : true
+    	}).bind();
+
+    	// 3. initialize popup
+    	var popup = N("table#form", view).popup({
+    		modal: false,
+    		onCancel : function() {
+    			form.revert();
+    		}
+    	});
+
+    	// 4. initialize grid
+    	this.grid = N([]).grid({
+       		context : N("table#grid", view),
+       		data : [],
+       		height : 350,
+       		resizable : true,
+       		sortable : true,
+       		select : true,
+       		hover : true,
+       		onSelect : function(i, ele, data) {
+       			cont.form.bind(i, data);
+       			popup.close();
+       			popup.open();
+       		},
+       		rowHandler : function(i, nTbody, rowData) {
+       			N("#idx", nTbody).text(String(i));
+       		}
+       	}).bind();
+
+    	// 5. bind events
+    	this.setEvents(this, view);
+    },
+    setEvents : function(this_, view) {
+    	N("#btnSearch", view).click(function(e) {
+            e.preventDefault();
+            N.comm({
+        		url : "html/exap/data/grid_big.json",
+        		async : false
+        	}).submit(function(data) {
+        		N("#progress", view).text("조회된 전체 데이터 건수 : " + data.length + " 건");
+        		this_.grid.bind(data);
+        	});
+        });
+
+    	N("#btnSave", view).click(function(e) {
+    		e.preventDefault();
+    		N(window).alert({
+    			title : "수정된 ROW DATA",
+    			msg : '<div class="pre">' + N.json.format(this_.grid.data("modified")) + '</div>',
+    			width : 550,
+    			height : 300
+    		}).show();
+    	});
+    }
+});
+</script>
