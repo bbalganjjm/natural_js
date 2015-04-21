@@ -300,6 +300,11 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 
 N("article#refr0102").cont({
     init : function(view, request) {
+    	// code highlight
+		view.find("code").each(function() {
+			Prism.highlightElement(this);
+    	});
+
     	CommonUtilController.setPageLinks(N("a.link", view));
     }
 });

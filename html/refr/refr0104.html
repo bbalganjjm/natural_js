@@ -694,6 +694,11 @@ fData의 값(결과값) :
 <script type="text/javascript">
 N("article#refr0104").cont({
     init : function(view, request) {
+    	// code highlight
+		view.find("code").each(function() {
+			Prism.highlightElement(this);
+    	});
+
     	CommonUtilController.setPageLinks(N("a.link", view));
 
     	// init tab

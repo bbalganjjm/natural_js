@@ -308,6 +308,11 @@ N("#viewCont").cont({
 <script type="text/javascript">
 	N("article#gtst0100").cont({
 	    init : function(view, request) {
+	    	// code highlight
+			view.find("code").each(function() {
+				Prism.highlightElement(this);
+	    	});
+
 	    	CommonUtilController.setPageLinks(N("a.link", view));
 	    }
 	});
