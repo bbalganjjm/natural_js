@@ -1,5 +1,5 @@
-<article id="exap0300" class="view-code">
-	<h1>상세데이터 입력 예제</h1>
+<article id="exap0400" class="view-code">
+	<h1>상세데이터 수정 예제</h1>
 	<div class="intro">
 		<p class="smallContTit">상세 데이터를 입력하는 화면 예제 입니다.</p>
 		<p class="smallContTit">서버와 연계되지 않은 UI 쪽 코딩 예제 입니다. 저장 시 서버쪽으로 전달되는 파라미터만 확인 바랍니다.</p>
@@ -11,6 +11,7 @@
 		<ul>
 			<li class="buttons">
 				<a id="btnSave" href="#" data-opts='{ "color": "skyblue" }'>저장</a>
+				<a id="btnRevert" href="#">되돌리기</a>
 			</li>
 		</ul>
 	</div>
@@ -82,7 +83,7 @@
 </article>
 
 <script type="text/javascript">
-N("article#exap0300").cont({
+N("article#exap0400").cont({
 	genderCodes: [{
     	"key" : "male",
     	"val" : "male"
@@ -155,8 +156,15 @@ N("article#exap0300").cont({
 		// 2-4. create #favoriteFruit select
 		N(this.favoriteFruitCodes).select(N("#detail #favoriteFruit", view)).bind();
 
-    	// 3. initialize N.form and generate new data
-    	var form = N([]).form(N("#detail", view)).add();
+    	// 3. initialize N.form
+    	var form = N([]).form({
+    		context : N("#detail", view),
+    		revert : true
+    	});
+    	// 3-1. N.form data bind
+    	N.comm("html/apid/data/grid.json").submit(function(data) {
+      		form.bind(0, data);
+      	});
 
     	// 4. bind events
     	// 4-1 Save data to server
@@ -180,6 +188,12 @@ N("article#exap0300").cont({
             	}).show();
             }
         });
+
+    	// Revert to initialize data
+    	N("#btnRevert", view).click(function(e) {
+    		e.preventDefault();
+    		form.revert();
+    	});
     }
 });
 </script>

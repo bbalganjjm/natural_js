@@ -98,13 +98,19 @@ N("article#exap0100").cont({
     	N("#btnSearch", view).click(function(e) {
             e.preventDefault();
             if(form.validate()) {
-            	// form.data() is just a request parameter
-            	N(form.data()).comm("html/apid/data/grid.json").submit(function(data, request) {
+            	/* Because github.io is not allow POST send, this sentence was annotated
+    			N(form.data()).comm("url").submit(function(data) {
+    				grid.bind(data);
+    			});
+    			*/
+
+    			// Temporary code
+    			N(form.data()).comm("html/apid/data/grid.json").submit(function(data, request) {
              		// Data bind by N.grid
              		grid.bind(data);
              		N(window).alert({
-             			title : "서버 요청정보",
-             			msg : "<pre>" + N.json.format(request.get()).replace(/\\/g, "") + "</pre>"
+             			title : "서버로 전송되는 파라미터",
+             			msg : "<pre>" + N.json.format(form.data()[0]).replace(/\\/g, "") + "</pre>"
              		}).show();
              	});
             }
