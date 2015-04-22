@@ -1,4 +1,4 @@
-<article id="exap0100" class="view-code">
+<article id="exap0200" class="view-code">
 	<h1>상세데이터조회 예제</h1>
 	<div class="intro">
 		<p class="smallContTit">상세 데이터를 조회하는 화면 예제 입니다.</p>
@@ -15,70 +15,68 @@
 
 	<table id="detail" class="form" style="width: 100%;">
 		<tr>
-			<th style="width: 20%;" align="right">picture</th>
-			<td width="*"><img id="picture" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D" /></td>
+			<th rowspan="11" style="width: 15%;" align="right">picture</th>
+			<td rowspan="11" style="width: 35%;" align="center" valign="middle"><img id="picture" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D" width="100%" /></td>
+			<th style="width: 15%;">Name</th>
+			<td id="name" style="width: 35%;"></td>
 		</tr>
 		<tr>
-			<th>name</th>
-			<td id="name"></td>
+			<th>Email</th>
+			<td id="email"></td>
 		</tr>
 		<tr>
-			<th>email</th>
-			<td id="email" data-format='[["trimtoempty"], ["generic", "@@@@@@＊＊＊"]]'></td>
+			<th>Password</th>
+			<td id="_id" data-format='[["trimtoempty"], ["generic", "@@＊＊＊＊＊＊"]]'></td>
 		</tr>
 		<tr>
-			<th>password</th>
-			<td id="_id"></td>
-		</tr>
-		<tr>
-			<th>balance</th>
+			<th>Balance</th>
 			<td id="balance" data-format='[["trimtoempty"], ["numeric", "$#,###.##0"]]'></td>
 		</tr>
 		<tr>
-			<th>phone</th>
+			<th>Phone</th>
 			<td id="phone"></td>
 		</tr>
 		<tr>
-			<th>age</th>
+			<th>Age</th>
 			<td id="age"></td>
 		</tr>
 		<tr>
-			<th>eye color</th>
+			<th>Eye color</th>
 			<td id="eyeColor"></td>
 		</tr>
 		<tr>
-			<th>company</th>
+			<th>Company</th>
 			<td id="company"></td>
 		</tr>
 		<tr>
-			<th>gender</th>
+			<th>Gender</th>
 			<td id="gender"></td>
 		</tr>
 		<tr>
-			<th>favorite fruit</th>
+			<th>Favorite fruit</th>
 			<td id="favoriteFruit"></td>
 		</tr>
 		<tr>
-			<th>registered</th>
-			<td id="registered"></td>
+			<th>Registered</th>
+			<td id="registered" data-format='[["date", 8]]'></td>
 		</tr>
 		<tr>
-			<th>about</th>
-			<td id="about"></td>
+			<th>About</th>
+			<td id="about" colspan="3"></td>
 		</tr>
 		<tr>
-			<th>greeting</th>
-			<td id="greeting"></td>
+			<th>Greeting</th>
+			<td id="greeting" colspan="3"></td>
 		</tr>
 		<tr>
-			<th>isActive</th>
-			<td id="isActive"></td>
+			<th>Active</th>
+			<td id="isActive" colspan="3"></td>
 		</tr>
 	</table>
 </article>
 
 <script type="text/javascript">
-N("article#exap0100").cont({
+N("article#exap0200").cont({
     init : function(view, request) {
     	// 1. initialize buttons
     	N(".buttons a", view).button();
@@ -89,11 +87,9 @@ N("article#exap0100").cont({
     	// 3. bind events
     	N("#btnSearch", view).click(function(e) {
             e.preventDefault();
-           	N.comm({
-           		url : "html/apid/data/grid.json",
-           		async : false
-           	}).submit(function(data) {
-           		form.bind(data);
+           	N.comm("html/apid/data/grid.json").submit(function(data) {
+           		// Data bind by N.form
+           		form.bind(0, data);
            	});
         });
     }

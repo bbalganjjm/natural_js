@@ -99,10 +99,8 @@ N("article#exap0100").cont({
             e.preventDefault();
             if(form.validate()) {
             	// form.data() is just a request parameter
-            	N(form.data()).comm({
-             		url : "html/apid/data/grid.json",
-             		async : false
-             	}).submit(function(data, request) {
+            	N(form.data()).comm("html/apid/data/grid.json").submit(function(data, request) {
+             		// Data bind by N.grid
              		grid.bind(data);
              		N(window).alert({
              			title : "서버 요청정보",

@@ -162,10 +162,7 @@ N("article#exap0900").cont({
     setEvents : function(this_, view) {
     	N("#btnSearch", view).click(function(e) {
             e.preventDefault();
-            N.comm({
-        		url : "html/exap/data/grid_big.json",
-        		async : false
-        	}).submit(function(data) {
+            N.comm("html/exap/data/grid_big.json").submit(function(data) {
         		N("#progress", view).text("조회된 전체 데이터 건수 : " + data.length + " 건");
         		this_.grid.bind(data);
         	});
