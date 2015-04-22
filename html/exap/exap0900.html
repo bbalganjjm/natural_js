@@ -162,8 +162,10 @@ N("article#exap0900").cont({
     setEvents : function(this_, view) {
     	N("#btnSearch", view).click(function(e) {
             e.preventDefault();
+            var art = N("div.searchBox", view).alert("github.io 의 네트워크 속도가 느려 데이터가 서버에서 브라우저까지 전송되는 시간이 조금 걸립니다.").show();
             N.comm("html/exap/data/grid_big.json").submit(function(data) {
         		N("#progress", view).text("조회된 전체 데이터 건수 : " + data.length + " 건");
+        		art.remove();
         		this_.grid.bind(data);
         	});
         });
