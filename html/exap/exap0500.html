@@ -1,0 +1,182 @@
+<article id="exap0100" class="view-code">
+	<h1>그리드 입력(C) 조회(R) 수정(U) 삭제(D) 예제</h1>
+	<div class="intro">
+		<p class="smallContTit">데이터 목록 화면에서 직접 입력 조회 수정 삭제를 처리하는 예제 입니다.</p>
+		<p class="smallContTit">서버와 연계되지 않은 UI 쪽 코딩 예제 입니다. 때문에 검색 조건으로 입력한 데이터는 그리드에 적용되지 않습니다. 서버쪽으로 전달되는 파라미터만 확인 바랍니다.</p>
+		<p class="smallContTit">서버에서는 브라우저에서 POST로 전달된 JSON 문자열 데이터를 변환하여 파라미터로 사용하면 됩니다.</p>
+		<p class="smallContTit">그리드의 모양과 스타일은 natural.ui.css 에서 바꿀 수 있습니다. 사이트 디자인에 맞게 수정 하시기 바랍니다.</p>
+		<p class="smallContTit">본예제에서는 행선택 유무를 색깔로 지정(multiselect 옵션)되게 되어있지만 jQuery를 이용하여 체크박스로도 구현 가능합니다.</p>
+	</div>
+
+	<div class="searchBox">
+		<ul>
+			<li class="inputs">
+				<label>Name<input id="name" type="text" data-validate='[["required"], ["alphabet+integer"]]' /></label>
+				<label>Gender<input id="gender" type="radio" /></label>
+				<label>Eye Color<select id="eyeColor"><option>선택</option></select></label>
+			</li>
+			<li class="buttons">
+				<a id="btnAdd" href="#" data-opts='{ "color": "blue" }'>추가</a>
+				<a id="btnDelete" href="#" data-opts='{ "color": "gray" }'>삭제</a>
+				<a id="btnSave" href="#" data-opts='{ "color": "skyblue" }'>저장</a>
+				<a id="btnSearch" href="#">조회</a>
+			</li>
+		</ul>
+	</div>
+
+	<table id="grid" class="grid" style="width: 100%;">
+		<thead>
+			<tr>
+				<th width="9%">Index</th>
+				<th width="17%">Name</th>
+				<th width="*">Email</th>
+				<th width="11%">Gender</th>
+				<th width="13%">Eye Color</th>
+				<th width="7%">Age</th>
+				<th width="13%">Registered</th>
+				<th width="12%">Active</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td id="index" align="center"></td>
+				<td><input id="name" type="text" data-validate='[["required"]]' /></td>
+				<td><input id="email" type="text" data-validate='[["required"], ["email"]]' /></td>
+				<td align="center">
+					<select id="gender">
+						<option>선택</option>
+					</select>
+				</td>
+				<td align="center">
+					<select id="eyeColor" data-validate='[["required"]]'>
+						<option>선택</option>
+					</select>
+				</td>
+				<td><input id="age" type="text" data-validate='[["required"], ["integer"]]' /></td>
+				<td><input id="registered" type="text" data-format='[["date", 8, "date"]]' data-validate='[["required"]]' /></td>
+				<td align="center"><input id="isActive" type="checkbox" /></td>
+			</tr>
+		</tbody>
+	</table>
+</article>
+
+<script type="text/javascript">
+N("article#exap0100").cont({
+	genderCodes : [{
+     	"key" : "male",
+     	"val" : "male"
+     },{
+     	"key" : "female",
+     	"val" : "female"
+    }],
+	eyeColorCodes : [{
+     	"key" : "blue",
+     	"val" : "blue"
+     },{
+     	"key" : "brown",
+     	"val" : "brown"
+     },{
+     	"key" : "green",
+     	"val" : "green"
+	}],
+    init : function(view, request) {
+    	// 1. initialize buttons
+    	N(".buttons a", view).button();
+
+    	// 2. initialize N.select and bind data for search box inputs
+    	// 2-1. create #gender select
+		N(this.genderCodes).select(N("div.searchBox li.inputs #gender", view)).bind();
+		N(this.genderCodes).select(N("table.grid tbody #gender", view)).bind();
+		// 2-2. create #eyeColor select
+		N(this.eyeColorCodes).select(N("div.searchBox li.inputs #eyeColor", view)).bind();
+		N(this.eyeColorCodes).select(N("table.grid tbody #eyeColor", view)).bind();
+
+    	// 3. initialize N.form and add new row data for search box
+    	var form = N([]).form({
+    		context : N("div.searchBox li.inputs", view),
+    		revert : true
+    	}).add();
+
+    	// 4. initialize N.grid and bind empty data for data list
+    	var grid = N([]).grid({
+       		context : N("table#grid", view),
+       		data : [],
+       		height : 350,
+       		resizable : true,
+       		sortable : true,
+       		hover : true,
+       		multiselect : true
+       	}).bind();
+
+    	// 5. bind events
+    	// 5-1. Search button
+    	N("#btnSearch", view).click(function(e) {
+            e.preventDefault();
+            if(form.validate()) {
+            	/* Because github.io is not allow POST send, this sentence was annotated
+    			N(form.data()).comm("url").submit(function(data) {
+    				grid.bind(data);
+    			});
+    			*/
+
+    			// Temporary code
+    			N(form.data()).comm("html/apid/data/grid.json").submit(function(data, request) {
+             		// Data bind by N.grid
+             		grid.bind(data);
+             		N(window).alert({
+             			title : "[조회] 서버로 전송되는 파라미터",
+             			msg : "<pre>" + N.json.format(form.data()[0]).replace(/\\/g, "") + "</pre>"
+             		}).show();
+             	});
+            }
+        });
+    	// 5-2. Add button
+    	N("#btnAdd", view).click(function(e) {
+            e.preventDefault();
+            grid.add();
+    	});
+    	// 5-3. Delete button
+    	N("#btnDelete", view).click(function(e) {
+            e.preventDefault();
+            N(window).alert({
+        		msg : "삭제 하시겠습니까?<br/>저장버튼을 누르기 전까지는 서버에 적용되지 않습니다.",
+        		confirm : true,
+        		onOk : function() {
+        			var selectedRows = grid.context("tbody.grid_selected__");
+                    selectedRows.each(function() {
+                    	// -1 is for hidden tbody 1 row
+                    	grid.remove($(this).index() - 1);
+                    });
+        		}
+        	}).show();
+    	});
+    	// 5-4. Save delete
+    	N("#btnSave", view).click(function(e) {
+            e.preventDefault();
+
+            if(grid.data("modified").length === 0) {
+            	N(window).alert("변경된 데이터가 없습니다.").show();
+            	return false;
+            }
+
+            if(grid.validate()) {
+            	N(window).alert({
+            		msg : "저장 하시겠습니까?",
+            		confirm : true,
+            		onOk : function() {
+            			/* Because github.io is not allow POST send, this sentence was annotated
+            			N(grid.data("modified")).comm("url").submit();
+            			*/
+
+            			// Temporary code
+            			N(window).alert({
+                 			title : "서버로 전송되는 파라미터",
+                 			msg : "<pre style='width: 450px; height: 400px; overflow: auto;'>" + N.json.format(grid.data("modified")).replace(/\\/g, "") + "</pre>"
+                 		}).show();
+            		}
+            	}).show();
+            }
+    	});
+    }
+});
+</script>

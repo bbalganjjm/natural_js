@@ -299,6 +299,10 @@ article .alert {
 	background: url("../images/icon/alert.png") no-repeat 7px 10px; font-size: 12px; padding: 5px 5px 5px 25px; background-color: #ffdddd; border-radius: 3px;
 }
 
+.grid input[type='text'], .grid input[type='password'], .grid select, .grid textarea {
+	width: 95%;
+}
+
 /* API Document */
 article.apiDoc table th {
 	width: 11%;
@@ -346,10 +350,6 @@ article.apiDoc .apidemo table th, article.apiDoc .apidemo table td, article.apiD
 
 article.apiDoc .apidemo table.grid th {
 	width: auto;
-}
-
-article.apiDoc .apidemo .grid input[type='text'], article.apiDoc .apidemo .grid input[type='password'], article.apiDoc .apidemo .grid select, article.apiDoc .apidemo .grid textarea {
-	width: 95%;
 }
 
 article.apiDoc .apidemo>article table.form th {
