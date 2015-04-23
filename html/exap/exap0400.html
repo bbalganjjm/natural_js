@@ -170,6 +170,10 @@ N("article#exap0400").cont({
     	// 4-1 Save data to server
     	N("#btnSave", view).click(function(e) {
             e.preventDefault();
+            if(form.data(true)[0].rowStatus === undefined) {
+            	N(window).alert("변경된 데이터가 없습니다.").show();
+            	return false;
+            }
             if(form.validate()) {
             	N(window).alert({
             		msg : "저장 하시겠습니까?",
@@ -189,7 +193,7 @@ N("article#exap0400").cont({
             }
         });
 
-    	// Revert to initialize data
+    	// Revert to initialized data
     	N("#btnRevert", view).click(function(e) {
     		e.preventDefault();
     		form.revert();

@@ -11,6 +11,7 @@
 		<ul>
 			<li class="buttons">
 				<a id="btnSave" href="#" data-opts='{ "color": "skyblue" }'>저장</a>
+				<a id="btnRevert" href="#">초기화</a>
 			</li>
 		</ul>
 	</div>
@@ -147,7 +148,7 @@ N("article#exap0300").cont({
 
     	// 2. initialize N.select and bind select data
     	// 2-1. create #gender select
-		N(this.genderCodes).select(N("#detail #gender", view)).bind();
+		N(this.genderCodes).select(N("#detail #gender", view)).bind().val("male");
 		// 2-2. create #eyeColor select
 		N(this.eyeColorCodes).select(N("#detail #eyeColor", view)).bind();
 		// 2-3. create #company select
@@ -156,7 +157,10 @@ N("article#exap0300").cont({
 		N(this.favoriteFruitCodes).select(N("#detail #favoriteFruit", view)).bind();
 
     	// 3. initialize N.form and generate new data
-    	var form = N([]).form(N("#detail", view)).add();
+    	var form = N([]).form({
+    		context : N("#detail", view),
+    		revert : true
+    	}).add();
 
     	// 4. bind events
     	// 4-1 Save data to server
@@ -180,6 +184,12 @@ N("article#exap0300").cont({
             	}).show();
             }
         });
+
+    	// Reset to initialized data
+    	N("#btnRevert", view).click(function(e) {
+    		e.preventDefault();
+    		form.revert();
+    	});
     }
 });
 </script>
