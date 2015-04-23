@@ -1,5 +1,5 @@
 /*!
- * Natural-CORE v0.8.2.5
+ * Natural-CORE v0.8.2.6
  * bbalganjjm@gmail.com
  *
  * Includes json2.js & formatdate.js
@@ -12,7 +12,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	var version = "0.8.2.5", N;
+	var version = "0.8.2.6", N;
 
 	// Use jQuery init
 	N = function(selector, context) {
@@ -673,7 +673,14 @@
 		        		this.val(vals[0]);
 	        		}
 		        } else if (type === "radio") {
-		        	this.filter("[value='" + String(vals) + "']").prop("checked", true);
+		        	this.each(function() {
+		        		var thisEle = N(this);
+		        		if(thisEle.attr("value") === String(vals)) {
+		        			thisEle.prop("checked", true);
+		        		} else {
+		        			thisEle.prop("checked", false);
+		        		}
+		        	});
 		        }
 	    		return this;
 	    	} else {
