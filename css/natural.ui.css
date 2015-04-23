@@ -243,7 +243,7 @@ table.grid__.grid_hover__ tbody:hover, table.grid__.grid_hover__ tbody:hover inp
 table.grid__.grid_select__ tbody {
 	cursor: pointer;
 }
-/* */
+
 table.grid__.grid_select__ tbody.grid_selected__,
 table.grid__.grid_select__ tbody.grid_selected__ input,
 table.grid__.grid_select__ tbody.grid_selected__ select,
