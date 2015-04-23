@@ -1,5 +1,5 @@
 /*!
- * Natural-DATA v0.8.1.6
+ * Natural-DATA v0.8.1.7
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	var version = "0.8.1.6";
+	var version = "0.8.1.7";
 
 	// N local variables
 	$.fn.extend(N, {
@@ -422,7 +422,7 @@
 								return false;
 							},
 							onBeforeHide : function(context, contents) {
-								context.unbind("focusout.prevent.format.date", N.element.disable).trigger("focusout.form.dataSync").trigger("focusout.form.format");
+								context.unbind("focusout.prevent.format.date", N.element.disable).trigger("focusout.form.validate").trigger("focusout.form.dataSync").trigger("focusout.form.format");
 							}
 						});
 					}
