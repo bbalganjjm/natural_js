@@ -4,7 +4,6 @@
 		<p class="smallContTit">검색박스와 그리드가 조합된 일반적인 데이터 목록 화면 입니다.</p>
 		<p class="smallContTit">서버와 연계되지 않은 UI 쪽 코딩 예제 입니다. 때문에 검색 조건으로 입력한 데이터는 그리드에 적용되지 않습니다. 서버쪽으로 전달되는 파라미터만 확인 바랍니다.</p>
 		<p class="smallContTit">서버에서는 브라우저에서 POST로 전달된 JSON 문자열 데이터를 변환하여 파라미터로 사용하면 됩니다.</p>
-		<p class="smallContTit">검색박스에는 Form(N.form) 컴포넌트와 Select(N.select) 컴포넌트가 목록에는 Grid(N.grid) 컴포넌트가 사용되었습니다.</p>
 	</div>
 
 	<div class="searchBox">
@@ -80,8 +79,7 @@ N("article#exap0100").cont({
     	// 3. initialize N.form and add new row data for search box
     	var form = N([]).form({
     		context : N("div.searchBox li.inputs", view),
-    		revert : true,
-    		validate : false
+    		revert : true
     	}).add();
 
     	// 4. initialize N.grid and bind empty data for data list
