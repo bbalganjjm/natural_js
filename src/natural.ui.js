@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.4.2
+ * Natural-UI v0.8.4.7
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	var version = "0.8.4.2";
+	var version = "0.8.4.7";
 
 	// N local variables
 	$.fn.extend(N, {
@@ -1543,7 +1543,7 @@
 					opts.row = row;
 				}
 				if(data !== undefined) {
-					opts.data = data;
+					opts.data = N.type(data) === "array" ? N(data) : data;
 					if(opts.revert) {
 						this.revertData = $.extend({}, data[row]);
 					}
@@ -1709,7 +1709,7 @@
 			add : function() {
 				var opts = this.options;
 		        if (opts.data === null) {
-		            throw new Error("[Form.add]data is null. you must input data");
+		            throw new Error("[Form.add]Data is null. you must input data");
 		        }
 
 		        // set default values
@@ -1727,6 +1727,11 @@
 	        		this.options.row = 0;
 	        		opts.extRow = 0;
 	        	}
+
+	        	// Set revert data
+				if(opts.revert) {
+					this.revertData = $.extend({}, opts.data[opts.row]);
+				}
 
 	        	//TODO think more how to [update] when be set only opts.row value
 		        N.ds.instance(opts.extObj !== null ? opts.extObj : this).notify(opts.extRow > -1 ? opts.extRow : opts.row);
@@ -1753,6 +1758,12 @@
 				}
 				eles.trigger("validate.validator");
 				eles.not(".validate_false__").trigger("format.formatter");
+
+				// Focus to first input element with failed validation
+				if(eles.filter(".validate_false__:eq(0)").length > 0) {
+					eles.filter(".validate_false__:eq(0)").get(0).focus();
+				}
+
 				return eles.filter(".validate_false__").length > 0 ? false : true;
 			},
 			val : function(key, val, notify) {
@@ -2111,7 +2122,8 @@
 					validate : opts.validate,
 					extObj : this,
 					extRow : opts.addTop ? 0 : opts.data.length,
-					addTop : opts.addTop
+					addTop : opts.addTop,
+					revert : opts.revert
 				}).add();
 
 				//focus to first input element
@@ -2143,11 +2155,12 @@
 				if(!opts.revert) {
 					N.error("[N.form.revert]Can not revert. N.form's revert option value is false");
 				}
+
 				if(row !== undefined) {
 					opts.context.find("tbody:eq(" + String(row) + ")").instance("form").revert();
 				} else {
 					opts.context.find("tbody").instance("form", function(i) {
-						if(this.options !== undefined && this.options.data[0].rowStatus === "update") {
+						if(this.options !== undefined && (this.options.data[0].rowStatus === "update" || this.options.data[0].rowStatus === "insert")) {
 							this.revert();
 						}
 					});
@@ -2160,10 +2173,17 @@
 				if(row !== undefined) {
 					valiRslt = opts.context.find("tbody:eq(" + String(row) + ")").instance("form").validate();
 				} else {
+					// Select the rows that rows data was not changed but that has failed validation input elements
+					if(this.options.context.find(".validate_false__").length > 0) {
+						this.options.context.find(".validate_false__").focusout();
+						valiRslt = false;
+					}
+
 					var rowStatus;
 					opts.context.find("tbody").instance("form", function(i) {
 						if(this.options !== undefined && this.options.data.length > 0) {
 							rowStatus = this.options.data[0].rowStatus;
+							// Select the rows that data was changed
 							if(rowStatus === "update" || rowStatus === "insert") {
 								if(!this.validate()) {
 									valiRslt = false;
@@ -2173,15 +2193,6 @@
 					});
 				}
 
-				if(this.options.context.find(".validate_false__").length > 0) {
-					this.options.context.find(".validate_false__").focusout();
-					valiRslt = false;
-				}
-
-				// Focus on the first input element of not passed input elements
-				if(!valiRslt) {
-					this.options.context.find(".validate_false__:first").focus();
-				}
 				return valiRslt;
 			},
 			val : function(row, key, val) {
