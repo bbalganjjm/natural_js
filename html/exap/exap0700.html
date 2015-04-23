@@ -9,8 +9,9 @@
 	<div class="searchBox">
 		<ul>
 			<li class="buttons">
-				<a id="btnSearch" href="#">조회</a>
+				<a id="btnDelete" href="#" data-opts='{ "color": "gray" }'>삭제</a>
 				<a id="btnSave" href="#" data-opts='{ "color": "skyblue" }'>저장</a>
+				<a id="btnSearch" href="#">조회</a>
 			</li>
 		</ul>
 	</div>
@@ -144,7 +145,7 @@ N("article#exap0900").cont({
        		height : 350,
        		resizable : true,
        		sortable : true,
-       		select : true,
+       		multiselect : true,
        		hover : true,
        		onSelect : function(i, ele, data) {
        			cont.form.bind(i, data);
@@ -169,7 +170,21 @@ N("article#exap0900").cont({
         		this_.grid.bind(data);
         	});
         });
-
+    	// 5-3. Delete button
+    	N("#btnDelete", view).click(function(e) {
+            e.preventDefault();
+            N(window).alert({
+        		msg : "삭제 하시겠습니까?<br/>저장버튼을 누르기 전까지는 서버에 적용되지 않습니다.",
+        		confirm : true,
+        		onOk : function() {
+        			var selectedRows = grid.context("tbody.grid_selected__");
+                    selectedRows.each(function() {
+                    	// -1 is for hidden tbody 1 row
+                    	grid.remove($(this).index() - 1);
+                    });
+        		}
+        	}).show();
+    	});
     	N("#btnSave", view).click(function(e) {
     		e.preventDefault();
     		N(window).alert({
