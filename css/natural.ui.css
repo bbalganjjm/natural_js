@@ -248,8 +248,7 @@ table.grid__.grid_select__ tbody.grid_selected__,
 table.grid__.grid_select__ tbody.grid_selected__ input,
 table.grid__.grid_select__ tbody.grid_selected__ select,
 table.grid__.grid_select__ tbody.grid_selected__ textarea {
-	background-color: #999999;
-	color: #ffffff;
+	background-color: #cfcfcf;
 }
 
 table.grid__ thead th, table.grid__ tbody td {
