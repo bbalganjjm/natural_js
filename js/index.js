@@ -73,9 +73,9 @@ var CommonUtilController = {
 			btnEle.click(function() {
 				var sourceCodeBox = view.find("#sourceCodeBox");
 				if(!sourceCodeBox.is(":visible")) {
-					view.find("#sourceCodeBox").slideDown();
+					btnEle.next("#sourceCodeBox").slideDown();
 				} else {
-					view.find("#sourceCodeBox").slideUp();
+					btnEle.next("#sourceCodeBox").slideUp();
 				}
 			});
 	    	N.comm({
