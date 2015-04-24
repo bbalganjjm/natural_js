@@ -153,7 +153,7 @@
 			<th width="10%">data</th>
 			<th width="10%">arguments[0]</th>
 			<td width="80%" colspan="3">
-				<input id="data" type="checkbox" checked="checked" /> If this checkbox with uncheck(false), get all data
+				<input id="data" type="text" value="true" />  true(return selected row data), false(return all data(JWS)), empty(return all data(pure object array))
 			</td>
 		</tr>
 	</table>
@@ -349,7 +349,7 @@
 	        N("#btnData", view).click(function(e) {
 	        	e.preventDefault();
 	        	N("div.result", view).alert({
-	        		msg : '<div class="pre">' + N.json.format(form.data(N("input#data", view).is(":checked"))) + '</div>',
+	        		msg : '<div class="pre">' + N.json.format(form.data(eval(N("input#data", view).val()))) + '</div>',
 	        		width : 400,
 	        		height : 250
 	        	}).show();

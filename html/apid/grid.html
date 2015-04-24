@@ -104,7 +104,8 @@
 					<option value="insert">insert</option>
 					<option value="update">update</option>
 					<option value="delete">delete</option>
-					<option value="">all</option>
+					<option value="">undefined(pure object array)</option>
+					<option value="false">false(JWS)</option>
 				</select> row status
 			</td>
 		</tr>
@@ -286,7 +287,7 @@
 	    	N("#btnData", view).click(function(e) {
 	    		e.preventDefault();
 	    		grid.context().parent().alert({
-	        		msg : '<div class="pre">' + N.json.format(grid.data(N.string.trimToUndefined(N("select#data", view).val()))) + '</div>',
+	        		msg : '<div class="pre">' + N.json.format(grid.data(N("select#data", view).val() === "false" ? false : N.string.trimToUndefined(N("select#data", view).val()))) + '</div>',
 	        		width : 400,
 	        		height : 250
 	        	}).show();

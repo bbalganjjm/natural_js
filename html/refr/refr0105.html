@@ -721,7 +721,7 @@
 				<p>팝업이 열릴 때마다 발생되는 이벤트</p>
 				<p>이벤트 콜백 메서드는 팝업페이지의 Controller 에 구현되어야 합니다. 메서드면은 Controller 에 정의한 메서드명칭만 String 으로 지정 합니다.</p>
 				<p>이벤트 콜백의 메서드는 인자로 onOpenData 가 들어옵니다.</p>
-				<p> url을 지정하여 다른 페이지를 가져왔을때만 사용가능</p>
+				<p class="alert">url을 지정하여 다른 페이지를 가져왔을때만 사용가능 합니다.</p>
 			</td>
 		</tr>
 		<tr>
@@ -731,7 +731,8 @@
 			<td></td>
 			<td>
 				<p>onOpen 이벤트의 인자로 들어가 팝업에 전달될 데이터</p>
-				<p> url을 지정하여 다른 페이지를 가져왔을때만 사용가능</p>
+				<p class="alert">url을 지정하여 다른 페이지를 가져왔을때만 사용가능 합니다.</p>
+				<p class="alert">open 함수의 첫번째 argument 로 넣어줘도 됩니다(동적인 데이터 전달 시 사용).</p>
 			</td>
 		</tr>
 		<tr>
@@ -743,8 +744,8 @@
 				<p>팝업이 닫힐 때마다 발생되는 이벤트.</p>
 				<p>이벤트 콜백의 메서드는 인자로 onCloseData 가 들어옵니다.</p>
 				<p>팝업 페이지에서 자신을 닫을때는 Controller에서 다음과 같이 처리 합니다.</p>
-				<p>this.caller.colse(onCloseData)</p>
-				<p> url을 지정하여 다른 페이지를 가져왔을때만 사용가능</p>
+				<p>this.caller.close(onCloseData)</p>
+				<p class="alert">url을 지정하여 다른 페이지를 가져왔을때만 사용가능 합니다.</p>
 			</td>
 		</tr>
 		<tr>
@@ -754,7 +755,8 @@
 			<td></td>
 			<td>
 				<p>onClose 이벤트의 인자로 들어가 팝업의 부모페이지에 전달될 데이터</p>
-				<p> url을 지정하여 다른 페이지를 가져왔을때만 사용가능</p>
+				<p class="alert">url을 지정하여 다른 페이지를 가져왔을때만 사용가능 합니다.</p>
+				<p class="alert">close 함수의 첫번째 argument 로 넣어줘도 됩니다(동적인 데이터 전달 시 사용).</p>
 			</td>
 		</tr>
 	</table>
@@ -770,15 +772,15 @@
 		</tr>
 		<tr>
 			<td>open</td>
-			<td align="center">-</td>
-			<td align="center">-</td>
+			<td align="center">onOpenData</td>
+			<td align="center">Object</td>
 			<td>N.popup</td>
 			<td>팝업을 보여 줍니다.</td>
 		</tr>
 		<tr>
 			<td>close</td>
-			<td align="center">-</td>
-			<td align="center">-</td>
+			<td align="center">onCloseData</td>
+			<td align="center">Object</td>
 			<td>N.popup</td>
 			<td>팝업을 감춥니다.</td>
 		</tr>
@@ -1148,7 +1150,7 @@
 			<td>selFlag</td>
 			<td>boolean</td>
 			<td align="center">-</td>
-			<td>true 이면 현재 선택된 값에 해당하는 데이터만 가져오고 false 이면 바인드 되어 있는 전체 데이터를 가져 옵니다.</td>
+			<td>true 이면 현재 선택된 값에 해당하는 데이터만 가져오고 false 이면 JWS 형태의 전체 데이터를 가져옵니다. 입력하지 않으면 정제된 순수 JSON Object Array 형태로 된 전체 데이터를 가져 옵니다.</td>
 		</tr>
 		<tr>
 			<td>context</td>
@@ -1386,7 +1388,7 @@
 			<td>selFlag</td>
 			<td>boolean</td>
 			<td align="center">-</td>
-			<td>true 이면 현재 바인드되어있는 데이터만 가져오고 false 이면 바인드 되어 있는 전체 데이터를 가져 옵니다.</td>
+			<td>true 이면 현제 바인드되어 있는 행의 데이터를 가져오고 false 이면 JWS 형태의 전체 데이터를 가져옵니다. 입력하지 않으면 정제된 순수 JSON Object Array 형태로 된 전체 데이터를 가져 옵니다.</td>
 		</tr>
 		<tr>
 			<td>row</td>
@@ -1465,7 +1467,6 @@
 			<td colspan="2">
 				<p>선택한 값을 가져오거나 입력 합니다.</p>
 				<p>val 인자를 입력하지 않으면 선택한 값을 반환하고 입력하면 선택한 컬럼의 값을 입력한 값으로 바꿔준다.</p>
-
 				<p> 값 입력 시 key 에 해당하는 HTML 요소가 없으면 데이터만 생성한다.</p>
 			</td>
 		</tr>
@@ -1600,6 +1601,7 @@
 			<td>
 				<p>add 메서드를 호출했을 때 새로운 로우요소와 데이터세트를 그리드의 상단에 추가할건지 하단에 추가할건지를 결정 합니다.</p>
 				<p>true 이면 상단에 추가하고 false 이면 하단에 추가 합니다.</p>
+				<p class="alert">헤더고정형(height 옵션을 0 이상 지정)의 그리드에서는 addTop 옵션이 무조건 true로 지정 됩니다. N.form 과 연동시 주의 하기 바랍니다.</p>
 			</td>
 		</tr>
 		<tr>
@@ -1789,7 +1791,7 @@
 			<td>String</td>
 			<td align="center">-</td>
 			<td>
-				<p>undefined 이면 전체 데이터를 가져오고</p>
+				<p>false 이면 JWS 형태의 전체 데이터를 가져옵니다. 입력하지 않으면 정제된 순수 JSON Object Array 형태로 된 전체 데이터를 가져 옵니다.</p>
 				<p>modified 이면 추가, 수정, 삭제 된 데이터를 가져옵니다.</p>
 				<p>delete 이면 삭제된 데이터, update 이면 수정된 데이터, insert 이면 추가된 데이터를 가져옵니다.</p>
 			</td>
