@@ -97,7 +97,10 @@ N("article#exap0100").cont({
             e.preventDefault();
             if(form.validate()) {
             	/* Because github.io is not allow POST send, this sentence was annotated
-    			N(form.data()).comm("url").submit(function(data) {
+    			N(form.data()).comm({
+    				url : "url",
+    				type : "POST"
+    			}).submit(function(data) {
     				grid.bind(data);
     			});
     			*/

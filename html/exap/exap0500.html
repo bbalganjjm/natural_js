@@ -1,4 +1,4 @@
-<article id="exap0100" class="view-code">
+<article id="exap0500" class="view-code">
 	<h1>그리드 입력(C) 조회(R) 수정(U) 삭제(D) 예제</h1>
 	<div class="intro">
 		<p class="smallContTit">데이터 목록 화면에서 직접 입력 조회 수정 삭제를 처리하는 예제 입니다.</p>
@@ -11,7 +11,7 @@
 	<div class="searchBox">
 		<ul>
 			<li class="inputs">
-				<label>Name<input id="name" type="text" data-validate='[["required"], ["alphabet+integer"]]' /></label>
+				<label>Name<input id="name" type="text" data-validate='[["alphabet+integer"]]' /></label>
 				<label>Gender<input id="gender" type="radio" /></label>
 				<label>Eye Color<select id="eyeColor"><option>선택</option></select></label>
 			</li>
@@ -61,7 +61,7 @@
 </article>
 
 <script type="text/javascript">
-N("article#exap0100").cont({
+N("article#exap0500").cont({
 	genderCodes : [{
      	"key" : "male",
      	"val" : "male"
@@ -114,7 +114,10 @@ N("article#exap0100").cont({
             e.preventDefault();
             if(form.validate()) {
             	/* Because github.io is not allow POST send, this sentence was annotated
-    			N(form.data()).comm("url").submit(function(data) {
+    			N(form.data()).comm({
+    				url : "url",
+    				type : "POST"
+    			}).submit(function(data) {
     				grid.bind(data);
     			});
     			*/
@@ -123,10 +126,6 @@ N("article#exap0100").cont({
     			N(form.data()).comm("html/apid/data/grid.json").submit(function(data, request) {
              		// Data bind by N.grid
              		grid.bind(data);
-             		N(window).alert({
-             			title : "[조회] 서버로 전송되는 파라미터",
-             			msg : "<pre>" + N.json.format(form.data()[0]).replace(/\\/g, "") + "</pre>"
-             		}).show();
              	});
             }
         });
@@ -165,7 +164,10 @@ N("article#exap0100").cont({
             		confirm : true,
             		onOk : function() {
             			/* Because github.io is not allow POST send, this sentence was annotated
-            			N(grid.data("modified")).comm("url").submit();
+            			N(grid.data("modified")).comm({
+            				url : "url",
+            				type : "POST"
+            			}).submit();
             			*/
 
             			// Temporary code

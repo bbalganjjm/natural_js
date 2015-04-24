@@ -172,7 +172,10 @@ N("article#exap0300").cont({
             		confirm : true,
             		onOk : function() {
             			/* Because github.io is not allow POST send, this sentence was annotated
-            			N(form.data(true)).comm("url").submit();
+            			N(form.data(true)).comm({
+            				url : "url",
+            				type : "POST"
+            			}).submit();
             			*/
 
             			// Temporary code
@@ -184,8 +187,7 @@ N("article#exap0300").cont({
             	}).show();
             }
         });
-
-    	// Reset to initialized data
+    	// 4-2 Reset to initialized data
     	N("#btnRevert", view).click(function(e) {
     		e.preventDefault();
     		form.revert();

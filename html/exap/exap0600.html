@@ -1,53 +1,56 @@
-<article id="exap0100" class="view-code">
-	<h1>입력(C) 조회(R) 수정(U) 삭제(D) 예제 종합 예제</h1>
+<article id="exap0600" class="view-code">
+	<h1>화면전환 입력(C) 조회(R) 수정(U) 삭제(D) 예제</h1>
 	<div class="intro">
-		<p class="smallContTit">목록 화면과 입력 수정 시 화면이 전환되는 예제 입니다.</p>
+		<p class="smallContTit">목록 화면과 입력 조회 수정 삭제 시 화면이 전환되는 예제 입니다.</p>
 		<p class="smallContTit">서버와 연계되지 않은 UI 쪽 코딩 예제 입니다. 때문에 검색 조건으로 입력한 데이터는 그리드에 적용되지 않습니다. 서버쪽으로 전달되는 파라미터만 확인 바랍니다.</p>
 	</div>
 
-	<div class="searchBox">
-		<ul>
-			<li class="inputs">
-				<label>Name<input id="name" type="text" data-validate='[["required"], ["alphabet+integer"]]' /></label>
-				<label>Gender<input id="gender" type="radio" /></label>
-				<label>Eye Color<select id="eyeColor"><option>선택</option></select></label>
-			</li>
-			<li class="buttons">
-				<a id="btnSearch" href="#">조회</a>
-			</li>
-		</ul>
-	</div>
+	<div id="subContext">
+		<div class="searchBox">
+			<ul>
+				<li class="inputs">
+					<label>Name<input id="name" type="text" data-validate='[["alphabet+integer"]]' /></label>
+					<label>Gender<input id="gender" type="radio" /></label>
+					<label>Eye Color<select id="eyeColor"><option>선택</option></select></label>
+				</li>
+				<li class="buttons">
+					<a id="btnAdd" href="#" data-opts='{ "color": "blue" }'>신규입력</a>
+					<a id="btnSearch" href="#">조회</a>
+				</li>
+			</ul>
+		</div>
 
-	<table id="grid" class="grid" style="width: 100%;">
-		<thead>
-			<tr>
-				<th width="9%">Index</th>
-				<th width="17%">Name</th>
-				<th width="*">Email</th>
-				<th width="11%">Gender</th>
-				<th width="13%">Eye Color</th>
-				<th width="7%">Age</th>
-				<th width="13%">Company</th>
-				<th width="12%">Active</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td id="index" align="center"></td>
-				<td id="name"></td>
-				<td id="email"></td>
-				<td id="gender" align="center"></td>
-				<td id="eyeColor" align="center"></td>
-				<td id="age"></td>
-				<td id="company"></td>
-				<td id="isActive" align="center"></td>
-			</tr>
-		</tbody>
-	</table>
+		<table id="grid" class="grid" style="width: 100%;">
+			<thead>
+				<tr>
+					<th width="9%">Index</th>
+					<th width="17%">Name</th>
+					<th width="*">Email</th>
+					<th width="11%">Gender</th>
+					<th width="13%">Eye Color</th>
+					<th width="7%">Age</th>
+					<th width="13%">Company</th>
+					<th width="12%">Active</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td id="index" align="center"></td>
+					<td id="name"></td>
+					<td id="email"></td>
+					<td id="gender" align="center"></td>
+					<td id="eyeColor" align="center"></td>
+					<td id="age"></td>
+					<td id="company"></td>
+					<td id="isActive" align="center"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 </article>
 
 <script type="text/javascript">
-N("article#exap0100").cont({
+N("article#exap0600").cont({
 	genderCodes : [{
      	"key" : "male",
      	"val" : "male"
@@ -79,7 +82,12 @@ N("article#exap0100").cont({
     	var form = N([]).form({
     		context : N("div.searchBox li.inputs", view),
     		revert : true
-    	}).add();
+    	});
+    	if(request.attr("scData") === undefined) {
+    		form.add();
+    	} else {
+    		form.bind(0, request.attr("scData"));
+    	}
 
     	// 4. initialize N.grid and bind empty data for data list
     	var grid = N([]).grid({
@@ -88,29 +96,45 @@ N("article#exap0100").cont({
        		height : 350,
        		resizable : true,
        		sortable : true,
-       		hover : true
-       	}).bind();
+       		hover : true,
+       		select : true,
+       		onSelect : function(index, rowEle, data) {
+       			// Grid row select event
+            	N("#subContext", view).comm("html/exap/exap0601.html")
+            		.request.attr("selData", [ data[index] ]) // send seleted row data
+            			.request.attr("scData", form.data()) // send search condition data
+            				.submit();
+        	}
+       	});
 
     	// 5. bind events
+    	// 5-1. Search button
     	N("#btnSearch", view).click(function(e) {
             e.preventDefault();
             if(form.validate()) {
             	/* Because github.io is not allow POST send, this sentence was annotated
-    			N(form.data()).comm("url").submit(function(data) {
+    			N(form.data()).comm({
+    				url : "url",
+    				type : "POST"
+    			}).submit(function(data) {
     				grid.bind(data);
     			});
     			*/
 
     			// Temporary code
-    			N(form.data()).comm("html/apid/data/grid.json").submit(function(data, request) {
+    			N(form.data()).comm("html/apid/data/grid.json").submit(function(data) {
              		// Data bind by N.grid
              		grid.bind(data);
-             		N(window).alert({
-             			title : "서버로 전송되는 파라미터",
-             			msg : "<pre>" + N.json.format(form.data()[0]).replace(/\\/g, "") + "</pre>"
-             		}).show();
              	});
             }
+        }).click(); // Auto retrieve
+    	 // 5-1. Add button
+    	N("#btnAdd", view).click(function(e) {
+            e.preventDefault();
+         // Grid row select event
+        	N("#subContext", view).comm("html/exap/exap0602.html")
+        		.request.attr("scData", form.data()) // send search condition data
+        			.submit();
         });
     }
 });

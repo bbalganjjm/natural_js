@@ -1,17 +1,10 @@
-<article id="exap0400" class="view-code">
-	<h1>상세데이터 수정 예제</h1>
-	<div class="intro">
-		<p class="smallContTit">상세 데이터를 입력하는 화면 예제 입니다.</p>
-		<p class="smallContTit">서버와 연계되지 않은 UI 쪽 코딩 예제 입니다. 저장 시 서버쪽으로 전달되는 파라미터만 확인 바랍니다.</p>
-		<p class="smallContTit">데이터에 대한 포멧룰을 지정하여 사용자가 입력한 데이터를 양식화(Format) 해 줍니다.</p>
-		<p class="smallContTit">데이터에 대한 검증룰을 지정하여 사용자가 입력한 데이터를 검증(Validation)해 줍니다.</p>
-	</div>
-
+<article id="exap0602" class="view-code">
 	<div class="searchBox">
 		<ul>
 			<li class="buttons">
 				<a id="btnSave" href="#" data-opts='{ "color": "skyblue" }'>저장</a>
-				<a id="btnRevert" href="#">되돌리기</a>
+				<a id="btnRevert" href="#">초기화</a>
+				<a id="btnList" href="#">목록</a>
 			</li>
 		</ul>
 	</div>
@@ -83,7 +76,7 @@
 </article>
 
 <script type="text/javascript">
-N("article#exap0400").cont({
+N("article#exap0602").cont({
 	genderCodes: [{
     	"key" : "male",
     	"val" : "male"
@@ -161,10 +154,13 @@ N("article#exap0400").cont({
     		context : N("#detail", view),
     		revert : true
     	});
-    	// 3-1. N.form data bind
-    	N.comm("html/apid/data/grid.json").submit(function(data) {
-      		form.bind(0, data);
-      	});
+		if(request.attr("selData") !== undefined) {
+			// 3-1-1. N.form data bind
+			form.bind(0, request.attr("selData"));
+		} else {
+			// 3-1-2. N.form data bind
+			form.add();
+		}
 
     	// 4. bind events
     	// 4-1 Save data to server
@@ -183,13 +179,20 @@ N("article#exap0400").cont({
             			N(form.data(true)).comm({
             				url : "url",
             				type : "POST"
-            			}).submit();
+            			}).submit(function() {
+            				// Go to list page
+                			N("#btnList", view).click();
+            			});
             			*/
 
             			// Temporary code
             			N(window).alert({
                  			title : "서버로 전송되는 파라미터",
-                 			msg : "<pre style='width: 450px; overflow: auto;'>" + N.json.format(form.data(true)[0]).replace(/\\/g, "") + "</pre>"
+                 			msg : "<pre style='width: 450px; overflow: auto;'>" + N.json.format(form.data(true)[0]).replace(/\\/g, "") + "</pre>",
+                 			onOk : function() {
+                 				// Go to list page
+                    			N("#btnList", view).click();
+                 			}
                  		}).show();
             		}
             	}).show();
@@ -199,6 +202,13 @@ N("article#exap0400").cont({
     	N("#btnRevert", view).click(function(e) {
     		e.preventDefault();
     		form.revert();
+    	});
+
+    	// 3-3 Go to detail page
+    	N("#btnList", view).click(function(e) {
+    		e.preventDefault();
+    		// Return list page with search condition data
+    		N(N.context.attr("architecture").page.context).comm("html/exap/exap0600.html").request.attr("scData", request.attr("scData")).submit();
     	});
     }
 });
