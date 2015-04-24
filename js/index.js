@@ -71,11 +71,11 @@ var CommonUtilController = {
 			view.append(btnEle);
 			view.append('<pre id="sourceCodeBox" class="line-numbers" style="display: none;"><code id="sourceCode" class="language-markup"></code></pre>');
 			btnEle.click(function() {
-				var sourceCodeBox = view.find("#sourceCodeBox");
+				var sourceCodeBox = btnEle.next("#sourceCodeBox");
 				if(!sourceCodeBox.is(":visible")) {
-					btnEle.next("#sourceCodeBox").slideDown();
+					sourceCodeBox.slideDown();
 				} else {
-					btnEle.next("#sourceCodeBox").slideUp();
+					sourceCodeBox.slideUp();
 				}
 			});
 	    	N.comm({
