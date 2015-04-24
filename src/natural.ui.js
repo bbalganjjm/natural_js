@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.4.7
+ * Natural-UI v0.8.4.10
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	var version = "0.8.4.7";
+	var version = "0.8.4.10";
 
 	// N local variables
 	$.fn.extend(N, {
@@ -1400,6 +1400,8 @@
 						rtnData.push(opts.data[i]);
 					});
 					return rtnData;
+				} else if(selFlag !== undefined && selFlag === false) {
+					return opts.data;
 				} else {
 					return opts.data.get();
 				}
@@ -1527,6 +1529,8 @@
 				var opts = this.options;
 				if(selFlag !== undefined && selFlag === true) {
 					return [ opts.data[opts.row] ];
+				} else if(selFlag !== undefined && selFlag === false) {
+						return opts.data;
 				} else {
 					return opts.data.get();
 				}
@@ -2001,6 +2005,8 @@
 			data : function(rowStatus) {
 				if(rowStatus === undefined) {
 					return this.options.data.get();
+				} else if(rowStatus === false) {
+					return this.options.data;
 				} else if(rowStatus === "modified") {
 					return this.options.data.datafilter(function(data) {
 						return data.rowStatus !== undefined;
@@ -2127,7 +2133,9 @@
 				}).add();
 
 				//focus to first input element
-				tbodyTempClone.find(":input:eq(0)").get(0).focus();
+				if(tbodyTempClone.find(":input:eq(0)").length > 0) {
+					tbodyTempClone.find(":input:eq(0)").get(0).focus();
+				}
 
 				return this;
 			},
