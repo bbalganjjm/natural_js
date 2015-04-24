@@ -1,5 +1,5 @@
 /*!
- * Natural-DATA v0.8.1.7
+ * Natural-DATA v0.8.1.8
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	var version = "0.8.1.7";
+	var version = "0.8.1.8";
 
 	// N local variables
 	$.fn.extend(N, {
@@ -613,7 +613,11 @@
 								rule = rule.split("+").sort().toString().replace(/\,/g, "_");
 							}
 							try {
-								retTempObj.result = Validator[rule](String(obj[k]), args);
+								if (rule !== "required" && N.string.trimToNull(String(obj[k])) === null) {
+									retTempObj.result = true;
+			                    } else {
+			                    	retTempObj.result = Validator[rule](String(obj[k]), args);
+			                    }
 							} catch (e) {
 								if (e.toString().indexOf("is not a function") > -1) {
 									N.error("[Validator.fn.validate]\"" + this[0] + "\" is invalid format rule");
