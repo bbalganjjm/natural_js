@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.4.10
+ * Natural-UI v0.8.4.12
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	var version = "0.8.4.10";
+	var version = "0.8.4.12";
 
 	// N local variables
 	$.fn.extend(N, {
@@ -1358,7 +1358,7 @@
 		// Select
 		var Select = N.select = function(data, opts) {
 			this.options = {
-				data : data,
+				data : N.type(data) === "array" ? N(data) : data,
 				context : null,
 				key : null,
 				val : null,
@@ -1737,9 +1737,19 @@
 					this.revertData = $.extend({}, opts.data[opts.row]);
 				}
 
-	        	//TODO think more how to [update] when be set only opts.row value
 		        N.ds.instance(opts.extObj !== null ? opts.extObj : this).notify(opts.extRow > -1 ? opts.extRow : opts.row);
 		        this.update(opts.row);
+				return this;
+			},
+			remove : function(row) {
+				var opts = this.options;
+				if(row === undefined || row > opts.data.length - 1) {
+		        	N.error("[N.grid.remove]Row index out of range");
+		        }
+
+				opts.data.splice(row, 1);
+
+				N.ds.instance(this).notify();
 				return this;
 			},
 			revert : function() {
@@ -2122,7 +2132,7 @@
 				}
 
 				// for new row data bind, use N.form
-				opts.data.form({
+				var form = opts.data.form({
 					context : tbodyTempClone,
 					html: opts.html,
 					validate : opts.validate,
@@ -2132,7 +2142,7 @@
 					revert : opts.revert
 				}).add();
 
-				//focus to first input element
+				// focus to first input element
 				if(tbodyTempClone.find(":input:eq(0)").length > 0) {
 					tbodyTempClone.find(":input:eq(0)").get(0).focus();
 				}
@@ -2211,10 +2221,10 @@
 				return this;
 			},
 			update : function(row, key) {
-				if(row === undefined) {
-					this.bind();
-				} else {
+				if(row !== undefined && key !== undefined) {
 					this.options.context.find("tbody:eq(" + String(row) + ")").instance("form").update(0, key);
+				} else {
+					this.bind();
 				}
 				return this;
 			}
