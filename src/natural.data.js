@@ -1,5 +1,5 @@
 /*!
- * Natural-DATA v0.8.1.8
+ * Natural-DATA v0.8.1.9
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	var version = "0.8.1.8";
+	var version = "0.8.1.9";
 
 	// N local variables
 	$.fn.extend(N, {
@@ -102,21 +102,21 @@
 				throw new Error("[N.datasync]There is no public constructor for N.ds, use instance method");
 			}
 
-			this.viewContext = $(inst.options.context).closest(".view_context__");
-			if(this.viewContext.length === 0) {
-				this.viewContext = $(inst.options.context).closest("span.block_overlay_msg__").siblings(".view_context__");
+			var pageContext = $(N.context.attr("architecture").page.context);
+			var dataSyncTemp = pageContext.find("var#data_sync_temp__");
+			if(dataSyncTemp.length === 0) {
+				dataSyncTemp = pageContext.append('<var id="data_sync_temp__"></var>').find("var#data_sync_temp__");
 			}
-			if(this.viewContext.length === 0) {
-				var pageContext = $(N.context.attr("architecture").page.context);
-				var dataSyncTemp = pageContext.find("var#data_sync_temp__");
-				if(dataSyncTemp.length === 0) {
-					dataSyncTemp = pageContext.append('<var id="data_sync_temp__"></var>').find("var#data_sync_temp__");
-				}
-				this.viewContext = dataSyncTemp;
-			}
+			this.viewContext = dataSyncTemp;
 
 			var siglInst = this.viewContext.instance("ds");
 			if (siglInst !== undefined) {
+				// Cleanup missing obserable
+				for (var i = 0; i < siglInst.obserable.length; i++) {
+					if(siglInst.obserable[i].context().prevObject === undefined) {
+						siglInst.obserable.splice(i, 1);
+					}
+				}
 				siglInst.inst = inst;
 				if(isReg !== undefined && isReg === true) {
 					siglInst.obserable.push(inst);
