@@ -85,7 +85,8 @@ N("article#exap0700").cont({
     	}).add();
 
     	// 4. initialize N.grid and bind empty data for data list
-    	var grid = this.grid = N([]).grid({
+    	var this_ = this;
+    	var grid = N([]).grid({
        		context : N("table#grid", view),
        		data : [],
        		height : 350,
@@ -108,6 +109,7 @@ N("article#exap0700").cont({
        	    			this.remove();
        	    		}
        	    	}).open({
+       	    		grid : grid,
        				data : data,
        				row : index
        			});;

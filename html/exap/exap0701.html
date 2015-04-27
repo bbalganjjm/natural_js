@@ -71,12 +71,11 @@
 N("article#exap0701").cont({
     init : function(view, request) {
     	var this_ = this;
-
     	// 1. initialize buttons
     	N(".buttons a", view).button();
 
     	// 2. initialize N.form
-    	this_.form = N([]).form(N("#detail", view));
+    	var form = this.form = N([]).form(N("#detail", view));
 
      	// 3. bind events
      	// 3-1 Go to create page
@@ -103,11 +102,11 @@ N("article#exap0701").cont({
     	N("#btnDelete", view).click(function(e) {
     		e.preventDefault();
     		N(window).alert({
-        		msg : "삭제 하시겠습니까?<br/>저장버튼을 누르기 전까지는 서버에 적용되지 않습니다.",
+        		msg : "현재보고 있는 행을 삭제 하시겠습니까?<br/>그리드의 저장 버튼을 누르기 전까지는 서버에 적용되지 않습니다.",
         		confirm : true,
         		onOk : function() {
         			// romove row
-        			this_.opener.grid.remove(this_.selData.row);
+        			this_.selData.grid.remove(this_.selData.row);
         			this_.caller.close()
         		}
         	}).show();
