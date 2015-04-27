@@ -15,7 +15,6 @@
 					<label>Eye Color<select id="eyeColor"><option>선택</option></select></label>
 				</li>
 				<li class="buttons">
-					<a id="btnAdd" href="#" data-opts='{ "color": "blue" }'>신규입력</a>
 					<a id="btnSave" href="#" data-opts='{ "color": "skyblue" }'>저장</a>
 					<a id="btnSearch" href="#">조회</a>
 				</li>
@@ -82,14 +81,8 @@ N("article#exap0600").cont({
 
     	// 3. initialize N.form and add new row data for search box
     	var form = N([]).form({
-    		context : N("div.searchBox li.inputs", view),
-    		revert : true
-    	});
-    	if(request.attr("scData") === undefined) {
-    		form.add();
-    	} else {
-    		form.bind(0, request.attr("scData"));
-    	}
+    		context : N("div.searchBox li.inputs", view)
+    	}).add();
 
     	// 4. initialize N.grid and bind empty data for data list
     	var grid = N([]).grid({
@@ -102,46 +95,27 @@ N("article#exap0600").cont({
        		select : true,
        		onSelect : function(index, rowEle, data) {
        			// Grid row select event
-       			detailPop.open({
+       			// 5. initialize and open detail popup;
+       			N().popup({
+       	    		url : "html/exap/exap0701.html",
+       	    		title : "상세",
+       	    		button : false,
+       	    		width : 700,
+       	    		height : 520,
+       	    		onOpen : "onOpen",
+       	    		onClose : function() {
+       	    			// remove popup resource
+       	    			this.remove();
+       	    		}
+       	    	}).open({
        				data : data,
        				row : index
-       			});
+       			});;
         	}
        	});
 
-    	// 5. initialize popup
-    	// 5-1. Detail & edit form popup
-    	var detailPop = N().popup({
-    		url : "html/exap/exap0701.html",
-    		title : "조회/수정",
-    		button : false,
-    		width : 700,
-    		height : 520,
-    		onOpen : "onOpen"
-    	});
-    	// 5-2. Add form popup
-    	var addPop = N().popup({
-    		url : "html/exap/exap0702.html",
-    		title : "신규입력",
-    		button : false,
-    		width : 700,
-    		height : 520,
-    		onOpen : "onOpen",
-    		onClose : function() {
-    			grid.bind();
-    		}
-    	});
-
     	// 6. bind events
-    	// 6-1. Add button
-    	N("#btnAdd", view).click(function(e) {
-    		e.preventDefault();
-    		addPop.open({
-   				data : grid.data(false),
-   				row : 0
-   			});
-    	});
-    	// 6-2. Save button
+    	// 6-1. Save button
     	N("#btnSave", view).click(function(e) {
     		e.preventDefault();
 
@@ -171,7 +145,7 @@ N("article#exap0600").cont({
             	}).show();
             }
     	});
-    	// 6-3. Search button
+    	// 6-2. Search button
     	N("#btnSearch", view).click(function(e) {
             e.preventDefault();
             if(form.validate()) {

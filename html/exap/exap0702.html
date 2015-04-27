@@ -126,8 +126,10 @@ N("article#exap0602").cont({
 	    	"val" : "banana"
 	}],
     init : function(view, request) {
-    	var this_ = this;
-		this.request_ = request;
+    	var editMode = this.request.attr("mode");
+		if(this.request.attr("caller") !== undefined) {
+			this.caller = this.request.attr("caller");
+		}
 
     	// 1. initialize buttons
     	N(".buttons a", view).button();
@@ -143,17 +145,27 @@ N("article#exap0602").cont({
 		N(this.favoriteFruitCodes).select(N("#detail #favoriteFruit", view)).bind();
 
     	// 3. initialize N.form
-    	this_.form = N([]).form({
+    	var form = N(this.request.attr("selData").data).form({
     		context : N("#detail", view),
     		addTop : true,
     		revert : true
     	});
+    	if(editMode === "create") {
+    		// 3-1. Create mode - add data
+			// 3-1-1. Bind data for data sync
+    		form.bind(-1, this.request.attr("selData").data);
+    		// 3-1-2. Add empty row data;
+    		form.add();
+		} else {
+			// 3-1. Edit mode - bind data
+			form.bind(this.request.attr("selData").row, this.request.attr("selData").data);
+		}
 
     	// 4. bind events
     	// 4-1 Confirm button
     	N("#btnConfirm", view).click(function(e) {
             e.preventDefault();
-            if(this_.form.validate()) {
+            if(form.validate()) {
             	caller.close()
             }
         });
@@ -162,25 +174,14 @@ N("article#exap0602").cont({
     	var caller = this.caller;
     	N("#btnCancel", view).click(function(e) {
     		e.preventDefault();
-    		this_.form.revert();
+    		if(editMode === "create") {
+				// romove created row
+    			form.remove(form.row());
+    		} else {
+		    	form.revert();
+    		}
     		caller.close()
     	});
-    },
-    /**
-     * Popup's onOpen callback
-     */
-    onOpen : function(onOpenData) {
-    	// 3-1. Data bind that transfered by onOpen's argument
-
-    	if(this.request_.attr("selData") !== undefined) {
-			// 3-1-1. N.form data bind
-			this.form.bind(this.request_.attr("selData").row, this.request_.attr("selData").data);
-		} else {
-			// 3-1-2. N.form data bind
-			this.form.bind(-1, onOpenData.data);
-			this.form.add();
-			console.log(this.form.data()[0]);
-		}
     }
 });
 </script>

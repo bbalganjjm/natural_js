@@ -60,6 +60,7 @@
 		</tr>
 	</table>
 	<div class="buttons" align="center">
+		<a id="btnAdd" href="#" data-opts='{ "color": "blue" }'>추가</a>
 		<a id="btnEdit" href="#" data-opts='{ "color": "skyblue" }'>수정</a>
 		<a id="btnDelete" href="#" data-opts='{ "color": "gray" }'>삭제</a>
 		<a id="btnClose" href="#">닫기</a>
@@ -78,15 +79,27 @@ N("article#exap0601").cont({
     	this_.form = N([]).form(N("#detail", view));
 
      	// 3. bind events
-     	// 3-1 Go to edit page
+     	// 3-1 Go to create page
+    	N("#btnAdd", view).click(function(e) {
+    		e.preventDefault();
+    		// Grid row select event
+        	view.parent().comm("html/exap/exap0702.html")
+        		.request.attr("selData", this_.selData) // send seleted row data
+       				.request.attr("caller", this_.caller) // send caller(this popup opener instance) object
+       					.request.attr("mode", "create") // edit mode flag
+     						.submit();
+    	});
+     	// 3-2 Go to edit page
     	N("#btnEdit", view).click(function(e) {
     		e.preventDefault();
     		// Grid row select event
         	view.parent().comm("html/exap/exap0702.html")
-        		.request.attr("selData", this_.form.data()) // send seleted row data
-       				.submit();
+        		.request.attr("selData", this_.selData) // send seleted row data
+        			.request.attr("caller", this_.caller) // send caller(this popup opener instance) object
+	   					.request.attr("mode", "edit") // edit mode flag
+	       					.submit();
     	});
-    	// 3-2 Delete
+    	// 3-3 Delete
     	N("#btnDelete", view).click(function(e) {
     		e.preventDefault();
     		N(window).alert({
@@ -115,20 +128,21 @@ N("article#exap0601").cont({
         		}
         	}).show();
     	});
-    	// 3-3 Close this popup
+    	// 3-4 Close this popup
     	// this.caller is popup instance that called this page
     	var caller = this.caller;
     	N("#btnClose", view).click(function(e) {
     		e.preventDefault();
-    		caller.close()
+    		caller.close();
     	});
     },
     /**
      * Popup's onOpen callback
      */
     onOpen : function(onOpenData) {
+    	this.selData = onOpenData;
     	// 2-1. Data bind that transfered by onOpen's argument
-    	this.form.bind(onOpenData.row, onOpenData.data).add();
+    	this.form.bind(this.selData.row, this.selData.data);
     }
 });
 </script>
