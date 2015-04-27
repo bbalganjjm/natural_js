@@ -71,7 +71,7 @@
 N("article#exap0701").cont({
     init : function(view, request) {
     	var this_ = this;
-console.log(this);
+
     	// 1. initialize buttons
     	N(".buttons a", view).button();
 
@@ -107,7 +107,6 @@ console.log(this);
         		confirm : true,
         		onOk : function() {
         			// romove row
-        			console.log(this_.opener);
         			this_.opener.grid.remove(this_.selData.row);
         			this_.caller.close()
         		}
