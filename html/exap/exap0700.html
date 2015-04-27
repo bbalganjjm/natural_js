@@ -1,4 +1,4 @@
-<article id="exap0600" class="view-code">
+<article id="exap0700" class="view-code">
 	<h1>팝업 입력(C) 조회(R) 수정(U) 삭제(D) 예제</h1>
 	<div class="intro">
 		<p class="smallContTit">목록 화면과 입력 조회 수정 팝업을 조합한 예제 입니다.</p>
@@ -51,7 +51,7 @@
 </article>
 
 <script type="text/javascript">
-N("article#exap0600").cont({
+N("article#exap0700").cont({
 	genderCodes : [{
      	"key" : "male",
      	"val" : "male"
@@ -85,7 +85,7 @@ N("article#exap0600").cont({
     	}).add();
 
     	// 4. initialize N.grid and bind empty data for data list
-    	var grid = N([]).grid({
+    	var grid = this.grid = N([]).grid({
        		context : N("table#grid", view),
        		data : [],
        		height : 350,
