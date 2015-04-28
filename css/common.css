@@ -418,7 +418,7 @@ article .searchBox label input, article .searchBox label select{
 	border-color: #cccccc;
 }
 
-article .searchBox label input {
+article .searchBox label input[type='text'] {
 	width: 120px;
 }
 
