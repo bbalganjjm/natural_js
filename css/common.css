@@ -418,6 +418,10 @@ article .searchBox label input, article .searchBox label select{
 	border-color: #cccccc;
 }
 
+article .searchBox label input {
+	width: 120px;
+}
+
 article .click {
 	margin-top: 30px;
 	padding: 5px 44px 5px 15px;
