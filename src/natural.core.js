@@ -1,5 +1,5 @@
 /*!
- * Natural-CORE v0.8.2.6
+ * Natural-CORE v0.8.3.1
  * bbalganjjm@gmail.com
  *
  * Includes json2.js & formatdate.js
@@ -12,7 +12,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	var version = "0.8.2.6", N;
+	var version = "0.8.3.0", N;
 
 	// Use jQuery init
 	N = function(selector, context) {
@@ -22,6 +22,9 @@
 	// N local variables
 	$.fn.extend(N, {
 		"Natural-CORE" : version,
+		/**
+		 * Set and get locale value
+		 */
 		locale : function(str) {
 			if(str === undefined) {
 				return N.context.attr("core").locale;
@@ -29,6 +32,9 @@
 				N.context.attr("core").locale = str;
 			}
 		},
+		/**
+		 * Display the error log to console
+		 */
 		error : function(msg, e) {
 			if (e !== undefined && e.stack !== undefined && console.error !== undefined) {
 				if(typeof console !== "undefined" && typeof console.error !== "undefined") {
@@ -37,11 +43,17 @@
 			}
 			throw new Error(msg);
 		},
+		/**
+		 * Display the warnning log to console
+		 */
 		warn : function() {
 			if(typeof console !== "undefined" && typeof console.warn !== "undefined") {
 				console.warn.apply(console, arguments);
 			}
 		},
+		/**
+		 * Display the log to console
+		 */
 		log : function() {
 			if(typeof console !== "undefined" && typeof console.log !== "undefined") {
 				console.log.apply(console, arguments);
@@ -51,6 +63,9 @@
 		 * Natural-JS resource garbage collector
 		 */
 		gc : {
+			/**
+			 * Minimum collection
+			 */
 			minimum : function() {
 				$(window).unbind("resize.datepicker");
 				$(window.document).unbind("mousedown.datepicker");
@@ -58,6 +73,9 @@
 				$(window.document).unbind("keyup.alert");
 				return true;
 			},
+			/**
+			 * Full collection
+			 */
 			full : function() {
 				$(window).unbind("resize.datepicker");
 				$(window.document).unbind("mousedown.datepicker");
@@ -68,9 +86,13 @@
 				return true;
 			}
 		},
-		isFunction : $.isFunction,
+		/**
+		 * Check of array type
+		 */
 		isArray : $.isArray,
-		isWindow : $.isWindow,
+		/**
+		 * Check type for numeric
+		 */
 		isNumeric : $.isNumeric,
 		isEmptyObject : function(obj) {
 			if(obj !== undefined && this.isString(obj)) {
@@ -84,11 +106,19 @@
 			}
 			return true;
 		},
+		/**
+		 * Check whether the plain object type
+		 */
 		isPlainObject : $.isPlainObject,
+		/**
+		 * Check whether the String type
+		 */
 		isString : function(str) {
 			return typeof str === "string";
 		},
-		globalEval : $.globalEval,
+		/**
+		 * Check object type
+		 */
 		type : function(obj) {
 	        if (typeof obj == "object") {
 	            if (obj === null) {
@@ -113,6 +143,9 @@
 	        }
 	        return typeof obj;
 	    },
+	    /**
+	     * Check whether the element
+	     */
 		isElement : function(obj) {
 			if(N.isString(obj)) {
 				obj = N(obj);
@@ -121,7 +154,7 @@
 		},
 		isArraylike : function(obj) {
 			var length = obj.length, type = N.type(obj);
-			if (type === "function" || N.isWindow(obj)) {
+			if (type === "function" || $.isWindow(obj)) {
 				return false;
 			}
 			if (obj.nodeType === 1 && length) {
@@ -129,28 +162,49 @@
 			}
 			return type === "array" || length === 0 || typeof length === "number" && length > 0 && (length - 1) in obj;
 		},
+		/**
+		 * Check whether the JWS(jQuery wraped set)
+		 */
 		isWrappedSet : function(obj) {
 			return this.isArraylike(obj) && obj.jquery;
 		},
+		/**
+		 * N.string package
+		 */
 		"string" : {
+			/**
+			 * Checks if CharSequence contains a search character
+			 */
 			contains : function(needle, haystack) {
 				return haystack && (haystack.indexOf(needle) != -1);
 			},
+			/**
+			 * check if a String ends with a suffix
+			 */
 			endsWith : function(str, postfix) {
 				if (this.isEmpty(str) || this.isEmpty(postfix)) {
 					return false;
 				}
 				return str.lastIndexOf(postfix) === str.length - postfix.length;
 			},
+			/**
+			 * Check if a String starts with a prefix
+			 */
 			startsWith : function(str, prefix) {
 				if (this.isEmpty(str)) {
 					return false;
 				}
 				return str.indexOf(prefix) === 0;
 			},
+			/**
+			 * Insert a character at the specified index in the string
+			 */
 			insertAt : function(str, strToInsert, index) {
 				return str.substring(0, index) + strToInsert + str.substring(index);
 			},
+			/**
+			 * Check if a String matches a prefix
+			 */
 			matches : function(str, matchExp, ignoreCase) {
 				var ignoreCase_ = arguments.length >= 3 ? ignoreCase : false;
 				matchExp = this.trim(matchExp);
@@ -160,18 +214,27 @@
 				var regExp = new RegExp("^" + matchExp, (ignoreCase_ ? "i" : ""));
 				return regExp.test(str);
 			},
+			/**
+			 * Remove whitespace in string
+			 */
 			removeWhitespace : function(str) {
 				if (this.isEmpty(str)) {
 					return str;
 				}
 				return str.replace(/\s/g, "");
 			},
+			/**
+			 * Left pad a String with a specified character
+			 */
 			lpad : function(originalstr, length, strToPad) {
 				while (originalstr.length < length) {
 					originalstr = strToPad + originalstr;
 				}
 				return originalstr;
 			},
+			/**
+			 * Right pad a String with a specified character
+			 */
 			rpad : function(originalstr, length, strToPad) {
 				while (originalstr.length < length) {
 					originalstr = originalstr + strToPad;
@@ -179,7 +242,8 @@
 				return originalstr;
 			},
 			/**
-			 * 문자열의 바이트 길이를 반환
+			 * Return byte length of string
+			 *  - Hangul is unicode that is 3 bytes
 			 */
 			byteLength : function(str) {
 				return (function(s,b,i,c){
@@ -187,55 +251,63 @@
 		        	return b;
 		        })(str);
 			},
+			/**
+			 * Removes leading and trailing whitespace
+			 *  - the String to be trimmed, may be null or undefined
+			 */
 			trim : function(str) {
 				return $.trim(str);
 			},
 			/**
-			 * 값이 비어 있는지 체크
+			 * Checks if a String contains text
 			 */
 			isEmpty : function(str) {
 				return $.trim(str).length === 0 ? true : false;
 			},
 			/**
-			 * null이나 스트링을 트림 하여 스트링으로 반환
+			 * Removes leading and trailing whitespace
+			 *  - the String to be trimmed, may be null or undefined
 			 */
 			trimToEmpty : function(str) {
 				return $.trim(str);
 			},
 			/**
-			 * null이나 스트링을 트림 하여 스트링으로 반환
+			 * Change null or undefined to empty string
 			 */
 			nullToEmpty : function(str) {
 				return str === null || str === undefined ? "" : str;
 			},
 			/**
-			 * null이나 스트링을 트림하여 값이 없으면 null 반환
+			 * If trimmed string value is empty, return null
 			 */
 			trimToNull : function(str) {
 				return $.trim(str).length === 0 ? null : $.trim(str);
 			},
 			/**
-			 * null이나 스트링을 트림하여 값이 없으면 undefined 반환
+			 * If trimmed string value is empty, return undefined
 			 */
 			trimToUndefined : function(str) {
 				return $.trim(str).length === 0 ? undefined : $.trim(str);
 			},
 			/**
-			 * null이나 스트링을 트림하여 값이 없으면 0을 반환
+			 * If trimmed string value is empty, return 0
 			 */
 			trimToZero : function(str) {
 				return $.trim(str).length === 0 ? "0" : $.trim(str);
 			},
 			/**
-			 * null이나 스트링을 트림하여 값이 없으면 valStr 을 반환
+			 * If trimmed string value is empty, return a specified value
 			 */
 			trimToVal : function(str, valStr) {
 				return $.trim(str).length === 0 ? valStr : $.trim(str);
 			}
 		},
+		/**
+		 * N.date package
+		 */
 		"date" : {
 			/**
-			 * 두 날짜의 차수를 리턴한다.
+			 * Calculate the date counts of difference between the two dates,
 			 */
 			diff : function(str1, str2) {
 				if (N.type(str1) == "string") {
@@ -247,7 +319,7 @@
 				return Math.ceil((str2 - str1) / 1000 / 24 / 60 / 60);
 			},
 			/**
-			 * 날짜 문자열을 주어진 포멧에 맞게 재 배치하여 반환한다.
+			 * Return to re-place the date string for a given format.
 			 */
 			strToDateStrArr : function(str, format, isString) {
 				var dateStrArr = [];
@@ -284,7 +356,7 @@
 				return dateStrArr;
 			},
 			/**
-			 * 날짜스트링을 Date Object와 기본 데이트포멧이 담긴 dateInfo 오브젝트 반환
+			 * Returns object of date information that contained the date object with a default date format
 			 */
 			strToDate : function(str, format) {
 				str = N.string.trimToEmpty(str).replace(/[^0-9]/g, "");
@@ -346,14 +418,14 @@
 				return dateInfo;
 			},
 			/**
-			 * 날짜를 형식에 맞게 리턴
+			 * Formatting the date string to specified date format
 			 */
 			format : function(str, format) {
 				var dateInfo = this.strToDate(str);
 				return dateInfo != null ? dateInfo.obj.formatDate(format != null ? format : dateInfo.format) : str;
 			},
 			/**
-			 * DATE 형식의 오브젝트를 TIMESTAMP로 변환한다.
+			 * Convert the timestamp from date object
 			 */
 			dateToTs : function(dateObj) {
 				var d = null;
@@ -363,13 +435,16 @@
 				return Math.round(d.getTime() / 1000);
 			},
 			/**
-			 * TIMESTAMP를 DATE 형식의 오브젝트로 변환한다.
+			 * Convert the date object from timestamp
 			 */
 			tsToDate : function(timestamp) {
 				var d = new Date(timestamp);
 				return d;
 			}
 		},
+		/**
+		 * N.element package
+		 */
 		"element" : {
 			/**
 			 * make options object from class attribute
@@ -383,9 +458,15 @@
 			toRules : function(ele, ruleset) {
 				var retRules = new Object();
 				var thisEle;
+				var id;
 				ele.each(function() {
 					thisEle = $(this);
-					retRules[thisEle.attr("id")] = thisEle.data(ruleset);
+					if(thisEle.is("input:radio, input:checkbox")) {
+						id = thisEle.attr("name");
+					} else {
+						id = thisEle.attr("id");
+					}
+					retRules[id] = thisEle.data(ruleset);
 				});
 				return retRules;
 			},
@@ -425,6 +506,9 @@
 				});
 				return retData;
 			},
+			/**
+			 * Get max z-index of all elements in web page
+			 */
 			maxZindex : function(nContext) {
 				if (nContext == null) {
 					nContext = $("div, span");
@@ -438,17 +522,30 @@
 					return zIndex || 0;
 				}));
 			},
+			/**
+			 * Prevent all events
+			 */
 			disable : function(e) {
 		        e.preventDefault();
 		        e.stopImmediatePropagation();
 		        e.stopPropagation();
 		        return false;
 		    },
+		    /**
+		     * Data change effect for N.ds
+		     */
 		    dataChanged : function(ele) {
 		    	ele.fadeOut(150).fadeIn(300);
 		    }
 		},
+		/**
+		 * N.browser package
+		 */
 		"browser" : {
+			/**
+			 * Set and get cookie
+			 *  - get : when value is undefined
+			 */
 			"cookie" : function(name, value, expiredays, domain) {
 				if (value === undefined) {
 					var getCookieVar = function(offset) {
@@ -491,6 +588,9 @@
 					document.cookie = name + "=" + escape(value) + "; path=/" + expires + domain_;
 				}
 			},
+			/**
+			 * Remove cookie
+			 */
 			removeCookie : function(name, domain) {
 				if (domain !== undefined) {
 					document.cookie = name + "=; path=/; expires=" + (new Date(1)) + "; domain=" + domain;
@@ -498,6 +598,10 @@
 					document.cookie = name + "=; path=/; expires=" + (new Date(1)) + ";";
 				}
 			},
+			/**
+			 * Get Microsoft Internet Explorer version
+			 *  - MSIE trident version has been applied
+			 */
 			msieVersion : function() {
 				var ua = window.navigator.userAgent;
 				var msie = ua.indexOf("MSIE ");
@@ -516,6 +620,9 @@
 					}
 				}
 			},
+			/**
+			 * Check the connected browser
+			 */
 			"is" : function(name) {
 				if(!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0) {
 					return name === "opera" ? true : false;
@@ -530,10 +637,16 @@
 				}
 				return false;
 			},
+			/**
+			 * Get max document height
+			 */
 			documentHeight : function() {
 				return Math.max(Math.max(document.body.scrollHeight, document.documentElement.scrollHeight), Math.max(document.body.offsetHeight,
 						document.documentElement.offsetHeight), Math.max(document.body.clientHeight, document.documentElement.clientHeight));
 			},
+			/**
+			 * Get height for each browsers
+			 */
 			browserHeight : function() {
 				var totalHeight = 0;
 				if ($.browser.msie) {
@@ -548,6 +661,9 @@
 				}
 				return totalHeight;
 			},
+			/**
+			 * Get scrollbars width for connected browser
+			 */
 			scrollbarWidth : function() {
 				var div = $('<div class="antiscroll-inner" style="width:50px;height:50px;overflow-y:scroll;' +
 					'position:absolute;top:-200px;left:-200px;"><div style="height:100px;width:100%"/>' +
@@ -561,7 +677,13 @@
 				return w1 - w2;
 			}
 		},
+		/**
+		 * N.message package
+		 */
 		"message" : {
+			/**
+			 * Replace message variables for N.message.get
+			 */
 			replaceMsgVars : function(msg, vars) {
 				if (vars !== undefined) {
 					for (var i = 0; i < vars.length; i++) {
@@ -570,12 +692,21 @@
 				}
 				return msg;
 			},
+			/**
+			 * Get message from message resource
+			 */
 			get : function(resource, key, vars) {
 				var msg = resource[N.locale()][key];
 				return msg !== undefined ? N.message.replaceMsgVars(msg, vars) : key;
 			}
 		},
+		/**
+		 * N.json package
+		 */
 		"json" : {
+			/**
+			 * Return formated JSON String
+			 */
 			"format" : function(oData, sIndent) {
 				if (oData != null && !N.isEmptyObject(oData)) {
 					if (N.isString(oData)) {
@@ -595,7 +726,9 @@
 
 	N.fn = N.prototype = {
 		constructor : N,
-		get : $.fn.get,
+		/**
+		 * Remove object of specified index from array
+		 */
 		"remove_" : function(idx, length) {
 			if (idx !== undefined) {
 				if (!N.isNumeric(idx)) {
@@ -608,7 +741,9 @@
 			}
 			return this;
 		},
-		toArray : $.fn.toArray,
+		/**
+		 * Event bind to the top
+		 */
 		tpBind : function(event, handler) {
 			this.each(function() {
 				if($._data(this, "events") !== undefined) {
@@ -623,6 +758,9 @@
 		        }
 			});
 	    },
+	    /**
+	     * Get instances form component context elements
+	     */
 	    instance : function(name, instance) {
 	    	if(instance !== undefined) {
 	    		if(N.type(instance) === "function") {
@@ -639,6 +777,10 @@
 	    	}
 	    	return this.data(name + "__");
 	    },
+	    /**
+	     * Get and Set value to input elements
+	     * - get : when the vals are undefined
+	     */
 	    vals : function(vals) {
 	    	var tagName = this.get(0).tagName.toLowerCase();
 	    	var type = N.string.trimToEmpty(this.attr("type")).toLowerCase();
