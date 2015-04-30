@@ -1,5 +1,5 @@
 (function(window, $) {
-	var version = "0.8.4.13";
+	var version = "0.8.4.14";
 
 	// N local variables
 	$.fn.extend(N, {
