@@ -1,5 +1,5 @@
 /*!
- * Natural-DATA v0.8.1.9
+ * Natural-DATA v0.8.1.12
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	var version = "0.8.1.9";
+	var version = "0.8.1.11";
 
 	// N local variables
 	$.fn.extend(N, {
@@ -613,11 +613,11 @@
 								rule = rule.split("+").sort().toString().replace(/\,/g, "_");
 							}
 							try {
-								if (rule !== "required" && N.string.trimToNull(String(obj[k])) === null) {
+								if (opts.rules[k].toString().indexOf("required") < 0 && rule !== "required" && N.string.isEmpty(String(obj[k]))) {
 									retTempObj.result = true;
-			                    } else {
-			                    	retTempObj.result = Validator[rule](String(obj[k]), args);
-			                    }
+								} else {
+									retTempObj.result = Validator[rule](String(obj[k]), args);
+								}
 							} catch (e) {
 								if (e.toString().indexOf("is not a function") > -1) {
 									N.error("[Validator.fn.validate]\"" + this[0] + "\" is invalid format rule");
@@ -638,14 +638,19 @@
 							retTempArr.push(retTempObj);
 						});
 						if (opts.isElement) {
-							var ele = opts.targetEle.filter("#" + k);
+							var ele;
+							if(opts.targetEle.is("input:radio, input:checkbox")) {
+								ele = opts.targetEle.filter("[name='" + k + "'].select_template__");
+							} else {
+								ele = opts.targetEle.filter("#" + k);
+							}
 							if(!pass) {
 								ele.addClass("validate_false__");
 							} else {
 								ele.removeClass("validate_false__");
 							}
 							if (N().alert !== undefined) {
-								alert = N(opts.targetEle != null ? ele : undefined).alert($(retTempArr).map(function() {
+								alert = N(opts.targetEle !== null ? ele : undefined).alert($(retTempArr).map(function() {
 									if (this.msg != null) {
 										return this.msg;
 									}
@@ -664,7 +669,7 @@
 		});
 		$.extend(Validator, {
 			"required" : function(str) {
-				return (N.string.trimToNull(str) !== null) ? true : false;
+				return !N.string.isEmpty(str);
 			},
 			"alphabet" : function(str) {
 				return new RegExp(/^[a-z\s]+$/i).test(str);
@@ -836,9 +841,7 @@
 				return true;
 			},
 			"date" : function(str, args) {
-				/*
-				 * 날짜포맷에 맞는지 검사
-				 */
+				// Check date format length
 				var isDateFormat = function(d) {
 					if (N.string.trimToEmpty(d).length == 8) {
 						return true;
@@ -846,9 +849,7 @@
 						return false;
 					}
 				};
-				/*
-				 * 윤년여부 검사
-				 */
+				// Check leap year
 				var isLeaf = function(year) {
 					var leaf = false;
 					if (year % 4 == 0) {
