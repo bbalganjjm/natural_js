@@ -1,14 +1,5 @@
-/*!
- * Natural-UI v0.8.4.12
- * bbalganjjm@gmail.com
- *
- * Copyright 2014 KIM HWANG MAN
- * Released under the LGPL license
- *
- * Date: 2014-09-26T11:11Z
- */
 (function(window, $) {
-	var version = "0.8.4.12";
+	var version = "0.8.4.13";
 
 	// N local variables
 	$.fn.extend(N, {
@@ -1678,7 +1669,12 @@
 							eles = $(opts.context).find("input:radio[id^='" + key + "'], input:checkbox[id^='" + key + "']");
 							eles.removeClass("data_changed__");
 							if(eles.length > 0) {
-								eles.vals(vals[key]);
+								//validate
+								if(eles.filter(".select_template__").data("validate") !== undefined) {
+									if (opts.validate) {
+										N().validator(opts.fRules !== null ? opts.fRules : eles.filter(".select_template__"));
+									}
+								}
 
 								//dataSync
 								eles.unbind("click.form.dataSync select.form.dataSync");
@@ -1702,6 +1698,8 @@
 										}
 	                                }
 								});
+
+								eles.vals(vals[key]);
 							}
 						}
 					}
@@ -2038,7 +2036,9 @@
 				this.thead.find("span.sortable__").remove();
 
 				//empty removedData;
-				opts.removedData = [];
+				if(arguments.callee.caller !== this.update) {
+					opts.removedData = [];
+				}
 				//for internal call by scrollPaging
 				var interCall = arguments[1] !== undefined && arguments[1] === true ? true : false;
 				//to rebind new data
