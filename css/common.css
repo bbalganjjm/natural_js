@@ -41,9 +41,8 @@ audio, canvas, progress, video {
  * Prevent modern browsers from displaying `audio` without controls.
  * Remove excess height in iOS 5 devices.
  */
-audio:not([controls]){
-	display: none;
-	height: 0;
+audio:not ([controls] ){
+	display: none; height: 0;
 }
 
 /**
@@ -176,13 +175,11 @@ header nav>ul>li>ul>li a {
 }
 
 section {
-	margin: 0 auto; max-width: 1003px; min-width: 560px; min-height: 350px; border-radius: 0 0 3px 3px; background-color: #ffffff;
-	padding: 15px 0 15px 0;
+	margin: 0 auto; max-width: 1003px; min-width: 560px; min-height: 350px; border-radius: 0 0 3px 3px; background-color: #ffffff; padding: 15px 0 15px 0;
 }
 
 section article {
-	margin: 0 30px 0 30px; word-break: break-word;
-	line-height: 165%;
+	margin: 0 30px 0 30px; word-break: break-word; line-height: 165%;
 }
 
 footer {
@@ -194,8 +191,7 @@ article dl.qna {
 }
 
 article dl.qna dt {
-	font-size: 1.1em;
-	font-weight: bold; padding: 10px 0 10px 20px; background: url("../images/icon/dt_leaf.png") no-repeat 0 9px;
+	font-size: 1.1em; font-weight: bold; padding: 10px 0 10px 20px; background: url("../images/icon/dt_leaf.png") no-repeat 0 9px;
 }
 
 article dl.qna dd {
@@ -210,7 +206,7 @@ article dl.qna dd ul li {
 	line-height: 165%;
 }
 
-article dl.qna dd ul li > ul {
+article dl.qna dd ul li>ul {
 	margin: 5px 0 5px 0;
 }
 
@@ -333,11 +329,7 @@ article .smallContTit {
 }
 
 article .searchBox {
-	border: 1px solid #cccccc;
-	box-shadow: inset 1px 1px 3px #eeeeee;
-	background-color: #fefefe;
-	border-radius: 3px;
-	margin-bottom: 15px;
+	border: 1px solid #cccccc; box-shadow: inset 1px 1px 3px #eeeeee; background-color: #fefefe; border-radius: 3px; margin-bottom: 15px;
 }
 
 article .searchBox ul {
@@ -345,9 +337,7 @@ article .searchBox ul {
 }
 
 article .searchBox ul li {
-	font-size: 12px;
-	margin: 0;
-	padding: 10px;
+	font-size: 12px; margin: 0; padding: 10px;
 }
 
 article .searchBox ul li.inputs {
@@ -358,19 +348,16 @@ article .searchBox ul li.buttons {
 	text-align: right;
 }
 
-article .searchBox li > label {
-	margin: 0 15px 0 10px;
-	font-weight: bold;
+article .searchBox li>label {
+	margin: 0 15px 0 10px; font-weight: bold;
 }
 
-article .searchBox li > label label {
+article .searchBox li>label label {
 	font-weight: normal;
 }
 
-article .searchBox label input, article .searchBox label select{
-	margin-left: 15px;
-	box-shadow: 1px 1px 2px #EEE;
-	border-color: #cccccc;
+article .searchBox label input, article .searchBox label select {
+	margin-left: 15px; box-shadow: 1px 1px 2px #EEE; border-color: #cccccc;
 }
 
 article .searchBox label input[type='text'] {
@@ -378,16 +365,5 @@ article .searchBox label input[type='text'] {
 }
 
 article .click {
-	margin-top: 30px;
-	padding: 5px 44px 5px 15px;
-	background: url("../images/icon/click.png") no-repeat 136px 6px;
-	display: inline-block;
-	height: 35px;
-	font-weight: bold;
-	color: #008800;
-	border: 1px dotted #008800;
-	border-radius: 3px;
-	box-shadow: 1px 1px 3px #ccffcc;
-	background-color: #efe;
-	cursor: pointer;
+	margin-top: 30px; padding: 5px 44px 5px 15px; background: url("../images/icon/click.png") no-repeat 136px 6px; display: inline-block; height: 35px; font-weight: bold; color: #008800; border: 1px dotted #008800; border-radius: 3px; box-shadow: 1px 1px 3px #ccffcc; background-color: #efe; cursor: pointer;
 }
