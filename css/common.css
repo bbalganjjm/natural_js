@@ -41,73 +41,9 @@ audio, canvas, progress, video {
  * Prevent modern browsers from displaying `audio` without controls.
  * Remove excess height in iOS 5 devices.
  */
-audio
-
-
-
-
-
-
-:not
-
-
-
-
-
-
-
-(
-[
-controls
-]
-
-
-
-
-
-
-
-)
-{
-display
-
-
-
-
-
-
-:
-
-
-
-
-
-
-
-none
-
-
-
-
-
-
-;
-height
-
-
-
-
-
-
-:
-
-
-
-
-
-
-
-0;
+audio:not([controls]){
+	display: none;
+	height: 0;
 }
 
 /**
@@ -244,7 +180,8 @@ section {
 }
 
 section article {
-	margin: 0 15px 0 15px; word-break: break-word; line-height: 160%;
+	margin: 0 15px 0 15px; word-break: break-word;
+	line-height: 165%;
 }
 
 footer {
@@ -256,8 +193,20 @@ article dl.qna {
 }
 
 article dl.qna dt {
-	font-size: 1.1em; 
+	font-size: 1.1em;
 	font-weight: bold; padding: 10px 0 10px 20px; background: url("../images/icon/dt_leaf.png") no-repeat 0 9px;
+}
+
+article dl.qna dd {
+	margin-left: 21px;
+}
+
+article dl.qna dd ul {
+	padding-left: 20px;
+}
+
+article dl.qna dd ul li {
+	line-height: 165%;
 }
 
 article h1 {
