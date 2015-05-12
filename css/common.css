@@ -176,11 +176,12 @@ header nav>ul>li>ul>li a {
 }
 
 section {
-	margin: 0 auto; max-width: 1003px; min-width: 560px; min-height: 350px; border-radius: 0 0 3px 3px; background-color: #ffffff; padding: 15px 0 15px 0;
+	margin: 0 auto; max-width: 1003px; min-width: 560px; min-height: 350px; border-radius: 0 0 3px 3px; background-color: #ffffff;
+	padding: 15px 0 15px 0;
 }
 
 section article {
-	margin: 0 15px 0 15px; word-break: break-word;
+	margin: 0 30px 0 30px; word-break: break-word;
 	line-height: 165%;
 }
 
@@ -207,6 +208,10 @@ article dl.qna dd ul {
 
 article dl.qna dd ul li {
 	line-height: 165%;
+}
+
+article dl.qna dd ul li > ul {
+	margin: 5px 0 5px 0;
 }
 
 article h1 {
