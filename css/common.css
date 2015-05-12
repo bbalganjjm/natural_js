@@ -256,7 +256,8 @@ article dl.qna {
 }
 
 article dl.qna dt {
-	font-size: 15px; font-weight: bold; padding: 10px 0 10px 20px; background: url("../images/icon/dt_leaf.png") no-repeat 0 9px;
+	font-size: 1.1em; 
+	font-weight: bold; padding: 10px 0 10px 20px; background: url("../images/icon/dt_leaf.png") no-repeat 0 9px;
 }
 
 article h1 {
