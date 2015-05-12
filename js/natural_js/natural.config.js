@@ -94,7 +94,7 @@
 					/**
 					 * Ajax 통신 시 브라우저 캐시 적용 여부, 운영 시에는 true로 변경 바람
 					 */
-					"cache" : false,
+					"cache" : true,
 					/**
 					 * 페이지 전환 없는 방식의 사이트 구현 시 Ajax 통신 시(async)
 					 * 요청할 때 location.href 와 응답 올때 location.href 을 비교하여 오류 방지 할건지 여부
