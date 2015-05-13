@@ -1,5 +1,5 @@
 /*!
- * Natural-DATA v0.8.1.12
+ * Natural-DATA v0.8.1.13
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	var version = "0.8.1.11";
+	var version = "0.8.1.13";
 
 	// N local variables
 	$.fn.extend(N, {
@@ -48,7 +48,7 @@
 					return N(this.refine(obj.toArray(), listId));
 				}
 			} else {
-				if (listId != null) {
+				if (listId !== undefined) {
 					return obj[listId] || [];
 				} else {
 					for ( var key in obj) {
@@ -302,10 +302,10 @@
 				str = str.replace(/-/g, "");
 				if (str.length == 13) {
 					var strToPad = "*";
-					if (args != null && args[1] != null) {
+					if (args !== undefined && args[1] !== undefined) {
 						strToPad = args[1];
 					}
-					if (args != null && args[0] != null) {
+					if (args !== undefined && args[0] !== undefined) {
 						str = N.string.rpad(str.substring(0, 13 - Number(args[0])), 13, strToPad);
 						str = str.substring(0, 6) + "-" + str.substring(6, 13);
 					} else {
@@ -376,7 +376,7 @@
 				return N.string.trimToZero(str);
 			},
 			"trimtoval" : function(str, args) {
-				if (args == null || args[0] == null) {
+				if (args === undefined || args[0] === undefined) {
 					N.error("[Formatter.trimToVal]You must input args[0](default value)");
 				}
 				return N.string.trimToVal(str, args[0]);
@@ -458,13 +458,13 @@
 				} else {
 					str = str.substring(0, 6);
 				}
-				if (args != null && args[0] != null && args[0] == '2') {
+				if (args !== undefined && args[0] !== undefined && args[0] == '2') {
 					str = str.substring(0, 2);
-				} else if (args != null && args[0] != null && args[0] == '4') {
+				} else if (args !== undefined && args[0] !== undefined && args[0] == '4') {
 					str = str.substring(0, 2) + N.context.attr("data").formatter.date.timeSepa + str.substring(2, 4);
-				} else if (args != null && args[0] != null && args[0] == '6') {
-					str = str.substring(0, 2) + N.context.attr("data").formatter.date.timeSepa + str.substring(2, 4)
-							+ N.context.attr("data").formatter.date.timeSepa + str.substring(4, 6);
+				} else if (args !== undefined && args[0] !== undefined && args[0] == '6') {
+					str = str.substring(0, 2) + N.context.attr("data").formatter.date.timeSepa + str.substring(2, 4) +
+							N.context.attr("data").formatter.date.timeSepa + str.substring(4, 6);
 				} else {
 					str = str.substring(0, 2) + N.context.attr("data").formatter.date.timeSepa + str.substring(2, 4);
 				}
@@ -472,7 +472,7 @@
 				return str;
 			},
 			"limit" : function(str, args, ele) {
-				if (args == null || args[0] == null) {
+				if (args === undefined || args[0] === undefined) {
 					N.error("[Formatter.limit]You must input args[0](cut length)");
 				}
 				if(str.substr(str.length - args[1].length, args[1].length) !== args[1]) {
@@ -483,7 +483,7 @@
 					for (var i = 0; i < str.length; i++) {
 						l += (str.charCodeAt(i) > 128) ? 2 : 1;
 						if (l > args[0]) {
-							if (args != null && args[1] != null) {
+							if (args !== undefined && args[1] !== undefined) {
 								return N.string.trimToEmpty(str.substring(0, i)) + args[1];
 							} else {
 								return str.substring(0, i);
@@ -494,11 +494,8 @@
 				return str;
 			},
 			"replace" : function(str, args, ele) {
-				if (args == null || args[0] == null) {
-					N.error("[Formatter.replace]You must input args[0](target string)");
-				}
-				if (args == null || args[1] == null) {
-					N.error("[Formatter.replace]You must input args[1](replace string)");
+				if (args === undefined || args.length < 2) {
+					N.error("[Formatter.replace]You must input args[0](target string) and args[1](replace string)");
 				}
 				var replaceStr = str.split(String(args[0])).join(String(args[1]));
 				if (typeof args[2] != "undefined" && String(args[2]) == "true") {
@@ -507,32 +504,26 @@
 				return replaceStr;
 			},
 			"lpad" : function(str, args) {
-				if (args == null || args[0] == null) {
-					N.error("[Formatter.lpad]You must input args[0](fill length)");
-				}
-				if (args == null || args[1] == null) {
-					N.error("[Formatter.lpad]You must input args[1](replace string)");
+				if (args === undefined || args.length < 2) {
+					N.error("[Formatter.lpad]You must input args[0](fill length) and args[1](replace string)");
 				}
 				return N.string.lpad(str, Number(args[0]), args[1]);
 			},
 			"rpad" : function(str, args) {
-				if (args == null || args[0] == null) {
-					N.error("[Formatter.rpad]You must input args[0](fill length)");
-				}
-				if (args == null || args[1] == null) {
-					N.error("[Formatter.rpad]You must input args[1](replace string)");
+				if (args === undefined || args.length < 2) {
+					N.error("[Formatter.rpad]You must input args[0](fill length) and  args[1](replace string)");
 				}
 				return N.string.rpad(str, Number(args[0]), args[1]);
 			},
 			"generic" : function(str, args) {
-				if (args === undefined || args[0] == null) {
+				if (args === undefined || args[0] === undefined) {
 					N.error("[Formatter.generic]You must input args[0](user format rule)");
 				}
 				var mask = new N.Mask(args[0]);
 				return mask.setGeneric(String(str));
 			},
 			"numeric" : function(str, args) {
-				if (args === undefined || args[0] == null) {
+				if (args === undefined || args[0] === undefined) {
 					N.error("[Formatter.numeric]You must input args[0](user format rule)");
 				}
 				var mask = new N.Mask(args[0]);
@@ -651,7 +642,7 @@
 							}
 							if (N().alert !== undefined) {
 								alert = N(opts.targetEle !== null ? ele : undefined).alert($(retTempArr).map(function() {
-									if (this.msg != null) {
+									if (this.msg !== undefined) {
 										return this.msg;
 									}
 								}).get()).show();
@@ -715,11 +706,11 @@
 				return new RegExp(/^\d{3}-\d{3}$/).test(str);
 			},
 			"decimal" : function(str, args) {
-				var length = (args != null && args[0] != null) ? args[0].trim() : 10;
-				return new RegExp(/^-?\d+$/).test(str) || new RegExp("^-?\\d*\\.\\d{0," + length + "}$").test(str);
+				var length = (args !== undefined && args[0] !== undefined) ? args[0] : 10;
+				return new RegExp(/^-?\d+$/).test(str) || new RegExp("^-?\\d*\\.\\d{0," + String(length) + "}$").test(str);
 			},
 			"phone" : function(str, args) {
-				if (args != null && args[0] != null) {
+				if (args !== undefined && args[0] !== undefined) {
 					if (args[0] == "true") {
 						return new RegExp(/^\d{2,3}-\d{3,4}-\w+|"("")"$/).test(str);
 					}
@@ -771,7 +762,7 @@
 				if (str.substr(6, 1) != 5 && str.substr(6, 1) != 6 && str.substr(6, 1) != 7 && str.substr(6, 1) != 8) {
 					return false;
 				}
-				if (Number(str.substr(7, 2)) % 2 != 0) {
+				if (Number(str.substr(7, 2)) % 2 !== 0) {
 					return false;
 				}
 				for (var i = 0; i < 12; i++) {
@@ -815,20 +806,17 @@
 				return false;
 			},
 			"cpno" : function(str, args) {
-				var re = /-/g;
-				var cc = str.replace(re, '');
-
-				if (cc.length != 13) {
+				var numStr = N.string.trim(str).replace(/-/g, '');
+				if (numStr.length != 13) {
 					return false;
 				}
-
-				var arr_regno = cc.split("");
-				var arr_wt = new Array(1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2);
+				var arr_regno = numStr.split("");
+				var arr_wt = [1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2];
 				var iSum_regno = 0;
 				var iCheck_digit = 0;
 
 				for (var i = 0; i < 12; i++) {
-					iSum_regno += eval(arr_regno[i]) * eval(arr_wt[i]);
+					iSum_regno += parseInt(arr_regno[i]) * arr_wt[i];
 				}
 
 				iCheck_digit = 10 - (iSum_regno % 10);
@@ -852,14 +840,14 @@
 				// Check leap year
 				var isLeaf = function(year) {
 					var leaf = false;
-					if (year % 4 == 0) {
+					if (year % 4 === 0) {
 						leaf = true;
 
-						if (year % 100 == 0) {
+						if (year % 100 === 0) {
 							leaf = false;
 						}
 
-						if (year % 400 == 0) {
+						if (year % 400 === 0) {
 							leaf = true;
 						}
 					}
@@ -877,7 +865,7 @@
 				var month = d.substring(4, 6);
 				var day = d.substring(6, 8);
 
-				if (day == 0) {
+				if (day === 0) {
 					return false;
 				}
 
@@ -905,118 +893,109 @@
 				return new RegExp(/^([01]\d|2[0-3])([0-5]\d){0,2}$/).test(str.replace(/:/g, ""));
 			},
 			"accept" : function(str, args) {
-				if (args == null || args[0] == null) {
+				if (args === undefined || args[0] === undefined) {
 					throw new Error("[Validator.accept]You must input args[0](accept string)");
 				}
 				return (new RegExp("^(" + args[0] + ")$")).test(str);
 			},
 			"match" : function(str, args) {
-				if (args == null || args[0] == null) {
+				if (args === undefined || args[0] === undefined) {
 					throw new Error("[Validator.match]You must input args[0](match string)");
 				}
 				return (new RegExp(args[0])).test(str);
 			},
 			"acceptfileext" : function(str, args) {
-				if (args == null || args[0] == null) {
+				if (args === undefined || args[0] === undefined) {
 					throw new Error("[Validator.acceptFileExt]You must input args[0](file extention)");
 				}
 				return (new RegExp(".(" + args[0] + ")$", "i")).test(str);
 			},
 			"notaccept" : function(str, args) {
-				if (args == null || args[0] == null) {
+				if (args === undefined || args[0] === undefined) {
 					throw new Error("[Validator.notAccept]You must input args[0](refused string)");
 				}
 				return !(new RegExp("^(" + args[0] + ")$")).test(str);
 			},
 			"notmatch" : function(str, args) {
-				if (args == null || args[0] == null) {
+				if (args === undefined || args[0] === undefined) {
 					throw new Error("[Validator.notMatch]You must input args[0](unmatch String)");
 				}
 				return !(new RegExp(args[0])).test(str);
 			},
 			"notacceptfileext" : function(str, args) {
-				if (args == null || args[0] == null) {
+				if (args === undefined || args[0] === undefined) {
 					throw new Error("[Validator.notAcceptFileExt]You must input args[0](file extention)");
 				}
 				return !(new RegExp(".(" + args[0] + ")$", "i")).test(str);
 			},
 			"equalTo" : function(str, args) {
-				if (args == null || args[0] == null) {
+				if (args === undefined || args[0] === undefined) {
 					throw new Error("[Validator.equalTo]You must input args[0](selector string(:input))");
 				}
-				if (N.string.trimToNull($(args[0]).val()) == null) {
+				if (N.string.trimToNull($(args[0]).val()) === null) {
 					return true;
 				}
-				return N.string.trimToEmpty(str) == N.string.trimToEmpty($(args[0]).val());
+				return str === $(args[0]).val();
 			},
 			"maxlength" : function(str, args) {
-				if (args == null || args[0] == null) {
+				if (args === undefined || args[0] === undefined) {
 					throw new Error("[Validator.maxlength]You must input args[0](length)");
 				}
 				return N.string.trimToEmpty(str).length <= Number(N.string.trimToZero(args[0]));
 			},
 			"minlength" : function(str, args) {
-				if (args == null || args[0] == null) {
+				if (args === undefined || args[0] === undefined) {
 					throw new Error("[Validator.minlength]You must input args[0](length)");
 				}
 				return Number(N.string.trimToZero(args[0])) <= N.string.trimToEmpty(str).length;
 			},
 			"rangelength" : function(str, args) {
-				if (args == null || args[0] == null) {
-					throw new Error("[Validator.rangelength]You must input args[0](minimum length)");
+				if (args === undefined || args.length < 2) {
+					throw new Error("[Validator.rangelength]You must input args[0](minimum length) and args[1](maximum length");
 				}
-				if (args == null || args[1] == null) {
-					throw new Error("[Validator.rangelength]You must input args[1](maximum length");
-				}
-				return Number(N.string.trimToZero(args[0])) <= N.string.trimToEmpty(str).length
-						&& N.string.trimToZero(str).length <= Number(N.string.trimToEmpty(args[1]));
+				return Number(N.string.trimToZero(args[0])) <= N.string.trimToEmpty(str).length &&
+						N.string.trimToZero(str).length <= Number(N.string.trimToEmpty(args[1]));
 			},
 			"maxbyte" : function(str, args) {
-				if (args == null || args[0] == null) {
+				if (args === undefined || args[0] === undefined) {
 					throw new Error("[Validator.maxbyte]You must input args[0](maximum byte)");
 				}
 				return N.string.byteLength(N.string.trimToEmpty(str)) <= Number(N.string.trimToZero(args[0]));
 			},
 			"minbyte" : function(str, args) {
-				if (args == null || args[0] == null) {
+				if (args === undefined || args[0] === undefined) {
 					throw new Error("[Validator.minbyte]You must input args[0](minimum byte)");
 				}
 				return Number(N.string.trimToZero(args[0])) <= N.string.byteLength(N.string.trimToEmpty(str));
 			},
 			"rangebyte" : function(str, args) {
-				if (args == null || args[0] == null) {
-					throw new Error("[Validator.rangebyte]You must input args[0](minimum byte)");
+				if (args === undefined || args.length < 2) {
+					throw new Error("[Validator.rangebyte]You must input args[0](minimum byte) and args[1](maximum byte)");
 				}
-				if (args == null || args[1] == null) {
-					throw new Error("[Validator.rangebyte]You must input args[0](maximum byte)");
-				}
-				return Number(N.string.trimToZero(args[0])) <= N.string.byteLength(N.string.trimToEmpty(str))
-						&& N.string.byteLength(N.string.trimToEmpty(str)) <= Number(N.string.trimToZero(args[1]));
+				return Number(N.string.trimToZero(args[0])) <= N.string.byteLength(N.string.trimToEmpty(str)) &&
+						N.string.byteLength(N.string.trimToEmpty(str)) <= Number(N.string.trimToZero(args[1]));
 			},
 			"maxvalue" : function(str, args) {
-				if (args == null || args[0] == null) {
+				if (args === undefined || args[0] === undefined) {
 					throw new Error("[Validator.maxvalue]You must input args[0](maximum value)");
 				}
 				return Number(N.string.trimToZero(str)) <= Number(N.string.trimToZero(args[0]));
 			},
 			"minvalue" : function(str, args) {
-				if (args == null || args[0] == null) {
+				if (args === undefined || args[0] === undefined) {
 					throw new Error("[Validator.minvalue]You must input args[0](minimum value)");
 				}
 				return Number(N.string.trimToZero(args[0])) <= Number(N.string.trimToZero(str));
 			},
 			"rangevalue" : function(str, args) {
-				if (args == null || args[0] == null) {
-					throw new Error("[Validator.rangevalue]You must input args[0](minimum value)");
+				if (args === undefined || args.length < 2) {
+					throw new Error("[Validator.rangevalue]You must input args[0](minimum value) and args[1](maximum value)");
 				}
-				if (args == null || args[1] == null) {
-					throw new Error("[Validator.rangevalue]You must input args[0](maximum value)");
-				}
-				return Number(N.string.trimToZero(args[0])) <= Number(N.string.trimToZero(str))
-						&& Number(N.string.trimToZero(str)) <= Number(N.string.trimToZero(args[1]));
+				return Number(N.string.trimToZero(args[0])) <= Number(N.string.trimToZero(str)) &&
+						Number(N.string.trimToZero(str)) <= Number(N.string.trimToZero(args[1]));
 			},
 			"regexp" : function(str, args) {
-				if (args == null || args[0] == null) {
+				if (args === undefined || args[0] === undefined) {
 					throw new Error("[Validator.regexp]You must input args[0](regular expression string)");
 				}
 				var regExp = args[1] !== undefined ? regExp = new RegExp(args[0], args[1]) : new RegExp(args[0]);

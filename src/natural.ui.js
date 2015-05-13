@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.4.14
+ * Natural-UI v0.8.4.15
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	var version = "0.8.4.14";
+	var version = "0.8.4.15";
 
 	// N local variables
 	$.fn.extend(N, {
@@ -247,11 +247,11 @@
 
 				// make message box
 				opts.msgContents = opts.msgContext.after(
-						$('<span class="block_overlay_msg__"><ul>'
-								+ titleBox
-								+ '<li class="msg_box__"></li>'
-								+ buttonBox
-								+ '</ul></span>').css(blockOverlayMsgCss)).next("span.block_overlay_msg__:last");
+						$('<span class="block_overlay_msg__"><ul>' +
+								titleBox +
+								'<li class="msg_box__"></li>' +
+								buttonBox +
+								'</ul></span>').css(blockOverlayMsgCss)).next("span.block_overlay_msg__:last");
 
 				// set message
 				opts.msgContents.find("li.msg_box__").html(opts.msg);
@@ -331,7 +331,7 @@
 					opts.context.instance("alert").remove();
 				}
 				opts.msgContext = opts.context.next("span.msg__");
-				if (opts.msgContext.length == 0) {
+				if (opts.msgContext.length === 0) {
 					opts.msgContext = opts.context.after('<span class="msg__" style="display: none;"><ul class="msg_line_box__"></ul></span>').next("span.msg__");
 					opts.msgContext.append('<a href="#" class="msg_close__"></a>');
 				}
@@ -378,7 +378,7 @@
 			};
 
 			try {
-				this.options = $.extend({}, this.options, N.context.attr("ui")["button"]);
+				this.options = $.extend({}, this.options, N.context.attr("ui").button);
 			} catch (e) {
 				N.error("[N.button]" + e, e);
 			}
@@ -548,7 +548,7 @@
 			};
 
 			try {
-				this.options = $.extend({}, this.options, N.context.attr("ui")["datepicker"]);
+				this.options = $.extend({}, this.options, N.context.attr("ui").datepicker);
 			} catch (e) {
 				N.error("[N.datepicker]" + e, e);
 			}
@@ -583,7 +583,7 @@
 					var result = opts.onBeforeShow.call(this, opts.context, opts.contents);
 					if(result !== undefined && result === false) {
 						return this;
-					};
+					}
 				}
 
 				var this_ = this;
@@ -642,7 +642,7 @@
 					var result = opts.onBeforeHide.call(this, opts.context, opts.contents);
 					if(result !== undefined && result === false) {
 						return this;
-					};
+					}
 				}
 
 				$(window.document).unbind("mousedown.datepicker");
@@ -696,7 +696,8 @@
 				var yearItemClone;
 				yearsPanel.append(yearItem.clone(true).addClass("datepicker_year_title__").text(N.message.get(opts.message, "year")));
 				// render year items
-				for(var i=currYear-2;i<=currYear+2;i++) {
+				var i;
+				for(i=currYear-2;i<=currYear+2;i++) {
 					yearItemClone = yearItem.clone(true).addClass("datepicker_year_item__");
 					if(i === currYear) {
 						yearItemClone.addClass("datepicker_curr_year__");
@@ -753,15 +754,17 @@
 					} else {
 						daysPanel.empty();
 						var endDateCls = N.date.strToDate(N.string.lpad(yearsPanel.find("div.datepicker_year_selected__").text(), 4, "0") +  N.string.lpad(String(parseInt($(this).text())+1), 2, "0") + "00", "Ymd");
-						var endDate = gEndDate = endDateCls.obj.getDate();
+						var endDate = endDateCls.obj.getDate();
+						gEndDate = endDate;
 						if(format !== "Ymd") {
 							gEndDate = 31;
 						}
 						endDateCls.obj.setDate(1);
 						var startDay = endDateCls.obj.getDay();
 						//render week
-						for(var i=0;i<days.length;i++) {
-							daysPanel.append(dayItem.clone().addClass("datepicker_day__").text(days[i]));
+						var j;
+						for(j=0;j<days.length;j++) {
+							daysPanel.append(dayItem.clone().addClass("datepicker_day__").text(days[j]));
 						}
 
 						var prevEndDateCls = N.date.strToDate(N.string.lpad(yearsPanel.find("div.datepicker_year_selected__").text(), 4, "0") +  N.string.lpad($(this).text(), 2, "0") + "00", "Ymd");
@@ -769,15 +772,15 @@
 						var date;
 						var dateItem;
 						//render date items
-						for(var i=1-startDay;i<=42-startDay;i++) {
-							date = String(i);
+						for(j=1-startDay;j<=42-startDay;j++) {
+							date = String(j);
 							dateItem = dayItem.clone(true);
-							if(i<=0) {
+							if(j<=0) {
 								dateItem.addClass("datepicker_prev_day_item__");
-								date = String(prevEndDate + i);
-							} else if(i > endDate) {
+								date = String(prevEndDate + j);
+							} else if(j > endDate) {
 								dateItem.addClass("datepicker_next_day_item__");
-								date = String(i-endDate);
+								date = String(j-endDate);
 							} else {
 								dateItem.addClass("datepicker_day_item__");
 							}
@@ -792,7 +795,7 @@
 				monthsPanel.append(monthItem.clone().css("width", "58px").addClass("datepicker_month_title__").text(N.message.get(opts.message, "month")));
 
 				// render month items
-				for(var i=1;i<=12;i++) {
+				for(i=1;i<=12;i++) {
 					monthsPanel.append(monthItem.clone(true).addClass("datepicker_month_item__").text(String(i)));
 					if(monthsPanel.find("div.datepicker_month_item__ .datepicker_month_selected__").length === 0) {
 						monthsPanel.find("div.datepicker_month_item__:contains(" + String(parseInt(d.formatDate("m"))) + "):eq(0)").addClass("datepicker_month_selected__");
@@ -827,9 +830,9 @@
 						} else {
 							selMonth = monthsPanel.find("div.datepicker_month_selected__").text();
 						}
-						var selDate = N.date.strToDate(N.string.lpad(yearsPanel.find("div.datepicker_year_selected__").text(), 4, "0")
-								+ N.string.lpad(selMonth, 2, "0")
-								+ N.string.lpad(thisEle.text(), 2, "0"), "Ymd");
+						var selDate = N.date.strToDate(N.string.lpad(yearsPanel.find("div.datepicker_year_selected__").text(), 4, "0") +
+								N.string.lpad(selMonth, 2, "0") +
+								N.string.lpad(thisEle.text(), 2, "0"), "Ymd");
 						// set date format of global config
 						selDate.format = N.context.attr("data").formatter.date.Ymd().replace(/[^Y|^m|^d]/g, "");
 
@@ -987,7 +990,7 @@
 			};
 
 			try {
-				this.options = $.extend({}, this.options, N.context.attr("ui")["popup"]);
+				this.options = $.extend({}, this.options, N.context.attr("ui").popup);
 			} catch (e) {
 				N.error("[N.popup]" + e, e);
 			}
@@ -1017,7 +1020,7 @@
 				}
 			} catch(e) {
 				if(this.options.url !== null) {
-					N.warn("[N.popup][" + e + "] Don't set opener object in popup's Controller")
+					N.warn("[N.popup][" + e + "] Don't set opener object in popup's Controller");
 				}
 			}
 
@@ -1137,7 +1140,7 @@
 
 						// set opener to popup's Controller
 						if(this_.opener !== undefined) {
-							sc["opener"] = this_.opener;
+							sc.opener = this_.opener;
 						}
 
 						if(sc.init !== undefined) {
@@ -1187,7 +1190,7 @@
 			};
 
 			try {
-				this.options = $.extend({}, this.options, N.context.attr("ui")["tab"]);
+				this.options = $.extend({}, this.options, N.context.attr("ui").tab);
 			} catch (e) {
 				N.error("[N.tab]" + e, e);
 			}
@@ -1239,7 +1242,7 @@
 				var defSelIdx;
 				$(opts.classOpts).each(function(i) {
 					// set default select index
-					if(this["active"] !== undefined && this["active"]) {
+					if(this.active !== undefined && this.active) {
 						// active option select
 						defSelIdx = i;
 					} else {
@@ -1369,7 +1372,7 @@
 			};
 
 			try {
-				this.options = $.extend({}, this.options, N.context.attr("ui")["select"]);
+				this.options = $.extend({}, this.options, N.context.attr("ui").select);
 			} catch (e) {
 				N.error("[N.select]" + e, e);
 			}
@@ -1421,7 +1424,7 @@
 						opts.context.append("<option value='" + data[opts.val] + "'>" + data[opts.key] + "</option>");
 					});
 		    	} else if(opts.type === 3 || opts.type === 4) {
-		    		if(opts.context.filter(".select_template__").length == 0) {
+		    		if(opts.context.filter(".select_template__").length === 0) {
 		    			var id = opts.context.attr("id");
 			    		opts.data.each(function(i, data) {
 			    			if(i === 0) {
@@ -1452,7 +1455,7 @@
 		    			opts.context.val(opts.context.prop("defaultSelected"));
 		    		}
 		    	} else if(opts.type === 3 || opts.type === 4) {
-		    		opts.context.prop("checked", false)
+		    		opts.context.prop("checked", false);
 		    	}
 		    	return this;
 		    }
@@ -1492,7 +1495,7 @@
 			};
 
 			try {
-				this.options = $.extend({}, this.options, N.context.attr("ui")["form"]);
+				this.options = $.extend({}, this.options, N.context.attr("ui").form);
 			} catch (e) {
 				N.error("[N.form]" + e, e);
 			}
@@ -1589,8 +1592,8 @@
 										if (String(vals[currEle.attr("id")]) !== currVal) {
 											if (!currEle.prop("disabled") && !currEle.prop("readonly") && (!opts.validate || (opts.validate && !currEle.hasClass("validate_false__")))) {
 												vals[currEle.attr("id")] = currVal;
-												if (vals["rowStatus"] != "insert") {
-													vals["rowStatus"] = "update";
+												if (vals.rowStatus != "insert") {
+													vals.rowStatus = "update";
 												}
 												currEle.addClass("data_changed__");
 												N.ds.instance(opts.extObj !== null ? opts.extObj : this_).notify(opts.extRow > -1 ? opts.extRow : opts.row, currEle.attr("id"));
@@ -1647,8 +1650,8 @@
 										if (vals[currEle.attr("id")] !== currVals) {
 											if (!currEle.prop("disabled") && !currEle.prop("readonly") && (!opts.validate || (opts.validate && !currEle.hasClass("validate_false__")))) {
 												vals[currEle.attr("id")] = currVals;
-	                                            if (vals["rowStatus"] != "insert") {
-	                                                vals["rowStatus"] = "update";
+	                                            if (vals.rowStatus != "insert") {
+	                                                vals.rowStatus = "update";
 	                                            }
 	                                            currEle.addClass("data_changed__");
 	                                            N.ds.instance(opts.extObj !== null ? opts.extObj : this_).notify(opts.extRow > -1 ? opts.extRow : opts.row, currEle.attr("id"));
@@ -1699,8 +1702,8 @@
 									if (vals[currKey] !== currVals) {
 										if (!currEle.prop("disabled") && !currEle.prop("readonly")) {
 											vals[currKey] = currVals;
-	                                        if (vals["rowStatus"] != "insert") {
-	                                            vals["rowStatus"] = "update";
+	                                        if (vals.rowStatus != "insert") {
+	                                            vals.rowStatus = "update";
 	                                        }
 	                                        currEles.addClass("data_changed__");
 	                                        N.ds.instance(opts.extObj !== null ? opts.extObj : this_).notify(opts.extRow > -1 ? opts.extRow : opts.row, currKey);
@@ -1801,6 +1804,7 @@
 				if (eles.length > 0) {
 					var tagName = eles.get(0).tagName.toLowerCase();
 					var type = N.string.trimToEmpty(eles.attr("type")).toLowerCase();
+					var currVal;
 					if (type !== "radio" && type !== "checkbox") {
 						eles.each(function() {
 							ele = $(this);
@@ -1838,10 +1842,10 @@
 								//dataSync
 								ele.trigger("change.form.dataSync");
 							} else if(tagName === "img") {
-								var currVal = String(val);
+								currVal = String(val);
 								vals[ele.attr("id")] = currVal;
-	                            if (vals["rowStatus"] != "insert") {
-	                                vals["rowStatus"] = "update";
+	                            if (vals.rowStatus != "insert") {
+	                                vals.rowStatus = "update";
 	                            }
 	                            ele.addClass("data_changed__");
 	                            if(notify === undefined || (notify !== undefined && notify === true)) {
@@ -1849,10 +1853,10 @@
 	                            }
 								ele.attr("src", currVal);
 							} else {
-								var currVal = String(val);
+								currVal = String(val);
 								vals[ele.attr("id")] = currVal;
-	                            if (vals["rowStatus"] != "insert") {
-	                                vals["rowStatus"] = "update";
+	                            if (vals.rowStatus != "insert") {
+	                                vals.rowStatus = "update";
 	                            }
 	                            ele.addClass("data_changed__");
 	                            if(notify === undefined || (notify !== undefined && notify === true)) {
@@ -2068,12 +2072,11 @@
 					}
 
 					var i = opts.scrollPaging.idx;
-					var this_ = this;
 					var limit;
 					if(opts.height > 0) {
 						limit = Math.min(opts.scrollPaging.limit, opts.data.length);
 					} else {
-						limit = opts.data.length
+						limit = opts.data.length;
 					}
 					var classOpts;
 					var this_ = this;
@@ -2120,8 +2123,8 @@
 				} else {
 					//remove tbodys in grid body area
 					opts.context.find("tbody").remove();
-					opts.context.append('<tbody><tr><td class="empty__" align="center" colspan="' + this.cellCnt + '">'
-							+ N.message.get(opts.message, "empty") + '</td></tr></tbody>');
+					opts.context.append('<tbody><tr><td class="empty__" align="center" colspan="' + this.cellCnt + '">' +
+							N.message.get(opts.message, "empty") + '</td></tr></tbody>');
 					opts.context.append(tbodyTempClone);
 				}
 
@@ -2170,7 +2173,7 @@
 		            opts.data.splice(row, 1);
 		        } else {
 		        	var removedData = opts.data.splice(row, 1)[0];
-		        	removedData["rowStatus"] = "delete";
+		        	removedData.rowStatus = "delete";
 		            opts.removedData.push(removedData);
 		        }
 
@@ -2519,7 +2522,7 @@
     	        		return false;
     	        	}
     	        	if (opts.data.length > 0) {
-    	        		if(N.string.trimToNull($(this).text()) != null && $(this).find("input[type='checkbox']").length == 0) {
+    	        		if(N.string.trimToNull($(this).text()) !== null && $(this).find("input[type='checkbox']").length === 0) {
     	        			var isAsc = false;
     	        			if (currEle.find("span.sortable__").hasClass("asc__")) {
     	        				isAsc = true;
