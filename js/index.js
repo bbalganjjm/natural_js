@@ -80,7 +80,9 @@ var CommonUtilController = {
 			});
 	    	N.comm({
 	       		url : url,
-	       		dataType : "text"
+	       		contentType : "text/plain; charset=UTF-8",
+				dataType : "text",
+				type : "GET"
 	       	}).submit(function(html) {
 	       		N("#sourceCode", view).text(html);
 
