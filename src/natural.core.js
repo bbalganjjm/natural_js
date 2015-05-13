@@ -1,5 +1,5 @@
 /*!
- * Natural-CORE v0.8.3.1
+ * Natural-CORE v0.8.3.3
  * bbalganjjm@gmail.com
  *
  * Includes json2.js & formatdate.js
@@ -12,7 +12,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	var version = "0.8.3.0", N;
+	var version = "0.8.3.3", N;
 
 	// Use jQuery init
 	N = function(selector, context) {
@@ -166,7 +166,7 @@
 		 * Check whether the JWS(jQuery wraped set)
 		 */
 		isWrappedSet : function(obj) {
-			return this.isArraylike(obj) && obj.jquery;
+			return this.isArraylike(obj) && obj.jquery !== undefined;
 		},
 		/**
 		 * N.string package
@@ -422,14 +422,14 @@
 			 */
 			format : function(str, format) {
 				var dateInfo = this.strToDate(str);
-				return dateInfo != null ? dateInfo.obj.formatDate(format != null ? format : dateInfo.format) : str;
+				return dateInfo !== null ? dateInfo.obj.formatDate(format !== undefined ? format : dateInfo.format) : str;
 			},
 			/**
 			 * Convert the timestamp from date object
 			 */
 			dateToTs : function(dateObj) {
 				var d = null;
-				if (dateObj == null) {
+				if (dateObj === undefined) {
 					d = new Date(obj.time);
 				}
 				return Math.round(d.getTime() / 1000);
@@ -456,7 +456,7 @@
 			 * make rules object from input element
 			 */
 			toRules : function(ele, ruleset) {
-				var retRules = new Object();
+				var retRules = {};
 				var thisEle;
 				var id;
 				ele.each(function() {
@@ -474,7 +474,7 @@
 			 * make data object from input element
 			 */
 			toData : function(eles) {
-				var retData = new Object();
+				var retData = {};
 				var key, ele;
 				eles.each(function() {
 					key = $(this).attr("id");
@@ -510,7 +510,7 @@
 			 * Get max z-index of all elements in web page
 			 */
 			maxZindex : function(nContext) {
-				if (nContext == null) {
+				if (nContext === undefined) {
 					nContext = $("div, span");
 				}
 				return Math.max.apply(null, $.map(nContext, function(e, n) {
@@ -566,7 +566,7 @@
 							return getCookieVar(j);
 						}
 						i = document.cookie.indexOf(" ", i) + 1;
-						if (i == 0) {
+						if (i === 0) {
 							break;
 						}
 					}
@@ -613,7 +613,7 @@
 				if (msie < 0) {
 					return 0;
 				} else {
-					if (trident == null) {
+					if (trident === undefined) {
 						return parseInt(ua.substring(msie + 5, ua.indexOf(".", msie)));
 					} else {
 						return parseInt(trident[1]) + 4.0;
@@ -708,7 +708,7 @@
 			 * Return formated JSON String
 			 */
 			"format" : function(oData, sIndent) {
-				if (oData != null && !N.isEmptyObject(oData)) {
+				if (!N.isEmptyObject(oData)) {
 					if (N.isString(oData)) {
 						oData = JSON.parse(oData);
 					}
@@ -785,6 +785,7 @@
 	    	var tagName = this.get(0).tagName.toLowerCase();
 	    	var type = N.string.trimToEmpty(this.attr("type")).toLowerCase();
 	    	var selEle;
+	    	var ele;
 	    	if(vals !== undefined && N.type(vals) !== "function") {
 	    		if (tagName === "select") {
 	    			if(N.string.trimToNull(vals) === null && !this.is("select[multiple='multiple']")) {
@@ -834,7 +835,7 @@
 			                    return N.string.trimToEmpty($(this).val());
 				            }).toArray();
 		        		} else {
-		        			var ele = this.find("> option");
+		        			ele = this.find("> option");
 		        			return selEle.each(function() {
 		        				vals.call(this, ele.index(this), this);
 		        			});
@@ -870,7 +871,7 @@
 				            }).toArray();
 		        			return selEle.length === 1 ? N.string.trimToEmpty($(selEle).val()) : chkedVals.length === 0 ? [] : chkedVals;
 		        		} else {
-		        			var ele = this.filter("[name='" + this.attr("name") + "']");
+		        			ele = this.filter("[name='" + this.attr("name") + "']");
 		        			return selEle.each(function() {
 		        				vals.call(this, ele.index(this), this);
 		        			});
@@ -1162,6 +1163,7 @@
 				// we first check, if getFullYear is supported. if it
 				// is, we just use that. ppks code is nice, but wont
 				// work with dates outside 1900-2038, or something like that
+				var x;
 				if (date.getFullYear) {
 					var newDate = new Date("January 1 2001 00:00:00 +0000");
 					var x = newDate.getFullYear();
