@@ -1,5 +1,5 @@
 /*!
- * Natural-ARCHITECTURE v0.8.0.6
+ * Natural-ARCHITECTURE v0.8.0.8
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	var version = "0.8.0.6";
+	var version = "0.8.0.8";
 
 	// N local variables
 	$.fn.extend(N, {
@@ -118,8 +118,9 @@
 				var obj = this;
 				if (N.isElement(obj)) {
 					$.extend(this.request.options, {
-						contentType : "application/x-www-form-urlencoded",
-						dataType : "html"
+						contentType : "text/html; charset=UTF-8",
+						dataType : "html",
+						type : "GET"
 					});
 				}
 
@@ -247,9 +248,18 @@
 
 			this.obj = obj;
 			// define params data
-			var params = this.options.data === null ? N.isWrappedSet(obj) ? !N.isElement(obj) ? obj.toArray()[0] : null : obj[0] : this.options.data;
-			if (params != null) {
-				this.options.data = JSON.stringify(params);
+			this.options.data = JSON.stringify(this.options.data === null ?
+					N.isWrappedSet(obj) ? !N.isElement(obj) ? obj.toArray()[0] : undefined : obj[0] :
+							this.options.data);
+
+			if(this.options.data !== undefined) {
+				if(this.options.type.toUpperCase() === "GET") {
+					var firstChar = this.options.data.charAt(0);
+					var lastChar = this.options.data.charAt(this.options.data.length - 1);
+					if(firstChar === "{" && lastChar === "}" || firstChar === "[" && lastChar === "]") {
+						this.options.data = "q=" + encodeURI(this.options.data);
+					}
+				}
 			}
 		};
 
@@ -264,7 +274,7 @@
 					return this.attrObj;
 				}
 				if (obj_ === undefined) {
-					return this.attrObj != null ? (typeof this.attrObj[name] != "undefined" ? this.attrObj[name] : undefined) : undefined;
+					return this.attrObj !== undefined && this.attrObj[name] !== undefined ? this.attrObj[name] : undefined;
 				} else {
 					if (this.attrObj === undefined) {
 						this.attrObj = {};
