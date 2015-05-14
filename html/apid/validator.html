@@ -78,7 +78,9 @@ N("article#validator").cont({
             N("#result", view).text(N.json.format(pData));
 
         	// code highlighter
-            Prism.highlightElement(N("#result", view).get(0));
+        	if(N.browser.msieVersion() > 8) {
+	            Prism.highlightElement(N("#result", view).get(0));
+        	}
         });
 
         N("#btnValidateDeclarative", view).click(function(e) {

@@ -695,9 +695,11 @@ fData의 값(결과값) :
 N("article#refr0104").cont({
     init : function(view, request) {
     	// code highlight
-		view.find("code").each(function() {
-			Prism.highlightElement(this);
-    	});
+    	if(N.browser.msieVersion() > 8) {
+			view.find("code").each(function() {
+				Prism.highlightElement(this);
+	    	});
+    	}
 
     	CommonUtilController.setPageLinks(N("a.link", view));
 

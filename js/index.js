@@ -87,9 +87,11 @@ var CommonUtilController = {
 	       		N("#sourceCode", view).text(html);
 
 	       		// code highlight
-				view.find("code").each(function() {
-					Prism.highlightElement(this);
-		    	});
+	       		if(N.browser.msieVersion() > 8) {
+	       			view.find("code").each(function() {
+	       				Prism.highlightElement(this);
+	       			});
+	       		}
 	       	});
 		}
 	}

@@ -459,9 +459,11 @@
 N("article#refr0103").cont({
     init : function(view, request) {
     	// code highlight
-		view.find("code").each(function() {
-			Prism.highlightElement(this);
-    	});
+    	if(N.browser.msieVersion() > 8) {
+			view.find("code").each(function() {
+				Prism.highlightElement(this);
+	    	});
+    	}
 
     	CommonUtilController.setPageLinks(N("a.link", view));
 
