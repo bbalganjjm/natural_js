@@ -15,7 +15,12 @@
 <![endif]-->
 
 <link rel="stylesheet" type="text/css" href="css/common.css" />
-<link rel="stylesheet" type="text/css" href="js/prism/css/prism.css" />
+<!--[if !IE]><!-->
+	<link rel="stylesheet" type="text/css" href="js/prism/css/prism.css" />
+<!--<![endif]-->
+<!--[if gte IE 9]>
+    <link rel="stylesheet" type="text/css" href="js/prism/css/prism.css" />
+<![endif]-->
 <link rel="stylesheet" type="text/css" href="js/natural_js/css/natural.ui.css" />
 
 <script type="text/javascript" charset="utf-8" src="js/natural_js/lib/jquery-1.11.1.min.js"></script>
@@ -27,7 +32,12 @@
 
 <script type="text/javascript" charset="utf-8" src="js/index.js"></script>
 
-<script type="text/javascript" charset="utf-8" src="js/prism/prism.js"></script>
+<!--[if !IE]><!-->
+	<script type="text/javascript" charset="utf-8" src="js/prism/prism.js"></script>
+<!--<![endif]-->
+<!--[if gte IE 9]>
+	<script type="text/javascript" charset="utf-8" src="js/prism/prism.js"></script>
+<!--<![endif]-->
 
 <script type="text/javascript">
 	//IndexController.initWebfont(window);
@@ -121,19 +131,38 @@
     <footer>
         <div style="display: inline-block;">Copyright © 2014 KIM HWANG MAN ( bbalganjjm@gmail.com )</div>
         <!-- Google Translate -->
-        <div id="google_translate_element"></div><script type="text/javascript">
-			function googleTranslateElementInit() {
-			  new google.translate.TranslateElement({pageLanguage: 'ko', includedLanguages: 'de,en,es,fr,ja,ko,la,ru,zh-CN,zh-TW', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, multilanguagePage: true, gaTrack: true, gaId: 'UA-58001949-1'}, 'google_translate_element');
-			}
-			</script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+        <!--[if !IE]><!-->
+	        <div id="google_translate_element"></div><script type="text/javascript">
+				function googleTranslateElementInit() {
+				  new google.translate.TranslateElement({pageLanguage: 'ko', includedLanguages: 'de,en,es,fr,ja,ko,la,ru,zh-CN,zh-TW', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, multilanguagePage: true, gaTrack: true, gaId: 'UA-58001949-1'}, 'google_translate_element');
+				}
+				</script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+		<!--<![endif]-->
+		<!--[if gte IE 10]>
+			<div id="google_translate_element"></div><script type="text/javascript">
+				function googleTranslateElementInit() {
+				  new google.translate.TranslateElement({pageLanguage: 'ko', includedLanguages: 'de,en,es,fr,ja,ko,la,ru,zh-CN,zh-TW', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, multilanguagePage: true, gaTrack: true, gaId: 'UA-58001949-1'}, 'google_translate_element');
+				}
+				</script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+		<!--<![endif]-->
     </footer>
 
     <!-- Google Analytics -->
-	<script>
-		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-	</script>
+	<!--[if !IE]><!-->
+		<script>
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		</script>
+	<!--<![endif]-->
+	<!--[if gte IE 10]>
+		<script>
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		</script>
+	<!--<![endif]-->
 </body>
 </html>

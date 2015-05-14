@@ -25,20 +25,24 @@ var IndexController = {
 		if(N.string.trimToNull(location.hash) !== null) {
 			N(N.context.attr("architecture").page.context).comm("html/" + N.string.trimToEmpty(location.hash).replace("#", "") + ".html").submit(function() {
 				// Google Analytics
-				ga('create', 'UA-58001949-2', 'auto');
-				ga('send', {
-					'hitType': 'pageview',
-					'page': location.hash
-				});
+				if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 9) {
+					ga('create', 'UA-58001949-2', 'auto');
+					ga('send', {
+						'hitType': 'pageview',
+						'page': location.hash
+					});
+				}
 			});
 		} else {
 			N(N.context.attr("architecture").page.context).comm("html/gtst/gtst0100.html").submit(function() {
 				// Google Analytics
-				ga('create', 'UA-58001949-2', 'auto');
-				ga('send', {
-					'hitType': 'pageview',
-					'page': '#gtst/gtst0100'
-				});
+				if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 9) {
+					ga('create', 'UA-58001949-2', 'auto');
+					ga('send', {
+						'hitType': 'pageview',
+						'page': '#gtst/gtst0100'
+					});
+				}
 			});
 		}
 	}
@@ -55,11 +59,13 @@ var CommonUtilController = {
 				var hash_ = href.replace("http://bbalganjjm.github.io/natural_js/", "").replace(/\.html/g, "").replace(/html\//g, "");
 				N(N.context.attr("architecture").page.context).comm(href).submit(function() {
 					// Google Analytics
-					ga('create', 'UA-58001949-2', 'auto');
-					ga('send',  {
-						'hitType': 'pageview',
-						'page': "#" + hash_
-					});
+					if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 9) {
+						ga('create', 'UA-58001949-2', 'auto');
+						ga('send',  {
+							'hitType': 'pageview',
+							'page': "#" + hash_
+						});
+					}
 				});
 				location.hash = hash_;
 			}
