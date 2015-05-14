@@ -695,7 +695,7 @@ fData의 값(결과값) :
 N("article#refr0104").cont({
     init : function(view, request) {
     	// code highlight
-    	if(N.browser.msieVersion() > 8) {
+    	if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {
 			view.find("code").each(function() {
 				Prism.highlightElement(this);
 	    	});

@@ -87,7 +87,7 @@ var CommonUtilController = {
 	       		N("#sourceCode", view).text(html);
 
 	       		// code highlight
-	       		if(N.browser.msieVersion() > 8) {
+	       		if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {
 	       			view.find("code").each(function() {
 	       				Prism.highlightElement(this);
 	       			});
