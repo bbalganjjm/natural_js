@@ -100,5 +100,30 @@ var CommonUtilController = {
 	       		}
 	       	});
 		}
+	},
+	getLocale : function() {
+		 if (navigator) {
+			if (navigator.language) {
+				return navigator.language;
+			} else if (navigator.browserLanguage) {
+				return navigator.browserLanguage;
+			} else if (navigator.systemLanguage) {
+				return navigator.systemLanguage;
+			} else if (navigator.userLanguage) {
+				return navigator.userLanguage;
+			}
+		}
+	},
+	i18n : function(locale) {
+		if(locale === undefined) {
+			locale = N.locale();
+		}
+		if(locale === "ko_KR") {
+    		$("[lang='ko_KR']").show();
+			$("[lang='en_US']").remove();
+		} else {
+			$("[lang='en_US']").show();
+			$("[lang='ko_KR']").remove();
+		}
 	}
 }
