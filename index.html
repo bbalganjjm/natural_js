@@ -44,10 +44,12 @@
 	$(document).ready(function() {
 		// set locale
 		N.locale(CommonUtilController.getLocale().toLowerCase().indexOf("ko") > -1 ? "ko_KR" : "en_US");
-		//N.locale("en_US");
 		if(N.locale() !== "ko_KR") {
 			setTimeout(function() {
-				N(window).alert("English translation is in progress").show();
+				var msg = [];
+				msg.push("Translation work is in progress.");
+				msg.push("I don't speak English well. Please note and understand.");
+				$("section>article").prepend('<p class="alert" style="display: none;">' + msg.join(" ") + '</p>').find("p.alert:first").slideDown(300);
 			}, 1500);
 		}
 
