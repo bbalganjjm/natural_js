@@ -36,14 +36,32 @@
 	$(document).ready(function() {
 		// set locale
 		N.locale(window.sessionStorage.locale !== undefined ? window.sessionStorage.locale : CommonUtilController.getLocale().toLowerCase().indexOf("ko") > -1 ? "ko_KR" : "en_US");
-		if(N.locale() !== "ko_KR") {
+			var msg = [];
 			setTimeout(function() {
-				var msg = [];
-				msg.push("Translation work is in progress.");
-				msg.push("I don't speak English well. Please note and understand.");
-				$("section>article").prepend('<p class="alert" style="display: none;">' + msg.join(" ") + '</p>').find("p.alert:first").slideDown(300);
+				if(N.locale() === "ko_KR") {
+					msg.push("영문 번역 중입니다.");
+					msg.push("쪽팔림을 무릅쓰고 번역기 돌려가면서 콩글리시로 번역하고 있습니다.");
+					msg.push("도움 주실분은 GitHub 의 gh-pages 브랜치에 소스가 올라가 있으니 동참 해 주시면 감사 하겠습니다.");
+					msg.push("기타 문의사항은 bbalganjjm@gmail.com 으로 문의 바랍니다.");
+					msg.push('[<a id="korean" href="#" class="link">한국어</a>] | [<a id="english" href="#" class="link">영어</a>]');
+				} else {
+					msg.push("Translation work is in progress.");
+					msg.push("I don't speak English well. Please note and understand.");
+					msg.push('[<a id="korean" href="#" class="link">KOREAN</a>] | [<a id="english" href="#" class="link">ENGLISH</a>]');
+				}
+				var noticeBox = $("section>article").prepend('<p id="notice" class="alert" style="display: none;">' + msg.join(" ") + '</p>').find("#notice").slideDown(300);
+				noticeBox.find("#korean").click(function(e) {
+					e.preventDefault();
+					window.sessionStorage.locale = "ko_KR";
+					window.location.reload();
+				});
+				noticeBox.find("#english").click(function(e) {
+					e.preventDefault();
+					window.sessionStorage.locale = "en_US";
+					window.location.reload();
+				});
 			}, 1500);
-		}
+
 
 		// app init
 		IndexController.init(window);
