@@ -45,8 +45,25 @@ audio, canvas, progress, video {
  * Prevent modern browsers from displaying `audio` without controls.
  * Remove excess height in iOS 5 devices.
  */
-audio:not ([controls] ){
-	display: none; height: 0;
+audio
+:not
+
+(
+[
+controls
+]
+
+){
+display
+:
+
+none
+;
+
+height
+:
+
+0;
 }
 
 /**
@@ -123,8 +140,7 @@ header hgroup {
 }
 
 header hgroup h1 {
-	margin: 0;
-	padding: 0 9px 0px 9px;
+	margin: 0; padding: 0 9px 0px 9px;
 }
 
 header hgroup h1 #logo {
@@ -140,8 +156,7 @@ header nav {
 }
 
 header nav>ul {
-	list-style: none; margin: 0 0 0 10px; padding: 0;
-	height: 60px;
+	list-style: none; margin: 0 0 0 10px; padding: 0; height: 60px;
 }
 
 header nav>ul>li {
@@ -177,19 +192,11 @@ header nav>ul>li>ul>li a {
 }
 
 section {
-	clear: left\9; /* for ie8 */
-	margin: 0 auto;
-	max-width: 1003px;
-	min-width: 560px; min-height: 350px;
-	border-radius: 0 0 3px 3px;
-	background-color: #ffffff;
-	padding: 15px 0 15px 0;
+	clear: left\9; /* for ie8 */ margin: 0 auto; max-width: 1003px; min-width: 560px; min-height: 350px; border-radius: 0 0 3px 3px; background-color: #ffffff; padding: 15px 0 15px 0;
 }
 
 section article {
-	margin: 0 15px 0 15px;
-	word-break: break-word;
-	line-height: 165%;
+	margin: 0 15px 0 15px; word-break: break-word; line-height: 165%;
 }
 
 footer {
@@ -245,7 +252,7 @@ article a.link {
 }
 
 article pre {
-	font-size: 12px; margin-bottom: 15px;
+	font-size: 12px; margin-bottom: 15px; overflow: auto\9; background-color: #F5F2F0\9; padding: 0 15px 0 15px\9;
 }
 
 article div.grid_wrap__ {
