@@ -43,7 +43,7 @@
 	//IndexController.initWebfont(window);
 	$(document).ready(function() {
 		// set locale
-		N.locale(CommonUtilController.getLocale().toLowerCase().indexOf("ko") > -1 ? "ko_KR" : "en_US");
+		N.locale(window.sessionStorage.locale !== undefined ? window.sessionStorage.locale : CommonUtilController.getLocale().toLowerCase().indexOf("ko") > -1 ? "ko_KR" : "en_US");
 		if(N.locale() !== "ko_KR") {
 			setTimeout(function() {
 				var msg = [];
