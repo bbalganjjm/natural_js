@@ -14,6 +14,8 @@ html {
  */
 body {
 	margin: 0;
+	font-family: "Nanum Gothic", "Malgun Gothic", "dotum", "Segoe UI", sans-serif; color: #004a00;
+	min-width: 574px;
 }
 
 [lang] {
@@ -45,41 +47,7 @@ audio, canvas, progress, video {
  * Prevent modern browsers from displaying `audio` without controls.
  * Remove excess height in iOS 5 devices.
  */
-audio
-
-
-:not
-
-
-
-(
-[
-controls
-]
-
-
-
-){
-display
-
-
-:
-
-
-
-none
-
-
-;
-height
-
-
-:
-
-
-
-0;
-}
+audio:not([controls]){display:none;height:0;}
 
 /**
  * Address `[hidden]` styling not present in IE 8/9/10.
@@ -93,16 +61,12 @@ html, body {
 	background-color: #008000;
 }
 
-body {
-	margin: 0; font-size: 14px; font-family: "Nanum Gothic", "Malgun Gothic", "dotum", "Segoe UI", sans-serif; color: #004a00;
-}
-
 img {
 	border: none;
 }
 
 input[type='text'], input[type='password'], select, textarea {
-	border-radius: 3px; padding: 3px 3px; border: 1px solid #cccccc; font-size: 14px; font-family: "Nanum Gothic", "Malgun Gothic", "dotum", "Segoe UI", sans-serif; color: #004a00; vertical-align: middle; background-color: #ffffff; font-size: 13px; line-height: 16px; border-color: #cceccc;
+	border-radius: 3px; padding: 3px 3px; border: 1px solid #cccccc; font-size: 0.875em; font-family: "Nanum Gothic", "Malgun Gothic", "dotum", "Segoe UI", sans-serif; color: #004a00; vertical-align: middle; background-color: #ffffff; line-height: 1em; border-color: #cceccc;
 }
 
 input[type='text']:hover, select:hover, textarea:hover, input[type='text']:focus, select:focus, textarea:focus {
@@ -122,7 +86,8 @@ input[type='radio'], input[type='checkbox'] {
 }
 
 a {
-	text-decoration: none; font-weight: normal; font-size: 14px; font-family: "Nanum Gothic", "Malgun Gothic", "dotum", "Segoe UI", sans-serif; color: #004a00;
+	text-decoration: none; font-weight: normal; 
+	font-size: 1em; font-family: "Nanum Gothic", "Malgun Gothic", "dotum", "Segoe UI", sans-serif; color: #004a00;
 }
 
 table {
@@ -134,7 +99,7 @@ table th {
 }
 
 table th, table td {
-	border: 1px solid #99d999; padding: 5px; font-size: 13px; word-break: break-word;
+	border: 1px solid #99d999; padding: 5px; word-break: break-word;
 }
 
 table.form th {
@@ -151,19 +116,16 @@ header {
 }
 
 header hgroup {
-	margin: 0 auto; max-width: 1003px; min-width: 560px;
+	margin: 0 auto; max-width: 1003px; min-width: 560px; padding: 0 9px 0px 9px;
 }
 
-header hgroup h1 {
-	margin: 0; padding: 0 9px 0px 9px;
+header hgroup #logo {
+	font-size: 3.3em; font-style: normal; font-weight: bold; display: inline-block; font-family: sans-serif; text-shadow: 1.2px 2px #4FA52B; color: #005000;
+	margin-right: 15px;
 }
 
-header hgroup h1 #logo {
-	font-size: 56px; font-style: normal; font-weight: bold; display: inline-block; font-family: sans-serif; text-shadow: 1.2px 2px #4FA52B; color: #005000;
-}
-
-header hgroup h1 span#desc {
-	font-size: 20px; margin: 0 9px 0 0; padding: 0; color: #A6CD59; text-shadow: -1px -0.8px #005000;
+header hgroup span#desc {
+	font-size: 1.4em; padding: 0; color: #A6CD59; text-shadow: -1px -0.8px #005000;
 }
 
 header nav {
@@ -179,7 +141,9 @@ header nav>ul>li {
 }
 
 header nav>ul>li>a {
-	color: #99f999; font-weight: bold; font-size: 16px; text-shadow: -1px -1px #004000;
+	color: #99f999; font-weight: bold;
+	font-size: 1em;
+	text-shadow: -1px -1px #004000;
 }
 
 header nav>ul>li>ul {
@@ -203,11 +167,13 @@ header nav>ul>li>ul>li.nav-saction {
 }
 
 header nav>ul>li>ul>li a {
-	color: #99f999; font-size: 14px; text-shadow: -1px -1px #005000;
+	color: #99f999;
+	font-size: 0.9em; text-shadow: -1px -1px #005000;
 }
 
 section {
 	margin: 0 auto; max-width: 1003px; min-width: 560px; min-height: 350px; border-radius: 0 0 3px 3px; background-color: #ffffff; padding: 15px 0 15px 0;
+	font-size: 0.875em;
 }
 
 section article {
@@ -247,15 +213,20 @@ article dl.qna dd ul li>ul {
 }
 
 article h1 {
-	padding: 15px 0 10px 35px; border-bottom: 1px solid #009000; font-size: 18px; background: url("../images/icon/h1_leaf.png") no-repeat 0 10px; margin: 0 0 20px 0;
+	padding: 10px 0 10px 35px; border-bottom: 1px solid #009000;
+	font-size: 1.4em; background: url("../images/icon/h1_leaf.png") no-repeat 0 10px; 
+	margin: 0 0 20px 0;
 }
 
 article h2 {
-	font-weight: bold; padding: 10px 0 0 20px; background: url("../images/icon/dt_leaf.png") no-repeat 0 9px; font-size: 16px; margin: 0 0 18px 0;
+	font-weight: bold; padding: 10px 0 0 20px; background: url("../images/icon/dt_leaf.png") no-repeat 0 9px;
+	font-size: 1.2em; margin: 0 0 18px 0;
 }
 
 article h3 {
-	font-size: 16px; margin: 40px 0 16px 0; color: #050; padding-left: 22px; background: url("../images/icon/h3_leaf.gif") no-repeat 5px 4px;
+	font-size: 1.1em; 
+	margin: 30px 0 15px 0; color: #050; 
+	padding: 3px 0 0 22px; background: url("../images/icon/h3_leaf.gif") no-repeat 5px 4px;
 }
 
 article h4 {
@@ -264,6 +235,7 @@ article h4 {
 
 article a.link {
 	padding-left: 18px; background: url("../images/icon/link.png") no-repeat 0 50%; border-bottom: 1px solid #00c000; color: #00c000;
+	font-size: 1em;
 }
 
 article pre {
@@ -283,7 +255,8 @@ article hr {
 }
 
 article .alert {
-	background: url("../images/icon/alert.png") no-repeat 7px 10px; font-size: 12px; padding: 5px 5px 5px 25px; background-color: #ffdddd; border-radius: 3px;
+	background: url("../images/icon/alert.png") no-repeat 7px 10px;
+	font-size: 0.95em; padding: 5px 5px 5px 25px; background-color: #ffdddd; border-radius: 3px;
 }
 
 .grid input[type='text'], .grid input[type='password'], .grid select, .grid textarea {
@@ -299,7 +272,7 @@ article.apiDoc table td p {
 	margin: 0;
 }
 
-article.apiDoc ul.list li {
+article.apiDoc ul.list > li {
 	padding-top: 15px; padding-bottom: 15px;
 }
 
@@ -308,7 +281,7 @@ article.apiDoc fieldset {
 }
 
 article.apiDoc fieldset legend {
-	font-size: 12px; color: #009000;
+	font-size: -9em; color: #009000;
 }
 
 article.apiDoc ul.footnotes {
@@ -316,7 +289,8 @@ article.apiDoc ul.footnotes {
 }
 
 article.apiDoc ul.footnotes li {
-	float: left; margin-right: 20px; font-size: 12px; color: #009000;
+	float: left; margin-right: 20px;
+	font-size: 0.9em; color: #009000;
 }
 
 article.apiDoc .b {
@@ -332,7 +306,7 @@ article.apiDoc .apidemo {
 }
 
 article.apiDoc .apidemo table th, article.apiDoc .apidemo table td, article.apiDoc .apidemo input[type='text'], article.apiDoc .apidemo input[type='password'], article.apiDoc .apidemo select, article.apiDoc .apidemo textarea {
-	font-size: 12px; vertical-align: top;
+	font-size: 1em; vertical-align: top;
 }
 
 article.apiDoc .apidemo table.grid th {
@@ -361,7 +335,9 @@ article .intro {
 }
 
 article .smallContTit {
-	padding-left: 15px; font-size: 12px; font-weight: normal; background: url("../images/icon/sct_leaf.gif") no-repeat 0 3px; margin: 0 0 0px 0;
+	padding-left: 15px; 
+	font-size: 0.9em; font-weight: normal; background: url("../images/icon/sct_leaf.gif") no-repeat 0 3px; 
+	margin: 0 0 5px 0;
 }
 
 article .searchBox {
@@ -397,9 +373,11 @@ article .searchBox label input, article .searchBox label select {
 }
 
 article .searchBox label input[type='text'] {
-	width: 120px;
+	width: 85px;
 }
 
 article .click {
-	margin-top: 30px; padding: 5px 44px 5px 15px; background: url("../images/icon/click.png") no-repeat 136px 6px; display: inline-block; height: 35px; font-weight: bold; color: #008800; border: 1px dotted #008800; border-radius: 3px; box-shadow: 1px 1px 3px #ccffcc; background-color: #efe; cursor: pointer;
+	margin-top: 30px; 
+	padding: 5px 40px 5px 15px; background: url("../images/icon/click.png") no-repeat 136px 6px; display: inline-block; height: 35px; font-weight: bold; color: #008800; border: 1px dotted #008800; border-radius: 3px; box-shadow: 1px 1px 3px #ccffcc; background-color: #efe; cursor: pointer;
+	font-size: 1.2em;
 }
