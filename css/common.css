@@ -150,6 +150,7 @@ header nav>ul>li>a {
 
 header nav>ul>li>ul {
 	list-style: none; display: none; position: absolute; background: #007000; border-radius: 0 0 3px 3px; padding: 5px 10px 5px 10px; box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.3); margin-left: -30px; transform: rotate3d(90, 0, -40, 10deg);
+	margin-top: 13px;
 }
 
 header nav>ul>li:hover {
