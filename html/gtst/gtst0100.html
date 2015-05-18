@@ -82,15 +82,23 @@
 	<p lang="ko_KR">Natural-JS 의 필수 라이브러리 파일은 다음과 같습니다.</p>
 	<p lang="en_US">Natural-JS's required library files are as follows:</p>
 	<ol>
-		<li><b>jquery-1.11.1.min.js</b> - Natural-JS 는 jQuery 를 기반으로 동작 하므로 반드시 임포트 해야합니다.</li>
-		<li><b>natural.core.js</b> - Natural-CORE 라이브러리 패키지 입니다.</li>
-		<li><b>natural.architecture.js</b> - Natural-ARCHITECTURE 라이브러리 패키지 입니다.</li>
-		<li><b>natural.data.js</b> - Natural-DATA 라이브러리 패키지 입니다.</li>
-		<li><b>natural.ui.js</b> - Natural-UI 라이브러리 패키지 입니다.</li>
-		<li><b>natural.ui.css</b> - Natural-UI 디자인 관련 스타일시트 입니다.</li>
-		<li><b>natural.config.js</b> - Natural-JS 의 환경설정 파일 입니다.</li>
+		<li lang="ko_KR"><b>jquery-1.11.1.min.js</b> - Natural-JS 는 jQuery 를 기반으로 동작 하므로 반드시 임포트 해야합니다.</li>
+		<li lang="en_US"><b>jquery-1.11.1.min.js</b> - You must import the jQuery library. because Natural-JS operates based on jQuery.</li>
+		<li lang="ko_KR"><b>natural.core.js</b> - Natural-CORE 라이브러리 패키지 입니다.</li>
+		<li lang="en_US"><b>natural.core.js</b> - Natural-CORE library package.</li>
+		<li lang="ko_KR"><b>natural.architecture.js</b> - Natural-ARCHITECTURE 라이브러리 패키지 입니다.</li>
+		<li lang="en_US"><b>natural.architecture.js</b> - Natural-ARCHITECTURE library package.</li>
+		<li lang="ko_KR"><b>natural.data.js</b> - Natural-DATA 라이브러리 패키지 입니다.</li>
+		<li lang="en_US"><b>natural.data.js</b> - Natural-DATA library package.</li>
+		<li lang="ko_KR"><b>natural.ui.js</b> - Natural-UI 라이브러리 패키지 입니다.</li>
+		<li lang="en_US"><b>natural.ui.js</b> - Natural-UI library package.</li>
+		<li lang="ko_KR"><b>natural.ui.css</b> - Natural-UI 디자인 관련 스타일시트 입니다.</li>
+		<li lang="en_US"><b>natural.ui.css</b> - The stylesheet for  Natural-UI design.</li>
+		<li lang="ko_KR"><b>natural.config.js</b> - Natural-JS 의 환경설정 파일 입니다.</li>
+		<li lang="en_US"><b>natural.config.js</b> - Config file of Natural-JS</li>
 	</ol>
-	<p>먼저 기본 HTML 파일을 만들고 위 파일들을 아래와 같은 순서로 페이지에 Import 해 줍니다.</p>
+	<p lang="ko_KR">먼저 기본 HTML 파일을 만들고 위 파일들을 아래와 같은 순서로 페이지에 Import 해 줍니다.</p>
+	<p lang="en_US">First, create basic HTML file. and then import the library files as follows order.</p>
 
 	<pre><code class="language-markup">
 &lt;script type="text/javascript" src="js/natural_js/lib/jquery-1.11.1.min.js"&gt;&lt;/script&gt;
@@ -104,9 +112,8 @@
 
 &lt;script type="text/javascript" src="js/natural_js/natural.config.js"&gt;&lt;/script&gt;</code></pre>
 
-	<p>
-		그다음 Natural-JS 의 구동 환경을 설정 합니다.<br> Natural-JS 의 환경설정 파일인 natural.architecture.js 파일을 열어보세요.<br>
-	</p>
+	<p lang="ko_KR">그다음 Natural-JS 의 구동 환경을 설정 합니다.<br>Natural-JS 의 환경설정 파일인 natural.architecture.js 파일을 열어보세요.</p>
+	<p lang="en_US">then set the operating environment of the Natural-JS.<br>open the natural.architecture.js file that is a configuration file of Natural-JS.</p>
 
 	<pre class="line-numbers"><code class="language-javascript">
 /* Natural-ARCHITECTURE Config */
@@ -121,12 +128,14 @@ N.context.attr("ui", {
 		"container" : "#natural_contents"
 	...</code></pre>
 
-	<p>위와 같은 JSON 형식의 구문이 보일겁니다. JSON 이 뭔지는 아시죠? 아주 쉬워요. 모르시면 아래 URL 을 클릭 해서 참고 하시구요.</p>
+	<p lang="ko_KR">위와 같은 JSON 형식의 구문이 보일겁니다. JSON 이 뭔지는 아시죠? 아주 쉬워요. 모르시면 아래 URL 을 클릭 해서 참고 하시구요.</p>
+	<p lang="en_US">You will see the syntax of above look like JSON format. you might known what is the JSON. that is very easy. if you don't know, refer to the following URL</p>
 
 	<a class="link" target="blank_" href="http://www.json.org/json-ko.html">http://www.json.org/json-ko.html</a>
 
-	<p>Natrual-JS 에서 JSON 포멧은 아주 중요 합니다. 서버와 송수신하는 데이터 형식도 JSON 형태로 되어 있고 이후 나올 Controller(N.cont) 에서 클래스를 생성하는 방식도
-		JSON 형태 입니다.</p>
+	<p lang="ko_KR">Natrual-JS 에서 JSON 포멧은 아주 중요 합니다. 서버와 송수신하는 데이터 형식도 JSON 형태로 되어 있고 이후 나올 Controller(N.cont) 에서 클래스를 생성하는 방식도	 JSON 형태 입니다.</p>
+	<p lang="en_US">JSON format is very important in Natrual-JS. 서버와 송수신하는 데이터 형식도 JSON 형태로 되어 있고 이후 나올 Controller(N.cont) 에서 클래스를 생성하는 방식도 JSON 형태 입니다.</p>
+
 	<p>다시 본론으로... Natural-JS의 환경설정값은 Context(N.context) 객체에 저장 됩니다. 환경설정값중 위 구문에 해당하는
 		N.context.attr("architecture").page.context 값은 아주 중요한 값입니다. Natural-JS 을 이용해서 구현된 단위 페이지들이 표시될 최상위 요소(Element)를 jQuery
 		Selector 문자열로 지정 해 주면 됩니다. 쉽게말해 싸이트의 본문(Body)영역이 표시 될 프레임을 지정 해 주면 됩니다. 더불어 N.alert 의 HTML 요소를 저장하는 위치도
