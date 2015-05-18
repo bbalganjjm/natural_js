@@ -1,5 +1,5 @@
 /*!
- * Natural-CORE v0.8.3.4
+ * Natural-CORE v0.8.3.5
  * bbalganjjm@gmail.com
  *
  * Includes formatdate.js & Mask JavaScript API
@@ -12,7 +12,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	var version = "0.8.3.4", N;
+	var version = "0.8.3.5", N;
 
 	// Use jQuery init
 	N = function(selector, context) {
@@ -120,28 +120,7 @@
 		 * Check object type
 		 */
 		type : function(obj) {
-	        if (typeof obj == "object") {
-	            if (obj === null) {
-	                return "null";
-	            }
-	            if (obj.constructor == (new String).constructor) {
-	                return "string";
-	            }
-	            if (obj.constructor == (new Array).constructor) {
-	                return "array";
-	            }
-	            if (obj.constructor == (new Date).constructor) {
-	                return "date";
-	            }
-	            if (obj.constructor == (new RegExp).constructor) {
-	                return "regex";
-	            }
-	            if (obj.constructor.toString().toUpperCase().indexOf("HTML") > -1 && obj.constructor.toString().toUpperCase().indexOf("ELEMENT")) {
-	                return "html";
-	            }
-	            return "object";
-	        }
-	        return typeof obj;
+	        return ({}).toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase();
 	    },
 	    /**
 	     * Check whether the element
@@ -243,7 +222,7 @@
 			},
 			/**
 			 * Return byte length of string
-			 *  - Hangul is unicode that is 3 bytes
+			 *  - Hangul(UTF-8) is 3 bytes
 			 */
 			byteLength : function(str) {
 				return (function(s,b,i,c){
@@ -990,7 +969,7 @@
 			},
 			g : function() {
 				// 12-hour format of an hour without leading zeros, 1 through 12!
-				if (date.getHours() == 0) {
+				if (date.getHours() === 0) {
 					return 12;
 				} else {
 					return date.getHours() > 12 ? date.getHours() - 12 : date.getHours();
@@ -1035,7 +1014,7 @@
 				// the logic should match iso's 8601 standard.
 				// http://www.uic.edu/depts/accc/software/isodates/leapyear.html
 				var Y = this.Y();
-				if ((Y % 4 == 0 && Y % 100 != 0) || (Y % 4 == 0 && Y % 100 == 0 && Y % 400 == 0)) {
+				if ((Y % 4 === 0 && Y % 100 !== 0) || (Y % 4 === 0 && Y % 100 === 0 && Y % 400 === 0)) {
 					return 1;
 				} else {
 					return 0;
@@ -1057,15 +1036,15 @@
 			N : function() {
 				// ISO-8601 numeric representation of the day of the week
 				var w = this.w();
-				return (w == 0 ? 7 : w);
+				return (w === 0 ? 7 : w);
 			},
 			O : function() {
 				// Difference to Greenwich time (GMT) in hours
 				var os = Math.abs(date.getTimezoneOffset());
 				var h = String(Math.floor(os / 60));
 				var m = String(os % 60);
-				h.length == 1 ? h = "0" + h : 1;
-				m.length == 1 ? m = "0" + m : 1;
+				if(h.length == 1) h = "0" + h;
+				if(m.length == 1) m = "0" + m;
 				return date.getTimezoneOffset() < 0 ? "+" + h + m : "-" + h + m;
 			},
 			P : function() {
@@ -1144,7 +1123,7 @@
 				}
 
 				var nyDoW = new Date(this.Y(), 0, 1).getDay();
-				nyDoW = nyDoW != 0 ? nyDoW - 1 : 6;
+				nyDoW = nyDoW !== 0 ? nyDoW - 1 : 6;
 
 				if (nyDoW <= 3) { // First day of the year is a Thursday or earlier
 					return (1 + Math.floor((DoY + nyDoW) / 7));
@@ -1166,7 +1145,7 @@
 				var x;
 				if (date.getFullYear) {
 					var newDate = new Date("January 1 2001 00:00:00 +0000");
-					var x = newDate.getFullYear();
+					x = newDate.getFullYear();
 					if (x == 2001) {
 						// i trust the method now
 						return date.getFullYear();
@@ -1175,7 +1154,7 @@
 				// else, do this:
 				// codes thanks to ppk:
 				// http://www.xs4all.nl/~ppk/js/introdate.html
-				var x = date.getYear();
+				x = date.getYear();
 				var y = x % 100;
 				y += (y < 38) ? 2000 : 1900;
 				return y;
@@ -1202,7 +1181,7 @@
 				// this is our way of allowing users to escape stuff
 				formatString.splice(i, 1);
 			} else {
-				formatString[i] = switches[formatString[i]] != undefined ? switches[formatString[i]]() : formatString[i];
+				formatString[i] = switches[formatString[i]] !== undefined ? switches[formatString[i]]() : formatString[i];
 			}
 			i++;
 		}
@@ -1244,7 +1223,7 @@
 
 		this.setGeneric = function(_v, _d) {
 			var v = _v, m = this.format;
-			var r = "@#*", rt = new Array(), nv = "", t, x, a = new Array(), j = 0, rx = {
+			var r = "@#*", rt = [], nv = "", t, x, a = [], j = 0, rx = {
 				"@" : "A-Za-z",
 				"#" : "0-9",
 				"*" : "A-Za-z0-9"
@@ -1252,11 +1231,11 @@
 
 			// strip out invalid characters
 			v = v.replace(new RegExp("[^" + rx["*"] + "]", "gi"), "");
-			if ((_d == true) && (v.length == this.strippedValue.length)) {
+			if ((_d === true) && (v.length == this.strippedValue.length)) {
 				v = v.substring(0, v.length - 1);
 			}
 			this.strippedValue = v;
-			var b = new Array();
+			var b = [];
 			for (var i = 0; i < m.length; i++) {
 				// grab the current character
 				x = m.charAt(i);
@@ -1325,16 +1304,16 @@
 				return this.throwError(1, "An invalid numeric user format was specified for the \nNumeric user format constructor.", _v);
 			}
 
-			if ((_d == true) && (v.length == this.strippedValue.length)) {
+			if ((_d === true) && (v.length == this.strippedValue.length)) {
 				v = v.substring(0, v.length - 1);
 			}
 
-			if (this.allowPartial && (v.replace(/[^0-9]/, "").length == 0)) {
+			if (this.allowPartial && (v.replace(/[^0-9]/, "").length === 0)) {
 				return v;
 			}
 			this.strippedValue = v;
 
-			if (v.length == 0) {
+			if (v.length === 0) {
 				v = NaN;
 			}
 			var vn = Number(v);
@@ -1343,7 +1322,7 @@
 			}
 
 			// if no mask, stop processing
-			if (m.length == 0) {
+			if (m.length === 0) {
 				return v;
 			}
 
@@ -1353,7 +1332,7 @@
 			var vd = (v.indexOf(".") > -1) ? v.split(".")[1] : "";
 			var _vd = vd;
 
-			var isNegative = (vn != 0 && Math.abs(vn) * -1 == vn);
+			var isNegative = (vn !== 0 && Math.abs(vn) * -1 == vn);
 
 			// check for masking operations
 			var show = {
@@ -1369,10 +1348,10 @@
 			// make sure there are the correct number of decimal places
 			// get number of digits after decimal point in mask
 			var dm = (m.indexOf(".") > -1) ? m.split(".")[1] : "";
-			if (dm.length == 0) {
-				if (_p != null && _p == "round") {
+			if (dm.length === 0) {
+				if (_p !== undefined && _p == "round") {
 					vi = String(Math.round(Number(vi)));
-				} else if (_p != null && _p == "ceil") {
+				} else if (_p !== undefined && _p == "ceil") {
 					vi = String(Math.ceil(Number(vi)));
 				} else {
 					vi = String(Math.floor(Number(vi)));
@@ -1384,9 +1363,9 @@
 				var md = dm.lastIndexOf("0") + 1;
 				// if the number of decimal places is greater than the mask, then round off
 				if (vd.length > dm.length) {
-					if (_p != null && _p == "round") {
+					if (_p !== undefined && _p == "round") {
 						vd = String(Math.round(Number(vd.substring(0, dm.length + 1)) / 10));
-					} else if (_p != null && _p == "ceil") {
+					} else if (_p !== undefined && _p == "ceil") {
 						vd = String(Math.ceil(Number(vd.substring(0, dm.length + 1)) / 10));
 					} else {
 						vd = String(Math.floor(Number(vd.substring(0, dm.length + 1)) / 10));
@@ -1439,7 +1418,7 @@
 				v = vi;
 			}
 
-			if (show["$"]) {
+			if (show.$) {
 				v = this.format.replace(/(^[\$])(.+)/gi, "$") + v;
 			}
 			if (show["+"]) {
