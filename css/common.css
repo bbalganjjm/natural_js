@@ -382,6 +382,7 @@ article .searchBox label input[type='text'] {
 
 article .click {
 	margin-top: 30px;
-	padding: 5px 40px 5px 15px; background: url("../images/icon/click.png") no-repeat 136px 6px; display: inline-block; height: 35px; font-weight: bold; color: #008800; border: 1px dotted #008800; border-radius: 3px; box-shadow: 1px 1px 3px #ccffcc; background-color: #efe; cursor: pointer;
+	padding: 5px 40px 5px 15px; 
+	background: url("../images/icon/click.png") no-repeat 156px 6px; display: inline-block; height: 35px; font-weight: bold; color: #008800; border: 1px dotted #008800; border-radius: 3px; box-shadow: 1px 1px 3px #ccffcc; background-color: #efe; cursor: pointer;
 	font-size: 1.2em;
 }
