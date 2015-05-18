@@ -33,7 +33,7 @@ span.block_overlay_msg__ > ul li {
 }
 
 span.block_overlay_msg__ li.msg_title_box__ {
-    padding: 6px;
+    padding: 10px;
     color: #4f535c;
     font-weight: bold;
     border-bottom: 1px solid #cccccc;
@@ -44,7 +44,7 @@ span.block_overlay_msg__ li.msg_title_box__ {
 
 span.block_overlay_msg__ li.msg_box__ {
     margin: 5px;
-    padding: 0;
+    padding: 10px;
     color: #4f535c;
     font-size: 12px;
     line-height: 20px;
@@ -336,6 +336,10 @@ div.tbody_wrap__ table.grid__ td {
 /* Popup */
 span.popup__ li.msg_box__ {
 	background-color: #ffffff;
+}
+
+span.popup__ li.msg_box__ {
+	padding: 0px;
 }
 
 /* Tab */
