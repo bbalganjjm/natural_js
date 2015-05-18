@@ -338,6 +338,10 @@ span.popup__ li.msg_box__ {
 	background-color: #ffffff;
 }
 
+span.popup__ li.msg_box__ {
+	padding: 0px;
+}
+
 /* Tab */
 div.tab__ > ul {
 	list-style: none;
