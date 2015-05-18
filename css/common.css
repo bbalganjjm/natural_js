@@ -86,7 +86,7 @@ input[type='radio'], input[type='checkbox'] {
 }
 
 a {
-	text-decoration: none; font-weight: normal; 
+	text-decoration: none; font-weight: normal;
 	font-size: 1em; font-family: "Nanum Gothic", "Malgun Gothic", "dotum", "Segoe UI", sans-serif; color: #004a00;
 }
 
@@ -137,7 +137,9 @@ header nav>ul {
 }
 
 header nav>ul>li {
-	margin: 0; padding: 19px 30px 20px 30px; text-align: center; float: left;
+	margin: 0;
+	padding: 19px 20px 20px 20px; text-align: center; float: left;
+	width: 70px;
 }
 
 header nav>ul>li>a {
@@ -172,6 +174,7 @@ header nav>ul>li>ul>li a {
 }
 
 section {
+	clear: left;
 	margin: 0 auto; max-width: 1003px; min-width: 560px; min-height: 350px; border-radius: 0 0 3px 3px; background-color: #ffffff; padding: 15px 0 15px 0;
 	font-size: 0.875em;
 }
@@ -214,7 +217,7 @@ article dl.qna dd ul li>ul {
 
 article h1 {
 	padding: 10px 0 10px 35px; border-bottom: 1px solid #009000;
-	font-size: 1.4em; background: url("../images/icon/h1_leaf.png") no-repeat 0 10px; 
+	font-size: 1.4em; background: url("../images/icon/h1_leaf.png") no-repeat 0 10px;
 	margin: 0 0 20px 0;
 }
 
@@ -224,8 +227,8 @@ article h2 {
 }
 
 article h3 {
-	font-size: 1.1em; 
-	margin: 30px 0 15px 0; color: #050; 
+	font-size: 1.1em;
+	margin: 30px 0 15px 0; color: #050;
 	padding: 3px 0 0 22px; background: url("../images/icon/h3_leaf.gif") no-repeat 5px 4px;
 }
 
@@ -335,8 +338,8 @@ article .intro {
 }
 
 article .smallContTit {
-	padding-left: 15px; 
-	font-size: 0.9em; font-weight: normal; background: url("../images/icon/sct_leaf.gif") no-repeat 0 3px; 
+	padding-left: 15px;
+	font-size: 0.9em; font-weight: normal; background: url("../images/icon/sct_leaf.gif") no-repeat 0 3px;
 	margin: 0 0 5px 0;
 }
 
@@ -377,7 +380,7 @@ article .searchBox label input[type='text'] {
 }
 
 article .click {
-	margin-top: 30px; 
+	margin-top: 30px;
 	padding: 5px 40px 5px 15px; background: url("../images/icon/click.png") no-repeat 136px 6px; display: inline-block; height: 35px; font-weight: bold; color: #008800; border: 1px dotted #008800; border-radius: 3px; box-shadow: 1px 1px 3px #ccffcc; background-color: #efe; cursor: pointer;
 	font-size: 1.2em;
 }
