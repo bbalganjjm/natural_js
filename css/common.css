@@ -66,7 +66,7 @@ img {
 }
 
 input[type='text'], input[type='password'], select, textarea {
-	border-radius: 3px; padding: 3px 3px; border: 1px solid #cccccc; font-size: 0.875em; font-family: "Nanum Gothic", "Malgun Gothic", "dotum", "Segoe UI", sans-serif; color: #004a00; vertical-align: middle; background-color: #ffffff; line-height: 1em; border-color: #cceccc;
+	border-radius: 3px; padding: 3px 3px; border: 1px solid #cccccc; font-size: 13px; font-family: "Nanum Gothic", "Malgun Gothic", "dotum", "Segoe UI", sans-serif; color: #004a00; vertical-align: middle; background-color: #ffffff; line-height: 13px; border-color: #cceccc;
 }
 
 input[type='text']:hover, select:hover, textarea:hover, input[type='text']:focus, select:focus, textarea:focus {
