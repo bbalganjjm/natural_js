@@ -117,7 +117,7 @@ header hgroup>h1, header hgroup>h2 {
 }
 
 header hgroup #logo {
-	font-size: 3.1em; font-style: normal; font-weight: bold; display: inline-block; font-family: sans-serif;
+	font-size: 3.1em; font-style: normal; font-weight: bold; display: inline-block;
 	text-shadow: 1px 1px 15px #7F7;
 	color: #030; margin-right: 15px;
 }
