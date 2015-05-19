@@ -13,7 +13,7 @@ html {
  * Remove default margin.
  */
 body {
-	margin: 0; font-family: "Nanum Gothic", "Malgun Gothic", "dotum", "Segoe UI", sans-serif; color: #004a00; min-width: 574px; background-image: url("../images/body_back.gif"); background-color: 008800;
+	margin: 0; font-family: "Nanum Gothic", "Malgun Gothic", "dotum", "Segoe UI", sans-serif; color: #004a00; min-width: 574px; background-image: url("../images/body_back.gif"); background-color: #008800;
 }
 
 [lang] {
@@ -121,9 +121,7 @@ header hgroup #logo {
 }
 
 header hgroup #desc {
-	font-size: 1.4em; padding: 0;
-	color: #5d5;
-	text-shadow: 1px 1px 1px #030;
+	font-size: 1.4em; padding: 0; color: #5d5; text-shadow: 1px 1px 1px #030;
 }
 
 header nav {
@@ -185,22 +183,15 @@ section article {
 }
 
 footer {
-	margin: 0 auto 15px auto; max-width: 1003px; min-width: 560px;
-	background-color: #005000;
-	padding: 10px 0 15px 0px;
-	opacity: 0.95;
+	margin: 0 auto 15px auto; max-width: 1003px; min-width: 560px; background-color: #005000; padding: 10px 0 15px 0px; opacity: 0.95;
 }
 
-footer > #copy {
-	color: #9f9;
-	text-shadow: 1px 1px 3px #000;
-	font-size: 0.875em;
-	margin-left: 10px;
+footer>#copy {
+	color: #9f9; text-shadow: 1px 1px 3px #000; font-size: 0.875em; margin-left: 10px;
 }
 
 footer #google_translate_element {
-	float: right;
-	margin: 0 10px 0 0;
+	float: right; margin: 0 10px 0 0;
 }
 
 article dl.qna {
