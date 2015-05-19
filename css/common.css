@@ -105,7 +105,7 @@ table.form td {
 
 /* page layout */
 header {
-	background: linear-gradient(top, #27a827, #008000); background: -ms-linear-gradient(top, #EEEE80, #008000); background: -moz-linear-gradient(top, #EEEE80, #008000); background: -o-linear-gradient(top, #EEEE80, #008000); min-width: 560px;
+	min-width: 560px;
 }
 
 header hgroup {
