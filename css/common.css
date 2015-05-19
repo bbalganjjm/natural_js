@@ -13,7 +13,7 @@ html {
  * Remove default margin.
  */
 body {
-	margin: 0; font-family: "Nanum Gothic", "Malgun Gothic", "dotum", "Segoe UI", sans-serif; color: #004a00; min-width: 574px; background-image: url("../images/body_back.gif");
+	margin: 0; font-family: "Nanum Gothic", "Malgun Gothic", "dotum", "Segoe UI", sans-serif; color: #004a00; min-width: 574px; background-image: url("../images/body_back.gif"); background-color: 008800;
 }
 
 [lang] {
@@ -105,7 +105,7 @@ table.form td {
 
 /* page layout */
 header {
-	background: linear-gradient(top, #27a827, #008000); background: -ms-linear-gradient(top, #EEEE80, #008000); background: -moz-linear-gradient(top, #EEEE80, #008000); background: -o-linear-gradient(top, #EEEE80, #008000); min-width: 560px;
+	min-width: 560px;
 }
 
 header hgroup {
@@ -117,9 +117,7 @@ header hgroup>h1, header hgroup>h2 {
 }
 
 header hgroup #logo {
-	font-size: 3.1em; font-style: normal; font-weight: bold; display: inline-block; font-family: sans-serif;
-	text-shadow: 1px 1px 15px #7F7;
-	color: #030; margin-right: 15px;
+	font-size: 3.1em; font-style: normal; font-weight: bold; display: inline-block; text-shadow: 1px 1px 15px #7F7; color: #030; margin-right: 15px;
 }
 
 header hgroup #desc {
