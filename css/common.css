@@ -108,6 +108,7 @@ header {
 	min-width: 560px;
 }
 
+}
 header hgroup {
 	margin: 0 auto; max-width: 1003px; min-width: 560px; padding: 0 9px 0px 9px;
 }
@@ -117,15 +118,11 @@ header hgroup>h1, header hgroup>h2 {
 }
 
 header hgroup #logo {
-	font-size: 3.1em; font-style: normal; font-weight: bold; display: inline-block;
-	text-shadow: 1px 1px 15px #7F7;
-	color: #030; margin-right: 15px;
+	font-size: 3.1em; font-style: normal; font-weight: bold; display: inline-block; text-shadow: 1px 1px 15px #7F7; color: #030; margin-right: 15px;
 }
 
 header hgroup #desc {
-	font-size: 1.4em; padding: 0;
-	color: #5d5;
-	text-shadow: 1px 1px 1px #030;
+	font-size: 1.4em; padding: 0; color: #5d5; text-shadow: 1px 1px 1px #030;
 }
 
 header nav {
@@ -141,8 +138,7 @@ header nav>ul>li {
 }
 
 header nav>ul>li>a {
-	color: #99f999; font-weight: bold; font-size: 1em;
-	text-shadow: 0 0 1px #7F7;
+	color: #99f999; font-weight: bold; font-size: 1em; text-shadow: 0 0 1px #7F7;
 }
 
 header nav>ul>li>ul {
@@ -173,7 +169,6 @@ header nav>ul>li>ul>li a {
 	color: #9f9; font-size: 0.9em; text-shadow: 1px 1px 1px #000;
 }
 
-
 header nav>ul>li>ul>li a:hover {
 	text-shadow: 0 0 10px #fff;
 }
@@ -187,22 +182,15 @@ section article {
 }
 
 footer {
-	margin: 0 auto 15px auto; max-width: 1003px; min-width: 560px;
-	background-color: #005000;
-	padding: 10px 0 15px 0px;
-	opacity: 0.95;
+	margin: 0 auto 15px auto; max-width: 1003px; min-width: 560px; background-color: #005000; padding: 10px 0 15px 0px; opacity: 0.95;
 }
 
-footer > #copy {
-	color: #9f9;
-	text-shadow: 1px 1px 3px #000;
-	font-size: 0.875em;
-	margin-left: 10px;
+footer>#copy {
+	color: #9f9; text-shadow: 1px 1px 3px #000; font-size: 0.875em; margin-left: 10px;
 }
 
 footer #google_translate_element {
-	float: right;
-	margin: 0 10px 0 0;
+	float: right; margin: 0 10px 0 0;
 }
 
 article dl.qna {
