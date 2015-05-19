@@ -300,7 +300,7 @@ article.apiDoc .bi {
 }
 
 article.apiDoc .apidemo {
-	border: 1px solid #77f777; font-size: 1em; margin: 0 0 15px 0; padding: 15px 0 15px 0;
+	border: 1px solid #77f777; font-size: 0.875em; margin: 0 0 15px 0; padding: 15px 0 15px 0;
 }
 
 article.apiDoc .apidemo table th, article.apiDoc .apidemo table td, article.apiDoc .apidemo input[type='text'], article.apiDoc .apidemo input[type='password'], article.apiDoc .apidemo select, article.apiDoc .apidemo textarea {
@@ -333,7 +333,7 @@ article .intro {
 }
 
 article .smallContTit {
-	padding-left: 15px; font-size: 0.9em; font-weight: normal; background: url("../images/icon/sct_leaf.gif") no-repeat 0 3px; margin: 0 0 5px 0;
+	padding-left: 15px; font-size: 1em; font-weight: normal; background: url("../images/icon/sct_leaf.gif") no-repeat 0 3px; margin: 0 0 5px 0;
 }
 
 article .searchBox {
