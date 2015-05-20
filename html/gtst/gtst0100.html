@@ -229,7 +229,7 @@ $(document).ready(function() {
 		&lt;a id="logo" href="index.html"&gt;Natural-JS&lt;/a&gt;
 	&lt;/div&gt;
 	&lt;div id="natural_contents"&gt;
-		&lt;!-- Here is the page context(N.context.attr("architecture").page.context) area. --&gt;
+		&lt;!-- this area is the page context(N.context.attr("architecture").page.context). --&gt;
 	&lt;/div&gt;
 &lt;/body&gt;
 &lt;/html&gt;</code></pre>
@@ -345,13 +345,13 @@ N("#viewCont").cont({
 ...
 N("#viewCont").cont({
 	init : function(view, request) {
-		N({ param1 : "파라메터 애요" }).comm("test_data.json").submit(function(data) {
+		N({ param1 : "This is parameter 1" }).comm("test_data.json").submit(function(data) {
 			// data is received data from the server
 			N("#result", view).text(JSON.stringify(data));
 		});
     }
 });</code></pre>
-	<p>피들러나 브라우저의 개발자 도구에서 network 탭에 가서 확인 해 보면 '{ param1 : "파라메터 애요" }' 라는 텍스트가 해당 URL 로 전송되는것을 확인 할 수 있습니다.</p>
+	<p>피들러나 브라우저에서 제공하는 개발자 도구의 network 탭에 가서 확인 해 보면 '{ param1 : "This is parameter 1" }' 라는 텍스트가 해당 URL 로 전송되는것을 확인 할 수 있습니다.</p>
 	<p>
 		N().comm 에서 N() 의 Argument 로 HTML 요소나 jQuery select 가 지정되면 지정된 영역에 HTML 을 표시 해 주고 JSON 오브젝트를 지정하고 comm() 의 Argument로
 		데이터를 서비스하는 URL을 지정하면 요청한 URL의 파라메터가 됩니다.<br> <br> N.comm 과 N.cont 에서 제공하는 상세 기능을 확인 하려면 API 문서를 참고 하세요.
