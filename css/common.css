@@ -264,7 +264,7 @@ article hr {
 }
 
 article .alert {
-	background: url("../images/icon/alert.png") no-repeat 7px 10px; font-size: 0.95em; padding: 5px 5px 5px 25px; 
+	background: url("../images/icon/alert.png") no-repeat 7px 10px; font-size: 0.95em; padding: 5px 5px 5px 25px;
 	background-color: #cfc; border-radius: 3px;
 }
 
@@ -367,7 +367,7 @@ article .searchBox ul li.buttons {
 }
 
 article .searchBox li>label {
-	margin: 0 15px 0 10px; font-weight: bold;
+	margin: 0 10px 0 10px; font-weight: bold;
 }
 
 article .searchBox li>label label {
