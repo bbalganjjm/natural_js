@@ -114,16 +114,16 @@ var CommonUtilController = {
 			}
 		}
 	},
-	i18n : function(locale) {
+	i18n : function(locale, view) {
 		if(locale === undefined) {
 			locale = N.locale();
 		}
 		if(locale === "ko_KR") {
-    		$("[lang='ko_KR']").show();
-			$("[lang='en_US']").remove();
+    		$("[lang='ko_KR']", view).show();
+			$("[lang='en_US']", view).remove();
 		} else {
-			$("[lang='en_US']").show();
-			$("[lang='ko_KR']").remove();
+			$("[lang='en_US']", view).show();
+			$("[lang='ko_KR']", view).remove();
 		}
 	}
 }

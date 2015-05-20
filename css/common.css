@@ -343,7 +343,9 @@ article .intro {
 }
 
 article .smallContTit {
-	padding-left: 15px; font-size: 1em; font-weight: normal; background: url("../images/icon/sct_leaf.gif") no-repeat 0 3px; margin: 0 0 5px 0;
+	padding-left: 15px;
+	font-size: 0.95em; font-weight: normal; background: url("../images/icon/sct_leaf.gif") no-repeat 0 3px;
+	margin: 0;
 }
 
 article .searchBox {
@@ -355,7 +357,8 @@ article .searchBox ul {
 }
 
 article .searchBox ul li {
-	font-size: 12px; margin: 0; padding: 10px;
+	font-size: 12px; margin: 0; 
+	padding: 10px;
 }
 
 article .searchBox ul li.inputs {
