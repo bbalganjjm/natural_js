@@ -229,7 +229,7 @@ $(document).ready(function() {
 		&lt;a id="logo" href="index.html"&gt;Natural-JS&lt;/a&gt;
 	&lt;/div&gt;
 	&lt;div id="natural_contents"&gt;
-		&lt;!-- 이부분에 페이지 컨텐츠가 표시 됩니다. --&gt;
+		&lt;!-- This is the page context(N.context.attr("architecture").page.context). --&gt;
 	&lt;/div&gt;
 &lt;/body&gt;
 &lt;/html&gt;</code></pre>
@@ -330,7 +330,7 @@ $(document).ready(function() {
 N("#viewCont").cont({
 	init : function(view, request) {
 		N.comm("test_data.json").submit(function(data) {
-			//data 는 서버로 부터 수신된 데이터
+			// data = received data from the server
 			N("#result", view).text(JSON.stringify(data));
 		});
     }
@@ -346,7 +346,7 @@ N("#viewCont").cont({
 N("#viewCont").cont({
 	init : function(view, request) {
 		N({ param1 : "파라메터 애요" }).comm("test_data.json").submit(function(data) {
-			//data 는 서버로 부터 수신된 데이터
+			// data = received data from the server
 			N("#result", view).text(JSON.stringify(data));
 		});
     }
