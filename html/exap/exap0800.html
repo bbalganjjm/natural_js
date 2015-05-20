@@ -123,7 +123,7 @@
 </article>
 
 <style>
-.grid .data_changed__ {
+.grid .row_data_changed__ {
 	background-color: #dfd;
 }
 </style>
@@ -311,6 +311,12 @@ N("article#exap0700").cont({
     	// 6-5 Revert button
     	N("#btnRevert", view).click(function(e) {
     		e.preventDefault();
+
+    		if(grid.data("modified").length === 0) {
+            	N(window).alert("변경된 데이터가 없습니다.").show();
+            	return false;
+            }
+
     		detailForm.revert();
     	});
     }
