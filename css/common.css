@@ -132,16 +132,16 @@ header .hgroup #desc {
 }
 
 header nav {
-	width: 100%; height: 60px; background-color: #005000; opacity: 0.90;
+	width: 100%; height: 62px; background-color: #005000; opacity: 0.90;
 }
 
 header nav>ul {
-	list-style: none; margin: 0 auto; padding: 0; height: 60px; max-width: 1003px; min-width: 560px;
+	list-style: none; margin: 0 auto; padding: 0; height: 62px; max-width: 1003px; min-width: 560px;
 }
 
 header nav>ul>li {
 	margin: 0;
-	padding: 19px 20px 20px 20px; text-align: center; float: left; width: 70px;
+	padding: 21px 20px 20px 20px; text-align: center; float: left; width: 70px;
 }
 
 header nav>ul>li>a {
