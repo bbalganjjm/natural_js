@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.4.15
+ * Natural-UI v0.8.5.0
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	var version = "0.8.4.15";
+	var version = "0.8.5.0";
 
 	// N local variables
 	$.fn.extend(N, {
@@ -1491,7 +1491,9 @@
 				vRules : null,
 				extObj : null, // extObj : for N.grid
 				extRow : -1, // extRow : for N.grid
-				revert : false
+				revert : false,
+				unbind : true,
+				initialInputData : null // for unbind
 			};
 
 			try {
@@ -1512,6 +1514,14 @@
 				this.options.row = 0;
 				this.options.context = N(opts);
 			}
+
+			// for unbind
+			if(this.options.unbind) {
+				if(this.options.context !== null) {
+					this.options.initialInputData = N.element.toData(this.options.context.find(":input").not(":button"));
+				}
+			}
+
 			this.options.context.addClass("form__");
 
 			if(this.options.revert) {
@@ -1558,6 +1568,7 @@
 				var this_ = this;
 				var vals;
 				if (!N.isEmptyObject(opts.data) && !N.isEmptyObject(vals = opts.data[opts.row])) {
+					opts.context.removeClass("row_data_changed__");
 					var eles, ele, val, tagName, type;
 					for ( var key in vals ) {
 						eles = $("#" + key, opts.context);
@@ -1575,6 +1586,14 @@
 											N().validator(opts.fRules !== null ? opts.fRules : ele);
 
 											ele.unbind("focusout.form.validate");
+
+											// remove validator's dregs for rebind
+											ele.removeClass("validate_false__");
+											if(ele.instance("alert") !== undefined) {
+												ele.instance("alert").remove();
+												ele.removeData("alert__");
+											}
+
 											ele.bind("focusout.form.validate", function() {
 												var currEle = $(this);
 					                            if (!currEle.prop("disabled") && !currEle.prop("readonly") && opts.validate) {
@@ -1586,27 +1605,37 @@
 
 									//dataSync
 									ele.unbind("focusout.form.dataSync");
-									ele.bind("focusout.form.dataSync", function() {
+									ele.bind("focusout.form.dataSync", function(e) {
 										var currEle = $(this);
 										var currVal = currEle.val();
 										if (String(vals[currEle.attr("id")]) !== currVal) {
 											if (!currEle.prop("disabled") && !currEle.prop("readonly") && (!opts.validate || (opts.validate && !currEle.hasClass("validate_false__")))) {
+												// update dataset value
 												vals[currEle.attr("id")] = currVal;
+
+												// change row status
 												if (vals.rowStatus != "insert") {
 													vals.rowStatus = "update";
 												}
+
+												// add changed flag
 												currEle.addClass("data_changed__");
+												opts.context.addClass("row_data_changed__");
+
+												// notify data changed
 												N.ds.instance(opts.extObj !== null ? opts.extObj : this_).notify(opts.extRow > -1 ? opts.extRow : opts.row, currEle.attr("id"));
 											}
                                         }
 									});
+
 									//Enter key event
 									ele.unbind("keyup.form.dataSync");
 			                        ele.bind("keyup.form.dataSync", function(e) {
 			                            if (e.which == 13) {
 			                            	e.preventDefault();
 			                            	$(this).trigger("focusout.form.validate");
-			                            	$(this).trigger("focusout.form.dataSync");
+			                            	// notify data changed
+		                            		$(this).trigger("focusout.form.dataSync");
 			                            }
 			                        });
 
@@ -1632,11 +1661,19 @@
 					                        });
 										}
 									} else {
-										ele.val(N.string.nullToEmpty(String(vals[key])));
+										// put value
+										ele.val(String(vals[key]));
 									}
 								} else if(tagName === "select") {
 									//validate
 									if(ele.data("validate") !== undefined) {
+										// remove validator's dregs for rebind
+										ele.removeClass("validate_false__");
+										if(ele.instance("alert") !== undefined) {
+											ele.instance("alert").remove();
+											ele.removeData("alert__");
+										}
+
 										if (opts.validate) {
 											N().validator(opts.fRules !== null ? opts.fRules : ele);
 										}
@@ -1644,30 +1681,40 @@
 
 									//dataSync
 									ele.unbind("change.form.dataSync");
-									ele.bind("change.form.dataSync", function() {
+									ele.bind("change.form.dataSync", function(e) {
 										var currEle = $(this);
 										var currVals = currEle.vals();
 										if (vals[currEle.attr("id")] !== currVals) {
-											if (!currEle.prop("disabled") && !currEle.prop("readonly") && (!opts.validate || (opts.validate && !currEle.hasClass("validate_false__")))) {
-												vals[currEle.attr("id")] = currVals;
-	                                            if (vals.rowStatus != "insert") {
-	                                                vals.rowStatus = "update";
-	                                            }
-	                                            currEle.addClass("data_changed__");
-	                                            N.ds.instance(opts.extObj !== null ? opts.extObj : this_).notify(opts.extRow > -1 ? opts.extRow : opts.row, currEle.attr("id"));
+											// update dataset value
+											vals[currEle.attr("id")] = currVals;
+
+											// change row status
+											if (vals.rowStatus != "insert") {
+												vals.rowStatus = "update";
+											}
+
+											// add changed flag
+											currEle.addClass("data_changed__");
+											opts.context.addClass("row_data_changed__");
+
+											// notify data changed
+											if (!currEle.prop("disabled") && !currEle.prop("readonly")) {
+												N.ds.instance(opts.extObj !== null ? opts.extObj : this_).notify(opts.extRow > -1 ? opts.extRow : opts.row, currEle.attr("id"));
 											}
                                         }
 									});
 
-									//Data bind
+									// select value
 									ele.vals(vals[key]);
 								} else if(tagName === "img") {
-									ele.attr("src", N.string.nullToEmpty(String(vals[key])));
+									// put image path
+									ele.attr("src", String(vals[key]));
 								} else {
 									if(ele.data("format") !== undefined) {
 										N(opts.data).formatter(opts.fRules !== null ? opts.fRules : ele).format(opts.row);
 									} else {
-										val = N.string.nullToEmpty(String(vals[key]));
+										val = String(vals[key]);
+										// put value
 										if(!opts.html) {
 											ele.text(val);
 										} else {
@@ -1683,6 +1730,13 @@
 							if(eles.length > 0) {
 								//validate
 								if(eles.filter(".select_template__").data("validate") !== undefined) {
+									// remove validator's dregs for rebind
+									ele.removeClass("validate_false__");
+									if(ele.instance("alert") !== undefined) {
+										ele.instance("alert").remove();
+										ele.removeData("alert__");
+									}
+
 									if (opts.validate) {
 										N().validator(opts.fRules !== null ? opts.fRules : eles.filter(".select_template__"));
 									}
@@ -1690,7 +1744,7 @@
 
 								//dataSync
 								eles.unbind("click.form.dataSync select.form.dataSync");
-								eles.bind("click.form.dataSync select.form.dataSync", function() {
+								eles.bind("click.form.dataSync select.form.dataSync", function(e) {
 									var currEle = $(this);
 									var currKey = currEle.attr("name");
 									if(currKey === undefined) {
@@ -1700,24 +1754,104 @@
 									currEles.push(this);
 									var currVals = currEles.vals();
 									if (vals[currKey] !== currVals) {
+										// update dataset value
+										vals[currKey] = currVals;
+
+										// change row status
+										if (vals.rowStatus != "insert") {
+											vals.rowStatus = "update";
+										}
+
+										// add changed flag
+										currEles.addClass("data_changed__");
+										opts.context.addClass("row_data_changed__");
+
+										// notify data changed
 										if (!currEle.prop("disabled") && !currEle.prop("readonly")) {
-											vals[currKey] = currVals;
-	                                        if (vals.rowStatus != "insert") {
-	                                            vals.rowStatus = "update";
-	                                        }
-	                                        currEles.addClass("data_changed__");
-	                                        N.ds.instance(opts.extObj !== null ? opts.extObj : this_).notify(opts.extRow > -1 ? opts.extRow : opts.row, currKey);
+											N.ds.instance(opts.extObj !== null ? opts.extObj : this_).notify(opts.extRow > -1 ? opts.extRow : opts.row, currKey);
 										}
 	                                }
 								});
 
+								// select value
+								eles.vals(vals[key]);
+							}
+						}
+					}
+					// be targeted of GC
+					eles = val = undefined;
+				}
+
+				return this;
+			},
+			unbind : function() {
+				var opts = this.options;
+				if(opts.unbind && opts.initialInputData !== null) {
+					opts.row = -1;
+					opts.context.removeClass("row_data_changed__");
+					var vals = opts.initialInputData;
+					var eles, ele, val, tagName, type;
+					for ( var key in vals ) {
+						eles = $("#" + key, opts.context);
+						type = N.string.trimToEmpty(eles.attr("type")).toLowerCase();
+						if (eles.length > 0 && type !== "radio" && type !== "checkbox") {
+							eles.each(function() {
+								ele = $(this);
+								ele.removeClass("data_changed__");
+								tagName = this.tagName.toLowerCase();
+								type = N.string.trimToEmpty(ele.attr("type")).toLowerCase();
+								if (tagName === "textarea" || type === "text" || type === "password" || type === "hidden" || type === "file") {
+									// unbind events
+									ele.unbind("focusout.form.validate focusout.form.dataSync keyup.form.dataSync focusin.form.unformat focusout.form.format");
+									// remove validator's dregs for rebind
+									ele.removeClass("validate_false__");
+									if(ele.instance("alert") !== undefined) {
+										ele.instance("alert").remove();
+										ele.removeData("alert__");
+									}
+									// bind initial value
+									ele.val(vals[key]);
+								} else if(tagName === "select") {
+									// unbind events
+									ele.unbind("change.form.dataSync");
+									// remove validator's dregs for rebind
+									ele.removeClass("validate_false__");
+									if(ele.instance("alert") !== undefined) {
+										ele.instance("alert").remove();
+										ele.removeData("alert__");
+									}
+									// bind initial value
+									ele.vals(vals[key]);
+								} else if(tagName === "img") {
+									// bind initial value
+									if(vals[key] !== undefined) {
+										ele.attr("src", vals[key]);
+									}
+								} else {
+									// bind initial value
+									ele.text(vals[key]);
+								}
+							});
+						} else {
+							//radio, checkbox
+							eles = $(opts.context).find("input:radio[id^='" + key + "'], input:checkbox[id^='" + key + "']");
+							eles.removeClass("data_changed__");
+							if(eles.length > 0) {
+								// unbind events
+								eles.unbind("click.form.dataSync select.form.dataSync");
+								// remove validator's dregs for rebind
+								ele.removeClass("validate_false__");
+								if(ele.instance("alert") !== undefined) {
+									ele.instance("alert").remove();
+									ele.removeData("alert__");
+								}
+								// bind initial value
 								eles.vals(vals[key]);
 							}
 						}
 					}
 					eles = val = undefined;
 				}
-
 				return this;
 			},
 			add : function() {
@@ -1780,6 +1914,7 @@
 				} else {
 					eles.trigger("unformat.formatter");
 				}
+
 				eles.trigger("validate.validator");
 				eles.not(".validate_false__").trigger("format.formatter");
 
@@ -1800,7 +1935,7 @@
 				var this_ = this;
 				var rdonyFg = false;
 				var dsabdFg = false;
-				eles = $(opts.context).find("#" + key);
+				eles = $(opts.context).find("#" + key + ", input:radio[id^='" + key + "'], input:checkbox[id^='" + key + "']");
 				if (eles.length > 0) {
 					var tagName = eles.get(0).tagName.toLowerCase();
 					var type = N.string.trimToEmpty(eles.attr("type")).toLowerCase();
@@ -1809,6 +1944,7 @@
 						eles.each(function() {
 							ele = $(this);
 
+							// remove prevent event condition of input element
 			                if(ele.prop("readonly")) {
 			                	ele.removeAttr("readonly");
 			                    rdonyFg = true;
@@ -1819,50 +1955,84 @@
 			                }
 
 							if (tagName === "textarea" || type === "text" || type === "password" || type === "hidden" || type === "file") {
+								// remove validator's dregs for rebind
+								ele.removeClass("validate_false__");
+								if(ele.instance("alert") !== undefined) {
+									ele.instance("alert").remove();
+									ele.removeData("alert__");
+								}
+
 								if(ele.data("format") !== undefined && ele.data("validate") !== undefined) {
+									// put value
 									ele.val(String(val));
-									//validate
+
+									// validate
 									if (type !== "hidden") {
 										ele.trigger("focusout.form.validate");
 									}
-									//dataSync
+
+									// dataSync
 									ele.trigger("focusout.form.dataSync");
-									//format
+
+									// format
 									if (!ele.is("input:password, input:hidden, input:file")) {
 										ele.trigger("focusin.form.format");
 										ele.trigger("focusout.form.unformat");
 									}
 								} else {
 									ele.val(String(val));
-									//dataSync
+									// dataSync
 									ele.trigger("focusout.form.dataSync");
 								}
 							} else if(tagName === "select") {
+								// remove validator's dregs for rebind
+								ele.removeClass("validate_false__");
+								if(ele.instance("alert") !== undefined) {
+									ele.instance("alert").remove();
+									ele.removeData("alert__");
+								}
+
+								// select value
 								ele.vals(val);
-								//dataSync
+
+								// dataSync
 								ele.trigger("change.form.dataSync");
 							} else if(tagName === "img") {
 								currVal = String(val);
+
+								// update dataset value
 								vals[ele.attr("id")] = currVal;
+
+								// change row status
 	                            if (vals.rowStatus != "insert") {
 	                                vals.rowStatus = "update";
-	                            }
-	                            ele.addClass("data_changed__");
-	                            if(notify === undefined || (notify !== undefined && notify === true)) {
-	                            	N.ds.instance(opts.extObj !== null ? opts.extObj : this_).notify(opts.extRow > -1 ? opts.extRow : opts.row, ele.attr("id"));
-	                            }
-								ele.attr("src", currVal);
-							} else {
-								currVal = String(val);
-								vals[ele.attr("id")] = currVal;
-	                            if (vals.rowStatus != "insert") {
-	                                vals.rowStatus = "update";
-	                            }
-	                            ele.addClass("data_changed__");
-	                            if(notify === undefined || (notify !== undefined && notify === true)) {
-	                            	N.ds.instance(opts.extObj !== null ? opts.extObj : this_).notify(opts.extRow > -1 ? opts.extRow : opts.row, ele.attr("id"));
 	                            }
 
+	                            // put image path
+	                            ele.attr("src", currVal);
+
+	                            // add changed flag
+	                            ele.addClass("data_changed__");
+	                            opts.context.addClass("row_data_changed__");
+
+	                            // notify data changed
+                            	N.ds.instance(opts.extObj !== null ? opts.extObj : this_).notify(opts.extRow > -1 ? opts.extRow : opts.row, ele.attr("id"));
+							} else {
+								currVal = String(val);
+
+								// update dataset value
+								vals[ele.attr("id")] = currVal;
+
+								// change row status
+	                            if (vals.rowStatus != "insert") {
+	                                vals.rowStatus = "update";
+	                            }
+
+	                            // add changed flag
+	                            ele.addClass("data_changed__");
+	                            opts.context.addClass("row_data_changed__");
+
+	                            // put value
 	                            if(ele.data("format") !== undefined) {
 									N(opts.data).formatter(opts.fRules !== null ? opts.fRules : ele).format(opts.row);
 								} else {
@@ -1872,8 +2042,12 @@
 										ele.html(currVal);
 									}
 								}
+
+	                            // notify data changed
+                            	N.ds.instance(opts.extObj !== null ? opts.extObj : this_).notify(opts.extRow > -1 ? opts.extRow : opts.row, ele.attr("id"));
 							}
 
+							// reset prevent event condition of input element
 							if(rdonyFg) {
 								ele.prop("readonly", true);
 			                }
@@ -1885,13 +2059,37 @@
 						//radio, checkbox
 						eles = $(opts.context).find("input:radio[id^='" + key + "'], input:checkbox[id^='" + key + "']");
 						if(eles.length > 0) {
+							// remove validator's dregs for rebind
+							eles.removeClass("validate_false__");
+							var a = eles.instance("alert", function() {
+								this.remove()
+							}).removeData("alert__");
+
+							// select value
 							eles.vals(val);
-							//dataSync
+							// dataSync
 							$(eles.get(0)).trigger("select.form.dataSync");
 						}
 					}
+
+					// be targeted of GC
+					eles = ele = currVal = undefined;
 				} else {
-					this.options.data[this.options.row][key] = val;
+					// put value
+					opts.data[opts.row][key] = val;
+
+					// change row status
+                    if (opts.data[opts.row].rowStatus != "insert") {
+                    	opts.data[opts.row].rowStatus = "update";
+                    }
+
+					// add changed flag
+                    opts.context.addClass("row_data_changed__");
+
+                    // dataSync
+                    if(notify !== false) {
+                    	N.ds.instance(opts.extObj !== null ? opts.extObj : this_).notify(opts.extRow > -1 ? opts.extRow : opts.row, key);
+                    }
 				}
 				return this;
 			},
@@ -1901,8 +2099,9 @@
 					this.bind(row);
 				} else {
 					this.val(key, opts.data[row][key], false);
+					N.element.dataChanged(opts.context.find("#" + key + ", input:radio[id='" + key + "'][name='" + key + "'], input:checkbox[id='" + key + "'][name='" + key + "']"));
 				}
-				N.element.dataChanged(opts.context.find("#" + key + ", input:radio[id='" + key + "'][name='" + key + "'], input:checkbox[id='" + key + "'][name='" + key + "']"));
+
 				return this;
 			}
 		});
@@ -1911,6 +2110,7 @@
 		var Grid = N.grid = function(data, opts) {
 			this.options = {
 				data : N.type(data) === "array" ? N(data) : data,
+				row : -1, // selected row index
 				removedData : [],
 				context : null,
 				heigth : 0,
@@ -1980,15 +2180,22 @@
 				// bind tbody click event for select, multiselect options
 				this.tbodyTemp.bind("click.grid.tbody", function() {
 					var thisEle = $(this);
-					if(thisEle.hasClass("grid_selected__")) {
-						thisEle.removeClass("grid_selected__");
-					} else {
-						if(!this_.options.multiselect) {
-							this_.options.context.find("> tbody").removeClass("grid_selected__");
-						}
-						thisEle.addClass("grid_selected__");
-						if(this_.options.onSelect !== null) {
-							this_.options.onSelect.call(thisEle, thisEle.index()-1, thisEle, this_.options.data);
+					var retFlag = true;
+
+					// save selected row index
+					this_.options.row = thisEle.index()-1;
+
+					if(this_.options.onSelect !== null) {
+						retFlag = this_.options.onSelect.call(thisEle, this_.options.row, thisEle, this_.options.data);
+					}
+					if(retFlag === undefined || retFlag === true) {
+						if(thisEle.hasClass("grid_selected__")) {
+							thisEle.removeClass("grid_selected__");
+						} else {
+							if(!this_.options.multiselect) {
+								this_.options.context.find("> tbody.grid_selected__").removeClass("grid_selected__");
+							}
+							thisEle.addClass("grid_selected__");
 						}
 					}
 				});
@@ -2039,6 +2246,9 @@
 						return data.rowStatus === rowStatus;
 					}).get();
 				}
+			},
+			row : function() {
+				return this.options.row;
 			},
 			context : function(sel) {
 				return sel !== undefined ? this.options.context.find(sel) : this.options.context;
