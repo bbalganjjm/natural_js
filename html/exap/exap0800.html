@@ -4,6 +4,7 @@
 		<p class="smallContTit">마스터 그리드와 상세 수정 화면 폼을 조합한 화면 입니다..</p>
 		<p class="smallContTit">마스터 그리드와 상세 수정화면의 폼은 같은 데이터를 참고하고 있으므로 둘중 한쪽에서 데이터 변동이 있을 시 나머지 한쪽도 실시간으로 변경된 데이터가 동기화 됩니다.</p>
 		<p class="smallContTit">서버와 연계되지 않은 UI 쪽 코딩 예제 입니다. 때문에 검색 조건으로 입력한 데이터와 저장 데이터는 그리드에 적용되지 않습니다. 서버쪽으로 전달되는 파라미터만 확인 바랍니다.</p>
+		<p class="smallContTit">데이터가 수정된 요소에는 "data_changed__" 라는 스타일 클래스가 수정된 그리드의 행에는 "row_data_changed__" 라는 스타일 클래스가 정의 됩니다. "data_changed__" 나 "row_data_changed__" 클래스에 대한 스타일을 지정하면 값이 수정된 요소나 그리드의 행을 화면에 표시 할 수 있습니다.</p>
 	</div>
 
 	<div id="subContext" style="overflow: hidden;">
@@ -39,18 +40,14 @@
 			<div class="searchBox" style="padding: 1px;">
 				<ul>
 					<li lang="ko_KR" class="buttons">
-						<!-- TODO
 						<a id="btnAdd" href="#" data-opts='{ "color": "blue" }'>추가</a>
 						<a id="btnDelete" href="#" data-opts='{ "color": "gray" }'>삭제</a>
-						-->
 						<a id="btnSave" href="#" data-opts='{ "color": "skyblue" }'>저장</a>
 						<a id="btnRevert" href="#" data-opts='{ "color": "white" }'>되돌리기</a>
 					</li>
 					<li lang="en_US" class="buttons">
-						<!-- TODO
 						<a id="btnAdd" href="#" data-opts='{ "color": "blue" }'>New</a>
 						<a id="btnDelete" href="#" data-opts='{ "color": "gray" }'>Delete</a>
-						-->
 						<a id="btnSave" href="#" data-opts='{ "color": "skyblue" }'>Save</a>
 						<a id="btnRevert" href="#" data-opts='{ "color": "white" }'>Revert</a>
 					</li>
@@ -60,7 +57,7 @@
 			<table id="detail" class="form" style="width: 100%;">
 				<tr>
 					<th rowspan="5" style="width: 15%;" align="right">picture</th>
-					<td rowspan="5" style="width: 35%;" align="center" valign="middle"><img id="picture" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D" height="170" /></td>
+					<td rowspan="5" style="width: 35%;" align="center" valign="middle"><img id="picture" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D" height="110" /></td>
 					<th style="width: 15%;"><label for="name">Name</label></th>
 					<td style="width: 35%;"><input id="name" type="text" data-validate='[["required"]]' /></td>
 				</tr>
@@ -111,7 +108,7 @@
 				</tr>
 				<tr>
 					<th><label for="greeting">Greeting</label></th>
-					<td colspan="3"><textarea id="greeting" style="width: 95%;" rows="2"></textarea></td>
+					<td colspan="3" id="greeting"></td>
 				</tr>
 				<tr>
 					<th><label for="isActive">Active</label></th>
@@ -123,7 +120,11 @@
 </article>
 
 <style>
-.grid .row_data_changed__ {
+.form input[type='text'] {
+	width: 90%;
+}
+
+.grid tbody.row_data_changed__ {
 	background-color: #dfd;
 }
 </style>
@@ -174,6 +175,9 @@ N("article#exap0700").cont({
 	    },{
 	    	"key" : "ZENTIA",
 	    	"val" : "ZENTIA"
+	    },{
+	    	"key" : "GRONK",
+	    	"val" : "GRONK"
 		},{
 	    	"key" : "INTRADISK",
 	    	"val" : "INTRADISK"
@@ -230,8 +234,30 @@ N("article#exap0700").cont({
        		select : true,
        		onSelect : function(index, rowEle, data) {
        			// Grid row select event
-       			// 5. bind data to detail form;
-       			detailForm.bind(index, data);
+
+       			// do validate;
+       			// detailForm.row() = -1 is unbind flag
+       			if(detailForm.row() > -1) {
+	       			if(!detailForm.validate()) {
+	       				return false;
+	       			}
+       			}
+
+  				if(grid.context("tbody.row_data_changed__").length > 0 && detailForm.context().hasClass("row_data_changed__")) {
+      				N(window).alert({
+      					msg : "데이터를 수정 중 입니다. 선택한 행의 데이터를 조회 하겠습니까?",
+      					confirm : true,
+      					onOk : function() {
+      						// 5. bind data to detail form;
+      						detailForm.bind(index, data);
+      						rowEle.click();
+      					}
+      				}).show();
+      				return false;
+      			} else {
+      				// 5. bind data to detail form;
+      				detailForm.bind(index, data);
+      			}
         	}
        	});
 
@@ -251,8 +277,10 @@ N("article#exap0700").cont({
 
     			// Temporary code
     			N(searchForm.data()).comm("html/apid/data/grid.json").submit(function(data) {
-             		// Data bind by N.grid
+    				// N.grid bind
              		grid.bind(data);
+             		// bind first row data to detail form;
+             		grid.context("tbody:eq(0)").click();
              	});
             }
         }).click(); // Auto retrieve
@@ -266,32 +294,40 @@ N("article#exap0700").cont({
             	return false;
             }
 
-            if(grid.validate()) {
-            	N(window).alert({
-            		msg : "저장 하시겠습니까?",
-            		confirm : true,
-            		onOk : function() {
-            			/* Because github.io is not allow POST send, this sentence was annotated
-            			N(grid.data("modified")).comm({
-            				url : "url",
-            				type : "POST"
-            			}).submit();
-            			*/
-
-            			// Temporary code
-            			N(window).alert({
-                 			title : "서버로 전송되는 파라미터",
-                 			msg : "<pre style='width: 450px; height: 400px; overflow: auto;'>" + N.json.format(grid.data("modified")).replace(/\\/g, "") + "</pre>"
-                 		}).show();
-            		}
-            	}).show();
+         	// do validate;
+         	// detailForm.row() = -1 is unbind flag
+            if(detailForm.row() > -1) {
+            	if(!detailForm.validate()) {
+            		return false;
+            	}
             }
+
+           	N(window).alert({
+           		msg : "저장 하겠습니까?",
+           		confirm : true,
+           		onOk : function() {
+           			/* Because github.io is not allow POST send, this sentence was annotated
+           			N(grid.data("modified")).comm({
+           				url : "url",
+           				type : "POST"
+           			}).submit();
+           			*/
+
+           			// Temporary code
+           			N(window).alert({
+                			title : "서버로 전송되는 파라미터",
+                			msg : "<pre style='width: 450px; height: 400px; overflow: auto;'>" + N.json.format(grid.data("modified")).replace(/\\/g, "") + "</pre>"
+                		}).show();
+           		}
+           	}).show();
     	});
 
-        /* TODO
     	// 6-3 New button
     	N("#btnAdd", view).click(function(e) {
     		e.preventDefault();
+    		// Unbind form
+    		detailForm.unbind();
+    		// Add row
     		detailForm.add();
     	});
 
@@ -299,14 +335,16 @@ N("article#exap0700").cont({
     	N("#btnDelete", view).click(function(e) {
     		e.preventDefault();
     		N(window).alert({
-        		msg : "삭제 하시겠습니까?<br/>저장버튼을 누르기 전까지는 서버에 적용되지 않습니다.",
+        		msg : "삭제 하겠습니까?<br/>저장버튼을 누르기 전까지는 서버에 적용되지 않습니다.",
         		confirm : true,
         		onOk : function() {
+        			// Remove row of N.grid
                     grid.remove(detailForm.row());
+                 	// Unbind form
+                    detailForm.unbind();
         		}
         	}).show();
     	});
-		*/
 
     	// 6-5 Revert button
     	N("#btnRevert", view).click(function(e) {
