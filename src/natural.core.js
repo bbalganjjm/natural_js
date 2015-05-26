@@ -1,5 +1,5 @@
 /*!
- * Natural-CORE v0.8.3.5
+ * Natural-CORE v0.8.3.6
  * bbalganjjm@gmail.com
  *
  * Includes formatdate.js & Mask JavaScript API
@@ -12,7 +12,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	var version = "0.8.3.5", N;
+	var version = "0.8.3.6", N;
 
 	// Use jQuery init
 	N = function(selector, context) {
@@ -514,6 +514,7 @@
 		     * Data change effect for N.ds
 		     */
 		    dataChanged : function(ele) {
+		    	ele.addClass("data_changed__");
 		    	ele.fadeOut(150).fadeIn(300);
 		    }
 		},
@@ -747,8 +748,11 @@
 	    			var inst;
 	    			this.each(function(i) {
 	    				inst = $(this).data(name + "__");
-	    				instance.call(inst, i, inst);
+	    				if(inst !== undefined) {
+	    					instance.call(inst, i, inst);
+	    				}
 	    			});
+	    			return this;
 	    		} else {
 	    			//set instance
 	    			this.data(name + "__", instance);
