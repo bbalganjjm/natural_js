@@ -125,6 +125,10 @@
 			<th>revert</th>
 			<td><input id="revert" type="checkbox" checked="checked" /> If this checkbox with check(true), activate the revert function(default value is false)</td>
 		</tr>
+		<tr>
+			<th>unbind</th>
+			<td colspan="3"><input id="unbind" type="checkbox" checked="checked" /> If this checkbox with uncheck(false), inactivate the unbind function</td>
+		</tr>
 	</table>
 
 	<p class="smallContTit">Method options : </p>
@@ -162,6 +166,7 @@
 		<a id="btnInit" href="#" data-opts='{ "color": "gray", "size": "large" }'>Initialize form</a> |
 		<a id="btnAdd" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>add</a> | or |
 		<a id="btnBind" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>bind</a>
+		<a id="btnUnbind" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>unbind</a>
 		<a id="btnRevert" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>revert</a> |
 		<a id="btnVal" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>val</a>
 		<a id="btnData" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>data</a>
@@ -301,7 +306,8 @@
 	    			context : view.find(N("input#context", view).val()),
 	    			validate : N("input#validate", view).is(":checked"),
 	    			html : N("input#html", view).is(":checked"),
-	        		revert : N("input#revert", view).is(":checked")
+	        		revert : N("input#revert", view).is(":checked"),
+	        		unbind : N("input#unbind", view).is(":checked")
 	    		}
 
 	    		form = N(data).form(opts);
@@ -323,15 +329,27 @@
 	            N("#btnRevert", view).instance("button").enable();
 	        });
 
+	        N("#btnUnbind", view).click(function(e) {
+	            e.preventDefault();
+	            if(!form.options.unbind) {
+	            	N("div.result", view).alert('You must check the "unbind" option checkbox before initializing the form').show();
+	    			return false;
+	    		}
+	            form.unbind();
+	        });
+
 	        N("#btnAdd", view).click(function(e) {
 	            e.preventDefault();
 	            form.add();
-
 	            N("#btnBind", view).instance("button").disable();
 	        });
 
 	        N("#btnRevert", view).click(function(e) {
 	            e.preventDefault();
+	            if(!form.options.revert) {
+	            	N("div.result", view).alert('You must check the "revert" option checkbox before initializing the form').show();
+	    			return false;
+	    		}
 	            form.revert();
 	        });
 

@@ -140,6 +140,7 @@
 		<a id="btnRemove" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>remove</a>
 		<a id="btnVal" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>val</a>
 		<a id="btnData" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>data</a>
+		<a id="btnRow" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>row</a>
 		<a id="btnValidate" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>validate</a>
 		<a id="btnReload" href="#" data-opts='{ "color": "white", "size": "large" }'>Reload this block page</a>
 	</div>
@@ -292,6 +293,15 @@
 	        		height : 250
 	        	}).show();
 	        });
+
+	    	N("#btnRow", view).click(function(e) {
+	    		e.preventDefault();
+	    		var msg = String(grid.row());
+	    		if(!grid.options.select && !grid.options.multiselect) {
+	    			msg = 'You must check the "select" or "multiselect" option checkbox before initializing the grid';
+	    		}
+	    		grid.context().parent().alert(msg).show();
+	        })
 
 	    	N("#btnValidate", view).click(function(e) {
 	            e.preventDefault();
