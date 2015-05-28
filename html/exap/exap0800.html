@@ -124,10 +124,6 @@
 .form input[type='text'] {
 	width: 90%;
 }
-
-.grid tbody.row_data_changed__ {
-	background-color: #dfd;
-}
 </style>
 
 <script type="text/javascript">
@@ -348,7 +344,7 @@ N("article#exap0700").cont({
         			// Remove row of N.grid
                     grid.remove(detailForm.row());
                  	// Unbind form
-                    detailForm.unbind();
+                    detailForm.bind();
         		}
         	}).show();
     	});
