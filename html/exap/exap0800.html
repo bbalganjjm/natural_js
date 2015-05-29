@@ -337,16 +337,10 @@ N("article#exap0700").cont({
     	// 6-4 Delete button
     	N("#btnDelete", view).click(function(e) {
     		e.preventDefault();
-    		N(window).alert({
-        		msg : N.message.get(this_.messages, "delete"),
-        		confirm : true,
-        		onOk : function() {
-        			// Remove row of N.grid
-                    grid.remove(detailForm.row());
-                 	// Unbind form
-                    detailForm.bind();
-        		}
-        	}).show();
+    		// Remove row of N.grid
+            grid.remove(detailForm.row());
+         	// Unbind form
+            detailForm.bind();
     	});
 
     	// 6-5 Revert button
@@ -366,14 +360,12 @@ N("article#exap0700").cont({
 			"ncddt" : "변경된 데이터가 없습니다.",
 			"save" : "저장 하겠습니까?",
 			"editr" : "데이터를 수정 중 입니다. 선택한 행의 데이터를 조회 하겠습니까?",
-			"delete" : "삭제 하겠습니까? 저장버튼을 누르기 전까지는 서버에 저장되지 않습니다.",
 			"sentp" : "서버로 전송되는 파라미터"
 		},
 		"en_US" : {
 			"ncddt" : "No changed data",
 			"save" : "Do you want to save?",
 			"editr" : "You are on the editing the data. are you sure you want to retrieve the data from the selected row?",
-			"delete" : "Do you want to delete? if you don't click the save button  it is not stored on the server.",
 			"sentp" : "sent parameters to the server"
 		}
 	}
