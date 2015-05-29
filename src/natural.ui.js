@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.5.0
+ * Natural-UI v0.8.6.0
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	var version = "0.8.5.0";
+	var version = "0.8.6.0";
 
 	// N local variables
 	$.fn.extend(N, {
@@ -113,7 +113,7 @@
 			},
 			"show" : function() {
 				var opts = this.options;
-				var this_ = this;
+				var self = this;
 
 				if (!opts.isInput) {
 					Alert.resetOffSetEle(opts);
@@ -139,7 +139,7 @@
 								opts.context.parent().css({
 									"white-space": ""
 								});
-								this_[opts.closeMode]();
+								self[opts.closeMode]();
 							}, opts.input.displayTimeout);
 						});
 					}
@@ -149,7 +149,7 @@
 				// if press the "ESC" key, alert dialog will be removed
 				opts.onKeyup = function(e) {
 		        	if (e.keyCode == 27) {
-		        		this_[opts.closeMode]();
+		        		self[opts.closeMode]();
 		        	}
 				};
 		        $(document).bind("keyup.alert", opts.onKeyup);
@@ -215,7 +215,7 @@
 
 				// make message overlay
 				opts.msgContext = opts.container.append($('<div class="block_overlay__" onselectstart="return false;"></div>')
-						.css(blockOverlayCss)).find("div.block_overlay__:last");
+						.css(blockOverlayCss)).find(".block_overlay__:last");
 				if (opts.vars !== undefined) {
 					opts.msg = N.message.replaceMsgVars(opts.msg, opts.vars);
 				}
@@ -251,31 +251,31 @@
 								titleBox +
 								'<li class="msg_box__"></li>' +
 								buttonBox +
-								'</ul></span>').css(blockOverlayMsgCss)).next("span.block_overlay_msg__:last");
+								'</ul></span>').css(blockOverlayMsgCss)).next(".block_overlay_msg__:last");
 
 				// set message
-				opts.msgContents.find("li.msg_box__").html(opts.msg);
+				opts.msgContents.find(".msg_box__").html(opts.msg);
 
 				// set width
 				if(opts.width > 0) {
-					opts.msgContents.find("li.msg_box__").width(opts.width);
+					opts.msgContents.find(".msg_box__").width(opts.width);
 				}
 
 				// set height
 				if(opts.height > 0) {
-					opts.msgContents.find("li.msg_box__").height(opts.height);
-					opts.msgContents.find("li.msg_box__").css("overflow-y", "auto");
+					opts.msgContents.find(".msg_box__").height(opts.height);
+					opts.msgContents.find(".msg_box__").css("overflow-y", "auto");
 				}
 
-				var this_ = this;
+				var self = this;
 				//set confirm button style and bind click event
-				opts.msgContents.find("li.buttonBox__ a.confirm__").button(opts.global.okBtnStyle);
-				opts.msgContents.find("li.buttonBox__ a.confirm__").click(function(e) {
+				opts.msgContents.find(".buttonBox__ a.confirm__").button(opts.global.okBtnStyle);
+				opts.msgContents.find(".buttonBox__ a.confirm__").click(function(e) {
 					e.preventDefault();
 					if (opts.onOk !== null) {
-						opts.onOk.call(this_, opts.msgContext, opts.msgContents);
+						opts.onOk.call(self, opts.msgContext, opts.msgContents);
 					}
-					this_[opts.closeMode]();
+					self[opts.closeMode]();
 				});
 
 				// remove modal overlay layer for (opts.modal = false)
@@ -285,16 +285,16 @@
 
 				// set cancel button style and bind click event
 				if(opts.confirm) {
-					opts.msgContents.find("li.buttonBox__ a.cancel__").button(opts.global.cancelBtnStyle);
-					opts.msgContents.find("li.buttonBox__ a.cancel__").click(function(e) {
+					opts.msgContents.find(".buttonBox__ a.cancel__").button(opts.global.cancelBtnStyle);
+					opts.msgContents.find(".buttonBox__ a.cancel__").click(function(e) {
 						e.preventDefault();
 						if (opts.onCancel !== null) {
 							opts.onCancel(opts.msgContext, opts.msgContents);
 						}
-						this_[opts.closeMode]();
+						self[opts.closeMode]();
 					});
 				} else {
-					opts.msgContents.find("a.cancel__").remove();
+					opts.msgContents.find(".cancel__").remove();
 				}
 			},
 			resetOffSetEle : function(opts) {
@@ -330,9 +330,9 @@
 				if(opts.context.instance("alert") !== undefined) {
 					opts.context.instance("alert").remove();
 				}
-				opts.msgContext = opts.context.next("span.msg__");
+				opts.msgContext = opts.context.next(".msg__");
 				if (opts.msgContext.length === 0) {
-					opts.msgContext = opts.context.after('<span class="msg__" style="display: none;"><ul class="msg_line_box__"></ul></span>').next("span.msg__");
+					opts.msgContext = opts.context.after('<span class="msg__" style="display: none;"><ul class="msg_line_box__"></ul></span>').next(".msg__");
 					opts.msgContext.append('<a href="#" class="msg_close__"></a>');
 				}
 				if(opts.alwaysOnTop) {
@@ -343,15 +343,15 @@
 					this.remove();
 				}
 
-				var this_ = this;
-				opts.msgContext.find("a.msg_close__").click(function(e) {
+				var self = this;
+				opts.msgContext.find(".msg_close__").click(function(e) {
 					e.preventDefault();
-					this_.remove();
+					self.remove();
 				});
 
-				var ul_ = opts.msgContext.find("ul.msg_line_box__");
+				var ul_ = opts.msgContext.find(".msg_line_box__");
 				if (N.isArray(opts.msg)) {
-					opts.msgContext.find("ul.msg_line_box__").empty();
+					opts.msgContext.find(".msg_line_box__").empty();
 					$(opts.msg).each(function(i, msg_) {
 						if (opts.vars !== undefined) {
 							opts.msg[i] = N.message.replaceMsgVars(msg_, opts.vars);
@@ -574,9 +574,9 @@
 					DatePicker.selectItems(opts,
 							opts.context.val().replace(/[^0-9]/g, ""),
 							(!opts.monthonly ? N.context.attr("data").formatter.date.Ymd() : N.context.attr("data").formatter.date.Ym()).replace(/[^Y|^m|^d]/g, ""),
-							opts.contents.find("div.datepicker_years_panel__"),
-							opts.contents.find("div.datepicker_months_panel__"),
-							opts.contents.find("div.datepicker_days_panel__"));
+							opts.contents.find(".datepicker_years_panel__"),
+							opts.contents.find(".datepicker_months_panel__"),
+							opts.contents.find(".datepicker_days_panel__"));
 				}
 
 				if(opts.onBeforeShow !== null) {
@@ -586,7 +586,7 @@
 					}
 				}
 
-				var this_ = this;
+				var self = this;
 
 				opts.contents.fadeIn(150);
 
@@ -594,7 +594,7 @@
 				// if press the "ESC" key, datepicker will be hidden
 		        $(document).bind("keyup.datepicker", function(e) {
 		        	if (e.keyCode == 27) {
-		        		this_.hide();
+		        		self.hide();
 		        	}
 				});
 
@@ -612,14 +612,14 @@
 		        // when the context(input) is focused out, close the datepicker panel
 		        opts.context.bind("blur.datepicker", function() {
 		        	if(!lock) {
-		        		this_.hide();
+		        		self.hide();
 		        	}
 		        });
 
 		        // set datapicker position
 				$(window).bind("resize.datepicker", function() {
 					var leftOfs = opts.context.position().left;
-					var parentEle = opts.contents.closest("tbody.form__");
+					var parentEle = opts.contents.closest(".form__");
 					var limitWidth;
 					if(parentEle.length > 0) {
 						limitWidth = parentEle.position().left + parentEle.width();
@@ -661,7 +661,7 @@
 			},
 			wrapEle : function() {
 				var opts = this.options;
-				var this_ = this;
+				var self = this;
 
 				var d = new Date();
 				var currYear = parseInt(d.formatDate("Y"));
@@ -690,7 +690,7 @@
 					"line-height": "25px"
 				}).click(function(e) {
 					e.preventDefault();
-					yearsPanel.find("div.datepicker_year_item__").removeClass("datepicker_year_selected__");
+					yearsPanel.find(".datepicker_year_item__").removeClass("datepicker_year_selected__");
 					$(this).addClass("datepicker_year_selected__");
 				});
 				var yearItemClone;
@@ -710,13 +710,13 @@
 				yearPaging.css({
 					"line-height": "25px"
 				});
-				yearPaging.find("a.datepicker_year_prev__").click(function(e) {
+				yearPaging.find(".datepicker_year_prev__").click(function(e) {
 					e.preventDefault();
-					DatePicker.yearPaging(yearsPanel.find("div.datepicker_year_item__"), currYear, -5);
+					DatePicker.yearPaging(yearsPanel.find(".datepicker_year_item__"), currYear, -5);
 				});
 				yearPaging.find("a.datepicker_year_next__").click(function(e) {
 					e.preventDefault();
-					DatePicker.yearPaging(yearsPanel.find("div.datepicker_year_item__"), currYear, 5);
+					DatePicker.yearPaging(yearsPanel.find(".datepicker_year_item__"), currYear, 5);
 				});
 				yearsPanel.append(yearPaging);
 				opts.contents.append(yearsPanel);
@@ -736,10 +736,10 @@
 					"float": "left"
 				}).click(function(e) {
 					e.preventDefault();
-					monthsPanel.find("div.datepicker_month_item__").removeClass("datepicker_month_selected__");
+					monthsPanel.find(".datepicker_month_item__").removeClass("datepicker_month_selected__");
 					$(this).addClass("datepicker_month_selected__");
 					if(opts.monthonly) {
-						var selDate = N.date.strToDate(N.string.lpad(yearsPanel.find("div.datepicker_year_selected__").text(), 4, "0") + N.string.lpad($(this).text(), 2, "0"), "Ym");
+						var selDate = N.date.strToDate(N.string.lpad(yearsPanel.find(".datepicker_year_selected__").text(), 4, "0") + N.string.lpad($(this).text(), 2, "0"), "Ym");
 						// set date format of global config
 						selDate.format = N.context.attr("data").formatter.date.Ym().replace(/[^Y|^m|^d]/g, "");
 
@@ -750,10 +750,10 @@
 						if(onSelectContinue === undefined || onSelectContinue === true) {
 							opts.context.val(selDate.obj.formatDate(selDate.format.replace(/[^Y|^m|^d]/g, "")));
 						}
-						this_.hide();
+						self.hide();
 					} else {
 						daysPanel.empty();
-						var endDateCls = N.date.strToDate(N.string.lpad(yearsPanel.find("div.datepicker_year_selected__").text(), 4, "0") +  N.string.lpad(String(parseInt($(this).text())+1), 2, "0") + "00", "Ymd");
+						var endDateCls = N.date.strToDate(N.string.lpad(yearsPanel.find(".datepicker_year_selected__").text(), 4, "0") +  N.string.lpad(String(parseInt($(this).text())+1), 2, "0") + "00", "Ymd");
 						var endDate = endDateCls.obj.getDate();
 						gEndDate = endDate;
 						if(format !== "Ymd") {
@@ -767,7 +767,7 @@
 							daysPanel.append(dayItem.clone().addClass("datepicker_day__").text(days[j]));
 						}
 
-						var prevEndDateCls = N.date.strToDate(N.string.lpad(yearsPanel.find("div.datepicker_year_selected__").text(), 4, "0") +  N.string.lpad($(this).text(), 2, "0") + "00", "Ymd");
+						var prevEndDateCls = N.date.strToDate(N.string.lpad(yearsPanel.find(".datepicker_year_selected__").text(), 4, "0") +  N.string.lpad($(this).text(), 2, "0") + "00", "Ymd");
 						var prevEndDate = prevEndDateCls.obj.getDate();
 						var date;
 						var dateItem;
@@ -787,8 +787,8 @@
 							daysPanel.append(dateItem.text(date));
 						}
 
-						if(daysPanel.find("div.datepicker_day_item__.datepicker_day_selected__").length === 0) {
-							daysPanel.find("div.datepicker_day_item__:contains(" + String(parseInt(d.formatDate("d"))) + "):eq(0)").addClass("datepicker_day_selected__");
+						if(daysPanel.find(".datepicker_day_selected__").length === 0) {
+							daysPanel.find(".datepicker_day_item__:contains(" + String(parseInt(d.formatDate("d"))) + "):eq(0)").addClass("datepicker_day_selected__");
 						}
 					}
 				});
@@ -797,8 +797,8 @@
 				// render month items
 				for(i=1;i<=12;i++) {
 					monthsPanel.append(monthItem.clone(true).addClass("datepicker_month_item__").text(String(i)));
-					if(monthsPanel.find("div.datepicker_month_item__ .datepicker_month_selected__").length === 0) {
-						monthsPanel.find("div.datepicker_month_item__:contains(" + String(parseInt(d.formatDate("m"))) + "):eq(0)").addClass("datepicker_month_selected__");
+					if(monthsPanel.find(".datepicker_month_selected__").length === 0) {
+						monthsPanel.find(".datepicker_month_item__:contains(" + String(parseInt(d.formatDate("m"))) + "):eq(0)").addClass("datepicker_month_selected__");
 					}
 				}
 				opts.contents.append(monthsPanel);
@@ -820,17 +820,17 @@
 					}).click(function(e) {
 						e.preventDefault();
 						var thisEle = $(this);
-						daysPanel.find("div.datepicker_prev_day_item__, div.datepicker_day_item__, div.datepicker_next_day_item__").removeClass("datepicker_day_selected__");
+						daysPanel.find(".datepicker_prev_day_item__, .datepicker_day_item__, .datepicker_next_day_item__").removeClass("datepicker_day_selected__");
 						thisEle.addClass("datepicker_day_selected__");
 						var selMonth;
 						if(thisEle.hasClass("datepicker_prev_day_item__")) {
-							selMonth = String(parseInt(monthsPanel.find("div.datepicker_month_selected__").text()) - 1);
+							selMonth = String(parseInt(monthsPanel.find(".datepicker_month_selected__").text()) - 1);
 						} else if(thisEle.hasClass("datepicker_next_day_item__")) {
-							selMonth = String(parseInt(monthsPanel.find("div.datepicker_month_selected__").text()) + 1);
+							selMonth = String(parseInt(monthsPanel.find(".datepicker_month_selected__").text()) + 1);
 						} else {
-							selMonth = monthsPanel.find("div.datepicker_month_selected__").text();
+							selMonth = monthsPanel.find(".datepicker_month_selected__").text();
 						}
-						var selDate = N.date.strToDate(N.string.lpad(yearsPanel.find("div.datepicker_year_selected__").text(), 4, "0") +
+						var selDate = N.date.strToDate(N.string.lpad(yearsPanel.find(".datepicker_year_selected__").text(), 4, "0") +
 								N.string.lpad(selMonth, 2, "0") +
 								N.string.lpad(thisEle.text(), 2, "0"), "Ymd");
 						// set date format of global config
@@ -843,12 +843,12 @@
 						if(onSelectContinue === undefined || onSelectContinue === true) {
 							opts.context.val(selDate.obj.formatDate(selDate.format.replace(/[^Y|^m|^d]/g, "")));
 						}
-						this_.hide();
+						self.hide();
 					});
 					opts.contents.append(daysPanel);
 
 					// click current month
-					monthsPanel.find("div.datepicker_month_item__:contains(" + String(parseInt(d.formatDate("m"))) + ")").click();
+					monthsPanel.find(".datepicker_month_item__:contains(" + String(parseInt(d.formatDate("m"))) + ")").click();
 				}
 
 				// append datepicker panel after context
@@ -858,7 +858,7 @@
 				if(opts.focusin) {
 					opts.context.bind("focusin.datepicker", function() {
 						if(!opts.contents.is(":visible")) {
-							this_.show();
+							self.show();
 						}
 					});
 				}
@@ -904,9 +904,9 @@
 	        		// when press the enter key
 					} else if (e.keyCode == 13) {
 		        		if(!opts.monthonly) {
-		        			daysPanel.find("div.datepicker_day_selected__").click();
+		        			daysPanel.find(".datepicker_day_selected__").click();
 		        		} else {
-		        			monthsPanel.find("div.datepicker_month_selected__").click();
+		        			monthsPanel.find(".datepicker_month_selected__").click();
 		        		}
 
 		        		// Temporary measures, I dont't know why into formated data to only data set of memory when press the enter key
@@ -944,23 +944,23 @@
 
 				// year item selection
     			if(!isNaN(dateStrStrArr[0]) && dateStrStrArr[0].length === 4) {
-    				yearsPanel.find("div.datepicker_year_item__").removeClass("datepicker_year_selected__");
-					DatePicker.yearPaging(yearsPanel.find("div.datepicker_year_item__"), dateStrArr[0], -2, true);
-					yearsPanel.find("div.datepicker_year_item__:contains('" + String(dateStrArr[0]) + "')").click();
+    				yearsPanel.find(".datepicker_year_item__").removeClass("datepicker_year_selected__");
+					DatePicker.yearPaging(yearsPanel.find(".datepicker_year_item__"), dateStrArr[0], -2, true);
+					yearsPanel.find(".datepicker_year_item__:contains('" + String(dateStrArr[0]) + "')").click();
     			}
     			// month item selection
     			if(!isNaN(dateStrStrArr[1]) && dateStrStrArr[1].length === 2) {
-					monthsPanel.find("div.datepicker_month_item__").removeClass("datepicker_month_selected__");
+					monthsPanel.find(".datepicker_month_item__").removeClass("datepicker_month_selected__");
 					if(!opts.monthonly) {
-						monthsPanel.find("div.datepicker_month_item__:contains(" + String(dateStrArr[1]) + "):eq(0)").click();
+						monthsPanel.find(".datepicker_month_item__:contains(" + String(dateStrArr[1]) + "):eq(0)").click();
 					} else {
-						monthsPanel.find("div.datepicker_month_item__:contains(" + String(dateStrArr[1]) + "):eq(0)").addClass("datepicker_month_selected__");
+						monthsPanel.find(".datepicker_month_item__:contains(" + String(dateStrArr[1]) + "):eq(0)").addClass("datepicker_month_selected__");
 					}
 				}
     			// day item selection
     			if(!isNaN(dateStrStrArr[2]) && dateStrStrArr[2].length === 2) {
-					daysPanel.find("div.datepicker_prev_day_item__, div.datepicker_day_item__, div.datepicker_next_day_item__").removeClass("datepicker_day_selected__");
-					daysPanel.find("div.datepicker_day_item__:contains(" + String(dateStrArr[2]) + "):eq(0)").addClass("datepicker_day_selected__");
+					daysPanel.find(".datepicker_prev_day_item__, .datepicker_day_item__, .datepicker_next_day_item__").removeClass("datepicker_day_selected__");
+					daysPanel.find(".datepicker_day_item__:contains(" + String(dateStrArr[2]) + "):eq(0)").addClass("datepicker_day_selected__");
 				}
 			}
 		});
@@ -968,7 +968,7 @@
 
 		// Popup
 		var Popup = N.popup = function(obj, opts) {
-			//TODO think more whether "onLoad event" needs or not
+			//TODO think more : whether the "onload" event needs or not
 			this.options = {
 				context : obj,
 				url : null,
@@ -1047,7 +1047,7 @@
 			},
 			open : function(onOpenData) {
 				var opts = this.options;
-				var this_ = this;
+				var self = this;
 
 				if(this.options.url !== null && !opts.preload) {
 					Popup.loadEle.call(this, function(context) {
@@ -1055,7 +1055,7 @@
 						opts.context = context;
 						opts.context.instance("popup", this);
 
-						Popup.popOpen.call(this_, onOpenData);
+						Popup.popOpen.call(self, onOpenData);
 					});
 					opts.preload = true;
 				} else {
@@ -1105,7 +1105,7 @@
 			},
 			loadEle : function(callback) {
 				var opts = this.options;
-				var this_ = this;
+				var self = this;
 
 				// TODO show loading bar
 				N.comm({
@@ -1124,9 +1124,9 @@
 
 					// opts.context is alert message;
 					opts.msg = opts.context;
-					this_.alert = N(window).alert(opts);
-					this_.alert.options.msgContext.addClass("popup_overlay__");
-					this_.alert.options.msgContents.addClass("popup__");
+					self.alert = N(window).alert(opts);
+					self.alert.options.msgContext.addClass("popup_overlay__");
+					self.alert.options.msgContents.addClass("popup__");
 
 					var sc = opts.context.instance("cont");
 
@@ -1136,11 +1136,11 @@
 						sc.request = this.request;
 
 						// set caller attribute in Conteroller in tab content, that is Popup instance
-						sc.caller = this_;
+						sc.caller = self;
 
 						// set opener to popup's Controller
-						if(this_.opener !== undefined) {
-							sc.opener = this_.opener;
+						if(self.opener !== undefined) {
+							sc.opener = self.opener;
 						}
 
 						if(sc.init !== undefined) {
@@ -1148,19 +1148,19 @@
 						}
 					}
 
-					callback.call(this_, opts.context);
+					callback.call(self, opts.context);
 
 					// TODO hide loading bar
 	        	});
 			},
 			popOpen : function(onOpenData) {
 				var opts = this.options;
-				var this_ = this;
+				var self = this;
 
 				if(opts.url === null) {
 					opts.context.show();
 				}
-				this_.alert.show();
+				self.alert.show();
 
 				// execute "onOpen" event
 				if(opts.onOpen !== null) {
@@ -1195,7 +1195,7 @@
 				N.error("[N.tab]" + e, e);
 			}
 
-			var this_ = this;
+			var self = this;
 			var opt;
 			this.options.links.each(function(i) {
 				var thisEle = $(this);
@@ -1204,7 +1204,7 @@
 					opt = {};
 				}
 				opt.target = thisEle.find("a").attr("href");
-				this_.options.classOpts.push(opt);
+				self.options.classOpts.push(opt);
 			});
 
 			if(opts !== undefined) {
@@ -1237,7 +1237,7 @@
 				// hide div contents
 				opts.contents.hide();
 
-				var this_ = this;
+				var self = this;
 
 				var defSelIdx;
 				$(opts.classOpts).each(function(i) {
@@ -1259,7 +1259,7 @@
 
 					if(this.preload !== undefined && this.preload === true) {
 						if(this.url !== undefined) {
-							Tab.loadContent.call(this_, this.url, i);
+							Tab.loadContent.call(self, this.url, i);
 						}
 					}
 				});
@@ -1280,7 +1280,7 @@
 					if(thisClassOpts.preload === undefined || thisClassOpts.preload === false) {
 						// load content
 						if(thisClassOpts.url !== undefined && thisEle.data("loaded") === undefined) {
-							Tab.loadContent.call(this_, thisClassOpts.url, thisIdx);
+							Tab.loadContent.call(self, thisClassOpts.url, thisIdx);
 						}
 					}
 
@@ -1302,7 +1302,7 @@
 					}
 
 					if (opts.effect) {
-						content.find(">").hide()[opts.effect[0]](opts.effect[1], opts.effect[2]);
+						content.children().hide()[opts.effect[0]](opts.effect[1], opts.effect[2]);
 					}
 				});
 
@@ -1311,7 +1311,7 @@
 			},
 			loadContent : function(url, targetIdx) {
 				var opts = this.options;
-				var this_ = this;
+				var self = this;
 
 				// TODO show loading bar
 				N.comm({
@@ -1319,7 +1319,7 @@
 					contentType : "application/x-www-form-urlencoded",
 					dataType : "html"
 				}).submit(function(page) {
-					var innerContent = opts.contents.eq(targetIdx).html(page).find(">");
+					var innerContent = opts.contents.eq(targetIdx).html(page).children();
 					var activeTabEle = opts.links.eq(targetIdx);
 
 					var sc = innerContent.instance("cont");
@@ -1328,7 +1328,7 @@
 					sc.request = this.request;
 
 					// set caller attribute in conteroller in tab content that is Tab instance
-					sc.caller = this_;
+					sc.caller = self;
 
 					// set tab instance to tab contents Controller
 					if(sc !== undefined) {
@@ -1415,7 +1415,7 @@
 		    bind : function() {
 		    	var opts = this.options;
 		    	if(opts.type === 1 || opts.type === 2) {
-		    		var defaultSelectEle = opts.template.find("option.select_default__").clone(true);
+		    		var defaultSelectEle = opts.template.find(".select_default__").clone(true);
 	    			opts.context.addClass("select_template__").empty();
 					if(opts.append) {
 	    				opts.context.append(defaultSelectEle);
@@ -1518,7 +1518,7 @@
 			// for unbind
 			if(this.options.unbind) {
 				if(this.options.context !== null) {
-					this.options.initialInputData = N.element.toData(this.options.context.find(":input").not(":button"));
+					this.options.initialInputData = N.element.toData(this.options.context.find(":input, img").not(":button"));
 				}
 			}
 
@@ -1548,8 +1548,8 @@
 					return opts.data.get();
 				}
 			},
-			row : function() {
-				return this.options.row;
+			row : function(before) {
+				return before !== undefined && before === "before" ? this.options.beforeRow : this.options.row;
 			},
 			context : function(sel) {
 				return sel !== undefined ? this.options.context.find(sel) : this.options.context;
@@ -1565,10 +1565,20 @@
 						this.revertData = $.extend({}, data[row]);
 					}
 				}
-				var this_ = this;
+				var self = this;
 				var vals;
 				if (!N.isEmptyObject(opts.data) && !N.isEmptyObject(vals = opts.data[opts.row])) {
-					opts.context.removeClass("row_data_changed__");
+					// add row data changed flag
+					if (vals.rowStatus === "insert" || vals.rowStatus === "update") {
+						opts.context.addClass("row_data_changed__");
+					} else {
+						opts.context.removeClass("row_data_changed__");
+					}
+					if (vals.rowStatus === "delete") {
+						opts.context.addClass("row_data_deleted__");
+					} else {
+						opts.context.removeClass("row_data_deleted__");
+					}
 					var eles, ele, val, tagName, type;
 					for ( var key in vals ) {
 						eles = $("#" + key, opts.context);
@@ -1576,7 +1586,13 @@
 						if (eles.length > 0 && type !== "radio" && type !== "checkbox") {
 							eles.each(function() {
 								ele = $(this);
-								ele.removeClass("data_changed__");
+								// add data changed flag
+								if (vals.rowStatus === "update") {
+									ele.addClass("data_changed__");
+								} else {
+									ele.removeClass("data_changed__");
+								}
+
 								tagName = this.tagName.toLowerCase();
 								type = N.string.trimToEmpty(ele.attr("type")).toLowerCase();
 								if (tagName === "textarea" || type === "text" || type === "password" || type === "hidden" || type === "file") {
@@ -1614,16 +1630,17 @@
 												vals[currEle.attr("id")] = currVal;
 
 												// change row status
-												if (vals.rowStatus != "insert") {
+												if (vals.rowStatus !== "insert" && vals.rowStatus !== "delete") {
 													vals.rowStatus = "update";
+													// add data changed flag
+													currEle.addClass("data_changed__");
+													if(!opts.context.hasClass("row_data_changed__")) {
+														opts.context.addClass("row_data_changed__");
+													}
 												}
 
-												// add changed flag
-												currEle.addClass("data_changed__");
-												opts.context.addClass("row_data_changed__");
-
 												// notify data changed
-												N.ds.instance(opts.extObj !== null ? opts.extObj : this_).notify(opts.extRow > -1 ? opts.extRow : opts.row, currEle.attr("id"));
+												N.ds.instance(opts.extObj !== null ? opts.extObj : self).notify(opts.extRow > -1 ? opts.extRow : opts.row, currEle.attr("id"));
 											}
                                         }
 									});
@@ -1689,17 +1706,19 @@
 											vals[currEle.attr("id")] = currVals;
 
 											// change row status
-											if (vals.rowStatus != "insert") {
+											if (vals.rowStatus !== "insert" && vals.rowStatus !== "delete") {
 												vals.rowStatus = "update";
+												// add data changed flag
+												currEle.addClass("data_changed__");
+												if(!opts.context.hasClass("row_data_changed__")) {
+													opts.context.addClass("row_data_changed__");
+												}
 											}
 
-											// add changed flag
-											currEle.addClass("data_changed__");
-											opts.context.addClass("row_data_changed__");
 
 											// notify data changed
 											if (!currEle.prop("disabled") && !currEle.prop("readonly")) {
-												N.ds.instance(opts.extObj !== null ? opts.extObj : this_).notify(opts.extRow > -1 ? opts.extRow : opts.row, currEle.attr("id"));
+												N.ds.instance(opts.extObj !== null ? opts.extObj : self).notify(opts.extRow > -1 ? opts.extRow : opts.row, currEle.attr("id"));
 											}
                                         }
 									});
@@ -1726,7 +1745,14 @@
 						} else {
 							//radio, checkbox
 							eles = $(opts.context).find("input:radio[id^='" + key + "'], input:checkbox[id^='" + key + "']");
-							eles.removeClass("data_changed__");
+
+							// add data changed flag
+							if (vals.rowStatus === "update") {
+								eles.addClass("data_changed__");
+							} else {
+								eles.removeClass("data_changed__");
+							}
+
 							if(eles.length > 0) {
 								//validate
 								if(eles.filter(".select_template__").data("validate") !== undefined) {
@@ -1758,17 +1784,19 @@
 										vals[currKey] = currVals;
 
 										// change row status
-										if (vals.rowStatus != "insert") {
+										if (vals.rowStatus !== "insert" && vals.rowStatus !== "delete") {
 											vals.rowStatus = "update";
+											// add data changed flag
+											currEles.addClass("data_changed__");
+											if(!opts.context.hasClass("row_data_changed__")) {
+												opts.context.addClass("row_data_changed__");
+											}
 										}
 
-										// add changed flag
-										currEles.addClass("data_changed__");
-										opts.context.addClass("row_data_changed__");
 
 										// notify data changed
 										if (!currEle.prop("disabled") && !currEle.prop("readonly")) {
-											N.ds.instance(opts.extObj !== null ? opts.extObj : this_).notify(opts.extRow > -1 ? opts.extRow : opts.row, currKey);
+											N.ds.instance(opts.extObj !== null ? opts.extObj : self).notify(opts.extRow > -1 ? opts.extRow : opts.row, currKey);
 										}
 	                                }
 								});
@@ -1854,35 +1882,33 @@
 				}
 				return this;
 			},
-			add : function() {
+			add : function(data) {
 				var opts = this.options;
 		        if (opts.data === null) {
 		            throw new Error("[Form.add]Data is null. you must input data");
 		        }
 
 		        // set default values
-		        var vals = N.element.toData(opts.context.find(":input").not(":button"));
-		        vals.rowStatus = "insert";
+		        if(data === undefined) {
+		        	var vals = N.element.toData(opts.context.find(":input").not(":button"));
+		        	vals.rowStatus = "insert";
 
-	        	if(!opts.addTop) {
-	        		opts.data.push(vals);
-	        		this.options.row = opts.data.length - 1;
-	        		if(opts.extObj !== null) {
-	        			opts.extRow = opts.extObj.data().length - 1;
-	        		}
-	        	} else {
-        			opts.data.splice(0, 0, vals);
-	        		this.options.row = 0;
-	        		opts.extRow = 0;
-	        	}
+		        	if(!opts.addTop) {
+		        		opts.data.push(vals);
+		        		this.options.row = opts.data.length - 1;
+		        	} else {
+		        		opts.data.splice(0, 0, vals);
+		        		this.options.row = 0;
+		        	}
+		        	// Set revert data
+		        	if(opts.revert) {
+		        		this.revertData = $.extend({}, opts.data[opts.row]);
+		        	}
 
-	        	// Set revert data
-				if(opts.revert) {
-					this.revertData = $.extend({}, opts.data[opts.row]);
-				}
+		        	N.ds.instance(opts.extObj !== null ? opts.extObj : this).notify(opts.extRow > -1 ? opts.extRow : opts.row);
+		        }
 
-		        N.ds.instance(opts.extObj !== null ? opts.extObj : this).notify(opts.extRow > -1 ? opts.extRow : opts.row);
-		        this.update(opts.row);
+		        this.bind(opts.row, data);
 				return this;
 			},
 			remove : function(row) {
@@ -1892,6 +1918,7 @@
 		        }
 
 				opts.data.splice(row, 1);
+				opts.context.find("tbody:eq(" + row + ")").addClass("row_data_deleted");
 
 				N.ds.instance(this).notify();
 				return this;
@@ -1932,7 +1959,7 @@
 				var opts = this.options;
 				var vals = opts.data[opts.row];
 				var eles, ele;
-				var this_ = this;
+				var self = this;
 				var rdonyFg = false;
 				var dsabdFg = false;
 				eles = $(opts.context).find("#" + key + ", input:radio[id^='" + key + "'], input:checkbox[id^='" + key + "']");
@@ -2004,19 +2031,21 @@
 								vals[ele.attr("id")] = currVal;
 
 								// change row status
-	                            if (vals.rowStatus != "insert") {
+	                            if (vals.rowStatus !== "insert" && vals.rowStatus !== "delete") {
 	                                vals.rowStatus = "update";
+	                                // add data changed flag
+	                                ele.addClass("data_changed__");
+	                                if(!opts.context.hasClass("row_data_changed__")) {
+	                                	opts.context.addClass("row_data_changed__");
+	                                }
 	                            }
 
 	                            // put image path
 	                            ele.attr("src", currVal);
 
-	                            // add changed flag
-	                            ele.addClass("data_changed__");
-	                            opts.context.addClass("row_data_changed__");
 
 	                            // notify data changed
-                            	N.ds.instance(opts.extObj !== null ? opts.extObj : this_).notify(opts.extRow > -1 ? opts.extRow : opts.row, ele.attr("id"));
+                            	N.ds.instance(opts.extObj !== null ? opts.extObj : self).notify(opts.extRow > -1 ? opts.extRow : opts.row, ele.attr("id"));
 							} else {
 								currVal = String(val);
 
@@ -2024,13 +2053,14 @@
 								vals[ele.attr("id")] = currVal;
 
 								// change row status
-	                            if (vals.rowStatus != "insert") {
+	                            if (vals.rowStatus !== "insert" && vals.rowStatus !== "delete") {
 	                                vals.rowStatus = "update";
+	                                // add data changed flag
+	                                ele.addClass("data_changed__");
+	                                if(!opts.context.hasClass("row_data_changed__")) {
+	                                	opts.context.addClass("row_data_changed__");
+	                                }
 	                            }
-
-	                            // add changed flag
-	                            ele.addClass("data_changed__");
-	                            opts.context.addClass("row_data_changed__");
 
 	                            // put value
 	                            if(ele.data("format") !== undefined) {
@@ -2044,7 +2074,7 @@
 								}
 
 	                            // notify data changed
-                            	N.ds.instance(opts.extObj !== null ? opts.extObj : this_).notify(opts.extRow > -1 ? opts.extRow : opts.row, ele.attr("id"));
+                            	N.ds.instance(opts.extObj !== null ? opts.extObj : self).notify(opts.extRow > -1 ? opts.extRow : opts.row, ele.attr("id"));
 							}
 
 							// reset prevent event condition of input element
@@ -2079,16 +2109,18 @@
 					opts.data[opts.row][key] = val;
 
 					// change row status
-                    if (opts.data[opts.row].rowStatus != "insert") {
+                    if (opts.data[opts.row].rowStatus !== "insert" && opts.data[opts.row].rowStatus !== "delete") {
                     	opts.data[opts.row].rowStatus = "update";
+                    	// add data changed flag
+                    	if(!opts.context.hasClass("row_data_changed__")) {
+                    		opts.context.addClass("row_data_changed__");
+                    	}
                     }
 
-					// add changed flag
-                    opts.context.addClass("row_data_changed__");
 
                     // dataSync
                     if(notify !== false) {
-                    	N.ds.instance(opts.extObj !== null ? opts.extObj : this_).notify(opts.extRow > -1 ? opts.extRow : opts.row, key);
+                    	N.ds.instance(opts.extObj !== null ? opts.extObj : self).notify(opts.extRow > -1 ? opts.extRow : opts.row, key);
                     }
 				}
 				return this;
@@ -2111,7 +2143,7 @@
 			this.options = {
 				data : N.type(data) === "array" ? N(data) : data,
 				row : -1, // selected row index
-				removedData : [],
+				beforeRow : -1, // before selected row index
 				context : null,
 				heigth : 0,
 				validate : true,
@@ -2176,26 +2208,34 @@
 				// set context style class for select, multiselect options
 				this.options.context.addClass("grid_select__");
 
-				var this_ = this;
+				var self = this;
 				// bind tbody click event for select, multiselect options
 				this.tbodyTemp.bind("click.grid.tbody", function() {
 					var thisEle = $(this);
-					var retFlag = true;
-
-					// save selected row index
-					this_.options.row = thisEle.index()-1;
-
-					if(this_.options.onSelect !== null) {
-						retFlag = this_.options.onSelect.call(thisEle, this_.options.row, thisEle, this_.options.data);
+					var retFlag;
+					var selected;
+					// save the selected row index
+					if(thisEle.hasClass("grid_selected__")) {
+						self.options.row = -1;
+						selected = true;
+					} else {
+						self.options.row = thisEle.index()-1;
+						selected = false;
 					}
+
+					if(self.options.onSelect !== null) {
+						retFlag = self.options.onSelect.call(thisEle, self.options.row, thisEle, self.options.data, self.options.beforeRow);
+					}
+
 					if(retFlag === undefined || retFlag === true) {
-						if(thisEle.hasClass("grid_selected__")) {
+						if(selected) {
 							thisEle.removeClass("grid_selected__");
 						} else {
-							if(!this_.options.multiselect) {
-								this_.options.context.find("> tbody.grid_selected__").removeClass("grid_selected__");
+							if(!self.options.multiselect) {
+								self.options.context.find("> tbody:eq(" + self.options.beforeRow + ")").removeClass("grid_selected__");
 							}
 							thisEle.addClass("grid_selected__");
+							self.options.beforeRow = self.options.row;
 						}
 					}
 				});
@@ -2238,9 +2278,7 @@
 				} else if(rowStatus === "modified") {
 					return this.options.data.datafilter(function(data) {
 						return data.rowStatus !== undefined;
-					}).get().concat(this.options.removedData);
-				} else if(rowStatus === "delete") {
-					return this.options.removedData;
+					}).get();
 				} else {
 					return this.options.data.datafilter(function(data) {
 						return data.rowStatus === rowStatus;
@@ -2256,14 +2294,11 @@
 			bind : function(data) {
 				var opts = this.options;
 				// remove all sort status
-				this.thead.find("span.sortable__").remove();
+				this.thead.find(".sortable__").remove();
 
-				//empty removedData;
-				if(arguments.callee.caller !== this.update) {
-					opts.removedData = [];
-				}
 				//for internal call by scrollPaging
 				var interCall = arguments[1] !== undefined && arguments[1] === true ? true : false;
+
 				//to rebind new data
 				if(data !== undefined) {
 					opts.data = N.type(data) === "array" ? N(data) : data;
@@ -2289,12 +2324,12 @@
 						limit = opts.data.length;
 					}
 					var classOpts;
-					var this_ = this;
+					var self = this;
 					var delay = opts.createRowDelay;
 					var lastIdx;
 					var render = function() {
 						// clone tbody for create new row
-						tbodyTempClone = this_.tbodyTemp.clone(true, true).hide();
+						tbodyTempClone = self.tbodyTemp.clone(true, true).hide();
 						opts.context.append(tbodyTempClone);
 
 						if(opts.rowHandler !== null) {
@@ -2306,9 +2341,10 @@
 							context : tbodyTempClone,
 							html: opts.html,
 							validate : opts.validate,
-							extObj : this_,
+							extObj : self,
 							extRow : i,
-							revert : opts.revert
+							revert : opts.revert,
+							unbind : false
 						}).bind();
 
 						tbodyTempClone.show(delay, function() {
@@ -2340,7 +2376,7 @@
 
 				return this;
 			},
-			add : function() {
+			add : function(data) {
 				var opts = this.options;
 				if (opts.context.find("td.empty__").length > 0) {
 					opts.context.find("tbody").remove();
@@ -2362,7 +2398,10 @@
 					extRow : opts.addTop ? 0 : opts.data.length,
 					addTop : opts.addTop,
 					revert : opts.revert
-				}).add();
+				}).add(data);
+
+				// unselect rows
+				opts.context.find("> tbody").removeClass("grid_selected__");
 
 				// focus to first input element
 				if(tbodyTempClone.find(":input:eq(0)").length > 0) {
@@ -2377,14 +2416,12 @@
 		        	N.error("[N.grid.remove]Row index out of range");
 		        }
 
-				opts.context.find("tbody:eq(" + row + ")").remove();
-
 				if (opts.data[row].rowStatus === "insert") {
 		            opts.data.splice(row, 1);
+		            opts.context.find("tbody:eq(" + row + ")").remove();
 		        } else {
-		        	var removedData = opts.data.splice(row, 1)[0];
-		        	removedData.rowStatus = "delete";
-		            opts.removedData.push(removedData);
+		        	opts.data[row].rowStatus = "delete";
+		        	opts.context.find("tbody:eq(" + row + ")").addClass("row_data_deleted__");
 		        }
 
 				N.ds.instance(this).notify();
@@ -2443,10 +2480,16 @@
 				return this;
 			},
 			update : function(row, key) {
-				if(row !== undefined && key !== undefined) {
-					this.options.context.find("tbody:eq(" + String(row) + ")").instance("form").update(0, key);
+				if(row !== undefined) {
+					if(key !== undefined) {
+						this.options.context.find("tbody:eq(" + String(row) + ")").instance("form").update(0, key);
+					} else if(this.options.data[row].rowStatus === "insert") {
+						this.add(this.options.data);
+					} else {
+						this.options.context.find("tbody:eq(" + String(row) + ")").instance("form").update(0);
+					}
 				} else {
-					this.bind();
+					this.bind(undefined, true);
 				}
 				return this;
 			}
@@ -2521,14 +2564,14 @@
 		        }
 
 		        // Scroll paging
-		        var this_ = this;
+		        var self = this;
 		        var defSPSize = opts.scrollPaging.limit;
 		        var tbodyLength;
 		        tbodyWrap.scroll(function() {
 		        	var thisWrap = $(this);
                     if (thisWrap.scrollTop() >= opts.context.height() - thisWrap.height()) {
                     	tbodyLength = opts.context.find("> tbody").length;
-                    	if (tbodyLength === opts.scrollPaging.idx + defSPSize) {
+                    	if (tbodyLength >= opts.scrollPaging.idx + defSPSize) {
 	                        if (tbodyLength > 0 && tbodyLength <= opts.data.length) {
 	                            opts.scrollPaging.idx += defSPSize;
 	                        }
@@ -2540,7 +2583,7 @@
 	                        }
 
 	                        if(opts.scrollPaging.idx < opts.data.length) {
-	                        	this_.bind(undefined, true);
+	                        	self.bind(undefined, true);
 	                        }
 	                    }
 	                }
@@ -2631,7 +2674,7 @@
 				}
 				theadCells.each(function() {
 					cellEle = $(this);
-		            resizeBar = cellEle.append('<span class="resize_bar__"></span>').find("span.resize_bar__");
+		            resizeBar = cellEle.append('<span class="resize_bar__"></span>').find(".resize_bar__");
 		            var resizeBarWidth = 6;
 		            var resizeBarRightMargin = resizeBarWidth + (resizeBarWidth/2);
 		            if(N.browser.is("safari")) {
@@ -2710,7 +2753,7 @@
 			        	$(window.document).bind("mouseup.grid.resize", function(se) {
 			        		theadCells.each(function() {
 			        			var cellEle = $(this);
-			        			cellEle.find("> span.resize_bar__").css("left", ((cellEle.offset().left + cellEle.width()) + resizeBarRightMargin) + "px");
+			        			cellEle.find("> .resize_bar__").css("left", ((cellEle.offset().left + cellEle.width()) + resizeBarRightMargin) + "px");
 			        		});
 			        		$(document).unbind("dragstart.grid.resize").unbind("selectstart.grid.resize").unbind("mousemove.grid.resize").unbind("mouseup.grid.resize");
 			        		pressed = false;
@@ -2724,7 +2767,7 @@
 
     	        var theadCells = thead.find("> tr th");
     	        theadCells.css("cursor", "pointer");
-    	        var this_ = this;
+    	        var self = this;
     	        theadCells.bind("click.grid.sort", function(e) {
     	        	var currEle = $(this);
     	        	if(currEle.data("sortLock")) {
@@ -2734,14 +2777,14 @@
     	        	if (opts.data.length > 0) {
     	        		if(N.string.trimToNull($(this).text()) !== null && $(this).find("input[type='checkbox']").length === 0) {
     	        			var isAsc = false;
-    	        			if (currEle.find("span.sortable__").hasClass("asc__")) {
+    	        			if (currEle.find(".sortable__").hasClass("asc__")) {
     	        				isAsc = true;
     	        			}
     	                    if (isAsc) {
-    	                    	this_.bind(N(opts.data).datasort($(this).data("id"), true));
+    	                    	self.bind(N(opts.data).datasort($(this).data("id"), true));
     	                    	currEle.append('<span class="sortable__ desc__">' + opts.sortableItem.asc + '</span>');
     	                    } else {
-    	                    	this_.bind(N(opts.data).datasort($(this).data("id")));
+    	                    	self.bind(N(opts.data).datasort($(this).data("id")));
     	                    	currEle.append('<span class="sortable__ asc__">' + opts.sortableItem.desc + '</span>');
     	                    }
     	        		}
@@ -2755,7 +2798,7 @@
         		var opts = this.options;
         		var thead;
     			if (opts.height > 0) {
-    	        	thead = opts.context.closest("div.grid_wrap__").find("> div.thead_wrap__ thead");
+    	        	thead = opts.context.closest(".grid_wrap__").find("> .thead_wrap__ thead");
     	        } else {
     	        	thead = opts.context.find("thead");
     	        }
