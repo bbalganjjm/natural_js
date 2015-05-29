@@ -1,5 +1,5 @@
 /*!
- * Natural-DATA v0.8.2.0
+ * Natural-DATA v0.8.2.1
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	var version = "0.8.2.0";
+	var version = "0.8.2.1";
 
 	// N local variables
 	$.fn.extend(N, {
@@ -203,7 +203,7 @@
 		$.extend(Formatter.fn, {
 			"format" : function(row) {
 				var opts = this.options;
-				var this_ = this;
+				var self = this;
 				var retArr = [];
 				var retObj;
 				var tempValue;
@@ -255,7 +255,7 @@
 										}
 
 										// TODO Temporary code, think more
-										var fmdVals = this_.format();
+										var fmdVals = self.format();
 										if(fmdVals.length === 1) {
 											row = 0;
 										}
@@ -267,7 +267,7 @@
 											row = 0;
 										}
 
-										$(this).val(this_.unformat(row, $(this).attr("id")));
+										$(this).val(self.unformat(row, $(this).attr("id")));
 									});
 								}
 							} else {
@@ -553,7 +553,7 @@
 				opts.isElement = true;
 				opts.context = N(rules);
 				opts.targetEle = opts.context.is(":input") ? opts.context : opts.context.find(":input");
-				var this_ = this;
+				var self = this;
 				opts.targetEle = opts.targetEle.map(function() {
 					if($(this).data("validate") !== undefined) {
 						if(opts.createEvent) {
