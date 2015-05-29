@@ -1,5 +1,5 @@
 /*!
- * Natural-CORE v0.8.3.6
+ * Natural-CORE v0.8.3.8
  * bbalganjjm@gmail.com
  *
  * Includes formatdate.js & Mask JavaScript API
@@ -12,7 +12,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	var version = "0.8.3.6", N;
+	var version = "0.8.3.8", N;
 
 	// Use jQuery init
 	N = function(selector, context) {
@@ -476,7 +476,11 @@
 					} else {
 						if(key !== undefined) {
 							if(!ele.is("select")) {
-								retData[key] = N.string.trimToEmpty(ele.val());
+								if(ele.is("img")) {
+									retData[key] = ele.attr("src");
+								} else {
+									retData[key] = ele.val();
+								}
 							} else {
 								retData[key] = ele.vals();
 							}
@@ -784,9 +788,9 @@
 		        	}
 		        	if(this.length > 1) {
 		        		this.prop("checked", false);
-		        		var this_ = this;
+		        		var self = this;
 		        		N(vals).each(function() {
-		        			this_.filter("[value='" + String(this) + "']").prop("checked", true);
+		        			self.filter("[value='" + String(this) + "']").prop("checked", true);
 		        		});
 		        	} else if(this.length === 1) {
 		        		if(N.context.attr("core").sgChkdVal === vals[0]) {
