@@ -1742,8 +1742,8 @@
 			<td>null</td>
 			<td></td>
 			<td style="max-width: 299px;">
-				<p>그리드의 행이 선택될때마다 발생되는 이벤트입니다. 이벤트 콜백 메서드의 인자로 생성될 당시의 row index, 로우 요소, 로우 데이터를 넣어줍니다.</p>
-				<pre><code class="language-javascript">onSelect : function(index, rowEle, rowData) {
+				<p>그리드의 행이 선택될때마다 발생되는 이벤트입니다. 이벤트 콜백 메서드의 인자로 생성될 당시의 row index, 로우 요소, 로우 데이터, 바로전에 선택한 row index 를 넣어줍니다.</p>
+				<pre><code class="language-javascript">onSelect : function(index, rowEle, rowData, beforeRow) {
 	// this 는 rowEle
 }</code></pre>
 
