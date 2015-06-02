@@ -1,5 +1,5 @@
 /*!
- * Natural-CORE v0.8.3.8
+ * Natural-CORE v0.8.3.9
  * bbalganjjm@gmail.com
  *
  * Includes formatdate.js & Mask JavaScript API
@@ -12,7 +12,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	var version = "0.8.3.8", N;
+	var version = "0.8.3.9", N;
 
 	// Use jQuery init
 	N = function(selector, context) {
@@ -793,6 +793,9 @@
 		        			self.filter("[value='" + String(this) + "']").prop("checked", true);
 		        		});
 		        	} else if(this.length === 1) {
+		        		if(vals[0] !== N.context.attr("core").sgChkdVal && vals[0] !== N.context.attr("core").sgUnChkdVal) {
+		        			vals[0] = N.context.attr("core").sgUnChkdVal;
+		        		}
 		        		if(N.context.attr("core").sgChkdVal === vals[0]) {
 		        			this.prop("checked", true);
 		        		} else if (N.context.attr("core").sgUnChkdVal === vals[0]) {
@@ -869,6 +872,9 @@
 		        		}
 	        			if(N.type(vals) !== "function") {
 	        				var val = N.string.trimToEmpty(selEle.val());
+	        				if(val !== N.context.attr("core").sgChkdVal && val !== N.context.attr("core").sgUnChkdVal) {
+			        			val = N.context.attr("core").sgUnChkdVal;
+			        		}
 	        				if(N.context.attr("core").sgChkdVal === val || N.context.attr("core").sgUnChkdVal === val || selEle.attr("value") === undefined) {
 	        					if(selEle.prop("checked")) {
 	        						val = N.context.attr("core").sgChkdVal;
