@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.6.0
+ * Natural-UI v0.8.6.3
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	var version = "0.8.6.0";
+	var version = "0.8.6.3";
 
 	// N local variables
 	$.fn.extend(N, {
@@ -1503,6 +1503,9 @@
 			}
 
 			if (N.isPlainObject(opts)) {
+				//convert data to wrapped set
+				opts.data = N.type(opts.data) === "array" ? N(opts.data) : opts.data;
+
 				$.extend(this.options, opts);
 				if(N.type(this.options.context) === "string") {
 					this.options.context = N(this.options.context);
@@ -1929,8 +1932,14 @@
 					N.error("[N.form.revert]Can not revert. N.form's revert option value is false");
 				}
 				$.extend(opts.data[opts.row], opts.data[opts.row], this.revertData);
+				opts.data[opts.row]._isRevert = true;
 				this.update(opts.row);
 				N.ds.instance(opts.extObj !== null ? opts.extObj : this).notify(opts.extRow > -1 ? opts.extRow : opts.row);
+				if(opts.data[opts.row]._isRevert !== undefined) {
+					try {
+						delete opts.data[opts.row]._isRevert
+					} catch(e) {}
+				}
 				return this;
 			},
 			validate : function() {
@@ -2179,6 +2188,9 @@
 			}
 
 			if (N.isPlainObject(opts)) {
+				//convert data to wrapped set
+				opts.data = N.type(opts.data) === "array" ? N(opts.data) : opts.data;
+
 				$.extend(this.options, opts);
 				//For $.extend method does not extend object type
 				if(opts.scrollPaging !== undefined) {
@@ -2303,6 +2315,7 @@
 				if(data !== undefined) {
 					opts.data = N.type(data) === "array" ? N(data) : data;
 				}
+
 				var tbodyTempClone;
 
 				if (opts.data.length > 0) {
@@ -2483,7 +2496,7 @@
 				if(row !== undefined) {
 					if(key !== undefined) {
 						this.options.context.find("tbody:eq(" + String(row) + ")").instance("form").update(0, key);
-					} else if(this.options.data[row].rowStatus === "insert") {
+					} else if(this.options.data[row]._isRevert !== true && this.options.data[row].rowStatus === "insert") {
 						this.add(this.options.data);
 					} else {
 						this.options.context.find("tbody:eq(" + String(row) + ")").instance("form").update(0);
