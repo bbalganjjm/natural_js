@@ -55,10 +55,11 @@
 		</tr>
 		<tr>
 			<th>onSelect</th>
-			<td><textarea id="onSelect" style="height: 82px;">function(index, row, data) {
+			<td><textarea id="onSelect" style="height: 82px;">function(index, row, data, beforeRow) {
 	N.log(index);
 	N.log(row);
 	N.log(data);
+	N.log(beforeRow);
 }</textarea><br /> Callback function for tab active event</td>
 			<th>onBind</th>
 			<td><textarea id="onBind" style="height: 64px;">function(context, data) {
