@@ -97,22 +97,24 @@ N("article#exap0700").cont({
        		onSelect : function(index, rowEle, data) {
        			// Grid row select event
        			// 5. initialize and open detail popup;
-       			N().popup({
-       	    		url : "html/exap/exap0701.html",
-       	    		title : "상세",
-       	    		button : false,
-       	    		width : 600,
-       	    		height : 540,
-       	    		onOpen : "onOpen",
-       	    		onClose : function() {
-       	    			// remove popup resource
-       	    			this.remove();
-       	    		}
-       	    	}).open({
-       	    		grid : grid,
-       				data : data,
-       				row : index
-       			});;
+       			if(index > -1) {
+	       			N().popup({
+	       	    		url : "html/exap/exap0701.html",
+	       	    		title : "상세",
+	       	    		button : false,
+	       	    		width : 600,
+	       	    		height : 540,
+	       	    		onOpen : "onOpen",
+	       	    		onClose : function() {
+	       	    			// remove popup resource
+	       	    			this.remove();
+	       	    		}
+	       	    	}).open({
+	       	    		grid : grid,
+	       				data : data,
+	       				row : index
+	       			});;
+       			}
         	}
        	});
 
