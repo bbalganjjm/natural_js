@@ -264,27 +264,36 @@ N("article#exap0700").cont({
         	}
        	});
 
+    	var retrDataNBind = function() {
+    		// Temporary code
+  			N(searchForm.data()).comm("html/apid/data/grid.json").submit(function(data) {
+  				// N.grid bind
+           		grid.bind(data);
+           		// bind first row data to detail form;
+           		grid.context("tbody:eq(0)").click();
+           	});
+    	}
+
     	// 6. bind events
     	// 6-1. Search button
     	N("#btnSearch", view).click(function(e) {
             e.preventDefault();
             if(searchForm.validate()) {
-            	/* Because github.io is not allow POST send, this sentence was annotated
-    			N(searchForm.data()).comm({
-    				url : "url",
-    				type : "POST"
-    			}).submit(function(data) {
-    				grid.bind(data);
-    			});
-    			*/
+  				if(detailForm.context().hasClass("row_data_changed__")) {
+					N(window).alert({
+      					msg : N.message.get(this_.messages, "edits"),
+      					confirm : true,
+      					onOk : function() {
+      						// Prevent duplication of modified check
+      						detailForm.context().removeClass("row_data_changed__");
 
-    			// Temporary code
-    			N(searchForm.data()).comm("html/apid/data/grid.json").submit(function(data) {
-    				// N.grid bind
-             		grid.bind(data);
-             		// bind first row data to detail form;
-             		grid.context("tbody:eq(0)").click();
-             	});
+      						// Temporary code
+      						retrDataNBind();
+      					}
+      				}).show();
+      			} else {
+      				retrDataNBind();
+      			}
             }
         }).click(); // Auto retrieve
 
@@ -360,12 +369,14 @@ N("article#exap0700").cont({
 			"ncddt" : "변경된 데이터가 없습니다.",
 			"save" : "저장 하겠습니까?",
 			"editr" : "데이터를 수정 중 입니다. 선택한 행의 데이터를 조회 하겠습니까?",
+			"edits" : "데이터를 수정 중 입니다. 조회 하겠습니까?",
 			"sentp" : "서버로 전송되는 파라미터"
 		},
 		"en_US" : {
 			"ncddt" : "No changed data",
 			"save" : "Do you want to save?",
 			"editr" : "You are on the editing the data. are you sure you want to retrieve the data from the selected row?",
+			"edits" : "You are on the editing the data. are you sure retrieve the data?",
 			"sentp" : "sent parameters to the server"
 		}
 	}
