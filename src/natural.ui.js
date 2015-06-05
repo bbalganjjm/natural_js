@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.6.3
+ * Natural-UI v0.8.6.4
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	var version = "0.8.6.3";
+	var version = "0.8.6.4";
 
 	// N local variables
 	$.fn.extend(N, {
@@ -1991,48 +1991,52 @@
 			                }
 
 							if (tagName === "textarea" || type === "text" || type === "password" || type === "hidden" || type === "file") {
-								// remove validator's dregs for rebind
-								ele.removeClass("validate_false__");
-								if(ele.instance("alert") !== undefined) {
-									ele.instance("alert").remove();
-									ele.removeData("alert__");
-								}
-
-								if(ele.data("format") !== undefined && ele.data("validate") !== undefined) {
-									// put value
-									ele.val(String(val));
-
-									// validate
-									if (type !== "hidden") {
-										ele.trigger("focusout.form.validate");
+								if(notify !== false) {
+									// remove validator's dregs for rebind
+									ele.removeClass("validate_false__");
+									if(ele.instance("alert") !== undefined) {
+										ele.instance("alert").remove();
+										ele.removeData("alert__");
 									}
 
-									// dataSync
-									ele.trigger("focusout.form.dataSync");
+									if(ele.data("format") !== undefined && ele.data("validate") !== undefined) {
+										// put value
+										ele.val(String(val));
 
-									// format
-									if (!ele.is("input:password, input:hidden, input:file")) {
-										ele.trigger("focusin.form.format");
-										ele.trigger("focusout.form.unformat");
+										// validate
+										if (type !== "hidden") {
+											ele.trigger("focusout.form.validate");
+										}
+
+										// dataSync
+										ele.trigger("focusout.form.dataSync");
+
+										// format
+										if (!ele.is("input:password, input:hidden, input:file")) {
+											ele.trigger("focusin.form.format");
+											ele.trigger("focusout.form.unformat");
+										}
+									} else {
+										ele.val(String(val));
+										// dataSync
+										ele.trigger("focusout.form.dataSync");
 									}
-								} else {
-									ele.val(String(val));
-									// dataSync
-									ele.trigger("focusout.form.dataSync");
 								}
 							} else if(tagName === "select") {
-								// remove validator's dregs for rebind
-								ele.removeClass("validate_false__");
-								if(ele.instance("alert") !== undefined) {
-									ele.instance("alert").remove();
-									ele.removeData("alert__");
+								if(notify !== false) {
+									// remove validator's dregs for rebind
+									ele.removeClass("validate_false__");
+									if(ele.instance("alert") !== undefined) {
+										ele.instance("alert").remove();
+										ele.removeData("alert__");
+									}
+
+									// select value
+									ele.vals(val);
+
+									// dataSync
+									ele.trigger("change.form.dataSync");
 								}
-
-								// select value
-								ele.vals(val);
-
-								// dataSync
-								ele.trigger("change.form.dataSync");
 							} else if(tagName === "img") {
 								currVal = String(val);
 
@@ -2040,21 +2044,20 @@
 								vals[ele.attr("id")] = currVal;
 
 								// change row status
-	                            if (vals.rowStatus !== "insert" && vals.rowStatus !== "delete") {
-	                                vals.rowStatus = "update";
-	                                // add data changed flag
-	                                ele.addClass("data_changed__");
-	                                if(!opts.context.hasClass("row_data_changed__")) {
-	                                	opts.context.addClass("row_data_changed__");
-	                                }
-	                            }
+								if (vals.rowStatus !== "insert" && vals.rowStatus !== "delete") {
+									vals.rowStatus = "update";
+									// add data changed flag
+									ele.addClass("data_changed__");
+									if(!opts.context.hasClass("row_data_changed__")) {
+										opts.context.addClass("row_data_changed__");
+									}
+								}
 
-	                            // put image path
-	                            ele.attr("src", currVal);
+								// put image path
+								ele.attr("src", currVal);
 
-
-	                            // notify data changed
-                            	N.ds.instance(opts.extObj !== null ? opts.extObj : self).notify(opts.extRow > -1 ? opts.extRow : opts.row, ele.attr("id"));
+								// notify data changed
+								N.ds.instance(opts.extObj !== null ? opts.extObj : self).notify(opts.extRow > -1 ? opts.extRow : opts.row, ele.attr("id"));
 							} else {
 								currVal = String(val);
 
@@ -2062,17 +2065,17 @@
 								vals[ele.attr("id")] = currVal;
 
 								// change row status
-	                            if (vals.rowStatus !== "insert" && vals.rowStatus !== "delete") {
-	                                vals.rowStatus = "update";
-	                                // add data changed flag
-	                                ele.addClass("data_changed__");
-	                                if(!opts.context.hasClass("row_data_changed__")) {
-	                                	opts.context.addClass("row_data_changed__");
-	                                }
-	                            }
+								if (vals.rowStatus !== "insert" && vals.rowStatus !== "delete") {
+									vals.rowStatus = "update";
+									// add data changed flag
+									ele.addClass("data_changed__");
+									if(!opts.context.hasClass("row_data_changed__")) {
+										opts.context.addClass("row_data_changed__");
+									}
+								}
 
-	                            // put value
-	                            if(ele.data("format") !== undefined) {
+								// put value
+								if(ele.data("format") !== undefined) {
 									N(opts.data).formatter(opts.fRules !== null ? opts.fRules : ele).format(opts.row);
 								} else {
 									if(!opts.html) {
@@ -2082,8 +2085,8 @@
 									}
 								}
 
-	                            // notify data changed
-                            	N.ds.instance(opts.extObj !== null ? opts.extObj : self).notify(opts.extRow > -1 ? opts.extRow : opts.row, ele.attr("id"));
+								// notify data changed
+								N.ds.instance(opts.extObj !== null ? opts.extObj : self).notify(opts.extRow > -1 ? opts.extRow : opts.row, ele.attr("id"));
 							}
 
 							// reset prevent event condition of input element
@@ -2098,16 +2101,19 @@
 						//radio, checkbox
 						eles = $(opts.context).find("input:radio[id^='" + key + "'], input:checkbox[id^='" + key + "']");
 						if(eles.length > 0) {
-							// remove validator's dregs for rebind
-							eles.removeClass("validate_false__");
-							var a = eles.instance("alert", function() {
-								this.remove()
-							}).removeData("alert__");
+							if(notify !== false) {
+								// remove validator's dregs for rebind
+								eles.removeClass("validate_false__");
+								var a = eles.instance("alert", function() {
+									this.remove()
+								}).removeData("alert__");
 
-							// select value
-							eles.vals(val);
-							// dataSync
-							$(eles.get(0)).trigger("select.form.dataSync");
+								// select value
+								eles.vals(val);
+								// dataSync
+								$(eles.get(0)).trigger("select.form.dataSync");
+
+							}
 						}
 					}
 
