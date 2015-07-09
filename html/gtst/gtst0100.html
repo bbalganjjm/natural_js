@@ -373,7 +373,7 @@ N("#viewCont").cont({
 		    	});
 	    	}
 
-	    	CommonUtilController.setPageLinks(N("a.link", view));
+	    	CommonUtilController.setPageLinks(N("a.link", view).not("[target='blank_']"));
 	    }
 	});
 </script>
