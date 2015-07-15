@@ -270,7 +270,10 @@ N("article#exap0700").cont({
   				// N.grid bind
            		grid.bind(data);
            		// bind first row data to detail form;
-           		grid.context("tbody:eq(0)").click();
+           		if(data.length > 0) {
+           			detailForm.unbind();
+           			detailForm.bind(0, grid.data(false));
+           		}
            	});
     	}
 
@@ -279,21 +282,7 @@ N("article#exap0700").cont({
     	N("#btnSearch", view).click(function(e) {
             e.preventDefault();
             if(searchForm.validate()) {
-  				if(detailForm.context().hasClass("row_data_changed__")) {
-					N(window).alert({
-      					msg : N.message.get(this_.messages, "edits"),
-      					confirm : true,
-      					onOk : function() {
-      						// Prevent duplication of modified check
-      						detailForm.context().removeClass("row_data_changed__");
-
-      						// Temporary code
-      						retrDataNBind();
-      					}
-      				}).show();
-      			} else {
-      				retrDataNBind();
-      			}
+   				retrDataNBind();
             }
         }).click(); // Auto retrieve
 
@@ -337,10 +326,17 @@ N("article#exap0700").cont({
     	// 6-3 New button
     	N("#btnAdd", view).click(function(e) {
     		e.preventDefault();
-    		// Unbind form
-    		detailForm.unbind();
-    		// Add row
-    		detailForm.add();
+    		if(detailForm.validate()) {
+    			// Unbind form
+	    		detailForm.unbind();
+	    		// Add row
+	    		detailForm.add();
+
+	    		// When the row data is empty
+    			if(grid.data().length === 0) {
+    				grid.bind(detailForm.data(false));
+    			}
+    		}
     	});
 
     	// 6-4 Delete button
