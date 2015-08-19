@@ -125,7 +125,7 @@ header .hgroup #logo {
 }
 
 header .hgroup #desc {
-	font-size: 1; padding: 0; color: #0B6D38; margin: 73px 3px 0 0; float: right;
+	font-size: 1em; padding: 0; color: #409333; margin: 73px 3px 0 0; float: right;
 }
 
 header nav {
@@ -153,6 +153,7 @@ header nav>ul>li:hover {
 }
 
 header nav>ul>li:hover>a {
+	color: #9f9;
 	text-shadow: 0 0 15px #7F7;
 }
 
@@ -219,6 +220,20 @@ article dl.qna dd ul li {
 
 article dl.qna dd ul li>ul {
 	margin: 5px 0 5px 0;
+}
+
+#sub-logos {
+	list-style: none;
+	padding: 0;
+	margin: 0 20px 0 0;
+}
+
+#sub-logos li {
+	margin: 0;
+	float: left;
+	width: 44%;
+	text-align: center;
+	padding: 3%;
 }
 
 article h1 {
