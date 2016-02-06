@@ -1,5 +1,5 @@
 /*!
- * Natural-DATA v0.8.2.1
+ * Natural-DATA v0.8.2.4
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,15 +8,9 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	var version = "0.8.2.1";
+	N.version["Natural-DATA"] = "0.8.2.4";
 
-	// N local variables
-	$.fn.extend(N, {
-		"Natural-DATA" : version
-	});
-
-	$.extend(N.fn, {
-		constructor : N,
+	$.fn.extend($.extend(N.prototype, {
 		datafilter : function(callBack) {
 			return N.data.filter(this, callBack);
 		},
@@ -32,70 +26,70 @@
 		validator : function(row) {
 			return new N.validator(this, row);
 		}
-	});
-	$.fn.extend(N.fn);
-
-	N.data = {
-		refine : function(obj, listId) {
-			if (N.isWrappedSet(obj)) {
-				if (obj.length == 1) {
-					if (N.isPlainObject(obj.get(0))) {
-						return N(this.refine(obj.get(0), listId));
-					} else {
-						return obj;
-					}
-				} else {
-					return N(this.refine(obj.toArray(), listId));
-				}
-			} else {
-				if (listId !== undefined) {
-					return obj[listId] || [];
-				} else {
-					for ( var key in obj) {
-						return N.isNumeric(key) ? obj : obj[key];
-					}
-				}
-			}
-		},
-		filter : function(arr, callBack) {
-			if (callBack === undefined) {
-				return arr;
-			}
-			return N.isWrappedSet(arr) ? N(this.filter(arr.toArray(), callBack)) : $.grep(arr, callBack);
-		},
-		sortBy : function(key, reverse) {
-			if (reverse === undefined) {
-				reverse = 1;
-			} else {
-				if(reverse) {
-					reverse = -1;
-				} else {
-					reverse = 1;
-				}
-			}
-
-			return function(a, b) {
-				a = N.string.trimToEmpty(String(a[key])).replace(/-|\./g, "");
-				b = N.string.trimToEmpty(String(b[key])).replace(/-|\./g, "");
-				if (parseInt(a) && parseInt(b)) {
-					a = parseInt(a);
-					b = parseInt(b);
-				}
-				if (a < b) {
-					return reverse * -1;
-				}
-				if (a > b) {
-					return reverse * 1;
-				}
-				return 0;
-			};
-		},
-		sort : function(arr, key, reverse) {
-			return N.isWrappedSet(arr) ? N(arr.sort(this.sortBy(key, reverse))) : arr.sort(this.sortBy(key, reverse));
-		}
-	};
+	}));
 
 	(function(N) {
+		
+		N.data = {
+			refine : function(obj, listId) {
+				if (N.isWrappedSet(obj)) {
+					if (obj.length == 1) {
+						if (N.isPlainObject(obj.get(0))) {
+							return N(this.refine(obj.get(0), listId));
+						} else {
+							return obj;
+						}
+					} else {
+						return N(this.refine(obj.toArray(), listId));
+					}
+				} else {
+					if (listId !== undefined) {
+						return obj[listId] || [];
+					} else {
+						for ( var key in obj) {
+							return N.isNumeric(key) ? obj : obj[key];
+						}
+					}
+				}
+			},
+			filter : function(arr, callBack) {
+				if (callBack === undefined) {
+					return arr;
+				}
+				return N.isWrappedSet(arr) ? N(this.filter(arr.toArray(), callBack)) : $.grep(arr, callBack);
+			},
+			sortBy : function(key, reverse) {
+				if (reverse === undefined) {
+					reverse = 1;
+				} else {
+					if(reverse) {
+						reverse = -1;
+					} else {
+						reverse = 1;
+					}
+				}
+
+				return function(a, b) {
+					a = N.string.trimToEmpty(String(a[key])).replace(/-|\./g, "");
+					b = N.string.trimToEmpty(String(b[key])).replace(/-|\./g, "");
+					if (parseInt(a) && parseInt(b)) {
+						a = parseInt(a);
+						b = parseInt(b);
+					}
+					if (a < b) {
+						return reverse * -1;
+					}
+					if (a > b) {
+						return reverse * 1;
+					}
+					return 0;
+				};
+			},
+			sort : function(arr, key, reverse) {
+				return N.isWrappedSet(arr) ? N(arr.sort(this.sortBy(key, reverse))) : arr.sort(this.sortBy(key, reverse));
+			}
+		};
+		
 		//DataSync
 		var DataSync = N.ds = function(inst, isReg) {
 			if (N.ds.caller != N.ds.instance) {
@@ -131,9 +125,15 @@
 
 			return siglInst;
 		};
-		DataSync.fn = DataSync.prototype;
 
-		$.extend(DataSync.fn, {
+		$.extend(DataSync, {
+			//singleton
+			"instance" : function(inst, isReg) {
+				return new N.ds(inst, isReg);
+			}
+		});
+		
+		$.extend(DataSync.prototype, {
 			"remove" : function() {
 				var inst = this.inst;
 				var obserable = this.obserable;
@@ -161,12 +161,6 @@
 					}
 				}
 				return this;
-			}
-		});
-		$.extend(DataSync, {
-			//singleton
-			"instance" : function(inst, isReg) {
-				return new N.ds(inst, isReg);
 			}
 		});
 
@@ -199,95 +193,7 @@
 				}
 			}
 		};
-		Formatter.fn = Formatter.prototype;
-		$.extend(Formatter.fn, {
-			"format" : function(row) {
-				var opts = this.options;
-				var self = this;
-				var retArr = [];
-				var retObj;
-				var tempValue;
-				var ele;
-				if (row !== undefined) {
-					if (row < opts.data.length && row >= 0) {
-						opts.data = [ opts.data[row] ];
-					} else {
-						N.error("[Formatter.fn.format]Row index out of range");
-					}
-				} else {
-					if (opts.isElement) {
-						row = 0;
-						opts.data = [ opts.data[row] ];
-					}
-				}
-				$(opts.data).each(function(i, obj) {
-					retObj = {};
-					for ( var k in opts.rules ) {
-						tempValue = String(obj[k]);
-						$(opts.rules[k]).each(function() {
-							if (opts.isElement) {
-								ele = opts.targetEle.filter("#" + k);
-								if(ele.length === 0) {
-									ele = undefined;
-								}
-							}
-							try {
-								tempValue = Formatter[N.string.trimToEmpty(this[0]).toLowerCase()](tempValue, N(this).remove_(0).toArray(), ele);
-							} catch (e) {
-								if (e.toString().indexOf("is not a function") > -1) {
-									N.error("[Formatter.fn.format]\"" + this[0] + "\" is invalid format rule", e);
-								} else {
-									N.error(e, e);
-								}
-							}
-						});
-						retObj[k] = tempValue;
-						if (opts.isElement) {
-							ele = opts.targetEle.filter("#" + k);
-							if (ele.is("input:text, textarea")) {
-								ele.val(tempValue);
-								if(opts.createEvent) {
-									ele.unbind("format.formatter unformat.formatter");
-									ele.bind("format.formatter", function() {
-										ele = opts.context.filter("#" + $(this).attr("id"));
-										if(ele.length === 0) {
-											ele = opts.context.find("#" + $(this).attr("id"));
-										}
-
-										// TODO Temporary code, think more
-										var fmdVals = self.format();
-										if(fmdVals.length === 1) {
-											row = 0;
-										}
-
-										$(this).val(fmdVals[row][$(this).attr("id")]);
-									}).bind("unformat.formatter", function() {
-										// TODO Temporary code, think more
-										if(opts.data.length === 1) {
-											row = 0;
-										}
-
-										$(this).val(self.unformat(row, $(this).attr("id")));
-									});
-								}
-							} else {
-								if(!ele.is(":input")) {
-									ele.text(tempValue);
-								}
-							}
-						}
-						tempValue = null;
-					}
-					retArr.push(retObj);
-					retObj = null;
-				});
-				return retArr;
-			},
-			"unformat" : function(row, key) {
-				return this.options.data[row][key];
-			}
-		});
-
+		
 		$.extend(Formatter, {
 			"commas" : function(str, args) {
 				if (N.isEmptyObject(str)) {
@@ -402,6 +308,9 @@
 							onBeforeShow : function(context, contents) {
 								context.unbind("focusout.prevent.format.date", N.element.disable);
 					            context.tpBind("focusout.prevent.format.date", N.element.disable);
+					            if(N.context.attr("ui").datepicker != undefined && N.context.attr("ui").datepicker.onBeforeShow != undefined) {
+					            	N.context.attr("ui").datepicker.onBeforeShow(context, contents);
+					            }
 							},
 							onSelect : function(context, date, monthonly) {
 								var formats = N.context.attr("data").formatter.date;
@@ -425,10 +334,18 @@
 								if(isReadonly) {
 									context.prop("readonly", true);
 								}
-								return false;
+								
+								if(N.context.attr("ui").datepicker != undefined && N.context.attr("ui").datepicker.onSelect != undefined) {
+					            	return N.context.attr("ui").datepicker.onSelect(context, date, monthonly);
+					            } else {
+					            	return false;					            	
+					            }
 							},
 							onBeforeHide : function(context, contents) {
 								context.unbind("focusout.prevent.format.date", N.element.disable).trigger("focusout.form.validate").trigger("focusout.form.dataSync").trigger("focusout.form.format");
+								if(N.context.attr("ui").datepicker != undefined && N.context.attr("ui").datepicker.onBeforeHide != undefined) {
+					            	N.context.attr("ui").datepicker.onBeforeHide(context, contents);
+					            }
 							}
 						});
 					}
@@ -571,99 +488,95 @@
 
 			this.options.data = obj.length > 0 ? obj : N(N.element.toData(this.options.targetEle));
 		};
-		Validator.fn = Validator.prototype;
-		$.extend(Validator.fn, {
-			"validate" : function(row) {
+		
+		$.extend(Formatter.prototype, {
+			"format" : function(row) {
 				var opts = this.options;
+				var self = this;
 				var retArr = [];
 				var retObj;
-				var retTempObj;
-				var retTempArr;
-				var data = opts.data.length > 0 ? opts.data : N(N.element.toData(opts.targetEle));
+				var tempValue;
+				var ele;
 				if (row !== undefined) {
-					if (row < data.length && row >= 0) {
-						data = [ data[row] ];
+					if (row < opts.data.length && row >= 0) {
+						opts.data = [ opts.data[row] ];
 					} else {
-						N.error("[Validator.fn.validate]Row index out of range");
+						N.error("[Formatter.prototype.format]Row index out of range");
 					}
 				} else {
 					if (opts.isElement) {
 						row = 0;
-						data = [ data[row] ];
+						opts.data = [ opts.data[row] ];
 					}
 				}
-
-				var args;
-				var alert;
-				var rule;
-				$(data).each(function(i, obj) {
+				$(opts.data).each(function(i, obj) {
 					retObj = {};
 					for ( var k in opts.rules ) {
-						retTempArr = [];
-						var pass = true;
+						tempValue = String(obj[k]);
 						$(opts.rules[k]).each(function() {
-							retTempObj = {};
-							retTempObj.rule = this.toString();
-							args = N(this).remove_(0).toArray();
-							rule = N.string.trimToEmpty(this[0]).toLowerCase();
-							if (rule.indexOf("+") > -1) {
-								rule = rule.split("+").sort().toString().replace(/\,/g, "_");
+							if (opts.isElement) {
+								ele = opts.targetEle.filter("#" + k);
+								if(ele.length === 0) {
+									ele = undefined;
+								}
 							}
 							try {
-								if (opts.rules[k].toString().indexOf("required") < 0 && rule !== "required" && N.string.isEmpty(String(obj[k]))) {
-									retTempObj.result = true;
-								} else {
-									retTempObj.result = Validator[rule](String(obj[k]), args);
-								}
+								tempValue = Formatter[N.string.trimToEmpty(this[0]).toLowerCase()](tempValue, N(this).remove_(0).toArray(), ele);
 							} catch (e) {
 								if (e.toString().indexOf("is not a function") > -1) {
-									N.error("[Validator.fn.validate]\"" + this[0] + "\" is invalid format rule");
+									N.error("[Formatter.prototype.format]\"" + this[0] + "\" is invalid format rule", e);
 								} else {
 									N.error(e, e);
 								}
 							}
-							retTempObj.msg = null;
-							if (!retTempObj.result) {
-								var valiMsg;
-								if (!(valiMsg = N.context.attr("data").validator.message[N.locale()][rule])) {
-									valiMsg = N.context.attr("data").validator.message[N.locale()].global;
-								}
-								retTempObj.msg = N.message.replaceMsgVars(valiMsg, args);
-
-								pass = false;
-							}
-							retTempArr.push(retTempObj);
 						});
+						retObj[k] = tempValue;
 						if (opts.isElement) {
-							var ele;
-							if(opts.targetEle.is("input:radio, input:checkbox")) {
-								ele = opts.targetEle.filter("[name='" + k + "'].select_template__");
+							ele = opts.targetEle.filter("#" + k);
+							if (ele.is("input:text, textarea")) {
+								ele.val(tempValue);
+								if(opts.createEvent) {
+									ele.unbind("format.formatter unformat.formatter");
+									ele.bind("format.formatter", function() {
+										ele = opts.context.filter("#" + $(this).attr("id"));
+										if(ele.length === 0) {
+											ele = opts.context.find("#" + $(this).attr("id"));
+										}
+
+										// TODO Temporary code, think more
+										var fmdVals = self.format();
+										if(fmdVals.length === 1) {
+											row = 0;
+										}
+
+										$(this).val(fmdVals[row][$(this).attr("id")]);
+									}).bind("unformat.formatter", function() {
+										// TODO Temporary code, think more
+										if(opts.data.length === 1) {
+											row = 0;
+										}
+
+										$(this).val(self.unformat(row, $(this).attr("id")));
+									});
+								}
 							} else {
-								ele = opts.targetEle.filter("#" + k);
-							}
-							if(!pass) {
-								ele.addClass("validate_false__");
-							} else {
-								ele.removeClass("validate_false__");
-							}
-							if (N().alert !== undefined) {
-								alert = N(opts.targetEle !== null ? ele : undefined).alert($(retTempArr).map(function() {
-									if (this.msg !== undefined) {
-										return this.msg;
-									}
-								}).get()).show();
-							} else {
-								N.error("You must import Natural-UI library");
+								if(!ele.is(":input")) {
+									ele.text(tempValue);
+								}
 							}
 						}
-						retObj[k] = retTempArr;
+						tempValue = null;
 					}
 					retArr.push(retObj);
 					retObj = null;
 				});
 				return retArr;
+			},
+			"unformat" : function(row, key) {
+				return this.options.data[row][key];
 			}
 		});
+
 		$.extend(Validator, {
 			"required" : function(str) {
 				return !N.string.isEmpty(str);
@@ -1008,7 +921,100 @@
 				return regExp.test(str);
 			}
 		});
+		
+		$.extend(Validator.prototype, {
+			"validate" : function(row) {
+				var opts = this.options;
+				var retArr = [];
+				var retObj;
+				var retTempObj;
+				var retTempArr;
+				var data = opts.data.length > 0 ? opts.data : N(N.element.toData(opts.targetEle));
+				if (row !== undefined) {
+					if (row < data.length && row >= 0) {
+						data = [ data[row] ];
+					} else {
+						N.error("[Validator.prototype.validate]Row index out of range");
+					}
+				} else {
+					if (opts.isElement) {
+						row = 0;
+						data = [ data[row] ];
+					}
+				}
 
+				var args;
+				var alert;
+				var rule;
+				$(data).each(function(i, obj) {
+					retObj = {};
+					for ( var k in opts.rules ) {
+						retTempArr = [];
+						var pass = true;
+						$(opts.rules[k]).each(function() {
+							retTempObj = {};
+							retTempObj.rule = this.toString();
+							args = N(this).remove_(0).toArray();
+							rule = N.string.trimToEmpty(this[0]).toLowerCase();
+							if (rule.indexOf("+") > -1) {
+								rule = rule.split("+").sort().toString().replace(/\,/g, "_");
+							}
+							try {
+								if (opts.rules[k].toString().indexOf("required") < 0 && rule !== "required" && N.string.isEmpty(String(obj[k]))) {
+									retTempObj.result = true;
+								} else {
+									retTempObj.result = Validator[rule](String(obj[k]), args);
+								}
+							} catch (e) {
+								if (e.toString().indexOf("is not a function") > -1) {
+									N.error("[Validator.prototype.validate]\"" + this[0] + "\" is invalid format rule");
+								} else {
+									N.error(e, e);
+								}
+							}
+							retTempObj.msg = null;
+							if (!retTempObj.result) {
+								var valiMsg;
+								if (!(valiMsg = N.context.attr("data").validator.message[N.locale()][rule])) {
+									valiMsg = N.context.attr("data").validator.message[N.locale()].global;
+								}
+								retTempObj.msg = N.message.replaceMsgVars(valiMsg, args);
+
+								pass = false;
+							}
+							retTempArr.push(retTempObj);
+						});
+						if (opts.isElement) {
+							var ele;
+							if(opts.targetEle.is("input:radio, input:checkbox")) {
+								ele = opts.targetEle.filter("[name='" + k + "'].select_template__");
+							} else {
+								ele = opts.targetEle.filter("#" + k);
+							}
+							if(!pass) {
+								ele.addClass("validate_false__");
+							} else {
+								ele.removeClass("validate_false__");
+							}
+							if (N().alert !== undefined) {
+								alert = N(opts.targetEle !== null ? ele : undefined).alert($(retTempArr).map(function() {
+									if (this.msg !== undefined) {
+										return this.msg;
+									}
+								}).get()).show();
+							} else {
+								N.error("You must import Natural-UI library");
+							}
+						}
+						retObj[k] = retTempArr;
+					}
+					retArr.push(retObj);
+					retObj = null;
+				});
+				return retArr;
+			}
+		});
+		
 	})(N);
 
 })(window, jQuery);

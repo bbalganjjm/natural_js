@@ -1,5 +1,5 @@
 /*!
- * Natural-ARCHITECTURE v0.8.0.8
+ * Natural-ARCHITECTURE v0.8.0.11
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,15 +8,9 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	var version = "0.8.0.8";
+	N.version["Natural-ARCHITECTURE"] = "0.8.0.11";
 
-	// N local variables
-	$.fn.extend(N, {
-		"Natural-ARCHITECTURE" : version
-	});
-
-	$.extend(N.fn, {
-		constructor : N,
+	$.fn.extend($.extend(N.prototype, {
 		ajax : function(opts) {
 			return N.ajax(opts);
 		},
@@ -29,8 +23,7 @@
 		cont : function(callback) {
 			return new N.cont(this, callback);
 		}
-	});
-	$.fn.extend(N.fn);
+	}));
 
 	(function(N) {
 		// Config
@@ -263,9 +256,8 @@
 			}
 		};
 
-		Communicator.request.fn = Communicator.request.prototype;
 		// Communicator.request local variable;
-		$.fn.extend(Communicator.request.fn, {
+		$.fn.extend(Communicator.request.prototype, {
 			/**
 			 * get request attribute
 			 */
@@ -282,6 +274,15 @@
 					this.attrObj[name] = obj_;
 					// this.obj : Defined by Communicator.request constructor;
 					return this.obj;
+				}
+				return this;
+			},
+			/**
+			 * remove request attribute
+			 */
+			removeAttr : function(name) {
+				if(this.attrObj[name] != undefined) {
+					delete this.attrObj[name];
 				}
 				return this;
 			},
@@ -334,7 +335,7 @@
 		// Context Object
 		N.context = {
 			attrObj : {},
-			attr : Communicator.request.fn.attr
+			attr : Communicator.request.prototype.attr
 		};
 
 	})(N);

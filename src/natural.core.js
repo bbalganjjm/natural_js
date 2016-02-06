@@ -1,5 +1,5 @@
 /*!
- * Natural-CORE v0.8.3.9
+ * Natural-CORE v0.8.5.2
  * bbalganjjm@gmail.com
  *
  * Includes formatdate.js & Mask JavaScript API
@@ -12,704 +12,14 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	var version = "0.8.3.9", N;
+	var N;
 
 	// Use jQuery init
 	N = function(selector, context) {
 		return new $.fn.init(selector, context);
 	};
 
-	// N local variables
-	$.fn.extend(N, {
-		"Natural-CORE" : version,
-		/**
-		 * Set and get locale value
-		 */
-		locale : function(str) {
-			if(str === undefined) {
-				return N.context.attr("core").locale;
-			} else {
-				N.context.attr("core").locale = str;
-			}
-		},
-		/**
-		 * Display the error log to console
-		 */
-		error : function(msg, e) {
-			if (e !== undefined && e.stack !== undefined && console.error !== undefined) {
-				if(typeof console !== "undefined" && typeof console.error !== "undefined") {
-					console.error(e.stack);
-				}
-			}
-			throw new Error(msg);
-		},
-		/**
-		 * Display the warnning log to console
-		 */
-		warn : function() {
-			if(typeof console !== "undefined" && typeof console.warn !== "undefined") {
-				console.warn.apply(console, arguments);
-			}
-		},
-		/**
-		 * Display the log to console
-		 */
-		log : function() {
-			if(typeof console !== "undefined" && typeof console.log !== "undefined") {
-				console.log.apply(console, arguments);
-			}
-		},
-		/**
-		 * Natural-JS resource garbage collector
-		 */
-		gc : {
-			/**
-			 * Minimum collection
-			 */
-			minimum : function() {
-				$(window).unbind("resize.datepicker");
-				$(window.document).unbind("mousedown.datepicker");
-				$(window.document).unbind("keyup.datepicker");
-				$(window.document).unbind("keyup.alert");
-				return true;
-			},
-			/**
-			 * Full collection
-			 */
-			full : function() {
-				$(window).unbind("resize.datepicker");
-				$(window.document).unbind("mousedown.datepicker");
-				$(window.document).unbind("keyup.datepicker");
-				$(window.document).unbind("keyup.alert");
-				$(window.document).unbind("dragstart.grid.vResize").unbind("selectstart.grid.vResize").unbind("mousemove.grid.vResize").unbind("mouseup.grid.vResize");
-				$(window.document).unbind("dragstart.grid.resize").unbind("selectstart.grid.resize").unbind("mousemove.grid.resize").unbind("mouseup.grid.resize");
-				return true;
-			}
-		},
-		/**
-		 * Check of array type
-		 */
-		isArray : $.isArray,
-		/**
-		 * Check type for numeric
-		 */
-		isNumeric : $.isNumeric,
-		isEmptyObject : function(obj) {
-			if(obj !== undefined && this.isString(obj)) {
-				if(obj.length > 0) {
-					return false;
-				}
-			} else {
-				for (var name in obj) {
-					return false;
-				}
-			}
-			return true;
-		},
-		/**
-		 * Check whether the plain object type
-		 */
-		isPlainObject : $.isPlainObject,
-		/**
-		 * Check whether the String type
-		 */
-		isString : function(str) {
-			return typeof str === "string";
-		},
-		/**
-		 * Check object type
-		 */
-		type : function(obj) {
-	        return ({}).toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase();
-	    },
-	    /**
-	     * Check whether the element
-	     */
-		isElement : function(obj) {
-			if(N.isString(obj)) {
-				obj = N(obj);
-			}
-			return obj !== undefined && obj.length > 0 && obj.get(0).getElementsByTagName ? true : false;
-		},
-		isArraylike : function(obj) {
-			var length = obj.length, type = N.type(obj);
-			if (type === "function" || $.isWindow(obj)) {
-				return false;
-			}
-			if (obj.nodeType === 1 && length) {
-				return true;
-			}
-			return type === "array" || length === 0 || typeof length === "number" && length > 0 && (length - 1) in obj;
-		},
-		/**
-		 * Check whether the JWS(jQuery wraped set)
-		 */
-		isWrappedSet : function(obj) {
-			return this.isArraylike(obj) && obj.jquery !== undefined;
-		},
-		/**
-		 * N.string package
-		 */
-		"string" : {
-			/**
-			 * Checks if CharSequence contains a search character
-			 */
-			contains : function(needle, haystack) {
-				return haystack && (haystack.indexOf(needle) != -1);
-			},
-			/**
-			 * check if a String ends with a suffix
-			 */
-			endsWith : function(str, postfix) {
-				if (this.isEmpty(str) || this.isEmpty(postfix)) {
-					return false;
-				}
-				return str.lastIndexOf(postfix) === str.length - postfix.length;
-			},
-			/**
-			 * Check if a String starts with a prefix
-			 */
-			startsWith : function(str, prefix) {
-				if (this.isEmpty(str)) {
-					return false;
-				}
-				return str.indexOf(prefix) === 0;
-			},
-			/**
-			 * Insert a character at the specified index in the string
-			 */
-			insertAt : function(str, strToInsert, index) {
-				return str.substring(0, index) + strToInsert + str.substring(index);
-			},
-			/**
-			 * Check if a String matches a prefix
-			 */
-			matches : function(str, matchExp, ignoreCase) {
-				var ignoreCase_ = arguments.length >= 3 ? ignoreCase : false;
-				matchExp = this.trim(matchExp);
-				matchExp = matchExp.replace(/\s+/, "*");
-				matchExp = matchExp.replace(/\*/, ".*?");
-				matchExp = matchExp.replace(/\?/, ".{0,1}");
-				var regExp = new RegExp("^" + matchExp, (ignoreCase_ ? "i" : ""));
-				return regExp.test(str);
-			},
-			/**
-			 * Remove whitespace in string
-			 */
-			removeWhitespace : function(str) {
-				if (this.isEmpty(str)) {
-					return str;
-				}
-				return str.replace(/\s/g, "");
-			},
-			/**
-			 * Left pad a String with a specified character
-			 */
-			lpad : function(originalstr, length, strToPad) {
-				while (originalstr.length < length) {
-					originalstr = strToPad + originalstr;
-				}
-				return originalstr;
-			},
-			/**
-			 * Right pad a String with a specified character
-			 */
-			rpad : function(originalstr, length, strToPad) {
-				while (originalstr.length < length) {
-					originalstr = originalstr + strToPad;
-				}
-				return originalstr;
-			},
-			/**
-			 * Return byte length of string
-			 *  - Hangul(UTF-8) is 3 bytes
-			 */
-			byteLength : function(str) {
-				return (function(s,b,i,c){
-		        	for(b=i=0;c=s.charCodeAt(i++);b+=c>>11?3:c>>7?2:1);
-		        	return b;
-		        })(str);
-			},
-			/**
-			 * Removes leading and trailing whitespace
-			 *  - the String to be trimmed, may be null or undefined
-			 */
-			trim : function(str) {
-				return $.trim(str);
-			},
-			/**
-			 * Checks if a String contains text
-			 */
-			isEmpty : function(str) {
-				return $.trim(str).length === 0 ? true : false;
-			},
-			/**
-			 * Removes leading and trailing whitespace
-			 *  - the String to be trimmed, may be null or undefined
-			 */
-			trimToEmpty : function(str) {
-				return $.trim(str);
-			},
-			/**
-			 * Change null or undefined to empty string
-			 */
-			nullToEmpty : function(str) {
-				return str === null || str === undefined ? "" : str;
-			},
-			/**
-			 * If trimmed string value is empty, return null
-			 */
-			trimToNull : function(str) {
-				return $.trim(str).length === 0 ? null : $.trim(str);
-			},
-			/**
-			 * If trimmed string value is empty, return undefined
-			 */
-			trimToUndefined : function(str) {
-				return $.trim(str).length === 0 ? undefined : $.trim(str);
-			},
-			/**
-			 * If trimmed string value is empty, return 0
-			 */
-			trimToZero : function(str) {
-				return $.trim(str).length === 0 ? "0" : $.trim(str);
-			},
-			/**
-			 * If trimmed string value is empty, return a specified value
-			 */
-			trimToVal : function(str, valStr) {
-				return $.trim(str).length === 0 ? valStr : $.trim(str);
-			}
-		},
-		/**
-		 * N.date package
-		 */
-		"date" : {
-			/**
-			 * Calculate the date counts of difference between the two dates,
-			 */
-			diff : function(str1, str2) {
-				if (N.type(str1) == "string") {
-					str1 = this.stringToDateObj(str1).obj;
-				}
-				if (N.type(str2) == "string") {
-					str2 = this.stringToDateObj(str2).obj;
-				}
-				return Math.ceil((str2 - str1) / 1000 / 24 / 60 / 60);
-			},
-			/**
-			 * Return to re-place the date string for a given format.
-			 */
-			strToDateStrArr : function(str, format, isString) {
-				var dateStrArr = [];
-				var fixNum = 0;
-				if(format.length === 3 && str.length === 7 || format.length === 2 && str.length === 5) {
-					fixNum = -1;
-				}
-				if(N.string.startsWith(format, "Ymd")) {
-					dateStrArr.push(str.substring(0, 4 + fixNum)); //year
-					dateStrArr.push(str.substring(4 + fixNum, 6 + fixNum)); //month
-					dateStrArr.push(str.substring(6 + fixNum, 8 + fixNum)); //day
-        		} else if(N.string.startsWith(format, "mdY")) {
-        			dateStrArr.push(str.substring(4, 8 + fixNum)); //year
-        			dateStrArr.push(str.substring(0, 2)); //month
-        			dateStrArr.push(str.substring(2, 4)); //day
-        		} else if(N.string.startsWith(format, "dmY")) {
-        			dateStrArr.push(str.substring(4, 8 + fixNum)); //year
-        			dateStrArr.push(str.substring(2, 4)); //month
-        			dateStrArr.push(str.substring(0, 2)); //day
-        		} else if(N.string.startsWith(format, "Ym")) {
-        			dateStrArr.push(str.substring(0, 4 + fixNum)); //year
-					dateStrArr.push(str.substring(4 + fixNum, 6 + fixNum)); //month
-        		} else if(N.string.startsWith(format, "mY")) {
-        			dateStrArr.push(str.substring(2, 6 + fixNum)); //year
-					dateStrArr.push(str.substring(0, 2)); //month
-        		} else {
-        			N.error("\"" + format + "\" date format is not support. please change return value of N.context.attr(\"data\").formatter.date's functions");
-        		}
-				if(isString === undefined || isString === false) {
-					$(dateStrArr).each(function(i) {
-						dateStrArr[i] = parseInt(this);
-					});
-				}
-				return dateStrArr;
-			},
-			/**
-			 * Returns object of date information that contained the date object with a default date format
-			 */
-			strToDate : function(str, format) {
-				str = N.string.trimToEmpty(str).replace(/[^0-9]/g, "");
-				var dateInfo = null;
-				var dateStrArr;
-				if (str.length > 2 && str.length <= 4) {
-					dateInfo = {
-						obj : new Date(str, 1, 1, 0, 0, 0),
-						format : "Y"
-					};
-				} else if (str.length === 6) {
-					if(format === undefined) {
-						format = N.context.attr("data").formatter.date.Ym();
-					}
-					dateStrArr = N.date.strToDateStrArr(str, format.replace(/[^Y|^m|^d]/g, ""));
-					dateInfo = {
-						obj : new Date(dateStrArr[0], dateStrArr[1]-1, 1, 0, 0, 0),
-						format : format
-					};
-				} else if (str.length === 8) {
-					if(format === undefined) {
-						format = N.context.attr("data").formatter.date.Ymd();
-					}
-					dateStrArr = N.date.strToDateStrArr(str, format.replace(/[^Y|^m|^d]/g, ""));
-					dateInfo = {
-						obj : new Date(dateStrArr[0], dateStrArr[1]-1, dateStrArr[2], 0, 0, 0),
-						format : format
-					};
-				} else if (str.length === 10) {
-					if(format === undefined) {
-						format = N.context.attr("data").formatter.date.YmdH();
-					}
-					dateStrArr = N.date.strToDateStrArr(str, format.replace(/[^Y|^m|^d]/g, ""));
-					dateInfo = {
-						obj : new Date(dateStrArr[0], dateStrArr[1]-1, dateStrArr[2], str.substring(8, 10), 0, 0),
-						format : format
-					};
-				} else if (str.length === 12) {
-					if(format === undefined) {
-						format = N.context.attr("data").formatter.date.YmdHi();
-					}
-					dateStrArr = N.date.strToDateStrArr(str, format.replace(/[^Y|^m|^d]/g, ""));
-					dateInfo = {
-						obj : new Date(dateStrArr[0], dateStrArr[1]-1, dateStrArr[2], str.substring(8, 10), str.substring(10, 12),
-								0),
-						format : format
-					};
-				} else if (str.length >= 14) {
-					if(format === undefined) {
-						format = N.context.attr("data").formatter.date.YmdHis();
-					}
-					dateStrArr = N.date.strToDateStrArr(str, format.replace(/[^Y|^m|^d]/g, ""));
-					dateInfo = {
-						obj : new Date(dateStrArr[0], dateStrArr[1]-1, dateStrArr[2], str.substring(8, 10), str.substring(10, 12),
-								str.substring(12, 14)),
-						format : format
-					};
-				}
-				return dateInfo;
-			},
-			/**
-			 * Formatting the date string to specified date format
-			 */
-			format : function(str, format) {
-				var dateInfo = this.strToDate(str);
-				return dateInfo !== null ? dateInfo.obj.formatDate(format !== undefined ? format : dateInfo.format) : str;
-			},
-			/**
-			 * Convert the timestamp from date object
-			 */
-			dateToTs : function(dateObj) {
-				var d = null;
-				if (dateObj === undefined) {
-					d = new Date(obj.time);
-				}
-				return Math.round(d.getTime() / 1000);
-			},
-			/**
-			 * Convert the date object from timestamp
-			 */
-			tsToDate : function(timestamp) {
-				var d = new Date(timestamp);
-				return d;
-			}
-		},
-		/**
-		 * N.element package
-		 */
-		"element" : {
-			/**
-			 * make options object from class attribute
-			 */
-			toOpts : function(ele) {
-				return N(ele).data("opts");
-			},
-			/**
-			 * make rules object from input element
-			 */
-			toRules : function(ele, ruleset) {
-				var retRules = {};
-				var thisEle;
-				var id;
-				ele.each(function() {
-					thisEle = $(this);
-					if(thisEle.is("input:radio, input:checkbox")) {
-						id = thisEle.attr("name");
-					} else {
-						id = thisEle.attr("id");
-					}
-					retRules[id] = thisEle.data(ruleset);
-				});
-				return retRules;
-			},
-			/**
-			 * make data object from input element
-			 */
-			toData : function(eles) {
-				var retData = {};
-				var key, ele;
-				eles.each(function() {
-					key = $(this).attr("id");
-					ele = $(this);
-					if(ele.is("input:radio") || ele.is("input:checkbox")) {
-						//TODO 이미 radio나 checkbox 로 잡았다면 루프의 다음번은 통과하도록 더 최적화 필요
-						ele = ele.siblings("input:" + ele.attr("type") + "[id^='" + ele.attr("name") + "']");
-						ele.push(this);
-						if(ele.length > 1) {
-							key = ele.attr("name");
-						} else if (ele.length === 1) {
-							key = ele.attr("id");
-							if(key === undefined) {
-								key = ele.attr("name");
-							}
-						}
-						if(key !== undefined) {
-							retData[key] = ele.vals();
-						}
-					} else {
-						if(key !== undefined) {
-							if(!ele.is("select")) {
-								if(ele.is("img")) {
-									retData[key] = ele.attr("src");
-								} else {
-									retData[key] = ele.val();
-								}
-							} else {
-								retData[key] = ele.vals();
-							}
-						}
-					}
-				});
-				return retData;
-			},
-			/**
-			 * Get max z-index of all elements in web page
-			 */
-			maxZindex : function(nContext) {
-				if (nContext === undefined) {
-					nContext = $("div, span");
-				}
-				return Math.max.apply(null, $.map(nContext, function(e, n) {
-					var zIndex = parseInt($(e).css("z-index"));
-					if (zIndex >= 2147483647) {
-						$(e).css("z-index", String(2147483647 - 999));
-						$(e).attr("fixed", "[Natural-JS]limited_z-index_value(-999)");
-					}
-					return zIndex || 0;
-				}));
-			},
-			/**
-			 * Prevent all events
-			 */
-			disable : function(e) {
-		        e.preventDefault();
-		        e.stopImmediatePropagation();
-		        e.stopPropagation();
-		        return false;
-		    },
-		    /**
-		     * Data change effect for N.ds
-		     */
-		    dataChanged : function(ele) {
-		    	ele.addClass("data_changed__");
-		    	ele.fadeOut(150).fadeIn(300);
-		    }
-		},
-		/**
-		 * N.browser package
-		 */
-		"browser" : {
-			/**
-			 * Set and get cookie
-			 *  - get : when value is undefined
-			 */
-			"cookie" : function(name, value, expiredays, domain) {
-				if (value === undefined) {
-					var getCookieVar = function(offset) {
-						var endstr = document.cookie.indexOf(";", offset);
-						if (endstr == -1) {
-							endstr = document.cookie.length;
-						}
-						return unescape(document.cookie.substring(offset, endstr));
-					};
-
-					var arg = name + "=";
-					var alen = arg.length;
-					var clen = document.cookie.length;
-					var i = 0;
-					while (i < clen) {
-						var j = i + alen;
-						if (document.cookie.substring(i, j) == arg) {
-							return getCookieVar(j);
-						}
-						i = document.cookie.indexOf(" ", i) + 1;
-						if (i === 0) {
-							break;
-						}
-					}
-				} else {
-					var expires;
-					if (expiredays !== undefined) {
-						var today = new Date();
-						today.setDate(today.getDate() + expiredays);
-						expires = "; expires=" + today.toGMTString();
-					} else {
-						expires = "";
-					}
-					var domain_;
-					if (domain !== undefined) {
-						domain_ = "; domain=" + domain;
-					} else {
-						domain_ = "";
-					}
-					document.cookie = name + "=" + escape(value) + "; path=/" + expires + domain_;
-				}
-			},
-			/**
-			 * Remove cookie
-			 */
-			removeCookie : function(name, domain) {
-				if (domain !== undefined) {
-					document.cookie = name + "=; path=/; expires=" + (new Date(1)) + "; domain=" + domain;
-				} else {
-					document.cookie = name + "=; path=/; expires=" + (new Date(1)) + ";";
-				}
-			},
-			/**
-			 * Get Microsoft Internet Explorer version
-			 *  - MSIE trident version has been applied
-			 */
-			msieVersion : function() {
-				var ua = window.navigator.userAgent;
-				var msie = ua.indexOf("MSIE ");
-				// for IE11
-				if(msie < 0) {
-					msie = ua.indexOf(".NET ");
-				}
-				var trident = ua.match(/Trident\/(\d.\d)/i);
-				if (msie < 0) {
-					return 0;
-				} else {
-					if (trident === undefined) {
-						return parseInt(ua.substring(msie + 5, ua.indexOf(".", msie)));
-					} else {
-						return parseInt(trident[1]) + 4.0;
-					}
-				}
-			},
-			/**
-			 * Check the connected browser
-			 */
-			"is" : function(name) {
-				if(!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0) {
-					return name === "opera" ? true : false;
-				} else if(typeof InstallTrigger !== 'undefined') {
-					return name === "firefox" ? true : false;
-				} else if(Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0) {
-					return name === "safari" ? true : false;
-				} else if(!!window.chrome && !(!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0)) {
-					return name === "chrome" ? true : false;
-				} else if(N.browser.msieVersion() > 0) {
-					return name === "ie" ? true : false;
-				}
-				return false;
-			},
-			/**
-			 * Get max document height
-			 */
-			documentHeight : function() {
-				return Math.max(Math.max(document.body.scrollHeight, document.documentElement.scrollHeight), Math.max(document.body.offsetHeight,
-						document.documentElement.offsetHeight), Math.max(document.body.clientHeight, document.documentElement.clientHeight));
-			},
-			/**
-			 * Get height for each browsers
-			 */
-			browserHeight : function() {
-				var totalHeight = 0;
-				if ($.browser.msie) {
-					var scrollHeight = document.documentElement.scrollHeight;
-					var browserHeight = document.documentElement.clientHeight;
-					totalHeight = scrollHeight < browserHeight ? browserHeight : scrollHeight;
-				} else if ($.browser.mozilla) {
-					var bodyHeight = document.body.clientHeight;
-					totalHeight = window.innerHeight < bodyHeight ? bodyHeight : window.innerHeight;
-				} else if ($.browser.webkit) {
-					totalHeight = document.body.scrollHeight;
-				}
-				return totalHeight;
-			},
-			/**
-			 * Get scrollbars width for connected browser
-			 */
-			scrollbarWidth : function() {
-				var div = $('<div class="antiscroll-inner" style="width:50px;height:50px;overflow-y:scroll;' +
-					'position:absolute;top:-200px;left:-200px;"><div style="height:100px;width:100%"/>' +
-					'</div>');
-
-				$("body").append(div);
-				var w1 = $(div).innerWidth();
-				var w2 = $("div", div).innerWidth();
-				$(div).remove();
-
-				return w1 - w2;
-			}
-		},
-		/**
-		 * N.message package
-		 */
-		"message" : {
-			/**
-			 * Replace message variables for N.message.get
-			 */
-			replaceMsgVars : function(msg, vars) {
-				if (vars !== undefined) {
-					for (var i = 0; i < vars.length; i++) {
-						msg = msg.split("{" + String(i) + "}").join(vars[i]);
-					}
-				}
-				return msg;
-			},
-			/**
-			 * Get message from message resource
-			 */
-			get : function(resource, key, vars) {
-				var msg = resource[N.locale()][key];
-				return msg !== undefined ? N.message.replaceMsgVars(msg, vars) : key;
-			}
-		},
-		/**
-		 * N.json package
-		 */
-		"json" : {
-			/**
-			 * Return formated JSON String
-			 */
-			"format" : function(oData, sIndent) {
-				if (!N.isEmptyObject(oData)) {
-					if (N.isString(oData)) {
-						oData = JSON.parse(oData);
-					}
-					if(sIndent === undefined) {
-						sIndent = 4;
-					}
-					return JSON.stringify(oData, undefined, sIndent);
-				} else {
-					return null;
-				}
-			}
-		}
-	});
-	$.fn.extend(N.fn);
-
-	N.fn = N.prototype = {
-		constructor : N,
+	$.fn.extend($.extend(N.prototype, {
 		/**
 		 * Remove object of specified index from array
 		 */
@@ -726,7 +36,7 @@
 			return this;
 		},
 		/**
-		 * Event bind to the top
+		 * Event bind to the top priority
 		 */
 		tpBind : function(event, handler) {
 			this.each(function() {
@@ -897,9 +207,747 @@
 	    	}
 	    	return "";
 	    }
-	};
-
+	}));
+	
 	(function(N) {
+		
+		// N local variables
+		$.extend(N, {
+			version : {
+				"Natural-CORE" : "0.8.5.2"
+			},
+			/**
+			 * Set and get locale value
+			 */
+			locale : function(str) {
+				if(str === undefined) {
+					return N.context.attr("core").locale;
+				} else {
+					N.context.attr("core").locale = str;
+				}
+			},
+			/**
+			 * Display the error log to console
+			 */
+			error : function(msg, e) {
+				if (e !== undefined && e.stack !== undefined && console.error !== undefined) {
+					if(typeof console !== "undefined" && typeof console.error !== "undefined") {
+						console.error(e.stack);
+					}
+				}
+				throw new Error(msg);
+			},
+			/**
+			 * Display the warnning log to console
+			 */
+			warn : function() {
+				if(typeof console !== "undefined" && typeof console.warn !== "undefined") {
+					console.warn.apply(console, arguments);
+				}
+			},
+			/**
+			 * Display the log to console
+			 */
+			log : function() {
+				if(typeof console !== "undefined" && typeof console.log !== "undefined") {
+					console.log.apply(console, arguments);
+				}
+			},
+			/**
+			 * Natural-JS resource garbage collector
+			 */
+			gc : {
+				/**
+				 * Minimum collection
+				 */
+				minimum : function() {
+					$(window).unbind("resize.datepicker");
+					$(window).unbind("resize.alert");
+					$(window.document).unbind("mousedown.datepicker");
+					$(window.document).unbind("keyup.datepicker");
+					$(window.document).unbind("keyup.alert");
+					return true;
+				},
+				/**
+				 * Full collection
+				 */
+				full : function() {
+					$(window).unbind("resize.datepicker");
+					$(window).unbind("resize.alert");
+					$(window.document).unbind("mousedown.datepicker");
+					$(window.document).unbind("keyup.datepicker");
+					$(window.document).unbind("keyup.alert");
+					$(window.document).unbind("dragstart.grid.vResize").unbind("selectstart.grid.vResize").unbind("mousemove.grid.vResize").unbind("mouseup.grid.vResize");
+					$(window.document).unbind("dragstart.grid.resize").unbind("selectstart.grid.resize").unbind("mousemove.grid.resize").unbind("mouseup.grid.resize");
+					return true;
+				}
+			},
+			/**
+			 * Check of array type
+			 */
+			isArray : $.isArray,
+			/**
+			 * Check type for numeric
+			 */
+			isNumeric : $.isNumeric,
+			isEmptyObject : function(obj) {
+				if(obj !== undefined && this.isString(obj)) {
+					if(obj.length > 0) {
+						return false;
+					}
+				} else {
+					for (var name in obj) {
+						return false;
+					}
+				}
+				return true;
+			},
+			/**
+			 * Check whether the plain object type
+			 */
+			isPlainObject : $.isPlainObject,
+			/**
+			 * Check whether the String type
+			 */
+			isString : function(str) {
+				return typeof str === "string";
+			},
+			/**
+			 * Check object type
+			 */
+			type : function(obj) {
+		        return ({}).toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase();
+		    },
+		    /**
+		     * Check whether the element
+		     */
+			isElement : function(obj) {
+				if(N.isString(obj)) {
+					obj = N(obj);
+				}
+				return obj !== undefined && obj.length > 0 && obj.get(0).getElementsByTagName ? true : false;
+			},
+			isArraylike : function(obj) {
+				var length = obj.length, type = N.type(obj);
+				if (type === "function" || $.isWindow(obj)) {
+					return false;
+				}
+				if (obj.nodeType === 1 && length) {
+					return true;
+				}
+				return type === "array" || length === 0 || typeof length === "number" && length > 0 && (length - 1) in obj;
+			},
+			/**
+			 * Check whether the JWS(jQuery wraped set)
+			 */
+			isWrappedSet : function(obj) {
+				return this.isArraylike(obj) && obj.jquery !== undefined;
+			},
+			/**
+			 * N.string package
+			 */
+			"string" : {
+				/**
+				 * Checks if CharSequence contains a search character
+				 */
+				contains : function(needle, haystack) {
+					return haystack && (haystack.indexOf(needle) != -1);
+				},
+				/**
+				 * check if a String ends with a suffix
+				 */
+				endsWith : function(str, postfix) {
+					if (this.isEmpty(str) || this.isEmpty(postfix)) {
+						return false;
+					}
+					return str.lastIndexOf(postfix) === str.length - postfix.length;
+				},
+				/**
+				 * Check if a String starts with a prefix
+				 */
+				startsWith : function(str, prefix) {
+					if (this.isEmpty(str)) {
+						return false;
+					}
+					return str.indexOf(prefix) === 0;
+				},
+				/**
+				 * Insert a character at the specified index in the string
+				 */
+				insertAt : function(str, strToInsert, index) {
+					return str.substring(0, index) + strToInsert + str.substring(index);
+				},
+				/**
+				 * Check if a String matches a prefix
+				 */
+				matches : function(str, matchExp, ignoreCase) {
+					var ignoreCase_ = arguments.length >= 3 ? ignoreCase : false;
+					matchExp = this.trim(matchExp);
+					matchExp = matchExp.replace(/\s+/, "*");
+					matchExp = matchExp.replace(/\*/, ".*?");
+					matchExp = matchExp.replace(/\?/, ".{0,1}");
+					var regExp = new RegExp("^" + matchExp, (ignoreCase_ ? "i" : ""));
+					return regExp.test(str);
+				},
+				/**
+				 * Remove whitespace in string
+				 */
+				removeWhitespace : function(str) {
+					if (this.isEmpty(str)) {
+						return str;
+					}
+					return str.replace(/\s/g, "");
+				},
+				/**
+				 * Left pad a String with a specified character
+				 */
+				lpad : function(originalstr, length, strToPad) {
+					while (originalstr.length < length) {
+						originalstr = strToPad + originalstr;
+					}
+					return originalstr;
+				},
+				/**
+				 * Right pad a String with a specified character
+				 */
+				rpad : function(originalstr, length, strToPad) {
+					while (originalstr.length < length) {
+						originalstr = originalstr + strToPad;
+					}
+					return originalstr;
+				},
+				/**
+				 * Return byte length of string
+				 *  - Hangul(UTF-8) is 3 bytes
+				 */
+				byteLength : function(str) {
+					return (function(s,b,i,c){
+			        	for(b=i=0;c=s.charCodeAt(i++);b+=c>>11?3:c>>7?2:1);
+			        	return b;
+			        })(str);
+				},
+				/**
+				 * Removes leading and trailing whitespace
+				 *  - the String to be trimmed, may be null or undefined
+				 */
+				trim : function(str) {
+					return $.trim(str);
+				},
+				/**
+				 * Checks if a String contains text
+				 */
+				isEmpty : function(str) {
+					return $.trim(str).length === 0 ? true : false;
+				},
+				/**
+				 * Removes leading and trailing whitespace
+				 *  - the String to be trimmed, may be null or undefined
+				 */
+				trimToEmpty : function(str) {
+					return $.trim(str);
+				},
+				/**
+				 * Change null or undefined to empty string
+				 */
+				nullToEmpty : function(str) {
+					return str === null || str === undefined ? "" : str;
+				},
+				/**
+				 * If trimmed string value is empty, return null
+				 */
+				trimToNull : function(str) {
+					return $.trim(str).length === 0 ? null : $.trim(str);
+				},
+				/**
+				 * If trimmed string value is empty, return undefined
+				 */
+				trimToUndefined : function(str) {
+					return $.trim(str).length === 0 ? undefined : $.trim(str);
+				},
+				/**
+				 * If trimmed string value is empty, return 0
+				 */
+				trimToZero : function(str) {
+					return $.trim(str).length === 0 ? "0" : $.trim(str);
+				},
+				/**
+				 * If trimmed string value is empty, return a specified value
+				 */
+				trimToVal : function(str, valStr) {
+					return $.trim(str).length === 0 ? valStr : $.trim(str);
+				}
+			},
+			/**
+			 * N.date package
+			 */
+			"date" : {
+				/**
+				 * Calculate the date counts of difference between the two dates,
+				 */
+				diff : function(str1, str2) {
+					if (N.type(str1) == "string") {
+						str1 = this.stringToDateObj(str1).obj;
+					}
+					if (N.type(str2) == "string") {
+						str2 = this.stringToDateObj(str2).obj;
+					}
+					return Math.ceil((str2 - str1) / 1000 / 24 / 60 / 60);
+				},
+				/**
+				 * Return to re-place the date string for a given format.
+				 */
+				strToDateStrArr : function(str, format, isString) {
+					var dateStrArr = [];
+					var fixNum = 0;
+					if(format.length === 3 && str.length === 7 || format.length === 2 && str.length === 5) {
+						fixNum = -1;
+					}
+					if(N.string.startsWith(format, "Ymd")) {
+						dateStrArr.push(str.substring(0, 4 + fixNum)); //year
+						dateStrArr.push(str.substring(4 + fixNum, 6 + fixNum)); //month
+						dateStrArr.push(str.substring(6 + fixNum, 8 + fixNum)); //day
+	        		} else if(N.string.startsWith(format, "mdY")) {
+	        			dateStrArr.push(str.substring(4, 8 + fixNum)); //year
+	        			dateStrArr.push(str.substring(0, 2)); //month
+	        			dateStrArr.push(str.substring(2, 4)); //day
+	        		} else if(N.string.startsWith(format, "dmY")) {
+	        			dateStrArr.push(str.substring(4, 8 + fixNum)); //year
+	        			dateStrArr.push(str.substring(2, 4)); //month
+	        			dateStrArr.push(str.substring(0, 2)); //day
+	        		} else if(N.string.startsWith(format, "Ym")) {
+	        			dateStrArr.push(str.substring(0, 4 + fixNum)); //year
+						dateStrArr.push(str.substring(4 + fixNum, 6 + fixNum)); //month
+	        		} else if(N.string.startsWith(format, "mY")) {
+	        			dateStrArr.push(str.substring(2, 6 + fixNum)); //year
+						dateStrArr.push(str.substring(0, 2)); //month
+	        		} else {
+	        			N.error("\"" + format + "\" date format is not support. please change return value of N.context.attr(\"data\").formatter.date's functions");
+	        		}
+					if(isString === undefined || isString === false) {
+						$(dateStrArr).each(function(i) {
+							dateStrArr[i] = parseInt(this);
+						});
+					}
+					return dateStrArr;
+				},
+				/**
+				 * Returns object of date information that contained the date object with a default date format
+				 */
+				strToDate : function(str, format) {
+					str = N.string.trimToEmpty(str).replace(/[^0-9]/g, "");
+					var dateInfo = null;
+					var dateStrArr;
+					if (str.length > 2 && str.length <= 4) {
+						dateInfo = {
+							obj : new Date(str, 1, 1, 0, 0, 0),
+							format : "Y"
+						};
+					} else if (str.length === 6) {
+						if(format === undefined) {
+							format = N.context.attr("data").formatter.date.Ym();
+						}
+						dateStrArr = N.date.strToDateStrArr(str, format.replace(/[^Y|^m|^d]/g, ""));
+						dateInfo = {
+							obj : new Date(dateStrArr[0], dateStrArr[1]-1, 1, 0, 0, 0),
+							format : format
+						};
+					} else if (str.length === 8) {
+						if(format === undefined) {
+							format = N.context.attr("data").formatter.date.Ymd();
+						}
+						dateStrArr = N.date.strToDateStrArr(str, format.replace(/[^Y|^m|^d]/g, ""));
+						dateInfo = {
+							obj : new Date(dateStrArr[0], dateStrArr[1]-1, dateStrArr[2], 0, 0, 0),
+							format : format
+						};
+					} else if (str.length === 10) {
+						if(format === undefined) {
+							format = N.context.attr("data").formatter.date.YmdH();
+						}
+						dateStrArr = N.date.strToDateStrArr(str, format.replace(/[^Y|^m|^d]/g, ""));
+						dateInfo = {
+							obj : new Date(dateStrArr[0], dateStrArr[1]-1, dateStrArr[2], str.substring(8, 10), 0, 0),
+							format : format
+						};
+					} else if (str.length === 12) {
+						if(format === undefined) {
+							format = N.context.attr("data").formatter.date.YmdHi();
+						}
+						dateStrArr = N.date.strToDateStrArr(str, format.replace(/[^Y|^m|^d]/g, ""));
+						dateInfo = {
+							obj : new Date(dateStrArr[0], dateStrArr[1]-1, dateStrArr[2], str.substring(8, 10), str.substring(10, 12),
+									0),
+							format : format
+						};
+					} else if (str.length >= 14) {
+						if(format === undefined) {
+							format = N.context.attr("data").formatter.date.YmdHis();
+						}
+						dateStrArr = N.date.strToDateStrArr(str, format.replace(/[^Y|^m|^d]/g, ""));
+						dateInfo = {
+							obj : new Date(dateStrArr[0], dateStrArr[1]-1, dateStrArr[2], str.substring(8, 10), str.substring(10, 12),
+									str.substring(12, 14)),
+							format : format
+						};
+					}
+					return dateInfo;
+				},
+				/**
+				 * Formatting the date string to specified date format
+				 */
+				format : function(str, format) {
+					var dateInfo = this.strToDate(str);
+					return dateInfo !== null ? dateInfo.obj.formatDate(format !== undefined ? format : dateInfo.format) : str;
+				},
+				/**
+				 * Convert the timestamp from date object
+				 */
+				dateToTs : function(dateObj) {
+					var d = null;
+					if (dateObj === undefined) {
+						d = new Date(obj.time);
+					}
+					return Math.round(d.getTime() / 1000);
+				},
+				/**
+				 * Convert the date object from timestamp
+				 */
+				tsToDate : function(timestamp) {
+					var d = new Date(timestamp);
+					return d;
+				}
+			},
+			/**
+			 * N.element package
+			 */
+			"element" : {
+				/**
+				 * make options object from class attribute
+				 */
+				toOpts : function(ele) {
+					return N(ele).data("opts");
+				},
+				/**
+				 * make rules object from input element
+				 */
+				toRules : function(ele, ruleset) {
+					var retRules = {};
+					var thisEle;
+					var id;
+					ele.each(function() {
+						thisEle = $(this);
+						if(thisEle.is("input:radio, input:checkbox")) {
+							id = thisEle.attr("name");
+						} else {
+							id = thisEle.attr("id");
+						}
+						retRules[id] = thisEle.data(ruleset);
+					});
+					return retRules;
+				},
+				/**
+				 * make data object from input element
+				 */
+				toData : function(eles) {
+					var retData = {};
+					var key, ele;
+					eles.each(function() {
+						key = $(this).attr("id");
+						ele = $(this);
+						if(ele.is("input:radio") || ele.is("input:checkbox")) {
+							//TODO 이미 radio나 checkbox 로 잡았다면 루프의 다음번은 통과하도록 더 최적화 필요
+							ele = ele.siblings("input:" + ele.attr("type") + "[id^='" + ele.attr("name") + "']");
+							ele.push(this);
+							if(ele.length > 1) {
+								key = ele.attr("name");
+							} else if (ele.length === 1) {
+								key = ele.attr("id");
+								if(key === undefined) {
+									key = ele.attr("name");
+								}
+							}
+							if(key !== undefined) {
+								retData[key] = ele.vals();
+							}
+						} else {
+							if(key !== undefined) {
+								if(!ele.is("select")) {
+									if(ele.is("img")) {
+										retData[key] = ele.attr("src");
+									} else {
+										retData[key] = ele.val();
+									}
+								} else {
+									retData[key] = ele.vals();
+								}
+							}
+						}
+					});
+					return retData;
+				},
+				/**
+				 * Get max z-index of all elements in web page
+				 */
+				maxZindex : function(nContext) {
+					if (nContext === undefined) {
+						nContext = $("div, span");
+					}
+					return Math.max.apply(null, $.map(nContext, function(e, n) {
+						var zIndex = parseInt($(e).css("z-index"));
+						if (zIndex >= 2147483647) {
+							$(e).css("z-index", String(2147483647 - 999));
+							$(e).attr("fixed", "[Natural-JS]limited_z-index_value(-999)");
+						}
+						return zIndex || 0;
+					}));
+				},
+				/**
+				 * Prevent all events
+				 */
+				disable : function(e) {
+			        e.preventDefault();
+			        e.stopImmediatePropagation();
+			        e.stopPropagation();
+			        return false;
+			    },
+			    /**
+			     * Data change effect for N.ds
+			     */
+			    dataChanged : function(ele) {
+			    	ele.addClass("data_changed__");
+			    	ele.fadeOut(150).fadeIn(300);
+			    }
+			},
+			/**
+			 * N.browser package
+			 */
+			"browser" : {
+				/**
+				 * Set and get cookie
+				 *  - get : when value is undefined
+				 */
+				"cookie" : function(name, value, expiredays, domain) {
+					if (value === undefined) {
+						var getCookieVar = function(offset) {
+							var endstr = document.cookie.indexOf(";", offset);
+							if (endstr == -1) {
+								endstr = document.cookie.length;
+							}
+							return unescape(document.cookie.substring(offset, endstr));
+						};
+	
+						var arg = name + "=";
+						var alen = arg.length;
+						var clen = document.cookie.length;
+						var i = 0;
+						while (i < clen) {
+							var j = i + alen;
+							if (document.cookie.substring(i, j) == arg) {
+								return getCookieVar(j);
+							}
+							i = document.cookie.indexOf(" ", i) + 1;
+							if (i === 0) {
+								break;
+							}
+						}
+					} else {
+						var expires;
+						if (expiredays !== undefined) {
+							var today = new Date();
+							today.setDate(today.getDate() + expiredays);
+							expires = "; expires=" + today.toGMTString();
+						} else {
+							expires = "";
+						}
+						var domain_;
+						if (domain !== undefined) {
+							domain_ = "; domain=" + domain;
+						} else {
+							domain_ = "";
+						}
+						document.cookie = name + "=" + escape(value) + "; path=/" + expires + domain_;
+					}
+				},
+				/**
+				 * Remove cookie
+				 */
+				removeCookie : function(name, domain) {
+					if (domain !== undefined) {
+						document.cookie = name + "=; path=/; expires=" + (new Date(1)) + "; domain=" + domain;
+					} else {
+						document.cookie = name + "=; path=/; expires=" + (new Date(1)) + ";";
+					}
+				},
+				/**
+				 * Get Microsoft Internet Explorer version
+				 *  - MSIE trident version has been applied
+				 */
+				msieVersion : function() {
+					var ua = window.navigator.userAgent;
+					var msie = ua.indexOf("MSIE ");
+					// for IE11
+					if(msie < 0) {
+						msie = ua.indexOf(".NET ");
+					}
+					var trident = ua.match(/Trident\/(\d.\d)/i);
+					if (msie < 0) {
+						return 0;
+					} else {
+						if (trident === undefined) {
+							return parseInt(ua.substring(msie + 5, ua.indexOf(".", msie)));
+						} else {
+							return parseInt(trident[1]) + 4.0;
+						}
+					}
+				},
+				/**
+				 * Check the connected browser
+				 */
+				"is" : function(name) {
+					if(!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0) {
+						return name === "opera" ? true : false;
+					} else if(typeof InstallTrigger !== 'undefined') {
+						return name === "firefox" ? true : false;
+					} else if(Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0) {
+						return name === "safari" ? true : false;
+					} else if(!!window.chrome && !(!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0)) {
+						return name === "chrome" ? true : false;
+					} else if(N.browser.msieVersion() > 0) {
+						return name === "ie" ? true : false;
+					}
+					return false;
+				},
+				/**
+				 * Get max document height
+				 */
+				documentHeight : function() {
+					return Math.max(Math.max(document.body.scrollHeight, document.documentElement.scrollHeight), Math.max(document.body.offsetHeight,
+							document.documentElement.offsetHeight), Math.max(document.body.clientHeight, document.documentElement.clientHeight));
+				},
+				/**
+				 * Get height for each browsers
+				 */
+				browserHeight : function() {
+					var totalHeight = 0;
+					if ($.browser.msie) {
+						var scrollHeight = document.documentElement.scrollHeight;
+						var browserHeight = document.documentElement.clientHeight;
+						totalHeight = scrollHeight < browserHeight ? browserHeight : scrollHeight;
+					} else if ($.browser.mozilla) {
+						var bodyHeight = document.body.clientHeight;
+						totalHeight = window.innerHeight < bodyHeight ? bodyHeight : window.innerHeight;
+					} else if ($.browser.webkit) {
+						totalHeight = document.body.scrollHeight;
+					}
+					return totalHeight;
+				},
+				/**
+				 * Get scrollbars width for connected browser
+				 */
+				scrollbarWidth : function() {
+					var div = $('<div class="antiscroll-inner" style="width:50px;height:50px;overflow-y:scroll;' +
+						'position:absolute;top:-200px;left:-200px;"><div style="height:100px;width:100%"/>' +
+						'</div>');
+	
+					$("body").append(div);
+					var w1 = $(div).innerWidth();
+					var w2 = $("div", div).innerWidth();
+					$(div).remove();
+	
+					return w1 - w2;
+				}
+			},
+			/**
+			 * N.message package
+			 */
+			"message" : {
+				/**
+				 * Replace message variables for N.message.get
+				 */
+				replaceMsgVars : function(msg, vars) {
+					if (vars !== undefined) {
+						for (var i = 0; i < vars.length; i++) {
+							msg = msg.split("{" + String(i) + "}").join(vars[i]);
+						}
+					}
+					return msg;
+				},
+				/**
+				 * Get message from message resource
+				 */
+				get : function(resource, key, vars) {
+					var msg = resource[N.locale()][key];
+					return msg !== undefined ? N.message.replaceMsgVars(msg, vars) : key;
+				}
+			},
+			/**
+			 * N.json package
+			 */
+			"json" : {
+				"mapFromKeys" : function(obj) {
+					if(arguments.length > 1) {
+						var args = Array.prototype.slice.call(arguments, 0);
+						if(N.context.attr("core").excludeMapFromKeys !== undefined) {
+							args = args.concat(N.context.attr("core").excludeMapFromKeys);
+						}
+						if(N.type(obj) === "array") {
+							if(obj.length === 0) {
+								return obj;
+							}
+							return $(obj).map(function() {
+								var retObj = {};
+								for(var i=1,length=args.length;i<length;i++) {
+									if(args[i] !== undefined && this[args[i]] !== undefined) {
+										retObj[args[i]] = this[args[i]];
+									}
+								}
+								return retObj;
+							}).get();
+						} else {
+							var retObj = {};
+							for(var i=1,length=args.length;i<length;i++) {
+								if(args[i] !== undefined && obj[args[i]] !== undefined) {
+									retObj[args[i]] = obj[args[i]];
+								}
+							}
+							return retObj;
+						}
+					} else {
+						return obj;
+					}
+				},
+				/**
+				 * Merge JSON Array by key
+				 */
+				"mergeJsonArray" : function(arr1, arr2, key) {
+					var keySet = $(arr1).map(function() {
+						return this[key];
+					}).get().join(",");
+					$(arr2).each(function() {
+						if(keySet.indexOf(this[key]) < 0) {
+							arr1.push(this);
+						}
+					});
+					return arr1;
+				},
+				/**
+				 * Return formated JSON String
+				 */
+				"format" : function(oData, sIndent) {
+					if (!N.isEmptyObject(oData)) {
+						if (N.isString(oData)) {
+							oData = JSON.parse(oData);
+						}
+						if(sIndent === undefined) {
+							sIndent = 4;
+						}
+						return JSON.stringify(oData, undefined, sIndent);
+					} else {
+						return null;
+					}
+				}
+			}
+		});
 
 	})(N);
 
