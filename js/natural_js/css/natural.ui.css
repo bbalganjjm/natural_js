@@ -296,7 +296,7 @@ div.tab__>ul {
 }
 
 div.tab__>ul li {
-	float: left; margin-right: 1px; padding: 0; padding: 6px 5px 8px 5px; border-top: 1px solid #55d555; border-left: 1px solid #55d555; border-right: 1px solid #55d555; cursor: pointer; min-width: 80px; border-radius: 3px 3px 0 0; text-align: center; background-image: -ms-linear-gradient(top, #77ee77 0%, #77ee88 100%); background-image: -moz-linear-gradient(top, #77ee77 0%, #77ee88 100%); background-image: -o-linear-gradient(top, #77ee77 0%, #77ee88 100%); background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #77ee77), color-stop(1, #77ee88)); background-image: -webkit-linear-gradient(top, #77ee77 0%, #77ee88 100%); background-image: linear-gradient(to bottom, #77ee77 0%, #77ee88 100%); background-color: #77ee77;
+	float: left; margin-right: 1px; padding: 4px; border-top: 1px solid #55d555; border-left: 1px solid #55d555; border-right: 1px solid #55d555; cursor: pointer; min-width: 80px; border-radius: 3px 3px 0 0; font-size: 12px; text-align: center; background-image: -ms-linear-gradient(top, #77ee77 0%, #77ee88 100%); background-image: -moz-linear-gradient(top, #77ee77 0%, #77ee88 100%); background-image: -o-linear-gradient(top, #77ee77 0%, #77ee88 100%); background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #77ee77), color-stop(1, #77ee88)); background-image: -webkit-linear-gradient(top, #77ee77 0%, #77ee88 100%); background-image: linear-gradient(to bottom, #77ee77 0%, #77ee88 100%); background-color: #77ee77;
 }
 
 div.tab__>ul li>a {
@@ -333,7 +333,7 @@ div.datepicker_contents__ div.datepicker_curr_year__ {
 }
 
 div.datepicker_contents__ div.datepicker_year_selected__ {
-	background-color: #008800; color: #ffffff;
+	background-color: #449944; color: #ffffff;
 }
 
 div.datepicker_contents__ div.datepicker_month_item__ {
@@ -353,11 +353,11 @@ div.datepicker_contents__ div.datepicker_day_item__ {
 }
 
 div.datepicker_contents__ div.datepicker_month_selected__ {
-	background-color: #008800; color: #ffffff;
+	background-color: #449944; color: #ffffff;
 }
 
 div.datepicker_contents__ div.datepicker_day_selected__ {
-	background-color: #008800; color: #ffffff;
+	background-color: #449944; color: #ffffff;
 }
 
 div.datepicker_contents__ div.datepicker_year_item__:hover, div.datepicker_contents__ div.datepicker_month_item__:hover, div.datepicker_contents__ div.datepicker_day_item__:hover {
