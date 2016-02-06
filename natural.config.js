@@ -286,7 +286,7 @@
 			 */
 			"global" : {
 				"okBtnStyle" : {
-					color : "skyblue",
+					color : "gray",
 					size : "medium"
 				},
 				"cancelBtnStyle" : {
