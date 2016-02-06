@@ -45,7 +45,9 @@ audio, canvas, progress, video {
  * Prevent modern browsers from displaying `audio` without controls.
  * Remove excess height in iOS 5 devices.
  */
-audio:not([controls]){display:none;height:0;}
+audio:not ([controls] ){
+	display: none; height: 0;
+}
 
 /**
  * Address `[hidden]` styling not present in IE 8/9/10.
@@ -85,6 +87,10 @@ a {
 
 table {
 	margin: 0 0 15px 0; border-collapse: collapse; table-layout: fixed;
+}
+
+table:last-child {
+	margin: 0;
 }
 
 table th {
@@ -153,8 +159,7 @@ header nav>ul>li:hover {
 }
 
 header nav>ul>li:hover>a {
-	color: #9f9;
-	text-shadow: 0 0 15px #7F7;
+	color: #9f9; text-shadow: 0 0 15px #7F7;
 }
 
 header nav>ul>li:hover>ul {
@@ -170,9 +175,8 @@ header nav>ul>li>ul>li.nav-saction {
 }
 
 header nav>ul>li>ul>li a {
-	color: #9f9; font-size: 0.9em; text-shadow: 1px 1px 1px #000;opacity: 1;
+	color: #9f9; font-size: 0.9em; text-shadow: 1px 1px 1px #000; opacity: 1;
 }
-
 
 header nav>ul>li>ul>li a:hover {
 	text-shadow: 0 0 10px #fff;
@@ -223,17 +227,11 @@ article dl.qna dd ul li>ul {
 }
 
 #sub-logos {
-	list-style: none;
-	padding: 0;
-	margin: 0 20px 0 0;
+	list-style: none; padding: 0; margin: 0 20px 0 0;
 }
 
 #sub-logos li {
-	margin: 0;
-	float: left;
-	width: 420px;
-	text-align: center;
-	padding: 20px;
+	margin: 0; float: left; width: 420px; text-align: center; padding: 20px;
 }
 
 article h1 {
@@ -273,8 +271,7 @@ article hr {
 }
 
 article .alert {
-	background: url("../images/icon/alert.png") no-repeat 7px 10px; font-size: 0.95em; padding: 5px 5px 5px 25px;
-	background-color: #cfc; border-radius: 3px;
+	background: url("../images/icon/alert.png") no-repeat 7px 10px; font-size: 0.95em; padding: 5px 5px 5px 25px; background-color: #cfc; border-radius: 3px;
 }
 
 .grid input[type='text'], .grid input[type='password'], .grid select, .grid textarea {
@@ -352,9 +349,7 @@ article .intro {
 }
 
 article .smallContTit {
-	padding-left: 15px;
-	font-size: 0.95em; font-weight: normal; background: url("../images/icon/sct_leaf.gif") no-repeat 0 3px;
-	margin: 0;
+	padding-left: 15px; font-size: 0.95em; font-weight: normal; background: url("../images/icon/sct_leaf.gif") no-repeat 0 3px; margin: 0;
 }
 
 article .searchBox {
@@ -366,8 +361,7 @@ article .searchBox ul {
 }
 
 article .searchBox ul li {
-	font-size: 12px; margin: 0;
-	padding: 10px;
+	font-size: 12px; margin: 0; padding: 10px;
 }
 
 article .searchBox ul li.inputs {
