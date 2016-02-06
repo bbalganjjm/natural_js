@@ -1,7 +1,7 @@
 @charset "utf-8";
 /* Alert global message */
 .alert_overlay__.block_overlay__ {
-	background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAIklEQVQIW2NkQAIf7n/4zwjjgzgCigKMYAEYB8RmROaABAAQCg/DqNBm8AAAAABJRU5ErkJggg==") repeat; background-color: #555555 !important; opacity: 0.75; filter: alpha(opacity = 50) \9;
+	background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAIklEQVQIW2NkQAIf7n/4zwjjgzgCigKMYAEYB8RmROaABAAQCg/DqNBm8AAAAABJRU5ErkJggg==") repeat; background-color: #003300 !important; opacity: 0.60; filter: alpha(opacity = 50) \9;
 }
 
 .alert__.block_overlay_msg__ {
