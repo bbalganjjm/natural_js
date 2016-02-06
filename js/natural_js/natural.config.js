@@ -20,7 +20,11 @@
 	    /**
 	     * N.context.attr("architecture").page.context 로 페이지가 전환될때 마다 실행될 가비지 컬렉터의 모드
 	     */
-	    gcMode : "full" //minimum, full
+	    gcMode : "full", //minimum, full
+	    /**
+	     * N.json.mapFromKeys 함수에서 필터링 제외 할 키값, N.grid 나 N.form 등 data() 메서드를 제공하는 컴포넌트에도 같이 적용됨.
+	     */
+	    excludeMapFromKeys : ["rowStatus"]
 	});
 
 	/**
@@ -203,13 +207,11 @@
 					dash_integer : "숫자(정수), 대쉬(-) 만 입력 할 수 있습니다.",
 					commas_integer : "숫자(정수), 콤마(,) 만 입력 할 수 있습니다.",
 					number : "숫자(+-,. 포함)만 입력 할 수 있습니다.",
-					decimal : "(유한)소수만 입력 할 수 있습니다.",
-					decimal_ : "(유한)소수 {0}번째 자리까지 입력 할 수 있습니다.",
+					decimal : "(유한)소수 {0}번째 자리까지 입력 할 수 있습니다.",
 					email : "e-mail 형식에 맞지 않습니다.",
 					url : "URL 형식에 맞지 않습니다.",
 					zipcode : "우편번호 형식에 맞지 않습니다.",
 					phone : "전화번호 형식이 아닙니다.",
-					phone_ : "전화번호 형식이 아닙니다.",
 					ssn : "주민등록번호 형식에 맞지 않습니다.",
 					frn : "외국인등록번호 형식에 맞지 않습니다.",
 					frn_ssn : "주민번호나 외국인등록번호 형식에 맞지 않습니다.",
@@ -217,23 +219,23 @@
 					cpno : "법인번호 형식에 맞지 않습니다.",
 					date : "날짜 형식에 맞지 않습니다.",
 					time : "시간 형식에 맞지 않습니다.",
-					accept_ : "\"{0}\" 값만 입력 할 수 있습니다.",
-					match_ : "\"{0}\" 이(가) 포함된 값만 입력 할 수 있습니다.",
-					acceptFileExt_ : "\"{0}\" 이(가) 포함된 확장자만 입력 할 수 있습니다.",
-					notAccept_ : "\"{0}\" 값은 입력 할 수 없습니다.",
-					notMatch_ : "\"{0}\" 이(가) 포함된 값은 입력 할 수 없습니다.",
-					notAcceptFileExt_ : "\"{0}\" 이(가) 포함된 확장자는 입력 할 수없습니다.",
-					equalTo_ : "\"{1}\" 의 값과 같아야 합니다.",
-					maxlength_ : "{0} 글자 이하만 입력 가능합니다.",
-					minlength_ : "{0} 글자 이상만 입력 가능합니다.",
-					rangelength_ : "{0} 글자 에서 {1} 글자 까지만 입력 가능합니다.",
-					maxbyte_ : "{0} 바이트 이하만 입력 가능합니다.<br> - 영문, 숫자 : 1 바이트<br> - 한글, 특수문자 : 3 바이트",
-					minbyte_ : "{0} 바이트 이상만 입력 가능합니다.<br> - 영문, 숫자 : 1 바이트<br> - 한글, 특수문자 : 3 바이트",
-					rangebyte_ : "{0} 바이트 에서 {1} 바이트 까지만 입력 가능합니다.<br> - 영문, 숫자 한글자 : 1 바이트<br> - 한글, 특수문자 : 3 바이트",
-					maxvalue_ : "{0} 이하의 값만 입력 가능합니다.",
-					minvalue_ : "{0} 이상의 값만 입력 가능합니다.",
-					rangevalue_ : "{0} 에서 {1} 사이의 값만 입력 가능합니다.",
-					regexp_ : "{1}"
+					accept : "\"{0}\" 값만 입력 할 수 있습니다.",
+					match : "\"{0}\" 이(가) 포함된 값만 입력 할 수 있습니다.",
+					acceptFileExt : "\"{0}\" 이(가) 포함된 확장자만 입력 할 수 있습니다.",
+					notAccept : "\"{0}\" 값은 입력 할 수 없습니다.",
+					notMatch : "\"{0}\" 이(가) 포함된 값은 입력 할 수 없습니다.",
+					notAcceptFileExt : "\"{0}\" 이(가) 포함된 확장자는 입력 할 수없습니다.",
+					equalTo : "\"{1}\" 의 값과 같아야 합니다.",
+					maxlength : "{0} 글자 이하만 입력 가능합니다.",
+					minlength : "{0} 글자 이상만 입력 가능합니다.",
+					rangelength : "{0} 글자 에서 {1} 글자 까지만 입력 가능합니다.",
+					maxbyte : "{0} 바이트 이하만 입력 가능합니다.<br> - 영문, 숫자 : 1 바이트<br> - 한글, 특수문자 : 3 바이트",
+					minbyte : "{0} 바이트 이상만 입력 가능합니다.<br> - 영문, 숫자 : 1 바이트<br> - 한글, 특수문자 : 3 바이트",
+					rangebyte : "{0} 바이트 에서 {1} 바이트 까지만 입력 가능합니다.<br> - 영문, 숫자 한글자 : 1 바이트<br> - 한글, 특수문자 : 3 바이트",
+					maxvalue : "{0} 이하의 값만 입력 가능합니다.",
+					minvalue : "{0} 이상의 값만 입력 가능합니다.",
+					rangevalue : "{0} 에서 {1} 사이의 값만 입력 가능합니다.",
+					regexp : "{1}"
 				},
 				"en_US" : {
 					global : "It Can't pass the field verification.",
@@ -248,13 +250,11 @@
 					dash_integer : "Can enter only number(integer) and dash(-).",
 					commas_integer : "Can enter only number(integer) and commas(,).",
 					number : "Can enter only number and (+-,.)",
-					decimal : "Can enter only (finite)decimal",
-					decimal_ : "Can enter up to {0} places of (finite)decimal.",
+					decimal : "Can enter up to {0} places of (finite)decimal.",
 					email : "Don't conform to the format of E-mail.",
 					url : "Don't conform to the format of URL.",
 					zipcode : "Don't conform to the format of zip code.",
 					phone : "There is no format of phone number.",
-					phone_ : "There is no format of phone number.",
 					ssn : "Don't fit the format of the resident registration number.",
 					frn : "Don't fit the format of foreign registration number.",
 					frn_ssn : "Don't fit the format of the resident registration number or foreign registration number.",
@@ -262,23 +262,23 @@
 					cpno : "Don't fit the format of corporation number.",
 					date : "Don't fit the format of date.",
 					time : "Don't fit the format of time.",
-					accept_ : "Can enter only \"{0}\" value.",
-					match_ : "Can enter only value ​​that contains \"{0}\".",
-					acceptFileExt_ : "Can enter only extension that includes \"{0}\".",
-					notAccept_ : "Can't enter \"{0}\" value.",
-					notMatch_ : "Can't enter only value ​​that contains \"{0}\".",
-					notAcceptFileExt_ : "Can't enter only extension that includes \"{0}\".",
-					equalTo_ : "Must be the same as \"{1}\" value.",
-					maxlength_ : "Can enter only below {0} letters.",
-					minlength_ : "Can enter only more than {0} letters.",
-					rangelength_ : "It can be entered from {0} to {1} letters.",
-					maxbyte_ : "Can enter only below {0} bytes.",
-					minbyte_ : "Can enter only more than {0} bytes.",
-					rangebyte_ : "It can be entered from {0} to {1} bytes.",
-					maxvalue_ : "Can enter only below {0} value.",
-					minvalue_ : "Can enter only more than {0} value.",
-					rangevalue_ : "Can be entered value from {0} to {1}.",
-					regexp_ : "{1}"
+					accept : "Can enter only \"{0}\" value.",
+					match : "Can enter only value ​​that contains \"{0}\".",
+					acceptFileExt : "Can enter only extension that includes \"{0}\".",
+					notAccept : "Can't enter \"{0}\" value.",
+					notMatch : "Can't enter only value ​​that contains \"{0}\".",
+					notAcceptFileExt : "Can't enter only extension that includes \"{0}\".",
+					equalTo : "Must be the same as \"{1}\" value.",
+					maxlength : "Can enter only below {0} letters.",
+					minlength : "Can enter only more than {0} letters.",
+					rangelength : "It can be entered from {0} to {1} letters.",
+					maxbyte : "Can enter only below {0} bytes.",
+					minbyte : "Can enter only more than {0} bytes.",
+					rangebyte : "It can be entered from {0} to {1} bytes.",
+					maxvalue : "Can enter only below {0} value.",
+					minvalue : "Can enter only more than {0} value.",
+					rangevalue : "Can be entered value from {0} to {1}.",
+					regexp : "{1}"
 				}
 			}
 		}
@@ -340,13 +340,14 @@
 				}
 			}
 		},
+		"button" : {
+			"customStyle" : false
+		},
 		"popup" : {
 			/**
-			 * 버튼 상태 변경에 따른 fade 효과 적용 유무
+			 * 버튼 표시 유무
 			 */
-			"button" : {
-				"effect" : true
-			}
+			"button" : true
 		},
 		"tab" : {
 			/**
