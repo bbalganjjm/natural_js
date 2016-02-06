@@ -243,7 +243,7 @@ table.grid__ thead, table.grid__ tfoot {
 }
 
 table.grid__ th, table.grid__ td {
-	border: 1px solid #cccccc;
+	border: 1px solid #77cc77;
 }
 
 table.grid__ tbody td input[type='text'], table.grid__ tbody td input[type='password'], table.grid__ tbody td select, table.grid__ tbody td textarea {
@@ -317,7 +317,7 @@ div.tab__>div {
 
 /* DatePicker */
 div.datepicker_contents__ {
-	border: 1px solid #777777; box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15); border-radius: 3px; background-image: -ms-linear-gradient(top, #c9c9c9 0%, #999999 100%); background-image: -moz-linear-gradient(top, #c9c9c9 0%, #999999 100%); background-image: -o-linear-gradient(top, #c9c9c9 0%, #999999 100%); background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #c9c9c9), color-stop(1, #999999)); background-image: -webkit-linear-gradient(top, #c9c9c9 0%, #999999 100%); background-image: linear-gradient(to bottom, #c9c9c9 0%, #999999 100%); background-color: #999999; padding: 3px; font-size: 12px; width: 316px; color: #004A00; z-index: 1;
+	border: 1px solid #777777; box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15); border-radius: 3px; background-image: -ms-linear-gradient(top, #c9c9c9 0%, #999999 100%); background-image: -moz-linear-gradient(top, #c9c9c9 0%, #999999 100%); background-image: -o-linear-gradient(top, #c9c9c9 0%, #999999 100%); background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #c9c9c9), color-stop(1, #999999)); background-image: -webkit-linear-gradient(top, #c9c9c9 0%, #999999 100%); background-image: linear-gradient(to bottom, #77ee77 0%, #77ee88 100%); background-color: #77ee77; padding: 3px; font-size: 12px; width: 316px; color: #004A00; z-index: 1;
 }
 
 div.datepicker_monthonly__ {
@@ -325,7 +325,7 @@ div.datepicker_monthonly__ {
 }
 
 div.datepicker_contents__ div.datepicker_year_item__, div.datepicker_contents__ div.datepicker_year_paging__ {
-	border: 1px solid #efefef; cursor: pointer; background-color: #feeeee;
+	border: 1px solid #efefef; cursor: pointer; background-color: #ccffcc;
 }
 
 div.datepicker_contents__ div.datepicker_curr_year__ {
@@ -333,19 +333,19 @@ div.datepicker_contents__ div.datepicker_curr_year__ {
 }
 
 div.datepicker_contents__ div.datepicker_year_selected__ {
-	background-color: #777777; color: #ffffff;
+	background-color: #008800; color: #ffffff;
 }
 
 div.datepicker_contents__ div.datepicker_month_item__ {
-	border: 1px solid #efefef; cursor: pointer; background-color: #feeeee;
+	border: 1px solid #efefef; cursor: pointer; background-color: #ccffcc;
 }
 
 div.datepicker_contents__ div.datepicker_year_title__, div.datepicker_contents__ div.datepicker_month_title__, div.datepicker_contents__ div.datepicker_day__ {
-	border: 1px solid #efefef; background-color: #999999; color: #ffffff; font-weight: bold;
+	border: 1px solid #efefef; background-color: #006600; color: #ffffff; font-weight: bold;
 }
 
 div.datepicker_contents__ div.datepicker_prev_day_item__, div.datepicker_contents__ div.datepicker_next_day_item__ {
-	border: 1px solid #efefef; cursor: pointer; background-color: #efefef; color: #999999;
+	border: 1px solid #efefef; cursor: pointer; background-color: #ddffdd;
 }
 
 div.datepicker_contents__ div.datepicker_day_item__ {
@@ -353,15 +353,15 @@ div.datepicker_contents__ div.datepicker_day_item__ {
 }
 
 div.datepicker_contents__ div.datepicker_month_selected__ {
-	background-color: #787878; color: #ffffff;
+	background-color: #008800; color: #ffffff;
 }
 
 div.datepicker_contents__ div.datepicker_day_selected__ {
-	background-color: #888888; color: #ffffff;
+	background-color: #008800; color: #ffffff;
 }
 
 div.datepicker_contents__ div.datepicker_year_item__:hover, div.datepicker_contents__ div.datepicker_month_item__:hover, div.datepicker_contents__ div.datepicker_day_item__:hover {
-	background-color: #cccccc;
+	background-color: #55dd55;
 }
 
 /* Tree */
