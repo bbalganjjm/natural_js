@@ -36,6 +36,7 @@ Features(특징)
  * Controller, Communicator
  * Formatter, Validator
  * Grid, Form, Select
+ * Pagination, Tree
  * Alert, Popup, Tab, Button, Datepicker
 - Data of the each UI-Components are synchronized on real time basis and that is interacted each other.
 
@@ -47,6 +48,7 @@ Features(특징)
  * Controller, Communicator
  * Formatter, Validator
  * Grid, Form, Select
+ * Pagination, Tree
  * Alert, Popup, Tab, Button, Datepicker
 - 각각의 UI 컴포넌트들은 실시간으로 데이터가 동기화되고 상호작용을 합니다.
 
