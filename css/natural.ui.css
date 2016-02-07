@@ -17,7 +17,7 @@
 }
 
 .alert__.block_overlay_msg__ .msg_title_box__ .msg_title_close__ {
-	display: inline-block; float: right; height: 17px; width: 17px; margin-top: 14px; margin-right: 14px; background: url('../../../images/btn_close.png') no-repeat right 0; cursor: pointer;
+	display: inline-block; float: right; height: 17px; width: 17px; margin-top: 9px; margin-right: 9px; background: url('../images/alert/btn_close.png') no-repeat right 0; cursor: pointer;
 }
 
 .alert__.block_overlay_msg__ .msg_title_box__ .msg_title_close__:hover {
