@@ -2651,8 +2651,7 @@
 		            	"position": "absolute",
 		            	"width": resizeBarWidth + "px",
 		            	"cursor": "e-resize",
-		            	"left": ((cellEle.position().left + cellEle.width()) + resizeBarRightMargin) + "px",
-		            	"background-color" : "#000000"
+		            	"left": ((cellEle.position().left + cellEle.width()) + resizeBarRightMargin) + "px"
 		            });
 
 		            resizeBar.bind("mousedown.grid.resize", function(e) {
@@ -2672,8 +2671,12 @@
 		            		// to block sort event
 		            		currCellEle.data("sortLock", true);
 
-		            		defWidth = currCellEle.innerWidth() - (paddingCrctn + 1);
-		            		nextDefWidth = currNextCellEle.innerWidth() - (paddingCrctn + 1);
+		            		defWidth = currCellEle.innerWidth() - paddingCrctn;
+		            		nextDefWidth = currNextCellEle.innerWidth() - paddingCrctn;
+		            		if(N.browser.is("chrome")) {
+		            			defWidth += 1;
+		            			nextDefWidth += 1;
+		            		}
 
 		            		initHeight = currCellEle.innerHeight() + 1;
 
