@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.13.20
+ * Natural-UI v0.8.13.21
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "v0.8.13.20";
+	N.version["Natural-UI"] = "v0.8.13.21";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -98,10 +98,10 @@
 
 			if (!this.options.isInput) {
 				Alert.wrapEle.call(this);
-				
+
 				// set style class to msgContents element
 				this.options.msgContents.addClass("alert__");
-				
+
 				// set style class to msgContext element
 				this.options.msgContext.addClass("alert_overlay__");
 
@@ -109,7 +109,7 @@
 				this.options.msgContents.instance("alert", this);
 			} else {
 				Alert.wrapInputEle.call(this);
-				
+
 				// set style class to msgContext element
 				this.options.msgContext.addClass("alert__ alert_tooltip__");
 			}
@@ -166,7 +166,7 @@
 				if(opts.title !== undefined) {
 					titleBox = '<div class="msg_title_box__"><span class="msg_title__">' + opts.title + '</span><span class="msg_title_close__"></span></div>';
 				}
-				
+
 				// set button box
 				var buttonBox = '';
 				if(opts.button) {
@@ -189,7 +189,7 @@
 				opts.msgContents.find(".msg_title_box__ .msg_title_close__").click(function() {
 					self[opts.closeMode]();
 				});
-				
+
 				// set message
 				opts.msgContents.find(".msg_box__").html(opts.msg);
 
@@ -232,7 +232,7 @@
 				} else {
 					opts.msgContents.find(".cancel__").remove();
 				}
-				
+
 				if(opts.draggable) {
 					var pressed;
 					var startX;
@@ -242,14 +242,14 @@
 							pressed = true;
 							startX = e.pageX - opts.msgContents.offset().left;
 							startY = e.pageY - opts.msgContents.offset().top;
-							
+
 							$(this).css("cursor", "pointer");
 							opts.msgContents.fadeTo(100, "0.4");
-							
+
 							$(window.document).bind("dragstart.alert, selectstart.alert", function() {
 			                    return false;
 			                });
-							
+
 							$(window.document).bind("mousemove.alert", function(e) {
 								if(pressed) {
 									opts.msgContents.offset({
@@ -258,14 +258,14 @@
 									});
 								}
 							});
-							
+
 							var self = this;
 							$(window.document).bind("mouseup.alert", function(e) {
 								pressed = false;
-								
+
 								$(self).css("cursor", "");
 								opts.msgContents.fadeTo(100, "1.0");
-								
+
 								$(window.document).unbind("dragstart.alert").unbind("selectstart.alert").unbind("mousemove.alert").unbind("mouseup.alert");
 							});
 						}
@@ -305,30 +305,30 @@
 				if(opts.context.instance("alert") !== undefined) {
 					opts.context.instance("alert").remove();
 				}
-				
+
 				if (opts.msg.length > 0) {
 					opts.msgContext = opts.context.next(".msg__");
 					if (opts.msgContext.length === 0) {
 						var limitWidth = opts.context.offset().left + opts.context.outerWidth() + 150;
-						
+
 						if(limitWidth > $(window).width()) {
-							opts.msgContext = opts.context.before('<span class="msg__ alert_before_show__" style="display: none;"><ul class="msg_line_box__"></ul></span>').prev(".msg__");	
+							opts.msgContext = opts.context.before('<span class="msg__ alert_before_show__" style="display: none;"><ul class="msg_line_box__"></ul></span>').prev(".msg__");
 						} else {
 							opts.msgContext = opts.context.after('<span class="msg__ alert_after_show__" style="display: none;"><ul class="msg_line_box__"></ul></span>').next(".msg__");
 						}
-						
+
 						opts.msgContext.append('<a href="#" class="msg_close__"></a>');
 					}
 					if(opts.alwaysOnTop) {
 						opts.msgContext.css("z-index", N.element.maxZindex(opts.container.find("div, span, ul, p")) + 1);
 					}
-	
+
 					var self = this;
 					opts.msgContext.find(".msg_close__").click(function(e) {
 						e.preventDefault();
 						self.remove();
 					});
-	
+
 					var ul_ = opts.msgContext.find(".msg_line_box__");
 					if (N.isArray(opts.msg)) {
 						opts.msgContext.find(".msg_line_box__").empty();
@@ -349,7 +349,7 @@
 				}
 			}
 		});
-		
+
 		$.extend(Alert.prototype, {
 			"context" : function(sel) {
 				return sel !== undefined ? this.options.context.find(sel) : this.options.context;
@@ -371,8 +371,8 @@
 							}
 						}, 500);
 					}
-					
-					// for when the window size is changed. 
+
+					// for when the window size is changed.
 					$(window).bind("resize.alert", function() {
 						Alert.resetOffSetEle(opts);
 					});
@@ -459,7 +459,7 @@
 
 			// set style class to context element
 			this.options.context.addClass("button__");
-			
+
 			Button.wrapEle.call(this);
 
 			// set this instance to context element
@@ -501,7 +501,7 @@
 	                			opts.context.css("line-height", "48px");
 	                		}
 	                	}
-	                	
+
 	                	if(N.browser.msieVersion() === 9) {
 	                		if(opts.context.is("a")) {
 	                			opts.context.css("line-height", "");
@@ -585,7 +585,7 @@
 	            }
 			}
 		});
-		
+
 		$.extend(Button.prototype, {
 			context : function(sel) {
 				return sel !== undefined ? this.options.context.find(sel) : this.options.context;
@@ -969,7 +969,7 @@
 				}
 			}
 		});
-		
+
 		$.extend(DatePicker.prototype, {
 			show : function() {
 				var opts = this.options;
@@ -1124,14 +1124,14 @@
 					Popup.loadEle.call(this, function(context) {
 						// this callback function is for async page load
 						this.options.context = context;
-						
+
 						// set this instance to context element
 						this.options.context.instance("popup", this);
 					});
 				}
 			} else {
 				Popup.wrapEle.call(this);
-				
+
 				// set this instance to context element
 				this.options.context.instance("popup", this);
 			}
@@ -1228,7 +1228,7 @@
 				}
 			}
 		});
-		
+
 		$.extend(Popup.prototype, {
 			context : function(sel) {
 				return sel !== undefined ? this.options.context.find(sel) : this.options.context;
@@ -1299,7 +1299,7 @@
 			}
 			this.options.links = this.options.context.find("li");
 			this.options.contents = this.options.context.find("> div");
-			
+
 			var self = this;
 			var opt;
 			this.options.links.each(function(i) {
@@ -1452,7 +1452,7 @@
 	        	});
 			}
 		});
-		
+
 		$.extend(Tab.prototype, {
 			open : function(idx) {
 				if(idx !== undefined) {
@@ -1494,7 +1494,7 @@
 
 			// set style class to context element
 			this.options.context.addClass("select__");
-			
+
 			// set this instance to context element
 			this.options.context.instance("select", this);
 
@@ -1517,7 +1517,7 @@
 	            }
 			}
 		});
-		
+
 		$.extend(Select.prototype, {
 			data : function(selFlag) { // TODO key name : argument2, argument3... argumentN
 				var opts = this.options;
@@ -1538,12 +1538,12 @@
 			},
 		    bind : function(data) {
 		    	var opts = this.options;
-		    	
+
 		    	//to rebind new data
 				if(data !== undefined) {
 					opts.data = N.type(data) === "array" ? N(data) : data;
 				}
-				
+
 		    	if(opts.type === 1 || opts.type === 2) {
 		    		var defaultSelectEle = opts.template.find(".select_default__").clone(true);
 	    			opts.context.addClass("select_template__").empty();
@@ -1657,7 +1657,7 @@
 
 			return this;
 		};
-		
+
 		$.extend(Form.prototype, {
 			data : function(selFlag) { // TODO key name : argument2, argument3... argumentN
 				var opts = this.options;
@@ -1692,7 +1692,7 @@
 					if(opts.onBeforeBind !== null && this.options.extObj === null) {
 						opts.onBeforeBind.call(opts.context, opts.context, vals);
 					}
-					
+
 					// add row data changed flag
 					if (vals.rowStatus === "insert" || vals.rowStatus === "update") {
 						opts.context.addClass("row_data_changed__");
@@ -1931,7 +1931,7 @@
 							}
 						}
 					}
-					
+
 					if(opts.onBindAfter !== null && this.options.extObj === null) {
 						opts.onBindAfter.call(opts.context, opts.context, vals);
 					}
@@ -2309,7 +2309,7 @@
 				rowHandler : null,
 				onSelect : null,
 				onBind : null,
-				misc : { 
+				misc : {
 					withoutTbodyLength : 0 // garbage rows count in table
 				}
 			};
@@ -2345,7 +2345,7 @@
 
 			// set garbage rows count in table
 			this.options.misc.withoutTbodyLength = this.options.context.children().length - this.options.context.children("tbody").length;
-			
+
 			// set tbody template
 			this.tbodyTemp = this.options.context.find("> tbody").clone(true, true);
 
@@ -2399,7 +2399,7 @@
 			if(this.options.resizable) {
 				Grid.removeColgroup.call(this);
 			}
-			
+
 			// fixed header
 			if(this.options.height > 0) {
 				Grid.fixHeader.call(this);
@@ -2411,12 +2411,12 @@
 			if(this.options.height > 0) {
 				this.tbodyContainer = this.options.context.closest("div.tbody_wrap__ > .grid__");
         	}
-			
+
 			// set function for check all checkbox in grid
 			if(this.options.checkAll !== null && this.options.checkAllTarget !== null) {
 				Grid.checkAll.call(this);
 			}
-			
+
 			// sortable, v(ertical)Resizable
 			if(this.options.sortable) {
 				Grid.sort.call(this);
@@ -2435,7 +2435,7 @@
 
 			return this;
 		};
-		
+
 		$.extend(Grid, {
 			removeColgroup : function() {
 				var opts = this.options;
@@ -2573,12 +2573,12 @@
 	        				tfootHeight = tfootWrap.height();
 	        			}
 	        			tbodyOffset = tbodyWrap.offset();
-	        			
+
 	        			$(document).bind("dragstart.grid.vResize, selectstart.grid.vResize", function() {
 	        				return false;
 	        			});
 	        			pressed = true;
-	        			
+
 	        			$(window.document).bind("mousemove.grid.vResize", function(e) {
 	        				if(pressed) {
 	        					currHeight = (e.pageY - tbodyOffset.top - tfootHeight) + "px";
@@ -2588,7 +2588,7 @@
 	        					});
 	        				}
 	        			});
-	        			
+
 	        			$(window.document).bind("mouseup.grid.vResize", function() {
 	        				$(document).unbind("dragstart.grid.vResize").unbind("selectstart.grid.vResize").unbind("mousemove.grid.vResize").unbind("mouseup.grid.vResize");
 	        				pressed = false;
@@ -2635,12 +2635,15 @@
 		            } else if(N.browser.is("firefox")) {
 		            	resizeBarRightMargin = resizeBarWidth / 2 * -1;
 		            }
+		            var paddingCrctn = parseInt(cellEle.css("padding-left")) + parseInt(cellEle.css("padding-right"));
+		            resizeBarRightMargin += paddingCrctn;
 
 		            if(N.browser.is("ie")) {
 		            	innerHeight = String(cellEle.innerHeight() - 1);
 		            } else {
 		            	innerHeight = String(cellEle.innerHeight() + 1);
 		            }
+
 		            resizeBar.css({
 		            	"padding": "0px",
 		            	"margin": "-" + cellEle.css("padding-top") + " -" + (resizeBarWidth/2 + parseInt(cellEle.css("padding-right"))) + "px -" + cellEle.css("padding-bottom") + " 0",
@@ -2648,7 +2651,8 @@
 		            	"position": "absolute",
 		            	"width": resizeBarWidth + "px",
 		            	"cursor": "e-resize",
-		            	"left": ((cellEle.position().left + cellEle.width()) + resizeBarRightMargin) + "px"
+		            	"left": ((cellEle.position().left + cellEle.width()) + resizeBarRightMargin) + "px",
+		            	"background-color" : "#000000"
 		            });
 
 		            resizeBar.bind("mousedown.grid.resize", function(e) {
@@ -2657,27 +2661,27 @@
 		            		currResizeBarEle = $(e.target);
 		            		currCellEle = currResizeBarEle.parent("th");
 		            		currNextCellEle = currResizeBarEle.parent("th").next();
-		            		
+
 		            		if(opts.height > 0) {
 		            			targetCellEle = opts.context.find("thead th:eq(" + theadCells.index(currCellEle) + ")");
 		            			targetNextCellEle = opts.context.find("thead th:eq(" + (theadCells.index(currCellEle) + 1) + ")");
 		            			currCellEleTable = currCellEle.parents("table.grid__");
 		            			targetCellEleWrap = targetCellEle.parents("div.tbody_wrap__");
 		            		}
-		            		
+
 		            		// to block sort event
 		            		currCellEle.data("sortLock", true);
-		            		
-		            		defWidth = currCellEle.innerWidth();
-		            		nextDefWidth = currNextCellEle.innerWidth();
-		            		
+
+		            		defWidth = currCellEle.innerWidth() - (paddingCrctn + 1);
+		            		nextDefWidth = currNextCellEle.innerWidth() - (paddingCrctn + 1);
+
 		            		initHeight = currCellEle.innerHeight() + 1;
-		            		
+
 		            		$(document).bind("dragstart.grid.resize, selectstart.grid.resize", function() {
 		            			return false;
 		            		});
 		            		pressed = true;
-		            		
+
 		            		var movedPx;
 		            		$(window.document).bind("mousemove.grid.resize", function(e) {
 		            			if(pressed) {
@@ -2694,7 +2698,7 @@
 		            				}
 		            			}
 		            		});
-		            		
+
 		            		$(window.document).bind("mouseup.grid.resize", function(se) {
 		            			theadCells.each(function() {
 		            				var cellEle = $(this);
@@ -2741,7 +2745,7 @@
         		var opts = this.options;
     	        var thead = this.thead;
     	        var tbodyContainer = this.tbodyContainer;
-    	        
+
 				var checkAll = thead.find(this.options.checkAll);
 				checkAll.bind("click.grid.checkAll", function() {
 					if(!$(this).prop("checked")) {
@@ -2811,10 +2815,10 @@
 					if(this.options.checkAll !== null && this.options.checkAllTarget !== null) {
 						var opts = this.options;
 						var retData = [];
-						
+
 						// clone arguments
 						var args = Array.prototype.slice.call(arguments, 0);
-						
+
 						this.tbodyContainer.find("tbody td " + this.options.checkAllTarget + ":checked").each(function() {
 							if(arguments.length > 1) {
 								args[0] = opts.data[N(this).closest("tbody").index() - opts.misc.withoutTbodyLength];
@@ -2830,7 +2834,7 @@
 				} else {
 					if(arguments.length > 1) {
 						var args = Array.prototype.slice.call(arguments, 0);
-						
+
 						return this.options.data.datafilter(function(data) {
 							return data.rowStatus === rowStatus;
 						}).map(function() {
@@ -2979,7 +2983,7 @@
 				} else {
 					form.bind(form.options.extRow, data);
 				}
-				
+
 				// unselect rows
 				opts.context.find("> tbody").removeClass("grid_selected__");
 
@@ -3074,7 +3078,7 @@
 				return this;
 			}
 		});
-		
+
 		// Tree
 		var Tree = N.tree = function(data, opts) {
 			this.options = {
@@ -3094,7 +3098,7 @@
 			} catch (e) {
 				N.error("[N.tree]" + e, e);
 			}
-			
+
 			if (N.isPlainObject(opts)) {
 				//convert data to wrapped set
 				opts.data = N.type(opts.data) === "array" ? N(opts.data) : opts.data;
@@ -3107,7 +3111,7 @@
 			} else {
 				this.options.context = N(opts);
 			}
-			
+
 			// set style class to context element
 			this.options.context.addClass("tree__");
 
@@ -3142,7 +3146,7 @@
 					}
 				} else if(rowStatus === "checkedInLastNode") {
 					var data = this.options.data;
-					
+
 					if(arguments.length > 1) {
 						var args = Array.prototype.slice.call(arguments, 0);
 						return this.options.context.find(".tree_last_node__ :checked").map(function() {
@@ -3166,7 +3170,7 @@
 				if(data !== undefined) {
 					opts.data = N.type(data) === "array" ? N(data) : data;
 				}
-				
+
 				var rootNode = N('<ul class="tree_level1_folder__"></ul>').appendTo(opts.context.empty());
 				N(opts.data).each(function(i, rowData) {
 					if(rowData[opts.level] === 1 || rootNode.find("ul#" + rowData[opts.parent]).length === 0) {
@@ -3175,7 +3179,7 @@
 						N('<li data-index="' + i + '" id="' + rowData[opts.val] + '" class="tree_level' + N.string.trim(rowData[opts.level]) + '_node__ tree_close__"><span class="tree_icon__" href="#"></span><span class="tree_check__">' + (opts.checkbox ? '<input type="checkbox" />' : '') + '</span><a class="tree_key__" href="#"><span>' + rowData[opts.key] + '</span></a><ul id="' + rowData[opts.val] + '"class="tree_level' + (opts.level !== null ? String(Number(rowData[opts.level]) + 1) : '') + '_folder__"></ul></li>').appendTo(rootNode.find("ul#" + rowData[opts.parent]));
 					}
 				});
-				
+
 				// add class to elements with no have chiidren
 				rootNode.find("ul:empty").parent().addClass("tree_last_node__");
 
@@ -3193,7 +3197,7 @@
 						N(this).parent().siblings("ul").find(":checked").prop("checked", false);
 						checkFlag = false;
 					}
-					
+
 					var checkboxLength = siblingNodesEle.find(":checkbox").length;
 					var checkedLength = siblingNodesEle.find(":checked").length;
 					var parentNodeCheckboxEle = parentNodeEle.find("> span.tree_check__ > :checkbox");
@@ -3219,7 +3223,7 @@
 							parentNodeCheckboxEle.trigger("click.tree").trigger("click.tree");
 						}
 					}
-					
+
 					// run onCheck event callback
 					// FIXME "e.clientX > 0 && e.clientY > 0" is temporary code
 					if(opts.onCheck !== null && e.clientX > 0 && e.clientY > 0) {
@@ -3250,7 +3254,7 @@
 					rootNode.find("li > a.tree_key__.tree_active__").removeClass("tree_active__");
 					N(this).addClass("tree_active__");
 				});
-				
+
 				// icon click event bind
 				rootNode.find(".tree_icon__, li:not('.tree_last_node__') .tree_key__").bind("click.tree", function(e) {
 					e.preventDefault();
@@ -3264,7 +3268,7 @@
 					}
 				});
 				this.closeAll(true);
-				
+
 				return this;
 			},
 			val : function(row, key, val) {
@@ -3298,17 +3302,17 @@
 		        pageNo : 1,
 		        onChange : null
 			};
-			
+
 			try {
 				this.options = $.extend({}, this.options, N.context.attr("ui").pagination);
 			} catch (e) {
 				N.error("[N.pagination]" + e, e);
 			}
-			
+
 			if(this.options.data.length > 0) {
 				this.options.totalCount = this.options.data.length;
 			}
-			
+
 			if (N.isPlainObject(opts)) {
 				//convert data to wrapped set
 				opts.data = N.type(opts.data) === "array" ? N(opts.data) : opts.data;
@@ -3324,7 +3328,7 @@
 
 			// Initialize paging panel
 			this.linkEles = Pagination.wrapEle.call(this);
-			
+
 			// set style class to context element
 			this.options.context.addClass("pagination__");
 
@@ -3337,17 +3341,17 @@
 		$.extend(Pagination, {
 			wrapEle : function() {
 				var opts = this.options;
-				
+
 				// pagination link element set
 				var linkEles = {};
-				
+
 				var lefter = opts.context.find("ul:eq(0)").addClass("pagination_lefter__");
-				
+
 				linkEles.body = opts.context.find("ul:eq(1)").addClass("pagination_body__");
 				linkEles.page = linkEles.body.find("li").addClass("pagination_page__");
-				
+
 				var righter = opts.context.find("ul:eq(2)").addClass("pagination_righter__");
-				
+
 				if(lefter.find("li").length === 2) {
 					linkEles.first = lefter.find("li:eq(0)").addClass("pagination_first__ pagination_disable__");
 					linkEles.prev = lefter.find("li:eq(1)").addClass("pagination_prev__ pagination_disable__");
@@ -3360,7 +3364,7 @@
 				} else if(righter.length === 1) {
 					linkEles.next = righter.find("li:eq(0)").addClass("pagination_next__ pagination_disable__");
 				}
-				
+
 				return linkEles;
 			},
 			changePageSet : function(linkEles, opts, isRemake) {
@@ -3368,10 +3372,10 @@
                 var pageSetCount = Math.ceil(pageCount / opts.countPerPageSet);
                 var currSelPageSet = Math.ceil(opts.pageNo / opts.countPerPageSet);
                 if (currSelPageSet > pageSetCount) { currSelPageSet = pageSetCount; };
-                
+
                 var startPage = (currSelPageSet - 1) * opts.countPerPageSet + 1;
                 var endPage = startPage + opts.countPerPageSet - 1;
-                
+
                 if (startPage < 1) {
                 	startPage = 1;
                 }
@@ -3381,7 +3385,7 @@
                 if (endPage < 1) {
                 	endPage = 1;
                 }
-                
+
                 if(isRemake === undefined || isRemake === false) {
                 	var pageClone;
                     linkEles.body.empty();
@@ -3392,7 +3396,7 @@
                     	linkEles.body.append(pageClone);
                     }
                 }
-                
+
                 if(currSelPageSet > 0 && startPage > currSelPageSet) {
                 	$(linkEles.prev).removeClass("pagination_disable__");
                 } else {
@@ -3405,7 +3409,7 @@
                 		$(linkEles.first).addClass("pagination_disable__");
                 	}
                 }
-                
+
                 if(pageSetCount > currSelPageSet) {
                 	$(linkEles.next).removeClass("pagination_disable__");
                 } else {
@@ -3418,13 +3422,13 @@
                 		$(linkEles.last).addClass("pagination_disable__");
                 	}
                 }
-                
+
                 var startRowIndex = (opts.pageNo - 1) * opts.countPerPage;
                 var endRowIndex = (startRowIndex + opts.countPerPage) - 1;
                 if(endRowIndex > opts.totalCount - 1) {
                 	endRowIndex = opts.totalCount - 1;
                 }
-                
+
                 return {
                 	"pageNo" : opts.pageNo,
                 	"pageCount" : pageCount,
@@ -3439,7 +3443,7 @@
                 };
 			}
 		});
-		
+
 		$.extend(Pagination.prototype, {
 			data : function(rowStatus) {
 				if(rowStatus === undefined) {
@@ -3470,10 +3474,10 @@
 						}
 					}
 				}
-				
+
                 var linkEles = this.linkEles;
                 var currPageNavInfo = Pagination.changePageSet(linkEles, opts);
-                
+
                 // first button event
                 if(linkEles.first !== undefined) {
                 	linkEles.first.unbind("click.pagination");
@@ -3497,15 +3501,15 @@
                     	linkEles.body.find("li a:first").click();
                     }
                 });
-                
+
                 // page number button event
                 linkEles.body.off("click.pagination");
                 linkEles.body.on("click.pagination", "li > a", function(e) {
                 	e.preventDefault();
-                    
+
                 	opts.pageNo = Number($(this).parent().data("pageno"));
                 	currPageNavInfo = Pagination.changePageSet(linkEles, opts, true);
-                	
+
                     if(opts.onChange !== null) {
                     	var selData = [];
                     	if(opts.data.length > 0 && opts.data.length <= opts.totalCount) {
@@ -3513,15 +3517,15 @@
                         		if(opts.data[i] !== undefined) {
                         			selData.push(opts.data[i]);
                         		}
-                        	}                    		
+                        	}
                     	}
                     	opts.onChange.call(this, opts.pageNo, this, selData, currPageNavInfo);
                     }
-                    
+
                     linkEles.body.find("li.pagination_active__").removeClass("pagination_active__");
                     $(this).parent().addClass("pagination_active__");
                 }).find("li a:eq(" + String(opts.pageNo - currPageNavInfo.startPage) +  ")").click();
-                
+
                 // next button event
                 linkEles.next.unbind("click.pagination");
                 linkEles.next.bind("click.pagination", function(e) {
@@ -3532,7 +3536,7 @@
                     	linkEles.body.find("li a:first").click();
                     }
                 });
-                
+
                 // last button event
                 if(linkEles.last !== undefined) {
                 	linkEles.last.unbind("click.pagination");
@@ -3545,7 +3549,7 @@
                 		}
                 	});
                 }
-                
+
 				return this;
 			},
 			pageNo : function(pageNo) {
@@ -3578,7 +3582,7 @@
 				return this;
 			}
 		});
-		
+
 	})(N);
 
 })(window, jQuery);
