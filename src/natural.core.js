@@ -1,5 +1,5 @@
 /*!
- * Natural-CORE v0.8.5.2
+ * Natural-CORE v0.8.5.4
  * bbalganjjm@gmail.com
  *
  * Includes formatdate.js & Mask JavaScript API
@@ -214,7 +214,7 @@
 		// N local variables
 		$.extend(N, {
 			version : {
-				"Natural-CORE" : "0.8.5.2"
+				"Natural-CORE" : "0.8.5.4"
 			},
 			/**
 			 * Set and get locale value
@@ -274,6 +274,7 @@
 				full : function() {
 					$(window).unbind("resize.datepicker");
 					$(window).unbind("resize.alert");
+					$(window.document).unbind("dragstart.alert").unbind("selectstart.alert").unbind("mousemove.alert").unbind("mouseup.alert");
 					$(window.document).unbind("mousedown.datepicker");
 					$(window.document).unbind("keyup.datepicker");
 					$(window.document).unbind("keyup.alert");
@@ -787,7 +788,7 @@
 					var msie = ua.indexOf("MSIE ");
 					// for IE11
 					if(msie < 0) {
-						msie = ua.indexOf(".NET ");
+						msie = ua.indexOf(".NET");
 					}
 					var trident = ua.match(/Trident\/(\d.\d)/i);
 					if (msie < 0) {
