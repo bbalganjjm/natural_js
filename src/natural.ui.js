@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.13.15
+ * Natural-UI v0.8.13.20
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "v0.8.13.15";
+	N.version["Natural-UI"] = "v0.8.13.20";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -73,7 +73,8 @@
 				"confirm" : false,
 				alwaysOnTop : false,
 				alwaysOnTopCalcTarget : "div, span, ul, p",
-				dynPos : true // dynamic positioning for massage context and message overlay
+				dynPos : true, // dynamic positioning for massage context and message overlay
+				draggable : false
 			};
 
 			try {
@@ -231,6 +232,45 @@
 				} else {
 					opts.msgContents.find(".cancel__").remove();
 				}
+				
+				if(opts.draggable) {
+					var pressed;
+					var startX;
+					var startY;
+					opts.msgContents.find(".msg_title_box__").bind("mousedown.alert", function(e) {
+						if(!$(e.target).is(".msg_title_close__") && (e.which || e.button) === 1) {
+							pressed = true;
+							startX = e.pageX - opts.msgContents.offset().left;
+							startY = e.pageY - opts.msgContents.offset().top;
+							
+							$(this).css("cursor", "pointer");
+							opts.msgContents.fadeTo(100, "0.4");
+							
+							$(window.document).bind("dragstart.alert, selectstart.alert", function() {
+			                    return false;
+			                });
+							
+							$(window.document).bind("mousemove.alert", function(e) {
+								if(pressed) {
+									opts.msgContents.offset({
+										left : e.pageX - startX,
+										top :  e.pageY - startY
+									});
+								}
+							});
+							
+							var self = this;
+							$(window.document).bind("mouseup.alert", function(e) {
+								pressed = false;
+								
+								$(self).css("cursor", "");
+								opts.msgContents.fadeTo(100, "1.0");
+								
+								$(window.document).unbind("dragstart.alert").unbind("selectstart.alert").unbind("mousemove.alert").unbind("mouseup.alert");
+							});
+						}
+					});
+				}
 			},
 			resetOffSetEle : function(opts) {
 				var position = opts.context.position();
@@ -269,7 +309,14 @@
 				if (opts.msg.length > 0) {
 					opts.msgContext = opts.context.next(".msg__");
 					if (opts.msgContext.length === 0) {
-						opts.msgContext = opts.context.after('<span class="msg__" style="display: none;"><ul class="msg_line_box__"></ul></span>').next(".msg__");
+						var limitWidth = opts.context.offset().left + opts.context.outerWidth() + 150;
+						
+						if(limitWidth > $(window).width()) {
+							opts.msgContext = opts.context.before('<span class="msg__ alert_before_show__" style="display: none;"><ul class="msg_line_box__"></ul></span>').prev(".msg__");	
+						} else {
+							opts.msgContext = opts.context.after('<span class="msg__ alert_after_show__" style="display: none;"><ul class="msg_line_box__"></ul></span>').next(".msg__");
+						}
+						
 						opts.msgContext.append('<a href="#" class="msg_close__"></a>');
 					}
 					if(opts.alwaysOnTop) {
@@ -664,7 +711,7 @@
 					yearsPanel.append(yearItemClone.text(String(i)));
 				}
 
-				var yearPaging = $('<div class="datepicker_year_paging__" align="center"><a href="#" class="datepicker_year_prev__" title="이전">◀</a> <a href="#" class="datepicker_year_next__" title="다음">▶</a></div>');
+				var yearPaging = $('<div class="datepicker_year_paging__" align="center"><a href="#" class="datepicker_year_prev__" title="이전">◀</a><a href="#" class="datepicker_year_next__" title="다음">▶</a></div>');
 				yearPaging.css({
 					"line-height": "25px"
 				});
@@ -1033,7 +1080,8 @@
 				onOpenData : null,
 				onClose : null,
 				onCloseData : null,
-				preload : false
+				preload : false,
+				draggable : false
 			};
 
 			try {
@@ -2347,6 +2395,11 @@
 			// set cell count in tbody
 			this.cellCnt = Grid.cellCnt(this.tbodyTemp);
 
+			//remove colgroup when the resizable option is true
+			if(this.options.resizable) {
+				Grid.removeColgroup.call(this);
+			}
+			
 			// fixed header
 			if(this.options.height > 0) {
 				Grid.fixHeader.call(this);
@@ -2384,6 +2437,16 @@
 		};
 		
 		$.extend(Grid, {
+			removeColgroup : function() {
+				var opts = this.options;
+				if(opts.context.find("colgroup").length > 0) {
+					var lastTr = opts.context.find("thead > tr:last");
+					opts.context.find("colgroup > col").each(function(i) {
+						lastTr.find("th:eq(" + String(i) + ")").css("width", this.style.width).removeAttr("scope");
+					}).parent().remove();
+					this.options.misc.withoutTbodyLength -= 1;
+				}
+			},
 			fixHeader : function() {
 				var opts = this.options;
 
@@ -2504,31 +2567,33 @@
 	        	gridWrap.css("margin-bottom", "0");
 
 	        	var currHeight, tbodyOffset, tfootHeight = 0;
-	        	vResizable.bind("mousedown.grid.vResize", function() {
-	        		if(tfootWrap !== undefined) {
-		        		tfootHeight = tfootWrap.height();
-		        	}
-		        	tbodyOffset = tbodyWrap.offset();
-
-	        		$(document).bind("dragstart.grid.vResize, selectstart.grid.vResize", function() {
-	                    return false;
-	                });
-	        		pressed = true;
-
-		        	$(window.document).bind("mousemove.grid.vResize", function(e) {
-		        		if(pressed) {
-		        			currHeight = (e.pageY - tbodyOffset.top - tfootHeight) + "px";
-		        			tbodyWrap.css({
-		        				"height" : currHeight,
-		        				"max-height" : currHeight
-		        			});
-		        		}
-			        });
-
-		        	$(window.document).bind("mouseup.grid.vResize", function() {
-		        		$(document).unbind("dragstart.grid.vResize").unbind("selectstart.grid.vResize").unbind("mousemove.grid.vResize").unbind("mouseup.grid.vResize");
-		        		pressed = false;
-		        	});
+	        	vResizable.bind("mousedown.grid.vResize", function(e) {
+	        		if((e.which || e.button) === 1) {
+	        			if(tfootWrap !== undefined) {
+	        				tfootHeight = tfootWrap.height();
+	        			}
+	        			tbodyOffset = tbodyWrap.offset();
+	        			
+	        			$(document).bind("dragstart.grid.vResize, selectstart.grid.vResize", function() {
+	        				return false;
+	        			});
+	        			pressed = true;
+	        			
+	        			$(window.document).bind("mousemove.grid.vResize", function(e) {
+	        				if(pressed) {
+	        					currHeight = (e.pageY - tbodyOffset.top - tfootHeight) + "px";
+	        					tbodyWrap.css({
+	        						"height" : currHeight,
+	        						"max-height" : currHeight
+	        					});
+	        				}
+	        			});
+	        			
+	        			$(window.document).bind("mouseup.grid.vResize", function() {
+	        				$(document).unbind("dragstart.grid.vResize").unbind("selectstart.grid.vResize").unbind("mousemove.grid.vResize").unbind("mouseup.grid.vResize");
+	        				pressed = false;
+	        			});
+	        		}
 	        	});
 
 	        	gridWrap.after(vResizable);
@@ -2564,15 +2629,15 @@
 					cellEle = $(this);
 		            resizeBar = cellEle.append('<span class="resize_bar__"></span>').find(".resize_bar__");
 		            var resizeBarWidth = 6;
-		            var resizeBarRightMargin = resizeBarWidth + (resizeBarWidth/2);
-		            if(N.browser.is("safari")) {
-		            	resizeBarRightMargin = 0;
+		            var resizeBarRightMargin = 0;
+		            if(N.browser.is("ie")) {
+		            	resizeBarRightMargin = (resizeBarWidth / 2 * -1) + 1;
 		            } else if(N.browser.is("firefox")) {
-		            	resizeBarRightMargin -= 1;
+		            	resizeBarRightMargin = resizeBarWidth / 2 * -1;
 		            }
 
-		            if(N.browser.is("ie") || N.browser.is("firefox")) {
-		            	innerHeight = String(cellEle.innerHeight());
+		            if(N.browser.is("ie")) {
+		            	innerHeight = String(cellEle.innerHeight() - 1);
 		            } else {
 		            	innerHeight = String(cellEle.innerHeight() + 1);
 		            }
@@ -2583,69 +2648,62 @@
 		            	"position": "absolute",
 		            	"width": resizeBarWidth + "px",
 		            	"cursor": "e-resize",
-		            	"left": ((cellEle.offset().left + cellEle.width()) + resizeBarRightMargin) + "px"
+		            	"left": ((cellEle.position().left + cellEle.width()) + resizeBarRightMargin) + "px"
 		            });
 
 		            resizeBar.bind("mousedown.grid.resize", function(e) {
-		            	startOffsetX = e.pageX;
-		            	currResizeBarEle = $(e.target);
-		            	currCellEle = currResizeBarEle.parent("th");
-		            	currNextCellEle = currResizeBarEle.parent("th").next();
-
-		            	if(opts.height > 0) {
-		            		targetCellEle = opts.context.find("thead th:eq(" + theadCells.index(currCellEle) + ")");
-		            		targetNextCellEle = opts.context.find("thead th:eq(" + (theadCells.index(currCellEle) + 1) + ")");
-		            		currCellEleTable = currCellEle.parents("table.grid__");
-		            		targetCellEleWrap = targetCellEle.parents("div.tbody_wrap__");
+		            	if((e.which || e.button) === 1) {
+		            		startOffsetX = e.pageX;
+		            		currResizeBarEle = $(e.target);
+		            		currCellEle = currResizeBarEle.parent("th");
+		            		currNextCellEle = currResizeBarEle.parent("th").next();
+		            		
+		            		if(opts.height > 0) {
+		            			targetCellEle = opts.context.find("thead th:eq(" + theadCells.index(currCellEle) + ")");
+		            			targetNextCellEle = opts.context.find("thead th:eq(" + (theadCells.index(currCellEle) + 1) + ")");
+		            			currCellEleTable = currCellEle.parents("table.grid__");
+		            			targetCellEleWrap = targetCellEle.parents("div.tbody_wrap__");
+		            		}
+		            		
+		            		// to block sort event
+		            		currCellEle.data("sortLock", true);
+		            		
+		            		defWidth = currCellEle.innerWidth();
+		            		nextDefWidth = currNextCellEle.innerWidth();
+		            		
+		            		initHeight = currCellEle.innerHeight() + 1;
+		            		
+		            		$(document).bind("dragstart.grid.resize, selectstart.grid.resize", function() {
+		            			return false;
+		            		});
+		            		pressed = true;
+		            		
+		            		var movedPx;
+		            		$(window.document).bind("mousemove.grid.resize", function(e) {
+		            			if(pressed) {
+		            				movedPx = e.pageX - startOffsetX;
+		            				currWidth = defWidth + movedPx;
+		            				nextCurrWidth = nextDefWidth - movedPx;
+		            				if(currWidth > 0 && nextCurrWidth > 0) {
+		            					currCellEle.css("width", currWidth + "px");
+		            					currNextCellEle.css("width", nextCurrWidth + "px");
+		            					if(targetCellEle !== undefined) {
+		            						targetCellEle.css("width", currWidth + "px");
+		            						targetNextCellEle.css("width", nextCurrWidth + "px");
+		            					}
+		            				}
+		            			}
+		            		});
+		            		
+		            		$(window.document).bind("mouseup.grid.resize", function(se) {
+		            			theadCells.each(function() {
+		            				var cellEle = $(this);
+		            				cellEle.find("> .resize_bar__").css("left", ((cellEle.position().left + cellEle.width()) + resizeBarRightMargin) + "px");
+		            			});
+		            			$(document).unbind("dragstart.grid.resize").unbind("selectstart.grid.resize").unbind("mousemove.grid.resize").unbind("mouseup.grid.resize");
+		            			pressed = false;
+		            		});
 		            	}
-
-		            	// to block sort event
-		            	currCellEle.data("sortLock", true);
-
-		            	defWidth = currCellEle.innerWidth();
-		            	nextDefWidth = currNextCellEle.innerWidth();
-
-		            	initHeight = currCellEle.innerHeight() + 1;
-
-		        		$(document).bind("dragstart.grid.resize, selectstart.grid.resize", function() {
-		                    return false;
-		                });
-		        		pressed = true;
-
-		        		var movedPx;
-		        		var correction = scrollbarWidth + 1;
-		        		if(N.browser.is("ie")) {
-		        			correction = scrollbarWidth + 3;
-	        			} else if(N.browser.is("safari")) {
-		        			correction = scrollbarWidth - 21;
-	        			} else if(N.browser.is("firefox")) {
-		        			correction = scrollbarWidth + 3;
-	        			}
-		        		$(window.document).bind("mousemove.grid.resize", function(e) {
-			        		if(pressed) {
-			        			movedPx = e.pageX - startOffsetX;
-			        			currWidth = defWidth + movedPx;
-			        			nextCurrWidth = nextDefWidth - movedPx - correction;
-			        			if(currWidth > 0 && nextCurrWidth > 0) {
-				        			currCellEle.css("width", currWidth + "px");
-			        				currNextCellEle.css("width", nextCurrWidth + "px");
-			        				if(targetCellEle !== undefined) {
-			        					targetCellEle.css("width", currWidth + "px");
-			        					targetNextCellEle.css("width", nextCurrWidth + "px");
-			        					targetCellEleWrap.width(currCellEleTable.width() + scrollbarWidth);
-			        				}
-			        			}
-			        		}
-				        });
-
-			        	$(window.document).bind("mouseup.grid.resize", function(se) {
-			        		theadCells.each(function() {
-			        			var cellEle = $(this);
-			        			cellEle.find("> .resize_bar__").css("left", ((cellEle.offset().left + cellEle.width()) + resizeBarRightMargin) + "px");
-			        		});
-			        		$(document).unbind("dragstart.grid.resize").unbind("selectstart.grid.resize").unbind("mousemove.grid.resize").unbind("mouseup.grid.resize");
-			        		pressed = false;
-			        	});
 		        	});
 				});
 			},
@@ -2886,7 +2944,7 @@
 				} else {
 					//remove tbodys in grid body area
 					opts.context.find("tbody").remove();
-					opts.context.append('<tbody><tr><td class="empty__" align="center" colspan="' + this.cellCnt + '">' +
+					opts.context.append('<tbody><tr><td class="empty__" colspan="' + this.cellCnt + '">' +
 							N.message.get(opts.message, "empty") + '</td></tr></tbody>');
 					opts.context.append(tbodyTempClone);
 				}
