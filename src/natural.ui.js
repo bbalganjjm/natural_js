@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.13.21
+ * Natural-UI v0.8.13.22
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "v0.8.13.21";
+	N.version["Natural-UI"] = "v0.8.13.22";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -2619,7 +2619,6 @@
 				var currResizeBarEle;
 				var startOffsetX;
 				var initHeight;
-				var innerHeight;
 				var scrollbarWidth = N.browser.scrollbarWidth();
 				if(N.browser.is("safari")){
 					theadCells.css("padding-left", "0");
@@ -2629,29 +2628,15 @@
 					cellEle = $(this);
 		            resizeBar = cellEle.append('<span class="resize_bar__"></span>').find(".resize_bar__");
 		            var resizeBarWidth = 6;
-		            var resizeBarRightMargin = 0;
-		            if(N.browser.is("ie")) {
-		            	resizeBarRightMargin = (resizeBarWidth / 2 * -1) + 1;
-		            } else if(N.browser.is("firefox")) {
-		            	resizeBarRightMargin = resizeBarWidth / 2 * -1;
-		            }
-		            var paddingCrctn = parseInt(cellEle.css("padding-left")) + parseInt(cellEle.css("padding-right"));
-		            resizeBarRightMargin += paddingCrctn;
-
-		            if(N.browser.is("ie")) {
-		            	innerHeight = String(cellEle.innerHeight() - 1);
-		            } else {
-		            	innerHeight = String(cellEle.innerHeight() + 1);
-		            }
 
 		            resizeBar.css({
 		            	"padding": "0px",
-		            	"margin": "-" + cellEle.css("padding-top") + " -" + (resizeBarWidth/2 + parseInt(cellEle.css("padding-right"))) + "px -" + cellEle.css("padding-bottom") + " 0",
-		            	"height": innerHeight + "px",
+		            	"height": String(cellEle.outerHeight()) + "px",
 		            	"position": "absolute",
 		            	"width": resizeBarWidth + "px",
 		            	"cursor": "e-resize",
-		            	"left": ((cellEle.position().left + cellEle.width()) + resizeBarRightMargin) + "px"
+		            	"top" : cellEle.position().top,
+		            	"left": (cellEle.position().left + cellEle.outerWidth() - resizeBarWidth / 2) + "px"
 		            });
 
 		            resizeBar.bind("mousedown.grid.resize", function(e) {
@@ -2671,13 +2656,9 @@
 		            		// to block sort event
 		            		currCellEle.data("sortLock", true);
 
-		            		defWidth = currCellEle.innerWidth() - paddingCrctn;
-		            		nextDefWidth = currNextCellEle.innerWidth() - paddingCrctn;
-		            		if(N.browser.is("chrome")) {
-		            			defWidth += 1;
-		            			nextDefWidth += 1;
-		            		}
-
+		            		defWidth = currCellEle.outerWidth();
+		            		nextDefWidth = currNextCellEle.outerWidth();
+		            		
 		            		initHeight = currCellEle.innerHeight() + 1;
 
 		            		$(document).bind("dragstart.grid.resize, selectstart.grid.resize", function() {
@@ -2705,7 +2686,7 @@
 		            		$(window.document).bind("mouseup.grid.resize", function(se) {
 		            			theadCells.each(function() {
 		            				var cellEle = $(this);
-		            				cellEle.find("> .resize_bar__").css("left", ((cellEle.position().left + cellEle.width()) + resizeBarRightMargin) + "px");
+		            				cellEle.find("> .resize_bar__").css("left", (cellEle.position().left + cellEle.outerWidth() - resizeBarWidth / 2) + "px");
 		            			});
 		            			$(document).unbind("dragstart.grid.resize").unbind("selectstart.grid.resize").unbind("mousemove.grid.resize").unbind("mouseup.grid.resize");
 		            			pressed = false;
