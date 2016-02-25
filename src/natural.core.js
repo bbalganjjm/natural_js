@@ -339,7 +339,7 @@
 				return type === "array" || length === 0 || typeof length === "number" && length > 0 && (length - 1) in obj;
 			},
 			/**
-			 * Check whether the JWS(jQuery wraped set)
+			 * Check whether the JO(jQuery Object)
 			 */
 			isWrappedSet : function(obj) {
 				return this.isArraylike(obj) && obj.jquery !== undefined;
