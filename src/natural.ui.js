@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.13.21
+ * Natural-UI v0.8.13.25
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "v0.8.13.21";
+	N.version["Natural-UI"] = "v0.8.13.25";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -78,7 +78,9 @@
 			};
 
 			try {
+				// 1. When undefined the N.context.attr("ui").alert.container value
 				this.options.container = N.context.attr("architecture").page.context;
+				// 2. If defined the N.context.attr("ui").alert.container value N.config, be applied N.config's value
 				this.options = $.extend({}, this.options, N.context.attr("ui").alert);
 				this.options.container = N(this.options.container);
 			} catch (e) {
@@ -240,6 +242,8 @@
 					opts.msgContents.find(".msg_title_box__").bind("mousedown.alert", function(e) {
 						if(!$(e.target).is(".msg_title_close__") && (e.which || e.button) === 1) {
 							pressed = true;
+							opts.msgContents.data("isMoved", true);
+							
 							startX = e.pageX - opts.msgContents.offset().left;
 							startY = e.pageY - opts.msgContents.offset().top;
 
@@ -262,7 +266,7 @@
 							var self = this;
 							$(window.document).bind("mouseup.alert", function(e) {
 								pressed = false;
-
+								
 								$(self).css("cursor", "");
 								opts.msgContents.fadeTo(100, "1.0");
 
@@ -284,15 +288,19 @@
 						"height" : opts.isWindow ? N(window.document).height() : opts.context.outerHeight() + "px",
 						"width" : opts.isWindow ? N(window.document).width() : opts.context.outerWidth() + "px"
 					}).hide().show();
-					// reset message contents position
-					var msgContentsCss = {
-						"top" : (((opts.isWindow ? N(opts.obj).height() : opts.msgContext.height()) / 2 + position.top) - opts.msgContents.height() / 2) + "px",
-						"left" : ((opts.msgContext.width() / 2 + position.left) - parseInt(opts.msgContents.width() / 2)) + "px"
-					};
-					if(opts.isWindow) {
-						msgContentsCss.position = "fixed";
+					
+					if(opts.msgContents.data("isMoved") !== true) {
+						// reset message contents position
+						var msgContentsCss = {
+							"top" : (((opts.isWindow ? N(opts.obj).height() : opts.msgContext.height()) / 2 + position.top) - opts.msgContents.height() / 2) + "px",
+							"left" : ((opts.msgContext.width() / 2 + position.left) - parseInt(opts.msgContents.width() / 2)) + "px"
+						};
+						
+						if(opts.isWindow) {
+							msgContentsCss.position = "fixed";
+						}
+						opts.msgContents.css(msgContentsCss).show();
 					}
-					opts.msgContents.css(msgContentsCss).show();
 				} else {
 					// for non-active tab
 					opts.msgContext.hide();
@@ -320,7 +328,7 @@
 						opts.msgContext.append('<a href="#" class="msg_close__"></a>');
 					}
 					if(opts.alwaysOnTop) {
-						opts.msgContext.css("z-index", N.element.maxZindex(opts.container.find("div, span, ul, p")) + 1);
+						opts.msgContext.css("z-index", N.element.maxZindex(opts.container.find(opts.alwaysOnTopCalcTarget)) + 1);
 					}
 
 					var self = this;
@@ -1081,6 +1089,7 @@
 				onClose : null,
 				onCloseData : null,
 				preload : false,
+				dynPos : true,
 				draggable : false
 			};
 
@@ -1607,7 +1616,7 @@
 				revert : false,
 				unbind : true,
 				initialInputData : null, // for unbind
-				onBeforeBind : null,
+				onBindBefore : null,
 				onBindAfter : null
 			};
 
@@ -1689,8 +1698,8 @@
 				var self = this;
 				var vals;
 				if (!N.isEmptyObject(opts.data) && !N.isEmptyObject(vals = opts.data[opts.row])) {
-					if(opts.onBeforeBind !== null && this.options.extObj === null) {
-						opts.onBeforeBind.call(opts.context, opts.context, vals);
+					if(opts.onBindBefore !== null && this.options.extObj === null) {
+						opts.onBindBefore.call(opts.context, opts.context, vals);
 					}
 
 					// add row data changed flag
@@ -2619,7 +2628,6 @@
 				var currResizeBarEle;
 				var startOffsetX;
 				var initHeight;
-				var innerHeight;
 				var scrollbarWidth = N.browser.scrollbarWidth();
 				if(N.browser.is("safari")){
 					theadCells.css("padding-left", "0");
@@ -2629,29 +2637,15 @@
 					cellEle = $(this);
 		            resizeBar = cellEle.append('<span class="resize_bar__"></span>').find(".resize_bar__");
 		            var resizeBarWidth = 6;
-		            var resizeBarRightMargin = 0;
-		            if(N.browser.is("ie")) {
-		            	resizeBarRightMargin = (resizeBarWidth / 2 * -1) + 1;
-		            } else if(N.browser.is("firefox")) {
-		            	resizeBarRightMargin = resizeBarWidth / 2 * -1;
-		            }
-		            var paddingCrctn = parseInt(cellEle.css("padding-left")) + parseInt(cellEle.css("padding-right"));
-		            resizeBarRightMargin += paddingCrctn;
-
-		            if(N.browser.is("ie")) {
-		            	innerHeight = String(cellEle.innerHeight() - 1);
-		            } else {
-		            	innerHeight = String(cellEle.innerHeight() + 1);
-		            }
 
 		            resizeBar.css({
 		            	"padding": "0px",
-		            	"margin": "-" + cellEle.css("padding-top") + " -" + (resizeBarWidth/2 + parseInt(cellEle.css("padding-right"))) + "px -" + cellEle.css("padding-bottom") + " 0",
-		            	"height": innerHeight + "px",
+		            	"height": String(cellEle.outerHeight()) + "px",
 		            	"position": "absolute",
 		            	"width": resizeBarWidth + "px",
 		            	"cursor": "e-resize",
-		            	"left": ((cellEle.position().left + cellEle.width()) + resizeBarRightMargin) + "px"
+		            	"top" : cellEle.position().top,
+		            	"left": (cellEle.position().left + cellEle.outerWidth() - resizeBarWidth / 2) + "px"
 		            });
 
 		            resizeBar.bind("mousedown.grid.resize", function(e) {
@@ -2671,13 +2665,9 @@
 		            		// to block sort event
 		            		currCellEle.data("sortLock", true);
 
-		            		defWidth = currCellEle.innerWidth() - paddingCrctn;
-		            		nextDefWidth = currNextCellEle.innerWidth() - paddingCrctn;
-		            		if(N.browser.is("chrome")) {
-		            			defWidth += 1;
-		            			nextDefWidth += 1;
-		            		}
-
+		            		defWidth = currCellEle.outerWidth();
+		            		nextDefWidth = currNextCellEle.outerWidth();
+		            		
 		            		initHeight = currCellEle.innerHeight() + 1;
 
 		            		$(document).bind("dragstart.grid.resize, selectstart.grid.resize", function() {
@@ -2705,7 +2695,7 @@
 		            		$(window.document).bind("mouseup.grid.resize", function(se) {
 		            			theadCells.each(function() {
 		            				var cellEle = $(this);
-		            				cellEle.find("> .resize_bar__").css("left", ((cellEle.position().left + cellEle.width()) + resizeBarRightMargin) + "px");
+		            				cellEle.find("> .resize_bar__").css("left", (cellEle.position().left + cellEle.outerWidth() - resizeBarWidth / 2) + "px");
 		            			});
 		            			$(document).unbind("dragstart.grid.resize").unbind("selectstart.grid.resize").unbind("mousemove.grid.resize").unbind("mouseup.grid.resize");
 		            			pressed = false;
