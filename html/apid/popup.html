@@ -28,24 +28,14 @@
 			<td><input id="height" type="text" value="0" /> Popup contents height, 0 is auto height</td>
 		</tr>
 		<tr>
-			<th>alwaysOnTop</th>
-			<td><input id="alwaysOnTop" type="checkbox" /><br>If this checkbox with check(true), z-index of N.alert's elements are defined alway max value</td>
-			<th>dynPos</th>
-			<td><input id="dynPos" type="checkbox" checked="checked" /><br>If this checkbox with uncheck(false), do not dynamic positioning N.alert's elements(Message overlay and message box)</td>
-		</tr>
-		<tr>
-			<th>draggable</th>
-			<td colspan="3"><input id="draggable" type="checkbox" /> If this checkbox with check(true), you can drag & drop the dialog box</td>
-		</tr>
-		<tr>
 			<th>onOk</th>
 			<td><textarea id="onOk">function() {
 	N.log("Ok");
-}</textarea><br />Event handler for Ok button event</td>
+}</textarea><br />Callback function for Ok button event</td>
 			<th>onCancel</th>
 			<td><textarea id="onCancel">function() {
 	N.log("Cancel");
-}</textarea><br />Event handler for Cancel button event</td>
+}</textarea><br />callback function for Cancel button event</td>
 		</tr>
 	</table>
 
@@ -104,26 +94,16 @@
 			<td><input id="height" type="text" value="400" /> Popup contents height, 0 is auto height(default)</td>
 		</tr>
 		<tr>
-			<th>alwaysOnTop</th>
-			<td><input id="alwaysOnTop" type="checkbox" /><br>If this checkbox with check(true), z-index of N.alert's elements are defined alway max value</td>
-			<th>dynPos</th>
-			<td><input id="dynPos" type="checkbox" checked="checked" /><br>If this checkbox with uncheck(false), do not dynamic positioning N.alert's elements(Message overlay and message box)</td>
-		</tr>
-		<tr>
-			<th>draggable</th>
-			<td colspan="3"><input id="draggable" type="checkbox" /> If this checkbox with check(true), you can drag & drop the dialog box</td>
-		</tr>
-		<tr>
 			<th>preload</th>
 			<td colspan="3"><input id="preload" type="checkbox" /> If this checkbox with check(true), load popup contents when popup is initialized, but with unchecked(false), load popup contens when first open</td>
 		</tr>
 		<tr>
 			<th>onOk</th>
-			<td><textarea id="onOk"></textarea><br />Event handler for Ok button event</td>
+			<td><textarea id="onOk"></textarea><br />Callback function for Ok button event</td>
 			<th>onCancel</th>
 			<td><textarea id="onCancel">function() {
 	N.log("Cancel");
-}</textarea><br />Event handler for Cancel button event</td>
+}</textarea><br />callback function for Cancel button event</td>
 		</tr>
 		<tr>
 			<th>onOpen</th>
@@ -170,7 +150,6 @@
 	            e.preventDefault();
 
 	            var opts = {
-					container : view.parent(),	            		
 	            	title : N.string.trimToNull(N("table#localPage input#title", view).val()) !== null ?
 	            			N("table#localPage input#title", view).val() : undefined,
 	       			confirm : N("table#localPage input#confirm", view).is(":checked"),
@@ -178,9 +157,6 @@
 	            	button : N("table#localPage input#button", view).is(":checked"),
 	            	width : Number(N("table#localPage input#width", view).val()),
 	            	height : Number(N("table#localPage input#height", view).val()),
-	            	alwaysOnTop : N("table#localPage input#alwaysOnTop", view).is(":checked"),
-	            	dynPos : N("table#localPage input#dynPos", view).is(":checked"),
-	            	draggable : N("table#localPage input#draggable", view).is(":checked"),
 	            	onOk : N.string.trimToNull(N("table#localPage textarea#onOk", view).val()) !== null ?
 	            			eval("(" + N("table#localPage textarea#onOk", view).val() + ")") : null,
 	            	onCancel : N.string.trimToNull(N("table#localPage textarea#onCancel", view).val()) !== null ?
@@ -210,9 +186,6 @@
 	            	button : N("table#otherPage input#button", view).is(":checked"),
 	            	width : Number(N("table#otherPage input#width", view).val()),
 	            	height : Number(N("table#otherPage input#height", view).val()),
-	            	alwaysOnTop : N("table#otherPage input#alwaysOnTop", view).is(":checked"),
-	            	dynPos : N("table#otherPage input#dynPos", view).is(":checked"),
-	            	draggable : N("table#otherPage input#draggable", view).is(":checked"),
 	            	onOk : N.string.trimToNull(N("table#otherPage textarea#onOk", view).val()) !== null ?
 	            			eval("(" + N("table#otherPage textarea#onOk", view).val() + ")") : null,
 	            	onCancel : N.string.trimToNull(N("table#otherPage textarea#onCancel", view).val()) !== null ?

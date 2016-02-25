@@ -129,17 +129,8 @@
 			<th>unbind</th>
 			<td colspan="3"><input id="unbind" type="checkbox" checked="checked" /> If this checkbox with uncheck(false), inactivate the unbind function</td>
 		</tr>
-		<tr>
-			<th>onBindBefore</th>
-			<td><textarea id="onBindBefore" style="height: 40px;">function(context, rowData) {
-	N.log("onBindBefore", context, rowData);
-}</textarea><br>Event handler for onBindBefore event</td>
-			<th>onBindAfter</th>
-			<td><textarea id="onBindAfter" style="height: 40px;">function(context, rowData) {
-	N.log("onBindAfter", context, rowData);
-}</textarea><br>Event handler for onBindAfter event</td>
-		</tr>
 	</table>
+
 	<p class="smallContTit">Method options : </p>
 	<table class="form">
 		<tr>
@@ -166,7 +157,7 @@
 			<th width="10%">data</th>
 			<th width="10%">arguments[0]</th>
 			<td width="80%" colspan="3">
-				<input id="data" type="text" value="true" />  true(return selected row data), false(return all data(JO)), empty(return all data(pure object array))
+				<input id="data" type="text" value="true" />  true(return selected row data), false(return all data(JWS)), empty(return all data(pure object array))
 			</td>
 		</tr>
 	</table>
@@ -316,11 +307,7 @@
 	    			validate : N("input#validate", view).is(":checked"),
 	    			html : N("input#html", view).is(":checked"),
 	        		revert : N("input#revert", view).is(":checked"),
-	        		unbind : N("input#unbind", view).is(":checked"),
-	        		onBindBefore : N.string.trimToNull(N("textarea#onBindBefore", view).val()) !== null ?
-	           				eval("(" + N("textarea#onBindBefore", view).val() + ")") : null,
-					onBindAfter : N.string.trimToNull(N("textarea#onBindAfter", view).val()) !== null ?
-	           				eval("(" + N("textarea#onBindAfter", view).val() + ")") : null
+	        		unbind : N("input#unbind", view).is(":checked")
 	    		}
 
 	    		form = N(data).form(opts);
