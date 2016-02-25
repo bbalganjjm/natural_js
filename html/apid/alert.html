@@ -22,30 +22,34 @@
 			<td><input id="button" type="checkbox" checked="checked" />If this checkbox with uncheck(false), hide button bar</td>
 		</tr>
 		<tr>
-			<th width="85">width</th>
-			<td width="*"><input id="width" type="text" value="300" /><br>Message contents width, 0 is auto width</td>
-			<th width="85">height</th>
-			<td width="*"><input id="height" type="text" value="100" /><br>Message contents height, 0 is auto height</td>
+			<th>width</th>
+			<td><input id="width" type="text" value="300" /><br>Message contents width, 0 is auto width</td>
+			<th>height</th>
+			<td><input id="height" type="text" value="100" /><br>Message contents height, 0 is auto height</td>
 		</tr>
 		<tr>
-			<th width="85">alwaysOnTop</th>
-			<td width="*"><input id="alwaysOnTop" type="checkbox" /><br>If this checkbox with check(true), z-index of N.alert's elements are defined alway max value</td>
-			<th width="85">dynPos</th>
-			<td width="*"><input id="dynPos" type="checkbox" checked="checked" /><br>If this checkbox with uncheck(false), do not dynamic positioning N.alert's elements(Message overlay and message box)</td>
+			<th>alwaysOnTop</th>
+			<td><input id="alwaysOnTop" type="checkbox" /><br>If this checkbox with check(true), z-index of N.alert's elements are defined alway max value</td>
+			<th>dynPos</th>
+			<td><input id="dynPos" type="checkbox" checked="checked" /><br>If this checkbox with uncheck(false), do not dynamic positioning N.alert's elements(Message overlay and message box)</td>
 		</tr>
 		<tr>
-			<th width="85">onOk</th>
+			<th>draggable</th>
+			<td colspan="3"><input id="draggable" type="checkbox" /> If this checkbox with check(true), you can drag & drop the dialog box</td>
+		</tr>
+		<tr>
+			<th>onOk</th>
 			<td><textarea id="onOk">
 function() {
 	N.log("Ok");
 }
-			</textarea><br />Callback function for ok button event</td>
-			<th width="85">onCancel</th>
+			</textarea><br />Event handler for ok button event</td>
+			<th>onCancel</th>
 			<td><textarea id="onCancel">
 function() {
 	N.log("Cancel");
 }
-			</textarea><br />Callback function for cancel button event</td>
+			</textarea><br />Event handler for cancel button event</td>
 		</tr>
 	</table>
 
@@ -85,6 +89,7 @@ function() {
 	            	height : Number(N("input#height", view).val()),
 	            	alwaysOnTop : N("input#alwaysOnTop", view).is(":checked"),
 	            	dynPos : N("input#dynPos", view).is(":checked"),
+	            	draggable : N("input#draggable", view).is(":checked"),
 	            	onOk : N.string.trimToNull(N("textarea#onOk", view).val()) !== null ?
 	            			eval("(" + N("textarea#onOk", view).val() + ")") : null,
 	            	onCancel : N.string.trimToNull(N("textarea#onCancel", view).val()) !== null ?

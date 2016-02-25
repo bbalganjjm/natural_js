@@ -5,11 +5,9 @@
 			<th width="10%">randomSel</th>
 			<td width="40%"><input id="randomSel" type="checkbox" /> If this checkbox with check(true), random select tab after tab initialize</td>
 			<th width="10%">onActive</th>
-			<td width="40%"><textarea id="onActive" style="height: 82px;">function(activeLinkEle, allLinksEle, tabContentsEle) {
-	N.log(activeLinkEle);
-	N.log(allLinksEle);
-	N.log(tabContentsEle);
-}</textarea><br /> Callback function for tab active event</td>
+			<td width="40%"><textarea id="onActive" style="height: 40px;">function(thisIdx, tab, content, tabs, content) {
+	N.log(thisIdx, tab, content, tabs, content);
+}</textarea><br /> Event handler for tab active event</td>
 		</tr>
 		<tr>
 			<th>effect<br />[effect, duration, callback]</th>
