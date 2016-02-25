@@ -243,7 +243,7 @@
 						if(!$(e.target).is(".msg_title_close__") && (e.which || e.button) === 1) {
 							pressed = true;
 							opts.msgContents.data("isMoved", true);
-							
+
 							startX = e.pageX - opts.msgContents.offset().left;
 							startY = e.pageY - opts.msgContents.offset().top;
 
@@ -266,7 +266,7 @@
 							var self = this;
 							$(window.document).bind("mouseup.alert", function(e) {
 								pressed = false;
-								
+
 								$(self).css("cursor", "");
 								opts.msgContents.fadeTo(100, "1.0");
 
@@ -288,19 +288,20 @@
 						"height" : opts.isWindow ? N(window.document).height() : opts.context.outerHeight() + "px",
 						"width" : opts.isWindow ? N(window.document).width() : opts.context.outerWidth() + "px"
 					}).hide().show();
-					
+
 					if(opts.msgContents.data("isMoved") !== true) {
 						// reset message contents position
 						var msgContentsCss = {
 							"top" : (((opts.isWindow ? N(opts.obj).height() : opts.msgContext.height()) / 2 + position.top) - opts.msgContents.height() / 2) + "px",
 							"left" : ((opts.msgContext.width() / 2 + position.left) - parseInt(opts.msgContents.width() / 2)) + "px"
 						};
-						
+
 						if(opts.isWindow) {
 							msgContentsCss.position = "fixed";
 						}
-						opts.msgContents.css(msgContentsCss).show();
+						opts.msgContents.css(msgContentsCss);
 					}
+					opts.msgContents.show();
 				} else {
 					// for non-active tab
 					opts.msgContext.hide();
@@ -2667,7 +2668,7 @@
 
 		            		defWidth = currCellEle.outerWidth();
 		            		nextDefWidth = currNextCellEle.outerWidth();
-		            		
+
 		            		initHeight = currCellEle.innerHeight() + 1;
 
 		            		$(document).bind("dragstart.grid.resize, selectstart.grid.resize", function() {
