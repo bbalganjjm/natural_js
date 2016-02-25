@@ -38,6 +38,12 @@
 			<td><input id="multiselect" type="checkbox" /> If this checkbox with check(true), can select multy row in grid body</td>
 		</tr>
 		<tr>
+			<th>checkAll</th>
+			<td><input id="checkAll" type="text" value="#checkAll" /> Checkbox element for Check to all checkbox elements in first column</td>
+			<th>checkAllTarget</th>
+			<td><input id="checkAllTarget" type="text" value=".checkAllTarget" /> Checkbox elements in first column</td>
+		</tr>
+		<tr>
 			<th>hover</th>
 			<td><input id="hover" type="checkbox" /> If this checkbox with check(true), display hover effect</td>
 			<th>createRow<br>Delay</th>
@@ -51,7 +57,7 @@
 	N.log(index);
 	N.log(row);
 	N.log(data);
-}</textarea><br /> Callback function for tab active event</td>
+}</textarea><br /> Event handler for tab active event</td>
 		</tr>
 		<tr>
 			<th>onSelect</th>
@@ -60,12 +66,12 @@
 	N.log(row);
 	N.log(data);
 	N.log(beforeRow);
-}</textarea><br /> Callback function for tab active event</td>
+}</textarea><br /> Event handler for tab active event</td>
 			<th>onBind</th>
 			<td><textarea id="onBind" style="height: 64px;">function(context, data) {
 	N.log(context);
 	N.log(data);
-}</textarea><br /> Callback function for tab active event</td>
+}</textarea><br /> Event handler for tab active event</td>
 		</tr>
 		<tr>
 			<th>windowScroll Lock</th>
@@ -106,7 +112,7 @@
 					<option value="update">update</option>
 					<option value="delete">delete</option>
 					<option value="">undefined(pure object array)</option>
-					<option value="false">false(JWS)</option>
+					<option value="false">false(JO)</option>
 				</select> row status
 			</td>
 		</tr>
@@ -150,8 +156,8 @@
 	<table id="grid" class="grid" style="width: 100%;">
 		<thead>
 			<tr>
-				<th style="width: 15%;" rowspan="2">picture</th>
-				<th style="width: 15%;">eyeColor</th>
+				<th style="width: 5%;" rowspan="2"><input id="checkAll" type="checkbox" /></th>
+				<th style="width: 20%;">eyeColor</th>
 				<th style="width: 20%;">name</th>
 				<th style="width: auto;">company</th>
 				<th style="width: 15%;">gender</th>
@@ -165,14 +171,14 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td align="center" rowspan="2"><img id="picture" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D" height="32" /></td>
+				<td align="center" valign="middle" rowspan="2"><input class="checkAllTarget" type="checkbox" /></td>
 				<td><input id="eyeColor" type="text" /></td>
 				<td id="name"></td>
 				<td><input id="company" type="text" data-validate='[["required"]]' /></td>
 				<td id="gender" align="center"></td>
 			</tr>
 			<tr>
-				<td id="index" align="center"></td>
+				<td id="index" align="center" valign="middle"></td>
 				<td><input id="email" type="text" data-validate='[["required"], ["email"]]' /></td>
 				<td><input id="registered" type="text" data-format='[["date", 8, "date"]]' /></td>
 				<td align="center"><input id="isActive" type="checkbox" /></td>
@@ -207,6 +213,10 @@
 	       			sortable : N("input#sortable", view).is(":checked"),
 	       			select : N("input#select", view).is(":checked"),
 	       			multiselect : N("input#multiselect", view).is(":checked"),
+	       			checkAll : N.string.trimToNull(N("input#checkAll", view).val()) !== null ?
+		       				N("input#checkAll", view).val() : null,
+       				checkAllTarget : N.string.trimToNull(N("input#checkAllTarget", view).val()) !== null ?
+    	       				N("input#checkAllTarget", view).val() : null,
 	       			hover : N("input#hover", view).is(":checked"),
 	       			createRowDelay : N.string.trimToNull(N("input#createRowDelay", view).val()) !== null ?
 	       				parseInt(N("input#createRowDelay", view).val()) : 1,
@@ -223,7 +233,7 @@
 	        		windowScrollLock : N("input#windowScrollLock", view).is(":checked"),
 	        		revert : N("input#revert", view).is(":checked")
 	       		}
-
+console.log(opts);
 	       		grid = N([]).grid(opts).bind();
 
 	       		N("#btnAdd", view).instance("button").enable();

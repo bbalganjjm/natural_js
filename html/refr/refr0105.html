@@ -43,14 +43,14 @@
 		<tr>
 			<td></td>
 			<td>context</td>
-			<td>window or JWS</td>
+			<td>window or JO</td>
 			<td align="center">-</td>
 			<td>기본옵션의 context 옵션과 같습니다.</td>
 		</tr>
 		<tr>
 			<td></td>
 			<td>msg</td>
-			<td>(JWS, HTML Tag String) or Object</td>
+			<td>(JO, HTML Tag String) or Object</td>
 			<td align="center">-</td>
 			<td>기본옵션의 msg 옵션과 같습니다.</td>
 		</tr>
@@ -74,7 +74,7 @@
 		<tr>
 			<td></td>
 			<td>msg</td>
-			<td>(JWS, HTML Tag String) or Object</td>
+			<td>(JO, HTML Tag String) or Object</td>
 			<td align="center">-</td>
 			<td>N.alert의 msg 옵션과 같습니다.</td>
 		</tr>
@@ -98,22 +98,22 @@
 		</tr>
 		<tr>
 			<td>context</td>
-			<td>window or JWS</td>
+			<td>window or JO</td>
 			<td>obj</td>
 			<td align="center">○</td>
 			<td>
 				<p>Alert 의 배경이 되는  컨텐츠를 가려주는 overlay 가 적용될 부분을 jQuery selector 를 사용하여 지정 합니다.</p>
-				<p>window 객체를 지정하면 화면 전체를 덮는 Modal overlay 가 표시되고 JWS를 입력하면 지정한 요소만 덮어줍니다.</p>
+				<p>window 객체를 지정하면 화면 전체를 덮는 Modal overlay 가 표시되고 JO를 입력하면 지정한 요소만 덮어줍니다.</p>
 			</td>
 		</tr>
 		<tr>
 			<td>msg</td>
-			<td>(JWS, HTML Tag String) or Object</td>
+			<td>(JO, HTML Tag String) or Object</td>
 			<td>undefined</td>
 			<td align="center">○</td>
 			<td>
 				<p>Alert 로 표시할 메시지</p>
-				<p>JWO, HTML 문자열 이나 HTML 요소 모두 인식 합니다.</p>
+				<p>JO, HTML 문자열 이나 HTML 요소 모두 인식 합니다.</p>
 			</td>
 		</tr>
 		<tr>
@@ -132,6 +132,13 @@
 결과 메시지 : "안녕하세요 저는 홍길동 입니다."
 */</code></pre>
 			</td>
+		</tr>
+		<tr>
+			<td>confirm</td>
+			<td>boolean</td>
+			<td>false</td>
+			<td></td>
+			<td>true  지정 시 확인할 수 있도록 [확인], [취소] 버튼을 표시하고 false 지정 시 [취소] 버튼만 표시 합니다.</td>
 		</tr>
 		<tr>
 			<td>width</td>
@@ -153,8 +160,8 @@
 			<td>undefined</td>
 			<td></td>
 			<td>
-				<p>메시지 다이얼로그의 제목, </p>
-				<p>title 옵션이 undefined 이면 타이틀바를 표시하지 않고 context 값으로 지정한 요소의 title 속성에 값이 있다면 해당 값으로 지정 됩니다. </p>
+				<p>메시지 다이얼로그의 제목</p>
+				<p class="alert">메시지 박스(context) 요소에 title 속성값이 정의 되어 있으면 정으된 값으로 지정되며 title 옵션이 undefined 이면 타이틀바를 표시하지 않습니다.</p>
 			</td>
 		</tr>
 		<tr>
@@ -172,6 +179,37 @@
 			<td>모달 적용 유무</td>
 		</tr>
 		<tr>
+			<td>alwaysOnTop</td>
+			<td>boolean</td>
+			<td>false</td>
+			<td></td>
+			<td>메시지 다이얼로그를 항상 페이지의 최상위로 항상 유지하기 위한 옵션</td>
+		</tr>
+		<tr>
+			<td>alwaysOnTopCalcTarget</td>
+			<td>String</td>
+			<td>"div, span, ul, p"</td>
+			<td></td>
+			<td>
+				alwaysOnTop 옵션 적용 시 최상위 z-index를 계산하기 위한 대상 요소지정
+				<p class="alert">jquery Selector 문자열로 지정</p>
+			</td>
+		</tr>
+		<tr>
+			<td>dynPos</td>
+			<td>boolean</td>
+			<td>true</td>
+			<td></td>
+			<td>브라우저 창 크기 조절 시 블록 오버레이의 크기도 같이 조절 할지 여부</td>
+		</tr>
+		<tr>
+			<td>draggable</td>
+			<td>boolean</td>
+			<td>false</td>
+			<td></td>
+			<td>메시지 창 드래그 가능 유무</td>
+		</tr>
+		<tr>
 			<td>onOk</td>
 			<td>Function</td>
 			<td>null</td>
@@ -184,20 +222,6 @@
 			<td>null</td>
 			<td></td>
 			<td>취소버튼을 눌렀을때 발생되는 이벤트</td>
-		</tr>
-		<tr>
-			<td>alwaysOnTop</td>
-			<td>boolean</td>
-			<td>false</td>
-			<td></td>
-			<td>메시지 다이얼로그를 항상 페이지의 최상위로 항상 유지하기 위한 옵션</td>
-		</tr>
-		<tr>
-			<td>confirm</td>
-			<td>boolean</td>
-			<td>false</td>
-			<td></td>
-			<td>true  지정 시 확인할 수 있도록 [확인], [취소] 버튼을 표시하고 false 지정 시 [취소] 버튼만 표시 합니다.</td>
 		</tr>
 	</table>
 
@@ -242,10 +266,16 @@
 	<h2>Button(N.button)</h2>
 
 	<h3>개요</h3>
-	<p>Button(이하 N.button) 은 a , input button , button 과 같은 버튼 요소들을 공통된 모양과 공통된 동작을 가진 버튼을 만들어 컴포넌트입니다.</p>
+	<p>Button(이하 N.button) 은 a, input button, button 과 같은 버튼 요소들을 공통된 모양과 공통된 동작을 가진 버튼을 만들어 주는 컴포넌트입니다.</p>
 
 	<h3>API DEMO</h3>
 	<div data-page="button" class="apidemo"></div>
+
+	<h3>HTML 템플릿(HTML templete)</h3>
+	<p class="alert">a 나 input button, button 요소를 공통된 버튼 모양으로 만들어 줍니다.</p>
+	<pre class="language-html"><code class="language-html"><xmp><a id="btnA">a</a>
+<input id="btnInputButton" type="button" value="input button" />
+<button id="btnButton">button</button></xmp></code></pre>
 
 	<h3>생성자(Constructor)</h3>
 	<table>
@@ -266,7 +296,7 @@
 		<tr>
 			<td></td>
 			<td>context</td>
-			<td>window or JWS</td>
+			<td>window or JO</td>
 			<td align="center">-</td>
 			<td>기본옵션의 context 옵션과 같습니다.</td>
 		</tr>
@@ -307,7 +337,7 @@
 		</tr>
 		<tr>
 			<td>context</td>
-			<td>JWS</td>
+			<td>JO</td>
 			<td>obj</td>
 			<td align="center">○</td>
 			<td>버튼컴포넌트화 할 버튼 요소를 지정합니다.</td>
@@ -345,6 +375,24 @@
 			<td>true</td>
 			<td></td>
 			<td>활성, 비활성 시 Fade 효과 적용 유무</td>
+		</tr>
+		<tr>
+			<td>customStyle</td>
+			<td>boolean</td>
+			<td>false</td>
+			<td></td>
+			<td>
+				사용자 정의 스타일 적용 유무
+				<p class="alert">
+					값이 true 이면<br>
+					css/natural.ui.css 파일에 정의된<br>
+					a.btn_mouseover__, input[type='button'].btn_mouseover__, button.btn_mouseover__<br>
+					a.btn_mousedown__, input[type='button'].btn_mousedown__, button.btn_mousedown__<br>
+					a.btn_mouseup__, input[type='button'].btn_mouseup__, button.btn_mouseup__<br>
+					a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__<br>
+					스타일이 적용 됩니다.
+				</p>
+			</td>
 		</tr>
 	</table>
 
@@ -423,6 +471,10 @@
 	<h3>API DEMO</h3>
 	<div data-page="datepicker" class="apidemo"></div>
 
+	<h3>HTML 템플릿(HTML templete)</h3>
+	<p class="alert">text input 요소에 Datepicker를 붙여 줍니다.</p>
+	<pre class="language-html"><code class="language-html"><xmp><input id="datepicker" type="text" /></xmp></code></pre>
+
 	<h3>생성자(Constructor)</h3>
 	<table>
 		<tr>
@@ -442,7 +494,7 @@
 		<tr>
 			<td></td>
 			<td>context</td>
-			<td>window or JWS</td>
+			<td>window or JO</td>
 			<td align="center">-</td>
 			<td>기본옵션의 context 옵션과 같습니다.</td>
 		</tr>
@@ -483,7 +535,7 @@
 		</tr>
 		<tr>
 			<td>context</td>
-			<td>JWS</td>
+			<td>JO</td>
 			<td>obj</td>
 			<td align="center">○</td>
 			<td>데이트피커를 적용할 입력 요소를 지정합니다.</td>
@@ -603,7 +655,7 @@
 		<tr>
 			<td></td>
 			<td>context</td>
-			<td>window or JWS</td>
+			<td>window or JO</td>
 			<td align="center">-</td>
 			<td>기본옵션의 context 옵션과 같습니다.</td>
 		</tr>
@@ -644,7 +696,7 @@
 		</tr>
 		<tr>
 			<td>context</td>
-			<td>JWS</td>
+			<td>JO</td>
 			<td>obj</td>
 			<td></td>
 			<td>같은 페이지 내에 있는 블록(Block) 요소를 지정 합니다.</td>
@@ -700,6 +752,20 @@
 			<td>false</td>
 			<td></td>
 			<td>팝업을 항상 페이지의 최상위로 항상 유지하기 위한 옵션</td>
+		</tr>
+		<tr>
+			<td>dynPos</td>
+			<td>boolean</td>
+			<td>true</td>
+			<td></td>
+			<td>브라우저 창 크기 조절 시 블록 오버레이의 크기도 같이 조절 할지 여부</td>
+		</tr>
+		<tr>
+			<td>draggable</td>
+			<td>boolean</td>
+			<td>false</td>
+			<td></td>
+			<td>메시지 창 드래그 가능 유무</td>
 		</tr>
 		<tr>
 			<td>onOk</td>
@@ -806,6 +872,19 @@
 	<h3>API DEMO</h3>
 	<div data-page="tab" class="apidemo"></div>
 
+	<h3>HTML 템플릿(HTML templete)</h3>
+	<p class="alert">다음과 같은 구조의 요소들을 배치하면 탭이 만들어 집니다.</p>
+	<pre class="language-html"><code class="language-html"><xmp><div id="tab">
+	<ul>
+		<li><a href="#tab1">Jeff Beck</a></li>
+		<li data-opts='{ "onOpen" : "onOpen", "preload" : true, "url" : "html/apid/form.html" }'><a href="#tab2">Form</a></li>
+		<li data-opts='{ "preload" : false, "url" : "html/apid/button.html", "*active" : true }'><a href="#tab3">Button</a></li>
+	</ul>
+	<div id="tab1"></div>
+	<div id="tab2"></div>
+	<div id="tab3"></div>
+</div></xmp></code></pre>
+	
 	<h3>생성자(Constructor)</h3>
 	<table>
 		<tr>
@@ -825,7 +904,7 @@
 		<tr>
 			<td></td>
 			<td>context</td>
-			<td>window or JWS</td>
+			<td>window or JO</td>
 			<td align="center">-</td>
 			<td>기본옵션의 context 옵션과 같습니다.</td>
 		</tr>
@@ -866,7 +945,7 @@
 		</tr>
 		<tr>
 			<td>context</td>
-			<td>JWS</td>
+			<td>JO</td>
 			<td>obj</td>
 			<td align="center">○</td>
 			<td style="max-width: 299px;">
@@ -947,10 +1026,12 @@
 			<td></td>
 			<td>
 				<p>탭이 활성화 될 때마다 실행되는 이벤트입니다.</p>
-				<p>이벤트 콜백 함수의 인자로 다음과 같은 요소가 반환 됩니다.</p>
-				<p>arguments[0] : 현재 활성화된 탭요소</p>
-				<p>arguments[1] : 전체 탭요소</p>
-				<p>arguments[2] : 전체 컨텐츠요소</p>
+				<p>이벤트 콜백 함수의 인자는 다음과 같이 반환 됩니다.</p>thisIdx, tab, content, tabs, content
+				<p>arguments[0] : 활성화된 탭의 Index</p>
+				<p>arguments[1] : 활성화된 탭 요소</p>
+				<p>arguments[2] : 활성화된 탭 컨텐츠 요소</p>
+				<p>arguments[3] : 전체 탭 요소</p>
+				<p>arguments[4] : 전체 컨텐츠 요소</p>
 			</td>
 		</tr>
 	</table>
@@ -1026,6 +1107,15 @@
 	<h3>API DEMO</h3>
 	<div data-page="select" class="apidemo"></div>
 
+	<h3>HTML 템플릿(HTML templete)</h3>
+	<p class="alert">비어있는 select 나 select multiple, input radio, input checkbox 에 바인드한 데이터를 선택자 요소로 만들어 줍니다.</p>
+	<pre class="language-html"><code class="language-html"><xmp><select id="eyeColor">
+	<option>선택</option>
+</select>
+<select id="company" multiple="multiple">
+<input id="gender" type="radio" />
+<input id="favoriteFruit" type="checkbox" /></xmp></code></pre>
+
 	<h3>생성자(Constructor)</h3>
 	<table>
 		<tr>
@@ -1045,7 +1135,7 @@
 		<tr>
 			<td></td>
 			<td>data</td>
-			<td>JWS(JSON Array)</td>
+			<td>JO(JSON Array)</td>
 			<td align="center">-</td>
 			<td>기본옵션의 data 옵션과 같습니다.</td>
 		</tr>
@@ -1086,14 +1176,14 @@
 		</tr>
 		<tr>
 			<td>data</td>
-			<td>JWS(JSON Array)</td>
+			<td>JO(JSON Array)</td>
 			<td>undefined</td>
 			<td align="center">○</td>
 			<td>입력요소에 바인드 할 데이터</td>
 		</tr>
 		<tr>
 			<td>context</td>
-			<td>JWS</td>
+			<td>JO</td>
 			<td>null</td>
 			<td align="center">○</td>
 			<td>N.select를 적용할 입력요소(SELECT, INPUT[TYPE=CHECKBOX], INPUT[TYPE=RADIO])를 지정합니다.</td>
@@ -1153,18 +1243,18 @@
 			<td>selFlag</td>
 			<td>boolean</td>
 			<td align="center">-</td>
-			<td>true 이면 현재 선택된 값에 해당하는 데이터만 가져오고 false 이면 JWS 형태의 전체 데이터를 가져옵니다. 입력하지 않으면 정제된 순수 JSON Object Array 형태로 된 전체 데이터를 가져 옵니다.</td>
+			<td>true 이면 현재 선택된 값에 해당하는 데이터만 가져오고 false 이면 JO 형태의 전체 데이터를 가져옵니다. 입력하지 않으면 정제된 순수 JSON Object Array 형태로 된 전체 데이터를 가져 옵니다.</td>
 		</tr>
 		<tr>
 			<td>context</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
-			<td>JWO</td>
+			<td>JO</td>
 			<td>바인드한 선택입력요소를 가져옵니다.</td>
 		</tr>
 		<tr>
 			<td></td>
-			<td>sel</td>
+			<td>selector</td>
 			<td>String</td>
 			<td align="center">-</td>
 			<td>jQuery selector를 입력하면 해당 context 하위 요소에서 선택된 요소를 반환 합니다.</td>
@@ -1216,6 +1306,107 @@
 	<h3>API DEMO</h3>
 	<div data-page="form" class="apidemo"></div>
 
+	<h3>HTML 템플릿(HTML templete)</h3>
+<p class="alert">폼의 블록이 DIV이든 TABLE이든 상관없이 컴포넌트에 바인딩한 데이터의 컬럼명과 지정한 영역(context)안의 요소들 중 ID 가 매칭되는것이 있으면 해당 요소에 값을 표시 합니다.</p>
+	<pre class="language-html"><code class="language-html"><xmp>
+<table id="form" class="form">
+	<tr height="43">
+		<th style="width: 20%;" align="right"><label for="picture">picture</label></th>
+		<td width="*"><img id="picture" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D" /></td>
+	</tr>
+	<tr>
+		<th><label for="name">name</label></th>
+		<td>
+			<input id="name" type="text" data-validate='[["required"]]' />
+		</td>
+	</tr>
+	<tr>
+		<th><label for="email">email</label></th>
+		<td>
+			<input id="email" type="text" data-format='[["generic", "@@@@@@＊＊＊"]]' data-validate='[["required"], ["email"]]' />
+		</td>
+	</tr>
+	<tr>
+		<th><label for="_id">password</label></th>
+		<td>
+			<input id="_id" type="password" data-validate='[["required"]]' />
+		</td>
+	</tr>
+	<tr>
+		<th><label for="balance">balance</label></th>
+		<td>
+			<input id="balance" type="text" data-format='[["numeric", "$#,###.##0"]]' data-validate='[["required"], ["decimal"]]' />
+		</td>
+	</tr>
+	<tr>
+		<th><label for="phone">phone</label></th>
+		<td>
+			<input id="phone" type="text" readonly="readonly" />
+		</td>
+	</tr>
+	<tr>
+		<th><label for="age">age</label></th>
+		<td>
+			<input id="age" type="text" disabled="disabled" />
+			<input id="index" type="hidden" />
+		</td>
+	</tr>
+	<tr>
+		<th><label for="eyeColor">eye color</label></th>
+		<td>
+			<select id="eyeColor" data-validate='[["required"]]'>
+				<option>선택</option>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<th><label for="company">company</label></th>
+		<td>
+			<select id="company" multiple="multiple" data-validate='[["required"]]' style="height: 117px;"></select>
+		</td>
+	</tr>
+	<tr>
+		<th><label for="gender">gender</label></th>
+		<td>
+			<input id="gender" type="radio" />
+		</td>
+	</tr>
+	<tr>
+		<th><label for="favoriteFruit">favorite fruit</label></th>
+		<td>
+			<input id="favoriteFruit" type="checkbox" />
+		</td>
+	</tr>
+	<tr>
+		<th><label for="registered">registered</label></th>
+		<td>
+			<input id="registered" type="text" data-format='[["date", 8, "date"]]' data-validate='[["required"]]' />
+		</td>
+	</tr>
+	<tr>
+		<th><label for="registered2">registered m</label></th>
+		<td>
+			<input id="registered2" type="text" data-format='[["date", 6, "month"]]' data-validate='[["required"]]' />
+		</td>
+	</tr>
+	<tr>
+		<th><label for="about">about</label></th>
+		<td>
+			<textarea id="about" data-format='[["limit", "50", "..."]]' data-validate='[["required"], ["korean"]]'></textarea>
+		</td>
+	</tr>
+	<tr>
+		<th><label for="greeting">about</label></th>
+		<td id="greeting"></td>
+	</tr>
+	<tr>
+		<th><label for="isActive">isActive</label></th>
+		<td>
+			<input id="isActive" type="checkbox" />
+		</td>
+	</tr>
+</table></xmp></code></pre>
+
 	<h3>생성자(Constructor)</h3>
 	<table>
 		<tr>
@@ -1235,7 +1426,7 @@
 		<tr>
 			<td></td>
 			<td>data</td>
-			<td>JWS(JSON Array)</td>
+			<td>JO(JSON Array)</td>
 			<td align="center">-</td>
 			<td>기본옵션의 data 옵션과 같습니다.</td>
 		</tr>
@@ -1276,7 +1467,7 @@
 		</tr>
 		<tr>
 			<td>data</td>
-			<td>JWS(JSON Array)</td>
+			<td>JO(JSON Array)</td>
 			<td>undefined</td>
 			<td align="center">○</td>
 			<td>입력요소에 바인드 할 데이터</td>
@@ -1293,7 +1484,7 @@
 		</tr>
 		<tr>
 			<td>context</td>
-			<td>JWS</td>
+			<td>JO</td>
 			<td>null</td>
 			<td align="center">○</td>
 			<td>폼을 적용할 폼 블록(Block)요소를 지정합니다.</td>
@@ -1401,7 +1592,7 @@
 			<td>selFlag</td>
 			<td>boolean</td>
 			<td align="center">-</td>
-			<td>true 이면 현제 바인드되어 있는 행의 데이터를 가져오고 false 이면 JWS 형태의 전체 데이터를 가져옵니다. 입력하지 않으면 정제된 순수 JSON Object Array 형태로 된 전체 데이터를 가져 옵니다.</td>
+			<td>true 이면 현제 바인드되어 있는 행의 데이터를 가져오고 false 이면 JO 형태의 전체 데이터를 가져옵니다. 입력하지 않으면 정제된 순수 JSON Object Array 형태로 된 전체 데이터를 가져 옵니다.</td>
 		</tr>
 		<tr>
 			<td>row</td>
@@ -1414,12 +1605,12 @@
 			<td>context</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
-			<td>JWO</td>
+			<td>JO</td>
 			<td>폼을 적용한 폼 블록(Block)요소를 가져옵니다.</td>
 		</tr>
 		<tr>
 			<td></td>
-			<td>sel</td>
+			<td>selector</td>
 			<td>String</td>
 			<td align="center">-</td>
 			<td>jQuery selector를 입력하면 해당 context 하위 요소에서 선택된 요소를 반환 합니다.</td>
@@ -1448,7 +1639,7 @@
 		<tr>
 			<td></td>
 			<td>data</td>
-			<td>JWS(JSON Array)</td>
+			<td>JO(JSON Array)</td>
 			<td align="center">-</td>
 			<td>data를 지정하면 데이터 전체를 지정된 데이터로 치환 합니다.</td>
 		</tr>
@@ -1511,11 +1702,47 @@
 	<h2>Grid(N.grid)</h2>
 
 	<h3>개요</h3>
-	<p>Grid(이하 N.grid)는 테이블(TABLE) 요소에 데이터를 바인드하여 그리드형태로 데이터를 표현해 주는 컴포넌트입니다. 헤더고정형, 리스트형의 두 가지 타입을 제공 합니다.</p>
+	<p>Grid(이하 N.grid)는 테이블(TABLE) 요소에 데이터를 바인드하여 테이블 형태로 데이터를 표현해 주는 컴포넌트입니다. 헤더고정형, 리스트형의 두 가지 타입을 제공 합니다.</p>
 	<p class="alert">그리드로 만들어질 TABLE 요소의 넓이는 고정(px등)이든 가변(%)이든 반드시 넓이가 지정 되어야 합니다.</p>
 
 	<h3>API DEMO</h3>
 	<div data-page="grid" class="apidemo"></div>
+
+	<h3>HTML 템플릿(HTML templete)</h3>
+<p class="alert">컴포넌트에 바인딩한 데이터의 컬럼명과 지정한 테이블(TABLE)요소의 TBODY영역에 ID 가 매칭되는것이 있으면 해당 요소에 값을 표시 합니다.</p>
+	<pre class="language-html"><code class="language-html"><xmp>
+<table id="grid" class="grid" style="width: 100%;">
+	<thead>
+		<tr>
+			<th style="width: 5%;" rowspan="2"><input id="checkAll" type="checkbox" /></th>
+			<th style="width: 20%;">eyeColor</th>
+			<th style="width: 20%;">name</th>
+			<th style="width: auto;">company</th>
+			<th style="width: 15%;">gender</th>
+		</tr>
+		<tr>
+			<th>index</th>
+			<th>email</th>
+			<th>registered</th>
+			<th>isActive</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td align="center" valign="middle" rowspan="2"><input class="checkAllTarget" type="checkbox" /></td>
+			<td><input id="eyeColor" type="text" /></td>
+			<td id="name"></td>
+			<td><input id="company" type="text" data-validate='[["required"]]' /></td>
+			<td id="gender" align="center"></td>
+		</tr>
+		<tr>
+			<td id="index" align="center" valign="middle"></td>
+			<td><input id="email" type="text" data-validate='[["required"], ["email"]]' /></td>
+			<td><input id="registered" type="text" data-format='[["date", 8, "date"]]' /></td>
+			<td align="center"><input id="isActive" type="checkbox" /></td>
+		</tr>
+	</tbody>
+</table></xmp></code></pre>
 
 	<h3>생성자(Constructor)</h3>
 	<table>
@@ -1536,7 +1763,7 @@
 		<tr>
 			<td></td>
 			<td>data</td>
-			<td>JWS(JSON Array)</td>
+			<td>JO(JSON Array)</td>
 			<td align="center">-</td>
 			<td>기본옵션의 data 옵션과 같습니다.</td>
 		</tr>
@@ -1577,14 +1804,14 @@
 		</tr>
 		<tr>
 			<td>data</td>
-			<td>JWS(JSON Array)</td>
+			<td>JO(JSON Array)</td>
 			<td>undefined</td>
 			<td align="center">○</td>
 			<td>입력요소에 바인드 할 데이터</td>
 		</tr>
 		<tr>
 			<td>context</td>
-			<td>JWS</td>
+			<td>JO</td>
 			<td>null</td>
 			<td align="center">○</td>
 			<td>그리드를 적용할 그리드 블록(Block)요소(TABLE)를 지정합니다.</td>
@@ -1619,7 +1846,7 @@
 			<td>false</td>
 			<td></td>
 			<td>
-				<p>add 메서드를 호출했을 때 새로운 로우요소와 데이터세트를 그리드의 상단에 추가할건지 하단에 추가할건지를 결정 합니다.</p>
+				<p>add 메서드를 호출했을 때 새로운 행요소와 데이터세트를 그리드의 상단에 추가할건지 하단에 추가할건지를 결정 합니다.</p>
 				<p>true 이면 상단에 추가하고 false 이면 하단에 추가 합니다.</p>
 				<p class="alert">헤더고정형(height 옵션을 0 이상 지정)의 그리드에서는 addTop 옵션이 무조건 true로 지정 됩니다. N.form 과 연동시 주의 하기 바랍니다.</p>
 			</td>
@@ -1671,8 +1898,8 @@
 			<td>false</td>
 			<td></td>
 			<td>
-				<p>특정 로우를 선택하는 효과 적용 유무, 한건만 선택 됨.</p>
-				<p> 로우 선택시 해당로우의 TBODY요소에 "grid_selected__" 스타일클래스가 생성되고 선택이 해제되면 생성된 스타일클래스가 제거 됩니다.</p>
+				<p>특정 행을 선택하는 효과 적용 유무, 한건만 선택 됨.</p>
+				<p>행 선택시 해당행의 TBODY요소에 "grid_selected__" 스타일클래스가 생성되고 선택이 해제되면 생성된 스타일클래스가 제거 됩니다.</p>
 			</td>
 		</tr>
 		<tr>
@@ -1681,8 +1908,30 @@
 			<td>false</td>
 			<td></td>
 			<td>
-				<p>특정 로우를 선택하는 효과 적용 유무, 여러건 선택 가능</p>
-				<p> 로우 선택시 해당로우의 TBODY요소에 "grid_selected__" 스타일클래스가 생성되고 선택이 해제되면 생성된 스타일클래스가 제거 됩니다.</p>
+				<p>특정 행을 선택하는 효과 적용 유무, 여러건 선택 가능</p>
+				<p>행 선택시 해당행의 TBODY요소에 "grid_selected__" 스타일클래스가 생성되고 선택이 해제되면 생성된 스타일클래스가 제거 됩니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>checkAll</td>
+			<td>String</td>
+			<td>null</td>
+			<td></td>
+			<td>
+				<p>그리드의 행을 선택하기 위한 체크박스를 모두 선택하는 checkbox input 요소 지정</p>
+				<p class="alert">jQuery selector 문자열로 지정하며 selector 의 context는 그리드 header 로 자동 지정됨</p>
+				<p class="alert">checkAll 대상 요소는 반드시 thead 영역에 있어야 함.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>checkAllTarget</td>
+			<td>String</td>
+			<td>null</td>
+			<td></td>
+			<td>
+				<p>그리드의 행을 선택하기 위한 체크박스 요소들을 지정</p>
+				<p class="alert">jQuery selector 문자열로 지정하며 selector 의 context는 그리드 body 로 자동 지정됨</p>
+				<p class="alert">checkAllTarget 대상 요소는 반드시 tbody 영역에 있어야 함.</p>
 			</td>
 		</tr>
 		<tr>
@@ -1690,7 +1939,10 @@
 			<td>boolean</td>
 			<td>false</td>
 			<td></td>
-			<td>그리드 로우들의 HOVER 효과 적용 유무</td>
+			<td>
+				<p>그리드 행들의 HOVER 효과 적용 유무</p>
+				<p>그리드 행에 MOUSE OVER 시 해당행의 TBODY요소에 "grid_hover__" 스타일클래스가 생성되고 선택이 해제되면 생성된 스타일클래스가 제거 됩니다.</p>
+			</td>
 		</tr>
 		<tr>
 			<td>createRowDelay</td>
@@ -1698,8 +1950,8 @@
 			<td>1</td>
 			<td></td>
 			<td>
-				<p>로우 요소들이 생성될 때마다의 딜레이를 지정 할수 있습니다.</p>
-				<p> 0지정시 모든로우를 한번에 만들어 표현 합니다. 이렇게 되면 브라우저는 모든로우가 생성될때까지 멈춰있게 됩니다.</p>
+				<p>행 요소들이 생성될 때마다의 딜레이를 지정 할수 있습니다.</p>
+				<p class="alert">0 지정시 모든행을 한번에 만들어 표현 합니다. 이렇게 되면 브라우저는 모든행이 생성될때까지 멈춰있게 됩니다.</p>
 			</td>
 		</tr>
 		<tr>
@@ -1708,7 +1960,7 @@
 			<td>100</td>
 			<td></td>
 			<td>
-				<p>헤더고정형 그리드에서는 스크롤페이징이 기본으로 적용됩니다. 페이징시 한번에 바인드하는 로우수를 지정 합니다.</p>
+				<p>헤더고정형 그리드에서는 스크롤페이징이 기본으로 적용됩니다. 페이징시 한번에 바인드하는 행수를 지정 합니다.</p>
 				<p> 너무 크게 지정하면 스크롤 페이징이 작동될때 브라우저에 부하가 발생되므로 그리드에 입력요소나 이미지가 들어 있다면 200 이하로 그렇지 않다면 1000 이하로 설정하는 것을 권장합니다.</p>
 			</td>
 		</tr>
@@ -1732,7 +1984,7 @@
 			<td>null</td>
 			<td></td>
 			<td style="max-width: 299px;">
-				<p>그리드 데이터가 바인드될때 로우가 생성될때마다 발생하는 이벤트입니다. 이벤트 콜백 메서드의 인자로 생성될 당시의 row index, 로우 요소, 로우 데이터를 넣어줍니다.</p>
+				<p>그리드 데이터가 바인드될때 행이 생성될때마다 발생하는 이벤트입니다. 이벤트 콜백 메서드의 인자로 생성될 당시의 row index, 행 요소, 로우 데이터를 넣어줍니다.</p>
 				<pre><code class="language-javascript">rowHandler : function(index, rowEle, rowData) {
 	// this 는 rowEle
 }</code></pre>
@@ -1744,7 +1996,7 @@
 			<td>null</td>
 			<td></td>
 			<td style="max-width: 299px;">
-				<p>그리드의 행이 선택될때마다 발생되는 이벤트입니다. 이벤트 콜백 메서드의 인자로 생성될 당시의 row index, 로우 요소, 로우 데이터, 바로전에 선택한 row index 를 넣어줍니다.</p>
+				<p>그리드의 행이 선택될때마다 발생되는 이벤트입니다. 이벤트 콜백 메서드의 인자로 생성될 당시의 row index, 행 요소, 로우 데이터, 바로전에 선택한 row index 를 넣어줍니다.</p>
 				<pre><code class="language-javascript">onSelect : function(index, rowEle, rowData, beforeRow) {
 	// this 는 rowEle
 }</code></pre>
@@ -1762,7 +2014,24 @@
 				<pre><code class="language-javascript">onBind : function(context, data) {
 	// this 는 context
 }</code></pre>
-				<p> 스크롤페이징에 의해 페이징 될 때도 페이지가 완성 될 때마다 발생합니다.</p>
+				<p> 스크롤페이징에 의해 페이징 될 때도 해당 행수 만큼 페이지가 완성 될 때마다 발생합니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="5" style="background-color: #88ff88;color: #004a00;"><b>기타 상수</b>(기본옵션에 포함되어 있는 상수 값)</td>
+		</tr>
+		<tr>
+			<td>misc.withoutTbodyLength</td>
+			<td>int</td>
+			<td>0</td>
+			<td></td>
+			<td>
+				데이터를 표현하지 않는 숨어있는 행 수
+				<p class="alert">
+					그리드 에서 클릭한 행의 Index 를 자동으로 가져오기위해 $("selector").index() 메서드 사용 시 반환된 Index 값은 클릭한 행의 인덱스에 1이 더해져 있습니다.
+					또한 colGroup 등 tbody 태그 레벨에 기입되는 요소가 있다면 그러한 요소 갯수만큼 Index가 더해져서 반환됩니다. 이를 보정하기 위한 값으로 withoutTbodyLength 를 제공합니다.
+					 $("selector").index() - gridInstance.options.misc.withoutTbodyLength 와 같이 사용한다면 정확한 Index 값을 가져 올 수 있습니다.
+				</p>
 			</td>
 		</tr>
 	</table>
@@ -1821,7 +2090,7 @@
 			<td>String</td>
 			<td align="center">-</td>
 			<td>
-				<p>false 이면 JWS 형태의 전체 데이터를 가져옵니다. 입력하지 않으면 정제된 순수 JSON Object Array 형태로 된 전체 데이터를 가져 옵니다.</p>
+				<p>false 이면 JO 형태의 전체 데이터를 가져옵니다. 입력하지 않으면 정제된 순수 JSON Object Array 형태로 된 전체 데이터를 가져 옵니다.</p>
 				<p>modified 이면 추가, 수정, 삭제 된 데이터를 가져옵니다.</p>
 				<p>delete 이면 삭제된 데이터, update 이면 수정된 데이터, insert 이면 추가된 데이터를 가져옵니다.</p>
 			</td>
@@ -1830,12 +2099,12 @@
 			<td>context</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
-			<td>JWO</td>
+			<td>JO</td>
 			<td>그리드를 적용한 그리드 블록(Block)요소를 가져옵니다.</td>
 		</tr>
 		<tr>
 			<td></td>
-			<td>sel</td>
+			<td>selector</td>
 			<td>String</td>
 			<td align="center">-</td>
 			<td>jQuery selector를 입력하면 해당 context 하위 요소에서 선택된 요소를 반환 합니다.</td>
@@ -1850,7 +2119,7 @@
 		<tr>
 			<td></td>
 			<td>data</td>
-			<td>JWS(JSON Array)</td>
+			<td>JO(JSON Array)</td>
 			<td align="center">-</td>
 			<td>data를 지정하면 데이터 전체를 지정된 데이터로 치환 합니다.</td>
 		</tr>
@@ -1890,7 +2159,7 @@
 			<td>row</td>
 			<td>int</td>
 			<td align="center">-</td>
-			<td>row index를 입력하면 해당 로우만 되돌려 주고 입력하지 않으면 전체다 되돌려 줍니다.</td>
+			<td>row index를 입력하면 해당 행만 되돌려 주고 입력하지 않으면 전체다 되돌려 줍니다.</td>
 		</tr>
 		<tr>
 			<td>validate</td>
@@ -1904,7 +2173,7 @@
 			<td>row</td>
 			<td>int</td>
 			<td align="center">-</td>
-			<td>row index를 입력하면 해당 로우데이터만 검증하고 입력하지 않으면 전체 데이터를 검증합니다.</td>
+			<td>row index를 입력하면 해당 행데이터만 검증하고 입력하지 않으면 전체 데이터를 검증합니다.</td>
 		</tr>
 		<tr>
 			<td>val</td>
@@ -1915,7 +2184,7 @@
 				<p>선택한 값을 가져오거나 입력 한다.</p>
 				<p>val 인자를 입력하지 않으면 선택한 값을 반환하고 입력하면 선택한 컬럼의 값을 입력한 값으로 바꿔준다.</p>
 
-				<p> 값 입력 시 지정한 로우의 key 에 해당하는 HTML 요소가 없으면 데이터만 생성한다.</p>
+				<p> 값 입력 시 지정한 행의 key 에 해당하는 HTML 요소가 없으면 데이터만 생성한다.</p>
 			</td>
 		</tr>
 		<tr>
@@ -1946,14 +2215,402 @@
 	<h2>Pagination(N.pagination)</h2>
 
 	<h3>개요</h3>
-	<p>API 문서 준비중...</p>
+	<p>
+	Pagination(이하 N.pagination)은 데이터 표현에 대한 브라우저의 부하를 줄이기 위해 데이터를 지정한 갯수만큼 잘라서 보여주는 컴포넌트입니다.
+	N.grid 와 연동하여 사용하면 서버단 페이징(DB 쿼리 페이징) 및 브라우저 단 페이징(전체 조회 후 잘라서 보여주기) 을 쉽게 구현 할 수 있습니다.
+	또한 페이징이 필요한 어떠한 목록도 페이징 처리를 할 수 있습니다.
+	</p>
+
+	<h3>API DEMO(문서 준비 중입니다.)</h3>
+	<div data-page="pagination" class="apidemo"></div>
+
+	<h3>HTML 템플릿(HTML templete)</h3>
+	<p class="alert">다음과 같은 구조의 요소들을 배치하면 Pagination이 만들어 집니다.</p>
+	<pre class="language-html"><code class="language-html"><xmp><div id="pagination">
+	<ul>
+		<li><a href="#" title="첫페이지">first</a></li>
+		<li><a href="#" title="이전">prev</a></li>
+	</ul>
+	<ul>
+		<li><a href="#"><span>1</span></a></li>
+	</ul>
+	<ul>
+		<li><a href="#" title="다음페이지">next</a></li>
+		<li><a href="#" title="마지막페이지">last</a></li>
+	</ul>
+</div></xmp></code></pre>
+
+	<h3>생성자(Constructor)</h3>
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Arguments</th>
+			<th>Type</th>
+			<th>Return</th>
+			<th style="width: auto;">Description</th>
+		</tr>
+		<tr>
+			<td>N.pagination</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>N.pagination</td>
+			<td>N.pagination 객체를 생성합니다.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>context</td>
+			<td>window or JO</td>
+			<td align="center">-</td>
+			<td>기본옵션의 context 옵션과 같습니다.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>opts</td>
+			<td>JSON Object</td>
+			<td align="center">-</td>
+			<td>기본 옵션을 JSON Object 형태로 지정 합니다.</td>
+		</tr>
+		<tr>
+			<td>N(obj).pagination</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>N.pagination</td>
+			<td>
+				<p>N.pagination을 플러그인 방식으로의 초기화 방식입니다.</p>
+				<p>N.pagination와 동작되는 로직은 같으며 실제 N() 의 인자로 들어온 값이 N.pagination()의 첫 번째 인자로 지정 됩니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>opts</td>
+			<td>JSON Object</td>
+			<td align="center">-</td>
+			<td>N.pagination의 opts 옵션과 같습니다.</td>
+		</tr>
+	</table>
+
+	<h3>기본옵션(Default options)</h3>
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Type</th>
+			<th>Default</th>
+			<th>Required</th>
+			<th style="width: auto;">Description</th>
+		</tr>
+		<tr>
+			<td>context</td>
+			<td>JO</td>
+			<td>obj</td>
+			<td align="center">○</td>
+			<td>Pagination 을 적용할 컨텍스트 요소를 지정합니다.</td>
+		</tr>
+		<tr>
+			<td>totalCount</td>
+			<td>int</td>
+			<td>0</td>
+			<td align="center">○</td>
+			<td>전체 로우 카운트를 지정 합니다.</td>
+		</tr>
+		<tr>
+			<td>countPerPage</td>
+			<td>int</td>
+			<td>10</td>
+			<td align="center">○</td>
+			<td>한번에 몇개의 로우데이터를 반환 할 것인지 지정 합니다.</td>
+		</tr>
+		<tr>
+			<td>countPerPageSet</td>
+			<td>int</td>
+			<td>10</td>
+			<td align="center">○</td>
+			<td>페이징 번호를 몇개를 표시할 것인지 지정 합니다.</td>
+		</tr>
+		<tr>
+			<td>pageNo</td>
+			<td>int</td>
+			<td>1</td>
+			<td align="center">○</td>
+			<td>초기화시 처음 표시 할 페이지 번호를 지정 합니다.</td>
+		</tr>
+		<tr>
+			<td>onChange</td>
+			<td>Function</td>
+			<td>null</td>
+			<td align="center"></td>
+			<td>
+			페이지가 전환 될때 발생되는 이벤트 입니다.
+				<pre><code class="language-javascript">onChange : function(pageNo, selEle, selData, currPageNavInfo) {
+	// this 는 선택한 페이지 링크 요소
+	// pageNo 는 선택한 페이지 번호
+	// selEle 는 선택한 페이지 링크 요소
+	// selData 는 선택한 페이지가 가지고 있는 데이터 리스트
+	// currPageNavInfo 는 이벤트가 발생할 시점의 페이징 정보
+}</code></pre>
+			</td>
+		</tr>
+	</table>
+
+	<h3>함수(Methods)(문서 준비 중입니다.)</h3>
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Arguments</th>
+			<th>Type</th>
+			<th>Return</th>
+			<th style="width: auto;">Description</th>
+		</tr>
+		<tr>
+			<td>data</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>JSON Array</td>
+			<td>선택입력요소에 바인드 되어 있는 데이터를 반환 합니다.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>selFlag</td>
+			<td>boolean</td>
+			<td align="center">-</td>
+			<td>true 이면 현재 선택된 값에 해당하는 데이터만 가져오고 false 이면 JO 형태의 전체 데이터를 가져옵니다. 입력하지 않으면 정제된 순수 JSON Object Array 형태로 된 전체 데이터를 가져 옵니다.</td>
+		</tr>
+		<tr>
+			<td>context</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>JO</td>
+			<td>바인드한 선택입력요소를 가져옵니다.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>selector</td>
+			<td>String</td>
+			<td align="center">-</td>
+			<td>jQuery selector를 입력하면 해당 context 하위 요소에서 선택된 요소를 반환 합니다.</td>
+		</tr>
+		<tr>
+			<td>bind</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>N.select</td>
+			<td>context 에 데이터를 바인드 합니다.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>data</td>
+			<td>String</td>
+			<td align="center">-</td>
+			<td>val 인자가 undefined 가 아니면 val 값에 해당하는 요소를 선택해 줍니다.</td>
+		</tr>
+	</table>
 </div>
 
 <div id="tab10">
 	<h2>Tree(N.tree)</h2>
 
 	<h3>개요</h3>
-	<p>API 문서 준비중...</p>
+	<p>Tree(이하 N.tree)는 계층 구조의 데이터를 트리 형태로 표현 해 주는 컴포넌트입니다.</p>
+
+	<h3>API DEMO(문서 준비 중입니다.)</h3>
+	<div data-page="tree" class="apidemo"></div>
+
+	<h3>HTML 템플릿(HTML templete)</h3>
+	<p class="alert">블록요소를 context로 지정하면 지정한 요소안에 트리를 만들어 줍니다.</p>
+	<pre class="language-html"><code class="language-html"><xmp><div id="tree"></div></xmp></code></pre>
+
+	<h3>생성자(Constructor)</h3>
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Arguments</th>
+			<th>Type</th>
+			<th>Return</th>
+			<th style="width: auto;">Description</th>
+		</tr>
+		<tr>
+			<td>N.tree</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>N.tree</td>
+			<td>N.tree 객체를 생성합니다.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>context</td>
+			<td>window or JO</td>
+			<td align="center">-</td>
+			<td>기본옵션의 context 옵션과 같습니다.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>opts</td>
+			<td>JSON Object</td>
+			<td align="center">-</td>
+			<td>기본 옵션을 JSON Object 형태로 지정 합니다.</td>
+		</tr>
+		<tr>
+			<td>N(obj).tree</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>N.tree</td>
+			<td>
+				<p>N.tree을 플러그인 방식으로의 초기화 방식입니다.</p>
+				<p>N.tree와 동작되는 로직은 같으며 실제 N() 의 인자로 들어온 값이 N.tree()의 첫 번째 인자로 지정 됩니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>opts</td>
+			<td>JSON Object</td>
+			<td align="center">-</td>
+			<td>N.tree의 opts 옵션과 같습니다.</td>
+		</tr>
+	</table>
+
+	<h3>기본옵션(Default options)</h3>
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Type</th>
+			<th>Default</th>
+			<th>Required</th>
+			<th style="width: auto;">Description</th>
+		</tr>
+		<tr>
+			<td>context</td>
+			<td>JO</td>
+			<td>obj</td>
+			<td align="center">○</td>
+			<td>Tree 를 적용할 컨텍스트 요소를 지정합니다.</td>
+		</tr>
+		<tr>
+			<td>key</td>
+			<td>String</td>
+			<td>null</td>
+			<td align="center">○</td>
+			<td>노드명으로 표시될 데이터의 컬럼명(key)을 지정 합니다.</td>
+		</tr>
+		<tr>
+			<td>val</td>
+			<td>String</td>
+			<td>null</td>
+			<td align="center">○</td>
+			<td>노드값으로 표시될 데이터의 컬럼명(key)을 지정 합니다.</td>
+		</tr>
+		<tr>
+			<td>level</td>
+			<td>String</td>
+			<td>level</td>
+			<td align="center"></td>
+			<td>
+				노드 레벨로 표현될 데이터의 컬럼명(key)을 지정 합니다.
+				<p class="alert">데이터 자체에 LEVEL정보를 가지고 있다면 level정보를 갖고 있는 컬럼(key)명 지정 시 트리 렌더링 속도가 더 빨라집니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>parent</td>
+			<td>String</td>
+			<td>null</td>
+			<td align="center">○</td>
+			<td>부모노드 값으로 참조될 컬럼명(key)을 지정 합니다.</td>
+		</tr>
+		<tr>
+			<td>checkbox</td>
+			<td>boolean</td>
+			<td>false</td>
+			<td align="center"></td>
+			<td>노드명 앞에 체크박스 표시 유무, 체크박스를 표시하면 선택된 노드의 값들만 추출 할 수 있습니다.</td>
+		</tr>
+		<tr>
+			<td>onSelect</td>
+			<td>Function</td>
+			<td>null</td>
+			<td align="center"></td>
+			<td>
+			노드가 선택되었을때 발생되는 이벤트 입니다.
+				<pre><code class="language-javascript">onSelect : function(selNodeIndex, selNodeEle, selNodeData) {
+	// this 는 선택된 노드의 요소
+	// selNodeIndex 는 선택된 노드의 index
+	// selNodeEle 는 선택된 노드의 요소
+	// selNodeData 는 선택된 노드의 row data
+}</code></pre>
+			</td>
+		</tr>
+		<tr>
+			<td>onCheck</td>
+			<td>Function</td>
+			<td>null</td>
+			<td align="center"></td>
+			<td>
+			노드 앞의 체크박스가 선택 되었을때 발생되는 이벤트 입니다.
+				<pre><code class="language-javascript">onCheck : function(selNodeIndex, selNodeEle, selNodeData
+					, checkedElesIndexes, checkedEles, checkedElesData
+					, checkFlag) {
+	// this 는 선택된 노드의 요소
+	// selNodeIndex 는 선택된 노드의 index
+	// selNodeEle 는 선택된 노드의 요소
+	// selNodeData 는 선택된 노드의 row data
+	// checkedElesIndexes 는 체크된 노드들의 index
+	// selNodeEle 는 체크된된 노드들의 요소
+	// selNodeData 는 체크된 노드들의 row data
+	// checkFlag 는 체크 유무
+}</code></pre>
+			</td>
+		</tr>
+	</table>
+
+	<h3>함수(Methods)(문서 준비 중입니다.)</h3>
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Arguments</th>
+			<th>Type</th>
+			<th>Return</th>
+			<th style="width: auto;">Description</th>
+		</tr>
+		<tr>
+			<td>data</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>JSON Array</td>
+			<td>선택입력요소에 바인드 되어 있는 데이터를 반환 합니다.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>selFlag</td>
+			<td>boolean</td>
+			<td align="center">-</td>
+			<td>true 이면 현재 선택된 값에 해당하는 데이터만 가져오고 false 이면 JO 형태의 전체 데이터를 가져옵니다. 입력하지 않으면 정제된 순수 JSON Object Array 형태로 된 전체 데이터를 가져 옵니다.</td>
+		</tr>
+		<tr>
+			<td>context</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>JO</td>
+			<td>바인드한 선택입력요소를 가져옵니다.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>selector</td>
+			<td>String</td>
+			<td align="center">-</td>
+			<td>jQuery selector를 입력하면 해당 context 하위 요소에서 선택된 요소를 반환 합니다.</td>
+		</tr>
+		<tr>
+			<td>bind</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>N.select</td>
+			<td>context 에 데이터를 바인드 합니다.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>data</td>
+			<td>String</td>
+			<td align="center">-</td>
+			<td>val 인자가 undefined 가 아니면 val 값에 해당하는 요소를 선택해 줍니다.</td>
+		</tr>
+	</table>
 </div>
 
 </div>

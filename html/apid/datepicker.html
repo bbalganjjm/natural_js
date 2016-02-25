@@ -9,26 +9,19 @@
 		</tr>
 		<tr>
 			<th width="10%">onSelect</th>
-			<td colspan="3"><textarea id="onSelect" style="height: 96px;">function(context, selDate, monthonly) {
-	N.log("onSelect");
-	N.log(context);
-	N.log(selDate);
-	N.log(monthonly);
-}</textarea><br /><br>Callback function for date select event</td>
+			<td colspan="3"><textarea id="onSelect" style="height: 40px;">function(context, selDate, monthonly) {
+	N.log("onSelect", context, selDate, monthonly);
+}</textarea><br>Event handler for date select event</td>
 		</tr>
 		<tr>
 			<th>onBeforeShow</th>
-			<td><textarea id="onBeforeShow" style="height: 80px;">function(context, contents) {
-	N.log("onBeforeShow");
-	N.log(context);
-	N.log(contents);
-}</textarea><br /><br>Callback function for date onBeforeShow event</td>
+			<td><textarea id="onBeforeShow" style="height: 40px;">function(context, contents) {
+	N.log("onBeforeShow", context, contents);
+}</textarea><br>Event handler for onBeforeShow event</td>
 			<th>onBeforeHide</th>
-			<td><textarea id="onBeforeHide" style="height: 80px;">function(context, contents) {
-	N.log("onBeforeHide");
-	N.log(context);
-	N.log(contents);
-}</textarea><br /><br>Callback function for date onBeforeHide event</td>
+			<td><textarea id="onBeforeHide" style="height: 40px;">function(context, contents) {
+	N.log("onBeforeHide", context, contents);
+}</textarea><br>Event handler for onBeforeHide event</td>
 		</tr>
 	</table>
 
