@@ -341,6 +341,16 @@ article .alert {
 	background: url("../images/icon/alert.png") no-repeat 7px 10px; font-size: 0.95em; padding: 5px 5px 5px 25px; background-color: #cfc; border-radius: 3px;
 }
 
+article .alert ul {
+	margin: 0;
+	padding: 0 0 0 10px;
+}
+
+article .alert ul > li {
+	margin: 0;
+	padding: 0;
+}
+
 .grid input[type='text'], .grid input[type='password'], .grid select, .grid textarea {
 	width: 95%;
 }

@@ -1,3 +1,8 @@
+<style type="text/css">
+	img {
+		margin: 25px;
+	}
+</style>
 <article id="basic">
 	<h1>Natural-JS</h1>
 	<h2>개요</h2>
@@ -9,19 +14,19 @@
 	<p>1990년대 등장한 웹 기술은 네트워크의 보급 확산과 정보공유 및 어플리케이션개발의 편의성에 힘입어 폭발적인 성장을 거듭하였습니다. 오늘날 웹 어플리케이션은 개인적 정보 공유로부터 기업의 자원 관리 및
 		전자정부에 이르기까지 현대인의 생활 전반에 매우 깊이 자리 잡고 있는 필수적인 부분이 되었습니다. 사용자에게 있어 이와 같은 웹 어플리케이션의 모든 기능은 사용자 인터페이스를 통해 보여 집니다. 이러한 사용자
 		인터페이스는 웹의 종단 사용자들이 경험하는 대화형 워크플로우의 모든 부분에 연관되며, 개발과정에서 가장 많은 시간과 노력이 요구되는 영역입니다. 한 통계자료에 따르면, 웹 어플리케이션 시스템 개발에 있어서 전체
-		개발 비용 중 유지보수에 관계된 비용은 75%가 사용자 인터페이스와 관련(이성혜, 마이크로소프트웨어, 7월 2003년)이 있다고 합니다. Ajax (Asynchronous Java Script and XML)는
+		개발 비용 중 유지보수에 관계된 비용은 80%가 사용자 인터페이스와 관련(이성혜, 마이크로소프트웨어, 7월 2003년)이 있다고 합니다. Ajax (Asynchronous Java Script and XML)는
 		클라이언트 영역에 사용되는 일련의 웹 개발 방법들을 지칭하는 용어로 이러한 사용자 인터페이스 개발을 위한 대표적 기술 중 하나입니다. Ajax를 통하여, 웹 어플리케이션들은 현재 페이지의 디스플레이나 동작에
 		방해받지 않고 비동기 방식으로 서버로부터 데이터를 검색하고 추출하는 것이 가능합니다. Ajax 기술은 웹 사이트의 능률적이고 역동적인 사용자 인터페이스 개발을 위해 폭넓게 채택되고 있으며, e-mail 시스템,
 		메시지 링킹, 주식거래 및 전자정부 시스템 등의 다양한 웹 어플리케이션에 향상된 사용자 경험을 제공하기 위해 사용되고 있습니다. 또한 Google이나 facebook등의 초대형 글로벌사이트들은 사용자 편의성을
 		위해 Ajax기술을 채택하고 있어 Ajax의 중요성을 증명하고 있습니다.</p>
 	<p align="center">
-		<img src="images/refr/pic1.png" width="75%" />
+		<img src="images/refr/pic1.png" width="80%" />
 	</p>
 	<p align="center">[그림1] WEB 2.0을 구현하는 기술</p>
 	<p>Ajax 기반 클라이언트는 이와 같은 다양한 웹 어플리케이션에서 고급 사용자 경험의 제공을 가능하게 하는 장점이 있지만, 방대한 분량의 코드로 이루어진 복잡한 클라이언트 개발에 있어 웹-개발의 편의성과
 		유지보수성 등이 낮아지는 단점이 있습니다. 다음은 Ajax기반의 웹 어플리케이션 개발의 대표적인 문제점을 나타내는 그림입니다.</p>
 	<p align="center">
-		<img src="images/refr/pic2.png" width="75%" />
+		<img src="images/refr/pic2.png" width="80%" />
 	</p>
 	<p align="center">[그림2] 현행 Ajax기반의 웹 어플리케이션 개발의 문제점</p>
 	<p>위와 같은 문제점들을 해결하여 웹-개발의 편의성과 유지보수성 향상을 제공할 수 있는 기술로 MVC (Model-View-Controller) 패턴을 들 수 있는데, 이 패턴은 응용 로직을 사용자
@@ -36,7 +41,7 @@
 		전반적으로 사용되어 지는 라이브러리의 패키지이고 Natural-ARCHITECTURE는 웹 어플리케이션 UI 개발에 대한 아키텍처를 제공 해 주고 Natural-DATA는 Data 처리 및 데이터 동기화에 대한
 		모듈들을 제공 하며 Natural-UI 는 HTML 기반의 Grid, Form, Popup등 여러 가지 컴포넌트를 제공 합니다.</p>
 	<p align="center">
-		<img src="images/refr/pic3.png" width="75%" />
+		<img src="images/refr/pic3.png" width="80%" />
 	</p>
 	<p align="center">[그림3] Natural-JS 아키텍처 구성도</p>
 
@@ -58,7 +63,7 @@
 	<p>Natural-JS 는 CVC 아키텍처 패턴 기반의 Natural-Architecture Framework 를 제공하여 웹 어플리케이션 UI 개발의 복잡성을 해결하고 개발생산성을 향상 시켜줍니다.
 		Natural-ARCHITECTURE 는 다음 다이어그램과 같이 구성되어 있습니다.</p>
 	<p align="center">
-		<img src="images/refr/pic4.png" width="75%" />
+		<img src="images/refr/pic4.png" width="80%" />
 	</p>
 	<p align="center">[그림4] Natural-ARCHITECTURE</p>
 	<h4>1) CVC Architecture Pattern</h4>
@@ -66,7 +71,7 @@
 		서비스해주는 단순 Model 영역으로 정의하여 MVC를 바라보는 관점을 서버중심에서 클라이언트 중심으로 이동 하는것이 CVC아키텍처 패턴의 핵심이론입니다. 이로서 클라이언트 브라우저를 웹 어플리케이션 서버와
 		서버기술의 종속성으로부터 탈피시킬 수 있고 디자인영역과 개발영역을 완벽하게 분리하여 개발의 복잡도를 낮출 수 있습니다.</p>
 	<p align="center">
-		<img src="images/refr/pic5.png" width="75%" />
+		<img src="images/refr/pic5.png" width="80%" />
 	</p>
 	<p align="center">[그림5] CVC Architecture Pattern</p>
 	<h4>2) Natural Architecture Framework</h4>
@@ -77,7 +82,7 @@
 		간 데이터를 전송하고 요청 정보등을 가져올 수 있는 N.comm.request 객체를 제공 합니다. 또한 N.comm에서는 서버에 요청(Request)과 응답(Response)의 각 단계별로 공통된 기능을
 		수행시킬 수 있는 Java Servlet Filter나 Spring의 Interceptor와 같은 기능을 수행하는 Natural Filter 기능을 제공 합니다.</p>
 	<p align="center">
-		<img src="images/refr/pic6.png" width="75%" />
+		<img src="images/refr/pic6.png" width="80%" />
 	</p>
 	<p align="center">[그림6] Natural Architecture Framework</p>
 	<p>Natural Application Context(N.context)는 Natural-JS 의 생명주기(Life-Cycle) 안의 데이터 저장소 역할을 수행 하며 설정 데이터, 메시지 리소스 등을 저장
@@ -119,7 +124,7 @@
 		수 있습니다.</p>
 	<p>Natural-UI는 다음과 같은 컴포넌트들과 구조로 구성 되어 있습니다.</p>
 	<p align="center">
-		<img src="images/refr/pic7.png" width="75%" />
+		<img src="images/refr/pic7.png" width="80%" />
 	</p>
 	<p align="center">[그림7] Natural-UI</p>
 

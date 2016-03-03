@@ -27,7 +27,7 @@
 &lt;/script&gt;</code></pre>
 	<p>
 		위와 같이 N.cont 를 선언하면 View 영역의 Load 가 완료된 후 N.cont의 인자로 들어온 Controller 클래스에 init 메서드가 정의 되어 있다면 init 메서드를 프레임워크에서 실행 시켜 줍니다.
-		init 의 인자(Arguments)로는 View영역의 HTML 요소들이 담긴 JO 객체와 Communicator.request(Communicator 참조) 객체를 넣어 줍니다.
+		init 의 인자(Arguments)로는 View영역의 HTML 요소들이 담긴 jQuery Object 객체와 Communicator.request(Communicator 참조) 객체를 넣어 줍니다.
 		또한 Controller Class 의 초기화(Initialize)가 완료되면 View영역의 최상위 Element 에 해당 Controller 인스턴스(instance)를 넣어줘 N("페이지 최상위 Element").instance("cont") 로 View 영역에서 참조 할 수 있습니다.
 	</p>
 
@@ -56,7 +56,7 @@
 		<tr>
 			<td></td>
 			<td>obj</td>
-			<td>JO</td>
+			<td>jQuery Object</td>
 			<td align="center">-</td>
 			<td>View 영역을 selector로 지정 합니다.</td>
 		</tr>
@@ -106,7 +106,7 @@
 		<tr>
 			<td></td>
 			<td>view</td>
-			<td>JO</td>
+			<td>jQuery Object</td>
 			<td align="center">-</td>
 			<td>View 영역의 요소들을 반환 합니다.</td>
 		</tr>
@@ -148,12 +148,12 @@
 		<tr>
 			<td></td>
 			<td>obj</td>
-			<td>JO(selector or element) or Object(JSON) or  JO(Object(JSON))</td>
+			<td>jQuery Object(selector or element) or Object(JSON) or  jQuery Object(Object(JSON))</td>
 			<td align="center">-</td>
 			<td style="max-width: 299px;">
-				<p>JO(selector or element) 형태의 인자로 지정하고 두 번째인자로 특정 페이지의 URL을 지정하면 가져온 HTML 컨텐츠를 지정한 요소 안에 넣어줍니다.</p>
+				<p>jQuery Object(selector or element) 형태의 인자로 지정하고 두 번째인자로 특정 페이지의 URL을 지정하면 가져온 HTML 컨텐츠를 지정한 요소 안에 넣어줍니다.</p>
 				<p>Object(JSON)  형태의 인자로 지정하면 Communicator.request 의 옵션으로 지정 됩니다.</p>
-				<p>JO(Object(JSON)) 형태의 인자로 지정하면 지정한 값을 서버로 전송한 파라미터로 인식하여 서버에 요청을 보낼 때 전송 해 줍니다.</p>
+				<p>jQuery Object(Object(JSON)) 형태의 인자로 지정하면 지정한 값을 서버로 전송한 파라미터로 인식하여 서버에 요청을 보낼 때 전송 해 줍니다.</p>
 				<p>* PAGE: </p>
 				<pre><code class="language-javascript">N.comm(N("#contents"), "page.html").submit()</code></pre>
 				<p>* DATA: </p>
