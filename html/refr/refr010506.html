@@ -1,4 +1,4 @@
-<article id="refr0105" class="apiDoc">
+<article id="refr010506" class="apiDoc">
 	<h2>Select(N.select)</h2>
 
 	<h3>개요</h3>
@@ -135,7 +135,7 @@
 			<td>data</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
-			<td>JSON Array | jQuery Object</td>
+			<td>JSON Array or jQuery Object</td>
 			<td>컴포넌트에 바인드 되어 있는 최종 데이터를 반환 합니다.</td>
 		</tr>
 		<tr>
@@ -153,6 +153,21 @@
 						<li>false : jQuery Object 형태의 데이터를 반환 합니다.</li>
 					</ul>
 				</div>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<p>arguments[1],</p>
+				<p>arguments[2],</p>
+				<p>arguments[3],</p>
+				<p>...arguments[N]</p>
+			</td>
+			<td>String</td>
+			<td align="center">-</td>
+			<td>
+				<p><strong style="color: red; font-size: 15px;">기능 구현중...</strong></p>
+				data 메서드의 두번째 인자부터 N번째 인자까지 데이터의 컬럼명을 지정하면 해당 컬럼에 해당하는 데이터만 추출하여 반환 합니다.
 			</td>
 		</tr>
 		<tr>
@@ -215,7 +230,7 @@
 </article>
 
 <script type="text/javascript">
-N("article#refr0105").cont({
+N("article#refr010506").cont({
     init : function(view, request) {
     	// code highlight
     	if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {

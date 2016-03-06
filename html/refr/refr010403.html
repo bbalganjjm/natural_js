@@ -1,0 +1,117 @@
+<article id="refr010403" class="apiDoc">
+	<h2>Validator(N.validator)</h2>
+
+	<h3>개요</h3>
+	<p>Validator 는 지정한 데이터세트를 정의한 룰을 기반으로 데이터세트 전체를 검증하여 검증 데이터 세트를 반환해 주는 라이브러리입니다. 룰(rules) 대신 입력요소가 담겨있는 블록요소(Block element)를 지정하면 입력요소에 선언형옵션으로 지정된 룰을 기반으로 검증을 하여 검증에 통과하지 못했다면 입력요소 바로옆에 툴팁으로 검증 메시지를 보여줍니다.</p>
+
+	<h3>API DEMO</h3>
+	<div data-page="validator" class="apidemo"></div>
+
+	<h3>생성자(Constructor)</h3>
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Arguments</th>
+			<th>Type</th>
+			<th>Return</th>
+			<th style="width: auto;">Description</th>
+		</tr>
+		<tr>
+			<td>N.validator</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>N.validator</td>
+			<td>N.validator 객체를 생성 합니다.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>obj</td>
+			<td>JSON Object</td>
+			<td align="center">-</td>
+			<td>검증할 데이터세트를 지정 합니다. 데이터는 JSON Array 타입으로 입력 해야 합니다.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>rules</td>
+			<td>JSON Object or jQuery Object(elements)</td>
+			<td align="center">-</td>
+			<td style="max-width: 299px;">
+				<p>룰은 다음과 같이 두가지 형태로 지정 가능 합니다.</p>
+				<p>* 라이브러리 초기화 시 명령형 옵션으로 지정 : </p>
+				<pre><code class="language-javascript">// { "컬럼명" : [[룰명, arg0, arg1...], [룰명, arg0, arg1...]] }
+{
+	&quot;numeric&quot; : [[&quot;required&quot;], [&quot;integer+commas&quot;]],
+	&quot;generic&quot; : [[&quot;required&quot;], [&quot;korean&quot;]],
+	&quot;limit&quot; : [[&quot;required&quot;], [&quot;alphabet&quot;]]
+}</code></pre>
+				<p>* data-validate 속성에 선언형 옵션으로 지정 : </p>
+				<pre><code class="language-markup">&lt;input id="numeric" type="text"
+	data-validate='[[&quot;required&quot;], [&quot;integer+commas&quot;]]'/&gt;</code></pre>
+[ ["룰명", "룰arguments[0]", "룰 arguments[1]"], ... ]
+			</td>
+		</tr>
+		<tr>
+			<td>N(obj).validator</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>N.validator</td>
+			<td>
+				<p>N.validator를 플러그인 방식으로의 초기화 방식입니다.</p>
+				<p>N.validator와 동작되는 로직은 같으며 실제 N() 의 인자로 들어온 값이 N.validator()의 첫 번째 인자로 지정 됩니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>rules</td>
+			<td>JSON Object or jQuery Object(elements)</td>
+			<td align="center">-</td>
+			<td>N.validator의 rules 인자 와 같습니다.</td>
+		</tr>
+	</table>
+
+	<h3>함수(Methods)</h3>
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Arguments</th>
+			<th>Type</th>
+			<th>Return</th>
+			<th style="width: auto;">Description</th>
+		</tr>
+		<tr>
+			<td>validate</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>데이터의 컬럼별 검증결과 데이터</td>
+			<td>데이터 검증을 실행합니다.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>row</td>
+			<td>number</td>
+			<td align="center">-</td>
+			<td>
+				<p>검증할 데이터의 row, </p>
+				<p>입력하지 않으면 무조건 첫 번째 데이터를 양식화 합니다.</p>
+			</td>
+		</tr>
+	</table>
+</article>
+
+<script type="text/javascript">
+N("article#refr010403").cont({
+    init : function(view, request) {
+    	// code highlight
+    	if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {
+			view.find("code").each(function() {
+				Prism.highlightElement(this);
+	    	});
+    	}
+
+    	//load api demo page
+    	N(".apidemo", view).each(function() {
+    		N(this).comm("html/apid/" + N(this).data("page") + ".html").submit();
+    	});
+    }
+});
+</script>

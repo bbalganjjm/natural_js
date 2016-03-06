@@ -1,0 +1,131 @@
+<article id="refr010402" class="apiDoc">
+	<h3>마. 포맷 룰(Format rules)</h3>
+	<table>
+		<tr>
+			<th style="width: 200px;">옵션명</th>
+			<th style="width: auto;">설명</th>
+		</tr>
+		<tr>
+			<td>["ssn"]</td>
+			<td>주민등록번호 형식으로 변경</td>
+		</tr>
+		<tr>
+			<td>["cno"]</td>
+			<td>사업자등록번호 형식으로 변경</td>
+		</tr>
+		<tr>
+			<td>["upper"]</td>
+			<td>대문자로 변경</td>
+		</tr>
+		<tr>
+			<td>["lower"]</td>
+			<td>소문자로 변경</td>
+		</tr>
+		<tr>
+			<td>["capitalize"]</td>
+			<td>첫번째 영문자를 대문자로 변경</td>
+		</tr>
+		<tr>
+			<td>["zipcode"]</td>
+			<td>우편번호 형식으로 변경</td>
+		</tr>
+		<tr>
+			<td>["phoneNum"]</td>
+			<td>전화번호 형식으로 변경</td>
+		</tr>
+		<tr>
+			<td>["realnum"]</td>
+			<td>
+				<p>의미없는 0 제거</p>
+				<p>ex)</p>
+				<p>0100.0 -&gt; 100</p>
+				<p>0100.10 -&gt; 100.1</p>
+			</td>
+		</tr>
+		<tr>
+			<td>["trimToEmpty"]</td>
+			<td>trim 후 값이 없으면 공백으로 표시</td>
+		</tr>
+		<tr>
+			<td>["trimToZero"]</td>
+			<td>trim 후 값이 없으면 0 으로 표시</td>
+		</tr>
+		<tr>
+			<td>["trimToVal", "valStr"]</td>
+			<td>trim 후 값이 없으면 valStr 값으로 표시</td>
+		</tr>
+		<tr>
+			<td>["date",  4|6|8|10|12|14|"month"|"date"]</td>
+			<td>
+				<p>날짜 형식으로 표시. </p>
+				<p>기본 날짜형식은 N.context.attr(&quot;data&quot;).formatter.date에서 설정 가능 합니다.</p>
+				<p>다음은 두 번째 값들에 대한 설명 입니다.</p>
+				<p> * month : Monthpicker 표시</p>
+				<p> * date : Datepicker 표시 </p>
+				<p> * 4:년</p>
+				<p> * 6:년-월</p>
+				<p> * 8:년-월-일</p>
+				<p> * 10:년-월-일 시</p>
+				<p> * 12:년-월-일 시:분</p>
+				<p> * 14:년-월-일 시:분:초</p>
+			</td>
+		</tr>
+		<tr>
+			<td>["limit, cutLength, "replaceStr"]</td>
+			<td>문자열을 cutLength 만큼 자르고 replaceStr로 치환</td>
+		</tr>
+		<tr>
+			<td>["replace", "targetStr", "replaceStr"]</td>
+			<td>targetStr을 replaceStr로 치환</td>
+		</tr>
+		<tr>
+			<td>["lpad", length "fillStr"]</td>
+			<td>length만큼 왼쪽부터 replaceStr문자로 채움</td>
+		</tr>
+		<tr>
+			<td>["rpad", length "fillStr"]</td>
+			<td>length만큼 오른쪽부터 replaceStr문자로 채움</td>
+		</tr>
+		<tr>
+			<td>["generic", "사용자서식"]</td>
+			<td>
+				<p>엑셀 사용자지정 서식과 같이 사용자 서식을 이용하여 문자열을 양식화</p>
+				<p> * # : 숫자</p>
+				<p> * @ : 영문자</p>
+				<p>ex)</p>
+				<p> * 10000123 -&gt; \#,###.### -&gt; \1,000.123</p>
+			</td>
+		</tr>
+		<tr>
+			<td>["numeric" "사용자서식", "option"]</td>
+			<td>
+				<p>엑셀 사용자지정 서식과 같이 사용자 서식을 이용하여 숫자를 양식화</p>
+				<p>option 값를 이용하여 소숫점을 다음과 같이 처리</p>
+				<p> * option 값</p>
+				<p> ceil : 무조건올림 (소수점 처리가능)</p>
+				<p> floor : 무조건버림(소수점 처리가능)</p>
+				<p> round : 반올림(소수점 처리가능)</p>
+				<p>ex)</p>
+				<p> * 1,2 -&gt; #,##0 -&gt; 1,200</p>
+			</td>
+		</tr>
+	</table>
+</article>
+
+<script type="text/javascript">
+N("article#refr010402").cont({
+    init : function(view, request) {
+    	// code highlight
+    	if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {
+			view.find("code").each(function() {
+				Prism.highlightElement(this);
+	    	});
+    	}
+
+    	//load api demo page
+    	N(".apidemo", view).each(function() {
+    		N(this).comm("html/apid/" + N(this).data("page") + ".html").submit();
+    	});
+    }
+});
+</script>

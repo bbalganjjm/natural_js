@@ -1,10 +1,10 @@
-<article id="refr0105" class="apiDoc">
+<article id="refr010510" class="apiDoc">
 	<h2>Tree(N.tree)</h2>
 
 	<h3>개요</h3>
 	<p>Tree(이하 N.tree)는 계층 구조의 데이터를 트리 형태로 표현 해 주는 컴포넌트입니다.</p>
 
-	<h3>API DEMO(문서 준비 중입니다.)</h3>
+	<h3>API DEMO</h3>
 	<div data-page="tree" class="apidemo"></div>
 
 	<h3>HTML 템플릿(HTML templete)</h3>
@@ -163,7 +163,7 @@
 	<table>
 		<tr>
 			<th>Name</th>
-			<th>Arguments</th>
+			<th style="width: 91px;">Arguments</th>
 			<th>Type</th>
 			<th>Return</th>
 			<th style="width: auto;">Description</th>
@@ -172,13 +172,13 @@
 			<td>data</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
-			<td>JSON Array | jQuery Object</td>
+			<td>JSON Array or jQuery Object</td>
 			<td>컴포넌트에 바인드 되어 있는 최종 데이터를 반환 합니다.</td>
 		</tr>
 		<tr>
 			<td></td>
 			<td>selFlag</td>
-			<td>boolean | String</td>
+			<td>boolean or String</td>
 			<td align="center">-</td>
 			<td>
 				반환되는 데이터의 형태를 결정하거나 데이터를 필터링 하기 위한 구분자 입니다.
@@ -204,6 +204,7 @@
 			<td>String</td>
 			<td align="center">-</td>
 			<td>
+				<p><strong style="color: red; font-size: 15px;">기능 구현중...</strong></p>
 				data 메서드의 두번째 인자부터 N번째 인자까지 데이터의 컬럼명을 지정하면 해당 컬럼에 해당하는 데이터만 추출하여 반환 합니다.
 			</td>
 		</tr>
@@ -225,7 +226,7 @@
 			<td>bind</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
-			<td>N.select</td>
+			<td>N.tree</td>
 			<td>지정된 context에 데이터를 바인드 합니다.</td>
 		</tr>
 		<tr>
@@ -235,11 +236,32 @@
 			<td align="center">-</td>
 			<td>data인자를 지정하면 컴포넌트에 바인드 된 데이터가 지정한 데이터로 치환되어 바인드 됩니다.</td>
 		</tr>
+		<tr>
+			<td>openAll</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>N.tree</td>
+			<td>모든 자식 노드들을 펼칩니다.</td>
+		</tr>
+		<tr>
+			<td>closeAll</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>N.tree</td>
+			<td>모든 자식 노드들을 닫습니다.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>isFirstNodeOpen</td>
+			<td>boolean</td>
+			<td align="center">-</td>
+			<td>인자값을 true로 지정 시 ROOT 노드 바로 밑 자식노드들은 닫지 않습니다.</td>
+		</tr>
 	</table>
 </article>
 
 <script type="text/javascript">
-N("article#refr0105").cont({
+N("article#refr010510").cont({
     init : function(view, request) {
     	// code highlight
     	if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {

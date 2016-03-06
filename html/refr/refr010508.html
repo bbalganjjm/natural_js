@@ -1,4 +1,4 @@
-<article id="refr0105" class="apiDoc">
+<article id="refr010508" class="apiDoc">
 	<h2>Grid(N.grid)</h2>
 
 	<h3>개요</h3>
@@ -118,7 +118,7 @@
 		</tr>
 		<tr>
 			<td>heigth</td>
-			<td>int</td>
+			<td>number</td>
 			<td>0</td>
 			<td></td>
 			<td>
@@ -246,7 +246,7 @@
 		</tr>
 		<tr>
 			<td>createRowDelay</td>
-			<td>int(ms)</td>
+			<td>number(ms)</td>
 			<td>1</td>
 			<td></td>
 			<td>
@@ -256,7 +256,7 @@
 		</tr>
 		<tr>
 			<td>scrollPaging.size</td>
-			<td>int</td>
+			<td>number</td>
 			<td>100</td>
 			<td></td>
 			<td>
@@ -322,7 +322,7 @@
 		</tr>
 		<tr>
 			<td>misc.withoutTbodyLength</td>
-			<td>int</td>
+			<td>number</td>
 			<td>0</td>
 			<td></td>
 			<td>
@@ -371,13 +371,13 @@
 			<td>data</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
-			<td>JSON Array | jQuery Object</td>
+			<td>JSON Array or jQuery Object</td>
 			<td>컴포넌트에 바인드 되어 있는 최종 데이터를 반환 합니다.</td>
 		</tr>
 		<tr>
 			<td></td>
 			<td>rowStatus</td>
-			<td>boolean | String</td>
+			<td>boolean or String</td>
 			<td align="center">-</td>
 			<td>
 				반환되는 데이터의 형태를 결정하거나 데이터를 필터링 하기 위한 구분자 입니다.
@@ -387,7 +387,9 @@
 						<li>입력하지 않았거나 undefined : JSON Array 형태의 데이터를 반환 합니다.</li>
 						<li>false : jQuery Object 형태의 데이터를 반환 합니다.</li>
 						<li>"modified" : JSON Array 형태의 추가, 수정, 삭제된 데이터를 반환 합니다.</li>
-						<li>"selected" : 기능 구현중..(select 옵션이나 multiselect 옵션 지정 시 JSON Array 형태의 체크된 데이터를 반환 합니다.)</li>
+						<li>
+							"selected" : <strong style="color: red; font-size: 15px;">기능 구현중...</strong>select 옵션이나 multiselect 옵션 지정 시 JSON Array 형태의 체크된 데이터를 반환 합니다.
+						</li>
 						<li>"checked" : checkAll 옵션과 checkAllTarget 옵션을 지정 했거나  checkOnlyTarget 옵션 지정 시 JSON Array 형태의 체크된 데이터를 반환 합니다.</li>
 						<li>"insert" : JSON Array 형태의 추가된 데이터를 반환 합니다.</li>
 						<li>"update" : JSON Array 형태의 수정된 데이터를 반환 합니다.</li>
@@ -458,9 +460,9 @@
 		<tr>
 			<td></td>
 			<td>row</td>
-			<td>int</td>
+			<td>number</td>
 			<td align="center">-</td>
-			<td>제거할 row를 지정 합니다.</td>
+			<td>제거할 행 인덱스를 지정 합니다.</td>
 		</tr>
 		<tr>
 			<td>revert</td>
@@ -472,7 +474,7 @@
 		<tr>
 			<td></td>
 			<td>row</td>
-			<td>int</td>
+			<td>number</td>
 			<td align="center">-</td>
 			<td>row index를 입력하면 해당 행만 되돌려 주고 입력하지 않으면 전체다 되돌려 줍니다.</td>
 		</tr>
@@ -486,7 +488,7 @@
 		<tr>
 			<td></td>
 			<td>row</td>
-			<td>int</td>
+			<td>number</td>
 			<td align="center">-</td>
 			<td>row index를 입력하면 해당 행데이터만 검증하고 입력하지 않으면 전체 데이터를 검증합니다.</td>
 		</tr>
@@ -497,37 +499,91 @@
 			<td>Value object or N.grid</td>
 			<td>
 				<p>선택한 값을 가져오거나 입력 한다.</p>
-				<p>val 인자를 입력하지 않으면 선택한 값을 반환하고 입력하면 선택한 컬럼의 값을 입력한 값으로 바꿔준다.</p>
-
+				<p>val 인자를 입력하지 않으면 선택한 값을 반환하고 입력하면 선택한 컬럼의 값을 입력한 값으로 지정 해 줍니다.</p>
 				<p> 값 입력 시 지정한 행의 key 에 해당하는 HTML 요소가 없으면 데이터만 생성한다.</p>
 			</td>
 		</tr>
 		<tr>
 			<td></td>
 			<td>row</td>
-			<td></td>
+			<td>number</td>
 			<td align="center">-</td>
 			<td>가져올 값의 row index</td>
 		</tr>
 		<tr>
 			<td></td>
 			<td>key</td>
-			<td></td>
+			<td>String</td>
 			<td align="center">-</td>
 			<td>가져올 값의 key 컬럼명</td>
 		</tr>
 		<tr>
 			<td></td>
 			<td>val</td>
-			<td></td>
+			<td>String or number or boolean</td>
 			<td align="center">-</td>
 			<td>저장할 값</td>
+		</tr>
+		<tr>
+			<td>select</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>Array</td>
+			<td>
+				<p><strong style="color: red; font-size: 15px;">기능 구현중...</strong></p>
+				<p>select 나 multiselect 옵션 지정 시 그리드안의 행 선택을 컨트롤 할 수 있습니다.</p>
+				<ul>
+					<li>첫번째 인자(indexArr)를 지정하지 않으면 선택된 행 들의 row index들을 반환 합니다.</li>
+					<li>첫번째 인자(indexArr)를 지정하면 지정된 인덱스에 해당하는 행을 선택 합니다.</li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>indexArr</td>
+			<td>Array or number</td>
+			<td align="center">-</td>
+			<td>
+				<p><strong style="color: red; font-size: 15px;">기능 구현중...</strong></p>
+				<p>선택할 row index</p>
+				<ul>
+					<li>행 1개를 선택 하려면 인자를 number형으로 지정해도 되고 Array형으로 지정해도 됩니다.</li>
+					<li>행을 2개 이상 선택 하려면 인자를 Array형으로 지정해야 합니다.</li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td>check</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>Array</td>
+			<td>
+				<p>checkAll 과 checkAllTarget 옵션 지정 시 그리드안의 체크박스를 컨트롤 할 수 있습니다.</p>
+				<ul>
+					<li>첫번째 인자(indexArr)를 지정하지 않으면 체크된 체크박스들의 row index들을 반환 합니다.</li>
+					<li>첫번째 인자(indexArr)를 지정하면 지정된 인덱스에 해당하는 체크박스를 선택 합니다.</li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>indexArr</td>
+			<td>Array or number</td>
+			<td align="center">-</td>
+			<td>
+				<p><strong style="color: red; font-size: 15px;">기능 구현중...</strong></p>
+				<p>체크할 체크박스들의 row index</p>
+				<ul>
+					<li>체크박스 1개를 선택 하려면 인자를 number형으로 지정해도 되고 Array형으로 지정해도 됩니다.</li>
+					<li>체크박스를 2개 이상 선택 하려면 인자를 Array형으로 지정해야 합니다.</li>
+				</ul>
+			</td>
 		</tr>
 	</table>
 </article>
 
 <script type="text/javascript">
-N("article#refr0105").cont({
+N("article#refr010508").cont({
     init : function(view, request) {
     	// code highlight
     	if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {

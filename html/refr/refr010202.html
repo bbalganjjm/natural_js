@@ -1,0 +1,34 @@
+<article id="refr010202" class="apiDoc">
+		<h2>Config(N.config)</h2>
+	
+		<h3>개요</h3>
+		<p>Natural-JS 의 환경설정 파일(natural.config.js)입니다. 설정값은 N.context 에 저장 되며 각 패키지 별로 따로 저장 됩니다. </p>
+	
+		<ul>
+			<li>N.context.attr(&quot;core&quot;) : Natural-CORE 패키지에 속한 라이브러리들의 기본 설정 값.</li>
+			<li>N.context.attr(&quot;architecture&quot;) : Natural-ARCHITECTURE 패키지에 속한 라이브러리들의 기본 설정 값. </li>
+			<li>N.context.attr(&quot;data&quot;) : Natural-DATA 패키지에 속한 라이브러리들의 기본 설정 값.</li>
+			<li>N.context.attr(&quot;ui&quot;) : Natural-UI 패키지에 속한 라이브러리들의 기본 설정 값.</li>
+		</ul>
+	
+		<!-- TODO 세부 설정값에 대한 설명 추가 -->
+		<p>세부 설정값에 대한 내용은 각 컴포넌트와 라이브러리별 기본옵션과 natural.config.js 파일 안의 설명을 참고하기 바랍니다.</p>
+	</article>
+
+<script type="text/javascript">
+N("article#refr010202").cont({
+    init : function(view, request) {
+    	// code highlight
+    	if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {
+			view.find("code").each(function() {
+				Prism.highlightElement(this);
+	    	});
+    	}
+
+    	//load api demo page
+    	N(".apidemo", view).each(function() {
+    		N(this).comm("html/apid/" + N(this).data("page") + ".html").submit();
+    	});
+    }
+});
+</script>

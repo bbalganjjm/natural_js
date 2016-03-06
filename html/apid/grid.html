@@ -111,6 +111,7 @@
 					<option value="insert">insert</option>
 					<option value="update">update</option>
 					<option value="delete">delete</option>
+					<option value="checked">checked</option>
 					<option value="">undefined(pure object array)</option>
 					<option value="false">false(jQuery Object)</option>
 				</select> row status
@@ -147,7 +148,7 @@
 		<a id="btnRemove" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>remove</a>
 		<a id="btnVal" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>val</a>
 		<a id="btnData" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>data</a>
-		<a id="btnRow" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>row</a>
+		<a id="btnCheck" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>check</a>
 		<a id="btnValidate" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>validate</a>
 		<a id="btnReload" href="#" data-opts='{ "color": "white", "size": "large" }'>Reload this block page</a>
 	</div>
@@ -305,13 +306,9 @@ console.log(opts);
 	        	}).show();
 	        });
 
-	    	N("#btnRow", view).click(function(e) {
+	    	N("#btnCheck", view).click(function(e) {
 	    		e.preventDefault();
-	    		var msg = String(grid.row());
-	    		if(!grid.options.select && !grid.options.multiselect) {
-	    			msg = 'You must check the "select" or "multiselect" option checkbox before initializing the grid';
-	    		}
-	    		grid.context().parent().alert(msg).show();
+	    		grid.context().parent().alert(JSON.stringify(grid.check())).show();
 	        })
 
 	    	N("#btnValidate", view).click(function(e) {

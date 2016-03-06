@@ -1,0 +1,56 @@
+<article id="refr010303" class="apiDoc">
+	<h2>Context(N.context)</h2>
+
+	<h3>개요</h3>
+	<p>Context(이하 N.context)는 Natural-JS 의 생명주기(Life-Cycle, 페이지가 표시되고 다른페이지로 redirect 되기 전까지) 안 에서의 데이터 저장소 역할을 합니다. Natural-JS 의 환경설정 값(Config)과 메시지등이 N.context 객체에 저장 됩니다.</p>
+
+	<h3>함수(Methods)</h3>
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Arguments</th>
+			<th>Type</th>
+			<th>Return</th>
+			<th style="width: auto;">Description</th>
+		</tr>
+		<tr>
+			<td>attr</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>N.comm</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>name</td>
+			<td>String</td>
+			<td align="center">-</td>
+			<td>저장할 값의 key를 입력 합니다.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>obj</td>
+			<td>Object</td>
+			<td align="center">-</td>
+			<td>저장할 값에 해당하는 object를 지정 한다. obj 인자를 지정하지 않으면 값을 가져오고 지정하면 해당 값으로 저장합니다.</td>
+		</tr>
+	</table>
+</article>
+
+<script type="text/javascript">
+N("article#refr010303").cont({
+    init : function(view, request) {
+    	// code highlight
+    	if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {
+			view.find("code").each(function() {
+				Prism.highlightElement(this);
+	    	});
+    	}
+
+    	//load api demo page
+    	N(".apidemo", view).each(function() {
+    		N(this).comm("html/apid/" + N(this).data("page") + ".html").submit();
+    	});
+    }
+});
+</script>

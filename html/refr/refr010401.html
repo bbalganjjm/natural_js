@@ -1,0 +1,146 @@
+<article id="refr010401" class="apiDoc">
+	<h2>Formatter(N.formatter)</h2>
+
+	<h3>개요</h3>
+	<p>Formatter 는 지정한 데이터세트를 정의한 룰을 기반으로 데이터세트 전체를 양식화하여 반환 합니다. 룰(rules) 대신 입력요소가 담겨있는 블록요소(Block element)를 지정하면 입력요소에 선언형 옵션으로 지정된 룰을 기반으로 양식화하여 반환 해 주는 라이브러리입니다.</p>
+
+	<p class="alert">
+		룰 대신 입력요소를 지정하면 해당 입력요소들마다 "format", "unformat" 이벤트를 바인드(bind) 해 줍니다.<br>
+		해당 입력요소를 jQuery selector로 가져와 jQuery trigger 메서드로 실행하면 해당입력요소에 입력된 값을 실시간으로 format, unformat 할 수 있습니다.<br>
+		<span style="color: slategray;">예) N("input[name='formatEx']").trigger("format or unformat");</span>
+	</p>
+
+	<h3>API DEMO</h3>
+	<div data-page="formatter" class="apidemo"></div>
+
+	<h3>생성자(Constructor)</h3>
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Arguments</th>
+			<th>Type</th>
+			<th>Return</th>
+			<th style="width: auto;">Description</th>
+		</tr>
+		<tr>
+			<td>N.formatter</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>N.formatter</td>
+			<td>N.formatter 객체를 생성 합니다.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>obj</td>
+			<td>JSON Object</td>
+			<td align="center">-</td>
+			<td>양식화할 데이터를 지정 합니다. 데이터는 JSON Array 타입으로 입력 해야 합니다.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>rules</td>
+			<td>JSON Object or jQuery Object(elements)</td>
+			<td align="center">-</td>
+			<td style="max-width: 299px;">
+				<p>룰은 다음과 같이 두가지 형태로 지정 가능 합니다.</p>
+				<p>* 라이브러리 초기화 시 명령형 옵션으로 지정 : </p>
+				<pre><code class="language-javascript">
+// { "컬럼명" : [[룰명, arg0, arg1...], [룰명, arg0, arg1...]] }
+{
+	&quot;numeric&quot; : [[&quot;trimtoempty&quot;], [&quot;numeric&quot;, &quot;#,###.##0000&quot;]],
+	&quot;generic&quot; : [[&quot;trimtoempty&quot;], [&quot;generic&quot;, &quot;@@ABCD&quot;]],
+	&quot;limit&quot; : [[&quot;trimtoempty&quot;], [&quot;limit&quot;, &quot;13&quot;, &quot;...&quot;]],
+	&quot;etc&quot; : [[&quot;date&quot;, 12]]
+}</code></pre>
+				<p>* data-format 속성에 선언형 옵션으로 지정 : </p>
+				<pre><code class="language-markup">&lt;input id="limit" type="text"
+	data-format='[[&quot;trimtoempty&quot;], [&quot;limit&quot;, &quot;13&quot;, &quot;...&quot; ]]' /&gt;</code></pre>
+[ ["룰명", "룰arguments[0]", "룰 arguments[1]"], ... ]
+			</td>
+		</tr>
+		<tr>
+			<td>N(obj).formatter</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>N.formatter</td>
+			<td>
+				<p>N.formatter를 플러그인 방식으로의 초기화 방식입니다.</p>
+				<p>N.formatter와 동작되는 로직은 같으며 실제 N() 의 인자로 들어온 값이 N.formatter()의 첫 번째 인자로 지정 됩니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>rules</td>
+			<td>JSON Object or jQuery Object(elements)</td>
+			<td align="center">-</td>
+			<td>N.formatter의 rules 인자 와 같습니다.</td>
+		</tr>
+	</table>
+
+	<h3>함수(Methods)</h3>
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Arguments</th>
+			<th>Type</th>
+			<th>Return</th>
+			<th style="width: auto;">Description</th>
+		</tr>
+		<tr>
+			<td>format</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>양식화된 데이터세트(JSON)</td>
+			<td>데이터 양식화를 실행합니다.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>row</td>
+			<td>number</td>
+			<td align="center">-</td>
+			<td>
+				<p>양식화할 데이터의 row, </p>
+				<p>입력하지 않으면 무조건 첫 번째 데이터를 양식화 합니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>unformat</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>양식화 되지않은 데이터(JSON)</td>
+			<td>원(元)데이터를 반환합니다.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>row</td>
+			<td>number</td>
+			<td align="center">-</td>
+			<td>양식화 되지않은 원(元)데이터를 반환 할 row</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>key</td>
+			<td>String</td>
+			<td align="center">-</td>
+			<td>양식화 되지않은 원(元)데이터(JSON Object)의 key 값</td>
+		</tr>
+	</table>
+</article>
+
+<script type="text/javascript">
+N("article#refr010401").cont({
+    init : function(view, request) {
+    	// code highlight
+    	if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {
+			view.find("code").each(function() {
+				Prism.highlightElement(this);
+	    	});
+    	}
+
+    	//load api demo page
+    	N(".apidemo", view).each(function() {
+    		N(this).comm("html/apid/" + N(this).data("page") + ".html").submit();
+    	});
+    }
+});
+</script>
