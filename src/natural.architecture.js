@@ -26,11 +26,6 @@
 	}));
 
 	(function(N) {
-		// Config
-		var Config = N.config = function(url) {
-			//TODO
-		};
-
 		// Ajax
 		var Ajax = N.ajax = $.ajax;
 

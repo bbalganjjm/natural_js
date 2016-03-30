@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.13.25
+ * Natural-UI v0.8.13.38
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "v0.8.13.25";
+	N.version["Natural-UI"] = "v0.8.13.38";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -101,19 +101,10 @@
 			if (!this.options.isInput) {
 				Alert.wrapEle.call(this);
 
-				// set style class to msgContents element
-				this.options.msgContents.addClass("alert__");
-
-				// set style class to msgContext element
-				this.options.msgContext.addClass("alert_overlay__");
-
 				// set this instance to msgContext element
 				this.options.msgContents.instance("alert", this);
 			} else {
 				Alert.wrapInputEle.call(this);
-
-				// set style class to msgContext element
-				this.options.msgContext.addClass("alert__ alert_tooltip__");
 			}
 
 			return this;
@@ -149,6 +140,10 @@
 				// make message overlay
 				opts.msgContext = opts.container.append($('<div class="block_overlay__" onselectstart="return false;"></div>')
 						.css(blockOverlayCss)).find(".block_overlay__:last");
+				
+				// set style class to msgContext element
+				opts.msgContext.addClass("alert_overlay__");
+				
 				if (opts.vars !== undefined) {
 					opts.msg = N.message.replaceMsgVars(opts.msg, opts.vars);
 				}
@@ -186,6 +181,9 @@
 								buttonBox +
 								'</div>').css(blockOverlayMsgCss)).next(".block_overlay_msg__:last");
 
+				// set style class to msgContents element
+				opts.msgContents.addClass("alert__");
+				
 				// bind event to close(X) button
 				var self = this;
 				opts.msgContents.find(".msg_title_box__ .msg_title_close__").click(function() {
@@ -237,23 +235,24 @@
 
 				if(opts.draggable) {
 					var pressed;
+					var moved;
 					var startX;
 					var startY;
 					opts.msgContents.find(".msg_title_box__").bind("mousedown.alert", function(e) {
 						if(!$(e.target).is(".msg_title_close__") && (e.which || e.button) === 1) {
 							pressed = true;
 							opts.msgContents.data("isMoved", true);
-
+							
 							startX = e.pageX - opts.msgContents.offset().left;
 							startY = e.pageY - opts.msgContents.offset().top;
-
-							$(this).css("cursor", "pointer");
-							opts.msgContents.fadeTo(100, "0.4");
 
 							$(window.document).bind("dragstart.alert, selectstart.alert", function() {
 			                    return false;
 			                });
 
+							$(this).css("cursor", "pointer");
+							
+							moved = true;
 							$(window.document).bind("mousemove.alert", function(e) {
 								if(pressed) {
 									opts.msgContents.offset({
@@ -261,12 +260,16 @@
 										top :  e.pageY - startY
 									});
 								}
+								if(moved) {
+									opts.msgContents.fadeTo(200, "0.4");
+									moved = false;
+								}
 							});
 
 							var self = this;
 							$(window.document).bind("mouseup.alert", function(e) {
 								pressed = false;
-
+								
 								$(self).css("cursor", "");
 								opts.msgContents.fadeTo(100, "1.0");
 
@@ -279,8 +282,6 @@
 			resetOffSetEle : function(opts) {
 				var position = opts.context.position();
 				if(opts.context.outerWidth() > 0 && ((position.top > 0 && position.left > 0) || opts.isWindow)) {
-					var context = opts.context;
-					var msgContext = opts.msgContext;
 					// reset message context(overlay) position
 					opts.msgContext.css({
 						"top" : opts.isWindow ? 0 : position.top + "px",
@@ -288,19 +289,20 @@
 						"height" : opts.isWindow ? N(window.document).height() : opts.context.outerHeight() + "px",
 						"width" : opts.isWindow ? N(window.document).width() : opts.context.outerWidth() + "px"
 					}).hide().show();
-
+					
 					if(opts.msgContents.data("isMoved") !== true) {
 						// reset message contents position
 						var msgContentsCss = {
 							"top" : (((opts.isWindow ? N(opts.obj).height() : opts.msgContext.height()) / 2 + position.top) - opts.msgContents.height() / 2) + "px",
 							"left" : ((opts.msgContext.width() / 2 + position.left) - parseInt(opts.msgContents.width() / 2)) + "px"
 						};
-
+						
 						if(opts.isWindow) {
 							msgContentsCss.position = "fixed";
 						}
 						opts.msgContents.css(msgContentsCss);
 					}
+					
 					opts.msgContents.show();
 				} else {
 					// for non-active tab
@@ -317,15 +319,21 @@
 
 				if (opts.msg.length > 0) {
 					opts.msgContext = opts.context.next(".msg__");
+					var isBeforeShow = false;
 					if (opts.msgContext.length === 0) {
 						var limitWidth = opts.context.offset().left + opts.context.outerWidth() + 150;
-
+						
 						if(limitWidth > $(window).width()) {
 							opts.msgContext = opts.context.before('<span class="msg__ alert_before_show__" style="display: none;"><ul class="msg_line_box__"></ul></span>').prev(".msg__");
+							isBeforeShow = true;
 						} else {
 							opts.msgContext = opts.context.after('<span class="msg__ alert_after_show__" style="display: none;"><ul class="msg_line_box__"></ul></span>').next(".msg__");
+							isBeforeShow = false;
 						}
 
+						// set style class to msgContext element
+						opts.msgContext.addClass("alert__ alert_tooltip__");
+						
 						opts.msgContext.append('<a href="#" class="msg_close__"></a>');
 					}
 					if(opts.alwaysOnTop) {
@@ -352,6 +360,9 @@
 							opts.msg = N.message.replaceMsgVars(msg, opts.vars);
 						}
 						ul_.append('<li>' + opts.msg + '</li>');
+					}
+					if(isBeforeShow) {
+						opts.msgContext.css("margin-left", "-" + String(opts.msgContext.outerWidth()) + "px");
 					}
 				} else {
 					this.remove();
@@ -1125,7 +1136,7 @@
 				}
 			} catch(e) {
 				if(this.options.url !== null) {
-					N.warn("[N.popup][" + e + "] Don't set opener object in popup's Controller");
+					N.warn("[N.popup][" + e + "] Don't set opener object in Controller of popup");
 				}
 			}
 
@@ -1227,11 +1238,9 @@
 
 				// execute "onOpen" event
 				if(opts.onOpen !== null) {
-					if(onOpenData !== undefined) {
-						opts.onOpenData = onOpenData;
-					}
+					opts.onOpenData = onOpenData !== undefined ? onOpenData : null;
 					if(opts.context.filter("[id]:first").instance("cont")[opts.onOpen] !== undefined) {
-						opts.context.filter("[id]:first").instance("cont")[opts.onOpen](opts.onOpenData);
+						opts.context.filter("[id]:first").instance("cont")[opts.onOpen](onOpenData);
 					} else {
 						N.warn("[N.popup.popOpen]onOpen callback function \"" + opts.onOpen + "\" is undefined in popup content's Service Controller");
 					}
@@ -2300,6 +2309,7 @@
 				html : false,
 				addTop : false,
 				resizable : false,
+				resizableCorrectionWidth : 0,
 				vResizable : false,
 				sortable : false,
 				windowScrollLock : true,
@@ -2307,6 +2317,7 @@
 				multiselect : false,
 				checkAll : null, // selector
 				checkAllTarget : null, // selector
+				checkOnlyTarget : null, // TODO
 				hover : false,
 				revert : false,
 				createRowDelay : 1,
@@ -2634,10 +2645,21 @@
 					theadCells.css("padding-left", "0");
 					theadCells.css("padding-right", "0");
 				}
+				var resizeBarWidth = 6;
+				
+				this.thead.bind("mouseover.grid.resize", function() {
+        			theadCells.each(function() {
+        				var cellEle = $(this);
+        				cellEle.find("> .resize_bar__").css({
+        					"top" : cellEle.position().top,
+        					"left" : (cellEle.position().left + cellEle.outerWidth() - resizeBarWidth / 2) + "px"
+        				});
+        			});
+        		});
+				
 				theadCells.each(function() {
 					cellEle = $(this);
 		            resizeBar = cellEle.append('<span class="resize_bar__"></span>').find(".resize_bar__");
-		            var resizeBarWidth = 6;
 
 		            resizeBar.css({
 		            	"padding": "0px",
@@ -2666,9 +2688,8 @@
 		            		// to block sort event
 		            		currCellEle.data("sortLock", true);
 
-		            		defWidth = currCellEle.outerWidth();
-		            		nextDefWidth = currNextCellEle.outerWidth();
-
+		            		defWidth = currCellEle.width() + 1 + opts.resizableCorrectionWidth;
+		            		nextDefWidth = currNextCellEle.width() + 1 + opts.resizableCorrectionWidth;
 		            		initHeight = currCellEle.innerHeight() + 1;
 
 		            		$(document).bind("dragstart.grid.resize, selectstart.grid.resize", function() {
@@ -2696,7 +2717,10 @@
 		            		$(window.document).bind("mouseup.grid.resize", function(se) {
 		            			theadCells.each(function() {
 		            				var cellEle = $(this);
-		            				cellEle.find("> .resize_bar__").css("left", (cellEle.position().left + cellEle.outerWidth() - resizeBarWidth / 2) + "px");
+		            				cellEle.find("> .resize_bar__").css({
+		            					"top" : cellEle.position().top,
+		            					"left" : (cellEle.position().left + cellEle.outerWidth() - resizeBarWidth / 2) + "px"
+		            				});
 		            			});
 		            			$(document).unbind("dragstart.grid.resize").unbind("selectstart.grid.resize").unbind("mousemove.grid.resize").unbind("mouseup.grid.resize");
 		            			pressed = false;
@@ -2756,9 +2780,6 @@
 						checkAll.removeProp("checked");
 					}
 				});
-        	},
-        	serverPaging : function() {
-        		//TODO
         	},
         	setTheadCellInfo : function() {
         		var opts = this.options;
@@ -2842,23 +2863,37 @@
 					}
 				}
 			},
-			row : function() {
-				return this.options.row;
-			},
 			context : function(sel) {
 				return sel !== undefined ? this.options.context.find(sel) : this.options.context;
 			},
 			select : function(indexArr) {
-				// TODO
+				var opts = this.options;
+				if(indexArr === undefined) {
+					// TODO
+				} else {
+					if(N.type(indexArr) === "number") {
+						// TODO						
+					} else if(N.type(indexArr) === "array") {
+						// TODO
+					}
+					
+					return this;
+				}
 			},
 			check : function(indexArr) {
 				var opts = this.options;
 				if(indexArr === undefined) {
 					return this.tbodyContainer.find("tbody td " + opts.checkAllTarget + ":checked").map(function() {
 						return N(this).closest("tbody").index() - opts.misc.withoutTbodyLength;
-					});
+					}).get();
 				} else {
-					// TODO
+					if(N.type(indexArr) === "number") {
+						// TODO						
+					} else if(N.type(indexArr) === "array") {
+						// TODO
+					}
+					
+					return this;
 				}
 			},
 			bind : function(data) {
@@ -3052,7 +3087,7 @@
 			},
 			val : function(row, key, val) {
 				if(val === undefined) {
-					return this.options.context.find("tbody:eq(" + String(row) + ")").instance("form").val(key);
+					return this.options.data[row][key];
 				}
 				this.options.context.find("tbody:eq(" + String(row) + ")").instance("form").val(key, val);
 				return this;
@@ -3069,218 +3104,6 @@
 				} else {
 					this.bind(undefined, true);
 				}
-				return this;
-			}
-		});
-
-		// Tree
-		var Tree = N.tree = function(data, opts) {
-			this.options = {
-				data : N.type(data) === "array" ? N(data) : data,
-				context : null,
-				key : null,
-				val : null,
-				level : null, // optional
-				parent : null,
-				checkbox : false,
-				onSelect : null,
-				onCheck : null
-			};
-
-			try {
-				this.options = $.extend({}, this.options, N.context.attr("ui").tree);
-			} catch (e) {
-				N.error("[N.tree]" + e, e);
-			}
-
-			if (N.isPlainObject(opts)) {
-				//convert data to wrapped set
-				opts.data = N.type(opts.data) === "array" ? N(opts.data) : opts.data;
-
-				$.extend(this.options, opts);
-
-				if(N.type(this.options.context) === "string") {
-					this.options.context = N(this.options.context);
-				}
-			} else {
-				this.options.context = N(opts);
-			}
-
-			// set style class to context element
-			this.options.context.addClass("tree__");
-
-			// set this instance to context element
-			this.options.context.instance("tree", this);
-
-			// register this to N.ds for realtime data synchronization
-			N.ds.instance(this, true);
-
-			return this;
-		};
-
-		$.extend(Tree.prototype, {
-			data : function(rowStatus) {
-				if(rowStatus === undefined) {
-					return this.options.data.get();
-				} else if(rowStatus === false) {
-					return this.options.data;
-				} else if(rowStatus === "checked") {
-					var data = this.options.data;
-					if(arguments.length > 1) {
-						// clone arguments
-						var args = Array.prototype.slice.call(arguments, 0);
-						return this.options.context.find(":checked").map(function() {
-							args[0] = data[N(this).closest("li").data("index")];
-							return N.json.mapFromKeys.apply(N.json, args);
-						}).get();
-					} else {
-						return this.options.context.find(":checked").map(function() {
-							return data[N(this).closest("li").data("index")];
-						}).get();
-					}
-				} else if(rowStatus === "checkedInLastNode") {
-					var data = this.options.data;
-
-					if(arguments.length > 1) {
-						var args = Array.prototype.slice.call(arguments, 0);
-						return this.options.context.find(".tree_last_node__ :checked").map(function() {
-							args[0] = data[N(this).closest("li").data("index")];
-							return N.json.mapFromKeys.apply(N.json, args);
-						}).get();
-					} else {
-						return this.options.context.find(".tree_last_node__ :checked").map(function() {
-							return data[N(this).closest("li").data("index")];
-						}).get();
-					}
-				}
-			},
-			context : function(sel) {
-				return sel !== undefined ? this.options.context.find(sel) : this.options.context;
-			},
-			bind : function(data) {
-				var opts = this.options;
-
-				//to rebind new data
-				if(data !== undefined) {
-					opts.data = N.type(data) === "array" ? N(data) : data;
-				}
-
-				var rootNode = N('<ul class="tree_level1_folder__"></ul>').appendTo(opts.context.empty());
-				N(opts.data).each(function(i, rowData) {
-					if(rowData[opts.level] === 1 || rootNode.find("ul#" + rowData[opts.parent]).length === 0) {
-						N('<li data-index="' + i + '" class="tree_level1_node__ tree_close__"><span class="tree_icon__" href="#"></span>' + (opts.checkbox ? '<span class="tree_check__"><input type="checkbox" /></span>' : '') + '<a class="tree_key__" href="#"><span>' + rowData[opts.key] + '</span></a><ul id="' + rowData[opts.val] + '" class="tree_level' + (opts.level !== null ? String(Number(rowData[opts.level]) + 1) : '') + '_folder__"></ul></li>').appendTo(rootNode);
-					} else {
-						N('<li data-index="' + i + '" id="' + rowData[opts.val] + '" class="tree_level' + N.string.trim(rowData[opts.level]) + '_node__ tree_close__"><span class="tree_icon__" href="#"></span><span class="tree_check__">' + (opts.checkbox ? '<input type="checkbox" />' : '') + '</span><a class="tree_key__" href="#"><span>' + rowData[opts.key] + '</span></a><ul id="' + rowData[opts.val] + '"class="tree_level' + (opts.level !== null ? String(Number(rowData[opts.level]) + 1) : '') + '_folder__"></ul></li>').appendTo(rootNode.find("ul#" + rowData[opts.parent]));
-					}
-				});
-
-				// add class to elements with no have chiidren
-				rootNode.find("ul:empty").parent().addClass("tree_last_node__");
-
-				// checkbox click event bind
-				rootNode.find(".tree_check__ > :checkbox").bind("click.tree", function(e) {
-					var checkFlag;
-					var siblingNodesEle = N(this).closest("li").parent().children("li");
-					var parentNodesEle = N(this).parents("li");
-					var parentNodeEle = N(this).closest("ul").parent();
-					N(this).removeClass("tree_auto_parents_select__");
-					if(N(this).is(":checked")) {
-						N(this).parent().siblings("ul").find(":not(:checked)").prop("checked", true);
-						checkFlag = true;
-					} else {
-						N(this).parent().siblings("ul").find(":checked").prop("checked", false);
-						checkFlag = false;
-					}
-
-					var checkboxLength = siblingNodesEle.find(":checkbox").length;
-					var checkedLength = siblingNodesEle.find(":checked").length;
-					var parentNodeCheckboxEle = parentNodeEle.find("> span.tree_check__ > :checkbox");
-					var parentNodesCheckedEle = parentNodesEle.not(":first").find("> span.tree_check__ > :checkbox");
-					if(checkFlag) {
-						if(checkedLength > 0) {
-							if(checkedLength < checkboxLength) {
-								parentNodesEle.find("> span.tree_check__ > :not(:checked)").prop("checked", true).addClass("tree_auto_parents_select__");
-							} else if(checkedLength === checkboxLength) {
-								parentNodeCheckboxEle.prop("checked", true).removeClass("tree_auto_parents_select__");
-								// apply click effect to parents nodes
-								// FIXME this code is temporary code
-								parentNodeCheckboxEle.trigger("click.tree").trigger("click.tree");
-							}
-						}
-					} else {
-						if(checkedLength > 0 && checkedLength < checkboxLength) {
-							parentNodesCheckedEle.addClass("tree_auto_parents_select__");
-						} else if(checkedLength === 0) {
-							parentNodesCheckedEle.prop("checked", false).removeClass("tree_auto_parents_select__");
-							// apply click effect to parents nodes
-							// FIXME this code is temporary code
-							parentNodeCheckboxEle.trigger("click.tree").trigger("click.tree");
-						}
-					}
-
-					// run onCheck event callback
-					// FIXME "e.clientX > 0 && e.clientY > 0" is temporary code
-					if(opts.onCheck !== null && e.clientX > 0 && e.clientY > 0) {
-						var closestLi = N(this).closest("li");
-						var checkedEle = N(this).closest("ul").find(".tree_last_node__ :checked");
-						opts.onCheck.call(closestLi
-								, closestLi.data("index")
-								, closestLi
-								, opts.data[closestLi.data("index")]
-								, checkedEle.map(function() {
-									return N(this).closest("li").data("index");
-								}).get()
-								, checkedEle
-								, checkedEle.map(function() {
-									return opts.data[N(this).closest("li").data("index")];
-								}).get()
-								, checkFlag);
-					}
-				});
-
-				// node name click event bind
-				rootNode.find("li.tree_last_node__ .tree_key__").bind("click.tree", function(e) {
-					e.preventDefault();
-					var parentLi = N(this).parent("li");
-					if(opts.onSelect !== null) {
-						opts.onSelect.call(parentLi, parentLi.data("index"), parentLi, opts.data[parentLi.data("index")]);
-					}
-					rootNode.find("li > a.tree_key__.tree_active__").removeClass("tree_active__");
-					N(this).addClass("tree_active__");
-				});
-
-				// icon click event bind
-				rootNode.find(".tree_icon__, li:not('.tree_last_node__') .tree_key__").bind("click.tree", function(e) {
-					e.preventDefault();
-					var parentLi = N(this).parent("li");
-					if(parentLi.find("> ul > li").length > 0) {
-						if(parentLi.hasClass("tree_open__")) {
-							parentLi.removeClass("tree_open__").addClass("tree_close__");
-						} else {
-							parentLi.removeClass("tree_close__").addClass("tree_open__");
-						}
-					}
-				});
-				this.closeAll(true);
-
-				return this;
-			},
-			val : function(row, key, val) {
-				// TODO
-				// notify
-				return this;
-			},
-			openAll : function() {
-				N("li.tree_close__:not(.tree_last_node__)").removeClass("tree_close__").addClass("tree_open__");
-			},
-			closeAll : function(isFirstNodeOpen) {
-				N("li.tree_open__:not(.tree_last_node__)").removeClass("tree_open__").addClass("tree_close__");
-				if(isFirstNodeOpen) {
-					this.options.context.find("li.tree_close__:first").removeClass("tree_close__").addClass("tree_open__");
-				}
-			},
-			update : function(row, key) {
-				// TODO
 				return this;
 			}
 		});
@@ -3439,10 +3262,10 @@
 		});
 
 		$.extend(Pagination.prototype, {
-			data : function(rowStatus) {
-				if(rowStatus === undefined) {
+			data : function(selFlag) {
+				if(selFlag === undefined) {
 					return this.options.data.get();
-				} else if(rowStatus === false) {
+				} else if(selFlag === false) {
 					return this.options.data;
 				}
 			},
@@ -3573,6 +3396,220 @@
 				} else {
 					return this.options.countPerPageSet;
 				}
+				return this;
+			}
+		});
+		
+		// Tree
+		var Tree = N.tree = function(data, opts) {
+			this.options = {
+				data : N.type(data) === "array" ? N(data) : data,
+				context : null,
+				key : null,
+				val : null,
+				level : null, // optional
+				parent : null,
+				checkbox : false,
+				onSelect : null,
+				onCheck : null
+			};
+
+			try {
+				this.options = $.extend({}, this.options, N.context.attr("ui").tree);
+			} catch (e) {
+				N.error("[N.tree]" + e, e);
+			}
+
+			if (N.isPlainObject(opts)) {
+				//convert data to wrapped set
+				opts.data = N.type(opts.data) === "array" ? N(opts.data) : opts.data;
+
+				$.extend(this.options, opts);
+
+				if(N.type(this.options.context) === "string") {
+					this.options.context = N(this.options.context);
+				}
+			} else {
+				this.options.context = N(opts);
+			}
+
+			// set style class to context element
+			this.options.context.addClass("tree__");
+
+			// set this instance to context element
+			this.options.context.instance("tree", this);
+
+			// register this to N.ds for realtime data synchronization
+			N.ds.instance(this, true);
+
+			return this;
+		};
+
+		$.extend(Tree.prototype, {
+			data : function(selFlag) {
+				if(selFlag === undefined) {
+					return this.options.data.get();
+				} else if(selFlag === false) {
+					return this.options.data;
+				} else if(selFlag === "checked") {
+					var data = this.options.data;
+					if(arguments.length > 1) {
+						// clone arguments
+						var args = Array.prototype.slice.call(arguments, 0);
+						return this.options.context.find(":checked").map(function() {
+							args[0] = data[N(this).closest("li").data("index")];
+							return N.json.mapFromKeys.apply(N.json, args);
+						}).get();
+					} else {
+						return this.options.context.find(":checked").map(function() {
+							return data[N(this).closest("li").data("index")];
+						}).get();
+					}
+				} else if(selFlag === "checkedInLastNode") {
+					var data = this.options.data;
+
+					if(arguments.length > 1) {
+						var args = Array.prototype.slice.call(arguments, 0);
+						return this.options.context.find(".tree_last_node__ :checked").map(function() {
+							args[0] = data[N(this).closest("li").data("index")];
+							return N.json.mapFromKeys.apply(N.json, args);
+						}).get();
+					} else {
+						return this.options.context.find(".tree_last_node__ :checked").map(function() {
+							return data[N(this).closest("li").data("index")];
+						}).get();
+					}
+				}
+			},
+			context : function(sel) {
+				return sel !== undefined ? this.options.context.find(sel) : this.options.context;
+			},
+			bind : function(data) {
+				var opts = this.options;
+
+				//to rebind new data
+				if(data !== undefined) {
+					opts.data = N.type(data) === "array" ? N(data) : data;
+				}
+
+				var rootNode = N('<ul class="tree_level1_folder__"></ul>').appendTo(opts.context.empty());
+				N(opts.data).each(function(i, rowData) {
+					if(rowData[opts.level] === 1 || rootNode.find("ul#" + rowData[opts.parent]).length === 0) {
+						N('<li data-index="' + i + '" class="tree_level1_node__ tree_close__"><span class="tree_icon__" href="#"></span>' + (opts.checkbox ? '<span class="tree_check__"><input type="checkbox" /></span>' : '') + '<a class="tree_key__" href="#"><span>' + rowData[opts.key] + '</span></a><ul id="' + rowData[opts.val] + '" class="tree_level' + (opts.level !== null ? String(Number(rowData[opts.level]) + 1) : '') + '_folder__"></ul></li>').appendTo(rootNode);
+					} else {
+						N('<li data-index="' + i + '" id="' + rowData[opts.val] + '" class="tree_level' + N.string.trim(rowData[opts.level]) + '_node__ tree_close__"><span class="tree_icon__" href="#"></span><span class="tree_check__">' + (opts.checkbox ? '<input type="checkbox" />' : '') + '</span><a class="tree_key__" href="#"><span>' + rowData[opts.key] + '</span></a><ul id="' + rowData[opts.val] + '"class="tree_level' + (opts.level !== null ? String(Number(rowData[opts.level]) + 1) : '') + '_folder__"></ul></li>').appendTo(rootNode.find("ul#" + rowData[opts.parent]));
+					}
+				});
+
+				// add class to elements with no have chiidren
+				rootNode.find("ul:empty").parent().addClass("tree_last_node__");
+
+				// checkbox click event bind
+				rootNode.find(".tree_check__ > :checkbox").bind("click.tree", function(e) {
+					var checkFlag;
+					var siblingNodesEle = N(this).closest("li").parent().children("li");
+					var parentNodesEle = N(this).parents("li");
+					var parentNodeEle = N(this).closest("ul").parent();
+					N(this).removeClass("tree_auto_parents_select__");
+					if(N(this).is(":checked")) {
+						N(this).parent().siblings("ul").find(":not(:checked)").prop("checked", true);
+						checkFlag = true;
+					} else {
+						N(this).parent().siblings("ul").find(":checked").prop("checked", false);
+						checkFlag = false;
+					}
+
+					var checkboxLength = siblingNodesEle.find(":checkbox").length;
+					var checkedLength = siblingNodesEle.find(":checked").length;
+					var parentNodeCheckboxEle = parentNodeEle.find("> span.tree_check__ > :checkbox");
+					var parentNodesCheckedEle = parentNodesEle.not(":first").find("> span.tree_check__ > :checkbox");
+					if(checkFlag) {
+						if(checkedLength > 0) {
+							if(checkedLength < checkboxLength) {
+								parentNodesEle.find("> span.tree_check__ > :not(:checked)").prop("checked", true).addClass("tree_auto_parents_select__");
+							} else if(checkedLength === checkboxLength) {
+								parentNodeCheckboxEle.prop("checked", true).removeClass("tree_auto_parents_select__");
+								// apply click effect to parents nodes
+								// FIXME this code is temporary code
+								parentNodeCheckboxEle.trigger("click.tree").trigger("click.tree");
+							}
+						}
+					} else {
+						if(checkedLength > 0 && checkedLength < checkboxLength) {
+							parentNodesCheckedEle.addClass("tree_auto_parents_select__");
+						} else if(checkedLength === 0) {
+							parentNodesCheckedEle.prop("checked", false).removeClass("tree_auto_parents_select__");
+							// apply click effect to parents nodes
+							// FIXME this code is temporary code
+							parentNodeCheckboxEle.trigger("click.tree").trigger("click.tree");
+						}
+					}
+
+					// run onCheck event callback
+					// FIXME "e.clientX > 0 && e.clientY > 0" is temporary code
+					if(opts.onCheck !== null && e.clientX > 0 && e.clientY > 0) {
+						var closestLi = N(this).closest("li");
+						var checkedEle = N(this).closest("ul").find(".tree_last_node__ :checked");
+						opts.onCheck.call(closestLi
+								, closestLi.data("index")
+								, closestLi
+								, opts.data[closestLi.data("index")]
+								, checkedEle.map(function() {
+									return N(this).closest("li").data("index");
+								}).get()
+								, checkedEle
+								, checkedEle.map(function() {
+									return opts.data[N(this).closest("li").data("index")];
+								}).get()
+								, checkFlag);
+					}
+				});
+
+				// node name click event bind
+				rootNode.find("li.tree_last_node__ .tree_key__").bind("click.tree", function(e) {
+					e.preventDefault();
+					var parentLi = N(this).parent("li");
+					if(opts.onSelect !== null) {
+						opts.onSelect.call(parentLi, parentLi.data("index"), parentLi, opts.data[parentLi.data("index")]);
+					}
+					rootNode.find("li > a.tree_key__.tree_active__").removeClass("tree_active__");
+					N(this).addClass("tree_active__");
+				});
+
+				// icon click event bind
+				rootNode.find(".tree_icon__, li:not('.tree_last_node__') .tree_key__").bind("click.tree", function(e) {
+					e.preventDefault();
+					var parentLi = N(this).parent("li");
+					if(parentLi.find("> ul > li").length > 0) {
+						if(parentLi.hasClass("tree_open__")) {
+							parentLi.removeClass("tree_open__").addClass("tree_close__");
+						} else {
+							parentLi.removeClass("tree_close__").addClass("tree_open__");
+						}
+					}
+				});
+				this.closeAll(true);
+
+				return this;
+			},
+			val : function(row, key, val) {
+				// TODO
+				// notify
+				return this;
+			},
+			openAll : function() {
+				N("li.tree_close__:not(.tree_last_node__)").removeClass("tree_close__").addClass("tree_open__");
+				return this;
+			},
+			closeAll : function(isFirstNodeOpen) {
+				N("li.tree_open__:not(.tree_last_node__)").removeClass("tree_open__").addClass("tree_close__");
+				if(isFirstNodeOpen) {
+					this.options.context.find("li.tree_close__:first").removeClass("tree_close__").addClass("tree_open__");
+				}
+				return this;
+			},
+			update : function(row, key) {
+				// TODO
 				return this;
 			}
 		});

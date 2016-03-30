@@ -210,7 +210,6 @@
 	}));
 	
 	(function(N) {
-		
 		// N local variables
 		$.extend(N, {
 			version : {
@@ -949,6 +948,11 @@
 				}
 			}
 		});
+		
+		// Config
+		var Config = N.config = function() {
+			//TODO
+		};
 
 	})(N);
 
