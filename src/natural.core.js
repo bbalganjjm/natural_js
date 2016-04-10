@@ -1,5 +1,5 @@
 /*!
- * Natural-CORE v0.8.5.4
+ * Natural-CORE v0.8.5.5
  * bbalganjjm@gmail.com
  *
  * Includes formatdate.js & Mask JavaScript API
@@ -240,16 +240,24 @@
 			 * Display the warnning log to console
 			 */
 			warn : function() {
-				if(typeof console !== "undefined" && typeof console.warn !== "undefined") {
-					console.warn.apply(console, arguments);
+				if(typeof console !== "undefined") {
+					if(typeof console.warn !== "undefined" && typeof console.warn.apply !== "undefined") {
+						console.warn.apply(console, arguments);
+					} else {
+						N.log(console);
+					}
 				}
 			},
 			/**
 			 * Display the log to console
 			 */
 			log : function() {
-				if(typeof console !== "undefined" && typeof console.log !== "undefined") {
-					console.log.apply(console, arguments);
+				if(typeof console !== "undefined") {
+					if(typeof console.log !== "undefined" && typeof console.log.apply !== "undefined") {
+						console.log.apply(console, arguments);
+					} else {
+						console.log(console);
+					}
 				}
 			},
 			/**
