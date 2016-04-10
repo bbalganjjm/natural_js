@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.13.38
+ * Natural-UI v0.8.13.42
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "v0.8.13.38";
+	N.version["Natural-UI"] = "v0.8.13.42";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -140,10 +140,10 @@
 				// make message overlay
 				opts.msgContext = opts.container.append($('<div class="block_overlay__" onselectstart="return false;"></div>')
 						.css(blockOverlayCss)).find(".block_overlay__:last");
-				
+
 				// set style class to msgContext element
 				opts.msgContext.addClass("alert_overlay__");
-				
+
 				if (opts.vars !== undefined) {
 					opts.msg = N.message.replaceMsgVars(opts.msg, opts.vars);
 				}
@@ -183,7 +183,7 @@
 
 				// set style class to msgContents element
 				opts.msgContents.addClass("alert__");
-				
+
 				// bind event to close(X) button
 				var self = this;
 				opts.msgContents.find(".msg_title_box__ .msg_title_close__").click(function() {
@@ -242,7 +242,7 @@
 						if(!$(e.target).is(".msg_title_close__") && (e.which || e.button) === 1) {
 							pressed = true;
 							opts.msgContents.data("isMoved", true);
-							
+
 							startX = e.pageX - opts.msgContents.offset().left;
 							startY = e.pageY - opts.msgContents.offset().top;
 
@@ -251,7 +251,7 @@
 			                });
 
 							$(this).css("cursor", "pointer");
-							
+
 							moved = true;
 							$(window.document).bind("mousemove.alert", function(e) {
 								if(pressed) {
@@ -269,7 +269,7 @@
 							var self = this;
 							$(window.document).bind("mouseup.alert", function(e) {
 								pressed = false;
-								
+
 								$(self).css("cursor", "");
 								opts.msgContents.fadeTo(100, "1.0");
 
@@ -289,20 +289,20 @@
 						"height" : opts.isWindow ? N(window.document).height() : opts.context.outerHeight() + "px",
 						"width" : opts.isWindow ? N(window.document).width() : opts.context.outerWidth() + "px"
 					}).hide().show();
-					
+
 					if(opts.msgContents.data("isMoved") !== true) {
 						// reset message contents position
 						var msgContentsCss = {
 							"top" : (((opts.isWindow ? N(opts.obj).height() : opts.msgContext.height()) / 2 + position.top) - opts.msgContents.height() / 2) + "px",
 							"left" : ((opts.msgContext.width() / 2 + position.left) - parseInt(opts.msgContents.width() / 2)) + "px"
 						};
-						
+
 						if(opts.isWindow) {
 							msgContentsCss.position = "fixed";
 						}
 						opts.msgContents.css(msgContentsCss);
 					}
-					
+
 					opts.msgContents.show();
 				} else {
 					// for non-active tab
@@ -322,7 +322,7 @@
 					var isBeforeShow = false;
 					if (opts.msgContext.length === 0) {
 						var limitWidth = opts.context.offset().left + opts.context.outerWidth() + 150;
-						
+
 						if(limitWidth > $(window).width()) {
 							opts.msgContext = opts.context.before('<span class="msg__ alert_before_show__" style="display: none;"><ul class="msg_line_box__"></ul></span>').prev(".msg__");
 							isBeforeShow = true;
@@ -333,7 +333,7 @@
 
 						// set style class to msgContext element
 						opts.msgContext.addClass("alert__ alert_tooltip__");
-						
+
 						opts.msgContext.append('<a href="#" class="msg_close__"></a>');
 					}
 					if(opts.alwaysOnTop) {
@@ -346,7 +346,7 @@
 						self.remove();
 					});
 
-					var ul_ = opts.msgContext.find(".msg_line_box__");
+					var ul_ = opts.msgContext.find(".msg_line_box__").empty();
 					if (N.isArray(opts.msg)) {
 						opts.msgContext.find(".msg_line_box__").empty();
 						$(opts.msg).each(function(i, msg_) {
@@ -396,6 +396,9 @@
 					$(window).bind("resize.alert", function() {
 						Alert.resetOffSetEle(opts);
 					});
+					if(opts.button === true) {
+						opts.msgContents.find(".buttonBox__ a.confirm__").get(0).focus();
+					}
 				} else {
 					if (!N.isEmptyObject(opts.msg)) {
 						opts.context.parent().css({
@@ -413,10 +416,10 @@
 					}
 				}
 
-				// bind "ESC" key event
+				// bind "ESC" key and "ENTER" key event
 				// if press the "ESC" key, alert dialog will be removed
 				opts.onKeyup = function(e) {
-		        	if (e.keyCode == 27) {
+					if ((e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode)) == 27) {
 		        		self[opts.closeMode]();
 		        	}
 				};
@@ -1018,7 +1021,7 @@
 				// bind "ESC" key event
 				// if press the "ESC" key, datepicker will be hidden
 		        $(document).bind("keyup.datepicker", function(e) {
-		        	if (e.keyCode == 27) {
+		        	if ((e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode)) == 27) {
 		        		self.hide();
 		        	}
 				});
@@ -1256,6 +1259,10 @@
 				var opts = this.options;
 				var self = this;
 
+				if(onOpenData === undefined && opts.onOpenData !== null) {
+					onOpenData = opts.onOpenData;
+				}
+
 				if(this.options.url !== null && !opts.preload) {
 					Popup.loadEle.call(this, function(context) {
 						// this callback function is for async page load
@@ -1273,12 +1280,13 @@
 			close : function(onCloseData) {
 				var opts = this.options;
 
+				if(onCloseData === undefined && opts.onCloseData !== null) {
+					onCloseData = opts.onCloseData;
+				}
+
 				// "onClose" event execute
 				if(opts.onClose !== null) {
-					if(onCloseData !== undefined) {
-						opts.onCloseData = onCloseData;
-					}
-					opts.onClose.call(this, opts.onCloseData);
+					opts.onClose.call(this, onCloseData);
 				}
 				this.alert.hide();
 				return this;
@@ -1792,8 +1800,8 @@
 									//Enter key event
 									ele.unbind("keyup.form.dataSync");
 			                        ele.bind("keyup.form.dataSync", function(e) {
-			                            if (e.which == 13) {
-			                            	e.preventDefault();
+			                        	e.preventDefault();
+			                        	if ((e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode)) == 13) {
 			                            	$(this).trigger("focusout.form.validate");
 			                            	// notify data changed
 		                            		$(this).trigger("focusout.form.dataSync");
@@ -2646,7 +2654,7 @@
 					theadCells.css("padding-right", "0");
 				}
 				var resizeBarWidth = 6;
-				
+
 				this.thead.bind("mouseover.grid.resize", function() {
         			theadCells.each(function() {
         				var cellEle = $(this);
@@ -2656,7 +2664,7 @@
         				});
         			});
         		});
-				
+
 				theadCells.each(function() {
 					cellEle = $(this);
 		            resizeBar = cellEle.append('<span class="resize_bar__"></span>').find(".resize_bar__");
@@ -2872,11 +2880,11 @@
 					// TODO
 				} else {
 					if(N.type(indexArr) === "number") {
-						// TODO						
+						// TODO
 					} else if(N.type(indexArr) === "array") {
 						// TODO
 					}
-					
+
 					return this;
 				}
 			},
@@ -2888,11 +2896,11 @@
 					}).get();
 				} else {
 					if(N.type(indexArr) === "number") {
-						// TODO						
+						// TODO
 					} else if(N.type(indexArr) === "array") {
 						// TODO
 					}
-					
+
 					return this;
 				}
 			},
@@ -3399,7 +3407,7 @@
 				return this;
 			}
 		});
-		
+
 		// Tree
 		var Tree = N.tree = function(data, opts) {
 			this.options = {
