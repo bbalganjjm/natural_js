@@ -2999,12 +2999,11 @@
 				}
 				var tbodyTempClone = this.tbodyTemp.clone(true, true);
 
-				var i = null;
+				var i = 0;
 				if(opts.addTop) {
-					i = opts.scrollPaging.idx;
 					opts.context.find("thead").after(tbodyTempClone);
 				} else {
-					i = opts.scrollPaging.idx + opts.data.length;
+					i = opts.data.length;
 					opts.context.append(tbodyTempClone);
 				}
 				
