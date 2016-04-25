@@ -25,7 +25,7 @@
 }
 
 .alert__.block_overlay_msg__ .msg_box__ {
-	padding: 10px 10px 0 10px; color: #4f535c; font-size: 12px; line-height: 20px;
+	padding: 10px 10px 0 10px; color: #4f535c; font-size: 12px; line-height: 20px; display: block; -webkit-overflow-scrolling: touch;
 }
 
 .alert__.block_overlay_msg__ .buttonBox__ {
@@ -77,8 +77,7 @@
 }
 
 .alert_tooltip__.alert_before_show__ a.msg_close__ {
-	top: -4px;
-	left: -4px;
+	top: -4px; left: -4px;
 }
 
 .alert_tooltip__.alert_after_show__ {
@@ -86,8 +85,7 @@
 }
 
 .alert_tooltip__.alert_after_show__ a.msg_close__ {
-	top: -4px;
-	right: -4px;
+	top: -4px; right: -4px;
 }
 
 /* Popup */
@@ -101,6 +99,10 @@
 
 .popup__.block_overlay_msg__ .msg_title_box__ .msg_title__ {
 
+}
+
+.popup__.alert__.block_overlay_msg__ .msg_box__ {
+	display: block; -webkit-overflow-scrolling: touch;
 }
 
 .popup__.block_overlay_msg__ .msg_box__ {
@@ -268,6 +270,10 @@ table.grid__ thead, table.grid__ tfoot {
 	background: linear-gradient(top, #efefef, #effeee); background: -ms-linear-gradient(top, #efefef, #effeee); background: -moz-linear-gradient(top, #efefef, #effeee); background: -o-linear-gradient(top, #efefef, #effeee); background: -webkit-linear-gradient(top, #efefef, #effeee); background-color: #efefef;
 }
 
+.grid__>thead>tr>th .resize_beam__ {
+	background: linear-gradient(to bottom, #003300, #77cc77); background: -ms-linear-gradient(to bottom, #003300, #77cc77); background: -moz-linear-gradient(to bottom, #003300, #77cc77); background: -o-linear-gradient(to bottom, #003300, #77cc77); background: -webkit-linear-gradient(top, #003300, #77cc77); background-color: #003300; z-index: 1;
+}
+
 table.tbody_wrap__>.grid__ tbody td.empty__ {
 	border: none; text-align: center;
 }
@@ -317,7 +323,7 @@ div.thead_wrap__ thead th .desc__ {
 }
 
 div.tbody_wrap__ {
-	background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAIklEQVQIW2NkQAIf7n/4zwjjgzgCigKMYAEYB8RmROaABAAQCg/DqNBm8AAAAABJRU5ErkJggg==") repeat; position: relative;
+	background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAIklEQVQIW2NkQAIf7n/4zwjjgzgCigKMYAEYB8RmROaABAAQCg/DqNBm8AAAAABJRU5ErkJggg==") repeat; position: relative; -webkit-overflow-scrolling: touch;
 }
 
 div.tbody_wrap__ table.grid__ td {
