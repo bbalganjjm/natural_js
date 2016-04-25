@@ -2999,10 +2999,17 @@
 				}
 				var tbodyTempClone = this.tbodyTemp.clone(true, true);
 
+				var i = 0;
 				if(opts.addTop) {
 					opts.context.find("thead").after(tbodyTempClone);
 				} else {
+					i = opts.data.length;
 					opts.context.append(tbodyTempClone);
+				}
+				
+
+				if(opts.rowHandler !== null) {
+					opts.rowHandler.call(tbodyTempClone, i, tbodyTempClone, data);
 				}
 
 				// for new row data bind, use N.form
@@ -3015,6 +3022,7 @@
 					addTop : opts.addTop,
 					revert : opts.revert
 				});
+				
 				if(data === undefined) {
 					form.add(data);
 				} else {
