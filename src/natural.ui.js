@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.13.42
+ * Natural-UI v0.8.13.52
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "v0.8.13.42";
+	N.version["Natural-UI"] = "v0.8.13.52";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -74,6 +74,7 @@
 				alwaysOnTop : false,
 				alwaysOnTopCalcTarget : "div, span, ul, p",
 				dynPos : true, // dynamic positioning for massage context and message overlay
+				windowScrollLock : true,
 				draggable : false
 			};
 
@@ -200,8 +201,11 @@
 
 				// set height
 				if(opts.height > 0) {
-					opts.msgContents.find(".msg_box__").height(opts.height);
-					opts.msgContents.find(".msg_box__").css("overflow-y", "auto");
+					opts.msgContents.find(".msg_box__").height(opts.height).css("overflow-y", "auto");
+
+					if(opts.windowScrollLock) {
+			        	N.element.windowScrollLock(opts.msgContents.find(".msg_box__"));
+			        }
 				}
 
 				//set confirm button style and bind click event
@@ -465,6 +469,7 @@
 				context : obj,
 				size : "medium", // size : smaller, small, medium, large, big
 				color : "white", // color : white, blue, skyblue, gray
+				iconClass : null,
 				disable : false,
 				effect : true,
 				customStyle : false
@@ -494,6 +499,10 @@
 		$.extend(Button, {
 			wrapEle : function() {
 				var opts = this.options;
+
+				if(opts.iconClass !== null) {
+					opts.context.prepend('<span class="' + opts.iconClass + '"></span>');
+				}
 
 				if(opts.disable) {
 					this.disable();
@@ -1105,6 +1114,7 @@
 				onCloseData : null,
 				preload : false,
 				dynPos : true,
+				windowScrollLock : true,
 				draggable : false
 			};
 
@@ -1187,8 +1197,9 @@
 				// TODO show loading bar
 				N.comm({
 					url : opts.url,
-					contentType : "application/x-www-form-urlencoded",
-					dataType : "html"
+					contentType : "text/html; charset=UTF-8",
+					dataType : "html",
+					type : "GET"
 				}).submit(function(page) {
 					// set loaded page instance to options.context
 					opts.context = $(page);
@@ -1204,6 +1215,9 @@
 					self.alert = N(window).alert(opts);
 					self.alert.options.msgContext.addClass("popup_overlay__");
 					self.alert.options.msgContents.addClass("popup__");
+
+					// set request target
+					this.request.options.target = opts.context.parent();
 
 					var sc = opts.context.filter("[id]:first").instance("cont");
 
@@ -1440,8 +1454,10 @@
 				// TODO show loading bar
 				N.comm({
 					url : url,
-					contentType : "application/x-www-form-urlencoded",
-					dataType : "html"
+					contentType : "text/html; charset=UTF-8",
+					dataType : "html",
+					type : "GET",
+					target : opts.contents.eq(targetIdx)
 				}).submit(function(page) {
 					var activeTabEle = opts.links.eq(targetIdx);
 					var sc = opts.contents.eq(targetIdx).html(page).children("[id]:first").instance("cont");
@@ -2535,12 +2551,7 @@
 		        }
 
 		        if(opts.windowScrollLock) {
-		        	tbodyWrap.bind('mousewheel.grid.fixHeader DOMMouseScroll.grid.fixHeader',function(e) {
-        		        var delta = e.originalEvent.wheelDelta || -e.originalEvent.detail;
-        		        if (delta > 0 && $(this).scrollTop() <= 0) return false;
-        		        if (delta < 0 && $(this).scrollTop() >= this.scrollHeight - $(this).height()) return false;
-        		        return true;
-        		    });
+		        	N.element.windowScrollLock(tbodyWrap);
 		        }
 
 		        // Scroll paging
@@ -2628,6 +2639,8 @@
 	        	gridWrap.after(vResizable);
         	},
         	resize : function() {
+        		var self = this;
+
 				var opts = this.options;
 				var theadCells = this.thead.find("> tr th");
 				var resizeBar;
@@ -2659,6 +2672,7 @@
         			theadCells.each(function() {
         				var cellEle = $(this);
         				cellEle.find("> .resize_bar__").css({
+        					"height": String(cellEle.outerHeight()) + "px",
         					"top" : cellEle.position().top,
         					"left" : (cellEle.position().left + cellEle.outerWidth() - resizeBarWidth / 2) + "px"
         				});
@@ -2668,15 +2682,11 @@
 				theadCells.each(function() {
 					cellEle = $(this);
 		            resizeBar = cellEle.append('<span class="resize_bar__"></span>').find(".resize_bar__");
-
 		            resizeBar.css({
 		            	"padding": "0px",
-		            	"height": String(cellEle.outerHeight()) + "px",
 		            	"position": "absolute",
 		            	"width": resizeBarWidth + "px",
 		            	"cursor": "e-resize",
-		            	"top" : cellEle.position().top,
-		            	"left": (cellEle.position().left + cellEle.outerWidth() - resizeBarWidth / 2) + "px"
 		            });
 
 		            resizeBar.bind("mousedown.grid.resize", function(e) {
@@ -2705,6 +2715,18 @@
 		            		});
 		            		pressed = true;
 
+		            		var resizeBeamHeight = opts.height > 0 ? self.tbodyContainer.closest(".grid_wrap__").height() - 1 : self.tbodyContainer.height();
+		            		$('<div class="resize_beam__"></div>').css({
+				            	"padding": "0px",
+				            	"position": "absolute",
+				            	"height": "0",
+				            	"width": "1px",
+				            	"margin-left": String(resizeBarWidth/2) + "px"
+				            }).appendTo(currResizeBarEle).animate({
+				            	"height" : resizeBeamHeight + "px"
+				            }, 150);
+
+		            		var leftBase = Math.floor(currResizeBarEle.parent("th").next().offset().left);
 		            		var movedPx;
 		            		$(window.document).bind("mousemove.grid.resize", function(e) {
 		            			if(pressed) {
@@ -2719,6 +2741,9 @@
 		            						targetNextCellEle.css("width", nextCurrWidth + "px");
 		            					}
 		            				}
+		            				currCellEle.find(".resize_bar__ > .resize_beam__").offset({
+		            					"left" : leftBase + movedPx
+		            				});
 		            			}
 		            		});
 
@@ -2730,6 +2755,13 @@
 		            					"left" : (cellEle.position().left + cellEle.outerWidth() - resizeBarWidth / 2) + "px"
 		            				});
 		            			});
+		            			currResizeBarEle.find(".resize_beam__").offset({
+	            					"left" : currResizeBarEle.parent("th").next().offset().left
+	            				}).animate({
+					            	"height" : "0"
+					            }, 200, function() {
+					            	$(this).remove();
+					            });
 		            			$(document).unbind("dragstart.grid.resize").unbind("selectstart.grid.resize").unbind("mousemove.grid.resize").unbind("mouseup.grid.resize");
 		            			pressed = false;
 		            		});
@@ -3006,7 +3038,6 @@
 					i = opts.data.length;
 					opts.context.append(tbodyTempClone);
 				}
-				
 
 				if(opts.rowHandler !== null) {
 					opts.rowHandler.call(tbodyTempClone, i, tbodyTempClone, data);
@@ -3022,7 +3053,6 @@
 					addTop : opts.addTop,
 					revert : opts.revert
 				});
-				
 				if(data === undefined) {
 					form.add(data);
 				} else {
