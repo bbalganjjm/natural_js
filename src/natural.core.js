@@ -1,5 +1,5 @@
 /*!
- * Natural-CORE v0.8.5.5
+ * Natural-CORE v0.8.5.7
  * bbalganjjm@gmail.com
  *
  * Includes formatdate.js & Mask JavaScript API
@@ -213,7 +213,7 @@
 		// N local variables
 		$.extend(N, {
 			version : {
-				"Natural-CORE" : "0.8.5.4"
+				"Natural-CORE" : "0.8.5.7"
 			},
 			/**
 			 * Set and get locale value
@@ -724,6 +724,17 @@
 			    dataChanged : function(ele) {
 			    	ele.addClass("data_changed__");
 			    	ele.fadeOut(150).fadeIn(300);
+			    },
+			    /**
+			     * This method is locked window scroll when scrolling in the ele(arg1)
+			     */
+			    windowScrollLock : function(ele) {
+			    	ele.bind('mousewheel.grid.fixHeader DOMMouseScroll.grid.fixHeader',function(e) {
+        		        var delta = e.originalEvent.wheelDelta || -e.originalEvent.detail;
+        		        if (delta > 0 && $(this).scrollTop() <= 0) return false;
+        		        if (delta < 0 && $(this).scrollTop() >= this.scrollHeight - $(this).height()) return false;
+        		        return true;
+        		    });
 			    }
 			},
 			/**
@@ -886,6 +897,31 @@
 				get : function(resource, key, vars) {
 					var msg = resource[N.locale()][key];
 					return msg !== undefined ? N.message.replaceMsgVars(msg, vars) : key;
+				}
+			},
+			/**
+			 * N.array package
+			 */
+			"array" : {
+				/**
+				 * Remove duplicated value(object | etc.)
+				 */
+				"deduplicate" : function(arr, key) {
+					var rtnArr = [];
+					$(arr).each(function(i, obj) {
+						if(N.type(obj) === "object" && key !== undefined) {
+							if($.inArray(obj[key], $(rtnArr).map(function() {
+									return this[key];
+								}).get()) < 0) {
+								rtnArr.push(obj);
+							}
+						} else {
+							if($.inArray(obj, rtnArr) < 0) {
+								rtnArr.push(obj);
+							}
+						}
+					});
+					return rtnArr;
 				}
 			},
 			/**
