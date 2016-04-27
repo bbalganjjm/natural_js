@@ -106,8 +106,7 @@
 }
 
 .popup__.block_overlay_msg__ .msg_box__ {
-	background-color: #ffffff;
-	padding: 0;
+	background-color: #ffffff; padding: 0;
 }
 
 .popup__.block_overlay_msg__ .buttonBox__ {
@@ -271,8 +270,8 @@ table.grid__ thead, table.grid__ tfoot {
 	background: linear-gradient(top, #efefef, #effeee); background: -ms-linear-gradient(top, #efefef, #effeee); background: -moz-linear-gradient(top, #efefef, #effeee); background: -o-linear-gradient(top, #efefef, #effeee); background: -webkit-linear-gradient(top, #efefef, #effeee); background-color: #efefef;
 }
 
-.grid__>thead>tr>th .resize_beam__ {
-	background: linear-gradient(to bottom, #003300, #77cc77); background: -ms-linear-gradient(to bottom, #003300, #77cc77); background: -moz-linear-gradient(to bottom, #003300, #77cc77); background: -o-linear-gradient(to bottom, #003300, #77cc77); background: -webkit-linear-gradient(top, #003300, #77cc77); background-color: #003300; z-index: 1;
+.grid__>thead>tr>th .resize_bar__ {
+	background: linear-gradient(to bottom, #B0BCC8, #ffffff); background: -ms-linear-gradient(to bottom, #B0BCC8, #ffffff); background: -moz-linear-gradient(to bottom, #B0BCC8, #ffffff); background: -o-linear-gradient(to bottom, #B0BCC8, #ffffff); background: -webkit-linear-gradient(top, #B0BCC8, #ffffff); background-color: #B0BCC8; opacity: 0.6; cursor: e-resize; z-index: 1;
 }
 
 table.tbody_wrap__>.grid__ tbody td.empty__ {
