@@ -271,7 +271,7 @@ table.grid__ thead, table.grid__ tfoot {
 }
 
 .grid__>thead>tr>th .resize_bar__ {
-	background: linear-gradient(to bottom, #B0BCC8, #ffffff); background: -ms-linear-gradient(to bottom, #B0BCC8, #ffffff); background: -moz-linear-gradient(to bottom, #B0BCC8, #ffffff); background: -o-linear-gradient(to bottom, #B0BCC8, #ffffff); background: -webkit-linear-gradient(top, #B0BCC8, #ffffff); background-color: #B0BCC8; opacity: 0.6; cursor: e-resize; z-index: 1;
+	background: linear-gradient(to bottom, #77cc77, #fff); background: -ms-linear-gradient(to bottom, #77cc77, #fff); background: -moz-linear-gradient(to bottom, #77cc77, #fff); background: -o-linear-gradient(to bottom, #77cc77, #fff); background: -webkit-linear-gradient(top, #77cc77, #fff); background-color: #77cc77; opacity: 0.6; cursor: e-resize; z-index: 1;
 }
 
 table.tbody_wrap__>.grid__ tbody td.empty__ {
