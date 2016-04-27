@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.13.52
+ * Natural-UI v0.8.13.55
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "v0.8.13.52";
+	N.version["Natural-UI"] = "v0.8.13.55";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -2059,27 +2059,32 @@
 		            throw new Error("[Form.add]Data is null. you must input data");
 		        }
 
-		        // set default values
 		        if(data === undefined) {
-		        	var vals = N.element.toData(opts.context.find(":input").not(":button"));
-		        	vals.rowStatus = "insert";
+		        	// set default values
+		        	data = N.element.toData(opts.context.find(":input").not(":button"));
+		        }
 
+		        if(!N.isWrappedSet(data)) {
+		        	$.extend(data, N.element.toData(opts.context.find(":input").not(":button")), data);
+		        	data.rowStatus = "insert";
+		        	
 		        	if(!opts.addTop) {
-		        		opts.data.push(vals);
+		        		opts.data.push(data);
 		        		opts.row = opts.data.length - 1;
 		        	} else {
-		        		opts.data.splice(0, 0, vals);
+		        		opts.data.splice(0, 0, data);
 		        		opts.row = 0;
 		        	}
 		        	// Set revert data
 		        	if(opts.revert) {
 		        		this.revertData = $.extend({}, opts.data[opts.row]);
 		        	}
-
+		        	
+		        	this.bind();
+		        	
 		        	N.ds.instance(opts.extObj !== null ? opts.extObj : this).notify(opts.extRow > -1 ? opts.extRow : opts.row);
 		        }
-
-		        this.bind(opts.row, data);
+	        	
 				return this;
 			},
 			remove : function(row) {
@@ -2333,7 +2338,6 @@
 				html : false,
 				addTop : false,
 				resizable : false,
-				resizableCorrectionWidth : 0,
 				vResizable : false,
 				sortable : false,
 				windowScrollLock : true,
@@ -2355,7 +2359,9 @@
 				onSelect : null,
 				onBind : null,
 				misc : {
-					withoutTbodyLength : 0 // garbage rows count in table
+					withoutTbodyLength : 0, // garbage rows count in table
+					resizableCorrectionWidth : 0,
+					resizeBarCorrectionHeight : 0
 				}
 			};
 
@@ -2640,130 +2646,120 @@
         	},
         	resize : function() {
         		var self = this;
-
+        		
+        		var resizeBar, currResizeBar, resizeBarHeight, cellEle, currCellEle, currNextCellEle, targetNextCellEle, targetCellEle, currResizeBarEle, 
+					defWidth, nextDefWidth, currWidth, nextCurrWidth, startOffsetX,
+					minPx, maxPx, defPx, movedPx;
+        		
 				var opts = this.options;
 				var theadCells = this.thead.find("> tr th");
-				var resizeBar;
-				var ele;
-
-				var pressed = false;
-				var cellEle;
-				var defWidth;
-				var nextDefWidth;
-				var currWidth;
-				var nextCurrWidth;
-				var currCellEle;
-				var currNextCellEle;
-				var targetNextCellEle;
-				var currCellEleTable;
-				var targetCellEle;
-				var targetCellEleWrap;
-				var currResizeBarEle;
-				var startOffsetX;
-				var initHeight;
+				var isPressed = false;
 				var scrollbarWidth = N.browser.scrollbarWidth();
+				
 				if(N.browser.is("safari")){
 					theadCells.css("padding-left", "0");
 					theadCells.css("padding-right", "0");
 				}
-				var resizeBarWidth = 6;
-
+				var resizeBarWidth = 3;
+				var resizeBarCorrectionHeight = N.browser.is("ie") ? -2 : 0;
+				var context;
+				if (opts.height > 0) {
+					context = opts.context.closest(".grid_wrap__");
+    	        } else {
+    	        	context = opts.context;
+    	        }
+				
 				this.thead.bind("mouseover.grid.resize", function() {
-        			theadCells.each(function() {
-        				var cellEle = $(this);
-        				cellEle.find("> .resize_bar__").css({
-        					"height": String(cellEle.outerHeight()) + "px",
-        					"top" : cellEle.position().top,
-        					"left" : (cellEle.position().left + cellEle.outerWidth() - resizeBarWidth / 2) + "px"
-        				});
-        			});
+					resizeBarHeight = (opts.height > 0 ? self.tbodyContainer.closest(".grid_wrap__").height() - 3 : self.tbodyContainer.height() + resizeBarCorrectionHeight) + 1 + opts.misc.resizeBarCorrectionHeight;
+					theadCells.each(function() {
+						var cellEle = $(this);
+						cellEle.find("> .resize_bar__").css({
+							"top" : cellEle.position().top + 1,
+							"left" : (cellEle.position().left + cellEle.outerWidth() - resizeBarWidth / 2) + "px"
+						});
+					});
         		});
 
 				theadCells.each(function() {
 					cellEle = $(this);
-		            resizeBar = cellEle.append('<span class="resize_bar__"></span>').find(".resize_bar__");
-		            resizeBar.css({
+		            resizeBar = $('<div class="resize_bar__"></div>').css({
 		            	"padding": "0px",
 		            	"position": "absolute",
 		            	"width": resizeBarWidth + "px",
-		            	"cursor": "e-resize",
-		            });
+		            	"height": String(cellEle.outerHeight()) + "px",
+		            	"opacity": "0"
+		            }).appendTo(cellEle);
 
 		            resizeBar.bind("mousedown.grid.resize", function(e) {
 		            	if((e.which || e.button) === 1) {
+		            		$(this).css({
+		            			"opacity": ""
+		            		}).animate({
+		            			"height" : resizeBarHeight + "px"
+		            		}, 150);
+		            		
 		            		startOffsetX = e.pageX;
 		            		currResizeBarEle = $(e.target);
 		            		currCellEle = currResizeBarEle.parent("th");
 		            		currNextCellEle = currResizeBarEle.parent("th").next();
-
+		            		var isContext = false;
+		            		if(currNextCellEle.length === 0) {
+		            			currNextCellEle = context;
+		            			isContext = true;
+		            		}
+		            		
 		            		if(opts.height > 0) {
 		            			targetCellEle = opts.context.find("thead th:eq(" + theadCells.index(currCellEle) + ")");
 		            			targetNextCellEle = opts.context.find("thead th:eq(" + (theadCells.index(currCellEle) + 1) + ")");
-		            			currCellEleTable = currCellEle.parents("table.grid__");
-		            			targetCellEleWrap = targetCellEle.parents("div.tbody_wrap__");
 		            		}
 
 		            		// to block sort event
 		            		currCellEle.data("sortLock", true);
 
-		            		defWidth = currCellEle.width() + 1 + opts.resizableCorrectionWidth;
-		            		nextDefWidth = currNextCellEle.width() + 1 + opts.resizableCorrectionWidth;
-		            		initHeight = currCellEle.innerHeight() + 1;
+		            		defWidth = currCellEle.width() + 1 + opts.misc.resizableCorrectionWidth;
+		            		nextDefWidth = (!isContext ? currNextCellEle.width() + 1 + opts.misc.resizableCorrectionWidth : context.width());
 
 		            		$(document).bind("dragstart.grid.resize, selectstart.grid.resize", function() {
 		            			return false;
 		            		});
-		            		pressed = true;
+		            		isPressed = true;
 
-		            		var resizeBeamHeight = opts.height > 0 ? self.tbodyContainer.closest(".grid_wrap__").height() - 1 : self.tbodyContainer.height();
-		            		$('<div class="resize_beam__"></div>').css({
-				            	"padding": "0px",
-				            	"position": "absolute",
-				            	"height": "0",
-				            	"width": "1px",
-				            	"margin-left": String(resizeBarWidth/2) + "px"
-				            }).appendTo(currResizeBarEle).animate({
-				            	"height" : resizeBeamHeight + "px"
-				            }, 150);
-
-		            		var leftBase = Math.floor(currResizeBarEle.parent("th").next().offset().left);
-		            		var movedPx;
+		            		minPx = Math.floor(!isContext ? currNextCellEle.offset().left : currCellEle.offset().left + currCellEle.outerWidth());
+		            		maxPx = minPx + (!isContext ? currNextCellEle.outerWidth() : 7680);
+		            		movedPx = defPx = Math.floor(currResizeBarEle.parent("th").offset().left);
 		            		$(window.document).bind("mousemove.grid.resize", function(e) {
-		            			if(pressed) {
-		            				movedPx = e.pageX - startOffsetX;
-		            				currWidth = defWidth + movedPx;
-		            				nextCurrWidth = nextDefWidth - movedPx;
-		            				if(currWidth > 0 && nextCurrWidth > 0) {
-		            					currCellEle.css("width", currWidth + "px");
-		            					currNextCellEle.css("width", nextCurrWidth + "px");
-		            					if(targetCellEle !== undefined) {
-		            						targetCellEle.css("width", currWidth + "px");
-		            						targetNextCellEle.css("width", nextCurrWidth + "px");
+		            			if(isPressed) {
+		            				if(defPx < e.pageX && maxPx > e.pageX) {
+		            					movedPx = e.pageX - startOffsetX;
+		            					currWidth = defWidth + movedPx;
+	            						nextCurrWidth = !isContext ? nextDefWidth - movedPx : nextDefWidth + movedPx;
+		            					if(currWidth > 0 && nextCurrWidth > 0) {
+		            						currCellEle.css("width", currWidth + "px");
+	            							currNextCellEle.css("width", nextCurrWidth + "px");
+		            						if(targetCellEle !== undefined) {
+		            							targetCellEle.css("width", currWidth + "px");
+	            								targetNextCellEle.css("width", nextCurrWidth + "px");
+		            						}
 		            					}
+		            					currCellEle.find(".resize_bar__").offset({
+			            					"left" : minPx - resizeBarWidth/2 + movedPx
+			            				});
 		            				}
-		            				currCellEle.find(".resize_bar__ > .resize_beam__").offset({
-		            					"left" : leftBase + movedPx
-		            				});
 		            			}
 		            		});
 
-		            		$(window.document).bind("mouseup.grid.resize", function(se) {
-		            			theadCells.each(function() {
-		            				var cellEle = $(this);
-		            				cellEle.find("> .resize_bar__").css({
-		            					"top" : cellEle.position().top,
-		            					"left" : (cellEle.position().left + cellEle.outerWidth() - resizeBarWidth / 2) + "px"
-		            				});
-		            			});
-		            			currResizeBarEle.find(".resize_beam__").offset({
-	            					"left" : currResizeBarEle.parent("th").next().offset().left
-	            				}).animate({
-					            	"height" : "0"
-					            }, 200, function() {
-					            	$(this).remove();
-					            });
+		            		var currResizeBar = $(this);
+		            		$(window.document).bind("mouseup.grid.resize", function(e) {
+		            			currResizeBar.animate({
+	            					"height" : String(cellEle.outerHeight()) + "px"
+	            				}, 200, function() {
+            						$(this).css({
+            							"opacity": "0"
+            						});
+	            				});
+		            			
 		            			$(document).unbind("dragstart.grid.resize").unbind("selectstart.grid.resize").unbind("mousemove.grid.resize").unbind("mouseup.grid.resize");
-		            			pressed = false;
+		            			isPressed = false;
 		            		});
 		            	}
 		        	});
@@ -3031,16 +3027,10 @@
 				}
 				var tbodyTempClone = this.tbodyTemp.clone(true, true);
 
-				var i = 0;
 				if(opts.addTop) {
 					opts.context.find("thead").after(tbodyTempClone);
 				} else {
-					i = opts.data.length;
 					opts.context.append(tbodyTempClone);
-				}
-
-				if(opts.rowHandler !== null) {
-					opts.rowHandler.call(tbodyTempClone, i, tbodyTempClone, data);
 				}
 
 				// for new row data bind, use N.form
@@ -3052,13 +3042,12 @@
 					extRow : opts.addTop ? 0 : opts.data.length,
 					addTop : opts.addTop,
 					revert : opts.revert
-				});
-				if(data === undefined) {
-					form.add(data);
-				} else {
-					form.bind(form.options.extRow, data);
-				}
+				}).add(data);
 
+				if(opts.rowHandler !== null) {
+					opts.rowHandler.call(tbodyTempClone, form.options.extRow, tbodyTempClone, form.data(true)[0]);
+				}
+				
 				// unselect rows
 				opts.context.find("> tbody").removeClass("grid_selected__");
 
