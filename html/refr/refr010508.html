@@ -334,6 +334,24 @@
 				</p>
 			</td>
 		</tr>
+		<tr>
+			<td>misc.resizableCorrectionWidth</td>
+			<td>number</td>
+			<td>0</td>
+			<td></td>
+			<td>
+				컬럼 리사이징 시 홈페이지 상황에 따라 데이터 컬럼의 넓이와 헤더컬럼의 넓이가 어긋날 수 있는데 이때 이를 보정할 수 있는 값
+			</td>
+		</tr>
+		<tr>
+			<td>misc.resizeBarCorrectionHeight</td>
+			<td>number</td>
+			<td>0</td>
+			<td></td>
+			<td>
+				컬럼 리사이징 시 홈페이지 상황에 따라 리사이즈 바의 높이가 꽉 차지 않을 수 있는데 이때 이를 보정할 수 있는 값
+			</td>
+		</tr>
 	</table>
 
 	<h3>선언형옵션(Declarative options)</h3>
@@ -448,6 +466,16 @@
 			<td>
 				<p>새로운 로우 데이터를 생성 합니다.</p>
 				<p>로우 데이터 생성 시 그리드요소안의 입력요소의 id 와 값들로 데이터를 생성합니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>data</td>
+			<td>JSON Object</td>
+			<td align="center">-</td>
+			<td>
+				새로운 행을 생성할 때 컬럼값들의 기본값을 지정 할 수 있습니다.
+				<p class="alert">인자로 지정된 데이터는 add 호출 시 생성된 기본 데이터를 확장 합니다.</p>
 			</td>
 		</tr>
 		<tr>
