@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.13.55
+ * Natural-UI v0.8.13.56
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "v0.8.13.55";
+	N.version["Natural-UI"] = "v0.8.13.56";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -188,6 +188,9 @@
 				// bind event to close(X) button
 				var self = this;
 				opts.msgContents.find(".msg_title_box__ .msg_title_close__").click(function() {
+					if (opts.onCancel !== null) {
+						opts.onCancel(opts.msgContext, opts.msgContents);
+					}
 					self[opts.closeMode]();
 				});
 
@@ -1183,6 +1186,8 @@
 				opts.msg = opts.context;
 				if(opts.title === null) {
 					opts.title = opts.context.attr("title");
+				}
+				if(opts.title !== null) {
 					opts.context.removeAttr("title");
 				}
 
@@ -1207,9 +1212,10 @@
 					// set title
 					if(opts.title === null) {
 						opts.title = opts.context.filter("[id]:first").attr("title");
+					}
+					if(opts.title !== null) {
 						opts.context.filter("[id]:first").removeAttr("title");
 					}
-
 					// opts.context is alert message;
 					opts.msg = opts.context;
 					self.alert = N(window).alert(opts);
@@ -2065,7 +2071,7 @@
 		        }
 
 		        if(!N.isWrappedSet(data)) {
-		        	$.extend(data, N.element.toData(opts.context.find(":input").not(":button")), data);
+		        	$.extend(N.element.toData(opts.context.find(":input").not(":button")), data);
 		        	data.rowStatus = "insert";
 		        	
 		        	if(!opts.addTop) {
@@ -2081,7 +2087,7 @@
 		        	}
 		        	
 		        	this.bind();
-		        	
+
 		        	N.ds.instance(opts.extObj !== null ? opts.extObj : this).notify(opts.extRow > -1 ? opts.extRow : opts.row);
 		        }
 	        	
@@ -2689,7 +2695,7 @@
 		            	"height": String(cellEle.outerHeight()) + "px",
 		            	"opacity": "0"
 		            }).appendTo(cellEle);
-
+		            
 		            resizeBar.bind("mousedown.grid.resize", function(e) {
 		            	if((e.which || e.button) === 1) {
 		            		$(this).css({
@@ -2699,13 +2705,13 @@
 		            		}, 150);
 		            		
 		            		startOffsetX = e.pageX;
-		            		currResizeBarEle = $(e.target);
+		            		currResizeBarEle = $(this);
 		            		currCellEle = currResizeBarEle.parent("th");
 		            		currNextCellEle = currResizeBarEle.parent("th").next();
-		            		var isContext = false;
+		            		var islast = false;
 		            		if(currNextCellEle.length === 0) {
 		            			currNextCellEle = context;
-		            			isContext = true;
+		            			islast = true;
 		            		}
 		            		
 		            		if(opts.height > 0) {
@@ -2713,26 +2719,37 @@
 		            			targetNextCellEle = opts.context.find("thead th:eq(" + (theadCells.index(currCellEle) + 1) + ")");
 		            		}
 
+		            		// Convert flexible cell width to absolute cell width when the clicked resizeBar is last last resizeBar
+		            		if(islast) {
+		            			theadCells.each(function(i) {
+	            					$(this).width(Math.floor($(this).width()) + 1 + opts.misc.resizableCorrectionWidth).removeAttr("width");
+	            					
+	            					if(targetCellEle !== undefined) {
+	            						opts.context.find("thead th:eq(" + theadCells.index(this) + ")").width(Math.floor($(this).width()) + 1 + opts.misc.resizableCorrectionWidth).removeAttr("width");
+	            					}
+		    					});
+	            			}
+		            		
 		            		// to block sort event
 		            		currCellEle.data("sortLock", true);
 
-		            		defWidth = currCellEle.width() + 1 + opts.misc.resizableCorrectionWidth;
-		            		nextDefWidth = (!isContext ? currNextCellEle.width() + 1 + opts.misc.resizableCorrectionWidth : context.width());
+		            		defWidth = Math.floor(currCellEle.width()) + 1 + opts.misc.resizableCorrectionWidth;
+		            		nextDefWidth = !islast ? Math.floor(currNextCellEle.width()) + 1 + opts.misc.resizableCorrectionWidth : Math.floor(context.width());
 
 		            		$(document).bind("dragstart.grid.resize, selectstart.grid.resize", function() {
 		            			return false;
 		            		});
 		            		isPressed = true;
 
-		            		minPx = Math.floor(!isContext ? currNextCellEle.offset().left : currCellEle.offset().left + currCellEle.outerWidth());
-		            		maxPx = minPx + (!isContext ? currNextCellEle.outerWidth() : 7680);
+		            		minPx = !islast ? Math.floor(currNextCellEle.offset().left) : Math.floor(currCellEle.offset().left) + Math.floor(currCellEle.outerWidth());
+		            		maxPx = minPx + (!islast ? Math.floor(currNextCellEle.outerWidth()) : 7680);
 		            		movedPx = defPx = Math.floor(currResizeBarEle.parent("th").offset().left);
 		            		$(window.document).bind("mousemove.grid.resize", function(e) {
 		            			if(isPressed) {
 		            				if(defPx < e.pageX && maxPx > e.pageX) {
 		            					movedPx = e.pageX - startOffsetX;
-		            					currWidth = defWidth + movedPx;
-	            						nextCurrWidth = !isContext ? nextDefWidth - movedPx : nextDefWidth + movedPx;
+	            						currWidth = defWidth + movedPx;
+	            						nextCurrWidth = !islast ? nextDefWidth - movedPx : nextDefWidth + movedPx;
 		            					if(currWidth > 0 && nextCurrWidth > 0) {
 		            						currCellEle.css("width", currWidth + "px");
 	            							currNextCellEle.css("width", nextCurrWidth + "px");
