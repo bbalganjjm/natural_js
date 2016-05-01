@@ -1,5 +1,5 @@
 /*!
- * Natural-DATA v0.8.2.4
+ * Natural-DATA v0.8.2.5
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-DATA"] = "0.8.2.4";
+	N.version["Natural-DATA"] = "0.8.2.5";
 
 	$.fn.extend($.extend(N.prototype, {
 		datafilter : function(callBack) {
@@ -342,7 +342,14 @@
 					            }
 							},
 							onBeforeHide : function(context, contents) {
-								context.unbind("focusout.prevent.format.date", N.element.disable).trigger("focusout.form.validate").trigger("focusout.form.dataSync").trigger("focusout.form.format");
+								// for Hide from ESC key
+								if ((window.event.keyCode ? window.event.keyCode : (window.event.which ? window.event.which : window.event.charCode)) == 27) {
+									setTimeout(function(){
+										context.unbind("focusout.prevent.format.date", N.element.disable).trigger("focusout.form.validate").trigger("focusout.form.dataSync").trigger("focusout.form.format");
+									}, 50);
+								} else {
+									context.unbind("focusout.prevent.format.date", N.element.disable).trigger("focusout.form.validate").trigger("focusout.form.dataSync").trigger("focusout.form.format");
+								}
 								if(N.context.attr("ui").datepicker != undefined && N.context.attr("ui").datepicker.onBeforeHide != undefined) {
 					            	N.context.attr("ui").datepicker.onBeforeHide(context, contents);
 					            }
