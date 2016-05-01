@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.13.56
+ * Natural-UI v0.8.13.57
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "v0.8.13.56";
+	N.version["Natural-UI"] = "v0.8.13.57";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -2367,6 +2367,8 @@
 				misc : {
 					withoutTbodyLength : 0, // garbage rows count in table
 					resizableCorrectionWidth : 0,
+					resizableLastCellCorrectionWidth : 0,
+					resizeBarCorrectionLeft : 0,
 					resizeBarCorrectionHeight : 0
 				}
 			};
@@ -2681,11 +2683,12 @@
 						var cellEle = $(this);
 						cellEle.find("> .resize_bar__").css({
 							"top" : cellEle.position().top + 1,
-							"left" : (cellEle.position().left + cellEle.outerWidth() - resizeBarWidth / 2) + "px"
+							"left" : (cellEle.position().left + cellEle.outerWidth() - resizeBarWidth / 2 + opts.misc.resizeBarCorrectionLeft) + "px"
 						});
 					});
         		});
 
+				var isFirstTimeLastClick = true;
 				theadCells.each(function() {
 					cellEle = $(this);
 		            resizeBar = $('<div class="resize_bar__"></div>').css({
@@ -2718,23 +2721,23 @@
 		            			targetCellEle = opts.context.find("thead th:eq(" + theadCells.index(currCellEle) + ")");
 		            			targetNextCellEle = opts.context.find("thead th:eq(" + (theadCells.index(currCellEle) + 1) + ")");
 		            		}
-
 		            		// Convert flexible cell width to absolute cell width when the clicked resizeBar is last last resizeBar
-		            		if(islast) {
+		            		if(isFirstTimeLastClick && islast) {
 		            			theadCells.each(function(i) {
-	            					$(this).width(Math.floor($(this).width()) + 1 + opts.misc.resizableCorrectionWidth).removeAttr("width");
+	            					$(this).width(Math.floor($(this).width()) + (opts.height > 0 ? opts.misc.resizableLastCellCorrectionWidth : 0) + opts.misc.resizableCorrectionWidth).removeAttr("width");
 	            					
 	            					if(targetCellEle !== undefined) {
-	            						opts.context.find("thead th:eq(" + theadCells.index(this) + ")").width(Math.floor($(this).width()) + 1 + opts.misc.resizableCorrectionWidth).removeAttr("width");
+	            						opts.context.find("thead th:eq(" + theadCells.index(this) + ")").width(Math.floor($(this).width()) + opts.misc.resizableCorrectionWidth).removeAttr("width");
 	            					}
 		    					});
+		            			isFirstTimeLastClick = false;
 	            			}
 		            		
 		            		// to block sort event
 		            		currCellEle.data("sortLock", true);
 
-		            		defWidth = Math.floor(currCellEle.width()) + 1 + opts.misc.resizableCorrectionWidth;
-		            		nextDefWidth = !islast ? Math.floor(currNextCellEle.width()) + 1 + opts.misc.resizableCorrectionWidth : Math.floor(context.width());
+		            		defWidth = Math.floor(currCellEle.width()) + opts.misc.resizableCorrectionWidth;
+		            		nextDefWidth = !islast ? Math.floor(currNextCellEle.width()) + opts.misc.resizableCorrectionWidth : Math.floor(context.width());
 
 		            		$(document).bind("dragstart.grid.resize, selectstart.grid.resize", function() {
 		            			return false;
@@ -2759,7 +2762,7 @@
 		            						}
 		            					}
 		            					currCellEle.find(".resize_bar__").offset({
-			            					"left" : minPx - resizeBarWidth/2 + movedPx
+			            					"left" : minPx - resizeBarWidth/2 + movedPx + opts.misc.resizeBarCorrectionLeft
 			            				});
 		            				}
 		            			}
