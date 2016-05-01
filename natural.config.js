@@ -53,11 +53,7 @@
 					success : function(request, data, textStatus, xhr) {
 					},
 					error : function(request, xhr, textStatus, errorThrown) {
-						if(request.obj.html !== undefined) {
-							request.obj.html('<div align="center" style="margin-top: 140px;margin-bottom: 140px;">[ ' + request.options.url + ' ] 페이지를 불러오는 도중 에러가 발생 했습니다.</div>');
-						} else {
-							N(window).alert('[ ' + request.options.url + ' ] 페이지를 불러오는 도중 에러가 발생 했습니다.').show();
-						}
+						
 					},
 					complete : function(request, xhr, textStatus) {
 					}
@@ -434,6 +430,24 @@
 				"en_US" : {
 					"empty" : "No inquired data or no data available."
 				}
+			},
+			"misc" : {
+				/**
+				 * 컬럼 리사이즈 시 다른컬럼이 밀릴때 아래 수치 조절(기본값 : 0)
+				 */
+				"resizableCorrectionWidth" : N.browser.is("chrome") ? 1 : N.browser.is("safari") ? 2 : 0,
+				/**
+				 * 헤더고정형 중 마지막 컬럼 클릭 시 다른컬럼이 밀릴때 아래 수치 조절(기본값 : 0)
+				 */
+				"resizableLastCellCorrectionWidth" : 0,
+				/**
+				 * 리사이즈바의 left 포지션이 컬럼 보더를 기준으로 가운데에 위치하지 않을때 아래 수치 조절(기본값 : 0)
+				 */
+				"resizeBarCorrectionLeft" : N.browser.is("firefox") ? -1 : N.browser.is("safari") ? 1 : 0,
+				/**
+				 * 리사이즈바의 높이가 밑에까지 꽉 차지 않을때 아래 수치 조절(기본값 : 0)
+				 */
+				"resizeBarCorrectionHeight" : 0
 			}
 		}
 	});
