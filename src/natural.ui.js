@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.13.57
+ * Natural-UI v0.8.13.61
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "v0.8.13.57";
+	N.version["Natural-UI"] = "v0.8.13.61";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -75,7 +75,14 @@
 				alwaysOnTopCalcTarget : "div, span, ul, p",
 				dynPos : true, // dynamic positioning for massage context and message overlay
 				windowScrollLock : true,
-				draggable : false
+				draggable : false,
+				draggableOverflowCorrection : true,
+				draggableOverflowCorrectionAddValues : {
+					top : 0,
+					bottom : 0,
+					left : 0,
+					right : 0
+				}
 			};
 
 			try {
@@ -84,6 +91,7 @@
 				// 2. If defined the N.context.attr("ui").alert.container value N.config, be applied N.config's value
 				this.options = $.extend({}, this.options, N.context.attr("ui").alert);
 				this.options.container = N(this.options.container);
+				this.options.draggableOverflowCorrectionAddValues = $.extend({}, this.options.draggableOverflowCorrectionAddValues, N.context.attr("ui").alert.draggableOverflowCorrectionAddValues);
 			} catch (e) {
 				N.error("[N.alert]" + e, e);
 			}
@@ -245,7 +253,7 @@
 					var moved;
 					var startX;
 					var startY;
-					opts.msgContents.find(".msg_title_box__").bind("mousedown.alert", function(e) {
+					opts.msgContents.addClass("draggable__").find(".msg_title_box__").bind("mousedown.alert", function(e) {
 						if(!$(e.target).is(".msg_title_close__") && (e.which || e.button) === 1) {
 							pressed = true;
 							opts.msgContents.data("isMoved", true);
@@ -256,8 +264,6 @@
 							$(window.document).bind("dragstart.alert, selectstart.alert", function() {
 			                    return false;
 			                });
-
-							$(this).css("cursor", "pointer");
 
 							moved = true;
 							$(window.document).bind("mousemove.alert", function(e) {
@@ -273,13 +279,32 @@
 								}
 							});
 
-							var self = this;
+							var documentWidth = $(window.document).width();
 							$(window.document).bind("mouseup.alert", function(e) {
 								pressed = false;
-
-								$(self).css("cursor", "");
+								if(opts.draggableOverflowCorrection) {
+									var offset = {};
+									if(opts.msgContents.offset().top - $(window).scrollTop() < 0) {
+										offset.top = (opts.isWindow ? 0 
+												: opts.msgContents.offset().top + ($(window).scrollTop() - opts.msgContents.offset().top)) + opts.draggableOverflowCorrectionAddValues.top;
+									} else if(opts.msgContents.offset().top + opts.msgContents.outerHeight() > $(window).scrollTop() + $(window).height()) {
+										offset.top = (opts.isWindow ? $(window).height() - opts.msgContents.outerHeight()
+												: $(window).scrollTop() + $(window).height() - opts.msgContents.outerHeight()) + opts.draggableOverflowCorrectionAddValues.bottom;
+									}
+									if(offset.top < 0) {
+										offset.top = 0 + opts.draggableOverflowCorrectionAddValues.left;
+									}
+									if(opts.msgContents.offset().left < 0) {
+										offset.left = 0 + opts.draggableOverflowCorrectionAddValues.left;
+									} else if(opts.msgContents.offset().left + opts.msgContents.outerWidth() > documentWidth) {
+										offset.left = documentWidth - opts.msgContents.outerWidth() + opts.draggableOverflowCorrectionAddValues.right;
+									}
+									if(!N.isEmptyObject(offset)) {
+										opts.msgContents.animate(offset, 200);
+									}
+								}
+								
 								opts.msgContents.fadeTo(100, "1.0");
-
 								$(window.document).unbind("dragstart.alert").unbind("selectstart.alert").unbind("mousemove.alert").unbind("mouseup.alert");
 							});
 						}
@@ -1118,7 +1143,14 @@
 				preload : false,
 				dynPos : true,
 				windowScrollLock : true,
-				draggable : false
+				draggable : false,
+				draggableOverflowCorrection : true,
+				draggableOverflowCorrectionAddValues : {
+					top : 0,
+					bottom : 0,
+					left : 0,
+					right : 0
+				}
 			};
 
 			try {
@@ -2378,6 +2410,7 @@
 
 				//For $.extend method does not extend object type
 				this.options.scrollPaging = $.extend({}, this.options.scrollPaging, N.context.attr("ui").grid.scrollPaging);
+				this.options.misc = $.extend({}, this.options.misc, N.context.attr("ui").grid.misc);
 			} catch (e) {
 				N.error("[N.grid]" + e, e);
 			}
@@ -2424,6 +2457,7 @@
 					var thisEle = $(this);
 					var retFlag;
 					var selected;
+					
 					// save the selected row index
 					if(thisEle.hasClass("grid_selected__")) {
 						self.options.row = -1;
@@ -2432,7 +2466,7 @@
 						self.options.row = thisEle.index() - self.options.misc.withoutTbodyLength;
 						selected = false;
 					}
-
+					
 					if(self.options.onSelect !== null) {
 						retFlag = self.options.onSelect.call(thisEle, self.options.row, thisEle, self.options.data, self.options.beforeRow, e);
 					}
@@ -3269,7 +3303,7 @@
                     }
                 }
 
-                if(currSelPageSet > 0 && startPage > currSelPageSet) {
+                if(currSelPageSet > 0 && currSelPageSet > 1 && startPage >= currSelPageSet) {
                 	$(linkEles.prev).removeClass("pagination_disable__");
                 } else {
                 	$(linkEles.prev).addClass("pagination_disable__");
@@ -3367,7 +3401,7 @@
                 linkEles.prev.unbind("click.pagination");
                 linkEles.prev.bind("click.pagination", function(e) {
                     e.preventDefault();
-                    if(currPageNavInfo.startPage > currPageNavInfo.currSelPageSet) {
+                    if(currPageNavInfo.currSelPageSet > 1 && currPageNavInfo.startPage >= currPageNavInfo.currSelPageSet) {
                     	opts.pageNo = currPageNavInfo.startPage - opts.countPerPageSet;
                     	currPageNavInfo = Pagination.changePageSet(linkEles, opts);
                     	linkEles.body.find("li a:first").click();

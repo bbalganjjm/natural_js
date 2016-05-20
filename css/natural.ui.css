@@ -523,7 +523,9 @@ div.datepicker_contents__ div.datepicker_year_item__:hover, div.datepicker_conte
 }
 
 .pagination__ .pagination_body__ li.pagination_page__ {
-	margin: 2px 7px 0 7px;
+	margin: 0 3px 0 3px;
+	line-height: 16px;
+    font-size: 13px;
 }
 
 .pagination__ .pagination_body__ li.pagination_page__>a>span {
