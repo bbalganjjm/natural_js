@@ -20,7 +20,7 @@
 			<col style="width: 37%">
 			<col style="width: 13%">
 			<col style="width: 37%">
-		</colgroup>	
+		</colgroup>
 		<tr>
 			<th align="right">context</th>
 			<td><input id="context" type="text" value="#pagination" readonly="readonly" /> Target element</td>
@@ -42,7 +42,7 @@
 			<td colspan="3"><textarea id="onChange" style="height: 92px;max-width: none;">function(pageNo, selEle, selData, currPageNavInfo) {
 	N("#pagingList").empty();
 	N(selData).each(function() {
-		N("#pagingList").append(JSON.stringify(this) + "<br>");
+		N("#pagingList").append(this.index + ", " + this.guid + ", " + this.balance + ", " + this.picture + "... " + "<br>");
 	});
 	N.log(currPageNavInfo);
 }</textarea><br /> Event handler for page change event</td>
@@ -64,7 +64,7 @@
 			</td>
 		</tr>
 	</table>
-	
+
 	<div align="center" class="btnBox">
 		<a id="btnInit" href="#" data-opts='{ "color": "gray", "size": "large" }'>Initialize pagination</a>
 		<a id="btnBind" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>bind</a>
@@ -101,7 +101,7 @@
 	    	N("div.btnBox a", view).button();
 
 	    	var pagination;
-	    	
+
 	    	// bind events
 	    	N("#btnInit", view).click(function(e) {
 	            e.preventDefault();
@@ -122,13 +122,13 @@
 	            N("#btnBind", view).instance("button").enable();
 	            N("#btnData", view).instance("button").enable();
 	        });
-	       	
+
 	    	N("#btnBind", view).click(function(e) {
 	    		e.preventDefault();
-	    		
+
 	    		pagination.bind();
 	        });
-	    	
+
 	    	N("#btnData", view).click(function(e) {
 	        	e.preventDefault();
 	        	N("div.result", view).alert({
@@ -137,7 +137,7 @@
 	        		height : 250
 	        	}).show();
 	        });
-	    	
+
 	    	N("#btnReload", view).click(function(e) {
 	        	e.preventDefault();
 	        	N(view.parent()).comm(request.get("url")).submit();
