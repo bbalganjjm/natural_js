@@ -1,4 +1,4 @@
-<article id="select" class="view-code" title="Select 예제">
+<article id="__select" class="view-code" title="Select 예제">
 	<p class="smallContTit">Data :</p>
 	<div class="dataBox">
 		<pre class="data" class="line-numbers"><code id="data" class="language-javascript">[{
@@ -165,7 +165,7 @@
 </article>
 
 <script type="text/javascript">
-	N("article#select").cont({
+	N("#__select").cont({
 		"select" : null,
 	    init : function(view, request) {
 	    	// initialize buttons in div.btnBox
@@ -211,7 +211,7 @@
 	        N("#btnData", view).click(function(e) {
 	        	e.preventDefault();
 	        	N("div.result", view).alert({
-	        		msg : '<div class="pre">' + N.json.format(this_.select.data(eval(N("input#data", view).val()))) + '</div>',
+	        		msg : '<pre class="pre">' + N.json.format(this_.select.data(eval(N("input#data", view).val()))) + '</pre>',
 	        		width : 400,
 	        		height : 250
 	        	}).show();

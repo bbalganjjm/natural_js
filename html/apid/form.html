@@ -1,4 +1,4 @@
-<article id="form" class="view-code">
+<article id="__form" class="view-code">
 	<p class="smallContTit">Data : </p>
 	<div class="dataBox">
 		<pre class="data" class="line-numbers"><code id="data" class="language-javascript">[
@@ -286,7 +286,7 @@
 </article>
 
 <script type="text/javascript">
-	N("article#form").cont({
+	N("#__form").cont({
 	    init : function(view, request) {
 	    	// initialize buttons in div.btnBox
 	    	N("div.btnBox a", view).button();
@@ -380,7 +380,7 @@
 	        N("#btnData", view).click(function(e) {
 	        	e.preventDefault();
 	        	N("div.result", view).alert({
-	        		msg : '<div class="pre">' + N.json.format(form.data(eval(N("input#data", view).val()))) + '</div>',
+	        		msg : '<pre class="pre">' + N.json.format(form.data(eval(N("input#data", view).val()))) + '</pre>',
 	        		width : 400,
 	        		height : 250
 	        	}).show();

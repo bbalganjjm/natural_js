@@ -1,4 +1,4 @@
-<article id="exap0100" class="view-code">
+<article id="__exap0100" class="view-code">
 	<h1>데이터목록 조회 예제</h1>
 	<div class="intro">
 		<p class="smallContTit">검색박스와 그리드가 조합된 일반적인 데이터 목록 화면 입니다.</p>
@@ -48,7 +48,7 @@
 </article>
 
 <script type="text/javascript">
-N("article#exap0100").cont({
+N("#__exap0100").cont({
 	genderCodes : [{
      	"key" : "male",
      	"val" : "male"
@@ -97,16 +97,6 @@ N("article#exap0100").cont({
     	N("#btnSearch", view).click(function(e) {
             e.preventDefault();
             if(form.validate()) {
-            	/* Because github.io is not allow POST send, this sentence was annotated
-    			N(form.data()).comm({
-    				url : "url",
-    				type : "POST"
-    			}).submit(function(data) {
-    				grid.bind(data);
-    			});
-    			*/
-
-    			// Temporary code
     			N(form.data()).comm("html/apid/data/grid.json").submit(function(data, request) {
              		// Data bind by N.grid
              		grid.bind(data);

@@ -1,4 +1,4 @@
-<article id="exap0602" class="view-code">
+<article id="__exap0602" class="view-code">
 	<div class="searchBox">
 		<ul>
 			<li class="buttons">
@@ -76,7 +76,7 @@
 </article>
 
 <script type="text/javascript">
-N("article#exap0602").cont({
+N("#__exap0602").cont({
 	genderCodes: [{
     	"key" : "male",
     	"val" : "male"
@@ -175,17 +175,6 @@ N("article#exap0602").cont({
             		msg : "저장 하시겠습니까?",
             		confirm : true,
             		onOk : function() {
-            			/* Because github.io is not allow POST send, this sentence was annotated
-            			N(form.data(true)).comm({
-            				url : "url",
-            				type : "POST"
-            			}).submit(function() {
-            				// Go to list page
-                			N("#btnList", view).click();
-            			});
-            			*/
-
-            			// Temporary code
             			N(window).alert({
                  			title : "서버로 전송되는 파라미터",
                  			msg : "<pre style='width: 450px; overflow: auto;'>" + N.json.format(form.data(true)[0]).replace(/\\/g, "") + "</pre>",
@@ -208,7 +197,10 @@ N("article#exap0602").cont({
     	N("#btnList", view).click(function(e) {
     		e.preventDefault();
     		// Return list page with search condition data
-    		N(N.context.attr("architecture").page.context).comm("html/exap/exap0600.html").request.attr("scData", request.attr("scData")).submit();
+    		N(N.context.attr("architecture").page.context).comm("html/exap/exap0600.html")
+    			.request.attr("scData", request.attr("scData"))
+					.request.attr("pageNo", request.attr("pageNo"))
+						.submit();
     	});
     }
 });

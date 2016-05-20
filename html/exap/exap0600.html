@@ -1,7 +1,8 @@
-<article id="exap0600" class="view-code">
+<article id="__exap0600" class="view-code">
 	<h1>화면전환 입력(C) 조회(R) 수정(U) 삭제(D) 예제</h1>
 	<div class="intro">
 		<p class="smallContTit">목록 화면과 입력 조회 수정 삭제 시 화면이 전환되는 예제 입니다.</p>
+		<p class="smallContTit">N.pagination 와 N.grid 를 연동 하여 페이징을 합니다(클라이언트로 받아진 전체 데이터에 대한 페이징이며 서버단 페이징은 Pagination API 문서 참고).</p>
 		<p class="smallContTit">서버와 연계되지 않은 UI 쪽 코딩 예제 입니다. 때문에 검색 조건으로 입력한 데이터는 그리드에 적용되지 않습니다. 서버쪽으로 전달되는 파라미터만 확인 바랍니다.</p>
 	</div>
 
@@ -20,37 +21,55 @@
 			</ul>
 		</div>
 
-		<table id="grid" class="grid" style="width: 100%;">
-			<thead>
-				<tr>
-					<th width="9%">Index</th>
-					<th width="17%">Name</th>
-					<th width="*">Email</th>
-					<th width="11%">Gender</th>
-					<th width="13%">Eye Color</th>
-					<th width="7%">Age</th>
-					<th width="13%">Company</th>
-					<th width="12%">Active</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td id="index" align="center"></td>
-					<td id="name"></td>
-					<td id="email"></td>
-					<td id="gender" align="center"></td>
-					<td id="eyeColor" align="center"></td>
-					<td id="age"></td>
-					<td id="company"></td>
-					<td id="isActive" align="center"></td>
-				</tr>
-			</tbody>
-		</table>
+		<div style="height: 375px;">
+			<table id="grid" class="grid" style="width: 100%;">
+				<thead>
+					<tr>
+						<th width="9%">Index</th>
+						<th width="17%">Name</th>
+						<th width="*">Email</th>
+						<th width="11%">Gender</th>
+						<th width="13%">Eye Color</th>
+						<th width="7%">Age</th>
+						<th width="13%">Company</th>
+						<th width="12%">Active</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td id="index" align="center"></td>
+						<td id="name"></td>
+						<td id="email"></td>
+						<td id="gender" align="center"></td>
+						<td id="eyeColor" align="center"></td>
+						<td id="age"></td>
+						<td id="company"></td>
+						<td id="isActive" align="center"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<br>
+		<div align="center">
+			<div id="pagination">
+				<ul>
+					<li><a href="#" title="첫페이지">first</a></li>
+					<li><a href="#" title="이전">prev</a></li>
+				</ul>
+				<ul>
+					<li><a href="#"><span>1</span></a></li>
+				</ul>
+				<ul>
+					<li><a href="#" title="다음페이지">next</a></li>
+					<li><a href="#" title="마지막페이지">last</a></li>
+				</ul>
+			</div>
+		</div>
 	</div>
 </article>
 
 <script type="text/javascript">
-N("article#exap0600").cont({
+N("#__exap0600").cont({
 	genderCodes : [{
      	"key" : "male",
      	"val" : "male"
@@ -93,7 +112,6 @@ N("article#exap0600").cont({
     	var grid = N([]).grid({
        		context : N("#grid", view),
        		data : [],
-       		height : 350,
        		resizable : true,
        		sortable : true,
        		hover : true,
@@ -103,32 +121,34 @@ N("article#exap0600").cont({
             	N("#subContext", view).comm("html/exap/exap0601.html")
             		.request.attr("selData", [ data[index] ]) // send seleted row data
             			.request.attr("scData", form.data()) // send search condition data
-            				.submit();
+            				.request.attr("pageNo", pagination.pageNo())	
+	            				.submit();
         	}
        	});
+    	
+    	// 5. initialize N.pagination
+    	var pagination = N().pagination({
+			context : $("#pagination", view),
+			onChange : function(pageNo, selEle, selData, currPageNavInfo) {
+				// Data bind to N.grid
+         		grid.bind(selData);
+			}
+		});
 
-    	// 5. bind events
-    	// 5-1. Search button
+    	// 6. bind events
+    	// 6-1. Search button
     	N("#btnSearch", view).click(function(e) {
             e.preventDefault();
             if(form.validate()) {
-            	/* Because github.io is not allow POST send, this sentence was annotated
-    			N(form.data()).comm({
-    				url : "url",
-    				type : "POST"
-    			}).submit(function(data) {
-    				grid.bind(data);
-    			});
-    			*/
-
     			// Temporary code
     			N(form.data()).comm("html/apid/data/grid.json").submit(function(data) {
-             		// Data bind by N.grid
-             		grid.bind(data);
+    				pagination.pageNo(request.attr("pageNo") !== undefined ? request.attr("pageNo") : 1).bind(data);
+    				request.removeAttr("pageNo");
              	});
             }
         }).click(); // Auto retrieve
-    	 // 5-1. Add button
+    	
+        // 6-2. Add button
     	N("#btnAdd", view).click(function(e) {
             e.preventDefault();
          // Grid row select event

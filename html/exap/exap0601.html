@@ -1,4 +1,4 @@
-<article id="exap0601" class="view-code">
+<article id="__exap0601" class="view-code">
 	<div class="searchBox">
 		<ul>
 			<li class="buttons">
@@ -72,7 +72,7 @@
 </article>
 
 <script type="text/javascript">
-N("article#exap0601").cont({
+N("#__exap0601").cont({
     init : function(view, request) {
     	// 1. initialize buttons
     	N(".buttons a", view).button();
@@ -92,7 +92,8 @@ N("article#exap0601").cont({
         	view.parent().comm("html/exap/exap0602.html")
         		.request.attr("selData", request.attr("selData")) // send seleted row data
         			.request.attr("scData", request.attr("scData")) // send search condition data
-        				.submit();
+    					.request.attr("pageNo", request.attr("pageNo"))
+        					.submit();
     	});
     	// 3-2 Delete
     	N("#btnDelete", view).click(function(e) {
@@ -101,17 +102,6 @@ N("article#exap0601").cont({
         		msg : "삭제 하시겠습니까?",
         		confirm : true,
         		onOk : function() {
-        			/* Because github.io is not allow POST send, this sentence was annotated
-        			N(form.data(true)).comm({
-        				url : "url",
-        				type : "POST"
-        			}).submit(function() {
-        				// Go to list page
-            			N("#btnList", view).click();
-        			});
-        			*/
-
-        			// Temporary code
         			N(window).alert({
              			title : "서버로 전송되는 파라미터",
              			msg : "<pre style='width: 450px; overflow: auto;'>" + N.json.format(form.data(true)[0]).replace(/\\/g, "") + "</pre>",
@@ -127,7 +117,10 @@ N("article#exap0601").cont({
     	N("#btnList", view).click(function(e) {
     		e.preventDefault();
     		// Return list page with search condition data
-    		N(N.context.attr("architecture").page.context).comm("html/exap/exap0600.html").request.attr("scData", request.attr("scData")).submit();
+    		N(N.context.attr("architecture").page.context).comm("html/exap/exap0600.html")
+    			.request.attr("scData", request.attr("scData"))
+    				.request.attr("pageNo", request.attr("pageNo"))
+    					.submit();
     	});
     }
 });

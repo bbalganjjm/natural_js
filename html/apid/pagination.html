@@ -1,10 +1,147 @@
-<article id="pagination" class="view-code">
-<h2>API DEMO 준비 중입니다.</h2>
+<style>
+#__pagination #pagingList {
+	white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: monospace;
+    font-size: 12px;
+}
+</style>
+
+<article id="__pagination" class="view-code">
+	<p class="smallContTit">Data :</p>
+	<div class="dataBox">
+		/natural_js/html/apid/data/grid.json
+	</div>
+	<p class="smallContTit">Default options : </p>
+	<table class="form" style="width: 100%;">
+		<colgroup>
+			<col style="width: 13%">
+			<col style="width: 37%">
+			<col style="width: 13%">
+			<col style="width: 37%">
+		</colgroup>	
+		<tr>
+			<th align="right">context</th>
+			<td><input id="context" type="text" value="#pagination" readonly="readonly" /> Target element</td>
+			<th align="right">totalCount</th>
+			<td style="background-color: #efffff;"><input id="totalCount" type="text" value="0" /> </td>
+		</tr>
+		<tr>
+			<th align="right">countPerPage</th>
+			<td><input id="countPerPage" type="text" value="10"/></td>
+			<th align="right">countPerPageSet</th>
+			<td style="background-color: #efffff;"><input id="countPerPageSet" type="text" value="10" /> </td>
+		</tr>
+		<tr>
+			<th align="right">pageNo</th>
+			<td colspan="3"><input id="pageNo" type="text" value="1"/></td>
+		</tr>
+		<tr>
+			<th align="right">onChange</th>
+			<td colspan="3"><textarea id="onChange" style="height: 92px;max-width: none;">function(pageNo, selEle, selData, currPageNavInfo) {
+	N("#pagingList").empty();
+	N(selData).each(function() {
+		N("#pagingList").append(JSON.stringify(this) + "<br>");
+	});
+	N.log(currPageNavInfo);
+}</textarea><br /> Event handler for page change event</td>
+		</tr>
+	</table>
+
+	<p class="smallContTit">Method options : </p>
+	<table class="form" style="width: 100%;">
+		<colgroup>
+			<col style="width: 13%">
+			<col style="width: 13%">
+			<col style="width: auto" >
+		</colgroup>
+		<tr>
+			<th>data</th>
+			<th>arguments[0]</th>
+			<td>
+				<input id="data" type="text" /> empty(pure object array), false(return all data(return all data(jQuery Object)))
+			</td>
+		</tr>
+	</table>
+	
+	<div align="center" class="btnBox">
+		<a id="btnInit" href="#" data-opts='{ "color": "gray", "size": "large" }'>Initialize pagination</a>
+		<a id="btnBind" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>bind</a>
+		<a id="btnData" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>data</a>
+		<a id="btnReload" href="#" data-opts='{ "color": "white", "size": "large" }'>Reload this block page</a>
+	</div>
+
+	<p class="smallContTit">Result : </p>
+	<div class="result" align="center" style="padding-top: 15px;">
+		<div id="pagingList"></div>
+		<br>
+		<div align="center">
+			<div id="pagination" align="left">
+				<ul>
+					<li><a href="#" title="첫페이지">first</a></li>
+					<li><a href="#" title="이전">prev</a></li>
+				</ul>
+				<ul>
+					<li><a href="#"><span>1</span></a></li>
+				</ul>
+				<ul>
+					<li><a href="#" title="다음페이지">next</a></li>
+					<li><a href="#" title="마지막페이지">last</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
 </article>
 
 <script type="text/javascript">
-	N("article#pagination").cont({
+	N("#__pagination").cont({
 	    init : function(view, request) {
+	    	// initialize buttons in div.btnBox
+	    	N("div.btnBox a", view).button();
+
+	    	var pagination;
+	    	
+	    	// bind events
+	    	N("#btnInit", view).click(function(e) {
+	            e.preventDefault();
+	            N.comm("/natural_js/html/apid/data/grid.json").submit(function(data) {
+	            	var opts = {
+    	       			context : N("#context", view).val(),
+    	       			totalCount : parseInt(N("#totalCount", view).val()) > 0 ? parseInt(N("#totalCount", view).val()) : undefined,
+    	       			countPerPage : parseInt(N("#countPerPage", view).val()),
+    	       			countPerPageSet : parseInt(N("#countPerPageSet", view).val()),
+    	       			pageNo : parseInt(N("#pageNo", view).val()),
+    	       			onChange : N.string.trimToNull(N("#onChange", view).val()) !== null ?
+    	          				eval("(" + N("#onChange", view).val() + ")") : null
+    	       		}
+	            	pagination = N(data).pagination(opts);
+				});
+
+	            N("#btnInit", view).instance("button").disable();
+	            N("#btnBind", view).instance("button").enable();
+	            N("#btnData", view).instance("button").enable();
+	        });
+	       	
+	    	N("#btnBind", view).click(function(e) {
+	    		e.preventDefault();
+	    		
+	    		pagination.bind();
+	        });
+	    	
+	    	N("#btnData", view).click(function(e) {
+	        	e.preventDefault();
+	        	N("div.result", view).alert({
+	        		msg : '<pre class="pre">' + N.json.format(pagination.data(eval(N("input#data", view).val()))) + '</pre>',
+	        		width : 400,
+	        		height : 250
+	        	}).show();
+	        });
+	    	
+	    	N("#btnReload", view).click(function(e) {
+	        	e.preventDefault();
+	        	N(view.parent()).comm(request.get("url")).submit();
+	        });
 	    }
 	});
 </script>

@@ -64,7 +64,7 @@
 					},
 					complete : function(request, xhr, textStatus) {
 						if(this.pageId !== undefined) {
-							CommonUtilController.sourceCode(N("article#" + this.pageId + ".view-code"), request.get("url"));
+							CommonUtilController.sourceCode(N(this.pageId + ".view-code"), request.get("url"));
 						}
 					}
 				},
@@ -296,7 +296,7 @@
 			 */
 			"container" : "#naturalJsContents",
 			/**
-			 * 필수 값
+			 * 버튼 스타일(Required)
 			 */
 			"global" : {
 				"okBtnStyle" : {
@@ -306,6 +306,16 @@
 				"cancelBtnStyle" : {
 					size : "medium"
 				}
+			},
+			/**
+			 * 드래그하면서 다이얼로그가 window영역을 벗어날때 다시 돌아올 위치를 추가로 지정(기본값은 0, 드래그 시 횡 스크롤이 생겨 화면이 지저분 해질때 조절바람)
+			 * N.popup 도 적용가능
+			 */
+			"draggableOverflowCorrectionAddValues" : {
+				top : 0,
+				bottom : 0,
+				left : +2,
+				right : -2
 			},
 			"alwaysOnTop" : false,
 			/**

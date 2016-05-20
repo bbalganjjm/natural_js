@@ -1,4 +1,4 @@
-<article id="exap0700" class="view-code">
+<article id="__exap0800" class="view-code">
 	<h1>마스터 그리드와 디테일 폼이 조합된 화면 예제</h1>
 	<div class="intro">
 		<p lang="ko_KR" class="smallContTit">마스터 그리드와 상세 수정 화면 폼을 조합한 화면 예제 입니다.</p>
@@ -128,7 +128,7 @@
 </style>
 
 <script type="text/javascript">
-N("article#exap0700").cont({
+N("#__exap0800").cont({
 	genderCodes: [{
     	"key" : "male",
     	"val" : "male"
@@ -308,18 +308,10 @@ N("article#exap0700").cont({
            		msg : N.message.get(this_.messages, "save"),
            		confirm : true,
            		onOk : function() {
-           			/* Because github.io is not allow POST send, this sentence was annotated
-           			N(grid.data("modified")).comm({
-           				url : "url",
-           				type : "POST"
-           			}).submit();
-           			*/
-
-           			// Temporary code
            			N(window).alert({
-                			title : N.message.get(this_.messages, "sentp"),
-                			msg : "<pre style='width: 450px; height: 400px; overflow: auto;'>" + N.json.format(grid.data("modified")).replace(/\\/g, "") + "</pre>"
-                		}).show();
+               			title : N.message.get(this_.messages, "sentp"),
+               			msg : "<pre style='width: 450px; height: 400px; overflow: auto;'>" + N.json.format(grid.data("modified")).replace(/\\/g, "") + "</pre>"
+               		}).show();
            		}
            	}).show();
     	});

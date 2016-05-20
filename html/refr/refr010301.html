@@ -1,4 +1,4 @@
-<article id="refr010301" class="apiDoc">
+<article id="__refr010301" class="apiDoc">
 	<h2>Controller(N.cont)</h2>
 
 	<h3>개요</h3>
@@ -9,7 +9,7 @@
 &lt;/div&gt;
 
 &lt;script type=&quot;text/javascript&quot;&gt;
-	N(&quot;div#view&quot;).cont({
+	N(&quot;#view&quot;).cont({
 		init : function(view, request) {
 			//JSON 형태의 Class 로 정의
 		}
@@ -111,7 +111,7 @@
 </article>
 
 <script type="text/javascript">
-N("article#refr010301").cont({
+N("#__refr010301").cont({
     init : function(view, request) {
     	// code highlight
     	if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {

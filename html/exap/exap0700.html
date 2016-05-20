@@ -1,4 +1,4 @@
-<article id="exap0700" class="view-code">
+<article id="__exap0700" class="view-code">
 	<h1>팝업 입력(C) 조회(R) 수정(U) 삭제(D) 예제</h1>
 	<div class="intro">
 		<p class="smallContTit">목록 화면과 입력 조회 수정 팝업을 조합한 예제 입니다.</p>
@@ -51,7 +51,7 @@
 </article>
 
 <script type="text/javascript">
-N("article#exap0700").cont({
+N("#__exap0700").cont({
 	genderCodes : [{
      	"key" : "male",
      	"val" : "male"
@@ -133,14 +133,6 @@ N("article#exap0700").cont({
             		msg : "저장 하시겠습니까?",
             		confirm : true,
             		onOk : function() {
-            			/* Because github.io is not allow POST send, this sentence was annotated
-            			N(grid.data("modified")).comm({
-            				url : "url",
-            				type : "POST"
-            			}).submit();
-            			*/
-
-            			// Temporary code
             			N(window).alert({
                  			title : "서버로 전송되는 파라미터",
                  			msg : "<pre style='width: 450px; height: 400px; overflow: auto;'>" + N.json.format(grid.data("modified")).replace(/\\/g, "") + "</pre>"
@@ -153,18 +145,8 @@ N("article#exap0700").cont({
     	N("#btnSearch", view).click(function(e) {
             e.preventDefault();
             if(form.validate()) {
-            	/* Because github.io is not allow POST send, this sentence was annotated
-    			N(form.data()).comm({
-    				url : "url",
-    				type : "POST"
-    			}).submit(function(data) {
-    				grid.bind(data);
-    			});
-    			*/
-
-    			// Temporary code
     			N(form.data()).comm("html/apid/data/grid.json").submit(function(data) {
-             		// Data bind by N.grid
+             		// Data bind to N.grid
              		grid.bind(data);
              	});
             }

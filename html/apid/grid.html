@@ -1,4 +1,4 @@
-<article id="gridDemo" class="view-code">
+<article id="__grid" class="view-code">
 	<p class="smallContTit">Data :</p>
 	<div class="dataBox">
 		/natural_js/html/apid/data/grid.json
@@ -189,17 +189,12 @@
 </article>
 
 <script type="text/javascript">
-	N("article#gridDemo").cont({
-		grid : undefined,
-		gridData : undefined,
+	N("#__grid").cont({
 	    init : function(view, request) {
 	    	// initialize buttons in div.btnBox
 	    	N("div.btnBox a", view).button();
 
 	    	// bind events
-	    	this.setEvents(view, this);
-	    },
-	    setEvents : function(view, this_) {
 	    	var grid;
 	    	N("#btnInit", view).click(function(e) {
 	            e.preventDefault();
@@ -234,7 +229,6 @@
 	        		windowScrollLock : N("input#windowScrollLock", view).is(":checked"),
 	        		revert : N("input#revert", view).is(":checked")
 	       		}
-console.log(opts);
 	       		grid = N([]).grid(opts).bind();
 
 	       		N("#btnAdd", view).instance("button").enable();
@@ -300,7 +294,7 @@ console.log(opts);
 	    	N("#btnData", view).click(function(e) {
 	    		e.preventDefault();
 	    		grid.context().parent().alert({
-	        		msg : '<div class="pre">' + N.json.format(grid.data(N("select#data", view).val() === "false" ? false : N.string.trimToUndefined(N("select#data", view).val()))) + '</div>',
+	        		msg : '<pre class="pre">' + N.json.format(grid.data(N("select#data", view).val() === "false" ? false : N.string.trimToUndefined(N("select#data", view).val()))) + '</pre>',
 	        		width : 400,
 	        		height : 250
 	        	}).show();
@@ -318,7 +312,7 @@ console.log(opts);
 
 	    	N("#btnReload", view).click(function(e) {
 	        	e.preventDefault();
-	        	N(view.parent()).comm(this_.request.get("url")).submit();
+	        	N(view.parent()).comm(request.get("url")).submit();
 	        });
 	    }
 	});

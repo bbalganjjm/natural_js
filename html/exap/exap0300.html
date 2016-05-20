@@ -1,4 +1,4 @@
-<article id="exap0300" class="view-code">
+<article id="__exap0300" class="view-code">
 	<h1>상세데이터 입력 예제</h1>
 	<div class="intro">
 		<p class="smallContTit">상세 데이터를 입력하는 화면 예제 입니다.</p>
@@ -83,7 +83,7 @@
 </article>
 
 <script type="text/javascript">
-N("article#exap0300").cont({
+N("#__exap0300").cont({
 	genderCodes: [{
     	"key" : "male",
     	"val" : "male"
@@ -171,14 +171,6 @@ N("article#exap0300").cont({
             		msg : "저장 하시겠습니까?",
             		confirm : true,
             		onOk : function() {
-            			/* Because github.io is not allow POST send, this sentence was annotated
-            			N(form.data(true)).comm({
-            				url : "url",
-            				type : "POST"
-            			}).submit();
-            			*/
-
-            			// Temporary code
             			N(window).alert({
                  			title : "서버로 전송되는 파라미터",
                  			msg : "<pre style='width: 450px; overflow: auto;'>" + N.json.format(form.data(true)[0]).replace(/\\/g, "") + "</pre>"
