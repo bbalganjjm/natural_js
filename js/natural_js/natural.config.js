@@ -42,8 +42,8 @@
 					afterInit : function(request) {
 					},
 					beforeSend : function(request, xhr, settings) {
-						if(request.options.dataType === "html" && request.obj.length > 0 && request.append === false) {
-							request.obj.html('<div align="center" style="margin-top: 140px;margin-bottom: 140px;">페이지를 불러오는 중...</div>');
+						if(request.options.dataType === "html" && request.options.target !== null && request.options.append === false) {
+							request.options.target.html('<table style="margin: 0;padding: 0;width: 100%;height: 100%;"><tr><td style="text-align: center;vertical-align: middle;border: 0;"><img src="images/loading.gif" height="24"></td></tr></table>');
 						}
 					},
 					success : function(request, data, textStatus, xhr) {
@@ -55,8 +55,8 @@
 					},
 					error : function(request, xhr, textStatus, errorThrown) {
 						if(request.options.dataType === "html") {
-							if(request.obj.html !== undefined) {
-								request.obj.html('<div align="center" style="margin-top: 140px;margin-bottom: 140px;">[ ' + request.options.url + ' ] 페이지를 불러오는 도중 에러가 발생 했습니다.</div>');
+							if(request.options.target.html !== undefined) {
+								request.options.target.html('<div align="center" style="margin-top: 140px;margin-bottom: 140px;">[ ' + request.options.url + ' ] 페이지를 불러오는 도중 에러가 발생 했습니다.</div>');
 							} else {
 								N(window).alert('[ ' + request.options.url + ' ] 페이지를 불러오는 도중 에러가 발생 했습니다.').show();
 							}
@@ -64,7 +64,7 @@
 					},
 					complete : function(request, xhr, textStatus) {
 						if(this.pageId !== undefined) {
-							CommonUtilController.sourceCode(N(this.pageId + ".view-code"), request.get("url"));
+							CommonUtilController.sourceCode(N("#" + this.pageId + ".view-code"), request.get("url"));
 						}
 					}
 				},
@@ -112,7 +112,7 @@
 					 * 특정 영역에 html 페이지를 불러올때 전환 효과 지정, false 이면 효과 없음.
 					 * ex) ["fadeIn", 300, null], 적용안할때는 false
 					 */
-					"effect" : ["fadeIn", 300, null]
+					"effect" : false
 				}
 			}
 		}
