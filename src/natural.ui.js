@@ -1489,7 +1489,6 @@
 				var opts = this.options;
 				var self = this;
 
-				// TODO show loading bar
 				N.comm({
 					url : url,
 					contentType : "text/html; charset=UTF-8",
@@ -1497,9 +1496,8 @@
 					type : "GET",
 					target : opts.contents.eq(targetIdx)
 				}).submit(function(page) {
-					var activeTabEle = opts.links.eq(targetIdx);
 					var sc = opts.contents.eq(targetIdx).html(page).children("[id]:first").instance("cont");
-
+					
 					// set Communicator.request
 					sc.request = this.request;
 
@@ -1513,6 +1511,8 @@
 						}
 					}
 
+					var activeTabEle = opts.links.eq(targetIdx);
+					
 					// run "onOpen" event
 					if(activeTabEle.hasClass("tab_active__")) {
 						var dataOpts = opts.dataOpts[targetIdx];
@@ -1528,8 +1528,6 @@
 
 					// set load status
 					activeTabEle.data("loaded", true);
-
-					// TODO hide loading bar
 	        	});
 			}
 		});
