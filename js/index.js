@@ -24,7 +24,7 @@ var IndexController = {
 	loadHeader : function() {
 		N("header").comm("html/indx/header.html").submit();
 
-		N("h2#desc").dblclick(function(){
+		N("h2#desc").one("dblclick", function(){
 			var sorryCnt=0;
 			var sorryArea = N("#natural-js-logo").parent();
 			var time = setInterval(function() {
