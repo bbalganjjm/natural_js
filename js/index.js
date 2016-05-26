@@ -23,18 +23,6 @@ var IndexController = {
 	},
 	loadHeader : function() {
 		N("header").comm("html/indx/header.html").submit();
-
-		N("h2#desc").one("dblclick", function(){
-			var sorryCnt=0;
-			var sorryArea = N("#natural-js-logo").parent();
-			var time = setInterval(function() {
-			   sorryCnt++;
-			   sorryArea.html("<span style='font-size: 72px; line-height: 100px'>그때 그런 만행을 저질러<br>" + String(sorryCnt) + " 번 사죄 합니다.</span>");
-			   if(sorryCnt > 9999) {
-			      clearInterval(time);
-			   }
-			}, 10000);
-		});
 	},
 	loadBodySection : function() {
 		if(N.string.trimToNull(location.hash) !== null) {
