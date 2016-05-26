@@ -160,7 +160,7 @@ N("#__header").cont({
     init : function(view, request) {
     	CommonUtilController.setPageLinks("nav > ul > li > ul a");
 
-    	N("h2#desc").one("dblclick", function(){
+    	N("h2#desc").one("dblclick touchmove", function(){
 			var sorryCnt=0;
 			var sorryArea = N("#natural-js-logo").parent();
 			var time = setInterval(function() {
