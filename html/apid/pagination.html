@@ -8,12 +8,14 @@
 }
 </style>
 
-<article id="__pagination" class="view-code">
-	<p class="smallContTit">Data :</p>
+<article id="__pagination">
+	<p lang="ko_KR" class="smallContTit">데이터 : </p>
+	<p lang="en_US" class="smallContTit">Data : </p>
 	<div class="dataBox">
 		/natural_js/html/apid/data/grid.json
 	</div>
-	<p class="smallContTit">Default options : </p>
+	<p lang="ko_KR" class="smallContTit">기본 옵션 : </p>
+	<p lang="en_US" class="smallContTit">Default options : </p>
 	<table class="form" style="width: 100%;">
 		<colgroup>
 			<col style="width: 13%">
@@ -22,23 +24,23 @@
 			<col style="width: 37%">
 		</colgroup>
 		<tr>
-			<th align="right">context</th>
+			<th align="right"><label for="context">context</label></th>
 			<td><input id="context" type="text" value="#pagination" readonly="readonly" /> Target element</td>
-			<th align="right">totalCount</th>
+			<th align="right"><label for="totalCount">totalCount</label></th>
 			<td style="background-color: #efffff;"><input id="totalCount" type="text" value="0" /> </td>
 		</tr>
 		<tr>
-			<th align="right">countPerPage</th>
+			<th align="right"><label for="countPerPage">countPerPage</label></th>
 			<td><input id="countPerPage" type="text" value="10"/></td>
-			<th align="right">countPerPageSet</th>
+			<th align="right"><label for="countPerPageSet">countPerPageSet</label></th>
 			<td style="background-color: #efffff;"><input id="countPerPageSet" type="text" value="10" /> </td>
 		</tr>
 		<tr>
-			<th align="right">pageNo</th>
+			<th align="right"><label for="pageNo">pageNo</label></th>
 			<td colspan="3"><input id="pageNo" type="text" value="1"/></td>
 		</tr>
 		<tr>
-			<th align="right">onChange</th>
+			<th align="right"><label for="onChange">onChange</label></th>
 			<td colspan="3"><textarea id="onChange" style="height: 92px;max-width: none;">function(pageNo, selEle, selData, currPageNavInfo) {
 	N("#pagingList").empty();
 	N(selData).each(function() {
@@ -49,7 +51,8 @@
 		</tr>
 	</table>
 
-	<p class="smallContTit">Method options : </p>
+	<p lang="ko_KR" class="smallContTit">함수 옵션 : </p>
+	<p lang="en_US" class="smallContTit">Method options : </p>
 	<table class="form" style="width: 100%;">
 		<colgroup>
 			<col style="width: 13%">
@@ -58,7 +61,7 @@
 		</colgroup>
 		<tr>
 			<th>data</th>
-			<th>arguments[0]</th>
+			<th><label for="data">arguments[0]</label></th>
 			<td>
 				<input id="data" type="text" /> empty(pure object array), false(return all data(return all data(jQuery Object)))
 			</td>
@@ -66,13 +69,20 @@
 	</table>
 
 	<div align="center" class="btnBox">
-		<a id="btnInit" href="#" data-opts='{ "color": "gray", "size": "large" }'>Initialize pagination</a>
+		<a id="btnInit" href="#" data-opts='{ "color": "gray", "size": "large" }'>
+			<span lang="ko_KR">Pagination 생성</span>
+			<span lang="en_US">Create Pagination</span>
+		</a>
 		<a id="btnBind" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>bind</a>
 		<a id="btnData" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>data</a>
-		<a id="btnReload" href="#" data-opts='{ "color": "white", "size": "large" }'>Reload this block page</a>
+		<a id="btnReload" href="#" data-opts='{ "color": "white", "size": "large" }'>
+			<span lang="ko_KR">DEMO 초기화</span>
+			<span lang="en_US">Reset DEMO</span>
+		</a>
 	</div>
 
-	<p class="smallContTit">Result : </p>
+	<p lang="ko_KR" class="smallContTit">결과 : </p>
+	<p lang="en_US" class="smallContTit">Result : </p>
 	<div class="result" align="center" style="padding-top: 15px;">
 		<div id="pagingList"></div>
 		<br>

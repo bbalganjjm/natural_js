@@ -1,58 +1,60 @@
-<article id="__grid" class="view-code">
-	<p class="smallContTit">Data :</p>
+<article id="__grid">
+	<p lang="ko_KR" class="smallContTit">데이터 : </p>
+	<p lang="en_US" class="smallContTit">Data : </p>
 	<div class="dataBox">
 		/natural_js/html/apid/data/grid.json
 	</div>
-	<p class="smallContTit">Default options : </p>
+	<p lang="ko_KR" class="smallContTit">기본 옵션 : </p>
+	<p lang="en_US" class="smallContTit">Default options : </p>
 	<table class="form">
 		<tr>
-			<th width="10%" align="right">context</th>
+			<th width="10%" align="right"><label for="context">context</label></th>
 			<td width="40%"><input id="context" type="text" value="table#grid" readonly="readonly" /> Target element</td>
-			<th width="10%" align="right">height</th>
+			<th width="10%" align="right"><label for="height">height</label></th>
 			<td width="40%" style="background-color: #efffff;"><input id="height" type="text" value="395" /> </td>
 		</tr>
 		<tr>
-			<th>validate</th>
+			<th><label for="validate">validate</label></th>
 			<td><input id="validate" type="checkbox" checked="checked" /> If this checkbox with uncheck(false), disable realtime validation check</td>
-			<th>html</th>
+			<th><label for="html">html</label></th>
 			<td><input id="html" type="checkbox" /> If this checkbox with check(true), do not recognize HTML tags</td>
 		</tr>
 		<tr>
-			<th>addTop</th>
+			<th><label for="addTop">addTop</label></th>
 			<td><input id="addTop" type="checkbox" /> If this checkbox with check(true), create new row on the top by add method
 				<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">* If height is greater than 0, addTop option is always set with "true"</font>
 			</td>
-			<th>resizable</th>
+			<th><label for="resizable">resizable</label></th>
 			<td><input id="resizable" type="checkbox" /> If this checkbox with check(true), can resize column of grid</td>
 		</tr>
 		<tr>
-			<th>vResizable</th>
+			<th><label for="vResizable">vResizable</label></th>
 			<td style="background-color: #efffff;"><input id="vResizable" type="checkbox" /> If this checkbox with check(true), can resize height of grid body</td>
-			<th>sortable</th>
+			<th><label for="sortable">sortable</label></th>
 			<td><input id="sortable" type="checkbox" /> If this checkbox with check(true), enable column sort</td>
 		</tr>
 		<tr>
-			<th>select</th>
+			<th><label for="select">select</label></th>
 			<td><input id="select" type="checkbox" /> If this checkbox with check(true), can select only 1 row in grid body</td>
-			<th>multiselect</th>
+			<th><label for="multiselect">multiselect</label></th>
 			<td><input id="multiselect" type="checkbox" /> If this checkbox with check(true), can select multy row in grid body</td>
 		</tr>
 		<tr>
-			<th>checkAll</th>
+			<th><label for="checkAll">checkAll</label></th>
 			<td><input id="checkAll" type="text" value="#checkAll" /> Checkbox element for Check to all checkbox elements in first column</td>
-			<th>checkAllTarget</th>
+			<th><label for="checkAllTarget">checkAllTarget</label></th>
 			<td><input id="checkAllTarget" type="text" value=".checkAllTarget" /> Checkbox elements in first column</td>
 		</tr>
 		<tr>
-			<th>hover</th>
+			<th><label for="hover">hover</label></th>
 			<td><input id="hover" type="checkbox" /> If this checkbox with check(true), display hover effect</td>
-			<th>createRow<br>Delay</th>
+			<th><label for="createRowDelay">createRow<br>Delay</label></th>
 			<td><input id="createRowDelay" type="text" value="1" /> delay whenever created row element</td>
 		</tr>
 		<tr>
-			<th>scrollPaging<br>.size</th>
+			<th><label for="scrollPagingSize">scrollPaging<br>.size</label></th>
 			<td><input id="scrollPagingSize" type="text" value="100" /> scroll paging size</td>
-			<th>rowHandler</th>
+			<th><label for="rowHandler">rowHandler</label></th>
 			<td><textarea id="rowHandler" style="height: 82px;">function(index, row, data) {
 	N.log(index);
 	N.log(row);
@@ -60,51 +62,52 @@
 }</textarea><br /> Event handler for tab active event</td>
 		</tr>
 		<tr>
-			<th>onSelect</th>
+			<th><label for="onSelect">onSelect</label></th>
 			<td><textarea id="onSelect" style="height: 82px;">function(index, row, data, beforeRow) {
 	N.log(index);
 	N.log(row);
 	N.log(data);
 	N.log(beforeRow);
 }</textarea><br /> Event handler for tab active event</td>
-			<th>onBind</th>
+			<th><label for="onBind">onBind</label></th>
 			<td><textarea id="onBind" style="height: 64px;">function(context, data) {
 	N.log(context);
 	N.log(data);
 }</textarea><br /> Event handler for tab active event</td>
 		</tr>
 		<tr>
-			<th>windowScroll Lock</th>
+			<th><label for="windowScrollLock">windowScroll Lock</label></th>
 			<td><input id="windowScrollLock" type="checkbox" checked="checked" /> If this checkbox with uncheck(false), don't block window scroll when mouse scrolling in grid</td>
-			<th>revert</th>
+			<th><label for="revert">revert</label></th>
 			<td><input id="revert" type="checkbox" checked="checked" /> If this checkbox with check(true), activate the revert function(default value is false)</td>
 		</tr>
 	</table>
 
-	<p class="smallContTit">Method options : </p>
+	<p lang="ko_KR" class="smallContTit">함수 옵션 : </p>
+	<p lang="en_US" class="smallContTit">Method options : </p>
 	<table class="form">
 		<tr>
 			<th width="10%" rowspan="3">val</th>
-			<th width="10%">arguments[0]</th>
+			<th width="10%"><label for="row">arguments[0]</label></th>
 			<td width="80%" colspan="3">
 				<input id="row" type="text" value="0" /> Target row
 			</td>
 		</tr>
 		<tr>
-			<th width="10%">arguments[1]</th>
+			<th width="10%"><label for="key">arguments[1]</label></th>
 			<td width="80%" colspan="3">
 				<input id="key" type="text" value="company" /> Target key name
 			</td>
 		</tr>
 		<tr>
-			<th width="10%">arguments[2]</th>
+			<th width="10%"><label for="val">arguments[2]</label></th>
 			<td width="80%" colspan="3">
 				<input id="val" type="text" value="NATURAL COMPANY" /> If empty value set, get value of key, otherwise set with this value
 			</td>
 		</tr>
 		<tr>
 			<th width="10%">data</th>
-			<th width="10%">arguments[0]</th>
+			<th width="10%"><label for="data">arguments[0]</label></th>
 			<td width="80%" colspan="3">
 				<select id="data">
 					<option value="modified">modified</option>
@@ -119,21 +122,21 @@
 		</tr>
 		<tr>
 			<th width="10%">revert</th>
-			<th width="10%">arguments[0]</th>
+			<th width="10%"><label for="rvtRow">arguments[0]</label></th>
 			<td width="80%" colspan="3">
 				<input id="rvtRow" type="text" value="0" /> Row index to revert, if set empty value, revert all row data
 			</td>
 		</tr>
 		<tr>
 			<th width="10%">remove</th>
-			<th width="10%">arguments[0]</th>
+			<th width="10%"><label for="rmvRow">arguments[0]</label></th>
 			<td width="80%" colspan="3">
 				<input id="rmvRow" type="text" value="0" /> Row index of to remove
 			</td>
 		</tr>
 		<tr>
 			<th width="10%">validate</th>
-			<th width="10%">arguments[0]</th>
+			<th width="10%"><label for="vldRow">arguments[0]</label></th>
 			<td width="80%" colspan="3">
 				<input id="vldRow" type="text" /> Row index of to validate, if set empty value, validate all row data
 			</td>
@@ -141,7 +144,10 @@
 	</table>
 
 	<div align="center" class="btnBox">
-		<a id="btnInit" href="#" data-opts='{ "color": "gray", "size": "large" }'>Initialize grid</a>
+		<a id="btnInit" href="#" data-opts='{ "color": "gray", "size": "large" }'>
+			<span lang="ko_KR">Grid 생성</span>
+			<span lang="en_US">Create Grid</span>
+		</a>
 		<a id="btnAdd" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>add</a>
 		<a id="btnBind" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>bind</a>
 		<a id="btnRevert" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>revert</a>
@@ -150,10 +156,14 @@
 		<a id="btnData" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>data</a>
 		<a id="btnCheck" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>check</a>
 		<a id="btnValidate" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>validate</a>
-		<a id="btnReload" href="#" data-opts='{ "color": "white", "size": "large" }'>Reload this block page</a>
+		<a id="btnReload" href="#" data-opts='{ "color": "white", "size": "large" }'>
+			<span lang="ko_KR">DEMO 초기화</span>
+			<span lang="en_US">Reset DEMO</span>
+		</a>
 	</div>
 
-	<p class="smallContTit">Result : </p>
+	<p lang="ko_KR" class="smallContTit">결과 : </p>
+	<p lang="en_US" class="smallContTit">Result : </p>
 	<table id="grid" class="grid" style="width: 100%;">
 		<thead>
 			<tr>

@@ -1,44 +1,64 @@
-<article id="__tab" class="view-code">
-	<p class="smallContTit">Default options : </p>
+<article id="__tab">
+	<p lang="ko_KR" class="smallContTit">기본 옵션 : </p>
+	<p lang="en_US" class="smallContTit">Default options : </p>
 	<table class="form">
 		<tr>
-			<th width="10%">randomSel</th>
-			<td width="40%"><input id="randomSel" type="checkbox" /> If this checkbox with check(true), random select tab after tab initialize</td>
-			<th width="10%">onActive</th>
-			<td width="40%"><textarea id="onActive" style="height: 40px;">function(thisIdx, tab, content, tabs, content) {
+			<th width="10%"><label for="randomSel">randomSel</label></th>
+			<td width="40%">
+				<input id="randomSel" type="checkbox" />
+				<label for="randomSel" lang="ko_KR">체크(true)하면 탭 생성 후 랜덤으로 탭을 선택합니다.</label>
+				<label for="randomSel" lang="en_US">If this checkbox with check(true), select random tab after create the tab</label>
+			 </td>
+			<th width="10%"><label for="onActive">onActive</label></th>
+			<td width="40%">
+				<textarea id="onActive" style="height: 40px;">function(thisIdx, tab, content, tabs, content) {
 	N.log(thisIdx, tab, content, tabs, content);
-}</textarea><br /> Event handler for tab active event</td>
+}</textarea><br /> 
+				<label for="onActive" lang="ko_KR">탭이 활성화 되었을때 마다 실행되는 이벤트 핸들러 지정.</label>
+				<label for="onActive" lang="en_US">Event handler for tab active event</label>
+			</td>
 		</tr>
 		<tr>
-			<th>effect<br />[effect, duration, callback]</th>
+			<th><label for="effect">effect<br />[effect, duration, callback]</label></th>
 			<td colspan="3">[ <input id="effect" type="text" value="fadeIn" style="width: 50px;" />,
 				<input id="duration" type="text" value="300" style="width: 40px;" />,
 				<textarea id="callback">
 function() {
 	N.log("Effect end");
 }</textarea> ]<br>
-			* effects : show, hide, slideUp, slideDown, fadeIn, fadeOut
+				<label for="effect" lang="ko_KR">* effect 종류 : show, hide, slideUp, slideDown, fadeIn, fadeOut</label>
+				<label for="effect" lang="en_US">* Kind of effect : show, hide, slideUp, slideDown, fadeIn, fadeOut</label>
 			</td>
 		</tr>
 	</table>
 
-	<p>Method options : </p>
+	<p lang="ko_KR" class="smallContTit">함수 옵션 : </p>
+	<p lang="en_US" class="smallContTit">Method options : </p>
 	<table class="form">
 		<tr>
 			<th width="10%">open</th>
-			<th width="10%">arguments[0]</th>
+			<th width="10%"><label for="idx">arguments[0]</label></th>
 			<td width="80%" colspan="3">
-				<input id="idx" type="text" value="2" /> Select tab index
+				<input id="idx" type="text" value="2" /> 
+				<label for="idx" lang="ko_KR">선택할 탭의 인덱스</label>
+				<label for="idx" lang="en_US">Tab index to select</label>
 			</td>
 		</tr>
 	</table>
 
 	<div align="center" class="btnBox">
-		<a id="btnInitTab" href="#" data-opts='{ "color": "gray", "size": "large" }'>Initialize tab</a>
+		<a id="btnInitTab" href="#" data-opts='{ "color": "gray", "size": "large" }'>
+			<span lang="ko_KR">Tab 생성</span>
+			<span lang="en_US">Create Tab</span>
+		</a>
 		<a id="btnOpen" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>open</a>
-		<a id="btnReload" href="#" data-opts='{ "color": "white", "size": "large" }'>Reload this block page</a>
+		<a id="btnReload" href="#" data-opts='{ "color": "white", "size": "large" }'>
+			<span lang="ko_KR">DEMO 초기화</span>
+			<span lang="en_US">Reset DEMO</span>
+		</a>
 	</div>
-	<p class="smallContTit">Result : </p>
+	<p lang="ko_KR" class="smallContTit">결과 : </p>
+	<p lang="en_US" class="smallContTit">Result : </p>
     <div id="tab" style="margin-bottom: 15px;">
 		<ul>
 			<li><a href="#tab1">Jeff Beck</a></li>

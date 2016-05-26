@@ -1,7 +1,8 @@
-<article id="__form" class="view-code">
-	<p class="smallContTit">Data : </p>
+<article id="__form">
+	<p lang="ko_KR" class="smallContTit">데이터 : </p>
+	<p lang="en_US" class="smallContTit">Data : </p>
 	<div class="dataBox">
-		<pre class="data" class="line-numbers"><code id="data" class="language-javascript">[
+		<pre class="data" class="line-numbers" style="height: 250px;overflow: scroll;border: 1px solid #77cc77;"><code id="data" class="language-javascript">[
 	{
 	    "_id": "53e21cba9f982281b3459438",
 	    "index": 0,
@@ -111,60 +112,62 @@
 ]</code></pre>
 	</div>
 
-	<p class="smallContTit">Default options : </p>
+	<p lang="ko_KR" class="smallContTit">기본 옵션 : </p>
+	<p lang="en_US" class="smallContTit">Default options : </p>
 	<table class="form">
 		<tr>
-			<th width="10%" align="right">context</th>
+			<th width="10%" align="right"><label for="context">context</label></th>
 			<td width="40%"><input id="context" type="text" value="table#form" readonly="readonly" /> Target element</td>
-			<th width="10%" align="right">validate</th>
+			<th width="10%" align="right"><label for="validate">validate</label></th>
 			<td width="40%"><input id="validate" type="checkbox" checked="checked" /> If this checkbox with uncheck(false), disable realtime validation check</td>
 		</tr>
 		<tr>
-			<th>html</th>
+			<th><label for="html">html</label></th>
 			<td><input id="html" type="checkbox" /> If this checkbox with check(true), do not recognize HTML tags</td>
-			<th>revert</th>
+			<th><label for="revert">revert</label></th>
 			<td><input id="revert" type="checkbox" checked="checked" /> If this checkbox with check(true), activate the revert function(default value is false)</td>
 		</tr>
 		<tr>
-			<th>unbind</th>
+			<th><label for="unbind">unbind</label></th>
 			<td colspan="3"><input id="unbind" type="checkbox" checked="checked" /> If this checkbox with uncheck(false), inactivate the unbind function</td>
 		</tr>
 		<tr>
-			<th>onBindBefore</th>
+			<th><label for="onBindBefore">onBindBefore</label></th>
 			<td><textarea id="onBindBefore" style="height: 40px;">function(context, rowData) {
 	N.log("onBindBefore", context, rowData);
 }</textarea><br>Event handler for onBindBefore event</td>
-			<th>onBindAfter</th>
+			<th><label for="onBindAfter">onBindAfter</label></th>
 			<td><textarea id="onBindAfter" style="height: 40px;">function(context, rowData) {
 	N.log("onBindAfter", context, rowData);
 }</textarea><br>Event handler for onBindAfter event</td>
 		</tr>
 	</table>
-	<p class="smallContTit">Method options : </p>
+	<p lang="ko_KR" class="smallContTit">함수 옵션 : </p>
+	<p lang="en_US" class="smallContTit">Method options : </p>
 	<table class="form">
 		<tr>
 			<th width="10%">bind</th>
-			<th width="10%">arguments[0]</th>
+			<th width="10%"><label for="row">arguments[0]</label></th>
 			<td width="80%" colspan="3">
 				<input id="row" type="text" value="0" /> Row index for bind(default : 0)
 			</td>
 		</tr>
 		<tr>
 			<th width="10%" rowspan="2">val</th>
-			<th width="10%">arguments[0]</th>
+			<th width="10%"><label for="key">arguments[0]</label></th>
 			<td width="80%" colspan="3">
 				<input id="key" type="text" value="name" /> key name
 			</td>
 		</tr>
 		<tr>
-			<th width="10%">arguments[1]</th>
+			<th width="10%"><label for="val">arguments[1]</label></th>
 			<td width="80%" colspan="3">
 				<input id="val" type="text" value="jeff beck" /> If empty value set, get value of key, otherwise set with this value
 			</td>
 		</tr>
 		<tr>
 			<th width="10%">data</th>
-			<th width="10%">arguments[0]</th>
+			<th width="10%"><label for="data">arguments[0]</label></th>
 			<td width="80%" colspan="3">
 				<input id="data" type="text" value="true" />  true(return selected row data), false(return all data(jQuery Object)), empty(return all data(pure object array))
 			</td>
@@ -172,7 +175,10 @@
 	</table>
 
 	<div align="center" class="btnBox">
-		<a id="btnInit" href="#" data-opts='{ "color": "gray", "size": "large" }'>Initialize form</a> |
+		<a id="btnInit" href="#" data-opts='{ "color": "gray", "size": "large" }'>
+			<span lang="ko_KR">Form 생성</span>
+			<span lang="en_US">Create Form</span>
+		</a> |
 		<a id="btnAdd" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>add</a> | or |
 		<a id="btnBind" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>bind</a>
 		<a id="btnUnbind" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>unbind</a>
@@ -180,10 +186,14 @@
 		<a id="btnVal" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>val</a>
 		<a id="btnData" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>data</a>
 		<a id="btnValidate" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>validate</a>
-		<a id="btnReload" href="#" data-opts='{ "color": "white", "size": "large" }'>Reload this block page</a>
+		<a id="btnReload" href="#" data-opts='{ "color": "white", "size": "large" }'>
+			<span lang="ko_KR">DEMO 초기화</span>
+			<span lang="en_US">Reset DEMO</span>
+		</a>
 	</div>
 
-	<p class="smallContTit">Result : </p>
+	<p lang="ko_KR" class="smallContTit">결과 : </p>
+	<p lang="en_US" class="smallContTit">Result : </p>
 	<div class="result">
 		<table id="form" class="form" style="width: 450px;">
 			<tr height="43">

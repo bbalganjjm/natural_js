@@ -1,41 +1,71 @@
-<article id="__datepicker" class="view-code">
-	<p class="smallContTit">Default options : </p>
+<article id="__datepicker">
+	<p lang="ko_KR" class="smallContTit">기본 옵션 : </p>
+	<p lang="en_US" class="smallContTit">Default options : </p>
 	<table class="form">
 		<tr>
-			<th width="10%">monthonly</th>
-			<td width="40%"><input id="monthonly" type="checkbox" />If this checkbox with check(true), display Monthpicker</td>
-			<th width="10%">focusin</th>
-			<td width="40%"><input id="focusin" type="checkbox" checked="checked" />If this checkbox with uncheck(false), disable to focusin event of date input element</td>
+			<th width="10%"><label for="monthonly">monthonly</label></th>
+			<td width="40%">
+				<input id="monthonly" type="checkbox" />
+				<label for="monthonly" lang="ko_KR">체크(true)하면 년, 월 만 선택 할 수 있는 Monthpicker를 보여줍니다.</label>
+				<label for="monthonly" lang="en_US">If this checkbox with check(true), display Monthpicker</label>
+			</td>
+			<th width="10%"><label for="focusin">focusin</label></th>
+			<td width="40%">
+				<input id="focusin" type="checkbox" checked="checked" />
+				<label for="focusin" lang="ko_KR">체크를 해제(false)하면 지정한 입력요소가 선택 됐을때 자동으로 Datepicker 를 보여주지 않습니다.</label>
+				<label for="focusin" lang="en_US">If this checkbox with uncheck(false), do not display Datepicker when selected input element has focus.</label>
+			</td>
 		</tr>
 		<tr>
-			<th width="10%">onSelect</th>
-			<td colspan="3"><textarea id="onSelect" style="height: 40px;">function(context, selDate, monthonly) {
+			<th><label for="onSelect">onSelect</label></th>
+			<td colspan="3">
+				<textarea id="onSelect" style="height: 40px;">function(context, selDate, monthonly) {
 	N.log("onSelect", context, selDate, monthonly);
-}</textarea><br>Event handler for date select event</td>
+}</textarea><br>
+				<label for="onSelect" lang="ko_KR">일 선택시 동작되는 이벤트 핸들러</label>
+				<label for="onSelect" lang="en_US">Event handler for date select event</label>
+			</td>
 		</tr>
 		<tr>
-			<th>onBeforeShow</th>
-			<td><textarea id="onBeforeShow" style="height: 40px;">function(context, contents) {
+			<th><label for="onBeforeShow">onBeforeShow</label></th>
+			<td>
+				<textarea id="onBeforeShow" style="height: 40px;">function(context, contents) {
 	N.log("onBeforeShow", context, contents);
-}</textarea><br>Event handler for onBeforeShow event</td>
-			<th>onBeforeHide</th>
-			<td><textarea id="onBeforeHide" style="height: 40px;">function(context, contents) {
+}</textarea><br>
+				<label for="onBeforeShow" lang="ko_KR">Datepicker가 보여지기 전에 동작되는 이벤트 핸들러</label>
+				<label for="onBeforeShow" lang="en_US">Event handler for onBeforeShow event</label>	
+			</td>
+			<th><label for="onBeforeHide">onBeforeHide</label></th>
+			<td>
+				<textarea id="onBeforeHide" style="height: 40px;">function(context, contents) {
 	N.log("onBeforeHide", context, contents);
-}</textarea><br>Event handler for onBeforeHide event</td>
+}</textarea><br>
+				<label for="onBeforeHide" lang="ko_KR">Datepicker가 감춰지기 전에 동작되는 이벤트 핸들러</label>
+				<label for="onBeforeHide" lang="en_US">Event handler for onBeforeHide event</label>
+			</td>
 		</tr>
 	</table>
 
 	<div align="center" class="btnBox">
-		<a id="btnApply" href="#" data-opts='{ "color": "gray", "size": "large" }'>Apply Datepicker</a>
-		<a id="btnShow" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>Show</a>
-		<a id="btnHide" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>Hide</a>
-		<a id="btnReload" href="#" data-opts='{ "color": "white", "size": "large" }'>Reload this block page</a>
+		<a id="btnApply" href="#" data-opts='{ "color": "gray", "size": "large" }'>
+			<span lang="ko_KR">Datepicker 생성</span>
+			<span lang="en_US">Create Datepicker</span>
+		</a>
+		<a id="btnShow" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>show</a>
+		<a id="btnHide" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>hide</a>
+		<a id="btnReload" href="#" data-opts='{ "color": "white", "size": "large" }'>
+			<span lang="ko_KR">DEMO 초기화</span>
+			<span lang="en_US">Reset DEMO</span>
+		</a>
 	</div>
 
-	<p class="smallContTit">Result : </p>
+	<p lang="ko_KR" class="smallContTit">결과 : </p>
+	<p lang="en_US" class="smallContTit">Result : </p>
     <div align="center" class="result" style="height: 70px;padding-top: 30px;">
-    	<label for="datepicker">Datepicker</label> <input id="datepicker" type="text" />
-    	Click! this text input element <b>after click the [Apply Datepicker] button</b>
+    	<label for="datepicker">Datepicker</label>
+    	&nbsp;<input id="datepicker" type="text" />
+    	<label for="datepicker" lang="ko_KR">[Datepicker 생성] 버튼을 클릭한 후에 이 입력요소를 클릭 하세요.</label>
+		<label for="datepicker" lang="en_US">Click! this text input element <strong>after click the [Create Datepicker] button</strong></label>
     </div>
 </article>
 

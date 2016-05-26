@@ -1,27 +1,30 @@
 var IndexController = {
-	initWebfont : function(window) {
-		window.WebFontConfig = {
-			custom : {
-				families : [ 'Nanum Gothic' ],
-				urls : [ 'http://fonts.googleapis.com/earlyaccess/nanumgothic.css' ]
-			}
-		};
-		var wf = document.createElement('script');
-		wf.src = ('https:' == document.location.protocol ? 'https' : 'http')
-				+ '://ajax.googleapis.com/ajax/libs/webfont/1.4.10/webfont.js';
-		wf.type = 'text/javascript';
-		wf.async = 'true';
-		var s = document.getElementsByTagName('script')[0];
-		s.parentNode.insertBefore(wf, s);
-	},
 	init : function(window) {
-		this.setMenuEvent();
-		this.loadMainContents();
+		this.setLocale();
+		this.googleAnalytics();
+		this.loadHeader();
+		this.loadBodySection();
+		this.loadFooter();
+		this.notice();
 	},
-	setMenuEvent : function() {
-		CommonUtilController.setPageLinks("nav > ul > li > ul a");
+	/**
+	 * Google Analytics
+	 */
+	googleAnalytics : function() {
+		if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 9) {
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		}
 	},
-	loadMainContents : function() {
+	setLocale : function() {
+		N.locale(window.sessionStorage.locale !== undefined ? window.sessionStorage.locale : CommonUtilController.getLocale().toLowerCase().indexOf("ko") > -1 ? "ko_KR" : "en_US");
+	},
+	loadHeader : function() {
+		N("header").comm("html/indx/header.html").submit();
+	},
+	loadBodySection : function() {
 		if(N.string.trimToNull(location.hash) !== null) {
 			N(N.context.attr("architecture").page.context).comm("html/" + N.string.trimToEmpty(location.hash).replace("#", "") + ".html").submit(function() {
 				// Google Analytics
@@ -45,11 +48,43 @@ var IndexController = {
 				}
 			});
 		}
+	},
+	loadFooter : function() {
+		N("footer").comm("html/indx/footer.html").submit();
+	},
+	notice : function() {
+		if(N.string.isEmpty(location.hash)) {
+			var msg = [];
+			setTimeout(function() {
+				if(N.locale() === "ko_KR") {
+					msg.push("영문 번역 중입니다.");
+					msg.push("쪽팔림을 무릅쓰고 번역기 돌려가면서 콩글리시로 번역하고 있습니다.");
+					msg.push("도움 주실분은 GitHub 의 gh-pages 브랜치에 소스가 올라가 있으니 동참 해 주시면 감사 하겠습니다.");
+					msg.push("기타 문의사항은 bbalganjjm@gmail.com 으로 문의 바랍니다.");
+					msg.push('[<a id="korean" href="#" class="link">한국어</a>] | [<a id="english" href="#" class="link">영어</a>]');
+				} else {
+					msg.push("Translation work is in progress.");
+					msg.push("I don't speak English well. Please understand.");
+					msg.push('[<a id="korean" href="#" class="link">KOREAN</a>] | [<a id="english" href="#" class="link">ENGLISH</a>]');
+				}
+				var noticeBox = $("section>article").prepend('<p id="notice" class="alert" style="display: none;">' + msg.join(" ") + '</p>').find("#notice").slideDown(300);
+				noticeBox.find("#korean").click(function(e) {
+					e.preventDefault();
+					window.sessionStorage.locale = "ko_KR";
+					window.location.reload();
+				});
+				noticeBox.find("#english").click(function(e) {
+					e.preventDefault();
+					window.sessionStorage.locale = "en_US";
+					window.location.reload();
+				});
+			}, 1500);
+		}
 	}
-}
+};
 
 var CommonUtilController = {
-	setPageLinks : function(eles) {
+    setPageLinks : function(eles) {
 		N(eles).click(function(e) {
 			var href = N(this).attr("href");
 			if(N.string.trimToEmpty(href).indexOf("#") < 0
@@ -126,4 +161,4 @@ var CommonUtilController = {
 			$("[lang='ko_KR']", view).remove();
 		}
 	}
-}
+};

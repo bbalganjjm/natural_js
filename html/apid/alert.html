@@ -1,63 +1,128 @@
-<article id="__alert" class="view-code">
-	<p class="smallContTit">Default options : </p>
+<article id="__alert">
+	<p lang="ko_KR" class="smallContTit">기본 옵션 : </p>
+	<p lang="en_US" class="smallContTit">Default options : </p>
 	<table class="form">
+		<colgroup>
+			<col style="width: 12%">
+			<col style="width: 38%">
+			<col style="width: 12%">
+			<col style="width: 38%">
+		</colgroup>
 		<tr>
-			<th width="10%">context</th>
-			<td width="40%"><input id="context" type="text" value="#result" /> window or jQuery selector</td>
-			<th width="10%">msg</th>
-			<td width="40%"><textarea id="msg">
+			<th><label for="context">context</label></th>
+			<td>
+				<input id="context" type="text" value="#result" /> 
+				<label for="confirm" lang="ko_KR">"window" 나 jQuery selector 입력</label>
+				<label for="confirm" lang="en_US">Input "window" or jQuery selector</label>
+			</td>
+			<th>msg</th>
+			<td><textarea id="msg">
  Mollit elit qui reprehenderit fugiat excepteur adipisicing sunt id proident laborum sint proident. Amet cupidatat ipsum do irure qui magna sunt pariatur commodo eiusmod ipsum qui ad culpa.
 			</textarea></td>
 		</tr>
 		<tr>
-			<th>confirm</th>
-			<td><input id="confirm" type="checkbox" />If this checkbox with check(true), display "OK" and "Cancel" button</td>
-			<th>title</th>
-			<td><input id="title" type="text" value="Alert test" /></td>
+			<th><label for="confirm">confirm</label></th>
+			<td>
+				<input id="confirm" type="checkbox" />
+				<label for="confirm" lang="ko_KR">체크(true)하면 "확인", "취소" 버튼이 표시 됩니다.</label>
+				<label for="confirm" lang="en_US">If this checkbox with check(true), display "OK" and "Cancel" button</label>
+			</td>
+			<th><label for="title">title</label></th>
+			<td>
+				<input id="title" type="text" value="Alert test" />
+				<label for="title" lang="ko_KR">입력하지 않으면 다이얼로그의 타이틀바가 표시 되지 않습니다.</label>
+				<label for="title" lang="en_US">If do not input title, do not display title bar</label>
+			</td>
 		</tr>
 		<tr>
-			<th>modal</th>
-			<td><input id="modal" type="checkbox" checked="checked" />If this checkbox with uncheck(false), hide modal overlay layer</td>
-			<th>button</th>
-			<td><input id="button" type="checkbox" checked="checked" />If this checkbox with uncheck(false), hide button bar</td>
+			<th><label for="modal">modal</label></th>
+			<td>
+				<input id="modal" type="checkbox" checked="checked" />
+				<label for="modal" lang="ko_KR">체크를 해제(false)하면 모달 오버레이 층이 보이지 않습니다.</label>
+				<label for="modal" lang="en_US">If this checkbox with uncheck(false), hide modal overlay layer</label>
+			</td>
+			<th><label for="button">button</label></th>
+			<td>
+				<input id="button" type="checkbox" checked="checked" />
+				<label for="button" lang="ko_KR">체크를 해제(false)하면 버튼바 영역이 표시 되지 않습니다.</label>
+				<label for="button" lang="en_US">If this checkbox with uncheck(false), do not display button bar</label>
+			</td>
 		</tr>
 		<tr>
-			<th>width</th>
-			<td><input id="width" type="text" value="300" /><br>Message contents width, 0 is auto width</td>
-			<th>height</th>
-			<td><input id="height" type="text" value="100" /><br>Message contents height, 0 is auto height</td>
+			<th><label for="width">width</label></th>
+			<td>
+				<input id="width" type="text" value="300" /><br>
+				<label for="width" lang="ko_KR">메세지 컨텐츠 영역의 넓이, 값이 0 이면 auto 로 지정 됩니다.</label>
+				<label for="width" lang="en_US">Message contents width, 0 is auto width</label>
+			</td>
+			<th><label for="height">height</label></th>
+			<td>
+				<input id="height" type="text" value="100" /><br>
+				<label for="height" lang="ko_KR">메세지 컨텐츠 영역의 높이, 값이 0 이면 auto 로 지정 됩니다.</label>
+				<label for="height" lang="en_US">Message contents height, 0 is auto height</label>
+			</td>
 		</tr>
 		<tr>
-			<th>alwaysOnTop</th>
-			<td><input id="alwaysOnTop" type="checkbox" /><br>If this checkbox with check(true), z-index of N.alert's elements are defined alway max value</td>
-			<th>dynPos</th>
-			<td><input id="dynPos" type="checkbox" checked="checked" /><br>If this checkbox with uncheck(false), do not dynamic positioning N.alert's elements(Message overlay and message box)</td>
+			<th><label for="alwaysOnTop">alwaysOnTop</label></th>
+			<td>
+				<input id="alwaysOnTop" type="checkbox" />
+				<label for="alwaysOnTop" lang="ko_KR">체크(true)하면 메시지 다이얼로그의 z-index 값을 모든 요소의 최상위값으로 지정 하여 다이얼로그가 항상 최상위에 보이게 합니다.</label>
+				<label for="alwaysOnTop" lang="en_US">If this checkbox with check(true), Set a max value of all elements to z-index of message dialog</label>
+			</td>
+			<th><label for="dynPos">dynPos</label></th>
+			<td>
+				<input id="dynPos" type="checkbox" checked="checked" />
+				<label for="dynPos" lang="ko_KR">체크를 해제(false)하면 브라우저 창 크기 조절 시 블록 오버레이의 크기와 메세지 다이얼로그의 위치를 보정하지 않습니다.</label>
+				<label for="dynPos" lang="en_US">If this checkbox with uncheck(false), do not correction the position of Message overlay and message dialog</label>
+			</td>
 		</tr>
 		<tr>
-			<th>draggable</th>
-			<td colspan="3"><input id="draggable" type="checkbox" /> If this checkbox with check(true), you can drag & drop the dialog box</td>
+			<th><label for="draggable">draggable</label></th>
+			<td>
+				<input id="draggable" type="checkbox" />
+				<label for="draggable" lang="ko_KR">체크(true)하면 메세지 다이얼로그를 드래그&드롭 할 수 있습니다.</label>
+				<label for="draggable" lang="en_US">If this checkbox with check(true), you can drag & drop the messege dialog</label>
+			</td>
+			<th><label for="draggableOverflowCorrection">draggableOverflowCorrection</label></th>
+			<td>
+				<input id="draggableOverflowCorrection" type="checkbox" checked="checked" />
+				<label for="draggableOverflowCorrection" lang="ko_KR">체크를 해제(false)하면 메세지 다이얼로그를 화면 밖으로 드래그&드롭 할 수 있습니다.</label>
+				<label for="draggableOverflowCorrection" lang="en_US">If this checkbox with uncheck(false), you can drag & drop the messege dialog to out of screen</label>
+			</td>
 		</tr>
 		<tr>
-			<th>onOk</th>
-			<td><textarea id="onOk">
+			<th><label for="onOk">onOk</label></th>
+			<td>
+				<textarea id="onOk">
 function() {
 	N.log("Ok");
 }
-			</textarea><br />Event handler for ok button event</td>
-			<th>onCancel</th>
-			<td><textarea id="onCancel">
+				</textarea><br />
+				<label for="onOk" lang="ko_KR">"확인" 버튼 클릭 시 작동되는 이벤트 핸들러</label>
+				<label for="onOk" lang="en_US">Event handler for "OK" button click event</label>
+			</td>
+			<th><label for="onCancel">onCancel</label></th>
+			<td>
+				<textarea id="onCancel">
 function() {
 	N.log("Cancel");
 }
-			</textarea><br />Event handler for cancel button event</td>
+				</textarea><br />
+				<label for="onCancel" lang="ko_KR">"취소" 버튼 클릭 시 작동되는 이벤트 핸들러</label>
+				<label for="onCancel" lang="en_US">Event handler for "Cancel" button click event</label>
+			</td>
 		</tr>
 	</table>
 
 	<div align="center" class="btnBox">
-		<a id="btnShow" href="#" data-opts='{ "color": "skyblue", "size": "large" }'>Show alert</a>
+		<a id="btnShow" href="#" data-opts='{ "color": "skyblue", "size": "large" }'>
+			<span lang="ko_KR">Alert 생성 및 show</span>
+			<span lang="en_US">Create Alert and show</span>
+		</a>
 	</div>
 
-	<p class="smallContTit">Result : </p>
+	<p lang="ko_KR" class="smallContTit">결과 : </p>
+	<p lang="en_US" class="smallContTit">Result : </p>
     <div id="result" class="result" style="height: 300px;"></div>
 </article>
 
@@ -74,26 +139,27 @@ function() {
 	        N("#btnShow", view).click(function(e) {
 	            e.preventDefault();
 
-	            var context = N("input#context", view).val();
+	            var context = N("#context", view).val();
 	            if(context === "window") {
 	            	context = window;
 	            }
 	            var opts = {
-	            	msg : N("textarea#msg", view).val(),
-	            	confirm : N("input#confirm", view).is(":checked"),
-	            	title : N.string.trimToNull(N("input#title", view).val()) !== null ?
-	            			N("input#title", view).val() : undefined,
-	            	modal : N("input#modal", view).is(":checked"),
-	            	button : N("input#button", view).is(":checked"),
-	            	width : Number(N("input#width", view).val()),
-	            	height : Number(N("input#height", view).val()),
-	            	alwaysOnTop : N("input#alwaysOnTop", view).is(":checked"),
-	            	dynPos : N("input#dynPos", view).is(":checked"),
-	            	draggable : N("input#draggable", view).is(":checked"),
-	            	onOk : N.string.trimToNull(N("textarea#onOk", view).val()) !== null ?
-	            			eval("(" + N("textarea#onOk", view).val() + ")") : null,
-	            	onCancel : N.string.trimToNull(N("textarea#onCancel", view).val()) !== null ?
-	            			eval("(" + N("textarea#onCancel", view).val() + ")") : null
+	            	msg : N("#msg", view).val(),
+	            	confirm : N("#confirm", view).is(":checked"),
+	            	title : N.string.trimToNull(N("#title", view).val()) !== null ?
+	            			N("#title", view).val() : undefined,
+	            	modal : N("#modal", view).is(":checked"),
+	            	button : N("#button", view).is(":checked"),
+	            	width : Number(N("#width", view).val()),
+	            	height : Number(N("#height", view).val()),
+	            	alwaysOnTop : N("#alwaysOnTop", view).is(":checked"),
+	            	dynPos : N("#dynPos", view).is(":checked"),
+	            	draggable : N("#draggable", view).is(":checked"),
+	            	draggableOverflowCorrection : N("#draggableOverflowCorrection", view).is(":checked"),
+	            	onOk : N.string.trimToNull(N("#onOk", view).val()) !== null ?
+	            			eval("(" + N("#onOk", view).val() + ")") : null,
+	            	onCancel : N.string.trimToNull(N("#onCancel", view).val()) !== null ?
+	            			eval("(" + N("#onCancel", view).val() + ")") : null
 	            };
 	            N(context, view).alert(opts).show();
 	        });

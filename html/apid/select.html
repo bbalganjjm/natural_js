@@ -1,7 +1,8 @@
-<article id="__select" class="view-code" title="Select 예제">
-	<p class="smallContTit">Data :</p>
+<article id="__select" title="Select 예제">
+	<p lang="ko_KR" class="smallContTit">데이터 : </p>
+	<p lang="en_US" class="smallContTit">Data : </p>
 	<div class="dataBox">
-		<pre class="data" class="line-numbers"><code id="data" class="language-javascript">[{
+		<pre class="data" class="line-numbers" style="height: 250px;overflow: scroll;border: 1px solid #77cc77;"><code id="data" class="language-javascript">[{
     "gender": [{
 	     	"key" : "male",
 	     	"val" : "male"
@@ -62,76 +63,100 @@
     }]
 }]</code></pre>
 	</div>
-	<p class="smallContTit">Default options : </p>
+	<p lang="ko_KR" class="smallContTit">기본 옵션 : </p>
+	<p lang="en_US" class="smallContTit">Default options : </p>
 	<table class="form">
 		<tr>
-			<th width="10%">context</th>
-			<td width="40%"><select id="context">
-				<option value="select#eyeColor">select#eyeColor</option>
-				<option value="select#company" selected="selected">select#company</option>
-				<option value="input#gender">input#gender</option>
-				<option value="input#favoriteFruit">input#favoriteFruit</option>
-			</select> Target element</td>
-			<th width="10%">data</th>
-			<td width="40%"><select id="data">
-				<option value="eyeColor">eye color</option>
-				<option value="company" selected="selected">company</option>
-				<option value="gender">gender</option>
-				<option value="favoriteFruit">favorite fruit</option>
-			</select> Data set key</td>
+			<th width="10%"><label for="context">context</label></th>
+			<td width="40%">
+				<select id="context">
+					<option value="select#eyeColor">select#eyeColor</option>
+					<option value="select#company" selected="selected">select#company</option>
+					<option value="input#gender">input#gender</option>
+					<option value="input#favoriteFruit">input#favoriteFruit</option>
+				</select>
+				Target element
+			</td>
+			<th width="10%"><label for="data">data</label></th>
+			<td width="40%">
+				<select id="data">
+					<option value="eyeColor">eye color</option>
+					<option value="company" selected="selected">company</option>
+					<option value="gender">gender</option>
+					<option value="favoriteFruit">favorite fruit</option>
+				</select>
+				Data set key
+			</td>
 		</tr>
 		<tr>
-			<th>key</th>
+			<th><label for="key">key</label></th>
 			<td><input id="key" type="text" value="key" /> name column</td>
-			<th>val</th>
+			<th><label for="val">val</label></th>
 			<td><input id="val" type="text" value="val" /> value column</td>
 		</tr>
 		<tr>
-			<th>append</th>
-			<td><input id="append" type="checkbox" checked="checked" /> If this checkbox with uncheck(false), empty select element before bind</td>
-			<th>direction</th>
-			<td><select id="direction">
-				<option value="h">h</option>
-				<option value="v">v</option>
-			</select> h : display horizontal, v : display vertical</td>
+			<th><label for="append">append</label></th>
+			<td>
+				<input id="append" type="checkbox" checked="checked" />
+				If this checkbox with uncheck(false), empty select element before bind
+			</td>
+			<th><label for="direction">direction</label></th>
+			<td>
+				<select id="direction">
+					<option value="h">h</option>
+					<option value="v">v</option>
+				</select>
+				h : display horizontal, v : display vertical
+			</td>
 		</tr>
 	</table>
 
-	<p class="smallContTit">Method options : </p>
+	<p lang="ko_KR" class="smallContTit">함수 옵션 : </p>
+	<p lang="en_US" class="smallContTit">Method options : </p>
 	<table class="form">
 		<tr>
 			<th width="10%">val</th>
-			<th width="10%">arguments[0]</th>
+			<th width="10%"><label for="val">arguments[0]</label></th>
 			<td width="80%" colspan="3">
-				<input id="val" type="text" value="STOCKPOST" /> If empty value set, get selected value, otherwise selected with this value
+				<input id="val" type="text" value="STOCKPOST" />
+				If empty value set, get selected value, otherwise selected with this value
 			</td>
 		</tr>
 		<tr>
 			<th width="10%">data</th>
-			<th width="10%">arguments[0]</th>
+			<th width="10%"><label for="data">arguments[0]</label></th>
 			<td width="80%" colspan="3">
-				<input id="data" type="text" value="true" /> true(return selected row data), false(return all data(return all data(jQuery Object))), empty(pure object array)
+				<input id="data" type="text" value="true" />
+				true(return selected row data), false(return all data(return all data(jQuery Object))), empty(pure object array)
 			</td>
 		</tr>
 		<tr>
 			<th width="10%">reset</th>
-			<th width="10%">arguments[0]</th>
+			<th width="10%"><label for="reset">arguments[0]</label></th>
 			<td width="80%" colspan="3">
-				<input id="reset" type="checkbox" checked="checked" /> If this checkbox with uncheck(false), absolute select 0 index
+				<input id="reset" type="checkbox" checked="checked" />
+				If this checkbox with uncheck(false), absolute select 0 index
 			</td>
 		</tr>
 	</table>
 
 	<div align="center" class="btnBox">
-		<a id="btnInit" href="#" data-opts='{ "color": "gray", "size": "large" }'>Initialize select</a>
+		<a id="btnInit" href="#" data-opts='{ "color": "gray", "size": "large" }'>
+			<span lang="ko_KR">Select 생성</span>
+			<span lang="en_US">Create Select</span>
+		</a>
 		<a id="btnBind" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>bind</a>
 		<a id="btnVal" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>val</a>
 		<a id="btnData" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>data</a>
 		<a id="btnReset" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>reset</a>
-		<a id="btnReload" href="#" data-opts='{ "color": "white", "size": "large" }'>Reload this block page</a>
+		<a id="btnReload" href="#" data-opts='{ "color": "white", "size": "large" }'>
+			<span lang="ko_KR">DEMO 초기화</span>
+			<span lang="en_US">Reset DEMO</span>
+		</a>
 	</div>
 
-	<p class="smallContTit">Result : </p>
+	<p lang="ko_KR" class="smallContTit">결과 : </p>
+	<p lang="en_US" class="smallContTit">Result : </p>
 	<div class="result" align="center" style="padding-top: 15px;">
 		<table id="inputBox" class="form" style="width: 385px;">
 			<tr>

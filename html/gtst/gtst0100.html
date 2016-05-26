@@ -375,9 +375,6 @@ N("#viewCont").cont({
 <script type="text/javascript">
 N("#__gtst0100").cont({
     init : function(view, request) {
-    	// Multilingual handling
-    	CommonUtilController.i18n(undefined, view);
-
     	// code highlight
     	if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {
 			view.find("code").each(function() {
