@@ -25,29 +25,44 @@
 		</colgroup>
 		<tr>
 			<th align="right"><label for="context">context</label></th>
-			<td><input id="context" type="text" value="#pagination" readonly="readonly" /> Target element</td>
+			<td>
+				<input id="context" type="text" value="#pagination" readonly="readonly" />
+				<label for="context" lang="ko_KR">jQuery selector 입력</label>
+				<label for="context" lang="en_US">Input jQuery selector</label>
+			</td>
 			<th align="right"><label for="totalCount">totalCount</label></th>
-			<td style="background-color: #efffff;"><input id="totalCount" type="text" value="0" /> </td>
+			<td>
+				<input id="totalCount" type="text" value="0" />
+			</td>
 		</tr>
 		<tr>
 			<th align="right"><label for="countPerPage">countPerPage</label></th>
-			<td><input id="countPerPage" type="text" value="10"/></td>
+			<td>
+				<input id="countPerPage" type="text" value="10"/>
+			</td>
 			<th align="right"><label for="countPerPageSet">countPerPageSet</label></th>
-			<td style="background-color: #efffff;"><input id="countPerPageSet" type="text" value="10" /> </td>
+			<td>
+				<input id="countPerPageSet" type="text" value="10" />
+			</td>
 		</tr>
 		<tr>
 			<th align="right"><label for="pageNo">pageNo</label></th>
-			<td colspan="3"><input id="pageNo" type="text" value="1"/></td>
+			<td colspan="3">
+				<input id="pageNo" type="text" value="1"/>
+			</td>
 		</tr>
 		<tr>
 			<th align="right"><label for="onChange">onChange</label></th>
-			<td colspan="3"><textarea id="onChange" style="height: 92px;max-width: none;">function(pageNo, selEle, selData, currPageNavInfo) {
+			<td colspan="3">
+				<textarea id="onChange" style="height: 92px;max-width: none;">function(pageNo, selEle, selData, currPageNavInfo) {
 	N("#pagingList").empty();
 	N(selData).each(function() {
 		N("#pagingList").append(this.index + ", " + this.guid + ", " + this.balance + ", " + this.picture + "..." + "<br>");
 	});
 	N.log(currPageNavInfo);
-}</textarea><br /> Event handler for page change event</td>
+}</textarea><br />
+				Event handler for page change event
+			</td>
 		</tr>
 	</table>
 
@@ -63,7 +78,12 @@
 			<th>data</th>
 			<th><label for="data">arguments[0]</label></th>
 			<td>
-				<input id="data" type="text" /> empty(pure object array), false(return all data(return all data(jQuery Object)))
+				<select id="data">
+					<option value="undefined">undefined</option>
+					<option value="false">false</option>
+				</select><br>
+				undefined : Return all data of pure JSON Object array<br>
+				false : Return all data of jQuery Object type
 			</td>
 		</tr>
 	</table>
@@ -142,7 +162,7 @@
 	    	N("#btnData", view).click(function(e) {
 	        	e.preventDefault();
 	        	N("div.result", view).alert({
-	        		msg : '<pre class="pre">' + N.json.format(pagination.data(eval(N("input#data", view).val()))) + '</pre>',
+	        		msg : '<pre class="pre">' + N.json.format(pagination.data(eval(N("#data", view).val()))) + '</pre>',
 	        		width : 400,
 	        		height : 250
 	        	}).show();

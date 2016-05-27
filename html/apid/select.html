@@ -70,12 +70,13 @@
 			<th width="10%"><label for="context">context</label></th>
 			<td width="40%">
 				<select id="context">
-					<option value="select#eyeColor">select#eyeColor</option>
-					<option value="select#company" selected="selected">select#company</option>
-					<option value="input#gender">input#gender</option>
-					<option value="input#favoriteFruit">input#favoriteFruit</option>
+					<option value="#eyeColor">#eyeColor</option>
+					<option value="#company" selected="selected">#company</option>
+					<option value="#gender">#gender</option>
+					<option value="#favoriteFruit">#favoriteFruit</option>
 				</select>
-				Target element
+				<label for="context" lang="ko_KR">jQuery selector 입력</label>
+				<label for="context" lang="en_US">Input jQuery selector</label>
 			</td>
 			<th width="10%"><label for="data">data</label></th>
 			<td width="40%">
@@ -85,20 +86,30 @@
 					<option value="gender">gender</option>
 					<option value="favoriteFruit">favorite fruit</option>
 				</select>
-				Data set key
+				<label for="data" lang="ko_KR">데이터 세트 명</label>
+				<label for="data" lang="en_US">Data set name</label>
 			</td>
 		</tr>
 		<tr>
 			<th><label for="key">key</label></th>
-			<td><input id="key" type="text" value="key" /> name column</td>
+			<td>
+				<input id="key" type="text" value="key" /> 
+				<label for="key" lang="ko_KR">name 속성 컬럼 명</label>
+				<label for="key" lang="en_US">name attribute column name</label>
+			</td>
 			<th><label for="val">val</label></th>
-			<td><input id="val" type="text" value="val" /> value column</td>
+			<td>
+				<input id="val" type="text" value="val" /> 
+				<label for="val" lang="ko_KR">value 속성 컬럼 명</label>
+				<label for="val" lang="en_US">value attribute column name</label>
+			</td>
 		</tr>
 		<tr>
 			<th><label for="append">append</label></th>
 			<td>
 				<input id="append" type="checkbox" checked="checked" />
-				If this checkbox with uncheck(false), empty select element before bind
+				<label for="append" lang="ko_KR">체크를 해제(false)하면 바인드하기 전에 select 요소 안의 요소(option)를 비우고 바인드 합니다.</label>
+				<label for="append" lang="en_US">If this checkbox with uncheck(false), empty inner element(options) of select element before bind</label>
 			</td>
 			<th><label for="direction">direction</label></th>
 			<td>
@@ -106,7 +117,8 @@
 					<option value="h">h</option>
 					<option value="v">v</option>
 				</select>
-				h : display horizontal, v : display vertical
+				<label for="direction" lang="ko_KR">h : 선택요소(radio, checkbox)를 가로로 표시 합니다., v : 선택요소(radio, checkbox)를 세로로 표시 합니다.</label>
+				<label for="direction" lang="en_US">h : display horizontal radio and checkbox, v : display vertical radio and checkbox</label>
 			</td>
 		</tr>
 	</table>
@@ -119,15 +131,29 @@
 			<th width="10%"><label for="val">arguments[0]</label></th>
 			<td width="80%" colspan="3">
 				<input id="val" type="text" value="STOCKPOST" />
-				If empty value set, get selected value, otherwise selected with this value
+				<label for="val" lang="ko_KR">입력하지 않으면 선택된 값을 반환하고 입력하면 입력한 값과 같은 요소를 선택 합니다.</label>
+				<label for="val" lang="en_US">If does not set value to this input, return the selected value. otherwise select element the same input value</label>
 			</td>
 		</tr>
 		<tr>
 			<th width="10%">data</th>
 			<th width="10%"><label for="data">arguments[0]</label></th>
 			<td width="80%" colspan="3">
-				<input id="data" type="text" value="true" />
-				true(return selected row data), false(return all data(return all data(jQuery Object))), empty(pure object array)
+				<select id="data">
+					<option value="true">true</option>
+					<option value="false">false</option>
+					<option value="undefined">undefined</option>
+				</select><br>
+				<label for="data" lang="ko_KR">
+					true : 선택한 요소에 해당하는 행 데이터를 반환 합니다.<br>
+					false : jQuery Object 타입의 모든 데이터를 반환합니다.<br> 
+					undefined : JSON Object Array 타입의 모든 데이터를 반환합니다.<br>
+				</label>
+				<label for="data" lang="en_US">
+					true : Return selected row data.<br>
+					false : Return all data of jQuery Object type.<br> 
+					undefined : Return all data of pure JSON Object array.
+				</label>
 			</td>
 		</tr>
 		<tr>
@@ -135,7 +161,8 @@
 			<th width="10%"><label for="reset">arguments[0]</label></th>
 			<td width="80%" colspan="3">
 				<input id="reset" type="checkbox" checked="checked" />
-				If this checkbox with uncheck(false), absolute select 0 index
+				<label for="val" lang="ko_KR">체크를 해제(false)하면 리셋할때 아무 요소도 선택하지 않습니다.</label>
+				<label for="val" lang="en_US">If this checkbox with uncheck(false), it does not select any element when reset</label>
 			</td>
 		</tr>
 	</table>
@@ -202,13 +229,13 @@
 	    setEvents : function(view, this_) {
 	    	N("#btnInit", view).click(function(e) {
 	            e.preventDefault();
-	            var data = eval(N("code#data", view).text())[0][N("select#data", view).val()];
+	            var data = eval(N("code#data", view).text())[0][N("select[id='data']:eq(0)", view).val()];
 	            var opts = {
 	            	context : view.find(N("select#context", view).val()),
-					key : N("input#key", view).val(),
-					val : N("input#val", view).val(),
-					append : N("input#append", view).is(":checked"),
-					direction : N("select#direction", view).val(),
+					key : N("#key", view).val(),
+					val : N("input[id=val]:eq(0)", view).val(),
+					append : N("#append", view).is(":checked"),
+					direction : N("#direction", view).val(),
 	            }
 	            this_.select = N(data).select(opts);
 
@@ -225,7 +252,7 @@
 
 	        N("#btnVal", view).click(function(e) {
 	        	e.preventDefault();
-	        	var value = N.string.trimToNull(N("input#val:eq(1)", view).val());
+	        	var value = N.string.trimToNull(N("input[id=val]:eq(1)", view).val());
 	        	if(value !== null) {
 	        		this_.select.val(value);
 	        	} else {
@@ -236,7 +263,7 @@
 	        N("#btnData", view).click(function(e) {
 	        	e.preventDefault();
 	        	N("div.result", view).alert({
-	        		msg : '<pre class="pre">' + N.json.format(this_.select.data(eval(N("input#data", view).val()))) + '</pre>',
+	        		msg : '<pre class="pre">' + N.json.format(this_.select.data(eval(N("select[id='data']:eq(1)", view).val()))) + '</pre>',
 	        		width : 400,
 	        		height : 250
 	        	}).show();
@@ -244,7 +271,7 @@
 
 	        N("#btnReset", view).click(function(e) {
 	        	e.preventDefault();
-	        	this_.select.reset(N("input#reset", view).is(":checked"));
+	        	this_.select.reset(N("#reset", view).is(":checked"));
 	        });
 
 	        N("#btnReload", view).click(function(e) {

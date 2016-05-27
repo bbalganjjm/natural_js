@@ -9,77 +9,135 @@
 	<table class="form">
 		<tr>
 			<th width="10%" align="right"><label for="context">context</label></th>
-			<td width="40%"><input id="context" type="text" value="table#grid" readonly="readonly" /> Target element</td>
+			<td width="40%">
+				<input id="context" type="text" value="#grid" readonly="readonly" /> 
+				<label for="context" lang="ko_KR">jQuery selector 입력</label>
+				<label for="context" lang="en_US">Input jQuery selector</label>
+			</td>
 			<th width="10%" align="right"><label for="height">height</label></th>
-			<td width="40%" style="background-color: #efffff;"><input id="height" type="text" value="395" /> </td>
+			<td width="40%" style="background-color: #efffff;">
+				<input id="height" type="text" value="395" />
+			</td>
 		</tr>
 		<tr>
 			<th><label for="validate">validate</label></th>
-			<td><input id="validate" type="checkbox" checked="checked" /> If this checkbox with uncheck(false), disable realtime validation check</td>
+			<td>
+				<input id="validate" type="checkbox" checked="checked" />
+				If this checkbox with uncheck(false), disable realtime validation check
+			</td>
 			<th><label for="html">html</label></th>
-			<td><input id="html" type="checkbox" /> If this checkbox with check(true), do not recognize HTML tags</td>
+			<td>
+				<input id="html" type="checkbox" />
+				If this checkbox with check(true), do not recognize HTML tags
+			</td>
 		</tr>
 		<tr>
 			<th><label for="addTop">addTop</label></th>
-			<td><input id="addTop" type="checkbox" /> If this checkbox with check(true), create new row on the top by add method
-				<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">* If height is greater than 0, addTop option is always set with "true"</font>
+			<td>
+				<input id="addTop" type="checkbox" /> 
+				If this checkbox with check(true), create new row on the top by add method<br /> 
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">* If height is greater than 0, addTop option is always set with "true"</font>
 			</td>
 			<th><label for="resizable">resizable</label></th>
-			<td><input id="resizable" type="checkbox" /> If this checkbox with check(true), can resize column of grid</td>
+			<td>
+				<input id="resizable" type="checkbox" /> 
+				If this checkbox with check(true), can resize column of grid
+			</td>
 		</tr>
 		<tr>
 			<th><label for="vResizable">vResizable</label></th>
-			<td style="background-color: #efffff;"><input id="vResizable" type="checkbox" /> If this checkbox with check(true), can resize height of grid body</td>
+			<td style="background-color: #efffff;">
+				<input id="vResizable" type="checkbox" /> 
+				If this checkbox with check(true), can resize height of grid body
+			</td>
 			<th><label for="sortable">sortable</label></th>
-			<td><input id="sortable" type="checkbox" /> If this checkbox with check(true), enable column sort</td>
+			<td>
+				<input id="sortable" type="checkbox" /> 
+				If this checkbox with check(true), enable column sort
+			</td>
 		</tr>
 		<tr>
 			<th><label for="select">select</label></th>
-			<td><input id="select" type="checkbox" /> If this checkbox with check(true), can select only 1 row in grid body</td>
+			<td>
+				<input id="select" type="checkbox" /> 
+				If this checkbox with check(true), can select only 1 row in grid body
+			</td>
 			<th><label for="multiselect">multiselect</label></th>
-			<td><input id="multiselect" type="checkbox" /> If this checkbox with check(true), can select multy row in grid body</td>
+			<td>
+				<input id="multiselect" type="checkbox" /> 
+				If this checkbox with check(true), can select multy row in grid body
+			</td>
 		</tr>
 		<tr>
 			<th><label for="checkAll">checkAll</label></th>
-			<td><input id="checkAll" type="text" value="#checkAll" /> Checkbox element for Check to all checkbox elements in first column</td>
+			<td>
+				<input id="checkAll" type="text" value="#checkAll" /> 
+				Checkbox element for Check to all checkbox elements in first column
+			</td>
 			<th><label for="checkAllTarget">checkAllTarget</label></th>
-			<td><input id="checkAllTarget" type="text" value=".checkAllTarget" /> Checkbox elements in first column</td>
+			<td>
+				<input id="checkAllTarget" type="text" value=".checkAllTarget" /> 
+				Checkbox elements in first column
+			</td>
 		</tr>
 		<tr>
 			<th><label for="hover">hover</label></th>
-			<td><input id="hover" type="checkbox" /> If this checkbox with check(true), display hover effect</td>
+			<td>
+				<input id="hover" type="checkbox" /> 
+				If this checkbox with check(true), display hover effect
+			</td>
 			<th><label for="createRowDelay">createRow<br>Delay</label></th>
-			<td><input id="createRowDelay" type="text" value="1" /> delay whenever created row element</td>
+			<td>
+				<input id="createRowDelay" type="text" value="1" /> 
+				delay whenever created row element
+			</td>
 		</tr>
 		<tr>
 			<th><label for="scrollPagingSize">scrollPaging<br>.size</label></th>
-			<td><input id="scrollPagingSize" type="text" value="100" /> scroll paging size</td>
+			<td>
+				<input id="scrollPagingSize" type="text" value="100" /> 
+				scroll paging size
+			</td>
 			<th><label for="rowHandler">rowHandler</label></th>
-			<td><textarea id="rowHandler" style="height: 82px;">function(index, row, data) {
+			<td>
+				<textarea id="rowHandler" style="height: 82px;">function(index, row, data) {
 	N.log(index);
 	N.log(row);
 	N.log(data);
-}</textarea><br /> Event handler for tab active event</td>
+}</textarea><br /> 
+				Event handler for tab active event</td>
 		</tr>
 		<tr>
 			<th><label for="onSelect">onSelect</label></th>
-			<td><textarea id="onSelect" style="height: 82px;">function(index, row, data, beforeRow) {
+			<td>
+				<textarea id="onSelect" style="height: 82px;">function(index, row, data, beforeRow) {
 	N.log(index);
 	N.log(row);
 	N.log(data);
 	N.log(beforeRow);
-}</textarea><br /> Event handler for tab active event</td>
+}</textarea><br /> 
+				Event handler for tab active event
+			</td>
 			<th><label for="onBind">onBind</label></th>
-			<td><textarea id="onBind" style="height: 64px;">function(context, data) {
+			<td>
+				<textarea id="onBind" style="height: 64px;">function(context, data) {
 	N.log(context);
 	N.log(data);
-}</textarea><br /> Event handler for tab active event</td>
+}</textarea><br /> 
+				Event handler for tab active event
+			</td>
 		</tr>
 		<tr>
 			<th><label for="windowScrollLock">windowScroll Lock</label></th>
-			<td><input id="windowScrollLock" type="checkbox" checked="checked" /> If this checkbox with uncheck(false), don't block window scroll when mouse scrolling in grid</td>
+			<td>
+				<input id="windowScrollLock" type="checkbox" checked="checked" /> 
+				If this checkbox with uncheck(false), don't block window scroll when mouse scrolling in grid
+			</td>
 			<th><label for="revert">revert</label></th>
-			<td><input id="revert" type="checkbox" checked="checked" /> If this checkbox with check(true), activate the revert function(default value is false)</td>
+			<td>
+				<input id="revert" type="checkbox" checked="checked" /> 
+				If this checkbox with check(true), activate the revert function(default value is false)
+			</td>
 		</tr>
 	</table>
 
@@ -90,19 +148,22 @@
 			<th width="10%" rowspan="3">val</th>
 			<th width="10%"><label for="row">arguments[0]</label></th>
 			<td width="80%" colspan="3">
-				<input id="row" type="text" value="0" /> Target row
+				<input id="row" type="text" value="0" /> 
+				Target row
 			</td>
 		</tr>
 		<tr>
 			<th width="10%"><label for="key">arguments[1]</label></th>
 			<td width="80%" colspan="3">
-				<input id="key" type="text" value="company" /> Target key name
+				<input id="key" type="text" value="company" /> 
+				Target key name
 			</td>
 		</tr>
 		<tr>
 			<th width="10%"><label for="val">arguments[2]</label></th>
 			<td width="80%" colspan="3">
-				<input id="val" type="text" value="NATURAL COMPANY" /> If empty value set, get value of key, otherwise set with this value
+				<input id="val" type="text" value="NATURAL COMPANY" /> 
+				If empty value set, get value of key, otherwise set with this value
 			</td>
 		</tr>
 		<tr>
@@ -117,28 +178,32 @@
 					<option value="checked">checked</option>
 					<option value="">undefined(pure object array)</option>
 					<option value="false">false(jQuery Object)</option>
-				</select> row status
+				</select> 
+				row status
 			</td>
 		</tr>
 		<tr>
 			<th width="10%">revert</th>
 			<th width="10%"><label for="rvtRow">arguments[0]</label></th>
 			<td width="80%" colspan="3">
-				<input id="rvtRow" type="text" value="0" /> Row index to revert, if set empty value, revert all row data
+				<input id="rvtRow" type="text" value="0" /> 
+				Row index to revert, if set empty value, revert all row data
 			</td>
 		</tr>
 		<tr>
 			<th width="10%">remove</th>
 			<th width="10%"><label for="rmvRow">arguments[0]</label></th>
 			<td width="80%" colspan="3">
-				<input id="rmvRow" type="text" value="0" /> Row index of to remove
+				<input id="rmvRow" type="text" value="0" /> 
+				Row index of to remove
 			</td>
 		</tr>
 		<tr>
 			<th width="10%">validate</th>
 			<th width="10%"><label for="vldRow">arguments[0]</label></th>
 			<td width="80%" colspan="3">
-				<input id="vldRow" type="text" /> Row index of to validate, if set empty value, validate all row data
+				<input id="vldRow" type="text" /> 
+				Row index of to validate, if set empty value, validate all row data
 			</td>
 		</tr>
 	</table>
@@ -209,35 +274,35 @@
 	    	N("#btnInit", view).click(function(e) {
 	            e.preventDefault();
 	       		var opts = {
-	       			context : view.find(N("input#context", view).val()),
-	       			height : parseInt(N.string.trimToZero(N("input#height", view).val())),
-	       			validate : N("input#validate", view).is(":checked"),
-	       			html : N("input#html", view).is(":checked"),
-	       			addTop : N("input#addTop", view).is(":checked"),
-	       			resizable : N("input#resizable", view).is(":checked"),
-	       			vResizable : N("input#vResizable", view).is(":checked"),
-	       			sortable : N("input#sortable", view).is(":checked"),
-	       			select : N("input#select", view).is(":checked"),
-	       			multiselect : N("input#multiselect", view).is(":checked"),
-	       			checkAll : N.string.trimToNull(N("input#checkAll", view).val()) !== null ?
-		       				N("input#checkAll", view).val() : null,
-       				checkAllTarget : N.string.trimToNull(N("input#checkAllTarget", view).val()) !== null ?
-    	       				N("input#checkAllTarget", view).val() : null,
-	       			hover : N("input#hover", view).is(":checked"),
-	       			createRowDelay : N.string.trimToNull(N("input#createRowDelay", view).val()) !== null ?
-	       				parseInt(N("input#createRowDelay", view).val()) : 1,
+	       			context : view.find(N("#context", view).val()),
+	       			height : parseInt(N.string.trimToZero(N("#height", view).val())),
+	       			validate : N("#validate", view).is(":checked"),
+	       			html : N("#html", view).is(":checked"),
+	       			addTop : N("#addTop", view).is(":checked"),
+	       			resizable : N("#resizable", view).is(":checked"),
+	       			vResizable : N("#vResizable", view).is(":checked"),
+	       			sortable : N("#sortable", view).is(":checked"),
+	       			select : N("#select", view).is(":checked"),
+	       			multiselect : N("#multiselect", view).is(":checked"),
+	       			checkAll : N.string.trimToNull(N("#checkAll", view).val()) !== null ?
+		       				N("#checkAll", view).val() : null,
+       				checkAllTarget : N.string.trimToNull(N("#checkAllTarget", view).val()) !== null ?
+    	       				N("#checkAllTarget", view).val() : null,
+	       			hover : N("#hover", view).is(":checked"),
+	       			createRowDelay : N.string.trimToNull(N("#createRowDelay", view).val()) !== null ?
+	       				parseInt(N("#createRowDelay", view).val()) : 1,
 	       			scrollPaging : {
-	       				size : N.string.trimToNull(N("input#scrollPagingSize", view).val()) !== null ?
-	       					parseInt(N("input#scrollPagingSize", view).val()) : 100
+	       				size : N.string.trimToNull(N("#scrollPagingSize", view).val()) !== null ?
+	       					parseInt(N("#scrollPagingSize", view).val()) : 100
 	       			},
-	       			rowHandler : N.string.trimToNull(N("textarea#rowHandler", view).val()) !== null ?
-	       				eval("(" + N("textarea#rowHandler", view).val() + ")") : null,
-	    				onSelect : N.string.trimToNull(N("textarea#onSelect", view).val()) !== null ?
-	        				eval("(" + N("textarea#onSelect", view).val() + ")") : null,
-	        			onBind : N.string.trimToNull(N("textarea#onBind", view).val()) !== null ?
-	        				eval("(" + N("textarea#onBind", view).val() + ")") : null,
-	        		windowScrollLock : N("input#windowScrollLock", view).is(":checked"),
-	        		revert : N("input#revert", view).is(":checked")
+	       			rowHandler : N.string.trimToNull(N("#rowHandler", view).val()) !== null ?
+	       				eval("(" + N("#rowHandler", view).val() + ")") : null,
+	    				onSelect : N.string.trimToNull(N("#onSelect", view).val()) !== null ?
+	        				eval("(" + N("#onSelect", view).val() + ")") : null,
+	        			onBind : N.string.trimToNull(N("#onBind", view).val()) !== null ?
+	        				eval("(" + N("#onBind", view).val() + ")") : null,
+	        		windowScrollLock : N("#windowScrollLock", view).is(":checked"),
+	        		revert : N("#revert", view).is(":checked")
 	       		}
 	       		grid = N([]).grid(opts).bind();
 
@@ -281,19 +346,19 @@
 
 	    	N("#btnRevert", view).click(function(e) {
 	            e.preventDefault();
-	       		grid.revert(N.string.trimToUndefined(N("input#rvtRow", view).val()));
+	       		grid.revert(N.string.trimToUndefined(N("#rvtRow", view).val()));
 	        });
 
 	    	N("#btnRemove", view).click(function(e) {
 	            e.preventDefault();
-	        	grid.remove(parseInt(N.string.trimToZero(N("input#rmvRow", view).val())));
+	        	grid.remove(parseInt(N.string.trimToZero(N("#rmvRow", view).val())));
 	        });
 
 	    	N("#btnVal", view).click(function(e) {
 	            e.preventDefault();
-	            var row = N.string.trimToZero(N("input#row", view).val());
-	            var key = N.string.trimToNull(N("input#key", view).val());
-	            var value = N.string.trimToNull(N("input#val", view).val());
+	            var row = N.string.trimToZero(N("#row", view).val());
+	            var key = N.string.trimToNull(N("#key", view).val());
+	            var value = N.string.trimToNull(N("#val", view).val());
 	        	if(value !== null) {
 	        		grid.val(row, key, value);
 	        	} else {
@@ -317,7 +382,7 @@
 
 	    	N("#btnValidate", view).click(function(e) {
 	            e.preventDefault();
-	            grid.context().parent().alert(String(grid.validate(N.string.trimToUndefined(N("input#vldRow", view).val())))).show();
+	            grid.context().parent().alert(String(grid.validate(N.string.trimToUndefined(N("#vldRow", view).val())))).show();
 	        });
 
 	    	N("#btnReload", view).click(function(e) {
