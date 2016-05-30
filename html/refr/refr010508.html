@@ -207,7 +207,7 @@
 			<td></td>
 			<td>
 				<p>그리드 행들의 HOVER 효과 적용 유무</p>
-				<p>그리드 행에 MOUSE OVER 시 해당행의 TBODY요소에 "grid_hover__" 스타일클래스가 생성되고 선택이 해제되면 생성된 스타일클래스가 제거 됩니다.</p>
+				<p class="alert">그리드 행에 mouseover 시 해당 행의 TBODY요소에 "grid_hover__" 스타일클래스가 생성되고 선택이 해제되면 생성된 스타일클래스가 제거 됩니다.</p>
 			</td>
 		</tr>
 		<tr>
@@ -227,7 +227,7 @@
 			<td></td>
 			<td>
 				<p>헤더고정형 그리드에서는 스크롤페이징이 기본으로 적용됩니다. 페이징시 한번에 바인드하는 행수를 지정 합니다.</p>
-				<p> 너무 크게 지정하면 스크롤 페이징이 작동될때 브라우저에 부하가 발생되므로 그리드에 입력요소나 이미지가 들어 있다면 200 이하로 그렇지 않다면 1000 이하로 설정하는 것을 권장합니다.</p>
+				<p class="alert">너무 크게 지정하면 스크롤 페이징이 작동될때 브라우저에 부하가 발생되므로 그리드에 입력요소나 이미지가 들어 있다면 200 이하로 그렇지 않다면 1000 이하로 설정하는 것을 권장합니다.</p>
 			</td>
 		</tr>
 		<tr>
@@ -235,14 +235,14 @@
 			<td>Array</td>
 			<td>null</td>
 			<td></td>
-			<td>포맷룰을 지정 합니다. Natural-DATA - 포멧 룰 참고</td>
+			<td>포맷룰을 지정 합니다. API/DEMO > Natural-DATA 메뉴의 Formatter 와 Format Rules 참고</td>
 		</tr>
 		<tr>
 			<td>vRules</td>
 			<td>Array</td>
 			<td>null</td>
 			<td></td>
-			<td>검증룰을 지정 합니다. Natural-DATA - 검증 룰 참고</td>
+			<td>검증룰을 지정 합니다. API/DEMO > Natural-DATA 메뉴의 Validator 와 Validation Rules 참고</td>
 		</tr>
 		<tr>
 			<td>rowHandler</td>
@@ -280,7 +280,7 @@
 				<pre><code class="language-javascript">onBind : function(context, data) {
 	// this 는 context
 }</code></pre>
-				<p> 스크롤페이징에 의해 페이징 될 때도 해당 행수 만큼 페이지가 완성 될 때마다 발생합니다.</p>
+				<p class="alert">스크롤페이징에 의해 페이징 될 때도 해당 행수 만큼 페이지가 완성 될 때마다 발생합니다.</p>
 			</td>
 		</tr>
 		<tr>
@@ -351,13 +351,13 @@
 			<td>data-format</td>
 			<td>Array[Array]</td>
 			<td>undefined</td>
-			<td>포맷룰을 지정 합니다. Natural-DATA > Formatter 와 Format Rules 참고</td>
+			<td>포맷룰을 지정 합니다. API/DEMO > Natural-DATA 메뉴의 Formatter 와 Format Rules 참고</td>
 		</tr>
 		<tr>
 			<td>data-validate</td>
 			<td>Array[Array]</td>
 			<td>undefined</td>
-			<td>검증룰을 지정 합니다. Natural-DATA > Validator 와 Validation Rules 참고</td>
+			<td>검증룰을 지정 합니다. API/DEMO > Natural-DATA 메뉴의 Validator 와 Validation Rules 참고</td>
 		</tr>
 	</table>
 
@@ -512,9 +512,9 @@
 			<td align="center">-</td>
 			<td>Value object or N.grid</td>
 			<td>
-				<p>선택한 값을 가져오거나 입력 한다.</p>
-				<p>val 인자를 입력하지 않으면 선택한 값을 반환하고 입력하면 선택한 컬럼의 값을 입력한 값으로 지정 해 줍니다.</p>
-				<p> 값 입력 시 지정한 행의 key 에 해당하는 HTML 요소가 없으면 데이터만 생성한다.</p>
+				<p>선택한 컬럼의 원래 값을 가져오거나 입력(수정) 합니다.</p>
+				<p class="alert">val 인자를 입력하지 않으면 선택한 값을 반환하고 입력하면 선택한 키 컬럼의 값을 입력한 값으로 바꿔 줍니다.</p>
+				<p class="alert">값 입력 시 입력한 키 에 해당하는 데이터 없으면 새로운 컬럼 데이터를 생성 합니다.</p>
 			</td>
 		</tr>
 		<tr>

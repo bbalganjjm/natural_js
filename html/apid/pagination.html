@@ -33,22 +33,30 @@
 			<th align="right"><label for="totalCount">totalCount</label></th>
 			<td>
 				<input id="totalCount" type="text" value="0" />
+				<label for="rmvRow" lang="ko_KR">페이징 데이터의 전체 행 수</label>
+				<label for="rmvRow" lang="en_US">Total count of paging data</label>
 			</td>
 		</tr>
 		<tr>
 			<th align="right"><label for="countPerPage">countPerPage</label></th>
 			<td>
 				<input id="countPerPage" type="text" value="10"/>
+				<label for="rmvRow" lang="ko_KR">페이지당 행 수</label>
+				<label for="rmvRow" lang="en_US">Row count per page</label>
 			</td>
 			<th align="right"><label for="countPerPageSet">countPerPageSet</label></th>
 			<td>
 				<input id="countPerPageSet" type="text" value="10" />
+				<label for="rmvRow" lang="ko_KR">페이지 세트당 페이지 수</label>
+				<label for="rmvRow" lang="en_US">Page count per Pageset</label>
 			</td>
 		</tr>
 		<tr>
 			<th align="right"><label for="pageNo">pageNo</label></th>
 			<td colspan="3">
 				<input id="pageNo" type="text" value="1"/>
+				<label for="rmvRow" lang="ko_KR">페이지 번호</label>
+				<label for="rmvRow" lang="en_US">Page number</label>
 			</td>
 		</tr>
 		<tr>
@@ -61,7 +69,8 @@
 	});
 	N.log(currPageNavInfo);
 }</textarea><br />
-				Event handler for page change event
+				<label for="onChange" lang="ko_KR">페이지가 변경되면 실행되면 이벤트 핸들러</label>
+				<label for="onChange" lang="en_US">Event handler for change the page</label>
 			</td>
 		</tr>
 	</table>
@@ -82,8 +91,14 @@
 					<option value="undefined">undefined</option>
 					<option value="false">false</option>
 				</select><br>
-				undefined : Return all data of pure JSON Object array<br>
-				false : Return all data of jQuery Object type
+				<label for="data" lang="ko_KR">
+					undefined : JSON Object Array 타입의 모든 데이터를 반환합니다.<br>
+					false : jQuery Object 타입의 모든 데이터를 반환합니다.<br> 
+				</label>
+				<label for="data" lang="en_US">
+					undefined : Return all data of pure JSON Object array<br>
+					false : Return all data of jQuery Object type
+				</label>
 			</td>
 		</tr>
 	</table>

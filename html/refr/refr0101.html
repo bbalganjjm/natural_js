@@ -36,7 +36,8 @@
 				선언형 옵션은 JSON 표준양식을 정확히 지켜줘야 합니다. 예를 들면 key 값에도 큰따옴표(")로 무조건 감싸줘야 하는 등 JSON 표준양식을 지키지 않으면 선언형 옵션이 인식되지 않거나 오류가 발생합니다.
 			</p>
 			<p class="alert">
-				format이나 validate등 선언형 옵션으로 실행되는 룰 들의 인자들(arguments)는 배열(Array) 형태(type)으로 정의하고 인자 순서대로 나열합니다.
+				data-format이나 data-validate등 선언형 옵션으로 실행되는 룰 들의 인자들(arguments)은 배열(Array) 형태(type)으로 정의하고 인자 순서대로 나열합니다.<br>
+				예) data-format='[["date", 8], ["lpad", 10, "@"]]'
 			</p>
 		</li>
 		<li>

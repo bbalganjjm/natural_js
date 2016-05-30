@@ -2,7 +2,7 @@
 	<h2>Form(N.form)</h2>
 
 	<h3>개요</h3>
-	<p>Form(이하 N.form)은 폼 입력, 조회 양식을 구성하는 폼 블록(Block)요소(DIV, TABLE, SPAN 등)에 데이터를 바인드(bind)하여 폼을 간단하게 구현 해 주는 컴포넌트입니다.</p>
+	<p>Form(이하 N.form)은 폼 입력, 조회 양식을 구성하는 폼 블록(Block)요소(DIV, TABLE, SPAN 등)에 데이터를 바인드(bind)하여 폼을 구현 해 주는 컴포넌트입니다.</p>
 
 	<h3>API DEMO</h3>
 	<div data-page="form" class="apidemo"></div>
@@ -140,14 +140,14 @@
 			<td>Array</td>
 			<td>null</td>
 			<td></td>
-			<td>포맷룰을 지정 합니다. Natural-DATA - 포멧 룰 참고</td>
+			<td>포맷룰을 지정 합니다. API/DEMO > Natural-DATA 메뉴의 Formatter 와 Format Rules 참고</td>
 		</tr>
 		<tr>
 			<td>vRules</td>
 			<td>Array</td>
 			<td>null</td>
 			<td></td>
-			<td>검증룰을 지정 합니다. Natural-DATA - 검증 룰 참고</td>
+			<td>검증룰을 지정 합니다. API/DEMO > Natural-DATA 메뉴의 Validator 와 Validation Rules 참고</td>
 		</tr>
 	</table>
 
@@ -164,13 +164,13 @@
 			<td>data-format</td>
 			<td>Array[Array]</td>
 			<td>undefined</td>
-			<td>포맷룰을 지정 합니다. Natural-DATA > Formatter 와 Format Rules 참고</td>
+			<td>포맷룰을 지정 합니다. API/DEMO > Natural-DATA 메뉴의 Formatter 와 Format Rules 참고</td>
 		</tr>
 		<tr>
 			<td>data-validate</td>
 			<td>Array[Array]</td>
 			<td>undefined</td>
-			<td>검증룰을 지정 합니다. Natural-DATA > Validator 와 Validation Rules 참고</td>
+			<td>검증룰을 지정 합니다. API/DEMO > Natural-DATA 메뉴의 Validator 와 Validation Rules 참고</td>
 		</tr>
 	</table>
 
@@ -315,9 +315,9 @@
 			<td align="center">-</td>
 			<td>Value object or N.form</td>
 			<td colspan="2">
-				<p>선택한 값을 가져오거나 입력 합니다.</p>
-				<p>val 인자를 입력하지 않으면 선택한 값을 반환하고 입력하면 선택한 컬럼의 값을 입력한 값으로 바꿔준다.</p>
-				<p> 값 입력 시 key 에 해당하는 HTML 요소가 없으면 데이터만 생성한다.</p>
+				<p>선택한 컬럼의 원래 값을 가져오거나 입력(수정) 합니다.</p>
+				<p class="alert">val 인자를 입력하지 않으면 선택한 값을 반환하고 입력하면 선택한 키 컬럼의 값을 입력한 값으로 바꿔 줍니다.</p>
+				<p class="alert">값 입력 시 입력한 키 에 해당하는 데이터 없으면 새로운 컬럼 데이터를 생성 합니다.</p>
 			</td>
 		</tr>
 		<tr>

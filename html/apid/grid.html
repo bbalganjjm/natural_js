@@ -10,102 +10,120 @@
 		<tr>
 			<th width="10%" align="right"><label for="context">context</label></th>
 			<td width="40%">
-				<input id="context" type="text" value="#grid" readonly="readonly" /> 
+				<input id="context" type="text" style="line-height: 15px;" value="#grid" readonly="readonly" /> 
 				<label for="context" lang="ko_KR">jQuery selector 입력</label>
 				<label for="context" lang="en_US">Input jQuery selector</label>
 			</td>
 			<th width="10%" align="right"><label for="height">height</label></th>
 			<td width="40%" style="background-color: #efffff;">
-				<input id="height" type="text" value="395" />
+				<input id="height" type="text" value="395" style="width: 50px;" /><br>
+				<label for="height" lang="ko_KR">N.gird의 바디 영역 높이 값(0 이면 헤더를 고정하지 않습니다, 기본값은 0)</label>
+				<label for="height" lang="en_US">The height value of N.gird's body area(If this vlaue is 0, does not fix the header, Default value is 0)</label> 
 			</td>
 		</tr>
 		<tr>
 			<th><label for="validate">validate</label></th>
 			<td>
 				<input id="validate" type="checkbox" checked="checked" />
-				If this checkbox with uncheck(false), disable realtime validation check
+				<label for="validate" lang="ko_KR">체크를 해제(false)하면 실시간(focus out) Validation Check 기능을 Off 합니다.</label>
+				<label for="validate" lang="en_US">If this checkbox with uncheck(false), off the realtime(focus out) validation check feature</label>
 			</td>
 			<th><label for="html">html</label></th>
 			<td>
 				<input id="html" type="checkbox" />
-				If this checkbox with check(true), do not recognize HTML tags
+				<label for="html" lang="ko_KR">체크(true)하면 데이터의 HTML 태그를 인식 합니다.</label>
+				<label for="html" lang="en_US">If this checkbox with check(true), recognize the HTML tags in data</label>
 			</td>
 		</tr>
 		<tr>
 			<th><label for="addTop">addTop</label></th>
 			<td>
 				<input id="addTop" type="checkbox" /> 
-				If this checkbox with check(true), create new row on the top by add method<br /> 
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">* If height is greater than 0, addTop option is always set with "true"</font>
+				<label for="addTop" lang="ko_KR">체크(true)하면 add 메서드 호출 시 새로운 행을 위쪽에 생성합니다.
+				<p class="alert">height 옵션 값이 0보다 크면 항상 "true"로 지정 됩니다.</p></label>
+				<label for="addTop" lang="en_US">If this checkbox with check(true), create the new row on the top when call the add method<br /> 
+				<p class="alert">If the height option value is greater than 0, addTop option is set always "true"</p></label>
 			</td>
 			<th><label for="resizable">resizable</label></th>
 			<td>
 				<input id="resizable" type="checkbox" /> 
-				If this checkbox with check(true), can resize column of grid
+				<label for="resizable" lang="ko_KR">체크(true)하면 컬럼 리사이즈 기능을 활성화 합니다.</label>
+				<label for="resizable" lang="en_US">If this checkbox with check(true), on the column resize feature</label>
 			</td>
 		</tr>
 		<tr>
 			<th><label for="vResizable">vResizable</label></th>
 			<td style="background-color: #efffff;">
 				<input id="vResizable" type="checkbox" /> 
-				If this checkbox with check(true), can resize height of grid body
+				<label for="vResizable" lang="ko_KR">체크(true)하면 그리드의 높이를 조절할 수 있는 기능을 활성화 합니다.</label>
+				<label for="vResizable" lang="en_US">If this checkbox with check(true), on the vertical resize feature for N.grid's body height</label>
 			</td>
 			<th><label for="sortable">sortable</label></th>
 			<td>
 				<input id="sortable" type="checkbox" /> 
-				If this checkbox with check(true), enable column sort
+				<label for="sortable" lang="ko_KR">체크(true)하면 컬럼 데이터 정렬 기능을 활성화 합니다.</label>
+				<label for="sortable" lang="en_US">If this checkbox with check(true), on the column data sort</label>
 			</td>
 		</tr>
 		<tr>
 			<th><label for="select">select</label></th>
 			<td>
 				<input id="select" type="checkbox" /> 
-				If this checkbox with check(true), can select only 1 row in grid body
+				<label for="select" lang="ko_KR">체크(true)하면 행 선택 기능을 활성화 합니다(1개 행 만 선택 가능).</label>
+				<label for="select" lang="en_US">If this checkbox with check(true), on select the row feature(can select the only one row)</label>
 			</td>
 			<th><label for="multiselect">multiselect</label></th>
 			<td>
 				<input id="multiselect" type="checkbox" /> 
-				If this checkbox with check(true), can select multy row in grid body
+				<label for="multiselect" lang="ko_KR">체크(true)하면 행 선택 기능을 활성화 합니다(여러 행 선택 가능).</label>
+				<label for="multiselect" lang="en_US">If this checkbox with check(true), on select the row feature(can select the multi row)</label>
 			</td>
 		</tr>
 		<tr>
 			<th><label for="checkAll">checkAll</label></th>
 			<td>
 				<input id="checkAll" type="text" value="#checkAll" /> 
-				Checkbox element for Check to all checkbox elements in first column
+				<label for="checkAll" lang="ko_KR">바디영역의 체크박스들을 모두 선택할 헤더영역의 체크 박스</label>
+				<label for="checkAll" lang="en_US">Checkbox element in N.grid's header to check all checkboxes in body area</label>
 			</td>
 			<th><label for="checkAllTarget">checkAllTarget</label></th>
 			<td>
 				<input id="checkAllTarget" type="text" value=".checkAllTarget" /> 
-				Checkbox elements in first column
+				<label for="checkAllTarget" lang="ko_KR">모두 체크될 바디영역의 체크박스들</label>
+				<label for="checkAllTarget" lang="en_US">To be checked all checkboxes in body area</label>
 			</td>
 		</tr>
 		<tr>
 			<th><label for="hover">hover</label></th>
 			<td>
 				<input id="hover" type="checkbox" /> 
-				If this checkbox with check(true), display hover effect
+				<label for="hover" lang="ko_KR">체크(true)하면 hover 효과를 보여줍니다.</label>
+				<label for="hover" lang="en_US">If this checkbox with check(true), display hover effect</label>
 			</td>
 			<th><label for="createRowDelay">createRow<br>Delay</label></th>
 			<td>
 				<input id="createRowDelay" type="text" value="1" /> 
-				delay whenever created row element
+				<label for="createRowDelay" lang="ko_KR">[행 생성 효과(effect)]각 행 요소가 만들어질 때의 지연 시간</label>
+				<label for="createRowDelay" lang="en_US">[Create row effect]Delay time(ms) for each create row element</label>
 			</td>
 		</tr>
 		<tr>
 			<th><label for="scrollPagingSize">scrollPaging<br>.size</label></th>
 			<td>
 				<input id="scrollPagingSize" type="text" value="100" /> 
-				scroll paging size
+				<label for="scrollPagingSize" lang="ko_KR">스크롤 페이징 사이즈</label>
+				<label for="scrollPagingSize" lang="en_US">Scroll paging size</label>
 			</td>
 			<th><label for="rowHandler">rowHandler</label></th>
 			<td>
-				<textarea id="rowHandler" style="height: 82px;">function(index, row, data) {
+				<textarea id="rowHandler" style="height: 67px;">function(index, row, data) {
 	N.log(index);
 	N.log(row);
 	N.log(data);
-}</textarea><br /> 
-				Event handler for tab active event</td>
+}</textarea><br />
+				<label for="rowHandler" lang="ko_KR">행 요소(TBODY)가 만들어 질때마다 호출되는 이벤트 핸들러</label>
+				<label for="rowHandler" lang="en_US">Event handler for be created the each row element(TBODY)</label> 
+			</td>
 		</tr>
 		<tr>
 			<th><label for="onSelect">onSelect</label></th>
@@ -116,27 +134,31 @@
 	N.log(data);
 	N.log(beforeRow);
 }</textarea><br /> 
-				Event handler for tab active event
+				<label for="onSelect" lang="ko_KR">행을 선택 할 때 실행되는 이벤트 핸들러</label>
+				<label for="onSelect" lang="en_US">Event handler for select the row</label>
 			</td>
 			<th><label for="onBind">onBind</label></th>
 			<td>
 				<textarea id="onBind" style="height: 64px;">function(context, data) {
 	N.log(context);
 	N.log(data);
-}</textarea><br /> 
-				Event handler for tab active event
+}</textarea><br />
+				<label for="onBind" lang="ko_KR">데이터가 바인드가 완료 된 후 실행되는 이벤트 핸들러</label>
+				<label for="onBind" lang="en_US">Event handler for complete the data bind</label> 
 			</td>
 		</tr>
 		<tr>
 			<th><label for="windowScrollLock">windowScroll Lock</label></th>
 			<td>
 				<input id="windowScrollLock" type="checkbox" checked="checked" /> 
-				If this checkbox with uncheck(false), don't block window scroll when mouse scrolling in grid
+				<label for="windowScrollLock" lang="ko_KR">체크를 해제(false)하면 N.grid의 바디영역을 스크롤 할 때 윈도우 스크롤을 차단하지 않습니다.</label>
+				<label for="windowScrollLock" lang="en_US">If this checkbox with uncheck(false), do not block window scroll when scroll the grid's body area</label>
 			</td>
 			<th><label for="revert">revert</label></th>
 			<td>
 				<input id="revert" type="checkbox" checked="checked" /> 
-				If this checkbox with check(true), activate the revert function(default value is false)
+				<label for="revert" lang="ko_KR">체크를 해제(false)하면 revert 기능을 Off 합니다(기본값은 false).</label>
+				<label for="revert" lang="en_US">If this checkbox with check(true), off the revert feature(default value is false)</label>
 			</td>
 		</tr>
 	</table>
@@ -149,21 +171,24 @@
 			<th width="10%"><label for="row">arguments[0]</label></th>
 			<td width="80%" colspan="3">
 				<input id="row" type="text" value="0" /> 
-				Target row
+				<label for="row" lang="ko_KR">대상 행 인덱스</label>
+				<label for="row" lang="en_US">Target row index</label>
 			</td>
 		</tr>
 		<tr>
 			<th width="10%"><label for="key">arguments[1]</label></th>
 			<td width="80%" colspan="3">
 				<input id="key" type="text" value="company" /> 
-				Target key name
+				<label for="key" lang="ko_KR">대상 키(컬럼) 명</label>
+				<label for="key" lang="en_US">Target key(column) name</label>
 			</td>
 		</tr>
 		<tr>
 			<th width="10%"><label for="val">arguments[2]</label></th>
 			<td width="80%" colspan="3">
 				<input id="val" type="text" value="NATURAL COMPANY" /> 
-				If empty value set, get value of key, otherwise set with this value
+				<label for="val" lang="ko_KR">대상 키에 해당하는 값</label>
+				<label for="val" lang="en_US">The value of target key</label> 
 			</td>
 		</tr>
 		<tr>
@@ -178,8 +203,26 @@
 					<option value="checked">checked</option>
 					<option value="">undefined(pure object array)</option>
 					<option value="false">false(jQuery Object)</option>
-				</select> 
-				row status
+				</select><br>
+				<label for="data" lang="ko_KR">
+					modified : 수정된 데이터를 반환 합니다.<br>
+					insert : 입력된 데이터를 반환 합니다.<br>
+					update : 수정된 데이터를 반환 합니다.<br>
+					delete : 삭제된 데이터를 반환 합니다.<br>
+					checked : 체크된 데이터를 반환 합니다.<br>
+					false : jQuery Object 타입의 모든 데이터를 반환합니다.<br> 
+					undefined : JSON Object Array 타입의 모든 데이터를 반환합니다.<br>
+				</label>
+				<label for="data" lang="en_US">
+					modified : Return the modified all row datas.<br>
+					insert : Return the inserted row datas.<br>
+					update : Return the updated row datas.<br>
+					delete : Return the deleted row datas.<br>
+					checked : Return the checked row datas.<br>
+					true : Return selected row data.<br>
+					false : Return all data of jQuery Object type.<br> 
+					undefined : Return all data of pure JSON Object array.
+				</label>
 			</td>
 		</tr>
 		<tr>
@@ -187,7 +230,8 @@
 			<th width="10%"><label for="rvtRow">arguments[0]</label></th>
 			<td width="80%" colspan="3">
 				<input id="rvtRow" type="text" value="0" /> 
-				Row index to revert, if set empty value, revert all row data
+				<label for="rvtRow" lang="ko_KR">복원 할 행 인덱스, 빈값 입력 시 모든 행 데이터 복원</label>
+				<label for="rvtRow" lang="en_US">The row index to revert, if set empty value, revert the all row data</label> 
 			</td>
 		</tr>
 		<tr>
@@ -195,7 +239,8 @@
 			<th width="10%"><label for="rmvRow">arguments[0]</label></th>
 			<td width="80%" colspan="3">
 				<input id="rmvRow" type="text" value="0" /> 
-				Row index of to remove
+				<label for="rmvRow" lang="ko_KR">삭제 할 행 인덱스</label>
+				<label for="rmvRow" lang="en_US">The row index to remove</label>
 			</td>
 		</tr>
 		<tr>
@@ -203,7 +248,8 @@
 			<th width="10%"><label for="vldRow">arguments[0]</label></th>
 			<td width="80%" colspan="3">
 				<input id="vldRow" type="text" /> 
-				Row index of to validate, if set empty value, validate all row data
+				<label for="vldRow" lang="ko_KR">검사 할 행 인덱스, 빈값 입력 시 모든 행 데이터 검사</label>
+				<label for="vldRow" lang="en_US">The row index to validate, if set empty value, validate the all row data</label>
 			</td>
 		</tr>
 	</table>
