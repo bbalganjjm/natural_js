@@ -202,7 +202,13 @@
 			</td>
 		</tr>
 	</table>
-	<p>※ 위 기본옵션 외에 N.comm은 jQuery $.ajax 모듈을 사용하여 $.ajax에서 제공하는 옵션중 이벤트콜백 관련 부분(beforeSend, success, error, complete)을 제외한 모든 옵션을 그대로 제공합니다.</p>
+	<fieldset>
+		<legend>주석</legend>
+		<ul class="footnotes">
+			<li>9) JSON Object 가 담겨있는 Array 객체</li>
+		</ul>
+	</fieldset>
+	<p>※ 위 기본옵션 외에 N.comm은 jQuery $.ajax 모듈을 사용하여 $.ajax에서 제공하는 옵션중 이벤트 관련 부분(beforeSend, success, error, complete)을 제외한 모든 옵션을 그대로 제공합니다.</p>
 
 	<h4>4) 함수(Methods)</h4>
 	<table>
@@ -269,13 +275,38 @@
 			<td>key를 지정하지 않으면 전체 요청정보를 가져오고 key 값을 지정하면 해당 정보만 가져옵니다. key 값은 기본옵션과 같고 referrer(호출한 페이지 URL) 값만 추가 됩니다.</td>
 		</tr>
 	</table>
+	
+	<h3 lang="ko_KR">예제</h3>
+	<h3 lang="en_US">Examples</h3>
 
-	<fieldset>
-		<legend>주석</legend>
-		<ul class="footnotes">
-			<li>9) JSON Object 가 담겨있는 Array 객체</li>
-		</ul>
-	</fieldset>
+	<p>1. 서버에서 데이터 조회</p>
+	<pre class="line-numbers"><code class="language-markup"><xmp>
+<script type="text/javascript">
+   	N.comm("retrieve.json").submit(function(data) {
+   		N.log(data); // 서버에서 조회된 데이터가 console 에 표시 됨.
+   	});
+</script></xmp></code></pre>
+
+	<p>2. 서버에 파라미터 전달 및 결과 데이터 조회</p>
+	<pre class="line-numbers"><code class="language-markup"><xmp>
+<script type="text/javascript">
+   	// N 함수의 인자가 파라미터로 전달 됨.
+   	N({ "param1": 1, "param2": "Mark" }).comm("retrieve.json").submit(function(data) {
+   		N.log(data); // 서버에서 조회된 데이터가 console 에 표시 됨.
+   	});
+</script></xmp></code></pre>
+
+	<p>3. 지정한 영역에 다른 페이지 불러오기</p>
+	<pre class="line-numbers"><code class="language-markup"><xmp>
+<secction id="section"></secction>
+
+<script type="text/javascript">
+   	// #section 영역에 page.html 페이지를 넣어 주고 불러오는 페이지의 컨트롤러에 init 메서드가 있다면 페이지 로딩완료 후에 init 메서드를 실행 시켜 줌.
+   	N("#section").comm("page.html").submit(function() {
+   		// [생략가능] 페이지 주입이 완료 된 후 실행됨.
+   	});
+</script></xmp></code></pre>
+
 </article>
 
 <script type="text/javascript">

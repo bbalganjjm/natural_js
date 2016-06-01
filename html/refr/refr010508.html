@@ -1,7 +1,8 @@
 <article id="__refr010508" class="apiDoc">
 	<h2>Grid(N.grid)</h2>
 
-	<h3>개요</h3>
+	<h3 lang="ko_KR">개요</h3>
+	<h3 lang="en_US">Overview</h3>
 	<p>Grid(이하 N.grid)는 테이블(TABLE) 요소에 데이터를 바인드하여 테이블 형태로 데이터를 표현해 주는 컴포넌트입니다. 헤더고정형, 리스트형의 두 가지 타입을 제공 합니다.</p>
 	<p class="alert">그리드로 만들어질 TABLE 요소의 넓이는 고정(px등)이든 가변(%)이든 반드시 넓이가 지정 되어야 합니다.</p>
 
@@ -35,9 +36,12 @@
 		<tr>
 			<td></td>
 			<td>opts</td>
-			<td>JSON Object</td>
+			<td>JSON Object | jQuery Selector(String | jQuery Object)</td>
 			<td align="center">-</td>
-			<td>기본 옵션을 JSON Object 형태로 지정 합니다.</td>
+			<td>
+				<p>기본 옵션을 JSON Object 형태로 지정 합니다.</p>
+				<p class="alert">jQuery Selector 를 입력하면 입력한 인자가 context 옵션으로 지정 됩니다.</p>
+			</td>
 		</tr>
 		<tr>
 			<td>N(obj).grid</td>
@@ -52,7 +56,7 @@
 		<tr>
 			<td></td>
 			<td>opts</td>
-			<td>JSON Object</td>
+			<td>JSON Object | jQuery Selector(String | jQuery Object)</td>
 			<td align="center">-</td>
 			<td>N.grid의 opts 옵션과 같습니다.</td>
 		</tr>
@@ -598,48 +602,228 @@
 	<h3 lang="ko_KR">예제</h3>
 	<h3 lang="en_US">Examples</h3>
 	
-	<p>1. 예제작업중</p>
-		<pre class="line-numbers"><code class="language-markup"><xmp>
-<script type="text/javascript">
+	<p class="alert">예제 데이터</p>
+	<pre class="line-numbers"><code class="language-markup"><xmp>
+var data = [{
+    "name": "Dean Stanley",
+    "age": 26,
+    "gender": "male",
+    "email": "deanstanley@zentia.com",
+    "registered": "20140727",
+}, {
+    "name": "Howard Kramer",
+    "age": 31,
+    "gender": "female",
+    "email": "howardkramer@zentia.com",
+    "registered": "20111103",
+}, {
+    "name": "Mark David",
+    "age": 28,
+    "gender": "male",
+    "email": "markdavid@zentia.com",
+    "registered": "20120616",
+}]</xmp></code></pre>
 
-</script></xmp></code></pre>
-<!--
-
-<p class="alert">컴포넌트에 바인딩한 데이터의 컬럼명과 지정한 테이블(TABLE)요소의 TBODY영역에 ID 가 매칭되는 요소가 있으면 해당 요소에 값을 표시 합니다.</p>
-	<pre class="language-html"><code class="language-html"><xmp>
-<table id="grid" class="grid" style="width: 100%;">
-	<thead>
+	<p>1. 리스트형 그리드 생성 후 데이터 바인드</p>
+	<p class="alert">그리드을 이루는 요소는 TABLE 이든 DIV 든 상관없습니다. 지정한 context 안에 데이터의 키(컬럼)명과 같은 id 속성을 가진 요소가 있다면 해당 요소에 값을 바인드 합니다.</p>
+	<pre class="line-numbers"><code class="language-markup"><xmp>
+<table id="gridExample10">
+	<thead><!-- 컬럼 타이틀 영역 -->
 		<tr>
-			<th style="width: 5%;" rowspan="2"><input id="checkAll" type="checkbox" /></th>
-			<th style="width: 20%;">eyeColor</th>
-			<th style="width: 20%;">name</th>
-			<th style="width: auto;">company</th>
-			<th style="width: 15%;">gender</th>
-		</tr>
-		<tr>
-			<th>index</th>
+			<th>name</th>
+			<th>age</th>
 			<th>email</th>
 			<th>registered</th>
-			<th>isActive</th>
 		</tr>
 	</thead>
-	<tbody>
+	<tbody><!-- 데이터가 반복되면서 바인드 되는 부분 -->
 		<tr>
-			<td align="center" valign="middle" rowspan="2"><input class="checkAllTarget" type="checkbox" /></td>
-			<td><input id="eyeColor" type="text" /></td>
-			<td id="name"></td>
-			<td><input id="company" type="text" data-validate='[["required"]]' /></td>
-			<td id="gender" align="center"></td>
-		</tr>
-		<tr>
-			<td id="index" align="center" valign="middle"></td>
-			<td><input id="email" type="text" data-validate='[["required"], ["email"]]' /></td>
-			<td><input id="registered" type="text" data-format='[["date", 8, "date"]]' /></td>
-			<td align="center"><input id="isActive" type="checkbox" /></td>
+			<td><input id="name" type="text" /></td>
+			<td><input id="age" type="text" /></td>
+			<td><input id="email" type="text" /></td>
+			<td id="registered"></td>
 		</tr>
 	</tbody>
-</table></xmp></code></pre>
--->
+</table>
+
+<script type="text/javascript">
+	N(data).grid("#gridExample10").bind();
+</script></xmp></code></pre>
+
+	<p>1.1 헤더고정형 그리드 생성 후 데이터 바인드</p>
+	<p class="alert">rowHandler 이벤트는 그리드 렌더링 시 행이 만들어질때마다 발생하는 이벤트 입니다. 기본 제공하는 그리드의 기능을 확장하기 위해 사용됩니다.</p>
+	<pre class="line-numbers"><code class="language-markup"><xmp>
+<table id="gridExample11">
+	<thead><!-- 컬럼 타이틀 영역 -->
+		<tr>
+			<th>name</th>
+			<th>age</th>
+			<th>email</th>
+			<th>registered</th>
+		</tr>
+	</thead>
+	<tbody><!-- 데이터가 반복되면서 바인드 되는 부분 -->
+		<tr>
+			<td><input id="name" type="text" /></td>
+			<td><input id="age" type="text" /></td>
+			<td><input id="email" type="text" /></td>
+			<td id="registered"></td>
+		</tr>
+	</tbody>
+</table>
+
+<script type="text/javascript">
+	N(data).grid({
+		context : "#gridExample11",
+		height : 200 // 그리드 바디영역의 높이가 200px 로 지정 됨.
+	}).bind();
+</script></xmp></code></pre>
+
+	<p>1.2 헤더고정형 그리드에 데이터 바인드(Row Handler 적용)</p>
+	<p class="alert">rowHandler 이벤트는 그리드 렌더링 시 행이 만들어질때마다 발생하는 이벤트 입니다. 기본 제공하는 그리드의 기능을 확장하기 위해 사용됩니다.</p>
+	<pre class="line-numbers"><code class="language-markup"><xmp>
+<table id="gridExample12">
+	<thead><!-- 컬럼 타이틀 영역 -->
+		<tr>
+			<th>name</th>
+			<th>age</th>
+			<th>email</th>
+			<th>registered</th>
+		</tr>
+	</thead>
+	<tbody><!-- 데이터가 반복되면서 바인드 되는 부분 -->
+		<tr>
+			<td><input id="name" type="text" /></td>
+			<td><input id="age" type="text" /></td>
+			<td><input id="email" type="text" /></td>
+			<td id="registered"></td>
+		</tr>
+	</tbody>
+</table>
+
+<script type="text/javascript">
+	N(data).grid({
+		context : "#gridExample12",
+		height : 200,
+		rowHandler : function(index, row, data) {
+			// age 가 28 이상이면 해당 셀의 배경색을 red 로 설정
+			if(data.age >= 28) {
+				row.find("#age").css("background-color", "red");
+			}
+		}
+	}).bind();
+</script></xmp></code></pre>
+
+	<p>2. 신규 행 추가</p>
+	<pre class="line-numbers"><code class="language-markup"><xmp>
+<table id="gridExample20">
+	<thead><!-- 컬럼 타이틀 영역 -->
+		<tr>
+			<th>name</th>
+			<th>age</th>
+			<th>email</th>
+			<th>registered</th>
+		</tr>
+	</thead>
+	<tbody><!-- 데이터가 반복되면서 바인드 되는 부분 -->
+		<tr>
+			<td><input id="name" type="text" /></td>
+			<td><input id="age" type="text" data-validate='[ ["required"], ["integer"] ]' /></td> <!-- 필수입력과 숫자만 입력 체크 -->
+			<td><input id="email" type="text" data-validate='[ ["email"] ]' /></td> <!-- 이메일 주소 체크 -->
+			<td><input id="registered" type="text" data-format='[ ["date", 8, "date"] ]' /></td> <!-- 날자포멧 및 데이트피커 적용 -->
+		</tr>
+	</tbody>
+</table>
+<button id="btnGridExample20">행추가</button>
+
+<script type="text/javascript">
+	var grid = N(data).grid("#gridExample20").bind();
+	
+	// 행추가
+	N("#btnGridExample20").click(function() {
+		grid.add(); //add 메서드를 호출하면 id 속성을 가지고 있는 입력요소를 기반으로 { "age": "", "email": "", "registered" : "" } 와 같은 데이터가 추가됨.
+	});
+</script></xmp></code></pre>
+
+	<p>3. 그리드에 데이터 바인드 및 데이터 포메팅(N.formatter)&nbsp; >>&nbsp; 저장 메시지 출력(N.alert) 후 그리드 일괄 검증(N.validator)&nbsp; >>&nbsp; 저장(N.comm)</p>
+	<pre class="line-numbers"><code class="language-markup"><xmp>
+<table id="gridExample30">
+	<thead><!-- 컬럼 타이틀 영역 -->
+		<tr>
+			<th>name</th>
+			<th>age</th>
+			<th>email</th>
+			<th>registered</th>
+		</tr>
+	</thead>
+	<tbody><!-- 데이터가 반복되면서 바인드 되는 부분 -->
+		<tr>
+			<td><input id="name" type="text" /></td>
+			<td><input id="age" type="text" data-validate='[ ["required"], ["integer"] ]' /></td> <!-- 필수입력과 숫자만 입력 체크 -->
+			<td><input id="email" type="text" data-validate='[ ["email"] ]' /></td> <!-- 이메일 주소 체크 -->
+			<td><input id="registered" type="text" data-format='[ ["date", 8, "date"] ]' /></td> <!-- 날자포멧 및 데이트피커 적용 -->
+		</tr>
+	</tbody>
+</table>
+<button id="btnGridExample30">저장</button>
+
+<script type="text/javascript">
+	var grid = N(data).grid("#gridExample30").bind();
+	
+	N("#btnGridExample30").click(function() {
+		N(window).alert({ // 1. confirm 메시지 출력
+			msg : "저장 하겠습니까?",
+			confirm : true,
+			onOk : function() {
+				if(grid.validate()) { // 2. 그리드에 입력된 데이터 검증
+					N(grid.data()).comm("save.json").submit(); // 3. 그리드의 데이터를 저장
+				}				
+			}
+		});
+	});
+</script></xmp></code></pre>
+
+	<p>4. N.select 와 N.grid 연동</p>
+	<p class="alert">N.select 와 N.grid을 연동하여 사용할 때는 반드시 N.select 를 먼저 초기화 하고 N.grid 를 그 다음에 초기화 해야 합니다.</p>
+	<pre class="line-numbers"><code class="language-markup"><xmp>
+<table id="gridExample40">
+	<thead><!-- 컬럼 타이틀 영역 -->
+		<tr>
+			<th>name</th>
+			<th>age</th>
+			<th>gender</th>
+			<th>email</th>
+			<th>registered</th>
+		</tr>
+	</thead>
+	<tbody><!-- 데이터가 반복되면서 바인드 되는 부분 -->
+		<tr>
+			<td><input id="name" type="text" /></td>
+			<td><input id="age" type="text" /></td>
+			<td><input id="gender" type="radio" /></td>
+			<td><input id="email" type="text" /></td>
+			<td id="registered"></td>
+		</tr>
+	</tbody>
+</table>
+
+<script type="text/javascript">
+	// 1. gender 라디오 셀렉트 생성
+	N([{
+     	"key" : "male",
+     	"val" : "male"
+     },{
+     	"key" : "female",
+     	"val" : "female"
+    }]).select({
+    	context : "#gridExample40 #gender",
+    	key : "key",
+    	val : "val"
+    })	
+
+    // 2. 그리드 바인드
+	N(data).grid("#gridExample40").bind();
+</script></xmp></code></pre>
 
 </article>
 

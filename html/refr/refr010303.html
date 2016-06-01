@@ -35,6 +35,25 @@
 			<td>저장할 값에 해당하는 object를 지정 한다. obj 인자를 지정하지 않으면 값을 가져오고 지정하면 해당 값으로 저장합니다.</td>
 		</tr>
 	</table>
+	
+	<h3 lang="ko_KR">예제</h3>
+	<h3 lang="en_US">Examples</h3>
+
+	<p>1. Context 에 값 정의</p>
+	<pre class="line-numbers"><code class="language-markup"><xmp>
+<script type="text/javascript">
+	N.context.attr("globalInfo", {
+		userId : "jeff1942",
+		userNm : "Jeff beck"
+	});
+</script></xmp></code></pre>
+
+	<p>2. Context 에 정의된 속성값 가져오기</p>
+	<pre class="line-numbers"><code class="language-markup"><xmp>
+<script type="text/javascript">
+	var globalInfo = N.context.attr("globalInfo");
+</script></xmp></code></pre>
+
 </article>
 
 <script type="text/javascript">

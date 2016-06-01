@@ -1,7 +1,8 @@
 <article id="__refr010507" class="apiDoc">
 	<h2>Form(N.form)</h2>
 
-	<h3>개요</h3>
+	<h3 lang="ko_KR">개요</h3>
+	<h3 lang="en_US">Overview</h3>
 	<p>Form(이하 N.form)은 폼 입력, 조회 양식을 구성하는 폼 블록(Block)요소(DIV, TABLE, SPAN 등)에 데이터를 바인드(bind)하여 폼을 구현 해 주는 컴포넌트입니다.</p>
 
 	<h3>API DEMO</h3>
@@ -34,9 +35,12 @@
 		<tr>
 			<td></td>
 			<td>opts</td>
-			<td>JSON Object</td>
+			<td>JSON Object | jQuery Selector(String | jQuery Object)</td>
 			<td align="center">-</td>
-			<td>기본 옵션을 JSON Object 형태로 지정 합니다.</td>
+			<td>
+				<p>기본 옵션을 JSON Object 형태로 지정 합니다.</p>
+				<p class="alert">jQuery Selector 를 입력하면 입력한 인자가 context 옵션으로 지정 됩니다.</p>
+			</td>
 		</tr>
 		<tr>
 			<td>N(obj).form</td>
@@ -51,7 +55,7 @@
 		<tr>
 			<td></td>
 			<td>opts</td>
-			<td>JSON Object</td>
+			<td>JSON Object | jQuery Selector(String | jQuery Object)</td>
 			<td align="center">-</td>
 			<td>N.form의 opts 옵션과 같습니다.</td>
 		</tr>
@@ -339,113 +343,154 @@
 	<h3 lang="ko_KR">예제</h3>
 	<h3 lang="en_US">Examples</h3>
 	
-	<p>1. 예제작업중</p>
-		<pre class="line-numbers"><code class="language-markup"><xmp>
-<script type="text/javascript">
+	<p class="alert">예제 데이터</p>
+	<pre class="line-numbers"><code class="language-markup"><xmp>
+var data = [{
+    "name": "Dean Stanley",
+    "age": 26,
+    "gender": "male",
+    "email": "deanstanley@zentia.com",
+    "registered": "20140727",
+}]</xmp></code></pre>
 
-</script></xmp></code></pre>
-<!--
-
-<p class="alert">폼의 블록이 DIV이든 TABLE이든 상관없이 컴포넌트에 바인딩한 데이터의 컬럼명과 지정한 영역(context)안의 요소들 중 ID 가 매칭되는 요소가 있으면 해당 요소에 값을 표시 합니다.</p>
-	<pre class="language-html"><code class="language-html"><xmp>
-<table id="form" class="form">
-	<tr height="43">
-		<th style="width: 20%;" align="right"><label for="picture">picture</label></th>
-		<td width="*"><img id="picture" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D" /></td>
-	</tr>
+	<p>1. 폼에 데이터 바인드</p>
+	<p class="alert">폼을 이루는 요소는 TABLE 이든 DIV 든 상관없습니다. 지정한 context 안에 데이터의 키(컬럼)명과 같은 id 속성을 가진 요소가 있다면 해당 요소에 값을 바인드 합니다.</p>
+	<p class="alert">옵션을 오브젝트형이 아닌 String 형으로 context 만 지정하면 JSON Array 의 0 번째 행 데이터를 자동으로 바인드 합니다.<br></p>
+	<pre class="line-numbers"><code class="language-markup"><xmp>
+<table id="formExample10">
 	<tr>
 		<th><label for="name">name</label></th>
-		<td>
-			<input id="name" type="text" data-validate='[["required"]]' />
-		</td>
-	</tr>
-	<tr>
-		<th><label for="email">email</label></th>
-		<td>
-			<input id="email" type="text" data-format='[["generic", "@@@@@@＊＊＊"]]' data-validate='[["required"], ["email"]]' />
-		</td>
-	</tr>
-	<tr>
-		<th><label for="_id">password</label></th>
-		<td>
-			<input id="_id" type="password" data-validate='[["required"]]' />
-		</td>
-	</tr>
-	<tr>
-		<th><label for="balance">balance</label></th>
-		<td>
-			<input id="balance" type="text" data-format='[["numeric", "$#,###.##0"]]' data-validate='[["required"], ["decimal"]]' />
-		</td>
-	</tr>
-	<tr>
-		<th><label for="phone">phone</label></th>
-		<td>
-			<input id="phone" type="text" readonly="readonly" />
-		</td>
+		<td><input id="name" type="text" /></td>
 	</tr>
 	<tr>
 		<th><label for="age">age</label></th>
-		<td>
-			<input id="age" type="text" disabled="disabled" />
-			<input id="index" type="hidden" />
-		</td>
+		<td><input id="age" type="text" /></td>
 	</tr>
 	<tr>
-		<th><label for="eyeColor">eye color</label></th>
-		<td>
-			<select id="eyeColor" data-validate='[["required"]]'>
-				<option>선택</option>
-			</select>
-		</td>
+		<th><label for="email">email</label></th>
+		<td><input id="email" type="text" /></td>
 	</tr>
 	<tr>
-		<th><label for="company">company</label></th>
-		<td>
-			<select id="company" multiple="multiple" data-validate='[["required"]]' style="height: 117px;"></select>
-		</td>
+		<th>registered</th>
+		<td id="registered"></td>
+	</tr>
+</table>
+
+<script type="text/javascript">
+	N(data).form("#formExample10").bind();
+	
+	/* 위 구문은 다음과 같습니다.
+		N(data).form({
+			context: "#formExample10",
+			row: 0
+		}).bind();
+	*/
+</script></xmp></code></pre>
+
+	<p>2. 폼에 데이터 바인드 및 데이터 포메팅(N.formatter)&nbsp; >>>&nbsp; 저장 메시지 출력(N.alert) 후 폼 일괄 검증(N.validator)&nbsp; >>>&nbsp; 저장(N.comm)</p>
+	<pre class="line-numbers"><code class="language-markup"><xmp>
+<table id="formExample20">
+	<tr>
+		<th><label for="name">name</label></th>
+		<td><input id="name" type="text" /></td>
 	</tr>
 	<tr>
-		<th><label for="gender">gender</label></th>
-		<td>
-			<input id="gender" type="radio" />
-		</td>
+		<th><label for="age">age</label></th>
+		<td><input id="age" type="text" data-validate='[ ["required"], ["integer"] ]' /></td> <!-- 필수입력과 숫자만 입력 체크 -->
 	</tr>
 	<tr>
-		<th><label for="favoriteFruit">favorite fruit</label></th>
-		<td>
-			<input id="favoriteFruit" type="checkbox" />
-		</td>
+		<th><label for="email">email</label></th>
+		<td><input id="email" type="text" data-validate='[ ["email"] ]' /></td> <!-- 이메일 주소 체크 -->
 	</tr>
 	<tr>
 		<th><label for="registered">registered</label></th>
-		<td>
-			<input id="registered" type="text" data-format='[["date", 8, "date"]]' data-validate='[["required"]]' />
-		</td>
+		<td><input id="registered" type="text" data-format='[ ["date", 8, "date"] ]' /></td> <!-- 날자포멧 및 데이트피커 적용 -->
+	</tr>
+</table>
+<button id="btnFormExample02">저장</button>
+
+<script type="text/javascript">
+	var form = N(data).form("#formExample20").bind();
+	
+	N("#btnFormExample02").click(function() {
+		N(window).alert({ // 1. confirm 메시지 출력
+			msg : "저장 하겠습니까?",
+			confirm : true,
+			onOk : function() {
+				if(form.validate()) { // 2. 폼에 입력된 데이터 검증
+					N(form.data()).comm("save.json").submit(); // 3. 폼의 데이터를 저장
+				}				
+			}
+		});
+	});
+</script></xmp></code></pre>
+
+	<p>3. 조회 블록(Block)에 N.form 을 적용 검색을 간단하게 처리(신규입력 및 신규입력 데이터 생성)</p>
+	<pre class="line-numbers"><code class="language-markup"><xmp>
+<table id="formExample30">
+	<tr>
+		<th><label for="name">name</label></th>
+		<td><input id="name" type="text" data-validate='[ ["required"] ]' /></td> <!-- 필수 조회조건 체크 -->
+		<th><label for="age">age</label></th>
+		<td><input id="age" type="text" /></td>
+	</tr>
+</table>
+<button id="btnFormExample30">조회</button>
+
+<script type="text/javascript">
+	//add 메서드를 호출하면 id 속성을 가지고 있는 입력요소를 기반으로 { "name": "", "age": "" } 와 같은 데이터가 생성됨.
+	var form = N(data).form("#formExample30").add();
+	
+	N("#btnFormExample30").click(function() {
+		if(form.validate()) { // 1. 조회 블록에 입력된 데이터 검증
+			N(form.data()).comm("retrieve.json").submit(); // 2. 폼의 데이터를 조건으로 하여 조회
+		}				
+	});
+</script></xmp></code></pre>
+
+	<p>4. N.select 와 N.form 연동</p>
+	<p class="alert">N.select 와 N.form을 연동하여 사용할 때는 반드시 N.select 를 먼저 초기화 하고 N.form 을 그다음에 초기화 해야 합니다.</p>
+	<pre class="line-numbers"><code class="language-markup"><xmp>
+<table id="formExample40">
+	<tr>
+		<th><label for="name">name</label></th>
+		<td><input id="name" type="text" /></td>
 	</tr>
 	<tr>
-		<th><label for="registered2">registered m</label></th>
-		<td>
-			<input id="registered2" type="text" data-format='[["date", 6, "month"]]' data-validate='[["required"]]' />
-		</td>
+		<th><label for="age">age</label></th>
+		<td><input id="age" type="text" /></td>
 	</tr>
 	<tr>
-		<th><label for="about">about</label></th>
-		<td>
-			<textarea id="about" data-format='[["limit", "50", "..."]]' data-validate='[["required"], ["korean"]]'></textarea>
-		</td>
+		<th><label for="gender">gender</label></th>
+		<td><input id="gender" type="radio" /></td>
 	</tr>
 	<tr>
-		<th><label for="greeting">about</label></th>
-		<td id="greeting"></td>
+		<th><label for="email">email</label></th>
+		<td><input id="email" type="text" /></td>
 	</tr>
 	<tr>
-		<th><label for="isActive">isActive</label></th>
-		<td>
-			<input id="isActive" type="checkbox" />
-		</td>
+		<th>registered</th>
+		<td id="registered"></td>
 	</tr>
-</table></xmp></code></pre>
--->
+</table>
+
+<script type="text/javascript">
+	// 1. gender 라디오 셀렉트 생성
+	N([{
+     	"key" : "male",
+     	"val" : "male"
+     },{
+     	"key" : "female",
+     	"val" : "female"
+    }]).select({
+    	context : "#formExample40 #gender",
+    	key : "key",
+    	val : "val"
+    })	
+	
+    // 2. 폼 바인드
+	N(data).form("#formExample40").bind();
+</script></xmp></code></pre>
 
 </article>
 

@@ -6,13 +6,15 @@
 			<a id="btnGetJson" href="#" data-opts='{ "color": "skyblue", "size": "large" }'>Submit</a>
 		</div>
 
-		<p class="smallContTit">Result : </p>
+		<p lang="ko_KR" class="smallContTit">결과 : </p>
+		<p lang="en_US" class="smallContTit">Result : </p>
 		<pre style="height: 100px;overflow: auto;" class="result"><code id="jsonResult"></code></pre>
 
 		<br />
 		<h4>2) Get html page from server</h4>
 
-		<p class="smallContTit">Default options : </p>
+		<p lang="ko_KR" class="smallContTit">기본 옵션 : </p>
+		<p lang="en_US" class="smallContTit">Default options : </p>
 		<table class="form">
 			<tr>
 				<th width="10%" align="right">context</th>
@@ -32,7 +34,7 @@
 				<th>effect<br />[effect, duration, callback]</th>
 				<td>[ <input id="effect" type="text" value="fadeIn" style="width: 50px;" />,
 					<input id="duration" type="text" value="300" style="width: 50px;" />,
-					<textarea id="callback" style="width: 170px;">function() {
+					<textarea id="callback" style="width: 150px; height: 45px;">function() {
 	N.log("Effect end");
 }</textarea> ]<br>
 					 * effects : show, hide, slideUp, slideDown, fadeIn, fadeOut
@@ -40,19 +42,20 @@
 			</tr>
 		</table>
 
-		<p class="smallContTit">Method options : </p>
+		<p lang="ko_KR" class="smallContTit">함수 옵션 : </p>
+		<p lang="en_US" class="smallContTit">Method options : </p>
 		<table class="form">
 			<tr>
 				<th width="10%">submit</th>
 				<th width="10%">arguments[0]</th>
-				<td width="80%" colspan="3"><textarea id="jsonCallback">function(data) {
+				<td width="80%" colspan="3"><textarea id="jsonCallback" style="height: 45px;">function(data) {
 	N("#jsonResult", view).text(JSON.stringify(data));
 }</textarea><br /> Success callback function</td>
 			</tr>
 			<tr>
 				<th width="10%">request</th>
 				<th width="10%">arguments[0]</th>
-				<td width="80%" colspan="3"><textarea id="request">Hello datepicker~!</textarea><br /> Request attribute</td>
+				<td width="80%" colspan="3"><textarea id="request" style="height: 15px;">Hello datepicker~!</textarea><br /> Request attribute</td>
 			</tr>
 		</table>
 
@@ -60,7 +63,8 @@
 			<a id="btnGetPage" href="#" data-opts='{ "color": "skyblue", "size": "large" }'>Submit</a>
 		</div>
 
-		<p class="smallContTit">Result : </p>
+		<p lang="ko_KR" class="smallContTit">결과 : </p>
+		<p lang="en_US" class="smallContTit">Result : </p>
 		<div class="result" style="min-height: 400px;"></div>
 	</div>
 </article>

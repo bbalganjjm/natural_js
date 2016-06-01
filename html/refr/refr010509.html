@@ -1,7 +1,8 @@
 <article id="__refr010509" class="apiDoc">
 	<h2>Pagination(N.pagination)</h2>
 
-	<h3>개요</h3>
+	<h3 lang="ko_KR">개요</h3>
+	<h3 lang="en_US">Overview</h3>
 	<p>
 	Pagination(이하 N.pagination)은 데이터 표현에 대한 브라우저의 부하를 줄이기 위해 데이터를 지정한 갯수만큼 잘라서 보여주는 컴포넌트입니다.
 	N.grid 와 연동하여 사용하면 서버단 페이징(DB 쿼리 페이징) 및 브라우저 단 페이징(전체 조회 후 잘라서 보여주기) 을 쉽게 구현 할 수 있습니다.
@@ -38,9 +39,12 @@
 		<tr>
 			<td></td>
 			<td>opts</td>
-			<td>JSON Object</td>
+			<td>JSON Object | jQuery Selector(String | jQuery Object)</td>
 			<td align="center">-</td>
-			<td>기본 옵션을 JSON Object 형태로 지정 합니다.</td>
+			<td>
+				<p>기본 옵션을 JSON Object 형태로 지정 합니다.</p>
+				<p class="alert">jQuery Selector 를 입력하면 입력한 인자가 context 옵션으로 지정 됩니다.</p>
+			</td>
 		</tr>
 		<tr>
 			<td>N(obj).pagination</td>
@@ -55,7 +59,7 @@
 		<tr>
 			<td></td>
 			<td>opts</td>
-			<td>JSON Object</td>
+			<td>JSON Object | jQuery Selector(String | jQuery Object)</td>
 			<td align="center">-</td>
 			<td>N.pagination의 opts 옵션과 같습니다.</td>
 		</tr>
@@ -137,10 +141,12 @@
 	// selData 는 선택한 페이지가 가지고 있는 데이터 리스트
 	// currPageNavInfo 는 이벤트가 발생할 시점의 페이징 정보
 }</code></pre>
-				<p class="alert">서버에서 DB 쿼리로 페이징 시 currPageNavInfo 정보로 선택될 DB 로우의 시작값과 얼마만큼 가져올건지의 정보를 서버에 파라미터로 던져 해당 행수 만큼만 가져와 N.grid 에 bind하는 형태로 서버단 페이징을 처리 할 수 있습니다.</p>
+				<p class="alert">서버에서 DB 쿼리로 페이징 시  먼저 조회하고자 하는 전체 행수를 가져오고 onChange 이벤트 핸들러의 인자로 들어오는 currPageNavInfo 정보로 선택될 DB 로우의 시작값(currPageNavInfo.startRowNum)과 얼마만큼 가져올건지의 정보(currPageNavInfo.countPerPage) 등을 서버에 파라미터로 던져 해당 행수 만큼만 가져와 N.grid 에 bind하는 형태로 서버단 페이징을 처리 할 수 있습니다.</p>
 				<p class="alert">
 					currPageNavInfo 정보<br>
 					&nbsp;&nbsp;-&nbsp;pageNo : 선택한 페이지 번호<br>
+					&nbsp;&nbsp;-&nbsp;countPerPage : 페이지당 행 수<br>
+					&nbsp;&nbsp;-&nbsp;countPerPageSet : 페이지 세트당 페이지 수<br>
 					&nbsp;&nbsp;-&nbsp;currSelPageSet : 현재 페이지세트(페이지 그룹) 번호<br>
 					&nbsp;&nbsp;-&nbsp;pageCount : 전체 페이지 개수<br>
 					&nbsp;&nbsp;-&nbsp;pageSetCount : 전체 페이지세트(페이지 그룹) 개수<br>
@@ -300,17 +306,11 @@
 	<h3 lang="ko_KR">예제</h3>
 	<h3 lang="en_US">Examples</h3>
 	
-	<p>1. 예제작업중</p>
-		<pre class="line-numbers"><code class="language-markup"><xmp>
-<script type="text/javascript">
-
-</script></xmp></code></pre>
-
-<!--
-	<p class="alert">다음과 같은 구조의 요소들을 배치하면 Pagination이 만들어 집니다.</p>
-	<pre class="language-html"><code class="language-html"><xmp><div id="pagination">
+	<p>1. Pagination 생성</p>
+	<pre class="line-numbers"><code class="language-markup"><xmp>
+<div id="paginationExample10">
 	<ul>
-		<li><a href="#" title="첫페이지">first</a></li> <-- 생략가능(표기하지 않으면 첫페이지로 가기 버튼이 보이지 않습니다)
+		<li><a href="#" title="첫페이지">first</a></li> <!-- first 버튼 생략가능(표기하지 않으면 첫페이지로 가기 버튼이 보이지 않습니다) -->
 		<li><a href="#" title="이전">prev</a></li>
 	</ul>
 	<ul>
@@ -318,10 +318,151 @@
 	</ul>
 	<ul>
 		<li><a href="#" title="다음페이지">next</a></li>
-		<li><a href="#" title="마지막페이지">last</a></li> <-- 생략가능(표기하지 않으면 마지막페이지로 가기 버튼이 보이지 않습니다)
+		<li><a href="#" title="마지막페이지">last</a></li> <!-- last 버튼 생략가능(표기하지 않으면 마지막페이지로 가기 버튼이 보이지 않습니다) -->
 	</ul>
-</div></xmp></code></pre>
--->
+</div>
+
+<script type="text/javascript">
+	N.comm("retrieve.json").submit(function(data){ // 데이터 조회
+		N(data).pagination({
+			context: "#paginationExample10",
+			onChange: function(pageNo, selEle, selData, currPageNavInfo) { // 페이지 전환 시 발생되는 이벤트
+				N.log(selData); // 현재 페이지 데이터 리스트를 console 로 출력
+			}
+		}).bind();
+	});
+</script></xmp></code></pre>
+
+	<p>2. [3] 페이지를 기본 선택하여 생성</p>
+	<pre class="line-numbers"><code class="language-markup"><xmp>
+<div id="paginationExample20">
+	<ul>
+		<li><a href="#" title="첫페이지">first</a></li> <!-- first 버튼 생략가능(표기하지 않으면 첫페이지로 가기 버튼이 보이지 않습니다) -->
+		<li><a href="#" title="이전">prev</a></li>
+	</ul>
+	<ul>
+		<li><a href="#"><span>1</span></a></li>
+	</ul>
+	<ul>
+		<li><a href="#" title="다음페이지">next</a></li>
+		<li><a href="#" title="마지막페이지">last</a></li> <!-- last 버튼 생략가능(표기하지 않으면 마지막페이지로 가기 버튼이 보이지 않습니다) -->
+	</ul>
+</div>
+
+<script type="text/javascript">
+	N.comm("retrieve.json").submit(function(data){ // 데이터 조회
+		N(data).pagination({
+			context: "#paginationExample20",
+			onChange: function(pageNo, selEle, selData, currPageNavInfo) { // 페이지 전환 시 발생되는 이벤트
+				N.log(selData); // 현재 페이지 데이터 리스트를 console 로 출력
+			}
+		}).pageNo(3).bind(); // [3] 페이지 선택 후 데이터 바인드
+	});
+</script></xmp></code></pre>
+
+	<p>3. N.pagination과 N.grid 를 연동하여 그리드 데이터 페이징</p>
+	<pre class="line-numbers"><code class="language-markup"><xmp>
+<table id="paginationExample31">
+	<thead><!-- 컬럼 타이틀 영역 -->
+		<tr>
+			<th>name</th>
+			<th>age</th>
+			<th>gender</th>
+			<th>email</th>
+			<th>registered</th>
+		</tr>
+	</thead>
+	<tbody><!-- 데이터가 반복되면서 바인드 되는 부분 -->
+		<tr>
+			<td id="name"></td>
+			<td id="age"></td>
+			<td id="gender"></td>
+			<td id="email"></td>
+			<td id="registered"></td>
+		</tr>
+	</tbody>
+</table>
+
+<div id="paginationExample30">
+	<ul>
+		<li><a href="#" title="첫페이지">first</a></li> <!-- first 버튼 생략가능(표기하지 않으면 첫페이지로 가기 버튼이 보이지 않습니다) -->
+		<li><a href="#" title="이전">prev</a></li>
+	</ul>
+	<ul>
+		<li><a href="#"><span>1</span></a></li>
+	</ul>
+	<ul>
+		<li><a href="#" title="다음페이지">next</a></li>
+		<li><a href="#" title="마지막페이지">last</a></li> <!-- last 버튼 생략가능(표기하지 않으면 마지막페이지로 가기 버튼이 보이지 않습니다) -->
+	</ul>
+</div>
+
+<script type="text/javascript">
+	var grid = N(data).grid("#paginationExample31"); // 1. N.grid 인스턴스 생성
+	
+	N.comm("retrieve.json").submit(function(data){ // 2. 데이터 조회
+		N(data).pagination({
+			context: "#paginationExample30",
+			onChange: function(pageNo, selEle, selData, currPageNavInfo) { // 페이지 전환 시 발생되는 이벤트
+				grid.bind(selData); // 3. 페이징된 데이터 리스트를 N.grid에 바인드
+			}
+		}).bind();
+	});
+</script></xmp></code></pre>
+
+	<p>4. N.pagination과 N.grid 를 연동하여 서버(DB) 페이징</p>
+	<p class="alert">서버에서 DB 쿼리로 페이징 시  먼저 조회하고자 하는 전체 행수를 가져오고 onChange 이벤트 핸들러의 인자로 들어오는 currPageNavInfo 정보로 선택될 DB 로우의 시작값(currPageNavInfo.startRowNum)과 얼마만큼 가져올건지의 정보(currPageNavInfo.countPerPage) 등을 서버에 파라미터로 던져 해당 행수 만큼만 가져와 N.grid 에 bind하는 형태로 서버단 페이징을 처리 할 수 있습니다.</p>
+	<pre class="line-numbers"><code class="language-markup"><xmp>
+<table id="paginationExample41">
+	<thead><!-- 컬럼 타이틀 영역 -->
+		<tr>
+			<th>name</th>
+			<th>age</th>
+			<th>gender</th>
+			<th>email</th>
+			<th>registered</th>
+		</tr>
+	</thead>
+	<tbody><!-- 데이터가 반복되면서 바인드 되는 부분 -->
+		<tr>
+			<td id="name"></td>
+			<td id="age"></td>
+			<td id="gender"></td>
+			<td id="email"></td>
+			<td id="registered"></td>
+		</tr>
+	</tbody>
+</table>
+
+<div id="paginationExample40">
+	<ul>
+		<li><a href="#" title="첫페이지">first</a></li> <!-- first 버튼 생략가능(표기하지 않으면 첫페이지로 가기 버튼이 보이지 않습니다) -->
+		<li><a href="#" title="이전">prev</a></li>
+	</ul>
+	<ul>
+		<li><a href="#"><span>1</span></a></li>
+	</ul>
+	<ul>
+		<li><a href="#" title="다음페이지">next</a></li>
+		<li><a href="#" title="마지막페이지">last</a></li> <!-- last 버튼 생략가능(표기하지 않으면 마지막페이지로 가기 버튼이 보이지 않습니다) -->
+	</ul>
+</div>
+
+<script type="text/javascript">
+	var grid = N(data).grid("#paginationExample41"); // 1. N.grid 인스턴스 생성
+	
+	N.comm("retrieveCnt.json").submit(function(data){ // 2. totalCount 조회
+		N(data).pagination({
+			context: "#paginationExample40",
+			totalCount: data.totalCount,
+			onChange: function(pageNo, selEle, selData, currPageNavInfo) { // 페이지 전환 시 발생되는 이벤트
+				N(currPageNavInfo).comm("retrieve.json").submit(function(data){ // 3. 페이징 정보를 서버로 전달하여 해당 데이터만 조회
+					grid.bind(selData); // 4. 서버에서 가져온 데이터를 N.grid에 바인드					
+				});
+			}
+		}).bind();
+	});
+</script></xmp></code></pre>
 
 </article>
 
