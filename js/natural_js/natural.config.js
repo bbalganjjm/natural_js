@@ -65,7 +65,7 @@
 					complete : function(request, xhr, textStatus) {
 						if(request.options.dataType === "html") {
 							// Multilingual handling
-					    	CommonUtilController.i18n(undefined, request.options.target);
+					    	CommonUtilController.i18n(undefined, request.options.target);							
 						}
 						if(this.pageId !== undefined) {
 							CommonUtilController.sourceCode(N("#" + this.pageId + ".view-code"), request.get("url"));
@@ -304,7 +304,7 @@
 			 */
 			"global" : {
 				"okBtnStyle" : {
-					color : "skyblue",
+					color : "yellowgreen",
 					size : "medium"
 				},
 				"cancelBtnStyle" : {

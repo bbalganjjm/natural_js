@@ -92,7 +92,15 @@
 			<td></td>
 			<td>
 				<p>색깔</p>
-				<p>white, blue, skyblue, gray</p>
+				<p>white, blue, skyblue, gray, green, yellowgreen</p>
+				<p class="alert">
+					css/natural.ui.css 파일에 다음과 같이 클래스 스타일을 추가 하면 컬러를 간단하게 확장 할 수 있습니다.<br>
+					a.btn_컬러명__,input[type='button'].btn_컬러명__,button.btn_컬러명__ {<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;color: #컬러값 !important;<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;background-color: #컬러값;<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;border: 1px solid #컬러값;<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;...<br>
+					}</p>
 			</td>
 		</tr>
 		<tr>
@@ -216,8 +224,8 @@
 	<p>1. 선언형 옵션을 적용하여 버튼생성</p>
 	<pre class="line-numbers"><code class="language-markup"><xmp>
 <a id="aTag" data-opts='{ "color" : "white", size : "big" }'>a</a>
-<input id="inputButtonTag" type="button" value="input button" data-opts='{ "color" : "skyblue" }' />
-<button id="buttonTag" data-opts='{ "color" : "gray", size : "large" }'>button</button>
+<input id="inputButtonTag" type="button" value="input button" data-opts='{ "color" : "yellowgreen" }' />
+<button id="buttonTag" data-opts='{ "color" : "green", size : "large" }'>button</button>
 
 <script type="text/javascript">
    	N("#aTag, #inputButtonTag, #buttonTag").button();

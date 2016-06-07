@@ -15,8 +15,10 @@
 			<td width="40%"><select id="color">
 				<option value="white">white</option>
 				<option value="blue">blue</option>
-				<option value="skyblue">skyblue</option>
-				<option value="gray">gray</option>
+				<option value="yellowgreen">skyblue</option>
+				<option value="green">gray</option>
+				<option value="green">green</option>
+				<option value="yellowgreen">yellowgreen</option>
 			</select></td>
 		</tr>
 		<tr>
@@ -36,12 +38,16 @@
 	</table>
 
 	<div align="center" class="btnBox">
-		<a id="btnMake" href="#" data-opts='{ "color": "gray", "size": "large" }'>
+		<a id="btnMake" href="#" data-opts='{ "color": "green", "size": "large" }'>
 			<span lang="ko_KR">Button 생성</span>
 			<span lang="en_US">Create Button</span>
 		</a>
-		<a id="btnDisable" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>disable</a>
-		<a id="btnEnable" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>enable</a>
+		<a id="btnDisable" href="#" data-opts='{ "color": "yellowgreen", "size": "large", "disable": true }'>disable</a>
+		<a id="btnEnable" href="#" data-opts='{ "color": "yellowgreen", "size": "large", "disable": true }'>enable</a>
+		<a id="btnReload" href="#" data-opts='{ "color": "white", "size": "large" }'>
+			<span lang="ko_KR">DEMO 초기화</span>
+			<span lang="en_US">Reset DEMO</span>
+		</a>
 	</div>
 
 	<p lang="ko_KR" class="smallContTit">결과 : </p>
@@ -60,9 +66,9 @@
 	    	N("div.btnBox a", view).button();
 
 	    	// bind events
-	        this.setEvents(view);
+	        this.setEvents(view, this);
 	    },
-	    setEvents : function(view) {
+	    setEvents : function(view, this_) {
 	        N("#btnMake", view).click(function(e) {
 	            e.preventDefault();
 	            var opts = {
@@ -90,6 +96,11 @@
 	            N("div.result", view).find("a, button, input[type='button']").instance("button", function() {
 	            	this.enable();
 	            });
+	        });
+	        
+	        N("#btnReload", view).click(function(e) {
+	        	e.preventDefault();
+	        	N(view.parent()).comm(this_.request.get("url")).submit();
 	        });
 	    }
 	});

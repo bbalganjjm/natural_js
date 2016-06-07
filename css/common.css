@@ -29,7 +29,7 @@ body {
  * and Firefox.
  * Correct `block` display not defined for `main` in IE 11.
  */
-article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section,summary {
 	display: block;
 }
 
@@ -37,7 +37,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
  * 1. Correct `inline-block` display not defined in IE 8/9.
  * 2. Normalize vertical alignment of `progress` in Chrome, Firefox, and Opera.
  */
-audio, canvas, progress, video {
+audio,canvas,progress,video {
 	display: inline-block; /* 1 */ vertical-align: baseline; /* 2 */
 }
 
@@ -45,79 +45,15 @@ audio, canvas, progress, video {
  * Prevent modern browsers from displaying `audio` without controls.
  * Remove excess height in iOS 5 devices.
  */
-audio
-
-
-
-
-
-
-:not
-
-
-
-
-
-
-
-(
-[
-controls
-]
-
-
-
-
-
-
-
-){
-display
-
-
-
-
-
-
-:
-
-
-
-
-
-
-
-none
-
-
-
-
-
-
-;
-height
-
-
-
-
-
-
-:
-
-
-
-
-
-
-
-0;
+audio:not ([controls] ){
+	display: none; height: 0;
 }
 
 /**
  * Address `[hidden]` styling not present in IE 8/9/10.
  * Hide the `template` element in IE 8/9/11, Safari, and Firefox < 22.
  */
-[hidden], template {
+[hidden],template {
 	display: none;
 }
 
@@ -125,23 +61,23 @@ img {
 	border: none;
 }
 
-input[type='text'], input[type='password'], select, textarea {
+input[type='text'],input[type='password'],select,textarea {
 	border-radius: 3px; padding: 3px 3px; border: 1px solid #cccccc; font-size: 13px; font-family: "Nanum Gothic", "Malgun Gothic", "dotum", "Segoe UI", sans-serif; color: #004a00; vertical-align: middle; background-color: #ffffff; line-height: 15px; border-color: #cceccc;
 }
 
-input[type='text']:hover, select:hover, textarea:hover, input[type='text']:focus, select:focus, textarea:focus {
-	border-color: #88ff88; box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.075); background-color: #fcfdec; transition: border-color ease-in-out 0.20s, background-color ease-in-out 0.15s, box-shadow ease-in-out 0.20s;
+input[type='text']:hover,select:hover,textarea:hover,input[type='text']:focus,select:focus,textarea:focus {
+	border-color: #BCFBBC; box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.075); background-color: #fcfdec; transition: border-color ease-in-out 0.20s, background-color ease-in-out 0.15s, box-shadow ease-in-out 0.20s;
 }
 
-input[disabled='disabled'], input[disabled='disabled']:hover, input[disabled='disabled']:focus {
+input[disabled='disabled'],input[disabled='disabled']:hover,input[disabled='disabled']:focus {
 	background-color: #eeeeee;
 }
 
-input[readonly='readonly'], input[readonly='readonly']:hover, input[readonly='readonly']:focus {
+input[readonly='readonly'],input[readonly='readonly']:hover,input[readonly='readonly']:focus {
 	background-color: #efffff;
 }
 
-input[type='radio'], input[type='checkbox'] {
+input[type='radio'],input[type='checkbox'] {
 	margin: 0 3px 0 10px; vertical-align: middle; border: none;
 }
 
@@ -158,18 +94,15 @@ table:last-child {
 }
 
 table th {
-	background: linear-gradient(top, #88ff88, #88ff99); background: -ms-linear-gradient(top, #88ff88, #88ff99); background: -moz-linear-gradient(top, #88ff88, #88ff99); background: -o-linear-gradient(top, #88ff88, #88ff99); background: -webkit-linear-gradient(top, #88ff88, #88ff99); background-color: #88ff88;
+	background: linear-gradient(top, #BCFBBC, #AFF9BA); background: -ms-linear-gradient(top, #BCFBBC, #AFF9BA); background: -moz-linear-gradient(top, #BCFBBC, #AFF9BA); background: -o-linear-gradient(top, #BCFBBC, #AFF9BA); background: -webkit-linear-gradient(top, #BCFBBC, #AFF9BA); background-color: #BCFBBC;
 }
 
-table th, table td {
-	border: 1px solid #77cc77;
-	padding: 5px;
-	word-break: break-word;
-	font-size: 12px;
+table th,table td {
+	border: 1px solid #77cc77; padding: 5px; word-break: break-word; font-size: 12px;
 }
 
 table.form th {
-	background: linear-gradient(left, #88ff88, #88ff99); background: -ms-linear-gradient(left, #88ff88, #88ff99); background: -moz-linear-gradient(left, #88ff88, #88ff99); background: -o-linear-gradient(left, #88ff88, #88ff99); background: -webkit-linear-gradient(left, #88ff88, #88ff99); background-color: #88ff88; text-align: right;
+	background: linear-gradient(left, #BCFBBC, #AFF9BA); background: -ms-linear-gradient(left, #BCFBBC, #AFF9BA); background: -moz-linear-gradient(left, #BCFBBC, #AFF9BA); background: -o-linear-gradient(left, #BCFBBC, #AFF9BA); background: -webkit-linear-gradient(left, #BCFBBC, #AFF9BA); background-color: #BCFBBC; text-align: right;
 }
 
 table.form td {
@@ -254,20 +187,18 @@ article hr {
 }
 
 article .alert {
-	background: url("../images/icon/alert.png") no-repeat 7px 10px; font-size: 0.95em; padding: 5px 5px 5px 25px; background-color: #9f9; border-radius: 3px; margin: 0 0 15px 0;
+	background: url("../images/icon/alert.png") no-repeat 7px 10px; font-size: 0.95em; padding: 5px 5px 5px 25px; background-color: #BDFDBD; border-radius: 3px; margin: 0 0 15px 0;
 }
 
 article .alert ul {
-	margin: 0;
-	padding: 0 0 0 10px;
+	margin: 0; padding: 0 0 0 10px;
 }
 
-article .alert ul > li {
-	margin: 0;
-	padding: 0;
+article .alert ul>li {
+	margin: 0; padding: 0;
 }
 
-.grid input[type='text'], .grid input[type='password'], .grid select, .grid textarea {
+.grid input[type='text'],.grid input[type='password'],.grid select,.grid textarea {
 	width: 95%;
 }
 
@@ -312,7 +243,7 @@ article.apiDoc .apidemo {
 	border: 1px solid #77f777; font-size: 0.875em; margin: 0 0 15px 0; padding: 15px 0 15px 0;
 }
 
-article.apiDoc .apidemo table th, article.apiDoc .apidemo table td, article.apiDoc .apidemo input[type='text'], article.apiDoc .apidemo input[type='password'], article.apiDoc .apidemo select, article.apiDoc .apidemo textarea {
+article.apiDoc .apidemo table th,article.apiDoc .apidemo table td,article.apiDoc .apidemo input[type='text'],article.apiDoc .apidemo input[type='password'],article.apiDoc .apidemo select,article.apiDoc .apidemo textarea {
 	font-size: 1em; vertical-align: top;
 }
 
@@ -325,7 +256,7 @@ article.apiDoc .apidemo>article table.form th {
 }
 
 article.apiDoc .apidemo>article .result {
-	border: 1px solid #88ff88; border-radius: 3px; padding: 10px; margin: 0 0 15px 0;
+	border: 1px solid #BCFBBC; border-radius: 3px; padding: 10px; margin: 0 0 15px 0; background-color: #ffffff;
 }
 
 article.apiDoc .apidemo>article textarea {
@@ -373,7 +304,7 @@ article .searchBox li>label label {
 	font-weight: normal;
 }
 
-article .searchBox label input, article .searchBox label select {
+article .searchBox label input,article .searchBox label select {
 	margin-left: 15px; box-shadow: 1px 1px 2px #EEE; border-color: #cccccc;
 }
 
@@ -382,7 +313,7 @@ article .searchBox label input[type='text'] {
 }
 
 article .click {
-	margin-top: 30px; padding: 5px 40px 5px 15px; background: url("../images/icon/click.png") no-repeat 160px 6px; display: inline-block; height: 35px; font-weight: bold; color: #008800; border: 1px dotted #008800; border-radius: 3px; box-shadow: 1px 1px 3px #88ff88; background-color: #efe; cursor: pointer; font-size: 17px;
+	margin-top: 30px; padding: 5px 40px 5px 15px; background: url("../images/icon/click.png") no-repeat 160px 6px; display: inline-block; height: 35px; font-weight: bold; color: #008800; border: 1px dotted #008800; border-radius: 3px; box-shadow: 1px 1px 3px #BCFBBC; background-color: #efe; cursor: pointer; font-size: 17px;
 }
 }
 }

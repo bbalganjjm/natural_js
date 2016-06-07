@@ -33,30 +33,30 @@
 			<th align="right"><label for="totalCount">totalCount</label></th>
 			<td>
 				<input id="totalCount" type="text" value="0" />
-				<label for="rmvRow" lang="ko_KR">페이징 데이터의 전체 행 수</label>
-				<label for="rmvRow" lang="en_US">Total count of paging data</label>
+				<label for="totalCount" lang="ko_KR">페이징 데이터의 전체 행 수</label>
+				<label for="totalCount" lang="en_US">Total count of paging data</label>
 			</td>
 		</tr>
 		<tr>
 			<th align="right"><label for="countPerPage">countPerPage</label></th>
 			<td>
 				<input id="countPerPage" type="text" value="10"/>
-				<label for="rmvRow" lang="ko_KR">페이지당 행 수</label>
-				<label for="rmvRow" lang="en_US">Row count per page</label>
+				<label for="countPerPage" lang="ko_KR">페이지당 행 수</label>
+				<label for="countPerPage" lang="en_US">Row count per page</label>
 			</td>
 			<th align="right"><label for="countPerPageSet">countPerPageSet</label></th>
 			<td>
 				<input id="countPerPageSet" type="text" value="10" />
-				<label for="rmvRow" lang="ko_KR">페이지 세트당 페이지 수</label>
-				<label for="rmvRow" lang="en_US">Page count per Pageset</label>
+				<label for="countPerPageSet" lang="ko_KR">페이지 세트당 페이지 수</label>
+				<label for="countPerPageSet" lang="en_US">Page count per Pageset</label>
 			</td>
 		</tr>
 		<tr>
 			<th align="right"><label for="pageNo">pageNo</label></th>
 			<td colspan="3">
 				<input id="pageNo" type="text" value="1"/>
-				<label for="rmvRow" lang="ko_KR">페이지 번호</label>
-				<label for="rmvRow" lang="en_US">Page number</label>
+				<label for="pageNo" lang="ko_KR">페이지 번호</label>
+				<label for="pageNo" lang="en_US">Page number</label>
 			</td>
 		</tr>
 		<tr>
@@ -69,7 +69,7 @@
 	});
 	N.log(currPageNavInfo);
 }</textarea><br />
-				<label for="onChange" lang="ko_KR">페이지가 변경되면 실행되면 이벤트 핸들러</label>
+				<label for="onChange" lang="ko_KR">페이지가 변경되면 실행되는 이벤트 핸들러</label>
 				<label for="onChange" lang="en_US">Event handler for change the page</label>
 			</td>
 		</tr>
@@ -96,7 +96,7 @@
 					false : jQuery Object 타입의 모든 데이터를 반환합니다.<br> 
 				</label>
 				<label for="data" lang="en_US">
-					undefined : Return all data of pure JSON Object array<br>
+					undefined : Return all data of pure JSON Object array type<br>
 					false : Return all data of jQuery Object type
 				</label>
 			</td>
@@ -104,12 +104,12 @@
 	</table>
 
 	<div align="center" class="btnBox">
-		<a id="btnInit" href="#" data-opts='{ "color": "gray", "size": "large" }'>
+		<a id="btnInit" href="#" data-opts='{ "color": "green", "size": "large" }'>
 			<span lang="ko_KR">Pagination 생성</span>
 			<span lang="en_US">Create Pagination</span>
 		</a>
-		<a id="btnBind" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>bind</a>
-		<a id="btnData" href="#" data-opts='{ "color": "skyblue", "size": "large", "disable": true }'>data</a>
+		<a id="btnBind" href="#" data-opts='{ "color": "yellowgreen", "size": "large", "disable": true }'>bind</a>
+		<a id="btnData" href="#" data-opts='{ "color": "yellowgreen", "size": "large", "disable": true }'>data</a>
 		<a id="btnReload" href="#" data-opts='{ "color": "white", "size": "large" }'>
 			<span lang="ko_KR">DEMO 초기화</span>
 			<span lang="en_US">Reset DEMO</span>
