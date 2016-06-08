@@ -1,5 +1,5 @@
 /*!
- * Natural-DATA v0.8.2.5
+ * Natural-DATA v0.8.2.6
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-DATA"] = "0.8.2.5";
+	N.version["Natural-DATA"] = "0.8.2.6";
 
 	$.fn.extend($.extend(N.prototype, {
 		datafilter : function(callBack) {
@@ -29,7 +29,7 @@
 	}));
 
 	(function(N) {
-		
+
 		N.data = {
 			refine : function(obj, listId) {
 				if (N.isWrappedSet(obj)) {
@@ -89,7 +89,7 @@
 				return N.isWrappedSet(arr) ? N(arr.sort(this.sortBy(key, reverse))) : arr.sort(this.sortBy(key, reverse));
 			}
 		};
-		
+
 		//DataSync
 		var DataSync = N.ds = function(inst, isReg) {
 			if (N.ds.caller != N.ds.instance) {
@@ -132,7 +132,7 @@
 				return new N.ds(inst, isReg);
 			}
 		});
-		
+
 		$.extend(DataSync.prototype, {
 			"remove" : function() {
 				var inst = this.inst;
@@ -193,7 +193,7 @@
 				}
 			}
 		};
-		
+
 		$.extend(Formatter, {
 			"commas" : function(str, args) {
 				if (N.isEmptyObject(str)) {
@@ -266,7 +266,7 @@
 				str = str.replace(/-/g, "");
 				return str.substring(0, 3) + "-" + str.substring(3, 6);
 			},
-			"phoneNum" : function(str, args) {
+			"phonenum" : function(str, args) {
 				if (N.isEmptyObject(str)) {
 					return str;
 				}
@@ -334,11 +334,11 @@
 								if(isReadonly) {
 									context.prop("readonly", true);
 								}
-								
+
 								if(N.context.attr("ui").datepicker != undefined && N.context.attr("ui").datepicker.onSelect != undefined) {
 					            	return N.context.attr("ui").datepicker.onSelect(context, date, monthonly);
 					            } else {
-					            	return false;					            	
+					            	return false;
 					            }
 							},
 							onBeforeHide : function(context, contents) {
@@ -495,7 +495,7 @@
 
 			this.options.data = obj.length > 0 ? obj : N(N.element.toData(this.options.targetEle));
 		};
-		
+
 		$.extend(Formatter.prototype, {
 			"format" : function(row) {
 				var opts = this.options;
@@ -928,7 +928,7 @@
 				return regExp.test(str);
 			}
 		});
-		
+
 		$.extend(Validator.prototype, {
 			"validate" : function(row) {
 				var opts = this.options;
@@ -1021,7 +1021,7 @@
 				return retArr;
 			}
 		});
-		
+
 	})(N);
 
 })(window, jQuery);
