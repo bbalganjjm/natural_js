@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.13.61
+ * Natural-UI v0.8.13.62
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "v0.8.13.61";
+	N.version["Natural-UI"] = "v0.8.13.62";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -285,7 +285,7 @@
 								if(opts.draggableOverflowCorrection) {
 									var offset = {};
 									if(opts.msgContents.offset().top - $(window).scrollTop() < 0) {
-										offset.top = (opts.isWindow ? 0 
+										offset.top = (opts.isWindow ? 0
 												: opts.msgContents.offset().top + ($(window).scrollTop() - opts.msgContents.offset().top)) + opts.draggableOverflowCorrectionAddValues.top;
 									} else if(opts.msgContents.offset().top + opts.msgContents.outerHeight() > $(window).scrollTop() + $(window).height()) {
 										offset.top = (opts.isWindow ? $(window).height() - opts.msgContents.outerHeight()
@@ -303,7 +303,7 @@
 										opts.msgContents.animate(offset, 200);
 									}
 								}
-								
+
 								opts.msgContents.fadeTo(100, "1.0");
 								$(window.document).unbind("dragstart.alert").unbind("selectstart.alert").unbind("mousemove.alert").unbind("mouseup.alert");
 							});
@@ -496,7 +496,7 @@
 			this.options = {
 				context : obj,
 				size : "medium", // size : smaller, small, medium, large, big
-				color : "white", // color : white, blue, skyblue, gray
+				color : "white", // color : white, blue, skyblue, gray, green, yellowgreen
 				iconClass : null,
 				disable : false,
 				effect : true,
@@ -1444,7 +1444,7 @@
 					e.preventDefault();
 					var thisEle = $(this);
 					var thisIdx = opts.links.index(this);
-					var thisClassOpts = opts.dataOpts[thisIdx];
+					var thisDeclarativeOpts = opts.dataOpts[thisIdx];
 
 					// hide tab contents
 					opts.contents.hide();
@@ -1453,10 +1453,10 @@
 					opts.links.removeClass("tab_active__");
 					thisEle.addClass("tab_active__");
 
-					if(thisClassOpts.preload === undefined || thisClassOpts.preload === false) {
+					if(thisDeclarativeOpts.preload === undefined || thisDeclarativeOpts.preload === false) {
 						// load content
-						if(thisClassOpts.url !== undefined && thisEle.data("loaded") === undefined) {
-							Tab.loadContent.call(self, thisClassOpts.url, thisIdx);
+						if(thisDeclarativeOpts.url !== undefined && thisEle.data("loaded") === undefined) {
+							Tab.loadContent.call(self, thisDeclarativeOpts.url, thisIdx);
 						}
 					}
 
@@ -1465,15 +1465,15 @@
 						opts.onActive.call(this, thisIdx, thisEle, content, opts.links, opts.contents);
 					}
 
-					// excute "onOpen"(class option) event
+					// excute "onOpen"(declarative option) event
 					// excuted only when defined url with class(inline) option and tab is active
-					if(thisClassOpts.onOpen !== undefined && thisEle.data("loaded")) {
+					if(thisDeclarativeOpts.onOpen !== undefined && thisEle.data("loaded")) {
 						var sc = content.find(">").instance("cont");
-						if(sc[thisClassOpts.onOpen] !== undefined) {
-							//thisClassOpts.onOpen
-							sc[thisClassOpts.onOpen]();
+						if(sc[thisDeclarativeOpts.onOpen] !== undefined) {
+							//thisDeclarativeOpts.onOpen
+							sc[thisDeclarativeOpts.onOpen]();
 						} else {
-							N.warn("[N.tab.wrapEle]onOpen callback function \"" + thisClassOpts.onOpen + "\" is undefined in tab content's Service Controller");
+							N.warn("[N.tab.wrapEle]onOpen event handler function \"" + thisDeclarativeOpts.onOpen + "\" is not defined in tab content's Controller(N.cont)");
 						}
 					}
 
@@ -1497,7 +1497,7 @@
 					target : opts.contents.eq(targetIdx)
 				}).submit(function(page) {
 					var sc = opts.contents.eq(targetIdx).html(page).children("[id]:first").instance("cont");
-					
+
 					// set Communicator.request
 					sc.request = this.request;
 
@@ -1512,7 +1512,7 @@
 					}
 
 					var activeTabEle = opts.links.eq(targetIdx);
-					
+
 					// run "onOpen" event
 					if(activeTabEle.hasClass("tab_active__")) {
 						var dataOpts = opts.dataOpts[targetIdx];
@@ -2103,7 +2103,7 @@
 		        if(!N.isWrappedSet(data)) {
 		        	$.extend(N.element.toData(opts.context.find(":input").not(":button")), data);
 		        	data.rowStatus = "insert";
-		        	
+
 		        	if(!opts.addTop) {
 		        		opts.data.push(data);
 		        		opts.row = opts.data.length - 1;
@@ -2115,12 +2115,12 @@
 		        	if(opts.revert) {
 		        		this.revertData = $.extend({}, opts.data[opts.row]);
 		        	}
-		        	
+
 		        	this.bind();
 
 		        	N.ds.instance(opts.extObj !== null ? opts.extObj : this).notify(opts.extRow > -1 ? opts.extRow : opts.row);
 		        }
-	        	
+
 				return this;
 			},
 			remove : function(row) {
@@ -2455,7 +2455,7 @@
 					var thisEle = $(this);
 					var retFlag;
 					var selected;
-					
+
 					// save the selected row index
 					if(thisEle.hasClass("grid_selected__")) {
 						self.options.row = -1;
@@ -2464,7 +2464,7 @@
 						self.options.row = thisEle.index() - self.options.misc.withoutTbodyLength;
 						selected = false;
 					}
-					
+
 					if(self.options.onSelect !== null) {
 						retFlag = self.options.onSelect.call(thisEle, self.options.row, thisEle, self.options.data, self.options.beforeRow, e);
 					}
@@ -2686,16 +2686,16 @@
         	},
         	resize : function() {
         		var self = this;
-        		
-        		var resizeBar, currResizeBar, resizeBarHeight, cellEle, currCellEle, currNextCellEle, targetNextCellEle, targetCellEle, currResizeBarEle, 
+
+        		var resizeBar, currResizeBar, resizeBarHeight, cellEle, currCellEle, currNextCellEle, targetNextCellEle, targetCellEle, currResizeBarEle,
 					defWidth, nextDefWidth, currWidth, nextCurrWidth, startOffsetX,
 					minPx, maxPx, defPx, movedPx;
-        		
+
 				var opts = this.options;
 				var theadCells = this.thead.find("> tr th");
 				var isPressed = false;
 				var scrollbarWidth = N.browser.scrollbarWidth();
-				
+
 				if(N.browser.is("safari")){
 					theadCells.css("padding-left", "0");
 					theadCells.css("padding-right", "0");
@@ -2708,7 +2708,7 @@
     	        } else {
     	        	context = opts.context;
     	        }
-				
+
 				this.thead.bind("mouseover.grid.resize", function() {
 					resizeBarHeight = (opts.height > 0 ? self.tbodyContainer.closest(".grid_wrap__").height() - 3 : self.tbodyContainer.height() + resizeBarCorrectionHeight) + 1 + opts.misc.resizeBarCorrectionHeight;
 					theadCells.each(function() {
@@ -2730,7 +2730,7 @@
 		            	"height": String(cellEle.outerHeight()) + "px",
 		            	"opacity": "0"
 		            }).appendTo(cellEle);
-		            
+
 		            resizeBar.bind("mousedown.grid.resize", function(e) {
 		            	if((e.which || e.button) === 1) {
 		            		$(this).css({
@@ -2738,7 +2738,7 @@
 		            		}).animate({
 		            			"height" : resizeBarHeight + "px"
 		            		}, 150);
-		            		
+
 		            		startOffsetX = e.pageX;
 		            		currResizeBarEle = $(this);
 		            		currCellEle = currResizeBarEle.parent("th");
@@ -2748,7 +2748,7 @@
 		            			currNextCellEle = context;
 		            			islast = true;
 		            		}
-		            		
+
 		            		if(opts.height > 0) {
 		            			targetCellEle = opts.context.find("thead th:eq(" + theadCells.index(currCellEle) + ")");
 		            			targetNextCellEle = opts.context.find("thead th:eq(" + (theadCells.index(currCellEle) + 1) + ")");
@@ -2757,14 +2757,14 @@
 		            		if(isFirstTimeLastClick && islast) {
 		            			theadCells.each(function(i) {
 	            					$(this).width(Math.floor($(this).width()) + (opts.height > 0 ? opts.misc.resizableLastCellCorrectionWidth : 0) + opts.misc.resizableCorrectionWidth).removeAttr("width");
-	            					
+
 	            					if(targetCellEle !== undefined) {
 	            						opts.context.find("thead th:eq(" + theadCells.index(this) + ")").width(Math.floor($(this).width()) + opts.misc.resizableCorrectionWidth).removeAttr("width");
 	            					}
 		    					});
 		            			isFirstTimeLastClick = false;
 	            			}
-		            		
+
 		            		// to block sort event
 		            		currCellEle.data("sortLock", true);
 
@@ -2809,7 +2809,7 @@
             							"opacity": "0"
             						});
 	            				});
-		            			
+
 		            			$(document).unbind("dragstart.grid.resize").unbind("selectstart.grid.resize").unbind("mousemove.grid.resize").unbind("mouseup.grid.resize");
 		            			isPressed = false;
 		            		});
@@ -3099,7 +3099,7 @@
 				if(opts.rowHandler !== null) {
 					opts.rowHandler.call(tbodyTempClone, form.options.extRow, tbodyTempClone, form.data(true)[0]);
 				}
-				
+
 				// unselect rows
 				opts.context.find("> tbody").removeClass("grid_selected__");
 
@@ -3335,6 +3335,8 @@
 
                 return {
                 	"pageNo" : opts.pageNo,
+                	"countPerPage" : opts.countPerPage,
+                	"countPerPageSet" : opts.countPerPageSet,
                 	"pageCount" : pageCount,
                 	"pageSetCount" : pageSetCount,
                 	"currSelPageSet" : currSelPageSet,
