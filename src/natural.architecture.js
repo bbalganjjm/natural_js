@@ -1,5 +1,5 @@
 /*!
- * Natural-ARCHITECTURE v0.8.0.13
+ * Natural-ARCHITECTURE v0.8.0.14
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-ARCHITECTURE"] = "0.8.0.13";
+	N.version["Natural-ARCHITECTURE"] = "0.8.0.14";
 
 	$.fn.extend($.extend(N.prototype, {
 		ajax : function(opts) {
@@ -237,10 +237,12 @@
 			this.attrObj = {};
 
 			this.obj = obj;
-			// define params data
-			this.options.data = JSON.stringify(this.options.data === null ?
-					N.isWrappedSet(obj) ? !N.isElement(obj) ? obj.toArray()[0] : undefined : obj[0] :
-							this.options.data);
+			if(!N.isString(this.options.data)) {
+				// define params data
+				this.options.data = JSON.stringify(this.options.data === null ?
+						N.isWrappedSet(obj) ? !N.isElement(obj) ? obj.toArray()[0] : undefined : obj[0] :
+								this.options.data);
+			}
 
 			if(this.options.data !== undefined) {
 				if(this.options.type.toUpperCase() === "GET") {
