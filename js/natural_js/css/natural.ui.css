@@ -466,7 +466,10 @@ div.datepicker_contents__ div.datepicker_year_item__:hover,div.datepicker_conten
 }
 
 .tree__ ul>li {
-	border-left: 1px dotted #b1bcca; margin-left: 5px; padding: 0 0 0 7px; line-height: 18px;
+	border-left: 1px dotted #b1bcca;
+	margin-left: 5px;
+	padding: 0 0 0 7px;
+	line-height: 18px;
 }
 
 .tree__ ul>li:last-child>.tree_icon__ {
