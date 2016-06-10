@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.13.62
+ * Natural-UI v0.8.13.64
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "v0.8.13.62";
+	N.version["Natural-UI"] = "v0.8.13.64";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -698,7 +698,8 @@
 				focusin : true,
 				onSelect : null,
 				onBeforeShow : null,
-				onBeforeHide : null
+				onBeforeHide : null,
+				shareEle : true
 			};
 
 			try {
@@ -714,7 +715,27 @@
 			// set style class to context element
 			this.options.context.addClass("datepicker__");
 
-			DatePicker.wrapEle.call(this);
+			if(opts.monthonly) {
+				if(this.options.shareEle && N(".datepicker_contents__.datepicker_monthonly__").length > 0) {
+					DatePicker.wrapSingleEle.call(this);
+				} else {
+					if(this.options.shareEle) {
+						this.options.context.addClass("datepicker_month_master__");
+					}
+					DatePicker.wrapEle.call(this);
+				}
+			} else {
+				if(this.options.shareEle && N(".datepicker_contents__:not(.datepicker_monthonly__)").length > 0) {
+					DatePicker.wrapSingleEle.call(this);
+				} else {
+					if(this.options.shareEle) {
+						this.options.context.addClass("datepicker_date_master__");
+					}
+					DatePicker.wrapEle.call(this);
+				}
+			}
+
+			//N(".datepicker_contents__:last").hasClass("datepicker_monthonly__")
 
 			// set this instance to context element
 			this.options.context.instance("datepicker", this);
@@ -795,11 +816,12 @@
 				});
 				var monthItem = $('<div align="center"></div>');
 				var gEndDate;
+
 				monthItem.css({
 					"line-height": "25px",
 					"width": "28px",
 					"float": "left"
-				}).click(function(e) {
+				}).click(function(e, ke) {
 					e.preventDefault();
 					monthsPanel.find(".datepicker_month_item__").removeClass("datepicker_month_selected__");
 					$(this).addClass("datepicker_month_selected__");
@@ -815,7 +837,7 @@
 						if(onSelectContinue === undefined || onSelectContinue === true) {
 							opts.context.val(selDate.obj.formatDate(selDate.format.replace(/[^Y|^m|^d]/g, "")));
 						}
-						self.hide();
+						self.hide(ke);
 					} else {
 						daysPanel.empty();
 						var endDateCls = N.date.strToDate(N.string.lpad(yearsPanel.find(".datepicker_year_selected__").text(), 4, "0") +  N.string.lpad(String(parseInt($(this).text())+1), 2, "0") + "00", "Ymd");
@@ -882,7 +904,7 @@
 						"line-height": "25px",
 						"width": "28px",
 						"float": "left"
-					}).click(function(e) {
+					}).click(function(e, ke) {
 						e.preventDefault();
 						var thisEle = $(this);
 						daysPanel.find(".datepicker_prev_day_item__, .datepicker_day_item__, .datepicker_next_day_item__").removeClass("datepicker_day_selected__");
@@ -908,7 +930,7 @@
 						if(onSelectContinue === undefined || onSelectContinue === true) {
 							opts.context.val(selDate.obj.formatDate(selDate.format.replace(/[^Y|^m|^d]/g, "")));
 						}
-						self.hide();
+						self.hide(ke);
 					});
 					opts.contents.append(daysPanel);
 
@@ -921,7 +943,17 @@
 
 				// bind focusin event
 				if(opts.focusin) {
-					opts.context.bind("focusin.datepicker", function() {
+					opts.context.bind("focusin.datepicker", function(e) {
+						// reuse datepicker panel element
+						if(opts.shareEle) {
+							var datepickerInst;
+							if(opts.monthonly) {
+								datepickerInst = N(".datepicker__.datepicker_month_master__").instance("datepicker");
+							} else {
+								datepickerInst = N(".datepicker__.datepicker_date_master__").instance("datepicker");
+							}
+							datepickerInst.options.context = N(e.target);
+						}
 						if(!opts.contents.is(":visible")) {
 							self.show();
 						}
@@ -929,7 +961,7 @@
 				}
 
 				// bind key event
-				opts.context.bind("keyup.datepicker", function(e) {
+				opts.context.bind(N.browser.is("firefox") ? "keydown.datepicker" : "keyup.datepicker", function(e) {
 					e.preventDefault();
 					var value = opts.context.val().replace(/[^0-9]/g, "");
 
@@ -969,9 +1001,82 @@
 	        		// when press the enter key
 					} else if (e.keyCode == 13) {
 		        		if(!opts.monthonly) {
-		        			daysPanel.find(".datepicker_day_selected__").click();
+		        			daysPanel.find(".datepicker_day_selected__").trigger("click", [e]);
 		        		} else {
-		        			monthsPanel.find(".datepicker_month_selected__").click();
+		        			monthsPanel.find(".datepicker_month_selected__").trigger("click", [e]);
+		        		}
+		        	}
+				});
+			},
+			wrapSingleEle : function() {
+				var opts = this.options;
+				var self = this;
+
+				// bind focusin event
+				if(opts.focusin) {
+					opts.context.bind("focusin.datepicker", function() {
+						if(!opts.contents.is(":visible")) {
+							self.show();
+						}
+					});
+				}
+
+				var format = (!opts.monthonly ? N.context.attr("data").formatter.date.Ymd() : N.context.attr("data").formatter.date.Ym()).replace(/[^Y|^m|^d]/g, "");
+				var yearsPanel = N((opts.monthonly ? ".datepicker_contents__.datepicker_monthonly__" : ".datepicker_contents__:not(.datepicker_monthonly__)") + " .datepicker_years_panel__");
+				var monthsPanel = N((opts.monthonly ? ".datepicker_contents__.datepicker_monthonly__" : ".datepicker_contents__:not(.datepicker_monthonly__)") + " .datepicker_months_panel__");
+				var daysPanel = N((opts.monthonly ? ".datepicker_contents__.datepicker_monthonly__" : ".datepicker_contents__:not(.datepicker_monthonly__)") + " .datepicker_days_panel__");
+
+				// bind key event
+				opts.context.bind(N.browser.is("firefox") ? "keydown.datepicker" : "keyup.datepicker", function(e) {
+					e.preventDefault();
+					var value = opts.context.val().replace(/[^0-9]/g, "");
+
+					var endDateCls = N.date.strToDate(N.string.lpad(yearsPanel.find(".datepicker_year_selected__").text(), 4, "0") +  N.string.lpad(String(parseInt(monthsPanel.find(".datepicker_month_selected__").text())+1), 2, "0") + "00", "Ymd");
+					var endDate = endDateCls.obj.getDate();
+					var gEndDate = endDate;
+					if(format !== "Ymd") {
+						gEndDate = 31;
+					}
+
+					// when press the number keys
+					if (e.keyCode >= 48 && e.keyCode <= 57 && value.length <= 8 && value.length%2 === 0) {
+		        		var dateStrArr = N.date.strToDateStrArr(value, format);
+		        		var dateStrStrArr = N.date.strToDateStrArr(value, format, true);
+
+        				// validate input value
+	        			if(!isNaN(dateStrArr[0]) && dateStrStrArr[0].length === 4 && dateStrArr[0] < 100) {
+        					opts.context.alert(N.message.get(opts.message, "yearNaN")).show();
+    						opts.context.val(value.replace(dateStrStrArr[0], ""));
+        					return false;
+        				} else if(!isNaN(dateStrArr[1]) && dateStrStrArr[1].length === 2 && (dateStrArr[1] < 1 || dateStrArr[1] > 12)) {
+        					opts.context.alert(N.message.get(opts.message, "monthNaN")).show();
+    						opts.context.val(value.replace(dateStrStrArr[1], ""));
+        					return false;
+        				} else if(!opts.monthonly && !isNaN(dateStrArr[2]) && dateStrStrArr[2].length === 2 && (dateStrArr[2] < 1 || dateStrArr[2] > parseInt(gEndDate))) {
+        					opts.context.alert(N.message.get(opts.message, "dayNaN", [String(parseInt(gEndDate))])).show();
+    						opts.context.val(value.replace(dateStrStrArr[2], ""));
+        					return false;
+        				}
+	        			if((format.length === 3 && format.indexOf("md") > -1) || format.length === 2) {
+	        				DatePicker.selectItems(opts, value, format, yearsPanel, monthsPanel, daysPanel);
+	        			} else {
+	        				if(!opts.monthonly) {
+	        					if(value.length === 8) {
+	        						DatePicker.selectItems(opts, value, format, yearsPanel, monthsPanel, daysPanel);
+	        					}
+	        				} else {
+	        					if(value.length === 6) {
+	        						DatePicker.selectItems(opts, value, format, yearsPanel, monthsPanel, daysPanel);
+	        					}
+	        				}
+	        			}
+
+	        		// when press the enter key
+					} else if (e.keyCode == 13) {
+		        		if(!opts.monthonly) {
+		        			daysPanel.find(".datepicker_day_selected__").trigger("click", [e]);
+		        		} else {
+		        			monthsPanel.find(".datepicker_month_selected__").trigger("click", [e]);
 		        		}
 
 		        		// Temporary measures, I dont't know why into formated data to only data set of memory when press the enter key
@@ -1034,6 +1139,23 @@
 			show : function() {
 				var opts = this.options;
 
+				// reuse datepicker panel element
+				if(opts.shareEle) {
+					var datepickerInst;
+					var contents;
+					if(opts.monthonly) {
+						datepickerInst = N(".datepicker__.datepicker_month_master__").instance("datepicker");
+						contents = N(".datepicker_contents__.datepicker_monthonly__");
+
+					} else {
+						datepickerInst = N(".datepicker__.datepicker_date_master__").instance("datepicker");
+						contents = N(".datepicker_contents__:not(.datepicker_monthonly__)");
+					}
+					datepickerInst.options.context = opts.context;
+					opts.context.after(contents.detach());
+					opts.contents = contents;
+				}
+
 				// auto select datepicker items from before input value
 				if(!N.string.isEmpty(opts.context.val())) {
 					DatePicker.selectItems(opts,
@@ -1057,9 +1179,10 @@
 
 				// bind "ESC" key event
 				// if press the "ESC" key, datepicker will be hidden
-		        $(document).bind("keyup.datepicker", function(e) {
+		        $(document).bind(N.browser.is("firefox") ? "keydown.datepicker" : "keyup.datepicker", function(e) {
+		        	e.preventDefault();
 		        	if ((e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode)) == 27) {
-		        		self.hide();
+		        		self.hide(e);
 		        	}
 				});
 
@@ -1075,7 +1198,7 @@
 	        	});
 
 		        // when the context(input) is focused out, close the datepicker panel
-		        opts.context.bind("blur.datepicker", function() {
+		        opts.context.bind("blur.datepicker", function(e) {
 		        	if(!lock) {
 		        		self.hide();
 		        	}
@@ -1104,7 +1227,8 @@
 				var opts = this.options;
 
 				if(opts.onBeforeHide !== null) {
-					var result = opts.onBeforeHide.call(this, opts.context, opts.contents);
+					 // arguments[0] - because of firefox, firefox does not have window.event object
+					var result = opts.onBeforeHide.call(this, opts.context, opts.contents, arguments.length > 0 ? arguments[0] : undefined);
 					if(result !== undefined && result === false) {
 						return this;
 					}
@@ -1112,9 +1236,13 @@
 
 				$(window.document).unbind("mousedown.datepicker");
 				opts.context.unbind("blur.datepicker");
-				$(window.document).unbind("keyup.datepicker");
+				$(window.document).unbind(N.browser.is("firefox") ? "keydown.datepicker" : "keyup.datepicker");
 				$(window).unbind("resize.datepicker");
-				opts.contents.fadeOut(150);
+				if(opts.shareEle) {
+					opts.contents.hide();
+				} else {
+					opts.contents.fadeOut(150);
+				}
 				opts.context.get(0).blur();
 				return this;
 			}
@@ -2883,7 +3011,9 @@
     				if(id === undefined) {
     					id = $(this).find("[id]").attr("id");
     				}
-    				thead.find("> tr th:eq(" + i + ")").data("id", id);
+    				if(thead.find("> tr th:eq(" + i + ")").data("id") === undefined) {
+    					thead.find("> tr th:eq(" + i + ")").data("id", id);
+    				}
                 });
     			return thead;
         	},
