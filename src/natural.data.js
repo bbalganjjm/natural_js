@@ -1,5 +1,5 @@
 /*!
- * Natural-DATA v0.8.2.6
+ * Natural-DATA v0.8.2.7
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-DATA"] = "0.8.2.6";
+	N.version["Natural-DATA"] = "0.8.2.7";
 
 	$.fn.extend($.extend(N.prototype, {
 		datafilter : function(callBack) {
@@ -343,21 +343,29 @@
 							},
 							onBeforeHide : function(context, contents) {
 								// for Hide from ESC key
-								if ((window.event.keyCode ? window.event.keyCode : (window.event.which ? window.event.which : window.event.charCode)) == 27) {
+								var e = arguments.length > 2 ? arguments[2] : undefined; // because of firefox, firefox does not have window.event object
+								var keyCode = e !== undefined ? e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode) : undefined;
+								var isHaveGlobalOnBeforeHide = N.context.attr("ui").datepicker != undefined && N.context.attr("ui").datepicker.onBeforeHide != undefined;
+								if (keyCode == 27 || keyCode == 13) {
 									setTimeout(function(){
 										context.unbind("focusout.prevent.format.date", N.element.disable).trigger("focusout.form.validate").trigger("focusout.form.dataSync").trigger("focusout.form.format");
-									}, 50);
+
+										if(isHaveGlobalOnBeforeHide) {
+							            	N.context.attr("ui").datepicker.onBeforeHide(context, contents, e);
+							            }
+									}, 0);
 								} else {
 									context.unbind("focusout.prevent.format.date", N.element.disable).trigger("focusout.form.validate").trigger("focusout.form.dataSync").trigger("focusout.form.format");
+
+									if(isHaveGlobalOnBeforeHide) {
+						            	N.context.attr("ui").datepicker.onBeforeHide(context, contents);
+						            }
 								}
-								if(N.context.attr("ui").datepicker != undefined && N.context.attr("ui").datepicker.onBeforeHide != undefined) {
-					            	N.context.attr("ui").datepicker.onBeforeHide(context, contents);
-					            }
 							}
 						});
 					}
 				} else {
-					N.warn("if use date & month options, load Natural-UI library");
+					N.warn("if you use date or month option, you must import Natural-UI library");
 				}
 
 				if (args[0] !== undefined) {
