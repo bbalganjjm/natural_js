@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.13.56
+ * Natural-UI v0.8.13.66
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "v0.8.13.56";
+	N.version["Natural-UI"] = "v0.8.13.66";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -75,7 +75,14 @@
 				alwaysOnTopCalcTarget : "div, span, ul, p",
 				dynPos : true, // dynamic positioning for massage context and message overlay
 				windowScrollLock : true,
-				draggable : false
+				draggable : false,
+				draggableOverflowCorrection : true,
+				draggableOverflowCorrectionAddValues : {
+					top : 0,
+					bottom : 0,
+					left : 0,
+					right : 0
+				}
 			};
 
 			try {
@@ -84,6 +91,7 @@
 				// 2. If defined the N.context.attr("ui").alert.container value N.config, be applied N.config's value
 				this.options = $.extend({}, this.options, N.context.attr("ui").alert);
 				this.options.container = N(this.options.container);
+				this.options.draggableOverflowCorrectionAddValues = $.extend({}, this.options.draggableOverflowCorrectionAddValues, N.context.attr("ui").alert.draggableOverflowCorrectionAddValues);
 			} catch (e) {
 				N.error("[N.alert]" + e, e);
 			}
@@ -245,7 +253,7 @@
 					var moved;
 					var startX;
 					var startY;
-					opts.msgContents.find(".msg_title_box__").bind("mousedown.alert", function(e) {
+					opts.msgContents.addClass("draggable__").find(".msg_title_box__").bind("mousedown.alert", function(e) {
 						if(!$(e.target).is(".msg_title_close__") && (e.which || e.button) === 1) {
 							pressed = true;
 							opts.msgContents.data("isMoved", true);
@@ -256,8 +264,6 @@
 							$(window.document).bind("dragstart.alert, selectstart.alert", function() {
 			                    return false;
 			                });
-
-							$(this).css("cursor", "pointer");
 
 							moved = true;
 							$(window.document).bind("mousemove.alert", function(e) {
@@ -273,13 +279,32 @@
 								}
 							});
 
-							var self = this;
+							var documentWidth = $(window.document).width();
 							$(window.document).bind("mouseup.alert", function(e) {
 								pressed = false;
+								if(opts.draggableOverflowCorrection) {
+									var offset = {};
+									if(opts.msgContents.offset().top - $(window).scrollTop() < 0) {
+										offset.top = (opts.isWindow ? 0
+												: opts.msgContents.offset().top + ($(window).scrollTop() - opts.msgContents.offset().top)) + opts.draggableOverflowCorrectionAddValues.top;
+									} else if(opts.msgContents.offset().top + opts.msgContents.outerHeight() > $(window).scrollTop() + $(window).height()) {
+										offset.top = (opts.isWindow ? $(window).height() - opts.msgContents.outerHeight()
+												: $(window).scrollTop() + $(window).height() - opts.msgContents.outerHeight()) + opts.draggableOverflowCorrectionAddValues.bottom;
+									}
+									if(offset.top < 0) {
+										offset.top = 0 + opts.draggableOverflowCorrectionAddValues.left;
+									}
+									if(opts.msgContents.offset().left < 0) {
+										offset.left = 0 + opts.draggableOverflowCorrectionAddValues.left;
+									} else if(opts.msgContents.offset().left + opts.msgContents.outerWidth() > documentWidth) {
+										offset.left = documentWidth - opts.msgContents.outerWidth() + opts.draggableOverflowCorrectionAddValues.right;
+									}
+									if(!N.isEmptyObject(offset)) {
+										opts.msgContents.animate(offset, 200);
+									}
+								}
 
-								$(self).css("cursor", "");
 								opts.msgContents.fadeTo(100, "1.0");
-
 								$(window.document).unbind("dragstart.alert").unbind("selectstart.alert").unbind("mousemove.alert").unbind("mouseup.alert");
 							});
 						}
@@ -471,7 +496,7 @@
 			this.options = {
 				context : obj,
 				size : "medium", // size : smaller, small, medium, large, big
-				color : "white", // color : white, blue, skyblue, gray
+				color : "white", // color : white, blue, skyblue, gray, green, yellowgreen
 				iconClass : null,
 				disable : false,
 				effect : true,
@@ -673,7 +698,8 @@
 				focusin : true,
 				onSelect : null,
 				onBeforeShow : null,
-				onBeforeHide : null
+				onBeforeHide : null,
+				shareEle : true
 			};
 
 			try {
@@ -689,7 +715,27 @@
 			// set style class to context element
 			this.options.context.addClass("datepicker__");
 
-			DatePicker.wrapEle.call(this);
+			if(opts.monthonly) {
+				if(this.options.shareEle && N(".datepicker_contents__.datepicker_monthonly__").length > 0) {
+					DatePicker.wrapSingleEle.call(this);
+				} else {
+					if(this.options.shareEle) {
+						this.options.context.addClass("datepicker_month_master__");
+					}
+					DatePicker.wrapEle.call(this);
+				}
+			} else {
+				if(this.options.shareEle && N(".datepicker_contents__:not(.datepicker_monthonly__)").length > 0) {
+					DatePicker.wrapSingleEle.call(this);
+				} else {
+					if(this.options.shareEle) {
+						this.options.context.addClass("datepicker_date_master__");
+					}
+					DatePicker.wrapEle.call(this);
+				}
+			}
+
+			//N(".datepicker_contents__:last").hasClass("datepicker_monthonly__")
 
 			// set this instance to context element
 			this.options.context.instance("datepicker", this);
@@ -770,11 +816,12 @@
 				});
 				var monthItem = $('<div align="center"></div>');
 				var gEndDate;
+
 				monthItem.css({
 					"line-height": "25px",
 					"width": "28px",
 					"float": "left"
-				}).click(function(e) {
+				}).click(function(e, ke) {
 					e.preventDefault();
 					monthsPanel.find(".datepicker_month_item__").removeClass("datepicker_month_selected__");
 					$(this).addClass("datepicker_month_selected__");
@@ -790,7 +837,7 @@
 						if(onSelectContinue === undefined || onSelectContinue === true) {
 							opts.context.val(selDate.obj.formatDate(selDate.format.replace(/[^Y|^m|^d]/g, "")));
 						}
-						self.hide();
+						self.hide(ke);
 					} else {
 						daysPanel.empty();
 						var endDateCls = N.date.strToDate(N.string.lpad(yearsPanel.find(".datepicker_year_selected__").text(), 4, "0") +  N.string.lpad(String(parseInt($(this).text())+1), 2, "0") + "00", "Ymd");
@@ -857,7 +904,7 @@
 						"line-height": "25px",
 						"width": "28px",
 						"float": "left"
-					}).click(function(e) {
+					}).click(function(e, ke) {
 						e.preventDefault();
 						var thisEle = $(this);
 						daysPanel.find(".datepicker_prev_day_item__, .datepicker_day_item__, .datepicker_next_day_item__").removeClass("datepicker_day_selected__");
@@ -883,7 +930,7 @@
 						if(onSelectContinue === undefined || onSelectContinue === true) {
 							opts.context.val(selDate.obj.formatDate(selDate.format.replace(/[^Y|^m|^d]/g, "")));
 						}
-						self.hide();
+						self.hide(ke);
 					});
 					opts.contents.append(daysPanel);
 
@@ -896,7 +943,17 @@
 
 				// bind focusin event
 				if(opts.focusin) {
-					opts.context.bind("focusin.datepicker", function() {
+					opts.context.bind("focusin.datepicker", function(e) {
+						// reuse datepicker panel element
+						if(opts.shareEle) {
+							var datepickerInst;
+							if(opts.monthonly) {
+								datepickerInst = N(".datepicker__.datepicker_month_master__").instance("datepicker");
+							} else {
+								datepickerInst = N(".datepicker__.datepicker_date_master__").instance("datepicker");
+							}
+							datepickerInst.options.context = N(e.target);
+						}
 						if(!opts.contents.is(":visible")) {
 							self.show();
 						}
@@ -904,7 +961,7 @@
 				}
 
 				// bind key event
-				opts.context.bind("keyup.datepicker", function(e) {
+				opts.context.bind(N.browser.is("firefox") ? "keydown.datepicker" : "keyup.datepicker", function(e) {
 					e.preventDefault();
 					var value = opts.context.val().replace(/[^0-9]/g, "");
 
@@ -944,9 +1001,82 @@
 	        		// when press the enter key
 					} else if (e.keyCode == 13) {
 		        		if(!opts.monthonly) {
-		        			daysPanel.find(".datepicker_day_selected__").click();
+		        			daysPanel.find(".datepicker_day_selected__").trigger("click", [e]);
 		        		} else {
-		        			monthsPanel.find(".datepicker_month_selected__").click();
+		        			monthsPanel.find(".datepicker_month_selected__").trigger("click", [e]);
+		        		}
+		        	}
+				});
+			},
+			wrapSingleEle : function() {
+				var opts = this.options;
+				var self = this;
+
+				// bind focusin event
+				if(opts.focusin) {
+					opts.context.bind("focusin.datepicker", function() {
+						if(!opts.contents.is(":visible")) {
+							self.show();
+						}
+					});
+				}
+
+				var format = (!opts.monthonly ? N.context.attr("data").formatter.date.Ymd() : N.context.attr("data").formatter.date.Ym()).replace(/[^Y|^m|^d]/g, "");
+				var yearsPanel = N((opts.monthonly ? ".datepicker_contents__.datepicker_monthonly__" : ".datepicker_contents__:not(.datepicker_monthonly__)") + " .datepicker_years_panel__");
+				var monthsPanel = N((opts.monthonly ? ".datepicker_contents__.datepicker_monthonly__" : ".datepicker_contents__:not(.datepicker_monthonly__)") + " .datepicker_months_panel__");
+				var daysPanel = N((opts.monthonly ? ".datepicker_contents__.datepicker_monthonly__" : ".datepicker_contents__:not(.datepicker_monthonly__)") + " .datepicker_days_panel__");
+
+				// bind key event
+				opts.context.bind(N.browser.is("firefox") ? "keydown.datepicker" : "keyup.datepicker", function(e) {
+					e.preventDefault();
+					var value = opts.context.val().replace(/[^0-9]/g, "");
+
+					var endDateCls = N.date.strToDate(N.string.lpad(yearsPanel.find(".datepicker_year_selected__").text(), 4, "0") +  N.string.lpad(String(parseInt(monthsPanel.find(".datepicker_month_selected__").text())+1), 2, "0") + "00", "Ymd");
+					var endDate = endDateCls.obj.getDate();
+					var gEndDate = endDate;
+					if(format !== "Ymd") {
+						gEndDate = 31;
+					}
+
+					// when press the number keys
+					if (e.keyCode >= 48 && e.keyCode <= 57 && value.length <= 8 && value.length%2 === 0) {
+		        		var dateStrArr = N.date.strToDateStrArr(value, format);
+		        		var dateStrStrArr = N.date.strToDateStrArr(value, format, true);
+
+        				// validate input value
+	        			if(!isNaN(dateStrArr[0]) && dateStrStrArr[0].length === 4 && dateStrArr[0] < 100) {
+        					opts.context.alert(N.message.get(opts.message, "yearNaN")).show();
+    						opts.context.val(value.replace(dateStrStrArr[0], ""));
+        					return false;
+        				} else if(!isNaN(dateStrArr[1]) && dateStrStrArr[1].length === 2 && (dateStrArr[1] < 1 || dateStrArr[1] > 12)) {
+        					opts.context.alert(N.message.get(opts.message, "monthNaN")).show();
+    						opts.context.val(value.replace(dateStrStrArr[1], ""));
+        					return false;
+        				} else if(!opts.monthonly && !isNaN(dateStrArr[2]) && dateStrStrArr[2].length === 2 && (dateStrArr[2] < 1 || dateStrArr[2] > parseInt(gEndDate))) {
+        					opts.context.alert(N.message.get(opts.message, "dayNaN", [String(parseInt(gEndDate))])).show();
+    						opts.context.val(value.replace(dateStrStrArr[2], ""));
+        					return false;
+        				}
+	        			if((format.length === 3 && format.indexOf("md") > -1) || format.length === 2) {
+	        				DatePicker.selectItems(opts, value, format, yearsPanel, monthsPanel, daysPanel);
+	        			} else {
+	        				if(!opts.monthonly) {
+	        					if(value.length === 8) {
+	        						DatePicker.selectItems(opts, value, format, yearsPanel, monthsPanel, daysPanel);
+	        					}
+	        				} else {
+	        					if(value.length === 6) {
+	        						DatePicker.selectItems(opts, value, format, yearsPanel, monthsPanel, daysPanel);
+	        					}
+	        				}
+	        			}
+
+	        		// when press the enter key
+					} else if (e.keyCode == 13) {
+		        		if(!opts.monthonly) {
+		        			daysPanel.find(".datepicker_day_selected__").trigger("click", [e]);
+		        		} else {
+		        			monthsPanel.find(".datepicker_month_selected__").trigger("click", [e]);
 		        		}
 
 		        		// Temporary measures, I dont't know why into formated data to only data set of memory when press the enter key
@@ -1009,6 +1139,23 @@
 			show : function() {
 				var opts = this.options;
 
+				// reuse datepicker panel element
+				if(opts.shareEle) {
+					var datepickerInst;
+					var contents;
+					if(opts.monthonly) {
+						datepickerInst = N(".datepicker__.datepicker_month_master__").instance("datepicker");
+						contents = N(".datepicker_contents__.datepicker_monthonly__");
+
+					} else {
+						datepickerInst = N(".datepicker__.datepicker_date_master__").instance("datepicker");
+						contents = N(".datepicker_contents__:not(.datepicker_monthonly__)");
+					}
+					datepickerInst.options.context = opts.context;
+					opts.context.after(contents.detach());
+					opts.contents = contents;
+				}
+
 				// auto select datepicker items from before input value
 				if(!N.string.isEmpty(opts.context.val())) {
 					DatePicker.selectItems(opts,
@@ -1032,9 +1179,10 @@
 
 				// bind "ESC" key event
 				// if press the "ESC" key, datepicker will be hidden
-		        $(document).bind("keyup.datepicker", function(e) {
+		        $(document).bind(N.browser.is("firefox") ? "keydown.datepicker" : "keyup.datepicker", function(e) {
+		        	e.preventDefault();
 		        	if ((e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode)) == 27) {
-		        		self.hide();
+		        		self.hide(e);
 		        	}
 				});
 
@@ -1050,7 +1198,7 @@
 	        	});
 
 		        // when the context(input) is focused out, close the datepicker panel
-		        opts.context.bind("blur.datepicker", function() {
+		        opts.context.bind("blur.datepicker", function(e) {
 		        	if(!lock) {
 		        		self.hide();
 		        	}
@@ -1079,7 +1227,8 @@
 				var opts = this.options;
 
 				if(opts.onBeforeHide !== null) {
-					var result = opts.onBeforeHide.call(this, opts.context, opts.contents);
+					 // arguments[0] - because of firefox, firefox does not have window.event object
+					var result = opts.onBeforeHide.call(this, opts.context, opts.contents, arguments.length > 0 ? arguments[0] : undefined);
 					if(result !== undefined && result === false) {
 						return this;
 					}
@@ -1087,9 +1236,13 @@
 
 				$(window.document).unbind("mousedown.datepicker");
 				opts.context.unbind("blur.datepicker");
-				$(window.document).unbind("keyup.datepicker");
+				$(window.document).unbind(N.browser.is("firefox") ? "keydown.datepicker" : "keyup.datepicker");
 				$(window).unbind("resize.datepicker");
-				opts.contents.fadeOut(150);
+				if(opts.shareEle) {
+					opts.contents.hide();
+				} else {
+					opts.contents.fadeOut(150);
+				}
 				opts.context.get(0).blur();
 				return this;
 			}
@@ -1118,7 +1271,14 @@
 				preload : false,
 				dynPos : true,
 				windowScrollLock : true,
-				draggable : false
+				draggable : false,
+				draggableOverflowCorrection : true,
+				draggableOverflowCorrectionAddValues : {
+					top : 0,
+					bottom : 0,
+					left : 0,
+					right : 0
+				}
 			};
 
 			try {
@@ -1412,7 +1572,7 @@
 					e.preventDefault();
 					var thisEle = $(this);
 					var thisIdx = opts.links.index(this);
-					var thisClassOpts = opts.dataOpts[thisIdx];
+					var thisDeclarativeOpts = opts.dataOpts[thisIdx];
 
 					// hide tab contents
 					opts.contents.hide();
@@ -1421,10 +1581,10 @@
 					opts.links.removeClass("tab_active__");
 					thisEle.addClass("tab_active__");
 
-					if(thisClassOpts.preload === undefined || thisClassOpts.preload === false) {
+					if(thisDeclarativeOpts.preload === undefined || thisDeclarativeOpts.preload === false) {
 						// load content
-						if(thisClassOpts.url !== undefined && thisEle.data("loaded") === undefined) {
-							Tab.loadContent.call(self, thisClassOpts.url, thisIdx);
+						if(thisDeclarativeOpts.url !== undefined && thisEle.data("loaded") === undefined) {
+							Tab.loadContent.call(self, thisDeclarativeOpts.url, thisIdx);
 						}
 					}
 
@@ -1433,15 +1593,15 @@
 						opts.onActive.call(this, thisIdx, thisEle, content, opts.links, opts.contents);
 					}
 
-					// excute "onOpen"(class option) event
+					// excute "onOpen"(declarative option) event
 					// excuted only when defined url with class(inline) option and tab is active
-					if(thisClassOpts.onOpen !== undefined && thisEle.data("loaded")) {
+					if(thisDeclarativeOpts.onOpen !== undefined && thisEle.data("loaded")) {
 						var sc = content.find(">").instance("cont");
-						if(sc[thisClassOpts.onOpen] !== undefined) {
-							//thisClassOpts.onOpen
-							sc[thisClassOpts.onOpen]();
+						if(sc[thisDeclarativeOpts.onOpen] !== undefined) {
+							//thisDeclarativeOpts.onOpen
+							sc[thisDeclarativeOpts.onOpen]();
 						} else {
-							N.warn("[N.tab.wrapEle]onOpen callback function \"" + thisClassOpts.onOpen + "\" is undefined in tab content's Service Controller");
+							N.warn("[N.tab.wrapEle]onOpen event handler function \"" + thisDeclarativeOpts.onOpen + "\" is not defined in tab content's Controller(N.cont)");
 						}
 					}
 
@@ -1457,7 +1617,6 @@
 				var opts = this.options;
 				var self = this;
 
-				// TODO show loading bar
 				N.comm({
 					url : url,
 					contentType : "text/html; charset=UTF-8",
@@ -1465,7 +1624,6 @@
 					type : "GET",
 					target : opts.contents.eq(targetIdx)
 				}).submit(function(page) {
-					var activeTabEle = opts.links.eq(targetIdx);
 					var sc = opts.contents.eq(targetIdx).html(page).children("[id]:first").instance("cont");
 
 					// set Communicator.request
@@ -1480,6 +1638,8 @@
 							sc.init(sc.view, this.request);
 						}
 					}
+
+					var activeTabEle = opts.links.eq(targetIdx);
 
 					// run "onOpen" event
 					if(activeTabEle.hasClass("tab_active__")) {
@@ -1496,8 +1656,6 @@
 
 					// set load status
 					activeTabEle.data("loaded", true);
-
-					// TODO hide loading bar
 	        	});
 			}
 		});
@@ -2073,7 +2231,7 @@
 		        if(!N.isWrappedSet(data)) {
 		        	$.extend(N.element.toData(opts.context.find(":input").not(":button")), data);
 		        	data.rowStatus = "insert";
-		        	
+
 		        	if(!opts.addTop) {
 		        		opts.data.push(data);
 		        		opts.row = opts.data.length - 1;
@@ -2085,12 +2243,12 @@
 		        	if(opts.revert) {
 		        		this.revertData = $.extend({}, opts.data[opts.row]);
 		        	}
-		        	
+
 		        	this.bind();
 
 		        	N.ds.instance(opts.extObj !== null ? opts.extObj : this).notify(opts.extRow > -1 ? opts.extRow : opts.row);
 		        }
-	        	
+
 				return this;
 			},
 			remove : function(row) {
@@ -2191,9 +2349,9 @@
 										ele.trigger("focusout.form.dataSync");
 
 										// format
-										if (!ele.is("input:password, input:hidden, input:file")) {
-											ele.trigger("focusin.form.format");
-											ele.trigger("focusout.form.unformat");
+										if (ele.is("input:password, input:hidden, input:file")) {
+											ele.trigger("focusin.form.unformat");
+											ele.trigger("focusout.form.format");
 										}
 									} else {
 										ele.val(String(val));
@@ -2367,6 +2525,8 @@
 				misc : {
 					withoutTbodyLength : 0, // garbage rows count in table
 					resizableCorrectionWidth : 0,
+					resizableLastCellCorrectionWidth : 0,
+					resizeBarCorrectionLeft : 0,
 					resizeBarCorrectionHeight : 0
 				}
 			};
@@ -2376,6 +2536,7 @@
 
 				//For $.extend method does not extend object type
 				this.options.scrollPaging = $.extend({}, this.options.scrollPaging, N.context.attr("ui").grid.scrollPaging);
+				this.options.misc = $.extend({}, this.options.misc, N.context.attr("ui").grid.misc);
 			} catch (e) {
 				N.error("[N.grid]" + e, e);
 			}
@@ -2422,6 +2583,7 @@
 					var thisEle = $(this);
 					var retFlag;
 					var selected;
+
 					// save the selected row index
 					if(thisEle.hasClass("grid_selected__")) {
 						self.options.row = -1;
@@ -2652,16 +2814,16 @@
         	},
         	resize : function() {
         		var self = this;
-        		
-        		var resizeBar, currResizeBar, resizeBarHeight, cellEle, currCellEle, currNextCellEle, targetNextCellEle, targetCellEle, currResizeBarEle, 
+
+        		var resizeBar, currResizeBar, resizeBarHeight, cellEle, currCellEle, currNextCellEle, targetNextCellEle, targetCellEle, currResizeBarEle,
 					defWidth, nextDefWidth, currWidth, nextCurrWidth, startOffsetX,
 					minPx, maxPx, defPx, movedPx;
-        		
+
 				var opts = this.options;
 				var theadCells = this.thead.find("> tr th");
 				var isPressed = false;
 				var scrollbarWidth = N.browser.scrollbarWidth();
-				
+
 				if(N.browser.is("safari")){
 					theadCells.css("padding-left", "0");
 					theadCells.css("padding-right", "0");
@@ -2674,18 +2836,19 @@
     	        } else {
     	        	context = opts.context;
     	        }
-				
+
 				this.thead.bind("mouseover.grid.resize", function() {
 					resizeBarHeight = (opts.height > 0 ? self.tbodyContainer.closest(".grid_wrap__").height() - 3 : self.tbodyContainer.height() + resizeBarCorrectionHeight) + 1 + opts.misc.resizeBarCorrectionHeight;
 					theadCells.each(function() {
 						var cellEle = $(this);
 						cellEle.find("> .resize_bar__").css({
 							"top" : cellEle.position().top + 1,
-							"left" : (cellEle.position().left + cellEle.outerWidth() - resizeBarWidth / 2) + "px"
+							"left" : (cellEle.position().left + cellEle.outerWidth() - resizeBarWidth / 2 + opts.misc.resizeBarCorrectionLeft) + "px"
 						});
 					});
         		});
 
+				var isFirstTimeLastClick = true;
 				theadCells.each(function() {
 					cellEle = $(this);
 		            resizeBar = $('<div class="resize_bar__"></div>').css({
@@ -2695,7 +2858,7 @@
 		            	"height": String(cellEle.outerHeight()) + "px",
 		            	"opacity": "0"
 		            }).appendTo(cellEle);
-		            
+
 		            resizeBar.bind("mousedown.grid.resize", function(e) {
 		            	if((e.which || e.button) === 1) {
 		            		$(this).css({
@@ -2703,7 +2866,7 @@
 		            		}).animate({
 		            			"height" : resizeBarHeight + "px"
 		            		}, 150);
-		            		
+
 		            		startOffsetX = e.pageX;
 		            		currResizeBarEle = $(this);
 		            		currCellEle = currResizeBarEle.parent("th");
@@ -2713,28 +2876,28 @@
 		            			currNextCellEle = context;
 		            			islast = true;
 		            		}
-		            		
+
 		            		if(opts.height > 0) {
 		            			targetCellEle = opts.context.find("thead th:eq(" + theadCells.index(currCellEle) + ")");
 		            			targetNextCellEle = opts.context.find("thead th:eq(" + (theadCells.index(currCellEle) + 1) + ")");
 		            		}
-
 		            		// Convert flexible cell width to absolute cell width when the clicked resizeBar is last last resizeBar
-		            		if(islast) {
+		            		if(isFirstTimeLastClick && islast) {
 		            			theadCells.each(function(i) {
-	            					$(this).width(Math.floor($(this).width()) + 1 + opts.misc.resizableCorrectionWidth).removeAttr("width");
-	            					
+	            					$(this).width(Math.floor($(this).width()) + (opts.height > 0 ? opts.misc.resizableLastCellCorrectionWidth : 0) + opts.misc.resizableCorrectionWidth).removeAttr("width");
+
 	            					if(targetCellEle !== undefined) {
-	            						opts.context.find("thead th:eq(" + theadCells.index(this) + ")").width(Math.floor($(this).width()) + 1 + opts.misc.resizableCorrectionWidth).removeAttr("width");
+	            						opts.context.find("thead th:eq(" + theadCells.index(this) + ")").width(Math.floor($(this).width()) + opts.misc.resizableCorrectionWidth).removeAttr("width");
 	            					}
 		    					});
+		            			isFirstTimeLastClick = false;
 	            			}
-		            		
+
 		            		// to block sort event
 		            		currCellEle.data("sortLock", true);
 
-		            		defWidth = Math.floor(currCellEle.width()) + 1 + opts.misc.resizableCorrectionWidth;
-		            		nextDefWidth = !islast ? Math.floor(currNextCellEle.width()) + 1 + opts.misc.resizableCorrectionWidth : Math.floor(context.width());
+		            		defWidth = Math.floor(currCellEle.width()) + opts.misc.resizableCorrectionWidth;
+		            		nextDefWidth = !islast ? Math.floor(currNextCellEle.width()) + opts.misc.resizableCorrectionWidth : Math.floor(context.width());
 
 		            		$(document).bind("dragstart.grid.resize, selectstart.grid.resize", function() {
 		            			return false;
@@ -2759,7 +2922,7 @@
 		            						}
 		            					}
 		            					currCellEle.find(".resize_bar__").offset({
-			            					"left" : minPx - resizeBarWidth/2 + movedPx
+			            					"left" : minPx - resizeBarWidth/2 + movedPx + opts.misc.resizeBarCorrectionLeft
 			            				});
 		            				}
 		            			}
@@ -2774,7 +2937,7 @@
             							"opacity": "0"
             						});
 	            				});
-		            			
+
 		            			$(document).unbind("dragstart.grid.resize").unbind("selectstart.grid.resize").unbind("mousemove.grid.resize").unbind("mouseup.grid.resize");
 		            			isPressed = false;
 		            		});
@@ -2848,7 +3011,9 @@
     				if(id === undefined) {
     					id = $(this).find("[id]").attr("id");
     				}
-    				thead.find("> tr th:eq(" + i + ")").data("id", id);
+    				if(thead.find("> tr th:eq(" + i + ")").data("id") === undefined) {
+    					thead.find("> tr th:eq(" + i + ")").data("id", id);
+    				}
                 });
     			return thead;
         	},
@@ -3064,7 +3229,7 @@
 				if(opts.rowHandler !== null) {
 					opts.rowHandler.call(tbodyTempClone, form.options.extRow, tbodyTempClone, form.data(true)[0]);
 				}
-				
+
 				// unselect rows
 				opts.context.find("> tbody").removeClass("grid_selected__");
 
@@ -3266,7 +3431,7 @@
                     }
                 }
 
-                if(currSelPageSet > 0 && startPage > currSelPageSet) {
+                if(currSelPageSet > 0 && currSelPageSet > 1 && startPage >= currSelPageSet) {
                 	$(linkEles.prev).removeClass("pagination_disable__");
                 } else {
                 	$(linkEles.prev).addClass("pagination_disable__");
@@ -3300,6 +3465,8 @@
 
                 return {
                 	"pageNo" : opts.pageNo,
+                	"countPerPage" : opts.countPerPage,
+                	"countPerPageSet" : opts.countPerPageSet,
                 	"pageCount" : pageCount,
                 	"pageSetCount" : pageSetCount,
                 	"currSelPageSet" : currSelPageSet,
@@ -3364,7 +3531,7 @@
                 linkEles.prev.unbind("click.pagination");
                 linkEles.prev.bind("click.pagination", function(e) {
                     e.preventDefault();
-                    if(currPageNavInfo.startPage > currPageNavInfo.currSelPageSet) {
+                    if(currPageNavInfo.currSelPageSet > 1 && currPageNavInfo.startPage >= currPageNavInfo.currSelPageSet) {
                     	opts.pageNo = currPageNavInfo.startPage - opts.countPerPageSet;
                     	currPageNavInfo = Pagination.changePageSet(linkEles, opts);
                     	linkEles.body.find("li a:first").click();
@@ -3543,79 +3710,85 @@
 				if(data !== undefined) {
 					opts.data = N.type(data) === "array" ? N(data) : data;
 				}
-
+				
 				var rootNode = N('<ul class="tree_level1_folder__"></ul>').appendTo(opts.context.empty());
+				var isAleadyRoot = false;
 				N(opts.data).each(function(i, rowData) {
-					if(rowData[opts.level] === 1 || rootNode.find("ul#" + rowData[opts.parent]).length === 0) {
-						N('<li data-index="' + i + '" class="tree_level1_node__ tree_close__"><span class="tree_icon__" href="#"></span>' + (opts.checkbox ? '<span class="tree_check__"><input type="checkbox" /></span>' : '') + '<a class="tree_key__" href="#"><span>' + rowData[opts.key] + '</span></a><ul id="' + rowData[opts.val] + '" class="tree_level' + (opts.level !== null ? String(Number(rowData[opts.level]) + 1) : '') + '_folder__"></ul></li>').appendTo(rootNode);
+					if(rowData[opts.level] === 1 || !isAleadyRoot) {
+						N('<li data-index="' + i + '" class="tree_level1_node__ tree_close__"><span class="tree_icon__"></span>' + (opts.checkbox ? '<span class="tree_check__"><input type="checkbox" /></span>' : '') + '<a class="tree_key__" href="#"><span>' + rowData[opts.key] + '</span></a><ul id="' + rowData[opts.val] + '" class="tree_level' + (opts.level !== null ? String(Number(rowData[opts.level]) + 1) : '') + '_folder__"></ul></li>').appendTo(rootNode);
+						isAleadyRoot = true;
 					} else {
-						N('<li data-index="' + i + '" id="' + rowData[opts.val] + '" class="tree_level' + N.string.trim(rowData[opts.level]) + '_node__ tree_close__"><span class="tree_icon__" href="#"></span><span class="tree_check__">' + (opts.checkbox ? '<input type="checkbox" />' : '') + '</span><a class="tree_key__" href="#"><span>' + rowData[opts.key] + '</span></a><ul id="' + rowData[opts.val] + '"class="tree_level' + (opts.level !== null ? String(Number(rowData[opts.level]) + 1) : '') + '_folder__"></ul></li>').appendTo(rootNode.find("ul#" + rowData[opts.parent]));
+						N('<li data-index="' + i + '" class="tree_level' + N.string.trim(rowData[opts.level]) + '_node__ tree_close__"><span class="tree_icon__"></span>' + (opts.checkbox ? '<span class="tree_check__"><input type="checkbox" /></span>' : '') + '<a class="tree_key__" href="#"><span>' + rowData[opts.key] + '</span></a><ul id="' + rowData[opts.val] + '" class="tree_level' + (opts.level !== null ? String(Number(rowData[opts.level]) + 1) : '') + '_folder__"></ul></li>').appendTo(rootNode.find("#" + rowData[opts.parent]));
 					}
 				});
-
+				
 				// add class to elements with no have chiidren
-				rootNode.find("ul:empty").parent().addClass("tree_last_node__");
-
+				var emptyUls = rootNode.find("ul:empty"); 
+				emptyUls.parent().addClass("tree_last_node__");
+				emptyUls.remove();
+				
 				// checkbox click event bind
-				rootNode.find(".tree_check__ > :checkbox").bind("click.tree", function(e) {
-					var checkFlag;
-					var siblingNodesEle = N(this).closest("li").parent().children("li");
-					var parentNodesEle = N(this).parents("li");
-					var parentNodeEle = N(this).closest("ul").parent();
-					N(this).removeClass("tree_auto_parents_select__");
-					if(N(this).is(":checked")) {
-						N(this).parent().siblings("ul").find(":not(:checked)").prop("checked", true);
-						checkFlag = true;
-					} else {
-						N(this).parent().siblings("ul").find(":checked").prop("checked", false);
-						checkFlag = false;
-					}
-
-					var checkboxLength = siblingNodesEle.find(":checkbox").length;
-					var checkedLength = siblingNodesEle.find(":checked").length;
-					var parentNodeCheckboxEle = parentNodeEle.find("> span.tree_check__ > :checkbox");
-					var parentNodesCheckedEle = parentNodesEle.not(":first").find("> span.tree_check__ > :checkbox");
-					if(checkFlag) {
-						if(checkedLength > 0) {
-							if(checkedLength < checkboxLength) {
-								parentNodesEle.find("> span.tree_check__ > :not(:checked)").prop("checked", true).addClass("tree_auto_parents_select__");
-							} else if(checkedLength === checkboxLength) {
-								parentNodeCheckboxEle.prop("checked", true).removeClass("tree_auto_parents_select__");
+				if(opts.checkbox) {
+					rootNode.find(".tree_check__ > :checkbox").bind("click.tree", function(e) {
+						var checkFlag;
+						var siblingNodesEle = N(this).closest("li").parent().children("li");
+						var parentNodesEle = N(this).parents("li");
+						var parentNodeEle = N(this).closest("ul").parent();
+						N(this).removeClass("tree_auto_parents_select__");
+						if(N(this).is(":checked")) {
+							N(this).parent().siblings("ul").find(":not(:checked)").prop("checked", true);
+							checkFlag = true;
+						} else {
+							N(this).parent().siblings("ul").find(":checked").prop("checked", false);
+							checkFlag = false;
+						}
+						
+						var checkboxLength = siblingNodesEle.find(":checkbox").length;
+						var checkedLength = siblingNodesEle.find(":checked").length;
+						var parentNodeCheckboxEle = parentNodeEle.find("> span.tree_check__ > :checkbox");
+						var parentNodesCheckedEle = parentNodesEle.not(":first").find("> span.tree_check__ > :checkbox");
+						if(checkFlag) {
+							if(checkedLength > 0) {
+								if(checkedLength < checkboxLength) {
+									parentNodesEle.find("> span.tree_check__ > :not(:checked)").prop("checked", true).addClass("tree_auto_parents_select__");
+								} else if(checkedLength === checkboxLength) {
+									parentNodeCheckboxEle.prop("checked", true).removeClass("tree_auto_parents_select__");
+									// apply click effect to parents nodes
+									// FIXME this code is temporary code
+									parentNodeCheckboxEle.trigger("click.tree").trigger("click.tree");
+								}
+							}
+						} else {
+							if(checkedLength > 0 && checkedLength < checkboxLength) {
+								parentNodesCheckedEle.addClass("tree_auto_parents_select__");
+							} else if(checkedLength === 0) {
+								parentNodesCheckedEle.prop("checked", false).removeClass("tree_auto_parents_select__");
 								// apply click effect to parents nodes
 								// FIXME this code is temporary code
 								parentNodeCheckboxEle.trigger("click.tree").trigger("click.tree");
 							}
 						}
-					} else {
-						if(checkedLength > 0 && checkedLength < checkboxLength) {
-							parentNodesCheckedEle.addClass("tree_auto_parents_select__");
-						} else if(checkedLength === 0) {
-							parentNodesCheckedEle.prop("checked", false).removeClass("tree_auto_parents_select__");
-							// apply click effect to parents nodes
-							// FIXME this code is temporary code
-							parentNodeCheckboxEle.trigger("click.tree").trigger("click.tree");
+						
+						// run onCheck event callback
+						// FIXME "e.clientX > 0 && e.clientY > 0" is temporary code
+						if(opts.onCheck !== null && e.clientX > 0 && e.clientY > 0) {
+							var closestLi = N(this).closest("li");
+							var checkedEle = N(this).closest("ul").find(".tree_last_node__ :checked");
+							opts.onCheck.call(closestLi
+									, closestLi.data("index")
+									, closestLi
+									, opts.data[closestLi.data("index")]
+							, checkedEle.map(function() {
+								return N(this).closest("li").data("index");
+							}).get()
+							, checkedEle
+							, checkedEle.map(function() {
+								return opts.data[N(this).closest("li").data("index")];
+							}).get()
+							, checkFlag);
 						}
-					}
-
-					// run onCheck event callback
-					// FIXME "e.clientX > 0 && e.clientY > 0" is temporary code
-					if(opts.onCheck !== null && e.clientX > 0 && e.clientY > 0) {
-						var closestLi = N(this).closest("li");
-						var checkedEle = N(this).closest("ul").find(".tree_last_node__ :checked");
-						opts.onCheck.call(closestLi
-								, closestLi.data("index")
-								, closestLi
-								, opts.data[closestLi.data("index")]
-								, checkedEle.map(function() {
-									return N(this).closest("li").data("index");
-								}).get()
-								, checkedEle
-								, checkedEle.map(function() {
-									return opts.data[N(this).closest("li").data("index")];
-								}).get()
-								, checkFlag);
-					}
-				});
+					});
+				}
 
 				// node name click event bind
 				rootNode.find("li.tree_last_node__ .tree_key__").bind("click.tree", function(e) {
@@ -3641,7 +3814,7 @@
 					}
 				});
 				this.closeAll(true);
-
+				
 				return this;
 			},
 			val : function(row, key, val) {

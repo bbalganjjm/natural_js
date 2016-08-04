@@ -1,5 +1,5 @@
 /*!
- * Natural-CORE v0.8.5.7
+ * Natural-CORE v0.8.5.8
  * bbalganjjm@gmail.com
  *
  * Includes formatdate.js & Mask JavaScript API
@@ -213,7 +213,7 @@
 		// N local variables
 		$.extend(N, {
 			version : {
-				"Natural-CORE" : "0.8.5.7"
+				"Natural-CORE" : "0.8.5.8"
 			},
 			/**
 			 * Set and get locale value
@@ -271,7 +271,7 @@
 					$(window).unbind("resize.datepicker");
 					$(window).unbind("resize.alert");
 					$(window.document).unbind("mousedown.datepicker");
-					$(window.document).unbind("keyup.datepicker");
+					$(window.document).unbind(N.browser.is("firefox") ? "keydown.datepicker" : "keyup.datepicker");
 					$(window.document).unbind("keyup.alert");
 					return true;
 				},
@@ -283,7 +283,7 @@
 					$(window).unbind("resize.alert");
 					$(window.document).unbind("dragstart.alert").unbind("selectstart.alert").unbind("mousemove.alert").unbind("mouseup.alert");
 					$(window.document).unbind("mousedown.datepicker");
-					$(window.document).unbind("keyup.datepicker");
+					$(window.document).unbind(N.browser.is("firefox") ? "keydown.datepicker" : "keyup.datepicker");
 					$(window.document).unbind("keyup.alert");
 					$(window.document).unbind("dragstart.grid.vResize").unbind("selectstart.grid.vResize").unbind("mousemove.grid.vResize").unbind("mouseup.grid.vResize");
 					$(window.document).unbind("dragstart.grid.resize").unbind("selectstart.grid.resize").unbind("mousemove.grid.resize").unbind("mouseup.grid.resize");

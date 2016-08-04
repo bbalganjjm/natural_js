@@ -1,5 +1,5 @@
 /*!
- * Natural-DATA v0.8.2.4
+ * Natural-DATA v0.8.2.8
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-DATA"] = "0.8.2.4";
+	N.version["Natural-DATA"] = "0.8.2.8";
 
 	$.fn.extend($.extend(N.prototype, {
 		datafilter : function(callBack) {
@@ -29,7 +29,7 @@
 	}));
 
 	(function(N) {
-		
+
 		N.data = {
 			refine : function(obj, listId) {
 				if (N.isWrappedSet(obj)) {
@@ -89,7 +89,7 @@
 				return N.isWrappedSet(arr) ? N(arr.sort(this.sortBy(key, reverse))) : arr.sort(this.sortBy(key, reverse));
 			}
 		};
-		
+
 		//DataSync
 		var DataSync = N.ds = function(inst, isReg) {
 			if (N.ds.caller != N.ds.instance) {
@@ -132,7 +132,7 @@
 				return new N.ds(inst, isReg);
 			}
 		});
-		
+
 		$.extend(DataSync.prototype, {
 			"remove" : function() {
 				var inst = this.inst;
@@ -193,7 +193,7 @@
 				}
 			}
 		};
-		
+
 		$.extend(Formatter, {
 			"commas" : function(str, args) {
 				if (N.isEmptyObject(str)) {
@@ -266,7 +266,7 @@
 				str = str.replace(/-/g, "");
 				return str.substring(0, 3) + "-" + str.substring(3, 6);
 			},
-			"phoneNum" : function(str, args) {
+			"phonenum" : function(str, args) {
 				if (N.isEmptyObject(str)) {
 					return str;
 				}
@@ -334,23 +334,38 @@
 								if(isReadonly) {
 									context.prop("readonly", true);
 								}
-								
+
 								if(N.context.attr("ui").datepicker != undefined && N.context.attr("ui").datepicker.onSelect != undefined) {
 					            	return N.context.attr("ui").datepicker.onSelect(context, date, monthonly);
 					            } else {
-					            	return false;					            	
+					            	return false;
 					            }
 							},
 							onBeforeHide : function(context, contents) {
-								context.unbind("focusout.prevent.format.date", N.element.disable).trigger("focusout.form.validate").trigger("focusout.form.dataSync").trigger("focusout.form.format");
-								if(N.context.attr("ui").datepicker != undefined && N.context.attr("ui").datepicker.onBeforeHide != undefined) {
-					            	N.context.attr("ui").datepicker.onBeforeHide(context, contents);
-					            }
+								// for Hide from ESC key
+								var e = arguments.length > 2 ? arguments[2] : undefined; // because of firefox, firefox does not have window.event object
+								var keyCode = e !== undefined ? e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode) : undefined;
+								var isHaveGlobalOnBeforeHide = N.context.attr("ui").datepicker != undefined && N.context.attr("ui").datepicker.onBeforeHide != undefined;
+								if (keyCode == 27 || keyCode == 13) {
+									setTimeout(function(){
+										context.unbind("focusout.prevent.format.date", N.element.disable).trigger("focusout.form.validate").trigger("focusout.form.dataSync").trigger("focusout.form.format");
+
+										if(isHaveGlobalOnBeforeHide) {
+							            	N.context.attr("ui").datepicker.onBeforeHide(context, contents, e);
+							            }
+									}, 0);
+								} else {
+									context.unbind("focusout.prevent.format.date", N.element.disable).trigger("focusout.form.validate").trigger("focusout.form.dataSync").trigger("focusout.form.format");
+
+									if(isHaveGlobalOnBeforeHide) {
+						            	N.context.attr("ui").datepicker.onBeforeHide(context, contents);
+						            }
+								}
 							}
 						});
 					}
 				} else {
-					N.warn("if use date & month options, load Natural-UI library");
+					N.warn("if you use date or month option, you must import Natural-UI library");
 				}
 
 				if (args[0] !== undefined) {
@@ -488,7 +503,7 @@
 
 			this.options.data = obj.length > 0 ? obj : N(N.element.toData(this.options.targetEle));
 		};
-		
+
 		$.extend(Formatter.prototype, {
 			"format" : function(row) {
 				var opts = this.options;
@@ -512,7 +527,7 @@
 				$(opts.data).each(function(i, obj) {
 					retObj = {};
 					for ( var k in opts.rules ) {
-						tempValue = String(obj[k]);
+						tempValue = N.string.trimToEmpty(obj[k]);
 						$(opts.rules[k]).each(function() {
 							if (opts.isElement) {
 								ele = opts.targetEle.filter("#" + k);
@@ -921,7 +936,7 @@
 				return regExp.test(str);
 			}
 		});
-		
+
 		$.extend(Validator.prototype, {
 			"validate" : function(row) {
 				var opts = this.options;
@@ -963,7 +978,7 @@
 								if (opts.rules[k].toString().indexOf("required") < 0 && rule !== "required" && N.string.isEmpty(String(obj[k]))) {
 									retTempObj.result = true;
 								} else {
-									retTempObj.result = Validator[rule](String(obj[k]), args);
+									retTempObj.result = Validator[rule](N.string.trimToEmpty(obj[k]), args);
 								}
 							} catch (e) {
 								if (e.toString().indexOf("is not a function") > -1) {
@@ -1014,7 +1029,7 @@
 				return retArr;
 			}
 		});
-		
+
 	})(N);
 
 })(window, jQuery);
