@@ -1,7 +1,7 @@
 Natural-JS
 ==========
 Natural-JS is composed of a Natural-CORE, Natural-ARCHITECTURE, Natural-DATA, Natural-UI.<br/>
-<b>Natural-CORE</b> is CORE library package that is used internally by the framework.<br/>
+<b>Natural-CORE</b> is CORE library package that is used internally in the framework.<br/>
 <b>Natural-ARCHITECTURE</b> is CVC Architecture Pattern based Architecture Framework. it makes structured and simplifies a complex web UI environment.<br/>
 <b>Natural-DATA</b> provides a module for Data processing and data synchronization.<br/>
 <b>Natural-UI</b> provides a variety of components such as HTML-based Grid, Form, Popup that help improve the user experience and web development productivity.
