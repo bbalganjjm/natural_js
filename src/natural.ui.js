@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.13.66
+ * Natural-UI v0.8.13.67
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "v0.8.13.66";
+	N.version["Natural-UI"] = "v0.8.13.67";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -3628,6 +3628,7 @@
 				val : null,
 				level : null, // optional
 				parent : null,
+				folderSelectable : false,
 				checkbox : false,
 				onSelect : null,
 				onCheck : null
@@ -3791,7 +3792,7 @@
 				}
 
 				// node name click event bind
-				rootNode.find("li.tree_last_node__ .tree_key__").bind("click.tree", function(e) {
+				rootNode.find("li" + (!opts.folderSelectable ? ".tree_last_node__" : "") + " .tree_key__").bind("click.tree", function(e) {
 					e.preventDefault();
 					var parentLi = N(this).parent("li");
 					if(opts.onSelect !== null) {
@@ -3802,7 +3803,7 @@
 				});
 
 				// icon click event bind
-				rootNode.find(".tree_icon__, li:not('.tree_last_node__') .tree_key__").bind("click.tree", function(e) {
+				rootNode.find(".tree_icon__" + (!opts.folderSelectable ? ", li:not('.tree_last_node__') .tree_key__" : "")).bind("click.tree", function(e) {
 					e.preventDefault();
 					var parentLi = N(this).parent("li");
 					if(parentLi.find("> ul > li").length > 0) {
@@ -3813,6 +3814,13 @@
 						}
 					}
 				});
+
+				if(opts.folderSelectable) {
+					rootNode.find("li:not('.tree_last_node__') .tree_key__").bind("click.tree", function(e) {
+						e.preventDefault();	
+					});
+				}
+				
 				this.closeAll(true);
 				
 				return this;
