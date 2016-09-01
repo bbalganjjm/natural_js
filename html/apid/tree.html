@@ -254,6 +254,7 @@
    	       			level : N("#level", view).val(),
    	       			parent : N("#parent", view).val(),
    	       			checkbox : N("#checkbox", view).is(":checked"),
+   	       			folderSelectable : N("#folderSelectable", view).is(":checked"),
    	       			onSelect : N.string.trimToNull(N("#onSelect", view).val()) !== null ?
    	          				eval("(" + N("#onSelect", view).val() + ")") : null,
          				onCheck : N.string.trimToNull(N("#onCheck", view).val()) !== null ?
