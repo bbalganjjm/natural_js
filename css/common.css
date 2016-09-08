@@ -86,23 +86,27 @@ a {
 }
 
 table {
-	margin: 0 0 15px 0; border-collapse: collapse; table-layout: fixed;
+	margin: 0 0 15px 0; border-collapse: collapse; table-layout: fixed; border-top: 2px solid #88dd88;
+}
+
+.tbody_wrap__ table, .tfoot_wrap__ table {
+	border-top: inherit;
 }
 
 table:last-child {
 	margin: 0;
 }
 
-table th {
-	background: linear-gradient(top, #BCFBBC, #AFF9BA); background: -ms-linear-gradient(top, #BCFBBC, #AFF9BA); background: -moz-linear-gradient(top, #BCFBBC, #AFF9BA); background: -o-linear-gradient(top, #BCFBBC, #AFF9BA); background: -webkit-linear-gradient(top, #BCFBBC, #AFF9BA); background-color: #BCFBBC;
+table th, table td {
+	border: 1px solid #88dd88; padding: 5px; word-break: break-word; font-size: 12px; background-color: #ffffff;
 }
 
-table th,table td {
-	border: 1px solid #77cc77; padding: 5px; word-break: break-word; font-size: 12px;
+table th {
+	background: linear-gradient(top, #ccffcc, #cfffcc); background: -ms-linear-gradient(top, #ccffcc, #cfffcc); background: -moz-linear-gradient(top, #ccffcc, #cfffcc); background: -o-linear-gradient(top, #ccffcc, #cfffcc); background: -webkit-linear-gradient(top, #ccffcc, #cfffcc); background-color: #ccffcc;
 }
 
 table.form th {
-	background: linear-gradient(left, #BCFBBC, #AFF9BA); background: -ms-linear-gradient(left, #BCFBBC, #AFF9BA); background: -moz-linear-gradient(left, #BCFBBC, #AFF9BA); background: -o-linear-gradient(left, #BCFBBC, #AFF9BA); background: -webkit-linear-gradient(left, #BCFBBC, #AFF9BA); background-color: #BCFBBC; text-align: right;
+	background: linear-gradient(left, #ccffcc, #cfffcc); background: -ms-linear-gradient(left, #ccffcc, #cfffcc); background: -moz-linear-gradient(left, #ccffcc, #cfffcc); background: -o-linear-gradient(left, #ccffcc, #cfffcc); background: -webkit-linear-gradient(left, #ccffcc, #cfffcc); background-color: #ccffcc; text-align: right;
 }
 
 table.form td {
@@ -111,7 +115,7 @@ table.form td {
 
 /* page layout */
 section {
-	clear: left; margin: 0 auto; max-width: 1003px; min-width: 560px; min-height: 350px; background-color: #efe; padding: 15px 0 15px 0; font-size: 0.875em; box-shadow: 0 0 5px #000;
+	clear: left; margin: 0 auto; max-width: 1003px; min-width: 560px; min-height: 350px; background-color: #fff; padding: 15px 0 15px 0; font-size: 0.875em; box-shadow: 0 0 5px #000;
 }
 
 section article {
@@ -187,7 +191,7 @@ article hr {
 }
 
 article .alert {
-	background: url("../images/icon/alert.png") no-repeat 7px 10px; font-size: 0.95em; padding: 5px 5px 5px 25px; background-color: #BDFDBD; border-radius: 3px; margin: 0 0 15px 0;
+	background: url("../images/icon/alert.png") no-repeat 7px 10px; font-size: 0.95em; padding: 5px 5px 5px 25px; background-color: #ffffc8; border-radius: 3px; margin: 0 0 15px 0;
 }
 
 article .alert ul {
