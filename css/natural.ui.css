@@ -376,7 +376,7 @@ a.btn_mouseout__,input[type='button'].btn_mouseout__,button.btn_mouseout__ {
 }
 
 .tab__>div {
-	padding: 15px; border: 1px solid #55d555;
+	padding: 15px; border: 1px solid #55d555; box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
 /* DatePicker */
