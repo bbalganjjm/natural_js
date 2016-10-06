@@ -4,51 +4,97 @@
 }
 
 #__header .hgroup-back {
-	width: 100%; height: 66px; opacity: 0.90;
+	width: 100%;
+	height: 66px;
+	background-color: #92e6b4;
+	opacity: 0.90;
 }
 
 #__header .hgroup {
-	margin: 0 auto; max-width: 1003px; min-width: 560px; padding: 0 9px 0px 9px;
+	margin: 0 auto;
+	max-width: 1003px;
+	min-width: 560px;
+	padding: 0 9px 0px 9px;
 }
 
 #__header .hgroup h1, #__header .hgroup h2 {
-	font-size: 1em; display: inline;
+	font-size: 1em;
+	display: inline;
 }
 
 #__header .hgroup #logo {
-	color: #030; margin: 6px 0 0 3px;
+	color: #030;
+	margin: 6px 0 0 3px;
 }
 
 #__header .hgroup #desc {
-	font-size: 1em; padding: 0; color: #006622; margin: 40px 3px 0 0; float: right;
+	font-size: 1em;
+	padding: 0;
+	color: #006622;
+	margin: 40px 3px 0 0;
+	float: right;
 }
 
 #__header nav {
-	width: 100%; background-color: #83C783; opacity: 0.8;
+	width: 100%;
+	background-color: #4f904f;
+	opacity: 0.9;
 }
 
 #__header nav>ul {
-	list-style: none; margin: 0 auto; padding: 0; height: 47px; max-width: 1003px; min-width: 560px;
+	list-style: none;
+	margin: 0 auto;
+	padding: 0;
+	height: 47px;
+	max-width: 1003px;
+	min-width: 560px;
 }
 
 #__header nav>ul>li {
-	margin: 0; padding: 13px 20px 13px 20px; text-align: center; float: left; width: 70px;
+	margin: 0;
+	padding: 13px 20px 13px 20px;
+	text-align: center;
+	float: left;
+	width: 70px;
 }
 
 #__header nav>ul>li>a {
-	color: #004400; font-weight: bold; font-size: 1em; text-shadow: 0 0 1px #6c6; opacity: 1;
+	color: #002200;
+	font-weight: bold;
+	font-size: 1em;
+	text-shadow: 0 0 2px #6c6;
+	opacity: 1;
 }
 
+@
+keyframes gnb {from { transform:none;
+
+}
+
+to {
+	transform: rotate3d(90, 0, -40, 10deg);
+}
+
+}
 #__header nav>ul>li>ul {
-	list-style: none; display: none; position: absolute; background: #030; border-radius: 0 0 3px 3px; padding: 5px 10px 5px 10px; box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.3); margin-left: -30px; transform: rotate3d(90, 0, -40, 10deg); margin-top: 5px;border: 3px solid #060;
-}
-
-#__header nav>ul>li:hover {
-	background-color: #030;
+	list-style: none;
+	display: none;
+	position: absolute;
+	background: #1c631c;
+	border-radius: 0 0 3px 3px;
+	padding: 5px 10px 5px 10px;
+	box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.3);
+	margin-left: -30px;
+	margin-top: 5px;
+	border: 1px solid #060;
+	transform: rotate3d(90, 0, -40, 10deg);
+	animation-name: gnb;
+	animation-duration: 0.5s;
 }
 
 #__header nav>ul>li:hover>a {
-	color: #9f9; text-shadow: 0 0 15px #7F7;
+	color: #9f9;
+	text-shadow: 0 0 15px #7F7;
 }
 
 #__header nav>ul>li:hover>ul {
@@ -56,15 +102,22 @@
 }
 
 #__header nav>ul>li>ul>li {
-	padding: 5px 0 5px 0; text-align: left;
+	padding: 5px 0 5px 0;
+	text-align: left;
 }
 
 #__header nav>ul>li>ul>li.nav-saction {
-	padding: 0; color: #449444; font-size: 14px; text-shadow: -1px -1px #005000;
+	padding: 0;
+	color: #449444;
+	font-size: 14px;
+	text-shadow: -1px -1px #005000;
 }
 
 #__header nav>ul>li>ul>li a {
-	color: #9f9; font-size: 0.9em; text-shadow: 1px 1px 1px #000; opacity: 1;
+	color: #9f9;
+	font-size: 0.9em;
+	text-shadow: 1px 1px 1px #000;
+	opacity: 1;
 }
 
 #__header nav>ul>li>ul>li a:hover {
@@ -72,93 +125,84 @@
 }
 </style>
 <div id="__header">
-		<div class="hgroup-back">
-			<div class="hgroup">
-			<h1><a href="./"><img id="logo" src="images/natural_js.png" height="55" /></a></h1>
+	<div class="hgroup-back">
+		<div class="hgroup">
+			<h1>
+				<a href="./"><img id="logo" src="images/natural_js.png"
+					height="55" /></a>
+			</h1>
 			<h2 id="desc">Javascript Enterprise UI Architecture Framework</h2>
 		</div>
-		</div>
-		<nav>
-	        <ul>
-	        	<li lang="ko_KR"><a href="./">시작하기</a></li>
-	        	<li lang="en_US" style="padding-top: 3px; padding-bottom: 2px;"><a href="./">Getting Started</a></li>
-	        	<li lang="ko_KR">
-	        		<a href="#">소개</a>
-	            	<ul>
-	            		<li>
-	            			<a href="html/intr/intr0100.html" lang="ko_KR">Natural-JS 소개</a>
-	            		</li>
-				    </ul>
-	            </li>
-	            <li lang="en_US" style="padding-left: 0; padding-right: 0; width: 110px;">
-	        		<a href="#">Introduction</a>
-	            	<ul>
-	            		<li>
-	            			<a href="html/intr/intr0100.html" lang="en_US">About Natural-JS</a>
-	            		</li>
-				    </ul>
-	            </li>
-	            <li style="padding-left: 0; padding-right: 0; width: 110px;">
-	            	<a href="#" lang="ko_KR">API/DEMO<br></a>
-	            	<a href="#" lang="en_US">API/DEMO<br></a>
-	            	<ul>
-	            		<li>
-	            			<a href="html/refr/refr0101.html" lang="ko_KR">API 문서 안내</a>
-	            			<a href="html/refr/refr0101.html" lang="en_US">API Documentation<br>&nbsp;&nbsp;Information</a>
-	            		</li>
-	            		<li><a href="html/refr/refr0102.html">Natural-CORE</a></li>
-	            		<li><a href="html/refr/refr0103.html">Natural-ARCHITECTURE</a></li>
-	            		<li><a href="html/refr/refr0104.html">Natural-DATA</a></li>
-	            		<li><a href="html/refr/refr0105.html">Natural-UI</a></li>
-	            	</ul>
-	            </li>
-	            <li>
-	            	<a href="#" lang="ko_KR">예제<br></a>
-	            	<a href="#" lang="en_US">Examples<br></a>
-	            	<ul>
-	            		<li>
-	            			<a href="html/exap/exap0100.html" lang="ko_KR">데이터목록조회</a>
-	            			<a href="html/exap/exap0100.html" lang="en_US">Data List View</a>
-	            		</li>
-						<li>
-							<a href="html/exap/exap0200.html" lang="ko_KR">상세데이터조회</a>
-							<a href="html/exap/exap0200.html" lang="en_US">Detailed Data View</a>
-						</li>
-						<li>
-							<a href="html/exap/exap0300.html" lang="ko_KR">상세데이터신규입력</a>
-							<a href="html/exap/exap0300.html" lang="en_US">Input Data View</a>
-						</li>
-						<li>
-							<a href="html/exap/exap0400.html" lang="ko_KR">상세데이터수정</a>
-							<a href="html/exap/exap0400.html" lang="en_US">Modify Data View</a>
-						</li>
-						<li>
-							<a href="html/exap/exap0500.html" lang="ko_KR">그리드CRUD</a>
-							<a href="html/exap/exap0500.html" lang="en_US">CRUD in Table Grid</a>
-						</li>
-						<li>
-							<a href="html/exap/exap0600.html" lang="ko_KR">화면전환CRUD(페이징)</a>
-							<a href="html/exap/exap0600.html" lang="en_US">CRUD for View Transition(Paging)</a>
-						</li>
-						<li>
-							<a href="html/exap/exap0700.html" lang="ko_KR">팝업CRUD</a>
-							<a href="html/exap/exap0700.html" lang="en_US">CRUD for Popup View</a>
-						</li>
-						<li>
-							<a href="html/exap/exap0800.html" lang="ko_KR">마스터 그리드<br/>&nbsp;&nbsp; 디테일 폼</a>
-							<a href="html/exap/exap0800.html" lang="en_US">Master grid<br/>&nbsp;&nbsp; Detail form View</a>
-						</li>
-					</ul>
-	            </li>
-	            <li><a href="https://github.com/bbalganjjm/natural_js" target="blank_">GitHub</a></li>
-	        </ul>
-	    </nav>
+	</div>
+	<nav>
+		<ul>
+			<li lang="ko_KR"><a href="./">시작하기</a></li>
+			<li lang="en_US" style="padding-top: 3px; padding-bottom: 2px;"><a
+				href="./">Getting Started</a></li>
+			<li lang="ko_KR"><a href="#">소개</a>
+				<ul>
+					<li><a href="html/intr/intr0100.html" lang="ko_KR">Natural-JS
+							소개</a></li>
+				</ul></li>
+			<li lang="en_US"
+				style="padding-left: 0; padding-right: 0; width: 110px;"><a
+				href="#">Introduction</a>
+				<ul>
+					<li><a href="html/intr/intr0100.html" lang="en_US">About
+							Natural-JS</a></li>
+				</ul></li>
+			<li style="padding-left: 0; padding-right: 0; width: 110px;"><a
+				href="#" lang="ko_KR">API/DEMO<br></a> <a href="#" lang="en_US">API/DEMO<br></a>
+				<ul>
+					<li><a href="html/refr/refr0101.html" lang="ko_KR">API 문서
+							안내</a> <a href="html/refr/refr0101.html" lang="en_US">API
+							Documentation<br>&nbsp;&nbsp;Information
+					</a></li>
+					<li><a href="html/refr/refr0102.html">Natural-CORE</a></li>
+					<li><a href="html/refr/refr0103.html">Natural-ARCHITECTURE</a></li>
+					<li><a href="html/refr/refr0104.html">Natural-DATA</a></li>
+					<li><a href="html/refr/refr0105.html">Natural-UI</a></li>
+				</ul></li>
+			<li><a href="#" lang="ko_KR">예제<br></a> <a href="#"
+				lang="en_US">Examples<br></a>
+				<ul>
+					<li><a href="html/exap/exap0100.html" lang="ko_KR">데이터목록조회</a>
+						<a href="html/exap/exap0100.html" lang="en_US">Data List View</a>
+					</li>
+					<li><a href="html/exap/exap0200.html" lang="ko_KR">상세데이터조회</a>
+						<a href="html/exap/exap0200.html" lang="en_US">Detailed Data
+							View</a></li>
+					<li><a href="html/exap/exap0300.html" lang="ko_KR">상세데이터신규입력</a>
+						<a href="html/exap/exap0300.html" lang="en_US">Input Data View</a>
+					</li>
+					<li><a href="html/exap/exap0400.html" lang="ko_KR">상세데이터수정</a>
+						<a href="html/exap/exap0400.html" lang="en_US">Modify Data
+							View</a></li>
+					<li><a href="html/exap/exap0500.html" lang="ko_KR">그리드CRUD</a>
+						<a href="html/exap/exap0500.html" lang="en_US">CRUD in Table
+							Grid</a></li>
+					<li><a href="html/exap/exap0600.html" lang="ko_KR">화면전환CRUD(페이징)</a>
+						<a href="html/exap/exap0600.html" lang="en_US">CRUD for View
+							Transition(Paging)</a></li>
+					<li><a href="html/exap/exap0700.html" lang="ko_KR">팝업CRUD</a>
+						<a href="html/exap/exap0700.html" lang="en_US">CRUD for Popup
+							View</a></li>
+					<li><a href="html/exap/exap0800.html" lang="ko_KR">마스터 그리드<br />&nbsp;&nbsp;
+							디테일 폼
+					</a> <a href="html/exap/exap0800.html" lang="en_US">Master grid<br />&nbsp;&nbsp;
+							Detail form View
+					</a></li>
+				</ul></li>
+			<li><a href="https://github.com/bbalganjjm/natural_js"
+				target="blank_">GitHub</a></li>
+		</ul>
+	</nav>
 </div>
 
 <script type="text/javascript">
-N("#__header").cont({
-    init : function(view, request) {
-    	CommonUtilController.setPageLinks("nav > ul > li > ul a");
-    }
-});
+	N("#__header").cont({
+		init : function(view, request) {
+			CommonUtilController.setPageLinks("nav > ul > li > ul a");
+		}
+	});
 </script>
