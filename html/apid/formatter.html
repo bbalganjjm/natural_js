@@ -45,14 +45,14 @@
 	</table>
 
 	<div align="center" class="btnBox">
-		<a id="btnFormatCommand" href="#" data-opts='{ "color": "green", "size": "large" }'>Format(Command)</a>
+		<a id="btnFormatImperative" href="#" data-opts='{ "color": "green", "size": "large" }'>Format(Imperative)</a>
 		<a id="btnFormatDeclarative" href="#" data-opts='{ "color": "yellowgreen", "size": "large" }'>Format(Declarative)</a>
 		<a id="btnUnFormatEvent" href="#" data-opts='{ "size": "large" }'>Run unformat event</a>
 		<a id="btnFormatEvent" href="#" data-opts='{ "size": "large" }'>Run format event</a>
 	</div>
 
 	<p lang="ko_KR" class="smallContTit">명령형 결과 : </p>
-	<p lang="en_US" class="smallContTit">Command Result : </p>
+	<p lang="en_US" class="smallContTit">Imperative Result : </p>
 	<pre class="line-numbers"><code id="result" class="language-javascript"></code></pre>
 </article>
 
@@ -66,7 +66,7 @@
 	        this.setEvents(view);
 	    },
 	    setEvents : function(view) {
-	    	N("#btnFormatCommand", view).click(function(e) {
+	    	N("#btnFormatImperative", view).click(function(e) {
 	            e.preventDefault();
 
 	            var data = eval(N("code#data", view).text());

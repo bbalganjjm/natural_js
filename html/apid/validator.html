@@ -47,12 +47,12 @@
 	</table>
 
 	<div align="center" class="btnBox">
-		<a id="btnValidateCommand" href="#" data-opts='{ "color": "green", "size": "large" }'>Validate(Command)</a>
+		<a id="btnValidateImperative" href="#" data-opts='{ "color": "green", "size": "large" }'>Validate(Imperative)</a>
 		<a id="btnValidateDeclarative" href="#" data-opts='{ "color": "yellowgreen", "size": "large" }'>Validate(Declarative)</a>
 	</div>
 
 	<p lang="ko_KR" class="smallContTit">명령형 결과 : </p>
-	<p lang="en_US" class="smallContTit">Command Result : </p>
+	<p lang="en_US" class="smallContTit">Imperative Result : </p>
 	<pre class="line-numbers"><code id="result" class="language-javascript"></code></pre>
 </article>
 
@@ -67,7 +67,7 @@ N("#__validator").cont({
         this.setEvents(view);
     },
     setEvents : function(view) {
-    	N("#btnValidateCommand", view).click(function(e) {
+    	N("#btnValidateImperative", view).click(function(e) {
             e.preventDefault();
 
             var data = eval(N("code#data", view).text());

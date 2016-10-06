@@ -61,11 +61,11 @@ var IndexController = {
 					msg.push("쪽팔림을 무릅쓰고 번역기 돌려가면서 콩글리시로 번역하고 있습니다.");
 					msg.push("도움 주실분은 GitHub 의 gh-pages 브랜치에 소스가 올라가 있으니 동참 해 주시면 감사 하겠습니다.");
 					msg.push("기타 문의사항은 bbalganjjm@gmail.com 으로 문의 바랍니다.");
-					msg.push('[<a id="korean" href="#" class="link">한국어</a>] | [<a id="english" href="#" class="link">영어</a>]');
+					msg.push('[<a id="korean" href="#" class="link">한국어</a>] | [<a id="english" href="#" class="link">English</a>]');
 				} else {
 					msg.push("Translation work is in progress.");
 					msg.push("I don't speak English well. Please understand.");
-					msg.push('[<a id="korean" href="#" class="link">KOREAN</a>] | [<a id="english" href="#" class="link">ENGLISH</a>]');
+					msg.push('[<a id="korean" href="#" class="link">한국어</a>] | [<a id="english" href="#" class="link">English</a>]');
 				}
 				var noticeBox = $("section>article").prepend('<p id="notice" class="alert" style="display: none;">' + msg.join(" ") + '</p>').find("#notice").slideDown(300);
 				noticeBox.find("#korean").click(function(e) {
