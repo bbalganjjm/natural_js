@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.13.67
+ * Natural-UI v0.8.13.68
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "v0.8.13.67";
+	N.version["Natural-UI"] = "v0.8.13.68";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -86,9 +86,9 @@
 			};
 
 			try {
-				// 1. When undefined the N.context.attr("ui").alert.container value
+				// 1. When N.context.attr("ui").alert.container value is undefined
 				this.options.container = N.context.attr("architecture").page.context;
-				// 2. If defined the N.context.attr("ui").alert.container value N.config, be applied N.config's value
+				// 2. If defined the N.context.attr("ui").alert.container value to N.config, this.options.container value is defined from N.config's value
 				this.options = $.extend({}, this.options, N.context.attr("ui").alert);
 				this.options.container = N(this.options.container);
 				this.options.draggableOverflowCorrectionAddValues = $.extend({}, this.options.draggableOverflowCorrectionAddValues, N.context.attr("ui").alert.draggableOverflowCorrectionAddValues);
@@ -101,6 +101,9 @@
 			}
 			if(msg !== undefined && N.isPlainObject(msg)) {
 				$.extend(this.options, msg);
+				// when the title option value is undefined
+				// $.extend method does not extend undefined value
+				this.options.title = msg.title;
 			}
 
 			if(this.options.isWindow) {
@@ -123,7 +126,7 @@
 			wrapEle : function() {
 				var opts = this.options;
 
-				// set style message overlay
+				// set message overlay's default style
 				var blockOverlayCss = {
 					"display" : "none",
 					"position" : opts.isWindow ? "fixed" : "absolute",
@@ -137,7 +140,7 @@
 
 				var maxZindex = 0;
 				if(opts.alwaysOnTop) {
-					// get max index among page elements
+					// get max index value from all elements in current page
 					maxZindex = N.element.maxZindex(N(opts.alwaysOnTopCalcTarget));
 					blockOverlayCss["z-index"] = String(maxZindex + 1);
 				}
@@ -146,18 +149,18 @@
 					blockOverlayCss["background-color"] = opts.overlayColor;
 				}
 
-				// make message overlay
+				// create message overlay
 				opts.msgContext = opts.container.append($('<div class="block_overlay__" onselectstart="return false;"></div>')
 						.css(blockOverlayCss)).find(".block_overlay__:last");
 
-				// set style class to msgContext element
+				// set style class name to msgContext element
 				opts.msgContext.addClass("alert_overlay__");
 
 				if (opts.vars !== undefined) {
 					opts.msg = N.message.replaceMsgVars(opts.msg, opts.vars);
 				}
 
-				// set style message box
+				// set message box's default style
 				var blockOverlayMsgCss = {
 					"display" : "none",
 					"position" : "absolute"
@@ -167,13 +170,13 @@
 					blockOverlayMsgCss["z-index"] = String(maxZindex + 2);
 				}
 
-				// set title
+				// create title bar element
 				var titleBox = '';
 				if(opts.title !== undefined) {
 					titleBox = '<div class="msg_title_box__"><span class="msg_title__">' + opts.title + '</span><span class="msg_title_close__"></span></div>';
 				}
 
-				// set button box
+				// create button box elements
 				var buttonBox = '';
 				if(opts.button) {
 					buttonBox = '<div class="buttonBox__">' +
@@ -182,7 +185,7 @@
 						'</div>';
 				}
 
-				// make message box
+				// create message box elements
 				opts.msgContents = opts.msgContext.after(
 						$('<div class="block_overlay_msg__">' +
 								titleBox +
@@ -190,7 +193,7 @@
 								buttonBox +
 								'</div>').css(blockOverlayMsgCss)).next(".block_overlay_msg__:last");
 
-				// set style class to msgContents element
+				// set style class name to msgContents element
 				opts.msgContents.addClass("alert__");
 
 				// bind event to close(X) button
@@ -229,7 +232,7 @@
 					self[opts.closeMode]();
 				});
 
-				// remove modal overlay layer for (opts.modal = false)
+				// remove modal overlay layer when opts.modal value is false
 				if(!opts.modal) {
 					opts.msgContext.remove();
 				}
@@ -418,7 +421,7 @@
 							if(opts.context.outerWidth() > 0) {
 								Alert.resetOffSetEle(opts);
 							} else {
-								// for the page change
+								// for when the page is changed.
 								clearInterval(opts.time);
 							}
 						}, 500);
@@ -513,7 +516,7 @@
 				$.extend(this.options, opts);
 			}
 
-			// set style class to context element
+			// set style class name to context element
 			this.options.context.addClass("button__");
 
 			Button.wrapEle.call(this);
@@ -712,7 +715,7 @@
 				$.extend(this.options, opts);
 			}
 
-			// set style class to context element
+			// set style class name to context element
 			this.options.context.addClass("datepicker__");
 
 			if(opts.monthonly) {
@@ -1523,7 +1526,7 @@
 				$.extend(this.options, opts);
 			}
 
-			// set style class to context element
+			// set style class name to context element
 			this.options.context.addClass("tab__");
 
 			Tab.wrapEle.call(this);
@@ -1699,7 +1702,7 @@
 
 			Select.wrapEle.call(this);
 
-			// set style class to context element
+			// set style class name to context element
 			this.options.context.addClass("select__");
 
 			// set this instance to context element
@@ -1847,7 +1850,7 @@
 				}
 			}
 
-			// set style class to context element
+			// set style class name to context element
 			this.options.context.addClass("form__");
 
 			if(this.options.revert) {
@@ -2567,14 +2570,14 @@
 			// set tbody template
 			this.tbodyTemp = this.options.context.find("> tbody").clone(true, true);
 
-			// set style class to context element
+			// set style class name to context element
 			this.options.context.addClass("grid__");
-			// set style class to context element for hover option
+			// set style class name to context element for hover option
 			if(this.options.hover) {
 				this.options.context.addClass("grid_hover__");
 			}
 			if(this.options.select || this.options.multiselect) {
-				// set style class to context element for select, multiselect options
+				// set style class name to context element for select, multiselect options
 				this.options.context.addClass("grid_select__");
 
 				var self = this;
@@ -3363,7 +3366,7 @@
 			// Initialize paging panel
 			this.linkEles = Pagination.wrapEle.call(this);
 
-			// set style class to context element
+			// set style class name to context element
 			this.options.context.addClass("pagination__");
 
 			// set this instance to context element
@@ -3653,7 +3656,7 @@
 				this.options.context = N(opts);
 			}
 
-			// set style class to context element
+			// set style class name to context element
 			this.options.context.addClass("tree__");
 
 			// set this instance to context element
@@ -3711,7 +3714,7 @@
 				if(data !== undefined) {
 					opts.data = N.type(data) === "array" ? N(data) : data;
 				}
-				
+
 				var rootNode = N('<ul class="tree_level1_folder__"></ul>').appendTo(opts.context.empty());
 				var isAleadyRoot = false;
 				N(opts.data).each(function(i, rowData) {
@@ -3722,12 +3725,12 @@
 						N('<li data-index="' + i + '" class="tree_level' + N.string.trim(rowData[opts.level]) + '_node__ tree_close__"><span class="tree_icon__"></span>' + (opts.checkbox ? '<span class="tree_check__"><input type="checkbox" /></span>' : '') + '<a class="tree_key__" href="#"><span>' + rowData[opts.key] + '</span></a><ul id="' + rowData[opts.val] + '" class="tree_level' + (opts.level !== null ? String(Number(rowData[opts.level]) + 1) : '') + '_folder__"></ul></li>').appendTo(rootNode.find("#" + rowData[opts.parent]));
 					}
 				});
-				
+
 				// add class to elements with no have chiidren
-				var emptyUls = rootNode.find("ul:empty"); 
+				var emptyUls = rootNode.find("ul:empty");
 				emptyUls.parent().addClass("tree_last_node__");
 				emptyUls.remove();
-				
+
 				// checkbox click event bind
 				if(opts.checkbox) {
 					rootNode.find(".tree_check__ > :checkbox").bind("click.tree", function(e) {
@@ -3743,7 +3746,7 @@
 							N(this).parent().siblings("ul").find(":checked").prop("checked", false);
 							checkFlag = false;
 						}
-						
+
 						var checkboxLength = siblingNodesEle.find(":checkbox").length;
 						var checkedLength = siblingNodesEle.find(":checked").length;
 						var parentNodeCheckboxEle = parentNodeEle.find("> span.tree_check__ > :checkbox");
@@ -3769,7 +3772,7 @@
 								parentNodeCheckboxEle.trigger("click.tree").trigger("click.tree");
 							}
 						}
-						
+
 						// run onCheck event callback
 						// FIXME "e.clientX > 0 && e.clientY > 0" is temporary code
 						if(opts.onCheck !== null && e.clientX > 0 && e.clientY > 0) {
@@ -3817,12 +3820,12 @@
 
 				if(opts.folderSelectable) {
 					rootNode.find("li:not('.tree_last_node__') .tree_key__").bind("click.tree", function(e) {
-						e.preventDefault();	
+						e.preventDefault();
 					});
 				}
-				
+
 				this.closeAll(true);
-				
+
 				return this;
 			},
 			val : function(row, key, val) {
