@@ -5,7 +5,7 @@
 
 #__header .hgroup-back {
 	width: 100%;
-	height: 66px;
+	height: 82px;
 	background-color: #92e6b4;
 	opacity: 0.90;
 }
@@ -28,31 +28,33 @@
 }
 
 #__header .hgroup #desc {
-	font-size: 1em;
-	padding: 0;
-	color: #006622;
-	margin: 40px 3px 0 0;
-	float: right;
+    font-size: 1.15em;
+    padding: 0;
+    color: #84d1a1;
+    margin: 53px 3px 0 0;
+    float: right;
+    text-shadow: 1px 1px 0px #696f4d;
 }
 
 #__header nav {
 	width: 100%;
 	background-color: #4f904f;
 	opacity: 0.9;
+	box-shadow: 0 1px 3px;
 }
 
 #__header nav>ul {
 	list-style: none;
 	margin: 0 auto;
 	padding: 0;
-	height: 47px;
+	height: 41px;
 	max-width: 1003px;
 	min-width: 560px;
 }
 
 #__header nav>ul>li {
 	margin: 0;
-	padding: 13px 20px 13px 20px;
+	padding: 10px 20px 10px 20px;
 	text-align: center;
 	float: left;
 	width: 70px;
@@ -61,7 +63,7 @@
 #__header nav>ul>li>a {
 	color: #002200;
 	font-weight: bold;
-	font-size: 1em;
+	font-size: 0.97em;
 	text-shadow: 0 0 2px #6c6;
 	opacity: 1;
 }
@@ -80,7 +82,7 @@
 	padding: 5px 10px 5px 10px;
 	box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.3);
 	margin-left: -30px;
-	margin-top: 5px;
+	margin-top: 2px;
 	border: 1px solid #060;
 	transform: rotate3d(90, 0, -40, 10deg);
 	animation-name: gnb;
@@ -118,15 +120,42 @@
 #__header nav>ul>li>ul>li a:hover {
 	text-shadow: 0 0 10px #fff;
 }
+
+@keyframes navFixOff {
+	from { opacity: 0.9; }
+	to { opacity: 0.5; }
+}
+
+@keyframes navFixOn {
+	from { opacity: 0.5; }
+	to { opacity: 0.9; }
+}
+
+#__header nav.navFix {
+	position: fixed;
+	z-index: 9999999;
+	width: 100%;
+	left: 0;
+	top: 0;
+	opacity: 0.5;
+	animation-name: navFixOff;
+	animation-duration: 3s;
+}
+
+#__header nav.navFix:hover {
+	opacity: 0.9;
+	animation-name: navFixOn;
+	animation-duration: 0.6s;
+}
+
 </style>
 <div id="__header">
 	<div class="hgroup-back">
 		<div class="hgroup">
 			<h1>
-				<a href="./"><img id="logo" src="images/natural_js.png"
-					height="55" /></a>
+				<a href="./"><img id="logo" src="images/natural_js.png" height="70" /></a>
 			</h1>
-			<h2 id="desc">Javascript Enterprise UI Architecture Framework</h2>
+			<h2 id="desc">Javascript UI Architecture Framework</h2>
 		</div>
 	</div>
 	<nav>
@@ -198,6 +227,20 @@
 	N("#__header").cont({
 		init : function(view, request) {
 			CommonUtilController.setPageLinks("nav > ul > li > ul a");
+
+			N(window).scroll(function() {
+				if(N(this).scrollTop() > 65) {
+					if(!N("nav", view).hasClass("navFix")) {
+						view.css("padding-bottom", "41px");
+						N("nav", view).addClass("navFix");
+					}
+				} else {
+					if(N("nav", view).hasClass("navFix")) {
+						view.css("padding-bottom", "");
+						N("nav", view).removeClass("navFix");
+					}
+				}
+			});
 		}
 	});
 </script>
