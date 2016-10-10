@@ -13,7 +13,7 @@
 		<tr>
 			<th><label for="context">context</label></th>
 			<td colspan="3">
-				<input id="context" type="text" value="#loginForm" /> 
+				<input id="context" type="text" value="#loginForm" />
 				<label for="context" lang="ko_KR">jQuery selector 입력</label>
 				<label for="context" lang="en_US">Input jQuery selector</label>
 			</td>
@@ -21,7 +21,7 @@
 		<tr>
 			<th><label for="title">title</label></th>
 			<td>
-				<input id="title" type="text" value="Alert test" />
+				<input id="title" type="text" value="Popup Title" />
 				<label for="title" lang="ko_KR">입력하지 않으면 팝업의 타이틀바가 표시 되지 않습니다.</label>
 				<label for="title" lang="en_US">If do not input title, do not display title bar</label>
 			</td>
@@ -324,7 +324,7 @@ function() {
 	            e.preventDefault();
 
 	            var opts = {
-					container : view.parent(),	            		
+					container : view.parent(),
 	            	title : N.string.trimToNull(N("#localPage #title", view).val()) !== null ?
 	            			N("#localPage #title", view).val() : undefined,
 	       			confirm : N("#localPage #confirm", view).is(":checked"),
