@@ -85,6 +85,7 @@ a {
 	text-decoration: none; font-weight: normal; font-size: 1em; font-family: "Nanum Gothic", "Malgun Gothic", "dotum", "Segoe UI", sans-serif; color: #004a00;
 }
 
+/* Table Style */
 table {
 	margin: 0 0 15px 0; border-collapse: collapse; table-layout: fixed; border-top: 2px solid #88dd88;
 }
@@ -107,10 +108,6 @@ table th {
 
 table.form th {
 	background: linear-gradient(left, #ccffcc, #cfffcc); background: -ms-linear-gradient(left, #ccffcc, #cfffcc); background: -moz-linear-gradient(left, #ccffcc, #cfffcc); background: -o-linear-gradient(left, #ccffcc, #cfffcc); background: -webkit-linear-gradient(left, #ccffcc, #cfffcc); background-color: #ccffcc; text-align: right;
-}
-
-table.form td {
-	text-align: left;
 }
 
 /* page layout */
