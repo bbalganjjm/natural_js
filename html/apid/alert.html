@@ -145,8 +145,7 @@ function() {
 	            var opts = {
 	            	msg : N("#msg", view).val(),
 	            	confirm : N("#confirm", view).is(":checked"),
-	            	title : N.string.trimToNull(N("#title", view).val()) !== null ?
-	            			N("#title", view).val() : undefined,
+	            	title : N.string.trimToUndefined(N("#title", view).val()),
 	            	modal : N("#modal", view).is(":checked"),
 	            	button : N("#button", view).is(":checked"),
 	            	width : Number(N("#width", view).val()),

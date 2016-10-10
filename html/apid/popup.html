@@ -325,8 +325,7 @@ function() {
 
 	            var opts = {
 					container : view.parent(),
-	            	title : N.string.trimToNull(N("#localPage #title", view).val()) !== null ?
-	            			N("#localPage #title", view).val() : undefined,
+	            	title : N.string.trimToUndefined(N("#localPage #title", view).val()),
 	       			confirm : N("#localPage #confirm", view).is(":checked"),
 	            	modal : N("#localPage #modal", view).is(":checked"),
 	            	button : N("#localPage #button", view).is(":checked"),
@@ -358,8 +357,7 @@ function() {
 
 	            var opts = {
 	            	url : N("#otherPage #url", view).val(),
-	            	title : N.string.trimToNull(N("#otherPage #title", view).val()) !== null ?
-	            			N("#otherPage #title", view).val() : undefined,
+	            	title : N.string.trimToUndefined(N("#otherPage #title", view).val()),
 	       			confirm : N("#otherPage #confirm", view).is(":checked"),
 	            	modal : N("#otherPage #modal", view).is(":checked"),
 	            	button : N("#otherPage #button", view).is(":checked"),
