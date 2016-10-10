@@ -605,10 +605,10 @@
 			</td>
 		</tr>
 	</table>
-	
+
 	<h3 lang="ko_KR">예제</h3>
 	<h3 lang="en_US">Examples</h3>
-	
+
 	<p class="alert">예제 데이터</p>
 	<pre class="line-numbers"><code class="language-markup"><xmp>
 var data = [{
@@ -632,7 +632,6 @@ var data = [{
 }]</xmp></code></pre>
 
 	<p>1. 리스트형 그리드 생성 후 데이터 바인드</p>
-	<p class="alert">그리드을 이루는 요소는 TABLE 이든 DIV 든 상관없습니다. 지정한 context 안에 데이터의 키(컬럼)명과 같은 id 속성을 가진 요소가 있다면 해당 요소에 값을 바인드 합니다.</p>
 	<pre class="line-numbers"><code class="language-markup"><xmp>
 <table id="gridExample10">
 	<thead><!-- 컬럼 타이틀 영역 -->
@@ -745,7 +744,7 @@ var data = [{
 
 <script type="text/javascript">
 	var grid = N(data).grid("#gridExample20").bind();
-	
+
 	// 행추가
 	N("#btnGridExample20").click(function() {
 		grid.add(); //add 메서드를 호출하면 id 속성을 가지고 있는 입력요소를 기반으로 { "age": "", "email": "", "registered" : "" } 와 같은 데이터가 추가됨.
@@ -776,7 +775,7 @@ var data = [{
 
 <script type="text/javascript">
 	var grid = N(data).grid("#gridExample30").bind();
-	
+
 	N("#btnGridExample30").click(function() {
 		N(window).alert({ // 1. confirm 메시지 출력
 			msg : "저장 하겠습니까?",
@@ -784,7 +783,7 @@ var data = [{
 			onOk : function() {
 				if(grid.validate()) { // 2. 그리드에 입력된 데이터 검증
 					N(grid.data()).comm("save.json").submit(); // 3. 그리드의 데이터를 저장
-				}				
+				}
 			}
 		});
 	});
@@ -826,7 +825,7 @@ var data = [{
     	context : "#gridExample40 #gender",
     	key : "key",
     	val : "val"
-    })	
+    })
 
     // 2. 그리드 바인드
 	N(data).grid("#gridExample40").bind();
