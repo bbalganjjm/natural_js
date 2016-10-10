@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.13.68
+ * Natural-UI v0.8.13.69
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -1296,8 +1296,14 @@
 				} else {
 					if(arguments.length === 1 && N.isPlainObject(obj)) {
 						$.extend(this.options, obj);
+						// when the title option value is undefined
+						// $.extend method does not extend undefined value
+						this.options.title = obj.title;
 					} else {
 						$.extend(this.options, opts);
+						// when the title option value is undefined
+						// $.extend method does not extend undefined value
+						this.options.title = opts.title;
 					}
 					if(N.type(this.options.context) === "string") {
 						this.options.context = N(this.options.context);
