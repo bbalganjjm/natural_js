@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "v0.8.13.68";
+	N.version["Natural-UI"] = "v0.8.13.69";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -103,7 +103,9 @@
 				$.extend(this.options, msg);
 				// when the title option value is undefined
 				// $.extend method does not extend undefined value
-				this.options.title = msg.title;
+				if(msg.hasOwnProperty("title")) {
+					this.options.title = msg.title;
+				}
 			}
 
 			if(this.options.isWindow) {
@@ -1298,12 +1300,16 @@
 						$.extend(this.options, obj);
 						// when the title option value is undefined
 						// $.extend method does not extend undefined value
-						this.options.title = obj.title;
+						if(obj.hasOwnProperty("title")) {
+							this.options.title = obj.title;
+						}
 					} else {
 						$.extend(this.options, opts);
 						// when the title option value is undefined
 						// $.extend method does not extend undefined value
-						this.options.title = opts.title;
+						if(obj.hasOwnProperty("title")) {
+							this.options.title = opts.title;
+						}
 					}
 					if(N.type(this.options.context) === "string") {
 						this.options.context = N(this.options.context);
