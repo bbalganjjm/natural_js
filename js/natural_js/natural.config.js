@@ -1,3 +1,11 @@
+/**
+ * Natural-JS에서 제공하는 라이브러리 및 컴포넌트의 전역 옵션 값 설정
+ *
+ * 컴포넌트들의 옵션 적용 순서
+ * 1. 컴포넌트 초기화시 지정한 옵션 값
+ * 2. 여기(N.Config)에서 지정한 옵션 값
+ * 3. 컴포넌트 클래스의 기본 옵션 값
+ */
 (function(N) {
 	/**
 	 * Natural-CORE Config
@@ -27,25 +35,40 @@
 	 * Natural-ARCHITECTURE Config
 	 */
 	N.context.attr("architecture", {
+		/**
+		 * Natural-JS 의 구동영역(지정 필수)
+		 */
 		"page" : {
 			"context" : "#naturalJsContents"
 		},
 		"comm" : {
 			/**
 			* Global ajax request filter
+			*
+			* N.comm 으로 호출되는 모든요청이 아래에서 정의한 필터를 통과하게 되므로 서버 요청 시 공통적으로 적용해야 할 부분을 정의 하면 됨.
+			* 필터 인자 중 request 인자에 요청에 대한 여러가지 정보가 있으니 잘 활용하면 엄청난 효과를 누릴 수 있음.
+			* request 객체에서 제공 해 주는 정보는 http://bbalganjjm.github.io/natural_js/#refr/refr0103 에서 > Communicatior 탭 > Communicator.request 챕터 > 3) 기본옵션(Default options)을 참고
+			* 필터를 여러개 걸수 있으며 단위 필터명은 아무거나 지정하면 됨.
+			* 여기에서 지정한 pageFilter, dataFilter 는 상수값이 아니므로 자유롭게 지정하면 됨.
 			*/
 			"filters" : {
-				/**
-				 * 필터를 여러개 걸수 있으며 단위 필터명은 아무거나 지정하면 됨.
-				 */
 				"pageFilter" : {
+					/**
+					 * N.cont 의 init 메서드가 실행 된 후 실행됨.
+					 */
 					afterInit : function(request) {
 					},
+					/**
+					 * 서버에 요청을 보내기 전 실행됨.
+					 */
 					beforeSend : function(request, xhr, settings) {
 						if(request.options.dataType === "html" && request.options.target !== null && request.options.append === false) {
 							request.options.target.html('<table style="margin: 0;padding: 0;width: 100%;height: 100%;"><tr><td style="text-align: center;vertical-align: middle;border: 0;"><img src="images/loading.gif" height="24"></td></tr></table>');
 						}
 					},
+					/**
+					 * 서버에 요청이 성공 했을 경우 실행됨.
+					 */
 					success : function(request, data, textStatus, xhr) {
 						if(request.options.dataType === "html" && N(data).hasClass("view-code")) {
 							this.pageId = N(data).attr("id");
@@ -53,6 +76,9 @@
 							this.pageId = undefined;
 						}
 					},
+					/**
+					 * 서버에 요청 후 서버에러가 발생 했을 경우 실행됨.
+					 */
 					error : function(request, xhr, textStatus, errorThrown) {
 						if(request.options.dataType === "html") {
 							if(request.options.target.html !== undefined) {
@@ -62,6 +88,9 @@
 							}
 						}
 					},
+					/**
+					 * 모든 요청완료 후 실행 됨.
+					 */
 					complete : function(request, xhr, textStatus) {
 						if(request.options.dataType === "html") {
 							// Multilingual handling
@@ -134,14 +163,16 @@
 		},
 		"formatter" : {
 			/**
-			 * define user format rules
-			 *
-			 * function name = rule name
-			 * return = boolean
+			 * 사용자 정의 포멧 룰 - 기본제공되는 데이터 포멧 룰 외에 추가로 지정하고 싶을 때 작성
+			 * userRules 오브젝트 안에 function 명이 룰 명이 되고 포멧된 값을 반환(return)하면 됨.
 			 */
 			"userRules" : {
-
+				// 함수 첫번째 인자는 검증 데이터가 들어오고 두번째 인자는 옵션값이 들어옴. natural.data.js 소스의 Formatter 부분 참고
 			},
+			/**
+			 * 사이트 전역으로 사용할 날짜포멧 지정
+			 * Y : 년, m : 월, d : 일, H : 시, i : 분, s : 초
+			 */
 			"date" : {
 				/**
 				 * 년월일 구분 문자
@@ -185,14 +216,16 @@
 		},
 		"validator" : {
 			/**
-			 * define user validate rules
-			 *
-			 * function name = rule name
-			 * return = boolean
+			 * 사용자 정의 검증 룰 - 기본제공되는 데이터 검증 룰 외에 추가로 지정하고 싶을 때 작성
+			 * userRules 오브젝트 안에 function 명이 룰 명이 되고 검증에 성공하면 true를 실패하면 false를 반환(return)하면 됨.
 			 */
 			"userRules" : {
-
+				// 함수 첫번째 인자는 검증 데이터가 들어오고 두번째 인자는 옵션값이 들어옴. natural.data.js 소스의 Validator 부분 참고
 			},
+			/**
+			 * 데이터 검증 오류 다국어 메시지
+			 * 다른언어 추가 시 해당언어의 로케일 값을 오브젝트명으로 하고 동인한 속성명들에 해당언어로 된 메시지를 추가하면 됨.
+			 */
 			"message" : {
 				"ko_KR" : {
 					global : "필드검증에 통과하지 못했습니다.",
@@ -287,6 +320,7 @@
 			}
 		}
 	});
+	// 아래 extend 구문은 사용자 정의 룰 정의 시 적용되게 하는 코드이므로 사용자 정의 룰을 정의 했다면 절대 지우면 안됨.
 	$.extend(N.formatter, N.context.attr("data").formatter.userRules);
 	$.extend(N.validator, N.context.attr("data").validator.userRules);
 
@@ -462,6 +496,9 @@
 					"empty" : "No inquired data or no data available."
 				}
 			},
+			/**
+			 * 기타 설정
+			 */
 			"misc" : {
 				/**
 				 * 컬럼 리사이즈 시 다른컬럼이 밀릴때 아래 수치 조절(기본값 : 0)
