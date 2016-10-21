@@ -1,3 +1,11 @@
+/**
+ * Natural-JS에서 제공하는 라이브러리 및 컴포넌트의 전역 옵션 값 설정
+ *
+ * 컴포넌트들의 옵션 적용 순서
+ * 1. 컴포넌트 초기화시 지정한 옵션 값
+ * 2. 여기(N.Config)에서 지정한 옵션 값
+ * 3. 컴포넌트 클래스의 기본 옵션 값
+ */
 (function(N) {
 	/**
 	 * Natural-CORE Config
@@ -20,42 +28,77 @@
 	    /**
 	     * N.context.attr("architecture").page.context 로 페이지가 전환될때 마다 실행될 가비지 컬렉터의 모드
 	     */
-	    gcMode : "minimum", //minimum, full
-	    /**
-	     * N.json.mapFromKeys 함수에서 필터링 제외 할 키값, N.grid 나 N.form 등 data() 메서드를 제공하는 컴포넌트에도 같이 적용됨.
-	     */
-	    excludeMapFromKeys : ["rowStatus"]
+	    gcMode : "full" //minimum, full
 	});
 
 	/**
 	 * Natural-ARCHITECTURE Config
 	 */
 	N.context.attr("architecture", {
+		/**
+		 * Natural-JS 의 구동영역(지정 필수)
+		 */
 		"page" : {
-			"context" : "div#contents"
+			"context" : "#naturalJsContents"
 		},
 		"comm" : {
 			/**
 			* Global ajax request filter
+			*
+			* N.comm 으로 호출되는 모든요청이 아래에서 정의한 필터를 통과하게 되므로 서버 요청 시 공통적으로 적용해야 할 부분을 정의 하면 됨.
+			* 필터 인자 중 request 인자에 요청에 대한 여러가지 정보가 있으니 잘 활용하면 엄청난 효과를 누릴 수 있음.
+			* request 객체에서 제공 해 주는 정보는 http://bbalganjjm.github.io/natural_js/#refr/refr0103 에서 > Communicatior 탭 > Communicator.request 챕터 > 3) 기본옵션(Default options)을 참고
+			* 필터를 여러개 걸수 있으며 단위 필터명은 아무거나 지정하면 됨.
+			* 여기에서 지정한 pageFilter, dataFilter 는 상수값이 아니므로 자유롭게 지정하면 됨.
 			*/
 			"filters" : {
-				/**
-				 * 필터를 여러개 걸수 있으며 단위 필터명은 아무거나 지정하면 됨.
-				 */
 				"pageFilter" : {
+					/**
+					 * N.cont 의 init 메서드가 실행 된 후 실행됨.
+					 */
 					afterInit : function(request) {
 					},
+					/**
+					 * 서버에 요청을 보내기 전 실행됨.
+					 */
 					beforeSend : function(request, xhr, settings) {
-						if(request.options.dataType === "html" && request.obj.length > 0 && request.append === false) {
-							request.obj.html('<div align="center" style="margin-top: 140px;margin-bottom: 140px;">페이지를 불러오는 중...</div>');
+						if(request.options.dataType === "html" && request.options.target !== null && request.options.append === false) {
+							request.options.target.html('<table style="margin: 0;padding: 0;width: 100%;height: 100%;"><tr><td style="text-align: center;vertical-align: middle;border: 0;"><img src="images/loading.gif" height="24"></td></tr></table>');
 						}
 					},
+					/**
+					 * 서버에 요청이 성공 했을 경우 실행됨.
+					 */
 					success : function(request, data, textStatus, xhr) {
+						if(request.options.dataType === "html" && N(data).hasClass("view-code")) {
+							this.pageId = N(data).attr("id");
+						} else {
+							this.pageId = undefined;
+						}
 					},
+					/**
+					 * 서버에 요청 후 서버에러가 발생 했을 경우 실행됨.
+					 */
 					error : function(request, xhr, textStatus, errorThrown) {
-						
+						if(request.options.dataType === "html") {
+							if(request.options.target.html !== undefined) {
+								request.options.target.html('<div align="center" style="margin-top: 140px;margin-bottom: 140px;">[ ' + request.options.url + ' ] 페이지를 불러오는 도중 에러가 발생 했습니다.</div>');
+							} else {
+								N(window).alert('[ ' + request.options.url + ' ] 페이지를 불러오는 도중 에러가 발생 했습니다.').show();
+							}
+						}
 					},
+					/**
+					 * 모든 요청완료 후 실행 됨.
+					 */
 					complete : function(request, xhr, textStatus) {
+						if(request.options.dataType === "html") {
+							// Multilingual handling
+					    	CommonUtilController.i18n(undefined, request.options.target);
+						}
+						if(this.pageId !== undefined) {
+							CommonUtilController.sourceCode(N("#" + this.pageId + ".view-code"), request.get("url"));
+						}
 					}
 				},
 				"dataFilter" : {
@@ -74,31 +117,35 @@
 			"request" : {
 				"options" : {
 					/**
+					 * 기본 Method
+					 */
+					"type" : "GET",
+					/**
 					 * 기본 contentType
 					 */
 					"contentType" : "application/json; charset=utf-8",
 					/**
 					 * Ajax 통신 시 브라우저 캐시 적용 여부, 운영 시에는 true로 변경 바람
 					 */
-					"cache" : false,
+					"cache" : true,
 					/**
 					 * 페이지 전환 없는 방식의 사이트 구현 시 Ajax 통신 시(async)
 					 * 요청할 때 location.href 와 응답 올때 location.href 을 비교하여 오류 방지 할건지 여부
 					 */
 					"urlSync" : true,
 					/**
-					 * 선택 영역에 html 페이지를 불러올때 browser history(뒤로가기버튼) 를 적용할 지 여부
+					 * 특정 영역에 html 페이지를 불러올때 browser history(뒤로가기버튼) 를 적용할 지 여부
 					 */
 					"browserHistory" : false,
 					/**
-					 * 선택 영역에 html 페이지를 불러올때 덮어 쓸건지 더할건지 여부
+					 * 특정 영역에 html 페이지를 불러올때 덮어 쓸건지 더할건지 여부
 					 */
 					"append" : false,
 					/**
 					 * 특정 영역에 html 페이지를 불러올때 전환 효과 지정, false 이면 효과 없음.
 					 * ex) ["fadeIn", 300, null], 적용안할때는 false
 					 */
-					"effect" : ["fadeIn", 300, null]
+					"effect" : false
 				}
 			}
 		}
@@ -116,14 +163,16 @@
 		},
 		"formatter" : {
 			/**
-			 * define user format rules
-			 *
-			 * function name = rule name
-			 * return = boolean
+			 * 사용자 정의 포멧 룰 - 기본제공되는 데이터 포멧 룰 외에 추가로 지정하고 싶을 때 작성
+			 * userRules 오브젝트 안에 function 명이 룰 명이 되고 포멧된 값을 반환(return)하면 됨.
 			 */
 			"userRules" : {
-
+				// 함수 첫번째 인자는 검증 데이터가 들어오고 두번째 인자는 옵션값이 들어옴. natural.data.js 소스의 Formatter 부분 참고
 			},
+			/**
+			 * 사이트 전역으로 사용할 날짜포멧 지정
+			 * Y : 년, m : 월, d : 일, H : 시, i : 분, s : 초
+			 */
 			"date" : {
 				/**
 				 * 년월일 구분 문자
@@ -167,14 +216,16 @@
 		},
 		"validator" : {
 			/**
-			 * define user validate rules
-			 *
-			 * function name = rule name
-			 * return = boolean
+			 * 사용자 정의 검증 룰 - 기본제공되는 데이터 검증 룰 외에 추가로 지정하고 싶을 때 작성
+			 * userRules 오브젝트 안에 function 명이 룰 명이 되고 검증에 성공하면 true를 실패하면 false를 반환(return)하면 됨.
 			 */
 			"userRules" : {
-
+				// 함수 첫번째 인자는 검증 데이터가 들어오고 두번째 인자는 옵션값이 들어옴. natural.data.js 소스의 Validator 부분 참고
 			},
+			/**
+			 * 데이터 검증 오류 다국어 메시지
+			 * 다른언어 추가 시 해당언어의 로케일 값을 오브젝트명으로 하고 동인한 속성명들에 해당언어로 된 메시지를 추가하면 됨.
+			 */
 			"message" : {
 				"ko_KR" : {
 					global : "필드검증에 통과하지 못했습니다.",
@@ -189,11 +240,13 @@
 					dash_integer : "숫자(정수), 대쉬(-) 만 입력 할 수 있습니다.",
 					commas_integer : "숫자(정수), 콤마(,) 만 입력 할 수 있습니다.",
 					number : "숫자(+-,. 포함)만 입력 할 수 있습니다.",
-					decimal : "(유한)소수 {0}번째 자리까지 입력 할 수 있습니다.",
+					decimal : "(유한)소수만 입력 할 수 있습니다.",
+					decimal_ : "(유한)소수 {0}번째 자리까지 입력 할 수 있습니다.",
 					email : "e-mail 형식에 맞지 않습니다.",
 					url : "URL 형식에 맞지 않습니다.",
 					zipcode : "우편번호 형식에 맞지 않습니다.",
 					phone : "전화번호 형식이 아닙니다.",
+					phone_ : "전화번호 형식이 아닙니다.",
 					ssn : "주민등록번호 형식에 맞지 않습니다.",
 					frn : "외국인등록번호 형식에 맞지 않습니다.",
 					frn_ssn : "주민번호나 외국인등록번호 형식에 맞지 않습니다.",
@@ -201,23 +254,23 @@
 					cpno : "법인번호 형식에 맞지 않습니다.",
 					date : "날짜 형식에 맞지 않습니다.",
 					time : "시간 형식에 맞지 않습니다.",
-					accept : "\"{0}\" 값만 입력 할 수 있습니다.",
-					match : "\"{0}\" 이(가) 포함된 값만 입력 할 수 있습니다.",
-					acceptFileExt : "\"{0}\" 이(가) 포함된 확장자만 입력 할 수 있습니다.",
-					notAccept : "\"{0}\" 값은 입력 할 수 없습니다.",
-					notMatch : "\"{0}\" 이(가) 포함된 값은 입력 할 수 없습니다.",
-					notAcceptFileExt : "\"{0}\" 이(가) 포함된 확장자는 입력 할 수없습니다.",
-					equalTo : "\"{1}\" 의 값과 같아야 합니다.",
-					maxlength : "{0} 글자 이하만 입력 가능합니다.",
-					minlength : "{0} 글자 이상만 입력 가능합니다.",
-					rangelength : "{0} 글자 에서 {1} 글자 까지만 입력 가능합니다.",
-					maxbyte : "{0} 바이트 이하만 입력 가능합니다.<br> - 영문, 숫자 : 1 바이트<br> - 한글, 특수문자 : 3 바이트",
-					minbyte : "{0} 바이트 이상만 입력 가능합니다.<br> - 영문, 숫자 : 1 바이트<br> - 한글, 특수문자 : 3 바이트",
-					rangebyte : "{0} 바이트 에서 {1} 바이트 까지만 입력 가능합니다.<br> - 영문, 숫자 한글자 : 1 바이트<br> - 한글, 특수문자 : 3 바이트",
-					maxvalue : "{0} 이하의 값만 입력 가능합니다.",
-					minvalue : "{0} 이상의 값만 입력 가능합니다.",
-					rangevalue : "{0} 에서 {1} 사이의 값만 입력 가능합니다.",
-					regexp : "{1}"
+					accept_ : "\"{0}\" 값만 입력 할 수 있습니다.",
+					match_ : "\"{0}\" 이(가) 포함된 값만 입력 할 수 있습니다.",
+					acceptFileExt_ : "\"{0}\" 이(가) 포함된 확장자만 입력 할 수 있습니다.",
+					notAccept_ : "\"{0}\" 값은 입력 할 수 없습니다.",
+					notMatch_ : "\"{0}\" 이(가) 포함된 값은 입력 할 수 없습니다.",
+					notAcceptFileExt_ : "\"{0}\" 이(가) 포함된 확장자는 입력 할 수없습니다.",
+					equalTo_ : "\"{1}\" 의 값과 같아야 합니다.",
+					maxlength_ : "{0} 글자 이하만 입력 가능합니다.",
+					minlength_ : "{0} 글자 이상만 입력 가능합니다.",
+					rangelength_ : "{0} 글자 에서 {1} 글자 까지만 입력 가능합니다.",
+					maxbyte_ : "{0} 바이트 이하만 입력 가능합니다.<br> - 영문, 숫자 : 1 바이트<br> - 한글, 특수문자 : 3 바이트",
+					minbyte_ : "{0} 바이트 이상만 입력 가능합니다.<br> - 영문, 숫자 : 1 바이트<br> - 한글, 특수문자 : 3 바이트",
+					rangebyte_ : "{0} 바이트 에서 {1} 바이트 까지만 입력 가능합니다.<br> - 영문, 숫자 한글자 : 1 바이트<br> - 한글, 특수문자 : 3 바이트",
+					maxvalue_ : "{0} 이하의 값만 입력 가능합니다.",
+					minvalue_ : "{0} 이상의 값만 입력 가능합니다.",
+					rangevalue_ : "{0} 에서 {1} 사이의 값만 입력 가능합니다.",
+					regexp_ : "{1}"
 				},
 				"en_US" : {
 					global : "It Can't pass the field verification.",
@@ -232,11 +285,13 @@
 					dash_integer : "Can enter only number(integer) and dash(-).",
 					commas_integer : "Can enter only number(integer) and commas(,).",
 					number : "Can enter only number and (+-,.)",
-					decimal : "Can enter up to {0} places of (finite)decimal.",
+					decimal : "Can enter only (finite)decimal",
+					decimal_ : "Can enter up to {0} places of (finite)decimal.",
 					email : "Don't conform to the format of E-mail.",
 					url : "Don't conform to the format of URL.",
 					zipcode : "Don't conform to the format of zip code.",
 					phone : "There is no format of phone number.",
+					phone_ : "There is no format of phone number.",
 					ssn : "Don't fit the format of the resident registration number.",
 					frn : "Don't fit the format of foreign registration number.",
 					frn_ssn : "Don't fit the format of the resident registration number or foreign registration number.",
@@ -244,27 +299,28 @@
 					cpno : "Don't fit the format of corporation number.",
 					date : "Don't fit the format of date.",
 					time : "Don't fit the format of time.",
-					accept : "Can enter only \"{0}\" value.",
-					match : "Can enter only value ​​that contains \"{0}\".",
-					acceptFileExt : "Can enter only extension that includes \"{0}\".",
-					notAccept : "Can't enter \"{0}\" value.",
-					notMatch : "Can't enter only value ​​that contains \"{0}\".",
-					notAcceptFileExt : "Can't enter only extension that includes \"{0}\".",
-					equalTo : "Must be the same as \"{1}\" value.",
-					maxlength : "Can enter only below {0} letters.",
-					minlength : "Can enter only more than {0} letters.",
-					rangelength : "It can be entered from {0} to {1} letters.",
-					maxbyte : "Can enter only below {0} bytes.",
-					minbyte : "Can enter only more than {0} bytes.",
-					rangebyte : "It can be entered from {0} to {1} bytes.",
-					maxvalue : "Can enter only below {0} value.",
-					minvalue : "Can enter only more than {0} value.",
-					rangevalue : "Can be entered value from {0} to {1}.",
-					regexp : "{1}"
+					accept_ : "Can enter only \"{0}\" value.",
+					match_ : "Can enter only value ​​that contains \"{0}\".",
+					acceptFileExt_ : "Can enter only extension that includes \"{0}\".",
+					notAccept_ : "Can't enter \"{0}\" value.",
+					notMatch_ : "Can't enter only value ​​that contains \"{0}\".",
+					notAcceptFileExt_ : "Can't enter only extension that includes \"{0}\".",
+					equalTo_ : "Must be the same as \"{1}\" value.",
+					maxlength_ : "Can enter only below {0} letters.",
+					minlength_ : "Can enter only more than {0} letters.",
+					rangelength_ : "It can be entered from {0} to {1} letters.",
+					maxbyte_ : "Can enter only below {0} bytes.",
+					minbyte_ : "Can enter only more than {0} bytes.",
+					rangebyte_ : "It can be entered from {0} to {1} bytes.",
+					maxvalue_ : "Can enter only below {0} value.",
+					minvalue_ : "Can enter only more than {0} value.",
+					rangevalue_ : "Can be entered value from {0} to {1}.",
+					regexp_ : "{1}"
 				}
 			}
 		}
 	});
+	// 아래 extend 구문은 사용자 정의 룰 정의 시 적용되게 하는 코드이므로 사용자 정의 룰을 정의 했다면 절대 지우면 안됨.
 	$.extend(N.formatter, N.context.attr("data").formatter.userRules);
 	$.extend(N.validator, N.context.attr("data").validator.userRules);
 
@@ -276,18 +332,28 @@
 			/**
 			 * Popup Element 가 담길 영역
 			 */
-			"container" : "div#contents",
+			"container" : "#naturalJsContents",
 			/**
-			 * 필수 값
+			 * 버튼 스타일(Required)
 			 */
 			"global" : {
 				"okBtnStyle" : {
-					color : "gray",
+					color : "yellowgreen",
 					size : "medium"
 				},
 				"cancelBtnStyle" : {
 					size : "medium"
 				}
+			},
+			/**
+			 * 드래그하면서 다이얼로그가 window영역을 벗어날때 다시 돌아올 위치를 추가로 지정(기본값은 0, 드래그 시 횡 스크롤이 생겨 화면이 지저분 해질때 조절바람)
+			 * N.popup 도 적용가능
+			 */
+			"draggableOverflowCorrectionAddValues" : {
+				top : 0,
+				bottom : 0,
+				left : +2,
+				right : -2
 			},
 			"alwaysOnTop" : false,
 			/**
@@ -322,14 +388,13 @@
 				}
 			}
 		},
-		"button" : {
-			"customStyle" : false
-		},
 		"popup" : {
 			/**
-			 * 버튼 표시 유무
+			 * 버튼 상태 변경에 따른 fade 효과 적용 유무
 			 */
-			"button" : false
+			"button" : {
+				"effect" : true
+			}
 		},
 		"tab" : {
 			/**
@@ -431,6 +496,9 @@
 					"empty" : "No inquired data or no data available."
 				}
 			},
+			/**
+			 * 기타 설정
+			 */
 			"misc" : {
 				/**
 				 * 컬럼 리사이즈 시 다른컬럼이 밀릴때 아래 수치 조절(기본값 : 0)
