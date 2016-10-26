@@ -124,6 +124,10 @@ a.btn_common__, input[type='button'].btn_common__, button.btn_common__ {
 	display: inline-block; margin-bottom: 2px 0 2px 0 !important; border: 1px; overflow: visible; cursor: pointer; text-align: center; white-space: nowrap; vertical-align: middle; margin: 0px; border-radius: 5px;
 }
 
+a.btn_common__ {
+	text-decoration: none;
+}
+
 /* Button Icon */
 a.btn_common__ img {
 
