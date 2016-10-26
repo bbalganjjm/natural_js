@@ -38,6 +38,7 @@
 }
 
 .alert__.block_overlay_msg__ .buttonBox__ a {
+	text-decoration: none;
 	display: inline-block;
 }
 
