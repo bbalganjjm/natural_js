@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.13.69
+ * Natural-UI v0.8.13.71
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "v0.8.13.69";
+	N.version["Natural-UI"] = "v0.8.13.71";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -119,6 +119,9 @@
 				this.options.msgContents.instance("alert", this);
 			} else {
 				Alert.wrapInputEle.call(this);
+
+				// set this instance to context element
+				this.options.context.instance("alert", this);
 			}
 
 			return this;
@@ -1583,7 +1586,7 @@
 					}
 				});
 
-				opts.links.bind("click.tab", function(e) {
+				opts.links.bind("click.tab", function(e, onOpenData) {
 					e.preventDefault();
 					var thisEle = $(this);
 					var thisIdx = opts.links.index(this);
@@ -1614,7 +1617,7 @@
 						var sc = content.find(">").instance("cont");
 						if(sc[thisDeclarativeOpts.onOpen] !== undefined) {
 							//thisDeclarativeOpts.onOpen
-							sc[thisDeclarativeOpts.onOpen]();
+							sc[thisDeclarativeOpts.onOpen](onOpenData);
 						} else {
 							N.warn("[N.tab.wrapEle]onOpen event handler function \"" + thisDeclarativeOpts.onOpen + "\" is not defined in tab content's Controller(N.cont)");
 						}
@@ -1676,9 +1679,13 @@
 		});
 
 		$.extend(Tab.prototype, {
-			open : function(idx) {
+			open : function(idx, onOpenData) {
 				if(idx !== undefined) {
-					$(this.options.links.get(idx)).click();
+					if(onOpenData !== undefined) {
+						$(this.options.links.get(idx)).trigger("click.tab", [onOpenData]);
+					} else {
+						$(this.options.links.get(idx)).trigger("click.tab");
+					}
 				}
 				return this;
 			}
