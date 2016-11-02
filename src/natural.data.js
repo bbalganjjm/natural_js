@@ -1,5 +1,5 @@
 /*!
- * Natural-DATA v0.8.2.8
+ * Natural-DATA v0.8.2.9
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-DATA"] = "0.8.2.8";
+	N.version["Natural-DATA"] = "0.8.2.9";
 
 	$.fn.extend($.extend(N.prototype, {
 		datafilter : function(callBack) {
@@ -469,41 +469,6 @@
 			}
 		});
 
-		// Validator
-		var Validator = N.validator = function(obj, rules) {
-			this.options = {
-				data : N.isPlainObject(obj) ? N(obj) : obj,
-				rules : rules,
-				isElement : false,
-				createEvent : true,
-				context : null,
-				targetEle : null
-			};
-
-			if (N.isElement(rules) || N.isString(rules)) {
-				var opts = this.options;
-				opts.isElement = true;
-				opts.context = N(rules);
-				opts.targetEle = opts.context.is(":input") ? opts.context : opts.context.find(":input");
-				var self = this;
-				opts.targetEle = opts.targetEle.map(function() {
-					if($(this).data("validate") !== undefined) {
-						if(opts.createEvent) {
-							var thisEle = $(this);
-							thisEle.unbind("validate.validator");
-							thisEle.bind("validate.validator", function() {
-								N().validator(N(this)).validate();
-							});
-						}
-						return this;
-					}
-				});
-				opts.rules = N.element.toRules(opts.targetEle, "validate");
-			}
-
-			this.options.data = obj.length > 0 ? obj : N(N.element.toData(this.options.targetEle));
-		};
-
 		$.extend(Formatter.prototype, {
 			"format" : function(row) {
 				var opts = this.options;
@@ -591,6 +556,41 @@
 				return this.options.data[row][key];
 			}
 		});
+
+		// Validator
+		var Validator = N.validator = function(obj, rules) {
+			this.options = {
+				data : N.isPlainObject(obj) ? N(obj) : obj,
+				rules : rules,
+				isElement : false,
+				createEvent : true,
+				context : null,
+				targetEle : null
+			};
+
+			if (N.isElement(rules) || N.isString(rules)) {
+				var opts = this.options;
+				opts.isElement = true;
+				opts.context = N(rules);
+				opts.targetEle = opts.context.is(":input") ? opts.context : opts.context.find(":input");
+				var self = this;
+				opts.targetEle = opts.targetEle.map(function() {
+					if($(this).data("validate") !== undefined) {
+						if(opts.createEvent) {
+							var thisEle = $(this);
+							thisEle.unbind("validate.validator");
+							thisEle.bind("validate.validator", function() {
+								N().validator(N(this)).validate();
+							});
+						}
+						return this;
+					}
+				});
+				opts.rules = N.element.toRules(opts.targetEle, "validate");
+			}
+
+			this.options.data = obj.length > 0 ? obj : N(N.element.toData(this.options.targetEle));
+		};
 
 		$.extend(Validator, {
 			"required" : function(str) {
@@ -1008,17 +1008,25 @@
 							}
 							if(!pass) {
 								ele.addClass("validate_false__");
+								if (N().alert !== undefined) {
+									alert = N(opts.targetEle !== null ? ele : undefined).alert($(retTempArr).map(function() {
+										if (this.msg !== undefined) {
+											return this.msg;
+										}
+									}).get()).show();
+								} else {
+									N.error("You must import Natural-UI library");
+								}
 							} else {
 								ele.removeClass("validate_false__");
-							}
-							if (N().alert !== undefined) {
-								alert = N(opts.targetEle !== null ? ele : undefined).alert($(retTempArr).map(function() {
-									if (this.msg !== undefined) {
-										return this.msg;
+								if (N().alert !== undefined) {
+									alertInst = ele.instance("alert");
+									if(alertInst !== undefined) {
+										alertInst.remove();
 									}
-								}).get()).show();
-							} else {
-								N.error("You must import Natural-UI library");
+								} else {
+									N.error("You must import Natural-UI library");
+								}
 							}
 						}
 						retObj[k] = retTempArr;
