@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.13.71
+ * Natural-UI v0.8.13.72
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "v0.8.13.71";
+	N.version["Natural-UI"] = "v0.8.13.72";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -119,7 +119,7 @@
 				this.options.msgContents.instance("alert", this);
 			} else {
 				Alert.wrapInputEle.call(this);
-
+				
 				// set this instance to context element
 				this.options.context.instance("alert", this);
 			}
@@ -1614,7 +1614,7 @@
 					// excute "onOpen"(declarative option) event
 					// excuted only when defined url with class(inline) option and tab is active
 					if(thisDeclarativeOpts.onOpen !== undefined && thisEle.data("loaded")) {
-						var sc = content.find(">").instance("cont");
+						var sc = content.find(">").filter("[id]:first").instance("cont");
 						if(sc[thisDeclarativeOpts.onOpen] !== undefined) {
 							//thisDeclarativeOpts.onOpen
 							sc[thisDeclarativeOpts.onOpen](onOpenData);
