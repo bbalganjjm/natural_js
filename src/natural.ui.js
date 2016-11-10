@@ -1499,7 +1499,7 @@
 			this.options = {
 				context : obj.length > 0 ? obj : null,
 				links : obj.length > 0 ? obj.find("li") : null,
-				dataOpts : [], // dataOpts : [{ url: undefined, width: "auto", active: false, preload: false, onOpen: undefined }]
+				dataOpts : [], // dataOpts : [{ url: undefined, active: false, preload: false, onOpen: undefined }]
 				randomSel : false,
 				onActive : null,
 				contents : obj.length > 0 ? obj.find("> div") : null,
