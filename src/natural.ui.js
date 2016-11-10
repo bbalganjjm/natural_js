@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.13.72
+ * Natural-UI v0.8.13.73
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "v0.8.13.72";
+	N.version["Natural-UI"] = "v0.8.13.73";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -119,7 +119,7 @@
 				this.options.msgContents.instance("alert", this);
 			} else {
 				Alert.wrapInputEle.call(this);
-				
+
 				// set this instance to context element
 				this.options.context.instance("alert", this);
 			}
@@ -1215,15 +1215,9 @@
 		        // set datapicker position
 				$(window).bind("resize.datepicker", function() {
 					var leftOfs = opts.context.position().left;
-					var parentEle = opts.contents.closest(".form__");
-					var limitWidth;
-					if(parentEle.length > 0) {
-						limitWidth = parentEle.position().left + parentEle.width();
-					} else {
-						limitWidth = $(window).width();
-					}
+					var limitWidth = $(window).width();
 					if(leftOfs + opts.contents.width() > limitWidth) {
-						opts.contents.css("right", (limitWidth - (leftOfs + opts.context.outerWidth())) + "px");
+						opts.contents.css("left", (leftOfs - (opts.contents.width() - opts.context.width())) + "px");
 					} else {
 						opts.contents.css("left", leftOfs + "px");
 					}
