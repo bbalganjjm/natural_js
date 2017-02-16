@@ -90,14 +90,14 @@
 			<td>String</td>
 			<td>null</td>
 			<td align="center">○</td>
-			<td>name 과 매핑(Mapping)될 데이터의 key 컬럼명을 지정 합니다.</td>
+			<td>name과 매핑(Mapping)될 데이터의 key 컬럼명을 지정 합니다.</td>
 		</tr>
 		<tr>
 			<td>val</td>
 			<td>String</td>
 			<td>null</td>
 			<td align="center">○</td>
-			<td>vlaue 과 매핑될 key 컬럼명을 지정 합니다.</td>
+			<td>vlaue와 매핑될 key 컬럼명을 지정 합니다.</td>
 		</tr>
 		<tr>
 			<td>append</td>
@@ -225,10 +225,10 @@
 			<td>true 이면 아무것 선택하지 않고 false 이면 SELECT 요소의 경우 기본 입력값으로 선택 됩니다.</td>
 		</tr>
 	</table>
-	
+
 	<h3 lang="ko_KR">예제</h3>
 	<h3 lang="en_US">Examples</h3>
-	
+
 	<p class="alert">예제 데이터</p>
 	<pre class="line-numbers"><code class="language-markup"><xmp>
 var data = [{
@@ -242,7 +242,7 @@ var data = [{
 		"val" : "green"
 }]</xmp></code></pre>
 
-<p class="alert">key 옵션과 val 옵션은 N.config(natural.config.js) 에 다음과 같이 전역옵션으로 설정하면 N(data).select("#eyeColor").bind(); 와 같이 간편하게 사용할 수 있습니다. 다음 예제들은 N.config에 다음과 같이 설정되어 있다는 가정하에 구동되는 예제 입니다. 그렇지 않다면 컴포넌트 초기화 시 key, val 옵션을 지정 해야 합니다.</p> 
+<p class="alert">key 옵션과 val 옵션은 N.config(natural.config.js) 에 다음과 같이 전역옵션으로 설정하면 N(data).select("#eyeColor").bind(); 와 같이 간편하게 사용할 수 있습니다. 다음 예제들은 N.config에 다음과 같이 설정되어 있다는 가정하에 구동되는 예제 입니다. 그렇지 않다면 컴포넌트 초기화 시 key, val 옵션을 지정 해야 합니다.</p>
 <pre class="line-numbers"><code class="language-markup"><xmp>
 N.context.attr("ui", {
     ...
@@ -252,7 +252,7 @@ N.context.attr("ui", {
 	}
 	...
 });</xmp></code></pre>
-	
+
 	<p>1. SELECT 요소에 데이터 바인드</p>
 		<pre class="line-numbers"><code class="language-markup"><xmp>
 <select id="eyeColor">
