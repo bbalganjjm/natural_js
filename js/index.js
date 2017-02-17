@@ -51,13 +51,13 @@ var IndexController = {
 				}
 			});
 		} else {
-			N(N.context.attr("architecture").page.context).comm("html/gtst/gtst0100.html").submit(function() {
+			N(N.context.attr("architecture").page.context).comm("html/home/home0100.html").submit(function() {
 				// Google Analytics
 				if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 9) {
 					ga('create', 'UA-58001949-2', 'auto');
 					ga('send', {
 						'hitType': 'pageview',
-						'page': '#gtst/gtst0100'
+						'page': '#home/home0100'
 					});
 				}
 			});
