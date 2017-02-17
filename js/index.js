@@ -73,7 +73,7 @@ var IndexController = {
 				if(N.locale() === "ko_KR") {
 					msg.push("공지사항.");
 				} else {
-					msg.push("I don't speak english well but i'm working on translate to english. please understand.");
+					msg.push("i'm working on translate to english but i don't speak english well. please understand.");
 				}
 				$("section>article").prepend('<p id="notice" class="alert" style="display: none;">' + msg.join(" ") + '</p>').find("#notice").slideDown(300);
 			}, 1000);
