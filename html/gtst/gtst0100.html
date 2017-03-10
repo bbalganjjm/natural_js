@@ -300,37 +300,6 @@ N("#__gtst0100").cont({
     	}
 
     	CommonUtilController.setPageLinks(N("a.link", view).not("[target='blank_']"));
-
-    	var logo = $("#natural-js-logo");
-		var i=0;
-		var handle = 0;
-
-		var renderLoop = function() {
-			if(i>720) {
-				if(window.cancelAnimationFrame ||
-						window.webkitCancelAnimationFrame ||
-						window.mozCancelAnimationFrame ||
-						window.oCancelAnimationFrame) {
-					window.cancelAnimationFrame(handle);
-				} else {
-					window.clearTimeout(handle);
-				}
-				logo.css("transform", "");
-			} else {
-				logo.css("transform", "rotate3d(0, 1, 0.1, " + i*0.5 + "deg)");
-				i++;
-				if(window.cancelAnimationFrame ||
-						window.webkitCancelAnimationFrame ||
-						window.mozCancelAnimationFrame ||
-						window.oCancelAnimationFrame) {
-					handle = window.requestAnimationFrame(renderLoop);
-				} else {
-					window.setTimeout(renderLoop, 1000 / 60);
-				}
-			}
-		};
-
-		renderLoop();
     }
 });
 </script>

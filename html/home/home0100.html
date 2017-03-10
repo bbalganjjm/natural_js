@@ -1,5 +1,5 @@
 <style type="text/css">
-	.video-container {
+	#__home0100 .video-container {
 		position: relative;
 		width: 100%;
 		height: 0;
@@ -7,7 +7,7 @@
 		padding-bottom: 75%;
 	}
 
-	.video-container iframe, .video-container object, .video-container embed {
+	#__home0100 .video-container iframe, .video-container object, .video-container embed {
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -15,14 +15,30 @@
 		height: 100%;
 	}
 
-	.mainLogoBox {
-		background-color: #55cc55;
-	    margin: 0 0 15px 0;
-	    border: 1px solid #22cc22;
+	#__home0100 .mainLogoBox {
+	    background-image: url("images/logo_back.jpg");
+	    background-position: -540px -264px;
+	    background-repeat: no-repeat;
+	    height: 226px;
+	    overflow-y: hidden;
+	    position: relative;
+	}
+
+	#__home0100 .naturalJsLogo {
+	    animation: naturalJsLogoAni 8s 1 ease-in-out;
+	}
+
+	@keyframes naturalJsLogoAni {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
 	}
 </style>
 <article id="__home0100">
-	<p class="mainLogoBox" align="center"><img id="natural-js-logo" src="images/js.png" style="margin: 40px 0 30px 0"></p>
+	<div class="mainLogoBox" align="center"><img class="naturalJsLogo" src="images/js.png" style="margin: 40px 0 30px 0"></div>
 	<dl class="qna">
 		<dt lang="ko_KR">Natural-JS 란?</dt>
 		<dt lang="en_US">What is Natural-JS?</dt>
@@ -130,37 +146,6 @@ N("#__home0100").cont({
     	}
 
     	CommonUtilController.setPageLinks(N("a.link", view).not("[target='blank_']"));
-
-    	var logo = $("#natural-js-logo");
-		var i=0;
-		var handle = 0;
-
-		var renderLoop = function() {
-			if(i>720) {
-				if(window.cancelAnimationFrame ||
-						window.webkitCancelAnimationFrame ||
-						window.mozCancelAnimationFrame ||
-						window.oCancelAnimationFrame) {
-					window.cancelAnimationFrame(handle);
-				} else {
-					window.clearTimeout(handle);
-				}
-				logo.css("transform", "");
-			} else {
-				logo.css("transform", "rotate3d(0, 1, 0.1, " + i*0.5 + "deg)");
-				i++;
-				if(window.cancelAnimationFrame ||
-						window.webkitCancelAnimationFrame ||
-						window.mozCancelAnimationFrame ||
-						window.oCancelAnimationFrame) {
-					handle = window.requestAnimationFrame(renderLoop);
-				} else {
-					window.setTimeout(renderLoop, 1000 / 60);
-				}
-			}
-		};
-
-		renderLoop();
     }
 });
 </script>
