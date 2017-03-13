@@ -1,6 +1,7 @@
 <style>
 #__header {
 	min-width: 560px;
+	margin-bottom: 41px;
 }
 
 #__header .hgroup-back {
@@ -25,16 +26,6 @@
 #__header .hgroup #logo {
 	color: #030;
 	margin: 6px 0 0 3px;
-	animation: naturalJsLogoAni 8s 1 ease-in-out;
-}
-
-@keyframes naturalJsLogoAni {
-	from {
-		opacity: 0;
-	}
-	to {
-		opacity: 1;
-	}
 }
 
 #__header .hgroup #desc {
@@ -50,6 +41,8 @@
 	background-color: #005500;
 	opacity: 0.9;
 	box-shadow: 0 1px 3px;
+	position: fixed;
+	z-index: 1;
 }
 
 #__header nav>ul {
@@ -254,16 +247,16 @@
 	N("#__header").cont({
 		init : function(view, request) {
 			CommonUtilController.setPageLinks("nav > ul > li > ul a");
-
-			N(window).scroll(function() {
-				if(N(this).scrollTop() > 65) {
+			var headerHeight = view.outerHeight();
+			N(window).scroll(function(e) {
+				if(N(this).scrollTop() > headerHeight) {
+					N("nav", view).css("top", "");
 					if(!N("nav", view).hasClass("navFix")) {
-						view.css("padding-bottom", "41px");
 						N("nav", view).addClass("navFix");
 					}
 				} else {
+					N("nav", view).css("top", headerHeight - N(this).scrollTop() - 1);
 					if(N("nav", view).hasClass("navFix")) {
-						view.css("padding-bottom", "");
 						N("nav", view).removeClass("navFix");
 					}
 				}
