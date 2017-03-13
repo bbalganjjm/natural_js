@@ -248,14 +248,16 @@
 		init : function(view, request) {
 			CommonUtilController.setPageLinks("nav > ul > li > ul a");
 			var headerHeight = view.outerHeight();
+			var scrollTop;
 			N(window).scroll(function(e) {
-				if(N(this).scrollTop() > headerHeight) {
+				scrollTop = N(this).scrollTop();
+				if(scrollTop > headerHeight) {
 					N("nav", view).css("top", "");
 					if(!N("nav", view).hasClass("navFix")) {
 						N("nav", view).addClass("navFix");
 					}
 				} else {
-					N("nav", view).css("top", headerHeight - (N(this).scrollTop() + 1));
+					N("nav", view).css("top", headerHeight - scrollTop);
 					if(N("nav", view).hasClass("navFix")) {
 						N("nav", view).removeClass("navFix");
 					}
