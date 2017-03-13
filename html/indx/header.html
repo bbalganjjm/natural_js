@@ -255,7 +255,7 @@
 						N("nav", view).addClass("navFix");
 					}
 				} else {
-					N("nav", view).css("top", headerHeight - N(this).scrollTop() - 1);
+					N("nav", view).css("top", headerHeight - (N(this).scrollTop() + 1));
 					if(N("nav", view).hasClass("navFix")) {
 						N("nav", view).removeClass("navFix");
 					}
