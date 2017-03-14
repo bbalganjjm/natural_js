@@ -41,7 +41,7 @@
 	background-color: #005500;
 	opacity: 0.9;
 	box-shadow: 0 1px 3px;
-	position: fixed;
+	position: absolute;
 	z-index: 1;
 }
 
@@ -83,7 +83,7 @@
 	background: #005500;
 	border-radius: 0 0 3px 3px;
 	padding: 5px 10px 5px 10px;
-	box-shadow: 3px 3px 3px 0 rgba(0, 0, 0, 0.3);
+	box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.3);
 	margin-top: 2px;
 	border: 1px solid #060;
 	transform: rotate3d(90, 0, -40, 10deg);
@@ -251,12 +251,10 @@
 			N(window).scroll(function(e) {
 				scrollTop = N(this).scrollTop();
 				if(scrollTop > headerHeight) {
-					N("nav", view).css("top", "");
 					if(!N("nav", view).hasClass("navFix")) {
 						N("nav", view).addClass("navFix");
 					}
 				} else {
-					N("nav", view).css("top", headerHeight - scrollTop);
 					if(N("nav", view).hasClass("navFix")) {
 						N("nav", view).removeClass("navFix");
 					}
