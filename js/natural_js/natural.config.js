@@ -156,10 +156,13 @@
 	 */
 	N.context.attr("data", {
 		/**
-		 * TODO Natural-LIVE
+		 * For Natural-LIVE
 		 */
-		"datasync" : {
-			"socket" : null
+		"dataSync" : {
+			"live" : true,
+			"liveClient" : undefined,
+			"connectUrl" : "/npt/natural/live/ds",
+			"subscribeUrl" : "/topic/ds"
 		},
 		"formatter" : {
 			/**
