@@ -6,14 +6,14 @@
  *    user zoom.
  */
 html {
-	font-family: "Nanum Gothic", "Malgun Gothic", "dotum", "Segoe UI", sans-serif; /* 1 */ -ms-text-size-adjust: 100%; /* 2 */ -webkit-text-size-adjust: 100%; /* 2 */
+	font-family: "Nanum Gothic Coding", "Malgun Gothic", "dotum", "Segoe UI", sans-serif; /* 1 */ -ms-text-size-adjust: 100%; /* 2 */ -webkit-text-size-adjust: 100%; /* 2 */
 }
 
 /**
  * Remove default margin.
  */
 body {
-	margin: 0; font-family: "Nanum Gothic", "Malgun Gothic", "dotum", "Segoe UI", sans-serif; color: #007700; min-width: 578px; background-image: url("../images/body_back.jpg"); background-color: #008800;
+	margin: 0; font-family: "Nanum Gothic Coding", "Malgun Gothic", "dotum", "Segoe UI", sans-serif; color: #007700; min-width: 578px; background-image: url("../images/body_back.jpg"); background-color: #008800;
 }
 
 [lang] {
@@ -62,7 +62,7 @@ img {
 }
 
 input[type='text'],input[type='password'],select,textarea {
-	border-radius: 3px; padding: 3px 3px; border: 1px solid #cccccc; font-size: 13px; font-family: "Nanum Gothic", "Malgun Gothic", "dotum", "Segoe UI", sans-serif; color: #004a00; vertical-align: middle; background-color: #ffffff; line-height: 15px; border-color: #cceccc;
+	border-radius: 3px; padding: 3px 3px; border: 1px solid #cccccc; font-size: 13px; font-family: "Nanum Gothic Coding", "Malgun Gothic", "dotum", "Segoe UI", sans-serif; color: #004a00; vertical-align: middle; background-color: #ffffff; line-height: 15px; border-color: #cceccc;
 }
 
 input[type='text']:hover,select:hover,textarea:hover,input[type='text']:focus,select:focus,textarea:focus {
@@ -82,7 +82,7 @@ input[type='radio'],input[type='checkbox'] {
 }
 
 a {
-	text-decoration: none; font-weight: normal; font-size: 1em; font-family: "Nanum Gothic", "Malgun Gothic", "dotum", "Segoe UI", sans-serif; color: #004a00;
+	text-decoration: none; font-weight: normal; font-size: 1em; font-family: "Nanum Gothic Coding", "Malgun Gothic", "dotum", "Segoe UI", sans-serif; color: #004a00;
 }
 
 /* Table Style */
@@ -116,7 +116,7 @@ section {
 }
 
 section article {
-	margin: 0 15px 0 15px; word-break: break-word; line-height: 165%;
+	margin: 0 15px 0 15px; word-break: break-word; line-height: 180%;
 }
 
 article dl.qna {
@@ -136,7 +136,7 @@ article dl.qna dd ul {
 }
 
 article dl.qna dd ul li {
-	line-height: 165%;
+	line-height: 180%;
 }
 
 article dl.qna dd ul li>ul {

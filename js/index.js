@@ -1,6 +1,6 @@
 var IndexController = {
 	init : function(window) {
-		this.loadNanumGothicFont();
+		this.loadWebFont();
 		this.setLocale();
 		this.googleAnalytics();
 		this.loadHeader();
@@ -13,11 +13,11 @@ var IndexController = {
 	/**
 	 * 웹폰트
 	 */
-	loadNanumGothicFont : function() {
+	loadWebFont : function() {
 		WebFontConfig = {
 			custom: {
-				families: ['Nanum Gothic'],
-				urls: ['http://fonts.googleapis.com/earlyaccess/nanumgothic.css']
+				families: ['Nanum Gothic Coding'],
+				urls: ['http://fonts.googleapis.com/earlyaccess/nanumgothiccoding.css']
 			}
 		};
 		(function() {
