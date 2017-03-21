@@ -51,6 +51,7 @@
 			obj.submit = function(callback) {
 				return Communicator.submit.call(obj, callback);
 			};
+
 			return obj;
 		};
 
