@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.13.73
+ * Natural-UI v0.8.13.75
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "v0.8.13.73";
+	N.version["Natural-UI"] = "v0.8.13.75";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -1215,9 +1215,15 @@
 		        // set datapicker position
 				$(window).bind("resize.datepicker", function() {
 					var leftOfs = opts.context.position().left;
-					var limitWidth = $(window).width();
+					var parentEle = opts.contents.closest(".form__");
+					var limitWidth;
+					if(parentEle.length > 0) {
+						limitWidth = parentEle.position().left + parentEle.width();
+					} else {
+						limitWidth = $(window).width();
+					}
 					if(leftOfs + opts.contents.width() > limitWidth) {
-						opts.contents.css("left", (leftOfs - (opts.contents.width() - opts.context.width())) + "px");
+						opts.contents.css("right", (limitWidth - (leftOfs + opts.context.outerWidth())) + "px");
 					} else {
 						opts.contents.css("left", leftOfs + "px");
 					}
@@ -1498,8 +1504,8 @@
 			//TODO think more whether "onLoad event" needs or not
 			this.options = {
 				context : obj.length > 0 ? obj : null,
-				links : obj.length > 0 ? obj.find("li") : null,
-				dataOpts : [], // dataOpts : [{ url: undefined, active: false, preload: false, onOpen: undefined }]
+				links : obj.length > 0 ? obj.find(">ul>li") : null,
+				dataOpts : [], // dataOpts : [{ url: undefined, width: "auto", active: false, preload: false, onOpen: undefined }]
 				randomSel : false,
 				onActive : null,
 				contents : obj.length > 0 ? obj.find("> div") : null,
@@ -1516,7 +1522,7 @@
 				$.extend(this.options, obj);
 				this.options.context = N(obj.context);
 			}
-			this.options.links = this.options.context.find("li");
+			this.options.links = this.options.context.find(">ul>li");
 			this.options.contents = this.options.context.find("> div");
 
 			var self = this;
@@ -1831,7 +1837,8 @@
 				unbind : true,
 				initialInputData : null, // for unbind
 				onBindBefore : null,
-				onBindAfter : null
+				onBindAfter : null,
+				live : false
 			};
 
 			try {
@@ -1909,6 +1916,7 @@
 						this.revertData = $.extend({}, data[row]);
 					}
 				}
+
 				var self = this;
 				var vals;
 				if (!N.isEmptyObject(opts.data) && !N.isEmptyObject(vals = opts.data[opts.row])) {
@@ -2544,7 +2552,8 @@
 					resizableLastCellCorrectionWidth : 0,
 					resizeBarCorrectionLeft : 0,
 					resizeBarCorrectionHeight : 0
-				}
+				},
+				live : false
 			};
 
 			try {
@@ -2765,6 +2774,8 @@
 
 	                        if(opts.scrollPaging.idx < opts.data.length) {
 	                        	self.bind(undefined, true);
+	                        } else if(opts.scrollPaging.idx === opts.data.length) {
+	                        	opts.scrollPaging.limit = opts.scrollPaging.size;
 	                        }
 	                    }
 	                }
@@ -3647,7 +3658,8 @@
 				folderSelectable : false,
 				checkbox : false,
 				onSelect : null,
-				onCheck : null
+				onCheck : null,
+				live : false
 			};
 
 			try {
