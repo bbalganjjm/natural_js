@@ -75,8 +75,8 @@
 	    	return this.data(name + "__");
 	    },
 	    /**
-	     * Get and Set value to input elements
-	     * - get : when the vals are undefined
+	     * Get or set the value to (multiple)select input elements
+	     * if vals(arg[0]) argument is undefined, it works in get mode
 	     */
 	    vals : function(vals) {
 	    	var tagName = this.get(0).tagName.toLowerCase();
@@ -208,7 +208,7 @@
 	    	return "";
 	    }
 	}));
-	
+
 	(function(N) {
 		// N local variables
 		$.extend(N, {
@@ -754,7 +754,7 @@
 							}
 							return unescape(document.cookie.substring(offset, endstr));
 						};
-	
+
 						var arg = name + "=";
 						var alen = arg.length;
 						var clen = document.cookie.length;
@@ -867,12 +867,12 @@
 					var div = $('<div class="antiscroll-inner" style="width:50px;height:50px;overflow-y:scroll;' +
 						'position:absolute;top:-200px;left:-200px;"><div style="height:100px;width:100%"/>' +
 						'</div>');
-	
+
 					$("body").append(div);
 					var w1 = $(div).innerWidth();
 					var w2 = $("div", div).innerWidth();
 					$(div).remove();
-	
+
 					return w1 - w2;
 				}
 			},
@@ -992,7 +992,7 @@
 				}
 			}
 		});
-		
+
 		// Config
 		var Config = N.config = function() {
 			//TODO
