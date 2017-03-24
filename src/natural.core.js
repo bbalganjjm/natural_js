@@ -1,5 +1,5 @@
 /*!
- * Natural-CORE v0.8.5.8
+ * Natural-CORE v0.8.5.9
  * bbalganjjm@gmail.com
  *
  * Includes formatdate.js & Mask JavaScript API
@@ -56,23 +56,50 @@
 	     * Get instances form component context elements
 	     */
 	    instance : function(name, instance) {
-	    	if(instance !== undefined) {
+	    	if(arguments.length === 0) {
+	    		return this.map(function() {
+    				return $.map($(this).data(), function(v, i) {
+    					if(N.string.endsWith(i, "__")) {
+    						return v;
+    					}
+    				});
+    			});
+	    	} else if(arguments.length === 1) {
+	    		if(N.type(name) === "function") {
+	    			return this.each(function() {
+	    				return $.each($(this).data(), function(i, v) {
+	    					if(N.string.endsWith(i, "__")) {
+	    						name.call(v, i.replace("__", ""), v);
+	    					}
+	    				});
+	    			});
+	    			return this;
+	    		} else {
+	    			var insts = this.map(function() {
+	    				return $.map($(this).data(), function(v, i) {
+	    					if(i === name + "__") {
+	    						return v;
+	    					}
+	    				});
+	    			});
+	    			return insts.length <= 1 ? insts[0] : insts;
+	    		}
+	    	} else if(arguments.length === 2) {
 	    		if(N.type(instance) === "function") {
-	    			//instance is callback function
-	    			var inst;
-	    			this.each(function(i) {
-	    				inst = $(this).data(name + "__");
-	    				if(inst !== undefined) {
-	    					instance.call(inst, i, inst);
-	    				}
+	    			return this.each(function() {
+	    				return $.each($(this).data(), function(i, v) {
+	    					if(name + "__" === i) {
+	    						instance.call(v, i.replace("__", ""), v);
+	    					}
+	    				});
 	    			});
 	    			return this;
 	    		} else {
 	    			//set instance
 	    			this.data(name + "__", instance);
+	    			return this;
 	    		}
 	    	}
-	    	return this.data(name + "__");
 	    },
 	    /**
 	     * Get or set the value to (multiple)select input elements
@@ -213,7 +240,7 @@
 		// N local variables
 		$.extend(N, {
 			version : {
-				"Natural-CORE" : "0.8.5.8"
+				"Natural-CORE" : "0.8.5.9"
 			},
 			/**
 			 * Set and get locale value
