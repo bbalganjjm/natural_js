@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.13.76
+ * Natural-UI v0.8.13.77
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "v0.8.13.76";
+	N.version["Natural-UI"] = "v0.8.13.77";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -2505,10 +2505,11 @@
 				if (key === undefined) {
 					this.bind(row);
 				} else {
-					this.val(key, opts.data[row][key], false);
-					N.element.dataChanged(opts.context.find("#" + key + ", input:radio[id='" + key + "'][name='" + key + "'], input:checkbox[id='" + key + "'][name='" + key + "']"));
+					if(row === this.row()) {
+						this.val(key, opts.data[row][key], false);
+						N.element.dataChanged(opts.context.find("#" + key + ", input:radio[id='" + key + "'][name='" + key + "'], input:checkbox[id='" + key + "'][name='" + key + "']"));
+					}
 				}
-
 				return this;
 			}
 		});
