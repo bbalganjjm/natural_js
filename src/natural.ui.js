@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.13.77
+ * Natural-UI v0.8.13.79
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "v0.8.13.77";
+	N.version["Natural-UI"] = "v0.8.13.79";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -2351,51 +2351,71 @@
 			                }
 
 							if (tagName === "textarea" || type === "text" || type === "password" || type === "hidden" || type === "file") {
-								if(notify !== false) {
-									// remove validator's dregs for rebind
-									ele.removeClass("validate_false__");
-									if(ele.instance("alert") !== undefined) {
-										ele.instance("alert").remove();
-										ele.removeData("alert__");
+								// remove validator's dregs for rebind
+								ele.removeClass("validate_false__");
+								if(ele.instance("alert") !== undefined) {
+									ele.instance("alert").remove();
+									ele.removeData("alert__");
+								}
+
+								if(ele.data("format") !== undefined && ele.data("validate") !== undefined) {
+									// put value
+									ele.val(String(val));
+
+									// validate
+									if (type !== "hidden") {
+										ele.trigger("focusout.form.validate");
 									}
 
-									if(ele.data("format") !== undefined && ele.data("validate") !== undefined) {
-										// put value
-										ele.val(String(val));
-
-										// validate
-										if (type !== "hidden") {
-											ele.trigger("focusout.form.validate");
-										}
-
+									if(notify !== false) {
 										// dataSync
 										ele.trigger("focusout.form.dataSync");
-
-										// format
-										if (ele.is("input:password, input:hidden, input:file")) {
-											ele.trigger("focusin.form.unformat");
-											ele.trigger("focusout.form.format");
-										}
 									} else {
-										ele.val(String(val));
+										// add data changed flag
+										ele.addClass("data_changed__");
+										if(!opts.context.hasClass("row_data_changed__")) {
+											opts.context.addClass("row_data_changed__");
+										}
+									}
+
+									// format
+									if (ele.is("input:password, input:hidden, input:file")) {
+										ele.trigger("focusin.form.unformat");
+										ele.trigger("focusout.form.format");
+									}
+								} else {
+									ele.val(String(val));
+									if(notify !== false) {
 										// dataSync
 										ele.trigger("focusout.form.dataSync");
+									} else {
+										// add data changed flag
+										ele.addClass("data_changed__");
+										if(!opts.context.hasClass("row_data_changed__")) {
+											opts.context.addClass("row_data_changed__");
+										}
 									}
 								}
 							} else if(tagName === "select") {
+								// remove validator's dregs for rebind
+								ele.removeClass("validate_false__");
+								if(ele.instance("alert") !== undefined) {
+									ele.instance("alert").remove();
+									ele.removeData("alert__");
+								}
+
+								// select value
+								ele.vals(val);
+
 								if(notify !== false) {
-									// remove validator's dregs for rebind
-									ele.removeClass("validate_false__");
-									if(ele.instance("alert") !== undefined) {
-										ele.instance("alert").remove();
-										ele.removeData("alert__");
-									}
-
-									// select value
-									ele.vals(val);
-
 									// dataSync
 									ele.trigger("change.form.dataSync");
+								} else {
+									// add data changed flag
+									ele.addClass("data_changed__");
+									if(!opts.context.hasClass("row_data_changed__")) {
+										opts.context.addClass("row_data_changed__");
+									}
 								}
 							} else if(tagName === "img") {
 								currVal = String(val);
@@ -2461,18 +2481,23 @@
 						//radio, checkbox
 						eles = $(opts.context).find("input:radio[id^='" + key + "'], input:checkbox[id^='" + key + "']");
 						if(eles.length > 0) {
-							if(notify !== false) {
-								// remove validator's dregs for rebind
-								eles.removeClass("validate_false__");
-								var a = eles.instance("alert", function() {
-									this.remove()
-								}).removeData("alert__");
+							// remove validator's dregs for rebind
+							eles.removeClass("validate_false__");
+							var a = eles.instance("alert", function() {
+								this.remove()
+							}).removeData("alert__");
 
-								// select value
-								eles.vals(val);
+							// select value
+							eles.vals(val);
+							if(notify !== false) {
 								// dataSync
 								$(eles.get(0)).trigger("select.form.dataSync");
-
+							} else {
+								// add data changed flag
+								ele.addClass("data_changed__");
+								if(!opts.context.hasClass("row_data_changed__")) {
+									opts.context.addClass("row_data_changed__");
+								}
 							}
 						}
 					}
