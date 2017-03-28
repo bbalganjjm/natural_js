@@ -1,5 +1,5 @@
 /*!
- * Natural-DATA v0.8.2.9
+ * Natural-DATA v0.8.2.11
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-DATA"] = "0.8.2.9";
+		N.version["Natural-DATA"] = "0.8.2.11";
 
 	$.fn.extend($.extend(N.prototype, {
 		datafilter : function(callBack) {
@@ -97,6 +97,9 @@
 			}
 
 			var pageContext = $(N.context.attr("architecture").page.context);
+			if(pageContext.length === 0) {
+				N.warn("[N.ds]Context element is missing. Please specify the correct Natural-JS's main context element selector to N.context.attr(\"architecture\").page.context value");
+			}
 			var dataSyncTemp = pageContext.find("var#data_sync_temp__");
 			if(dataSyncTemp.length === 0) {
 				dataSyncTemp = pageContext.append('<var id="data_sync_temp__"></var>').find("var#data_sync_temp__");
@@ -105,12 +108,6 @@
 
 			var siglInst = this.viewContext.instance("ds");
 			if (siglInst !== undefined) {
-				// Cleanup missing obserable
-				for (var i = 0; i < siglInst.obserable.length; i++) {
-					if(siglInst.obserable[i].context().prevObject === undefined) {
-						siglInst.obserable.splice(i, 1);
-					}
-				}
 				siglInst.inst = inst;
 				if(isReg !== undefined && isReg === true) {
 					siglInst.obserable.push(inst);
