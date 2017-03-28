@@ -2494,7 +2494,7 @@
 								$(eles.get(0)).trigger("select.form.dataSync");
 							} else {
 								// add data changed flag
-								ele.addClass("data_changed__");
+								$(eles.get(0)).addClass("data_changed__");
 								if(!opts.context.hasClass("row_data_changed__")) {
 									opts.context.addClass("row_data_changed__");
 								}
