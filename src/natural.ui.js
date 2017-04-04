@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.13.79
+ * Natural-UI v0.8.13.81
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "v0.8.13.79";
+	N.version["Natural-UI"] = "v0.8.13.81";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -1321,16 +1321,19 @@
 			}
 
 			//set opener(parent page's Controller)
+			var self = this;
 			try {
-				var viewContext = arguments.callee.caller.arguments.callee.caller.arguments[0];
-				if(viewContext.instance !== undefined) {
-					this.opener = viewContext.instance("cont");
-				} else {
-					this.opener = $(viewContext.target).closest(".view_context__").instance("cont");
+				var caller = arguments.callee.caller;
+				while(caller != null) {
+				    caller = caller.arguments.callee.caller;
+				    if(caller.arguments.length > 0 && N(caller.arguments[0]).hasClass("view_context__") && caller.arguments[0].instance != null && N.type(caller.arguments[0].instance) === "function") {
+						self.opener = caller.arguments[0].instance("cont");
+						break;
+					}
 				}
 			} catch(e) {
 				if(this.options.url !== null) {
-					N.warn("[N.popup][" + e + "] Don't set opener object in Controller of popup");
+					N.warn("[N.popup][" + e + "]N.popup failed to set the opener object on the Controller(N.cont) of the popup.");
 				}
 			}
 
@@ -1443,7 +1446,7 @@
 					if(opts.context.filter("[id]:first").instance("cont")[opts.onOpen] !== undefined) {
 						opts.context.filter("[id]:first").instance("cont")[opts.onOpen](onOpenData);
 					} else {
-						N.warn("[N.popup.popOpen]onOpen callback function \"" + opts.onOpen + "\" is undefined in popup content's Service Controller");
+						N.warn("[N.popup.popOpen]The onOpen event handler(" + opts.onOpen + ") is not defined on the Controller(N.cont) of the Popup.");
 					}
 				}
 			}
@@ -1619,7 +1622,7 @@
 							//thisDeclarativeOpts.onOpen
 							sc[thisDeclarativeOpts.onOpen](onOpenData);
 						} else {
-							N.warn("[N.tab.wrapEle]onOpen event handler function \"" + thisDeclarativeOpts.onOpen + "\" is not defined in tab content's Controller(N.cont)");
+							N.warn("[N.tab.wrapEle]The onOpen event handler(" + thisDeclarativeOpts.onOpen + ") is not defined on the Controller(N.cont) of the tab(N.tab)'s contents.");
 						}
 					}
 
@@ -1667,7 +1670,7 @@
 								//TODO think more how to work "onOpenData"
 								sc[dataOpts.onOpen]();
 							} else {
-								N.warn("[N.tab.loadContent]\"" + dataOpts.onOpen + "\" onOpen callback function is undefined in tab content's Service Controller");
+								N.warn("[N.tab.loadContent]The onOpen event handler(" + dataOpts.onOpen + ") is not defined on the Controller(N.cont) of the tab(N.tab)'s contents.");
 							}
 						}
 					}
