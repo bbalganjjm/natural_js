@@ -15,6 +15,7 @@
 		<h3>Config 예시</h3>
 		<p>현재 보고 있는 Natural-JS 홈페이지는 Natural-JS 기반으로 구현되어 있습니다. 다음 설정은 현 사이트의 natural.config.js 파일의 내용입니다. 참고 하여 UI 전역으로 적용해야 될 옵션을 한방에 해결 하세요.</p>
 		<pre class="line-numbers"><code class="language-markup">/**
+/**
  * Natural-JS에서 제공하는 라이브러리 및 컴포넌트의 전역 옵션 값 설정
  *
  * 컴포넌트들의 옵션 적용 순서
@@ -91,6 +92,8 @@
 						} else {
 							this.pageId = undefined;
 						}
+
+						// return data 를 하면 N.comm.submit 의 콜백의 인자로 넘어오는 data 가 리턴한 데이터로 치환 됨.
 					},
 					/**
 					 * 서버에 요청 후 서버에러가 발생 했을 경우 실행됨.
@@ -171,12 +174,6 @@
 	 * Natural-DATA Config
 	 */
 	N.context.attr("data", {
-		/**
-		 * TODO Natural-LIVE
-		 */
-		"datasync" : {
-			"socket" : null
-		},
 		"formatter" : {
 			/**
 			 * 사용자 정의 포멧 룰 - 기본제공되는 데이터 포멧 룰 외에 추가로 지정하고 싶을 때 작성
