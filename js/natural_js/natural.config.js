@@ -157,15 +157,6 @@
 	 * Natural-DATA Config
 	 */
 	N.context.attr("data", {
-		/**
-		 * For Natural-LIVE
-		 */
-		"dataSync" : {
-			"live" : true,
-			"liveClient" : undefined,
-			"connectUrl" : "/npt/natural/live/ds",
-			"subscribeUrl" : "/topic/ds"
-		},
 		"formatter" : {
 			/**
 			 * 사용자 정의 포멧 룰 - 기본제공되는 데이터 포멧 룰 외에 추가로 지정하고 싶을 때 작성
