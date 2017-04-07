@@ -75,6 +75,8 @@
 						} else {
 							this.pageId = undefined;
 						}
+
+						// return data 를 하면 N.comm.submit 의 콜백의 인자로 넘어오는 data 가 리턴한 데이터로 치환 됨.
 					},
 					/**
 					 * 서버에 요청 후 서버에러가 발생 했을 경우 실행됨.
