@@ -482,14 +482,24 @@
 				"desc" : "▲"
 			},
 			/**
+			 * 데이터 필터 기능 활성화 여부
+			 */
+			"filter" : true,
+			/**
 			 * Grid 에서 사용 할 메시지 다국어 처리
 			 */
 			"message" : {
 				"ko_KR" : {
-					"empty" : "조회를 하지 않았거나 조회된 데이터가 없습니다."
+					"empty" : "조회를 하지 않았거나 조회된 데이터가 없습니다.",
+					"search" : "검색",
+					"selectAll" : "전체선택",
+					"dFilter" : "데이터 필터"
 				},
 				"en_US" : {
-					"empty" : "No inquired data or no data available."
+					"empty" : "No inquired data or no data available.",
+					"search" : "Search",
+					"selectAll" : "Select all",
+					"dFilter" : "Data filter"
 				}
 			},
 			/**
