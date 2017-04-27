@@ -1,7 +1,7 @@
 <article id="__exap0500" class="view-code">
-	<h1>그리드 입력(C) 조회(R) 수정(U) 삭제(D) 예제(헤더고정형, 체크박스 선택)</h1>
+	<h1>그리드 입력(C) 조회(R) 수정(U) 삭제(D) 예제(헤더고정형)</h1>
 	<div class="intro">
-		<p class="smallContTit">데이터 목록 화면에서 직접 입력 조회 수정 삭제를 처리하는 예제 입니다(체크박스로 행을 선택하여 삭제).</p>
+		<p class="smallContTit">데이터 목록 화면에서 직접 입력 조회 수정 삭제를 처리하는 예제 입니다(행을 직접 선택하여 삭제).</p>
 		<p class="smallContTit">서버와 연계되지 않은 UI 쪽 코딩 예제 입니다. 때문에 검색 조건으로 입력한 데이터는 그리드에 적용되지 않습니다. 서버쪽으로 전달되는 파라미터만 확인 바랍니다.</p>
 		<p class="smallContTit">서버에서는 브라우저에서 POST로 전달된 JSON 문자열 데이터를 변환하여 파라미터로 사용하면 됩니다.</p>
 		<p class="smallContTit">그리드의 모양과 스타일은 natural.ui.css 에서 바꿀 수 있습니다. 사이트 디자인에 맞게 수정 하기 바랍니다.</p>
@@ -27,7 +27,7 @@
 	<table id="grid" class="grid" style="width: 100%;">
 		<thead>
 			<tr>
-				<th width="9%"><input id="checkAll" type="checkbox" title="하위 체크박스 모두 선택"></th>
+				<th width="9%">Index</th>
 				<th width="17%">Name</th>
 				<th width="*">Email</th>
 				<th width="11%" data-filter="true">Gender</th>
@@ -39,7 +39,7 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td align="center"><input class="checkAllTarget" type="checkbox" title="마이링크 선택" /></td>
+				<td id="index" align="center"></td>
 				<td><input id="name" type="text" data-validate='[["required"]]' /></td>
 				<td><input id="email" type="text" data-validate='[["required"], ["email"]]' /></td>
 				<td align="center">
@@ -100,11 +100,11 @@ N("#__exap0500").cont({
     	// 4. initialize N.grid and bind empty data for data list
     	var grid = N([]).grid({
        		context : N("table#grid", view),
+       		height : 350,
        		resizable : true,
        		sortable : true,
        		hover : true,
-       		checkAll : "#checkAll",
-			checkAllTarget : ".checkAllTarget"
+       		multiselect : true
        	}).bind();
 
     	// 5. bind events
@@ -126,20 +126,17 @@ N("#__exap0500").cont({
     	// 5-3. Delete button
     	N("#btnDelete", view).click(function(e) {
             e.preventDefault();
-            var checkedIndexs = grid.check();
-            if(checkedIndexs.length > 0) {
-	            N(window).alert({
-	        		msg : "삭제 하시겠습니까?<br/>저장버튼을 누르기 전까지는 서버에 적용되지 않습니다.",
-	        		confirm : true,
-	        		onOk : function() {
-	        			$(checkedIndexs).each(function() {
-	        				grid.remove(this);
-						});
-	        		}
-	        	}).show();
-            } else {
-				N(window).alert("선택된 행이 없습니다.").show();
-			}
+            N(window).alert({
+        		msg : "삭제 하시겠습니까?<br/>저장버튼을 누르기 전까지는 서버에 적용되지 않습니다.",
+        		confirm : true,
+        		onOk : function() {
+        			var selectedRows = grid.context("tbody.grid_selected__");
+                    selectedRows.each(function() {
+                    	// -1 is for hidden tbody 1 row
+                    	grid.remove($(this).index() - 1);
+                    });
+        		}
+        	}).show();
     	});
     	// 5-4. Save delete
     	N("#btnSave", view).click(function(e) {
