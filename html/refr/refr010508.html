@@ -150,6 +150,23 @@
 			</td>
 		</tr>
 		<tr>
+			<td>filter</td>
+			<td>boolean</td>
+			<td>false</td>
+			<td></td>
+			<td>
+				<p>데이터 필터 기능 활성화 유무</p>
+				<p class="alert">
+					filter 옵션이 false 인 상태에서 thead 의 th 에 data-filter="true" 속성을 추가 하면 컬럼별로 필터 기능을 활성화 할 수 있습니다.
+				</p>
+				<p class="alert">
+					정렬 되는 컬럼 정보는 내부적으로 tbody 의 td 나 td 안에 있는 요소들의 id 값을 가져와 사용 합니다.
+					tbody 의 td 안에 id 속성을 가진 요소가 2개 이상일 경우는 정렬이 정상적으로 작동되지 않을 수 있습니다.
+					이때는 thead 의 th 요소에 data-id 속성에 정렬 될 데이터 컬럼명을 정의 해 주면 정상적으로 작동 됩니다.
+				</p>
+			</td>
+		</tr>
+		<tr>
 			<td>windowScrollLock</td>
 			<td>boolean</td>
 			<td>true</td>
