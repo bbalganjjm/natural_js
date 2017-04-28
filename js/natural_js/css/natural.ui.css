@@ -327,8 +327,9 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 /* Grid - Data Filter */
 .grid__ > thead .btn_data_filter__ {
 	float: left;
+	position: absolute;
 	height: 16px;
-	padding: 4px 0 4px 0;
+	width: 16px;
 }
 
 .grid__ > thead .btn_data_filter__ span {
@@ -337,7 +338,6 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	overflow: hidden;
 	height: 16px;
 	width: 16px;
-	margin-left: 2px;
 }
 
 .grid__ > thead .btn_data_filter__.btn_data_filter_empty__ span {

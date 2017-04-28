@@ -108,7 +108,10 @@ table:last-child {
 }
 
 table th, table td {
-	border: 1px solid #88dd88; padding: 5px; word-break: break-word; font-size: 12px;
+	border: 1px solid #88dd88;
+	padding: 5px 3px;
+	word-break: break-word;
+	font-size: 12px;
 }
 
 table th {
