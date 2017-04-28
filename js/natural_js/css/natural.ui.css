@@ -359,7 +359,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	background-color: #eeffee;
 	box-shadow: 0px 4px 12px #999;
 	border-radius: 5px 0 5px 5px;
-	padding: 0 0 4px 0;
+	padding: 4px;
 	margin: 0;
 }
 
@@ -368,36 +368,40 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .grid__ > thead .data_filter_panel__ .data_filter_search__ {
-	padding: 4px 12px 2px 4px;
+	padding: 0;
 	margin: 0;
 }
 
 .grid__ > thead .data_filter_panel__ .data_filter_search__ .data_filter_search_btn__ {
 	line-height: 100%;
 	height: 24px;
-	margin: 0 0 0 -24px;
+	margin: 0 0 0 -36px;
 }
 
 .grid__ > thead .data_filter_panel__ .data_filter_search__ .data_filter_search_word__ {
 	width: 100%;
-	height: 18px;
+	height: 17px;
+	padding: 3px 0;
+	border-radius: 3px;
+	border: 1px solid #cccccc;
+	font-size: 12px;
+	line-height: 15px;
 }
 
 .grid__ > thead .data_filter_panel__ .data_filter_search__ .data_filter_search_btn__ span {
 	text-indent: -999px;
 	display: inline-block;
-	overflow: hidden;
 	height: 24px;
 	width: 24px;
 	background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABbElEQVRIx+1UvWrCUBgVkc7i5CQdOhUHH6FoEvwb3Fylkw/gJF065AHcjNFuFvoAzh2cnBx8AunYUZwkxHPCF7hYuM01uogXDrl6P875vpNzk8nc17nLnthly7NmwBYIgB2wBPr1af0hFTlIhsBBSL8AFxgBayAENmjgKQ05SeaO7xT+TObZbZz9Aj/OxCmeYws7n/9TV0HNntOZdk/Pd+y8Nq49Au+nwHlPamlbgClKJgLbuCs8X0AYil1hvMfzm+cgfpaznokA0+Imqe1+dnMi+mYiwNSMov3Y0lrUmDbyMsHARIA5X+ssAiKLkKYOf+NZNRHok4hR1NU1Z80saleMKva5xAK8obxEzDmjqCH3ZJpF66OVTSwQjY4bys4k5y7TwhdKz8WWlWodo20swhsqn4iAZCpEfHHyn7mICJWYGkaRaeELpeckk0uZbhLdikVS25VURLHLv5iAKiIT8EvwelEBRcS/CvntryNzexxP/rmQ3QAAAABJRU5ErkJggg==') 0 0 no-repeat;
-	line-height: 100%;
 	position: absolute;
+	right: 1px;
 }
 
 .grid__ > thead .data_filter_panel__ .data_filter_checkall_box__ {
-	padding: 2px 4px 2px 4px;
-	line-height: 14px;
-	margin: 0;
+	padding: 0;
+	line-height: 16px;
+	margin: 2px 0 0 0;
 }
 
 .grid__ > thead .data_filter_panel__ .data_filter_checkall_box__ input {
@@ -425,9 +429,9 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .grid__ > thead .data_filter_panel__ .data_filter_list__ li {
-	padding: 1px 4px 1px 4px;
+	padding: 0;
 	line-height: 16px;
-	margin: 0;
+	margin: 0 0 0 0;
 }
 
 .grid__ > thead .data_filter_panel__ .data_filter_list__ li input {

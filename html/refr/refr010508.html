@@ -157,7 +157,8 @@
 			<td>
 				<p>데이터 필터 기능 활성화 유무</p>
 				<p class="alert">
-					filter 옵션이 false 인 상태에서 thead 의 th 에 data-filter="true" 속성을 추가 하면 컬럼별로 필터 기능을 활성화 할 수 있습니다.
+					filter 옵션이 false 인 상태에서 thead 의 th 에   data-filter="string|number|date" 속성을 추가 하면 컬럼별로 필터 기능을 활성화 할 수 있습니다.
+					(data-filter 속성 값인 string, number, date 에 따라 검색조건을 다양화 하려고 합니다. 현재는 string 으로만 인식되며 number, date 는 개발 하는대로 릴리즈 할 예정 입니다.)
 				</p>
 				<p class="alert">
 					정렬 되는 컬럼 정보는 내부적으로 tbody 의 td 나 td 안에 있는 요소들의 id 값을 가져와 사용 합니다.
