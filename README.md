@@ -1,5 +1,13 @@
 Natural-JS
 ==========
+**Natural-JS** is a Javascript library that can be easily and quickly development the enterprise web application UI such as ERP, CRM, etc.
+
+----------------------------------------------
+
+**Natural-JS** 는 ERP, CRM 등의 기업용 웹 어플리케이션 UI를 쉽고 빠르게 구현할 수 있는 Javascript 프레임워크 라이브러리 입니다.
+
+Structure(구조)
+==========
 **Natural-JS** is composed of Natural-CORE, Natural-ARCHITECTURE, Natural-DATA, Natural-UI.
 **Natural-CORE** is CORE library package that is used internally in the framework.
 **Natural-ARCHITECTURE** is CVC Architecture Pattern based Architecture Framework. it makes structured and simplifies a complex web UI environment.
