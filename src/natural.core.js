@@ -1,5 +1,5 @@
 /*!
- * Natural-CORE v0.8.5.9
+ * Natural-CORE v0.8.5.14
  * bbalganjjm@gmail.com
  *
  * Includes formatdate.js & Mask JavaScript API
@@ -39,7 +39,7 @@
 		 * Event bind to the top priority
 		 */
 		tpBind : function(event, handler) {
-			this.each(function() {
+			return this.each(function() {
 				if($._data(this, "events") !== undefined) {
 		            $(this).bind(event, handler);
 		            $(this).each(function() {
@@ -73,7 +73,6 @@
 	    					}
 	    				});
 	    			});
-	    			return this;
 	    		} else {
 	    			var insts = this.map(function() {
 	    				return $.map($(this).data(), function(v, i) {
@@ -93,7 +92,6 @@
 	    					}
 	    				});
 	    			});
-	    			return this;
 	    		} else {
 	    			//set instance
 	    			this.data(name + "__", instance);
@@ -240,7 +238,7 @@
 		// N local variables
 		$.extend(N, {
 			version : {
-				"Natural-CORE" : "0.8.5.9"
+				"Natural-CORE" : "0.8.5.14"
 			},
 			/**
 			 * Set and get locale value
@@ -300,6 +298,7 @@
 					$(window.document).unbind("mousedown.datepicker");
 					$(window.document).unbind(N.browser.is("firefox") ? "keydown.datepicker" : "keyup.datepicker");
 					$(window.document).unbind("keyup.alert");
+					$(window.document).unbind("click.grid.dataFilter");
 					return true;
 				},
 				/**
@@ -314,6 +313,7 @@
 					$(window.document).unbind("keyup.alert");
 					$(window.document).unbind("dragstart.grid.vResize").unbind("selectstart.grid.vResize").unbind("mousemove.grid.vResize").unbind("mouseup.grid.vResize");
 					$(window.document).unbind("dragstart.grid.resize").unbind("selectstart.grid.resize").unbind("mousemove.grid.resize").unbind("mouseup.grid.resize");
+					$(window.document).unbind("click.grid.dataFilter");
 					return true;
 				}
 			},
@@ -457,7 +457,7 @@
 				 */
 				byteLength : function(str) {
 					return (function(s,b,i,c){
-			        	for(b=i=0;c=s.charCodeAt(i++);b+=c>>11?3:c>>7?2:1);
+			        	for(b=i=0;c=s.charCodeAt(i++);b+=c>>11?3:c>>7?2:1){};
 			        	return b;
 			        })(str);
 				},
@@ -901,6 +901,13 @@
 					$(div).remove();
 
 					return w1 - w2;
+				},
+				/**
+				 * Get context path from current window url
+				 */
+				contextPath : function(){
+				    var offset = location.href.indexOf(location.host) + location.host.length;
+				    return location.href.substring(offset, location.href.indexOf('/', offset + 1));
 				}
 			},
 			/**
