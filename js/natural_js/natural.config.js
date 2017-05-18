@@ -543,11 +543,4 @@
 		}
 	});
 
-	/**
-	 * Natural-LIVE Config
-	 */
-	N.context.attr("live", {
-		"debug" : true
-	});
-
 })(N);
