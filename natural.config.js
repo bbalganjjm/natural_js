@@ -487,4 +487,25 @@
 		}
 	});
 
+	/**
+	 * Natural-UI.Shell Config
+	 */
+	N.context.attr("ui.shell", {
+		"notify" : {
+			"position" : {
+				top : 10,
+				right : 10
+			},
+			"alwaysOnTop" : true,
+			"message" : {
+				"ko_KR" : {
+					"close" : "닫기"
+				},
+				"en_US" : {
+					"close" : "Close"
+				}
+			}
+		}
+	});
+
 })(N);
