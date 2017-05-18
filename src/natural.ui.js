@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.13.81
+ * Natural-UI v0.8.14.1
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "v0.8.13.81";
+	N.version["Natural-UI"] = "v0.8.14.1";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -145,7 +145,7 @@
 
 				var maxZindex = 0;
 				if(opts.alwaysOnTop) {
-					// get max index value from all elements in current page
+					// get maximum "z-index" value
 					maxZindex = N.element.maxZindex(N(opts.alwaysOnTopCalcTarget));
 					blockOverlayCss["z-index"] = String(maxZindex + 1);
 				}
@@ -178,7 +178,7 @@
 				// create title bar element
 				var titleBox = '';
 				if(opts.title !== undefined) {
-					titleBox = '<div class="msg_title_box__"><span class="msg_title__">' + opts.title + '</span><span class="msg_title_close__"></span></div>';
+					titleBox = '<div class="msg_title_box__"><span class="msg_title__">' + opts.title + '</span><span class="msg_title_close__" title="' + N.message.get(opts.message, "close") + '"></span></div>';
 				}
 
 				// create button box elements
@@ -374,7 +374,7 @@
 						// set style class to msgContext element
 						opts.msgContext.addClass("alert__ alert_tooltip__");
 
-						opts.msgContext.append('<a href="#" class="msg_close__"></a>');
+						opts.msgContext.append('<a href="#" class="msg_close__" title="' + N.message.get(opts.message, "close") + '"></a>');
 					}
 					if(opts.alwaysOnTop) {
 						opts.msgContext.css("z-index", N.element.maxZindex(opts.container.find(opts.alwaysOnTopCalcTarget)) + 1);
@@ -2553,6 +2553,7 @@
 				validate : true,
 				html : false,
 				addTop : false,
+				filter : false,
 				resizable : false,
 				vResizable : false,
 				sortable : false,
@@ -2698,6 +2699,14 @@
 				Grid.resize.call(this);
 			}
 
+			// data filter
+			if(this.options.filter || this.thead.find("> tr th[data-filter='true']").length > 0) {
+				if(this.options.filter) {
+					this.thead.find("> tr th").attr("data-filter", "true");
+				}
+				Grid.dataFilter.call(this);
+			}
+
 			// set this instance to context element
 			this.options.context.instance("grid", this);
 
@@ -2800,7 +2809,7 @@
 	                        }
 
 	                        if(opts.scrollPaging.idx < opts.data.length) {
-	                        	self.bind(undefined, true);
+	                        	self.bind(undefined, "grid.bind");
 	                        } else if(opts.scrollPaging.idx === opts.data.length) {
 	                        	opts.scrollPaging.limit = opts.scrollPaging.size;
 	                        }
@@ -3013,22 +3022,289 @@
     	        		return false;
     	        	}
     	        	if (opts.data.length > 0) {
-    	        		if(N.string.trimToNull($(this).text()) !== null && $(this).find("input[type='checkbox']").length === 0) {
+    	        		if(N.string.trimToNull($(this).text()) !== null && $(this).find(opts.checkAll).length === 0) {
     	        			var isAsc = false;
     	        			if (currEle.find(".sortable__").hasClass("asc__")) {
     	        				isAsc = true;
     	        			}
     	                    if (isAsc) {
-    	                    	self.bind(N(opts.data).datasort($(this).data("id"), true));
+    	                    	self.bind(N(opts.data).datasort($(this).data("id"), true), "grid.sort");
     	                    	currEle.append('<span class="sortable__ desc__">' + opts.sortableItem.asc + '</span>');
     	                    } else {
-    	                    	self.bind(N(opts.data).datasort($(this).data("id")));
+    	                    	self.bind(N(opts.data).datasort($(this).data("id")), "grid.sort");
     	                    	currEle.append('<span class="sortable__ asc__">' + opts.sortableItem.desc + '</span>');
     	                    }
     	        		}
     	        	}
     	        });
         	},
+			dataFilter : function() {
+				var opts = this.options;
+				var thead = this.thead;
+				var theadCells = thead.find("> tr th");
+				var self = this;
+
+				var clonedData;
+
+				var filterKeys;
+				var filteredKeys;
+				var bfrSelId;
+
+				var changeBtnIcon = function(th, kind) {
+					th.find(".btn_data_filter__")
+					.removeClass("btn_data_filter_empty__ btn_data_filter_part__ btn_data_filter_full__")
+					.addClass("btn_data_filter_" + kind + "__");
+				};
+
+				var btnEle = $('<a href="#" class="btn_data_filter__" title="' + N.message.get(opts.message, "dFilter") + '"><span>' + N.message.get(opts.message, "dFilter") + '</span><a>')
+					.addClass("btn_data_filter_full__")
+					.bind("click.grid.dataFilter", function(e) {
+						e.preventDefault();
+						e.stopPropagation();
+
+						var theadCell = $(this).closest("th");
+
+						thead.find(".data_filter_panel__:visible").hide();
+
+						var panel;
+						var searchBox;
+						var filterListBox;
+						var id = theadCell.data("id");
+						var dataFilterProgress;
+
+						if(theadCell.find(".data_filter_panel__").length > 0) {
+							panel = theadCell.find(".data_filter_panel__");
+							dataFilterProgress = theadCell.find(".data_filter_progress__");
+							searchBox = panel.find(".data_filter_search__");
+							panel.find(".data_filter_checkall_box__ .data_filter_total_cnt__").text('(' + opts.data.length + ')');
+							filterListBox = panel.find(".data_filter_list__");
+							panel.show();
+
+							// Index filter keys
+							if(bfrSelId !== id) {
+								filterKeys = {};
+								$.each(clonedData, function(i, v) {
+									if(filterKeys[id + "_" + v[id]] === undefined) {
+										filterKeys[id + "_" + v[id]] = [i];
+									} else {
+										filterKeys[id + "_" + v[id]].push(i);
+									}
+								});
+							}
+
+							// Index filter keys from filtered data
+							filteredKeys = {};
+							$.each(opts.data, function(i, v) {
+								if(filteredKeys[id + "_" + v[id]] === undefined) {
+									filteredKeys[id + "_" + v[id]] = [i];
+								} else {
+									filteredKeys[id + "_" + v[id]].push(i);
+								}
+							});
+						} else {
+							if(theadCells.find(".data_filter_panel__").length === 0) {
+								clonedData = opts.data.get().slice(0);
+							}
+
+							panel = $('<div align="left" class="data_filter_panel__">'
+									+ 	'<div class="data_filter_search__">'
+									+ 		'<input class="data_filter_search_word__" type="text">'
+									+		'<a class="data_filter_search_btn__" href="#" title="' + N.message.get(opts.message, "search") + '">'
+									+			'<span>' + N.message.get(opts.message, "search") + '</span>'
+									+		'</a>'
+									+ 	'</div>'
+									+ 	'<div class="data_filter_checkall_box__"><label><input type="checkbox" checked="checked">' + N.message.get(opts.message, "selectAll") + '<span class="data_filter_total_cnt__">(' + opts.data.length + ')</span></label></div>'
+									+ 	'<ul class="data_filter_list__"></ul>'
+									+ '</div>')
+							.css("z-index", 1)
+							.appendTo(theadCell).bind("click.grid.dataFilter, mouseover.grid.dataFilter", function(e) {
+								e.stopPropagation();
+							});
+
+							dataFilterProgress = $('<div class="data_filter_progress__"></div>')
+							.css({
+								"z-index" : 2,
+								"opacity" : 0.3
+							})
+							.appendTo(panel);
+
+							searchBox = panel.find(".data_filter_search__");
+
+							// search btn event
+							panel.find(".data_filter_search_btn__").bind("click.grid.dataFilter", function(e) {
+								e.preventDefault();
+								var searchWord = N.string.escapeSelectorChar(panel.find(".data_filter_search_word__").val());
+								if(N.string.trimToNull(searchWord) !== null) {
+									var retChkbxs = filterListBox.find("li[class*='" + searchWord + "']").show().find(":checkbox").prop("checked", true);
+									filterListBox.find("li:not([class*='" + searchWord + "'])").hide().find(":checkbox").prop("checked", false).last().trigger("do.grid.dataFilter");
+									retChkbxs.each(function() {
+										chkboxEle = $(this);
+										chkboxEle.parent().children("span").text('(' + String(chkboxEle.data("length")) + ')')
+									});
+								} else {
+									filterListBox.find("li").show();
+									filterListBox.find("li :checkbox").prop("checked", true).last().trigger("do.grid.dataFilter");
+								}
+							});
+							panel.find(".data_filter_search_word__").keyup(function(e) {
+								var keycode = (e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode));
+			                    if (keycode == 13) {
+			                    	panel.find(".data_filter_search_btn__").click();
+			                    }
+							});
+
+							// select all checkbox event
+							panel.find(".data_filter_checkall_box__ :checkbox").bind("click.grid.dataFilter", function() {
+								if($(this).is(":checked")) {
+									var chkboxEle;
+									panel.find(".data_filter_search_word__").val("");
+									filterListBox.find("li").show();
+									filterListBox.find("li :checkbox").prop("checked", true).each(function() {
+										chkboxEle = $(this);
+										chkboxEle.parent().children("span").text('(' + String(chkboxEle.data("length")) + ')')
+									}).last().trigger("do.grid.dataFilter");
+								} else {
+									filterListBox.find("li :checkbox").prop("checked", false).last().trigger("do.grid.dataFilter");
+									filterListBox.find("li span").text("(0)");
+								}
+							});
+
+							filterListBox = panel.find(".data_filter_list__").css({
+								"max-height" : opts.height - searchBox.outerHeight() - panel.find(".data_filter_checkall_box__").height() - 15
+							});
+
+							// Index filter keys
+							filterKeys = {};
+							$.each(clonedData, function(i, v) {
+								if(filterKeys[id + "_" + v[id]] === undefined) {
+									filterKeys[id + "_" + v[id]] = [i];
+								} else {
+									filterKeys[id + "_" + v[id]].push(i);
+								}
+							});
+
+							// Index filter keys from filtered data
+							if(!N.isEmptyObject(filteredKeys) && clonedData.length !== opts.data.length) {
+								filteredKeys = {};
+								$.each(opts.data, function(i, v) {
+									if(filteredKeys[id + "_" + v[id]] === undefined) {
+										filteredKeys[id + "_" + v[id]] = [i];
+									} else {
+										filteredKeys[id + "_" + v[id]].push(i);
+									}
+								});
+							} else {
+								filteredKeys = filterKeys;
+							}
+						}
+
+						var itemSeq = 0;
+						for(var k in filterKeys) {
+							var filterItemEle;
+							var length = filteredKeys[k] === undefined ? 0 : filteredKeys[k].length;
+
+							var prevFilterItemEle = filterListBox.find(".data_filter_item_" + String(itemSeq) + "__");
+							if(prevFilterItemEle.length > 0) {
+								filterItemEle = prevFilterItemEle;
+								filterItemEle.find(".data_filter_cnt__").text("(" + String(length) + ")");
+							} else {
+								filterItemEle = $('<li class="data_filter_item_' + String(itemSeq) + '__">'
+										+ '<label><input type="checkbox" checked="checked" class="data_filter_checkbox__">'
+										+ k.replace(id + "_", "") + '<span class="data_filter_cnt__">(' + String(length) + ')</span></label></li>');
+
+								filterItemEle.find(".data_filter_checkbox__")
+								.data("rowIdxs", filterKeys[k])
+								.data("length", length)
+								.bind("click.grid.dataFilter, do.grid.dataFilter", function() {
+									// Update clicked checkbox(filter) row count
+									var thisEle = $(this);
+									if(thisEle.is(":checked")) {
+										thisEle.parent().children("span").text("(" + String(thisEle.data("length")) + ")");
+									} else {
+										thisEle.parent().children("span").text("(0)");
+									}
+
+									// dataFilterListUnCheckedEles is current thead's cell unchecked data filter list
+									var dataFilterListUnCheckedEles = theadCell.find(".data_filter_list__ li :checkbox:not(:checked)");
+									if(dataFilterListUnCheckedEles.length > 0) {
+										panel.find(".data_filter_checkall_box__ :checkbox").prop("checked", false);
+										if(theadCell.find(".data_filter_list__ li :checkbox:checked").length > 0) {
+											changeBtnIcon(theadCell, "part");
+										} else {
+											changeBtnIcon(theadCell, "empty");
+										}
+									} else {
+										panel.find(".data_filter_checkall_box__ :checkbox").prop("checked", true);
+										changeBtnIcon(theadCell, "full");
+									}
+
+									// dataFilterListUnCheckedEles is all thead's cells unchecked data filter list
+									dataFilterListUnCheckedEles = theadCells.find(".data_filter_list__ li :checkbox:not(:checked)");
+
+									var filterIdxs = [];
+									dataFilterListUnCheckedEles.each(function() {
+										$.each($(this).data("rowIdxs"), function(i, v) {
+											filterIdxs[v] = v;
+										});
+									});
+
+									filterIdxs = $.grep(filterIdxs, function(n){ return n == 0 || n });
+
+									dataFilterProgress.show().fadeTo(50, 0.5, function() {
+										// init scrollPaging index
+										opts.scrollPaging.idx = 0;
+
+										if(filterIdxs.length > 0 && filterIdxs.length !== clonedData.length) {
+											var extrData = clonedData.slice(0);
+											var bfrFilterIdx = -1;
+											var addUnits = 0;
+											for(var i = 0; i < filterIdxs.length; i++){
+												if(filterIdxs[i] - bfrFilterIdx === 1) {
+													addUnits++;
+												} else {
+													extrData.splice((bfrFilterIdx - addUnits + 1) - (i - addUnits), addUnits);
+													addUnits = 1;
+												}
+												bfrFilterIdx = filterIdxs[i];
+										    }
+											extrData.splice((bfrFilterIdx - addUnits + 1) - (i - addUnits), addUnits);
+
+											self.bind(extrData, "grid.dataFilter");
+										} else {
+											if(filterIdxs.length > 0) {
+												self.bind([], "grid.dataFilter");
+											} else {
+												self.bind(clonedData, "grid.dataFilter");
+											}
+										}
+
+										// Update total count.
+										theadCell.find(".data_filter_total_cnt__").text("(" + String(opts.data.length) + ")");
+
+										// Prevent event propagation when browser is stoped.
+										setTimeout(function() {
+											dataFilterProgress.fadeTo("opacity", 0.3).hide();
+										}, 0);
+									});
+								});
+
+								filterListBox.append(filterItemEle);
+							}
+
+							if(length === 0) {
+								filterItemEle.find(".data_filter_checkbox__").prop("checked", false);
+							}
+							itemSeq++;
+						}
+
+						$(document).bind("click.grid.dataFilter", function(e) {
+							$(document).unbind("click.grid.dataFilter");
+							thead.find(".data_filter_panel__").hide();
+						});
+
+						bfrSelId = id;
+					}).prependTo(theadCells.filter("[data-filter='true']"));
+			},
         	checkAll : function() {
         		var opts = this.options;
     	        var thead = this.thead;
@@ -3170,15 +3446,40 @@
 			},
 			bind : function(data) {
 				var opts = this.options;
-				// remove all sort status
-				this.thead.find(".sortable__").remove();
 
-				//for internal call by scrollPaging
-				var interCall = arguments[1] !== undefined && arguments[1] === true ? true : false;
+				// for internal call by scrollPaging and data filter
+				var callFrom = arguments[1];
+
+				// remove all sort status
+				if(opts.sortable) {
+					this.thead.find(".sortable__").remove();
+				}
 
 				//to rebind new data
 				if(data !== undefined) {
 					opts.data = N.type(data) === "array" ? N(data) : data;
+				}
+
+				// remove all data filter status
+				if(opts.filter || this.thead.find("> tr th[data-filter='true']").length > 0) {
+					if(callFrom !== "grid.dataFilter" && callFrom !== "grid.sort") {
+						this.thead.find("th .data_filter_panel__").remove();
+
+						this.thead.find(".btn_data_filter__")
+						.removeClass("btn_data_filter_empty__ btn_data_filter_part__ btn_data_filter_full__")
+						.addClass("btn_data_filter_full__");
+
+						if(opts.data.length > 0) {
+							this.thead.find(".btn_data_filter__").show();
+						} else {
+							this.thead.find(".btn_data_filter__").hide();
+						}
+					} else {
+						// To keep your filter list even after sorting delete this codes.
+						if(callFrom === "grid.sort") {
+							this.thead.find(".data_filter_panel__").remove();
+						}
+					}
 				}
 
 				var tbodyTempClone;
@@ -3189,7 +3490,7 @@
 				if (opts.data.length > 0) {
 					//clear tbody visual effect
 					opts.context.find("tbody").clearQueue().stop();
-					if(!interCall) {
+					if(callFrom !== "grid.bind") {
 						opts.scrollPaging.idx = 0;
 					}
 					if(opts.scrollPaging.idx === 0) {
@@ -3236,7 +3537,9 @@
 								delay = opts.createRowDelay;
 							}
 							if(i <= lastIdx) {
-								render();
+								if (opts.data.length > 0) {
+									render();
+								}
 							} else if(i === lastIdx + 1) {
 								if(opts.onBind !== null) {
 									opts.onBind.call(opts.context, opts.context, opts.data);
@@ -3373,7 +3676,7 @@
 						this.options.context.find("tbody:eq(" + String(row) + ")").instance("form").update(0);
 					}
 				} else {
-					this.bind(undefined, true);
+					this.bind(undefined, "grid.update");
 				}
 				return this;
 			}
