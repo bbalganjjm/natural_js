@@ -215,7 +215,11 @@
 												}
 											}
 										});
+<<<<<<< HEAD
 								   	}
+=======
+								   	}									
+>>>>>>> refs/remotes/origin/controller-aop
 									if(sc.init !== undefined) {
 										sc.init(sc.view, obj.request);
 									}
