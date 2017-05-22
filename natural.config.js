@@ -41,6 +41,46 @@
 		"page" : {
 			"context" : "#naturalJsContents"
 		},
+		"cont" : {
+			"pointcuts" : { 
+				/* default pointcut */
+				"regexp" : {
+					"fn" : function(param, cont, fnName){
+						var regexp = param instanceof RegExp ? param : new RegExp(param);
+						return regexp.test(fnName);
+					}					
+				} 
+			},
+			"advisors" : [{
+				"selector" : "#part1",
+				/* pointcut의 값이 객체가 아닌경우 regexp pointcut을 기본으로 사용한다 */
+				"pointcut" : "init",
+				"adviceType" : "before",
+				"fn" : function(cont, fnName, args){ /* cont 컨트롤러, fnName 함수명, args 인자 */
+					console.log(this.selector, "call me before %s", fnName);
+				}
+			},
+			{
+				"selector" : "#part1",
+				"pointcut" : "after.*",
+				"adviceType" : "after",
+				"fn" : function(cont, fnName, args, result){ /* cont 컨트롤러, fnName 함수명, args 인자, 반환값 */
+					console.log(this.selector, "call me after %s", fnName);
+					console.log("\treuslt", result);
+				}
+			},
+			{
+				"selector" : "#part1",
+				"pointcut" : "around.*",
+				"adviceType" : "around",
+				"fn" : function(cont, fnName, args, joinPoint){
+					console.log(this.selector, "call me around %s", fnName);
+					var result = joinPoint.proceed();
+					console.log("result ", result);
+					return result;
+				}
+			}]
+		},		
 		"comm" : {
 			/**
 			* Global ajax request filter
