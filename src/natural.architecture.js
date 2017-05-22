@@ -141,6 +141,81 @@
 								var sc = obj.children("[id]:first").instance("cont");
 								if(sc !== undefined) {
 									sc.request = obj.request;
+									if (N.context.attr("architecture").cont &&
+									    N.context.attr("architecture").cont.advisors &&
+									    N.context.attr("architecture").cont.advisors.length > 0) {
+										var o = N.context.attr("architecture").cont;
+										$(o.advisors).each(function (idx, advisor) {
+											if (advisor.selector && !sc.view.is(advisor.selector)) {
+												return;
+											}
+											var pointcut;
+											if (!$.isPlainObject(advisor.pointcut)) {
+												pointcut = o.pointcuts["regexp"];
+											} else {
+												pointcut = o.pointcuts[advisor.type];
+											}
+											for (var x in sc) {
+												if (!sc.hasOwnProperty(x)) continue;
+
+												if (pointcut.fn(advisor.pointcut, sc, x)) {
+													var real = sc[x];
+
+													sc[x] = (function (real, x) {
+														var wrappedFn;
+
+														switch(advisor.adviceType){
+															case "before":
+															wrappedFn = function(){
+																var args = [].slice.call(arguments);	
+																advisor.fn.call(advisor, sc, x, args);		
+																return real.apply(sc, args);														
+															};
+															break;
+															case "after":
+															wrappedFn = function(){
+																var args = [].slice.call(arguments);	
+																var result = real.apply(sc, args);
+																advisor.fn.call(advisor, sc, x, args, result);
+																return result;
+															};
+															break;
+															case "around":
+															wrappedFn = function(){
+																var args = [].slice.call(arguments);	
+																return advisor.fn.call(advisor, sc, x, args, {
+																	"sc" : sc,
+																	"args" : args,
+																	"real" : real,
+																	"proceed" : function(){
+																		return this.real.apply(this.sc, this.args);
+																	}	
+																});																
+															};
+															break;
+															case "error":
+															wrappedFn = function(){
+																var args = [].slice.call(arguments);	
+																var result;
+																try{
+																	result = real.apply(sc, args);
+																} catch(e) {
+																	if (advisor.adviceType == "error") {
+																		result = advisor.fn.call(advisor, sc, x, args, e);
+																	} else {
+																		throw e;
+																	}
+																}
+																return result;															
+															};
+															break;															
+														}
+														return wrappedFn;
+													})(real, x);
+												}
+											}
+										});
+								   	}									
 									if(sc.init !== undefined) {
 										sc.init(sc.view, obj.request);
 									}
