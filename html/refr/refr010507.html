@@ -339,10 +339,10 @@
 			<td>저장할 값</td>
 		</tr>
 	</table>
-	
+
 	<h3 lang="ko_KR">예제</h3>
 	<h3 lang="en_US">Examples</h3>
-	
+
 	<p class="alert">예제 데이터</p>
 	<pre class="line-numbers"><code class="language-markup"><xmp>
 var data = [{
@@ -378,7 +378,7 @@ var data = [{
 
 <script type="text/javascript">
 	N(data).form("#formExample10").bind();
-	
+
 	/* 위 구문은 다음과 같습니다.
 		N(data).form({
 			context: "#formExample10",
@@ -411,7 +411,7 @@ var data = [{
 
 <script type="text/javascript">
 	var form = N(data).form("#formExample20").bind();
-	
+
 	N("#btnFormExample02").click(function() {
 		N(window).alert({ // 1. confirm 메시지 출력
 			msg : "저장 하겠습니까?",
@@ -419,7 +419,7 @@ var data = [{
 			onOk : function() {
 				if(form.validate()) { // 2. 폼에 입력된 데이터 검증
 					N(form.data()).comm("save.json").submit(); // 3. 폼의 데이터를 저장
-				}				
+				}
 			}
 		});
 	});
@@ -440,11 +440,11 @@ var data = [{
 <script type="text/javascript">
 	//add 메서드를 호출하면 id 속성을 가지고 있는 입력요소를 기반으로 { "name": "", "age": "" } 와 같은 데이터가 생성됨.
 	var form = N(data).form("#formExample30").add();
-	
+
 	N("#btnFormExample30").click(function() {
 		if(form.validate()) { // 1. 조회 블록에 입력된 데이터 검증
 			N(form.data()).comm("retrieve.json").submit(); // 2. 폼의 데이터를 조건으로 하여 조회
-		}				
+		}
 	});
 </script></xmp></code></pre>
 
@@ -486,8 +486,8 @@ var data = [{
     	context : "#formExample40 #gender",
     	key : "key",
     	val : "val"
-    })	
-	
+    })
+
     // 2. 폼 바인드
 	N(data).form("#formExample40").bind();
 </script></xmp></code></pre>
@@ -497,17 +497,7 @@ var data = [{
 <script type="text/javascript">
 N("#__refr010507").cont({
     init : function(view, request) {
-    	// code highlight
-    	if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {
-			view.find("code").each(function() {
-				Prism.highlightElement(this);
-	    	});
-    	}
 
-    	//load api demo page
-    	N(".apidemo", view).each(function() {
-    		N(this).comm("html/apid/" + N(this).data("page") + ".html").submit();
-    	});
     }
 });
 </script>

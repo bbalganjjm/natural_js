@@ -191,6 +191,13 @@
 			<td>브라우저명(opera, firefox, safari, chrome, ie)</td>
 		</tr>
 		<tr>
+			<td>N.browser<br>.contextPath</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>number</td>
+			<td>현재 접속한 브라우저 URL 에서 컨텍스트 경로를 반환 합니다.</td>
+		</tr>
+		<tr>
 			<td>N.message<br>.get</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
@@ -304,17 +311,7 @@ N("div#sample1").instance("name", instance);</code></pre>
 
 N("#__refr010201").cont({
     init : function(view, request) {
-    	// code highlight
-    	if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {
-			view.find("code").each(function() {
-				Prism.highlightElement(this);
-	    	});
-    	}
 
-    	//load api demo page
-    	N(".apidemo", view).each(function() {
-    		N(this).comm("html/apid/" + N(this).data("page") + ".html").submit();
-    	});
     }
 });
 

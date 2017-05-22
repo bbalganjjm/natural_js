@@ -302,10 +302,10 @@
 			<td>입력된 값으로 컴포넌트 옵션의 countPerPageSet가 지정 됩니다.</td>
 		</tr>
 	</table>
-	
+
 	<h3 lang="ko_KR">예제</h3>
 	<h3 lang="en_US">Examples</h3>
-	
+
 	<p>1. Pagination 생성</p>
 	<pre class="line-numbers"><code class="language-markup"><xmp>
 <div id="paginationExample10">
@@ -399,7 +399,7 @@
 
 <script type="text/javascript">
 	var grid = N(data).grid("#paginationExample31"); // 1. N.grid 인스턴스 생성
-	
+
 	N.comm("retrieve.json").submit(function(data){ // 2. 데이터 조회
 		N(data).pagination({
 			context: "#paginationExample30",
@@ -450,14 +450,14 @@
 
 <script type="text/javascript">
 	var grid = N(data).grid("#paginationExample41"); // 1. N.grid 인스턴스 생성
-	
+
 	N.comm("retrieveCnt.json").submit(function(data){ // 2. totalCount 조회
 		N(data).pagination({
 			context: "#paginationExample40",
 			totalCount: data.totalCount,
 			onChange: function(pageNo, selEle, selData, currPageNavInfo) { // 페이지 전환 시 발생되는 이벤트
 				N(currPageNavInfo).comm("retrieve.json").submit(function(data){ // 3. 페이징 정보를 서버로 전달하여 해당 데이터만 조회
-					grid.bind(selData); // 4. 서버에서 가져온 데이터를 N.grid에 바인드					
+					grid.bind(selData); // 4. 서버에서 가져온 데이터를 N.grid에 바인드
 				});
 			}
 		}).bind();
@@ -469,17 +469,7 @@
 <script type="text/javascript">
 N("#__refr010509").cont({
     init : function(view, request) {
-    	// code highlight
-    	if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {
-			view.find("code").each(function() {
-				Prism.highlightElement(this);
-	    	});
-    	}
 
-    	//load api demo page
-    	N(".apidemo", view).each(function() {
-    		N(this).comm("html/apid/" + N(this).data("page") + ".html").submit();
-    	});
     }
 });
 </script>

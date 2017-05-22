@@ -41,6 +41,120 @@
 		"page" : {
 			"context" : "#naturalJsContents"
 		},
+		"cont" : {
+			/* advisor에서 참조할 pointcut을 정의한다.
+			 * pointcut은 반드시 fn 속성에 function(param, cont, fnName) 함수를 정의해야 한다.
+			 * 함수 수행 결과는 advice의 적용 여부를 판단하는데 사용된다.
+			 * 아래는 예제코드 이므로 필요없으면 pointcuts 오브젝트를 삭제하고 사용 바람.
+			 * */
+			"pointcuts" : {
+				/* pointcut 객체는 유일한 속성명으로 정의한다. */
+				"regexp" : {
+					/*
+					 * param : 정규표현식 문자열 혹은 RegExp 객체,
+					 * cont : 컨트롤러 객체
+					 * fnName : 컨트롤러에 정의된 함수명 (Built-in 함수를 제외한 사용자가 정의한 함수만 대상으로 한다)
+					 * */
+					"fn" : function(param, cont, fnName){
+						var regexp = param instanceof RegExp ? param : new RegExp(param);
+						return regexp.test(fnName);
+					}
+				}
+			},
+			/* 컨트롤러의 함수에 적용하고자 하는 기능을 정의한다 */
+			"advisors" : [{
+				/* 특정 뷰(컨트롤러)에만 advisor가 동작하도록 하려면 해당 뷰에 대한 selector를 문자열로 정의한다
+				 *
+				 * <article id="part1">part1</article>
+				 * <article id="part2">part2</article>
+				 * 위와 같이 두개의 뷰가 있을 경우
+				 * "selector": "#part1"
+				 * 위와 같이 정의하면 part1에만 advisor가 동작한다.
+				 * */
+				"selector" : [
+					"#__refr010201",
+					"#__refr010202",
+					"#__refr010301",
+					"#__refr010302",
+					"#__refr010303",
+					"#__refr010401",
+					"#__refr010402",
+					"#__refr010403",
+					"#__refr010404",
+					"#__refr010405",
+					"#__refr010501",
+					"#__refr010502",
+					"#__refr010503",
+					"#__refr010504",
+					"#__refr010505",
+					"#__refr010506",
+					"#__refr010507",
+					"#__refr010508",
+					"#__refr010509",
+					"#__refr010510"
+				].join(","),
+				/*
+				 * advisor가 적용될 pointcut을 정의한다
+				 * "pointcut" : {
+				 *     "type" : "regexp"
+				 *     "param" : "something"
+				 * }
+				 * 위의 경우 pointcuts에서 regexp pointcut을 찾아 pointcut에 정의된 객체를 파라미터로 전달한다.
+				 * "pointcut" : "someregexp"
+				 * 위와 같이 pointcut의 값이 객체가 아닌 경우 regexp pointcut을 기본값으로 사용한다.
+				 **/
+				"pointcut" : "init",
+				/*
+				 * adviecType은 아래와 같다.
+				 * before : 원본 함수를 실행하기 전에 실행된다.
+				 * after : 원본 함수를 실행 후 실행된다. 원본 함수의 반환값이 함께 전달된다.
+				 * error : 원본 함수에서 예외 발생 시 실행된다.
+				 * around : 원본 함수를 실행할 수 있는 joinPoint가 파라미터로 전달
+				 * 각 사용방식은 아래의 각 예제를 참고
+				 */
+				"adviceType" : "before",
+				"fn" : function(cont, fnName, args){ /* cont 컨트롤러, fnName 함수명, args 인자 */
+					var view = args[0];
+
+					// code highlight
+			    	if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {
+						view.find("code").each(function() {
+							Prism.highlightElement(this);
+				    	});
+			    	}
+
+			    	//load api demo page
+			    	N(".apidemo", view).each(function() {
+			    		N(this).comm("html/apid/" + N(this).data("page") + ".html").submit();
+			    	});
+				}
+			}, {
+				"selector" : "#__refr0101",
+				"pointcut" : "init",
+				"adviceType" : "before",
+				"fn" : function(cont, fnName, args){ /* cont 컨트롤러, fnName 함수명, args 인자 */
+					var view = args[0];
+
+					// code highlight
+			    	if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {
+						view.find("code").each(function() {
+							Prism.highlightElement(this);
+				    	});
+			    	}
+
+			    	CommonUtilController.setPageLinks(N("a.link", view));
+				}
+			}, {
+				"selector" : "#__refr0102, #__refr0103, #__refr0104, #__refr0105",
+				"pointcut" : "init",
+				"adviceType" : "before",
+				"fn" : function(cont, fnName, args){ /* cont 컨트롤러, fnName 함수명, args 인자 */
+					var view = args[0];
+
+			    	CommonUtilController.setPageLinks(N("a.link", view));
+				}
+			}]
+		},
 		"comm" : {
 			/**
 			* Global ajax request filter
@@ -159,15 +273,15 @@
 	N.context.attr("data", {
 		"formatter" : {
 			/**
-			 * 사용자 정의 포멧 룰 - 기본제공되는 데이터 포멧 룰 외에 추가로 지정하고 싶을 때 작성
-			 * userRules 오브젝트 안에 function 명이 룰 명이 되고 포멧된 값을 반환(return)하면 됨.
+			 * 사용자 정의 포멧 룰 - 기본제공되는 데이터 포멧 룰 외에 추가로 지정하고 싶을 때 작성 userRules 오브젝트
+			 * 안에 function 명이 룰 명이 되고 포멧된 값을 반환(return)하면 됨.
 			 */
 			"userRules" : {
-				// 함수 첫번째 인자는 검증 데이터가 들어오고 두번째 인자는 옵션값이 들어옴. natural.data.js 소스의 Formatter 부분 참고
+				// 함수 첫번째 인자는 검증 데이터가 들어오고 두번째 인자는 옵션값이 들어옴. natural.data.js 소스의
+				// Formatter 부분 참고
 			},
 			/**
-			 * 사이트 전역으로 사용할 날짜포멧 지정
-			 * Y : 년, m : 월, d : 일, H : 시, i : 분, s : 초
+			 * 사이트 전역으로 사용할 날짜포멧 지정 Y : 년, m : 월, d : 일, H : 시, i : 분, s : 초
 			 */
 			"date" : {
 				/**

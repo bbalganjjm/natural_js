@@ -217,7 +217,7 @@
 			<td>버턴을 비활성화 합니다.</td>
 		</tr>
 	</table>
-	
+
 	<h3 lang="ko_KR">예제</h3>
 	<h3 lang="en_US">Examples</h3>
 
@@ -247,17 +247,7 @@
 <script type="text/javascript">
 N("#__refr010502").cont({
     init : function(view, request) {
-    	// code highlight
-    	if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {
-			view.find("code").each(function() {
-				Prism.highlightElement(this);
-	    	});
-    	}
 
-    	//load api demo page
-    	N(".apidemo", view).each(function() {
-    		N(this).comm("html/apid/" + N(this).data("page") + ".html").submit();
-    	});
     }
 });
 </script>

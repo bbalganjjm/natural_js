@@ -852,17 +852,7 @@ var data = [{
 <script type="text/javascript">
 N("#__refr010508").cont({
     init : function(view, request) {
-    	// code highlight
-    	if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {
-			view.find("code").each(function() {
-				Prism.highlightElement(this);
-	    	});
-    	}
 
-    	//load api demo page
-    	N(".apidemo", view).each(function() {
-    		N(this).comm("html/apid/" + N(this).data("page") + ".html").submit();
-    	});
     }
 });
 </script>

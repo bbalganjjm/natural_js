@@ -275,7 +275,7 @@
 			<td>key를 지정하지 않으면 전체 요청정보를 가져오고 key 값을 지정하면 해당 정보만 가져옵니다. key 값은 기본옵션과 같고 referrer(호출한 페이지 URL) 값만 추가 됩니다.</td>
 		</tr>
 	</table>
-	
+
 	<h3 lang="ko_KR">예제</h3>
 	<h3 lang="en_US">Examples</h3>
 
@@ -312,17 +312,7 @@
 <script type="text/javascript">
 N("#__refr010302").cont({
     init : function(view, request) {
-    	// code highlight
-    	if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {
-			view.find("code").each(function() {
-				Prism.highlightElement(this);
-	    	});
-    	}
 
-    	//load api demo page
-    	N(".apidemo", view).each(function() {
-    		N(this).comm("html/apid/" + N(this).data("page") + ".html").submit();
-    	});
     }
 });
 </script>
