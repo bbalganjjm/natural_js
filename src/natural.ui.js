@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.14.1
+ * Natural-UI v0.8.14.3
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "v0.8.14.1";
+	N.version["Natural-UI"] = "v0.8.14.3";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -1406,24 +1406,20 @@
 					// set request target
 					this.request.options.target = opts.context.parent();
 
-					var sc = opts.context.filter("[id]:first").instance("cont");
+					var cont = opts.context.filter("[id]:first").instance("cont");
 
 					// set popup instance to popup's Controller
-					if(sc !== undefined) {
-						// set Communicator.request
-						sc.request = this.request;
-
+					if(cont !== undefined) {
 						// set caller attribute in Conteroller in tab content, that is Popup instance
-						sc.caller = self;
+						cont.caller = self;
 
 						// set opener to popup's Controller
 						if(self.opener !== undefined) {
-							sc.opener = self.opener;
+							cont.opener = self.opener;
 						}
 
-						if(sc.init !== undefined) {
-							sc.init(sc.view, this.request);
-						}
+						// triggering "init" method
+						N.cont.trInit.call(this, cont, this.request);
 					}
 
 					callback.call(self, opts.context);
@@ -1617,10 +1613,10 @@
 					// excute "onOpen"(declarative option) event
 					// excuted only when defined url with class(inline) option and tab is active
 					if(thisDeclarativeOpts.onOpen !== undefined && thisEle.data("loaded")) {
-						var sc = content.find(">").filter("[id]:first").instance("cont");
-						if(sc[thisDeclarativeOpts.onOpen] !== undefined) {
+						var cont = content.find(">").filter("[id]:first").instance("cont");
+						if(cont[thisDeclarativeOpts.onOpen] !== undefined) {
 							//thisDeclarativeOpts.onOpen
-							sc[thisDeclarativeOpts.onOpen](onOpenData);
+							cont[thisDeclarativeOpts.onOpen](onOpenData);
 						} else {
 							N.warn("[N.tab.wrapEle]The onOpen event handler(" + thisDeclarativeOpts.onOpen + ") is not defined on the Controller(N.cont) of the tab(N.tab)'s contents.");
 						}
@@ -1645,19 +1641,15 @@
 					type : "GET",
 					target : opts.contents.eq(targetIdx)
 				}).submit(function(page) {
-					var sc = opts.contents.eq(targetIdx).html(page).children("[id]:first").instance("cont");
-
-					// set Communicator.request
-					sc.request = this.request;
+					var cont = opts.contents.eq(targetIdx).html(page).children("[id]:first").instance("cont");
 
 					// set caller attribute in conteroller in tab content that is Tab instance
-					sc.caller = self;
+					cont.caller = self;
 
 					// set tab instance to tab contents Controller
-					if(sc !== undefined) {
-						if(sc.init !== undefined) {
-							sc.init(sc.view, this.request);
-						}
+					if(cont !== undefined) {
+						// triggering "init" method
+						N.cont.trInit.call(this, cont, this.request);
 					}
 
 					var activeTabEle = opts.links.eq(targetIdx);
@@ -1666,9 +1658,9 @@
 					if(activeTabEle.hasClass("tab_active__")) {
 						var dataOpts = opts.dataOpts[targetIdx];
 						if(dataOpts.onOpen !== undefined) {
-							if(sc[dataOpts.onOpen] !== undefined) {
+							if(cont[dataOpts.onOpen] !== undefined) {
 								//TODO think more how to work "onOpenData"
-								sc[dataOpts.onOpen]();
+								cont[dataOpts.onOpen]();
 							} else {
 								N.warn("[N.tab.loadContent]The onOpen event handler(" + dataOpts.onOpen + ") is not defined on the Controller(N.cont) of the tab(N.tab)'s contents.");
 							}

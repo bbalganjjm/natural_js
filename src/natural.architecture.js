@@ -1,5 +1,5 @@
 /*!
- * Natural-ARCHITECTURE v0.8.0.18
+ * Natural-ARCHITECTURE v0.8.1.0
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-ARCHITECTURE"] = "0.8.0.18";
+	N.version["Natural-ARCHITECTURE"] = "0.8.1.0";
 
 	$.fn.extend($.extend(N.prototype, {
 		ajax : function(opts) {
@@ -138,87 +138,10 @@
 								obj.hide()[obj.request.options.effect[0]](obj.request.options.effect[1], obj.request.options.effect[2]);
 							}
 							if(obj.children("[id]:first").length > 0) {
-								var sc = obj.children("[id]:first").instance("cont");
-								if(sc !== undefined) {
-									sc.request = obj.request;
-									if (N.context.attr("architecture").cont &&
-									    N.context.attr("architecture").cont.advisors &&
-									    N.context.attr("architecture").cont.advisors.length > 0) {
-										var o = N.context.attr("architecture").cont;
-										$(o.advisors).each(function (idx, advisor) {
-											if (advisor.selector && !sc.view.is(advisor.selector)) {
-												return;
-											}
-											var pointcut;
-											if (!$.isPlainObject(advisor.pointcut)) {
-												pointcut = o.pointcuts["regexp"];
-											} else {
-												pointcut = o.pointcuts[advisor.type];
-											}
-											for (var x in sc) {
-												if (!sc.hasOwnProperty(x)) continue;
-
-												if (pointcut.fn(advisor.pointcut, sc, x)) {
-													var real = sc[x];
-
-													sc[x] = (function (real, x) {
-														var wrappedFn;
-
-														switch(advisor.adviceType){
-															case "before":
-															wrappedFn = function(){
-																var args = [].slice.call(arguments);	
-																advisor.fn.call(advisor, sc, x, args);		
-																return real.apply(sc, args);														
-															};
-															break;
-															case "after":
-															wrappedFn = function(){
-																var args = [].slice.call(arguments);	
-																var result = real.apply(sc, args);
-																advisor.fn.call(advisor, sc, x, args, result);
-																return result;
-															};
-															break;
-															case "around":
-															wrappedFn = function(){
-																var args = [].slice.call(arguments);	
-																return advisor.fn.call(advisor, sc, x, args, {
-																	"sc" : sc,
-																	"args" : args,
-																	"real" : real,
-																	"proceed" : function(){
-																		return this.real.apply(this.sc, this.args);
-																	}	
-																});																
-															};
-															break;
-															case "error":
-															wrappedFn = function(){
-																var args = [].slice.call(arguments);	
-																var result;
-																try{
-																	result = real.apply(sc, args);
-																} catch(e) {
-																	if (advisor.adviceType == "error") {
-																		result = advisor.fn.call(advisor, sc, x, args, e);
-																	} else {
-																		throw e;
-																	}
-																}
-																return result;															
-															};
-															break;															
-														}
-														return wrappedFn;
-													})(real, x);
-												}
-											}
-										});
-								   	}									
-									if(sc.init !== undefined) {
-										sc.init(sc.view, obj.request);
-									}
+								var cont = obj.children("[id]:first").instance("cont");
+								if(cont !== undefined) {
+									// triggering "init" method
+									Controller.trInit.call(this, cont, obj.request);
 								}
 							}
 						}
@@ -373,6 +296,104 @@
 			callback.view = obj;
 			return callback;
 		};
+
+		$.extend(Controller, {
+			/**
+			 * "init" method trigger
+			 */
+			trInit : function(cont, request) {
+				// set request attribute
+				cont.request = request;
+
+				// AOP processing
+				Controller.aopProc.call(this, cont);
+
+				// run Controller's "init" method
+				if(cont.init !== undefined) {
+					cont.init(cont.view, request);
+				}
+			},
+			/*
+			 * AOP processing module
+			 */
+			aopProc : function(cont) {
+				if (N.context.attr("architecture").cont &&
+				    N.context.attr("architecture").cont.advisors &&
+				    N.context.attr("architecture").cont.advisors.length > 0) {
+					var o = N.context.attr("architecture").cont;
+					$(o.advisors).each(function (idx, advisor) {
+						if (advisor.selector && !cont.view.is(advisor.selector)) {
+							return;
+						}
+						var pointcut;
+						if (!$.isPlainObject(advisor.pointcut)) {
+							pointcut = o.pointcuts["regexp"];
+						} else {
+							pointcut = o.pointcuts[advisor.type];
+						}
+						for (var x in cont) {
+							if (!cont.hasOwnProperty(x)) continue;
+
+							if (pointcut.fn(advisor.pointcut, cont, x)) {
+								var real = cont[x];
+
+								cont[x] = (function (real, x) {
+									var wrappedFn;
+
+									switch(advisor.adviceType){
+										case "before":
+										wrappedFn = function(){
+											var args = [].slice.call(arguments);
+											advisor.fn.call(advisor, cont, x, args);
+											return real.apply(cont, args);
+										};
+										break;
+										case "after":
+										wrappedFn = function(){
+											var args = [].slice.call(arguments);
+											var result = real.apply(cont, args);
+											advisor.fn.call(advisor, cont, x, args, result);
+											return result;
+										};
+										break;
+										case "around":
+										wrappedFn = function(){
+											var args = [].slice.call(arguments);
+											return advisor.fn.call(advisor, cont, x, args, {
+												"cont" : cont,
+												"args" : args,
+												"real" : real,
+												"proceed" : function(){
+													return this.real.apply(this.cont, this.args);
+												}
+											});
+										};
+										break;
+										case "error":
+										wrappedFn = function(){
+											var args = [].slice.call(arguments);
+											var result;
+											try{
+												result = real.apply(cont, args);
+											} catch(e) {
+												if (advisor.adviceType == "error") {
+													result = advisor.fn.call(advisor, cont, x, args, e);
+												} else {
+													throw e;
+												}
+											}
+											return result;
+										};
+										break;
+									}
+									return wrappedFn;
+								})(real, x);
+							}
+						}
+					});
+			   	}
+			}
+		});
 
 		// Context Object
 		N.context = {
