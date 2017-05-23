@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.14.3
+ * Natural-UI v0.8.14.4
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "v0.8.14.3";
+	N.version["Natural-UI"] = "v0.8.14.4";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -3125,10 +3125,10 @@
 							// search btn event
 							panel.find(".data_filter_search_btn__").bind("click.grid.dataFilter", function(e) {
 								e.preventDefault();
-								var searchWord = N.string.escapeSelectorChar(panel.find(".data_filter_search_word__").val());
+								var searchWord = panel.find(".data_filter_search_word__").val();
 								if(N.string.trimToNull(searchWord) !== null) {
-									var retChkbxs = filterListBox.find("li[class*='" + searchWord + "']").show().find(":checkbox").prop("checked", true);
-									filterListBox.find("li:not([class*='" + searchWord + "'])").hide().find(":checkbox").prop("checked", false).last().trigger("do.grid.dataFilter");
+									var retChkbxs = filterListBox.find("li:contains('" + searchWord + "')").show().find(":checkbox").prop("checked", true);
+									filterListBox.find("li:not(:contains('" + searchWord + "'))").hide().find(":checkbox").prop("checked", false).last().trigger("do.grid.dataFilter");
 									retChkbxs.each(function() {
 										chkboxEle = $(this);
 										chkboxEle.parent().children("span").text('(' + String(chkboxEle.data("length")) + ')')
