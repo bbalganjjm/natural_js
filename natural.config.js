@@ -41,37 +41,41 @@
 		"page" : {
 			"context" : "#naturalJsContents"
 		},
+		/**
+		 * N.cont(Controller)에 정의한 오브젝트들을 대상으로 하는 관점 지향 프로그래밍(AOP) 설정
+		 *   - 아래는 AOP 관련 된 예제코드 이므로 사용하지 않는다면 cont 하위의 모든 구문을 삭제하고 사용 바랍니다.
+		 */
 		"cont" : {
-			/* advisor에서 참조할 pointcut을 정의한다.
+			/** advisor에서 참조할 pointcut을 정의한다.
 			 * pointcut은 반드시 fn 속성에 function(param, cont, fnName) 함수를 정의해야 한다.
 			 * 함수 수행 결과는 advice의 적용 여부를 판단하는데 사용된다.
-			 * */
+			 */
 			"pointcuts" : {
-				/* pointcut 객체는 유일한 속성명으로 정의한다. */
+				/** pointcut 객체는 유일한 속성명으로 정의한다. */
 				"regexp" : {
-					/*
+					/**
 					 * param : 정규표현식 문자열 혹은 RegExp 객체,
 					 * cont : 컨트롤러 객체
 					 * fnName : 컨트롤러에 정의된 함수명 (Built-in 함수를 제외한 사용자가 정의한 함수만 대상으로 한다)
-					 * */
+					 */
 					"fn" : function(param, cont, fnName){
 						var regexp = param instanceof RegExp ? param : new RegExp(param);
 						return regexp.test(fnName);
 					}
 				}
 			},
-			/* 컨트롤러의 함수에 적용하고자 하는 기능을 정의한다 */
+			/** 컨트롤러의 함수에 적용하고자 하는 기능을 정의한다 */
 			"advisors" : [{
-				/* 특정 뷰(컨트롤러)에만 advisor가 동작하도록 하려면 해당 뷰에 대한 selector를 문자열로 정의한다
+				/** 특정 뷰(컨트롤러)에만 advisor가 동작하도록 하려면 해당 뷰에 대한 selector를 문자열로 정의한다
 				 *
 				 * <article id="part1">part1</article>
 				 * <article id="part2">part2</article>
 				 * 위와 같이 두개의 뷰가 있을 경우
 				 * "selector": "#part1"
 				 * 위와 같이 정의하면 part1에만 advisor가 동작한다.
-				 * */
+				 */
 				"selector" : "#part1",
-				/*
+				/**
 				 * advisor가 적용될 pointcut을 정의한다
 				 * "pointcut" : {
 				 *     "type" : "regexp"
@@ -80,9 +84,9 @@
 				 * 위의 경우 pointcuts에서 regexp pointcut을 찾아 pointcut에 정의된 객체를 파라미터로 전달한다.
 				 * "pointcut" : "someregexp"
 				 * 위와 같이 pointcut의 값이 객체가 아닌 경우 regexp pointcut을 기본값으로 사용한다.
-				 **/
+				 */
 				"pointcut" : "init",
-				/*
+				/**
 				 * adviecType은 아래와 같다.
 				 * before : 원본 함수를 실행하기 전에 실행된다.
 				 * after : 원본 함수를 실행 후 실행된다. 원본 함수의 반환값이 함께 전달된다.
