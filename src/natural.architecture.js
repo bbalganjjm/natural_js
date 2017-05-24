@@ -313,7 +313,7 @@
 					cont.init(cont.view, request);
 				}
 			},
-			/*
+			/**
 			 * AOP processing module
 			 */
 			aopProc : function(cont) {
@@ -329,10 +329,10 @@
 						if (!$.isPlainObject(advisor.pointcut)) {
 							pointcut = o.pointcuts["regexp"];
 						} else {
-							pointcut = o.pointcuts[advisor.type];
+							pointcut = o.pointcuts[advisor.pointcut.type];
 						}
 						for (var x in cont) {
-							if (!cont.hasOwnProperty(x)) continue;
+							if (!cont.hasOwnProperty(x) || !$.isFunction(cont[x])) continue;
 
 							if (pointcut.fn(advisor.pointcut, cont, x)) {
 								var real = cont[x];
