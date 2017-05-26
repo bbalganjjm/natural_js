@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.14.4
+ * Natural-UI v0.8.14.5
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "v0.8.14.4";
+	N.version["Natural-UI"] = "v0.8.14.5";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -1326,7 +1326,7 @@
 				var caller = arguments.callee.caller;
 				while(caller != null) {
 				    caller = caller.arguments.callee.caller;
-				    if(caller.arguments.length > 0 && N(caller.arguments[0]).hasClass("view_context__") && caller.arguments[0].instance != null && N.type(caller.arguments[0].instance) === "function") {
+				    if(caller != null && caller.arguments.length > 0 && N(caller.arguments[0]).hasClass("view_context__") && caller.arguments[0].instance != null && N.type(caller.arguments[0].instance) === "function") {
 						self.opener = caller.arguments[0].instance("cont");
 						break;
 					}
