@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.14.5
+ * Natural-UI v0.8.14.6
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "v0.8.14.5";
+	N.version["Natural-UI"] = "v0.8.14.6";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -1392,10 +1392,10 @@
 
 					// set title
 					if(opts.title === null) {
-						opts.title = opts.context.filter("[id]:first").attr("title");
+						opts.title = opts.context.filter(".view_context__:first").attr("title");
 					}
 					if(opts.title !== null) {
-						opts.context.filter("[id]:first").removeAttr("title");
+						opts.context.filter(".view_context__:first").removeAttr("title");
 					}
 					// opts.context is alert message;
 					opts.msg = opts.context;
@@ -1406,7 +1406,7 @@
 					// set request target
 					this.request.options.target = opts.context.parent();
 
-					var cont = opts.context.filter("[id]:first").instance("cont");
+					var cont = opts.context.filter(".view_context__").instance("cont");
 
 					// set popup instance to popup's Controller
 					if(cont !== undefined) {
@@ -1641,7 +1641,7 @@
 					type : "GET",
 					target : opts.contents.eq(targetIdx)
 				}).submit(function(page) {
-					var cont = opts.contents.eq(targetIdx).html(page).children("[id]:first").instance("cont");
+					var cont = opts.contents.eq(targetIdx).html(page).children(".view_context__").instance("cont");
 
 					// set caller attribute in conteroller in tab content that is Tab instance
 					cont.caller = self;
