@@ -1,5 +1,5 @@
 /*!
- * Natural-ARCHITECTURE v0.8.1.1
+ * Natural-ARCHITECTURE v0.8.1.2
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-ARCHITECTURE"] = "0.8.1.1";
+	N.version["Natural-ARCHITECTURE"] = "0.8.1.2";
 
 	$.fn.extend($.extend(N.prototype, {
 		ajax : function(opts) {
@@ -137,8 +137,8 @@
 							if (obj.request.options.effect) {
 								obj.hide()[obj.request.options.effect[0]](obj.request.options.effect[1], obj.request.options.effect[2]);
 							}
-							if(obj.children(".view_context__").length > 0) {
-								var cont = obj.children(".view_context__").instance("cont");
+							if(obj.children(".view_context__:last").length > 0) {
+								var cont = obj.children(".view_context__:last").instance("cont");
 								if(cont !== undefined) {
 									// triggering "init" method
 									Controller.trInit.call(this, cont, obj.request);
@@ -287,7 +287,7 @@
 				return obj.data(obj.attr("id"));
 			}
 			if(obj.length > 1) {
-				obj = N($.grep(obj, function(ele) { return !$(ele).hasClass(obj.attr("id") + "__ view_context__"); }));
+				N.error("[Controller]Only one view element must be selected.");
 			}
 			obj.addClass(obj.attr("id") + "__ view_context__");
 
@@ -306,7 +306,7 @@
 				cont.request = request;
 
 				// AOP processing
-				Controller.aopProc.call(this, cont);
+				Controller.aop.wrap.call(this, cont);
 
 				// run Controller's "init" method
 				if(cont.init !== undefined) {
@@ -316,82 +316,97 @@
 			/**
 			 * AOP processing module
 			 */
-			aopProc : function(cont) {
-				if (N.context.attr("architecture").cont &&
-				    N.context.attr("architecture").cont.advisors &&
-				    N.context.attr("architecture").cont.advisors.length > 0) {
-					var o = N.context.attr("architecture").cont;
-					$(o.advisors).each(function (idx, advisor) {
-						if (advisor.selector && !cont.view.is(advisor.selector)) {
-							return;
+			aop : {
+				pointcuts : {
+					"regexp" : {
+						"fn" : function(param, contFrag, fnChain){
+							var regexp = param instanceof RegExp ? param : new RegExp(param);
+							return regexp.test(fnChain);
 						}
-						var pointcut;
-						if (!$.isPlainObject(advisor.pointcut)) {
-							pointcut = o.pointcuts["regexp"];
-						} else {
-							pointcut = o.pointcuts[advisor.pointcut.type];
-						}
-						for (var x in cont) {
-							if (!cont.hasOwnProperty(x) || !$.isFunction(cont[x])) continue;
-
-							if (pointcut.fn(advisor.pointcut, cont, x)) {
-								var real = cont[x];
-
-								cont[x] = (function (real, x) {
-									var wrappedFn;
-
-									switch(advisor.adviceType){
-										case "before":
-										wrappedFn = function(){
-											var args = [].slice.call(arguments);
-											advisor.fn.call(advisor, cont, x, args);
-											return real.apply(cont, args);
-										};
-										break;
-										case "after":
-										wrappedFn = function(){
-											var args = [].slice.call(arguments);
-											var result = real.apply(cont, args);
-											advisor.fn.call(advisor, cont, x, args, result);
-											return result;
-										};
-										break;
-										case "around":
-										wrappedFn = function(){
-											var args = [].slice.call(arguments);
-											return advisor.fn.call(advisor, cont, x, args, {
-												"cont" : cont,
-												"args" : args,
-												"real" : real,
-												"proceed" : function(){
-													return this.real.apply(this.cont, this.args);
-												}
-											});
-										};
-										break;
-										case "error":
-										wrappedFn = function(){
-											var args = [].slice.call(arguments);
-											var result;
-											try{
-												result = real.apply(cont, args);
-											} catch(e) {
-												if (advisor.adviceType == "error") {
-													result = advisor.fn.call(advisor, cont, x, args, e);
-												} else {
-													throw e;
-												}
-											}
-											return result;
-										};
-										break;
-									}
-									return wrappedFn;
-								})(real, x);
+					}
+				},
+				wrap : function(cont) {
+					if (N.context.attr("architecture").cont &&
+					    N.context.attr("architecture").cont.advisors &&
+					    N.context.attr("architecture").cont.advisors.length > 0) {
+						var o = N.context.attr("architecture").cont;
+						$(o.advisors).each(function (idx, advisor) {
+							var pointcut;
+							if (!N.isPlainObject(advisor.pointcut)) {
+								pointcut = Controller.aop.pointcuts.regexp;
+							} else {
+								pointcut = o.pointcuts[advisor.pointcut.type];
 							}
-						}
-					});
-			   	}
+
+							var wrapFn = function(contFrag, path){
+								for (var x in contFrag) {
+									if (!contFrag.hasOwnProperty(x)) continue;
+
+									if($.isFunction(contFrag[x])) {
+										if (pointcut.fn(advisor.pointcut, contFrag, path + "." + x)) {
+											var real = contFrag[x];
+
+											contFrag[x] = (function (real, x) {
+												var wrappedFn;
+
+												switch(advisor.adviceType){
+													case "before":
+													wrappedFn = function(){
+														var args = [].slice.call(arguments);
+														advisor.fn.call(advisor, contFrag, path + "." + x, args);
+														return real.apply(contFrag, args);
+													};
+													break;
+													case "after":
+													wrappedFn = function(){
+														var args = [].slice.call(arguments);
+														var result = real.apply(contFrag, args);
+														advisor.fn.call(advisor, contFrag, path + "." + x, args, result);
+														return result;
+													};
+													break;
+													case "around":
+													wrappedFn = function(){
+														var args = [].slice.call(arguments);
+														return advisor.fn.call(advisor, contFrag, path + "." + x, args, {
+															"contFrag" : contFrag,
+															"args" : args,
+															"real" : real,
+															"proceed" : function(){
+																return this.real.apply(this.contFrag, this.args);
+															}
+														});
+													};
+													break;
+													case "error":
+													wrappedFn = function(){
+														var args = [].slice.call(arguments);
+														var result;
+														try{
+															result = real.apply(contFrag, args);
+														} catch(e) {
+															if (advisor.adviceType == "error") {
+																result = advisor.fn.call(advisor, contFrag, path + "." + x, args, e);
+															} else {
+																throw e;
+															}
+														}
+														return result;
+													};
+													break;
+												}
+												return wrappedFn;
+											})(real, x);
+										}
+									} else if(N.isPlainObject(contFrag[x])) {
+										wrapFn.call(this, contFrag[x], path + "." + x);
+									}
+								}
+							};
+							wrapFn.call(this, cont, cont.view.selector + ".cont");
+						});
+				   	}
+				}
 			}
 		});
 
