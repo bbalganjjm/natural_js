@@ -66,36 +66,6 @@
 			},
 			/** 컨트롤러의 함수에 적용하고자 하는 기능을 정의한다 */
 			"advisors" : [{
-				/** 특정 뷰(컨트롤러)에만 advisor가 동작하도록 하려면 해당 뷰에 대한 selector를 문자열로 정의한다
-				 *
-				 * <article id="part1">part1</article>
-				 * <article id="part2">part2</article>
-				 * 위와 같이 두개의 뷰가 있을 경우
-				 * "selector": "#part1"
-				 * 위와 같이 정의하면 part1에만 advisor가 동작한다.
-				 */
-				"selector" : [
-					"#__refr010201",
-					"#__refr010202",
-					"#__refr010301",
-					"#__refr010302",
-					"#__refr010303",
-					"#__refr010401",
-					"#__refr010402",
-					"#__refr010403",
-					"#__refr010404",
-					"#__refr010405",
-					"#__refr010501",
-					"#__refr010502",
-					"#__refr010503",
-					"#__refr010504",
-					"#__refr010505",
-					"#__refr010506",
-					"#__refr010507",
-					"#__refr010508",
-					"#__refr010509",
-					"#__refr010510"
-				].join(","),
 				/**
 				 * advisor가 적용될 pointcut을 정의한다
 				 * "pointcut" : {
@@ -106,7 +76,28 @@
 				 * "pointcut" : "someregexp"
 				 * 위와 같이 pointcut의 값이 객체가 아닌 경우 regexp pointcut을 기본값으로 사용한다.
 				 */
-				"pointcut" : "init",
+				"pointcut" : [
+					"#__refr010201.cont.init.*",
+					"#__refr010202.cont.init.*",
+					"#__refr010301.cont.init.*",
+					"#__refr010302.cont.init.*",
+					"#__refr010303.cont.init.*",
+					"#__refr010401.cont.init.*",
+					"#__refr010402.cont.init.*",
+					"#__refr010403.cont.init.*",
+					"#__refr010404.cont.init.*",
+					"#__refr010405.cont.init.*",
+					"#__refr010501.cont.init.*",
+					"#__refr010502.cont.init.*",
+					"#__refr010503.cont.init.*",
+					"#__refr010504.cont.init.*",
+					"#__refr010505.cont.init.*",
+					"#__refr010506.cont.init.*",
+					"#__refr010507.cont.init.*",
+					"#__refr010508.cont.init.*",
+					"#__refr010509.cont.init.*",
+					"#__refr010510.cont.init.*"
+				].join("|"),
 				/**
 				 * adviecType은 아래와 같다.
 				 * before : 원본 함수를 실행하기 전에 실행된다.
@@ -117,6 +108,7 @@
 				 */
 				"adviceType" : "before",
 				"fn" : function(cont, fnName, args){ /* cont 컨트롤러, fnName 함수명, args 인자 */
+					N.log(fnName);
 					var view = args[0];
 
 					// code highlight
@@ -132,8 +124,7 @@
 			    	});
 				}
 			}, {
-				"selector" : "#__refr0101",
-				"pointcut" : "init",
+				"pointcut" : "#__refr0101.cont.init.*",
 				"adviceType" : "before",
 				"fn" : function(cont, fnName, args){ /* cont 컨트롤러, fnName 함수명, args 인자 */
 					var view = args[0];
@@ -148,8 +139,12 @@
 			    	CommonUtilController.setPageLinks(N("a.link", view));
 				}
 			}, {
-				"selector" : "#__refr0102, #__refr0103, #__refr0104, #__refr0105",
-				"pointcut" : "init",
+				"pointcut" : [
+					"#__refr0102.cont.init.*",
+					"#__refr0103.cont.init.*",
+					"#__refr0104.cont.init.*",
+					"#__refr0105.cont.init.*"
+				].join("|"),
 				"adviceType" : "before",
 				"fn" : function(cont, fnName, args){ /* cont 컨트롤러, fnName 함수명, args 인자 */
 					var view = args[0];
