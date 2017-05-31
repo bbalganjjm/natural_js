@@ -54,9 +54,10 @@
 				/** pointcut 객체는 유일한 속성명으로 정의한다. */
 				"regexp" : {
 					/**
+					 * 정규표현식으로 평가하는 사용자 포인트 컷(예제이므로 삭제해도 됨)
 					 * param : 정규표현식 문자열 혹은 RegExp 객체,
 					 * cont : 컨트롤러 객체
-					 * fnChain : 컨트롤러에 정의된 함수채인(뷰의selector.cont.functionName.functionName...)(Built-in 함수를 제외한 사용자가 정의한 함수만 대상으로 한다)
+					 * fnChain : 컨트롤러에 정의된 함수채인(뷰의selector.N.cont.functionName.functionName...)(Built-in 함수를 제외한 사용자가 정의한 함수만 대상으로 한다)
 					 */
 					"fn" : function(param, cont, fnChain){
 						var regexp = param instanceof RegExp ? param : new RegExp(param);
@@ -76,7 +77,7 @@
 				 * "pointcut" : "someregexp"
 				 * 위와 같이 pointcut의 값이 객체가 아닌 경우 regexp pointcut을 기본값으로 사용한다.
 				 */
-				"pointcut" : "cont.init",
+				"pointcut" : "N.cont.init",
 				/**
 				 * adviecType은 아래와 같다.
 				 * before : 원본 함수를 실행하기 전에 실행된다.
@@ -86,12 +87,12 @@
 				 * 각 사용방식은 아래의 각 예제를 참고
 				 */
 				"adviceType" : "before",
-				"fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 뷰의selector.cont.functionName.functionName... , args 인자 */
+				"fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 뷰의selector.N.cont.functionName.functionName... , args 인자 */
 					console.log("call me before %s", fnChain);
 				}
 			},
 			{
-				"pointcut" : "cont.after.*",
+				"pointcut" : "N.cont.after.*",
 				"adviceType" : "after",
 				"fn" : function(cont, fnChain, args, result){ /* cont 컨트롤러, fnChain 함수명, args 인자, 반환값 */
 					console.log("call me after %s", fnChain);

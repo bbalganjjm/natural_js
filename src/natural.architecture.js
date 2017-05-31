@@ -403,7 +403,7 @@
 									}
 								}
 							};
-							wrapFn.call(this, cont, cont.view.selector + ".cont");
+							wrapFn.call(this, cont, cont.view.selector + ".N.cont");
 						});
 				   	}
 				}
