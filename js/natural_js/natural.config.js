@@ -47,7 +47,7 @@
 		 */
 		"cont" : {
 			/** advisor에서 참조할 pointcut을 정의한다.
-			 * pointcut은 반드시 fn 속성에 function(param, cont, fnName) 함수를 정의해야 한다.
+			 * pointcut은 반드시 fn 속성에 function(param, cont, fnChain) 함수를 정의해야 한다.
 			 * 함수 수행 결과는 advice의 적용 여부를 판단하는데 사용된다.
 			 */
 			"pointcuts" : {
@@ -56,11 +56,11 @@
 					/**
 					 * param : 정규표현식 문자열 혹은 RegExp 객체,
 					 * cont : 컨트롤러 객체
-					 * fnName : 컨트롤러에 정의된 함수명 (Built-in 함수를 제외한 사용자가 정의한 함수만 대상으로 한다)
+					 * fnChain : 컨트롤러에 정의된 함수명 (Built-in 함수를 제외한 사용자가 정의한 함수만 대상으로 한다)
 					 */
-					"fn" : function(param, cont, fnName){
+					"fn" : function(param, cont, fnChain){
 						var regexp = param instanceof RegExp ? param : new RegExp(param);
-						return regexp.test(fnName);
+						return regexp.test(fnChain);
 					}
 				}
 			},
@@ -77,26 +77,26 @@
 				 * 위와 같이 pointcut의 값이 객체가 아닌 경우 regexp pointcut을 기본값으로 사용한다.
 				 */
 				"pointcut" : [
-					"#__refr010201.cont.init.*",
-					"#__refr010202.cont.init.*",
-					"#__refr010301.cont.init.*",
-					"#__refr010302.cont.init.*",
-					"#__refr010303.cont.init.*",
-					"#__refr010401.cont.init.*",
-					"#__refr010402.cont.init.*",
-					"#__refr010403.cont.init.*",
-					"#__refr010404.cont.init.*",
-					"#__refr010405.cont.init.*",
-					"#__refr010501.cont.init.*",
-					"#__refr010502.cont.init.*",
-					"#__refr010503.cont.init.*",
-					"#__refr010504.cont.init.*",
-					"#__refr010505.cont.init.*",
-					"#__refr010506.cont.init.*",
-					"#__refr010507.cont.init.*",
-					"#__refr010508.cont.init.*",
-					"#__refr010509.cont.init.*",
-					"#__refr010510.cont.init.*"
+					"#__refr010201.N.cont.init.*",
+					"#__refr010202.N.cont.init.*",
+					"#__refr010301.N.cont.init.*",
+					"#__refr010302.N.cont.init.*",
+					"#__refr010303.N.cont.init.*",
+					"#__refr010401.N.cont.init.*",
+					"#__refr010402.N.cont.init.*",
+					"#__refr010403.N.cont.init.*",
+					"#__refr010404.N.cont.init.*",
+					"#__refr010405.N.cont.init.*",
+					"#__refr010501.N.cont.init.*",
+					"#__refr010502.N.cont.init.*",
+					"#__refr010503.N.cont.init.*",
+					"#__refr010504.N.cont.init.*",
+					"#__refr010505.N.cont.init.*",
+					"#__refr010506.N.cont.init.*",
+					"#__refr010507.N.cont.init.*",
+					"#__refr010508.N.cont.init.*",
+					"#__refr010509.N.cont.init.*",
+					"#__refr010510.N.cont.init.*"
 				].join("|"),
 				/**
 				 * adviecType은 아래와 같다.
@@ -107,8 +107,7 @@
 				 * 각 사용방식은 아래의 각 예제를 참고
 				 */
 				"adviceType" : "before",
-				"fn" : function(cont, fnName, args){ /* cont 컨트롤러, fnName 함수명, args 인자 */
-					N.log(fnName);
+				"fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 함수명, args 인자 */
 					var view = args[0];
 
 					// code highlight
@@ -124,9 +123,9 @@
 			    	});
 				}
 			}, {
-				"pointcut" : "#__refr0101.cont.init.*",
+				"pointcut" : "#__refr0101.N.cont.init.*",
 				"adviceType" : "before",
-				"fn" : function(cont, fnName, args){ /* cont 컨트롤러, fnName 함수명, args 인자 */
+				"fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 함수명, args 인자 */
 					var view = args[0];
 
 					// code highlight
@@ -140,13 +139,13 @@
 				}
 			}, {
 				"pointcut" : [
-					"#__refr0102.cont.init.*",
-					"#__refr0103.cont.init.*",
-					"#__refr0104.cont.init.*",
-					"#__refr0105.cont.init.*"
+					"#__refr0102.N.cont.init.*",
+					"#__refr0103.N.cont.init.*",
+					"#__refr0104.N.cont.init.*",
+					"#__refr0105.N.cont.init.*"
 				].join("|"),
 				"adviceType" : "before",
-				"fn" : function(cont, fnName, args){ /* cont 컨트롤러, fnName 함수명, args 인자 */
+				"fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 함수명, args 인자 */
 					var view = args[0];
 
 			    	CommonUtilController.setPageLinks(N("a.link", view));
