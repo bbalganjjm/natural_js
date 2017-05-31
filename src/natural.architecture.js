@@ -330,6 +330,7 @@
 					    N.context.attr("architecture").cont.advisors &&
 					    N.context.attr("architecture").cont.advisors.length > 0) {
 						var o = N.context.attr("architecture").cont;
+
 						$(o.advisors).each(function (idx, advisor) {
 							var pointcut;
 							if (!N.isPlainObject(advisor.pointcut)) {
@@ -338,12 +339,12 @@
 								pointcut = o.pointcuts[advisor.pointcut.type];
 							}
 
-							var wrapFn = function(contFrag, path){
+							var wrapFn = function(contFrag, fnPath){
 								for (var x in contFrag) {
 									if (!contFrag.hasOwnProperty(x)) continue;
 
 									if($.isFunction(contFrag[x])) {
-										if (pointcut.fn(advisor.pointcut, contFrag, path + "." + x)) {
+										if (pointcut.fn(advisor.pointcut, contFrag, fnPath + x)) {
 											var real = contFrag[x];
 
 											contFrag[x] = (function (real, x) {
@@ -353,7 +354,7 @@
 													case "before":
 													wrappedFn = function(){
 														var args = [].slice.call(arguments);
-														advisor.fn.call(advisor, contFrag, path + "." + x, args);
+														advisor.fn.call(advisor, contFrag, fnPath + x, args);
 														return real.apply(contFrag, args);
 													};
 													break;
@@ -361,14 +362,14 @@
 													wrappedFn = function(){
 														var args = [].slice.call(arguments);
 														var result = real.apply(contFrag, args);
-														advisor.fn.call(advisor, contFrag, path + "." + x, args, result);
+														advisor.fn.call(advisor, contFrag, fnPath + x, args, result);
 														return result;
 													};
 													break;
 													case "around":
 													wrappedFn = function(){
 														var args = [].slice.call(arguments);
-														return advisor.fn.call(advisor, contFrag, path + "." + x, args, {
+														return advisor.fn.call(advisor, contFrag, fnPath + x, args, {
 															"contFrag" : contFrag,
 															"args" : args,
 															"real" : real,
@@ -386,7 +387,7 @@
 															result = real.apply(contFrag, args);
 														} catch(e) {
 															if (advisor.adviceType == "error") {
-																result = advisor.fn.call(advisor, contFrag, path + "." + x, args, e);
+																result = advisor.fn.call(advisor, contFrag, fnPath + x, args, e);
 															} else {
 																throw e;
 															}
@@ -399,11 +400,11 @@
 											})(real, x);
 										}
 									} else if(N.isPlainObject(contFrag[x])) {
-										wrapFn.call(this, contFrag[x], path + "." + x);
+										wrapFn.call(this, contFrag[x], fnPath + x + ".");
 									}
 								}
 							};
-							wrapFn.call(this, cont, cont.view.selector + ".N.cont");
+							wrapFn.call(this, cont, cont.view.selector + ":");
 						});
 				   	}
 				}
