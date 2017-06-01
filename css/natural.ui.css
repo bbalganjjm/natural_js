@@ -1,5 +1,6 @@
 @charset "utf-8";
-/* Alert global message */
+
+/* Alert */
 .alert_overlay__.block_overlay__ {
 	background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAIklEQVQIW2NkQAIf7n/4zwjjgzgCigKMYAEYB8RmROaABAAQCg/DqNBm8AAAAABJRU5ErkJggg==") repeat;
 	background-color: #003300 !important;
@@ -29,23 +30,22 @@
 }
 
 .alert__.block_overlay_msg__ .msg_title_box__ .msg_title__ {
-	display: inline-block;
 	background: none;
-	padding: 8px 0px 10px 12px;
+	padding: 0 0 0 12px;
 	margin: 0;
 	font-size: 12px;
 	font-weight: bold;
 	color: #fff;
 	text-shadow: 0 1px #000000;
+	line-height: 43px;
 }
 
 .alert__.block_overlay_msg__ .msg_title_box__ .msg_title_close__ {
-	display: inline-block;
 	float: right;
 	height: 17px;
 	width: 17px;
-	margin-top: 9px;
-	margin-right: 9px;
+	margin-top: 12px;
+	margin-right: 12px;
 	background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAARCAYAAAA7bUf6AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wIYCDkVrZsQowAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAADZSURBVDjLtZOxDgFBEIa/uIv23sA7aEm8BI03uUJDwRNodBoaCp6AggjRX0NBLSERxTU0u8lmM3PuEiaZbHbn3293Z2bhx1YBVsAQCBRNB9gBVQ1wAt7GpwJo4MRvEmjtCKxPHFBfiF/t5tCMCdDwwG0jvgCxcPvEXygDM+E0zTdAJOUlL2irAVzQvCig5M1T6a2OnYHnt17p5XjOOKOP6BZIrAiKFfEeWCqxkQ85KoDIJHshxO8+pAY8HMHBq4IPSoGWlJO6+RNaH9jyv4BmVnWCHL895B/2AShtccx+lX2aAAAAAElFTkSuQmCC') no-repeat right 0;
 	cursor: pointer;
 }
@@ -77,7 +77,28 @@
 	display: inline-block;
 }
 
-/* Alert input message */
+.alert__ {
+	transform: scale(0);
+}
+
+.alert__.visible__ {
+	transform: scale(1);
+	transition: transform 0.26s cubic-bezier(0.65, -0.01, 0.21, 1.36);
+}
+
+.alert__.orgin_left__ {
+	transform-origin: top left;
+}
+
+.alert__.orgin_right__ {
+	transform-origin: top right;
+}
+
+.alert__.block_overlay_msg__.draggable__ .msg_title_box__ {
+	cursor: pointer;
+}
+
+/* Alert for input elements */
 .alert_tooltip__.msg__ {
 	position: absolute;
 	background-color: #ffffdd;
@@ -164,6 +185,7 @@
 .popup__.alert__.block_overlay_msg__ .msg_box__ {
 	display: block;
 	-webkit-overflow-scrolling: touch;
+	resize: both;
 }
 
 .popup__.block_overlay_msg__ .msg_box__ {
@@ -191,6 +213,11 @@ a.btn_common__, input[type='button'].btn_common__, button.btn_common__ {
 	vertical-align: middle;
 	margin: 0px;
 	border-radius: 5px;
+}
+
+a.btn_disabled__, input.btn_disabled__, button.btn_disabled__ {
+	opacity: 0.6;
+	transition: opacity 0.26s ease;
 }
 
 a.btn_common__ {
@@ -522,8 +549,16 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	margin: 0;
 }
 
-.grid__>thead .data_filter_panel__ .data_filter_panel__ {
+.grid__>thead .data_filter_panel__.visible__ {
+	visibility: visible;
+	transform: scale(1);
+	transform-origin: top left;
+	transition: transform 0.26s cubic-bezier(0.65, -0.01, 0.21, 1.36);
+}
 
+.grid__>thead .data_filter_panel__.hidden__ {
+	transform: scale(0);
+	visibility: hidden;
 }
 
 .grid__>thead .data_filter_panel__ .data_filter_search__ {
@@ -565,7 +600,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .grid__>thead .data_filter_panel__ .data_filter_checkall_box__ input {
-	margin: 0 0 0 1px;
+	margin: 0 2px 0 1px;
 }
 
 .grid__>thead .data_filter_panel__ .data_filter_progress__ {
@@ -595,7 +630,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .grid__>thead .data_filter_panel__ .data_filter_list__ li input {
-	margin: 0 0 0 1px;
+	margin: 0 2px 0 1px;
 }
 
 .thead_wrap__>table, .tbody_wrap__>table, .tfoot_wrap__>table {
@@ -652,6 +687,11 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	background-color: #AAF7AA;
 }
 
+.tab__>ul li.tab_disabled__ {
+	opacity: 0.6;
+	transition: opacity 0.26s ease;
+}
+
 .tab__>ul li>a {
 	font-weight: bold;
 	color: #009000;
@@ -673,6 +713,15 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	border: 1px solid #55d555;
 }
 
+.tab__>div>.view_context__:last-of-type {
+	opacity: 0;
+}
+
+.tab__>div.visible__>.view_context__:last-of-type {
+	opacity: 1;
+	transition: opacity 0.26s cubic-bezier(0.9, 0.01, 0.63, 0.88);
+}
+
 /* DatePicker */
 .datepicker_contents__ {
 	border: 1px solid #009000;
@@ -684,6 +733,20 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	width: 316px;
 	color: #004A00;
 	z-index: 1;
+	transform: scale(0);
+}
+
+.datepicker_contents__.visible__ {
+	transform: scale(1);
+	transition: transform 0.26s cubic-bezier(0.65, -0.01, 0.21, 1.36);
+}
+
+.datepicker_contents__.orgin_left__ {
+	transform-origin: top left;
+}
+
+.datepicker_contents__.orgin_right__ {
+	transform-origin: top right;
 }
 
 .datepicker_monthonly__ {
@@ -938,6 +1001,20 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	margin-bottom: 5px;
 	border-radius: 5px;
 	box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.23);
+	transform: scale(0);
+	opacity: 0;
+}
+
+.notify__ .notify_msg__.visible__ {
+	transform: scale(1);
+	opacity: 1;
+	transition: opacity 0.26s ease, transform 0.26s cubic-bezier(0.65, -0.01, 0.21, 1.36);
+}
+
+.notify__ .notify_msg__.hidden__ {
+	transform: scale(0);
+	opacity: 0;
+	transition: opacity 0.26s ease, transform 0.26s cubic-bezier(0.65, -0.01, 0.21, 1.36);
 }
 
 .notify__ .notify_msg__ a, .notify__ .notify_msg__ span {
