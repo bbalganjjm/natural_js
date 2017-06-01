@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.14.7
+ * Natural-UI v0.8.14.11
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "v0.8.14.7";
+	N.version["Natural-UI"] = "v0.8.14.11";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -365,9 +365,11 @@
 
 						if(limitWidth > $(window).width()) {
 							opts.msgContext = opts.context.before('<span class="msg__ alert_before_show__" style="display: none;"><ul class="msg_line_box__"></ul></span>').prev(".msg__");
+							opts.msgContext.addClass("orgin_right__");
 							isBeforeShow = true;
 						} else {
 							opts.msgContext = opts.context.after('<span class="msg__ alert_after_show__" style="display: none;"><ul class="msg_line_box__"></ul></span>').next(".msg__");
+							opts.msgContext.addClass("orgin_left__");
 							isBeforeShow = false;
 						}
 
@@ -439,20 +441,25 @@
 					if(opts.button === true) {
 						opts.msgContents.find(".buttonBox__ a.confirm__").get(0).focus();
 					}
+
+					opts.msgContents.addClass("visible__");
 				} else {
 					if (!N.isEmptyObject(opts.msg)) {
 						opts.context.parent().css({
 							"white-space": "normal"
 						});
-						opts.msgContext.fadeIn(150, function() {
-							opts.iTime = setTimeout(function() {
-								clearTimeout(opts.iTime);
-								opts.context.parent().css({
-									"white-space": ""
-								});
-								self[opts.closeMode]();
-							}, opts.input.displayTimeout);
-						});
+
+						opts.msgContext.show();
+
+						opts.iTime = setTimeout(function() {
+							clearTimeout(opts.iTime);
+							opts.context.parent().css({
+								"white-space": ""
+							});
+							self[opts.closeMode]();
+						}, opts.input.displayTimeout);
+
+						opts.msgContext.addClass("visible__");
 					}
 				}
 
@@ -473,13 +480,18 @@
 					clearInterval(opts.time);
 					opts.msgContext.hide();
 					opts.msgContents.hide();
+
+					opts.msgContents.removeClass("visible__");
 				} else {
 					clearTimeout(opts.iTime);
 					opts.msgContext.remove();
+
+					opts.msgContext.removeClass("visible__ orgin_left__ orgin_right__");
 				}
 
 				$(window).unbind("resize.alert");
 				$(document).unbind("keyup.alert", opts.onKeyup);
+
 				return this;
 			},
 			"remove" : function() {
@@ -507,7 +519,6 @@
 				color : "white", // color : white, blue, skyblue, gray, green, yellowgreen
 				iconClass : null,
 				disable : false,
-				effect : true,
 				customStyle : false
 			};
 
@@ -660,14 +671,6 @@
 			},
 			disable : function() {
 				var context = this.options.context;
-				if(!this.options.customStyle) {
-					// fade effect
-					if(this.options.effect) {
-						context.fadeTo(150, "0.6");
-					} else {
-						context.css("opacity", "0.6");
-					}
-				}
 		        if (context.is("a")) {
 		        	context.unbind("click.button");
 		            context.tpBind("click.button", N.element.disable);
@@ -679,14 +682,6 @@
 			},
 			enable : function() {
 				var context = this.options.context;
-				if(!this.options.customStyle) {
-					// fade effect
-					if(this.options.effect) {
-						context.fadeTo(150, "1");
-					} else {
-						context.css("opacity", "1");
-					}
-				}
 		        if (context.is("a")) {
 		            context.unbind("click", N.element.disable);
 		        } else {
@@ -742,8 +737,6 @@
 					DatePicker.wrapEle.call(this);
 				}
 			}
-
-			//N(".datepicker_contents__:last").hasClass("datepicker_monthonly__")
 
 			// set this instance to context element
 			this.options.context.instance("datepicker", this);
@@ -1183,7 +1176,7 @@
 
 				var self = this;
 
-				opts.contents.fadeIn(150);
+				opts.contents.show();
 
 				// bind "ESC" key event
 				// if press the "ESC" key, datepicker will be hidden
@@ -1224,10 +1217,14 @@
 					}
 					if(leftOfs + opts.contents.width() > limitWidth) {
 						opts.contents.css("right", (limitWidth - (leftOfs + opts.context.outerWidth())) + "px");
+						opts.contents.addClass("orgin_right__");
 					} else {
 						opts.contents.css("left", leftOfs + "px");
+						opts.contents.addClass("orgin_left__");
 					}
 				}).trigger("resize.datepicker");
+
+				opts.contents.addClass("visible__");
 
 				return this;
 			},
@@ -1246,12 +1243,11 @@
 				opts.context.unbind("blur.datepicker");
 				$(window.document).unbind(N.browser.is("firefox") ? "keydown.datepicker" : "keyup.datepicker");
 				$(window).unbind("resize.datepicker");
-				if(opts.shareEle) {
-					opts.contents.hide();
-				} else {
-					opts.contents.fadeOut(150);
-				}
+				opts.contents.hide();
 				opts.context.get(0).blur();
+
+				opts.contents.removeClass("orgin_left__ orgin_right__ visible__");
+
 				return this;
 			}
 		});
@@ -1504,11 +1500,11 @@
 			this.options = {
 				context : obj.length > 0 ? obj : null,
 				links : obj.length > 0 ? obj.find(">ul>li") : null,
-				dataOpts : [], // dataOpts : [{ url: undefined, width: "auto", active: false, preload: false, onOpen: undefined }]
+				dataOpts : [], // dataOpts : [{ url: undefined, width: "auto", active: false, preload: false, onOpen: undefined, disable : false }]
 				randomSel : false,
 				onActive : null,
-				contents : obj.length > 0 ? obj.find("> div") : null,
-				effect : false
+				contents : obj.length > 0 ? obj.find(">div") : null,
+				effect : false // Deprecated
 			};
 
 			try {
@@ -1522,7 +1518,7 @@
 				this.options.context = N(obj.context);
 			}
 			this.options.links = this.options.context.find(">ul>li");
-			this.options.contents = this.options.context.find("> div");
+			this.options.contents = this.options.context.find(">div");
 
 			var self = this;
 			var opt;
@@ -1562,6 +1558,12 @@
 
 				var defSelIdx;
 				$(opts.dataOpts).each(function(i) {
+					if(this.disable) {
+						self.disable(i);
+					} else {
+						self.enable(i);
+					}
+
 					// set default select index
 					if(this.active !== undefined && this.active) {
 						// active option select
@@ -1592,10 +1594,15 @@
 					var thisDeclarativeOpts = opts.dataOpts[thisIdx];
 
 					// hide tab contents
+					opts.contents.filter(".tab_content_active__").removeClass("tab_content_active__");
+					opts.contents.filter(".visible__").removeClass("visible__");
 					opts.contents.hide();
-					var content = opts.contents.eq(thisIdx).show();
+					var content = opts.contents.eq(thisIdx).addClass("tab_content_active__").show();
+					setTimeout(function() {
+						content.addClass("visible__");
+					}, 15);
 
-					opts.links.removeClass("tab_active__");
+					opts.links.filter(".tab_active__").removeClass("tab_active__");
 					thisEle.addClass("tab_active__");
 
 					if(thisDeclarativeOpts.preload === undefined || thisDeclarativeOpts.preload === false) {
@@ -1622,6 +1629,7 @@
 						}
 					}
 
+					// Deprecated
 					if (opts.effect) {
 						content.children().hide()[opts.effect[0]](opts.effect[1], opts.effect[2]);
 					}
@@ -1681,6 +1689,23 @@
 					} else {
 						$(this.options.links.get(idx)).trigger("click.tab");
 					}
+				}
+				return this;
+			},
+			disable : function(idx) {
+				if(idx !== undefined) {
+					$(this.options.links.get(idx))
+						.unbind("click.tab.disable")
+						.tpBind("click.tab.disable", N.element.disable)
+						.addClass("tab_disabled__");
+				}
+				return this;
+			},
+			enable : function(idx) {
+				if(idx !== undefined) {
+					$(this.options.links.get(idx))
+						.unbind("click", N.element.disable)
+						.removeClass("tab_disabled__");
 				}
 				return this;
 			}
@@ -3056,7 +3081,7 @@
 
 						var theadCell = $(this).closest("th");
 
-						thead.find(".data_filter_panel__:visible").hide();
+						thead.find(".data_filter_panel__:visible").removeClass("visible__").addClass("hidden__");
 
 						var panel;
 						var searchBox;
@@ -3070,7 +3095,7 @@
 							searchBox = panel.find(".data_filter_search__");
 							panel.find(".data_filter_checkall_box__ .data_filter_total_cnt__").text('(' + opts.data.length + ')');
 							filterListBox = panel.find(".data_filter_list__");
-							panel.show();
+							panel.addClass("visible__").removeClass("hidden__");
 
 							// Index filter keys
 							if(bfrSelId !== id) {
@@ -3098,7 +3123,7 @@
 								clonedData = opts.data.get().slice(0);
 							}
 
-							panel = $('<div align="left" class="data_filter_panel__">'
+							panel = $('<div align="left" class="data_filter_panel__ hidden__">'
 									+ 	'<div class="data_filter_search__">'
 									+ 		'<input class="data_filter_search_word__" type="text">'
 									+		'<a class="data_filter_search_btn__" href="#" title="' + N.message.get(opts.message, "search") + '">'
@@ -3112,6 +3137,9 @@
 							.appendTo(theadCell).bind("click.grid.dataFilter, mouseover.grid.dataFilter", function(e) {
 								e.stopPropagation();
 							});
+							setTimeout(function() {
+								panel.removeClass("hidden__").addClass("visible__");
+							}, 0);
 
 							dataFilterProgress = $('<div class="data_filter_progress__"></div>')
 							.css({
@@ -3275,7 +3303,7 @@
 
 										// Prevent event propagation when browser is stoped.
 										setTimeout(function() {
-											dataFilterProgress.fadeTo("opacity", 0.3).hide();
+											dataFilterProgress.hide();
 										}, 0);
 									});
 								});
@@ -3291,7 +3319,7 @@
 
 						$(document).bind("click.grid.dataFilter", function(e) {
 							$(document).unbind("click.grid.dataFilter");
-							thead.find(".data_filter_panel__").hide();
+							thead.find(".data_filter_panel__").removeClass("visible__").addClass("hidden__");
 						});
 
 						bfrSelId = id;
@@ -3462,9 +3490,9 @@
 						.addClass("btn_data_filter_full__");
 
 						if(opts.data.length > 0) {
-							this.thead.find(".btn_data_filter__").show();
+							this.thead.find(".btn_data_filter__").addClass("visible__").removeClass("hidden__");
 						} else {
-							this.thead.find(".btn_data_filter__").hide();
+							this.thead.find(".btn_data_filter__").removeClass("visible__").addClass("hidden__");
 						}
 					} else {
 						// To keep your filter list even after sorting delete this codes.
