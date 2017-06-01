@@ -123,7 +123,7 @@
 			"filters" : {
 				"exFilter1" : {
 					/**
-					 * N.cont 의 init 메서드가 실행 된 후 실행됨.
+					 * N.comm 이 초기화 된 후 실행됨(N.cont 의 init 아님)
 					 */
 					afterInit : function(request) {
 					},
@@ -385,7 +385,8 @@
 				left : +2,
 				right : -2
 			},
-			"alwaysOnTop" : false,
+			"draggable" : true,
+			"alwaysOnTop" : true,
 			/**
 			 * 페이지의 요소들이 동적으로 사이즈가 조절될 때 N.alert 의 모달오버레이와 메시지 박스의 위치를 자동으로 맞춰줄지 여부
 			 *  주) 성능적으로 최적화하기 위해서는 false로 지정하는게 좋고 false로 지정 시 탭(N.tab)이 전환되거나 페이지가 리다이렉트 되지않고 논리적으로 전환될때 N.alert 의 요소가 남아있음.
@@ -419,6 +420,8 @@
 			}
 		},
 		"popup" : {
+			"draggable" : true,
+			"alwaysOnTop" : true,
 			/**
 			 * 버튼 상태 변경에 따른 fade 효과 적용 유무
 			 */
