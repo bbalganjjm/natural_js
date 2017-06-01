@@ -134,6 +134,7 @@
 							} else {
 								obj.append(data);
 							}
+							// Deprecated
 							if (obj.request.options.effect) {
 								obj.hide()[obj.request.options.effect[0]](obj.request.options.effect[1], obj.request.options.effect[2]);
 							}
@@ -187,7 +188,7 @@
 				crossDomain : false,
 				browserHistory : true, // TODO
 				append : false,
-				effect : false,
+				effect : false, // Deprecated
 				target : null
 			};
 
