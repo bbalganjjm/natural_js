@@ -46,70 +46,32 @@
 		 *   - 아래는 AOP 관련 된 예제코드 이므로 사용하지 않는다면 cont 하위의 모든 구문을 삭제하고 사용 바랍니다.
 		 */
 		"cont" : {
-			/** advisor에서 참조할 pointcut을 정의한다.
-			 * pointcut은 반드시 fn 속성에 function(param, cont, fnChain) 함수를 정의해야 한다.
-			 * 함수 수행 결과는 advice의 적용 여부를 판단하는데 사용된다.
-			 */
-			"pointcuts" : {
-				/** pointcut 객체는 유일한 속성명으로 정의한다. */
-				"regexp" : {
-					/**
-					 * param : 정규표현식 문자열 혹은 RegExp 객체,
-					 * cont : 컨트롤러 객체
-					 * fnChain : 컨트롤러에 정의된 함수명 (Built-in 함수를 제외한 사용자가 정의한 함수만 대상으로 한다)
-					 */
-					"fn" : function(param, cont, fnChain){
-						var regexp = param instanceof RegExp ? param : new RegExp(param);
-						return regexp.test(fnChain);
-					}
-				}
-			},
-			/** 컨트롤러의 함수에 적용하고자 하는 기능을 정의한다 */
 			"advisors" : [{
-				/**
-				 * advisor가 적용될 pointcut을 정의한다
-				 * "pointcut" : {
-				 *     "type" : "regexp"
-				 *     "param" : "something"
-				 * }
-				 * 위의 경우 pointcuts에서 regexp pointcut을 찾아 pointcut에 정의된 객체를 파라미터로 전달한다.
-				 * "pointcut" : "someregexp"
-				 * 위와 같이 pointcut의 값이 객체가 아닌 경우 regexp pointcut을 기본값으로 사용한다.
-				 */
 				"pointcut" : [
-					"#__refr010201.N.cont.init.*",
-					"#__refr010202.N.cont.init.*",
-					"#__refr010301.N.cont.init.*",
-					"#__refr010302.N.cont.init.*",
-					"#__refr010303.N.cont.init.*",
-					"#__refr010401.N.cont.init.*",
-					"#__refr010402.N.cont.init.*",
-					"#__refr010403.N.cont.init.*",
-					"#__refr010404.N.cont.init.*",
-					"#__refr010405.N.cont.init.*",
-					"#__refr010501.N.cont.init.*",
-					"#__refr010502.N.cont.init.*",
-					"#__refr010503.N.cont.init.*",
-					"#__refr010504.N.cont.init.*",
-					"#__refr010505.N.cont.init.*",
-					"#__refr010506.N.cont.init.*",
-					"#__refr010507.N.cont.init.*",
-					"#__refr010508.N.cont.init.*",
-					"#__refr010509.N.cont.init.*",
-					"#__refr010510.N.cont.init.*"
+					"#__refr010201:init",
+					"#__refr010202:init",
+					"#__refr010301:init",
+					"#__refr010302:init",
+					"#__refr010303:init",
+					"#__refr010401:init",
+					"#__refr010402:init",
+					"#__refr010403:init",
+					"#__refr010404:init",
+					"#__refr010405:init",
+					"#__refr010501:init",
+					"#__refr010502:init",
+					"#__refr010503:init",
+					"#__refr010504:init",
+					"#__refr010505:init",
+					"#__refr010506:init",
+					"#__refr010507:init",
+					"#__refr010508:init",
+					"#__refr010509:init",
+					"#__refr010510:init"
 				].join("|"),
-				/**
-				 * adviecType은 아래와 같다.
-				 * before : 원본 함수를 실행하기 전에 실행된다.
-				 * after : 원본 함수를 실행 후 실행된다. 원본 함수의 반환값이 함께 전달된다.
-				 * error : 원본 함수에서 예외 발생 시 실행된다.
-				 * around : 원본 함수를 실행할 수 있는 joinPoint가 파라미터로 전달
-				 * 각 사용방식은 아래의 각 예제를 참고
-				 */
 				"adviceType" : "before",
 				"fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 함수명, args 인자 */
 					var view = args[0];
-
 					// code highlight
 			    	if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {
 						view.find("code").each(function() {
@@ -123,7 +85,7 @@
 			    	});
 				}
 			}, {
-				"pointcut" : "#__refr0101.N.cont.init.*",
+				"pointcut" : "#__refr0101:init",
 				"adviceType" : "before",
 				"fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 함수명, args 인자 */
 					var view = args[0];
@@ -139,10 +101,10 @@
 				}
 			}, {
 				"pointcut" : [
-					"#__refr0102.N.cont.init.*",
-					"#__refr0103.N.cont.init.*",
-					"#__refr0104.N.cont.init.*",
-					"#__refr0105.N.cont.init.*"
+					"#__refr0102:init",
+					"#__refr0103:init",
+					"#__refr0104:init",
+					"#__refr0105:init"
 				].join("|"),
 				"adviceType" : "before",
 				"fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 함수명, args 인자 */
@@ -165,9 +127,14 @@
 			"filters" : {
 				"pageFilter" : {
 					/**
-					 * N.cont 의 init 메서드가 실행 된 후 실행됨.
+					 * N.comm 이 초기화 된 후 실행됨(N.cont 의 init 아님).
 					 */
 					afterInit : function(request) {
+						if(request.options.dataType === "html" && request.options.target !== null && request.options.append === false) {
+							if(request.options.url !== "html/indx/header.html") {
+								request.options.target.children(".view_context__:last").removeClass("visible__");
+							}
+						}
 					},
 					/**
 					 * 서버에 요청을 보내기 전 실행됨.
@@ -186,7 +153,6 @@
 						} else {
 							this.pageId = undefined;
 						}
-
 						// return data 를 하면 N.comm.submit 의 콜백의 인자로 넘어오는 data 가 리턴한 데이터로 치환 됨.
 					},
 					/**
@@ -462,7 +428,8 @@
 				left : +2,
 				right : -2
 			},
-			"alwaysOnTop" : false,
+			"draggable" : true,
+			"alwaysOnTop" : true,
 			/**
 			 * 페이지의 요소들이 동적으로 사이즈가 조절될 때 N.alert 의 모달오버레이와 메시지 박스의 위치를 자동으로 맞춰줄지 여부
 			 *  주) 성능적으로 최적화하기 위해서는 false로 지정하는게 좋고 false로 지정 시 탭(N.tab)이 전환되거나 페이지가 리다이렉트 되지않고 논리적으로 전환될때 N.alert 의 요소가 남아있음.
@@ -496,6 +463,8 @@
 			}
 		},
 		"popup" : {
+			"draggable" : true,
+			"alwaysOnTop" : true,
 			/**
 			 * 버튼 상태 변경에 따른 fade 효과 적용 유무
 			 */
@@ -507,7 +476,7 @@
 			/**
 			 * 탭 컨텐츠 표시할때 효과
 			 */
-			"effect" : ["fadeIn", 300, undefined]
+			"effect" : false
 		},
 		"datepicker" : {
 			"focusin" : true,

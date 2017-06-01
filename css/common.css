@@ -6,14 +6,22 @@
  *    user zoom.
  */
 html {
-	font-family: "Nanum Gothic Coding", "Malgun Gothic", "dotum", "Segoe UI", sans-serif; /* 1 */ -ms-text-size-adjust: 100%; /* 2 */ -webkit-text-size-adjust: 100%; /* 2 */
+	font-family: "Nanum Gothic Coding", "Malgun Gothic", "dotum", "Segoe UI", sans-serif; /* 1 */
+	-ms-text-size-adjust: 100%; /* 2 */
+	-webkit-text-size-adjust: 100%; /* 2 */
 }
 
 /**
  * Remove default margin.
  */
 body {
-	margin: 0; font-family: "Nanum Gothic Coding", "Malgun Gothic", "dotum", "Segoe UI", sans-serif; color: #007700; min-width: 578px; background-image: url("../images/body_back.jpg"); background-color: #008800;
+	margin: 0;
+	font-family: "Nanum Gothic Coding", "Malgun Gothic", "dotum", "Segoe UI", sans-serif;
+	color: #007700;
+	min-width: 578px;
+	background-image: url("../images/body_back.jpg");
+	background-color: #008800;
+	overflow-y: scroll;
 }
 
 [lang] {
@@ -29,7 +37,7 @@ body {
  * and Firefox.
  * Correct `block` display not defined for `main` in IE 11.
  */
-article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section,summary {
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
 	display: block;
 }
 
@@ -37,8 +45,9 @@ article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,secti
  * 1. Correct `inline-block` display not defined in IE 8/9.
  * 2. Normalize vertical alignment of `progress` in Chrome, Firefox, and Opera.
  */
-audio,canvas,progress,video {
-	display: inline-block; /* 1 */ vertical-align: baseline; /* 2 */
+audio, canvas, progress, video {
+	display: inline-block; /* 1 */
+	vertical-align: baseline; /* 2 */
 }
 
 /**
@@ -53,7 +62,7 @@ audio:not ([controls] ){
  * Address `[hidden]` styling not present in IE 8/9/10.
  * Hide the `template` element in IE 8/9/11, Safari, and Firefox < 22.
  */
-[hidden],template {
+[hidden], template {
 	display: none;
 }
 
@@ -61,7 +70,7 @@ img {
 	border: none;
 }
 
-input[type='text'],input[type='password'],select,textarea {
+input[type='text'], input[type='password'], select, textarea {
 	border-radius: 3px;
 	padding: 3px;
 	border: 1px solid #cccccc;
@@ -74,29 +83,41 @@ input[type='text'],input[type='password'],select,textarea {
 	border-color: #cceccc;
 }
 
-input[type='text']:hover,select:hover,textarea:hover,input[type='text']:focus,select:focus,textarea:focus {
-	border-color: #BCFBBC; box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.075); background-color: #fcfdec; transition: border-color ease-in-out 0.20s, background-color ease-in-out 0.15s, box-shadow ease-in-out 0.20s;
+input[type='text']:hover, select:hover, textarea:hover, input[type='text']:focus, select:focus, textarea:focus {
+	border-color: #BCFBBC;
+	box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.075);
+	background-color: #fcfdec;
+	transition: border-color ease-in-out 0.20s, background-color ease-in-out 0.15s, box-shadow ease-in-out 0.20s;
 }
 
-input[disabled='disabled'],input[disabled='disabled']:hover,input[disabled='disabled']:focus {
+input[disabled='disabled'], input[disabled='disabled']:hover, input[disabled='disabled']:focus {
 	background-color: #eeeeee;
 }
 
-input[readonly='readonly'],input[readonly='readonly']:hover,input[readonly='readonly']:focus {
+input[readonly='readonly'], input[readonly='readonly']:hover, input[readonly='readonly']:focus {
 	background-color: #efffff;
 }
 
-input[type='radio'],input[type='checkbox'] {
-	margin: 0 3px 0 10px; vertical-align: middle; border: none;
+input[type='radio'], input[type='checkbox'] {
+	margin: 0 3px 0 10px;
+	vertical-align: middle;
+	border: none;
 }
 
 a {
-	text-decoration: none; font-weight: normal; font-size: 1em; font-family: "Nanum Gothic Coding", "Malgun Gothic", "dotum", "Segoe UI", sans-serif; color: #004a00;
+	text-decoration: none;
+	font-weight: normal;
+	font-size: 1em;
+	font-family: "Nanum Gothic Coding", "Malgun Gothic", "dotum", "Segoe UI", sans-serif;
+	color: #004a00;
 }
 
 /* Table Style */
 table {
-	margin: 0 0 15px 0; border-collapse: collapse; table-layout: fixed; border-top: 2px solid #88dd88;
+	margin: 0 0 15px 0;
+	border-collapse: collapse;
+	table-layout: fixed;
+	border-top: 2px solid #88dd88;
 }
 
 .tbody_wrap__ table, .tfoot_wrap__ table {
@@ -115,20 +136,41 @@ table th, table td {
 }
 
 table th {
-	background: linear-gradient(top, #ccffcc, #cfffcc); background: -ms-linear-gradient(top, #ccffcc, #cfffcc); background: -moz-linear-gradient(top, #ccffcc, #cfffcc); background: -o-linear-gradient(top, #ccffcc, #cfffcc); background: -webkit-linear-gradient(top, #ccffcc, #cfffcc); background-color: #ccffcc;
+	background: linear-gradient(top, #ccffcc, #cfffcc);
+	background: -ms-linear-gradient(top, #ccffcc, #cfffcc);
+	background: -moz-linear-gradient(top, #ccffcc, #cfffcc);
+	background: -o-linear-gradient(top, #ccffcc, #cfffcc);
+	background: -webkit-linear-gradient(top, #ccffcc, #cfffcc);
+	background-color: #ccffcc;
 }
 
 table.form th {
-	background: linear-gradient(left, #ccffcc, #cfffcc); background: -ms-linear-gradient(left, #ccffcc, #cfffcc); background: -moz-linear-gradient(left, #ccffcc, #cfffcc); background: -o-linear-gradient(left, #ccffcc, #cfffcc); background: -webkit-linear-gradient(left, #ccffcc, #cfffcc); background-color: #ccffcc; text-align: right;
+	background: linear-gradient(left, #ccffcc, #cfffcc);
+	background: -ms-linear-gradient(left, #ccffcc, #cfffcc);
+	background: -moz-linear-gradient(left, #ccffcc, #cfffcc);
+	background: -o-linear-gradient(left, #ccffcc, #cfffcc);
+	background: -webkit-linear-gradient(left, #ccffcc, #cfffcc);
+	background-color: #ccffcc;
+	text-align: right;
 }
 
 /* page layout */
 section {
-	clear: left; margin: 0 auto; max-width: 1003px; min-width: 560px; min-height: 350px; background-color: #fff; padding: 15px 0 15px 0; font-size: 0.875em; box-shadow: 0 0 5px #000;
+	clear: left;
+	margin: 0 auto;
+	max-width: 1003px;
+	min-width: 560px;
+	min-height: 350px;
+	background-color: #fff;
+	padding: 15px 0 15px 0;
+	font-size: 0.875em;
+	box-shadow: 0 0 5px #000;
 }
 
 section article {
-	margin: 0 15px 0 15px; word-break: break-word; line-height: 180%;
+	margin: 0 15px 0 15px;
+	word-break: break-word;
+	line-height: 180%;
 }
 
 article dl.qna {
@@ -136,7 +178,10 @@ article dl.qna {
 }
 
 article dl.qna dt {
-	font-size: 1.1em; font-weight: bold; padding: 10px 0 10px 20px; background: url("../images/icon/dt_leaf.png") no-repeat 0 9px;
+	font-size: 1.1em;
+	font-weight: bold;
+	padding: 10px 0 10px 20px;
+	background: url("../images/icon/dt_leaf.png") no-repeat 0 9px;
 }
 
 article dl.qna dd {
@@ -156,35 +201,59 @@ article dl.qna dd ul li>ul {
 }
 
 #sub-logos {
-	list-style: none; padding: 0; margin: 0 20px 0 0;
+	list-style: none;
+	padding: 0;
+	margin: 0 20px 0 0;
 }
 
 #sub-logos li {
-	margin: 0; float: left; width: 420px; text-align: center; padding: 20px;
+	margin: 0;
+	float: left;
+	width: 420px;
+	text-align: center;
+	padding: 20px;
 }
 
 article h1 {
-	padding: 10px 0 10px 35px; border-bottom: 1px solid #009000; font-size: 1.4em; background: url("../images/icon/h1_leaf.png") no-repeat 0 10px; margin: 0 0 20px 0;
+	padding: 10px 0 10px 35px;
+	border-bottom: 1px solid #009000;
+	font-size: 1.4em;
+	background: url("../images/icon/h1_leaf.png") no-repeat 0 10px;
+	margin: 0 0 20px 0;
 }
 
 article h2 {
-	font-weight: bold; padding: 10px 0 0 20px; background: url("../images/icon/dt_leaf.png") no-repeat 0 9px; font-size: 1.2em; margin: 0 0 18px 0;
+	font-weight: bold;
+	padding: 10px 0 0 20px;
+	background: url("../images/icon/dt_leaf.png") no-repeat 0 9px;
+	font-size: 1.2em;
+	margin: 0 0 18px 0;
 }
 
 article h3 {
-	font-size: 1.1em; margin: 30px 0 15px 0; color: #050; padding: 3px 0 0 22px; background: url("../images/icon/h3_leaf.gif") no-repeat 5px 4px;
+	font-size: 1.1em;
+	margin: 30px 0 15px 0;
+	color: #050;
+	padding: 3px 0 0 22px;
+	background: url("../images/icon/h3_leaf.gif") no-repeat 5px 4px;
 }
 
 article h4 {
-	font-size: 14px; margin: 0 0 15px 0;
+	font-size: 14px;
+	margin: 0 0 15px 0;
 }
 
 article a.link {
-	padding-left: 18px; background: url("../images/icon/link.png") no-repeat 0 50%; border-bottom: 1px solid #00c000; color: #00c000; font-size: 1em;
+	padding-left: 18px;
+	background: url("../images/icon/link.png") no-repeat 0 50%;
+	border-bottom: 1px solid #00c000;
+	color: #00c000;
+	font-size: 1em;
 }
 
 article pre {
-	font-size: 12px; margin-bottom: 15px;
+	font-size: 12px;
+	margin-bottom: 15px;
 }
 
 article div.grid_wrap__ {
@@ -196,22 +265,31 @@ article .btnBox {
 }
 
 article hr {
-	border: none; border-bottom: 1px dotted #00c000; padding-top: 10px;
+	border: none;
+	border-bottom: 1px dotted #00c000;
+	padding-top: 10px;
 }
 
 article .alert {
-	background: url("../images/icon/alert.png") no-repeat 7px 10px; font-size: 0.95em; padding: 5px 5px 5px 25px; background-color: #ffffc8; border-radius: 3px; margin: 0 0 15px 0;
+	background: url("../images/icon/alert.png") no-repeat 7px 10px;
+	font-size: 0.95em;
+	padding: 5px 5px 5px 25px;
+	background-color: #ffffc8;
+	border-radius: 3px;
+	margin: 0 0 15px 0;
 }
 
 article .alert ul {
-	margin: 0; padding: 0 0 0 10px;
+	margin: 0;
+	padding: 0 0 0 10px;
 }
 
 article .alert ul>li {
-	margin: 0; padding: 0;
+	margin: 0;
+	padding: 0;
 }
 
-.grid tbody input[type='text'], .grid tbody input[type='password'], .grid tbody select,.grid textarea {
+.grid tbody input[type='text'], .grid tbody input[type='password'], .grid tbody select, .grid textarea {
 	width: 95%;
 }
 
@@ -225,23 +303,33 @@ article.apiDoc table td p {
 }
 
 article.apiDoc ul.list>li {
-	padding-top: 15px; padding-bottom: 15px;
+	padding-top: 15px;
+	padding-bottom: 15px;
 }
 
 article.apiDoc fieldset {
-	display: inline-block; border: 1px dotted #77c777; border-radius: 5px; padding: 0 0 0 10px;
+	display: inline-block;
+	border: 1px dotted #77c777;
+	border-radius: 5px;
+	padding: 0 0 0 10px;
 }
 
 article.apiDoc fieldset legend {
-	font-size: -9em; color: #009000;
+	font-size: -9em;
+	color: #009000;
 }
 
 article.apiDoc ul.footnotes {
-	padding-left: 5px; overflow: hidden; list-style: none;
+	padding-left: 5px;
+	overflow: hidden;
+	list-style: none;
 }
 
 article.apiDoc ul.footnotes li {
-	float: left; margin-right: 20px; font-size: 0.9em; color: #009000;
+	float: left;
+	margin-right: 20px;
+	font-size: 0.9em;
+	color: #009000;
 }
 
 article.apiDoc .b {
@@ -249,15 +337,20 @@ article.apiDoc .b {
 }
 
 article.apiDoc .bi {
-	font-weight: bold; font-style: italic;
+	font-weight: bold;
+	font-style: italic;
 }
 
 article.apiDoc .apidemo {
-	border: 1px solid #77f777; font-size: 0.875em; margin: 0 0 15px 0; padding: 15px 0 15px 0;
+	border: 1px solid #77f777;
+	font-size: 0.875em;
+	margin: 0 0 15px 0;
+	padding: 15px 0 15px 0;
 }
 
-article.apiDoc .apidemo table th,article.apiDoc .apidemo table td,article.apiDoc .apidemo input[type='text'],article.apiDoc .apidemo input[type='password'],article.apiDoc .apidemo select,article.apiDoc .apidemo textarea {
-	font-size: 1em; vertical-align: top;
+article.apiDoc .apidemo table th, article.apiDoc .apidemo table td, article.apiDoc .apidemo input[type='text'], article.apiDoc .apidemo input[type='password'], article.apiDoc .apidemo select, article.apiDoc .apidemo textarea {
+	font-size: 1em;
+	vertical-align: top;
 }
 
 article.apiDoc .apidemo table.grid th {
@@ -269,11 +362,17 @@ article.apiDoc .apidemo>article table.form th {
 }
 
 article.apiDoc .apidemo>article .result {
-	border: 1px solid #BCFBBC; border-radius: 3px; padding: 10px; margin: 0 0 15px 0; background-color: #ffffff;
+	border: 1px solid #BCFBBC;
+	border-radius: 3px;
+	padding: 10px;
+	margin: 0 0 15px 0;
+	background-color: #ffffff;
 }
 
 article.apiDoc .apidemo>article textarea {
-	width: 95%; max-width: 345px; height: 60px;
+	width: 95%;
+	max-width: 345px;
+	height: 60px;
 }
 
 article.apiDoc .apidemo>article .dataBox {
@@ -282,23 +381,38 @@ article.apiDoc .apidemo>article .dataBox {
 
 /* Examples */
 article .intro {
-	padding: 10px; background-color: #ffeeee; border-radius: 3px; margin-bottom: 20px;
+	padding: 10px;
+	background-color: #ffeeee;
+	border-radius: 3px;
+	margin-bottom: 20px;
 }
 
 article .smallContTit {
-	padding-left: 15px; font-size: 0.95em; font-weight: normal; background: url("../images/icon/sct_leaf.gif") no-repeat 0 3px; margin: 0 0 5px 0;
+	padding-left: 15px;
+	font-size: 0.95em;
+	font-weight: normal;
+	background: url("../images/icon/sct_leaf.gif") no-repeat 0 3px;
+	margin: 0 0 5px 0;
 }
 
 article .searchBox {
-	border: 1px solid #cccccc; box-shadow: inset 1px 1px 3px #eeeeee; background-color: #fefefe; border-radius: 3px; margin-bottom: 15px;
+	border: 1px solid #cccccc;
+	box-shadow: inset 1px 1px 3px #eeeeee;
+	background-color: #fefefe;
+	border-radius: 3px;
+	margin-bottom: 15px;
 }
 
 article .searchBox ul {
-	list-style: none; margin: 0; padding: 0;
+	list-style: none;
+	margin: 0;
+	padding: 0;
 }
 
 article .searchBox ul li {
-	font-size: 12px; margin: 0; padding: 10px;
+	font-size: 12px;
+	margin: 0;
+	padding: 10px;
 }
 
 article .searchBox ul li.inputs {
@@ -310,15 +424,18 @@ article .searchBox ul li.buttons {
 }
 
 article .searchBox li>label {
-	margin: 0 10px 0 10px; font-weight: bold;
+	margin: 0 10px 0 10px;
+	font-weight: bold;
 }
 
 article .searchBox li>label label {
 	font-weight: normal;
 }
 
-article .searchBox label input,article .searchBox label select {
-	margin-left: 15px; box-shadow: 1px 1px 2px #EEE; border-color: #cccccc;
+article .searchBox label input, article .searchBox label select {
+	margin-left: 15px;
+	box-shadow: 1px 1px 2px #EEE;
+	border-color: #cccccc;
 }
 
 article .searchBox label input[type='text'] {
@@ -326,5 +443,32 @@ article .searchBox label input[type='text'] {
 }
 
 article .click {
-	margin-top: 30px; padding: 5px 40px 5px 15px; background: url("../images/icon/click.png") no-repeat 160px 6px; display: inline-block; height: 35px; font-weight: bold; color: #008800; border: 1px dotted #008800; border-radius: 3px; box-shadow: 1px 1px 3px #BCFBBC; background-color: #efe; cursor: pointer; font-size: 17px;
+	margin-top: 30px;
+	padding: 5px 40px 5px 15px;
+	background: url("../images/icon/click.png") no-repeat 160px 6px;
+	display: inline-block;
+	height: 35px;
+	font-weight: bold;
+	color: #008800;
+	border: 1px dotted #008800;
+	border-radius: 3px;
+	box-shadow: 1px 1px 3px #BCFBBC;
+	background-color: #efe;
+	cursor: pointer;
+	font-size: 17px;
+}
+
+/* Page transition */
+#naturalJsContents>.view_context__:last-of-type {
+	/* opacity: 0; */
+}
+
+#naturalJsContents>.view_context__:last-of-type.visible__ {
+	/* opacity: 1; */
+	/* transition: opacity 0.5s cubic-bezier(0.9, 0.01, 0.63, 0.88); */
+}
+
+article .depricated {
+	text-decoration: line-through;
+	color: #ddd;
 }

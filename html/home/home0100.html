@@ -144,14 +144,6 @@
 <script type="text/javascript">
 N("#__home0100").cont({
     init : function(view, request) {
-    	// code highlight
-    	if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {
-			view.find("code").each(function() {
-				Prism.highlightElement(this);
-	    	});
-    	}
-
-    	CommonUtilController.setPageLinks(N("a.link", view).not("[target='blank_']"));
     }
 });
 </script>

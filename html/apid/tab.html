@@ -13,21 +13,9 @@
 			<td width="40%">
 				<textarea id="onActive" style="height: 45px;">function(thisIdx, tab, content, tabs, content) {
 	N.log(thisIdx, tab, content, tabs, content);
-}</textarea><br /> 
+}</textarea><br />
 				<label for="onActive" lang="ko_KR">탭이 활성화 되었을때 마다 실행되는 이벤트 핸들러 지정.</label>
 				<label for="onActive" lang="en_US">Event handler for tab active event</label>
-			</td>
-		</tr>
-		<tr>
-			<th><label for="effect">effect<br />[effect, duration, callback]</label></th>
-			<td colspan="3">[ <input id="effect" type="text" value="fadeIn" style="width: 50px;" />,
-				<input id="duration" type="text" value="300" style="width: 40px;" />,
-				<textarea id="callback" style="height: 45px;">
-function() {
-	N.log("Effect end");
-}</textarea> ]<br>
-				<label for="effect" lang="ko_KR">* effect 종류 : show, hide, slideUp, slideDown, fadeIn, fadeOut</label>
-				<label for="effect" lang="en_US">* Kind of effect : show, hide, slideUp, slideDown, fadeIn, fadeOut</label>
 			</td>
 		</tr>
 	</table>
@@ -39,9 +27,27 @@ function() {
 			<th width="10%">open</th>
 			<th width="10%"><label for="idx">arguments[0]</label></th>
 			<td width="80%" colspan="3">
-				<input id="idx" type="text" value="2" /> 
+				<input id="idx" type="text" value="1" />
 				<label for="idx" lang="ko_KR">선택할 탭의 인덱스</label>
 				<label for="idx" lang="en_US">Tab index to select</label>
+			</td>
+		</tr>
+		<tr>
+			<th width="10%">disable</th>
+			<th width="10%"><label for="disable">arguments[0]</label></th>
+			<td width="80%" colspan="3">
+				<input id="disable" type="text" value="1" />
+				<label for="disable" lang="ko_KR">비활설화 할 탭의 인덱스</label>
+				<label for="disable" lang="en_US">Tab index to disable</label>
+			</td>
+		</tr>
+		<tr>
+			<th width="10%">enable</th>
+			<th width="10%"><label for="enable">arguments[0]</label></th>
+			<td width="80%" colspan="3">
+				<input id="enable" type="text" value="1" />
+				<label for="enable" lang="ko_KR">활설화 할 탭의 인덱스</label>
+				<label for="enable" lang="en_US">Tabindex to enable</label>
 			</td>
 		</tr>
 	</table>
@@ -52,6 +58,8 @@ function() {
 			<span lang="en_US">Create Tab</span>
 		</a>
 		<a id="btnOpen" href="#" data-opts='{ "color": "yellowgreen", "size": "large", "disable": true }'>open</a>
+		<a id="btnDisable" href="#" data-opts='{ "color": "yellowgreen", "size": "large", "disable": true }'>disable</a>
+		<a id="btnEnable" href="#" data-opts='{ "color": "yellowgreen", "size": "large", "disable": true }'>enable</a>
 		<a id="btnReload" href="#" data-opts='{ "color": "white", "size": "large" }'>
 			<span lang="ko_KR">DEMO 초기화</span>
 			<span lang="en_US">Reset DEMO</span>
@@ -90,17 +98,15 @@ He was ranked 5th in Rolling Stone's list of the "100 Greatest Guitarists of All
 	            var opts = {
 	            	randomSel : N("input#randomSel", view).is(":checked"),
 	            	onActive : N.string.trimToNull(N("textarea#onActive", view).val()) !== null ?
-	          				eval("(" + N("textarea#onActive", view).val() + ")") : null,
-	          		effect : N.string.trimToNull(N("input#effect", view).val()) === null ? false :
-	          				[N("input#effect", view).val(),
-	          		        parseInt(N("input#duration", view).val()),
-	          		        N.string.trimToNull(N("textarea#callback", view).val()) !== null ?
-								eval("(" + N("textarea#callback", view).val() + ")") : undefined ]
+	          				eval("(" + N("textarea#onActive", view).val() + ")") : null
 	      		};
 	            this_.tab = N("div#tab").tab(opts);
 
 	            N(this).instance("button").disable();
-	            N("#btnOpen").instance("button").enable();
+
+	            N("#btnOpen", view).instance("button").enable();
+	            N("#btnDisable", view).instance("button").enable();
+	            N("#btnEnable", view).instance("button").enable();
 	        });
 
 	    	N("#btnReload", view).click(function(e) {
@@ -111,6 +117,16 @@ He was ranked 5th in Rolling Stone's list of the "100 Greatest Guitarists of All
 	    	N("#btnOpen", view).click(function(e) {
 	        	e.preventDefault();
 	        	this_.tab.open(N("input#idx", view).val());
+	        });
+
+	    	N("#btnDisable", view).click(function(e) {
+	            e.preventDefault();
+	            this_.tab.disable(N("input#disable", view).val());
+	        });
+
+	        N("#btnEnable", view).click(function(e) {
+	            e.preventDefault();
+            	this_.tab.enable(N("input#enable", view).val());
 	        });
 	    }
 	});

@@ -1,7 +1,7 @@
 <article id="__button">
 	<p lang="ko_KR" class="smallContTit">기본 옵션 : </p>
 	<p lang="en_US" class="smallContTit">Default options : </p>
-	<table class="form">
+	<table class="form" style="width: 100%;">
 		<tr>
 			<th width="10%"><label for="size">size</label></th>
 			<td width="40%"><select id="size">
@@ -22,17 +22,11 @@
 			</select></td>
 		</tr>
 		<tr>
-			<th width="10%"><label for="disable">disable</label></th>
-			<td width="40%">
+			<th><label for="disable">disable</label></th>
+			<td colspan="3">
 				<input id="disable" type="checkbox" />
 				<label for="disable" lang="ko_KR">체크(true)하면 버튼들이 비활성화 된 상태로 초기화 됩니다.</label>
 				<label for="disable" lang="en_US">If this checkbox with check(true), buttons are initailized with disabled</label>
-			</td>
-			<th width="10%"><label for="effect">effect</label></th>
-			<td width="40%">
-				<input id="effect" type="checkbox" checked="checked" />
-				<label for="effect" lang="ko_KR">체크를 해제(false)하면 버튼이 활성화 또는 비활성화 될때 전환 이펙트를 보여주지 않습니다.</label>
-				<label for="effect" lang="en_US">If this checkbox with uncheck(false), The transition effect does not apply when buttons are enabled or disabled</label>
 			</td>
 		</tr>
 	</table>
@@ -74,8 +68,7 @@
 	            var opts = {
 	              	color : N("select#color", view).val(),
 	              	size : N("select#size", view).val(),
-	              	disable : N("input#disable", view).is(":checked"),
-	              	effect : N("input#effect", view).is(":checked")
+	              	disable : N("input#disable", view).is(":checked")
 	            };
 	            N("div.result", view).find("a, button, input[type='button']").button(opts);
 
@@ -97,7 +90,7 @@
 	            	this.enable();
 	            });
 	        });
-	        
+
 	        N("#btnReload", view).click(function(e) {
 	        	e.preventDefault();
 	        	N(view.parent()).comm(this_.request.get("url")).submit();

@@ -30,15 +30,7 @@
 			</tr>
 			<tr>
 				<th>dataType</th>
-				<td><input id="dataType" type="text" value="html" readonly="readonly" /> Response data type<br></td>
-				<th>effect<br />[effect, duration, callback]</th>
-				<td>[ <input id="effect" type="text" value="fadeIn" style="width: 50px;" />,
-					<input id="duration" type="text" value="300" style="width: 50px;" />,
-					<textarea id="callback" style="width: 150px; height: 45px;">function() {
-	N.log("Effect end");
-}</textarea> ]<br>
-					 * effects : show, hide, slideUp, slideDown, fadeIn, fadeOut
-				</td>
+				<td colspan="3"><input id="dataType" type="text" value="html" readonly="readonly" /> Response data type<br></td>
 			</tr>
 		</table>
 
@@ -94,12 +86,7 @@
 	            	url : N("input#url", view).val(),
 	            	async : N("input#async", view).is(":checked"),
 	            	type : N("input#type", view).val(),
-	            	dataType : N("input#dataType", view).val(),
-	        		effect : N.string.trimToNull(N("input#effect", view).val()) === null ? false :
-	      				[N("input#effect", view).val(),
-	      		        parseInt(N("input#duration", view).val()),
-	      		        N.string.trimToNull(N("textarea#callback", view).val()) !== null ?
-							eval("(" + N("textarea#callback", view).val() + ")") : undefined ]
+	            	dataType : N("input#dataType", view).val()
 	            }
 	            N(N("#context", view).val(), view).comm(opts).request.attr("hello", N("textarea#request", view).val()).submit();
 	            N("#btnGetPage", view).instance("button").disable();

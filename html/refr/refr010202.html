@@ -69,9 +69,9 @@
 			* 여기에서 지정한 pageFilter, dataFilter 는 상수값이 아니므로 자유롭게 지정하면 됨.
 			*/
 			"filters" : {
-				"pageFilter" : {
+				"exFilter1" : {
 					/**
-					 * N.cont 의 init 메서드가 실행 된 후 실행됨.
+					 * N.comm 이 초기화 된 후 실행됨(N.cont 의 init 아님)
 					 */
 					afterInit : function(request) {
 					},
@@ -79,56 +79,21 @@
 					 * 서버에 요청을 보내기 전 실행됨.
 					 */
 					beforeSend : function(request, xhr, settings) {
-						if(request.options.dataType === "html" && request.options.target !== null && request.options.append === false) {
-							request.options.target.html('<table style="margin: 0;padding: 0;width: 100%;height: 100%;"><tr><td style="text-align: center;vertical-align: middle;border: 0;"><img src="images/loading.gif" height="24"></td></tr></table>');
-						}
 					},
 					/**
 					 * 서버에 요청이 성공 했을 경우 실행됨.
 					 */
 					success : function(request, data, textStatus, xhr) {
-						if(request.options.dataType === "html" && N(data).hasClass("view-code")) {
-							this.pageId = N(data).attr("id");
-						} else {
-							this.pageId = undefined;
-						}
-
 						// return data 를 하면 N.comm.submit 의 콜백의 인자로 넘어오는 data 가 리턴한 데이터로 치환 됨.
 					},
 					/**
 					 * 서버에 요청 후 서버에러가 발생 했을 경우 실행됨.
 					 */
 					error : function(request, xhr, textStatus, errorThrown) {
-						if(request.options.dataType === "html") {
-							if(request.options.target.html !== undefined) {
-								request.options.target.html('<div align="center" style="margin-top: 140px;margin-bottom: 140px;">[ ' + request.options.url + ' ] 페이지를 불러오는 도중 에러가 발생 했습니다.</div>');
-							} else {
-								N(window).alert('[ ' + request.options.url + ' ] 페이지를 불러오는 도중 에러가 발생 했습니다.').show();
-							}
-						}
 					},
 					/**
 					 * 모든 요청완료 후 실행 됨.
 					 */
-					complete : function(request, xhr, textStatus) {
-						if(request.options.dataType === "html") {
-							// Multilingual handling
-					    	CommonUtilController.i18n(undefined, request.options.target);
-						}
-						if(this.pageId !== undefined) {
-							CommonUtilController.sourceCode(N("#" + this.pageId + ".view-code"), request.get("url"));
-						}
-					}
-				},
-				"dataFilter" : {
-					afterInit : function(request) {
-					},
-					beforeSend : function(request, xhr, settings) {
-					},
-					success : function(request, data, textStatus, xhr) {
-					},
-					error : function(request, xhr, textStatus, errorThrown) {
-					},
 					complete : function(request, xhr, textStatus) {
 					}
 				}
