@@ -1,5 +1,5 @@
 /*!
- * Natural-UI.Shell v0.8.0.1
+ * Natural-UI.Shell v0.8.0.2
  * bbalganjjm@gmail.com
  *
  * Copyright 2017 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2017-05-11T20:00Z
  */
 (function(window, $) {
-	N.version["Natural-UI.Shell"] = "v0.1.0.1";
+	N.version["Natural-UI.Shell"] = "v0.1.0.2";
 
 	$.fn.extend($.extend(N.prototype, {
 		notify : function(opts) {
@@ -26,7 +26,7 @@
 				context : null,
 				displayTime : 7,
 				alwaysOnTop : false,
-				alwaysOnTopCalcTarget : "div, span, ul, p",
+				alwaysOnTopCalcTarget : "div, span, ul, p, nav, article, section",
 			};
 
 			try {
@@ -115,7 +115,9 @@
 					.addClass("hidden__");
 				setTimeout(function() {
 					msgBoxEle.remove();
-				}, 1000);
+				}, Math.max.apply(undefined, $(msgBoxEle.css("transition-duration").split(",")).map(function() {
+					  return parseFloat(this);
+				}).get()) * 1000 + 10);
 				return this;
 			}
 		});
