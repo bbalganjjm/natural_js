@@ -225,10 +225,10 @@ $(document).ready(function() {
 	<p lang="en_US">Now that we've loaded the page we'll call the data with N.comm.</p>
 	<p lang="ko_KR">Natural-JS 의 컴포넌트 데이터 및 데이터 송수신을 위한 데이터 타입은 JSON 이라고 했었죠?</p>
 	<p lang="en_US">The data type for sending and receiving and components data of Natural-JS is the JSON, right?</p>
-	<p>먼저 json 형태로 데이터를 서비스 해 주는 서버가 필요 하지만 이 문서에서는 데이터를 서비스 해 주는 서버단의 작업에 대해서는 생략할께요.
+	<p lang="ko_KR">먼저 json 형태로 데이터를 서비스 해 주는 서버가 필요 하지만 이 문서에서는 데이터를 서비스 해 주는 서버단의 작업에 대해서는 생략할께요.
 		Spring MVC 이나 PHP 로 간단하게 List 나 Map 타입의 객체를 JSON 타입으로 변환 해 주는 모듈들이 많이 있습니다.
 		아래 사이트에 방문하면 프로그래밍 언어별 변환모듈에 대한 정보가 많이 있습니다.</p>
-	<p>First, It need a server to serve data in json format, but in this document, I will skip the operation of the server that serves the data.
+	<p lang="en_US">First, It need a server to serve data in json format, but in this document, I will skip the operation of the server that serves the data.
 		There are a number of modules that simply convert List or Map type objects to JSON types using Spring MVC or PHP.
 		Please refer to the following site for information on conversion modules for each programming language.</p>
 	<a lang="ko_KR" class="link" target="blank_" href="http://www.json.org/json-ko.html">http://www.json.org/json-ko.html</a>
@@ -306,12 +306,12 @@ $(document).ready(function() {
     "favoriteFruit": "strawberry"
   }
 ]</code></pre>
+	<p>위 파일들을 웹서버 올려놓고 구동해야 정상이지만 간단하게 확인하기 위해 브라우저로 로컬 파일을 불러와 처리 해 보겠습니다.</p>
 	<p>대부분의 브라우저는 Ajax로 로컬파일을 참조할 수 없게 막혀 있습니다.
 		그러나 파이어폭스는 그냥 열려있네요?
 		IE 도 보안경고 메시지가 뜨면 허용 해 주면 됩니다.
 		크롬도 이걸 해제시키는 방법이 있는데 찾아 보세요.^^
 		일단 파이어폭스로 해 보겠습니다.</p>
-	<p>웹서버에서 구동 하는 것이 제일 좋겠죠?</p>
 	<pre class="line-numbers"><code class="language-javascript">
 ...
 N("#viewCont").cont({
