@@ -85,7 +85,10 @@
 			    	});
 				}
 			}, {
-				"pointcut" : "#__refr0101:init",
+				"pointcut" : [
+					"#__refr0101:init",
+					"#__gtst0100:init"
+				].join("|"),
 				"adviceType" : "before",
 				"fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 함수명, args 인자 */
 					var view = args[0];
