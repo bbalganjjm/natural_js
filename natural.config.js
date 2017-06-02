@@ -176,12 +176,7 @@
 					/**
 					 * 특정 영역에 html 페이지를 불러올때 덮어 쓸건지 더할건지 여부
 					 */
-					"append" : false,
-					/**
-					 * 특정 영역에 html 페이지를 불러올때 전환 효과 지정, false 이면 효과 없음.
-					 * ex) ["fadeIn", 300, null], 적용안할때는 false
-					 */
-					"effect" : false
+					"append" : false
 				}
 			}
 		}
@@ -421,19 +416,10 @@
 		},
 		"popup" : {
 			"draggable" : true,
-			"alwaysOnTop" : true,
-			/**
-			 * 버튼 상태 변경에 따른 fade 효과 적용 유무
-			 */
-			"button" : {
-				"effect" : true
-			}
+			"alwaysOnTop" : true
 		},
 		"tab" : {
-			/**
-			 * 탭 컨텐츠 표시할때 효과
-			 */
-			"effect" : ["fadeIn", 300, undefined]
+
 		},
 		"datepicker" : {
 			"focusin" : true,
