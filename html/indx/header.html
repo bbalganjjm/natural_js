@@ -276,6 +276,7 @@
 				var self = $(this);
 				var time = setTimeout(function() {
 					clearTimeout(time);
+					$("#__header nav>ul>li>ul:visible").hide();
 					self.parent().find("ul").show();
 				}, 15);
 			});
