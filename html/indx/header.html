@@ -265,7 +265,9 @@
 			});
 
 			$(document).on("click touchstart", function() {
-				$("#__header nav>ul>li>ul:visible").hide();
+				if($(this).closest("#__header nav").length < 0) {
+					$("#__header nav>ul>li>ul:visible").hide();
+				}
 			})
 		}
 	});
