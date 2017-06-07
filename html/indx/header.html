@@ -263,6 +263,16 @@
 					}
 				}
 			});
+
+			$(document).bind("touchstart", function(e) {
+				if(!$(e.target).is("#__header nav>ul>li>a")) {
+					$("#__header nav>ul>li>ul:visible").hide();
+				}
+			});
+
+			$("#__header nav>ul>li>a").bind("touchstart", function(e) {
+				$(this).parent().find("ul").show();
+			});
 		}
 	});
 </script>
