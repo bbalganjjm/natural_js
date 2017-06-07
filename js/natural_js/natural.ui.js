@@ -3318,7 +3318,7 @@
 						}
 
 						$(document).bind("click.grid.dataFilter touchstart.grid.dataFilter", function(e) {
-							$(document).unbind("click.grid.dataFilter");
+							$(document).unbind("click.grid.dataFilter touchstart.grid.dataFilter");
 							thead.find(".data_filter_panel__").removeClass("visible__").addClass("hidden__");
 						});
 
