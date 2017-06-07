@@ -263,6 +263,10 @@
 					}
 				}
 			});
+
+			$(document).on("click touchstart", function() {
+				$("#__header nav>ul>li>ul:visible").hide();
+			})
 		}
 	});
 </script>
