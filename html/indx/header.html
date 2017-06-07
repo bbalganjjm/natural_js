@@ -266,12 +266,18 @@
 
 			$(document).bind("touchstart", function(e) {
 				if(!$(e.target).is("#__header nav>ul>li>a")) {
-					$("#__header nav>ul>li>ul:visible").hide();
+					setTimeout(function() {
+						$("#__header nav>ul>li>ul:visible").hide();
+					}, 15);
 				}
 			});
 
 			$("#__header nav>ul>li>a").bind("touchstart", function(e) {
-				$(this).parent().find("ul").show();
+				var self = $(this);
+				var time = setTimeout(function() {
+					clearTimeout(time);
+					self.parent().find("ul").show();
+				}, 15);
 			});
 		}
 	});
