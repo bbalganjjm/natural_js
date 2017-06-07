@@ -472,3 +472,9 @@ article .depricated {
 	text-decoration: line-through;
 	color: #ddd;
 }
+
+@media screen and (max-width: 578px){
+	body * {
+		cursor: pointer;
+	}
+}
