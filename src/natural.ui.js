@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.14.12
+ * Natural-UI v0.8.14.14
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "v0.8.14.12";
+	N.version["Natural-UI"] = "v0.8.14.14";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -470,7 +470,7 @@
 		        		self[opts.closeMode]();
 		        	}
 				};
-		        $(document).bind("keyup.alert", opts.onKeyup);
+		        $(document).bind(N.browser.is("firefox") ? "keydown.alert" : "keyup.alert", opts.onKeyup);
 
 				return this;
 			},
@@ -490,7 +490,7 @@
 				}
 
 				$(window).unbind("resize.alert");
-				$(document).unbind("keyup.alert", opts.onKeyup);
+				$(document).unbind(N.browser.is("firefox") ? "keydown.alert" : "keyup.alert", opts.onKeyup);
 
 				return this;
 			},
@@ -506,7 +506,7 @@
 				}
 
 				$(window).unbind("resize.alert");
-				$(document).unbind("keyup.alert", opts.onKeyup);
+				$(document).unbind(N.browser.is("firefox") ? "keydown.alert" : "keyup.alert", opts.onKeyup);
 				return this;
 			}
 		});
@@ -2021,8 +2021,8 @@
 									});
 
 									//Enter key event
-									ele.unbind("keyup.form.dataSync");
-			                        ele.bind("keyup.form.dataSync", function(e) {
+									ele.unbind(N.browser.is("firefox") ? "keydown.form.dataSync" : "keyup.form.dataSync");
+			                        ele.bind(N.browser.is("firefox") ? "keydown.form.dataSync" : "keyup.form.dataSync", function(e) {
 			                        	e.preventDefault();
 			                        	if ((e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode)) == 13) {
 			                            	$(this).trigger("focusout.form.validate");
@@ -3166,7 +3166,7 @@
 									filterListBox.find("li :checkbox").prop("checked", true).last().trigger("do.grid.dataFilter");
 								}
 							});
-							panel.find(".data_filter_search_word__").keyup(function(e) {
+							panel.find(".data_filter_search_word__").bind(N.browser.is("firefox") ? "keydown.grid.dataFilter" : "keyup.grid.dataFilter", function(e) {
 								var keycode = (e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode));
 			                    if (keycode == 13) {
 			                    	panel.find(".data_filter_search_btn__").click();
@@ -3320,6 +3320,13 @@
 						$(document).bind("click.grid.dataFilter", function(e) {
 							$(document).unbind("click.grid.dataFilter");
 							thead.find(".data_filter_panel__").removeClass("visible__").addClass("hidden__");
+						});
+
+						$(document).bind("touchstart.grid.dataFilter", function(e) {
+							$(document).unbind("touchstart.grid.dataFilter");
+							if($(e.target).closest(".data_filter_panel__").length === 0) {
+								thead.find(".data_filter_panel__").removeClass("visible__").addClass("hidden__");
+							}
 						});
 
 						bfrSelId = id;
