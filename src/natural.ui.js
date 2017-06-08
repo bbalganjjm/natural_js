@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.14.14
+ * Natural-UI v0.8.14.16
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "v0.8.14.14";
+	N.version["Natural-UI"] = "v0.8.14.16";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -463,14 +463,13 @@
 					}
 				}
 
-				// bind "ESC" key and "ENTER" key event
 				// if press the "ESC" key, alert dialog will be removed
 				opts.onKeyup = function(e) {
 					if ((e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode)) == 27) {
 		        		self[opts.closeMode]();
 		        	}
 				};
-		        $(document).bind(N.browser.is("firefox") ? "keydown.alert" : "keyup.alert", opts.onKeyup);
+		        $(document).bind("keyup.alert", opts.onKeyup);
 
 				return this;
 			},
@@ -490,7 +489,7 @@
 				}
 
 				$(window).unbind("resize.alert");
-				$(document).unbind(N.browser.is("firefox") ? "keydown.alert" : "keyup.alert", opts.onKeyup);
+				$(document).unbind("keyup.alert", opts.onKeyup);
 
 				return this;
 			},
@@ -506,7 +505,7 @@
 				}
 
 				$(window).unbind("resize.alert");
-				$(document).unbind(N.browser.is("firefox") ? "keydown.alert" : "keyup.alert", opts.onKeyup);
+				$(document).unbind("keyup.alert", opts.onKeyup);
 				return this;
 			}
 		});
@@ -962,12 +961,12 @@
 				}
 
 				// bind key event
-				opts.context.bind(N.browser.is("firefox") ? "keydown.datepicker" : "keyup.datepicker", function(e) {
-					e.preventDefault();
+				opts.context.bind("keyup.datepicker", function(e) {
 					var value = opts.context.val().replace(/[^0-9]/g, "");
-
+					var keyCode = e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode);
+					
 					// when press the number keys
-					if (e.keyCode >= 48 && e.keyCode <= 57 && value.length <= 8 && value.length%2 === 0) {
+					if (keyCode >= 48 && keyCode <= 57 && value.length <= 8 && value.length%2 === 0) {
 		        		var dateStrArr = N.date.strToDateStrArr(value, format);
 		        		var dateStrStrArr = N.date.strToDateStrArr(value, format, true);
 
@@ -1000,7 +999,8 @@
 	        			}
 
 	        		// when press the enter key
-					} else if (e.keyCode == 13) {
+					} else if (keyCode == 13) {
+						e.preventDefault();
 		        		if(!opts.monthonly) {
 		        			daysPanel.find(".datepicker_day_selected__").trigger("click", [e]);
 		        		} else {
@@ -1028,8 +1028,7 @@
 				var daysPanel = N((opts.monthonly ? ".datepicker_contents__.datepicker_monthonly__" : ".datepicker_contents__:not(.datepicker_monthonly__)") + " .datepicker_days_panel__");
 
 				// bind key event
-				opts.context.bind(N.browser.is("firefox") ? "keydown.datepicker" : "keyup.datepicker", function(e) {
-					e.preventDefault();
+				opts.context.bind("keyup.datepicker", function(e) {
 					var value = opts.context.val().replace(/[^0-9]/g, "");
 
 					var endDateCls = N.date.strToDate(N.string.lpad(yearsPanel.find(".datepicker_year_selected__").text(), 4, "0") +  N.string.lpad(String(parseInt(monthsPanel.find(".datepicker_month_selected__").text())+1), 2, "0") + "00", "Ymd");
@@ -1039,8 +1038,9 @@
 						gEndDate = 31;
 					}
 
+					var keyCode = e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode);
 					// when press the number keys
-					if (e.keyCode >= 48 && e.keyCode <= 57 && value.length <= 8 && value.length%2 === 0) {
+					if (keyCode >= 48 && keyCode <= 57 && value.length <= 8 && value.length%2 === 0) {
 		        		var dateStrArr = N.date.strToDateStrArr(value, format);
 		        		var dateStrStrArr = N.date.strToDateStrArr(value, format, true);
 
@@ -1073,7 +1073,8 @@
 	        			}
 
 	        		// when press the enter key
-					} else if (e.keyCode == 13) {
+					} else if (keyCode == 13) {
+						e.preventDefault();
 		        		if(!opts.monthonly) {
 		        			daysPanel.find(".datepicker_day_selected__").trigger("click", [e]);
 		        		} else {
@@ -1178,10 +1179,8 @@
 
 				opts.contents.show();
 
-				// bind "ESC" key event
 				// if press the "ESC" key, datepicker will be hidden
-		        $(document).bind(N.browser.is("firefox") ? "keydown.datepicker" : "keyup.datepicker", function(e) {
-		        	e.preventDefault();
+		        $(document).bind("keyup.datepicker", function(e) {
 		        	if ((e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode)) == 27) {
 		        		self.hide(e);
 		        	}
@@ -1241,7 +1240,7 @@
 
 				$(window.document).unbind("mousedown.datepicker");
 				opts.context.unbind("blur.datepicker");
-				$(window.document).unbind(N.browser.is("firefox") ? "keydown.datepicker" : "keyup.datepicker");
+				$(window.document).unbind("keyup.datepicker");
 				$(window).unbind("resize.datepicker");
 				opts.contents.hide();
 				opts.context.get(0).blur();
@@ -2021,10 +2020,10 @@
 									});
 
 									//Enter key event
-									ele.unbind(N.browser.is("firefox") ? "keydown.form.dataSync" : "keyup.form.dataSync");
-			                        ele.bind(N.browser.is("firefox") ? "keydown.form.dataSync" : "keyup.form.dataSync", function(e) {
-			                        	e.preventDefault();
+									ele.unbind("keyup.form.dataSync");
+			                        ele.bind("keyup.form.dataSync", function(e) {
 			                        	if ((e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode)) == 13) {
+			                        		e.preventDefault();
 			                            	$(this).trigger("focusout.form.validate");
 			                            	// notify data changed
 		                            		$(this).trigger("focusout.form.dataSync");
@@ -3166,9 +3165,9 @@
 									filterListBox.find("li :checkbox").prop("checked", true).last().trigger("do.grid.dataFilter");
 								}
 							});
-							panel.find(".data_filter_search_word__").bind(N.browser.is("firefox") ? "keydown.grid.dataFilter" : "keyup.grid.dataFilter", function(e) {
-								var keycode = (e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode));
-			                    if (keycode == 13) {
+							panel.find(".data_filter_search_word__").bind("keyup.grid.dataFilter", function(e) {
+								var keyCode = (e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode));
+			                    if (keyCode == 13) {
 			                    	panel.find(".data_filter_search_btn__").click();
 			                    }
 							});
