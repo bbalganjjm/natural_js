@@ -624,20 +624,6 @@
 					"close" : "Close"
 				}
 			}
-		},
-		"page" : {
-			"message" : {
-				"ko_KR" : {
-					"closeAll" : "페이지 모두 닫기",
-					"pageList" : "페이지 목록",
-					"selPage" : "{0} 페이지 선택"
-				},
-				"en_US" : {
-					"closeAll" : "Close all pages",
-					"pageList" : "Page list",
-					"selPage" : "Select the {0} page"
-				}
-			}
 		}
 	});
 
