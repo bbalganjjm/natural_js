@@ -39,7 +39,7 @@
 		 * Natural-JS 의 구동영역(지정 필수)
 		 */
 		"page" : {
-			"context" : "#naturalJsContents"
+			"context" : "#naturalJsContents, .page__ > .page_contents__.visible__"
 		},
 		/**
 		 * N.cont(Controller)에 정의한 오브젝트들을 대상으로 하는 관점 지향 프로그래밍(AOP) 설정
@@ -409,7 +409,7 @@
 			/**
 			 * Popup Element 가 담길 영역
 			 */
-			"container" : "#naturalJsContents",
+			"container" : "#naturalJsContents, .page__ > .page_contents__.visible__",
 			/**
 			 * 버튼 스타일(Required)
 			 */
