@@ -17,10 +17,18 @@
 		<pre class="line-numbers"><code class="language-markup">/**
 /**
  * Natural-JS에서 제공하는 라이브러리 및 컴포넌트의 전역 옵션 값 설정
+ * 여기에 기본으로 정의 된 값들은 제거하면 안 됨. 추가만 가능
  *
  * 컴포넌트들의 옵션 적용 순서
  * 1. 컴포넌트 초기화시 지정한 옵션 값
+ *
  * 2. 여기(N.Config)에서 지정한 옵션 값
+ *    2.1. 각 영역별로 지정 하세요. 컴포넌트 초기화 시 각 영역별 값들을 자동으로 기본옵션으로 지정 해 줍니다.
+ *         ex) 2.1.1 모든 N.grid의 높이를 300으로 지정하고 싶음.
+ *                   - N.context.attr("ui") 의 grid 키에 height 속성을 추가하고 값은 300 을 지정
+ *             2.1.2 모든 N.form에 html을 인식 시키고 싶음.
+ *                   - N.context.attr("ui") 의 form 키에 html 속성을 추가하고 값은 true 로 지정
+ *
  * 3. 컴포넌트 클래스의 기본 옵션 값
  */
 (function(N) {
@@ -28,7 +36,13 @@
 	 * Natural-CORE Config
 	 */
 	N.context.attr("core", {
+		/**
+		 * 로케일
+		 */
 		"locale" : "ko_KR",
+		/**
+		 * 전역 다국어 메시지
+		 */
 		"message" : {
 			"ko_KR" : {},
 			"en_US" : {}
@@ -41,6 +55,9 @@
 	     * 체크박스 선택 안됐을때 기본 값
 	     */
 	    sgUnChkdVal : "N", //N, 0, off
+	    /**
+	     * 문자열 구분자
+	     */
 	    spltSepa : "$@^",
 	    /**
 	     * N.context.attr("architecture").page.context 로 페이지가 전환될때 마다 실행될 가비지 컬렉터의 모드
@@ -56,7 +73,76 @@
 		 * Natural-JS 의 구동영역(지정 필수)
 		 */
 		"page" : {
-			"context" : "#naturalJsContents"
+			"context" : ".docs__ > .docs_contents__.visible__"
+		},
+		/**
+		 * N.cont(Controller)에 정의한 오브젝트들을 대상으로 하는 관점 지향 프로그래밍(AOP) 설정
+		 *   - 아래는 AOP 관련 된 예제코드 이므로 사용하지 않는다면 cont 하위의 모든 구문을 삭제하고 사용 바랍니다.
+		 */
+		"cont" : {
+			/** advisor에서 참조할 pointcut을 정의한다.
+			 * pointcut은 반드시 fn 속성에 function(param, cont, fnChain) 함수를 정의해야 한다.
+			 * 함수 수행 결과는 advice의 적용 여부를 판단하는데 사용된다.
+			 */
+			"pointcuts" : {
+				/** pointcut 객체는 유일한 속성명으로 정의한다. */
+				"regexp" : {
+					/**
+					 * 정규표현식으로 평가하는 사용자 포인트 컷(예제이므로 삭제해도 됨)
+					 * param : 정규표현식 문자열 혹은 RegExp 객체,
+					 * cont : 컨트롤러 객체
+					 * fnChain : 컨트롤러에 정의된 함수채인(뷰의selector.:functionName.functionName...)(Built-in 함수를 제외한 사용자가 정의한 함수만 대상으로 한다)
+					 */
+					"fn" : function(param, cont, fnChain){
+						var regexp = param instanceof RegExp ? param : new RegExp(param);
+						return regexp.test(fnChain);
+					}
+				}
+			},
+			/** 컨트롤러의 함수에 적용하고자 하는 기능을 정의한다 */
+			"advisors" : [{
+				/**
+				 * advisor가 적용될 pointcut을 정의한다
+				 * "pointcut" : {
+				 *     "type" : "regexp"
+				 *     "param" : "something"
+				 * }
+				 * 위의 경우 pointcuts에서 regexp pointcut을 찾아 pointcut에 정의된 객체를 파라미터로 전달한다.
+				 * "pointcut" : "someregexp"
+				 * 위와 같이 pointcut의 값이 객체가 아닌 경우 regexp pointcut을 기본값으로 사용한다.
+				 */
+				"pointcut" : ":init",
+				/**
+				 * adviecType은 아래와 같다.
+				 * before : 원본 함수를 실행하기 전에 실행된다.
+				 * after : 원본 함수를 실행 후 실행된다. 원본 함수의 반환값이 함께 전달된다.
+				 * error : 원본 함수에서 예외 발생 시 실행된다.
+				 * around : 원본 함수를 실행할 수 있는 joinPoint가 파라미터로 전달
+				 * 각 사용방식은 아래의 각 예제를 참고
+				 */
+				"adviceType" : "before",
+				"fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 뷰의selector:functionName.functionName... , args 인자 */
+					console.log("call me before %s", fnChain);
+				}
+			},
+			{
+				"pointcut" : "after.*",
+				"adviceType" : "after",
+				"fn" : function(cont, fnChain, args, result){ /* cont 컨트롤러, fnChain 함수명, args 인자, 반환값 */
+					console.log("call me after %s", fnChain);
+					console.log("\treuslt", result);
+				}
+			},
+			{
+				"pointcut" : "around.*",
+				"adviceType" : "around",
+				"fn" : function(cont, fnChain, args, joinPoint){ /* cont 컨트롤러, fnChain 함수명, args 인자, joinPoint 원본 함수 실행 객체 */
+					console.log("call me around %s", fnChain);
+					var result = joinPoint.proceed();
+					console.log("result ", result);
+					return result;
+				}
+			}]
 		},
 		"comm" : {
 			/**
@@ -101,10 +187,6 @@
 			"request" : {
 				"options" : {
 					/**
-					 * 기본 Method
-					 */
-					"type" : "GET",
-					/**
 					 * 기본 contentType
 					 */
 					"contentType" : "application/json; charset=utf-8",
@@ -113,8 +195,8 @@
 					 */
 					"cache" : true,
 					/**
-					 * 페이지 전환 없는 방식의 사이트 구현 시 Ajax 통신 시(async)
-					 * 요청할 때 location.href 와 응답 올때 location.href 을 비교하여 오류 방지 할건지 여부
+					 * Single Page Application(SPA) 개발 시 N.comm(async) 으로 데이터를 요청하고 요청이 오기전에 다른 페이지로 전환 했을때
+					 * 요청할 때 location.href 와 응답 올때 location.href 을 비교하여 틀리면 요청을 중지 할 건지 여부
 					 */
 					"urlSync" : true,
 					/**
@@ -124,12 +206,7 @@
 					/**
 					 * 특정 영역에 html 페이지를 불러올때 덮어 쓸건지 더할건지 여부
 					 */
-					"append" : false,
-					/**
-					 * 특정 영역에 html 페이지를 불러올때 전환 효과 지정, false 이면 효과 없음.
-					 * ex) ["fadeIn", 300, null], 적용안할때는 false
-					 */
-					"effect" : false
+					"append" : false
 				}
 			}
 		}
@@ -310,7 +387,7 @@
 			/**
 			 * Popup Element 가 담길 영역
 			 */
-			"container" : "#naturalJsContents",
+			"container" : ".docs__ > .docs_contents__.visible__",
 			/**
 			 * 버튼 스타일(Required)
 			 */
@@ -333,14 +410,8 @@
 				left : +2,
 				right : -2
 			},
-			"alwaysOnTop" : false,
 			/**
-			 * 페이지의 요소들이 동적으로 사이즈가 조절될 때 N.alert 의 모달오버레이와 메시지 박스의 위치를 자동으로 맞춰줄지 여부
-			 *  주) 성능적으로 최적화하기 위해서는 false로 지정하는게 좋고 false로 지정 시 탭(N.tab)이 전환되거나 페이지가 리다이렉트 되지않고 논리적으로 전환될때 N.alert 의 요소가 남아있음.
-			 */
-			"dynPos" : true,
-			/**
-			 * 필수 값
+			 * 인풋 메시지 설정
 			 */
 			"input" : {
 				/**
@@ -353,7 +424,7 @@
 				closeBtn : "&times;"
 			},
 			/**
-			 * 필수 값
+			 * 다국어 메시지
 			 */
 			"message" : {
 				"ko_KR" : {
@@ -367,21 +438,15 @@
 			}
 		},
 		"popup" : {
-			/**
-			 * 버튼 상태 변경에 따른 fade 효과 적용 유무
-			 */
-			"button" : {
-				"effect" : true
-			}
+
 		},
 		"tab" : {
-			/**
-			 * 탭 컨텐츠 표시할때 효과
-			 */
-			"effect" : ["fadeIn", 300, undefined]
+
 		},
 		"datepicker" : {
-			"focusin" : true,
+			/**
+			 * 다국어 메시지
+			 */
 			"message" : {
 				"ko_KR" : {
 					"year" : "년",
@@ -409,53 +474,12 @@
 			/**
 			 * 기본 value 값
 			 */
-			"val" : "val",
-			/**
-			 * select 요소에 option 을 덮어쓸건지 더할건지 지정
-			 */
-			"append" : true
+			"val" : "val"
 		},
 		"form" : {
-			/**
-			 * 바인드된 데이터의 html 을 인식 할건지 여부
-			 */
-			"html" : false,
-			/**
-			 * 실시간 데이터 검증을 할 건지 여부
-			 */
-			"validate" : true,
-			/**
-			 * 바인드된 데이터의 새로운 row 생성시 위치를 최상단에 만들건지 여부
-			 */
-			"addTop" : false
+
 		},
 		"grid" : {
-			/**
-			 * 그리드에서 스크롤할때 위, 아래 끝에 다다르면 전체 페이지가(window scroll) 스크롤 되는것을 방지하기 위한 기능 활성 여부
-			 */
-			"windowScrollLock" : true,
-			/**
-			 * bind 시 row 생성 delay(ms)
-			 */
-			"createRowDelay" : 1,
-			/**
-			 * 헤더픽스형일 경우 스크롤 페이징 사이즈(대용량 데이터 처리)
-			 */
-			/**
-			 * 바인드된 데이터의 새로운 row 생성시 위치를 최상단에 만들건지 여부
-			 */
-			"addTop" : false,
-			"scrollPaging" : {
-				"size" : 50
-			},
-			/**
-			 * 세로 길이조절 기능 활성화 여부
-			 */
-			"vResizable" : false,
-			/**
-			 * 소트 기능 활성화 여부
-			 */
-			"sortable" : false,
 			/**
 			 * 소트기능 활설화 시 표시 구분자(html 태그 가능)
 			 */
@@ -464,14 +488,20 @@
 				"desc" : "▲"
 			},
 			/**
-			 * Grid 에서 사용 할 메시지 다국어 처리
+			 * 다국어 메시지
 			 */
 			"message" : {
 				"ko_KR" : {
-					"empty" : "조회를 하지 않았거나 조회된 데이터가 없습니다."
+					"empty" : "조회를 하지 않았거나 조회된 데이터가 없습니다.",
+					"search" : "검색",
+					"selectAll" : "전체선택",
+					"dFilter" : "데이터 필터"
 				},
 				"en_US" : {
-					"empty" : "No inquired data or no data available."
+					"empty" : "No inquired data or no data available.",
+					"search" : "Search",
+					"selectAll" : "Select all",
+					"dFilter" : "Data filter"
 				}
 			},
 			/**
@@ -494,6 +524,32 @@
 				 * 리사이즈바의 높이가 밑에까지 꽉 차지 않을때 아래 수치 조절(기본값 : 0)
 				 */
 				"resizeBarCorrectionHeight" : 0
+			}
+		}
+	});
+
+	/**
+	 * Natural-UI.Shell Config
+	 */
+	N.context.attr("ui.shell", {
+		"notify" : {
+			/**
+			 * 메시지가 표시 될 위치
+			 */
+			"position" : {
+				top : 10,
+				right : 10
+			},
+			/**
+			 * 다국어 메시지
+			 */
+			"message" : {
+				"ko_KR" : {
+					"close" : "닫기"
+				},
+				"en_US" : {
+					"close" : "Close"
+				}
 			}
 		}
 	});
