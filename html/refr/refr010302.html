@@ -149,6 +149,23 @@
 			<td>요청시 파라미터를 지정 합니다(jQuery.ajax 의 옵션)</td>
 		</tr>
 		<tr>
+			<td>dataIsArray</td>
+			<td>boolean</td>
+			<td>false</td>
+			<td></td>
+			<td>
+				요청 파라미터의 객체 타입이 Array 일 경우 Array 자체를 서버에 보내고 싶을때 true로 설정
+				<p class="alert">
+					N(params).comm(url).submit() 와 같이 사용할 때 params의 객체타입이 Array 일때 dataIsArray 옵션이 false 로 지정되어 있다면 Array 의 첫번째 오브젝트만 전달 됩니다.
+					해당 문제는 N(params) 구문에 의해 params를 jQuery Object로 변환되는 과정에서 $([{}]) 와 같이 하나 $({}) 와 같이 하나 get 했을때 [{}] 로만 반환이 되어서 생기는 문제 입니다.
+					불편하더라도 Array 를 넘길때는 dataIsArray 를 true로 설정하거나 Object 에 Array를 담아서 사용 바랍니다.
+				</p>
+				<p class="alert">
+					N.comm(params, url).submit() 와 같이 사용하면 dataIsArray 옵션을 true로 지정하지 않아도 params를 jQuery Object화 하지않기 때문에 params의 객체타입이 Array 더라도 그대로 전송 됩니다.
+				</p>
+			</td>
+		</tr>
+		<tr>
 			<td>dataType</td>
 			<td>String</td>
 			<td>"json"</td>

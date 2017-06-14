@@ -98,7 +98,7 @@ N("#__exap0100").cont({
     	N("#btnSearch", view).click(function(e) {
             e.preventDefault();
             if(form.validate()) {
-    			N(form.data()).comm("html/apid/data/grid.json").submit(function(data, request) {
+    			N(form.data()[0]).comm("html/apid/data/grid.json").submit(function(data, request) {
              		// Data bind by N.grid
              		grid.bind(data);
              		N(window).alert({
