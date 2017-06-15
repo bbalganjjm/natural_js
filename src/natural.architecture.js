@@ -1,5 +1,5 @@
 /*!
- * Natural-ARCHITECTURE v0.8.1.2
+ * Natural-ARCHITECTURE v0.8.1.4
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-ARCHITECTURE"] = "0.8.1.2";
+	N.version["Natural-ARCHITECTURE"] = "0.8.1.4";
 
 	$.fn.extend($.extend(N.prototype, {
 		ajax : function(opts) {
@@ -37,10 +37,6 @@
 				if ((N.isPlainObject(obj) || N.isString(obj)) && url === undefined) {
 					url = obj;
 					obj = [];
-				} else {
-					if (!N.isWrappedSet(obj) && !N.isArray(obj)) {
-						obj = [ obj ];
-					}
 				}
 			}
 
@@ -183,6 +179,7 @@
 				async : true,
 				type : "POST",
 				data : null,
+				dataIsArray : false,
 				dataType : "json",
 				urlSync : true,
 				crossDomain : false,
@@ -203,10 +200,17 @@
 
 			this.obj = obj;
 			if(!N.isString(this.options.data)) {
-				// define params data
-				this.options.data = JSON.stringify(this.options.data === null ?
-						N.isWrappedSet(obj) ? !N.isElement(obj) ? obj.toArray()[0] : undefined : obj[0] :
-								this.options.data);
+				// Set parameters
+				this.options.data = JSON.stringify(
+					this.options.data === null ?
+						!N.isWrappedSet(obj) ? obj
+							: !N.isElement(obj) ?
+								this.options.dataIsArray ?
+									obj.get()
+								: obj.get(0)
+						: null
+					: this.options.data
+				);
 			}
 
 			if(this.options.data !== undefined) {
