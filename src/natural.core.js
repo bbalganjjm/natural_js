@@ -1,5 +1,5 @@
 /*!
- * Natural-CORE v0.8.5.14
+ * Natural-CORE v0.8.5.16
  * bbalganjjm@gmail.com
  *
  * Includes formatdate.js & Mask JavaScript API
@@ -238,7 +238,7 @@
 		// N local variables
 		$.extend(N, {
 			version : {
-				"Natural-CORE" : "0.8.5.14"
+				"Natural-CORE" : "0.8.5.16"
 			},
 			/**
 			 * Set and get locale value
@@ -318,11 +318,11 @@
 				}
 			},
 			/**
-			 * Check of array type
+			 * Check whether arg[0] is a Array type
 			 */
 			isArray : $.isArray,
 			/**
-			 * Check type for numeric
+			 * Check whether arg[0] is a numeric type
 			 */
 			isNumeric : $.isNumeric,
 			isEmptyObject : function(obj) {
@@ -338,11 +338,11 @@
 				return true;
 			},
 			/**
-			 * Check whether the plain object type
+			 * Check whether arg[0] is a plain object type
 			 */
 			isPlainObject : $.isPlainObject,
 			/**
-			 * Check whether the String type
+			 * Check whether arg[0] is a String type
 			 */
 			isString : function(str) {
 				return typeof str === "string";
@@ -354,14 +354,17 @@
 		        return ({}).toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase();
 		    },
 		    /**
-		     * Check whether the element
+		     * Check whether arg[0] is an element type
 		     */
 			isElement : function(obj) {
-				if(N.isString(obj)) {
-					obj = N(obj);
+				if(this.isWrappedSet(obj)) {
+					obj = obj.get(0);
 				}
-				return obj !== undefined && obj.length > 0 && obj.get(0).getElementsByTagName ? true : false;
+				return obj !== undefined && obj.getElementsByTagName ? true : false;
 			},
+			/**
+			 * Deprecated - Will be removed from version 1.0
+			 */
 			isArraylike : function(obj) {
 				var length = obj.length, type = N.type(obj);
 				if (type === "function" || $.isWindow(obj)) {
@@ -373,7 +376,7 @@
 				return type === "array" || length === 0 || typeof length === "number" && length > 0 && (length - 1) in obj;
 			},
 			/**
-			 * Check whether the JO(jQuery Object)
+			 * Check whether arg[0] is a jQuery Object type
 			 */
 			isWrappedSet : function(obj) {
 				return this.isArraylike(obj) && obj.jquery !== undefined;
@@ -762,7 +765,17 @@
         		        if (delta < 0 && $(this).scrollTop() >= this.scrollHeight - $(this).height()) return false;
         		        return true;
         		    });
-			    }
+			    },
+			    /**
+			     * Excute the method after effect
+			     */
+			    excuteAfterEffect : function(ele, type, css) {
+					setTimeout(function() {
+						ele[type]();
+					}, Math.max.apply(undefined, $(ele.css(css).split(",")).map(function() {
+						  return parseFloat(this);
+					}).get()) * 1000);
+				}
 			},
 			/**
 			 * N.browser package
