@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.14.16
+ * Natural-UI v0.8.14.18
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "v0.8.14.16";
+	N.version["Natural-UI"] = "v0.8.14.18";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -72,7 +72,7 @@
 				overlayColor : null,
 				"confirm" : false,
 				alwaysOnTop : false,
-				alwaysOnTopCalcTarget : "div, span, ul, p",
+				alwaysOnTopCalcTarget : "div, span, ul, p, nav, article, section",
 				dynPos : true, // dynamic positioning for massage context and message overlay
 				windowScrollLock : true,
 				draggable : false,
@@ -595,12 +595,7 @@
                 				if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {
                 					$(this).css("box-shadow", "rgba(0, 0, 0, 0.2) 1px 1px 1px inset");
                 				} else {
-                					// fade effect
-                					if(opts.effect) {
-                						$(this).fadeTo(100, "0.9");
-                					} else {
-                						$(this).css("opacity", "0.9");
-                					}
+            						$(this).css("opacity", "0.9");
                 				}
                 			}
                 			$(this).removeClass("btn_mouseover__ btn_mousedown__ btn_mouseup__ btn_mouseout__");
@@ -613,12 +608,7 @@
 	                    		if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {
 	                    			$(this).css("box-shadow", "rgba(0, 0, 0, 0.2) 3px 3px 3px inset");
 	                    		} else {
-	                    			// fade effect
-	                    			if(opts.effect) {
-	                    				$(this).fadeTo(100, "0.7");
-	                    			} else {
-	                    				$(this).css("opacity", "0.7");
-	                    			}
+                    				$(this).css("opacity", "0.7");
 	                    		}
 	                    	}
 	                    	$(this).removeClass("btn_mouseover__ btn_mousedown__ btn_mouseup__ btn_mouseout__");
@@ -631,12 +621,7 @@
 	                    		if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {
 	                    			$(this).css("box-shadow", "none");
 	                    		} else {
-	                    			// fade effect
-	                    			if(opts.effect) {
-	                    				$(this).fadeTo(100, "1");
-	                    			} else {
-	                    				$(this).css("opacity", "1");
-	                    			}
+                    				$(this).css("opacity", "1");
 	                    		}
 	                    	}
 	                    	$(this).removeClass("btn_mouseover__ btn_mousedown__ btn_mouseup__ btn_mouseout__");
@@ -649,12 +634,7 @@
 	                    		if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {
 	                    			$(this).css("box-shadow", "none");
 	                    		} else {
-	                    			// fade effect
-	                    			if(opts.effect) {
-	                    				$(this).fadeTo(100, "1");
-	                    			} else {
-	                    				$(this).css("opacity", "1");
-	                    			}
+                    				$(this).css("opacity", "1");
 	                    		}
 	                    	}
 	                    	$(this).removeClass("btn_mouseover__ btn_mousedown__ btn_mouseup__ btn_mouseout__");
@@ -964,7 +944,7 @@
 				opts.context.bind("keyup.datepicker", function(e) {
 					var value = opts.context.val().replace(/[^0-9]/g, "");
 					var keyCode = e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode);
-					
+
 					// when press the number keys
 					if (keyCode >= 48 && keyCode <= 57 && value.length <= 8 && value.length%2 === 0) {
 		        		var dateStrArr = N.date.strToDateStrArr(value, format);
