@@ -1,9 +1,17 @@
 /**
  * Natural-JS에서 제공하는 라이브러리 및 컴포넌트의 전역 옵션 값 설정
+ * 여기에 기본으로 정의 된 값들은 제거하면 안 됨. 추가만 가능
  *
  * 컴포넌트들의 옵션 적용 순서
  * 1. 컴포넌트 초기화시 지정한 옵션 값
+ *
  * 2. 여기(N.Config)에서 지정한 옵션 값
+ *    2.1. 각 영역별로 지정 하세요. 컴포넌트 초기화 시 각 영역별 값들을 자동으로 기본옵션으로 지정 해 줍니다.
+ *         ex) 2.1.1 모든 N.grid의 높이를 300으로 지정하고 싶음.
+ *                   - N.context.attr("ui") 의 grid 키에 height 속성을 추가하고 값은 300 을 지정
+ *             2.1.2 모든 N.form에 html을 인식 시키고 싶음.
+ *                   - N.context.attr("ui") 의 form 키에 html 속성을 추가하고 값은 true 로 지정
+ *
  * 3. 컴포넌트 클래스의 기본 옵션 값
  */
 (function(N) {
@@ -11,7 +19,13 @@
 	 * Natural-CORE Config
 	 */
 	N.context.attr("core", {
+		/**
+		 * 로케일
+		 */
 		"locale" : "ko_KR",
+		/**
+		 * 전역 다국어 메시지
+		 */
 		"message" : {
 			"ko_KR" : {},
 			"en_US" : {}
@@ -24,6 +38,9 @@
 	     * 체크박스 선택 안됐을때 기본 값
 	     */
 	    sgUnChkdVal : "N", //N, 0, off
+	    /**
+	     * 문자열 구분자
+	     */
 	    spltSepa : "$@^",
 	    /**
 	     * N.context.attr("architecture").page.context 로 페이지가 전환될때 마다 실행될 가비지 컬렉터의 모드
@@ -39,7 +56,7 @@
 		 * Natural-JS 의 구동영역(지정 필수)
 		 */
 		"page" : {
-			"context" : "#naturalJsContents"
+			"context" : ".docs__ > .docs_contents__.visible__"
 		},
 		/**
 		 * N.cont(Controller)에 정의한 오브젝트들을 대상으로 하는 관점 지향 프로그래밍(AOP) 설정
@@ -153,10 +170,6 @@
 			"request" : {
 				"options" : {
 					/**
-					 * 기본 Method
-					 */
-					"type" : "GET",
-					/**
 					 * 기본 contentType
 					 */
 					"contentType" : "application/json; charset=utf-8",
@@ -165,8 +178,8 @@
 					 */
 					"cache" : true,
 					/**
-					 * 페이지 전환 없는 방식의 사이트 구현 시 Ajax 통신 시(async)
-					 * 요청할 때 location.href 와 응답 올때 location.href 을 비교하여 오류 방지 할건지 여부
+					 * Single Page Application(SPA) 개발 시 N.comm(async) 으로 데이터를 요청하고 요청이 오기전에 다른 페이지로 전환 했을때
+					 * 요청할 때 location.href 와 응답 올때 location.href 을 비교하여 틀리면 요청을 중지 할 건지 여부
 					 */
 					"urlSync" : true,
 					/**
@@ -357,7 +370,7 @@
 			/**
 			 * Popup Element 가 담길 영역
 			 */
-			"container" : "#naturalJsContents",
+			"container" : ".docs__ > .docs_contents__.visible__",
 			/**
 			 * 버튼 스타일(Required)
 			 */
@@ -380,15 +393,8 @@
 				left : +2,
 				right : -2
 			},
-			"draggable" : true,
-			"alwaysOnTop" : true,
 			/**
-			 * 페이지의 요소들이 동적으로 사이즈가 조절될 때 N.alert 의 모달오버레이와 메시지 박스의 위치를 자동으로 맞춰줄지 여부
-			 *  주) 성능적으로 최적화하기 위해서는 false로 지정하는게 좋고 false로 지정 시 탭(N.tab)이 전환되거나 페이지가 리다이렉트 되지않고 논리적으로 전환될때 N.alert 의 요소가 남아있음.
-			 */
-			"dynPos" : true,
-			/**
-			 * 필수 값
+			 * 인풋 메시지 설정
 			 */
 			"input" : {
 				/**
@@ -401,7 +407,7 @@
 				closeBtn : "&times;"
 			},
 			/**
-			 * 필수 값
+			 * 다국어 메시지
 			 */
 			"message" : {
 				"ko_KR" : {
@@ -415,14 +421,15 @@
 			}
 		},
 		"popup" : {
-			"draggable" : true,
-			"alwaysOnTop" : true
+
 		},
 		"tab" : {
 
 		},
 		"datepicker" : {
-			"focusin" : true,
+			/**
+			 * 다국어 메시지
+			 */
 			"message" : {
 				"ko_KR" : {
 					"year" : "년",
@@ -450,53 +457,12 @@
 			/**
 			 * 기본 value 값
 			 */
-			"val" : "val",
-			/**
-			 * select 요소에 option 을 덮어쓸건지 더할건지 지정
-			 */
-			"append" : true
+			"val" : "val"
 		},
 		"form" : {
-			/**
-			 * 바인드된 데이터의 html 을 인식 할건지 여부
-			 */
-			"html" : false,
-			/**
-			 * 실시간 데이터 검증을 할 건지 여부
-			 */
-			"validate" : true,
-			/**
-			 * 바인드된 데이터의 새로운 row 생성시 위치를 최상단에 만들건지 여부
-			 */
-			"addTop" : false
+
 		},
 		"grid" : {
-			/**
-			 * 그리드에서 스크롤할때 위, 아래 끝에 다다르면 전체 페이지가(window scroll) 스크롤 되는것을 방지하기 위한 기능 활성 여부
-			 */
-			"windowScrollLock" : true,
-			/**
-			 * bind 시 row 생성 delay(ms)
-			 */
-			"createRowDelay" : 1,
-			/**
-			 * 헤더픽스형일 경우 스크롤 페이징 사이즈(대용량 데이터 처리)
-			 */
-			/**
-			 * 바인드된 데이터의 새로운 row 생성시 위치를 최상단에 만들건지 여부
-			 */
-			"addTop" : false,
-			"scrollPaging" : {
-				"size" : 50
-			},
-			/**
-			 * 세로 길이조절 기능 활성화 여부
-			 */
-			"vResizable" : false,
-			/**
-			 * 소트 기능 활성화 여부
-			 */
-			"sortable" : false,
 			/**
 			 * 소트기능 활설화 시 표시 구분자(html 태그 가능)
 			 */
@@ -505,7 +471,7 @@
 				"desc" : "▲"
 			},
 			/**
-			 * Grid 에서 사용 할 메시지 다국어 처리
+			 * 다국어 메시지
 			 */
 			"message" : {
 				"ko_KR" : {
@@ -550,11 +516,16 @@
 	 */
 	N.context.attr("ui.shell", {
 		"notify" : {
+			/**
+			 * 메시지가 표시 될 위치
+			 */
 			"position" : {
 				top : 10,
 				right : 10
 			},
-			"alwaysOnTop" : true,
+			/**
+			 * 다국어 메시지
+			 */
 			"message" : {
 				"ko_KR" : {
 					"close" : "닫기"
