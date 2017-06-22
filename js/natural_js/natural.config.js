@@ -1,9 +1,17 @@
 /**
  * Natural-JS에서 제공하는 라이브러리 및 컴포넌트의 전역 옵션 값 설정
+ * 여기에 기본으로 정의 된 값들은 제거하면 안 됨. 추가만 가능
  *
  * 컴포넌트들의 옵션 적용 순서
  * 1. 컴포넌트 초기화시 지정한 옵션 값
+ *
  * 2. 여기(N.Config)에서 지정한 옵션 값
+ *    2.1. 각 영역별로 지정 하세요. 컴포넌트 초기화 시 각 영역별 값들을 자동으로 기본옵션으로 지정 해 줍니다.
+ *         ex) 2.1.1 모든 N.grid의 높이를 300으로 지정하고 싶음.
+ *                   - N.context.attr("ui") 의 grid 키에 height 속성을 추가하고 값은 300 을 지정
+ *             2.1.2 모든 N.form에 html을 인식 시키고 싶음.
+ *                   - N.context.attr("ui") 의 form 키에 html 속성을 추가하고 값은 true 로 지정
+ *
  * 3. 컴포넌트 클래스의 기본 옵션 값
  */
 (function(N) {
@@ -11,7 +19,13 @@
 	 * Natural-CORE Config
 	 */
 	N.context.attr("core", {
+		/**
+		 * 로케일
+		 */
 		"locale" : "ko_KR",
+		/**
+		 * 전역 다국어 메시지
+		 */
 		"message" : {
 			"ko_KR" : {},
 			"en_US" : {}
@@ -24,6 +38,9 @@
 	     * 체크박스 선택 안됐을때 기본 값
 	     */
 	    sgUnChkdVal : "N", //N, 0, off
+	    /**
+	     * 문자열 구분자
+	     */
 	    spltSepa : "$@^",
 	    /**
 	     * N.context.attr("architecture").page.context 로 페이지가 전환될때 마다 실행될 가비지 컬렉터의 모드
@@ -39,7 +56,7 @@
 		 * Natural-JS 의 구동영역(지정 필수)
 		 */
 		"page" : {
-			"context" : "#naturalJsContents, .page__ > .page_contents__.visible__"
+			"context" : ".docs__ > .docs_contents__.visible__"
 		},
 		/**
 		 * N.cont(Controller)에 정의한 오브젝트들을 대상으로 하는 관점 지향 프로그래밍(AOP) 설정
@@ -200,7 +217,9 @@
 			"request" : {
 				"options" : {
 					/**
-					 * 기본 Method
+					 * 기본 Request Method
+					 * GET 으로 되어 있으면 JSON 형태의 파라미터가 q라는 파라미터명으로 q={a:1} 와 같이 전달 됩니다.
+					 * JSON Object String 을 Request Body에 온전히 서버로 전송하려면 반드시 POST로 바꿔 주시기 바랍니다.
 					 */
 					"type" : "GET",
 					/**
@@ -212,8 +231,8 @@
 					 */
 					"cache" : true,
 					/**
-					 * 페이지 전환 없는 방식의 사이트 구현 시 Ajax 통신 시(async)
-					 * 요청할 때 location.href 와 응답 올때 location.href 을 비교하여 오류 방지 할건지 여부
+					 * Single Page Application(SPA) 개발 시 N.comm(async) 으로 데이터를 요청하고 요청이 오기전에 다른 페이지로 전환 했을때
+					 * 요청할 때 location.href 와 응답 올때 location.href 을 비교하여 틀리면 요청을 중지 할 건지 여부
 					 */
 					"urlSync" : true,
 					/**
@@ -223,12 +242,7 @@
 					/**
 					 * 특정 영역에 html 페이지를 불러올때 덮어 쓸건지 더할건지 여부
 					 */
-					"append" : false,
-					/**
-					 * 특정 영역에 html 페이지를 불러올때 전환 효과 지정, false 이면 효과 없음.
-					 * ex) ["fadeIn", 300, null], 적용안할때는 false
-					 */
-					"effect" : false
+					"append" : false
 				}
 			}
 		}
@@ -240,15 +254,15 @@
 	N.context.attr("data", {
 		"formatter" : {
 			/**
-			 * 사용자 정의 포멧 룰 - 기본제공되는 데이터 포멧 룰 외에 추가로 지정하고 싶을 때 작성 userRules 오브젝트
-			 * 안에 function 명이 룰 명이 되고 포멧된 값을 반환(return)하면 됨.
+			 * 사용자 정의 포멧 룰 - 기본제공되는 데이터 포멧 룰 외에 추가로 지정하고 싶을 때 작성
+			 * userRules 오브젝트 안에 function 명이 룰 명이 되고 포멧된 값을 반환(return)하면 됨.
 			 */
 			"userRules" : {
-				// 함수 첫번째 인자는 검증 데이터가 들어오고 두번째 인자는 옵션값이 들어옴. natural.data.js 소스의
-				// Formatter 부분 참고
+				// 함수 첫번째 인자는 검증 데이터가 들어오고 두번째 인자는 옵션값이 들어옴. natural.data.js 소스의 Formatter 부분 참고
 			},
 			/**
-			 * 사이트 전역으로 사용할 날짜포멧 지정 Y : 년, m : 월, d : 일, H : 시, i : 분, s : 초
+			 * 사이트 전역으로 사용할 날짜포멧 지정
+			 * Y : 년, m : 월, d : 일, H : 시, i : 분, s : 초
 			 */
 			"date" : {
 				/**
@@ -409,7 +423,7 @@
 			/**
 			 * Popup Element 가 담길 영역
 			 */
-			"container" : "#naturalJsContents, .page__ > .page_contents__.visible__",
+			"container" : ".docs__ > .docs_contents__.visible__",
 			/**
 			 * 버튼 스타일(Required)
 			 */
@@ -440,7 +454,7 @@
 			 */
 			"dynPos" : true,
 			/**
-			 * 필수 값
+			 * 인풋 메시지 설정
 			 */
 			"input" : {
 				/**
@@ -453,7 +467,7 @@
 				closeBtn : "&times;"
 			},
 			/**
-			 * 필수 값
+			 * 다국어 메시지
 			 */
 			"message" : {
 				"ko_KR" : {
@@ -468,22 +482,16 @@
 		},
 		"popup" : {
 			"draggable" : true,
-			"alwaysOnTop" : true,
-			/**
-			 * 버튼 상태 변경에 따른 fade 효과 적용 유무
-			 */
-			"button" : {
-				"effect" : true
-			}
+			"alwaysOnTop" : true
 		},
 		"tab" : {
-			/**
-			 * 탭 컨텐츠 표시할때 효과
-			 */
-			"effect" : false
+
 		},
 		"datepicker" : {
 			"focusin" : true,
+			/**
+			 * 다국어 메시지
+			 */
 			"message" : {
 				"ko_KR" : {
 					"year" : "년",
@@ -566,7 +574,7 @@
 				"desc" : "▲"
 			},
 			/**
-			 * Grid 에서 사용 할 메시지 다국어 처리
+			 * 다국어 메시지
 			 */
 			"message" : {
 				"ko_KR" : {
@@ -611,17 +619,118 @@
 	 */
 	N.context.attr("ui.shell", {
 		"notify" : {
-			"position" : {
-				top : 10,
-				right : 10
-			},
 			"alwaysOnTop" : true,
+			/**
+			 * 다국어 메시지
+			 */
 			"message" : {
 				"ko_KR" : {
 					"close" : "닫기"
 				},
 				"en_US" : {
 					"close" : "Close"
+				}
+			}
+		},
+		"docs" : {
+			"alwaysOnTop" : true,
+			"maxStateful" : 10,
+			/*
+			"onBeforeLoad" : function(docId, target) {
+				N.log("G_onBeforeLoad", this, docId, target);
+			},
+			"onLoad" : function(docId, cont) {
+				N.log("G_onLoad", this, docId, cont);
+			},
+			*/
+			"onBeforeLoadEntire" : function(docId) {
+				var maxZindex = N.element.maxZindex(N(this.options.alwaysOnTopCalcTarget)) + 1;
+				if($("#ajaxloader_overlay__").length > 0) {
+					$("#ajaxloader_overlay__, #ajaxloader__").css({
+						"z-index" : String(maxZindex)
+					}).removeClass("hidden__").show();
+				} else {
+					$('<div id="ajaxloader_overlay__"></div>').css({
+						"z-index" : String(maxZindex)
+					}).click(function(e) {
+						e.stopPropagation();
+					}).appendTo("body").bind(N.element.whichAnimationEvent(), function(e){
+						$(this).hide().removeClass("hidden__");
+			        }).trigger("nothing");
+
+					$('<div id="ajaxloader__"></div>').css({
+						"z-index" : String(maxZindex + 1)
+					}).appendTo("body").bind(N.element.whichAnimationEvent(), function(e){
+			            $(this).hide().removeClass("hidden__");
+			        }).trigger("nothing");
+				}
+			},
+			"onLoadEntire" : function(docId) {
+				$("#ajaxloader__, #ajaxloader_overlay__").addClass("hidden__");
+			},
+			/*
+			"onBeforeActive" : function(docId, isFromDocsTabList, isNotLoaded) {
+				N.log("G_onBeforeActive", this, docId, isFromDocsTabList, isNotLoaded);
+			},
+			*/
+			"onActive" : function(docId, isFromDocsTabList, isNotLoaded) {
+				// Google Analytics
+				var hashVal = location.hash;
+				if(N.string.isEmpty(hashVal)) {
+					hashVal = "#home/home0100";
+				}
+				if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 9) {
+					ga('create', 'UA-58001949-2', 'auto');
+					ga('send', {
+						'hitType': 'pageview',
+						'page': hashVal
+					});
+				}
+			},
+			/*
+			"onBeforeInactive" : function(docId) {
+				N.log("G_onBeforeInactive", this, docId);
+			},
+			"onInactive" : function(docId) {
+				N.log("G_onInactive", this, docId);
+			},
+			"onBeforeRemoveState" : function(docId) {
+				N.log("G_onBeforeRemoveState", this, docId);
+			},
+			"onRemoveState" : function(docId) {
+				N.log("G_onRemoveState", this, docId);
+			},
+			"onBeforeRemove" : function(docId) {
+				N.log("G_onBeforeRemove", this, docId);
+			},
+			"onRemove" : function(docId) {
+				N.log("G_onRemove", this, docId);
+			},
+			*/
+			"message" : {
+				"ko_KR" : {
+					"closeAllTitle" : "메뉴 전체 닫기",
+					"closeAll" : "전체닫기",
+					"closeAllQ" : "선택한 메뉴를 제외하고 열린 메뉴 전체를 닫겠습니까?",
+					"docListTitle" : "열린 메뉴 목록",
+					"docList" : "메뉴목록",
+					"selDocument" : "{0} 메뉴 선택",
+					"close" : "메뉴 닫기",
+					"closeConf" : "\"{0}\" 메뉴에 편집중인 항목이 있습니다. 무시하고 메뉴를 닫겠습니까?",
+					"maxTabs" : "최대 {0} 개의 메뉴 만 열 수 있습니다. <br>다른 메뉴 탭을 닫고 다시 시도 하세요.",
+					"maxStateful" : "선택한 메뉴가 활성화 되면 설정 된 최대 상태유지 메뉴 개수({1} 개)가 초과되어<br>마지막으로 선택 된 \"{0}\" 메뉴의 상태가 초기화 됩니다.<br>메뉴를 선택 하겠습니까?"
+				},
+				"en_US" : {
+					"closeAllTitle" : "Close all menus",
+					"closeAll" : "Close all",
+					"closeAllQ" : "Are you sure you want to close the entire open menu except for the selected menu?",
+					"docListTitle" : "Opened menu list",
+					"docList" : "Menu list",
+					"selDocument" : "Select the {0} menu",
+					"close" : "Close the menu",
+					"closeConf" : "There is an item being edited in the \"{0}\" memu. Are you sure you want to close the menu?",
+					"maxTabs" : "You can only open up to {0} menus. <br>Close other menu tabs and try again.",
+					"maxStateful" : "선택한 메뉴가 활성화 되면 설정 된 최대 상태유지 메뉴 개수({1} 개)가 초과되어<br>마지막으로 선택 된 \"{0}\" 메뉴의 상태가 초기화 됩니다.<br>메뉴를 선택 하겠습니까?"
 				}
 			}
 		}

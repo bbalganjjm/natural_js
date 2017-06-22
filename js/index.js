@@ -1,10 +1,11 @@
 var IndexController = {
+	docs : null,
 	init : function(window) {
-		this.loadWebFont();
 		this.setLocale();
+		this.docs = $("#docsContainer__").docs();
+		this.loadWebFont();
 		this.googleAnalytics();
 		this.loadHeader();
-		this.loadBodySection();
 		this.loadFooter();
 		if(N.locale() === "en_US") {
 			this.notice();
@@ -57,32 +58,30 @@ var IndexController = {
 				window.sessionStorage.locale = "en_US";
 				window.location.reload();
 			});
+
+			setTimeout(function() {
+				IndexController.loadBodySection();
+			}, 0);
 		});
 	},
 	loadBodySection : function() {
+		var docId;
+		var docNm;
+		var url;
 		if(N.string.trimToNull(location.hash) !== null) {
-			N(N.context.attr("architecture").page.context).comm("html/" + N.string.trimToEmpty(location.hash).replace("#", "") + ".html").submit(function() {
-				// Google Analytics
-				if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 9) {
-					ga('create', 'UA-58001949-2', 'auto');
-					ga('send', {
-						'hitType': 'pageview',
-						'page': location.hash
-					});
-				}
-			});
+			var fileName = N.string.trimToEmpty(location.hash).replace("#", "");
+			docId = fileName.substring(fileName.indexOf("/") + 1);
+			docNm = $("#__header > nav > ul a[href='" + "html/" + fileName + ".html']").text();
+			url = "html/" + fileName + ".html";
 		} else {
-			N(N.context.attr("architecture").page.context).comm("html/home/home0100.html").submit(function() {
-				// Google Analytics
-				if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 9) {
-					ga('create', 'UA-58001949-2', 'auto');
-					ga('send', {
-						'hitType': 'pageview',
-						'page': '#home/home0100'
-					});
-				}
-			});
+			var docId = "home0100";
+			var docNm = "Home";
+			var url = "html/home/home0100.html";
 		}
+
+		this.docs.add(docId, docNm, {
+			"url" : url
+		});
 	},
 	loadFooter : function() {
 		N("footer").comm("html/indx/footer.html").submit();
@@ -106,22 +105,51 @@ var CommonUtilController = {
     setPageLinks : function(eles) {
 		N(eles).bind("click touchstart", function(e) {
 			var href = N(this).attr("href");
+			var text = N(this).text();
 			if(N.string.trimToEmpty(href).indexOf("#") < 0
 					&& N.string.trimToEmpty(href).indexOf(".html") > -1
 					&& N.string.trimToNull(href) !== null) {
 				e.preventDefault();
+
 				var hash_ = href.replace("http://bbalganjjm.github.io/natural_js/", "").replace(/\.html/g, "").replace(/html\//g, "");
-				N(N.context.attr("architecture").page.context).comm(href).submit(function() {
-					// Google Analytics
-					if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 9) {
-						ga('create', 'UA-58001949-2', 'auto');
-						ga('send',  {
-							'hitType': 'pageview',
-							'page': "#" + hash_
-						});
-					}
-				});
 				location.hash = hash_;
+				var docId = hash_.substring(hash_.indexOf("/") + 1);
+				IndexController.docs.add(docId, text, {
+					url : href
+					/*
+					,
+					"onBeforeLoad" : function(docId, target) {
+						N.log("L_onBeforeLoad", this, docId, target);
+					},
+					"onLoad" : function(docId, cont) {
+						N.log("L_onLoad", this, docId, cont);
+					},
+					"onBeforeActive" : function(docId, isFromDocsTabList, isNotLoaded) {
+						N.log("L_onBeforeActive", this, docId, isFromDocsTabList, isNotLoaded);
+					},
+					"onActive" : function(docId, isFromDocsTabList, isNotLoaded) {
+						N.log("L_onActive", this, docId, isFromDocsTabList, isNotLoaded);
+					},
+					"onBeforeInactive" : function(docId) {
+						N.log("L_onBeforeInactive", this, docId);
+					},
+					"onInactive" : function(docId) {
+						N.log("L_onInactive", this, docId);
+					},
+					"onBeforeRemoveState" : function(docId) {
+						N.log("L_onBeforeRemoveState", this, docId);
+					},
+					"onRemoveState" : function(docId) {
+						N.log("L_onRemoveState", this, docId);
+					},
+					"onBeforeRemove" : function(docId) {
+						N.log("L_onBeforeRemove", this, docId);
+					},
+					"onRemove" : function(docId) {
+						N.log("L_onRemove", this, docId);
+					}
+					*/
+				});
 			}
 		});
 	},

@@ -178,7 +178,7 @@
 	</div>
 	<nav>
 		<ul>
-			<li><a href="./">Home</a></li>
+			<li class="home"><a href="html/home/home0100.html">Home</a></li>
 			<li lang="ko_KR"><a href="#">소개</a>
 				<ul>
 					<li><a href="html/intr/intr0100.html" lang="ko_KR">Natural-JS 소개</a></li>
@@ -248,7 +248,8 @@
 <script type="text/javascript">
 	N("#__header").cont({
 		init : function(view, request) {
-			CommonUtilController.setPageLinks("nav > ul > li > ul a");
+			CommonUtilController.setPageLinks("nav > ul > li > ul a, nav > ul > li.home > a");
+
 			var headerHeight = view.outerHeight();
 			var scrollTop;
 			N(window).scroll(function(e) {

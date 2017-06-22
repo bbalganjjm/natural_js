@@ -187,6 +187,12 @@
 			"request" : {
 				"options" : {
 					/**
+					 * 기본 Request Method
+					 * GET 으로 되어 있으면 JSON 형태의 파라미터가 q라는 파라미터명으로 q={a:1} 와 같이 전달 됩니다.
+					 * JSON Object String 을 Request Body에 온전히 서버로 전송하려면 반드시 POST로 바꿔 주기 바랍니다.
+					 */
+					"type" : "GET",
+					/**
 					 * 기본 contentType
 					 */
 					"contentType" : "application/json; charset=utf-8",
@@ -533,13 +539,6 @@
 	 */
 	N.context.attr("ui.shell", {
 		"notify" : {
-			/**
-			 * 메시지가 표시 될 위치
-			 */
-			"position" : {
-				top : 10,
-				right : 10
-			},
 			/**
 			 * 다국어 메시지
 			 */
