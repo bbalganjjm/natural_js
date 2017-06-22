@@ -93,7 +93,7 @@
 				</select><br>
 				<label for="data" lang="ko_KR">
 					undefined : JSON Object Array 타입의 모든 데이터를 반환합니다.<br>
-					false : jQuery Object 타입의 모든 데이터를 반환합니다.<br> 
+					false : jQuery Object 타입의 모든 데이터를 반환합니다.<br>
 				</label>
 				<label for="data" lang="en_US">
 					undefined : Return all data of pure JSON Object array type<br>
@@ -150,7 +150,7 @@
 	    	// bind events
 	    	N("#btnInit", view).click(function(e) {
 	            e.preventDefault();
-	            N.comm("/natural_js/html/apid/data/grid.json").submit(function(data) {
+	            N.comm("html/apid/data/grid.json").submit(function(data) {
 	            	var opts = {
     	       			context : N("#context", view).val(),
     	       			totalCount : parseInt(N("#totalCount", view).val()) > 0 ? parseInt(N("#totalCount", view).val()) : undefined,
