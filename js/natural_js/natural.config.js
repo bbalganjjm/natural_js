@@ -635,6 +635,7 @@
 		"docs" : {
 			"alwaysOnTop" : true,
 			"maxStateful" : 10,
+			"maxTabs" : 20,
 			"entireLoadIndicator" : true,
 			"entireLoadScreenBlock" : true,
 			/*
