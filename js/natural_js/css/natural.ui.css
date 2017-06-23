@@ -1143,11 +1143,10 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 		line-height: 31px;
 	}
 }
-/* Safari only override */
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-	::i-block-chrome,.docs__>.docs_tab_context__>ul.docs_tabs__ li>.docs_tab_active_btn__ {
-		line-height: 31px;
-	}
+
+/* Safari 9.0+ only override */
+_::-webkit-:not(:root:root), .docs__>.docs_tab_context__>ul.docs_tabs__ li>.docs_tab_active_btn__ {
+	line-height: 31px;
 }
 
 .docs__>.docs_tab_context__>ul.docs_tabs__>li>.docs_tab_close_btn__>span {
@@ -1165,11 +1164,9 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 		margin-top: -2px;
 	}
 }
-/* Safari only override */
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-	::i-block-chrome,.docs__>.docs_tab_context__>ul.docs_tabs__>li>.docs_tab_close_btn__>span {
-		margin-top: -2px;
-	}
+/* Safari 9.0+ only override */
+_::-webkit-:not(:root:root), .docs__>.docs_tab_context__>ul.docs_tabs__>li>.docs_tab_close_btn__>span {
+	margin-top: -2px;
 }
 
 .docs__>.docs_tab_context__>ul.docs_tabs__ li.active__>a {text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.22);}
