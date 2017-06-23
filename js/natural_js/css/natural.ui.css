@@ -1208,7 +1208,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .docs__>.docs_tab_context__>ul.docs_tab_utils__>.docs_tab_list_item__ .docs_tab_list__ > .docs_tab__ > .docs_tab_active_btn__ {
-	line-height: 17px;
+	line-height: 19px;
 	color: #006600;
 	white-space: nowrap;
 	font-size: 11px;
