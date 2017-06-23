@@ -1123,6 +1123,9 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	background-color: #a1d8a1;
 	line-height: 10px;
 }
+.docs__>.docs_tab_context__>ul.docs_tab_utils__>li {
+	height: 30px;
+}
 
 .docs__>.docs_tab_context__>ul.docs_tab_utils__>li>a {
 	color: #f3f9d2;
@@ -1138,7 +1141,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	padding: 0 5px;
 }
 .docs__.ios__>.docs_tab_context__>ul.docs_tabs__ li>.docs_tab_active_btn__ {
-	line-height: 30px;
+	line-height: 31px;
 }
 /* Firefox only override */
 @-moz-document url-prefix() {
@@ -1157,7 +1160,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 		url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAY0lEQVQoz2NgoCsIvRoaA8R1+DCy4gQg/k8IwxS7APFPJImjUP5PKBuhIexqmA6Q8RHNpDAgDoDiMBQNQOI4Fqu/hl8NFwNhEBtdgwFJNkD94AbEv4nyA1IoJREdSmTFA7EAABG+2P9dT7JgAAAAAElFTkSuQmCC");
 }
 .docs__.ios__>.docs_tab_context__>ul.docs_tabs__>li>.docs_tab_close_btn__>span {
-	margin-top: -3px;
+	margin-top: -2px;
 }
 /* Firefox only override */
 @-moz-document url-prefix() {
