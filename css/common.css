@@ -6,7 +6,6 @@
  *    user zoom.
  */
 html {
-	font-family: "Nanum Gothic Coding", "Malgun Gothic", "dotum", "Segoe UI", sans-serif; /* 1 */
 	-ms-text-size-adjust: 100%; /* 2 */
 	-webkit-text-size-adjust: 100%; /* 2 */
 }
