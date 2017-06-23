@@ -6,7 +6,7 @@
  *    user zoom.
  */
 html {
-	font-family: "Malgun Gothic", "dotum", "Segoe UI", sans-serif; /* 1 */
+	font-family: "Nanum Gothic Coding", "Malgun Gothic", "dotum", "Segoe UI", sans-serif; /* 1 */
 	-ms-text-size-adjust: 100%; /* 2 */
 	-webkit-text-size-adjust: 100%; /* 2 */
 }
@@ -16,7 +16,7 @@ html {
  */
 body {
 	margin: 0;
-	font-family: "Malgun Gothic", "dotum", "Segoe UI", sans-serif;
+	font-family: "Nanum Gothic Coding", "Malgun Gothic", "dotum", "Segoe UI", sans-serif;
 	color: #007700;
 	min-width: 578px;
 	background-image: url("../images/body_back.jpg");
@@ -75,7 +75,7 @@ input[type='text'], input[type='password'], select, textarea {
 	padding: 3px;
 	border: 1px solid #cccccc;
 	font-size: 13px;
-	font-family: "Malgun Gothic", "dotum", "Segoe UI", sans-serif;
+	font-family: "Nanum Gothic Coding", "Malgun Gothic", "dotum", "Segoe UI", sans-serif;
 	color: #004a00;
 	vertical-align: middle;
 	background-color: #ffffff;
@@ -108,7 +108,7 @@ a {
 	text-decoration: none;
 	font-weight: normal;
 	font-size: 1em;
-	font-family: "Malgun Gothic", "dotum", "Segoe UI", sans-serif;
+	font-family: "Nanum Gothic Coding", "Malgun Gothic", "dotum", "Segoe UI", sans-serif;
 	color: #004a00;
 }
 
