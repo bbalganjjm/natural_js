@@ -266,7 +266,7 @@
 			});
 
 			$(document).bind("touchstart", function(e) {
-				if(!$(e.target).is("#__header nav>ul>li>a")) {
+				if(!$(e.target).is("#__header nav")) {
 					setTimeout(function() {
 						$("#__header nav>ul>li>ul:visible").hide();
 					}, 15);
