@@ -103,7 +103,7 @@ var IndexController = {
 
 var CommonUtilController = {
     setPageLinks : function(eles) {
-		N(eles).bind("click", function(e) {
+		N(eles).bind("click touchstart", function(e) {
 			var href = N(this).attr("href");
 			var text = N(this).text();
 			if(N.string.trimToEmpty(href).indexOf("#") < 0
