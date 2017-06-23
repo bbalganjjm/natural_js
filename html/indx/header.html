@@ -265,15 +265,15 @@
 				}
 			});
 
-			/*
 			$(document).bind("touchstart", function(e) {
 				if(!$(e.target).is("#__header nav>ul>li>a")) {
 					setTimeout(function() {
-						$("#__header nav>ul>li>ul:visible").hide();
+						IndexController.docs.options.context.find(".docs_tabs__ > .docs_tab__:first").get(0).focus()
 					}, 15);
 				}
 			});
 
+			/*
 			$("#__header nav>ul>li>a").bind("touchstart", function(e) {
 				var self = $(this);
 				var time = setTimeout(function() {
