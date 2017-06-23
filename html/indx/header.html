@@ -272,15 +272,6 @@
 					}, 15);
 				}
 			});
-
-			$("#__header nav>ul>li>a").bind("touchstart", function(e) {
-				var self = $(this);
-				var time = setTimeout(function() {
-					clearTimeout(time);
-					$("#__header nav>ul>li>ul:visible").hide();
-					self.parent().find("ul").show();
-				}, 15);
-			});
 		}
 	});
 </script>
