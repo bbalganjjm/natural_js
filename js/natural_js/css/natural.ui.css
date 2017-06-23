@@ -1123,7 +1123,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	background-color: #a1d8a1;
 	line-height: 10px;
 }
-.docs__>.docs_tab_context__>ul.docs_tab_utils__>li {
+.docs__.ios__>.docs_tab_context__>ul.docs_tab_utils__>li {
 	height: 30px;
 }
 
