@@ -268,7 +268,7 @@
 			$(document).bind("touchstart", function(e) {
 				if(!$(e.target).is("#__header nav>ul>li>a")) {
 					setTimeout(function() {
-						IndexController.docs.options.context.find(".docs_tabs__ > .docs_tab__:first").get(0).focus()
+						IndexController.docs.options.context.find(".docs_tabs__ > .docs_tab__:first a").get(0).focus()
 					}, 15);
 				}
 			});
