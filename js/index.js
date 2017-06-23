@@ -150,6 +150,10 @@ var CommonUtilController = {
 					}
 					*/
 				});
+
+				setTimeout(function() {
+					IndexController.docs.options.context.find(".docs_tabs__ > .docs_tab__:first").get(0).focus();
+				}, 30);
 			}
 		});
 	},
