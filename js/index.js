@@ -3,10 +3,10 @@ var IndexController = {
 	init : function(window) {
 		this.setLocale();
 		this.loadWebFont();
-		this.googleAnalytics();
 		this.loadHeader();
 		this.loadFooter();
 		this.docs = $("#docsContainer__").docs();
+		this.googleAnalytics();
 		if(N.locale() === "en_US") {
 			this.notice();
 		}
