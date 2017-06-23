@@ -1089,7 +1089,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	text-align: center;
 }
 .docs__.ios__>.docs_tab_context__>ul.docs_tabs__>.docs_tab__ {
-	height: 35px;
+	padding: 7px 0;
 }
 
 .docs__>.docs_tab_context__>ul.docs_tabs__>.docs_tab__.inactive__ {
