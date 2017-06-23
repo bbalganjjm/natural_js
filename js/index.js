@@ -1,9 +1,9 @@
 var IndexController = {
 	docs : null,
 	init : function(window) {
+		this.loadWebFont();
 		this.setLocale();
 		this.docs = $("#docsContainer__").docs();
-		this.loadWebFont();
 		this.googleAnalytics();
 		this.loadHeader();
 		this.loadFooter();
