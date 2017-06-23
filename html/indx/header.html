@@ -273,16 +273,11 @@
 				}
 			});
 
-			/*
 			$("#__header nav>ul>li>a").bind("touchstart", function(e) {
-				var self = $(this);
 				var time = setTimeout(function() {
-					clearTimeout(time);
-					$("#__header nav>ul>li>ul:visible").hide();
-					self.parent().find("ul").show();
+					IndexController.docs.options.context.find(".docs_tabs__ > .docs_tab__:first a").get(0).focus()
 				}, 15);
 			});
-			*/
 		}
 	});
 </script>
