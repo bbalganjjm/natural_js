@@ -1164,6 +1164,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 .docs__.ios__>.docs_tab_context__>ul.docs_tabs__>li>.docs_tab_close_btn__>span {
 	margin-top: -2px;
+	background: none;
 }
 
 
