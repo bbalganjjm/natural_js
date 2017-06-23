@@ -635,42 +635,18 @@
 		"docs" : {
 			"alwaysOnTop" : true,
 			"maxStateful" : 10,
+			"entireLoadIndicator" : true,
+			"entireLoadScreenBlock" : true,
 			/*
 			"onBeforeLoad" : function(docId, target) {
-				N.log("G_onBeforeLoad", this, docId, target);
 			},
 			"onLoad" : function(docId, cont) {
-				N.log("G_onLoad", this, docId, cont);
 			},
-			*/
-			"onBeforeLoadEntire" : function(docId) {
-				var maxZindex = N.element.maxZindex(N(this.options.alwaysOnTopCalcTarget)) + 1;
-				if($("#ajaxloader_overlay__").length > 0) {
-					$("#ajaxloader_overlay__, #ajaxloader__").css({
-						"z-index" : String(maxZindex)
-					}).removeClass("hidden__").show();
-				} else {
-					$('<div id="ajaxloader_overlay__"></div>').css({
-						"z-index" : String(maxZindex)
-					}).click(function(e) {
-						e.stopPropagation();
-					}).appendTo("body").bind(N.element.whichAnimationEvent(), function(e){
-						$(this).hide().removeClass("hidden__");
-			        }).trigger("nothing");
-
-					$('<div id="ajaxloader__"></div>').css({
-						"z-index" : String(maxZindex + 1)
-					}).appendTo("body").bind(N.element.whichAnimationEvent(), function(e){
-			            $(this).hide().removeClass("hidden__");
-			        }).trigger("nothing");
-				}
+			"onBeforeEntireLoad" : function(docId) {
 			},
-			"onLoadEntire" : function(docId) {
-				$("#ajaxloader__, #ajaxloader_overlay__").addClass("hidden__");
+			"onEntireLoad" : function(docId) {
 			},
-			/*
 			"onBeforeActive" : function(docId, isFromDocsTabList, isNotLoaded) {
-				N.log("G_onBeforeActive", this, docId, isFromDocsTabList, isNotLoaded);
 			},
 			*/
 			"onActive" : function(docId, isFromDocsTabList, isNotLoaded) {
@@ -689,31 +665,25 @@
 			},
 			/*
 			"onBeforeInactive" : function(docId) {
-				N.log("G_onBeforeInactive", this, docId);
 			},
 			"onInactive" : function(docId) {
-				N.log("G_onInactive", this, docId);
 			},
 			"onBeforeRemoveState" : function(docId) {
-				N.log("G_onBeforeRemoveState", this, docId);
 			},
 			"onRemoveState" : function(docId) {
-				N.log("G_onRemoveState", this, docId);
 			},
 			"onBeforeRemove" : function(docId) {
-				N.log("G_onBeforeRemove", this, docId);
 			},
 			"onRemove" : function(docId) {
-				N.log("G_onRemove", this, docId);
 			},
 			*/
 			"message" : {
 				"ko_KR" : {
 					"closeAllTitle" : "메뉴 전체 닫기",
-					"closeAll" : "전체닫기",
+					"closeAll" : "전체 닫기",
 					"closeAllQ" : "선택한 메뉴를 제외하고 열린 메뉴 전체를 닫겠습니까?",
 					"docListTitle" : "열린 메뉴 목록",
-					"docList" : "메뉴목록",
+					"docList" : "메뉴 목록",
 					"selDocument" : "{0} 메뉴 선택",
 					"close" : "메뉴 닫기",
 					"closeConf" : "\"{0}\" 메뉴에 편집중인 항목이 있습니다. 무시하고 메뉴를 닫겠습니까?",
