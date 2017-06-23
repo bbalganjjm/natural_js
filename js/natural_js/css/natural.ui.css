@@ -1137,9 +1137,15 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	line-height: 32px;
 	padding: 0 5px;
 }
-
+/* Firefox only override */
 @-moz-document url-prefix() {
 	.docs__>.docs_tab_context__>ul.docs_tabs__ li>.docs_tab_active_btn__ {
+		line-height: 31px;
+	}
+}
+/* Safari only override */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+	::i-block-chrome,.docs__>.docs_tab_context__>ul.docs_tabs__ li>.docs_tab_active_btn__ {
 		line-height: 31px;
 	}
 }
@@ -1153,9 +1159,15 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	background:
 		url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAY0lEQVQoz2NgoCsIvRoaA8R1+DCy4gQg/k8IwxS7APFPJImjUP5PKBuhIexqmA6Q8RHNpDAgDoDiMBQNQOI4Fqu/hl8NFwNhEBtdgwFJNkD94AbEv4nyA1IoJREdSmTFA7EAABG+2P9dT7JgAAAAAElFTkSuQmCC");
 }
-
+/* Firefox only override */
 @-moz-document url-prefix() {
 	.docs__>.docs_tab_context__>ul.docs_tabs__>li>.docs_tab_close_btn__>span {
+		margin-top: -2px;
+	}
+}
+/* Safari only override */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+	::i-block-chrome,.docs__>.docs_tab_context__>ul.docs_tabs__>li>.docs_tab_close_btn__>span {
 		margin-top: -2px;
 	}
 }
