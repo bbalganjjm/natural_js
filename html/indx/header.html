@@ -242,6 +242,7 @@
 			</li>
 			<li><a href="https://github.com/bbalganjjm/natural_js" target="blank_">GitHub</a></li>
 		</ul>
+		<span class="touchstartDummy" style="cursor: pointer;"></span>
 	</nav>
 </div>
 
@@ -265,12 +266,12 @@
 				}
 			});
 
-			$(document).bind("touchstart", function(e) {
-				if(!$(e.target).is("#__header nav>ul>li>a")) {
-					setTimeout(function() {
-						IndexController.docs.options.context.find(".docs_tabs__ > .docs_tab__:first a").get(0).focus()
-					}, 15);
-				}
+			$("#__header nav .touchstartDummy").bind("touchstart", function(e){});
+
+			$("#__header nav>ul>li a").bind("touchstart", function(e) {
+				setTimeout(function() {
+					$("#__header nav .touchstartDummy").trigger("touchstart");
+				}, 30);
 			});
 		}
 	});
