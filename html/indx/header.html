@@ -265,13 +265,24 @@
 				}
 			});
 
+			/*
 			$(document).bind("touchstart", function(e) {
-				if(!$(e.target).is("#__header nav")) {
+				if(!$(e.target).is("#__header nav>ul>li>a")) {
 					setTimeout(function() {
 						$("#__header nav>ul>li>ul:visible").hide();
 					}, 15);
 				}
 			});
+
+			$("#__header nav>ul>li>a").bind("touchstart", function(e) {
+				var self = $(this);
+				var time = setTimeout(function() {
+					clearTimeout(time);
+					$("#__header nav>ul>li>ul:visible").hide();
+					self.parent().find("ul").show();
+				}, 15);
+			});
+			*/
 		}
 	});
 </script>
