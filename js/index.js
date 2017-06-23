@@ -10,11 +10,6 @@ var IndexController = {
 		if(N.locale() === "en_US") {
 			this.notice();
 		}
-
-		document.addEventListener("touchstart", N.element.touchHandler, true);
-	    document.addEventListener("touchmove", N.element.touchHandler, true);
-	    document.addEventListener("touchend", N.element.touchHandler, true);
-	    document.addEventListener("touchcancel", N.element.touchHandler, true);
 	},
 	/**
 	 * 웹폰트
