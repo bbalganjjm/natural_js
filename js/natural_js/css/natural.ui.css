@@ -1234,21 +1234,23 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	margin: 15px 0;
 }
 
-.docs__>.docs_contents__.hidden__ > .view_context__ {
+.docs__>.docs_contents__.hidden__  {
 	position: absolute;
+	margin-top: 30px;
 	opacity: 0;
-	transition: opacity 0.15s ease;
+	transition: margin-top 0.15s cubic-bezier(0.65, -0.01, 0.21, 1), opacity 0.15s ease;
 }
 
-.docs__>.docs_contents__.visible__ > .view_context__ {
+.docs__>.docs_contents__.visible__ {
 	opacity: 1;
-	transition: opacity 0.5s ease;
+	transition: margin-top 0.3s cubic-bezier(0.65, -0.01, 0.21, 1), opacity 0.5s ease;
 }
 
-.docs__>.docs_contents__.remove__ > .view_context__ {
+.docs__>.docs_contents__.remove__ {
 	position: absolute;
+	margin-top: 115px;
 	opacity: 0;
-	transition: pacity 0.3s ease;
+	transition: margin-top 0.3s cubic-bezier(0.65, -0.01, 0.21, 1), opacity 0.3s ease;
 }
 
 .entire_load_screen_block__ {
@@ -1270,17 +1272,18 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
   position: relative;
   overflow: hidden;
   margin-top: -2px;
+  background-color: #55d555;
+  opacity: 0.6;
 }
 
 .docs__>.entire_load_indicator__:before{
   display: block;
   position: absolute;
   content: "";
-  left: -200px;
-  width: 200px;
+  left: -300px;
+  width: 300px;
   height: 2px;
-  background-color: #55d555;
-  opacity: 0.7;
+  background-color: #008800;
   animation: entire_load_indicator_ani__ 1s linear infinite;
 }
 
@@ -1289,10 +1292,6 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 @keyframes entire_load_indicator_ani__ {
-    from {left: -200px; width: 30%;}
-    50% {width: 30%;}
-    70% {width: 70%;}
-    80% {left: 50%;}
-    95% {left: 120%;}
+    from {left: -300px;}
     to {left: 100%;}
 }
