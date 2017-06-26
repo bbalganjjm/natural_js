@@ -1093,6 +1093,12 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .docs__.ios__>.docs_tab_context__>ul.docs_tabs__>.docs_tab__ {
 	padding: 7px 0;
 }
+/* Firefox only override */
+@-moz-document url-prefix() {
+	.docs__>.docs_tab_context__>ul.docs_tabs__>.docs_tab__ {
+		line-height: 31px;
+	}
+}
 
 .docs__>.docs_tab_context__>ul.docs_tabs__>.docs_tab__.inactive__ {
 	background-color: #c0eec0;
@@ -1142,12 +1148,6 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	line-height: 32px;
 	padding: 0 5px;
 }
-/* Firefox only override */
-@-moz-document url-prefix() {
-	.docs__>.docs_tab_context__>ul.docs_tabs__ li>.docs_tab_active_btn__ {
-		line-height: 31px;
-	}
-}
 
 .docs__>.docs_tab_context__>ul.docs_tabs__>li>.docs_tab_close_btn__>span {
 	position: absolute;
@@ -1165,7 +1165,9 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	}
 }
 
-.docs__>.docs_tab_context__>ul.docs_tabs__ li.active__>a {text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.22);}
+.docs__>.docs_tab_context__>ul.docs_tabs__ li.active__>a {
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.22);
+}
 
 .docs__>.docs_tab_context__>ul.docs_tab_utils__>.docs_tab_list_item__ .docs_tab_list__ {
 	position: relative;
