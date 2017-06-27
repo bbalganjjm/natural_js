@@ -1,34 +1,34 @@
 <style>
-#__header {
+.header {
 	min-width: 560px;
 	margin-bottom: 41px;
 }
 
-#__header .hgroup-back {
+.header .hgroup-back {
 	width: 100%;
 	height: 82px;
 	background-color: #002200;
 	opacity: 0.90;
 }
 
-#__header .hgroup {
+.header .hgroup {
 	margin: 0 auto;
 	max-width: 1003px;
 	min-width: 560px;
 	padding: 0 9px 0px 9px;
 }
 
-#__header .hgroup h1, #__header .hgroup h2 {
+.header .hgroup h1, .header .hgroup h2 {
 	font-size: 1em;
 	display: inline;
 }
 
-#__header .hgroup #logo {
+.header .hgroup #logo {
 	color: #030;
 	margin: 6px 0 0 3px;
 }
 
-#__header .hgroup #desc {
+.header .hgroup #desc {
     font-size: 1.15em;
     padding: 0;
     color: #008800;
@@ -36,7 +36,7 @@
     float: right;
 }
 
-#__header nav {
+.header nav {
 	width: 100%;
 	background-color: #005500;
 	opacity: 0.9;
@@ -45,7 +45,7 @@
 	z-index: 1;
 }
 
-#__header nav>ul {
+.header nav>ul {
 	list-style: none;
 	margin: 0 auto;
 	padding: 0;
@@ -55,7 +55,7 @@
 	overflow: hidden;
 }
 
-#__header nav>ul>li {
+.header nav>ul>li {
 	margin: 0;
 	padding: 10px 9px 10px 9px;
 	text-align: center;
@@ -63,7 +63,7 @@
 	width: 70px;
 }
 
-#__header nav>ul>li>a {
+.header nav>ul>li>a {
 	color: #77cc77;
 	font-weight: bold;
 	font-size: 0.97em;
@@ -76,7 +76,7 @@
 	to { transform: rotate3d(90, 0, -40, 10deg); }
 }
 
-#__header nav>ul>li>ul {
+.header nav>ul>li>ul {
 	list-style: none;
 	display: none;
 	position: absolute;
@@ -91,35 +91,35 @@
 	animation-duration: 0.5s;
 }
 
-#__header nav>ul>li:hover>a {
+.header nav>ul>li:hover>a {
 	color: #9f9;
 	text-shadow: 0 0 15px #7F7;
 }
 
-#__header nav>ul>li:hover>ul {
+.header nav>ul>li:hover>ul {
 	display: block;
 }
 
-#__header nav>ul>li>ul>li {
+.header nav>ul>li>ul>li {
 	padding: 5px 0 5px 0;
 	text-align: left;
 }
 
-#__header nav>ul>li>ul>li.nav-saction {
+.header nav>ul>li>ul>li.nav-saction {
 	padding: 0;
 	color: #449444;
 	font-size: 14px;
 	text-shadow: -1px -1px #005000;
 }
 
-#__header nav>ul>li>ul>li a {
+.header nav>ul>li>ul>li a {
 	color: #9f9;
 	font-size: 0.9em;
 	text-shadow: 1px 1px 1px #000;
 	opacity: 1;
 }
 
-#__header nav>ul>li>ul>li a:hover {
+.header nav>ul>li>ul>li a:hover {
 	text-shadow: 0 0 10px #fff;
 }
 
@@ -133,7 +133,7 @@
 	to { opacity: 0.9; }
 }
 
-#__header nav.navFix {
+.header nav.navFix {
 	position: fixed;
 	z-index: 99999;
 	width: 100%;
@@ -144,13 +144,13 @@
 	animation-duration: 1s;
 }
 
-#__header nav.navFix:hover {
+.header nav.navFix:hover {
 	opacity: 0.9;
 	animation-name: navFixOn;
 	animation-duration: 0.5s;
 }
 
-#__header #i18nButtons {
+.header #i18nButtons {
 	float: right;
 	font-size: 0.8em;
 	color: #119911;
@@ -159,12 +159,12 @@
 	margin-right: -310px;
 }
 
-#__header #i18nButtons a {
+.header #i18nButtons a {
 	color: #119911;
 	text-shadow: 1px 1px 0px #000000;
 }
 </style>
-<div id="__header">
+<div class="header">
 	<div class="hgroup-back">
 		<div class="hgroup">
 			<h1>
@@ -247,7 +247,7 @@
 </div>
 
 <script type="text/javascript">
-	N("#__header").cont({
+	N(".header").cont({
 		init : function(view, request) {
 			CommonUtilController.setPageLinks("nav > ul > li > ul a, nav > ul > li.home > a");
 

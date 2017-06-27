@@ -1,4 +1,4 @@
-<article id="__refr010504" class="apiDoc">
+<article class="refr010504 apiDoc" >
 	<h2>Popup(N.popup)</h2>
 
 	<h3 lang="ko_KR">개요</h3>
@@ -312,18 +312,18 @@
 	<pre class="line-numbers"><code class="language-markup"><xmp>
 <!-- Style -->
 <style>
-	#__POPUP01 #result { width: 400px; height: 300px; border: 1px solid #080; }
+	.POPUP01 #result { width: 400px; height: 300px; border: 1px solid #080; }
 </style>
 
 <!-- View -->
-<article id="__POPUP01" title="onOpen Example">
+<article class="POPUP01" title="onOpen Example">
 	<p id="result"></p>
 	<button id="close">닫기</button>
 </article>
 
 <!-- Controller -->
 <script type="text/javascript">
-N("#__POPUP01").cont({
+N(".POPUP01").cont({
     init : function(view, request) {
     	var caller = this.caller; // caller는 현제 팝업페이지를 열어준 N.popup 인스턴스
     	N("#close", this.view).click(function() { // 닫기버튼에 이벤트 바인드
@@ -341,17 +341,17 @@ N("#__POPUP01").cont({
 	<pre class="line-numbers"><code class="language-markup"><xmp>
 <!-- Style -->
 <style>
-	#__POPUP01 #result { width: 400px; height: 300px; border: 1px solid #080; }
+	.POPUP01 #result { width: 400px; height: 300px; border: 1px solid #080; }
 </style>
 
 <!-- View -->
-<article id="__POPUP02" title="onOpen Example">
+<article class="POPUP02" title="onOpen Example">
 	<p id="result"></p>
 </article>
 
 <!-- Controller -->
 <script type="text/javascript">
-N("#__POPUP02").cont({
+N(".POPUP02").cont({
     init : function(view, request) {
 	   	var popup = N().popup({
 	   		url: "./popup.html",
@@ -368,7 +368,7 @@ N("#__POPUP02").cont({
 </article>
 
 <script type="text/javascript">
-N("#__refr010504").cont({
+N(".refr010504").cont({
     init : function(view, request) {
 
     }

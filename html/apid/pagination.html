@@ -1,5 +1,5 @@
 <style>
-#__pagination #pagingList {
+.pagination #pagingList {
 	white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -8,7 +8,7 @@
 }
 </style>
 
-<article id="__pagination">
+<article class="demo_pagination">
 	<p lang="ko_KR" class="smallContTit">데이터 : </p>
 	<p lang="en_US" class="smallContTit">Data : </p>
 	<div class="dataBox">
@@ -140,7 +140,7 @@
 </article>
 
 <script type="text/javascript">
-	N("#__pagination").cont({
+	N(".demo_pagination").cont({
 	    init : function(view, request) {
 	    	// initialize buttons in div.btnBox
 	    	N("div.btnBox a", view).button();

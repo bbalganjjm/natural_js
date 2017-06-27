@@ -1,4 +1,4 @@
-<article id="__tree">
+<article class="demo_tree">
 	<p lang="ko_KR" class="smallContTit">데이터 : </p>
 	<p lang="en_US" class="smallContTit">Data : </p>
 	<div class="dataBox">
@@ -152,12 +152,12 @@
 			<th align="right"><label for="onCheck">onCheck</label></th>
 			<td>
 				<textarea id="onCheck" style="height: 150px;max-width: none;">function(selNodeIndex, selNodeEle, selNodeData,
-	checkedElesIndexes, checkedEles, checkedElesData, 
+	checkedElesIndexes, checkedEles, checkedElesData,
 	checkFlag) {
-		N.log(selNodeIndex, selNodeEle, 
+		N.log(selNodeIndex, selNodeEle,
 			selNodeData);
-		N.log(checkedElesIndexes, 
-			checkedEles, 
+		N.log(checkedElesIndexes,
+			checkedEles,
 			checkedElesData);
 		N.log(checkFlag);
 }</textarea><br />
@@ -233,7 +233,7 @@
 </article>
 
 <script type="text/javascript">
-	N("#__tree").cont({
+	N(".demo_tree").cont({
 	    init : function(view, request) {
 	    	// initialize buttons in div.btnBox
 	    	N("div.btnBox a", view).button();
@@ -243,10 +243,10 @@
 	    	// bind events
 	    	N("#btnInit", view).click(function(e) {
 	            e.preventDefault();
-            	
+
 	         	// data
 		    	var data = eval(N("code#data", view).text());
-	         
+
 	            var opts = {
    	       			context : N("#context", view).val(),
    	       			key : N("#key", view).val(),
@@ -260,7 +260,7 @@
          				onCheck : N.string.trimToNull(N("#onCheck", view).val()) !== null ?
    	          				eval("(" + N("#onCheck", view).val() + ")") : null
    	       		}
-            	
+
 	            tree = N(data).tree(opts);
 
 	            N("#btnInit", view).instance("button").disable();
@@ -279,12 +279,12 @@
 	    		e.preventDefault();
 	    		tree.openAll();
 	        });
-	    	
+
 	    	N("#btnCloseAll", view).click(function(e) {
 	    		e.preventDefault();
 	    		tree.closeAll(N("#isFirstNodeOpen", view).is(":checked"));
 	        });
-	    	
+
 	    	N("#btnData", view).click(function(e) {
 	        	e.preventDefault();
 	        	N("div.result", view).alert({

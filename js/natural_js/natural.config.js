@@ -65,26 +65,26 @@
 		"cont" : {
 			"advisors" : [{
 				"pointcut" : [
-					"#__refr010201:init",
-					"#__refr010202:init",
-					"#__refr010301:init",
-					"#__refr010302:init",
-					"#__refr010303:init",
-					"#__refr010401:init",
-					"#__refr010402:init",
-					"#__refr010403:init",
-					"#__refr010404:init",
-					"#__refr010405:init",
-					"#__refr010501:init",
-					"#__refr010502:init",
-					"#__refr010503:init",
-					"#__refr010504:init",
-					"#__refr010505:init",
-					"#__refr010506:init",
-					"#__refr010507:init",
-					"#__refr010508:init",
-					"#__refr010509:init",
-					"#__refr010510:init"
+					".refr010201:init",
+					".refr010202:init",
+					".refr010301:init",
+					".refr010302:init",
+					".refr010303:init",
+					".refr010401:init",
+					".refr010402:init",
+					".refr010403:init",
+					".refr010404:init",
+					".refr010405:init",
+					".refr010501:init",
+					".refr010502:init",
+					".refr010503:init",
+					".refr010504:init",
+					".refr010505:init",
+					".refr010506:init",
+					".refr010507:init",
+					".refr010508:init",
+					".refr010509:init",
+					".refr010510:init"
 				].join("|"),
 				"adviceType" : "before",
 				"fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 함수명, args 인자 */
@@ -103,8 +103,8 @@
 				}
 			}, {
 				"pointcut" : [
-					"#__refr0101:init",
-					"#__gtst0100:init"
+					".refr0101:init",
+					".gtst0100:init"
 				].join("|"),
 				"adviceType" : "before",
 				"fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 함수명, args 인자 */
@@ -121,11 +121,11 @@
 				}
 			}, {
 				"pointcut" : [
-					"#__home0100:init",
-					"#__refr0102:init",
-					"#__refr0103:init",
-					"#__refr0104:init",
-					"#__refr0105:init"
+					".home0100:init",
+					".refr0102:init",
+					".refr0103:init",
+					".refr0104:init",
+					".refr0105:init"
 				].join("|"),
 				"adviceType" : "before",
 				"fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 함수명, args 인자 */

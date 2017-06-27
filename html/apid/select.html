@@ -1,4 +1,4 @@
-<article id="__select" title="Select 예제">
+<article class="demo_select" title="Select 예제">
 	<p lang="ko_KR" class="smallContTit">데이터 : </p>
 	<p lang="en_US" class="smallContTit">Data : </p>
 	<div class="dataBox">
@@ -93,13 +93,13 @@
 		<tr>
 			<th><label for="key">key</label></th>
 			<td>
-				<input id="key" type="text" value="key" /> 
+				<input id="key" type="text" value="key" />
 				<label for="key" lang="ko_KR">name 속성 컬럼 명</label>
 				<label for="key" lang="en_US">name attribute column name</label>
 			</td>
 			<th><label for="val">val</label></th>
 			<td>
-				<input id="val" type="text" value="val" /> 
+				<input id="val" type="text" value="val" />
 				<label for="val" lang="ko_KR">value 속성 컬럼 명</label>
 				<label for="val" lang="en_US">value attribute column name</label>
 			</td>
@@ -146,12 +146,12 @@
 				</select><br>
 				<label for="data" lang="ko_KR">
 					true : 선택한 요소에 해당하는 행 데이터를 반환 합니다.<br>
-					false : jQuery Object 타입의 모든 데이터를 반환합니다.<br> 
+					false : jQuery Object 타입의 모든 데이터를 반환합니다.<br>
 					undefined : JSON Object Array 타입의 모든 데이터를 반환합니다.<br>
 				</label>
 				<label for="data" lang="en_US">
 					true : Return selected row data.<br>
-					false : Return all data of jQuery Object type.<br> 
+					false : Return all data of jQuery Object type.<br>
 					undefined : Return all data of pure JSON Object array type.
 				</label>
 			</td>
@@ -217,7 +217,7 @@
 </article>
 
 <script type="text/javascript">
-	N("#__select").cont({
+	N(".demo_select").cont({
 		"select" : null,
 	    init : function(view, request) {
 	    	// initialize buttons in div.btnBox

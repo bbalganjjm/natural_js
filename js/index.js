@@ -5,7 +5,9 @@ var IndexController = {
 		this.loadWebFont();
 		this.loadHeader();
 		this.loadFooter();
-		this.docs = $("#docsContainer__").docs();
+		this.docs = $("#docsContainer__").docs({
+			entireLoadScreenBlock : false
+		});
 		this.googleAnalytics();
 		if(N.locale() === "en_US") {
 			this.notice();
@@ -47,7 +49,7 @@ var IndexController = {
 	},
 	loadHeader : function() {
 		N("header").comm("html/indx/header.html").submit(function() {
-			var i18nButtons = $("#__header #i18nButtons");
+			var i18nButtons = $(".header #i18nButtons");
 			i18nButtons.find("#korean").click(function(e) {
 				e.preventDefault();
 				window.sessionStorage.locale = "ko_KR";
@@ -71,7 +73,7 @@ var IndexController = {
 		if(N.string.trimToNull(location.hash) !== null) {
 			var fileName = N.string.trimToEmpty(location.hash).replace("#", "");
 			docId = fileName.substring(fileName.indexOf("/") + 1);
-			docNm = $("#__header > nav > ul a[href='" + "html/" + fileName + ".html']").text();
+			docNm = $(".header > nav > ul a[href='" + "html/" + fileName + ".html']").text();
 			url = "html/" + fileName + ".html";
 		} else {
 			var docId = "home0100";

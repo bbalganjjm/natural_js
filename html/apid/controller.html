@@ -1,4 +1,4 @@
-<article id="__controller">
+<article class="demo_controller">
 	<div class="demoBox">
 		<p class="smallContTit">View Info :</p>
 		<pre class="line-numbers"><code id="view" class="language-javascript"></code></pre>
@@ -8,7 +8,7 @@
 </article>
 
 <script type="text/javascript">
-	N("#__controller").cont({
+	N(".demo_controller").cont({
 	    init : function(view, request) {
 	    	// view info
 	    	N("#view", view).text('<article id="controller">' + view.html() + "</article>");
@@ -21,7 +21,7 @@
 	    	delete requestInfo.success;
 	    	requestInfo.target = ["jQuery Object"];
 	    	N("#request", view).text(N.json.format(requestInfo));
-	    	
+
 	    	// code highlight
 	    	if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {
 				view.find("code").each(function() {

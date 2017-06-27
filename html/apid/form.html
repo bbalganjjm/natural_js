@@ -1,4 +1,4 @@
-<article id="__form">
+<article class="demo_form">
 	<p lang="ko_KR" class="smallContTit">데이터 : </p>
 	<p lang="en_US" class="smallContTit">Data : </p>
 	<div class="dataBox">
@@ -118,13 +118,13 @@
 		<tr>
 			<th width="10%" align="right"><label for="context">context</label></th>
 			<td width="40%">
-				<input id="context" type="text" value="#form" readonly="readonly" /> 
+				<input id="context" type="text" value="#form" readonly="readonly" />
 				<label for="context" lang="ko_KR">jQuery selector 입력</label>
 				<label for="context" lang="en_US">Input jQuery selector</label>
 			</td>
 			<th width="10%" align="right"><label for="validate">validate</label></th>
 			<td width="40%">
-				<input id="validate" type="checkbox" checked="checked" /> 
+				<input id="validate" type="checkbox" checked="checked" />
 				<label for="validate" lang="ko_KR">체크를 해제(false)하면 실시간(focus out) Validation Check 기능을 Off 합니다.</label>
 				<label for="validate" lang="en_US">If this checkbox with uncheck(false), off the realtime(focus out) validation check feature</label>
 			</td>
@@ -132,13 +132,13 @@
 		<tr>
 			<th><label for="html">html</label></th>
 			<td>
-				<input id="html" type="checkbox" /> 
+				<input id="html" type="checkbox" />
 				<label for="html" lang="ko_KR">체크(true)하면 데이터의 HTML 태그를 인식 합니다.</label>
 				<label for="html" lang="en_US">If this checkbox with check(true), recognize the HTML tags in data</label>
 			</td>
 			<th><label for="revert">revert</label></th>
 			<td>
-				<input id="revert" type="checkbox" checked="checked" /> 
+				<input id="revert" type="checkbox" checked="checked" />
 				<label for="revert" lang="ko_KR">체크를 해제(false)하면 revert 기능을 Off 합니다(기본값은 false).</label>
 				<label for="revert" lang="en_US">If this checkbox with check(true), off the revert feature(default value is false)</label>
 			</td>
@@ -146,7 +146,7 @@
 		<tr>
 			<th><label for="unbind">unbind</label></th>
 			<td colspan="3">
-				<input id="unbind" type="checkbox" checked="checked" /> 
+				<input id="unbind" type="checkbox" checked="checked" />
 				<label for="unbind" lang="ko_KR">체크를 해제(false)하면 unbind 기능을 Off 합니다.</label>
 				<label for="unbind" lang="en_US">If this checkbox with uncheck(false), off the unbind feature</label>
 			</td>
@@ -177,7 +177,7 @@
 			<th width="10%">bind</th>
 			<th width="10%"><label for="row">arguments[0]</label></th>
 			<td width="80%" colspan="3">
-				<input id="row" type="text" value="0" /> 
+				<input id="row" type="text" value="0" />
 				<label for="row" lang="ko_KR">N.form 에 바인드할 데이터 리스트의 행 인덱스</label>
 				<label for="row" lang="en_US">Row index of data list to bind the N.form</label>
 			</td>
@@ -188,15 +188,15 @@
 			<td width="80%" colspan="3">
 				<input id="key" type="text" value="name" />
 				<label for="key" lang="ko_KR">대상 키(컬럼) 명</label>
-				<label for="key" lang="en_US">The name of key(column)</label> 
+				<label for="key" lang="en_US">The name of key(column)</label>
 			</td>
 		</tr>
 		<tr>
 			<th width="10%"><label for="val">arguments[1]</label></th>
 			<td width="80%" colspan="3">
-				<input id="val" type="text" value="jeff beck" /> 
+				<input id="val" type="text" value="jeff beck" />
 				<label for="key" lang="ko_KR">대상 키에 해당하는 값</label>
-				<label for="key" lang="en_US">The value of target key</label> 
+				<label for="key" lang="en_US">The value of target key</label>
 			</td>
 		</tr>
 		<tr>
@@ -210,12 +210,12 @@
 				</select><br>
 				<label for="data" lang="ko_KR">
 					true : 선택한 요소에 해당하는 행 데이터를 반환 합니다.<br>
-					false : jQuery Object 타입의 모든 데이터를 반환합니다.<br> 
+					false : jQuery Object 타입의 모든 데이터를 반환합니다.<br>
 					undefined : JSON Object Array 타입의 모든 데이터를 반환합니다.<br>
 				</label>
 				<label for="data" lang="en_US">
 					true : Return selected row data.<br>
-					false : Return all data of jQuery Object type.<br> 
+					false : Return all data of jQuery Object type.<br>
 					undefined : Return all data of pure JSON Object array type.
 				</label>
 			</td>
@@ -344,7 +344,7 @@
 </article>
 
 <script type="text/javascript">
-	N("#__form").cont({
+	N(".demo_form").cont({
 	    init : function(view, request) {
 	    	// initialize buttons in div.btnBox
 	    	N("div.btnBox a", view).button();

@@ -1,4 +1,4 @@
-<article id="__datepicker">
+<article class="demo_datepicker">
 	<p lang="ko_KR" class="smallContTit">기본 옵션 : </p>
 	<p lang="en_US" class="smallContTit">Default options : </p>
 	<table class="form">
@@ -33,7 +33,7 @@
 	N.log("onBeforeShow", context, contents);
 }</textarea><br>
 				<label for="onBeforeShow" lang="ko_KR">Datepicker가 보여지기 전에 동작되는 이벤트 핸들러</label>
-				<label for="onBeforeShow" lang="en_US">Event handler for onBeforeShow event</label>	
+				<label for="onBeforeShow" lang="en_US">Event handler for onBeforeShow event</label>
 			</td>
 			<th><label for="onBeforeHide">onBeforeHide</label></th>
 			<td>
@@ -70,7 +70,7 @@
 </article>
 
 <script type="text/javascript">
-	N("#__datepicker").cont({
+	N(".demo_datepicker").cont({
 		datepicker : undefined,
 	    init : function(view, request) {
 	    	// initialize buttons in div.btnBox
