@@ -124,10 +124,10 @@
 			</td>
 			<th><label for="rowHandler">rowHandler</label></th>
 			<td>
-				<textarea id="rowHandler" style="height: 75px;">function(index, row, data) {
-	N.log(index);
-	N.log(row);
-	N.log(data);
+				<textarea id="rowHandler" style="height: 75px;">function(rowIdx, rowEle, rowData) {
+	N.log(rowIdx);
+	N.log(rowEle);
+	N.log(rowData);
 }</textarea><br />
 				<label for="rowHandler" lang="ko_KR">행 요소(TBODY)가 만들어 질때마다 호출되는 이벤트 핸들러</label>
 				<label for="rowHandler" lang="en_US">Event handler for be created the each row element(TBODY)</label>
@@ -136,11 +136,11 @@
 		<tr>
 			<th><label for="onSelect">onSelect</label></th>
 			<td>
-				<textarea id="onSelect" style="height: 90px;">function(index, row, data, beforeRow) {
-	N.log(index);
-	N.log(row);
-	N.log(data);
-	N.log(beforeRow);
+				<textarea id="onSelect" style="height: 90px;">function(rowIdx, rowEle, rowData, beforeRowIdx) {
+	N.log(rowIdx);
+	N.log(rowEle);
+	N.log(rowData);
+	N.log(beforeRowIdx);
 }</textarea><br />
 				<label for="onSelect" lang="ko_KR">행을 선택 할 때 실행되는 이벤트 핸들러</label>
 				<label for="onSelect" lang="en_US">Event handler for select the row</label>
@@ -385,7 +385,7 @@
 	    	N("#btnBind", view).click(function(e) {
 	            e.preventDefault();
 	            N.comm("html/apid/data/grid.json").submit(function(data) {
-	            	grid.bind(data);
+	            	grid.bind(data, true);
 		       	});
 
 	            N("div.btnBox", view).find("a").instance("button", function(u) {
