@@ -133,6 +133,18 @@
 
 			    	CommonUtilController.setPageLinks(N("a.link", view));
 				}
+			}, {
+				"pointcut" : ":init",
+				"adviceType" : "before",
+				"fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 함수명, args 인자 */
+					var view = args[0];
+
+			    	CommonUtilController.setPageLinks(N("a.link", view));
+
+			    	if(cont.view.hasClass("view-code")) {
+			    		CommonUtilController.sourceCode(cont.view, cont.request.get("url"));
+			    	}
+				}
 			}]
 		},
 		"comm" : {
@@ -169,11 +181,6 @@
 					 * 서버에 요청이 성공 했을 경우 실행됨.
 					 */
 					success : function(request, data, textStatus, xhr) {
-						if(request.options.dataType === "html" && N(data).hasClass("view-code")) {
-							this.pageId = N(data).attr("id");
-						} else {
-							this.pageId = undefined;
-						}
 						// return data 를 하면 N.comm.submit 의 콜백의 인자로 넘어오는 data 가 리턴한 데이터로 치환 됨.
 					},
 					/**
@@ -195,9 +202,6 @@
 						if(request.options.dataType === "html") {
 							// Multilingual handling
 					    	CommonUtilController.i18n(undefined, request.options.target);
-						}
-						if(this.pageId !== undefined) {
-							CommonUtilController.sourceCode(N("#" + this.pageId + ".view-code"), request.get("url"));
 						}
 					}
 				},
