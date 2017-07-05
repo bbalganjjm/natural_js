@@ -385,7 +385,7 @@
 	    	N("#btnBind", view).click(function(e) {
 	            e.preventDefault();
 	            N.comm("html/apid/data/grid.json").submit(function(data) {
-	            	grid.bind(data, true);
+	            	grid.bind(data);
 		       	});
 
 	            N("div.btnBox", view).find("a").instance("button", function(u) {
