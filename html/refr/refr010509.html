@@ -150,6 +150,7 @@
 					&nbsp;&nbsp;-&nbsp;currSelPageSet : 현재 페이지세트(페이지 그룹) 번호<br>
 					&nbsp;&nbsp;-&nbsp;pageCount : 전체 페이지 개수<br>
 					&nbsp;&nbsp;-&nbsp;pageSetCount : 전체 페이지세트(페이지 그룹) 개수<br>
+					&nbsp;&nbsp;-&nbsp;totalCount : 전체 행 개수<br>
 					&nbsp;&nbsp;-&nbsp;startPage : 현재 페이지세트(페이지 그룹) 중 첫번째 페이지 번호<br>
 					&nbsp;&nbsp;-&nbsp;startRowIndex : 선택한 페이지의 첫번째 행 인덱스<br>
 					&nbsp;&nbsp;-&nbsp;startRowNum : 선택한 페이지의 첫번째 행 번호<br>
@@ -242,10 +243,10 @@
 		</tr>
 		<tr>
 			<td></td>
-			<td>data or totalCnt</td>
+			<td>data or totalCount</td>
 			<td>String</td>
 			<td align="center">-</td>
-			<td>숫자 타입의 tatalCnt 값을 넣으면 컴포넌트 인스턴스의 totalCnt 옵션이 지정한 값으로 치환되고 Array(JSON Object) 타입의 data 인자를 지정하면 컴포넌트에 바인드 된 데이터가 지정한 데이터로 치환되어 바인드 됩니다.</td>
+			<td>숫자 타입의 totalCount 값을 넣으면 컴포넌트 인스턴스의 totalCount 옵션이 지정한 값으로 치환되고 Array(JSON Object) 타입의 data 인자를 지정하면 컴포넌트에 바인드 된 데이터가 지정한 데이터로 치환되어 바인드 됩니다.</td>
 		</tr>
 		<tr>
 			<td></td>
@@ -274,23 +275,23 @@
 			<td>입력된 값으로 컴포넌트 옵션의 pageNo가 지정 됩니다.</td>
 		</tr>
 		<tr>
-			<td>totalCnt</td>
+			<td>totalCount</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
 			<td>number or N.pagination</td>
 			<td>
 				<p>전체 행 건수 값을 가져오거나 지정 합니다.</p>
-				<p>인자가 없으면 totalCnt 값을 가져오고 첫번째 인자를 입력하면 입력된 값으로 totalCnt가 지정 됩니다.</p>
+				<p>인자가 없으면 totalCount 값을 가져오고 첫번째 인자를 입력하면 입력된 값으로 totalCount가 지정 됩니다.</p>
 				<p class="alert">인스턴스 내부의 값만 변경 되므로 이후 bind 메서드를 호출 해 줘야 바뀐 부분이 화면에 표시됩니다.</p>
-				<p class="alert">N.pagination 이 이미 인스턴스화 된 후 페이지를 변경할때 사용 됩니다.</p>
+				<p class="alert">N.pagination 이 이미 인스턴스화 된 후 전체 행 수를 변경할때 사용 됩니다.</p>
 			</td>
 		</tr>
 		<tr>
 			<td></td>
-			<td>totalCnt</td>
+			<td>totalCount</td>
 			<td>number</td>
 			<td align="center">-</td>
-			<td>입력된 값으로 컴포넌트 옵션의 totalCnt가 지정 됩니다.</td>
+			<td>입력된 값으로 컴포넌트 옵션의 totalCount가 지정 됩니다.</td>
 		</tr>
 		<tr>
 			<td>countPerPage</td>
@@ -329,6 +330,29 @@
 			<td>number</td>
 			<td align="center">-</td>
 			<td>입력된 값으로 컴포넌트 옵션의 countPerPageSet가 지정 됩니다.</td>
+		</tr>
+		<tr>
+			<td>currPageNavInfo</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>N.pagination</td>
+			<td>
+				<p>페이징 정보를 반환 합니다.</p>
+				<p>currPageNavInfo 정보<br>
+					&nbsp;&nbsp;-&nbsp;pageNo : 선택한 페이지 번호<br>
+					&nbsp;&nbsp;-&nbsp;countPerPage : 페이지당 행 수<br>
+					&nbsp;&nbsp;-&nbsp;countPerPageSet : 페이지 세트당 페이지 수<br>
+					&nbsp;&nbsp;-&nbsp;currSelPageSet : 현재 페이지세트(페이지 그룹) 번호<br>
+					&nbsp;&nbsp;-&nbsp;pageCount : 전체 페이지 개수<br>
+					&nbsp;&nbsp;-&nbsp;pageSetCount : 전체 페이지세트(페이지 그룹) 개수<br>
+					&nbsp;&nbsp;-&nbsp;totalCount : 전체 행 개수<br>
+					&nbsp;&nbsp;-&nbsp;startPage : 현재 페이지세트(페이지 그룹) 중 첫번째 페이지 번호<br>
+					&nbsp;&nbsp;-&nbsp;startRowIndex : 선택한 페이지의 첫번째 행 인덱스<br>
+					&nbsp;&nbsp;-&nbsp;startRowNum : 선택한 페이지의 첫번째 행 번호<br>
+					&nbsp;&nbsp;-&nbsp;endPage : 현재 페이지세트(페이지 그룹) 중 마지막 페이지 번호<br>
+					&nbsp;&nbsp;-&nbsp;endRowIndex : 선택한 페이지의 마지막 행 인덱스<br>
+					&nbsp;&nbsp;-&nbsp;endRowNum : 선택한 페이지의 마지막 행 번호</p>
+			</td>
 		</tr>
 	</table>
 
