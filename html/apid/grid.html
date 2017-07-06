@@ -39,10 +39,10 @@
 			<th><label for="addTop">addTop</label></th>
 			<td colspan="3">
 				<input id="addTop" type="checkbox" />
-				<label for="addTop" lang="ko_KR">체크(true)하면 add 메서드 호출 시 새로운 행을 위쪽에 생성합니다.
-				<p class="alert">height 옵션 값이 0보다 크면 항상 "true"로 지정 됩니다.</p></label>
-				<label for="addTop" lang="en_US">If this checkbox with check(true), create the new row activate the top when call the add method<br />
-				<p class="alert">If the height option value is greater than 0, addTop option is set always "true"</p></label>
+				<label for="addTop" lang="ko_KR">체크(true)하면 add 메서드 호출 시 새로운 행을 위쪽에 생성합니다.</label>
+				<p lang="ko_KR" class="alert">height 옵션 값이 0보다 크면 항상 "true"로 지정 됩니다.</p>
+				<label for="addTop" lang="en_US">If this checkbox with check(true), create the new row activate the top when call the add method</label>
+				<p lang="en_US" class="alert">If height option value is greater than 0, addTop option is set always "true"</p>
 			</td>
 		</tr>
 		<tr>
@@ -118,9 +118,11 @@
 		<tr>
 			<th><label for="scrollPagingSize">scrollPaging<br>.size</label></th>
 			<td>
-				<input id="scrollPagingSize" type="text" value="100" />
+				<input id="scrollPagingSize" type="text" value="50" />
 				<label for="scrollPagingSize" lang="ko_KR">스크롤 페이징 사이즈</label>
+				<p class="alert" lang="ko_KR">0 이면 스크롤 페이징 하지 않습니다.</p>
 				<label for="scrollPagingSize" lang="en_US">Scroll paging size</label>
+				<p class="alert" lang="en_US">If the value is 0 it does not scroll paging.</p>
 			</td>
 			<th><label for="rowHandler">rowHandler</label></th>
 			<td>
