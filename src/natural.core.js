@@ -1,5 +1,5 @@
 /*!
- * Natural-CORE v0.8.5.16
+ * Natural-CORE v0.8.5.20
  * bbalganjjm@gmail.com
  *
  * Includes formatdate.js & Mask JavaScript API
@@ -238,7 +238,7 @@
 		// N local variables
 		$.extend(N, {
 			version : {
-				"Natural-CORE" : "0.8.5.16"
+				"Natural-CORE" : "0.8.5.20"
 			},
 			/**
 			 * Set and get locale value
@@ -286,6 +286,18 @@
 				}
 			},
 			/**
+			 * Display the info to console
+			 */
+			info : function() {
+				if(typeof console !== "undefined") {
+					if(typeof console.info !== "undefined" && typeof console.info.apply !== "undefined") {
+						console.info.apply(console, arguments);
+					} else {
+						console.info(console);
+					}
+				}
+			},
+			/**
 			 * Natural-JS resource garbage collector
 			 */
 			gc : {
@@ -307,12 +319,12 @@
 				full : function() {
 					$(window).unbind("resize.datepicker");
 					$(window).unbind("resize.alert");
-					$(window.document).unbind("dragstart.alert").unbind("selectstart.alert").unbind("mousemove.alert").unbind("mouseup.alert");
+					$(window.document).unbind("dragstart.alert selectstart.alert mousemove.alert touchmove.alert mouseup.alert touchend.alert");
 					$(window.document).unbind("mousedown.datepicker");
 					$(window.document).unbind(N.browser.is("firefox") ? "keydown.datepicker" : "keyup.datepicker");
 					$(window.document).unbind("keyup.alert");
-					$(window.document).unbind("dragstart.grid.vResize").unbind("selectstart.grid.vResize").unbind("mousemove.grid.vResize").unbind("mouseup.grid.vResize");
-					$(window.document).unbind("dragstart.grid.resize").unbind("selectstart.grid.resize").unbind("mousemove.grid.resize").unbind("mouseup.grid.resize");
+					$(window.document).unbind("dragstart.grid.vResize selectstart.grid.vResize mousemove.grid.vResize touchmove.grid.vResize mouseup.grid.vResize touchend.grid.vResize");
+					$(window.document).unbind("dragstart.grid.resize selectstart.grid.resize mousemove.grid.resize touchmove.grid.resize mouseup.grid.resize touchend.grid.resize");
 					$(window.document).unbind("click.grid.dataFilter");
 					return true;
 				}
@@ -766,16 +778,70 @@
         		        return true;
         		    });
 			    },
+			    getMaxDuration : function(ele, css) {
+			    	return duration = Math.max.apply(undefined, $(ele.css(css).split(",")).map(function() {
+		    			if(this.indexOf("ms") > -1) {
+		    				return parseInt(N.string.trimToZero(this));
+		    			} else {
+		    				return parseFloat(N.string.trimToZero(this)) * 1000;
+		    			}
+					}).get());
+			    },
 			    /**
-			     * Excute the method after effect
+			     * Detect the end event name of CSS animations
+			     * Reference from David Walsh: http://davidwalsh.name/css-animation-callback
 			     */
-			    excuteAfterEffect : function(ele, type, css) {
-					setTimeout(function() {
-						ele[type]();
-					}, Math.max.apply(undefined, $(ele.css(css).split(",")).map(function() {
-						  return parseFloat(this);
-					}).get()) * 1000);
-				}
+			    whichAnimationEvent  : function(ele){
+			    	var el;
+			    	if(ele !== undefined && ele.length > 0) {
+			    		if(this.getMaxDuration(ele, "animation-duration") === 0) {
+			    			return "nothing";
+			    		}
+			    		el = ele.get(0);
+		        	} else {
+		        		el = document.createElement("fakeelement");
+		        	}
+
+			        var animations = {
+			            "animation" : "animationend",
+			            "OAnimation" : "oAnimationEnd",
+			            "MSAnimation" : "MSAnimationEnd",
+			            "WebkitAnimation" : "webkitAnimationEnd"
+			        };
+			        for(var t in animations){
+			            if( animations.hasOwnProperty(t) && el.style[t] !== undefined ){
+			                return animations[t];
+			            }
+			        }
+
+			        return "nothing";
+			    },
+			    /**
+			     * Detect the end event name of CSS transitions
+			     * Reference from David Walsh: http://davidwalsh.name/css-animation-callback
+			     */
+			    whichTransitionEvent  : function(ele){
+			    	if(ele !== undefined) {
+			    		if(this.getMaxDuration(ele, "transition-duration") === 0) {
+			    			return "nothing";
+			    		}
+		        	}
+
+			        var el = document.createElement("fakeelement");
+			        var transitions = {
+		        		"transition" : "transitionend",
+		        	    "OTransition" : "oTransitionEnd",
+		        	    "MozTransition" : "transitionend",
+		        	    "WebkitTransition" : "webkitTransitionEnd"
+			        };
+			        for(var t in transitions){
+			            if( transitions.hasOwnProperty(t) && el.style[t] !== undefined ){
+			                return transitions[t];
+			            }
+			        }
+
+			        return "nothing";
+			    }
 			},
 			/**
 			 * N.browser package
@@ -873,6 +939,10 @@
 						return name === "chrome" ? true : false;
 					} else if(N.browser.msieVersion() > 0) {
 						return name === "ie" ? true : false;
+					} else if(navigator.userAgent.match(/(iPad|iPhone|iPod)/i)) {
+						return name === "ios" ? true : false;
+					} else if(navigator.userAgent.match(/android/i)) {
+						return name === "android" ? true : false;
 					}
 					return false;
 				},
