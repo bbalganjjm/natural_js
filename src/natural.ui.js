@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.14.18
+ * Natural-UI v0.8.14.36
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "v0.8.14.18";
+	N.version["Natural-UI"] = "v0.8.14.36";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -59,6 +59,7 @@
 				msgContents : null,
 				msg : msg,
 				vars : vars,
+				html : false,
 				width : 0,
 		        height : 0,
 				isInput : false,
@@ -90,7 +91,9 @@
 				this.options.container = N.context.attr("architecture").page.context;
 				// 2. If defined the N.context.attr("ui").alert.container value to N.config, this.options.container value is defined from N.config's value
 				this.options = $.extend({}, this.options, N.context.attr("ui").alert);
-				this.options.container = N(this.options.container);
+				if(N.isString(this.options.container)) {
+					this.options.container = N(this.options.container);
+				}
 				this.options.draggableOverflowCorrectionAddValues = $.extend({}, this.options.draggableOverflowCorrectionAddValues, N.context.attr("ui").alert.draggableOverflowCorrectionAddValues);
 			} catch (e) {
 				N.error("[N.alert]" + e, e);
@@ -101,6 +104,9 @@
 			}
 			if(msg !== undefined && N.isPlainObject(msg)) {
 				$.extend(this.options, msg);
+				if(N.isString(this.options.container)) {
+					this.options.container = N(this.options.container);
+				}
 				// when the title option value is undefined
 				// $.extend method does not extend undefined value
 				if(msg.hasOwnProperty("title")) {
@@ -178,7 +184,7 @@
 				// create title bar element
 				var titleBox = '';
 				if(opts.title !== undefined) {
-					titleBox = '<div class="msg_title_box__"><span class="msg_title__">' + opts.title + '</span><span class="msg_title_close__" title="' + N.message.get(opts.message, "close") + '"></span></div>';
+					titleBox = '<div class="msg_title_box__"><span class="msg_title__">' + opts.title + '</span><a href="#" class="msg_title_close_btn__"><span class="msg_title_close__" title="' + N.message.get(opts.message, "close") + '"></span></a></div>';
 				}
 
 				// create button box elements
@@ -203,7 +209,8 @@
 
 				// bind event to close(X) button
 				var self = this;
-				opts.msgContents.find(".msg_title_box__ .msg_title_close__").click(function() {
+				opts.msgContents.find(".msg_title_box__ .msg_title_close_btn__").bind("click.alert touchend.alert", function(e) {
+					e.preventDefault();
 					if (opts.onCancel !== null) {
 						opts.onCancel(opts.msgContext, opts.msgContents);
 					}
@@ -211,7 +218,7 @@
 				});
 
 				// set message
-				opts.msgContents.find(".msg_box__").html(opts.msg);
+				opts.msgContents.find(".msg_box__")[ opts.html ? "html" : "text" ](opts.msg);
 
 				// set width
 				if(opts.width > 0) {
@@ -229,7 +236,7 @@
 
 				//set confirm button style and bind click event
 				opts.msgContents.find(".buttonBox__ a.confirm__").button(opts.global.okBtnStyle);
-				opts.msgContents.find(".buttonBox__ a.confirm__").click(function(e) {
+				opts.msgContents.find(".buttonBox__ a.confirm__").bind("click.alert", function(e) {
 					e.preventDefault();
 					if (opts.onOk !== null) {
 						opts.onOk.call(self, opts.msgContext, opts.msgContents);
@@ -245,7 +252,7 @@
 				// set cancel button style and bind click event
 				if(opts.confirm) {
 					opts.msgContents.find(".buttonBox__ a.cancel__").button(opts.global.cancelBtnStyle);
-					opts.msgContents.find(".buttonBox__ a.cancel__").click(function(e) {
+					opts.msgContents.find(".buttonBox__ a.cancel__").bind("click.alert", function(e) {
 						e.preventDefault();
 						if (opts.onCancel !== null) {
 							opts.onCancel(opts.msgContext, opts.msgContents);
@@ -261,26 +268,39 @@
 					var moved;
 					var startX;
 					var startY;
-					opts.msgContents.addClass("draggable__").find(".msg_title_box__").bind("mousedown.alert", function(e) {
-						if(!$(e.target).is(".msg_title_close__") && (e.which || e.button) === 1) {
+					opts.msgContents.addClass("draggable__").find(".msg_title_box__").bind("mousedown.alert touchstart.alert", function(e) {
+						var dte;
+						if(e.originalEvent.touches) {
+							e.preventDefault();
+							e.stopPropagation();
+							dte = e.originalEvent.touches[0];
+						}
+
+						if(!$(dte !== undefined ? dte.target : e.target).is(".msg_title_close__") && (e.originalEvent.touches || (e.which || e.button) === 1)) {
 							pressed = true;
 							opts.msgContents.data("isMoved", true);
 
-							startX = e.pageX - opts.msgContents.offset().left;
-							startY = e.pageY - opts.msgContents.offset().top;
+							startX = (dte !== undefined ? dte.pageX : e.pageX)- opts.msgContents.offset().left;
+							startY = (dte !== undefined ? dte.pageY : e.pageY) - opts.msgContents.offset().top;
 
-							$(window.document).bind("dragstart.alert, selectstart.alert", function() {
+							$(window.document).bind("dragstart.alert selectstart.alert", function(e) {
 			                    return false;
 			                });
 
 							moved = true;
-							$(window.document).bind("mousemove.alert", function(e) {
+							$(window.document).bind("mousemove.alert touchmove.alert", function(e) {
+								var mte;
+								if(e.originalEvent.touches) {
+									e.stopPropagation();
+									mte = e.originalEvent.touches[0];
+								}
 								if(pressed) {
 									opts.msgContents.offset({
-										left : e.pageX - startX,
-										top :  e.pageY - startY
+										left : (mte !== undefined ? mte.pageX : e.pageX) - startX,
+										top :  (mte !== undefined ? mte.pageY : e.pageY) - startY
 									});
 								}
+
 								if(moved) {
 									opts.msgContents.fadeTo(200, "0.4");
 									moved = false;
@@ -288,7 +308,7 @@
 							});
 
 							var documentWidth = $(window.document).width();
-							$(window.document).bind("mouseup.alert", function(e) {
+							$(window.document).bind("mouseup.alert touchend.alert", function(e) {
 								pressed = false;
 								if(opts.draggableOverflowCorrection) {
 									var offset = {};
@@ -313,7 +333,7 @@
 								}
 
 								opts.msgContents.fadeTo(100, "1.0");
-								$(window.document).unbind("dragstart.alert").unbind("selectstart.alert").unbind("mousemove.alert").unbind("mouseup.alert");
+								$(window.document).unbind("dragstart.alert selectstart.alert mousemove.alert touchmove.alert mouseup.alert touchend.alert");
 							});
 						}
 					});
@@ -1276,14 +1296,14 @@
 				} else {
 					if(arguments.length === 1 && N.isPlainObject(obj)) {
 						$.extend(this.options, obj);
-						// when the title option value is undefined
+						// When title option value is undefined
 						// $.extend method does not extend undefined value
 						if(obj.hasOwnProperty("title")) {
 							this.options.title = obj.title;
 						}
 					} else {
 						$.extend(this.options, opts);
-						// when the title option value is undefined
+						// When title option value is undefined
 						// $.extend method does not extend undefined value
 						if(obj.hasOwnProperty("title")) {
 							this.options.title = opts.title;
@@ -1339,6 +1359,7 @@
 
 				// use alert
 				// opts.context is alert message
+				opts.html = true;
 				opts.msg = opts.context;
 				if(opts.title === null) {
 					opts.title = opts.context.attr("title");
@@ -1373,6 +1394,7 @@
 						opts.context.filter(".view_context__:last").removeAttr("title");
 					}
 					// opts.context is alert message;
+					opts.html = true;
 					opts.msg = opts.context;
 					self.alert = N(window).alert(opts);
 					self.alert.options.msgContext.addClass("popup_overlay__");
@@ -1414,8 +1436,8 @@
 				// execute "onOpen" event
 				if(opts.onOpen !== null) {
 					opts.onOpenData = onOpenData !== undefined ? onOpenData : null;
-					if(opts.context.filter("[id]:first").instance("cont")[opts.onOpen] !== undefined) {
-						opts.context.filter("[id]:first").instance("cont")[opts.onOpen](onOpenData);
+					if(opts.context.filter(".view_context__:last").instance("cont")[opts.onOpen] !== undefined) {
+						opts.context.filter(".view_context__:last").instance("cont")[opts.onOpen](onOpenData);
 					} else {
 						N.warn("[N.popup.popOpen]The onOpen event handler(" + opts.onOpen + ") is not defined on the Controller(N.cont) of the Popup.");
 					}
@@ -1482,6 +1504,7 @@
 				dataOpts : [], // dataOpts : [{ url: undefined, width: "auto", active: false, preload: false, onOpen: undefined, disable : false }]
 				randomSel : false,
 				onActive : null,
+				blockOnActiveWhenCreate : false,
 				contents : obj.length > 0 ? obj.find(">div") : null,
 				effect : false // Deprecated
 			};
@@ -1525,9 +1548,6 @@
 		};
 
 		$.extend(Tab, {
-			context : function(sel) {
-				return sel !== undefined ? this.options.context.find(sel) : this.options.context;
-			},
 			wrapEle : function() {
 				var opts = this.options;
 				// hide div contents
@@ -1566,7 +1586,7 @@
 					}
 				});
 
-				opts.links.bind("click.tab", function(e, onOpenData) {
+				opts.links.bind("click.tab", function(e, onOpenData, isFirst) {
 					e.preventDefault();
 					var thisEle = $(this);
 					var thisIdx = opts.links.index(this);
@@ -1591,15 +1611,18 @@
 						}
 					}
 
+
 					// run "onActive" event
 					if(opts.onActive !== null) {
-						opts.onActive.call(this, thisIdx, thisEle, content, opts.links, opts.contents);
+						if(opts.blockOnActiveWhenCreate === false || (opts.blockOnActiveWhenCreate === true && isFirst !== true)) {
+							opts.onActive.call(this, thisIdx, thisEle, content, opts.links, opts.contents);
+	                	}
 					}
 
 					// excute "onOpen"(declarative option) event
 					// excuted only when defined url with class(inline) option and tab is active
 					if(thisDeclarativeOpts.onOpen !== undefined && thisEle.data("loaded")) {
-						var cont = content.find(">").filter("[id]:first").instance("cont");
+						var cont = content.children(".view_context__:last").instance("cont");
 						if(cont[thisDeclarativeOpts.onOpen] !== undefined) {
 							//thisDeclarativeOpts.onOpen
 							cont[thisDeclarativeOpts.onOpen](onOpenData);
@@ -1615,7 +1638,7 @@
 				});
 
 				// select tab
-				$(opts.links.get(defSelIdx)).click();
+				$(opts.links.get(defSelIdx)).trigger("click.tab", [undefined, true]);
 			},
 			loadContent : function(url, targetIdx) {
 				var opts = this.options;
@@ -1630,11 +1653,11 @@
 				}).submit(function(page) {
 					var cont = opts.contents.eq(targetIdx).html(page).children(".view_context__:last").instance("cont");
 
-					// set caller attribute in conteroller in tab content that is Tab instance
-					cont.caller = self;
-
 					// set tab instance to tab contents Controller
 					if(cont !== undefined) {
+						// set caller attribute in conteroller in tab content that is Tab instance
+						cont.caller = self;
+
 						// triggering "init" method
 						N.cont.trInit.call(this, cont, this.request);
 					}
@@ -1661,6 +1684,9 @@
 		});
 
 		$.extend(Tab.prototype, {
+			context : function(sel) {
+				return sel !== undefined ? this.options.context.find(sel) : this.options.context;
+			},
 			open : function(idx, onOpenData) {
 				if(idx !== undefined) {
 					if(onOpenData !== undefined) {
@@ -2321,10 +2347,11 @@
 				return eles.filter(".validate_false__").length > 0 ? false : true;
 			},
 			val : function(key, val, notify) {
-				if(val === undefined) {
-					return this.options.data[this.options.row][key];
-				}
 				var opts = this.options;
+				if(val === undefined) {
+					return opts.data[opts.row][key];
+				}
+
 				var vals = opts.data[opts.row];
 				var eles, ele;
 				var self = this;
@@ -2372,9 +2399,6 @@
 									} else {
 										// add data changed flag
 										ele.addClass("data_changed__");
-										if(!opts.context.hasClass("row_data_changed__")) {
-											opts.context.addClass("row_data_changed__");
-										}
 									}
 
 									// format
@@ -2390,9 +2414,6 @@
 									} else {
 										// add data changed flag
 										ele.addClass("data_changed__");
-										if(!opts.context.hasClass("row_data_changed__")) {
-											opts.context.addClass("row_data_changed__");
-										}
 									}
 								}
 							} else if(tagName === "select") {
@@ -2412,9 +2433,6 @@
 								} else {
 									// add data changed flag
 									ele.addClass("data_changed__");
-									if(!opts.context.hasClass("row_data_changed__")) {
-										opts.context.addClass("row_data_changed__");
-									}
 								}
 							} else if(tagName === "img") {
 								currVal = String(val);
@@ -2427,9 +2445,6 @@
 									vals.rowStatus = "update";
 									// add data changed flag
 									ele.addClass("data_changed__");
-									if(!opts.context.hasClass("row_data_changed__")) {
-										opts.context.addClass("row_data_changed__");
-									}
 								}
 
 								// put image path
@@ -2448,9 +2463,6 @@
 									vals.rowStatus = "update";
 									// add data changed flag
 									ele.addClass("data_changed__");
-									if(!opts.context.hasClass("row_data_changed__")) {
-										opts.context.addClass("row_data_changed__");
-									}
 								}
 
 								// put value
@@ -2494,9 +2506,6 @@
 							} else {
 								// add data changed flag
 								$(eles.get(0)).addClass("data_changed__");
-								if(!opts.context.hasClass("row_data_changed__")) {
-									opts.context.addClass("row_data_changed__");
-								}
 							}
 						}
 					}
@@ -2505,24 +2514,29 @@
 					eles = ele = currVal = undefined;
 				} else {
 					// put value
-					opts.data[opts.row][key] = val;
+					if(opts.data[opts.row][key] !== val) {
+						opts.data[opts.row][key] = val;
 
-					// change row status
-                    if (opts.data[opts.row].rowStatus !== "insert" && opts.data[opts.row].rowStatus !== "delete") {
-                    	opts.data[opts.row].rowStatus = "update";
-                    	// add data changed flag
-                    	if(!opts.context.hasClass("row_data_changed__")) {
-                    		opts.context.addClass("row_data_changed__");
-                    	}
-                    }
+						// change row status
+	                    if (opts.data[opts.row].rowStatus !== "insert" && opts.data[opts.row].rowStatus !== "delete") {
+	                    	opts.data[opts.row].rowStatus = "update";
+	                    }
 
-
-                    // dataSync
-                    if(notify !== false) {
-                    	N.ds.instance(opts.extObj !== null ? opts.extObj : self).notify(opts.extRow > -1 ? opts.extRow : opts.row, key);
-                    }
+	                    // dataSync
+	                    if(notify !== false) {
+	                    	N.ds.instance(opts.extObj !== null ? opts.extObj : self).notify(opts.extRow > -1 ? opts.extRow : opts.row, key);
+	                    }
+					}
 				}
-				return this;
+
+				// add data changed flag
+            	if(opts.data[opts.row].rowStatus !== "insert"
+        			&& opts.data[opts.row].rowStatus !== "delete"
+        			&& !opts.context.hasClass("row_data_changed__")) {
+            		opts.context.addClass("row_data_changed__");
+            	}
+
+            	return this;
 			},
 			update : function(row, key) {
 				var opts = this.options;
@@ -2790,27 +2804,29 @@
 		        var defSPSize = opts.scrollPaging.limit;
 		        var tbodyLength;
 		        tbodyWrap.scroll(function() {
-		        	var thisWrap = $(this);
-                    if (thisWrap.scrollTop() >= opts.context.height() - thisWrap.height()) {
-                    	tbodyLength = opts.context.find("> tbody").length;
-                    	if (tbodyLength >= opts.scrollPaging.idx + defSPSize) {
-	                        if (tbodyLength > 0 && tbodyLength <= opts.data.length) {
-	                            opts.scrollPaging.idx += defSPSize;
-	                        }
+		        	if(opts.scrollPaging.size > 0) {
+			        	var thisWrap = $(this);
+	                    if (thisWrap.scrollTop() >= opts.context.height() - thisWrap.height()) {
+	                    	tbodyLength = opts.context.find("> tbody").length;
+	                    	if (tbodyLength >= opts.scrollPaging.idx + defSPSize) {
+		                        if (tbodyLength > 0 && tbodyLength <= opts.data.length) {
+		                            opts.scrollPaging.idx += defSPSize;
+		                        }
 
-	                        if (opts.scrollPaging.idx + opts.scrollPaging.limit >= opts.data.length) {
-	                        	opts.scrollPaging.limit = opts.data.length - opts.scrollPaging.idx;
-	                        } else {
-	                        	opts.scrollPaging.limit = defSPSize;
-	                        }
+		                        if (opts.scrollPaging.idx + opts.scrollPaging.limit >= opts.data.length) {
+		                        	opts.scrollPaging.limit = opts.data.length - opts.scrollPaging.idx;
+		                        } else {
+		                        	opts.scrollPaging.limit = defSPSize;
+		                        }
 
-	                        if(opts.scrollPaging.idx < opts.data.length) {
-	                        	self.bind(undefined, "grid.bind");
-	                        } else if(opts.scrollPaging.idx === opts.data.length) {
-	                        	opts.scrollPaging.limit = opts.scrollPaging.size;
-	                        }
-	                    }
-	                }
+		                        if(opts.scrollPaging.idx < opts.data.length) {
+		                        	self.bind(undefined, "grid.bind");
+		                        } else if(opts.scrollPaging.idx === opts.data.length) {
+		                        	opts.scrollPaging.limit = opts.scrollPaging.size === 0 ? opts.data.length : opts.scrollPaging.size;
+		                        }
+		                    }
+		                }
+		        	}
 	            });
 
 		        // Create grid footer
@@ -2840,21 +2856,31 @@
 	        	gridWrap.css("margin-bottom", "0");
 
 	        	var currHeight, tbodyOffset, tfootHeight = 0;
-	        	vResizable.bind("mousedown.grid.vResize", function(e) {
-	        		if((e.which || e.button) === 1) {
+	        	vResizable.bind("mousedown.grid.vResize touchstart.grid.vResize", function(e) {
+					if(e.originalEvent.touches) {
+						e.preventDefault();
+						e.stopPropagation();
+					}
+
+	        		if(e.originalEvent.touches || (e.which || e.button) === 1) {
 	        			if(tfootWrap !== undefined) {
 	        				tfootHeight = tfootWrap.height();
 	        			}
 	        			tbodyOffset = tbodyWrap.offset();
 
-	        			$(document).bind("dragstart.grid.vResize, selectstart.grid.vResize", function() {
+	        			$(document).bind("dragstart.grid.vResize selectstart.grid.vResize", function() {
 	        				return false;
 	        			});
 	        			pressed = true;
 
-	        			$(window.document).bind("mousemove.grid.vResize", function(e) {
+	        			$(window.document).bind("mousemove.grid.vResize touchmove.grid.vResize", function(e) {
+	        				var mte;
+							if(e.originalEvent.touches) {
+								e.stopPropagation();
+								mte = e.originalEvent.touches[0];
+							}
 	        				if(pressed) {
-	        					currHeight = (e.pageY - tbodyOffset.top - tfootHeight) + "px";
+	        					currHeight = ((mte !== undefined ? mte.pageY : e.pageY) - tbodyOffset.top - tfootHeight) + "px";
 	        					tbodyWrap.css({
 	        						"height" : currHeight,
 	        						"max-height" : currHeight
@@ -2862,8 +2888,8 @@
 	        				}
 	        			});
 
-	        			$(window.document).bind("mouseup.grid.vResize", function() {
-	        				$(document).unbind("dragstart.grid.vResize").unbind("selectstart.grid.vResize").unbind("mousemove.grid.vResize").unbind("mouseup.grid.vResize");
+	        			$(window.document).bind("mouseup.grid.vResize touchend.grid.vResize", function(e) {
+	        				$(document).unbind("dragstart.grid.vResize selectstart.grid.vResize mousemove.grid.vResize touchmove.grid.vResize mouseup.grid.vResize touchend.grid.vResize");
 	        				pressed = false;
 	        			});
 	        		}
@@ -2896,7 +2922,7 @@
     	        	context = opts.context;
     	        }
 
-				this.thead.bind("mouseover.grid.resize", function() {
+				this.thead.bind("mouseover.grid.resize touchstart.grid.resize", function() {
 					resizeBarHeight = (opts.height > 0 ? self.tbodyContainer.closest(".grid_wrap__").height() - 3 : self.tbodyContainer.height() + resizeBarCorrectionHeight) + 1 + opts.misc.resizeBarCorrectionHeight;
 					theadCells.each(function() {
 						var cellEle = $(this);
@@ -2915,18 +2941,25 @@
 		            	"position": "absolute",
 		            	"width": resizeBarWidth + "px",
 		            	"height": String(cellEle.outerHeight()) + "px",
-		            	"opacity": "0"
+		            	"opacity": "0",
+		            	"background-color" : "#000",
+		            	"z-index" : 9999999
 		            }).appendTo(cellEle);
 
-		            resizeBar.bind("mousedown.grid.resize", function(e) {
-		            	if((e.which || e.button) === 1) {
+		            resizeBar.bind("mousedown.grid.resize touchstart.grid.resize", function(e) {
+		            	var dte;
+						if(e.originalEvent.touches) {
+							dte = e.originalEvent.touches[0];
+						}
+
+		            	if(e.originalEvent.touches || (e.which || e.button) === 1) {
 		            		$(this).css({
 		            			"opacity": ""
 		            		}).animate({
 		            			"height" : resizeBarHeight + "px"
 		            		}, 150);
 
-		            		startOffsetX = e.pageX;
+		            		startOffsetX = dte !== undefined ? dte.pageX : e.pageX;
 		            		currResizeBarEle = $(this);
 		            		currCellEle = currResizeBarEle.parent("th");
 		            		currNextCellEle = currResizeBarEle.parent("th").next();
@@ -2958,7 +2991,7 @@
 		            		defWidth = Math.floor(currCellEle.width()) + opts.misc.resizableCorrectionWidth;
 		            		nextDefWidth = !islast ? Math.floor(currNextCellEle.width()) + opts.misc.resizableCorrectionWidth : Math.floor(context.width());
 
-		            		$(document).bind("dragstart.grid.resize, selectstart.grid.resize", function() {
+		            		$(document).bind("dragstart.grid.resize selectstart.grid.resize", function() {
 		            			return false;
 		            		});
 		            		isPressed = true;
@@ -2966,10 +2999,16 @@
 		            		minPx = !islast ? Math.floor(currNextCellEle.offset().left) : Math.floor(currCellEle.offset().left) + Math.floor(currCellEle.outerWidth());
 		            		maxPx = minPx + (!islast ? Math.floor(currNextCellEle.outerWidth()) : 7680);
 		            		movedPx = defPx = Math.floor(currResizeBarEle.parent("th").offset().left);
-		            		$(window.document).bind("mousemove.grid.resize", function(e) {
+		            		$(window.document).bind("mousemove.grid.resize touchmove.grid.resize", function(e) {
+		            			var mte;
+								if(e.originalEvent.touches) {
+									e.stopPropagation();
+									mte = e.originalEvent.touches[0];
+								}
 		            			if(isPressed) {
-		            				if(defPx < e.pageX && maxPx > e.pageX) {
-		            					movedPx = e.pageX - startOffsetX;
+		            				var mPageX = mte !== undefined ? mte.pageX : e.pageX;
+		            				if(defPx < mPageX && maxPx > mPageX) {
+		            					movedPx = mPageX - startOffsetX;
 	            						currWidth = defWidth + movedPx;
 	            						nextCurrWidth = !islast ? nextDefWidth - movedPx : nextDefWidth + movedPx;
 		            					if(currWidth > 0 && nextCurrWidth > 0) {
@@ -2988,7 +3027,7 @@
 		            		});
 
 		            		var currResizeBar = $(this);
-		            		$(window.document).bind("mouseup.grid.resize", function(e) {
+		            		$(window.document).bind("mouseup.grid.resize touchend.grid.resize", function(e) {
 		            			currResizeBar.animate({
 	            					"height" : String(cellEle.outerHeight()) + "px"
 	            				}, 200, function() {
@@ -2997,7 +3036,7 @@
             						});
 	            				});
 
-		            			$(document).unbind("dragstart.grid.resize").unbind("selectstart.grid.resize").unbind("mousemove.grid.resize").unbind("mouseup.grid.resize");
+		            			$(document).unbind("dragstart.grid.resize selectstart.grid.resize mousemove.grid.resize touchmove.grid.resize mouseup.grid.resize touchend.grid.resize");
 		            			isPressed = false;
 		            		});
 		            	}
@@ -3450,119 +3489,155 @@
 					return this;
 				}
 			},
-			bind : function(data) {
+			/**
+			 * callType arguments is call type about scrollPaging(internal) or data filter(internal) or data append(external)
+			 */
+			bind : function(data, callType) {
 				var opts = this.options;
 
-				// for internal call by scrollPaging and data filter
-				var callFrom = arguments[1];
+				if(!opts.isBinding) {
 
-				// remove all sort status
-				if(opts.sortable) {
-					this.thead.find(".sortable__").remove();
-				}
+					// remove all sort status
+					if(opts.sortable) {
+						this.thead.find(".sortable__").remove();
+					}
 
-				//to rebind new data
-				if(data !== undefined) {
-					opts.data = N.type(data) === "array" ? N(data) : data;
-				}
-
-				// remove all data filter status
-				if(opts.filter || this.thead.find("> tr th[data-filter='true']").length > 0) {
-					if(callFrom !== "grid.dataFilter" && callFrom !== "grid.sort") {
-						this.thead.find("th .data_filter_panel__").remove();
-
-						this.thead.find(".btn_data_filter__")
-						.removeClass("btn_data_filter_empty__ btn_data_filter_part__ btn_data_filter_full__")
-						.addClass("btn_data_filter_full__");
-
-						if(opts.data.length > 0) {
-							this.thead.find(".btn_data_filter__").addClass("visible__").removeClass("hidden__");
-						} else {
-							this.thead.find(".btn_data_filter__").removeClass("visible__").addClass("hidden__");
-						}
+					if(opts.data && callType === "append") {
+						// Merge data to binded data;
+						opts.scrollPaging.idx = opts.data.length - 1;
+						$.merge(opts.data, data);
 					} else {
-						// To keep your filter list even after sorting delete this codes.
-						if(callFrom === "grid.sort") {
-							this.thead.find(".data_filter_panel__").remove();
+						// rebind new data
+						if(data !== undefined) {
+							opts.data = N.type(data) === "array" ? N(data) : data;
 						}
 					}
-				}
 
-				var tbodyTempClone;
+					// remove all data filter status
+					if(opts.filter || this.thead.find("> tr th[data-filter='true']").length > 0) {
+						if(callType !== "grid.dataFilter" && callType !== "grid.sort") {
+							this.thead.find("th .data_filter_panel__").remove();
 
-				if(opts.checkAll !== null) {
-					this.thead.find(opts.checkAll).prop("checked", false);
-				}
-				if (opts.data.length > 0) {
-					//clear tbody visual effect
-					opts.context.find("tbody").clearQueue().stop();
-					if(callFrom !== "grid.bind") {
-						opts.scrollPaging.idx = 0;
+							this.thead.find(".btn_data_filter__")
+							.removeClass("btn_data_filter_empty__ btn_data_filter_part__ btn_data_filter_full__")
+							.addClass("btn_data_filter_full__");
+
+							if(opts.data.length > 0) {
+								this.thead.find(".btn_data_filter__").addClass("visible__").removeClass("hidden__");
+							} else {
+								this.thead.find(".btn_data_filter__").removeClass("visible__").addClass("hidden__");
+							}
+						} else {
+							// To keep your filter list even after sorting delete this codes.
+							if(callType === "grid.sort") {
+								this.thead.find(".data_filter_panel__").remove();
+							}
+						}
 					}
-					if(opts.scrollPaging.idx === 0) {
+
+					var tbodyTempClone;
+
+					if(opts.checkAll !== null) {
+						this.thead.find(opts.checkAll).prop("checked", false);
+					}
+					if (opts.data.length > 0 || (callType === "append" && data && data.length > 0)) {
+						//clear tbody visual effect
+						opts.context.find("tbody").clearQueue().stop();
+						if(callType !== "grid.bind") {
+							if(callType === "append" && data.length > 0) {
+								opts.scrollPaging.idx = opts.data.length - data.length;
+							} else {
+								opts.scrollPaging.idx = 0;
+							}
+						}
+
+						if(opts.scrollPaging.idx === 0) {
+							//remove tbodys in grid body area
+							if(callType === "append" && data.length > 0) {
+								opts.context.find("tbody > tr > td.empty__").parent().parent().remove();
+							} else {
+								opts.context.find("tbody").remove();
+							}
+						}
+
+						var i = opts.scrollPaging.idx;
+						var limit;
+						if(opts.height === 0 || opts.scrollPaging.size === 0 || (callType === "append" && data.length > 0 && data.length <= opts.scrollPaging.size)) {
+							limit = opts.data.length;
+						} else {
+							limit = Math.min(opts.scrollPaging.limit, opts.data.length);
+						}
+
+						var self = this;
+						var delay = opts.createRowDelay;
+						var lastIdx;
+
+						var render = function() {
+							// clone tbody for create new row
+							tbodyTempClone = self.tbodyTemp.clone(true, true).hide();
+							opts.context.append(tbodyTempClone);
+
+							if(opts.rowHandler !== null) {
+								opts.rowHandler.call(tbodyTempClone, i, tbodyTempClone, opts.data[i]);
+							}
+
+							// for row data bind, use N.form
+							N(opts.data[i]).form({
+								context : tbodyTempClone,
+								html: opts.html,
+								validate : opts.validate,
+								extObj : self,
+								extRow : i,
+								revert : opts.revert,
+								unbind : false
+							}).bind();
+
+							tbodyTempClone.show(delay, function() {
+								i++;
+								if(opts.height === 0 || opts.scrollPaging.size === 0 || (callType === "append" && data.length > 0 && data.length <= opts.scrollPaging.size)) {
+									lastIdx = opts.data.length - 1;
+								} else {
+									lastIdx = opts.scrollPaging.idx + (limit - 1);
+								}
+								// -4(5) is visualization rendering buffer;
+								if(i-4 === lastIdx) {
+									delay = 0;
+								} else {
+									delay = opts.createRowDelay;
+								}
+								if(i <= lastIdx) {
+									if (opts.data.length > 0) {
+										opts.isBinding = true;
+
+										render();
+									}
+								} else if(i === lastIdx + 1) {
+									if(opts.onBind !== null) {
+										opts.onBind.call(opts.context, opts.context, opts.data);
+									}
+									opts.scrollPaging.limit = opts.scrollPaging.size === 0 ? opts.data.length : opts.scrollPaging.size;
+
+									opts.isBinding = false;
+									opts.context.dequeue("grid.bind");
+								}
+							});
+						};
+						render();
+					} else {
 						//remove tbodys in grid body area
 						opts.context.find("tbody").remove();
-					}
-
-					var i = opts.scrollPaging.idx;
-					var limit;
-					if(opts.height > 0) {
-						limit = Math.min(opts.scrollPaging.limit, opts.data.length);
-					} else {
-						limit = opts.data.length;
-					}
-					var self = this;
-					var delay = opts.createRowDelay;
-					var lastIdx;
-					var render = function() {
-						// clone tbody for create new row
-						tbodyTempClone = self.tbodyTemp.clone(true, true).hide();
+						opts.context.append('<tbody><tr><td class="empty__" colspan="' + this.cellCnt + '">' +
+								N.message.get(opts.message, "empty") + '</td></tr></tbody>');
 						opts.context.append(tbodyTempClone);
+					}
 
-						if(opts.rowHandler !== null) {
-							opts.rowHandler.call(tbodyTempClone, i, tbodyTempClone, opts.data[i]);
-						}
-
-						// for row data bind, use N.form
-						N(opts.data[i]).form({
-							context : tbodyTempClone,
-							html: opts.html,
-							validate : opts.validate,
-							extObj : self,
-							extRow : i,
-							revert : opts.revert,
-							unbind : false
-						}).bind();
-
-						tbodyTempClone.show(delay, function() {
-							i++;
-							lastIdx = opts.scrollPaging.idx + limit - 1;
-							if(i === lastIdx) {
-								delay = 0;
-							} else {
-								delay = opts.createRowDelay;
-							}
-							if(i <= lastIdx) {
-								if (opts.data.length > 0) {
-									render();
-								}
-							} else if(i === lastIdx + 1) {
-								if(opts.onBind !== null) {
-									opts.onBind.call(opts.context, opts.context, opts.data);
-								}
-								opts.scrollPaging.limit = opts.scrollPaging.size;
-							}
-						});
-					};
-					render();
 				} else {
-					//remove tbodys in grid body area
-					opts.context.find("tbody").remove();
-					opts.context.append('<tbody><tr><td class="empty__" colspan="' + this.cellCnt + '">' +
-							N.message.get(opts.message, "empty") + '</td></tr></tbody>');
-					opts.context.append(tbodyTempClone);
+					var self = this;
+					var args = arguments;
+					opts.context.queue("grid.bind", function() {
+						self.bind.apply(self, args);
+					});
 				}
-
 				return this;
 			},
 			add : function(data) {
@@ -3697,7 +3772,9 @@
 		        countPerPage : 10,
 		        countPerPageSet : 10,
 		        pageNo : 1,
-		        onChange : null
+		        onChange : null,
+		        blockOnChangeWhenBind : false,
+		        currPageNavInfo : null
 			};
 
 			try {
@@ -3826,10 +3903,11 @@
                 	endRowIndex = opts.totalCount - 1;
                 }
 
-                return {
+                return currPageNavInfo = {
                 	"pageNo" : opts.pageNo,
                 	"countPerPage" : opts.countPerPage,
                 	"countPerPageSet" : opts.countPerPageSet,
+                	"totalCount" : opts.totalCount,
                 	"pageCount" : pageCount,
                 	"pageSetCount" : pageSetCount,
                 	"currSelPageSet" : currSelPageSet,
@@ -3861,7 +3939,7 @@
 					// reset totalCount
 					opts.totalCount = arguments[0];
 				} else if(arguments.length > 0 && N.type(arguments[0]) === "array") {
-					//to rebind new data
+					// to rebind new data
 					opts.data = N.type(data) === "array" ? N(data) : data;
 
 					// reset totalCount
@@ -3885,7 +3963,7 @@
                 		if(1 !== opts.pageNo) {
                 			opts.pageNo = 1;
                 			currPageNavInfo = Pagination.changePageSet(linkEles, opts);
-                			linkEles.body.find("li a:first").click();
+                			linkEles.body.find("li a:first").trigger("click.pagination");
                 		}
                 	});
                 }
@@ -3897,13 +3975,13 @@
                     if(currPageNavInfo.currSelPageSet > 1 && currPageNavInfo.startPage >= currPageNavInfo.currSelPageSet) {
                     	opts.pageNo = currPageNavInfo.startPage - opts.countPerPageSet;
                     	currPageNavInfo = Pagination.changePageSet(linkEles, opts);
-                    	linkEles.body.find("li a:first").click();
+                    	linkEles.body.find("li a:first").trigger("click.pagination");
                     }
                 });
 
                 // page number button event
                 linkEles.body.off("click.pagination");
-                linkEles.body.on("click.pagination", "li > a", function(e) {
+                linkEles.body.on("click.pagination", "li > a", function(e, isFirst) {
                 	e.preventDefault();
 
                 	opts.pageNo = Number($(this).parent().data("pageno"));
@@ -3918,12 +3996,14 @@
                         		}
                         	}
                     	}
-                    	opts.onChange.call(this, opts.pageNo, this, selData, currPageNavInfo);
+                    	if(opts.blockOnChangeWhenBind === false || (opts.blockOnChangeWhenBind === true && isFirst !== true)) {
+                    		opts.onChange.call(this, opts.pageNo, this, selData, currPageNavInfo);
+                    	}
                     }
 
                     linkEles.body.find("li.pagination_active__").removeClass("pagination_active__");
                     $(this).parent().addClass("pagination_active__");
-                }).find("li a:eq(" + String(opts.pageNo - currPageNavInfo.startPage) +  ")").click();
+                }).find("li a:eq(" + String(opts.pageNo - currPageNavInfo.startPage) +  ")").trigger("click.pagination", [true]);
 
                 // next button event
                 linkEles.next.unbind("click.pagination");
@@ -3932,7 +4012,7 @@
                     if(currPageNavInfo.pageSetCount > currPageNavInfo.currSelPageSet) {
                     	opts.pageNo = currPageNavInfo.startPage + opts.countPerPageSet;
                     	currPageNavInfo = Pagination.changePageSet(linkEles, opts);
-                    	linkEles.body.find("li a:first").click();
+                    	linkEles.body.find("li a:first").trigger("click.pagination");
                     }
                 });
 
@@ -3944,12 +4024,21 @@
                 		if(opts.pageNo !== currPageNavInfo.pageCount) {
                 			opts.pageNo = currPageNavInfo.pageCount;
                 			currPageNavInfo = Pagination.changePageSet(linkEles, opts);
-                			linkEles.body.find("li a:last").click();
+                			linkEles.body.find("li a:last").trigger("click.pagination");
                 		}
                 	});
                 }
 
 				return this;
+			},
+			totalCount : function(totalCount) {
+				var opts = this.options;
+				if(totalCount != undefined) {
+					opts.totalCount = totalCount;
+					return this;
+				} else {
+					return opts.totalCount;
+				}
 			},
 			pageNo : function(pageNo) {
 				var opts = this.options;
@@ -3979,6 +4068,9 @@
 					return this.options.countPerPageSet;
 				}
 				return this;
+			},
+			currPageNavInfo : function() {
+				return this.options.currPageNavInfo;
 			}
 		});
 
