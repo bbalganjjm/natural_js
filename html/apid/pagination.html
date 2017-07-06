@@ -53,10 +53,16 @@
 		</tr>
 		<tr>
 			<th align="right"><label for="pageNo">pageNo</label></th>
-			<td colspan="3">
+			<td>
 				<input id="pageNo" type="text" value="1"/>
 				<label for="pageNo" lang="ko_KR">페이지 번호</label>
 				<label for="pageNo" lang="en_US">Page number</label>
+			</td>
+			<th align="right"><label for="blockOnChangeWhenBind">blockOnChangeWhenBind</label></th>
+			<td>
+				<input id="blockOnChangeWhenBind" type="checkbox">
+				<label for="blockOnChangeWhenBind" lang="ko_KR">Bind 할 때 onChange 이벤트를 차단 할지 여부</label>
+				<label for="blockOnChangeWhenBind" lang="en_US">Whether to block onChange event when bind</label>
 			</td>
 		</tr>
 		<tr>
@@ -158,7 +164,8 @@
     	       			countPerPageSet : parseInt(N("#countPerPageSet", view).val()),
     	       			pageNo : parseInt(N("#pageNo", view).val()),
     	       			onChange : N.string.trimToNull(N("#onChange", view).val()) !== null ?
-    	          				eval("(" + N("#onChange", view).val() + ")") : null
+    	          				eval("(" + N("#onChange", view).val() + ")") : null,
+          				blockOnChangeWhenBind : N("#blockOnChangeWhenBind", view).is(":checked")
     	       		}
 	            	pagination = N(data).pagination(opts);
 				});

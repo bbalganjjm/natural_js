@@ -18,6 +18,14 @@
 				<label for="onActive" lang="en_US">Event handler for tab active event</label>
 			</td>
 		</tr>
+		<tr>
+			<th><label for="blockOnActiveWhenCreate">blockOnActiveWhenCreate</label></th>
+			<td colspan="3">
+				<input id="blockOnActiveWhenCreate" type="checkbox">
+				<label for="blockOnActiveWhenCreate" lang="ko_KR">탭을 생성 하면서 기본 탭을 선택 할 때 onActive 이벤트를 차단 할지 여부</label>
+				<label for="blockOnActiveWhenCreate" lang="en_US">Whether to block onActive event when creating a tab and selecting the default tab</label>
+			</td>
+		</tr>
 	</table>
 
 	<p lang="ko_KR" class="smallContTit">함수 옵션 : </p>
@@ -98,7 +106,8 @@ He was ranked 5th in Rolling Stone's list of the "100 Greatest Guitarists of All
 	            var opts = {
 	            	randomSel : N("input#randomSel", view).is(":checked"),
 	            	onActive : N.string.trimToNull(N("textarea#onActive", view).val()) !== null ?
-	          				eval("(" + N("textarea#onActive", view).val() + ")") : null
+	          				eval("(" + N("textarea#onActive", view).val() + ")") : null,
+       				blockOnActiveWhenCreate : N("#blockOnActiveWhenCreate", view).is(":checked")
 	      		};
 	            this_.tab = N("div#tab").tab(opts);
 
