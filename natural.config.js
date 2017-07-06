@@ -170,6 +170,12 @@
 			"request" : {
 				"options" : {
 					/**
+					 * 기본 Request Method
+					 * GET 으로 되어 있으면 JSON 형태의 파라미터가 q라는 파라미터명으로 q={a:1} 와 같이 전달 됩니다.
+					 * JSON Object String 을 Request Body에 온전히 서버로 전송하려면 반드시 POST로 바꿔 주시기 바랍니다.
+					 */
+					"type" : "GET",
+					/**
 					 * 기본 contentType
 					 */
 					"contentType" : "application/json; charset=utf-8",
@@ -517,13 +523,6 @@
 	N.context.attr("ui.shell", {
 		"notify" : {
 			/**
-			 * 메시지가 표시 될 위치
-			 */
-			"position" : {
-				top : 10,
-				right : 10
-			},
-			/**
 			 * 다국어 메시지
 			 */
 			"message" : {
@@ -532,6 +531,34 @@
 				},
 				"en_US" : {
 					"close" : "Close"
+				}
+			}
+		},
+		"docs" : {
+			"message" : {
+				"ko_KR" : {
+					"closeAllTitle" : "메뉴 전체 닫기",
+					"closeAll" : "전체 닫기",
+					"closeAllQ" : "선택한 메뉴를 제외하고 열린 메뉴 전체를 닫겠습니까?",
+					"docListTitle" : "열린 메뉴 목록",
+					"docList" : "메뉴 목록",
+					"selDocument" : "{0} 메뉴 선택",
+					"close" : "메뉴 닫기",
+					"closeConf" : "\"{0}\" 메뉴에 편집중인 항목이 있습니다. 무시하고 메뉴를 닫겠습니까?",
+					"maxTabs" : "최대 {0} 개의 메뉴 만 열 수 있습니다. <br>다른 메뉴 탭을 닫고 다시 시도 하세요.",
+					"maxStateful" : "선택한 메뉴가 활성화 되면 설정 된 최대 상태유지 메뉴 개수({1} 개)가 초과되어<br>마지막으로 선택 된 \"{0}\" 메뉴의 상태가 초기화 됩니다.<br>메뉴를 선택 하겠습니까?"
+				},
+				"en_US" : {
+					"closeAllTitle" : "Close all menus",
+					"closeAll" : "Close all",
+					"closeAllQ" : "Are you sure you want to close the entire open menu except for the selected menu?",
+					"docListTitle" : "Opened menu list",
+					"docList" : "Menu list",
+					"selDocument" : "Select the {0} menu",
+					"close" : "Close the menu",
+					"closeConf" : "There is an item being edited in the \"{0}\" memu. Are you sure you want to close the menu?",
+					"maxTabs" : "You can only open up to {0} menus. <br>Close other menu tabs and try again.",
+					"maxStateful" : "선택한 메뉴가 활성화 되면 설정 된 최대 상태유지 메뉴 개수({1} 개)가 초과되어<br>마지막으로 선택 된 \"{0}\" 메뉴의 상태가 초기화 됩니다.<br>메뉴를 선택 하겠습니까?"
 				}
 			}
 		}
