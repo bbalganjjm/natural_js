@@ -171,6 +171,21 @@
 				<p lang="en_US">Whether to block onActive event when creating a tab and selecting the default tab</p>
 			</td>
 		</tr>
+		<tr>
+			<td>onLoad</td>
+			<td>Function</td>
+			<td>null</td>
+			<td></td>
+			<td>
+				<p>탭에 URL 을 지정하여 다른 페이지를 불러올때 로딩이 완료 된 후 실행되는 이벤트입니다.</p>
+				<p>이벤트 콜백 함수의 인자는 다음과 같이 반환 됩니다.</p>tabIdx, tabEle, contentEle, cont
+				<p>tabIdx : 로딩 된 탭 Index</p>
+				<p>tabEle : 로딩 된 탭 요소</p>
+				<p>contentEle : 로딩 된 탭 컨텐츠 요소</p>
+				<p>cont : 로딩 된 페이지의 Controller 오브젝트</p>
+				<p class="alert">preload 옵션에 의해 탭이 활성화 되지 전에 페이지를 로딩 할 경우에도 해당 탭 컨텐츠가 불러와지면 onLoad 이벤트가 발생 됩니다.</p>
+			</td>
+		</tr>
 	</table>
 
 	<h3 lang="ko_KR">선언형옵션</h3>
