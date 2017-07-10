@@ -89,7 +89,8 @@
 			<td align="center">○</td>
 			<td>
 				<p>Alert 의 배경이 되는  컨텐츠를 가려주는 overlay 가 적용될 부분을 jQuery selector 를 사용하여 지정 합니다.</p>
-				<p>window 객체를 지정하면 화면 전체를 덮는 Modal overlay 가 표시되고 jQuery Object를 입력하면 지정한 요소만 덮어줍니다.</p>
+				<p>window 객체를 지정하면 화면 전체를 덮어 주고 jQuery Object를 입력하면 지정한 요소만 덮어줍니다.</p>
+				<p>입력요소(select, input, textarea 등)를 지정 하면 입력요소 옆에 툴팁으로 메시지를 표시 해 줍니다.</p>
 			</td>
 		</tr>
 		<tr>
@@ -163,6 +164,17 @@
 			<td>true</td>
 			<td></td>
 			<td>버튼 표시 유무</td>
+		</tr>
+		<tr>
+			<td>closeMode</td>
+			<td>String</td>
+			<td>remove</td>
+			<td></td>
+			<td>
+				X 버튼이나 확인 버튼을 클릭 했을때 hide 메서드를 호출 할 것인지 remove 메서드를 호출 할 것인지 지정<br>
+				 - hide : hide 메서드를 호출하여 메시지 다이얼로그 요소를 숨겨 줌.<br>
+				 - remove : remove 메서드를 호출하여 메시지 다이얼로그 요소를 제거 함(이전 상태가 사라짐).
+			</td>
 		</tr>
 		<tr>
 			<td>modal</td>

@@ -11,9 +11,13 @@
 		<tr>
 			<th><label for="context">context</label></th>
 			<td>
-				<input id="context" type="text" value="#result" />
-				<label for="context" lang="ko_KR">"window" 나 jQuery selector 입력</label>
-				<label for="context" lang="en_US">Input "window" or jQuery selector</label>
+				<select id="context">
+					<option value="window">window</option>
+					<option value="#result" selected="selected">#result</option>
+					<option value="#input">#input</option>
+				</select>
+				<label for="context" lang="ko_KR">window 는 window 객체이고 #result 는 결과가 표시되는 요소의 id 입니다. #input 은 입력 요소의 id 입니다.</label>
+				<label for="context" lang="en_US">window value is window object and #result value is element's id for display the result. #input is input element's id</label>
 			</td>
 			<th><label for="msg">msg</label></th>
 			<td><textarea id="msg">
@@ -121,8 +125,10 @@ function() {
 	</div>
 
 	<p lang="ko_KR" class="smallContTit">결과 : </p>
+	:input <input id="input" type="text" />
+	<br><br>
 	<p lang="en_US" class="smallContTit">Result : </p>
-    <div id="result" class="result" style="height: 300px;"></div>
+    div <div id="result" class="result" style="height: 300px;"></div>
 </article>
 
 <script type="text/javascript">
