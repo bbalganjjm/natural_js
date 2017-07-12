@@ -558,7 +558,6 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .grid__>thead .data_filter_panel__.visible__ {
-	visibility: visible;
 	transform: scale(1);
 	transform-origin: top left;
 	transition: transform 0.3s cubic-bezier(0.65, -0.01, 0.21, 1.36);
@@ -566,7 +565,8 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 .grid__>thead .data_filter_panel__.hidden__ {
 	transform: scale(0);
-	visibility: hidden;
+	transform-origin: top left;
+	transition: transform 0.15s cubic-bezier(0.65, -0.01, 0.21, 1);
 }
 
 .grid__>thead .data_filter_panel__ .data_filter_search__ {
