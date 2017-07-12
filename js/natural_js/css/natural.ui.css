@@ -743,12 +743,16 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	width: 316px;
 	color: #004A00;
 	z-index: 1;
-	transform: scale(0);
 }
 
 .datepicker_contents__.visible__ {
 	transform: scale(1);
 	transition: transform 0.3s cubic-bezier(0.65, -0.01, 0.21, 1.36);
+}
+
+.datepicker_contents__.hidden__ {
+	transform: scale(0);
+	transition: transform 0.15s cubic-bezier(0.65, -0.01, 0.21, 1);
 }
 
 .datepicker_contents__.orgin_left__ {
