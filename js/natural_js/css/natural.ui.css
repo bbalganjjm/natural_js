@@ -400,6 +400,15 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 }
 
+/* Select */
+.select_input_container__ .select_input_label__ {
+	display: inline-block;
+}
+
+.select_input_container__.select_input_vertical__ .select_input_label__ {
+	display: block;
+}
+
 /* Form */
 .validate_false__ {
 	border-color: red !important;

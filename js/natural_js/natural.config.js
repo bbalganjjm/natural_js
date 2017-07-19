@@ -471,6 +471,10 @@
 				closeBtn : "&times;"
 			},
 			/**
+			 * html 인식 여부
+			 */
+			html : true,
+			/**
 			 * 다국어 메시지
 			 */
 			"message" : {
