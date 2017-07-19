@@ -121,11 +121,11 @@ N(".exap0600").cont({
             	N("#subContext", view).comm("html/exap/exap0601.html")
             		.request.attr("selData", [ data[index] ]) // send seleted row data
             			.request.attr("scData", form.data()) // send search condition data
-            				.request.attr("pageNo", pagination.pageNo())	
+            				.request.attr("pageNo", pagination.pageNo())
 	            				.submit();
         	}
        	});
-    	
+
     	// 5. initialize N.pagination
     	var pagination = N().pagination({
 			context : $("#pagination", view),
@@ -147,14 +147,15 @@ N(".exap0600").cont({
              	});
             }
         }).click(); // Auto retrieve
-    	
+
         // 6-2. Add button
     	N("#btnAdd", view).click(function(e) {
             e.preventDefault();
          // Grid row select event
         	N("#subContext", view).comm("html/exap/exap0602.html")
         		.request.attr("scData", form.data()) // send search condition data
-        			.submit();
+        			.request.attr("pageNo", pagination.pageNo()) // send pagination's pageNo
+        				.submit();
         });
     }
 });
