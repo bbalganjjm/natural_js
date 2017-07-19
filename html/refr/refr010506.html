@@ -187,35 +187,59 @@
 			<td align="center">-</td>
 			<td align="center">-</td>
 			<td>N.select</td>
-			<td>지정된 context에 데이터를 바인드 합니다.</td>
+			<td>
+				<p>지정된 context에 데이터를 바인드 합니다.</p>
+				<p class="alert">요소가 체크박스 일 경우 템플릿 요소가 체크된 상태라면 바인드 될 때 생성되는 요소들도 체크된 상태로 생성 됩니다.</p>
+			</td>
 		</tr>
 		<tr>
 			<td></td>
 			<td>data</td>
 			<td>JSON Array</td>
 			<td align="center">-</td>
-			<td>data인자를 지정하면 컴포넌트에 바인드 된 데이터가 지정한 데이터로 치환되어 바인드 됩니다.</td>
+			<td>data 인자를 지정하면 컴포넌트에 바인드 된 데이터가 지정한 데이터로 치환되어 바인드 됩니다.</td>
 		</tr>
 		<tr>
 			<td>val</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
 			<td>String or Array</td>
-			<td>선택된 값을 가져옵니다.</td>
+			<td>선택 된 값을 가져 옵니다.</td>
 		</tr>
 		<tr>
 			<td></td>
 			<td>val</td>
 			<td>String</td>
 			<td align="center">-</td>
-			<td>val 인자가 undefined 가 아니면 val 값에 해당하는 요소를 선택해 줍니다.</td>
+			<td>val 인자가 undefined 가 아니면 val 값에 해당하는 요소를 선택 해 줍니다.</td>
+		</tr>
+		<tr>
+			<td>index</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>number or array(number)</td>
+			<td>선택 된 요소의 index를 가져 옵니다.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>index</td>
+			<td>number or array(number)</td>
+			<td>N.select</td>
+			<td>index 인자가 undefined 가 아니면 index 값에 해당하는 요소를 선택 해 줍니다.</td>
+		</tr>
+		<tr>
+			<td>remove</td>
+			<td>val</td>
+			<td>number</td>
+			<td>N.select</td>
+			<td>val 값에 해당하는 선택 요소를 제거 해 줍니다.</td>
 		</tr>
 		<tr>
 			<td>reset</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
 			<td>N.select</td>
-			<td>선택입력요소의 선택을 초기화 합니다.</td>
+			<td>선택 입력요소의 선택을 초기화 합니다.</td>
 		</tr>
 		<tr>
 			<td></td>
