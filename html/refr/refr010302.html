@@ -53,10 +53,16 @@
 			<td>
 				<p>N.comm을 플러그인 방식으로의 초기화 방식입니다.</p>
 				<p>N.comm과 동작되는 로직은 같으며 실제 N() 의 인자로 들어온 값이 N.comm()의 첫 번째 인자로 지정 됩니다.</p>
-				<p>* PAGE: </p>
+				<p>* PAGE 를 불러올때: </p>
 				<pre><code class="language-javascript">N("#contents").comm("page.html").submit()</code></pre>
-				<p>* DATA: </p>
+				<p>* DATA 를 불러올때: </p>
 				<pre><code class="language-javascript">N([{ parameter : "param1" }, { parameter : "param2" }]).comm("data.json").submit(function(data) {})</code></pre>
+				<p class="alert">N() 의 인자로 지정한 파라미터는 Communicator.request.options 의 data 속성으로 저정되어 파라미터로 전달 됩니다.</p>
+				<p class="alert">
+					N() 의 인자로 지정한 파라미터는 요청 타입(type, HTTP 에서는 Method)이 GET 일 경우 지정한 파라미터 타입이 JSON String 이나 Array(JSON) String 이면 q 라는 파라미터 변수명에 해당 문자열을(URL Encode 함) 담아 보냅니다.<br>
+					예) text.html?q=[{"a" : 1}, {"a" : 2}]<br>
+					브라우저마다 GET 파라미터로 보낼수 있는 양이 정해져 있어 파라미터가 잘릴 수 있으니 브라우저별 GET 파라미터 최대 전송량을 파악하여 사용하기 바랍니다.
+				</p>
 			</td>
 		</tr>
 		<tr>
