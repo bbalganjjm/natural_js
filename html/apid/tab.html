@@ -108,7 +108,7 @@ He was ranked 5th in Rolling Stone's list of the "100 Greatest Guitarists of All
 	    	// bind events
 	    	this.setEvents(view, this);
 	    },
-	    setEvents : function(view, this_) {
+	    setEvents : function(view, cont) {
 	    	N("#btnInitTab", view).click(function(e) {
 	            e.preventDefault();
 	            var opts = {
@@ -119,7 +119,7 @@ He was ranked 5th in Rolling Stone's list of the "100 Greatest Guitarists of All
  	          				eval("(" + N("textarea#onLoad", view).val() + ")") : null,
        				blockOnActiveWhenCreate : N("#blockOnActiveWhenCreate", view).is(":checked")
 	      		};
-	            this_.tab = N("div#tab").tab(opts);
+	            cont.tab = N("div#tab").tab(opts);
 
 	            N(this).instance("button").disable();
 
@@ -130,22 +130,22 @@ He was ranked 5th in Rolling Stone's list of the "100 Greatest Guitarists of All
 
 	    	N("#btnReload", view).click(function(e) {
 	        	e.preventDefault();
-	        	N(view.parent()).comm(this_.request.get("url")).submit();
+	        	N(view.parent()).comm(cont.request.get("url")).submit();
 	        });
 
 	    	N("#btnOpen", view).click(function(e) {
 	        	e.preventDefault();
-	        	this_.tab.open(N("input#idx", view).val());
+	        	cont.tab.open(N("input#idx", view).val());
 	        });
 
 	    	N("#btnDisable", view).click(function(e) {
 	            e.preventDefault();
-	            this_.tab.disable(N("input#disable", view).val());
+	            cont.tab.disable(N("input#disable", view).val());
 	        });
 
 	        N("#btnEnable", view).click(function(e) {
 	            e.preventDefault();
-            	this_.tab.enable(N("input#enable", view).val());
+            	cont.tab.enable(N("input#enable", view).val());
 	        });
 	    }
 	});

@@ -62,7 +62,7 @@
 	    	// bind events
 	        this.setEvents(view, this);
 	    },
-	    setEvents : function(view, this_) {
+	    setEvents : function(view, cont) {
 	        N("#btnMake", view).click(function(e) {
 	            e.preventDefault();
 	            var opts = {
@@ -93,7 +93,7 @@
 
 	        N("#btnReload", view).click(function(e) {
 	        	e.preventDefault();
-	        	N(view.parent()).comm(this_.request.get("url")).submit();
+	        	N(view.parent()).comm(cont.request.get("url")).submit();
 	        });
 	    }
 	});

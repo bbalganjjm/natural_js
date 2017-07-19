@@ -5,61 +5,61 @@
 		<pre class="data" class="line-numbers" style="height: 250px;overflow: scroll;border: 1px solid #77cc77;"><code id="data" class="language-javascript">[{
     "gender": [{
 	     	"key" : "male",
-	     	"val" : "male"
+	     	"val" : "01"
 	     },{
 	     	"key" : "female",
-	     	"val" : "female"
+	     	"val" : "02"
 	    }],
     "eyeColor": [{
 	     	"key" : "blue",
-	     	"val" : "blue"
+	     	"val" : "01"
 	     },{
 	     	"key" : "brown",
-	     	"val" : "brown"
+	     	"val" : "02"
 	     },{
 	     	"key" : "green",
-	     	"val" : "green"
+	     	"val" : "03"
     }],
     "company": [{
 	     	"key" : "PROSELY",
-	     	"val" : "PROSELY"
+	     	"val" : "01"
 	     },{
 	     	"key" : "ASSISTIX",
-	     	"val" : "ASSISTIX"
+	     	"val" : "02"
 	     },{
 	     	"key" : "VORATAK",
-	     	"val" : "VORATAK"
+	     	"val" : "03"
 	     },{
 	     	"key" : "CANDECOR",
-	     	"val" : "CANDECOR"
+	     	"val" : "04"
 	     },{
 	     	"key" : "BARKARAMA",
-	     	"val" : "BARKARAMA"
+	     	"val" : "05"
 	     },{
 	     	"key" : "STOCKPOST",
-	     	"val" : "STOCKPOST"
+	     	"val" : "06"
 	     },{
 	     	"key" : "MICROLUXE",
-	     	"val" : "MICROLUXE"
+	     	"val" : "07"
 	     },{
 	     	"key" : "SHADEASE",
-	     	"val" : "SHADEASE"
+	     	"val" : "08"
 	     },{
 	     	"key" : "ZENTIA",
-	     	"val" : "ZENTIA"
-	    	},{
-     	"key" : "INTRADISK",
-     	"val" : "INTRADISK"
+	     	"val" : "09"
+    	},{
+	     	"key" : "INTRADISK",
+	     	"val" : "10"
     }],
     "favoriteFruit": [{
 	     	"key" : "apple",
-	     	"val" : "apple"
+	     	"val" : "01"
 	     },{
 	     	"key" : "strawberry",
-	     	"val" : "strawberry"
+	     	"val" : "02"
 	     },{
 	     	"key" : "banana",
-	     	"val" : "banana"
+	     	"val" : "03"
     }]
 }]</code></pre>
 	</div>
@@ -130,9 +130,27 @@
 			<th width="10%">val</th>
 			<th width="10%"><label for="val">arguments[0]</label></th>
 			<td width="80%" colspan="3">
-				<input id="val" type="text" value="STOCKPOST" />
-				<label for="val" lang="ko_KR">입력하지 않으면 선택된 값을 반환하고 입력하면 입력한 값과 같은 요소를 선택 합니다.</label>
-				<label for="val" lang="en_US">If does not set value to this input, return the selected value. otherwise select element the same input value</label>
+				<input id="val" type="text" value="05" />
+				<label for="val" lang="ko_KR">입력하지 않으면 선택된 값을 반환하고 입력하면 입력한 값과 같은 선택지 요소를 선택 합니다.</label>
+				<label for="val" lang="en_US">If does not set value to this input, return the selected value. otherwise select optional element the same input value</label>
+			</td>
+		</tr>
+		<tr>
+			<th width="10%">index</th>
+			<th width="10%"><label for="index">arguments[0]</label></th>
+			<td width="80%" colspan="3">
+				<input id="index" type="text" value="3" />
+				<label for="index" lang="ko_KR">입력하지 않으면 선택된 index 값을 반환하고 index 값을 입력하면 인덱스 값에 해당하는 선택지 요소를 선택합니다.</label>
+				<label for="index" lang="en_US">If it does not set the value to this input return the selected index value. otherwise, If you enter index value, it selects optional element corresponding to index value.</label>
+			</td>
+		</tr>
+		<tr>
+			<th width="10%">remove</th>
+			<th width="10%"><label for="remove">arguments[0]</label></th>
+			<td width="80%" colspan="3">
+				<input id="remove" type="text" value="04" />
+				<label for="remove" lang="ko_KR">입력한 값에 해당하는 선택지 요소와 해당 행 데이터를 제거 합니다.</label>
+				<label for="remove" lang="en_US">Removes the optional element and its row data corresponding to the entered value.</label>
 			</td>
 		</tr>
 		<tr>
@@ -174,6 +192,8 @@
 		</a>
 		<a id="btnBind" href="#" data-opts='{ "color": "yellowgreen", "size": "large", "disable": true }'>bind</a>
 		<a id="btnVal" href="#" data-opts='{ "color": "yellowgreen", "size": "large", "disable": true }'>val</a>
+		<a id="btnIndex" href="#" data-opts='{ "color": "yellowgreen", "size": "large", "disable": true }'>index</a>
+		<a id="btnRemove" href="#" data-opts='{ "color": "yellowgreen", "size": "large", "disable": true }'>remove</a>
 		<a id="btnData" href="#" data-opts='{ "color": "yellowgreen", "size": "large", "disable": true }'>data</a>
 		<a id="btnReset" href="#" data-opts='{ "color": "yellowgreen", "size": "large", "disable": true }'>reset</a>
 		<a id="btnReload" href="#" data-opts='{ "color": "white", "size": "large" }'>
@@ -190,7 +210,8 @@
 				<th style="width: 85px;"><label for="eyeColor">eye color</label></th>
 				<td  style="width: 300px;">
 					<select id="eyeColor">
-						<option>선택</option>
+						<option value="">선택</option>
+						<option value="E1">E1</option>
 					</select>
 				</td>
 			</tr>
@@ -226,7 +247,7 @@
 	    	// bind events
 	    	this.setEvents(view, this);
 	    },
-	    setEvents : function(view, this_) {
+	    setEvents : function(view, cont) {
 	    	N("#btnInit", view).click(function(e) {
 	            e.preventDefault();
 	            var data = eval(N("code#data", view).text())[0][N("select[id='data']:eq(0)", view).val()];
@@ -237,33 +258,64 @@
 					append : N("#append", view).is(":checked"),
 					direction : N("#direction", view).val(),
 	            }
-	            this_.select = N(data).select(opts);
+	            cont.select = N(data).select(opts);
 
 	           	N("#btnBind", view).instance("button").enable();
-	           	N("#btnVal", view).instance("button").enable();
 	           	N("#btnData", view).instance("button").enable();
-	           	N("#btnReset", view).instance("button").enable();
 	        });
+
+	    	N("select#context", view).change(function() {
+	    		N("#btnBind", view).instance("button").disable();
+	           	N("#btnData", view).instance("button").disable();
+	           	N("#btnVal", view).instance("button").disable();
+	           	N("#btnIndex", view).instance("button").disable();
+	           	N("#btnRemove", view).instance("button").disable();
+	           	N("#btnReset", view).instance("button").disable();
+	    	});
 
 	        N("#btnBind", view).click(function(e) {
 	        	e.preventDefault();
-	        	this_.select.bind();
+	        	cont.select.bind();
+
+	           	N("#btnVal", view).instance("button").enable();
+	           	N("#btnIndex", view).instance("button").enable();
+	           	N("#btnRemove", view).instance("button").enable();
+	           	N("#btnReset", view).instance("button").enable();
 	        });
 
 	        N("#btnVal", view).click(function(e) {
 	        	e.preventDefault();
 	        	var value = N.string.trimToNull(N("input[id=val]:eq(1)", view).val());
 	        	if(value !== null) {
-	        		this_.select.val(value);
+	        		cont.select.val(value);
 	        	} else {
-	        		N("div.result", view).alert(this_.select.val()).show();
+	        		N("div.result", view).alert(N.type(cont.select.val()) === "array" ? cont.select.val().join(", ") : cont.select.val()).show();
+	        	}
+	        });
+
+	        N("#btnIndex", view).click(function(e) {
+	        	e.preventDefault();
+	        	var value = N.string.trimToNull(N("input[id=index]", view).val());
+	        	if(value !== null) {
+	        		cont.select.index(Number(value));
+	        	} else {
+	        		var idxs = cont.select.index();
+	        		N("div.result", view).alert(N.type(idxs) === "array" ? idxs.join(", ") : idxs).show();
+	        	}
+	        });
+
+	        N("#btnRemove", view).click(function(e) {
+	        	e.preventDefault();
+	        	var value = N.string.trimToNull(N("input[id=remove]", view).val());
+	        	if(value !== null) {
+	        		cont.select.remove(value);
 	        	}
 	        });
 
 	        N("#btnData", view).click(function(e) {
 	        	e.preventDefault();
 	        	N("div.result", view).alert({
-	        		msg : '<pre class="pre">' + N.json.format(this_.select.data(eval(N("select[id='data']:eq(1)", view).val()))) + '</pre>',
+	        		msg : '<pre class="pre">' + N.json.format(cont.select.data(eval(N("select[id='data']:eq(1)", view).val()))) + '</pre>',
 	        		width : 400,
 	        		height : 250
 	        	}).show();
@@ -271,12 +323,12 @@
 
 	        N("#btnReset", view).click(function(e) {
 	        	e.preventDefault();
-	        	this_.select.reset(N("#reset", view).is(":checked"));
+	        	cont.select.reset(N("#reset", view).is(":checked"));
 	        });
 
 	        N("#btnReload", view).click(function(e) {
 	        	e.preventDefault();
-	        	N(view.parent()).comm(this_.request.get("url")).submit();
+	        	N(view.parent()).comm(cont.request.get("url")).submit();
 	        });
 	    },
 	    /**

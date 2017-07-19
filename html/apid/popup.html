@@ -319,7 +319,7 @@ function() {
 	    	N("#btnLogin", view).css("padding-top", "15px");
 	    	N("#btnLogin", view).css("padding-bottom", "15px");
 	    },
-	    setEvents : function(view, this_) {
+	    setEvents : function(view, cont) {
 	    	N("#btnInitLocal", view).click(function(e) {
 	            e.preventDefault();
 
@@ -341,7 +341,7 @@ function() {
 	            			eval("(" + N("#localPage #onCancel", view).val() + ")") : null
 	            };
 
-	            this_.localPopup = N(N("#context", view).val()).popup(opts);
+	            cont.localPopup = N(N("#context", view).val()).popup(opts);
 
 	            N("#btnOpenLocal", view).instance("button").enable();
 	            N(this).instance("button").disable();
@@ -349,7 +349,7 @@ function() {
 
 	        N("#btnOpenLocal", view).click(function(e) {
 	            e.preventDefault();
-	            this_.localPopup.open();
+	            cont.localPopup.open();
 	        });
 
 	        N("#btnInitOther", view).click(function(e) {
@@ -378,7 +378,7 @@ function() {
 	            	onCloseData : N.string.trimToNull(N("#otherPage #onCloseData", view).val())
 	            };
 
-	            this_.otherPopup = N().popup(opts);
+	            cont.otherPopup = N().popup(opts);
 
 	            N("#btnOpenOther", view).instance("button").enable();
 	            N(this).instance("button").disable();
@@ -386,12 +386,12 @@ function() {
 
 	        N("#btnOpenOther", view).click(function(e) {
 	            e.preventDefault();
-	            this_.otherPopup.open();
+	            cont.otherPopup.open();
 	        });
 
 	        N("a[id='btnReload']", view).click(function(e) {
 	        	e.preventDefault();
-	        	N(view.parent()).comm(this_.request.get("url")).submit();
+	        	N(view.parent()).comm(cont.request.get("url")).submit();
 	        });
 	    }
 	});

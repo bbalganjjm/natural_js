@@ -13,7 +13,7 @@
 	    "age": 26,
 	    "eyeColor": "green",
 	    "name": "Dean Stanley",
-	    "gender": "male",
+	    "gender": "female",
 	    "company": ["ASSISTIX", "CANDECOR"],
 	    "email": "deanstanley@zentia.com",
 	    "phone": "+1 (920) 409-2680",
@@ -364,7 +364,7 @@
 			N(data[2].gender).select(N("#gender", view)).bind();
 			N(data[2].favoriteFruit).select(N("#favoriteFruit", view)).bind();
 	    },
-	    setEvents : function(view, this_, data) {
+	    setEvents : function(view, cont, data) {
 	    	var form;
 	    	N("#btnInit", view).click(function(e) {
 	    		e.preventDefault();
@@ -451,7 +451,7 @@
 
 	        N("#btnReload", view).click(function(e) {
 	        	e.preventDefault();
-	        	N(view.parent()).comm(this_.request.get("url")).submit();
+	        	N(view.parent()).comm(cont.request.get("url")).submit();
 	        });
 	    },
 	    /**

@@ -84,7 +84,7 @@
 	     		N("div.result", view).alert('request.attr("hello") : <br/>' + request.attr("hello")).show();
 	     	}
 	    },
-	    setEvents : function(view, this_) {
+	    setEvents : function(view, cont) {
 	        N("#btnApply", view).click(function(e) {
 	        	e.preventDefault();
 
@@ -99,7 +99,7 @@
 	           		focusin : N("input#focusin", view).is(":checked")
 	       		};
 
-	        	this_.datepicker = N("input#datepicker", view).datepicker(opts);
+	        	cont.datepicker = N("input#datepicker", view).datepicker(opts);
 
 	           	N(this).instance("button").disable();
 	           	N("#btnShow", view).instance("button").enable();
@@ -108,17 +108,17 @@
 
 	        N("#btnShow", view).click(function(e) {
 	        	e.preventDefault();
-	        	this_.datepicker.show();
+	        	cont.datepicker.show();
 	        });
 
 	        N("#btnHide", view).click(function(e) {
 	        	e.preventDefault();
-	        	this_.datepicker.hide();
+	        	cont.datepicker.hide();
 	        });
 
 	        N("#btnReload", view).click(function(e) {
 	        	e.preventDefault();
-	        	N(view.parent()).comm(this_.request.get("url")).submit();
+	        	N(view.parent()).comm(cont.request.get("url")).submit();
 	        });
 	    }
 	});
