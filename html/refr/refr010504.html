@@ -294,7 +294,7 @@
 	<h3 lang="ko_KR">예제</h3>
 	<h3 lang="en_US">Examples</h3>
 
-	<p>1. 특정영역(.popupArea)을 팝업으로 띄우기</p>
+	<p>1. 지정한 영역(.popupArea)을 팝업으로 띄우기</p>
 	<pre class="line-numbers"><code class="language-markup"><xmp>
 <div title="Popup Example" class="popupArea" style="height: 200px;border: 3px dotted #080;">이 블록이 팝업으로 보이나요?</div>
 
@@ -305,21 +305,34 @@
 	<p>2. 다른 (블록)페이지를 팝업으로 띄우기</p>
 	<pre class="line-numbers"><code class="language-markup"><xmp>
 <script type="text/javascript">
-   	N().popup("html/indx/header.html").open();
+	var popup = N().popup("html/indx/header.html");
+	popup.open();
 </script></xmp></code></pre>
 	<p>3. 다른 (블록)페이지를 드래그 가능한 팝업으로 띄우기</p>
+	<pre class="line-numbers"><code class="language-markup"><xmp>
+<script type="text/javascript">
+   	var popup = N().popup({
+   		url: "html/indx/header.html",
+   		title: "Global Navigation Bar",
+   		width: 800,
+   		draggable: true
+   	});
+   	popup.open();
+</script></xmp></code></pre>
+
+	<p>4. 다른 (블록)페이지를 팝업으로 띄우기(상태가 유지 되지 않고 매번 팝업을 다시 불러옴)</p>
 	<pre class="line-numbers"><code class="language-markup"><xmp>
 <script type="text/javascript">
    	N().popup({
    		url: "html/indx/header.html",
    		title: "Global Navigation Bar",
    		width: 800,
-   		draggable: true
+   		closeMode: "remove" // "hide" 는 팝업의 상태를 유지 하고 "remove" 는 팝업을 닫을 때 마다 팝업 요소를 제거 함.
    	}).open();
 </script></xmp></code></pre>
 
-	<p>4. 팝업에 데이터 전달하고 팝업으로부터 데이터 받기</p>
-	<p>4.1 팝업페이지(popup.html)</p>
+	<p>5. 팝업에 데이터 전달하고 팝업으로부터 데이터 받기</p>
+	<p>5.1 팝업페이지(popup.html)</p>
 	<pre class="line-numbers"><code class="language-markup"><xmp>
 <!-- Style -->
 <style>
@@ -348,7 +361,7 @@ N(".POPUP01").cont({
 });
 </script></xmp></code></pre>
 
-	<p>4.2 부모페이지(parent.html)</p>
+	<p>5.2 부모페이지(parent.html)</p>
 	<pre class="line-numbers"><code class="language-markup"><xmp>
 <!-- Style -->
 <style>
