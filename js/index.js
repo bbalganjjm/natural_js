@@ -2,13 +2,17 @@ var IndexController = {
 	docs : null,
 	init : function(window) {
 		this.setLocale();
-		this.loadWebFont();
+		if(location.hostname !== "localhost") {
+			this.loadWebFont();
+		}
 		this.loadHeader();
 		this.loadFooter();
 		this.docs = $("#docsContainer__").docs({
 			entireLoadScreenBlock : false
 		});
-		this.googleAnalytics();
+		if(location.hostname !== "localhost") {
+			this.googleAnalytics();
+		}
 		if(N.locale() === "en_US") {
 			this.notice();
 		}
