@@ -2,7 +2,7 @@ var IndexController = {
 	docs : null,
 	init : function(window) {
 		this.setLocale();
-		if(location.hostname !== "localhost") {
+		if(location.hostname === "bbalganjjm.github.io") {
 			this.loadWebFont();
 		}
 		this.loadHeader();
@@ -10,7 +10,7 @@ var IndexController = {
 		this.docs = $("#docsContainer__").docs({
 			entireLoadScreenBlock : false
 		});
-		if(location.hostname !== "localhost") {
+		if(location.hostname === "bbalganjjm.github.io") {
 			this.googleAnalytics();
 		}
 		if(N.locale() === "en_US") {

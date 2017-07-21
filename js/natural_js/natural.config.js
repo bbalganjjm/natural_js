@@ -493,7 +493,25 @@
 			"alwaysOnTop" : true
 		},
 		"tab" : {
-
+			onActive : function(tabIdx, tabEle, contentEle, tabEles, contentEles) {
+    			if(contentEle.find("> .view_context__").length > 0) {
+    				var url = contentEle.find("> .view_context__").instance("cont").request.options.url;
+    				var fixedHash = location.hash;
+    				if(fixedHash.indexOf("_T_") > -1) {
+    					fixedHash = fixedHash.substring(0, fixedHash.indexOf("_T_"));
+    				}
+    				var hash = fixedHash + "_T_" + url.replace("html/", "").replace(".html", "");
+    				if(location.hostname === "bbalganjjm.github.io") {
+    					try {
+    						ga('create', 'UA-58001949-2', 'auto');
+    						ga('send', {
+    							'hitType': 'pageview',
+    							'page': "#" + hash
+    						});
+    					} catch (e) {}
+    				}
+    			}
+    		}
 		},
 		"datepicker" : {
 			"focusin" : true,
@@ -659,10 +677,11 @@
 			},
 			*/
 			"onActive" : function(docId, isFromDocsTabList, isNotLoaded) {
-				var url = this.context(".docs_contents__." + docId + "__ > .view_context__").instance("cont").request.options.url;
+				var cont = this.context(".docs_contents__." + docId + "__ > .view_context__").instance("cont");
+				var url = cont.request.options.url;
 				var hash = url.replace("html/", "").replace(".html", "");
 				location.hash = hash;
-				if(location.hostname !== "localhost") {
+				if(location.hostname === "bbalganjjm.github.io") {
 					try {
 						ga('create', 'UA-58001949-2', 'auto');
 						ga('send', {
