@@ -659,17 +659,17 @@
 			},
 			*/
 			"onActive" : function(docId, isFromDocsTabList, isNotLoaded) {
-				// Google Analytics
-				var hashVal = location.hash;
-				if(N.string.isEmpty(hashVal)) {
-					hashVal = "#home/home0100";
-				}
-				if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 9) {
-					ga('create', 'UA-58001949-2', 'auto');
-					ga('send', {
-						'hitType': 'pageview',
-						'page': hashVal
-					});
+				var url = this.context(".docs_contents__." + docId + "__ > .view_context__").instance("cont").request.options.url;
+				var hash = url.replace("html/", "").replace(".html", "");
+				location.hash = hash;
+				if(location.hostname !== "localhost") {
+					try {
+						ga('create', 'UA-58001949-2', 'auto');
+						ga('send', {
+							'hitType': 'pageview',
+							'page': "#" + hash
+						});
+					} catch (e) {}
 				}
 			},
 			/*
