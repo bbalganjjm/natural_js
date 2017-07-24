@@ -47,6 +47,20 @@
 			</td>
 		</tr>
 		<tr>
+			<th><label for="top">top</label></th>
+			<td>
+				<input id="top" type="text" value="undefined" /><br>
+				<label for="top" lang="ko_KR">메세지 컨텐츠 영역의 top 위치 값, 값이 undefined 면 auto 로 지정 됩니다.</label>
+				<label for="top" lang="en_US">Message contents top position, undefined is auto</label>
+			</td>
+			<th><label for="left">left</label></th>
+			<td>
+				<input id="left" type="text" value="undefined" /><br>
+				<label for="left" lang="ko_KR">메세지 컨텐츠 영역의 left 위치 값, 값이 undefined 면 auto 로 지정 됩니다.</label>
+				<label for="left" lang="en_US">Message contents left position, undefined is auto</label>
+			</td>
+		</tr>
+		<tr>
 			<th><label for="width">width</label></th>
 			<td>
 				<input id="width" type="text" value="0" /><br>
@@ -86,6 +100,14 @@
 				<input id="draggableOverflowCorrection" type="checkbox" checked="checked" />
 				<label for="draggableOverflowCorrection" lang="ko_KR">체크를 해제(false)하면 메세지 팝업를 화면 밖으로 드래그 &amp; 드롭 할 수 있습니다.</label>
 				<label for="draggableOverflowCorrection" lang="en_US">If this checkbox with uncheck(false), you can drag &amp; drop the messege dialog to out of screen</label>
+			</td>
+		</tr>
+		<tr>
+			<th><label for="overlayClose">overlayClose</label></th>
+			<td colspan="3">
+				<input id="overlayClose" type="checkbox" checked="checked" />
+				<label for="overlayClose" lang="ko_KR">체크를 해제(false)하면 오버레이 요소를 클릭 할 때 메세지 대화상자를 닫지 않습니다.</label>
+				<label for="overlayClose" lang="en_US">If this checkbox with uncheck(false), it does not close the message dialog when clicking the overlay element.</label>
 			</td>
 		</tr>
 		<tr>
@@ -186,6 +208,20 @@ function() {
 			</td>
 		</tr>
 		<tr>
+			<th><label for="top">top</label></th>
+			<td>
+				<input id="top" type="text" value="undefined" /><br>
+				<label for="top" lang="ko_KR">메세지 컨텐츠 영역의 top 위치 값, 값이 undefined 면 auto 로 지정 됩니다.</label>
+				<label for="top" lang="en_US">Message contents top position, undefined is auto</label>
+			</td>
+			<th><label for="left">left</label></th>
+			<td>
+				<input id="left" type="text" value="undefined" /><br>
+				<label for="left" lang="ko_KR">메세지 컨텐츠 영역의 left 위치 값, 값이 undefined 면 auto 로 지정 됩니다.</label>
+				<label for="left" lang="en_US">Message contents left position, undefined is auto</label>
+			</td>
+		</tr>
+		<tr>
 			<th><label for="width">width</label></th>
 			<td>
 				<input id="width" type="text" value="500" /><br>
@@ -228,10 +264,16 @@ function() {
 			</td>
 		</tr>
 		<tr>
+			<th><label for="overlayClose">overlayClose</label></th>
+			<td>
+				<input id="overlayClose" type="checkbox" checked="checked" />
+				<label for="overlayClose" lang="ko_KR">체크를 해제(false)하면 오버레이 요소를 클릭 할 때 메세지 대화상자를 닫지 않습니다.</label>
+				<label for="overlayClose" lang="en_US">If this checkbox with uncheck(false), it does not close the message dialog when clicking the overlay element.</label>
+			</td>
 			<th><label for="preload">preload</label></th>
-			<td colspan="3">
+			<td>
 				<input id="preload" type="checkbox" />
-				<label for="preload" lang="ko_KR">체크(true)하면 팝업이 초기화 될때 팝업의 컨텐츠도 미리 적제 합니다.</label>
+				<label for="preload" lang="ko_KR">체크(true)하면 팝업이 초기화 될때 팝업의 컨텐츠를 미리 적제 합니다.</label>
 				<label for="preload" lang="en_US">If this checkbox with check(true), immediately loads the contents when the popup is initialized</label>
 			</td>
 		</tr>
@@ -329,12 +371,15 @@ function() {
 	       			confirm : N("#localPage #confirm", view).is(":checked"),
 	            	modal : N("#localPage #modal", view).is(":checked"),
 	            	button : N("#localPage #button", view).is(":checked"),
+	            	top : !N.isEmptyObject(N("#localPage #top", view).val()) && N("#localPage #top", view).val() !== "undefined" ? Number(N("#localPage #top", view).val()) : undefined,
+           			left : !N.isEmptyObject(N("#localPage #left", view).val()) && N("#localPage #left", view).val() !== "undefined" ? Number(N("#localPage #left", view).val()) : undefined,
 	            	width : Number(N("#localPage #width", view).val()),
 	            	height : Number(N("#localPage #height", view).val()),
 	            	alwaysOnTop : N("#localPage #alwaysOnTop", view).is(":checked"),
 	            	dynPos : N("#localPage #dynPos", view).is(":checked"),
 	            	draggable : N("#localPage #draggable", view).is(":checked"),
 	            	draggableOverflowCorrection : N("#localPage #draggableOverflowCorrection", view).is(":checked"),
+	            	overlayClose : N("#localPage #overlayClose", view).is(":checked"),
 	            	onOk : N.string.trimToNull(N("#localPage #onOk", view).val()) !== null ?
 	            			eval("(" + N("#localPage #onOk", view).val() + ")") : null,
 	            	onCancel : N.string.trimToNull(N("#localPage #onCancel", view).val()) !== null ?
@@ -361,11 +406,15 @@ function() {
 	       			confirm : N("#otherPage #confirm", view).is(":checked"),
 	            	modal : N("#otherPage #modal", view).is(":checked"),
 	            	button : N("#otherPage #button", view).is(":checked"),
+	            	top : !N.isEmptyObject(N("#otherPage #top", view).val()) && N("#otherPage #top", view).val() !== "undefined" ? Number(N("#otherPage #top", view).val()) : undefined,
+          			left : !N.isEmptyObject(N("#otherPage #left", view).val()) && N("#otherPage #left", view).val() !== "undefined" ? Number(N("#otherPage #left", view).val()) : undefined,
 	            	width : Number(N("#otherPage #width", view).val()),
 	            	height : Number(N("#otherPage #height", view).val()),
 	            	alwaysOnTop : N("#otherPage #alwaysOnTop", view).is(":checked"),
 	            	dynPos : N("#otherPage #dynPos", view).is(":checked"),
 	            	draggable : N("#otherPage #draggable", view).is(":checked"),
+	            	draggableOverflowCorrection : N("#otherPage #draggableOverflowCorrection", view).is(":checked"),
+	            	overlayClose : N("#otherPage #overlayClose", view).is(":checked"),
 	            	onOk : N.string.trimToNull(N("#otherPage #onOk", view).val()) !== null ?
 	            			eval("(" + N("#otherPage #onOk", view).val() + ")") : null,
 	            	onCancel : N.string.trimToNull(N("#otherPage #onCancel", view).val()) !== null ?

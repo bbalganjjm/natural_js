@@ -126,18 +126,32 @@
 			<td>모달 적용 유무</td>
 		</tr>
 		<tr>
-			<td>height</td>
+			<td>top</td>
 			<td>number</td>
-			<td>0</td>
+			<td>undefined</td>
 			<td></td>
-			<td>팝업의 높이</td>
+			<td>팝업 대화상자의 상단(px) 위치</td>
+		</tr>
+		<tr>
+			<td>left</td>
+			<td>number</td>
+			<td>undefined</td>
+			<td></td>
+			<td>팝업 대화상자의 좌측(px) 위치</td>
 		</tr>
 		<tr>
 			<td>width</td>
 			<td>number</td>
 			<td>0</td>
 			<td></td>
-			<td>팝업의 넓이</td>
+			<td>팝업 대화상자의 넓이(px)</td>
+		</tr>
+		<tr>
+			<td>height</td>
+			<td>number</td>
+			<td>0</td>
+			<td></td>
+			<td>팝업 대화상자의 높이(px)</td>
 		</tr>
 		<tr>
 			<td>alwaysOnTop</td>
@@ -168,11 +182,18 @@
 			<td>메시지 창 드래그 시 팝업 창이 화면바깥으로 넘어갔을때 자동으로 다시 안으로 넣어줄지 여부</td>
 		</tr>
 		<tr>
+			<td>overlayClose</td>
+			<td>boolean</td>
+			<td>true</td>
+			<td></td>
+			<td>오버레이 요소를 클릭 할 때 메세지 대화상자를 닫을지 여부</td>
+		</tr>
+		<tr>
 			<td>preload</td>
 			<td>boolean</td>
 			<td>false</td>
 			<td></td>
-			<td>URL을 입력하여 다른 페이지를 팝업으로 띄울때 팝업을 초기화 하면서 해당페이지를 로딩할것인지 처음 열때 로딩할것인지 여부</td>
+			<td>URL을 입력하여 다른 페이지를 팝업으로 생성 할 때 팝업 컴포넌트를 초기화 하면서 해당페이지의 요소를 생성하고 init 을 미리 실행 해 놓을 것인지 처음 팝업을 열때 생성 할 것인지 여부</td>
 		</tr>
 		<tr>
 			<td>onOk</td>
@@ -186,7 +207,7 @@
 			<td>Function</td>
 			<td>null</td>
 			<td></td>
-			<td>취소버튼을 눌렀을때 발생되는 이벤트</td>
+			<td>취소 또는 X 버튼을 눌렀을때, 오버레이를 클릭하여 팝업 대화상자가 닫혔을때 발생되는 이벤트</td>
 		</tr>
 		<tr>
 			<td>onOpen</td>

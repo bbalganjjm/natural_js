@@ -3,7 +3,7 @@
 
 	<h3 lang="ko_KR">개요</h3>
 	<h3 lang="en_US">Overview</h3>
-	<p>Alert(이하 N.alert) 는 window.alert 이나 window.confirm과 같이 메세지를 다이얼로그로 표현하기 위한 컴포넌트 입니다.</p>
+	<p>Alert(이하 N.alert) 는 window.alert 이나 window.confirm과 같이 메세지 대화상자를 레이어 팝업 형태로 표현하기 위한 컴포넌트 입니다.</p>
 
 	<h3>API DEMO</h3>
 	<div data-page="alert" class="apidemo"></div>
@@ -135,18 +135,32 @@
 			<td>true  지정 시 확인할 수 있도록 [확인], [취소] 버튼을 표시하고 false 지정 시 [취소] 버튼만 표시 합니다.</td>
 		</tr>
 		<tr>
+			<td>top</td>
+			<td>number</td>
+			<td>undefined</td>
+			<td></td>
+			<td>메시지 대화상자의 상단(px) 위치</td>
+		</tr>
+		<tr>
+			<td>left</td>
+			<td>number</td>
+			<td>undefined</td>
+			<td></td>
+			<td>메시지 대화상자의 좌측(px) 위치</td>
+		</tr>
+		<tr>
 			<td>width</td>
 			<td>number</td>
 			<td>0</td>
 			<td></td>
-			<td>메시지 다이얼로그의 넓이</td>
+			<td>메시지 대화상자의 넓이(px)</td>
 		</tr>
 		<tr>
 			<td>height</td>
 			<td>number</td>
 			<td>0</td>
 			<td></td>
-			<td>메시지 다이얼로그의 높이</td>
+			<td>메시지 대화상자의 높이(px)</td>
 		</tr>
 		<tr>
 			<td>title</td>
@@ -154,7 +168,7 @@
 			<td>undefined</td>
 			<td></td>
 			<td>
-				<p>메시지 다이얼로그의 제목</p>
+				<p>메시지 대화상자의 제목</p>
 				<p class="alert">메시지 박스(context) 요소에 title 속성값이 정의 되어 있으면 정으된 값으로 지정되며 title 옵션이 undefined 이면 타이틀바를 표시하지 않습니다.</p>
 			</td>
 		</tr>
@@ -172,8 +186,8 @@
 			<td></td>
 			<td>
 				X 버튼이나 확인 버튼을 클릭 했을때 hide 메서드를 호출 할 것인지 remove 메서드를 호출 할 것인지 지정<br>
-				 - hide : hide 메서드를 호출하여 메시지 다이얼로그 요소를 숨겨 줌.<br>
-				 - remove : remove 메서드를 호출하여 메시지 다이얼로그 요소를 제거 함(이전 상태가 사라짐).
+				 - hide : hide 메서드를 호출하여 메시지 대화상자 요소를 숨겨 줌.<br>
+				 - remove : remove 메서드를 호출하여 메시지 대화상자 요소를 제거 함(이전 상태가 사라짐).
 			</td>
 		</tr>
 		<tr>
@@ -188,7 +202,7 @@
 			<td>boolean</td>
 			<td>false</td>
 			<td></td>
-			<td>메시지 다이얼로그를 항상 페이지의 최상위로 항상 유지하기 위한 옵션</td>
+			<td>메시지 대화상자를 항상 페이지의 최상위로 항상 유지하기 위한 옵션</td>
 		</tr>
 		<tr>
 			<td>alwaysOnTopCalcTarget</td>
@@ -205,7 +219,7 @@
 			<td>boolean</td>
 			<td>true</td>
 			<td></td>
-			<td>브라우저 창 크기 조절 시, 또는 부모 컨텐츠 높이가 동적으로 변경되었을때 블록 오버레이의 크기와 메시지 다이얼로그의 위치를 자동으로 조절 할지 여부</td>
+			<td>브라우저 창 크기 조절 시, 또는 부모 컨텐츠 높이가 동적으로 변경되었을때 블록 오버레이의 크기와 메시지 대화상자의 위치를 자동으로 조절 할지 여부</td>
 		</tr>
 		<tr>
 			<td>draggable</td>
@@ -232,7 +246,14 @@
 }</code></pre>
 			</td>
 			<td></td>
-			<td>드래그하면서 다이얼로그가 window영역을 벗어날때 다시 돌아올 위치를 추가로 지정(드래그 시 횡 스크롤이 생겨 화면이 지저분 해 질때 1씩 증감하여 조절 바랍니다.)</td>
+			<td>드래그하면서 대화상자가 window영역을 벗어날때 다시 돌아올 위치를 추가로 지정(드래그 시 횡 스크롤이 생겨 화면이 지저분 해 질때 1씩 증감하여 조절 바랍니다.)</td>
+		</tr>
+		<tr>
+			<td>overlayClose</td>
+			<td>boolean</td>
+			<td>true</td>
+			<td></td>
+			<td>오버레이 요소를 클릭 할 때 메세지 대화상자를 닫을지 여부</td>
 		</tr>
 		<tr>
 			<td>onOk</td>
@@ -246,7 +267,7 @@
 			<td>Function</td>
 			<td>null</td>
 			<td></td>
-			<td>취소버튼을 눌렀을때 발생되는 이벤트</td>
+			<td>취소 또는 X 버튼을 눌렀을때, 오버레이를 클릭하여 메시지 대화상자가 닫혔을때 발생되는 이벤트</td>
 		</tr>
 	</table>
 
@@ -279,14 +300,14 @@
 			<td align="center">-</td>
 			<td align="center">-</td>
 			<td>N.alert</td>
-			<td>메시지 다이얼로그를 보여 줍니다.</td>
+			<td>메시지 대화상자를 보여 줍니다.</td>
 		</tr>
 		<tr>
 			<td>hide</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
 			<td>N.alert</td>
-			<td>메시지 다이얼로그를 숨깁니다.</td>
+			<td>메시지 대화상자를 숨깁니다.</td>
 		</tr>
 		<tr>
 			<td>remove</td>
@@ -294,7 +315,7 @@
 			<td align="center">-</td>
 			<td>N.alert</td>
 			<td>
-				메시지 다이얼로그를 표현하는 HTML Element들을 제거합니다.
+				메시지 대화상자를 표현하는 HTML Element들을 제거합니다.
 				<p class="alert">"ESC" 키를 눌러도 팝업이 remove 됩니다.
 				N.alert 라이브러리를 공유하는 다른 컴포넌트(N.popup, N.grid(Validate), N.form(Validate))들도 이와 같은 동작을 합니다.</p>
 			</td>
@@ -317,7 +338,7 @@
    	N(window).alert("It's a N.alert example").show();
 </script></xmp></code></pre>
 
-	<p>3. 전체(window) 영역에 확인(Confirm) 메시지 표시 하고 메시지 다이얼로그 드래그앤드롭 기능 활성화</p>
+	<p>3. 전체(window) 영역에 확인(Confirm) 메시지를 표시 하고 메시지 대화상자에 드래그앤드롭 기능 활성화</p>
 	<pre class="line-numbers"><code class="language-markup"><xmp>
 <script type="text/javascript">
    	N(window).alert({
