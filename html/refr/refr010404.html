@@ -1,5 +1,6 @@
 <article class="refr010404 apiDoc" >
 	<h3>마. 검증 룰(Validation rules)</h3>
+	<p class="alert">룰 명칭은 대소문자를 가리지 않습니다.</p>
 	<table>
 		<tr>
 			<th style="width: 200px;">옵션명</th>
@@ -66,12 +67,26 @@
 			<td>우편번호 형식에 맞는지 검사</td>
 		</tr>
 		<tr>
-			<td>["frn"]</td>
-			<td>외국인등록번호 형식에 맞지 검사</td>
+			<td>["rrn"]</td>
+			<td>주민등록번호 형식에 맞는지 검사</td>
 		</tr>
 		<tr>
-			<td>["ssn"]</td>
-			<td>주민등록번호 형식에 맞지 검사</td>
+			<td>
+				<p class="depricated">["ssn"]</p>
+				<p>Deprecated. rrn 룰로 변경(2017.07.27)</p>
+			</td>
+			<td class="depricated">
+				<p>주민등록번호 형식에 맞는지 검사</p>
+				<p class="alert">나중에 미국 사회보장번호 체크 로직으로 변경 됩니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>["frn"]</td>
+			<td>외국인등록번호 형식에 맞는지 검사</td>
+		</tr>
+		<tr>
+			<td>["frn_rrn"]</td>
+			<td>외국인등록번호 또는 주민등록번호 형식에 맞는지 검사</td>
 		</tr>
 		<tr>
 			<td>["cno"]</td>
@@ -154,8 +169,13 @@
 			<td>stratValue 값 에서   endValue 값 까지만 입력 가능</td>
 		</tr>
 		<tr>
-			<td>["regexp", "regexp", "message"]</td>
-			<td>입력한 regexp 의 조건으로 검사 후 message 값 표시</td>
+			<td>["regexp", "regexp", "flag", "message"]</td>
+			<td>
+				<p>입력한 regexp 의 조건으로 검사 후 message 값 표시</p>
+				<p class="alert">정규식 평가는 다음과 같이 이루어 집니다.\regexp(arg[1])\flag(arg[2])</p>
+				<p class="alert">"flag" 가 없으면 빈 값으로 넣어주세요.</p>
+				<p class="alert">"message" 를 입력하지 않으면 기본 메시지("필드검증에 통과하지 못했습니다")가 표시 됩니다.</p>
+			</td>
 		</tr>
 	</table>
 </article>

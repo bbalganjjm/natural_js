@@ -1,13 +1,21 @@
 <article class="refr010402 apiDoc" >
 	<h3>마. 포맷 룰(Format rules)</h3>
+	<p class="alert">룰 명칭은 대소문자를 가리지 않습니다.</p>
 	<table>
 		<tr>
 			<th style="width: 200px;">옵션명</th>
 			<th style="width: auto;">설명</th>
 		</tr>
 		<tr>
+			<td>["rrn"]</td>
+			<td>주민등록번호(Resident registration number) 형식으로 변경</td>
+		</tr>
+		<tr>
 			<td>["ssn"]</td>
-			<td>주민등록번호 형식으로 변경</td>
+			<td>
+				<p>문자열 길이에 따라서 주민등록번호(Resident registration number) 형식(13자리)이나 미국의 사회보장번호(Social Security Number) 형식()으로 변경</p>
+				<p class="alert">사회보장번호 체크로직을 나중에 제거할 예정이니 주민등록번호는 "rrn" 을 사용 해 주세요.</p>
+			</td>
 		</tr>
 		<tr>
 			<td>["cno"]</td>
@@ -30,7 +38,14 @@
 			<td>우편번호 형식으로 변경</td>
 		</tr>
 		<tr>
-			<td>["phoneNum"]</td>
+			<td>
+				<p class="depricated">["phoneNum"]</p>
+				<p>Deprecated. phone 룰로 변경(2017.07.27)</p>
+			</td>
+			<td class="depricated">전화번호 형식으로 변경</td>
+		</tr>
+		<tr>
+			<td>["phone"]</td>
 			<td>전화번호 형식으로 변경</td>
 		</tr>
 		<tr>
@@ -75,16 +90,61 @@
 			<td>문자열을 cutLength 만큼 자르고 replaceStr로 치환</td>
 		</tr>
 		<tr>
-			<td>["replace", "targetStr", "replaceStr"]</td>
-			<td>targetStr을 replaceStr로 치환</td>
+			<td>["replace", "target string", "replace string"]</td>
+			<td>"target string" 을 "replace string"로 치환</td>
 		</tr>
 		<tr>
-			<td>["lpad", length "fillStr"]</td>
-			<td>length만큼 왼쪽부터 replaceStr문자로 채움</td>
+			<td>["lpad", length, "fill string"]</td>
+			<td>length만큼 왼쪽부터 "fill string" 으로 채움</td>
 		</tr>
 		<tr>
-			<td>["rpad", length "fillStr"]</td>
-			<td>length만큼 오른쪽부터 replaceStr문자로 채움</td>
+			<td>["rpad", length, "fill string"]</td>
+			<td>length만큼 오른쪽부터 "fill string" 으로 채움</td>
+		</tr>
+		<tr>
+			<td>["mask", "phone", "masking character"]</td>
+			<td>
+				<p>전화번호를 마스킹 합니다.</p>
+				<p class="alert">
+					"masking character" 인자를 입력하지 않으면 "*" 문자로 치환 됩니다.
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td>["mask", "email", "masking character"]</td>
+			<td>
+				<p>이메일 주소를 마스킹 합니다.</p>
+				<p class="alert">
+					"masking character" 인자를 입력하지 않으면 "*" 문자로 치환 됩니다.
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td>["mask", "address", "masking character"]</td>
+			<td>
+				<p>주소를 마스킹 합니다.</p>
+				<p class="alert">
+					"masking character" 인자를 입력하지 않으면 "*" 문자로 치환 됩니다.
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td>["mask", "name", "masking character"]</td>
+			<td>
+				<p>이름을 마스킹 합니다.</p>
+				<p class="alert">
+					"masking character" 인자를 입력하지 않으면 "*" 문자로 치환 됩니다.
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td>["mask", "rrn", "masking character"]</td>
+			<td>
+				<p>주민등록 번호를 마스킹 합니다.</p>
+				<p class="alert">
+					"masking character" 인자를 입력하지 않으면 "*" 문자로 치환 됩니다.
+				</p>
+			</td>
 		</tr>
 		<tr>
 			<td>["generic", "사용자서식"]</td>
