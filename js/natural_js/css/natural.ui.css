@@ -684,7 +684,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .tab__>ul li {
-	display: inline;
+	float: left;
 	margin-right: 1px;
 	padding: 4px;
 	border-top: 1px solid #55d555;
