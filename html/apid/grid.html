@@ -138,11 +138,12 @@
 		<tr>
 			<th><label for="onSelect">onSelect</label></th>
 			<td>
-				<textarea id="onSelect" style="height: 90px;">function(rowIdx, rowEle, rowData, beforeRowIdx) {
+				<textarea id="onSelect" style="height: 90px;">function(rowIdx, rowEle, rowData, beforeRowIdx, e) {
 	N.log(rowIdx);
 	N.log(rowEle);
 	N.log(rowData);
 	N.log(beforeRowIdx);
+	N.log(e); // Click event object
 }</textarea><br />
 				<label for="onSelect" lang="ko_KR">행을 선택 할 때 실행되는 이벤트 핸들러</label>
 				<label for="onSelect" lang="en_US">Event handler for select the row</label>
