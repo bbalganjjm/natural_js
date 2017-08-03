@@ -144,6 +144,80 @@
 }</code></pre>
 			</td>
 		</tr>
+		<tr>
+			<td>onHide</td>
+			<td>Function</td>
+			<td>null</td>
+			<td></td>
+			<td>
+				데이트피커 판넬이 닫히고 나서(닫히는 효과 완료 후) 발생 되는 이벤트 입니다.
+				<pre><code class="language-javascript">onHide : function(context, contents) {
+	// this 는 N.datepicker instance
+	// context 는 날짜가 입력되는 입력요소
+	// contents 는 데이트피커 판넬
+}</code></pre>
+			</td>
+		</tr>
+	</table>
+
+	<h3 lang="ko_KR">jQuery 이벤트</h3>
+	<h3 lang="en_US">jQuery Events</h3>
+	<p class="alert">Datepicker 가 표시 될 입력 요소에 jQuery Event 로 다음과 같은 명칭의 이벤트를 바인드 하면 해당 단계에 실행 됩니다.</p>
+	<p class="alert">컴포넌트 초기화 시 지정한 같은 명칭의 이벤트가 있다면 초기화 시 지정한 이벤트가 먼저 실행됩니다.</p>
+	<table style="width: 100%;">
+		<tr>
+			<th style="width: 100px;">Event Name</th>
+			<th style="width: auto;">Description</th>
+		</tr>
+		<tr>
+			<td>onSelect</td>
+			<td>
+				날짜나 월(monthonly:true)이 선택되었을 때 발생하는 이벤트입니다.
+				<pre><code class="language-javascript">$("selector").bind("onSelect", function(e, context, selDate, monthonly) {
+	// e 는 이벤트 오브젝트
+	// context 는 날짜가 입력되는 입력요소
+	// selDate 는 선택한 날짜의 Date 객체
+	// monthonly 는 옵션으로 지정한 monthonly 값
+});</code></pre>
+				<p class="alert">selector 는 Datepicker 가 적용 되는 입력 요소를 지정 해 주세요.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>onBeforeShow</td>
+			<td>
+				데이트피커 판넬이 표시되기 전에 발생 되는 이벤트 입니다.
+				<pre><code class="language-javascript">$("selector").bind("onBeforeShow", function(e, context, contents) {
+	// e 는 이벤트 오브젝트
+	// context 는 날짜가 입력되는 입력요소
+	// contents 는 데이트피커 판넬
+});</code></pre>
+				<p class="alert">selector 는 Datepicker 가 적용 되는 입력 요소를 지정 해 주세요.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>onBeforeHide</td>
+			<td>
+				데이트피커 판넬이 닫히기 전에 발생 되는 이벤트 입니다.
+				<pre><code class="language-javascript">$("selector").bind("onBeforeHide", function(e, context, contents) {
+	// e 는 이벤트 오브젝트
+	// context 는 날짜가 입력되는 입력요소
+	// contents 는 데이트피커 판넬
+});</code></pre>
+				<p class="alert">selector 는 Datepicker 가 적용 되는 입력 요소를 지정 해 주세요.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>onHide</td>
+			<td>
+				데이트피커 판넬이 닫히고 나서(닫히는 효과 완료 후) 발생 되는 이벤트 입니다.
+				<pre><code class="language-javascript">$("selector").bind("onHide", function(e, context, contents) {
+	// e 는 이벤트 오브젝트
+	// context 는 날짜가 입력되는 입력요소
+	// contents 는 데이트피커 판넬
+});</code></pre>
+				<p class="alert">selector 는 Datepicker 가 적용 되는 입력 요소를 지정 해 주세요.</p>
+			</td>
+		</tr>
 	</table>
 
 	<h3 lang="ko_KR">함수</h3>
