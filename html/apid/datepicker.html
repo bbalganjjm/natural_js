@@ -17,6 +17,14 @@
 			</td>
 		</tr>
 		<tr>
+			<th><label for="onBeforeShow">onBeforeShow</label></th>
+			<td>
+				<textarea id="onBeforeShow" style="height: 45px;">function(context, contents) {
+	N.log("onBeforeShow", context, contents);
+}</textarea><br>
+				<label for="onBeforeShow" lang="ko_KR">Datepicker가 보여지기 전에 동작되는 이벤트 핸들러</label>
+				<label for="onBeforeShow" lang="en_US">Event handler for onBeforeShow event</label>
+			</td>
 			<th><label for="onSelect">onSelect</label></th>
 			<td colspan="3">
 				<textarea id="onSelect" style="height: 45px;">function(context, selDate, monthonly) {
@@ -27,14 +35,6 @@
 			</td>
 		</tr>
 		<tr>
-			<th><label for="onBeforeShow">onBeforeShow</label></th>
-			<td>
-				<textarea id="onBeforeShow" style="height: 45px;">function(context, contents) {
-	N.log("onBeforeShow", context, contents);
-}</textarea><br>
-				<label for="onBeforeShow" lang="ko_KR">Datepicker가 보여지기 전에 동작되는 이벤트 핸들러</label>
-				<label for="onBeforeShow" lang="en_US">Event handler for onBeforeShow event</label>
-			</td>
 			<th><label for="onBeforeHide">onBeforeHide</label></th>
 			<td>
 				<textarea id="onBeforeHide" style="height: 45px;">function(context, contents) {
@@ -42,6 +42,14 @@
 }</textarea><br>
 				<label for="onBeforeHide" lang="ko_KR">Datepicker가 감춰지기 전에 동작되는 이벤트 핸들러</label>
 				<label for="onBeforeHide" lang="en_US">Event handler for onBeforeHide event</label>
+			</td>
+			<th><label for="onHide">onHide</label></th>
+			<td>
+				<textarea id="onHide" style="height: 45px;">function(context, contents) {
+	N.log("onHide", context, contents);
+}</textarea><br>
+				<label for="onHide" lang="ko_KR">Datepicker가 감춰지기 전에 동작되는 이벤트 핸들러</label>
+				<label for="onHide" lang="en_US">Event handler for onHide event</label>
 			</td>
 		</tr>
 	</table>
@@ -96,6 +104,8 @@
            				eval("(" + N("textarea#onBeforeShow", view).val() + ")") : null,
       				onBeforeHide : N.string.trimToNull(N("textarea#onBeforeHide", view).val()) !== null ?
            				eval("(" + N("textarea#onBeforeHide", view).val() + ")") : null,
+      				onHide : N.string.trimToNull(N("textarea#onHide", view).val()) !== null ?
+          				eval("(" + N("textarea#onHide", view).val() + ")") : null,
 	           		focusin : N("input#focusin", view).is(":checked")
 	       		};
 

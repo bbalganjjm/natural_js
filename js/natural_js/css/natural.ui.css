@@ -751,6 +751,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	font-weight: bold;
 	color: #009000;
 	text-decoration: none;
+	line-height: 25px;
 }
 
 .tab__>ul>li.tab_active__ {
