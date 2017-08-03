@@ -771,6 +771,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 .tab__>div.hidden__ {
 	position: absolute;
+	width: 100%;
 	opacity: 0;
 	transition: opacity 0.2s cubic-bezier(0.02, 0.9, 1, 1);
 }
