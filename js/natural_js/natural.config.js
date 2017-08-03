@@ -513,8 +513,7 @@
     					} catch (e) {}
     				}
     			}
-    		},
-    		tabScroll : true
+    		}
 		},
 		"datepicker" : {
 			"focusin" : true,
