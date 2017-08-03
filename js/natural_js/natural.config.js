@@ -514,7 +514,7 @@
     				}
     			}
     		},
-    		scroll : true
+    		tabScroll : true
 		},
 		"datepicker" : {
 			"focusin" : true,
