@@ -101,14 +101,14 @@
 			</td>
 		</tr>
 		<tr>
-			<td>dataOpts</td>
+			<td>tabOpts</td>
 			<td>Array</td>
 			<td>[]</td>
 			<td></td>
 			<td style="max-width: 299px;">
 				<p>탭별 옵션을 명령형으로 지정 할 때 탭의 순서대로 JSON Obejct 형태로 옵션을 지정 합니다.</p>
 				<pre><code class="language-javascript">N("#tab").tab({
-	dataOpts : [
+	tabOpts : [
 		{ width: "auto", url: "tab1.html", preload: false,
 		  active: false }, //Tab1
 		{ width: "auto", url: "tab2.html", preload: false,
@@ -118,6 +118,7 @@
 	]
 });</code></pre>
 				<p>선언형옵션으로 지정할 때는 탭요소(LI 태그)에 data-opts 속성으로 각각 지정 합니다.</p>
+				<p>탭별 옵션에 대한 설명은 <a href="#tabDeclarativeOptions" class="link">선언형옵션</a> 부분을 참고 하세요.</p>
 			</td>
 		</tr>
 		<tr>
@@ -232,8 +233,8 @@
 		</tr>
 	</table>
 
-	<h3 lang="ko_KR">선언형옵션</h3>
-	<h3 lang="en_US">Declarative options</h3>
+	<h3 id="tabDeclarativeOptions" lang="ko_KR">선언형옵션</h3>
+	<h3 id="tabDeclarativeOptions" lang="en_US">Declarative options</h3>
 	<table>
 		<tr>
 			<th>Name</th>
@@ -375,7 +376,7 @@
 
 <script type="text/javascript">
 	N("#tab").tab({
-		dataOpts : [
+		tabOpts : [
 			{}, //Tab1,
 			{ "url" : "html/apid/form.html", "onOpen" : "onOpen", "preload" : true }, //Tab2
 			{ "url" : "html/apid/button.html", "active" : true }  //Tab3
