@@ -711,7 +711,9 @@
 				var cont = this.context(".docs_contents__." + docId + "__ > .view_context__").instance("cont");
 				var url = cont.request.options.url;
 				var hash = url.replace("html/", "").replace(".html", "");
-				location.hash = hash;
+				if(location.hash.split("/").length < 3) {
+					location.hash = hash;
+				}
 				if(location.hostname === "bbalganjjm.github.io") {
 					try {
 						ga('create', 'UA-58001949-2', 'auto');
