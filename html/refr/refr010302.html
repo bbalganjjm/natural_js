@@ -337,7 +337,7 @@
 		<span lang="en_US">Examples</span>
 	</h3>
 
-	<p>1. 서버에서 데이터 조회</p>
+	<h4 class="notTableOfContents">1. 서버에서 데이터 조회</h4>
 	<pre class="line-numbers"><code class="language-markup"><xmp>
 <script type="text/javascript">
    	N.comm("retrieve.json").submit(function(data) {
@@ -345,7 +345,7 @@
    	});
 </script></xmp></code></pre>
 
-	<p>2. 서버에 파라미터 전달 및 결과 데이터 조회</p>
+	<h4 class="notTableOfContents">2. 서버에 파라미터 전달 및 결과 데이터 조회</h4>
 	<pre class="line-numbers"><code class="language-markup"><xmp>
 <script type="text/javascript">
    	// N 함수의 인자가 파라미터로 전달 됨.
@@ -354,9 +354,9 @@
    	});
 </script></xmp></code></pre>
 
-	<p>3. 지정한 영역에 다른 페이지 불러오기</p>
+	<h4 class="notTableOfContents">3. 지정한 영역에 다른 페이지 불러오기</h4>
 	<pre class="line-numbers"><code class="language-markup"><xmp>
-<secction id="section"></secction>
+<section id="section"></section>
 
 <script type="text/javascript">
    	// #section 영역에 page.html 페이지를 넣어 주고 불러오는 페이지의 컨트롤러에 init 메서드가 있다면 페이지 로딩완료 후에 init 메서드를 실행 시켜 줌.
@@ -364,6 +364,25 @@
    		// [생략가능] 페이지 주입이 완료 된 후 실행됨.
    	});
 </script></xmp></code></pre>
+
+	<h4 class="notTableOfContents">4. 지정한 영역에 다른 페이지 불러오면서 불러온 페이지에 데이터 전달 하기</h4>
+
+<p>3.1. Communicator 초기 화 후 submit 전에 request.attr("attribute name", object) 명령을 실행.</p>
+	<pre class="line-numbers"><code class="language-markup"><xmp>
+<section id="section"></section>
+
+<script type="text/javascript">
+   	N("#section").comm("page.html").request.attr("data1", { data : ["1", "2"] }).request.attr("data2", ["3", "4"]).submit();
+</script></xmp></code></pre>
+
+<p>3.2. 불러온 페이지의 Controller 오브젝트의 init 메서드의 두번째 인자인 request 에서 request.attr("attribute name") 명령으로 전달 된 데이터를 꺼냄.</p>
+	<pre class="line-numbers"><code class="language-javascript">
+N("page selector").cont({
+	init : function(view, request) {
+		var data1 = request.attr("data1");
+		var data2 = request.attr("data2");
+	}
+});</code></pre>
 
 </article>
 

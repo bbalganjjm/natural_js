@@ -355,11 +355,11 @@
 		<span lang="en_US">Examples</span>
 	</h3>
 
-	<p>1. 선언형으로 탭 생성</p>
+	<h4 class="notTableOfContents">1. 선언형으로 탭 생성</h4>
 		<pre class="line-numbers"><code class="language-markup"><xmp>
 <div id="tab">
 	<ul>
-		<!-- Tab -->
+		<!-- Tabs -->
 		<li><a href="#tab1">Tab1</a></li>
 		<!-- a 태그의 href 속성에 연결할 탭 컨텐츠의 id 속성값을 입력하고 data-opts 속성에 url 등의 옵션을 지정 -->
 		<li data-opts='{ "url" : "html/apid/form.html", "onOpen" : "onOpen", "preload" : true }'><a href="#tab2">Form</a></li>
@@ -375,7 +375,7 @@
 	N("#tab").tab();
 </script></xmp></code></pre>
 
-	<p>2. 명령형으로 탭 생성</p>
+	<h4 class="notTableOfContents">2. 명령형으로 탭 생성</h4>
 		<pre class="line-numbers"><code class="language-markup"><xmp>
 <div id="tab">
 	<ul>
@@ -395,6 +395,27 @@
 			{ "url" : "html/apid/form.html", "onOpen" : "onOpen", "preload" : true }, //Tab2
 			{ "url" : "html/apid/button.html", "active" : true }  //Tab3
     	]
+	});
+</script></xmp></code></pre>
+
+	<h4 class="notTableOfContents">3. 좌우 스크롤 가능한 탭 생성</h4>
+		<pre class="line-numbers"><code class="language-markup"><xmp>
+<div id="tab">
+	<ul>
+		<a href="#"><span></span></a> <!-- 맨 앞으로 가기 버튼 -->
+		<li><a href="#tab1">Tab1</a></li>
+		<li data-opts='{ "url" : "html/apid/form.html", "onOpen" : "onOpen", "preload" : true }'><a href="#tab2">Form</a></li>
+		<li data-opts='{ "url" : "html/apid/button.html", "active" : true }'><a href="#tab3">Button</a></li>
+		<a href="#"><span></span></a> <!-- 맨 끝으로 가기 버튼 -->
+	</ul>
+	<div id="tab1">Hello~ Tab1</div>
+	<div id="tab2"></div>
+	<div id="tab3"></div>
+</div>
+
+<script type="text/javascript">
+	N("#tab").tab({
+		tabScroll : true
 	});
 </script></xmp></code></pre>
 
