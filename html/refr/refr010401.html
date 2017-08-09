@@ -130,6 +130,33 @@
 			<td>양식화 되지않은 원(元)데이터(JSON Object)의 key 값</td>
 		</tr>
 	</table>
+
+	<h3 lang="ko_KR">예제</h3>
+	<h3 lang="en_US">Examples</h3>
+
+	<p>1. [마스킹]N.form 이나 N.grid 초기화 전에 값이 바인드 되는 컬럼 태그에 data-format 속성에 정의 하여 선언형으로 처리</p>
+		<pre><code class="language-markup"><xmp>
+<input id="col01" type="text" data-format='[["mask", "phone", "*"]]'></xmp></code></pre>
+<p>위와 같이 입력요소에 정의하면 해당 요소에 포커스인 되면 마스킹이 해제 되고 포커스아웃 되면 마스킹 됩니다.</p>
+		<pre><code class="language-markup"><xmp>
+<span id="col01" data-format='[["mask", "phone", "*"]]'></span></xmp></code></pre>
+<p>위와 같이 입력요소가 아니면 요소에 정의하면 마스킹 된 상태로 유지 됩니다.</p>
+<p class="alert">위 예제 2가지 모두 N.grid 나 N.form 의 data 함수를 호출하여 데이터를 보면 마스킹 안된 원래 값이 들어가 있습니다. 화면에 보이는 부분만 마스킹 해주므로 서버에 보낼때는 언마스킹 하지않고 그냥 보내도 됩니다.</p>
+
+	<p>2. 처리 함수를 직접 호출하여 포멧팅 및 마스킹을 명령형으로 처리</p>
+		<pre><code class="language-javascript"><xmp>
+N.formatter.포멧팅룰("포멧팅 할 문자", [arg[0], arg[1]]);</xmp></code></pre>
+		<p>data-format 으로 정의 할 때 data-format='[["mask", "phone", "masking character"]]' 에서<br>
+		"mask" 가 포멧팅룰 이고 "포멧팅 할 문자" 는 사용자가 입력한 문자가 자동으로 들어갑니다.<br>
+		"phone", "masking character" 는 arg[0], arg[0], arg[n] 입니다.</p>
+
+		<pre><code class="language-javascript"><xmp>
+// 한글이름
+N.formatter.mask("전인권", ["name", "@"]); //--> "전@권"
+// 영문이름(한글 이름과 사용법은 똑같고 결과만 다르게 나옴)
+N.formatter.mask("Jeff beck 2.", ["name"]); //--> "Jef* **** 2."</xmp></code></pre>
+
+	<p class="alert">전체 포멧팅 룰들과 마스킹 룰 들은 Formatting Rules 탭을 참고 하세요.</p>
 </article>
 
 <script type="text/javascript">

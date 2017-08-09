@@ -106,7 +106,8 @@
 			<td>[]</td>
 			<td></td>
 			<td style="max-width: 299px;">
-				<p>탭별 옵션을 명령형으로 지정 할 때 탭의 순서대로 JSON Obejct 형태로 옵션을 지정 합니다.</p>
+				<p>탭 별 옵션을 명령형으로 지정 할 때 탭의 순서대로 JSON Obejct 형태로 옵션을 지정 합니다.</p>
+				<p>옵션은 탭 개수 만큼 Array 에 탭 순서대로 Object 타입으로 옵션을 지정하여 선언 해 주세요.</p>
 				<pre><code class="language-javascript">N("#tab").tab({
 	tabOpts : [
 		{ width: "auto", url: "tab1.html", preload: false,
@@ -118,7 +119,7 @@
 	]
 });</code></pre>
 				<p>선언형옵션으로 지정할 때는 탭요소(LI 태그)에 data-opts 속성으로 각각 지정 합니다.</p>
-				<p>탭별 옵션에 대한 설명은 <a href="#tabDeclarativeOptions" class="link">선언형옵션</a> 부분을 참고 하세요.</p>
+				<p>탭 별 옵션에 대한 설명은 <a href="#tabDeclarativeOptions" class="link">선언형옵션</a> 부분을 참고 하세요.</p>
 			</td>
 		</tr>
 		<tr>
