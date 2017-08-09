@@ -75,7 +75,8 @@ var IndexController = {
 		var docNm;
 		var url;
 		if(N.string.trimToNull(location.hash) !== null) {
-			var fileName = N.string.trimToEmpty(location.hash).replace("#", "");
+			var fileName = N.string.trimToEmpty(location.hash).replace("#", "").split("/");
+			fileName = fileName[0] + "/" + fileName[1];
 			docId = fileName.substring(fileName.indexOf("/") + 1);
 			docNm = $(".header > nav > ul a[href='" + "html/" + fileName + ".html']").text();
 			url = "html/" + fileName + ".html";

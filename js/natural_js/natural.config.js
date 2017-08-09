@@ -145,6 +145,35 @@
 			    		CommonUtilController.sourceCode(cont.view, cont.request.get("url"));
 			    	}
 				}
+			}, {
+				"pointcut" : "refr.*:init",
+				"adviceType" : "before",
+				/**
+				 * Create table of contents
+				 */
+				"fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 함수명, args 인자 */
+					// Multilingual handling
+			    	CommonUtilController.i18n(undefined, cont.request.options.target);
+
+			    	var contents = cont.view.find(".contents");
+
+			    	if(contents.length > 0) {
+			    		cont.view.find("h3, h4").each(function() {
+							var selfEle = $(this);
+							var sId = location.hash.replace("#", "") + "/" + cont.view.data("pageid") + "/" + Math.random();
+							selfEle.attr("id", sId);
+							if(selfEle.is("h4")) {
+								if(contents.children("li:last").find("ul").length > 0) {
+									contents.children("li:last").find("ul").append('<li><a class="link" href="#' + sId + '">' + N.string.trim(selfEle.text()) + '</a></li>');
+								} else {
+									$('<ul><li><a class="link" href="#' + sId + '">' + N.string.trim(selfEle.text()) + '</a></li></ul>').appendTo(contents.find("li:last"));
+								}
+							} else {
+								contents.append('<li><a class="link" href="#' + sId + '">' + N.string.trim(selfEle.text()) + '</a></li>');
+							}
+						});
+			    	}
+				}
 			}]
 		},
 		"comm" : {
