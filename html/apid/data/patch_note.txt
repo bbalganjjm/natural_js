@@ -4,16 +4,17 @@ N.alert : Fixed a bug that caused $(window) .height() calculation to be wrong(ov
 N.alert : Add overlayClose option
           - Whether to close the popup when clicking the overlay
 N.alert : Added an option to specify the top and left positions of the message dialog box.
-N.datepicker : 데이터가 표시 된 후 다른 데이트픽커 입력요소 선택 시 이전 입력요소 밑에 표시되는 오류 수정
-N.datepicker : 전체적인 성능 및 정합성 개선
-N.datepicker : 데이트픽커 대화상자가 사라진 후 실행 되는 onHide 이벤트 추가
-N.datepicker : 컴포넌트 초기화할 때 뿐만 아니라 입력요소에 jQuery 이벤트 bind 메서드로 onSelect, onBeforeShow, onBeforeHide, onHide 이벤트를 지정 하면 해당 이벤트를 해당상황에 실행 해 줌.
+N.datepicker : Fixed an error displayed below the previous input element when selecting another datepicker's input element after data was displayed
+N.datepicker : Add an onHide event that runs after the date picker dialog disappears
+N.datepicker : 컴포넌트 초기화할 때 뿐만 아니라 입력요소에 jQuery 이벤트 bind 메서드로 onSelect, onBeforeShow, onBeforeHide, onHide 이벤트를 지정 하면 해당 이벤트를 해당 상황에 실행 해 주는 기능 추가.
+N.datepicker : Improve overall performance and consistency
 N.popup : AOP에 의해 init이 지연 될 경우 onOpen 을 AOP의 advisor 나 init 에서 직접 실행 할 수 있도록 탭 초기화 옵션에 delayContInit = true 를 지정하면 컨트롤러에 onOpenProcFn__ 함수를 넣어 줌.
-N.popup : 내부 함수 인 loadEle 를 loadContent 로 함수명 변경
-N.popup : overlayClose 옵션 추가
-          - 오버레이 클릭 시 팝업을 닫아줌.
-N.popup : 팝업의 top, left 위치 를 지정 할 수 있는 옵션 추가
+N.popup : Changed internal function loadEle to loadContent
+N.popup : Added overlayClose option
+          - Closes popup when clicking overlay.
+N.popup : Added an option to specify the top and left positions of pop-ups.
 N.popup : 불러와지는 팝업 컨텐츠의 최상위 요소에 title 지정시 팝업의 타이틀로 표시되지 않던 버그 수정
+N.tab : 탭 초기화 시 탭들의 옵션들을 명령으로 정의가 되지 않던 버그 수정
 N.tab : 탭들이 탭컨테이너의 넓이보다 클때 좌우 스크롤 및 드래그(터치 지원) 가능 하도록 기능 추가
         - 탭의 넓이 계산이 정상적으로 되지 않을때 사용하는 tabScrollCorrection : {
 					tabContainerWidthCorrectionPx : 0,
@@ -27,6 +28,10 @@ N.tab : dataOpts 내부 옵션명을 tabOpts 로 변경
 N.tab : onActive 와 onOpen 이 init 이 완료된 후 실행 되도록 전체적인 실행 순서 정합성 보완.
 N.tab : AOP에 의해 init이 지연 될 경우 onActive 와 onOpen 을 AOP의 advisor 나 init 에서 직접 실행 할 수 있도록 탭 초기화 옵션에 delayContInit = true 를 지정하면 컨트롤러에 onActiveProcFn__ 와 onOpenProcFn__ 함수를 넣어 줌.
 N.form : val 호출 시 format 과 validate가 안되던 버그 수정.
+N.form : validate 함수 성능 개선
+N.form : HTML5 input type support.
+         - number, email, search, color, range, url input types support.
+         - date, datetime-local, month, time, week types does not support formatting, so it does not support it.
 N.grid : filter 대화상자가 가끔 나타났다가 바로 사라지는 버그 수정
 N.grid : val 호출 시 format 과 validate가 안되던 버그 수정.
 N.grid.add : 수행로직 최적화
@@ -43,6 +48,7 @@ N.select : 데이터에 의해 복제되는 선택지들은 id 속성을 부여하지 않고 name 속성만
 N.select : 라벨 클릭시 간헐적으로 체크되지 않던 버그 수정
 N.select : id 중복에 의한 라벨 클릭 시 선택지 요소가 선택되지 않던 버그를 수정하기 위하여 radio와 checkbox 요소 배치 변경 및 최적화(새로운 버전 적용시 기존 사이트에서는 모양이 다르게 보일 수 있습니다. CSS 를 수정 해 주세요.)
 
+N.formatter : $(selector).data("format", rules) 로 포멧룰을 동적으로 바꾸었을때 룰이 적용되지 않던 버그 수정
 N.formatter : 데이트픽커를 표시하는 date 옵션 최적화
 N.formatter : 데이트픽커를 표시할때 가끔 이상한 위치에 표시되던 버그 수정
 N.formatter : Deprecated phonenum rule(it is "phone" 룰로 대체되었다)
