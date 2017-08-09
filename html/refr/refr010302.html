@@ -1,7 +1,12 @@
 <article class="refr010302 apiDoc" >
 	<h2>Communicator(N.comm)</h2>
 
-	<h3>개요</h3>
+	<ul class="contents links"></ul>
+
+	<h3>
+		<span lang="ko_KR">개요</span>
+		<span lang="en_US">Overview</span>
+	</h3>
 	<p>Communicator(이하 N.comm) 는 CVC 패턴의 Communicator 영역을 구현한 클래스로서 서버와의 통신을 담당하는 Natural-JS의 공통모듈입니다. Communicator 는 jQuery,ajax 모듈을 사용해서 Ajax로 서버와의 통신을 합니다. Ajax 통신외에 요청마다 Communicator.request 객체가 생성되어 웹 UI 안의 논리적인 페이지(탭, 임베드, 팝업등)의 Controller간 데이터를 송·수신 할 수 있고 불러온 페이지의 Controller 에서 요청정보를 확인 할 수 있습니다.</p>
 
 	<h3>API DEMO</h3>
@@ -9,7 +14,10 @@
 	<p lang="en_US" class="alert">The demo does not include all options and features. For a complete list of features, please refer to the function documentation directly below the demo.</p>
 	<div data-page="communicator" class="apidemo"></div>
 
-	<h3>생성자(Constructor)</h3>
+	<h3>
+		<span lang="ko_KR">생성자</span>
+		<span lang="en_US">Constructor</span>
+	</h3>
 	<table>
 		<tr>
 			<th>Name</th>
@@ -76,10 +84,16 @@
 		</tr>
 	</table>
 
-	<h3>기본옵션(Default options)</h3>
+	<h3>
+		<span lang="ko_KR">기본옵션</span>
+		<span lang="en_US">Default Options</span>
+	</h3>
 	<p>obj(arguments[0])가 JSON 오브젝트 타입의 옵션이면 Communicator.request(이하 request) 가 생성되어서 request 의 옵션으로 지정 됩니다. request 의 기본옵션 부분을과 동일하므로 "마. Communicator.request"의 기본옵션 부분을 참고하기 바랍니다.</p>
 
-	<h3>함수(Methods)</h3>
+	<h3>
+		<span lang="ko_KR">함수</span>
+		<span lang="en_US">Methods</span>
+	</h3>
 	<table>
 		<tr>
 			<th>Name</th>
@@ -106,13 +120,23 @@
 
 	<h3>Communicator.request</h3>
 
-	<h4>1) 개요</h4>
+	<h4 id="refr/refr0103/refr010302/communicator.request/overview">
+		<span lang="ko_KR">1) 개요</span>
+		<span lang="en_US">1) Overview</span>
+	</h4>
+
 	<p>Communicator.request(이하 request) 는 단독으로 사용될 수 없고 N.comm 으로 요청을 보낼때마다 N.comm 에 의해서 생성 되는 모듈입니다. request는 요청에 대한 옵션을 지정 할 수 있고 요청정보를 가지고 있고 페이지간 데이터 전달을 위한 attr 메서드가 구현 되어 있습니다. </p>
 
-	<h4>2) 생성자(Constructor)</h4>
+	<h4 id="refr/refr0103/refr010302/communicator.request/constructor">
+		<span lang="ko_KR">2) 생성자</span>
+		<span lang="en_US">2) Constructor</span>
+	</h4>
 	<p>개발시 직접 컨트롤 할 수 없고 Communicator 에 의해 자동 생성되므로 설명을 생략 합니다.</p>
 
-	<h4>3) 기본옵션(Default options)</h4>
+	<h4 id="refr/refr0103/refr010302/communicator.request/defaultoptions">
+		<span lang="ko_KR">3) 기본옵션</span>
+		<span lang="en_US">3) Default Options</span>
+	</h4>
 	<table>
 		<tr>
 			<th>Name</th>
@@ -239,7 +263,10 @@
 	</fieldset>
 	<p>※ 위 기본옵션 외에 N.comm은 jQuery $.ajax 모듈을 사용하여 $.ajax에서 제공하는 옵션중 이벤트 관련 부분(beforeSend, success, error, complete)을 제외한 모든 옵션을 그대로 제공합니다.</p>
 
-	<h4>4) 함수(Methods)</h4>
+	<h4>
+		<span lang="ko_KR">4) 함수</span>
+		<span lang="en_US">4) Methods</span>
+	</h4>
 	<table>
 		<tr>
 			<th>Name</th>
@@ -305,8 +332,10 @@
 		</tr>
 	</table>
 
-	<h3 lang="ko_KR">예제</h3>
-	<h3 lang="en_US">Examples</h3>
+	<h3>
+		<span lang="ko_KR">예제</span>
+		<span lang="en_US">Examples</span>
+	</h3>
 
 	<p>1. 서버에서 데이터 조회</p>
 	<pre class="line-numbers"><code class="language-markup"><xmp>
