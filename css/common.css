@@ -233,9 +233,13 @@ article h2 {
 	margin: 0 0 18px 0;
 }
 
+article ul.contents {
+	margin: 0 0 15px 0;
+}
+
 article h3 {
 	font-size: 1.1em;
-	margin: 30px 0 15px 0;
+	margin: 15px 0 15px 0;
 	color: #050;
 	padding: 3px 0 0 22px;
 	background: url("../images/icon/h3_leaf.gif") no-repeat 5px 4px;
@@ -244,6 +248,10 @@ article h3 {
 article h4 {
 	font-size: 14px;
 	margin: 0 0 15px 0;
+}
+
+article p {
+	margin: 0 0 10px 0;
 }
 
 article a.link {
@@ -256,7 +264,7 @@ article a.link {
 
 article pre {
 	font-size: 12px;
-	margin-bottom: 15px;
+	margin-bottom: 15px !important;
 }
 
 article div.grid_wrap__ {
