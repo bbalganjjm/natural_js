@@ -160,16 +160,18 @@
 			    	if(contents.length > 0) {
 			    		cont.view.find("h3, h4").each(function() {
 							var selfEle = $(this);
-							var sId = location.hash.replace("#", "") + "/" + cont.view.data("pageid") + "/" + Math.random();
-							selfEle.attr("id", sId);
-							if(selfEle.is("h4")) {
-								if(contents.children("li:last").find("ul").length > 0) {
-									contents.children("li:last").find("ul").append('<li><a class="link" href="#' + sId + '">' + N.string.trim(selfEle.text()) + '</a></li>');
+							if(!selfEle.hasClass("notTableOfContents")) {
+								var sId = location.hash.replace("#", "") + "/" + cont.view.data("pageid") + "/" + Math.random();
+								selfEle.attr("id", sId);
+								if(selfEle.is("h4")) {
+									if(contents.children("li:last").find("ul").length > 0) {
+										contents.children("li:last").find("ul").append('<li><a class="link" href="#' + sId + '">' + N.string.trim(selfEle.text()) + '</a></li>');
+									} else {
+										$('<ul><li><a class="link" href="#' + sId + '">' + N.string.trim(selfEle.text()) + '</a></li></ul>').appendTo(contents.find("li:last"));
+									}
 								} else {
-									$('<ul><li><a class="link" href="#' + sId + '">' + N.string.trim(selfEle.text()) + '</a></li></ul>').appendTo(contents.find("li:last"));
+									contents.append('<li><a class="link" href="#' + sId + '">' + N.string.trim(selfEle.text()) + '</a></li>');
 								}
-							} else {
-								contents.append('<li><a class="link" href="#' + sId + '">' + N.string.trim(selfEle.text()) + '</a></li>');
 							}
 						});
 			    	}
