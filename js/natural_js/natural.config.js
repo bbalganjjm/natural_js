@@ -70,6 +70,8 @@
 					".refr010301:init",
 					".refr010302:init",
 					".refr010303:init",
+					".refr010311:init",
+					".refr010312:init",
 					".refr010401:init",
 					".refr010402:init",
 					".refr010403:init",
@@ -149,7 +151,7 @@
 				"pointcut" : ".intr0100:init|refr.*:init",
 				"adviceType" : "before",
 				/**
-				 * Create table of contents
+				 * Create Index
 				 */
 				"fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 함수명, args 인자 */
 					// Multilingual handling
@@ -214,6 +216,7 @@
 					 * 서버에 요청이 성공 했을 경우 실행됨.
 					 */
 					success : function(request, data, textStatus, xhr) {
+						N.log(textStatus);
 						// return data 를 하면 N.comm.submit 의 콜백의 인자로 넘어오는 data 가 리턴한 데이터로 치환 됨.
 					},
 					/**
