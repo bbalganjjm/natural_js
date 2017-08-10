@@ -1,5 +1,5 @@
 <article class="refr010509 apiDoc" >
-	<h2>Pagination(N.pagination)</h2>
+	<h2 class="notIndex">Pagination(N.pagination)</h2>
 
 	<!-- 목차 -->
 	<ul class="contents links"></ul>
@@ -374,7 +374,7 @@
 		<span lang="en_US">Examples</span>
 	</h3>
 
-	<h4 class="notTableOfContents">1. Pagination 생성</h4>
+	<h4 class="notIndex">1. Pagination 생성</h4>
 	<pre class="line-numbers"><code class="language-markup"><xmp>
 <div id="paginationExample10">
 	<ul>
@@ -401,7 +401,7 @@
 	});
 </script></xmp></code></pre>
 
-	<h4 class="notTableOfContents">2. [3] 페이지를 기본 선택하여 생성</h4>
+	<h4 class="notIndex">2. [3] 페이지를 기본 선택하여 생성</h4>
 	<pre class="line-numbers"><code class="language-markup"><xmp>
 <div id="paginationExample20">
 	<ul>
@@ -428,7 +428,7 @@
 	});
 </script></xmp></code></pre>
 
-	<h4 class="notTableOfContents">3. N.pagination과 N.grid 를 연동하여 그리드 데이터 페이징</h4>
+	<h4 class="notIndex">3. N.pagination과 N.grid 를 연동하여 그리드 데이터 페이징</h4>
 	<pre class="line-numbers"><code class="language-markup"><xmp>
 <table id="paginationExample31">
 	<thead><!-- 컬럼 타이틀 영역 -->
@@ -478,7 +478,7 @@
 	});
 </script></xmp></code></pre>
 
-	<h4 class="notTableOfContents">4. N.pagination과 N.grid 를 연동하여 서버(DB) 페이징</h4>
+	<h4 class="notIndex">4. N.pagination과 N.grid 를 연동하여 서버(DB) 페이징</h4>
 	<p class="alert">서버에서 DB 쿼리로 페이징 시  먼저 조회하고자 하는 전체 행수를 가져오고 onChange 이벤트 핸들러의 인자로 들어오는 currPageNavInfo 정보로 선택될 DB 로우의 시작값(currPageNavInfo.startRowNum)과 얼마만큼 가져올건지의 정보(currPageNavInfo.countPerPage) 등을 서버에 파라미터로 던져 해당 행수 만큼만 가져와 N.grid 에 bind하는 형태로 서버단 페이징을 처리 할 수 있습니다.</p>
 	<pre class="line-numbers"><code class="language-markup"><xmp>
 <table id="paginationExample41">

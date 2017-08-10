@@ -1,5 +1,5 @@
 <article class="refr010403 apiDoc" >
-	<h2>Validator(N.validator)</h2>
+	<h2 class="notIndex">Validator(N.validator)</h2>
 
 	<!-- 목차 -->
 	<ul class="contents links"></ul>
@@ -118,12 +118,12 @@
 		<span lang="en_US">Examples</span>
 	</h3>
 
-	<h4 class="notTableOfContents">1. N.form 이나 N.grid 초기화 전에 값이 바인드 되는 컬럼 태그에 data-validate 속성에 정의 하여 선언형으로 처리</h4>
+	<h4 class="notIndex">1. N.form 이나 N.grid 초기화 전에 값이 바인드 되는 컬럼 태그에 data-validate 속성에 정의 하여 선언형으로 처리</h4>
 		<pre><code class="language-markup"><xmp>
 <input id="col01" type="text" data-validate='[["required"]]'></xmp></code></pre>
 	<p>위와 같이 입력요소에 정의하면 해당 요소에서 포커스 아웃 되면 검증이 실행 되고 검증 실패 시 실패 원인을 입력 요소 옆에 툴팁으로 보여 줍니다.</p>
 
-	<h4 class="notTableOfContents">2. 동적으로 검증룰을 변경하고 바로 검증</h4>
+	<h4 class="notIndex">2. 동적으로 검증룰을 변경하고 바로 검증</h4>
 	<pre><code class="language-javascript">N("selector").data("validate", [[&quot;required&quot;]]).trigger("validate");</code></pre>
 
 </article>
