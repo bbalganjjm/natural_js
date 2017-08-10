@@ -505,12 +505,12 @@ article ul.contents.links li {
 
 article ul.contents.links li ul {
 	list-style: none;
-	padding: 0 10px 10px 10px;
+	padding: 10px;
 }
 
 article ul.contents.links li.title {
 	border-right: none;
-	padding: 0 8px 5px 5px;
+	padding: 5px 8px 5px 5px;
 	font-weight: bold;
 	font-size: 16px;
 }
