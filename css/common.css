@@ -483,3 +483,40 @@ article .depricated {
 	text-decoration: line-through;
 	color: #ddd;
 }
+
+article ul.contents {
+	position: fixed;
+	margin-left: -216px;
+	top: 157px;
+	background-color: #ffffff;
+	list-style: none;
+	padding: 5px 0px 10px 10px;
+	border-radius: 10px 0 0 10px;
+	border-top: 1px solid #55d555;
+	border-left: 1px solid #55d555;
+	border-bottom: 1px solid #55d555;
+	width: 159px;
+}
+
+article ul.contents.links li {
+	border-right: 3px solid;
+	padding: 0px 5px;
+	text-align: right;
+}
+
+article ul.contents.links li ul {
+	list-style: none;
+	padding: 0 10px 10px 10px;
+}
+
+article ul.contents.links li.title {
+	border-right: none;
+	padding: 0 5px 5px 5px;
+	font-weight: bold;
+}
+
+article ul.contents.links li a.link {
+	background: none;
+	padding: 0;
+	border: none;
+}

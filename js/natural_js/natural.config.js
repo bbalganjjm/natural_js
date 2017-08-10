@@ -157,6 +157,8 @@
 
 			    	var contents = cont.view.find(".contents");
 
+			    	contents.prepend('<li class="title">' + (N.locale() === "ko_KR" ? "목차" : "Contents") + '</li>');
+
 			    	if(contents.length > 0) {
 			    		cont.view.find("h3, h4").each(function() {
 							var selfEle = $(this);
