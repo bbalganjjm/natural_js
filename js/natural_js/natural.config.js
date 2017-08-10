@@ -236,18 +236,6 @@
 					    	CommonUtilController.i18n(undefined, request.options.target);
 						}
 					}
-				},
-				"dataFilter" : {
-					afterInit : function(request) {
-					},
-					beforeSend : function(request, xhr, settings) {
-					},
-					success : function(request, data, textStatus, xhr) {
-					},
-					error : function(request, xhr, textStatus, errorThrown) {
-					},
-					complete : function(request, xhr, textStatus) {
-					}
 				}
 			},
 			"request" : {
