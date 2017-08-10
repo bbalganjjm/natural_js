@@ -146,7 +146,7 @@
 			    	}
 				}
 			}, {
-				"pointcut" : "refr.*:init",
+				"pointcut" : ".intr0100:init|refr.*:init",
 				"adviceType" : "before",
 				/**
 				 * Create table of contents
@@ -157,10 +157,10 @@
 
 			    	var contents = cont.view.find(".contents");
 
-			    	contents.prepend('<li class="title">' + (N.locale() === "ko_KR" ? "목차" : "Contents") + '</li>');
+			    	contents.prepend('<li class="title">' + (N.locale() === "ko_KR" ? "색인" : "Index") + '</li>');
 
 			    	if(contents.length > 0) {
-			    		cont.view.find("h3, h4").each(function() {
+			    		cont.view.find("h2, h3, h4").each(function() {
 							var selfEle = $(this);
 							if(!selfEle.hasClass("notTableOfContents")) {
 								var sId = location.hash.replace("#", "") + "/" + cont.view.data("pageid") + "/" + Math.random();
