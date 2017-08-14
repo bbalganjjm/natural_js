@@ -178,6 +178,33 @@
 	<p lang="en_US" class="smallContTit">Method options : </p>
 	<table class="form">
 		<tr>
+			<th width="10%">add</th>
+			<th width="10%"><label for="addRow">arguments[0]</label></th>
+			<td width="80%" colspan="3">
+				<input id="addRow" type="text" value="" />
+				<label for="addRow" lang="ko_KR">추가할 행 인덱스, 입력하지 않으면 addTop 옵션의 설정이 적용 됨.</label>
+				<label for="addRow" lang="en_US">The row index to add, If not, the setting of addTop option is applied.</label>
+			</td>
+		</tr>
+		<tr>
+			<th width="10%">revert</th>
+			<th width="10%"><label for="rvtRow">arguments[0]</label></th>
+			<td width="80%" colspan="3">
+				<input id="rvtRow" type="text" value="0" />
+				<label for="rvtRow" lang="ko_KR">복원 할 행 인덱스, 빈값 입력 시 모든 행 데이터 복원</label>
+				<label for="rvtRow" lang="en_US">The row index to revert, if set empty value, revert the all row data</label>
+			</td>
+		</tr>
+		<tr>
+			<th width="10%">remove</th>
+			<th width="10%"><label for="rmvRow">arguments[0]</label></th>
+			<td width="80%" colspan="3">
+				<input id="rmvRow" type="text" value="0" />
+				<label for="rmvRow" lang="ko_KR">삭제 할 행 인덱스</label>
+				<label for="rmvRow" lang="en_US">The row index to remove</label>
+			</td>
+		</tr>
+		<tr>
 			<th width="10%" rowspan="3">val</th>
 			<th width="10%"><label for="row">arguments[0]</label></th>
 			<td width="80%" colspan="3">
@@ -234,24 +261,6 @@
 					false : Return all data of jQuery Object type.<br>
 					undefined : Return all data of pure JSON Object array type.
 				</label>
-			</td>
-		</tr>
-		<tr>
-			<th width="10%">revert</th>
-			<th width="10%"><label for="rvtRow">arguments[0]</label></th>
-			<td width="80%" colspan="3">
-				<input id="rvtRow" type="text" value="0" />
-				<label for="rvtRow" lang="ko_KR">복원 할 행 인덱스, 빈값 입력 시 모든 행 데이터 복원</label>
-				<label for="rvtRow" lang="en_US">The row index to revert, if set empty value, revert the all row data</label>
-			</td>
-		</tr>
-		<tr>
-			<th width="10%">remove</th>
-			<th width="10%"><label for="rmvRow">arguments[0]</label></th>
-			<td width="80%" colspan="3">
-				<input id="rmvRow" type="text" value="0" />
-				<label for="rmvRow" lang="ko_KR">삭제 할 행 인덱스</label>
-				<label for="rmvRow" lang="en_US">The row index to remove</label>
 			</td>
 		</tr>
 		<tr>
@@ -379,7 +388,7 @@
 
 	    	N("#btnAdd", view).click(function(e) {
 	            e.preventDefault();
-	        	grid.add();
+	        	grid.add(parseInt(N.string.trimToUndefined(N("#addRow", view).val())));
 
 	        	N("div.btnBox", view).find("a").instance("button", function(u) {
 	            	if(!this.context().is("#btnAdd") && !this.context().is("#btnBind")) {
