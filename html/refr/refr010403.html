@@ -123,9 +123,23 @@
 <input id="col01" type="text" data-validate='[["required"]]'></xmp></code></pre>
 	<p>위와 같이 입력요소에 정의하면 해당 요소에서 포커스 아웃 되면 검증이 실행 되고 검증 실패 시 실패 원인을 입력 요소 옆에 툴팁으로 보여 줍니다.</p>
 
-	<h4 class="notIndex">2. 동적으로 검증룰을 변경하고 바로 검증</h4>
+	<h4 class="notIndex">2. 처리 함수를 직접 호출하여 검증을 명령형으로 처리</h4>
+		<p>검증을 선언형으로 처리 할 때 data-validate='[["maxbyte", 8]]' 구문 에서<br>
+		"검증 할 문자" 는 사용자가 입력한 문자가 자동으로 입력 되고<br>
+		"maxbyte" 가 검증룰 이고 8 은 인자(arguments) 입니다.</p>
+		<p>이런 구문을 명령형으로 처리 할 때는 다음과 같이 사용하면 됩니다.</p>
+
+		<pre><code class="language-javascript">
+N.formatter.검증룰("검증 할 문자", [arg[0], arg[1], arg[n]]);</code></pre>
+
+		<pre><code class="language-javascript">
+// 한글이름
+N.validator.maxbyte("가나다라마", [8]); //--> false</code></pre>
+
+	<h4 class="notIndex">3. 동적으로 검증룰을 변경하고 바로 검증</h4>
 	<pre><code class="language-javascript">N("selector").data("validate", [[&quot;required&quot;]]).trigger("validate");</code></pre>
 
+	<p class="alert">전체 검증 룰 들은 Validation Rules 탭을 참고 하세요.</p>
 </article>
 
 <script type="text/javascript">
