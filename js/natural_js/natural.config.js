@@ -85,6 +85,7 @@
 					".refr010506:init",
 					".refr010507:init",
 					".refr010508:init",
+					".refr010511:init",
 					".refr010509:init",
 					".refr010510:init"
 				].join("|"),
@@ -216,7 +217,6 @@
 					 * 서버에 요청이 성공 했을 경우 실행됨.
 					 */
 					success : function(request, data, textStatus, xhr) {
-						N.log(textStatus);
 						// return data 를 하면 N.comm.submit 의 콜백의 인자로 넘어오는 data 가 리턴한 데이터로 치환 됨.
 					},
 					/**
