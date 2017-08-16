@@ -112,14 +112,14 @@
 			<td>boolean</td>
 			<td>true</td>
 			<td></td>
-			<td>입력요소의 실시간 검증을 할건지 유무를 지정 합니다.</td>
+			<td>입력요소의 실시간 검증을 할건지 여부를 지정 합니다.</td>
 		</tr>
 		<tr>
 			<td>html</td>
 			<td>boolean</td>
 			<td>false</td>
 			<td></td>
-			<td>bind 시 HTML 태그를 인식할건지 그대로 표시할건지 유무를 지정 합니다.</td>
+			<td>bind 시 HTML 태그를 인식할건지 그대로 표시할건지 여부를 지정 합니다.</td>
 		</tr>
 		<tr>
 			<td>addTop</td>
@@ -129,22 +129,36 @@
 			<td>
 				<p>add 메서드를 호출했을 때 새로운 행요소와 데이터세트를 그리드의 상단에 추가할건지 하단에 추가할건지를 결정 합니다.</p>
 				<p>true 이면 상단에 추가하고 false 이면 하단에 추가 합니다.</p>
-				<p class="alert">헤더고정형(height 옵션을 0 이상 지정)의 그리드에서는 addTop 옵션이 무조건 true로 지정 됩니다. N.form 과 연동시 주의 하기 바랍니다.</p>
+				<p class="alert">addTop 옵션이 false 이면 scrollPaging.size 옵션과 createRowDelay 옵션을 강제로 0으로 설정 하여 스크롤페이징 기능과 행이 순서대로 그려지는 효과를 비활성화 시킵니다.</p>
 			</td>
+		</tr>
+		<tr>
+			<td>addSelect</td>
+			<td>boolean</td>
+			<td>true</td>
+			<td></td>
+			<td>select 옵션이 true 이고 행이 추가 됐을때 자동으로 선택 할 건지 여부</td>
+		</tr>
+		<tr>
+			<td>appendScroll</td>
+			<td>boolean</td>
+			<td>true</td>
+			<td></td>
+			<td>bind 할때 "append" 옵션 적용 시 Append 된 행으로 스크롤 할 건지 여부</td>
 		</tr>
 		<tr>
 			<td>resizable</td>
 			<td>boolean</td>
 			<td>false</td>
 			<td></td>
-			<td>컬럼 리사이징 기능 활성화 유무</td>
+			<td>컬럼 리사이징 기능 활성화 여부</td>
 		</tr>
 		<tr>
 			<td>vResizable</td>
 			<td>boolean</td>
 			<td>false</td>
 			<td></td>
-			<td>그리드 높이 리사이징 기능 활성화 유무</td>
+			<td>그리드 높이 리사이징 기능 활성화 여부</td>
 		</tr>
 		<tr>
 			<td>sortable</td>
@@ -152,7 +166,7 @@
 			<td>false</td>
 			<td></td>
 			<td>
-				<p>컬럼 정렬 기능 활성화 유무</p>
+				<p>컬럼 정렬 기능 활성화 여부</p>
 				<p class="alert">
 					정렬 되는 컬럼 정보는 내부적으로 tbody 의 td 나 td 안에 있는 요소들의 id 값을 가져와 사용 합니다.
 					tbody 의 td 안에 id 속성을 가진 요소가 2개 이상일 경우는 정렬이 정상적으로 작동되지 않을 수 있습니다.
@@ -166,7 +180,7 @@
 			<td>false</td>
 			<td></td>
 			<td>
-				<p>데이터 필터 기능 활성화 유무</p>
+				<p>데이터 필터 기능 활성화 여부</p>
 				<p class="alert">
 					filter 옵션이 false 인 상태에서 thead 의 th 에   data-filter="string|number|date" 속성을 추가 하면 컬럼별로 필터 기능을 활성화 할 수 있습니다.
 					(data-filter 속성 값인 string, number, date 에 따라 검색조건을 다양화 하려고 합니다. 현재는 string 으로만 인식되며 number, date 는 개발 하는대로 릴리즈 할 예정 입니다.)
@@ -184,7 +198,7 @@
 			<td>true</td>
 			<td></td>
 			<td>
-				<p>그리드 바디 영역에 mouseover 시 윈도우 스크롤을 비활설화 할 것인지 유무</p>
+				<p>그리드 바디 영역에 mouseover 시 윈도우 스크롤을 비활설화 할 것인지 여부</p>
 				<p>그리드안에서 마우스 스크롤 시 그리드의 끝 영역이나 시작영역에 가면 브라우저 윈도우 스크롤이 자동으로 올라가거나 내려가서 그리드가 표시된 부분이 넘어가게 됩니다. 때문에 그리드 바디영역에 마우스가 올라가면 윈도우 스크롤을 비활성 시킵니다. false로 지정하면 브라우저 기본모드로 동작 됩니다.</p>
 			</td>
 		</tr>
@@ -204,8 +218,8 @@
 			<td>false</td>
 			<td></td>
 			<td>
-				<p>특정 행을 선택하는 효과 적용 유무, 한건만 선택 됨.</p>
-				<p>행 선택시 해당행의 TBODY요소에 "grid_selected__" 스타일클래스가 생성되고 선택이 해제되면 생성된 스타일클래스가 제거 됩니다.</p>
+				<p>특정 행을 선택하는 효과 적용 여부, 한건만 선택 됨.</p>
+				<p>행이 선택 되면 해당 요소(TBODY)의 class 속성에 "grid_selected__" 값이 추가 되고 해제되면 "grid_selected__" 값이 제거 됩니다.</p>
 			</td>
 		</tr>
 		<tr>
@@ -214,8 +228,8 @@
 			<td>false</td>
 			<td></td>
 			<td>
-				<p>특정 행을 선택하는 효과 적용 유무, 여러건 선택 가능</p>
-				<p>행 선택시 해당행의 TBODY요소에 "grid_selected__" 스타일클래스가 생성되고 선택이 해제되면 생성된 스타일클래스가 제거 됩니다.</p>
+				<p>특정 행을 선택하는 효과 적용 여부, 여러건 선택 가능</p>
+				<p>행이 선택 되면 해당 요소(TBODY)의 class 속성에 "grid_selected__" 값이 추가 되고 해제되면 "grid_selected__" 값이 제거 됩니다.</p>
 			</td>
 		</tr>
 		<tr>
@@ -259,7 +273,7 @@
 			<td>false</td>
 			<td></td>
 			<td>
-				<p>그리드 행들의 HOVER 효과 적용 유무</p>
+				<p>그리드 행들의 HOVER 효과 적용 여부</p>
 				<p class="alert">그리드 행에 mouseover 시 해당 행의 TBODY요소에 "grid_hover__" 스타일클래스가 생성되고 선택이 해제되면 생성된 스타일클래스가 제거 됩니다.</p>
 			</td>
 		</tr>
@@ -517,7 +531,7 @@
 			<td align="center">-</td>
 			<td>
 				두번째 인자에 "append" 라는 문자열을 지정하면 처음 바인드 되어 있던 데이터에 다시 바인드 한 데이터를 합쳐 주고 첫번째 인자로 지정한 data를 그리드에 추가로 표시 해 줍니다.
-				<p class="alert">그리드 초기화 시 반드시 scrollPaging.size 옵션 값을 0 으로 지정 해야 합니다.</p>
+				<p class="alert">"append" 인자가 입력 되면 scrollPaging.size 옵션 값 자동으로 0 으로 지정 되어 스크롤 페이징 기능이 비활성화 됩니다.</p>
 			</td>
 		</tr>
 		<tr>

@@ -38,11 +38,11 @@
 		<tr>
 			<th><label for="addTop">addTop</label></th>
 			<td colspan="3">
-				<input id="addTop" type="checkbox" />
+				<input id="addTop" type="checkbox" checked="checked" />
 				<label for="addTop" lang="ko_KR">체크(true)하면 add 메서드 호출 시 새로운 행을 위쪽에 생성합니다.</label>
-				<p lang="ko_KR" class="alert">height 옵션 값이 0보다 크면 항상 "true"로 지정 됩니다.</p>
+				<p lang="ko_KR" class="alert">addTop 옵션이 false 이면 스크롤페이징 기능과 행이 순서대로 그려지는 효과가 비활성화 됩니다.</p>
 				<label for="addTop" lang="en_US">If this checkbox with check(true), create the new row activate the top when call the add method</label>
-				<p lang="en_US" class="alert">If height option value is greater than 0, addTop option is set always "true"</p>
+				<p lang="en_US" class="alert">If the addTop option is false, the scrolling paging feature and the effect that rows are drawn in sequence are disabled.</p>
 			</td>
 		</tr>
 		<tr>
@@ -366,8 +366,7 @@
 	       			createRowDelay : N.string.trimToNull(N("#createRowDelay", view).val()) !== null ?
 	       				parseInt(N("#createRowDelay", view).val()) : 1,
 	       			scrollPaging : {
-	       				size : N.string.trimToNull(N("#scrollPagingSize", view).val()) !== null ?
-	       					parseInt(N("#scrollPagingSize", view).val()) : 100
+	       				size : parseInt(N.string.trimToZero(N("#scrollPagingSize", view).val()))
 	       			},
 	       			rowHandler : N.string.trimToNull(N("#rowHandler", view).val()) !== null ?
 	       				eval("(" + N("#rowHandler", view).val() + ")") : null,
@@ -404,7 +403,7 @@
 	    	N("#btnBind", view).click(function(e) {
 	            e.preventDefault();
 	            N.comm("html/apid/data/grid.json").submit(function(data) {
-	            	grid.bind(data);
+	            	grid.bind(data, "append");
 		       	});
 
 	            N("div.btnBox", view).find("a").instance("button", function(u) {

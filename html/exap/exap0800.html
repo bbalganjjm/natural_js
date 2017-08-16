@@ -215,7 +215,6 @@ N(".exap0800").cont({
     	// 3-2. initialize detail form
     	var detailForm = N([]).form({
     		context : N("#detail", view),
-    		addTop : true,
     		revert : true
     	});
 
@@ -227,8 +226,10 @@ N(".exap0800").cont({
        		height : 500,
        		resizable : true,
        		sortable : true,
+       		addSelect : false,
        		hover : true,
        		select : true,
+       		addTop : true,
        		onSelect : function(index, rowEle, data, beforeRow) {
        			// Grid row select event
        			if(index > -1) {
