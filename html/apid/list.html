@@ -38,11 +38,11 @@
 		<tr>
 			<th><label for="addTop">addTop</label></th>
 			<td colspan="3">
-				<input id="addTop" type="checkbox" />
+				<input id="addTop" type="checkbox" checked="checked" />
 				<label for="addTop" lang="ko_KR">체크(true)하면 add 메서드 호출 시 새로운 행을 위쪽에 생성합니다.</label>
-				<p lang="ko_KR" class="alert">height 옵션 값이 0보다 크면 항상 "true"로 지정 됩니다.</p>
+				<p lang="ko_KR" class="alert">addTop 옵션이 false 이면 스크롤페이징 기능과 행이 순서대로 그려지는 효과가 비활성화 됩니다.</p>
 				<label for="addTop" lang="en_US">If this checkbox with check(true), create the new row activate the top when call the add method</label>
-				<p lang="en_US" class="alert">If height option value is greater than 0, addTop option is set always "true"</p>
+				<p lang="en_US" class="alert">If the addTop option is false, the scrolling paging feature and the effect that rows are drawn in sequence are disabled.</p>
 			</td>
 		</tr>
 		<tr>
@@ -157,6 +157,15 @@
 	<p lang="ko_KR" class="smallContTit">함수 옵션 : </p>
 	<p lang="en_US" class="smallContTit">Method options : </p>
 	<table class="form">
+		<tr>
+			<th width="10%">bind</th>
+			<th width="10%"><label for="append">arguments[1]</label></th>
+			<td width="80%" colspan="3">
+				<input id="append" type="text" value="" />
+				<label for="append" lang="ko_KR">"append" 문자열을 입력 하면 기존 데이터를 남겨두고 추가로 바인드 합니다.</label>
+				<label for="append" lang="en_US">If input "append" string, it does append the data</label>
+			</td>
+		</tr>
 		<tr>
 			<th width="10%">add</th>
 			<th width="10%"><label for="addRow">arguments[0]</label></th>
@@ -356,7 +365,7 @@
 	    	N("#btnBind", view).click(function(e) {
 	            e.preventDefault();
 	            N.comm("html/apid/data/grid.json").submit(function(data) {
-	            	list.bind(data);
+	            	list.bind(data, N.string.trimToUndefined(N("#append", view).val()));
 		       	});
 
 	            N("div.btnBox", view).find("a").instance("button", function(u) {
