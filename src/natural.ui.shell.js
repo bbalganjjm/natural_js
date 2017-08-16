@@ -1,5 +1,5 @@
 /*!
- * Natural-UI.Shell v0.8.1.0, Works fine in IE9 and above
+ * Natural-UI.Shell v0.8.1.3, Works fine in IE9 and above
  * bbalganjjm@gmail.com
  *
  * Copyright 2017 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2017-05-11T20:00Z
  */
 (function(window, $) {
-	N.version["Natural-UI.Shell"] = "v0.8.1.0";
+	N.version["Natural-UI.Shell"] = "v0.8.1.3";
 
 	$.fn.extend($.extend(N.prototype, {
 		notify : function(opts) {
@@ -264,6 +264,9 @@
 				};
 			}
 
+			// set Controller's request instance
+			this.request = new N.comm.request(this);
+
 			Documents.wrapEle.call(this);
 
 			this.options.context.instance("docs", this);
@@ -399,22 +402,29 @@
 					docOpts.onBeforeLoad.call(this, docOpts.docId, target);
 				}
 
-				N.comm({
+				var comm = N.comm({
 					url : docOpts.url,
 					contentType : "text/html; charset=UTF-8",
 					dataType : "html",
 					type : "GET",
 					target : target
-				}).submit(function(document) {
+				});
+
+				// set current N.comm's request from N.docs's request;
+				$.extend(comm.request.attrObj, this.request.attrObj);
+				this.request.attrObj = {};
+
+				comm.submit(function(document) {
 					// Reset page context
 					N.context.attr("architecture").page.context = N.context.attr("ui").alert.container = target;
 
 					var cont = target.html(document).children(".view_context__:last").instance("cont");
-					// set caller attribute in conteroller in tab content that is Tab instance
-					cont.caller = self;
 
 					// set tab instance to tab contents Controller
 					if(cont !== undefined) {
+						// set caller attribute in conteroller in tab content that is Tab instance
+						cont.caller = self;
+
 						// triggering "init" method
 						N.cont.trInit.call(this, cont, this.request);
 						cont.docOpts = docOpts;
@@ -750,6 +760,11 @@
 			},
 			"remove" : function(docId) {
 				var opts = this.options;
+
+				if(opts.docs[docId] === undefined) {
+					return false;
+				}
+
 				var self = this;
 
 				var targetTabEle = opts.context.find("> .docs_tab_context__ > .docs_tabs__ > .docs_tab__." + docId + "__");
