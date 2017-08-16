@@ -1,5 +1,5 @@
 /*!
- * Natural-CORE v0.8.5.20
+ * Natural-CORE v0.8.5.23
  * bbalganjjm@gmail.com
  *
  * Includes formatdate.js & Mask JavaScript API
@@ -238,7 +238,7 @@
 		// N local variables
 		$.extend(N, {
 			version : {
-				"Natural-CORE" : "0.8.5.20"
+				"Natural-CORE" : "0.8.5.23"
 			},
 			/**
 			 * Set and get locale value
@@ -307,10 +307,9 @@
 				minimum : function() {
 					$(window).unbind("resize.datepicker");
 					$(window).unbind("resize.alert");
-					$(window.document).unbind("mousedown.datepicker");
-					$(window.document).unbind(N.browser.is("firefox") ? "keydown.datepicker" : "keyup.datepicker");
+					$(window.document).unbind("click.datepicker");
 					$(window.document).unbind("keyup.alert");
-					$(window.document).unbind("click.grid.dataFilter");
+					$(window.document).unbind("click.grid.dataFilter touchstart.grid.dataFilter");
 					return true;
 				},
 				/**
@@ -320,12 +319,11 @@
 					$(window).unbind("resize.datepicker");
 					$(window).unbind("resize.alert");
 					$(window.document).unbind("dragstart.alert selectstart.alert mousemove.alert touchmove.alert mouseup.alert touchend.alert");
-					$(window.document).unbind("mousedown.datepicker");
-					$(window.document).unbind(N.browser.is("firefox") ? "keydown.datepicker" : "keyup.datepicker");
+					$(window.document).unbind("click.datepicker");
 					$(window.document).unbind("keyup.alert");
 					$(window.document).unbind("dragstart.grid.vResize selectstart.grid.vResize mousemove.grid.vResize touchmove.grid.vResize mouseup.grid.vResize touchend.grid.vResize");
 					$(window.document).unbind("dragstart.grid.resize selectstart.grid.resize mousemove.grid.resize touchmove.grid.resize mouseup.grid.resize touchend.grid.resize");
-					$(window.document).unbind("click.grid.dataFilter");
+					$(window.document).unbind("click.grid.dataFilter touchstart.grid.dataFilter");
 					return true;
 				}
 			},
@@ -391,7 +389,7 @@
 			 * Check whether arg[0] is a jQuery Object type
 			 */
 			isWrappedSet : function(obj) {
-				return this.isArraylike(obj) && obj.jquery !== undefined;
+				return obj != null && this.isArraylike(obj) && obj.jquery !== undefined;
 			},
 			/**
 			 * N.string package
@@ -701,23 +699,37 @@
 				toData : function(eles) {
 					var retData = {};
 					var key, ele;
+					var beforeCheckboxNRadios = $();
 					eles.each(function() {
 						key = $(this).attr("id");
 						ele = $(this);
 						if(ele.is("input:radio") || ele.is("input:checkbox")) {
-							//TODO 이미 radio나 checkbox 로 잡았다면 루프의 다음번은 통과하도록 더 최적화 필요
-							ele = ele.siblings("input:" + ele.attr("type") + "[id^='" + ele.attr("name") + "']");
-							ele.push(this);
-							if(ele.length > 1) {
-								key = ele.attr("name");
-							} else if (ele.length === 1) {
-								key = ele.attr("id");
-								if(key === undefined) {
-									key = ele.attr("name");
+							if(beforeCheckboxNRadios.filter(ele).length === 0) {
+								if(ele.closest(".select_input_container__").length > 0) {
+									ele = ele.closest(".select_input_container__").find("input:" + ele.attr("type") + "[name='" + ele.attr("name") + "']");
+									beforeCheckboxNRadios = ele;
+								} else if(ele.parent("label").length > 0) {
+									ele = ele.parent().siblings("label").find("input:" + ele.attr("type") + "[name='" + ele.attr("name") + "']");
+									ele.push(this);
+									beforeCheckboxNRadios = ele;
+								} else {
+									ele = ele.siblings("input:" + ele.attr("type") + "[name='" + ele.attr("name") + "']");
+									ele.push(this);
+									beforeCheckboxNRadios = ele;
 								}
-							}
-							if(key !== undefined) {
-								retData[key] = ele.vals();
+
+								if(ele.length > 1) {
+									key = ele.attr("name");
+								} else if (ele.length === 1) {
+									key = ele.attr("id");
+									if(key === undefined) {
+										key = ele.attr("name");
+									}
+								}
+
+								if(key !== undefined) {
+									retData[key] = ele.vals();
+								}
 							}
 						} else {
 							if(key !== undefined) {
