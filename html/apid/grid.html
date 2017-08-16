@@ -181,8 +181,11 @@
 			<th width="10%">bind</th>
 			<th width="10%"><label for="append">arguments[1]</label></th>
 			<td width="80%" colspan="3">
-				<input id="append" type="text" value="" />
-				<label for="append" lang="ko_KR">"append" 문자열을 입력 하면 기존 데이터를 남겨두고 추가로 바인드 합니다.</label>
+				<select id="append">
+					<option value=""></option>
+					<option value="append">append</option>
+				</select>
+				<label for="append" lang="ko_KR">append를 선택 하면 기존 데이터를 남겨두고 추가로 바인드 합니다.</label>
 				<label for="append" lang="en_US">If input "append" string, it does append the data</label>
 			</td>
 		</tr>
