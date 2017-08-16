@@ -1,0 +1,420 @@
+<article class="demo_list">
+	<p lang="ko_KR" class="smallContTit">데이터 : </p>
+	<p lang="en_US" class="smallContTit">Data : </p>
+	<div class="dataBox">
+		/natural_js/html/apid/data/list.json
+	</div>
+	<p lang="ko_KR" class="smallContTit">기본 옵션 : </p>
+	<p lang="en_US" class="smallContTit">Default options : </p>
+	<table class="form">
+		<tr>
+			<th width="10%" align="right"><label for="context">context</label></th>
+			<td width="40%">
+				<input id="context" type="text" value="#list" readonly="readonly" />
+				<label for="context" lang="ko_KR">jQuery selector 입력</label>
+				<label for="context" lang="en_US">Input jQuery selector</label>
+			</td>
+			<th width="10%" align="right"><label for="height">height</label></th>
+			<td width="40%" style="background-color: #efffff;">
+				<input id="height" type="text" value="395" style="width: 50px;" /><br>
+				<label for="height" lang="ko_KR">N.list의 바디 영역 높이 값(0 이면 헤더를 고정하지 않습니다, 기본값은 0)</label>
+				<label for="height" lang="en_US">The height value of N.gird's body area(If this vlaue is 0, does not fix the header, Default value is 0)</label>
+			</td>
+		</tr>
+		<tr>
+			<th><label for="validate">validate</label></th>
+			<td>
+				<input id="validate" type="checkbox" checked="checked" />
+				<label for="validate" lang="ko_KR">체크를 해제(false)하면 실시간(focus out) Validation Check 기능을 Off 합니다.</label>
+				<label for="validate" lang="en_US">If this checkbox with uncheck(false), off the realtime(focus out) validation check feature</label>
+			</td>
+			<th><label for="html">html</label></th>
+			<td>
+				<input id="html" type="checkbox" />
+				<label for="html" lang="ko_KR">체크(true)하면 데이터의 HTML 태그를 인식 합니다.</label>
+				<label for="html" lang="en_US">If this checkbox with check(true), recognize the HTML tags in data</label>
+			</td>
+		</tr>
+		<tr>
+			<th><label for="addTop">addTop</label></th>
+			<td colspan="3">
+				<input id="addTop" type="checkbox" />
+				<label for="addTop" lang="ko_KR">체크(true)하면 add 메서드 호출 시 새로운 행을 위쪽에 생성합니다.</label>
+				<p lang="ko_KR" class="alert">height 옵션 값이 0보다 크면 항상 "true"로 지정 됩니다.</p>
+				<label for="addTop" lang="en_US">If this checkbox with check(true), create the new row activate the top when call the add method</label>
+				<p lang="en_US" class="alert">If height option value is greater than 0, addTop option is set always "true"</p>
+			</td>
+		</tr>
+		<tr>
+			<th><label for="vResizable">vResizable</label></th>
+			<td style="background-color: #efffff;" colspan="3">
+				<input id="vResizable" type="checkbox" />
+				<label for="vResizable" lang="ko_KR">체크(true)하면 리스트의 높이를 조절할 수 있는 기능을 활성화 합니다.</label>
+				<label for="vResizable" lang="en_US">If this checkbox with check(true), activate the vertical resize feature for N.list's body height</label>
+			</td>
+		</tr>
+		<tr>
+			<th><label for="select">select</label></th>
+			<td>
+				<input id="select" type="checkbox" />
+				<label for="select" lang="ko_KR">체크(true)하면 행 선택 기능을 활성화 합니다(1개 행 만 선택 가능).</label>
+				<label for="select" lang="en_US">If this checkbox with check(true), on select the row feature(can select the only one row)</label>
+			</td>
+			<th><label for="multiselect">multiselect</label></th>
+			<td>
+				<input id="multiselect" type="checkbox" />
+				<label for="multiselect" lang="ko_KR">체크(true)하면 행 선택 기능을 활성화 합니다(여러 행 선택 가능).</label>
+				<label for="multiselect" lang="en_US">If this checkbox with check(true), on select the row feature(can select the multi row)</label>
+			</td>
+		</tr>
+		<tr>
+			<th><label for="checkAll">checkAll</label></th>
+			<td>
+				<input id="checkAll" type="text" value="#checkAll" />
+				<label for="checkAll" lang="ko_KR">바디영역의 체크박스들을 모두 선택할 헤더영역의 체크 박스</label>
+				<label for="checkAll" lang="en_US">Checkbox element in N.list's header to check all checkboxes in body area</label>
+			</td>
+			<th><label for="checkAllTarget">checkAllTarget</label></th>
+			<td>
+				<input id="checkAllTarget" type="text" value=".checkAllTarget" />
+				<label for="checkAllTarget" lang="ko_KR">모두 체크될 바디영역의 체크박스들</label>
+				<label for="checkAllTarget" lang="en_US">To be checked all checkboxes in body area</label>
+			</td>
+		</tr>
+		<tr>
+			<th><label for="hover">hover</label></th>
+			<td>
+				<input id="hover" type="checkbox" />
+				<label for="hover" lang="ko_KR">체크(true)하면 hover 효과를 보여줍니다.</label>
+				<label for="hover" lang="en_US">If this checkbox with check(true), display hover effect</label>
+			</td>
+			<th><label for="createRowDelay">createRow<br>Delay</label></th>
+			<td>
+				<input id="createRowDelay" type="text" value="1" />
+				<label for="createRowDelay" lang="ko_KR">[행 생성 효과(effect)]각 행 요소가 만들어질 때의 지연 시간</label>
+				<label for="createRowDelay" lang="en_US">[Create row effect]Delay time(ms) for each create row element</label>
+			</td>
+		</tr>
+		<tr>
+			<th><label for="scrollPagingSize">scrollPaging<br>.size</label></th>
+			<td>
+				<input id="scrollPagingSize" type="text" value="50" />
+				<label for="scrollPagingSize" lang="ko_KR">스크롤 페이징 사이즈</label>
+				<p class="alert" lang="ko_KR">0 이면 스크롤 페이징 하지 않습니다.</p>
+				<label for="scrollPagingSize" lang="en_US">Scroll paging size</label>
+				<p class="alert" lang="en_US">If the value is 0 it does not scroll paging.</p>
+			</td>
+			<th><label for="rowHandler">rowHandler</label></th>
+			<td>
+				<textarea id="rowHandler" style="height: 75px;">function(rowIdx, rowEle, rowData) {
+	N.log(rowIdx);
+	N.log(rowEle);
+	N.log(rowData);
+}</textarea><br />
+				<label for="rowHandler" lang="ko_KR">행 요소(TBODY)가 만들어 질때마다 호출되는 이벤트 핸들러</label>
+				<label for="rowHandler" lang="en_US">Event handler for be created the each row element(TBODY)</label>
+			</td>
+		</tr>
+		<tr>
+			<th><label for="onSelect">onSelect</label></th>
+			<td>
+				<textarea id="onSelect" style="height: 90px;">function(rowIdx, rowEle, rowData, beforeRowIdx, e) {
+	N.log(rowIdx);
+	N.log(rowEle);
+	N.log(rowData);
+	N.log(beforeRowIdx);
+	N.log(e); // Click event object
+}</textarea><br />
+				<label for="onSelect" lang="ko_KR">행을 선택 할 때 실행되는 이벤트 핸들러</label>
+				<label for="onSelect" lang="en_US">Event handler for select the row</label>
+			</td>
+			<th><label for="onBind">onBind</label></th>
+			<td>
+				<textarea id="onBind" style="height: 60px;">function(context, data) {
+	N.log(context);
+	N.log(data);
+}</textarea><br />
+				<label for="onBind" lang="ko_KR">데이터가 바인드가 완료 된 후 실행되는 이벤트 핸들러</label>
+				<label for="onBind" lang="en_US">Event handler for complete the data bind</label>
+			</td>
+		</tr>
+		<tr>
+			<th><label for="windowScrollLock">windowScroll Lock</label></th>
+			<td>
+				<input id="windowScrollLock" type="checkbox" checked="checked" />
+				<label for="windowScrollLock" lang="ko_KR">체크를 해제(false)하면 N.list의 바디영역을 스크롤 할 때 윈도우 스크롤을 차단하지 않습니다.</label>
+				<label for="windowScrollLock" lang="en_US">If this checkbox with uncheck(false), do not block window scroll when scroll the list's body area</label>
+			</td>
+			<th><label for="revert">revert</label></th>
+			<td>
+				<input id="revert" type="checkbox" checked="checked" />
+				<label for="revert" lang="ko_KR">체크를 해제(false)하면 revert 기능을 Off 합니다(기본값은 false).</label>
+				<label for="revert" lang="en_US">If this checkbox with check(true), off the revert feature(default value is false)</label>
+			</td>
+		</tr>
+	</table>
+
+	<p lang="ko_KR" class="smallContTit">함수 옵션 : </p>
+	<p lang="en_US" class="smallContTit">Method options : </p>
+	<table class="form">
+		<tr>
+			<th width="10%">add</th>
+			<th width="10%"><label for="addRow">arguments[0]</label></th>
+			<td width="80%" colspan="3">
+				<input id="addRow" type="text" value="" />
+				<label for="addRow" lang="ko_KR">추가할 행 인덱스, 입력하지 않으면 addTop 옵션의 설정이 적용 됨.</label>
+				<label for="addRow" lang="en_US">The row index to add, If not, the setting of addTop option is applied.</label>
+			</td>
+		</tr>
+		<tr>
+			<th width="10%">revert</th>
+			<th width="10%"><label for="rvtRow">arguments[0]</label></th>
+			<td width="80%" colspan="3">
+				<input id="rvtRow" type="text" value="0" />
+				<label for="rvtRow" lang="ko_KR">복원 할 행 인덱스, 빈값 입력 시 모든 행 데이터 복원</label>
+				<label for="rvtRow" lang="en_US">The row index to revert, if set empty value, revert the all row data</label>
+			</td>
+		</tr>
+		<tr>
+			<th width="10%">remove</th>
+			<th width="10%"><label for="rmvRow">arguments[0]</label></th>
+			<td width="80%" colspan="3">
+				<input id="rmvRow" type="text" value="0" />
+				<label for="rmvRow" lang="ko_KR">삭제 할 행 인덱스</label>
+				<label for="rmvRow" lang="en_US">The row index to remove</label>
+			</td>
+		</tr>
+		<tr>
+			<th width="10%" rowspan="3">val</th>
+			<th width="10%"><label for="row">arguments[0]</label></th>
+			<td width="80%" colspan="3">
+				<input id="row" type="text" value="0" />
+				<label for="row" lang="ko_KR">대상 행 인덱스</label>
+				<label for="row" lang="en_US">Target row index</label>
+			</td>
+		</tr>
+		<tr>
+			<th width="10%"><label for="key">arguments[1]</label></th>
+			<td width="80%" colspan="3">
+				<input id="key" type="text" value="company" />
+				<label for="key" lang="ko_KR">대상 키(컬럼) 명</label>
+				<label for="key" lang="en_US">Target key(column) name</label>
+			</td>
+		</tr>
+		<tr>
+			<th width="10%"><label for="val">arguments[2]</label></th>
+			<td width="80%" colspan="3">
+				<input id="val" type="text" value="NATURAL COMPANY" />
+				<label for="val" lang="ko_KR">대상 키에 해당하는 값</label>
+				<label for="val" lang="en_US">The value of target key</label>
+			</td>
+		</tr>
+		<tr>
+			<th width="10%">data</th>
+			<th width="10%"><label for="data">arguments[0]</label></th>
+			<td width="80%" colspan="3">
+				<select id="data">
+					<option value="modified">modified</option>
+					<option value="insert">insert</option>
+					<option value="update">update</option>
+					<option value="delete">delete</option>
+					<option value="checked">checked</option>
+					<option value="">undefined(pure object array)</option>
+					<option value="false">false(jQuery Object)</option>
+				</select><br>
+				<label for="data" lang="ko_KR">
+					modified : 수정된 데이터를 반환 합니다.<br>
+					insert : 입력된 데이터를 반환 합니다.<br>
+					update : 수정된 데이터를 반환 합니다.<br>
+					delete : 삭제된 데이터를 반환 합니다.<br>
+					checked : 체크된 데이터를 반환 합니다.<br>
+					false : jQuery Object 타입의 모든 데이터를 반환합니다.<br>
+					undefined : JSON Object Array 타입의 모든 데이터를 반환합니다.<br>
+				</label>
+				<label for="data" lang="en_US">
+					modified : Return the modified all row datas.<br>
+					insert : Return the inserted row datas.<br>
+					update : Return the updated row datas.<br>
+					delete : Return the deleted row datas.<br>
+					checked : Return the checked row datas.<br>
+					true : Return selected row data.<br>
+					false : Return all data of jQuery Object type.<br>
+					undefined : Return all data of pure JSON Object array type.
+				</label>
+			</td>
+		</tr>
+		<tr>
+			<th width="10%">validate</th>
+			<th width="10%"><label for="vldRow">arguments[0]</label></th>
+			<td width="80%" colspan="3">
+				<input id="vldRow" type="text" />
+				<label for="vldRow" lang="ko_KR">검사 할 행 인덱스, 빈값 입력 시 모든 행 데이터 검사</label>
+				<label for="vldRow" lang="en_US">The row index to validate, if set empty value, validate the all row data</label>
+			</td>
+		</tr>
+	</table>
+
+	<div align="center" class="btnBox">
+		<a id="btnInit" href="#" data-opts='{ "color": "green", "size": "large" }'>
+			<span lang="ko_KR">List 생성</span>
+			<span lang="en_US">Create List</span>
+		</a>
+		<a id="btnAdd" href="#" data-opts='{ "color": "yellowgreen", "size": "large", "disable": true }'>add</a>
+		<a id="btnBind" href="#" data-opts='{ "color": "yellowgreen", "size": "large", "disable": true }'>bind</a>
+		<a id="btnRevert" href="#" data-opts='{ "color": "yellowgreen", "size": "large", "disable": true }'>revert</a>
+		<a id="btnRemove" href="#" data-opts='{ "color": "yellowgreen", "size": "large", "disable": true }'>remove</a>
+		<a id="btnVal" href="#" data-opts='{ "color": "yellowgreen", "size": "large", "disable": true }'>val</a>
+		<a id="btnData" href="#" data-opts='{ "color": "yellowgreen", "size": "large", "disable": true }'>data</a>
+		<a id="btnCheck" href="#" data-opts='{ "color": "yellowgreen", "size": "large", "disable": true }'>check</a>
+		<a id="btnValidate" href="#" data-opts='{ "color": "yellowgreen", "size": "large", "disable": true }'>validate</a>
+		<a id="btnReload" href="#" data-opts='{ "color": "white", "size": "large" }'>
+			<span lang="ko_KR">DEMO 초기화</span>
+			<span lang="en_US">Reset DEMO</span>
+		</a>
+	</div>
+
+	<p lang="ko_KR" class="smallContTit">결과 : </p>
+	<p lang="en_US" class="smallContTit">Result : </p>
+	<ul id="list">
+		<li>
+			<span><input class="checkAllTarget" type="checkbox" /></span>
+			<span><input id="eyeColor" type="text" /></span>
+			<span id="name"></span>
+			<span><input id="company" type="text" data-validate='[["required"]]' /></span>
+			<span id="gender"></span>
+			<span id="index"></span>
+			<span><input id="email" type="text" data-validate='[["required"], ["email"]]' /></span>
+			<span><input id="registered" type="text" data-format='[["date", 8, "date"]]' /></span>
+			<span><input id="isActive" type="checkbox" /></span>
+		</li>
+	</ul>
+</article>
+
+<script type="text/javascript">
+	N(".demo_list").cont({
+	    init : function(view, request) {
+	    	// initialize buttons in div.btnBox
+	    	N("div.btnBox a", view).button();
+
+	    	// bind events
+	    	var list;
+	    	N("#btnInit", view).click(function(e) {
+	            e.preventDefault();
+	       		var opts = {
+	       			context : view.find(N("#context", view).val()),
+	       			height : parseInt(N.string.trimToZero(N("#height", view).val())),
+	       			validate : N("#validate", view).is(":checked"),
+	       			html : N("#html", view).is(":checked"),
+	       			addTop : N("#addTop", view).is(":checked"),
+	       			resizable : N("#resizable", view).is(":checked"),
+	       			vResizable : N("#vResizable", view).is(":checked"),
+	       			select : N("#select", view).is(":checked"),
+	       			multiselect : N("#multiselect", view).is(":checked"),
+	       			checkAll : N.string.trimToNull(N("#checkAll", view).val()) !== null ?
+		       				N("#checkAll", view).val() : null,
+       				checkAllTarget : N.string.trimToNull(N("#checkAllTarget", view).val()) !== null ?
+    	       				N("#checkAllTarget", view).val() : null,
+	       			hover : N("#hover", view).is(":checked"),
+	       			createRowDelay : N.string.trimToNull(N("#createRowDelay", view).val()) !== null ?
+	       				parseInt(N("#createRowDelay", view).val()) : 1,
+	       			scrollPaging : {
+	       				size : N.string.trimToNull(N("#scrollPagingSize", view).val()) !== null ?
+	       					parseInt(N("#scrollPagingSize", view).val()) : 100
+	       			},
+	       			rowHandler : N.string.trimToNull(N("#rowHandler", view).val()) !== null ?
+	       				eval("(" + N("#rowHandler", view).val() + ")") : null,
+	    				onSelect : N.string.trimToNull(N("#onSelect", view).val()) !== null ?
+	        				eval("(" + N("#onSelect", view).val() + ")") : null,
+	        			onBind : N.string.trimToNull(N("#onBind", view).val()) !== null ?
+	        				eval("(" + N("#onBind", view).val() + ")") : null,
+	        		windowScrollLock : N("#windowScrollLock", view).is(":checked"),
+	        		revert : N("#revert", view).is(":checked")
+	       		}
+	       		list = N([]).list(opts).bind();
+
+	       		N("#btnAdd", view).instance("button").enable();
+	            N("#btnBind", view).instance("button").enable();
+
+	            N("#btnInit", view).instance("button").disable();
+	        });
+
+	    	N("#btnAdd", view).click(function(e) {
+	            e.preventDefault();
+	        	list.add(parseInt(N.string.trimToUndefined(N("#addRow", view).val())));
+
+	        	N("div.btnBox", view).find("a").instance("button", function(u) {
+	            	if(!this.context().is("#btnAdd") && !this.context().is("#btnBind")) {
+	            		if(this.context().is("a#btnInit")) {
+	    					this.disable();
+	    				} else {
+	    					this.enable();
+	    				}
+	            	}
+				});
+	        });
+
+	    	N("#btnBind", view).click(function(e) {
+	            e.preventDefault();
+	            N.comm("html/apid/data/grid.json").submit(function(data) {
+	            	list.bind(data);
+		       	});
+
+	            N("div.btnBox", view).find("a").instance("button", function(u) {
+	            	if(!this.context().is("#btnAdd") && !this.context().is("#btnBind")) {
+	            		if(this.context().is("a#btnInit")) {
+	    					this.disable();
+	    				} else {
+	    					this.enable();
+	    				}
+	            	}
+				});
+	        });
+
+	    	N("#btnRevert", view).click(function(e) {
+	            e.preventDefault();
+	       		list.revert(N.string.trimToUndefined(N("#rvtRow", view).val()));
+	        });
+
+	    	N("#btnRemove", view).click(function(e) {
+	            e.preventDefault();
+	        	list.remove(parseInt(N.string.trimToZero(N("#rmvRow", view).val())));
+	        });
+
+	    	N("#btnVal", view).click(function(e) {
+	            e.preventDefault();
+	            var row = N.string.trimToZero(N("#row", view).val());
+	            var key = N.string.trimToNull(N("#key", view).val());
+	            var value = N.string.trimToNull(N("#val", view).val());
+	        	if(value !== null) {
+	        		list.val(row, key, value);
+	        	} else {
+	        		list.context().parent().alert(list.val(row, key)).show();
+	        	}
+	        });
+
+	    	N("#btnData", view).click(function(e) {
+	    		e.preventDefault();
+	    		list.context().parent().alert({
+	        		msg : '<pre class="pre">' + N.json.format(list.data(N("select#data", view).val() === "false" ? false : N.string.trimToUndefined(N("select#data", view).val()))) + '</pre>',
+	        		width : 400,
+	        		height : 250
+	        	}).show();
+	        });
+
+	    	N("#btnCheck", view).click(function(e) {
+	    		e.preventDefault();
+	    		list.context().parent().alert(JSON.stringify(list.check())).show();
+	        })
+
+	    	N("#btnValidate", view).click(function(e) {
+	            e.preventDefault();
+	            list.context().parent().alert(String(list.validate(N.string.trimToUndefined(N("#vldRow", view).val())))).show();
+	        });
+
+	    	N("#btnReload", view).click(function(e) {
+	        	e.preventDefault();
+	        	N(view.parent()).comm(request.get("url")).submit();
+	        });
+	    }
+	});
+</script>

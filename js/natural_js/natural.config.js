@@ -589,7 +589,24 @@
 			/**
 			 * 바인드된 데이터의 새로운 row 생성시 위치를 최상단에 만들건지 여부
 			 */
-			"addTop" : false
+			"addTop" : true
+		},
+		"list" : {
+			/**
+			 * 다국어 메시지
+			 */
+			"message" : {
+				"ko_KR" : {
+					"empty" : "조회를 하지 않았거나 조회된 데이터가 없습니다."
+				},
+				"en_US" : {
+					"empty" : "No inquired data or no data available."
+				}
+			},
+			/**
+			 * 바인드된 데이터의 새로운 row 생성시 위치를 최상단에 만들건지 여부
+			 */
+			"addTop" : true
 		},
 		"grid" : {
 			/**
@@ -606,7 +623,10 @@
 			/**
 			 * 바인드된 데이터의 새로운 row 생성시 위치를 최상단에 만들건지 여부
 			 */
-			"addTop" : false,
+			"addTop" : true,
+			/**
+			 * 스크롤 페이징 시 한번에 몇개를 가져온건지 설정
+			 */
 			"scrollPaging" : {
 				"size" : 50
 			},
