@@ -337,9 +337,9 @@
 	       			select : N("#select", view).is(":checked"),
 	       			multiselect : N("#multiselect", view).is(":checked"),
 	       			checkAll : N.string.trimToNull(N("#checkAll", view).val()) !== null ?
-		       				N(N("#checkAll", view).val(), view) : null,
+		       				N(N("#checkAll", view).val() + ":checkbox", view) : null,
        				checkAllTarget : N.string.trimToNull(N("#checkAllTarget", view).val()) !== null ?
-    	       				N(N("#checkAllTarget", view).val(), view) : null,
+    	       				N("#checkAllTarget", view).val() : null,
 	       			hover : N("#hover", view).is(":checked"),
 	       			createRowDelay : N.string.trimToNull(N("#createRowDelay", view).val()) !== null ?
 	       				parseInt(N("#createRowDelay", view).val()) : 1,
