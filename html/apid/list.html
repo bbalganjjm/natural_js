@@ -1,3 +1,12 @@
+<style>
+.demo_list .context_wrap__ {
+	border: 1px solid #88dd88;
+}
+
+.demo_list .context_wrap__ > ul {
+	border: none;
+}
+</style>
 <article class="demo_list">
 	<p lang="ko_KR" class="smallContTit">데이터 : </p>
 	<p lang="en_US" class="smallContTit">Data : </p>
@@ -47,7 +56,7 @@
 		</tr>
 		<tr>
 			<th><label for="vResizable">vResizable</label></th>
-			<td style="background-color: #efffff;" colspan="3">
+			<td colspan="3">
 				<input id="vResizable" type="checkbox" />
 				<label for="vResizable" lang="ko_KR">체크(true)하면 리스트의 높이를 조절할 수 있는 기능을 활성화 합니다.</label>
 				<label for="vResizable" lang="en_US">If this checkbox with check(true), activate the vertical resize feature for N.list's body height</label>
@@ -71,13 +80,13 @@
 			<th><label for="checkAll">checkAll</label></th>
 			<td>
 				<input id="checkAll" type="text" value="#checkAll" />
-				<label for="checkAll" lang="ko_KR">바디영역의 체크박스들을 모두 선택할 헤더영역의 체크 박스</label>
+				<label for="checkAll" lang="ko_KR">리스트의 checkAllTarget 으로 지정한 체크박스들을 모두 선택할 체크 박스</label>
 				<label for="checkAll" lang="en_US">Checkbox element in N.list's header to check all checkboxes in body area</label>
 			</td>
 			<th><label for="checkAllTarget">checkAllTarget</label></th>
 			<td>
 				<input id="checkAllTarget" type="text" value=".checkAllTarget" />
-				<label for="checkAllTarget" lang="ko_KR">모두 체크될 바디영역의 체크박스들</label>
+				<label for="checkAllTarget" lang="ko_KR">모두 체크될 리스트의 체크박스들</label>
 				<label for="checkAllTarget" lang="en_US">To be checked all checkboxes in body area</label>
 			</td>
 		</tr>
@@ -287,17 +296,22 @@
 
 	<p lang="ko_KR" class="smallContTit">결과 : </p>
 	<p lang="en_US" class="smallContTit">Result : </p>
-	<ul id="list">
-		<li>
-			<span><input class="checkAllTarget" type="checkbox" /></span>
-			<span><input id="eyeColor" type="text" /></span>
-			<span id="name"></span>
-			<span><input id="company" type="text" data-validate='[["required"]]' /></span>
-			<span id="gender"></span>
-			<span id="index"></span>
-			<span><input id="email" type="text" data-validate='[["required"], ["email"]]' /></span>
-			<span><input id="registered" type="text" data-format='[["date", 8, "date"]]' /></span>
-			<span><input id="isActive" type="checkbox" /></span>
+
+	checkAll : <input id="checkAll" type="checkbox" />
+
+	<ul id="list" style="list-style: none;padding: 0;margin: 0;border: 1px solid #88dd88;">
+		<li style="margin: 0; padding: 10px; border-bottom: 1px solid #88dd88;">
+			<span style="margin-right: 25px;"><input class="checkAllTarget" type="checkbox" /></span>
+			name : <span id="name" style="margin-right: 55px;"></span>
+			gender : <span id="gender" style="margin-right: 55px;"></span>
+			index : <span id="index"></span>
+			<hr>
+			<label style="margin-left: 56px; margin-right: 25px;">eyeColor : <input id="eyeColor" type="text" /></label>
+			<label style="margin-right: 25px;">company : <input id="company" type="text" data-validate='[["required"]]' /></label>
+			<label style="margin-right: 25px;">email : <input id="email" type="text" data-validate='[["required"], ["email"]]' /></label>
+			<hr>
+			<label style="margin-left: 56px; margin-right: 25px;">registered : <input id="registered" type="text" data-format='[["date", 8, "date"]]' /></label>
+			<label>isActive : <input id="isActive" type="checkbox" /></label>
 		</li>
 	</ul>
 </article>
@@ -323,9 +337,9 @@
 	       			select : N("#select", view).is(":checked"),
 	       			multiselect : N("#multiselect", view).is(":checked"),
 	       			checkAll : N.string.trimToNull(N("#checkAll", view).val()) !== null ?
-		       				N("#checkAll", view).val() : null,
+		       				N(N("#checkAll", view).val(), view) : null,
        				checkAllTarget : N.string.trimToNull(N("#checkAllTarget", view).val()) !== null ?
-    	       				N("#checkAllTarget", view).val() : null,
+    	       				N(N("#checkAllTarget", view).val(), view) : null,
 	       			hover : N("#hover", view).is(":checked"),
 	       			createRowDelay : N.string.trimToNull(N("#createRowDelay", view).val()) !== null ?
 	       				parseInt(N("#createRowDelay", view).val()) : 1,
