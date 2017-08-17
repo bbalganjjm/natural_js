@@ -519,7 +519,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .v_resizable__ {
-	height: 2px;
+	height: 3px;
 	margin-right: 18px;
 	border-bottom: 3px double #dddddd;
 }
