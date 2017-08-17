@@ -149,7 +149,7 @@
 			<td>
 			노드가 선택되었을때 발생되는 이벤트 입니다.
 				<pre><code class="language-javascript">onSelect : function(selNodeIndex, selNodeEle, selNodeData) {
-	// this 는 선택된 노드의 요소
+	// this 는 N.tree 인스턴스
 	// selNodeIndex 는 선택된 노드의 index
 	// selNodeEle 는 선택된 노드의 요소
 	// selNodeData 는 선택된 노드의 row data
@@ -166,7 +166,7 @@
 				<pre><code class="language-javascript">onCheck : function(selNodeIndex, selNodeEle, selNodeData
 					, checkedElesIndexes, checkedEles, checkedElesData
 					, checkFlag) {
-	// this 는 선택된 노드의 요소
+	// this 는 N.tree 인스턴스
 	// selNodeIndex 는 선택된 노드의 index
 	// selNodeEle 는 선택된 노드의 요소
 	// selNodeData 는 선택된 노드의 row data
