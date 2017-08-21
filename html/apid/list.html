@@ -1,9 +1,22 @@
 <style>
+.demo_list ul#list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	border: 1px solid #88dd88;
+}
+
+.demo_list ul#list > li {
+	margin: 0;
+	padding: 10px;
+	border-bottom: 1px solid #88dd88;
+}
+
 .demo_list .context_wrap__ {
 	border: 1px solid #88dd88;
 }
 
-.demo_list .context_wrap__ > ul {
+.demo_list .context_wrap__ > ul#list {
 	border: none;
 }
 </style>
@@ -299,17 +312,17 @@
 
 	checkAll : <input id="checkAll" type="checkbox" />
 
-	<ul id="list" style="list-style: none;padding: 0;margin: 0;border: 1px solid #88dd88;">
-		<li style="margin: 0; padding: 10px; border-bottom: 1px solid #88dd88;">
+	<ul id="list">
+		<li>
 			<span style="margin-right: 25px;"><input class="checkAllTarget" type="checkbox" /></span>
 			name : <span id="name" style="margin-right: 55px;"></span>
 			gender : <span id="gender" style="margin-right: 55px;"></span>
 			index : <span id="index"></span>
-			<hr>
+			<p style="line-height: 5px;"></p>
 			<label style="margin-left: 56px; margin-right: 25px;">eyeColor : <input id="eyeColor" type="text" /></label>
 			<label style="margin-right: 25px;">company : <input id="company" type="text" data-validate='[["required"]]' /></label>
-			<label style="margin-right: 25px;">email : <input id="email" type="text" data-validate='[["required"], ["email"]]' /></label>
-			<hr>
+			<label style="margin-right: 25px;">email : <input id="email" type="text" data-validate='[["required"], ["email"]]' style="width: 200px;" /></label>
+			<p style="line-height: 5px;"></p>
 			<label style="margin-left: 56px; margin-right: 25px;">registered : <input id="registered" type="text" data-format='[["date", 8, "date"]]' /></label>
 			<label>isActive : <input id="isActive" type="checkbox" /></label>
 		</li>
