@@ -47,8 +47,8 @@
 			<th><label for="validate">validate</label></th>
 			<td>
 				<input id="validate" type="checkbox" checked="checked" />
-				<label for="validate" lang="ko_KR">체크를 해제(false)하면 실시간(focus out) Validation Check 기능을 Off 합니다.</label>
-				<label for="validate" lang="en_US">If this checkbox with uncheck(false), off the realtime(focus out) validation check feature</label>
+				<label for="validate" lang="ko_KR">체크를 해제(false)하면 입력 한 값의 실시간(focus out) 데이터 검증 기능을 비활성화 합니다.</label>
+				<label for="validate" lang="en_US">If this checkbox with uncheck(false), disable feature to the realtime(focus out) validation check</label>
 			</td>
 			<th><label for="html">html</label></th>
 			<td>
@@ -72,21 +72,29 @@
 			<td colspan="3">
 				<input id="vResizable" type="checkbox" />
 				<label for="vResizable" lang="ko_KR">체크(true)하면 리스트의 높이를 조절할 수 있는 기능을 활성화 합니다.</label>
-				<label for="vResizable" lang="en_US">If this checkbox with check(true), activate the vertical resize feature for N.list's body height</label>
+				<label for="vResizable" lang="en_US">If this checkbox with check(true), enable to the vertical resize feature for N.list's body height</label>
 			</td>
 		</tr>
 		<tr>
 			<th><label for="select">select</label></th>
 			<td>
 				<input id="select" type="checkbox" />
-				<label for="select" lang="ko_KR">체크(true)하면 행 선택 기능을 활성화 합니다(1개 행 만 선택 가능).</label>
-				<label for="select" lang="en_US">If this checkbox with check(true), on select the row feature(can select the only one row)</label>
+				<label for="select" lang="ko_KR">체크(true)하면 단일 행 선택 기능을 활성화 합니다.</label>
+				<label for="select" lang="en_US">If this checkbox with check(true), enable feature to the single row select</label>
 			</td>
-			<th><label for="multiselect">multiselect</label></th>
+			<th><label for="unselect">unselect</label></th>
 			<td>
+				<input id="unselect" type="checkbox" checked="checked" />
+				<label for="unselect" lang="ko_KR">체크를 해제(false)하면 행 선택 취소 기능을 비활성화 합니다(multiselect 옵션이 true 이면 이 옵션은 적용 되지 않음)</label>
+				<label for="unselect" lang="en_US">If this checkbox with uncheck(false), disable feature to the unselect the selected row(this option is not applicable if multiselect option is true)</label>
+			</td>
+		</tr>
+		<tr>
+			<th><label for="multiselect">multiselect</label></th>
+			<td colspan="3">
 				<input id="multiselect" type="checkbox" />
-				<label for="multiselect" lang="ko_KR">체크(true)하면 행 선택 기능을 활성화 합니다(여러 행 선택 가능).</label>
-				<label for="multiselect" lang="en_US">If this checkbox with check(true), on select the row feature(can select the multi row)</label>
+				<label for="multiselect" lang="ko_KR">체크(true)하면 여러 행 선택 기능을 활성화 합니다.</label>
+				<label for="multiselect" lang="en_US">If this checkbox with check(true), enable feature to the multi row select</label>
 			</td>
 		</tr>
 		<tr>
@@ -348,6 +356,7 @@
 	       			resizable : N("#resizable", view).is(":checked"),
 	       			vResizable : N("#vResizable", view).is(":checked"),
 	       			select : N("#select", view).is(":checked"),
+	       			unselect : N("#unselect", view).is(":checked"),
 	       			multiselect : N("#multiselect", view).is(":checked"),
 	       			checkAll : N.string.trimToNull(N("#checkAll", view).val()) !== null ?
 		       				N(N("#checkAll", view).val() + ":checkbox", view) : null,
