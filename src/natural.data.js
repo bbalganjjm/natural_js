@@ -1,5 +1,5 @@
 /*!
- * Natural-DATA v0.8.2.11
+ * Natural-DATA v0.8.2.19
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-		N.version["Natural-DATA"] = "0.8.2.11";
+		N.version["Natural-DATA"] = "0.8.2.19";
 
 	$.fn.extend($.extend(N.prototype, {
 		datafilter : function(callBack) {
@@ -204,7 +204,10 @@
 				}
 				return str;
 			},
-			"ssn" : function(str, args) {
+			/**
+			 * Resident registration number
+			 */
+			"rrn" : function(str, args) {
 				if (N.isEmptyObject(str)) {
 					return str;
 				}
@@ -220,6 +223,19 @@
 					} else {
 						str = str.substring(0, 6) + "-" + str.substring(6, 13);
 					}
+				}
+				return str;
+			},
+			/**
+			 * Resident registration number or US Social Security Number
+			 * TODO Later, "rrn"(Resident registration number) check logic will be removed
+			 */
+			"ssn" : function(str, args) {
+				if (str.length === 13) {
+					return this.rrn(str, args);
+				} else if (str.length === 9) {
+					str = str.replace(/-/g, "");
+					return str.substr(0, 3) + "-" + str.substr(3, 2) + "-" + str.substr(5, 4);
 				}
 				return str;
 			},
@@ -263,12 +279,19 @@
 				str = str.replace(/-/g, "");
 				return str.substring(0, 3) + "-" + str.substring(3, 6);
 			},
-			"phonenum" : function(str, args) {
+			"phone" : function(str, args) {
 				if (N.isEmptyObject(str)) {
 					return str;
 				}
 				str = str.replace(/-/g, "");
 				return str.replace(/(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/, "$1-$2-$3");
+			},
+			/**
+			 * Deprecated 2017.07.26
+			 * phonenum to phone
+			 */
+			"phonenum" : function(str, args) {
+				return this.phone(str, args);
 			},
 			"realnum" : function(str, args) {
 				try {
@@ -300,63 +323,43 @@
 				if(N.datepicker !== undefined) {
 					if(args[1] !== undefined && (args[1] === "date" || args[1] === "month") && ele !== undefined && !ele.hasClass("datepicker__")) {
 						var isMonth = args[1] === "month" ? true : false;
+						var dateVal;
+						var formInst;
+						var colId;
 						ele.datepicker({
 							monthonly : isMonth,
 							onBeforeShow : function(context, contents) {
-								context.unbind("focusout.prevent.format.date", N.element.disable);
-					            context.tpBind("focusout.prevent.format.date", N.element.disable);
-					            if(N.context.attr("ui").datepicker != undefined && N.context.attr("ui").datepicker.onBeforeShow != undefined) {
-					            	N.context.attr("ui").datepicker.onBeforeShow(context, contents);
-					            }
+								if(contents.closest(".view_context__").length > 0) {
+									this.isApplyRelative = true;
+									contents.closest(".view_context__").css("position", "relative");
+								} else {
+									this.isApplyRelative = false;
+								}
 							},
 							onSelect : function(context, date, monthonly) {
-								var formats = N.context.attr("data").formatter.date;
-								var isReadonly = false;
-								if(context.prop("readonly")) {
-									context.prop("readonly", false);
-									isReadonly = true;
-								}
-								var val = date.obj.formatDate(date.format);
-								if(date.obj.formatDate("Y").length <= 3) {
-									val = val.replace(date.obj.formatDate("Y"), N.string.lpad(date.obj.formatDate("Y"), 4, "0"));
-								}
+								dateVal = date.obj.formatDate(monthonly ? "Ym" : "Ymd");
 
-								if(!monthonly && val.length === 7) {
-									val = "0" + val;
-								} else if(monthonly && val.length === 5) {
-									val = "0" + val;
-								}
-								context.val(val);
+								context.parents(".form__").each(function() {
+									formInst = $(this).instance("form");
+									if(formInst !== undefined) {
+										return false;
+									}
+								});
 
-								if(isReadonly) {
-									context.prop("readonly", true);
+								colId = context.attr("id");
+								if(formInst !== undefined && dateVal !== formInst.val(colId)) {
+									formInst.val(colId, dateVal);
 								}
-
-								if(N.context.attr("ui").datepicker != undefined && N.context.attr("ui").datepicker.onSelect != undefined) {
-					            	return N.context.attr("ui").datepicker.onSelect(context, date, monthonly);
-					            } else {
-					            	return false;
-					            }
 							},
 							onBeforeHide : function(context, contents) {
-								// for Hide from ESC key
-								var e = arguments.length > 2 ? arguments[2] : undefined; // because of firefox, firefox does not have window.event object
-								var keyCode = e !== undefined ? e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode) : undefined;
-								var isHaveGlobalOnBeforeHide = N.context.attr("ui").datepicker != undefined && N.context.attr("ui").datepicker.onBeforeHide != undefined;
-								if (keyCode == 27 || keyCode == 13) {
-									setTimeout(function(){
-										context.unbind("focusout.prevent.format.date", N.element.disable).trigger("focusout.form.validate").trigger("focusout.form.dataSync").trigger("focusout.form.format");
-
-										if(isHaveGlobalOnBeforeHide) {
-							            	N.context.attr("ui").datepicker.onBeforeHide(context, contents, e);
-							            }
-									}, 0);
-								} else {
-									context.unbind("focusout.prevent.format.date", N.element.disable).trigger("focusout.form.validate").trigger("focusout.form.dataSync").trigger("focusout.form.format");
-
-									if(isHaveGlobalOnBeforeHide) {
-						            	N.context.attr("ui").datepicker.onBeforeHide(context, contents);
-						            }
+								if(dateVal !== undefined && colId !== undefined && formInst !== undefined) {
+									context.trigger("focusout.form.format");
+								}
+							},
+							onHide : function(context, contents) {
+								if(this.isApplyRelative === true) {
+									contents.closest(".view_context__").css("position", "");
+									this.isApplyRelative = false;
 								}
 							}
 						});
@@ -450,6 +453,97 @@
 				}
 				return N.string.rpad(str, Number(args[0]), args[1]);
 			},
+			"mask" : function(str, args) {
+				if (args === undefined || args.length < 1) {
+					N.error("[Formatter.rpad]You must input args[0](masking rule)");
+				}
+				var replaceStr = "*";
+				if(args.length === 2 && !N.string.isEmpty(args[1])) {
+					replaceStr = args[1];
+				}
+
+				if(args[0] === "phone") {
+					var rtnStr;
+					str = N.string.trim(str);
+					rtnStr = this.phonenum(str);
+					var frontNum = rtnStr.substring(0, rtnStr.indexOf("-")+1);
+					var rearNum = rtnStr.substring(rtnStr.lastIndexOf("-"), rtnStr.length);
+					var middleNum = rtnStr.replace(frontNum, "").replace(rearNum, "");
+					return frontNum + middleNum.replace(/\d/g, replaceStr) + rearNum;
+				} else if(args[0] === "email") {
+					str = N.string.trim(str);
+					if(N.validator.email(str)) {
+						var rplcStr = "";
+						for(var i=0;i<3;i++) {
+							rplcStr += replaceStr;
+						}
+						return str.replace(/@.*/, "").replace(/.{1,3}$/, rplcStr) + str.replace(/.*@/, "@");
+					}
+				} else if(args[0] === "address") {
+					str = N.string.trim(str);
+					var firstCheckChars = "_경기_강원_충북_충남_전북_전남_경북_경남_제주_";
+					var secondCheckChars = "_도_시_군_구_";
+					var thirdCheckChars = "_읍_면_동_리_로_길_가_";
+
+					var addrFrags = str.split(" ");
+					var maskedAddr = "";
+					var addrFrag;
+					var firstChar;
+					var lastChar;
+					$(addrFrags).each(function() {
+						addrFrag = N.string.trim(this);
+					    firstChar = addrFrag.substring(0, 1);
+						lastChar = addrFrag.substring(addrFrag.length - 1, addrFrag.length);
+					    if(firstCheckChars.indexOf("_" + addrFrag + "_") < 0 && secondCheckChars.indexOf("_" + lastChar + "_") < 0) {
+							var rplcStr = "";
+							if(thirdCheckChars.indexOf("_" + lastChar + "_") > -1 && (new RegExp(/[^0-9]/)).test(firstChar)) {
+								for(var i=0;i<addrFrag.length-1;i++) {
+					            	rplcStr += replaceStr;
+					        	}
+								addrFrag = rplcStr + lastChar;
+							} else {
+								for(var i=0;i<addrFrag.length;i++) {
+					            	rplcStr += replaceStr;
+					        	}
+								addrFrag = rplcStr;
+					        }
+						}
+						maskedAddr += addrFrag + " ";
+					});
+					return N.string.trim(maskedAddr);
+				} else if(args[0] === "name") {
+					str = N.string.trim(str);
+
+					// if str is alphabet and number and dot(.)
+					if((new RegExp(/^[a-z-?\d\s\.]+$/i)).test(str)) {
+						return $(str.split("")).map(function(i){
+						    if((i > 2 && i < 10) && this != " ") {
+						        return replaceStr;
+						    } else {
+								return this;
+							}
+						}).get().join("");
+					}
+
+					// if str is Hanguel
+					var firstCheckChars = "_남궁_제갈_선우_독고_황보_강전_동방_망절_사공_서문_소봉_장곡_";
+					var frontIdx = 1;
+					if(str.length > 1 && firstCheckChars.indexOf("_" + str.substring(0, 2) + "_") > -1) {
+						frontIdx = 2;
+					}
+
+					return str.substring(0, frontIdx) + replaceStr + str.substring(frontIdx + 1, str.length);
+				} else if(args[0] === "rrn") {
+					str = N.string.trim(str);
+					var rplcStr = "";
+					for(var i=0;i<7;i++) {
+						rplcStr += replaceStr;
+					}
+					return this.rrn(str.replace(/.{1,7}$/, rplcStr));
+				}
+
+				return str;
+			},
 			"generic" : function(str, args) {
 				if (args === undefined || args[0] === undefined) {
 					N.error("[Formatter.generic]You must input args[0](user format rule)");
@@ -490,13 +584,22 @@
 					retObj = {};
 					for ( var k in opts.rules ) {
 						tempValue = N.string.trimToEmpty(obj[k]);
-						$(opts.rules[k]).each(function() {
-							if (opts.isElement) {
-								ele = opts.targetEle.filter("#" + k);
-								if(ele.length === 0) {
-									ele = undefined;
+
+						if (opts.isElement) {
+							ele = opts.targetEle.filter("#" + k);
+							N.log(k, obj[k], ele.data("format"), opts.rules[k]);
+
+							if(ele.length > 0) {
+								if(ele.data("format") !== undefined) {
+									// Replace with the latest rule.
+									opts.rules[k] = ele.data("format");
 								}
+							} else {
+								ele = undefined;
 							}
+						}
+
+						$(opts.rules[k]).each(function() {
 							try {
 								tempValue = Formatter[N.string.trimToEmpty(this[0]).toLowerCase()](tempValue, N(this).remove_(0).toArray(), ele);
 							} catch (e) {
@@ -648,7 +751,7 @@
 				}
 				return new RegExp(/^\d{2,3}-\d{3,4}-\d{4}$/).test(str);
 			},
-			"ssn" : function(str, args) {
+			"rrn" : function(str, args) {
 				str = str.replace(/-/g, '');
 				if (N.string.trimToEmpty(str).length != 13) {
 					str = null;
@@ -682,6 +785,14 @@
 
 				return true;
 			},
+			/**
+			 * Deprecated 2017.07.26
+			 * ssn to rrn
+			 * TODO Later, "ssn" will be replaced by the US Social Security Number
+			 */
+			"ssn" : function(str, args) {
+				return this.rrn(str, args);
+			},
 			"frn" : function(str, args) {
 				str = str.replace(/-/g, '');
 				if (N.string.trimToEmpty(str).length != 13) {
@@ -704,7 +815,7 @@
 				}
 				return false;
 			},
-			"frn_ssn" : function(str, args) {
+			"frn_rrn" : function(str, args) {
 				str = str.replace(/-/g, '');
 				if (N.string.trimToEmpty(str).length != 13) {
 					str = null;
@@ -715,6 +826,13 @@
 				} else {
 					return this.ssn();
 				}
+			},
+			/**
+			 * Deprecated 2017.07.26
+			 * frn_ssn to frn_rrn
+			 */
+			"frn_ssn" : function(str, args) {
+				return this.frn_rrn(str, args);
 			},
 			"cno" : function(str, args) {
 				var re = /-/g;
@@ -926,10 +1044,10 @@
 						Number(N.string.trimToZero(str)) <= Number(N.string.trimToZero(args[1]));
 			},
 			"regexp" : function(str, args) {
-				if (args === undefined || args[0] === undefined) {
-					throw new Error("[Validator.regexp]You must input args[0](regular expression string)");
+				if (args === undefined || args.length < 2) {
+					throw new Error("[Validator.regexp]You must input args[0](regular expression string) and args[1](flag)");
 				}
-				var regExp = args[1] !== undefined ? regExp = new RegExp(args[0], args[1]) : new RegExp(args[0]);
+				var regExp = N.string.trimToUndefined(args[1]) ? new RegExp(args[0], args[1]) : new RegExp(args[0]);
 				return regExp.test(str);
 			}
 		});

@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.14.1
+ * Natural-UI v0.8.14.81
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "v0.8.14.1";
+	N.version["Natural-UI"] = "v0.8.14.81";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -26,6 +26,9 @@
 		},
 		form : function(opts) {
 			return new N.form(this, opts);
+		},
+		list : function(opts) {
+			return new N.list(this, opts);
 		},
 		grid : function(opts) {
 			return new N.grid(this, opts);
@@ -59,20 +62,24 @@
 				msgContents : null,
 				msg : msg,
 				vars : vars,
+				html : false,
+				top : undefined,
+				left : undefined,
 				width : 0,
 		        height : 0,
 				isInput : false,
-				isWindow : obj.get(0) === window || obj.get(0) === window.document,
+				isWindow : obj.get(0) === window || obj.is(window.document) || obj.is("body"),
 				title : obj.get(0) === window || obj.get(0) === window.document ? undefined : obj.attr("title"),
 				button : true,
-				closeMode : "remove", // closeMode : hide : keep element, remove : remove element
+				closeMode : "remove", // closeMode : hide - keep element, remove - remove element
 				modal : true,
 				onOk : null,
 				onCancel : null,
 				overlayColor : null,
+				overlayClose : true,
 				"confirm" : false,
 				alwaysOnTop : false,
-				alwaysOnTopCalcTarget : "div, span, ul, p",
+				alwaysOnTopCalcTarget : "div, span, ul, p, nav, article, section",
 				dynPos : true, // dynamic positioning for massage context and message overlay
 				windowScrollLock : true,
 				draggable : false,
@@ -90,7 +97,9 @@
 				this.options.container = N.context.attr("architecture").page.context;
 				// 2. If defined the N.context.attr("ui").alert.container value to N.config, this.options.container value is defined from N.config's value
 				this.options = $.extend({}, this.options, N.context.attr("ui").alert);
-				this.options.container = N(this.options.container);
+				if(N.isString(this.options.container)) {
+					this.options.container = N(this.options.container);
+				}
 				this.options.draggableOverflowCorrectionAddValues = $.extend({}, this.options.draggableOverflowCorrectionAddValues, N.context.attr("ui").alert.draggableOverflowCorrectionAddValues);
 			} catch (e) {
 				N.error("[N.alert]" + e, e);
@@ -101,6 +110,9 @@
 			}
 			if(msg !== undefined && N.isPlainObject(msg)) {
 				$.extend(this.options, msg);
+				if(N.isString(this.options.container)) {
+					this.options.container = N(this.options.container);
+				}
 				// when the title option value is undefined
 				// $.extend method does not extend undefined value
 				if(msg.hasOwnProperty("title")) {
@@ -155,8 +167,8 @@
 				}
 
 				// create message overlay
-				opts.msgContext = opts.container.append($('<div class="block_overlay__" onselectstart="return false;"></div>')
-						.css(blockOverlayCss)).find(".block_overlay__:last");
+				opts.msgContext = opts[opts.isWindow ? "container" : "context"][opts.isWindow ? "append" : "after"]($('<div class="block_overlay__" onselectstart="return false;"></div>')
+						.css(blockOverlayCss))[opts.isWindow ? "find" : "siblings"](".block_overlay__:" + (opts.isWindow ? "last" : "first"));
 
 				// set style class name to msgContext element
 				opts.msgContext.addClass("alert_overlay__");
@@ -168,7 +180,7 @@
 				// set message box's default style
 				var blockOverlayMsgCss = {
 					"display" : "none",
-					"position" : "absolute"
+					"position" : opts.isWindow ? "fixed" : "absolute"
 				};
 
 				if(opts.alwaysOnTop) {
@@ -178,7 +190,7 @@
 				// create title bar element
 				var titleBox = '';
 				if(opts.title !== undefined) {
-					titleBox = '<div class="msg_title_box__"><span class="msg_title__">' + opts.title + '</span><span class="msg_title_close__" title="' + N.message.get(opts.message, "close") + '"></span></div>';
+					titleBox = '<div class="msg_title_box__"><span class="msg_title__">' + opts.title + '</span><a href="#" class="msg_title_close_btn__"><span class="msg_title_close__" title="' + N.message.get(opts.message, "close") + '"></span></a></div>';
 				}
 
 				// create button box elements
@@ -199,11 +211,12 @@
 								'</div>').css(blockOverlayMsgCss)).next(".block_overlay_msg__:last");
 
 				// set style class name to msgContents element
-				opts.msgContents.addClass("alert__");
+				opts.msgContents.addClass("alert__ hidden__");
 
 				// bind event to close(X) button
 				var self = this;
-				opts.msgContents.find(".msg_title_box__ .msg_title_close__").click(function() {
+				opts.msgContents.find(".msg_title_box__ .msg_title_close_btn__").bind("click.alert touchend.alert", function(e) {
+					e.preventDefault();
 					if (opts.onCancel !== null) {
 						opts.onCancel(opts.msgContext, opts.msgContents);
 					}
@@ -211,7 +224,7 @@
 				});
 
 				// set message
-				opts.msgContents.find(".msg_box__").html(opts.msg);
+				opts.msgContents.find(".msg_box__")[ opts.html ? "html" : "text" ](opts.msg);
 
 				// set width
 				if(opts.width > 0) {
@@ -229,7 +242,7 @@
 
 				//set confirm button style and bind click event
 				opts.msgContents.find(".buttonBox__ a.confirm__").button(opts.global.okBtnStyle);
-				opts.msgContents.find(".buttonBox__ a.confirm__").click(function(e) {
+				opts.msgContents.find(".buttonBox__ a.confirm__").bind("click.alert", function(e) {
 					e.preventDefault();
 					if (opts.onOk !== null) {
 						opts.onOk.call(self, opts.msgContext, opts.msgContents);
@@ -240,12 +253,18 @@
 				// remove modal overlay layer when opts.modal value is false
 				if(!opts.modal) {
 					opts.msgContext.remove();
+				} else {
+					if(opts.overlayClose) {
+						opts.msgContext.bind("click.alert", function() {
+							self[opts.closeMode]();
+						});
+					}
 				}
 
 				// set cancel button style and bind click event
 				if(opts.confirm) {
 					opts.msgContents.find(".buttonBox__ a.cancel__").button(opts.global.cancelBtnStyle);
-					opts.msgContents.find(".buttonBox__ a.cancel__").click(function(e) {
+					opts.msgContents.find(".buttonBox__ a.cancel__").bind("click.alert", function(e) {
 						e.preventDefault();
 						if (opts.onCancel !== null) {
 							opts.onCancel(opts.msgContext, opts.msgContents);
@@ -261,26 +280,42 @@
 					var moved;
 					var startX;
 					var startY;
-					opts.msgContents.addClass("draggable__").find(".msg_title_box__").bind("mousedown.alert", function(e) {
-						if(!$(e.target).is(".msg_title_close__") && (e.which || e.button) === 1) {
+					var defMargin;
+					opts.msgContents.addClass("draggable__").find(".msg_title_box__").bind("mousedown.alert touchstart.alert", function(e) {
+						var dte;
+						if(e.originalEvent.touches) {
+							e.preventDefault();
+							e.stopPropagation();
+							dte = e.originalEvent.touches[0];
+						}
+
+						defMargin = opts.msgContents.css("margin");
+
+						if(!$(dte !== undefined ? dte.target : e.target).is(".msg_title_close__") && (e.originalEvent.touches || (e.which || e.button) === 1)) {
 							pressed = true;
 							opts.msgContents.data("isMoved", true);
 
-							startX = e.pageX - opts.msgContents.offset().left;
-							startY = e.pageY - opts.msgContents.offset().top;
+							startX = (dte !== undefined ? dte.pageX : e.pageX)- opts.msgContents.offset().left;
+							startY = (dte !== undefined ? dte.pageY : e.pageY) - opts.msgContents.offset().top;
 
-							$(window.document).bind("dragstart.alert, selectstart.alert", function() {
+							$(window.document).bind("dragstart.alert selectstart.alert", function(e) {
 			                    return false;
 			                });
 
 							moved = true;
-							$(window.document).bind("mousemove.alert", function(e) {
+							$(window.document).bind("mousemove.alert touchmove.alert", function(e) {
+								var mte;
+								if(e.originalEvent.touches) {
+									e.stopPropagation();
+									mte = e.originalEvent.touches[0];
+								}
 								if(pressed) {
 									opts.msgContents.offset({
-										left : e.pageX - startX,
-										top :  e.pageY - startY
+										top :  (mte !== undefined ? mte.pageY : e.pageY) - startY,
+										left : (mte !== undefined ? mte.pageX : e.pageX) - startX
 									});
 								}
+
 								if(moved) {
 									opts.msgContents.fadeTo(200, "0.4");
 									moved = false;
@@ -288,19 +323,27 @@
 							});
 
 							var documentWidth = $(window.document).width();
-							$(window.document).bind("mouseup.alert", function(e) {
+							$(window.document).bind("mouseup.alert touchend.alert", function(e) {
 								pressed = false;
 								if(opts.draggableOverflowCorrection) {
 									var offset = {};
-									if(opts.msgContents.offset().top - $(window).scrollTop() < 0) {
+									var windowHeight = window.innerHeight ? window.innerHeight : $(window).height();
+									var windowScrollTop = $(window).scrollTop();
+									var msgContentsOffsetTop = opts.msgContents.offset().top;
+									var msgContentsOuterHeight = opts.msgContents.outerHeight();
+
+									if(msgContentsOffsetTop - windowScrollTop < 0) {
 										offset.top = (opts.isWindow ? 0
-												: opts.msgContents.offset().top + ($(window).scrollTop() - opts.msgContents.offset().top)) + opts.draggableOverflowCorrectionAddValues.top;
-									} else if(opts.msgContents.offset().top + opts.msgContents.outerHeight() > $(window).scrollTop() + $(window).height()) {
-										offset.top = (opts.isWindow ? $(window).height() - opts.msgContents.outerHeight()
-												: $(window).scrollTop() + $(window).height() - opts.msgContents.outerHeight()) + opts.draggableOverflowCorrectionAddValues.bottom;
+												: msgContentsOffsetTop + (windowScrollTop - msgContentsOffsetTop)) + opts.draggableOverflowCorrectionAddValues.top;
+										offset.top -= parseFloat(opts.msgContents.css("margin-top"));
+									} else if(msgContentsOffsetTop + msgContentsOuterHeight > windowScrollTop + windowHeight) {
+										offset.top = (opts.isWindow ? windowHeight - msgContentsOuterHeight
+												: windowScrollTop + windowHeight - msgContentsOuterHeight) + opts.draggableOverflowCorrectionAddValues.bottom;
+										offset.top -= parseFloat(opts.msgContents.css("margin-top"));
 									}
 									if(offset.top < 0) {
-										offset.top = 0 + opts.draggableOverflowCorrectionAddValues.left;
+										offset.top = 0 + opts.draggableOverflowCorrectionAddValues.top;
+										offset.top -= parseFloat(opts.msgContents.css("margin-top"));
 									}
 									if(opts.msgContents.offset().left < 0) {
 										offset.left = 0 + opts.draggableOverflowCorrectionAddValues.left;
@@ -313,7 +356,7 @@
 								}
 
 								opts.msgContents.fadeTo(100, "1.0");
-								$(window.document).unbind("dragstart.alert").unbind("selectstart.alert").unbind("mousemove.alert").unbind("mouseup.alert");
+								$(window.document).unbind("dragstart.alert selectstart.alert mousemove.alert touchmove.alert mouseup.alert touchend.alert");
 							});
 						}
 					});
@@ -321,24 +364,51 @@
 			},
 			resetOffSetEle : function(opts) {
 				var position = opts.context.position();
-				if(opts.context.outerWidth() > 0 && ((position.top > 0 && position.left > 0) || opts.isWindow)) {
+				if(opts.context.is(":visible")) {
 					// reset message context(overlay) position
-					opts.msgContext.css({
-						"top" : opts.isWindow ? 0 : position.top + "px",
-						"left" : opts.isWindow ? 0 : position.left + "px",
-						"height" : opts.isWindow ? N(window.document).height() : opts.context.outerHeight() + "px",
-						"width" : opts.isWindow ? N(window.document).width() : opts.context.outerWidth() + "px"
-					}).hide().show();
+					var msgContextCss = {
+						"height" : opts.isWindow ? (window.innerHeight ? window.innerHeight : $(window).height()) : opts.context.outerHeight() + "px",
+						"width" : opts.isWindow ? (window.innerWidth ? window.innerWidth : $(window).width()) : opts.context.outerWidth() + "px"
+					}
+					var marginLeft = 0;
+					if(opts.isWindow) {
+						msgContextCss.top = "0";
+						msgContextCss.left = "0";
+					} else {
+						msgContextCss["margin-top"] = "-" + (parseFloat(msgContextCss.height) + parseFloat(opts.context.css("margin-bottom"))) + "px";
+						marginLeft = parseFloat(opts.context.css("margin-left"));
+						msgContextCss.left = String(opts.context.position().left + marginLeft) + "px";
+					}
+					opts.msgContext.css(msgContextCss).hide().show();
 
 					if(opts.msgContents.data("isMoved") !== true) {
 						// reset message contents position
-						var msgContentsCss = {
-							"top" : (((opts.isWindow ? N(opts.obj).height() : opts.msgContext.height()) / 2 + position.top) - opts.msgContents.height() / 2) + "px",
-							"left" : ((opts.msgContext.width() / 2 + position.left) - parseInt(opts.msgContents.width() / 2)) + "px"
-						};
-
+						var msgContentsCss = {};
 						if(opts.isWindow) {
-							msgContentsCss.position = "fixed";
+							if(opts.top !== undefined) {
+								msgContentsCss.position = "absolute";
+								msgContentsCss.top = String(opts.top) + "px";
+							} else {
+								msgContentsCss.top = "0";
+								msgContentsCss["margin-top"] = String(opts.msgContext.height() / 2 - opts.msgContents.height() / 2) + "px";
+							}
+							if(opts.left !== undefined) {
+								msgContentsCss.left = String(opts.left) + "px";
+							} else {
+								msgContentsCss.left = "0";
+							}
+						} else {
+							if(opts.top !== undefined) {
+								msgContentsCss.position = "absolute";
+								msgContentsCss.top = String(opts.top) + "px";
+							} else {
+								msgContentsCss["margin-top"] = "-" + String(opts.msgContext.height() / 2 + opts.msgContents.height() / 2 + parseFloat(opts.context.css("margin-bottom"))) + "px";
+							}
+						}
+						if(opts.left !== undefined) {
+							msgContentsCss.left = String(opts.left) + "px";
+						} else {
+							msgContentsCss.left = String(opts.context.position().left + marginLeft + (opts.msgContext.width() / 2 - opts.msgContents.width() / 2)) + "px";
 						}
 						opts.msgContents.css(msgContentsCss);
 					}
@@ -363,16 +433,18 @@
 					if (opts.msgContext.length === 0) {
 						var limitWidth = opts.context.offset().left + opts.context.outerWidth() + 150;
 
-						if(limitWidth > $(window).width()) {
+						if(limitWidth > (window.innerWidth ? window.innerWidth : $(window).width())) {
 							opts.msgContext = opts.context.before('<span class="msg__ alert_before_show__" style="display: none;"><ul class="msg_line_box__"></ul></span>').prev(".msg__");
+							opts.msgContext.addClass("orgin_right__");
 							isBeforeShow = true;
 						} else {
 							opts.msgContext = opts.context.after('<span class="msg__ alert_after_show__" style="display: none;"><ul class="msg_line_box__"></ul></span>').next(".msg__");
+							opts.msgContext.addClass("orgin_left__");
 							isBeforeShow = false;
 						}
 
 						// set style class to msgContext element
-						opts.msgContext.addClass("alert__ alert_tooltip__");
+						opts.msgContext.addClass("alert__ alert_tooltip__ hidden__");
 
 						opts.msgContext.append('<a href="#" class="msg_close__" title="' + N.message.get(opts.message, "close") + '"></a>');
 					}
@@ -420,16 +492,17 @@
 
 				if (!opts.isInput) {
 					Alert.resetOffSetEle(opts);
-					var position = opts.context.position();
+
 					if(opts.dynPos && !opts.isWindow) {
 						opts.time = setInterval(function() {
-							if(opts.context.outerWidth() > 0) {
+							if(opts.context.is(":visible")) {
 								Alert.resetOffSetEle(opts);
-							} else {
-								// for when the page is changed.
-								clearInterval(opts.time);
 							}
 						}, 500);
+					}
+
+					if(!opts.isWindow) {
+						opts.msgContext.closest(".msg_box__").css("position", "relative");
 					}
 
 					// for when the window size is changed.
@@ -439,24 +512,28 @@
 					if(opts.button === true) {
 						opts.msgContents.find(".buttonBox__ a.confirm__").get(0).focus();
 					}
+
+					opts.msgContents.removeClass("hidden__").addClass("visible__");
 				} else {
 					if (!N.isEmptyObject(opts.msg)) {
 						opts.context.parent().css({
 							"white-space": "normal"
 						});
-						opts.msgContext.fadeIn(150, function() {
-							opts.iTime = setTimeout(function() {
-								clearTimeout(opts.iTime);
-								opts.context.parent().css({
-									"white-space": ""
-								});
-								self[opts.closeMode]();
-							}, opts.input.displayTimeout);
-						});
+
+						opts.msgContext.show();
+
+						opts.iTime = setTimeout(function() {
+							clearTimeout(opts.iTime);
+							opts.context.parent().css({
+								"white-space": ""
+							});
+							self[opts.closeMode]();
+						}, opts.input.displayTimeout);
+
+						opts.msgContext.removeClass("hidden__").addClass("visible__");
 					}
 				}
 
-				// bind "ESC" key and "ENTER" key event
 				// if press the "ESC" key, alert dialog will be removed
 				opts.onKeyup = function(e) {
 					if ((e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode)) == 27) {
@@ -470,27 +547,48 @@
 			"hide" : function() {
 				var opts = this.options;
 				if (!opts.isInput) {
-					clearInterval(opts.time);
+					if(!opts.isWindow) {
+						opts.msgContext.closest(".msg_box__").css("position", "");
+					}
 					opts.msgContext.hide();
-					opts.msgContents.hide();
+
+					opts.msgContents.removeClass("visible__").addClass("hidden__");
+					opts.msgContents.one(N.element.whichTransitionEvent(opts.msgContents), function(e){
+						opts.msgContents.hide();
+			        }).trigger("nothing");
+
 				} else {
-					clearTimeout(opts.iTime);
-					opts.msgContext.remove();
+					opts.msgContents.removeClass("visible__").addClass("hidden__");
+					opts.msgContents.one(N.element.whichTransitionEvent(opts.msgContents), function(e){
+						clearTimeout(opts.iTime);
+						opts.msgContext.remove();
+			        }).trigger("nothing");
 				}
 
 				$(window).unbind("resize.alert");
 				$(document).unbind("keyup.alert", opts.onKeyup);
+
 				return this;
 			},
 			"remove" : function() {
 				var opts = this.options;
 				if (!opts.isInput) {
 					clearInterval(opts.time);
+					if(!opts.isWindow) {
+						opts.msgContext.closest(".msg_box__").css("position", "");
+					}
 					opts.msgContext.remove();
-					opts.msgContents.remove();
+
+					opts.msgContents.removeClass("visible__").addClass("hidden__");
+					opts.msgContents.one(N.element.whichTransitionEvent(opts.msgContents), function(e){
+						opts.msgContents.remove();
+			        }).trigger("nothing");
 				} else {
-					clearTimeout(opts.iTime);
-					opts.msgContext.remove();
+					opts.msgContext.removeClass("visible__").addClass("hidden__");
+					opts.msgContext.one(N.element.whichTransitionEvent(opts.msgContext), function(e){
+						clearTimeout(opts.iTime);
+						opts.msgContext.remove();
+			        }).trigger("nothing");
 				}
 
 				$(window).unbind("resize.alert");
@@ -507,7 +605,6 @@
 				color : "white", // color : white, blue, skyblue, gray, green, yellowgreen
 				iconClass : null,
 				disable : false,
-				effect : true,
 				customStyle : false
 			};
 
@@ -585,12 +682,7 @@
                 				if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {
                 					$(this).css("box-shadow", "rgba(0, 0, 0, 0.2) 1px 1px 1px inset");
                 				} else {
-                					// fade effect
-                					if(opts.effect) {
-                						$(this).fadeTo(100, "0.9");
-                					} else {
-                						$(this).css("opacity", "0.9");
-                					}
+            						$(this).css("opacity", "0.9");
                 				}
                 			}
                 			$(this).removeClass("btn_mouseover__ btn_mousedown__ btn_mouseup__ btn_mouseout__");
@@ -603,12 +695,7 @@
 	                    		if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {
 	                    			$(this).css("box-shadow", "rgba(0, 0, 0, 0.2) 3px 3px 3px inset");
 	                    		} else {
-	                    			// fade effect
-	                    			if(opts.effect) {
-	                    				$(this).fadeTo(100, "0.7");
-	                    			} else {
-	                    				$(this).css("opacity", "0.7");
-	                    			}
+                    				$(this).css("opacity", "0.7");
 	                    		}
 	                    	}
 	                    	$(this).removeClass("btn_mouseover__ btn_mousedown__ btn_mouseup__ btn_mouseout__");
@@ -621,12 +708,7 @@
 	                    		if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {
 	                    			$(this).css("box-shadow", "none");
 	                    		} else {
-	                    			// fade effect
-	                    			if(opts.effect) {
-	                    				$(this).fadeTo(100, "1");
-	                    			} else {
-	                    				$(this).css("opacity", "1");
-	                    			}
+                    				$(this).css("opacity", "1");
 	                    		}
 	                    	}
 	                    	$(this).removeClass("btn_mouseover__ btn_mousedown__ btn_mouseup__ btn_mouseout__");
@@ -639,12 +721,7 @@
 	                    		if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {
 	                    			$(this).css("box-shadow", "none");
 	                    		} else {
-	                    			// fade effect
-	                    			if(opts.effect) {
-	                    				$(this).fadeTo(100, "1");
-	                    			} else {
-	                    				$(this).css("opacity", "1");
-	                    			}
+                    				$(this).css("opacity", "1");
 	                    		}
 	                    	}
 	                    	$(this).removeClass("btn_mouseover__ btn_mousedown__ btn_mouseup__ btn_mouseout__");
@@ -660,14 +737,6 @@
 			},
 			disable : function() {
 				var context = this.options.context;
-				if(!this.options.customStyle) {
-					// fade effect
-					if(this.options.effect) {
-						context.fadeTo(150, "0.6");
-					} else {
-						context.css("opacity", "0.6");
-					}
-				}
 		        if (context.is("a")) {
 		        	context.unbind("click.button");
 		            context.tpBind("click.button", N.element.disable);
@@ -679,14 +748,6 @@
 			},
 			enable : function() {
 				var context = this.options.context;
-				if(!this.options.customStyle) {
-					// fade effect
-					if(this.options.effect) {
-						context.fadeTo(150, "1");
-					} else {
-						context.css("opacity", "1");
-					}
-				}
 		        if (context.is("a")) {
 		            context.unbind("click", N.element.disable);
 		        } else {
@@ -707,6 +768,7 @@
 				onSelect : null,
 				onBeforeShow : null,
 				onBeforeHide : null,
+				onHide : null,
 				shareEle : true
 			};
 
@@ -743,8 +805,6 @@
 				}
 			}
 
-			//N(".datepicker_contents__:last").hasClass("datepicker_monthonly__")
-
 			// set this instance to context element
 			this.options.context.instance("datepicker", this);
 		};
@@ -761,7 +821,13 @@
 				var currYear = parseInt(d.formatDate("Y"));
 				var format = (!opts.monthonly ? N.context.attr("data").formatter.date.Ymd() : N.context.attr("data").formatter.date.Ym()).replace(/[^Y|^m|^d]/g, "");
 
-				opts.contents = $('<div class="datepicker_contents__"></div>');
+				opts.contents = $('<div class="datepicker_contents__"></div>').bind("click.datepicker", function(e) {
+					e.stopPropagation();
+				}).addClass("hidden__");
+				opts.context.bind("click.datepicker", function(e) {
+					e.stopPropagation();
+				});
+
 				if(opts.monthonly) {
 					opts.context.attr("maxlength", "6");
 					opts.contents.addClass("datepicker_monthonly__");
@@ -845,6 +911,8 @@
 						if(onSelectContinue === undefined || onSelectContinue === true) {
 							opts.context.val(selDate.obj.formatDate(selDate.format.replace(/[^Y|^m|^d]/g, "")));
 						}
+						opts.context.trigger("onSelect", [opts.context, selDate, opts.monthonly]);
+
 						self.hide(ke);
 					} else {
 						daysPanel.empty();
@@ -938,6 +1006,7 @@
 						if(onSelectContinue === undefined || onSelectContinue === true) {
 							opts.context.val(selDate.obj.formatDate(selDate.format.replace(/[^Y|^m|^d]/g, "")));
 						}
+						opts.context.trigger("onSelect", [opts.context, selDate, opts.monthonly]);
 						self.hide(ke);
 					});
 					opts.contents.append(daysPanel);
@@ -960,7 +1029,10 @@
 							} else {
 								datepickerInst = N(".datepicker__.datepicker_date_master__").instance("datepicker");
 							}
-							datepickerInst.options.context = N(e.target);
+							if(!datepickerInst.options.context.is(e.target)) {
+								datepickerInst.options.context = N(e.target);
+								opts.contents.hide().removeClass("visible__").addClass("hidden__");
+							}
 						}
 						if(!opts.contents.is(":visible")) {
 							self.show();
@@ -969,12 +1041,12 @@
 				}
 
 				// bind key event
-				opts.context.bind(N.browser.is("firefox") ? "keydown.datepicker" : "keyup.datepicker", function(e) {
-					e.preventDefault();
+				opts.context.bind("keyup.datepicker", function(e) {
 					var value = opts.context.val().replace(/[^0-9]/g, "");
+					var keyCode = e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode);
 
 					// when press the number keys
-					if (e.keyCode >= 48 && e.keyCode <= 57 && value.length <= 8 && value.length%2 === 0) {
+					if (keyCode >= 48 && keyCode <= 57 && value.length <= 8 && value.length%2 === 0) {
 		        		var dateStrArr = N.date.strToDateStrArr(value, format);
 		        		var dateStrStrArr = N.date.strToDateStrArr(value, format, true);
 
@@ -1005,20 +1077,33 @@
 	        					}
 	        				}
 	        			}
-
-	        		// when press the enter key
-					} else if (e.keyCode == 13) {
-		        		if(!opts.monthonly) {
-		        			daysPanel.find(".datepicker_day_selected__").trigger("click", [e]);
-		        		} else {
-		        			monthsPanel.find(".datepicker_month_selected__").trigger("click", [e]);
-		        		}
+					} else if (keyCode == 13) { // When press the ENTER key
+						e.preventDefault();
+					} else if (keyCode == 27) { // When press the ESC key
+						e.preventDefault();
+						setTimeout(function() {
+							self.hide();
+						}, 0);
+		        	}
+				}).bind("keydown.datepicker", function(e) {
+					var keyCode = e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode);
+					if (keyCode == 9) { // When press the TAB key
+						setTimeout(function() {
+							self.hide();
+						}, 0);
 		        	}
 				});
 			},
 			wrapSingleEle : function() {
 				var opts = this.options;
 				var self = this;
+
+				opts.contents.bind("click.datepicker", function(e) {
+					e.stopPropagation();
+				});
+				opts.context.bind("click.datepicker", function(e) {
+					e.stopPropagation();
+				});
 
 				// bind focusin event
 				if(opts.focusin) {
@@ -1034,9 +1119,28 @@
 				var monthsPanel = N((opts.monthonly ? ".datepicker_contents__.datepicker_monthonly__" : ".datepicker_contents__:not(.datepicker_monthonly__)") + " .datepicker_months_panel__");
 				var daysPanel = N((opts.monthonly ? ".datepicker_contents__.datepicker_monthonly__" : ".datepicker_contents__:not(.datepicker_monthonly__)") + " .datepicker_days_panel__");
 
+				// bind focusin event
+				if(opts.focusin) {
+					opts.context.bind("focusin.datepicker", function(e) {
+						// reuse datepicker panel element
+						if(opts.shareEle) {
+							var datepickerInst;
+							if(opts.monthonly) {
+								datepickerInst = N(".datepicker__.datepicker_month_master__").instance("datepicker");
+							} else {
+								datepickerInst = N(".datepicker__.datepicker_date_master__").instance("datepicker");
+							}
+							datepickerInst.options.context = opts.context;
+							opts.contents.hide().removeClass("visible__").addClass("hidden__");
+						}
+						if(!opts.contents.is(":visible")) {
+							self.show();
+						}
+					});
+				}
+
 				// bind key event
-				opts.context.bind(N.browser.is("firefox") ? "keydown.datepicker" : "keyup.datepicker", function(e) {
-					e.preventDefault();
+				opts.context.bind("keyup.datepicker", function(e) {
 					var value = opts.context.val().replace(/[^0-9]/g, "");
 
 					var endDateCls = N.date.strToDate(N.string.lpad(yearsPanel.find(".datepicker_year_selected__").text(), 4, "0") +  N.string.lpad(String(parseInt(monthsPanel.find(".datepicker_month_selected__").text())+1), 2, "0") + "00", "Ymd");
@@ -1046,8 +1150,9 @@
 						gEndDate = 31;
 					}
 
+					var keyCode = e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode);
 					// when press the number keys
-					if (e.keyCode >= 48 && e.keyCode <= 57 && value.length <= 8 && value.length%2 === 0) {
+					if (keyCode >= 48 && keyCode <= 57 && value.length <= 8 && value.length%2 === 0) {
 		        		var dateStrArr = N.date.strToDateStrArr(value, format);
 		        		var dateStrStrArr = N.date.strToDateStrArr(value, format, true);
 
@@ -1078,19 +1183,16 @@
 	        					}
 	        				}
 	        			}
-
-	        		// when press the enter key
-					} else if (e.keyCode == 13) {
-		        		if(!opts.monthonly) {
-		        			daysPanel.find(".datepicker_day_selected__").trigger("click", [e]);
-		        		} else {
-		        			monthsPanel.find(".datepicker_month_selected__").trigger("click", [e]);
-		        		}
-
-		        		// Temporary measures, I dont't know why into formated data to only data set of memory when press the enter key
-		        		if(!N.string.isEmpty(value)) {
-		        			opts.context.val(value).focusout();
-		        		}
+					} else if (keyCode == 13) { // When press the ENTER key
+						e.preventDefault();
+					} else if (keyCode == 27) { // When press the ESC key
+						e.preventDefault();
+						self.hide();
+		        	}
+				}).bind("keydown.datepicker", function(e) {
+					var keyCode = e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode);
+					if (keyCode == 9) { // When press the TAB key
+						self.hide();
 		        	}
 				});
 			},
@@ -1180,37 +1282,7 @@
 						return this;
 					}
 				}
-
-				var self = this;
-
-				opts.contents.fadeIn(150);
-
-				// bind "ESC" key event
-				// if press the "ESC" key, datepicker will be hidden
-		        $(document).bind(N.browser.is("firefox") ? "keydown.datepicker" : "keyup.datepicker", function(e) {
-		        	e.preventDefault();
-		        	if ((e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode)) == 27) {
-		        		self.hide(e);
-		        	}
-				});
-
-		        // lock for when the click datepicker panel
-		        // prevent blur event of opts.context
-		        var lock;
-	        	$(window.document).bind("mousedown.datepicker", function(e) {
-	        		if($(e.target).closest(opts.contents).length > 0) {
-	        			lock = true;
-					} else {
-						lock = false;
-					}
-	        	});
-
-		        // when the context(input) is focused out, close the datepicker panel
-		        opts.context.bind("blur.datepicker", function(e) {
-		        	if(!lock) {
-		        		self.hide();
-		        	}
-		        });
+				opts.context.trigger("onBeforeShow", [opts.context, opts.contents]);
 
 		        // set datapicker position
 				$(window).bind("resize.datepicker", function() {
@@ -1220,38 +1292,60 @@
 					if(parentEle.length > 0) {
 						limitWidth = parentEle.position().left + parentEle.width();
 					} else {
-						limitWidth = $(window).width();
+						limitWidth = (window.innerWidth ? window.innerWidth : $(window).width());
 					}
 					if(leftOfs + opts.contents.width() > limitWidth) {
 						opts.contents.css("right", (limitWidth - (leftOfs + opts.context.outerWidth())) + "px");
+						opts.contents.addClass("orgin_right__");
 					} else {
 						opts.contents.css("left", leftOfs + "px");
+						opts.contents.addClass("orgin_left__");
 					}
 				}).trigger("resize.datepicker");
+
+				var self = this;
+
+				setTimeout(function() {
+					opts.contents.show(0, function() {
+						$(this).removeClass("hidden__").addClass("visible__");
+
+						$(document).unbind("click.datepicker");
+				        $(document).bind("click.datepicker", function(e) {
+				        	self.hide();
+			        	});
+					});
+				}, 0);
 
 				return this;
 			},
 			hide : function() {
 				var opts = this.options;
 
-				if(opts.onBeforeHide !== null) {
-					 // arguments[0] - because of firefox, firefox does not have window.event object
-					var result = opts.onBeforeHide.call(this, opts.context, opts.contents, arguments.length > 0 ? arguments[0] : undefined);
-					if(result !== undefined && result === false) {
-						return this;
+				if(opts.contents.hasClass("visible__")) {
+					var self = this;
+					if(opts.onBeforeHide !== null) {
+						 // arguments[0] - because of firefox, firefox does not have window.event object
+						var result = opts.onBeforeHide.call(this, opts.context, opts.contents, arguments.length > 0 ? arguments[0] : undefined);
+						if(result !== undefined && result === false) {
+							return this;
+						}
 					}
+					opts.context.trigger("onBeforeHide", [opts.context, opts.contents, arguments.length > 0 ? arguments[0] : undefined]);
+
+					$(window).unbind("resize.datepicker");
+					$(document).unbind("click.datepicker");
+					opts.context.unbind("blur.datepicker");
+
+					opts.contents.removeClass("visible__").addClass("hidden__");
+					opts.contents.one(N.element.whichTransitionEvent(opts.contents), function(e){
+			            $(this).hide();
+			            if(opts.onHide !== null) {
+							opts.onHide.call(self, opts.context, opts.contents);
+						}
+			            opts.context.trigger("onHide", [opts.context, opts.contents]);
+			        }).trigger("nothing");
 				}
 
-				$(window.document).unbind("mousedown.datepicker");
-				opts.context.unbind("blur.datepicker");
-				$(window.document).unbind(N.browser.is("firefox") ? "keydown.datepicker" : "keyup.datepicker");
-				$(window).unbind("resize.datepicker");
-				if(opts.shareEle) {
-					opts.contents.hide();
-				} else {
-					opts.contents.fadeOut(150);
-				}
-				opts.context.get(0).blur();
 				return this;
 			}
 		});
@@ -1265,6 +1359,8 @@
 				title : null,
 				button : true,
 				modal : true,
+				top : undefined,
+				left : undefined,
 				height : 0,
 				width : 0,
 				closeMode : "hide",
@@ -1272,8 +1368,10 @@
 				"confirm" : true,
 				onOk : null,
 				onCancel : null,
+				overlayClose : true,
 				onOpen : null,
 				onOpenData : null,
+				delayContInit : false,
 				onClose : null,
 				onCloseData : null,
 				preload : false,
@@ -1298,27 +1396,16 @@
 			if(opts !== undefined) {
 				if(N.type(opts) === "string") {
 					this.options.url = opts;
-				} else {
-					if(arguments.length === 1 && N.isPlainObject(obj)) {
-						$.extend(this.options, obj);
-						// when the title option value is undefined
-						// $.extend method does not extend undefined value
-						if(obj.hasOwnProperty("title")) {
-							this.options.title = obj.title;
-						}
-					} else {
-						$.extend(this.options, opts);
-						// when the title option value is undefined
-						// $.extend method does not extend undefined value
-						if(obj.hasOwnProperty("title")) {
-							this.options.title = opts.title;
-						}
-					}
-					if(N.type(this.options.context) === "string") {
-						this.options.context = N(this.options.context);
-					}
+				}
+			} else {
+				if(arguments.length === 1 && N.isPlainObject(obj)) {
+					opts = obj;
+					obj = N(window);
 				}
 			}
+			$.extend(this.options, opts);
+			// if title option value is undefined
+			this.options.title = N.string.trimToNull(opts.title);
 
 			//set opener(parent page's Controller)
 			var self = this;
@@ -1326,7 +1413,7 @@
 				var caller = arguments.callee.caller;
 				while(caller != null) {
 				    caller = caller.arguments.callee.caller;
-				    if(caller.arguments.length > 0 && N(caller.arguments[0]).hasClass("view_context__") && caller.arguments[0].instance != null && N.type(caller.arguments[0].instance) === "function") {
+				    if(caller != null && caller.arguments.length > 0 && N(caller.arguments[0]).hasClass("view_context__") && caller.arguments[0].instance != null && N.type(caller.arguments[0].instance) === "function") {
 						self.opener = caller.arguments[0].instance("cont");
 						break;
 					}
@@ -1339,7 +1426,7 @@
 
 			if(this.options.url !== null) {
 				if(this.options.preload) {
-					Popup.loadEle.call(this, function(context) {
+					Popup.loadContent.call(this, function(cont, context) {
 						// this callback function is for async page load
 						this.options.context = context;
 
@@ -1364,6 +1451,7 @@
 
 				// use alert
 				// opts.context is alert message
+				opts.html = true;
 				opts.msg = opts.context;
 				if(opts.title === null) {
 					opts.title = opts.context.attr("title");
@@ -1376,11 +1464,10 @@
 				this.alert.options.msgContext.addClass("popup_overlay__");
 				this.alert.options.msgContents.addClass("popup__");
 			},
-			loadEle : function(callback) {
+			loadContent : function(callback) {
 				var opts = this.options;
 				var self = this;
 
-				// TODO show loading bar
 				N.comm({
 					url : opts.url,
 					contentType : "text/html; charset=UTF-8",
@@ -1392,12 +1479,14 @@
 
 					// set title
 					if(opts.title === null) {
-						opts.title = opts.context.filter("[id]:first").attr("title");
+						opts.title = opts.context.filter(":not('style, script'):last").attr("title");
+						if(opts.title !== null) {
+							opts.context.filter(":not('style, script'):last").removeAttr("title");
+						}
 					}
-					if(opts.title !== null) {
-						opts.context.filter("[id]:first").removeAttr("title");
-					}
+
 					// opts.context is alert message;
+					opts.html = true;
 					opts.msg = opts.context;
 					self.alert = N(window).alert(opts);
 					self.alert.options.msgContext.addClass("popup_overlay__");
@@ -1406,29 +1495,34 @@
 					// set request target
 					this.request.options.target = opts.context.parent();
 
-					var sc = opts.context.filter("[id]:first").instance("cont");
+					var cont = opts.context.filter(".view_context__:last").instance("cont");
 
 					// set popup instance to popup's Controller
-					if(sc !== undefined) {
-						// set Communicator.request
-						sc.request = this.request;
-
+					if(cont !== undefined) {
 						// set caller attribute in Conteroller in tab content, that is Popup instance
-						sc.caller = self;
+						cont.caller = self;
 
 						// set opener to popup's Controller
 						if(self.opener !== undefined) {
-							sc.opener = self.opener;
+							cont.opener = self.opener;
 						}
 
-						if(sc.init !== undefined) {
-							sc.init(sc.view, this.request);
+						// if delayContInit options is true, *ProcFn__ function is must set to Controller's attribute before the aop processing
+						if(opts.delayContInit) {
+							callback.call(self, cont, opts.context);
+
+							// triggering "init" method
+							N.cont.trInit.call(this, cont, this.request);
+						} else {
+							// triggering "init" method
+							N.cont.trInit.call(this, cont, this.request);
+
+							callback.call(self, cont, opts.context);
 						}
+					} else {
+						callback.call(self, cont, opts.context);
 					}
 
-					callback.call(self, opts.context);
-
-					// TODO hide loading bar
 	        	});
 			},
 			popOpen : function(onOpenData) {
@@ -1439,16 +1533,6 @@
 					opts.context.show();
 				}
 				self.alert.show();
-
-				// execute "onOpen" event
-				if(opts.onOpen !== null) {
-					opts.onOpenData = onOpenData !== undefined ? onOpenData : null;
-					if(opts.context.filter("[id]:first").instance("cont")[opts.onOpen] !== undefined) {
-						opts.context.filter("[id]:first").instance("cont")[opts.onOpen](onOpenData);
-					} else {
-						N.warn("[N.popup.popOpen]The onOpen event handler(" + opts.onOpen + ") is not defined on the Controller(N.cont) of the Popup.");
-					}
-				}
 			}
 		});
 
@@ -1465,12 +1549,29 @@
 				}
 
 				if(this.options.url !== null && !opts.preload) {
-					Popup.loadEle.call(this, function(context) {
+					Popup.loadContent.call(this, function(cont, context) {
 						// this callback function is for async page load
 						opts.context = context;
 						opts.context.instance("popup", this);
 
 						Popup.popOpen.call(self, onOpenData);
+
+						var onOpenProcFn__ = function() {
+							// execute "onOpen" event
+							if(opts.onOpen !== null) {
+								opts.onOpenData = onOpenData !== undefined ? onOpenData : null;
+								if(opts.context.filter(".view_context__:last").instance("cont")[opts.onOpen] !== undefined) {
+									opts.context.filter(".view_context__:last").instance("cont")[opts.onOpen](onOpenData);
+								} else {
+									N.warn("[N.popup.popOpen]The onOpen event handler(" + opts.onOpen + ") is not defined on the Controller(N.cont) of the Popup.");
+								}
+							}
+						};
+						if(opts.delayContInit && cont !== undefined) {
+							cont.onOpenProcFn__ = onOpenProcFn__;
+						} else {
+							onOpenProcFn__();
+						}
 					});
 					opts.preload = true;
 				} else {
@@ -1489,7 +1590,7 @@
 				if(opts.onClose !== null) {
 					opts.onClose.call(this, onCloseData);
 				}
-				this.alert.hide();
+				this.alert[opts.closeMode]();
 				return this;
 			},
 			changeEvent : function(name, callback) {
@@ -1504,15 +1605,22 @@
 
 		// Tab
 		var Tab = N.tab = function(obj, opts) {
-			//TODO think more whether "onLoad event" needs or not
 			this.options = {
 				context : obj.length > 0 ? obj : null,
 				links : obj.length > 0 ? obj.find(">ul>li") : null,
-				dataOpts : [], // dataOpts : [{ url: undefined, width: "auto", active: false, preload: false, onOpen: undefined }]
+				tabOpts : [], // tabOpts : [{ url: undefined, active: false, preload: false, onOpen: undefined, disable : false, stateless : false }]
+				delayContInit : false,
 				randomSel : false,
 				onActive : null,
-				contents : obj.length > 0 ? obj.find("> div") : null,
-				effect : false
+				onLoad : null,
+				blockOnActiveWhenCreate : false,
+				contents : obj.length > 0 ? obj.find(">div") : null,
+				effect : false, // Deprecated
+				tabScroll : false,
+				tabScrollCorrection : {
+					tabContainerWidthCorrectionPx : 0,
+					tabContainerWidthReCalcDelayTime : 0
+				}
 			};
 
 			try {
@@ -1526,19 +1634,21 @@
 				this.options.context = N(obj.context);
 			}
 			this.options.links = this.options.context.find(">ul>li");
-			this.options.contents = this.options.context.find("> div");
+			this.options.contents = this.options.context.find(">div");
 
 			var self = this;
 			var opt;
-			this.options.links.each(function(i) {
-				var thisEle = $(this);
-				opt = N.element.toOpts(thisEle);
-				if(opt === undefined) {
-					opt = {};
-				}
-				opt.target = thisEle.find("a").attr("href");
-				self.options.dataOpts.push(opt);
-			});
+			if(N.isEmptyObject(this.options.tabOpts)) {
+				this.options.links.each(function(i) {
+					var thisEle = $(this);
+					opt = N.element.toOpts(thisEle);
+					if(opt === undefined) {
+						opt = {};
+					}
+					opt.target = thisEle.find("a").attr("href");
+					self.options.tabOpts.push(opt);
+				});
+			}
 
 			if(opts !== undefined) {
 				$.extend(this.options, opts);
@@ -1554,9 +1664,6 @@
 		};
 
 		$.extend(Tab, {
-			context : function(sel) {
-				return sel !== undefined ? this.options.context.find(sel) : this.options.context;
-			},
 			wrapEle : function() {
 				var opts = this.options;
 				// hide div contents
@@ -1565,7 +1672,13 @@
 				var self = this;
 
 				var defSelIdx;
-				$(opts.dataOpts).each(function(i) {
+				$(opts.tabOpts).each(function(i) {
+					if(this.disable) {
+						self.disable(i);
+					} else {
+						self.enable(i);
+					}
+
 					// set default select index
 					if(this.active !== undefined && this.active) {
 						// active option select
@@ -1582,106 +1695,304 @@
 						}
 					}
 
-					if(this.preload !== undefined && this.preload === true) {
+					if(this.preload) {
 						if(this.url !== undefined) {
-							Tab.loadContent.call(self, this.url, i);
+							Tab.loadContent.call(self, this.url, i, function(cont, selContentEle_) {
+								// excute "onLoad" event
+								if(opts.onLoad !== null) {
+									opts.onLoad.call(self, i, opts.links.eq(i), selContentEle_, cont);
+								}
+							});
 						}
 					}
 				});
 
-				opts.links.bind("click.tab", function(e, onOpenData) {
+				opts.links.bind("click.tab", function(e, onOpenData, isFirst) {
 					e.preventDefault();
-					var thisEle = $(this);
-					var thisIdx = opts.links.index(this);
-					var thisDeclarativeOpts = opts.dataOpts[thisIdx];
 
-					// hide tab contents
-					opts.contents.hide();
-					var content = opts.contents.eq(thisIdx).show();
+					if(!$(this).hasClass("tab_active__")) {
+						var selTabEle = $(this);
+						var selTabIdx = opts.links.index(this);
+						var selDeclarativeOpts = opts.tabOpts[selTabIdx];
+						var selContentEle = opts.contents.eq(selTabIdx);
 
-					opts.links.removeClass("tab_active__");
-					thisEle.addClass("tab_active__");
+						opts.links.filter(".tab_active__").removeClass("tab_active__");
+						selTabEle.addClass("tab_active__");
 
-					if(thisDeclarativeOpts.preload === undefined || thisDeclarativeOpts.preload === false) {
-						// load content
-						if(thisDeclarativeOpts.url !== undefined && thisEle.data("loaded") === undefined) {
-							Tab.loadContent.call(self, thisDeclarativeOpts.url, thisIdx);
+						var onActiveProcFn__ = function() {
+							// excute "onActive" event
+							if(opts.onActive !== null) {
+								if(opts.blockOnActiveWhenCreate === false || (opts.blockOnActiveWhenCreate === true && isFirst !== true)) {
+									opts.onActive.call(this, selTabIdx, selTabEle, selContentEle, opts.links, opts.contents);
+			                	}
+							}
 						}
-					}
 
-					// run "onActive" event
-					if(opts.onActive !== null) {
-						opts.onActive.call(this, thisIdx, thisEle, content, opts.links, opts.contents);
-					}
+						var onOpenProcFn__ = function() {
+							// excute "onOpen"(declarative option) event
+							if(selDeclarativeOpts.onOpen !== undefined) {
+								var cont = selContentEle.children(".view_context__:last").instance("cont");
+								if(cont[selDeclarativeOpts.onOpen] !== undefined) {
+									//thisDeclarativeOpts.onOpen
+									cont[selDeclarativeOpts.onOpen](onOpenData);
+								} else {
+									N.warn("[N.tab.wrapEle]The onOpen event handler(" + selDeclarativeOpts.onOpen + ") is not defined on the Controller(N.cont) of the tab(N.tab)'s contents.");
+								}
+							}
+						}
 
-					// excute "onOpen"(declarative option) event
-					// excuted only when defined url with class(inline) option and tab is active
-					if(thisDeclarativeOpts.onOpen !== undefined && thisEle.data("loaded")) {
-						var sc = content.find(">").filter("[id]:first").instance("cont");
-						if(sc[thisDeclarativeOpts.onOpen] !== undefined) {
-							//thisDeclarativeOpts.onOpen
-							sc[thisDeclarativeOpts.onOpen](onOpenData);
+						// hide tab contents
+						var beforeActivatedContent = opts.contents.filter(".tab_content_active__");
+						if(beforeActivatedContent.length > 0) {
+							var isRelative = false;
+							if(opts.context.css("position") !== "relative") {
+								opts.context.css("position", "relative");
+								isRelative = true;
+							}
+							beforeActivatedContent.removeClass("tab_content_active__ visible__").addClass("hidden__");
+							beforeActivatedContent.one(N.element.whichTransitionEvent(beforeActivatedContent), function(e){
+								$(this).hide();
+								if(isRelative) {
+									opts.context.css("position", "");
+								}
+							}).trigger("nothing");
+						}
+
+						if(!selDeclarativeOpts.preload && selDeclarativeOpts.url !== undefined && !selContentEle.data("loaded") || selDeclarativeOpts.stateless) {
+							// load content
+							Tab.loadContent.call(self, selDeclarativeOpts.url, selTabIdx, function(cont, selContentEle_) {
+								// excute "onLoad" event
+								if(opts.onLoad !== null) {
+									opts.onLoad.call(self, selTabIdx, selTabEle, selContentEle_, cont);
+								}
+
+								if(opts.delayContInit) {
+									cont.onActiveProcFn__ = onActiveProcFn__;
+									cont.onOpenProcFn__ = onOpenProcFn__;
+								} else {
+									onActiveProcFn__();
+									onOpenProcFn__();
+								}
+
+								// show tab contents
+								selContentEle_.show(0, function() {
+									selContentEle_.addClass("tab_content_active__ visible__");
+								}).removeClass("hidden__");
+
+								selContentEle.data("loaded", true);
+							});
 						} else {
-							N.warn("[N.tab.wrapEle]The onOpen event handler(" + thisDeclarativeOpts.onOpen + ") is not defined on the Controller(N.cont) of the tab(N.tab)'s contents.");
-						}
-					}
+							onActiveProcFn__();
+							onOpenProcFn__();
 
-					if (opts.effect) {
-						content.children().hide()[opts.effect[0]](opts.effect[1], opts.effect[2]);
+							// show tab contents
+							selContentEle.show(0, function() {
+								selContentEle.addClass("tab_content_active__ visible__");
+							}).removeClass("hidden__");
+						}
+
+						// Deprecated
+						if (opts.effect) {
+							selContentEle.children().hide()[opts.effect[0]](opts.effect[1], opts.effect[2]);
+						}
 					}
 				});
+
+				if(opts.tabScroll) {
+					Tab.wrapScroll.call(this);
+				}
 
 				// select tab
-				$(opts.links.get(defSelIdx)).click();
+				$(opts.links.get(defSelIdx)).trigger("click.tab", [undefined, true]);
 			},
-			loadContent : function(url, targetIdx) {
+			wrapScroll : function() {
+				var opts = this.options;
+				var eventNameSpace = ".tab.scroll";
+				var tabContainerEle = opts.context.find(">ul").addClass("effect__");
+
+				var scrollBtnEles = opts.context.find(">a");
+				var prevBtnEle;
+				var nextBtnEle;
+				var lastDistance = 0;
+
+				if(scrollBtnEles.length > 1) {
+					opts.context.css("position", "relative");
+					scrollBtnEles.css({
+						"position" : "absolute",
+						"top" : 0
+					});
+
+					prevBtnEle = scrollBtnEles.eq(0).addClass("tab_scroll_prev__").css("left", 0).bind("click" + eventNameSpace,  function(e) {
+						e.preventDefault();
+						tabContainerEle.addClass("effect__");
+						lastDistance = prevBtnEle.outerWidth();
+						tabContainerEle.css("margin-left", lastDistance + "px");
+						nextBtnEle.removeClass("disabled__");
+						prevBtnEle.addClass("disabled__");
+					});
+					nextBtnEle = scrollBtnEles.eq(1).addClass("tab_scroll_next__").css("right", 0).bind("click" + eventNameSpace,  function(e) {
+						e.preventDefault();
+						tabContainerEle.addClass("effect__");
+						lastDistance = opts.context.outerWidth() - tabContainerEle.width() - nextBtnEle.outerWidth() + 1;
+						tabContainerEle.css("margin-left", lastDistance + "px");
+						prevBtnEle.removeClass("disabled__");
+						nextBtnEle.addClass("disabled__");
+					});
+				}
+
+				$(window).bind("resize" + eventNameSpace, function() {
+					var ulWidth = 0;
+					opts.links.each(function() {
+						ulWidth += ($(this).outerWidth() + parseInt(N.string.trimToZero($(this).css("margin-left"))) + parseInt(N.string.trimToZero($(this).css("margin-right"))));
+					});
+					ulWidth += opts.tabScrollCorrection.tabContainerWidthCorrectionPx;
+
+					if(ulWidth > 0 && ulWidth > opts.context.width()) {
+						opts.context.css("overflow", "hidden");
+						tabContainerEle.addClass("tab_scroll__").width(ulWidth);
+						if(scrollBtnEles.length > 1) {
+							tabContainerEle.css("margin-left", prevBtnEle.outerWidth() + "px");
+							prevBtnEle.addClass("disabled__");
+							scrollBtnEles.show();
+						}
+					} else {
+						opts.context.css("overflow", "");
+						tabContainerEle.css("width", "");
+						if(scrollBtnEles.length > 1) {
+							tabContainerEle.css("margin-left", "");
+							prevBtnEle.removeClass("disabled__");
+							scrollBtnEles.hide();
+						}
+					}
+				}).trigger("resize" + eventNameSpace);
+
+				if(opts.tabScrollCorrection.tabContainerWidthReCalcDelayTime > 0) {
+					setTimeout(function() {
+						$(window).trigger("resize" + eventNameSpace);
+					}, opts.tabScrollCorrection.tabContainerWidthReCalcDelayTime);
+				}
+
+				$.fn.drag = function(nameSpace, startHandler, moveHandler, endHandler) {
+					var selfEle = this;
+					this.bind("mousedown" + nameSpace + " touchstart" + nameSpace, function(e) {
+		            	var se = e.originalEvent.touches ? e.originalEvent.touches[0] : e;
+		            	e.stopImmediatePropagation();
+		            	e.stopPropagation();
+
+		            	if(e.originalEvent.touches || (e.which || e.button) === 1) {
+		            		$(document).bind("dragstart" + nameSpace + " selectstart" + nameSpace, function() {
+		            			return false;
+		            		});
+
+		            		var isContinue = startHandler.call(this, e, selfEle, se.pageX, se.pageY);
+		            		if(isContinue !== false) {
+		            			$(document).bind("mousemove" + nameSpace + " touchmove" + nameSpace, function(e) {
+			            			var me = e.originalEvent.touches ? e.originalEvent.touches[0] : e;
+			            			e.stopImmediatePropagation();
+			            			e.stopPropagation();
+			            			moveHandler.call(this, e, selfEle, me.pageX, me.pageY);
+			            		});
+
+			            		$(document).bind("mouseup" + nameSpace + " touchend" + nameSpace, function(e) {
+			            			e.stopImmediatePropagation();
+			            			e.stopPropagation();
+			            			endHandler.call(this, e, selfEle);
+			            			$(document).unbind("dragstart" + nameSpace + " selectstart" + nameSpace + " mousemove" + nameSpace + " touchmove" + nameSpace + " mouseup" + nameSpace + " touchend" + nameSpace);
+			            		});
+		            		}
+		            	}
+		        	});
+				};
+
+				var sPageX;
+				var prevDefGap = 0;
+				var nextDefGap = 0;
+				if(scrollBtnEles.length > 1) {
+					prevDefGap = prevBtnEle.outerWidth();
+					nextDefGap = nextBtnEle.outerWidth();
+				}
+				tabContainerEle.drag(eventNameSpace, function(e, tabContainerEle_, pageX, pageY) { // start
+					tabContainerEle_.removeClass("effect__");
+					if(tabContainerEle_.outerWidth() <= opts.context.innerWidth()) {
+						return false;
+					}
+					sPageX = pageX - lastDistance;
+				}, function(e, tabContainerEle_, pageX, pageY) { // move
+					var distance = (sPageX - pageX) * -1;
+					if(distance > prevDefGap || opts.context.outerWidth() >= tabContainerEle_.width() + nextDefGap + distance) {
+						return false;
+					} else {
+						lastDistance = distance;
+						tabContainerEle_.css("margin-left", distance + "px");
+					}
+				}, function(e, tabContainerEle_) { //end
+					if(lastDistance + (scrollBtnEles.length > 1 ? 0 : 30) >= 0 && lastDistance <= prevDefGap) {
+						if(scrollBtnEles.length > 1) {
+							lastDistance = prevDefGap;
+							nextBtnEle.removeClass("disabled__");
+							prevBtnEle.addClass("disabled__");
+						} else {
+							lastDistance = 0;
+						}
+						tabContainerEle_.addClass("effect__").css("margin-left", lastDistance + "px");
+					} else if(nextDefGap + (scrollBtnEles.length > 1 ? 0 : 30) >= tabContainerEle_.width() - (opts.context.outerWidth() + lastDistance * -1)) {
+						lastDistance = (tabContainerEle_.width() - opts.context.outerWidth() - 1) * -1;
+						if(scrollBtnEles.length > 1) {
+							lastDistance -= nextDefGap;
+							prevBtnEle.removeClass("disabled__");
+							nextBtnEle.addClass("disabled__");
+						}
+						tabContainerEle_.addClass("effect__").css("margin-left", lastDistance + "px");
+					} else {
+						scrollBtnEles.removeClass("disabled__");
+					}
+				});
+			},
+			loadContent : function(url, targetIdx, callback) {
 				var opts = this.options;
 				var self = this;
+				var selContentEle = opts.contents.eq(targetIdx);
 
 				N.comm({
 					url : url,
 					contentType : "text/html; charset=UTF-8",
 					dataType : "html",
 					type : "GET",
-					target : opts.contents.eq(targetIdx)
+					target : selContentEle
 				}).submit(function(page) {
-					var sc = opts.contents.eq(targetIdx).html(page).children("[id]:first").instance("cont");
-
-					// set Communicator.request
-					sc.request = this.request;
-
-					// set caller attribute in conteroller in tab content that is Tab instance
-					sc.caller = self;
+					var cont = selContentEle.html(page).children(".view_context__:last").instance("cont");
 
 					// set tab instance to tab contents Controller
-					if(sc !== undefined) {
-						if(sc.init !== undefined) {
-							sc.init(sc.view, this.request);
+					if(cont !== undefined) {
+						// set caller attribute in conteroller in tab content that is Tab instance
+						cont.caller = self;
+
+						// if delayContInit options is true, *ProcFn__ function is must set to Controller's attribute before the aop processing
+						if(opts.delayContInit) {
+							callback.call(this, cont, selContentEle);
+
+							// triggering "init" method
+							N.cont.trInit.call(this, cont, this.request);
+						} else {
+							// triggering "init" method
+							N.cont.trInit.call(this, cont, this.request);
+
+							callback.call(this, cont, selContentEle);
 						}
+
+					} else {
+						callback.call(this, cont, selContentEle);
 					}
 
 					var activeTabEle = opts.links.eq(targetIdx);
-
-					// run "onOpen" event
-					if(activeTabEle.hasClass("tab_active__")) {
-						var dataOpts = opts.dataOpts[targetIdx];
-						if(dataOpts.onOpen !== undefined) {
-							if(sc[dataOpts.onOpen] !== undefined) {
-								//TODO think more how to work "onOpenData"
-								sc[dataOpts.onOpen]();
-							} else {
-								N.warn("[N.tab.loadContent]The onOpen event handler(" + dataOpts.onOpen + ") is not defined on the Controller(N.cont) of the tab(N.tab)'s contents.");
-							}
-						}
-					}
-
-					// set load status
-					activeTabEle.data("loaded", true);
 	        	});
 			}
 		});
 
 		$.extend(Tab.prototype, {
+			context : function(sel) {
+				return sel !== undefined ? this.options.context.find(sel) : this.options.context;
+			},
 			open : function(idx, onOpenData) {
 				if(idx !== undefined) {
 					if(onOpenData !== undefined) {
@@ -1689,6 +2000,23 @@
 					} else {
 						$(this.options.links.get(idx)).trigger("click.tab");
 					}
+				}
+				return this;
+			},
+			disable : function(idx) {
+				if(idx !== undefined) {
+					$(this.options.links.get(idx))
+						.unbind("click.tab.disable")
+						.tpBind("click.tab.disable", N.element.disable)
+						.addClass("tab_disabled__");
+				}
+				return this;
+			},
+			enable : function(idx) {
+				if(idx !== undefined) {
+					$(this.options.links.get(idx))
+						.unbind("click", N.element.disable)
+						.removeClass("tab_disabled__");
 				}
 				return this;
 			}
@@ -1754,11 +2082,17 @@
 			data : function(selFlag) { // TODO key name : argument2, argument3... argumentN
 				var opts = this.options;
 				if(selFlag !== undefined && selFlag === true) {
-					var rtnData = [];
-					$(opts.context).vals(function(i) {
-						rtnData.push(opts.data[i]);
-					});
-					return rtnData;
+					var selectEles = opts.type === 1 || opts.type === 2 ? opts.context.find("option") : opts.context.closest(".select_input_container__").children("label");
+		    		var defSelCnt = selectEles.filter(".select_default__").length;
+		    		var idxs = this.index();
+		    		if(N.type(idxs) === "string") {
+		    			idxs = [idxs];
+		    		}
+					return $(idxs).map(function() {
+						if(this - defSelCnt > -1) {
+							return opts.data.get(this - defSelCnt);
+						}
+					}).get();
 				} else if(selFlag !== undefined && selFlag === false) {
 					return opts.data;
 				} else {
@@ -1772,7 +2106,7 @@
 		    	var opts = this.options;
 
 		    	//to rebind new data
-				if(data !== undefined) {
+				if(data != null) {
 					opts.data = N.type(data) === "array" ? N(data) : data;
 				}
 
@@ -1787,26 +2121,87 @@
 					});
 		    	} else if(opts.type === 3 || opts.type === 4) {
 		    		if(opts.context.filter(".select_template__").length === 0) {
-		    			var id = opts.context.attr("id");
-			    		opts.data.each(function(i, data) {
+		    			var id = opts.context.attr("id")
+		    			var container = $('<span class="select_input_container__"/>');
+		    			if (opts.direction === "h") {
+		    				container.addClass("select_input_horizental__");
+		    			} else if (opts.direction === "v") {
+		    				container.addClass("select_input_vertical__");
+		    			}
+		    			opts.data.each(function(i, data) {
+			    			var labelEle = $('<label class="select_input_label__ ' + id + "_" + String(i) + '__"></label>');
+			    			var labelTextEle = $('<span>' + data[opts.key] + '</span>');
 			    			if(i === 0) {
-			    				opts.context.attr("name", id).attr("id", id + "_" + String(i)).attr("value", data[opts.val])
-			    					.addClass("select_input__ select_template__");
+			    				opts.template.attr("name", id).attr("value", data[opts.val]).addClass("select_input__ select_template__")
+			    					.wrap(labelEle)
+			    					.parent().append(labelTextEle).wrap(container);
+			    				container = opts.template.closest(".select_input_container__");
 			    			} else {
-			    				opts.context.push($(opts.template.filter("input:eq(0)")).clone(true).attr("name", id).attr("id", id + "_" + String(i)).attr("value", data[opts.val]).removeClass("select_template__").get(0));
-			    			}
-			    			opts.context.push($('<label class="select_input_label__" for="' + id + "_" + String(i) + '">' + data[opts.key] + '</label>').get(0));
-			    			if (opts.direction === "v" && opts.data.length - 1 != i) {
-			    				opts.context.push($('<br class="select_input_br__" />').get(0));
+			    				labelEle.append(opts.template.clone(true).attr("name", id).attr("value", data[opts.val]).removeAttr("id").removeClass("select_template__"));
+			    				labelEle.append(labelTextEle);
+			    				container.append(labelEle);
 			    			}
 			    		});
-			    		$(opts.template.filter("input:eq(0)")).after(opts.context);
 		    		}
 		    	}
 		    	return this;
 		    },
+		    index : function(idx) {
+		    	var opts = this.options;
+		    	var self = this;
+
+		    	var selectSiblingEles = opts.type === 1 || opts.type === 2 ? opts.context.find("option") : opts.context.closest(".select_input_container__").children("label");
+		    	var selectEles = opts.type === 1 || opts.type === 2 ? opts.context : selectSiblingEles.find(":radio, :checkbox");
+		    	if(idx === undefined) {
+		    		var rslt = selectEles.vals();
+		    		var spltSepa = N.context.attr("core").spltSepa;
+		    		var rsltStr = spltSepa + (N.type(rslt) === "array" ? rslt.join(spltSepa) : String(rslt)) + spltSepa;
+		    		var rsltArr = [];
+		    		(opts.type === 1 || opts.type === 2 ? selectSiblingEles : selectEles).each(function(i) {
+		    			if(rsltStr.indexOf(spltSepa + this.value + spltSepa) > -1) {
+		    				rsltArr.push(i);
+		    			}
+		    		});
+		    		return rsltArr.length > 0 ? rsltArr.length === 1 ? rsltArr[0] : rsltArr : -1;
+		    	}
+
+		    	var vals = [];
+	    		$(N.type(idx) === "number" ? [idx] : idx).each(function() {
+		    		vals.push((opts.type === 1 || opts.type === 2 ? selectSiblingEles : selectEles).get(this).value);
+	    		});
+	    		selectEles.vals(vals);
+
+	    		return this;
+		    },
 		    val : function(val) {
-		    	return $(this.options.context).vals(val);
+		    	var opts = this.options;
+
+		    	var rtnVal = $(opts.type === 3 || opts.type === 4
+		    				? this.options.context.closest(".select_input_container__").find(":input") : this.options.context).vals(val);
+		    	if(val === undefined) {
+		    		return rtnVal;
+		    	}
+
+		    	return this;
+		    },
+		    remove : function(val) {
+		    	var opts = this.options;
+		    	if(val !== undefined) {
+		    		var selectEles = opts.type === 1 || opts.type === 2 ? opts.context.find("option") : opts.context.closest(".select_input_container__").children("label");
+
+		    		selOptEle = opts.type === 1 || opts.type === 2 ? selectEles.filter("[value='" + val + "']") : selectEles.find("input[value='" + val + "']").parent("label");
+		    		var idx = selOptEle.index();
+		    		var defSelCnt = selectEles.filter(".select_default__").length;
+
+		    		//remove element
+		    		selOptEle.remove();
+
+		    		// remove data
+		    		if(idx - defSelCnt > -1) {
+		    			opts.data.splice(idx - defSelCnt, 1);
+		    		}
+		    	}
+		    	return this;
 		    },
 		    reset : function(selFlag) {
 		    	var opts = this.options;
@@ -1890,6 +2285,12 @@
 			return this;
 		};
 
+		$.extend(Form, {
+			getRadioNCheckBoxSelectorStr : function(key) {
+				return "input:radio[name='" + key + "'], input:checkbox[name='" + key + "'], input:radio[id='" + key + "'], input:checkbox[id='" + key + "']";
+			}
+		});
+
 		$.extend(Form.prototype, {
 			data : function(selFlag) { // TODO key name : argument2, argument3... argumentN
 				var opts = this.options;
@@ -1912,7 +2313,7 @@
 				if(row !== undefined) {
 					opts.row = row;
 				}
-				if(data !== undefined) {
+				if(data != null) {
 					opts.data = N.type(data) === "array" ? N(data) : data;
 					if(opts.revert) {
 						this.revertData = $.extend({}, data[row]);
@@ -1941,7 +2342,7 @@
 					for ( var key in vals ) {
 						eles = $("#" + key, opts.context);
 						type = N.string.trimToEmpty(eles.attr("type")).toLowerCase();
-						if (eles.length > 0 && type !== "radio" && type !== "checkbox") {
+						if (eles.length > 0 && $(opts.context).find(Form.getRadioNCheckBoxSelectorStr(key)).length === 0) {
 							eles.each(function() {
 								ele = $(this);
 								// add data changed flag
@@ -1953,11 +2354,17 @@
 
 								tagName = this.tagName.toLowerCase();
 								type = N.string.trimToEmpty(ele.attr("type")).toLowerCase();
-								if (tagName === "textarea" || type === "text" || type === "password" || type === "hidden" || type === "file") {
+								if (tagName === "textarea" || type === "text" || type === "password" || type === "hidden" || type === "file"
+									// Support HTML5 Form's input types
+									|| type === "number" || type === "email" || type === "search" || type === "color"
+									// The date type does not support formatting, so it does not support it.
+									// || type === "date" || type === "datetime-local" || type === "month" || type === "time" || type === "week"
+									|| type === "range"
+									|| type === "url") {
 									//validate
 									if(ele.data("validate") !== undefined) {
 										if (type !== "hidden") {
-											N().validator(opts.fRules !== null ? opts.fRules : ele);
+											N().validator(opts.vRules !== null ? opts.vRules : ele);
 
 											ele.unbind("focusout.form.validate");
 
@@ -2006,8 +2413,8 @@
 									//Enter key event
 									ele.unbind("keyup.form.dataSync");
 			                        ele.bind("keyup.form.dataSync", function(e) {
-			                        	e.preventDefault();
 			                        	if ((e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode)) == 13) {
+			                        		e.preventDefault();
 			                            	$(this).trigger("focusout.form.validate");
 			                            	// notify data changed
 		                            		$(this).trigger("focusout.form.dataSync");
@@ -2050,7 +2457,7 @@
 										}
 
 										if (opts.validate) {
-											N().validator(opts.fRules !== null ? opts.fRules : ele);
+											N().validator(opts.vRules !== null ? opts.vRules : ele);
 										}
 									}
 
@@ -2102,14 +2509,7 @@
 							});
 						} else {
 							//radio, checkbox
-							eles = $(opts.context).find("input:radio[id^='" + key + "'], input:checkbox[id^='" + key + "']");
-
-							// add data changed flag
-							if (vals.rowStatus === "update") {
-								eles.addClass("data_changed__");
-							} else {
-								eles.removeClass("data_changed__");
-							}
+							eles = $(opts.context).find(Form.getRadioNCheckBoxSelectorStr(key));
 
 							if(eles.length > 0) {
 								//validate
@@ -2122,21 +2522,19 @@
 									}
 
 									if (opts.validate) {
-										N().validator(opts.fRules !== null ? opts.fRules : eles.filter(".select_template__"));
+										N().validator(opts.vRules !== null ? opts.vRules : eles.filter(".select_template__"));
 									}
 								}
 
 								//dataSync
 								eles.unbind("click.form.dataSync select.form.dataSync");
-								eles.bind("click.form.dataSync select.form.dataSync", function(e) {
+								eles.data("eles", eles).bind("click.form.dataSync select.form.dataSync", function(e) {
 									var currEle = $(this);
 									var currKey = currEle.attr("name");
 									if(currKey === undefined) {
 										currKey = currEle.attr("id");
 									}
-									var currEles = currEle.siblings("input:" + currEle.attr("type") + "[id^='" + currEle.attr("name") + "']");
-									currEles.push(this);
-									var currVals = currEles.vals();
+									var currVals = $(this).data("eles").vals();
 									if (vals[currKey] !== currVals) {
 										// update dataset value
 										vals[currKey] = currVals;
@@ -2145,12 +2543,11 @@
 										if (vals.rowStatus !== "insert" && vals.rowStatus !== "delete") {
 											vals.rowStatus = "update";
 											// add data changed flag
-											currEles.addClass("data_changed__");
+											$(this).data("eles").addClass("data_changed__");
 											if(!opts.context.hasClass("row_data_changed__")) {
 												opts.context.addClass("row_data_changed__");
 											}
 										}
-
 
 										// notify data changed
 										if (!currEle.prop("disabled") && !currEle.prop("readonly")) {
@@ -2160,7 +2557,14 @@
 								});
 
 								// select value
-								eles.vals(vals[key] != null ? String(vals[key]) : "");
+								eles.vals(vals[key] != null ? vals[key] : "");
+
+								// add data changed flag
+								if (vals.rowStatus === "update") {
+									eles.addClass("data_changed__");
+								} else {
+									eles.removeClass("data_changed__");
+								}
 							}
 						}
 					}
@@ -2168,7 +2572,7 @@
 					if(opts.onBindAfter !== null && this.options.extObj === null) {
 						opts.onBindAfter.call(opts.context, opts.context, vals);
 					}
-					// be targeted of GC
+					// Empty variables
 					eles = val = undefined;
 				}
 				return this;
@@ -2189,7 +2593,13 @@
 								ele.removeClass("data_changed__");
 								tagName = this.tagName.toLowerCase();
 								type = N.string.trimToEmpty(ele.attr("type")).toLowerCase();
-								if (tagName === "textarea" || type === "text" || type === "password" || type === "hidden" || type === "file") {
+								if (tagName === "textarea" || type === "text" || type === "password" || type === "hidden" || type === "file"
+									// Support HTML5 Form's input types
+									|| type === "number" || type === "email" || type === "search" || type === "color"
+									// The date type does not support formatting, so it does not support it.
+									// || type === "date" || type === "datetime-local" || type === "month" || type === "time" || type === "week"
+									|| type === "range"
+									|| type === "url") {
 									// unbind events
 									ele.unbind("focusout.form.validate focusout.form.dataSync keyup.form.dataSync focusin.form.unformat focusout.form.format");
 									// remove validator's dregs for rebind
@@ -2223,7 +2633,7 @@
 							});
 						} else {
 							//radio, checkbox
-							eles = $(opts.context).find("input:radio[id^='" + key + "'], input:checkbox[id^='" + key + "']");
+							eles = $(opts.context).find(Form.getRadioNCheckBoxSelectorStr(key));
 							eles.removeClass("data_changed__");
 							if(eles.length > 0) {
 								// unbind events
@@ -2235,7 +2645,7 @@
 									ele.removeData("alert__");
 								}
 								// bind initial value
-								eles.vals(vals[key] != null ? String(vals[key]) : "");
+								eles.vals(vals[key] != null ? vals[key] : "");
 							}
 						}
 					}
@@ -2243,37 +2653,52 @@
 				}
 				return this;
 			},
-			add : function(data) {
+			add : function(data, row) {
 				var opts = this.options;
 		        if (opts.data === null) {
 		            throw new Error("[Form.add]Data is null. you must input data");
 		        }
 
-		        if(data === undefined) {
-		        	// set default values
-		        	data = N.element.toData(opts.context.find(":input").not(":button"));
+		        var extractedData = N.element.toData(opts.context.find(":input").not(":button"));
+		        if(data != null) {
+		        	if(N.isNumeric(data)) {
+		        		row = data;
+		        		data = undefined;
+		        	} else {
+		        		$.extend(extractedData, data);
+		        	}
 		        }
+	        	extractedData.rowStatus = "insert";
 
-		        if(!N.isWrappedSet(data)) {
-		        	$.extend(N.element.toData(opts.context.find(":input").not(":button")), data);
-		        	data.rowStatus = "insert";
+	        	if(row > opts.data.length || row < 0) {
+					row = undefined;
+				}
 
-		        	if(!opts.addTop) {
-		        		opts.data.push(data);
+	        	if(row === undefined) {
+	        		if(!opts.addTop) {
+		        		opts.data.push(extractedData);
 		        		opts.row = opts.data.length - 1;
 		        	} else {
-		        		opts.data.splice(0, 0, data);
+		        		opts.data.splice(0, 0, extractedData);
 		        		opts.row = 0;
 		        	}
-		        	// Set revert data
-		        	if(opts.revert) {
-		        		this.revertData = $.extend({}, opts.data[opts.row]);
+	        	} else {
+		        	if(row === opts.data.length) {
+		        		opts.data.push(extractedData);
+		        		opts.row = opts.data.length - 1;
+		        	} else {
+		        		opts.data.splice(row, 0, extractedData);
+		        		opts.row = row;
 		        	}
+	        	}
+	        	// Set revert data
+	        	if(opts.revert) {
+	        		this.revertData = $.extend({}, opts.data[opts.row]);
+	        	}
 
-		        	this.bind();
+	        	this.bind();
 
-		        	N.ds.instance(opts.extObj !== null ? opts.extObj : this).notify(opts.extRow > -1 ? opts.extRow : opts.row);
-		        }
+	        	N.ds.instance(opts.extObj !== null ? opts.extObj : this).notify(opts.extRow > -1 ? opts.extRow : opts.row);
 
 				return this;
 			},
@@ -2294,6 +2719,12 @@
 				if(!opts.revert) {
 					N.error("[N.form.revert]Can not revert. N.form's revert option value is false");
 				}
+				var orgRow = opts.row;
+				this.unbind();
+				opts.row = orgRow;
+				for(var k in opts.data[opts.row]){
+					delete opts.data[opts.row][k];
+				}
 				$.extend(opts.data[opts.row], opts.data[opts.row], this.revertData);
 				opts.data[opts.row]._isRevert = true;
 				this.update(opts.row);
@@ -2307,7 +2738,7 @@
 			},
 			validate : function() {
 				var opts = this.options;
-				var eles = opts.context.find(":input");
+				var eles = opts.context.find(":input:not(:radio, :checkbox), :radio.select_template__, :checkbox.select_template__");
 				if(opts.validate) {
 					eles.not(".validate_false__").trigger("unformat.formatter");
 				} else {
@@ -2325,16 +2756,21 @@
 				return eles.filter(".validate_false__").length > 0 ? false : true;
 			},
 			val : function(key, val, notify) {
-				if(val === undefined) {
-					return this.options.data[this.options.row][key];
-				}
 				var opts = this.options;
+				if(val === undefined) {
+					return opts.data[opts.row][key];
+				} else {
+					if(val === null) {
+						val = "";
+					}
+				}
+
 				var vals = opts.data[opts.row];
 				var eles, ele;
 				var self = this;
 				var rdonyFg = false;
 				var dsabdFg = false;
-				eles = $(opts.context).find("#" + key + ", input:radio[id^='" + key + "'], input:checkbox[id^='" + key + "']");
+				eles = $(opts.context).find("#" + key + ", input:radio[name='" + key + "'], input:checkbox[name='" + key + "'], input:radio[id='" + key + "'], input:checkbox[id='" + key + "']");
 				if (eles.length > 0) {
 					var tagName = eles.get(0).tagName.toLowerCase();
 					var type = N.string.trimToEmpty(eles.attr("type")).toLowerCase();
@@ -2353,7 +2789,13 @@
 			                	dsabdFg = true;
 			                }
 
-							if (tagName === "textarea" || type === "text" || type === "password" || type === "hidden" || type === "file") {
+							if (tagName === "textarea" || type === "text" || type === "password" || type === "hidden" || type === "file"
+								// Support HTML5 Form's input types
+								|| type === "number" || type === "email" || type === "search" || type === "color"
+								// The date type does not support formatting, so it does not support it.
+								// || type === "date" || type === "datetime-local" || type === "month" || type === "time" || type === "week"
+								|| type === "range"
+								|| type === "url") {
 								// remove validator's dregs for rebind
 								ele.removeClass("validate_false__");
 								if(ele.instance("alert") !== undefined) {
@@ -2361,42 +2803,29 @@
 									ele.removeData("alert__");
 								}
 
-								if(ele.data("format") !== undefined && ele.data("validate") !== undefined) {
-									// put value
-									ele.val(String(val));
+								// put value
+								ele.val(String(val));
 
-									// validate
+								// validate
+								if(ele.data("validate") !== undefined) {
 									if (type !== "hidden") {
 										ele.trigger("focusout.form.validate");
 									}
+								}
 
-									if(notify !== false) {
-										// dataSync
-										ele.trigger("focusout.form.dataSync");
-									} else {
-										// add data changed flag
-										ele.addClass("data_changed__");
-										if(!opts.context.hasClass("row_data_changed__")) {
-											opts.context.addClass("row_data_changed__");
-										}
-									}
+								if(notify !== false) {
+									// dataSync
+									ele.trigger("focusout.form.dataSync");
+								} else {
+									// add data changed flag
+									ele.addClass("data_changed__");
+								}
 
-									// format
-									if (ele.is("input:password, input:hidden, input:file")) {
+								// format
+								if(ele.data("format") !== undefined) {
+									if (type !== "hidden" && type !== "password") {
 										ele.trigger("focusin.form.unformat");
 										ele.trigger("focusout.form.format");
-									}
-								} else {
-									ele.val(String(val));
-									if(notify !== false) {
-										// dataSync
-										ele.trigger("focusout.form.dataSync");
-									} else {
-										// add data changed flag
-										ele.addClass("data_changed__");
-										if(!opts.context.hasClass("row_data_changed__")) {
-											opts.context.addClass("row_data_changed__");
-										}
 									}
 								}
 							} else if(tagName === "select") {
@@ -2416,9 +2845,6 @@
 								} else {
 									// add data changed flag
 									ele.addClass("data_changed__");
-									if(!opts.context.hasClass("row_data_changed__")) {
-										opts.context.addClass("row_data_changed__");
-									}
 								}
 							} else if(tagName === "img") {
 								currVal = String(val);
@@ -2431,9 +2857,6 @@
 									vals.rowStatus = "update";
 									// add data changed flag
 									ele.addClass("data_changed__");
-									if(!opts.context.hasClass("row_data_changed__")) {
-										opts.context.addClass("row_data_changed__");
-									}
 								}
 
 								// put image path
@@ -2452,9 +2875,6 @@
 									vals.rowStatus = "update";
 									// add data changed flag
 									ele.addClass("data_changed__");
-									if(!opts.context.hasClass("row_data_changed__")) {
-										opts.context.addClass("row_data_changed__");
-									}
 								}
 
 								// put value
@@ -2482,7 +2902,7 @@
 						});
 					} else {
 						//radio, checkbox
-						eles = $(opts.context).find("input:radio[id^='" + key + "'], input:checkbox[id^='" + key + "']");
+						eles = $(opts.context).find(Form.getRadioNCheckBoxSelectorStr(key));
 						if(eles.length > 0) {
 							// remove validator's dregs for rebind
 							eles.removeClass("validate_false__");
@@ -2498,35 +2918,37 @@
 							} else {
 								// add data changed flag
 								$(eles.get(0)).addClass("data_changed__");
-								if(!opts.context.hasClass("row_data_changed__")) {
-									opts.context.addClass("row_data_changed__");
-								}
 							}
 						}
 					}
 
-					// be targeted of GC
+					// Empty variables
 					eles = ele = currVal = undefined;
 				} else {
 					// put value
-					opts.data[opts.row][key] = val;
+					if(opts.data[opts.row][key] !== val) {
+						opts.data[opts.row][key] = val;
 
-					// change row status
-                    if (opts.data[opts.row].rowStatus !== "insert" && opts.data[opts.row].rowStatus !== "delete") {
-                    	opts.data[opts.row].rowStatus = "update";
-                    	// add data changed flag
-                    	if(!opts.context.hasClass("row_data_changed__")) {
-                    		opts.context.addClass("row_data_changed__");
-                    	}
-                    }
+						// change row status
+	                    if (opts.data[opts.row].rowStatus !== "insert" && opts.data[opts.row].rowStatus !== "delete") {
+	                    	opts.data[opts.row].rowStatus = "update";
+	                    }
 
-
-                    // dataSync
-                    if(notify !== false) {
-                    	N.ds.instance(opts.extObj !== null ? opts.extObj : self).notify(opts.extRow > -1 ? opts.extRow : opts.row, key);
-                    }
+	                    // dataSync
+	                    if(notify !== false) {
+	                    	N.ds.instance(opts.extObj !== null ? opts.extObj : self).notify(opts.extRow > -1 ? opts.extRow : opts.row, key);
+	                    }
+					}
 				}
-				return this;
+
+				// add data changed flag
+            	if(opts.data[opts.row].rowStatus !== "insert"
+        			&& opts.data[opts.row].rowStatus !== "delete"
+        			&& !opts.context.hasClass("row_data_changed__")) {
+            		opts.context.addClass("row_data_changed__");
+            	}
+
+            	return this;
 			},
 			update : function(row, key) {
 				var opts = this.options;
@@ -2535,10 +2957,71 @@
 				} else {
 					if(row === this.row()) {
 						this.val(key, opts.data[row][key], false);
-						N.element.dataChanged(opts.context.find("#" + key + ", input:radio[id='" + key + "'][name='" + key + "'], input:checkbox[id='" + key + "'][name='" + key + "']"));
+						N.element.dataChanged(opts.context.find("#" + key + ":not(:radio, :checkbox), " + Form.getRadioNCheckBoxSelectorStr(key)));
 					}
 				}
 				return this;
+			}
+		});
+
+		// List
+		var List = N.list = function(data, opts) {
+			return this;
+		};
+
+		$.extend(List, {
+        	render : function(i, limit, delay, lastIdx, callType) {
+        		var opts = this.options;
+        		var self = this;
+
+				// clone li for create new row
+				tempRowEleClone = self.tempRowEle.clone(true, true).hide();
+				opts.context.append(tempRowEleClone);
+
+				if(opts.rowHandler !== null) {
+					opts.rowHandler.call(tempRowEleClone, i, tempRowEleClone, opts.data[i]);
+				}
+
+				// for row data bind, use N.form
+				N(opts.data[i]).form({
+					context : tempRowEleClone,
+					html: opts.html,
+					validate : opts.validate,
+					extObj : self,
+					extRow : i,
+					revert : opts.revert,
+					unbind : false
+				}).bind();
+
+				tempRowEleClone.show(delay, function() {
+					i++;
+					if(opts.height === 0 || opts.scrollPaging.size === 0 || (callType === "append" && data.length > 0 && data.length <= opts.scrollPaging.size)) {
+						lastIdx = opts.data.length - 1;
+					} else {
+						lastIdx = opts.scrollPaging.idx + (limit - 1);
+					}
+					// -4(5) is visualization rendering buffer;
+					if(i-4 === lastIdx) {
+						delay = 0;
+					} else {
+						delay = opts.createRowDelay;
+					}
+					if(i <= lastIdx) {
+						if (opts.data.length > 0) {
+							opts.isBinding = true;
+
+							List.render.call(self, i, limit, delay, lastIdx, callType);
+						}
+					} else if(i === lastIdx + 1) {
+						if(opts.onBind !== null) {
+							opts.onBind.call(opts.context, opts.context, opts.data);
+						}
+						opts.scrollPaging.limit = opts.scrollPaging.size === 0 ? opts.data.length : opts.scrollPaging.size;
+
+						opts.isBinding = false;
+						opts.context.dequeue("bind");
+					}
+				});
 			}
 		});
 
@@ -2549,10 +3032,12 @@
 				row : -1, // selected row index
 				beforeRow : -1, // before selected row index
 				context : null,
-				heigth : 0,
+				height : 0,
 				validate : true,
 				html : false,
 				addTop : false,
+				addSelect : true,
+				appendScroll : true,
 				filter : false,
 				resizable : false,
 				vResizable : false,
@@ -2562,7 +3047,7 @@
 				multiselect : false,
 				checkAll : null, // selector
 				checkAllTarget : null, // selector
-				checkOnlyTarget : null, // TODO
+				checkSingleTarget : null, // TODO
 				hover : false,
 				revert : false,
 				createRowDelay : 1,
@@ -2615,10 +3100,19 @@
 			}
 
 			// set garbage rows count in table
-			this.options.misc.withoutTbodyLength = this.options.context.children().length - this.options.context.children("tbody").length;
+			this.options.misc.withoutTbodyLength = this.options.context.children().length - this.options.context.children("tbody").length - this.options.context.children("tfoot").length;
+
+			// If the value of the opts.scrollPaging.size option is greater than 0, the addTop option is unconditionally set to true.
+			if(!this.options.addTop) {
+				this.options.scrollPaging.size = 0;
+				this.options.createRowDelay = 0;
+			}
+
+			// for bind "append"
+			this.options.scrollPaging.defSize = this.options.scrollPaging.size;
 
 			// set tbody template
-			this.tbodyTemp = this.options.context.find("> tbody").clone(true, true);
+			this.tempRowEle = this.options.context.find("> tbody").clone(true, true);
 
 			// set style class name to context element
 			this.options.context.addClass("grid__");
@@ -2632,7 +3126,7 @@
 
 				var self = this;
 				// bind tbody click event for select, multiselect options
-				this.tbodyTemp.bind("click.grid.tbody", function(e) {
+				this.tempRowEle.bind("click.grid.tbody", function(e) {
 					var thisEle = $(this);
 					var retFlag;
 					var selected;
@@ -2665,7 +3159,7 @@
 			}
 
 			// set cell count in tbody
-			this.cellCnt = Grid.cellCnt(this.tbodyTemp);
+			this.cellCnt = Grid.cellCnt(this.tempRowEle);
 
 			//remove colgroup when the resizable option is true
 			if(this.options.resizable) {
@@ -2679,14 +3173,19 @@
 
 			// set tbody cell's id attribute into th cell in thead
 			this.thead = Grid.setTheadCellInfo.call(this);
-			this.tbodyContainer = this.options.context;
+			this.rowContainerEle = this.options.context;
 			if(this.options.height > 0) {
-				this.tbodyContainer = this.options.context.closest("div.tbody_wrap__ > .grid__");
+				this.rowContainerEle = this.options.context.closest("div.tbody_wrap__ > .grid__");
         	}
 
 			// set function for check all checkbox in grid
 			if(this.options.checkAll !== null && this.options.checkAllTarget !== null) {
 				Grid.checkAll.call(this);
+			}
+
+			// set function for check single checkbox in grid
+			if(this.options.checkSingleTarget !== null) {
+				Grid.checkSingle.call(this);
 			}
 
 			// sortable, v(ertical)Resizable
@@ -2720,18 +3219,15 @@
 			removeColgroup : function() {
 				var opts = this.options;
 				if(opts.context.find("colgroup").length > 0) {
-					var lastTr = opts.context.find("thead > tr:last");
+					var firstTr = opts.context.find("thead > tr:first");
 					opts.context.find("colgroup > col").each(function(i) {
-						lastTr.find("th:eq(" + String(i) + ")").css("width", this.style.width).removeAttr("scope");
+						firstTr.find("th:eq(" + String(i) + ")").css("width", this.style.width).removeAttr("scope");
 					}).parent().remove();
 					this.options.misc.withoutTbodyLength -= 1;
 				}
 			},
 			fixHeader : function() {
 				var opts = this.options;
-
-				// addTop option is asolute true when fixed header mode
-				opts.addTop = true;
 
 				opts.context.css({
 					"table-layout" : "fixed",
@@ -2770,7 +3266,7 @@
 		        opts.context.find("> tbody td").css({
 	                "border-top" : "none"
 		        });
-		        this.tbodyTemp.find("td").css({
+		        this.tempRowEle.find("td").css({
 	                "border-top" : "none"
 		        });
 		        var tbodyWrap = opts.context.wrap('<div class="tbody_wrap__"/>').parent().css({
@@ -2792,29 +3288,31 @@
 		        // Scroll paging
 		        var self = this;
 		        var defSPSize = opts.scrollPaging.limit;
-		        var tbodyLength;
+		        var rowEleLength;
 		        tbodyWrap.scroll(function() {
-		        	var thisWrap = $(this);
-                    if (thisWrap.scrollTop() >= opts.context.height() - thisWrap.height()) {
-                    	tbodyLength = opts.context.find("> tbody").length;
-                    	if (tbodyLength >= opts.scrollPaging.idx + defSPSize) {
-	                        if (tbodyLength > 0 && tbodyLength <= opts.data.length) {
-	                            opts.scrollPaging.idx += defSPSize;
-	                        }
+		        	if(opts.scrollPaging.size > 0) {
+			        	var thisWrap = $(this);
+	                    if (thisWrap.scrollTop() >= opts.context.height() - thisWrap.height()) {
+	                    	rowEleLength = opts.context.find("> tbody").length;
+	                    	if (rowEleLength >= opts.scrollPaging.idx + defSPSize) {
+		                        if (rowEleLength > 0 && rowEleLength <= opts.data.length) {
+		                            opts.scrollPaging.idx += defSPSize;
+		                        }
 
-	                        if (opts.scrollPaging.idx + opts.scrollPaging.limit >= opts.data.length) {
-	                        	opts.scrollPaging.limit = opts.data.length - opts.scrollPaging.idx;
-	                        } else {
-	                        	opts.scrollPaging.limit = defSPSize;
-	                        }
+		                        if (opts.scrollPaging.idx + opts.scrollPaging.limit >= opts.data.length) {
+		                        	opts.scrollPaging.limit = opts.data.length - opts.scrollPaging.idx;
+		                        } else {
+		                        	opts.scrollPaging.limit = defSPSize;
+		                        }
 
-	                        if(opts.scrollPaging.idx < opts.data.length) {
-	                        	self.bind(undefined, "grid.bind");
-	                        } else if(opts.scrollPaging.idx === opts.data.length) {
-	                        	opts.scrollPaging.limit = opts.scrollPaging.size;
-	                        }
-	                    }
-	                }
+		                        if(opts.scrollPaging.idx < opts.data.length) {
+		                        	self.bind(undefined, "grid.bind");
+		                        } else if(opts.scrollPaging.idx === opts.data.length) {
+		                        	opts.scrollPaging.limit = opts.scrollPaging.size === 0 ? opts.data.length : opts.scrollPaging.size;
+		                        }
+		                    }
+		                }
+		        	}
 	            });
 
 		        // Create grid footer
@@ -2844,21 +3342,31 @@
 	        	gridWrap.css("margin-bottom", "0");
 
 	        	var currHeight, tbodyOffset, tfootHeight = 0;
-	        	vResizable.bind("mousedown.grid.vResize", function(e) {
-	        		if((e.which || e.button) === 1) {
+	        	vResizable.bind("mousedown.grid.vResize touchstart.grid.vResize", function(e) {
+					if(e.originalEvent.touches) {
+						e.preventDefault();
+						e.stopPropagation();
+					}
+
+	        		if(e.originalEvent.touches || (e.which || e.button) === 1) {
 	        			if(tfootWrap !== undefined) {
 	        				tfootHeight = tfootWrap.height();
 	        			}
 	        			tbodyOffset = tbodyWrap.offset();
 
-	        			$(document).bind("dragstart.grid.vResize, selectstart.grid.vResize", function() {
+	        			$(document).bind("dragstart.grid.vResize selectstart.grid.vResize", function() {
 	        				return false;
 	        			});
 	        			pressed = true;
 
-	        			$(window.document).bind("mousemove.grid.vResize", function(e) {
+	        			$(window.document).bind("mousemove.grid.vResize touchmove.grid.vResize", function(e) {
+	        				var mte;
+							if(e.originalEvent.touches) {
+								e.stopPropagation();
+								mte = e.originalEvent.touches[0];
+							}
 	        				if(pressed) {
-	        					currHeight = (e.pageY - tbodyOffset.top - tfootHeight) + "px";
+	        					currHeight = ((mte !== undefined ? mte.pageY : e.pageY) - tbodyOffset.top - tfootHeight) + "px";
 	        					tbodyWrap.css({
 	        						"height" : currHeight,
 	        						"max-height" : currHeight
@@ -2866,8 +3374,8 @@
 	        				}
 	        			});
 
-	        			$(window.document).bind("mouseup.grid.vResize", function() {
-	        				$(document).unbind("dragstart.grid.vResize").unbind("selectstart.grid.vResize").unbind("mousemove.grid.vResize").unbind("mouseup.grid.vResize");
+	        			$(window.document).bind("mouseup.grid.vResize touchend.grid.vResize", function(e) {
+	        				$(document).unbind("dragstart.grid.vResize selectstart.grid.vResize mousemove.grid.vResize touchmove.grid.vResize mouseup.grid.vResize touchend.grid.vResize");
 	        				pressed = false;
 	        			});
 	        		}
@@ -2891,7 +3399,7 @@
 					theadCells.css("padding-left", "0");
 					theadCells.css("padding-right", "0");
 				}
-				var resizeBarWidth = 3;
+				var resizeBarWidth = 5;
 				var resizeBarCorrectionHeight = N.browser.is("ie") ? -2 : 0;
 				var context;
 				if (opts.height > 0) {
@@ -2900,8 +3408,8 @@
     	        	context = opts.context;
     	        }
 
-				this.thead.bind("mouseover.grid.resize", function() {
-					resizeBarHeight = (opts.height > 0 ? self.tbodyContainer.closest(".grid_wrap__").height() - 3 : self.tbodyContainer.height() + resizeBarCorrectionHeight) + 1 + opts.misc.resizeBarCorrectionHeight;
+				this.thead.bind("mouseover.grid.resize touchstart.grid.resize", function() {
+					resizeBarHeight = (opts.height > 0 ? self.rowContainerEle.closest(".grid_wrap__").height() - 3 : self.rowContainerEle.height() + resizeBarCorrectionHeight) + 1 + opts.misc.resizeBarCorrectionHeight;
 					theadCells.each(function() {
 						var cellEle = $(this);
 						cellEle.find("> .resize_bar__").css({
@@ -2919,18 +3427,25 @@
 		            	"position": "absolute",
 		            	"width": resizeBarWidth + "px",
 		            	"height": String(cellEle.outerHeight()) + "px",
-		            	"opacity": "0"
+		            	"opacity": "0",
+		            	"background-color" : "#000",
+		            	"z-index" : 9999999
 		            }).appendTo(cellEle);
 
-		            resizeBar.bind("mousedown.grid.resize", function(e) {
-		            	if((e.which || e.button) === 1) {
+		            resizeBar.bind("mousedown.grid.resize touchstart.grid.resize", function(e) {
+		            	var dte;
+						if(e.originalEvent.touches) {
+							dte = e.originalEvent.touches[0];
+						}
+
+		            	if(e.originalEvent.touches || (e.which || e.button) === 1) {
 		            		$(this).css({
 		            			"opacity": ""
 		            		}).animate({
 		            			"height" : resizeBarHeight + "px"
 		            		}, 150);
 
-		            		startOffsetX = e.pageX;
+		            		startOffsetX = dte !== undefined ? dte.pageX : e.pageX;
 		            		currResizeBarEle = $(this);
 		            		currCellEle = currResizeBarEle.parent("th");
 		            		currNextCellEle = currResizeBarEle.parent("th").next();
@@ -2962,7 +3477,7 @@
 		            		defWidth = Math.floor(currCellEle.width()) + opts.misc.resizableCorrectionWidth;
 		            		nextDefWidth = !islast ? Math.floor(currNextCellEle.width()) + opts.misc.resizableCorrectionWidth : Math.floor(context.width());
 
-		            		$(document).bind("dragstart.grid.resize, selectstart.grid.resize", function() {
+		            		$(document).bind("dragstart.grid.resize selectstart.grid.resize", function() {
 		            			return false;
 		            		});
 		            		isPressed = true;
@@ -2970,10 +3485,16 @@
 		            		minPx = !islast ? Math.floor(currNextCellEle.offset().left) : Math.floor(currCellEle.offset().left) + Math.floor(currCellEle.outerWidth());
 		            		maxPx = minPx + (!islast ? Math.floor(currNextCellEle.outerWidth()) : 7680);
 		            		movedPx = defPx = Math.floor(currResizeBarEle.parent("th").offset().left);
-		            		$(window.document).bind("mousemove.grid.resize", function(e) {
+		            		$(window.document).bind("mousemove.grid.resize touchmove.grid.resize", function(e) {
+		            			var mte;
+								if(e.originalEvent.touches) {
+									e.stopPropagation();
+									mte = e.originalEvent.touches[0];
+								}
 		            			if(isPressed) {
-		            				if(defPx < e.pageX && maxPx > e.pageX) {
-		            					movedPx = e.pageX - startOffsetX;
+		            				var mPageX = mte !== undefined ? mte.pageX : e.pageX;
+		            				if(defPx < mPageX && maxPx > mPageX) {
+		            					movedPx = mPageX - startOffsetX;
 	            						currWidth = defWidth + movedPx;
 	            						nextCurrWidth = !islast ? nextDefWidth - movedPx : nextDefWidth + movedPx;
 		            					if(currWidth > 0 && nextCurrWidth > 0) {
@@ -2992,7 +3513,7 @@
 		            		});
 
 		            		var currResizeBar = $(this);
-		            		$(window.document).bind("mouseup.grid.resize", function(e) {
+		            		$(window.document).bind("mouseup.grid.resize touchend.grid.resize", function(e) {
 		            			currResizeBar.animate({
 	            					"height" : String(cellEle.outerHeight()) + "px"
 	            				}, 200, function() {
@@ -3001,7 +3522,7 @@
             						});
 	            				});
 
-		            			$(document).unbind("dragstart.grid.resize").unbind("selectstart.grid.resize").unbind("mousemove.grid.resize").unbind("mouseup.grid.resize");
+		            			$(document).unbind("dragstart.grid.resize selectstart.grid.resize mousemove.grid.resize touchmove.grid.resize mouseup.grid.resize touchend.grid.resize");
 		            			isPressed = false;
 		            		});
 		            	}
@@ -3062,9 +3583,20 @@
 						e.preventDefault();
 						e.stopPropagation();
 
-						var theadCell = $(this).closest("th");
+						var thisEle = $(this);
+						var visiblePanel = thead.find(".data_filter_panel__.visible__");
+						if(visiblePanel.length > 0) {
+							visiblePanel.removeClass("visible__").addClass("hidden__");
+							var eventNm = N.element.whichTransitionEvent(visiblePanel);
+							visiblePanel.unbind(eventNm);
+							visiblePanel.one(eventNm, function(e){
+								if(!thisEle.hasClass("btn_data_filter__")) {
+									$(this).hide();
+								}
+					        }).trigger("nothing");
+						}
 
-						thead.find(".data_filter_panel__:visible").hide();
+						var theadCell = $(this).closest("th");
 
 						var panel;
 						var searchBox;
@@ -3073,12 +3605,11 @@
 						var dataFilterProgress;
 
 						if(theadCell.find(".data_filter_panel__").length > 0) {
-							panel = theadCell.find(".data_filter_panel__");
+							panel = theadCell.find(".data_filter_panel__").hide().removeClass("visible__").addClass("hidden__");
 							dataFilterProgress = theadCell.find(".data_filter_progress__");
 							searchBox = panel.find(".data_filter_search__");
 							panel.find(".data_filter_checkall_box__ .data_filter_total_cnt__").text('(' + opts.data.length + ')');
 							filterListBox = panel.find(".data_filter_list__");
-							panel.show();
 
 							// Index filter keys
 							if(bfrSelId !== id) {
@@ -3106,7 +3637,7 @@
 								clonedData = opts.data.get().slice(0);
 							}
 
-							panel = $('<div align="left" class="data_filter_panel__">'
+							panel = $('<div align="left" class="data_filter_panel__ hidden__">'
 									+ 	'<div class="data_filter_search__">'
 									+ 		'<input class="data_filter_search_word__" type="text">'
 									+		'<a class="data_filter_search_btn__" href="#" title="' + N.message.get(opts.message, "search") + '">'
@@ -3117,6 +3648,7 @@
 									+ 	'<ul class="data_filter_list__"></ul>'
 									+ '</div>')
 							.css("z-index", 1)
+							.hide()
 							.appendTo(theadCell).bind("click.grid.dataFilter, mouseover.grid.dataFilter", function(e) {
 								e.stopPropagation();
 							});
@@ -3133,10 +3665,10 @@
 							// search btn event
 							panel.find(".data_filter_search_btn__").bind("click.grid.dataFilter", function(e) {
 								e.preventDefault();
-								var searchWord = N.string.escapeSelectorChar(panel.find(".data_filter_search_word__").val());
+								var searchWord = panel.find(".data_filter_search_word__").val();
 								if(N.string.trimToNull(searchWord) !== null) {
-									var retChkbxs = filterListBox.find("li[class*='" + searchWord + "']").show().find(":checkbox").prop("checked", true);
-									filterListBox.find("li:not([class*='" + searchWord + "'])").hide().find(":checkbox").prop("checked", false).last().trigger("do.grid.dataFilter");
+									var retChkbxs = filterListBox.find("li:contains('" + searchWord + "')").show().find(":checkbox").prop("checked", true);
+									filterListBox.find("li:not(:contains('" + searchWord + "'))").hide().find(":checkbox").prop("checked", false).last().trigger("do.grid.dataFilter");
 									retChkbxs.each(function() {
 										chkboxEle = $(this);
 										chkboxEle.parent().children("span").text('(' + String(chkboxEle.data("length")) + ')')
@@ -3146,9 +3678,9 @@
 									filterListBox.find("li :checkbox").prop("checked", true).last().trigger("do.grid.dataFilter");
 								}
 							});
-							panel.find(".data_filter_search_word__").keyup(function(e) {
-								var keycode = (e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode));
-			                    if (keycode == 13) {
+							panel.find(".data_filter_search_word__").bind("keyup.grid.dataFilter", function(e) {
+								var keyCode = (e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode));
+			                    if (keyCode == 13) {
 			                    	panel.find(".data_filter_search_btn__").click();
 			                    }
 							});
@@ -3197,6 +3729,10 @@
 								filteredKeys = filterKeys;
 							}
 						}
+
+						panel.show(0, function() {
+							N(this).removeClass("hidden__").addClass("visible__");
+						});
 
 						var itemSeq = 0;
 						for(var k in filterKeys) {
@@ -3283,7 +3819,7 @@
 
 										// Prevent event propagation when browser is stoped.
 										setTimeout(function() {
-											dataFilterProgress.fadeTo("opacity", 0.3).hide();
+											dataFilterProgress.hide();
 										}, 0);
 									});
 								});
@@ -3297,9 +3833,19 @@
 							itemSeq++;
 						}
 
-						$(document).bind("click.grid.dataFilter", function(e) {
-							$(document).unbind("click.grid.dataFilter");
-							thead.find(".data_filter_panel__").hide();
+						$(document).unbind("click.grid.dataFilter touchstart.grid.dataFilter");
+						$(document).one("click.grid.dataFilter touchstart.grid.dataFilter", function(e) {
+							if($(e.target).closest(".data_filter_panel__").length === 0 && !$(e.target).hasClass("btn_data_filter__")) {
+								var panel = thead.find(".data_filter_panel__.visible__");
+								if(panel.length > 0) {
+									panel.removeClass("visible__").addClass("hidden__");
+									var eventNm = N.element.whichTransitionEvent(panel);
+									panel.unbind(eventNm);
+									panel.one(eventNm, function(e){
+						            	$(this).hide();
+							        }).trigger("nothing");
+								}
+							}
 						});
 
 						bfrSelId = id;
@@ -3308,23 +3854,31 @@
         	checkAll : function() {
         		var opts = this.options;
     	        var thead = this.thead;
-    	        var tbodyContainer = this.tbodyContainer;
+    	        var rowContainerEle = this.rowContainerEle;
 
 				var checkAll = thead.find(this.options.checkAll);
 				checkAll.bind("click.grid.checkAll", function() {
 					if(!$(this).prop("checked")) {
-						tbodyContainer.find("tbody td " + opts.checkAllTarget + ":checked").removeProp("checked");
+						rowContainerEle.find("tbody td " + opts.checkAllTarget + ":checked").removeProp("checked");
 					} else {
-						tbodyContainer.find("tbody td " + opts.checkAllTarget + ":not(':checked')").prop("checked", true);
+						rowContainerEle.find("tbody td " + opts.checkAllTarget + ":not(':checked')").prop("checked", true);
 					}
 				});
-				tbodyContainer.on("click.grid.checkAllTarget", "tbody td " + opts.checkAllTarget, function() {
-					if(tbodyContainer.find("tbody td " + opts.checkAllTarget).length
-							=== tbodyContainer.find("tbody td " + opts.checkAllTarget + ":checked").length) {
+				rowContainerEle.on("click.grid.checkAllTarget", "tbody td " + opts.checkAllTarget, function() {
+					if(rowContainerEle.find("tbody td " + opts.checkAllTarget).length
+							=== rowContainerEle.find("tbody td " + opts.checkAllTarget + ":checked").length) {
 						checkAll.prop("checked", true);
 					} else {
 						checkAll.removeProp("checked");
 					}
+				});
+        	},
+        	checkSingle : function() {
+        		var opts = this.options;
+    	        var rowContainerEle = this.rowContainerEle;
+
+				rowContainerEle.on("click.grid.checkSingleTarget", "tbody td " + opts.checkSingleTarget, function() {
+					rowContainerEle.find("tbody td " + opts.checkSingleTarget).not(this).removeAttr("checked");
 				});
         	},
         	setTheadCellInfo : function() {
@@ -3336,7 +3890,7 @@
     	        	thead = opts.context.find("thead");
     	        }
     			var id;
-    			this.tbodyTemp.find("> tr td").each(function(i) {
+    			this.tempRowEle.find("> tr td").each(function(i) {
     				id = $(this).attr("id");
     				if(id === undefined) {
     					id = $(this).find("[id]").attr("id");
@@ -3372,28 +3926,24 @@
 					if(this.options.select || this.options.multiselect) {
 						// TODO
 					} else {
-						N.error("[N.gird.data]select or multiselect option is must be true(boolean)");
+						N.error("[N.grid.data]select or multiselect option is must be true(boolean)");
 					}
 				} else if(rowStatus === "checked") {
-					if(this.options.checkAll !== null && this.options.checkAllTarget !== null) {
-						var opts = this.options;
-						var retData = [];
+					var opts = this.options;
+					var retData = [];
 
-						// clone arguments
-						var args = Array.prototype.slice.call(arguments, 0);
+					// clone arguments
+					var args = Array.prototype.slice.call(arguments, 0);
 
-						this.tbodyContainer.find("tbody td " + this.options.checkAllTarget + ":checked").each(function() {
-							if(arguments.length > 1) {
-								args[0] = opts.data[N(this).closest("tbody").index() - opts.misc.withoutTbodyLength];
-								retData.push(N.json.mapFromKeys.apply(N.json, args));
-							} else {
-								retData.push(opts.data[N(this).closest("tbody").index()  - opts.misc.withoutTbodyLength]);
-							}
-						});
-						return retData;
-					} else {
-						N.error("[N.gird.data]checkAll and checkAllTarget options are must be assigned");
-					}
+					this.rowContainerEle.find("tbody td " + N.string.trimToEmpty(this.options.checkAllTarget) + N.string.trimToEmpty(this.options.checkSingleTarget) + ":checked").each(function() {
+						if(arguments.length > 1) {
+							args[0] = opts.data[N(this).closest("tbody").index() - opts.misc.withoutTbodyLength];
+							retData.push(N.json.mapFromKeys.apply(N.json, args));
+						} else {
+							retData.push(opts.data[N(this).closest("tbody").index()  - opts.misc.withoutTbodyLength]);
+						}
+					});
+					return retData;
 				} else {
 					if(arguments.length > 1) {
 						var args = Array.prototype.slice.call(arguments, 0);
@@ -3431,9 +3981,10 @@
 			check : function(indexArr) {
 				var opts = this.options;
 				if(indexArr === undefined) {
-					return this.tbodyContainer.find("tbody td " + opts.checkAllTarget + ":checked").map(function() {
+					var rtnArr = this.rowContainerEle.find("tbody td " + N.string.trimToEmpty(this.options.checkAllTarget) + N.string.trimToEmpty(this.options.checkSingleTarget) + ":checked").map(function() {
 						return N(this).closest("tbody").index() - opts.misc.withoutTbodyLength;
 					}).get();
+					return rtnArr;
 				} else {
 					if(N.type(indexArr) === "number") {
 						// TODO
@@ -3444,155 +3995,185 @@
 					return this;
 				}
 			},
-			bind : function(data) {
+			/**
+			 * callType arguments is call type about scrollPaging(internal) or data filter(internal) or data append(external)
+			 * callType : "append", "grid.bind", "grid.dataFilter", "grid.sort"
+			 */
+			bind : function(data, callType) {
 				var opts = this.options;
 
-				// for internal call by scrollPaging and data filter
-				var callFrom = arguments[1];
+				if(!opts.isBinding) {
+					// remove all sort status
+					if(opts.sortable) {
+						this.thead.find(".sortable__").remove();
+					}
 
-				// remove all sort status
-				if(opts.sortable) {
-					this.thead.find(".sortable__").remove();
-				}
+					if(opts.data && callType === "append") {
+						opts.scrollPaging.size = 0;
+						// Merge data to binded data;
+						opts.scrollPaging.idx = opts.data.length - 1;
+						$.merge(opts.data, data);
+					} else {
+						opts.scrollPaging.size = opts.scrollPaging.defSize;
+						// rebind new data
+						if(data != null) {
+							opts.data = N.type(data) === "array" ? N(data) : data;
+						}
+					}
 
-				//to rebind new data
-				if(data !== undefined) {
-					opts.data = N.type(data) === "array" ? N(data) : data;
-				}
+					// remove all data filter status
+					if(opts.filter || this.thead.find("> tr th[data-filter='true']").length > 0) {
+						// [callType === "grid.sort"]To keep your filter list even after sorting delete this codes.
+						if(callType !== "grid.dataFilter" && callType !== "grid.sort"
+							|| (!(callType !== "grid.dataFilter" && callType !== "grid.sort") && callType === "grid.sort")) {
+							this.thead.find("th .data_filter_panel__").remove();
 
-				// remove all data filter status
-				if(opts.filter || this.thead.find("> tr th[data-filter='true']").length > 0) {
-					if(callFrom !== "grid.dataFilter" && callFrom !== "grid.sort") {
-						this.thead.find("th .data_filter_panel__").remove();
+							if(callType !== "grid.dataFilter" && callType !== "grid.sort") {
+								this.thead.find(".btn_data_filter__")
+								.removeClass("btn_data_filter_empty__ btn_data_filter_part__ btn_data_filter_full__")
+								.addClass("btn_data_filter_full__");
 
-						this.thead.find(".btn_data_filter__")
-						.removeClass("btn_data_filter_empty__ btn_data_filter_part__ btn_data_filter_full__")
-						.addClass("btn_data_filter_full__");
+								if(opts.data.length > 0) {
+									this.thead.find(".btn_data_filter__").removeClass("hidden__").addClass("visible__");
+								} else {
+									this.thead.find(".btn_data_filter__").removeClass("visible__").addClass("hidden__");
+								}
+							}
+						}
+					}
 
-						if(opts.data.length > 0) {
-							this.thead.find(".btn_data_filter__").show();
+					var tempRowEleClone;
+
+					if(opts.checkAll !== null) {
+						this.thead.find(opts.checkAll).prop("checked", false);
+					}
+					if (opts.data.length > 0 || (callType === "append" && data && data.length > 0)) {
+						//clear tbody visual effect
+						opts.context.find("tbody").clearQueue().stop();
+						if(callType !== "grid.bind") {
+							if(callType === "append" && data.length > 0) {
+								opts.scrollPaging.idx = opts.data.length - data.length;
+							} else {
+								opts.scrollPaging.idx = 0;
+							}
+						}
+
+						if(opts.scrollPaging.idx === 0) {
+							//remove tbodys in grid body area
+							if(callType === "append" && data.length > 0) {
+								opts.context.find("tbody > tr > td.empty__").parent().parent().remove();
+							} else {
+								opts.context.find("tbody").remove();
+							}
+						}
+
+						var i = opts.scrollPaging.idx;
+						var limit;
+						if(opts.height === 0 || opts.scrollPaging.size === 0 || (callType === "append" && data.length > 0 && data.length <= opts.scrollPaging.size)) {
+							limit = opts.data.length;
 						} else {
-							this.thead.find(".btn_data_filter__").hide();
+							limit = Math.min(opts.scrollPaging.limit, opts.data.length);
+						}
+
+						var self = this;
+						var delay = opts.createRowDelay;
+						var lastIdx;
+
+						List.render.call(this, i, limit, delay, lastIdx, callType);
+						if(opts.appendScroll && i > 0 && callType === "append") {
+							opts.context.parent(".tbody_wrap__").stop().animate({
+								"scrollTop" : opts.context.parent(".tbody_wrap__").prop("scrollHeight")
+							}, 300, 'swing');
 						}
 					} else {
-						// To keep your filter list even after sorting delete this codes.
-						if(callFrom === "grid.sort") {
-							this.thead.find(".data_filter_panel__").remove();
-						}
-					}
-				}
-
-				var tbodyTempClone;
-
-				if(opts.checkAll !== null) {
-					this.thead.find(opts.checkAll).prop("checked", false);
-				}
-				if (opts.data.length > 0) {
-					//clear tbody visual effect
-					opts.context.find("tbody").clearQueue().stop();
-					if(callFrom !== "grid.bind") {
-						opts.scrollPaging.idx = 0;
-					}
-					if(opts.scrollPaging.idx === 0) {
 						//remove tbodys in grid body area
 						opts.context.find("tbody").remove();
+						opts.context.append('<tbody><tr><td class="empty__" colspan="' + this.cellCnt + '">' +
+								N.message.get(opts.message, "empty") + '</td></tr></tbody>');
+						opts.context.append(tempRowEleClone);
 					}
 
-					var i = opts.scrollPaging.idx;
-					var limit;
-					if(opts.height > 0) {
-						limit = Math.min(opts.scrollPaging.limit, opts.data.length);
-					} else {
-						limit = opts.data.length;
-					}
-					var self = this;
-					var delay = opts.createRowDelay;
-					var lastIdx;
-					var render = function() {
-						// clone tbody for create new row
-						tbodyTempClone = self.tbodyTemp.clone(true, true).hide();
-						opts.context.append(tbodyTempClone);
-
-						if(opts.rowHandler !== null) {
-							opts.rowHandler.call(tbodyTempClone, i, tbodyTempClone, opts.data[i]);
-						}
-
-						// for row data bind, use N.form
-						N(opts.data[i]).form({
-							context : tbodyTempClone,
-							html: opts.html,
-							validate : opts.validate,
-							extObj : self,
-							extRow : i,
-							revert : opts.revert,
-							unbind : false
-						}).bind();
-
-						tbodyTempClone.show(delay, function() {
-							i++;
-							lastIdx = opts.scrollPaging.idx + limit - 1;
-							if(i === lastIdx) {
-								delay = 0;
-							} else {
-								delay = opts.createRowDelay;
-							}
-							if(i <= lastIdx) {
-								if (opts.data.length > 0) {
-									render();
-								}
-							} else if(i === lastIdx + 1) {
-								if(opts.onBind !== null) {
-									opts.onBind.call(opts.context, opts.context, opts.data);
-								}
-								opts.scrollPaging.limit = opts.scrollPaging.size;
-							}
-						});
-					};
-					render();
 				} else {
-					//remove tbodys in grid body area
-					opts.context.find("tbody").remove();
-					opts.context.append('<tbody><tr><td class="empty__" colspan="' + this.cellCnt + '">' +
-							N.message.get(opts.message, "empty") + '</td></tr></tbody>');
-					opts.context.append(tbodyTempClone);
+					var self = this;
+					var args = arguments;
+					opts.context.queue("bind", function() {
+						self.bind.apply(self, args);
+					});
 				}
-
 				return this;
 			},
-			add : function(data) {
+			add : function(data, row) {
 				var opts = this.options;
 				if (opts.context.find("td.empty__").length > 0) {
 					opts.context.find("tbody").remove();
 				}
-				var tbodyTempClone = this.tbodyTemp.clone(true, true);
+				var tempRowEleClone = this.tempRowEle.clone(true, true);
 
-				if(opts.addTop) {
-					opts.context.find("thead").after(tbodyTempClone);
+				if(N.isNumeric(data)) {
+	        		row = data;
+	        	}
+
+				if(row > opts.data.length || row < 0) {
+					row = undefined;
+				}
+
+				if(row === undefined) {
+					if(opts.addTop) {
+						opts.context.find("thead").after(tempRowEleClone);
+					} else {
+						opts.context.append(tempRowEleClone);
+					}
 				} else {
-					opts.context.append(tbodyTempClone);
+					var selRowEle = opts.context.find("tbody:eq(" + row + ")");
+					var scrollTop;
+
+					if(row === 0) {
+						opts.context.find("thead").after(tempRowEleClone);
+					} else if(row === opts.context.find("tbody").length) {
+						selRowEle = opts.context.find("tbody:eq(" + (row - 1) + ")");
+					} else {
+						opts.context.find("tbody:eq(" + row + ")").before(tempRowEleClone);
+					}
+
+					scrollTop = (row * selRowEle.outerHeight()) - (opts.height / 2) + (selRowEle.outerHeight() / 2);
+					if(scrollTop < 0) {
+						scrollTop = 0;
+					}
+					opts.context.parent(".tbody_wrap__").stop().animate({ "scrollTop" : scrollTop }, 300, 'swing', function() {
+						if(opts.addSelect) {
+							$(this).find("tbody:eq(" + row + ")").trigger("click.grid.tbody");
+						}
+					});
 				}
 
 				// for new row data bind, use N.form
 				var form = opts.data.form({
-					context : tbodyTempClone,
+					context : tempRowEleClone,
 					html: opts.html,
 					validate : opts.validate,
 					extObj : this,
-					extRow : opts.addTop ? 0 : opts.data.length,
+					extRow : row === undefined ? (opts.addTop ? 0 : opts.data.length) : row,
 					addTop : opts.addTop,
 					revert : opts.revert
-				}).add(data);
+				}).add(data, row);
 
 				if(opts.rowHandler !== null) {
-					opts.rowHandler.call(tbodyTempClone, form.options.extRow, tbodyTempClone, form.data(true)[0]);
+					opts.rowHandler.call(tempRowEleClone, form.options.extRow, tempRowEleClone, form.data(true)[0]);
 				}
 
 				// unselect rows
 				opts.context.find("> tbody").removeClass("grid_selected__");
 
 				// focus to first input element
-				if(tbodyTempClone.find(":input:eq(0)").length > 0) {
-					tbodyTempClone.find(":input:eq(0)").get(0).focus();
+
+				if(row === undefined) {
+					opts.context.parent(".tbody_wrap__").stop().animate({
+						"scrollTop" : (opts.addTop ? 0 : opts.context.parent(".tbody_wrap__").prop("scrollHeight"))
+					}, 300, 'swing', function() {
+						if(opts.addSelect) {
+							$(this).find("> table > tbody:" + (opts.addTop ? "first" : "last")).trigger("click.grid.tbody");
+						}
+					});
 				}
 
 				return this;
@@ -3691,7 +4272,9 @@
 		        countPerPage : 10,
 		        countPerPageSet : 10,
 		        pageNo : 1,
-		        onChange : null
+		        onChange : null,
+		        blockOnChangeWhenBind : false,
+		        currPageNavInfo : null
 			};
 
 			try {
@@ -3820,10 +4403,11 @@
                 	endRowIndex = opts.totalCount - 1;
                 }
 
-                return {
+                return currPageNavInfo = {
                 	"pageNo" : opts.pageNo,
                 	"countPerPage" : opts.countPerPage,
                 	"countPerPageSet" : opts.countPerPageSet,
+                	"totalCount" : opts.totalCount,
                 	"pageCount" : pageCount,
                 	"pageSetCount" : pageSetCount,
                 	"currSelPageSet" : currSelPageSet,
@@ -3855,14 +4439,14 @@
 					// reset totalCount
 					opts.totalCount = arguments[0];
 				} else if(arguments.length > 0 && N.type(arguments[0]) === "array") {
-					//to rebind new data
+					// to rebind new data
 					opts.data = N.type(data) === "array" ? N(data) : data;
 
 					// reset totalCount
 					if(totalCount !== undefined) {
 						opts.totalCount = totalCount;
 					} else {
-						if(data !== undefined) {
+						if(data != null) {
 							opts.totalCount = data.length;
 						}
 					}
@@ -3879,7 +4463,7 @@
                 		if(1 !== opts.pageNo) {
                 			opts.pageNo = 1;
                 			currPageNavInfo = Pagination.changePageSet(linkEles, opts);
-                			linkEles.body.find("li a:first").click();
+                			linkEles.body.find("li a:first").trigger("click.pagination");
                 		}
                 	});
                 }
@@ -3891,13 +4475,13 @@
                     if(currPageNavInfo.currSelPageSet > 1 && currPageNavInfo.startPage >= currPageNavInfo.currSelPageSet) {
                     	opts.pageNo = currPageNavInfo.startPage - opts.countPerPageSet;
                     	currPageNavInfo = Pagination.changePageSet(linkEles, opts);
-                    	linkEles.body.find("li a:first").click();
+                    	linkEles.body.find("li a:first").trigger("click.pagination");
                     }
                 });
 
                 // page number button event
                 linkEles.body.off("click.pagination");
-                linkEles.body.on("click.pagination", "li > a", function(e) {
+                linkEles.body.on("click.pagination", "li > a", function(e, isFirst) {
                 	e.preventDefault();
 
                 	opts.pageNo = Number($(this).parent().data("pageno"));
@@ -3912,12 +4496,14 @@
                         		}
                         	}
                     	}
-                    	opts.onChange.call(this, opts.pageNo, this, selData, currPageNavInfo);
+                    	if(opts.blockOnChangeWhenBind === false || (opts.blockOnChangeWhenBind === true && isFirst !== true)) {
+                    		opts.onChange.call(this, opts.pageNo, this, selData, currPageNavInfo);
+                    	}
                     }
 
                     linkEles.body.find("li.pagination_active__").removeClass("pagination_active__");
                     $(this).parent().addClass("pagination_active__");
-                }).find("li a:eq(" + String(opts.pageNo - currPageNavInfo.startPage) +  ")").click();
+                }).find("li a:eq(" + String(opts.pageNo - currPageNavInfo.startPage) +  ")").trigger("click.pagination", [true]);
 
                 // next button event
                 linkEles.next.unbind("click.pagination");
@@ -3926,7 +4512,7 @@
                     if(currPageNavInfo.pageSetCount > currPageNavInfo.currSelPageSet) {
                     	opts.pageNo = currPageNavInfo.startPage + opts.countPerPageSet;
                     	currPageNavInfo = Pagination.changePageSet(linkEles, opts);
-                    	linkEles.body.find("li a:first").click();
+                    	linkEles.body.find("li a:first").trigger("click.pagination");
                     }
                 });
 
@@ -3938,12 +4524,21 @@
                 		if(opts.pageNo !== currPageNavInfo.pageCount) {
                 			opts.pageNo = currPageNavInfo.pageCount;
                 			currPageNavInfo = Pagination.changePageSet(linkEles, opts);
-                			linkEles.body.find("li a:last").click();
+                			linkEles.body.find("li a:last").trigger("click.pagination");
                 		}
                 	});
                 }
 
 				return this;
+			},
+			totalCount : function(totalCount) {
+				var opts = this.options;
+				if(totalCount != undefined) {
+					opts.totalCount = totalCount;
+					return this;
+				} else {
+					return opts.totalCount;
+				}
 			},
 			pageNo : function(pageNo) {
 				var opts = this.options;
@@ -3973,6 +4568,9 @@
 					return this.options.countPerPageSet;
 				}
 				return this;
+			},
+			currPageNavInfo : function() {
+				return this.options.currPageNavInfo;
 			}
 		});
 
@@ -4065,7 +4663,7 @@
 				var opts = this.options;
 
 				//to rebind new data
-				if(data !== undefined) {
+				if(data != null) {
 					opts.data = N.type(data) === "array" ? N(data) : data;
 				}
 

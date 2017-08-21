@@ -1,9 +1,17 @@
 /**
  * Natural-JS에서 제공하는 라이브러리 및 컴포넌트의 전역 옵션 값 설정
+ * 여기에 기본으로 정의 된 값들은 제거하면 안 됨. 추가만 가능
  *
  * 컴포넌트들의 옵션 적용 순서
  * 1. 컴포넌트 초기화시 지정한 옵션 값
+ *
  * 2. 여기(N.Config)에서 지정한 옵션 값
+ *    2.1. 각 영역별로 지정 하세요. 컴포넌트 초기화 시 각 영역별 값들을 자동으로 기본옵션으로 지정 해 줍니다.
+ *         ex) 2.1.1 모든 N.grid의 높이를 300으로 지정하고 싶음.
+ *                   - N.context.attr("ui") 의 grid 키에 height 속성을 추가하고 값은 300 을 지정
+ *             2.1.2 모든 N.form에 html을 인식 시키고 싶음.
+ *                   - N.context.attr("ui") 의 form 키에 html 속성을 추가하고 값은 true 로 지정
+ *
  * 3. 컴포넌트 클래스의 기본 옵션 값
  */
 (function(N) {
@@ -11,7 +19,13 @@
 	 * Natural-CORE Config
 	 */
 	N.context.attr("core", {
+		/**
+		 * 로케일
+		 */
 		"locale" : "ko_KR",
+		/**
+		 * 전역 다국어 메시지
+		 */
 		"message" : {
 			"ko_KR" : {},
 			"en_US" : {}
@@ -24,6 +38,9 @@
 	     * 체크박스 선택 안됐을때 기본 값
 	     */
 	    sgUnChkdVal : "N", //N, 0, off
+	    /**
+	     * 문자열 구분자
+	     */
 	    spltSepa : "$@^",
 	    /**
 	     * N.context.attr("architecture").page.context 로 페이지가 전환될때 마다 실행될 가비지 컬렉터의 모드
@@ -39,81 +56,77 @@
 		 * Natural-JS 의 구동영역(지정 필수)
 		 */
 		"page" : {
-			"context" : "#naturalJsContents"
+			"context" : ".docs__ > .docs_contents__.visible__"
 		},
+		/**
+		 * N.cont(Controller)에 정의한 오브젝트들을 대상으로 하는 관점 지향 프로그래밍(AOP) 설정
+		 *   - 아래는 AOP 관련 된 예제코드 이므로 사용하지 않는다면 cont 하위의 모든 구문을 삭제하고 사용 바랍니다.
+		 */
 		"cont" : {
-			/* advisor에서 참조할 pointcut을 정의한다. 
-			 * pointcut은 반드시 fn 속성에 function(param, cont, fnName) 함수를 정의해야 한다. 
+			/** advisor에서 참조할 pointcut을 정의한다.
+			 * pointcut은 반드시 fn 속성에 function(param, cont, fnChain) 함수를 정의해야 한다.
 			 * 함수 수행 결과는 advice의 적용 여부를 판단하는데 사용된다.
-			 * */
-			"pointcuts" : { 
-				/* pointcut 객체는 유일한 속성명으로 정의한다. */
+			 */
+			"pointcuts" : {
+				/** pointcut 객체는 유일한 속성명으로 정의한다. */
 				"regexp" : {
-					/* 
+					/**
+					 * 정규표현식으로 평가하는 사용자 포인트 컷(예제이므로 삭제해도 됨)
 					 * param : 정규표현식 문자열 혹은 RegExp 객체,
 					 * cont : 컨트롤러 객체
-					 * fnName : 컨트롤러에 정의된 함수명 (Built-in 함수를 제외한 사용자가 정의한 함수만 대상으로 한다)
-					 * */
-					"fn" : function(param, cont, fnName){
+					 * fnChain : 컨트롤러에 정의된 함수채인(뷰의selector.:functionName.functionName...)(Built-in 함수를 제외한 사용자가 정의한 함수만 대상으로 한다)
+					 */
+					"fn" : function(param, cont, fnChain){
 						var regexp = param instanceof RegExp ? param : new RegExp(param);
-						return regexp.test(fnName);
-					}					
-				} 
+						return regexp.test(fnChain);
+					}
+				}
 			},
-			/* 컨트롤러의 함수에 적용하고자 하는 기능을 정의한다 */
+			/** 컨트롤러의 함수에 적용하고자 하는 기능을 정의한다 */
 			"advisors" : [{
-				/* 특정 뷰(컨트롤러)에만 advisor가 동작하도록 하려면 해당 뷰에 대한 selector를 문자열로 정의한다 
-				 * 
-				 * <div id="part1">part1</div>
-				 * <div id="part2">part2</div>
-				 * 위와 같이 두개의 뷰가 있을 경우 
-				 * "selector": "#part1"
-				 * 위와 같이 정의하면 part1에만 advisor가 동작한다. 
-				 * */
-				"selector" : "#part1",
-				/*
+				/**
 				 * advisor가 적용될 pointcut을 정의한다
 				 * "pointcut" : {
 				 *     "type" : "regexp"
 				 *     "param" : "something"
 				 * }
-				 * 위의 경우 pointcuts에서 regexp pointcut을 찾아 pointcut에 정의된 객체를 파라미터로 전달한다. 
+				 * 위의 경우 pointcuts에서 regexp pointcut을 찾아 pointcut에 정의된 객체를 파라미터로 전달한다.
 				 * "pointcut" : "someregexp"
-				 * 위와 같이 pointcut의 값이 객체가 아닌 경우 regexp pointcut을 기본값으로 사용한다. 
-				 **/
-				"pointcut" : "init",
-				/*
+				 * 위와 같이 pointcut의 값이 객체가 아닌 경우 regexp pointcut을 기본값으로 사용한다.
+				 */
+				"pointcut" : ":init",
+				/**
 				 * adviecType은 아래와 같다.
 				 * before : 원본 함수를 실행하기 전에 실행된다.
-				 * after : 원본 함수를 실행 후 실행된다. 원본 함수의 반환값이 함께 전달된다. 
-				 * error : 원본 함수에서 예외 발생 시 실행된다. 
+				 * after : 원본 함수를 실행 후 실행된다. 원본 함수의 반환값이 함께 전달된다.
+				 * error : 원본 함수에서 예외 발생 시 실행된다.
 				 * around : 원본 함수를 실행할 수 있는 joinPoint가 파라미터로 전달
-				 * 각 사용방식은 아래의 각 예제를 참고  
+				 * 각 사용방식은 아래의 각 예제를 참고
 				 */
 				"adviceType" : "before",
-				"fn" : function(cont, fnName, args){ /* cont 컨트롤러, fnName 함수명, args 인자 */
-					console.log("call me before %s", fnName);
+				"fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 뷰의selector:functionName.functionName... , args 인자 */
+					console.log("call me before %s", fnChain);
 				}
 			},
 			{
 				"pointcut" : "after.*",
 				"adviceType" : "after",
-				"fn" : function(cont, fnName, args, result){ /* cont 컨트롤러, fnName 함수명, args 인자, 반환값 */
-					console.log("call me after %s", fnName);
+				"fn" : function(cont, fnChain, args, result){ /* cont 컨트롤러, fnChain 함수명, args 인자, 반환값 */
+					console.log("call me after %s", fnChain);
 					console.log("\treuslt", result);
 				}
 			},
 			{
 				"pointcut" : "around.*",
 				"adviceType" : "around",
-				"fn" : function(cont, fnName, args, joinPoint){ /* cont 컨트롤러, fnName 함수명, args 인자, joinPoint 원본 함수 실행 객체 */
-					console.log("call me around %s", fnName);
+				"fn" : function(cont, fnChain, args, joinPoint){ /* cont 컨트롤러, fnChain 함수명, args 인자, joinPoint 원본 함수 실행 객체 */
+					console.log("call me around %s", fnChain);
 					var result = joinPoint.proceed();
 					console.log("result ", result);
 					return result;
 				}
 			}]
-		},				
+		},
 		"comm" : {
 			/**
 			* Global ajax request filter
@@ -122,12 +135,17 @@
 			* 필터 인자 중 request 인자에 요청에 대한 여러가지 정보가 있으니 잘 활용하면 엄청난 효과를 누릴 수 있음.
 			* request 객체에서 제공 해 주는 정보는 http://bbalganjjm.github.io/natural_js/#refr/refr0103 에서 > Communicatior 탭 > Communicator.request 챕터 > 3) 기본옵션(Default options)을 참고
 			* 필터를 여러개 걸수 있으며 단위 필터명은 아무거나 지정하면 됨.
+			* 수행 순서는 order 속성(숫자가 적을 수록 먼저 실행 됨)이 정의 된 필터가 실행 된 다음 order 속성이 정의 되지 않은 필터들이 실행 됨.
 			* 여기에서 지정한 pageFilter, dataFilter 는 상수값이 아니므로 자유롭게 지정하면 됨.
 			*/
 			"filters" : {
 				"exFilter1" : {
 					/**
-					 * N.cont 의 init 메서드가 실행 된 후 실행됨.
+					 * 필터 실행 순서
+					 */
+					order : 1,
+					/**
+					 * N.comm 이 초기화 된 후 실행됨(N.cont 의 init 아님)
 					 */
 					afterInit : function(request) {
 					},
@@ -157,7 +175,9 @@
 			"request" : {
 				"options" : {
 					/**
-					 * 기본 Method
+					 * 기본 Request Method
+					 * GET 으로 되어 있으면 JSON 형태의 파라미터가 q라는 파라미터명으로 q={a:1} 와 같이 전달 됩니다.
+					 * JSON Object String 을 Request Body에 온전히 서버로 전송하려면 반드시 POST로 바꿔 주시기 바랍니다.
 					 */
 					"type" : "GET",
 					/**
@@ -169,8 +189,8 @@
 					 */
 					"cache" : true,
 					/**
-					 * 페이지 전환 없는 방식의 사이트 구현 시 Ajax 통신 시(async)
-					 * 요청할 때 location.href 와 응답 올때 location.href 을 비교하여 오류 방지 할건지 여부
+					 * Single Page Application(SPA) 개발 시 N.comm(async) 으로 데이터를 요청하고 요청이 오기전에 다른 페이지로 전환 했을때
+					 * 요청할 때 location.href 와 응답 올때 location.href 을 비교하여 틀리면 요청을 중지 할 건지 여부
 					 */
 					"urlSync" : true,
 					/**
@@ -180,12 +200,7 @@
 					/**
 					 * 특정 영역에 html 페이지를 불러올때 덮어 쓸건지 더할건지 여부
 					 */
-					"append" : false,
-					/**
-					 * 특정 영역에 html 페이지를 불러올때 전환 효과 지정, false 이면 효과 없음.
-					 * ex) ["fadeIn", 300, null], 적용안할때는 false
-					 */
-					"effect" : false
+					"append" : false
 				}
 			}
 		}
@@ -275,36 +290,37 @@
 					commas_integer : "숫자(정수), 콤마(,) 만 입력 할 수 있습니다.",
 					number : "숫자(+-,. 포함)만 입력 할 수 있습니다.",
 					decimal : "(유한)소수만 입력 할 수 있습니다.",
-					decimal_ : "(유한)소수 {0}번째 자리까지 입력 할 수 있습니다.",
+					decimal_ : "(유한)소수 {0}번째 자리까지 입력 할 수 있습니다.", // TODO
 					email : "e-mail 형식에 맞지 않습니다.",
 					url : "URL 형식에 맞지 않습니다.",
 					zipcode : "우편번호 형식에 맞지 않습니다.",
 					phone : "전화번호 형식이 아닙니다.",
-					phone_ : "전화번호 형식이 아닙니다.",
-					ssn : "주민등록번호 형식에 맞지 않습니다.",
+					rrn : "주민등록번호 형식에 맞지 않습니다.",
+					ssn : "주민등록번호 형식에 맞지 않습니다.", // Deprecated
 					frn : "외국인등록번호 형식에 맞지 않습니다.",
+					frn_rrn : "주민번호나 외국인등록번호 형식에 맞지 않습니다.", // Deprecated
 					frn_ssn : "주민번호나 외국인등록번호 형식에 맞지 않습니다.",
 					cno : "사업자등록번호 형식에 맞지 않습니다.",
 					cpno : "법인번호 형식에 맞지 않습니다.",
 					date : "날짜 형식에 맞지 않습니다.",
 					time : "시간 형식에 맞지 않습니다.",
-					accept_ : "\"{0}\" 값만 입력 할 수 있습니다.",
-					match_ : "\"{0}\" 이(가) 포함된 값만 입력 할 수 있습니다.",
-					acceptFileExt_ : "\"{0}\" 이(가) 포함된 확장자만 입력 할 수 있습니다.",
-					notAccept_ : "\"{0}\" 값은 입력 할 수 없습니다.",
-					notMatch_ : "\"{0}\" 이(가) 포함된 값은 입력 할 수 없습니다.",
-					notAcceptFileExt_ : "\"{0}\" 이(가) 포함된 확장자는 입력 할 수없습니다.",
-					equalTo_ : "\"{1}\" 의 값과 같아야 합니다.",
-					maxlength_ : "{0} 글자 이하만 입력 가능합니다.",
-					minlength_ : "{0} 글자 이상만 입력 가능합니다.",
-					rangelength_ : "{0} 글자 에서 {1} 글자 까지만 입력 가능합니다.",
-					maxbyte_ : "{0} 바이트 이하만 입력 가능합니다.<br> - 영문, 숫자 : 1 바이트<br> - 한글, 특수문자 : 3 바이트",
-					minbyte_ : "{0} 바이트 이상만 입력 가능합니다.<br> - 영문, 숫자 : 1 바이트<br> - 한글, 특수문자 : 3 바이트",
-					rangebyte_ : "{0} 바이트 에서 {1} 바이트 까지만 입력 가능합니다.<br> - 영문, 숫자 한글자 : 1 바이트<br> - 한글, 특수문자 : 3 바이트",
-					maxvalue_ : "{0} 이하의 값만 입력 가능합니다.",
-					minvalue_ : "{0} 이상의 값만 입력 가능합니다.",
-					rangevalue_ : "{0} 에서 {1} 사이의 값만 입력 가능합니다.",
-					regexp_ : "{1}"
+					accept : "\"{0}\" 값만 입력 할 수 있습니다.",
+					match : "\"{0}\" 이(가) 포함된 값만 입력 할 수 있습니다.",
+					acceptFileExt : "\"{0}\" 이(가) 포함된 확장자만 입력 할 수 있습니다.",
+					notAccept : "\"{0}\" 값은 입력 할 수 없습니다.",
+					notMatch : "\"{0}\" 이(가) 포함된 값은 입력 할 수 없습니다.",
+					notAcceptFileExt : "\"{0}\" 이(가) 포함된 확장자는 입력 할 수없습니다.",
+					equalTo : "\"{1}\" 의 값과 같아야 합니다.",
+					maxlength : "{0} 글자 이하만 입력 가능합니다.",
+					minlength : "{0} 글자 이상만 입력 가능합니다.",
+					rangelength : "{0} 글자 에서 {1} 글자 까지만 입력 가능합니다.",
+					maxbyte : "{0} 바이트 이하만 입력 가능합니다.<br> - 영문, 숫자 : 1 바이트<br> - 한글, 특수문자 : 3 바이트",
+					minbyte : "{0} 바이트 이상만 입력 가능합니다.<br> - 영문, 숫자 : 1 바이트<br> - 한글, 특수문자 : 3 바이트",
+					rangebyte : "{0} 바이트 에서 {1} 바이트 까지만 입력 가능합니다.<br> - 영문, 숫자 한글자 : 1 바이트<br> - 한글, 특수문자 : 3 바이트",
+					maxvalue : "{0} 이하의 값만 입력 가능합니다.",
+					minvalue : "{0} 이상의 값만 입력 가능합니다.",
+					rangevalue : "{0} 에서 {1} 사이의 값만 입력 가능합니다.",
+					regexp : "{2}"
 				},
 				"en_US" : {
 					global : "It Can't pass the field verification.",
@@ -320,36 +336,37 @@
 					commas_integer : "Can enter only number(integer) and commas(,).",
 					number : "Can enter only number and (+-,.)",
 					decimal : "Can enter only (finite)decimal",
-					decimal_ : "Can enter up to {0} places of (finite)decimal.",
+					decimal_ : "Can enter up to {0} places of (finite)decimal.", // TODO
 					email : "Don't conform to the format of E-mail.",
 					url : "Don't conform to the format of URL.",
 					zipcode : "Don't conform to the format of zip code.",
 					phone : "There is no format of phone number.",
-					phone_ : "There is no format of phone number.",
-					ssn : "Don't fit the format of the resident registration number.",
+					rrn : "Don't fit the format of the resident registration number.",
+					ssn : "Don't fit the format of the resident registration number.", // Deprecated.
 					frn : "Don't fit the format of foreign registration number.",
-					frn_ssn : "Don't fit the format of the resident registration number or foreign registration number.",
+					frn_rrn : "Don't fit the format of the resident registration number or foreign registration number.",
+					frn_ssn : "Don't fit the format of the resident registration number or foreign registration number.", // Deprecated.
 					cno : "Don't fit the format of registration of enterpreneur.",
 					cpno : "Don't fit the format of corporation number.",
 					date : "Don't fit the format of date.",
 					time : "Don't fit the format of time.",
-					accept_ : "Can enter only \"{0}\" value.",
-					match_ : "Can enter only value ​​that contains \"{0}\".",
-					acceptFileExt_ : "Can enter only extension that includes \"{0}\".",
-					notAccept_ : "Can't enter \"{0}\" value.",
-					notMatch_ : "Can't enter only value ​​that contains \"{0}\".",
-					notAcceptFileExt_ : "Can't enter only extension that includes \"{0}\".",
-					equalTo_ : "Must be the same as \"{1}\" value.",
-					maxlength_ : "Can enter only below {0} letters.",
-					minlength_ : "Can enter only more than {0} letters.",
-					rangelength_ : "It can be entered from {0} to {1} letters.",
-					maxbyte_ : "Can enter only below {0} bytes.",
-					minbyte_ : "Can enter only more than {0} bytes.",
-					rangebyte_ : "It can be entered from {0} to {1} bytes.",
-					maxvalue_ : "Can enter only below {0} value.",
-					minvalue_ : "Can enter only more than {0} value.",
-					rangevalue_ : "Can be entered value from {0} to {1}.",
-					regexp_ : "{1}"
+					accept : "Can enter only \"{0}\" value.",
+					match : "Can enter only value ​​that contains \"{0}\".",
+					acceptFileExt : "Can enter only extension that includes \"{0}\".",
+					notAccept : "Can't enter \"{0}\" value.",
+					notMatch : "Can't enter only value ​​that contains \"{0}\".",
+					notAcceptFileExt : "Can't enter only extension that includes \"{0}\".",
+					equalTo : "Must be the same as \"{1}\" value.",
+					maxlength : "Can enter only below {0} letters.",
+					minlength : "Can enter only more than {0} letters.",
+					rangelength : "It can be entered from {0} to {1} letters.",
+					maxbyte : "Can enter only below {0} bytes.",
+					minbyte : "Can enter only more than {0} bytes.",
+					rangebyte : "It can be entered from {0} to {1} bytes.",
+					maxvalue : "Can enter only below {0} value.",
+					minvalue : "Can enter only more than {0} value.",
+					rangevalue : "Can be entered value from {0} to {1}.",
+					regexp : "{2}"
 				}
 			}
 		}
@@ -366,7 +383,7 @@
 			/**
 			 * Popup Element 가 담길 영역
 			 */
-			"container" : "#naturalJsContents",
+			"container" : ".docs__ > .docs_contents__.visible__",
 			/**
 			 * 버튼 스타일(Required)
 			 */
@@ -389,14 +406,8 @@
 				left : +2,
 				right : -2
 			},
-			"alwaysOnTop" : false,
 			/**
-			 * 페이지의 요소들이 동적으로 사이즈가 조절될 때 N.alert 의 모달오버레이와 메시지 박스의 위치를 자동으로 맞춰줄지 여부
-			 *  주) 성능적으로 최적화하기 위해서는 false로 지정하는게 좋고 false로 지정 시 탭(N.tab)이 전환되거나 페이지가 리다이렉트 되지않고 논리적으로 전환될때 N.alert 의 요소가 남아있음.
-			 */
-			"dynPos" : true,
-			/**
-			 * 필수 값
+			 * 인풋 메시지 설정
 			 */
 			"input" : {
 				/**
@@ -409,7 +420,7 @@
 				closeBtn : "&times;"
 			},
 			/**
-			 * 필수 값
+			 * 다국어 메시지
 			 */
 			"message" : {
 				"ko_KR" : {
@@ -423,21 +434,15 @@
 			}
 		},
 		"popup" : {
-			/**
-			 * 버튼 상태 변경에 따른 fade 효과 적용 유무
-			 */
-			"button" : {
-				"effect" : true
-			}
+
 		},
 		"tab" : {
-			/**
-			 * 탭 컨텐츠 표시할때 효과
-			 */
-			"effect" : ["fadeIn", 300, undefined]
+
 		},
 		"datepicker" : {
-			"focusin" : true,
+			/**
+			 * 다국어 메시지
+			 */
 			"message" : {
 				"ko_KR" : {
 					"year" : "년",
@@ -465,53 +470,12 @@
 			/**
 			 * 기본 value 값
 			 */
-			"val" : "val",
-			/**
-			 * select 요소에 option 을 덮어쓸건지 더할건지 지정
-			 */
-			"append" : true
+			"val" : "val"
 		},
 		"form" : {
-			/**
-			 * 바인드된 데이터의 html 을 인식 할건지 여부
-			 */
-			"html" : false,
-			/**
-			 * 실시간 데이터 검증을 할 건지 여부
-			 */
-			"validate" : true,
-			/**
-			 * 바인드된 데이터의 새로운 row 생성시 위치를 최상단에 만들건지 여부
-			 */
-			"addTop" : false
+
 		},
 		"grid" : {
-			/**
-			 * 그리드에서 스크롤할때 위, 아래 끝에 다다르면 전체 페이지가(window scroll) 스크롤 되는것을 방지하기 위한 기능 활성 여부
-			 */
-			"windowScrollLock" : true,
-			/**
-			 * bind 시 row 생성 delay(ms)
-			 */
-			"createRowDelay" : 1,
-			/**
-			 * 헤더픽스형일 경우 스크롤 페이징 사이즈(대용량 데이터 처리)
-			 */
-			/**
-			 * 바인드된 데이터의 새로운 row 생성시 위치를 최상단에 만들건지 여부
-			 */
-			"addTop" : false,
-			"scrollPaging" : {
-				"size" : 50
-			},
-			/**
-			 * 세로 길이조절 기능 활성화 여부
-			 */
-			"vResizable" : false,
-			/**
-			 * 소트 기능 활성화 여부
-			 */
-			"sortable" : false,
 			/**
 			 * 소트기능 활설화 시 표시 구분자(html 태그 가능)
 			 */
@@ -520,7 +484,7 @@
 				"desc" : "▲"
 			},
 			/**
-			 * Grid 에서 사용 할 메시지 다국어 처리
+			 * 다국어 메시지
 			 */
 			"message" : {
 				"ko_KR" : {
@@ -565,17 +529,43 @@
 	 */
 	N.context.attr("ui.shell", {
 		"notify" : {
-			"position" : {
-				top : 10,
-				right : 10
-			},
-			"alwaysOnTop" : true,
+			/**
+			 * 다국어 메시지
+			 */
 			"message" : {
 				"ko_KR" : {
 					"close" : "닫기"
 				},
 				"en_US" : {
 					"close" : "Close"
+				}
+			}
+		},
+		"docs" : {
+			"message" : {
+				"ko_KR" : {
+					"closeAllTitle" : "메뉴 전체 닫기",
+					"closeAll" : "전체 닫기",
+					"closeAllQ" : "선택한 메뉴를 제외하고 열린 메뉴 전체를 닫겠습니까?",
+					"docListTitle" : "열린 메뉴 목록",
+					"docList" : "메뉴 목록",
+					"selDocument" : "{0} 메뉴 선택",
+					"close" : "메뉴 닫기",
+					"closeConf" : "\"{0}\" 메뉴에 편집중인 항목이 있습니다. 무시하고 메뉴를 닫겠습니까?",
+					"maxTabs" : "최대 {0} 개의 메뉴 만 열 수 있습니다. <br>다른 메뉴 탭을 닫고 다시 시도 하세요.",
+					"maxStateful" : "선택한 메뉴가 활성화 되면 설정 된 최대 상태유지 메뉴 개수({1} 개)가 초과되어<br>마지막으로 선택 된 \"{0}\" 메뉴의 상태가 초기화 됩니다.<br>메뉴를 선택 하겠습니까?"
+				},
+				"en_US" : {
+					"closeAllTitle" : "Close all menus",
+					"closeAll" : "Close all",
+					"closeAllQ" : "Are you sure you want to close the entire open menu except for the selected menu?",
+					"docListTitle" : "Opened menu list",
+					"docList" : "Menu list",
+					"selDocument" : "Select the {0} menu",
+					"close" : "Close the menu",
+					"closeConf" : "There is an item being edited in the \"{0}\" memu. Are you sure you want to close the menu?",
+					"maxTabs" : "You can only open up to {0} menus. <br>Close other menu tabs and try again.",
+					"maxStateful" : "선택한 메뉴가 활성화 되면 설정 된 최대 상태유지 메뉴 개수({1} 개)가 초과되어<br>마지막으로 선택 된 \"{0}\" 메뉴의 상태가 초기화 됩니다.<br>메뉴를 선택 하겠습니까?"
 				}
 			}
 		}

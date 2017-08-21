@@ -1,5 +1,5 @@
 /*!
- * Natural-ARCHITECTURE v0.8.0.18
+ * Natural-ARCHITECTURE v0.8.1.7
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-ARCHITECTURE"] = "0.8.0.18";
+	N.version["Natural-ARCHITECTURE"] = "0.8.1.7";
 
 	$.fn.extend($.extend(N.prototype, {
 		ajax : function(opts) {
@@ -36,11 +36,7 @@
 			} else {
 				if ((N.isPlainObject(obj) || N.isString(obj)) && url === undefined) {
 					url = obj;
-					obj = [];
-				} else {
-					if (!N.isWrappedSet(obj) && !N.isArray(obj)) {
-						obj = [ obj ];
-					}
+					obj = $();
 				}
 			}
 
@@ -82,21 +78,39 @@
 				var errorFilters = [];
 				var completeFilters = [];
 				var filters = N.context.attr("architecture").comm.filters;
+				var orderedFilterKeys = [];
+				var spltSepa = N.context.attr("core").spltSepa;
+
+				// Indexing to execute filters with the order property defined first and filters with no order property defined
 				for ( var key in filters) {
-					for ( var filterKey in filters[key]) {
-						if (filterKey === "afterInit") {
-							afterInitFilters.push(filters[key][filterKey]);
-						} else if (filterKey === "beforeSend") {
-							beforeSendFilters.push(filters[key][filterKey]);
-						} else if (filterKey === "success") {
-							successFilters.push(filters[key][filterKey]);
-						} else if (filterKey === "error") {
-							errorFilters.push(filters[key][filterKey]);
-						} else if (filterKey === "complete") {
-							completeFilters.push(filters[key][filterKey]);
-						}
+					if(filters[key].order !== undefined) {
+						orderedFilterKeys.push(filters[key].order + spltSepa + key);
 					}
 				}
+				orderedFilterKeys.sort();
+				for ( var key in filters) {
+					if(filters[key].order === undefined) {
+						orderedFilterKeys.push(key);
+					}
+				}
+
+				$(orderedFilterKeys).each(function() {
+					var kArr = this.split(spltSepa);
+					var k = kArr.length > 1 ? kArr[1] : kArr[0];
+					for ( var filterKey in filters[k]) {
+						if (filterKey === "afterInit") {
+							afterInitFilters.push(filters[k][filterKey]);
+						} else if (filterKey === "beforeSend") {
+							beforeSendFilters.push(filters[k][filterKey]);
+						} else if (filterKey === "success") {
+							successFilters.push(filters[k][filterKey]);
+						} else if (filterKey === "error") {
+							errorFilters.push(filters[k][filterKey]);
+						} else if (filterKey === "complete") {
+							completeFilters.push(filters[k][filterKey]);
+						}
+					}
+				});
 
 				// request filter
 				$(afterInitFilters).each(function(i) {
@@ -134,91 +148,15 @@
 							} else {
 								obj.append(data);
 							}
+							// Deprecated
 							if (obj.request.options.effect) {
 								obj.hide()[obj.request.options.effect[0]](obj.request.options.effect[1], obj.request.options.effect[2]);
 							}
-							if(obj.children("[id]:first").length > 0) {
-								var sc = obj.children("[id]:first").instance("cont");
-								if (sc !== undefined) {
-									sc.request = obj.request;
-									if (N.context.attr("architecture").cont &&
-									    N.context.attr("architecture").cont.advisors &&
-									    N.context.attr("architecture").cont.advisors.length > 0) {
-										var o = N.context.attr("architecture").cont;
-										$(o.advisors).each(function (idx, advisor) {
-											if (advisor.selector && !sc.view.is(advisor.selector)) {
-												return;
-											}
-											var pointcut;
-											if (!$.isPlainObject(advisor.pointcut)) {
-												pointcut = o.pointcuts["regexp"];
-											} else {
-												pointcut = o.pointcuts[advisor.type];
-											}
-											for (var x in sc) {
-												if (!sc.hasOwnProperty(x)) continue;
-
-												if (pointcut.fn(advisor.pointcut, sc, x)) {
-													var real = sc[x];
-
-													sc[x] = (function (real, x) {
-														var wrappedFn;
-
-														switch(advisor.adviceType){
-															case "before":
-															wrappedFn = function(){
-																var args = [].slice.call(arguments);	
-																advisor.fn.call(advisor, sc, x, args);		
-																return real.apply(sc, args);														
-															};
-															break;
-															case "after":
-															wrappedFn = function(){
-																var args = [].slice.call(arguments);	
-																var result = real.apply(sc, args);
-																advisor.fn.call(advisor, sc, x, args, result);
-																return result;
-															};
-															break;
-															case "around":
-															wrappedFn = function(){
-																var args = [].slice.call(arguments);	
-																return advisor.fn.call(advisor, sc, x, args, {
-																	"sc" : sc,
-																	"args" : args,
-																	"real" : real,
-																	"proceed" : function(){
-																		return this.real.apply(this.sc, this.args);
-																	}	
-																});																
-															};
-															break;
-															case "error":
-															wrappedFn = function(){
-																var args = [].slice.call(arguments);	
-																var result;
-																try{
-																	result = real.apply(sc, args);
-																} catch(e) {
-																	if (advisor.adviceType == "error") {
-																		result = advisor.fn.call(advisor, sc, x, args, e);
-																	} else {
-																		throw e;
-																	}
-																}
-																return result;															
-															};
-															break;															
-														}
-														return wrappedFn;
-													})(real, x);
-												}
-											}
-										});
-								   	}									
-									if(sc.init !== undefined) {
-										sc.init(sc.view, obj.request);
-									}
+							if(obj.children(".view_context__:last").length > 0) {
+								var cont = obj.children(".view_context__:last").instance("cont");
+								if(cont !== undefined) {
+									// triggering "init" method
+									Controller.trInit.call(this, cont, obj.request);
 								}
 							}
 						}
@@ -259,12 +197,13 @@
 				async : true,
 				type : "POST",
 				data : null,
+				dataIsArray : false,
 				dataType : "json",
 				urlSync : true,
 				crossDomain : false,
 				browserHistory : true, // TODO
 				append : false,
-				effect : false,
+				effect : false, // Deprecated
 				target : null
 			};
 
@@ -278,20 +217,24 @@
 			this.attrObj = {};
 
 			this.obj = obj;
-			if(!N.isString(this.options.data)) {
-				// define params data
-				this.options.data = JSON.stringify(this.options.data === null ?
-						N.isWrappedSet(obj) ? !N.isElement(obj) ? obj.toArray()[0] : undefined : obj[0] :
-								this.options.data);
+
+			// set post parameters
+			if(N.isWrappedSet(obj)) {
+				if(!N.isElement(obj)) {
+					this.options.data = JSON.stringify(this.options.dataIsArray ? obj.get() : obj.get(0));
+				}
+			} else {
+				if(obj != null) {
+					this.options.data = JSON.stringify(obj);
+				}
 			}
 
-			if(this.options.data !== undefined) {
-				if(this.options.type.toUpperCase() === "GET") {
-					var firstChar = this.options.data.charAt(0);
-					var lastChar = this.options.data.charAt(this.options.data.length - 1);
-					if(firstChar === "{" && lastChar === "}" || firstChar === "[" && lastChar === "]") {
-						this.options.data = "q=" + encodeURI(this.options.data);
-					}
+			// set get parameters
+			if(this.options.data != null && this.options.type.toUpperCase() === "GET") {
+				var firstChar = this.options.data.charAt(0);
+				var lastChar = this.options.data.charAt(this.options.data.length - 1);
+				if(firstChar === "{" && lastChar === "}" || firstChar === "[" && lastChar === "]") {
+					this.options.data = "q=" + encodeURI(this.options.data);
 				}
 			}
 		};
@@ -312,7 +255,7 @@
 						this.attrObj = {};
 					}
 					this.attrObj[name] = obj_;
-					// this.obj : Defined by Communicator.request constructor;
+					// this.obj is defined at Communicator.request constructor;
 					return this.obj;
 				}
 			},
@@ -357,22 +300,134 @@
 		});
 
 		var Controller = N.cont = function(obj, callback) {
-			if(N("[id='" + obj.attr("id") + "']").length > 1) {
+			if(obj.attr("id") !== undefined && N("[id='" + obj.attr("id") + "']").length > 1) {
 				obj = N("#" + obj.attr("id") + ":not(.view_context__)");
 			}
-			if(callback === undefined) {
-				return obj.data(obj.attr("id"));
-			}
 			if(obj.length > 1) {
-				obj = N($.grep(obj, function(ele) { return !$(ele).hasClass(obj.attr("id") + "__ view_context__"); }));
+				obj = obj.filter(":not(.view_context__)").filter(":last");
 			}
-			obj.addClass(obj.attr("id") + "__ view_context__");
+			obj.attr("data-pageid", obj.attr("id") ? obj.attr("id") : obj.selector.replace(/\.|\#|\[|\]|\'|\:|\(|\)|\>| |\-/gi, ""));
+			obj.addClass("view_context__");
 
 			obj.instance("cont", callback);
 
 			callback.view = obj;
 			return callback;
 		};
+
+		$.extend(Controller, {
+			/**
+			 * "init" method trigger
+			 */
+			trInit : function(cont, request) {
+				// set request attribute
+				cont.request = request;
+
+				// AOP processing
+				Controller.aop.wrap.call(this, cont);
+
+				// run Controller's "init" method
+				if(cont.init !== undefined) {
+					cont.init(cont.view, request);
+				}
+			},
+			/**
+			 * AOP processing module
+			 */
+			aop : {
+				pointcuts : {
+					"regexp" : {
+						"fn" : function(param, contFrag, fnChain){
+							var regexp = param instanceof RegExp ? param : new RegExp(param);
+							return regexp.test(fnChain);
+						}
+					}
+				},
+				wrap : function(cont) {
+					if (N.context.attr("architecture").cont &&
+					    N.context.attr("architecture").cont.advisors &&
+					    N.context.attr("architecture").cont.advisors.length > 0) {
+						var o = N.context.attr("architecture").cont;
+
+						$(o.advisors).each(function (idx, advisor) {
+							var pointcut;
+							if (!N.isPlainObject(advisor.pointcut)) {
+								pointcut = Controller.aop.pointcuts.regexp;
+							} else {
+								pointcut = o.pointcuts[advisor.pointcut.type];
+							}
+
+							var wrapFn = function(contFrag, fnPath){
+								for (var x in contFrag) {
+									if (!contFrag.hasOwnProperty(x)) continue;
+
+									if($.isFunction(contFrag[x])) {
+										if (pointcut.fn(advisor.pointcut, contFrag, fnPath + x)) {
+											var real = contFrag[x];
+
+											contFrag[x] = (function (real, x) {
+												var wrappedFn;
+
+												switch(advisor.adviceType){
+													case "before":
+													wrappedFn = function(){
+														var args = [].slice.call(arguments);
+														advisor.fn.call(advisor, contFrag, fnPath + x, args);
+														return real.apply(contFrag, args);
+													};
+													break;
+													case "after":
+													wrappedFn = function(){
+														var args = [].slice.call(arguments);
+														var result = real.apply(contFrag, args);
+														advisor.fn.call(advisor, contFrag, fnPath + x, args, result);
+														return result;
+													};
+													break;
+													case "around":
+													wrappedFn = function(){
+														var args = [].slice.call(arguments);
+														return advisor.fn.call(advisor, contFrag, fnPath + x, args, {
+															"contFrag" : contFrag,
+															"args" : args,
+															"real" : real,
+															"proceed" : function(){
+																return this.real.apply(this.contFrag, this.args);
+															}
+														});
+													};
+													break;
+													case "error":
+													wrappedFn = function(){
+														var args = [].slice.call(arguments);
+														var result;
+														try{
+															result = real.apply(contFrag, args);
+														} catch(e) {
+															if (advisor.adviceType == "error") {
+																result = advisor.fn.call(advisor, contFrag, fnPath + x, args, e);
+															} else {
+																throw e;
+															}
+														}
+														return result;
+													};
+													break;
+												}
+												return wrappedFn;
+											})(real, x);
+										}
+									} else if(N.isPlainObject(contFrag[x])) {
+										wrapFn.call(this, contFrag[x], fnPath + x + ".");
+									}
+								}
+							};
+							wrapFn.call(this, cont, cont.view.selector + ":");
+						});
+				   	}
+				}
+			}
+		});
 
 		// Context Object
 		N.context = {
