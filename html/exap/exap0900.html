@@ -1,0 +1,349 @@
+<style>
+	.data01 {
+		background-color: red;
+	}
+
+	.data02 {
+		background-color: yellow;
+	}
+
+	.data03 {
+		background-color: blue;
+	}
+</style>
+
+
+<article class="exap0900 view-code">
+	<h1>멀티 폼 바인드 예제</h1>
+	<div class="intro">
+		<p class="smallContTit">폼 요소를 여러군데 지정하여 데이터를 바인드 하고 폼데이터들을 취합하여 서버쪽으로 보내는 예제 입니다.</p>
+		<p class="smallContTit">빨강(.data01), 노랑(.data02), 파랑(.data03) 색깔 별 로 N.form 컴포넌트가 바인드 됩니다.</p>
+		<p class="smallContTit">서버와 연계되지 않은 UI 쪽 코딩 예제 입니다. 저장 시 서버쪽으로 전달되는 파라미터만 확인 바랍니다.</p>
+	</div>
+
+	<div class="searchBox">
+		<ul>
+			<li class="buttons">
+				<a id="btnBindData01" href="#" data-opts='{ "color": "yellowgreen" }'>data01Form 바인드</a>
+				<a id="btnBindData02" href="#" data-opts='{ "color": "yellowgreen" }'>data02Form 바인드</a>
+				<a id="btnBindData03" href="#" data-opts='{ "color": "yellowgreen" }'>data03Form 바인드</a>
+				<a id="btnSaveData01" href="#" data-opts='{ "color": "green" }'>data01Form 저장</a>
+				<a id="btnSaveData02" href="#" data-opts='{ "color": "green" }'>data02Form 저장</a>
+				<a id="btnSaveData03" href="#" data-opts='{ "color": "green" }'>data03Form 저장</a>
+				<a id="btnSaveAll" href="#" data-opts='{ "color": "blue" }'>폼 전체 한번에 저장</a>
+			</li>
+		</ul>
+	</div>
+
+	<table id="detail01" class="data01" style="width: 100%;">
+		<colgroup>
+			<col style="width: 15%;">
+			<col style="width: 35%;">
+			<col style="width: 15%;">
+			<col style="width: 35%;">
+		</colgroup>
+		<tr>
+			<th rowspan="4" align="right">picture</th>
+			<td rowspan="4" align="center" valign="middle"><img id="picture" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D" /></td>
+			<th><label for="name">Name</label></th>
+			<td><input id="name" type="text" data-validate='[["required"]]' /></td>
+		</tr>
+		<tr>
+			<th><label for="email">Email</label></th>
+			<td><input id="email" type="text" data-validate='[["required"], ["email"]]' /></td>
+		</tr>
+		<tr>
+			<th><label for="password">Password</label></th>
+			<td><input id="password" type="text" data-format='[["generic", "@@＊＊＊＊＊＊"]]' data-validate='[["required"]]' /></td>
+		</tr>
+		<tr>
+			<th><label for="balance">Balance</label></th>
+			<td><input id="balance" type="text" data-format='[["numeric", "$#,###.##0"]]' data-validate='[["required"], ["number"]]' /></td>
+		</tr>
+	</table>
+
+	<table id="detail02" class="data02" style="width: 100%;">
+		<colgroup>
+			<col style="width: 15%;">
+			<col style="width: 35%;">
+			<col style="width: 15%;">
+			<col style="width: 35%;">
+		</colgroup>
+		<tr>
+			<th><label for="phone">Phone</label></th>
+			<td class="data01"><input id="phone" type="text" data-validate='[["required"]]' /></td>
+			<th><label for="age">Age</label></th>
+			<td><input id="age" type="text" data-validate='[["required"], ["integer"]]' /></td>
+		</tr>
+		<tr>
+			<th><label for="eyeColor">Eye color</label></th>
+			<td>
+				<select id="eyeColor" data-validate='[["required"]]'>
+					<option>선택</option>
+				</select>
+			</td>
+			<th><label for="company">Company</label></th>
+			<td class="data01"><select id="company" multiple="multiple" data-validate='[["required"]]' style="height: 117px;"></select></td>
+		</tr>
+	</table>
+
+	<table id="detail03" class="data03" style="width: 100%;">
+		<colgroup>
+			<col style="width: 15%;">
+			<col style="width: 35%;">
+			<col style="width: 15%;">
+			<col style="width: 35%;">
+		</colgroup>
+		<tr>
+			<th><label for="gender">Gender</label></th>
+			<td><input id="gender" type="radio" /></td>
+			<th><label for="favoriteFruit">Favorite fruit</label></th>
+			<td><input id="favoriteFruit" type="checkbox" /></td>
+		</tr>
+		<tr>
+			<th><label for="registered">Registered</label></th>
+			<td><input id="registered" type="text" data-format='[["date", 8, "date"]]' data-validate='[["required"]]' /></td>
+			<th><label for="about">About</label></th>
+			<td><textarea id="about" style="width: 95%;" rows="3" data-format='[["limit", "100", "..."]]' data-validate='[["required"]]'></textarea></td>
+		</tr>
+	</table>
+
+	<table id="detail04" class="form" style="width: 100%;">
+		<colgroup>
+			<col style="width: 15%;">
+			<col style="width: 35%;">
+			<col style="width: 15%;">
+			<col style="width: 35%;">
+		</colgroup>
+		<tr>
+			<th><label for="greeting">Greeting</label></th>
+			<td class="data03"><textarea id="greeting" style="width: 95%;" rows="2"></textarea></td>
+			<th><label for="active">Active</label></th>
+			<td class="data01"><input id="active" type="checkbox" /></td>
+		</tr>
+	</table>
+</article>
+
+<script type="text/javascript">
+N(".exap0900").cont({
+	genderCodes: [{
+    	"key" : "male",
+    	"val" : "male"
+	    },{
+	    	"key" : "female",
+	    	"val" : "female"
+	}],
+	eyeColorCodes: [{
+	    	"key" : "blue",
+	    	"val" : "blue"
+	    },{
+	    	"key" : "brown",
+	    	"val" : "brown"
+	    },{
+	    	"key" : "green",
+	    	"val" : "green"
+	}],
+	companyCodes: [{
+	    	"key" : "PROSELY",
+	    	"val" : "PROSELY"
+	    },{
+	    	"key" : "ASSISTIX",
+	    	"val" : "ASSISTIX"
+	    },{
+	    	"key" : "VORATAK",
+	    	"val" : "VORATAK"
+	    },{
+	    	"key" : "CANDECOR",
+	    	"val" : "CANDECOR"
+	    },{
+	    	"key" : "BARKARAMA",
+	    	"val" : "BARKARAMA"
+	    },{
+	    	"key" : "STOCKPOST",
+	    	"val" : "STOCKPOST"
+	    },{
+	    	"key" : "MICROLUXE",
+	    	"val" : "MICROLUXE"
+	    },{
+	    	"key" : "SHADEASE",
+	    	"val" : "SHADEASE"
+	    },{
+	    	"key" : "ZENTIA",
+	    	"val" : "ZENTIA"
+		},{
+	    	"key" : "INTRADISK",
+	    	"val" : "INTRADISK"
+	}],
+	favoriteFruitCodes: [{
+	    	"key" : "apple",
+	    	"val" : "apple"
+	    },{
+	    	"key" : "strawberry",
+	    	"val" : "strawberry"
+	    },{
+	    	"key" : "banana",
+	    	"val" : "banana"
+	}],
+    init : function(view, request) {
+    	// 버튼 컴포넌트 초기화
+    	N(".buttons a", view).button();
+
+    	// N.select 컴포넌트 초기화 및 데이터 바인드
+		N(this.genderCodes).select(N("#gender", view)).bind();
+		N(this.eyeColorCodes).select(N("#eyeColor", view)).bind();
+		N(this.companyCodes).select(N("#company", view)).bind();
+		N(this.favoriteFruitCodes).select(N("#favoriteFruit", view)).bind();
+
+
+
+		// 1. N.forms 컴포넌트 초기화
+    	var data01Form = N([]).form({
+    		context : N(".data01", view),
+    		revert : true
+    	});
+    	var data02Form = N([]).form({
+    		context : N(".data02", view),
+    		revert : true
+    	});
+    	var data03Form = N([]).form({
+    		context : N(".data03", view),
+    		revert : true
+    	});
+
+    	// 2. 데이터
+    	var data01 = [{
+   			"picture" : "http://placehold.it/32x32",
+   			"name" : "Dean Stanley",
+   			"email" : "deanstanley@zentia.com",
+   			"password" : "53e21cba9f982281b3459438",
+   			"balance" : "1284.38",
+   			"phone" : "+1 (920) 409-2680",
+   			"company" : "ZENTIA",
+   			"active" : "Y"
+   		}];
+    	var data02 = [{
+   			"age" : 26,
+   			"eyeColor" : "green"
+   		}];
+    	var data03 = [{
+   			"gender" : "male",
+   			"favoriteFruit" : "strawberry",
+   			"registered" : "20140220",
+   			"about" : "Mollit elit qui reprehenderit fugiat excepteur adipisicing sunt id proident laborum sint proident.\r\nAmet cupidatat ipsum do irure qui magna sunt pariatur commodo eiusmod ipsum qui ad culpa.\r\nNisi tempor cupidatat do tempor reprehenderit irure consectetur cupidatat deserunt fugiat.\r\nIpsum sint id ipsum voluptate duis laboris esse sunt nisi mollit dolore cupidatat.\r\n",
+   			"greeting" : "Hello, Dean Stanley! You have 1 unread messages."
+   		}];
+
+    	// 3. 버튼 이벤트 바인드
+    	// 3-1. data01Form 바인드 버튼
+    	N("#btnBindData01", view).click(function(e) {
+            e.preventDefault();
+            data01Form.bind(0, data01);
+    	});
+    	// 3-2. data02Form 바인드 버튼
+    	N("#btnBindData02", view).click(function(e) {
+            e.preventDefault();
+            data02Form.bind(0, data02);
+    	});
+    	// 3-3. data03Form 바인드 버튼
+    	N("#btnBindData03", view).click(function(e) {
+            e.preventDefault();
+            data03Form.bind(0, data03);
+    	});
+
+    	// 3-4. data01Form 저장 버튼
+    	N("#btnSaveData01", view).click(function(e) {
+            e.preventDefault();
+            if(data01Form.data(true)[0].rowStatus === undefined
+           		&& data02Form.data(true)[0].rowStatus === undefined
+           		&& data03Form.data(true)[0].rowStatus === undefined) {
+            	N(window).alert("변경된 데이터가 없습니다.").show();
+            	return false;
+            }
+            if(data01Form.validate() && data02Form.validate() && data03Form.validate()) {
+            	N(window).alert({
+            		msg : "저장 하시겠습니까?",
+            		confirm : true,
+            		onOk : function() {
+            			N(window).alert({
+                 			title : "서버로 전송되는 파라미터",
+                 			msg : "<pre style='width: 450px; overflow: auto;'>" + N.json.format(data01Form.data(true)[0]).replace(/\\/g, "") + "</pre>"
+                 		}).show();
+            		}
+            	}).show();
+            }
+        });
+    	// 3-5. data02Form 저장 버튼
+    	N("#btnSaveData02", view).click(function(e) {
+            e.preventDefault();
+            if(data01Form.data(true)[0].rowStatus === undefined
+           		&& data02Form.data(true)[0].rowStatus === undefined
+           		&& data03Form.data(true)[0].rowStatus === undefined) {
+            	N(window).alert("변경된 데이터가 없습니다.").show();
+            	return false;
+            }
+            if(data01Form.validate() && data02Form.validate() && data03Form.validate()) {
+            	N(window).alert({
+            		msg : "저장 하시겠습니까?",
+            		confirm : true,
+            		onOk : function() {
+            			N(window).alert({
+                 			title : "서버로 전송되는 파라미터",
+                 			msg : "<pre style='width: 450px; overflow: auto;'>" + N.json.format(data02Form.data(true)[0]).replace(/\\/g, "") + "</pre>"
+                 		}).show();
+            		}
+            	}).show();
+            }
+        });
+    	// 3-6. data03Form 저장 버튼
+    	N("#btnSaveData03", view).click(function(e) {
+            e.preventDefault();
+            if(data01Form.data(true)[0].rowStatus === undefined
+           		&& data02Form.data(true)[0].rowStatus === undefined
+           		&& data03Form.data(true)[0].rowStatus === undefined) {
+            	N(window).alert("변경된 데이터가 없습니다.").show();
+            	return false;
+            }
+            if(data01Form.validate() && data02Form.validate() && data03Form.validate()) {
+            	N(window).alert({
+            		msg : "저장 하시겠습니까?",
+            		confirm : true,
+            		onOk : function() {
+            			N(window).alert({
+                 			title : "서버로 전송되는 파라미터",
+                 			msg : "<pre style='width: 450px; overflow: auto;'>" + N.json.format(data03Form.data(true)[0]).replace(/\\/g, "") + "</pre>"
+                 		}).show();
+            		}
+            	}).show();
+            }
+        });
+    	// 3-7. 폼 전체 한번에 저장
+    	N("#btnSaveAll", view).click(function(e) {
+            e.preventDefault();
+            if(data01Form.data(true)[0].rowStatus === undefined
+           		&& data02Form.data(true)[0].rowStatus === undefined
+           		&& data03Form.data(true)[0].rowStatus === undefined) {
+            	N(window).alert("변경된 데이터가 없습니다.").show();
+            	return false;
+            }
+            if(data01Form.validate() && data02Form.validate() && data03Form.validate()) {
+            	N(window).alert({
+            		msg : "저장 하시겠습니까?",
+            		confirm : true,
+            		onOk : function() {
+            			var params = {};
+
+            			$.extend(params, data01Form.data(true)[0]);
+            			$.extend(params, data02Form.data(true)[0]);
+            			$.extend(params, data03Form.data(true)[0]);
+
+            			N(window).alert({
+                 			title : "서버로 전송되는 파라미터",
+                 			msg : "<pre style='width: 450px; overflow: auto;'>" + N.json.format(params).replace(/\\/g, "") + "</pre>"
+                 		}).show();
+            		}
+            	}).show();
+            }
+        });
+    }
+});
+</script>
