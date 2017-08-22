@@ -27,10 +27,10 @@
 				<a id="btnBindData01" href="#" data-opts='{ "color": "yellowgreen" }'>data01Form 바인드</a>
 				<a id="btnBindData02" href="#" data-opts='{ "color": "yellowgreen" }'>data02Form 바인드</a>
 				<a id="btnBindData03" href="#" data-opts='{ "color": "yellowgreen" }'>data03Form 바인드</a>
-				<a id="btnSaveData01" href="#" data-opts='{ "color": "green" }'>data01Form 저장</a>
-				<a id="btnSaveData02" href="#" data-opts='{ "color": "green" }'>data02Form 저장</a>
-				<a id="btnSaveData03" href="#" data-opts='{ "color": "green" }'>data03Form 저장</a>
-				<a id="btnSaveAll" href="#" data-opts='{ "color": "blue" }'>폼 전체 한번에 저장</a>
+				<a id="btnSaveData01" href="#" data-opts='{ "color": "green", "disable" : true }'>data01Form 저장</a>
+				<a id="btnSaveData02" href="#" data-opts='{ "color": "green", "disable" : true }'>data02Form 저장</a>
+				<a id="btnSaveData03" href="#" data-opts='{ "color": "green", "disable" : true }'>data03Form 저장</a>
+				<a id="btnSaveAll" href="#" data-opts='{ "color": "blue", "disable" : true }'>폼 전체 한번에 저장</a>
 			</li>
 		</ul>
 	</div>
@@ -194,7 +194,13 @@ N(".exap0900").cont({
 		N(this.companyCodes).select(N("#company", view)).bind();
 		N(this.favoriteFruitCodes).select(N("#favoriteFruit", view)).bind();
 
-
+		// 버튼 제어
+		N(".buttons a[id^=btnBindData]", view).click(function() {
+			N("#" + this.id.replace("Bind", "Save")).instance("button").enable();
+			if(!N(".buttons a[id^=btnSaveData]").hasClass("btn_disabled__")) {
+				N("#btnSaveAll").instance("button").enable();
+			}
+		});
 
 		// 1. N.forms 컴포넌트 초기화
     	var data01Form = N([]).form({
@@ -253,96 +259,44 @@ N(".exap0900").cont({
     	// 3-4. data01Form 저장 버튼
     	N("#btnSaveData01", view).click(function(e) {
             e.preventDefault();
-            if(data01Form.data(true)[0].rowStatus === undefined
-           		&& data02Form.data(true)[0].rowStatus === undefined
-           		&& data03Form.data(true)[0].rowStatus === undefined) {
-            	N(window).alert("변경된 데이터가 없습니다.").show();
-            	return false;
-            }
-            if(data01Form.validate() && data02Form.validate() && data03Form.validate()) {
-            	N(window).alert({
-            		msg : "저장 하시겠습니까?",
-            		confirm : true,
-            		onOk : function() {
-            			N(window).alert({
-                 			title : "서버로 전송되는 파라미터",
-                 			msg : "<pre style='width: 450px; overflow: auto;'>" + N.json.format(data01Form.data(true)[0]).replace(/\\/g, "") + "</pre>"
-                 		}).show();
-            		}
-            	}).show();
-            }
+
+           	N(window).alert({
+       			title : "서버로 전송되는 파라미터",
+       			msg : "<pre style='width: 450px; overflow: auto;'>" + N.json.format(data01Form.data(true)[0]).replace(/\\/g, "") + "</pre>"
+       		}).show();
         });
     	// 3-5. data02Form 저장 버튼
     	N("#btnSaveData02", view).click(function(e) {
             e.preventDefault();
-            if(data01Form.data(true)[0].rowStatus === undefined
-           		&& data02Form.data(true)[0].rowStatus === undefined
-           		&& data03Form.data(true)[0].rowStatus === undefined) {
-            	N(window).alert("변경된 데이터가 없습니다.").show();
-            	return false;
-            }
-            if(data01Form.validate() && data02Form.validate() && data03Form.validate()) {
-            	N(window).alert({
-            		msg : "저장 하시겠습니까?",
-            		confirm : true,
-            		onOk : function() {
-            			N(window).alert({
-                 			title : "서버로 전송되는 파라미터",
-                 			msg : "<pre style='width: 450px; overflow: auto;'>" + N.json.format(data02Form.data(true)[0]).replace(/\\/g, "") + "</pre>"
-                 		}).show();
-            		}
-            	}).show();
-            }
+
+            N(window).alert({
+     			title : "서버로 전송되는 파라미터",
+     			msg : "<pre style='width: 450px; overflow: auto;'>" + N.json.format(data02Form.data(true)[0]).replace(/\\/g, "") + "</pre>"
+     		}).show();
         });
     	// 3-6. data03Form 저장 버튼
     	N("#btnSaveData03", view).click(function(e) {
             e.preventDefault();
-            if(data01Form.data(true)[0].rowStatus === undefined
-           		&& data02Form.data(true)[0].rowStatus === undefined
-           		&& data03Form.data(true)[0].rowStatus === undefined) {
-            	N(window).alert("변경된 데이터가 없습니다.").show();
-            	return false;
-            }
-            if(data01Form.validate() && data02Form.validate() && data03Form.validate()) {
-            	N(window).alert({
-            		msg : "저장 하시겠습니까?",
-            		confirm : true,
-            		onOk : function() {
-            			N(window).alert({
-                 			title : "서버로 전송되는 파라미터",
-                 			msg : "<pre style='width: 450px; overflow: auto;'>" + N.json.format(data03Form.data(true)[0]).replace(/\\/g, "") + "</pre>"
-                 		}).show();
-            		}
-            	}).show();
-            }
+
+           	N(window).alert({
+       			title : "서버로 전송되는 파라미터",
+       			msg : "<pre style='width: 450px; overflow: auto;'>" + N.json.format(data03Form.data(true)[0]).replace(/\\/g, "") + "</pre>"
+       		}).show();
         });
     	// 3-7. 폼 전체 한번에 저장
     	N("#btnSaveAll", view).click(function(e) {
             e.preventDefault();
-            if(data01Form.data(true)[0].rowStatus === undefined
-           		&& data02Form.data(true)[0].rowStatus === undefined
-           		&& data03Form.data(true)[0].rowStatus === undefined) {
-            	N(window).alert("변경된 데이터가 없습니다.").show();
-            	return false;
-            }
-            if(data01Form.validate() && data02Form.validate() && data03Form.validate()) {
-            	N(window).alert({
-            		msg : "저장 하시겠습니까?",
-            		confirm : true,
-            		onOk : function() {
-            			var params = {};
 
-            			$.extend(params, data01Form.data(true)[0]);
-            			$.extend(params, data02Form.data(true)[0]);
-            			$.extend(params, data03Form.data(true)[0]);
+            // 폼 데이터 합치기
+            var params = {};
+			$.extend(params, data01Form.data(true)[0]);
+			$.extend(params, data02Form.data(true)[0]);
+			$.extend(params, data03Form.data(true)[0]);
 
-            			N(window).alert({
-                 			title : "서버로 전송되는 파라미터",
-                 			msg : "<pre style='width: 450px; overflow: auto;'>" + N.json.format(params).replace(/\\/g, "") + "</pre>"
-                 		}).show();
-            		}
-            	}).show();
-            }
+			N(window).alert({
+     			title : "서버로 전송되는 파라미터",
+     			msg : "<pre style='width: 450px; overflow: auto;'>" + N.json.format(params).replace(/\\/g, "") + "</pre>"
+     		}).show();
         });
     }
 });
