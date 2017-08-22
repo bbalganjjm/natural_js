@@ -260,27 +260,36 @@ N(".exap0900").cont({
     	N("#btnSaveData01", view).click(function(e) {
             e.preventDefault();
 
+         	// 폼 데이터
+            var params = data01Form.data(true)[0];
+
            	N(window).alert({
        			title : "서버로 전송되는 파라미터",
-       			msg : "<pre style='width: 450px; overflow: auto;'>" + N.json.format(data01Form.data(true)[0]).replace(/\\/g, "") + "</pre>"
+       			msg : "<pre style='width: 450px; overflow: auto;'>" + N.json.format(params).replace(/\\/g, "") + "</pre>"
        		}).show();
         });
     	// 3-5. data02Form 저장 버튼
     	N("#btnSaveData02", view).click(function(e) {
             e.preventDefault();
 
+         	// 폼 데이터
+            var params = data02Form.data(true)[0];
+
             N(window).alert({
      			title : "서버로 전송되는 파라미터",
-     			msg : "<pre style='width: 450px; overflow: auto;'>" + N.json.format(data02Form.data(true)[0]).replace(/\\/g, "") + "</pre>"
+     			msg : "<pre style='width: 450px; overflow: auto;'>" + N.json.format(params).replace(/\\/g, "") + "</pre>"
      		}).show();
         });
     	// 3-6. data03Form 저장 버튼
     	N("#btnSaveData03", view).click(function(e) {
             e.preventDefault();
 
-           	N(window).alert({
+         	// 폼 데이터
+            var params = data03Form.data(true)[0];
+
+         	N(window).alert({
        			title : "서버로 전송되는 파라미터",
-       			msg : "<pre style='width: 450px; overflow: auto;'>" + N.json.format(data03Form.data(true)[0]).replace(/\\/g, "") + "</pre>"
+       			msg : "<pre style='width: 450px; overflow: auto;'>" + N.json.format(params).replace(/\\/g, "") + "</pre>"
        		}).show();
         });
     	// 3-7. 폼 전체 한번에 저장
