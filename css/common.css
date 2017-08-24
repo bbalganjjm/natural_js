@@ -501,11 +501,17 @@ article ul.contents.links li {
 	border-right: 3px solid;
 	padding: 0px 5px;
 	text-align: right;
+	margin: 0;
 }
 
 article ul.contents.links li ul {
 	list-style: none;
-	padding: 10px;
+	padding: 5px;
+}
+
+article ul.contents.links li ul li {
+	line-height: 22px;
+	padding: 0px 5px;
 }
 
 article ul.contents.links li.title {
