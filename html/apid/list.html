@@ -139,7 +139,7 @@
 			<th><label for="rowHandlerBeforeBind">rowHandlerBeforeBind</label></th>
 			<td>
 				<textarea id="rowHandlerBeforeBind" style="height: 75px;">function(rowIdx, rowEle, rowData) {
-	N.log(rowIdx);
+	N.log("rowHandlerBeforeBind", rowIdx);
 	N.log(rowEle);
 	N.log(rowData);
 }</textarea><br>
@@ -149,7 +149,7 @@
 			<th><label for="rowHandler">rowHandler</label></th>
 			<td>
 				<textarea id="rowHandler" style="height: 75px;">function(rowIdx, rowEle, rowData) {
-	N.log(rowIdx);
+	N.log("rowHandler", rowIdx);
 	N.log(rowEle);
 	N.log(rowData);
 }</textarea><br>
@@ -161,7 +161,7 @@
 			<th><label for="onSelect">onSelect</label></th>
 			<td>
 				<textarea id="onSelect" style="height: 90px;">function(rowIdx, rowEle, rowData, beforeRowIdx, e) {
-	N.log(rowIdx);
+	N.log("onSelect", rowIdx);
 	N.log(rowEle);
 	N.log(rowData);
 	N.log(beforeRowIdx);
@@ -173,7 +173,7 @@
 			<th><label for="onBind">onBind</label></th>
 			<td>
 				<textarea id="onBind" style="height: 60px;">function(context, data) {
-	N.log(context);
+	N.log("onBind", context);
 	N.log(data);
 }</textarea><br />
 				<label for="onBind" lang="ko_KR">데이터가 바인드가 완료 된 후 실행되는 이벤트 핸들러</label>
@@ -411,7 +411,11 @@
 
 	    	N("#btnAdd", view).click(function(e) {
 	            e.preventDefault();
-	        	list.add(parseInt(N.string.trimToUndefined(N("#addRow", view).val())));
+	            var addRowIdx = N.string.trimToUndefined(N("#addRow", view).val());
+	            if(addRowIdx !== undefined) {
+	            	addRowIdx = parseInt(addRowIdx);
+	            }
+	        	list.add(addRowIdx);
 
 	        	N("div.btnBox", view).find("a").instance("button", function(u) {
 	            	if(!this.context().is("#btnAdd") && !this.context().is("#btnBind")) {
