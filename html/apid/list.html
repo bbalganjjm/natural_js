@@ -127,12 +127,24 @@
 		</tr>
 		<tr>
 			<th><label for="scrollPagingSize">scrollPaging<br>.size</label></th>
-			<td>
+			<td colspan="3">
 				<input id="scrollPagingSize" type="text" value="50" />
 				<label for="scrollPagingSize" lang="ko_KR">스크롤 페이징 사이즈</label>
 				<p class="alert" lang="ko_KR">0 이면 스크롤 페이징 하지 않습니다.</p>
 				<label for="scrollPagingSize" lang="en_US">Scroll paging size</label>
 				<p class="alert" lang="en_US">If the value is 0 it does not scroll paging.</p>
+			</td>
+		</tr>
+		<tr>
+			<th><label for="rowHandlerBeforeBind">rowHandlerBeforeBind</label></th>
+			<td>
+				<textarea id="rowHandlerBeforeBind" style="height: 75px;">function(rowIdx, rowEle, rowData) {
+	N.log(rowIdx);
+	N.log(rowEle);
+	N.log(rowData);
+}</textarea><br>
+				<label for="rowHandlerBeforeBind" lang="ko_KR">행 요소(LI)가 만들어질 때마다 데이터를 바인드 하기 전 호출되는 이벤트 핸들러</label>
+				<label for="rowHandlerBeforeBind" lang="en_US">Event handler called before binding data whenever a row element(LI) is created</label>
 			</td>
 			<th><label for="rowHandler">rowHandler</label></th>
 			<td>
@@ -140,9 +152,9 @@
 	N.log(rowIdx);
 	N.log(rowEle);
 	N.log(rowData);
-}</textarea><br />
-				<label for="rowHandler" lang="ko_KR">행 요소(LI)가 만들어 질때마다 호출되는 이벤트 핸들러</label>
-				<label for="rowHandler" lang="en_US">Event handler for be created the each row element(LI)</label>
+}</textarea><br>
+				<label for="rowHandler" lang="ko_KR">행 요소(LI)가 만들어질 때마다 데이터를 바인드 한 후 호출되는 이벤트 핸들러</label>
+				<label for="rowHandler" lang="en_US">Event handler called after binding data whenever a row element(LI) is created</label>
 			</td>
 		</tr>
 		<tr>
@@ -369,6 +381,8 @@
 	       				size : N.string.trimToNull(N("#scrollPagingSize", view).val()) !== null ?
 	       					parseInt(N("#scrollPagingSize", view).val()) : 100
 	       			},
+	       			rowHandlerBeforeBind : N.string.trimToNull(N("#rowHandlerBeforeBind", view).val()) !== null ?
+	       				eval("(" + N("#rowHandlerBeforeBind", view).val() + ")") : null,
 	       			rowHandler : N.string.trimToNull(N("#rowHandler", view).val()) !== null ?
 	       				eval("(" + N("#rowHandler", view).val() + ")") : null,
 	    				onSelect : N.string.trimToNull(N("#onSelect", view).val()) !== null ?

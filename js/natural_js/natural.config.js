@@ -149,7 +149,10 @@
 			    	}
 				}
 			}, {
-				"pointcut" : ".intr0100:init|refr.*:init",
+				"pointcut" : [
+					".intr0100:init",
+					".refr.*:init"
+				].join("|"),
 				"adviceType" : "before",
 				/**
 				 * Create Index
