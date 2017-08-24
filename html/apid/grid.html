@@ -356,7 +356,7 @@
 				<td><input id="eyeColor" type="text" /></td>
 				<td id="name"></td>
 				<td><input id="company" type="text" data-validate='[["required"]]' /></td>
-				<td id="gender" align="center"></td>
+				<td align="center"><input id="gender" type="radio" /></td>
 			</tr>
 			<tr>
 				<td id="index" align="center" valign="middle"></td>
@@ -373,6 +373,15 @@
 	    init : function(view, request) {
 	    	// initialize buttons in div.btnBox
 	    	N("div.btnBox a", view).button();
+
+	    	// initialize N.select
+	    	N([{
+	        	"key" : "male",
+	        	"val" : "male"
+			},{
+		        "key" : "female",
+		        "val" : "female"
+		    }]).select(N("#gender", view)).bind();
 
 	    	// bind events
 	    	var grid;

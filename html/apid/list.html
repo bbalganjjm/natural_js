@@ -336,7 +336,7 @@
 		<li>
 			<span style="margin-right: 25px;"><input class="checkAllTarget" type="checkbox" /></span>
 			name : <span id="name" style="margin-right: 55px;"></span>
-			gender : <span id="gender" style="margin-right: 55px;"></span>
+			<span style="margin-right: 55px;">gender : <input id="gender" type="radio" /></span>
 			index : <span id="index"></span>
 			<p style="line-height: 5px;"></p>
 			<label style="margin-left: 56px; margin-right: 25px;">eyeColor : <input id="eyeColor" type="text" /></label>
@@ -354,6 +354,15 @@
 	    init : function(view, request) {
 	    	// initialize buttons in div.btnBox
 	    	N("div.btnBox a", view).button();
+
+	    	// initialize N.select
+	    	N([{
+	        	"key" : "male",
+	        	"val" : "male"
+			},{
+		        "key" : "female",
+		        "val" : "female"
+		    }]).select(N("#gender", view)).bind();
 
 	    	// bind events
 	    	var list;
