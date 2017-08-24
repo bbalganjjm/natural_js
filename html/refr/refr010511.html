@@ -295,13 +295,14 @@
 			<td>null</td>
 			<td></td>
 			<td style="max-width: 299px;">
-				<p>리스트 데이터가 바인드될때 행이 생성될때마다 발생하는 이벤트입니다. 이벤트 콜백 메서드의 인자로 생성될 당시의 row index, 행 요소, 로우 데이터를 넣어줍니다.</p>
+				<p>리스트에서 data를 bind 하거나 add 할때 행이 렌더링 될 때 마다 발생 하는 이벤트 입니다. 이벤트 콜백 메서드의 인자로 생성될 당시의 row index, 행 요소, 로우 데이터를 넣어줍니다.</p>
 				<pre><code class="language-javascript">rowHandler : function(rowIdx, rowEle, rowData) {
 	// this : N.list 인스턴스
 	// rowIdx : 생성되는 행의 index
 	// rowEle : 생성되는 행의 row element(li)
 	// rowData : 생성되는 행의 row data
 }</code></pre>
+				<p class="alert">rowHandler 는 행 마다 값이 바인드 된 후 실행 됩니다.</p>
 			</td>
 		</tr>
 		<tr>
@@ -330,9 +331,9 @@
 			<td style="max-width: 299px;">
 				<p>리스트의 데이터가 바인드 될 때마다 발생되는 이벤트입니다. 이벤트 콜백 메서드의 인자로 context, data를 넣어줍니다.</p>
 				<pre><code class="language-javascript">onBind : function(context, data) {
-	// this : N.grid 인스턴스
-	// context : context(그리드 컨텍스트 요소)
-	// data : 그리드에 바인드 된 데이터
+	// this : N.list 인스턴스
+	// context : context(리스트 컨텍스트 요소)
+	// data : 리스트에 바인드 된 데이터
 }</code></pre>
 				<p class="alert">스크롤페이징에 의해 페이징 될 때도 해당 행수 만큼 페이지가 완성 될 때마다 발생합니다.</p>
 			</td>
