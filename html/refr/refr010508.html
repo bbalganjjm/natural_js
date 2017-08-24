@@ -244,7 +244,7 @@
 		</tr>
 		<tr>
 			<td>checkAll</td>
-			<td>String</td>
+			<td>string</td>
 			<td>null</td>
 			<td></td>
 			<td>
@@ -255,7 +255,7 @@
 		</tr>
 		<tr>
 			<td>checkAllTarget</td>
-			<td>String</td>
+			<td>string</td>
 			<td>null</td>
 			<td></td>
 			<td>
@@ -267,7 +267,7 @@
 		</tr>
 		<tr>
 			<td>checkSingleTarget</td>
-			<td>String</td>
+			<td>string</td>
 			<td>null</td>
 			<td></td>
 			<td>
@@ -519,7 +519,7 @@
 				<p>arguments[3],</p>
 				<p>...arguments[N]</p>
 			</td>
-			<td>String</td>
+			<td>string</td>
 			<td align="center">-</td>
 			<td>
 				data 메서드의 두번째 인자부터 N번째 인자까지 데이터의 컬럼명을 지정하면 해당 컬럼에 해당하는 데이터만 추출하여 반환 합니다.
@@ -535,7 +535,7 @@
 		<tr>
 			<td></td>
 			<td>selector</td>
-			<td>String</td>
+			<td>string</td>
 			<td align="center">-</td>
 			<td>selector 문자열을 입력하면 해당 context 하위 요소에서 선택된 요소를 반환 합니다.</td>
 		</tr>
@@ -556,7 +556,7 @@
 		<tr>
 			<td></td>
 			<td>"append"</td>
-			<td>String</td>
+			<td>string</td>
 			<td align="center">-</td>
 			<td>
 				두번째 인자에 "append" 라는 문자열을 지정하면 처음 바인드 되어 있던 데이터에 다시 바인드 한 데이터를 합쳐 주고 첫번째 인자로 지정한 data를 그리드에 추가로 표시 해 줍니다.
@@ -639,7 +639,7 @@
 			<td>val</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
-			<td>Value object or N.grid</td>
+			<td>value object or N.grid</td>
 			<td>
 				<p>선택한 컬럼의 원래 값을 가져오거나 입력(수정) 합니다.</p>
 				<p class="alert">val 인자를 입력하지 않으면 선택한 값을 반환하고 입력하면 선택한 키 컬럼의 값을 입력한 값으로 바꿔 줍니다.</p>
@@ -656,16 +656,19 @@
 		<tr>
 			<td></td>
 			<td>key</td>
-			<td>String</td>
+			<td>string</td>
 			<td align="center">-</td>
 			<td>가져올 값의 key 컬럼명</td>
 		</tr>
 		<tr>
 			<td></td>
 			<td>val</td>
-			<td>String or number or boolean</td>
+			<td>string|number|boolean|null</td>
 			<td align="center">-</td>
-			<td>저장할 값</td>
+			<td>
+				<p>저장할 값</p>
+				<p class="alert">key 와 같은 id 속성값을 가진 HTML 요소가 있다면 null 은 빈 문자열 숫자는 숫자 문자열, Boolean 은 "true" 나 "false" 문자열로 변환 되어 저장 되고 대상 HTML 요소가 없다면 원형 그대로 저장 됩니다.</p>
+			</td>
 		</tr>
 		<tr>
 			<td>select</td>

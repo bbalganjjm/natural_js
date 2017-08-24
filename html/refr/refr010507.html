@@ -235,7 +235,7 @@
 				<p>arguments[3],</p>
 				<p>...arguments[N]</p>
 			</td>
-			<td>String</td>
+			<td>string</td>
 			<td align="center">-</td>
 			<td>
 				<p><strong style="color: red; font-size: 15px;">기능 구현 예정...</strong></p>
@@ -259,7 +259,7 @@
 		<tr>
 			<td></td>
 			<td>selector</td>
-			<td>String</td>
+			<td>string</td>
 			<td align="center">-</td>
 			<td>selector 문자열을 입력하면 해당 context 하위 요소에서 선택된 요소를 반환 합니다.</td>
 		</tr>
@@ -342,7 +342,7 @@
 			<td>val</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
-			<td>Value object or N.form</td>
+			<td>value object or N.form</td>
 			<td colspan="2">
 				<p>선택한 컬럼의 원래 값을 가져오거나 입력(수정) 합니다.</p>
 				<p class="alert">val 인자를 입력하지 않으면 선택한 값을 반환하고 입력하면 선택한 키 컬럼의 값을 입력한 값으로 바꿔 줍니다.</p>
@@ -352,16 +352,19 @@
 		<tr>
 			<td></td>
 			<td>key</td>
-			<td>String</td>
+			<td>string</td>
 			<td align="center">-</td>
 			<td>가져올 값의 key 컬럼명</td>
 		</tr>
 		<tr>
 			<td></td>
 			<td>val</td>
-			<td>Value object</td>
+			<td>string|number|boolean|null</td>
 			<td align="center">-</td>
-			<td>저장할 값</td>
+			<td>
+				<p>저장할 값</p>
+				<p class="alert">key 와 같은 id 속성값을 가진 HTML 요소가 있다면 null 은 빈 문자열 숫자는 숫자 문자열, Boolean 은 "true" 나 "false" 문자열로 변환 되어 저장 되고 대상 HTML 요소가 없다면 원형 그대로 저장 됩니다.</p>
+			</td>
 		</tr>
 	</table>
 
