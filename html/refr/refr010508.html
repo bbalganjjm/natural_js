@@ -324,6 +324,22 @@
 			<td>검증룰을 지정 합니다. API/DEMO > Natural-DATA 메뉴의 Validator 와 Validation Rules 참고</td>
 		</tr>
 		<tr>
+			<td>rowHandlerBeforeBind</td>
+			<td>Function</td>
+			<td>null</td>
+			<td></td>
+			<td style="max-width: 299px;">
+				<p>그리드에서 data를 bind 하거나 add 할때 행이 렌더링 될 때 마다 발생 하는 이벤트 입니다. 이벤트 콜백 메서드의 인자로 생성될 당시의 row index, 행 요소, 로우 데이터를 넣어줍니다.</p>
+				<pre><code class="language-javascript">rowHandlerBeforeBind : function(rowIdx, rowEle, rowData) {
+	// this : N.grid 인스턴스
+	// rowIdx : 생성되는 행의 index
+	// rowEle : 생성되는 행의 row element(tbody)
+	// rowData : 생성되는 행의 row data
+}</code></pre>
+				<p class="alert">rowHandlerBeforeBind 는 행 마다 값이 바인드 되기 전 실행 됩니다.</p>
+			</td>
+		</tr>
+		<tr>
 			<td>rowHandler</td>
 			<td>Function</td>
 			<td>null</td>
