@@ -87,7 +87,8 @@
 					".refr010508:init",
 					".refr010511:init",
 					".refr010509:init",
-					".refr010510:init"
+					".refr010510:init",
+					".refr010602:init"
 				].join("|"),
 				"adviceType" : "before",
 				"fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 함수명, args 인자 */
