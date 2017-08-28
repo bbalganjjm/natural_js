@@ -1,5 +1,5 @@
 /*!
- * Natural-ARCHITECTURE v0.8.1.7
+ * Natural-ARCHITECTURE v0.8.1.9
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-ARCHITECTURE"] = "0.8.1.7";
+	N.version["Natural-ARCHITECTURE"] = "0.8.1.9";
 
 	$.fn.extend($.extend(N.prototype, {
 		ajax : function(opts) {
@@ -303,8 +303,10 @@
 			if(obj.attr("id") !== undefined && N("[id='" + obj.attr("id") + "']").length > 1) {
 				obj = N("#" + obj.attr("id") + ":not(.view_context__)");
 			}
+			var selector = obj.selector;
 			if(obj.length > 1) {
-				obj = obj.filter(":not(.view_context__)").filter(":last");
+				obj = N(obj.selector + ":not(.view_context__)");
+				obj.selector = selector;
 			}
 			obj.attr("data-pageid", obj.attr("id") ? obj.attr("id") : obj.selector.replace(/\.|\#|\[|\]|\'|\:|\(|\)|\>| |\-/gi, ""));
 			obj.addClass("view_context__");
@@ -352,17 +354,32 @@
 						$(o.advisors).each(function (idx, advisor) {
 							var pointcut;
 							if (!N.isPlainObject(advisor.pointcut)) {
-								pointcut = Controller.aop.pointcuts.regexp;
+								advisor.pointcut = { "type": "regexp", "param": advisor.pointcut };
+								if(N.isString(advisor.pointcut.param)){
+		    						advisor.pointcut.selector = advisor.pointcut.selector || advisor.pointcut.param.substring(0, advisor.pointcut.param.lastIndexOf(":"));
+		    						advisor.pointcut.param = advisor.pointcut.param.substring(advisor.pointcut.param.lastIndexOf(":") + 1);
+								}
 							} else {
 								pointcut = o.pointcuts[advisor.pointcut.type];
 							}
 
+							pointcut = o.pointcuts[advisor.pointcut.type] || Controller.aop.pointcuts[advisor.pointcut.type];
+
+							if(!pointcut){
+								N.error("[Controller]Unkown pointcut type : " + advisor.pointcut.type);
+							}
+
+							if(advisor.pointcut.selector && !cont.view.is(advisor.pointcut.selector)){
+								return;
+							}
+
 							var wrapFn = function(contFrag, fnPath){
+
 								for (var x in contFrag) {
 									if (!contFrag.hasOwnProperty(x)) continue;
 
 									if($.isFunction(contFrag[x])) {
-										if (pointcut.fn(advisor.pointcut, contFrag, fnPath + x)) {
+										if (pointcut.fn(advisor.pointcut.param, contFrag, fnPath + x)) {
 											var real = contFrag[x];
 
 											contFrag[x] = (function (real, x) {
@@ -422,7 +439,7 @@
 									}
 								}
 							};
-							wrapFn.call(this, cont, cont.view.selector + ":");
+							wrapFn.call(this, cont, "");
 						});
 				   	}
 				}
