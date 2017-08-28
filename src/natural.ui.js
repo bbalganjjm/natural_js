@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.14.81
+ * Natural-UI v0.8.15.13
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "v0.8.14.81";
+	N.version["Natural-UI"] = "v0.8.15.13";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -51,6 +51,217 @@
 	}));
 
 	(function(N) {
+
+		var UI = N.ui = {
+			iteration : {
+				render : function(i, limit, delay, lastIdx, callType) {
+	        		var opts = this.options;
+	        		var self = this;
+
+					// clone li for create new row
+					tempRowEleClone = self.tempRowEle.clone(true, true).hide();
+					opts.context.append(tempRowEleClone);
+
+					// for row data bind, use N.form
+					var form = N(opts.data[i]).form({
+						context : tempRowEleClone,
+						html: opts.html,
+						validate : opts.validate,
+						extObj : self,
+						extRow : i,
+						revert : opts.revert,
+						unbind : false
+					})
+
+					if(opts.rowHandlerBeforeBind !== null) {
+						opts.rowHandlerBeforeBind.call(self, i, tempRowEleClone, opts.data[i]);
+					}
+
+					form.bind();
+
+					if(opts.rowHandler !== null) {
+						opts.rowHandler.call(self, i, tempRowEleClone, opts.data[i]);
+					}
+
+					tempRowEleClone.show(delay, function() {
+						i++;
+						if(opts.height === 0 || opts.scrollPaging.size === 0 || (callType === "append" && data.length > 0 && data.length <= opts.scrollPaging.size)) {
+							lastIdx = opts.data.length - 1;
+						} else {
+							lastIdx = opts.scrollPaging.idx + (limit - 1);
+						}
+						// -4(5) is visualization rendering buffer;
+						if(i-4 === lastIdx) {
+							delay = 0;
+						} else {
+							delay = opts.createRowDelay;
+						}
+						if(i <= lastIdx) {
+							if (opts.data.length > 0) {
+								opts.isBinding = true;
+
+								UI.iteration.render.call(self, i, limit, delay, lastIdx, callType);
+							}
+						} else if(i === lastIdx + 1) {
+							if(opts.onBind !== null) {
+								opts.onBind.call(self, opts.context, opts.data);
+							}
+							opts.scrollPaging.limit = opts.scrollPaging.size === 0 ? opts.data.length : opts.scrollPaging.size;
+
+							opts.isBinding = false;
+							opts.context.dequeue("bind");
+						}
+					});
+				},
+				select : function(compNm) {
+					var self = this;
+
+					var lineTag = compNm === "grid" ? "tbody" : "li";
+
+					// set style class name to context element for select, multiselect options
+					this.options.context.addClass(compNm + "_select__");
+
+					// bind tbody click event for select, multiselect options
+					this.tempRowEle.bind("click." + compNm, function(e) {
+						var thisEle = $(this);
+						var retFlag;
+						var isSelected;
+
+						// save the selected row index
+						if(thisEle.hasClass(compNm + "_selected__")) {
+							self.options.row = -1;
+							isSelected = false;
+						} else {
+							self.options.row = thisEle.index() - (compNm === "grid" ? self.options.misc.withoutTbodyLength : 0);
+							isSelected = true;
+						}
+
+						// apply unselect option
+						if(!self.options.multiselect && !self.options.unselect) {
+							self.options.row = thisEle.index() - (compNm === "grid" ? self.options.misc.withoutTbodyLength : 0);
+							isSelected = true;
+						}
+
+						if(self.options.onSelect !== null) {
+							retFlag = self.options.onSelect.call(self, self.options.row, thisEle, self.options.data, self.options.beforeRow, e);
+						}
+
+						if(retFlag === undefined || retFlag === true) {
+							if(isSelected) {
+								if(!self.options.multiselect) {
+									self.options.context.find("> " + lineTag + ":eq(" + self.options.beforeRow + ")").removeClass(compNm + "_selected__");
+								}
+								thisEle.addClass(compNm + "_selected__");
+								self.options.beforeRow = self.options.row;
+							} else {
+								thisEle.removeClass(compNm + "_selected__");
+							}
+						}
+					});
+				},
+	        	checkAll : function(compNm) {
+	        		var opts = this.options;
+	    	        var contextEle = this.contextEle;
+
+					var checkAll = compNm === "grid" ? this.thead.find(this.options.checkAll) : $(this.options.checkAll);
+					var cellTag = compNm === "grid" ? "tbody > tr > td" : "li";
+					checkAll.bind("click." + compNm + ".checkAll", function() {
+						if(!$(this).prop("checked")) {
+							contextEle.find(cellTag + " " + opts.checkAllTarget + ":checked").removeProp("checked");
+						} else {
+							contextEle.find(cellTag + " " + opts.checkAllTarget + ":not(':checked')").prop("checked", true);
+						}
+					});
+					contextEle.on("click." + compNm + ".checkAllTarget", cellTag + " " + opts.checkAllTarget, function() {
+						if(contextEle.find(cellTag + " " + opts.checkAllTarget).length
+								=== contextEle.find(cellTag + " " + opts.checkAllTarget + ":checked").length) {
+							checkAll.prop("checked", true);
+						} else {
+							checkAll.removeProp("checked");
+						}
+					});
+	        	},
+	        	checkSingle : function(compNm) {
+	        		var opts = this.options;
+	    	        var contextEle = this.contextEle;
+
+	    	        var cellTag = compNm === "grid" ? "tbody > tr > td" : "li";
+					contextEle.on("click.grid.checkSingleTarget", cellTag + " " + opts.checkSingleTarget, function() {
+						contextEle.find(cellTag + " " + opts.checkSingleTarget).not(this).removeAttr("checked");
+					});
+	        	}
+			},
+			events : {
+				drag : function(eventNameSpace, startHandler, moveHandler, endHandler) {
+					var selfEle = this;
+					this.bind("mousedown" + eventNameSpace + " touchstart" + eventNameSpace, function(e) {
+		            	var se = e.originalEvent.touches ? e.originalEvent.touches[0] : e;
+		            	e.stopImmediatePropagation();
+		            	e.stopPropagation();
+
+		            	if(e.originalEvent.touches || (e.which || e.button) === 1) {
+		            		$(document).bind("dragstart" + eventNameSpace + " selectstart" + eventNameSpace, function() {
+		            			return false;
+		            		});
+
+		            		var isContinue;
+		            		if(startHandler !== undefined) {
+		            			isContinue = startHandler.call(this, e, selfEle, se.pageX, se.pageY)
+		            		}
+		            		if(isContinue !== false) {
+		            			$(document).bind("mousemove" + eventNameSpace + " touchmove" + eventNameSpace, function(e) {
+			            			var me = e.originalEvent.touches ? e.originalEvent.touches[0] : e;
+			            			e.stopImmediatePropagation();
+			            			e.stopPropagation();
+			            			if(moveHandler !== undefined) {
+			            				moveHandler.call(this, e, selfEle, me.pageX, me.pageY);
+			            			}
+			            		});
+
+			            		$(document).bind("mouseup" + eventNameSpace + " touchend" + eventNameSpace, function(e) {
+			            			e.stopImmediatePropagation();
+			            			e.stopPropagation();
+			            			if(endHandler !== undefined) {
+			            				endHandler.call(this, e, selfEle)
+			            			};
+			            			$(document).unbind("dragstart" + eventNameSpace + " selectstart" + eventNameSpace + " mousemove" + eventNameSpace + " touchmove" + eventNameSpace + " mouseup" + eventNameSpace + " touchend" + eventNameSpace);
+			            		});
+		            		}
+		            	}
+		        	});
+				},
+				scrollPaging : function(contextWrapEle, defSPSize, rowEleLength, rowTagName, bindOpt) {
+					var opts = this.options;
+	        		var self = this;
+
+					contextWrapEle.scroll(function() {
+			        	if(opts.scrollPaging.size > 0) {
+				        	var thisWrap = $(this);
+		                    if (thisWrap.scrollTop() >= opts.context.height() - thisWrap.height()) {
+		                    	rowEleLength = opts.context.find(rowTagName).length;
+		                    	if (rowEleLength >= opts.scrollPaging.idx + defSPSize) {
+			                        if (rowEleLength > 0 && rowEleLength <= opts.data.length) {
+			                            opts.scrollPaging.idx += defSPSize;
+			                        }
+
+			                        if (opts.scrollPaging.idx + opts.scrollPaging.limit >= opts.data.length) {
+			                        	opts.scrollPaging.limit = opts.data.length - opts.scrollPaging.idx;
+			                        } else {
+			                        	opts.scrollPaging.limit = defSPSize;
+			                        }
+
+			                        if(opts.scrollPaging.idx < opts.data.length) {
+			                        	self.bind(undefined, bindOpt);
+			                        } else if(opts.scrollPaging.idx === opts.data.length) {
+			                        	opts.scrollPaging.limit = opts.scrollPaging.size === 0 ? opts.data.length : opts.scrollPaging.size;
+			                        }
+			                    }
+			                }
+			        	}
+		            });
+				}
+			}
+		};
 
 		// Alert
 		var Alert = N.alert = function(obj, msg, vars) {
@@ -218,7 +429,7 @@
 				opts.msgContents.find(".msg_title_box__ .msg_title_close_btn__").bind("click.alert touchend.alert", function(e) {
 					e.preventDefault();
 					if (opts.onCancel !== null) {
-						opts.onCancel(opts.msgContext, opts.msgContents);
+						opts.onCancel.call(self, opts.msgContext, opts.msgContents);
 					}
 					self[opts.closeMode]();
 				});
@@ -267,7 +478,7 @@
 					opts.msgContents.find(".buttonBox__ a.cancel__").bind("click.alert", function(e) {
 						e.preventDefault();
 						if (opts.onCancel !== null) {
-							opts.onCancel(opts.msgContext, opts.msgContents);
+							opts.onCancel.call(self, opts.msgContext, opts.msgContents);
 						}
 						self[opts.closeMode]();
 					});
@@ -906,7 +1117,7 @@
 
 						var onSelectContinue;
 						if(opts.onSelect !== null) {
-							onSelectContinue = opts.onSelect.call(this, opts.context, selDate, opts.monthonly);
+							onSelectContinue = opts.onSelect.call(self, opts.context, selDate, opts.monthonly);
 						}
 						if(onSelectContinue === undefined || onSelectContinue === true) {
 							opts.context.val(selDate.obj.formatDate(selDate.format.replace(/[^Y|^m|^d]/g, "")));
@@ -1001,7 +1212,7 @@
 
 						var onSelectContinue;
 						if(opts.onSelect !== null) {
-							onSelectContinue = opts.onSelect.call(this, opts.context, selDate, opts.monthonly);
+							onSelectContinue = opts.onSelect.call(self, opts.context, selDate, opts.monthonly);
 						}
 						if(onSelectContinue === undefined || onSelectContinue === true) {
 							opts.context.val(selDate.obj.formatDate(selDate.format.replace(/[^Y|^m|^d]/g, "")));
@@ -1417,6 +1628,11 @@
 						self.opener = caller.arguments[0].instance("cont");
 						break;
 					}
+
+				    // Infinite loop prevention processing
+				    if(caller == $.event.dispatch) {
+				    	caller = null;
+				    }
 				}
 			} catch(e) {
 				if(this.options.url !== null) {
@@ -1723,7 +1939,7 @@
 							// excute "onActive" event
 							if(opts.onActive !== null) {
 								if(opts.blockOnActiveWhenCreate === false || (opts.blockOnActiveWhenCreate === true && isFirst !== true)) {
-									opts.onActive.call(this, selTabIdx, selTabEle, selContentEle, opts.links, opts.contents);
+									opts.onActive.call(self, selTabIdx, selTabEle, selContentEle, opts.links, opts.contents);
 			                	}
 							}
 						}
@@ -1761,6 +1977,8 @@
 						if(!selDeclarativeOpts.preload && selDeclarativeOpts.url !== undefined && !selContentEle.data("loaded") || selDeclarativeOpts.stateless) {
 							// load content
 							Tab.loadContent.call(self, selDeclarativeOpts.url, selTabIdx, function(cont, selContentEle_) {
+								selContentEle_.addClass("tab_content_active__");
+
 								// excute "onLoad" event
 								if(opts.onLoad !== null) {
 									opts.onLoad.call(self, selTabIdx, selTabEle, selContentEle_, cont);
@@ -1776,18 +1994,20 @@
 
 								// show tab contents
 								selContentEle_.show(0, function() {
-									selContentEle_.addClass("tab_content_active__ visible__");
+									selContentEle_.addClass("visible__");
 								}).removeClass("hidden__");
 
 								selContentEle.data("loaded", true);
 							});
 						} else {
+							selContentEle.addClass("tab_content_active__");
+
 							onActiveProcFn__();
 							onOpenProcFn__();
 
 							// show tab contents
 							selContentEle.show(0, function() {
-								selContentEle.addClass("tab_content_active__ visible__");
+								selContentEle.addClass("visible__");
 							}).removeClass("hidden__");
 						}
 
@@ -1872,38 +2092,6 @@
 					}, opts.tabScrollCorrection.tabContainerWidthReCalcDelayTime);
 				}
 
-				$.fn.drag = function(nameSpace, startHandler, moveHandler, endHandler) {
-					var selfEle = this;
-					this.bind("mousedown" + nameSpace + " touchstart" + nameSpace, function(e) {
-		            	var se = e.originalEvent.touches ? e.originalEvent.touches[0] : e;
-		            	e.stopImmediatePropagation();
-		            	e.stopPropagation();
-
-		            	if(e.originalEvent.touches || (e.which || e.button) === 1) {
-		            		$(document).bind("dragstart" + nameSpace + " selectstart" + nameSpace, function() {
-		            			return false;
-		            		});
-
-		            		var isContinue = startHandler.call(this, e, selfEle, se.pageX, se.pageY);
-		            		if(isContinue !== false) {
-		            			$(document).bind("mousemove" + nameSpace + " touchmove" + nameSpace, function(e) {
-			            			var me = e.originalEvent.touches ? e.originalEvent.touches[0] : e;
-			            			e.stopImmediatePropagation();
-			            			e.stopPropagation();
-			            			moveHandler.call(this, e, selfEle, me.pageX, me.pageY);
-			            		});
-
-			            		$(document).bind("mouseup" + nameSpace + " touchend" + nameSpace, function(e) {
-			            			e.stopImmediatePropagation();
-			            			e.stopPropagation();
-			            			endHandler.call(this, e, selfEle);
-			            			$(document).unbind("dragstart" + nameSpace + " selectstart" + nameSpace + " mousemove" + nameSpace + " touchmove" + nameSpace + " mouseup" + nameSpace + " touchend" + nameSpace);
-			            		});
-		            		}
-		            	}
-		        	});
-				};
-
 				var sPageX;
 				var prevDefGap = 0;
 				var nextDefGap = 0;
@@ -1911,7 +2099,8 @@
 					prevDefGap = prevBtnEle.outerWidth();
 					nextDefGap = nextBtnEle.outerWidth();
 				}
-				tabContainerEle.drag(eventNameSpace, function(e, tabContainerEle_, pageX, pageY) { // start
+
+				UI.events.drag.call(tabContainerEle, eventNameSpace, function(e, tabContainerEle_, pageX, pageY) { // start
 					tabContainerEle_.removeClass("effect__");
 					if(tabContainerEle_.outerWidth() <= opts.context.innerWidth()) {
 						return false;
@@ -2122,7 +2311,7 @@
 		    	} else if(opts.type === 3 || opts.type === 4) {
 		    		if(opts.context.filter(".select_template__").length === 0) {
 		    			var id = opts.context.attr("id")
-		    			var container = $('<span class="select_input_container__"/>');
+		    			var container = $('<form class="select_input_container__" style="display: inline;" />');
 		    			if (opts.direction === "h") {
 		    				container.addClass("select_input_horizental__");
 		    			} else if (opts.direction === "v") {
@@ -2233,9 +2422,9 @@
 				extRow : -1, // extRow : for N.grid
 				revert : false,
 				unbind : true,
-				initialInputData : null, // for unbind
-				onBindBefore : null,
-				onBindAfter : null
+				onBeforeBind : null,
+				onBind : null,
+				initialInputData : null // for unbind
 			};
 
 			try {
@@ -2323,8 +2512,8 @@
 				var self = this;
 				var vals;
 				if (!N.isEmptyObject(opts.data) && !N.isEmptyObject(vals = opts.data[opts.row])) {
-					if(opts.onBindBefore !== null && this.options.extObj === null) {
-						opts.onBindBefore.call(opts.context, opts.context, vals);
+					if(opts.onBeforeBind !== null && this.options.extObj === null) {
+						opts.onBeforeBind.call(self, opts.context, vals);
 					}
 
 					// add row data changed flag
@@ -2569,8 +2758,8 @@
 						}
 					}
 
-					if(opts.onBindAfter !== null && this.options.extObj === null) {
-						opts.onBindAfter.call(opts.context, opts.context, vals);
+					if(opts.onBind !== null && this.options.extObj === null) {
+						opts.onBind.call(self, opts.context, vals);
 					}
 					// Empty variables
 					eles = val = undefined;
@@ -2759,10 +2948,6 @@
 				var opts = this.options;
 				if(val === undefined) {
 					return opts.data[opts.row][key];
-				} else {
-					if(val === null) {
-						val = "";
-					}
 				}
 
 				var vals = opts.data[opts.row];
@@ -2774,7 +2959,6 @@
 				if (eles.length > 0) {
 					var tagName = eles.get(0).tagName.toLowerCase();
 					var type = N.string.trimToEmpty(eles.attr("type")).toLowerCase();
-					var currVal;
 					if (type !== "radio" && type !== "checkbox") {
 						eles.each(function() {
 							ele = $(this);
@@ -2804,7 +2988,7 @@
 								}
 
 								// put value
-								ele.val(String(val));
+								ele.val(val);
 
 								// validate
 								if(ele.data("validate") !== undefined) {
@@ -2814,7 +2998,7 @@
 								}
 
 								if(notify !== false) {
-									// dataSync
+									// dataSync & add data changed flag
 									ele.trigger("focusout.form.dataSync");
 								} else {
 									// add data changed flag
@@ -2840,17 +3024,15 @@
 								ele.vals(val);
 
 								if(notify !== false) {
-									// dataSync
+									// dataSync & add data changed flag
 									ele.trigger("change.form.dataSync");
 								} else {
 									// add data changed flag
 									ele.addClass("data_changed__");
 								}
 							} else if(tagName === "img") {
-								currVal = String(val);
-
 								// update dataset value
-								vals[ele.attr("id")] = currVal;
+								vals[ele.attr("id")] = val;
 
 								// change row status
 								if (vals.rowStatus !== "insert" && vals.rowStatus !== "delete") {
@@ -2860,15 +3042,13 @@
 								}
 
 								// put image path
-								ele.attr("src", currVal);
+								ele.attr("src", val);
 
 								// notify data changed
 								N.ds.instance(opts.extObj !== null ? opts.extObj : self).notify(opts.extRow > -1 ? opts.extRow : opts.row, ele.attr("id"));
 							} else {
-								currVal = String(val);
-
 								// update dataset value
-								vals[ele.attr("id")] = currVal;
+								vals[ele.attr("id")] = val;
 
 								// change row status
 								if (vals.rowStatus !== "insert" && vals.rowStatus !== "delete") {
@@ -2882,9 +3062,9 @@
 									N(opts.data).formatter(opts.fRules !== null ? opts.fRules : ele).format(opts.row);
 								} else {
 									if(!opts.html) {
-										ele.text(currVal);
+										ele.text(val === null ? "" : val);
 									} else {
-										ele.html(currVal);
+										ele.html(val);
 									}
 								}
 
@@ -2913,7 +3093,7 @@
 							// select value
 							eles.vals(val);
 							if(notify !== false) {
-								// dataSync
+								// dataSync & add data changed flag
 								$(eles.get(0)).trigger("select.form.dataSync");
 							} else {
 								// add data changed flag
@@ -2923,7 +3103,7 @@
 					}
 
 					// Empty variables
-					eles = ele = currVal = undefined;
+					eles = ele = undefined;
 				} else {
 					// put value
 					if(opts.data[opts.row][key] !== val) {
@@ -2966,62 +3146,506 @@
 
 		// List
 		var List = N.list = function(data, opts) {
+			this.options = {
+				data : N.type(data) === "array" ? N(data) : data,
+				row : -1, // selected row index
+				beforeRow : -1, // before selected row index
+				context : null,
+				height : 0,
+				validate : true,
+				html : false,
+				addTop : false,
+				addSelect : true,
+				appendScroll : true,
+				vResizable : false,
+				windowScrollLock : true,
+				select : false,
+				unselect : true,
+				multiselect : false,
+				checkAll : null, // selector
+				checkAllTarget : null, // selector
+				checkSingleTarget : null, // TODO
+				hover : false,
+				revert : false,
+				createRowDelay : 1,
+				scrollPaging : {
+					idx : 0,
+					size : 100
+				},
+				fRules : null,
+				vRules : null,
+				rowHandlerBeforeBind : null,
+				rowHandler : null,
+				onSelect : null,
+				onBind : null
+			};
+
+			try {
+				this.options = $.extend({}, this.options, N.context.attr("ui").list);
+
+				//For $.extend method does not extend object type
+				this.options.scrollPaging = $.extend({}, this.options.scrollPaging, N.context.attr("ui").list.scrollPaging);
+			} catch (e) {
+				N.error("[N.list]" + e, e);
+			}
+
+			if (N.isPlainObject(opts)) {
+				//convert data to wrapped set
+				opts.data = N.type(opts.data) === "array" ? N(opts.data) : opts.data;
+
+				$.extend(this.options, opts);
+				//For $.extend method does not extend object type
+				if(opts.scrollPaging !== undefined) {
+					$.extend(this.options.scrollPaging, opts.scrollPaging);
+				}
+
+				//for scroll paging limit
+				this.options.scrollPaging.limit = this.options.scrollPaging.size;
+
+				if(N.type(this.options.context) === "string") {
+					this.options.context = N(this.options.context);
+				}
+			} else {
+				this.options.context = N(opts);
+			}
+
+			// If the value of the opts.scrollPaging.size option is greater than 0, the addTop option is unconditionally set to true.
+			if(!this.options.addTop) {
+				this.options.scrollPaging.size = 0;
+				this.options.createRowDelay = 0;
+			}
+
+			// for bind "append"
+			this.options.scrollPaging.defSize = this.options.scrollPaging.size;
+
+			// set li template
+			this.tempRowEle = this.options.context.find("> li").clone(true, true);
+
+			// set style class name to context element
+			this.options.context.addClass("list__");
+			// set style class name to context element for hover option
+			if(this.options.hover) {
+				this.options.context.addClass("list_hover__");
+			}
+			if(this.options.select || this.options.multiselect) {
+				UI.iteration.select.call(this, "list");
+			}
+
+			// Create scroll
+			if(this.options.height > 0) {
+				List.createScroll.call(this);
+			}
+
+			this.contextEle = this.options.context;
+			if(this.options.height > 0) {
+				this.contextEle = this.options.context.closest("div.context_wrap__ > .list__");
+        	}
+
+			// set function for check all checkbox in list
+			if(this.options.checkAll !== null && this.options.checkAllTarget !== null) {
+				UI.iteration.checkAll.call(this, "list");
+			} else {
+				if(this.options.checkSingleTarget !== null) {
+					// set function for check single checkbox in list
+					UI.iteration.checkSingle.call(this, "list");
+				}
+			}
+
+			// set this instance to context element
+			this.options.context.instance("list", this);
+
+			// register this to N.ds for realtime data synchronization
+			N.ds.instance(this, true);
+
 			return this;
 		};
 
 		$.extend(List, {
-        	render : function(i, limit, delay, lastIdx, callType) {
-        		var opts = this.options;
-        		var self = this;
+			createScroll : function() {
+				var opts = this.options;
 
-				// clone li for create new row
-				tempRowEleClone = self.tempRowEle.clone(true, true).hide();
-				opts.context.append(tempRowEleClone);
+				opts.context.css({
+					"margin" : "0"
+				});
 
-				if(opts.rowHandler !== null) {
-					opts.rowHandler.call(tempRowEleClone, i, tempRowEleClone, opts.data[i]);
+		        //Create list header
+		        var scrollbarWidth = N.browser.scrollbarWidth();
+
+		        //Create list body
+		        var contextWrapEle = opts.context.wrap('<div class="context_wrap__"/>').parent().css({
+		        	"height" : String(opts.height) + "px",
+		        	"overflow-y" : "scroll",
+		        	"margin-left" : "-1px"
+		        });
+
+		        // for IE
+		        if(N.browser.is("ie")) {
+		        	contextWrapEle.css("overflow-x", "hidden");
+		        }
+
+		        if(opts.windowScrollLock) {
+		        	N.element.windowScrollLock(contextWrapEle);
+		        }
+
+		        // Scroll paging
+		        var self = this;
+		        var defSPSize = opts.scrollPaging.limit;
+		        var rowEleLength;
+		        UI.events.scrollPaging.call(self, contextWrapEle, defSPSize, rowEleLength, "> li", "list.bind");
+
+		        // Vertical height resizing
+		        if(opts.vResizable) {
+		        	List.vResize.call(this, contextWrapEle);
+		        }
+			},
+			vResize : function(contextWrapEle) {
+        		var pressed = false;
+	        	var vResizable = $('<div class="v_resizable__" align="center"></div>');
+	        	vResizable.css("cursor", "n-resize");
+	        	vResizable.css("margin-bottom", contextWrapEle.css("margin-bottom"));
+	        	contextWrapEle.css("margin-bottom", "0");
+
+	        	var currHeight, contextWrapOffset;
+	        	var eventNameSpace = ".list.vResize";
+	        	UI.events.drag.call(vResizable, eventNameSpace, function(e, tabContainerEle_, pageX, pageY) { // start
+        			contextWrapOffset = contextWrapEle.offset();
+				}, function(e, tabContainerEle_, pageX, pageY) { // move
+					currHeight = (pageY - contextWrapOffset.top) + "px";
+					contextWrapEle.css({
+						"height" : currHeight,
+						"max-height" : currHeight
+					});
+				});
+
+	        	contextWrapEle.after(vResizable);
+        	}
+		});
+
+		$.extend(List.prototype, {
+			data : function(rowStatus) { // key name : argument2, argument3... argumentN
+				if(rowStatus === undefined) {
+					return this.options.data.get();
+				} else if(rowStatus === false) {
+					return this.options.data;
+				} else if(rowStatus === "modified") {
+					return this.options.data.datafilter(function(data) {
+						return data.rowStatus !== undefined;
+					}).get();
+				} else if(rowStatus === "selected") {
+					if(this.options.select || this.options.multiselect) {
+						// TODO
+					} else {
+						N.error("[N.list.data]select or multiselect option is must be true(boolean)");
+					}
+				} else if(rowStatus === "checked") {
+					var opts = this.options;
+					var retData = [];
+
+					// clone arguments
+					var args = Array.prototype.slice.call(arguments, 0);
+
+					this.contextEle.find("li " + N.string.trimToEmpty(this.options.checkAllTarget) + N.string.trimToEmpty(this.options.checkSingleTarget) + ":checked").each(function() {
+						if(arguments.length > 1) {
+							args[0] = opts.data[N(this).closest("li").index()];
+							retData.push(N.json.mapFromKeys.apply(N.json, args));
+						} else {
+							retData.push(opts.data[N(this).closest("li").index()]);
+						}
+					});
+					return retData;
+				} else {
+					if(arguments.length > 1) {
+						var args = Array.prototype.slice.call(arguments, 0);
+
+						return this.options.data.datafilter(function(data) {
+							return data.rowStatus === rowStatus;
+						}).map(function() {
+							args[0] = this;
+							return N.json.mapFromKeys.apply(N.json, args);
+						}).get();
+					} else {
+						return this.options.data.datafilter(function(data) {
+							return data.rowStatus === rowStatus;
+						}).get();
+					}
+				}
+			},
+			context : function(sel) {
+				return sel !== undefined ? this.options.context.find(sel) : this.options.context;
+			},
+			select : function(indexArr) {
+				var opts = this.options;
+				if(indexArr === undefined) {
+					// TODO
+				} else {
+					if(N.type(indexArr) === "number") {
+						// TODO
+					} else if(N.type(indexArr) === "array") {
+						// TODO
+					}
+
+					return this;
+				}
+			},
+			check : function(indexArr) {
+				var opts = this.options;
+				if(indexArr === undefined) {
+					var rtnArr = this.contextEle.find("li " + N.string.trimToEmpty(this.options.checkAllTarget) + N.string.trimToEmpty(this.options.checkSingleTarget) + ":checked").map(function() {
+						return N(this).closest("li").index();
+					}).get();
+					return rtnArr;
+				} else {
+					if(N.type(indexArr) === "number") {
+						// TODO
+					} else if(N.type(indexArr) === "array") {
+						// TODO
+					}
+
+					return this;
+				}
+			},
+			/**
+			 * callType arguments is call type about scrollPaging(internal) or data filter(internal) or data append(external)
+			 * callType : "append", "list.bind"
+			 */
+			bind : function(data, callType) {
+				var opts = this.options;
+
+				if(!opts.isBinding) {
+					if(opts.data && callType === "append") {
+						opts.scrollPaging.size = 0;
+						// Merge data to binded data;
+						opts.scrollPaging.idx = opts.data.length - 1;
+						$.merge(opts.data, data);
+					} else {
+						opts.scrollPaging.size = opts.scrollPaging.defSize;
+						// rebind new data
+						if(data != null) {
+							opts.data = N.type(data) === "array" ? N(data) : data;
+						}
+					}
+
+					if(opts.checkAll !== null) {
+						$(opts.checkAll).prop("checked", false);
+					}
+					if (opts.data.length > 0 || (callType === "append" && data && data.length > 0)) {
+						//clear li visual effect
+						opts.context.find("li").clearQueue().stop();
+
+						if(callType !== "list.bind") {
+							if(callType === "append" && data.length > 0) {
+								opts.scrollPaging.idx = opts.data.length - data.length;
+							} else {
+								opts.scrollPaging.idx = 0;
+							}
+						}
+
+						if(opts.scrollPaging.idx === 0) {
+							//remove lis in list body area
+							if(callType === "append" && data.length > 0) {
+								opts.context.find("li.empty__").remove();
+							} else {
+								opts.context.find("li").remove();
+							}
+						}
+
+						var i = opts.scrollPaging.idx;
+						var limit;
+						if(opts.height === 0 || opts.scrollPaging.size === 0 || (callType === "append" && data.length > 0 && data.length <= opts.scrollPaging.size)) {
+							limit = opts.data.length;
+						} else {
+							limit = Math.min(opts.scrollPaging.limit, opts.data.length);
+						}
+
+						var delay = opts.createRowDelay;
+						var lastIdx;
+
+						UI.iteration.render.call(this, i, limit, delay, lastIdx, callType);
+
+						if(opts.appendScroll && callType === "append") {
+							opts.context.parent(".context_wrap__").stop().animate({
+								"scrollTop" : opts.context.parent(".context_wrap__").prop("scrollHeight")
+							}, 300, 'swing');
+						}
+					} else {
+						//remove lis in list body area
+						opts.context.find("li").remove();
+						opts.context.append('<li class="empty__">' +
+								N.message.get(opts.message, "empty") + '</li>');
+					}
+				} else {
+					var self = this;
+					var args = arguments;
+					opts.context.queue("bind", function() {
+						self.bind.apply(self, args);
+					});
+				}
+				return this;
+			},
+			add : function(data, row) {
+				var opts = this.options;
+				if (opts.context.find("li.empty__").length > 0) {
+					opts.context.find("li").remove();
+				}
+				var tempRowEleClone = this.tempRowEle.clone(true, true);
+
+				if(N.isNumeric(data)) {
+	        		row = data;
+	        		data = undefined;
+	        	}
+
+				if(row > opts.data.length || row < 0) {
+					row = undefined;
 				}
 
-				// for row data bind, use N.form
-				N(opts.data[i]).form({
+				if(row === undefined) {
+					if(opts.addTop) {
+						opts.context.prepend(tempRowEleClone);
+					} else {
+						opts.context.append(tempRowEleClone);
+					}
+				} else {
+					var selRowEle = opts.context.find("li:eq(" + row + ")");
+					var scrollTop;
+
+					if(row === 0) {
+						opts.context.prepend(tempRowEleClone);
+					} else if(row === opts.context.find("li").length) {
+						selRowEle = opts.context.find("li:eq(" + (row - 1) + ")");
+					} else {
+						opts.context.find("li:eq(" + row + ")").before(tempRowEleClone);
+					}
+
+					scrollTop = (row * selRowEle.outerHeight()) - (opts.height / 2) + (selRowEle.outerHeight() / 2);
+					if(scrollTop < 0) {
+						scrollTop = 0;
+					}
+					opts.context.parent(".context_wrap__").stop().animate({ "scrollTop" : scrollTop }, 300, 'swing', function() {
+						if(opts.addSelect) {
+							$(this).find("li:eq(" + row + ")").trigger("click.list");
+						}
+					});
+				}
+
+				// for new row data bind, use N.form
+				var form = opts.data.form({
 					context : tempRowEleClone,
 					html: opts.html,
 					validate : opts.validate,
-					extObj : self,
-					extRow : i,
-					revert : opts.revert,
-					unbind : false
-				}).bind();
+					extObj : this,
+					extRow : row === undefined ? (opts.addTop ? 0 : opts.data.length) : row,
+					addTop : opts.addTop,
+					revert : opts.revert
+				})
 
-				tempRowEleClone.show(delay, function() {
-					i++;
-					if(opts.height === 0 || opts.scrollPaging.size === 0 || (callType === "append" && data.length > 0 && data.length <= opts.scrollPaging.size)) {
-						lastIdx = opts.data.length - 1;
-					} else {
-						lastIdx = opts.scrollPaging.idx + (limit - 1);
-					}
-					// -4(5) is visualization rendering buffer;
-					if(i-4 === lastIdx) {
-						delay = 0;
-					} else {
-						delay = opts.createRowDelay;
-					}
-					if(i <= lastIdx) {
-						if (opts.data.length > 0) {
-							opts.isBinding = true;
+				if(opts.rowHandlerBeforeBind !== null) {
+					opts.rowHandler.call(this, form.options.extRow, tempRowEleClone, data);
+				}
 
-							List.render.call(self, i, limit, delay, lastIdx, callType);
+				form.add(data, row);
+
+				if(opts.rowHandler !== null) {
+					opts.rowHandler.call(this, form.options.extRow, tempRowEleClone, form.data(true)[0]);
+				}
+
+				// unselect rows
+				opts.context.find("> li").removeClass("list_selected__");
+
+				// scroll to created row element
+				if(row === undefined) {
+					opts.context.parent(".context_wrap__").stop().animate({
+						"scrollTop" : (opts.addTop ? 0 : opts.context.parent(".context_wrap__").prop("scrollHeight"))
+					}, 300, 'swing', function() {
+						if(opts.addSelect) {
+							$(this).find("> ul > li:" + (opts.addTop ? "first" : "last")).trigger("click.list");
 						}
-					} else if(i === lastIdx + 1) {
-						if(opts.onBind !== null) {
-							opts.onBind.call(opts.context, opts.context, opts.data);
-						}
-						opts.scrollPaging.limit = opts.scrollPaging.size === 0 ? opts.data.length : opts.scrollPaging.size;
+					});
+				}
 
-						opts.isBinding = false;
-						opts.context.dequeue("bind");
+				return this;
+			},
+			remove : function(row) {
+				var opts = this.options;
+				if(row === undefined || row > opts.data.length - 1) {
+		        	N.error("[N.list.remove]Row index out of range");
+		        }
+
+				if (opts.data[row].rowStatus === "insert") {
+		            opts.data.splice(row, 1);
+		            opts.context.find("li:eq(" + row + ")").remove();
+		        } else {
+		        	opts.data[row].rowStatus = "delete";
+		        	opts.context.find("li:eq(" + row + ")").addClass("row_data_deleted__");
+		        }
+
+				N.ds.instance(this).notify();
+				return this;
+			},
+			revert : function(row) {
+				var opts = this.options;
+				if(!opts.revert) {
+					N.error("[N.form.revert]Can not revert. N.form's revert option value is false");
+				}
+
+				if(row !== undefined) {
+					opts.context.find("li:eq(" + String(row) + ")").instance("form").revert();
+				} else {
+					opts.context.find("li").instance("form", function(i) {
+						if(this.options !== undefined && (this.options.data[0].rowStatus === "update" || this.options.data[0].rowStatus === "insert")) {
+							this.revert();
+						}
+					});
+				}
+				return this;
+			},
+			validate : function(row) {
+				var opts = this.options;
+				var valiRslt = true;
+				if(row !== undefined) {
+					valiRslt = opts.context.find("li:eq(" + String(row) + ")").instance("form").validate();
+				} else {
+					// Select the rows that rows data was not changed but that has failed validation input elements
+					if(this.options.context.find(".validate_false__").length > 0) {
+						this.options.context.find(".validate_false__").focusout();
+						valiRslt = false;
 					}
-				});
+
+					var rowStatus;
+					opts.context.find("li").instance("form", function(i) {
+						if(this.options !== undefined && this.options.data.length > 0) {
+							rowStatus = this.options.data[0].rowStatus;
+							// Select the rows that data was changed
+							if(rowStatus === "update" || rowStatus === "insert") {
+								if(!this.validate()) {
+									valiRslt = false;
+								}
+							}
+						}
+					});
+				}
+
+				return valiRslt;
+			},
+			val : function(row, key, val) {
+				if(val === undefined) {
+					return this.options.data[row][key];
+				}
+				this.options.context.find("li:eq(" + String(row) + ")").instance("form").val(key, val);
+				return this;
+			},
+			update : function(row, key) {
+				if(row !== undefined) {
+					if(key !== undefined) {
+						this.options.context.find("li:eq(" + String(row) + ")").instance("form").update(0, key);
+					} else if(this.options.data[row]._isRevert !== true && this.options.data[row].rowStatus === "insert") {
+						this.add(this.options.data);
+					} else {
+						this.options.context.find("li:eq(" + String(row) + ")").instance("form").update(0);
+					}
+				} else {
+					this.bind(undefined, "list.update");
+				}
+				return this;
 			}
 		});
 
@@ -3044,6 +3668,7 @@
 				sortable : false,
 				windowScrollLock : true,
 				select : false,
+				unselect : true,
 				multiselect : false,
 				checkAll : null, // selector
 				checkAllTarget : null, // selector
@@ -3057,6 +3682,7 @@
 				},
 				fRules : null,
 				vRules : null,
+				rowHandlerBeforeBind : null,
 				rowHandler : null,
 				onSelect : null,
 				onBind : null,
@@ -3120,42 +3746,10 @@
 			if(this.options.hover) {
 				this.options.context.addClass("grid_hover__");
 			}
+
+			// set selectable
 			if(this.options.select || this.options.multiselect) {
-				// set style class name to context element for select, multiselect options
-				this.options.context.addClass("grid_select__");
-
-				var self = this;
-				// bind tbody click event for select, multiselect options
-				this.tempRowEle.bind("click.grid.tbody", function(e) {
-					var thisEle = $(this);
-					var retFlag;
-					var selected;
-
-					// save the selected row index
-					if(thisEle.hasClass("grid_selected__")) {
-						self.options.row = -1;
-						selected = true;
-					} else {
-						self.options.row = thisEle.index() - self.options.misc.withoutTbodyLength;
-						selected = false;
-					}
-
-					if(self.options.onSelect !== null) {
-						retFlag = self.options.onSelect.call(thisEle, self.options.row, thisEle, self.options.data, self.options.beforeRow, e);
-					}
-
-					if(retFlag === undefined || retFlag === true) {
-						if(selected) {
-							thisEle.removeClass("grid_selected__");
-						} else {
-							if(!self.options.multiselect) {
-								self.options.context.find("> tbody:eq(" + self.options.beforeRow + ")").removeClass("grid_selected__");
-							}
-							thisEle.addClass("grid_selected__");
-							self.options.beforeRow = self.options.row;
-						}
-					}
-				});
+				UI.iteration.select.call(this, "grid");
 			}
 
 			// set cell count in tbody
@@ -3173,19 +3767,19 @@
 
 			// set tbody cell's id attribute into th cell in thead
 			this.thead = Grid.setTheadCellInfo.call(this);
-			this.rowContainerEle = this.options.context;
+			this.contextEle = this.options.context;
 			if(this.options.height > 0) {
-				this.rowContainerEle = this.options.context.closest("div.tbody_wrap__ > .grid__");
+				this.contextEle = this.options.context.closest("div.tbody_wrap__ > .grid__");
         	}
 
-			// set function for check all checkbox in grid
+			// set function for check all checkbox in list
 			if(this.options.checkAll !== null && this.options.checkAllTarget !== null) {
-				Grid.checkAll.call(this);
-			}
-
-			// set function for check single checkbox in grid
-			if(this.options.checkSingleTarget !== null) {
-				Grid.checkSingle.call(this);
+				UI.iteration.checkAll.call(this, "grid");
+			} else {
+				if(this.options.checkSingleTarget !== null) {
+					// set function for check single checkbox in list
+					UI.iteration.checkSingle.call(this, "grid");
+				}
 			}
 
 			// sortable, v(ertical)Resizable
@@ -3219,9 +3813,16 @@
 			removeColgroup : function() {
 				var opts = this.options;
 				if(opts.context.find("colgroup").length > 0) {
-					var firstTr = opts.context.find("thead > tr:first");
+					var firstTrInThead = opts.context.find("thead > tr:first");
+					var firstTrInTfoot;
+					if(opts.height > 0) {
+						firstTrInTfoot = opts.context.find("tfoot > tr:first");
+					}
 					opts.context.find("colgroup > col").each(function(i) {
-						firstTr.find("th:eq(" + String(i) + ")").css("width", this.style.width).removeAttr("scope");
+						firstTrInThead.find("th:eq(" + String(i) + ")").css("width", this.style.width).removeAttr("scope");
+						if(opts.height > 0) {
+							firstTrInTfoot.find("td:eq(" + String(i) + ")").css("width", this.style.width).removeAttr("scope");
+						}
 					}).parent().remove();
 					this.options.misc.withoutTbodyLength -= 1;
 				}
@@ -3269,7 +3870,7 @@
 		        this.tempRowEle.find("td").css({
 	                "border-top" : "none"
 		        });
-		        var tbodyWrap = opts.context.wrap('<div class="tbody_wrap__"/>').parent().css({
+		        var contextWrapEle = opts.context.wrap('<div class="tbody_wrap__"/>').parent().css({
 		        	"height" : String(opts.height) + "px",
 		        	"overflow-y" : "scroll",
 		        	"margin-left" : "-1px",
@@ -3278,42 +3879,18 @@
 
 		        // for IE
 		        if(N.browser.is("ie")) {
-		        	tbodyWrap.css("overflow-x", "hidden");
+		        	contextWrapEle.css("overflow-x", "hidden");
 		        }
 
 		        if(opts.windowScrollLock) {
-		        	N.element.windowScrollLock(tbodyWrap);
+		        	N.element.windowScrollLock(contextWrapEle);
 		        }
 
 		        // Scroll paging
 		        var self = this;
 		        var defSPSize = opts.scrollPaging.limit;
 		        var rowEleLength;
-		        tbodyWrap.scroll(function() {
-		        	if(opts.scrollPaging.size > 0) {
-			        	var thisWrap = $(this);
-	                    if (thisWrap.scrollTop() >= opts.context.height() - thisWrap.height()) {
-	                    	rowEleLength = opts.context.find("> tbody").length;
-	                    	if (rowEleLength >= opts.scrollPaging.idx + defSPSize) {
-		                        if (rowEleLength > 0 && rowEleLength <= opts.data.length) {
-		                            opts.scrollPaging.idx += defSPSize;
-		                        }
-
-		                        if (opts.scrollPaging.idx + opts.scrollPaging.limit >= opts.data.length) {
-		                        	opts.scrollPaging.limit = opts.data.length - opts.scrollPaging.idx;
-		                        } else {
-		                        	opts.scrollPaging.limit = defSPSize;
-		                        }
-
-		                        if(opts.scrollPaging.idx < opts.data.length) {
-		                        	self.bind(undefined, "grid.bind");
-		                        } else if(opts.scrollPaging.idx === opts.data.length) {
-		                        	opts.scrollPaging.limit = opts.scrollPaging.size === 0 ? opts.data.length : opts.scrollPaging.size;
-		                        }
-		                    }
-		                }
-		        	}
-	            });
+		        UI.events.scrollPaging.call(self, contextWrapEle, defSPSize, rowEleLength, "> tbody", "grid.bind");
 
 		        // Create grid footer
 		        var tfootWrap;
@@ -3331,17 +3908,31 @@
 
 		        // Vertical height resizing
 		        if(opts.vResizable) {
-		        	Grid.vResize.call(this, gridWrap, tbodyWrap, tfootWrap);
+		        	Grid.vResize.call(this, gridWrap, contextWrapEle, tfootWrap);
 		        }
 			},
-			vResize : function(gridWrap, tbodyWrap, tfootWrap) {
+			vResize : function(gridWrap, contextWrapEle, tfootWrap) {
         		var pressed = false;
 	        	var vResizable = $('<div class="v_resizable__" align="center"></div>');
 	        	vResizable.css("cursor", "n-resize");
 	        	vResizable.css("margin-bottom", gridWrap.css("margin-bottom"));
 	        	gridWrap.css("margin-bottom", "0");
 
-	        	var currHeight, tbodyOffset, tfootHeight = 0;
+	        	var currHeight, contextWrapOffset, tfootHeight = 0;
+	        	var eventNameSpace = ".grid.vResize";
+	        	UI.events.drag.call(vResizable, eventNameSpace, function(e, tabContainerEle_, pageX, pageY) { // start
+	        		if(tfootWrap !== undefined) {
+        				tfootHeight = tfootWrap.height();
+        			}
+        			contextWrapOffset = contextWrapEle.offset();
+				}, function(e, tabContainerEle_, pageX, pageY) { // move
+					currHeight = (pageY - contextWrapOffset.top - tfootHeight) + "px";
+					contextWrapEle.css({
+						"height" : currHeight,
+						"max-height" : currHeight
+					});
+				});
+
 	        	vResizable.bind("mousedown.grid.vResize touchstart.grid.vResize", function(e) {
 					if(e.originalEvent.touches) {
 						e.preventDefault();
@@ -3349,10 +3940,7 @@
 					}
 
 	        		if(e.originalEvent.touches || (e.which || e.button) === 1) {
-	        			if(tfootWrap !== undefined) {
-	        				tfootHeight = tfootWrap.height();
-	        			}
-	        			tbodyOffset = tbodyWrap.offset();
+
 
 	        			$(document).bind("dragstart.grid.vResize selectstart.grid.vResize", function() {
 	        				return false;
@@ -3366,8 +3954,8 @@
 								mte = e.originalEvent.touches[0];
 							}
 	        				if(pressed) {
-	        					currHeight = ((mte !== undefined ? mte.pageY : e.pageY) - tbodyOffset.top - tfootHeight) + "px";
-	        					tbodyWrap.css({
+	        					currHeight = ((mte !== undefined ? mte.pageY : e.pageY) - contextWrapOffset.top - tfootHeight) + "px";
+	        					contextWrapEle.css({
 	        						"height" : currHeight,
 	        						"max-height" : currHeight
 	        					});
@@ -3386,7 +3974,8 @@
         	resize : function() {
         		var self = this;
 
-        		var resizeBar, currResizeBar, resizeBarHeight, cellEle, currCellEle, currNextCellEle, targetNextCellEle, targetCellEle, currResizeBarEle,
+        		var resizeBar, currResizeBar, resizeBarHeight, cellEle, currCellEle, currNextCellEle, targetCellEle, targetNextCellEle,
+        			targetTfootCellEle, targetNextTfootCellEle, currResizeBarEle,
 					defWidth, nextDefWidth, currWidth, nextCurrWidth, startOffsetX,
 					minPx, maxPx, defPx, movedPx;
 
@@ -3409,7 +3998,7 @@
     	        }
 
 				this.thead.bind("mouseover.grid.resize touchstart.grid.resize", function() {
-					resizeBarHeight = (opts.height > 0 ? self.rowContainerEle.closest(".grid_wrap__").height() - 3 : self.rowContainerEle.height() + resizeBarCorrectionHeight) + 1 + opts.misc.resizeBarCorrectionHeight;
+					resizeBarHeight = (opts.height > 0 ? self.contextEle.closest(".grid_wrap__").height() - 3 : self.contextEle.height() + resizeBarCorrectionHeight) + 1 + opts.misc.resizeBarCorrectionHeight;
 					theadCells.each(function() {
 						var cellEle = $(this);
 						cellEle.find("> .resize_bar__").css({
@@ -3458,6 +4047,10 @@
 		            		if(opts.height > 0) {
 		            			targetCellEle = opts.context.find("thead th:eq(" + theadCells.index(currCellEle) + ")");
 		            			targetNextCellEle = opts.context.find("thead th:eq(" + (theadCells.index(currCellEle) + 1) + ")");
+		            			if(opts.height > 0 && opts.context.parent().parent(".grid_wrap__").find("tfoot").length > 0) {
+		            				targetTfootCellEle = opts.context.parent().parent(".grid_wrap__").find("tfoot > tr > td:eq(" + theadCells.index(currCellEle) + ")");
+			            			targetNextTfootCellEle = opts.context.parent().parent(".grid_wrap__").find("tfoot > tr > td:eq(" + (theadCells.index(currCellEle) + 1) + ")");
+		            			}
 		            		}
 		            		// Convert flexible cell width to absolute cell width when the clicked resizeBar is last last resizeBar
 		            		if(isFirstTimeLastClick && islast) {
@@ -3466,6 +4059,9 @@
 
 	            					if(targetCellEle !== undefined) {
 	            						opts.context.find("thead th:eq(" + theadCells.index(this) + ")").width(Math.floor($(this).width()) + opts.misc.resizableCorrectionWidth).removeAttr("width");
+	            					}
+	            					if(opts.height > 0 && targetTfootCellEle !== undefined) {
+	            						opts.context.parent().parent(".grid_wrap__").find("tfoot > tr > td:eq(" + theadCells.index(this) + ")").width(Math.floor($(this).width()) + opts.misc.resizableCorrectionWidth).removeAttr("width");
 	            					}
 		    					});
 		            			isFirstTimeLastClick = false;
@@ -3503,6 +4099,10 @@
 		            						if(targetCellEle !== undefined) {
 		            							targetCellEle.css("width", currWidth + "px");
 	            								targetNextCellEle.css("width", nextCurrWidth + "px");
+		            						}
+		            						if(targetTfootCellEle !== undefined) {
+		            							targetTfootCellEle.css("width", currWidth + "px");
+		            							targetNextTfootCellEle.css("width", nextCurrWidth + "px");
 		            						}
 		            					}
 		            					currCellEle.find(".resize_bar__").offset({
@@ -3851,36 +4451,6 @@
 						bfrSelId = id;
 					}).prependTo(theadCells.filter("[data-filter='true']"));
 			},
-        	checkAll : function() {
-        		var opts = this.options;
-    	        var thead = this.thead;
-    	        var rowContainerEle = this.rowContainerEle;
-
-				var checkAll = thead.find(this.options.checkAll);
-				checkAll.bind("click.grid.checkAll", function() {
-					if(!$(this).prop("checked")) {
-						rowContainerEle.find("tbody td " + opts.checkAllTarget + ":checked").removeProp("checked");
-					} else {
-						rowContainerEle.find("tbody td " + opts.checkAllTarget + ":not(':checked')").prop("checked", true);
-					}
-				});
-				rowContainerEle.on("click.grid.checkAllTarget", "tbody td " + opts.checkAllTarget, function() {
-					if(rowContainerEle.find("tbody td " + opts.checkAllTarget).length
-							=== rowContainerEle.find("tbody td " + opts.checkAllTarget + ":checked").length) {
-						checkAll.prop("checked", true);
-					} else {
-						checkAll.removeProp("checked");
-					}
-				});
-        	},
-        	checkSingle : function() {
-        		var opts = this.options;
-    	        var rowContainerEle = this.rowContainerEle;
-
-				rowContainerEle.on("click.grid.checkSingleTarget", "tbody td " + opts.checkSingleTarget, function() {
-					rowContainerEle.find("tbody td " + opts.checkSingleTarget).not(this).removeAttr("checked");
-				});
-        	},
         	setTheadCellInfo : function() {
         		var opts = this.options;
         		var thead;
@@ -3935,7 +4505,7 @@
 					// clone arguments
 					var args = Array.prototype.slice.call(arguments, 0);
 
-					this.rowContainerEle.find("tbody td " + N.string.trimToEmpty(this.options.checkAllTarget) + N.string.trimToEmpty(this.options.checkSingleTarget) + ":checked").each(function() {
+					this.contextEle.find("tbody td " + N.string.trimToEmpty(this.options.checkAllTarget) + N.string.trimToEmpty(this.options.checkSingleTarget) + ":checked").each(function() {
 						if(arguments.length > 1) {
 							args[0] = opts.data[N(this).closest("tbody").index() - opts.misc.withoutTbodyLength];
 							retData.push(N.json.mapFromKeys.apply(N.json, args));
@@ -3981,7 +4551,7 @@
 			check : function(indexArr) {
 				var opts = this.options;
 				if(indexArr === undefined) {
-					var rtnArr = this.rowContainerEle.find("tbody td " + N.string.trimToEmpty(this.options.checkAllTarget) + N.string.trimToEmpty(this.options.checkSingleTarget) + ":checked").map(function() {
+					var rtnArr = this.contextEle.find("tbody td " + N.string.trimToEmpty(this.options.checkAllTarget) + N.string.trimToEmpty(this.options.checkSingleTarget) + ":checked").map(function() {
 						return N(this).closest("tbody").index() - opts.misc.withoutTbodyLength;
 					}).get();
 					return rtnArr;
@@ -4079,7 +4649,8 @@
 						var delay = opts.createRowDelay;
 						var lastIdx;
 
-						List.render.call(this, i, limit, delay, lastIdx, callType);
+						UI.iteration.render.call(this, i, limit, delay, lastIdx, callType);
+
 						if(opts.appendScroll && i > 0 && callType === "append") {
 							opts.context.parent(".tbody_wrap__").stop().animate({
 								"scrollTop" : opts.context.parent(".tbody_wrap__").prop("scrollHeight")
@@ -4111,6 +4682,7 @@
 
 				if(N.isNumeric(data)) {
 	        		row = data;
+	        		data = undefined;
 	        	}
 
 				if(row > opts.data.length || row < 0) {
@@ -4141,7 +4713,7 @@
 					}
 					opts.context.parent(".tbody_wrap__").stop().animate({ "scrollTop" : scrollTop }, 300, 'swing', function() {
 						if(opts.addSelect) {
-							$(this).find("tbody:eq(" + row + ")").trigger("click.grid.tbody");
+							$(this).find("tbody:eq(" + row + ")").trigger("click.grid");
 						}
 					});
 				}
@@ -4155,23 +4727,28 @@
 					extRow : row === undefined ? (opts.addTop ? 0 : opts.data.length) : row,
 					addTop : opts.addTop,
 					revert : opts.revert
-				}).add(data, row);
+				});
+
+				if(opts.rowHandlerBeforeBind !== null) {
+					opts.rowHandler.call(this, form.options.extRow, tempRowEleClone, data);
+				}
+
+				form.add(data, row);
 
 				if(opts.rowHandler !== null) {
-					opts.rowHandler.call(tempRowEleClone, form.options.extRow, tempRowEleClone, form.data(true)[0]);
+					opts.rowHandler.call(this, form.options.extRow, tempRowEleClone, form.data(true)[0]);
 				}
 
 				// unselect rows
 				opts.context.find("> tbody").removeClass("grid_selected__");
 
-				// focus to first input element
-
+				// scroll to created row element
 				if(row === undefined) {
 					opts.context.parent(".tbody_wrap__").stop().animate({
 						"scrollTop" : (opts.addTop ? 0 : opts.context.parent(".tbody_wrap__").prop("scrollHeight"))
 					}, 300, 'swing', function() {
 						if(opts.addSelect) {
-							$(this).find("> table > tbody:" + (opts.addTop ? "first" : "last")).trigger("click.grid.tbody");
+							$(this).find("> table > tbody:" + (opts.addTop ? "first" : "last")).trigger("click.grid");
 						}
 					});
 				}
@@ -4246,6 +4823,9 @@
 				}
 				this.options.context.find("tbody:eq(" + String(row) + ")").instance("form").val(key, val);
 				return this;
+			},
+			move : function(from, to) {
+
 			},
 			update : function(row, key) {
 				if(row !== undefined) {
@@ -4434,6 +5014,7 @@
 			},
 			bind : function(data, totalCount) {
 				var opts = this.options;
+				var self = this;
 
 				if(arguments.length > 0 && N.type(arguments[0]) === "number") {
 					// reset totalCount
@@ -4497,7 +5078,7 @@
                         	}
                     	}
                     	if(opts.blockOnChangeWhenBind === false || (opts.blockOnChangeWhenBind === true && isFirst !== true)) {
-                    		opts.onChange.call(this, opts.pageNo, this, selData, currPageNavInfo);
+                    		opts.onChange.call(self, opts.pageNo, this, selData, currPageNavInfo);
                     	}
                     }
 
@@ -4661,6 +5242,7 @@
 			},
 			bind : function(data) {
 				var opts = this.options;
+				var self = this;
 
 				//to rebind new data
 				if(data != null) {
@@ -4730,7 +5312,7 @@
 						if(opts.onCheck !== null && e.clientX > 0 && e.clientY > 0) {
 							var closestLi = N(this).closest("li");
 							var checkedEle = N(this).closest("ul").find(".tree_last_node__ :checked");
-							opts.onCheck.call(closestLi
+							opts.onCheck.call(self
 									, closestLi.data("index")
 									, closestLi
 									, opts.data[closestLi.data("index")]
@@ -4751,7 +5333,7 @@
 					e.preventDefault();
 					var parentLi = N(this).parent("li");
 					if(opts.onSelect !== null) {
-						opts.onSelect.call(parentLi, parentLi.data("index"), parentLi, opts.data[parentLi.data("index")]);
+						opts.onSelect.call(self, parentLi.data("index"), parentLi, opts.data[parentLi.data("index")]);
 					}
 					rootNode.find("li > a.tree_key__.tree_active__").removeClass("tree_active__");
 					N(this).addClass("tree_active__");
