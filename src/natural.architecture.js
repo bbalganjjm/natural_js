@@ -1,5 +1,5 @@
 /*!
- * Natural-ARCHITECTURE v0.8.1.7
+ * Natural-ARCHITECTURE v0.8.1.9
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-ARCHITECTURE"] = "0.8.1.7";
+	N.version["Natural-ARCHITECTURE"] = "0.8.1.9";
 
 	$.fn.extend($.extend(N.prototype, {
 		ajax : function(opts) {
@@ -316,8 +316,10 @@
 			if(obj.attr("id") !== undefined && N("[id='" + obj.attr("id") + "']").length > 1) {
 				obj = N("#" + obj.attr("id") + ":not(.view_context__)");
 			}
+			var selector = obj.selector;
 			if(obj.length > 1) {
-				obj = obj.filter(":not(.view_context__)").filter(":last");
+				obj = N(obj.selector + ":not(.view_context__)");
+				obj.selector = selector;
 			}
 			obj.attr("data-pageid", obj.attr("id") ? obj.attr("id") : obj.selector.replace(/\.|\#|\[|\]|\'|\:|\(|\)|\>| |\-/gi, ""));
 			obj.addClass("view_context__");
