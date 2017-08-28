@@ -143,16 +143,29 @@
 							if(obj.is(N.context.attr("architecture").page.context)) {
 								N.gc[N.context.attr("core").gcMode]();
 							}
-							if (!obj.request.options.append) {
-								obj.html(data);
-							} else {
+							if (obj.request.options.append) {
 								obj.append(data);
+							} else if(obj.request.options.replace){
+								obj.attr("id", obj.attr("id") + "_pending_to_remove");
+								obj.css("display", "none");
+								obj.after(data);
+							} else {
+								obj.html(data);
 							}
 							// Deprecated
 							if (obj.request.options.effect) {
 								obj.hide()[obj.request.options.effect[0]](obj.request.options.effect[1], obj.request.options.effect[2]);
 							}
-							if(obj.children(".view_context__:last").length > 0) {
+							if(obj.request.options.replace){
+								if(obj.nextAll(".view_context__:first").length > 0){
+									var cont = obj.nextAll(".view_context__:first").instance("cont");
+									if(cont !== undefined){
+										// triggering "init" method
+										Controller.trInit.call(this, cont, obj.request);
+									}
+								}
+								obj.remove();
+							} else if(obj.children(".view_context__:last").length > 0) {
 								var cont = obj.children(".view_context__:last").instance("cont");
 								if(cont !== undefined) {
 									// triggering "init" method
@@ -359,11 +372,9 @@
 		    						advisor.pointcut.selector = advisor.pointcut.selector || advisor.pointcut.param.substring(0, advisor.pointcut.param.lastIndexOf(":"));
 		    						advisor.pointcut.param = advisor.pointcut.param.substring(advisor.pointcut.param.lastIndexOf(":") + 1);
 								}
-							} else {
-								pointcut = o.pointcuts[advisor.pointcut.type];
 							}
 
-							pointcut = o.pointcuts[advisor.pointcut.type] || Controller.aop.pointcuts[advisor.pointcut.type];
+							pointcut = o.pointcuts ? (o.pointcuts[advisor.pointcut.type] || Controller.aop.pointcuts[advisor.pointcut.type]) : Controller.aop.pointcuts[advisor.pointcut.type];
 
 							if(!pointcut){
 								N.error("[Controller]Unkown pointcut type : " + advisor.pointcut.type);
