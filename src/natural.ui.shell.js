@@ -1,5 +1,5 @@
 /*!
- * Natural-UI.Shell v0.8.1.3, Works fine in IE9 and above
+ * Natural-UI.Shell v0.8.1.6, Works fine in IE9 and above
  * bbalganjjm@gmail.com
  *
  * Copyright 2017 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2017-05-11T20:00Z
  */
 (function(window, $) {
-	N.version["Natural-UI.Shell"] = "v0.8.1.3";
+	N.version["Natural-UI.Shell"] = "v0.8.1.6";
 
 	$.fn.extend($.extend(N.prototype, {
 		notify : function(opts) {
@@ -153,11 +153,11 @@
 				maxTabs : 0, // 0 is unlimit
 				entireLoadIndicator : false,
 				entireLoadScreenBlock : false,
+				onEntireLoadXhrCaptureDuration : 300,
 				onBeforeLoad : null,
 				onLoad : null,
 				onBeforeEntireLoad : null,
 				onEntireLoad : null,
-				onEntireLoadXhrCaptureDuration : 300,
 				onBeforeActive : null,
 				onActive : null,
 				onBeforeInactive : null,
@@ -435,10 +435,10 @@
 					}
 
 					if(opts.onLoad !== null) {
-						opts.onLoad.call(self, docOpts.docId, cont);
+						opts.onLoad.call(self, docOpts.docId);
 					}
 					if(docOpts.onLoad !== null) {
-						docOpts.onLoad.call(self, docOpts.docId, cont);
+						docOpts.onLoad.call(self, docOpts.docId);
 					}
 	        	});
 			},
@@ -600,8 +600,7 @@
 							onRemoveState : null,
 							onBeforeRemove : null,
 							onRemove : null,
-							stateless : false,
-							visible : true
+							stateless : false
 						};
 						$.extend(opts.docs[docId], docOpts);
 
@@ -793,6 +792,15 @@
 					Documents.remove.call(self, targetTabEle);
 				}
 				return this;
+			},
+			"doc" : function(docId) {
+				if(docId !== undefined) {
+					return this.options.docs[docId];
+				}
+				return this.options.docs;
+			},
+			"cont" : function(docId) {
+				return this.context(".docs_contents__." + docId + "__ > .view_context__").instance("cont");
 			}
 		});
 
