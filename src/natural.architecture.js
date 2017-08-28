@@ -372,11 +372,9 @@
 		    						advisor.pointcut.selector = advisor.pointcut.selector || advisor.pointcut.param.substring(0, advisor.pointcut.param.lastIndexOf(":"));
 		    						advisor.pointcut.param = advisor.pointcut.param.substring(advisor.pointcut.param.lastIndexOf(":") + 1);
 								}
-							} else {
-								pointcut = o.pointcuts[advisor.pointcut.type];
 							}
 
-							pointcut = o.pointcuts[advisor.pointcut.type] || Controller.aop.pointcuts[advisor.pointcut.type];
+							pointcut = o.pointcuts ? (o.pointcuts[advisor.pointcut.type] || Controller.aop.pointcuts[advisor.pointcut.type]) : Controller.aop.pointcuts[advisor.pointcut.type];
 
 							if(!pointcut){
 								N.error("[Controller]Unkown pointcut type : " + advisor.pointcut.type);
