@@ -41,6 +41,15 @@
 				<ul>
 					<li>request(arguments[0]) : Communicator.request</li>
 				</ul>
+				<p class="alert">다음과 같이 Error 객체를 리턴하면 다음 단계의 필터가 실행 되지 않습니다.</p>
+				<pre class="line-numbers"><code class="language-javascript">
+...
+afterInit : function(request, data, textStatus, xhr) {
+    if(data &amp;&amp; data.fail){
+        return new Error("stop filter execution after this");
+    }
+}
+...</code></pre>
 			</td>
 		</tr>
 		<tr>
@@ -56,6 +65,15 @@
 					<li>xhr(arguments[1]) : jQuery XMLHTTPRequest</li>
 					<li>settings(arguments[2]) : jQuery XMLHTTPRequest 요청 정보</li>
 				</ul>
+				<p class="alert">다음과 같이 Error 객체를 리턴하면 다음 단계의 필터가 실행 되지 않습니다.</p>
+				<pre class="line-numbers"><code class="language-javascript">
+...
+beforeSend : function(request, data, textStatus, xhr) {
+    if(data &amp;&amp; data.fail){
+        return new Error("stop filter execution after this");
+    }
+}
+...</code></pre>
 			</td>
 		</tr>
 		<tr>
@@ -73,6 +91,15 @@
 					<li>textStatus(arguments[2]) : 응답에 대한 상태 문자("success", "notmodified", "nocontent", "error", "timeout", "abort", or "parsererror")</li>
 					<li>xhr(arguments[3]) : jQuery XMLHTTPRequest</li>
 				</ul>
+				<p class="alert">다음과 같이 Error 객체를 리턴하면 다음 단계의 필터가 실행 되지 않습니다.</p>
+				<pre class="line-numbers"><code class="language-javascript">
+...
+success : function(request, data, textStatus, xhr) {
+    if(data &amp;&amp; data.fail){
+        return new Error("stop filter execution after this");
+    }
+}
+...</code></pre>
 			</td>
 		</tr>
 		<tr>
@@ -89,6 +116,15 @@
 					<li>textStatus(arguments[2]) : 응답에 대한 상태 문자("timeout", "error", "abort", and "parsererror")</li>
 					<li>errorThrown(arguments[3]) : Error thrown object</li>
 				</ul>
+				<p class="alert">다음과 같이 Error 객체를 리턴하면 다음 단계의 필터가 실행 되지 않습니다.</p>
+				<pre class="line-numbers"><code class="language-javascript">
+...
+error : function(request, data, textStatus, xhr) {
+    if(data &amp;&amp; data.fail){
+        return new Error("stop filter execution after this");
+    }
+}
+...</code></pre>
 			</td>
 		</tr>
 		<tr>
@@ -104,6 +140,15 @@
 					<li>xhr(arguments[1]) : jQuery XMLHTTPRequest</li>
 					<li>textStatus(arguments[2]) : 응답에 대한 상태 문자("success", "notmodified", "nocontent", "error", "timeout", "abort", or "parsererror")</li>
 				</ul>
+				<p class="alert">다음과 같이 Error 객체를 리턴하면 다음 단계의 필터가 실행 되지 않습니다.</p>
+				<pre class="line-numbers"><code class="language-javascript">
+...
+complete : function(request, data, textStatus, xhr) {
+    if(data &amp;&amp; data.fail){
+        return new Error("stop filter execution after this");
+    }
+}
+...</code></pre>
 			</td>
 		</tr>
 	</table>
