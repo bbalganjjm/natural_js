@@ -112,27 +112,43 @@
 					}
 				});
 
+				var isFilterStopped = false;
 				// request filter
 				$(afterInitFilters).each(function(i) {
-					this(obj.request);
+					if(this(obj.request) instanceof Error){
+						isFilterStopped = true;
+						return false;
+					};
 				});
+				if(isFilterStopped) return;
 
 				$.extend(obj.request.options, {
 					beforeSend : function(xhr, settings) {
+					    var isFilterStopped = false;
 						// request filter
 						$(beforeSendFilters).each(function(i) {
-							this(obj.request, xhr, settings);
+							if(this(obj.request, xhr, settings) instanceof Error){
+								isFilterStopped = true;
+								return false;
+							}
 						});
+						if(isFilterStopped) return false;
 					},
 					success : function(data, textStatus, xhr) {
+					    var isFilterStopped = false;
 						// request filter
 						$(successFilters).each(function(i) {
 							var fData = this(obj.request, data, textStatus, xhr);
+							if(fData instanceof Error){
+								isFilterStopped = true;
+								return false;
+							}
 							if(fData !== undefined) {
 								data = fData;
 							}
 							fData = undefined;
 						});
+						if(isFilterStopped) return false;
 
 						if (!N.isElement(obj)) {
 							if (obj.request.options.urlSync && obj.request.options.referrer.replace(/!/g, "") != window.location.href.replace(/!/g, "")) {
@@ -183,17 +199,25 @@
 						}
 					},
 					error : function(xhr, textStatus, errorThrown) {
+						var isFilterStopped = false;
 						// request filter
 						$(errorFilters).each(function(i) {
-							this(obj.request, xhr, textStatus, errorThrown);
+							if(this(obj.request, xhr, textStatus, errorThrown) instanceof Error){
+								isFilterStopped = true;
+								return false;
+							}
 						});
 
 						N.error("[N.ajax." + textStatus + "]" + errorThrown, errorThrown);
 					},
 					complete : function(xhr, textStatus) {
+						var isFilterStopped = false;
 						// request filter
 						$(completeFilters).each(function(i) {
-							this(obj.request, xhr, textStatus);
+							if(this(obj.request, xhr, textStatus) instanceof Error){
+								isFilterStopped = true;
+								return false;
+							}
 						});
 					}
 				});
