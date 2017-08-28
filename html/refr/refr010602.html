@@ -432,7 +432,7 @@ N("page id").cont({
 })
 </code></pre>
 
-		<p class="alert">Documents.request 은 Communicator.request 모듈을 그대로 사용하므로 [Natural-ARCHITECTURE] 메뉴의 [Communicator 탭] 에서 Communicator.request 섹션을 참고 하세요.</p>
+		<p class="alert">Documents.request 의 자세한 스펙과 사용법은 Communicator.request 모듈을 그대로 사용하므로 [Natural-ARCHITECTURE] 메뉴의 [Communicator 탭] 에서 Communicator.request 섹션을 참고 하세요.</p>
 	<h3>
 		<span lang="ko_KR">함수</span>
 		<span lang="en_US">Methods</span>
@@ -491,43 +491,43 @@ N("page id").cont({
 			<td>
 				<p>컨테츠 옵션(페이지 옵션)을 입력 합니다.</p>
 <pre><code class="language-javascript">
-	var docOpts = {
-		url : "url", // 컨텐츠(페이지) URL
-		docId : docId, // 컨텐츠(페이지) 아이디
-		docNm : docNm, // 컨텐츠(페이지) 명
-		onBeforeLoad : function(docId, target) {
-			// 추가 되는 컨텐츠(페이지) 에만 적용되는 onBeforeLoad 이벤트.
-		},
-		onLoad : function(docId) {
-			// 추가 되는 컨텐츠(페이지) 에만 적용되는 onLoad 이벤트.
-		},
-		onBeforeActive : function(docId) {
-			// 추가 되는 컨텐츠(페이지) 에만 적용되는 onBeforeActive 이벤트.
-		},
-		onActive : function(docId) {
-			// 추가 되는 컨텐츠(페이지) 에만 적용되는 onActive 이벤트.
-		},
-		onBeforeInactive : function(docId) {
-			// 추가 되는 컨텐츠(페이지) 에만 적용되는 onBeforeInactive 이벤트.
-		},
-		onInactive : function(docId) {
-			// 추가 되는 컨텐츠(페이지) 에만 적용되는 onInactive 이벤트.
-		},
-		onBeforeRemoveState : function(docId) {
-			// 추가 되는 컨텐츠(페이지) 에만 적용되는 onBeforeRemoveState 이벤트.
-		},
-		onRemoveState : function(docId) {
-			// 추가 되는 컨텐츠(페이지) 에만 적용되는 onRemoveState 이벤트.
-		},
-		onBeforeRemove : function(docId) {
-			// 추가 되는 컨텐츠(페이지) 에만 적용되는 onBeforeRemove 이벤트.
-		},
-		onRemove : function(docId) {
-			// 추가 되는 컨텐츠(페이지) 에만 적용되는 onRemove 이벤트.
-		},
-		stateless : false // 상태유지 여부
-	}
-}</code></pre>
+var docOpts = {
+	url : "url", // 컨텐츠(페이지) URL
+	docId : docId, // 컨텐츠(페이지) 아이디
+	docNm : docNm, // 컨텐츠(페이지) 명
+	onBeforeLoad : function(docId, target) {
+		// 추가 되는 컨텐츠(페이지) 에만 적용되는 onBeforeLoad 이벤트.
+	},
+	onLoad : function(docId) {
+		// 추가 되는 컨텐츠(페이지) 에만 적용되는 onLoad 이벤트.
+	},
+	onBeforeActive : function(docId) {
+		// 추가 되는 컨텐츠(페이지) 에만 적용되는 onBeforeActive 이벤트.
+	},
+	onActive : function(docId) {
+		// 추가 되는 컨텐츠(페이지) 에만 적용되는 onActive 이벤트.
+	},
+	onBeforeInactive : function(docId) {
+		// 추가 되는 컨텐츠(페이지) 에만 적용되는 onBeforeInactive 이벤트.
+	},
+	onInactive : function(docId) {
+		// 추가 되는 컨텐츠(페이지) 에만 적용되는 onInactive 이벤트.
+	},
+	onBeforeRemoveState : function(docId) {
+		// 추가 되는 컨텐츠(페이지) 에만 적용되는 onBeforeRemoveState 이벤트.
+	},
+	onRemoveState : function(docId) {
+		// 추가 되는 컨텐츠(페이지) 에만 적용되는 onRemoveState 이벤트.
+	},
+	onBeforeRemove : function(docId) {
+		// 추가 되는 컨텐츠(페이지) 에만 적용되는 onBeforeRemove 이벤트.
+	},
+	onRemove : function(docId) {
+		// 추가 되는 컨텐츠(페이지) 에만 적용되는 onRemove 이벤트.
+	},
+	stateless : false // 상태유지 여부
+}
+</code></pre>
 				<p class="alert">개별 이벤트들은 전역 이벤트가 실행 된 후 실행 됩니다.</p>
 			</td>
 		</tr>
