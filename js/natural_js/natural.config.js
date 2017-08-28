@@ -717,7 +717,7 @@
 			/*
 			"onBeforeLoad" : function(docId, target) {
 			},
-			"onLoad" : function(docId, cont) {
+			"onLoad" : function(docId) {
 			},
 			"onBeforeEntireLoad" : function(docId) {
 			},
@@ -727,7 +727,7 @@
 			},
 			*/
 			"onActive" : function(docId, isFromDocsTabList, isNotLoaded) {
-				var cont = this.context(".docs_contents__." + docId + "__ > .view_context__").instance("cont");
+				var cont = this.cont(docId);
 				var url = cont.request.options.url;
 				var hash = url.replace("html/", "").replace(".html", "");
 				if(location.hash.split("/").length < 3) {
