@@ -152,21 +152,21 @@
 			</td>
 		</tr>
 		<tr>
-			<th><label for="onBindBefore">onBindBefore</label></th>
+			<th><label for="onBeforeBind">onBeforeBind</label></th>
 			<td>
-				<textarea id="onBindBefore" style="height: 45px;">function(context, rowData) {
-	N.log("onBindBefore", context, rowData);
+				<textarea id="onBeforeBind" style="height: 45px;">function(context, rowData) {
+	N.log("onBeforeBind", context, rowData);
 }</textarea><br>
-				<label for="onBindBefore" lang="ko_KR">데이터가 바인드 되기 전 실행되는 이벤트 핸들러</label>
-				<label for="onBindBefore" lang="en_US">Event handler for brefore bind the data</label>
+				<label for="onBeforeBind" lang="ko_KR">데이터가 바인드 되기 전 실행되는 이벤트 핸들러</label>
+				<label for="onBeforeBind" lang="en_US">Event handler for brefore bind the data</label>
 			</td>
-			<th><label for="onBindAfter">onBindAfter</label></th>
+			<th><label for="onBind">onBind</label></th>
 			<td>
-				<textarea id="onBindAfter" style="height: 45px;">function(context, rowData) {
-	N.log("onBindAfter", context, rowData);
+				<textarea id="onBind" style="height: 45px;">function(context, rowData) {
+	N.log("onBind", context, rowData);
 }</textarea><br>
-				<label for="onBindAfter" lang="ko_KR">데이터가 바인드 된 후 실행되는 이벤트 핸들러</label>
-				<label for="onBindAfter" lang="en_US">Event handler for after bind the data</label>
+				<label for="onBind" lang="ko_KR">데이터가 바인드 된 후 실행되는 이벤트 핸들러</label>
+				<label for="onBind" lang="en_US">Event handler for after bind the data</label>
 			</td>
 		</tr>
 	</table>
@@ -384,10 +384,10 @@
 	    			html : N("#html", view).is(":checked"),
 	        		revert : N("#revert", view).is(":checked"),
 	        		unbind : N("#unbind", view).is(":checked"),
-	        		onBindBefore : N.string.trimToNull(N("#onBindBefore", view).val()) !== null ?
-	           				eval("(" + N("#onBindBefore", view).val() + ")") : null,
-					onBindAfter : N.string.trimToNull(N("#onBindAfter", view).val()) !== null ?
-	           				eval("(" + N("#onBindAfter", view).val() + ")") : null
+	        		onBeforeBind : N.string.trimToNull(N("#onBeforeBind", view).val()) !== null ?
+	           				eval("(" + N("#onBeforeBind", view).val() + ")") : null,
+					onBind : N.string.trimToNull(N("#onBind", view).val()) !== null ?
+	           				eval("(" + N("#onBind", view).val() + ")") : null
 	    		}
 
 	    		form = N(data).form(opts);

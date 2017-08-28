@@ -164,6 +164,34 @@
 			<td></td>
 			<td>검증룰을 지정 합니다. API/DEMO > Natural-DATA 메뉴의 Validator 와 Validation Rules 참고</td>
 		</tr>
+		<tr>
+			<td>onBeforeBind</td>
+			<td>Function</td>
+			<td>null</td>
+			<td></td>
+			<td>
+				<p>폼에 데이터가 바인드 되지 전 발생 되는 이벤트입니다.</p>
+				<pre><code class="language-javascript">onBeforeBind : function(context, rowData) {
+	// this : N.grid 인스턴스
+	// context : 폼 context 요소
+	// rowData : 폼에 바인드 될 데이터
+}</code></pre>
+			</td>
+		</tr>
+		<tr>
+			<td>onBind</td>
+			<td>Function</td>
+			<td>null</td>
+			<td></td>
+			<td>
+				<p>폼에 데이터가 바인드가 완료 된 후 발생 되는 이벤트입니다.</p>
+				<pre><code class="language-javascript">onBind : function(context, rowData) {
+	// this : N.grid 인스턴스
+	// context : 폼 context 요소
+	// rowData : 폼에 바인드 된 데이터
+}</code></pre>
+			</td>
+		</tr>
 	</table>
 
 	<h3>
