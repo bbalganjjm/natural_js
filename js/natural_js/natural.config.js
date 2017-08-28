@@ -65,31 +65,31 @@
 		"cont" : {
 			"advisors" : [{
 				"pointcut" : [
-					".refr010201:init",
-					".refr010202:init",
-					".refr010301:init",
-					".refr010302:init",
-					".refr010303:init",
-					".refr010311:init",
-					".refr010312:init",
-					".refr010401:init",
-					".refr010402:init",
-					".refr010403:init",
-					".refr010404:init",
-					".refr010405:init",
-					".refr010501:init",
-					".refr010502:init",
-					".refr010503:init",
-					".refr010504:init",
-					".refr010505:init",
-					".refr010506:init",
-					".refr010507:init",
-					".refr010508:init",
-					".refr010511:init",
-					".refr010509:init",
-					".refr010510:init",
+					".refr010201",
+					".refr010202",
+					".refr010301",
+					".refr010302",
+					".refr010303",
+					".refr010311",
+					".refr010312",
+					".refr010401",
+					".refr010402",
+					".refr010403",
+					".refr010404",
+					".refr010405",
+					".refr010501",
+					".refr010502",
+					".refr010503",
+					".refr010504",
+					".refr010505",
+					".refr010506",
+					".refr010507",
+					".refr010508",
+					".refr010511",
+					".refr010509",
+					".refr010510",
 					".refr010602:init"
-				].join("|"),
+				].join(","),
 				"adviceType" : "before",
 				"fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 함수명, args 인자 */
 					var view = args[0];
@@ -107,9 +107,9 @@
 				}
 			}, {
 				"pointcut" : [
-					".refr0101:init",
+					".refr0101",
 					".gtst0100:init"
-				].join("|"),
+				].join(","),
 				"adviceType" : "before",
 				"fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 함수명, args 인자 */
 					var view = args[0];
@@ -125,12 +125,12 @@
 				}
 			}, {
 				"pointcut" : [
-					".home0100:init",
-					".refr0102:init",
-					".refr0103:init",
-					".refr0104:init",
+					".home0100",
+					".refr0102",
+					".refr0103",
+					".refr0104",
 					".refr0105:init"
-				].join("|"),
+				].join(","),
 				"adviceType" : "before",
 				"fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 함수명, args 인자 */
 					var view = args[0];
@@ -151,9 +151,9 @@
 				}
 			}, {
 				"pointcut" : [
-					".intr0100:init",
-					".refr.*:init"
-				].join("|"),
+					".intr0100",
+					"[class*=refr]:init"
+				].join(","),
 				"adviceType" : "before",
 				/**
 				 * Create Index
