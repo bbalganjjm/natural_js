@@ -11,10 +11,13 @@
 	<p>
 		Documents(이하 N.docs) 는 Natural-JS 로 제작 된 메뉴 페이지들을 MDI(Multi Document Interface) 나 SDI(Single Document Interface) 형태로 표시 할 수 있는 페이지 컨테이너 입니다.
 	</p>
+
+	<!--
 	<h3>API DEMO</h3>
 	<p lang="ko_KR" class="alert">데모에는 모든 옵션 및 기능을 포함하고 있지 않습니다. 전체 기능 목록은 데모 바로 아래 있는 기능 문서들을 참고 바랍니다.</p>
 	<p lang="en_US" class="alert">The demo does not include all options and features. For a complete list of features, please refer to the function documentation directly below the demo.</p>
 	<div data-page="docs" class="apidemo"></div>
+	 -->
 
 	<h3>
 		<span lang="ko_KR">생성자</span>
@@ -416,18 +419,18 @@ onRemove : function(docId) {
 		<p>Document.request(N.docs.request) 는 단독으로 사용될 수 없고 N.docs 로 컨텐츠를 열때 마다 생성 되는 모듈입니다. request는 요청에 대한 옵션을 지정 할 수 있고 요청정보를 가지고 있고 페이지간 데이터 전달을 위한 attr 메서드가 구현 되어 있습니다. </p>
 		<p>add 함수를 호출 하기 전에 다음과 같이 request attribute 를 정의 하면</p>
 		<pre><code class="language-javascript">
-	var docs = N("container selector").docs();
-	docs.request.attr("pageParam", { a : 1 }).add("page id", "page name", { url : "url" });
-}</code></pre>
+var docs = N("container selector").docs();
+docs.request.attr("pageParam", { a : 1 }).add("page id", "page name", { url : "url" });
+</code></pre>
 		<p>불러와진 컨텐츠의 Controller(N.cont) 오브젝트의 init 함수의 두번째 인자(request)로  불러 올 수 있습니다.</p>
 		<pre><code class="language-javascript">
-	N("page id").cont({
-		init : function(view, request) {
-			N.log(request.attr("pageParam")); // --> { a : 1 }
-			// request 는 다른 함수들에서 this.request 로 참조 가능
-		}
-	})
-}</code></pre>
+N("page id").cont({
+	init : function(view, request) {
+		N.log(request.attr("pageParam")); // --> { a : 1 }
+		// request 는 다른 함수들에서 this.request 로 참조 가능
+	}
+})
+</code></pre>
 
 		<p class="alert">Documents.request 은 Communicator.request 모듈을 그대로 사용하므로 [Natural-ARCHITECTURE] 메뉴의 [Communicator 탭] 에서 Communicator.request 섹션을 참고 하세요.</p>
 	<h3>
