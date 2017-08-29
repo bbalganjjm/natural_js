@@ -230,6 +230,7 @@ article h2 {
 	padding: 40px 0 20px 15px;
 	background: url("../images/icon/dt_leaf.png") no-repeat 0 40px;
 	font-size: 1.2em;
+	color: #080;
 	margin: 0 0 0 0;
 }
 
@@ -240,7 +241,7 @@ article ul.contents {
 article h3 {
 	font-size: 1.2em;
 	margin: 0;
-	color: #050;
+	color: #080;
 	padding: 35px 0 18px 15px;
 	background: url("../images/icon/h3_leaf.gif") no-repeat 0px 35px;
 }
@@ -249,6 +250,7 @@ article h4 {
 	font-size: 1.1em;
 	margin: 0;
 	padding: 15px 0 10px 0;
+	color: #080;
 }
 
 article p {
