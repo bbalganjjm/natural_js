@@ -234,6 +234,43 @@
 	    }
 	}));
 
+	(function(){
+		var paramMatch = /^([^,]+),(.+)/;
+		var getterMap = {
+				"default": function($el, attrName, propertyName){
+					return $el.attr(attrName) ? [ $el.attr(attrName) ] : [];
+				},
+				"data": function($el, attrName, propertyName){
+					return $el.data(propertyName) ? [ $el.data(propertyName) ] : [];
+				},
+				"class": function($el, attrName, propertyName){
+					return $el.attr('class') ? $el.attr('class').split(' ') : [];
+				},
+				"css": function($el, attrName, propertyName){
+					return $el.css(propertyName) ? [ $el.css(propertyName) ] : [];
+				}
+		};
+		$.expr[":"].regexp = $.expr.createPseudo(function(meta){
+			if(!meta) return $.noop;
+
+			var params = meta.match(paramMatch);
+			if(!params) return $.noop;
+
+			var attrNames = params[1].trim().split(':'), attrName = attrNames[0].trim(), propertyName = attrNames.length == 2 ? attrNames[1].trim() : '';
+			var regexp = new RegExp(params[2].trim());
+			var getter = getterMap[attrName] || getterMap['default'];
+
+			return function(el){
+				$el = $(el);
+				var values = getter($el, attrName, propertyName);
+				for(var i = 0, len = values.length; i < len; i++)
+					if(regexp.test(values[i])) return true;
+				return false;
+			};
+		});
+	})();
+
+
 	(function(N) {
 		// N local variables
 		$.extend(N, {
