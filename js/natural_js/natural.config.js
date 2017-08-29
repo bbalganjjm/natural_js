@@ -184,6 +184,21 @@
 							}
 						});
 			    	}
+
+			    	var navHeight = N(".header nav").outerHeight();
+					N(window).scroll(function(e) {
+						if(N(this).scrollTop() > 303 - navHeight) {
+							contents.css({
+								"position" : "fixed",
+								"top" : navHeight
+							});
+						} else {
+							contents.css({
+								"position" : "absolute",
+								"top" : 303
+							});
+						}
+					});
 				}
 			}]
 		},

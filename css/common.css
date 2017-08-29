@@ -485,7 +485,7 @@ article .depricated {
 }
 
 article ul.contents {
-	position: fixed;
+	position: absolute;
 	margin-left: -200px;
 	top: 303px;
 	background-color: #fff;

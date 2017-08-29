@@ -56,7 +56,7 @@ N("div:regexp(class, Btn$|Button$)")</code></pre>
 &lt;div data-sample="test-1"&gt;&lt;/div&gt;
 &lt;div data-sample="test-2"&gt;&lt;/div&gt;
 
-N("div:regexp(data:sample, test-[1-2])</code></pre>
+N("div:regexp(data:sample, test-[1-2]")</code></pre>
 
 	<p>3. css 속성의 프로퍼티 명으로 필터링</p>
 <pre><code class="language-javascript">
@@ -75,6 +75,10 @@ N("div:regexp(id, page-[0-9])")</code></pre>
 		<span lang="ko_KR">함수</span>
 		<span lang="en_US">Methods</span>
 	</h3>
+	<h4>
+		<span lang="ko_KR">N 객체의 함수</span>
+		<span lang="en_US">N Object's Methods</span>
+	</h4>
 	<table>
 		<tr>
 			<th>Name</th>
@@ -482,6 +486,121 @@ N("div#sample1").instance("name", instance);</code></pre>
 			</td>
 		</tr>
 	</table>
+
+	<h4>
+		<span lang="ko_KR">N.string 객체의 함수</span>
+		<span lang="en_US">N.string Object's Methods</span>
+	</h4>
+	<p>"N.string.아래함수명(arg[0...N])" 과 같이 사용하면 됩니다.</p>
+	<table style="width: 100%;">
+		<tr>
+			<th>Name</th>
+			<th>Arguments</th>
+			<th>Type</th>
+			<th>Return</th>
+			<th style="width: auto;">Description</th>
+		</tr>
+		<tr>
+			<td><h4>contains</h4></td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>boolean</td>
+			<td>
+				입력 한 문자열이 포함되어 있는지 여부를 리턴 합니다.
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>context</td>
+			<td>string</td>
+			<td align="center">-</td>
+			<td>여부를 판단 할 대상 문자열</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>str</td>
+			<td>string</td>
+			<td align="center">-</td>
+			<td>여부를 판단 할 문자열</td>
+		</tr>
+		<tr>
+			<td><h4>endsWith</h4></td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>boolean</td>
+			<td>
+				입력 한 문자열로 끝나는지 여부를 리턴 합니다.
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>context</td>
+			<td>string</td>
+			<td align="center">-</td>
+			<td>여부를 판단 할 대상 문자열</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>str</td>
+			<td>string</td>
+			<td align="center">-</td>
+			<td>여부를 판단 할 문자열</td>
+		</tr>
+		<tr>
+			<td><h4>startsWith</h4></td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>boolean</td>
+			<td>
+				입력 한 문자열로 시작 하는지 여부를 리턴 합니다.
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>context</td>
+			<td>string</td>
+			<td align="center">-</td>
+			<td>여부를 판단 할 대상 문자열</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>str</td>
+			<td>string</td>
+			<td align="center">-</td>
+			<td>여부를 판단 할 문자열</td>
+		</tr>
+		<tr>
+			<td><h4>insertAt</h4></td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>string</td>
+			<td>
+				문자열의 중간에 입력한 문자열을 삽입 합니다.
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>context</td>
+			<td>string</td>
+			<td align="center">-</td>
+			<td>문자열을 삽일 할 대상 문자열</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>idx</td>
+			<td>number</td>
+			<td align="center">-</td>
+			<td>문자열을 삽일 할 대상 문자열의 index</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>str</td>
+			<td>string</td>
+			<td align="center">-</td>
+			<td>문자열을 삽일 할 문자열</td>
+		</tr>
+	</table>
+	<h4 class="notIndex">정리할게 더 있음.(작업중...)</h4>
 
 	<fieldset>
 		<legend>주석</legend>
