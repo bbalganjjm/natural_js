@@ -88,6 +88,7 @@
 					".refr010511",
 					".refr010509",
 					".refr010510",
+					".refr010601",
 					".refr010602:init"
 				].join(","),
 				"adviceType" : "before",

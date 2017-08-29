@@ -23,8 +23,8 @@
 &lt;/script&gt;</code></pre>
 	<p>
 		위와 같이 N.cont 를 선언하면 N.comm이나 N.popup, N.tab 등으로 페이지를 호출 했을 경우 View 영역의 Load 가 완료된 후 N.cont의 인자로 들어온 Controller 클래스에 init 메서드가 정의 되어 있다면 init 메서드를 프레임워크에서 실행 시켜 줍니다.
-		init 의 인자(Arguments)로는 View영역의 최상위 요소가 선택된 jQuery Object 객체를 첫번째 인자로 반환하고 Communicator.request(Communicator 참조) 객체를 두번째 인자로 반환 합니다.
-		또한 Controller Class 의 초기화(Initialize)가 완료되면 View영역의 최상위 Element 에 해당 Controller 인스턴스(instance)를 넣어줘 N("페이지 최상위 Element").instance("cont") 로 View 영역에서 참조 할 수 있습니다.
+		init 의 인자(Arguments)로는 View영역의 최 상위 요소가 선택된 jQuery Object 객체를 첫번째 인자로 반환하고 Communicator.request(Communicator 참조) 객체를 두번째 인자로 반환 합니다.
+		또한 Controller Class 의 초기화(Initialize)가 완료되면 View영역의 최 상위 Element 에 해당 Controller 인스턴스(instance)를 넣어줘 N("페이지 최 상위 Element").instance("cont") 로 View 영역에서 참조 할 수 있습니다.
 	</p>
 	<p class="alert">
 		Natural-ARCHITECTURE 기반으로 구성된 페이지들은 무조건 N.comm 이나 N.popup, N.tab 으로 불러와야 정상적으로 작동 됩니다.
