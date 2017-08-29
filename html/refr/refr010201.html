@@ -1,15 +1,8 @@
 <style>
-	.refr010201 td {
-		vertical-align: top;
-	}
-
-	.refr010201 td > h4 {
-	    font-size: 12px;
-	    font-weight: normal;
-	    margin: 0;
+	.refr010201 table {
+		width: 100%;
 	}
 </style>
-
 <article class="refr010201" class="apiDoc">
 	<h2 class="notIndex">N</h2>
 
@@ -24,7 +17,8 @@
 	N은 Natural-JS를 처음 시작하는 함수 입니다.
 	jQuery 의 $와 같은 역할을 수행하며 Natural-JS 의 N() 처럼 N 함수로 초기화하고 이후 실행되는 메서드들은 jQuery 의 $ 함수 로 실행해도 됩니다.
 	반대로 jQuery 의 기능들은 모두 N() 에 상속되어 있으므로 jQuery 메서드를 호출할 때 $() 대신 N()을 사용해도 됩니다.
-	단, 아래의 jQuery 확작 기능은 N() 을 사용 해야 합니다.</p>
+	</p>
+	<p class="alert">단, 아래의 jQuery 확장 기능과 확장 함수들은 N() 을 사용 해야 하고 N 오브젝트(N.)로 서비스 되는 함수들은 $ 오브젝트($.) 로 사용이 불가능 합니다.</p>
 
 	<h3>
 		<span lang="ko_KR">jQeury selector 확장</span>
@@ -71,29 +65,104 @@ N("div:regexp(css:width, ^128px)")</code></pre>
 
 N("div:regexp(id, page-[0-9])")</code></pre>
 
-	<p>Natural-CORE 의 함수들은 기본적으로 Natural-JS 만을 위해서 제작 되었으나 개발할 때 공통적으로 사용되어져야할 함수들은 다음과 같이 사용할 수 있습니다.</p>
-	<h3>
+		<h3>
 		<span lang="ko_KR">함수</span>
 		<span lang="en_US">Methods</span>
 	</h3>
+	<p>Natural-CORE 에서 제공되는 함수들은 아래와 같습니다.</p>
+	<p class="alert">Natural-CORE 함수들의 대부분은 jQuery 내부 함수들을 N 오브젝트로 속성으로 재 정의 하거나 Natural-JS 개발을 위해서 제작 된 유틸리티 함수 들 입니다.</p>
+
+	<h4 class="notIndex">정리할게 더 많이 있음.(작업중...)</h4>
+
+	<h4>
+		<span lang="ko_KR">jQeury plugin 확장 함수</span>
+		<span lang="en_US">jQeury plugin extension functions</span>
+	</h4>
+	<p>jQuery plugin 형태로 제공 되는 CORE 유틸리티 함수들은 다음과 같습니다.</p>
+	<table>
+		<tr>
+			<th style="width: 9%;">Name</th>
+			<th style="width: 9%;">Arguments</th>
+			<th style="width: 9%;">Type</th>
+			<th style="width: 9%;">Return</th>
+			<th style="width: auto;">Description</th>
+		</tr>
+		<tr>
+			<td>N().instance</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>Object</td>
+			<td>
+				<p>Natural-JS 는 기본적으로 컴포넌트나 라이브러리들에 의해 생성된 인스턴스를 대상 HTML element(이하 요소)가 있다면 대상요소에 인스턴스를 저장 합니다.</p>
+				<p>N().instance 메서드는 이 인스턴스를 요소에 저장하고 가져오는 역할을 수행 합니다.</p>
+				<p>arguments 의 개수와 타입에 따라 다음과 같이 라이브러리 인스터스를 가져 올 수 있습니다.</p>
+				<pre><code class="language-javascript">// 조회한 요소에 저장되어 있는 모든 인스턴스를 Array 로 모두 반환 합니다.
+var all = N("div#sample1", "div#sample2").instance();</code></pre>
+				<pre><code class="language-javascript">// 조회한 요소에 저장되어 있는 모든 요소를 지정한 콜백에 반환 합니다.
+var all = N("div#sample1", "div#sample2").instance(function(instanceId, instance) {
+	// this : instance
+	// instanceId : 저장 된 인스턴스의 식별자
+	// instance : 저장 된 인스턴스
+});</code></pre>
+				<pre><code class="language-javascript">// 조회한 요소에 instanceId 가 "name" 으로 저장되어 있는 모든 요소를 반환 합니다.
+// 반환된 인스턴스가 1개 이면 인스턴스 원형을 반환하고 1개 이상이면 Array 에 담아 반환합니다.
+// 반환된 인스턴스가 없다면 undefined 를 반환 합니다.
+var all = N("div#sample1", "div#sample2").instance("name");</code></pre>
+				<pre><code class="language-javascript">// 조회한 요소에 instanceId 가 "name" 으로 저장되어 있는 모든 요소를 지정한 콜백에 반환 합니다.
+var all = N("div#sample1", "div#sample2").instance("name", function(instanceId, instance) {
+	// this : instance
+	// instanceId : 저장 된 인스턴스의 식별자
+	// instance : 저장 된 인스턴스
+});</code></pre>
+				<pre><code class="language-javascript">// 조회한 요소에 instanceId 가 "name" 으로 instance 를 저장 합니다.
+N("div#sample1").instance("name", instance);</code></pre>
+				<p class="alert">인스턴스 저장 시 instance 인자가 function 타입이면 정상작동 하지 않을 수 있습니다. function 타입을 제외한 object 나 string 과 같은 타입을 instance 인자로 지정하기 바랍니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>name</td>
+			<td>string</td>
+			<td align="center">-</td>
+			<td>인스턴스 명</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>instance</td>
+			<td>Object or callback function(이하 callback)</td>
+			<td align="center">-</td>
+			<td>
+				<p>인스턴스 or 인스턴스를 가져올 callback</p>
+				<p class="alert">callback의 인자는 index(arguments[0])와 각각의 instance(arguments[1])가 들어옵니다. 이 callback 안의 this 는 각각의 instance를 가리킵니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>N().toArray</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>Array</td>
+			<td>jQuery Object를 순수한 Array 객체로 반환 합니다.</td>
+		</tr>
+	</table>
+
 	<h4>
 		<span lang="ko_KR">N 객체의 함수</span>
 		<span lang="en_US">N Object's Methods</span>
 	</h4>
 	<table>
 		<tr>
-			<th>Name</th>
-			<th>Arguments</th>
-			<th>Type</th>
-			<th>Return</th>
+			<th style="width: 9%;">Name</th>
+			<th style="width: 9%;">Arguments</th>
+			<th style="width: 9%;">Type</th>
+			<th style="width: 9%;">Return</th>
 			<th style="width: auto;">Description</th>
 		</tr>
 		<tr>
-			<td><h4>N</h4></td>
+			<td>N</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
 			<td>jQuery Object<sup>1)</sup></td>
-			<td style="max-width: 299px;">
+			<td>
 				<p>Natural 의 플러그인 형태로 제공되는 라이브러리들과 N클래스의 멤버변수(함수)가 정의 되어있는 핵심 클래스입니다.</p>
 				<p>N(selector<sup>2)</sup> or function, object, HTML Element(이하 element))를 호출하면 jQuery 의 init 메서드가 호출되어 Naturl-JS 와 jQuery가 동시에 초기화(Initialize) 됩니다.</p>
 				<pre><code class="language-javascript">var divs = N("div");</code></pre>
@@ -114,7 +183,7 @@ N("div:regexp(id, page-[0-9])")</code></pre>
 			<td>element를 지정할 때 지정된 element 가 속해있는 element 영역을 지정할 수 있습니다.</td>
 		</tr>
 		<tr>
-			<td><h4>N.locale</h4></td>
+			<td>N.locale</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
 			<td>undefined</td>
@@ -128,7 +197,7 @@ N("div:regexp(id, page-[0-9])")</code></pre>
 			<td>"en_US", "ko_KR" 등의 로케일 문자열</td>
 		</tr>
 		<tr>
-			<td><h4>N.error</h4></td>
+			<td>N.error</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
 			<td>ErrorThrown</td>
@@ -149,7 +218,7 @@ N("div:regexp(id, page-[0-9])")</code></pre>
 			<td>에러 발생시 생성되는 ErrorThrown 객체를 입력 하면 Error Stack Trace 로그를 브라우저 콘솔창에 보여 줍니다. (Chrome 에서만 지원)</td>
 		</tr>
 		<tr>
-			<td><h4>N.info</h4></td>
+			<td>N.info</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
 			<td>undefined</td>
@@ -169,7 +238,7 @@ N("div:regexp(id, page-[0-9])")</code></pre>
 			</td>
 		</tr>
 		<tr>
-			<td><h4>N.warn</h4></td>
+			<td>N.warn</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
 			<td>undefined</td>
@@ -189,7 +258,7 @@ N("div:regexp(id, page-[0-9])")</code></pre>
 			</td>
 		</tr>
 		<tr>
-			<td><h4>N.log</h4></td>
+			<td>N.log</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
 			<td>undefined</td>
@@ -209,7 +278,7 @@ N("div:regexp(id, page-[0-9])")</code></pre>
 			</td>
 		</tr>
 		<tr>
-			<td><h4>N.serialExecute</h4></td>
+			<td>N.serialExecute</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
 			<td>[jQuery Deferred Objects]</td>
@@ -282,8 +351,23 @@ $.when.apply($, defers).done(function(arg0, agr1, arg2, agr3) {
 });</code></pre>
 			</td>
 		</tr>
+	</table>
+
+	<h4>
+		<span lang="ko_KR">N.gc 객체의 함수</span>
+		<span lang="en_US">N.gc Object's Methods</span>
+	</h4>
+	<p>"N.gc.아래함수명(arg[0...N])" 과 같이 사용하면 됩니다.</p>
+	<table>
 		<tr>
-			<td><h4>N.gc.minimum</h4></td>
+			<th style="width: 9%;">Name</th>
+			<th style="width: 9%;">Arguments</th>
+			<th style="width: 9%;">Type</th>
+			<th style="width: 9%;">Return</th>
+			<th style="width: auto;">Description</th>
+		</tr>
+		<tr>
+			<td>minimum</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
 			<td>object</td>
@@ -293,7 +377,7 @@ $.when.apply($, defers).done(function(arg0, agr1, arg2, agr3) {
 			</td>
 		</tr>
 		<tr>
-			<td><h4>N.gc.full</h4></td>
+			<td>full</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
 			<td>object</td>
@@ -302,8 +386,166 @@ $.when.apply($, defers).done(function(arg0, agr1, arg2, agr3) {
 				<p>페이지가 redirect 되지않고 N.comm 으로 블록 페이지를 불러오는 방식(SPA(Single Page Application) 방식)으로 사이트를 제작할때 브라우저의 메모리가 사용할 수록 증가한다면 N.gc.full()을 호출하면 브라우저 환경을 쾌적하게 유지 시킬 수 있습니다. N.gc.full()이 호출될 타이밍은 제작되는 사이트의 환경에 따라 적절하게 catch 하여  사용하기 바랍니다.</p>
 			</td>
 		</tr>
+	</table>
+
+	<h4>
+		<span lang="ko_KR">N.string 객체의 함수</span>
+		<span lang="en_US">N.string Object's Methods</span>
+	</h4>
+	<p>"N.string.아래함수명(arg[0...N])" 과 같이 사용하면 됩니다.</p>
+	<table>
 		<tr>
-			<td><h4>N.browser<br>.cookie</h4></td>
+			<th style="width: 9%;">Name</th>
+			<th style="width: 9%;">Arguments</th>
+			<th style="width: 9%;">Type</th>
+			<th style="width: 9%;">Return</th>
+			<th style="width: auto;">Description</th>
+		</tr>
+		<tr>
+			<td>contains</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>boolean</td>
+			<td>
+				입력 한 문자열이 포함되어 있는지 여부를 리턴 합니다.
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>context</td>
+			<td>string</td>
+			<td align="center">-</td>
+			<td>여부를 판단 할 대상 문자열</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>str</td>
+			<td>string</td>
+			<td align="center">-</td>
+			<td>여부를 판단 할 문자열</td>
+		</tr>
+		<tr>
+			<td>endsWith</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>boolean</td>
+			<td>
+				입력 한 문자열로 끝나는지 여부를 리턴 합니다.
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>context</td>
+			<td>string</td>
+			<td align="center">-</td>
+			<td>여부를 판단 할 대상 문자열</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>str</td>
+			<td>string</td>
+			<td align="center">-</td>
+			<td>여부를 판단 할 문자열</td>
+		</tr>
+		<tr>
+			<td>startsWith</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>boolean</td>
+			<td>입력 한 문자열로 시작 하는지 여부를 리턴 합니다.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>context</td>
+			<td>string</td>
+			<td align="center">-</td>
+			<td>여부를 판단 할 대상 문자열</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>str</td>
+			<td>string</td>
+			<td align="center">-</td>
+			<td>여부를 판단 할 문자열</td>
+		</tr>
+		<tr>
+			<td>insertAt</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>string</td>
+			<td>
+				문자열의 중간에 입력한 문자열을 삽입 합니다.
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>context</td>
+			<td>string</td>
+			<td align="center">-</td>
+			<td>문자열을 삽일 할 대상 문자열</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>idx</td>
+			<td>number</td>
+			<td align="center">-</td>
+			<td>문자열을 삽일 할 대상 문자열의 index</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>str</td>
+			<td>string</td>
+			<td align="center">-</td>
+			<td>문자열을 삽일 할 문자열</td>
+		</tr>
+	</table>
+
+	<h4>
+		<span lang="ko_KR">N.date 객체의 함수</span>
+		<span lang="en_US">N.date Object's Methods</span>
+	</h4>
+	<p>"N.element.아래함수명(arg[0...N])" 과 같이 사용하면 됩니다.</p>
+	<table>
+		<tr>
+			<th style="width: 9%;">Name</th>
+			<th style="width: 9%;">Arguments</th>
+			<th style="width: 9%;">Type</th>
+			<th style="width: 9%;">Return</th>
+			<th style="width: auto;">Description</th>
+		</tr>
+	</table>
+
+
+	<h4>
+		<span lang="ko_KR">N.element 객체의 함수</span>
+		<span lang="en_US">N.element Object's Methods</span>
+	</h4>
+	<p>"N.element.아래함수명(arg[0...N])" 과 같이 사용하면 됩니다.</p>
+	<table>
+		<tr>
+			<th style="width: 9%;">Name</th>
+			<th style="width: 9%;">Arguments</th>
+			<th style="width: 9%;">Type</th>
+			<th style="width: 9%;">Return</th>
+			<th style="width: auto;">Description</th>
+		</tr>
+	</table>
+
+	<h4>
+		<span lang="ko_KR">N.browser 객체의 함수</span>
+		<span lang="en_US">N.browser Object's Methods</span>
+	</h4>
+	<p>"N.browser.아래함수명(arg[0...N])" 과 같이 사용하면 됩니다.</p>
+	<table>
+		<tr>
+			<th style="width: 9%;">Name</th>
+			<th style="width: 9%;">Arguments</th>
+			<th style="width: 9%;">Type</th>
+			<th style="width: 9%;">Return</th>
+			<th style="width: auto;">Description</th>
+		</tr>
+		<tr>
+			<td>N.browser<br>.cookie</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
 			<td>undefined</td>
@@ -361,14 +603,14 @@ $.when.apply($, defers).done(function(arg0, agr1, arg2, agr3) {
 			<td>해당 쿠키가 생성된 도메인</td>
 		</tr>
 		<tr>
-			<td><h4>N.browser.msieVersion</h4></td>
+			<td>N.browser.msieVersion</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
 			<td>number</td>
 			<td>현재 접속한 Microsoft Internet Explorer(이하 MSIE)의 버전을 가져옵니다. MSIE가 아닐 경우 0을 반환 합니다.</td>
 		</tr>
 		<tr>
-			<td><h4>N.browser.is</h4></td>
+			<td>N.browser.is</td>
 			<td></td>
 			<td></td>
 			<td>boolean</td>
@@ -382,14 +624,29 @@ $.when.apply($, defers).done(function(arg0, agr1, arg2, agr3) {
 			<td>브라우저 명(opera, firefox, safari, chrome, ie) 나 모바일 OS 명(android, ios)</td>
 		</tr>
 		<tr>
-			<td><h4>N.browser.contextPath</h4></td>
+			<td>N.browser.contextPath</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
 			<td>number</td>
 			<td>현재 접속한 브라우저 URL 에서 컨텍스트 경로를 반환 합니다.</td>
 		</tr>
+	</table>
+
+	<h4>
+		<span lang="ko_KR">N.message 객체의 함수</span>
+		<span lang="en_US">N.message Object's Methods</span>
+	</h4>
+	<p>"N.message.아래함수명(arg[0...N])" 과 같이 사용하면 됩니다.</p>
+	<table>
 		<tr>
-			<td><h4>N.message<br>.get</h4></td>
+			<th style="width: 9%;">Name</th>
+			<th style="width: 9%;">Arguments</th>
+			<th style="width: 9%;">Type</th>
+			<th style="width: 9%;">Return</th>
+			<th style="width: auto;">Description</th>
+		</tr>
+		<tr>
+			<td>N.message<br>.get</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
@@ -400,7 +657,7 @@ $.when.apply($, defers).done(function(arg0, agr1, arg2, agr3) {
 			<td>resource</td>
 			<td>object</td>
 			<td align="center">-</td>
-			<td style="max-width: 299px;">
+			<td>
 				<p>메시지 리소스 객체를 지정 합니다.</p>
 				<p>메시지 리소스는 object 형태로 만들면 되고 다음과 같이 메시지 세트를 구성 해야 합니다.</p>
 				<pre><code class="language-javascript">var message = {
@@ -430,176 +687,37 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 			<td align="center">-</td>
 			<td>메시지 변수를 치환할 값</td>
 		</tr>
+	</table>
+
+	<h4>
+		<span lang="ko_KR">N.array 객체의 함수</span>
+		<span lang="en_US">N.array Object's Methods</span>
+	</h4>
+	<p>"N.array.아래함수명(arg[0...N])" 과 같이 사용하면 됩니다.</p>
+	<table>
 		<tr>
-			<td><h4>N().toArray</h4></td>
-			<td align="center">-</td>
-			<td align="center">-</td>
-			<td>Array</td>
-			<td>jQuery Object를 순수한 Array 객체로 반환 합니다.</td>
-		</tr>
-		<tr>
-			<td><h4>N().instance</h4></td>
-			<td align="center">-</td>
-			<td align="center">-</td>
-			<td>Object</td>
-			<td style="max-width: 299px;">
-				<p>Natural-JS 는 기본적으로 컴포넌트나 라이브러리들에 의해 생성된 인스턴스를 대상 HTML element(이하 요소)가 있다면 대상요소에 인스턴스를 저장 합니다.</p>
-				<p>N().instance 메서드는 이 인스턴스를 요소에 저장하고 가져오는 역할을 수행 합니다.</p>
-				<p>arguments 의 개수와 타입에 따라 다음과 같이 라이브러리 인스터스를 가져 올 수 있습니다.</p>
-				<pre><code class="language-javascript">// 조회한 요소에 저장되어 있는 모든 인스턴스를 Array 로 모두 반환 합니다.
-var all = N("div#sample1", "div#sample2").instance();</code></pre>
-				<pre><code class="language-javascript">// 조회한 요소에 저장되어 있는 모든 요소를 지정한 콜백에 반환 합니다.
-var all = N("div#sample1", "div#sample2").instance(function(instanceId, instance) {
-	// this : instance
-	// instanceId : 저장 된 인스턴스의 식별자
-	// instance : 저장 된 인스턴스
-});</code></pre>
-				<pre><code class="language-javascript">// 조회한 요소에 instanceId 가 "name" 으로 저장되어 있는 모든 요소를 반환 합니다.
-// 반환된 인스턴스가 1개 이면 인스턴스 원형을 반환하고 1개 이상이면 Array 에 담아 반환합니다.
-// 반환된 인스턴스가 없다면 undefined 를 반환 합니다.
-var all = N("div#sample1", "div#sample2").instance("name");</code></pre>
-				<pre><code class="language-javascript">// 조회한 요소에 instanceId 가 "name" 으로 저장되어 있는 모든 요소를 지정한 콜백에 반환 합니다.
-var all = N("div#sample1", "div#sample2").instance("name", function(instanceId, instance) {
-	// this : instance
-	// instanceId : 저장 된 인스턴스의 식별자
-	// instance : 저장 된 인스턴스
-});</code></pre>
-				<pre><code class="language-javascript">// 조회한 요소에 instanceId 가 "name" 으로 instance 를 저장 합니다.
-N("div#sample1").instance("name", instance);</code></pre>
-				<p class="alert">인스턴스 저장 시 instance 인자가 function 타입이면 정상작동 하지 않을 수 있습니다. function 타입을 제외한 object 나 string 과 같은 타입을 instance 인자로 지정하기 바랍니다.</p>
-			</td>
-		</tr>
-		<tr>
-			<td></td>
-			<td>name</td>
-			<td>string</td>
-			<td align="center">-</td>
-			<td>인스턴스 명</td>
-		</tr>
-		<tr>
-			<td></td>
-			<td>instance</td>
-			<td>Object or callback function(이하 callback)</td>
-			<td align="center">-</td>
-			<td>
-				<p>인스턴스 or 인스턴스를 가져올 callback</p>
-				<p class="alert">callback의 인자는 index(arguments[0])와 각각의 instance(arguments[1])가 들어옵니다. 이 callback 안의 this 는 각각의 instance를 가리킵니다.</p>
-			</td>
+			<th style="width: 9%;">Name</th>
+			<th style="width: 9%;">Arguments</th>
+			<th style="width: 9%;">Type</th>
+			<th style="width: 9%;">Return</th>
+			<th style="width: auto;">Description</th>
 		</tr>
 	</table>
 
 	<h4>
-		<span lang="ko_KR">N.string 객체의 함수</span>
-		<span lang="en_US">N.string Object's Methods</span>
+		<span lang="ko_KR">N.json 객체의 함수</span>
+		<span lang="en_US">N.json Object's Methods</span>
 	</h4>
-	<p>"N.string.아래함수명(arg[0...N])" 과 같이 사용하면 됩니다.</p>
-	<table style="width: 100%;">
+	<p>"N.json.아래함수명(arg[0...N])" 과 같이 사용하면 됩니다.</p>
+	<table>
 		<tr>
-			<th>Name</th>
-			<th>Arguments</th>
-			<th>Type</th>
-			<th>Return</th>
+			<th style="width: 9%;">Name</th>
+			<th style="width: 9%;">Arguments</th>
+			<th style="width: 9%;">Type</th>
+			<th style="width: 9%;">Return</th>
 			<th style="width: auto;">Description</th>
 		</tr>
-		<tr>
-			<td><h4>contains</h4></td>
-			<td align="center">-</td>
-			<td align="center">-</td>
-			<td>boolean</td>
-			<td>
-				입력 한 문자열이 포함되어 있는지 여부를 리턴 합니다.
-			</td>
-		</tr>
-		<tr>
-			<td></td>
-			<td>context</td>
-			<td>string</td>
-			<td align="center">-</td>
-			<td>여부를 판단 할 대상 문자열</td>
-		</tr>
-		<tr>
-			<td></td>
-			<td>str</td>
-			<td>string</td>
-			<td align="center">-</td>
-			<td>여부를 판단 할 문자열</td>
-		</tr>
-		<tr>
-			<td><h4>endsWith</h4></td>
-			<td align="center">-</td>
-			<td align="center">-</td>
-			<td>boolean</td>
-			<td>
-				입력 한 문자열로 끝나는지 여부를 리턴 합니다.
-			</td>
-		</tr>
-		<tr>
-			<td></td>
-			<td>context</td>
-			<td>string</td>
-			<td align="center">-</td>
-			<td>여부를 판단 할 대상 문자열</td>
-		</tr>
-		<tr>
-			<td></td>
-			<td>str</td>
-			<td>string</td>
-			<td align="center">-</td>
-			<td>여부를 판단 할 문자열</td>
-		</tr>
-		<tr>
-			<td><h4>startsWith</h4></td>
-			<td align="center">-</td>
-			<td align="center">-</td>
-			<td>boolean</td>
-			<td>입력 한 문자열로 시작 하는지 여부를 리턴 합니다.</td>
-		</tr>
-		<tr>
-			<td></td>
-			<td>context</td>
-			<td>string</td>
-			<td align="center">-</td>
-			<td>여부를 판단 할 대상 문자열</td>
-		</tr>
-		<tr>
-			<td></td>
-			<td>str</td>
-			<td>string</td>
-			<td align="center">-</td>
-			<td>여부를 판단 할 문자열</td>
-		</tr>
-		<tr>
-			<td><h4>insertAt</h4></td>
-			<td align="center">-</td>
-			<td align="center">-</td>
-			<td>string</td>
-			<td>
-				문자열의 중간에 입력한 문자열을 삽입 합니다.
-			</td>
-		</tr>
-		<tr>
-			<td></td>
-			<td>context</td>
-			<td>string</td>
-			<td align="center">-</td>
-			<td>문자열을 삽일 할 대상 문자열</td>
-		</tr>
-		<tr>
-			<td></td>
-			<td>idx</td>
-			<td>number</td>
-			<td align="center">-</td>
-			<td>문자열을 삽일 할 대상 문자열의 index</td>
-		</tr>
-		<tr>
-			<td></td>
-			<td>str</td>
-			<td>string</td>
-			<td align="center">-</td>
-			<td>문자열을 삽일 할 문자열</td>
-		</tr>
 	</table>
-	<h4 class="notIndex">정리할게 더 있음.(작업중...)</h4>
 
 	<fieldset>
 		<legend>주석</legend>
