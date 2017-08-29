@@ -9,19 +9,17 @@
 		<span lang="en_US">Overview</span>
 	</h3>
 	<p>
-		Notify(이하 N.notify) 는 사이트 전역 알림 메시지를 표시하는 컴포넌트 입니다.
+		Notify(이하 N.notify) 는 사이트 전역 알림 메시지를 지정한 위치에 표시 해 주는 컴포넌트 입니다.
 	</p>
 	<p class="alert">
 		Alert(N.alert)는 컨텐츠 영역의 메시지를 처리하는 용도이고 N.notify는 사이트 전역의 메시지를 처리 하는 용도 입니다.
 		때문에 N.alert의 요소(Element)는 주로 document.body.[pageContext] 영역에 생성 되고 N.notify는 document.body 영역에 생성 됩니다.
 	</p>
 
-	<!--
 	<h3>API DEMO</h3>
 	<p lang="ko_KR" class="alert">데모에는 모든 옵션 및 기능을 포함하고 있지 않습니다. 전체 기능 목록은 데모 바로 아래 있는 기능 문서들을 참고 바랍니다.</p>
 	<p lang="en_US" class="alert">The demo does not include all options and features. For a complete list of features, please refer to the function documentation directly below the demo.</p>
 	<div data-page="notify" class="apidemo"></div>
-	 -->
 
 	<h3>
 		<span lang="ko_KR">생성자</span>
@@ -140,37 +138,7 @@
 			<td></td>
 			<td>
 				alwaysOnTop 옵션 적용 시 최 상위 z-index를 계산하기 위한 대상 요소지정
-				<p class="alert">jQuery Selector 문자열로 지정</p>
-			</td>
-		</tr>
-
-
-		<tr>
-			<td>onEntireLoadXhrCaptureDuration</td>
-			<td>number</td>
-			<td>300</td>
-			<td></td>
-			<td>
-				<p>불러온 컨텐츠와 컨텐츠의 데이터들이 로딩되는 Communicator(N.comm) 요청 블록을 캐치하는 시간을 ms 단위로 지정</p>
-				<p class="alert">onEntireLoad 이벤트는 onEntireLoadXhrCaptureDuration 옵션값으로 지정한 시간안에 캐치된 Communicator 요청들이 완료되는 시점에 실행 됩니다.</p>
-				<p class="alert">entireLoadIndicator 옵션에 의한 로딩 인디케이터가 표시되는 시간과 entireLoadScreenBlock 옵션에 의한 컨텐츠가 블록되는 시간은 onBeforeEntireLoad 이벤트가 시작되는 시간 에서 onEntireLoad 이벤트가 완료되는 시간과 거의 일치 합니다.</p>
-			</td>
-		</tr>
-		<tr>
-			<td>alwaysOnTop</td>
-			<td>boolean</td>
-			<td>false</td>
-			<td></td>
-			<td>"메뉴목록" 대화상자를 항상 최 상위에 표시 할건 지 여부</td>
-		</tr>
-		<tr>
-			<td>alwaysOnTopCalcTarget</td>
-			<td>string</td>
-			<td>"div, span, ul, p"</td>
-			<td></td>
-			<td>
-				alwaysOnTop 옵션 적용 시 최 상위 z-index를 계산하기 위한 대상 요소지정
-				<p class="alert">jQuery Selector 문자열로 지정</p>
+				<p class="alert">jQuery selector 문자열로 지정 합니다</p>
 			</td>
 		</tr>
 	</table>
@@ -216,7 +184,7 @@
 			<td>메시지를 클릭 했을 때 이동 할 URL 을 입력 합니다.</td>
 		</tr>
 		<tr>
-			<td>remove</td>
+			<td>message element(.notify_msg__)</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
 			<td>N.notify</td>
@@ -230,7 +198,7 @@
 			<td>string</td>
 			<td align="center">-</td>
 			<td>
-				<p>제거 할 메시지 대화상자 요소(context)를 입력 합니다.</p>
+				<p>제거 할 메시지 요소를 입력 합니다.</p>
 			</td>
 		</tr>
 	</table>

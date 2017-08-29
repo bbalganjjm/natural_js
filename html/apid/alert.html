@@ -30,9 +30,17 @@
 				<label for="confirm" lang="ko_KR">체크(true)하면 "확인", "취소" 버튼이 표시 됩니다.</label>
 				<label for="confirm" lang="en_US">If this checkbox with check(true), display "OK" and "Cancel" button</label>
 			</td>
-			<th><label for="title">title</label></th>
+			<th><label for="html">html</label></th>
 			<td>
-				<input id="title" type="text" value="Alert Title" />
+				<input id="html" type="checkbox" />
+				<label for="html" lang="ko_KR">체크(true)하면 데이터의 HTML 태그를 인식 합니다.</label>
+				<label for="html" lang="en_US">If this checkbox with check(true), recognize the HTML tags in data</label>
+			</td>
+		</tr>
+		<tr>
+			<th><label for="title">title</label></th>
+			<td colspan="3">
+				<input id="title" type="text" value="Alert Title" style="width: 50%;" /><br>
 				<label for="title" lang="ko_KR">입력하지 않으면 메세지 대화상자의 타이틀바가 표시 되지 않습니다.</label>
 				<label for="title" lang="en_US">If do not input title, it does not display title bar</label>
 			</td>
@@ -173,6 +181,7 @@ function() {
 	            var opts = {
 	            	msg : N("#msg", view).val(),
 	            	confirm : N("#confirm", view).is(":checked"),
+	            	html : N("#html", view).is(":checked"),
 	            	title : N.string.trimToUndefined(N("#title", view).val()),
 	            	modal : N("#modal", view).is(":checked"),
 	            	button : N("#button", view).is(":checked"),
