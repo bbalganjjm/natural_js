@@ -41,16 +41,16 @@
 		<tr>
 			<td></td>
 			<td>context</td>
-			<td>window or jQuery Object</td>
+			<td>jQuery Object</td>
 			<td align="center">-</td>
 			<td>기본옵션의 context 옵션과 같습니다.</td>
 		</tr>
 		<tr>
 			<td></td>
 			<td>opts</td>
-			<td>JSON Object</td>
+			<td>object</td>
 			<td align="center">-</td>
-			<td>기본 옵션을 JSON Object 형태로 지정 합니다.</td>
+			<td>기본 옵션을 object 형태로 지정 합니다.</td>
 		</tr>
 		<tr>
 			<td>N(obj).docs</td>
@@ -65,7 +65,7 @@
 		<tr>
 			<td></td>
 			<td>opts</td>
-			<td>JSON Object</td>
+			<td>object</td>
 			<td align="center">-</td>
 			<td>N.docs의 opts 옵션과 같습니다.</td>
 		</tr>
@@ -86,7 +86,7 @@
 		<tr>
 			<td>context</td>
 			<td>jQuery Object</td>
-			<td>obj</td>
+			<td>null</td>
 			<td align="center">○</td>
 			<td>Documents컴포넌트화 할 Documents 요소를 지정합니다.</td>
 		</tr>
@@ -416,9 +416,9 @@ onRemove : function(docId) {
 	<h3>
 		<span>Documents.request</span>
 	</h3>
-		<p>Document.request(N.docs.request) 는 단독으로 사용될 수 없고 N.docs 로 컨텐츠를 열때 마다 생성 되는 모듈입니다. request는 요청에 대한 옵션을 지정 할 수 있고 요청정보를 가지고 있고 페이지간 데이터 전달을 위한 attr 메서드가 구현 되어 있습니다. </p>
-		<p>add 함수를 호출 하기 전에 다음과 같이 request attribute 를 정의 하면</p>
-		<pre><code class="language-javascript">
+	<p>Document.request(N.docs.request) 는 단독으로 사용될 수 없고 N.docs 로 컨텐츠를 열때 마다 생성 되는 모듈입니다. request는 요청에 대한 옵션을 지정 할 수 있고 요청정보를 가지고 있고 페이지간 데이터 전달을 위한 attr 메서드가 구현 되어 있습니다. </p>
+	<p>add 함수를 호출 하기 전에 다음과 같이 request attribute 를 정의 하면</p>
+	<pre><code class="language-javascript">
 var docs = N("container selector").docs();
 docs.request.attr("pageParam", { a : 1 }).add("page id", "page name", { url : "url" });
 </code></pre>
@@ -431,8 +431,8 @@ N("page id").cont({
 	}
 })
 </code></pre>
+	<p class="alert">Documents.request 의 자세한 스펙과 사용법은 Communicator.request 모듈을 그대로 사용하므로 [Natural-ARCHITECTURE] 메뉴의 [Communicator 탭] 에서 Communicator.request 섹션을 참고 하세요.</p>
 
-		<p class="alert">Documents.request 의 자세한 스펙과 사용법은 Communicator.request 모듈을 그대로 사용하므로 [Natural-ARCHITECTURE] 메뉴의 [Communicator 탭] 에서 Communicator.request 섹션을 참고 하세요.</p>
 	<h3>
 		<span lang="ko_KR">함수</span>
 		<span lang="en_US">Methods</span>
