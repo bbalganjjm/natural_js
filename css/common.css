@@ -227,10 +227,10 @@ article h1 {
 
 article h2 {
 	font-weight: bold;
-	padding: 10px 0 0 20px;
-	background: url("../images/icon/dt_leaf.png") no-repeat 0 9px;
+	padding: 40px 0 20px 15px;
+	background: url("../images/icon/dt_leaf.png") no-repeat 0 40px;
 	font-size: 1.2em;
-	margin: 0 0 18px 0;
+	margin: 0 0 0 0;
 }
 
 article ul.contents {
@@ -238,16 +238,17 @@ article ul.contents {
 }
 
 article h3 {
-	font-size: 1.1em;
-	margin: 15px 0 15px 0;
+	font-size: 1.2em;
+	margin: 0;
 	color: #050;
-	padding: 3px 0 0 22px;
-	background: url("../images/icon/h3_leaf.gif") no-repeat 5px 4px;
+	padding: 35px 0 18px 15px;
+	background: url("../images/icon/h3_leaf.gif") no-repeat 0px 35px;
 }
 
 article h4 {
-	font-size: 14px;
-	margin: 0 0 15px 0;
+	font-size: 1.1em;
+	margin: 0;
+	padding: 15px 0 10px 0;
 }
 
 article p {
