@@ -15,7 +15,618 @@
 		Alert(N.alert)는 컨텐츠 영역의 메시지를 처리하는 용도이고 N.notify는 사이트 전역의 메시지를 처리 하는 용도 입니다.
 		때문에 N.alert의 요소(Element)는 주로 document.body.[pageContext] 영역에 생성 되고 N.notify는 document.body 영역에 생성 됩니다.
 	</p>
-	<h2>문서 작업중...</h2>
+
+	<!--
+	<h3>API DEMO</h3>
+	<p lang="ko_KR" class="alert">데모에는 모든 옵션 및 기능을 포함하고 있지 않습니다. 전체 기능 목록은 데모 바로 아래 있는 기능 문서들을 참고 바랍니다.</p>
+	<p lang="en_US" class="alert">The demo does not include all options and features. For a complete list of features, please refer to the function documentation directly below the demo.</p>
+	<div data-page="notify" class="apidemo"></div>
+	 -->
+
+	<h3>
+		<span lang="ko_KR">생성자</span>
+		<span lang="en_US">Constructor</span>
+	</h3>
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Arguments</th>
+			<th>Type</th>
+			<th>Return</th>
+			<th style="width: auto;">Description</th>
+		</tr>
+		<tr>
+			<td>N.notify</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>N.notify</td>
+			<td>N.notify의 객체 인스턴스를 생성합니다.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>position</td>
+			<td>jQuery Object</td>
+			<td align="center">-</td>
+			<td>기본옵션의 position 옵션과 같습니다.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>opts</td>
+			<td>object</td>
+			<td align="center">-</td>
+			<td>기본 옵션을 object 형태로 지정 합니다.</td>
+		</tr>
+		<tr>
+			<td>N(obj).notify</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>N.notify</td>
+			<td>
+				<p>N.notify의 객체 인스턴스를 jQuery 플러그인 방식으로 생성합니다.</p>
+				<p>N.notify과 동작되는 로직은 같으며 내부적으로 N()의 첫번째 인자가 N.notify()의 첫 번째 인자로 지정 됩니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>opts</td>
+			<td>object</td>
+			<td align="center">-</td>
+			<td>N.notify의 opts 옵션과 같습니다.</td>
+		</tr>
+	</table>
+
+	<h3>
+		<span lang="ko_KR">기본옵션</span>
+		<span lang="en_US">Default Options</span>
+	</h3>
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Type</th>
+			<th>Default</th>
+			<th>Required</th>
+			<th style="width: auto;">Description</th>
+		</tr>
+		<tr>
+			<td>position</td>
+			<td>object</td>
+			<td>obj</td>
+			<td align="center">○</td>
+			<td>
+				<p>Notify 가 표시 될 위치를 지정 합니다.</p>
+				<p>CSS Position 속성 인 left / right / top / bottom 을 지정 할 수 있습니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>multi</td>
+			<td>boolean</td>
+			<td>true</td>
+			<td></td>
+			<td>
+				<p>MDI, SDI 여부</p>
+				<p>true 이면 MDI 형태로 탭 링크들과 컨텐츠들을 표시하고 false 이면 컨텐츠 탭 링크는 표시 하지 않고 단 한 개의 컨텐츠만 표시 합니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>maxStateful</td>
+			<td>number</td>
+			<td>0</td>
+			<td></td>
+			<td>
+				<p>MDI 방식으로 사용할 때 탭 컨텐츠가 열릴수록 웹 브라우저의 속도가 느려지는 현상을 방지하기 위해 최대 상태유지 컨텐츠 개수를 설정 할 수 있습니다.</p>
+				<p class="alert">
+					새로운 컨텐츠를 열때 열려있는 탭 컨텐츠의 개수가 최대 상태유지 탭 개수를 초과 하면
+					먼저 열린 순서대로 컨텐츠의 내용을 제거해서 해당 컨텐츠의 마지막 상태(입력이나 조회 값등)가 사라지게 되고
+					상태유지가 제거 된 탭 링크 클릭 시 해당 컨텐츠의 초기 화면이 다시 불러와 집니다.
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td>maxTabs</td>
+			<td>number</td>
+			<td>0</td>
+			<td></td>
+			<td>
+				<p>MDI 방식으로 사용할 때 탭 컨텐츠가 열릴수록 웹 브라우저의 속도가 느려지는 현상을 방지하기 위해 최대 탭 컨텐츠 개수를 설정 할 수 있습니다.</p>
+				<p class="alert">
+					새로운 컨텐츠를 열때 열려있는 탭 컨텐츠의 개수가 최대 탭 개수를 초과 하면 더이상 탭 컨텐츠를 열 수 없습니다. 새로운 컨텐츠를 열려면 기존 탭 중에 하나를 닫아야 합니다.
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td>entireLoadIndicator</td>
+			<td>boolean</td>
+			<td>false</td>
+			<td></td>
+			<td>
+				<p>컨텐츠와 컨텐츠의 데이터등이 로딩 되는 동안 로딩 상태 바를 보여줄지 여부</p>
+			</td>
+		</tr>
+		<tr>
+			<td>entireLoadScreenBlock</td>
+			<td>boolean</td>
+			<td>false</td>
+			<td></td>
+			<td>
+				<p>컨텐츠와 컨텐츠의 데이터등이 로딩 되는 동안 컨텐츠 화면을 차단 할 지 여부</p>
+			</td>
+		</tr>
+		<tr>
+			<td>onEntireLoadXhrCaptureDuration</td>
+			<td>number</td>
+			<td>300</td>
+			<td></td>
+			<td>
+				<p>불러온 컨텐츠와 컨텐츠의 데이터들이 로딩되는 Communicator(N.comm) 요청 블록을 캐치하는 시간을 ms 단위로 지정</p>
+				<p class="alert">onEntireLoad 이벤트는 onEntireLoadXhrCaptureDuration 옵션값으로 지정한 시간안에 캐치된 Communicator 요청들이 완료되는 시점에 실행 됩니다.</p>
+				<p class="alert">entireLoadIndicator 옵션에 의한 로딩 인디케이터가 표시되는 시간과 entireLoadScreenBlock 옵션에 의한 컨텐츠가 블록되는 시간은 onBeforeEntireLoad 이벤트가 시작되는 시간 에서 onEntireLoad 이벤트가 완료되는 시간과 거의 일치 합니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>alwaysOnTop</td>
+			<td>boolean</td>
+			<td>false</td>
+			<td></td>
+			<td>"메뉴목록" 대화상자를 항상 페이지의 최상위로 항상 유지하기 위한 옵션</td>
+		</tr>
+		<tr>
+			<td>alwaysOnTopCalcTarget</td>
+			<td>string</td>
+			<td>"div, span, ul, p"</td>
+			<td></td>
+			<td>
+				alwaysOnTop 옵션 적용 시 최상위 z-index를 계산하기 위한 대상 요소지정
+				<p class="alert">jquery Selector 문자열로 지정</p>
+			</td>
+		</tr>
+		<tr>
+			<td>onBeforeLoad</td>
+			<td>Function</td>
+			<td>null</td>
+			<td></td>
+			<td style="max-width: 299px;">
+				<p>컨텐츠가 로딩 되기 전 실행 되는 이벤트 입니다.</p>
+				<pre><code class="language-javascript">
+onBeforeLoad : function(docId, target) {
+	// docId : Document Id
+	// target : 컨텐츠가 로딩 될 요소
+
+	// get document info
+	var doc = this.doc(docId);
+}</code></pre>
+				<p class="alert">해당 컨텐츠가 닫히기 전 까지 다시 호출 되지 않습니다.</p>
+				<p class="alert">컨텐츠가 로딩되기 전에 실행 되므로 cont 메서드로 컨텐츠의 Controller 를 가져 올 수 없습니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>onLoad</td>
+			<td>Function</td>
+			<td>null</td>
+			<td></td>
+			<td style="max-width: 299px;">
+				<p>컨텐츠가 로딩 된 후 실행 되는 이벤트 입니다.</p>
+				<pre><code class="language-javascript">
+onLoad : function(docId) {
+	// docId : Document Id
+
+	// get document info
+	var doc = this.doc(docId);
+	// get document's Controller
+	var docCont = this.cont(docId);
+	var docView = this.cont(docId).view;
+	var docRequest = this.cont(docId).request;
+}</code></pre>
+				<p class="alert">해당 컨텐츠가 닫히기 전 까지 다시 호출 되지 않습니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>onBeforeEntireLoad</td>
+			<td>Function</td>
+			<td>null</td>
+			<td></td>
+			<td style="max-width: 299px;">
+				<p>onEntireLoadXhrCaptureDuration 옵션값으로 지정한 시간안에 캐치된 모든 컨텐츠들의 Communicator 요청들이 완료되기 전 실행 되는 이벤트</p>
+				<pre><code class="language-javascript">
+onBeforeEntireLoad : function(docId) {
+	// docId : Document Id
+
+	// get document info
+	var doc = this.doc(docId);
+}</code></pre>
+				<p class="alert">다른 컨텐츠들의 N.comm 의 요청을 계속 캐치 하므로 로딩 후 에도 Communicator 요청이 일어나면 실행 됩니다.</p>
+				<p class="alert">컨텐츠 로딩 전 최초 한번은 이벤트가 컨텐츠가 로딩되기 전에 실행 되므로 cont 메서드로 컨텐츠의 Controller 를 가져 올 수 없습니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>onEntireLoad</td>
+			<td>Function</td>
+			<td>null</td>
+			<td></td>
+			<td style="max-width: 299px;">
+				<p>onEntireLoadXhrCaptureDuration 옵션값으로 지정한 시간안에 캐치된 모든 컨텐츠들의 Communicator 요청들이 완료된 후 실행 되는 이벤트</p>
+				<pre><code class="language-javascript">
+onEntireLoad : function(docId) {
+	// docId : Document Id
+
+	// get document info
+	var doc = this.doc(docId);
+	// get document's Controller
+	var docCont = this.cont(docId);
+	var docView = this.cont(docId).view;
+	var docRequest = this.cont(docId).request;
+}</code></pre>
+				<p class="alert">다른 컨텐츠들의 N.comm 의 요청을 계속 캐치 하므로 로딩 후 에도 Communicator 요청이 일어나면 실행 됩니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>onBeforeActive</td>
+			<td>Function</td>
+			<td>null</td>
+			<td></td>
+			<td style="max-width: 299px;">
+				<p>선택한 탭이 활성화 되기 전 마다 실행 되는 이벤트</p>
+				<pre><code class="language-javascript">
+onBeforeActive : function(docId) {
+	// docId : Document Id
+
+	// get document info
+	var doc = this.doc(docId);
+	// get document's Controller
+	var docCont = this.cont(docId);
+	var docView = this.cont(docId).view;
+	var docRequest = this.cont(docId).request;
+}</code></pre>
+			</td>
+		</tr>
+		<tr>
+			<td>onActive</td>
+			<td>Function</td>
+			<td>null</td>
+			<td></td>
+			<td style="max-width: 299px;">
+				<p>선택한 탭이 활성화 될 때 마다 실행 되는 이벤트</p>
+				<pre><code class="language-javascript">
+onActive : function(docId) {
+	// docId : Document Id
+
+	// get document info
+	var doc = this.doc(docId);
+	// get document's Controller
+	var docCont = this.cont(docId);
+	var docView = this.cont(docId).view;
+	var docRequest = this.cont(docId).request;
+}</code></pre>
+			</td>
+		</tr>
+		<tr>
+			<td>onBeforeInactive</td>
+			<td>Function</td>
+			<td>null</td>
+			<td></td>
+			<td style="max-width: 299px;">
+				<p>선택한 탭이 비활성화 되기 전 마다 실행 되는 이벤트</p>
+				<pre><code class="language-javascript">
+onBeforeInactive : function(docId) {
+	// docId : Document Id
+
+	// get document info
+	var doc = this.doc(docId);
+	// get document's Controller
+	var docCont = this.cont(docId);
+	var docView = this.cont(docId).view;
+	var docRequest = this.cont(docId).request;
+}</code></pre>
+			</td>
+		</tr>
+		<tr>
+			<td>onInactive</td>
+			<td>Function</td>
+			<td>null</td>
+			<td></td>
+			<td style="max-width: 299px;">
+				<p>선택한 탭이 비활성화 될 때 마다 실행 되는 이벤트</p>
+				<pre><code class="language-javascript">
+onInactive : function(docId) {
+	// docId : Document Id
+
+	// get document info
+	var doc = this.doc(docId);
+	// get document's Controller
+	var docCont = this.cont(docId);
+	var docView = this.cont(docId).view;
+	var docRequest = this.cont(docId).request;
+}</code></pre>
+			</td>
+		</tr>
+		<tr>
+			<td>onBeforeRemoveState</td>
+			<td>Function</td>
+			<td>null</td>
+			<td></td>
+			<td style="max-width: 299px;">
+				<p>선택한 탭의 상태가 제거 되기 전 마다 실행 되는 이벤트</p>
+				<pre><code class="language-javascript">
+onBeforeRemoveState : function(docId) {
+	// docId : Document Id
+
+	// get document info
+	var doc = this.doc(docId);
+	// get document's Controller
+	var docCont = this.cont(docId);
+	var docView = this.cont(docId).view;
+	var docRequest = this.cont(docId).request;
+}</code></pre>
+			</td>
+		</tr>
+		<tr>
+			<td>onRemoveState</td>
+			<td>Function</td>
+			<td>null</td>
+			<td></td>
+			<td style="max-width: 299px;">
+				<p>선택한 탭의 상태가 제거 될 때 마다 실행 되는 이벤트</p>
+				<pre><code class="language-javascript">
+onRemoveState : function(docId) {
+	// docId : Document Id
+
+	// get document info
+	var doc = this.doc(docId);
+	// get document's Controller
+	var docCont = this.cont(docId);
+	var docView = this.cont(docId).view;
+	var docRequest = this.cont(docId).request;
+}</code></pre>
+			</td>
+		</tr>
+		<tr>
+			<td>onBeforeRemove</td>
+			<td>Function</td>
+			<td>null</td>
+			<td></td>
+			<td style="max-width: 299px;">
+				<p>선택한 탭이 제거 되기 전 마다 실행 되는 이벤트</p>
+				<pre><code class="language-javascript">
+onBeforeRemove : function(docId) {
+	// docId : Document Id
+
+	// get document info
+	var doc = this.doc(docId);
+	// get document's Controller
+	var docCont = this.cont(docId);
+	var docView = this.cont(docId).view;
+	var docRequest = this.cont(docId).request;
+}</code></pre>
+			</td>
+		</tr>
+		<tr>
+			<td>onRemove</td>
+			<td>Function</td>
+			<td>null</td>
+			<td></td>
+			<td style="max-width: 299px;">
+				<p>선택한 탭이 제거 될 때 마다 실행 되는 이벤트</p>
+				<pre><code class="language-javascript">
+onRemove : function(docId) {
+	// docId : Document Id
+
+	// get document info
+	var doc = this.doc(docId);
+	// get document's Controller
+	var docCont = this.cont(docId);
+	var docView = this.cont(docId).view;
+	var docRequest = this.cont(docId).request;
+}</code></pre>
+			</td>
+		</tr>
+	</table>
+
+	<h3>
+		<span lang="ko_KR">함수</span>
+		<span lang="en_US">Methods</span>
+	</h3>
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Arguments</th>
+			<th>Type</th>
+			<th>Return</th>
+			<th style="width: auto;">Description</th>
+		</tr>
+		<tr>
+			<td>position</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>jQuery Object</td>
+			<td>컴포넌트를 적용한 요소를 반환 합니다.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>selector</td>
+			<td>string</td>
+			<td align="center">-</td>
+			<td>selector 문자열을 입력하면 해당 context 하위 요소에서 선택된 요소를 반환 합니다.</td>
+		</tr>
+		<tr>
+			<td>add</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>N.notify</td>
+			<td>새로운 컨텐츠과 컨텐츠 탭을 추가 합니다.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>docId</td>
+			<td>string</td>
+			<td align="center">-</td>
+			<td>
+				<p>컨텐츠(페이지) 아이디를 입력 합니다.</p>
+				<p class="alert">이미 같은 아이디로 지정 된 컨텐츠가 있다면 해당 컨텐츠가 활성화 됩니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>docNm</td>
+			<td>string</td>
+			<td align="center">-</td>
+			<td>컨텐츠 명(페이지 명)을 입력 합니다.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>docOpts</td>
+			<td>object</td>
+			<td align="center">-</td>
+			<td>
+				<p>컨테츠 옵션(페이지 옵션)을 입력 합니다.</p>
+<pre><code class="language-javascript">
+var docOpts = {
+	url : "url", // 컨텐츠(페이지) URL
+	docId : docId, // 컨텐츠(페이지) 아이디
+	docNm : docNm, // 컨텐츠(페이지) 명
+	onBeforeLoad : function(docId, target) {
+		// 추가 되는 컨텐츠(페이지) 에만 적용되는 onBeforeLoad 이벤트.
+	},
+	onLoad : function(docId) {
+		// 추가 되는 컨텐츠(페이지) 에만 적용되는 onLoad 이벤트.
+	},
+	onBeforeActive : function(docId) {
+		// 추가 되는 컨텐츠(페이지) 에만 적용되는 onBeforeActive 이벤트.
+	},
+	onActive : function(docId) {
+		// 추가 되는 컨텐츠(페이지) 에만 적용되는 onActive 이벤트.
+	},
+	onBeforeInactive : function(docId) {
+		// 추가 되는 컨텐츠(페이지) 에만 적용되는 onBeforeInactive 이벤트.
+	},
+	onInactive : function(docId) {
+		// 추가 되는 컨텐츠(페이지) 에만 적용되는 onInactive 이벤트.
+	},
+	onBeforeRemoveState : function(docId) {
+		// 추가 되는 컨텐츠(페이지) 에만 적용되는 onBeforeRemoveState 이벤트.
+	},
+	onRemoveState : function(docId) {
+		// 추가 되는 컨텐츠(페이지) 에만 적용되는 onRemoveState 이벤트.
+	},
+	onBeforeRemove : function(docId) {
+		// 추가 되는 컨텐츠(페이지) 에만 적용되는 onBeforeRemove 이벤트.
+	},
+	onRemove : function(docId) {
+		// 추가 되는 컨텐츠(페이지) 에만 적용되는 onRemove 이벤트.
+	},
+	stateless : false // 상태유지 여부
+}
+</code></pre>
+				<p class="alert">개별 이벤트들은 전역 이벤트가 실행 된 후 실행 됩니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>active</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>N.notify</td>
+			<td>선택한 컨텐츠과 컨텐츠 탭을 활성화 합니다.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>docId</td>
+			<td>string</td>
+			<td align="center">-</td>
+			<td>컨텐츠(페이지) 아이디를 입력 합니다.</td>
+		</tr>
+		<tr>
+			<td>removeState</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>N.notify</td>
+			<td>선택한 컨텐츠의 상태를 제거 합니다.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>docId</td>
+			<td>string</td>
+			<td align="center">-</td>
+			<td>컨텐츠의 상태를 제거할 컨텐츠(페이지) 아이디를 입력 합니다.</td>
+		</tr>
+		<tr>
+			<td>remove</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>N.notify</td>
+			<td>선택한 컨텐츠과 컨텐츠 탭을 제거 합니다.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>docId</td>
+			<td>string</td>
+			<td align="center">-</td>
+			<td>컨텐츠(페이지) 아이디를 입력 합니다.</td>
+		</tr>
+		<tr>
+			<td>doc</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>object|array</td>
+			<td>
+				<p>선택한 컨텐츠의 정보(docOpts)를 가져 옵니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>docId</td>
+			<td>string</td>
+			<td align="center">-</td>
+			<td>
+				<p>정보를 가져 올 컨텐츠(페이지) 아이디를 입력 합니다.</p>
+				<p>입력하지 않으면 모든 컨텐츠의 정보를 array 로 반환 합니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>cont</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>object</td>
+			<td>
+				<p>선택한 컨텐츠의 Controller(N.cont) 오브젝트를 가져 옵니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>docId</td>
+			<td>string</td>
+			<td align="center">-</td>
+			<td>
+				<p>Controller를 가져 올 컨텐츠(페이지) 아이디를 입력 합니다.</p>
+			</td>
+		</tr>
+	</table>
+
+	<h3>
+		<span lang="ko_KR">예제</span>
+		<span lang="en_US">Examples</span>
+	</h3>
+
+	<h4 class="notIndex">1. Notify 생성 및 페이지 추가</h4>
+	<pre class="line-numbers"><code class="language-markup"><xmp>
+<section id="notifyContainer"></section>
+
+<script type="text/javascript">
+   	var notify = N("#notifyContainer").notify();
+   	notify.add("ex", "예제", { url : "ex.html" });
+</script></xmp></code></pre>
+
+	<h4 class="notIndex">2. 페이지에 파라미터 전달</h4>
+	<pre class="line-numbers"><code class="language-markup"><xmp>
+<section id="notifyContainer"></section>
+
+<script type="text/javascript">
+   	var notify = N("#notifyContainer").notify();
+   	notify.request.attr("a", 1).request.attr("b", 2).add("ex", "예제", { url : "ex.html" });
+
+   	// ex.html 의 N.cont 오브젝트의 init 함수의 두번째 인자인 request 객체에서
+   	// request.attr("a");
+   	// request.attr("b");
+   	// 로 받을 수 있음.
+</script></xmp></code></pre>
+
 </article>
 
 <script type="text/javascript">
