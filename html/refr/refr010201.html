@@ -80,15 +80,17 @@ N("div:regexp(id, page-[0-9])")</code></pre>
 	</h4>
 	<p>jQuery plugin 타입으로 제공 되는 CORE 유틸리티 함수들은 다음과 같습니다.</p>
 	<table>
+		<thead>
 		<tr>
-			<th style="width: 9%;">Name</th>
+			<th style="width: 10%;">Name</th>
 			<th style="width: 9%;">Arguments</th>
 			<th style="width: 9%;">Type</th>
 			<th style="width: 9%;">Return</th>
 			<th style="width: auto;">Description</th>
 		</tr>
+		</thead>
 		<tr>
-			<td>N("selector").instance</td>
+			<td>N("selector") .instance</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
 			<td>object</td>
@@ -99,17 +101,21 @@ N("div:regexp(id, page-[0-9])")</code></pre>
 				<pre><code class="language-javascript">// 조회한 요소에 저장되어 있는 모든 인스턴스를 array 로 모두 반환 합니다.
 var all = N("div#sample1", "div#sample2").instance();</code></pre>
 				<pre><code class="language-javascript">// 조회한 요소에 저장되어 있는 모든 요소를 지정한 콜백에 반환 합니다.
-var all = N("div#sample1", "div#sample2").instance(function(instanceId, instance) {
+var all = N("div#sample1", "div#sample2")
+			.instance(function(instanceId, instance) {
 	// this : instance
 	// instanceId : 저장 된 인스턴스의 식별자
 	// instance : 저장 된 인스턴스
 });</code></pre>
 				<pre><code class="language-javascript">// 조회한 요소에 instanceId 가 "name" 으로 저장되어 있는 모든 요소를 반환 합니다.
-// 반환된 인스턴스가 1개 이면 인스턴스 원형을 반환하고 1개 이상이면 array 에 담아 반환합니다.
+// 반환된 인스턴스가 1개 이면 인스턴스 원형을 반환하고
+// 1개 이상이면 array 에 담아 반환 하고
 // 반환된 인스턴스가 없다면 undefined 를 반환 합니다.
 var all = N("div#sample1", "div#sample2").instance("name");</code></pre>
-				<pre><code class="language-javascript">// 조회한 요소에 instanceId 가 "name" 으로 저장되어 있는 모든 요소를 지정한 콜백에 반환 합니다.
-var all = N("div#sample1", "div#sample2").instance("name", function(instanceId, instance) {
+				<pre><code class="language-javascript">// 조회한 요소에 instanceId 가 "name" 으로 저장되어 있는 모든 요소를
+//지정한 콜백에 반환 합니다.
+var all = N("div#sample1", "div#sample2")
+			.instance("name", function(instanceId, instance) {
 	// this : instance
 	// instanceId : 저장 된 인스턴스의 식별자
 	// instance : 저장 된 인스턴스
@@ -137,28 +143,7 @@ N("div#sample1").instance("name", instance);</code></pre>
 			</td>
 		</tr>
 		<tr>
-			<td>N(array).remove_</td>
-			<td align="center">-</td>
-			<td align="center">-</td>
-			<td>jquery object</td>
-			<td>셀럭터로 지정한 array 의 특정 요소를 제거 합니다.</td>
-		</tr>
-		<tr>
-			<td></td>
-			<td>idx</td>
-			<td>number</td>
-			<td align="center">-</td>
-			<td>배열 에서 제거 할 요소의 Index</td>
-		</tr>
-		<tr>
-			<td></td>
-			<td>length</td>
-			<td>number</td>
-			<td align="center">-</td>
-			<td>제거 할 배열 요소들의 개수</td>
-		</tr>
-		<tr>
-			<td>N("selector").tpBind</td>
+			<td>N("selector") .tpBind</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
 			<td>jquery object</td>
@@ -182,7 +167,7 @@ N("div#sample1").instance("name", instance);</code></pre>
 			<td>이벤트 핸들러 함수</td>
 		</tr>
 		<tr>
-			<td>N("selector").vals</td>
+			<td>N("selector") .vals</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
 			<td>string|array|jquery object</td>
@@ -190,7 +175,7 @@ N("div#sample1").instance("name", instance);</code></pre>
 				<p>select, select[multiple=multiple], input[type=radio], input[type=checkbox] 와 같은 선택 요소의 선택된 값을 가져오거나 명령으로 선택 할 수 있게 해 주는 함수 입니다.</p>
 				<ul>
 					<li>vals 인자를 지정하지 않으면 선택된 value 들을 가져오고 vals를 지정하면 입력한 값들과 일치하는 선택지 요소들을 선택 해 줍니다.</li>
-					<li>선택 된 값을 가져올 때 1개만 선택 되어 있으면</li>
+					<li>선택 된 값을 가져올 때 1개만 선택 되어 있으면 string 타입의 값 1개만 반환하고 2개 이상 일 경우 값 들을 array 에 담아 반환 합니다.</li>
 					<li>checkbox 의 경우 선택지가 1개만 있다면 Y나 N 또는 1, 0 과 같이 여부를 판단하는 모드로 작동하게 됩니다. Y/N 인지 1/0 인지 on/off 인지 설정은
 					natural.config.js 의 N.context.attr("core").sgChkdVal(체크값) 변수와 N.context.attr("core").sgUnChkdVal(언체크값) 변수 값으로 설정 할 수 있습니다.	</li>
 				</ul>
@@ -201,7 +186,36 @@ N("div#sample1").instance("name", instance);</code></pre>
 			<td>vals</td>
 			<td>array|string|function</td>
 			<td align="center">-</td>
-			<td>단일 값을 지정 할 때는 string 타입으로 값을 지정하고 2개 이상의 선택지를 선택 할 때는 array 에 string 을 담아 지정 합니다.</td>
+			<td>
+				단일 값을 지정 할 때는 string 타입으로 값을 지정하고 2개 이상의 선택지를 선택 할 때는 array 에 string 을 담아 지정 합니다.
+				function 타입을 지정하면 요소 개수 만큼 지정한 콜백 함수를 실행 해 줍니다. 콜백함수의 인자는 다음과 같습니다.
+				<ul>
+					<li>this : 선택 된 선택지 요소</li>
+					<li>arguments[0] : 선택 된 선택지 요소의 index</li>
+					<li>arguments[1] : 선택 된 선택지 요소</li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td>N(array) .remove_</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>jquery object</td>
+			<td>셀럭터로 지정한 array 의 특정 요소를 제거 합니다.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>idx</td>
+			<td>number</td>
+			<td align="center">-</td>
+			<td>배열 에서 제거 할 요소의 Index</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>length</td>
+			<td>number</td>
+			<td align="center">-</td>
+			<td>제거 할 배열 요소들의 개수</td>
 		</tr>
 	</table>
 
@@ -211,7 +225,7 @@ N("div#sample1").instance("name", instance);</code></pre>
 	</h4>
 	<table>
 		<tr>
-			<th style="width: 9%;">Name</th>
+			<th style="width: 10%;">Name</th>
 			<th style="width: 9%;">Arguments</th>
 			<th style="width: 9%;">Type</th>
 			<th style="width: 9%;">Return</th>
@@ -223,15 +237,15 @@ N("div#sample1").instance("name", instance);</code></pre>
 			<td align="center">-</td>
 			<td>jquery object<sup>1)</sup></td>
 			<td>
-				<p>Natural 의 플러그인 타입으로 제공되는 라이브러리들과 N클래스의 멤버변수(함수)가 정의 되어있는 핵심 클래스입니다.</p>
-				<p>N(selector<sup>2)</sup> 나 function, object, HTML Element(이하 element))를 호출하면 jQuery 의 init 메서드가 호출되어 Naturl-JS 와 jQuery가 동시에 초기화(Initialize) 됩니다.</p>
+				<p>Natural-JS 의 플러그인 타입으로 제공되는 라이브러리들과 N 객체의 멤버변수나 함수가 정의 되어있는 핵심 클래스입니다.</p>
+				<p>N(selector<sup>2)</sup>) 를 호출하면 jQuery 의 init 메서드가 호출되어 Naturl-JS 와 jQuery가 동시에 초기화(Initialize) 됩니다.</p>
 				<pre><code class="language-javascript">var divs = N("div");</code></pre>
 			</td>
 		</tr>
 		<tr>
 			<td></td>
 			<td>selector</td>
-			<td>jquery object, selector or function, object, element</td>
+			<td>jquery object |selector |function |element |object</td>
 			<td align="center">-</td>
 			<td>json object 나 selector 등.</td>
 		</tr>
@@ -241,6 +255,22 @@ N("div#sample1").instance("name", instance);</code></pre>
 			<td>jquery object</td>
 			<td align="center">-</td>
 			<td>element를 지정할 때 지정된 element 가 속해있는 element 영역을 지정할 수 있습니다.</td>
+		</tr>
+		<tr>
+			<td>N.version ["package name"]</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>string</td>
+			<td>
+				Natural-JS 의 패키지별 버전을 가져 올 수 있습니다.
+				<ul>
+					<li>Natural-CORE 패키지의 버전 : N.version["Natural-CORE"]</li>
+					<li>Natural-ARCHITECTURE 패키지의 버전 : N.version["Natural-ARCHITECTURE"]</li>
+					<li>Natural-DATA 패키지의 버전 : N.version["Natural-DATA"]</li>
+					<li>Natural-UI 패키지의 버전 : N.version["Natural-UI"]</li>
+					<li>Natural-UI.Shell 패키지의 버전 : N.version["Natural-UI.Shell"]</li>
+				</ul>
+			</td>
 		</tr>
 		<tr>
 			<td>N.locale</td>
@@ -257,25 +287,24 @@ N("div#sample1").instance("name", instance);</code></pre>
 			<td>"en_US", "ko_KR" 등의 로케일 문자열</td>
 		</tr>
 		<tr>
-			<td>N.error</td>
+			<td>N.log</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
-			<td>ErrorThrown</td>
-			<td>에러를 발생 시키고 에러 메시지를 브라우저 콘솔창에 보여줍니다.</td>
+			<td>undefined</td>
+			<td>
+				<p>콘솔창에 로깅(Logging) 메시지를 보여 줍니다</p>
+				<p class="alert">console.log 를 Wrapping 한 함수로서 console.log 와 사용법이 동일 합니다.</p>
+				<p class="alert">브라우저에서 console.log를 지원하지 않으면 메시지가 표시되지 않습니다.</p>
+			</td>
 		</tr>
 		<tr>
 			<td></td>
 			<td>msg</td>
 			<td>string</td>
 			<td></td>
-			<td>에러 텍스트 메시지</td>
-		</tr>
-		<tr>
-			<td></td>
-			<td>e</td>
-			<td>ErrorThrown</td>
-			<td align="center">-</td>
-			<td>에러 발생시 생성되는 ErrorThrown 객체를 입력 하면 Error Stack Trace 로그를 브라우저 콘솔창에 보여 줍니다. (Chrome 에서만 지원)</td>
+			<td>
+				<p>텍스트 메시지</p>
+			</td>
 		</tr>
 		<tr>
 			<td>N.info</td>
@@ -318,24 +347,176 @@ N("div#sample1").instance("name", instance);</code></pre>
 			</td>
 		</tr>
 		<tr>
-			<td>N.log</td>
+			<td>N.error</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
-			<td>undefined</td>
-			<td>
-				<p>콘솔창에 로깅(Logging) 메시지를 보여 줍니다</p>
-				<p class="alert">console.log 를 Wrapping 한 함수로서 console.log 와 사용법이 동일 합니다.</p>
-				<p class="alert">브라우저에서 console.log를 지원하지 않으면 메시지가 표시되지 않습니다.</p>
-			</td>
+			<td>ErrorThrown</td>
+			<td>에러를 발생 시키고 에러 메시지를 브라우저 콘솔창에 보여줍니다.</td>
 		</tr>
 		<tr>
 			<td></td>
 			<td>msg</td>
 			<td>string</td>
 			<td></td>
+			<td>에러 텍스트 메시지</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>e</td>
+			<td>ErrorThrown</td>
+			<td align="center">-</td>
+			<td>에러 발생시 생성되는 ErrorThrown 객체를 입력 하면 Error Stack Trace 로그를 브라우저 콘솔창에 보여 줍니다. (Chrome 에서만 지원)</td>
+		</tr>
+		<tr>
+			<td>type</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>string</td>
+			<td>"number", "string", "array", "object", "function" 등의 객체 타입을 반환 합니다.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>obj</td>
+			<td>object</td>
+			<td></td>
+			<td>검사 할 object</td>
+		</tr>
+		<tr>
+			<td>isString</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>boolean</td>
+			<td>입력한 객체가 string 타입인지 검사 합니다.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>obj</td>
+			<td>object</td>
+			<td></td>
+			<td>검사 할 object</td>
+		</tr>
+		<tr>
+			<td>isNumeric</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>boolean</td>
 			<td>
-				<p>텍스트 메시지</p>
+				<p>입력한 객체가 숫자 타입인지 검사 합니다.</p>
+				<p class="alert">N.isNumeric 은 jQuery 의 $.isNumeric 함수를 그대로 사용 합니다.</p>
 			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>obj</td>
+			<td>object</td>
+			<td></td>
+			<td>검사 할 object</td>
+		</tr>
+		<tr>
+			<td>isPlainObject</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>boolean</td>
+			<td>
+				<p>입력한 객체가 순수한 객체 타입인지 검사 합니다.</p>
+				<p class="alert">
+					typeof N() 나 N.type(N()) 을 실행하면 "object" 로 반환 되지만 N.isPlainObject 이러한 오브젝트를 순수한 오브젝트로 평가 하지 않습니다.
+					new Object() 나 객체 생성 리터럴({})로 생성한 오브젝트만 true 가 반환 됩니다.
+				</p>
+				<p class="alert">N.isPlainObject 은 jQuery 의 $.isPlainObject 함수를 그대로 사용 합니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>obj</td>
+			<td>object</td>
+			<td></td>
+			<td>검사 할 object</td>
+		</tr>
+		<tr>
+			<td>isEmptyObject</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>boolean</td>
+			<td>
+				<p>입력한 객체가 비어 있는 객체인지 검사 합니다.</p>
+				<p class="alert">
+					"" 나 {}, [] 는 모두 비어 있는 객체여서 true를 반환 하지만 [{}] 안에 있는 객체가 비어 있으므로 false 가 반환 됩니다.
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>obj</td>
+			<td>object</td>
+			<td></td>
+			<td>검사 할 object</td>
+		</tr>
+		<tr>
+			<td>isArray</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>boolean</td>
+			<td>
+				<p>입력한 객체가 array 타입인지 검사 합니다.</p>
+				<p class="alert">N.isArray 은 jQuery 의 $.isArray 함수를 그대로 사용 합니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>obj</td>
+			<td>object</td>
+			<td></td>
+			<td>검사 할 object</td>
+		</tr>
+		<tr>
+			<td>isArraylike</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>boolean</td>
+			<td>
+				<p>입력한 객체가 array 와 비슷한 타입인지 검사 합니다.</p>
+				<p class="alert">jquery object 도 겉 보기에는 array 와 유사하여 true 를 반환 합니다. array, jquery object 를 둘다 같은 오브젝트로 평가하고 싶을 때 사용 하세요.</p>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>obj</td>
+			<td>object</td>
+			<td></td>
+			<td>검사 할 object</td>
+		</tr>
+		<tr>
+			<td>isWrappedSet</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>boolean</td>
+			<td>
+				<p>입력한 객체가 N() 이나 $(), jQuery() 로 초기화 한 jquery object 타입인지 검사 합니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>obj</td>
+			<td>object</td>
+			<td></td>
+			<td>검사 할 object</td>
+		</tr>
+		<tr>
+			<td>isElement</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>boolean</td>
+			<td>
+				<p>N() 이나 $(), jQuery() 의 인자로 지정한 객체가 HTML 요소 인지 검사 합니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>obj</td>
+			<td>jquery object</td>
+			<td></td>
+			<td>검사 할 jquery object</td>
 		</tr>
 		<tr>
 			<td>N.serialExecute</td>
@@ -420,7 +601,7 @@ $.when.apply($, defers).done(function(arg0, agr1, arg2, agr3) {
 	<p>"N.gc.아래함수명(arg[0...N])" 과 같이 사용하면 됩니다.</p>
 	<table>
 		<tr>
-			<th style="width: 9%;">Name</th>
+			<th style="width: 10%;">Name</th>
 			<th style="width: 9%;">Arguments</th>
 			<th style="width: 9%;">Type</th>
 			<th style="width: 9%;">Return</th>
@@ -455,7 +636,7 @@ $.when.apply($, defers).done(function(arg0, agr1, arg2, agr3) {
 	<p>"N.string.아래함수명(arg[0...N])" 과 같이 사용하면 됩니다.</p>
 	<table>
 		<tr>
-			<th style="width: 9%;">Name</th>
+			<th style="width: 10%;">Name</th>
 			<th style="width: 9%;">Arguments</th>
 			<th style="width: 9%;">Type</th>
 			<th style="width: 9%;">Return</th>
@@ -567,7 +748,7 @@ $.when.apply($, defers).done(function(arg0, agr1, arg2, agr3) {
 	<p>"N.element.아래함수명(arg[0...N])" 과 같이 사용하면 됩니다.</p>
 	<table>
 		<tr>
-			<th style="width: 9%;">Name</th>
+			<th style="width: 10%;">Name</th>
 			<th style="width: 9%;">Arguments</th>
 			<th style="width: 9%;">Type</th>
 			<th style="width: 9%;">Return</th>
@@ -583,7 +764,7 @@ $.when.apply($, defers).done(function(arg0, agr1, arg2, agr3) {
 	<p>"N.element.아래함수명(arg[0...N])" 과 같이 사용하면 됩니다.</p>
 	<table>
 		<tr>
-			<th style="width: 9%;">Name</th>
+			<th style="width: 10%;">Name</th>
 			<th style="width: 9%;">Arguments</th>
 			<th style="width: 9%;">Type</th>
 			<th style="width: 9%;">Return</th>
@@ -598,14 +779,14 @@ $.when.apply($, defers).done(function(arg0, agr1, arg2, agr3) {
 	<p>"N.browser.아래함수명(arg[0...N])" 과 같이 사용하면 됩니다.</p>
 	<table>
 		<tr>
-			<th style="width: 9%;">Name</th>
+			<th style="width: 10%;">Name</th>
 			<th style="width: 9%;">Arguments</th>
 			<th style="width: 9%;">Type</th>
 			<th style="width: 9%;">Return</th>
 			<th style="width: auto;">Description</th>
 		</tr>
 		<tr>
-			<td>N.browser<br>.cookie</td>
+			<td>cookie</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
 			<td>undefined</td>
@@ -641,7 +822,7 @@ $.when.apply($, defers).done(function(arg0, agr1, arg2, agr3) {
 		</tr>
 		<tr>
 			<td>
-				N.browser<br>.removeCookie
+				removeCookie
 			</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
@@ -663,14 +844,14 @@ $.when.apply($, defers).done(function(arg0, agr1, arg2, agr3) {
 			<td>해당 쿠키가 생성된 도메인</td>
 		</tr>
 		<tr>
-			<td>N.browser.msieVersion</td>
+			<td>msieVersion</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
 			<td>number</td>
 			<td>현재 접속한 Microsoft Internet Explorer(이하 MSIE)의 버전을 가져옵니다. MSIE가 아닐 경우 0을 반환 합니다.</td>
 		</tr>
 		<tr>
-			<td>N.browser.is</td>
+			<td>is</td>
 			<td></td>
 			<td></td>
 			<td>boolean</td>
@@ -684,7 +865,7 @@ $.when.apply($, defers).done(function(arg0, agr1, arg2, agr3) {
 			<td>브라우저 명(opera, firefox, safari, chrome, ie) 나 모바일 OS 명(android, ios)</td>
 		</tr>
 		<tr>
-			<td>N.browser.contextPath</td>
+			<td>contextPath</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
 			<td>number</td>
@@ -699,14 +880,14 @@ $.when.apply($, defers).done(function(arg0, agr1, arg2, agr3) {
 	<p>"N.message.아래함수명(arg[0...N])" 과 같이 사용하면 됩니다.</p>
 	<table>
 		<tr>
-			<th style="width: 9%;">Name</th>
+			<th style="width: 10%;">Name</th>
 			<th style="width: 9%;">Arguments</th>
 			<th style="width: 9%;">Type</th>
 			<th style="width: 9%;">Return</th>
 			<th style="width: auto;">Description</th>
 		</tr>
 		<tr>
-			<td>N.message<br>.get</td>
+			<td>get</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
@@ -756,7 +937,7 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 	<p>"N.array.아래함수명(arg[0...N])" 과 같이 사용하면 됩니다.</p>
 	<table>
 		<tr>
-			<th style="width: 9%;">Name</th>
+			<th style="width: 10%;">Name</th>
 			<th style="width: 9%;">Arguments</th>
 			<th style="width: 9%;">Type</th>
 			<th style="width: 9%;">Return</th>
@@ -771,7 +952,7 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 	<p>"N.json.아래함수명(arg[0...N])" 과 같이 사용하면 됩니다.</p>
 	<table>
 		<tr>
-			<th style="width: 9%;">Name</th>
+			<th style="width: 10%;">Name</th>
 			<th style="width: 9%;">Arguments</th>
 			<th style="width: 9%;">Type</th>
 			<th style="width: 9%;">Return</th>
