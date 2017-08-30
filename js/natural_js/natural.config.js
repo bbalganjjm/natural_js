@@ -89,7 +89,7 @@
 					".refr010509",
 					".refr010510",
 					".refr010601",
-					".refr010602:init"
+					".refr010602:init$"
 				].join(","),
 				"adviceType" : "before",
 				"fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 함수명, args 인자 */
@@ -109,7 +109,7 @@
 			}, {
 				"pointcut" : [
 					".refr0101",
-					".gtst0100:init"
+					".gtst0100:init$"
 				].join(","),
 				"adviceType" : "before",
 				"fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 함수명, args 인자 */
@@ -130,7 +130,7 @@
 					".refr0102",
 					".refr0103",
 					".refr0104",
-					".refr0105:init"
+					".refr0105:init$"
 				].join(","),
 				"adviceType" : "before",
 				"fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 함수명, args 인자 */
@@ -139,12 +139,12 @@
 			    	CommonUtilController.setPageLinks(N("a.link", view));
 				}
 			}, {
-				"pointcut" : ":init",
+				"pointcut" : "^init$",
 				"adviceType" : "before",
 				"fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 함수명, args 인자 */
 					var view = args[0];
 
-			    	CommonUtilController.setPageLinks(N("a.link", view));
+					CommonUtilController.setPageLinks(N("a.link", view));
 
 			    	if(cont.view.hasClass("view-code")) {
 			    		CommonUtilController.sourceCode(cont.view, cont.request.get("url"));
@@ -153,7 +153,7 @@
 			}, {
 				"pointcut" : [
 					".intr0100",
-					"[class*=refr]:init"
+					"[class*=refr]:init$"
 				].join(","),
 				"adviceType" : "before",
 				/**
