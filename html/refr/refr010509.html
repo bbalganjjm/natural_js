@@ -41,17 +41,17 @@
 		<tr>
 			<td></td>
 			<td>data</td>
-			<td>JSON Array</td>
+			<td>array[json object]</td>
 			<td align="center">-</td>
 			<td>기본옵션의 data 옵션과 같습니다.</td>
 		</tr>
 		<tr>
 			<td></td>
 			<td>opts</td>
-			<td>object | jQuery Selector(String | jQuery Object)</td>
+			<td>object | jQuery Selector(string | jquery object)</td>
 			<td align="center">-</td>
 			<td>
-				<p>기본 옵션을 object 형태로 지정 합니다.</p>
+				<p>기본 옵션을 object 타입으로 지정 합니다.</p>
 				<p class="alert">jQuery Selector 를 입력하면 입력한 인자가 context 옵션으로 지정 됩니다.</p>
 			</td>
 		</tr>
@@ -68,7 +68,7 @@
 		<tr>
 			<td></td>
 			<td>opts</td>
-			<td>object | jQuery Selector(String | jQuery Object)</td>
+			<td>object | jQuery Selector(string | jquery object)</td>
 			<td align="center">-</td>
 			<td>N.pagination의 opts 옵션과 같습니다.</td>
 		</tr>
@@ -88,7 +88,7 @@
 		</tr>
 		<tr>
 			<td>data</td>
-			<td>JSON Array</td>
+			<td>array[json object]</td>
 			<td>undefined</td>
 			<td align="center">○</td>
 			<td>
@@ -102,7 +102,7 @@
 		</tr>
 		<tr>
 			<td>context</td>
-			<td>jQuery Object</td>
+			<td>jquery object</td>
 			<td>null</td>
 			<td align="center">○</td>
 			<td>Pagination 을 적용할 컨텍스트 요소를 지정합니다.</td>
@@ -152,7 +152,7 @@
 	// selData 는 선택한 페이지가 가지고 있는 데이터 리스트
 	// currPageNavInfo 는 이벤트가 발생할 시점의 페이징 정보
 }</code></pre>
-				<p class="alert">서버에서 DB 쿼리로 페이징 시  먼저 조회하고자 하는 전체 행수를 가져오고 onChange 이벤트 핸들러의 인자로 들어오는 currPageNavInfo 정보로 선택될 DB 로우의 시작값(currPageNavInfo.startRowNum)과 얼마만큼 가져올건지의 정보(currPageNavInfo.countPerPage) 등을 서버에 파라미터로 던져 해당 행수 만큼만 가져와 N.grid 에 bind하는 형태로 서버단 페이징을 처리 할 수 있습니다.</p>
+				<p class="alert">서버에서 DB 쿼리로 페이징 시  먼저 조회하고자 하는 전체 행수를 가져오고 onChange 이벤트 핸들러의 인자로 들어오는 currPageNavInfo 정보로 선택될 DB 로우의 시작값(currPageNavInfo.startRowNum)과 얼마만큼 가져올건지의 정보(currPageNavInfo.countPerPage) 등을 서버에 파라미터로 던져 해당 행수 만큼만 가져와 N.grid 에 bind하는 타입으로 서버단 페이징을 처리 할 수 있습니다.</p>
 				<p class="alert">
 					currPageNavInfo 정보<br>
 					&nbsp;&nbsp;-&nbsp;pageNo : 선택한 페이지 번호<br>
@@ -199,7 +199,7 @@
 			<td>data</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
-			<td>JSON Array or jQuery Object</td>
+			<td>array[json object]|jquery object</td>
 			<td>컴포넌트에 바인드 되어 있는 최종 데이터를 반환 합니다.</td>
 		</tr>
 		<tr>
@@ -208,12 +208,12 @@
 			<td>boolean</td>
 			<td align="center">-</td>
 			<td>
-				반환되는 데이터의 형태를 결정하는 구분자 입니다.
+				반환되는 데이터의 타입을 결정하는 구분자 입니다.
 				<div class="alert">
-					<p>selFlag 인자 값에 따라 다음과 같은 형식의 데이터를 반환 합니다.</p>
+					<p>selFlag 인자 값에 따라 다음과 같은 타입의 데이터를 반환 합니다.</p>
 					<ul>
-						<li>입력하지 않았거나 undefined : JSON Array 형태의 데이터를 반환 합니다.</li>
-						<li>false : jQuery Object 형태의 데이터를 반환 합니다.</li>
+						<li>입력하지 않았거나 undefined : array[json object] 타입의 데이터를 반환 합니다.</li>
+						<li>false : jquery object 타입의 데이터를 반환 합니다.</li>
 					</ul>
 				</div>
 			</td>
@@ -237,7 +237,7 @@
 			<td>context</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
-			<td>jQuery Object</td>
+			<td>jquery object</td>
 			<td>컴포넌트를 적용한 요소를 반환 합니다.</td>
 		</tr>
 		<tr>
@@ -256,10 +256,10 @@
 		</tr>
 		<tr>
 			<td></td>
-			<td>data or totalCount</td>
+			<td>data|totalCount</td>
 			<td>string</td>
 			<td align="center">-</td>
-			<td>숫자 타입의 totalCount 값을 넣으면 컴포넌트 인스턴스의 totalCount 옵션이 지정한 값으로 치환되고 Array(object) 타입의 data 인자를 지정하면 컴포넌트에 바인드 된 데이터가 지정한 데이터로 치환되어 바인드 됩니다.</td>
+			<td>숫자 타입의 totalCount 값을 넣으면 컴포넌트 인스턴스의 totalCount 옵션이 지정한 값으로 치환되고 array(object) 타입의 data 인자를 지정하면 컴포넌트에 바인드 된 데이터가 지정한 데이터로 치환되어 바인드 됩니다.</td>
 		</tr>
 		<tr>
 			<td></td>
@@ -272,7 +272,7 @@
 			<td>pageNo</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
-			<td>number or N.pagination</td>
+			<td>number|N.pagination</td>
 			<td>
 				<p>페이지번호 값을 가져오거나 지정 합니다.</p>
 				<p>인자가 없으면 pageNo 값을 가져오고 첫번째 인자를 입력하면 입력된 값으로 pageNo가 지정 됩니다.</p>
@@ -291,7 +291,7 @@
 			<td>totalCount</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
-			<td>number or N.pagination</td>
+			<td>number|N.pagination</td>
 			<td>
 				<p>전체 행 건수 값을 가져오거나 지정 합니다.</p>
 				<p>인자가 없으면 totalCount 값을 가져오고 첫번째 인자를 입력하면 입력된 값으로 totalCount가 지정 됩니다.</p>
@@ -310,7 +310,7 @@
 			<td>countPerPage</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
-			<td>number or N.pagination</td>
+			<td>number|N.pagination</td>
 			<td>
 				<p>페이지 당 행 수 값을 가져오거나 지정 합니다.</p>
 				<p>인자가 없으면 countPerPage 값을 가져오고 첫번째 인자를 입력하면 입력된 값으로 countPerPage가 지정 됩니다.</p>
@@ -329,7 +329,7 @@
 			<td>countPerPageSet</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
-			<td>number or N.pagination</td>
+			<td>number|N.pagination</td>
 			<td>
 				<p>페이지 세트 당 페이지 수 값을 가져오거나 지정 합니다.</p>
 				<p>인자가 없으면 countPerPageSet 값을 가져오고 첫번째 인자를 입력하면 입력된 값으로 countPerPageSet가 지정 됩니다.</p>
@@ -479,7 +479,7 @@
 </script></xmp></code></pre>
 
 	<h4 class="notIndex">4. N.pagination과 N.grid 를 연동하여 서버(DB) 페이징</h4>
-	<p class="alert">서버에서 DB 쿼리로 페이징 시  먼저 조회하고자 하는 전체 행수를 가져오고 onChange 이벤트 핸들러의 인자로 들어오는 currPageNavInfo 정보로 선택될 DB 로우의 시작값(currPageNavInfo.startRowNum)과 얼마만큼 가져올건지의 정보(currPageNavInfo.countPerPage) 등을 서버에 파라미터로 던져 해당 행수 만큼만 가져와 N.grid 에 bind하는 형태로 서버단 페이징을 처리 할 수 있습니다.</p>
+	<p class="alert">서버에서 DB 쿼리로 페이징 시  먼저 조회하고자 하는 전체 행수를 가져오고 onChange 이벤트 핸들러의 인자로 들어오는 currPageNavInfo 정보로 선택될 DB 로우의 시작값(currPageNavInfo.startRowNum)과 얼마만큼 가져올건지의 정보(currPageNavInfo.countPerPage) 등을 서버에 파라미터로 던져 해당 행수 만큼만 가져와 N.grid 에 bind하는 타입으로 서버단 페이징을 처리 할 수 있습니다.</p>
 	<pre class="line-numbers"><code class="language-markup"><xmp>
 <table id="paginationExample41">
 	<thead><!-- 컬럼 타이틀 영역 -->

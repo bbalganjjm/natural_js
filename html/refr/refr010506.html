@@ -37,17 +37,17 @@
 		<tr>
 			<td></td>
 			<td>data</td>
-			<td>JSON Array</td>
+			<td>array[json object]</td>
 			<td align="center">-</td>
 			<td>기본옵션의 data 옵션과 같습니다.</td>
 		</tr>
 		<tr>
 			<td></td>
 			<td>opts</td>
-			<td>object | jQuery Selector(String | jQuery Object)</td>
+			<td>object | jQuery Selector(string | jquery object)</td>
 			<td align="center">-</td>
 			<td>
-				<p>기본 옵션을 object 형태로 지정 합니다.</p>
+				<p>기본 옵션을 object 타입으로 지정 합니다.</p>
 				<p class="alert">jQuery Selector 를 입력하면 입력한 인자가 context 옵션으로 지정 됩니다.</p>
 			</td>
 		</tr>
@@ -64,7 +64,7 @@
 		<tr>
 			<td></td>
 			<td>opts</td>
-			<td>object | jQuery Selector(String | jQuery Object)</td>
+			<td>object | jQuery Selector(string | jquery object)</td>
 			<td align="center">-</td>
 			<td>N.select의 opts 옵션과 같습니다.</td>
 		</tr>
@@ -84,14 +84,14 @@
 		</tr>
 		<tr>
 			<td>data</td>
-			<td>JSON Array</td>
+			<td>array[json object]</td>
 			<td>undefined</td>
 			<td align="center">○</td>
 			<td>context(HTML Templete)요소에 바인드 할 데이터</td>
 		</tr>
 		<tr>
 			<td>context</td>
-			<td>jQuery Object</td>
+			<td>jquery object</td>
 			<td>null</td>
 			<td align="center">○</td>
 			<td>N.select를 적용할 입력요소(SELECT, INPUT[TYPE=CHECKBOX], INPUT[TYPE=RADIO])를 지정합니다.</td>
@@ -146,7 +146,7 @@
 			<td>data</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
-			<td>JSON Array or jQuery Object</td>
+			<td>array[json object]|jquery object</td>
 			<td>컴포넌트에 바인드 되어 있는 최종 데이터를 반환 합니다.</td>
 		</tr>
 		<tr>
@@ -155,13 +155,13 @@
 			<td>boolean</td>
 			<td align="center">-</td>
 			<td>
-				반환되는 데이터의 형태를 결정하는 구분자 입니다.
+				반환되는 데이터의 타입을 결정하는 구분자 입니다.
 				<div class="alert">
-					<p>selFlag 인자 값에 따라 다음과 같은 형식의 데이터를 반환 합니다.</p>
+					<p>selFlag 인자 값에 따라 다음과 같은 타입의 데이터를 반환 합니다.</p>
 					<ul>
-						<li>입력하지 않았거나 undefined : JSON Array 형태의 데이터를 반환 합니다.</li>
+						<li>입력하지 않았거나 undefined : array[json object] 타입의 데이터를 반환 합니다.</li>
 						<li>true : 선택된 요소에 해당하는 데이터만 추출하여 반환 합니다.</li>
-						<li>false : jQuery Object 형태의 데이터를 반환 합니다.</li>
+						<li>false : jquery object 타입의 데이터를 반환 합니다.</li>
 					</ul>
 				</div>
 			</td>
@@ -185,7 +185,7 @@
 			<td>context</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
-			<td>jQuery Object</td>
+			<td>jquery object</td>
 			<td>컴포넌트를 적용한 요소를 반환 합니다.</td>
 		</tr>
 		<tr>
@@ -208,7 +208,7 @@
 		<tr>
 			<td></td>
 			<td>data</td>
-			<td>JSON Array</td>
+			<td>array[json object]</td>
 			<td align="center">-</td>
 			<td>data 인자를 지정하면 컴포넌트에 바인드 된 데이터가 지정한 데이터로 치환되어 바인드 됩니다.</td>
 		</tr>
@@ -216,7 +216,7 @@
 			<td>val</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
-			<td>String or Array</td>
+			<td>string|array</td>
 			<td>선택 된 값을 가져 옵니다.</td>
 		</tr>
 		<tr>
@@ -230,13 +230,13 @@
 			<td>index</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
-			<td>number or array(number)</td>
+			<td>number|array(number)</td>
 			<td>선택 된 요소의 index를 가져 옵니다.</td>
 		</tr>
 		<tr>
 			<td></td>
 			<td>index</td>
-			<td>number or array(number)</td>
+			<td>number|array(number)</td>
 			<td>N.select</td>
 			<td>index 인자가 undefined 가 아니면 index 값에 해당하는 요소를 선택 해 줍니다.</td>
 		</tr>

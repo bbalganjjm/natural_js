@@ -112,8 +112,8 @@
 	<p>Natural-JS는 어플리케이션 개발의 편의성을 제공하기 위한 여러 가지 유틸리티를 제공합니다.</p>
 	<ul>
 		<li>N.datarefine : 서버에서 가져온 데이터를 Natural-JS UI 컴포넌트들에서 쓸 수 있도록 데이터 정제</li>
-		<li>N.datafilter : 조건에 의한 JSON Array 데이터 필터링</li>
-		<li>N.datasort : JSON Array 데이터의 컬럼별 정렬</li>
+		<li>N.datafilter : 조건에 의한 array[json object] 데이터 필터링</li>
+		<li>N.datasort : array[json object] 데이터의 컬럼별 정렬</li>
 	</ul>
 
 	<h3>라. Natural-UI</h3>
@@ -124,7 +124,7 @@
 		보여지는 데이터가 따로 관리 되어 집니다. Grid를 예를 들면 화면에서 새로운 행을 생성하면 메모리의 데이터도 새로운 행이 생성되고 값을 수정하면 메모리의 값도 실시간으로 수정됩니다. Formatting,
 		Validate 등 Data 조작과 검증에 관련된 라이브러리들도 이 메모리의 데이터를 기반으로 동작 됩니다. 수정, 입력, 삭제된 데이터를 서버로 보낼때는 화면의 입력요소에서 가져올 필요 없이 자동으로
 		동기화되어진 메모리의 데이터만 보내면 되어서 UI 개발이 단순 해 집니다. 또한 UI 컴포넌트들은 Controller 영역에서 컴포넌트의 기본 옵션을 직접 적용할 수 있는 명령형 옵션과 컴포넌트의 기본옵션과
-		서브옵션을 view 영역의 HTML 요소의 data 속성에 JSON Text 형태로 지정할 수 있는 선언형 옵션을 지원합니다(선언형 옵션과 명령형 옵션의 지원 항목은 컴포넌트 기능의 속성에 따라 일치 하지 않을
+		서브옵션을 view 영역의 HTML 요소의 data 속성에 JSON 타입의 문자열로 지정할 수 있는 선언형 옵션을 지원합니다(선언형 옵션과 명령형 옵션의 지원 항목은 컴포넌트 기능의 속성에 따라 일치 하지 않을
 		수 있습니다).</p>
 	<p>Natural-UI는 다음과 같은 컴포넌트들과 구조로 구성 되어 있습니다.</p>
 	<p align="center">
@@ -134,7 +134,7 @@
 
 	<h4>1) Alert(N.alert)</h4>
 	<p>Alert(이하 N.alert)은 Javascript 의 window.alert 이나 window.confirm 같은 메시지를 표현을 위한 컴포넌트입니다. N.alert은 메시지 다이얼로그를 모달
-		레이어나 일반 레이어 형태로 표시 해 줍니다.</p>
+		레이어나 일반 레이어 타입으로 표시 해 줍니다.</p>
 
 	<h4>2) Button(N.button)</h4>
 	<p>Button(이하 N.button)은 HTML a, button, input중 타입이 button인 요소들을 기본버튼모양으로 만들어 줍니다. 명령형으로 옵션을 지정할 수 있지만 편의성을 위해 선언형
@@ -157,13 +157,13 @@
 		구현해주는 컴포넌트 입니다. 데이터를 바인딩 하는 기능 외에 값을 가져올 때 선택된 값만 가져오는 것이 아니라 선택한 값이 포함된 row data set 을 가져올 수 있는 기능도 제공 해 줍니다.</p>
 
 	<h4>7) Form(N.form)</h4>
-	<p>Form(이하 N.form)은 리스트 데이터(JSON Array)의 특정 로우(Row) Data를 HTML 요소에 값을 바인드(Bind) 해 주는 컴포넌트입니다. 그리드와 연계된 상세화면 보기나
+	<p>Form(이하 N.form)은 리스트 데이터(array[json object])의 특정 로우(Row) Data를 HTML 요소에 값을 바인드(Bind) 해 주는 컴포넌트입니다. 그리드와 연계된 상세화면 보기나
 		그리드의 조회조건에 해당하는 입력요소의 값을 손쉽게 컨트롤 하는데 사용됩니다. 또한 신규 입력페이지 등 에서도 손쉽게 입력요소를 기반으로 데이터를 생성하고 입력 데이터 및 표현 데이터에 대한 실시간
 		양식화(Formatting)와 검증(Validate)할 수 있는 기능을 제공합니다. 데이터 레이아웃을 표현하는 HTML 요소(DIV, SPAN, TABLE등)를 지정하면 지정한 요소의 하위요소(Children
 		Elements)중에서 Data의 컬럼명과 일치하는 식별자(태그의 id 속성)를 가진 요소를 찾아 값을 바인드 해 주어 데이터 폼을 쉽게 구현 해 줍니다.</p>
 
 	<h4>8) Grid(N.grid)</h4>
-	<p>Grid(이하 N.grid)는 메모리에 저장되어 있는 리스트 데이터(JSON Array)를 HTML 기반의 데이타 그리드 형태로 표현 해 줍니다. 다른 그리드 컴포넌트들과 달리 미리 정의한 HTML
+	<p>Grid(이하 N.grid)는 메모리에 저장되어 있는 리스트 데이터(array[json object])를 HTML 기반의 데이타 그리드 타입으로 표현 해 줍니다. 다른 그리드 컴포넌트들과 달리 미리 정의한 HTML
 		Table을 그대로 그리드 컴포넌트화 해줍니다. 때문에 그리드 디자인에 대한 제약이 전혀 없어 퍼블리싱된 HTML Table 요소에 Grid 컴포넌트만 실행시켜주면 아주 손쉽게 데이터 그리드를 완성 할 수
 		있습니다. 컬럼 리사이징, 스크롤 페이징, 행(row)의 추가·삭제, 컬럼정렬(Sort)등 일반적인 데이터그리드의 기능 외에 표시 데이터와 입력 데이터에 대한 실시간 양식화(Formatting)와,
 		검증(Validate) 기능을 제공 해 줍니다. 또한 그리드의 각 행의 요소 및 데이터를 제어를 하기위한(RowHandler) 기능을 제공 함으로서 그리드 조작에 대한 한계를 극복할 수 있습니다.</p>
@@ -174,7 +174,7 @@
 	     또한 페이징이 필요한 어떠한 목록도 페이징 처리를 할 수 있습니다.</p>
 
 	<h4>10) Tree(N.tree)</h4>
-	<p>Tree(이하 N.tree)는 계층 구조의 데이터를 트리 형태로 표현 해 주는 컴포넌트입니다.</p>
+	<p>Tree(이하 N.tree)는 계층 구조의 데이터를 트리 타입으로 표현 해 주는 컴포넌트입니다.</p>
 
 	<h3>마. Natural-UI.Shell</h3>
 	<p>Natural-UI 가 컨텐츠 영역의 UI 개발을 지원 한다면 Natural-UI.Shell 은 컨텐츠영역 바깥의 쉘(Shell) 영역의 개발을 지원 하는 컴포넌트 패키지 입니다.</p>
@@ -188,14 +188,14 @@
 	</p>
 
 	<h4>2) Documents(N.docs)</h4>
-	<p>Documents(이하 N.docs) 는 Natural-JS 로 제작 된 메뉴 페이지들을 Multi Document 나 Single Document 형태로 표시 할 수 있는 페이지 컨테이너 입니다.</p>
+	<p>Documents(이하 N.docs) 는 Natural-JS 로 제작 된 메뉴 페이지들을 Multi Document 나 Single Document 타입으로 표시 할 수 있는 페이지 컨테이너 입니다.</p>
 
 	<h2>개발언어</h2>
 	<ul>
 		<li>Javascript</li>
 		<li>HTML4 / HTML5</li>
 		<li>CSS2 / CSS3</li>
-		<li>jQuery 1.12.4 : Natural-JS는 기본적으로 jQuery Object를 상속받아 사용함.</li>
+		<li>jQuery 1.12.4 : Natural-JS는 기본적으로 jquery object를 상속받아 사용함.</li>
 	</ul>
 
 	<h2>지원 브라우저</h2>

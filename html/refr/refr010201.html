@@ -78,7 +78,7 @@ N("div:regexp(id, page-[0-9])")</code></pre>
 		<span lang="ko_KR">jQeury plugin 확장 함수</span>
 		<span lang="en_US">jQeury plugin extension functions</span>
 	</h4>
-	<p>jQuery plugin 형태로 제공 되는 CORE 유틸리티 함수들은 다음과 같습니다.</p>
+	<p>jQuery plugin 타입으로 제공 되는 CORE 유틸리티 함수들은 다음과 같습니다.</p>
 	<table>
 		<tr>
 			<th style="width: 9%;">Name</th>
@@ -91,12 +91,12 @@ N("div:regexp(id, page-[0-9])")</code></pre>
 			<td>N("selector").instance</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
-			<td>Object</td>
+			<td>object</td>
 			<td>
 				<p>Natural-JS 는 기본적으로 컴포넌트나 라이브러리들에 의해 생성된 인스턴스를 대상 HTML element(context 옵션, 이하 요소)가 있다면 대상요소에 인스턴스를 저장 합니다.</p>
 				<p>N().instance 메서드는 이 인스턴스를 요소에 저장하고 가져오는 역할을 수행 합니다.</p>
 				<p>arguments 의 개수와 타입에 따라 다음과 같이 라이브러리 인스터스를 가져 올 수 있습니다.</p>
-				<pre><code class="language-javascript">// 조회한 요소에 저장되어 있는 모든 인스턴스를 Array 로 모두 반환 합니다.
+				<pre><code class="language-javascript">// 조회한 요소에 저장되어 있는 모든 인스턴스를 array 로 모두 반환 합니다.
 var all = N("div#sample1", "div#sample2").instance();</code></pre>
 				<pre><code class="language-javascript">// 조회한 요소에 저장되어 있는 모든 요소를 지정한 콜백에 반환 합니다.
 var all = N("div#sample1", "div#sample2").instance(function(instanceId, instance) {
@@ -105,7 +105,7 @@ var all = N("div#sample1", "div#sample2").instance(function(instanceId, instance
 	// instance : 저장 된 인스턴스
 });</code></pre>
 				<pre><code class="language-javascript">// 조회한 요소에 instanceId 가 "name" 으로 저장되어 있는 모든 요소를 반환 합니다.
-// 반환된 인스턴스가 1개 이면 인스턴스 원형을 반환하고 1개 이상이면 Array 에 담아 반환합니다.
+// 반환된 인스턴스가 1개 이면 인스턴스 원형을 반환하고 1개 이상이면 array 에 담아 반환합니다.
 // 반환된 인스턴스가 없다면 undefined 를 반환 합니다.
 var all = N("div#sample1", "div#sample2").instance("name");</code></pre>
 				<pre><code class="language-javascript">// 조회한 요소에 instanceId 가 "name" 으로 저장되어 있는 모든 요소를 지정한 콜백에 반환 합니다.
@@ -129,10 +129,10 @@ N("div#sample1").instance("name", instance);</code></pre>
 		<tr>
 			<td></td>
 			<td>instance</td>
-			<td>Object|jQuery Object</td>
+			<td>object|jquery object</td>
 			<td align="center">-</td>
 			<td>
-				<p>인스턴스 or 인스턴스를 가져올 callback</p>
+				<p>인스턴스나 인스턴스를 가져올 callback</p>
 				<p class="alert">callback의 인자는 index(arguments[0])와 각각의 instance(arguments[1])가 들어옵니다. 이 callback 안의 this 는 각각의 instance를 가리킵니다.</p>
 			</td>
 		</tr>
@@ -140,8 +140,8 @@ N("div#sample1").instance("name", instance);</code></pre>
 			<td>N(array).remove_</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
-			<td>jQuery Object</td>
-			<td>셀럭터로 지정한 Array 의 특정 요소를 제거 합니다.</td>
+			<td>jquery object</td>
+			<td>셀럭터로 지정한 array 의 특정 요소를 제거 합니다.</td>
 		</tr>
 		<tr>
 			<td></td>
@@ -161,7 +161,7 @@ N("div#sample1").instance("name", instance);</code></pre>
 			<td>N("selector").tpBind</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
-			<td>jQuery Object</td>
+			<td>jquery object</td>
 			<td>
 				<p>선택 한 요소에 지정 한 이벤트 명과 같은 이벤트가 미리 정의 되어 있더라도 정의한 이벤트가 제일 먼저 실행 되게 해 줍니다.</p>
 				<p>기본적인 사용법은 jQuery().bind 메서드와 같습니다.</p>
@@ -185,24 +185,23 @@ N("div#sample1").instance("name", instance);</code></pre>
 			<td>N("selector").vals</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
-			<td>jQuery Object</td>
+			<td>string|array|jquery object</td>
 			<td>
 				<p>select, select[multiple=multiple], input[type=radio], input[type=checkbox] 와 같은 선택 요소의 선택된 값을 가져오거나 명령으로 선택 할 수 있게 해 주는 함수 입니다.</p>
+				<ul>
+					<li>vals 인자를 지정하지 않으면 선택된 value 들을 가져오고 vals를 지정하면 입력한 값들과 일치하는 선택지 요소들을 선택 해 줍니다.</li>
+					<li>선택 된 값을 가져올 때 1개만 선택 되어 있으면</li>
+					<li>checkbox 의 경우 선택지가 1개만 있다면 Y나 N 또는 1, 0 과 같이 여부를 판단하는 모드로 작동하게 됩니다. Y/N 인지 1/0 인지 on/off 인지 설정은
+					natural.config.js 의 N.context.attr("core").sgChkdVal(체크값) 변수와 N.context.attr("core").sgUnChkdVal(언체크값) 변수 값으로 설정 할 수 있습니다.	</li>
+				</ul>
 			</td>
 		</tr>
 		<tr>
 			<td></td>
 			<td>vals</td>
-			<td>function|string|array</td>
+			<td>array|string|function</td>
 			<td align="center">-</td>
-			<td>이벤트 명</td>
-		</tr>
-		<tr>
-			<td></td>
-			<td>handler</td>
-			<td>function</td>
-			<td align="center">-</td>
-			<td>이벤트 핸들러 함수</td>
+			<td>단일 값을 지정 할 때는 string 타입으로 값을 지정하고 2개 이상의 선택지를 선택 할 때는 array 에 string 을 담아 지정 합니다.</td>
 		</tr>
 	</table>
 
@@ -222,24 +221,24 @@ N("div#sample1").instance("name", instance);</code></pre>
 			<td>N</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
-			<td>jQuery Object<sup>1)</sup></td>
+			<td>jquery object<sup>1)</sup></td>
 			<td>
-				<p>Natural 의 플러그인 형태로 제공되는 라이브러리들과 N클래스의 멤버변수(함수)가 정의 되어있는 핵심 클래스입니다.</p>
-				<p>N(selector<sup>2)</sup> or function, object, HTML Element(이하 element))를 호출하면 jQuery 의 init 메서드가 호출되어 Naturl-JS 와 jQuery가 동시에 초기화(Initialize) 됩니다.</p>
+				<p>Natural 의 플러그인 타입으로 제공되는 라이브러리들과 N클래스의 멤버변수(함수)가 정의 되어있는 핵심 클래스입니다.</p>
+				<p>N(selector<sup>2)</sup> 나 function, object, HTML Element(이하 element))를 호출하면 jQuery 의 init 메서드가 호출되어 Naturl-JS 와 jQuery가 동시에 초기화(Initialize) 됩니다.</p>
 				<pre><code class="language-javascript">var divs = N("div");</code></pre>
 			</td>
 		</tr>
 		<tr>
 			<td></td>
 			<td>selector</td>
-			<td>jQuery Object, selector or function, object, element</td>
+			<td>jquery object, selector or function, object, element</td>
 			<td align="center">-</td>
-			<td>JSON data나 selector 등.</td>
+			<td>json object 나 selector 등.</td>
 		</tr>
 		<tr>
 			<td></td>
 			<td>context</td>
-			<td>jQuery Object</td>
+			<td>jquery object</td>
 			<td align="center">-</td>
 			<td>element를 지정할 때 지정된 element 가 속해있는 element 영역을 지정할 수 있습니다.</td>
 		</tr>
@@ -349,7 +348,7 @@ N("div#sample1").instance("name", instance);</code></pre>
 					<li>비동기로 작동하는 로직과 그 로직의 전처리, 후처리 로직을 하나의 함수 블록으로 만들어 N.serialExecute 함수에 개수 상관없이 인자로 넣어 주면 됩니다.</li>
 					<li>기입된 인자의 순서대로 함수들이 실행 되고 다음 인자로 정의한 함수 블록을 실행 하기 위해서는 해당 비동기 로직이 끝나는 시점(다음 함수가 실행되어야 하는 시점)에 함수 블록의 인자로 반환되는 Deferred 객체에서 resolve 함수를 실행 시켜 주어야 합니다.</li>
 					<li>인자로 정의되는 함수 블록에서 defer.resolve 의 인자들은 그 다음 실행 될 함수 블록의 두번째 인자부터 순서대로 배당 됩니다.</li>
-					<li>각 함수 블록의 this 와 Return 객체는 인자로 정의 된 함수 블록 들의 jQuery Deferred 객체들이 담겨 있는 Array 입니다.</li>
+					<li>각 함수 블록의 this 와 Return 객체는 인자로 정의 된 함수 블록 들의 jQuery Deferred 객체들이 담겨 있는 array 입니다.</li>
 					<li>이 this 를 가지고 첫번째 함수 블록의 비동기 로직의 완료 시점(시작 시점에서는 아직 다음 함수 블록의 Deferred 객체가 생성되지 않았기 때문에 해당 함수 블록 앞에 정의 된 함수 블록들은 참조 가능하나 이후에 정의 된 함수 블록은 참조가 불 가능)에 this[2].resolve() 와 같이 호출하면 두번째, 세번째 함수 블록을 건너 뛰고 네번째 함수 블록을 실행 시킬 수 있습니다.</li>
 				</ul>
 				<p>예)</p>
@@ -720,7 +719,7 @@ $.when.apply($, defers).done(function(arg0, agr1, arg2, agr3) {
 			<td align="center">-</td>
 			<td>
 				<p>메시지 리소스 객체를 지정 합니다.</p>
-				<p>메시지 리소스는 object 형태로 만들면 되고 다음과 같이 메시지 세트를 구성 해야 합니다.</p>
+				<p>메시지 리소스는 object 타입으로 만들면 되고 다음과 같이 메시지 세트를 구성 해야 합니다.</p>
 				<pre><code class="language-javascript">var message = {
 	&quot;ko_KR&quot; : {
 		key : ＂메시지{0}＂
@@ -744,7 +743,7 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 		<tr>
 			<td></td>
 			<td>vars</td>
-			<td>Array</td>
+			<td>array</td>
 			<td align="center">-</td>
 			<td>메시지 변수를 치환할 값</td>
 		</tr>
@@ -783,8 +782,8 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 	<fieldset>
 		<legend>주석</legend>
 		<ul class="footnotes">
-			<li>1) jQuery Object : jQuery()를 실행하면 반환되는 jQuery 확장 객체 나 jQuery selector</li>
-			<li>2) selector : jQuery에서 CSS selector 형식으로 지정하는 String 형태의 문자열이나 object, Aray, HTML Element, Function 등의 Object</li>
+			<li>1) jquery object : jQuery()를 실행하면 반환되는 jQuery 확장 객체 나 jQuery selector</li>
+			<li>2) selector : jQuery에서 CSS selector 타입으로 지정하는 string 타입의 문자열이나 object, array, html element, function 등의 object</li>
 		</ul>
 	</fieldset>
 

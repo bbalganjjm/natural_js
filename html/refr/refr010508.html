@@ -8,7 +8,7 @@
 		<span lang="ko_KR">개요</span>
 		<span lang="en_US">Overview</span>
 	</h3>
-	<p>Grid(이하 N.grid)는 테이블(TABLE) 요소에 데이터를 바인드하여 테이블 형태로 데이터를 표현해 주는 컴포넌트입니다. 헤더고정형, 리스트형의 두 가지 타입을 제공 합니다.</p>
+	<p>Grid(이하 N.grid)는 테이블(TABLE) 요소에 데이터를 바인드하여 테이블 타입으로 데이터를 표현해 주는 컴포넌트입니다. 헤더고정형, 리스트형의 두 가지 타입을 제공 합니다.</p>
 	<p class="alert">그리드로 만들어질 TABLE 요소의 넓이는 고정(px등)이든 가변(%)이든 반드시 넓이가 지정 되어야 합니다.</p>
 
 	<h3>API DEMO</h3>
@@ -38,17 +38,17 @@
 		<tr>
 			<td></td>
 			<td>data</td>
-			<td>JSON Array</td>
+			<td>array[json object]</td>
 			<td align="center">-</td>
 			<td>기본옵션의 data 옵션과 같습니다.</td>
 		</tr>
 		<tr>
 			<td></td>
 			<td>opts</td>
-			<td>object | jQuery Selector(String | jQuery Object)</td>
+			<td>object | jQuery Selector(string | jquery object)</td>
 			<td align="center">-</td>
 			<td>
-				<p>기본 옵션을 object 형태로 지정 합니다.</p>
+				<p>기본 옵션을 object 타입으로 지정 합니다.</p>
 				<p class="alert">jQuery Selector 를 입력하면 입력한 인자가 context 옵션으로 지정 됩니다.</p>
 			</td>
 		</tr>
@@ -65,7 +65,7 @@
 		<tr>
 			<td></td>
 			<td>opts</td>
-			<td>object | jQuery Selector(String | jQuery Object)</td>
+			<td>object | jQuery Selector(string | jquery object)</td>
 			<td align="center">-</td>
 			<td>N.grid의 opts 옵션과 같습니다.</td>
 		</tr>
@@ -85,14 +85,14 @@
 		</tr>
 		<tr>
 			<td>data</td>
-			<td>JSON Array</td>
+			<td>array[json object]</td>
 			<td>undefined</td>
 			<td align="center">○</td>
 			<td>context(HTML Templete)요소에 바인드 할 데이터</td>
 		</tr>
 		<tr>
 			<td>context</td>
-			<td>jQuery Object</td>
+			<td>jquery object</td>
 			<td>null</td>
 			<td align="center">○</td>
 			<td>그리드를 적용할 그리드 블록(Block)요소(TABLE)를 지정합니다.</td>
@@ -104,7 +104,7 @@
 			<td></td>
 			<td>
 				<p>그리드 바디(body)의 높이를 지정 합니다.</p>
-				<p>입력한 값이 0보다 크면 헤더고정형의 일반적인 그리드형태로 초기화 되고 0을 입력하면 전체데이터 한번에 표현하는 리스트형의 그리드로 초기화 됩니다.</p>
+				<p>입력한 값이 0보다 크면 헤더고정형의 일반적인 그리드타입으로 초기화 되고 0을 입력하면 전체데이터 한번에 표현하는 리스트형의 그리드로 초기화 됩니다.</p>
 			</td>
 		</tr>
 		<tr>
@@ -311,14 +311,14 @@
 		</tr>
 		<tr>
 			<td>fRules</td>
-			<td>Array</td>
+			<td>array</td>
 			<td>null</td>
 			<td></td>
 			<td>포맷룰을 지정 합니다. API/DEMO > Natural-DATA 메뉴의 Formatter 와 Format Rules 참고</td>
 		</tr>
 		<tr>
 			<td>vRules</td>
-			<td>Array</td>
+			<td>array</td>
 			<td>null</td>
 			<td></td>
 			<td>검증룰을 지정 합니다. API/DEMO > Natural-DATA 메뉴의 Validator 와 Validation Rules 참고</td>
@@ -456,13 +456,13 @@
 		</tr>
 		<tr>
 			<td>data-format</td>
-			<td>Array[Array]</td>
+			<td>array[array]</td>
 			<td>undefined</td>
 			<td>포맷룰을 지정 합니다. API/DEMO > Natural-DATA 메뉴의 Formatter 와 Format Rules 참고</td>
 		</tr>
 		<tr>
 			<td>data-validate</td>
-			<td>Array[Array]</td>
+			<td>array[array]</td>
 			<td>undefined</td>
 			<td>검증룰을 지정 합니다. API/DEMO > Natural-DATA 메뉴의 Validator 와 Validation Rules 참고</td>
 		</tr>
@@ -484,29 +484,29 @@
 			<td>data</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
-			<td>JSON Array or jQuery Object</td>
+			<td>array[json object]|jquery object</td>
 			<td>컴포넌트에 바인드 되어 있는 최종 데이터를 반환 합니다.</td>
 		</tr>
 		<tr>
 			<td></td>
 			<td>rowStatus</td>
-			<td>boolean or String</td>
+			<td>boolean|string</td>
 			<td align="center">-</td>
 			<td>
-				반환되는 데이터의 형태를 결정하거나 데이터를 필터링 하기 위한 구분자 입니다.
+				반환되는 데이터의 타입을 결정하거나 데이터를 필터링 하기 위한 구분자 입니다.
 				<div class="alert">
-					<p>rowStatus 인자 값에 따라 다음과 같은 형식의 데이터를 반환 합니다.</p>
+					<p>rowStatus 인자 값에 따라 다음과 같은 타입의 데이터를 반환 합니다.</p>
 					<ul>
-						<li>입력하지 않았거나 undefined : JSON Array 형태의 데이터를 반환 합니다.</li>
-						<li>false : jQuery Object 형태의 데이터를 반환 합니다.</li>
-						<li>"modified" : JSON Array 형태의 추가, 수정, 삭제된 데이터를 반환 합니다.</li>
+						<li>입력하지 않았거나 undefined : array[json object] 타입의 데이터를 반환 합니다.</li>
+						<li>false : jquery object 타입의 데이터를 반환 합니다.</li>
+						<li>"modified" : array[json object] 타입의 추가, 수정, 삭제된 데이터를 반환 합니다.</li>
 						<li>
-							"selected" : <strong style="color: red; font-size: 15px;">기능 구현 예정...</strong>select 옵션이나 multiselect 옵션 지정 시 JSON Array 형태의 체크된 데이터를 반환 합니다.
+							"selected" : <strong style="color: red; font-size: 15px;">기능 구현 예정...</strong>select 옵션이나 multiselect 옵션 지정 시 array[json object] 타입의 체크된 데이터를 반환 합니다.
 						</li>
-						<li>"checked" : checkAll 옵션과 checkAllTarget 옵션을 지정 했거나  checkOnlyTarget 옵션 지정 시 JSON Array 형태의 체크된 데이터를 반환 합니다.</li>
-						<li>"insert" : JSON Array 형태의 추가된 데이터를 반환 합니다.</li>
-						<li>"update" : JSON Array 형태의 수정된 데이터를 반환 합니다.</li>
-						<li>"delete" : JSON Array 형태의 삭제된 데이터를 반환 합니다.</li>
+						<li>"checked" : checkAll 옵션과 checkAllTarget 옵션을 지정 했거나  checkOnlyTarget 옵션 지정 시 array[json object] 타입의 체크된 데이터를 반환 합니다.</li>
+						<li>"insert" : array[json object] 타입의 추가된 데이터를 반환 합니다.</li>
+						<li>"update" : array[json object] 타입의 수정된 데이터를 반환 합니다.</li>
+						<li>"delete" : array[json object] 타입의 삭제된 데이터를 반환 합니다.</li>
 					</ul>
 				</div>
 			</td>
@@ -529,7 +529,7 @@
 			<td>context</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
-			<td>jQuery Object</td>
+			<td>jquery object</td>
 			<td>컴포넌트를 적용한 요소를 반환 합니다.</td>
 		</tr>
 		<tr>
@@ -549,7 +549,7 @@
 		<tr>
 			<td></td>
 			<td>data</td>
-			<td>JSON Array</td>
+			<td>array[json object]</td>
 			<td align="center">-</td>
 			<td>data인자를 지정하면 컴포넌트에 바인드 된 데이터가 지정한 데이터로 치환되어 바인드 됩니다.</td>
 		</tr>
@@ -639,7 +639,7 @@
 			<td>val</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
-			<td>value object or N.grid</td>
+			<td>value object|N.grid</td>
 			<td>
 				<p>선택한 컬럼의 원래 값을 가져오거나 입력(수정) 합니다.</p>
 				<p class="alert">val 인자를 입력하지 않으면 선택한 값을 반환하고 입력하면 선택한 키 컬럼의 값을 입력한 값으로 바꿔 줍니다.</p>
@@ -674,7 +674,7 @@
 			<td>select</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
-			<td>Array</td>
+			<td>array</td>
 			<td>
 				<p><strong style="color: red; font-size: 15px;">기능 구현 예정...</strong></p>
 				<p>select 나 multiselect 옵션 지정 시 그리드안의 행 선택을 컨트롤 할 수 있습니다.</p>
@@ -687,14 +687,14 @@
 		<tr>
 			<td></td>
 			<td>indexArr</td>
-			<td>Array or number</td>
+			<td>array|number</td>
 			<td align="center">-</td>
 			<td>
 				<p><strong style="color: red; font-size: 15px;">기능 구현 예정...</strong></p>
 				<p>선택할 row index</p>
 				<ul>
-					<li>행 1개를 선택 하려면 인자를 number형으로 지정해도 되고 Array형으로 지정해도 됩니다.</li>
-					<li>행을 2개 이상 선택 하려면 인자를 Array형으로 지정해야 합니다.</li>
+					<li>행 1개를 선택 하려면 인자를 number 타입 으로 지정해도 되고 array 타입 으로 지정해도 됩니다.</li>
+					<li>행을 2개 이상 선택 하려면 인자를 array 타입 으로 지정해야 합니다.</li>
 				</ul>
 			</td>
 		</tr>
@@ -702,7 +702,7 @@
 			<td>check</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
-			<td>Array</td>
+			<td>string</td>
 			<td>
 				<p>checkAll 과 checkAllTarget 옵션 지정 시 그리드안의 체크박스를 컨트롤 할 수 있습니다.</p>
 				<ul>
@@ -714,14 +714,14 @@
 		<tr>
 			<td></td>
 			<td>indexArr</td>
-			<td>Array or number</td>
+			<td>array|number</td>
 			<td align="center">-</td>
 			<td>
 				<p><strong style="color: red; font-size: 15px;">기능 구현 예정...</strong></p>
 				<p>체크할 체크박스들의 row index</p>
 				<ul>
-					<li>체크박스 1개를 선택 하려면 인자를 number형으로 지정해도 되고 Array형으로 지정해도 됩니다.</li>
-					<li>체크박스를 2개 이상 선택 하려면 인자를 Array형으로 지정해야 합니다.</li>
+					<li>체크박스 1개를 선택 하려면 인자를 number 타입 으로 지정해도 되고 array 타입 으로 지정해도 됩니다.</li>
+					<li>체크박스를 2개 이상 선택 하려면 인자를 array 타입 으로 지정해야 합니다.</li>
 				</ul>
 			</td>
 		</tr>
