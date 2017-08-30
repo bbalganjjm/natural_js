@@ -18,7 +18,7 @@
 	jQuery 의 $와 같은 역할을 수행하며 Natural-JS 의 N() 처럼 N 함수로 초기화하고 이후 실행되는 메서드들은 jQuery 의 $ 함수 로 실행해도 됩니다.
 	반대로 jQuery 의 기능들은 모두 N() 에 상속되어 있으므로 jQuery 메서드를 호출할 때 $() 대신 N()을 사용해도 됩니다.
 	</p>
-	<p class="alert">단, 아래의 jQuery 확장 기능과 확장 함수들은 N() 을 사용 해야 하고 N 오브젝트(N.)로 서비스 되는 함수들은 $ 오브젝트($.) 로 사용이 불가능 합니다.</p>
+	<p class="alert">단, 아래의 N 오브젝트(N.)로 서비스 되는 함수들은 $ 오브젝트($.) 로 사용이 불 가능 합니다.</p>
 
 	<h3>
 		<span lang="ko_KR">jQeury selector 확장</span>
@@ -88,12 +88,12 @@ N("div:regexp(id, page-[0-9])")</code></pre>
 			<th style="width: auto;">Description</th>
 		</tr>
 		<tr>
-			<td>N().instance</td>
+			<td>N("selector").instance</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
 			<td>Object</td>
 			<td>
-				<p>Natural-JS 는 기본적으로 컴포넌트나 라이브러리들에 의해 생성된 인스턴스를 대상 HTML element(이하 요소)가 있다면 대상요소에 인스턴스를 저장 합니다.</p>
+				<p>Natural-JS 는 기본적으로 컴포넌트나 라이브러리들에 의해 생성된 인스턴스를 대상 HTML element(context 옵션, 이하 요소)가 있다면 대상요소에 인스턴스를 저장 합니다.</p>
 				<p>N().instance 메서드는 이 인스턴스를 요소에 저장하고 가져오는 역할을 수행 합니다.</p>
 				<p>arguments 의 개수와 타입에 따라 다음과 같이 라이브러리 인스터스를 가져 올 수 있습니다.</p>
 				<pre><code class="language-javascript">// 조회한 요소에 저장되어 있는 모든 인스턴스를 Array 로 모두 반환 합니다.
@@ -129,7 +129,7 @@ N("div#sample1").instance("name", instance);</code></pre>
 		<tr>
 			<td></td>
 			<td>instance</td>
-			<td>Object or callback function(이하 callback)</td>
+			<td>Object|jQuery Object</td>
 			<td align="center">-</td>
 			<td>
 				<p>인스턴스 or 인스턴스를 가져올 callback</p>
@@ -137,11 +137,49 @@ N("div#sample1").instance("name", instance);</code></pre>
 			</td>
 		</tr>
 		<tr>
-			<td>N().toArray</td>
+			<td>N(array).remove_</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
-			<td>Array</td>
-			<td>jQuery Object를 순수한 Array 객체로 반환 합니다.</td>
+			<td>jQuery Object</td>
+			<td>셀럭터로 지정한 Array 의 특정 요소를 제거 합니다.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>idx</td>
+			<td>number</td>
+			<td align="center">-</td>
+			<td>배열 에서 제거 할 요소의 Index</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>length</td>
+			<td>number</td>
+			<td align="center">-</td>
+			<td>제거 할 배열 요소들의 개수</td>
+		</tr>
+		<tr>
+			<td>N("selector").tpBind</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>jQuery Object</td>
+			<td>
+				<p>선택 한 요소에 지정 한 이벤트 명과 같은 이벤트가 미리 정의 되어 있더라도 정의한 이벤트가 제일 먼저 실행 되게 해 줍니다.</p>
+				<p>기본적인 사용법은 jQuery().bind 메서드와 같습니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>event</td>
+			<td>string</td>
+			<td align="center">-</td>
+			<td>이벤트 명</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>handler</td>
+			<td>Function</td>
+			<td align="center">-</td>
+			<td>이벤트 핸들러 함수</td>
 		</tr>
 	</table>
 
