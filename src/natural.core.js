@@ -1,5 +1,5 @@
 /*!
- * Natural-CORE v0.8.6.0
+ * Natural-CORE v0.8.6.10
  * bbalganjjm@gmail.com
  *
  * Includes formatdate.js & Mask JavaScript API
@@ -21,7 +21,7 @@
 
 	$.fn.extend($.extend(N.prototype, {
 		/**
-		 * Remove object of specified index from array
+		 * Remove element in array
 		 */
 		"remove_" : function(idx, length) {
 			if (idx !== undefined) {
@@ -234,6 +234,7 @@
 	    }
 	}));
 
+	// Extend regexp filter selector to jQuery filter selector
 	(function(){
 		var paramMatch = /^([^,]+),(.+)/;
 		var getterMap = {
@@ -275,7 +276,7 @@
 		// N local variables
 		$.extend(N, {
 			version : {
-				"Natural-CORE" : "0.8.6.0"
+				"Natural-CORE" : "0.8.6.10"
 			},
 			/**
 			 * Set and get locale value
@@ -285,29 +286,6 @@
 					return N.context.attr("core").locale;
 				} else {
 					N.context.attr("core").locale = str;
-				}
-			},
-			/**
-			 * Display the error log to console
-			 */
-			error : function(msg, e) {
-				if (e !== undefined && e.stack !== undefined && console.error !== undefined) {
-					if(typeof console !== "undefined" && typeof console.error !== "undefined") {
-						console.error(e.stack);
-					}
-				}
-				throw new Error(msg);
-			},
-			/**
-			 * Display the warnning log to console
-			 */
-			warn : function() {
-				if(typeof console !== "undefined") {
-					if(typeof console.warn !== "undefined" && typeof console.warn.apply !== "undefined") {
-						console.warn.apply(console, arguments);
-					} else {
-						N.log(console);
-					}
 				}
 			},
 			/**
@@ -333,6 +311,115 @@
 						console.info(console);
 					}
 				}
+			},
+			/**
+			 * Display the warnning log to console
+			 */
+			warn : function() {
+				if(typeof console !== "undefined") {
+					if(typeof console.warn !== "undefined" && typeof console.warn.apply !== "undefined") {
+						console.warn.apply(console, arguments);
+					} else {
+						N.log(console);
+					}
+				}
+			},
+			/**
+			 * Display the error log to console
+			 */
+			error : function(msg, e) {
+				if (e !== undefined && e.stack !== undefined && console.error !== undefined) {
+					if(typeof console !== "undefined" && typeof console.error !== "undefined") {
+						console.error(e.stack);
+					}
+				}
+				throw new Error(msg);
+			},
+			/**
+			 * Check object type
+			 */
+			type : function(obj) {
+		        return ({}).toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase();
+		    },
+			/**
+			 * Check whether arg[0] is a String type
+			 */
+			isString : function(obj) {
+				return N.type(obj) === "string";
+			},
+		    /**
+			 * Check whether arg[0] is a numeric type
+			 */
+			isNumeric : $.isNumeric,
+			/**
+			 * Check whether arg[0] is a plain object type
+			 */
+			isPlainObject : $.isPlainObject,
+			/**
+			 * Check if object is empty
+			 */
+			isEmptyObject : function(obj) {
+				if(obj !== undefined && this.isString(obj)) {
+					if(obj.length > 0) {
+						return false;
+					}
+				} else {
+					for (var name in obj) {
+						return false;
+					}
+				}
+				return true;
+			},
+			/**
+			 * Check whether arg[0] is a Array type
+			 */
+			isArray : $.isArray,
+			/**
+			 * Checks whether an object of a type similar(array or jquery object etc.) to an array
+			 */
+			isArraylike : function(obj) {
+				var length = obj.length, type = N.type(obj);
+				if (type === "function" || $.isWindow(obj)) {
+					return false;
+				}
+				if (obj.nodeType === 1 && length) {
+					return true;
+				}
+				return type === "array" || length === 0 || typeof length === "number" && length > 0 && (length - 1) in obj;
+			},
+			/**
+			 * Check whether arg[0] is a jQuery Object type
+			 */
+			isWrappedSet : function(obj) {
+				return obj != null && this.isArraylike(obj) && obj.jquery !== undefined;
+			},
+			/**
+		     * Check whether arg[0] is an element type
+		     */
+			isElement : function(obj) {
+				if(this.isWrappedSet(obj)) {
+					obj = obj.get(0);
+				}
+				return obj !== undefined && obj.getElementsByTagName ? true : false;
+			},
+			/**
+			 * serialize async execution
+			 */
+			serialExecute : function() {
+				var self = this;
+				self.defers = [];
+				$(arguments).each(function(i, fn){
+					var defer = $.Deferred();
+					self.defers.push(defer);
+					if(self.defers.length > 1) {
+						self.defers[i-1].done(function() {
+							fn.apply(self.defers, $.merge([defer], arguments));
+						});
+					} else {
+						fn.apply(self.defers, [defer]);
+					}
+				});
+				return self.defers;
 			},
 			/**
 			 * Natural-JS resource garbage collector
@@ -365,220 +452,73 @@
 				}
 			},
 			/**
-			 * Check whether arg[0] is a Array type
-			 */
-			isArray : $.isArray,
-			/**
-			 * Check whether arg[0] is a numeric type
-			 */
-			isNumeric : $.isNumeric,
-			isEmptyObject : function(obj) {
-				if(obj !== undefined && this.isString(obj)) {
-					if(obj.length > 0) {
-						return false;
-					}
-				} else {
-					for (var name in obj) {
-						return false;
-					}
-				}
-				return true;
-			},
-			/**
-			 * Check whether arg[0] is a plain object type
-			 */
-			isPlainObject : $.isPlainObject,
-			/**
-			 * Check whether arg[0] is a String type
-			 */
-			isString : function(str) {
-				return typeof str === "string";
-			},
-			/**
-			 * Check object type
-			 */
-			type : function(obj) {
-		        return ({}).toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase();
-		    },
-		    /**
-		     * Check whether arg[0] is an element type
-		     */
-			isElement : function(obj) {
-				if(this.isWrappedSet(obj)) {
-					obj = obj.get(0);
-				}
-				return obj !== undefined && obj.getElementsByTagName ? true : false;
-			},
-			/**
-			 * Deprecated - Will be removed from version 1.0
-			 */
-			isArraylike : function(obj) {
-				var length = obj.length, type = N.type(obj);
-				if (type === "function" || $.isWindow(obj)) {
-					return false;
-				}
-				if (obj.nodeType === 1 && length) {
-					return true;
-				}
-				return type === "array" || length === 0 || typeof length === "number" && length > 0 && (length - 1) in obj;
-			},
-			/**
-			 * Check whether arg[0] is a jQuery Object type
-			 */
-			isWrappedSet : function(obj) {
-				return obj != null && this.isArraylike(obj) && obj.jquery !== undefined;
-			},
-			/**
-			 * serialize async execution
-			 */
-			serialExecute : function() {
-				var self = this;
-				self.defers = [];
-				$(arguments).each(function(i, fn){
-					var defer = $.Deferred();
-					self.defers.push(defer);
-					if(self.defers.length > 1) {
-						self.defers[i-1].done(function() {
-							fn.apply(self.defers, $.merge([defer], arguments));
-						});
-					} else {
-						fn.apply(self.defers, [defer]);
-					}
-				});
-				return self.defers;
-			},
-			/**
 			 * N.string package
 			 */
 			"string" : {
-				/**
-				 * Checks if CharSequence contains a search character
-				 */
-				contains : function(needle, haystack) {
-					return haystack && (haystack.indexOf(needle) != -1);
-				},
-				/**
-				 * check if a String ends with a suffix
-				 */
-				endsWith : function(str, postfix) {
-					if (this.isEmpty(str) || this.isEmpty(postfix)) {
+				contains : function(context, str) {
+					if (this.isEmpty(context) || this.isEmpty(str)) {
 						return false;
 					}
-					return str.lastIndexOf(postfix) === str.length - postfix.length;
+					return context && (context.indexOf(str) != -1);
 				},
-				/**
-				 * Check if a String starts with a prefix
-				 */
-				startsWith : function(str, prefix) {
-					if (this.isEmpty(str)) {
+				endsWith : function(context, str) {
+					if (this.isEmpty(context) || this.isEmpty(str)) {
 						return false;
 					}
-					return str.indexOf(prefix) === 0;
+					return context.lastIndexOf(str) === context.length - str.length;
 				},
-				/**
-				 * Insert a character at the specified index in the string
-				 */
-				insertAt : function(str, strToInsert, index) {
-					return str.substring(0, index) + strToInsert + str.substring(index);
+				startsWith : function(context, str) {
+					if (this.isEmpty(context)) {
+						return false;
+					}
+					return context.indexOf(str) === 0;
 				},
-				/**
-				 * Check if a String matches a prefix
-				 */
-				matches : function(str, matchExp, ignoreCase) {
-					var ignoreCase_ = arguments.length >= 3 ? ignoreCase : false;
-					matchExp = this.trim(matchExp);
-					matchExp = matchExp.replace(/\s+/, "*");
-					matchExp = matchExp.replace(/\*/, ".*?");
-					matchExp = matchExp.replace(/\?/, ".{0,1}");
-					var regExp = new RegExp("^" + matchExp, (ignoreCase_ ? "i" : ""));
-					return regExp.test(str);
+				insertAt : function(context, idx, str) {
+					return context.substring(0, idx) + str + context.substring(idx);
 				},
-				/**
-				 * Remove whitespace in string
-				 */
 				removeWhitespace : function(str) {
 					if (this.isEmpty(str)) {
 						return str;
 					}
 					return str.replace(/\s/g, "");
 				},
-				/**
-				 * Left pad a String with a specified character
-				 */
-				lpad : function(originalstr, length, strToPad) {
-					while (originalstr.length < length) {
-						originalstr = strToPad + originalstr;
+				lpad : function(str, length, padStr) {
+					while (str.length < length) {
+						str = padStr + str;
 					}
-					return originalstr;
+					return str;
 				},
-				/**
-				 * Right pad a String with a specified character
-				 */
-				rpad : function(originalstr, length, strToPad) {
-					while (originalstr.length < length) {
-						originalstr = originalstr + strToPad;
+				rpad : function(str, length, padStr) {
+					while (str.length < length) {
+						str = str + padStr;
 					}
-					return originalstr;
+					return str;
 				},
-				/**
-				 * Return byte length of string
-				 *  - Hangul(UTF-8) is 3 bytes
-				 */
+				trim : $.trim,
+				isEmpty : function(str) {
+					return $.trim(str).length === 0 ? true : false;
+				},
 				byteLength : function(str) {
 					return (function(s,b,i,c){
 			        	for(b=i=0;c=s.charCodeAt(i++);b+=c>>11?3:c>>7?2:1){};
 			        	return b;
 			        })(str);
 				},
-				/**
-				 * Removes leading and trailing whitespace
-				 *  - the String to be trimmed, may be null or undefined
-				 */
-				trim : function(str) {
-					return $.trim(str);
-				},
-				/**
-				 * Checks if a String contains text
-				 */
-				isEmpty : function(str) {
-					return $.trim(str).length === 0 ? true : false;
-				},
-				/**
-				 * Removes leading and trailing whitespace
-				 *  - the String to be trimmed, may be null or undefined
-				 */
-				trimToEmpty : function(str) {
-					return $.trim(str);
-				},
-				/**
-				 * Change null or undefined to empty string
-				 */
+				trimToEmpty : $.trim,
 				nullToEmpty : function(str) {
 					return str === null || str === undefined ? "" : str;
 				},
-				/**
-				 * If trimmed string value is empty, return null
-				 */
 				trimToNull : function(str) {
 					return $.trim(str).length === 0 ? null : $.trim(str);
 				},
-				/**
-				 * If trimmed string value is empty, return undefined
-				 */
 				trimToUndefined : function(str) {
 					return $.trim(str).length === 0 ? undefined : $.trim(str);
 				},
-				/**
-				 * If trimmed string value is empty, return 0
-				 */
 				trimToZero : function(str) {
 					return $.trim(str).length === 0 ? "0" : $.trim(str);
 				},
-				/**
-				 * If trimmed string value is empty, return a specified value
-				 */
-				trimToVal : function(str, valStr) {
-					return $.trim(str).length === 0 ? valStr : $.trim(str);
+				trimToVal : function(str, val) {
+					return $.trim(str).length === 0 ? val : $.trim(str);
 				}
 			},
 			/**
@@ -586,16 +526,16 @@
 			 */
 			"date" : {
 				/**
-				 * Calculate the date counts of difference between the two dates,
+				 * Calculate the difference between two dates
 				 */
-				diff : function(str1, str2) {
-					if (N.type(str1) == "string") {
-						str1 = this.stringToDateObj(str1).obj;
+				diff : function(refDateStr, targetDateStr) {
+					if (N.type(refDateStr) == "string") {
+						refDateStr = this.strToDate(refDateStr).obj;
 					}
-					if (N.type(str2) == "string") {
-						str2 = this.stringToDateObj(str2).obj;
+					if (N.type(targetDateStr) == "string") {
+						targetDateStr = this.strToDate(targetDateStr).obj;
 					}
-					return Math.ceil((str2 - str1) / 1000 / 24 / 60 / 60);
+					return Math.ceil((targetDateStr - refDateStr) / 1000 / 24 / 60 / 60);
 				},
 				/**
 				 * Return to re-place the date string for a given format.
@@ -635,7 +575,7 @@
 					return dateStrArr;
 				},
 				/**
-				 * Returns object of date information that contained the date object with a default date format
+				 * Convert a date string to a date object
 				 */
 				strToDate : function(str, format) {
 					str = N.string.trimToEmpty(str).replace(/[^0-9]/g, "");
@@ -697,28 +637,31 @@
 					return dateInfo;
 				},
 				/**
-				 * Formatting the date string to specified date format
+				 * Format the date string
 				 */
 				format : function(str, format) {
 					var dateInfo = this.strToDate(str);
 					return dateInfo !== null ? dateInfo.obj.formatDate(format !== undefined ? format : dateInfo.format) : str;
 				},
 				/**
-				 * Convert the timestamp from date object
+				 * Convert date object to timestamp number
 				 */
 				dateToTs : function(dateObj) {
-					var d = null;
-					if (dateObj === undefined) {
-						d = new Date(obj.time);
+					var d = dateObj;
+					if (d === undefined) {
+						d = new Date();
 					}
 					return Math.round(d.getTime() / 1000);
 				},
 				/**
-				 * Convert the date object from timestamp
+				 * Convert timestamp number to date object
 				 */
-				tsToDate : function(timestamp) {
-					var d = new Date(timestamp);
-					return d;
+				tsToDate : function(tsNum) {
+					if (tsNum === undefined) {
+						return new Date();
+					} else {
+						return new Date(tsNum);
+					}
 				}
 			},
 			/**
@@ -804,22 +747,6 @@
 					return retData;
 				},
 				/**
-				 * Get max z-index of all elements in web page
-				 */
-				maxZindex : function(nContext) {
-					if (nContext === undefined) {
-						nContext = $("div, span");
-					}
-					return Math.max.apply(null, $.map(nContext, function(e, n) {
-						var zIndex = parseInt($(e).css("z-index"));
-						if (zIndex >= 2147483647) {
-							$(e).css("z-index", String(2147483647 - 999));
-							$(e).attr("fixed", "[Natural-JS]limited_z-index_value(-999)");
-						}
-						return zIndex || 0;
-					}));
-				},
-				/**
 				 * Prevent all events
 				 */
 				disable : function(e) {
@@ -835,6 +762,22 @@
 			    	ele.addClass("data_changed__");
 			    	ele.fadeOut(150).fadeIn(300);
 			    },
+			    /**
+				 * Get the maximum z-index of all elements
+				 */
+				maxZindex : function(nContext) {
+					if (nContext === undefined) {
+						nContext = $("div, span");
+					}
+					return Math.max.apply(null, $.map(nContext, function(e, n) {
+						var zIndex = parseInt($(e).css("z-index"));
+						if (zIndex >= 2147483647) {
+							$(e).css("z-index", String(2147483647 - 999));
+							$(e).attr("fixed", "[Natural-JS]limited_z-index_value(-999)");
+						}
+						return zIndex || 0;
+					}));
+				},
 			    /**
 			     * This method is locked window scroll when scrolling in the ele(arg1)
 			     */
@@ -1015,28 +958,11 @@
 					return false;
 				},
 				/**
-				 * Get max document height
+				 * Get context path from current window url
 				 */
-				documentHeight : function() {
-					return Math.max(Math.max(document.body.scrollHeight, document.documentElement.scrollHeight), Math.max(document.body.offsetHeight,
-							document.documentElement.offsetHeight), Math.max(document.body.clientHeight, document.documentElement.clientHeight));
-				},
-				/**
-				 * Get height for each browsers
-				 */
-				browserHeight : function() {
-					var totalHeight = 0;
-					if ($.browser.msie) {
-						var scrollHeight = document.documentElement.scrollHeight;
-						var browserHeight = document.documentElement.clientHeight;
-						totalHeight = scrollHeight < browserHeight ? browserHeight : scrollHeight;
-					} else if ($.browser.mozilla) {
-						var bodyHeight = document.body.clientHeight;
-						totalHeight = window.innerHeight < bodyHeight ? bodyHeight : window.innerHeight;
-					} else if ($.browser.webkit) {
-						totalHeight = document.body.scrollHeight;
-					}
-					return totalHeight;
+				contextPath : function(){
+				    var offset = location.href.indexOf(location.host) + location.host.length;
+				    return location.href.substring(offset, location.href.indexOf('/', offset + 1));
 				},
 				/**
 				 * Get scrollbars width for connected browser
@@ -1052,13 +978,6 @@
 					$(div).remove();
 
 					return w1 - w2;
-				},
-				/**
-				 * Get context path from current window url
-				 */
-				contextPath : function(){
-				    var offset = location.href.indexOf(location.host) + location.host.length;
-				    return location.href.substring(offset, location.href.indexOf('/', offset + 1));
 				}
 			},
 			/**
