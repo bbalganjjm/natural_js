@@ -589,7 +589,6 @@
 
 						if (opts.isElement) {
 							ele = opts.targetEle.filter("#" + k);
-							N.log(k, obj[k], ele.data("format"), opts.rules[k]);
 
 							if(ele.length > 0) {
 								if(ele.data("format") !== undefined) {
