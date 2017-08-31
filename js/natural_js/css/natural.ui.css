@@ -698,8 +698,9 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .tbody_wrap__ {
-	background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAIklEQVQIW2NkQAIf7n/4zwjjgzgCigKMYAEYB8RmROaABAAQCg/DqNBm8AAAAABJRU5ErkJggg==") repeat;
 	position: relative;
+	display: inline-block;
+	background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAIklEQVQIW2NkQAIf7n/4zwjjgzgCigKMYAEYB8RmROaABAAQCg/DqNBm8AAAAABJRU5ErkJggg==") repeat;
 	-webkit-overflow-scrolling: touch;
 }
 
