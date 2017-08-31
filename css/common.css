@@ -498,6 +498,7 @@ article ul.contents {
 	border-top: 1px solid #55d555;
 	border-left: 1px solid #55d555;
 	border-bottom: 1px solid #55d555;
+    list-style: none;
 	width: 159px;
 }
 
