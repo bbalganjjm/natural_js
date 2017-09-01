@@ -24,26 +24,24 @@
 		<table id="grid" class="grid" style="width: 100%;">
 			<thead>
 				<tr>
-					<th width="9%">Index</th>
+					<th width="7%" data-rowspan="true">Age</th>
+					<th width="11%" data-rowspan="true">Gender</th>
+					<th width="13%" data-rowspan="true">Eye Color</th>
+					<th width="12%" data-rowspan="true">Active</th>
+					<th width="13%">Company</th>
 					<th width="17%">Name</th>
 					<th width="*">Email</th>
-					<th width="11%">Gender</th>
-					<th width="13%">Eye Color</th>
-					<th width="7%">Age</th>
-					<th width="13%">Company</th>
-					<th width="12%">Active</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
-					<td id="index" align="center"></td>
-					<td id="name"></td>
-					<td id="email"></td>
+					<td id="age"></td>
 					<td id="gender" align="center"></td>
 					<td id="eyeColor" align="center"></td>
-					<td id="age"></td>
-					<td id="company"></td>
 					<td id="isActive" align="center"></td>
+					<td id="company"></td>
+					<td id="name"></td>
+					<td id="email"></td>
 				</tr>
 			</tbody>
 		</table>
@@ -146,7 +144,7 @@ N(".exap0700").cont({
     	N("#btnSearch", view).click(function(e) {
             e.preventDefault();
             if(form.validate()) {
-    			N(form.data()).comm("html/apid/data/grid.json").submit(function(data) {
+    			N(form.data()).comm("html/apid/data/grid_age_sorted.json").submit(function(data) {
              		// Data bind to N.grid
              		grid.bind(data);
              	});
