@@ -104,7 +104,7 @@
 			<td></td>
 			<td>
 				<p>그리드 바디(body)의 높이를 지정 합니다.</p>
-				<p>입력한 값이 0보다 크면 헤더고정형의 일반적인 그리드타입으로 초기화 되고 0을 입력하면 전체데이터 한번에 표현하는 리스트형의 그리드로 초기화 됩니다.</p>
+				<p>입력한 값이 0보다 크면 헤더고정형의 일반적인 그리드타입으로 초기화 되고 0을 입력하면 전체데이터를 한번에 표현하는 리스트형의 그리드로 초기화 됩니다.</p>
 			</td>
 		</tr>
 		<tr>
@@ -458,14 +458,26 @@
 			<th style="width: auto;">Description</th>
 		</tr>
 		<tr>
+			<td>data-rowspan</td>
+			<td>string</td>
+			<td>undefined</td>
+			<td>
+				<p>열(컬럼)을 기준으로 같은 값이 들어 있는 셀 들을 병합 합니다.</p>
+				<p>thead 의 열을 병합 할 열(th 태그)들에 data-rowspan="true" 속성을 추가 하면 됩니다.</p>
+				<p class="alert">물리적으로 요소들이 병합되지 않고 보이는 부분만 병합 된 것처럼 보입니다.</p>
+				<p class="alert">병합할 열의 바로 앞 열도 병합 되어 있다면 바로 앞 열의 병합이 풀리는 기준에 따라 해당 열도 병합이 풀려 자연 스러운 열이 병합 된 테이블을 만들어 줍니다.</p>
+				<p class="alert">해당 셀에 입력 요소가 있으면 병합은 되나 입력요소의 값이 병합 된 행의 첫번째 행의 입력요소만 메모리의 데이터 세트와 동기화 됩니다(병합 된 나머지 셀의 입력요소는 제거 됨)</p>
+			</td>
+		</tr>
+		<tr>
 			<td>data-format</td>
-			<td>array[array]</td>
+			<td>array[array[string|number]] 타입의 문자열</td>
 			<td>undefined</td>
 			<td>포맷룰을 지정 합니다. API/DEMO > Natural-DATA 메뉴의 Formatter 와 Format Rules 참고</td>
 		</tr>
 		<tr>
 			<td>data-validate</td>
-			<td>array[array]</td>
+			<td>array[array[string|number]] 타입의 문자열</td>
 			<td>undefined</td>
 			<td>검증룰을 지정 합니다. API/DEMO > Natural-DATA 메뉴의 Validator 와 Validation Rules 참고</td>
 		</tr>
@@ -782,7 +794,7 @@ var data = [{
 	N(data).grid("#gridExample10").bind();
 </script></xmp></code></pre>
 
-	<p>1.1. 헤더고정형 그리드 생성 후 데이터 바인드</p>
+	<h4 class="notIndex">1.1. 헤더고정형 그리드 생성 후 데이터 바인드</h4>
 	<pre class="line-numbers"><code class="language-markup"><xmp>
 <table id="gridExample11">
 	<thead><!-- 컬럼 타이틀 영역 -->
@@ -810,7 +822,7 @@ var data = [{
 	}).bind();
 </script></xmp></code></pre>
 
-	<p>1.2. 헤더고정형 그리드에 데이터 바인드(Row Handler 적용)</p>
+	<h4 class="notIndex">1.2. 헤더고정형 그리드에 데이터 바인드(Row Handler 적용)</h4>
 	<p class="alert">rowHandler 이벤트는 그리드 렌더링 시 행이 만들어질때마다 발생하는 이벤트 입니다. 기본 제공하는 그리드의 기능을 확장하기 위해 사용됩니다.</p>
 	<pre class="line-numbers"><code class="language-markup"><xmp>
 <table id="gridExample12">
@@ -977,6 +989,31 @@ N("selector").cont(function() {
 	});
 });
 </code></pre>
+
+	<h4 class="notIndex">6. 열(컬럼) 자동 병합</h4>
+	<pre class="line-numbers"><code class="language-markup"><xmp>
+<table id="gridExample11">
+	<thead><!-- 컬럼 타이틀 영역 -->
+		<tr>
+			<th data-rowspan="true">age</th>
+			<th data-rowspan="true">registered</th>
+			<th>name</th>
+			<th>email</th>
+		</tr>
+	</thead>
+	<tbody><!-- 데이터가 반복되면서 바인드 되는 부분 -->
+		<tr>
+			<td id="age"></td>
+			<td id="registered"></td>
+			<td><span id="name"></span></td>
+			<td><input id="email" type="text" /></td>
+		</tr>
+	</tbody>
+</table>
+
+<script type="text/javascript">
+	N(data).grid("#gridExample11").bind();
+</script></xmp></code></pre>
 
 </article>
 
