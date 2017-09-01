@@ -803,7 +803,7 @@ N("selector").cont(function() {
 
 		// 3. 행 인덱스 얻어오기
 		var rowEle = $(this).closest("li");
-		var idx = rowEle.index("li.form__");
+		var idx = list.context("li").index(rowEle);
 		var rowData = list.data()[idx];
 
 		// 4. 가져 온 행 인덱스와 행 요소, 행 데이터를 이용하여 로직을 처리
