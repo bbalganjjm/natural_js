@@ -290,7 +290,7 @@
 	        	if(value !== null) {
 	        		cont.select.val(value);
 	        	} else {
-	        		N("div.result", view).alert(N.type(cont.select.val()) === "array" ? cont.select.val().join(", ") : cont.select.val()).show();
+	        		N("div.result", view).alert(JSON.stringify(cont.select.val())).show();
 	        	}
 	        });
 
@@ -300,8 +300,7 @@
 	        	if(value !== null) {
 	        		cont.select.index(Number(value));
 	        	} else {
-	        		var idxs = cont.select.index();
-	        		N("div.result", view).alert(N.type(idxs) === "array" ? idxs.join(", ") : idxs).show();
+	        		N("div.result", view).alert(JSON.stringify(cont.select.index())).show();
 	        	}
 	        });
 
