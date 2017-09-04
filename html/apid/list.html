@@ -248,16 +248,16 @@
 			</td>
 		</tr>
 		<tr>
-			<th width="10%"><label for="key">arguments[1]</label></th>
-			<td width="80%">
+			<th><label for="key">arguments[1]</label></th>
+			<td>
 				<input id="key" type="text" value="company" />
 				<label for="key" lang="ko_KR">대상 키(컬럼) 명</label>
 				<label for="key" lang="en_US">Target key(column) name</label>
 			</td>
 		</tr>
 		<tr>
-			<th width="10%"><label for="val">arguments[2]</label></th>
-			<td width="80%">
+			<th><label for="val">arguments[2]</label></th>
+			<td>
 				<input id="val" type="text" value="NATURAL COMPANY" />
 				<label for="val" lang="ko_KR">대상 키에 해당하는 값</label>
 				<label for="val" lang="en_US">The value of target key</label>
@@ -272,6 +272,7 @@
 					<option value="insert">insert</option>
 					<option value="update">update</option>
 					<option value="delete">delete</option>
+					<option value="selected">selected</option>
 					<option value="checked">checked</option>
 					<option value="">undefined(pure object array)</option>
 					<option value="false">false(jquery object)</option>
@@ -281,6 +282,7 @@
 					insert : 입력된 데이터를 반환 합니다.<br>
 					update : 수정된 데이터를 반환 합니다.<br>
 					delete : 삭제된 데이터를 반환 합니다.<br>
+					selected : 선택된 데이터를 반환 합니다.<br>
 					checked : 체크된 데이터를 반환 합니다.<br>
 					false : jquery object 타입의 모든 데이터를 반환합니다.<br>
 					undefined : array[json object] 타입의 모든 데이터를 반환합니다.<br>
@@ -290,11 +292,46 @@
 					insert : Return the inserted row datas.<br>
 					update : Return the updated row datas.<br>
 					delete : Return the deleted row datas.<br>
+					selected : Return the selected row datas.<br>
 					checked : Return the checked row datas.<br>
 					true : Return selected row data.<br>
 					false : Return all data of jquery object type.<br>
 					undefined : Return all data of pure array[json object] type.
 				</label>
+			</td>
+		</tr>
+		<tr>
+			<th width="10%" rowspan="2">select</th>
+			<th width="10%"><label for="selectIndex">arguments[0]</label></th>
+			<td width="80%">
+				<input id="selectIndex" type="text" value="[0, 2]" />
+				<label for="selectIndex" lang="ko_KR">선택 할 행 인덱스</label>
+				<label for="selectIndex" lang="en_US">The row index to select</label>
+			</td>
+		</tr>
+		<tr>
+			<th><label for="selectIsAppend">arguments[1]</label></th>
+			<td>
+				<input id="selectIsAppend" type="checkbox" />
+				<label for="selectIsAppend" lang="ko_KR">추가 선택 할 지 다시 선택 할 지 여부</label>
+				<label for="selectIsAppend" lang="en_US">Whether to append or choose again</label>
+			</td>
+		</tr>
+		<tr>
+			<th width="10%" rowspan="2">check</th>
+			<th width="10%"><label for="checkIndex">arguments[0]</label></th>
+			<td width="80%">
+				<input id="checkIndex" type="text" value="[1, 3]" />
+				<label for="checkIndex" lang="ko_KR">체크 할 행 인덱스</label>
+				<label for="checkIndex" lang="en_US">The row index to check</label>
+			</td>
+		</tr>
+		<tr>
+			<th><label for="checkIsAppend">arguments[1]</label></th>
+			<td>
+				<input id="checkIsAppend" type="checkbox" />
+				<label for="checkIsAppend" lang="ko_KR">추가 선택 할 지 다시 선택 할 지 여부</label>
+				<label for="checkIsAppend" lang="en_US">Whether to append or choose again</label>
 			</td>
 		</tr>
 		<tr>
@@ -319,6 +356,7 @@
 		<a id="btnRemove" href="#" data-opts='{ "color": "yellowgreen", "size": "large", "disable": true }'>remove</a>
 		<a id="btnVal" href="#" data-opts='{ "color": "yellowgreen", "size": "large", "disable": true }'>val</a>
 		<a id="btnData" href="#" data-opts='{ "color": "yellowgreen", "size": "large", "disable": true }'>data</a>
+		<a id="btnSelect" href="#" data-opts='{ "color": "yellowgreen", "size": "large", "disable": true }'>select</a>
 		<a id="btnCheck" href="#" data-opts='{ "color": "yellowgreen", "size": "large", "disable": true }'>check</a>
 		<a id="btnValidate" href="#" data-opts='{ "color": "yellowgreen", "size": "large", "disable": true }'>validate</a>
 		<a id="btnReload" href="#" data-opts='{ "color": "white", "size": "large" }'>
@@ -476,9 +514,24 @@
 	        	}).show();
 	        });
 
+	    	N("#btnSelect", view).click(function(e) {
+	    		e.preventDefault();
+	        	var value = N.string.trimToNull(N("#selectIndex", view).val());
+	        	if(value !== null) {
+	        		list.select(eval(value), N("#selectIsAppend", view).is(":checked"));
+	        	} else {
+	        		list.context().parent().alert(JSON.stringify(list.select())).show();
+	        	}
+	        })
+
 	    	N("#btnCheck", view).click(function(e) {
 	    		e.preventDefault();
-	    		list.context().parent().alert(JSON.stringify(list.check())).show();
+	        	var value = N.string.trimToNull(N("#checkIndex", view).val());
+	        	if(value !== null) {
+	        		list.check(eval(value), N("#checkIsAppend", view).is(":checked"));
+	        	} else {
+	        		list.context().parent().alert(JSON.stringify(list.check())).show();
+	        	}
 	        })
 
 	    	N("#btnValidate", view).click(function(e) {

@@ -295,7 +295,7 @@
 			<td>null</td>
 			<td></td>
 			<td style="max-width: 299px;">
-				<p>그리드에서 data를 bind 하거나 add 할때 행이 렌더링 될 때 마다 발생 하는 이벤트 입니다. 이벤트 콜백 메서드의 인자로 생성될 당시의 row index, 행 요소, 로우 데이터를 넣어줍니다.</p>
+				<p>리스트에서 data를 bind 하거나 add 할때 행이 렌더링 될 때 마다 발생 하는 이벤트 입니다. 이벤트 콜백 메서드의 인자로 생성될 당시의 row index, 행 요소, 로우 데이터를 넣어줍니다.</p>
 				<pre><code class="language-javascript">rowHandlerBeforeBind : function(rowIdx, rowEle, rowData) {
 	// this : N.grid 인스턴스
 	// rowIdx : 생성되는 행의 index
@@ -416,9 +416,7 @@
 						<li>입력하지 않았거나 undefined : array[json object] 타입의 데이터를 반환 합니다.</li>
 						<li>false : jquery object 타입의 데이터를 반환 합니다.</li>
 						<li>"modified" : array[json object] 타입의 추가, 수정, 삭제된 데이터를 반환 합니다.</li>
-						<li>
-							"selected" : <strong style="color: red; font-size: 15px;">기능 구현 예정...</strong>select 옵션이나 multiselect 옵션 지정 시 array[json object] 타입의 체크된 데이터를 반환 합니다.
-						</li>
+						<li>"selected" : select 옵션이나 multiselect 옵션 지정 시 array[json object] 타입의 체크된 데이터를 반환 합니다.</li>
 						<li>"checked" : checkAll 옵션과 checkAllTarget 옵션을 지정 했거나  checkOnlyTarget 옵션 지정 시 array[json object] 타입의 체크된 데이터를 반환 합니다.</li>
 						<li>"insert" : array[json object] 타입의 추가된 데이터를 반환 합니다.</li>
 						<li>"update" : array[json object] 타입의 수정된 데이터를 반환 합니다.</li>
@@ -439,6 +437,36 @@
 			<td align="center">-</td>
 			<td>
 				data 메서드의 두번째 인자부터 N번째 인자까지 데이터의 컬럼명을 지정하면 해당 컬럼에 해당하는 데이터만 추출하여 반환 합니다.
+				<pre><code class="language-javascript">
+/** bind 되어 있는 데이터
+[{
+	col01 : "",
+ 	col02 : "",
+ 	col03 : "",
+ 	col04 : "",
+ 	col05 : "",
+ 	col06 : "",
+}, {
+ 	col01 : "",
+ 	col02 : "",
+ 	col03 : "",
+ 	col04 : "",
+ 	col05 : "",
+ 	col06 : "",
+}]
+*/
+listInstance.data("modified", "col01", "col02", "col03");
+/** 결과 데이터
+[{
+	col01 : "",
+ 	col02 : "",
+ 	col03 : ""
+}, {
+ 	col01 : "",
+ 	col02 : "",
+ 	col03 : ""
+}]
+*/</code></pre>
 			</td>
 		</tr>
 		<tr>
@@ -592,21 +620,18 @@
 			<td align="center">-</td>
 			<td>array</td>
 			<td>
-				<p><strong style="color: red; font-size: 15px;">기능 구현 예정...</strong></p>
-				<p>select 나 multiselect 옵션 지정 시 리스트안의 행 선택을 컨트롤 할 수 있습니다.</p>
+				<p>select 나 multiselect 옵션 지정 시 리스트 안의 행을 명령으로 선택 할 수 있습니다.</p>
 				<ul>
-					<li>첫번째 인자(indexArr)를 지정하지 않으면 선택된 행 들의 row index들을 반환 합니다.</li>
-					<li>첫번째 인자(indexArr)를 지정하면 지정된 인덱스에 해당하는 행을 선택 합니다.</li>
+					<li>첫번째 인자(indexes)를 입력하지 않으면 선택 된 행 들의 행 index 들을 반환 하고 입력하면 입력 된 인덱스에 해당하는 행을 선택 합니다.</li>
 				</ul>
 			</td>
 		</tr>
 		<tr>
 			<td></td>
-			<td>indexArr</td>
+			<td>indexes</td>
 			<td>array|number</td>
 			<td align="center">-</td>
 			<td>
-				<p><strong style="color: red; font-size: 15px;">기능 구현 예정...</strong></p>
 				<p>선택할 row index</p>
 				<ul>
 					<li>행 1개를 선택 하려면 인자를 number 타입 으로 지정해도 되고 array 타입 으로 지정해도 됩니다.</li>
@@ -615,30 +640,46 @@
 			</td>
 		</tr>
 		<tr>
+			<td></td>
+			<td>isAppend</td>
+			<td>boolean</td>
+			<td align="center">-</td>
+			<td>
+				<p>true 를 입력 하면 이전에 선택 된 행들을 선택 취소 하지 않고 추가로 선택 합니다. false 를 입력 하면 이전에 선택 된 행들을 모두 선택 취소 후 선택 합니다.</p>
+			</td>
+		</tr>
+		<tr>
 			<td>check</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
 			<td>string</td>
 			<td>
-				<p>checkAll 과 checkAllTarget 옵션 지정 시 리스트안의 체크박스를 컨트롤 할 수 있습니다.</p>
+				<p>checkAllTarget 과 checkSingleTarget 옵션으로 지정 한 체크박스 들을 명령으로 선택 할 수 있습니다.</p>
 				<ul>
-					<li>첫번째 인자(indexArr)를 지정하지 않으면 체크된 체크박스들의 row index들을 반환 합니다.</li>
-					<li>첫번째 인자(indexArr)를 지정하면 지정된 인덱스에 해당하는 체크박스를 선택 합니다.</li>
+					<li>첫번째 인자(indexes)를 입력하지 않으면 선택 된 체크박스 가 속해 있는 행 index 들을 반환 하고 입력하면 입력 된 인덱스에 속해 있는 체크박스들을 선택 합니다.</li>
 				</ul>
 			</td>
 		</tr>
 		<tr>
 			<td></td>
-			<td>indexArr</td>
+			<td>indexes</td>
 			<td>array|number</td>
 			<td align="center">-</td>
 			<td>
-				<p><strong style="color: red; font-size: 15px;">기능 구현 예정...</strong></p>
 				<p>체크할 체크박스들의 row index</p>
 				<ul>
 					<li>체크박스 1개를 선택 하려면 인자를 number 타입 으로 지정해도 되고 array 타입 으로 지정해도 됩니다.</li>
 					<li>체크박스를 2개 이상 선택 하려면 인자를 array 타입 으로 지정해야 합니다.</li>
 				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>isAppend</td>
+			<td>boolean</td>
+			<td align="center">-</td>
+			<td>
+				<p>true 를 입력 하면 이전에 선택 된 체크박스 들을 선택 취소 하지 않고 추가로 선택 합니다. false 를 입력 하면 이전에 선택 된 체크박스 들을 모두 선택 취소 후 선택 합니다.</p>
 			</td>
 		</tr>
 	</table>
@@ -795,7 +836,7 @@ var data = [{
 <pre class="line-numbers"><code class="language-javascript">
 // Controller
 N("selector").cont(function() {
-    // 1. 그리드 바인드
+    // 1. 리스트 바인드
 	var list = N(data).list(N("selector"), view).bind();
 
     // 2. 행의 특정 요소(#col01) 클릭 시 동작하는 이벤트 핸들러 정의
