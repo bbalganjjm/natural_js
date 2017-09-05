@@ -1,5 +1,5 @@
 /*!
- * Natural-CORE v0.8.6.10
+ * Natural-CORE v0.8.6.11
  * bbalganjjm@gmail.com
  *
  * Includes formatdate.js & Mask JavaScript API
@@ -276,7 +276,7 @@
 		// N local variables
 		$.extend(N, {
 			version : {
-				"Natural-CORE" : "0.8.6.10"
+				"Natural-CORE" : "0.8.6.11"
 			},
 			/**
 			 * Set and get locale value
@@ -736,7 +736,11 @@
 									if(ele.is("img")) {
 										retData[key] = ele.attr("src");
 									} else {
-										retData[key] = ele.val();
+										if(!ele.is(":input")) {
+											retData[key] = ele.text();
+										} else {
+											retData[key] = ele.val();
+										}
 									}
 								} else {
 									retData[key] = ele.vals();
