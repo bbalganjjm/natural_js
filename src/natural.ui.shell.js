@@ -1,5 +1,5 @@
 /*!
- * Natural-UI.Shell v0.8.1.6, Works fine in IE9 and above
+ * Natural-UI.Shell v0.8.1.7, Works fine in IE9 and above
  * bbalganjjm@gmail.com
  *
  * Copyright 2017 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2017-05-11T20:00Z
  */
 (function(window, $) {
-	N.version["Natural-UI.Shell"] = "v0.8.1.6";
+	N.version["Natural-UI.Shell"] = "v0.8.1.7";
 
 	$.fn.extend($.extend(N.prototype, {
 		notify : function(opts) {
@@ -322,7 +322,7 @@
 									var docId = activeTab.data("docOpts").docId;
 									activeSiblingTabs.remove();
 									opts.context.find("> .docs_contents__." + docId + "__").siblings(".docs_contents__").remove();
-									Documents.closeBtnControll.call(self);
+									Documents.closeBtnControl.call(self);
 								}
 							}).show();
 						}
@@ -442,7 +442,7 @@
 					}
 	        	});
 			},
-			closeBtnControll : function() {
+			closeBtnControl : function() {
 				var opts = this.options;
 				var tabs = opts.context.find("> .docs_tab_context__ > .docs_tabs__ > .docs_tab__:not('.remove__')");
 				if(tabs.length === 1) {
@@ -542,7 +542,7 @@
 					targetTabContents.remove();
 				}
 
-				Documents.closeBtnControll.call(this);
+				Documents.closeBtnControl.call(this);
 
 				delete opts.docs[targetTabDocOpts.docId];
 
@@ -643,7 +643,7 @@
 
 							Documents.inactivateTab.call(self);
 
-							Documents.closeBtnControll.call(self);
+							Documents.closeBtnControl.call(self);
 						}
 
 						Documents.loadContent.call(self, opts.docs[docId], function() {
@@ -801,6 +801,17 @@
 			},
 			"cont" : function(docId) {
 				return this.context(".docs_contents__." + docId + "__ > .view_context__").instance("cont");
+			},
+			"reload" : function(docId, callback) {
+				var cont = this.cont(docId);
+				var comm = cont.request.options.target.comm(cont.request.options.url);
+				comm.request = cont.request;
+
+				// set current N.comm's request from N.docs's request;
+				$.extend(comm.request.attrObj, this.request.attrObj);
+				this.request.attrObj = {};
+
+				comm.submit(callback);
 			}
 		});
 
