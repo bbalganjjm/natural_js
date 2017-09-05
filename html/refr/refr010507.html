@@ -266,8 +266,27 @@
 			<td>string</td>
 			<td align="center">-</td>
 			<td>
-				<p><strong style="color: red; font-size: 15px;">기능 구현 예정...</strong></p>
-				data 메서드의 두번째 인자부터 N번째 인자까지 데이터의 컬럼명을 지정하면 해당 컬럼에 해당하는 데이터만 추출하여 반환 합니다.
+				<p>data 메서드의 두번째 인자부터 N번째 인자까지 데이터의 컬럼명을 지정하면 해당 컬럼에 해당하는 데이터만 추출하여 반환 합니다.</p>
+				<pre><code class="language-javascript">
+/** bind 되어 있는 데이터
+[{
+	col01 : "",
+ 	col02 : "",
+ 	col03 : "",
+ 	col04 : "",
+ 	col05 : "",
+ 	col06 : "",
+}]
+*/
+formInstance.data(true, "col01", "col02", "col03");
+/** 결과 데이터
+[{
+ 	col01 : "",
+ 	col02 : "",
+ 	col03 : ""
+}]
+*/</code></pre>
+				<p class="alert">첫번째 인자로 true 를 지정 했을 때만 작동 됩니다.</p>
 			</td>
 		</tr>
 		<tr>
