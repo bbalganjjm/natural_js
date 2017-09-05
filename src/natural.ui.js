@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.15.14
+ * Natural-UI v0.8.15.31
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "v0.8.15.14";
+	N.version["Natural-UI"] = "v0.8.15.31";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -83,6 +83,12 @@
 						opts.rowHandler.call(self, i, tempRowEleClone, opts.data[i]);
 					}
 
+					if(self.rowSpanIds !== undefined) {
+						self.rowSpanIds.each(function() {
+							Grid.rowSpan.call(self, i, tempRowEleClone, opts.context.find("tbody:eq(" + (i-1) + ")"), opts.data[i], opts.data[i-1], String(this));
+						});
+					}
+
 					tempRowEleClone.show(delay, function() {
 						i++;
 						if(opts.height === 0 || opts.scrollPaging.size === 0 || (callType === "append" && data.length > 0 && data.length <= opts.scrollPaging.size)) {
@@ -114,12 +120,13 @@
 					});
 				},
 				select : function(compNm) {
+					var opts = this.options;
 					var self = this;
 
 					var lineTag = compNm === "grid" ? "tbody" : "li";
 
 					// set style class name to context element for select, multiselect options
-					this.options.context.addClass(compNm + "_select__");
+					opts.context.addClass(compNm + "_select__");
 
 					// bind tbody click event for select, multiselect options
 					this.tempRowEle.bind("click." + compNm, function(e) {
@@ -127,34 +134,36 @@
 						var retFlag;
 						var isSelected;
 
-						// save the selected row index
-						if(thisEle.hasClass(compNm + "_selected__")) {
-							self.options.row = -1;
-							isSelected = false;
-						} else {
-							self.options.row = thisEle.index() - (compNm === "grid" ? self.options.misc.withoutTbodyLength : 0);
-							isSelected = true;
-						}
-
-						// apply unselect option
-						if(!self.options.multiselect && !self.options.unselect) {
-							self.options.row = thisEle.index() - (compNm === "grid" ? self.options.misc.withoutTbodyLength : 0);
-							isSelected = true;
-						}
-
-						if(self.options.onSelect !== null) {
-							retFlag = self.options.onSelect.call(self, self.options.row, thisEle, self.options.data, self.options.beforeRow, e);
-						}
-
-						if(retFlag === undefined || retFlag === true) {
-							if(isSelected) {
-								if(!self.options.multiselect) {
-									self.options.context.find("> " + lineTag + ":eq(" + self.options.beforeRow + ")").removeClass(compNm + "_selected__");
-								}
-								thisEle.addClass(compNm + "_selected__");
-								self.options.beforeRow = self.options.row;
+						if(!$(e.target).is(opts.checkAllTarget) && !$(e.target).is(opts.checkSingleTarget)) {
+							// save the selected row index
+							if(thisEle.hasClass(compNm + "_selected__")) {
+								self.options.row = -1;
+								isSelected = false;
 							} else {
-								thisEle.removeClass(compNm + "_selected__");
+								self.options.row = compNm === "grid" ? thisEle.parent().find("tbody").index(thisEle) : thisEle.parent().find("li").index(thisEle);
+								isSelected = true;
+							}
+
+							// apply unselect option
+							if(!self.options.multiselect && !self.options.unselect) {
+								self.options.row = compNm === "grid" ? thisEle.parent().find("tbody").index(thisEle) : thisEle.parent().find("li").index(thisEle);
+								isSelected = true;
+							}
+
+							if(self.options.onSelect !== null) {
+								retFlag = self.options.onSelect.call(self, self.options.row, thisEle, self.options.data, self.options.beforeRow, e);
+							}
+
+							if(retFlag === undefined || retFlag === true) {
+								if(isSelected) {
+									if(!self.options.multiselect) {
+										self.options.context.find("> " + lineTag + ":eq(" + self.options.beforeRow + ")").removeClass(compNm + "_selected__");
+									}
+									thisEle.addClass(compNm + "_selected__");
+									self.options.beforeRow = self.options.row;
+								} else {
+									thisEle.removeClass(compNm + "_selected__");
+								}
 							}
 						}
 					});
@@ -163,7 +172,7 @@
 	        		var opts = this.options;
 	    	        var contextEle = this.contextEle;
 
-					var checkAll = compNm === "grid" ? this.thead.find(this.options.checkAll) : $(this.options.checkAll);
+					var checkAll = compNm === "grid" ? this.thead.find(opts.checkAll) : $(opts.checkAll);
 					var cellTag = compNm === "grid" ? "tbody > tr > td" : "li";
 					checkAll.bind("click." + compNm + ".checkAll", function() {
 						if(!$(this).prop("checked")) {
@@ -2268,7 +2277,7 @@
 		});
 
 		$.extend(Select.prototype, {
-			data : function(selFlag) { // TODO key name : argument2, argument3... argumentN
+			data : function(selFlag) {
 				var opts = this.options;
 				if(selFlag !== undefined && selFlag === true) {
 					var selectEles = opts.type === 1 || opts.type === 2 ? opts.context.find("option") : opts.context.closest(".select_input_container__").children("label");
@@ -2424,7 +2433,7 @@
 				unbind : true,
 				onBeforeBind : null,
 				onBind : null,
-				initialInputData : null // for unbind
+				InitialData : null // for unbind
 			};
 
 			try {
@@ -2452,7 +2461,7 @@
 			// for unbind
 			if(this.options.unbind) {
 				if(this.options.context !== null) {
-					this.options.initialInputData = N.element.toData(this.options.context.find(":input, img").not(":button"));
+					this.options.InitialData = N.element.toData(this.options.context.find("[id]").not(":button"));
 				}
 			}
 
@@ -2481,10 +2490,19 @@
 		});
 
 		$.extend(Form.prototype, {
-			data : function(selFlag) { // TODO key name : argument2, argument3... argumentN
+			data : function(selFlag) { // key name : argument1, argument2... argumentN
 				var opts = this.options;
 				if(selFlag !== undefined && selFlag === true) {
-					return [ opts.data[opts.row] ];
+					var retData = [];
+					// clone arguments
+					var args = Array.prototype.slice.call(arguments, 0);
+					if(arguments.length > 1) {
+						args[0] = opts.data[opts.row];
+						retData.push(N.json.mapFromKeys.apply(N.json, args));
+					} else {
+						retData.push(opts.data[opts.row]);
+					}
+					return retData;
 				} else if(selFlag !== undefined && selFlag === false) {
 						return opts.data;
 				} else {
@@ -2768,10 +2786,10 @@
 			},
 			unbind : function() {
 				var opts = this.options;
-				if(opts.unbind && opts.initialInputData !== null) {
+				if(opts.unbind && opts.InitialData !== null) {
 					opts.row = -1;
 					opts.context.removeClass("row_data_changed__");
-					var vals = opts.initialInputData;
+					var vals = opts.InitialData;
 					var eles, ele, val, tagName, type;
 					for ( var key in vals ) {
 						eles = $("#" + key, opts.context);
@@ -3322,34 +3340,47 @@
 		});
 
 		$.extend(List.prototype, {
-			data : function(rowStatus) { // key name : argument2, argument3... argumentN
+			data : function(rowStatus) { // key name : argument1, argument2... argumentN
+				var opts = this.options;
+
 				if(rowStatus === undefined) {
-					return this.options.data.get();
+					return opts.data.get();
 				} else if(rowStatus === false) {
-					return this.options.data;
+					return opts.data;
 				} else if(rowStatus === "modified") {
-					return this.options.data.datafilter(function(data) {
+					return opts.data.datafilter(function(data) {
 						return data.rowStatus !== undefined;
 					}).get();
 				} else if(rowStatus === "selected") {
-					if(this.options.select || this.options.multiselect) {
-						// TODO
-					} else {
-						N.error("[N.list.data]select or multiselect option is must be true(boolean)");
+					if(opts.select || opts.multiselect) {
+						var retData = [];
+
+						// clone arguments
+						var args = Array.prototype.slice.call(arguments, 0);
+
+						this.contextEle.find("li.list_selected__").each(function() {
+							if(arguments.length > 1) {
+								args[0] = opts.data[N(this).parent().find("li").index(this)];
+								retData.push(N.json.mapFromKeys.apply(N.json, args));
+							} else {
+								retData.push(opts.data[N(this).parent().find("li").index(this)]);
+							}
+						});
+						return retData;
 					}
 				} else if(rowStatus === "checked") {
-					var opts = this.options;
+					var opts = opts;
 					var retData = [];
 
 					// clone arguments
 					var args = Array.prototype.slice.call(arguments, 0);
 
-					this.contextEle.find("li " + N.string.trimToEmpty(this.options.checkAllTarget) + N.string.trimToEmpty(this.options.checkSingleTarget) + ":checked").each(function() {
+					this.contextEle.find("li").find(opts.checkAllTarget||opts.checkSingleTarget).filter(":checked").each(function() {
 						if(arguments.length > 1) {
-							args[0] = opts.data[N(this).closest("li").index()];
+							args[0] = opts.data[N(this).closest("ul").find("li").index(N(this).closest("li"))];
 							retData.push(N.json.mapFromKeys.apply(N.json, args));
 						} else {
-							retData.push(opts.data[N(this).closest("li").index()]);
+							retData.push(opts.data[N(this).closest("ul").find("li").index(N(this).closest("li"))]);
 						}
 					});
 					return retData;
@@ -3357,14 +3388,14 @@
 					if(arguments.length > 1) {
 						var args = Array.prototype.slice.call(arguments, 0);
 
-						return this.options.data.datafilter(function(data) {
+						return opts.data.datafilter(function(data) {
 							return data.rowStatus === rowStatus;
 						}).map(function() {
 							args[0] = this;
 							return N.json.mapFromKeys.apply(N.json, args);
 						}).get();
 					} else {
-						return this.options.data.datafilter(function(data) {
+						return opts.data.datafilter(function(data) {
 							return data.rowStatus === rowStatus;
 						}).get();
 					}
@@ -3373,33 +3404,59 @@
 			context : function(sel) {
 				return sel !== undefined ? this.options.context.find(sel) : this.options.context;
 			},
-			select : function(indexArr) {
+			select : function(indexes, isAppend) {
 				var opts = this.options;
-				if(indexArr === undefined) {
-					// TODO
+				if(indexes === undefined) {
+					var rtnArr = this.contextEle.find("li.list_selected__").map(function() {
+						return N(this).parent().find("li").index(this);
+					}).get();
+					return rtnArr;
 				} else {
-					if(N.type(indexArr) === "number") {
-						// TODO
-					} else if(N.type(indexArr) === "array") {
-						// TODO
+					if(N.type(indexes) !== "array") {
+						indexes = [indexes];
 					}
+
+					var self = this;
+					var selectEle;
+
+					if(!isAppend) {
+						self.contextEle.find("li").removeClass("list_selected__");
+					}
+					$(indexes).each(function() {
+						selectEle = self.contextEle.find("li").eq(this);
+						if(selectEle.hasClass("list_selected__")) {
+							selectEle.removeClass("list_selected__");
+						}
+						selectEle.click();
+					});
 
 					return this;
 				}
 			},
-			check : function(indexArr) {
+			check : function(indexes, isAppend) {
 				var opts = this.options;
-				if(indexArr === undefined) {
-					var rtnArr = this.contextEle.find("li " + N.string.trimToEmpty(this.options.checkAllTarget) + N.string.trimToEmpty(this.options.checkSingleTarget) + ":checked").map(function() {
-						return N(this).closest("li").index();
+				if(indexes === undefined) {
+					var rtnArr = this.contextEle.find("li").find(opts.checkAllTarget||opts.checkSingleTarget).filter(":checked").map(function() {
+						return N(this).closest("ul").find("li").index(N(this).closest("li"));
 					}).get();
 					return rtnArr;
 				} else {
-					if(N.type(indexArr) === "number") {
-						// TODO
-					} else if(N.type(indexArr) === "array") {
-						// TODO
+					if(N.type(indexes) !== "array") {
+						indexes = [indexes];
 					}
+
+					var self = this;
+					var checkboxEle;
+					if(!isAppend) {
+						self.contextEle.find("li").find(opts.checkAllTarget||opts.checkSingleTarget).prop("checked", false);
+					}
+					$(indexes).each(function() {
+						checkboxEle = self.contextEle.find("li").find(opts.checkAllTarget||opts.checkSingleTarget).eq(this);
+						if(checkboxEle.is(":checked")) {
+							checkboxEle.prop("checked", false);
+						}
+						checkboxEle.click();
+					});
 
 					return this;
 				}
@@ -3687,7 +3744,7 @@
 				onSelect : null,
 				onBind : null,
 				misc : {
-					withoutTbodyLength : 0, // garbage rows count in table
+					withoutTbodyLength : 0, // garbage rows count in table -> Deprecated.
 					resizableCorrectionWidth : 0,
 					resizableLastCellCorrectionWidth : 0,
 					resizeBarCorrectionLeft : 0,
@@ -3771,6 +3828,11 @@
 			if(this.options.height > 0) {
 				this.contextEle = this.options.context.closest("div.tbody_wrap__ > .grid__");
         	}
+
+			// set rowspan column info
+			this.rowSpanIds = this.thead.find("th:regexp(data:rowspan,true)").map(function() {
+				return $(this).data("id");
+			});
 
 			// set function for check all checkbox in list
 			if(this.options.checkAll !== null && this.options.checkAllTarget !== null) {
@@ -4479,38 +4541,83 @@
 		            });
 		            return cellCnt;
 		        }));
+		    },
+			rowSpan : function(i, rowEle, bfRowEle, rowData, bfRowData, colId) {
+				var opts = this.options;
+				if(bfRowData !== undefined && rowData[colId] === bfRowData[colId]) {
+					var bfRowCell = bfRowEle.find("#" + colId + ", .grid_rowspan__").closest("td");
+					var prevColId = this.thead.find("th:eq(" + bfRowEle.find("> tr > td").index(bfRowCell.prev("td")) + ")").data("id");
+
+					if((this.rowSpanIds.get().join("|") + "|").indexOf(prevColId) < 0 || bfRowCell.prev("td").hasClass("grid_rowspan__")) {
+						var cell = rowEle.find("#" + colId).closest("td");
+						var bfCellBgColor = bfRowCell.css("background-color");
+						if(bfCellBgColor === "rgba(0, 0, 0, 0)") {
+							bfCellBgColor = bfRowCell.parent().css("background-color");
+						}
+						if(bfCellBgColor === "rgba(0, 0, 0, 0)") {
+							bfCellBgColor = bfRowCell.parent().parent().css("background-color");
+						}
+
+						bfRowCell.css("border-bottom-color", bfCellBgColor);
+
+						bfRowCell.css("background-color", bfCellBgColor);
+						cell.css("background-color", bfCellBgColor);
+
+						bfRowCell.addClass("grid_rowspan__");
+
+						var cldr = cell.children();
+						if(cldr.length > 0) {
+							cldr.hide();
+						} else {
+							cell.empty();
+						}
+					}
+				}
 		    }
 		});
 
 		$.extend(Grid.prototype, {
-			data : function(rowStatus) { // key name : argument2, argument3... argumentN
+			data : function(rowStatus) { // key name : argument1, argument2... argumentN
+				var opts = this.options;
+
 				if(rowStatus === undefined) {
-					return this.options.data.get();
+					return opts.data.get();
 				} else if(rowStatus === false) {
-					return this.options.data;
+					return opts.data;
 				} else if(rowStatus === "modified") {
-					return this.options.data.datafilter(function(data) {
+					return opts.data.datafilter(function(data) {
 						return data.rowStatus !== undefined;
 					}).get();
 				} else if(rowStatus === "selected") {
-					if(this.options.select || this.options.multiselect) {
-						// TODO
-					} else {
-						N.error("[N.grid.data]select or multiselect option is must be true(boolean)");
+					if(opts.select || opts.multiselect) {
+						var retData = [];
+
+						// clone arguments
+						var args = Array.prototype.slice.call(arguments, 0);
+
+						this.contextEle.find("tbody.grid_selected__").each(function() {
+							if(arguments.length > 1) {
+								args[0] = opts.data[N(this).parent().find("tbody").index(this)];
+								retData.push(N.json.mapFromKeys.apply(N.json, args));
+							} else {
+								retData.push(opts.data[N(this).parent().find("tbody").index(this)]);
+							}
+						});
+						return retData;
 					}
 				} else if(rowStatus === "checked") {
-					var opts = this.options;
+					var opts = opts;
 					var retData = [];
 
 					// clone arguments
 					var args = Array.prototype.slice.call(arguments, 0);
 
-					this.contextEle.find("tbody td " + N.string.trimToEmpty(this.options.checkAllTarget) + N.string.trimToEmpty(this.options.checkSingleTarget) + ":checked").each(function() {
+					this.contextEle.find("tbody td").find(opts.checkAllTarget||opts.checkSingleTarget).filter(":checked").each(function() {
 						if(arguments.length > 1) {
-							args[0] = opts.data[N(this).closest("tbody").index() - opts.misc.withoutTbodyLength];
+							args[0] = opts.data[N(this).closest("tbody").parent().find("tbody").index(N(this).closest("tbody"))];
 							retData.push(N.json.mapFromKeys.apply(N.json, args));
 						} else {
-							retData.push(opts.data[N(this).closest("tbody").index()  - opts.misc.withoutTbodyLength]);
+							retData.push(opts.data[N(this).closest("tbody").parent().find("tbody").index(N(this).closest("tbody"))]);
 						}
 					});
 					return retData;
@@ -4518,14 +4625,14 @@
 					if(arguments.length > 1) {
 						var args = Array.prototype.slice.call(arguments, 0);
 
-						return this.options.data.datafilter(function(data) {
+						return opts.data.datafilter(function(data) {
 							return data.rowStatus === rowStatus;
 						}).map(function() {
 							args[0] = this;
 							return N.json.mapFromKeys.apply(N.json, args);
 						}).get();
 					} else {
-						return this.options.data.datafilter(function(data) {
+						return opts.data.datafilter(function(data) {
 							return data.rowStatus === rowStatus;
 						}).get();
 					}
@@ -4534,33 +4641,59 @@
 			context : function(sel) {
 				return sel !== undefined ? this.options.context.find(sel) : this.options.context;
 			},
-			select : function(indexArr) {
+			select : function(indexes, isAppend) {
 				var opts = this.options;
-				if(indexArr === undefined) {
-					// TODO
+				if(indexes === undefined) {
+					var rtnArr = this.contextEle.find("tbody.grid_selected__").map(function() {
+						return N(this).parent().find("tbody").index(this);
+					}).get();
+					return rtnArr;
 				} else {
-					if(N.type(indexArr) === "number") {
-						// TODO
-					} else if(N.type(indexArr) === "array") {
-						// TODO
+					if(N.type(indexes) !== "array") {
+						indexes = [indexes];
 					}
+
+					var self = this;
+					var selectEle;
+
+					if(!isAppend) {
+						self.contextEle.find("tbody").removeClass("grid_selected__");
+					}
+					$(indexes).each(function() {
+						selectEle = self.contextEle.find("tbody").eq(this);
+						if(selectEle.hasClass("grid_selected__")) {
+							selectEle.removeClass("grid_selected__");
+						}
+						selectEle.click();
+					});
 
 					return this;
 				}
 			},
-			check : function(indexArr) {
+			check : function(indexes, isAppend) {
 				var opts = this.options;
-				if(indexArr === undefined) {
-					var rtnArr = this.contextEle.find("tbody td " + N.string.trimToEmpty(this.options.checkAllTarget) + N.string.trimToEmpty(this.options.checkSingleTarget) + ":checked").map(function() {
-						return N(this).closest("tbody").index() - opts.misc.withoutTbodyLength;
+				if(indexes === undefined) {
+					var rtnArr = this.contextEle.find("tbody td").find(opts.checkAllTarget||opts.checkSingleTarget).filter(":checked").map(function() {
+						return N(this).closest("tbody").parent().find("tbody").index(N(this).closest("tbody"));
 					}).get();
 					return rtnArr;
 				} else {
-					if(N.type(indexArr) === "number") {
-						// TODO
-					} else if(N.type(indexArr) === "array") {
-						// TODO
+					if(N.type(indexes) !== "array") {
+						indexes = [indexes];
 					}
+
+					var self = this;
+					var checkboxEle;
+					if(!isAppend) {
+						self.contextEle.find("tbody td").find(opts.checkAllTarget||opts.checkSingleTarget).prop("checked", false);
+					}
+					$(indexes).each(function() {
+						checkboxEle = self.contextEle.find("tbody td").find(opts.checkAllTarget||opts.checkSingleTarget).eq(this);
+						if(checkboxEle.is(":checked")) {
+							checkboxEle.prop("checked", false);
+						}
+						checkboxEle.click();
+					});
 
 					return this;
 				}
