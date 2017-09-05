@@ -1174,7 +1174,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .docs__>.docs_tab_context__>ul.docs_tabs__>.docs_tab__ {
 	display: inline;
 	margin-right: 2px;
-	padding: 6px 0;
+	padding: 7px 0;
 	border-top: 1px solid #55d555;
 	border-left: 10px solid #55d555;
 	border-right: 1px solid #55d555;
