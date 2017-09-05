@@ -417,10 +417,11 @@ onRemove : function(docId) {
 		<span>Documents.request</span>
 	</h3>
 	<p>Document.request(N.docs.request) 는 단독으로 사용될 수 없고 N.docs 로 컨텐츠를 열때 마다 생성 되는 모듈입니다. request는 요청에 대한 옵션을 지정 할 수 있고 요청정보를 가지고 있고 페이지간 데이터 전달을 위한 attr 메서드가 구현 되어 있습니다. </p>
-	<p>add 함수를 호출 하기 전에 다음과 같이 request attribute 를 정의 하면</p>
+	<p>add 나 reload 함수를 호출 하기 전에 다음과 같이 request attribute 를 정의 하면</p>
 	<pre><code class="language-javascript">
 var docs = N("container selector").docs();
 docs.request.attr("pageParam", { a : 1 }).add("page id", "page name", { url : "url" });
+// docs.request.attr("pageParam", { a : 1 }).reload();
 </code></pre>
 		<p>불러와진 컨텐츠의 Controller(N.cont) 오브젝트의 init 함수의 두번째 인자(request)로  불러 올 수 있습니다.</p>
 		<pre><code class="language-javascript">
@@ -608,6 +609,40 @@ var docOpts = {
 			<td align="center">-</td>
 			<td>
 				<p>Controller를 가져 올 컨텐츠(페이지) 아이디를 입력 합니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>reload</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>object</td>
+			<td>
+				<p>선택한 컨텐츠(페이지)를 리로드 합니다.</p>
+				<p class="alert">reload 함수 호출 전에 request.attr 함수로 값을 지정하지 않았다면 리로드 전의 request 객체의 값은 리로드 해도 유지 됩니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>docId</td>
+			<td>string</td>
+			<td align="center">-</td>
+			<td>
+				<p>리로드 할 컨텐츠(페이지) 아이디를 입력 합니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>callback</td>
+			<td>string</td>
+			<td align="center">-</td>
+			<td>
+				<p>리로드가 완료 되면 실행 되는 콜백을 지정 합니다. 필요 없으면 지정 하지 않아도 됩니다.</p>
+				<p>콜백의 인자로 html 과 Communicator.request 객체가 반환 됩니다.</p>
+				<pre><code class="language-javascript">
+docsInstance.reload("docId", function(html, request) {
+	N.log(html, request);
+});
+</code></pre>
 			</td>
 		</tr>
 	</table>

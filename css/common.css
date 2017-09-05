@@ -490,7 +490,7 @@ article .depricated {
 
 article ul.contents {
 	position: absolute;
-	margin-left: -200px;
+	margin-left: -233px;
 	top: 303px;
 	background-color: #fff;
 	padding: 5px 0px 10px 10px;
@@ -498,8 +498,8 @@ article ul.contents {
 	border-top: 1px solid #55d555;
 	border-left: 1px solid #55d555;
 	border-bottom: 1px solid #55d555;
-    list-style: none;
-	width: 159px;
+	list-style: none;
+	width: 192px;
 }
 
 article ul.contents.links li {

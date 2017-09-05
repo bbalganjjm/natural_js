@@ -2,7 +2,7 @@
 	<h2 class="notIndex">Controller(N.cont)</h2>
 
 	<!-- 목차 -->
-	<ul class="contents links"></ul>
+	<ul class="contents links" style="margin-left: -284px; width: 243px;"></ul>
 
 	<h3>
 		<span lang="ko_KR">개요</span>
@@ -92,8 +92,43 @@
 	</table>
 
 	<h3>
-		<span lang="ko_KR">Controller(N.cont) 객체</span>
-		<span lang="en_US">Controller(N.cont) object</span>
+		<span lang="ko_KR">Controller(N.cont) 객체 변수</span>
+		<span lang="en_US">Controller(N.cont) object's variables</span>
+	</h3>
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Type</th>
+			<th style="width: auto;">Description</th>
+		</tr>
+		<tr>
+			<td>view</td>
+			<td>jquery object</td>
+			<td>view 요소가 정의 되어 있습니다.</td>
+		</tr>
+		<tr>
+			<td>request</td>
+			<td>Communicator.request</td>
+			<td>현재 페이지의 요청 정보와 페이지 호출 시 전달 한 데이터를 얻을 수 있는 Communicator.request 객체가 정의 되어 있습니다.</td>
+		</tr>
+		<tr>
+			<td>caller</td>
+			<td>N.popup</td>
+			<td>팝업으로 호출 된 페이지 일 경우 자신을 호출 한 팝업 인스턴스가 정의 되어 있습니다.</td>
+		</tr>
+		<tr>
+			<td>opener</td>
+			<td>object</td>
+			<td>
+				<p>팝업으로 호출 된 페이지 일 경우 자신을 호출 한 팝업 인스턴스가 포함된 컨트롤러 오브젝트가 정의 되어 있습니다.</p>
+				<p class="alert">팝업 인스턴스가 무기명이거나 지역 변수일 경우 opener 속성이 정의 되지 않을 수 있습니다. 먼저 opener 속성이 undefined 인지 체크 후 사용 바랍니다.</p>
+			</td>
+		</tr>
+	</table>
+
+	<h3>
+		<span lang="ko_KR">Controller(N.cont) 객체 함수</span>
+		<span lang="en_US">Controller(N.cont) object's functions</span>
 	</h3>
 	<table>
 		<tr>
@@ -107,7 +142,7 @@
 			<td>init</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
-			<td>User define</td>
+			<td>user define</td>
 			<td>N.cont 에 의해 등록된 callback 이 초기화 된 후 최초 실행 되는 함수입니다.</td>
 		</tr>
 		<tr>
@@ -116,19 +151,15 @@
 			<td>jquery object</td>
 			<td align="center">-</td>
 			<td>
-				<p>View 영역의 요소들을 반환 합니다.</p>
-				<p class="alert">view 는 Controller 오브젝트 자신 에도 view 라는 속성으로 정의 되어 있습니다(init 메서드 안에서 this.view)</p>
+				<p>view 요소를 반환 합니다.</p>
 			</td>
 		</tr>
 		<tr>
 			<td></td>
 			<td>request</td>
-			<td>Communicator.request instance</td>
+			<td>Communicator.request</td>
 			<td align="center">-</td>
-			<td>
-				<p>Communicator.request 인스턴스를 반환하여 현재 페이지의 요청 정보를 볼 수 있습니다.</p>
-				<p class="alert">request 는 Controller 오브젝트 자신 에도 request 라는 속성으로 정의 되어 있습니다(init 메서드 안에서 this.request)</p>
-			</td>
+			<td>현재 페이지의 요청 정보와 페이지 호출 시 전달 한 데이터를 얻을 수 있는 Communicator.request 객체를 반환 합니다.</td>
 		</tr>
 	</table>
 

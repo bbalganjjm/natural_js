@@ -114,7 +114,21 @@
 			<td>callback</td>
 			<td>function</td>
 			<td align="center">-</td>
-			<td>서버에서 요청이 처리되고 응답이 완료된 다음 실행되는 콜백 함수입니다. 콜백함수의 첫번째 인자(arguments[0])에는 서버에서 가져온 data 를 넣어 주고 두번째 인자(arguments[1])에는 요청정보가 담긴 Communicator.request 객체를 넣어줍니다.</td>
+			<td>
+				<p>서버에서 요청이 처리되고 응답이 완료된 다음 실행되는 콜백 함수입니다.</p>
+				<p>콜백의 인자로 data 또는 html 과 Communicator.request 객체가 반환 됩니다.</p>
+				<pre><code class="language-javascript">
+// 데이터 요청 시
+N.comm("url").submit(function(data, request) {
+	N.log(data, request);
+});
+
+// 페이지 요청 시
+N("selector").comm("url").submit(function(html, request) {
+	N.log(html, request);
+});
+</code></pre>
+			</td>
 		</tr>
 	</table>
 
@@ -329,6 +343,37 @@
 			<td>string</td>
 			<td align="center">-</td>
 			<td>key를 지정하지 않으면 전체 요청정보를 가져오고 key 값을 지정하면 해당 정보만 가져옵니다. key 값은 기본옵션과 같고 referrer(호출한 페이지 URL) 값만 추가 됩니다.</td>
+		</tr>
+		<tr>
+			<td>reload</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>Controller object</td>
+			<td>
+				<p>해당 블록 페이지를 다시 로드 합니다.</p>
+				<p class="alert">reload 함수 호출 전에 request.attr 함수로 값을 지정하지 않았다면 리로드 전의 request 객체의 값은 리로드 해도 유지 됩니다.</p>
+				<p class="alert">reload 되는 페이지에 값을 전달 하려면 request.attr() 로 전달 할 값을 저장 후 reload 함수를 호출 하면 됩니다.</p>
+				<pre><code class="language-javascript">
+request.attr("param", { param : 1 });
+request.reload();
+</code></pre>
+				<p class="alert">request.attr("param", { param : 1 }).reload() 와 같이 메서드 체이닝을 지원하지 않습니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>callback</td>
+			<td>string</td>
+			<td align="center">-</td>
+			<td>
+				<p>리로드가 완료 되면 실행 되는 콜백을 지정 합니다. 필요 없으면 지정 하지 않아도 됩니다.</p>
+				<p>콜백의 인자로 html 과 Communicator.request 객체가 반환 됩니다.</p>
+				<pre><code class="language-javascript">
+request.reload(function(html, request) {
+	N.log(html, request);
+});
+</code></pre>
+			</td>
 		</tr>
 	</table>
 
