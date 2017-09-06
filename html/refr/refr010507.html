@@ -201,7 +201,7 @@
 	<table>
 		<tr>
 			<th>Name</th>
-			<th style="width: 65px;">Type</th>
+			<th>Type</th>
 			<th>Default</th>
 			<th style="width: auto;">Description</th>
 		</tr>
@@ -261,12 +261,12 @@
 				<p>arguments[1],</p>
 				<p>arguments[2],</p>
 				<p>arguments[3],</p>
-				<p>...arguments[N]</p>
+				<p>...arguments[n]</p>
 			</td>
 			<td>string</td>
 			<td align="center">-</td>
 			<td>
-				<p>data 메서드의 두번째 인자부터 N번째 인자까지 데이터의 컬럼명을 지정하면 해당 컬럼에 해당하는 데이터만 추출하여 반환 합니다.</p>
+				<p>data 메서드의 두번째 인자부터 n 번째 인자까지 데이터의 컬럼명을 지정하면 해당 컬럼에 해당하는 데이터만 추출하여 반환 합니다.</p>
 				<pre><code class="language-javascript">
 /** bind 되어 있는 데이터
 [{
@@ -275,7 +275,7 @@
  	col03 : "",
  	col04 : "",
  	col05 : "",
- 	col06 : "",
+ 	col06 : ""
 }]
 */
 formInstance.data(true, "col01", "col02", "col03");
@@ -330,6 +330,44 @@ formInstance.data(true, "col01", "col02", "col03");
 			<td>array[json object]</td>
 			<td align="center">-</td>
 			<td>data인자를 지정하면 컴포넌트에 바인드 된 데이터가 지정한 데이터로 치환되어 바인드 됩니다.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<p>arguments[1],</p>
+				<p>arguments[2],</p>
+				<p>arguments[3],</p>
+				<p>...arguments[n]</p>
+			</td>
+			<td>string</td>
+			<td align="center">-</td>
+			<td>
+				<p>bind 메서드의 세번째 인자부터 n 번째 인자까지 데이터의 컬럼명을 지정하면 해당 컬럼에 해당하는 요소에만 바인드 합니다.</p>
+				<pre><code class="language-javascript">
+/** bind 될 데이터
+var data = [{
+	col01 : "",
+ 	col02 : "",
+ 	col03 : "",
+ 	col04 : "",
+ 	col05 : "",
+ 	col06 : ""
+}]
+*/
+// "col01", "col02", "col03" 아이디 속성값을 갖고 있는 요소에만 바인드.
+formInstance.bind(0, data, "col01", "col02", "col03");
+</code></pre>
+				<pre><code class="language-javascript">
+// 바인드 되어 있는 데이터를 직접 수정 한 후
+// "col01", "col02", "col03" 아이디 속성값을 갖고 있는 요소에만 바인드.
+var data = formInstance.data()[formInstance.row()]
+data.col01 = "abc";
+data.col02 = "123";
+data.col03 = "가나다";
+formInstance.bind(0, data, "col01", "col02", "col03");
+</code></pre>
+				<p class="alert">첫번째 인자로 true 를 지정 했을 때만 작동 됩니다.</p>
+			</td>
 		</tr>
 		<tr>
 			<td>unbind</td>

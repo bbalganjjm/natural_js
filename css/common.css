@@ -89,11 +89,11 @@ input[type='text']:hover, select:hover, textarea:hover, input[type='text']:focus
 	transition: border-color ease-in-out 0.20s, background-color ease-in-out 0.15s, box-shadow ease-in-out 0.20s;
 }
 
-input[disabled='disabled'], input[disabled='disabled']:hover, input[disabled='disabled']:focus {
+input[disabled], input[disabled]:hover, input[disabled]:focus {
 	background-color: #eeeeee;
 }
 
-input[readonly='readonly'], input[readonly='readonly']:hover, input[readonly='readonly']:focus {
+input[readonly], input[readonly]:hover, input[readonly]:focus {
 	background-color: #efffff;
 }
 

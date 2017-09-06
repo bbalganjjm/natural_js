@@ -273,6 +273,31 @@ N("div#sample1").instance("name", instance);</code></pre>
 			<td align="center">-</td>
 			<td>제거 할 배열 요소들의 개수</td>
 		</tr>
+		<tr>
+			<td>N(selector) .events</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>object similar to array|array|undefined</td>
+			<td>
+				<p>셀렉터로 지정한 요소에 바인드 되어 있는 이벤트들을 반환 합니다.</p>
+				<p class="alert">eventName 인자와 namespace 인자를 둘다 입력 하지 않으면 모든 이벤트들을 반환하고 namespace 를 입력 하지 않으면 지정한 eventName 에 해당하는 이벤트들만 반환 합니다.</p>
+				<p class="alert">namespace 인자가 입력 되면 array 타입으로 이벤트를 반환 하고 그렇지 않은 경우에는 array 와 비슷한 object 타입으로 이벤트들을 반환 합니다. 바인드되어 있는 이벤트가 없으면 undefined 를 반환 합니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>eventName</td>
+			<td>string</td>
+			<td align="center">-</td>
+			<td>이벤트 명</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>namespace</td>
+			<td>string</td>
+			<td align="center">-</td>
+			<td>이벤트 네임스페이스</td>
+		</tr>
 	</table>
 
 	<h4>
