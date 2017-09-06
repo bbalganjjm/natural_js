@@ -124,7 +124,7 @@
 			<td>hide</td>
 			<td></td>
 			<td>
-				X 버튼이나 확인 버튼을 클릭 했을때 hide 메서드를 호출 할 것인지 remove 메서드를 호출 할 것인지 지정<br>
+				팝업이 닫힐 때 hide 메서드를 호출 할 것인지 remove 메서드를 호출 할 것인지 지정<br>
 				 - hide : hide 메서드를 호출하여 팝업 요소를 숨겨 줌.<br>
 				 - remove : remove 메서드를 호출하여 팝업 요소를 제거 함(이전 상태가 사라짐).
 			</td>
@@ -278,7 +278,7 @@
 			<td>
 				<p>onClose 이벤트의 첫번째 인자로 지정되어 팝업의 부모페이지에 전달될 데이터</p>
 				<p class="alert">url을 지정하여 다른 페이지를 가져왔을때만 사용가능 합니다.</p>
-				<p class="alert">close 함수의 첫번째 argument 로 넣어줘도 됩니다(동적인 데이터 전달 시 사용).</p>
+				<p class="alert">팝업에서 this.caller.close 함수의 첫번째 argument 로 넣어줘도 됩니다(동적인 데이터 전달 시 사용).</p>
 			</td>
 		</tr>
 	</table>

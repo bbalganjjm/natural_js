@@ -114,20 +114,20 @@
 			<th><label for="onOk">onOk</label></th>
 			<td>
 				<textarea id="onOk" style="height: 45px;">
-function() {
-	N.log("Ok");
+function(msgContext, msgContents) {
+	N.log("onOk", msgContext, msgContents);
 }</textarea><br />
 				<label for="onOk" lang="ko_KR">"확인" 버튼 클릭 시 작동되는 이벤트 핸들러</label>
 				<label for="onOk" lang="en_US">Event handler for "OK" button click event</label>
 			</td>
 			<th><label for="onCancel">onCancel</label></th>
 			<td>
-				<textarea id="onCancel" style="height: 45px;">
-function() {
-	N.log("Cancel");
+				<textarea id="onCancel">
+function(msgContext, msgContents) {
+	N.log("onCancel", msgContext, msgContents);
 }</textarea><br />
-				<label for="onCancel" lang="ko_KR">"취소" 버튼 클릭 시 작동되는 이벤트 핸들러</label>
-				<label for="onCancel" lang="en_US">Event handler for "Cancel" button click event</label>
+				<label for="onCancel" lang="ko_KR">"취소" 버튼 이나 오버레이, 닫기(X) 버튼 클릭 시 작동되는 이벤트 핸들러</label>
+				<label for="onCancel" lang="en_US">Event handler for "Cancel" button or message overlay or close(X) button click event</label>
 			</td>
 		</tr>
 	</table>
@@ -208,6 +208,17 @@ function() {
 			</td>
 		</tr>
 		<tr>
+			<th><label for="closeMode">closeMode</label></th>
+			<td colspan="3">
+				<select id="closeMode">
+					<option value="hide">hide</option>
+					<option value="remove">remove</option>
+				</select>
+				<label for="closeMode" lang="ko_KR">hide 를 선택하면 팝업 관련 요소들을 제거 하지 않고 remove 를 선택 하면 요소들을 제거 합니다.</label>
+				<label for="closeMode" lang="en_US">If select the "hide" value, it does not remove popup related elements and if select the "remove" value, it remove the elements.</label>
+			</td>
+		</tr>
+		<tr>
 			<th><label for="top">top</label></th>
 			<td>
 				<input id="top" type="text" value="undefined" /><br>
@@ -280,23 +291,21 @@ function() {
 		<tr>
 			<th><label for="onOk">onOk</label></th>
 			<td>
-				<textarea id="onOk">
-function() {
-	N.log("Ok");
-}
-				</textarea><br />
+				<textarea id="onOk" style="height: 45px;">
+function(msgContext, msgContents) {
+	N.log("onOk", msgContext, msgContents);
+}</textarea><br />
 				<label for="onOk" lang="ko_KR">"확인" 버튼 클릭 시 작동되는 이벤트 핸들러</label>
 				<label for="onOk" lang="en_US">Event handler for "OK" button click event</label>
 			</td>
 			<th><label for="onCancel">onCancel</label></th>
 			<td>
 				<textarea id="onCancel">
-function() {
-	N.log("Cancel");
-}
-				</textarea><br />
-				<label for="onCancel" lang="ko_KR">"취소" 버튼 클릭 시 작동되는 이벤트 핸들러</label>
-				<label for="onCancel" lang="en_US">Event handler for "Cancel" button click event</label>
+function(msgContext, msgContents) {
+	N.log("onCancel", msgContext, msgContents);
+}</textarea><br />
+				<label for="onCancel" lang="ko_KR">"취소" 버튼 이나 오버레이, 닫기(X) 버튼 클릭 시 작동되는 이벤트 핸들러</label>
+				<label for="onCancel" lang="en_US">Event handler for "Cancel" button or message overlay or close(X) button click event</label>
 			</td>
 		</tr>
 		<tr>
@@ -406,6 +415,7 @@ function() {
 	       			confirm : N("#otherPage #confirm", view).is(":checked"),
 	            	modal : N("#otherPage #modal", view).is(":checked"),
 	            	button : N("#otherPage #button", view).is(":checked"),
+	            	closeMode : N("#otherPage #closeMode", view).val(),
 	            	top : !N.isEmptyObject(N("#otherPage #top", view).val()) && N("#otherPage #top", view).val() !== "undefined" ? Number(N("#otherPage #top", view).val()) : undefined,
           			left : !N.isEmptyObject(N("#otherPage #left", view).val()) && N("#otherPage #left", view).val() !== "undefined" ? Number(N("#otherPage #left", view).val()) : undefined,
 	            	width : Number(N("#otherPage #width", view).val()),
@@ -430,12 +440,19 @@ function() {
 	            cont.otherPopup = N().popup(opts);
 
 	            N("#btnOpenOther", view).instance("button").enable();
-	            N(this).instance("button").disable();
+
+	            if(N("#otherPage #closeMode", view).val() !== "remove") {
+		            N(this).instance("button").disable();
+	            }
 	        });
 
 	        N("#btnOpenOther", view).click(function(e) {
 	            e.preventDefault();
 	            cont.otherPopup.open();
+
+	            if(N("#otherPage #closeMode", view).val() === "remove") {
+		            N(this).instance("button").disable();
+	            }
 	        });
 
 	        N("a[id='btnReload']", view).click(function(e) {
