@@ -581,7 +581,43 @@ gridInstance.data("modified", "col01", "col02", "col03");
 			<td>selector</td>
 			<td>string</td>
 			<td align="center">-</td>
-			<td>selector 문자열을 입력하면 해당 context 하위 요소에서 선택된 요소를 반환 합니다.</td>
+			<td>selector 문자열을 입력하면 context 옵션으로 지정한 요소에서 선택된 요소를 반환 합니다.</td>
+		</tr>
+		<tr>
+			<td>contextHead</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>jquery object</td>
+			<td>
+				<p>그리드의 헤더 영역 요소를 반환 합니다.</p>
+				<p>동적으로 헤더의 모양을 바꿔야 된다면 contextHead 메서드와 jQuery 를 활용하여 템플릿을 수정하기 바랍니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>selector</td>
+			<td>string</td>
+			<td align="center">-</td>
+			<td>selector 문자열을 입력하면 헤더 영역 요소에서 선택된 요소를 반환 합니다.</td>
+		</tr>
+		<tr>
+			<td>contextBodyTemplate</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>jquery object</td>
+			<td>
+				<p>그리드 bind 전 초기화 시 지정된 그리드 바디 템플릿 요소를 반환 합니다.</p>
+				<p class="alert">N.grid 는 이 요소를 복제하여 행들을 만듭니다.</p>
+				<p>contextBodyTemplate 메서드를 통해 반환 된 요소의 구성을 수정하고 다시 바인드 하면 수정된 모양의 그리드 바디가 만들어 집니다.</p>
+				<p>동적으로 그리드 바디의 모양을 바꿔야 된다면 contextBodyTemplate 메서드와 jQuery 를 활용하여 템플릿을 수정하기 바랍니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>selector</td>
+			<td>string</td>
+			<td align="center">-</td>
+			<td>selector 문자열을 입력하면 그리드 바디 템플릿 요소에서 선택된 요소를 반환 합니다.</td>
 		</tr>
 		<tr>
 			<td>bind</td>
