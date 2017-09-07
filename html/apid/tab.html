@@ -168,7 +168,11 @@ He was ranked 5th in Rolling Stone's list of the "100 Greatest Guitarists of All
 
 	    	N("#btnOpen", view).click(function(e) {
 	        	e.preventDefault();
-	        	cont.tab.open(N("input#idx", view).val());
+	        	var idx = N.string.trimToUndefined(N("input#idx", view).val());
+	        	var rslt = cont.tab.open(idx);
+	        	if(N.isPlainObject(rslt)) {
+	        		N.log(rslt);
+	        	}
 	        });
 
 	    	N("#btnDisable", view).click(function(e) {
