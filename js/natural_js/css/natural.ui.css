@@ -808,16 +808,15 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	border: 1px solid #55d555;
 }
 
-.tab__>div.hidden__ {
-	position: absolute;
-	width: 100%;
-	opacity: 0;
-	transition: opacity 0.2s cubic-bezier(0.02, 0.9, 1, 1);
+.tab__>div.hidden__ > * {}
+
+.tab__>div.visible__ > * {
+	animation: tab_visible__ 0.5s cubic-bezier(0.14, 0.9, 1, 1);
 }
 
-.tab__>div.visible__ {
-	opacity: 1;
-	transition: opacity 0.5s cubic-bezier(0.14, 0.9, 1, 1);
+@keyframes tab_visible__ {
+    from {opacity: 0}
+    to {opacity: 1}
 }
 
 /* DatePicker */
