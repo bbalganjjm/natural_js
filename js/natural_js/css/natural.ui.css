@@ -1149,7 +1149,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 .docs__>.docs_tab_context__ {
 	position: relative;
-	height: 30px;
+	height: 31px;
 	border-bottom: 1px solid #55d555;
 	font-family: "Malgun Gothic", "dotum", "Segoe UI", sans-serif;
 }
@@ -1225,7 +1225,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	border-bottom: none;
 	min-width: 22px;
 	max-width: 27px;
-	height: 29px;
+	height: 30px;
 	border-radius: 0 7px 0 0;
 	text-align: center;
 	background-color: #a1d8a1;
