@@ -344,7 +344,7 @@ formInstance.data(true, "col01", "col02", "col03");
 			<td>
 				<p>bind 메서드의 세번째 인자부터 n 번째 인자까지 데이터의 컬럼명을 지정하면 해당 컬럼에 해당하는 요소에만 바인드 합니다.</p>
 				<pre><code class="language-javascript">
-/** bind 될 데이터
+// 바인드 할 데이터
 var data = [{
 	col01 : "",
  	col02 : "",
@@ -353,7 +353,6 @@ var data = [{
  	col05 : "",
  	col06 : ""
 }]
-*/
 // "col01", "col02", "col03" 아이디 속성값을 갖고 있는 요소에만 바인드.
 formInstance.bind(0, data, "col01", "col02", "col03");
 </code></pre>
