@@ -683,23 +683,26 @@ gridInstance.data("modified", "col01", "col02", "col03");
 		<tr>
 			<td></td>
 			<td>row</td>
-			<td>number</td>
+			<td>number|array</td>
 			<td align="center">-</td>
-			<td>제거할 행 인덱스를 지정 합니다.</td>
+			<td>제거할 행 인덱스를 지정 합니다. index 들을 array에 담아 인자로 지정 하면 한번에 여러 행을 제거 합니다.</td>
 		</tr>
 		<tr>
 			<td>revert</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
 			<td>N.grid</td>
-			<td>최초 수정하기 전이나 add() 시 최초 생성된 데이터로 되돌려 줍니다.</td>
+			<td>bind 했을 때의 초기 데이터나 add 시 생성된 초기 데이터 상태로 복원 합니다.</td>
 		</tr>
 		<tr>
 			<td></td>
 			<td>row</td>
-			<td>number</td>
+			<td>number|array</td>
 			<td align="center">-</td>
-			<td>row index를 입력하면 해당 행만 되돌려 주고 입력하지 않으면 전체다 되돌려 줍니다.</td>
+			<td>
+				<p>row index를 입력하면 해당 행 데이터만 복원 하고 입력하지 않으면 전체 행 데이터를 복원 합니다.</p>
+				<p>index 들을 array에 담아 인자로 지정 하면 한번에 여러 행을 복원 합니다.</p>
+			</td>
 		</tr>
 		<tr>
 			<td>validate</td>

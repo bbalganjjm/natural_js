@@ -222,7 +222,7 @@
 			<th width="10%">revert</th>
 			<th width="10%"><label for="rvtRow">arguments[0]</label></th>
 			<td width="80%">
-				<input id="rvtRow" type="text" value="0" />
+				<input id="rvtRow" type="text" value="[0, 2, 3]" />
 				<label for="rvtRow" lang="ko_KR">복원 할 행 인덱스, 빈값 입력 시 모든 행 데이터 복원</label>
 				<label for="rvtRow" lang="en_US">The row index to revert, if set empty value, revert the all row data</label>
 			</td>
@@ -231,7 +231,7 @@
 			<th width="10%">remove</th>
 			<th width="10%"><label for="rmvRow">arguments[0]</label></th>
 			<td width="80%">
-				<input id="rmvRow" type="text" value="0" />
+				<input id="rmvRow" type="text" value="[0, 2, 3]" />
 				<label for="rmvRow" lang="ko_KR">삭제 할 행 인덱스</label>
 				<label for="rmvRow" lang="en_US">The row index to remove</label>
 			</td>
@@ -505,12 +505,12 @@
 
 	    	N("#btnRevert", view).click(function(e) {
 	            e.preventDefault();
-	       		grid.revert(N.string.trimToUndefined(N("#rvtRow", view).val()));
+	       		grid.revert(eval(N.string.trimToUndefined(N("#rvtRow", view).val())));
 	        });
 
 	    	N("#btnRemove", view).click(function(e) {
 	            e.preventDefault();
-	        	grid.remove(parseInt(N.string.trimToZero(N("#rmvRow", view).val())));
+	            grid.remove(eval(N.string.trimToUndefined(N("#rmvRow", view).val())));
 	        });
 
 	    	N("#btnVal", view).click(function(e) {
