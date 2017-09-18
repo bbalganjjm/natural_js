@@ -475,7 +475,7 @@
 	N.context.attr("ui", {
 		"alert" : {
 			/**
-			 * Popup Element 가 담길 영역
+			 * N.alert, N.popup 컴포넌트의 요소들이 저장 되는 영역
 			 */
 			"container" : ".docs__ > .docs_contents__.visible__",
 			/**
