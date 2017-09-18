@@ -8,8 +8,8 @@
 		<span lang="ko_KR">개요</span>
 		<span lang="en_US">Overview</span>
 	</h3>
-	<p>Config(N.config)는 Natural-JS 의 구동 환경 설정 값을 저장하는 공간 이고 natural.config.js 파일에 정의 되어 있습니다. 설정값은 N.context 에 저장 되며 각 패키지 별로 따로 저장 됩니다. </p>
-
+	<p>Config(N.config)는 Natural-JS 의 구동 환경 설정 값 / AOP 설정 / Filter 설정 / 컴포넌트의 기본 옵션 값 등을 저장하는 공간 입니다.</p>
+	<p>natural.config.js 파일에 정의 되어 있으며 설정 값은 N.context 에 각 패키지 별 속성 값으로 따로 저장 됩니다.</p>
 	<ul>
 		<li>N.context.attr(&quot;core&quot;) : Natural-CORE 패키지에 속한 라이브러리들의 기본 설정 값.</li>
 		<li>N.context.attr(&quot;architecture&quot;) : Natural-ARCHITECTURE 패키지에 속한 라이브러리들의 기본 설정 값. </li>
@@ -18,11 +18,27 @@
 		<li>N.context.attr(&quot;ui.shell&quot;) : Natural-UI.Shell 패키지에 속한 라이브러리들의 기본 설정 값.</li>
 	</ul>
 
+	<p>Natural-JS 적용 시 설정 해야 할 기본 속성값은 다음 두가지 입니다.</p>
+	<ol>
+		<li>N.context.attr("architecture").page.context : 사이트의 페이지 컨텐츠가 표시 되는 영역
+			<p class="alert">Documents 컴포넌트를 사용하면 따로 지정하지 않아도 됩니다.</p>
+		</li>
+		<li>N.context.attr("ui").alert.container : N.alert, N.popup 컴포넌트의 요소들이 저장 되는 영역
+			<p class="alert">Documents 컴포넌트를 사용하면 따로 지정하지 않아도 됩니다.</p>
+		</li>
+	</ol>
+
+	<p>사이트 전역으로 설정되는 컴포넌트 기본 옵션값의 적용 순서는 다음과 같습니다.</p>
+	<ol>
+		<li>컴포넌트를 초기화 할 때 지정한 옵션 값</li>
+		<li>환경설정(N.config)에서 지정한 옵션 값</li>
+		<li>컴포넌트의 기본 옵션 값</li>
+	</ol>
+
 	<h3>
 		<span lang="ko_KR">Config 예시</span>
 		<span lang="en_US">Config Example</span>
 	</h3>
-	<p>다음을 참고 하여 패키지 및 컴포넌트별로 사이트 전역에 적용해야 할 옵션들을 선언 하여 한방에 처리 하세요.</p>
 	<pre class="line-numbers"><code class="language-javascript">/**
  * Natural-JS에서 제공하는 라이브러리 및 컴포넌트의 전역 옵션 값 설정
  * 여기에 기본으로 정의 된 값들은 제거하면 안 됨. 추가만 가능
@@ -45,7 +61,7 @@
 	 */
 	N.context.attr("core", {
 		/**
-		 * 로케일
+		 * 기본 로케일(N.locale 함수로 정의)
 		 */
 		"locale" : "ko_KR",
 		/**
@@ -56,11 +72,11 @@
 			"en_US" : {}
 		},
 		/**
-	     * 체크박스 선택시 기본 값
+	     * 체크박스가 1개 일 경우 선택 했을 때 기본 값
 	     */
 	    sgChkdVal : "Y", //Y, 1, on
 	    /**
-	     * 체크박스 선택 안됐을때 기본 값
+	     * 체크박스가 1개 일 경우 선택 안 했을 때 기본 값
 	     */
 	    sgUnChkdVal : "N", //N, 0, off
 	    /**
@@ -70,7 +86,11 @@
 	    /**
 	     * N.context.attr("architecture").page.context 로 페이지가 전환될때 마다 실행될 가비지 컬렉터의 모드
 	     */
-	    gcMode : "full" //minimum, full
+	    gcMode : "full", //minimum, full
+	    /**
+	     * N.string.byteLength 함수 및 maxbyte / minbyte / rangebyte 룰에서 영문, 숫자, 기본 특수문자등을 제외한 한글, 한글특수 문자 등의 기본 바이트 길이를 설정
+	     */
+	    charByteLength : 3
 	});
 
 	/**
@@ -79,6 +99,7 @@
 	N.context.attr("architecture", {
 		/**
 		 * Natural-JS 의 구동영역(지정 필수)
+		 * Documents 컴포넌트를 사용하면 따로 지정 하지 않아도 됩니다.
 		 */
 		"page" : {
 			"context" : ".docs__ > .docs_contents__.visible__"
@@ -160,7 +181,7 @@
 			* 필터 인자 중 request 인자에 요청에 대한 여러가지 정보가 있으니 잘 활용하면 엄청난 효과를 누릴 수 있음.
 			* request 객체에서 제공 해 주는 정보는 http://bbalganjjm.github.io/natural_js/#refr/refr0103 에서 > Communicatior 탭 > Communicator.request 챕터 > 3) 기본옵션(Default options)을 참고
 			* 필터를 여러개 걸수 있으며 단위 필터명은 아무거나 지정하면 됨.
-			* 수행 순서는 order 속성(적을 수록 먼저 실행 됨)이 정의 된 필터가 실행 되고 order 속성이 정의 되지 않은 필터들이 실행 됨.
+			* 수행 순서는 order 속성(숫자가 적을 수록 먼저 실행 됨)이 정의 된 필터가 실행 된 다음 order 속성이 정의 되지 않은 필터들이 실행 됨.
 			* 여기에서 지정한 pageFilter, dataFilter 는 상수값이 아니므로 자유롭게 지정하면 됨.
 			*/
 			"filters" : {
@@ -201,8 +222,8 @@
 				"options" : {
 					/**
 					 * 기본 Request Method
-					 * GET 으로 되어 있으면 JSON 타입의 파라미터가 q라는 파라미터명으로 q={a:1} 와 같이 전달 됩니다.
-					 * object string 을 Request Body에 온전히 서버로 전송하려면 반드시 POST로 바꿔 주시기 바랍니다.
+					 * GET 으로 되어 있으면 JSON 형태의 파라미터가 q라는 파라미터명으로 q={a:1} 와 같이 전달 됩니다.
+					 * JSON Object String 을 Request Body에 온전히 서버로 전송하려면 반드시 POST로 바꿔 주시기 바랍니다.
 					 */
 					"type" : "GET",
 					/**
@@ -339,9 +360,9 @@
 					maxlength : "{0} 글자 이하만 입력 가능합니다.",
 					minlength : "{0} 글자 이상만 입력 가능합니다.",
 					rangelength : "{0} 글자 에서 {1} 글자 까지만 입력 가능합니다.",
-					maxbyte : "{0} 바이트 이하만 입력 가능합니다.<br> - 영문, 숫자 : 1 바이트<br> - 한글, 특수문자 : 3 바이트",
-					minbyte : "{0} 바이트 이상만 입력 가능합니다.<br> - 영문, 숫자 : 1 바이트<br> - 한글, 특수문자 : 3 바이트",
-					rangebyte : "{0} 바이트 에서 {1} 바이트 까지만 입력 가능합니다.<br> - 영문, 숫자 한글자 : 1 바이트<br> - 한글, 특수문자 : 3 바이트",
+					maxbyte : "{0} 바이트 이하만 입력 가능합니다.<br> - 영문, 숫자 : 1 바이트<br> - 한글, 특수문자 : {1} 바이트",
+					minbyte : "{0} 바이트 이상만 입력 가능합니다.<br> - 영문, 숫자 : 1 바이트<br> - 한글, 특수문자 : {1} 바이트",
+					rangebyte : "{0} 바이트 에서 {1} 바이트 까지만 입력 가능합니다.<br> - 영문, 숫자 한글자 : 1 바이트<br> - 한글, 특수문자 : {2} 바이트",
 					maxvalue : "{0} 이하의 값만 입력 가능합니다.",
 					minvalue : "{0} 이상의 값만 입력 가능합니다.",
 					rangevalue : "{0} 에서 {1} 사이의 값만 입력 가능합니다.",
@@ -406,7 +427,9 @@
 	N.context.attr("ui", {
 		"alert" : {
 			/**
-			 * Popup Element 가 담길 영역
+			 * N.alert, N.popup 컴포넌트의 요소들이 저장 되는 영역(지정 필수)
+			 * N.context.attr("architecture").page.context 와 같게 설정해도 됩니다.
+			 * Documents 컴포넌트를 사용하면 따로 지정 하지 않아도 됩니다.
 			 */
 			"container" : ".docs__ > .docs_contents__.visible__",
 			/**
