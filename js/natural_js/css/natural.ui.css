@@ -226,6 +226,7 @@ a.btn_common__, input[type='button'].btn_common__, button.btn_common__ {
 a.btn_disabled__, input.btn_disabled__, button.btn_disabled__ {
 	opacity: 0.6;
 	transition: opacity 0.3s ease;
+	cursor: default;
 }
 
 a.btn_common__ {
@@ -712,6 +713,11 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	-o-text-overflow: ellipsis;
+}
+
+/* Grid - Column fixed */
+.grid_container__ > .grid_wrap__ {
+	-webkit-overflow-scrolling: touch;
 }
 
 /* Tab */

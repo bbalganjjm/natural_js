@@ -143,6 +143,10 @@ table th {
 	background-color: #ccffcc;
 }
 
+table > thead > tr > th.grid_head_fixed__ {
+	border-top: 2px solid #88dd88;
+}
+
 table.form th {
 	background: linear-gradient(left, #ccffcc, #cfffcc);
 	background: -ms-linear-gradient(left, #ccffcc, #cfffcc);

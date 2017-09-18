@@ -315,7 +315,91 @@ formInstance.data(true, "col01", "col02", "col03");
 			<td align="center">-</td>
 			<td align="center">-</td>
 			<td>N.form</td>
-			<td>지정된 context에 데이터를 바인드 합니다.</td>
+			<td>
+				<p>지정된 context에 데이터를 바인드 합니다.</p>
+				<br>
+				<p>data 관련 컴포넌트들 끼리 같은 데이터를 바인드 한 다음 데이터를 완벽하게 동기화 하기 위해서는 다음 사항들을 유의 하여 사용 바랍니다.</p>
+				<p>Natural-JS 의 데이터 관련 컴포넌트들은 내부적으로 data 는 jQuery Object 화 하여 사용합니다.</p>
+				<p>"컴포넌트인스턴스.bind(data)" 와 같이 data 를 bind 메서드의 인자로 입력 하면 data는 내부적으로 N(data) 와 같이 jQuery Object로 변환 되고
+				    "N(data).컴포넌트" 와 같이 jQuery Object 화 되어 있는 데이터를 입력 하면 별다른 처리 없이 컴포넌트에서 사용 될 data 로 지정 됩니다.</p>
+				<p>때문에 다음과 같이 data 를 따로 담아 놓고 공유 해서 사용하는 경우 컴포넌트의 add 메서드를 통해 새로운 데이터를 생성했을 때 따로 담아 둔 데이터가 동기화 되지 않는 문제가 발생 됩니다.</p>
+				<pre><code class="language-javascript">
+...
+data : [{
+	col01 : 1,
+	col01 : 2,
+}, {
+	col01 : 3,
+	col01 : 4,
+}],
+init : function() {
+	var form = N([]).form();
+	form.bind(0, this.data);
+
+	form.data() === this.data //-> false
+
+	// array 자체는 false 이지만 array 안의 요소들은 같은 참조로 연결됨.
+	// 때문에 Form 에서 val 메서드로 데이터 수정 시 값이 동기화 됨.
+	form.data()[0] === this.data[0] //-> true
+
+	// 하지만 다음과 같이 add 할 때는 동기화 되지 않음.
+	form.add();
+	form.data().length //-> 3
+	this.length //-> 2
+},
+...
+</code></pre>
+				<p>위와 같은 문제를 해결하기 위해서 "컴포넌트인스턴스.bind(data)" 메서드로 바인드 할 데이터를 jQuery Object 화 하여 바인드 하면 데이터 연동 문제가 해결 됩니다.</p>
+				<pre><code class="language-javascript">
+...
+data : [{
+	col01 : 1,
+	col01 : 2,
+}, {
+	col01 : 3,
+	col01 : 4,
+}],
+init : function() {
+	// 순수한 데이터 Array 를 jQuery Object 로 변환
+	this.data = N(this.data);
+
+	var form = N([]).form();
+	form.bind(0, this.data);
+
+	form.data() === this.data //-> true
+	form.data()[0] === this.data[0] //-> true
+
+	form.add();
+	form.data().length //-> 3
+	this.length //-> 3
+},
+...
+</code></pre>
+				<p>여러 컴포넌트에 같은 데이터를 바인드 하여 자동으로 데이터들이 연동 되도록 할 경우에는 데이터를 따로 변수에 담아놓고 사용하지 말고 데이터를 최초 바인드 한 컴포넌트에서 data() 메서드를 통해 data 를 꺼내여 연동 할 컴포넌트에 바인드하는 방법을 추천 합니다.</p>
+				<pre><code class="language-javascript">
+...
+init : function() {
+	// 아래 구문 추가
+	this.data = N(this.data);
+
+	// 컴포넌트 초기화
+	var form = N([]).form();
+	var grid = N([]).grid();
+
+	// 데이터 조회
+	N.comm("data url").submit(function(data) {
+		// form 에 데이터 바인드
+		form.bind(0, data);
+
+		// grid 에 form 의 데이터를 바인드
+		grid.bind(form.data());
+	});
+
+	// form.data() === grid.data() //-> true
+},
+...
+</code></pre>
+			</td>
 		</tr>
 		<tr>
 			<td></td>
@@ -354,8 +438,7 @@ var data = [{
  	col06 : ""
 }]
 // "col01", "col02", "col03" 아이디 속성값을 갖고 있는 요소에만 바인드.
-formInstance.bind(0, data, "col01", "col02", "col03");
-</code></pre>
+formInstance.bind(0, data, "col01", "col02", "col03");</code></pre>
 				<pre><code class="language-javascript">
 // 바인드 되어 있는 데이터를 직접 수정 한 후
 // "col01", "col02", "col03" 아이디 속성값을 갖고 있는 요소에만 바인드.
@@ -363,8 +446,7 @@ var data = formInstance.data()[formInstance.row()]
 data.col01 = "abc";
 data.col02 = "123";
 data.col03 = "가나다";
-formInstance.bind(0, data, "col01", "col02", "col03");
-</code></pre>
+formInstance.bind(0, data, "col01", "col02", "col03");</code></pre>
 			</td>
 		</tr>
 		<tr>
