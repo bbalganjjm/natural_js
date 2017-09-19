@@ -466,11 +466,7 @@
         			onBind : N.string.trimToNull(N("#onBind", view).val()) !== null ?
         				eval("(" + N("#onBind", view).val() + ")") : null,
 	        		windowScrollLock : N("#windowScrollLock", view).is(":checked"),
-	        		revert : N("#revert", view).is(":checked"),
-	        		misc : {
-	        			fixedcolHeadMarginTop : 0,
-	        			fixedcolBodyBindHeight : 1
-	        		}
+	        		revert : N("#revert", view).is(":checked")
 	       		}
 	       		grid = N([]).grid(opts).bind();
 
