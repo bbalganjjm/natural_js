@@ -466,7 +466,11 @@
         			onBind : N.string.trimToNull(N("#onBind", view).val()) !== null ?
         				eval("(" + N("#onBind", view).val() + ")") : null,
 	        		windowScrollLock : N("#windowScrollLock", view).is(":checked"),
-	        		revert : N("#revert", view).is(":checked")
+	        		revert : N("#revert", view).is(":checked"),
+	        		misc : {
+	        			fixedcolHeadMarginTop : 0,
+	        			fixedcolBodyBindHeight : 1
+	        		}
 	       		}
 	       		grid = N([]).grid(opts).bind();
 
@@ -492,6 +496,8 @@
 	    		gridEle.find("colgroup").remove();
 	    		gridEle.find("thead > tr:eq(0)").append(gridEle.find("thead > tr:eq(1) > th"));
 	    		gridEle.find("tbody > tr:eq(0)").append(gridEle.find("tbody > tr:eq(1) > td"));
+	    		gridEle.find("thead > tr:eq(1)").remove()
+	    		gridEle.find("tbody > tr:eq(1)").remove()
 	    		gridEle.find("thead > tr > th").width(150);
 	        });
 
