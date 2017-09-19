@@ -21,34 +21,48 @@
 			</ul>
 		</div>
 
-		<div style="height: 375px;">
-			<table id="grid" class="grid" style="width: 100%;">
-				<thead>
-					<tr>
-						<th width="9%">Index</th>
-						<th width="17%">Name</th>
-						<th width="*">Email</th>
-						<th width="11%">Gender</th>
-						<th width="13%">Eye Color</th>
-						<th width="7%">Age</th>
-						<th width="13%">Company</th>
-						<th width="12%">Active</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td id="index" align="center"></td>
-						<td id="name"></td>
-						<td id="email"></td>
-						<td id="gender" align="center"></td>
-						<td id="eyeColor" align="center"></td>
-						<td id="age"></td>
-						<td id="company"></td>
-						<td id="isActive" align="center"></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
+		<table id="grid" class="grid">
+			<colgroup>
+				<col style="width: 50px;">
+				<col style="width: 110px;">
+				<col style="width: 170px;">
+				<col style="width: 70px;">
+				<col style="width: 70px;">
+				<col style="width: 50px;">
+				<col style="width: 100px;">
+				<col style="width: 50px;">
+				<col style="width: 900px;">
+				<col style="width: 300px;">
+			</colgroup>
+			<thead>
+				<tr>
+					<th>index</th>
+					<th>name</th>
+					<th>email</th>
+					<th>gender</th>
+					<th>eye color</th>
+					<th>age</th>
+					<th>company</th>
+					<th>active</th>
+					<th>about</th>
+					<th>greeting</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td id="index" align="center"></td>
+					<td id="name"></td>
+					<td id="email"></td>
+					<td id="gender" align="center"></td>
+					<td id="eyeColor" align="center"></td>
+					<td id="age" align="center"></td>
+					<td id="company"></td>
+					<td id="isActive" align="center"></td>
+					<td id="about"></td>
+					<td id="greeting"></td>
+				</tr>
+			</tbody>
+		</table>
 		<br>
 		<div align="center">
 			<div id="pagination">
@@ -116,6 +130,7 @@ N(".exap0600").cont({
        		sortable : true,
        		hover : true,
        		select : true,
+       		fixedcol : 2,
        		onSelect : function(index, rowEle, data) {
        			// Grid row select event
             	N("#subContext", view).comm("html/exap/exap0601.html")

@@ -104,7 +104,25 @@
 			<td></td>
 			<td>
 				<p>그리드 바디(body)의 높이를 지정 합니다.</p>
-				<p>입력한 값이 0보다 크면 헤더고정형의 일반적인 그리드타입으로 초기화 되고 0을 입력하면 전체데이터를 한번에 표현하는 리스트형의 그리드로 초기화 됩니다.</p>
+				<p>입력한 값이 0보다 크면 헤더가 고정되고 그리드 바디에 스크롤이 생기면서 입력한 높이로 고정 됩니다. 0을 입력하면 헤더를 고정 하지 않고 모든데이터를 목록 형태로 화면에 표시 합니다.</p>
+				<p>Pagination 컴포넌트와 결합하여 목록을 페이징 한다면 0을 입력하여 모든 데이터가 한번에 표시되도록 설정 해 주세요.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>fixedcol</td>
+			<td>number</td>
+			<td>0</td>
+			<td></td>
+			<td>
+				<p>지정 한 열들을 고정 하고 나머지 열 들을 수평 스크롤 할 수 있게 해 줍니다.</p>
+				<p>0을 입력하면 열을 고정하지 않고 0이상 숫자를 입력 하면 해당 숫자(열개수) 만큼 앞에서 부터 열을 고정 해 줍니다.</p>
+				<p class="alert">그리드의 헤더나 바디가 2행 이상 세트로 구성있거나 height 옵션이 0보다 크면 작동하지 않습니다(추후 구현 예정).</p>
+				<p class="alert">고정 된 셀 들이 비 정상적으로 표시되면 아래
+					misc.fixedcolHeadMarginTop /
+					misc.fixedcolHeadHeight /
+					misc.fixedcolBodyMarginTop /
+					misc.fixedcolBodyBindHeight /
+					misc.fixedcolBodyAddHeight 옵션 값 들을 1씩 가감하여 조절 해 주세요.</p>
 			</td>
 		</tr>
 		<tr>
@@ -160,6 +178,11 @@
 				<p class="alert">
 					thaed 의 th 에 colspan 속성이 있을경우 컬럼 리사이즈 기능이 정상적으로 작동하지 않을 수 있습니다.
 				</p>
+				<p class="alert">리사이즈 된 셀 들이 비 정상적으로 표시되면 아래
+					misc.resizableCorrectionWidth /
+					misc.resizableLastCellCorrectionWidth /
+					misc.resizeBarCorrectionLeft /
+					misc.resizeBarCorrectionHeight 옵션 값 들을 1씩 가감하여 조절 해 주세요.</p>
 			</td>
 		</tr>
 		<tr>
@@ -423,7 +446,7 @@
 			<td>0</td>
 			<td></td>
 			<td>
-				컬럼 리사이징 시 홈페이지 상황에 따라 데이터 컬럼의 넓이와 헤더컬럼의 넓이가 어긋날 수 있는데 이때 이를 보정 할 수 있는 값
+				컬럼 리사이징 시 사이트의 CSS 구성 및 구현에 따라 데이터 컬럼의 넓이와 헤더컬럼의 넓이가 어긋날 수 있는데 이때 이를 보정 할 수 있는 값
 			</td>
 		</tr>
 		<tr>
@@ -432,7 +455,7 @@
 			<td>0</td>
 			<td></td>
 			<td>
-				컬럼 리사이징 시 홈페이지 상황에 따라 헤더고정형 중 마지막 컬럼 클릭 시 다른컬럼이 밀릴때 이를 보정 할 수 있는 값
+				컬럼 리사이징 시 사이트의 CSS 구성 및 구현에 따라 헤더고정형 중 마지막 컬럼 클릭 시 다른컬럼이 밀릴때 이를 보정 할 수 있는 값
 			</td>
 		</tr>
 		<tr>
@@ -441,7 +464,7 @@
 			<td>0</td>
 			<td></td>
 			<td>
-				컬럼 리사이징 시 홈페이지 상황에 따라 리사이즈바의 left 포지션이 컬럼 보더를 기준으로 가운데에 위치하지 않을때 이를 보정 할 수 있는 값
+				컬럼 리사이징 시 사이트의 CSS 구성 및 구현에 따라 리사이즈바의 left 포지션이 컬럼 보더를 기준으로 가운데에 위치하지 않을때 이를 보정 할 수 있는 값
 			</td>
 		</tr>
 		<tr>
@@ -450,7 +473,52 @@
 			<td>0</td>
 			<td></td>
 			<td>
-				컬럼 리사이징 시 홈페이지 상황에 따라 리사이즈 바의 높이가 꽉 차지 않을 수 있는데 이때 이를 보정 할 수 있는 값
+				컬럼 리사이징 시 사이트의 CSS 구성 및 구현에 따라 리사이즈 바의 높이가 꽉 차지 않을 수 있는데 이때 이를 보정 할 수 있는 값
+			</td>
+		</tr>
+		<tr>
+			<td>misc.fixedcolHeadMarginTop</td>
+			<td>number</td>
+			<td>0</td>
+			<td></td>
+			<td>
+				컬럼 고정 시 사이트의 CSS 구성 및 구현에 따라 고정 된 헤더 셀(TH)의 상단 위치가 맞지 않을 수 있는데 이때 이를 보정 할 수 있는 값
+			</td>
+		</tr>
+		<tr>
+			<td>misc.fixedcolHeadHeight</td>
+			<td>number</td>
+			<td>0</td>
+			<td></td>
+			<td>
+				컬럼 고정 시 사이트의 CSS 구성 및 구현에 따라 고정 된 헤더 셀(TH)의 높이가 맞지 않을 수 있는데 이때 이를 보정 할 수 있는 값
+			</td>
+		</tr>
+		<tr>
+			<td>misc.fixedcolBodyMarginTop</td>
+			<td>number</td>
+			<td>0</td>
+			<td></td>
+			<td>
+				컬럼 고정 시 사이트의 CSS 구성 및 구현에 따라 고정 된 바디 셀(TD)의 상단 위치가 맞지 않을 수 있는데 이때 이를 보정 할 수 있는 값
+			</td>
+		</tr>
+		<tr>
+			<td>misc.fixedcolBodyBindHeight</td>
+			<td>number</td>
+			<td>0</td>
+			<td></td>
+			<td>
+				컬럼 고정 시 사이트의 CSS 구성 및 구현에 따라 고정 된 바디 셀(TD)의 높이가 맞지 않을 수 있는데 이때 이를 보정 할 수 있는 값
+			</td>
+		</tr>
+		<tr>
+			<td>misc.fixedcolBodyAddHeight</td>
+			<td>number</td>
+			<td>1</td>
+			<td></td>
+			<td>
+				컬럼 고정 시 사이트의 CSS 구성 및 구현에 따라 고정 된 바디 셀(TD)의 높이가 맞지 않을 수 있는데 이때 이를 보정 할 수 있는 값
 			</td>
 		</tr>
 	</table>

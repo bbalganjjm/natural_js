@@ -8,17 +8,25 @@
 	<p lang="en_US" class="smallContTit">Default options : </p>
 	<table class="form">
 		<tr>
-			<th width="10%" align="right"><label for="context">context</label></th>
-			<td width="40%">
+			<th align="right"><label for="context">context</label></th>
+			<td colspan="3">
 				<input id="context" type="text" value="#grid" readonly="readonly" />
 				<label for="context" lang="ko_KR">jQuery selector 입력</label>
 				<label for="context" lang="en_US">Input jQuery selector</label>
 			</td>
+		</tr>
+		<tr>
 			<th width="10%" align="right"><label for="height">height</label></th>
 			<td width="40%">
 				<input id="height" type="text" value="395" style="width: 50px;" /><br>
 				<label for="height" lang="ko_KR">N.grid의 바디 영역 높이 값(0 이면 헤더를 고정하지 않습니다, 기본값은 0)</label>
 				<label for="height" lang="en_US">The height value of N.gird's body area(If this vlaue is 0, does not fix the header, Default value is 0)</label>
+			</td>
+			<th width="10%" align="right"><label for="fixedcol">fixedcol</label></th>
+			<td width="40%">
+				<input id="fixedcol" type="text" value="0" style="width: 50px;" /><br>
+				<label for="fixedcol" lang="ko_KR">입력한 숫자(열 개수) 만큼 앞에서 부터 열 스크롤이 고정 됩니다.</label>
+				<label for="fixedcol" lang="en_US">Fixed columns from the front by the number you enter (the number of columns).</label>
 			</td>
 		</tr>
 		<tr>
@@ -428,6 +436,7 @@
 	       		var opts = {
 	       			context : view.find(N("#context", view).val()),
 	       			height : parseInt(N.string.trimToZero(N("#height", view).val())),
+	       			fixedcol : parseInt(N.string.trimToZero(N("#fixedcol", view).val())),
 	       			validate : N("#validate", view).is(":checked"),
 	       			html : N("#html", view).is(":checked"),
 	       			addTop : N("#addTop", view).is(":checked"),
@@ -457,7 +466,11 @@
         			onBind : N.string.trimToNull(N("#onBind", view).val()) !== null ?
         				eval("(" + N("#onBind", view).val() + ")") : null,
 	        		windowScrollLock : N("#windowScrollLock", view).is(":checked"),
-	        		revert : N("#revert", view).is(":checked")
+	        		revert : N("#revert", view).is(":checked"),
+	        		misc : {
+	        			fixedcolHeadMarginTop : 0,
+	        			fixedcolBodyBindHeight : 1
+	        		}
 	       		}
 	       		grid = N([]).grid(opts).bind();
 
@@ -465,6 +478,25 @@
 	            N("#btnBind", view).instance("button").enable();
 
 	            N("#btnInit", view).instance("button").disable();
+	        });
+
+	    	N("#height", view).change(function(e) {
+	    		if($(this).val() > 0) {
+	    			N("#fixedcol", view).val("0");
+	    		}
+	        });
+
+	    	N("#fixedcol", view).change(function(e) {
+	    		if($(this).val() > 0) {
+	    			N("#height", view).val("0");
+	    		}
+
+	    		var gridEle = view.find(N("#context", view).val());
+	    		gridEle.find("[rowspan]").removeAttr("rowspan");
+	    		gridEle.find("colgroup").remove();
+	    		gridEle.find("thead > tr:eq(0)").append(gridEle.find("thead > tr:eq(1) > th"));
+	    		gridEle.find("tbody > tr:eq(0)").append(gridEle.find("tbody > tr:eq(1) > td"));
+	    		gridEle.find("thead > tr > th").width(150);
 	        });
 
 	    	N("#btnAdd", view).click(function(e) {
@@ -489,6 +521,9 @@
 	    	N("#btnBind", view).click(function(e) {
 	            e.preventDefault();
 	            N.comm("html/apid/data/grid.json").submit(function(data) {
+	            	if(N("#fixedcol", view).val() > 0) {
+	            		data = data.splice(0, 20);
+		    		}
 	            	grid.bind(data, N.string.trimToUndefined(N("#append", view).val()));
 		       	});
 
