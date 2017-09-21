@@ -63,7 +63,6 @@
 				</tr>
 			</tbody>
 		</table>
-		<br>
 		<div align="center">
 			<div id="pagination">
 				<ul>
@@ -131,6 +130,7 @@ N(".exap0600").cont({
        		hover : true,
        		select : true,
        		fixedcol : 2,
+       		createRowDelay : 0,
        		onSelect : function(index, rowEle, data) {
        			// Grid row select event
             	N("#subContext", view).comm("html/exap/exap0601.html")

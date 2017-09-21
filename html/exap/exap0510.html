@@ -114,7 +114,7 @@ N(".exap0500").cont({
             if(form.validate()) {
     			N(form.data()).comm("html/apid/data/grid.json").submit(function(data, request) {
              		// Data bind by N.grid
-             		grid.bind(data);
+             		grid.bind(data.splice(0, 15));
              	});
             }
         });
