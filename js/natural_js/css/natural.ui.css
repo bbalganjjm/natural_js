@@ -720,6 +720,83 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	-webkit-overflow-scrolling: touch;
 }
 
+/* Details popup */
+.grid__ .grid_more_colgroup_col__,
+.grid__ .grid_more_thead_col__ {
+	width: 30px;
+	text-align: center;
+	line-height: 0;
+}
+
+.grid__ .grid_more_tbody_col__ {
+	text-align: center;
+	line-height: 0;
+}
+
+.grid__ .grid_col_show_hide_btn__ {
+	line-height: 16px;
+}
+
+.grid__ .grid_col_show_hide_btn__ > span {
+	display: inline-block;
+	height: 16px;
+	width: 16px;
+	background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAu0lEQVQ4y2Ng6GD4TxEGE+0M/UAcQiLuRzYghIFUANKDywDGDkY/pk4mKZIMAGqQA7LbgZqDgPRs9l52JrhCdNzBIIPVBUDNSUD+QrYeNiYUm4g1AAaArpFg6WZhIdULYkAXWAFpGaDYThCfJAOYu5g5gOyVQLwXbAhC4WoM3MFggdULIGeDnE9WNHL0cjABXcHD3gMMfWAsoLiCyDAA+X07EM8HRyU5XmDsZFQBag6gOCWSYwCFmYkCDACiFrwVMc3R1AAAAABJRU5ErkJggg==') 0 0 no-repeat;
+}
+
+.grid__ .grid_more_btn__ {
+	line-height: 16px;
+}
+
+.grid__ .grid_more_btn__ > span {
+	display: inline-block;
+	height: 16px;
+	width: 16px;
+	background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAApUlEQVQ4y2NgIACYO5n5GDoYQhjacWCiQAdDDRD/x4pxmoxuQwdDFXYDcJkMVwD1ShczD5B/H7sBBPwC1MwFVLcftwvwGADVvBdJ010g7ibKAKBmDqD8biTN9xk7GeVQAhaXASxdLCDNO5E0PwRqVkCLnTqcBjB1MYHi/ziSZiWoJhlU9Xi8wNQJNmQtULMKXBCkFil2iIoFFDBcDSAHo5hIDoYCAFwgqLzXDQsEAAAAAElFTkSuQmCC') 0 0 no-repeat;
+}
+
+.grid_more_popup_contents__ > .grid_more_contents__ {
+}
+
+.grid_more_popup_contents__ > .grid_more_contents__ {
+	padding: 10px;
+}
+
+.grid_more_popup_contents__ > .grid_more_contents__ th {
+	text-align: right;
+	min-width: 100px;
+}
+
+.grid_more_popup_contents__ > .grid_more_contents__ .grid_more_thead_col__,
+.grid_more_popup_contents__ > .grid_more_contents__ .grid_more_tbody_col__ {
+	text-align: center;
+	vertical-align: middle;
+}
+
+.grid_more_popup_contents__ > .grid_more_contents__ td {
+	min-width: 250px;
+	max-width: 500px;
+	text-align: left;
+}
+
+.grid_more_popup_contents__ .btn_box__ {
+	text-align: center;
+	margin-bottom: 10px;
+}
+
+.grid_more_popup_contents__ .btn_box__ > .prev_btn__,
+.grid_more_popup_contents__ .btn_box__ > .next_btn__ {
+	border: 1px solid #88dd88;
+	line-height: 18px;
+	padding: 2px 5px 4px 5px;
+	border-radius: 3px;
+}
+
+.grid_more_popup_contents__ .btn_box__ .page__ {
+	margin: 0 10px;
+	font-size: 13px;
+}
+
 /* Tab */
 .tab__>ul {
 	list-style: none;

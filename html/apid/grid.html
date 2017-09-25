@@ -8,25 +8,31 @@
 	<p lang="en_US" class="smallContTit">Default options : </p>
 	<table class="form">
 		<tr>
-			<th align="right"><label for="context">context</label></th>
-			<td colspan="3">
+			<th width="10%" align="right"><label for="context">context</label></th>
+			<td width="40%">
 				<input id="context" type="text" value="#grid" readonly="readonly" />
 				<label for="context" lang="ko_KR">jQuery selector 입력</label>
 				<label for="context" lang="en_US">Input jQuery selector</label>
 			</td>
-		</tr>
-		<tr>
 			<th width="10%" align="right"><label for="height">height</label></th>
 			<td width="40%">
 				<input id="height" type="text" value="395" style="width: 50px;" /><br>
 				<label for="height" lang="ko_KR">N.grid의 바디 영역 높이 값(0 이면 헤더를 고정하지 않습니다, 기본값은 0)</label>
 				<label for="height" lang="en_US">The height value of N.gird's body area(If this vlaue is 0, does not fix the header, Default value is 0)</label>
 			</td>
-			<th width="10%" align="right"><label for="fixedcol">fixedcol</label></th>
-			<td width="40%">
+		</tr>
+		<tr>
+			<th align="right"><label for="fixedcol">fixedcol</label></th>
+			<td>
 				<input id="fixedcol" type="text" value="0" style="width: 50px;" /><br>
 				<label for="fixedcol" lang="ko_KR">입력한 숫자(열 개수) 만큼 앞에서 부터 열 스크롤이 고정 됩니다.</label>
 				<label for="fixedcol" lang="en_US">Fixed columns from the front by the number you enter (the number of columns).</label>
+			</td>
+			<th align="right"><label for="more">more</label></th>
+			<td>
+				<input id="more" type="checkbox" />
+				<label for="more" lang="ko_KR">체크(true)하면 상세 조회 팝업을 자동으로 생성 해 줍니다.</label>
+				<label for="more" lang="en_US">If this checkbox with check(true), automatically generate the detailed data popup.</label>
 			</td>
 		</tr>
 		<tr>
@@ -218,36 +224,36 @@
 			</td>
 		</tr>
 		<tr>
-			<th width="10%">add</th>
-			<th width="10%"><label for="addRow">arguments[0]</label></th>
-			<td width="80%">
+			<th>add</th>
+			<th><label for="addRow">arguments[0]</label></th>
+			<td>
 				<input id="addRow" type="text" value="" />
 				<label for="addRow" lang="ko_KR">추가할 행 인덱스, 입력하지 않으면 addTop 옵션의 설정이 적용 됨.</label>
 				<label for="addRow" lang="en_US">The row index to add, If not, the setting of addTop option is applied.</label>
 			</td>
 		</tr>
 		<tr>
-			<th width="10%">revert</th>
-			<th width="10%"><label for="rvtRow">arguments[0]</label></th>
-			<td width="80%">
+			<th>revert</th>
+			<th><label for="rvtRow">arguments[0]</label></th>
+			<td>
 				<input id="rvtRow" type="text" value="[0, 2, 3]" />
 				<label for="rvtRow" lang="ko_KR">복원 할 행 인덱스, 빈값 입력 시 모든 행 데이터 복원</label>
 				<label for="rvtRow" lang="en_US">The row index to revert, if set empty value, revert the all row data</label>
 			</td>
 		</tr>
 		<tr>
-			<th width="10%">remove</th>
-			<th width="10%"><label for="rmvRow">arguments[0]</label></th>
-			<td width="80%">
+			<th>remove</th>
+			<th><label for="rmvRow">arguments[0]</label></th>
+			<td>
 				<input id="rmvRow" type="text" value="[0, 2, 3]" />
 				<label for="rmvRow" lang="ko_KR">삭제 할 행 인덱스</label>
 				<label for="rmvRow" lang="en_US">The row index to remove</label>
 			</td>
 		</tr>
 		<tr>
-			<th width="10%" rowspan="3">val</th>
-			<th width="10%"><label for="row">arguments[0]</label></th>
-			<td width="80%">
+			<th rowspan="3">val</th>
+			<th><label for="row">arguments[0]</label></th>
+			<td>
 				<input id="row" type="text" value="0" />
 				<label for="row" lang="ko_KR">대상 행 인덱스</label>
 				<label for="row" lang="en_US">Target row index</label>
@@ -270,9 +276,9 @@
 			</td>
 		</tr>
 		<tr>
-			<th width="10%">data</th>
-			<th width="10%"><label for="data">arguments[0]</label></th>
-			<td width="80%">
+			<th>data</th>
+			<th><label for="data">arguments[0]</label></th>
+			<td>
 				<select id="data">
 					<option value="modified">modified</option>
 					<option value="insert">insert</option>
@@ -307,9 +313,9 @@
 			</td>
 		</tr>
 		<tr>
-			<th width="10%" rowspan="2">select</th>
-			<th width="10%"><label for="selectIndex">arguments[0]</label></th>
-			<td width="80%">
+			<th rowspan="2">select</th>
+			<th><label for="selectIndex">arguments[0]</label></th>
+			<td>
 				<input id="selectIndex" type="text" value="[0, 2]" />
 				<label for="selectIndex" lang="ko_KR">선택 할 행 인덱스</label>
 				<label for="selectIndex" lang="en_US">The row index to select</label>
@@ -324,9 +330,9 @@
 			</td>
 		</tr>
 		<tr>
-			<th width="10%" rowspan="2">check</th>
-			<th width="10%"><label for="checkIndex">arguments[0]</label></th>
-			<td width="80%">
+			<th rowspan="2">check</th>
+			<th><label for="checkIndex">arguments[0]</label></th>
+			<td>
 				<input id="checkIndex" type="text" value="[1, 3]" />
 				<label for="checkIndex" lang="ko_KR">체크 할 행 인덱스</label>
 				<label for="checkIndex" lang="en_US">The row index to check</label>
@@ -341,9 +347,27 @@
 			</td>
 		</tr>
 		<tr>
-			<th width="10%">validate</th>
-			<th width="10%"><label for="vldRow">arguments[0]</label></th>
-			<td width="80%">
+			<th>hide</th>
+			<th><label for="hideIndex">arguments[0]</label></th>
+			<td>
+				<input id="hideIndex" type="text" value="[1, 3]" />
+				<label for="hideIndex" lang="ko_KR">숨길 컬럼 인덱스</label>
+				<label for="hideIndex" lang="en_US">Column index to hide</label>
+			</td>
+		</tr>
+		<tr>
+			<th>show</th>
+			<th><label for="showIndex">arguments[0]</label></th>
+			<td>
+				<input id="showIndex" type="text" value="[1, 3]" />
+				<label for="showIndex" lang="ko_KR">숨김 해제 할 컬럼 인덱스</label>
+				<label for="showIndex" lang="en_US">Column index to unhide</label>
+			</td>
+		</tr>
+		<tr>
+			<th>validate</th>
+			<th><label for="vldRow">arguments[0]</label></th>
+			<td>
 				<input id="vldRow" type="text" />
 				<label for="vldRow" lang="ko_KR">검사 할 행 인덱스, 빈값 입력 시 모든 행 데이터 검사</label>
 				<label for="vldRow" lang="en_US">The row index to validate, if set empty value, validate the all row data</label>
@@ -364,6 +388,8 @@
 		<a id="btnData" href="#" data-opts='{ "color": "yellowgreen", "size": "large", "disable": true }'>data</a>
 		<a id="btnSelect" href="#" data-opts='{ "color": "yellowgreen", "size": "large", "disable": true }'>select</a>
 		<a id="btnCheck" href="#" data-opts='{ "color": "yellowgreen", "size": "large", "disable": true }'>check</a>
+		<a id="btnHide" href="#" data-opts='{ "color": "yellowgreen", "size": "large", "disable": true }'>hide</a>
+		<a id="btnShow" href="#" data-opts='{ "color": "yellowgreen", "size": "large", "disable": true }'>show</a>
 		<a id="btnValidate" href="#" data-opts='{ "color": "yellowgreen", "size": "large", "disable": true }'>validate</a>
 		<a id="btnReload" href="#" data-opts='{ "color": "white", "size": "large" }'>
 			<span lang="ko_KR">DEMO 초기화</span>
@@ -376,6 +402,7 @@
 	<table id="grid" class="grid" style="width: 100%;">
 		<colgroup>
 			<col style="width: 5%;">
+			<col style="width: 5%;">
 			<col style="width: 20%;">
 			<col style="width: 20%;">
 			<col style="width: auto;">
@@ -384,13 +411,13 @@
 		<thead>
 			<tr>
 				<th rowspan="2"><input id="checkAll" type="checkbox" /></th>
+				<th rowspan="2">index</th>
+				<th rowspan="2">name</th>
 				<th>eyeColor</th>
-				<th>name</th>
 				<th>company</th>
 				<th>gender</th>
 			</tr>
 			<tr>
-				<th>index</th>
 				<th>email</th>
 				<th>registered</th>
 				<th>isActive</th>
@@ -399,13 +426,13 @@
 		<tbody>
 			<tr>
 				<td align="center" valign="middle" rowspan="2"><input class="checkAllTarget" type="checkbox" /></td>
+				<td rowspan="2" id="index" align="center" valign="middle"></td>
+				<td rowspan="2" id="name"></td>
 				<td><input id="eyeColor" type="text" /></td>
-				<td id="name"></td>
 				<td><input id="company" type="text" data-validate='[["required"]]' /></td>
 				<td align="center"><input id="gender" type="radio" /></td>
 			</tr>
 			<tr>
-				<td id="index" align="center" valign="middle"></td>
 				<td><input id="email" type="text" data-validate='[["required"], ["email"]]' /></td>
 				<td><input id="registered" type="text" data-format='[["date", 8, "date"]]' /></td>
 				<td align="center"><input id="isActive" type="checkbox" /></td>
@@ -437,6 +464,7 @@
 	       			context : view.find(N("#context", view).val()),
 	       			height : parseInt(N.string.trimToZero(N("#height", view).val())),
 	       			fixedcol : parseInt(N.string.trimToZero(N("#fixedcol", view).val())),
+	       			more : N("#more", view).is(":checked"),
 	       			validate : N("#validate", view).is(":checked"),
 	       			html : N("#html", view).is(":checked"),
 	       			addTop : N("#addTop", view).is(":checked"),
@@ -585,6 +613,16 @@
 	        	} else {
 	        		grid.context().parent().alert(JSON.stringify(grid.check())).show();
 	        	}
+	        })
+
+	        N("#btnHide", view).click(function(e) {
+	    		e.preventDefault();
+	        	grid.hide(eval(N.string.trimToNull(N("#hideIndex", view).val())));
+	        })
+
+	        N("#btnShow", view).click(function(e) {
+	    		e.preventDefault();
+	    		grid.show(eval(N.string.trimToNull(N("#showIndex", view).val())));
 	        })
 
 	    	N("#btnValidate", view).click(function(e) {

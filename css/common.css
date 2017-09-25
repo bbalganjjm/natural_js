@@ -71,14 +71,14 @@ img {
 
 input[type='text'], input[type='password'], select, textarea {
 	border-radius: 3px;
-	padding: 3px;
+	padding: 2px 3px;
 	border: 1px solid #cccccc;
 	font-size: 13px;
 	font-family: "Nanum Gothic Coding", "Malgun Gothic", "dotum", "Segoe UI", sans-serif;
 	color: #004a00;
 	vertical-align: middle;
 	background-color: #ffffff;
-	line-height: 15px;
+	line-height: 18px;
 	border-color: #cceccc;
 }
 
@@ -369,7 +369,6 @@ article.apiDoc .apidemo {
 
 article.apiDoc .apidemo table th, article.apiDoc .apidemo table td, article.apiDoc .apidemo input[type='text'], article.apiDoc .apidemo input[type='password'], article.apiDoc .apidemo select, article.apiDoc .apidemo textarea {
 	font-size: 1em;
-	vertical-align: top;
 }
 
 article.apiDoc .apidemo table.grid th {

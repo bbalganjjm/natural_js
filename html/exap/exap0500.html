@@ -25,22 +25,36 @@
 	</div>
 
 	<table id="grid" class="grid" style="width: 100%;">
+		<colgroup>
+			<col style="width: 50px;">
+			<col style="width: 100px;">
+			<col style="width: auto;">
+			<col style="width: 70px;">
+			<col style="width: 90px;">
+			<col style="width: 50px;">
+			<col style="width: 110px;">
+			<col style="width: 60px;">
+		</colgroup>
 		<thead>
 			<tr>
-				<th width="9%">Index</th>
-				<th width="17%">Name</th>
-				<th width="*" data-filter="true">Email</th>
-				<th width="11%" data-filter="true">Gender</th>
-				<th width="13%" data-filter="true">Eye Color</th>
-				<th width="7%" data-filter="true">Age</th>
-				<th width="13%" data-filter="true">Registered</th>
-				<th width="12%" data-filter="true">Active</th>
+				<th rowspan="2">Index</th>
+				<th rowspan="2">Name</th>
+				<th data-filter="true">Email</th>
+				<th data-filter="true">Gender</th>
+				<th data-filter="true">Eye Color</th>
+				<th rowspan="2" data-filter="true">Age</th>
+				<th data-filter="true">Registered</th>
+				<th data-filter="true">Active</th>
+			</tr>
+			<tr>
+				<th colspan="3">About</th>
+				<th colspan="2">Greeting</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
-				<td id="index" align="center"></td>
-				<td><input id="name" type="text" data-validate='[["required"]]' /></td>
+				<td id="index" align="center" rowspan="2"></td>
+				<td rowspan="2"><input id="name" type="text" data-validate='[["required"]]' /></td>
 				<td><input id="email" type="text" data-validate='[["required"], ["email"]]' /></td>
 				<td align="center">
 					<select id="gender">
@@ -52,9 +66,13 @@
 						<option>선택</option>
 					</select>
 				</td>
-				<td><input id="age" type="text" data-validate='[["required"], ["integer"]]' /></td>
+				<td rowspan="2" align="center"><input id="age" type="text" data-validate='[["required"], ["integer"]]' /></td>
 				<td><input id="registered" type="text" data-format='[["date", 8, "date"]]' /></td>
 				<td align="center"><input id="isActive" type="checkbox" /></td>
+			</tr>
+			<tr>
+				<td id="about" colspan="3"></td>
+				<td id="greeting" colspan="2"></td>
 			</tr>
 		</tbody>
 	</table>
@@ -101,10 +119,10 @@ N(".exap0500").cont({
     	var grid = N([]).grid({
        		context : N("table#grid", view),
        		height : 350,
-       		resizable : true,
+       		resizable : false,
        		sortable : true,
        		hover : true,
-       		multiselect : true
+       		more : true
        	}).bind();
 
     	// 5. bind events
