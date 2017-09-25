@@ -20,7 +20,7 @@
 	 */
 	N.context.attr("core", {
 		/**
-		 * 로케일
+		 * 기본 로케일(N.locale 함수로 정의)
 		 */
 		"locale" : "ko_KR",
 		/**
@@ -31,11 +31,11 @@
 			"en_US" : {}
 		},
 		/**
-	     * 체크박스 선택시 기본 값
+	     * 체크박스가 1개 일 경우 선택 했을 때 기본 값
 	     */
 	    sgChkdVal : "Y", //Y, 1, on
 	    /**
-	     * 체크박스 선택 안됐을때 기본 값
+	     * 체크박스가 1개 일 경우 선택 안 했을 때 기본 값
 	     */
 	    sgUnChkdVal : "N", //N, 0, off
 	    /**
@@ -58,6 +58,7 @@
 	N.context.attr("architecture", {
 		/**
 		 * Natural-JS 의 구동영역(지정 필수)
+		 * Documents 컴포넌트를 사용하면 따로 지정 하지 않아도 됩니다.
 		 */
 		"page" : {
 			"context" : ".docs__ > .docs_contents__.visible__"
@@ -475,7 +476,9 @@
 	N.context.attr("ui", {
 		"alert" : {
 			/**
-			 * N.alert, N.popup 컴포넌트의 요소들이 저장 되는 영역
+			 * N.alert, N.popup 컴포넌트의 요소들이 저장 되는 영역(지정 필수)
+			 * N.context.attr("architecture").page.context 와 같게 설정해도 됩니다.
+			 * Documents 컴포넌트를 사용하면 따로 지정 하지 않아도 됩니다.
 			 */
 			"container" : ".docs__ > .docs_contents__.visible__",
 			/**
@@ -677,13 +680,21 @@
 					"empty" : "조회를 하지 않았거나 조회된 데이터가 없습니다.",
 					"search" : "검색",
 					"selectAll" : "전체선택",
-					"dFilter" : "데이터 필터"
+					"dFilter" : "데이터 필터",
+					"more" : "더보기",
+					"showHide" : "Column 감추기 / 보이기",
+					"prev" : "이전",
+					"next" : "다음"
 				},
 				"en_US" : {
 					"empty" : "No inquired data or no data available.",
 					"search" : "Search",
 					"selectAll" : "Select all",
-					"dFilter" : "Data filter"
+					"dFilter" : "Data filter",
+					"more" : "MORE",
+					"showHide" : "Column hide & show",
+					"prev" : "Previous",
+					"next" : "Next"
 				}
 			},
 			/**

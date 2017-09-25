@@ -755,6 +755,26 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAApUlEQVQ4y2NgIACYO5n5GDoYQhjacWCiQAdDDRD/x4pxmoxuQwdDFXYDcJkMVwD1ShczD5B/H7sBBPwC1MwFVLcftwvwGADVvBdJ010g7ibKAKBmDqD8biTN9xk7GeVQAhaXASxdLCDNO5E0PwRqVkCLnTqcBjB1MYHi/ziSZiWoJhlU9Xi8wNQJNmQtULMKXBCkFil2iIoFFDBcDSAHo5hIDoYCAFwgqLzXDQsEAAAAAElFTkSuQmCC') 0 0 no-repeat;
 }
 
+.grid__ .grid_more_thead_col__ .grid_more_panel__ {
+	border: 1px solid #cccccc;
+	background-color: #eeffee;
+	box-shadow: 0px 4px 12px #999;
+	border-radius: 5px 0 5px 5px;
+	padding: 4px;
+	z-index: 1;
+}
+
+.grid__ .grid_more_thead_col__ .grid_more_panel__ > .grid_more_col_list__ {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+.grid__ .grid_more_thead_col__ .grid_more_panel__ > .grid_more_col_list__ > .grid_more_cols__ {
+	padding: 0;
+	margin: 0;
+}
+
 .grid_more_popup_contents__ > .grid_more_contents__ {
 }
 
