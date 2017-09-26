@@ -626,6 +626,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .grid__>thead .data_filter_panel__ .data_filter_search__ .data_filter_search_btn__ {
 	line-height: 100%;
 	height: 24px;
+	width: 24px;
 	margin: 0 0 0 -42px;
 }
 
@@ -648,6 +649,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABbElEQVRIx+1UvWrCUBgVkc7i5CQdOhUHH6FoEvwb3Fylkw/gJF065AHcjNFuFvoAzh2cnBx8AunYUZwkxHPCF7hYuM01uogXDrl6P875vpNzk8nc17nLnthly7NmwBYIgB2wBPr1af0hFTlIhsBBSL8AFxgBayAENmjgKQ05SeaO7xT+TObZbZz9Aj/OxCmeYws7n/9TV0HNntOZdk/Pd+y8Nq49Au+nwHlPamlbgClKJgLbuCs8X0AYil1hvMfzm+cgfpaznokA0+Imqe1+dnMi+mYiwNSMov3Y0lrUmDbyMsHARIA5X+ssAiKLkKYOf+NZNRHok4hR1NU1Z80saleMKva5xAK8obxEzDmjqCH3ZJpF66OVTSwQjY4bys4k5y7TwhdKz8WWlWodo20swhsqn4iAZCpEfHHyn7mICJWYGkaRaeELpeckk0uZbhLdikVS25VURLHLv5iAKiIT8EvwelEBRcS/CvntryNzexxP/rmQ3QAAAABJRU5ErkJggg==') 0 0 no-repeat;
 	position: absolute;
 	right: 3px;
+	margin-top: 1px;
 }
 
 .grid__>thead .data_filter_panel__ .data_filter_checkall_box__ {
@@ -760,8 +762,25 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	background-color: #eeffee;
 	box-shadow: 0px 4px 12px #999;
 	border-radius: 5px 0 5px 5px;
-	padding: 4px;
+	padding: 5px;
+	text-align: left;
 	z-index: 1;
+}
+
+.grid__ .grid_more_thead_col__ .grid_more_panel__.visible__ {
+	transform: scale(1);
+	transform-origin: top right;
+	transition: transform 0.3s cubic-bezier(0.65, -0.01, 0.21, 1.36);
+}
+
+.grid__ .grid_more_thead_col__ .grid_more_panel__.hidden__ {
+	transform: scale(0);
+	transform-origin: top right;
+	transition: transform 0.15s cubic-bezier(0.65, -0.01, 0.21, 1);
+}
+
+.grid__ .grid_more_thead_col__ .grid_more_panel__ input[type=checkbox] {
+	margin: 0 2px 0 0;
 }
 
 .grid__ .grid_more_thead_col__ .grid_more_panel__ > .grid_more_col_list__ {
@@ -772,7 +791,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 .grid__ .grid_more_thead_col__ .grid_more_panel__ > .grid_more_col_list__ > .grid_more_cols__ {
 	padding: 0;
-	margin: 0;
+	margin: 3px 0 0 0;
 }
 
 .grid_more_popup_contents__ > .grid_more_contents__ {
