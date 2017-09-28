@@ -278,7 +278,7 @@
 			<tr>
 				<th><label for="balance">balance</label></th>
 				<td>
-					<input id="balance" type="text" data-format='[["cpno"]]' />
+					<input id="balance" type="text" data-format='[["numeric", "$#,###.##0"]]' data-validate='[["required"], ["decimal"]]' />
 				</td>
 			</tr>
 			<tr>
