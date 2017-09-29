@@ -45,7 +45,7 @@
 						<p class="alert">파라미터가 객체가 object 이면 string 으로 변환 되기 전 jquery object 화 된 원래 오브젝트가 반환 되고 element 이면 선택한 요소가 반환 됩니다.</p>
 					</li>
 				</ul>
-				<p class="alert">obj 를 가공하여 return 하면 가공 된 데이터를 모든 N.comm 을 이용한 요청의 파라미터(dataType:json)나 블록페이지 컨텍스트(dataType:html)로 지정 됩니다.</p>
+				<p class="alert">obj 를 가공하여 return 하면 가공 된 데이터가 모든 N.comm 을 이용한 요청의 파라미터(dataType:json)나 블록페이지 컨텍스트(dataType:html)로 지정 됩니다.</p>
 				<p class="alert">다음과 같이 Error 객체를 리턴하면 다음 단계의 필터가 실행 되지 않습니다.</p>
 				<pre class="line-numbers"><code class="language-javascript">
 ...
@@ -211,6 +211,11 @@ N.context.attr("architecture", {
 				 */
 				order : 1,
 				/**
+				 * N.comm 이 초기화 되기 전 실행됨(N.cont 의 init 아님). string 으로 변환되지 않은 원형의 파라미터를 꺼내올 수 있음.
+				 */
+				beforeInit : function(obj) {
+				},
+				/**
 				 * N.comm 이 초기화 된 후 실행됨(N.cont 의 init 아님)
 				 */
 				afterInit : function(request) {
@@ -239,6 +244,8 @@ N.context.attr("architecture", {
 			},
 			"exFilter2" : {
 				order : 2,
+				beforeInit : function(obj) {
+				},
 				afterInit : function(request) {
 				},
 				beforeSend : function(request, xhr, settings) {
