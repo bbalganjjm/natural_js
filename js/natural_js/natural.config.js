@@ -221,6 +221,11 @@
 			"filters" : {
 				"pageFilter" : {
 					/**
+					 * N.comm 이 초기화 되기 전 실행됨(N.cont 의 init 아님). string 으로 변환되지 않은 원형의 파라미터를 꺼내올 수 있음.
+					 */
+					beforeInit : function(obj) {
+					},
+					/**
 					 * N.comm 이 초기화 된 후 실행됨(N.cont 의 init 아님).
 					 */
 					afterInit : function(request) {
@@ -229,6 +234,7 @@
 								request.options.target.children(".view_context__:last").removeClass("visible__");
 							}
 						}
+						N.log(1)
 					},
 					/**
 					 * 서버에 요청을 보내기 전 실행됨.
@@ -237,12 +243,14 @@
 						if(request.options.dataType === "html" && request.options.target !== null && request.options.append === false) {
 							request.options.target.html('<table style="margin: 0;padding: 0;width: 100%;height: 100%;"><tr><td style="text-align: center;vertical-align: middle;border: 0;"><img src="images/loading.gif" height="24"></td></tr></table>');
 						}
+						N.log(2)
 					},
 					/**
 					 * 서버에 요청이 성공 했을 경우 실행됨.
 					 */
 					success : function(request, data, textStatus, xhr) {
 						// return data 를 하면 N.comm.submit 의 콜백의 인자로 넘어오는 data 가 리턴한 데이터로 치환 됨.
+						N.log(3)
 					},
 					/**
 					 * 서버에 요청 후 서버에러가 발생 했을 경우 실행됨.
@@ -264,6 +272,7 @@
 							// Multilingual handling
 					    	CommonUtilController.i18n(undefined, request.options.target);
 						}
+						N.log(4)
 					}
 				}
 			},

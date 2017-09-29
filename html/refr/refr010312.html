@@ -30,6 +30,34 @@
 			<td>정의한 필터 오브젝트의 실행 순서를 숫자로 지정 합니다.</td>
 		</tr>
 		<tr>
+			<td>beforeInit</td>
+			<td>function</td>
+			<td>undefined</td>
+			<td></td>
+			<td>
+				<p>모든 N.comm 이 초기화 전 실행 되는 함수 입니다.</p>
+
+				<p class="alert">Controller(N.cont) object 의 init 이 아니고 N.comm 에서 submit 함수를 호출하기 전 N.comm 라이브러리가 초기화 되기 전 실행 되는 함수 입니다.</p>
+				<p>인자는 다음과 같은 객체가 반환 됩니다.</p>
+				<ul>
+					<li>
+						obj : N(paramData).comm 에서 N(paramData) 오브젝트
+						<p class="alert">파라미터가 객체가 object 이면 string 으로 변환 되기 전 jquery object 화 된 원래 오브젝트가 반환 되고 element 이면 선택한 요소가 반환 됩니다.</p>
+					</li>
+				</ul>
+				<p class="alert">obj 가공하여 return 하면 가공 된 데이터를 모든 N.comm 을 이용한 요청에 파라미터나 반환 된 요소가 블록페이지 컨텍스트로 지정이 됩니다.</p>
+				<p class="alert">다음과 같이 Error 객체를 리턴하면 다음 단계의 필터가 실행 되지 않습니다.</p>
+				<pre class="line-numbers"><code class="language-javascript">
+...
+afterInit : function(request, data, textStatus, xhr) {
+    if(data &amp;&amp; data.fail){
+        return new Error("stop filter execution after this");
+    }
+}
+...</code></pre>
+			</td>
+		</tr>
+		<tr>
 			<td>afterInit</td>
 			<td>function</td>
 			<td>undefined</td>
