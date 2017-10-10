@@ -20,7 +20,7 @@
 	 */
 	N.context.attr("core", {
 		/**
-		 * 로케일
+		 * 기본 로케일(N.locale 함수로 정의)
 		 */
 		"locale" : "ko_KR",
 		/**
@@ -31,11 +31,11 @@
 			"en_US" : {}
 		},
 		/**
-	     * 체크박스 선택시 기본 값
+	     * 체크박스가 1개 일 경우 선택 했을 때 기본 값
 	     */
 	    sgChkdVal : "Y", //Y, 1, on
 	    /**
-	     * 체크박스 선택 안됐을때 기본 값
+	     * 체크박스가 1개 일 경우 선택 안 했을 때 기본 값
 	     */
 	    sgUnChkdVal : "N", //N, 0, off
 	    /**
@@ -45,7 +45,11 @@
 	    /**
 	     * N.context.attr("architecture").page.context 로 페이지가 전환될때 마다 실행될 가비지 컬렉터의 모드
 	     */
-	    gcMode : "full" //minimum, full
+	    gcMode : "full", //minimum, full
+	    /**
+	     * N.string.byteLength 함수 및 maxbyte / minbyte / rangebyte 룰에서 영문, 숫자, 기본 특수문자등을 제외한 한글, 한글특수 문자 등의 기본 바이트 길이를 설정
+	     */
+	    charByteLength : 3
 	});
 
 	/**
@@ -54,6 +58,7 @@
 	N.context.attr("architecture", {
 		/**
 		 * Natural-JS 의 구동영역(지정 필수)
+		 * Documents 컴포넌트를 사용하면 따로 지정 하지 않아도 됩니다.
 		 */
 		"page" : {
 			"context" : ".docs__ > .docs_contents__.visible__"
@@ -144,6 +149,11 @@
 					 * 필터 실행 순서
 					 */
 					order : 1,
+					/**
+					 * N.comm 이 초기화 되기 전 실행됨(N.cont 의 init 아님). string 으로 변환되지 않은 원형의 파라미터를 꺼내올 수 있음.
+					 */
+					beforeInit : function(obj) {
+					},
 					/**
 					 * N.comm 이 초기화 된 후 실행됨(N.cont 의 init 아님)
 					 */
@@ -314,9 +324,9 @@
 					maxlength : "{0} 글자 이하만 입력 가능합니다.",
 					minlength : "{0} 글자 이상만 입력 가능합니다.",
 					rangelength : "{0} 글자 에서 {1} 글자 까지만 입력 가능합니다.",
-					maxbyte : "{0} 바이트 이하만 입력 가능합니다.<br> - 영문, 숫자 : 1 바이트<br> - 한글, 특수문자 : 3 바이트",
-					minbyte : "{0} 바이트 이상만 입력 가능합니다.<br> - 영문, 숫자 : 1 바이트<br> - 한글, 특수문자 : 3 바이트",
-					rangebyte : "{0} 바이트 에서 {1} 바이트 까지만 입력 가능합니다.<br> - 영문, 숫자 한글자 : 1 바이트<br> - 한글, 특수문자 : 3 바이트",
+					maxbyte : "{0} 바이트 이하만 입력 가능합니다.<br> - 영문, 숫자 : 1 바이트<br> - 한글, 특수문자 : {1} 바이트",
+					minbyte : "{0} 바이트 이상만 입력 가능합니다.<br> - 영문, 숫자 : 1 바이트<br> - 한글, 특수문자 : {1} 바이트",
+					rangebyte : "{0} 바이트 에서 {1} 바이트 까지만 입력 가능합니다.<br> - 영문, 숫자 한글자 : 1 바이트<br> - 한글, 특수문자 : {2} 바이트",
 					maxvalue : "{0} 이하의 값만 입력 가능합니다.",
 					minvalue : "{0} 이상의 값만 입력 가능합니다.",
 					rangevalue : "{0} 에서 {1} 사이의 값만 입력 가능합니다.",
@@ -381,7 +391,9 @@
 	N.context.attr("ui", {
 		"alert" : {
 			/**
-			 * Popup Element 가 담길 영역
+			 * N.alert, N.popup 컴포넌트의 요소들이 저장 되는 영역(지정 필수)
+			 * N.context.attr("architecture").page.context 와 같게 설정해도 됩니다.
+			 * Documents 컴포넌트를 사용하면 따로 지정 하지 않아도 됩니다.
 			 */
 			"container" : ".docs__ > .docs_contents__.visible__",
 			/**
@@ -491,13 +503,21 @@
 					"empty" : "조회를 하지 않았거나 조회된 데이터가 없습니다.",
 					"search" : "검색",
 					"selectAll" : "전체선택",
-					"dFilter" : "데이터 필터"
+					"dFilter" : "데이터 필터",
+					"more" : "더보기",
+					"showHide" : "Column 감추기 / 보이기",
+					"prev" : "이전",
+					"next" : "다음"
 				},
 				"en_US" : {
 					"empty" : "No inquired data or no data available.",
 					"search" : "Search",
 					"selectAll" : "Select all",
-					"dFilter" : "Data filter"
+					"dFilter" : "Data filter",
+					"more" : "MORE",
+					"showHide" : "Column hide & show",
+					"prev" : "Previous",
+					"next" : "Next"
 				}
 			},
 			/**
@@ -519,7 +539,27 @@
 				/**
 				 * 리사이즈바의 높이가 밑에까지 꽉 차지 않을때 아래 수치 조절(기본값 : 0)
 				 */
-				"resizeBarCorrectionHeight" : 0
+				"resizeBarCorrectionHeight" : 0,
+				/**
+				 * 컬럼 고정 시 고정 된 헤더 셀(TH)의 상단 위치가 맞지 않을때 아래 수치 조절(기본값 : 0)
+				 */
+				"fixedcolHeadMarginTop" : 0,
+				/**
+				 * 컬럼 고정 시 고정 된 헤더 셀(TH)의 높이가 맞지 않을때 아래 수치 조절(기본값 : 0)
+				 */
+				"fixedcolHeadHeight" : 0,
+				/**
+				 * 컬럼 고정 시 고정 된 바디 셀(TD)의 상단 위치가 맞지 않을때 아래 수치 조절(기본값 : 0)
+				 */
+				"fixedcolBodyMarginTop" : 0,
+				/**
+				 * 컬럼 고정 시 데이터를 바인드 할 때 고정 된 바디 셀(TD)의 높이가 맞지 않을때 아래 수치 조절(기본값 : 0)
+				 */
+				"fixedcolBodyBindHeight" : 0,
+				/**
+				 * 컬럼 고정 시 데이터를 Add 할 때 고정 된 바디 셀(TD)의 높이가 맞지 않을때 아래 수치 조절(기본값 : 1)
+				 */
+				"fixedcolBodyAddHeight" : 1
 			}
 		}
 	});
