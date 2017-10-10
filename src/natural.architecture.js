@@ -1,5 +1,5 @@
 /*!
- * Natural-ARCHITECTURE v0.8.1.13
+ * Natural-ARCHITECTURE v0.8.1.15
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-ARCHITECTURE"] = "0.8.1.13";
+	N.version["Natural-ARCHITECTURE"] = "0.8.1.15";
 
 	$.fn.extend($.extend(N.prototype, {
 		ajax : function(opts) {
@@ -29,6 +29,8 @@
 		// Ajax
 		var Ajax = N.ajax = $.ajax;
 
+		var filterConfig;
+
 		// Communicator
 		var Communicator = N.comm = function(obj, url) {
 			if (obj === undefined) {
@@ -39,6 +41,27 @@
 					obj = $();
 				}
 			}
+
+			if(filterConfig === undefined) {
+				filterConfig = Communicator.initFilterConfig();
+			}
+
+			var isFilterStopped = false;
+			// request filter
+			$(filterConfig.beforeInitFilters).each(function(i) {
+				var jo;
+				if((jo = this(obj)) instanceof Error){
+					isFilterStopped = true;
+					return false;
+				};
+				if(jo !== undefined) {
+					obj = $(jo);
+				}
+			});
+			if(isFilterStopped) return obj;
+
+
+
 
 			obj.request = new Communicator.request(obj, N.isString(url) ? {
 				"url" : url
@@ -61,17 +84,8 @@
 
 		$.extend(Communicator, {
 			xhr : null,
-			submit : function(callback) {
-				var obj = this;
-				if (N.isElement(obj)) {
-					$.extend(this.request.options, {
-						contentType : "text/html; charset=UTF-8",
-						dataType : "html",
-						type : "GET"
-					});
-					this.request.options.target = obj;
-				}
-
+			initFilterConfig : function() {
+				var beforeInitFilters = [];
 				var afterInitFilters = [];
 				var beforeSendFilters = [];
 				var successFilters = [];
@@ -97,8 +111,10 @@
 				$(orderedFilterKeys).each(function() {
 					var kArr = this.split(spltSepa);
 					var k = kArr.length > 1 ? kArr[1] : kArr[0];
-					for ( var filterKey in filters[k]) {
-						if (filterKey === "afterInit") {
+					for (var filterKey in filters[k]) {
+						if (filterKey === "beforeInit") {
+							beforeInitFilters.push(filters[k][filterKey]);
+						} else if (filterKey === "afterInit") {
 							afterInitFilters.push(filters[k][filterKey]);
 						} else if (filterKey === "beforeSend") {
 							beforeSendFilters.push(filters[k][filterKey]);
@@ -112,9 +128,29 @@
 					}
 				});
 
+				return {
+					"beforeInitFilters" : beforeInitFilters,
+					"afterInitFilters" : afterInitFilters,
+					"beforeSendFilters" : beforeSendFilters,
+					"successFilters" : successFilters,
+					"errorFilters" : errorFilters,
+					"completeFilters" : completeFilters
+				}
+			},
+			submit : function(callback) {
+				var obj = this;
+				if (N.isElement(obj)) {
+					$.extend(this.request.options, {
+						contentType : "text/html; charset=UTF-8",
+						dataType : "html",
+						type : "GET"
+					});
+					this.request.options.target = obj;
+				}
+
 				var isFilterStopped = false;
 				// request filter
-				$(afterInitFilters).each(function(i) {
+				$(filterConfig.afterInitFilters).each(function(i) {
 					if(this(obj.request) instanceof Error){
 						isFilterStopped = true;
 						return false;
@@ -126,7 +162,7 @@
 					beforeSend : function(xhr, settings) {
 					    var isFilterStopped = false;
 						// request filter
-						$(beforeSendFilters).each(function(i) {
+						$(filterConfig.beforeSendFilters).each(function(i) {
 							if(this(obj.request, xhr, settings) instanceof Error){
 								isFilterStopped = true;
 								return false;
@@ -137,7 +173,7 @@
 					success : function(data, textStatus, xhr) {
 					    var isFilterStopped = false;
 						// request filter
-						$(successFilters).each(function(i) {
+						$(filterConfig.successFilters).each(function(i) {
 							var fData = this(obj.request, data, textStatus, xhr);
 							if(fData instanceof Error){
 								isFilterStopped = true;
@@ -201,7 +237,7 @@
 					error : function(xhr, textStatus, errorThrown) {
 						var isFilterStopped = false;
 						// request filter
-						$(errorFilters).each(function(i) {
+						$(filterConfig.errorFilters).each(function(i) {
 							if(this(obj.request, xhr, textStatus, errorThrown) instanceof Error){
 								isFilterStopped = true;
 								return false;
@@ -213,7 +249,7 @@
 					complete : function(xhr, textStatus) {
 						var isFilterStopped = false;
 						// request filter
-						$(completeFilters).each(function(i) {
+						$(filterConfig.completeFilters).each(function(i) {
 							if(this(obj.request, xhr, textStatus) instanceof Error){
 								isFilterStopped = true;
 								return false;
