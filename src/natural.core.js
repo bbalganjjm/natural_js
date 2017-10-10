@@ -1,5 +1,5 @@
 /*!
- * Natural-CORE v0.8.6.11
+ * Natural-CORE v0.8.7.0
  * bbalganjjm@gmail.com
  *
  * Includes formatdate.js & Mask JavaScript API
@@ -13,6 +13,13 @@
  */
 (function(window, $) {
 	var N;
+
+	// array.indexOf polyfill
+	if (!Array.prototype.indexOf) {
+		Array.prototype.indexOf = function(val) {
+	    	return jQuery.inArray(val, this);
+	    };
+	}
 
 	// Use jQuery init
 	N = function(selector, context) {
@@ -231,7 +238,25 @@
 	        	}
 	    	}
 	    	return "";
-	    }
+	    },
+	    /**
+		 * Returns the event bound to an element.
+	     */
+	    events : function(eventName, namespace) {
+	    	var ele = $(this);
+			if(ele.length > 0 && $._data(ele.get(0), "events") !== undefined) {
+				if(eventName !== undefined && namespace !== undefined) {
+					var e_ = $($._data(ele.get(0), "events")[eventName]).filter(function() {
+						return namespace === this.namespace;
+					}).get();
+					return N.isEmptyObject(e_) ? undefined : e_;
+				} else if(eventName !== undefined && namespace === undefined) {
+					return $._data(ele.get(0), "events")[eventName];
+				} else {
+					return $._data(ele.get(0), "events");
+				}
+			}
+		}
 	}));
 
 	// Extend regexp filter selector to jQuery filter selector
@@ -276,7 +301,7 @@
 		// N local variables
 		$.extend(N, {
 			version : {
-				"Natural-CORE" : "0.8.6.11"
+				"Natural-CORE" : "0.8.7.0"
 			},
 			/**
 			 * Set and get locale value
@@ -431,9 +456,10 @@
 				minimum : function() {
 					$(window).unbind("resize.datepicker");
 					$(window).unbind("resize.alert");
-					$(window.document).unbind("click.datepicker");
-					$(window.document).unbind("keyup.alert");
-					$(window.document).unbind("click.grid.dataFilter touchstart.grid.dataFilter");
+					$(document).unbind("click.datepicker");
+					$(document).unbind("keyup.alert");
+					$(document).unbind("click.grid.dataFilter touchstart.grid.dataFilter");
+					$(document).unbind("click.grid.more touchstart.grid.more");
 					return true;
 				},
 				/**
@@ -442,12 +468,13 @@
 				full : function() {
 					$(window).unbind("resize.datepicker");
 					$(window).unbind("resize.alert");
-					$(window.document).unbind("dragstart.alert selectstart.alert mousemove.alert touchmove.alert mouseup.alert touchend.alert");
-					$(window.document).unbind("click.datepicker");
-					$(window.document).unbind("keyup.alert");
-					$(window.document).unbind("dragstart.grid.vResize selectstart.grid.vResize mousemove.grid.vResize touchmove.grid.vResize mouseup.grid.vResize touchend.grid.vResize");
-					$(window.document).unbind("dragstart.grid.resize selectstart.grid.resize mousemove.grid.resize touchmove.grid.resize mouseup.grid.resize touchend.grid.resize");
-					$(window.document).unbind("click.grid.dataFilter touchstart.grid.dataFilter");
+					$(document).unbind("dragstart.alert selectstart.alert mousemove.alert touchmove.alert mouseup.alert touchend.alert");
+					$(document).unbind("click.datepicker");
+					$(document).unbind("keyup.alert");
+					$(document).unbind("dragstart.grid.vResize selectstart.grid.vResize mousemove.grid.vResize touchmove.grid.vResize mouseup.grid.vResize touchend.grid.vResize");
+					$(document).unbind("dragstart.grid.resize selectstart.grid.resize mousemove.grid.resize touchmove.grid.resize mouseup.grid.resize touchend.grid.resize");
+					$(document).unbind("click.grid.dataFilter touchstart.grid.dataFilter");
+					$(document).unbind("click.grid.more touchstart.grid.more");
 					return true;
 				}
 			},
@@ -498,9 +525,12 @@
 				isEmpty : function(str) {
 					return $.trim(str).length === 0 ? true : false;
 				},
-				byteLength : function(str) {
+				byteLength : function(str, charByteLength) {
+					if(charByteLength === undefined) {
+						charByteLength = N.context.attr("core").charByteLength !== undefined ? N.context.attr("core").charByteLength : 3;
+					}
 					return (function(s,b,i,c){
-			        	for(b=i=0;c=s.charCodeAt(i++);b+=c>>11?3:c>>7?2:1){};
+			        	for(b=i=0;c=s.charCodeAt(i++);b+=c>>11?charByteLength:c>>7?2:1){};
 			        	return b;
 			        })(str);
 				},
@@ -1442,14 +1472,14 @@
 
 		this.setGeneric = function(_v, _d) {
 			var v = _v, m = this.format;
-			var r = "@#*", rt = [], nv = "", t, x, a = [], j = 0, rx = {
-				"@" : "A-Za-z",
-				"#" : "0-9",
-				"*" : "A-Za-z0-9"
+			var r = "@#~", rt = [], nv = "", t, x, a = [], j = 0, rx = {
+				"@" : "a-zA-Z가-힣ㄱ-ㅎㅏ-ㅣ\x20\s",
+				"#" : "0-9\s",
+				"~" : "0-9a-zA-Z가-힣ㄱ-ㅎㅏ-ㅣ\x20\s"
 			};
 
 			// strip out invalid characters
-			v = v.replace(new RegExp("[^" + rx["*"] + "]", "gi"), "");
+			v = v.replace(new RegExp("[^" + rx["~"] + "]", "gi"), "");
 			if ((_d === true) && (v.length == this.strippedValue.length)) {
 				v = v.substring(0, v.length - 1);
 			}
