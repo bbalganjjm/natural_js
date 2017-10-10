@@ -1,5 +1,5 @@
 /*!
- * Natural-DATA v0.8.2.20
+ * Natural-DATA v0.8.2.24
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-		N.version["Natural-DATA"] = "0.8.2.20";
+		N.version["Natural-DATA"] = "0.8.2.24";
 
 	$.fn.extend($.extend(N.prototype, {
 		datafilter : function(callBack) {
@@ -239,7 +239,10 @@
 				}
 				return str;
 			},
-			"cno" : function(str, args) {
+			/**
+			 * Korean business registration number
+			 */
+			"kbrn" : function(str, args) {
 				if (N.string.trimToEmpty(str).length < 5) {
 					return str;
 				}
@@ -249,6 +252,19 @@
 					str = str.substring(0, 10);
 				}
 				return str.substring(0, 3) + "-" + str.substring(3, 5) + "-" + str.substring(5, 10);
+			},
+			/**
+			 * Deprecated.
+			 * Use kbrn rule.
+			 */
+			"cno" : function(str, args) {
+				return this.kbrn(str);
+			},
+			/**
+			 * Korean corporation number
+			 */
+			"kcn" : function(str, args) {
+				return this.rrn(str);
 			},
 			"upper" : function(str, args) {
 				if (N.isEmptyObject(str)) {
@@ -788,7 +804,7 @@
 			},
 			/**
 			 * Deprecated 2017.07.26
-			 * ssn to rrn
+			 * Use rrn rule
 			 * TODO Later, "ssn" will be replaced by the US Social Security Number
 			 */
 			"ssn" : function(str, args) {
@@ -825,17 +841,27 @@
 				if (Number(str.charAt(6)) >= 5 && Number(str.charAt(6)) <= 8) {
 					return this.frn();
 				} else {
-					return this.ssn();
+					return this.rrn();
 				}
 			},
 			/**
 			 * Deprecated 2017.07.26
-			 * frn_ssn to frn_rrn
+			 * Use frn_rrn rule
 			 */
 			"frn_ssn" : function(str, args) {
 				return this.frn_rrn(str, args);
 			},
+			/**
+			 * Deprecated 2017.09.26
+			 * Use kbrn rule
+			 */
 			"cno" : function(str, args) {
+				return this.kbrn(str, args);
+			},
+			/**
+			 * Korean business registration number
+			 */
+			"kbrn" : function(str, args) {
 				var re = /-/g;
 				var bizID = str.replace(re, '');
 				var checkID = new Array(1, 3, 7, 1, 3, 7, 1, 3, 5, 1);
@@ -855,7 +881,17 @@
 				}
 				return false;
 			},
+			/**
+			 * Deprecated 2017.09.26
+			 * Use kcn rule
+			 */
 			"cpno" : function(str, args) {
+				return this.kcn(str, args);
+			},
+			/**
+			 * Korean corporation number
+			 */
+			"kcn" : function(str, args) {
 				var numStr = N.string.trim(str).replace(/-/g, '');
 				if (numStr.length != 13) {
 					return false;
@@ -1010,20 +1046,29 @@
 				if (args === undefined || args[0] === undefined) {
 					throw new Error("[Validator.maxbyte]You must input args[0](maximum byte)");
 				}
-				return N.string.byteLength(N.string.trimToEmpty(str)) <= Number(N.string.trimToZero(args[0]));
+				if(args[1] === undefined) {
+					args[1] = N.context.attr("core").charByteLength;
+				}
+				return N.string.byteLength(N.string.trimToEmpty(str), args[1]) <= Number(N.string.trimToZero(args[0]));
 			},
 			"minbyte" : function(str, args) {
 				if (args === undefined || args[0] === undefined) {
 					throw new Error("[Validator.minbyte]You must input args[0](minimum byte)");
 				}
-				return Number(N.string.trimToZero(args[0])) <= N.string.byteLength(N.string.trimToEmpty(str));
+				if(args[1] === undefined) {
+					args[1] = N.context.attr("core").charByteLength;
+				}
+				return Number(N.string.trimToZero(args[0])) <= N.string.byteLength(N.string.trimToEmpty(str), args[1]);
 			},
 			"rangebyte" : function(str, args) {
 				if (args === undefined || args.length < 2) {
 					throw new Error("[Validator.rangebyte]You must input args[0](minimum byte) and args[1](maximum byte)");
 				}
-				return Number(N.string.trimToZero(args[0])) <= N.string.byteLength(N.string.trimToEmpty(str)) &&
-						N.string.byteLength(N.string.trimToEmpty(str)) <= Number(N.string.trimToZero(args[1]));
+				if(args[2] === undefined) {
+					args[2] = N.context.attr("core").charByteLength;
+				}
+				return Number(N.string.trimToZero(args[0])) <= N.string.byteLength(N.string.trimToEmpty(str), args[2]) &&
+						N.string.byteLength(N.string.trimToEmpty(str), args[2]) <= Number(N.string.trimToZero(args[1]));
 			},
 			"maxvalue" : function(str, args) {
 				if (args === undefined || args[0] === undefined) {
