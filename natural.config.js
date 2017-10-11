@@ -45,11 +45,16 @@
 	    /**
 	     * N.context.attr("architecture").page.context 로 페이지가 전환될때 마다 실행될 가비지 컬렉터의 모드
 	     */
-	    gcMode : "full", //minimum, full
+	    gcMode : "minimum", //minimum, full
 	    /**
 	     * N.string.byteLength 함수 및 maxbyte / minbyte / rangebyte 룰에서 영문, 숫자, 기본 특수문자등을 제외한 한글, 한글특수 문자 등의 기본 바이트 길이를 설정
 	     */
-	    charByteLength : 3
+	    charByteLength : 3,
+	    /**
+		 * N.json.mapFromKeys 함수에서 필터링 제외 할 키값, N.grid 나 N.form 등 data() 메서드를
+		 * 제공하는 컴포넌트에도 같이 적용됨.
+		 */
+		excludeMapFromKeys : [ "rowStatus" ]
 	});
 
 	/**
@@ -189,7 +194,7 @@
 					 * GET 으로 되어 있으면 JSON 형태의 파라미터가 q라는 파라미터명으로 q={a:1} 와 같이 전달 됩니다.
 					 * JSON Object String 을 Request Body에 온전히 서버로 전송하려면 반드시 POST로 바꿔 주시기 바랍니다.
 					 */
-					"type" : "GET",
+					"type" : "POST",
 					/**
 					 * 기본 contentType
 					 */
@@ -402,10 +407,13 @@
 			"global" : {
 				"okBtnStyle" : {
 					color : "yellowgreen",
-					size : "medium"
+					size : "medium",
+					iconClass : "btn_ok"
 				},
 				"cancelBtnStyle" : {
-					size : "medium"
+					color : "white",
+					size : "medium",
+					iconClass : "btn_cancel"
 				}
 			},
 			/**
@@ -437,13 +445,18 @@
 			"message" : {
 				"ko_KR" : {
 					"confirm" : "확인",
-					"cancel" : "취소"
+					"cancel" : "취소",
+					"close" : "닫기"
 				},
 				"en_US" : {
 					"confirm" : "OK",
-					"cancel" : "Cancel"
+					"cancel" : "Cancel",
+					"close" : "Close"
 				}
 			}
+		},
+		"button" : {
+			"customStyle" : true
 		},
 		"popup" : {
 
@@ -496,7 +509,7 @@
 				"desc" : "▲"
 			},
 			/**
-			 * 다국어 메시지
+			 * Grid 에서 사용 할 메시지 다국어 처리
 			 */
 			"message" : {
 				"ko_KR" : {
