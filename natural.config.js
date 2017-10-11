@@ -51,8 +51,7 @@
 	     */
 	    charByteLength : 3,
 	    /**
-		 * N.json.mapFromKeys 함수에서 필터링 제외 할 키값, N.grid 나 N.form 등 data() 메서드를
-		 * 제공하는 컴포넌트에도 같이 적용됨.
+		 * N.json.mapFromKeys 함수에서 필터링 제외 할 키값, N.grid 나 N.form 등 data() 메서드를 제공하는 컴포넌트에도 같이 적용됨.
 		 */
 		excludeMapFromKeys : [ "rowStatus" ]
 	});
@@ -189,12 +188,6 @@
 			},
 			"request" : {
 				"options" : {
-					/**
-					 * 기본 Request Method
-					 * GET 으로 되어 있으면 JSON 형태의 파라미터가 q라는 파라미터명으로 q={a:1} 와 같이 전달 됩니다.
-					 * JSON Object String 을 Request Body에 온전히 서버로 전송하려면 반드시 POST로 바꿔 주시기 바랍니다.
-					 */
-					"type" : "POST",
 					/**
 					 * 기본 contentType
 					 */
