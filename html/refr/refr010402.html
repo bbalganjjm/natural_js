@@ -85,7 +85,7 @@
 			<td>trim 후 값이 없으면 valStr 값으로 표시</td>
 		</tr>
 		<tr>
-			<td>["date", 4|6|8|10|12|14, "month"|"date"]</td>
+			<td>["date", 4|6|8|10|12|14, "month"|"date", { "datepicker options" : "" }]</td>
 			<td>
 				<p>날짜 형식으로 표시. </p>
 				<p>기본 날짜형식은 N.context.attr(&quot;data&quot;).formatter.date 에서 설정 가능 합니다.</p>
@@ -103,6 +103,7 @@
 					<li>date : Datepicker 표시 </li>
 					<li>month : Monthpicker 표시</li>
 				</ul>
+				<p>네 번째 인자는 Datepicker 컴포넌트의 옵션들을 JSON String 형태로 넣으면 옵션이 적용 됩니다.</p>
 			</td>
 		</tr>
 		<tr>
