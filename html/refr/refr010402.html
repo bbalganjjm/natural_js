@@ -87,7 +87,7 @@
 		<tr>
 			<td>["date", 4|6|8|10|12|14, "month"|"date", { "datepicker options" : "" }]</td>
 			<td>
-				<p>날짜 형식으로 표시. </p>
+				<p>날짜 형식으로 표시</p>
 				<p>기본 날짜형식은 N.context.attr(&quot;data&quot;).formatter.date 에서 설정 가능 합니다.</p>
 				<p>1. 다음은 두 번째 인자 값들에 대한 설명 입니다.</p>
 				<p class="alert">대쉬(-), 콜론(:) 등의 날짜와 시간을 구분하는 문자는 Config(N.config, natural.config.js 파일) 의 N.context.attr("data").formatter.date 오브젝트의 함수들로 정의 되어 있습니다. 날짜/시간 구분 문자는 해당 위치에서 변경 가능 합니다.</p>
@@ -121,6 +121,12 @@
 					<li>month : Monthpicker 표시</li>
 				</ul>
 				<p>3. 네 번째 인자는 Datepicker 컴포넌트의 옵션들을 JSON String 형태로 넣으면 옵션이 적용 됩니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>["time"]</td>
+			<td>
+				<p>시간 형식으로 표시</p>
 			</td>
 		</tr>
 		<tr>
