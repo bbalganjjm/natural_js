@@ -1055,10 +1055,64 @@ $.when.apply($, defers).done(function(arg0, agr1, arg2, agr3) {
 	</table>
 
 	<h4>
+		<span lang="ko_KR">N.element 객체의 함수</span>
+		<span lang="en_US">N.element Object's Methods</span>
+	</h4>
+	<p>"N.element.아래함수명(arg[0...N])" 과 같이 사용하면 됩니다.</p>
+	<table>
+		<tr>
+			<th style="width: 10%;">Name</th>
+			<th style="width: 9%;">Arguments</th>
+			<th style="width: 9%;">Type</th>
+			<th style="width: 9%;">Return</th>
+			<th style="width: auto;">Description</th>
+		</tr>
+		<tr>
+			<td>toData</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>boolean</td>
+			<td>
+				<p>인자로 입력한 입력 요소들의 id 와 value 속성 값으로 JSON 오브젝트를 생성 합니다.</p>
+				<p class="alert">N.form 에서 add 메서드 호출 시 초기 데이터를 생성 할 때 사용 합니다.</p>
+				<pre><code class="language-javascript">// #box 의 입력요소의 값을 json 데이터로 변환
+var data = N.element.toData($("#box").find(":input"));</code></pre>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>eles</td>
+			<td>jquery object</td>
+			<td align="center">-</td>
+			<td>입력 요소</td>
+		</tr>
+		<tr>
+			<td>maxZindex</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>number</td>
+			<td>
+				<p>입력한 요소 중 가장 높은 z-index 값을 반환 합니다.</p>
+				<pre><code class="language-javascript">var maxZindex = N.element.maxZindex($("div"));</code></pre>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>ele</td>
+			<td>jquery object</td>
+			<td align="center">-</td>
+			<td>
+				<p>대상 요소</p>
+				<p class="alert">입력하지 않으면 $("div, span, ul, p, nav, article, section") 로 작동 합니다.</p>
+			</td>
+		</tr>
+	</table>
+
+	<h4>
 		<span lang="ko_KR">N.date 객체의 함수</span>
 		<span lang="en_US">N.date Object's Methods</span>
 	</h4>
-	<p>"N.element.아래함수명(arg[0...N])" 과 같이 사용하면 됩니다.</p>
+	<p>"N.date.아래함수명(arg[0...N])" 과 같이 사용하면 됩니다.</p>
 	<table>
 		<tr>
 			<th style="width: 10%;">Name</th>
@@ -1534,6 +1588,60 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 			<td>number</td>
 			<td align="center">-</td>
 			<td>indent, 코드 그룹 간 공백 개수</td>
+		</tr>
+	</table>
+
+	<h4>
+		<span lang="ko_KR">N.event 객체의 함수</span>
+		<span lang="en_US">N.event Object's Methods</span>
+	</h4>
+	<p>"N.event.아래함수명(arg[0...N])" 과 같이 사용하면 됩니다.</p>
+	<table>
+		<tr>
+			<th style="width: 10%;">Name</th>
+			<th style="width: 9%;">Arguments</th>
+			<th style="width: 9%;">Type</th>
+			<th style="width: 9%;">Return</th>
+			<th style="width: auto;">Description</th>
+		</tr>
+		<tr>
+			<td>isNumberRelatedKeys</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>boolean</td>
+			<td>
+				<p>눌러진 키가 숫자와 관련된 키들인지 여부를 리턴</p>
+				<p class="alert">내부적으로 Datepicker 에서 숫자 관련 키들을 제외한 입력을 차단할 때 사용 합니다.</p>
+				<p class="alert">숫자 키 외에 다음과 같은 키들을 인식 합니다.<br>
+					97 : a Ctrl + a Select All<br>
+				    65 : A Ctrl + A Select All<br>
+			        99 : c Ctrl + c Copy<br>
+			        67 : C Ctrl + C Copy<br>
+			        118 : v Ctrl + v paste<br>
+			        86 : V Ctrl + V paste<br>
+			        115 : s Ctrl + s save<br>
+			        83 : S Ctrl + S save<br>
+			        112 : p Ctrl + p print<br>
+			        80 // P Ctrl + P print<br>
+				    8 : backspace<br>
+				    9 : tab<br>
+				    27 : escape<br>
+				    13 : enter<br>
+				    35 : Home & shiftKey + #<br>
+				    36 : End & shiftKey + $<br>
+				    37 : left arrow & shiftKey + %<br>
+				    39 : right arrow & '<br>
+				    46 : delete & .<br>
+				    45 : Ins & -<br>
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>e</td>
+			<td>Event</td>
+			<td align="center">-</td>
+			<td>키 Event 객체</td>
 		</tr>
 	</table>
 
