@@ -583,7 +583,9 @@
 					"days" : "일,월,화,수,목,금,토",
 					"yearNaN" : "년도는 서기 100년 이하는 입력 할 수 없습니다.",
 					"monthNaN" : "월은 1월 부터 12월 까지 입력 할 수 있습니다.",
-					"dayNaN" : "일은 1일부터 {0}일 까지 입력 할 수 있습니다."
+					"dayNaN" : "일은 1일부터 {0}일 까지 입력 할 수 있습니다.",
+					"prev" : "이전",
+					"next" : "다음"
 				},
 				"en_US" : {
 					"year" : "Year",
@@ -591,7 +593,9 @@
 					"days" : "Sun,Mon,Tue,Wed,Thu,Fri,Sat",
 					"yearNaN" : "You can not enter less AD 100 years",
 					"monthNaN" : "You can enter 1 to 12 months value",
-					"dayNaN" : "You can enter 1 to {0} days value"
+					"dayNaN" : "You can enter 1 to {0} days value",
+					"prev" : "Previous",
+					"next" : "Next"
 				}
 			}
 		},
