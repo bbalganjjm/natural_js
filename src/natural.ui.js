@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.19.3
+ * Natural-UI v0.8.19.15
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "v0.8.19.3";
+	N.version["Natural-UI"] = "0.8.19.15";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -1034,13 +1034,13 @@
 			this.options.context.addClass("datepicker__");
 
 			if(opts.monthonly) {
-				if(this.options.shareEle && N(".datepicker_contents__.datepicker_monthonly__").length > 0) {
+				if(this.options.shareEle && N(".datepicker__.datepicker_month_master__").length > 0) {
 					DatePicker.wrapSingleEle.call(this);
 				} else {
 					DatePicker.wrapEle.call(this);
 				}
 			} else {
-				if(this.options.shareEle && N(".datepicker_contents__:not(.datepicker_monthonly__)").length > 0) {
+				if(this.options.shareEle && N(".datepicker__.datepicker_date_master__").length > 0) {
 					DatePicker.wrapSingleEle.call(this);
 				} else {
 					DatePicker.wrapEle.call(this);
@@ -1073,13 +1073,15 @@
 				if(opts.monthonly) {
 					opts.context.attr("maxlength", "6");
 					opts.contents.addClass("datepicker_monthonly__");
-					if(this.options.shareEle) {
-						this.options.context.addClass("datepicker_month_master__");
+					if(opts.shareEle) {
+						opts.context.addClass("datepicker_month_master__");
+						opts.contents.addClass("datepicker_contents_month_master__");
 					}
 				} else {
 					opts.context.attr("maxlength", "8");
-					if(this.options.shareEle) {
-						this.options.context.addClass("datepicker_date_master__");
+					if(opts.shareEle) {
+						opts.context.addClass("datepicker_date_master__");
+						opts.contents.addClass("datepicker_contents_date_master__");
 					}
 				}
 				opts.contents.css({
@@ -1098,7 +1100,7 @@
 					"line-height": "25px"
 				}).click(function(e) {
 					e.preventDefault();
-					yearsPanel.find(".datepicker_year_item__").removeClass("datepicker_year_selected__");
+					yearsPanel.find(".datepicker_year_item__.datepicker_year_selected__").removeClass("datepicker_year_selected__");
 					$(this).addClass("datepicker_year_selected__");
 				});
 				var yearItemClone;
@@ -1114,7 +1116,7 @@
 					yearsPanel.append(yearItemClone.text(String(i)));
 				}
 
-				var yearPaging = $('<div class="datepicker_year_paging__" align="center"><a href="#" class="datepicker_year_prev__" title="이전">◀</a><a href="#" class="datepicker_year_next__" title="다음">▶</a></div>');
+				var yearPaging = $('<div class="datepicker_year_paging__" align="center"><a href="#" class="datepicker_year_prev__" title="' + N.message.get(opts.message, "prev") + '">◀</a><a href="#" class="datepicker_year_next__" title="' + N.message.get(opts.message, "next") + '">▶</a></div>');
 				yearPaging.css({
 					"line-height": "25px"
 				});
@@ -1145,7 +1147,7 @@
 					"float": "left"
 				}).click(function(e, ke) {
 					e.preventDefault();
-					monthsPanel.find(".datepicker_month_item__").removeClass("datepicker_month_selected__");
+					monthsPanel.find(".datepicker_month_item__.datepicker_month_selected__").removeClass("datepicker_month_selected__");
 					$(this).addClass("datepicker_month_selected__");
 					if(opts.monthonly) {
 						var selDate = N.date.strToDate(N.string.lpad(yearsPanel.find(".datepicker_year_selected__").text(), 4, "0") + N.string.lpad($(this).text(), 2, "0"), "Ym");
@@ -1231,7 +1233,7 @@
 					}).click(function(e, ke) {
 						e.preventDefault();
 						var thisEle = $(this);
-						daysPanel.find(".datepicker_prev_day_item__, .datepicker_day_item__, .datepicker_next_day_item__").removeClass("datepicker_day_selected__");
+						daysPanel.find(".datepicker_prev_day_item__.datepicker_day_selected__, .datepicker_day_item__.datepicker_day_selected__, .datepicker_next_day_item__.datepicker_day_selected__").removeClass("datepicker_day_selected__");
 						thisEle.addClass("datepicker_day_selected__");
 						var selMonth;
 						if(thisEle.hasClass("datepicker_prev_day_item__")) {
@@ -1293,25 +1295,37 @@
 				}
 
 				// bind key events
-				opts.context.unbind("keyup.datepicker").bind("keyup.datepicker", function(e) {
-					var value = opts.context.val().replace(/[^0-9]/g, "");
+				opts.context.unbind("keydown.datepicker").bind("keydown.datepicker", function(e) {
+					var keyCode = e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode);
+					if(!N.event.isNumberRelatedKeys(e) || opts.context.val().length > 8) {
+						e.preventDefault();
+						return false;
+					} else if (keyCode == 13) { // When press the ENTER key
+						opts.context.get(0).blur();
+						self.hide();
+					}
+				}).unbind("keyup.datepicker").bind("keyup.datepicker", function(e) {
+					// Hangul does not apply e.preventDefault() of keydown event
+					e.target.value = e.target.value.replace(/[^0-9]/g, "");
+
+					var value = opts.context.val();
 					var keyCode = e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode);
 
 					// when press the number keys
-					if (keyCode >= 48 && keyCode <= 57 && value.length <= 8 && value.length%2 === 0) {
+					if (value.length%2 === 0) {
 		        		var dateStrArr = N.date.strToDateStrArr(value, format);
 		        		var dateStrStrArr = N.date.strToDateStrArr(value, format, true);
 
         				// validate input value
-	        			if(!isNaN(dateStrArr[0]) && dateStrStrArr[0].length === 4 && dateStrArr[0] < 100) {
+	        			if(dateStrStrArr[0].length === 4 && dateStrArr[0] < 100) {
         					opts.context.alert(N.message.get(opts.message, "yearNaN")).show();
     						opts.context.val(value.replace(dateStrStrArr[0], ""));
         					return false;
-        				} else if(!isNaN(dateStrArr[1]) && dateStrStrArr[1].length === 2 && (dateStrArr[1] < 1 || dateStrArr[1] > 12)) {
+        				} else if(dateStrStrArr[1].length === 2 && (dateStrArr[1] < 1 || dateStrArr[1] > 12)) {
         					opts.context.alert(N.message.get(opts.message, "monthNaN")).show();
     						opts.context.val(value.replace(dateStrStrArr[1], ""));
         					return false;
-        				} else if(!opts.monthonly && !isNaN(dateStrArr[2]) && dateStrStrArr[2].length === 2 && (dateStrArr[2] < 1 || dateStrArr[2] > parseInt(gEndDate))) {
+        				} else if(!opts.monthonly && dateStrStrArr[2].length === 2 && (dateStrArr[2] < 1 || dateStrArr[2] > parseInt(gEndDate))) {
         					opts.context.alert(N.message.get(opts.message, "dayNaN", [String(parseInt(gEndDate))])).show();
     						opts.context.val(value.replace(dateStrStrArr[2], ""));
         					return false;
@@ -1329,21 +1343,15 @@
 	        					}
 	        				}
 	        			}
-					} else if (keyCode == 13) { // When press the ENTER key
+					}
+
+					if (keyCode == 9 && keyCode == 27) { // When press the TAB key & ESC key
 						e.preventDefault();
-					} else if (keyCode == 27) { // When press the ESC key
-						e.preventDefault();
-						setTimeout(function() {
-							self.hide();
-						}, 0);
+						self.hide();
 		        	}
-				}).unbind("keydown.datepicker").bind("keydown.datepicker", function(e) {
-					var keyCode = e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode);
-					if (keyCode == 9) { // When press the TAB key
-						setTimeout(function() {
-							self.hide();
-						}, 0);
-		        	}
+				}).unbind("focusout.datepicker").bind("focusout.datepicker", function(e) {
+					// Hangul does not apply e.preventDefault() of keydown event
+					e.target.value = e.target.value.replace(/[^0-9]/g, "");
 				});
 
 				return opts.contents;
@@ -1446,10 +1454,10 @@
 					var contents;
 					if(opts.monthonly) {
 						datepickerInst = N(".datepicker__.datepicker_month_master__:last").instance("datepicker");
-						contents = N(".datepicker_contents__.datepicker_monthonly__");
+						contents = N(".datepicker_contents_month_master__.datepicker_monthonly__");
 					} else {
 						datepickerInst = N(".datepicker__.datepicker_date_master__:last").instance("datepicker");
-						contents = N(".datepicker_contents__:not(.datepicker_monthonly__)");
+						contents = N(".datepicker_contents_date_master__:not(.datepicker_monthonly__)");
 					}
 
 					if(contents.length === 0) {
@@ -1465,6 +1473,14 @@
 					opts.contents = contents;
 				}
 
+				if(opts.onBeforeShow !== null) {
+					var result = opts.onBeforeShow.call(this, opts.context, opts.contents);
+					if(result !== undefined && result === false) {
+						return this;
+					}
+				}
+				opts.context.trigger("onBeforeShow", [opts.context, opts.contents]);
+
 				// auto select datepicker items from before input value
 				if(!N.string.isEmpty(opts.context.val())) {
 					DatePicker.selectItems(opts,
@@ -1474,14 +1490,6 @@
 							opts.contents.find(".datepicker_months_panel__"),
 							opts.contents.find(".datepicker_days_panel__"));
 				}
-
-				if(opts.onBeforeShow !== null) {
-					var result = opts.onBeforeShow.call(this, opts.context, opts.contents);
-					if(result !== undefined && result === false) {
-						return this;
-					}
-				}
-				opts.context.trigger("onBeforeShow", [opts.context, opts.contents]);
 
 		        // set datapicker position
 				$(window).bind("resize.datepicker", function() {
@@ -2572,8 +2580,6 @@
 										if (type !== "hidden") {
 											N().validator(opts.vRules !== null ? opts.vRules : ele);
 
-											ele.unbind("focusout.form.validate");
-
 											// remove validator's dregs for rebind
 											ele.removeClass("validate_false__");
 											if(ele.instance("alert") !== undefined) {
@@ -2581,78 +2587,85 @@
 												ele.removeData("alert__");
 											}
 
-											ele.bind("focusout.form.validate", function() {
-												var currEle = $(this);
-					                            if (!currEle.prop("disabled") && !currEle.prop("readonly") && opts.validate) {
-				                            		currEle.trigger("validate");
-					                            }
-					                        });
+											if(N.isEmptyObject(ele.events("focusout", "form.validate"))) {
+												ele.bind("focusout.form.validate", function() {
+													var currEle = $(this);
+						                            if (!currEle.prop("disabled") && !currEle.prop("readonly") && opts.validate) {
+					                            		currEle.trigger("validate");
+						                            }
+						                        });
+											}
 										}
 									}
 
 									//dataSync
-									ele.unbind("focusout.form.dataSync");
-									ele.bind("focusout.form.dataSync", function(e) {
-										var currEle = $(this);
-										var currVal = currEle.val();
+									if(N.isEmptyObject(ele.events("focusout", "dataSync.form"))) {
+										ele.bind("focusout.form.dataSync", function(e) {
+											var currEle = $(this);
+											var currVal = currEle.val();
 
-										// for val method
-										if(vals !== opts.data[opts.row]) {
-											vals = opts.data[opts.row];
-										}
-
-										if (String(vals[currEle.attr("id")]) !== currVal) {
-											if (!currEle.prop("disabled") && !currEle.prop("readonly") && (!opts.validate || (opts.validate && !currEle.hasClass("validate_false__")))) {
-												// update dataset value
-												vals[currEle.attr("id")] = currVal;
-
-												// change row status
-												if (vals.rowStatus !== "insert" && vals.rowStatus !== "delete") {
-													vals.rowStatus = "update";
-													// add data changed flag
-													currEle.addClass("data_changed__");
-													if(!opts.context.hasClass("row_data_changed__")) {
-														opts.context.addClass("row_data_changed__");
-													}
-												}
-
-												// notify data changed
-												N.ds.instance(opts.extObj !== null ? opts.extObj : self).notify(opts.extRow > -1 ? opts.extRow : opts.row, currEle.attr("id"));
+											// for val method
+											if(vals !== opts.data[opts.row]) {
+												vals = opts.data[opts.row];
 											}
-                                        }
-									});
+
+											if (String(vals[currEle.attr("id")]) !== currVal) {
+												if (!currEle.prop("disabled") && !currEle.prop("readonly") && (!opts.validate || (opts.validate && !currEle.hasClass("validate_false__")))) {
+													// update dataset value
+													vals[currEle.attr("id")] = currVal;
+
+													// change row status
+													if (vals.rowStatus !== "insert" && vals.rowStatus !== "delete") {
+														vals.rowStatus = "update";
+														// add data changed flag
+														currEle.addClass("data_changed__");
+														if(!opts.context.hasClass("row_data_changed__")) {
+															opts.context.addClass("row_data_changed__");
+														}
+													}
+
+													// notify data changed
+													N.ds.instance(opts.extObj !== null ? opts.extObj : self).notify(opts.extRow > -1 ? opts.extRow : opts.row, currEle.attr("id"));
+												}
+	                                        }
+										});
+									}
 
 									//Enter key event
 									ele.unbind("keyup.form.dataSync");
-			                        ele.bind("keyup.form.dataSync", function(e) {
-			                        	if ((e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode)) == 13) {
-			                        		e.preventDefault();
-			                            	$(this).trigger("focusout.form.validate");
-			                            	// notify data changed
-		                            		$(this).trigger("focusout.form.dataSync");
-			                            }
-			                        });
+									if(N.isEmptyObject(ele.events("keyup", "dataSync.form"))) {
+										 ele.bind("keyup.form.dataSync", function(e) {
+				                        	if ((e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode)) == 13) {
+				                        		e.preventDefault();
+				                            	$(this).trigger("focusout.form.validate");
+				                            	// notify data changed
+			                            		$(this).trigger("focusout.form.dataSync");
+				                            }
+				                        });
+									}
 
 				                    //format
 			                        if(ele.data("format") !== undefined) {
 										if (type !== "password" && type !== "hidden" && type !== "file") {
 											N(opts.data).formatter(opts.fRules !== null ? opts.fRules : ele).format(opts.row);
 
-											ele.unbind("focusin.form.unformat");
-											ele.bind("focusin.form.unformat", function() {
-												var currEle = $(this);
-					                            if (!currEle.prop("disabled") && !currEle.prop("readonly") && (!opts.validate || (opts.validate && !currEle.hasClass("validate_false__")))) {
-					                                currEle.trigger("unformat");
-					                            }
-					                        });
+											if(N.isEmptyObject(ele.events("focusin", "form.unformat"))) {
+												ele.bind("focusin.form.unformat", function() {
+													var currEle = $(this);
+						                            if (!currEle.prop("disabled") && !currEle.prop("readonly") && (!opts.validate || (opts.validate && !currEle.hasClass("validate_false__")))) {
+						                                currEle.trigger("unformat");
+						                            }
+						                        });
+											}
 
-											ele.unbind("focusout.form.format");
-											ele.bind("focusout.form.format", function() {
-												var currEle = $(this);
-					                            if (!currEle.prop("disabled") && !currEle.prop("readonly") && (!opts.validate || (opts.validate && !currEle.hasClass("validate_false__")))) {
-					                                currEle.trigger("format");
-					                            }
-					                        });
+											if(N.isEmptyObject(ele.events("focusout", "form.unformat"))) {
+												ele.bind("focusout.form.format", function() {
+													var currEle = $(this);
+						                            if (!currEle.prop("disabled") && !currEle.prop("readonly") && (!opts.validate || (opts.validate && !currEle.hasClass("validate_false__")))) {
+						                                currEle.trigger("format");
+						                            }
+						                        });
+											}
 										}
 									} else {
 										// put value
@@ -2674,37 +2687,38 @@
 									}
 
 									//dataSync
-									ele.unbind("change.form.dataSync");
-									ele.bind("change.form.dataSync", function(e) {
-										var currEle = $(this);
-										var currVals = currEle.vals();
+									if(N.isEmptyObject(ele.events("change", "dataSync.form"))) {
+										ele.bind("change.form.dataSync", function(e) {
+											var currEle = $(this);
+											var currVals = currEle.vals();
 
-										// for val method
-										if(vals !== opts.data[opts.row]) {
-											vals = opts.data[opts.row];
-										}
+											// for val method
+											if(vals !== opts.data[opts.row]) {
+												vals = opts.data[opts.row];
+											}
 
-										if (vals[currEle.attr("id")] !== currVals) {
-											// update dataset value
-											vals[currEle.attr("id")] = currVals;
+											if (vals[currEle.attr("id")] !== currVals) {
+												// update dataset value
+												vals[currEle.attr("id")] = currVals;
 
-											// change row status
-											if (vals.rowStatus !== "insert" && vals.rowStatus !== "delete") {
-												vals.rowStatus = "update";
-												// add data changed flag
-												currEle.addClass("data_changed__");
-												if(!opts.context.hasClass("row_data_changed__")) {
-													opts.context.addClass("row_data_changed__");
+												// change row status
+												if (vals.rowStatus !== "insert" && vals.rowStatus !== "delete") {
+													vals.rowStatus = "update";
+													// add data changed flag
+													currEle.addClass("data_changed__");
+													if(!opts.context.hasClass("row_data_changed__")) {
+														opts.context.addClass("row_data_changed__");
+													}
 												}
-											}
 
 
-											// notify data changed
-											if (!currEle.prop("disabled") && !currEle.prop("readonly")) {
-												N.ds.instance(opts.extObj !== null ? opts.extObj : self).notify(opts.extRow > -1 ? opts.extRow : opts.row, currEle.attr("id"));
-											}
-                                        }
-									});
+												// notify data changed
+												if (!currEle.prop("disabled") && !currEle.prop("readonly")) {
+													N.ds.instance(opts.extObj !== null ? opts.extObj : self).notify(opts.extRow > -1 ? opts.extRow : opts.row, currEle.attr("id"));
+												}
+	                                        }
+										});
+									}
 
 									// select value
 									ele.vals(vals[key] != null ? String(vals[key]) : "");
@@ -2745,40 +2759,41 @@
 								}
 
 								//dataSync
-								eles.unbind("click.form.dataSync select.form.dataSync");
-								eles.data("eles", eles).bind("click.form.dataSync select.form.dataSync", function(e) {
-									var currEle = $(this);
-									var currKey = currEle.attr("name");
-									if(currKey === undefined) {
-										currKey = currEle.attr("id");
-									}
-									var currVals = $(this).data("eles").vals();
+								if(N.isEmptyObject(ele.events("click", "dataSync.form")) && N.isEmptyObject(ele.events("select", "dataSync.form"))) {
+									eles.data("eles", eles).bind("click.form.dataSync select.form.dataSync", function(e) {
+										var currEle = $(this);
+										var currKey = currEle.attr("name");
+										if(currKey === undefined) {
+											currKey = currEle.attr("id");
+										}
+										var currVals = $(this).data("eles").vals();
 
-									// for val method
-									if(vals !== opts.data[opts.row]) {
-										vals = opts.data[opts.row];
-									}
+										// for val method
+										if(vals !== opts.data[opts.row]) {
+											vals = opts.data[opts.row];
+										}
 
-									if (vals[currKey] !== currVals) {
-										// update dataset value
-										vals[currKey] = currVals;
+										if (vals[currKey] !== currVals) {
+											// update dataset value
+											vals[currKey] = currVals;
 
-										// change row status
-										if (vals.rowStatus !== "insert" && vals.rowStatus !== "delete") {
-											vals.rowStatus = "update";
-											// add data changed flag
-											$(this).data("eles").addClass("data_changed__");
-											if(!opts.context.hasClass("row_data_changed__")) {
-												opts.context.addClass("row_data_changed__");
+											// change row status
+											if (vals.rowStatus !== "insert" && vals.rowStatus !== "delete") {
+												vals.rowStatus = "update";
+												// add data changed flag
+												$(this).data("eles").addClass("data_changed__");
+												if(!opts.context.hasClass("row_data_changed__")) {
+													opts.context.addClass("row_data_changed__");
+												}
 											}
-										}
 
-										// notify data changed
-										if (!currEle.prop("disabled") && !currEle.prop("readonly")) {
-											N.ds.instance(opts.extObj !== null ? opts.extObj : self).notify(opts.extRow > -1 ? opts.extRow : opts.row, currKey);
-										}
-	                                }
-								});
+											// notify data changed
+											if (!currEle.prop("disabled") && !currEle.prop("readonly")) {
+												N.ds.instance(opts.extObj !== null ? opts.extObj : self).notify(opts.extRow > -1 ? opts.extRow : opts.row, currKey);
+											}
+		                                }
+									});
+								}
 
 								// select value
 								eles.vals(vals[key] != null ? vals[key] : "");
@@ -3445,45 +3460,51 @@
 			contextBodyTemplate : function(sel) {
 				return sel !== undefined ? this.tempRowEle.find(sel) : this.tempRowEle;
 			},
-			select : function(indexes, isAppend) {
+			select : function(row, isAppend) {
 				var opts = this.options;
-				if(indexes === undefined) {
+				if(row === undefined) {
 					var rtnArr = this.contextEle.find("li.list_selected__").map(function() {
 						return N(this).parent().find("li").index(this);
 					}).get();
 					return rtnArr;
 				} else {
-					if(N.type(indexes) !== "array") {
-						indexes = [indexes];
+					if(N.type(row) !== "array") {
+						row = [row];
 					}
 
 					var self = this;
-					var selectEle;
+					var selRowEle;
 
 					if(!isAppend) {
 						self.contextEle.find("li").removeClass("list_selected__");
 					}
-					$(indexes).each(function() {
-						selectEle = self.contextEle.find("li").eq(this);
-						if(selectEle.hasClass("list_selected__")) {
-							selectEle.removeClass("list_selected__");
+					$(row).each(function() {
+						selRowEle = self.contextEle.find("li").eq(this);
+						if(selRowEle.hasClass("list_selected__")) {
+							selRowEle.removeClass("list_selected__");
 						}
-						selectEle.click();
+						selRowEle.click();
 					});
+
+					scrollTop = (row[row.length - 1] * selRowEle.outerHeight()) - (opts.height / 2) + (selRowEle.outerHeight() / 2);
+					if(scrollTop < 0) {
+						scrollTop = 0;
+					}
+					opts.context.parent(".context_wrap__").stop().animate({ "scrollTop" : scrollTop }, 300, 'swing');
 
 					return this;
 				}
 			},
-			check : function(indexes, isAppend) {
+			check : function(row, isAppend) {
 				var opts = this.options;
-				if(indexes === undefined) {
+				if(row === undefined) {
 					var rtnArr = this.contextEle.find("li").find(opts.checkAllTarget||opts.checkSingleTarget).filter(":checked").map(function() {
 						return N(this).closest("ul").find("li").index(N(this).closest("li"));
 					}).get();
 					return rtnArr;
 				} else {
-					if(N.type(indexes) !== "array") {
-						indexes = [indexes];
+					if(N.type(row) !== "array") {
+						row = [row];
 					}
 
 					var self = this;
@@ -3491,13 +3512,20 @@
 					if(!isAppend) {
 						self.contextEle.find("li").find(opts.checkAllTarget||opts.checkSingleTarget).prop("checked", false);
 					}
-					$(indexes).each(function() {
+					$(row).each(function() {
 						checkboxEle = self.contextEle.find("li").find(opts.checkAllTarget||opts.checkSingleTarget).eq(this);
 						if(checkboxEle.is(":checked")) {
 							checkboxEle.prop("checked", false);
 						}
 						checkboxEle.click();
 					});
+
+					var selRowEle = checkboxEle.closest(".list__>li");
+					scrollTop = (row[row.length - 1] * selRowEle.outerHeight()) - (opts.height / 2) + (selRowEle.outerHeight() / 2);
+					if(scrollTop < 0) {
+						scrollTop = 0;
+					}
+					opts.context.parent(".context_wrap__").stop().animate({ "scrollTop" : scrollTop }, 300, 'swing');
 
 					return this;
 				}
@@ -3637,7 +3665,7 @@
 				})
 
 				if(opts.rowHandlerBeforeBind !== null) {
-					opts.rowHandler.call(this, form.options.extRow, tempRowEleClone, data);
+					opts.rowHandlerBeforeBind.call(this, form.options.extRow, tempRowEleClone, data);
 				}
 
 				form.add(data, row);
@@ -5046,45 +5074,51 @@
 			contextBodyTemplate : function(sel) {
 				return sel !== undefined ? this.tempRowEle.find(sel) : this.tempRowEle;
 			},
-			select : function(indexes, isAppend) {
+			select : function(row, isAppend) {
 				var opts = this.options;
-				if(indexes === undefined) {
+				if(row === undefined) {
 					var rtnArr = this.contextEle.find("tbody.grid_selected__").map(function() {
 						return N(this).parent().find("tbody").index(this);
 					}).get();
 					return rtnArr;
 				} else {
-					if(N.type(indexes) !== "array") {
-						indexes = [indexes];
+					if(N.type(row) !== "array") {
+						row = [row];
 					}
 
 					var self = this;
-					var selectEle;
+					var selRowEle;
 
 					if(!isAppend) {
 						self.contextEle.find("tbody").removeClass("grid_selected__");
 					}
-					$(indexes).each(function() {
-						selectEle = self.contextEle.find("tbody").eq(this);
-						if(selectEle.hasClass("grid_selected__")) {
-							selectEle.removeClass("grid_selected__");
+					$(row).each(function() {
+						selRowEle = self.contextEle.find("tbody").eq(this);
+						if(selRowEle.hasClass("grid_selected__")) {
+							selRowEle.removeClass("grid_selected__");
 						}
-						selectEle.click();
+						selRowEle.click();
 					});
+
+					scrollTop = (row[row.length - 1] * selRowEle.outerHeight()) - (opts.height / 2) + (selRowEle.outerHeight() / 2);
+					if(scrollTop < 0) {
+						scrollTop = 0;
+					}
+					opts.context.parent(".tbody_wrap__").stop().animate({ "scrollTop" : scrollTop }, 300, 'swing');
 
 					return this;
 				}
 			},
-			check : function(indexes, isAppend) {
+			check : function(row, isAppend) {
 				var opts = this.options;
-				if(indexes === undefined) {
+				if(row === undefined) {
 					var rtnArr = this.contextEle.find("tbody td").find(opts.checkAllTarget||opts.checkSingleTarget).filter(":checked").map(function() {
 						return N(this).closest("tbody").parent().find("tbody").index(N(this).closest("tbody"));
 					}).get();
 					return rtnArr;
 				} else {
-					if(N.type(indexes) !== "array") {
-						indexes = [indexes];
+					if(N.type(row) !== "array") {
+						row = [row];
 					}
 
 					var self = this;
@@ -5092,13 +5126,20 @@
 					if(!isAppend) {
 						self.contextEle.find("tbody td").find(opts.checkAllTarget||opts.checkSingleTarget).prop("checked", false);
 					}
-					$(indexes).each(function() {
+					$(row).each(function() {
 						checkboxEle = self.contextEle.find("tbody td").find(opts.checkAllTarget||opts.checkSingleTarget).eq(this);
 						if(checkboxEle.is(":checked")) {
 							checkboxEle.prop("checked", false);
 						}
 						checkboxEle.click();
 					});
+
+					var selRowEle = checkboxEle.closest(".grid__>tbody");
+					scrollTop = (row[row.length - 1] * selRowEle.outerHeight()) - (opts.height / 2) + (selRowEle.outerHeight() / 2);
+					if(scrollTop < 0) {
+						scrollTop = 0;
+					}
+					opts.context.parent(".tbody_wrap__").stop().animate({ "scrollTop" : scrollTop }, 300, 'swing');
 
 					return this;
 				}
@@ -5291,7 +5332,7 @@
 				});
 
 				if(opts.rowHandlerBeforeBind !== null) {
-					opts.rowHandler.call(this, form.options.extRow, tempRowEleClone, data);
+					opts.rowHandlerBeforeBind.call(this, form.options.extRow, tempRowEleClone, data);
 				}
 
 				form.add(data, row);
