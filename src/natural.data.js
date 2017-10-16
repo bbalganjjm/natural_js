@@ -1,5 +1,5 @@
 /*!
- * Natural-DATA v0.8.2.24
+ * Natural-DATA v0.8.2.27
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-		N.version["Natural-DATA"] = "0.8.2.24";
+		N.version["Natural-DATA"] = "0.8.2.27";
 
 	$.fn.extend($.extend(N.prototype, {
 		datafilter : function(callBack) {
@@ -342,7 +342,8 @@
 						var dateVal;
 						var formInst;
 						var colId;
-						ele.datepicker({
+
+						var options = {
 							monthonly : isMonth,
 							onBeforeShow : function(context, contents) {
 								if(contents.closest(".view_context__").length > 0) {
@@ -352,6 +353,8 @@
 								} else {
 									this.isApplyRelative = false;
 								}
+								// for md format without Y format
+								context.trigger("unformat");
 							},
 							onSelect : function(context, date, monthonly) {
 								dateVal = date.obj.formatDate(monthonly ? "Ym" : "Ymd");
@@ -380,7 +383,12 @@
 									this.isApplyRelative = false;
 								}
 							}
-						});
+						};
+
+						if(args[2] !== undefined) {
+							$.extend(options, args[2]);
+						}
+						ele.datepicker(options);
 					}
 				} else {
 					N.warn("if you use date or month option, you must import Natural-UI library");
@@ -389,26 +397,32 @@
 				if (args[0] !== undefined) {
 					var formats = N.context.attr("data").formatter.date;
 					var val;
-					if (args[0] === 4) {
-						val = N.date.format(str, "Y");
-					} else if (args[0] === 6) {
-						val = N.date.format(str, formats.Ym());
-					} else if (args[0] === 8) {
-						val = N.date.format(str, formats.Ymd());
-					} else if (args[0] === 10) {
-						val = N.date.format(str, formats.YmdH());
-					} else if (args[0] === 12) {
-						val = N.date.format(str, formats.YmdHi());
-					} else if (args[0] === 14) {
-						val = N.date.format(str, formats.YmdHis());
+
+					if(N.type(args[0]) === "number") {
+						if (args[0] === 4) {
+							val = N.date.format(str, "Y");
+						} else if (args[0] === 6) {
+							val = N.date.format(str, formats.Ym());
+						} else if (args[0] === 8) {
+							val = N.date.format(str, formats.Ymd());
+						} else if (args[0] === 10) {
+							val = N.date.format(str, formats.YmdH());
+						} else if (args[0] === 12) {
+							val = N.date.format(str, formats.YmdHi());
+						} else if (args[0] === 14) {
+							val = N.date.format(str, formats.YmdHis());
+						} else {
+							val = N.date.format(str, formats.Ymd());
+						}
 					} else {
-						val = N.date.format(str, formats.Ymd());
+						val = N.date.format(str, args[0]);
 					}
+
 					return Number(str) > 0 ? val : "";
 				}
 			},
 			"time" : function(str, args) {
-				str = str.replace(/:/g, "");
+				str = str.replace(/[^0-9]/g, "");
 				if (N.string.trimToEmpty(str) > 6) {
 					str = N.string.rpad(str, 6, "0");
 				} else {
