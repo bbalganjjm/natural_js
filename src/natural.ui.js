@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.19.15
+ * Natural-UI v0.8.19.16
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "0.8.19.15";
+	N.version["Natural-UI"] = "0.8.19.16";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -2759,7 +2759,7 @@
 								}
 
 								//dataSync
-								if(N.isEmptyObject(ele.events("click", "dataSync.form")) && N.isEmptyObject(ele.events("select", "dataSync.form"))) {
+								if(N.isEmptyObject(eles.events("click", "dataSync.form")) && N.isEmptyObject(eles.events("select", "dataSync.form"))) {
 									eles.data("eles", eles).bind("click.form.dataSync select.form.dataSync", function(e) {
 										var currEle = $(this);
 										var currKey = currEle.attr("name");
