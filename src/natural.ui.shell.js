@@ -1,5 +1,5 @@
 /*!
- * Natural-UI.Shell v0.8.1.7, Works fine in IE9 and above
+ * Natural-UI.Shell v0.8.1.8, Works fine in IE9 and above
  * bbalganjjm@gmail.com
  *
  * Copyright 2017 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2017-05-11T20:00Z
  */
 (function(window, $) {
-	N.version["Natural-UI.Shell"] = "0.8.1.7";
+	N.version["Natural-UI.Shell"] = "0.8.1.8";
 
 	$.fn.extend($.extend(N.prototype, {
 		notify : function(opts) {
@@ -262,6 +262,8 @@
 						}
 					}
 				};
+
+				N.comm.resetFilterConfig();
 			}
 
 			// set Controller's request instance
