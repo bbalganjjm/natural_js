@@ -8,7 +8,7 @@
  * Date: 2017-05-11T20:00Z
  */
 (function(window, $) {
-	N.version["Natural-UI.Shell"] = "v0.8.1.7";
+	N.version["Natural-UI.Shell"] = "0.8.1.7";
 
 	$.fn.extend($.extend(N.prototype, {
 		notify : function(opts) {
