@@ -1,5 +1,5 @@
 /*!
- * Natural-CORE v0.8.7.0
+ * Natural-CORE v0.8.8.0
  * bbalganjjm@gmail.com
  *
  * Includes formatdate.js & Mask JavaScript API
@@ -301,7 +301,7 @@
 		// N local variables
 		$.extend(N, {
 			version : {
-				"Natural-CORE" : "0.8.7.0"
+				"Natural-CORE" : "0.8.8.0"
 			},
 			/**
 			 * Set and get locale value
@@ -799,11 +799,11 @@
 			    /**
 				 * Get the maximum z-index of all elements
 				 */
-				maxZindex : function(nContext) {
-					if (nContext === undefined) {
-						nContext = $("div, span");
+				maxZindex : function(ele) {
+					if (ele === undefined) {
+						ele = $("div, span, ul, p, nav, article, section");
 					}
-					return Math.max.apply(null, $.map(nContext, function(e, n) {
+					return Math.max.apply(null, $.map(ele, function(e, n) {
 						var zIndex = parseInt($(e).css("z-index"));
 						if (zIndex >= 2147483647) {
 							$(e).css("z-index", String(2147483647 - 999));
@@ -1127,6 +1127,74 @@
 					} else {
 						return null;
 					}
+				}
+			},
+			"event" : {
+				/**
+				 * This function was taken from "https://stackoverflow.com/a/13952775" and modified.
+				 */
+				isNumberRelatedKeys : function(e) {
+				    e = (e) ? e : window.event;
+				    var key;
+				    var charsKeys = [
+				        97, // a Ctrl + a Select All
+				        65, // A Ctrl + A Select All
+				        99, // c Ctrl + c Copy
+				        67, // C Ctrl + C Copy
+				        118, // v Ctrl + v paste
+				        86, // V Ctrl + V paste
+				        115, // s Ctrl + s save
+				        83, // S Ctrl + S save
+				        112, // p Ctrl + p print
+				        80 // P Ctrl + P print
+				    ];
+
+				    var specialKeys = [
+					    8, // backspace
+					    9, // tab
+					    27, // escape
+					    13, // enter
+					    35, // Home & shiftKey + #
+					    36, // End & shiftKey + $
+					    37, // left arrow & shiftKey + %
+					    39, // right arrow & '
+					    46, // delete & .
+					    45 // Ins & -
+				    ];
+
+				    key = e.keyCode ? e.keyCode : e.which ? e.which : e.charCode;
+
+				    // check if pressed key is not number
+				    if (key && !((key >= 48 && key <= 57) || (key >= 96 && key <= 105))) {
+
+				        // Allow: Ctrl + char for action save, print, copy,
+						// ...etc
+				        if ((e.ctrlKey && charsKeys.indexOf(key) != -1) ||
+				            // Fix Issue: f1 : f12 Or Ctrl + f1 : f12, in
+							// Firefox browser
+				            (navigator.userAgent.indexOf("Firefox") != -1 && ((e.ctrlKey && e.keyCode && e.keyCode > 0 && key >= 112 && key <= 123) || (e.keyCode && e.keyCode > 0 && key && key >= 112 && key <= 123)))) {
+				            return true
+				        }
+				            // Allow: Special Keys
+				        else if (specialKeys.indexOf(key) != -1) {
+				            // Fix Issue: right arrow & Delete & ins in FireFox
+				            if ((key == 39 || key == 45 || key == 46)) {
+				                return (navigator.userAgent.indexOf("Firefox") != -1 && e.keyCode != undefined && e.keyCode > 0);
+				            }
+				                // DisAllow : "#" & "$" & "%"
+				            else if (e.shiftKey && (key == 35 || key == 36 || key == 37)) {
+				                return false;
+				            }
+				            else {
+				                return true;
+				            }
+				        }
+				        else {
+				            return false;
+				        }
+				    } else {
+				    	return true;
+				    }
 				}
 			}
 		});
