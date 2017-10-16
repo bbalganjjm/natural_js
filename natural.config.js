@@ -45,15 +45,11 @@
 	    /**
 	     * N.context.attr("architecture").page.context 로 페이지가 전환될때 마다 실행될 가비지 컬렉터의 모드
 	     */
-	    gcMode : "minimum", //minimum, full
+	    gcMode : "full", //minimum, full
 	    /**
 	     * N.string.byteLength 함수 및 maxbyte / minbyte / rangebyte 룰에서 영문, 숫자, 기본 특수문자등을 제외한 한글, 한글특수 문자 등의 기본 바이트 길이를 설정
 	     */
-	    charByteLength : 3,
-	    /**
-		 * N.json.mapFromKeys 함수에서 필터링 제외 할 키값, N.grid 나 N.form 등 data() 메서드를 제공하는 컴포넌트에도 같이 적용됨.
-		 */
-		excludeMapFromKeys : [ "rowStatus" ]
+	    charByteLength : 3
 	});
 
 	/**
@@ -188,6 +184,12 @@
 			},
 			"request" : {
 				"options" : {
+					/**
+					 * 기본 Request Method
+					 * GET 으로 되어 있으면 JSON 형태의 파라미터가 q라는 파라미터명으로 q={a:1} 와 같이 전달 됩니다.
+					 * JSON Object String 을 Request Body에 온전히 서버로 전송하려면 반드시 POST로 바꿔 주시기 바랍니다.
+					 */
+					"type" : "GET",
 					/**
 					 * 기본 contentType
 					 */
@@ -400,13 +402,10 @@
 			"global" : {
 				"okBtnStyle" : {
 					color : "yellowgreen",
-					size : "medium",
-					iconClass : "btn_ok"
+					size : "medium"
 				},
 				"cancelBtnStyle" : {
-					color : "white",
-					size : "medium",
-					iconClass : "btn_cancel"
+					size : "medium"
 				}
 			},
 			/**
@@ -438,18 +437,13 @@
 			"message" : {
 				"ko_KR" : {
 					"confirm" : "확인",
-					"cancel" : "취소",
-					"close" : "닫기"
+					"cancel" : "취소"
 				},
 				"en_US" : {
 					"confirm" : "OK",
-					"cancel" : "Cancel",
-					"close" : "Close"
+					"cancel" : "Cancel"
 				}
 			}
-		},
-		"button" : {
-			"customStyle" : true
 		},
 		"popup" : {
 
@@ -468,7 +462,9 @@
 					"days" : "일,월,화,수,목,금,토",
 					"yearNaN" : "년도는 서기 100년 이하는 입력 할 수 없습니다.",
 					"monthNaN" : "월은 1월 부터 12월 까지 입력 할 수 있습니다.",
-					"dayNaN" : "일은 1일부터 {0}일 까지 입력 할 수 있습니다."
+					"dayNaN" : "일은 1일부터 {0}일 까지 입력 할 수 있습니다.",
+					"prev" : "이전",
+					"next" : "다음"
 				},
 				"en_US" : {
 					"year" : "Year",
@@ -476,7 +472,9 @@
 					"days" : "Sun,Mon,Tue,Wed,Thu,Fri,Sat",
 					"yearNaN" : "You can not enter less AD 100 years",
 					"monthNaN" : "You can enter 1 to 12 months value",
-					"dayNaN" : "You can enter 1 to {0} days value"
+					"dayNaN" : "You can enter 1 to {0} days value",
+					"prev" : "Previous",
+					"next" : "Next"
 				}
 			}
 		},
