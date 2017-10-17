@@ -2759,41 +2759,40 @@
 								}
 
 								//dataSync
-								if(N.isEmptyObject(eles.events("click", "dataSync.form")) && N.isEmptyObject(eles.events("select", "dataSync.form"))) {
-									eles.data("eles", eles).bind("click.form.dataSync select.form.dataSync", function(e) {
-										var currEle = $(this);
-										var currKey = currEle.attr("name");
-										if(currKey === undefined) {
-											currKey = currEle.attr("id");
-										}
-										var currVals = $(this).data("eles").vals();
+								eles.unbind("click.form.dataSync select.form.dataSync");
+								eles.data("eles", eles).bind("click.form.dataSync select.form.dataSync", function(e) {
+									var currEle = $(this);
+									var currKey = currEle.attr("name");
+									if(currKey === undefined) {
+										currKey = currEle.attr("id");
+									}
+									var currVals = $(this).data("eles").vals();
 
-										// for val method
-										if(vals !== opts.data[opts.row]) {
-											vals = opts.data[opts.row];
-										}
+									// for val method
+									if(vals !== opts.data[opts.row]) {
+										vals = opts.data[opts.row];
+									}
 
-										if (vals[currKey] !== currVals) {
-											// update dataset value
-											vals[currKey] = currVals;
+									if (vals[currKey] !== currVals) {
+										// update dataset value
+										vals[currKey] = currVals;
 
-											// change row status
-											if (vals.rowStatus !== "insert" && vals.rowStatus !== "delete") {
-												vals.rowStatus = "update";
-												// add data changed flag
-												$(this).data("eles").addClass("data_changed__");
-												if(!opts.context.hasClass("row_data_changed__")) {
-													opts.context.addClass("row_data_changed__");
-												}
+										// change row status
+										if (vals.rowStatus !== "insert" && vals.rowStatus !== "delete") {
+											vals.rowStatus = "update";
+											// add data changed flag
+											$(this).data("eles").addClass("data_changed__");
+											if(!opts.context.hasClass("row_data_changed__")) {
+												opts.context.addClass("row_data_changed__");
 											}
+										}
 
-											// notify data changed
-											if (!currEle.prop("disabled") && !currEle.prop("readonly")) {
-												N.ds.instance(opts.extObj !== null ? opts.extObj : self).notify(opts.extRow > -1 ? opts.extRow : opts.row, currKey);
-											}
-		                                }
-									});
-								}
+										// notify data changed
+										if (!currEle.prop("disabled") && !currEle.prop("readonly")) {
+											N.ds.instance(opts.extObj !== null ? opts.extObj : self).notify(opts.extRow > -1 ? opts.extRow : opts.row, currKey);
+										}
+	                                }
+								});
 
 								// select value
 								eles.vals(vals[key] != null ? vals[key] : "");
