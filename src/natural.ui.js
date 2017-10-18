@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.19.17
+ * Natural-UI v0.8.19.20
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "0.8.19.17";
+	N.version["Natural-UI"] = "0.8.19.20";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -1737,7 +1737,7 @@
 
 	        	});
 			},
-			popOpen : function(onOpenData) {
+			popOpen : function(onOpenData, cont) {
 				var opts = this.options;
 				var self = this;
 
@@ -1745,6 +1745,23 @@
 					opts.context.show();
 				}
 				self.alert.show();
+
+				var onOpenProcFn__ = function() {
+					// execute "onOpen" event
+					if(opts.onOpen !== null) {
+						opts.onOpenData = onOpenData !== undefined ? onOpenData : null;
+						if(opts.context.filter(".view_context__:last").instance("cont")[opts.onOpen] !== undefined) {
+							opts.context.filter(".view_context__:last").instance("cont")[opts.onOpen](onOpenData);
+						} else {
+							N.warn("[N.popup.popOpen]The onOpen event handler(" + opts.onOpen + ") is not defined on the Controller(N.cont) of the Popup.");
+						}
+					}
+				};
+				if(opts.delayContInit && cont !== undefined) {
+					cont.onOpenProcFn__ = onOpenProcFn__;
+				} else {
+					onOpenProcFn__();
+				}
 			}
 		});
 
@@ -1766,24 +1783,7 @@
 						opts.context = context;
 						opts.context.instance("popup", this);
 
-						Popup.popOpen.call(self, onOpenData);
-
-						var onOpenProcFn__ = function() {
-							// execute "onOpen" event
-							if(opts.onOpen !== null) {
-								opts.onOpenData = onOpenData !== undefined ? onOpenData : null;
-								if(opts.context.filter(".view_context__:last").instance("cont")[opts.onOpen] !== undefined) {
-									opts.context.filter(".view_context__:last").instance("cont")[opts.onOpen](onOpenData);
-								} else {
-									N.warn("[N.popup.popOpen]The onOpen event handler(" + opts.onOpen + ") is not defined on the Controller(N.cont) of the Popup.");
-								}
-							}
-						};
-						if(opts.delayContInit && cont !== undefined) {
-							cont.onOpenProcFn__ = onOpenProcFn__;
-						} else {
-							onOpenProcFn__();
-						}
+						Popup.popOpen.call(self, onOpenData, cont);
 					});
 					opts.preload = true;
 				} else {
@@ -2570,7 +2570,7 @@
 								type = N.string.trimToEmpty(ele.attr("type")).toLowerCase();
 								if (tagName === "textarea" || type === "text" || type === "password" || type === "hidden" || type === "file"
 									// Support HTML5 Form's input types
-									|| type === "number" || type === "email" || type === "search" || type === "color"
+									|| type === "number" || type === "tel" || type === "email" || type === "search" || type === "color"
 									// The date type does not support formatting, so it does not support it.
 									// || type === "date" || type === "datetime-local" || type === "month" || type === "time" || type === "week"
 									|| type === "range"
@@ -2833,7 +2833,7 @@
 								type = N.string.trimToEmpty(ele.attr("type")).toLowerCase();
 								if (tagName === "textarea" || type === "text" || type === "password" || type === "hidden" || type === "file"
 									// Support HTML5 Form's input types
-									|| type === "number" || type === "email" || type === "search" || type === "color"
+									|| type === "number" || type === "tel" || type === "email" || type === "search" || type === "color"
 									// The date type does not support formatting, so it does not support it.
 									// || type === "date" || type === "datetime-local" || type === "month" || type === "time" || type === "week"
 									|| type === "range"
@@ -3020,7 +3020,7 @@
 
 							if (tagName === "textarea" || type === "text" || type === "password" || type === "hidden" || type === "file"
 								// Support HTML5 Form's input types
-								|| type === "number" || type === "email" || type === "search" || type === "color"
+								|| type === "number" || type === "tel" || type === "email" || type === "search" || type === "color"
 								// The date type does not support formatting, so it does not support it.
 								// || type === "date" || type === "datetime-local" || type === "month" || type === "time" || type === "week"
 								|| type === "range"
