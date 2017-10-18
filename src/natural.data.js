@@ -1,5 +1,5 @@
 /*!
- * Natural-DATA v0.8.2.27
+ * Natural-DATA v0.8.2.28
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-		N.version["Natural-DATA"] = "0.8.2.27";
+		N.version["Natural-DATA"] = "0.8.2.28";
 
 	$.fn.extend($.extend(N.prototype, {
 		datafilter : function(callBack) {
@@ -644,7 +644,7 @@
 						retObj[k] = tempValue;
 						if (opts.isElement) {
 							ele = opts.targetEle.filter("#" + k);
-							if (ele.is("input:text, textarea")) {
+							if (ele.is("[type='text'], [type='tel'], textarea")) {
 								ele.val(tempValue);
 								if(opts.createEvent) {
 									ele.unbind("format.formatter unformat.formatter");
