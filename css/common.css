@@ -69,7 +69,7 @@ img {
 	border: none;
 }
 
-input[type='text'], input[type='password'], select, textarea {
+input[type='text'], input[type='number'], input[type='tel'], input[type='password'], select, textarea {
 	border-radius: 3px;
 	padding: 2px 3px;
 	border: 1px solid #cccccc;
@@ -82,7 +82,7 @@ input[type='text'], input[type='password'], select, textarea {
 	border-color: #cceccc;
 }
 
-input[type='text']:hover, select:hover, textarea:hover, input[type='text']:focus, select:focus, textarea:focus {
+input[type='text']:hover, input[type='number']:hover, input[type='tel']:hover, select:hover, textarea:hover, input[type='text']:focus, input[type='number']:focus, input[type='tel']:focus, select:focus, textarea:focus {
 	border-color: #BCFBBC;
 	box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.075);
 	background-color: #fcfdec;
