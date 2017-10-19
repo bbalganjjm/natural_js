@@ -215,7 +215,7 @@
 			<th width="10%">add</th>
 			<th width="10%"><label for="addRow">arguments[0]</label></th>
 			<td width="80%">
-				<input id="addRow" type="text" value="" />
+				<input id="addRow" type="number" value="" />
 				<label for="addRow" lang="ko_KR">추가할 행 인덱스, 입력하지 않으면 addTop 옵션의 설정이 적용 됨.</label>
 				<label for="addRow" lang="en_US">The row index to add, If not, the setting of addTop option is applied.</label>
 			</td>
@@ -242,7 +242,7 @@
 			<th width="10%" rowspan="3">val</th>
 			<th width="10%"><label for="row">arguments[0]</label></th>
 			<td width="80%">
-				<input id="row" type="text" value="0" />
+				<input id="row" type="number" value="0" />
 				<label for="row" lang="ko_KR">대상 행 인덱스</label>
 				<label for="row" lang="en_US">Target row index</label>
 			</td>
@@ -335,6 +335,40 @@
 			</td>
 		</tr>
 		<tr>
+			<th rowspan="2">move</th>
+			<th><label for="moveFrom">arguments[0]</label></th>
+			<td>
+				<input id="moveFrom" type="number" value="4"  />
+				<label for="moveFrom" lang="ko_KR"></label>
+				<label for="moveFrom" lang="en_US"></label>
+			</td>
+		</tr>
+		<tr>
+			<th><label for="moveTo">arguments[1]</label></th>
+			<td>
+				<input id="moveTo" type="number" value="1" />
+				<label for="moveTo" lang="ko_KR"></label>
+				<label for="moveTo" lang="en_US"></label>
+			</td>
+		</tr>
+		<tr>
+			<th rowspan="2">copy</th>
+			<th><label for="copyFrom">arguments[0]</label></th>
+			<td>
+				<input id="copyFrom" type="number" value="4"  />
+				<label for="copyFrom" lang="ko_KR"></label>
+				<label for="copyFrom" lang="en_US"></label>
+			</td>
+		</tr>
+		<tr>
+			<th><label for="copyTo">arguments[1]</label></th>
+			<td>
+				<input id="copyTo" type="number" value="1" />
+				<label for="copyTo" lang="ko_KR"></label>
+				<label for="copyTo" lang="en_US"></label>
+			</td>
+		</tr>
+		<tr>
 			<th width="10%">validate</th>
 			<th width="10%"><label for="vldRow">arguments[0]</label></th>
 			<td width="80%">
@@ -358,6 +392,8 @@
 		<a id="btnData" href="#" data-opts='{ "color": "yellowgreen", "size": "large", "disable": true }'>data</a>
 		<a id="btnSelect" href="#" data-opts='{ "color": "yellowgreen", "size": "large", "disable": true }'>select</a>
 		<a id="btnCheck" href="#" data-opts='{ "color": "yellowgreen", "size": "large", "disable": true }'>check</a>
+		<a id="btnMove" href="#" data-opts='{ "color": "yellowgreen", "size": "large", "disable": true }'>move</a>
+		<a id="btnCopy" href="#" data-opts='{ "color": "yellowgreen", "size": "large", "disable": true }'>copy</a>
 		<a id="btnValidate" href="#" data-opts='{ "color": "yellowgreen", "size": "large", "disable": true }'>validate</a>
 		<a id="btnReload" href="#" data-opts='{ "color": "white", "size": "large" }'>
 			<span lang="ko_KR">DEMO 초기화</span>
@@ -533,6 +569,16 @@
 	        		list.context().parent().alert(JSON.stringify(list.check())).show();
 	        	}
 	        })
+
+	        N("#btnMove", view).click(function(e) {
+	            e.preventDefault();
+	            list.move(eval(N.string.trimToUndefined(N("#moveFrom", view).val())), eval(N.string.trimToUndefined(N("#moveTo", view).val())));
+	        });
+
+	    	N("#btnCopy", view).click(function(e) {
+	            e.preventDefault();
+	            list.copy(eval(N.string.trimToUndefined(N("#copyFrom", view).val())), eval(N.string.trimToUndefined(N("#copyTo", view).val())));
+	        });
 
 	    	N("#btnValidate", view).click(function(e) {
 	            e.preventDefault();
