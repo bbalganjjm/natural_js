@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.19.20
+ * Natural-UI v0.8.19.40
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "0.8.19.20";
+	N.version["Natural-UI"] = "0.8.19.40";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -202,7 +202,36 @@
 					contextEle.on("click.grid.checkSingleTarget", cellTag + " " + opts.checkSingleTarget, function() {
 						contextEle.find(cellTag + " " + opts.checkSingleTarget).not(this).removeAttr("checked");
 					});
-	        	}
+	        	},
+	        	move : function(fromRow, toRow, compNm) {
+					if(fromRow !== toRow) {
+						var opts = this.options;
+
+						opts.data.splice(fromRow < toRow ? toRow - 1 : toRow, 0, opts.data.splice(fromRow, 1)[0]);
+
+						var rowTag = compNm === "grid" ? "tbody" : "li";
+						if(opts.context.find(rowTag + ":eq(" + toRow + ")").length > 0) {
+							opts.context.find(rowTag + ":eq(" + toRow + ")")["before"](opts.context.find(rowTag + ":eq(" + fromRow + ")"));
+						} else {
+							opts.currMoveToRow = toRow;
+							opts.context.find(rowTag + ":eq(" + fromRow + ")").remove();
+						}
+					}
+
+					return this;
+				},
+				copy : function(fromRow, toRow, compNm) {
+					if(fromRow !== toRow) {
+						var opts = this.options;
+
+						opts.data.splice(toRow, 0, opts.data[fromRow]);
+
+						var rowTag = compNm === "grid" ? "tbody" : "li";
+						opts.context.find(rowTag + ":eq(" + toRow + ")")["before"](opts.context.find(rowTag + ":eq(" + fromRow + ")").clone(true, true));
+					}
+
+					return this;
+				}
 			},
 			events : {
 				draggable : function(eventNameSpace, startHandler, moveHandler, endHandler) {
@@ -262,6 +291,9 @@
 				        	var thisWrap = $(this);
 		                    if (thisWrap.scrollTop() >= opts.context.height() - thisWrap.height()) {
 		                    	rowEleLength = opts.context.find(rowTagName).length;
+		                    	if(opts.currMoveToRow > -1 && rowEleLength < opts.currMoveToRow) {
+		                    		defSPSize -= 1;
+		                    	}
 		                    	if (rowEleLength >= opts.scrollPaging.idx + defSPSize) {
 			                        if (rowEleLength > 0 && rowEleLength <= opts.data.length) {
 			                            opts.scrollPaging.idx += defSPSize;
@@ -1033,7 +1065,7 @@
 			// set style class name to context element
 			this.options.context.addClass("datepicker__");
 
-			if(opts.monthonly) {
+			if(this.options.monthonly) {
 				if(this.options.shareEle && N(".datepicker__.datepicker_month_master__").length > 0) {
 					DatePicker.wrapSingleEle.call(this);
 				} else {
@@ -1049,6 +1081,8 @@
 
 			// set this instance to context element
 			this.options.context.instance("datepicker", this);
+
+			return this;
 		};
 
 		$.extend(DatePicker, {
@@ -3767,6 +3801,16 @@
 				this.options.context.find("li:eq(" + String(row) + ")").instance("form").val(key, val);
 				return this;
 			},
+			move : function(fromRow, toRow) {
+				UI.iteration.move.call(this, fromRow, toRow, "list");
+
+				return this;
+			},
+			copy : function(fromRow, toRow) {
+				UI.iteration.copy.call(this, fromRow, toRow, "list");
+
+				return this;
+			},
 			update : function(row, key) {
 				if(row !== undefined) {
 					if(key !== undefined) {
@@ -3832,7 +3876,8 @@
 					fixedcolHeadHeight : 0,
 					fixedcolBodyBindHeight : 0,
 					fixedcolBodyAddHeight : 1
-				}
+				},
+				currMoveToRow : -1
 			};
 
 			try {
@@ -5438,13 +5483,13 @@
 				this.options.context.find("tbody:eq(" + String(row) + ")").instance("form").val(key, val);
 				return this;
 			},
-			move : function(fromRowIdx, toRowIdx) {
-				var opts = this.options;
+			move : function(fromRow, toRow) {
+				UI.iteration.move.call(this, fromRow, toRow, "grid");
 
 				return this;
 			},
-			copy : function(fromRowIdx, toRowIdx) {
-				var opts = this.options;
+			copy : function(fromRow, toRow) {
+				UI.iteration.copy.call(this, fromRow, toRow, "grid");
 
 				return this;
 			},
