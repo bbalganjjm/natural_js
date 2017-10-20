@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.19.40
+ * Natural-UI v0.8.19.42
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "0.8.19.40";
+	N.version["Natural-UI"] = "0.8.19.42";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -55,11 +55,11 @@
 		var UI = N.ui = {
 			iteration : {
 				render : function(i, limit, delay, lastIdx, callType) {
-	        		var opts = this.options;
-	        		var self = this;
+					var opts = this.options;
+					var self = this;
 
 					// clone li for create new row
-					tempRowEleClone = self.tempRowEle.clone(true, true).hide();
+					var tempRowEleClone = self.tempRowEle.clone(true, true).hide();
 					opts.context.append(tempRowEleClone);
 
 					// for row data bind, use N.form
@@ -172,9 +172,9 @@
 						}
 					});
 				},
-	        	checkAll : function(compNm) {
-	        		var opts = this.options;
-	    	        var contextEle = this.contextEle;
+				checkAll : function(compNm) {
+					var opts = this.options;
+					var contextEle = this.contextEle;
 
 					var checkAll = compNm === "grid" ? this.thead.find(opts.checkAll) : $(opts.checkAll);
 					var cellTag = compNm === "grid" ? "tbody > tr > td" : "li";
@@ -193,10 +193,10 @@
 							checkAll.removeProp("checked");
 						}
 					});
-	        	},
-	        	checkSingle : function(compNm) {
+				},
+				checkSingle : function(compNm) {
 	        		var opts = this.options;
-	    	        var contextEle = this.contextEle;
+	        		var contextEle = this.contextEle;
 
 	    	        var cellTag = compNm === "grid" ? "tbody > tr > td" : "li";
 					contextEle.on("click.grid.checkSingleTarget", cellTag + " " + opts.checkSingleTarget, function() {
@@ -207,11 +207,19 @@
 					if(fromRow !== toRow) {
 						var opts = this.options;
 
-						opts.data.splice(fromRow < toRow ? toRow - 1 : toRow, 0, opts.data.splice(fromRow, 1)[0]);
-
+						var insertPos;
+						if(toRow > opts.data.length - 1) {
+							insertPos = "after";
+							toRow = opts.data.length - 1;
+							opts.data.push(opts.data.splice(fromRow, 1)[0]);
+						} else {
+							insertPos = "before";
+							opts.data.splice(fromRow < toRow ? toRow - 1 : toRow, 0, opts.data.splice(fromRow, 1)[0]);
+						}
+$($0).gri
 						var rowTag = compNm === "grid" ? "tbody" : "li";
 						if(opts.context.find(rowTag + ":eq(" + toRow + ")").length > 0) {
-							opts.context.find(rowTag + ":eq(" + toRow + ")")["before"](opts.context.find(rowTag + ":eq(" + fromRow + ")"));
+							opts.context.find(rowTag + ":eq(" + toRow + ")")[insertPos](opts.context.find(rowTag + ":eq(" + fromRow + ")"));
 						} else {
 							opts.currMoveToRow = toRow;
 							opts.context.find(rowTag + ":eq(" + fromRow + ")").remove();
@@ -224,10 +232,18 @@
 					if(fromRow !== toRow) {
 						var opts = this.options;
 
-						opts.data.splice(toRow, 0, opts.data[fromRow]);
-
+						var insertPos;
+						if(toRow > opts.data.length - 1) {
+							insertPos = "after";
+							toRow = opts.data.length - 1;
+							opts.data.push(opts.data[fromRow]);
+						} else {
+							insertPos = "before";
+							opts.data.splice(toRow, 0, opts.data[fromRow]);
+						}
+						
 						var rowTag = compNm === "grid" ? "tbody" : "li";
-						opts.context.find(rowTag + ":eq(" + toRow + ")")["before"](opts.context.find(rowTag + ":eq(" + fromRow + ")").clone(true, true));
+						opts.context.find(rowTag + ":eq(" + toRow + ")")[insertPos](opts.context.find(rowTag + ":eq(" + fromRow + ")").clone(true, true));
 					}
 
 					return this;
@@ -238,29 +254,29 @@
 					var selfEle = this;
 
 					this.bind("mousedown" + eventNameSpace + " touchstart" + eventNameSpace, function(e) {
-		            	var se = e.originalEvent.touches ? e.originalEvent.touches[0] : e;
+						var se = e.originalEvent.touches ? e.originalEvent.touches[0] : e;
 
-		            	if(e.originalEvent.touches || (e.which || e.button) === 1) {
-		            		$(document).bind("dragstart" + eventNameSpace + " selectstart" + eventNameSpace, function() {
-		            			return false;
-		            		});
+						if(e.originalEvent.touches || (e.which || e.button) === 1) {
+							$(document).bind("dragstart" + eventNameSpace + " selectstart" + eventNameSpace, function() {
+								return false;
+							});
 
-		            		var isContinue;
-		            		if(startHandler !== undefined) {
-		            			isContinue = startHandler.call(this, e, selfEle, se.pageX, se.pageY)
-		            		}
-		            		if(isContinue !== false) {
-		            			$(document).bind("mousemove" + eventNameSpace + " touchmove" + eventNameSpace, function(e) {
-			            			var me = e.originalEvent.touches ? e.originalEvent.touches[0] : e;
-			            			if(moveHandler !== undefined) {
-			            				moveHandler.call(this, e, selfEle, me.pageX, me.pageY);
-			            			}
+							var isContinue;
+							if(startHandler !== undefined) {
+								isContinue = startHandler.call(this, e, selfEle, se.pageX, se.pageY)
+							}
+							if(isContinue !== false) {
+								$(document).bind("mousemove" + eventNameSpace + " touchmove" + eventNameSpace, function(e) {
+									var me = e.originalEvent.touches ? e.originalEvent.touches[0] : e;
+									if(moveHandler !== undefined) {
+										moveHandler.call(this, e, selfEle, me.pageX, me.pageY);
+									}
 
-			            			e.preventDefault();
-			            			e.stopImmediatePropagation();
-			            			e.stopPropagation();
-			            			return false;
-			            		});
+									e.preventDefault();
+									e.stopImmediatePropagation();
+									e.stopPropagation();
+									return false;
+								});
 
 			            		$(document).bind("mouseup" + eventNameSpace + " touchend" + eventNameSpace, function(e) {
 			            			if(endHandler !== undefined) {
@@ -1304,7 +1320,7 @@
 
 				// bind focusin event
 				if(opts.focusin) {
-					opts.context.unbind("focusin.datepicker").bind("focusin.datepicker", function(e) {
+					opts.context.unbind("focusin.datepicker").bind("focusin.datepicker", function() {
 						// Hide opened other datepicker dialogs
 						var openedContents = N(".datepicker_contents__:visible");
 						if(openedContents.length > 0) {
@@ -1315,7 +1331,7 @@
 								if(prevOpts.onHide !== null) {
 									prevOpts.onHide.call(self, prevOpts.context, prevOpts.contents);
 								}
-					            prevOpts.context.trigger("onHide", [prevOpts.context, prevOpts.contents]);
+								prevOpts.context.trigger("onHide", [prevOpts.context, prevOpts.contents]);
 							}
 						}
 
@@ -1347,15 +1363,15 @@
 
 					// when press the number keys
 					if (value.length%2 === 0) {
-		        		var dateStrArr = N.date.strToDateStrArr(value, format);
-		        		var dateStrStrArr = N.date.strToDateStrArr(value, format, true);
+						var dateStrArr = N.date.strToDateStrArr(value, format);
+						var dateStrStrArr = N.date.strToDateStrArr(value, format, true);
 
-        				// validate input value
-	        			if(dateStrStrArr[0].length === 4 && dateStrArr[0] < 100) {
-        					opts.context.alert(N.message.get(opts.message, "yearNaN")).show();
-    						opts.context.val(value.replace(dateStrStrArr[0], ""));
-        					return false;
-        				} else if(dateStrStrArr[1].length === 2 && (dateStrArr[1] < 1 || dateStrArr[1] > 12)) {
+						// validate input value
+						if(dateStrStrArr[0].length === 4 && dateStrArr[0] < 100) {
+							opts.context.alert(N.message.get(opts.message, "yearNaN")).show();
+							opts.context.val(value.replace(dateStrStrArr[0], ""));
+							return false;
+						} else if(dateStrStrArr[1].length === 2 && (dateStrArr[1] < 1 || dateStrArr[1] > 12)) {
         					opts.context.alert(N.message.get(opts.message, "monthNaN")).show();
     						opts.context.val(value.replace(dateStrStrArr[1], ""));
         					return false;
