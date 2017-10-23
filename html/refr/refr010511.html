@@ -297,7 +297,7 @@
 			<td style="max-width: 299px;">
 				<p>리스트에서 data를 bind 하거나 add 할때 행이 렌더링 될 때 마다 발생 하는 이벤트 입니다. 이벤트 콜백 메서드의 인자로 생성될 당시의 row index, 행 요소, 로우 데이터를 넣어줍니다.</p>
 				<pre><code class="language-javascript">rowHandlerBeforeBind : function(rowIdx, rowEle, rowData) {
-	// this : N.grid 인스턴스
+	// this : N.list 인스턴스
 	// rowIdx : 생성되는 행의 index
 	// rowEle : 생성되는 행의 row element(tbody)
 	// rowData : 생성되는 행의 row data
@@ -488,7 +488,7 @@ listInstance.data("modified", "col01", "col02", "col03");
 			<td>jquery object</td>
 			<td>
 				<p>리스트 bind 전 초기화 시 지정된 리스트 바디 템플릿 요소를 반환 합니다.</p>
-				<p class="alert">N.grid 는 이 요소를 복제하여 행들을 만듭니다.</p>
+				<p class="alert">N.list 는 이 요소를 복제하여 행들을 만듭니다.</p>
 				<p>contextBodyTemplate 메서드를 통해 반환 된 요소의 구성을 수정하고 다시 바인드 하면 수정된 모양의 리스트 바디가 만들어 집니다.</p>
 				<p>동적으로 리스트 바디의 모양을 바꿔야 된다면 contextBodyTemplate 메서드와 jQuery 를 활용하여 템플릿을 수정하기 바랍니다.</p>
 			</td>
@@ -574,18 +574,18 @@ init : function() {
 
 	// 컴포넌트 초기화
 	var form = N([]).form();
-	var grid = N([]).grid();
+	var list = N([]).list();
 
 	// 데이터 조회
 	N.comm("data url").submit(function(data) {
 		// form 에 데이터 바인드
 		form.bind(0, data);
 
-		// grid 에 form 의 데이터를 바인드
-		grid.bind(form.data());
+		// list 에 form 의 데이터를 바인드
+		list.bind(form.data());
 	});
 
-	// form.data() === grid.data() //-> true
+	// form.data() === list.data() //-> true
 },
 ...
 </code></pre>
@@ -642,7 +642,7 @@ init : function() {
 			<td>remove</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
-			<td>N.grid</td>
+			<td>N.list</td>
 			<td>선택한 행 요소와 데이터를 삭제 합니다.</td>
 		</tr>
 		<tr>
@@ -656,7 +656,7 @@ init : function() {
 			<td>revert</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
-			<td>N.grid</td>
+			<td>N.list</td>
 			<td>bind 했을 때의 초기 데이터나 add 시 생성 된 초기 데이터 상태로 복원 합니다.</td>
 		</tr>
 		<tr>
@@ -784,6 +784,72 @@ init : function() {
 			<td align="center">-</td>
 			<td>
 				<p>true 를 입력 하면 이전에 선택 된 체크박스 들을 선택 취소 하지 않고 추가로 선택 합니다. false 를 입력 하면 이전에 선택 된 체크박스 들을 모두 선택 취소 후 선택 합니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>move</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>N.list</td>
+			<td>
+				<p>선택한 행을 이동 합니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>fromRow</td>
+			<td>number</td>
+			<td align="center">-</td>
+			<td>
+				<p>이동 대상 행의 인덱스를 입력 합니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>toRow</td>
+			<td>number</td>
+			<td align="center">-</td>
+			<td>
+				<p>이동 할 위치의 행 인덱스를 입력 합니다.</p>
+				<p class="alert">
+					지정 한 행 이전으로 이동 됩니다. 마지막 행으로 이동 하려면 마지막 행 인덱스 값에 1을 더하여 입력 해 주세요.
+				</p>
+				<p class="alert">
+					입력 한 값이 바인드 되어 있는 데이터의 전체 행 수 보다 클 경우 항상 마지막 행 다음으로 이동 됩니다.
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td>copy</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>N.list</td>
+			<td>
+				<p>선택한 행을 복사 합니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>fromRow</td>
+			<td>number</td>
+			<td align="center">-</td>
+			<td>
+				<p>복사 대상 행의 인덱스를 입력 합니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>toRow</td>
+			<td>number</td>
+			<td align="center">-</td>
+			<td>
+				<p>복사 할 위치의 행 인덱스를 입력 합니다.</p>
+				<p class="alert">
+					지정 한 행 이전으로 복사 됩니다. 마지막 행으로 복사 하려면 마지막 행 인덱스 값에 1을 더하여 입력 해 주세요.
+				</p>
+				<p class="alert">
+					입력 한 값이 바인드 되어 있는 데이터의 전체 행 수 보다 클 경우 항상 마지막 행 다음으로 복사 됩니다.
+				</p>
 			</td>
 		</tr>
 	</table>

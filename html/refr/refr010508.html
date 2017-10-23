@@ -1044,6 +1044,72 @@ init : function() {
 			<td align="center">-</td>
 			<td>숨김 해제 할 컬럼 인덱스를 지정 합니다. index 들을 array에 담아 인자로 지정 하면 한번에 여러 컬럼을 한번에 숨김 해제 합니다.</td>
 		</tr>
+				<tr>
+			<td>move</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>N.grid</td>
+			<td>
+				<p>선택한 행을 이동 합니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>fromRow</td>
+			<td>number</td>
+			<td align="center">-</td>
+			<td>
+				<p>이동 대상 행의 인덱스를 입력 합니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>toRow</td>
+			<td>number</td>
+			<td align="center">-</td>
+			<td>
+				<p>이동 할 위치의 행 인덱스를 입력 합니다.</p>
+				<p class="alert">
+					지정 한 행 이전으로 이동 됩니다. 마지막 행으로 이동 하려면 마지막 행 인덱스 값에 1을 더하여 입력 해 주세요.
+				</p>
+				<p class="alert">
+					입력 한 값이 바인드 되어 있는 데이터의 전체 행 수 보다 클 경우 항상 마지막 행 다음으로 이동 됩니다.
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td>copy</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>N.grid</td>
+			<td>
+				<p>선택한 행을 복사 합니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>fromRow</td>
+			<td>number</td>
+			<td align="center">-</td>
+			<td>
+				<p>복사 대상 행의 인덱스를 입력 합니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>toRow</td>
+			<td>number</td>
+			<td align="center">-</td>
+			<td>
+				<p>복사 할 위치의 행 인덱스를 입력 합니다.</p>
+				<p class="alert">
+					지정 한 행 이전으로 복사 됩니다. 마지막 행으로 복사 하려면 마지막 행 인덱스 값에 1을 더하여 입력 해 주세요.
+				</p>
+				<p class="alert">
+					입력 한 값이 바인드 되어 있는 데이터의 전체 행 수 보다 클 경우 항상 마지막 행 다음으로 복사 됩니다.
+				</p>
+			</td>
+		</tr>
 	</table>
 
 	<h3>
