@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.19.42
+ * Natural-UI v0.8.19.44
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "0.8.19.42";
+	N.version["Natural-UI"] = "0.8.19.44";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -2328,7 +2328,7 @@ $($0).gri
 					var selectEles = opts.type === 1 || opts.type === 2 ? opts.context.find("option") : opts.context.closest(".select_input_container__").children("label");
 		    		var defSelCnt = selectEles.filter(".select_default__").length;
 		    		var idxs = this.index();
-		    		if(N.type(idxs) === "string") {
+		    		if(N.type(idxs) !== "array") {
 		    			idxs = [idxs];
 		    		}
 					return $(idxs).map(function() {
@@ -2810,7 +2810,7 @@ $($0).gri
 
 								//dataSync
 								eles.unbind("click.form.dataSync select.form.dataSync");
-								eles.data("eles", eles).bind("click.form.dataSync select.form.dataSync", function(e) {
+								eles.data("eles", eles).tpBind("click.form.dataSync select.form.dataSync", function(e) {
 									var currEle = $(this);
 									var currKey = currEle.attr("name");
 									if(currKey === undefined) {
