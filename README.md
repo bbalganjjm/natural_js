@@ -4,7 +4,7 @@ Natural-JS
 
 ----------------------------------------------
 
-**Natural-JS** 는 ERP, CRM 등의 기업용 웹 어플리케이션 UI를 쉽고 빠르게 구현할 수 있는 Javascript 프레임워크 라이브러리 입니다.
+**Natural-JS** 는 ERP, CRM 등의 기업용 웹 어플리케이션 UI를 쉽고 빠르게 구현 할 수 있는 Javascript 프레임워크 라이브러리 입니다.
 
 Structure(구조)
 ==========
@@ -12,7 +12,7 @@ Structure(구조)
 **Natural-CORE** is CORE library package that is used internally in the framework.
 **Natural-ARCHITECTURE** is CVC Architecture Pattern based Architecture Framework. it makes structured and simplifies a complex web UI environment.
 **Natural-DATA** provides a module for data processing and data synchronization.
-**Natural-UI** provides a variety of components such as HTML-based Grid, Form, Popup that help to improve user experience and web development productivity.
+**Natural-UI** provides a variety of components such as HTML-based Grid, List, Form, Popup that help to improve user experience and web development productivity.
 
 ----------------------------------------------
 
@@ -20,7 +20,7 @@ Structure(구조)
 **Natural-CORE** 는 프레임워크에서 내부적으로 사용하는 CORE 라이브러리 패키지 입니다.
 **Natural-ARCHITECTURE** 는 복잡한 웹 UI 환경을 구조화, 단순화 시켜주는 CVC Architecture Pattern 기반의 Architecture Framework를 제공 합니다.
 **Natural-DATA** 는 Data 처리 및 데이터 동기화에 대한 모듈들을 제공 합니다.
-**Natural-UI** 는 HTML 기반의 Grid, Form, Popup등 여러가지 컴포넌트를 제공하여 웹 사용자경험과 개발생산성을 증대 시켜 줍니다.
+**Natural-UI** 는 HTML 기반의 Grid, List, Form, Popup등 여러가지 컴포넌트를 제공하여 웹 사용자경험과 개발생산성을 증대 시켜 줍니다.
 
 Reference(참고)
 =========
@@ -43,7 +43,7 @@ Features(특징)
 - Provide various UI-Components.
  * Controller, Communicator
  * Formatter, Validator
- * Grid, Form, Select
+ * Grid, List, Form, Select
  * Pagination, Tree
  * Alert, Popup, Tab, Button, Datepicker
  * Documents, Notify
@@ -56,7 +56,7 @@ Features(특징)
 - 다양한 UI 컴포넌트와 라이브러리를 제공 합니다.
  * Controller, Communicator
  * Formatter, Validator
- * Grid, Form, Select
+ * Grid, List, Form, Select
  * Pagination, Tree
  * Alert, Popup, Tab, Button, Datepicker
  * Documents, Notify
@@ -66,4 +66,4 @@ License(저작권)
 =======
 Copyright 2014 KIM HWANG MAN<br/>
 Released under the LGPL license<br/>
-bbalganjjm@gmail.com<br/>
+bbalganjjm@gmail.com
