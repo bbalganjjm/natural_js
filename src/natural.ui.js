@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.19.44
+ * Natural-UI v0.8.19.53
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "0.8.19.44";
+	N.version["Natural-UI"] = "0.8.19.53";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -216,7 +216,7 @@
 							insertPos = "before";
 							opts.data.splice(fromRow < toRow ? toRow - 1 : toRow, 0, opts.data.splice(fromRow, 1)[0]);
 						}
-$($0).gri
+
 						var rowTag = compNm === "grid" ? "tbody" : "li";
 						if(opts.context.find(rowTag + ":eq(" + toRow + ")").length > 0) {
 							opts.context.find(rowTag + ":eq(" + toRow + ")")[insertPos](opts.context.find(rowTag + ":eq(" + fromRow + ")"));
@@ -377,12 +377,12 @@ $($0).gri
 			try {
 				// 1. When N.context.attr("ui").alert.container value is undefined
 				this.options.container = N.context.attr("architecture").page.context;
-				// 2. If defined the N.context.attr("ui").alert.container value to N.config, this.options.container value is defined from N.config's value
-				this.options = $.extend({}, this.options, N.context.attr("ui").alert);
+				// 2. If defined the N.context.attr("ui").alert.container value to N.config this.options.container value is defined from N.config's value
+				$.extend(true, this.options, N.context.attr("ui").alert);
+				
 				if(N.isString(this.options.container)) {
 					this.options.container = N(this.options.container);
 				}
-				this.options.draggableOverflowCorrectionAddValues = $.extend({}, this.options.draggableOverflowCorrectionAddValues, N.context.attr("ui").alert.draggableOverflowCorrectionAddValues);
 			} catch (e) {
 				N.error("[N.alert]" + e, e);
 			}
@@ -391,7 +391,7 @@ $($0).gri
 				this.options.isInput = true;
 			}
 			if(msg !== undefined && N.isPlainObject(msg)) {
-				$.extend(this.options, msg);
+				$.extend(true, this.options, msg);
 				if(N.isString(this.options.container)) {
 					this.options.container = N(this.options.container);
 				}
@@ -905,7 +905,7 @@ $($0).gri
 			};
 
 			try {
-				this.options = $.extend({}, this.options, N.context.attr("ui").button);
+				$.extend(this.options, N.context.attr("ui").button);
 			} catch (e) {
 				N.error("[N.button]" + e, e);
 			}
@@ -1069,7 +1069,7 @@ $($0).gri
 			};
 
 			try {
-				this.options = $.extend({}, this.options, N.context.attr("ui").datepicker);
+				$.extend(this.options, N.context.attr("ui").datepicker);
 			} catch (e) {
 				N.error("[N.datepicker]" + e, e);
 			}
@@ -1645,7 +1645,7 @@ $($0).gri
 			};
 
 			try {
-				this.options = $.extend({}, this.options, N.context.attr("ui").popup);
+				$.extend(true, this.options, N.context.attr("ui").popup);
 			} catch (e) {
 				N.error("[N.popup]" + e, e);
 			}
@@ -1660,7 +1660,9 @@ $($0).gri
 					obj = N(window);
 				}
 			}
-			$.extend(this.options, opts);
+			
+			$.extend(true, this.options, opts);
+			
 			// if title option value is undefined
 			this.options.title = opts !== undefined ? N.string.trimToNull(opts.title) : null;
 
@@ -1886,13 +1888,13 @@ $($0).gri
 			};
 
 			try {
-				this.options = $.extend({}, this.options, N.context.attr("ui").tab);
+				$.extend(true, this.options, N.context.attr("ui").tab);
 			} catch (e) {
 				N.error("[N.tab]" + e, e);
 			}
 
 			if (N.isPlainObject(obj)) {
-				$.extend(this.options, obj);
+				$.extend(true, this.options, obj);
 				this.options.context = N(obj.context);
 			}
 			this.options.links = this.options.context.find(">ul>li");
@@ -2279,7 +2281,7 @@ $($0).gri
 			};
 
 			try {
-				this.options = $.extend({}, this.options, N.context.attr("ui").select);
+				$.extend(this.options, N.context.attr("ui").select);
 			} catch (e) {
 				N.error("[N.select]" + e, e);
 			}
@@ -2482,7 +2484,7 @@ $($0).gri
 			};
 
 			try {
-				this.options = $.extend({}, this.options, N.context.attr("ui").form);
+				$.extend(this.options, N.context.attr("ui").form);
 			} catch (e) {
 				N.error("[N.form]" + e, e);
 			}
@@ -2682,7 +2684,6 @@ $($0).gri
 									}
 
 									//Enter key event
-									ele.unbind("keyup.form.dataSync");
 									if(N.isEmptyObject(ele.events("keyup", "dataSync.form"))) {
 										 ele.bind("keyup.form.dataSync", function(e) {
 				                        	if ((e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode)) == 13) {
@@ -2708,7 +2709,7 @@ $($0).gri
 						                        });
 											}
 
-											if(N.isEmptyObject(ele.events("focusout", "form.unformat"))) {
+											if(N.isEmptyObject(ele.events("focusout", "form.format"))) {
 												ele.bind("focusout.form.format", function() {
 													var currEle = $(this);
 						                            if (!currEle.prop("disabled") && !currEle.prop("readonly") && (!opts.validate || (opts.validate && !currEle.hasClass("validate_false__")))) {
@@ -3301,10 +3302,7 @@ $($0).gri
 			};
 
 			try {
-				this.options = $.extend({}, this.options, N.context.attr("ui").list);
-
-				//For $.extend method does not extend object type
-				this.options.scrollPaging = $.extend({}, this.options.scrollPaging, N.context.attr("ui").list.scrollPaging);
+				$.extend(true, this.options, N.context.attr("ui").list);
 			} catch (e) {
 				N.error("[N.list]" + e, e);
 			}
@@ -3313,11 +3311,7 @@ $($0).gri
 				//convert data to wrapped set
 				opts.data = N.type(opts.data) === "array" ? N(opts.data) : opts.data;
 
-				$.extend(this.options, opts);
-				//For $.extend method does not extend object type
-				if(opts.scrollPaging !== undefined) {
-					$.extend(this.options.scrollPaging, opts.scrollPaging);
-				}
+				$.extend(true, this.options, opts);
 
 				//for scroll paging limit
 				this.options.scrollPaging.limit = this.options.scrollPaging.size;
@@ -3890,18 +3884,16 @@ $($0).gri
 					resizeBarCorrectionHeight : 0,
 					fixedcolHeadMarginTop : 0,
 					fixedcolHeadHeight : 0,
+					fixedcolBodyMarginTop : 0,
 					fixedcolBodyBindHeight : 0,
-					fixedcolBodyAddHeight : 1
+					fixedcolBodyAddHeight : 1,
+					fixedcolRootContainer : null // for mobile browser, input selector string
 				},
 				currMoveToRow : -1
 			};
 
 			try {
-				this.options = $.extend({}, this.options, N.context.attr("ui").grid);
-
-				//For $.extend method does not extend object type
-				this.options.scrollPaging = $.extend({}, this.options.scrollPaging, N.context.attr("ui").grid.scrollPaging);
-				this.options.misc = $.extend({}, this.options.misc, N.context.attr("ui").grid.misc);
+				$.extend(true, this.options, N.context.attr("ui").grid);
 			} catch (e) {
 				N.error("[N.grid]" + e, e);
 			}
@@ -3910,11 +3902,7 @@ $($0).gri
 				//convert data to wrapped set
 				opts.data = N.type(opts.data) === "array" ? N(opts.data) : opts.data;
 
-				$.extend(this.options, opts);
-				//For $.extend method does not extend object type
-				if(opts.scrollPaging !== undefined) {
-					$.extend(this.options.scrollPaging, opts.scrollPaging);
-				}
+				$.extend(true, this.options, opts);
 
 				//for scroll paging limit
 				this.options.scrollPaging.limit = this.options.scrollPaging.size;
@@ -4146,9 +4134,14 @@ $($0).gri
 					})).parent("div");
 
 					var gridContainer = gridWrap.wrap($("<div/>", {
-						"css" : { "position" : "relative" },
 						"class" : "grid_container__"
 					})).parent("div");
+
+					if(opts.misc.fixedcolRootContainer === null) {
+						gridContainer.css("position", "relative");						
+					} else {
+						opts.context.closest(opts.misc.fixedcolRootContainer).css("position", "relative");
+					}
 
 					var theadTrHeight = self.thead.find("> tr").height();
 					self.thead.find("> tr").height(theadTrHeight);
@@ -5591,7 +5584,7 @@ $($0).gri
 			};
 
 			try {
-				this.options = $.extend({}, this.options, N.context.attr("ui").pagination);
+				$.extend(this.options, N.context.attr("ui").pagination);
 			} catch (e) {
 				N.error("[N.pagination]" + e, e);
 			}
@@ -5904,7 +5897,7 @@ $($0).gri
 			};
 
 			try {
-				this.options = $.extend({}, this.options, N.context.attr("ui").tree);
+				$.extend(this.options, N.context.attr("ui").tree);
 			} catch (e) {
 				N.error("[N.tree]" + e, e);
 			}
