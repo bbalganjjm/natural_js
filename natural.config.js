@@ -563,7 +563,11 @@
 				/**
 				 * 컬럼 고정 시 데이터를 Add 할 때 고정 된 바디 셀(TD)의 높이가 맞지 않을때 아래 수치 조절(기본값 : 1)
 				 */
-				"fixedcolBodyAddHeight" : 1
+				"fixedcolBodyAddHeight" : 1,
+				/**
+				 * 컬럼 고정 시 그리드 위에 있는 요소가 동적으로 높이가 조절 될때 그리드 모양이 깨지면 동적으로 높이가 조절 되는 요소와 그리드 요소를 모두 포함하고 있는 요소를 jQuery selector 문자열로 지정.
+				 */
+				"fixedcolRootContainer" : null
 			}
 		}
 	});
