@@ -355,7 +355,7 @@
 						return {};
 					} else {
 						var params = {};
-						var parts = this.options.url.split("?")[1].substring(1).split('&');
+						var parts = this.options.url.split("?")[1].split('&');
 						for (var i = 0; i < parts.length; i++) {
 							var nv = parts[i].split('=');
 							if (!nv[0])
