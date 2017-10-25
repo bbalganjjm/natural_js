@@ -1,5 +1,5 @@
 /*!
- * Natural-DATA v0.8.2.28
+ * Natural-DATA v0.8.2.29
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-		N.version["Natural-DATA"] = "0.8.2.28";
+		N.version["Natural-DATA"] = "0.8.2.29";
 
 	$.fn.extend($.extend(N.prototype, {
 		datafilter : function(callBack) {
@@ -346,7 +346,10 @@
 						var options = {
 							monthonly : isMonth,
 							onBeforeShow : function(context, contents) {
-								if(contents.closest(".view_context__").length > 0) {
+								if(contents.closest(".view_context__").length > 0 
+										&& !(contents.closest(".view_context__").css("position") === "relative"
+											|| contents.closest(".view_context__").css("position") === "absolute"
+											|| contents.closest(".view_context__").css("position") === "sticky")) {
 									contents.closest(".view_context__").css("position", "relative");
 									contents.closest(".context_wrap__").css("position", "relative");
 									this.isApplyRelative = true;
