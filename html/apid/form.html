@@ -401,6 +401,12 @@
 	            });
 	    	});
 
+	        N("#btnAdd", view).click(function(e) {
+	            e.preventDefault();
+	            form.add(parseInt(N.string.trimToUndefined(N("#addRow", view).val())));
+	            N("#btnBind", view).instance("button").disable();
+	        });
+
 	        N("#btnBind", view).click(function(e) {
 	            e.preventDefault();
 	            form.bind(parseInt(N("#row").val()));
@@ -416,12 +422,6 @@
 	    			return false;
 	    		}
 	            form.unbind();
-	        });
-
-	        N("#btnAdd", view).click(function(e) {
-	            e.preventDefault();
-	            form.add(parseInt(N.string.trimToUndefined(N("#addRow", view).val())));
-	            N("#btnBind", view).instance("button").disable();
 	        });
 
 	        N("#btnRevert", view).click(function(e) {
