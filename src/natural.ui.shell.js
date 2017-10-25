@@ -1,5 +1,5 @@
 /*!
- * Natural-UI.Shell v0.8.1.8, Works fine in IE9 and above
+ * Natural-UI.Shell v0.8.1.10, Works fine in IE9 and above
  * bbalganjjm@gmail.com
  *
  * Copyright 2017 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2017-05-11T20:00Z
  */
 (function(window, $) {
-	N.version["Natural-UI.Shell"] = "0.8.1.8";
+	N.version["Natural-UI.Shell"] = "0.8.1.10";
 
 	$.fn.extend($.extend(N.prototype, {
 		notify : function(opts) {
@@ -27,10 +27,7 @@
 			}
 
 			this.options = {
-				position : {
-					top : 10,
-					right : 10
-				},
+				position : null,
 				container : N("body"),
 				context : null,
 				displayTime : 7,
@@ -41,6 +38,14 @@
 
 			try {
 				this.options = $.extend({}, this.options, N.context.attr("ui.shell").notify);
+				
+				//For $.extend method does not extend object type
+				var position = {
+					top : 10,
+					right : 10
+				}
+				this.options.position = $.extend({}, position, N.context.attr("ui").notify.position);
+				
 				if(position) {
 					if(N.isWrappedSet(position)) {
 						if(position.length > 0) {
@@ -759,7 +764,7 @@
 
 				return this;
 			},
-			"remove" : function(docId) {
+			"remove" : function(docId, unconditional) {
 				var opts = this.options;
 
 				if(opts.docs[docId] === undefined) {
@@ -779,7 +784,9 @@
 				}
 
 				var dataChangedInputEle = opts.context.find("> .docs_contents__." + docId + "__ .data_changed__");
-				if(dataChangedInputEle.length > 0) {
+				if(dataChangedInputEle.length === 0 || unconditional === true) {
+					Documents.remove.call(self, targetTabEle);					
+				} else {
 					N(window).alert({
 						msg : N.message.get(opts.message, "closeConf", [ opts.docs[docId].docNm ]),
 						confirm : true,
@@ -790,8 +797,6 @@
 							dataChangedInputEle.get(0).focus();
 						}
 					}).show();
-				} else {
-					Documents.remove.call(self, targetTabEle);
 				}
 				return this;
 			},
