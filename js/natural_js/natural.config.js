@@ -191,7 +191,7 @@
 			    	}
 
 			    	var navHeight = N(".header nav").outerHeight();
-					N(window).scroll(function(e) {
+					N(window).unbind("scroll.aop").bind("scroll.aop", function(e) {
 						if(N(this).scrollTop() > 303 - navHeight) {
 							contents.css({
 								"position" : "fixed",
