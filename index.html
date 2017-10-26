@@ -48,6 +48,14 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		IndexController.init(window);
+		
+		$(window).resize(function() {
+			if($(window).width() > 578) {
+				$("meta[name=viewport]").attr("content", "width=device-width, user-scalable=0")
+			} else {
+				$("meta[name=viewport]").attr("content", "width=578, user-scalable=0")
+			}
+		}).resize();
 	});
 </script>
 
