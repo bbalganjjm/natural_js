@@ -411,16 +411,20 @@
 			<td>null</td>
 			<td></td>
 			<td style="max-width: 299px;">
-				<p>그리드의 행이 선택 될 때 마다 발생되는 이벤트이다. 이벤트 콜백 메서드의 인자로 선택한 행의 row index, 행 요소, 로우 데이터, 바로전에 선택한 row index를  넣어준다.</p>
+				<p>그리드의 행이 선택 될 때 마다 발생되는 이벤트 입니다. 지정한 이벤트 핸들러의 인자로 선택한 행의 row index, 행 요소, 로우 데이터, 바로전에 선택한 row index를 반환 합니다.</p>
 				<pre><code class="language-javascript">onSelect : function(rowIdx, rowEle, rowData, beforeRowIdx, e) {
 	// this : N.grid 인스턴스
-	// rowIdx : 선택된 행의 index
+	// rowIdx : 선택된 행의 index 
 	// rowEle : 선택된 행의 row element(tbody)
 	// rowData : 선택된 행의 row data
 	// beforeRowIdx : 이전 선택된 행의 index
 	// e : Click event object
 }</code></pre>
-				<p> select 옵션이 true 일 때만 발생 됩니다.</p>
+				<p class="alert">select 옵션이 true 일 때만 발생 됩니다.</p>
+				<p class="alert">
+					unselect 옵션이 false(기본값) 이면 선택이 해제 되었을 때 rowIdx 인자 값에 -1을 반환 하고 선택 되었을 때는 선택 된 행의 인덱스를 반환 합니다.
+					unselect 옵션이 true 이면 선택 해제 기능이 비활성화 되기 때문에 rowIdx 값은 항상 선택 된 행의 인덱스를 반환 합니다.
+				</p>
 			</td>
 		</tr>
 		<tr>
