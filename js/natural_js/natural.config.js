@@ -252,9 +252,6 @@
 						/* 디버깅 지원을 위한 컨트롤러의 sourceURL 자동 삽입 처리 */
 						var opts = request.options;
 						if((opts.target && N.isElement(opts.target)) || opts.dataType === "html") {
-							if(typeof(console.debug) !== undefined) {
-								console.debug("page load : " + opts.url);
-							}
 							var cutIndex = data.lastIndexOf("</script>");
 							return data = [data.slice(0, cutIndex), '\n//# sourceURL=' + opts.url + "\n", data.slice(cutIndex)].join("");
 						}
