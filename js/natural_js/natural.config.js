@@ -252,7 +252,13 @@
 						/* 디버깅 지원을 위한 컨트롤러의 sourceURL 자동 삽입 처리 */
 						var opts = request.options;
 						if((opts.target && N.isElement(opts.target)) || opts.dataType === "html") {
-							var cutIndex = data.lastIndexOf("</script>");
+							var cutIndex = data.lastIndexOf("\n</script>");
+							if(cutIndex < 0) {
+								cutIndex = data.lastIndexOf("\t</script>");
+							}
+							if(cutIndex < 0) {
+								cutIndex = data.lastIndexOf(" </script>");
+							}
 							return data = [data.slice(0, cutIndex), '\n//# sourceURL=' + opts.url + "\n", data.slice(cutIndex)].join("");
 						}
 					},
