@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.19.61
+ * Natural-UI v0.8.19.74
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "0.8.19.61";
+	N.version["Natural-UI"] = "0.8.19.74";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -71,7 +71,7 @@
 						extRow : i,
 						revert : opts.revert,
 						unbind : false
-					})
+					});
 
 					if(opts.rowHandlerBeforeBind !== null) {
 						opts.rowHandlerBeforeBind.call(self, i, tempRowEleClone, opts.data[i]);
@@ -288,18 +288,26 @@
 			            			};
 			            			$(document).unbind("dragstart" + eventNameSpace + " selectstart" + eventNameSpace + " mousemove" + eventNameSpace + " touchmove" + eventNameSpace + " mouseup" + eventNameSpace + " touchend" + eventNameSpace);
 
-			            			e.preventDefault();
+			            			if(!e.originalEvent.touches) {
+										e.preventDefault();
+									}
 			            			e.stopImmediatePropagation();
 			            			e.stopPropagation();
-			            			return false;
+			            			if(!e.originalEvent.touches) {
+			            				return false;
+			            			}
 			            		});
 		            		}
 		            	}
 
-		            	e.preventDefault();
+						if(!e.originalEvent.touches) {
+							e.preventDefault();
+						}
 		            	e.stopImmediatePropagation();
 		            	e.stopPropagation();
-		            	return false;
+		            	if(!e.originalEvent.touches) {
+            				return false;
+            			}
 		        	});
 				},
 				/**
@@ -431,6 +439,10 @@
 				N.error("[N.alert]" + e, e);
 			}
 
+			if(N(this.options.container).length === 0) {
+				N.error("[N.alert]Container element is missing. please specify the correct element selector that will contain the message dialog's element. it can be defined in the \"N.context.attr(\"ui\").alert.container\" property of \"natural.config.js\" file.");
+			}
+			
 			if (obj.is(":input")) {
 				this.options.isInput = true;
 			}
@@ -564,7 +576,7 @@
 				if(opts.height > 0) {
 					opts.msgContents.find(".msg_box__").height(opts.height).css("overflow-y", "auto");
 					if(opts.windowScrollLock) {
-			        	N.element.windowScrollLock(opts.msgContents.find(".msg_box__"));
+			        	N.event.windowScrollLock(opts.msgContents.find(".msg_box__"));
 			        }
 				}
 
@@ -912,13 +924,13 @@
 					opts.msgContext.hide();
 
 					opts.msgContents.removeClass("visible__").addClass("hidden__");
-					opts.msgContents.one(N.element.whichTransitionEvent(opts.msgContents), function(e){
+					opts.msgContents.one(N.event.whichTransitionEvent(opts.msgContents), function(e){
 						opts.msgContents.hide();
 			        }).trigger("nothing");
 
 				} else {
 					opts.msgContents.removeClass("visible__").addClass("hidden__");
-					opts.msgContents.one(N.element.whichTransitionEvent(opts.msgContents), function(e){
+					opts.msgContents.one(N.event.whichTransitionEvent(opts.msgContents), function(e){
 						clearTimeout(opts.iTime);
 						opts.msgContext.remove();
 			        }).trigger("nothing");
@@ -939,12 +951,12 @@
 					opts.msgContext.remove();
 
 					opts.msgContents.removeClass("visible__").addClass("hidden__");
-					opts.msgContents.one(N.element.whichTransitionEvent(opts.msgContents), function(e){
+					opts.msgContents.one(N.event.whichTransitionEvent(opts.msgContents), function(e){
 						opts.msgContents.remove();
 			        }).trigger("nothing");
 				} else {
 					opts.msgContext.removeClass("visible__").addClass("hidden__");
-					opts.msgContext.one(N.element.whichTransitionEvent(opts.msgContext), function(e){
+					opts.msgContext.one(N.event.whichTransitionEvent(opts.msgContext), function(e){
 						clearTimeout(opts.iTime);
 						opts.msgContext.remove();
 			        }).trigger("nothing");
@@ -989,6 +1001,9 @@
 		};
 
 		$.extend(Button, {
+			context : function(sel) {
+				return sel !== undefined ? this.options.context.find(sel) : this.options.context;
+			},
 			wrapEle : function() {
 				var opts = this.options;
 
@@ -1098,7 +1113,7 @@
 				var context = this.options.context;
 		        if (context.is("a")) {
 		        	context.unbind("click.button");
-		            context.tpBind("click.button", N.element.disable);
+		            context.tpBind("click.button", N.event.disable);
 		        } else {
 		            context.prop("disabled", true);
 		        }
@@ -1108,7 +1123,7 @@
 			enable : function() {
 				var context = this.options.context;
 		        if (context.is("a")) {
-		            context.unbind("click", N.element.disable);
+		            context.unbind("click", N.event.disable);
 		        } else {
 		            context.prop("disabled", false);
 		        }
@@ -1384,18 +1399,22 @@
 				// bind focusin event
 				if(opts.focusin) {
 					opts.context.unbind("focusin.datepicker").bind("focusin.datepicker", function() {
+						if(!opts.context.is(this)) {
+							opts.context = $(this);
+						}
 						if(!opts.context.prop("readonly") && !opts.context.prop("disabled")) {
 							// Hide opened other datepicker dialogs
 							var openedContents = N(".datepicker_contents__:visible");
 							if(openedContents.length > 0) {
 								openedContents.removeClass("visible__").addClass("hidden__").hide();
 
-								if(openedContents.prev(".datepicker__").length > 0) {
-									var prevOpts = openedContents.prev(".datepicker__").instance("datepicker").options;
+								var context = openedContents.prev(".datepicker__");
+								if(context.length > 0) {
+									var prevOpts = context.instance("datepicker").options;
 									if(prevOpts.onHide !== null) {
 										prevOpts.onHide.call(self, prevOpts.context, prevOpts.contents);
 									}
-									prevOpts.context.trigger("onHide", [prevOpts.context, prevOpts.contents]);
+									context.trigger("onHide", [prevOpts.context, prevOpts.contents]);
 								}
 							}
 
@@ -1561,6 +1580,9 @@
 		});
 
 		$.extend(DatePicker.prototype, {
+			context : function(sel) {
+				return sel !== undefined ? this.options.context.find(sel) : this.options.context;
+			},
 			show : function() {
 				var opts = this.options;
 				var self = this;
@@ -1661,7 +1683,7 @@
 					opts.context.unbind("blur.datepicker");
 
 					opts.contents.removeClass("visible__").addClass("hidden__");
-					opts.contents.one(N.element.whichTransitionEvent(opts.contents), function(e){
+					opts.contents.one(N.event.whichTransitionEvent(opts.contents), function(e){
 			            $(this).hide();
 			            if(opts.onHide !== null) {
 							opts.onHide.call(self, opts.context, opts.contents);
@@ -1676,7 +1698,7 @@
 
 		// Popup
 		var Popup = N.popup = function(obj, opts) {
-			//TODO think more : whether the "onload" event needs or not
+			// TODO think more : whether the "onload" event needs or not
 			this.options = {
 				context : obj,
 				url : null,
@@ -1737,8 +1759,10 @@
 			var self = this;
 			try {
 				var caller = arguments.callee.caller;
+				var callers = [caller];
 				while(caller != null) {
 				    caller = caller.arguments.callee.caller;
+				    callers.push(caller);
 				    if(caller != null && caller.arguments.length > 0 && N(caller.arguments[0]).hasClass("view_context__") && caller.arguments[0].instance != null && N.type(caller.arguments[0].instance) === "function") {
 						self.opener = caller.arguments[0].instance("cont");
 						break;
@@ -1746,15 +1770,23 @@
 
 				    // Infinite loop prevention processing
 				    if(caller == $.event.dispatch) {
-				    	caller = null;
+				    	callers = undefined;
+				    	N.error("Opener not found");
+				    }
+				    if(callers.indexOf(caller) > -1) {
+				    	callers = undefined;
+				    	N.error("Opener not found");
 				    }
 				}
 			} catch(e) {
+				callers = undefined;
 				if(this.options.url !== null) {
 					N.warn("[N.popup][" + e + "]N.popup failed to set the opener object on the Controller(N.cont) of the popup.");
 				}
 			}
 
+			callers = undefined;
+			
 			if(this.options.url !== null) {
 				if(this.options.preload) {
 					Popup.loadContent.call(this, function(cont, context) {
@@ -2038,9 +2070,22 @@
 					}
 				});
 
-				opts.links.bind("click.tab", function(e, onOpenData, isFirst) {
+				var marginLeft;
+				opts.links.bind("mousedown.tab touchstart.tab", function(e) {
+					e.preventDefault();
+					
+					marginLeft = parseInt(opts.context.find(">ul").css("margin-left"));
+				});
+				
+				opts.links.bind("click.tab touchend.tab", function(e, onOpenData, isFirst) {
 					e.preventDefault();
 
+					if(marginLeft !== undefined && Math.abs(parseInt(opts.context.find(">ul").css("margin-left")) - marginLeft) > 15 && isFirst !== true) {
+						marginLeft = undefined;
+						return false;
+					}
+					marginLeft = undefined;
+					
 					if(!$(this).hasClass("tab_active__")) {
 						var selTabEle = $(this);
 						var selTabIdx = opts.links.index(this);
@@ -2081,7 +2126,7 @@
 								isRelative = true;
 							}
 							beforeActivatedContent.removeClass("tab_content_active__ visible__").addClass("hidden__");
-							beforeActivatedContent.one(N.element.whichTransitionEvent(beforeActivatedContent), function(e){
+							beforeActivatedContent.one(N.event.whichTransitionEvent(beforeActivatedContent), function(e){
 								$(this).hide();
 								if(isRelative) {
 									opts.context.css("position", "");
@@ -2173,6 +2218,8 @@
 						prevBtnEle.removeClass("disabled__");
 						nextBtnEle.addClass("disabled__");
 					});
+					
+					lastDistance = prevBtnEle.outerWidth();
 				}
 
 				$(window).bind("resize" + eventNameSpace, function() {
@@ -2210,6 +2257,7 @@
 				var sPageX;
 				var prevDefGap = 0;
 				var nextDefGap = 0;
+				var isMoved = false;
 				if(scrollBtnEles.length > 1) {
 					prevDefGap = prevBtnEle.outerWidth();
 					nextDefGap = nextBtnEle.outerWidth();
@@ -2228,27 +2276,32 @@
 					} else {
 						lastDistance = distance;
 						tabContainerEle_.css("margin-left", distance + "px");
+						isMoved = true;
 					}
 				}, function(e, tabContainerEle_) { //end
-					if(lastDistance + (scrollBtnEles.length > 1 ? 0 : 30) >= 0 && lastDistance <= prevDefGap) {
-						if(scrollBtnEles.length > 1) {
-							lastDistance = prevDefGap;
-							nextBtnEle.removeClass("disabled__");
-							prevBtnEle.addClass("disabled__");
+					if(isMoved) {
+						if(lastDistance + (scrollBtnEles.length > 1 ? 0 : 30) >= 0 && lastDistance <= prevDefGap) {
+							if(scrollBtnEles.length > 1) {
+								lastDistance = prevDefGap;
+								nextBtnEle.removeClass("disabled__");
+								prevBtnEle.addClass("disabled__");
+							} else {
+								lastDistance = 0;
+							}
+							tabContainerEle_.addClass("effect__").css("margin-left", lastDistance + "px");
+							isMoved = false;
+						} else if(nextDefGap + (scrollBtnEles.length > 1 ? 0 : 30) >= tabContainerEle_.width() - (opts.context.outerWidth() + lastDistance * -1)) {
+							lastDistance = (tabContainerEle_.width() - opts.context.outerWidth() - 1) * -1;
+							if(scrollBtnEles.length > 1) {
+								lastDistance -= nextDefGap;
+								prevBtnEle.removeClass("disabled__");
+								nextBtnEle.addClass("disabled__");
+							}
+							tabContainerEle_.addClass("effect__").css("margin-left", lastDistance + "px");
+							isMoved = false;
 						} else {
-							lastDistance = 0;
-						}
-						tabContainerEle_.addClass("effect__").css("margin-left", lastDistance + "px");
-					} else if(nextDefGap + (scrollBtnEles.length > 1 ? 0 : 30) >= tabContainerEle_.width() - (opts.context.outerWidth() + lastDistance * -1)) {
-						lastDistance = (tabContainerEle_.width() - opts.context.outerWidth() - 1) * -1;
-						if(scrollBtnEles.length > 1) {
-							lastDistance -= nextDefGap;
-							prevBtnEle.removeClass("disabled__");
-							nextBtnEle.addClass("disabled__");
-						}
-						tabContainerEle_.addClass("effect__").css("margin-left", lastDistance + "px");
-					} else {
-						scrollBtnEles.removeClass("disabled__");
+							scrollBtnEles.removeClass("disabled__");
+						}						
 					}
 				});
 			},
@@ -2305,6 +2358,29 @@
 					} else {
 						$(opts.links.get(idx)).trigger("click.tab");
 					}
+					
+					if(opts.tabScroll) {
+						var tabContainerEle = opts.context.find(">ul");
+						if(tabContainerEle.outerWidth() > opts.context.innerWidth()) {
+							var marginLeft = parseInt(tabContainerEle.css("margin-left")) - $(opts.links.get(idx)).position().left + (opts.context.innerWidth() / 2 - $(opts.links.get(idx)).outerWidth() / 2);
+							var prevBtnEle = opts.context.find(">a.tab_scroll_prev__");
+							var nextBtnEle = opts.context.find(">a.tab_scroll_next__");
+							
+							if(marginLeft > opts.context.find(">a.tab_scroll_prev__").outerWidth()) {
+								marginLeft = prevBtnEle.length > 0 ? prevBtnEle.outerWidth() : 0;
+								nextBtnEle.removeClass("disabled__");
+								prevBtnEle.addClass("disabled__");
+							} else if(opts.context.innerWidth() > tabContainerEle.outerWidth() + marginLeft) {
+								marginLeft = -(tabContainerEle.outerWidth() - opts.context.innerWidth() + (nextBtnEle.length > 0 ? nextBtnEle.outerWidth() : 0) - 1);
+								prevBtnEle.removeClass("disabled__");
+								nextBtnEle.addClass("disabled__");
+							} else {
+								prevBtnEle.removeClass("disabled__");
+								nextBtnEle.removeClass("disabled__");
+							}
+							tabContainerEle.removeClass("effect__").addClass("effect__").css("margin-left", marginLeft + "px");
+						}
+					}
 				} else {
 					return {
 						index : opts.links.index(opts.links.filter(".tab_active__")),
@@ -2319,7 +2395,7 @@
 				if(idx !== undefined) {
 					$(this.options.links.get(idx))
 						.unbind("click.tab.disable")
-						.tpBind("click.tab.disable", N.element.disable)
+						.tpBind("click.tab.disable", N.event.disable)
 						.addClass("tab_disabled__");
 				}
 				return this;
@@ -2327,7 +2403,7 @@
 			enable : function(idx) {
 				if(idx !== undefined) {
 					$(this.options.links.get(idx))
-						.unbind("click", N.element.disable)
+						.unbind("click", N.event.disable)
 						.removeClass("tab_disabled__");
 				}
 				return this;
@@ -3030,23 +3106,25 @@
 					row = undefined;
 				}
 
-	        	if(row === undefined) {
-	        		if(!opts.addTop) {
-		        		opts.data.push(extractedData);
-		        		opts.row = opts.data.length - 1;
-		        	} else {
-		        		opts.data.splice(0, 0, extractedData);
-		        		opts.row = 0;
-		        	}
+	        	if(!opts.addTop) {
+	        		opts.data.push(extractedData);
+	        		opts.row = opts.data.length - 1;
 	        	} else {
-		        	if(row === opts.data.length) {
-		        		opts.data.push(extractedData);
-		        		opts.row = opts.data.length - 1;
-		        	} else {
-		        		opts.data.splice(row, 0, extractedData);
-		        		opts.row = row;
-		        	}
+	        		if(row === undefined) {
+	        			opts.data.splice(0, 0, extractedData);
+		        		opts.row = 0;
+	        		} else {
+	        			opts.data.splice(row, 0, extractedData);
+		        		opts.row = row;	
+	        		}
 	        	}
+
+	        	// row index of N.grid's form is 0;
+	        	if(this.options.extObj !== null) {
+        			opts.data = $(opts.data[opts.row]);
+        			opts.row = 0;
+        		}
+	        	
 	        	// Set revert data
 	        	if(opts.revert) {
 	        		this.revertData = $.extend({}, opts.data[opts.row]);
@@ -3056,18 +3134,6 @@
 
 	        	N.ds.instance(opts.extObj !== null ? opts.extObj : this).notify(opts.extRow > -1 ? opts.extRow : opts.row);
 
-				return this;
-			},
-			remove : function(row) {
-				var opts = this.options;
-				if(row === undefined || row > opts.data.length - 1) {
-		        	N.error("[N.grid.remove]Row index out of range");
-		        }
-
-				opts.data.splice(row, 1);
-				opts.context.find("tbody:eq(" + row + ")").addClass("row_data_deleted");
-
-				N.ds.instance(this).notify();
 				return this;
 			},
 			revert : function() {
@@ -3465,7 +3531,7 @@
 		        }
 
 		        if(opts.windowScrollLock) {
-		        	N.element.windowScrollLock(contextWrapEle);
+		        	N.event.windowScrollLock(contextWrapEle);
 		        }
 
 		        // Scroll paging
@@ -3807,6 +3873,9 @@
 						row = [row];
 					}
 					$(row.sort().reverse()).each(function(i, row) {
+						if (opts.data[this] === undefined) {
+							N.error("[N.list.remove]Row index is out of range");
+						}
 						if (opts.data[this].rowStatus === "insert") {
 				            opts.data.splice(this, 1);
 				            opts.context.find("li:eq(" + row + ")").remove();
@@ -3929,7 +3998,7 @@
 				multiselect : false,
 				checkAll : null, // selector
 				checkAllTarget : null, // selector
-				checkSingleTarget : null, // TODO
+				checkSingleTarget : null, // selector
 				hover : false,
 				revert : false,
 				createRowDelay : 1,
@@ -4129,8 +4198,6 @@
     				tableCells.push(tr);
     			});
 
-				N.log(tableCells);
-				
 				return tableCells;
 			},
 			tableMap : function() {
@@ -4336,7 +4403,7 @@
 		        }
 
 		        if(opts.windowScrollLock) {
-		        	N.element.windowScrollLock(contextWrapEle);
+		        	N.event.windowScrollLock(contextWrapEle);
 		        }
 
 		        // Scroll paging
@@ -4530,7 +4597,7 @@
 					$(document).bind("click.grid.more", function(e) {
 						if($(e.target).parents(".grid_more_panel__, .grid_col_show_hide_btn__").length === 0 && !$(e.target).hasClass("grid_col_show_hide_btn__")) {
 							panel.removeClass("visible__").addClass("hidden__");
-							panel.one(N.element.whichTransitionEvent(panel), function(){
+							panel.one(N.event.whichTransitionEvent(panel), function(){
 								panel.hide();
 
 								// The touchstart event is not removed when using the one method
@@ -4831,7 +4898,7 @@
 						var visiblePanel = thead.find(".data_filter_panel__.visible__");
 						if(visiblePanel.length > 0) {
 							visiblePanel.removeClass("visible__").addClass("hidden__");
-							var eventNm = N.element.whichTransitionEvent(visiblePanel);
+							var eventNm = N.event.whichTransitionEvent(visiblePanel);
 							visiblePanel.unbind(eventNm);
 							visiblePanel.one(eventNm, function(e){
 								if(!thisEle.hasClass("btn_data_filter__")) {
@@ -5083,7 +5150,7 @@
 								var panel = thead.find(".data_filter_panel__.visible__");
 								if(panel.length > 0) {
 									panel.removeClass("visible__").addClass("hidden__");
-									var eventNm = N.element.whichTransitionEvent(panel);
+									var eventNm = N.event.whichTransitionEvent(panel);
 									panel.unbind(eventNm);
 									panel.one(eventNm, function(e){
 						            	$(this).hide();
@@ -5497,6 +5564,9 @@
 						row = [row];
 					}
 					$(row.sort().reverse()).each(function(i, row) {
+						if (opts.data[this] === undefined) {
+							N.error("[N.grid.remove]Row index is out of range");
+						}
 						if (opts.data[this].rowStatus === "insert") {
 				            opts.data.splice(this, 1);
 				            opts.context.find("tbody:eq(" + row + ")").remove();
