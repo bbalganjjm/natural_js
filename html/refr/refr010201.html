@@ -1068,20 +1068,6 @@ $.when.apply($, defers).done(function(arg0, agr1, arg2, agr3) {
 			<th style="width: auto;">Description</th>
 		</tr>
 		<tr>
-			<td>disable</td>
-			<td align="center">-</td>
-			<td align="center">-</td>
-			<td>boolean</td>
-			<td>
-				<p>지정한 요소에 바인드 되어 있는 이벤트들의 실행을 중단 시킬 수 있는 이벤트 핸들러 입니다. N().tpBind 메서드를 사용하여 이벤트 중 제일 앞단에 disable 이벤트 핸들러를 바인드 합니다.</p>
-				<pre><code class="language-javascript">// 요소에 클릭 방지 처리
-$("selector").tpBind("click", N.element.disable);
-// 클릭 방지 처리 해제
-$("selector").unbind("click", N.element.disable);
-</code></pre>
-			</td>
-		</tr>
-		<tr>
 			<td>toData</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
@@ -1655,7 +1641,28 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
 			<td>e</td>
 			<td>Event</td>
 			<td align="center">-</td>
-			<td>키 Event 객체</td>
+			<td>키 Event Object</td>
+		</tr>
+		<tr>
+			<td>disable</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>boolean</td>
+			<td>
+				<p>지정한 요소에 바인드 되어 있는 이벤트들의 실행을 중단 시킬 수 있는 이벤트 핸들러 입니다. N().tpBind 메서드를 사용하여 이벤트 중 제일 앞단에 disable 이벤트 핸들러를 바인드 합니다.</p>
+				<pre><code class="language-javascript">// 요소에 클릭 방지 처리
+$("selector").tpBind("click", N.event.disable);
+// 클릭 방지 처리 해제
+$("selector").unbind("click", N.event.disable);
+</code></pre>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>e</td>
+			<td>Event</td>
+			<td align="center">-</td>
+			<td>Event Object</td>
 		</tr>
 	</table>
 
