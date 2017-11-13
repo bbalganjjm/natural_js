@@ -704,7 +704,8 @@
 					"selectAll" : "전체선택",
 					"dFilter" : "데이터 필터",
 					"more" : "더보기",
-					"showHide" : "Column 감추기 / 보이기",
+					"column" : "열",
+					"showHide" : "열 감추기 / 보이기",
 					"prev" : "이전",
 					"next" : "다음"
 				},
@@ -714,7 +715,8 @@
 					"selectAll" : "Select all",
 					"dFilter" : "Data filter",
 					"more" : "MORE",
-					"showHide" : "Column hide & show",
+					"column" : "Column",
+					"showHide" : "Hide and show columns",
 					"prev" : "Previous",
 					"next" : "Next"
 				}
