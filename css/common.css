@@ -134,7 +134,7 @@ table th, table td {
 	font-size: 12px;
 }
 
-table th {
+table th, table > tfoot td {
 	background: linear-gradient(top, #ccffcc, #cfffcc);
 	background: -ms-linear-gradient(top, #ccffcc, #cfffcc);
 	background: -moz-linear-gradient(top, #ccffcc, #cfffcc);
