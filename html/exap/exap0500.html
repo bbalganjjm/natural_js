@@ -37,7 +37,10 @@
 		</colgroup>
 		<thead>
 			<tr>
-				<th rowspan="2">Index</th>
+				<th rowspan="3">Index</th>
+				<th colspan="7">Privacy</th>
+			</tr>
+			<tr>
 				<th rowspan="2">Name</th>
 				<th data-filter="true">Email</th>
 				<th data-filter="true">Gender</th>
@@ -75,6 +78,11 @@
 				<td id="greeting" colspan="2"></td>
 			</tr>
 		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="8" style="text-align: center;">&nbsp;</td>
+			</tr>
+		</tfoot>
 	</table>
 </article>
 
@@ -119,7 +127,7 @@ N(".exap0500").cont({
     	var grid = N([]).grid({
        		context : N("table#grid", view),
        		height : 350,
-       		resizable : true,
+       		resizable : false,
        		sortable : true,
        		hover : true,
        		more : true
