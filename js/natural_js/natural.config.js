@@ -756,7 +756,7 @@
 				/**
 				 * 컬럼 고정 시 고정 된 바디 셀(TD)의 상단 위치가 맞지 않을때 아래 수치 조절(기본값 : 0)
 				 */
-				"fixedcolBodyMarginTop" : N.browser.is("firefox") ? -1 : 0,
+				"fixedcolBodyMarginTop" : N.browser.is("firefox") ? 1 : 0,
 				/**
 				 * 컬럼 고정 시 고정 된 바디 셀(TD)의 좌측 위치가 맞지 않을때 아래 수치 조절(기본값 : 0)
 				 */
@@ -764,7 +764,7 @@
 				/**
 				 * 컬럼 고정 시 데이터를 바인드 할 때 고정 된 바디 셀(TD)의 높이가 맞지 않을때 아래 수치 조절(기본값 : 0)
 				 */
-				"fixedcolBodyBindHeight" : N.browser.is("ios") ? -1 : 0,
+				"fixedcolBodyBindHeight" : N.browser.is("ios") ? 1 : 0,
 				/**
 				 * 컬럼 고정 시 데이터를 Add 할 때 고정 된 바디 셀(TD)의 높이가 맞지 않을때 아래 수치 조절(기본값 : 1)
 				 */
