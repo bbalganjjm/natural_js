@@ -720,7 +720,9 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 /* Grid - Column fixed */
 .grid_container__ > .grid_wrap__ {
 	-webkit-overflow-scrolling: touch;
-	-webkit-transform: translateZ(0px); /*HELPS THE ABOVE WORK IN IOS5*/
+	-webkit-transform: translateZ(0px);
+	-webkit-transform: translate3d(0,0,0);
+	-webkit-perspective: 1000;
 }
 
 /* Details popup */
