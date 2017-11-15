@@ -120,10 +120,12 @@
 				<p class="alert">그리드의 헤더나 바디가 2행 이상 세트로 구성있거나 height 옵션이 0보다 크면 작동하지 않습니다.</p>
 				<p class="alert">고정 된 셀 들이 비 정상적으로 표시되면 아래
 					misc.fixedcolHeadMarginTop /
+					misc.fixedcolHeadMarginLeft /
 					misc.fixedcolHeadHeight /
 					misc.fixedcolBodyMarginTop /
-					misc.fixedcolBodyBindHeight /
-					misc.fixedcolBodyAddHeight 옵션 값 들을 1씩 가감 하여 조절 해 주세요.</p>
+					misc.fixedcolBodyMarginLeft /
+					fixedcolBodyBindHeight /
+					fixedcolBodyAddHeight 옵션 값 들을 1씩 가감 하여 조절 해 주세요.</p>
 			</td>
 		</tr>
 		<tr>
@@ -513,6 +515,15 @@
 			</td>
 		</tr>
 		<tr>
+			<td>misc.fixedcolHeadMarginLeft</td>
+			<td>number</td>
+			<td>0</td>
+			<td></td>
+			<td>
+				컬럼 고정 시 사이트의 CSS 구성 및 구현에 따라 고정 된 헤더 셀(TH)의 좌측 위치가 맞지 않을 수 있는데 이때 이를 보정 할 수 있는 값
+			</td>
+		</tr>
+		<tr>
 			<td>misc.fixedcolHeadHeight</td>
 			<td>number</td>
 			<td>0</td>
@@ -528,6 +539,15 @@
 			<td></td>
 			<td>
 				컬럼 고정 시 사이트의 CSS 구성 및 구현에 따라 고정 된 바디 셀(TD)의 상단 위치가 맞지 않을 수 있는데 이때 이를 보정 할 수 있는 값
+			</td>
+		</tr>
+		<tr>
+			<td>misc.fixedcolBodyMarginLeft</td>
+			<td>number</td>
+			<td>0</td>
+			<td></td>
+			<td>
+				컬럼 고정 시 사이트의 CSS 구성 및 구현에 따라 고정 된 바디 셀(TD)의 좌측 위치가 맞지 않을 수 있는데 이때 이를 보정 할 수 있는 값
 			</td>
 		</tr>
 		<tr>
