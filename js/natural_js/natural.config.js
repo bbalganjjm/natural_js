@@ -53,7 +53,7 @@
 	    /**
 	     * N.debug, N.log, N.info, N.warn, N.error 함수들의 로깅 레벨 설정
 	     */
-	    consoleLogLevel : "off" // "debug"|"log"|"info"|"warn"|"off"
+	    consoleLogLevel : "debug" // "debug"|"log"|"info"|"warn"|"off"
 	});
 
 	/**
