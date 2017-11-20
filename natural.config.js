@@ -49,7 +49,11 @@
 	    /**
 	     * N.string.byteLength 함수 및 maxbyte / minbyte / rangebyte 룰에서 영문, 숫자, 기본 특수문자등을 제외한 한글, 한글특수 문자 등의 기본 바이트 길이를 설정
 	     */
-	    charByteLength : 3
+	    charByteLength : 3,
+	    /**
+	     * N.debug, N.log, N.info, N.warn, N.error 함수들의 로깅 레벨 설정
+	     */
+	    consoleLogLevel : "debug" // "debug"|"log"|"info"|"warn"|"off"
 	});
 
 	/**
@@ -509,7 +513,8 @@
 					"selectAll" : "전체선택",
 					"dFilter" : "데이터 필터",
 					"more" : "더보기",
-					"showHide" : "Column 감추기 / 보이기",
+					"column" : "열",
+					"showHide" : "열 감추기 / 보이기",
 					"prev" : "이전",
 					"next" : "다음"
 				},
@@ -519,7 +524,8 @@
 					"selectAll" : "Select all",
 					"dFilter" : "Data filter",
 					"more" : "MORE",
-					"showHide" : "Column hide & show",
+					"column" : "Column",
+					"showHide" : "Hide and show columns",
 					"prev" : "Previous",
 					"next" : "Next"
 				}
@@ -547,19 +553,27 @@
 				/**
 				 * 컬럼 고정 시 고정 된 헤더 셀(TH)의 상단 위치가 맞지 않을때 아래 수치 조절(기본값 : 0)
 				 */
-				"fixedcolHeadMarginTop" : 0,
+				"fixedcolHeadMarginTop" : N.browser.is("ie") || N.browser.is("firefox") ? -1 : 0,
+				/**
+				 * 컬럼 고정 시 고정 된 헤더 셀(TH)의 좌측 위치가 맞지 않을때 아래 수치 조절(기본값 : 0)
+				 */
+				"fixedcolHeadMarginLeft" : N.browser.is("ie") || N.browser.is("firefox") ? -1 : 0,
 				/**
 				 * 컬럼 고정 시 고정 된 헤더 셀(TH)의 높이가 맞지 않을때 아래 수치 조절(기본값 : 0)
 				 */
-				"fixedcolHeadHeight" : 0,
+				"fixedcolHeadHeight" : N.browser.is("ie") ? 0.5 : 0,
 				/**
 				 * 컬럼 고정 시 고정 된 바디 셀(TD)의 상단 위치가 맞지 않을때 아래 수치 조절(기본값 : 0)
 				 */
-				"fixedcolBodyMarginTop" : 0,
+				"fixedcolBodyMarginTop" : N.browser.is("firefox") ? -1 : 0,
+				/**
+				 * 컬럼 고정 시 고정 된 바디 셀(TD)의 좌측 위치가 맞지 않을때 아래 수치 조절(기본값 : 0)
+				 */
+				"fixedcolBodyMarginLeft" : N.browser.is("ie") || N.browser.is("firefox") ? -1 : 0,
 				/**
 				 * 컬럼 고정 시 데이터를 바인드 할 때 고정 된 바디 셀(TD)의 높이가 맞지 않을때 아래 수치 조절(기본값 : 0)
 				 */
-				"fixedcolBodyBindHeight" : 0,
+				"fixedcolBodyBindHeight" : N.browser.is("ie") || N.browser.is("firefox") ? 0.33 : 0,
 				/**
 				 * 컬럼 고정 시 데이터를 Add 할 때 고정 된 바디 셀(TD)의 높이가 맞지 않을때 아래 수치 조절(기본값 : 1)
 				 */
@@ -567,7 +581,7 @@
 				/**
 				 * 컬럼 고정 시 그리드 위에 있는 요소가 동적으로 높이가 조절 될때 그리드 모양이 깨지면 동적으로 높이가 조절 되는 요소와 그리드 요소를 모두 포함하고 있는 요소를 jQuery selector 문자열로 지정.
 				 */
-				"fixedcolRootContainer" : null
+				"fixedcolRootContainer" : ".view_context__"
 			}
 		}
 	});
