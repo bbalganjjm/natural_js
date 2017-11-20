@@ -438,9 +438,9 @@
 	            var key = N.string.trimToNull(N("#key", view).val());
 	            var value = N.string.trimToNull(N("#val", view).val());
 	        	if(value !== null) {
-	        		form.val(key, value);
+	        		form.val(key, eval(value));
 	        	} else {
-	        		N("div.result", view).alert(form.val(key)).show();
+	        		N("div.result", view).alert(JSON.stringify(form.val(key))).show();
 	        	}
 	        });
 
@@ -455,7 +455,7 @@
 
 	        N("#btnValidate", view).click(function(e) {
 	            e.preventDefault();
-	            N("table#form").alert('<b>전체검증 결과 : ' + form.validate() + '</b>').show()
+	            N("table#form").alert('<b>전체 Validate 결과 : ' + form.validate() + '</b>').show()
 	        });
 
 	        N("#btnReload", view).click(function(e) {
@@ -467,7 +467,7 @@
 	     * for tab onOpen exemple
 	     */
 	    onOpen : function(onOpenData) {
-	    	N.log("onOpen 콜백 실행\nonOpenData :\n" + JSON.stringify(onOpenData));
+	    	N.log("onOpen 이벤트 핸들러 실행\nonOpenData :\n" + JSON.stringify(onOpenData));
 	    }
 	});
 </script>
