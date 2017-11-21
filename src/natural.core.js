@@ -1,5 +1,5 @@
 /*!
- * Natural-CORE v0.8.8.0
+ * Natural-CORE v0.8.8.9
  * bbalganjjm@gmail.com
  *
  * Includes formatdate.js & Mask JavaScript API
@@ -301,7 +301,7 @@
 		// N local variables
 		$.extend(N, {
 			version : {
-				"Natural-CORE" : "0.8.8.0"
+				"Natural-CORE" : "0.8.8.9"
 			},
 			/**
 			 * Set and get locale value
@@ -314,26 +314,48 @@
 				}
 			},
 			/**
-			 * Display the log to console
+			 * Display the debug log to console
 			 */
-			log : function() {
+			debug : function() {
+				if(N.context.attr("core").consoleLogLevel !== undefined 
+						&& "log|info|warn|off".split("|").indexOf(N.context.attr("core").consoleLogLevel) > -1) {
+					return;
+				}
 				if(typeof console !== "undefined") {
-					if(typeof console.log !== "undefined" && typeof console.log.apply !== "undefined") {
-						console.log.apply(console, arguments);
+					if(typeof console.debug !== "undefined" && typeof console.debug.apply !== "undefined") {
+						console.debug.apply(console, arguments);
 					} else {
-						console.log(console);
+						N.log(console);
 					}
 				}
 			},
 			/**
-			 * Display the info to console
+			 * Display the log to console
+			 */
+			log : function() {
+				if(N.context.attr("core").consoleLogLevel !== undefined 
+						&& "info|warn|off".split("|").indexOf(N.context.attr("core").consoleLogLevel) > -1) {
+					return;
+				}
+				if(typeof console !== "undefined") {
+					if(typeof console.log !== "undefined" && typeof console.log.apply !== "undefined") {
+						console.log.apply(console, arguments);
+					}
+				}
+			},
+			/**
+			 * Display the info log to console
 			 */
 			info : function() {
+				if(N.context.attr("core").consoleLogLevel !== undefined 
+						&& "warn|off".split("|").indexOf(N.context.attr("core").consoleLogLevel) > -1) {
+					return;
+				}
 				if(typeof console !== "undefined") {
 					if(typeof console.info !== "undefined" && typeof console.info.apply !== "undefined") {
 						console.info.apply(console, arguments);
 					} else {
-						console.info(console);
+						N.log(console);
 					}
 				}
 			},
@@ -341,6 +363,10 @@
 			 * Display the warnning log to console
 			 */
 			warn : function() {
+				if(N.context.attr("core").consoleLogLevel !== undefined 
+						&& "off" === N.context.attr("core").consoleLogLevel) {
+					return;
+				}
 				if(typeof console !== "undefined") {
 					if(typeof console.warn !== "undefined" && typeof console.warn.apply !== "undefined") {
 						console.warn.apply(console, arguments);
@@ -353,12 +379,14 @@
 			 * Display the error log to console
 			 */
 			error : function(msg, e) {
-				if (e !== undefined && e.stack !== undefined && console.error !== undefined) {
-					if(typeof console !== "undefined" && typeof console.error !== "undefined") {
-						console.error(e.stack);
-					}
+				if(e === undefined) {
+					e = new Error(msg);
 				}
-				throw new Error(msg);
+				if(Error.captureStackTrace !== undefined) {
+					Error.captureStackTrace(e, N.error);					
+				}
+				
+				throw e;
 			},
 			/**
 			 * Check object type
@@ -780,15 +808,6 @@
 					});
 					return retData;
 				},
-				/**
-				 * Prevent all events
-				 */
-				disable : function(e) {
-			        e.preventDefault();
-			        e.stopImmediatePropagation();
-			        e.stopPropagation();
-			        return false;
-			    },
 			    /**
 			     * Data change effect for N.ds
 			     */
@@ -811,82 +830,7 @@
 						}
 						return zIndex || 0;
 					}));
-				},
-			    /**
-			     * This method is locked window scroll when scrolling in the ele(arg1)
-			     */
-			    windowScrollLock : function(ele) {
-			    	ele.bind('mousewheel.grid.fixHeader DOMMouseScroll.grid.fixHeader',function(e) {
-        		        var delta = e.originalEvent.wheelDelta || -e.originalEvent.detail;
-        		        if (delta > 0 && $(this).scrollTop() <= 0) return false;
-        		        if (delta < 0 && $(this).scrollTop() >= this.scrollHeight - $(this).height()) return false;
-        		        return true;
-        		    });
-			    },
-			    getMaxDuration : function(ele, css) {
-			    	return duration = Math.max.apply(undefined, $(ele.css(css).split(",")).map(function() {
-		    			if(this.indexOf("ms") > -1) {
-		    				return parseInt(N.string.trimToZero(this));
-		    			} else {
-		    				return parseFloat(N.string.trimToZero(this)) * 1000;
-		    			}
-					}).get());
-			    },
-			    /**
-			     * Detect the end event name of CSS animations
-			     * Reference from David Walsh: http://davidwalsh.name/css-animation-callback
-			     */
-			    whichAnimationEvent  : function(ele){
-			    	var el;
-			    	if(ele !== undefined && ele.length > 0) {
-			    		if(this.getMaxDuration(ele, "animation-duration") === 0) {
-			    			return "nothing";
-			    		}
-			    		el = ele.get(0);
-		        	} else {
-		        		el = document.createElement("fakeelement");
-		        	}
-
-			        var animations = {
-			            "animation" : "animationend",
-			            "OAnimation" : "oAnimationEnd",
-			            "MSAnimation" : "MSAnimationEnd",
-			            "WebkitAnimation" : "webkitAnimationEnd"
-			        };
-			        for(var t in animations){
-			            if( animations.hasOwnProperty(t) && el.style[t] !== undefined ){
-			                return animations[t];
-			            }
-			        }
-
-			        return "nothing";
-			    },
-			    /**
-			     * Detect the end event name of CSS transitions
-			     * Reference from David Walsh: http://davidwalsh.name/css-animation-callback
-			     */
-			    whichTransitionEvent  : function(ele){
-			    	if(ele !== undefined) {
-			    		if(this.getMaxDuration(ele, "transition-duration") === 0) {
-			    			return "nothing";
-			    		}
-		        	}
-
-			        var el = document.createElement("fakeelement");
-			        var transitions = {
-		        		"transition" : "transitionend",
-		        	    "OTransition" : "oTransitionEnd",
-		        	    "MozTransition" : "transitionend",
-		        	    "WebkitTransition" : "webkitTransitionEnd"
-			        };
-			        for(var t in transitions){
-			            if( transitions.hasOwnProperty(t) && el.style[t] !== undefined ){
-			                return transitions[t];
-			            }
-			        }
-
-			        return "nothing";
-			    }
+				}
 			},
 			/**
 			 * N.browser package
@@ -978,13 +922,13 @@
 						return name === "opera" ? true : false;
 					} else if(typeof InstallTrigger !== 'undefined') {
 						return name === "firefox" ? true : false;
-					} else if(Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0) {
+					} else if(name !== "ios" && navigator.userAgent.match(/^((?!chrome|android|crios|fxios).)*safari/i)) {
 						return name === "safari" ? true : false;
 					} else if(!!window.chrome && !(!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0)) {
 						return name === "chrome" ? true : false;
 					} else if(N.browser.msieVersion() > 0) {
 						return name === "ie" ? true : false;
-					} else if(navigator.userAgent.match(/(iPad|iPhone|iPod)/i)) {
+					} else if(navigator.userAgent.match(/like Mac OS X/i)) {
 						return name === "ios" ? true : false;
 					} else if(navigator.userAgent.match(/android/i)) {
 						return name === "android" ? true : false;
@@ -1195,7 +1139,94 @@
 				    } else {
 				    	return true;
 				    }
-				}
+				},
+				/**
+				 * Prevent all events
+				 */
+				disable : function(e) {
+			        e.preventDefault();
+			        e.stopImmediatePropagation();
+			        e.stopPropagation();
+			        return false;
+			    },
+			    /**
+			     * This method is locked window scroll when scrolling in the ele(arg1)
+			     */
+			    windowScrollLock : function(ele) {
+			    	ele.bind('mousewheel.grid.fixHeader DOMMouseScroll.grid.fixHeader',function(e) {
+        		        var delta = e.originalEvent.wheelDelta || -e.originalEvent.detail;
+        		        if (delta > 0 && $(this).scrollTop() <= 0) return false;
+        		        if (delta < 0 && $(this).scrollTop() >= this.scrollHeight - $(this).height()) return false;
+        		        return true;
+        		    });
+			    },
+			    /**
+			     * Detect the duration of animation or transition of css3 
+			     */
+			    getMaxDuration : function(ele, css) {
+			    	return duration = Math.max.apply(undefined, $(ele.css(css).split(",")).map(function() {
+		    			if(this.indexOf("ms") > -1) {
+		    				return parseInt(N.string.trimToZero(this));
+		    			} else {
+		    				return parseFloat(N.string.trimToZero(this)) * 1000;
+		    			}
+					}).get());
+			    },
+			    /**
+			     * Detect the end event name of CSS animations
+			     * Reference from David Walsh: http://davidwalsh.name/css-animation-callback
+			     */
+			    whichAnimationEvent  : function(ele){
+			    	var el;
+			    	if(ele !== undefined && ele.length > 0) {
+			    		if(this.getMaxDuration(ele, "animation-duration") === 0) {
+			    			return "nothing";
+			    		}
+			    		el = ele.get(0);
+		        	} else {
+		        		el = document.createElement("fakeelement");
+		        	}
+
+			        var animations = {
+			            "animation" : "animationend",
+			            "OAnimation" : "oAnimationEnd",
+			            "MSAnimation" : "MSAnimationEnd",
+			            "WebkitAnimation" : "webkitAnimationEnd"
+			        };
+			        for(var t in animations){
+			            if( animations.hasOwnProperty(t) && el.style[t] !== undefined ){
+			                return animations[t];
+			            }
+			        }
+
+			        return "nothing";
+			    },
+			    /**
+			     * Detect the end event name of CSS transitions
+			     * Reference from David Walsh: http://davidwalsh.name/css-animation-callback
+			     */
+			    whichTransitionEvent  : function(ele){
+			    	if(ele !== undefined) {
+			    		if(this.getMaxDuration(ele, "transition-duration") === 0) {
+			    			return "nothing";
+			    		}
+		        	}
+
+			        var el = document.createElement("fakeelement");
+			        var transitions = {
+		        		"transition" : "transitionend",
+		        	    "OTransition" : "oTransitionEnd",
+		        	    "MozTransition" : "transitionend",
+		        	    "WebkitTransition" : "webkitTransitionEnd"
+			        };
+			        for(var t in transitions){
+			            if( transitions.hasOwnProperty(t) && el.style[t] !== undefined ){
+			                return transitions[t];
+			            }
+			        }
+
+			        return "nothing";
+			    }
 			}
 		});
 
