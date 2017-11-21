@@ -299,11 +299,19 @@
 			// set post parameters
 			if(N.isWrappedSet(obj)) {
 				if(!N.isElement(obj)) {
-					this.options.data = JSON.stringify(this.options.dataIsArray ? obj.get() : obj.get(0));
+					try {
+						this.options.data = JSON.stringify(this.options.dataIsArray ? obj.get() : obj.get(0));
+					} catch(e) {
+						this.options.data = null;
+					}
 				}
 			} else {
 				if(obj != null) {
-					this.options.data = JSON.stringify(obj);
+					try {
+						this.options.data = JSON.stringify(obj);
+					} catch(e) {
+						this.options.data = null;
+					}
 				}
 			}
 
