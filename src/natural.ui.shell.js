@@ -1,5 +1,5 @@
 /*!
- * Natural-UI.Shell v0.8.1.10, Works fine in IE9 and above
+ * Natural-UI.Shell v0.8.1.14, Works fine in IE9 and above
  * bbalganjjm@gmail.com
  *
  * Copyright 2017 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2017-05-11T20:00Z
  */
 (function(window, $) {
-	N.version["Natural-UI.Shell"] = "0.8.1.10";
+	N.version["Natural-UI.Shell"] = "0.8.1.14";
 
 	$.fn.extend($.extend(N.prototype, {
 		notify : function(opts) {
@@ -27,7 +27,10 @@
 			}
 
 			this.options = {
-				position : null,
+				position : {
+					top : 10,
+					right : 10
+				},
 				container : N("body"),
 				context : null,
 				displayTime : 7,
@@ -37,14 +40,7 @@
 			};
 
 			try {
-				this.options = $.extend({}, this.options, N.context.attr("ui.shell").notify);
-				
-				//For $.extend method does not extend object type
-				var position = {
-					top : 10,
-					right : 10
-				}
-				this.options.position = $.extend({}, position, N.context.attr("ui").notify.position);
+				$.extend(true, this.options, N.context.attr("ui.shell").notify);
 				
 				if(position) {
 					if(N.isWrappedSet(position)) {
@@ -141,7 +137,7 @@
 			"remove" : function(msgBoxEle) {
 				msgBoxEle.removeClass("visible__").addClass("hidden__");
 
-				msgBoxEle.one(N.element.whichTransitionEvent(msgBoxEle), function(e){
+				msgBoxEle.one(N.event.whichTransitionEvent(msgBoxEle), function(e){
 		            $(this).remove();
 		        }).trigger("nothing");
 
@@ -181,7 +177,7 @@
 			};
 
 			try {
-				this.options = $.extend({}, this.options, N.context.attr("ui.shell").docs);
+				$.extend(this.options, N.context.attr("ui.shell").docs);
 			} catch (e) {
 				N.error("[N.docs]" + e, e);
 			}
@@ -216,7 +212,7 @@
 										var entireLoadIndicator = $('<div class="entire_load_indicator__"></div>').click(function(e) {
 											e.stopPropagation();
 										});
-										entireLoadIndicator.bind(N.element.whichAnimationEvent(entireLoadIndicator), function(e){
+										entireLoadIndicator.bind(N.event.whichAnimationEvent(entireLoadIndicator), function(e){
 											$(this).hide().removeClass("hidden__");
 								        }).trigger("nothing");
 										self.options.context.find(".docs_tab_context__").after(entireLoadIndicator);
@@ -235,7 +231,7 @@
 										}).click(function(e) {
 											e.stopPropagation();
 										});
-										entireLoadScreenBlock.appendTo("body").bind(N.element.whichAnimationEvent(entireLoadScreenBlock), function(e){
+										entireLoadScreenBlock.appendTo("body").bind(N.event.whichAnimationEvent(entireLoadScreenBlock), function(e){
 											$(this).hide().removeClass("hidden__");
 								        }).trigger("nothing");
 									}
@@ -304,6 +300,18 @@
 						"class" : "docs_tabs__"
 					}).appendTo(docsTabContext);
 
+					/*
+					// docsTabs scroll
+					var defOffsetLeft = 
+					N.ui.draggable.events.call(docsTabs, ".docs.scroll", function(e, ele, x, y) { // start
+
+					}, function(e, ele, x, y) { // move
+						N.ui.draggable.moveX.call(ele, x);
+					}, function(e, ele) { //end
+						
+					});
+					*/
+					
 					var docsTabUtils = $("<ul/>", {
 						"class" : "docs_tab_utils__"
 					}).appendTo(docsTabContext);
@@ -365,7 +373,7 @@
 						$(document).bind("click.docs", function(e) {
 							$(document).unbind("click.docs");
 							docsTabList.removeClass("visible__").addClass("hidden__");
-							docsTabList.one(N.element.whichTransitionEvent(docsTabList), function(e){
+							docsTabList.one(N.event.whichTransitionEvent(docsTabList), function(e){
 					            $(this).remove();
 					        }).trigger("nothing");
 						});
@@ -374,7 +382,7 @@
 							$(document).unbind("touchstart.docs");
 							if($(e.target).closest(".docs_tab_list__").length === 0) {
 								docsTabList.removeClass("visible__").addClass("hidden__");
-								docsTabList.one(N.element.whichTransitionEvent(docsTabList), function(e){
+								docsTabList.one(N.event.whichTransitionEvent(docsTabList), function(e){
 						            $(this).remove();
 						        }).trigger("nothing");
 							}
@@ -392,7 +400,7 @@
 				if(!opts.multi) {
 					var docsContents = opts.context.find("section.docs_contents__")
 					if(docsContents.length > 0) {
-						docsContents.one(N.element.whichTransitionEvent(docsContents), function(e){
+						docsContents.one(N.event.whichTransitionEvent(docsContents), function(e){
 				            $(this).remove();
 				        }).trigger("nothing");
 					}
@@ -520,7 +528,7 @@
 
 				if(tabContents_.siblings(".docs_contents__.visible__").length > 0) {
 					opts.context.css("position", "relative");
-					tabContents_.siblings(".docs_contents__.visible__").one(N.element.whichTransitionEvent(tabContents_), function(e){
+					tabContents_.siblings(".docs_contents__.visible__").one(N.event.whichTransitionEvent(tabContents_), function(e){
 						$(this).hide();
 						opts.context.css("position", "");
 			        }).addClass("hidden__").removeClass("visible__").trigger("nothing");
@@ -529,12 +537,28 @@
 			remove : function(targetTabEle) {
 				var opts = this.options;
 				var targetTabDocOpts = targetTabEle.data("docOpts");
-
-				if(targetTabEle.hasClass("active__")) {
+				var targetTabPrevEle = targetTabEle.prev();
+				var targetTabNextEle = targetTabEle.next();
+				var isActiveTargetTabEle = targetTabEle.hasClass("active__");
+				
+				if(isActiveTargetTabEle) {
 					targetTabEle.addClass("remove__");
-					targetTabEle.one(N.element.whichTransitionEvent(targetTabEle), function(e){
-			            $(this).remove();
+
+					var isRemoved = false;
+					targetTabEle.one(N.event.whichTransitionEvent(targetTabEle), function(e){
+						if(!isRemoved) {
+							$(this).remove();
+				            isRemoved = true;							
+						}
 			        }).trigger("nothing");
+
+					// Because targetTabEle does not remove in old version ios 
+					setTimeout(function() {
+						if(!isRemoved) {
+							targetTabEle.remove();
+							isRemoved = true;
+						}
+					}, N.event.getMaxDuration(targetTabEle, "transition-duration"));
 				} else {
 					targetTabEle.remove();
 				}
@@ -542,7 +566,7 @@
 				var targetTabContents = opts.context.find("> .docs_contents__." + targetTabDocOpts.docId + "__");
 				if(targetTabContents.hasClass("visible__")) {
 					targetTabContents.addClass("remove__");
-					targetTabContents.one(N.element.whichTransitionEvent(targetTabContents), function(e){
+					targetTabContents.one(N.event.whichTransitionEvent(targetTabContents), function(e){
 			            $(this).remove();
 			        }).trigger("nothing");
 				} else {
@@ -564,12 +588,12 @@
 					targetTabDocOpts.onRemove.call(this, targetTabDocOpts.docId);
 				}
 
-				if(targetTabEle.hasClass("active__")) {
-					if(targetTabEle.prev().length > 0) {
-						targetTabEle.prev().find(".docs_tab_active_btn__").click();
+				if(isActiveTargetTabEle) {
+					if(targetTabPrevEle.length > 0) {
+						targetTabPrevEle.find(".docs_tab_active_btn__").click();
 					} else {
-						if(targetTabEle.next().length > 0) {
-							targetTabEle.next().find(".docs_tab_active_btn__").click();
+						if(targetTabNextEle.length > 0) {
+							targetTabNextEle.find(".docs_tab_active_btn__").click();
 						}
 					}
 				}
