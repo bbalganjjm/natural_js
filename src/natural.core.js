@@ -382,7 +382,7 @@
 				if(e === undefined) {
 					e = new Error(msg);
 				}
-				if(Error.captureStackTrace !== undefined) {
+				if(Error.captureStackTrace !== undefined && N.type(e) === "error") {
 					Error.captureStackTrace(e, N.error);					
 				}
 				
