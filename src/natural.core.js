@@ -379,13 +379,12 @@
 			 * Display the error log to console
 			 */
 			error : function(msg, e) {
-				if(e === undefined) {
+				if(N.type(e) !== "error") {
 					e = new Error(msg);
 				}
-				if(Error.captureStackTrace !== undefined && N.type(e) === "error") {
+				if(Error.captureStackTrace !== undefined) {
 					Error.captureStackTrace(e, N.error);					
 				}
-				
 				throw e;
 			},
 			/**
