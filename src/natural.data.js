@@ -1,5 +1,5 @@
 /*!
- * Natural-DATA v0.8.2.29
+ * Natural-DATA v0.8.2.31
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-		N.version["Natural-DATA"] = "0.8.2.29";
+		N.version["Natural-DATA"] = "0.8.2.31";
 
 	$.fn.extend($.extend(N.prototype, {
 		datafilter : function(callBack) {
@@ -98,7 +98,7 @@
 
 			var pageContext = $(N.context.attr("architecture").page.context);
 			if(pageContext.length === 0) {
-				N.warn("[N.ds]Context element is missing. Please specify the correct Natural-JS's main context element selector to N.context.attr(\"architecture\").page.context value");
+				N.warn("[N.ds]Context element is missing. Please specify the correct Natural-JS's main context element selector to \"N.context.attr(\"architecture\").page.context\" property in \"natural.config.js\" file");
 			}
 			var dataSyncTemp = pageContext.find("var#data_sync_temp__");
 			if(dataSyncTemp.length === 0) {
@@ -957,7 +957,7 @@
 					return leaf;
 				};
 
-				var d = str.replace(new RegExp(N.context.attr("data").formatter.date.dateSepa, "gi"), '');
+				var d = str.replace(new RegExp("\\" + N.context.attr("data").formatter.date.dateSepa, "gi"), '');
 				if (!isDateFormat(d)) {
 					return false;
 				}
