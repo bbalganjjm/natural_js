@@ -866,7 +866,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .tab__>ul.tab_scroll__.effect__ {
-	transition: margin-left 0.36s cubic-bezier(1, 0, 1, 1);
+	transition: margin-left 0.25s cubic-bezier(0.76, 0.07, 0.3, 1.5);
 }
 
 .tab__>a.tab_scroll_prev__, .tab__>a.tab_scroll_next__ {
@@ -1273,6 +1273,10 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	height: 31px;
 	border-bottom: 1px solid #55d555;
 	font-family: "Malgun Gothic", "dotum", "Segoe UI", sans-serif;
+}
+
+.docs__>.docs_tab_context__>ul.docs_tabs__.effect__ {
+	transition: margin-left 0.25s cubic-bezier(0.76, 0.07, 0.3, 1.5);
 }
 
 .docs__>.docs_tab_context__>ul.docs_tabs__, .docs__>.docs_tab_context__>ul.docs_tab_utils__, .docs__>.docs_tab_context__>ul.docs_tab_utils__ .docs_tab_list__ {

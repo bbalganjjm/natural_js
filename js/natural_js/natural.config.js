@@ -805,6 +805,8 @@
 			"maxTabs" : 20,
 			"entireLoadIndicator" : true,
 			"entireLoadScreenBlock" : true,
+			"addLast" : true,
+			"tabScroll" : true,
 			/*
 			"onBeforeLoad" : function(docId, target) {
 			},
