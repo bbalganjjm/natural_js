@@ -177,7 +177,7 @@
 			<th width="10%">add</th>
 			<th width="10%"><label for="addRow">arguments[0]</label></th>
 			<td width="80%">
-				<input id="addRow" type="text" value="" />
+				<input id="addRow" type="text" value="0" />
 				<label for="addRow" lang="ko_KR">추가할 행 인덱스, 입력하지 않으면 addTop 옵션의 설정이 적용 됨.</label>
 				<label for="addRow" lang="en_US">The row index to add, If not, the setting of addTop option is applied.</label>
 			</td>
@@ -387,7 +387,9 @@
 	        		onBeforeBind : N.string.trimToNull(N("#onBeforeBind", view).val()) !== null ?
 	           				eval("(" + N("#onBeforeBind", view).val() + ")") : null,
 					onBind : N.string.trimToNull(N("#onBind", view).val()) !== null ?
-	           				eval("(" + N("#onBind", view).val() + ")") : null
+	           				eval("(" + N("#onBind", view).val() + ")") : null,
+	           		autoUnbind : true,
+	           		addTop : false
 	    		}
 
 	    		form = N(data).form(opts);
@@ -403,15 +405,21 @@
 
 	        N("#btnAdd", view).click(function(e) {
 	            e.preventDefault();
-	            form.add(parseInt(N.string.trimToUndefined(N("#addRow", view).val())));
-	            N("#btnBind", view).instance("button").disable();
+	            var row = N.string.trimToUndefined(N("#addRow", view).val());
+	            if(row !== undefined) {
+	            	row = parseInt(row);
+	            }
+	            form.add(row);
 	        });
 
 	        N("#btnBind", view).click(function(e) {
 	            e.preventDefault();
-	            form.bind(parseInt(N("#row").val()));
+	            var row = N.string.trimToUndefined(N("#row", view).val());
+	            if(row !== undefined) {
+	            	row = parseInt(row);
+	            }
+	            form.bind(row);
 
-	            N("#btnAdd", view).instance("button").disable();
 	            N("#btnRevert", view).instance("button").enable();
 	        });
 
