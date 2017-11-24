@@ -193,7 +193,6 @@
 .popup__.alert__.block_overlay_msg__ .msg_box__ {
 	display: block;
 	-webkit-overflow-scrolling: touch;
-	resize: both;
 }
 
 .popup__.block_overlay_msg__ .msg_box__ {
