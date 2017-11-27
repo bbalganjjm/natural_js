@@ -807,6 +807,7 @@
 			"entireLoadScreenBlock" : true,
 			"addLast" : true,
 			"tabScroll" : true,
+			"closeAllRedirectURL" : "./",
 			/*
 			"onBeforeLoad" : function(docId, target) {
 			},
@@ -855,6 +856,7 @@
 					"closeAllTitle" : "메뉴 전체 닫기",
 					"closeAll" : "전체 닫기",
 					"closeAllQ" : "선택한 메뉴를 제외하고 열린 메뉴 전체를 닫겠습니까?",
+					"closeAllDQ" : "열려있는 메뉴 전체를 닫고 메인(홈) 화면으로 이동 하겠습니까?",
 					"docListTitle" : "열린 메뉴 목록",
 					"docList" : "메뉴 목록",
 					"selDocument" : "{0} 메뉴 선택",
@@ -866,7 +868,8 @@
 				"en_US" : {
 					"closeAllTitle" : "Close all menus",
 					"closeAll" : "Close all",
-					"closeAllQ" : "Are you sure you want to close the entire open menu except for the selected menu?",
+					"closeAllQ" : "Are you sure you want to close the all open menus except for the selected menu?",
+					"closeAllDQ" : "Are you sure you want to close the all open menus and go to home page?",
 					"docListTitle" : "Opened menu list",
 					"docList" : "Menu list",
 					"selDocument" : "Select the {0} menu",
