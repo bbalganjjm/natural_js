@@ -66,6 +66,5 @@ License(저작권)
 =======
 Released under the LGPL license
 
-
-
+----------------------------------------------
 Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
