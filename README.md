@@ -68,4 +68,4 @@ Released under the LGPL license
 
 <hr/>
 
-&copy; 2014 KIM HWANG MAN(bbalganjjm@gmail.com){: .text-right }
+<p align="right">&copy; 2014 KIM HWANG MAN(bbalganjjm@gmail.com)</p>
