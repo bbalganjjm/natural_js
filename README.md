@@ -64,6 +64,8 @@ Features(특징)
 
 License(저작권)
 =======
-Copyright 2014 KIM HWANG MAN<br/>
-Released under the LGPL license<br/>
-bbalganjjm@gmail.com
+Released under the LGPL license
+
+
+
+Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
