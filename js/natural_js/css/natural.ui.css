@@ -193,6 +193,13 @@
 .popup__.alert__.block_overlay_msg__ .msg_box__ {
 	display: block;
 	-webkit-overflow-scrolling: touch;
+	resize: both;
+}
+
+/* To prevent inheritance on iOS */
+.popup__.alert__.block_overlay_msg__ .msg_box__ > .view_context__ {
+	-webkit-overflow-scrolling: auto;
+	resize: none;
 }
 
 .popup__.block_overlay_msg__ .msg_box__ {
