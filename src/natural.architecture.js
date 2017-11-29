@@ -1,5 +1,5 @@
 /*!
- * Natural-ARCHITECTURE v0.8.2.1
+ * Natural-ARCHITECTURE v0.8.2.2
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-ARCHITECTURE"] = "0.8.2.1";
+	N.version["Natural-ARCHITECTURE"] = "0.8.2.2";
 
 	$.fn.extend($.extend(N.prototype, {
 		ajax : function(opts) {
@@ -396,12 +396,13 @@
 
 		var Controller = N.cont = function(obj, callback) {
 			if(obj.attr("id") !== undefined && N("[id='" + obj.attr("id") + "']").length > 1) {
-				obj = N("#" + obj.attr("id") + ":not(.view_context__)");
-			}
-			var selector = obj.selector;
-			if(obj.length > 1) {
-				obj = N(obj.selector + ":not(.view_context__)");
-				obj.selector = selector;
+				obj = N("#" + obj.attr("id") + ":not([data-pageid])");
+			} else {
+				var selector = obj.selector;
+				if(obj.length > 1) {
+					obj = N(obj.selector + ":not([data-pageid])");
+					obj.selector = selector;
+				}				
 			}
 			obj.attr("data-pageid", obj.attr("id") ? obj.attr("id") : obj.selector.replace(/\.|\#|\[|\]|\'|\:|\(|\)|\>| |\-/gi, ""));
 			obj.addClass("view_context__");
