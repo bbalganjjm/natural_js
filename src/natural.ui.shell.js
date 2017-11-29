@@ -1,5 +1,5 @@
 /*!
- * Natural-UI.Shell v0.8.1.14, Works fine in IE9 and above
+ * Natural-UI.Shell v0.8.1.20, Works fine in IE9 and above
  * bbalganjjm@gmail.com
  *
  * Copyright 2017 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2017-05-11T20:00Z
  */
 (function(window, $) {
-	N.version["Natural-UI.Shell"] = "0.8.1.14";
+	N.version["Natural-UI.Shell"] = "0.8.1.20";
 
 	$.fn.extend($.extend(N.prototype, {
 		notify : function(opts) {
@@ -152,8 +152,16 @@
 				multi : true,
 				maxStateful : 0, // 0 is unlimit
 				maxTabs : 0, // 0 is unlimit
+				addLast : false,
+				tabScroll : false,
+				closeAllRedirectURL : null,
+				tabScrollCorrection : {
+					rightCorrectionPx : 0,
+				},
+				msgContext : $(window),
 				entireLoadIndicator : false,
 				entireLoadScreenBlock : false,
+				entireLoadExcludeURLs : [],
 				onEntireLoadXhrCaptureDuration : 300,
 				onBeforeLoad : null,
 				onLoad : null,
@@ -177,7 +185,7 @@
 			};
 
 			try {
-				$.extend(this.options, N.context.attr("ui.shell").docs);
+				$.extend(true, this.options, N.context.attr("ui.shell").docs);
 			} catch (e) {
 				N.error("[N.docs]" + e, e);
 			}
@@ -190,9 +198,11 @@
 					|| self.options.entireLoadScreenBlock) {
 				var isStarted = false;
 				var isBeforeDone = false;
+				var entireLoadExcludeURLs = "|" + this.options.entireLoadExcludeURLs.join("|") + "|";
+				
 				N.context.attr("architecture").comm.filters.docsFilter__ = {
 					"beforeSend" : function(request, xhr, settings) {
-						if(!isBeforeDone) {
+						if(!isBeforeDone && entireLoadExcludeURLs.indexOf(request.options.url) < 0) {
 							self.options.docsFilterDefers.push(xhr);
 						}
 
@@ -272,6 +282,10 @@
 
 			Documents.wrapEle.call(this);
 
+			if(this.options.tabScroll) {
+				Documents.wrapScroll.call(this);
+			}
+			
 			this.options.context.instance("docs", this);
 
 			return this;
@@ -300,18 +314,6 @@
 						"class" : "docs_tabs__"
 					}).appendTo(docsTabContext);
 
-					/*
-					// docsTabs scroll
-					var defOffsetLeft = 
-					N.ui.draggable.events.call(docsTabs, ".docs.scroll", function(e, ele, x, y) { // start
-
-					}, function(e, ele, x, y) { // move
-						N.ui.draggable.moveX.call(ele, x);
-					}, function(e, ele) { //end
-						
-					});
-					*/
-					
 					var docsTabUtils = $("<ul/>", {
 						"class" : "docs_tab_utils__"
 					}).appendTo(docsTabContext);
@@ -327,19 +329,30 @@
 						"title" : N.message.get(opts.message, "closeAllTitle")
 					}).bind("click.docs", function(e) {
 						e.preventDefault();
-						var activeTab = opts.context.find("> .docs_tab_context__ > .docs_tabs__ > .docs_tab__.active__");
-						var activeSiblingTabs = activeTab.siblings();
-						if(activeSiblingTabs.length > 0) {
-							opts.context.find("> .docs_tab_context__").alert({
-								msg : N.message.get(opts.message, "closeAllQ"),
+						if(opts.closeAllRedirectURL !== null) {
+							opts.msgContext.alert({
+								msg : N.message.get(opts.message, "closeAllDQ"),
 								confirm : true,
 								onOk : function() {
-									var docId = activeTab.data("docOpts").docId;
-									activeSiblingTabs.remove();
-									opts.context.find("> .docs_contents__." + docId + "__").siblings(".docs_contents__").remove();
-									Documents.closeBtnControl.call(self);
+									window.location.href = opts.closeAllRedirectURL;
 								}
 							}).show();
+						} else {
+							var activeTab = opts.context.find("> .docs_tab_context__ > .docs_tabs__ > .docs_tab__.active__");
+							var activeSiblingTabs = activeTab.siblings();
+							if(activeSiblingTabs.length > 0) {
+								opts.msgContext.alert({
+									msg : N.message.get(opts.message, "closeAllQ"),
+									confirm : true,
+									onOk : function() {
+										var docId = activeTab.data("docOpts").docId;
+										activeSiblingTabs.remove();
+										opts.context.find("> .docs_contents__." + docId + "__").siblings(".docs_contents__").remove();
+										Documents.closeBtnControl.call(self);
+										Documents.clearScrollPosition.call(self, 0);
+									}
+								}).show();
+							}							
 						}
 					}).appendTo(docsTabCloseAllItem);
 					docsTabCloseAllItem.appendTo(docsTabUtils);
@@ -362,13 +375,17 @@
 							// get maximum "z-index" value
 							docsTabList.css("z-index", String(N.element.maxZindex(N(opts.alwaysOnTopCalcTarget)) + 1));
 						}
-						docsTabList
-							.html(opts.context.find("> .docs_tab_context__ > .docs_tabs__ > .docs_tab__:not('.remove__')").clone(true, true))
-							.show().removeClass("hidden__")
-							.appendTo(docsTabListBtn);
-						setTimeout(function() {
-							docsTabList.addClass("visible__");
-						}, 0);
+						
+						if(!docsTabList.hasClass("visible__")) {
+							docsTabList
+								.empty()
+								.append(opts.context.find("> .docs_tab_context__ > .docs_tabs__ > .docs_tab__:not('.remove__')").clone(true, true))
+								.addClass("hidden__")
+								.appendTo(docsTabListBtn);
+							setTimeout(function() {
+								docsTabList.removeClass("hidden__").show().addClass("visible__");
+							}, 0);
+						}
 
 						$(document).bind("click.docs", function(e) {
 							$(document).unbind("click.docs");
@@ -391,6 +408,93 @@
 
 					docsTabListBtn.appendTo(docsTabListItem);
 					docsTabListItem.appendTo(docsTabUtils);
+				}
+			},
+			wrapScroll : function() {
+				var opts = this.options;
+				var eventNameSpace = ".docs.scroll";
+				var tabContext = opts.context.find(">nav");
+				var tabContainerEle = tabContext.find(">ul.docs_tabs__");
+				var tabUtilsEleWidth = tabContext.find(">ul.docs_tab_utils__").outerWidth() + opts.tabScrollCorrection.rightCorrectionPx;
+				
+				var lastDistance = 0;
+
+				$(window).bind("resize" + eventNameSpace, function() {
+					var ulWidth = 0;
+					tabContainerEle.find(">li").each(function() {
+						ulWidth += ($(this).outerWidth() + parseInt(N.string.trimToZero($(this).css("margin-left"))) + parseInt(N.string.trimToZero($(this).css("margin-right"))));
+					});
+
+					if(ulWidth > 0 && ulWidth > tabContext.width() - tabUtilsEleWidth) {
+						tabContext.css("overflow", "hidden");
+						tabContainerEle.addClass("docs_scroll__").width(ulWidth);
+					} else {
+						tabContext.css("overflow", "");
+						tabContainerEle.css("width", "");
+					}
+				}).trigger("resize" + eventNameSpace);
+
+				$(window).trigger("resize" + eventNameSpace);
+
+				var sPageX;
+				var prevDefGap = 77;
+				var nextDefGap = 77;
+				var isMoved = false;
+				N.ui.draggable.events.call(tabContainerEle, eventNameSpace, function(e, tabContainerEle_, pageX, pageY) { // start
+					tabContainerEle_.removeClass("effect__");
+					if(tabContainerEle_.outerWidth() <= tabContext.innerWidth() - tabUtilsEleWidth) {
+						return false;
+					}
+					sPageX = pageX - parseInt(tabContainerEle_.css("margin-left"));
+				}, function(e, tabContainerEle_, pageX, pageY) { // move
+					var distance = (sPageX - pageX) * -1;
+					if(distance > prevDefGap || tabContext.outerWidth() - tabUtilsEleWidth >= tabContainerEle_.width() + nextDefGap + distance) {
+						return false;
+					} else {
+						lastDistance = distance;
+						tabContainerEle_.css("margin-left", distance + "px");
+						isMoved = true;
+					}
+				}, function(e, tabContainerEle_) { //end
+					if(isMoved) {
+						if(lastDistance >= 0 && lastDistance <= prevDefGap) {
+							lastDistance = 0;
+						} else if(nextDefGap >= tabContainerEle_.width() - (tabContext.outerWidth() - tabUtilsEleWidth + lastDistance * -1)) {
+							lastDistance = (tabContainerEle_.width() - tabContext.outerWidth() - 1) * -1 - tabUtilsEleWidth;
+						}
+						tabContainerEle_.addClass("effect__").css("margin-left", lastDistance + "px");
+						isMoved = false;
+					}
+				});
+			},
+			clearScrollPosition : function(tabEle, isActive) {
+				var opts = this.options;
+				
+				var tabContext = opts.context.find(">nav");
+				var tabContainerEle = tabContext.find(">ul.docs_tabs__");
+				var marginLeft;
+				
+				if(N.type(tabEle) === "number") {
+					marginLeft = tabEle;
+				} else {
+					var tabUtilsEleWidth = tabContext.find(">ul.docs_tab_utils__").outerWidth() + opts.tabScrollCorrection.rightCorrectionPx;
+					var tabContainerEleMarginLeft = parseInt(N.string.trimToZero(tabContainerEle.css("margin-left")));
+					if(tabEle.position().left + tabEle.outerWidth() + tabContainerEleMarginLeft > tabContext.innerWidth() - tabUtilsEleWidth
+							|| tabContainerEleMarginLeft > 0 && tabContainerEle.outerWidth() > tabContext.innerWidth() - tabUtilsEleWidth) {	
+						marginLeft = (tabEle.position().left + 1 + tabEle.outerWidth() - tabContext.outerWidth() + tabUtilsEleWidth) * -1;
+					} else if(tabEle.position().left < tabContainerEleMarginLeft * -1){
+						marginLeft = tabEle.position().left * -1;
+					} else if(tabContainerEle.outerWidth() < tabContext.innerWidth() - tabUtilsEleWidth) {
+						marginLeft = 0;
+					} else if(tabContext.innerWidth() > tabContainerEle.outerWidth() - (tabContainerEleMarginLeft * -1) - tabUtilsEleWidth
+							&& tabContainerEleMarginLeft < 0 && !isActive){
+						tabEle = tabContainerEle.find(".docs_tab__:last");
+						marginLeft = (tabEle.position().left + 1 + tabEle.outerWidth() - tabContext.outerWidth() + tabUtilsEleWidth) * -1;
+					}
+				}
+				
+				if(marginLeft !== undefined) {
+					tabContainerEle.addClass("effect__").css("margin-left", String(marginLeft) + "px");
 				}
 			},
 			loadContent : function(docOpts, callback) {
@@ -494,10 +598,13 @@
 				var tabToActivate = opts.context.find("> .docs_tab_context__ > .docs_tabs__ > .docs_tab__." + docId_ + "__");
 
 				// Activate inactived tab and tab contents
-				if(isFromDocsTabList_) {
-					tabToActivate.prependTo(tabToActivate.parent());
+				if(isFromDocsTabList_ && !opts.tabScroll) {
+					tabToActivate.prependTo(tabToActivate.parent());						
 				}
-
+				if(opts.tabScroll) {
+					Documents.clearScrollPosition.call(this, tabToActivate, true);
+				}
+				
 				if(opts.onBeforeActive !== null) {
 					opts.onBeforeActive.call(this, docId_, isFromDocsTabList_ === undefined ? false : isFromDocsTabList_, isNotLoaded_ === undefined ? false : isNotLoaded_);
 				}
@@ -596,6 +703,11 @@
 							targetTabNextEle.find(".docs_tab_active_btn__").click();
 						}
 					}
+				} else {
+					if(opts.tabScroll) {
+						var activatedTab = opts.context.find("> .docs_tab_context__ > .docs_tabs__ > .docs_tab__.active__");
+						Documents.clearScrollPosition.call(this, activatedTab);
+					}
 				}
 			}
 		});
@@ -670,7 +782,12 @@
 
 								self.remove(docId);
 							}).appendTo(tab);
-							tab.prependTo(docsTabContext.find("> .docs_tabs__"));
+							if(opts.addLast) {
+								tab.appendTo(docsTabContext.find("> .docs_tabs__"));	
+							} else {
+								tab.prependTo(docsTabContext.find("> .docs_tabs__"));
+							}
+							
 
 							Documents.inactivateTab.call(self);
 
@@ -763,7 +880,7 @@
 					var self = this;
 
 					N.context.attr("ui").alert.container = opts.context.find("> .docs_contents__:visible");
-					N(window).alert({
+					opts.msgContext.alert({
 						html : true,
 						confirm : true,
 						msg : N.message.get(opts.message, "maxStateful", [ targetTabDocOpts.docNm, String(opts.maxStateful) ]),
@@ -811,7 +928,7 @@
 				if(dataChangedInputEle.length === 0 || unconditional === true) {
 					Documents.remove.call(self, targetTabEle);					
 				} else {
-					N(window).alert({
+					opts.msgContext.alert({
 						msg : N.message.get(opts.message, "closeConf", [ opts.docs[docId].docNm ]),
 						confirm : true,
 						onOk : function() {
