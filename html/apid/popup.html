@@ -434,7 +434,8 @@ function(msgContext, msgContents) {
 	       			onOpenData : N.string.trimToNull(N("#otherPage #onOpenData", view).val()),
 	            	onClose : N.string.trimToNull(N("#onClose", view).val()) !== null ?
 	            			eval("(" + N("#otherPage #onClose", view).val() + ")") : null,
-	            	onCloseData : N.string.trimToNull(N("#otherPage #onCloseData", view).val())
+	            	onCloseData : N.string.trimToNull(N("#otherPage #onCloseData", view).val()),
+	            	opener : cont
 	            };
 
 	            cont.otherPopup = N().popup(opts);
