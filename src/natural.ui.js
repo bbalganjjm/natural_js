@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.20.0
+ * Natural-UI v0.8.20.25
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "0.8.20.0";
+	N.version["Natural-UI"] = "0.8.20.25";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -695,7 +695,9 @@
 									}
 									if(offset.top < 0) {
 										offset.top = 0 + opts.draggableOverflowCorrectionAddValues.top;
-										offset.top -= parseFloat(opts.msgContents.css("margin-top"));
+										if(opts.msgContents.css("position") === "fixed") {
+											offset.top -= parseFloat(opts.msgContents.css("margin-top"));
+										}
 									}
 									if(opts.msgContents.offset().left < 0) {
 										offset.left = 0 + opts.draggableOverflowCorrectionAddValues.left;
@@ -769,12 +771,11 @@
 						}
 						
 						if(msgContentsHeight > windowHeight) {
-							msgContentsCss["margin-top"] = "";
-							$(window).scrollTop(0);
+							msgContentsCss["margin-top"] = String($(window).scrollTop()) + "px";
 							msgContentsCss.position = "absolute";
 						}
 						if(msgContentsWidth > windowWidth) {
-							msgContentsCss["left"] = "";
+							msgContentsCss["left"] = "0";
 							msgContentsCss.position = "absolute";
 						}
 						
@@ -2627,6 +2628,8 @@
 				row : -1,
 				context : null,
 				validate : true,
+				autoUnbind : false,
+				state : null, // add, bind, revert, update
 				html : false,
 				addTop : false,
 				fRules : null,
@@ -2673,7 +2676,7 @@
 			this.options.context.addClass("form__");
 
 			if(this.options.revert) {
-				this.revertData = $.extend({}, this.options.data[this.options.row]);
+				this.options.revertData = $.extend({}, this.options.data[this.options.row]);
 			}
 
 			// set this instance to context element
@@ -2686,12 +2689,6 @@
 
 			return this;
 		};
-
-		$.extend(Form, {
-			getRadioNCheckBoxSelectorStr : function(key) {
-				return "[name='" + key + "']:radio, [name='" + key + "']:checkbox, [id='" + key + "']:radio, [id='" + key + "']:checkbox";
-			}
-		});
 
 		$.extend(Form.prototype, {
 			data : function(selFlag) { // key name : argument1, argument2... argumentN
@@ -2724,13 +2721,24 @@
 			 */
 			bind : function(row, data) {
 				var opts = this.options;
+				
+				if(data === "add" || data === "bind" || data === "revert" || data === "update") {
+					if(opts.autoUnbind) {
+						this.unbind();
+					}
+					opts.state = data;
+					data = undefined;
+				} else {
+					opts.state = "bind";
+				}
+				
 				if(row !== undefined) {
 					opts.row = row;
 				}
 				if(data != null) {
 					opts.data = N.type(data) === "array" ? N(data) : data;
 					if(opts.revert) {
-						this.revertData = $.extend({}, data[row]);
+						opts.revertData = $.extend({}, data[row]);
 					}
 				}
 
@@ -2800,7 +2808,7 @@
 											ele.bind("focusout.form.validate", function() {
 												var currEle = $(this);
 					                            if (!currEle.prop("disabled") && !currEle.prop("readonly") && opts.validate) {
-				                            		currEle.trigger("validate");
+				                            		currEle.trigger("validate.validator");
 					                            }
 					                        });
 										}
@@ -2861,7 +2869,7 @@
 											ele.bind("focusin.form.unformat", function() {
 												var currEle = $(this);
 					                            if (!currEle.prop("disabled") && !currEle.prop("readonly") && (!opts.validate || (opts.validate && !currEle.hasClass("validate_false__")))) {
-					                                currEle.trigger("unformat");
+					                                currEle.trigger("unformat.formatter");
 					                            }
 					                        });
 										}
@@ -2870,7 +2878,7 @@
 											ele.bind("focusout.form.format", function() {
 												var currEle = $(this);
 					                            if (!currEle.prop("disabled") && !currEle.prop("readonly") && (!opts.validate || (opts.validate && !currEle.hasClass("validate_false__")))) {
-					                                currEle.trigger("format");
+					                                currEle.trigger("format.formatter");
 					                            }
 					                        });
 										}
@@ -3024,10 +3032,10 @@
 				}
 				return this;
 			},
-			unbind : function() {
+			unbind : function(state) {
 				var opts = this.options;
+				
 				if(opts.unbind && opts.InitialData !== null) {
-					opts.row = -1;
 					opts.context.removeClass("row_data_changed__");
 					var vals = opts.InitialData;
 					var idContext, rcContext, eles, ele, val, tagName, type;
@@ -3048,7 +3056,7 @@
 								|| type === "range"
 								|| type === "url") {
 								// unbind events
-								ele.unbind("focusout.form.validate focusout.form.dataSync keyup.form.dataSync focusin.form.unformat focusout.form.format");
+								ele.unbind("focusout.form.validate focusout.form.dataSync keyup.form.dataSync focusin.form.unformat focusout.form.format format.formatter unformat.formatter");
 								// remove validator's dregs for rebind
 								ele.removeClass("validate_false__");
 								if(ele.instance("alert") !== undefined) {
@@ -3106,6 +3114,11 @@
 			},
 			add : function(data, row) {
 				var opts = this.options;
+				opts.state = "add";
+				if(opts.autoUnbind) {
+					this.unbind();
+				}
+
 		        if (opts.data === null) {
 		            throw new Error("[Form.add]Data is null. you must input data");
 		        }
@@ -3126,17 +3139,19 @@
 				}
 
 	        	if(!opts.addTop) {
-	        		opts.data.push(extractedData);
-	        		opts.row = opts.data.length - 1;
-	        	} else {
 	        		if(row === undefined) {
-	        			opts.data.splice(0, 0, extractedData);
-		        		opts.row = 0;
+	        			opts.data.push(extractedData);
+	        			row = opts.data.length - 1;
 	        		} else {
 	        			opts.data.splice(row, 0, extractedData);
-		        		opts.row = row;	
 	        		}
+	        	} else {
+	        		if(row === undefined) {
+		        		row = 0;
+	        		}
+	        		opts.data.splice(row, 0, extractedData);
 	        	}
+	        	opts.row = row;
 
 	        	// row index of N.grid's form is 0;
 	        	if(this.options.extObj !== null) {
@@ -3146,10 +3161,10 @@
 	        	
 	        	// Set revert data
 	        	if(opts.revert) {
-	        		this.revertData = $.extend({}, opts.data[opts.row]);
+	        		opts.revertData = $.extend({}, opts.data[opts.row]);
 	        	}
 
-	        	this.bind();
+	        	this.bind(opts.row, opts.state);
 
 	        	N.ds.instance(opts.extObj !== null ? opts.extObj : this).notify(opts.extRow > -1 ? opts.extRow : opts.row);
 
@@ -3160,15 +3175,19 @@
 				if(!opts.revert) {
 					N.error("[N.form.revert]Can not revert. N.form's revert option value is false");
 				}
+				
+				opts.state = "revert";
+				
 				var orgRow = opts.row;
-				this.unbind();
 				opts.row = orgRow;
 				for(var k in opts.data[opts.row]){
 					delete opts.data[opts.row][k];
 				}
-				$.extend(opts.data[opts.row], opts.data[opts.row], this.revertData);
+				$.extend(opts.data[opts.row], opts.data[opts.row], opts.revertData);
 				opts.data[opts.row]._isRevert = true;
-				this.update(opts.row);
+				
+				this.bind(opts.row, opts.state);
+				
 				N.ds.instance(opts.extObj !== null ? opts.extObj : this).notify(opts.extRow > -1 ? opts.extRow : opts.row);
 				if(opts.data[opts.row]._isRevert !== undefined) {
 					try {
@@ -3403,13 +3422,15 @@
 			update : function(row, key) {
 				var opts = this.options;
 
+				opts.state = "update"
+					
 				// FIXME refer to http://bbalganjjm.github.io/natural_js/#exap/exap0700 -> popup -> edit -> change select box value -> fall into an infinite loop
 				if(arguments.callee.caller.arguments.callee.caller.arguments.callee.caller.arguments.callee.caller.arguments.callee.caller === this.val) {
 					return this;
 				}
 
 				if (key === undefined) {
-					this.bind(row);
+					this.bind(row, opts.state);
 				} else {
 					if(row === this.row()) {
 						this.val(key, opts.data[row][key], false);
@@ -3438,8 +3459,7 @@
 				validate : true,
 				html : false,
 				addTop : false,
-				addSelect : true,
-				appendScroll : true,
+				addSelect : false,
 				vResizable : false,
 				windowScrollLock : true,
 				select : false,
@@ -3457,6 +3477,11 @@
 				},
 				fRules : null,
 				vRules : null,
+				appendScroll : true,
+				addScroll : true,
+				selectScroll : true,
+				checkScroll : true,
+				validateScroll : true,
 				rowHandlerBeforeBind : null,
 				rowHandler : null,
 				onSelect : null,
@@ -3700,11 +3725,13 @@
 						selRowEle.click();
 					});
 
-					scrollTop = (row[row.length - 1] * selRowEle.outerHeight()) - (opts.height / 2) + (selRowEle.outerHeight() / 2);
-					if(scrollTop < 0) {
-						scrollTop = 0;
+					if(opts.selectScroll) {
+						scrollTop = (row[row.length - 1] * selRowEle.outerHeight()) - (opts.height / 2) + (selRowEle.outerHeight() / 2);
+						if(scrollTop < 0) {
+							scrollTop = 0;
+						}
+						opts.context.parent(".context_wrap__").stop().animate({ "scrollTop" : scrollTop }, 300, 'swing');						
 					}
-					opts.context.parent(".context_wrap__").stop().animate({ "scrollTop" : scrollTop }, 300, 'swing');
 
 					return this;
 				}
@@ -3735,12 +3762,14 @@
 						checkboxEle.click();
 					});
 
-					var selRowEle = checkboxEle.closest("li.form__");
-					scrollTop = (row[row.length - 1] * selRowEle.outerHeight()) - (opts.height / 2) + (selRowEle.outerHeight() / 2);
-					if(scrollTop < 0) {
-						scrollTop = 0;
+					if(opts.checkScroll) {
+						var selRowEle = checkboxEle.closest("li.form__");
+						scrollTop = (row[row.length - 1] * selRowEle.outerHeight()) - (opts.height / 2) + (selRowEle.outerHeight() / 2);
+						if(scrollTop < 0) {
+							scrollTop = 0;
+						}
+						opts.context.parent(".context_wrap__").stop().animate({ "scrollTop" : scrollTop }, 300, 'swing');						
 					}
-					opts.context.parent(".context_wrap__").stop().animate({ "scrollTop" : scrollTop }, 300, 'swing');
 
 					return this;
 				}
@@ -3857,15 +3886,23 @@
 						opts.context.find(">li:eq(" + row + ")").before(tempRowEleClone);
 					}
 
-					scrollTop = (row * selRowEle.outerHeight()) - (opts.height / 2) + (selRowEle.outerHeight() / 2);
-					if(scrollTop < 0) {
-						scrollTop = 0;
-					}
-					opts.context.parent(".context_wrap__").stop().animate({ "scrollTop" : scrollTop }, 300, 'swing', function() {
-						if(opts.addSelect) {
-							$(this).find(">li:eq(" + row + ")").trigger("click.list");
+					if(opts.addScroll) {
+						scrollTop = (row * selRowEle.outerHeight()) - (opts.height / 2) + (selRowEle.outerHeight() / 2);
+						if(scrollTop < 0) {
+							scrollTop = 0;
 						}
-					});
+						opts.context.parent(".context_wrap__").stop().animate({ "scrollTop" : scrollTop }, 300, 'swing', function() {
+							if(opts.addSelect) {
+								$(this).find(">ul>li:eq(" + row + ")").trigger("click.list");
+							}
+						});	
+					} else {
+						if(opts.addSelect) {
+							setTimeout(function() {
+								opts.context.parent(".context_wrap__").find(">ul>li:eq(" + row + ")").trigger("click.list");
+							}, 0);
+						}
+					}
 				}
 
 				// for new row data bind, use N.form
@@ -3970,7 +4007,7 @@
 					});
 				}
 
-				if(!valiRslt) {
+				if(!valiRslt && opts.validateScroll) {
 					var valiLastTbody = opts.context.find(".validate_false__:last").closest("li.form__");
 					opts.context.parent(".context_wrap__").stop().animate({
 						"scrollTop" : opts.context.parent(".context_wrap__").scrollTop() + valiLastTbody.position().top - opts.height + (valiLastTbody.outerHeight() * 2)
@@ -4025,8 +4062,7 @@
 				validate : true,
 				html : false,
 				addTop : false,
-				addSelect : true,
-				appendScroll : true,
+				addSelect : false,
 				filter : false,
 				resizable : false,
 				vResizable : false,
@@ -4047,6 +4083,11 @@
 				},
 				fRules : null,
 				vRules : null,
+				appendScroll : true,
+				addScroll : true,
+				selectScroll : true,
+				checkScroll : true,
+				validateScroll : true,
 				rowHandlerBeforeBind : null,
 				rowHandler : null,
 				onSelect : null,
@@ -5419,11 +5460,13 @@
 						selRowEle.click();
 					});
 
-					scrollTop = (row[row.length - 1] * selRowEle.outerHeight()) - (opts.height / 2) + (selRowEle.outerHeight() / 2);
-					if(scrollTop < 0) {
-						scrollTop = 0;
+					if(opts.selectScroll) {
+						scrollTop = (row[row.length - 1] * selRowEle.outerHeight()) - (opts.height / 2) + (selRowEle.outerHeight() / 2);
+						if(scrollTop < 0) {
+							scrollTop = 0;
+						}
+						opts.context.parent(".tbody_wrap__").stop().animate({ "scrollTop" : scrollTop }, 300, 'swing');						
 					}
-					opts.context.parent(".tbody_wrap__").stop().animate({ "scrollTop" : scrollTop }, 300, 'swing');
 
 					return this;
 				}
@@ -5454,12 +5497,14 @@
 						checkboxEle.click();
 					});
 
-					var selRowEle = checkboxEle.closest("tbody.form__");
-					scrollTop = (row[row.length - 1] * selRowEle.outerHeight()) - (opts.height / 2) + (selRowEle.outerHeight() / 2);
-					if(scrollTop < 0) {
-						scrollTop = 0;
+					if(opts.checkScroll) {
+						var selRowEle = checkboxEle.closest("tbody.form__");
+						scrollTop = (row[row.length - 1] * selRowEle.outerHeight()) - (opts.height / 2) + (selRowEle.outerHeight() / 2);
+						if(scrollTop < 0) {
+							scrollTop = 0;
+						}
+						opts.context.parent(".tbody_wrap__").stop().animate({ "scrollTop" : scrollTop }, 300, 'swing');						
 					}
-					opts.context.parent(".tbody_wrap__").stop().animate({ "scrollTop" : scrollTop }, 300, 'swing');
 
 					return this;
 				}
@@ -5635,15 +5680,23 @@
 						opts.context.find(">tbody:eq(" + row + ")").before(tempRowEleClone);
 					}
 
-					scrollTop = (row * selRowEle.outerHeight()) - (opts.height / 2) + (selRowEle.outerHeight() / 2);
-					if(scrollTop < 0) {
-						scrollTop = 0;
-					}
-					opts.context.parent(".tbody_wrap__").stop().animate({ "scrollTop" : scrollTop }, 300, 'swing', function() {
-						if(opts.addSelect) {
-							$(this).find(">tbody:eq(" + row + ")").trigger("click.grid");
+					if(opts.addScroll) {
+						scrollTop = (row * selRowEle.outerHeight()) - (opts.height / 2) + (selRowEle.outerHeight() / 2);
+						if(scrollTop < 0) {
+							scrollTop = 0;
 						}
-					});
+						opts.context.parent(".tbody_wrap__").stop().animate({ "scrollTop" : scrollTop }, 300, 'swing', function() {
+							if(opts.addSelect) {
+								$(this).find(">table>tbody:eq(" + row + ")").trigger("click.grid");
+							}
+						});						
+					} else {
+						if(opts.addSelect) {
+							setTimeout(function() {
+								opts.context.parent(".tbody_wrap__").find(">table>tbody:eq(" + row + ")").trigger("click.grid");
+							}, 0);
+						}
+					}
 				}
 
 				// for new row data bind, use N.form
@@ -5752,7 +5805,7 @@
 					});
 				}
 
-				if(!valiRslt) {
+				if(!valiRslt && opts.validateScroll) {
 					var valiLastTbody = opts.context.find(".validate_false__:last").closest("tbody.form__");
 					opts.context.parent(".tbody_wrap__").stop().animate({
 						"scrollTop" : opts.context.parent(".tbody_wrap__").scrollTop() + valiLastTbody.position().top - opts.height + (valiLastTbody.outerHeight() * 2)
