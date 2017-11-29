@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.20.25
+ * Natural-UI v0.8.20.27
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "0.8.20.25";
+	N.version["Natural-UI"] = "0.8.20.27";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -1713,7 +1713,6 @@
 
 		// Popup
 		var Popup = N.popup = function(obj, opts) {
-			// TODO think more : whether the "onload" event needs or not
 			this.options = {
 				context : obj,
 				url : null,
@@ -1724,6 +1723,7 @@
 				left : undefined,
 				height : 0,
 				width : 0,
+				opener : null,
 				closeMode : "hide",
 				alwaysOnTop : false,
 				"confirm" : true,
@@ -1770,37 +1770,38 @@
 			// if title option value is undefined
 			this.options.title = opts !== undefined ? N.string.trimToNull(opts.title) : null;
 
-			//set opener(parent page's Controller)
-			var self = this;
-			try {
-				var caller = arguments.callee.caller;
-				var callers = [caller];
-				while(caller != null) {
-				    caller = caller.arguments.callee.caller;
-				    callers.push(caller);
-				    if(caller != null && caller.arguments.length > 0 && N(caller.arguments[0]).hasClass("view_context__") && caller.arguments[0].instance != null && N.type(caller.arguments[0].instance) === "function") {
-						self.opener = caller.arguments[0].instance("cont");
-						break;
+			// Auto opener Settings(parent page's Controller)
+			if(this.options.opener == null) {
+				var self = this;
+				try {
+					var caller = arguments.callee.caller;
+					var callers = [caller];
+					while(caller != null) {
+					    caller = caller.arguments.callee.caller;
+					    callers.push(caller);
+					    if(caller != null && caller.arguments.length > 0 && N(caller.arguments[0]).hasClass("view_context__") && caller.arguments[0].instance != null && N.type(caller.arguments[0].instance) === "function") {
+							self.options.opener = caller.arguments[0].instance("cont");
+							break;
+						}
+
+					    // Infinite loop prevention processing
+					    if(caller == $.event.dispatch) {
+					    	callers = undefined;
+					    	N.error("Opener not found");
+					    }
+					    if(callers.indexOf(caller) > -1) {
+					    	callers = undefined;
+					    	N.error("Opener not found");
+					    }
 					}
-
-				    // Infinite loop prevention processing
-				    if(caller == $.event.dispatch) {
-				    	callers = undefined;
-				    	N.error("Opener not found");
-				    }
-				    if(callers.indexOf(caller) > -1) {
-				    	callers = undefined;
-				    	N.error("Opener not found");
-				    }
+				} catch(e) {
+					callers = undefined;
+					if(this.options.url !== null) {
+						N.warn("[N.popup][" + e.toString().replace("Error: ", "") + "]opener(parent's N.cont object) auto setup failed. please define the opener option value of N.popup.");
+					}
 				}
-			} catch(e) {
-				callers = undefined;
-				if(this.options.url !== null) {
-					N.warn("[N.popup][" + e.toString().replace("Error: ", "") + "]Fail to set the opener(parent's N.cont object) object on the N.cont object of the popup.");
-				}
+				callers = undefined;				
 			}
-
-			callers = undefined;
 			
 			if(this.options.url !== null) {
 				if(this.options.preload) {
@@ -1881,8 +1882,8 @@
 						cont.caller = self;
 
 						// set opener to popup's Controller
-						if(self.opener !== undefined) {
-							cont.opener = self.opener;
+						if(opts.opener != null) {
+							cont.opener = opts.opener;
 						}
 
 						// if delayContInit options is true, *ProcFn__ function is must set to Controller's attribute before the aop processing
