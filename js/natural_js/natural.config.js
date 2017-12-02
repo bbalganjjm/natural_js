@@ -667,10 +667,6 @@
 			 */
 			"windowScrollLock" : true,
 			/**
-			 * bind 시 row 생성 delay(ms)
-			 */
-			"createRowDelay" : 1,
-			/**
 			 * 헤더픽스형일 경우 스크롤 페이징 사이즈(대용량 데이터 처리)
 			 */
 			/**
