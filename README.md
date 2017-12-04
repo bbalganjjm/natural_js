@@ -64,7 +64,7 @@ Features(특징)
 
 License(저작권)
 =======
-Released under the LGPL license.
+Released under the LGPL v2.1 license.
 
 <hr/>
 
