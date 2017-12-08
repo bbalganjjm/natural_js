@@ -1,5 +1,5 @@
 /*!
- * Natural-UI.Shell v0.8.1.20, Works fine in IE9 and above
+ * Natural-UI.Shell v0.8.1.23, Works fine in IE9 and above
  * bbalganjjm@gmail.com
  *
  * Copyright 2017 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2017-05-11T20:00Z
  */
 (function(window, $) {
-	N.version["Natural-UI.Shell"] = "0.8.1.20";
+	N.version["Natural-UI.Shell"] = "0.8.1.23";
 
 	$.fn.extend($.extend(N.prototype, {
 		notify : function(opts) {
@@ -625,7 +625,9 @@
 				N.context.attr("architecture").page.context = N.context.attr("ui").alert.container = tabContents_;
 
 				tabContents_.show(0, function() {
-					tabContents_.addClass("visible__").removeClass("hidden__");
+					tabContents_.addClass("visible__").one(N.event.whichTransitionEvent(tabContents_), function(e){
+						tabContents_.siblings(".docs_contents__.hidden__").hide();
+			        }).removeClass("hidden__");
 				});
 			},
 			hideTabContents : function(docId_) {
@@ -635,10 +637,12 @@
 
 				if(tabContents_.siblings(".docs_contents__.visible__").length > 0) {
 					opts.context.css("position", "relative");
-					tabContents_.siblings(".docs_contents__.visible__").one(N.event.whichTransitionEvent(tabContents_), function(e){
-						$(this).hide();
+					tabContents_.siblings(".docs_contents__.visible__").removeClass("visible__").one(N.event.whichTransitionEvent(tabContents_), function(e){
 						opts.context.css("position", "");
-			        }).addClass("hidden__").removeClass("visible__").trigger("nothing");
+						if($(this).hasClass("hidden__")) {
+							$(this).hide();
+						}
+			        }).addClass("hidden__").trigger("nothing");
 				}
 			},
 			remove : function(targetTabEle) {
@@ -674,10 +678,14 @@
 				if(targetTabContents.hasClass("visible__")) {
 					targetTabContents.addClass("remove__");
 					targetTabContents.one(N.event.whichTransitionEvent(targetTabContents), function(e){
+						$(this).find("*").unbind();
 			            $(this).remove();
+			            targetTabContents = undefined;
 			        }).trigger("nothing");
 				} else {
+					targetTabContents.find("*").unbind();
 					targetTabContents.remove();
+					targetTabContents = undefined;
 				}
 
 				Documents.closeBtnControl.call(this);
@@ -720,6 +728,14 @@
 				var opts = this.options;
 				var self = this;
 
+				var beforeTabContents = opts.context.find("> .docs_contents__." + docId + "__");
+				if(beforeTabContents.length > 0 && beforeTabContents.hasClass("remove__")) {
+					opts.context.find("> .docs_tab_context__ > .docs_tabs__ > .docs_tab__." + docId + "__").remove();
+					beforeTabContents.find("*").unbind();
+					beforeTabContents.remove();
+					beforeTabContents = undefined;
+				}
+				
 				if(opts.context.find("> .docs_tab_context__ > .docs_tabs__ > .docs_tab__." + docId + "__").length === 0) {
 					if(opts.maxTabs !== 0 && opts.context.find("> .docs_tab_context__ > .docs_tabs__ > .docs_tab__").length >= opts.maxTabs) {
 						N.notify({
