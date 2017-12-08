@@ -1,5 +1,5 @@
 /*!
- * Natural-CORE v0.8.8.9
+ * Natural-CORE v0.8.8.10
  * bbalganjjm@gmail.com
  *
  * Includes formatdate.js & Mask JavaScript API
@@ -301,7 +301,7 @@
 		// N local variables
 		$.extend(N, {
 			version : {
-				"Natural-CORE" : "0.8.8.9"
+				"Natural-CORE" : "0.8.8.10"
 			},
 			/**
 			 * Set and get locale value
@@ -1143,9 +1143,11 @@
 				 * Prevent all events
 				 */
 				disable : function(e) {
-			        e.preventDefault();
-			        e.stopImmediatePropagation();
-			        e.stopPropagation();
+					try {
+						e.preventDefault();
+				        e.stopImmediatePropagation();
+				        e.stopPropagation();						
+					} catch(e) {}
 			        return false;
 			    },
 			    /**
