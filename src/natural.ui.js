@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.20.27
+ * Natural-UI v0.8.20.37
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "0.8.20.27";
+	N.version["Natural-UI"] = "0.8.20.37";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -59,7 +59,7 @@
 					var self = this;
 
 					// clone li for create new row
-					var tempRowEleClone = self.tempRowEle.clone(true, true).hide();
+					var tempRowEleClone = self.tempRowEle.clone(true, true);
 					opts.context.append(tempRowEleClone);
 
 					// for row data bind, use N.form
@@ -93,35 +93,40 @@
 						});
 					}
 
-					tempRowEleClone.show(delay, function() {
-						i++;
-						if(opts.height === 0 || opts.scrollPaging.size === 0 || (callType === "append" && data.length > 0 && data.length <= opts.scrollPaging.size)) {
-							lastIdx = opts.data.length - 1;
-						} else {
-							lastIdx = opts.scrollPaging.idx + (limit - 1);
-						}
-						// -4(5) is visualization rendering buffer;
-						if(i-4 === lastIdx) {
-							delay = 0;
-						} else {
-							delay = opts.createRowDelay;
-						}
-						if(i <= lastIdx) {
-							if (opts.data.length > 0) {
-								opts.isBinding = true;
-
+					i++;
+					if(opts.height === 0 || opts.scrollPaging.size === 0 || (callType === "append" && data.length > 0 && data.length <= opts.scrollPaging.size)) {
+						lastIdx = opts.data.length - 1;
+					} else {
+						lastIdx = opts.scrollPaging.idx + (limit - 1);
+					}
+					
+					// -4(5) is visualization rendering buffer;
+					if(i-4 === lastIdx) {
+						delay = 0;
+					} else {
+						delay = opts.createRowDelay;
+					}
+					
+					if(i <= lastIdx) {
+						if (opts.data.length > 0) {
+							opts.isBinding = true;
+							if(delay > 0) {
+								setTimeout(function() {
+									UI.iteration.render.call(self, i, limit, delay, lastIdx, callType);
+								}, delay);
+							} else {
 								UI.iteration.render.call(self, i, limit, delay, lastIdx, callType);
 							}
-						} else if(i === lastIdx + 1) {
-							if(opts.onBind !== null) {
-								opts.onBind.call(self, opts.context, opts.data);
-							}
-							opts.scrollPaging.limit = opts.scrollPaging.size === 0 ? opts.data.length : opts.scrollPaging.size;
-
-							opts.isBinding = false;
-							opts.context.dequeue("bind");
 						}
-					});
+					} else if(i === lastIdx + 1) {
+						if(opts.onBind !== null) {
+							opts.onBind.call(self, opts.context, opts.data);
+						}
+						opts.scrollPaging.limit = opts.scrollPaging.size === 0 ? opts.data.length : opts.scrollPaging.size;
+
+						opts.isBinding = false;
+						opts.context.dequeue("bind");
+					}
 				},
 				select : function(compNm) {
 					var opts = this.options;
@@ -355,7 +360,7 @@
 	        		var self = this;
 
 					contextWrapEle.scroll(function() {
-			        	if(opts.scrollPaging.size > 0) {
+			        	if(opts.scrollPaging.size > 0 && opts.isBinding === false) {
 				        	var thisWrap = $(this);
 		                    if (thisWrap.scrollTop() >= opts.context.height() - thisWrap.height()) {
 		                    	rowEleLength = opts.context.find(rowTagName).length;
@@ -2059,7 +2064,7 @@
 					}
 
 					// set default select index
-					if(this.active !== undefined && this.active) {
+					if(this.active === true) {
 						// active option select
 						defSelIdx = i;
 					} else {
@@ -2133,6 +2138,13 @@
 							}
 						}
 
+						// Synchronize the animation and page load
+						var visibleDefer = $.Deferred(); 
+						var loadDefer = $.Deferred();
+						$.when(visibleDefer, loadDefer).done(function() {
+							opts.context.dequeue("open");
+						});
+						
 						// hide tab contents
 						var beforeActivatedContent = opts.contents.filter(".tab_content_active__");
 						if(beforeActivatedContent.length > 0) {
@@ -2141,13 +2153,15 @@
 								opts.context.css("position", "relative");
 								isRelative = true;
 							}
-							beforeActivatedContent.removeClass("tab_content_active__ visible__").addClass("hidden__");
-							beforeActivatedContent.one(N.event.whichTransitionEvent(beforeActivatedContent), function(e){
+							beforeActivatedContent.removeClass("tab_content_active__ visible__").one(N.event.whichTransitionEvent(beforeActivatedContent), function(e){
 								$(this).hide();
 								if(isRelative) {
 									opts.context.css("position", "");
 								}
-							}).trigger("nothing");
+								visibleDefer.resolve();
+							}).addClass("hidden__").trigger("nothing");
+						} else {
+							visibleDefer.resolve();
 						}
 
 						if(!selDeclarativeOpts.preload && selDeclarativeOpts.url !== undefined && !selContentEle.data("loaded") || selDeclarativeOpts.stateless) {
@@ -2168,13 +2182,15 @@
 									onOpenProcFn__();
 								}
 
+								selContentEle.data("loaded", true);
+								
 								// show tab contents
 								selContentEle_.show(0, function() {
 									selContentEle_.addClass("visible__");
+									
+									loadDefer.resolve();
 								}).removeClass("hidden__");
-
-								selContentEle.data("loaded", true);
-							});
+							}, isFirst);
 						} else {
 							selContentEle.addClass("tab_content_active__");
 
@@ -2184,6 +2200,8 @@
 							// show tab contents
 							selContentEle.show(0, function() {
 								selContentEle.addClass("visible__");
+								
+								loadDefer.resolve();
 							}).removeClass("hidden__");
 						}
 
@@ -2199,7 +2217,7 @@
 				}
 
 				// select tab
-				$(opts.links.get(defSelIdx)).trigger("click.tab", [undefined, true]);
+				this.open(defSelIdx, undefined, true);
 			},
 			wrapScroll : function() {
 				var opts = this.options;
@@ -2321,7 +2339,7 @@
 					}
 				});
 			},
-			loadContent : function(url, targetIdx, callback) {
+			loadContent : function(url, targetIdx, callback, isFirst) {
 				var opts = this.options;
 				var self = this;
 				var selContentEle = opts.contents.eq(targetIdx);
@@ -2331,6 +2349,7 @@
 					contentType : "text/html; charset=UTF-8",
 					dataType : "html",
 					type : "GET",
+					urlSync : isFirst ? false : true,
 					target : selContentEle
 				}).submit(function(page) {
 					var cont = selContentEle.html(page).children(".view_context__:last").instance("cont");
@@ -2366,14 +2385,20 @@
 			context : function(sel) {
 				return sel !== undefined ? this.options.context.find(sel) : this.options.context;
 			},
-			open : function(idx, onOpenData) {
+			open : function(idx, onOpenData, isFirst) {
 				var opts = this.options;
 				if(idx !== undefined) {
-					if(onOpenData !== undefined) {
-						$(opts.links.get(idx)).trigger("click.tab", [onOpenData]);
-					} else {
-						$(opts.links.get(idx)).trigger("click.tab");
-					}
+					opts.context.queue("open", function() {
+						if(onOpenData !== undefined) {
+							$(opts.links.get(idx)).trigger("click.tab", [onOpenData]);
+						} else {
+							$(opts.links.get(idx)).trigger("click.tab", [undefined, isFirst]);
+						}						
+					});
+					clearTimeout(opts.openTime);
+					opts.openTime = setTimeout(function() {
+						opts.context.dequeue("open");
+					}, 0);
 					
 					if(opts.tabScroll) {
 						var tabContainerEle = opts.context.find(">ul");
@@ -2411,7 +2436,11 @@
 				if(idx !== undefined) {
 					$(this.options.links.get(idx))
 						.unbind("click.tab.disable")
+						.unbind("touchstart.tab.disable")
+						.unbind("touchend.tab.disable")
 						.tpBind("click.tab.disable", N.event.disable)
+						.tpBind("touchstart.tab.disable", N.event.disable)
+						.tpBind("touchend.tab.disable", N.event.disable)
 						.addClass("tab_disabled__");
 				}
 				return this;
@@ -2420,6 +2449,8 @@
 				if(idx !== undefined) {
 					$(this.options.links.get(idx))
 						.unbind("click", N.event.disable)
+						.unbind("touchstart", N.event.disable)
+						.unbind("touchend", N.event.disable)
 						.removeClass("tab_disabled__");
 				}
 				return this;
@@ -3155,9 +3186,16 @@
 	        	opts.row = row;
 
 	        	// row index of N.grid's form is 0;
-	        	if(this.options.extObj !== null) {
+	        	if(opts.extObj !== null) {
         			opts.data = $(opts.data[opts.row]);
         			opts.row = 0;
+        			
+        			// for scroll paging
+        			// just +1 is inappropriate on android 4.4.2 webkit
+        			var rowEleLength = opts.extObj.options.context.find(opts.extObj instanceof N.grid ? ">tbody" : ">li").length;
+        			var pagingSize = opts.extObj.options.scrollPaging.size;
+        			var rest = rowEleLength % pagingSize;
+        			opts.extObj.options.scrollPaging.idx = parseInt(rowEleLength / pagingSize) * pagingSize - pagingSize + rest;
         		}
 	        	
 	        	// Set revert data
@@ -3464,11 +3502,13 @@
 				vResizable : false,
 				windowScrollLock : true,
 				select : false,
+				selectWithCheck : false,
 				unselect : true,
 				multiselect : false,
 				checkAll : null, // selector
 				checkAllTarget : null, // selector
-				checkSingleTarget : null, // TODO
+				checkSingleTarget : null,
+				checkWidthSelect : false,
 				hover : false,
 				revert : false,
 				createRowDelay : 1,
@@ -3956,6 +3996,13 @@
 						if (opts.data[this].rowStatus === "insert") {
 				            opts.data.splice(this, 1);
 				            opts.context.find(">li:eq(" + row + ")").remove();
+				            
+				         	// for scroll paging
+		        			// just +1 is inappropriate on android 4.4.2 webkit
+		        			var rowEleLength = opts.context.find(">li").length;
+		        			var pagingSize = opts.scrollPaging.size;
+		        			var rest = rowEleLength % pagingSize;
+		        			opts.scrollPaging.idx = parseInt(rowEleLength / pagingSize) * pagingSize - pagingSize + rest;
 				        } else {
 				        	opts.data[this].rowStatus = "delete";
 				        	opts.context.find(">li:eq(" + row + ")").addClass("row_data_deleted__");
@@ -4070,11 +4117,13 @@
 				sortable : false,
 				windowScrollLock : true,
 				select : false,
+				selectWithCheck : false,
 				unselect : true,
 				multiselect : false,
 				checkAll : null, // selector
 				checkAllTarget : null, // selector
 				checkSingleTarget : null, // selector
+				checkWidthSelect : false,
 				hover : false,
 				revert : false,
 				createRowDelay : 1,
@@ -5754,6 +5803,14 @@
 						if (opts.data[this].rowStatus === "insert") {
 				            opts.data.splice(this, 1);
 				            opts.context.find(">tbody:eq(" + row + ")").remove();
+				            
+				            
+				            // for scroll paging
+		        			// just +1 is inappropriate on android 4.4.2 webkit
+		        			var rowEleLength = opts.context.find(">tbody").length;
+		        			var pagingSize = opts.scrollPaging.size;
+		        			var rest = rowEleLength % pagingSize;
+		        			opts.scrollPaging.idx = parseInt(rowEleLength / pagingSize) * pagingSize - pagingSize + rest;
 				        } else {
 				        	opts.data[this].rowStatus = "delete";
 				        	opts.context.find(">tbody:eq(" + row + ")").addClass("row_data_deleted__");
