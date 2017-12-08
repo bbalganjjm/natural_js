@@ -573,7 +573,7 @@
 				/**
 				 * 컬럼 고정 시 데이터를 바인드 할 때 고정 된 바디 셀(TD)의 높이가 맞지 않을때 아래 수치 조절(기본값 : 0)
 				 */
-				"fixedcolBodyBindHeight" : N.browser.is("ie") || N.browser.is("firefox") ? 0.33 : 0,
+				"fixedcolBodyBindHeight" : N.browser.is("ie") || N.browser.is("firefox") ? 0.33 : 1,
 				/**
 				 * 컬럼 고정 시 데이터를 Add 할 때 고정 된 바디 셀(TD)의 높이가 맞지 않을때 아래 수치 조절(기본값 : 1)
 				 */
@@ -609,6 +609,7 @@
 					"closeAllTitle" : "메뉴 전체 닫기",
 					"closeAll" : "전체 닫기",
 					"closeAllQ" : "선택한 메뉴를 제외하고 열린 메뉴 전체를 닫겠습니까?",
+					"closeAllDQ" : "열려있는 메뉴 전체를 닫고 메인(홈) 화면으로 이동 하겠습니까?",
 					"docListTitle" : "열린 메뉴 목록",
 					"docList" : "메뉴 목록",
 					"selDocument" : "{0} 메뉴 선택",
@@ -620,7 +621,8 @@
 				"en_US" : {
 					"closeAllTitle" : "Close all menus",
 					"closeAll" : "Close all",
-					"closeAllQ" : "Are you sure you want to close the entire open menu except for the selected menu?",
+					"closeAllQ" : "Are you sure you want to close the all open menus except for the selected menu?",
+					"closeAllDQ" : "Are you sure you want to close the all open menus and go to home page?",
 					"docListTitle" : "Opened menu list",
 					"docList" : "Menu list",
 					"selDocument" : "Select the {0} menu",
