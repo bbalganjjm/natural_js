@@ -132,7 +132,7 @@
 					}
 				}
 			},
-			/** 컨트롤러의 함수에 적용하고자 하는 기능을 정의 합니다. */
+			/** 컨트롤러(N.cont)의 함수에 적용하고자 하는 기능을 정의 합니다. */
 			"advisors" : [{
 				/**
 				 * advisor가 적용될 pointcut을 정의 합니다.
@@ -144,7 +144,7 @@
 				 * "pointcut" : "someregexp"
 				 * 위와 같이 pointcut의 값이 객체가 아닌 경우 "regexp" pointcut을 기본값으로 사용 합니다.
 				 */
-				"pointcut" : "^init$",
+				"pointcut" : "^before.*",
 				/**
 				 * adviecType 은 아래와 같습니다.
 				 * before : 원본 함수를 실행하기 전에 실행 됩니다.
@@ -157,17 +157,15 @@
 				"fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 함수체인, args 인자 */
 					console.log("call me before %s", fnChain);
 				}
-			},
-			{
-				"pointcut" : "after.*",
+			}, {
+				"pointcut" : "^after.*",
 				"adviceType" : "after",
-				"fn" : function(cont, fnChain, args, result){ /* cont 컨트롤러, fnChain 함수체인, args 인자, 반환값 */
+				"fn" : function(cont, fnChain, args, result){ /* cont 컨트롤러, fnChain 함수체인, args 인자, result 반환값 */
 					console.log("call me after %s", fnChain);
-					console.log("\treuslt", result);
+					console.log("reuslt", result);
 				}
-			},
-			{
-				"pointcut" : "around.*",
+			}, {
+				"pointcut" : "^around.*",
 				"adviceType" : "around",
 				"fn" : function(cont, fnChain, args, joinPoint){ /* cont 컨트롤러, fnChain 함수체인, args 인자, joinPoint 원본 함수 실행 객체 */
 					console.log("call me around %s", fnChain);
