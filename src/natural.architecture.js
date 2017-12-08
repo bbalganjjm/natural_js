@@ -194,6 +194,7 @@
 						if (!N.isElement(obj)) {
 							if (obj.request.options.urlSync && obj.request.options.referrer.replace(/!/g, "") != window.location.href.replace(/!/g, "")) {
 								xhr.abort();
+								N.warn("[Communicator.submit.success(urlSync option)]The response was stopped because it was different from the URL at the time of the request and the URL at the time of the response.");
 								return false;
 							}
 						} else {
