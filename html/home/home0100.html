@@ -16,22 +16,21 @@
 	}
 
 	.home0100 .mainLogoBox {
-	    background-image: url("images/logo_back.jpg");
-	    background-position: -539px -264px;
+		margin : -15px -15px 0 -15px;
+	    background-image: url("images/logo_back_new.jpg");
+	    background-position: 0 0;
 	    background-repeat: no-repeat;
 	    box-shadow: 0px 0px 4px #99cccc;
-	    padding: 35px 0 35px 0;
-		animation: naturalJsLogoAni 3s infinite ease-in-out alternate;
+	    padding: 45px 0 220px 0;
+		animation: naturalJsLogoAni 3s infinite cubic-bezier(0.4, 0.4, 0.6, 0.6) alternate;;
 	}
 
 	@keyframes naturalJsLogoAni {
 		from {
-			background-position: -539px -284px;
-			opacity : 0.7;
+			background-position: 0px 0;
 		}
 		to {
-			background-position: -539px -224px;
-			opacity : 1;
+			background-position: -52px 0;
 		}
 	}
 </style>
