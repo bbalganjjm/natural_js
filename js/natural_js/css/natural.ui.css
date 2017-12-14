@@ -515,11 +515,6 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .grid__ thead, .grid__ tfoot {
-	background: linear-gradient(top, #efefef, #effeee);
-	background: -ms-linear-gradient(top, #efefef, #effeee);
-	background: -moz-linear-gradient(top, #efefef, #effeee);
-	background: -o-linear-gradient(top, #efefef, #effeee);
-	background: -webkit-linear-gradient(top, #efefef, #effeee);
 	background-color: #efefef;
 }
 
