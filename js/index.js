@@ -114,6 +114,7 @@ var CommonUtilController = {
 			var href = N(this).attr("href");
 			var text = N(this).text();
 			if(N.string.trimToEmpty(href).indexOf("#") < 0
+					&& N.string.trimToEmpty(href).indexOf("www.") < 0
 					&& N.string.trimToEmpty(href).indexOf(".html") > -1
 					&& N.string.trimToNull(href) !== null) {
 				e.preventDefault();

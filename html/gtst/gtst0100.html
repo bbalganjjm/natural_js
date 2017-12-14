@@ -316,7 +316,7 @@ N("#viewCont").cont({
 	<p lang="ko_KR">
 		미리 만들어 놓은 "c:/natural_js/index.html" 파일을 웹 브라우저로 열어 보세요.
 		index 페이지에 의해 "c:/natural_js/test_html.html" 파일이 로딩되고 N.cont 의 인자로 지정 한 오브젝트의 init 함수가 실행 될 것 입니다.
-		위 코드가 실행 되면 id 가 result 인 div 요소안에 불러온 파일의 내용이 표시 될 것 입니다.
+		그 다음 위 코드가 실행 되면서 id 가 result 인 div 요소안에 불러온 파일의 내용이 표시 될 것 입니다.<br>
 		데이터를 조회 할 수 있는 서버가 있다면 "c:/natural_js/test_data.json" 대신 해당 서비스의 URL 을 입력 하면 됩니다.<br>
 		서버에 파라미터를 보내고 싶다면 다음과 같이 N()함수의 인자로 JSON 타입의 파라미터를 넣고 실행 해 주세요.
 		그러면 그 값이 HTTP Request Body 에 실려 서버로 보내지게 됩니다.
@@ -324,12 +324,15 @@ N("#viewCont").cont({
 	<p lang="en_US">
 		Let's open the pre-written "c: /natural_js/index.html" file in a web browser.
 		The "c:/natural_js/test_html.html" file will be loaded by the index page and the init function of the object specified in the argument of N.cont will be executed.<br>
-		그 다음 위 코드가 실행 되면서 id 가 result 인 div 요소안에 불러온 파일의 내용이 표시 될 것 입니다.
-		데이터를 조회 할 수 있는 서버가 있다면 "c:/natural_js/test_data.json" 대신 해당 서비스의 URL 을 입력 하면 됩니다.<br>
-		서버에 파라미터를 보내고 싶다면 다음과 같이 N()함수의 인자로 JSON 타입의 파라미터를 넣고 실행 해 주세요.
-		그러면 그 값이 HTTP Request Body 에 실려 서버로 보내지게 됩니다.
+		Then the above code will be executed and the contents of the file loaded into the div element with id as "result" will be displayed.<br>
+		If you have a server that can query data, you can enter the URL of the service instead of "c:/natural_js/test_data.json".<br>
+		If you want to send a parameter to the server, you should put the JSON type parameter as an argument of N() function as follows.
+		That way, the value will be sent to the server in the HTTP Request Body.
 	</p>
-	<p class="alert">JSON 타입의 파라미터를 서버에서 받으려면 서버에 JSON 타입의 문자열을 서버단 언어의 객체로 변환 해 주는 모듈이 있어야 합니다.</p>
+	
+	<p lang="ko_KR" class="alert">서버에서 JSON 타입의 파라미터 문자열을 Map 이나 List 같은 객체로 변환 해서 사용하려면 <a class="link" target="blank_" href="http://www.json.org/json-ko.html">JSON 변환 모듈</a> 이 있어야 합니다.</p>
+	<p lang="en_US" class="alert">To convert a parameter string of JSON type to an object such as Map or List on the server, you must have a <a class="link" target="blank_" href="http://www.json.org">JSON conversion module</a>.</p>
+	
 	<pre class="line-numbers"><code class="language-javascript">
 ...
 N("#viewCont").cont({
@@ -343,10 +346,9 @@ N("#viewCont").cont({
 	<p>피들러나 브라우저에서 제공하는 개발자 도구의 Network 탭을 선택하고 페이지를 리프레쉬 한 다음 요청한 URL을 확인 해 보면 { param1 : "This is parameter 1" } 라는 텍스트가 요청 한 URL 로 전송 되는 것을 확인 할 수 있습니다.</p>
 	<p class="alert">
 		N().comm 에서 N()의 인자로 HTML 요소나 jQuery select 문자열이 지정 되면 지정 한 요소 안에 불러 온 HTML 블록 페이지를 넣어주고 JSON 형태의 오브젝트를 지정 하면 요청한 URL의 요청 파라미터가 됩니다.<br>
-		N.comm 과 N.cont 에서 제공하는 상세 기능을 확인 하려면 Natural-ARCHITECTURE API 문서를 참고 하세요.
+		N.comm 과 N.cont 에서 제공하는 상세 기능을 확인 하려면 <a class="link" href="html/refr/refr0103.html">Natural-ARCHITECTURE API 문서</a>를 참고 하세요.
 	</p>
-	<p>이제 기본 구조를 알았으니 API 문서를 참고해서 신나게 개발 해 볼까요?</p>
-	<p><a class="link" href="html/refr/refr0101.html">API 문서 및 API 데모 바로가기</a></p>
+	<p>이제 기본 구조를 알았으니 <a class="link" href="html/refr/refr0101.html">API 문서</a>를 참고해서 신나게 개발 해 볼까요?</p>
 	<p>지금 보고 있는 사이트도 Natural-JS 로 만들어진 사이트 입니다. 이 사이트의 소스코드는 <a class="link" href="https://github.com/bbalganjjm/natural_js/tree/gh-pages" target="_blank">Github 의 gh-pages 브랜치</a>에 공개 되어 있으니 참고 바랍니다.</p>
 </article>
 
