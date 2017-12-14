@@ -14,7 +14,7 @@ var IndexController = {
 			this.googleAnalytics();
 		}
 		if(N.locale() === "en_US") {
-			this.notice();
+			// this.notice();
 		}
 	},
 	/**
