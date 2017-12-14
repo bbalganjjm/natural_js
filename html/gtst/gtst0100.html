@@ -337,19 +337,26 @@ N("#viewCont").cont({
 ...
 N("#viewCont").cont({
 	init : function(view, request) {
-		N({ param1 : "This is parameter 1" }).comm("test_data.json").submit(function(data) {
+		N({ "param1" : "This is parameter 1" }).comm("test_data.json").submit(function(data) {
 			// data is received data from the server
 			N("#result", view).text(JSON.stringify(data));
 		});
     }
 });</code></pre>
-	<p>피들러나 브라우저에서 제공하는 개발자 도구의 Network 탭을 선택하고 페이지를 리프레쉬 한 다음 요청한 URL을 확인 해 보면 { param1 : "This is parameter 1" } 라는 텍스트가 요청 한 URL 로 전송 되는 것을 확인 할 수 있습니다.</p>
-	<p class="alert">
-		N().comm 에서 N()의 인자로 HTML 요소나 jQuery select 문자열이 지정 되면 지정 한 요소 안에 불러 온 HTML 블록 페이지를 넣어주고 JSON 형태의 오브젝트를 지정 하면 요청한 URL의 요청 파라미터가 됩니다.<br>
-		N.comm 과 N.cont 에서 제공하는 상세 기능을 확인 하려면 <a class="link" href="html/refr/refr0103.html">Natural-ARCHITECTURE API 문서</a>를 참고 하세요.
+	<p lang="ko_KR"><a class="link" target="blank_" href="https://www.telerik.com/fiddler">Fiddler</a>나 브라우저에서 제공하는 개발자 도구의 Network 탭을 선택하고 페이지를 리프레쉬 한 다음 요청한 URL을 확인 해 보면 { "param1" : "This is parameter 1" } 라는 텍스트가 요청 한 URL 로 전송 되는 것을 확인 할 수 있습니다.</p>
+	<p lang="en_US">If look at the requested URL after refreshing the page on <a class="link" target="blank_" href="https://www.telerik.com/fiddler">Fiddler</a> or select the Network tab of the developer tool provided by your browser, you can see that the text { "param1" : "This is parameter 1"} is sent to the requested URL</p>
+	<p lang="ko_KR" class="alert">
+		N().comm 에서 N() 함수의 인자로 HTML 요소나 jQuery select 문자열이 지정 되면 지정 한 요소 안에 불러 온 HTML 블록 페이지를 넣어주고 JSON 형태의 오브젝트를 지정 하면 요청한 URL의 요청 파라미터가 됩니다.<br>
+		N.comm 과 N.cont 에서 제공되는 기능에 대한 자세한 내용은 <a class="link" href="html/refr/refr0103.html">Natural-ARCHITECTURE API 문서</a>를 참고 하세요.
 	</p>
-	<p>이제 기본 구조를 알았으니 <a class="link" href="html/refr/refr0101.html">API 문서</a>를 참고해서 신나게 개발 해 볼까요?</p>
-	<p>지금 보고 있는 사이트도 Natural-JS 로 만들어진 사이트 입니다. 이 사이트의 소스코드는 <a class="link" href="https://github.com/bbalganjjm/natural_js/tree/gh-pages" target="_blank">Github 의 gh-pages 브랜치</a>에 공개 되어 있으니 참고 바랍니다.</p>
+	<p lang="en_US" class="alert">
+		If an HTML element or a jQuery select string is specified as an argument of N() function in N().comm, the HTML block page loaded in the specified element is inserted and If the object of JSON type is specified, it becomes a request parameter of the requested URL.<br>
+		Please refer to the <a class="link" href="html/refr/refr0103.html">Natural-ARCHITECTURE API Documents</a> for details on the features provided by N.comm and N.cont.
+	</p>
+	<p lang="ko_KR">이제 기본 구조를 알았으니 <a class="link" href="html/refr/refr0101.html">API 문서</a>를 참고 해서 신나게 개발 해 볼까요?</p>
+	<p lang="en_US">Now that you know the basic structure, let's try to develop it with reference to the <a class="link" href="html/refr/refr0101.html">API document</a>.</p>
+	<p lang="ko_KR" class="alert">지금 보고 있는 이 사이트도 Natural-JS 로 개발 된 사이트 입니다. 이 사이트의 소스 코드는 <a class="link" href="https://github.com/bbalganjjm/natural_js/tree/gh-pages" target="_blank">Github 의 gh-pages 브랜치</a>에 공개 되어 있으니 참고 바랍니다.</p>
+	<p lang="en_US" class="alert">This site is developed with Natural-JS. A reference to the source code of this site can be found in <a class="link" href="https://github.com/bbalganjjm/natural_js/tree/gh-pages" target="_blank">Github's "gh-pages" branch</a>.</p>
 </article>
 
 <script type="text/javascript">
