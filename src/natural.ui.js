@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.8.20.37
+ * Natural-UI v0.8.20.39
  * bbalganjjm@gmail.com
  *
  * Copyright 2014 KIM HWANG MAN
@@ -8,7 +8,7 @@
  * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "0.8.20.37";
+	N.version["Natural-UI"] = "0.8.20.39";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -2910,7 +2910,7 @@
 											ele.bind("focusout.form.format", function() {
 												var currEle = $(this);
 					                            if (!currEle.prop("disabled") && !currEle.prop("readonly") && (!opts.validate || (opts.validate && !currEle.hasClass("validate_false__")))) {
-					                                currEle.trigger("format.formatter");
+					                            	currEle.trigger("format.formatter");
 					                            }
 					                        });
 										}
@@ -4801,6 +4801,7 @@
 					e.preventDefault();
 					e.stopPropagation();
 					e.stopImmediatePropagation();
+					
 					var rowIdx = opts.context.find(">tbody").index($(this).closest("tbody.form__"));
 
 					var morePopupContects = $("<div></div>").addClass("grid_more_popup_contents__");
@@ -4824,13 +4825,17 @@
 							td.clone().removeAttr("rowspan").removeAttr("colspan").removeAttr("class").removeAttr("style").appendTo(tr);
 						} else {
 							if(td.hasClass("datepicker__")) {
-								td.removeClass("datepicker__");
+								td.next(".datepicker_contents__").remove(); 
 							}
-							td.closest("td").clone().removeAttr("rowspan").removeAttr("colspan").removeAttr("class").removeAttr("style").appendTo(tr);
+							
+							var tdClone = td.closest("td").clone();
+							tdClone.find(".datepicker__").removeClass("datepicker__");
+							
+							tdClone.removeAttr("rowspan").removeAttr("colspan").removeAttr("class").removeAttr("style").appendTo(tr);
 						}
 					});
 
-					var form = opts.data.form(moreContents).bind(rowIdx);
+					var form = opts.data.form(moreContents).unbind().bind(rowIdx);
 
 					var btnBox = $('<div class="btn_box__"></div>').appendTo(morePopupContects);
 					var prevBtn = $('<a href="#" class="prev_btn__">' + N.message.get(opts.message, "prev") + '</a>').bind("click.grid.more", function(e) {
