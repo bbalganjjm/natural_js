@@ -68,22 +68,12 @@
 				}
 			},
 			sortBy : function(key, reverse) {
-				if (reverse === undefined) {
-					reverse = 1;
-				} else {
-					if(reverse) {
-						reverse = -1;
-					} else {
-						reverse = 1;
-					}
-				}
-
 				return function(a, b) {
-					a = N.string.trimToEmpty(String(a[key])).replace(/-|\./g, "");
-					b = N.string.trimToEmpty(String(b[key])).replace(/-|\./g, "");
-					if (parseInt(a) && parseInt(b)) {
-						a = parseInt(a);
-						b = parseInt(b);
+					a = a[key];
+					b = b[key];
+					if (Number(a) && Number(b)) {
+						a = Number(a);
+						b = Number(b);
 					}
 					if (a < b) {
 						return reverse * -1;
@@ -95,7 +85,12 @@
 				};
 			},
 			sort : function(arr, key, reverse) {
-				return N.isWrappedSet(arr) ? N(arr.sort(this.sortBy(key, reverse))) : arr.sort(this.sortBy(key, reverse));
+				if(reverse) {
+					reverse = -1;
+				} else {
+					reverse = 1;
+				}
+				return arr.sort(this.sortBy(key, reverse));
 			}
 		};
 
