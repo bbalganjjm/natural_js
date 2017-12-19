@@ -157,6 +157,31 @@ table.form th {
 	text-align: right;
 }
 
+.grid__ tbody td input[type='text'], .grid__ tbody td input[type='tel'], .grid__ tbody td input[type='number'], .grid__ tbody td input[type='password'], .grid__ tbody td select, .grid__ tbody td textarea {
+	padding-left: 0;
+	padding-right: 0;
+	border-color: #ffffff;
+	box-shadow: none;
+}
+
+.grid__ tbody td input[type='text'], .grid__ tbody td input[type='tel'], .grid__ tbody td input[type='number'], .grid__ tbody td input[type='password'] {
+	height: 14px;
+	line-height: 14px;
+}
+
+.grid__ tbody td input[type='text'], .grid__ tbody td input[type='tel'], .grid__ tbody td input[type='number'], .grid__ tbody td input[type='password'], .grid__ tbody td textarea {
+	width: 98%;
+}
+
+.grid__ tbody td input[type='text']:hover, .grid__ tbody td input[type='tel']:hover, .grid__ tbody td input[type='number']:hover, .grid__ tbody td input[type='password']:hover, .grid__ tbody td select:hover, .grid__ tbody td textarea:hover, .grid__ tbody td input[type='text']:focus, .grid__ tbody td input[type='password']:focus, .grid__ tbody td select:focus, .grid__ tbody td textarea:focus {
+	border-color: #faaeae;
+	background-color: #ffe5e5;
+	transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+	box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.075);
+	width: 98%;
+	color: #002200;
+}
+
 /* Documents layout */
 body > #docsContainer__ {
 	clear: left;
@@ -309,7 +334,7 @@ article .alert ul>li {
 	padding: 0;
 }
 
-.grid tbody input[type='text'], .grid tbody input[type='password'], .grid tbody select, .grid textarea {
+.grid tbody input[type='text'], .grid tbody input[type='number'], .grid tbody input[type='tel'], .grid tbody input[type='password'], .grid tbody select, .grid textarea {
 	width: 95%;
 }
 
@@ -368,7 +393,7 @@ article.apiDoc .apidemo {
 	padding: 15px 0 15px 0;
 }
 
-article.apiDoc .apidemo table th, article.apiDoc .apidemo table td, article.apiDoc .apidemo input[type='text'], article.apiDoc .apidemo input[type='password'], article.apiDoc .apidemo select, article.apiDoc .apidemo textarea {
+article.apiDoc .apidemo table th, article.apiDoc .apidemo table td, article.apiDoc .apidemo input[type='text'], article.apiDoc .apidemo input[type='number'], article.apiDoc .apidemo input[type='tel'], article.apiDoc .apidemo input[type='password'], article.apiDoc .apidemo select, article.apiDoc .apidemo textarea {
 	font-size: 1em;
 }
 
@@ -457,7 +482,7 @@ article .searchBox label input, article .searchBox label select {
 	border-color: #cccccc;
 }
 
-article .searchBox label input[type='text'] {
+article .searchBox label input[type='text'], article .searchBox label input[type='number'], article .searchBox label input[type='tel'] {
 	width: 85px;
 }
 
