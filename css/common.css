@@ -166,7 +166,8 @@ table.form th {
 
 .grid__ tbody td input[type='text'], .grid__ tbody td input[type='tel'], .grid__ tbody td input[type='number'], .grid__ tbody td input[type='password'] {
 	height: 14px;
-	line-height: 14px;
+    line-height: 14px;
+    padding: 4px 2px;
 }
 
 .grid__ tbody td input[type='text'], .grid__ tbody td input[type='tel'], .grid__ tbody td input[type='number'], .grid__ tbody td input[type='password'], .grid__ tbody td textarea {
