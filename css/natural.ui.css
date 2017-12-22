@@ -530,35 +530,6 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	z-index: 1;
 }
 
-.grid__ th, .grid__ td {
-	border: 1px solid #77cc77;
-}
-
-.grid__ tbody td input[type='text'], .grid__ tbody td input[type='password'], .grid__ tbody td select, .grid__ tbody td textarea {
-	padding-left: 0;
-	padding-right: 0;
-	border-color: #ffffff;
-	box-shadow: none;
-}
-
-.grid__ tbody td input[type='text'], .grid__ tbody td input[type='password'] {
-	height: 14px;
-	line-height: 14px;
-}
-
-.grid__ tbody td input[type='text'], .grid__ tbody td input[type='password'], .grid__ tbody td textarea {
-	width: 98%;
-}
-
-.grid__ tbody td input[type='text']:hover, .grid__ tbody td input[type='password']:hover, .grid__ tbody td select:hover, .grid__ tbody td textarea:hover, .grid__ tbody td input[type='text']:focus, .grid__ tbody td input[type='password']:focus, .grid__ tbody td select:focus, .grid__ tbody td textarea:focus {
-	border-color: #faaeae;
-	background-color: #ffe5e5;
-	transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
-	box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.075);
-	width: 98%;
-	color: #002200;
-}
-
 .v_resizable__ {
 	height: 3px;
 	margin-right: 18px;
@@ -867,7 +838,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .tab__>ul.tab_scroll__.effect__ {
-	transition: margin-left 0.36s cubic-bezier(1, 0, 1, 1);
+	transition: margin-left 0.25s cubic-bezier(0.76, 0.07, 0.3, 1.5);
 }
 
 .tab__>a.tab_scroll_prev__, .tab__>a.tab_scroll_next__ {
@@ -1274,6 +1245,10 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	height: 31px;
 	border-bottom: 1px solid #55d555;
 	font-family: "Malgun Gothic", "dotum", "Segoe UI", sans-serif;
+}
+
+.docs__>.docs_tab_context__>ul.docs_tabs__.effect__ {
+	transition: margin-left 0.25s cubic-bezier(0.76, 0.07, 0.3, 1.5);
 }
 
 .docs__>.docs_tab_context__>ul.docs_tabs__, .docs__>.docs_tab_context__>ul.docs_tab_utils__, .docs__>.docs_tab_context__>ul.docs_tab_utils__ .docs_tab_list__ {
