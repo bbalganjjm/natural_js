@@ -51,7 +51,7 @@ Features
 References
 =========
 - Home page : http://bbalganjjm.github.io/natural_js
- * Getting Start(Korean) : http://bbalganjjm.github.io/natural_js/#gtst/gtst0100
+ * Getting Start : http://bbalganjjm.github.io/natural_js/#gtst/gtst0100
  * Basic Document(Korean) : http://bbalganjjm.github.io/natural_js/#intr/intr0100
  * API Document(Korean) & DEMO : http://bbalganjjm.github.io/natural_js/#refr/refr0101
 
