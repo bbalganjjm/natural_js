@@ -1,11 +1,10 @@
 /*!
  * Natural-ARCHITECTURE v0.8.2.2
- * bbalganjjm@gmail.com
  *
- * Copyright 2014 KIM HWANG MAN
- * Released under the LGPL license
- *
+ * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
+ *  
+ * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
 	N.version["Natural-ARCHITECTURE"] = "0.8.2.2";

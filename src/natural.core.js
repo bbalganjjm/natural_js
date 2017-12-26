@@ -1,15 +1,14 @@
 /*!
  * Natural-CORE v0.8.8.10
- * bbalganjjm@gmail.com
+ *
+ * Released under the LGPL v2.1 license
+ * Date: 2014-09-26T11:11Z
+ *  
+ * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  *
  * Includes formatdate.js & Mask JavaScript API
  * formatdate.js : http://www.svendtofte.com/javascript/javascript-date-string-formatting/
  * Mask JavaScript API : http://www.pengoworks.com/workshop/js/mask/, dswitzer@pengoworks.com
- *
- * Copyright 2014 KIM HWANG MAN
- * Released under the LGPL license
- *
- * Date: 2014-09-26T11:11Z
  */
 (function(window, $) {
 	var N;

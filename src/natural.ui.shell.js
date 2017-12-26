@@ -1,11 +1,10 @@
 /*!
  * Natural-UI.Shell v0.8.1.23, Works fine in IE9 and above
- * bbalganjjm@gmail.com
  *
- * Copyright 2017 KIM HWANG MAN
- * Released under the LGPL license
- *
- * Date: 2017-05-11T20:00Z
+ * Released under the LGPL v2.1 license
+ * Date: 2014-09-26T11:11Z
+ *  
+ * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
 	N.version["Natural-UI.Shell"] = "0.8.1.23";
