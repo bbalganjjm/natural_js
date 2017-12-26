@@ -234,22 +234,8 @@ article dl.qna dd ul li>ul {
 	margin: 5px 0 5px 0;
 }
 
-#sub-logos {
-	list-style: none;
-	padding: 0;
-	margin: 0 20px 0 0;
-}
-
-#sub-logos li {
-	margin: 0;
-	float: left;
-	width: 420px;
-	text-align: center;
-	padding: 20px;
-}
-
 article h1 {
-	padding: 10px 0 10px 35px;
+	padding: 10px 0 10px 40px;
 	border-bottom: 1px solid #009000;
 	font-size: 1.5em;
 	background: url("../images/icon/h1_leaf.png") no-repeat 0 10px;
@@ -259,7 +245,7 @@ article h1 {
 
 article h2 {
 	font-weight: bold;
-	padding: 40px 0 20px 15px;
+	padding: 40px 0 20px 20px;
 	background: url("../images/icon/dt_leaf.png") no-repeat 0 40px;
 	font-size: 1.2em;
 	color: #080;
@@ -274,7 +260,7 @@ article h3 {
 	font-size: 1.2em;
 	margin: 0;
 	color: #080;
-	padding: 35px 0 18px 15px;
+	padding: 35px 0 18px 20px;
 	background: url("../images/icon/h3_leaf.gif") no-repeat 0px 35px;
 }
 
