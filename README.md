@@ -6,7 +6,7 @@ Natural-JS
 
 **Natural-JS** 는 ERP, CRM 등의 기업용 웹 어플리케이션 UI를 쉽고 빠르게 구현 할 수 있는 Javascript 프레임워크 라이브러리 입니다.
 
-Structure(구조)
+Structure
 ==========
 **Natural-JS** is composed of Natural-CORE, Natural-ARCHITECTURE, Natural-DATA, Natural-UI.
 **Natural-CORE** is CORE library package that is used internally in the framework.
@@ -22,21 +22,7 @@ Structure(구조)
 **Natural-DATA** 는 Data 처리 및 데이터 동기화에 대한 모듈들을 제공 합니다.
 **Natural-UI** 는 HTML 기반의 Grid, List, Form, Popup등 여러가지 컴포넌트를 제공하여 웹 사용자경험과 개발생산성을 증대 시켜 줍니다.
 
-Reference(참고)
-=========
-- Home page : http://bbalganjjm.github.io/natural_js
- * Getting Start(Korean) : http://bbalganjjm.github.io/natural_js/#gtst/gtst0100
- * Basic Document(Korean) : http://bbalganjjm.github.io/natural_js/#intr/intr0100
- * API Document(Korean) & DEMO : http://bbalganjjm.github.io/natural_js/#refr/refr0101
-
-----------------------------------------------
-
-- 홈페이지 : http://bbalganjjm.github.io/natural_js
- * 시작하기 문서 : http://bbalganjjm.github.io/natural_js/#gtst/gtst0100
- * 기본문서 : http://bbalganjjm.github.io/natural_js/#intr/intr0100
- * API 문서와 데모 : http://bbalganjjm.github.io/natural_js/#refr/refr0101
-
-Features(특징)
+Features
 ========
 - Complete separation of the design area and development areas.
 - Provide CVC architecture pattern based UI-Architecture.
@@ -62,7 +48,21 @@ Features(특징)
  * Documents, Notify
 - 각각의 데이터 관련 UI 컴포넌트들은 실시간으로 데이터가 동기화되고 상호작용을 합니다.
 
-License(저작권)
+References
+=========
+- Home page : http://bbalganjjm.github.io/natural_js
+ * Getting Start(Korean) : http://bbalganjjm.github.io/natural_js/#gtst/gtst0100
+ * Basic Document(Korean) : http://bbalganjjm.github.io/natural_js/#intr/intr0100
+ * API Document(Korean) & DEMO : http://bbalganjjm.github.io/natural_js/#refr/refr0101
+
+----------------------------------------------
+
+- 홈페이지 : http://bbalganjjm.github.io/natural_js
+ * 시작하기 문서 : http://bbalganjjm.github.io/natural_js/#gtst/gtst0100
+ * 기본문서 : http://bbalganjjm.github.io/natural_js/#intr/intr0100
+ * API 문서와 데모 : http://bbalganjjm.github.io/natural_js/#refr/refr0101
+ 
+License
 =======
 Released under the LGPL v2.1 license.
 
