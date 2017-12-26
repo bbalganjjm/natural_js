@@ -39,7 +39,7 @@
 	}
 	
 	.home0100 .links a {
-		color: #ccffcc;
+		color: #ddffdd;
 		border-bottom: 1px solid #ccffcc;
 		font-size: 13px;
 	}
@@ -53,22 +53,73 @@
 	.home0100 .sub-logos li {
 		margin: 0;
 		float: left;
-	    max-width: 476px;
-       padding: 20px 65px;
+		width: 50%;
+		min-width : 400px;
+		padding: 20px 0;
+		text-align: center;
 	    box-sizing: border-box;
 	}
 
-	.home0100 .sub-logos p {
-		text-align: center;
+	@media (max-width: 868px) {
+		.home0100 .sub-logos li {
+			width: 100%;
+		}
 	}
 	
 	.home0100 h2 {
 		clear: both;
 	}
 	
+	.home0100 h4 {
+	    padding: 0px 0 10px 1px;
+	}
+	
 	.home0100 .contents {
 		padding-left: 20px;
 	}
+	
+	.home0100 .features > h4 {
+		clear: both;
+	}
+	
+	.home0100 .features > ul {
+		float: left;
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+	
+	.home0100 .features > ul > li {
+	    margin: 10px;
+	    float: left;
+	    width: 47%;
+	    min-width: 297px;
+	    padding: 15px;
+	    box-sizing: border-box;
+	    min-height: 130px;
+	    background-color: #ccffcc;
+	    border-radius: 3px;
+	}
+	
+	@media (max-width: 1008px) {
+		.home0100 .features > ul > li {
+			 min-height: 155px;
+		}
+	}
+	
+	@media (max-width: 841px) {
+		.home0100 .features > ul > li {
+			 min-height: 180px;
+		}
+	}
+	
+	@media (max-width: 734px) {
+		.home0100 .features > ul > li {
+			width: 94%;
+			min-height: auto;
+		}
+	}
+	
 </style>
 <article class="home0100">
 	<div class="mainLogoBox" align="center"><img class="naturalJsLogo" src="images/js.png"></div>
@@ -78,6 +129,12 @@
 		<br>
 		<a lang="ko_KR" href="files/Natural-JS.pdf" target="blank">Natraul-JS 소개(PDF)</a>
 		<a lang="en_US" href="files/Natural-JS.pdf" target="blank">Introduction to Natraul-JS(PDF, Korean)</a>
+		<br>
+		<a lang="ko_KR" href="https://github.com/bbalganjjm/natural_js" target="blank">소스 다운로드(GitHub)</a>
+		<a lang="en_US" href="https://github.com/bbalganjjm/natural_js" target="blank">Source Download(GitHub)</a>
+		<br>
+		<a lang="ko_KR" href="#gtst/gtst0100" target="blank">시작하기</a>
+		<a lang="en_US" href="#gtst/gtst0100" target="blank">Get Started</a>
 	</p>
 
 	<h2 lang="ko_KR" style="padding-bottom: 15px;">Natural-JS 란?</h2>
@@ -116,9 +173,9 @@
 	<h2 lang="ko_KR">Natural-JS 의 특징</h2>
 	<h2 lang="en_US">Features of Natural-JS</h2>
 	
-	<div class="contents">
-		<p lang="ko_KR">CVC 아키텍처 패턴 기반의 UI 아키텍처와 이를 지원하는 라이브러리를 제공합니다.</p>
-		<p lang="en_US">Provides the CVC architecture pattern based architecture and libraries for support to UI architecture</p>
+	<div class="contents features">
+		<h4 lang="ko_KR">CVC 아키텍처 패턴 기반의 UI 아키텍처와 이를 지원하는 라이브러리를 제공합니다.</h4>
+		<h4 lang="en_US">Provides the CVC architecture pattern based architecture and libraries for support to UI architecture</h4>
 		<ul>
 			<li lang="ko_KR">개발영역과 디자인영역을 완벽하게 분리하여 서버 개발자와 UI 개발자, 또는 스크립트 개발자와 디자이너간의 업무 분쟁을 최소화 할 수 있습니다. 또한 이로 인해 서버 개발 조직과 UI 개발 조직을 분리하여 웹 어플리케이션 개발 프로젝트를 진행 할 수 있습니다.</li>
 			<li lang="en_US">It can completely separate the development and design areas and minimize disputes between server side developers and UI side developer or script developer and designer. In addition, As a result, that may separate the server side and UI side development organization during to do web application development projects.</li>
@@ -130,8 +187,8 @@
 			<li lang="en_US">Provides the Communicator(N.comm) library that can be transmitting and receiving data between the UI(Client Web Browser) side and server side.</li>
 		</ul>
 	
-		<p lang="ko_KR">데이터의 조작과 가공, 입력된 데이터의 검증을 편리하게 할 수 있는 라이브러리를 제공합니다.</p>
-		<p lang="en_US">Provides the libraries for easy control that supports to manipulation and processing of the data, verification of the input data</p>
+		<h4 lang="ko_KR">데이터의 조작과 가공, 입력된 데이터의 검증을 편리하게 할 수 있는 라이브러리를 제공합니다.</h4>
+		<h4 lang="en_US">Provides the libraries for easy control that supports to manipulation and processing of the data, verification of the input data</h4>
 		<ul>
 			<li lang="ko_KR">데이터에 대한 양식(Format)을 손쉽게 변환 할 수 있는 Formatter 라이브러리를 제공합니다.</li>
 			<li lang="en_US">Provides the Formatter library that can be easily convert the format of the data.</li>
@@ -141,8 +198,8 @@
 			<li lang="en_US">Provides the libraries for simply manipulating and processing the data.</li>
 		</ul>
 	
-		<p lang="ko_KR">Rich-UI를 표현하기 위한 다양한 UI 컴포넌트를 제공 합니다.</p>
-		<p lang="en_US">Provides the various UI-Components for express the Rich-UI.</p>
+		<h4 lang="ko_KR">Rich-UI를 표현하기 위한 다양한 UI 컴포넌트를 제공 합니다.</h4>
+		<h4 lang="en_US">Provides the various UI-Components for express the Rich-UI.</h4>
 		<ul>
 			<li lang="ko_KR">지정한 요소에 데이터 바인드를 손쉽게 할 수 있는 Grid, List, Form, Select, Pagination, Tree 컴포넌트를 제공합니다.</li>
 			<li lang="en_US">Provides the Grid, List, Form, Select, Pagination and Tree components that can be easily bind the data to the selected elements</li>
@@ -154,7 +211,7 @@
 			<li lang="en_US">Data of the each UI-Components are synchronized on real time(Two way bind) and that is interacted each other.</li>
 			<li lang="ko_KR">
 				각각의 컴포넌트는 퍼블리싱된 HTML 템플릿의 모양과 디자인을 최대한 유지시켜 줍니다.
-				<p class="alert">
+				<p class="alert" style="margin: 10px 0 0 0;">
 				Grid, Form 등의 컴포넌트는 자체 스타일을 갖고 있지 않습니다.
 				예를 들어, Grid 컴포넌트를 사용하는 경우,
 				페이지 내 table 태그에 대한 스타일이 공통 css나 직접 css를 지정하여 적용되어 있다고 하면
@@ -162,7 +219,7 @@
 				컴포넌트 디자인을 사이트 디자인 컨셉에 간편하게 적용할 수 있습니다.</p>
 			</li>
 			<li lang="en_US">Each components are keeps most the shape and graphic design of be published HTML templete
-				<p class="alert">
+				<p class="alert" style="margin: 10px 0 0 0;">
 				Components such as Grid and Form do not have their own style.
 				For example, if you are use the Grid component,
 				If the styles for the table tags in the page are applied by specifying common css or direct css,
@@ -170,10 +227,11 @@
 			</li>
 		</ul>
 	
-		<p lang="ko_KR">모바일 브라우저(iOS Safari, iOS UIWebView, Android Browser, Android Chrome, Android WebView)와 터치 디바이스를 지원 하고 모바일 하이브리드 앱과의 연동을 지원 합니다.</p>
-		<p lang="en_US">Supports mobile browsers (iOS Safari, iOS UIWebView, Android Browser, Android Chrome, Android WebView) and touch devices and it supports interworking with mobile hybrid applications.</p>
-			
-		<p lang="ko_KR">자세한 아키텍처 구조와 설명은 [ 소개 > <a class="link" href="html/intr/intr0100.html">Natural-JS 소개</a> ] 페이지의 내용을 참조 해 보세요.</p>
+		<h4 lang="ko_KR">모바일 브라우저(iOS Safari, iOS UIWebView, Android Browser, Android Chrome, Android WebView)와 터치 디바이스를 지원 하고 모바일 하이브리드 앱과의 연동을 지원 합니다.</h4>
+		<h4 lang="en_US">Supports mobile browsers (iOS Safari, iOS UIWebView, Android Browser, Android Chrome, Android WebView) and touch devices and it supports interworking with mobile hybrid applications.</h4>
+		
+		<br><br>
+		<p lang="ko_KR">자세한 아키텍처 구조와 설명은 [ 소개 > <a class="link" href="html/intr/intr0100.html">Natural-JS 소개</a> ] 페이지의 내용을 참조 하세요.</p>
 		<p lang="en_US">Detailed architecture structure and descriptions will be found from the contents of [ Introduction > <a class="link" href="html/intr/intr0100.html">About Natural-JS</a> ] page.</p>
 	</div>
 </article>
