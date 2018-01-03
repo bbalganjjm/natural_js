@@ -79,12 +79,20 @@
 	</p>
 	<p align="center">[그림5] CVC Architecture Pattern</p>
 	<h4>2) Natural Architecture Framework</h4>
-	<p>Natural Architecture Framework는 CVC Architecture Pattern(이하 CVC 패턴)의 Communicator영역은 N.comm 클래스로 구현하였고,
-		Controller 영역은 N.cont 라는 클래스로 구현되어 있습니다. 각 페이지별로 구현되는 N.cont 는 데이터를 가져와 가공하거나 View 에 데이터를 뿌려주거나 View로부터 데이터를 가져와
-		N.comm 에 전달 해 주는 역할을 수행 합니다. N.cont 는 페이지 별로 구현된 Controller 들의 라이프사이클과 Scope을 관리 해 줍니다. View 영역은 CVC 패턴에 정의된바 와같이
-		개발스크립트가 첨가되지 않은 순수 HTML만으로 구현하는 방법을 프레임워크에서 제공하고 있습니다. 특히 N.comm 는 논리페이지(물리적으로는 같이 있지만 논리적 Scope에 의해 분리된 페이지(팝업, 탭등))
-		간 데이터를 전송하고 요청 정보등을 가져올 수 있는 N.comm.request 객체를 제공 합니다. 또한 N.comm에서는 서버에 요청(Request)과 응답(Response)의 각 단계별로 공통된 기능을
-		수행시킬 수 있는 Java Servlet Filter나 Spring의 Interceptor와 같은 기능을 수행하는 Natural Filter 기능을 제공 합니다.</p>
+	<p>Natural Architecture Framework 는 CVC Architecture Pattern 의 
+	
+		Communicator 영역이 N.comm 클래스로 구현 되어 있고,
+		Controller 영역은 N.cont 클래스로 구현되어 있습니다. 
+		View 는 이를 구현한 구현체는 존재하지 않고 개발 스크립트가 첨부 되어있지 않는 순수 HTML 영역이 view 요소로 정의 되어 있습니다.
+		
+		N.comm 은 서버에 JSON 형태의 데이터를 송신/수신 하고 블록 페이지들을 불러오는 역할을 담당 합니다. 
+		또한 블록 페이지 간 전송 되는 데이터와 요청 정보들을 확인 할 수 있는 N.comm.request 객체를 제공 하고
+		N.comm 으로 통신하는 모든 요청과 응답 사이에 공통 실행 로직 이나 공통 데이터 처리기를 적용 할 수 있는 Communication Filter 기능을 제공 합니다.
+		
+		N.cont 는 View 의 DOM 을 컨트롤 하거나 요소에 이벤트를 바인드 하고 데이터를 바인드를 하거나 View 로 부터 데이터를 가져와 Communicator 에 전달 해 주는 역할을 수행 합니다.  
+		또한 Controller 객체의 사용자 정의 메서드들에 대해서 AOP(Aspect-Oriented Programming) 를 적용 할 수 있습니다.
+		
+		View 는 개발 스크립트가 첨부되지 않은 순수 HTML만으로 View를 구현 할 수 있는 방법을 Natural-ARCHITECTURE 에서 가이드 하고 있습니다.</p>
 	<p align="center">
 		<img src="images/refr/pic6.png" width="80%" class="imgMg" />
 	</p>
@@ -111,19 +119,20 @@
 	<h4>4) Utilities</h4>
 	<p>Natural-JS는 어플리케이션 개발의 편의성을 제공하기 위한 여러 가지 유틸리티를 제공합니다.</p>
 	<ul>
-		<li>N.datarefine : 서버에서 가져온 데이터를 Natural-JS UI 컴포넌트들에서 쓸 수 있도록 데이터 정제</li>
-		<li>N.datafilter : 조건에 의한 array[json object] 데이터 필터링</li>
-		<li>N.datasort : array[json object] 데이터의 컬럼별 정렬</li>
+		<li>N.data.refine : 서버에서 가져온 데이터를 Natural-JS UI 컴포넌트에서 쓸 수 있도록 데이터를 정제</li>
+		<li>N.data.filter : 조건에 의한 JSON 객체 배열 데이터의 컬럼 별 필터링</li>
+		<li>N.data.sort : JSON 객체 배열 데이터의 컬럼 별 정렬</li>
 	</ul>
 
 	<h3>라. Natural-UI</h3>
 	<img src="images/ui.png" class="imgMg">
-	<p>Natural-JS는 표준 웹 기반의 RIA(Rich Internet Application)를 손쉽게 구현 할 수 있도록 필수 컴포넌트를 제공 합니다. 모든 컴포넌트는 개개별로 사용할수도 있지만 결합되어 사용되어질 경우 Natural-CORE와
-		Natural-DATA 기반하에 모두 유기적으로 연동되어 좀더 편리하고 강력한 개발 환경을 제공 해 줍니다. 또한 컴포넌트들에 대한 기본 옵션을 Global Config 에 지정할 수 있어 통일된 UI 환경을
-		손쉽게 구성 할 수 있습니다. 물론 컴포넌트 생성 시 컴포넌트 옵션을 따로 지정 할 수 있습니다. Data 와 관련된 컴포넌트들(Select, Form, Grid)은 실제 데이터(메모리에 저장)와 HTML 요소로
-		보여지는 데이터가 따로 관리 되어 집니다. Grid를 예를 들면 화면에서 새로운 행을 생성하면 메모리의 데이터도 새로운 행이 생성되고 값을 수정하면 메모리의 값도 실시간으로 수정됩니다. Formatting,
-		Validate 등 Data 조작과 검증에 관련된 라이브러리들도 이 메모리의 데이터를 기반으로 동작 됩니다. 수정, 입력, 삭제된 데이터를 서버로 보낼때는 화면의 입력요소에서 가져올 필요 없이 자동으로
-		동기화되어진 메모리의 데이터만 보내면 되어서 UI 개발이 단순 해 집니다. 또한 UI 컴포넌트들은 Controller 영역에서 컴포넌트의 기본 옵션을 직접 적용할 수 있는 명령형 옵션과 컴포넌트의 기본옵션과
+	<p>Natural-JS는 표준 웹 기반의 RIA(Rich Internet Application)를 손쉽게 구현 하기 위한 다양한 컴포넌트를 제공 합니다. 모든 컴포넌트는 개개별로 사용할수도 있지만 결합되어 사용되어질 경우 
+		모두 유기적으로 연동되어 좀더 편리하고 강력한 개발 환경을 제공 해 줍니다. 또한 컴포넌트들에 대한 기본 옵션을 Global Config 에 지정할 수 있어 통일된 UI 환경을
+		손쉽게 구성 할 수 있습니다. 물론 컴포넌트 생성 시 컴포넌트 옵션을 따로 지정 할 수 있습니다. Data 와 관련된 컴포넌트들(Select, Form, List, Grid, Pagination, Tree)은 실제 데이터(메모리에 저장)와 HTML 요소로
+		보여지는 데이터가 따로 관리 되어 집니다. Grid를 예를 들면 화면에서 새로운 행을 생성하면 메모리의 데이터도 새로운 행이 생성되고 값을 수정하면 메모리의 값도 실시간으로 수정됩니다. Formatter,
+		Validator 등 Data 조작과 검증에 관련된 라이브러리들도 이 메모리의 데이터를 기반으로 동작 됩니다. 수정, 입력, 삭제 된 데이터를 서버로 보낼때는 화면의 입력요소들 마 가져올 필요 없이 자동으로
+		동기화되어진 메모리의 데이터만 보내면 되어서 컴포넌트의 데이터를 DBMS의 데이와 손쉽게 동기화 할 수 있습니다. 
+		또한 UI 컴포넌트들은 Controller 영역에서 컴포넌트의 기본 옵션을 직접 적용할 수 있는 명령형 옵션과 컴포넌트의 기본옵션과
 		서브옵션을 view 영역의 HTML 요소의 data 속성에 JSON 타입의 문자열로 지정할 수 있는 선언형 옵션을 지원합니다(선언형 옵션과 명령형 옵션의 지원 항목은 컴포넌트 기능의 속성에 따라 일치 하지 않을
 		수 있습니다).</p>
 	<p>Natural-UI는 다음과 같은 컴포넌트들과 구조로 구성 되어 있습니다.</p>
