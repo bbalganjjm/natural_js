@@ -1287,6 +1287,13 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .docs__.ios__>.docs_tab_context__>ul.docs_tabs__>.docs_tab__ {
 	padding: 7px 0;
 }
+/* Safari 11+ */
+@media not all and (min-resolution:.001dpcm)
+{ @supports (-webkit-appearance:none) and (stroke-color:transparent) {
+    .docs__>.docs_tab_context__>ul.docs_tabs__>.docs_tab__ {
+		padding: 7.5px 0;
+	}
+}}
 /* Firefox only override */
 @-moz-document url-prefix() {
 	.docs__>.docs_tab_context__>ul.docs_tabs__>.docs_tab__ {
