@@ -1,7 +1,7 @@
 {
 	"name": "naturaljs",
 	"description": "Javascript UI Architecture Framework",
-	"main": "./natural.js.min.js",
+	"main": "natural.js.min.js",
 	"keywords": [
 		"Natural-JS",
 		"natural-js",
@@ -22,11 +22,8 @@
     	"jquery": "1.12.4"
     },
 	"ignore": [
-		"**/.*",
-		"./lib/",
-		"node_modules",
-		"bower_components",
-		"test",
-		"tests"
+		"lib/",
+		".gitignore",
+		"package.json"
 	]
 }
