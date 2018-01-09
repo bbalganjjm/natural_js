@@ -1,7 +1,6 @@
 {
 	"name": "naturaljs",
 	"description": "Javascript UI Architecture Framework",
-	"main": "./natural.js.min.js",
 	"keywords": [
 		"Natural-JS",
 		"natural-js",
