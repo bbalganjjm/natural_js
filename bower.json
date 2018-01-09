@@ -17,7 +17,6 @@
 	],
 	"license": "LGPL-2.1",
 	"homepage": "http://bbalganjjm.github.io/natural_js",
-	// "private": true,
 	"dependencies":{
     	"jquery": "1.12.4"
     },
