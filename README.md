@@ -24,43 +24,43 @@ Structure
 
 Features
 ========
-- Complete separation of the design area and development areas.
-- Provide CVC architecture pattern based UI-Architecture.
-- Provide various UI-Components.
- * Controller, Communicator
- * Formatter, Validator
- * Grid, List, Form, Select
- * Pagination, Tree
- * Alert, Popup, Tab, Button, DatePicker
- * Documents, Notify
-- Data of the each UI-Components related to data are synchronized on real time basis and that is interacted each other.
+* Complete separation of the design area and development areas.
+* Provide CVC architecture pattern based UI-Architecture.
+* Provide various UI-Components.
+	* Controller, Communicator
+	* Formatter, Validator
+	* Grid, List, Form, Select
+	* Pagination, Tree
+	* Alert, Popup, Tab, Button, DatePicker
+	* Documents, Notify
+* Data of the each UI-Components related to data are synchronized on real time basis and that is interacted each other.
 
 ----------------------------------------------
 
-- 디자인 영역과 개발영역을 완벽하게 분리 해 줍니다.
-- CVC 아키텍처 패턴 기반의 UI 아키텍처를 제공합니다.
-- 다양한 UI 컴포넌트와 라이브러리를 제공 합니다.
- * Controller, Communicator
- * Formatter, Validator
- * Grid, List, Form, Select
- * Pagination, Tree
- * Alert, Popup, Tab, Button, DatePicker
- * Documents, Notify
-- 각각의 데이터 관련 UI 컴포넌트들은 실시간으로 데이터가 동기화되고 상호작용을 합니다.
+* 디자인 영역과 개발영역을 완벽하게 분리 해 줍니다.
+* CVC 아키텍처 패턴 기반의 UI 아키텍처를 제공합니다.
+* 다양한 UI 컴포넌트와 라이브러리를 제공 합니다.
+	* Controller, Communicator
+	* Formatter, Validator
+	* Grid, List, Form, Select
+	* Pagination, Tree
+	* Alert, Popup, Tab, Button, DatePicker
+	* Documents, Notify
+* 각각의 데이터 관련 UI 컴포넌트들은 실시간으로 데이터가 동기화되고 상호작용을 합니다.
 
 References
 =========
-- Home page : http://bbalganjjm.github.io/natural_js
- * Getting Start : http://bbalganjjm.github.io/natural_js/#gtst/gtst0100
- * Basic Document(Korean) : http://bbalganjjm.github.io/natural_js/#intr/intr0100
- * API Document(Korean) & DEMO : http://bbalganjjm.github.io/natural_js/#refr/refr0101
+* Home page : http://bbalganjjm.github.io/natural_js
+	* Getting Start : http://bbalganjjm.github.io/natural_js/#gtst/gtst0100
+	* Basic Document(Korean) : http://bbalganjjm.github.io/natural_js/#intr/intr0100
+	* API Document(Korean) & DEMO : http://bbalganjjm.github.io/natural_js/#refr/refr0101
 
 ----------------------------------------------
 
-- 홈페이지 : http://bbalganjjm.github.io/natural_js
- * 시작하기 문서 : http://bbalganjjm.github.io/natural_js/#gtst/gtst0100
- * 기본문서 : http://bbalganjjm.github.io/natural_js/#intr/intr0100
- * API 문서와 데모 : http://bbalganjjm.github.io/natural_js/#refr/refr0101
+* 홈페이지 : http://bbalganjjm.github.io/natural_js
+	* 시작하기 문서 : http://bbalganjjm.github.io/natural_js/#gtst/gtst0100
+	* 기본문서 : http://bbalganjjm.github.io/natural_js/#intr/intr0100
+	* API 문서와 데모 : http://bbalganjjm.github.io/natural_js/#refr/refr0101
  
 License
 =======
