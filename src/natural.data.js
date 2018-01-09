@@ -1,5 +1,5 @@
 /*!
- * Natural-DATA v0.8.2.34
+ * Natural-DATA v0.10.34
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-		N.version["Natural-DATA"] = "0.8.2.34";
+		N.version["Natural-DATA"] = "0.10.34";
 
 	$.fn.extend($.extend(N.prototype, {
 		datafilter : function(callBack) {
