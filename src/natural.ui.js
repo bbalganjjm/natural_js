@@ -4231,10 +4231,10 @@
 			Grid.setTheadCellInfo.call(this);
 			
 			// set this.thead
-			if (opts.height > 0) {
-				this.thead = opts.context.closest(".grid_wrap__").find(">.thead_wrap__>table>thead");
+			if (this.options.height > 0) {
+				this.thead = this.options.context.closest(".grid_wrap__").find(">.thead_wrap__>table>thead");
 	        } else {
-	        	this.thead = opts.context.find(">thead");
+	        	this.thead = this.options.context.find(">thead");
 	        }
 
 			// fixed column
