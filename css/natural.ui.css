@@ -1479,13 +1479,16 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .docs__>.entire_load_indicator__ {
-  height: 2px;
-  width: 100%;
-  position: relative;
-  overflow: hidden;
-  margin-top: -2px;
-  background-color: #55d555;
-  opacity: 0.6;
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 1;
+	height: 4px;
+	width: 100%;
+	overflow: hidden;
+	margin-top: -2px;
+	background-color: #9f9;
+	opacity: 0.6;
 }
 
 .docs__>.entire_load_indicator__:before{
@@ -1494,8 +1497,8 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
   content: "";
   left: -300px;
   width: 300px;
-  height: 2px;
-  background-color: #008800;
+  height: 4px;
+  background-color: #050;
   animation: entire_load_indicator_ani__ 1s linear infinite;
 }
 
