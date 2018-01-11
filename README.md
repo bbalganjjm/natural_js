@@ -62,7 +62,7 @@ References
 	* 기본문서 : http://bbalganjjm.github.io/natural_js/#intr/intr0100
 	* API 문서와 데모 : http://bbalganjjm.github.io/natural_js/#refr/refr0101
 
-Install
+Installs
 =========
 * npm :
 	* npm install @bbalganjjm/natural_js
