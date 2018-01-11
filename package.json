@@ -1,5 +1,5 @@
 {
-	"name": "naturaljs",
+	"name": "natural-js",
 	"version": "0.28.41",
 	"description": "Javascript UI Architecture Framework",
 	"author": {
@@ -7,7 +7,10 @@
 		"email": "bbalganjjm@gmail.com",
 		"url": "http://bbalganjjm.github.io/natural_js"
 	},
-	"contributors": [],
+	"contributors": [
+		"bbalganjjm <bbalganjjm@gmail.com>",
+		"lemonfish <lemonfish@gmail.com>"
+	],
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/bbalganjjm/natural_js.git"
@@ -18,12 +21,7 @@
 	"dependencies": {
 		"jquery": "1.12.4"
 	},
-	"licenses": [
-		{
-			"type": "LGPL-2.1",
-			"url": "https://github.com/bbalganjjm/natural_js/blob/master/LICENSE"
-		}
-	],
+	"license": "LGPL-2.1",
 	"keywords": [
 		"Natural-JS",
 		"natural-js",
