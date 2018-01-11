@@ -1,0 +1,37 @@
+{
+	"name": "naturaljs",
+	"version": "0.28.41",
+	"description": "Javascript UI Architecture Framework",
+	"author": {
+		"name": "KIM HWANG MAN",
+		"email": "bbalganjjm@gmail.com",
+		"url": "http://bbalganjjm.github.io/natural_js"
+	},
+	"contributors": [],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/bbalganjjm/natural_js.git"
+	},
+	"bugs": {
+		"url": "https://github.com/bbalganjjm/natural_js/issues"
+	},
+	"dependencies": {
+		"jquery": "1.12.4"
+	},
+	"licenses": [
+		{
+			"type": "LGPL-2.1",
+			"url": "https://github.com/bbalganjjm/natural_js/blob/master/LICENSE"
+		}
+	],
+	"keywords": [
+		"Natural-JS",
+		"natural-js",
+		"natural_js",
+		"naturaljs",
+		"jquery-plugin",
+		"ui framework",
+		"javascript ui framework",
+		"enterprise web application ui"
+	]
+}
