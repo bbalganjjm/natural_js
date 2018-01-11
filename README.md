@@ -61,7 +61,15 @@ References
 	* 시작하기 문서 : http://bbalganjjm.github.io/natural_js/#gtst/gtst0100
 	* 기본문서 : http://bbalganjjm.github.io/natural_js/#intr/intr0100
 	* API 문서와 데모 : http://bbalganjjm.github.io/natural_js/#refr/refr0101
- 
+
+Install
+=========
+* npm :
+	* npm install @bbalganjjm/natural_js
+
+* Bower :
+	* bower install natural_js
+
 License
 =======
 Released under the LGPL v2.1 license.
