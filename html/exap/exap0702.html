@@ -145,16 +145,13 @@ N(".exap0702").cont({
 		N(this.favoriteFruitCodes).select(N("#detail #favoriteFruit", view)).bind();
 
     	// 3. initialize N.form
-    	var form = N(this.request.attr("selData").data).form({
+    	var form = this.request.attr("selData").data.form({
     		context : N("#detail", view),
     		addTop : true,
     		revert : true
     	});
     	if(editMode === "create") {
     		// 3-1. Create mode - add data
-			// 3-1-1. Bind data for data sync
-    		form.bind(-1, this.request.attr("selData").data);
-    		// 3-1-2. Add empty row data;
     		form.add();
 		} else {
 			// 3-1. Edit mode - bind data
@@ -176,7 +173,7 @@ N(".exap0702").cont({
     		e.preventDefault();
     		if(editMode === "create") {
 				// romove created row
-    			form.remove(form.row());
+    			form.remove();
     		} else {
 		    	form.revert();
     		}
