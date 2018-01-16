@@ -1435,6 +1435,37 @@
 							}
 
 							if(!opts.contents.is(":visible")) {
+								if(opts.shareEle) {
+									// Replace the options for the shared instance with the Datepicker instance options for the selected input element.
+									self = $(this).instance("datepicker");
+									opts = self.options;
+									
+									// Reuse the datepicker panel element
+									var contents;
+									if(opts.monthonly) {
+										contents = N(".datepicker_contents_month_master__.datepicker_monthonly__");
+									} else {
+										contents = N(".datepicker_contents_date_master__:not(.datepicker_monthonly__)");
+									}
+
+									if(contents.length === 0) {
+										contents = DatePicker.wrapEle.call(self);
+									}
+
+									opts.context.after(contents);
+									opts.contents = contents;
+								}
+								
+								// auto select datepicker items from before input value
+								if(!N.string.isEmpty(opts.context.val())) {
+									DatePicker.selectItems(opts,
+											opts.context.val().replace(/[^0-9]/g, ""),
+											(!opts.monthonly ? N.context.attr("data").formatter.date.Ymd() : N.context.attr("data").formatter.date.Ym()).replace(/[^Y|^m|^d]/g, ""),
+											opts.contents.find(".datepicker_years_panel__"),
+											opts.contents.find(".datepicker_months_panel__"),
+											opts.contents.find(".datepicker_days_panel__"));
+								}
+								
 								self.show();
 							}							
 						}
@@ -1527,33 +1558,7 @@
 							: $(".datepicker__.datepicker_date_master__").events("focusin", "datepicker");
 
 					if(focusinHandler !== undefined) {
-						opts.context.bind("focusin.datepicker", function() {
-							// reuse datepicker panel element
-							var datepickerInst;
-							var contents;
-							if(opts.monthonly) {
-								datepickerInst = N(".datepicker__.datepicker_month_master__:last").instance("datepicker");
-								contents = N(".datepicker_contents_month_master__.datepicker_monthonly__");
-							} else {
-								datepickerInst = N(".datepicker__.datepicker_date_master__:last").instance("datepicker");
-								contents = N(".datepicker_contents_date_master__:not(.datepicker_monthonly__)");
-							}
-
-							if(contents.length === 0) {
-								contents = DatePicker.wrapEle.call(this);
-								if(datepickerInst === undefined) {
-									datepickerInst = opts.monthonly ? N(".datepicker__.datepicker_month_master__:last").instance("datepicker")
-											: N(".datepicker__.datepicker_date_master__:last").instance("datepicker");
-								}
-							}
-
-							datepickerInst.options.context = opts.context;
-							
-							opts.context.after(contents);
-							opts.contents = contents;
-							
-							focusinHandler[0].handler.call(self);
-						});
+						opts.context.bind("focusin.datepicker", focusinHandler[0].handler);
 					}
 				}
 
@@ -1626,31 +1631,6 @@
 				var opts = this.options;
 				var self = this;
 
-				// reuse datepicker panel element
-				if(opts.shareEle) {
-					var datepickerInst;
-					var contents;
-					if(opts.monthonly) {
-						datepickerInst = N(".datepicker__.datepicker_month_master__:last").instance("datepicker");
-						contents = N(".datepicker_contents_month_master__.datepicker_monthonly__");
-					} else {
-						datepickerInst = N(".datepicker__.datepicker_date_master__:last").instance("datepicker");
-						contents = N(".datepicker_contents_date_master__:not(.datepicker_monthonly__)");
-					}
-
-					if(contents.length === 0) {
-						contents = DatePicker.wrapEle.call(this);
-						if(datepickerInst === undefined) {
-							datepickerInst = opts.monthonly ? N(".datepicker__.datepicker_month_master__:last").instance("datepicker")
-									: N(".datepicker__.datepicker_date_master__:last").instance("datepicker");
-						}
-					}
-
-					datepickerInst.options.context = opts.context;
-					opts.context.after(contents);
-					opts.contents = contents;
-				}
-
 				if(opts.onBeforeShow !== null) {
 					var result = opts.onBeforeShow.call(this, opts.context, opts.contents);
 					if(result !== undefined && result === false) {
@@ -1658,16 +1638,6 @@
 					}
 				}
 				opts.context.trigger("onBeforeShow", [opts.context, opts.contents]);
-
-				// auto select datepicker items from before input value
-				if(!N.string.isEmpty(opts.context.val())) {
-					DatePicker.selectItems(opts,
-							opts.context.val().replace(/[^0-9]/g, ""),
-							(!opts.monthonly ? N.context.attr("data").formatter.date.Ymd() : N.context.attr("data").formatter.date.Ym()).replace(/[^Y|^m|^d]/g, ""),
-							opts.contents.find(".datepicker_years_panel__"),
-							opts.contents.find(".datepicker_months_panel__"),
-							opts.contents.find(".datepicker_days_panel__"));
-				}
 
 		        // set datapicker position
 				$(window).bind("resize.datepicker", function() {
@@ -3228,6 +3198,21 @@
 
 				return this;
 			},
+			remove : function() {
+				var opts = this.options;
+
+				if (opts.data[opts.row].rowStatus === "insert") {
+		            opts.data.splice(opts.row, 1);
+		            opts.row = -1;
+		            N.ds.instance(opts.extObj !== null ? opts.extObj : this).notify();
+		        } else {
+		        	opts.data[opts.row].rowStatus = "delete";
+		        	opts.context.addClass("row_data_deleted");
+		        	N.ds.instance(opts.extObj !== null ? opts.extObj : this).notify(opts.extRow > -1 ? opts.extRow : opts.row);
+		        }
+				
+				return this;
+			},
 			revert : function() {
 				var opts = this.options;
 				if(!opts.revert) {
@@ -3483,7 +3468,11 @@
 				opts.state = "update"
 					
 				// FIXME refer to http://bbalganjjm.github.io/natural_js/#exap/exap0700 -> popup -> edit -> change select box value -> fall into an infinite loop
-				if(arguments.callee.caller.arguments.callee.caller.arguments.callee.caller.arguments.callee.caller.arguments.callee.caller === this.val) {
+				if(arguments.callee.caller 
+						&& arguments.callee.caller.arguments.callee.caller 
+						&& arguments.callee.caller.arguments.callee.caller.arguments.callee.caller
+						&& arguments.callee.caller.arguments.callee.caller.arguments.callee.caller.arguments.callee.caller
+						&& arguments.callee.caller.arguments.callee.caller.arguments.callee.caller.arguments.callee.caller.arguments.callee.caller === this.val) {
 					return this;
 				}
 
@@ -4105,7 +4094,11 @@
 					if(key !== undefined) {
 						this.options.context.find(">li:eq(" + String(row) + ")").instance("form").update(0, key);
 					} else if(this.options.data[row]._isRevert !== true && this.options.data[row].rowStatus === "insert") {
-						this.add(this.options.data);
+						if(this.options.data[row].rowStatus === "insert") {
+							this.bind(undefined, "list.update");
+						} else {
+							this.add(this.options.data[row]);
+						}
 					} else {
 						this.options.context.find(">li:eq(" + String(row) + ")").instance("form").update(0);
 					}
@@ -6002,7 +5995,11 @@
 					if(key !== undefined) {
 						this.options.context.find(">tbody:eq(" + String(row) + ")").instance("form").update(0, key);
 					} else if(this.options.data[row]._isRevert !== true && this.options.data[row].rowStatus === "insert") {
-						this.add(this.options.data);
+						if(this.options.data[row].rowStatus === "insert") {
+							this.bind(undefined, "list.update");
+						} else {
+							this.add(this.options.data[row]);
+						}
 					} else {
 						this.options.context.find(">tbody:eq(" + String(row) + ")").instance("form").update(0);
 					}
