@@ -33,6 +33,7 @@
 <script type="text/javascript" charset="utf-8" src="js/index.js"></script>
 
 <script type="text/javascript" charset="utf-8" src="js/prism/prism.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/flexibility.js"></script>
 
 <!--[if lt IE 9]>
 <style>
@@ -46,6 +47,8 @@
 <![endif]-->
 
 <script type="text/javascript">
+	flexibility(document.documentElement);
+
 	$(document).ready(function() {
 		IndexController.init(window);
 		
