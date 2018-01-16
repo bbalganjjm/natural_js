@@ -1,5 +1,5 @@
 {
-	"name": "naturaljs",
+	"name": "natural_js",
 	"description": "Javascript UI Architecture Framework",
 	"keywords": [
 		"Natural-JS",
@@ -20,8 +20,12 @@
     	"jquery": "1.12.4"
     },
 	"ignore": [
-		"./lib/",
-		"./.gitignore",
-		"./package.json"
+		"lib/",
+		".settings/",
+		".externalToolBuilders/",
+		".project",
+		".gitignore",
+		".npmignore",
+		"package.json"
 	]
 }
