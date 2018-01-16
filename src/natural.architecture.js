@@ -249,7 +249,9 @@
 							}
 						});
 
-						N.error("[N.ajax." + textStatus + "]" + errorThrown, errorThrown);
+						if(!isFilterStopped){
+							N.error("[N.ajax." + textStatus + "]" + errorThrown, errorThrown);
+						}
 					},
 					complete : function(xhr, textStatus) {
 						var isFilterStopped = false;
