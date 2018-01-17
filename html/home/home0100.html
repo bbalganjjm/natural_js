@@ -17,11 +17,11 @@
 
 	.home0100 .mainLogoBox {
 		margin : -15px -15px 0 -15px;
-	    background-image: url("images/logo_back_new.jpg");
+	    background-image: url("images/home/logo_back.jpg");
 	    background-repeat: no-repeat;
 	    box-shadow: 0px 0px 4px #99cccc;
 	    padding: 45px 0 219px 0;
-		animation: naturalJsLogoAni 3s infinite cubic-bezier(0.5, 0.45, 0.5, 0.55) alternate;;
+		animation: naturalJsLogoAni 40s infinite cubic-bezier(0.4, 0.2, 0.6, 0.8) alternate;;
 	}
 
 	@keyframes naturalJsLogoAni {
@@ -29,8 +29,72 @@
 			background-position: 0 0;
 		}
 		to {
-			background-position: -52px 0;
+			background-position: -855px 0;
 		}
+	}
+	
+	.n-architecture > li:nth-child(1) {
+		background: url("images/home/n_architecture_back1.png") 5% 50% no-repeat; /* 99FF99 */
+		background-size: auto 90%;
+	}
+	
+	.n-architecture > li:nth-child(2) {
+		background: url("images/home/n_architecture_back2.png") 5% 50% no-repeat; /* 99FF99 */
+		background-size: auto 90%;
+	}
+	
+	.n-architecture > li:nth-child(3) {
+		background: url("images/home/n_architecture_back3.png") 95% 50% no-repeat; /* 99FF99 */
+		background-size: auto 90%;
+	}
+	
+	.n-architecture > li:nth-child(4) {
+		background: url("images/home/n_architecture_back4.png") 95% 50% no-repeat; /* 99FF99 */
+		background-size: auto 90%;
+	}
+	
+	.n-data > li:nth-child(1) {
+		background: url("images/home/n_data_back1.png") 5% 50% no-repeat; /* 99FF99 */
+		background-size: auto 90%;
+	}
+	
+	.n-data > li:nth-child(2) {
+		background: url("images/home/n_data_back2.png") 5% 50% no-repeat; /* 99FF99 */
+		background-size: auto 90%;
+	}
+	
+	.n-data > li:nth-child(3) {
+		background: url("images/home/n_data_back3.png") 95% 50% no-repeat; /* 99FF99 */
+		background-size: auto 90%;
+	}
+	
+	.n-ui > li:nth-child(1) {
+		background: url("images/home/n_ui_back1.png") 5% 50% no-repeat; /* 99FF99 */
+		background-size: auto 90%;
+	}
+	
+	.n-ui > li:nth-child(2) {
+		background: url("images/home/n_ui_back2.png") 5% 50% no-repeat; /* 99FF99 */
+		background-size: auto 90%;
+	}
+	
+	.n-ui > li:nth-child(3) {
+		background: url("images/home/n_ui_back3.png") 95% 50% no-repeat; /* 99FF99 */
+		background-size: auto 90%;
+	}
+	
+	.n-ui > li:nth-child(4) {
+		background: url("images/home/n_ui_back4.png") 95% 50% no-repeat; /* 99FF99 */
+		background-size: auto 90%;
+	}
+	
+	.n-ui > li:nth-child(5) {
+		background: url("images/home/n_ui_back5.png") 5% 50% no-repeat; /* 99FF99 */
+		background-size: auto 90%;
+	}
+	
+	.n-ui > li:nth-child(5) p {
+		background-color: transparent;
 	}
 	
 	.home0100 .links {
@@ -86,6 +150,7 @@
 		list-style: none;
 		padding: 0;
 		margin: 0;
+	    overflow: hidden;
 	}
 	
 	.home0100 .features > ul > li {
@@ -141,7 +206,7 @@
 	<div class="mainLogoBox" align="center"><img class="naturalJsLogo" src="images/js.png"></div>
 	
 	<p class="links">
-		<a href="https://www.facebook.com/groups/1927201360891679/" target="blank" style="margin-right: 15px;"><img height="30" src="images/icon/facebook.jpg"> Natraul-JS Community</a>
+		<a href="https://www.facebook.com/groups/1927201360891679/" target="blank" style="margin-right: 15px;"><img src="images/icon/facebook.png"> Natraul-JS Community</a>
 		<br>
 		<a lang="ko_KR" href="files/Natural-JS.pdf" target="blank">Natraul-JS 소개(PDF)</a>
 		<a lang="en_US" href="files/Natural-JS.pdf" target="blank">Introduction to Natraul-JS(PDF, Korean)</a>
@@ -192,7 +257,7 @@
 	<div class="contents features">
 		<h4 lang="ko_KR">CVC 아키텍처 패턴 기반의 UI 아키텍처와 이를 지원하는 라이브러리를 제공 합니다.</h4>
 		<h4 lang="en_US">Provides the CVC architecture pattern based architecture and libraries for support to UI architecture</h4>
-		<ul>
+		<ul class="n-architecture">
 			<li lang="ko_KR">개발영역과 디자인영역을 완벽하게 분리하여 서버 개발자와 UI 개발자, 또는 스크립트 개발자와 디자이너간의 업무 분쟁을 최소화 할 수 있습니다. 또한 이로 인해 서버 개발 조직과 UI 개발 조직을 분리하여 웹 어플리케이션 개발 프로젝트를 진행 할 수 있습니다.</li>
 			<li lang="en_US">It can completely separate the development and design areas and minimize disputes between server side developers and UI side developer or script developer and designer. In addition, As a result, that may separate the server side and UI side development organization during to do web application development projects.</li>
 			<li lang="ko_KR">여러개의 블록페이지(View와 Controller로 구성된 단위 페이지)들을 조합하여 하나의 페이지로 완성할 수 있습니다. 이때 스크립트간, 요소간 Scope 을 완벽하게 분리 해 줍니다.</li>
