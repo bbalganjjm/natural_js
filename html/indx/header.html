@@ -216,7 +216,7 @@
 			<li>
 				<a href="#" lang="ko_KR">예제<br></a>
 				<a href="#" lang="en_US">Examples<br></a>
-				<ul>
+				<ul class="menu_exap__" style="margin-top: -1px;">
 					<li>
 						<a href="html/exap/exap0100.html" lang="ko_KR">데이터목록조회</a>
 						<a href="html/exap/exap0100.html" lang="en_US">Data List View</a>
@@ -284,6 +284,10 @@
 					}
 				}
 			});
+			
+			if(N.locale() === "en_US") {
+				$(".menu_exap__", view).css("margin-top", "-3px");
+			}
 		}
 	});
 </script>
