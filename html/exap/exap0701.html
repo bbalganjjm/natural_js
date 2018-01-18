@@ -95,6 +95,7 @@ N(".exap0701").cont({
     	N("#btnEdit", view).click(function(e) {
     		e.preventDefault();
     		
+    		// Removes this form instance from obserables of N.ds 
     		N.ds.instance(form).remove();
     		
     		// Grid row select event
@@ -111,6 +112,9 @@ N(".exap0701").cont({
         		msg : "현재보고 있는 행을 삭제 하시겠습니까?<br/>그리드의 저장 버튼을 누르기 전까지는 서버에 적용되지 않습니다.",
         		confirm : true,
         		onOk : function() {
+        			// Removes this form instance from obserables of N.ds 
+        			N.ds.instance(form).remove();
+        			
         			// romove row
         			this_.selData.grid.remove(this_.selData.row);
         			this_.caller.close()
@@ -122,6 +126,7 @@ N(".exap0701").cont({
     	N("#btnClose", view).click(function(e) {
     		e.preventDefault();
     		
+    		// Removes this form instance from obserables of N.ds 
     		N.ds.instance(form).remove();
     		
     		this_.caller.close();

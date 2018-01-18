@@ -161,6 +161,7 @@ N(".exap0702").cont({
     	// 4. bind events
     	// 4-1 Confirm button
     	N("#btnConfirm", view).click(function(e) {
+    		// Removes this form instance from obserables of N.ds 
     		N.ds.instance(form).remove();
     		
             e.preventDefault();
@@ -172,6 +173,7 @@ N(".exap0702").cont({
     	// this.caller is popup instance that called this page
     	var caller = this.caller;
     	N("#btnCancel", view).click(function(e) {
+    		// Removes this form instance from obserables of N.ds 
     		N.ds.instance(form).remove();
     		
     		e.preventDefault();
