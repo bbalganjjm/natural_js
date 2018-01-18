@@ -81,6 +81,9 @@ N(".exap0701").cont({
      	// 3-1 Go to create page
     	N("#btnAdd", view).click(function(e) {
     		e.preventDefault();
+    		
+    		N.ds.instance(form).remove();
+    		
     		// Grid row select event
         	view.parent().comm("html/exap/exap0702.html")
         		.request.attr("selData", this_.selData) // send seleted row data
@@ -91,6 +94,9 @@ N(".exap0701").cont({
      	// 3-2 Go to edit page
     	N("#btnEdit", view).click(function(e) {
     		e.preventDefault();
+    		
+    		N.ds.instance(form).remove();
+    		
     		// Grid row select event
         	view.parent().comm("html/exap/exap0702.html")
         		.request.attr("selData", this_.selData) // send seleted row data
@@ -115,6 +121,9 @@ N(".exap0701").cont({
     	// this.caller is popup instance that called this page
     	N("#btnClose", view).click(function(e) {
     		e.preventDefault();
+    		
+    		N.ds.instance(form).remove();
+    		
     		this_.caller.close();
     	});
     },

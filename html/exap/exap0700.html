@@ -102,17 +102,14 @@ N(".exap0700").cont({
 	       	    		button : false,
 	       	    		width : 600,
 	       	    		height : 540,
+	       	    		closeMode : "remove",
 	       	    		onOpen : "onOpen",
-	       	    		onClose : function() {
-	       	    			// remove popup resource
-	       	    			this.remove();
-	       	    		},
 	       	    		opener : this_
 	       	    	}).open({
 	       	    		grid : grid,
 	       				data : data,
 	       				row : index
-	       			});;
+	       			});
        			}
         	},
         	filter : true

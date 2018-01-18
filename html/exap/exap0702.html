@@ -161,6 +161,8 @@ N(".exap0702").cont({
     	// 4. bind events
     	// 4-1 Confirm button
     	N("#btnConfirm", view).click(function(e) {
+    		N.ds.instance(form).remove();
+    		
             e.preventDefault();
             if(form.validate()) {
             	caller.close()
@@ -170,9 +172,11 @@ N(".exap0702").cont({
     	// this.caller is popup instance that called this page
     	var caller = this.caller;
     	N("#btnCancel", view).click(function(e) {
+    		N.ds.instance(form).remove();
+    		
     		e.preventDefault();
     		if(editMode === "create") {
-				// romove created row
+				// remove created row
     			form.remove();
     		} else {
 		    	form.revert();
