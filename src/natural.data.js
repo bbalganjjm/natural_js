@@ -1,5 +1,5 @@
 /*!
- * Natural-DATA v0.10.34
+ * Natural-DATA v0.10.51
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-		N.version["Natural-DATA"] = "0.10.34";
+		N.version["Natural-DATA"] = "0.10.51";
 
 	$.fn.extend($.extend(N.prototype, {
 		datafilter : function(callBack) {
@@ -328,7 +328,7 @@
 			},
 			"trimtoval" : function(str, args) {
 				if (args === undefined || args[0] === undefined) {
-					N.error("[Formatter.trimToVal]You must input args[0](default value)");
+					throw N.error("[N.formatter.trimtoval]You must input args[0](default value)");
 				}
 				return N.string.trimToVal(str, args[0]);
 			},
@@ -340,7 +340,7 @@
 
 				//use datepicker, monthpicker
 				if(N.datepicker !== undefined) {
-					if(args[1] !== undefined && (args[1] === "date" || args[1] === "month") && ele !== undefined && !ele.hasClass("datepicker__")) {
+					if(args[1] !== undefined && (args[1] === "date" || args[1] === "month") && ele !== undefined && !ele.hasClass("datepicker__") && ele.is("input")) {
 						var isMonth = args[1] === "month" ? true : false;
 						var dateVal;
 						var formInst;
@@ -449,7 +449,7 @@
 			},
 			"limit" : function(str, args, ele) {
 				if (args === undefined || args[0] === undefined) {
-					N.error("[Formatter.limit]You must input args[0](cut length)");
+					throw N.error("[N.formatter.limit]You must input args[0](cut length)");
 				}
 				if(str.substr(str.length - args[1].length, args[1].length) !== args[1]) {
 					if (ele !== undefined) {
@@ -471,7 +471,7 @@
 			},
 			"replace" : function(str, args, ele) {
 				if (args === undefined || args.length < 2) {
-					N.error("[Formatter.replace]You must input args[0](target string) and args[1](replace string)");
+					throw N.error("[N.formatter.replace]You must input args[0](target string) and args[1](replace string)");
 				}
 				var replaceStr = str.split(String(args[0])).join(String(args[1]));
 				if (typeof args[2] != "undefined" && String(args[2]) == "true") {
@@ -481,19 +481,19 @@
 			},
 			"lpad" : function(str, args) {
 				if (args === undefined || args.length < 2) {
-					N.error("[Formatter.lpad]You must input args[0](fill length) and args[1](replace string)");
+					throw N.error("[N.formatter.lpad]You must input args[0](fill length) and args[1](replace string)");
 				}
 				return N.string.lpad(str, Number(args[0]), args[1]);
 			},
 			"rpad" : function(str, args) {
 				if (args === undefined || args.length < 2) {
-					N.error("[Formatter.rpad]You must input args[0](fill length) and  args[1](replace string)");
+					throw N.error("[N.formatter.rpad]You must input args[0](fill length) and  args[1](replace string)");
 				}
 				return N.string.rpad(str, Number(args[0]), args[1]);
 			},
 			"mask" : function(str, args) {
 				if (args === undefined || args.length < 1) {
-					N.error("[Formatter.rpad]You must input args[0](masking rule)");
+					throw N.error("[N.formatter.rpad]You must input args[0](masking rule)");
 				}
 				var replaceStr = "*";
 				if(args.length === 2 && !N.string.isEmpty(args[1])) {
@@ -584,14 +584,14 @@
 			},
 			"generic" : function(str, args) {
 				if (args === undefined || args[0] === undefined) {
-					N.error("[Formatter.generic]You must input args[0](user format rule)");
+					throw N.error("[N.formatter.generic]You must input args[0](user format rule)");
 				}
 				var mask = new N.Mask(args[0]);
 				return mask.setGeneric(String(str));
 			},
 			"numeric" : function(str, args) {
 				if (args === undefined || args[0] === undefined) {
-					N.error("[Formatter.numeric]You must input args[0](user format rule)");
+					throw N.error("[N.formatter.numeric]You must input args[0](user format rule)");
 				}
 				var mask = new N.Mask(args[0]);
 				return mask.setNumeric(String(str), args[1]);
@@ -610,7 +610,7 @@
 					if (row < opts.data.length && row >= 0) {
 						opts.data = [ opts.data[row] ];
 					} else {
-						N.error("[Formatter.prototype.format]Row index out of range");
+						throw N.error("[N.formatter.prototype.format]Row index out of range");
 					}
 				} else {
 					if (opts.isElement) {
@@ -641,9 +641,9 @@
 								tempValue = Formatter[N.string.trimToEmpty(this[0]).toLowerCase()](tempValue, N(this).remove_(0).toArray(), ele);
 							} catch (e) {
 								if (e.toString().indexOf("is not a function") > -1) {
-									N.error("[Formatter.prototype.format]\"" + this[0] + "\" is invalid format rule", e);
+									throw N.error("[N.formatter.prototype.format]\"" + this[0] + "\" is invalid format rule", e);
 								} else {
-									N.error(e, e);
+									throw N.error("[N.formatter.prototype.format]" + e, e);
 								}
 							}
 						});
@@ -1130,7 +1130,7 @@
 					if (row < data.length && row >= 0) {
 						data = [ data[row] ];
 					} else {
-						N.error("[Validator.prototype.validate]Row index out of range");
+						throw N.error("[N.validator.prototype.validate]Row index out of range");
 					}
 				} else {
 					if (opts.isElement) {
@@ -1163,9 +1163,9 @@
 								}
 							} catch (e) {
 								if (e.toString().indexOf("is not a function") > -1) {
-									N.error("[Validator.prototype.validate]\"" + this[0] + "\" is invalid format rule");
+									throw N.error("[N.validator.prototype.validate]\"" + this[0] + "\" is invalid format rule");
 								} else {
-									N.error(e, e);
+									throw N.error("[N.validator.prototype.validate]" + e, e);
 								}
 							}
 							retTempObj.msg = null;
@@ -1196,7 +1196,7 @@
 										}
 									}).get()).show();
 								} else {
-									N.error("You must import Natural-UI library");
+									throw N.error("[N.validator.prototype.validate]You must import Natural-UI library");
 								}
 							} else {
 								ele.removeClass("validate_false__");
@@ -1206,7 +1206,7 @@
 										alertInst.remove();
 									}
 								} else {
-									N.error("You must import Natural-UI library");
+									throw N.error("[N.validator.prototype.validate]You must import Natural-UI library");
 								}
 							}
 						}
