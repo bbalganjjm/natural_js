@@ -1,5 +1,5 @@
 /*!
- * Natural-ARCHITECTURE v0.10.3
+ * Natural-ARCHITECTURE v0.13.8
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-	N.version["Natural-ARCHITECTURE"] = "0.10.3";
+	N.version["Natural-ARCHITECTURE"] = "0.13.8";
 
 	$.fn.extend($.extend(N.prototype, {
 		ajax : function(opts) {
@@ -33,7 +33,7 @@
 		// Communicator
 		var Communicator = N.comm = function(obj, url) {
 			if (obj === undefined) {
-				N.error("[Communicator]You must input arguments[0]");
+				throw N.error("[N.comm]You must input arguments[0]");
 			} else {
 				if ((N.isPlainObject(obj) || N.isString(obj)) && url === undefined) {
 					url = obj;
@@ -41,7 +41,7 @@
 				}
 			}
 
-			if(N.isPlainObject(obj)) {
+			if(N.isPlainObject(obj) || N.isArray(obj)) {
 				obj = $(obj);
 			}
 			
@@ -67,6 +67,8 @@
 				"url" : url
 			} : url);
 
+			obj.errorHandlers = [];
+			
 			$($.map(Communicator, function(v, i){
 				if(N.type(Communicator[i]) === "function") {
 					if(i !== "request") {
@@ -166,8 +168,8 @@
 					beforeSend : function(xhr, settings) {
 					    var isFilterStopped = false;
 						// request filter
-						$(filterConfig.beforeSendFilters).each(function(i) {
-							if(this(obj.request, xhr, settings) instanceof Error){
+						$(filterConfig.beforeSendFilters).each(function(i, filter) {
+							if(filter.call(obj, obj.request, xhr, settings) instanceof Error){
 								isFilterStopped = true;
 								return false;
 							}
@@ -177,8 +179,8 @@
 					success : function(data, textStatus, xhr) {
 					    var isFilterStopped = false;
 						// request filter
-						$(filterConfig.successFilters).each(function(i) {
-							var fData = this(obj.request, data, textStatus, xhr);
+						$(filterConfig.successFilters).each(function(i, filter) {
+							var fData = filter.call(obj, obj.request, data, textStatus, xhr);
 							if(fData instanceof Error){
 								isFilterStopped = true;
 								return false;
@@ -209,6 +211,12 @@
 							} else {
 								obj.html(data);
 							}
+							
+							if(!obj.is(N.context.attr("architecture").page.context)) {
+								// Removes garbage instances from obserables of N.ds 
+								N.gc.ds();								
+							}
+							
 							// Deprecated
 							if (obj.request.options.effect) {
 								obj.hide()[obj.request.options.effect[0]](obj.request.options.effect[1], obj.request.options.effect[2]);
@@ -235,29 +243,39 @@
 							try {
 								callback.call(obj, data, obj.request);
 							} catch (e) {
-								N.error("[Communicator.submit.success.callback]" + e, e);
+								if(obj.errorHandlers.length > 0) {
+									$(obj.errorHandlers).each(function(i, errorHandler) {
+										errorHandler.call(obj, e, obj.request, xhr, textStatus, callback);
+									});
+								}
+								throw N.error("[N.comm.submit.success.callback(url:" + obj.request.options.url + ")]" + e, e);
 							}
 						}
 					},
-					error : function(xhr, textStatus, errorThrown) {
+					error : function(xhr, textStatus, e) {
 						var isFilterStopped = false;
 						// request filter
-						$(filterConfig.errorFilters).each(function(i) {
-							if(this(obj.request, xhr, textStatus, errorThrown) instanceof Error){
+						$(filterConfig.errorFilters).each(function(i, filter) {
+							if(filter.call(obj, obj.request, xhr, textStatus, e) instanceof Error){
 								isFilterStopped = true;
 								return false;
 							}
 						});
 
 						if(!isFilterStopped){
-							N.error("[N.ajax." + textStatus + "]" + errorThrown, errorThrown);
+							if(obj.errorHandlers.length > 0) {
+								$(obj.errorHandlers).each(function(i, errorHandler) {
+									errorHandler.call(obj, e, obj.request, xhr, textStatus);
+								});
+							}
+							throw N.error("[N.comm.submit.error(url:" + obj.request.options.url + ")]" + e, e);
 						}
 					},
 					complete : function(xhr, textStatus) {
 						var isFilterStopped = false;
 						// request filter
-						$(filterConfig.completeFilters).each(function(i) {
-							if(this(obj.request, xhr, textStatus) instanceof Error){
+						$(filterConfig.completeFilters).each(function(i, filter) {
+							if(filter.call(obj, obj.request, xhr, textStatus) instanceof Error){
 								isFilterStopped = true;
 								return false;
 							}
@@ -266,6 +284,10 @@
 				});
 				this.xhr = N.ajax(obj.request.options);
 				return obj;
+			},
+			error : function(callback) {
+				this.errorHandlers.push(callback);
+				return this;
 			}
 		});
 
@@ -462,7 +484,7 @@
 							pointcut = o.pointcuts ? (o.pointcuts[advisor.pointcut.type] || Controller.aop.pointcuts[advisor.pointcut.type]) : Controller.aop.pointcuts[advisor.pointcut.type];
 
 							if(!pointcut){
-								N.error("[Controller]Unkown pointcut type : " + advisor.pointcut.type);
+								throw N.error("[N.cont.aop.wrap]Unkown pointcut type : " + advisor.pointcut.type);
 							}
 
 							if(advisor.pointcut.selector && !cont.view.is(advisor.pointcut.selector)){
