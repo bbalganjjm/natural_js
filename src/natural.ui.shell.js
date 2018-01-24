@@ -1,5 +1,5 @@
 /*!
- * Natural-UI.Shell v0.9.23, Works fine in IE9 and above
+ * Natural-UI.Shell v0.9.25, Works fine in IE9 and above
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-	N.version["Natural-UI.Shell"] = "0.9.23";
+	N.version["Natural-UI.Shell"] = "0.9.25";
 
 	$.fn.extend($.extend(N.prototype, {
 		notify : function(opts) {
@@ -205,6 +205,16 @@
 							self.options.docsFilterDefers.push(xhr);
 						}
 
+						// Direct regist the error handler to N.comm's errorHandlers
+						this.errorHandlers.push(function() {
+							if(self.options.entireLoadIndicator) {
+								self.options.context.find("> .entire_load_indicator__").trigger("nothing");
+							}
+							if(self.options.entireLoadScreenBlock) {
+								$(".entire_load_screen_block__").trigger("nothing");
+							}
+						})
+						
 						if(!isStarted) {
 							isStarted = true;
 
@@ -261,10 +271,11 @@
 										if(self.options.entireLoadScreenBlock) {
 											$(".entire_load_screen_block__").trigger("nothing");
 										}
-										self.options.docsFilterDefers = [];
 										isBeforeDone = false;
 										isStarted = false;
 									});
+									
+									self.options.docsFilterDefers = [];
 								}, self.options.onEntireLoadXhrCaptureDuration);
 							} else {
 								isStarted = false;
