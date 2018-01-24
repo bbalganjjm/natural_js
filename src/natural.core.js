@@ -1,5 +1,5 @@
 /*!
- * Natural-CORE v0.16.10
+ * Natural-CORE v0.17.13
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -300,7 +300,7 @@
 		// N local variables
 		$.extend(N, {
 			version : {
-				"Natural-CORE" : "0.16.10"
+				"Natural-CORE" : "0.17.13"
 			},
 			/**
 			 * Set and get locale value
@@ -379,12 +379,14 @@
 			 */
 			error : function(msg, e) {
 				if(N.type(e) !== "error") {
-					e = new Error(msg);
+					e = new Error();
 				}
 				if(Error.captureStackTrace !== undefined) {
 					Error.captureStackTrace(e, N.error);					
 				}
-				throw e;
+				
+				e.message = msg;
+				return e;
 			},
 			/**
 			 * Check object type
@@ -502,6 +504,15 @@
 					$(document).unbind("click.grid.dataFilter touchstart.grid.dataFilter");
 					$(document).unbind("click.grid.more touchstart.grid.more");
 					return true;
+				},
+				/**
+				 * Removes garbage instances from obserables of N.ds 
+				 */
+				ds : function() {
+					if($(N.context.attr("architecture").page.context).find(">#data_sync_temp__").length > 0) {
+						$(N.context.attr("architecture").page.context).find(">#data_sync_temp__").instance("ds").obserable
+							= $.unique($(".grid__, .list__, .form__:not('.grid__>tbody, .list__>li'), .tree__", N.context.attr("architecture").page.context).instance());						
+					}
 				}
 			},
 			/**
@@ -621,7 +632,7 @@
 	        			dateStrArr.push(str.substring(2, 6 + fixNum)); //year
 						dateStrArr.push(str.substring(0, 2)); //month
 	        		} else {
-	        			N.error("\"" + format + "\" date format is not support. please change return value of N.context.attr(\"data\").formatter.date's functions");
+	        			throw N.error("[N.date.strToDateStrArr]\"" + format + "\" date format is not support. please change return value of N.context.attr(\"data\").formatter.date's functions");
 	        		}
 					if(isString === undefined || isString === false) {
 						$(dateStrArr).each(function(i) {
