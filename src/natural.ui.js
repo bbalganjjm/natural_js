@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.28.41
+ * Natural-UI v0.30.65
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "0.28.41";
+	N.version["Natural-UI"] = "v0.30.65";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -440,11 +440,11 @@
 					this.options.container = N(this.options.container);
 				}
 			} catch (e) {
-				N.error("[N.alert]" + e, e);
+				throw N.error("[N.alert]" + e, e);
 			}
 
 			if(N(this.options.container).length === 0) {
-				N.error("[N.alert]Container element is missing. please specify the correct element selector that will contain the message dialog's element. it can be defined in the \"N.context.attr(\"ui\").alert.container\" property of \"natural.config.js\" file.");
+				throw N.error("[N.alert]Container element is missing. please specify the correct element selector that will contain the message dialog's element. it can be defined in the \"N.context.attr(\"ui\").alert.container\" property of \"natural.config.js\" file.");
 			}
 			
 			if (obj.is(":input")) {
@@ -964,6 +964,11 @@
 					opts.msgContents.removeClass("visible__").addClass("hidden__");
 					opts.msgContents.one(N.event.whichTransitionEvent(opts.msgContents), function(e){
 						opts.msgContents.remove();
+						
+						if(opts.msgContents.hasClass("popup__")) {
+							// Removes garbage instances from obserables of N.ds 
+							N.gc.ds();
+						}
 			        }).trigger("nothing");
 				} else {
 					opts.msgContext.removeClass("visible__").addClass("hidden__");
@@ -993,7 +998,7 @@
 			try {
 				$.extend(this.options, N.context.attr("ui").button);
 			} catch (e) {
-				N.error("[N.button]" + e, e);
+				throw N.error("[N.button]" + e, e);
 			}
 			$.extend(this.options, N.element.toOpts(this.options.context));
 			if(opts !== undefined) {
@@ -1160,7 +1165,7 @@
 			try {
 				$.extend(this.options, N.context.attr("ui").datepicker);
 			} catch (e) {
-				N.error("[N.datepicker]" + e, e);
+				throw N.error("[N.datepicker]" + e, e);
 			}
 
 			if(opts !== undefined) {
@@ -1418,29 +1423,54 @@
 				// bind focusin event
 				if(opts.focusin) {
 					opts.context.unbind("focusin.datepicker").bind("focusin.datepicker", function() {
-						if(!opts.context.is(this)) {
-							opts.context = $(this);
-						}
-						if(!opts.context.prop("readonly") && !opts.context.prop("disabled")) {
-							// Hide opened other datepicker dialogs
-							var openedContents = N(".datepicker_contents__:visible");
-							if(openedContents.length > 0) {
-								openedContents.removeClass("visible__").addClass("hidden__").hide();
+						// Hide opened other datepicker dialogs
+						var openedContents = N(".datepicker_contents__:visible");
+						if(openedContents.length > 0) {
+							openedContents.removeClass("visible__").addClass("hidden__").hide();
 
-								var context = openedContents.prev(".datepicker__");
-								if(context.length > 0) {
-									var prevOpts = context.instance("datepicker").options;
-									if(prevOpts.onHide !== null) {
-										prevOpts.onHide.call(self, prevOpts.context, prevOpts.contents);
-									}
-									context.trigger("onHide", [prevOpts.context, prevOpts.contents]);
+							var context = openedContents.prev(".datepicker__");
+							if(context.length > 0) {
+								var prevOpts = context.instance("datepicker").options;
+								if(prevOpts.onHide !== null) {
+									prevOpts.onHide.call(self, prevOpts.context, prevOpts.contents);
 								}
+								context.trigger("onHide", [prevOpts.context, prevOpts.contents]);
 							}
-
+						}
+						
+						if(!opts.context.prop("readonly") && !opts.context.prop("disabled")) {
 							if(!opts.contents.is(":visible")) {
-								if(!opts.context.is(this)) {
-									opts.context = $(this);
+								if(opts.shareEle) {
+									// Replace the options for the shared instance with the Datepicker instance options for the selected input element.
+									self = $(this).instance("datepicker");
+									opts = self.options;
+									
+									// Reuse the datepicker panel element
+									var contents;
+									if(opts.monthonly) {
+										contents = N(".datepicker_contents_month_master__.datepicker_monthonly__");
+									} else {
+										contents = N(".datepicker_contents_date_master__:not(.datepicker_monthonly__)");
+									}
+
+									if(contents.length === 0) {
+										contents = DatePicker.wrapEle.call(self);
+									}
+
+									opts.context.after(contents);
+									opts.contents = contents;
 								}
+								
+								// auto select datepicker items from before input value
+								if(!N.string.isEmpty(opts.context.val())) {
+									DatePicker.selectItems(opts,
+											opts.context.val().replace(/[^0-9]/g, ""),
+											(!opts.monthonly ? N.context.attr("data").formatter.date.Ymd() : N.context.attr("data").formatter.date.Ym()).replace(/[^Y|^m|^d]/g, ""),
+											opts.contents.find(".datepicker_years_panel__"),
+											opts.contents.find(".datepicker_months_panel__"),
+											opts.contents.find(".datepicker_days_panel__"));
+								}
+								
 								self.show();
 							}							
 						}
@@ -1606,31 +1636,6 @@
 				var opts = this.options;
 				var self = this;
 
-				// reuse datepicker panel element
-				if(opts.shareEle) {
-					var datepickerInst;
-					var contents;
-					if(opts.monthonly) {
-						datepickerInst = N(".datepicker__.datepicker_month_master__:last").instance("datepicker");
-						contents = N(".datepicker_contents_month_master__.datepicker_monthonly__");
-					} else {
-						datepickerInst = N(".datepicker__.datepicker_date_master__:last").instance("datepicker");
-						contents = N(".datepicker_contents_date_master__:not(.datepicker_monthonly__)");
-					}
-
-					if(contents.length === 0) {
-						contents = DatePicker.wrapEle.call(this);
-						if(datepickerInst === undefined) {
-							datepickerInst = opts.monthonly ? N(".datepicker__.datepicker_month_master__:last").instance("datepicker")
-									: N(".datepicker__.datepicker_date_master__:last").instance("datepicker");
-						}
-					}
-
-					datepickerInst.options.context = opts.context;
-					opts.context.after(contents);
-					opts.contents = contents;
-				}
-
 				if(opts.onBeforeShow !== null) {
 					var result = opts.onBeforeShow.call(this, opts.context, opts.contents);
 					if(result !== undefined && result === false) {
@@ -1638,16 +1643,6 @@
 					}
 				}
 				opts.context.trigger("onBeforeShow", [opts.context, opts.contents]);
-
-				// auto select datepicker items from before input value
-				if(!N.string.isEmpty(opts.context.val())) {
-					DatePicker.selectItems(opts,
-							opts.context.val().replace(/[^0-9]/g, ""),
-							(!opts.monthonly ? N.context.attr("data").formatter.date.Ymd() : N.context.attr("data").formatter.date.Ym()).replace(/[^Y|^m|^d]/g, ""),
-							opts.contents.find(".datepicker_years_panel__"),
-							opts.contents.find(".datepicker_months_panel__"),
-							opts.contents.find(".datepicker_days_panel__"));
-				}
 
 		        // set datapicker position
 				$(window).bind("resize.datepicker", function() {
@@ -1755,7 +1750,7 @@
 			try {
 				$.extend(true, this.options, N.context.attr("ui").popup);
 			} catch (e) {
-				N.error("[N.popup]" + e, e);
+				throw N.error("[N.popup]" + e, e);
 			}
 
 			if(opts !== undefined) {
@@ -1791,11 +1786,11 @@
 					    // Infinite loop prevention processing
 					    if(caller == $.event.dispatch) {
 					    	callers = undefined;
-					    	N.error("Opener not found");
+					    	throw N.error("[N.popup]Opener not found");
 					    }
 					    if(callers.indexOf(caller) > -1) {
 					    	callers = undefined;
-					    	N.error("Opener not found");
+					    	throw N.error("[N.popup]Opener not found");
 					    }
 					}
 				} catch(e) {
@@ -1974,6 +1969,7 @@
 					opts.onClose.call(this, onCloseData);
 				}
 				this.alert[opts.closeMode]();
+				
 				return this;
 			},
 			changeEvent : function(name, callback) {
@@ -2009,7 +2005,7 @@
 			try {
 				$.extend(true, this.options, N.context.attr("ui").tab);
 			} catch (e) {
-				N.error("[N.tab]" + e, e);
+				throw N.error("[N.tab]" + e, e);
 			}
 
 			if (N.isPlainObject(obj)) {
@@ -2389,7 +2385,7 @@
 				if(idx !== undefined) {
 					opts.context.queue("open", function() {
 						if(onOpenData !== undefined) {
-							$(opts.links.get(idx)).trigger("click.tab", [onOpenData]);
+							$(opts.links.get(idx)).trigger("click.tab", [onOpenData, isFirst]);
 						} else {
 							$(opts.links.get(idx)).trigger("click.tab", [undefined, isFirst]);
 						}						
@@ -2472,7 +2468,7 @@
 			try {
 				$.extend(this.options, N.context.attr("ui").select);
 			} catch (e) {
-				N.error("[N.select]" + e, e);
+				throw N.error("[N.select]" + e, e);
 			}
 			$.extend(this.options, N.element.toOpts(this.options.context));
 
@@ -2677,7 +2673,7 @@
 			try {
 				$.extend(this.options, N.context.attr("ui").form);
 			} catch (e) {
-				N.error("[N.form]" + e, e);
+				throw N.error("[N.form]" + e, e);
 			}
 
 			if (N.isPlainObject(opts)) {
@@ -3208,10 +3204,25 @@
 
 				return this;
 			},
+			remove : function() {
+				var opts = this.options;
+
+				if (opts.data[opts.row].rowStatus === "insert") {
+		            opts.data.splice(opts.row, 1);
+		            opts.row = -1;
+		            N.ds.instance(opts.extObj !== null ? opts.extObj : this).notify();
+		        } else {
+		        	opts.data[opts.row].rowStatus = "delete";
+		        	opts.context.addClass("row_data_deleted");
+		        	N.ds.instance(opts.extObj !== null ? opts.extObj : this).notify(opts.extRow > -1 ? opts.extRow : opts.row);
+		        }
+				
+				return this;
+			},
 			revert : function() {
 				var opts = this.options;
 				if(!opts.revert) {
-					N.error("[N.form.revert]Can not revert. N.form's revert option value is false");
+					throw N.error("[N.form.prototype.revert]Can not revert. N.form's revert option value is false");
 				}
 				
 				opts.state = "revert";
@@ -3362,7 +3373,9 @@
 							ele.attr("src", val);
 
 							// notify data changed
-							N.ds.instance(opts.extObj !== null ? opts.extObj : self).notify(opts.extRow > -1 ? opts.extRow : opts.row, key);
+							if(notify !== false) {
+								N.ds.instance(opts.extObj !== null ? opts.extObj : self).notify(opts.extRow > -1 ? opts.extRow : opts.row, key);
+							}
 						} else {
 							// update dataset value
 							vals[key] = val;
@@ -3386,7 +3399,9 @@
 							}
 
 							// notify data changed
-							N.ds.instance(opts.extObj !== null ? opts.extObj : self).notify(opts.extRow > -1 ? opts.extRow : opts.row, key);
+							if(notify !== false) {
+								N.ds.instance(opts.extObj !== null ? opts.extObj : self).notify(opts.extRow > -1 ? opts.extRow : opts.row, key);
+							}
 						}
 
 						// reset prevent event condition of input element
@@ -3442,9 +3457,7 @@
 	                    }
 
 	                    // dataSync
-	                    if(notify !== false) {
-	                    	N.ds.instance(opts.extObj !== null ? opts.extObj : self).notify(opts.extRow > -1 ? opts.extRow : opts.row, key);
-	                    }
+                    	N.ds.instance(opts.extObj !== null ? opts.extObj : self).notify(opts.extRow > -1 ? opts.extRow : opts.row, key);
 					}
 				}
 
@@ -3461,12 +3474,7 @@
 				var opts = this.options;
 
 				opts.state = "update"
-					
-				// FIXME refer to http://bbalganjjm.github.io/natural_js/#exap/exap0700 -> popup -> edit -> change select box value -> fall into an infinite loop
-				if(arguments.callee.caller.arguments.callee.caller.arguments.callee.caller.arguments.callee.caller.arguments.callee.caller === this.val) {
-					return this;
-				}
-
+				
 				if (key === undefined) {
 					this.bind(row, opts.state);
 				} else {
@@ -3531,7 +3539,7 @@
 			try {
 				$.extend(true, this.options, N.context.attr("ui").list);
 			} catch (e) {
-				N.error("[N.list]" + e, e);
+				throw N.error("[N.list]" + e, e);
 			}
 
 			if (N.isPlainObject(opts)) {
@@ -3990,7 +3998,7 @@
 					}
 					$(row.sort().reverse()).each(function(i, row) {
 						if (opts.data[this] === undefined) {
-							N.error("[N.list.remove]Row index is out of range");
+							throw N.error("[N.list.prototype.remove]Row index is out of range");
 						}
 						if (opts.data[this].rowStatus === "insert") {
 				            opts.data.splice(this, 1);
@@ -4015,7 +4023,7 @@
 			revert : function(row) {
 				var opts = this.options;
 				if(!opts.revert) {
-					N.error("[N.form.revert]Can not revert. N.form's revert option value is false");
+					throw N.error("[N.form.prototype.revert]Can not revert. N.form's revert option value is false");
 				}
 
 				if(row !== undefined) {
@@ -4085,7 +4093,11 @@
 					if(key !== undefined) {
 						this.options.context.find(">li:eq(" + String(row) + ")").instance("form").update(0, key);
 					} else if(this.options.data[row]._isRevert !== true && this.options.data[row].rowStatus === "insert") {
-						this.add(this.options.data);
+						if(this.options.data[row].rowStatus === "insert") {
+							this.bind(undefined, "list.update");
+						} else {
+							this.add(this.options.data[row]);
+						}
 					} else {
 						this.options.context.find(">li:eq(" + String(row) + ")").instance("form").update(0);
 					}
@@ -4162,7 +4174,7 @@
 			try {
 				$.extend(true, this.options, N.context.attr("ui").grid);
 			} catch (e) {
-				N.error("[N.grid]" + e, e);
+				throw N.error("[N.grid]" + e, e);
 			}
 
 			if (N.isPlainObject(opts)) {
@@ -5802,7 +5814,7 @@
 					}
 					$(row.sort().reverse()).each(function(i, row) {
 						if (opts.data[this] === undefined) {
-							N.error("[N.grid.remove]Row index is out of range");
+							throw N.error("[N.grid.prototype.remove]Row index is out of range");
 						}
 						if (opts.data[this].rowStatus === "insert") {
 				            opts.data.splice(this, 1);
@@ -5828,7 +5840,7 @@
 			revert : function(row) {
 				var opts = this.options;
 				if(!opts.revert) {
-					N.error("[N.form.revert]Can not revert. N.form's revert option value is false");
+					throw N.error("[N.form.prototype.revert]Can not revert. N.form's revert option value is false");
 				}
 
 				if(row !== undefined) {
@@ -5982,7 +5994,11 @@
 					if(key !== undefined) {
 						this.options.context.find(">tbody:eq(" + String(row) + ")").instance("form").update(0, key);
 					} else if(this.options.data[row]._isRevert !== true && this.options.data[row].rowStatus === "insert") {
-						this.add(this.options.data);
+						if(this.options.data[row].rowStatus === "insert") {
+							this.bind(undefined, "list.update");
+						} else {
+							this.add(this.options.data[row]);
+						}
 					} else {
 						this.options.context.find(">tbody:eq(" + String(row) + ")").instance("form").update(0);
 					}
@@ -6010,7 +6026,7 @@
 			try {
 				$.extend(this.options, N.context.attr("ui").pagination);
 			} catch (e) {
-				N.error("[N.pagination]" + e, e);
+				throw N.error("[N.pagination]" + e, e);
 			}
 
 			if(this.options.data.length > 0) {
@@ -6323,7 +6339,7 @@
 			try {
 				$.extend(this.options, N.context.attr("ui").tree);
 			} catch (e) {
-				N.error("[N.tree]" + e, e);
+				throw N.error("[N.tree]" + e, e);
 			}
 
 			if (N.isPlainObject(opts)) {
