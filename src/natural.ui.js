@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.30.65
+ * Natural-UI v0.30.68
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "v0.30.65";
+	N.version["Natural-UI"] = "v0.30.68";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -1438,29 +1438,29 @@
 							}
 						}
 						
-						if(!opts.context.prop("readonly") && !opts.context.prop("disabled")) {
-							if(!opts.contents.is(":visible")) {
-								if(opts.shareEle) {
-									// Replace the options for the shared instance with the Datepicker instance options for the selected input element.
-									self = $(this).instance("datepicker");
-									opts = self.options;
-									
-									// Reuse the datepicker panel element
-									var contents;
-									if(opts.monthonly) {
-										contents = N(".datepicker_contents_month_master__.datepicker_monthonly__");
-									} else {
-										contents = N(".datepicker_contents_date_master__:not(.datepicker_monthonly__)");
-									}
-
-									if(contents.length === 0) {
-										contents = DatePicker.wrapEle.call(self);
-									}
-
-									opts.context.after(contents);
-									opts.contents = contents;
-								}
+						if(!opts.contents.is(":visible")) {
+							if(opts.shareEle) {
+								// Replace the options for the shared instance with the Datepicker instance options for the selected input element.
+								self = $(this).instance("datepicker");
+								opts = self.options;
 								
+								// Reuse the datepicker panel element
+								var contents;
+								if(opts.monthonly) {
+									contents = N(".datepicker_contents_month_master__.datepicker_monthonly__");
+								} else {
+									contents = N(".datepicker_contents_date_master__:not(.datepicker_monthonly__)");
+								}
+
+								if(contents.length === 0) {
+									contents = DatePicker.wrapEle.call(self);
+								}
+
+								opts.context.after(contents);
+								opts.contents = contents;
+							}
+							
+							if(!opts.context.prop("readonly") && !opts.context.prop("disabled")) {
 								// auto select datepicker items from before input value
 								if(!N.string.isEmpty(opts.context.val())) {
 									DatePicker.selectItems(opts,
@@ -4535,15 +4535,19 @@
 
 		        //Create grid header
 		        var scrollbarWidth = N.browser.scrollbarWidth();
-		        var thead = opts.context.clone(true, true);
-		        thead.find(">tbody").remove();
-		        thead.find(">tfoot").remove();
-		        var theadWrap = thead.wrap('<div class="thead_wrap__"/>').parent().css({
+		        var contextClone = opts.context.clone(true, true);
+		        var theadClone = opts.context.find("> thead").clone();
+		        contextClone.find(">thead").remove();
+		        contextClone.find(">tbody").remove();
+		        contextClone.find(">tfoot").remove();
+		        contextClone.append(opts.context.find("> thead"));
+		        var theadWrap = contextClone.wrap('<div class="thead_wrap__"/>').parent().css({
 		        	"padding-right" : scrollbarWidth + "px",
 		        	"margin-left" : "-1px"
 		        });
 		        gridWrap.prepend(theadWrap);
 
+		        opts.context.append(theadClone);
 		        //Create grid body
 		        opts.context.find("> thead th").empty().css({
 		        	"height" : "0",
@@ -4584,11 +4588,12 @@
 		        // Create grid footer
 		        var tfootWrap;
 		        if(opts.context.find("> tfoot").length > 0) {
-		        	var tfoot = opts.context.clone(true, true);
-			        opts.context.find("> tfoot").remove();
-			        tfoot.find(">thead").remove();
-			        tfoot.find(">tbody").remove();
-			        tfootWrap = tfoot.wrap('<div class="tfoot_wrap__"/>').parent().css({
+		        	var contextClone = opts.context.clone(true, true);
+		        	contextClone.find(">thead").remove();
+		        	contextClone.find(">tbody").remove();
+		        	contextClone.find(">tfoot").remove();
+		        	contextClone.append(opts.context.find("> tfoot"));
+			        tfootWrap = contextClone.wrap('<div class="tfoot_wrap__"/>').parent().css({
 			        	"padding-right" : scrollbarWidth + "px",
 			        	"margin-left" : "-1px"
 			        });
