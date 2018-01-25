@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.30.68
+ * Natural-UI v0.30.69
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "v0.30.68";
+	N.version["Natural-UI"] = "v0.30.69";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -2383,17 +2383,20 @@
 			open : function(idx, onOpenData, isFirst) {
 				var opts = this.options;
 				if(idx !== undefined) {
-					opts.context.queue("open", function() {
-						if(onOpenData !== undefined) {
-							$(opts.links.get(idx)).trigger("click.tab", [onOpenData, isFirst]);
-						} else {
-							$(opts.links.get(idx)).trigger("click.tab", [undefined, isFirst]);
-						}						
-					});
-					clearTimeout(opts.openTime);
-					opts.openTime = setTimeout(function() {
-						opts.context.dequeue("open");
-					}, 0);
+					if(opts.beforeOpenIdx !== idx) {
+						opts.context.queue("open", function() {
+							if(onOpenData !== undefined) {
+								$(opts.links.get(idx)).trigger("click.tab", [onOpenData, isFirst]);
+							} else {
+								$(opts.links.get(idx)).trigger("click.tab", [undefined, isFirst]);
+							}						
+						});
+						clearTimeout(opts.openTime);
+						opts.openTime = setTimeout(function() {
+							opts.context.dequeue("open");
+						}, 0);
+					}
+					opts.beforeOpenIdx = idx;
 					
 					if(opts.tabScroll) {
 						var tabContainerEle = opts.context.find(">ul");
