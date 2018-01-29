@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.30.69
+ * Natural-UI v0.30.70
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "v0.30.69";
+	N.version["Natural-UI"] = "v0.30.70";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -1295,6 +1295,12 @@
 					monthsPanel.find(".datepicker_month_item__.datepicker_month_selected__").removeClass("datepicker_month_selected__");
 					$(this).addClass("datepicker_month_selected__");
 					if(opts.monthonly) {
+						if(opts.shareEle) {
+							// Replace the options for the shared instance with the Datepicker instance options for the selected input element.
+							self = opts.contents.prev(".datepicker__").instance("datepicker");
+							opts = self.options;
+						}
+						
 						var selDate = N.date.strToDate(N.string.lpad(yearsPanel.find(".datepicker_year_selected__").text(), 4, "0") + N.string.lpad($(this).text(), 2, "0"), "Ym");
 						// set date format of global config
 						selDate.format = N.context.attr("data").formatter.date.Ym().replace(/[^Y|^m|^d]/g, "");
@@ -1385,6 +1391,13 @@
 					}).click(function(e, ke) {
 						e.preventDefault();
 						var thisEle = $(this);
+						
+						if(opts.shareEle) {
+							// Replace the options for the shared instance with the Datepicker instance options for the selected input element.
+							self = opts.contents.prev(".datepicker__").instance("datepicker");
+							opts = self.options;
+						}
+						
 						daysPanel.find(".datepicker_prev_day_item__.datepicker_day_selected__, .datepicker_day_item__.datepicker_day_selected__, .datepicker_next_day_item__.datepicker_day_selected__").removeClass("datepicker_day_selected__");
 						thisEle.addClass("datepicker_day_selected__");
 						var selMonth;
