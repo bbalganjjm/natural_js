@@ -43,31 +43,30 @@ input[type='radio'], input[type='checkbox'] {
 	border: none;
 }
 
-/* table element styles */
-table {
+/* N.grid */
+.grid__ {
 	margin: 0 0 15px 0;
 	border-collapse: collapse;
 	table-layout: fixed;
 	border-top: 2px solid #88dd88;
 }
-table:last-child {
+.grid__:last-child {
 	margin: 0;
 }
-table th, table td {
+.grid__ th, table td {
 	border: 1px solid #88dd88;
 	padding: 5px 3px;
 	word-break: break-word;
 	font-size: 12px;
 }
-table th, table > tfoot td {
+.grid__ th, table > tfoot td {
 	background-color: #ccffcc;
 }
-table.form th {
+.grid__.form th {
 	background-color: #ccffcc;
 	text-align: right;
 }
 
-/* N.grid */
 .tbody_wrap__ table, .tfoot_wrap__ table {
 	border-top: inherit;
 }
