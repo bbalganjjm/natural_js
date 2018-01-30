@@ -1,2 +1,7 @@
-/.project
+.project
+.DS_Store*
+ehthumbs.db
+Icon?
+Thumbs.db
+.settings/
 /.settings/
