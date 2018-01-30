@@ -2,9 +2,11 @@ var IndexController = {
 	docs : null,
 	init : function(window) {
 		this.setLocale();
+		/*
 		if(location.hostname === "bbalganjjm.github.io") {
-			//this.loadWebFont();
+			this.loadWebFont();
 		}
+		*/
 		this.loadHeader();
 		this.loadFooter();
 		this.docs = $("#docsContainer__").docs({
@@ -23,8 +25,8 @@ var IndexController = {
 	loadWebFont : function() {
 		WebFontConfig = {
 			custom: {
-				families: ['Noto Sans KR'],
-				urls: ['http://fonts.googleapis.com/earlyaccess/notosanskr.css']
+				families: ['Nanum Gothic Coding'],
+				urls: ['http://fonts.googleapis.com/earlyaccess/nanumgothiccoding.css']
 			}
 		};
 		(function() {

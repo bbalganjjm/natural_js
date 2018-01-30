@@ -432,7 +432,12 @@ N("div#sample1").instance("name", instance);</code></pre>
 			<td align="center">-</td>
 			<td align="center">-</td>
 			<td>ErrorThrown</td>
-			<td>에러를 발생 시키고 에러 메시지를 브라우저 콘솔창에 보여줍니다.</td>
+			<td>
+				<p>에러를 발생 시키고 에러 메시지를 브라우저 콘솔창에 보여줍니다.</p>
+				<p class="alert">N.error 함수는 ErrorThrown 객체를 반환하기 때문에 함수 앞에 throw 구문을 선언을 해야 에러가 발생 합니다.</p>
+				<pre class="line-numbers"><code class="language-javascript">
+throw N.error("오류가 발생 했습니다.");</code></pre>
+			</td>
 		</tr>
 		<tr>
 			<td></td>
@@ -446,7 +451,7 @@ N("div#sample1").instance("name", instance);</code></pre>
 			<td>e</td>
 			<td>ErrorThrown</td>
 			<td align="center">-</td>
-			<td>에러 발생시 생성되는 ErrorThrown 객체를 입력 하면 Error Stack Trace 로그를 브라우저 콘솔창에 보여 줍니다. (Chrome 에서만 지원)</td>
+			<td>에러 발생시 생성되는 ErrorThrown 객체를 입력하면 해당 객체를 기반으로 처리 합니다.</td>
 		</tr>
 		<tr>
 			<td>type</td>

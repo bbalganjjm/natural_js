@@ -1,0 +1,107 @@
+@charset "utf-8";
+
+/* img element style */
+img {
+	border: none;
+}
+
+/* a element style */
+a {
+	text-decoration: none;
+	font-weight: normal;
+	font-size: 1em;
+	font-family: "Nanum Gothic Coding", "Malgun Gothic", "dotum", "Segoe UI", sans-serif;
+	color: #004a00;
+}
+
+/* input element styles */
+input[type='text'], input[type='number'], input[type='tel'], input[type='password'], select, textarea {
+	border-radius: 3px;
+	padding: 2px 3px;
+	border: 1px solid #cccccc;
+	font-size: 13px;
+	font-family: "Nanum Gothic Coding", "Malgun Gothic", "dotum", "Segoe UI", sans-serif;
+	color: #004a00;
+	vertical-align: middle;
+	background-color: #ffffff;
+	line-height: 18px;
+	border-color: #cceccc;
+}
+input[type='text']:hover, input[type='number']:hover, input[type='tel']:hover, select:hover, textarea:hover, input[type='text']:focus, input[type='number']:focus, input[type='tel']:focus, select:focus, textarea:focus {
+	border-color: #BCFBBC;
+	box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.075);
+	background-color: #fcfdec;
+	transition: border-color ease-in-out 0.20s, background-color ease-in-out 0.15s, box-shadow ease-in-out 0.20s;
+}
+input[disabled], input[disabled]:hover, input[disabled]:focus {
+	background-color: #eeeeee;
+}
+input[readonly], input[readonly]:hover, input[readonly]:focus {
+	background-color: #efffff;
+}
+input[type='radio'], input[type='checkbox'] {
+	margin: 0 3px 0 10px;
+	vertical-align: middle;
+	border: none;
+}
+
+/* N.grid */
+.grid__ {
+	margin: 0 0 15px 0;
+	border-collapse: collapse;
+	table-layout: fixed;
+	border-top: 2px solid #88dd88;
+}
+.grid__:last-child {
+	margin: 0;
+}
+.grid__ th, table td {
+	border: 1px solid #88dd88;
+	padding: 5px 3px;
+	word-break: break-word;
+	font-size: 12px;
+}
+.grid__ th, table > tfoot td {
+	background-color: #ccffcc;
+}
+.grid__.form th {
+	background-color: #ccffcc;
+	text-align: right;
+}
+
+.tbody_wrap__ table, .tfoot_wrap__ table {
+	border-top: inherit;
+}
+/* fixed column in thead */
+.grid__ > thead > tr > th.grid_head_fixed__ {
+	border-top: 2px solid #88dd88;
+}
+.grid__ tbody td input[type='text'], .grid__ tbody td input[type='tel'], .grid__ tbody td input[type='number'], .grid__ tbody td input[type='password'], .grid__ tbody td select, .grid__ tbody td textarea {
+	padding-left: 0;
+	padding-right: 0;
+	border-color: #ffffff;
+	box-shadow: none;
+}
+
+.grid__ tbody td input[type='text'], .grid__ tbody td input[type='tel'], .grid__ tbody td input[type='number'], .grid__ tbody td input[type='password'] {
+	height: 14px;
+    line-height: 14px;
+    padding: 4px 2px;
+}
+
+.grid__ tbody td input[type='text'], .grid__ tbody td input[type='tel'], .grid__ tbody td input[type='number'], .grid__ tbody td input[type='password'], .grid__ tbody td textarea {
+	width: 98%;
+}
+
+.grid__ tbody td input[type='text']:hover, .grid__ tbody td input[type='tel']:hover, .grid__ tbody td input[type='number']:hover, .grid__ tbody td input[type='password']:hover, .grid__ tbody td select:hover, .grid__ tbody td textarea:hover, .grid__ tbody td input[type='text']:focus, .grid__ tbody td input[type='password']:focus, .grid__ tbody td select:focus, .grid__ tbody td textarea:focus {
+	border-color: #faaeae;
+	background-color: #ffe5e5;
+	transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+	box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.075);
+	width: 98%;
+	color: #002200;
+}
+
+.grid tbody input[type='text'], .grid tbody input[type='number'], .grid tbody input[type='tel'], .grid tbody input[type='password'], .grid tbody select, .grid textarea {
+	width: 95%;
+}

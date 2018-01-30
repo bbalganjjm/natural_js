@@ -954,6 +954,11 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	background-color: #B6FFB6;
 }
 
+.datepicker_contents__ .datepicker_year_paging__ > a {
+	text-decoration: none;
+	color: #004A00;
+}
+
 .datepicker_contents__ .datepicker_curr_year__ {
 	border-color: #cccccc;
 	background-color: #deeeee;
@@ -1166,6 +1171,10 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	margin: 0 3px 0 3px;
 	line-height: 16px;
 	font-size: 13px;
+}
+
+.pagination__ .pagination_body__ li.pagination_page__>a {
+	text-decoration: none;	
 }
 
 .pagination__ .pagination_body__ li.pagination_page__>a>span {
@@ -1470,13 +1479,16 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .docs__>.entire_load_indicator__ {
-  height: 2px;
-  width: 100%;
-  position: relative;
-  overflow: hidden;
-  margin-top: -2px;
-  background-color: #55d555;
-  opacity: 0.6;
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 1;
+	height: 4px;
+	width: 100%;
+	overflow: hidden;
+	margin-top: -2px;
+	background-color: #9f9;
+	opacity: 0.6;
 }
 
 .docs__>.entire_load_indicator__:before{
@@ -1485,8 +1497,8 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
   content: "";
   left: -300px;
   width: 300px;
-  height: 2px;
-  background-color: #008800;
+  height: 4px;
+  background-color: #050;
   animation: entire_load_indicator_ani__ 1s linear infinite;
 }
 
