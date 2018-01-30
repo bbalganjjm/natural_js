@@ -17,7 +17,7 @@ html {
  */
 body {
 	margin: 0;
-	font-family: "Nanum Gothic Coding", "Malgun Gothic", "dotum", "Segoe UI", sans-serif;
+	font-family: "Noto Sans KR", "Malgun Gothic", "dotum", "Segoe UI", sans-serif;
 	color: #007700;
 	min-width: 578px;
 	background-image: url("../images/body_back_new.jpg");

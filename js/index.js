@@ -25,8 +25,8 @@ var IndexController = {
 	loadWebFont : function() {
 		WebFontConfig = {
 			custom: {
-				families: ['Nanum Gothic Coding'],
-				urls: ['http://fonts.googleapis.com/earlyaccess/nanumgothiccoding.css']
+				families: ['Noto Sans KR'],
+				urls: ['http://fonts.googleapis.com/earlyaccess/notosanskr.css']
 			}
 		};
 		(function() {
