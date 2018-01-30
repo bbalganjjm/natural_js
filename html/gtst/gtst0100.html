@@ -3,8 +3,18 @@
 	<h1 lang="en_US">Getting Started Natural-JS</h1>
 	<h2 lang="ko_KR">Natural-JS 환경설정과 Communicator(N.comm), Controller(N.cont)</h2>
 	<h2 lang="en_US">Config of Natural-JS and Communicator(N.comm), Controller(N.cont)</h2>
-	<p lang="ko_KR">Natural-JS 의 필수 라이브러리 파일은 다음과 같습니다.</p>
-	<p lang="en_US">Natural-JS's required library files are as follows:</p>
+	
+	<p lang="ko_KR">먼저 다음 중 한 가지 방법으로 Natural-JS 라이브러리 파일들을 다운로드 하세요.</p>
+	<p lang="en_US">First, download the Natural-JS library files in one of the following ways.</p>
+	<ol>
+		<li lang="ko_KR"><a class="link" href="https://github.com/bbalganjjm/natural_js" target="blank">GitHub</a> 에서 직접 다운로드</li>
+		<li lang="en_US">Directly download from <a class="link" href="https://github.com/bbalganjjm/natural_js" target="blank">GitHub</a></li>
+		<li>npm : npm install @bbalganjjm/natural_js</li>
+		<li>Bower : bower install natural_js</li>
+	</ol>
+	
+	<p lang="ko_KR">다운로드 된 파일 들 중 Natural-JS 를 구동하기 위한 필수 라이브러리 파일들은 다음과 같습니다.</p>
+	<p lang="en_US">Among the downloaded files, the necessary library files for running Natural-JS are as follows.</p>
 	<ol>
 		<li lang="ko_KR"><b>jquery-1.12.4.min.js</b> - Natural-JS 는 jQuery 를 기반으로 동작 하므로 반드시 임포트 해야합니다.</li>
 		<li lang="en_US"><b>jquery-1.12.4.min.js</b> - You must import the jQuery library. because Natural-JS operates based on jQuery.</li>
@@ -16,8 +26,8 @@
 		<li lang="en_US"><b>natural.config.js</b> - This is Natural-JS's configuration file.</li>
 	</ol>
 
-	<p lang="ko_KR">먼저 기본 HTML 파일을 만들고 위 파일들을 다음과 같은 순서로 페이지에 Import 해 줍니다.</p>
-	<p lang="en_US">First, create a basic HTML file and import the above files into the page in the following order.</p>
+	<p lang="ko_KR">이제 최상위 HTML 파일을 만들고 위 파일들을 다음과 같은 순서로 페이지에 Import 해 줍니다.</p>
+	<p lang="en_US">Now you can create a top-level HTML file and import the above files into the page in the following order.</p>
 
 	<pre><code class="language-markup">
 &lt;script type="text/javascript" src="js/natural_js/lib/jquery-1.12.4.min.js"&gt;&lt;/script&gt;
@@ -27,7 +37,7 @@
 
 	<p lang="ko_KR">CORE, ARCHITECTURE, DATA, UI, UI.Shell 전체를 사용하기 원한다면  natural.js.min.js 를 임포트(Import) 하고 각 패키지 별로 따로 사용하기 원한다면 따로 임포트 하면 됩니다.</p>
 	<p lang="en_US">If you want to use the entire CORE, ARCHITECTURE, DATA, UI, UI.Shell, import natural.js.min.js and if you want to use it separately for each package, you can import it separately.</p>
-	<p lang="ko_KR">각 패키지별 의존 관계는 다음과 같습니다.</p>
+	<p lang="ko_KR">각 패키지 별 의존 관계는 다음과 같습니다.</p>
 	<p lang="en_US">The dependencies for each package are as follows.</p>
 
 	<ul>
