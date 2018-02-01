@@ -2,9 +2,11 @@ var IndexController = {
 	docs : null,
 	init : function(window) {
 		this.setLocale();
+		/*
 		if(location.hostname === "bbalganjjm.github.io") {
 			this.loadWebFont();
 		}
+		*/
 		this.loadHeader();
 		this.loadFooter();
 		this.docs = $("#docsContainer__").docs({
