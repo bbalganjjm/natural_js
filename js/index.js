@@ -25,7 +25,7 @@ var IndexController = {
 	loadWebFont : function() {
 		WebFontConfig = {
 			custom: {
-				families: ['Noto Sans KR'],
+				families: ['Apple SD Gothic Neo'],
 				urls: ['http://fonts.googleapis.com/earlyaccess/notosanskr.css']
 			}
 		};
