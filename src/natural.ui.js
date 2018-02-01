@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.30.70
+ * Natural-UI v0.30.74
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "v0.30.70";
+	N.version["Natural-UI"] = "v0.30.74";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -4549,8 +4549,14 @@
 		        	"border-left" : borderLeft
 		        });
 
-		        //Create grid header
 		        var scrollbarWidth = N.browser.scrollbarWidth();
+		        
+		        // When opts.context overflows gridWrap
+		        if(opts.context.width() > gridWrap.width()) {
+		        	gridWrap.width(opts.context.width() + scrollbarWidth);    	
+		        }
+
+		        //Create grid header
 		        var contextClone = opts.context.clone(true, true);
 		        var theadClone = opts.context.find("> thead").clone();
 		        contextClone.find(">thead").remove();
@@ -4582,13 +4588,11 @@
 		        	"height" : String(opts.height) + "px",
 		        	"overflow-y" : "scroll",
 		        	"overflow-x" : "hidden",
-		        	"margin-left" : "-1px",
-		        	"border-bottom" : borderBottom
+		        	"margin-left" : "-1px"
 		        });
 
-		        // for IE
-		        if(N.browser.is("ie")) {
-		        	contextWrapEle.css("overflow-x", "hidden");
+		        if(opts.context.find("> tfoot").length === 0) {
+		        	contextWrapEle.css("border-bottom", borderBottom);
 		        }
 
 		        if(opts.windowScrollLock) {
@@ -4962,9 +4966,7 @@
 			            	"position": "absolute",
 			            	"width": resizeBarWidth + "px",
 			            	"height": String(cellEle.outerHeight()) + "px",
-			            	"opacity": "0",
-			            	"background-color" : "#000",
-			            	"z-index" : 9999999
+			            	"opacity": "0"
 			            }).appendTo(cellEle);
 	
 			            resizeBar.bind("mousedown.grid.resize touchstart.grid.resize", function(e) {
