@@ -18,10 +18,10 @@ html {
 body {
 	margin: 0;
 	font-family: "Apple SD Gothic Neo", "Malgun Gothic", "dotum", "Segoe UI", sans-serif;
-	color: #007700;
+	color : #000;
 	min-width: 578px;
 	background-image: url("../images/body_back_new.jpg");
-	background-color: #008800;
+	background-color: #009688;
 	overflow-y: scroll;
 }
 
@@ -72,22 +72,22 @@ table {
 	margin: 0 0 15px 0;
 	border-collapse: collapse;
 	table-layout: fixed;
-	border-top: 2px solid #88dd88;
+	border-top: 2px solid #80CBC4;
 }
 table:last-child {
 	margin: 0;
 }
 table th, table td {
-	border: 1px solid #88dd88;
+	border: 1px solid #80CBC4;
 	padding: 5px 3px;
 	word-break: break-word;
 	font-size: 12px;
 }
 table th, table > tfoot td {
-	background-color: #ccffcc;
+	background-color: #B2DFDB;
 }
 table.form th {
-	background-color: #ccffcc;
+	background-color: #B2DFDB;
 	text-align: right;
 }
 
@@ -101,8 +101,8 @@ body > #docsContainer__ {
 	background-color: #fff;
 	padding: 0;
 	font-size: 0.875em;
-	box-shadow: 0 0 10px #003300;
-	opacity: 0.95;
+	box-shadow: 0 0 10px #00695C;
+	opacity: 0.98;
 }
 
 body > #docsContainer__.multi__ {
@@ -144,11 +144,11 @@ article dl.qna dd ul li>ul {
 
 article h1 {
 	padding: 10px 0 10px 40px;
-	border-bottom: 1px solid #009000;
+	border-bottom: 1px solid #004D40;
 	font-size: 1.5em;
 	background: url("../images/icon/h1_leaf.png") no-repeat 0 10px;
 	margin: 0 0 20px 0;
-	color: #080;
+	color : #000;
 }
 
 article h2 {
@@ -156,7 +156,7 @@ article h2 {
 	padding: 40px 0 20px 20px;
 	background: url("../images/icon/dt_leaf.png") no-repeat 0 40px;
 	font-size: 1.2em;
-	color: #080;
+	color : #000;
 	margin: 0 0 0 0;
 }
 
@@ -168,7 +168,7 @@ article h3 {
 	font-size: 1.2em;
 	font-weight: bold;
 	margin: 0;
-	color: #080;
+	color : #000;
 	padding: 35px 0 18px 20px;
 	background: url("../images/icon/h3_leaf.gif") no-repeat 0px 35px;
 }
@@ -178,7 +178,7 @@ article h4 {
 	font-weight: bold;
 	margin: 0;
 	padding: 15px 0 10px 0;
-	color: #080;
+	color : #000;
 }
 
 article p {
@@ -188,8 +188,8 @@ article p {
 article a.link {
 	padding-left: 18px;
 	background: url("../images/icon/link.png") no-repeat 0 50%;
-	border-bottom: 1px solid #00c000;
-	color: #00c000;
+	border-bottom: 1px solid #004D40;
+	color : #000;
 	font-size: 1em;
 }
 
@@ -216,7 +216,7 @@ article .alert {
 	background: url("../images/icon/alert.png") no-repeat 7px 10px;
 	font-size: 0.95em;
 	padding: 5px 5px 5px 25px;
-	background-color: #ffffc8;
+	background-color: #E0F2F1;
 	border-radius: 3px;
 	margin: 0 0 15px 0;
 }
@@ -247,14 +247,14 @@ article.apiDoc ul.list>li {
 
 article.apiDoc fieldset {
 	display: inline-block;
-	border: 1px dotted #77c777;
+	border: 1px dotted #26A69A;
 	border-radius: 5px;
 	padding: 0 0 0 10px;
 }
 
 article.apiDoc fieldset legend {
 	font-size: -9em;
-	color: #009000;
+	color : #000;
 }
 
 article.apiDoc ul.footnotes {
@@ -267,7 +267,7 @@ article.apiDoc ul.footnotes li {
 	float: left;
 	margin-right: 20px;
 	font-size: 0.9em;
-	color: #009000;
+	color : #000;
 }
 
 article.apiDoc .b {
@@ -280,7 +280,7 @@ article.apiDoc .bi {
 }
 
 article.apiDoc .apidemo {
-	border: 1px solid #77f777;
+	border: 1px solid #26A69A;
 	font-size: 0.875em;
 	margin: 0 0 15px 0;
 	padding: 15px 0 15px 0;
@@ -299,7 +299,7 @@ article.apiDoc .apidemo>article table.form th {
 }
 
 article.apiDoc .apidemo>article .result {
-	border: 1px solid #BCFBBC;
+	border: 1px solid #80CBC4;
 	border-radius: 3px;
 	padding: 10px;
 	margin: 0 0 15px 0;
@@ -319,7 +319,7 @@ article.apiDoc .apidemo>article .dataBox {
 /* Examples */
 article .intro {
 	padding: 10px;
-	background-color: #ffeeee;
+	background-color: #E0F2F1;
 	border-radius: 3px;
 	margin-bottom: 20px;
 }
@@ -333,9 +333,9 @@ article .smallContTit {
 }
 
 article .searchBox {
-	border: 1px solid #cccccc;
-	box-shadow: inset 1px 1px 3px #eeeeee;
-	background-color: #fefefe;
+	border: 1px solid #80CBC4;
+	box-shadow: inset 1px 1px 3px #B2DFDB;
+	background-color: #E0F2F1;
 	border-radius: 3px;
 	margin-bottom: 15px;
 }
@@ -353,7 +353,7 @@ article .searchBox ul li {
 }
 
 article .searchBox ul li.inputs {
-	border: 1px dotted #eeeeee;
+	border: 1px dotted #B2DFDB;
 }
 
 article .searchBox ul li.buttons {
@@ -371,8 +371,8 @@ article .searchBox li>label label {
 
 article .searchBox label input, article .searchBox label select {
 	margin-left: 15px;
-	box-shadow: 1px 1px 2px #EEE;
-	border-color: #cccccc;
+	box-shadow: 1px 1px 2px #B2DFDB;
+	border-color: #B2DFDB;
 }
 
 article .searchBox label input[type='text'], article .searchBox label input[type='number'], article .searchBox label input[type='tel'] {
@@ -386,11 +386,11 @@ article .click {
 	display: inline-block;
 	height: 35px;
 	font-weight: bold;
-	color: #008800;
-	border: 1px dotted #008800;
+	color : #000;
+	border: 1px dotted #009688;
 	border-radius: 3px;
 	box-shadow: 1px 1px 3px #BCFBBC;
-	background-color: #efe;
+	background-color: #E0F2F1;
 	cursor: pointer;
 	font-size: 17px;
 }
@@ -407,7 +407,7 @@ article .click {
 
 article .depricated {
 	text-decoration: line-through;
-	color: #ddd;
+	color: #B2DFDB;
 }
 
 article ul.contents {
@@ -417,9 +417,9 @@ article ul.contents {
 	background-color: #fff;
 	padding: 5px 0px 10px 10px;
 	border-radius: 10px 0 0 10px;
-	border-top: 1px solid #55d555;
-	border-left: 1px solid #55d555;
-	border-bottom: 1px solid #55d555;
+	border-top: 1px solid #26A69A;
+	border-left: 1px solid #26A69A;
+	border-bottom: 1px solid #26A69A;
 	list-style: none;
 	width: 192px;
 }
@@ -452,5 +452,5 @@ article ul.contents.links li a.link {
 	background: none;
 	padding: 0;
 	border: none;
-	color: #080;
+	color : #000;
 }

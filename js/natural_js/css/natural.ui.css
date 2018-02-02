@@ -3,20 +3,20 @@
 /* Alert */
 .alert_overlay__.block_overlay__ {
 	background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAIklEQVQIW2NkQAIf7n/4zwjjgzgCigKMYAEYB8RmROaABAAQCg/DqNBm8AAAAABJRU5ErkJggg==") repeat;
-	background-color: #003300 !important;
+	background-color: #00695C !important;
 	opacity: 0.60;
 	filter: alpha(opacity = 50) \9;
 }
 
 .alert__.block_overlay_msg__ {
 	background: #fff;
-	border: 2px solid #4A9E4A;
+	border: 2px solid #26A69A;
 	box-shadow: 4px 4px 8px rgba(0, 0, 0, .20);
 	border-radius: 5px;
 }
 
 .alert__.block_overlay_msg__ .msg_title_box__ {
-	background-color: #4A9E4A;
+	background-color: #26A69A;
 	box-shadow: 0px 3px 3px rgba(0, 0, 0, .14);
 	margin: -2px -4px -2px -4px;
 	border-top: none;
@@ -50,7 +50,7 @@
 
 .alert__.block_overlay_msg__ .msg_box__ {
 	padding: 10px 10px 0 10px;
-	color: #4f535c;
+	color : #000;
 	font-size: 12px;
 	line-height: 20px;
 	display: block;
@@ -98,10 +98,10 @@
 /* Alert for input elements */
 .alert_tooltip__.msg__ {
 	position: absolute;
-	background: #ffffc9;
+	background: #E0F2F1;
 	padding: 5px;
 	border-radius: 0 10px 0 10px;
-	border: 1px solid #ff9999;
+	border: 1px solid #E0F2F1;
 	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
 	text-shadow: 1px 1px 1px rgba(212, 224, 212, 0.57);
 	margin-right: 5px;
@@ -133,7 +133,7 @@
 	background:
 		url("data:image/png;base64,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")
 		no-repeat 3px 1px;
-	color: #f90000;
+	color : #000;
 	margin-right: 5px;
 	font-style: italic;
 	font-weight: normal;
@@ -209,7 +209,6 @@
 a.btn_common__, input[type='button'].btn_common__, button.btn_common__ {
 	display: inline-block;
 	margin-bottom: 2px 0 2px 0 !important;
-	border: 1px;
 	overflow: visible;
 	cursor: pointer;
 	text-align: center;
@@ -237,7 +236,7 @@ a.btn_common__ img {
 a.btn_white__, input[type='button'].btn_white__, button.btn_white__ {
 	color: #4f535c !important;
 	background-color: #ffffff;
-	border: 1px solid #808080;
+	border: 1px solid #4DB6AC;
 }
 
 a.btn_gray__, input[type='button'].btn_gray__, button.btn_gray__ {
@@ -260,8 +259,8 @@ a.btn_skyblue__, input[type='button'].btn_skyblue__, button.btn_skyblue__ {
 
 a.btn_green__, input[type='button'].btn_green__, button.btn_green__ {
 	color: #ffffff !important;
-	background-color: #008800;
-	border: 1px solid #005500;
+	background-color: #009688;
+	border: 1px solid #00897B;
 }
 
 a.btn_yellowgreen__, input[type='button'].btn_yellowgreen__, button.btn_yellowgreen__ {
@@ -383,7 +382,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .row_data_deleted__, .row_data_deleted__ input, .row_data_deleted__ select, .row_data_deleted__ textarea {
-	color: #ededed !important;
+	color: #E0F2F1 !important;
 }
 
 .data_changed__ {
@@ -395,7 +394,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .list__.list_hover__ > li:hover input,
 .list__.list_hover__ > li:hover select,
 .list__.list_hover__ > li:hover textarea {
-	background-color: #efefef;
+	background-color: #E0F2F1;
 }
 
 .list__.list_select__ > li {
@@ -406,7 +405,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .list__.list_select__ > li.list_selected__ input,
 .list__.list_select__ > li.list_selected__ select,
 .list__.list_select__ > li.list_selected__ textarea {
-	background-color: #dfdfdf;
+	background-color: #E0F2F1;
 }
 
 .list__ li.empty__ {
@@ -428,7 +427,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .grid__ > tbody.row_data_changed__ {
-	background-color: #dfd;
+	background-color: #B2DFDB;
 }
 
 .grid__ > tbody.row_data_changed__>tr:first-child>td:first-child {
@@ -444,7 +443,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .grid__.grid_hover__ > tbody:hover select,
 .grid__.grid_hover__ > tbody:hover textarea
 	{
-	background-color: #efefef;
+	background-color: #E0F2F1;
 }
 
 .grid__.grid_select__ > tbody {
@@ -455,7 +454,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .grid__.grid_select__ > tbody.grid_selected__ input,
 .grid__.grid_select__ > tbody.grid_selected__ select,
 .grid__.grid_select__ > tbody.grid_selected__ textarea {
-	background-color: #dfdfdf;
+	background-color: #E0F2F1;
 }
 
 .grid__ td.empty__ {
@@ -474,17 +473,8 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	-o-text-overflow: ellipsis;
 }
 
-.grid__ thead, .grid__ tfoot {
-	background-color: #efefef;
-}
-
 .grid__>thead>tr>th .resize_bar__ {
-	background: linear-gradient(to bottom, #77cc77, #fff);
-	background: -ms-linear-gradient(to bottom, #77cc77, #fff);
-	background: -moz-linear-gradient(to bottom, #77cc77, #fff);
-	background: -o-linear-gradient(to bottom, #77cc77, #fff);
-	background: -webkit-linear-gradient(top, #77cc77, #fff);
-	background-color: #77cc77;
+	background-color: #26A69A;
 	opacity: 0.6;
 	cursor: e-resize;
 	z-index: 1;
@@ -493,7 +483,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .v_resizable__ {
 	height: 3px;
 	margin-right: 18px;
-	border-bottom: 3px double #dddddd;
+	border-bottom: 3px double #B2DFDB;
 }
 
 .grid_wrap__ {
@@ -528,10 +518,10 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .grid__>thead .data_filter_panel__ {
-	border: 1px solid #cccccc;
+	border: 1px solid #80CBC4;
 	max-width: 300px;
 	position: absolute;
-	background-color: #eeffee;
+	background-color: #E0F2F1;
 	box-shadow: 0px 4px 12px #999;
 	border-radius: 5px 0 5px 5px;
 	padding: 4px;
@@ -567,7 +557,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	height: 23px;
 	padding: 3px 3px;
 	border-radius: 3px;
-	border: 1px solid #cccccc;
+	border: 1px solid #80CBC4;
 	font-size: 12px;
 	line-height: 100%;
 	box-sizing: border-box;
@@ -602,7 +592,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	left: 0;
 	display: none;
 	cursor: wait;
-	background-color: #eeffee;
+	background-color: #E0F2F1;
 }
 
 .grid__>thead .data_filter_panel__ .data_filter_list__ {
@@ -690,8 +680,8 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .grid__ .grid_more_thead_col__ .grid_more_panel__ {
-	border: 1px solid #cccccc;
-	background-color: #eeffee;
+	border: 1px solid #80CBC4;
+	background-color: #E0F2F1;
 	box-shadow: 0px 4px 12px #999;
 	border-radius: 5px 0 5px 5px;
 	padding: 5px;
@@ -757,7 +747,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 .grid_more_popup_contents__ .btn_box__ > .prev_btn__,
 .grid_more_popup_contents__ .btn_box__ > .next_btn__ {
-	border: 1px solid #88dd88;
+	border: 1px solid #009688;
 	line-height: 18px;
 	padding: 2px 5px 4px 5px;
 	border-radius: 3px;
@@ -780,15 +770,15 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	float: left;
 	margin-right: 1px;
 	padding: 4px;
-	border-top: 1px solid #55d555;
-	border-left: 1px solid #55d555;
-	border-right: 1px solid #55d555;
+	border-top: 1px solid #26A69A;
+	border-left: 1px solid #26A69A;
+	border-right: 1px solid #26A69A;
 	cursor: pointer;
 	min-width: 80px;
 	border-radius: 3px 3px 0 0;
 	font-size: 12px;
 	text-align: center;
-	background-color: #AAF7AA;
+	background-color: #80CBC4;
 }
 
 .tab__>ul.tab_scroll__.effect__ {
@@ -798,12 +788,12 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .tab__>a.tab_scroll_prev__, .tab__>a.tab_scroll_next__ {
 	line-height: 16px;
 	padding: 8px 0 9px 0;
-	border-top: 1px solid #55d555;
-	border-left: 1px solid #55d555;
-	border-right: 1px solid #55d555;
-	background-color: #CCFFCC;
+	border-top: 1px solid #26A69A;
+	border-left: 1px solid #26A69A;
+	border-right: 1px solid #26A69A;
+	background-color: #B2DFDB;
 	font-size: 12px;
-	color: #4A9E4A;
+	color : #000;
 }
 
 .tab__>a.tab_scroll_prev__ span {
@@ -830,24 +820,24 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 .tab__>ul>li>a {
 	font-weight: bold;
-	color: #009000;
+	color : #000;
 	text-decoration: none;
 	line-height: 25px;
 }
 
 .tab__>ul>li.tab_active__ {
-	background-color: #4A9E4A;
+	background-color: #26A69A;
 	background-image: none;
 }
 
 .tab__>ul>li.tab_active__>a {
-	color: #ffffc0;
+	color : #fff;
 	text-shadow: 1px 1px #005000;
 }
 
 .tab__>div {
 	padding: 15px;
-	border: 1px solid #55d555;
+	border: 1px solid #26A69A;
 }
 
 .tab__>div.hidden__ > * {}
@@ -863,14 +853,14 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 /* DatePicker */
 .datepicker_contents__ {
-	border: 1px solid #009000;
+	border: 1px solid #009688;
 	box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
 	border-radius: 3px;
-	background-color: #479C47;
+	background-color: #26A69A;
 	padding: 3px;
 	font-size: 12px;
 	width: 316px;
-	color: #004A00;
+	color : #000;
 	z-index: 1;
 }
 
@@ -897,35 +887,35 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .datepicker_contents__ .datepicker_year_item__, .datepicker_contents__ .datepicker_year_paging__ {
-	border: 1px solid #F7F6F6;
+	border: 1px solid #E0F2F1;
 	cursor: pointer;
-	background-color: #B6FFB6;
+	background-color: #80CBC4;
 }
 
 .datepicker_contents__ .datepicker_year_paging__ > a {
 	text-decoration: none;
-	color: #004A00;
+	color : #000;
 }
 
 .datepicker_contents__ .datepicker_curr_year__ {
-	border-color: #cccccc;
+	border-color: #B2DFDB;
 	background-color: #deeeee;
 }
 
 .datepicker_contents__ .datepicker_year_selected__ {
-	background-color: #7CA27C;
+	background-color: #26A69A;
 	color: #ffffff;
 }
 
 .datepicker_contents__ .datepicker_month_item__ {
-	border: 1px solid #F7F6F6;
+	border: 1px solid #E0F2F1;
 	cursor: pointer;
-	background-color: #B6ffB6;
+	background-color: #80CBC4;
 }
 
 .datepicker_contents__ .datepicker_year_title__, .datepicker_contents__ .datepicker_month_title__, .datepicker_contents__ .datepicker_day__ {
 	border: 1px solid #F7F6F6;
-	background-color: #5F965F;
+	background-color: #26A69A;
 	color: #ffffff;
 	font-weight: bold;
 }
@@ -933,28 +923,28 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .datepicker_contents__ .datepicker_prev_day_item__, .datepicker_contents__ .datepicker_next_day_item__ {
 	border: 1px solid #F7F6F6;
 	cursor: pointer;
-	background-color: #CCFFCC;
-	color: #32A732;
+	background-color: #B2DFDB;
+	color : #000;
 }
 
 .datepicker_contents__ .datepicker_day_item__ {
-	border: 1px solid #F7F6F6;
+	border: 1px solid #E0F2F1;
 	cursor: pointer;
 	background-color: #ffffff;
 }
 
 .datepicker_contents__ .datepicker_month_selected__ {
-	background-color: #7CA27C;
+	background-color: #26A69A;
 	color: #ffffff;
 }
 
 .datepicker_contents__ .datepicker_day_selected__ {
-	background-color: #7CA27C;
+	background-color: #26A69A;
 	color: #ffffff;
 }
 
 .datepicker_contents__ .datepicker_year_item__:hover, .datepicker_contents__ .datepicker_month_item__:hover, .datepicker_contents__ .datepicker_day_item__:hover {
-	background-color: #8AD08A;
+	background-color: #4DB6AC;
 	color: #ffffff;
 }
 
@@ -965,7 +955,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .tree__ a>span {
-	color: #393f48;
+	color : #000;
 }
 
 .tree__ ul {
@@ -976,7 +966,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .tree__ ul>li {
-	border-left: 1px dotted #b1bcca;
+	border-left: 1px dotted #80CBC4;
 	margin-left: 5px;
 	padding: 0 0 0 7px;
 	line-height: 18px;
@@ -992,7 +982,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 .tree__>ul>li>a>span {
 	font-weight: bold;
-	color: #008ad6;
+	color : #000;
 }
 
 .tree__ li>.tree_icon__ {
@@ -1052,7 +1042,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 .tree__ li>a.tree_key__.tree_active__>span {
 	font-weight: bold;
-	color: #000000;
+	color : #000;
 }
 
 /* Pagination */
@@ -1151,11 +1141,11 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	word-break: break-all;
 	margin-bottom: 5px;
 	border-radius: 5px;
-	border: 1px solid #c9c9c9;
+	border: 1px solid #B2DFDB;
 	box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.23);
 	transform: scale(0);
 	opacity: 0;
-	background-color: #ffffc9;
+	background-color: #E0F2F1;
 }
 
 .notify__ .notify_msg__.visible__ {
@@ -1172,7 +1162,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 .notify__ .notify_msg__ a, .notify__ .notify_msg__ span {
 	line-height: 120%;
-	color: #8a2727;
+	color : #000;
 	text-decoration: none;
 	font-size: 12px;
 	text-shadow: 1px 1px 0 rgba(212, 224, 212, 0.1);
@@ -1196,7 +1186,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .docs__>.docs_tab_context__ {
 	position: relative;
 	height: 31px;
-	border-bottom: 1px solid #55d555;
+	border-bottom: 1px solid #26A69A;
 	font-family: "Malgun Gothic", "dotum", "Segoe UI", sans-serif;
 }
 
@@ -1228,10 +1218,10 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	display: inline;
 	margin-right: 2px;
 	padding: 7px 0;
-	border-top: 1px solid #55d555;
-	border-left: 10px solid #55d555;
-	border-right: 1px solid #55d555;
-	border-bottom: 1px solid #55d555;
+	border-top: 1px solid #26A69A;
+	border-left: 10px solid #26A69A;
+	border-right: 1px solid #26A69A;
+	border-bottom: 1px solid #26A69A;
 	border-radius: 7px 0px 0px 0px;
 	font-size: 12px;
 	text-align: center;
@@ -1255,7 +1245,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .docs__>.docs_tab_context__>ul.docs_tabs__>.docs_tab__.inactive__ {
-	background-color: #c0eec0;
+	background-color: #B2DFDB;
 }
 
 .docs__>.docs_tab_context__>ul.docs_tabs__>.docs_tab__.active__ {
@@ -1278,26 +1268,26 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	float: left;
 	margin-right: 2px;
 	padding: 0;
-	border: 1px solid #55d555;
+	border: 1px solid #26A69A;
 	border-bottom: none;
 	min-width: 22px;
 	max-width: 27px;
 	height: 30px;
 	border-radius: 0 7px 0 0;
 	text-align: center;
-	background-color: #a1d8a1;
+	background-color: #80CBC4;
 	line-height: 10px;
 }
 
 .docs__>.docs_tab_context__>ul.docs_tab_utils__>li>a {
-	color: #f3f9d2;
+	color: #fff;
 	font-size: 10px;
 	font-weight: bolder;
 	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.55);
 }
 
 .docs__>.docs_tab_context__>ul.docs_tabs__ li>.docs_tab_active_btn__ {
-	color: #006600;
+	color : #000;
 	text-decoration: none;
 	line-height: 32px;
 	padding: 0 5px;
@@ -1330,9 +1320,9 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .docs__>.docs_tab_context__>ul.docs_tab_utils__>.docs_tab_list_item__ .docs_tab_list__ {
 	position: absolute;
 	right: 2px;
-	border: 1px solid #cccccc;
+	border: 1px solid #80CBC4;
 	max-width: 300px;
-	background-color: #eeffee;
+	background-color: #E0F2F1;
 	box-shadow: 0px 4px 12px #999;
 	border-radius: 5px 0 5px 5px;
 	padding: 4px;
@@ -1365,7 +1355,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 .docs__>.docs_tab_context__>ul.docs_tab_utils__>.docs_tab_list_item__ .docs_tab_list__ > .docs_tab__ > .docs_tab_active_btn__ {
 	line-height: 19px;
-	color: #006600;
+	color : #000;
 	white-space: nowrap;
 	font-size: 11px;
 	padding: 0 18px 0 0;
@@ -1431,7 +1421,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	width: 100%;
 	overflow: hidden;
 	margin-top: -2px;
-	background-color: #9f9;
+	background-color: #80CBC4;
 	opacity: 0.6;
 }
 
@@ -1442,7 +1432,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
   left: -300px;
   width: 300px;
   height: 4px;
-  background-color: #050;
+  background-color: #00897B;
   animation: entire_load_indicator_ani__ 1s linear infinite;
 }
 
