@@ -16,12 +16,6 @@
 }
 
 .alert__.block_overlay_msg__ .msg_title_box__ {
-	background-image: -ms-linear-gradient(top, #4A9E4A 0%, #3C823C 100%);
-	background-image: -moz-linear-gradient(top, #3C823C 0%, #4A9E4A 100%);
-	background-image: -o-linear-gradient(top, #4A9E4A 0%, #3C823C 100%);
-	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #4A9E4A), color-stop(1, #3C823C));
-	background-image: -webkit-linear-gradient(top, #4A9E4A 0%, #3C823C 100%);
-	background-image: linear-gradient(to bottom, #4A9E4A 0%, #3C823C 100%);
 	background-color: #4A9E4A;
 	box-shadow: 0px 3px 3px rgba(0, 0, 0, .14);
 	margin: -2px -4px -2px -4px;
@@ -105,10 +99,6 @@
 .alert_tooltip__.msg__ {
 	position: absolute;
 	background: #ffffc9;
-	background: -moz-linear-gradient(top, #ffffc9 0%, #ffffa3 100%);
-	background: -webkit-linear-gradient(top, #ffffc9 0%,#ffffa3 100%);
-	background: linear-gradient(to bottom, #ffffc9 0%,#ffffa3 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffc9', endColorstr='#ffffa3',GradientType=0 );
 	padding: 5px;
 	border-radius: 0 10px 0 10px;
 	border: 1px solid #ff9999;
@@ -245,66 +235,36 @@ a.btn_common__ img {
 }
 
 a.btn_white__, input[type='button'].btn_white__, button.btn_white__ {
-	background: -ms-linear-gradient(top, #ffffff, #eeeeee);
-	background: -moz-linear-gradient(top, #ffffff, #eeeeee);
-	background: -o-linear-gradient(top, #ffffff, #eeeeee);
-	background: -webkit-linear-gradient(top, #ffffff, #eeeeee);
-	background: linear-gradient(top, #ffffff, #eeeeee);
 	color: #4f535c !important;
 	background-color: #ffffff;
 	border: 1px solid #808080;
 }
 
 a.btn_gray__, input[type='button'].btn_gray__, button.btn_gray__ {
-	background: -ms-linear-gradient(top, #a2a2a2, #808080);
-	background: -moz-linear-gradient(top, #a2a2a2, #808080);
-	background: -o-linear-gradient(top, #a2a2a2, #808080);
-	background: -webkit-linear-gradient(top, #a2a2a2, #808080);
-	background: linear-gradient(top, #a2a2a2, #808080);
 	color: #ffffff !important;
 	background-color: #a2a2a2;
 	border: 1px solid #707070;
 }
 
 a.btn_blue__, input[type='button'].btn_blue__, button.btn_blue__ {
-	background: -ms-linear-gradient(top, #6666ff, #2a2aff);
-	background: -moz-linear-gradient(top, #6666ff, #2a2aff);
-	background: -o-linear-gradient(top, #6666ff, #2a2aff);
-	background: -webkit-linear-gradient(top, #6666ff, #2a2aff);
-	background: linear-gradient(top, #6666ff, #2a2aff);
 	color: #ffffff !important;
 	background-color: #6666ff;
 	border: 1px solid #2727ff;
 }
 
 a.btn_skyblue__, input[type='button'].btn_skyblue__, button.btn_skyblue__ {
-	background: -ms-linear-gradient(top, #1fbaff, #009fff);
-	background: -moz-linear-gradient(top, #1fbaff, #009fff);
-	background: -o-linear-gradient(top, #1fbaff, #009fff);
-	background: -webkit-linear-gradient(top, #1fbaff, #009fff);
-	background: linear-gradient(top, #1fbaff, #009fff);
 	color: #ffffff !important;
 	background-color: #3cc3ff;
 	border: 1px solid #0071eb;
 }
 
 a.btn_green__, input[type='button'].btn_green__, button.btn_green__ {
-	background: -ms-linear-gradient(top, #008800, #007100);
-	background: -moz-linear-gradient(top, #008800, #007100);
-	background: -o-linear-gradient(top, #008800, #007100);
-	background: -webkit-linear-gradient(top, #008800, #007100);
-	background: linear-gradient(top, #008800, #007100);
 	color: #ffffff !important;
 	background-color: #008800;
 	border: 1px solid #005500;
 }
 
 a.btn_yellowgreen__, input[type='button'].btn_yellowgreen__, button.btn_yellowgreen__ {
-	background: -ms-linear-gradient(top, #9ACD32, #88B52C);
-	background: -moz-linear-gradient(top, #9ACD32, #88B52C);
-	background: -o-linear-gradient(top, #9ACD32, #88B52C);
-	background: -webkit-linear-gradient(top, #9ACD32, #88B52C);
-	background: linear-gradient(top, #9ACD32, #88B52C);
 	color: #ffffff !important;
 	background-color: #9ACD32;
 	border: 1px solid #00A900;
@@ -828,12 +788,6 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	border-radius: 3px 3px 0 0;
 	font-size: 12px;
 	text-align: center;
-	background-image: -ms-linear-gradient(top, #AAF7AA 0%, #81F591 100%);
-	background-image: -moz-linear-gradient(top, #AAF7AA 0%, #81F591 100%);
-	background-image: -o-linear-gradient(top, #AAF7AA 0%, #81F591 100%);
-	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #AAF7AA), color-stop(1, #81F591));
-	background-image: -webkit-linear-gradient(top, #AAF7AA 0%, #81F591 100%);
-	background-image: linear-gradient(to bottom, #AAF7AA 0%, #81F591 100%);
 	background-color: #AAF7AA;
 }
 
@@ -847,12 +801,6 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	border-top: 1px solid #55d555;
 	border-left: 1px solid #55d555;
 	border-right: 1px solid #55d555;
-	background-image: -ms-linear-gradient(top, #CCFFCC 0%, #99FF99 100%);
-	background-image: -moz-linear-gradient(top, #CCFFCC 0%, #99FF99 100%);
-	background-image: -o-linear-gradient(top, #CCFFCC 0%, #99FF99 100%);
-	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #CCFFCC), color-stop(1, #99FF99));
-	background-image: -webkit-linear-gradient(top, #CCFFCC 0%, #99FF99 100%);
-	background-image: linear-gradient(to bottom, #CCFFCC 0%, #99FF99 100%);
 	background-color: #CCFFCC;
 	font-size: 12px;
 	color: #4A9E4A;
@@ -1207,11 +1155,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.23);
 	transform: scale(0);
 	opacity: 0;
-	background: #ffffc9;
-	background: -moz-linear-gradient(top, #ffffc9 0%, #ffffa3 100%);
-	background: -webkit-linear-gradient(top, #ffffc9 0%,#ffffa3 100%);
-	background: linear-gradient(to bottom, #ffffc9 0%,#ffffa3 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffc9', endColorstr='#ffffa3',GradientType=0 );
+	background-color: #ffffc9;
 }
 
 .notify__ .notify_msg__.visible__ {
