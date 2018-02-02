@@ -1,5 +1,5 @@
 /*!
- * Natural-UI.Shell v0.9.25, Works fine in IE9 and above
+ * Natural-UI.Shell v0.9.26, Works fine in IE9 and above
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-	N.version["Natural-UI.Shell"] = "0.9.25";
+	N.version["Natural-UI.Shell"] = "0.9.26";
 
 	$.fn.extend($.extend(N.prototype, {
 		notify : function(opts) {
@@ -747,7 +747,7 @@
 				}
 				
 				if(opts.context.find("> .docs_tab_context__ > .docs_tabs__ > .docs_tab__." + docId + "__").length === 0) {
-					if(opts.maxTabs !== 0 && opts.context.find("> .docs_tab_context__ > .docs_tabs__ > .docs_tab__").length >= opts.maxTabs) {
+					if(opts.maxTabs !== 0 && opts.context.find("> .docs_tab_context__ > .docs_tabs__ > .docs_tab__").not(".remove__").length >= opts.maxTabs) {
 						N.notify({
 							html : true
 						}).add(N.message.get(opts.message, "maxTabs", [String(opts.maxTabs)]));
