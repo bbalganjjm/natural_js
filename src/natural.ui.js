@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.30.74
+ * Natural-UI v0.30.75
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "v0.30.74";
+	N.version["Natural-UI"] = "v0.30.75";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -4552,8 +4552,9 @@
 		        var scrollbarWidth = N.browser.scrollbarWidth();
 		        
 		        // When opts.context overflows gridWrap
-		        if(opts.context.width() > gridWrap.width()) {
-		        	gridWrap.width(opts.context.width() + scrollbarWidth);    	
+		        // if gridWrap.width() is 0, opts.context's display style is none or invisible element.
+		        if(gridWrap.width() > 0 && opts.context.width() > gridWrap.width()) {
+		        	gridWrap.width(opts.context.width() + scrollbarWidth);
 		        }
 
 		        //Create grid header
