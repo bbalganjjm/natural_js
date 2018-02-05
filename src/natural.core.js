@@ -1,5 +1,5 @@
 /*!
- * Natural-CORE v0.17.13
+ * Natural-CORE v0.17.14
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -300,7 +300,7 @@
 		// N local variables
 		$.extend(N, {
 			version : {
-				"Natural-CORE" : "0.17.13"
+				"Natural-CORE" : "0.17.14"
 			},
 			/**
 			 * Set and get locale value
@@ -380,9 +380,10 @@
 			error : function(msg, e) {
 				if(N.type(e) !== "error") {
 					e = new Error();
-				}
-				if(Error.captureStackTrace !== undefined) {
-					Error.captureStackTrace(e, N.error);					
+					
+					if(Error.captureStackTrace !== undefined) {
+						Error.captureStackTrace(e, N.error);					
+					}
 				}
 				
 				e.message = msg;
