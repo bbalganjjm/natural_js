@@ -2,7 +2,7 @@ var IndexController = {
 	docs : null,
 	init : function(window) {
 		this.setLocale();
-			this.loadWebFont();
+		//this.loadWebFont();
 		this.loadHeader();
 		this.loadFooter();
 		this.docs = $("#docsContainer__").docs({
