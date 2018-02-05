@@ -2,11 +2,7 @@ var IndexController = {
 	docs : null,
 	init : function(window) {
 		this.setLocale();
-		/*
-		if(location.hostname === "bbalganjjm.github.io") {
 			this.loadWebFont();
-		}
-		*/
 		this.loadHeader();
 		this.loadFooter();
 		this.docs = $("#docsContainer__").docs({
@@ -25,19 +21,16 @@ var IndexController = {
 	loadWebFont : function() {
 		WebFontConfig = {
 			custom: {
-				families: ['Apple SD Gothic Neo'],
+				families: ['Noto Sans KR'],
 				urls: ['http://fonts.googleapis.com/earlyaccess/notosanskr.css']
 			}
 		};
-		(function() {
-			var wf = document.createElement('script');
-			wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
-				'://ajax.googleapis.com/ajax/libs/webfont/1.4.10/webfont.js';
-			wf.type = 'text/javascript';
-			wf.async = 'true';
-			var s = document.getElementsByTagName('script')[0];
+		(function(d) {
+			var wf = d.createElement('script'), s = d.scripts[0];
+			wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js';
+			wf.async = true;
 			s.parentNode.insertBefore(wf, s);
-		})();
+		})(document);
 	},
 	/**
 	 * Google Analytics

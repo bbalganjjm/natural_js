@@ -17,7 +17,7 @@ html {
  */
 body {
 	margin: 0;
-	font-family: "Apple SD Gothic Neo", "Malgun Gothic", "dotum", "Segoe UI", sans-serif;
+	font-family: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", "dotum", "Segoe UI", sans-serif;
 	color : rgba(0, 0, 0, 0.87);;
 	min-width: 578px;
 	background-image: url("../images/body_back_new.jpg");

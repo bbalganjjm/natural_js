@@ -10,7 +10,7 @@ a {
 	text-decoration: none;
 	font-weight: normal;
 	font-size: 1em;
-	font-family: "Apple SD Gothic Neo", "Malgun Gothic", "dotum", "Segoe UI", sans-serif;
+	font-family: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", "dotum", "Segoe UI", sans-serif;
 	color : rgba(0, 0, 0, 0.87);;
 }
 
@@ -20,7 +20,7 @@ input[type='text'], input[type='number'], input[type='tel'], input[type='passwor
 	padding: 2px 3px;
 	border: 1px solid #80CBC4;
 	font-size: 13px;
-	font-family: "Apple SD Gothic Neo", "Malgun Gothic", "dotum", "Segoe UI", sans-serif;
+	font-family: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", "dotum", "Segoe UI", sans-serif;
 	color : rgba(0, 0, 0, 0.87);;
 	vertical-align: middle;
 	background-color: #ffffff;
