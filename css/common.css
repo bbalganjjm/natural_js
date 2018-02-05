@@ -18,7 +18,7 @@ html {
 body {
 	margin: 0;
 	font-family: "Apple SD Gothic Neo", "Malgun Gothic", "dotum", "Segoe UI", sans-serif;
-	color : #000;
+	color : #000000de;
 	min-width: 578px;
 	background-image: url("../images/body_back_new.jpg");
 	background-color: #009688;
@@ -148,7 +148,7 @@ article h1 {
 	font-size: 1.5em;
 	background: url("../images/icon/h1_leaf.png") no-repeat 0 10px;
 	margin: 0 0 20px 0;
-	color : #000;
+	color : #000000de;
 }
 
 article h2 {
@@ -156,7 +156,7 @@ article h2 {
 	padding: 40px 0 20px 20px;
 	background: url("../images/icon/dt_leaf.png") no-repeat 0 40px;
 	font-size: 1.2em;
-	color : #000;
+	color : #000000de;
 	margin: 0 0 0 0;
 }
 
@@ -168,7 +168,7 @@ article h3 {
 	font-size: 1.2em;
 	font-weight: bold;
 	margin: 0;
-	color : #000;
+	color : #000000de;
 	padding: 35px 0 18px 20px;
 	background: url("../images/icon/h3_leaf.gif") no-repeat 0px 35px;
 }
@@ -178,7 +178,7 @@ article h4 {
 	font-weight: bold;
 	margin: 0;
 	padding: 15px 0 10px 0;
-	color : #000;
+	color : #000000de;
 }
 
 article p {
@@ -189,7 +189,7 @@ article a.link {
 	padding-left: 18px;
 	background: url("../images/icon/link.png") no-repeat 0 50%;
 	border-bottom: 1px solid #004D40;
-	color : #000;
+	color : #000000de;
 	font-size: 1em;
 }
 
@@ -254,7 +254,7 @@ article.apiDoc fieldset {
 
 article.apiDoc fieldset legend {
 	font-size: -9em;
-	color : #000;
+	color : #000000de;
 }
 
 article.apiDoc ul.footnotes {
@@ -267,7 +267,7 @@ article.apiDoc ul.footnotes li {
 	float: left;
 	margin-right: 20px;
 	font-size: 0.9em;
-	color : #000;
+	color : #000000de;
 }
 
 article.apiDoc .b {
@@ -386,7 +386,7 @@ article .click {
 	display: inline-block;
 	height: 35px;
 	font-weight: bold;
-	color : #000;
+	color : #000000de;
 	border: 1px dotted #009688;
 	border-radius: 3px;
 	box-shadow: 1px 1px 3px #BCFBBC;
@@ -452,5 +452,5 @@ article ul.contents.links li a.link {
 	background: none;
 	padding: 0;
 	border: none;
-	color : #000;
+	color : #000000de;
 }

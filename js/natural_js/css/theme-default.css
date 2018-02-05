@@ -11,7 +11,7 @@ a {
 	font-weight: normal;
 	font-size: 1em;
 	font-family: "Apple SD Gothic Neo", "Malgun Gothic", "dotum", "Segoe UI", sans-serif;
-	color : #000;
+	color : #000000de;
 }
 
 /* input element styles */
@@ -21,7 +21,7 @@ input[type='text'], input[type='number'], input[type='tel'], input[type='passwor
 	border: 1px solid #80CBC4;
 	font-size: 13px;
 	font-family: "Apple SD Gothic Neo", "Malgun Gothic", "dotum", "Segoe UI", sans-serif;
-	color : #000;
+	color : #000000de;
 	vertical-align: middle;
 	background-color: #ffffff;
 	line-height: 18px;
@@ -99,7 +99,7 @@ input[type='radio'], input[type='checkbox'] {
 	transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 	box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.075);
 	width: 98%;
-	color : #000;
+	color : #000000de;
 }
 
 .grid input[type='text'], .grid input[type='number'], .grid input[type='tel'], .grid input[type='password'], .grid select, .grid textarea {
