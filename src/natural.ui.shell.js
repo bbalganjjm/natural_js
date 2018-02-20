@@ -1,5 +1,5 @@
 /*!
- * Natural-UI.Shell v0.9.26, Works fine in IE9 and above
+ * Natural-UI.Shell v0.9.29, Works fine in IE9 and above
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-	N.version["Natural-UI.Shell"] = "0.9.26";
+	N.version["Natural-UI.Shell"] = "0.9.29";
 
 	$.fn.extend($.extend(N.prototype, {
 		notify : function(opts) {
@@ -53,7 +53,7 @@
 					}
 				}
 			} catch (e) {
-				N.error("[N.notify]" + e, e);
+				N.error("N.notify", e);
 			}
 
 			if(!N.isEmptyObject(opts)) {
@@ -186,7 +186,7 @@
 			try {
 				$.extend(true, this.options, N.context.attr("ui.shell").docs);
 			} catch (e) {
-				N.error("[N.docs]" + e, e);
+				N.error("N.docs", e);
 			}
 			$.extend(this.options, opts);
 
@@ -724,7 +724,9 @@
 				} else {
 					if(opts.tabScroll) {
 						var activatedTab = opts.context.find("> .docs_tab_context__ > .docs_tabs__ > .docs_tab__.active__");
-						Documents.clearScrollPosition.call(this, activatedTab);
+						if(activatedTab.length > 0) {
+							Documents.clearScrollPosition.call(this, activatedTab);
+						}
 					}
 				}
 			}
@@ -838,6 +840,11 @@
 				var opts = this.options;
 				var self = this;
 
+				if(opts.docs[docId] === undefined) {
+					N.warn("[N.docs]\"" + docId + "\" is invalid document id(docId)");
+					return this;
+				}
+				
 				if(opts.multi) {
 					if(opts.docs[docId].stateless) {
 						self.removeState(function() {
@@ -935,7 +942,8 @@
 				var opts = this.options;
 
 				if(opts.docs[docId] === undefined) {
-					return false;
+					N.warn("[N.docs]\"" + docId + "\" is invalid document id(docId)");
+					return this;
 				}
 
 				var self = this;
@@ -978,6 +986,12 @@
 			},
 			"reload" : function(docId, callback) {
 				var cont = this.cont(docId);
+				
+				if(!cont) {
+					N.warn("[N.docs]\"" + docId + "\" is invalid document id(docId)");
+					return this;
+				}
+				
 				var comm = cont.request.options.target.comm(cont.request.options.url);
 				comm.request = cont.request;
 
@@ -986,6 +1000,8 @@
 				this.request.attrObj = {};
 
 				comm.submit(callback);
+				
+				return this;
 			}
 		});
 
