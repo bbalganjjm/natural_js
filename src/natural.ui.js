@@ -1809,7 +1809,7 @@
 				} catch(e) {
 					callers = undefined;
 					if(this.options.url !== null) {
-						N.warn("[" + e.toString().replace("Error: ", "") + "]opener could not be found automatically. Specify the Controller (N.cont) object directly in the opener option of N.popup.");
+						N.warn("[" + e.toString().replace("Error: ", "") + "]opener could not be found automatically. Specify the Controller(N.cont) object directly in the opener option of N.popup.");
 					}
 				}
 				callers = undefined;				
