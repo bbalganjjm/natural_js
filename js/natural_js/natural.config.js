@@ -255,7 +255,7 @@
 						
 						/* 디버깅 지원을 위한 컨트롤러의 sourceURL 자동 삽입 처리 */
 						var opts = request.options;
-						if((opts.target && N.isElement(opts.target)) || opts.dataType === "html") {
+						if((opts.target && N.isElement(opts.target)) || opts.dataType === "html" || opts.contentType === "text/css") {
 							var cutIndex = data.lastIndexOf("\n</script>");
 							if(cutIndex < 0) {
 								cutIndex = data.lastIndexOf("\t</script>");
@@ -263,6 +263,16 @@
 							if(cutIndex < 0) {
 								cutIndex = data.lastIndexOf(" </script>");
 							}
+							
+							// color theme
+							$(IndexController.colorPalette.teal).each(function(i, color) {
+								data = data.replace(new RegExp(color, "gi"), IndexController.colorPalette[window.localStorage.colorTheme][i]);
+
+								if(opts.contentType === "text/css") {
+									data = data.replace(/url\(/gi, "*url(");
+								}
+							});								
+							
 							return data = [data.slice(0, cutIndex), '\n//# sourceURL=' + opts.url + "\n", data.slice(cutIndex)].join("");
 						}
 					},
@@ -877,5 +887,5 @@
 			}
 		}
 	});
-
+	
 })(N);
