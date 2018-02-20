@@ -1,5 +1,5 @@
 /*!
- * Natural-ARCHITECTURE v0.13.8
+ * Natural-ARCHITECTURE v0.13.9
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-	N.version["Natural-ARCHITECTURE"] = "0.13.8";
+	N.version["Natural-ARCHITECTURE"] = "0.13.9";
 
 	$.fn.extend($.extend(N.prototype, {
 		ajax : function(opts) {
@@ -248,7 +248,7 @@
 										errorHandler.call(obj, e, obj.request, xhr, textStatus, callback);
 									});
 								}
-								throw N.error("[N.comm.submit.success.callback(url:" + obj.request.options.url + ")]" + e, e);
+								throw N.error("N.comm.submit.success.callback(url:" + obj.request.options.url + ")", e);
 							}
 						}
 					},
@@ -268,7 +268,7 @@
 									errorHandler.call(obj, e, obj.request, xhr, textStatus);
 								});
 							}
-							throw N.error("[N.comm.submit.error(url:" + obj.request.options.url + ")]" + e, e);
+							throw N.error("N.comm.submit.error(url:" + obj.request.options.url + ")", e);
 						}
 					},
 					complete : function(xhr, textStatus) {
