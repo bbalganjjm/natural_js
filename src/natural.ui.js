@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.30.75
+ * Natural-UI v0.30.77
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "v0.30.75";
+	N.version["Natural-UI"] = "v0.30.77";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -440,7 +440,7 @@
 					this.options.container = N(this.options.container);
 				}
 			} catch (e) {
-				throw N.error("[N.alert]" + e, e);
+				throw N.error("N.alert", e);
 			}
 
 			if(N(this.options.container).length === 0) {
@@ -998,7 +998,7 @@
 			try {
 				$.extend(this.options, N.context.attr("ui").button);
 			} catch (e) {
-				throw N.error("[N.button]" + e, e);
+				throw N.error("N.button", e);
 			}
 			$.extend(this.options, N.element.toOpts(this.options.context));
 			if(opts !== undefined) {
@@ -1165,7 +1165,7 @@
 			try {
 				$.extend(this.options, N.context.attr("ui").datepicker);
 			} catch (e) {
-				throw N.error("[N.datepicker]" + e, e);
+				throw N.error("N.datepicker", e);
 			}
 
 			if(opts !== undefined) {
@@ -1763,7 +1763,7 @@
 			try {
 				$.extend(true, this.options, N.context.attr("ui").popup);
 			} catch (e) {
-				throw N.error("[N.popup]" + e, e);
+				throw N.error("N.popup", e);
 			}
 
 			if(opts !== undefined) {
@@ -2018,7 +2018,7 @@
 			try {
 				$.extend(true, this.options, N.context.attr("ui").tab);
 			} catch (e) {
-				throw N.error("[N.tab]" + e, e);
+				throw N.error("N.tab", e);
 			}
 
 			if (N.isPlainObject(obj)) {
@@ -2484,7 +2484,7 @@
 			try {
 				$.extend(this.options, N.context.attr("ui").select);
 			} catch (e) {
-				throw N.error("[N.select]" + e, e);
+				throw N.error("N.select", e);
 			}
 			$.extend(this.options, N.element.toOpts(this.options.context));
 
@@ -2689,7 +2689,7 @@
 			try {
 				$.extend(this.options, N.context.attr("ui").form);
 			} catch (e) {
-				throw N.error("[N.form]" + e, e);
+				throw N.error("N.form", e);
 			}
 
 			if (N.isPlainObject(opts)) {
@@ -3555,7 +3555,7 @@
 			try {
 				$.extend(true, this.options, N.context.attr("ui").list);
 			} catch (e) {
-				throw N.error("[N.list]" + e, e);
+				throw N.error("N.list", e);
 			}
 
 			if (N.isPlainObject(opts)) {
@@ -3846,7 +3846,7 @@
 				var opts = this.options;
 
 				if(!opts.isBinding) {
-					if(opts.data && callType === "append") {
+					if(opts.data && data && callType === "append") {
 						opts.scrollPaging.size = 0;
 						// Merge data to binded data;
 						opts.scrollPaging.idx = opts.data.length - 1;
@@ -3854,7 +3854,7 @@
 					} else {
 						opts.scrollPaging.size = opts.scrollPaging.defSize;
 						// rebind new data
-						if(data != null) {
+						if(data) {
 							opts.data = N.type(data) === "array" ? N(data) : data;
 						}
 					}
@@ -4190,7 +4190,7 @@
 			try {
 				$.extend(true, this.options, N.context.attr("ui").grid);
 			} catch (e) {
-				throw N.error("[N.grid]" + e, e);
+				throw N.error("N.grid", e);
 			}
 
 			if (N.isPlainObject(opts)) {
@@ -5610,7 +5610,7 @@
 					this.thead.find(".sortable__").remove();
 				}
 				if(!opts.isBinding) {
-					if(opts.data && callType === "append") {
+					if(opts.data && data && callType === "append") {
 						opts.scrollPaging.size = 0;
 						// Merge data to binded data;
 						opts.scrollPaging.idx = opts.data.length - 1;
@@ -6050,7 +6050,7 @@
 			try {
 				$.extend(this.options, N.context.attr("ui").pagination);
 			} catch (e) {
-				throw N.error("[N.pagination]" + e, e);
+				throw N.error("N.pagination", e);
 			}
 
 			if(this.options.data.length > 0) {
@@ -6363,7 +6363,7 @@
 			try {
 				$.extend(this.options, N.context.attr("ui").tree);
 			} catch (e) {
-				throw N.error("[N.tree]" + e, e);
+				throw N.error("N.tree", e);
 			}
 
 			if (N.isPlainObject(opts)) {
