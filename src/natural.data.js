@@ -1,5 +1,5 @@
 /*!
- * Natural-DATA v0.10.51
+ * Natural-DATA v0.10.52
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-		N.version["Natural-DATA"] = "0.10.51";
+		N.version["Natural-DATA"] = "0.10.52";
 
 	$.fn.extend($.extend(N.prototype, {
 		datafilter : function(callBack) {
@@ -641,9 +641,9 @@
 								tempValue = Formatter[N.string.trimToEmpty(this[0]).toLowerCase()](tempValue, N(this).remove_(0).toArray(), ele);
 							} catch (e) {
 								if (e.toString().indexOf("is not a function") > -1) {
-									throw N.error("[N.formatter.prototype.format]\"" + this[0] + "\" is invalid format rule", e);
+									throw N.error("N.formatter.prototype.format(\"" + this[0] + "\" is invalid format rule)", e);
 								} else {
-									throw N.error("[N.formatter.prototype.format]" + e, e);
+									throw N.error("N.formatter.prototype.format", e);
 								}
 							}
 						});
@@ -1163,9 +1163,9 @@
 								}
 							} catch (e) {
 								if (e.toString().indexOf("is not a function") > -1) {
-									throw N.error("[N.validator.prototype.validate]\"" + this[0] + "\" is invalid format rule");
+									throw N.error("N.validator.prototype.validate(\"" + this[0] + "\" is invalid format rule)");
 								} else {
-									throw N.error("[N.validator.prototype.validate]" + e, e);
+									throw N.error("N.validator.prototype.validate", e);
 								}
 							}
 							retTempObj.msg = null;
