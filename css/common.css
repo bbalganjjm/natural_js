@@ -186,10 +186,7 @@ article p {
 }
 
 article a.link {
-	padding-left: 18px;
-	background: url("../images/icon/link.png") no-repeat 0 50%;
-	border-bottom: 1px solid #004D40;
-	color : rgba(0, 0, 0, 0.87);;
+	color: rgba(0, 136, 0, 0.87);
 	font-size: 1em;
 }
 
