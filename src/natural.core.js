@@ -1,5 +1,5 @@
 /*!
- * Natural-CORE v0.17.14
+ * Natural-CORE v0.17.15
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -300,7 +300,7 @@
 		// N local variables
 		$.extend(N, {
 			version : {
-				"Natural-CORE" : "0.17.14"
+				"Natural-CORE" : "0.17.15"
 			},
 			/**
 			 * Set and get locale value
@@ -379,14 +379,14 @@
 			 */
 			error : function(msg, e) {
 				if(N.type(e) !== "error") {
-					e = new Error();
+					e = new Error(msg);
 					
 					if(Error.captureStackTrace !== undefined) {
 						Error.captureStackTrace(e, N.error);					
 					}
+				} else {
+					e.message = (msg != null ? "[" + msg + "]" : "") + e.message;					
 				}
-				
-				e.message = msg;
 				return e;
 			},
 			/**
