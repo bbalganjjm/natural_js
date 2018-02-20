@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.30.77
+ * Natural-UI v0.30.78
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "v0.30.77";
+	N.version["Natural-UI"] = "v0.30.78";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -1799,17 +1799,17 @@
 					    // Infinite loop prevention processing
 					    if(caller == $.event.dispatch) {
 					    	callers = undefined;
-					    	throw N.error("[N.popup]Opener not found");
+					    	throw N.error("[N.popup]opener not found");
 					    }
 					    if(callers.indexOf(caller) > -1) {
 					    	callers = undefined;
-					    	throw N.error("[N.popup]Opener not found");
+					    	throw N.error("[N.popup]opener not found");
 					    }
 					}
 				} catch(e) {
 					callers = undefined;
 					if(this.options.url !== null) {
-						N.warn("[N.popup][" + e.toString().replace("Error: ", "") + "]opener(parent's N.cont object) auto setup failed. please define the opener option value of N.popup.");
+						N.warn("[" + e.toString().replace("Error: ", "") + "]opener could not be found automatically. Specify the Controller (N.cont) object directly in the opener option of N.popup.");
 					}
 				}
 				callers = undefined;				
