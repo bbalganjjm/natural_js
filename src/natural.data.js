@@ -1,5 +1,5 @@
 /*!
- * Natural-DATA v0.10.52
+ * Natural-DATA v0.10.53
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-		N.version["Natural-DATA"] = "0.10.52";
+		N.version["Natural-DATA"] = "0.10.53";
 
 	$.fn.extend($.extend(N.prototype, {
 		datafilter : function(callBack) {
@@ -137,9 +137,11 @@
 			"remove" : function() {
 				var inst = this.inst;
 				var obserable = this.obserable;
-				for (var i = 0; i < obserable.length; i++) {
-					if (obserable[i] == inst) {
-						obserable.splice(i, 1);
+				if (inst && obserable) {
+					for (var i = 0; i < obserable.length; i++) {
+						if (obserable[i] == inst) {
+							obserable.splice(i, 1);
+						}
 					}
 				}
 				return this;
@@ -147,7 +149,7 @@
 			"notify" : function(row, key) {
 				var inst = this.inst;
 				var obserable = this.obserable;
-				if (inst !== null) {
+				if (inst && obserable) {
 					for (var i = 0; i < obserable.length; i++) {
 						if (inst !== obserable[i] && inst.options.data === obserable[i].options.data) {
 							if(obserable[i] instanceof N.form) {
