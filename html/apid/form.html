@@ -446,7 +446,7 @@
 	            var key = N.string.trimToNull(N("#key", view).val());
 	            var value = N.string.trimToNull(N("#val", view).val());
 	        	if(value !== null) {
-	        		form.val(key, eval(value));
+	        		form.val(key, value);
 	        	} else {
 	        		N("div.result", view).alert(JSON.stringify(form.val(key))).show();
 	        	}
