@@ -141,11 +141,11 @@
 
 @keyframes navFixOff {
 	from { opacity: 0.9; }
-	to { opacity: 0.2; }
+	to { opacity: 0.6; }
 }
 
 @keyframes navFixOn {
-	from { opacity: 0.2; }
+	from { opacity: 0.6; }
 	to { opacity: 0.9; }
 }
 
@@ -154,7 +154,7 @@
 	width: 100%;
 	left: 0;
 	top: 0;
-	opacity: 0.2;
+	opacity: 0.6;
 	animation-name: navFixOff;
 	animation-duration: 1s;
 }
@@ -284,7 +284,7 @@
 		init : function(view, request) {
 			CommonUtilController.setPageLinks("nav > ul > li > ul a, nav > ul > li.home > a");
 
-			var headerHeight = view.outerHeight();
+			var headerHeight = view.outerHeight() -  N("nav", view).height();
 			var scrollTop;
 			N(window).scroll(function(e) {
 				scrollTop = N(this).scrollTop();
