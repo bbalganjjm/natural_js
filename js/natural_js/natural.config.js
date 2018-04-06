@@ -195,8 +195,9 @@
 			    	}
 
 			    	var navHeight = N(".header nav").outerHeight();
+			    	var marginTop = 179 + $("header").height();
 					N(window).unbind("scroll.aop").bind("scroll.aop", function(e) {
-						if(N(this).scrollTop() > 303 - navHeight) {
+						if(N(this).scrollTop() > marginTop - navHeight) {
 							contents.css({
 								"position" : "fixed",
 								"top" : navHeight
@@ -204,10 +205,10 @@
 						} else {
 							contents.css({
 								"position" : "absolute",
-								"top" : 303
+								"top" : marginTop
 							});
 						}
-					});
+					}).trigger("scroll.aop");
 				}
 			}]
 		},

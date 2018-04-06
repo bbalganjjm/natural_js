@@ -5,7 +5,7 @@ var IndexController = {
 		if(!window.localStorage.colorTheme) {
 			window.localStorage.colorTheme = "teal";
 		}
-		this.reloadCss();
+		//this.reloadCss();
 		//this.loadWebFont();
 		this.loadHeader();
 		this.loadFooter();

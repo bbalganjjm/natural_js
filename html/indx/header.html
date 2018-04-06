@@ -1,39 +1,54 @@
 <style>
 .header {
 	min-width: 560px;
-	margin-bottom: 41px;
+	padding-bottom: 41px;
+	background: url("images/header_beck.jpg") 0px -90px no-repeat;
+	position: relative;
 }
 
+.header .header_logo {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -60%);
+	display: inline-block;
+}
+
+.header #i18nButtons {
+	position: absolute;
+	top: 7px;
+	right: 10px; 
+	color : #80CBC4;
+}
+
+.header #i18nButtons a {
+	font-size: 0.8em;
+	color : #B2DFDB;
+	text-shadow: 0px 0px 1px #000000;
+}
+
+.header .links {
+	position: absolute;
+	top : 7px;
+	left: 10px; 
+}
+
+.header .links > ul {
+	padding: 0;
+	margin: 0 0 0 37px;
+}
+
+.header .links a {
+	font-size: 0.8em;
+	color : #B2DFDB;
+	text-shadow: 0px 0px 1px #000000;
+}
+	
 .header .hgroup-back {
 	width: 100%;
-	height: 82px;
-	background: linear-gradient(141deg, #004D40 10%, #E0F2F1 30%, #004D40 50%);
+	height: 300px;
 	background-color: #004D40;
-	opacity: 0.90;
-}
-
-.header .hgroup {
-	margin: 0 auto;
-	max-width: 1003px;
-	min-width: 560px;
-	padding: 0 9px 0px 9px;
-}
-
-.header .hgroup h1, .header .hgroup h2 {
-	font-size: 1em;
-	display: inline;
-}
-
-.header .hgroup #logo {
-	margin: 6px 0 0 3px;
-}
-
-.header .hgroup #desc {
-    font-size: 1.15em;
-    padding: 0;
-    color : #fff;
-    margin: 53px 3px 0 0;
-    float: right;
+	opacity: 0.50;
 }
 
 .header nav {
@@ -149,32 +164,31 @@
 	animation-name: navFixOn;
 	animation-duration: 0.5s;
 }
-
-.header #i18nButtons {
-	float: right;
-	font-size: 0.8em;
-	color : #fff;
-	text-shadow: 0px 0px 1px #000000;
-	margin-top: 3px;
-	margin-right: -310px;
-}
-
-.header #i18nButtons a {
-	color : #fff;
-	text-shadow: 1px 1px 0px #000000;
-}
 </style>
 <div class="header">
-	<div class="hgroup-back">
-		<div class="hgroup">
-			<h1>
-				<a href="./index.html"><img id="logo" src="images/natural_js.png" height="70" /></a>
-			</h1>
-			<h2 id="desc">Javascript UI Architecture Framework</h2>
-			<div id="i18nButtons">
-				<a id="korean" href="#" class="link">한국어</a> | <a id="english" href="#" class="link">English</a>
-			</div>
-		</div>
+	<div class="hgroup-back"></div>
+	<div class="header_logo">
+		<a href="./index.html"><img id="logo" src="images/natural_js.png" height="150" /></a>
+	</div>
+	<div id="i18nButtons">
+		<a id="korean" href="#" class="link">한국어</a> | <a id="english" href="#" class="link">English</a>
+	</div>
+	<div class="links">
+		<a href="https://www.facebook.com/groups/1927201360891679/" target="blank" style="margin-right: 15px;"><img src="images/icon/facebook.png"> Natraul-JS Community</a>
+		<ul>
+			<li>
+				<a lang="ko_KR" href="files/Natural-JS.pdf" target="blank">Natraul-JS 소개(PDF)</a>
+				<a lang="en_US" href="files/Natural-JS.pdf" target="blank">Introduction to Natraul-JS(PDF, Korean)</a>
+			</li>
+			<li>
+				<a lang="ko_KR" href="https://github.com/bbalganjjm/natural_js" target="blank">소스 다운로드(GitHub)</a>
+				<a lang="en_US" href="https://github.com/bbalganjjm/natural_js" target="blank">Source Download(GitHub)</a>
+			</li>
+			<li>
+				<a lang="ko_KR" href="#gtst/gtst0100" target="blank">시작하기</a>
+				<a lang="en_US" href="#gtst/gtst0100" target="blank">Get Started</a>
+			</li>
+		</ul>
 	</div>
 	<nav>
 		<ul>

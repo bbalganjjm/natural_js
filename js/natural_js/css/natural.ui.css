@@ -1379,6 +1379,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 .docs__>.docs_contents__ {
 	margin: 15px 0;
+	background-color: #fff;
 }
 
 .docs__>.docs_contents__.hidden__  {
