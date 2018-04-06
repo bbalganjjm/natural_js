@@ -1276,6 +1276,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .docs__>.docs_tab_context__>ul.docs_tab_utils__ {
 	position: absolute;
 	right: 0;
+	background-color: #fff;
 	padding: 0 2px 0 0;
 }
 
