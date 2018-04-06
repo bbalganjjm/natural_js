@@ -7,10 +7,6 @@
 	color : #fff; text-shadow: 1px 1px 3px #000; font-size: 0.875em; margin-left: 10px;
 }
 
-.footer #colorTheme {
-	float: right; margin: 0 10px 0 0;
-}
-
 .footer #google_translate_element {
 	float: right; margin: 0 10px 0 0;
 }
@@ -18,7 +14,6 @@
 
 <div class="footer">
 	<div id="copy" style="display: inline-block;">© 2014 KIM HWANG MAN ( bbalganjjm@gmail.com )</div>
-	<select id="colorTheme"></select>
 	<div id="google_translate_element"></div>
 </div>
 
@@ -31,20 +26,4 @@ if(location.hostname === "bbalganjjm.github.io") {
 		}
 	}
 }
-
-var colorSelect = $("#colorTheme");
-for(var k in IndexController.colorPalette) {
-	var selected="";
-	if(k === window.localStorage.colorTheme) {
-		selected = 'selected="selected"';
-	} else {
-		selected = "";
-	}
-	colorSelect.append('<option value="' + k + '" ' + selected + '>' + k + '</option>')
-};
-
-colorSelect.change(function() {
-	window.localStorage.colorTheme = $(this).val();
-	location.reload();
-});
 </script>
