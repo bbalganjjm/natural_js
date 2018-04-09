@@ -11,13 +11,13 @@
 .alert__.block_overlay_msg__ {
 	background: #fff;
 	border: 2px solid #26A69A;
-	box-shadow: 4px 4px 8px rgba(0, 0, 0, .20);
+	box-shadow: 4px 4px 8px #00897B;
 	border-radius: 5px;
 }
 
 .alert__.block_overlay_msg__ .msg_title_box__ {
 	background-color: #26A69A;
-	box-shadow: 0px 3px 3px rgba(0, 0, 0, .14);
+	box-shadow: 0px 3px 3px #00897B;
 	margin: -2px -4px -2px -4px;
 	border-top: none;
 	border-radius: 4px;
@@ -102,8 +102,8 @@
 	padding: 5px;
 	border-radius: 0 10px 0 10px;
 	border: 1px solid #E0F2F1;
-	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
-	text-shadow: 1px 1px 1px rgba(212, 224, 212, 0.57);
+	box-shadow: 1px 1px 5px #00897B;
+	text-shadow: 1px 1px 1px #00897B;
 	margin-right: 5px;
 }
 
@@ -523,7 +523,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	max-width: 300px;
 	position: absolute;
 	background-color: #E0F2F1;
-	box-shadow: 0px 4px 12px #999;
+	box-shadow: 0px 4px 12px #00897B;
 	border-radius: 5px 0 5px 5px;
 	padding: 4px;
 	margin: 0;
@@ -683,7 +683,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .grid__ .grid_more_thead_col__ .grid_more_panel__ {
 	border: 1px solid #80CBC4;
 	background-color: #E0F2F1;
-	box-shadow: 0px 4px 12px #999;
+	box-shadow: 0px 4px 12px #00897B;
 	border-radius: 5px 0 5px 5px;
 	padding: 5px;
 	text-align: left;
@@ -855,7 +855,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 /* DatePicker */
 .datepicker_contents__ {
 	border: 1px solid #009688;
-	box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+	box-shadow: 0 3px 12px #00897B;
 	border-radius: 3px;
 	background-color: #26A69A;
 	padding: 3px;
@@ -1143,7 +1143,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	margin-bottom: 5px;
 	border-radius: 5px;
 	border: 1px solid #B2DFDB;
-	box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.23);
+	box-shadow: 1px 1px 4px #00897B;
 	transform: scale(0);
 	opacity: 0;
 	background-color: #E0F2F1;
@@ -1324,7 +1324,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	border: 1px solid #80CBC4;
 	max-width: 300px;
 	background-color: #E0F2F1;
-	box-shadow: 0px 4px 12px #999;
+	box-shadow: 0px 4px 12px #00897B;
 	border-radius: 5px 0 5px 5px;
 	padding: 4px;
 	margin: 2px 0 0 0;
