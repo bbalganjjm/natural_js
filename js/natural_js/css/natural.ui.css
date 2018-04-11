@@ -927,6 +927,8 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	background-color: #80CBC4;
 	color: #ffffff;
 	border-radius: 50%;
+	    transform: scale(0.9);
+    font-size: 13px;
 }
 
 .datepicker_contents__ .datepicker_month_item__ {
@@ -956,19 +958,24 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .datepicker_contents__ .datepicker_month_selected__ {
 	background-color: #80CBC4;
 	color: #ffffff;
-	border-radius: 50%;
+	border-radius: 50%;    transform: scale(0.9);
+    font-size: 13px;
 }
 
 .datepicker_contents__ .datepicker_day_selected__ {
 	background-color: #80CBC4;
 	color: #ffffff;
 	border-radius: 50%;
+	    transform: scale(0.9);
+    font-size: 13px;
 }
 
 .datepicker_contents__ .datepicker_year_item__:hover, .datepicker_contents__ .datepicker_month_item__:hover, .datepicker_contents__ .datepicker_day_item__:hover {
 	background-color: #B2DFDB;
 	border-radius: 50%;
 	transition: background-color 0.3s ease-out;
+    transform: scale(0.9);
+    font-size: 13px;
 }
 
 /* Tree */
