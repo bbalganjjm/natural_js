@@ -858,7 +858,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	box-shadow: 0 3px 12px #00897B;
 	border-radius: 3px;
 	background-color: #FFFFFF;
-	padding: 1px;
+	padding: 3px;
 	font-size: 12px;
 	z-index: 1;
 }
@@ -873,7 +873,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .datepicker_contents__ > .datepicker_months_panel__ {
 	width: 60px;
 	float: left;
-	margin-left: 1px;
+	margin-left: 3px;
 	border-radius: 3px;
 	background-color: #E0F2F1;
 }
@@ -881,7 +881,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .datepicker_contents__ > .datepicker_days_panel__ {
 	width: 210px;
 	float: left;
-	margin-left: 1px;
+	margin-left: 3px;
 	border-radius: 3px;
 }
 
@@ -923,11 +923,9 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .datepicker_contents__ .datepicker_year_selected__ {
-	background-color: #4DB6AC;
+	background-color: #80CBC4;
 	color: #ffffff;
 	border-radius: 50%;
-	font-size: 13px;
-	transform: scale(0.9);
 }
 
 .datepicker_contents__ .datepicker_month_item__ {
@@ -936,11 +934,10 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .datepicker_contents__ .datepicker_year_title__, .datepicker_contents__ .datepicker_month_title__, .datepicker_contents__ .datepicker_day__ {
-	border: 1px solid #ffffff;
+	border: 1px solid #4DB6AC;
 	background-color: #4DB6AC;
 	color: #fff;
 	font-weight: bold;
-	border-radius: 3px 3px 0 0;
 }
 
 .datepicker_contents__ .datepicker_prev_day_item__, .datepicker_contents__ .datepicker_next_day_item__ {
@@ -956,24 +953,21 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .datepicker_contents__ .datepicker_month_selected__ {
-	background-color: #4DB6AC;
+	background-color: #80CBC4;
 	color: #ffffff;
 	border-radius: 50%;
-	font-size: 13px;
-	transform: scale(0.9);
 }
 
 .datepicker_contents__ .datepicker_day_selected__ {
-	background-color: #4DB6AC;
+	background-color: #80CBC4;
 	color: #ffffff;
 	border-radius: 50%;
-	font-size: 13px;
-	transform: scale(0.9);
 }
 
 .datepicker_contents__ .datepicker_year_item__:hover, .datepicker_contents__ .datepicker_month_item__:hover, .datepicker_contents__ .datepicker_day_item__:hover {
-	background-color: #4DB6AC;
-	color: #ffffff;
+	background-color: #B2DFDB;
+	border-radius: 50%;
+	transition: background-color 0.3s ease-out;
 }
 
 /* Tree */
