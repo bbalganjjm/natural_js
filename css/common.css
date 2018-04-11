@@ -81,6 +81,7 @@ table th, table td {
 	word-break: break-word;
 	font-size: 12px;
 	height: 35px;
+    box-sizing: border-box;
 }
 table th, table > tfoot td {
 	background-color: #B2DFDB;
