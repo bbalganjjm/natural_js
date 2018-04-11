@@ -427,7 +427,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .grid__ > tbody.row_data_changed__ {
-	background-color: #B2DFDB;
+	background-color: #E0F2F1CC;
 }
 
 .grid__ > tbody.row_data_changed__>tr:first-child>td:first-child {

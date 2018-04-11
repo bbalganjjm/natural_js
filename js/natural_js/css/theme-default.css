@@ -11,33 +11,34 @@ a {
 	font-weight: normal;
 	font-size: 1em;
 	font-family: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", "dotum", "Segoe UI", sans-serif;
-	color : rgba(0, 0, 0, 0.87);;
+	color : rgba(0, 0, 0, 0.87);
 }
 
 /* input element styles */
 input[type='text'], input[type='number'], input[type='tel'], input[type='password'], select, textarea {
 	border-radius: 3px;
-	padding: 2px 3px;
+	padding: 4px;
 	border: 1px solid #80CBC4;
 	font-size: 13px;
 	font-family: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", "dotum", "Segoe UI", sans-serif;
-	color : rgba(0, 0, 0, 0.87);;
+	color : rgba(0, 0, 0, 0.87);
 	vertical-align: middle;
-	background-color: #ffffff;
-	line-height: 18px;
+	background-color: #fff;
+	line-height: 100%;
 	border-color: #B2DFDB;
+	box-sizing: border-box;
 }
 input[type='text']:hover, input[type='number']:hover, input[type='tel']:hover, select:hover, textarea:hover, input[type='text']:focus, input[type='number']:focus, input[type='tel']:focus, select:focus, textarea:focus {
-	border-color: #B2DFDB;
-	box-shadow: inset 1px 1px 1px #00897B;
-	background-color: #E0F2F1;
+	background-color: #E0F2F1CC !important;
+	box-shadow: inset 0 0 1px #4DB6AC;
 	transition: border-color ease-in-out 0.20s, background-color ease-in-out 0.15s, box-shadow ease-in-out 0.20s;
 }
 input[disabled], input[disabled]:hover, input[disabled]:focus {
-	background-color: #B2DFDB;
+	background-color: #B2DFDB !important;
+	color: #00897B !important;
 }
 input[readonly], input[readonly]:hover, input[readonly]:focus {
-	background-color: #efffff;
+	background-color: #B2DFDB !important;
 }
 input[type='radio'], input[type='checkbox'] {
 	margin: 0 3px 0 10px;
@@ -50,16 +51,16 @@ input[type='radio'], input[type='checkbox'] {
 	margin: 0 0 15px 0;
 	border-collapse: collapse;
 	table-layout: fixed;
-	border-top: 2px solid #80CBC4;
+	border-top: 2px solid #26A69A;
 }
 .grid__:last-child {
 	margin: 0;
 }
 .grid__ th, .grid__ td {
 	border: 1px solid #80CBC4;
-	padding: 5px 3px;
+	padding: 4px;
 	word-break: break-word;
-	font-size: 12px;
+	box-sizing: border-box;
 }
 .grid__ th, .grid__ > tfoot td {
 	background-color: #B2DFDB;
@@ -74,34 +75,11 @@ input[type='radio'], input[type='checkbox'] {
 }
 /* fixed column in thead */
 .grid__ > thead > tr > th.grid_head_fixed__ {
-	border-top: 2px solid #009688;
+	border-top: 2px solid #26A69A;
 }
 .grid__ input[type='text'], .grid__ input[type='tel'], .grid__ input[type='number'], .grid__ input[type='password'], .grid__ select, .grid__ textarea {
-	padding-left: 0;
-	padding-right: 0;
-	border-color: #fff;
-	box-shadow: none;
-}
-
-.grid__ input[type='text'], .grid__ input[type='tel'], .grid__ input[type='number'], .grid__ input[type='password'] {
-	height: 14px;
-    line-height: 14px;
-    padding: 4px 2px;
-}
-
-.grid__ input[type='text'], .grid__ input[type='tel'], .grid__ input[type='number'], .grid__ input[type='password'], .grid__ textarea {
-	width: 98%;
-}
-
-.grid__ input[type='text']:hover, .grid__ input[type='tel']:hover, .grid__ input[type='number']:hover, .grid__ input[type='password']:hover, .grid__ select:hover, .grid__ textarea:hover, .grid__ input[type='text']:focus, .grid__ input[type='password']:focus, .grid__ select:focus, .grid__ textarea:focus {
-	border-color: #B2DFDB;
-	background-color: #E0F2F1;
-	transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
-	box-shadow: inset 1px 1px 1px #00897B;
-	width: 98%;
-	color : rgba(0, 0, 0, 0.87);;
-}
-
-.grid input[type='text'], .grid input[type='number'], .grid input[type='tel'], .grid input[type='password'], .grid select, .grid textarea {
-	width: 95%;
+	height: 100%;
+	width: 100%;
+    border: none;
+    background-color: transparent;
 }

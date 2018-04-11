@@ -77,9 +77,10 @@ table:last-child {
 }
 table th, table td {
 	border: 1px solid #80CBC4;
-	padding: 5px 3px;
+	padding: 3px 5px;
 	word-break: break-word;
 	font-size: 12px;
+	height: 35px;
 }
 table th, table > tfoot td {
 	background-color: #B2DFDB;
@@ -327,7 +328,6 @@ article .smallContTit {
 
 article .searchBox {
 	border: 1px solid #80CBC4;
-	box-shadow: inset 1px 1px 3px #B2DFDB;
 	background-color: #E0F2F1;
 	border-radius: 3px;
 	margin-bottom: 15px;
