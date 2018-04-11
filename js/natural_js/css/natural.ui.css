@@ -857,12 +857,32 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	border: 1px solid #009688;
 	box-shadow: 0 3px 12px #00897B;
 	border-radius: 3px;
-	background-color: #ffffff;
+	background-color: #FFFFFF;
 	padding: 1px;
 	font-size: 12px;
-	width: 316px;
-	color : rgba(0, 0, 0, 0.87);
 	z-index: 1;
+}
+
+.datepicker_contents__ > .datepicker_years_panel__ {
+	width: 40px;
+	float: left;
+	border-radius: 3px;
+	background-color: #E0F2F1;
+}
+
+.datepicker_contents__ > .datepicker_months_panel__ {
+	width: 60px;
+	float: left;
+	margin-left: 1px;
+	border-radius: 3px;
+	background-color: #E0F2F1;
+}
+
+.datepicker_contents__ > .datepicker_days_panel__ {
+	width: 210px;
+	float: left;
+	margin-left: 1px;
+	border-radius: 3px;
 }
 
 .datepicker_contents__.visible__ {
@@ -888,63 +908,67 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .datepicker_contents__ .datepicker_year_item__, .datepicker_contents__ .datepicker_year_paging__ {
-	border: 1px solid #E0F2F1;
+	border: 1px solid transparent;
 	cursor: pointer;
-	background-color: #B2DFDB;
 }
 
 .datepicker_contents__ .datepicker_year_paging__ > a {
 	text-decoration: none;
-	color : rgba(0, 0, 0, 0.87);;
+	color: #009688;
 }
 
 .datepicker_contents__ .datepicker_curr_year__ {
-	border-color: #B2DFDB;
+	color: #00BFA5;
 	background-color: #deeeee;
 }
 
 .datepicker_contents__ .datepicker_year_selected__ {
-	background-color: #26A69A;
+	background-color: #4DB6AC;
 	color: #ffffff;
 	border-radius: 50%;
+	font-size: 13px;
+	transform: scale(0.9);
 }
 
 .datepicker_contents__ .datepicker_month_item__ {
-	border: 1px solid #E0F2F1;
+	border: 1px solid transparent;
 	cursor: pointer;
-	background-color: #B2DFDB;
 }
 
 .datepicker_contents__ .datepicker_year_title__, .datepicker_contents__ .datepicker_month_title__, .datepicker_contents__ .datepicker_day__ {
-	border: 1px solid #F7F6F6;
-	background-color: #26A69A;
-	color: #ffffff;
+	border: 1px solid #ffffff;
+	background-color: #4DB6AC;
+	color: #fff;
 	font-weight: bold;
+	border-radius: 3px 3px 0 0;
 }
 
 .datepicker_contents__ .datepicker_prev_day_item__, .datepicker_contents__ .datepicker_next_day_item__ {
-	border: 1px solid #F7F6F6;
+	border: 1px solid #fff;
 	cursor: pointer;
-	background-color: #E0F2F1;
 	color: #00BFA5;
 }
 
 .datepicker_contents__ .datepicker_day_item__ {
-	border: 1px solid #E0F2F1;
+	border: 1px solid transparent;
 	cursor: pointer;
 	background-color: #ffffff;
 }
 
 .datepicker_contents__ .datepicker_month_selected__ {
-	background-color: #26A69A;
+	background-color: #4DB6AC;
 	color: #ffffff;
 	border-radius: 50%;
+	font-size: 13px;
+	transform: scale(0.9);
 }
 
 .datepicker_contents__ .datepicker_day_selected__ {
-	background-color: #26A69A;
+	background-color: #4DB6AC;
 	color: #ffffff;
 	border-radius: 50%;
+	font-size: 13px;
+	transform: scale(0.9);
 }
 
 .datepicker_contents__ .datepicker_year_item__:hover, .datepicker_contents__ .datepicker_month_item__:hover, .datepicker_contents__ .datepicker_day_item__:hover {
