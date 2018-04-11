@@ -857,11 +857,11 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	border: 1px solid #009688;
 	box-shadow: 0 3px 12px #00897B;
 	border-radius: 3px;
-	background-color: #26A69A;
-	padding: 3px;
+	background-color: #ffffff;
+	padding: 1px;
 	font-size: 12px;
 	width: 316px;
-	color : rgba(0, 0, 0, 0.87);;
+	color : rgba(0, 0, 0, 0.87);
 	z-index: 1;
 }
 
@@ -890,7 +890,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .datepicker_contents__ .datepicker_year_item__, .datepicker_contents__ .datepicker_year_paging__ {
 	border: 1px solid #E0F2F1;
 	cursor: pointer;
-	background-color: #80CBC4;
+	background-color: #B2DFDB;
 }
 
 .datepicker_contents__ .datepicker_year_paging__ > a {
@@ -906,12 +906,13 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .datepicker_contents__ .datepicker_year_selected__ {
 	background-color: #26A69A;
 	color: #ffffff;
+	border-radius: 50%;
 }
 
 .datepicker_contents__ .datepicker_month_item__ {
 	border: 1px solid #E0F2F1;
 	cursor: pointer;
-	background-color: #80CBC4;
+	background-color: #B2DFDB;
 }
 
 .datepicker_contents__ .datepicker_year_title__, .datepicker_contents__ .datepicker_month_title__, .datepicker_contents__ .datepicker_day__ {
@@ -924,8 +925,8 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .datepicker_contents__ .datepicker_prev_day_item__, .datepicker_contents__ .datepicker_next_day_item__ {
 	border: 1px solid #F7F6F6;
 	cursor: pointer;
-	background-color: #B2DFDB;
-	color : rgba(0, 0, 0, 0.87);;
+	background-color: #E0F2F1;
+	color: #00BFA5;
 }
 
 .datepicker_contents__ .datepicker_day_item__ {
@@ -937,11 +938,13 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .datepicker_contents__ .datepicker_month_selected__ {
 	background-color: #26A69A;
 	color: #ffffff;
+	border-radius: 50%;
 }
 
 .datepicker_contents__ .datepicker_day_selected__ {
 	background-color: #26A69A;
 	color: #ffffff;
+	border-radius: 50%;
 }
 
 .datepicker_contents__ .datepicker_year_item__:hover, .datepicker_contents__ .datepicker_month_item__:hover, .datepicker_contents__ .datepicker_day_item__:hover {
