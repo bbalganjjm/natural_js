@@ -946,7 +946,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .datepicker_contents__ .datepicker_prev_day_item__, .datepicker_contents__ .datepicker_next_day_item__ {
 	border: 1px solid #fff;
 	cursor: pointer;
-	color: #00BFA5;
+	color: #00000088;
 }
 
 .datepicker_contents__ .datepicker_day_item__ {
