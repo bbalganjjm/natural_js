@@ -590,6 +590,8 @@
     				if(location.hostname === "bbalganjjm.github.io") {
     					try {
     						ga('create', 'UA-58001949-2', 'auto');
+    						ga('set', 'location', location.href);
+    						ga('set', 'title', tabEle.find("a").text());
     						ga('send', {
     							'hitType': 'pageview',
     							'page': "#" + hash
@@ -837,6 +839,8 @@
 				if(location.hostname === "bbalganjjm.github.io") {
 					try {
 						ga('create', 'UA-58001949-2', 'auto');
+						ga('set', 'location', location.href);
+						ga('set', 'title', this.doc(docId).docNm);
 						ga('send', {
 							'hitType': 'pageview',
 							'page': "#" + hash
