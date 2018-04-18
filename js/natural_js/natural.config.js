@@ -594,7 +594,7 @@
     						ga('set', 'title', tabEle.find("a").text());
     						ga('send', {
     							'hitType': 'pageview',
-    							'page': "#" + hash
+    							'page': hash
     						});
     					} catch (e) {}
     				}
