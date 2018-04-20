@@ -108,7 +108,7 @@ body > #docsContainer__.multi__ {
 }
 
 body > #docsContainer__ article {
-	margin: 0 15px 0 15px;
+	margin: 15px;
 	word-break: break-word;
 	line-height: 180%;
 }
