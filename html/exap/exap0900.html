@@ -196,9 +196,9 @@ N(".exap0900").cont({
 
 		// 버튼 제어
 		N(".buttons a[id^=btnBindData]", view).click(function() {
-			N("#" + this.id.replace("Bind", "Save")).instance("button").enable();
-			if(!N(".buttons a[id^=btnSaveData]").hasClass("btn_disabled__")) {
-				N("#btnSaveAll").instance("button").enable();
+			N("#" + this.id.replace("Bind", "Save"), view).instance("button").enable();
+			if(!N(".buttons a[id^=btnSaveData]", view).hasClass("btn_disabled__")) {
+				N("#btnSaveAll", view).instance("button").enable();
 			}
 		});
 
