@@ -224,7 +224,7 @@
 			* 여기에서 지정한 pageFilter, dataFilter 는 상수값이 아니므로 자유롭게 지정하면 됨.
 			*/
 			"filters" : {
-				"pageFilter" : {
+				"basicFilter" : {
 					/**
 					 * N.comm 이 초기화 되기 전 실행됨(N.cont 의 init 아님). string 으로 변환되지 않은 원형의 파라미터를 꺼내올 수 있음.
 					 */
@@ -244,6 +244,27 @@
 					 * 서버에 요청을 보내기 전 실행됨.
 					 */
 					beforeSend : function(request, xhr, settings) {
+						// github pages 는 GET 요청 만 보낼 수 있어서 서버로 데이터를 전송하는 예제는 여기서 파라미터 정보만 보여주고 요청을 중단 함.
+						if(request.options.type !== "GET" || (request.options.data != null && request.options.data.indexOf("q=%7B%22name%22") > -1)) {
+							var msg;
+							if(request.options.type !== "GET") {
+								msg = request.options.data;
+								xhr.abort();
+							} else {
+								msg = JSON.parse(decodeURIComponent(request.options.data.replace("q=", "")));
+							}
+							
+							N(window).alert({
+								title : "이 예제는 서버와 연동 되지 않음 / 서버로 전송 되는 파라미터 확인",
+								msg : "<pre style='white-space: pre-wrap;'>" + N.json.format(msg) + "</pre>",
+								onOk : function() {
+									N(".entire_load_indicator__").hide();
+								},
+								width : 480,
+								onCancel : this.onOk
+							}).show();
+						}	
+						
 						if(request.options.dataType === "html" && request.options.target !== null && request.options.append === false) {
 							request.options.target.html('<table style="margin: 0;padding: 0;width: 100%;height: 100%;"><tr><td style="text-align: center;vertical-align: middle;border: 0;"><img src="images/loading.gif" height="24"></td></tr></table>');
 						}

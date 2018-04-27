@@ -1,0 +1,129 @@
+<article class="exap0702 view-code" >
+	<table id="detail" class="form" style="width: 100%;">
+		<tr>
+			<th rowspan="5" style="width: 15%; text-align: right;">picture</th>
+			<td rowspan="5" style="width: 35%; text-align: center; vertical-align: middle;"><img id="picture" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D" height="170"></td>
+			<th style="width: 15%;"><label for="name">Name</label></th>
+			<td style="width: 35%;"><input id="name" type="text" data-validate='[["required"]]'></td>
+		</tr>
+		<tr>
+			<th><label for="email">Email</label></th>
+			<td><input id="email" type="text" data-validate='[["required"], ["email"]]'></td>
+		</tr>
+		<tr>
+			<th><label for="key">Password</label></th>
+			<td><input id="key" type="text" data-format='[["generic", "@@＊＊＊＊＊＊"]]' data-validate='[["required"]]'></td>
+		</tr>
+		<tr>
+			<th><label for="balance">Balance</label></th>
+			<td><input id="balance" type="text" data-format='[["numeric", "$#,###.##0"]]' data-validate='[["required"], ["number"]]'></td>
+		</tr>
+		<tr>
+			<th><label for="phone">Phone</label></th>
+			<td><input id="phone" type="text" data-validate='[["required"]]'></td>
+		</tr>
+		<tr>
+			<th><label for="age">Age</label></th>
+			<td><input id="age" type="text" data-validate='[["required"], ["integer"]]'></td>
+			<th><label for="eyeColor">Eye color</label></th>
+			<td>
+				<select id="eyeColor" data-validate='[["required"]]'>
+					<option></option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<th rowspan="3"><label for="company">Company</label></th>
+			<td rowspan="3"><select id="company" multiple="multiple" data-validate='[["required"]]' style="height: 117px;"></select></td>
+			<th><label for="gender">Gender</label></th>
+			<td><input id="gender" type="radio"></td>
+		</tr>
+		<tr>
+			<th><label for="favoriteFruit">Favorite fruit</label></th>
+			<td><input id="favoriteFruit" type="checkbox"></td>
+		</tr>
+		<tr>
+			<th><label for="registered">Registered</label></th>
+			<td><input id="registered" type="text" data-format='[["date", 8, "date"]]' data-validate='[["required"]]'></td>
+		</tr>
+		<tr>
+			<th><label for="about">About</label></th>
+			<td colspan="3"><textarea id="about" style="width: 100%;" rows="3" data-format='[["limit", "100", "..."]]' data-validate='[["required"]]'></textarea></td>
+		</tr>
+		<tr>
+			<th><label for="greeting">Greeting</label></th>
+			<td colspan="3"><textarea id="greeting" style="width: 100%;" rows="2"></textarea></td>
+		</tr>
+		<tr>
+			<th><label for="isActive">Active</label></th>
+			<td colspan="3"><input id="isActive" type="checkbox"></td>
+		</tr>
+	</table>
+	<div class="buttons" style="text-align: center;">
+		<a id="btnConfirm" href="#" data-opts='{ "color" : "gray" }'>확인</a>
+		<a id="btnCancel" href="#">취소</a>
+	</div>
+</article>
+
+<script type="text/javascript">
+N(".exap0702").cont({
+    init : function(view, request) {
+    	this.caller = this.request.attr("caller");
+    	
+    	this.setCodes(this, [ "gender", "eyeColor", "company", "favoriteFruit" ], function() {
+    		// The N.select component must be initialized before data-related components such as N.grid or N.form are initialized.
+    		this.setComponents(this);
+        	this.setEvents(this);
+    	});
+    },
+    setCodes : function(cont, codeParams, afterCodeInitFn) {
+    	// 1. initialize N.select and bind the code data.
+    	N({ codes : codeParams }).comm("data/code.json").submit(function(data, request) {
+    		N(codeParams).each(function(i, code) {
+    			N(data).datafilter("code === '" + code + "'").select(N("#detail #" + code, cont.view)).bind();
+    		});
+    		
+    		afterCodeInitFn.call(cont);
+     	});
+    },
+    setComponents : function(cont) {
+    	// 2. initialize buttons
+    	N(".buttons a", cont.view).button();
+    	
+    	// 3. initialize N.form
+    	cont.form = cont.request.attr("selData").data.form({
+    		context : N("#detail", cont.view),
+    		addTop : true,
+    		revert : true
+    	});
+    	if(cont.request.attr("mode") === "create") {
+    		// 3-1. Create mode - add data
+    		cont.form.add();
+		} else {
+			// 3-1. Edit mode - bind data
+			cont.form.bind(cont.request.attr("selData").row, cont.request.attr("selData").data);
+		}
+    },
+    setEvents : function(cont) {
+    	// 4. bind events
+    	// 4-1 Confirm button
+    	N("#btnConfirm", cont.view).click(function(e) {
+            e.preventDefault();
+            if(cont.form.validate()) {
+            	cont.caller.close()
+            }
+        });
+    	// 4-2 Cancel button - Revert data & close this popup
+    	N("#btnCancel", cont.view).click(function(e) {
+    		e.preventDefault();
+    		if(cont.request.attr("mode") === "create") {
+				// remove created row
+    			cont.form.remove();
+    		} else {
+		    	cont.form.revert();
+    		}
+    		cont.caller.close()
+    	});
+    }
+});
+</script>
