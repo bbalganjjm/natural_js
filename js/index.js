@@ -2,7 +2,7 @@ var IndexController = {
 	docs : null,
 	init : function(window) {
 		this.setLocale();
-		if(!window.localStorage.themeColor) {
+		if(!window.localStorage.themeColor || window.localStorage.themeColor === "undefined") {
 			window.localStorage.themeColor = "teal";
 		}
 		this.reloadCss();
