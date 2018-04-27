@@ -373,6 +373,10 @@ article .searchBox label input[type='text'], article .searchBox label input[type
 	width: 85px;
 }
 
+article .form input[type='text'], article .form input[type='number'], article .form input[type='tel'] {
+	width: 100%;
+}
+
 article .click {
 	margin-top: 30px;
 	padding: 5px 40px 5px 15px;
