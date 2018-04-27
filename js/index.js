@@ -2,8 +2,8 @@ var IndexController = {
 	docs : null,
 	init : function(window) {
 		this.setLocale();
-		if(!window.localStorage.colorTheme) {
-			window.localStorage.colorTheme = "teal";
+		if(!window.localStorage.themeColor) {
+			window.localStorage.themeColor = "teal";
 		}
 		this.reloadCss();
 		//this.loadWebFont();
@@ -45,7 +45,7 @@ var IndexController = {
 	 * CSS 를 다시 불러오면 filter 에서 컬러값을 치환 함.
 	 */
 	reloadCss : function() {
-		if(this.colorTheme !== "teal") {
+		if(this.themeColor !== "teal") {
 			$("head > link[rel=stylesheet]").each(function() {
 				N.comm({
 					url : $(this).attr("href"),

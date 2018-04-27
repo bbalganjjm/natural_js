@@ -295,7 +295,7 @@
 							
 							// color theme
 							$(IndexController.colorPalette.teal).each(function(i, color) {
-								data = data.replace(new RegExp(color, "gi"), IndexController.colorPalette[window.localStorage.colorTheme][i]);
+								data = data.replace(new RegExp(color, "gi"), IndexController.colorPalette[window.localStorage.themeColor][i]);
 
 								if(opts.contentType === "text/css") {
 									data = data.replace(/url\(/gi, "*url(");
