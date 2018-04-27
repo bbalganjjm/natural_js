@@ -255,7 +255,14 @@
 							}
 							
 							N(window).alert({
-								title : "이 예제는 서버와 연동 되지 않음 / 서버로 전송 되는 파라미터 확인",
+								title : N.message.get({
+									"ko_KR" : {
+										"COMM_TITLE" : "이 예제는 DB 서버와 연동 되지 않음 / 서버로 전송 되는 파라미터 확인"
+									},
+									"en_US" : {
+										"COMM_TITLE" : "This example does not work with the DB server / Check parameters sent to the server"
+									}
+								}, "COMM_TITLE"),
 								msg : "<pre style='white-space: pre-wrap;'>" + N.json.format(msg) + "</pre>",
 								onOk : function() {
 									N(".entire_load_indicator__").hide();
