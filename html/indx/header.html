@@ -44,14 +44,14 @@
 	text-shadow: 0px 0px 1px #000000;
 }
 
-.header #colorTheme {
+.header #themeColor {
 	height: 25px;
     background-color: #0000;
     color : #80CBC4;
     padding: 0;
 }
 
-.header #colorTheme:hover {
+.header #themeColor:hover {
 	color : #000000de;
 }
 	
@@ -200,8 +200,9 @@
 				<a lang="en_US" href="#gtst/gtst0100" target="blank">Get Started</a>
 			</li>
 			<li>
-				<span>컬러</span> 
-				<select id="colorTheme"></select>
+				<span lang="ko_KR">테마 컬러 </span>
+				<span lang="en_US">Theme color</span> 
+				<select id="themeColor"></select>
 			</li>
 		</ul>
 	</div>
@@ -318,10 +319,10 @@
 				$(".menu_exap__", view).css("margin-top", "-3px");
 			}
 			
-			var colorSelect = $("#colorTheme", view);
+			var colorSelect = $("#themeColor", view);
 			for(var k in IndexController.colorPalette) {
 				var selected="";
-				if(k === window.localStorage.colorTheme) {
+				if(k === window.localStorage.themeColor) {
 					selected = 'selected="selected"';
 				} else {
 					selected = "";
@@ -330,7 +331,7 @@
 			};
 
 			colorSelect.change(function() {
-				window.localStorage.colorTheme = $(this).val();
+				window.localStorage.themeColor = $(this).val();
 				location.reload();
 			});
 		}
