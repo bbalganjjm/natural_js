@@ -212,8 +212,11 @@
 				<div class="alert">
 					<p>selFlag 인자 값에 따라 다음과 같은 타입의 데이터를 반환 합니다.</p>
 					<ul>
-						<li>입력하지 않았거나 undefined : array[json object] 타입의 데이터를 반환 합니다.</li>
-						<li>false : jquery object 타입의 데이터를 반환 합니다.</li>
+						<li>입력하지 않았거나 undefined : array[json object] 타입의 가공 된 데이터를 반환 합니다.</li>
+						<li>
+							<p>false : 바인드 되어 있는 원형(jquery object 타입)의 데이터를 반환 합니다.</p>
+							<p class="alert">다른 데이터 관련 컴포넌트와 양방향 데이터 바인딩을 가능하게 하려면 반드시 false 인자값을 넣어 줘야 합니다.</p>
+						</li>
 					</ul>
 				</div>
 			</td>

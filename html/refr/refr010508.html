@@ -452,7 +452,7 @@
 				<p>그리드의 행이 선택 될 때 마다 발생되는 이벤트 입니다. 지정한 이벤트 핸들러의 인자로 선택한 행의 row index, 행 요소, 로우 데이터, 바로전에 선택한 row index를 반환 합니다.</p>
 				<pre><code class="language-javascript">onSelect : function(rowIdx, rowEle, rowData, beforeRowIdx, e) {
 	// this : N.grid 인스턴스
-	// rowIdx : 선택된 행의 index 
+	// rowIdx : 선택된 행의 index
 	// rowEle : 선택된 행의 row element(tbody)
 	// rowData : 선택된 행의 row data
 	// beforeRowIdx : 이전 선택된 행의 index
@@ -605,8 +605,8 @@
 			<td>null</td>
 			<td></td>
 			<td>
-				컬럼 고정 시 그리드 위에 있는 요소가 동적으로 높이가 조절 될 때 그리드 모양이 깨지면 
-				동적으로 높이가 조절 되는 요소와 그리드 요소를 모두 포함하고 있는 요소를 fixedcolRootContainer 옵션에 jQuery selector 문자열로 지정하면 그리드 모양이 깨지지 않습니다. 
+				컬럼 고정 시 그리드 위에 있는 요소가 동적으로 높이가 조절 될 때 그리드 모양이 깨지면
+				동적으로 높이가 조절 되는 요소와 그리드 요소를 모두 포함하고 있는 요소를 fixedcolRootContainer 옵션에 jQuery selector 문자열로 지정하면 그리드 모양이 깨지지 않습니다.
 			</td>
 		</tr>
 	</table>
@@ -690,8 +690,11 @@
 				<div class="alert">
 					<p>rowStatus 인자 값에 따라 다음과 같은 타입의 데이터를 반환 합니다.</p>
 					<ul>
-						<li>입력하지 않았거나 undefined : array[json object] 타입의 데이터를 반환 합니다.</li>
-						<li>false : jquery object 타입의 데이터를 반환 합니다.</li>
+						<li>입력하지 않았거나 undefined : array[json object] 타입의 가공 된 데이터를 반환 합니다.</li>
+						<li>
+							<p>false : 바인드 되어 있는 원형(jquery object 타입)의 데이터를 반환 합니다.</p>
+							<p class="alert">다른 데이터 관련 컴포넌트와 양방향 데이터 바인딩을 가능하게 하려면 반드시 false 인자값을 넣어 줘야 합니다.</p>
+						</li>
 						<li>"modified" : array[json object] 타입의 추가, 수정, 삭제된 데이터를 반환 합니다.</li>
 						<li>"selected" : select 옵션이나 multiselect 옵션 지정 시 array[json object] 타입의 체크된 데이터를 반환 합니다.</li>
 						<li>"checked" : checkAll 옵션과 checkAllTarget 옵션을 지정 했거나  checkOnlyTarget 옵션 지정 시 array[json object] 타입의 체크된 데이터를 반환 합니다.</li>
@@ -879,7 +882,9 @@ init : function() {
 		form.bind(0, data);
 
 		// grid 에 form 의 데이터를 바인드
-		grid.bind(form.data());
+		// grid 와 form 의 데이터가 양방향 바인딩이 되기 위해서는 form.data() 함수 호출 시
+		// false 인자를 지정 하여 데이터 원형이 반환 되도록 해야 합니다.
+		grid.bind(form.data(false));
 	});
 
 	// form.data() === grid.data() //-> true
