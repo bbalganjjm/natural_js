@@ -78,16 +78,9 @@
 				].join(","),
 				"adviceType" : "before",
 				"fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 함수명, args 인자 */
-
 					/* markdown 파일 로딩 후  html 로 변환 */
-					var fileName = N.string.trimToEmpty(location.hash).replace("#", "").split("/");
-					fileName = fileName[0] + "/" + fileName[1];
-					docId = fileName.substring(fileName.indexOf("/") + 1);
-					docNm = $(".header > nav > ul a[href='" + "html/" + fileName + ".html']").text();
-					url = "md/" + fileName + ".md";
-
 					N.comm({
-						url : url,
+						url : args[1].options.url.replace(/html/g, "md"),
 						dataType : "text",
 						type : "GET"
 					}).submit(function(data) {
