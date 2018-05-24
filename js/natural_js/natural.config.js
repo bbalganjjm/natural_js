@@ -80,7 +80,7 @@
 				"fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 함수명, args 인자 */
 					/* markdown 파일 로딩 후  html 로 변환 */
 					N.comm({
-						url : args[1].options.url.replace(/html/g, "md"),
+						url : args[1].options.url.replace(/html/g, "md").replace(/\.md/g, "_" + N.locale() + ".md"),
 						dataType : "text",
 						type : "GET"
 					}).submit(function(data) {
