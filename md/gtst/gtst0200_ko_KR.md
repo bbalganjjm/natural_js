@@ -20,7 +20,7 @@
  * Back : Spring Boot, MyBatis
  * DB : HSQLDB
 
-ㅍㅡㄹㅗㅈㅔㄱㅌㅡ 설치
+Project 설치
 ---
 
 ### 이클립스 설치
