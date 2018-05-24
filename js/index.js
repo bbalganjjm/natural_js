@@ -54,7 +54,7 @@ var IndexController = {
 				}).submit(function(data) {
 					$('<style type="text/css">\n' + data + '</style>').appendTo("head");
 				});
-			});			
+			});
 		}
 	},
 	/**

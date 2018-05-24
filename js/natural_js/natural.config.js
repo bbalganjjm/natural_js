@@ -72,7 +72,29 @@
 		 *   - 아래는 AOP 관련 된 예제코드 이므로 사용하지 않는다면 cont 하위의 모든 구문을 삭제하고 사용 바랍니다.
 		 */
 		"cont" : {
-			"advisors" : [{
+			"advisors" : [{ // md 파일 변환
+				"pointcut" : [
+					".gtst0200:init$"
+				].join(","),
+				"adviceType" : "before",
+				"fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 함수명, args 인자 */
+
+					/* markdown 파일 로딩 후  html 로 변환 */
+					var fileName = N.string.trimToEmpty(location.hash).replace("#", "").split("/");
+					fileName = fileName[0] + "/" + fileName[1];
+					docId = fileName.substring(fileName.indexOf("/") + 1);
+					docNm = $(".header > nav > ul a[href='" + "html/" + fileName + ".html']").text();
+					url = "md/" + fileName + ".md";
+
+					N.comm({
+						url : url,
+						dataType : "text",
+						type : "GET"
+					}).submit(function(data) {
+						args[0].html((new showdown.Converter()).makeHtml(data));
+					});
+				}
+			}, {
 				"pointcut" : [
 					".refr010201",
 					".refr010202",
@@ -253,7 +275,7 @@
 							} else {
 								msg = JSON.parse(decodeURIComponent(request.options.data.replace("q=", "")));
 							}
-							
+
 							N(window).alert({
 								title : N.message.get({
 									"ko_KR" : {
@@ -270,8 +292,8 @@
 								width : 480,
 								onCancel : this.onOk
 							}).show();
-						}	
-						
+						}
+
 						if(request.options.dataType === "html" && request.options.target !== null && request.options.append === false) {
 							request.options.target.html('<table style="margin: 0;padding: 0;width: 100%;height: 100%;"><tr><td style="text-align: center;vertical-align: middle;border: 0;"><img src="images/loading.gif" height="24"></td></tr></table>');
 						}
@@ -281,9 +303,9 @@
 					 */
 					success : function(request, data, textStatus, xhr) {
 						// return data 를 하면 N.comm.submit 의 콜백의 인자로 넘어오는 data 가 리턴한 데이터로 치환 됨.
-						
-						/* 디버깅 지원을 위한 컨트롤러의 sourceURL 자동 삽입 처리 */
 						var opts = request.options;
+
+						/* 디버깅 지원을 위한 컨트롤러의 sourceURL 자동 삽입 처리 */
 						if((opts.target && N.isElement(opts.target)) || opts.dataType === "html" || opts.contentType === "text/css") {
 							var cutIndex = data.lastIndexOf("\n</script>");
 							if(cutIndex < 0) {
@@ -292,7 +314,7 @@
 							if(cutIndex < 0) {
 								cutIndex = data.lastIndexOf(" </script>");
 							}
-							
+
 							// color theme
 							$(IndexController.colorPalette.teal).each(function(i, color) {
 								data = data.replace(new RegExp(color, "gi"), IndexController.colorPalette[window.localStorage.themeColor][i]);
@@ -300,8 +322,8 @@
 								if(opts.contentType === "text/css") {
 									data = data.replace(/url\(/gi, "*url(");
 								}
-							});								
-							
+							});
+
 							return data = [data.slice(0, cutIndex), '\n//# sourceURL=' + opts.url + "\n", data.slice(cutIndex)].join("");
 						}
 					},
@@ -920,5 +942,5 @@
 			}
 		}
 	});
-	
+
 })(N);
