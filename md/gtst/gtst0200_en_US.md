@@ -30,10 +30,13 @@ Getting Started with Sample project(Under construction)
 
 ### 1. 이클립스 설치
 [이클립스 사이트][eclipse] 에서 Eclipse IDE for Java EE Developers 를 다운로드 받아 이클립스를 실행 합니다.
-실행 후 편한 작업을 위해 Help > `Eclipse Marketplace` 메뉴를 클릭 하고 Find 입력 요소에  `sts` 로 검색 하면
-다음 그림과 같이 `Spring Tools` 플러그인이 조회 됩니다. `install` 버튼을 클릭하여 설치 합니다.
-
 > 이클립스를 구동하기 위해서는 [Java SE Development Kit][jdk] 이 설치 되어 있어야 합니다.
+
+다운로드 받은 이클립스 압축 파일을 압축 해제하고 eclipse.exe 파일을 실행 합니다.
+Spring Boot 환경 지원을 위해 `Spring Tools` 플러그인을 설치 합니다.
+
+Help > `Eclipse Marketplace` 메뉴를 클릭 하고 Find 입력 요소에  `sts` 로 검색 하면
+다음 그림과 같이 `Spring Tools` 플러그인이 조회 됩니다. `install` 버튼을 클릭하여 설치 합니다.
 
 ![Spring Tools 설치][img-0]
 
