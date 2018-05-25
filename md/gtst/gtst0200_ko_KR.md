@@ -2,6 +2,7 @@
 ===
 
 [eclipse]: https://www.eclipse.org/downloads/eclipse-packages/
+[jdk]: http://www.oracle.com/technetwork/java/javase/downloads/index.html
 
 [img-0]: ./images/gtst/gtst0200/0.png
 [img-1]: ./images/gtst/gtst0200/1.png
@@ -17,11 +18,10 @@
 ## 샘플 프로젝트 구성
 
 샘플 프로젝트의 기술 요소들은 다음과 같이 구성 되어 있습니다.
-
-> * **Front-End**
+* **Front-End**
      * 기반기술 : HTML, CSS, Javascript
      * 프레임워크 : Natural-JS
-> * **Back-End**
+* **Back-End**
      * 기반기술 : JAVA
      * 프레임워크 : Spring Boot
      * DB : HSQLDB
@@ -32,6 +32,8 @@
 [이클립스 사이트][eclipse] 에서 Eclipse IDE for Java EE Developers 를 다운로드 받아 이클립스를 실행 합니다.
 실행 후 편한 작업을 위해 Help > `Eclipse Marketplace` 메뉴를 클릭 하고 Find 입력 요소에  `sts` 로 검색 하면
 다음 그림과 같이 `Spring Tools` 플러그인이 조회 됩니다. `install` 버튼을 클릭하여 설치 합니다.
+
+> 이클립스를 구동하기 위해서는 [Java SE Development Kit][jdk] 이 설치 되어 있어야 합니다.
 
 ![Spring Tools 설치][img-0]
 
