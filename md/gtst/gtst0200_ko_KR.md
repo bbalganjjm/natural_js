@@ -25,7 +25,8 @@
 
 ## 이클립스 설치
 먼저 [이클립스 사이트][releases] 에서 Eclipse IDE for Java EE Developers 를 다운로드 받아 이클립스를 실행 합니다.
-실행 후 편한 작업을 위해 Help > Eclipse Marketplace 메뉴를 클릭 하여 Find 입력에 `Spring Tools`를 입력하여 검색 후 플러그인을 설치 합니다.
+실행 후 편한 작업을 위해 Help > Eclipse Marketplace 메뉴를 클릭 하여 Find 입력 요소에  `Spring Tools` 으로 검색 하여 플러그인을 설치 합니다.
+ * MyBatipse, Properties Editor 도 설치 하면 개발이 편리 합니다.
 
 
 ## Github 에서 natural-js-spring-boot 프로젝트 내려받기
