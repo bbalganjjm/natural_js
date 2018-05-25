@@ -80,11 +80,11 @@
 				"fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 함수명, args 인자 */
 					/* markdown 파일 로딩 후  html 로 변환 */
 					N.comm({
-						url : args[1].options.url.replace(/html/g, "md").replace(/\.md/g, "_" + N.locale() + ".md"),
+						url : cont.request.options.url.replace(/html/g, "md").replace(/\.md/g, "_" + N.locale() + ".md"),
 						dataType : "text",
 						type : "GET"
 					}).submit(function(data) {
-						args[0].addClass("markdown-body").html((new showdown.Converter()).makeHtml(data));
+						cont.view.addClass("markdown-body").html((new showdown.Converter()).makeHtml(data));
 					});
 				}
 			}, {
@@ -117,16 +117,15 @@
 				].join(","),
 				"adviceType" : "before",
 				"fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 함수명, args 인자 */
-					var view = args[0];
 					// code highlight
 			    	if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {
-						view.find("code").each(function() {
+						cont.view.find("code").each(function() {
 							Prism.highlightElement(this);
 				    	});
 			    	}
 
 			    	//load api demo page
-			    	N(".apidemo", view).each(function() {
+			    	N(".apidemo", cont.view).each(function() {
 			    		N(this).comm("html/apid/" + N(this).data("page") + ".html").submit();
 			    	});
 				}
@@ -137,16 +136,14 @@
 				].join(","),
 				"adviceType" : "before",
 				"fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 함수명, args 인자 */
-					var view = args[0];
-
 					// code highlight
 			    	if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {
-						view.find("code").each(function() {
+						cont.view.find("code").each(function() {
 							Prism.highlightElement(this);
 				    	});
 			    	}
 
-			    	CommonUtilController.setPageLinks(N("a.link", view));
+			    	CommonUtilController.setPageLinks(N("a.link", cont.view));
 				}
 			}, {
 				"pointcut" : [
@@ -158,17 +155,13 @@
 				].join(","),
 				"adviceType" : "before",
 				"fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 함수명, args 인자 */
-					var view = args[0];
-
-			    	CommonUtilController.setPageLinks(N("a.link", view));
+			    	CommonUtilController.setPageLinks(N("a.link", cont.view));
 				}
 			}, {
 				"pointcut" : "^init$",
 				"adviceType" : "before",
 				"fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 함수명, args 인자 */
-					var view = args[0];
-
-					CommonUtilController.setPageLinks(N("a.link", view));
+					CommonUtilController.setPageLinks(N("a.link", cont.view));
 
 			    	if(cont.view.hasClass("view-code")) {
 			    		CommonUtilController.sourceCode(cont.view, cont.request.get("url"));
@@ -177,6 +170,7 @@
 			}, {
 				"pointcut" : [
 					".intr0100",
+					".gtst0200",
 					"[class*=refr]:init$"
 				].join(","),
 				"adviceType" : "before",
