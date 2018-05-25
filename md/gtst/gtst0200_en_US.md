@@ -4,6 +4,7 @@ Getting Started with Sample project(Under construction)
 [eclipse]: https://www.eclipse.org
 [eclipse-download]: https://www.eclipse.org/downloads/eclipse-packages/
 [jdk]: http://www.oracle.com/technetwork/java/javase/downloads/index.html
+[Natural-JS]: http://bbalganjjm.github.io/natural_js/
 
 [img-0]: ./images/gtst/gtst0200/0.png
 [img-1]: ./images/gtst/gtst0200/1.png
@@ -100,7 +101,7 @@ http://localhost/index.html
 현재 보고 있는 Natural-JS 사이트가 정상적으로 표시 되면 설치가 완료 된 것 입니다.
 
 ## 예제
-Natural-JS 홈페이지의 예제는 서버와 연동되어 있지 않는 클라이언트 소스 예제 이지만 `natural-js-spring-boot` 프로젝트의 예제는 DB 와 연동 되어 CRUD(생성,조회,수정,삭제) 가 물리적으로 처리 되는 예제 입니다.
+현재 보고 있는 [Natural-JS 홈페이지][Natural-JS]의 예제는 서버와 연동되어 있지 않는 클라이언트 소스 예제 이지만 `natural-js-spring-boot` 프로젝트의 예제는 서버(DB) 와 연동 되어 CRUD(생성,조회,수정,삭제) 가 물리적으로 처리 되는 예제 입니다.
 
 다음은 예제 소스코드들에 대한 설명 입니다.
 
