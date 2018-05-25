@@ -18,9 +18,10 @@ article ul.contents {
 	margin: auto;
 }
 
-img.alignleft{float:left}
-img.alignright{float:right}
-img.aligncenter{display:block;margin:0 auto}
+.markdown-body img {
+	display: block;
+	margin: 0 auto;
+}
 
 .markdown-body h1, .markdown-body h2, .markdown-body h3, .markdown-body h4 {
 	background: none;
