@@ -1,7 +1,7 @@
 Getting Started with Sample project(Under construction)
 ===
 
-<ul class="contents links" style="width: 218px;margin-left: -233px;"></ul>
+<ul class="contents links" style="width: 237px;margin-left: -252px;"></ul>
 
 [eclipse]: https://www.eclipse.org
 [eclipse-download]: https://www.eclipse.org/downloads/eclipse-packages/
