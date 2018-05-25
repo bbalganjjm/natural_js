@@ -35,7 +35,7 @@ Getting Started with Sample project(Under construction)
 이클립스 실행이 완료 되면 `Spring Boot` 환경 지원을 위해 `Spring Tools` 플러그인을 다음과 같이 설치 합니다.
 
 Help > `Eclipse Marketplace` 메뉴를 클릭 하고 Find 입력 항목에  `sts` 로 검색 하면
-다음 그림과 같이 `Spring Tools` 플러그인이 조회 됩니다. `install` 버튼을 클릭하면 설치가 진행 됩니다.
+다음 그림과 같이 `Spring Tools` 플러그인이 조회 됩니다. 여기에서 `install` 버튼을 클릭하면 설치가 진행 됩니다.
 
 ![Spring Tools 설치][img-0]
 
