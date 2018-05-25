@@ -49,7 +49,7 @@ Help > `Eclipse Marketplace` 메뉴를 클릭 하고 Find 입력 항목에  `sts
 https://github.com/bbalganjjm/natural_js.git
 ```
 
-2.1. 좌측 `Package Explorer` 나 `File` 메뉴 에서 `Import` 를 선택 합니다.
+2.1. 좌측 `Package Explorer` 에서 마우스 오른 버튼을 클릭 하거나 `File` 메뉴 에서 `Import` 를 선택 합니다.
 
 ![Import 선택][img-1]
 
