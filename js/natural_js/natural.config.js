@@ -85,6 +85,7 @@
 						type : "GET"
 					}).submit(function(data) {
 						cont.view.addClass("markdown-body").html((new showdown.Converter()).makeHtml(data));
+						CommonUtilController.setIndex(cont.view);
 					});
 				}
 			}, {
@@ -170,7 +171,6 @@
 			}, {
 				"pointcut" : [
 					".intr0100",
-					".gtst0200",
 					"[class*=refr]:init$"
 				].join(","),
 				"adviceType" : "before",

@@ -1,6 +1,8 @@
 샘플 프로젝트로 시작하기(작업 중)
 ===
 
+<ul class="contents links" style="width: 218px;margin-left: -233px;"></ul>
+
 [eclipse]: https://www.eclipse.org
 [eclipse-download]: https://www.eclipse.org/downloads/eclipse-packages/
 [jdk]: http://www.oracle.com/technetwork/java/javase/downloads/index.html
@@ -43,7 +45,7 @@
 
 설치가 완료되면 이클립스를 재기동합니다.
 
-### 2. Github에서 natural-js-spring-boot 프로젝트 내려받기
+### 2. 샘플 프로젝트 내려받기
 이클립스 설치가 완료되었으면 이클립스에서 다음 순서대로 실행합니다.
 
 먼저 아래 URL을 선택 후 복사(Ctrl + C)합니다. 복사만 해 두면 됩니다.
