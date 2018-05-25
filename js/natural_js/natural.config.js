@@ -181,43 +181,7 @@
 					// Multilingual handling
 			    	CommonUtilController.i18n(undefined, cont.request.options.target);
 
-			    	var contents = cont.view.find(".contents");
-
-			    	if(contents.length > 0) {
-			    		contents.prepend('<li class="title">' + (N.locale() === "ko_KR" ? "색인" : "Index") + '</li>');
-
-			    		var isHasH2 = cont.view.find("h2").not(".notIndex").length > 0 ? true : false;
-			    		cont.view.find(isHasH2 ? "h2, h3" : "h3, h4").not(".notIndex").each(function() {
-							var selfEle = $(this);
-							var sId = location.hash.replace("#", "") + "/" + cont.view.data("pageid") + "/" + Math.random();
-							selfEle.attr("id", sId);
-							if(selfEle.is(isHasH2 ? "h3" : "h4")) {
-								if(contents.children("li:last").find("ul").length > 0) {
-									contents.children("li:last").find("ul").append('<li><a class="link" href="#' + sId + '">' + N.string.trim(selfEle.text()) + '</a></li>');
-								} else {
-									$('<ul><li><a class="link" href="#' + sId + '">' + N.string.trim(selfEle.text()) + '</a></li></ul>').appendTo(contents.find("li:last"));
-								}
-							} else {
-								contents.append('<li><a class="link" href="#' + sId + '">' + N.string.trim(selfEle.text()) + '</a></li>');
-							}
-						});
-			    	}
-
-			    	var navHeight = N(".header nav").outerHeight();
-			    	var marginTop = 179 + $("header").height();
-					N(window).unbind("scroll.aop").bind("scroll.aop", function(e) {
-						if(N(this).scrollTop() > marginTop - navHeight) {
-							contents.css({
-								"position" : "fixed",
-								"top" : navHeight
-							});
-						} else {
-							contents.css({
-								"position" : "absolute",
-								"top" : marginTop
-							});
-						}
-					}).trigger("scroll.aop");
+			    	CommonUtilController.setIndex(cont.view);
 				}
 			}]
 		},
