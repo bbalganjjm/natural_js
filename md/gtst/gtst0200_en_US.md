@@ -1,7 +1,8 @@
 Getting Started with Sample project(Under construction)
 ===
 
-[eclipse]: https://www.eclipse.org/downloads/eclipse-packages/
+[eclipse]: https://www.eclipse.org
+[eclipse-download]: https://www.eclipse.org/downloads/eclipse-packages/
 [jdk]: http://www.oracle.com/technetwork/java/javase/downloads/index.html
 
 [img-0]: ./images/gtst/gtst0200/0.png
@@ -29,8 +30,8 @@ Getting Started with Sample project(Under construction)
 ## 설치
 
 ### 1. 이클립스 설치
-[이클립스 사이트][eclipse] 에서 Eclipse IDE for Java EE Developers 를 다운로드 받아 압축을 해제하고 eclipse.exe 파일을 실행 합니다.
->이클립스를 구동하기 위해서는 [Java SE Development Kit][jdk] 이 설치 되어 있어야 합니다.
+[이클립스][eclipse] 사이트 에서 Eclipse IDE for Java EE Developers 를 [다운로드][eclipse-download] 받아 압축을 해제하고 eclipse.exe 파일을 실행 합니다.
+>이클립스를 구동하기 위해서는 [Java SE Development Kit][jdk] 이 OS 에 설치 되어 있어야 합니다.
 
 이클립스 실행이 완료 되면 `Spring Boot` 환경 지원을 위해 `Spring Tools` 플러그인을 다음과 같이 설치 합니다.
 
