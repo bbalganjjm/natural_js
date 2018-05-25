@@ -84,7 +84,7 @@
 						dataType : "text",
 						type : "GET"
 					}).submit(function(data) {
-						args[0].html((new showdown.Converter()).makeHtml(data));
+						args[0].addClass("markdown-body").html((new showdown.Converter()).makeHtml(data));
 					});
 				}
 			}, {

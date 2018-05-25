@@ -158,10 +158,6 @@ article h2 {
 	margin: 0 0 0 0;
 }
 
-article ul.contents {
-	margin: 0 0 15px 0;
-}
-
 article h3 {
 	font-size: 1.2em;
 	font-weight: bold;
@@ -177,6 +173,10 @@ article h4 {
 	margin: 0;
 	padding: 15px 0 10px 0;
 	color : rgba(0, 0, 0, 0.87);;
+}
+
+article ul.contents {
+	margin: 0 0 15px 0;
 }
 
 article p {
