@@ -44,7 +44,7 @@ Help > `Eclipse Marketplace` 메뉴를 클릭 하고 Find 입력 항목에  `sts
 ### 2. Github 에서 natural-js-spring-boot 프로젝트 내려받기
 설치가 완료 되었으면 이클립스에서 다음 순서대로 실행 합니다.
 
-먼저 아래 URL 을 선택 후 복사(Ctrl + C) 합니다.
+먼저 아래 URL 을 선택 후 복사(Ctrl + C) 합니다. 복사만 해 두면 됩니다.
 ```md
 https://github.com/bbalganjjm/natural_js.git
 ```
@@ -61,12 +61,12 @@ https://github.com/bbalganjjm/natural_js.git
 
 ![img-3][]
 
-2.4. Natural-JS 의 Source Git Repository 접속 정보를 입력 하는 화면 입니다. 처음에 복사 해둔 URL 에 의해 값들이 자동으로 입력 되어 있을 겁니다. 입력이 되어 있지 않으면
+2.4. Natural-JS 의 Source Git Repository 접속 정보를 입력 하는 화면 입니다. 처음에 복사 해 둔 URL 에 의해 값들이 자동으로 입력 되어 있을 겁니다. 입력이 되어 있지 않으면
 ```md
 https://github.com/bbalganjjm/natural_js.git
 ```
 를 타이핑 합니다.
-아래 그림에서 `User` 와 `Password` 는 Git 로그인 정보를 입력 하면 됩니다. 인증 정보를 저장 하려면 `Store in Secure Store` 를 체크하고 `Finish` 버튼을 클릭 합니다.
+입력 항목 중 `User` 와 `Password` 는 Github 로그인 정보를 입력 하면 됩니다. 인증 정보를 저장 하려면 `Store in Secure Store` 를 체크하고 `Finish` 버튼을 클릭 합니다.
 
 ![img-4][]
 
