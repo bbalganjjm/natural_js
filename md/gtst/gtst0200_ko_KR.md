@@ -1,7 +1,7 @@
 샘플 프로젝트로 시작하기(작업 중)
 ===
 
-<ul class="contents links" style="width: 237px;margin-left: -252px;"></ul>
+<ul class="contents links" style="margin-left: -267px;width: 237px;"></ul>
 
 [eclipse]: https://www.eclipse.org
 [eclipse-download]: https://www.eclipse.org/downloads/eclipse-packages/

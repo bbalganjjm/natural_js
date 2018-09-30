@@ -1,7 +1,7 @@
-Getting Started with Sample project(Under construction)
+샘플 프로젝트로 시작하기(작업 중)
 ===
 
-<ul class="contents links" style="width: 237px;margin-left: -252px;"></ul>
+<ul class="contents links" style="margin-left: -267px;width: 237px;"></ul>
 
 [eclipse]: https://www.eclipse.org
 [eclipse-download]: https://www.eclipse.org/downloads/eclipse-packages/
@@ -107,4 +107,4 @@ http://localhost/index.html
 
 다음은 예제 소스코드들에 대한 설명입니다.
 
-#Under construction...
+#작업 중...
