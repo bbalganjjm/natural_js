@@ -3,7 +3,7 @@ var IndexController = {
 	init : function(window) {
 		this.setLocale();
 		if(!window.localStorage.themeColor || window.localStorage.themeColor === "undefined") {
-			window.localStorage.themeColor = "teal";
+			window.localStorage.themeColor = "green";
 		}
 		this.reloadCss();
 		//this.loadWebFont();
@@ -45,7 +45,7 @@ var IndexController = {
 	 * CSS 를 다시 불러오면 filter 에서 컬러값을 치환 함.
 	 */
 	reloadCss : function() {
-		if(this.themeColor !== "teal") {
+		if(window.localStorage.themeColor !== "green") {
 			$("head > link[rel=stylesheet]").each(function() {
 				N.comm({
 					url : $(this).attr("href"),
@@ -146,8 +146,8 @@ var IndexController = {
 };
 
 var CommonUtilController = {
-    setPageLinks : function(eles) {
-		N(eles).bind("click", function(e) {
+    setPageLinks : function(eles, view) {
+    	view.on("click." + view.data("pageid"), eles, function(e) {
 			var href = N(this).attr("href");
 			var text = N(this).text();
 			if(N.string.trimToEmpty(href).indexOf("#") < 0

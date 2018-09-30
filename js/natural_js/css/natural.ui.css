@@ -3,21 +3,21 @@
 /* Alert */
 .alert_overlay__.block_overlay__ {
 	background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAIklEQVQIW2NkQAIf7n/4zwjjgzgCigKMYAEYB8RmROaABAAQCg/DqNBm8AAAAABJRU5ErkJggg==") repeat;
-	background-color: #00695C !important;
+	background-color: #2E7D32 !important;
 	opacity: 0.60;
 	filter: alpha(opacity = 50) \9;
 }
 
 .alert__.block_overlay_msg__ {
 	background: #fff;
-	border: 2px solid #26A69A;
-	box-shadow: 4px 4px 8px #00897B;
+	border: 2px solid #66BB6A;
+	box-shadow: 4px 4px 8px #43A047;
 	border-radius: 5px;
 }
 
 .alert__.block_overlay_msg__ .msg_title_box__ {
-	background-color: #26A69A;
-	box-shadow: 0px 3px 3px #00897B;
+	background-color: #66BB6A;
+	box-shadow: 0px 3px 3px #43A047;
 	margin: -2px -4px -2px -4px;
 	border-top: none;
 	border-radius: 4px;
@@ -98,12 +98,12 @@
 /* Alert for input elements */
 .alert_tooltip__.msg__ {
 	position: absolute;
-	background: #E0F2F1;
+	background: #E8F5E9;
 	padding: 5px;
 	border-radius: 0 10px 0 10px;
-	border: 1px solid #E0F2F1;
-	box-shadow: 1px 1px 5px #00897B;
-	text-shadow: 1px 1px 1px #00897B;
+	border: 1px solid #E8F5E9;
+	box-shadow: 1px 1px 5px #43A047;
+	text-shadow: 1px 1px 1px #43A047;
 	margin-right: 5px;
 }
 
@@ -236,7 +236,7 @@ a.btn_common__ img {
 a.btn_white__, input[type='button'].btn_white__, button.btn_white__ {
 	color: #4f535c !important;
 	background-color: #ffffff;
-	border: 1px solid #4DB6AC;
+	border: 1px solid #81C784;
 }
 
 a.btn_gray__, input[type='button'].btn_gray__, button.btn_gray__ {
@@ -260,7 +260,7 @@ a.btn_skyblue__, input[type='button'].btn_skyblue__, button.btn_skyblue__ {
 a.btn_green__, input[type='button'].btn_green__, button.btn_green__ {
 	color: #ffffff !important;
 	background-color: #008800;
-	border: 1px solid #00897B;
+	border: 1px solid #43A047;
 }
 
 a.btn_yellowgreen__, input[type='button'].btn_yellowgreen__, button.btn_yellowgreen__ {
@@ -382,7 +382,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .row_data_deleted__, .row_data_deleted__ input, .row_data_deleted__ select, .row_data_deleted__ textarea {
-	color: #E0F2F1 !important;
+	color: #E8F5E9 !important;
 }
 
 .data_changed__ {
@@ -394,7 +394,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .list__.list_hover__ > li:hover input,
 .list__.list_hover__ > li:hover select,
 .list__.list_hover__ > li:hover textarea {
-	background-color: #E0F2F1;
+	background-color: #E8F5E9;
 }
 
 .list__.list_select__ > li {
@@ -405,7 +405,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .list__.list_select__ > li.list_selected__ input,
 .list__.list_select__ > li.list_selected__ select,
 .list__.list_select__ > li.list_selected__ textarea {
-	background-color: #E0F2F1;
+	background-color: #E8F5E9;
 }
 
 .list__ li.empty__ {
@@ -427,7 +427,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .grid__ > tbody.row_data_changed__ {
-	background-color: #E0F2F1CC;
+	background-color: #E8F5E9CC;
 }
 
 .grid__ > tbody.row_data_changed__>tr:first-child>td:first-child {
@@ -443,7 +443,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .grid__.grid_hover__ > tbody:hover select,
 .grid__.grid_hover__ > tbody:hover textarea
 	{
-	background-color: #E0F2F1;
+	background-color: #E8F5E9;
 }
 
 .grid__.grid_select__ > tbody {
@@ -454,7 +454,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .grid__.grid_select__ > tbody.grid_selected__ input,
 .grid__.grid_select__ > tbody.grid_selected__ select,
 .grid__.grid_select__ > tbody.grid_selected__ textarea {
-	background-color: #E0F2F1;
+	background-color: #E8F5E9;
 }
 
 .grid__ td.empty__ {
@@ -475,7 +475,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .grid__>thead>tr>th .resize_bar__ {
-	background-color: #26A69A;
+	background-color: #66BB6A;
 	opacity: 0.6;
 	cursor: e-resize;
 	z-index: 1;
@@ -484,7 +484,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .v_resizable__ {
 	height: 3px;
 	margin-right: 18px;
-	border-bottom: 3px double #B2DFDB;
+	border-bottom: 3px double #C8E6C9;
 }
 
 .grid_wrap__ {
@@ -519,11 +519,11 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .grid__>thead .data_filter_panel__ {
-	border: 1px solid #80CBC4;
+	border: 1px solid #A5D6A7;
 	max-width: 300px;
 	position: absolute;
-	background-color: #E0F2F1;
-	box-shadow: 0px 4px 12px #00897B;
+	background-color: #E8F5E9;
+	box-shadow: 0px 4px 12px #43A047;
 	border-radius: 5px 0 5px 5px;
 	padding: 4px;
 	margin: 0;
@@ -558,7 +558,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	height: 28px;
 	padding: 3px 3px;
 	border-radius: 3px;
-	border: 1px solid #80CBC4;
+	border: 1px solid #A5D6A7;
 	font-size: 12px;
 	line-height: 100%;
 	box-sizing: border-box;
@@ -593,7 +593,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	left: 0;
 	display: none;
 	cursor: wait;
-	background-color: #E0F2F1;
+	background-color: #E8F5E9;
 }
 
 .grid__>thead .data_filter_panel__ .data_filter_list__ {
@@ -681,9 +681,9 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .grid__ .grid_more_thead_col__ .grid_more_panel__ {
-	border: 1px solid #80CBC4;
-	background-color: #E0F2F1;
-	box-shadow: 0px 4px 12px #00897B;
+	border: 1px solid #A5D6A7;
+	background-color: #E8F5E9;
+	box-shadow: 0px 4px 12px #43A047;
 	border-radius: 5px 0 5px 5px;
 	padding: 5px;
 	text-align: left;
@@ -748,7 +748,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 .grid_more_popup_contents__ .btn_box__ > .prev_btn__,
 .grid_more_popup_contents__ .btn_box__ > .next_btn__ {
-	border: 1px solid #009688;
+	border: 1px solid #4CAF50;
 	line-height: 18px;
 	padding: 2px 5px 4px 5px;
 	border-radius: 3px;
@@ -771,15 +771,15 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	float: left;
 	margin-right: 1px;
 	padding: 4px;
-	border-top: 1px solid #26A69A;
-	border-left: 1px solid #26A69A;
-	border-right: 1px solid #26A69A;
+	border-top: 1px solid #66BB6A;
+	border-left: 1px solid #66BB6A;
+	border-right: 1px solid #66BB6A;
 	cursor: pointer;
 	min-width: 80px;
 	border-radius: 3px 3px 0 0;
 	font-size: 12px;
 	text-align: center;
-	background-color: #80CBC4;
+	background-color: #A5D6A7;
 }
 
 .tab__>ul.tab_scroll__.effect__ {
@@ -789,10 +789,10 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .tab__>a.tab_scroll_prev__, .tab__>a.tab_scroll_next__ {
 	line-height: 16px;
 	padding: 8px 0 9px 0;
-	border-top: 1px solid #26A69A;
-	border-left: 1px solid #26A69A;
-	border-right: 1px solid #26A69A;
-	background-color: #B2DFDB;
+	border-top: 1px solid #66BB6A;
+	border-left: 1px solid #66BB6A;
+	border-right: 1px solid #66BB6A;
+	background-color: #C8E6C9;
 	font-size: 12px;
 	color : rgba(0, 0, 0, 0.87);;
 }
@@ -827,7 +827,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .tab__>ul>li.tab_active__ {
-	background-color: #26A69A;
+	background-color: #66BB6A;
 	background-image: none;
 }
 
@@ -838,7 +838,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 .tab__>div {
 	padding: 15px;
-	border: 1px solid #26A69A;
+	border: 1px solid #66BB6A;
 }
 
 .tab__>div.hidden__ > * {}
@@ -852,37 +852,37 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     to {opacity: 1}
 }
 
-/* DatePicker */
+/* Datepicker */
 .datepicker_contents__ {
-	border: 1px solid #009688;
-	box-shadow: 0 3px 12px #00897B;
+	border: 1px solid #A5D6A7;
+	box-shadow: 0 3px 12px #43A047;
 	border-radius: 3px;
 	background-color: #FFFFFF;
-	padding: 3px;
 	font-size: 12px;
 	z-index: 1;
-	width: 316px;
+	padding: 2px;
+	width: 314px;
 }
 
 .datepicker_contents__ > .datepicker_years_panel__ {
 	width: 40px;
 	float: left;
 	border-radius: 3px;
-	background-color: #E0F2F1;
+	background-color: #E8F5E9;
 }
 
 .datepicker_contents__ > .datepicker_months_panel__ {
 	width: 60px;
 	float: left;
-	margin-left: 3px;
+	margin-left: 2px;
 	border-radius: 3px;
-	background-color: #E0F2F1;
+	background-color: #E8F5E9;
 }
 
 .datepicker_contents__ > .datepicker_days_panel__ {
 	width: 210px;
 	float: left;
-	margin-left: 3px;
+	margin-left: 2px;
 	border-radius: 3px;
 }
 
@@ -911,71 +911,279 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .datepicker_contents__ .datepicker_year_item__, .datepicker_contents__ .datepicker_year_paging__ {
 	border: 1px solid transparent;
 	cursor: pointer;
+	line-height: 25px;
+	text-align: center;
 }
 
 .datepicker_contents__ .datepicker_year_paging__ > a {
 	text-decoration: none;
-	color: #009688;
+	color: #4CAF50;
+}
+
+.datepicker_contents__ .datepicker_year_paging__ > a > span {
+    padding: 5px;
+    line-height: 25px;
 }
 
 .datepicker_contents__ .datepicker_curr_year__ {
-	color: #00BFA5;
-	background-color: #deeeee;
 }
 
 .datepicker_contents__ .datepicker_year_selected__ {
-	background-color: #80CBC4;
-	color: #ffffff;
+	background-color: #A5D6A74A;
 	border-radius: 50%;
 	    transform: scale(0.9);
     font-size: 13px;
 }
 
 .datepicker_contents__ .datepicker_month_item__ {
+	line-height: 25px;
+	width: 28px;
+	float: left;
 	border: 1px solid transparent;
 	cursor: pointer;
+	text-align: center;
 }
 
-.datepicker_contents__ .datepicker_year_title__, .datepicker_contents__ .datepicker_month_title__, .datepicker_contents__ .datepicker_day__ {
-	border: 1px solid #4DB6AC;
-	background-color: #4DB6AC;
-	color: #fff;
-	font-weight: bold;
+.datepicker_contents__ .datepicker_month_title__ {
+	line-height: 25px;
+	width: 58px;
+	float: left;
 }
 
-.datepicker_contents__ .datepicker_prev_day_item__, .datepicker_contents__ .datepicker_next_day_item__ {
-	border: 1px solid #fff;
-	cursor: pointer;
-	color: #00000088;
-}
-
-.datepicker_contents__ .datepicker_day_item__ {
+.datepicker_contents__ .datepicker_day_item__, .datepicker_contents__ .datepicker_prev_day_item__, .datepicker_contents__ .datepicker_next_day_item__ {
+	float: left;
 	border: 1px solid transparent;
 	cursor: pointer;
 	background-color: #ffffff;
+	line-height: 25px;
+	width: 28px;
+	text-align: center;
+	opacity: 0;
+	transform: scaleX(0);
+}
+
+.datepicker_contents__ .datepicker_prev_day_item__, .datepicker_contents__ .datepicker_next_day_item__ {
+	color: #00000088;
+}
+
+.datepicker_contents__ .datepicker_day_item__.visible__,
+.datepicker_contents__ .datepicker_prev_day_item__.visible__,
+.datepicker_contents__ .datepicker_next_day_item__.visible__ {
+	opacity: 1;
+	transform: scaleX(1);
+	transition: transform 0.3s cubic-bezier(0.65, -0.01, 0.21, 1.5);
+}
+
+.datepicker_contents__ .datepicker_day_title__ {
+	background-color: #ffffff;
+	width: 28px;
+	float: left;
+	text-align: center;
+}
+
+.datepicker_contents__ .datepicker_year_title__, .datepicker_contents__ .datepicker_month_title__, .datepicker_contents__ .datepicker_day_title__ {
+	border: 1px solid #A5D6A7;
+    background-color: #A5D6A7;
+    line-height: 25px;
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
 }
 
 .datepicker_contents__ .datepicker_month_selected__ {
-	background-color: #80CBC4;
-	color: #ffffff;
+	background-color: #A5D6A74A;
 	border-radius: 50%;    transform: scale(0.9);
     font-size: 13px;
 }
 
 .datepicker_contents__ .datepicker_day_selected__ {
-	background-color: #80CBC4;
-	color: #ffffff;
-	border-radius: 50%;
-	    transform: scale(0.9);
+    background-color: #A5D6A74A;
+    border-radius: 50%;
     font-size: 13px;
 }
 
 .datepicker_contents__ .datepicker_year_item__:hover, .datepicker_contents__ .datepicker_month_item__:hover, .datepicker_contents__ .datepicker_day_item__:hover {
-	background-color: #B2DFDB;
+	background-color: #81C7844A;
 	border-radius: 50%;
 	transition: background-color 0.3s ease-out;
-    transform: scale(0.9);
     font-size: 13px;
+}
+
+.datepicker_contents__.years_panel_position_top__,
+.datepicker_contents__.months_panel_position_top__ {
+	width: auto;
+	    text-align: center;
+}
+
+.datepicker_contents__.years_panel_position_top__ .datepicker_years_panel__ {
+	float: none;
+	display: inline;
+	background-color: inherit;
+	border: none;
+	width: auto;
+}
+
+.datepicker_contents__.years_panel_position_top__ .datepicker_year_item__ {
+	border: none !important;
+	cursor: pointer;
+	line-height: inherit;
+	text-align: center;
+	background-color: transparent !important;
+	box-shadow: none !important;
+	color: inherit;
+	border-radius: inherit;
+	width: auto;
+	padding: 0;
+	float: none;
+
+	/* Remove the arrow in select box */
+    birder-radius: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+/* Remove the arrow in select box(ie)*/
+.datepicker_contents__.years_panel_position_top__ .datepicker_year_item__::-ms-expand {
+	display: none;
+}
+
+.datepicker_contents__.years_panel_position_top__ .datepicker_year_item_select__ {
+	border: none;
+	background-color: transparent;
+	padding: 0;
+	margin: 0;
+}
+
+.datepicker_contents__.years_panel_position_top__ .datepicker_year_item__, .datepicker_contents__.years_panel_position_top__ .datepicker_year_paging__ {
+    display: inline;
+	cursor: pointer;
+	line-height: 16px;
+	font-size: 14px;
+	padding-bottom: 3px;
+	font-weight: bold;
+}
+
+.datepicker_contents__.years_panel_position_top__ .datepicker_year_paging__ > a {
+	text-decoration: none;
+	color: #4CAF50;
+}
+
+.datepicker_contents__.years_panel_position_top__ .datepicker_year_paging__ > a > span {
+    padding: 0 10px;
+    line-height: 16px;
+    font-weight: bold;
+}
+
+.datepicker_contents__.months_panel_position_top__ .datepicker_top_months_panel__ {
+	float: none;
+	display: inline;
+	background-color: inherit;
+	border: none;
+	width: auto;
+}
+
+.datepicker_contents__.months_panel_position_top__ .datepicker_month_item__ {
+	border: none !important;
+	cursor: pointer;
+	line-height: inherit;
+	text-align: center;
+	background-color: transparent !important;
+	box-shadow: none !important;
+	color: inherit;
+	border-radius: inherit;
+	width: auto;
+	padding: 0;
+	float: none;
+
+    /* Remove the arrow in select box */
+    birder-radius: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+/* Remove the arrow in select box(ie)*/
+.datepicker_contents__.months_panel_position_top__ .datepicker_month_item__::-ms-expand {
+	display: none;
+}
+
+.datepicker_contents__.months_panel_position_top__ .datepicker_month_item_select__ {
+	border: none;
+	background-color: transparent;
+	padding: 0;
+	margin: 0;
+}
+
+.datepicker_contents__.months_panel_position_top__ .datepicker_month_item__, .datepicker_contents__.months_panel_position_top__ .datepicker_month_paging__ {
+    display: inline;
+    cursor: pointer;
+    line-height: 16px;
+    font-size: 14px;
+    padding-bottom: 3px;
+    font-weight: bold;
+}
+
+.datepicker_contents__.months_panel_position_top__ .datepicker_month_paging__ > a {
+	text-decoration: none;
+	color: #4CAF50;
+}
+
+.datepicker_contents__.months_panel_position_top__ .datepicker_month_paging__ > a > span {
+    padding: 0 10px;
+    line-height: 16px;
+    font-weight: bold;
+}
+
+.datepicker_contents__.years_panel_position_top__ > .datepicker_days_panel__,
+.datepicker_contents__.months_panel_position_top__ > .datepicker_days_panel__ {
+    float: none;
+}
+
+.datepicker_contents__.years_panel_position_left__.months_panel_position_top__ > .datepicker_days_panel__ {
+    margin-left: 42px;
+}
+
+.datepicker_contents__.years_panel_position_top__.months_panel_position_left__ > .datepicker_days_panel__ {
+    margin-left: 62px;
+}
+
+/* Datepicker panels position correction */
+.datepicker_contents__.years_panel_position_left__.months_panel_position_top__ .datepicker_years_panel__ {
+	clear: both;
+	text-align: center;
+	float: none;
+    position: absolute;
+}
+.datepicker_contents__.years_panel_position_top__.months_panel_position_left__ .datepicker_months_panel__ {
+	clear: both;
+	margin-left: 0;
+	text-align: center;
+	float: none;
+	position: absolute;
+}
+.datepicker_contents__.years_panel_position_top__.months_panel_position_top__ .datepicker_days_panel__ {
+	clear: both;
+	margin-left: 0;
+	text-align: center;
+	margin-top: 4px;
+	overflow: hidden;
+}
+
+.datepicker_contents__.years_panel_position_top__.datepicker_monthonly__ .datepicker_year_paging__ span {
+	padding: 0 1px;
+}
+.datepicker_contents__.months_panel_position_top__.datepicker_monthonly__ .datepicker_month_paging__ span {
+	padding: 0 2px;
+}
+.datepicker_contents__.years_panel_position_top__.months_panel_position_top__.datepicker_monthonly__ .datepicker_year_paging__ span,
+.datepicker_contents__.years_panel_position_top__.months_panel_position_top__.datepicker_monthonly__ .datepicker_month_paging__ span {
+	padding: 0 10px;
+}
+.datepicker_contents__.years_panel_position_left__.months_panel_position_top__.datepicker_monthonly__ .datepicker_years_panel__ {
+	position: static;
+	display: inline;
+}
+.datepicker_contents__.years_panel_position_top__.months_panel_position_left__.datepicker_monthonly__ .datepicker_months_panel__ {
+	position: static;
 }
 
 /* Tree */
@@ -996,7 +1204,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .tree__ ul>li {
-	border-left: 1px dotted #80CBC4;
+	border-left: 1px dotted #A5D6A7;
 	margin-left: 5px;
 	padding: 0 0 0 7px;
 	line-height: 18px;
@@ -1142,7 +1350,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .pagination__ .pagination_body__ li.pagination_page__>a {
-	text-decoration: none;	
+	text-decoration: none;
 }
 
 .pagination__ .pagination_body__ li.pagination_page__>a>span {
@@ -1171,11 +1379,11 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	word-break: break-all;
 	margin-bottom: 5px;
 	border-radius: 5px;
-	border: 1px solid #B2DFDB;
-	box-shadow: 1px 1px 4px #00897B;
+	border: 1px solid #C8E6C9;
+	box-shadow: 1px 1px 4px #43A047;
 	transform: scale(0);
 	opacity: 0;
-	background-color: #E0F2F1;
+	background-color: #E8F5E9;
 }
 
 .notify__ .notify_msg__.visible__ {
@@ -1216,8 +1424,9 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .docs__>.docs_tab_context__ {
 	position: relative;
 	height: 31px;
-	border-bottom: 1px solid #26A69A;
+	border-bottom: 1px solid #66BB6A;
 	font-family: "Malgun Gothic", "dotum", "Segoe UI", sans-serif;
+	z-index: 1;
 }
 
 .docs__>.docs_tab_context__>ul.docs_tabs__.effect__ {
@@ -1248,10 +1457,10 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	display: inline;
 	margin-right: 2px;
 	padding: 7px 0 7.1px 0;
-	border-top: 1px solid #26A69A;
-	border-left: 10px solid #26A69A;
-	border-right: 1px solid #26A69A;
-	border-bottom: 1px solid #26A69A;
+	border-top: 1px solid #66BB6A;
+	border-left: 10px solid #66BB6A;
+	border-right: 1px solid #66BB6A;
+	border-bottom: 1px solid #66BB6A;
 	border-radius: 7px 0px 0px 0px;
 	font-size: 12px;
 	text-align: center;
@@ -1275,7 +1484,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .docs__>.docs_tab_context__>ul.docs_tabs__>.docs_tab__.inactive__ {
-	background-color: #B2DFDB;
+	background-color: #C8E6C9;
 }
 
 .docs__>.docs_tab_context__>ul.docs_tabs__>.docs_tab__.active__ {
@@ -1298,14 +1507,14 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	float: left;
 	margin-right: 2px;
 	padding: 0;
-	border: 1px solid #26A69A;
+	border: 1px solid #66BB6A;
 	border-bottom: none;
 	min-width: 22px;
 	max-width: 27px;
 	height: 30px;
 	border-radius: 0 7px 0 0;
 	text-align: center;
-	background-color: #80CBC4;
+	background-color: #A5D6A7;
 	line-height: 10px;
 }
 
@@ -1350,10 +1559,10 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .docs__>.docs_tab_context__>ul.docs_tab_utils__>.docs_tab_list_item__ .docs_tab_list__ {
 	position: absolute;
 	right: 2px;
-	border: 1px solid #80CBC4;
+	border: 1px solid #A5D6A7;
 	max-width: 300px;
-	background-color: #E0F2F1;
-	box-shadow: 0px 4px 12px #00897B;
+	background-color: #E8F5E9;
+	box-shadow: 0px 4px 12px #43A047;
 	border-radius: 5px 0 5px 5px;
 	padding: 4px;
 	margin: 2px 0 0 0;
@@ -1407,15 +1616,15 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .docs__>.docs_contents__ {
-	margin: 15px 0;
+	margin: 0;
 	background-color: #fff;
 }
 
 .docs__>.docs_contents__.hidden__  {
 	position: absolute;
-	margin-top: 30px;
+	margin-top: -15px;
 	opacity: 0;
-	transition: margin-top 0.15s cubic-bezier(0.65, -0.01, 0.21, 1), opacity 0.15s ease;
+	transition: margin-top 0.15s cubic-bezier(0.65, -0.01, 0.21, 1);
 }
 
 .docs__>.docs_contents__.visible__ {
@@ -1452,7 +1661,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	width: 100%;
 	overflow: hidden;
 	margin-top: -2px;
-	background-color: #80CBC4;
+	background-color: #A5D6A7;
 	opacity: 0.6;
 }
 
@@ -1463,7 +1672,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
   left: -300px;
   width: 300px;
   height: 4px;
-  background-color: #00897B;
+  background-color: #43A047;
   animation: entire_load_indicator_ani__ 1s linear infinite;
 }
 

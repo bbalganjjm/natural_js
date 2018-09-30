@@ -74,6 +74,8 @@
 		"cont" : {
 			"advisors" : [{ // md 파일 변환
 				"pointcut" : [
+					".intr0100",
+					".gtst0100",
 					".gtst0200:init$"
 				].join(","),
 				"adviceType" : "before",
@@ -118,16 +120,34 @@
 				].join(","),
 				"adviceType" : "before",
 				"fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 함수명, args 인자 */
+					var view = args[0];
 					// code highlight
 			    	if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {
-						cont.view.find("code").each(function() {
+						view.find("code").each(function() {
 							Prism.highlightElement(this);
 				    	});
 			    	}
 
 			    	//load api demo page
-			    	N(".apidemo", cont.view).each(function() {
-			    		N(this).comm("html/apid/" + N(this).data("page") + ".html").submit();
+			    	N(".apidemo", view).each(function() {
+			    		N(this).comm("html/apid/" + N(this).data("page") + ".html").submit(function() {
+			    			var view_ = view.find(".view_context__");
+
+			    			// inject description to option inputs
+			    			if(view.closest(".refr0104").length === 0) {
+			    				var descTableEle;
+			    				if(view.closest(".refr010302").length === 0) {
+			    					descTableEle = $("h3:contains('기본옵션'), h3:contains('Default Options')", view).next("table:first");
+			    				} else {
+			    					descTableEle = $("h4:contains('기본옵션'), h4:contains('Default Options')", view).next("table:first");
+			    				}
+				         		var optNm;
+				         		N(".form:first, .form#otherPage", view_).find(":input[id]").each(function() {
+				    	     		optNm = this.id;
+				    	     		$(this).after('<div class="demo-desc">' + $.trim(descTableEle.find("tr").find(">td:first").filter(":contains('" + optNm + "'):first").siblings(":last").html()) + '</div>');
+				    	     	});
+			    			}
+			    		});
 			    	});
 				}
 			}, {
@@ -137,14 +157,16 @@
 				].join(","),
 				"adviceType" : "before",
 				"fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 함수명, args 인자 */
+					var view = args[0];
+
 					// code highlight
 			    	if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {
-						cont.view.find("code").each(function() {
+						view.find("code").each(function() {
 							Prism.highlightElement(this);
 				    	});
 			    	}
 
-			    	CommonUtilController.setPageLinks(N("a.link", cont.view));
+			    	CommonUtilController.setPageLinks("a.link", view);
 				}
 			}, {
 				"pointcut" : [
@@ -156,13 +178,17 @@
 				].join(","),
 				"adviceType" : "before",
 				"fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 함수명, args 인자 */
-			    	CommonUtilController.setPageLinks(N("a.link", cont.view));
+					var view = args[0];
+
+			    	CommonUtilController.setPageLinks("a.link", view);
 				}
 			}, {
 				"pointcut" : "^init$",
 				"adviceType" : "before",
 				"fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 함수명, args 인자 */
-					CommonUtilController.setPageLinks(N("a.link", cont.view));
+					var view = args[0];
+
+					CommonUtilController.setPageLinks("a.link", view);
 
 			    	if(cont.view.hasClass("view-code")) {
 			    		CommonUtilController.sourceCode(cont.view, cont.request.get("url"));
@@ -254,9 +280,9 @@
 					 */
 					success : function(request, data, textStatus, xhr) {
 						// return data 를 하면 N.comm.submit 의 콜백의 인자로 넘어오는 data 가 리턴한 데이터로 치환 됨.
-						var opts = request.options;
 
 						/* 디버깅 지원을 위한 컨트롤러의 sourceURL 자동 삽입 처리 */
+						var opts = request.options;
 						if((opts.target && N.isElement(opts.target)) || opts.dataType === "html" || opts.contentType === "text/css") {
 							var cutIndex = data.lastIndexOf("\n</script>");
 							if(cutIndex < 0) {
@@ -267,13 +293,15 @@
 							}
 
 							// color theme
-							$(IndexController.colorPalette.teal).each(function(i, color) {
-								data = data.replace(new RegExp(color, "gi"), IndexController.colorPalette[window.localStorage.themeColor][i]);
+							if(window.localStorage.themeColor !== "green") {
+								$(IndexController.colorPalette.green).each(function(i, color) {
+									data = data.replace(new RegExp(color, "gi"), IndexController.colorPalette[window.localStorage.themeColor][i]);
 
-								if(opts.contentType === "text/css") {
-									data = data.replace(/url\(/gi, "*url(");
-								}
-							});
+									if(opts.contentType === "text/css") {
+										data = data.replace(/url\(/gi, "*url(");
+									}
+								});
+							}
 
 							return data = [data.slice(0, cutIndex), '\n//# sourceURL=' + opts.url + "\n", data.slice(cutIndex)].join("");
 						}
@@ -628,7 +656,13 @@
 					"prev" : "Previous",
 					"next" : "Next"
 				}
-			}
+			},
+			"yearsPanelPosition" : "top",
+			"monthsPanelPosition" : "top",
+			"yearChangeInput" : true,
+			"monthChangeInput" : true,
+			"touchMonthChange" : true,
+			"scrollMonthChange" : true
 		},
 		"select" : {
 			/**
@@ -742,7 +776,7 @@
 				/**
 				 * 컬럼 리사이즈 시 다른컬럼이 밀릴때 아래 수치 조절(기본값 : 0)
 				 */
-				"resizableCorrectionWidth" : N.browser.is("chrome") ? 1 : N.browser.is("safari") ? 2 : 0,
+				"resizableCorrectionWidth" : N.browser.is("safari") ? 1 : 0,
 				/**
 				 * 헤더고정형 중 마지막 컬럼 클릭 시 다른컬럼이 밀릴때 아래 수치 조절(기본값 : 0)
 				 */
