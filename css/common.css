@@ -91,7 +91,7 @@ table.form th {
 }
 
 /* Documents layout */
-body > #docsContainer__ {
+#docsContainer__ {
 	clear: left;
 	margin: 0 auto;
 	max-width: 1003px;
@@ -100,27 +100,31 @@ body > #docsContainer__ {
 	font-size: 0.875em;
 }
 
-body > #docsContainer__ > section {
+#docsContainer__ > section {
 	border-left: 1px solid #66BB6A;
 	border-right: 1px solid #66BB6A;
 	border-bottom: 1px solid #66BB6A;
 }
 
-body > #docsContainer__.multi__ {
+#docsContainer__.multi__ {
 	margin-top: 4px;
 }
 
-body > #docsContainer__ article {
+#docsContainer__ article {
     margin: 15px;
 	word-break: break-word;
 	line-height: 180%;
 }
 
-body > #docsContainer__ > article {
+#docsContainer__ .docs_contents__ > article {
 	padding: 30px 0;
     margin: 0 30px;
 	word-break: break-word;
 	line-height: 180%;
+}
+
+.tab__>div {
+	padding: 0 !important;
 }
 
 article dl.qna {
@@ -454,7 +458,7 @@ article .depricated {
 
 article ul.contents {
 	position: absolute;
-	margin-left: -248px;
+	margin-left: -218px;
 	top: 303px;
 	background-color: #fff;
 	padding: 5px 0px 10px 10px;
