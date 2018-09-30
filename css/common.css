@@ -19,7 +19,6 @@ body {
 	margin: 0;
 	font-family: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", "dotum", "Segoe UI", sans-serif;
 	color : rgba(0, 0, 0, 0.87);
-	min-width: 578px;
 	overflow-y: scroll;
 }
 
@@ -70,13 +69,13 @@ table {
 	margin: 0 0 15px 0;
 	border-collapse: collapse;
 	table-layout: fixed;
-	border-top: 2px solid #80CBC4;
+	border-top: 2px solid #A5D6A7;
 }
 table:last-child {
 	margin: 0;
 }
 table th, table td {
-	border: 1px solid #80CBC4;
+	border: 1px solid #A5D6A7;
 	padding: 3px 5px;
 	word-break: break-word;
 	font-size: 12px;
@@ -84,10 +83,10 @@ table th, table td {
     box-sizing: border-box;
 }
 table th, table > tfoot td {
-	background-color: #B2DFDB;
+	background-color: #C8E6C9;
 }
 table.form th {
-	background-color: #B2DFDB;
+	background-color: #C8E6C9;
 	text-align: right;
 }
 
@@ -96,11 +95,15 @@ body > #docsContainer__ {
 	clear: left;
 	margin: 0 auto;
 	max-width: 1003px;
-	min-width: 560px;
 	min-height: 350px;
 	padding: 0;
 	font-size: 0.875em;
-	box-shadow: 0 0 50px #B2DFDB;
+}
+
+body > #docsContainer__ > section {
+	border-left: 1px solid #66BB6A;
+	border-right: 1px solid #66BB6A;
+	border-bottom: 1px solid #66BB6A;
 }
 
 body > #docsContainer__.multi__ {
@@ -108,7 +111,7 @@ body > #docsContainer__.multi__ {
 }
 
 body > #docsContainer__ article {
-	margin: 15px;
+	padding: 15px;
 	word-break: break-word;
 	line-height: 180%;
 }
@@ -142,7 +145,7 @@ article dl.qna dd ul li>ul {
 
 article h1 {
 	padding: 10px 0 10px 40px;
-	border-bottom: 1px solid #004D40;
+	border-bottom: 1px solid #1B5E20;
 	font-size: 1.5em;
 	background: url("../images/icon/h1_leaf.png") no-repeat 0 10px;
 	margin: 0 0 20px 0;
@@ -211,7 +214,7 @@ article .alert {
 	background: url("../images/icon/alert.png") no-repeat 7px 10px;
 	font-size: 0.95em;
 	padding: 5px 5px 5px 25px;
-	background-color: #E0F2F1;
+	background-color: #E8F5E9;
 	border-radius: 3px;
 	margin: 0 0 15px 0;
 }
@@ -227,94 +230,128 @@ article .alert ul>li {
 }
 
 /* API Document */
-article.apiDoc table th {
+.apiDoc table th {
 	width: 11%;
 }
 
-article.apiDoc table td p {
+.apiDoc table td p {
 	margin: 0;
 }
 
-article.apiDoc ul.list>li {
+.apiDoc ul.list>li {
 	padding-top: 15px;
 	padding-bottom: 15px;
 }
 
-article.apiDoc fieldset {
+.apiDoc fieldset {
 	display: inline-block;
-	border: 1px dotted #26A69A;
+	border: 1px dotted #66BB6A;
 	border-radius: 5px;
 	padding: 0 0 0 10px;
 }
 
-article.apiDoc fieldset legend {
+.apiDoc fieldset legend {
 	font-size: -9em;
 	color : rgba(0, 0, 0, 0.87);;
 }
 
-article.apiDoc ul.footnotes {
+.apiDoc ul.footnotes {
 	padding-left: 5px;
 	overflow: hidden;
 	list-style: none;
 }
 
-article.apiDoc ul.footnotes li {
+.apiDoc ul.footnotes li {
 	float: left;
 	margin-right: 20px;
 	font-size: 0.9em;
 	color : rgba(0, 0, 0, 0.87);;
 }
 
-article.apiDoc .b {
+.apiDoc .b {
 	font-weight: bold;
 }
 
-article.apiDoc .bi {
+.apiDoc .bi {
 	font-weight: bold;
 	font-style: italic;
 }
 
-article.apiDoc .apidemo {
-	border: 1px solid #26A69A;
+.apiDoc .apidemo {
+	border: 1px solid #66BB6A;
 	font-size: 0.875em;
 	margin: 0 0 15px 0;
 	padding: 15px 0 15px 0;
 }
 
-article.apiDoc .apidemo table th, article.apiDoc .apidemo table td, article.apiDoc .apidemo input[type='text'], article.apiDoc .apidemo input[type='number'], article.apiDoc .apidemo input[type='tel'], article.apiDoc .apidemo input[type='password'], article.apiDoc .apidemo select, article.apiDoc .apidemo textarea {
+.apiDoc .apidemo table th, .apiDoc .apidemo table td, .apiDoc .apidemo input[type='text'], .apiDoc .apidemo input[type='number'], .apiDoc .apidemo input[type='tel'], .apiDoc .apidemo input[type='password'], .apiDoc .apidemo select, .apiDoc .apidemo textarea {
 	font-size: 1em;
 }
 
-article.apiDoc .apidemo table.grid th {
+.apiDoc .apidemo table.grid th {
 	width: auto;
 }
 
-article.apiDoc .apidemo>article table.form th {
+.apiDoc .apidemo>article table.form th {
 	min-width: 10%;
 }
 
-article.apiDoc .apidemo>article .result {
-	border: 1px solid #80CBC4;
+.apiDoc .apidemo>article .result {
+	border: 1px solid #A5D6A7;
 	border-radius: 3px;
 	padding: 10px;
 	margin: 0 0 15px 0;
 	background-color: #ffffff;
 }
 
-article.apiDoc .apidemo>article textarea {
-	width: 95%;
-	max-width: 345px;
+.apiDoc .apidemo>article textarea {
+	width: 100%;
 	height: 60px;
 }
 
-article.apiDoc .apidemo>article .dataBox {
+.apiDoc .apidemo>article .dataBox {
 	margin-bottom: 15px;
+}
+
+.apiDoc .apidemo .form td {
+	position: relative;
+}
+
+.apiDoc .apidemo .form .demo-desc {
+	position: absolute;
+    padding: 10px;
+    margin: 0;
+	margin-bottom: 15px;
+    overflow: auto;
+    background-color: #fff;
+    border: 3px solid #81C784;
+	border-radius: 10px;
+    box-shadow: 0px 0px 15px #81C784;
+    box-sizing: border-box;
+	z-index: 1;
+	opacity: 0;
+	transform : scale(0);
+	transition: all 0.3s cubic-bezier(0.89, 0.05, 1, 1);
+	transform-origin: top left;
+}
+
+.apiDoc .apidemo .form select:hover+.demo-desc,
+.apiDoc .apidemo .form input:hover+.demo-desc,
+.apiDoc .apidemo .form textarea:hover+.demo-desc,
+.apiDoc .apidemo .form select:focus+.demo-desc,
+.apiDoc .apidemo .form input:focus+.demo-desc,
+.apiDoc .apidemo .form textarea:focus+.demo-desc {
+	margin-bottom: 15px;
+	opacity: 1;
+	transform : scale(1);
+	transition: all 0.5s cubic-bezier(0.89, 0.05, 1, 1);
+	transform-origin: top left;
 }
 
 /* Examples */
 article .intro {
 	padding: 10px;
-	background-color: #E0F2F1;
+	background-color: #E8F5E9;
 	border-radius: 3px;
 	margin-bottom: 20px;
 }
@@ -328,8 +365,8 @@ article .smallContTit {
 }
 
 article .searchBox {
-	border: 1px solid #80CBC4;
-	background-color: #E0F2F1;
+	border: 1px solid #A5D6A7;
+	background-color: #E8F5E9;
 	border-radius: 3px;
 	margin-bottom: 15px;
 }
@@ -347,7 +384,7 @@ article .searchBox ul li {
 }
 
 article .searchBox ul li.inputs {
-	border: 1px dotted #B2DFDB;
+	border: 1px dotted #C8E6C9;
 }
 
 article .searchBox ul li.buttons {
@@ -365,8 +402,8 @@ article .searchBox li>label label {
 
 article .searchBox label input, article .searchBox label select {
 	margin-left: 15px;
-	box-shadow: 1px 1px 2px #B2DFDB;
-	border-color: #B2DFDB;
+	box-shadow: 1px 1px 2px #C8E6C9;
+	border-color: #C8E6C9;
 }
 
 article .searchBox label input[type='text'], article .searchBox label input[type='number'], article .searchBox label input[type='tel'] {
@@ -385,10 +422,10 @@ article .click {
 	height: 35px;
 	font-weight: bold;
 	color : rgba(0, 0, 0, 0.87);;
-	border: 1px dotted #009688;
+	border: 1px dotted #4CAF50;
 	border-radius: 3px;
 	box-shadow: 1px 1px 3px #BCFBBC;
-	background-color: #E0F2F1;
+	background-color: #E8F5E9;
 	cursor: pointer;
 	font-size: 17px;
 }
@@ -405,7 +442,7 @@ article .click {
 
 article .depricated {
 	text-decoration: line-through;
-	color: #B2DFDB;
+	color: #C8E6C9;
 }
 
 article ul.contents {
@@ -415,9 +452,9 @@ article ul.contents {
 	background-color: #fff;
 	padding: 5px 0px 10px 10px;
 	border-radius: 10px 0 0 10px;
-	border-top: 1px solid #26A69A;
-	border-left: 1px solid #26A69A;
-	border-bottom: 1px solid #26A69A;
+	border-top: 1px solid #66BB6A;
+	border-left: 1px solid #66BB6A;
+	border-bottom: 1px solid #66BB6A;
 	list-style: none;
 	width: 192px;
 }
