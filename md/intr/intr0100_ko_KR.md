@@ -10,16 +10,11 @@ Natural-JS 는 Natural-CORE, Natural-ARCHITECTURE, Natural-DATA, Natural-UI 로 
 ## 개발배경 및 목적
 
 1990년대 등장한 웹 기술은 네트워크의 보급 확산과 정보공유 및 어플리케이션개발의 편의성에 힘입어 폭발적인 성장을 거듭하였습니다. 오늘날 웹 어플리케이션은 개인적 정보 공유로부터 기업의 자원 관리 및 전자정부에 이르기까지 현대인의 생활 전반에 매우 깊이 자리 잡고 있는 필수적인 부분이 되었습니다. 사용자에게 있어 이와 같은 웹 어플리케이션의 모든 기능은 사용자 인터페이스를 통해 보여 집니다. 이러한 사용자 인터페이스는 웹의 종단 사용자들이 경험하는 대화형 워크플로우의 모든 부분에 연관되며, 개발과정에서 가장 많은 시간과 노력이 요구되는 영역입니다. 한 통계자료에 따르면, 웹 어플리케이션 시스템 개발에 있어서 전체 개발 비용 중 유지보수에 관계된 비용은 80%가 사용자 인터페이스와 관련(이성혜, 마이크로소프트웨어, 7월 2003년)이 있다고 합니다. Ajax (Asynchronous Java Script and XML)는 클라이언트 영역에 사용되는 일련의 웹 개발 방법들을 지칭하는 용어로 이러한 사용자 인터페이스 개발을 위한 대표적 기술 중 하나입니다. Ajax를 통하여, 웹 어플리케이션들은 현재 페이지의 디스플레이나 동작에 방해받지 않고 비동기 방식으로 서버로부터 데이터를 검색하고 추출하는 것이 가능합니다. Ajax 기술은 웹 사이트의 능률적이고 역동적인 사용자 인터페이스 개발을 위해 폭넓게 채택되고 있으며, e-mail 시스템, 메시지 링킹, 주식거래 및 전자정부 시스템 등의 다양한 웹 어플리케이션에 향상된 사용자 경험을 제공하기 위해 사용되고 있습니다. 또한 Google이나 facebook등의 초대형 글로벌사이트들은 사용자 편의성을 위해 Ajax기술을 채택하고 있어 Ajax의 중요성을 증명하고 있습니다.
-
-![](images/refr/pic1.png)
-
-<center>[그림1] WEB 2.0을 구현하는 기술</center>
-
-Ajax 기반 클라이언트는 이와 같은 다양한 웹 어플리케이션에서 고급 사용자 경험의 제공을 가능하게 하는 장점이 있지만, 방대한 분량의 코드로 이루어진 복잡한 클라이언트 개발에 있어 웹-개발의 편의성과 유지보수성 등이 낮아지는 단점이 있습니다. 다음은 Ajax기반의 웹 어플리케이션 개발의 대표적인 문제점을 나타내는 그림입니다.
+Ajax 기반 클라이언트는 앞에서 말한 것과 같이 다양한 웹 어플리케이션에서 고급 사용자 경험의 제공을 가능하게 하는 장점이 있지만, 방대한 분량의 코드로 이루어진 복잡한 클라이언트 개발에 있어 웹-개발의 생산성이 낮아지는 단점이 있습니다. 다음은 Ajax기반의 웹 어플리케이션 개발의 대표적인 문제점을 나타내는 그림입니다.
 
 ![](images/refr/pic2.png)
 
-<center>[그림2] 현행 Ajax기반의 웹 어플리케이션 개발의 문제점</center>
+<center>[그림1] 현행 Ajax기반의 웹 어플리케이션 개발의 문제점</center>
 
 위와 같은 문제점들을 해결하여 웹-개발의 편의성과 유지보수성 향상을 제공할 수 있는 기술로 MVC (Model-View-Controller) 패턴을 들 수 있는데, 이 패턴은 응용 로직을 사용자 인터페이스와 분리함으로써 구조적 디자인 복잡도를 감소시키고 이를 통해 유지보수성 향상을 제공합니다. MVC 모델은 Smalltalk80의 사용자 인터페이스 디자인에서 발전된 기술로, 다양한 웹 어플리케이션 개발에 보편적으로 적용되는 기술입니다. 하지만, 복잡한 사용자 인터페이스 코드 영역을 일반적인 서버-클라이언트 기반의 MVC 모델에서는 단순히 View 영역으로 구분함으로써 UI의 개발 편의성과 유지보수성을 개선하는데 제한적일 뿐 아니라 비대해지고 다이나믹해진 UI영역의 개발을 수용하기에도 무리가 따릅니다. 이와같이 복잡한 Ajax 기반 클라이언트 개발에 있어, 그 개발편의성을 증대시키고 방대한 코드의 유지보수성을 개선하기 위해, Naturl-JS 를 개발하게 되었습니다. Natural-JS 는 MVC 아키텍처 패턴을 웹 환경에 맞게 개량시킨 CVC(Communicator-View-Controller) 아키텍처 패턴(김황만, 김용구, 한국통신학회, 9월 2011년) 과 이 패턴 기반의 아키텍처 프레임워크를 제공하여 [그림2]와 같은 Ajax 기반 웹 어플리케이션 개발의 여러 가지 문제점들을 해결하고 엔터프라이즈 웹 어플리케이션에서 모바일 웹 어플리케이션까지, 웹 개발 전체의 개발 생산성과 사용자 경험을 월등하게 개선 시켜줄 수 있는 CVC 아키텍처 패턴기반의 프레임워크와 UI 컴포넌트를 제공 합니다.
 
@@ -29,7 +24,7 @@ Natural-JS 는 크게 Natural-CORE, Natural-ARCHITECTURE 와 Natural-DATA, Natur
 
 ![](images/refr/pic3.png)
 
-<center>[그림3] Natural-JS 아키텍처 구성</center>
+<center>[그림2] Natural-JS 아키텍처 구성</center>
 
 ### 가. Natural-CORE
 
@@ -57,7 +52,7 @@ Natural-JS 는 CVC 아키텍처 패턴 기반의 Natural-Architecture Framework 
 
 ![](images/refr/pic4.png)
 
-<center>[그림4] Natural-ARCHITECTURE</center>
+<center>[그림3] Natural-ARCHITECTURE</center>
 
 #### 1) CVC Architecture Pattern
 
@@ -65,7 +60,7 @@ CVC 아키텍처 패턴은 기존 MVC로 구현된 서버중심 웹 어플리케
 
 ![](images/refr/pic5.png)
 
-<center>[그림5] CVC Architecture Pattern</center>
+<center>[그림4] CVC Architecture Pattern</center>
 
 #### 2) Natural Architecture Framework
 
@@ -73,7 +68,7 @@ Natural Architecture Framework 는 CVC Architecture Pattern 의 Communicator 영
 
 ![](images/refr/pic6.png)
 
-<center>[그림6] Natural Architecture Framework</center>
+<center>[그림5] Natural Architecture Framework</center>
 
 Natural Application Context(N.context)는 Natural-JS 의 생명주기(Life-Cycle) 안의 데이터 저장소 역할을 수행 하며 설정 데이터, 메시지 리소스 등을 저장 하고 관리할 수 있는 기능을 제공 합니다.
 
@@ -113,7 +108,7 @@ Natural-UI는 다음과 같은 컴포넌트들과 구조로 구성 되어 있습
 
 ![](images/refr/pic7.png)
 
-<center>[그림7] Natural-UI</center>
+<center>[그림6] Natural-UI</center>
 
 #### 1) Alert(N.alert)
 
