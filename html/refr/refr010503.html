@@ -1,5 +1,5 @@
 <article class="refr010503 apiDoc" >
-	<h2 class="notIndex">DatePicker(N.datepicker)</h2>
+	<h2 class="notIndex">Datepicker(N.datepicker)</h2>
 
 	<!-- 목차 -->
 	<ul class="contents links"></ul>
@@ -8,7 +8,7 @@
 		<span lang="ko_KR">개요</span>
 		<span lang="en_US">Overview</span>
 	</h3>
-	<p>DatePicker(이하 N.datepicker)는 달력 대화 상자를 입력요소 주변에 표시하여 날짜를 선택하여 입력할 수 있도록 해 주는 컴포넌트입니다.</p>
+	<p>Datepicker(이하 N.datepicker)는 달력 대화 상자를 입력요소 주변에 표시하여 날짜를 선택하여 입력할 수 있도록 해 주는 컴포넌트입니다.</p>
 
 	<h3>API DEMO</h3>
 	<p lang="ko_KR" class="alert">데모에는 모든 옵션 및 기능을 포함하고 있지 않습니다. 전체 기능 목록은 데모 바로 아래 있는 기능 문서들을 참고 바랍니다.</p>
@@ -84,21 +84,63 @@
 			<td>jquery object</td>
 			<td>null</td>
 			<td align="center">○</td>
-			<td>데이트피커를 적용할 입력 요소를 지정합니다.</td>
+			<td>데이트피커를 적용할 입력 요소를 지정 합니다.</td>
+		</tr>
+		<tr>
+			<td>yearsPanelPosition</td>
+			<td>string(left|top)</td>
+			<td>left</td>
+			<td></td>
+			<td>년 선택 요소의 위치를 지정 합니다.</td>
+		</tr>
+		<tr>
+			<td>monthsPanelPosition</td>
+			<td>string(left|top)</td>
+			<td>left</td>
+			<td></td>
+			<td>월 선택 요소의 위치를 지정 합니다.</td>
+		</tr>
+		<tr>
+			<td>minYear</td>
+			<td>number</td>
+			<td>200</td>
+			<td></td>
+			<td>yearsPanelPosition 옵션 값이 "top" 일 때 선택 할 수 있는 년의 시작 년도를 지정 합니다.</td>
+		</tr>
+		<tr>
+			<td>maxYear</td>
+			<td>number</td>
+			<td>200</td>
+			<td></td>
+			<td>yearsPanelPosition 옵션 값이 "top" 일 때 선택 할 수 있는 년의 마지막 년도를 지정 합니다.</td>
+		</tr>
+		<tr>
+			<td>yearChangeInput</td>
+			<td>boolean</td>
+			<td>false</td>
+			<td></td>
+			<td>년 선택 시 입력요소에 바로 반영하여 보여 줄지 여부를 지정 합니다.</td>
+		</tr>
+		<tr>
+			<td>monthChangeInput</td>
+			<td>boolean</td>
+			<td>false</td>
+			<td></td>
+			<td>월 선택 시 입력요소에 바로 반영하여 보여 줄지 여부를 지정 합니다.</td>
 		</tr>
 		<tr>
 			<td>monthonly</td>
 			<td>boolean</td>
 			<td>false</td>
 			<td></td>
-			<td>true 이면 Monthpicker를 표시합니다.</td>
+			<td>월 만 선택 할 수 있는 Monthpicker 로 표시 할 것인지 여부를 지정 합니다.</td>
 		</tr>
 		<tr>
 			<td>focusin</td>
 			<td>boolean</td>
 			<td>true</td>
 			<td></td>
-			<td>날짜 입력요소에 자동으로 focusin 이벤트를 bind 하여 Datepicker를 표시할 것인지 여부를 지정 합니다.</td>
+			<td>데이트픽커가 적용 된 입력요소가 선택 되었을때 Datepicker 를 표시할 것 인지 여부를 지정 합니다.</td>
 		</tr>
 		<tr>
 			<td>shareEle</td>
@@ -106,7 +148,7 @@
 			<td>true</td>
 			<td></td>
 			<td>
-				<p>데이트픽커를 선택하는 다이얼로그 요소를 모든 N.datepicker 요소들이 공유할것인지 인스턴스마다 따로 만들것인지 여부를 지정 합니다.</p>
+				<p>데이트픽커 대화상자 요소를 모든 N.datepicker 요소들이 공유할것인지 인스턴스마다 따로 만들것인지 여부를 지정 합니다.</p>
 				<p class="alert">false 로 지정하면 N.grid 와 연동하여 사용 시 그리드 렌더링과 페이지 반응속도가 느려질 수 있습니다.</p>
 			</td>
 		</tr>
@@ -133,6 +175,20 @@
 			<td style="max-width: 299px;">
 				데이트피커 판넬이 표시되기 전에 발생 되는 이벤트 입니다.
 				<pre><code class="language-javascript">onBeforeShow : function(context, contents) {
+	// this 는 N.datepicker instance
+	// context 는 날짜가 입력되는 입력요소
+	// contents 는 데이트피커 판넬
+}</code></pre>
+			</td>
+		</tr>
+		<tr>
+			<td>onShow</td>
+			<td>function</td>
+			<td>null</td>
+			<td></td>
+			<td style="max-width: 299px;">
+				데이트피커 판넬이 표시된 후 발생 되는 이벤트 입니다.
+				<pre><code class="language-javascript">onShow : function(context, contents) {
 	// this 는 N.datepicker instance
 	// context 는 날짜가 입력되는 입력요소
 	// contents 는 데이트피커 판넬
@@ -167,11 +223,42 @@
 }</code></pre>
 			</td>
 		</tr>
+		<tr>
+			<td>onChangeYear</td>
+			<td>function</td>
+			<td>null</td>
+			<td></td>
+			<td style="max-width: 299px;">
+				년도가 변경 되었을 때 발생 되는 이벤트 입니다.
+				<pre><code class="language-javascript">onChangeYear : function(context, year, e) {
+	// this 는 N.datepicker instance
+	// context 는 날짜가 입력되는 입력요소
+	// year 선택 된 년도
+	// e 는 실행 된 이벤트 객체
+}</code></pre>
+			</td>
+		</tr>
+		<tr>
+			<td>onChangeMonth</td>
+			<td>function</td>
+			<td>null</td>
+			<td></td>
+			<td style="max-width: 299px;">
+				월이 변경 되었을 때 발생 되는 이벤트 입니다.
+				<pre><code class="language-javascript">onChangeMonth : function(context, month, year, e) {
+	// this 는 N.datepicker instance
+	// context 는 날짜가 입력되는 입력요소
+	// month 는 선택 된 월
+	// year 선택 된 년도
+	// e 는 실행 된 이벤트 객체
+}</code></pre>
+			</td>
+		</tr>
 	</table>
 
 	<h3 lang="ko_KR">jQuery 이벤트</h3>
 	<h3 lang="en_US">jQuery Events</h3>
-	<p class="alert">DatePicker 가 표시 될 입력 요소에 jQuery Event 로 다음과 같은 명칭의 이벤트를 바인드 하면 해당 단계에 실행 됩니다.</p>
+	<p class="alert">Datepicker 가 표시 될 입력 요소에 jQuery Event 로 다음과 같은 명칭의 이벤트를 바인드 하면 해당 단계에 실행 됩니다.</p>
 	<p class="alert">컴포넌트 초기화 시 지정한 같은 명칭의 이벤트가 있다면 초기화 시 지정한 이벤트가 먼저 실행됩니다.</p>
 	<table style="width: 100%;">
 		<tr>
@@ -188,7 +275,7 @@
 	// selDate 는 선택한 날짜의 Date 객체
 	// monthonly 는 옵션으로 지정한 monthonly 값
 });</code></pre>
-				<p class="alert">selector 는 DatePicker 가 적용 되는 입력 요소를 지정 해 주세요.</p>
+				<p class="alert">selector 는 Datepicker 가 적용 되는 입력 요소를 지정 해 주세요.</p>
 			</td>
 		</tr>
 		<tr>
@@ -200,7 +287,19 @@
 	// context 는 날짜가 입력되는 입력요소
 	// contents 는 데이트피커 판넬
 });</code></pre>
-				<p class="alert">selector 는 DatePicker 가 적용 되는 입력 요소를 지정 해 주세요.</p>
+				<p class="alert">selector 는 Datepicker 가 적용 되는 입력 요소를 지정 해 주세요.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>onShow</td>
+			<td>
+				데이트피커 판넬이 표시된 후 발생 되는 이벤트 입니다.
+				<pre><code class="language-javascript">$("selector").bind("onShow", function(e, context, contents) {
+	// e 는 이벤트 오브젝트
+	// context 는 날짜가 입력되는 입력요소
+	// contents 는 데이트피커 판넬
+});</code></pre>
+				<p class="alert">selector 는 Datepicker 가 적용 되는 입력 요소를 지정 해 주세요.</p>
 			</td>
 		</tr>
 		<tr>
@@ -212,7 +311,7 @@
 	// context 는 날짜가 입력되는 입력요소
 	// contents 는 데이트피커 판넬
 });</code></pre>
-				<p class="alert">selector 는 DatePicker 가 적용 되는 입력 요소를 지정 해 주세요.</p>
+				<p class="alert">selector 는 Datepicker 가 적용 되는 입력 요소를 지정 해 주세요.</p>
 			</td>
 		</tr>
 		<tr>
@@ -224,7 +323,34 @@
 	// context 는 날짜가 입력되는 입력요소
 	// contents 는 데이트피커 판넬
 });</code></pre>
-				<p class="alert">selector 는 DatePicker 가 적용 되는 입력 요소를 지정 해 주세요.</p>
+				<p class="alert">selector 는 Datepicker 가 적용 되는 입력 요소를 지정 해 주세요.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>onChangeYear</td>
+			<td>
+				년도가 변경 되었을 때 발생 되는 이벤트 입니다.
+				<pre><code class="language-javascript">$("selector").bind("onHide", function(e, context, year, oe) {
+	// e 는 이벤트 오브젝트
+	// context 는 날짜가 입력되는 입력요소
+	// year 선택 된 년도
+	// oe 는 Original 이벤트 오브젝트
+});</code></pre>
+				<p class="alert">selector 는 Datepicker 가 적용 되는 입력 요소를 지정 해 주세요.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>onChangeMonth</td>
+			<td>
+				월이 변경 되었을 때 발생 되는 이벤트 입니다.
+				<pre><code class="language-javascript">$("selector").bind("onHide", function(e, month, year, oe) {
+	// e 는 이벤트 오브젝트
+	// context 는 날짜가 입력되는 입력요소
+	// month 는 선택 된 월
+	// year 선택 된 년도
+	// oe 는 Original 이벤트 오브젝트
+});</code></pre>
+				<p class="alert">selector 는 Datepicker 가 적용 되는 입력 요소를 지정 해 주세요.</p>
 			</td>
 		</tr>
 	</table>
@@ -276,7 +402,7 @@
 		<span lang="en_US">Examples</span>
 	</h3>
 
-	<h4 class="notIndex">1. DatePicker 생성</h4>
+	<h4 class="notIndex">1. Datepicker 생성</h4>
 		<pre class="line-numbers"><code class="language-markup"><xmp>
 <input id="datepicker" type="text" />
 
@@ -284,7 +410,7 @@
 	N("#datepicker").datepicker();
 </script></xmp></code></pre>
 
-	<h4 class="notIndex">2. MonthPicker 생성</h4>
+	<h4 class="notIndex">2. Monthpicker 생성</h4>
 		<pre class="line-numbers"><code class="language-markup"><xmp>
 <input id="datepicker" type="text" />
 
@@ -294,7 +420,7 @@
 	});
 </script></xmp></code></pre>
 
-	<h4 class="notIndex">3. 선언형 생성 : Format 룰로 지정하여 N.form 이나 N.grid 초기화시 자동으로 DatePicker 생성</h4>
+	<h4 class="notIndex">3. 선언형 생성 : Format 룰로 지정하여 N.form 이나 N.grid 초기화시 자동으로 Datepicker 생성</h4>
 		<pre class="line-numbers"><code class="language-markup"><xmp>
 <div id="form">
 	<!-- 첫번째 인자로 "date"룰을 지정하고 세번째 인자로 "date" 나 "month"(Monthpicker가 표시 됨) 지정 -->
