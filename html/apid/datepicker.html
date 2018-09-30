@@ -2,62 +2,122 @@
 	<p lang="ko_KR" class="smallContTit">기본 옵션 : </p>
 	<p lang="en_US" class="smallContTit">Default options : </p>
 	<table class="form">
-		<tr>
-			<th width="10%"><label for="monthonly">monthonly</label></th>
-			<td width="40%">
-				<input id="monthonly" type="checkbox" />
-				<label for="monthonly" lang="ko_KR">체크(true)하면 년, 월 만 선택 할 수 있는 Monthpicker를 보여줍니다.</label>
-				<label for="monthonly" lang="en_US">If this checkbox with check(true), display MonthPicker</label>
-			</td>
-			<th width="10%"><label for="focusin">focusin</label></th>
-			<td width="40%">
-				<input id="focusin" type="checkbox" checked="checked" />
-				<label for="focusin" lang="ko_KR">체크를 해제(false)하면 지정한 입력요소가 선택 됐을때 자동으로 DatePicker 를 보여주지 않습니다.</label>
-				<label for="focusin" lang="en_US">If this checkbox with uncheck(false), do not display DatePicker when selected input element has focus.</label>
-			</td>
-		</tr>
-		<tr>
-			<th><label for="onBeforeShow">onBeforeShow</label></th>
-			<td>
-				<textarea id="onBeforeShow" style="height: 45px;">function(context, contents) {
-	N.log("onBeforeShow", context, contents);
-}</textarea><br>
-				<label for="onBeforeShow" lang="ko_KR">Datepicker가 보여지기 전에 동작되는 이벤트 핸들러</label>
-				<label for="onBeforeShow" lang="en_US">Event handler for onBeforeShow event</label>
-			</td>
-			<th><label for="onSelect">onSelect</label></th>
-			<td colspan="3">
-				<textarea id="onSelect" style="height: 45px;">function(context, selDate, monthonly) {
+		<colgroup>
+			<col style="width: 12%">
+			<col style="width: 38%">
+			<col style="width: 12%">
+			<col style="width: 38%">
+		</colgroup>
+		<tbody>
+			<tr>
+				<th><label for="yearsPanelPosition">yearsPanelPosition</label></th>
+				<td>
+					<select id="yearsPanelPosition">
+						<option value="left">left</option>
+						<option value="top">top</option>
+					</select>
+				</td>
+				<th><label for="monthsPanelPosition">monthsPanelPosition</label></th>
+				<td>
+					<select id="monthsPanelPosition">
+						<option value="left">left</option>
+						<option value="top">top</option>
+					</select>
+				</td>
+			</tr>
+			<tr class="minMaxYearLine">
+				<th><label for="monthonly">minYear</label></th>
+				<td>
+					<input id="minYear" type="number" placeholder="200">
+				</td>
+				<th><label for="maxYear">maxYear</label></th>
+				<td>
+					<input id="maxYear" type="number" placeholder="200">
+				</td>
+			</tr>
+			<tr>
+				<th><label for="yearChangeInput">yearChangeInput</label></th>
+				<td>
+					<input id="yearChangeInput" type="checkbox">
+				</td>
+				<th><label for="monthChangeInput">monthChangeInput</label></th>
+				<td>
+					<input id="monthChangeInput" type="checkbox">
+				</td>
+			</tr>
+			<tr>
+				<th><label for="monthonly">monthonly</label></th>
+				<td>
+					<input id="monthonly" type="checkbox">
+				</td>
+				<th><label for="focusin">focusin</label></th>
+				<td>
+					<input id="focusin" type="checkbox" checked="checked">
+				</td>
+			</tr>
+			<tr>
+				<th><label for="onSelect">onSelect</label></th>
+				<td colspan="3">
+					<textarea id="onSelect" style="height: 45px;">function(context, selDate, monthonly) {
 	N.log("onSelect", context, selDate, monthonly);
-}</textarea><br>
-				<label for="onSelect" lang="ko_KR">일 선택시 동작되는 이벤트 핸들러</label>
-				<label for="onSelect" lang="en_US">Event handler for date select event</label>
-			</td>
-		</tr>
-		<tr>
-			<th><label for="onBeforeHide">onBeforeHide</label></th>
-			<td>
-				<textarea id="onBeforeHide" style="height: 45px;">function(context, contents) {
+}</textarea>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="onBeforeShow">onBeforeShow</label></th>
+				<td colspan="3">
+					<textarea id="onBeforeShow" style="height: 45px;">function(context, contents) {
+	N.log("onBeforeShow", context, contents);
+}</textarea>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="onShow">onShow</label></th>
+				<td colspan="3">
+					<textarea id="onShow" style="height: 45px;">function(context, contents) {
+	N.log("onShow", context, contents);
+}</textarea>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="onBeforeHide">onBeforeHide</label></th>
+				<td colspan="3">
+					<textarea id="onBeforeHide" style="height: 45px;">function(context, contents) {
 	N.log("onBeforeHide", context, contents);
-}</textarea><br>
-				<label for="onBeforeHide" lang="ko_KR">Datepicker가 감춰지기 전에 동작되는 이벤트 핸들러</label>
-				<label for="onBeforeHide" lang="en_US">Event handler for onBeforeHide event</label>
-			</td>
-			<th><label for="onHide">onHide</label></th>
-			<td>
-				<textarea id="onHide" style="height: 45px;">function(context, contents) {
+}</textarea>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="onHide">onHide</label></th>
+				<td colspan="3">
+					<textarea id="onHide" style="height: 45px;">function(context, contents) {
 	N.log("onHide", context, contents);
-}</textarea><br>
-				<label for="onHide" lang="ko_KR">Datepicker가 감춰지기 전에 동작되는 이벤트 핸들러</label>
-				<label for="onHide" lang="en_US">Event handler for onHide event</label>
-			</td>
-		</tr>
+}</textarea>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="onChangeYear">onChangeYear</label></th>
+				<td colspan="3">
+					<textarea id="onChangeYear" style="height: 45px;">function(context, year, e) {
+	N.log("onChangeYear", context, year, e);
+}</textarea>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="onChangeMonth">onChangeMonth</label></th>
+				<td colspan="3">
+					<textarea id="onChangeMonth" style="height: 45px;">function(context, month, year, e) {
+	 N.log("onChangeMonth", context, month, year, e);
+}</textarea>
+				</td>
+			</tr>
+		</tbody>
 	</table>
 
 	<div align="center" class="btnBox">
 		<a id="btnApply" href="#" data-opts='{ "color": "green", "size": "large" }'>
-			<span lang="ko_KR">DatePicker 생성</span>
-			<span lang="en_US">Create DatePicker</span>
+			<span lang="ko_KR">Datepicker 생성</span>
+			<span lang="en_US">Create Datepicker</span>
 		</a>
 		<a id="btnShow" href="#" data-opts='{ "color" : "gray", "size": "large", "disable": true }'>show</a>
 		<a id="btnHide" href="#" data-opts='{ "color" : "gray", "size": "large", "disable": true }'>hide</a>
@@ -70,10 +130,10 @@
 	<p lang="ko_KR" class="smallContTit">결과 : </p>
 	<p lang="en_US" class="smallContTit">Result : </p>
     <div align="center" class="result" style="height: 70px;padding-top: 30px;">
-    	<label for="datepicker">DatePicker</label>
-    	&nbsp;<input id="datepicker" type="text" />
-    	<label for="datepicker" lang="ko_KR">[DatePicker 생성] 버튼을 클릭한 후에 이 입력요소를 클릭 하세요.</label>
-		<label for="datepicker" lang="en_US">Click! this text input element <strong>after click the [Create DatePicker] button</strong></label>
+    	<label for="datepicker">Datepicker</label>
+    	&nbsp;<input id="datepicker" type="text">
+    	<label for="datepicker" lang="ko_KR">[Datepicker 생성] 버튼을 클릭한 후에 이 입력요소를 클릭 하세요.</label>
+		<label for="datepicker" lang="en_US">Click! this text input element <strong>after click the [Create Datepicker] button</strong></label>
     </div>
 </article>
 
@@ -97,24 +157,51 @@
 	        	e.preventDefault();
 
 	        	var opts = {
+        			yearsPanelPosition : N("select#yearsPanelPosition", view).val(),
+        			monthsPanelPosition : N("select#monthsPanelPosition", view).val(),
+        			minYear : N.string.trimToNull(N("#minYear", view).val()) !== null ?
+   						parseInt(N("input#minYear", view).val()) : undefined,
+        			maxYear : N.string.trimToNull(N("#maxYear", view).val()) !== null ?
+       					parseInt(N("input#maxYear", view).val()) : undefined,
+   					yearChangeInput : N("input#yearChangeInput", view).is(":checked"),
+   	           		monthChangeInput : N("input#monthChangeInput", view).is(":checked"),
 	           		monthonly : N("input#monthonly", view).is(":checked"),
+	           		focusin : N("input#focusin", view).is(":checked"),
 	           		onSelect : N.string.trimToNull(N("textarea#onSelect", view).val()) !== null ?
-	           				eval("(" + N("textarea#onSelect", view).val() + ")") : null,
-      				onBeforeShow : N.string.trimToNull(N("textarea#onBeforeShow", view).val()) !== null ?
-           				eval("(" + N("textarea#onBeforeShow", view).val() + ")") : null,
+           				eval("(" + N("textarea#onSelect", view).val() + ")") : null,
+   					onBeforeShow : N.string.trimToNull(N("textarea#onBeforeShow", view).val()) !== null ?
+						eval("(" + N("textarea#onBeforeShow", view).val() + ")") : null,
+      				onShow : N.string.trimToNull(N("textarea#onShow", view).val()) !== null ?
+           				eval("(" + N("textarea#onShow", view).val() + ")") : null,
       				onBeforeHide : N.string.trimToNull(N("textarea#onBeforeHide", view).val()) !== null ?
            				eval("(" + N("textarea#onBeforeHide", view).val() + ")") : null,
       				onHide : N.string.trimToNull(N("textarea#onHide", view).val()) !== null ?
           				eval("(" + N("textarea#onHide", view).val() + ")") : null,
-	           		focusin : N("input#focusin", view).is(":checked")
+       				onChangeYear : N.string.trimToNull(N("textarea#onChangeYear", view).val()) !== null ?
+           				eval("(" + N("textarea#onChangeYear", view).val() + ")") : null,
+       				onChangeMonth : N.string.trimToNull(N("textarea#onChangeMonth", view).val()) !== null ?
+           				eval("(" + N("textarea#onChangeMonth", view).val() + ")") : null
 	       		};
 
-	        	cont.datepicker = N("input#datepicker", view).datepicker(opts);
+	        	try {
+	        		cont.datepicker = N("input#datepicker", view).datepicker(opts);
+	        	} catch(e) {
+	        		N(window).alert(e).show();
+	        		throw N.error(e);
+	        	}
 
 	           	N(this).instance("button").disable();
 	           	N("#btnShow", view).instance("button").enable();
 	           	N("#btnHide", view).instance("button").enable();
 	        });
+
+	        N("#yearsPanelPosition", view).change(function() {
+	        	if($(this).val() === "top") {
+					N(".minMaxYearLine", view).show();
+	        	} else {
+	        		N(".minMaxYearLine", view).hide();
+	        	}
+	        }).change();
 
 	        N("#btnShow", view).click(function(e) {
 	        	e.preventDefault();

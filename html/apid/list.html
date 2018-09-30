@@ -3,17 +3,17 @@
 	list-style: none;
 	padding: 0;
 	margin: 0;
-	border: 1px solid #009688;
+	border: 1px solid #4CAF50;
 }
 
 .demo_list ul#list > li {
 	margin: 0;
 	padding: 10px;
-	border-bottom: 1px solid #009688;
+	border-bottom: 1px solid #4CAF50;
 }
 
 .demo_list .context_wrap__ {
-	border: 1px solid #009688;
+	border: 1px solid #4CAF50;
 }
 
 .demo_list .context_wrap__ > ul#list {
@@ -29,109 +29,85 @@
 	<p lang="ko_KR" class="smallContTit">기본 옵션 : </p>
 	<p lang="en_US" class="smallContTit">Default options : </p>
 	<table class="form">
+		<colgroup>
+			<col style="width: 12%">
+			<col style="width: 38%">
+			<col style="width: 12%">
+			<col style="width: 38%">
+		</colgroup>
 		<tr>
-			<th width="10%" align="right"><label for="context">context</label></th>
-			<td width="40%">
+			<th><label for="context">context</label></th>
+			<td>
 				<input id="context" type="text" value="#list" readonly="readonly" />
-				<label for="context" lang="ko_KR">jQuery selector 입력</label>
-				<label for="context" lang="en_US">Input jQuery selector</label>
 			</td>
-			<th width="10%" align="right"><label for="height">height</label></th>
-			<td width="40%">
-				<input id="height" type="text" value="395" style="width: 50px;" /><br>
-				<label for="height" lang="ko_KR">N.list의 바디 영역 높이 값(0 이면 헤더를 고정하지 않습니다, 기본값은 0)</label>
-				<label for="height" lang="en_US">The height value of N.gird's body area(If this vlaue is 0, does not fix the header, Default value is 0)</label>
+			<th><label for="height">height</label></th>
+			<td>
+				<input id="height" type="text" value="395" style="width: 50px;" />
 			</td>
 		</tr>
 		<tr>
 			<th><label for="validate">validate</label></th>
 			<td>
 				<input id="validate" type="checkbox" checked="checked" />
-				<label for="validate" lang="ko_KR">체크를 해제(false)하면 입력 한 값의 실시간(focus out) 데이터 검증 기능을 비활성화 합니다.</label>
-				<label for="validate" lang="en_US">If this checkbox with uncheck(false), disable feature to the realtime(focus out) validation check</label>
 			</td>
 			<th><label for="html">html</label></th>
 			<td>
 				<input id="html" type="checkbox" />
-				<label for="html" lang="ko_KR">체크(true)하면 데이터의 HTML 태그를 인식 합니다.</label>
-				<label for="html" lang="en_US">If this checkbox with check(true), recognize the HTML tags in data</label>
 			</td>
 		</tr>
 		<tr>
 			<th><label for="addTop">addTop</label></th>
 			<td colspan="3">
 				<input id="addTop" type="checkbox" checked="checked" />
-				<label for="addTop" lang="ko_KR">체크(true)하면 add 메서드 호출 시 새로운 행을 위쪽에 생성합니다.</label>
-				<p lang="ko_KR" class="alert">addTop 옵션이 false 이면 스크롤페이징 기능과 행이 순서대로 그려지는 효과가 비활성화 됩니다.</p>
-				<label for="addTop" lang="en_US">If this checkbox with check(true), create the new row activate the top when call the add method</label>
-				<p lang="en_US" class="alert">If the addTop option is false, the scrolling paging feature and the effect that rows are drawn in sequence are disabled.</p>
 			</td>
 		</tr>
 		<tr>
 			<th><label for="vResizable">vResizable</label></th>
 			<td colspan="3">
 				<input id="vResizable" type="checkbox" />
-				<label for="vResizable" lang="ko_KR">체크(true)하면 리스트의 높이를 조절할 수 있는 기능을 활성화 합니다.</label>
-				<label for="vResizable" lang="en_US">If this checkbox with check(true), enable to the vertical resize feature for N.list's body height</label>
 			</td>
 		</tr>
 		<tr>
 			<th><label for="select">select</label></th>
 			<td>
 				<input id="select" type="checkbox" />
-				<label for="select" lang="ko_KR">체크(true)하면 단일 행 선택 기능을 활성화 합니다.</label>
-				<label for="select" lang="en_US">If this checkbox with check(true), enable feature to the single row select</label>
 			</td>
 			<th><label for="unselect">unselect</label></th>
 			<td>
 				<input id="unselect" type="checkbox" checked="checked" />
-				<label for="unselect" lang="ko_KR">체크를 해제(false)하면 행 선택 취소 기능을 비활성화 합니다(multiselect 옵션이 true 이면 이 옵션은 적용 되지 않음)</label>
-				<label for="unselect" lang="en_US">If this checkbox with uncheck(false), disable feature to the unselect the selected row(this option is not applicable if multiselect option is true)</label>
 			</td>
 		</tr>
 		<tr>
 			<th><label for="multiselect">multiselect</label></th>
 			<td colspan="3">
 				<input id="multiselect" type="checkbox" />
-				<label for="multiselect" lang="ko_KR">체크(true)하면 여러 행 선택 기능을 활성화 합니다.</label>
-				<label for="multiselect" lang="en_US">If this checkbox with check(true), enable feature to the multi row select</label>
 			</td>
 		</tr>
 		<tr>
 			<th><label for="checkAll">checkAll</label></th>
 			<td>
 				<input id="checkAll" type="text" value="#checkAll" />
-				<label for="checkAll" lang="ko_KR">리스트의 checkAllTarget 으로 지정한 체크박스들을 모두 선택할 체크 박스</label>
-				<label for="checkAll" lang="en_US">Checkbox element in N.list's header to check all checkboxes in body area</label>
 			</td>
 			<th><label for="checkAllTarget">checkAllTarget</label></th>
 			<td>
 				<input id="checkAllTarget" type="text" value=".checkAllTarget" />
-				<label for="checkAllTarget" lang="ko_KR">모두 체크될 리스트의 체크박스들</label>
-				<label for="checkAllTarget" lang="en_US">To be checked all checkboxes in body area</label>
 			</td>
 		</tr>
 		<tr>
 			<th><label for="hover">hover</label></th>
 			<td>
 				<input id="hover" type="checkbox" />
-				<label for="hover" lang="ko_KR">체크(true)하면 hover 효과를 보여줍니다.</label>
-				<label for="hover" lang="en_US">If this checkbox with check(true), display hover effect</label>
 			</td>
-			<th><label for="createRowDelay">createRow<br>Delay</label></th>
+			<th><label for="createRowDelay">createRowDelay</label></th>
 			<td>
 				<input id="createRowDelay" type="text" value="1" />
-				<label for="createRowDelay" lang="ko_KR">[행 생성 효과(effect)]각 행 요소가 만들어질 때의 지연 시간</label>
-				<label for="createRowDelay" lang="en_US">[Create row effect]Delay time(ms) for each create row element</label>
 			</td>
 		</tr>
 		<tr>
-			<th><label for="scrollPagingSize">scrollPaging<br>.size</label></th>
+			<th><label for="scrollPagingSize">scrollPaging.size</label></th>
 			<td colspan="3">
 				<input id="scrollPagingSize" type="text" value="50" />
-				<label for="scrollPagingSize" lang="ko_KR">스크롤 페이징 사이즈</label>
 				<p class="alert" lang="ko_KR">0 이면 스크롤 페이징 하지 않습니다.</p>
-				<label for="scrollPagingSize" lang="en_US">Scroll paging size</label>
 				<p class="alert" lang="en_US">If the value is 0 it does not scroll paging.</p>
 			</td>
 		</tr>
@@ -142,9 +118,7 @@
 	N.log("rowHandlerBeforeBind", rowIdx);
 	N.log(rowEle);
 	N.log(rowData);
-}</textarea><br>
-				<label for="rowHandlerBeforeBind" lang="ko_KR">행 요소(LI)가 만들어질 때마다 데이터를 바인드 하기 전 호출되는 이벤트 핸들러</label>
-				<label for="rowHandlerBeforeBind" lang="en_US">Event handler called before binding data whenever a row element(LI) is created</label>
+}</textarea>
 			</td>
 			<th><label for="rowHandler">rowHandler</label></th>
 			<td>
@@ -152,9 +126,7 @@
 	N.log("rowHandler", rowIdx);
 	N.log(rowEle);
 	N.log(rowData);
-}</textarea><br>
-				<label for="rowHandler" lang="ko_KR">행 요소(LI)가 만들어질 때마다 데이터를 바인드 한 후 호출되는 이벤트 핸들러</label>
-				<label for="rowHandler" lang="en_US">Event handler called after binding data whenever a row element(LI) is created</label>
+}</textarea>
 			</td>
 		</tr>
 		<tr>
@@ -166,32 +138,24 @@
 	N.log(rowData);
 	N.log(beforeRowIdx);
 	N.log(e); // Click event object
-}</textarea><br>
-				<label for="onSelect" lang="ko_KR">행을 선택 할 때 실행되는 이벤트 핸들러</label>
-				<label for="onSelect" lang="en_US">Event handler for select the row</label>
+}</textarea>
 			</td>
 			<th><label for="onBind">onBind</label></th>
 			<td>
 				<textarea id="onBind" style="height: 60px;">function(context, data) {
 	N.log("onBind", context);
 	N.log(data);
-}</textarea><br>
-				<label for="onBind" lang="ko_KR">데이터가 바인드가 완료 된 후 실행되는 이벤트 핸들러</label>
-				<label for="onBind" lang="en_US">Event handler for complete the data bind</label>
+}</textarea>
 			</td>
 		</tr>
 		<tr>
 			<th><label for="windowScrollLock">windowScroll Lock</label></th>
 			<td>
 				<input id="windowScrollLock" type="checkbox" checked="checked" />
-				<label for="windowScrollLock" lang="ko_KR">체크를 해제(false)하면 N.list의 바디영역을 스크롤 할 때 윈도우 스크롤을 차단하지 않습니다.</label>
-				<label for="windowScrollLock" lang="en_US">If this checkbox with uncheck(false), do not block window scroll when scroll the list's body area</label>
 			</td>
 			<th><label for="revert">revert</label></th>
 			<td>
 				<input id="revert" type="checkbox" checked="checked" />
-				<label for="revert" lang="ko_KR">체크를 해제(false)하면 revert 기능을 Off 합니다(기본값은 false).</label>
-				<label for="revert" lang="en_US">If this checkbox with check(true), off the revert feature(default value is false)</label>
 			</td>
 		</tr>
 	</table>
@@ -199,10 +163,15 @@
 	<p lang="ko_KR" class="smallContTit">함수 옵션 : </p>
 	<p lang="en_US" class="smallContTit">Method options : </p>
 	<table class="form">
+		<colgroup>
+			<col style="width: 12%">
+			<col style="width: 12%">
+			<col style="width: 76%">
+		</colgroup>
 		<tr>
-			<th width="10%">bind</th>
-			<th width="10%"><label for="append">arguments[1]</label></th>
-			<td width="80%">
+			<th>bind</th>
+			<th><label for="append">arguments[1]</label></th>
+			<td>
 				<select id="append">
 					<option value=""></option>
 					<option value="append">append</option>
@@ -212,27 +181,27 @@
 			</td>
 		</tr>
 		<tr>
-			<th width="10%">add</th>
-			<th width="10%"><label for="addRow">arguments[0]</label></th>
-			<td width="80%">
+			<th>add</th>
+			<th><label for="addRow">arguments[0]</label></th>
+			<td>
 				<input id="addRow" type="number" value="" />
 				<label for="addRow" lang="ko_KR">추가할 행 인덱스, 입력하지 않으면 addTop 옵션의 설정이 적용 됨.</label>
 				<label for="addRow" lang="en_US">The row index to add, If not, the setting of addTop option is applied.</label>
 			</td>
 		</tr>
 		<tr>
-			<th width="10%">revert</th>
-			<th width="10%"><label for="rvtRow">arguments[0]</label></th>
-			<td width="80%">
+			<th>revert</th>
+			<th><label for="rvtRow">arguments[0]</label></th>
+			<td>
 				<input id="rvtRow" type="text" value="[0, 2, 3]" />
 				<label for="rvtRow" lang="ko_KR">복원 할 행 인덱스, 빈값 입력 시 모든 행 데이터 복원</label>
 				<label for="rvtRow" lang="en_US">The row index to revert, if set empty value, revert the all row data</label>
 			</td>
 		</tr>
 		<tr>
-			<th width="10%">remove</th>
-			<th width="10%"><label for="rmvRow">arguments[0]</label></th>
-			<td width="80%">
+			<th>remove</th>
+			<th><label for="rmvRow">arguments[0]</label></th>
+			<td>
 				<input id="rmvRow" type="text" value="[0, 2, 3]" />
 				<label for="rmvRow" lang="ko_KR">삭제 할 행 인덱스</label>
 				<label for="rmvRow" lang="en_US">The row index to remove</label>
@@ -240,8 +209,8 @@
 		</tr>
 		<tr>
 			<th width="10%" rowspan="3">val</th>
-			<th width="10%"><label for="row">arguments[0]</label></th>
-			<td width="80%">
+			<th><label for="row">arguments[0]</label></th>
+			<td>
 				<input id="row" type="number" value="0" />
 				<label for="row" lang="ko_KR">대상 행 인덱스</label>
 				<label for="row" lang="en_US">Target row index</label>
@@ -264,9 +233,9 @@
 			</td>
 		</tr>
 		<tr>
-			<th width="10%">data</th>
-			<th width="10%"><label for="data">arguments[0]</label></th>
-			<td width="80%">
+			<th>data</th>
+			<th><label for="data">arguments[0]</label></th>
+			<td>
 				<select id="data">
 					<option value="modified">modified</option>
 					<option value="insert">insert</option>
@@ -302,8 +271,8 @@
 		</tr>
 		<tr>
 			<th width="10%" rowspan="2">select</th>
-			<th width="10%"><label for="selectIndex">arguments[0]</label></th>
-			<td width="80%">
+			<th><label for="selectIndex">arguments[0]</label></th>
+			<td>
 				<input id="selectIndex" type="text" value="[0, 2]" />
 				<label for="selectIndex" lang="ko_KR">선택 할 행 인덱스</label>
 				<label for="selectIndex" lang="en_US">The row index to select</label>
@@ -319,8 +288,8 @@
 		</tr>
 		<tr>
 			<th width="10%" rowspan="2">check</th>
-			<th width="10%"><label for="checkIndex">arguments[0]</label></th>
-			<td width="80%">
+			<th><label for="checkIndex">arguments[0]</label></th>
+			<td>
 				<input id="checkIndex" type="text" value="[1, 3]" />
 				<label for="checkIndex" lang="ko_KR">체크 할 행 인덱스</label>
 				<label for="checkIndex" lang="en_US">The row index to check</label>
@@ -369,9 +338,9 @@
 			</td>
 		</tr>
 		<tr>
-			<th width="10%">validate</th>
-			<th width="10%"><label for="vldRow">arguments[0]</label></th>
-			<td width="80%">
+			<th>validate</th>
+			<th><label for="vldRow">arguments[0]</label></th>
+			<td>
 				<input id="vldRow" type="text" />
 				<label for="vldRow" lang="ko_KR">검사 할 행 인덱스, 빈값 입력 시 모든 행 데이터 검사</label>
 				<label for="vldRow" lang="en_US">The row index to validate, if set empty value, validate the all row data</label>
@@ -468,9 +437,9 @@
 	       				eval("(" + N("#rowHandlerBeforeBind", view).val() + ")") : null,
 	       			rowHandler : N.string.trimToNull(N("#rowHandler", view).val()) !== null ?
 	       				eval("(" + N("#rowHandler", view).val() + ")") : null,
-	    				onSelect : N.string.trimToNull(N("#onSelect", view).val()) !== null ?
-	        				eval("(" + N("#onSelect", view).val() + ")") : null,
-	        			onBind : N.string.trimToNull(N("#onBind", view).val()) !== null ?
+    				onSelect : N.string.trimToNull(N("#onSelect", view).val()) !== null ?
+        				eval("(" + N("#onSelect", view).val() + ")") : null,
+        			onBind : N.string.trimToNull(N("#onBind", view).val()) !== null ?
 	        				eval("(" + N("#onBind", view).val() + ")") : null,
 	        		windowScrollLock : N("#windowScrollLock", view).is(":checked"),
 	        		revert : N("#revert", view).is(":checked")

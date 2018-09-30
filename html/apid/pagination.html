@@ -16,53 +16,41 @@
 	</div>
 	<p lang="ko_KR" class="smallContTit">기본 옵션 : </p>
 	<p lang="en_US" class="smallContTit">Default options : </p>
-	<table class="form" style="width: 100%;">
+	<table class="form">
 		<colgroup>
-			<col style="width: 13%">
-			<col style="width: 37%">
-			<col style="width: 13%">
-			<col style="width: 37%">
+			<col style="width: 12%">
+			<col style="width: 38%">
+			<col style="width: 12%">
+			<col style="width: 38%">
 		</colgroup>
 		<tr>
 			<th align="right"><label for="context">context</label></th>
 			<td>
 				<input id="context" type="text" value="#pagination" readonly="readonly" />
-				<label for="context" lang="ko_KR">jQuery selector 입력</label>
-				<label for="context" lang="en_US">Input jQuery selector</label>
 			</td>
 			<th align="right"><label for="totalCount">totalCount</label></th>
 			<td>
 				<input id="totalCount" type="text" value="0" />
-				<label for="totalCount" lang="ko_KR">페이징 데이터의 전체 행 수</label>
-				<label for="totalCount" lang="en_US">Total count of paging data</label>
 			</td>
 		</tr>
 		<tr>
 			<th align="right"><label for="countPerPage">countPerPage</label></th>
 			<td>
 				<input id="countPerPage" type="text" value="10"/>
-				<label for="countPerPage" lang="ko_KR">페이지당 행 수</label>
-				<label for="countPerPage" lang="en_US">Row count per page</label>
 			</td>
 			<th align="right"><label for="countPerPageSet">countPerPageSet</label></th>
 			<td>
 				<input id="countPerPageSet" type="text" value="10" />
-				<label for="countPerPageSet" lang="ko_KR">페이지 세트당 페이지 수</label>
-				<label for="countPerPageSet" lang="en_US">Page count per Pageset</label>
 			</td>
 		</tr>
 		<tr>
 			<th align="right"><label for="pageNo">pageNo</label></th>
 			<td>
 				<input id="pageNo" type="text" value="1"/>
-				<label for="pageNo" lang="ko_KR">페이지 번호</label>
-				<label for="pageNo" lang="en_US">Page number</label>
 			</td>
 			<th align="right"><label for="blockOnChangeWhenBind">blockOnChangeWhenBind</label></th>
 			<td>
 				<input id="blockOnChangeWhenBind" type="checkbox">
-				<label for="blockOnChangeWhenBind" lang="ko_KR">Bind 할 때 onChange 이벤트를 차단 할지 여부</label>
-				<label for="blockOnChangeWhenBind" lang="en_US">Whether to block onChange event when bind</label>
 			</td>
 		</tr>
 		<tr>
@@ -75,19 +63,18 @@
 	});
 	N.log(currPageNavInfo);
 }</textarea><br>
-				<label for="onChange" lang="ko_KR">페이지가 변경되면 실행되는 이벤트 핸들러</label>
-				<label for="onChange" lang="en_US">Event handler for change the page</label>
 			</td>
 		</tr>
 	</table>
 
 	<p lang="ko_KR" class="smallContTit">함수 옵션 : </p>
 	<p lang="en_US" class="smallContTit">Method options : </p>
-	<table class="form" style="width: 100%;">
+	<table class="form">
 		<colgroup>
-			<col style="width: 13%">
-			<col style="width: 13%">
-			<col style="width: auto" >
+			<colgroup>
+			<col style="width: 12%">
+			<col style="width: 12%">
+			<col style="width: 76%">
 		</colgroup>
 		<tr>
 			<th>data</th>

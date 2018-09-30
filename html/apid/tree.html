@@ -2,7 +2,7 @@
 	<p lang="ko_KR" class="smallContTit">데이터 : </p>
 	<p lang="en_US" class="smallContTit">Data : </p>
 	<div class="dataBox">
-	<pre class="data" class="line-numbers" style="height: 250px;overflow: scroll;border: 1px solid #26A69A;"><code id="data" class="language-javascript">[
+	<pre class="data" class="line-numbers" style="height: 250px;overflow: scroll;border: 1px solid #66BB6A;"><code id="data" class="language-javascript">[
 	{
     	"key": "Root",
 	    "val": "0",
@@ -83,61 +83,47 @@
 	</div>
 	<p lang="ko_KR" class="smallContTit">기본 옵션 : </p>
 	<p lang="en_US" class="smallContTit">Default options : </p>
-	<table class="form" style="width: 100%;">
+	<table class="form">
 		<colgroup>
-			<col style="width: 10%">
-			<col style="width: 40%">
-			<col style="width: 10%">
-			<col style="width: 40%">
+			<col style="width: 12%">
+			<col style="width: 38%">
+			<col style="width: 12%">
+			<col style="width: 38%">
 		</colgroup>
 		<tr>
 			<th align="right"><label for="context">context</label></th>
 			<td colspan="3">
 				<input id="context" type="text" value="#tree" readonly="readonly" />
-				<label for="context" lang="ko_KR">jQuery selector 입력</label>
-				<label for="context" lang="en_US">Input jQuery selector</label>
 			</td>
 		</tr>
 		<tr>
 			<th align="right"><label for="context">key</label></th>
 			<td>
 				<input id="key" type="text" value="key" />
-				<label for="key" lang="ko_KR">키(노드명) 컬럼 명</label>
-				<label for="key" lang="en_US">key(node name) column name</label>
 			</td>
 			<th align="right"><label for="val">val</label></th>
 			<td>
 				<input id="val" type="text" value="val" />
-				<label for="val" lang="ko_KR">값 컬럼 명</label>
-				<label for="val" lang="en_US">value column name</label>
 			</td>
 		</tr>
 		<tr>
 			<th align="right"><label for="level">level</label></th>
 			<td>
 				<input id="level" type="text" value="level"/>
-				<label for="level" lang="ko_KR">레벨 컬럼 명</label>
-				<label for="level" lang="en_US">level column name</label>
 			</td>
 			<th align="right"><label for="parent">parent</label></th>
 			<td>
 				<input id="parent" type="text" value="parent" />
-				<label for="parent" lang="ko_KR">부모 노드 값 컬럼 명</label>
-				<label for="parent" lang="en_US">parent node value column name</label>
 			</td>
 		</tr>
 		<tr>
 			<th align="right"><label for="folderSelectable">folderSelectable</label></th>
 			<td>
 				<input id="folderSelectable" type="checkbox" />
-				<label for="folderSelectable" lang="ko_KR">체크(true)하면 노드 폴더노드를 선택할 수 있습니다.</label>
-				<label for="folderSelectable" lang="en_US">If this checkbox with check(true), you can select folder node</label>
 			</td>
 			<th align="right"><label for="checkbox">checkbox</label></th>
 			<td>
 				<input id="checkbox" type="checkbox" />
-				<label for="checkbox" lang="ko_KR">체크(true)하면 노드 명 앞에 체크박스를 표시 합니다.</label>
-				<label for="checkbox" lang="en_US">If this checkbox with check(true), display checkbox before node name</label>
 			</td>
 		</tr>
 		<tr>
@@ -146,8 +132,6 @@
 				<textarea id="onSelect" style="height: 45px;max-width: none;">function(selNodeIndex, selNodeEle, selNodeData) {
 	N.log(selNodeIndex, selNodeEle, selNodeData);
 }</textarea><br>
-				<label for="onSelect" lang="ko_KR">노드 요소가 선택되었을때 실행되는 이벤트 핸들러</label>
-				<label for="onSelect" lang="en_US">Event handler for select the node element</label>
 			</td>
 			<th align="right"><label for="onCheck">onCheck</label></th>
 			<td>
@@ -161,19 +145,17 @@
 			checkedElesData);
 		N.log(checkFlag);
 }</textarea><br>
-				<label for="onCheck" lang="ko_KR">체크박스가 선택되었을때 실행되는 이벤트 핸들러</label>
-				<label for="onCheck" lang="en_US">Event handler for select the checkbox</label>
 			</td>
 		</tr>
 	</table>
 
 	<p lang="ko_KR" class="smallContTit">함수 옵션 : </p>
 	<p lang="en_US" class="smallContTit">Method options : </p>
-	<table class="form" style="width: 100%;">
+	<table class="form">
 		<colgroup>
-			<col style="width: 13%">
-			<col style="width: 13%">
-			<col style="width: auto" >
+			<col style="width: 12%">
+			<col style="width: 12%">
+			<col style="width: 76%">
 		</colgroup>
 		<tr>
 			<th>data</th>

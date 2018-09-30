@@ -2,7 +2,7 @@
 	<p lang="ko_KR" class="smallContTit">데이터 : </p>
 	<p lang="en_US" class="smallContTit">Data : </p>
 	<div class="dataBox">
-		<pre class="data" class="line-numbers" style="height: 250px;overflow: scroll;border: 1px solid #26A69A;"><code id="data" class="language-javascript">[{
+		<pre class="data" class="line-numbers" style="height: 250px;overflow: scroll;border: 1px solid #66BB6A;"><code id="data" class="language-javascript">[{
     "gender": [{
 	     	"key" : "male",
 	     	"val" : "01"
@@ -66,50 +66,46 @@
 	<p lang="ko_KR" class="smallContTit">기본 옵션 : </p>
 	<p lang="en_US" class="smallContTit">Default options : </p>
 	<table class="form">
+		<colgroup>
+			<col style="width: 12%">
+			<col style="width: 38%">
+			<col style="width: 12%">
+			<col style="width: 38%">
+		</colgroup>
 		<tr>
-			<th width="10%"><label for="context">context</label></th>
-			<td width="40%">
+			<th><label for="context">context</label></th>
+			<td>
 				<select id="context">
 					<option value="#eyeColor">#eyeColor</option>
 					<option value="#company" selected="selected">#company</option>
 					<option value="#gender">#gender</option>
 					<option value="#favoriteFruit">#favoriteFruit</option>
 				</select>
-				<label for="context" lang="ko_KR">jQuery selector 입력</label>
-				<label for="context" lang="en_US">Input jQuery selector</label>
 			</td>
-			<th width="10%"><label for="data">data</label></th>
-			<td width="40%">
+			<th><label for="data">data</label></th>
+			<td>
 				<select id="data">
 					<option value="eyeColor">eye color</option>
 					<option value="company" selected="selected">company</option>
 					<option value="gender">gender</option>
 					<option value="favoriteFruit">favorite fruit</option>
 				</select>
-				<label for="data" lang="ko_KR">데이터 세트 명</label>
-				<label for="data" lang="en_US">Data set name</label>
 			</td>
 		</tr>
 		<tr>
 			<th><label for="key">key</label></th>
 			<td>
 				<input id="key" type="text" value="key" />
-				<label for="key" lang="ko_KR">name 속성 컬럼 명</label>
-				<label for="key" lang="en_US">name attribute column name</label>
 			</td>
 			<th><label for="val">val</label></th>
 			<td>
 				<input id="val" type="text" value="val" />
-				<label for="val" lang="ko_KR">value 속성 컬럼 명</label>
-				<label for="val" lang="en_US">value attribute column name</label>
 			</td>
 		</tr>
 		<tr>
 			<th><label for="append">append</label></th>
 			<td>
 				<input id="append" type="checkbox" checked="checked" />
-				<label for="append" lang="ko_KR">체크를 해제(false)하면 바인드하기 전에 select 요소 안의 요소(option)를 비우고 바인드 합니다.</label>
-				<label for="append" lang="en_US">If this checkbox with uncheck(false), empty inner element(options) of select element before bind</label>
 			</td>
 			<th><label for="direction">direction</label></th>
 			<td>
@@ -117,8 +113,6 @@
 					<option value="h">h</option>
 					<option value="v">v</option>
 				</select>
-				<label for="direction" lang="ko_KR">h : 선택요소(radio, checkbox)를 가로로 표시 합니다., v : 선택요소(radio, checkbox)를 세로로 표시 합니다.</label>
-				<label for="direction" lang="en_US">h : display horizontal radio and checkbox, v : display vertical radio and checkbox</label>
 			</td>
 		</tr>
 	</table>
@@ -126,37 +120,42 @@
 	<p lang="ko_KR" class="smallContTit">함수 옵션 : </p>
 	<p lang="en_US" class="smallContTit">Method options : </p>
 	<table class="form">
+		<colgroup>
+			<col style="width: 12%">
+			<col style="width: 12%">
+			<col style="width: 76%">
+		</colgroup>
 		<tr>
-			<th width="10%">val</th>
-			<th width="10%"><label for="val">arguments[0]</label></th>
-			<td width="80%">
+			<th>val</th>
+			<th><label for="val">arguments[0]</label></th>
+			<td>
 				<input id="val" type="text" value="05" />
 				<label for="val" lang="ko_KR">입력하지 않으면 선택된 값을 반환하고 입력하면 입력한 값과 같은 선택지 요소를 선택 합니다.</label>
 				<label for="val" lang="en_US">If does not set value to this input, return the selected value. otherwise select optional element the same input value</label>
 			</td>
 		</tr>
 		<tr>
-			<th width="10%">index</th>
-			<th width="10%"><label for="index">arguments[0]</label></th>
-			<td width="80%">
+			<th>index</th>
+			<th><label for="index">arguments[0]</label></th>
+			<td>
 				<input id="index" type="text" value="3" />
 				<label for="index" lang="ko_KR">입력하지 않으면 선택된 index 값을 반환하고 index 값을 입력하면 인덱스 값에 해당하는 선택지 요소를 선택합니다.</label>
 				<label for="index" lang="en_US">If it does not set the value to this input return the selected index value. otherwise, If you enter index value, it selects optional element corresponding to index value.</label>
 			</td>
 		</tr>
 		<tr>
-			<th width="10%">remove</th>
-			<th width="10%"><label for="remove">arguments[0]</label></th>
-			<td width="80%">
+			<th>remove</th>
+			<th><label for="remove">arguments[0]</label></th>
+			<td>
 				<input id="remove" type="text" value="04" />
 				<label for="remove" lang="ko_KR">입력한 값에 해당하는 선택지 요소와 해당 행 데이터를 제거 합니다.</label>
 				<label for="remove" lang="en_US">Removes the optional element and its row data corresponding to the entered value.</label>
 			</td>
 		</tr>
 		<tr>
-			<th width="10%">data</th>
-			<th width="10%"><label for="data">arguments[0]</label></th>
-			<td width="80%">
+			<th>data</th>
+			<th><label for="data">arguments[0]</label></th>
+			<td>
 				<select id="data">
 					<option value="true">true</option>
 					<option value="false">false</option>
@@ -175,9 +174,9 @@
 			</td>
 		</tr>
 		<tr>
-			<th width="10%">reset</th>
-			<th width="10%"><label for="reset">arguments[0]</label></th>
-			<td width="80%">
+			<th>reset</th>
+			<th><label for="reset">arguments[0]</label></th>
+			<td>
 				<input id="reset" type="checkbox" checked="checked" />
 				<label for="reset" lang="ko_KR">체크를 해제(false)하면 리셋할때 아무 요소도 선택하지 않습니다.</label>
 				<label for="reset" lang="en_US">If this checkbox with uncheck(false), it does not select any element when reset</label>

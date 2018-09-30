@@ -16,8 +16,6 @@
 					<option value="#result" selected="selected">#result</option>
 					<option value="#input">#input</option>
 				</select>
-				<label for="context" lang="ko_KR">window 는 window 객체이고 #result 는 결과가 표시되는 요소의 id 입니다. #input 은 입력 요소의 id 입니다.</label>
-				<label for="context" lang="en_US">window value is window object and #result value is element's id for display the result. #input is input element's id</label>
 			</td>
 			<th><label for="msg">msg</label></th>
 			<td><textarea id="msg">
@@ -27,100 +25,72 @@
 			<th><label for="confirm">confirm</label></th>
 			<td>
 				<input id="confirm" type="checkbox" />
-				<label for="confirm" lang="ko_KR">체크(true)하면 "확인", "취소" 버튼이 표시 됩니다.</label>
-				<label for="confirm" lang="en_US">If this checkbox with check(true), display "OK" and "Cancel" button</label>
 			</td>
 			<th><label for="html">html</label></th>
 			<td>
 				<input id="html" type="checkbox" />
-				<label for="html" lang="ko_KR">체크(true)하면 데이터의 HTML 태그를 인식 합니다.</label>
-				<label for="html" lang="en_US">If this checkbox with check(true), recognize the HTML tags in data</label>
 			</td>
 		</tr>
 		<tr>
 			<th><label for="title">title</label></th>
 			<td colspan="3">
-				<input id="title" type="text" value="Alert Title" style="width: 50%;" /><br>
-				<label for="title" lang="ko_KR">입력하지 않으면 메세지 대화상자의 타이틀바가 표시 되지 않습니다.</label>
-				<label for="title" lang="en_US">If do not input title, it does not display title bar</label>
+				<input id="title" type="text" value="Alert Title" style="width: 50%;" />
 			</td>
 		</tr>
 		<tr>
 			<th><label for="modal">modal</label></th>
 			<td>
 				<input id="modal" type="checkbox" checked="checked" />
-				<label for="modal" lang="ko_KR">체크를 해제(false)하면 모달 오버레이 층이 보이지 않습니다.</label>
-				<label for="modal" lang="en_US">If this checkbox with uncheck(false), hide modal overlay layer</label>
 			</td>
 			<th><label for="button">button</label></th>
 			<td>
 				<input id="button" type="checkbox" checked="checked" />
-				<label for="button" lang="ko_KR">체크를 해제(false)하면 버튼바 영역이 표시 되지 않습니다.</label>
-				<label for="button" lang="en_US">If this checkbox with uncheck(false), it does not display button bar</label>
 			</td>
 		</tr>
 		<tr>
 			<th><label for="top">top</label></th>
 			<td>
-				<input id="top" type="text" value="undefined" /><br>
-				<label for="top" lang="ko_KR">메세지 컨텐츠 영역의 top 위치 값, 값이 undefined 면 auto 로 지정 됩니다.</label>
-				<label for="top" lang="en_US">Message contents top position, undefined is auto</label>
+				<input id="top" type="text" value="undefined" />
 			</td>
 			<th><label for="left">left</label></th>
 			<td>
-				<input id="left" type="text" value="undefined" /><br>
-				<label for="left" lang="ko_KR">메세지 컨텐츠 영역의 left 위치 값, 값이 undefined 면 auto 로 지정 됩니다.</label>
-				<label for="left" lang="en_US">Message contents left position, undefined is auto</label>
+				<input id="left" type="text" value="undefined" />
 			</td>
 		</tr>
 		<tr>
 			<th><label for="width">width</label></th>
 			<td>
-				<input id="width" type="text" value="300" /><br>
-				<label for="width" lang="ko_KR">메세지 컨텐츠 영역의 넓이, 값이 0 이면 auto 로 지정 됩니다.</label>
-				<label for="width" lang="en_US">Message contents width, 0 is auto</label>
+				<input id="width" type="text" value="300" />
 			</td>
 			<th><label for="height">height</label></th>
 			<td>
-				<input id="height" type="text" value="100" /><br>
-				<label for="height" lang="ko_KR">메세지 컨텐츠 영역의 높이, 값이 0 이면 auto 로 지정 됩니다.</label>
-				<label for="height" lang="en_US">Message contents height, 0 is auto</label>
+				<input id="height" type="text" value="100" />
 			</td>
 		</tr>
 		<tr>
 			<th><label for="alwaysOnTop">alwaysOnTop</label></th>
 			<td>
 				<input id="alwaysOnTop" type="checkbox" checked="checked" />
-				<label for="alwaysOnTop" lang="ko_KR">체크(true)하면 메세지 대화상자의 z-index 값을 모든 요소의 최 상위 값으로 지정 하여 메세지 대화상자가 항상 최 상위에 보이게 합니다.</label>
-				<label for="alwaysOnTop" lang="en_US">If this checkbox with check(true), Set a max value of all elements to z-index of message dialog</label>
 			</td>
 			<th><label for="dynPos">dynPos</label></th>
 			<td>
 				<input id="dynPos" type="checkbox" checked="checked" />
-				<label for="dynPos" lang="ko_KR">체크를 해제(false)하면 브라우저 창 크기 조절 시 블록 오버레이의 크기와 메세지 대화상자의 위치를 보정하지 않습니다.</label>
-				<label for="dynPos" lang="en_US">If this checkbox with uncheck(false), it does not correction the position of Message overlay and message dialog</label>
 			</td>
 		</tr>
 		<tr>
 			<th><label for="draggable">draggable</label></th>
 			<td>
 				<input id="draggable" type="checkbox" />
-				<label for="draggable" lang="ko_KR">체크(true)하면 메세지 대화상자를 드래그&amp;드롭 할 수 있습니다.</label>
-				<label for="draggable" lang="en_US">If this checkbox with check(true), you can drag &amp; drop the messege dialog</label>
 			</td>
 			<th><label for="draggableOverflowCorrection">draggableOverflowCorrection</label></th>
 			<td>
 				<input id="draggableOverflowCorrection" type="checkbox" checked="checked" />
-				<label for="draggableOverflowCorrection" lang="ko_KR">체크를 해제(false)하면 메세지 대화상자를 화면 밖으로 드래그 &amp; 드롭 할 수 있습니다.</label>
-				<label for="draggableOverflowCorrection" lang="en_US">If this checkbox with uncheck(false), you can drag &amp; drop the messege dialog to out of screen</label>
 			</td>
 		</tr>
 		<tr>
 			<th><label for="overlayClose">overlayClose</label></th>
 			<td colspan="3">
 				<input id="overlayClose" type="checkbox" checked="checked" />
-				<label for="overlayClose" lang="ko_KR">체크를 해제(false)하면 오버레이 요소를 클릭 할 때 메세지 대화상자를 닫지 않습니다.</label>
-				<label for="overlayClose" lang="en_US">If this checkbox with uncheck(false), it does not close the message dialog when clicking the overlay element.</label>
 			</td>
 		</tr>
 		<tr>
@@ -129,18 +99,23 @@
 				<textarea id="onOk">
 function(msgContext, msgContents) {
 	N.log("onOk", msgContext, msgContents);
-}</textarea><br>
-				<label for="onOk" lang="ko_KR">"확인" 버튼 클릭 시 작동되는 이벤트 핸들러</label>
-				<label for="onOk" lang="en_US">Event handler for "OK" button click event</label>
+}</textarea>
 			</td>
 			<th><label for="onCancel">onCancel</label></th>
 			<td>
 				<textarea id="onCancel">
 function(msgContext, msgContents) {
 	N.log("onCancel", msgContext, msgContents);
-}</textarea><br>
-				<label for="onCancel" lang="ko_KR">"취소" 버튼 이나 오버레이, 닫기(X) 버튼 클릭 시 작동되는 이벤트 핸들러</label>
-				<label for="onCancel" lang="en_US">Event handler for "Cancel" button or message overlay or close(X) button click event</label>
+}</textarea>
+			</td>
+		</tr>
+		<tr>
+			<th><label for="onShow">onShow</label></th>
+			<td colspan="3">
+				<textarea id="onShow">
+function(msgContext, msgContents) {
+	N.log("onShow", msgContext, msgContents);
+}</textarea>
 			</td>
 		</tr>
 	</table>
@@ -195,7 +170,9 @@ function(msgContext, msgContents) {
 	            	onOk : N.string.trimToNull(N("#onOk", view).val()) !== null ?
 	            			eval("(" + N("#onOk", view).val() + ")") : null,
 	            	onCancel : N.string.trimToNull(N("#onCancel", view).val()) !== null ?
-	            			eval("(" + N("#onCancel", view).val() + ")") : null
+	            			eval("(" + N("#onCancel", view).val() + ")") : null,
+           			onShow : N.string.trimToNull(N("#onShow", view).val()) !== null ?
+   	            			eval("(" + N("#onShow", view).val() + ")") : null
 	            };
 	            N(context, view).alert(opts).show();
 	        });

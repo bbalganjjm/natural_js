@@ -17,37 +17,34 @@
     "right" : 10
 }
  				</textarea>
- 				<label for="position" lang="ko_KR">메세지 컨텐츠 영역의 넓이, 값이 0 이면 auto 로 지정 됩니다.</label>
-				<label for="position" lang="en_US">Message contents width, 0 is auto</label>
 			</td>
 			<th><label for="displayTime">displayTime</label></th>
 			<td>
-				<input id="displayTime" type="text" value="7" /><br>
-				<label for="displayTime" lang="ko_KR">메세지 컨텐츠 영역의 넓이, 값이 0 이면 auto 로 지정 됩니다.</label>
-				<label for="displayTime" lang="en_US">Message contents width, 0 is auto</label>
+				<input id="displayTime" type="text" value="7" />
 			</td>
 		</tr>
 		<tr>
 			<th><label for="html">html</label></th>
 			<td>
 				<input id="html" type="checkbox" />
-				<label for="html" lang="ko_KR">체크(true)하면 데이터의 HTML 태그를 인식 합니다.</label>
-				<label for="html" lang="en_US">If this checkbox with check(true), recognize the HTML tags in data</label>
 			</td>
 			<th><label for="alwaysOnTop">alwaysOnTop</label></th>
 			<td>
 				<input id="alwaysOnTop" type="checkbox" checked="checked" />
-				<label for="alwaysOnTop" lang="ko_KR">체크(true)하면 메세지 대화상자의 z-index 값을 모든 요소의 최 상위 값으로 지정 하여 메세지 대화상자가 항상 최 상위에 보이게 합니다.</label>
-				<label for="alwaysOnTop" lang="en_US">If this checkbox with check(true), Set a max value of all elements to z-index of message dialog</label>
 			</td>
 		</tr>
 	</table>
 	<p lang="ko_KR" class="smallContTit">함수 옵션 : </p>
 	<p lang="en_US" class="smallContTit">Method options : </p>
-	<table class="form" style="width: 100%;">
+	<table class="form">
+		<colgroup>
+			<col style="width: 12%">
+			<col style="width: 12%">
+			<col style="width: 76%">
+		</colgroup>
 		<tr>
-			<th rowspan="3" style="width: 10%;">add</th>
-			<th style="width: 10%;"><label for="msg">arguments[0]</label></th>
+			<th rowspan="3">add</th>
+			<th><label for="msg">arguments[0]</label></th>
 			<td>
 				<input id="msg" type="text" value="지금 보고 있는 사이트의 소스코드는 Github 에 공개 되어 있습니다." style="width: 95%;" /><br>
 				<label for="msg" lang="ko_KR">표시 할 메시지를 입력 합니다.</label>

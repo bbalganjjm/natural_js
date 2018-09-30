@@ -1,18 +1,24 @@
 <article class="demo_button">
 	<p lang="ko_KR" class="smallContTit">기본 옵션 : </p>
 	<p lang="en_US" class="smallContTit">Default options : </p>
-	<table class="form" style="width: 100%;">
+	<table class="form">
+		<colgroup>
+			<col style="width: 12%">
+			<col style="width: 38%">
+			<col style="width: 12%">
+			<col style="width: 38%">
+		</colgroup>
 		<tr>
-			<th width="10%"><label for="size">size</label></th>
-			<td width="40%"><select id="size">
+			<th><label for="size">size</label></th>
+			<td><select id="size">
 				<option value="smaller">smaller</option>
 				<option value="small">small</option>
 				<option value="medium">medium</option>
 				<option value="large">large</option>
 				<option value="big">big</option>
 			</select></td>
-			<th width="10%"><label for="color">color</label></th>
-			<td width="40%"><select id="color">
+			<th><label for="color">color</label></th>
+			<td><select id="color">
 				<option value="white">white</option>
 				<option value="blue">blue</option>
 				<option value="skyblue">skyblue</option>
@@ -25,8 +31,6 @@
 			<th><label for="disable">disable</label></th>
 			<td colspan="3">
 				<input id="disable" type="checkbox" />
-				<label for="disable" lang="ko_KR">체크(true)하면 버튼들이 비활성화 된 상태로 초기화 됩니다.</label>
-				<label for="disable" lang="en_US">If this checkbox with check(true), buttons are initailized with disabled</label>
 			</td>
 		</tr>
 	</table>
