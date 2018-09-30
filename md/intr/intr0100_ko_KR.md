@@ -1,5 +1,6 @@
 Natural-JS
 ===
+Natural-JS 는 ERP, CRM 등의 기업용 웹 어플리케이션 UI를 쉽고 빠르게 구현할 수 있는 Javascript 프레임워크 라이브러리 입니다.
 
 <ul class="contents links" style="width: 218px;margin-left: -233px;top: 157px;"></ul>
 
