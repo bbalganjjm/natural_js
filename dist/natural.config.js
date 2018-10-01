@@ -614,7 +614,7 @@
 					"close" : "메뉴 닫기",
 					"closeConf" : "\"{0}\" 메뉴에 편집중인 항목이 있습니다. 무시하고 메뉴를 닫겠습니까?",
 					"maxTabs" : "최대 {0} 개의 메뉴 만 열 수 있습니다. <br>다른 메뉴 탭을 닫고 다시 시도 하세요.",
-					"maxStateful" : "선택한 메뉴가 활성화 되면 설정 된 최대 상태유지 메뉴 개수({1} 개)가 초과되어<br>마지막으로 선택 된 \"{0}\" 메뉴의 상태가 초기화 됩니다.<br>메뉴를 선택 하겠습니까?"
+					"maxStateful" : "선택한 메뉴가 활성화 되면 설정 된 최대 상태유지 메뉴 개수(최대 {1} 개)가 초과 되어 마지막으로 선택 된 \"{0}\" 메뉴 페이지가 다시 로딩 됩니다.<br>메뉴를 선택 하겠습니까?"
 				},
 				"en_US" : {
 					"closeAllTitle" : "Close all menus",
@@ -627,7 +627,7 @@
 					"close" : "Close the menu",
 					"closeConf" : "There is an item being edited in the \"{0}\" memu. Are you sure you want to close the menu?",
 					"maxTabs" : "You can only open up to {0} menus. <br>Close other menu tabs and try again.",
-					"maxStateful" : "선택한 메뉴가 활성화 되면 설정 된 최대 상태유지 메뉴 개수({1} 개)가 초과되어<br>마지막으로 선택 된 \"{0}\" 메뉴의 상태가 초기화 됩니다.<br>메뉴를 선택 하겠습니까?"
+					"maxStateful" : "When the selected menu is activated, the maximum number of menu items (maximum of {1}) is exceeded and the last selected menu page \"{0}\" will be  reloaded.<br>Do you want to select the menu?"
 				}
 			}
 		}
