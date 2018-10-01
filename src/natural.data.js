@@ -1,13 +1,13 @@
 /*!
- * Natural-DATA v0.10.53
+ * Natural-DATA v0.10.55
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
- *  
+ *
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-		N.version["Natural-DATA"] = "0.10.53";
+		N.version["Natural-DATA"] = "0.10.55";
 
 	$.fn.extend($.extend(N.prototype, {
 		datafilter : function(callBack) {
@@ -53,9 +53,9 @@
 			},
 			filter : function(arr, condition) {
 				if(N.type(condition) === "function") {
-					return N.isWrappedSet(arr) ? N($.grep(arr.toArray(), condition)) : $.grep(arr, condition);					
+					return N.isWrappedSet(arr) ? N($.grep(arr.toArray(), condition)) : $.grep(arr, condition);
 				} else if(N.type(condition) === "string") {
-					condition = condition.replace(/ /g, "").replace(/\|\|/g, " || item.").replace(/\&\&/g, " || item."); 
+					condition = condition.replace(/ /g, "").replace(/\|\|/g, " || item.").replace(/\&\&/g, " || item.");
 					var testFn = new Function("item", "return item." + condition);
 					return N.isWrappedSet(arr) ? N($.grep(arr.toArray(), function(item) {
 						return testFn(item);
@@ -113,13 +113,13 @@
 			if (siglInst !== undefined) {
 				siglInst.inst = inst;
 				if(isReg !== undefined && isReg === true) {
-					siglInst.obserable.push(inst);
+					siglInst.observable.push(inst);
 				}
 			} else {
 				siglInst = this;
 				siglInst.inst = inst;
-				siglInst.obserable = [];
-				siglInst.obserable.push(inst);
+				siglInst.observable = [];
+				siglInst.observable.push(inst);
 				this.viewContext.instance("ds", siglInst);
 			}
 
@@ -136,11 +136,11 @@
 		$.extend(DataSync.prototype, {
 			"remove" : function() {
 				var inst = this.inst;
-				var obserable = this.obserable;
-				if (inst && obserable) {
-					for (var i = 0; i < obserable.length; i++) {
-						if (obserable[i] == inst) {
-							obserable.splice(i, 1);
+				var observable = this.observable;
+				if (inst && observable) {
+					for (var i = 0; i < observable.length; i++) {
+						if (observable[i] == inst) {
+							observable.splice(i, 1);
 						}
 					}
 				}
@@ -148,16 +148,16 @@
 			},
 			"notify" : function(row, key) {
 				var inst = this.inst;
-				var obserable = this.obserable;
-				if (inst && obserable) {
-					for (var i = 0; i < obserable.length; i++) {
-						if (inst !== obserable[i] && inst.options.data === obserable[i].options.data) {
-							if(obserable[i] instanceof N.form) {
-								if(row === obserable[i].row()) {
-									obserable[i].update(row, key);
+				var observable = this.observable;
+				if (inst && observable) {
+					for (var i = 0; i < observable.length; i++) {
+						if (inst !== observable[i] && inst.options.data === observable[i].options.data) {
+							if(observable[i] instanceof N.form) {
+								if(row === observable[i].row()) {
+									observable[i].update(row, key);
 								}
 							} else {
-								obserable[i].update(row, key);
+								observable[i].update(row, key);
 							}
 						}
 					}
@@ -349,54 +349,99 @@
 						var colId;
 
 						var options = {
-							monthonly : isMonth,
-							onBeforeShow : function(context, contents) {
-								if(contents.closest(".view_context__").length > 0 
-										&& !(contents.closest(".view_context__").css("position") === "relative"
-											|| contents.closest(".view_context__").css("position") === "absolute"
-											|| contents.closest(".view_context__").css("position") === "sticky")) {
-									contents.closest(".view_context__").css("position", "relative");
-									contents.closest(".context_wrap__").css("position", "relative");
-									this.isApplyRelative = true;
-								} else {
-									this.isApplyRelative = false;
-								}
-								// for md format without Y format
-								context.trigger("unformat");
-							},
-							onSelect : function(context, date, monthonly) {
-								dateVal = date.obj.formatDate(monthonly ? "Ym" : "Ymd");
-
-								context.parents(".form__").each(function() {
-									formInst = $(this).instance("form");
-									if(formInst !== undefined) {
-										return false;
-									}
-								});
-
-								colId = context.attr("id");
-								if(formInst !== undefined && dateVal !== formInst.val(colId)) {
-									formInst.val(colId, dateVal);
-								}
-							},
-							onBeforeHide : function(context, contents) {
-								if(dateVal !== undefined && colId !== undefined && formInst !== undefined) {
-									context.trigger("focusout.dataSync.form").trigger("focusout.form.format");
-								}
-							},
-							onHide : function(context, contents) {
-								if(this.isApplyRelative === true) {
-									contents.closest(".context_wrap__").css("position", "");
-									contents.closest(".view_context__").css("position", "");
-									this.isApplyRelative = false;
-								}
-							}
+							monthonly : isMonth
 						};
 
 						if(args[2] !== undefined) {
 							$.extend(options, args[2]);
 						}
-						ele.datepicker(options);
+						var datepicker = ele.datepicker(options);
+						var opts = datepicker.options;
+
+						var orgOnBeforeShow = opts.onBeforeShow;
+						opts.onBeforeShow = function(context, contents) {
+							if(contents.closest(".view_context__").length > 0
+									&& !(contents.closest(".view_context__").css("position") === "relative"
+										|| contents.closest(".view_context__").css("position") === "absolute"
+										|| contents.closest(".view_context__").css("position") === "sticky")) {
+								contents.closest(".view_context__").css("position", "relative");
+								contents.closest(".context_wrap__").css("position", "relative");
+								this.isApplyRelative = true;
+							} else {
+								this.isApplyRelative = false;
+							}
+							// for md format without Y format
+							context.trigger("unformat");
+
+							if(orgOnBeforeShow !== null) {
+								return orgOnBeforeShow.apply(this, arguments);
+							}
+						};
+
+						var orgOnSelect = opts.onSelect;
+						opts.onSelect = function(context, date, monthonly) {
+							dateVal = date.obj.formatDate(monthonly ? "Ym" : "Ymd");
+
+							context.parents(".form__").each(function() {
+								formInst = $(this).instance("form");
+								if(formInst !== undefined) {
+									return false;
+								}
+							});
+
+							colId = context.attr("id");
+							if(formInst !== undefined && dateVal !== formInst.val(colId)) {
+								formInst.val(colId, dateVal);
+							}
+
+							if(orgOnSelect !== null) {
+								return orgOnSelect.apply(this, arguments);
+							}
+						};
+
+						var orgOnBeforeHide = opts.onBeforeHide;
+						opts.onBeforeHide = function(context, contents) {
+							if(dateVal !== undefined && colId !== undefined && formInst !== undefined) {
+								context.trigger("focusout.dataSync.form").trigger("focusout.form.format");
+							}
+
+							if(orgOnBeforeHide !== null) {
+								return orgOnBeforeHide.apply(this, arguments);
+							}
+						};
+
+						var orgOnHide = opts.onHide;
+						opts.onHide = function(context, contents) {
+							if(this.isApplyRelative === true) {
+								contents.closest(".context_wrap__").css("position", "");
+								contents.closest(".view_context__").css("position", "");
+								this.isApplyRelative = false;
+							}
+
+							if(orgOnHide !== null) {
+								return orgOnHide.apply(this, arguments);
+							}
+						};
+
+						if(opts.yearChangeInput) {
+							var orgOnChangeYear = opts.onChangeYear;
+							opts.onChangeYear = function() {
+								opts.context.trigger("focusout.dataSync.form");
+								if(orgOnChangeYear !== null) {
+									return orgOnChangeYear.apply(this, arguments);
+								}
+							};
+						}
+
+						if(opts.monthChangeInput) {
+							var orgOnChangeMonth = opts.onChangeMonth;
+							opts.onChangeMonth = function() {
+								opts.context.trigger("focusout.dataSync.form");
+								if(orgOnChangeMonth !== null) {
+									return orgOnChangeMonth.apply(this, arguments);
+								}
+							};
+						}
 					}
 				} else {
 					N.warn("if you use date or month option, you must import Natural-UI library");
