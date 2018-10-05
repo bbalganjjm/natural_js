@@ -386,16 +386,17 @@ article .searchBox ul {
 	list-style: none;
 	margin: 0;
 	padding: 0;
+	padding-top: 10px;
 }
 
 article .searchBox ul li {
 	font-size: 12px;
 	margin: 0;
-	padding: 10px;
+	padding-bottom: 10px;
 }
 
 article .searchBox ul li.inputs {
-	border: 1px dotted #C8E6C9;
+	border-bottom: 1px dotted #C8E6C9;
 }
 
 article .searchBox ul li.buttons {
