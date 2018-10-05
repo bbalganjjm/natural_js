@@ -496,6 +496,8 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	float: left;
 	height: 16px;
 	width: 16px;
+	margin-right: -16px;
+	transition: margin-right 0.3s ease;
 }
 
 .grid__>thead .btn_data_filter__ span {
@@ -504,6 +506,18 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	overflow: hidden;
 	height: 16px;
 	width: 16px;
+	opacity: 0.3;
+	transition: opacity 0.3s ease;
+}
+
+.grid__>thead .btn_data_filter__:hover {
+	margin-right: 0px;
+	transition: margin-right 0.3s ease;
+}
+
+.grid__>thead .btn_data_filter__:hover span {
+	opacity: 1;
+	transition: opacity 0.3s ease;
 }
 
 .grid__>thead .btn_data_filter__.btn_data_filter_empty__ span {
@@ -615,8 +629,16 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	margin: 0 2px 0 1px;
 }
 
+.thead_wrap__ {
+	position: relative;
+}
+
 .thead_wrap__>table, .tbody_wrap__>table, .tfoot_wrap__>table {
 	min-width: 100%;
+}
+
+.tbody_wrap__>table, .tfoot_wrap__>table {
+	border-top: none;
 }
 
 .thead_wrap__ thead th .asc__ {
@@ -643,6 +665,10 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 /* Grid - Column fixed */
 .grid_container__ > .grid_wrap__ {
 	/* -webkit-overflow-scrolling: touch; */
+}
+
+.grid__ > thead > tr > th.grid_head_fixed__ {
+	border-top-width: 2px;
 }
 
 /* Details popup */

@@ -79,7 +79,7 @@ table th, table td {
 	padding: 3px 5px;
 	word-break: break-word;
 	font-size: 12px;
-	height: 35px;
+	height: 31px;
     box-sizing: border-box;
 }
 table th, table > tfoot td {
@@ -386,13 +386,13 @@ article .searchBox ul {
 	list-style: none;
 	margin: 0;
 	padding: 0;
-	padding-top: 10px;
+	padding-top: 5px;
 }
 
 article .searchBox ul li {
 	font-size: 12px;
 	margin: 0;
-	padding-bottom: 10px;
+	padding-bottom: 5px;
 }
 
 article .searchBox ul li.inputs {
@@ -400,6 +400,7 @@ article .searchBox ul li.inputs {
 }
 
 article .searchBox ul li.buttons {
+	padding: 5px;
 	text-align: right;
 }
 

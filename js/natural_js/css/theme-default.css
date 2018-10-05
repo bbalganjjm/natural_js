@@ -58,42 +58,14 @@ input[readonly], input[readonly]:hover, input[readonly]:focus {
 	background-color: #C8E6C9 !important;
 }
 input[type='radio'], input[type='checkbox'] {
-	margin: 0 3px 0 10px;
 	vertical-align: middle;
 	border: none;
 }
 
-/* N.grid */
-.grid__ {
-	margin: 0 0 15px 0;
-	border-collapse: collapse;
-	table-layout: fixed;
-	border-top: 2px solid #66BB6A;
-}
-.grid__:last-child {
-	margin: 0;
-}
-.grid__ th, .grid__ td {
-	border: 1px solid #A5D6A7;
-	padding: 4px;
-	word-break: break-word;
-	box-sizing: border-box;
-}
-.grid__ th, .grid__ > tfoot td {
-	background-color: #C8E6C9;
-}
-.grid__.form th {
-	background-color: #C8E6C9;
-	text-align: right;
+.select_input_label__ input[type='radio'], .select_input_label__ input[type='checkbox'] {
+	margin: 0 3px 0 10px;
 }
 
-.tbody_wrap__ > table, .tfoot_wrap__ > table {
-	border-top: inherit;
-}
-/* fixed column in thead */
-.grid__ > thead > tr > th.grid_head_fixed__ {
-	border-top: 2px solid #66BB6A;
-}
 .grid__ input[type='text'], .grid__ input[type='tel'], .grid__ input[type='number'], .grid__ input[type='password'], .grid__ select, .grid__ textarea {
 	height: 100%;
 	width: 100%;
