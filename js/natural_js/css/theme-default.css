@@ -38,7 +38,7 @@ input[type='number']:focus,
 input[type='tel']:focus,
 select:focus,
 textarea:focus {
-	box-shadow: inset 0 0 3px #81C784;
+	box-shadow: inset 0 0 1px #81C784;
 	transition: border-color ease-in-out 0.20s, box-shadow ease-in-out 0.20s;
 }
 input[disabled][type='text']:hover,
