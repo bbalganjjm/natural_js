@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.31.102
+ * Natural-UI v0.31.103
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "0.31.102";
+	N.version["Natural-UI"] = "0.31.103";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -1734,7 +1734,7 @@
 
 						if(opts.shareEle) {
 							// Replace the options for the shared instance with the Datepicker instance options for the selected input element.
-							self = opts.contents.siblings(".datepicker__").instance("datepicker");
+							self = $(this).closest(".datepicker_contents__").prev(".datepicker__").instance("datepicker");
 							opts = self.options;
 						}
 
