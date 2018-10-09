@@ -1699,9 +1699,10 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
   width: 100%;
   height: 5px;
   background-color: #43A047;
-  transition: left 0.1s ease;
+  transition: left 0.15s ease;
 }
 
 .entire_load_indicator__.hidden__ {
-
+	opacity: 0;
+	transition: opacity 0.3s ease;
 }
