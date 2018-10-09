@@ -1683,12 +1683,12 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	left: 0;
 	top: 0;
 	z-index: 1;
-	height: 5px;
+	height: 7px;
 	width: 100%;
 	overflow: hidden;
-	margin-top: -2px;
-	background-color: #00E676;
-	opacity: 0.6;
+	margin-top: 0;
+	background-color: #00C853;
+	opacity: 0.5;
 }
 
 .docs__>.entire_load_indicator__>.entire_load_indicator_bar__{
@@ -1697,12 +1697,11 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
   content: "";
   left: -100%;
   width: 100%;
-  height: 5px;
-  background-color: #43A047;
-  transition: left 0.15s ease;
+  height: 6px;
+  background-color: #2E7D32;
 }
 
-.entire_load_indicator__.hidden__ {
-	opacity: 0;
-	transition: opacity 0.3s ease;
+.docs__>.entire_load_indicator__.hidden__ {
+	margin-top: -7px;
+	transition: margin-top 0.4s cubic-bezier(1, 0, 1, 1);
 }
