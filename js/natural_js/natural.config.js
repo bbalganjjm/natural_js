@@ -707,7 +707,17 @@
 			/**
 			 * 바인드된 데이터의 새로운 row 생성시 위치를 최상단에 만들건지 여부
 			 */
-			"addTop" : true
+			"addTop" : true,
+			/**
+			 * 스크롤 페이징 시 한번에 몇개를 가져온건지 설정
+			 */
+			"scrollPaging" : {
+				"size" : N.browser.is("ie") ? 20 : 50
+			},
+			/**
+			 * 행을 그릴때 마다의 딜레이 타임
+			 */
+			"createRowDelay" : N.browser.is("ie") ? 0 : 1,
 		},
 		"grid" : {
 			/**
@@ -725,8 +735,12 @@
 			 * 스크롤 페이징 시 한번에 몇개를 가져온건지 설정
 			 */
 			"scrollPaging" : {
-				"size" : 50
+				"size" : N.browser.is("ie") ? 20 : 50
 			},
+			/**
+			 * 행을 그릴때 마다의 딜레이 타임
+			 */
+			"createRowDelay" : N.browser.is("ie") ? 0 : 1,
 			/**
 			 * 세로 길이조절 기능 활성화 여부
 			 */
@@ -800,11 +814,11 @@
 				/**
 				 * 컬럼 고정 시 고정 된 헤더 셀(TH)의 높이가 맞지 않을때 아래 수치 조절(기본값 : 0)
 				 */
-				"fixedcolHeadHeight" : N.browser.is("ie") ? 0.5 : 0,
+				"fixedcolHeadHeight" : 0,
 				/**
 				 * 컬럼 고정 시 고정 된 바디 셀(TD)의 상단 위치가 맞지 않을때 아래 수치 조절(기본값 : 0)
 				 */
-				"fixedcolBodyMarginTop" : N.browser.is("firefox") ? -1 : 0,
+				"fixedcolBodyMarginTop" : N.browser.is("ie") || N.browser.is("firefox") ? -1 : 0,
 				/**
 				 * 컬럼 고정 시 고정 된 바디 셀(TD)의 좌측 위치가 맞지 않을때 아래 수치 조절(기본값 : 0)
 				 */
@@ -812,7 +826,7 @@
 				/**
 				 * 컬럼 고정 시 데이터를 바인드 할 때 고정 된 바디 셀(TD)의 높이가 맞지 않을때 아래 수치 조절(기본값 : 0)
 				 */
-				"fixedcolBodyBindHeight" : N.browser.is("ie") || N.browser.is("firefox") ? 0.33 : 1,
+				"fixedcolBodyBindHeight" : N.browser.is("ie") || N.browser.is("firefox") ? 1 : 1,
 				/**
 				 * 컬럼 고정 시 데이터를 Add 할 때 고정 된 바디 셀(TD)의 높이가 맞지 않을때 아래 수치 조절(기본값 : 1)
 				 */
