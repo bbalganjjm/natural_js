@@ -471,7 +471,6 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	-o-text-overflow: ellipsis;
-	box-sizing: border-box;
 }
 
 .grid__>thead>tr>th .resize_bar__ {
