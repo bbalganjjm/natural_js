@@ -74,13 +74,13 @@
 .alert__.hidden__ {
 	opacity: 0;
 	transform: scale(0);
-	transition: opacity 0.15s cubic-bezier(0.77, 0.1, 1, 1), transform 0.3s cubic-bezier(0.65, -0.01, 0.21, 1);
+	transition: opacity 0.15s linear, transform 0.15s linear;
 }
 
 .alert__.visible__ {
 	opacity: 1;
 	transform: scale(1);
-	transition: transform 0.3s cubic-bezier(0.65, -0.01, 0.21, 1.5);
+	transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .alert__.orgin_left__ {
@@ -545,13 +545,13 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .grid__>thead .data_filter_panel__.visible__ {
 	transform: scale(1);
 	transform-origin: top left;
-	transition: transform 0.3s cubic-bezier(0.65, -0.01, 0.21, 1.36);
+	transition: transform 0.3s ease;
 }
 
 .grid__>thead .data_filter_panel__.hidden__ {
 	transform: scale(0);
 	transform-origin: top left;
-	transition: transform 0.15s cubic-bezier(0.65, -0.01, 0.21, 1);
+	transition: transform 0.15s linear;
 }
 
 .grid__>thead .data_filter_panel__ .data_filter_search__ {
@@ -718,13 +718,13 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .grid__ .grid_more_thead_col__ .grid_more_panel__.visible__ {
 	transform: scale(1);
 	transform-origin: top right;
-	transition: transform 0.3s cubic-bezier(0.65, -0.01, 0.21, 1.36);
+	transition: transform 0.3s ease;
 }
 
 .grid__ .grid_more_thead_col__ .grid_more_panel__.hidden__ {
 	transform: scale(0);
 	transform-origin: top right;
-	transition: transform 0.15s cubic-bezier(0.65, -0.01, 0.21, 1);
+	transition: transform 0.15s linear;
 }
 
 .grid__ .grid_more_thead_col__ .grid_more_panel__ input[type=checkbox] {
@@ -866,10 +866,10 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	border: 1px solid #66BB6A;
 }
 
-.tab__>div.hidden__ > * {}
+.tab__>div.hidden__ > .view_context__ {}
 
-.tab__>div.visible__ > * {
-	animation: tab_visible__ 0.5s cubic-bezier(0.14, 0.9, 1, 1);
+.tab__>div.visible__ > .view_context__ {
+	animation: tab_visible__ 0.5s ease;
 }
 
 @keyframes tab_visible__ {
@@ -913,12 +913,12 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 .datepicker_contents__.visible__ {
 	transform: scale(1);
-	transition: transform 0.3s cubic-bezier(0.65, -0.01, 0.21, 1.36);
+	transition: transform 0.3s ease;
 }
 
 .datepicker_contents__.hidden__ {
 	transform: scale(0);
-	transition: transform 0.15s cubic-bezier(0.65, -0.01, 0.21, 1);
+	transition: transform 0.15s linear;
 }
 
 .datepicker_contents__.orgin_left__ {
@@ -996,7 +996,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .datepicker_contents__ .datepicker_next_day_item__.visible__ {
 	opacity: 1;
 	transform: scaleX(1);
-	transition: transform 0.3s cubic-bezier(0.65, -0.01, 0.21, 1.5);
+	transition: transform 0.3s ease;
 }
 
 .datepicker_contents__ .datepicker_day_title__ {
@@ -1030,7 +1030,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .datepicker_contents__ .datepicker_year_item__:hover, .datepicker_contents__ .datepicker_month_item__:hover, .datepicker_contents__ .datepicker_day_item__:hover {
 	background-color: #81C7844A;
 	border-radius: 50%;
-	transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease;
     font-size: 13px;
 }
 
@@ -1414,13 +1414,13 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .notify__ .notify_msg__.visible__ {
 	transform: scale(1);
 	opacity: 1;
-	transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.65, -0.01, 0.21, 1.36);
+	transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .notify__ .notify_msg__.hidden__ {
 	transform: scale(0);
 	opacity: 0;
-	transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.65, -0.01, 0.21, 1.36);
+	transition: opacity 0.15s linear, transform 0.15s linear;
 }
 
 .notify__ .notify_msg__ a, .notify__ .notify_msg__ span {
@@ -1455,7 +1455,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .docs__>.docs_tab_context__>ul.docs_tabs__.effect__ {
-	transition: margin-left 0.25s cubic-bezier(0.76, 0.07, 0.3, 1.5);
+	transition: margin-left 0.25s ease;
 }
 
 .docs__>.docs_tab_context__>ul.docs_tabs__, .docs__>.docs_tab_context__>ul.docs_tab_utils__, .docs__>.docs_tab_context__>ul.docs_tab_utils__ .docs_tab_list__ {
@@ -1481,7 +1481,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .docs__>.docs_tab_context__>ul.docs_tabs__>.docs_tab__ {
 	display: inline;
 	margin-right: 2px;
-	padding: 7px 0 7.1px 0;
+	padding: 7px 0 7px 0;
 	border-top: 1px solid #66BB6A;
 	border-left: 10px solid #66BB6A;
 	border-right: 1px solid #66BB6A;
@@ -1515,17 +1515,17 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .docs__>.docs_tab_context__>ul.docs_tabs__>.docs_tab__.active__ {
 	background-color: #fff;
 	border-bottom: 1px solid #fff;
-	transition: background-color 0.3s cubic-bezier(0.65, -0.01, 0.21, 1), border-bottom-color 0.3s cubic-bezier(0.65, -0.01, 0.21, 1);
+	transition: background-color 0.3s ease, border-bottom-color 0.3s ease;
 }
 
 .docs__>.docs_tab_context__>ul.docs_tabs__>.docs_tab__.stateless__ {
 	opacity: 0.8;
-	transition: opacity 0.3s cubic-bezier(0.65, -0.01, 0.21, 1.36);
+	transition: opacity 0.3s ease;
 }
 
 .docs__>.docs_tab_context__>ul.docs_tabs__>.docs_tab__.remove__ {
 	opacity: 0;
-	transition: opacity 0.3s cubic-bezier(0.65, -0.01, 0.21, 1.36);
+	transition: opacity 0.3s ease;
 }
 
 .docs__>.docs_tab_context__>ul.docs_tab_utils__>li {
@@ -1599,14 +1599,14 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	transform: scale(0);
 	opacity: 0;
 	transform-origin: top right;
-	transition: transform 0.3s cubic-bezier(0.65, -0.01, 0.21, 1.36), opacity 0.2s cubic-bezier(0.65, -0.01, 0.21, 1.36);
+	transition: transform 0.15s linear, opacity 0.15s linear;
 }
 
 .docs__>.docs_tab_context__>ul.docs_tab_utils__>.docs_tab_list_item__ .docs_tab_list__.visible__ {
 	transform: scale(1);
 	opacity: 1;
 	transform-origin: top right;
-	transition: transform 0.3s cubic-bezier(0.65, -0.01, 0.21, 1.36), opacity 0.5s cubic-bezier(0.65, -0.01, 0.21, 1.36);
+	transition: transform 0.3s ease, opacity 0.5s ease;
 }
 
 .docs__>.docs_tab_context__>ul.docs_tab_utils__>.docs_tab_list_item__ .docs_tab_list__ > .docs_tab__ {
@@ -1649,19 +1649,19 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	position: absolute;
 	margin-top: -15px;
 	opacity: 0;
-	transition: margin-top 0.15s cubic-bezier(0.65, -0.01, 0.21, 1);
+	transition: margin-top 0.15s linear;
 }
 
 .docs__>.docs_contents__.visible__ {
 	opacity: 1;
-	transition: margin-top 0.3s cubic-bezier(0.65, -0.01, 0.21, 1), opacity 0.5s ease;
+	transition: margin-top 0.5s ease, opacity 0.5s ease;
 }
 
 .docs__>.docs_contents__.remove__ {
 	position: absolute;
 	margin-top: 115px;
 	opacity: 0;
-	transition: margin-top 0.3s cubic-bezier(0.65, -0.01, 0.21, 1), opacity 0.3s ease;
+	transition: margin-top 0.3s ease, opacity 0.3s ease;
 }
 
 .entire_load_screen_block__ {
