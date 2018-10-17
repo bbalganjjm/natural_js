@@ -1,0 +1,31 @@
+D:\devenv\java\jdk1.8.0_121\bin\java.exe
+
+minify_core
+-jar ${workspace_loc}/ExternalToolBuilders/closure-compiler.jar
+--js ${build_project}/src/natural.core.js
+--js_output_file ${build_project}/natural.core.min.js
+
+minify_architecture
+-jar ${workspace_loc}/ExternalToolBuilders/closure-compiler.jar
+--js ${build_project}/src/natural.architecture.js
+--js_output_file ${build_project}/natural.architecture.min.js
+
+minify_data
+-jar ${workspace_loc}/ExternalToolBuilders/closure-compiler.jar
+--js ${build_project}/src/natural.data.js
+--js_output_file ${build_project}/natural.data.min.js
+
+minify_ui
+-jar ${workspace_loc}/ExternalToolBuilders/closure-compiler.jar
+--js ${build_project}/src/natural.ui.js
+--js_output_file ${build_project}/natural.ui.min.js
+
+minify_ui_shell
+-jar ${workspace_loc}/ExternalToolBuilders/closure-compiler.jar
+--js ${build_project}/src/natural.ui.shell.js
+--js_output_file ${build_project}/natural.ui.shell.min.js
+
+minify_all
+-jar ${workspace_loc}/ExternalToolBuilders/closure-compiler.jar 
+--js ${build_project}/src/natural.core.js ${build_project}/src/natural.architecture.js ${build_project}/src/natural.data.js ${build_project}/src/natural.ui.js ${build_project}/src/natural.ui.shell.js 
+--js_output_file ${build_project}/dist/natural.js.min.js --create_source_map ${build_project}/dist/natural.js.min.map
