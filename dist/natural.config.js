@@ -146,7 +146,7 @@
 			* 여기에서 지정한 pageFilter, dataFilter 는 상수값이 아니므로 자유롭게 지정하면 됨.
 			*/
 			"filters" : {
-				"exFilter1" : {
+				"basicFilter" : {
 					/**
 					 * 필터 실행 순서
 					 */
@@ -535,7 +535,7 @@
 				/**
 				 * 컬럼 리사이즈 시 다른컬럼이 밀릴때 아래 수치 조절(기본값 : 0)
 				 */
-				"resizableCorrectionWidth" : N.browser.is("chrome") ? 1 : N.browser.is("safari") ? 2 : 0,
+				"resizableCorrectionWidth" : N.browser.is("safari") ? 1 : 0,
 				/**
 				 * 헤더고정형 중 마지막 컬럼 클릭 시 다른컬럼이 밀릴때 아래 수치 조절(기본값 : 0)
 				 */
@@ -559,11 +559,11 @@
 				/**
 				 * 컬럼 고정 시 고정 된 헤더 셀(TH)의 높이가 맞지 않을때 아래 수치 조절(기본값 : 0)
 				 */
-				"fixedcolHeadHeight" : N.browser.is("ie") ? 0.5 : 0,
+				"fixedcolHeadHeight" : 0,
 				/**
 				 * 컬럼 고정 시 고정 된 바디 셀(TD)의 상단 위치가 맞지 않을때 아래 수치 조절(기본값 : 0)
 				 */
-				"fixedcolBodyMarginTop" : N.browser.is("firefox") ? -1 : 0,
+				"fixedcolBodyMarginTop" : N.browser.is("ie") || N.browser.is("firefox") ? -1 : 0,
 				/**
 				 * 컬럼 고정 시 고정 된 바디 셀(TD)의 좌측 위치가 맞지 않을때 아래 수치 조절(기본값 : 0)
 				 */
@@ -571,7 +571,7 @@
 				/**
 				 * 컬럼 고정 시 데이터를 바인드 할 때 고정 된 바디 셀(TD)의 높이가 맞지 않을때 아래 수치 조절(기본값 : 0)
 				 */
-				"fixedcolBodyBindHeight" : N.browser.is("ie") || N.browser.is("firefox") ? 0.33 : 1,
+				"fixedcolBodyBindHeight" : N.browser.is("ie") || N.browser.is("firefox") ? 1 : 1,
 				/**
 				 * 컬럼 고정 시 데이터를 Add 할 때 고정 된 바디 셀(TD)의 높이가 맞지 않을때 아래 수치 조절(기본값 : 1)
 				 */
