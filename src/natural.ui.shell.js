@@ -1,5 +1,5 @@
 /*!
- * Natural-UI.Shell v0.9.29, Works fine in IE9 and above
+ * Natural-UI.Shell v0.9.33, Works fine in IE9 and above
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-	N.version["Natural-UI.Shell"] = "0.9.29";
+	N.version["Natural-UI.Shell"] = "0.9.33";
 
 	$.fn.extend($.extend(N.prototype, {
 		notify : function(opts) {
@@ -161,10 +161,12 @@
 				entireLoadIndicator : false,
 				entireLoadScreenBlock : false,
 				entireLoadExcludeURLs : [],
-				onEntireLoadXhrCaptureDuration : 300,
+				entireLoadRequestCnt : 0,
+				entireLoadRequestMaxCnt : 0,
 				onBeforeLoad : null,
 				onLoad : null,
 				onBeforeEntireLoad : null,
+				onErrorEntireLoad : null,
 				onEntireLoad : null,
 				onBeforeActive : null,
 				onActive : null,
@@ -195,45 +197,24 @@
 					|| self.options.onEntireLoad !== null
 					|| self.options.entireLoadIndicator
 					|| self.options.entireLoadScreenBlock) {
-				var isStarted = false;
-				var isBeforeDone = false;
 				var entireLoadExcludeURLs = "|" + this.options.entireLoadExcludeURLs.join("|") + "|";
 				
 				N.context.attr("architecture").comm.filters.docsFilter__ = {
 					"beforeSend" : function(request, xhr, settings) {
-						if(!isBeforeDone && entireLoadExcludeURLs.indexOf(request.options.url) < 0) {
-							self.options.docsFilterDefers.push(xhr);
-						}
-
-						// Direct regist the error handler to N.comm's errorHandlers
-						this.errorHandlers.push(function() {
-							if(self.options.entireLoadIndicator) {
-								self.options.context.find("> .entire_load_indicator__").trigger("nothing");
-							}
-							if(self.options.entireLoadScreenBlock) {
-								$(".entire_load_screen_block__").trigger("nothing");
-							}
-						})
-						
-						if(!isStarted) {
-							isStarted = true;
-
-							if(self.options.loadedDocId !== null) {
-								if(self.options.dataType === "html" && self.options.target.closest("docs_contents__." + self.options.loadedDocId + "__").length === 0) {
-									isStarted = false;
-									return false;
+						if(self.options.loadedDocId !== null) {
+							if(self.options.entireLoadRequestCnt === 0) {
+								if(self.options.onBeforeEntireLoad !== null) {
+									self.options.onBeforeEntireLoad.call(self, self.options.loadedDocId);
 								}
-
+								
 								if(self.options.entireLoadIndicator) {
 									if(self.options.context.find("> .entire_load_indicator__").length > 0) {
-										self.options.context.find("> .entire_load_indicator__").removeClass("hidden__").show();
+										self.options.context.find("> .entire_load_indicator__").removeClass("hidden__").show()
+											.find("> .entire_load_indicator_bar__").css("left", "");
 									} else {
-										var entireLoadIndicator = $('<div class="entire_load_indicator__"></div>').click(function(e) {
+										var entireLoadIndicator = $('<div class="entire_load_indicator__"><div class="entire_load_indicator_bar__"></div></div>').click(function(e) {
 											e.stopPropagation();
 										});
-										entireLoadIndicator.bind(N.event.whichAnimationEvent(entireLoadIndicator), function(e){
-											$(this).hide().removeClass("hidden__");
-								        }).trigger("nothing");
 										self.options.context.find(".docs_tab_context__").after(entireLoadIndicator);
 									}
 								}
@@ -250,35 +231,71 @@
 										}).click(function(e) {
 											e.stopPropagation();
 										});
-										entireLoadScreenBlock.appendTo("body").bind(N.event.whichAnimationEvent(entireLoadScreenBlock), function(e){
+										entireLoadScreenBlock.appendTo("body").bind(N.event.whichTransitionEvent(entireLoadScreenBlock), function(e){
 											$(this).hide().removeClass("hidden__");
 								        }).trigger("nothing");
 									}
 								}
-								if(self.options.onBeforeEntireLoad !== null) {
-									self.options.onBeforeEntireLoad.call(self, self.options.loadedDocId);
+							}
+							
+							if(entireLoadExcludeURLs.indexOf(request.options.url) < 0) {
+								self.options.entireLoadRequestCnt++;
+								if(self.options.entireLoadIndicator) {
+									self.options.entireLoadRequestMaxCnt++;
 								}
-
-								setTimeout(function() {
-									isBeforeDone = true;
-									$.when.apply($, self.options.docsFilterDefers).done(function() {
-										if(self.options.onEntireLoad !== null) {
-											self.options.onEntireLoad.call(self, self.options.loadedDocId);
-										}
-										if(self.options.entireLoadIndicator) {
-											self.options.context.find("> .entire_load_indicator__").trigger("nothing");
-										}
-										if(self.options.entireLoadScreenBlock) {
-											$(".entire_load_screen_block__").trigger("nothing");
-										}
-										isBeforeDone = false;
-										isStarted = false;
-									});
+							}
+							
+							// Direct regist the error handler to N.comm's errorHandlers
+							this.errorHandlers.push(function(e, request, xhr, textStatus, callback) {
+								if(self.options.onErrorEntireLoad !== null) {
+									self.options.onErrorEntireLoad.call(self, e, request, xhr, textStatus, callback);
+								}
+								if(self.options.entireLoadIndicator) {
+									var entireLoadIndicator = self.options.context.find("> .entire_load_indicator__");
+									entireLoadIndicator.one(N.event.whichTransitionEvent(entireLoadIndicator), function(e){
+										$(this).hide();
+							        }).trigger("nothing");
 									
-									self.options.docsFilterDefers = [];
-								}, self.options.onEntireLoadXhrCaptureDuration);
-							} else {
-								isStarted = false;
+									self.options.entireLoadRequestMaxCnt = 0;
+									self.options.context.find("> .entire_load_indicator__ > .entire_load_indicator_bar__").css("left", "");
+								}
+								if(self.options.entireLoadScreenBlock) {
+									$(".entire_load_screen_block__").trigger("nothing");
+								}
+								self.options.entireLoadRequestCnt = 0;
+								if(self.options.entireLoadIndicator) {
+									self.options.entireLoadRequestMaxCnt = 0;
+								}
+							})
+							
+						}
+					},
+					"complete" : function(request, xhr, textStatus) {
+						if(self.options.loadedDocId !== null) {
+							if(entireLoadExcludeURLs.indexOf(request.options.url) < 0) {
+								self.options.entireLoadRequestCnt--;
+								
+								if(self.options.entireLoadIndicator) {
+									self.options.context.find("> .entire_load_indicator__ > .entire_load_indicator_bar__")
+										.css("left", "-" + (self.options.entireLoadRequestCnt * 100 / self.options.entireLoadRequestMaxCnt) + "%");
+								}
+							}
+							if(self.options.entireLoadRequestCnt <= 0) {
+								if(self.options.onEntireLoad !== null) {
+									self.options.onEntireLoad.call(self, self.options.loadedDocId);
+								}
+								if(self.options.entireLoadIndicator) {
+									var entireLoadIndicator = self.options.context.find("> .entire_load_indicator__");
+									entireLoadIndicator.addClass("hidden__").one(N.event.whichTransitionEvent(entireLoadIndicator), function(e){
+										$(this).hide();
+							        }).trigger("nothing");
+									
+									self.options.entireLoadRequestMaxCnt = 0;
+									entireLoadIndicator.find("> .entire_load_indicator_bar__").css("left", "0");
+								}
+								if(self.options.entireLoadScreenBlock) {
+									$(".entire_load_screen_block__").trigger("nothing");
+								}
 							}
 						}
 					}
