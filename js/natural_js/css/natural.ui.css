@@ -72,12 +72,14 @@
 }
 
 .alert__.hidden__ {
+	will-change: opacity, transform;
 	opacity: 0;
 	transform: scale(0);
 	transition: opacity 0.15s linear, transform 0.15s linear;
 }
 
 .alert__.visible__ {
+	will-change: opacity, transform;
 	opacity: 1;
 	transform: scale(1);
 	transition: opacity 0.3s ease, transform 0.3s ease;
@@ -219,6 +221,7 @@ a.btn_common__, input[type='button'].btn_common__, button.btn_common__ {
 }
 
 a.btn_disabled__, input.btn_disabled__, button.btn_disabled__ {
+	will-change: opacity;
 	opacity: 0.6;
 	transition: opacity 0.3s ease;
 	cursor: default;
@@ -510,11 +513,13 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .grid__>thead .btn_data_filter__:hover {
+	will-change: margin-right;
 	margin-right: 0px;
 	transition: margin-right 0.3s ease;
 }
 
 .grid__>thead .btn_data_filter__:hover span {
+	will-change: opacity;
 	opacity: 1;
 	transition: opacity 0.3s ease;
 }
@@ -543,6 +548,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .grid__>thead .data_filter_panel__.visible__ {
+	will-change: transform;
 	transform: scale(1);
 	transform-origin: top left;
 	transition: transform 0.3s ease;
@@ -716,6 +722,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .grid__ .grid_more_thead_col__ .grid_more_panel__.visible__ {
+	will-change: transform;
 	transform: scale(1);
 	transform-origin: top right;
 	transition: transform 0.3s ease;
@@ -808,6 +815,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .tab__>ul.tab_scroll__.effect__ {
+	will-change: margin-left;
 	transition: margin-left 0.25s cubic-bezier(0.76, 0.07, 0.3, 1.5);
 }
 
@@ -835,18 +843,19 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .tab__>a.tab_scroll_prev__.disabled__ span, .tab__>a.tab_scroll_next__.disabled__ span {
+	will-change: opacity;
 	opacity : 0.4;
 	transition: opacity 0.3s ease;
 }
 
 .tab__>ul li.tab_disabled__ {
+	will-change: opacity;
 	opacity: 0.6;
 	transition: opacity 0.3s ease;
 }
 
 .tab__>ul>li>a {
 	font-weight: bold;
-	color : rgba(0, 0, 0, 0.87);;
 	text-decoration: none;
 	line-height: 25px;
 }
@@ -866,15 +875,18 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	border: 1px solid #66BB6A;
 }
 
-.tab__>div.hidden__ > .view_context__ {}
-
-.tab__>div.visible__ > .view_context__ {
-	animation: tab_visible__ 0.5s ease;
+.tab__>div > .view_context__ {
+	opacity: 0;
 }
 
-@keyframes tab_visible__ {
-    from {opacity: 0}
-    to {opacity: 1}
+.tab__>div.hidden__ > .view_context__ {
+	opacity: 0;
+}
+
+.tab__>div.visible__ > .view_context__ {
+	will-change: opacity;
+	opacity: 1;
+	transition: opacity 0.5s ease;
 }
 
 /* Datepicker */
@@ -912,6 +924,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .datepicker_contents__.visible__ {
+	will-change: transform;
 	transform: scale(1);
 	transition: transform 0.3s ease;
 }
@@ -994,6 +1007,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .datepicker_contents__ .datepicker_day_item__.visible__,
 .datepicker_contents__ .datepicker_prev_day_item__.visible__,
 .datepicker_contents__ .datepicker_next_day_item__.visible__ {
+	will-change: opacity, transform;
 	opacity: 1;
 	transform: scaleX(1);
 	transition: transform 0.3s ease;
@@ -1028,6 +1042,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .datepicker_contents__ .datepicker_year_item__:hover, .datepicker_contents__ .datepicker_month_item__:hover, .datepicker_contents__ .datepicker_day_item__:hover {
+	will-change: background-color;
 	background-color: #81C7844A;
 	border-radius: 50%;
 	transition: background-color 0.3s ease;
@@ -1412,6 +1427,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .notify__ .notify_msg__.visible__ {
+	will-change: opacity, transform;
 	transform: scale(1);
 	opacity: 1;
 	transition: opacity 0.3s ease, transform 0.3s ease;
@@ -1455,6 +1471,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .docs__>.docs_tab_context__>ul.docs_tabs__.effect__ {
+	will-change: margin-left;
 	transition: margin-left 0.25s ease;
 }
 
@@ -1513,12 +1530,14 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .docs__>.docs_tab_context__>ul.docs_tabs__>.docs_tab__.active__ {
+	will-change: background-color, border-bottom-color;
 	background-color: #fff;
 	border-bottom: 1px solid #fff;
 	transition: background-color 0.3s ease, border-bottom-color 0.3s ease;
 }
 
 .docs__>.docs_tab_context__>ul.docs_tabs__>.docs_tab__.stateless__ {
+	will-change: opacity;
 	opacity: 0.8;
 	transition: opacity 0.3s ease;
 }
@@ -1595,18 +1614,19 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	opacity: 0;
 }
 
+.docs__>.docs_tab_context__>ul.docs_tab_utils__>.docs_tab_list_item__ .docs_tab_list__.visible__ {
+	will-change: opacity, transform;
+	transform: scale(1);
+	opacity: 1;
+	transform-origin: top right;
+	transition: transform 0.3s ease, opacity 0.5s ease;
+}
+
 .docs__>.docs_tab_context__>ul.docs_tab_utils__>.docs_tab_list_item__ .docs_tab_list__.hidden__ {
 	transform: scale(0);
 	opacity: 0;
 	transform-origin: top right;
 	transition: transform 0.15s linear, opacity 0.15s linear;
-}
-
-.docs__>.docs_tab_context__>ul.docs_tab_utils__>.docs_tab_list_item__ .docs_tab_list__.visible__ {
-	transform: scale(1);
-	opacity: 1;
-	transform-origin: top right;
-	transition: transform 0.3s ease, opacity 0.5s ease;
 }
 
 .docs__>.docs_tab_context__>ul.docs_tab_utils__>.docs_tab_list_item__ .docs_tab_list__ > .docs_tab__ {
@@ -1645,16 +1665,17 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	background-color: #fff;
 }
 
+.docs__>.docs_contents__.visible__ {
+	will-change: opacity, margin-top;
+	opacity: 1;
+	transition: margin-top 0.5s ease, opacity 0.5s ease;
+}
+
 .docs__>.docs_contents__.hidden__  {
 	position: absolute;
 	margin-top: -15px;
 	opacity: 0;
 	transition: margin-top 0.15s linear;
-}
-
-.docs__>.docs_contents__.visible__ {
-	opacity: 1;
-	transition: margin-top 0.5s ease, opacity 0.5s ease;
 }
 
 .docs__>.docs_contents__.remove__ {
@@ -1701,6 +1722,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .docs__>.entire_load_indicator__.hidden__ {
+	will-change: margin-top;
 	margin-top: -7px;
 	transition: margin-top 0.4s cubic-bezier(1, 0, 1, 1);
 }
