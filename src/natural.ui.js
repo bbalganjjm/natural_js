@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.31.103
+ * Natural-UI v0.31.106
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "0.31.103";
+	N.version["Natural-UI"] = "0.31.106";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -1328,11 +1328,11 @@
 										});
 										dateVal = selDate.obj.formatDate(tempFormat).replace(selDate.obj.formatDate("Y"), selYearStr).replace(/\-/g, "");
 										opts.context.val(dateVal);
-
-										monthsPanel.find(".datepicker_month_item__.datepicker_month_selected__").trigger("click.datepicker");
 									}
 								}
 							}
+							
+							monthsPanel.find(".datepicker_month_item__.datepicker_month_selected__").trigger("click.datepicker");
 
 							if(opts.onChangeYear !== null) {
 								opts.onChangeYear.call(self, opts.context, selYearStr, e);
@@ -1575,6 +1575,13 @@
 				// bind the click event to month items
 				monthsPanel.on("click.datepicker", ".datepicker_month_item__", function(e, ke) {
 					e.preventDefault();
+					
+					if(opts.shareEle) {
+						// Replace the options for the shared instance with the Datepicker instance options for the selected input element.
+						self = N(this).closest(".datepicker_contents__").siblings(".datepicker__").instance("datepicker");
+						opts = self.options;
+					}
+					
 					var selectedMonthItemEle = monthsPanel.find(".datepicker_month_item__.datepicker_month_selected__").removeClass("datepicker_month_selected__");
 					$(this).addClass("datepicker_month_selected__");
 
@@ -1631,12 +1638,6 @@
 					}
 
 					if(opts.monthonly) {
-						if(opts.shareEle) {
-							// Replace the options for the shared instance with the Datepicker instance options for the selected input element.
-							self = opts.contents.siblings(".datepicker__").instance("datepicker");
-							opts = self.options;
-						}
-
 						var selDate = N.date.strToDate(N.string.lpad(selYearStr, 4, "0") + N.string.lpad($(this).text(), 2, "0"), "Ym");
 						// set date format of global config
 						selDate.format = N.context.attr("data").formatter.date.Ym().replace(/[^Y|^m|^d]/g, "");
@@ -1777,9 +1778,6 @@
 						opts.context.trigger("onSelect", [opts.context, selDate, opts.monthonly]);
 						self.hide(ke);
 					});
-
-					// click current month
-					monthsPanel.find(".datepicker_month_item__:contains(" + String(parseInt(d.formatDate("m"))) + "):eq(0)").click();
 				}
 
 				// append datepicker panel after context
@@ -1812,9 +1810,9 @@
 								// Reuse the datepicker panel element
 								var contents;
 								if(opts.monthonly) {
-									contents = N(".datepicker_contents_month_master__.datepicker_monthonly__");
+									contents = opts.context.closest(".view_context__").find(".datepicker_contents_month_master__.datepicker_monthonly__");
 								} else {
-									contents = N(".datepicker_contents_date_master__:not(.datepicker_monthonly__)");
+									contents = opts.context.closest(".view_context__").find(".datepicker_contents_date_master__:not(.datepicker_monthonly__)");
 								}
 
 								if(contents.length === 0) {
@@ -1827,15 +1825,20 @@
 
 							if(!opts.context.prop("readonly") && !opts.context.prop("disabled")) {
 								// auto select datepicker items from before input value
+								var dateStr;
 								if(!N.string.isEmpty(opts.context.val())) {
-									Datepicker.selectItems(opts,
-											opts.context.val().replace(/[^0-9]/g, ""),
-											(!opts.monthonly ? N.context.attr("data").formatter.date.Ymd() : N.context.attr("data").formatter.date.Ym()).replace(/[^Y|^m|^d]/g, ""),
-											opts.contents.find(".datepicker_years_panel__"),
-											opts.contents.find(".datepicker_months_panel__"),
-											opts.contents.find(".datepicker_days_panel__"));
+									dateStr = opts.context.val().replace(/[^0-9]/g, "");
+								} else {
+									dateStr = !opts.monthonly ? d.formatDate("Ymd") : d.formatDate("Ym");
 								}
 
+								Datepicker.selectItems(opts,
+										dateStr,
+										(!opts.monthonly ? N.context.attr("data").formatter.date.Ymd() : N.context.attr("data").formatter.date.Ym()).replace(/[^Y|^m|^d]/g, ""),
+										opts.contents.find(".datepicker_years_panel__"),
+										opts.contents.find(".datepicker_months_panel__"),
+										opts.contents.find(".datepicker_days_panel__"));
+								
 								self.show();
 							}
 						}
@@ -1997,7 +2000,9 @@
         							yearItem.append('<option value="' + N.string.lpad(String(i), 4, "0") +'" ' + selected + '>' + N.string.lpad(String(i), 4, "0") +'</option>');
         						}
         					}
-        					yearItem.trigger("change.datepicker");
+        					if(!N.string.isEmpty(opts.context.val())) {
+        						yearItem.trigger("change.datepicker");        						
+        					}
     					}
     				}
     			}
@@ -2409,7 +2414,9 @@
 				delayContInit : false,
 				randomSel : false,
 				onActive : null,
+				onActiveG : null, // set from N.context.attr("ui").tab
 				onLoad : null,
+				onLoadG : null, // set from N.context.attr("ui").tab
 				blockOnActiveWhenCreate : false,
 				contents : obj.length > 0 ? obj.find(">div") : null,
 				effect : false, // Deprecated
@@ -2578,6 +2585,11 @@
 						}
 
 						if(!selDeclarativeOpts.preload && selDeclarativeOpts.url !== undefined && !selContentEle.data("loaded") || selDeclarativeOpts.stateless) {
+							// show tab contents
+							selContentEle.show(0, function() {
+								selContentEle.addClass("visible__");
+							}).removeClass("hidden__");
+
 							// load content
 							Tab.loadContent.call(self, selDeclarativeOpts.url, selTabIdx, function(cont, selContentEle_) {
 								selContentEle_.addClass("tab_content_active__");
@@ -2595,14 +2607,8 @@
 									onOpenProcFn__();
 								}
 
-								selContentEle.data("loaded", true);
-
-								// show tab contents
-								selContentEle_.show(0, function() {
-									selContentEle_.addClass("visible__");
-
-									loadDefer.resolve();
-								}).removeClass("hidden__");
+								selContentEle_.data("loaded", true);
+								loadDefer.resolve();
 							}, isFirst);
 						} else {
 							selContentEle.addClass("tab_content_active__");
