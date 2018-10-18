@@ -1,0 +1,54 @@
+#Eclipse Builders program script.
+
+#Location
+	$JAVA_HOME/bin/java.exe
+
+#Name : 
+	minify_core
+#Arguments
+	-jar ${build_project}/compiler/closure-compiler-v20170423.jar
+	--js ${build_project}/src/natural.core.js
+	--js_output_file ${build_project}/dist/natural.core.min.js
+
+#Name : 
+	minify_architecture
+#Arguments
+	-jar ${build_project}/compiler/closure-compiler-v20170423.jar
+	--js ${build_project}/src/natural.architecture.js
+	--js_output_file ${build_project}/dist/natural.architecture.min.js
+
+#Name : 
+	minify_data
+#Arguments
+	-jar ${build_project}/compiler/closure-compiler-v20170423.jar
+	--js ${build_project}/src/natural.data.js
+	--js_output_file ${build_project}/dist/natural.data.min.js
+
+#Name : 
+	minify_ui
+#Arguments
+	-jar ${build_project}/compiler/closure-compiler-v20170423.jar
+	--js ${build_project}/src/natural.ui.js
+	--js_output_file ${build_project}/dist/natural.ui.min.js
+
+#Name : 
+	minify_ui_shell
+#Arguments
+	-jar ${build_project}/compiler/closure-compiler-v20170423.jar
+	--js ${build_project}/src/natural.ui.shell.js
+	--js_output_file ${build_project}/dist/natural.ui.shell.min.js
+
+#Name : 
+	minify_all
+#Arguments
+	-jar ${build_project}/compiler/closure-compiler-v20170423.jar 
+	--js ${build_project}/src/natural.core.js ${build_project}/src/natural.architecture.js ${build_project}/src/natural.data.js ${build_project}/src/natural.ui.js ${build_project}/src/natural.ui.shell.js 
+	--js_output_file ${build_project}/dist/natural.js.min.js --create_source_map ${build_project}/dist/natural.js.min.map
+	
+	
+	
+#SourceMap
+#file :
+	"natural.js.min.js"
+#src location :
+	"https://raw.githubusercontent.com/bbalganjjm/natural_js/master/src/" + filename
