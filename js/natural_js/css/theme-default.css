@@ -66,6 +66,10 @@ input[type='radio'], input[type='checkbox'] {
 	margin: 0 3px 0 10px;
 }
 
+.tab__>div {
+	min-height : 451px;
+}
+
 .grid__ input[type='text'], .grid__ input[type='tel'], .grid__ input[type='number'], .grid__ input[type='password'], .grid__ select, .grid__ textarea {
 	height: 100%;
 	width: 100%;

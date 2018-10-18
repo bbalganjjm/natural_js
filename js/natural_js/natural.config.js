@@ -272,7 +272,7 @@
 						}
 
 						if(request.options.dataType === "html" && request.options.target !== null && request.options.append === false) {
-							request.options.target.html('<table style="margin: 0;padding: 0;width: 100%;height: 100%;"><tr><td style="text-align: center;vertical-align: middle;border: 0;"><img src="images/loading.gif" height="24"></td></tr></table>');
+							request.options.target.html('<div style="text-align: center;vertical-align: middle;border: 0; border: none;width: 100%;height: 100%;"><img src="images/loading.gif" height="24"></div>');
 						}
 					},
 					/**
@@ -608,7 +608,6 @@
 			"alwaysOnTop" : true
 		},
 		"tab" : {
-			autoSetDefaultHeightOfContents : true,
 			onActive : function(tabIdx, tabEle, contentEle, tabEles, contentEles) {
     			if(contentEle.find("> .view_context__").length > 0) {
     				var url = contentEle.find("> .view_context__").instance("cont").request.options.url;

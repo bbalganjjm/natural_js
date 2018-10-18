@@ -341,20 +341,18 @@ article .alert ul>li {
 	z-index: 1;
 	opacity: 0;
 	transform : scale(0);
-	transition: all 0.3s cubic-bezier(0.89, 0.05, 1, 1);
+	transition: transform 0.15s linear, opacity 0.15s linear;
 	transform-origin: top left;
 }
 
-.apiDoc .apidemo .form select:hover+.demo-desc,
-.apiDoc .apidemo .form input:hover+.demo-desc,
-.apiDoc .apidemo .form textarea:hover+.demo-desc,
 .apiDoc .apidemo .form select:focus+.demo-desc,
 .apiDoc .apidemo .form input:focus+.demo-desc,
 .apiDoc .apidemo .form textarea:focus+.demo-desc {
+	will-change: transform, opacity;
 	margin-bottom: 15px;
 	opacity: 1;
 	transform : scale(1);
-	transition: all 0.5s cubic-bezier(0.89, 0.05, 1, 1);
+	transition: transform 0.3s ease, opacity 0.3s ease;
 	transform-origin: top left;
 }
 
