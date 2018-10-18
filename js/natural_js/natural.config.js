@@ -608,6 +608,7 @@
 			"alwaysOnTop" : true
 		},
 		"tab" : {
+			autoSetDefaultHeightOfContents : true,
 			onActive : function(tabIdx, tabEle, contentEle, tabEles, contentEles) {
     			if(contentEle.find("> .view_context__").length > 0) {
     				var url = contentEle.find("> .view_context__").instance("cont").request.options.url;
