@@ -10,28 +10,24 @@
 
 .alert__.block_overlay_msg__ {
 	background: #fff;
-	border: 2px solid #66BB6A;
-	box-shadow: 4px 4px 8px #43A047;
-	border-radius: 5px;
+	border: 1px solid #66BB6A;
+	box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.2);
 }
 
 .alert__.block_overlay_msg__ .msg_title_box__ {
 	background-color: #66BB6A;
-	box-shadow: 0px 3px 3px #43A047;
-	margin: -2px -4px -2px -4px;
 	border-top: none;
-	border-radius: 4px;
 }
 
 .alert__.block_overlay_msg__ .msg_title_box__ .msg_title__ {
 	background: none;
 	padding: 0 0 0 12px;
 	margin: 0;
-	font-size: 12px;
+	font-size: 13px;
 	font-weight: bold;
 	color: #fff;
 	text-shadow: 0 1px #000000;
-	line-height: 43px;
+	line-height: 42px;
 }
 
 .alert__.block_overlay_msg__ .msg_title_box__ .msg_title_close__ {
@@ -102,9 +98,8 @@
 	position: absolute;
 	background: #E8F5E9;
 	padding: 5px;
-	border-radius: 0 10px 0 10px;
 	border: 1px solid #E8F5E9;
-	box-shadow: 1px 1px 5px #43A047;
+	box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.2);
 	text-shadow: 1px 1px 1px #43A047;
 	margin-right: 5px;
 }
@@ -152,7 +147,6 @@
 }
 
 .alert_tooltip__.alert_before_show__ {
-	border-radius: 10px 0 10px 0;
 }
 
 .alert_tooltip__.alert_before_show__ a.msg_close__ {
@@ -161,7 +155,6 @@
 }
 
 .alert_tooltip__.alert_after_show__ {
-	border-radius: 0 10px 0 10px;
 }
 
 .alert_tooltip__.alert_after_show__ a.msg_close__ {
@@ -171,7 +164,7 @@
 
 /* Popup */
 .popup__.block_overlay_msg__ {
-
+	box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.2);
 }
 
 .popup__.block_overlay_msg__ .msg_title_box__ {
@@ -217,7 +210,6 @@ a.btn_common__, input[type='button'].btn_common__, button.btn_common__ {
 	white-space: nowrap;
 	vertical-align: middle;
 	margin: 0px;
-	border-radius: 5px;
 }
 
 a.btn_disabled__, input.btn_disabled__, button.btn_disabled__ {
@@ -546,8 +538,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	max-width: 300px;
 	position: absolute;
 	background-color: #E8F5E9;
-	box-shadow: 0px 4px 12px #43A047;
-	border-radius: 5px 0 5px 5px;
+	box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.2);
 	padding: 4px;
 	margin: 0;
 }
@@ -581,7 +572,6 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	width: 100%;
 	height: 28px;
 	padding: 3px 3px;
-	border-radius: 3px;
 	border: 1px solid #A5D6A7;
 	font-size: 12px;
 	line-height: 100%;
@@ -719,8 +709,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .grid__ .grid_more_thead_col__ .grid_more_panel__ {
 	border: 1px solid #A5D6A7;
 	background-color: #E8F5E9;
-	box-shadow: 0px 4px 12px #43A047;
-	border-radius: 5px 0 5px 5px;
+	box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.2);
 	padding: 5px;
 	text-align: left;
 	z-index: 1;
@@ -788,7 +777,6 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	border: 1px solid #4CAF50;
 	line-height: 18px;
 	padding: 2px 5px 4px 5px;
-	border-radius: 3px;
 }
 
 .grid_more_popup_contents__ .btn_box__ .page__ {
@@ -813,7 +801,6 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	border-right: 1px solid #66BB6A;
 	cursor: pointer;
 	min-width: 80px;
-	border-radius: 3px 3px 0 0;
 	font-size: 12px;
 	text-align: center;
 	background-color: #A5D6A7;
@@ -837,13 +824,11 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 .tab__>a.tab_scroll_prev__ span {
 	padding: 0 10px 0 10px;
-	border-radius: 0 3px 0 0;
 	background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACrSURBVChTY/Sa5+XAwMBgB8SHtiVtOwCksQKgujAgJcIEJECKG6E0BvCe7y0GVLwayFwJxGANOAHI1P///18FMkMgIgwMWDWgmwoWhAIMDdhMRQbIGsRxmYoM8PoBG0DW8BIYrKFAOhyI34BFsAAMG4CaVjEyMmoDmWsgIqgAq5O2Jm59BbUNhF+BBaEArx+AmtYwMjDqAplw20AaDgFxPZTGAFuTkG1jeAMAAW42soB/2q4AAAAASUVORK5CYII=') no-repeat 50%;
 }
 
 .tab__>a.tab_scroll_next__ span {
 	padding: 0 10px 0 10px;
-	border-radius: 3px 0 0 0;
 	background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAXklEQVQoz2PwmueVBcQhDHgAUN4BiOtANAOU8R+IV3vP8xbDoQGmpg6ZA8IvsdmGT8N/uG3zEbYRowGEXwNxGCka4LYB8VSaaCDJSUR7Gm4qMcGKYio+DVnYTMWVNAAjHMpWChoQfAAAAABJRU5ErkJggg==') no-repeat 50%;
 }
 
@@ -897,7 +882,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 /* Datepicker */
 .datepicker_contents__ {
 	border: 1px solid #A5D6A7;
-	box-shadow: 0 3px 12px #43A047;
+	box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.2);
 	background-color: #FFFFFF;
 	font-size: 12px;
 	z-index: 1;
@@ -1417,9 +1402,8 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	text-align: left;
 	word-break: break-all;
 	margin-bottom: 5px;
-	border-radius: 5px;
 	border: 1px solid #C8E6C9;
-	box-shadow: 1px 1px 4px #43A047;
+	box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.2);
 	transform: scale(0);
 	opacity: 0;
 	background-color: #E8F5E9;
@@ -1443,7 +1427,6 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	color : rgba(0, 0, 0, 0.87);
 	text-decoration: none;
 	font-size: 12px;
-	text-shadow: 1px 1px 0 rgba(212, 224, 212, 0.1);
 }
 
 .notify__ .notify_msg__ .notify_msg_close__ span {
@@ -1501,7 +1484,6 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	border-left: 10px solid #66BB6A;
 	border-right: 1px solid #66BB6A;
 	border-bottom: 1px solid #66BB6A;
-	border-radius: 7px 0px 0px 0px;
 	font-size: 12px;
 	text-align: center;
 	line-height: 33px;
@@ -1554,7 +1536,6 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	min-width: 22px;
 	max-width: 27px;
 	height: 30px;
-	border-radius: 0 7px 0 0;
 	text-align: center;
 	background-color: #A5D6A7;
 	line-height: 10px;
@@ -1564,7 +1545,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	color: #fff;
 	font-size: 10px;
 	font-weight: bolder;
-	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.55);
+	text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
 }
 
 .docs__>.docs_tab_context__>ul.docs_tabs__ li>.docs_tab_active_btn__ {
@@ -1591,7 +1572,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .docs__>.docs_tab_context__>ul.docs_tabs__ li.active__>a {
-	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.22);
+	text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
 }
 
 .docs__>.docs_tab_context__>ul.docs_tab_utils__>.docs_tab_list_item__ .docs_tab_list__ {
@@ -1604,8 +1585,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	border: 1px solid #A5D6A7;
 	max-width: 300px;
 	background-color: #E8F5E9;
-	box-shadow: 0px 4px 12px #43A047;
-	border-radius: 5px 0 5px 5px;
+	box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.2);
 	padding: 4px;
 	margin: 2px 0 0 0;
 	transform: scale(0);

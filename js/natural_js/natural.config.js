@@ -603,6 +603,9 @@
 				}
 			}
 		},
+		"button" : {
+			"size" : "large"
+		},
 		"popup" : {
 			"draggable" : true,
 			"alwaysOnTop" : true

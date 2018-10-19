@@ -212,6 +212,7 @@ article div.grid_wrap__ {
 
 article .btnBox {
 	margin-bottom: 15px;
+	line-height: 40px;
 }
 
 article hr {
@@ -329,17 +330,17 @@ article .alert ul>li {
 
 .apiDoc .apidemo .form .demo-desc {
 	position: absolute;
-    padding: 10px;
+    padding: 5px;
     margin: 0;
 	margin-bottom: 15px;
     overflow: auto;
     background-color: #fff;
-    border: 3px solid #81C784;
-	border-radius: 10px;
-    box-shadow: 0px 0px 15px #81C784;
-    box-sizing: border-box;
+    border: 1px solid #81C784;
+    box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.2);
+    background-color: #E8F5E9;
 	z-index: 1;
 	opacity: 0;
+	font-size: 12px;
 	transform : scale(0);
 	transition: transform 0.15s linear, opacity 0.15s linear;
 	transform-origin: top left;
@@ -366,7 +367,6 @@ article .intro {
 
 article .smallContTit {
 	padding-left: 15px;
-	font-size: 0.95em;
 	font-weight: normal;
 	background: url("../images/icon/sct_leaf.gif") no-repeat 0 3px;
 	margin: 0 0 5px 0;
@@ -383,13 +383,12 @@ article .searchBox ul {
 	list-style: none;
 	margin: 0;
 	padding: 0;
-	padding-top: 5px;
+	padding-top: 10px;
 }
 
 article .searchBox ul li {
-	font-size: 12px;
 	margin: 0;
-	padding-bottom: 5px;
+	padding-bottom: 10px;
 }
 
 article .searchBox ul li.inputs {
@@ -397,7 +396,7 @@ article .searchBox ul li.inputs {
 }
 
 article .searchBox ul li.buttons {
-	padding: 5px;
+	padding: 10px;
 	text-align: right;
 }
 
@@ -410,13 +409,16 @@ article .searchBox li>label label {
 	font-weight: normal;
 }
 
-article .searchBox label input, article .searchBox label select {
+article .searchBox input, 
+article .searchBox select,
+article .searchBox textarea {
 	margin-left: 15px;
-	box-shadow: 1px 1px 2px #C8E6C9;
 	border-color: #C8E6C9;
 }
 
-article .searchBox label input[type='text'], article .searchBox label input[type='number'], article .searchBox label input[type='tel'] {
+article .searchBox input[type='text'], 
+article .searchBox input[type='number'], 
+article .searchBox input[type='tel'] {
 	width: 85px;
 }
 
