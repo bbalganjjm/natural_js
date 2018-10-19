@@ -1,5 +1,5 @@
 /*!
- * Natural-CORE v0.17.15
+ * Natural-CORE v0.17.16
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -300,7 +300,7 @@
 		// N local variables
 		$.extend(N, {
 			version : {
-				"Natural-CORE" : "0.17.15"
+				"Natural-CORE" : "0.17.16"
 			},
 			/**
 			 * Set and get locale value
@@ -1165,7 +1165,7 @@
 			     * This method is locked window scroll when scrolling in the ele(arg1)
 			     */
 			    windowScrollLock : function(ele) {
-			    	ele.bind('mousewheel.grid.fixHeader DOMMouseScroll.grid.fixHeader',function(e) {
+			    	ele.bind('mousewheel.ui DOMMouseScroll.ui',function(e) {
         		        var delta = e.originalEvent.wheelDelta || -e.originalEvent.detail;
         		        if (delta > 0 && $(this).scrollTop() <= 0) return false;
         		        if (delta < 0 && $(this).scrollTop() >= this.scrollHeight - $(this).height()) return false;
