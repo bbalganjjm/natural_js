@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.31.106
+ * Natural-UI v0.31.112
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "0.31.106";
+	N.version["Natural-UI"] = "0.31.112";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -417,6 +417,10 @@
 				onCancelG : null, // set from N.context.attr("ui").alert
 				onShow : null,
 				onShowG : null, // set from N.context.attr("ui").alert
+				onHide : null,
+				onHideG : null, // set from N.context.attr("ui").alert
+				onRemove : null,
+				onRemoveG : null, // set from N.context.attr("ui").alert
 				overlayColor : null,
 				overlayClose : true,
 				"confirm" : false,
@@ -586,11 +590,15 @@
 				// set height
 				if(opts.height > 0) {
 					opts.msgContents.find(".msg_box__").height(opts.height).css("overflow-y", "auto");
-					if(opts.windowScrollLock) {
-			        	N.event.windowScrollLock(opts.msgContents.find(".msg_box__"));
-			        }
 				}
 
+				if(opts.windowScrollLock) {
+		        	N.event.windowScrollLock(opts.msgContents.find(".msg_box__"));
+		        	if(opts.modal) {
+		        		N.event.windowScrollLock(opts.msgContext);
+		        	}
+		        }
+				
 				//set confirm button style and bind click event
 				opts.msgContents.find(".buttonBox__ a.confirm__").button(opts.global.okBtnStyle);
 				opts.msgContents.find(".buttonBox__ a.confirm__").bind("click.alert", function(e) {
@@ -883,6 +891,9 @@
 				var opts = this.options;
 				var self = this;
 
+				// for N.docs transition effect
+				N(".docs__>.docs_tab_context__").css("z-index", "0");
+				
 				if (!opts.isInput) {
 					if(opts.dynPos && !opts.isWindow) {
 						Alert.resetOffSetEle(opts);
@@ -954,6 +965,10 @@
 			},
 			"hide" : function() {
 				var opts = this.options;
+				
+				// for N.docs transition effect
+				N(".docs__>.docs_tab_context__").css("z-index", "");
+				
 				if (!opts.isInput) {
 					if(!opts.isWindow) {
 						opts.msgContext.closest(".msg_box__").css("position", "");
@@ -963,6 +978,13 @@
 					opts.msgContents.removeClass("visible__").addClass("hidden__");
 					opts.msgContents.one(N.event.whichTransitionEvent(opts.msgContents), function(e){
 						opts.msgContents.hide();
+						
+						if (opts.onHideG !== null) {
+							opts.onHideG.call(this, opts.msgContext, opts.msgContents);
+						}
+				        if (opts.onHide !== null) {
+							opts.onHide.call(this, opts.msgContext, opts.msgContents);
+						}
 			        }).trigger("nothing");
 
 				} else {
@@ -970,6 +992,13 @@
 					opts.msgContents.one(N.event.whichTransitionEvent(opts.msgContents), function(e){
 						clearTimeout(opts.iTime);
 						opts.msgContext.remove();
+						
+						if (opts.onHideG !== null) {
+							opts.onHideG.call(this, opts.msgContext, opts.msgContents);
+						}
+				        if (opts.onHide !== null) {
+							opts.onHide.call(this, opts.msgContext, opts.msgContents);
+						}
 			        }).trigger("nothing");
 				}
 
@@ -980,6 +1009,10 @@
 			},
 			"remove" : function() {
 				var opts = this.options;
+				
+				// for N.docs transition effect
+				N(".docs__>.docs_tab_context__").css("z-index", "");
+				
 				if (!opts.isInput) {
 					clearInterval(opts.time);
 					if(!opts.isWindow) {
@@ -995,12 +1028,26 @@
 							// Removes garbage instances from obserables of N.ds
 							N.gc.ds();
 						}
+						
+						if (opts.onRemoveG !== null) {
+							opts.onRemoveG.call(this, opts.msgContext, opts.msgContents);
+						}
+				        if (opts.onRemove !== null) {
+							opts.onRemove.call(this, opts.msgContext, opts.msgContents);
+						}
 			        }).trigger("nothing");
 				} else {
 					opts.msgContext.removeClass("visible__").addClass("hidden__");
 					opts.msgContext.one(N.event.whichTransitionEvent(opts.msgContext), function(e){
 						clearTimeout(opts.iTime);
 						opts.msgContext.remove();
+						
+						if (opts.onRemoveG !== null) {
+							opts.onRemoveG.call(this, opts.msgContext, opts.msgContents);
+						}
+				        if (opts.onRemove !== null) {
+							opts.onRemove.call(this, opts.msgContext, opts.msgContents);
+						}
 			        }).trigger("nothing");
 				}
 
@@ -1210,7 +1257,9 @@
 			}
 
 			if(this.options.yearsPanelPosition === "top" && this.options.monthsPanelPosition === "top" && this.options.monthonly === true) {
-				throw N.error('[N.datepicker]This option combination({ yearsPanelPosition : "top", monthsPanelPosition : "top", monthonly : true }) is not suppored.');
+				N.warn('[N.datepicker]This option combination({ yearsPanelPosition : "top", monthsPanelPosition : "top", monthonly : true }) is not suppored.');
+				this.options.yearsPanelPosition = "left";
+				this.options.monthsPanelPosition = "left";
 			}
 
 			// set style class name to context element
@@ -1332,7 +1381,9 @@
 								}
 							}
 							
-							monthsPanel.find(".datepicker_month_item__.datepicker_month_selected__").trigger("click.datepicker");
+							if(!opts.monthonly) {
+								monthsPanel.find(".datepicker_month_item__.datepicker_month_selected__").trigger("click.datepicker");
+							}
 
 							if(opts.onChangeYear !== null) {
 								opts.onChangeYear.call(self, opts.context, selYearStr, e);
