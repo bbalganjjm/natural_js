@@ -1453,7 +1453,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 .docs__>.docs_tab_context__>ul.docs_tabs__.effect__ {
 	will-change: margin-left;
-	transition: margin-left 0.25s ease;
+	transition: margin-left 0.3s ease;
 }
 
 .docs__>.docs_tab_context__>ul.docs_tabs__, .docs__>.docs_tab_context__>ul.docs_tab_utils__, .docs__>.docs_tab_context__>ul.docs_tab_utils__ .docs_tab_list__ {
