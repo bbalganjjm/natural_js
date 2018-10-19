@@ -966,13 +966,6 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .datepicker_contents__ .datepicker_curr_year__ {
 }
 
-.datepicker_contents__ .datepicker_year_selected__ {
-	background-color: #C8E6C9;
-	border-radius: 50%;
-	    transform: scale(0.9);
-    font-size: 13px;
-}
-
 .datepicker_contents__ .datepicker_month_item__ {
 	line-height: 25px;
 	width: 28px;
@@ -1029,30 +1022,31 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     font-weight: bold;
 }
 
+.datepicker_contents__ .datepicker_year_selected__ {
+	border-color: #C8E6C9;
+	border-radius: 45%;
+}
+
 .datepicker_contents__ .datepicker_month_selected__ {
-	background-color: #C8E6C9;
-	border-radius: 50%;    transform: scale(0.9);
-    font-size: 13px;
+	border-color: #C8E6C9;
+	border-radius: 50%;
 }
 
 .datepicker_contents__ .datepicker_day_selected__ {
-    background-color: #C8E6C9;
+    border-color: #C8E6C9;
     border-radius: 50%;
-    font-size: 13px;
 }
 
 .datepicker_contents__ .datepicker_year_item__:hover, .datepicker_contents__ .datepicker_month_item__:hover, .datepicker_contents__ .datepicker_day_item__:hover {
 	will-change: background-color;
-	background-color: #A5D6A7;
+	background-color: #C8E6C9;
 	border-radius: 50%;
-	transition: background-color 0.3s ease;
-    font-size: 13px;
 }
 
 .datepicker_contents__.years_panel_position_top__,
 .datepicker_contents__.months_panel_position_top__ {
 	width: auto;
-	    text-align: center;
+    text-align: center;
 }
 
 .datepicker_contents__.years_panel_position_top__ .datepicker_years_panel__ {
@@ -1077,7 +1071,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	float: none;
 
 	/* Remove the arrow in select box */
-    birder-radius: 0;
+    border-radius: 0;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -1136,7 +1130,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	float: none;
 
     /* Remove the arrow in select box */
-    birder-radius: 0;
+    border-radius: 0;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
