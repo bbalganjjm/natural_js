@@ -272,14 +272,13 @@ right : 0<br>
 			<td></td>
 			<td style="max-width: 299px;">
 				<p>확인버튼을 눌렀을때 실행되는 이벤트</p>
-				<p class="alert">onOkG 옵션은 natural.config.js 의 N.context.attr("ui").alert 에서 지정 가능 하며 모든 N.alert 컴포넌트의 onOk 함수가 실행 되기 전 단계에서 실행 됩니다.</p>
+				<p class="alert">onOkG 옵션은 natural.config.js 의 N.context.attr("ui").alert 에서 지정 가능 하며 모든 N.alert 컴포넌트에서 확인버튼을 눌렀을때 실행 됩니다.</p>
 				<pre><code class="language-javascript">onOk : function(msgContext, msgContents) {
 	// this : N.alert 인스턴스
 	// msgContext : 메시지 오버레이 요소
 	// msgContents : 메시지 대화상자 요소
 }</code></pre>
 				<p class="alert">이벤트 핸들러 함수 에서 0을 반환 하면 대화 상자를 닫지 않습니다.</p>
-				<p class="alert">natural.config.js 의 N.context.attr("ui").alert 에 onOkG 옵션을 지정 하면 모든 N.alert 의 onOk 이벤트가 실행 되기 전에 실행 됩니다. onOkG 의 이벤트 핸들러 함수의 인자들과 사용법은 onOk와 같습니다.</p>
 			</td>
 		</tr>
 		<tr>
@@ -289,7 +288,7 @@ right : 0<br>
 			<td></td>
 			<td style="max-width: 299px;">
 				<p>취소 버튼을 누르거나 X 버튼을 눌렀을때 또는 메시지 오버레이를 클릭하여 메시지 대화상자가 닫혔을때 실행되는 이벤트</p>
-				<p class="alert">onCancelG 옵션은 natural.config.js 의 N.context.attr("ui").alert 에서 지정 가능 하며 모든 N.alert 컴포넌트의 onCancel 함수가 실행 되기 전 단계에서 실행 됩니다.</p>
+				<p class="alert">onCancelG 옵션은 natural.config.js 의 N.context.attr("ui").alert 에서 지정 가능 하며 모든 N.alert 컴포넌트에서 취소 버튼을 누르거나 X 버튼을 눌렀을때 또는 메시지 오버레이를 클릭하여 메시지 대화상자가 닫았을때 실행 됩니다.</p>
 				<pre><code class="language-javascript">onCancel : function(msgContext, msgContents) {
 	// this : N.alert 인스턴스
 	// msgContext : 메시지 오버레이 요소
@@ -305,8 +304,38 @@ right : 0<br>
 			<td></td>
 			<td style="max-width: 299px;">
 				<p>메시지 대화상자가 표시 된 후 실행되는 이벤트</p>
-				<p class="alert">onShowG 옵션은 natural.config.js 의 N.context.attr("ui").alert 에서 지정 가능 하며 모든 N.alert 컴포넌트의 onShow 함수가 실행 되기 전 단계에서 실행 됩니다.</p>
-				<pre><code class="language-javascript">onCancel : function(msgContext, msgContents) {
+				<p class="alert">onShowG 옵션은 natural.config.js 의 N.context.attr("ui").alert 에서 지정 가능 하며 모든 N.alert 컴포넌트에서 메시지 대화상자가 표시 된 후 실행 됩니다.</p>
+				<pre><code class="language-javascript">onShow : function(msgContext, msgContents) {
+	// this : N.alert 인스턴스
+	// msgContext : 메시지 오버레이 요소
+	// msgContents : 메시지 대화상자 요소
+}</code></pre>
+			</td>
+		</tr>
+		<tr>
+			<td>onHide<br>(onHideG)</td>
+			<td>function</td>
+			<td>null</td>
+			<td></td>
+			<td style="max-width: 299px;">
+				<p>메시지 대화상자가 감춰진 후 실행되는 이벤트</p>
+				<p class="alert">onHideG 옵션은 natural.config.js 의 N.context.attr("ui").alert 에서 지정 가능 하며 모든 N.alert 컴포넌트에서 메시지 대화상자가 감춰진 후 실행 됩니다.</p>
+				<pre><code class="language-javascript">onHide : function(msgContext, msgContents) {
+	// this : N.alert 인스턴스
+	// msgContext : 메시지 오버레이 요소
+	// msgContents : 메시지 대화상자 요소
+}</code></pre>
+			</td>
+		</tr>
+		<tr>
+			<td>onRemove<br>(onRemoveG)</td>
+			<td>function</td>
+			<td>null</td>
+			<td></td>
+			<td style="max-width: 299px;">
+				<p>메시지 대화상자가 제거 된 후 실행되는 이벤트</p>
+				<p class="alert">onRemoveG 옵션은 natural.config.js 의 N.context.attr("ui").alert 에서 지정 가능 하며 모든 N.alert 컴포넌트에서 메시지 대화상자가 제거 된 후 실행 됩니다.</p>
+				<pre><code class="language-javascript">onRemove : function(msgContext, msgContents) {
 	// this : N.alert 인스턴스
 	// msgContext : 메시지 오버레이 요소
 	// msgContents : 메시지 대화상자 요소

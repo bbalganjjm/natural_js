@@ -118,6 +118,24 @@ function(msgContext, msgContents) {
 }</textarea>
 			</td>
 		</tr>
+		<tr>
+			<th><label for="onHide">onHide</label></th>
+			<td colspan="3">
+				<textarea id="onHide">
+function(msgContext, msgContents) {
+	N.log("onHide", msgContext, msgContents);
+}</textarea>
+			</td>
+		</tr>
+		<tr>
+			<th><label for="onRemove">onRemove</label></th>
+			<td colspan="3">
+				<textarea id="onRemove">
+function(msgContext, msgContents) {
+	N.log("onRemove", msgContext, msgContents);
+}</textarea>
+			</td>
+		</tr>
 	</table>
 
 	<p lang="ko_KR" class="smallContTit">실행 : </p>
@@ -174,7 +192,11 @@ function(msgContext, msgContents) {
 	            	onCancel : N.string.trimToNull(N("#onCancel", view).val()) !== null ?
 	            			eval("(" + N("#onCancel", view).val() + ")") : null,
            			onShow : N.string.trimToNull(N("#onShow", view).val()) !== null ?
-   	            			eval("(" + N("#onShow", view).val() + ")") : null
+   	            			eval("(" + N("#onShow", view).val() + ")") : null,
+           			onHide : N.string.trimToNull(N("#onHide", view).val()) !== null ?
+   	            			eval("(" + N("#onHide", view).val() + ")") : null,
+           			onRemove : N.string.trimToNull(N("#onRemove", view).val()) !== null ?
+   	            			eval("(" + N("#onRemove", view).val() + ")") : null
 	            };
 	            N(context, view).alert(opts).show();
 	        });
