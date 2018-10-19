@@ -898,7 +898,6 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .datepicker_contents__ {
 	border: 1px solid #A5D6A7;
 	box-shadow: 0 3px 12px #43A047;
-	border-radius: 3px;
 	background-color: #FFFFFF;
 	font-size: 12px;
 	z-index: 1;
@@ -909,7 +908,6 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .datepicker_contents__ > .datepicker_years_panel__ {
 	width: 40px;
 	float: left;
-	border-radius: 3px;
 	background-color: #E8F5E9;
 }
 
@@ -917,15 +915,17 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	width: 60px;
 	float: left;
 	margin-left: 2px;
-	border-radius: 3px;
 	background-color: #E8F5E9;
+}
+
+.datepicker_contents__.datepicker_monthonly__ > .datepicker_months_panel__ {
+	background-color: #FFFFFF;
 }
 
 .datepicker_contents__ > .datepicker_days_panel__ {
 	width: 210px;
 	float: left;
 	margin-left: 2px;
-	border-radius: 3px;
 }
 
 .datepicker_contents__.visible__ {
@@ -948,7 +948,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .datepicker_monthonly__ {
-	width: 103px;
+	width: 102px;
 }
 
 .datepicker_contents__ .datepicker_year_item__, .datepicker_contents__ .datepicker_year_paging__ {
