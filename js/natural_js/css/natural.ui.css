@@ -1447,6 +1447,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	position: relative;
 	height: 33px;
 	border-bottom: 1px solid #66BB6A;
+	z-index: 1;
 }
 
 .docs__>.docs_tab_context__>.docs_tabs__.effect__ {
@@ -1556,10 +1557,6 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	font-size: 10px;
 	font-weight: bolder;
 	text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
-}
-
-.docs__>.docs_tab_context__>ul.docs_tab_utils__>.docs_tab_list_item__ .docs_tab_list__ {
-	position: relative;
 }
 
 .docs__>.docs_tab_context__>ul.docs_tab_utils__>.docs_tab_list_item__ .docs_tab_list__ {
