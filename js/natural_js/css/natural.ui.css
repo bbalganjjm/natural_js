@@ -1447,8 +1447,6 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	position: relative;
 	height: 33px;
 	border-bottom: 1px solid #66BB6A;
-	font-family: "Malgun Gothic", "dotum", "Segoe UI", sans-serif;
-	z-index: 1;
 }
 
 .docs__>.docs_tab_context__>.docs_tabs__.effect__ {
@@ -1488,7 +1486,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .docs__>.docs_tab_context__>.docs_tabs__>.docs_tab__ {
-	
+
 }
 
 .docs__>.docs_tab_context__>.docs_tabs__>.docs_tab__.inactive__ {
