@@ -10,6 +10,8 @@
 html {
 	-ms-text-size-adjust: 100%; /* 2 */
 	-webkit-text-size-adjust: 100%; /* 2 */
+	overflow-x: hidden;
+	overflow-y: scroll;
 }
 
 /**
@@ -19,7 +21,6 @@ body {
 	margin: 0;
 	font-family: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", "dotum", "Segoe UI", sans-serif;
 	color : rgba(0, 0, 0, 0.87);
-	overflow-y: scroll;
 }
 
 [lang] {
