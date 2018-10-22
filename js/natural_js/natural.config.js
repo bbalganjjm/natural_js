@@ -263,9 +263,6 @@
 									}
 								}, "COMM_TITLE"),
 								msg : "<pre style='white-space: pre-wrap;'>" + N.json.format(msg) + "</pre>",
-								onOk : function() {
-									N(".entire_load_indicator__").hide();
-								},
 								width : 480,
 								onCancel : this.onOk
 							}).show();

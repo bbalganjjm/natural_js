@@ -1631,7 +1631,6 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .docs__>.docs_contents__.visible__ {
-	will-change: opacity, margin-top;
 	opacity: 1;
 	transition: margin-top 0.5s ease, opacity 0.5s ease;
 }
@@ -1687,7 +1686,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .docs__>.entire_load_indicator__.hidden__ {
-	will-change: margin-top;
-	margin-top: -7px;
-	transition: margin-top 0.4s cubic-bezier(1, 0, 1, 1);
+	will-change: transform;
+	transform: translateY(-7px);
+	transition: transform 0.4s cubic-bezier(1, 0, 1, 1);
 }
