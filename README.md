@@ -1,2 +1,2 @@
-# natural_js
+# Natural-JS
 Natural-JS API/DEMO Homepage Source Codes.
