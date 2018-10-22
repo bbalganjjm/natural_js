@@ -1440,6 +1440,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 /* N.docs */
 .docs__ {
+	overflow-x: hidden;
 }
 
 .docs__>.docs_tab_context__ {
