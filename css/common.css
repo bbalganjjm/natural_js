@@ -410,15 +410,15 @@ article .searchBox li>label label {
 	font-weight: normal;
 }
 
-article .searchBox input, 
+article .searchBox input,
 article .searchBox select,
 article .searchBox textarea {
 	margin-left: 15px;
 	border-color: #C8E6C9;
 }
 
-article .searchBox input[type='text'], 
-article .searchBox input[type='number'], 
+article .searchBox input[type='text'],
+article .searchBox input[type='number'],
 article .searchBox input[type='tel'] {
 	width: 85px;
 }
