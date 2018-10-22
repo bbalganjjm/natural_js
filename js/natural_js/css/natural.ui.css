@@ -135,6 +135,7 @@
 	margin-right: 5px;
 	font-style: italic;
 	font-weight: normal;
+	white-space: nowrap;
 }
 
 .alert_tooltip__.msg__ a.msg_close__ {
