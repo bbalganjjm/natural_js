@@ -69,13 +69,14 @@
 
 .alert__.hidden__ {
 	will-change: opacity, transform;
+	transform: translateZ(0)\0; /* for ie 8+ */
+	
 	opacity: 0;
 	transform: scale(0);
 	transition: opacity 0.15s linear, transform 0.15s linear;
 }
 
 .alert__.visible__ {
-	will-change: opacity, transform;
 	opacity: 1;
 	transform: scale(1);
 	transition: opacity 0.3s ease, transform 0.3s ease;
@@ -134,6 +135,7 @@
 	margin-right: 5px;
 	font-style: italic;
 	font-weight: normal;
+	white-space: nowrap;
 }
 
 .alert_tooltip__.msg__ a.msg_close__ {
@@ -214,6 +216,8 @@ a.btn_common__, input[type='button'].btn_common__, button.btn_common__ {
 
 a.btn_disabled__, input.btn_disabled__, button.btn_disabled__ {
 	will-change: opacity;
+	transform: translateZ(0)\0; /* for ie 8+ */
+	
 	opacity: 0.6;
 	transition: opacity 0.3s ease;
 	cursor: default;
@@ -511,12 +515,16 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 .grid__>thead .btn_data_filter__:hover {
 	will-change: margin-right;
+	transform: translateZ(0)\0; /* for ie 8+ */
+	
 	margin-right: 0px;
 	transition: margin-right 0.3s ease;
 }
 
 .grid__>thead .btn_data_filter__:hover span {
 	will-change: opacity;
+	transform: translateZ(0)\0; /* for ie 8+ */
+	
 	opacity: 1;
 	transition: opacity 0.3s ease;
 }
@@ -544,13 +552,15 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .grid__>thead .data_filter_panel__.visible__ {
-	will-change: transform;
 	transform: scale(1);
 	transform-origin: top left;
 	transition: transform 0.3s ease;
 }
 
 .grid__>thead .data_filter_panel__.hidden__ {
+	will-change: transform;
+	transform: translateZ(0)\0; /* for ie 8+ */
+	
 	transform: scale(0);
 	transform-origin: top left;
 	transition: transform 0.15s linear;
@@ -716,13 +726,15 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .grid__ .grid_more_thead_col__ .grid_more_panel__.visible__ {
-	will-change: transform;
 	transform: scale(1);
 	transform-origin: top right;
 	transition: transform 0.3s ease;
 }
 
 .grid__ .grid_more_thead_col__ .grid_more_panel__.hidden__ {
+	will-change: transform;
+	transform: translateZ(0)\0; /* for ie 8+ */
+	
 	transform: scale(0);
 	transform-origin: top right;
 	transition: transform 0.15s linear;
@@ -808,6 +820,8 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 .tab__>ul.tab_scroll__.effect__ {
 	will-change: margin-left;
+	transform: translateZ(0)\0; /* for ie 8+ */
+	
 	transition: margin-left 0.25s cubic-bezier(0.76, 0.07, 0.3, 1.5);
 }
 
@@ -834,12 +848,16 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 .tab__>a.tab_scroll_prev__.disabled__ span, .tab__>a.tab_scroll_next__.disabled__ span {
 	will-change: opacity;
+	transform: translateZ(0)\0; /* for ie 8+ */
+	
 	opacity : 0.4;
 	transition: opacity 0.3s ease;
 }
 
 .tab__>ul li.tab_disabled__ {
 	will-change: opacity;
+	transform: translateZ(0)\0; /* for ie 8+ */
+	
 	opacity: 0.6;
 	transition: opacity 0.3s ease;
 }
@@ -870,11 +888,13 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .tab__>div.hidden__ > .view_context__ {
+	will-change: opacity;
+	transform: translateZ(0)\0; /* for ie 8+ */
+	
 	opacity: 0;
 }
 
 .tab__>div.visible__ > .view_context__ {
-	will-change: opacity;
 	opacity: 1;
 	transition: opacity 0.5s ease;
 }
@@ -914,12 +934,14 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .datepicker_contents__.visible__ {
-	will-change: transform;
 	transform: scale(1);
 	transition: transform 0.3s ease;
 }
 
 .datepicker_contents__.hidden__ {
+	will-change: transform;
+	transform: translateZ(0)\0; /* for ie 8+ */
+	
 	transform: scale(0);
 	transition: transform 0.15s linear;
 }
@@ -991,6 +1013,8 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .datepicker_contents__ .datepicker_prev_day_item__.visible__,
 .datepicker_contents__ .datepicker_next_day_item__.visible__ {
 	will-change: opacity, transform;
+	transform: translateZ(0)\0; /* for ie 8+ */
+	
 	opacity: 1;
 	transform: scaleX(1);
 	transition: transform 0.3s ease;
@@ -1029,6 +1053,8 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 .datepicker_contents__ .datepicker_year_item__:hover, .datepicker_contents__ .datepicker_month_item__:hover, .datepicker_contents__ .datepicker_day_item__:hover {
 	will-change: background-color;
+	transform: translateZ(0)\0; /* for ie 8+ */
+	
 	background-color: #C8E6C9;
 	border-radius: 50%;
 }
@@ -1410,13 +1436,15 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .notify__ .notify_msg__.visible__ {
-	will-change: opacity, transform;
 	transform: scale(1);
 	opacity: 1;
 	transition: opacity 0.15s ease, transform 0.15s ease;
 }
 
 .notify__ .notify_msg__.hidden__ {
+	will-change: opacity, transform;
+	transform: translateZ(0)\0; /* for ie 8+ */
+	
 	transform: scale(0);
 	opacity: 0;
 	transition: opacity 0.3s linear, transform 0.3s linear;
@@ -1440,7 +1468,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 /* N.docs */
 .docs__ {
-	overflow-x: hidden;
+    overflow: hidden;
 }
 
 .docs__>.docs_tab_context__ {
@@ -1452,6 +1480,8 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 .docs__>.docs_tab_context__>.docs_tabs__.effect__ {
 	will-change: margin-left;
+	transform: translateZ(0)\0; /* for ie 8+ */
+	
 	transition: margin-left 0.3s ease;
 }
 
@@ -1500,9 +1530,11 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 .docs__>.docs_tab_context__>.docs_tabs__>.docs_tab__.active__ {
 	will-change: background-color, border-bottom-color;
+	transform: translateZ(0)\0; /* for ie 8+ */
+	
 	background-color: #fff;
 	border-bottom: 1px solid #fff;
-	transition: background-color 0.3s ease, border-bottom-color 0.3s ease;
+	transition: background-color 0.5s ease, border-bottom-color 0.3s ease;
 }
 
 .docs__>.docs_tab_context__>.docs_tabs__>.docs_tab__.stateless__>.docs_tab_active_btn__>span {
@@ -1573,7 +1605,6 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .docs__>.docs_tab_context__>ul.docs_tab_utils__>.docs_tab_list_item__ .docs_tab_list__.visible__ {
-	will-change: opacity, transform;
 	transform: scale(1);
 	opacity: 1;
 	transform-origin: top right;
@@ -1581,6 +1612,9 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .docs__>.docs_tab_context__>ul.docs_tab_utils__>.docs_tab_list_item__ .docs_tab_list__.hidden__ {
+	will-change: opacity, transform;
+	transform: translateZ(0)\0; /* for ie 8+ */
+	
 	transform: scale(0);
 	opacity: 0;
 	transform-origin: top right;
@@ -1631,12 +1665,14 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .docs__>.docs_contents__.visible__ {
-	will-change: opacity, margin-top;
 	opacity: 1;
 	transition: margin-top 0.5s ease, opacity 0.5s ease;
 }
 
 .docs__>.docs_contents__.hidden__  {
+	will-change: opacity, margin-top;
+	transform: translateZ(0)\0; /* for ie 8+ */
+	
 	position: absolute;
 	margin-top: -15px;
 	opacity: 0;
@@ -1687,7 +1723,9 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .docs__>.entire_load_indicator__.hidden__ {
-	will-change: margin-top;
-	margin-top: -7px;
-	transition: margin-top 0.4s cubic-bezier(1, 0, 1, 1);
+	will-change: transform;
+	transform: translateZ(0)\0; /* for ie 8+ */
+	
+	transform: translateY(-7px);
+	transition: transform 0.4s cubic-bezier(1, 0, 1, 1);
 }
