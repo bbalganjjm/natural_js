@@ -1,5 +1,5 @@
 /*!
- * Natural-UI.Shell v0.9.33, Works fine in IE9 and above
+ * Natural-UI.Shell v0.9.34, Works fine in IE9 and above
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-	N.version["Natural-UI.Shell"] = "0.9.33";
+	N.version["Natural-UI.Shell"] = "0.9.34";
 
 	$.fn.extend($.extend(N.prototype, {
 		notify : function(opts) {
@@ -453,10 +453,8 @@
 					});
 
 					if(ulWidth > 0 && ulWidth > tabContext.width() - tabUtilsEleWidth) {
-						tabContext.css("overflow", "hidden");
 						tabContainerEle.addClass("docs_scroll__").width(ulWidth);
 					} else {
-						tabContext.css("overflow", "");
 						tabContainerEle.css("width", "");
 					}
 				}).trigger("resize" + eventNameSpace);
