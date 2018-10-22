@@ -425,7 +425,7 @@
 	        N("#btnUnbind", view).click(function(e) {
 	            e.preventDefault();
 	            if(!form.options.unbind) {
-	            	N("div.result", view).alert('You must check the "unbind" option checkbox before initializing the form').show();
+	            	N(".result", view).alert('You must check the "unbind" option checkbox before initializing the form').show();
 	    			return false;
 	    		}
 	            form.unbind();
@@ -434,7 +434,7 @@
 	        N("#btnRevert", view).click(function(e) {
 	            e.preventDefault();
 	            if(!form.options.revert) {
-	            	N("div.result", view).alert('You must check the "revert" option checkbox before initializing the form').show();
+	            	N(".result", view).alert('You must check the "revert" option checkbox before initializing the form').show();
 	    			return false;
 	    		}
 	            form.revert();
@@ -447,13 +447,13 @@
 	        	if(value !== null) {
 	        		form.val(key, value);
 	        	} else {
-	        		N("div.result", view).alert(JSON.stringify(form.val(key))).show();
+	        		N(".result", view).alert(JSON.stringify(form.val(key))).show();
 	        	}
 	        });
 
 	        N("#btnData", view).click(function(e) {
 	        	e.preventDefault();
-	        	N("div.result", view).alert({
+	        	N(".result", view).alert({
 	        		msg : '<pre class="pre">' + N.json.format(form.data(eval(N("select#data", view).val()))) + '</pre>',
 	        		width : 400,
 	        		height : 250
@@ -462,7 +462,7 @@
 
 	        N("#btnValidate", view).click(function(e) {
 	            e.preventDefault();
-	            N("table#form").alert('<b>전체 Validate 결과 : ' + form.validate() + '</b>').show()
+	            N(".result", view).alert('<b>전체 Validate 결과 : ' + form.validate() + '</b>').show()
 	        });
 
 	        N("#btnReload", view).click(function(e) {
