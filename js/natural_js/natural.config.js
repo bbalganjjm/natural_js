@@ -263,8 +263,7 @@
 									}
 								}, "COMM_TITLE"),
 								msg : "<pre style='white-space: pre-wrap;'>" + N.json.format(msg) + "</pre>",
-								width : 480,
-								onCancel : this.onOk
+								width : 480
 							}).show();
 						}
 
