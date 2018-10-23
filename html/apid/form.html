@@ -354,8 +354,8 @@
 <script type="text/javascript">
 	N(".demo_form").cont({
 	    init : function(view, request) {
-	    	// initialize buttons in div.btnBox
-	    	N("div.btnBox a", view).button();
+	    	// initialize buttons in .btnBox
+	    	N(".btnBox a", view).button();
 
 	    	// data
 	    	var data = eval(N("code#data", view).text());
@@ -393,7 +393,7 @@
 
 	    		form = N(data).form(opts);
 
-	    		N("div.btnBox", view).find("a").instance("button", function() {
+	    		N(".btnBox", view).find("a").instance("button", function() {
 	    			if(this.context().is("#btnInit") || this.context().is("#btnRevert")) {
 	    				this.disable();
 	    			} else {
