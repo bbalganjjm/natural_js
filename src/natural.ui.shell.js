@@ -1,5 +1,5 @@
 /*!
- * Natural-UI.Shell v0.9.34, Works fine in IE9 and above
+ * Natural-UI.Shell v0.9.36, Works fine in IE9 and above
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-	N.version["Natural-UI.Shell"] = "0.9.34";
+	N.version["Natural-UI.Shell"] = "0.9.36";
 
 	$.fn.extend($.extend(N.prototype, {
 		notify : function(opts) {
@@ -35,7 +35,7 @@
 				displayTime : 7,
 				alwaysOnTop : false,
 				html : false,
-				alwaysOnTopCalcTarget : "div, span, ul, p, nav, article, section",
+				alwaysOnTopCalcTarget : "div, span, ul, p, nav, article, section, header, footer, aside",
 			};
 
 			try {
@@ -179,7 +179,7 @@
 				saveHistory : true,
 				docs : {},
 				alwaysOnTop : false,
-				alwaysOnTopCalcTarget : "div, span, ul, p, nav, article, section",
+				alwaysOnTopCalcTarget : "div, span, ul, p, nav, article, section, header, footer, aside",
 				order : [],
 				docsFilterDefers : [],
 				loadedDocId : null
