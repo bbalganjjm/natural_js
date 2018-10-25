@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.31.113
+ * Natural-UI v0.31.114
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "0.31.113";
+	N.version["Natural-UI"] = "0.31.114";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -425,7 +425,7 @@
 				overlayClose : true,
 				"confirm" : false,
 				alwaysOnTop : false,
-				alwaysOnTopCalcTarget : "div, span, ul, p, nav, article, section",
+				alwaysOnTopCalcTarget : "div, span, ul, p, nav, article, section, header, footer, aside",
 				dynPos : true, // dynamic positioning for massage context and message overlay
 				windowScrollLock : true,
 				draggable : false,
