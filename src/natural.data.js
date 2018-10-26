@@ -1,5 +1,5 @@
 /*!
- * Natural-DATA v0.10.55
+ * Natural-DATA v0.10.56
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-		N.version["Natural-DATA"] = "0.10.55";
+		N.version["Natural-DATA"] = "0.10.56";
 
 	$.fn.extend($.extend(N.prototype, {
 		datafilter : function(callBack) {
@@ -413,8 +413,8 @@
 						var orgOnHide = opts.onHide;
 						opts.onHide = function(context, contents) {
 							if(this.isApplyRelative === true) {
-								contents.closest(".context_wrap__").css("position", "");
-								contents.closest(".view_context__").css("position", "");
+								context.closest(".context_wrap__").css("position", "");
+								context.closest(".view_context__").css("position", "");
 								this.isApplyRelative = false;
 							}
 
