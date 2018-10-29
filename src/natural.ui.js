@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.32.114
+ * Natural-UI v0.32.126
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "0.32.114";
+	N.version["Natural-UI"] = "0.32.126";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -137,7 +137,7 @@
 					opts.context.addClass(compNm + "_select__");
 
 					// bind tbody click event for select, multiselect options
-					this.tempRowEle.bind("click." + compNm, function(e) {
+					opts.context.on("click." + compNm, ">" + lineTag, function(e) {
 						var thisEle = $(this);
 						var retFlag;
 						var isSelected;
@@ -4159,7 +4159,7 @@
 						if(selRowEle.hasClass("list_selected__")) {
 							selRowEle.removeClass("list_selected__");
 						}
-						selRowEle.click();
+						selRowEle.trigger("click.list");
 					});
 
 					if(opts.selectScroll) {
@@ -4196,7 +4196,7 @@
 						if(checkboxEle.is(":checked")) {
 							checkboxEle.prop("checked", false);
 						}
-						checkboxEle.click();
+						checkboxEle.trigger("click.list");
 					});
 
 					if(opts.checkScroll) {
@@ -4917,8 +4917,16 @@
 				});
 
 		        var sampleCell = opts.context.find(">tbody td:eq(0)");
-		        var borderLeft = sampleCell.css("border-left-width") + " " + sampleCell.css("border-left-style") + " " + sampleCell.css("border-left-color");
-		        var borderBottom = sampleCell.css("border-bottom-width") + " " + sampleCell.css("border-bottom-style") + " " + sampleCell.css("border-bottom-color");
+		        var borderLeftWidth = sampleCell.css("border-left-width");
+		        if(parseInt(borderLeftWidth) < 1) {
+		        	borderLeftWidth = "1px"; // for IE
+		        }
+		        var borderLeft = borderLeftWidth + " " + sampleCell.css("border-left-style") + " " + sampleCell.css("border-left-color");
+		        var borderBottomWidth = sampleCell.css("border-bottom-width");
+		        if(parseInt(borderBottomWidth) < 1) {
+		        	borderBottomWidth = "1px"; // for IE
+		        }
+		        var borderBottom = borderBottomWidth + " " + sampleCell.css("border-bottom-style") + " " + sampleCell.css("border-bottom-color");
 
 		        // Root grid container
 		        var gridWrap = opts.context.wrap('<div class="grid_wrap__"/>').parent();
@@ -5171,6 +5179,16 @@
 
 					if(self.tableMap.thead.length > 0 && gridMoreColList === undefined) {
 		    			gridMoreColList = panel.find(".grid_more_col_list__");
+		    			gridMoreColList.on("click.grid.more", "input[name='hideshow']", function() {
+							var thisEle = $(this);
+							if(!thisEle.is(":checked")) {
+								self.hide(parseInt(thisEle.val()));
+							} else {
+								self.show(parseInt(thisEle.val()));
+							}
+							calibDialogItems(thisBtn, panel);
+						});
+		    			
 		    			$(self.tableMap.thead[0]).each(function(i) {
 		    				var thisEleClone = $(this).clone();
 		    				if(!thisEleClone.hasClass("grid_more_thead_col__")) {
@@ -5178,16 +5196,7 @@
 			    				var cols = $('<li class="grid_more_cols__" title="' + String(i+1) + '">'
 									+ '<label><input name="hideshow" type="checkbox" checked="checked" value="' + String(i) + '">'
 									+ String(i+1) + " " + N.message.get(opts.message, "column") + '</label></li>')
-									.appendTo(gridMoreColList)
-									.find("input[name='hideshow']").bind("click.grid.more", function() {
-										var thisEle = $(this);
-										if(!thisEle.is(":checked")) {
-											self.hide(parseInt(thisEle.val()));
-										} else {
-											self.show(parseInt(thisEle.val()));
-										}
-										calibDialogItems(thisBtn, panel);
-									});
+									.appendTo(gridMoreColList);
 		    				}
 		    			});
 
@@ -5213,7 +5222,7 @@
         		});
 
         		// Detail popup button event.
-				detailBtn.bind("click.grid.more", function(e) {
+				opts.context.on("click.grid.more", ".grid_more_tbody_col__ .grid_more_btn__", function(e) {
 					e.preventDefault();
 					e.stopPropagation();
 					e.stopImmediatePropagation();
@@ -5686,7 +5695,7 @@
 								filterItemEle.find(".data_filter_checkbox__")
 								.data("rowIdxs", filterKeys[k])
 								.data("length", length)
-								.bind("click.grid.dataFilter, do.grid.dataFilter", function() {
+								.bind("click.grid.dataFilter, do.grid.dataFilter", function() { // TODO Change "on" method
 									// Update clicked checkbox(filter) row count
 									var thisEle = $(this);
 									if(thisEle.is(":checked")) {
@@ -5901,7 +5910,7 @@
 			select : function(row, isAppend) {
 				var opts = this.options;
 				if(!opts.select && !opts.multiselect) {
-					N.warn("[N.list.select]The \"select\" option value is false. please enable the select feature.");
+					N.warn("[N.grid.select]The \"select\" option value is false. please enable the select feature.");
 					return false;
 				}
 				if(row === undefined) {
@@ -5926,7 +5935,7 @@
 						if(selRowEle.hasClass("grid_selected__")) {
 							selRowEle.removeClass("grid_selected__");
 						}
-						selRowEle.click();
+						selRowEle.trigger("click.grid");
 					});
 
 					if(opts.selectScroll) {
@@ -5963,7 +5972,7 @@
 						if(checkboxEle.is(":checked")) {
 							checkboxEle.prop("checked", false);
 						}
-						checkboxEle.click();
+						checkboxEle.trigger("click.grid");
 					});
 
 					if(opts.checkScroll) {
@@ -6840,7 +6849,7 @@
 
 				// checkbox click event bind
 				if(opts.checkbox) {
-					rootNode.find(".tree_check__ > :checkbox").bind("click.tree", function(e) {
+					rootNode.on("click.tree", ".tree_check__ > :checkbox", function(e) {
 						var checkFlag;
 						var siblingNodesEle = N(this).closest("li").parent().children("li");
 						var parentNodesEle = N(this).parents("li");
@@ -6902,7 +6911,7 @@
 				}
 
 				// node name click event bind
-				rootNode.find("li" + (!opts.folderSelectable ? ".tree_last_node__" : "") + " .tree_key__").bind("click.tree", function(e) {
+				rootNode.on("click.tree", "li" + (!opts.folderSelectable ? ".tree_last_node__" : "") + " .tree_key__", function(e) {
 					e.preventDefault();
 					var parentLi = N(this).parent("li");
 					if(opts.onSelect !== null) {
@@ -6913,7 +6922,7 @@
 				});
 
 				// icon click event bind
-				rootNode.find(".tree_icon__" + (!opts.folderSelectable ? ", li:not('.tree_last_node__') .tree_key__" : "")).bind("click.tree", function(e) {
+				rootNode.on("click.tree", ".tree_icon__" + (!opts.folderSelectable ? ", li:not('.tree_last_node__') .tree_key__" : ""), function(e) {
 					e.preventDefault();
 					var parentLi = N(this).parent("li");
 					if(parentLi.find("> ul > li").length > 0) {
@@ -6926,7 +6935,7 @@
 				});
 
 				if(opts.folderSelectable) {
-					rootNode.find("li:not('.tree_last_node__') .tree_key__").bind("click.tree", function(e) {
+					rootNode.on("click.tree", "li:not('.tree_last_node__') .tree_key__", function(e) {
 						e.preventDefault();
 					});
 				}
