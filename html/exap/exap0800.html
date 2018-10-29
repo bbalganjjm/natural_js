@@ -166,6 +166,7 @@ N(".exap0800").cont({
        		sortable : true,
        		addSelect : false,
        		select : true,
+       		filter : true,
        		unselect : false,
        		addTop : true,
        		onSelect : function(index, rowEle, data, beforeRow) {
@@ -196,7 +197,7 @@ N(".exap0800").cont({
       			}
         	},
         	onBind : function(context, rowData) {
-        		context.find("> tbody:eq(0)").click();
+        		this.select(0);
         	}
        	});
     },
