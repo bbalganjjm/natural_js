@@ -175,7 +175,7 @@
 "advisors" : [{
 	"pointcut" : "^init$",
 	"adviceType" : "around",
-	"fn" : function(cont, fnChain, args, result, joinPoint) {
+	"fn" : function(cont, fnChain, args, joinPoint) {
 		// 페이지 로딩 후 init 함수가 자동으로 호출 되기 전 마다 실행 됨.
 		
 		// before
