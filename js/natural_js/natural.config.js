@@ -706,11 +706,7 @@
 			/**
 			 * 바인드된 데이터의 새로운 row 생성시 위치를 최상단에 만들건지 여부
 			 */
-			"addTop" : true,
-			/**
-			 * 행을 그릴때 마다의 딜레이 타임
-			 */
-			"createRowDelay" : N.browser.is("ie") ? 0 : 1,
+			"addTop" : true
 		},
 		"grid" : {
 			/**
@@ -724,10 +720,6 @@
 			 * 바인드된 데이터의 새로운 row 생성시 위치를 최상단에 만들건지 여부
 			 */
 			"addTop" : true,
-			/**
-			 * 행을 그릴때 마다의 딜레이 타임
-			 */
-			"createRowDelay" : N.browser.is("ie") ? 0 : 1,
 			/**
 			 * 세로 길이조절 기능 활성화 여부
 			 */
