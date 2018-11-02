@@ -153,6 +153,7 @@
 	// currPageNavInfo 는 이벤트가 발생할 시점의 페이징 정보
 }</code></pre>
 				<p class="alert">서버에서 DB 쿼리로 페이징 시  먼저 조회하고자 하는 전체 행수를 가져오고 onChange 이벤트 핸들러의 인자로 들어오는 currPageNavInfo 정보로 선택될 DB 로우의 시작값(currPageNavInfo.startRowNum)과 얼마만큼 가져올건지의 정보(currPageNavInfo.countPerPage) 등을 서버에 파라미터로 던져 해당 행수 만큼만 가져와 N.grid 에 bind하는 타입으로 서버단 페이징을 처리 할 수 있습니다.</p>
+				<p class="alert">blockOnChangeWhenBind 옵션이 true 이면 페이징 버튼들을 클릭 할 때만 이벤트가 실행 됩니다.</p>
 				<p class="alert">
 					currPageNavInfo 정보<br>
 					&nbsp;&nbsp;-&nbsp;pageNo : 선택한 페이지 번호<br>
@@ -177,8 +178,8 @@
 			<td>false</td>
 			<td align="center"></td>
 			<td>
-				<p lang="ko_KR">Bind 할 때 onChange 이벤트를 차단 할지 여부</p>
-				<p lang="en_US">Whether to block onChange event when bind</p>
+				<p lang="ko_KR">bind 함수를 호출 할 때 onChange 이벤트를 차단 할지 여부</p>
+				<p lang="en_US">Whether to block onChange event when call the bind method</p>
 			</td>
 		</tr>
 	</table>
@@ -520,7 +521,34 @@
 	});
 </script></xmp></code></pre>
 
-	<p class="alert">DB 페이징 시 리스트 데이터에 total count 가 같이 전달 된다면 N.grid 를 주(主)로 하고 pagination 인스턴스에서 bind(data, totalCnt) 메서드를 매번 호출하여 처리 할 수도 있습니다.</p>
+	<p>
+		DB 페이징 시 리스트 데이터에 totalCount 가 같이 전달 된다면 다음과 같이 N.grid 를 주(主)로 하고 pagination 인스턴스에서 bind(totalCnt) 메서드를 매번 호출하여 처리 할 수도 있습니다.
+		이러한 방식의 데이터 페이징은 페이지가 바뀔 때마다 페이지네이션 인덱싱을 다시 한다는 단점이 있지만 데이터 조회 후 다른 사용자가 데이터를 추가하거나 삭제하여도 페이징을 정확하게 할 수 있는 장점이 있습니다.
+	</p>
+<pre class="line-numbers"><code class="language-markup"><xmp>
+<script type="text/javascript">
+	var grid = N(data).grid("#paginationExample41"); // 1. N.grid 인스턴스 생성
+	
+	var pagination = N(data).pagination({ // 2. N.pagination 인스턴스 생성
+		context: "#paginationExample40",
+		blockOnChangeWhenBind : true, // bind 함수를 호출 할 때 도 onChange 이벤트가 발생하면 무한루프에 빠지므로 이를 차단하는 옵션 
+		onChange: function(pageNo, selEle, selData, currPageNavInfo) { // 페이지 전환 시 발생되는 이벤트
+			N(currPageNavInfo).comm("retrieve.json").submit(function(data){ // 6. 초기 페이징 정보로 1페이지 리스트 데이터 조회
+				if(data[0]) {
+					pagination.bind(data[0].totalCount); // 7. 서버에서 가져온 totalCount 로  N.pagination 에 바인드하여 Pagination 재 생성.
+				}
+				grid.bind(data); // 8. 현재 페이지 데이터를 N.grid에 바인드
+			});
+		}
+	}).bind();
+	
+	N(pagination.currPageNavInfo()).comm("retrieve.json").submit(function(data){ // 3. totalCount 컬럼 이 포함 된 리스트 데이터 조회
+		if(data[0]) {
+			pagination.bind(data[0].totalCount); // 4. 서버에서 가져온 totalCount 로  N.pagination 에 바인드
+		}
+		grid.bind(data); // 5. 서버에서 가져온 데이터를 N.grid에 바인드
+	});
+</script></xmp></code></pre>
 
 </article>
 
