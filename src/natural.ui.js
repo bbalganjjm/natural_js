@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.32.130
+ * Natural-UI v0.32.131
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "0.32.130";
+	N.version["Natural-UI"] = "0.32.131";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -6503,6 +6503,8 @@
 					linkEles.next = righter.find("li:eq(0)").addClass("pagination_next__ pagination_disable__");
 				}
 
+				opts.currPageNavInfo = Pagination.changePageSet(linkEles, opts);
+				
 				return linkEles;
 			},
 			changePageSet : function(linkEles, opts, isRemake) {
@@ -6567,7 +6569,7 @@
                 	endRowIndex = opts.totalCount - 1;
                 }
 
-                return currPageNavInfo = {
+                return opts.currPageNavInfo = {
                 	"pageNo" : opts.pageNo,
                 	"countPerPage" : opts.countPerPage,
                 	"countPerPageSet" : opts.countPerPageSet,
@@ -6618,7 +6620,7 @@
 				}
 
                 var linkEles = this.linkEles;
-                var currPageNavInfo = Pagination.changePageSet(linkEles, opts);
+                opts.currPageNavInfo = Pagination.changePageSet(linkEles, opts);
 
                 // first button event
                 if(linkEles.first !== undefined) {
@@ -6627,7 +6629,7 @@
                 		e.preventDefault();
                 		if(1 !== opts.pageNo) {
                 			opts.pageNo = 1;
-                			currPageNavInfo = Pagination.changePageSet(linkEles, opts);
+                			opts.currPageNavInfo = Pagination.changePageSet(linkEles, opts);
                 			linkEles.body.find("li a:first").trigger("click.pagination");
                 		}
                 	});
@@ -6637,9 +6639,9 @@
                 linkEles.prev.unbind("click.pagination");
                 linkEles.prev.bind("click.pagination", function(e) {
                     e.preventDefault();
-                    if(currPageNavInfo.currSelPageSet > 1 && currPageNavInfo.startPage >= currPageNavInfo.currSelPageSet) {
-                    	opts.pageNo = currPageNavInfo.startPage - opts.countPerPageSet;
-                    	currPageNavInfo = Pagination.changePageSet(linkEles, opts);
+                    if(opts.currPageNavInfo.currSelPageSet > 1 && opts.currPageNavInfo.startPage >= opts.currPageNavInfo.currSelPageSet) {
+                    	opts.pageNo = opts.currPageNavInfo.startPage - opts.countPerPageSet;
+                    	opts.currPageNavInfo = Pagination.changePageSet(linkEles, opts);
                     	linkEles.body.find("li a:first").trigger("click.pagination");
                     }
                 });
@@ -6650,33 +6652,33 @@
                 	e.preventDefault();
 
                 	opts.pageNo = Number($(this).parent().data("pageno"));
-                	currPageNavInfo = Pagination.changePageSet(linkEles, opts, true);
+                	opts.currPageNavInfo = Pagination.changePageSet(linkEles, opts, true);
 
                     if(opts.onChange !== null) {
                     	var selData = [];
                     	if(opts.data.length > 0 && opts.data.length <= opts.totalCount) {
-                    		for(var i = currPageNavInfo.startRowIndex; i <= currPageNavInfo.endRowIndex; i++) {
+                    		for(var i = opts.currPageNavInfo.startRowIndex; i <= opts.currPageNavInfo.endRowIndex; i++) {
                         		if(opts.data[i] !== undefined) {
                         			selData.push(opts.data[i]);
                         		}
                         	}
                     	}
                     	if(opts.blockOnChangeWhenBind === false || (opts.blockOnChangeWhenBind === true && isFirst !== true)) {
-                    		opts.onChange.call(self, opts.pageNo, this, selData, currPageNavInfo);
+                    		opts.onChange.call(self, opts.pageNo, this, selData, opts.currPageNavInfo);
                     	}
                     }
 
                     linkEles.body.find("li.pagination_active__").removeClass("pagination_active__");
                     $(this).parent().addClass("pagination_active__");
-                }).find("li a:eq(" + String(opts.pageNo - currPageNavInfo.startPage) +  ")").trigger("click.pagination", [true]);
+                }).find("li a:eq(" + String(opts.pageNo - opts.currPageNavInfo.startPage) +  ")").trigger("click.pagination", [true]);
 
                 // next button event
                 linkEles.next.unbind("click.pagination");
                 linkEles.next.bind("click.pagination", function(e) {
                     e.preventDefault();
-                    if(currPageNavInfo.pageSetCount > currPageNavInfo.currSelPageSet) {
-                    	opts.pageNo = currPageNavInfo.startPage + opts.countPerPageSet;
-                    	currPageNavInfo = Pagination.changePageSet(linkEles, opts);
+                    if(opts.currPageNavInfo.pageSetCount > opts.currPageNavInfo.currSelPageSet) {
+                    	opts.pageNo = opts.currPageNavInfo.startPage + opts.countPerPageSet;
+                    	opts.currPageNavInfo = Pagination.changePageSet(linkEles, opts);
                     	linkEles.body.find("li a:first").trigger("click.pagination");
                     }
                 });
@@ -6686,9 +6688,9 @@
                 	linkEles.last.unbind("click.pagination");
                 	linkEles.last.bind("click.pagination", function(e) {
                 		e.preventDefault();
-                		if(opts.pageNo !== currPageNavInfo.pageCount) {
-                			opts.pageNo = currPageNavInfo.pageCount;
-                			currPageNavInfo = Pagination.changePageSet(linkEles, opts);
+                		if(opts.pageNo !== opts.currPageNavInfo.pageCount) {
+                			opts.pageNo = opts.currPageNavInfo.pageCount;
+                			opts.currPageNavInfo = Pagination.changePageSet(linkEles, opts);
                 			linkEles.body.find("li a:last").trigger("click.pagination");
                 		}
                 	});
