@@ -198,10 +198,7 @@ N(".exap0800").cont({
       			}
         	},
         	onBind : function(context, data) {
-        		var row = this.options.addTop ? 0 : data.length - 1; 
-	    		if(data[row].rowStatus !== "insert") {
-		    		this.select(0);
-	    		}
+	    		this.select(0);
         	}
        	});
     },
