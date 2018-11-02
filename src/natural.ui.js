@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.32.126
+ * Natural-UI v0.32.129
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "0.32.126";
+	N.version["Natural-UI"] = "0.32.129";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -118,7 +118,7 @@
 							}
 						}
 					} else if(i === lastIdx + 1) {
-						if(opts.onBind !== null) {
+						if(opts.onBind !== null && !N.string.endsWith(callType, ".update")) {
 							opts.onBind.call(self, opts.context, opts.data);
 						}
 						opts.scrollPaging.limit = opts.scrollPaging.size === 0 ? opts.data.length : opts.scrollPaging.size;
@@ -4280,7 +4280,7 @@
 						opts.context.append('<li class="empty__">' +
 								N.message.get(opts.message, "empty") + '</li>');
 
-						if(opts.onBind !== undefined) {
+						if(opts.onBind !== undefined && callType !== "list.update") {
 							opts.onBind.call(this, opts.context, opts.data);
 						}
 					}
@@ -5988,8 +5988,8 @@
 				}
 			},
 			/**
-			 * callType arguments is call type about scrollPaging(internal) or data filter(internal) or data append(external)
-			 * callType : "append", "grid.bind", "grid.dataFilter", "grid.sort"
+			 * callType arguments is call type about scrollPaging(internal), data filter(internal), data append(external), DataSync's update.
+			 * callType : "append", "grid.bind", "grid.dataFilter", "grid.sort", "grid.update"
 			 */
 			bind : function(data, callType) {
 				var opts = this.options;
@@ -6113,7 +6113,7 @@
 								emptyCellEle.parent("tr").css("height", emptyCellEle.outerHeight());
 							}, 0);
 
-							if(opts.onBind !== undefined) {
+							if(opts.onBind !== undefined && callType !== "grid.update") {
 								opts.onBind.call(this, opts.context, opts.data);
 							}
 						}
@@ -6411,7 +6411,7 @@
 						this.options.context.find(">tbody:eq(" + String(row) + ")").instance("form").update(0, key);
 					} else if(this.options.data[row]._isRevert !== true && this.options.data[row].rowStatus === "insert") {
 						if(this.options.data[row].rowStatus === "insert") {
-							this.bind(undefined, "list.update");
+							this.bind(undefined, "grid.update");
 						} else {
 							this.add(this.options.data[row]);
 						}
