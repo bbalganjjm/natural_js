@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.32.129
+ * Natural-UI v0.32.130
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "0.32.129";
+	N.version["Natural-UI"] = "0.32.130";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -3598,9 +3598,11 @@
 		            opts.data.splice(opts.row, 1);
 		            opts.row = -1;
 		            N.ds.instance(opts.extObj !== null ? opts.extObj : this).notify();
+		            
+		            this.unbind();
 		        } else {
 		        	opts.data[opts.row].rowStatus = "delete";
-		        	opts.context.addClass("row_data_deleted");
+		        	opts.context.addClass("row_data_deleted__");
 		        	N.ds.instance(opts.extObj !== null ? opts.extObj : this).notify(opts.extRow > -1 ? opts.extRow : opts.row);
 		        }
 
