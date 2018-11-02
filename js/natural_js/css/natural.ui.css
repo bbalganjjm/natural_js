@@ -386,7 +386,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .row_data_deleted__, .row_data_deleted__ input, .row_data_deleted__ select, .row_data_deleted__ textarea {
-	color: #E8F5E9 !important;
+	color: #81C784 !important;
 }
 
 .data_changed__ {
@@ -394,6 +394,13 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 /* List */
+.list__ > .row_data_changed__, 
+.list__ > .row_data_changed__ input, 
+.list__ > .row_data_changed__ select, 
+.list__ > .row_data_changed__ textarea {
+	text-shadow: 1px 1px 0 #C8E6C9;
+}
+
 .list__.list_hover__ > li:hover,
 .list__.list_hover__ > li:hover input,
 .list__.list_hover__ > li:hover select,
@@ -405,11 +412,12 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	cursor: pointer;
 }
 
-.list__.list_select__ > li.list_selected__,
-.list__.list_select__ > li.list_selected__ input,
-.list__.list_select__ > li.list_selected__ select,
-.list__.list_select__ > li.list_selected__ textarea {
+.list__.list_select__ > .list_selected__,
+.list__.list_select__ > .list_selected__ input,
+.list__.list_select__ > .list_selected__ select,
+.list__.list_select__ > .list_selected__ textarea {
 	background-color: #E8F5E9;
+	text-shadow: 1px 1px 0 #C8E6C9;
 }
 
 .list__ li.empty__ {
@@ -430,23 +438,25 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	background-color: #ffffff;
 }
 
-.grid__ > tbody.row_data_changed__ {
-	background-color: #E8F5E9;
+.grid__ > .row_data_changed__, 
+.grid__ > .row_data_changed__ input, 
+.grid__ > .row_data_changed__ select, 
+.grid__ > .row_data_changed__ textarea {
+	text-shadow: 1px 1px 0 #C8E6C9;
 }
 
 .grid__ > tbody.row_data_changed__>tr:first-child>td:first-child {
-	background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAALtJREFUeNqkkrENwyAQAN/UdO48AHPQ0XgCmqRiKKpkBxo6z8EATEBP8siOjJM3KH4JPUjc8TwMOWe4Eqy1wVr7wPGXYAVvOCgJ64BhmiagJKwFCyFgnmdSwlqwlBKWZYEY408J64FDCGQlrBfeV/J1hWPDKBjXazyNMXecDPiR3oLqN6EET2rB5CtsDWvBlWAcR9Bal7xJnHOncCVQSgHnvOR9JWdwJfDeQ0qp5EOQMNnEXvgjuBIvAQYAyQyVrHfXjNAAAAAASUVORK5CYII=") no-repeat 1px 8px;
+	background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAALtJREFUeNqkkrENwyAQAN/UdO48AHPQ0XgCmqRiKKpkBxo6z8EATEBP8siOjJM3KH4JPUjc8TwMOWe4Eqy1wVr7wPGXYAVvOCgJ64BhmiagJKwFCyFgnmdSwlqwlBKWZYEY408J64FDCGQlrBfeV/J1hWPDKBjXazyNMXecDPiR3oLqN6EET2rB5CtsDWvBlWAcR9Bal7xJnHOncCVQSgHnvOR9JWdwJfDeQ0qp5EOQMNnEXvgjuBIvAQYAyQyVrHfXjNAAAAAASUVORK5CYII=") no-repeat 1px 3px;
 }
 
 .grid__ > tbody.row_data_deleted__>tr:first-child>td:first-child {
-	background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAALlJREFUeNpi/P//PwM2MGvWLAck7oe0tLQL2NQxYjMAqLkASPWjCRtiM4SJATsQAOKLQOwIxTAx/C4A2rwASIGcLo/D4IdAfADokgRcLojHo5kBKhePzwuNUKfjAhehauCABU3BASAGBdQD9AADes8ASCmAYgSfASD/10M14HJFI9QivLFANEA34AMRej7gM+ACEQZcICYhke2FATYAGPeg6DmIR/1BqBqCuRGUcQzQAw+oGSOWAAIMAHRmOlxoNr5jAAAAAElFTkSuQmCC") no-repeat 1px 8px;
+	background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAALlJREFUeNpi/P//PwM2MGvWLAck7oe0tLQL2NQxYjMAqLkASPWjCRtiM4SJATsQAOKLQOwIxTAx/C4A2rwASIGcLo/D4IdAfADokgRcLojHo5kBKhePzwuNUKfjAhehauCABU3BASAGBdQD9AADes8ASCmAYgSfASD/10M14HJFI9QivLFANEA34AMRej7gM+ACEQZcICYhke2FATYAGPeg6DmIR/1BqBqCuRGUcQzQAw+oGSOWAAIMAHRmOlxoNr5jAAAAAElFTkSuQmCC") no-repeat 1px 3px;
 }
 
 .grid__.grid_hover__ > tbody:hover,
 .grid__.grid_hover__ > tbody:hover input,
 .grid__.grid_hover__ > tbody:hover select,
-.grid__.grid_hover__ > tbody:hover textarea
-	{
+.grid__.grid_hover__ > tbody:hover textarea	{
 	background-color: #E8F5E9;
 }
 
@@ -454,11 +464,12 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	cursor: pointer;
 }
 
-.grid__.grid_select__ > tbody.grid_selected__,
-.grid__.grid_select__ > tbody.grid_selected__ input,
-.grid__.grid_select__ > tbody.grid_selected__ select,
-.grid__.grid_select__ > tbody.grid_selected__ textarea {
+.grid__.grid_select__ > .grid_selected__,
+.grid__.grid_select__ > .grid_selected__ input,
+.grid__.grid_select__ > .grid_selected__ select,
+.grid__.grid_select__ > .grid_selected__ textarea {
 	background-color: #E8F5E9;
+	text-shadow: 1px 1px 0 #C8E6C9;
 }
 
 .grid__ td.empty__ {
