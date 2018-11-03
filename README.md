@@ -5,6 +5,10 @@ Natural-JS
 ----------------------------------------------
 
 **Natural-JS** 는 ERP, CRM 등의 기업용 웹 어플리케이션 UI를 쉽고 빠르게 구현 할 수 있는 Javascript 프레임워크 라이브러리 입니다.
+**Natural-JS** 는 CVC 아키텍처 패턴 기반의 UI 아키텍처 프레임워크를 제공하여 페이지와 페이지 사이의 논리적인 영역을 구분 해 주고 페이지 단위 안에서는 디자인영역과 개발영역을 완벽하게 분리 해 줍니다.
+**Natural-JS** 는 SPA(Single Page Application) 와 모바일 Web 개발에 최적화 되어 있습니다.
+**Natural-JS** 는 AOP(Aspect-Oriented Programming), Communication Filter, 양방향 데이터 바인딩, 데이터 검증 및 포맷등을 지원하여 개발생산성을 획기적으로 증대 시켜 줍니다.
+**Natural-JS** 는 Grid/List/Form/Select/Pagination/Tree/Documents/Popup/Tab/Datepciker 등의 HTML(HTML5) 기본 컨트롤들과 융합 된 자연스럽고 강력한 UI 컴포넌트들을 제공 합니다.      
 
 Structure
 ==========
