@@ -74,6 +74,9 @@ References
 
 Installs
 =========
+* npm :
+	* npm install @bbalganjjm/natural_js
+
 * Bower :
 	* bower install natural_js
 
