@@ -1714,13 +1714,25 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	position: fixed;
 	left: 0;
 	top: 0;
-	z-index: 1;
 	height: 7px;
 	width: 100%;
 	overflow: hidden;
 	margin-top: 0;
-	background-color: #A5D6A7;
 	opacity: 0.5;
+	
+	animation: backgroundColorChange 1s linear infinite alternate;
+}
+@-moz-keyframes backgroundColorChange {
+	from { background-color: #A5D6A7; }
+	to { background-color: #4CAF50; }
+}
+@-webkit-keyframes backgroundColorChange {
+	from { background-color: #A5D6A7; }
+	to { background-color: #4CAF50; }
+}
+@keyframes backgroundColorChange {
+	from { background-color: #A5D6A7; }
+	to { background-color: #4CAF50; }
 }
 
 .docs__>.entire_load_indicator__>.entire_load_indicator_bar__ {
