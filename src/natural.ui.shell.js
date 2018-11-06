@@ -1,5 +1,5 @@
 /*!
- * Natural-UI.Shell v0.9.36, Works fine in IE9 and above
+ * Natural-UI.Shell v0.9.38, Works fine in IE9 and above
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-	N.version["Natural-UI.Shell"] = "0.9.36";
+	N.version["Natural-UI.Shell"] = "0.9.38";
 
 	$.fn.extend($.extend(N.prototype, {
 		notify : function(opts) {
@@ -207,35 +207,45 @@
 									self.options.onBeforeEntireLoad.call(self, self.options.loadedDocId);
 								}
 								
-								if(self.options.entireLoadIndicator) {
-									if(self.options.context.find("> .entire_load_indicator__").length > 0) {
-										self.options.context.find("> .entire_load_indicator__").removeClass("hidden__").show()
-											.find("> .entire_load_indicator_bar__").css("left", "");
-									} else {
-										var entireLoadIndicator = $('<div class="entire_load_indicator__"><div class="entire_load_indicator_bar__"></div></div>').click(function(e) {
-											e.stopPropagation();
-										});
-										self.options.context.find(".docs_tab_context__").after(entireLoadIndicator);
-									}
-								}
+								var maxZindex;
 
 								if(self.options.entireLoadScreenBlock) {
-									var maxZindex = N.element.maxZindex(N(self.options.alwaysOnTopCalcTarget)) + 1;
-									if($(".entire_load_screen_block__").length > 0) {
-										$(".entire_load_screen_block__").css({
-											"z-index" : String(maxZindex)
-										}).removeClass("hidden__").show();
+									maxZindex = N.element.maxZindex(N(self.options.alwaysOnTopCalcTarget).not(".entire_load_screen_block__, .entire_load_indicator__")) + 1;
+									var entireLoadScreenBlock = $(".entire_load_screen_block__");
+									if(entireLoadScreenBlock.length > 0) {
+										entireLoadScreenBlock.removeClass("hidden__").show().css("z-index", String(maxZindex));
 									} else {
-										var entireLoadScreenBlock = $('<div class="entire_load_screen_block__"></div>').css({
-											"z-index" : String(maxZindex)
-										}).click(function(e) {
+										var entireLoadScreenBlock = $('<div class="entire_load_screen_block__"></div>')
+										.css("z-index", String(maxZindex))
+										.click(function(e) {
 											e.stopPropagation();
 										});
 										entireLoadScreenBlock.appendTo("body").bind(N.event.whichTransitionEvent(entireLoadScreenBlock), function(e){
 											$(this).hide().removeClass("hidden__");
 								        }).trigger("nothing");
 									}
+									entireLoadScreenBlock = undefined;
 								}
+								
+								if(self.options.entireLoadIndicator) {
+									if(maxZindex === undefined) {
+										maxZindex = N.element.maxZindex(N(self.options.alwaysOnTopCalcTarget).not(".entire_load_screen_block__, .entire_load_indicator__")) + 1;
+									} else {
+										maxZindex += 1;
+									}
+									var entireLoadIndicator = self.options.context.find("> .entire_load_indicator__");
+									if(entireLoadIndicator.length > 0) {
+										entireLoadIndicator.css("z-index", String(maxZindex)).removeClass("hidden__").show();
+										entireLoadIndicator.find("> .entire_load_indicator_bar__").css("left", "");
+									} else {
+										var entireLoadIndicator = $('<div class="entire_load_indicator__"><div class="entire_load_indicator_bar__"></div></div>').click(function(e) {
+											e.stopPropagation();
+										}).css("z-index", String(maxZindex));
+										self.options.context.find(".docs_tab_context__").after(entireLoadIndicator);
+									}
+									entireLoadIndicator = undefined;
+								}
+
 							}
 							
 							if(entireLoadExcludeURLs.indexOf(request.options.url) < 0) {
