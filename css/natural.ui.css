@@ -1429,13 +1429,12 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 /* Natural-UI.Shell */
 /* N.notify */
 .notify__ {
-
+	max-width: 50%;
 }
 
 .notify__ .notify_msg__ {
 	padding: 2px 12px 6px 8px;
 	line-height: 16px;
-	max-width: 300px;
 	text-align: left;
 	word-break: break-all;
 	margin-bottom: 5px;
@@ -1443,7 +1442,6 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.2);
 	transform: scale(0);
 	opacity: 0;
-	max-width: 50%;
 	background-color: #E8F5E9;
 }
 
