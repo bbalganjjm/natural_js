@@ -789,7 +789,7 @@
 				/**
 				 * 컬럼 리사이즈 시 다른컬럼이 밀릴때 아래 수치 조절(기본값 : 0)
 				 */
-				"resizableCorrectionWidth" : N.browser.is("safari") ? -6 : -7,
+				"resizableCorrectionWidth" : N.browser.is("safari") ? -10 : -11,
 				/**
 				 * 헤더고정형 중 마지막 컬럼 클릭 시 다른컬럼이 밀릴때 아래 수치 조절(기본값 : 0)
 				 */
