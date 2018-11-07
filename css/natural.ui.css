@@ -1443,6 +1443,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.2);
 	transform: scale(0);
 	opacity: 0;
+	max-width: 50%;
 	background-color: #E8F5E9;
 }
 
