@@ -72,9 +72,13 @@
 		</tr>
 		<tr>
 			<th><label for="overlayClose">overlayClose</label></th>
-			<td colspan="3">
+			<td>
 				<input id="overlayClose" type="checkbox" checked="checked" />
 			</td>
+            <th><label for="windowScrollLock">windowScrollLock</label></th>
+            <td>
+                <input id="windowScrollLock" type="checkbox" checked="checked" />
+            </td>
 		</tr>
 		<tr>
 			<th><label for="onOk">onOk</label></th>
@@ -213,11 +217,17 @@ function(msgContext, msgContents) {
 			<td>
 				<input id="overlayClose" type="checkbox" checked="checked" />
 			</td>
-			<th><label for="preload">preload</label></th>
-			<td>
-				<input id="preload" type="checkbox" />
-			</td>
+            <th><label for="windowScrollLock">windowScrollLock</label></th>
+            <td>
+                <input id="windowScrollLock" type="checkbox" checked="checked" />
+            </td>
 		</tr>
+        <tr>
+            <th><label for="preload">preload</label></th>
+            <td colspan="3">
+                <input id="preload" type="checkbox" />
+            </td>
+        </tr>
 		<tr>
 			<th><label for="onOk">onOk</label></th>
 			<td>
@@ -311,6 +321,7 @@ function(msgContext, msgContents) {
 	            	draggable : N("#localPage #draggable", view).is(":checked"),
 	            	draggableOverflowCorrection : N("#localPage #draggableOverflowCorrection", view).is(":checked"),
 	            	overlayClose : N("#localPage #overlayClose", view).is(":checked"),
+	            	windowScrollLock : N("#localPage #windowScrollLock", view).is(":checked"),
 	            	onOk : N.string.trimToNull(N("#localPage #onOk", view).val()) !== null ?
 	            			eval("(" + N("#localPage #onOk", view).val() + ")") : null,
 	            	onCancel : N.string.trimToNull(N("#localPage #onCancel", view).val()) !== null ?
@@ -347,6 +358,7 @@ function(msgContext, msgContents) {
 	            	draggable : N("#otherPage #draggable", view).is(":checked"),
 	            	draggableOverflowCorrection : N("#otherPage #draggableOverflowCorrection", view).is(":checked"),
 	            	overlayClose : N("#otherPage #overlayClose", view).is(":checked"),
+	            	windowScrollLock : N("#otherPage #windowScrollLock", view).is(":checked"),
 	            	onOk : N.string.trimToNull(N("#otherPage #onOk", view).val()) !== null ?
 	            			eval("(" + N("#otherPage #onOk", view).val() + ")") : null,
 	            	onCancel : N.string.trimToNull(N("#otherPage #onCancel", view).val()) !== null ?

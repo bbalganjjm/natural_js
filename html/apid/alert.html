@@ -89,9 +89,13 @@
 		</tr>
 		<tr>
 			<th><label for="overlayClose">overlayClose</label></th>
-			<td colspan="3">
+			<td>
 				<input id="overlayClose" type="checkbox" checked="checked" />
 			</td>
+            <th><label for="windowScrollLock">windowScrollLock</label></th>
+            <td>
+                <input id="windowScrollLock" type="checkbox" checked="checked" />
+            </td>
 		</tr>
 		<tr>
 			<th><label for="onOk">onOk</label></th>
@@ -187,6 +191,7 @@ function(msgContext, msgContents) {
 	            	draggable : N("#draggable", view).is(":checked"),
 	            	draggableOverflowCorrection : N("#draggableOverflowCorrection", view).is(":checked"),
 	            	overlayClose : N("#overlayClose", view).is(":checked"),
+	            	windowScrollLock : N("#windowScrollLock", view).is(":checked"),
 	            	onOk : N.string.trimToNull(N("#onOk", view).val()) !== null ?
 	            			eval("(" + N("#onOk", view).val() + ")") : null,
 	            	onCancel : N.string.trimToNull(N("#onCancel", view).val()) !== null ?
