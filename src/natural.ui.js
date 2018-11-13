@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.32.135
+ * Natural-UI v0.32.141
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "0.32.135";
+	N.version["Natural-UI"] = "0.32.141";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -69,7 +69,8 @@
 						extObj : self,
 						extRow : i,
 						revert : opts.revert,
-						unbind : false
+						unbind : false,
+						cache : opts.cache
 					});
 
 					if(opts.rowHandlerBeforeBind !== null) {
@@ -3051,7 +3052,8 @@
 				unbind : true,
 				onBeforeBind : null,
 				onBind : null,
-				InitialData : null // for unbind
+				InitialData : null, // for unbind
+				cache : true
 			};
 
 			try {
@@ -3179,8 +3181,21 @@
 						cols = spltSepa + Array.prototype.slice.call(arguments, 2).join(spltSepa) + spltSepa;
 					}
 
-					idContext = opts.context.find("[id]:not(:radio, :checkbox)"); // normal elements
-					rcContext = opts.context.find(":radio, :checkbox"); // radio and checkbox elements
+					if(opts.cache) {
+					    if(this.idContext === undefined) {
+					        idContext = self.idContext = opts.context.find("[id]:not(:radio, :checkbox)"); // normal elements
+	                    } else {
+	                        idContext = self.idContext;
+	                    }
+					    if(this.rcContext === undefined) {
+					        rcContext = self.rcContext = opts.context.find(":radio, :checkbox"); // radio and checkbox elements
+	                    } else {
+	                        rcContext = self.rcContext;
+	                    }
+					} else {
+					    idContext = opts.context.find("[id]:not(:radio, :checkbox)"); // normal elements
+					    rcContext = opts.context.find(":radio, :checkbox"); // radio and checkbox elements
+					}
 					for ( var key in vals ) {
 						if(cols !== undefined && cols.indexOf(spltSepa + key + spltSepa) < 0) {
 							continue;
@@ -3196,13 +3211,7 @@
 
 							tagName = ele.get(0).tagName.toLowerCase();
 							type = N.string.trimToEmpty(ele.attr("type")).toLowerCase();
-							if (tagName === "textarea" || type === "text" || type === "password" || type === "hidden" || type === "file"
-								// Support HTML5 Form's input types
-								|| type === "number" || type === "tel" || type === "email" || type === "search" || type === "color"
-								// The date type does not support formatting, so it does not support it.
-								// || type === "date" || type === "datetime-local" || type === "month" || type === "time" || type === "week"
-								|| type === "range"
-								|| type === "url") {
+							if (N.element.isTextInput(tagName, type)) {
 								//validate
 								if(ele.data("validate") !== undefined) {
 									if (type !== "hidden") {
@@ -3459,13 +3468,7 @@
 							ele.removeClass("data_changed__");
 							tagName = ele.get(0).tagName.toLowerCase();
 							type = N.string.trimToEmpty(ele.attr("type")).toLowerCase();
-							if (tagName === "textarea" || type === "text" || type === "password" || type === "hidden" || type === "file"
-								// Support HTML5 Form's input types
-								|| type === "number" || type === "tel" || type === "email" || type === "search" || type === "color"
-								// The date type does not support formatting, so it does not support it.
-								// || type === "date" || type === "datetime-local" || type === "month" || type === "time" || type === "week"
-								|| type === "range"
-								|| type === "url") {
+							if (N.element.isTextInput(tagName, type)) {
 								// unbind events
 								ele.unbind("focusout.form.validate focusout.form.dataSync keyup.form.dataSync focusin.form.unformat focusout.form.format format.formatter unformat.formatter");
 								// remove validator's dregs for rebind
@@ -3675,13 +3678,7 @@
 		                	dsabdFg = true;
 		                }
 
-						if (tagName === "textarea" || type === "text" || type === "password" || type === "hidden" || type === "file"
-							// Support HTML5 Form's input types
-							|| type === "number" || type === "tel" || type === "email" || type === "search" || type === "color"
-							// The date type does not support formatting, so it does not support it.
-							// || type === "date" || type === "datetime-local" || type === "month" || type === "time" || type === "week"
-							|| type === "range"
-							|| type === "url") {
+						if (N.element.isTextInput(tagName, type)) {
 							// remove validator's dregs for rebind
 							ele.removeClass("validate_false__");
 							if(ele.instance("alert") !== undefined) {
@@ -3916,6 +3913,7 @@
 				selectScroll : true,
 				checkScroll : true,
 				validateScroll : true,
+				cache : true,
 				rowHandlerBeforeBind : null,
 				rowHandler : null,
 				onSelect : null,
@@ -4541,6 +4539,7 @@
 				selectScroll : true,
 				checkScroll : true,
 				validateScroll : true,
+				cache : true,
 				rowHandlerBeforeBind : null,
 				rowHandler : null,
 				onSelect : null,
