@@ -1,5 +1,5 @@
 /*!
- * Natural-CORE v0.17.16
+ * Natural-CORE v0.18.16
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -300,7 +300,7 @@
 		// N local variables
 		$.extend(N, {
 			version : {
-				"Natural-CORE" : "0.17.16"
+				"Natural-CORE" : "0.18.16"
 			},
 			/**
 			 * Set and get locale value
@@ -840,6 +840,18 @@
 						}
 						return zIndex || 0;
 					}));
+				},
+				/**
+				 * Determines whether this is a text input field.
+				 */
+				isTextInput : function(tagName, type) {
+				    return tagName === "textarea" || type === "text" || type === "password" || type === "hidden" || type === "file"
+                        // Support HTML5 Form's input types
+                        || type === "number" || type === "tel" || type === "email" || type === "search" || type === "color"
+                        // The date type does not support formatting, so it does not support it.
+                        // || type === "date" || type === "datetime-local" || type === "month" || type === "time" || type === "week"
+                        || type === "range"
+                        || type === "url" ? true : false; 
 				}
 			},
 			/**
