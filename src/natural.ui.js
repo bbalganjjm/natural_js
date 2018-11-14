@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.32.141
+ * Natural-UI v0.34.141
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "0.32.141";
+	N.version["Natural-UI"] = "0.34.141";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -388,6 +388,41 @@
 			        	}
 		            });
 				}
+			},
+			utils : {
+			    /**
+			     * Wraps component event options and global event options in N.config.
+			     */
+			    wrapGlobalAndLocalEventOptions : function(opts, compNm, eventNm) {
+			        if(N.context.attr("ui")[compNm] && N.context.attr("ui")[compNm][eventNm] && opts[eventNm]) {
+	                    var localEventHandler = opts[eventNm]; 
+	                    opts[eventNm] = function() {
+	                        if(eventNm === "onBeforeBindValue") {
+	                            var rVal = localEventHandler.apply(this, arguments);
+	                            return N.context.attr("ui")[compNm][eventNm].call(this, arguments[0], rVal);	                            
+	                        } else {
+	                            var rVal = localEventHandler.apply(this, arguments);
+	                            if(rVal === false) {
+	                                return rVal;
+	                            } else {
+	                                return N.context.attr("ui")[compNm][eventNm].apply(this, arguments);    
+	                            }
+	                        }
+	                    }
+	                }
+			    },
+			    /**
+                 * Determines whether this is a text input field.
+                 */
+                isTextInput : function(tagName, type) {
+                    return tagName === "textarea" || type === "text" || type === "password" || type === "hidden" || type === "file"
+                        // Support HTML5 Form's input types
+                        || type === "number" || type === "tel" || type === "email" || type === "search" || type === "color"
+                        // The date type does not support formatting, so it does not support it.
+                        // || type === "date" || type === "datetime-local" || type === "month" || type === "time" || type === "week"
+                        || type === "range"
+                        || type === "url" ? true : false; 
+                }
 			}
 		};
 
@@ -413,15 +448,15 @@
 				closeMode : "remove", // closeMode : hide - keep element, remove - remove element
 				modal : true,
 				onOk : null,
-				onOkG : null, // set from N.context.attr("ui").alert
+				onOkG : null, // DEPRECATED
 				onCancel : null,
-				onCancelG : null, // set from N.context.attr("ui").alert
+				onCancelG : null, // DEPRECATED
 				onShow : null,
-				onShowG : null, // set from N.context.attr("ui").alert
+				onShowG : null, // DEPRECATED
 				onHide : null,
-				onHideG : null, // set from N.context.attr("ui").alert
+				onHideG : null, // DEPRECATED
 				onRemove : null,
-				onRemoveG : null, // set from N.context.attr("ui").alert
+				onRemoveG : null, // DEPRECATED
 				overlayColor : null,
 				overlayClose : true,
 				"confirm" : false,
@@ -460,6 +495,13 @@
 				this.options.isInput = true;
 			}
 			if(msg !== undefined && N.isPlainObject(msg)) {
+			    // Wraps the global event options in N.config and event options for this component.
+                UI.utils.wrapGlobalAndLocalEventOptions(msg, "alert", "onOk");
+                UI.utils.wrapGlobalAndLocalEventOptions(msg, "alert", "onCancel");
+                UI.utils.wrapGlobalAndLocalEventOptions(msg, "alert", "onShow");
+                UI.utils.wrapGlobalAndLocalEventOptions(msg, "alert", "onHide");
+                UI.utils.wrapGlobalAndLocalEventOptions(msg, "alert", "onRemove");
+                
 				$.extend(true, this.options, msg);
 				if(N.isString(this.options.container)) {
 					this.options.container = N(this.options.container);
@@ -1230,12 +1272,12 @@
 				monthsPanelPosition : "left",
 				minYear : 200,
 				maxYear : 200,
-				onChangeYear : null,
-				onChangeMonth : null,
 				yearChangeInput : false,
 				monthChangeInput : false,
 				touchMonthChange : false,
 				scrollMonthChange : false,
+				onChangeYear : null,
+                onChangeMonth : null,
 				onSelect : null,
 				onBeforeShow : null,
 				onShow : null,
@@ -1250,6 +1292,15 @@
 			}
 
 			if(opts !== undefined) {
+			    // Wraps the global event options in N.config and event options for this component.
+                UI.utils.wrapGlobalAndLocalEventOptions(opts, "datepicker", "onChangeYear");
+                UI.utils.wrapGlobalAndLocalEventOptions(opts, "datepicker", "onChangeMonth");
+                UI.utils.wrapGlobalAndLocalEventOptions(opts, "datepicker", "onSelect");
+                UI.utils.wrapGlobalAndLocalEventOptions(opts, "datepicker", "onBeforeShow");
+                UI.utils.wrapGlobalAndLocalEventOptions(opts, "datepicker", "onShow");
+                UI.utils.wrapGlobalAndLocalEventOptions(opts, "datepicker", "onBeforeHide");
+                UI.utils.wrapGlobalAndLocalEventOptions(opts, "datepicker", "onHide");
+                
 				$.extend(this.options, opts);
 			}
 
@@ -2085,17 +2136,17 @@
 				closeMode : "hide",
 				alwaysOnTop : false,
 				"confirm" : true,
-				onOk : null,
-				onOkG : null, // set from N.context.attr("ui").popup
-				onCancel : null,
-				onCancelG : null, // set from N.context.attr("ui").popup
 				overlayClose : true,
-				onOpen : null,
-				onOpenG : null, // set from N.context.attr("ui").popup
-				onOpenData : null,
 				delayContInit : false,
+				onOk : null,
+				onOkG : null, // DEPRECATED
+				onCancel : null,
+				onCancelG : null, // DEPRECATED
+				onOpen : null,
+				onOpenG : null, // DEPRECATED
+				onOpenData : null,
 				onClose : null,
-				onCloseG : null, // set from N.context.attr("ui").popup
+				onCloseG : null, // DEPRECATED
 				onCloseData : null,
 				preload : false,
 				dynPos : true,
@@ -2127,6 +2178,12 @@
 				}
 			}
 
+			// Wraps the global event options in N.config and event options for this component.
+            UI.utils.wrapGlobalAndLocalEventOptions(opts, "popup", "onOk");
+            UI.utils.wrapGlobalAndLocalEventOptions(opts, "popup", "onCancel");
+            UI.utils.wrapGlobalAndLocalEventOptions(opts, "popup", "onOpen");
+            UI.utils.wrapGlobalAndLocalEventOptions(opts, "popup", "onClose");
+            
 			$.extend(true, this.options, opts);
 
 			// if title option value is undefined
@@ -2372,12 +2429,12 @@
 				delayContInit : false,
 				randomSel : false,
 				onActive : null,
-				onActiveG : null, // set from N.context.attr("ui").tab
+				onActiveG : null, // DEPRECATED
 				onLoad : null,
-				onLoadG : null, // set from N.context.attr("ui").tab
+				onLoadG : null, // DEPRECATED
 				blockOnActiveWhenCreate : false,
 				contents : obj.length > 0 ? obj.find(">div") : null,
-				effect : false, // Deprecated
+				effect : false, // DEPRECATED
 				tabScroll : false,
 				tabScrollCorrection : {
 					tabContainerWidthCorrectionPx : 0,
@@ -2392,6 +2449,10 @@
 			}
 
 			if (N.isPlainObject(obj)) {
+			    // Wraps the global event options in N.config and event options for this component.
+	            UI.utils.wrapGlobalAndLocalEventOptions(opts, "tab", "onActive");
+	            UI.utils.wrapGlobalAndLocalEventOptions(opts, "tab", "onLoad");
+	            
 				$.extend(true, this.options, obj);
 				this.options.context = N(obj.context);
 			}
@@ -2582,7 +2643,7 @@
 							}).removeClass("hidden__");
 						}
 
-						// Deprecated
+						// DEPRECATED
 						if (opts.effect) {
 							selContentEle.children().hide()[opts.effect[0]](opts.effect[1], opts.effect[2]);
 						}
@@ -3049,11 +3110,12 @@
 				extObj : null, // extObj : for N.grid
 				extRow : -1, // extRow : for N.grid
 				revert : false,
+				cache : true,
 				unbind : true,
+				onBeforeBindValue : null,
 				onBeforeBind : null,
 				onBind : null,
-				InitialData : null, // for unbind
-				cache : true
+				InitialData : null // for unbind
 			};
 
 			try {
@@ -3063,6 +3125,11 @@
 			}
 
 			if (N.isPlainObject(opts)) {
+			    // Wraps the global event options in N.config and event options for this component.
+                UI.utils.wrapGlobalAndLocalEventOptions(opts, "form", "onBeforeBindValue");
+                UI.utils.wrapGlobalAndLocalEventOptions(opts, "form", "onBeforeBind");
+                UI.utils.wrapGlobalAndLocalEventOptions(opts, "form", "onBind");
+                
 				//convert data to wrapped set
 				opts.data = N.type(opts.data) === "array" ? N(opts.data) : opts.data;
 
@@ -3201,6 +3268,14 @@
 							continue;
 						}
 						ele = idContext.filter("#" + key);
+
+						if(opts.onBeforeBindValue !== null) {
+                            var filteredVal = opts.onBeforeBindValue.call(self, ele, vals[key], "bind");
+                            if(filteredVal !== undefined) {
+                                vals[key] = filteredVal;
+                            }
+                        }
+						
 						if (ele.length > 0) {
 							// add data changed flag
 							if (vals.rowStatus === "update") {
@@ -3211,7 +3286,7 @@
 
 							tagName = ele.get(0).tagName.toLowerCase();
 							type = N.string.trimToEmpty(ele.attr("type")).toLowerCase();
-							if (N.element.isTextInput(tagName, type)) {
+							if (UI.utils.isTextInput(tagName, type)) {
 								//validate
 								if(ele.data("validate") !== undefined) {
 									if (type !== "hidden") {
@@ -3468,7 +3543,7 @@
 							ele.removeClass("data_changed__");
 							tagName = ele.get(0).tagName.toLowerCase();
 							type = N.string.trimToEmpty(ele.attr("type")).toLowerCase();
-							if (N.element.isTextInput(tagName, type)) {
+							if (UI.utils.isTextInput(tagName, type)) {
 								// unbind events
 								ele.unbind("focusout.form.validate focusout.form.dataSync keyup.form.dataSync focusin.form.unformat focusout.form.format format.formatter unformat.formatter");
 								// remove validator's dregs for rebind
@@ -3662,6 +3737,13 @@
 				var dsabdFg = false;
 				var ele = opts.context.find("#" + key);
 
+				if(opts.onBeforeBindValue !== null) {
+                    var filteredVal = opts.onBeforeBindValue.call(self, ele, vals[key], "val");
+                    if(filteredVal !== undefined) {
+                        vals[key] = filteredVal;
+                    }
+                }
+				
 				if (ele.length > 0) {
 					tagName = ele.get(0).tagName.toLowerCase();
 					type = N.string.trimToEmpty(ele.attr("type")).toLowerCase();
@@ -3678,7 +3760,7 @@
 		                	dsabdFg = true;
 		                }
 
-						if (N.element.isTextInput(tagName, type)) {
+						if (UI.utils.isTextInput(tagName, type)) {
 							// remove validator's dregs for rebind
 							ele.removeClass("validate_false__");
 							if(ele.instance("alert") !== undefined) {
@@ -3927,6 +4009,10 @@
 			}
 
 			if (N.isPlainObject(opts)) {
+			    // Wraps the global event options in N.config and event options for this component.
+                UI.utils.wrapGlobalAndLocalEventOptions(opts, "list", "onSelect");
+                UI.utils.wrapGlobalAndLocalEventOptions(opts, "list", "onBind");
+                
 				//convert data to wrapped set
 				opts.data = N.type(opts.data) === "array" ? N(opts.data) : opts.data;
 
@@ -4545,7 +4631,7 @@
 				onSelect : null,
 				onBind : null,
 				misc : {
-					withoutTbodyLength : 0, // garbage rows count in table -> Deprecated.
+					withoutTbodyLength : 0, // garbage rows count in table -> DEPRECATED.
 					resizableCorrectionWidth : 0,
 					resizableLastCellCorrectionWidth : 0,
 					resizeBarCorrectionLeft : 0,
@@ -4569,6 +4655,10 @@
 			}
 
 			if (N.isPlainObject(opts)) {
+			    // Wraps the global event options in N.config and event options for this component.
+                UI.utils.wrapGlobalAndLocalEventOptions(opts, "grid", "onSelect");
+                UI.utils.wrapGlobalAndLocalEventOptions(opts, "grid", "onBind");
+                
 				//convert data to wrapped set
 				opts.data = N.type(opts.data) === "array" ? N(opts.data) : opts.data;
 
@@ -6448,6 +6538,9 @@
 			}
 
 			if (N.isPlainObject(opts)) {
+			    // Wraps the global event options in N.config and event options for this component.
+                UI.utils.wrapGlobalAndLocalEventOptions(opts, "pagination", "onChange");
+                
 				//convert data to wrapped set
 				opts.data = N.type(opts.data) === "array" ? N(opts.data) : opts.data;
 
@@ -6759,6 +6852,10 @@
 			}
 
 			if (N.isPlainObject(opts)) {
+			    // Wraps the global event options in N.config and event options for this component.
+                UI.utils.wrapGlobalAndLocalEventOptions(opts, "tree", "onSelect");
+                UI.utils.wrapGlobalAndLocalEventOptions(opts, "tree", "onCheck");
+                
 				//convert data to wrapped set
 				opts.data = N.type(opts.data) === "array" ? N(opts.data) : opts.data;
 
