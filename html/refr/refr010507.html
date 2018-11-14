@@ -185,15 +185,34 @@
 			<td></td>
 			<td>검증룰을 지정 합니다. API/DEMO > Natural-DATA 메뉴의 Validator 와 Validation Rules 참고</td>
 		</tr>
+        <tr>
+            <td>onBeforeBindValue</td>
+            <td>function</td>
+            <td>null</td>
+            <td></td>
+            <td style="max-width: 299px;">
+                <p>단위(컬럼) 요소에 값이 바인드 되기전 실행 되는 이벤트입니다.</p>
+                <p class="alert">natural.config.js 에 전역으로 설정 시 N.form 을 이용하는 모든 컴포넌트(N.grid, N.list)들에도 적용되어 해당 컴포넌트에서 값을 바인드 할 때도 N.form 의 전역 onBeforeBindValue 이벤트 핸들러가 실행 됩니다. 이것을 활용해 바인드 되는 모든 값들과 요소들을 한번에 가공 또는 조작 할 수 있습니다.</p>
+                <p class="alert">onBeforeBindValue 는 natural.config.js 에 전역으로 설정 시 컴포넌트에 정의 한 이벤트핸들러의 결과값이 전역 이벤트의 값(val) 인자로 지정 됩니다. 때문에 다른 이벤트 들 처럼 전역 으로 설정한 이벤트 핸들러를 컴포넌트 이벤트에서 중단 할 수 없습니다.</p>
+                <pre><code class="language-javascript">onBeforeBind : function(ele, val, action) {
+    // this : N.form 인스턴스
+    // ele : 바인드 될 요소
+    // val : 바인드 될 값
+    // action : 호출 함수 명 - "bind" | "val"
+    return val; // 반드시 val 을 (가공 후) 다시 리턴 해야 함.
+}</code></pre>
+            </td>
+        </tr>
 		<tr>
 			<td>onBeforeBind</td>
 			<td>function</td>
 			<td>null</td>
 			<td></td>
 			<td style="max-width: 299px;">
-				<p>폼에 데이터가 바인드 되지 전 발생 되는 이벤트입니다.</p>
+				<p>폼에 데이터가 바인드 되기 전 발생 되는 이벤트입니다.</p>
+                <p class="alert">natural.config.js 에 전역으로 설정 시 N.form 을 이용하는 컴포넌트(N.grid, N.list)들에 값을 바인드 할 때도 모두 적용 됩니다.</p>
 				<pre><code class="language-javascript">onBeforeBind : function(context, rowData) {
-	// this : N.grid 인스턴스
+	// this : N.form 인스턴스
 	// context : 폼 context 요소
 	// rowData : 폼에 바인드 될 데이터
 }</code></pre>
@@ -206,8 +225,9 @@
 			<td></td>
 			<td style="max-width: 299px;">
 				<p>폼에 데이터가 바인드가 완료 된 후 발생 되는 이벤트입니다.</p>
+                <p class="alert">natural.config.js 에 전역으로 설정 시 N.form 을 이용하는 컴포넌트(N.grid, N.list)들에 값을 바인드 할 때도 모두 적용 됩니다.</p>
 				<pre><code class="language-javascript">onBind : function(context, data) {
-	// this : N.grid 인스턴스
+	// this : N.form 인스턴스
 	// context : 폼 context 요소
 	// rowData : 폼에 바인드 된 데이터
 }</code></pre>
