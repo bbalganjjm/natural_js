@@ -534,20 +534,21 @@
 		blockOnChangeWhenBind : true, // bind 함수를 호출 할 때 도 onChange 이벤트가 발생하면 무한루프에 빠지므로 이를 차단하는 옵션 
 		onChange: function(pageNo, selEle, selData, currPageNavInfo) { // 페이지 전환 시 발생되는 이벤트
 			N(currPageNavInfo).comm("retrieve.json").submit(function(data){ // 6. 초기 페이징 정보로 1페이지 리스트 데이터 조회
-				if(data[0]) {
-					pagination.bind(data[0].totalCount); // 7. 서버에서 가져온 totalCount 로  N.pagination 에 바인드하여 Pagination 재 생성.
-				}
+				pagination.bind(data[0] && data[0].totalCount ? data[0].totalCount : 0 ); // 7. 서버에서 가져온 totalCount 로  N.pagination 에 바인드하여 Pagination 재 생성.
 				grid.bind(data); // 8. 현재 페이지 데이터를 N.grid에 바인드
 			});
 		}
 	}).bind();
 	
-	N(pagination.currPageNavInfo()).comm("retrieve.json").submit(function(data){ // 3. totalCount 컬럼 이 포함 된 리스트 데이터 조회
-		if(data[0]) {
-			pagination.bind(data[0].totalCount); // 4. 서버에서 가져온 totalCount 로  N.pagination 에 바인드
-		}
-		grid.bind(data); // 5. 서버에서 가져온 데이터를 N.grid에 바인드
-	});
+	var getPaginationData = function() {
+	    pagination.pageNo(1).bind(); // 다시 조회할때 Pagination을 초기화 하기 위한 구문(1 페이지로 이동 및 1페이지 bind를 통한 currPageNavInfo 초기화).
+		N(pagination.currPageNavInfo()).comm("retrieve.json").submit(function(data){ // 3. totalCount 컬럼 이 포함 된 리스트 데이터 조회
+			pagination.bind(data[0] && data[0].totalCount ? data[0].totalCount : 0 ); // 4. 서버에서 가져온 totalCount 로  N.pagination 에 바인드
+			grid.bind(data); // 5. 서버에서 가져온 데이터를 N.grid에 바인드
+		});	    
+	}
+	
+	getPaginationData();
 </script></xmp></code></pre>
 
 </article>
