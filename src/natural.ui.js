@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.34.141
+ * Natural-UI v0.36.142
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "0.34.141";
+	N.version["Natural-UI"] = "0.36.142";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -393,7 +393,7 @@
 			    /**
 			     * Wraps component event options and global event options in N.config.
 			     */
-			    wrapGlobalAndLocalEventOptions : function(opts, compNm, eventNm) {
+			    wrapHandler : function(opts, compNm, eventNm) {
 			        if(N.context.attr("ui")[compNm] && N.context.attr("ui")[compNm][eventNm] && opts[eventNm]) {
 	                    var localEventHandler = opts[eventNm]; 
 	                    opts[eventNm] = function() {
@@ -496,11 +496,11 @@
 			}
 			if(msg !== undefined && N.isPlainObject(msg)) {
 			    // Wraps the global event options in N.config and event options for this component.
-                UI.utils.wrapGlobalAndLocalEventOptions(msg, "alert", "onOk");
-                UI.utils.wrapGlobalAndLocalEventOptions(msg, "alert", "onCancel");
-                UI.utils.wrapGlobalAndLocalEventOptions(msg, "alert", "onShow");
-                UI.utils.wrapGlobalAndLocalEventOptions(msg, "alert", "onHide");
-                UI.utils.wrapGlobalAndLocalEventOptions(msg, "alert", "onRemove");
+                UI.utils.wrapHandler(msg, "alert", "onOk");
+                UI.utils.wrapHandler(msg, "alert", "onCancel");
+                UI.utils.wrapHandler(msg, "alert", "onShow");
+                UI.utils.wrapHandler(msg, "alert", "onHide");
+                UI.utils.wrapHandler(msg, "alert", "onRemove");
                 
 				$.extend(true, this.options, msg);
 				if(N.isString(this.options.container)) {
@@ -1293,13 +1293,13 @@
 
 			if(opts !== undefined) {
 			    // Wraps the global event options in N.config and event options for this component.
-                UI.utils.wrapGlobalAndLocalEventOptions(opts, "datepicker", "onChangeYear");
-                UI.utils.wrapGlobalAndLocalEventOptions(opts, "datepicker", "onChangeMonth");
-                UI.utils.wrapGlobalAndLocalEventOptions(opts, "datepicker", "onSelect");
-                UI.utils.wrapGlobalAndLocalEventOptions(opts, "datepicker", "onBeforeShow");
-                UI.utils.wrapGlobalAndLocalEventOptions(opts, "datepicker", "onShow");
-                UI.utils.wrapGlobalAndLocalEventOptions(opts, "datepicker", "onBeforeHide");
-                UI.utils.wrapGlobalAndLocalEventOptions(opts, "datepicker", "onHide");
+                UI.utils.wrapHandler(opts, "datepicker", "onChangeYear");
+                UI.utils.wrapHandler(opts, "datepicker", "onChangeMonth");
+                UI.utils.wrapHandler(opts, "datepicker", "onSelect");
+                UI.utils.wrapHandler(opts, "datepicker", "onBeforeShow");
+                UI.utils.wrapHandler(opts, "datepicker", "onShow");
+                UI.utils.wrapHandler(opts, "datepicker", "onBeforeHide");
+                UI.utils.wrapHandler(opts, "datepicker", "onHide");
                 
 				$.extend(this.options, opts);
 			}
@@ -2161,6 +2161,14 @@
 				}
 			};
 
+			// To prevent "maximum call stack size exceeded" error in jQuery's extend method when define the opener option.
+            var isOpenerHas = false;
+            if(opts && opts.opener) {
+                var opener = opts.opener;
+                opts.opener = undefined;
+                isOpenerHas = true;
+            }
+            
 			try {
 				$.extend(true, this.options, N.context.attr("ui").popup);
 			} catch (e) {
@@ -2179,48 +2187,22 @@
 			}
 
 			// Wraps the global event options in N.config and event options for this component.
-            UI.utils.wrapGlobalAndLocalEventOptions(opts, "popup", "onOk");
-            UI.utils.wrapGlobalAndLocalEventOptions(opts, "popup", "onCancel");
-            UI.utils.wrapGlobalAndLocalEventOptions(opts, "popup", "onOpen");
-            UI.utils.wrapGlobalAndLocalEventOptions(opts, "popup", "onClose");
+            UI.utils.wrapHandler(opts, "popup", "onOk");
+            UI.utils.wrapHandler(opts, "popup", "onCancel");
+            UI.utils.wrapHandler(opts, "popup", "onOpen");
+            UI.utils.wrapHandler(opts, "popup", "onClose");
             
 			$.extend(true, this.options, opts);
+			
+			// To prevent "maximum call stack size exceeded" error in jQuery's extend method when define the opener option.
+			if(isOpenerHas) {
+			    opts.opener = opener;
+			    this.options.opener = opts.opener;
+			    opener = undefined;
+			}
 
 			// if title option value is undefined
 			this.options.title = opts !== undefined ? N.string.trimToNull(opts.title) : null;
-
-			// Auto opener Settings(parent page's Controller)
-			if(this.options.opener == null) {
-				var self = this;
-				try {
-					var caller = arguments.callee.caller;
-					var callers = [caller];
-					while(caller != null) {
-					    caller = caller.arguments.callee.caller;
-					    callers.push(caller);
-					    if(caller != null && caller.arguments.length > 0 && N(caller.arguments[0]).hasClass("view_context__") && caller.arguments[0].instance != null && N.type(caller.arguments[0].instance) === "function") {
-							self.options.opener = caller.arguments[0].instance("cont");
-							break;
-						}
-
-					    // Infinite loop prevention processing
-					    if(caller == $.event.dispatch) {
-					    	callers = undefined;
-					    	throw N.error("[N.popup]opener not found");
-					    }
-					    if(callers.indexOf(caller) > -1) {
-					    	callers = undefined;
-					    	throw N.error("[N.popup]opener not found");
-					    }
-					}
-				} catch(e) {
-					callers = undefined;
-					if(this.options.url !== null) {
-						N.warn("[" + e.toString().replace("Error: ", "") + "]opener could not be found automatically. Specify the Controller(N.cont) object directly in the opener option of N.popup.");
-					}
-				}
-				callers = undefined;
-			}
 
 			if(this.options.url !== null) {
 				if(this.options.preload) {
@@ -2428,6 +2410,7 @@
 				tabOpts : [], // tabOpts : [{ url: undefined, active: false, preload: false, onOpen: undefined, disable : false, stateless : false }]
 				delayContInit : false,
 				randomSel : false,
+				opener : null,
 				onActive : null,
 				onActiveG : null, // DEPRECATED
 				onLoad : null,
@@ -2442,6 +2425,14 @@
 				}
 			};
 
+			// To prevent "maximum call stack size exceeded" error in jQuery's extend method when define the opener option.
+            var isOpenerHas = false;
+            if(opts && opts.opener) {
+                var opener = opts.opener;
+                opts.opener = undefined;
+                isOpenerHas = true;
+            }
+            
 			try {
 				$.extend(true, this.options, N.context.attr("ui").tab);
 			} catch (e) {
@@ -2450,8 +2441,8 @@
 
 			if (N.isPlainObject(obj)) {
 			    // Wraps the global event options in N.config and event options for this component.
-	            UI.utils.wrapGlobalAndLocalEventOptions(opts, "tab", "onActive");
-	            UI.utils.wrapGlobalAndLocalEventOptions(opts, "tab", "onLoad");
+	            UI.utils.wrapHandler(opts, "tab", "onActive");
+	            UI.utils.wrapHandler(opts, "tab", "onLoad");
 	            
 				$.extend(true, this.options, obj);
 				this.options.context = N(obj.context);
@@ -2473,10 +2464,15 @@
 				});
 			}
 
-			if(opts !== undefined) {
-				$.extend(this.options, opts);
-			}
+			$.extend(this.options, opts);
 
+			// To prevent "maximum call stack size exceeded" error in jQuery's extend method when define the opener option.
+            if(isOpenerHas) {
+                opts.opener = opener;
+                this.options.opener = opts.opener;
+                opener = undefined;
+            }
+            
 			// set style class name to context element
 			this.options.context.addClass("tab__");
 
@@ -2797,6 +2793,11 @@
 						// set caller attribute in conteroller in tab content that is Tab instance
 						cont.caller = self;
 
+						// set opener to popup's Controller
+                        if(opts.opener != null) {
+                            cont.opener = opts.opener;
+                        }
+                        
 						// if delayContInit options is true, *ProcFn__ function is must set to Controller's attribute before the aop processing
 						if(opts.delayContInit) {
 							callback.call(this, cont, selContentEle);
@@ -2895,7 +2896,15 @@
 						.removeClass("tab_disabled__");
 				}
 				return this;
-			}
+			},
+			cont : function(idx) {
+			    var opts = this.options;
+                if(idx !== undefined) {
+                    return opts.context.find("> div:eq(" + String(idx) + ") > .view_context__").instance("cont");
+                } else {
+                    return opts.context.find("> .tab_content_active__ > .view_context__").instance("cont");
+                }
+            } 
 		});
 
 		// Select
@@ -3126,9 +3135,9 @@
 
 			if (N.isPlainObject(opts)) {
 			    // Wraps the global event options in N.config and event options for this component.
-                UI.utils.wrapGlobalAndLocalEventOptions(opts, "form", "onBeforeBindValue");
-                UI.utils.wrapGlobalAndLocalEventOptions(opts, "form", "onBeforeBind");
-                UI.utils.wrapGlobalAndLocalEventOptions(opts, "form", "onBind");
+                UI.utils.wrapHandler(opts, "form", "onBeforeBindValue");
+                UI.utils.wrapHandler(opts, "form", "onBeforeBind");
+                UI.utils.wrapHandler(opts, "form", "onBind");
                 
 				//convert data to wrapped set
 				opts.data = N.type(opts.data) === "array" ? N(opts.data) : opts.data;
@@ -4010,8 +4019,8 @@
 
 			if (N.isPlainObject(opts)) {
 			    // Wraps the global event options in N.config and event options for this component.
-                UI.utils.wrapGlobalAndLocalEventOptions(opts, "list", "onSelect");
-                UI.utils.wrapGlobalAndLocalEventOptions(opts, "list", "onBind");
+                UI.utils.wrapHandler(opts, "list", "onSelect");
+                UI.utils.wrapHandler(opts, "list", "onBind");
                 
 				//convert data to wrapped set
 				opts.data = N.type(opts.data) === "array" ? N(opts.data) : opts.data;
@@ -4656,8 +4665,8 @@
 
 			if (N.isPlainObject(opts)) {
 			    // Wraps the global event options in N.config and event options for this component.
-                UI.utils.wrapGlobalAndLocalEventOptions(opts, "grid", "onSelect");
-                UI.utils.wrapGlobalAndLocalEventOptions(opts, "grid", "onBind");
+                UI.utils.wrapHandler(opts, "grid", "onSelect");
+                UI.utils.wrapHandler(opts, "grid", "onBind");
                 
 				//convert data to wrapped set
 				opts.data = N.type(opts.data) === "array" ? N(opts.data) : opts.data;
@@ -6539,7 +6548,7 @@
 
 			if (N.isPlainObject(opts)) {
 			    // Wraps the global event options in N.config and event options for this component.
-                UI.utils.wrapGlobalAndLocalEventOptions(opts, "pagination", "onChange");
+                UI.utils.wrapHandler(opts, "pagination", "onChange");
                 
 				//convert data to wrapped set
 				opts.data = N.type(opts.data) === "array" ? N(opts.data) : opts.data;
@@ -6853,8 +6862,8 @@
 
 			if (N.isPlainObject(opts)) {
 			    // Wraps the global event options in N.config and event options for this component.
-                UI.utils.wrapGlobalAndLocalEventOptions(opts, "tree", "onSelect");
-                UI.utils.wrapGlobalAndLocalEventOptions(opts, "tree", "onCheck");
+                UI.utils.wrapHandler(opts, "tree", "onSelect");
+                UI.utils.wrapHandler(opts, "tree", "onCheck");
                 
 				//convert data to wrapped set
 				opts.data = N.type(opts.data) === "array" ? N(opts.data) : opts.data;
