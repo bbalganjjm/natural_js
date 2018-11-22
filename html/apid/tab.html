@@ -77,6 +77,15 @@
 				<label for="enable" lang="en_US">Tabindex to enable</label>
 			</td>
 		</tr>
+        <tr>
+            <th>cont</th>
+            <th><label for="cont">arguments[0]</label></th>
+            <td>
+                <input id="cont" type="text" />
+                <label for="cont" lang="ko_KR">Controller Object 를 가져올 탭 컨텐츠의 인덱스</label>
+                <label for="cont" lang="en_US">Index of tab content to get Controller Object</label>
+            </td>
+        </tr>
 	</table>
 
 	<p lang="ko_KR" class="smallContTit">실행 : </p>
@@ -89,6 +98,7 @@
 		<a id="btnOpen" href="#" data-opts='{ "color" : "gray", "size": "large", "disable": true }'>open</a>
 		<a id="btnDisable" href="#" data-opts='{ "color" : "gray", "size": "large", "disable": true }'>disable</a>
 		<a id="btnEnable" href="#" data-opts='{ "color" : "gray", "size": "large", "disable": true }'>enable</a>
+        <a id="btnCont" href="#" data-opts='{ "color" : "gray", "size": "large", "disable": true }'>cont</a>
 		<a id="btnReload" href="#" data-opts='{ "color": "white", "size": "large" }'>
 			<span lang="ko_KR">DEMO 초기화</span>
 			<span lang="en_US">Reset DEMO</span>
@@ -99,9 +109,9 @@
     <div id="tab">
     	<a href="#"><span></span></a>
 		<ul>
-			<li><a href="#tab1">Jeff Beck</a></li>
-			<li data-opts='{ "onOpen" : "onOpen", "url" : "html/apid/form.html" }'><a href="#tab2">Form</a></li>
-			<li data-opts='{ "preload" : true, "url" : "html/apid/button.html", "stateless" : true }'><a href="#tab3">Button</a></li>
+			<li data-opts='{ "onOpen" : "onOpen", "url" : "html/apid/form.html" }'><a href="#tab1">Form</a></li>
+			<li data-opts='{ "preload" : true, "url" : "html/apid/button.html", "stateless" : true }'><a href="#tab2">Button</a></li>
+			<li><a href="#tab3">Jeff Beck</a></li>
 			<li><a href="#tab4">Tab4</a></li>
 			<li><a href="#tab5">Tab5</a></li>
 			<li><a href="#tab6">Tab6</a></li>
@@ -113,14 +123,14 @@
 			<li><a href="#tab12">Tab12</a></li>
 		</ul>
 		<a href="#"><span></span></a>
-		<div id="tab1">
+		<div id="tab1"></div>
+		<div id="tab2"></div>
+		<div id="tab3">
 			<article class="view_context__">Geoffrey Arnold "Jeff" Beck (born 24 June 1944) is an English rock guitarist. He is one of the three noted guitarists to have played with The Yardbirds (the other two being Eric Clapton and Jimmy Page). Beck also formed The Jeff Beck Group and Beck, Bogert &amp; Appice.
 Much of Beck's recorded output has been instrumental, with a focus on innovative sound, and his releases have spanned genres ranging from blues rock, heavy metal, jazz fusion and an additional blend of guitar-rock and electronica. Although he recorded two hit albums (in 1975 and 1976) as a solo act, Beck has not established or maintained the sustained commercial success of many of his contemporaries and bandmates.[1][2] Beck appears on albums by Mick Jagger, Tina Turner, Morrissey, Jon Bon Jovi, Malcolm McLaren, Kate Bush, Roger Waters, Donovan, Stevie Wonder, Les Paul, Zucchero, Cyndi Lauper, Brian May, Stanley Clarke and ZZ Top.
 He was ranked 5th in Rolling Stone's list of the "100 Greatest Guitarists of All Time" and the magazine, upon whose cover Beck has appeared three times, has described him as "one of the most influential lead guitarists in rock".[3] MSNBC has called him a "guitarist's guitarist".[1] Beck has earned wide critical praise and received the Grammy Award for Best Rock Instrumental Performance six times and Best Pop Instrumental Performance once. He has been inducted into the Rock and Roll Hall of Fame twice: as a member of the Yardbirds (1992) and as a solo artist (2009).
 - from WIKIPEDIA</article>
-			</div>
-		<div id="tab2"></div>
-		<div id="tab3"></div>
+		</div>
 		<div id="tab4"><article class="view_context__">tab4</article></div>
 		<div id="tab5"><article class="view_context__">tab5</article></div>
 		<div id="tab6"><article class="view_context__">tab6</article></div>
@@ -162,6 +172,7 @@ He was ranked 5th in Rolling Stone's list of the "100 Greatest Guitarists of All
 	            N("#btnOpen", view).instance("button").enable();
 	            N("#btnDisable", view).instance("button").enable();
 	            N("#btnEnable", view).instance("button").enable();
+	            N("#btnCont", view).instance("button").enable();
 	        });
 
 	    	N("#btnReload", view).click(function(e) {
@@ -186,6 +197,11 @@ He was ranked 5th in Rolling Stone's list of the "100 Greatest Guitarists of All
 	        N("#btnEnable", view).click(function(e) {
 	            e.preventDefault();
             	cont.tab.enable(N("input#enable", view).val());
+	        });
+	        
+	        N("#btnCont", view).click(function(e) {
+	            e.preventDefault();
+            	N.log(cont.tab.cont(N.string.trimToUndefined(N("input#cont", view).val())));
 	        });
 	    }
 	});

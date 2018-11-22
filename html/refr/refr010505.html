@@ -9,7 +9,9 @@
 		<span lang="en_US">Overview</span>
 	</h3>
 	<p>Tab(이하 N.tab) 지정한 HTML 탭 템플릿을 기반으로 탭을 만들어 주는 컴포넌트입니다.</p>
-
+    <p class="alert">N.tab 의 url 옵션으로 다른 페이지를 탭 컨텐츠로 생성 할 때 생성된 탭 컨텐츠의 Controller 에는 caller(자신을 호출한 N.tab instance) 와 opener(자신을 호출한 부모페이지의 Controller, 옵션으로 직접 지정 해야 함) 속성이 추가 되어 탭 컨텐츠들의 컨트롤러에서 자신을 호출한 탭 객체와 부모 컨트롤러를 제어할 수 있습니다.</p>
+    <p class="alert">N.tab 을 생성한 부모페이지에서 자식 탭 컨텐츠들의 Controller 오브젝트를 가져오려면 cont 메서드를 사용하면 됩니다.</p>
+    
 	<h3>API DEMO</h3>
 	<p lang="ko_KR" class="alert">데모에는 모든 옵션 및 기능을 포함하고 있지 않습니다. 전체 기능 목록은 데모 바로 아래 있는 기능 문서들을 참고 바랍니다.</p>
 	<p lang="en_US" class="alert">The demo does not include all options and features. For a complete list of features, please refer to the function documentation directly below the demo.</p>
@@ -183,6 +185,26 @@
 				<p class="alert">탭에 선언형옵션으로 active 가 true 로 설정 되어 있으면 해당 옵션이 먼저 적용 됩니다. </p>
 			</td>
 		</tr>
+        <tr>
+			<td>blockOnActiveWhenCreate</td>
+			<td>boolean</td>
+			<td>false</td>
+			<td align="center"></td>
+			<td>
+				<p lang="ko_KR">탭을 생성 하면서 기본 탭을 선택 할 때 onActive 이벤트를 차단 할지 여부</p>
+				<p lang="en_US">Whether to block onActive event when creating a tab and selecting the default tab</p>
+			</td>
+		</tr>
+        <tr>
+            <td>opener</td>
+            <td>N.cont's object</td>
+            <td>null</td>
+            <td></td>
+            <td>
+                <p>각각의 탭 컨텐츠의 Controller(N.cont) 오브젝트에서 부모페이지의 컨트롤러를 참조하기 위한 옵션 입니다.</p> 
+                <p>탭 컴포넌트 생성 시 opener 옵션에 해당 컨트롤러(this)를 지정 하면 탭의 Controller Object 의 opener 속성으로 전달 됩니다.</p>
+            </td>
+        </tr>
 		<tr>
 			<td>
 				<p class="depricated">effect</p>
@@ -214,16 +236,6 @@
 				<p>contentEle : 활성화된 탭 컨텐츠 요소</p>
 				<p>tabEles : 전체 탭 요소</p>
 				<p>contentEles : 전체 컨텐츠 요소</p>
-			</td>
-		</tr>
-		<tr>
-			<td>blockOnActiveWhenCreate</td>
-			<td>boolean</td>
-			<td>false</td>
-			<td align="center"></td>
-			<td>
-				<p lang="ko_KR">탭을 생성 하면서 기본 탭을 선택 할 때 onActive 이벤트를 차단 할지 여부</p>
-				<p lang="en_US">Whether to block onActive event when creating a tab and selecting the default tab</p>
 			</td>
 		</tr>
 		<tr>
@@ -364,6 +376,25 @@
 			<td>N.tab</td>
 			<td>지정한 index 번째 탭을 비활성화 합니다.</td>
 		</tr>
+        <tr>
+            <td>cont</td>
+            <td align="center">-</td>
+            <td align="center">-</td>
+            <td>N.cont's object</td>
+            <td>
+                <p>생성 된 탭 컨텐츠(자식 페이지)의 Controller 오브젝트를 반환 합니다.</p>
+                <p class="alert">다른 페이지를 불러오지 않고 내부에서 생성된 탭 컨텐츠 이거나 preload 옵션이 false 일때 한번도 활성화 되지 않은 탭 컨텐츠는 Controller Object 가 없는 상태이기 때문에 undefined 가 반환 됩니다.</p>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>idx</td>
+            <td>number</td>
+            <td align="center">-</td>
+            <td>
+                <p>idx 인자를 입력하지 않으면 활성화 된 탭의 Controller 오브젝트를 반환하고 idx 인자를 입력하면 지정한 index 번째 탭 컨텐츠의 Controller 오브젝트를 반환 합니다.</p>
+            </td>
+        </tr>
 	</table>
 
 	<h3>

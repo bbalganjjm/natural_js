@@ -92,8 +92,8 @@
 	</table>
 
 	<h3>
-		<span lang="ko_KR">Controller(N.cont) 객체 변수</span>
-		<span lang="en_US">Controller(N.cont) object's variables</span>
+		<span lang="ko_KR">Controller(N.cont) 객체의 상수</span>
+		<span lang="en_US">Constant for the Controller(N.cont) object</span>
 	</h3>
 	<table>
 		<tr>
@@ -113,15 +113,15 @@
 		</tr>
 		<tr>
 			<td>caller</td>
-			<td>N.popup</td>
-			<td>팝업으로 호출 된 페이지 일 경우 자신을 호출 한 팝업 인스턴스가 정의 되어 있습니다.</td>
+			<td>N.popup instance | N.tab instance</td>
+			<td>N.popup 이나 N.tab 컴포넌트에 의해 호출 된 페이지 일 경우 자신을 호출 한 N.popup 이나 N.tab 인스턴스가 정의 되어 있습니다.</td>
 		</tr>
 		<tr>
 			<td>opener</td>
-			<td>object</td>
+			<td>N.cont's object</td>
 			<td>
-				<p>팝업으로 호출 된 페이지 일 경우 자신을 호출 한 팝업 인스턴스가 포함된 컨트롤러 오브젝트가 정의 되어 있습니다.</p>
-				<p class="alert">팝업 인스턴스가 무기명이거나 지역 변수일 경우 opener 속성이 정의 되지 않을 수 있습니다. 먼저 opener 속성이 undefined 인지 체크 후 사용 바랍니다.</p>
+				<p>N.popup 이나 N.tab 컴포넌트에 의해 호출 된 페이지 일 경우 자신을 호출 한 N.popup 이나 N.tab 인스턴스가 포함된 컨트롤러(부모 페이지의 컨트롤러) 오브젝트가 정의 되어 있습니다.</p>
+				<p class="alert">opener 속성은 N.popup 이나 N.tab 컴포넌트 초기화 시 opener 옵션으로 지정한 Controller Object 가 지정 되어 있습니다.</p>
 			</td>
 		</tr>
 	</table>
