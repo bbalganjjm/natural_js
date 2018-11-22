@@ -1,5 +1,5 @@
 /*!
- * Natural-UI.Shell v0.9.38, Works fine in IE9 and above
+ * Natural-UI.Shell v0.9.39, Works fine in IE9 and above
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-	N.version["Natural-UI.Shell"] = "0.9.38";
+	N.version["Natural-UI.Shell"] = "0.9.39";
 
 	$.fn.extend($.extend(N.prototype, {
 		notify : function(opts) {
@@ -668,6 +668,11 @@
 			hideTabContents : function(docId_) {
 				var opts = this.options;
 
+				// Correct the wrong entireLoadRequestCnt value.
+				if(opts.entireLoadRequestCnt < 0) {
+				    opts.entireLoadRequestCnt = 0;
+				}
+				
 				var tabContents_ = opts.context.find("> .docs_contents__." + docId_ + "__");
 
 				if(tabContents_.siblings(".docs_contents__.visible__").length > 0) {
