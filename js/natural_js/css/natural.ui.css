@@ -169,36 +169,36 @@
 	box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.2);
 }
 
-.popup__.block_overlay_msg__ .msg_title_box__ {
+.popup__.block_overlay_msg__ > .msg_title_box__ {
 
 }
 
-.popup__.block_overlay_msg__ .msg_title_box__ .msg_title__ {
+.popup__.block_overlay_msg__ > .msg_title_box__ .msg_title__ {
 
 }
 
-.popup__.alert__.block_overlay_msg__ .msg_box__ {
+.popup__.alert__.block_overlay_msg__ > .msg_box__ {
 	display: block;
 	-webkit-overflow-scrolling: touch;
 	resize: both;
 }
 
 /* To prevent inheritance on iOS */
-.popup__.alert__.block_overlay_msg__ .msg_box__ > .view_context__ {
+.popup__.alert__.block_overlay_msg__ > .msg_box__ > .view_context__ {
 	-webkit-overflow-scrolling: auto;
 	resize: none;
 }
 
-.popup__.block_overlay_msg__ .msg_box__ {
+.popup__.block_overlay_msg__ > .msg_box__ {
 	background-color: #ffffff;
 	padding: 0;
 }
 
-.popup__.block_overlay_msg__ .buttonBox__ {
+.popup__.block_overlay_msg__ > .buttonBox__ {
 
 }
 
-.popup__.block_overlay_msg__ .msg_title_box__ .msg_title_close__:hover {
+.popup__.block_overlay_msg__ > .msg_title_box__ .msg_title_close__:hover {
 
 }
 
