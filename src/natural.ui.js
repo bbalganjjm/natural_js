@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.36.142
+ * Natural-UI v0.36.145
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "0.36.142";
+	N.version["Natural-UI"] = "0.36.145";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -120,7 +120,7 @@
 						}
 					} else if(i === lastIdx + 1) {
 						if(opts.onBind !== null && !N.string.endsWith(callType, ".update")) {
-							opts.onBind.call(self, opts.context, opts.data);
+							opts.onBind.call(self, opts.context, opts.data, i === opts.scrollPaging.size || opts.data.length <= opts.scrollPaging.size, i === opts.data.length);
 						}
 						opts.scrollPaging.limit = opts.scrollPaging.size === 0 ? opts.data.length : opts.scrollPaging.size;
 
@@ -4373,7 +4373,7 @@
 								N.message.get(opts.message, "empty") + '</li>');
 
 						if(opts.onBind !== null && callType !== "list.update") {
-							opts.onBind.call(this, opts.context, opts.data);
+							opts.onBind.call(this, opts.context, opts.data, true, true);
 						}
 					}
 				} else {
@@ -5875,8 +5875,10 @@
 						}
 
 						$(document).unbind("click.grid.dataFilter");
-						$(document).one("click.grid.dataFilter", function(e) {
-							if($(e.target).closest(".data_filter_panel__, .btn_data_filter__").length === 0 && !$(e.target).hasClass("btn_data_filter__")) {
+						$(document).bind("click.grid.dataFilter", function(e) {
+							if($(e.target).closest(".data_filter_panel__, .btn_data_filter__").length === 0 
+							        && !$(e.target).hasClass("btn_data_filter__")
+							        && !$(e.target).hasClass("form__")) {
 								var panel = thead.find(".data_filter_panel__.visible__");
 								if(panel.length > 0) {
 									panel.removeClass("visible__").addClass("hidden__");
@@ -5884,9 +5886,7 @@
 									panel.unbind(eventNm);
 									panel.one(eventNm, function(e){
 						            	$(this).hide();
-
-						            	// The touchstart event is not removed when using the one method
-										$(document).unbind("touchstart.grid.dataFilter");
+										$(document).unbind("click.grid.dataFilter");
 							        }).trigger("nothing");
 								}
 							}
@@ -6211,7 +6211,7 @@
 							}, 0);
 
 							if(opts.onBind !== null && callType !== "grid.update") {
-								opts.onBind.call(this, opts.context, opts.data);
+								opts.onBind.call(this, opts.context, opts.data, true, true);
 							}
 						}
 					}
