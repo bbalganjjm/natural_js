@@ -142,9 +142,11 @@
 			</td>
 			<th><label for="onBind">onBind</label></th>
 			<td>
-				<textarea id="onBind" style="height: 60px;">function(context, data) {
+				<textarea id="onBind" style="height: 90px;">function(context, data, isFirstPage, isLastPage) {
 	N.log("onBind", context);
 	N.log(data);
+    N.log(isFirstPage);
+    N.log(isLastPage);
 }</textarea>
 			</td>
 		</tr>
