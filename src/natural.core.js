@@ -1,5 +1,5 @@
 /*!
- * Natural-CORE v0.17.16
+ * Natural-CORE v0.17.17
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -300,7 +300,7 @@
 		// N local variables
 		$.extend(N, {
 			version : {
-				"Natural-CORE" : "0.17.16"
+				"Natural-CORE" : "0.17.17"
 			},
 			/**
 			 * Set and get locale value
@@ -487,7 +487,7 @@
 					$(window).unbind("resize.alert");
 					$(document).unbind("click.datepicker");
 					$(document).unbind("keyup.alert");
-					$(document).unbind("click.grid.dataFilter touchstart.grid.dataFilter");
+					$(document).unbind("click.grid.dataFilter");
 					$(document).unbind("click.grid.more touchstart.grid.more");
 					return true;
 				},
@@ -502,7 +502,7 @@
 					$(document).unbind("keyup.alert");
 					$(document).unbind("dragstart.grid.vResize selectstart.grid.vResize mousemove.grid.vResize touchmove.grid.vResize mouseup.grid.vResize touchend.grid.vResize");
 					$(document).unbind("dragstart.grid.resize selectstart.grid.resize mousemove.grid.resize touchmove.grid.resize mouseup.grid.resize touchend.grid.resize");
-					$(document).unbind("click.grid.dataFilter touchstart.grid.dataFilter");
+					$(document).unbind("click.grid.dataFilter");
 					$(document).unbind("click.grid.more touchstart.grid.more");
 					return true;
 				},
