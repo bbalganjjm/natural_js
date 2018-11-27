@@ -198,9 +198,11 @@ N(".exap0800").cont({
       				cont.detailForm.bind(index, data);
       			}
         	},
-        	onBind : function(context, data) {
-	    		this.select(0);
-        	}
+        	onBind : function(context, data, isFirstPage, isLastPage) {
+                if(isFirstPage) {
+                    this.select(0);
+                }
+            }
        	});
     },
     setEvents : function(cont) {

@@ -471,11 +471,13 @@
 			<td>null</td>
 			<td></td>
 			<td style="max-width: 299px;">
-				<p>그리드에 데이터 바인드가 완료 될 때 발생 하는 이벤트입니다.</p>
-				<pre><code class="language-javascript">onBind : function(context, data) {
+				<p>데이터가 바인드 될 때마다 발생되는 이벤트입니다. 이벤트 핸들러 함수의 인자로 context, data, isFirstPage, isLastPage 가 반환 됩니다.</p>
+				<pre><code class="language-javascript">onBind : function(context, data, isFirstPage, isLastPage) {
 	// this : N.grid 인스턴스
 	// context : context(그리드 컨텍스트 요소)
 	// rowData : 그리드에 바인드 된 데이터
+    // isFirstPage : 스크롤 페이징 시 첫번째 페이지 여부(스크롤 페이징 하지 않으면 true 반환)
+    // isLastPage : 스크롤 페이징 시 마지막 페이지 여부(스크롤 페이징 하지 않으면 true 반환)
 }</code></pre>
 				<p class="alert">스크롤페이징에 의해 페이징 될 때도 해당 페이징 사이즈 만큼 행들이 완성 될 때마다 발생합니다.</p>
 			</td>
