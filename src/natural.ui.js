@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.36.145
+ * Natural-UI v0.36.146
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "0.36.145";
+	N.version["Natural-UI"] = "0.36.146";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -6895,6 +6895,20 @@
 					return this.options.data.get();
 				} else if(selFlag === false) {
 					return this.options.data;
+				} else if(selFlag === "selected") {
+                    var data = this.options.data;
+                    if(arguments.length > 1) {
+                        // clone arguments
+                        var args = Array.prototype.slice.call(arguments, 0);
+                        return this.options.context.find(".tree_active__").map(function() {
+                            args[0] = data[N(this).closest("li").data("index")];
+                            return N.json.mapFromKeys.apply(N.json, args);
+                        }).get();
+                    } else {
+                        return this.options.context.find(".tree_active__").map(function() {
+                            return data[N(this).closest("li").data("index")];
+                        }).get();
+                    }
 				} else if(selFlag === "checked") {
 					var data = this.options.data;
 					if(arguments.length > 1) {
