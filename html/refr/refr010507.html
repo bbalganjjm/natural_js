@@ -226,7 +226,7 @@
 			<td style="max-width: 299px;">
 				<p>폼에 데이터가 바인드가 완료 된 후 발생 되는 이벤트입니다.</p>
                 <p class="alert">natural.config.js 에 전역으로 설정 시 N.form 을 이용하는 컴포넌트(N.grid, N.list)들에 값을 바인드 할 때도 모두 적용 됩니다.</p>
-				<pre><code class="language-javascript">onBind : function(context, data) {
+				<pre><code class="language-javascript">onBind : function(context, rowData) {
 	// this : N.form 인스턴스
 	// context : 폼 context 요소
 	// rowData : 폼에 바인드 된 데이터
