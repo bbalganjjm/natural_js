@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.36.147
+ * Natural-UI v0.36.149
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "0.36.147";
+	N.version["Natural-UI"] = "0.36.149";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -4247,7 +4247,7 @@
 						self.contextEle.find(">li.list_selected__").removeClass("list_selected__");
 					}
 					$(row).each(function() {
-						selRowEle = self.contextEle.find(">li.form__").eq(this);
+						selRowEle = self.contextEle.find(">li" + (self.options.data.length > 0 ? ".form__" : "") +":eq(" + String(this) + ")");
 						if(selRowEle.hasClass("list_selected__")) {
 							selRowEle.removeClass("list_selected__");
 						}
@@ -6010,6 +6010,7 @@
 					N.warn("[N.grid.select]The \"select\" option value is false. please enable the select feature.");
 					return false;
 				}
+				
 				if(row === undefined) {
 					var rowEles = this.contextEle.find(">tbody.form__");
 					var rtnArr = rowEles.filter(".grid_selected__").map(function() {
@@ -6028,7 +6029,7 @@
 						self.contextEle.find(">tbody.grid_selected__").removeClass("grid_selected__");
 					}
 					$(row).each(function() {
-						selRowEle = self.contextEle.find(">tbody.form__").eq(this);
+						selRowEle = self.contextEle.find(">tbody" + (self.options.data.length > 0 ? ".form__" : "") +":eq(" + String(this) + ")");
 						if(selRowEle.hasClass("grid_selected__")) {
 							selRowEle.removeClass("grid_selected__");
 						}
