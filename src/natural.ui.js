@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.36.149
+ * Natural-UI v0.36.152
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "0.36.149";
+	N.version["Natural-UI"] = "0.36.152";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -3662,6 +3662,11 @@
         			var pagingSize = opts.extObj.options.scrollPaging.size;
         			var rest = rowEleLength % pagingSize;
         			opts.extObj.options.scrollPaging.idx = parseInt(rowEleLength / pagingSize) * pagingSize - pagingSize + rest;
+        			
+        			// for rowHandlerBeforeBind of N.list and N.grid
+                    if(opts.extObj.options.rowHandlerBeforeBind !== null) {
+                        opts.extObj.options.rowHandlerBeforeBind.call(opts.extObj, opts.extRow, opts.context, this.data(true)[0]);
+                    }
         		}
 
 	        	// Set revert data
@@ -4448,10 +4453,6 @@
 					addTop : opts.addTop,
 					revert : opts.revert
 				})
-
-				if(opts.rowHandlerBeforeBind !== null) {
-					opts.rowHandlerBeforeBind.call(this, form.options.extRow, tempRowEleClone, data);
-				}
 
 				form.add(data, row);
 
@@ -6288,10 +6289,6 @@
 					addTop : opts.addTop,
 					revert : opts.revert
 				});
-
-				if(opts.rowHandlerBeforeBind !== null) {
-					opts.rowHandlerBeforeBind.call(this, form.options.extRow, tempRowEleClone, data);
-				}
 
 				form.add(data, row);
 
