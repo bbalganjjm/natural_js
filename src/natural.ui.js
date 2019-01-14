@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.36.152
+ * Natural-UI v0.37.153
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "0.36.152";
+	N.version["Natural-UI"] = "0.37.153";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -2929,6 +2929,9 @@
 
 			if (N.isPlainObject(opts)) {
 				$.extend(this.options, opts);
+				if(N.type(this.options.data) === "array") {
+                    this.options.data = N(opts.data);
+                }
 				this.options.context = N(opts.context);
 			} else {
 				this.options.context = N(opts);
@@ -3665,7 +3668,7 @@
         			
         			// for rowHandlerBeforeBind of N.list and N.grid
                     if(opts.extObj.options.rowHandlerBeforeBind !== null) {
-                        opts.extObj.options.rowHandlerBeforeBind.call(opts.extObj, opts.extRow, opts.context, this.data(true)[0]);
+                        opts.extObj.options.rowHandlerBeforeBind.call(opts.extObj, opts.extRow, opts.context, opts.data[opts.row]);
                     }
         		}
 
@@ -7066,6 +7069,22 @@
 				// notify
 				return this;
 			},
+			select : function(val) {
+			    var opts = this.options;
+			    if(val !== undefined) {
+			        opts.context.find(".tree_" + val + "__ > .tree_key__").trigger("click.tree");
+			        return this;
+			    } else {
+			        var activeNodeEle = opts.context.find(".tree_key__.tree_active__");
+			        if(opts.data.length > 0 && activeNodeEle.length > 0) {
+			            return opts.data[activeNodeEle.parent("li").data("index")][opts.val];
+			        }
+			    }
+			},
+			check : function(vals) {
+			    // TODO
+			    return this;
+            },
 			openAll : function() {
 				N("li.tree_close__:not(.tree_last_node__)").removeClass("tree_close__").addClass("tree_open__");
 				return this;
