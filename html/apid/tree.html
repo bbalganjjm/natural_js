@@ -181,6 +181,15 @@
 				</label>
 			</td>
 		</tr>
+        <tr>
+            <th>select</th>
+            <th><label for="nodeVal">arguments[0]</label></th>
+            <td>
+                <input id="nodeVal" type="text" value="4" />
+                <label for="nodeVal" lang="ko_KR">선택 할 노드 값(Value)을 입력 합니다.</label>
+                <label for="nodeVal" lang="en_US">Input the node value to select.</label>
+            </td>
+        </tr>
 		<tr>
 			<th>closeAll</th>
 			<th><label for="isFirstNodeOpen">arguments[0]</label></th>
@@ -200,6 +209,7 @@
 			<span lang="en_US">Create Tree</span>
 		</a>
 		<a id="btnBind" href="#" data-opts='{ "color" : "gray", "size": "large", "disable": true }'>bind</a>
+        <a id="btnSelect" href="#" data-opts='{ "color" : "gray", "size": "large", "disable": true }'>select</a>
 		<a id="btnData" href="#" data-opts='{ "color" : "gray", "size": "large", "disable": true }'>data</a>
 		<a id="btnOpenAll" href="#" data-opts='{ "color" : "gray", "size": "large", "disable": true }'>openAll</a>
 		<a id="btnCloseAll" href="#" data-opts='{ "color" : "gray", "size": "large", "disable": true }'>closeAll</a>
@@ -249,6 +259,7 @@
 
 	            N("#btnInit", view).instance("button").disable();
 	            N("#btnBind", view).instance("button").enable();
+	            N("#btnSelect", view).instance("button").enable();
 	            N("#btnOpenAll", view).instance("button").enable();
 	            N("#btnCloseAll", view).instance("button").enable();
 	            N("#btnData", view).instance("button").enable();
@@ -257,6 +268,15 @@
 	    	N("#btnBind", view).click(function(e) {
 	    		e.preventDefault();
 	    		tree.bind();
+	        });
+	    	
+	    	N("#btnSelect", view).click(function(e) {
+	    		e.preventDefault();
+	    		if(N.string.trimToUndefined(N("#nodeVal", view).val())) {
+    	    		tree.select(N.string.trimToUndefined(N("#nodeVal", view).val()));
+	    		} else {
+	    		    N(window).alert(tree.select()).show();
+	    		}
 	        });
 
 	    	N("#btnOpenAll", view).click(function(e) {
