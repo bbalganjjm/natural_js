@@ -33,7 +33,7 @@ The dependencies for each package are as follows.
 *   When using only Natural-UI : natural.core.js, natural.data.js, natural.ui.js
 *   When using only Natural-UI.Shell : natural.core.js, natural.ui.js, natural.ui.shell.js
 
-Importing only natural.js.min.js does not have a significant impact on performance, as natural.js.min.js has a combined capacity of 195kb for all Natural-JS libraries.
+Importing only natural.js.min.js does not have a significant impact on performance, as natural.js.min.js has a combined capacity of 210kb for all Natural-JS libraries.
 
 Now that you have imported the library, let's set up the environment for running Natural-JS.
 
@@ -83,7 +83,7 @@ So now we have finished setting up the environment, so let's start development i
 
 Natural-JS has a simple source code composition rule to separate development areas and design areas within a source code of page block and to guarantee the scope between elements and scripts. It is not so difficult. You just need to separate the view area and the Controller area as shown below and arrange them in order.
 
-[c:/natural_js/test_html.html]
+[c:/natural\_js/test\_html.html]
 
     <!-- View Context -->
     <div id="viewCont">
@@ -105,10 +105,10 @@ Natural-JS has a simple source code composition rule to separate development are
 
 All pages or page blocks based on Natural-ARCHITECTURE must be composed of the above code form.
 
-Save the above codes as "c:/natural_js/test_html.html" and save the codes below as "c:/natural_js/index.html".
-I will load the "c:/natural_js/test_html.html" file from the "c:/natural_js/index.html" file.
+Save the above codes as "c:/natural\_js/test\_html.html" and save the codes below as "c:/natural\_js/index.html".
+I will load the "c:/natural\_js/test\_html.html" file from the "c:/natural_js/index.html" file.
 
-[c:/natural_js/index.html]
+[c:/natural\_js/index.html]
 
     <!DOCTYPE html>
     <html>
@@ -139,7 +139,7 @@ I will load the "c:/natural_js/test_html.html" file from the "c:/natural_js/inde
 
 $(document).ready is a function provided by jQuery that executes the callback function specified by the argument after the DOM elements of the loaded HTML file are loaded into the browser.
 
-Now I will load the contents of the test_html.html file created above on the main page. Natural-JS uses the Communicator(N.comm) module to send and receive data and files with the server. For more information about Communicator, see [API / DEMO> Natural-ARCHITECTURE> Communicator Tab] screen.
+Now I will load the contents of the test\_html.html file created above on the main page. Natural-JS uses the Communicator(N.comm) module to send and receive data and files with the server. For more information about Communicator, see [API / DEMO> Natural-ARCHITECTURE> Communicator Tab] screen.
 Change the contents of the callback argument of the $(document).ready() function to the syntax below.
 
     ...
@@ -158,9 +158,9 @@ First, It need a server to serve data in json format, but in this document, I wi
 
 [http://www.json.org](http://www.json.org)
 
-Now create and save a data file (c: /natural_js/test_data.json) consisting of the following JSON string.
+Now create and save a data file (c: /natural\_js/test\_data.json) consisting of the following JSON string.
 
-[c:/natural_js/test_data.json]
+[c:/natural\_js/test\_data.json]
 
     [
       {
@@ -245,9 +245,9 @@ Most web browsers are blocked from referencing local files with Ajax. But Firefo
         }
     });
 
-Let's open the pre-written "c: /natural_js/index.html" file in a web browser. The "c:/natural_js/test_html.html" file will be loaded by the index page and the init function of the object specified in the argument of N.cont will be executed.
+Let's open the pre-written "c: /natural\_js/index.html" file in a web browser. The "c:/natural\_js/test_html.html" file will be loaded by the index page and the init function of the object specified in the argument of N.cont will be executed.
 Then the above code will be executed and the contents of the file loaded into the div element with id as "result" will be displayed.
-If you have a server that can query data, you can enter the URL of the service instead of "c:/natural_js/test_data.json".
+If you have a server that can query data, you can enter the URL of the service instead of "c:/natural\_js/test\_data.json".
 If you want to send a parameter to the server, you should put the JSON type parameter as an argument of N() function as follows. That way, the value will be sent to the server in the HTTP Request Body.
 
 To convert a parameter string of JSON type to an object such as Map or List on the server, you must have a [JSON conversion module](http://www.json.org).
@@ -269,4 +269,4 @@ Please refer to the [Natural-ARCHITECTURE API Documents](html/refr/refr0103.html
 
 Now that you know the basic structure, let's try to develop it with reference to the [API document](html/refr/refr0101.html).
 
-This site is developed with Natural-JS. A reference to the source code of this site can be found in [Github's "gh-pages" branch](https://github.com/bbalganjjm/natural_js/tree/gh-pages).
+This site is developed with Natural-JS. A reference to the source code of this site can be found in [Github's "gh-pages" branch](https://github.com/bbalganjjm/natural\_js/tree/gh-pages).
