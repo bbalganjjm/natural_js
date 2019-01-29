@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.37.153
+ * Natural-UI v0.37.155
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "0.37.153";
+	N.version["Natural-UI"] = "0.37.155";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -1287,6 +1287,9 @@
 
 			try {
 				$.extend(this.options, N.context.attr("ui").datepicker);
+				if(opts && opts.monthonly === true && N.context.attr("ui").datepicker.monthonlyOpts) {
+				    $.extend(this.options, N.context.attr("ui").datepicker.monthonlyOpts);
+                }
 			} catch (e) {
 				throw N.error("N.datepicker", e);
 			}
@@ -1353,7 +1356,8 @@
 
 					var value = opts.context.val();
 					var keyCode = e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode);
-
+					var format = (!opts.monthonly ? N.context.attr("data").formatter.date.Ymd() : N.context.attr("data").formatter.date.Ym()).replace(/[^Y|^m|^d]/g, "");
+					
 					// when press the number keys
 					if (value.length%2 === 0) {
 						var dateStrArr = N.date.strToDateStrArr(value, format);
@@ -1368,11 +1372,16 @@
         					opts.context.alert(N.message.get(opts.message, "monthNaN")).show();
     						opts.context.val(value.replace(dateStrStrArr[1], ""));
         					return false;
-        				} else if(!opts.monthonly && dateStrStrArr[2].length === 2 && (dateStrArr[2] < 1 || dateStrArr[2] > parseInt(gEndDate))) {
-        					opts.context.alert(N.message.get(opts.message, "dayNaN", [String(parseInt(gEndDate))])).show();
+        				} else if(!opts.monthonly && dateStrStrArr[2].length === 2 && (dateStrArr[2] < 1 || dateStrArr[2] > parseInt(opts.gEndDate))) {
+        					opts.context.alert(N.message.get(opts.message, "dayNaN", [String(parseInt(opts.gEndDate))])).show();
     						opts.context.val(value.replace(dateStrStrArr[2], ""));
         					return false;
         				}
+						
+						var yearsPanel = opts.contents.find(".datepicker_years_panel__");
+	                    var monthsPanel = opts.contents.find(".datepicker_months_panel__");
+	                    var daysPanel = opts.contents.find(".datepicker_days_panel__");
+	                    
 	        			if((format.length === 3 && format.indexOf("md") > -1) || format.length === 2) {
 	        				Datepicker.selectItems(opts, value, format, yearsPanel, monthsPanel, daysPanel);
 	        			} else {
@@ -1714,7 +1723,6 @@
 				}
 
 				var monthItem = $('<div></div>');
-				var gEndDate;
 				monthsPanel.append(monthItem.clone().addClass("datepicker_month_title__").text(N.message.get(opts.message, "month")));
 				// render month items
 				for(i=1;i<=12;i++) {
@@ -1814,9 +1822,9 @@
 						daysPanel.empty();
 						var endDateCls = N.date.strToDate(N.string.lpad(selYearStr, 4, "0") +  N.string.lpad(String(parseInt($(this).text())+1), 2, "0") + "00", "Ymd");
 						var endDate = endDateCls.obj.getDate();
-						gEndDate = endDate;
+						opts.gEndDate = endDate;
 						if(format !== "Ymd") {
-							gEndDate = 31;
+							opts.gEndDate = 31;
 						}
 						endDateCls.obj.setDate(1);
 						var startDay = endDateCls.obj.getDay();
