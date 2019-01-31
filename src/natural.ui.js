@@ -7094,11 +7094,11 @@
 			    return this;
             },
 			openAll : function() {
-				N("li.tree_close__:not(.tree_last_node__)").removeClass("tree_close__").addClass("tree_open__");
+			    this.options.context.find("li.tree_close__:not(.tree_last_node__)").removeClass("tree_close__").addClass("tree_open__");
 				return this;
 			},
 			closeAll : function(isFirstNodeOpen) {
-				N("li.tree_open__:not(.tree_last_node__)").removeClass("tree_open__").addClass("tree_close__");
+			    this.options.context.find("li.tree_open__:not(.tree_last_node__)").removeClass("tree_open__").addClass("tree_close__");
 				if(isFirstNodeOpen) {
 					this.options.context.find("li.tree_close__:first").removeClass("tree_close__").addClass("tree_open__");
 				}
