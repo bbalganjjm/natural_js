@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.37.155
+ * Natural-UI v0.37.156
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "0.37.155";
+	N.version["Natural-UI"] = "0.37.156";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -5798,8 +5798,8 @@
 								filterItemEle.find(".data_filter_cnt__").text("(" + String(length) + ")");
 							} else {
 								filterItemEle = $('<li class="data_filter_item_' + String(itemSeq) + '__">'
-										+ '<label><input type="checkbox" checked="checked" class="data_filter_checkbox__">'
-										+ k.replace(id + "_", "") + '<span class="data_filter_cnt__">(' + String(length) + ')</span></label></li>');
+										+ '<label><input type="checkbox" checked="checked" class="data_filter_checkbox__"><span class="data_filter_item_name__">'
+										+ k.replace(id + "_", "") + '</span><span class="data_filter_cnt__">(' + String(length) + ')</span></label></li>');
 
 								filterItemEle.find(".data_filter_checkbox__")
 								.data("rowIdxs", filterKeys[k])
