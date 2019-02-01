@@ -5697,7 +5697,7 @@
 									+			'<span>' + N.message.get(opts.message, "search") + '</span>'
 									+		'</a>'
 									+ 	'</div>'
-									+ 	'<div class="data_filter_checkall_box__"><label><input type="checkbox" checked="checked">' + N.message.get(opts.message, "selectAll") + '<span class="data_filter_total_cnt__">(' + opts.data.length + ')</span></label></div>'
+									+ 	'<div class="data_filter_checkall_box__"><label><input type="checkbox" checked="checked"><span class="data_filter_select_all__">' + N.message.get(opts.message, "selectAll") + '</span><span class="data_filter_total_cnt__">(' + opts.data.length + ')</span></label></div>'
 									+ 	'<ul class="data_filter_list__"></ul>'
 									+ '</div>')
 							.css("z-index", 1)
@@ -5805,12 +5805,12 @@
 								.data("rowIdxs", filterKeys[k])
 								.data("length", length)
 								.bind("click.grid.dataFilter, do.grid.dataFilter", function() { // TODO Change "on" method
-									// Update clicked checkbox(filter) row count
+									// Update the count of rows for each filter item
 									var thisEle = $(this);
 									if(thisEle.is(":checked")) {
-										thisEle.parent().children("span").text("(" + String(thisEle.data("length")) + ")");
+										thisEle.parent().children(".data_filter_cnt__").text("(" + String(thisEle.data("length")) + ")");
 									} else {
-										thisEle.parent().children("span").text("(0)");
+										thisEle.parent().children(".data_filter_cnt__").text("(0)");
 									}
 
 									// dataFilterListUnCheckedEles is current thead's cell unchecked data filter list
