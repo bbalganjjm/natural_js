@@ -819,9 +819,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	float: left;
 	margin-right: 1px;
 	padding: 4px;
-	border-top: 1px solid #66BB6A;
-	border-left: 1px solid #66BB6A;
-	border-right: 1px solid #66BB6A;
+    border: 1px solid #66BB6A;
 	cursor: pointer;
 	min-width: 80px;
 	font-size: 12px;
@@ -865,6 +863,10 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	transition: opacity 0.3s ease;
 }
 
+.tab__>ul {
+    margin-bottom: -1px;    
+}
+
 .tab__>ul li.tab_disabled__ {
 	will-change: opacity;
 	transform: translateZ(0)\0; /* for ie 8+ */
@@ -880,13 +882,8 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .tab__>ul>li.tab_active__ {
-	background-color: #66BB6A;
-	background-image: none;
-}
-
-.tab__>ul>li.tab_active__>a {
-	color : #fff;
-	text-shadow: 1px 1px #005000;
+	background-color: #FFFFFF;
+	border-bottom: 1px solid #FFFFFF;
 }
 
 .tab__>div {
