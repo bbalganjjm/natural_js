@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.37.157
+ * Natural-UI v0.37.158
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "0.37.157";
+	N.version["Natural-UI"] = "0.37.158";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -2282,9 +2282,20 @@
 					opts.msg = opts.context;
 
 					// To prevent the onShowG event from running when popup.
-					opts.onShowG = null;
+					opts.onShowG = null; // DEPRECATED
 
+					var opener;
+					if(opts.opener) {
+					    opener = opts.opener;
+	                    opts.opener = undefined;					    
+					}
+					
 					self.alert = N(window).alert(opts);
+					
+					if(opener) {
+					    opts.opener = opener;
+					    opener = undefined;
+					}
 					self.alert.options.msgContext.addClass("popup_overlay__");
 					self.alert.options.msgContents.addClass("popup__");
 
@@ -2332,6 +2343,7 @@
 
 				var onOpenProcFn__ = function() {
 					// execute "onOpenG" event handler
+				    // DEPRECATED
 					if(opts.onOpenG !== null) {
 						opts.onOpenG.call(self);
 					}
