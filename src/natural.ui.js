@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.37.158
+ * Natural-UI v0.37.162
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "0.37.158";
+	N.version["Natural-UI"] = "0.37.162";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -3144,6 +3144,7 @@
 				revert : false,
 				cache : true,
 				unbind : true,
+				tpBind : false,
 				onBeforeBindValue : null,
 				onBeforeBind : null,
 				onBind : null,
@@ -3332,7 +3333,7 @@
 										}
 
 										if(N.isEmptyObject(ele.events("focusout", "form.validate"))) {
-											ele.bind("focusout.form.validate", function() {
+											ele[opts.tpBind ? "tpBind" : "bind"]("focusout.form.validate", function() {
 												var currEle = $(this);
 					                            if (!currEle.prop("disabled") && !currEle.prop("readonly") && opts.validate) {
 				                            		currEle.trigger("validate.validator");
@@ -3344,7 +3345,7 @@
 
 								//dataSync
 								if(N.isEmptyObject(ele.events("focusout", "dataSync.form"))) {
-									ele.bind("focusout.form.dataSync", function(e) {
+									ele[opts.tpBind ? "tpBind" : "bind"]("focusout.form.dataSync", function(e) {
 										var currEle = $(this);
 										var currVal = currEle.val();
 
@@ -3377,7 +3378,7 @@
 
 								//Enter key event
 								if(N.isEmptyObject(ele.events("keyup", "dataSync.form"))) {
-									 ele.bind("keyup.form.dataSync", function(e) {
+									 ele[opts.tpBind ? "tpBind" : "bind"]("keyup.form.dataSync", function(e) {
 			                        	if ((e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode)) == 13) {
 			                        		e.preventDefault();
 			                            	$(this).trigger("focusout.form.validate");
@@ -3393,7 +3394,7 @@
 										N(opts.data).formatter(opts.fRules !== null ? opts.fRules : ele).format(opts.row);
 
 										if(N.isEmptyObject(ele.events("focusin", "form.unformat"))) {
-											ele.bind("focusin.form.unformat", function() {
+											ele[opts.tpBind ? "tpBind" : "bind"]("focusin.form.unformat", function() {
 												var currEle = $(this);
 					                            if (!currEle.prop("disabled") && !currEle.prop("readonly") && (!opts.validate || (opts.validate && !currEle.hasClass("validate_false__")))) {
 					                                currEle.trigger("unformat.formatter");
@@ -3402,7 +3403,7 @@
 										}
 
 										if(N.isEmptyObject(ele.events("focusout", "form.format"))) {
-											ele.bind("focusout.form.format", function() {
+											ele[opts.tpBind ? "tpBind" : "bind"]("focusout.form.format", function() {
 												var currEle = $(this);
 					                            if (!currEle.prop("disabled") && !currEle.prop("readonly") && (!opts.validate || (opts.validate && !currEle.hasClass("validate_false__")))) {
 					                            	currEle.trigger("format.formatter");
@@ -3431,7 +3432,7 @@
 
 								//dataSync
 								if(N.isEmptyObject(ele.events("change", "dataSync.form"))) {
-									ele.bind("change.form.dataSync", function(e) {
+									ele[opts.tpBind ? "tpBind" : "bind"]("change.form.dataSync", function(e) {
 										var currEle = $(this);
 										var currVals = currEle.vals();
 
@@ -3504,13 +3505,17 @@
 
 								//dataSync
 								eles.unbind("click.form.dataSync select.form.dataSync");
-								eles.data("eles", eles).tpBind("click.form.dataSync select.form.dataSync", function(e) {
+								eles[opts.tpBind ? "tpBind" : "bind"]("click.form.dataSync select.form.dataSync", function(e) {
 									var currEle = $(this);
+									var currEles = opts.context.find("[name='" + currEle.attr("id") + "']");
+									if(currEles.length === 0) {
+									    currEles = $(this);
+		                            }
 									var currKey = currEle.attr("name");
 									if(currKey === undefined) {
 										currKey = currEle.attr("id");
 									}
-									var currVals = $(this).data("eles").vals();
+									var currVals = currEles.vals();
 
 									// for val method
 									if(vals !== opts.data[opts.row]) {
@@ -3525,7 +3530,7 @@
 										if (vals.rowStatus !== "insert" && vals.rowStatus !== "delete") {
 											vals.rowStatus = "update";
 											// add data changed flag
-											$(this).data("eles").addClass("data_changed__");
+											currEles.addClass("data_changed__");
 											if(!opts.context.hasClass("row_data_changed__")) {
 												opts.context.addClass("row_data_changed__");
 											}
@@ -4033,6 +4038,7 @@
 				checkScroll : true,
 				validateScroll : true,
 				cache : true,
+				tpBind : false,
 				rowHandlerBeforeBind : null,
 				rowHandler : null,
 				onSelect : null,
@@ -4474,7 +4480,8 @@
 					extObj : this,
 					extRow : row === undefined ? (opts.addTop ? 0 : opts.data.length) : row,
 					addTop : opts.addTop,
-					revert : opts.revert
+					revert : opts.revert,
+					tpBind : opts.tpBind
 				})
 
 				form.add(data, row);
@@ -4659,6 +4666,7 @@
 				checkScroll : true,
 				validateScroll : true,
 				cache : true,
+				tpBind : false,
 				rowHandlerBeforeBind : null,
 				rowHandler : null,
 				onSelect : null,
@@ -6310,7 +6318,8 @@
 					extObj : this,
 					extRow : row === undefined ? (opts.addTop ? 0 : opts.data.length) : row,
 					addTop : opts.addTop,
-					revert : opts.revert
+					revert : opts.revert,
+					tpBind : opts.tpBind
 				});
 
 				form.add(data, row);
