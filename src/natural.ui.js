@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.37.162
+ * Natural-UI v0.37.165
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "0.37.162";
+	N.version["Natural-UI"] = "0.37.165";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -3232,6 +3232,145 @@
 			/**
 			 * arguments[2]... arguments[n] are the columns to be bound.
 			 */
+			bindEvents : {
+			    /**
+			     * validate
+			     */
+			    validate : function(ele, opts, type, isTextInput) {
+                    if(ele.data("validate") !== undefined) {
+                        if (type !== "hidden") {
+                            // remove validator's dregs for rebind
+                            ele.removeClass("validate_false__");
+                            if(ele.instance("alert") !== undefined) {
+                                ele.instance("alert").remove();
+                                ele.removeData("alert__");
+                            }
+
+                            if(isTextInput || (!isTextInput && opts.validate)) {
+                                N().validator(opts.vRules !== null ? opts.vRules : ele);
+                            }
+                            
+                            if(isTextInput && N.isEmptyObject(ele.events("focusout", "form.validate"))) {
+                                ele[opts.tpBind ? "tpBind" : "on"]("focusout.form.validate", function() {
+                                    var currEle = $(this);
+                                    if (!currEle.prop("disabled") && !currEle.prop("readonly") && opts.validate) {
+                                        currEle.trigger("validate.validator");
+                                    }
+                                    
+                                    currEle = undefined;
+                                });
+                            }
+                        }
+                    }
+			    },
+			    /**
+			     * dataSync
+			     */
+			    dataSync : function(ele, opts, vals, eleType) {
+			        var self = this;
+			        
+			        var eventName = "focusout";
+			        if(eleType === "select") {
+			            eventName = "change";
+			        }
+			        
+                    if(N.isEmptyObject(ele.events(eventName, "dataSync.form"))) {
+                        ele[opts.tpBind ? "tpBind" : "on"](eventName + ".form.dataSync", function(e) {
+                            var currEle = $(this);
+                            var currVal = currEle.val();
+                            
+                            // for val method
+                            if(vals !== opts.data[opts.row]) {
+                                vals = opts.data[opts.row];
+                            }
+
+                            if (String(vals[currEle.attr("id")]) !== currVal) {
+                                if (!currEle.prop("disabled") && !currEle.prop("readonly") && (!opts.validate || (opts.validate && !currEle.hasClass("validate_false__")))) {
+                                    // update dataset value
+                                    vals[currEle.attr("id")] = currVal;
+
+                                    // change row status
+                                    if (vals.rowStatus !== "insert" && vals.rowStatus !== "delete") {
+                                        vals.rowStatus = "update";
+                                        // add data changed flag
+                                        currEle.addClass("data_changed__");
+                                        if(!opts.context.hasClass("row_data_changed__")) {
+                                            opts.context.addClass("row_data_changed__");
+                                        }
+                                    }
+
+                                    // notify data changed
+                                    N.ds.instance(opts.extObj !== null ? opts.extObj : self).notify(opts.extRow > -1 ? opts.extRow : opts.row, currEle.attr("id"));
+                                }
+                            }
+                            
+                            currEle = currVal = undefined;
+                        });
+                    }
+                    
+                    eventName = undefined;
+			    },
+			    /**
+			     * Enter key event
+			     */
+			    enterKey : function(ele, opts) {
+                    if(N.isEmptyObject(ele.events("keyup", "dataSync.form"))) {
+                         ele[opts.tpBind ? "tpBind" : "on"]("keyup.form.dataSync", function(e) {
+                            if ((e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode)) == 13) {
+                                e.preventDefault();
+                                $(this).trigger("focusout.form.validate");
+                                // notify data changed
+                                $(this).trigger("focusout.form.dataSync");
+                            }
+                        });
+                    }
+			    },
+			    /**
+			     * format
+			     */
+			    format : function(ele, opts, type, vals, key) {
+                    if(ele.data("format") !== undefined) {
+                        if (type !== "password" && type !== "hidden" && type !== "file") {
+                            N(opts.data).formatter(opts.fRules !== null ? opts.fRules : ele).format(opts.row);
+
+                            var eventNames = ["focusin", "focusout"];
+                            var formats = ["unformat", "format"];
+                            var bindMethod = "on";
+                            
+                            if(opts.tpBind) {
+                                eventNames.reverse();
+                                formats.reverse();
+                                bindMethod = "tpBind";
+                            }
+                            
+                            if(N.isEmptyObject(ele.events(eventNames[0], "form." + formats[0]))) {
+                                ele[bindMethod](eventNames[0] + ".form." + formats[0], function() {
+                                    var currEle = $(this);
+                                    if (!currEle.prop("disabled") && !currEle.prop("readonly") && (!opts.validate || (opts.validate && !currEle.hasClass("validate_false__")))) {
+                                        currEle.trigger(formats[0] + ".formatter");
+                                    }
+                                    currEle = undefined;
+                                });
+                            }
+
+                            if(N.isEmptyObject(ele.events(eventNames[1], "form." + formats[1]))) {
+                                ele[bindMethod](eventNames[1] + ".form." + formats[1], function() {
+                                    var currEle = $(this);
+                                    if (!currEle.prop("disabled") && !currEle.prop("readonly") && (!opts.validate || (opts.validate && !currEle.hasClass("validate_false__")))) {
+                                        currEle.trigger(formats[1] + ".formatter");
+                                    }
+                                    currEle = undefined;
+                                });
+                            }
+                            
+                            eventNames = bindMethod = undefined;
+                        }
+                    } else {
+                        // put value
+                        ele.val(vals[key] != null ? String(vals[key]) : "");
+                    }
+			    }
+			},
 			bind : function(row, data) {
 				var opts = this.options;
 
@@ -3320,150 +3459,28 @@
 							tagName = ele.get(0).tagName.toLowerCase();
 							type = N.string.trimToEmpty(ele.attr("type")).toLowerCase();
 							if (UI.utils.isTextInput(tagName, type)) {
-								//validate
-								if(ele.data("validate") !== undefined) {
-									if (type !== "hidden") {
-										N().validator(opts.vRules !== null ? opts.vRules : ele);
+							    if(opts.tpBind) {
+							        self.bindEvents.format.call(self, ele, opts, type, vals, key);
+							        
+							        self.bindEvents.enterKey.call(self, ele, opts);
+							        
+							        self.bindEvents.dataSync.call(self, ele, opts, vals);
+							        
+							        self.bindEvents.validate.call(self, ele, opts, type, true);
+							    } else {
+							        self.bindEvents.validate.call(self, ele, opts, type, true);
 
-										// remove validator's dregs for rebind
-										ele.removeClass("validate_false__");
-										if(ele.instance("alert") !== undefined) {
-											ele.instance("alert").remove();
-											ele.removeData("alert__");
-										}
+							        self.bindEvents.dataSync.call(self, ele, opts, vals);
 
-										if(N.isEmptyObject(ele.events("focusout", "form.validate"))) {
-											ele[opts.tpBind ? "tpBind" : "bind"]("focusout.form.validate", function() {
-												var currEle = $(this);
-					                            if (!currEle.prop("disabled") && !currEle.prop("readonly") && opts.validate) {
-				                            		currEle.trigger("validate.validator");
-					                            }
-					                        });
-										}
-									}
-								}
-
-								//dataSync
-								if(N.isEmptyObject(ele.events("focusout", "dataSync.form"))) {
-									ele[opts.tpBind ? "tpBind" : "bind"]("focusout.form.dataSync", function(e) {
-										var currEle = $(this);
-										var currVal = currEle.val();
-
-										// for val method
-										if(vals !== opts.data[opts.row]) {
-											vals = opts.data[opts.row];
-										}
-
-										if (String(vals[currEle.attr("id")]) !== currVal) {
-											if (!currEle.prop("disabled") && !currEle.prop("readonly") && (!opts.validate || (opts.validate && !currEle.hasClass("validate_false__")))) {
-												// update dataset value
-												vals[currEle.attr("id")] = currVal;
-
-												// change row status
-												if (vals.rowStatus !== "insert" && vals.rowStatus !== "delete") {
-													vals.rowStatus = "update";
-													// add data changed flag
-													currEle.addClass("data_changed__");
-													if(!opts.context.hasClass("row_data_changed__")) {
-														opts.context.addClass("row_data_changed__");
-													}
-												}
-
-												// notify data changed
-												N.ds.instance(opts.extObj !== null ? opts.extObj : self).notify(opts.extRow > -1 ? opts.extRow : opts.row, currEle.attr("id"));
-											}
-                                        }
-									});
-								}
-
-								//Enter key event
-								if(N.isEmptyObject(ele.events("keyup", "dataSync.form"))) {
-									 ele[opts.tpBind ? "tpBind" : "bind"]("keyup.form.dataSync", function(e) {
-			                        	if ((e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode)) == 13) {
-			                        		e.preventDefault();
-			                            	$(this).trigger("focusout.form.validate");
-			                            	// notify data changed
-		                            		$(this).trigger("focusout.form.dataSync");
-			                            }
-			                        });
-								}
-
-			                    //format
-		                        if(ele.data("format") !== undefined) {
-									if (type !== "password" && type !== "hidden" && type !== "file") {
-										N(opts.data).formatter(opts.fRules !== null ? opts.fRules : ele).format(opts.row);
-
-										if(N.isEmptyObject(ele.events("focusin", "form.unformat"))) {
-											ele[opts.tpBind ? "tpBind" : "bind"]("focusin.form.unformat", function() {
-												var currEle = $(this);
-					                            if (!currEle.prop("disabled") && !currEle.prop("readonly") && (!opts.validate || (opts.validate && !currEle.hasClass("validate_false__")))) {
-					                                currEle.trigger("unformat.formatter");
-					                            }
-					                        });
-										}
-
-										if(N.isEmptyObject(ele.events("focusout", "form.format"))) {
-											ele[opts.tpBind ? "tpBind" : "bind"]("focusout.form.format", function() {
-												var currEle = $(this);
-					                            if (!currEle.prop("disabled") && !currEle.prop("readonly") && (!opts.validate || (opts.validate && !currEle.hasClass("validate_false__")))) {
-					                            	currEle.trigger("format.formatter");
-					                            }
-					                        });
-										}
-									}
-								} else {
-									// put value
-									ele.val(vals[key] != null ? String(vals[key]) : "");
-								}
+							        self.bindEvents.enterKey.call(self, ele, opts);
+							        
+							        self.bindEvents.format.call(self, ele, opts, type, vals, key);
+							    }
 							} else if(tagName === "select") {
-								//validate
-								if(ele.data("validate") !== undefined) {
-									// remove validator's dregs for rebind
-									ele.removeClass("validate_false__");
-									if(ele.instance("alert") !== undefined) {
-										ele.instance("alert").remove();
-										ele.removeData("alert__");
-									}
+							    self.bindEvents.validate.call(self, ele, opts, type, false);
 
-									if (opts.validate) {
-										N().validator(opts.vRules !== null ? opts.vRules : ele);
-									}
-								}
-
-								//dataSync
-								if(N.isEmptyObject(ele.events("change", "dataSync.form"))) {
-									ele[opts.tpBind ? "tpBind" : "bind"]("change.form.dataSync", function(e) {
-										var currEle = $(this);
-										var currVals = currEle.vals();
-
-										// for val method
-										if(vals !== opts.data[opts.row]) {
-											vals = opts.data[opts.row];
-										}
-
-										if (vals[currEle.attr("id")] !== currVals) {
-											// update dataset value
-											vals[currEle.attr("id")] = currVals;
-
-											// change row status
-											if (vals.rowStatus !== "insert" && vals.rowStatus !== "delete") {
-												vals.rowStatus = "update";
-												// add data changed flag
-												currEle.addClass("data_changed__");
-												if(!opts.context.hasClass("row_data_changed__")) {
-													opts.context.addClass("row_data_changed__");
-												}
-											}
-
-
-											// notify data changed
-											if (!currEle.prop("disabled") && !currEle.prop("readonly")) {
-												N.ds.instance(opts.extObj !== null ? opts.extObj : self).notify(opts.extRow > -1 ? opts.extRow : opts.row, currEle.attr("id"));
-											}
-                                        }
-									});
-								}
-
+							    self.bindEvents.dataSync.call(self, ele, opts, vals, "select");
+							    
 								// select value
 								ele.vals(vals[key] != null ? String(vals[key]) : "");
 							} else if(tagName === "img") {
@@ -3504,8 +3521,8 @@
 								}
 
 								//dataSync
-								eles.unbind("click.form.dataSync select.form.dataSync");
-								eles[opts.tpBind ? "tpBind" : "bind"]("click.form.dataSync select.form.dataSync", function(e) {
+								eles.off("click.form.dataSync select.form.dataSync");
+								eles.on("click.form.dataSync select.form.dataSync", function(e) {
 									var currEle = $(this);
 									var currEles = opts.context.find("[name='" + currEle.attr("id") + "']");
 									if(currEles.length === 0) {
@@ -3620,8 +3637,8 @@
 
 							eles.removeClass("data_changed__");
 							if(eles.length > 0) {
-								// unbind events
-								eles.unbind("click.form.dataSync select.form.dataSync");
+								// off events
+								eles.off("click.form.dataSync select.form.dataSync");
 								// remove validator's dregs for rebind
 								ele.removeClass("validate_false__");
 								if(ele.instance("alert") !== undefined) {
