@@ -1,5 +1,5 @@
 /*!
- * Natural-CORE v0.17.17
+ * Natural-CORE v0.17.18
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -44,17 +44,19 @@
 		/**
 		 * Event bind to the top priority
 		 */
-		tpBind : function(event, handler) {
+		tpBind : function() {
+		    var args = arguments;
+		    var self = this;
 			return this.each(function() {
 				if($._data(this, "events") !== undefined) {
-		            $(this).bind(event, handler);
+				    self.on.apply(self, args);
 		            $(this).each(function() {
-		                var handlers = $._data(this, "events")[event.split(".")[0]];
+		                var handlers = $._data(this, "events")[args[0].split(".")[0]];
 		                var handler = handlers.pop();
 		                handlers.splice(0, 0, handler);
 		            });
 		        } else {
-		        	$(this).bind(event, handler);
+		            self.on.apply(self, args);
 		        }
 			});
 	    },
@@ -300,7 +302,7 @@
 		// N local variables
 		$.extend(N, {
 			version : {
-				"Natural-CORE" : "0.17.17"
+				"Natural-CORE" : "0.17.18"
 			},
 			/**
 			 * Set and get locale value
