@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.37.165
+ * Natural-UI v0.37.171
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "0.37.165";
+	N.version["Natural-UI"] = "0.37.171";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -127,6 +127,8 @@
 						opts.isBinding = false;
 						opts.context.dequeue("bind");
 					}
+					
+					tempRowEleClone = undefined;
 				},
 				select : function(compNm) {
 					var opts = this.options;
@@ -471,7 +473,8 @@
 					bottom : 0,
 					left : 0,
 					right : 0
-				}
+				},
+				saveMemory : false
 			};
 
 			try {
@@ -529,6 +532,11 @@
 				this.options.context.instance("alert", this);
 			}
 
+			if(this.options.saveMemory) {
+			    this.options.msg = null;
+			    this.options.vars = null;
+			}
+			
 			return this;
 		};
 
@@ -2166,7 +2174,8 @@
 					bottom : 0,
 					left : 0,
 					right : 0
-				}
+				},
+				saveMemory : false // false, "min", "max"
 			};
 
 			// To prevent "maximum call stack size exceeded" error in jQuery's extend method when define the opener option.
@@ -2255,6 +2264,10 @@
 				this.alert = N(window).alert(opts);
 				this.alert.options.msgContext.addClass("popup_overlay__");
 				this.alert.options.msgContents.addClass("popup__");
+				
+				if(opts.saveMemory) {
+                    this.alert.options.msg = null;
+                }
 			},
 			loadContent : function(callback) {
 				var opts = this.options;
@@ -2299,6 +2312,10 @@
 					self.alert.options.msgContext.addClass("popup_overlay__");
 					self.alert.options.msgContents.addClass("popup__");
 
+					if(opts.saveMemory) {
+	                    self.alert.options.msg = null;
+	                }
+					
 					// set request target
 					this.request.options.target = opts.context.parent();
 
@@ -3024,8 +3041,8 @@
 					if(opts.append) {
 	    				opts.context.append(defaultSelectEle);
 	    			}
-					opts.data.each(function(i, data) {
-						opts.context.append("<option value='" + data[opts.val] + "'>" + data[opts.key] + "</option>");
+					opts.data.each(function(i, rowData) {
+						opts.context.append("<option value='" + rowData[opts.val] + "'>" + rowData[opts.key] + "</option>");
 					});
 		    	} else if(opts.type === 3 || opts.type === 4) {
 		    		if(opts.context.filter(".select_template__").length === 0) {
@@ -3036,20 +3053,24 @@
 		    			} else if (opts.direction === "v") {
 		    				container.addClass("select_input_vertical__");
 		    			}
-		    			opts.data.each(function(i, data) {
-			    			var labelEle = $('<label class="select_input_label__ ' + id + "_" + String(i) + '__"></label>');
-			    			var labelTextEle = $('<span>' + data[opts.key] + '</span>');
+		    			var labelEle;
+		    			var labelTextEle
+		    			opts.data.each(function(i, rowData) {
+			    			labelEle = $('<label class="select_input_label__ ' + id + "_" + String(i) + '__"></label>');
+			    			labelTextEle = $('<span>' + rowData[opts.key] + '</span>');
 			    			if(i === 0) {
-			    				opts.template.attr("name", id).attr("value", data[opts.val]).addClass("select_input__ select_template__")
+			    				opts.template.attr("name", id).attr("value", rowData[opts.val]).addClass("select_input__ select_template__")
 			    					.wrap(labelEle)
 			    					.parent().append(labelTextEle).wrap(container);
 			    				container = opts.template.closest(".select_input_container__");
 			    			} else {
-			    				labelEle.append(opts.template.clone(true).attr("name", id).attr("value", data[opts.val]).removeAttr("id").removeClass("select_template__"));
+			    				labelEle.append(opts.template.clone(true).attr("name", id).attr("value", rowData[opts.val]).removeAttr("id").removeClass("select_template__"));
 			    				labelEle.append(labelTextEle);
 			    				container.append(labelEle);
 			    			}
 			    		});
+		    			labelEle = undefined;
+                        labelTextEle = undefined;
 		    		}
 		    	}
 		    	return this;
@@ -4521,6 +4542,8 @@
 					});
 				}
 
+				tempRowEleClone = undefined;
+				
 				return this;
 			},
 			remove : function(row) {
@@ -6363,6 +6386,8 @@
 					});
 				}
 
+				tempRowEleClone = undefined;
+				
 				return this;
 			},
 			remove : function(row) {
@@ -6931,7 +6956,7 @@
 
 			// register this to N.ds for realtime data synchronization
 			N.ds.instance(this, true);
-
+			
 			return this;
 		};
 
@@ -7001,10 +7026,10 @@
 				var isAleadyRoot = false;
 				N(opts.data).each(function(i, rowData) {
 					if(rowData[opts.level] === 1 || !isAleadyRoot) {
-						N('<li data-index="' + i + '" class="tree_' + rowData[opts.val] + '__ tree_level1_node__ tree_close__"><span class="tree_icon__"></span>' + (opts.checkbox ? '<span class="tree_check__"><input type="checkbox" /></span>' : '') + '<a class="tree_key__" href="#"><span>' + rowData[opts.key] + '</span></a><ul id="' + rowData[opts.val] + '" class="tree_level' + (opts.level !== null ? String(Number(rowData[opts.level]) + 1) : '') + '_folder__"></ul></li>').appendTo(rootNode);
+						rootNode.append('<li data-index="' + i + '" class="tree_' + rowData[opts.val] + '__ tree_level1_node__ tree_close__"><span class="tree_icon__"></span>' + (opts.checkbox ? '<span class="tree_check__"><input type="checkbox" /></span>' : '') + '<a class="tree_key__" href="#"><span>' + rowData[opts.key] + '</span></a><ul id="' + rowData[opts.val] + '" class="tree_level' + (opts.level !== null ? String(Number(rowData[opts.level]) + 1) : '') + '_folder__"></ul></li>');
 						isAleadyRoot = true;
 					} else {
-						N('<li data-index="' + i + '" class="tree_' + rowData[opts.val] + '__ tree_level' + N.string.trim(rowData[opts.level]) + '_node__ tree_close__"><span class="tree_icon__"></span>' + (opts.checkbox ? '<span class="tree_check__"><input type="checkbox" /></span>' : '') + '<a class="tree_key__" href="#"><span>' + rowData[opts.key] + '</span></a><ul id="' + rowData[opts.val] + '" class="tree_level' + (opts.level !== null ? String(Number(rowData[opts.level]) + 1) : '') + '_folder__"></ul></li>').appendTo(rootNode.find("#" + rowData[opts.parent]));
+						rootNode.find("#" + rowData[opts.parent]).append('<li data-index="' + i + '" class="tree_' + rowData[opts.val] + '__ tree_level' + N.string.trim(rowData[opts.level]) + '_node__ tree_close__"><span class="tree_icon__"></span>' + (opts.checkbox ? '<span class="tree_check__"><input type="checkbox" /></span>' : '') + '<a class="tree_key__" href="#"><span>' + rowData[opts.key] + '</span></a><ul id="' + rowData[opts.val] + '" class="tree_level' + (opts.level !== null ? String(Number(rowData[opts.level]) + 1) : '') + '_folder__"></ul></li>');
 					}
 				});
 
