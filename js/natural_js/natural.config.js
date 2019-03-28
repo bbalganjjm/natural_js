@@ -585,6 +585,10 @@
 			 * html 인식 여부
 			 */
 			html : true,
+            /**
+             * 메모리를 절약 해 준다.
+             */
+            "saveMemory" : true,
 			/**
 			 * 다국어 메시지
 			 */
@@ -604,7 +608,11 @@
 		},
 		"popup" : {
 			"draggable" : true,
-			"alwaysOnTop" : true
+			"alwaysOnTop" : true,
+            /**
+             * 메모리를 절약 해 준다.
+             */
+            "saveMemory" : true
 		},
 		"tab" : {
 			onActive : function(tabIdx, tabEle, contentEle, tabEles, contentEles) {
