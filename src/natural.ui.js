@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.37.171
+ * Natural-UI v0.37.173
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "0.37.171";
+	N.version["Natural-UI"] = "0.37.173";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -525,6 +525,11 @@
 
 				// set this instance to msgContext element
 				this.options.msgContents.instance("alert", this);
+				
+				if(this.options.saveMemory) {
+	                this.options.msg = null;
+	                this.options.vars = null;
+	            }
 			} else {
 				Alert.wrapInputEle.call(this);
 
@@ -532,11 +537,6 @@
 				this.options.context.instance("alert", this);
 			}
 
-			if(this.options.saveMemory) {
-			    this.options.msg = null;
-			    this.options.vars = null;
-			}
-			
 			return this;
 		};
 
@@ -5806,11 +5806,11 @@
 									filterListBox.find("li").show();
 									filterListBox.find("li :checkbox").prop("checked", true).each(function() {
 										chkboxEle = $(this);
-										chkboxEle.parent().children("span").text('(' + String(chkboxEle.data("length")) + ')')
+										chkboxEle.parent().children(".data_filter_cnt__").text('(' + String(chkboxEle.data("length")) + ')')
 									}).last().trigger("do.grid.dataFilter");
 								} else {
-									filterListBox.find("li :checkbox").prop("checked", false).last().trigger("do.grid.dataFilter");
-									filterListBox.find("li span").text("(0)");
+									filterListBox.find("li .data_filter_checkbox__").prop("checked", false).last().trigger("do.grid.dataFilter");
+									filterListBox.find("li .data_filter_cnt__").text("(0)");
 								}
 							});
 
