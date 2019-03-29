@@ -1,5 +1,5 @@
 /*!
- * Natural-UI.Shell v0.9.39, Works fine in IE9 and above
+ * Natural-UI.Shell v0.9.40, Works fine in IE9 and above
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-	N.version["Natural-UI.Shell"] = "0.9.39";
+	N.version["Natural-UI.Shell"] = "0.9.40";
 
 	$.fn.extend($.extend(N.prototype, {
 		notify : function(opts) {
@@ -22,13 +22,15 @@
 		// Notify
 		var Notify = N.notify = function(position, opts) {
 			if(arguments.length === 1 && !N.isEmptyObject(position)) {
-				return new N.notify(null, position);
+				return new N.notify(null, {
+				    position : position
+				});
 			}
 
 			this.options = {
 				position : {
 					top : 10,
-					right : 10
+					left : 10
 				},
 				container : N("body"),
 				context : null,
@@ -39,7 +41,7 @@
 			};
 
 			try {
-				$.extend(true, this.options, N.context.attr("ui.shell").notify);
+				$.extend(this.options, N.context.attr("ui.shell").notify);
 				
 				if(position) {
 					if(N.isWrappedSet(position)) {
@@ -84,7 +86,6 @@
 					// get maximum "z-index" value
 					opts.context.css("z-index", String(N.element.maxZindex(N(opts.alwaysOnTopCalcTarget)) + 1));
 				}
-				opts.context.css(opts.position);
 			}
 		});
 
@@ -96,6 +97,14 @@
 				var opts = this.options;
 				var self = this;
 
+				opts.context.css({
+				   top : "",
+				   right : "",
+				   bottom : "",
+				   left : ""
+				});
+				opts.context.css(opts.position);
+				
 				var msgEle = $(url !== undefined ? '<a href="#"></a>' : '<span></span>');
 				msgEle[ opts.html ? "html" : "text" ](msg);
 
