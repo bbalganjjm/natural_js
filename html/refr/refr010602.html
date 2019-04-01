@@ -194,17 +194,6 @@
 			</td>
 		</tr>
 		<tr>
-			<td>onEntireLoadXhrCaptureDuration</td>
-			<td>number</td>
-			<td>300</td>
-			<td></td>
-			<td>
-				<p>불러온 컨텐츠와 컨텐츠의 데이터들이 로딩되는 Communicator(N.comm) 요청 블록을 캐치하는 시간을 ms 단위로 지정</p>
-				<p class="alert">onEntireLoad 이벤트는 onEntireLoadXhrCaptureDuration 옵션값으로 지정한 시간안에 캐치된 Communicator 요청들이 완료되는 시점에 실행 됩니다.</p>
-				<p class="alert">entireLoadIndicator 옵션에 의한 로딩 인디케이터가 표시되는 시간과 entireLoadScreenBlock 옵션에 의한 컨텐츠가 블록되는 시간은 onBeforeEntireLoad 이벤트가 시작되는 시간 에서 onEntireLoad 이벤트가 완료되는 시간과 거의 일치 합니다.</p>
-			</td>
-		</tr>
-		<tr>
 			<td>alwaysOnTop</td>
 			<td>boolean</td>
 			<td>false</td>
@@ -267,7 +256,7 @@ onLoad : function(docId) {
 			<td>null</td>
 			<td></td>
 			<td style="max-width: 299px;">
-				<p>onEntireLoadXhrCaptureDuration 옵션값으로 지정한 시간안에 캐치된 모든 컨텐츠들의 Communicator 요청들이 완료되기 전 실행 되는 이벤트</p>
+				<p>컨텐츠 로딩 시 동시에 실행 되는 여러 서버 요청(N.comm.submit)들 중 최초 요청이 실행 되기 전 실행되는 이벤트</p>
 				<pre><code class="language-javascript">
 onBeforeEntireLoad : function(docId) {
 	// docId : Document Id
@@ -275,8 +264,25 @@ onBeforeEntireLoad : function(docId) {
 	// get document info
 	var doc = this.doc(docId);
 }</code></pre>
-				<p class="alert">다른 컨텐츠들의 N.comm 의 요청을 계속 캐치 하므로 로딩 후 에도 Communicator 요청이 일어나면 실행 됩니다.</p>
-				<p class="alert">컨텐츠 로딩 전 최초 한번은 이벤트가 컨텐츠가 로딩되기 전에 실행 되므로 cont 메서드로 컨텐츠의 Controller 를 가져 올 수 없습니다.</p>
+				<p class="alert">컨텐츠 로딩 전 최초 한번은 컨텐츠가 로딩되기 전에 이벤트가 실행 되므로 cont 메서드로 컨텐츠의 Controller 를 가져 올 수 없습니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>onErrorEntireLoad</td>
+			<td>function</td>
+			<td>null</td>
+			<td></td>
+			<td style="max-width: 299px;">
+				<p>컨텐츠 로딩 시 동시에 실행 되는 여러 서버 요청(N.comm.submit)들 중 에러가 발생 했을때 실행되는 이벤트</p>
+				<pre><code class="language-javascript">
+onErrorEntireLoad : function(e, request, xhr, textStatus, callback) {
+	// e(arguments[0]) : ErrorThrown
+    // request(arguments[1]) : Communicator.request
+    // xhr(arguments[2]) : jQuery XMLHTTORequest
+    // textStatus(arguments[3]) : "success"(submit 콜백에서 에러 발생 시) 또는 "error"(서버에서 오류 발생 시)
+    // callback(arguments[4]) : textStatus 값이 "success" 일때 submit 메서드의 인자로 지정한 콜백 함수
+}</code></pre>
+                <p class="alert">onErrorEntireLoad의 이벤트 핸들러 함수는 N.comm.error 메소드의 callback 과 같습니다.</p>
 			</td>
 		</tr>
 		<tr>
@@ -285,7 +291,7 @@ onBeforeEntireLoad : function(docId) {
 			<td>null</td>
 			<td></td>
 			<td style="max-width: 299px;">
-				<p>onEntireLoadXhrCaptureDuration 옵션값으로 지정한 시간안에 캐치된 모든 컨텐츠들의 Communicator 요청들이 완료된 후 실행 되는 이벤트</p>
+				<p>컨텐츠 로딩 시 동시에 실행 되는 여러 서버 요청(N.comm.submit)들이 모두 완료 되었을 때 실행되는 이벤트</p>
 				<pre><code class="language-javascript">
 onEntireLoad : function(docId) {
 	// docId : Document Id
@@ -297,7 +303,6 @@ onEntireLoad : function(docId) {
 	var docView = this.cont(docId).view;
 	var docRequest = this.cont(docId).request;
 }</code></pre>
-				<p class="alert">다른 컨텐츠들의 N.comm 의 요청을 계속 캐치 하므로 로딩 후 에도 Communicator 요청이 일어나면 실행 됩니다.</p>
 			</td>
 		</tr>
 		<tr>
