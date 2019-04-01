@@ -1,5 +1,5 @@
 /*!
- * Natural-UI.Shell v0.9.43, Works fine in IE9 and above
+ * Natural-UI.Shell v0.9.44, Works fine in IE9 and above
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-UI.Shell"] = "0.9.43";
+    N.version["Natural-UI.Shell"] = "0.9.44";
 
     $.fn.extend($.extend(N.prototype, {
         notify : function(opts) {
@@ -28,7 +28,7 @@
             this.options = {
                 position : {
                     top : 10,
-                    left : 10
+                    right : 10
                 },
                 container : N("body"),
                 context : null,
