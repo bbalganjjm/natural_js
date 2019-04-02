@@ -323,12 +323,16 @@
                     }
                     entireLoadIndicator = undefined;
                 }
+                
+                return this;
             },
             updateLoadIndicator : function(entireLoadRequestCnt, entireLoadRequestMaxCnt) {
                 var opts = this.options;
                 
                 opts.context.find("> .entire_load_indicator__ > .entire_load_indicator_bar__")
                     .css("left", "-" + ((entireLoadRequestCnt ? entireLoadRequestCnt : opts.entireLoadRequestCnt) * 100 / (entireLoadRequestMaxCnt ? entireLoadRequestMaxCnt : opts.entireLoadRequestMaxCnt)) + "%");
+                
+                return this;
             },
             removeLoadIndicator : function() {
                 var opts = this.options;
@@ -343,6 +347,8 @@
                 if(opts.entireLoadScreenBlock) {
                     $(".entire_load_screen_block__").trigger("nothing");
                 }
+                
+                return this;
             },
             errorLoadIndicator : function() {
                 var opts = this.options;
@@ -358,6 +364,8 @@
                 if(opts.entireLoadScreenBlock) {
                     $(".entire_load_screen_block__").trigger("nothing");
                 }
+                
+                return this;
             },
             wrapEle : function() {
                 var opts = this.options;
