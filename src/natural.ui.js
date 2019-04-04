@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.37.173
+ * Natural-UI v0.37.175
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "0.37.173";
+	N.version["Natural-UI"] = "0.37.175";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -2153,7 +2153,7 @@
 				alwaysOnTop : false,
 				"confirm" : true,
 				overlayClose : true,
-				delayContInit : false,
+				delayContInit : false, // WILL BE DEPRECATED
 				onOk : null,
 				onOkG : null, // DEPRECATED
 				onCancel : null,
@@ -2175,7 +2175,7 @@
 					left : 0,
 					right : 0
 				},
-				saveMemory : false // false, "min", "max"
+				saveMemory : false
 			};
 
 			// To prevent "maximum call stack size exceeded" error in jQuery's extend method when define the opener option.
@@ -2221,16 +2221,18 @@
 			// if title option value is undefined
 			this.options.title = opts !== undefined ? N.string.trimToNull(opts.title) : null;
 
-			if(this.options.url !== null) {
-				if(this.options.preload) {
-					Popup.loadContent.call(this, function(cont, context) {
-						// this callback function is for async page load
-						this.options.context = context;
+			if(this.options.url !== null || (this.options.preload && this.options.closeMode === "remove")) {
+			    if(this.options.preload) {
+	                Popup.loadContent.call(this, function(cont, context) {
+	                    // this callback function is for async page load
+	                    this.options.context = context;
 
-						// set this instance to context element
-						this.options.context.instance("popup", this);
-					});
-				}
+	                    // set this instance to context element
+	                    this.options.context.instance("popup", this);
+	                    
+	                    this.options.isLoaded = true;
+	                });			        
+			    }
 			} else {
 				Popup.wrapEle.call(this);
 
@@ -2250,9 +2252,9 @@
 				// opts.context is alert message
 				opts.html = true;
 				opts.msg = opts.context;
-
+				
 				// To prevent the onShowG event from running when popup.
-				opts.onShowG = null;
+				opts.onShowG = null; // DEPRECATED
 
 				if(opts.title === null) {
 					opts.title = opts.context.attr("title");
@@ -2293,7 +2295,10 @@
 					// opts.context is alert message;
 					opts.html = true;
 					opts.msg = opts.context;
-
+					opts.onRemove = function() {
+	                    opts.context = null;
+	                };
+	                
 					// To prevent the onShowG event from running when popup.
 					opts.onShowG = null; // DEPRECATED
 
@@ -2332,7 +2337,7 @@
 						}
 
 						// if delayContInit options is true, *ProcFn__ function is must set to Controller's attribute before the aop processing
-						if(opts.delayContInit) {
+						if(opts.delayContInit) { // WILL BE DEPRECATED
 							callback.call(self, cont, opts.context);
 
 							// triggering "init" method
@@ -2375,6 +2380,8 @@
 						}
 					}
 				};
+				
+				// WILL BE DEPRECATED
 				if(opts.delayContInit && cont !== undefined) {
 					cont.onOpenProcFn__ = onOpenProcFn__;
 				} else {
@@ -2395,17 +2402,24 @@
 					onOpenData = opts.onOpenData;
 				}
 
-				if(this.options.url !== null && !opts.preload) {
-					Popup.loadContent.call(this, function(cont, context) {
-						// this callback function is for async page load
-						opts.context = context;
-						opts.context.instance("popup", this);
+				if((this.options.url !== null && !opts.preload) || !opts.isLoaded) {
+                    opts.isLoaded = false;
+                    Popup.loadContent.call(this, function(cont, context) {
+                        // this callback function is for async page load
+                        opts.context = context;
+                        opts.context.instance("popup", this);
 
-						Popup.popOpen.call(self, onOpenData, cont);
-					});
-					opts.preload = true;
+                        Popup.popOpen.call(self, onOpenData, cont);
+                        
+                        if(opts.closeMode !== "remove") {
+                            opts.isLoaded = true;
+                        }
+                    }); 				            
 				} else {
-					Popup.popOpen.call(this, onOpenData);
+				    Popup.popOpen.call(this, onOpenData);
+                    if(opts.preload && opts.closeMode === "remove") {
+                        opts.isLoaded = false;
+                    }                        
 				}
 				return this;
 			},
@@ -2425,6 +2439,7 @@
 				if(opts.onClose !== null) {
 					opts.onClose.call(this, onCloseData);
 				}
+				
 				this.alert[opts.closeMode]();
 
 				return this;
@@ -2445,7 +2460,7 @@
 				context : obj.length > 0 ? obj : null,
 				links : obj.length > 0 ? obj.find(">ul>li") : null,
 				tabOpts : [], // tabOpts : [{ url: undefined, active: false, preload: false, onOpen: undefined, disable : false, stateless : false }]
-				delayContInit : false,
+				delayContInit : false, // WILL BE DEPRECATED
 				randomSel : false,
 				opener : null,
 				onActive : null,
@@ -2651,7 +2666,7 @@
 									opts.onLoad.call(self, selTabIdx, selTabEle, selContentEle_, cont);
 								}
 
-								if(opts.delayContInit) {
+								if(opts.delayContInit) { // WILL BE DEPRECATED
 									cont.onActiveProcFn__ = onActiveProcFn__;
 									cont.onOpenProcFn__ = onOpenProcFn__;
 								} else {
@@ -2836,7 +2851,7 @@
                         }
                         
 						// if delayContInit options is true, *ProcFn__ function is must set to Controller's attribute before the aop processing
-						if(opts.delayContInit) {
+						if(opts.delayContInit) { // WILL BE DEPRECATED
 							callback.call(this, cont, selContentEle);
 
 							// triggering "init" method
