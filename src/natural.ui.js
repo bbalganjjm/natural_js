@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.37.175
+ * Natural-UI v0.37.176
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "0.37.175";
+	N.version["Natural-UI"] = "0.37.176";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -2364,8 +2364,9 @@
 				self.alert.show();
 
 				var onOpenProcFn__ = function() {
-					// execute "onOpenG" event handler
+				    
 				    // DEPRECATED
+				    // execute "onOpenG" event handler
 					if(opts.onOpenG !== null) {
 						opts.onOpenG.call(self);
 					}
@@ -2381,9 +2382,8 @@
 					}
 				};
 				
-				// WILL BE DEPRECATED
 				if(opts.delayContInit && cont !== undefined) {
-					cont.onOpenProcFn__ = onOpenProcFn__;
+					cont.onOpenProcFn__ = onOpenProcFn__; // WILL BE DEPRECATED
 				} else {
 					onOpenProcFn__();
 				}
@@ -2402,7 +2402,7 @@
 					onOpenData = opts.onOpenData;
 				}
 
-				if((this.options.url !== null && !opts.preload) || !opts.isLoaded) {
+				if((this.options.url !== null && !opts.preload && !opts.isLoaded) || !opts.isLoaded) {
                     opts.isLoaded = false;
                     Popup.loadContent.call(this, function(cont, context) {
                         // this callback function is for async page load
