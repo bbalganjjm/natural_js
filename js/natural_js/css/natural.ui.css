@@ -1691,6 +1691,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	position: absolute;
 	margin-top: 115px;
 	opacity: 0;
+	width: 100%;
 	transition: margin-top 0.3s ease, opacity 0.3s ease;
 }
 
