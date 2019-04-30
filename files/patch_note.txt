@@ -9,6 +9,9 @@
  * N.form : Splitted the event binding part of the bind function into functions of the Form.prototype.bindEvents object.
  * N.grid : Fixed a bug where filtering list disappears when you click "Select All" in dataFilter.
  * N.alert, N.popup : Added saveMemory option.
+ * N.form : Fixed the "data_changed__" class being added even if the "focusout" event occurs without changing the value of the input element when the column value is null.
+   * Empty spaces("") and null are treated as the same value when check whether the value has changed
+   * Applies to all components that use N.form.
 
 ## Natural-ARCHITECTURE v0.13.10
  * N.comm.request : Fixed a bug where the parameter was not sent to the server if you specified the parameter directly in the "data" option.
