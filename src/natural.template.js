@@ -1,5 +1,5 @@
 /*!
- * Natural-CODE v0.0.3
+ * Natural-CODE v0.0.4
  *
  * Released under the LGPL v2.1 license
  * Date: 2019-02-28T18:00Z
@@ -7,7 +7,7 @@
  * Copyright 2019 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-TEMPLATE"] = "0.0.3";
+    N.version["Natural-TEMPLATE"] = "0.0.4";
 
     (function(N) {
 
@@ -107,7 +107,7 @@
                                     .map(function(i, ele) {
                                         opts.context = ele;
                                         var selData = $.grep(data, function(d) {
-                                            return d[TEMPLATE.aop.codeKey] === codeInfoArr[1];
+                                            return d[options.codeKey] === codeInfoArr[1];
                                         });
                                         var select = N(opts.filter ? opts.filter(selData) : selData).select(opts).bind();
                                         if(opts.selected) {
