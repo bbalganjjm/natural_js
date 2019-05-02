@@ -1,5 +1,5 @@
 /*!
- * Natural-CODE v0.0.1
+ * Natural-CODE v0.0.3
  *
  * Released under the LGPL v2.1 license
  * Date: 2019-02-28T18:00Z
@@ -7,14 +7,28 @@
  * Copyright 2019 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-TEMPLATE"] = "0.0.1";
+    N.version["Natural-TEMPLATE"] = "0.0.3";
 
     (function(N) {
 
         var TEMPLATE = N.template = {
             aop : {
-                codeURI : "sample/code/getSampleCodeList.json",
-                codes : function(cont, joinPoint) {
+                codes : function(cont, joinPoint, opts) {
+                    var options = {
+                        codeUrl : function(cont) {
+                            return "sample/code/getSampleCodeList.json";
+                        },
+                        codeKey : "code",
+                    }
+                    
+                    if(opts) {
+                        try {
+                            $.extend(true, options, opts.codes);
+                        } catch (e) {
+                            throw N.error("N.template", e);
+                        }               
+                    }
+                    
                     var codeList = [];
                     var commList = [];
                     var selectList = [];
@@ -83,7 +97,7 @@
                             xhrs.push(N({ 
                                 codes : codeParam != null && codeParam.length === 0 ? undefined : codeParam
                             }).comm({
-                                url : TEMPLATE.aop.codeURI
+                                url : options.codeUrl(cont)
                             }).submit(function(data) {
                                 N(codeList).each(function(i, codeInfo) {
                                     var codeInfoArr = codeInfo.split("|");
@@ -93,7 +107,7 @@
                                     .map(function(i, ele) {
                                         opts.context = ele;
                                         var selData = $.grep(data, function(d) {
-                                            return d.code === codeInfoArr[1];
+                                            return d[TEMPLATE.aop.codeKey] === codeInfoArr[1];
                                         });
                                         var select = N(opts.filter ? opts.filter(selData) : selData).select(opts).bind();
                                         if(opts.selected) {
@@ -283,11 +297,13 @@
                                 compInst = listCompEle.instance("grid");
                             }
 
-                            targetEle = compInst.tempRowEle.find(idSelector + targetProp);
-                            
-                            // 대상요소가 checkbox 나 radio 이면 name selector 로 요소가 지정 됨(#eleId -> [name='eleId']).
-                            if(targetEle.is(":radio, :checkbox") && N("[name='" + targetProp + "']", compInst.tempRowEle).length > 1) {
-                                targetEle = N("[name='" + targetProp + "']", compInst.tempRowEle);
+                            if(compInst) {
+                                targetEle = compInst.tempRowEle.find(idSelector + targetProp);
+                                
+                                // 대상요소가 checkbox 나 radio 이면 name selector 로 요소가 지정 됨(#eleId -> [name='eleId']).
+                                if(targetEle.is(":radio, :checkbox") && N("[name='" + targetProp + "']", compInst.tempRowEle).length > 1) {
+                                    targetEle = N("[name='" + targetProp + "']", compInst.tempRowEle);
+                                }                                
                             }
                         } else {
                             // 대상요소가 checkbox 나 radio 이면 name selector 로 요소가 지정 됨(#eleId -> [name='eleId']).
@@ -303,7 +319,7 @@
                         
                         if(compInst) {
                             var targetStr;
-                            if(targetEle.is(":radio") || targetEle.is(":checkbox") && targetEle.length > 1) {
+                            if(targetEle.is(":radio") || (targetEle.is(":checkbox") && targetEle.length > 1)) {
                                 targetStr = ">.form__ [name='" + targetProp + "']:radio, >.form__ [name='" + targetProp + "']:checkbox";
                             } else {
                                 targetStr = ">.form__ " + idSelector + targetProp;
