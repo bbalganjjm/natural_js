@@ -1,13 +1,13 @@
 /*!
- * Natural-CODE v0.1.2
+ * Natural-CODE v0.1.3
  *
  * Released under the LGPL v2.1 license
  * Date: 2019-02-28T18:00Z
  *
- * Copyright 2019 KIM HWANG MAN(bbalganjjm@gmail.com)
+ * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-CODE"] = "0.1.2";
+    N.version["Natural-CODE"] = "0.1.3";
 
     (function(N) {
 
@@ -90,7 +90,7 @@
                      * Natural-UI 컴포넌트의 val을 사용하지 않고 jQuery val 을 사용한 코드 검출
                      */
                     "UseTheComponentsValMethod" : function(sourceCode, excludes, report) {
-                        var regex = /[N|$]\((.*?)\)\.val\((.*)/gm;
+                        var regex = /[N$]\((.*?)\)\.val\((.*?)\)(.*)/gm;
                         var match;
                         while (match=regex.exec(sourceCode)) {
                             var isExclude = false;
@@ -100,6 +100,13 @@
                                     return false;
                                 }
                             });
+
+                            if(!isExclude) {
+                                var args = match[2];
+                                if(N.string.isEmpty(args)) {
+                                    isExclude = true;
+                                }                       
+                            }
                             
                             if(!isExclude) {
                                 var script = "";
@@ -109,8 +116,8 @@
                                 if(script.indexOf(match[0]) > -1) {
                                     report.push({
                                         "level" : "INFO",
-                                        "message" : 'jQuery 의 val 메서드를 사용하면 컴포넌트에 바인드 되어 있는 데이터는 업데이트 되지 않습니다. ' +
-                                                '데이터와 관련있는 HTML 컨트롤은 N.form 이나 N.grid, N.list 등의 val 메서드를 사용해야 합니다.' +
+                                        "message" : 'jQuery 의 val 메서드를 사용하여 입력요소의 value 를 수정하면 컴포넌트에 바인드 되어 있는 데이터는 업데이트 되지 않습니다. ' +
+                                                '데이터와 관련있는 HTML 컨트롤은 N.form 이나 N.grid, N.list 등의 컴포넌트에서 제공하는 val 메서드를 사용해야 합니다.' +
                                                 '\nex) cont["p.form.id"].val("columnName", "value")' +
                                                 '\n    cont["p.grid.id"].val(index, "columnName", "value")' +
                                                 '\n    cont["p.list.id"].val(index, "columnName", "value")',
