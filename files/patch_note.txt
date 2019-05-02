@@ -18,7 +18,7 @@
  * N.comm.request : Complemented the feature that can be send all types parameters(such as FormData) to server, in addition to object and string.
 
 ## Natural-DATA v0.10.56
- *
+ * N.formatter.date : Fixed a bug where date format would not be applied unless you opened the date picker dialog and clicked on the date element.
 
 ## Natural-CORE v0.17.18
  * N.tpBind : Changed the $.bind method to the $.on method and made all the functionality of the $ .on method available.
