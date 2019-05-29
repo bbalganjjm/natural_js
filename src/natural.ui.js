@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.37.178
+ * Natural-UI v0.37.182
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "0.37.178";
+	N.version["Natural-UI"] = "0.37.182";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -264,17 +264,18 @@
 						var se = e.originalEvent.touches ? e.originalEvent.touches[0] : e;
 
 						if(e.originalEvent.touches || (e.which || e.button) === 1) {
-							$(document).bind("dragstart" + eventNameSpace + " selectstart" + eventNameSpace, function() {
-								return false;
-							});
-
 							var isContinue;
 							if(startHandler !== undefined) {
 								isContinue = startHandler.call(this, e, selfEle, se.pageX, se.pageY)
 							}
 							if(isContinue !== false) {
 								$(document).bind("mousemove" + eventNameSpace + " touchmove" + eventNameSpace, function(e) {
-									var me = e.originalEvent.touches ? e.originalEvent.touches[0] : e;
+								    $(document).bind("dragstart" + eventNameSpace + " selectstart" + eventNameSpace, function() {
+                                        return false;
+                                    });
+								    
+								    var me = e.originalEvent.touches ? e.originalEvent.touches[0] : e;
+									
 									if(moveHandler !== undefined) {
 										moveHandler.call(this, e, selfEle, me.pageX, me.pageY);
 									}
@@ -290,10 +291,11 @@
 								});
 
 			            		$(document).bind("mouseup" + eventNameSpace + " touchend" + eventNameSpace, function(e) {
-			            			if(endHandler !== undefined) {
+			            		    $(document).unbind("dragstart" + eventNameSpace + " selectstart" + eventNameSpace + " mousemove" + eventNameSpace + " touchmove" + eventNameSpace + " mouseup" + eventNameSpace + " touchend" + eventNameSpace);
+
+			            		    if(endHandler !== undefined) {
 			            				endHandler.call(this, e, selfEle)
 			            			};
-			            			$(document).unbind("dragstart" + eventNameSpace + " selectstart" + eventNameSpace + " mousemove" + eventNameSpace + " touchmove" + eventNameSpace + " mouseup" + eventNameSpace + " touchend" + eventNameSpace);
 
 			            			if(!e.originalEvent.touches) {
 										e.preventDefault();
@@ -3475,7 +3477,12 @@
 						if(cols !== undefined && cols.indexOf(spltSepa + key + spltSepa) < 0) {
 							continue;
 						}
-						ele = idContext.filter("#" + key);
+
+						if(N.string.isEmpty(key)) {
+						    N.warn('[N.form.bind]Within the context, there is an element with an id attribute value of ""(blank).');
+						    continue;
+						}
+						ele = idContext.filter("#" + key);						    
 
 						if(opts.onBeforeBindValue !== null) {
                             var filteredVal = opts.onBeforeBindValue.call(self, ele, vals[key], "bind");
@@ -4597,17 +4604,39 @@
 					throw N.error("[N.form.prototype.revert]Can not revert. N.form's revert option value is false");
 				}
 
+				var self = this;
+				
 				if(row !== undefined) {
 					if(N.type(row) !== "array") {
 						row = [row];
 					}
 					$(row).each(function() {
-						opts.context.find(">li:eq(" + String(this) + ")").instance("form").revert();
+					    var i = this;
+					    var context = opts.context.find(">li:eq(" + String(this) + ")");
+					    var form = context.instance("form"); 
+					    if(opts.rowHandlerBeforeBind !== null) {
+                            opts.rowHandlerBeforeBind.call(self, i, context, form.options.revertData);
+                        }
+						
+					    form.revert();
+						
+						if(opts.rowHandler !== null) {
+                            opts.rowHandler.call(self, i, context, opts.data[i]);
+                        }
 					});
 				} else {
-					opts.context.find("li").instance("form", function(i) {
+					opts.context.find("li").instance("form", function() {
 						if(this.options !== undefined && (this.options.data[0].rowStatus === "update" || this.options.data[0].rowStatus === "insert")) {
-							this.revert();
+						    var i = this.options.extRow;
+						    if(opts.rowHandlerBeforeBind !== null) {
+		                        opts.rowHandlerBeforeBind.call(self, i, this.context(), this.options.revertData);
+		                    }
+
+						    this.revert();
+
+		                    if(opts.rowHandler !== null) {
+		                        opts.rowHandler.call(self, i, this.context(), opts.data[i]);
+		                    }
 						}
 					});
 				}
@@ -6442,17 +6471,39 @@
 					throw N.error("[N.form.prototype.revert]Can not revert. N.form's revert option value is false");
 				}
 
+				var self = this;
+				
 				if(row !== undefined) {
 					if(N.type(row) !== "array") {
 						row = [row];
 					}
 					$(row).each(function() {
-						opts.context.find(">tbody:eq(" + String(this) + ")").instance("form").revert();
+					    var i = this;
+                        var context = opts.context.find(">tbody:eq(" + String(this) + ")");
+                        var form = context.instance("form");
+                        if(opts.rowHandlerBeforeBind !== null) {
+                            opts.rowHandlerBeforeBind.call(self, i, context, form.options.revertData);
+                        }
+                        
+                        form.revert();
+                        
+                        if(opts.rowHandler !== null) {
+                            opts.rowHandler.call(self, i, context, opts.data[i]);
+                        }
 					});
 				} else {
-					opts.context.find(">tbody").instance("form", function(i) {
+					opts.context.find(">tbody").instance("form", function() {
 						if(this.options !== undefined && (this.options.data[0].rowStatus === "update" || this.options.data[0].rowStatus === "insert")) {
-							this.revert();
+						    var i = this.options.extRow;
+						    if(opts.rowHandlerBeforeBind !== null) {
+                                opts.rowHandlerBeforeBind.call(self, i, this.context(), this.options.revertData);
+                            }
+
+                            this.revert();
+
+                            if(opts.rowHandler !== null) {
+                                opts.rowHandler.call(self, i, this.context(), opts.data[i]);
+                            }
 						}
 					});
 				}
