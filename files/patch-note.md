@@ -8,14 +8,16 @@
  * N.form, N.list, N.grid : Reduced memory usage for checkbox and radio input elements in data binding.
  * N.form : Splitted the event binding part of the bind function into functions of the Form.prototype.bindEvents object.
  * N.grid : Fixed a bug where filtering list disappears when you click "Select All" in dataFilter.
- * N.alert, N.popup : Added saveMemory option.
+ * N.grid, N.list : Changed the feature to execute the "rowHandler" and "rowHandlerBeforeBind" event handlers when calling the revert method.
  * N.form : Fixed the "data_changed__" class being added even if the "focusout" event occurs without changing the value of the input element when the column value is null.
    * Empty spaces("") and null are treated as the same value when check whether the value has changed
    * Applies to all components that use N.form.
- * N.ui.draggable.events : Fixed a bug where screen elements could not be selected when the function finished.
  * N.form : Added the feature to display a Warnning message without an error if the "id" attribute value is blank.
- * N.grid, N.list : Changed the feature to execute the "rowHandler" and "rowHandlerBeforeBind" event handlers when calling the revert method.
-
+ * N.form : Fixed a bug where the validate option was set to false and the select element was not validated when the validate method was called.
+   * N.grid and N.list components using N.form are also applied.
+ * N.alert, N.popup : Added saveMemory option.
+ * N.ui.draggable.events : Fixed a bug where screen elements could not be selected when the function finished.
+ 
 ## Natural-ARCHITECTURE v0.13.10
  * N.comm.request : Fixed a bug where the parameter was not sent to the server if you specified the parameter directly in the "data" option.
  * N.comm.request : Complemented the feature that can be send all types parameters(such as FormData) to server, in addition to object and string.
@@ -35,7 +37,7 @@
  * N.docs : Added "createLoadIndicator, updateLoadIndicator, removeLoadIndicator, errorLoadIndicator" functions to the Documents class so that the loading indicator can be used externally.
 
 ## Natural-CODE v0.1.1
- * ≈∫ª˝
+ * ÌÉÑÏÉù
 
 ## natural.ui.css
  * ".entire_load_indicator" in N.docs related styles changed.
