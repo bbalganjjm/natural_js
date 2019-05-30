@@ -1,5 +1,7 @@
 ## Natural-UI v0.37.158
  * Appended code to prevent memory leaks related to DOM elements.
+ * N.alert: Fixed a bug that caused the message dialog to be hidden when the show method was called again with an input message displayed.
+ * N.alert, N.popup : Added saveMemory option.
  * N.popup : Fixed a bug where jQuery.extend related errors occured when the opener option was specified.
  * N.popup : Fixed a bug where if onOpen was caught by AOP, setting the closeMode option to "remove" and opening the popup would cause an error.
  * N.popup : The logic flow was redefined and applied when setting the preload(true) and closeMode(remove) options together.
@@ -15,7 +17,6 @@
  * N.form : Added the feature to display a Warnning message without an error if the "id" attribute value is blank.
  * N.form : Fixed a bug where the validate option was set to false and the select element was not validated when the validate method was called.
    * N.grid and N.list components using N.form are also applied.
- * N.alert, N.popup : Added saveMemory option.
  * N.ui.draggable.events : Fixed a bug where screen elements could not be selected when the function finished.
  
 ## Natural-ARCHITECTURE v0.13.10
@@ -35,6 +36,7 @@
  * N.docs : Improved accuracy of the onEntireLoad event.
  * N.docs : Relocate "EntireLoad" related source code.
  * N.docs : Added "createLoadIndicator, updateLoadIndicator, removeLoadIndicator, errorLoadIndicator" functions to the Documents class so that the loading indicator can be used externally.
+ * N.docs : Added "urlSync" option.
 
 ## Natural-CODE v0.1.1
  * 탄생

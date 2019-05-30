@@ -548,6 +548,7 @@ N("page id").cont({
 <pre><code class="language-javascript">
 var docOpts = {
 	url : "url", // 컨텐츠(페이지) URL
+    urlSync : true, // 서버로 요청 할 때의 location.href 와 서버에서 응답이 왔을 때의 location.href 이 같은지 비교하여 다르면 응답을 차단 합니다.
 	docId : docId, // 컨텐츠(페이지) 아이디
 	docNm : docNm, // 컨텐츠(페이지) 명
 	onBeforeLoad : function(docId, target) {
