@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.37.183
+ * Natural-UI v0.37.184
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "0.37.183";
+	N.version["Natural-UI"] = "0.37.184";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -874,14 +874,16 @@
 			wrapInputEle : function() {
 				var opts = this.options;
 
+				var isRemoved = false;
 				if(opts.context.instance("alert") !== undefined) {
 					opts.context.instance("alert").remove();
+					isRemoved = true;
 				}
 
 				if (opts.msg.length > 0) {
 					opts.msgContext = opts.context.next(".msg__");
 					var isBeforeShow = false;
-					if (opts.msgContext.length === 0) {
+					if (opts.msgContext.length === 0 || isRemoved) {
 						var limitWidth = opts.context.offset().left + opts.context.outerWidth() + 150;
 
 						if(limitWidth > (window.innerWidth ? window.innerWidth : $(window).width())) {
