@@ -1,5 +1,5 @@
 /*!
- * Natural-UI.Shell v0.9.44, Works fine in IE9 and above
+ * Natural-UI.Shell v0.9.45, Works fine in IE9 and above
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-UI.Shell"] = "0.9.44";
+    N.version["Natural-UI.Shell"] = "0.9.45";
 
     $.fn.extend($.extend(N.prototype, {
         notify : function(opts) {
@@ -596,6 +596,7 @@
 
                 var comm = N.comm({
                     url : docOpts.url,
+                    urlSync : docOpts.urlSync,
                     contentType : "text/html; charset=UTF-8",
                     dataType : "html",
                     type : "GET",
@@ -824,6 +825,7 @@
                             docId : docId,
                             docNm : docNm,
                             url : null,
+                            urlSync : true,
                             onBeforeLoad : null,
                             onLoad : null,
                             onBeforeActive : null,
