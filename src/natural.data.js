@@ -1,5 +1,5 @@
 /*!
- * Natural-DATA v0.10.69
+ * Natural-DATA v0.10.70
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-		N.version["Natural-DATA"] = "0.10.69";
+		N.version["Natural-DATA"] = "0.10.70";
 
 	$.fn.extend($.extend(N.prototype, {
 		datafilter : function(callBack) {
@@ -216,7 +216,7 @@
 				if (N.isEmptyObject(str)) {
 					return str;
 				}
-				str = str.replace(/[^0-9]/g, "");
+				str = str.replace(/[^0-9*]/g, "");
 				if (str.length == 13) {
 					var strToPad = "*";
 					if (args !== undefined && args[1] !== undefined) {
@@ -239,7 +239,7 @@
 				if (str.length === 13) {
 					return this.rrn(str, args);
 				} else if (str.length === 9) {
-					str = str.replace(/[^0-9]/g, "");
+					str = str.replace(/[^0-9*]/g, "");
 					return str.substr(0, 3) + "-" + str.substr(3, 2) + "-" + str.substr(5, 4);
 				}
 				return str;
@@ -251,7 +251,7 @@
 				if (N.string.trimToEmpty(str).length < 5) {
 					return str;
 				}
-				str = str.replace(/[^0-9]/g, "");
+				str = str.replace(/[^0-9*]/g, "");
 				if (str.length > 10) {
 					str = str.substring(0, 10);
 				}
@@ -296,14 +296,14 @@
 				if (N.isEmptyObject(str)) {
 					return str;
 				}
-				str = str.replace(/[^0-9]/g, "");
+				str = str.replace(/[^0-9*]/g, "");
 				return str.substring(0, 3) + "-" + str.substring(3, 6);
 			},
 			"phone" : function(str, args) {
 				if (N.isEmptyObject(str)) {
 					return str;
 				}
-				str = str.replace(/[^0-9]/g, "");
+				str = str.replace(/[^0-9*]/g, "");
 				return str.replace(/(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/, "$1-$2-$3");
 			},
 			/**
@@ -578,7 +578,7 @@
 						lastChar = addrFrag.substring(addrFrag.length - 1, addrFrag.length);
 					    if(firstCheckChars.indexOf("_" + addrFrag + "_") < 0 && secondCheckChars.indexOf("_" + lastChar + "_") < 0) {
 							var rplcStr = "";
-							if(thirdCheckChars.indexOf("_" + lastChar + "_") > -1 && (new RegExp(/[^0-9]/)).test(firstChar)) {
+							if(thirdCheckChars.indexOf("_" + lastChar + "_") > -1 && (new RegExp(/[^0-9*]/)).test(firstChar)) {
 								for(var i=0;i<addrFrag.length-1;i++) {
 					            	rplcStr += replaceStr;
 					        	}
@@ -833,7 +833,7 @@
 				return new RegExp(/^\d{2,3}-\d{3,4}-\d{4}$/).test(str);
 			},
 			"rrn" : function(str, args) {
-				str = str.replace(/[^0-9]/g, "");
+				str = str.replace(/[^0-9*]/g, "");
 				if (N.string.trimToEmpty(str).length != 13) {
 					str = null;
 					return false;
@@ -875,7 +875,7 @@
 				return this.rrn(str, args);
 			},
 			"frn" : function(str, args) {
-				str = str.replace(/[^0-9]/g, "");
+				str = str.replace(/[^0-9*]/g, "");
 				if (N.string.trimToEmpty(str).length != 13) {
 					str = null;
 					return false;
@@ -897,7 +897,7 @@
 				return false;
 			},
 			"frn_rrn" : function(str, args) {
-				str = str.replace(/[^0-9]/g, "");
+				str = str.replace(/[^0-9*]/g, "");
 				if (N.string.trimToEmpty(str).length != 13) {
 					str = null;
 					return false;
@@ -926,7 +926,7 @@
 			 * Korean business registration number
 			 */
 			"kbrn" : function(str, args) {
-				var bizID = str.replace(/[^0-9]/g, "");
+				var bizID = str.replace(/[^0-9*]/g, "");
 				var checkID = new Array(1, 3, 7, 1, 3, 7, 1, 3, 5, 1);
 				var i, chkSum = 0, c2, remander;
 				for (i = 0; i <= 7; i++) {
@@ -955,7 +955,7 @@
 			 * Korean corporation number
 			 */
 			"kcn" : function(str, args) {
-				var numStr = str.replace(/[^0-9]/g, "");
+				var numStr = str.replace(/[^0-9*]/g, "");
 				if (numStr.length != 13) {
 					return false;
 				}
