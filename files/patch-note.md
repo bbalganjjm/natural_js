@@ -25,11 +25,11 @@
 
 ## Natural-DATA v0.10.56
  * N.formatter.date : Fixed a bug where date format would not be applied unless you opened the date picker dialog and clicked on the date element.
-
+ * N.formatter : Changed the "rrn", "ssn", "kbrn", "zipcode" and "phone" methods to detect and handle only numbers and asterisks(*).
+ * N.validator : Changed the "rrn", "frn", "frn_rrn", "kbrn", "kcn" and "time" methods to detect and handle only numbers and asterisks(*).
+ 
 ## Natural-CORE v0.17.18
  * N.tpBind : Changed the $.bind method to the $.on method and made all the functionality of the $ .on method available.
- * N.formatter : Changed the "rrn", "ssn", "kbrn", "zipcode" and "phone" methods to detect and handle only numbers.
- * N.validator : Changed the "rrn", "frn", "frn_rrn", "kbrn", "kcn" and "time" methods to detect and handle only numbers.
 
 ## Natural-UI.Shell v0.9.39
  * N.notify : Fixed a bug where the position option does not apply in some status.
