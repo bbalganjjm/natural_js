@@ -10,6 +10,8 @@
  * N.form, N.list, N.grid : Reduced memory usage for checkbox and radio input elements in data binding.
  * N.form : Splitted the event binding part of the bind function into functions of the Form.prototype.bindEvents object.
  * N.grid : Fixed a bug where filtering list disappears when you click "Select All" in dataFilter.
+ * N.grid : Fixed a bug where the column resize function does not work properly when the height option is 0.
+ * N.grid : Fixed a bug where filter item name was broken when searching filter item in filter dialog.
  * N.grid, N.list : Changed the feature to execute the "rowHandler" and "rowHandlerBeforeBind" event handlers when calling the revert method.
  * N.form : Fixed the "data_changed__" class being added even if the "focusout" event occurs without changing the value of the input element when the column value is null.
    * Empty spaces("") and null are treated as the same value when check whether the value has changed
