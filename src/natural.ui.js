@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.37.184
+ * Natural-UI v0.37.186
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "0.37.184";
+	N.version["Natural-UI"] = "0.37.186";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -5540,6 +5540,11 @@
 						theadCells.css("padding-left", "0");
 						theadCells.css("padding-right", "0");
 					}
+					
+					if(opts.context.css("table-layout") != "fixed") {
+					    opts.context.css("table-layout", "fixed");
+					}
+					
 					var resizeBarWidth = 5;
 					var resizeBarCorrectionHeight = N.browser.is("ie") ? -2 : 0;
 					var context;
@@ -5828,7 +5833,7 @@
 									filterListBox.find("li:not(:contains('" + searchWord + "'))").hide().find(":checkbox").prop("checked", false).last().trigger("do.grid.dataFilter");
 									retChkbxs.each(function() {
 										chkboxEle = $(this);
-										chkboxEle.parent().children("span").text('(' + String(chkboxEle.data("length")) + ')')
+                                        chkboxEle.parent().children(".data_filter_cnt__").text('(' + String(chkboxEle.data("length")) + ')')
 									});
 								} else {
 									filterListBox.find("li").show();
