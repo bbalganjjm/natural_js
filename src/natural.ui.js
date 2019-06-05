@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.37.186
+ * Natural-UI v0.37.188
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "0.37.186";
+	N.version["Natural-UI"] = "0.37.188";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -4979,33 +4979,38 @@
     			};
 			},
         	setTheadCellInfo : function() {
-        		var opts = this.options;
-        		var tableMap = this.tableMap;
-        		if(tableMap.thead.length === 0) {
-        			return;
-        		}
-        		var nextCnt = 0;
-        		$(tableMap.tbody).each(function(i, cells) {
-        			$(cells).each(function(j, cell) {
-        				if(tableMap.thead[i+nextCnt] === undefined || tableMap.thead[i+nextCnt][j] === undefined) {
-        					return false;
-        				}
-        				var theadCell = $(tableMap.thead[i+nextCnt][j]);
-        				var tbodyCell = $(cell);
-        				if(tbodyCell.attr("colspan") === theadCell.attr("colspan")) {
-        					var id = tbodyCell.attr("id");
-            				if(id === undefined) {
-            					id = tbodyCell.find("[id]").attr("id");
-            				}
-            				if(id !== undefined) {
-            					theadCell.data("id", id);
-            				}
-        				} else {
-        					nextCnt++;
-        					return true;
-        				}
-        			});
-        		});
+        	    var opts = this.options;
+                var tableMap = this.tableMap;
+                if(tableMap.thead.length === 0) {
+                    return;
+                }
+                var nextCnt = 0;
+                $(tableMap.tbody).each(function(i, cells) {
+                    $(cells).each(function(j, cell) {
+                        if(tableMap.thead[i+nextCnt] === undefined || tableMap.thead[i+nextCnt][j] === undefined) {
+                            return false;
+                        }
+                        var theadCell = $(tableMap.thead[i+nextCnt][j]);
+                        var tbodyCell = $(cell);
+                        
+                        if(nextCnt === 0 && tbodyCell.attr("colspan") !== theadCell.attr("colspan")) {
+                            theadCell = $(tableMap.thead[i+1][j]);               
+                        }
+                        
+                        if(tbodyCell.attr("colspan") === theadCell.attr("colspan")) {
+                            var id = tbodyCell.attr("id");
+                            if(id === undefined) {
+                                id = tbodyCell.find("[id]").attr("id");
+                            }
+                            if(id !== undefined) {
+                                theadCell.data("id", id);
+                            }
+                        } else {
+                            nextCnt++;
+                            return true;
+                        }
+                    });
+                });
         	},
 			removeColgroup : function() {
 				var opts = this.options;
@@ -6020,8 +6025,15 @@
 				var opts = this.options;
 				if(bfRowData !== undefined && rowData[colId] === bfRowData[colId]) {
 					var bfRowCell = bfRowEle.find("#" + colId + ", .grid_rowspan__").closest("td");
-					var prevColId = this.thead.find("th:eq(" + bfRowEle.find("> tr > td").index(bfRowCell.prev("td")) + ")").data("id");
-
+					var prevColId;
+					var prevBfRowCell = bfRowCell.prev("td");
+					if(prevBfRowCell.length > 0) {
+					    if(prevBfRowCell.attr("id")) {
+					        prevColId = prevBfRowCell.attr("id");
+					    } else {
+					        prevColId = prevBfRowCell.find("[id]").attr("id");
+					    }
+					}
 					if((this.rowSpanIds.get().join("|") + "|").indexOf(prevColId) < 0 || bfRowCell.prev("td").hasClass("grid_rowspan__")) {
 						var cell = rowEle.find("#" + colId).closest("td");
 						var bfCellBgColor = bfRowCell.css("background-color");
