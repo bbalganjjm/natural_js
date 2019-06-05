@@ -1,5 +1,5 @@
 /*!
- * Natural-CODE v0.0.6
+ * Natural-TEMPLATE v0.0.6
  *
  * Released under the LGPL v2.1 license
  * Date: 2019-02-28T18:00Z
