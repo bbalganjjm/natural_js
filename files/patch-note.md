@@ -15,6 +15,7 @@
  * N.grid : Fixed a bug in the setTheadCellInfo function that the column id information was not entered in the first TH depending on the TH element placement of THEAD.
  * N.grid : Fixed a bug where the first column of TBODY would not be merged according to the TH element placement of THEAD when row-merging by declaring data-rowspan = "true".
  * N.grid : Fixed a bug where the filter function is not activated in the first column depending on the TH element placement of THEAD in the filter function.
+ * N.grid : Fixed bug where the table has a crash when the cell has a "hidden" attribute and binds empty data.  
  * N.grid, N.list : Changed the feature to execute the "rowHandler" and "rowHandlerBeforeBind" event handlers when calling the revert method.
  * N.form : Fixed the "data_changed__" class being added even if the "focusout" event occurs without changing the value of the input element when the column value is null.
    * Empty spaces("") and null are treated as the same value when check whether the value has changed
