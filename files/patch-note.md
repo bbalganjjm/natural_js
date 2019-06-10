@@ -45,10 +45,10 @@
  * N.docs : Added "urlSync" option.
 
 ## Natural-CODE v0.1.1
- * 탄생
+ * A new package was born. I will announce the related content later.
 
 ## Natural-TEMPLATE v0.0.6
- * 탄생
+ * A new package was born. I will announce the related content later.
 
 ## natural.ui.css
  * ".entire_load_indicator" in N.docs related styles changed.
