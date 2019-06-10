@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.37.188
+ * Natural-UI v0.37.189
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "0.37.188";
+	N.version["Natural-UI"] = "0.37.189";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -6313,10 +6313,10 @@
 
 						var colspan = 0;
 						if(this.tableMap.colgroup[0] !== undefined && this.tableMap.colgroup[0].length > 0) {
-							colspan = $(this.tableMap.colgroup[0]).not(":regexp(css:display, none)").length;
+							colspan = $(this.tableMap.colgroup[0]).not(":regexp(css:display, none), [hidden]").length;
 						} else {
 							$(this.tableMap.tbody).each(function(i, eles) {
-								var currLen = $(eles).not(":regexp(css:display, none)").length;
+								var currLen = $(eles).not(":regexp(css:display, none), [hidden]").length;
 								if(colspan < currLen) {
 									colspan = currLen;
 								}
