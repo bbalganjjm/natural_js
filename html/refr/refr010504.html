@@ -290,9 +290,14 @@
 			<td></td>
 			<td>
 				<p>팝업이 닫힐 때마다 발생되는 이벤트.</p>
-				<p class="alert">팝업 페이지에서 자신을 닫을때는 팝업 페이지의 Controller에서 다음과 같이 처리 합니다.<br>
-				this.caller.close(onCloseData)<br>
-				위와 같이 명령 하면 팝업이 닫히면서 onClose 이벤트 핸들러 메서드의 인자로 onCloseData 가 반환 됩니다.</p>
+                <pre><code class="language-javascript">onClose : function(onCloseData) {
+    // this : N.popup 인스턴스
+    // onCloseData : 팝업에서 전달 해준 데이터
+}</code></pre>
+            <p class="alert">
+	           팝업 컨텐츠 로드가 완료 되면 팝업의 Controller object 에 caller 라는 속성을 넣어 주는데 이 caller 는 부모페이지에서 정의 한 N.popup 인스턴스 입니다.<br>  
+                열린 팝업 자신이 자신을 닫을 때는 팝업 페이지의 Controller(N.cont) object 에서 "this.caller.close(onCloseData);" 명령을 실행 하면 됩니다.<br>
+                위 명령을 실행하면 팝업이 닫히면서 onClose 이벤트 핸들러 메서드의 인자로 onCloseData 가 전달 됩니다.</p>                
 				<p class="alert">url 옵션을 지정하여 다른 파일의 컨텐츠를 팝업으로 생성 했을 때만 사용가능 합니다.</p>
 			</td>
 		</tr>
@@ -307,6 +312,20 @@
 				<p class="alert">팝업에서 this.caller.close 함수의 첫번째 argument 로 넣어줘도 됩니다(동적인 데이터 전달 시 사용).</p>
 			</td>
 		</tr>
+        <tr>
+            <td>onLoad</td>
+            <td>function</td>
+            <td>null</td>
+            <td></td>
+            <td>
+                <p>팝업 컨텐츠가 로딩 완료 되면 발생 되는 이벤트</p>
+                <pre><code class="language-javascript">onLoad : function(cont) {
+    // this : N.popup 인스턴스
+    // cont : 팝업의 Controller(N.cont) 오브젝트
+}</code></pre>
+                <p class="alert">url 옵션을 지정하여 다른 파일의 컨텐츠를 팝업으로 생성 했을 때만 사용가능 합니다.</p>
+            </td>
+        </tr>
 	</table>
 
 	<h3>

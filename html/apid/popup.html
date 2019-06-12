@@ -270,6 +270,14 @@ function(msgContext, msgContents) {
 				<textarea lang="en_US" id="onCloseData" placeholder="This value is sent to onOpen event handler function's argument of popup's Controller."></textarea>
 			</td>
 		</tr>
+		<tr>
+			<th><label for="onLoad">onLoad</label></th>
+			<td colspan="3">
+				<textarea id="onLoad">function(cont) {
+	N.log(cont);
+}</textarea>
+			</td>
+		</tr>
 	</table>
     
     <p lang="ko_KR" class="smallContTit">실행 : </p>
@@ -371,9 +379,11 @@ function(msgContext, msgContents) {
 	       			preload : N("#otherPage #preload", view).is(":checked"),
 	       			onOpen : N.string.trimToNull(N("#otherPage #onOpen", view).val()),
 	       			onOpenData : N.string.trimToNull(N("#otherPage #onOpenData", view).val()),
-	            	onClose : N.string.trimToNull(N("#onClose", view).val()) !== null ?
+	            	onClose : N.string.trimToNull(N("#otherPage #onClose", view).val()) !== null ?
 	            			eval("(" + N("#otherPage #onClose", view).val() + ")") : null,
 	            	onCloseData : N.string.trimToNull(N("#otherPage #onCloseData", view).val()),
+	            	onLoad : N.string.trimToNull(N("#otherPage #onLoad", view).val()) !== null ?
+	            			eval("(" + N("#otherPage #onLoad", view).val() + ")") : null,
 	            	opener : cont
 	            };
 

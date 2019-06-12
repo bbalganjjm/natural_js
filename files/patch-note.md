@@ -10,6 +10,7 @@
  * N.tab : The function has been changed so that idx information is returned correctly when the open function is called with no arguments, and the remaining information is returned as a string message value.
    * If the "open" method was last executed after the "open (idx)" method was executed, the last tab information was being returned because the content had not yet been loaded.
  * N.tab : If you have not yet loaded the tab content and you have called the "cont" method, prompted a warning message on the console.
+ * N.popup : Added "onLoad" event option.
  * N.form, N.list, N.grid : Added a tpBind option that allows you to execute the events associated with a component before other events to prevent potential errors in the order of component initialization and event binding.
  * N.form, N.list, N.grid : Reduced memory usage for checkbox and radio input elements in data binding.
  * N.form : Splitted the event binding part of the bind function into functions of the Form.prototype.bindEvents object.
