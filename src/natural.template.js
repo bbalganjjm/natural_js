@@ -1,5 +1,5 @@
 /*!
- * Natural-TEMPLATE v0.0.6
+ * Natural-CODE v0.0.7
  *
  * Released under the LGPL v2.1 license
  * Date: 2019-02-28T18:00Z
@@ -7,7 +7,7 @@
  * Copyright 2019 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-TEMPLATE"] = "0.0.6";
+    N.version["Natural-TEMPLATE"] = "0.0.7";
 
     (function(N) {
 
@@ -199,6 +199,7 @@
                             opts.url = "file/manager.view";
                             opts.onOpen = "onOpen";
                             opts.overlayClose = false;
+                            opts.escClose = false;
                         }
                         
                         if (opts !== undefined && (!(contextEle.length === 0 && opts.context === undefined) || !(contextEle.length === 0 && opts.url === undefined))) {
