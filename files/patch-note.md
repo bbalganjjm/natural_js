@@ -29,6 +29,7 @@
  * N.grid : Fixed a bug where the filter function is not activated in the first column depending on the TH element placement of THEAD in the filter function.
  * N.grid : Fixed bug where the table has a crash when the cell has a "hidden" attribute and binds empty data.  
  * N.grid, N.list : Changed the feature to execute the "rowHandler" and "rowHandlerBeforeBind" event handlers when calling the revert method.
+ * N.grid, N.list : Fixed a bug where scrolling paging does not work on the latest Android chrome engine based apps. 
  * N.ui.draggable.events : Fixed a bug where screen elements could not be selected when the function finished.
  
 ## Natural-ARCHITECTURE v0.13.10
