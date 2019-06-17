@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.38.194
+ * Natural-UI v0.38.195
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "0.38.194";
+	N.version["Natural-UI"] = "0.38.195";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -366,7 +366,7 @@
 					contextWrapEle.scroll(function() {
 			        	if(opts.scrollPaging.size > 0 && opts.isBinding === false) {
 				        	var thisWrap = $(this);
-		                    if (thisWrap.scrollTop() >= opts.context.height() - thisWrap.height()) {
+		                    if (Math.ceil(thisWrap.scrollTop()) >= opts.context.height() - thisWrap.height()) {
 		                    	rowEleLength = opts.context.find(rowTagName).length;
 		                    	if(opts.currMoveToRow > -1 && rowEleLength < opts.currMoveToRow) {
 		                    		defSPSize -= 1;
