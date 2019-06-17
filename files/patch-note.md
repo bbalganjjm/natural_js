@@ -1,7 +1,8 @@
 ## Natural-UI v0.37.158
  * Appended code to prevent memory leaks related to DOM elements.
  * N.alert: Fixed a bug that caused the message dialog to be hidden when the show method was called again with an input message displayed.
- * N.alert, N.popup : Added saveMemory option.
+ * N.alert, N.popup : Added "saveMemory" option.
+ * N.alert, N.popup : Added "escClose" option.
  * N.popup : Fixed a bug where jQuery.extend related errors occured when the opener option was specified.
  * N.popup : Fixed a bug where if onOpen was caught by AOP, setting the closeMode option to "remove" and opening the popup would cause an error.
  * N.popup : The logic flow was redefined and applied when setting the preload(true) and closeMode(remove) options together.
@@ -60,11 +61,3 @@
  * N.tab related styles changed.
 
 ## For more information on added and changed features, refer to the API manual(http://bbalganjjm.github.io/natural_js/)
-
-
-
-
-
-
-
-
