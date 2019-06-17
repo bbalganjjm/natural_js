@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.37.189
+ * Natural-UI v0.38.194
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "0.37.189";
+	N.version["Natural-UI"] = "0.38.194";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -463,6 +463,7 @@
 				onRemoveG : null, // DEPRECATED
 				overlayColor : null,
 				overlayClose : true,
+				escClose : true,
 				"confirm" : false,
 				alwaysOnTop : false,
 				alwaysOnTopCalcTarget : "div, span, ul, p, nav, article, section, header, footer, aside",
@@ -990,21 +991,23 @@
 				}
 
 				// if press the "ESC" key, alert dialog will be removed
-				opts.keyupHandler = function(e) {
-					if ((e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode)) == 27) {
-						if (opts.onCancelG !== null) {
-							opts.onCancelG.call(self, opts.msgContext, opts.msgContents);
-						}
-						if (opts.onCancel !== null) {
-							if(opts.onCancel.call(self, opts.msgContext, opts.msgContents) !== 0) {
-								self[opts.closeMode]();
-							}
-						} else {
-							self[opts.closeMode]();
-						}
-		        	}
-				};
-		        $(document).unbind("keyup.alert", opts.keyupHandler).bind("keyup.alert", opts.keyupHandler);
+				if(opts.escClose) {
+				    opts.keyupHandler = function(e) {
+	                    if ((e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode)) == 27) {
+	                        if (opts.onCancelG !== null) {
+	                            opts.onCancelG.call(self, opts.msgContext, opts.msgContents);
+	                        }
+	                        if (opts.onCancel !== null) {
+	                            if(opts.onCancel.call(self, opts.msgContext, opts.msgContents) !== 0) {
+	                                self[opts.closeMode]();
+	                            }
+	                        } else {
+	                            self[opts.closeMode]();
+	                        }
+	                    }
+	                };
+	                $(document).unbind("keyup.alert", opts.keyupHandler).bind("keyup.alert", opts.keyupHandler);
+				}
 
 		        if (opts.onShowG !== null) {
 					opts.onShowG.call(self, opts.msgContext, opts.msgContents);
@@ -1055,7 +1058,9 @@
 				}
 
 				$(window).unbind("resize.alert", opts.resizeHandler);
-				$(document).unbind("keyup.alert", opts.keyupHandler);
+				if(opts.escClose) {
+				    $(document).unbind("keyup.alert", opts.keyupHandler);
+				}
 
 				return this;
 			},
@@ -1104,7 +1109,9 @@
 				}
 
 				$(window).unbind("resize.alert", opts.resizeHandler);
-				$(document).unbind("keyup.alert", opts.keyupHandler);
+				if(opts.escClose) {
+				    $(document).unbind("keyup.alert", opts.keyupHandler);
+				}
 				return this;
 			}
 		});
@@ -2157,6 +2164,7 @@
 				alwaysOnTop : false,
 				"confirm" : true,
 				overlayClose : true,
+				escClose : true,
 				delayContInit : false, // WILL BE DEPRECATED
 				onOk : null,
 				onOkG : null, // DEPRECATED
@@ -2168,6 +2176,7 @@
 				onClose : null,
 				onCloseG : null, // DEPRECATED
 				onCloseData : null,
+				onLoad : null,
 				preload : false,
 				dynPos : true,
 				windowScrollLock : true,
@@ -2212,6 +2221,7 @@
             UI.utils.wrapHandler(opts, "popup", "onCancel");
             UI.utils.wrapHandler(opts, "popup", "onOpen");
             UI.utils.wrapHandler(opts, "popup", "onClose");
+            UI.utils.wrapHandler(opts, "popup", "onLoad");
             
 			$.extend(true, this.options, opts);
 			
@@ -2356,6 +2366,10 @@
 						callback.call(self, cont, opts.context);
 					}
 
+					// execute the "onLoad" event handler.
+	                if(opts.onLoad !== null) {
+	                    opts.onLoad.call(this, cont);
+	                }
 	        	});
 			},
 			popOpen : function(onOpenData, cont) {
@@ -2434,12 +2448,12 @@
 					onCloseData = opts.onCloseData;
 				}
 
-				// execute "onCloseG" event handler
+				// execute the "onCloseG" event handler.
 				if(opts.onCloseG !== null) {
 					opts.onCloseG.call(this);
 				}
 
-				// "onClose" event execute
+				// execute the "onClose" event handler.
 				if(opts.onClose !== null) {
 					opts.onClose.call(this, onCloseData);
 				}
@@ -2600,7 +2614,7 @@
 
 					if(!$(this).hasClass("tab_active__")) {
 						var selTabEle = $(this);
-						var selTabIdx = opts.links.index(this);
+						var selTabIdx = opts.beforeOpenIdx = opts.links.index(this);
 						var selDeclarativeOpts = opts.tabOpts[selTabIdx];
 						var selContentEle = opts.contents.eq(selTabIdx);
 
@@ -2921,12 +2935,21 @@
 						}
 					}
 				} else {
-					return {
-						index : opts.links.index(opts.links.filter(".tab_active__")),
-						tab : opts.links.filter(".tab_active__"),
-						content : opts.context.find("> div.tab_content_active__"),
-						cont : opts.context.find("> div.tab_content_active__ > .view_context__").instance("cont")
-					}
+				    if(opts.links.index(opts.links.filter(".tab_active__")) === opts.beforeOpenIdx) {
+				        return {
+	                        index : opts.links.index(opts.links.filter(".tab_active__")),
+	                        tab : opts.links.filter(".tab_active__"),
+	                        content : opts.context.find("> div.tab_content_active__"),
+	                        cont : opts.context.find("> div.tab_content_active__ > .view_context__").instance("cont")
+	                    }				        
+				    } else {
+				        return {
+                            index : opts.beforeOpenIdx,
+                            tab : "Tab content has not yet been loaded.",
+                            content : "Tab content has not yet been loaded.",
+                            cont : "Tab content has not yet been loaded."
+                        }
+				    }
 				}
 				return this;
 			},
@@ -2955,11 +2978,18 @@
 			},
 			cont : function(idx) {
 			    var opts = this.options;
+			    var cont;
                 if(idx !== undefined) {
-                    return opts.context.find("> div:eq(" + String(idx) + ") > .view_context__").instance("cont");
+                    cont = opts.context.find("> div:eq(" + String(idx) + ") > .view_context__").instance("cont");
                 } else {
-                    return opts.context.find("> .tab_content_active__ > .view_context__").instance("cont");
+                    cont = opts.context.find("> .tab_content_active__ > .view_context__").instance("cont");
                 }
+                
+                if(cont === undefined) {
+                    N.warn("Tab content has not been loaded yet or Controller(N.cont) object is missing.");
+                }
+                
+                return cont;
             } 
 		});
 
