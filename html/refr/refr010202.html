@@ -102,7 +102,7 @@
 	 */
 	N.context.attr("architecture", {
 		/**
-		 * Natural-JS 의 구동영역(지정 필수)
+		 * Natural-JS Page Context(지정 필수, 메인 컨텐츠가 들어갈 자리를 지정 해 주세요.)
 		 * Documents 컴포넌트를 사용하면 따로 지정 하지 않아도 됩니다.
 		 */
 		"page" : {
@@ -342,19 +342,21 @@
 					dash_integer : "숫자(정수), 대쉬(-) 만 입력 할 수 있습니다.",
 					commas_integer : "숫자(정수), 콤마(,) 만 입력 할 수 있습니다.",
 					number : "숫자(+-,. 포함)만 입력 할 수 있습니다.",
-					decimal : "(유한)소수만 입력 할 수 있습니다.",
-					decimal_ : "(유한)소수 {0}번째 자리까지 입력 할 수 있습니다.", // TODO
 					email : "e-mail 형식에 맞지 않습니다.",
 					url : "URL 형식에 맞지 않습니다.",
 					zipcode : "우편번호 형식에 맞지 않습니다.",
+					decimal : "(유한)소수만 입력 할 수 있습니다.",
+                    decimal_ : "(유한)소수 {0}번째 자리까지 입력 할 수 있습니다.", // TODO
 					phone : "전화번호 형식이 아닙니다.",
 					rrn : "주민등록번호 형식에 맞지 않습니다.",
 					ssn : "주민등록번호 형식에 맞지 않습니다.", // Deprecated
 					frn : "외국인등록번호 형식에 맞지 않습니다.",
 					frn_rrn : "주민번호나 외국인등록번호 형식에 맞지 않습니다.", // Deprecated
 					frn_ssn : "주민번호나 외국인등록번호 형식에 맞지 않습니다.",
-					cno : "사업자등록번호 형식에 맞지 않습니다.",
-					cpno : "법인번호 형식에 맞지 않습니다.",
+					cno : "사업자등록번호 형식에 맞지 않습니다.", // Deprecated
+					kbrn : "사업자등록번호 형식에 맞지 않습니다.",
+					cpno : "법인번호 형식에 맞지 않습니다.", // Deprecated
+					kcn : "법인번호 형식에 맞지 않습니다.",
 					date : "날짜 형식에 맞지 않습니다.",
 					time : "시간 형식에 맞지 않습니다.",
 					accept : "\"{0}\" 값만 입력 할 수 있습니다.",
@@ -388,19 +390,21 @@
 					dash_integer : "Can enter only number(integer) and dash(-).",
 					commas_integer : "Can enter only number(integer) and commas(,).",
 					number : "Can enter only number and (+-,.)",
-					decimal : "Can enter only (finite)decimal",
-					decimal_ : "Can enter up to {0} places of (finite)decimal.", // TODO
 					email : "Don't conform to the format of E-mail.",
 					url : "Don't conform to the format of URL.",
 					zipcode : "Don't conform to the format of zip code.",
+					decimal : "Can enter only (finite)decimal",
+                    decimal_ : "Can enter up to {0} places of (finite)decimal.", // TODO
 					phone : "There is no format of phone number.",
 					rrn : "Don't fit the format of the resident registration number.",
 					ssn : "Don't fit the format of the resident registration number.", // Deprecated.
 					frn : "Don't fit the format of foreign registration number.",
 					frn_rrn : "Don't fit the format of the resident registration number or foreign registration number.",
 					frn_ssn : "Don't fit the format of the resident registration number or foreign registration number.", // Deprecated.
-					cno : "Don't fit the format of registration of enterpreneur.",
-					cpno : "Don't fit the format of corporation number.",
+					cno : "Don't fit the format of registration of enterpreneur.", // Deprecated
+					kbrn : "Don't fit the format of registration of enterpreneur.",
+					cpno : "Don't fit the format of corporation number.", // Deprecated
+					kcn : "Don't fit the format of corporation number.",
 					date : "Don't fit the format of date.",
 					time : "Don't fit the format of time.",
 					accept : "Can enter only \"{0}\" value.",
@@ -578,7 +582,7 @@
 				 */
 				"resizableCorrectionWidth" : N.browser.is("chrome") ? 1 : N.browser.is("safari") ? 2 : 0,
 				/**
-				 * 헤더고정형 중 마지막 컬럼 클릭 시 다른컬럼이 밀릴때 아래 수치 조절(기본값 : 0)
+				 * 헤더고정형 중 마지막 컬럼 리사이즈 시 다른컬럼이 밀릴때 아래 수치 조절(기본값 : 0)
 				 */
 				"resizableLastCellCorrectionWidth" : 0,
 				/**

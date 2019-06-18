@@ -28,7 +28,8 @@
  * N.grid : Fixed a bug where the first column of TBODY would not be merged according to the TH element placement of THEAD when row-merging by declaring data-rowspan = "true".
  * N.grid : Fixed a bug where the filter function is not activated in the first column depending on the TH element placement of THEAD in the filter function.
  * N.grid : Fixed bug where the table has a crash when the cell has a "hidden" attribute and binds empty data.
- * N.grid : Reduced the width so that the last ".resize_bar__" element does not exceed the table width.   
+ * N.grid : The left position of the last ".resize_bar__" element has been moved so that it does not exceed the table width.
+ * N.grid : Improved the accuracy of the "resizable" feature and eliminated the potential memory leak.  
  * N.grid, N.list : Changed the feature to execute the "rowHandler" and "rowHandlerBeforeBind" event handlers when calling the revert method.
  * N.grid, N.list : Fixed a bug where scrolling paging does not work on the latest Android chrome engine based apps. 
  * N.ui.draggable.events : Fixed a bug where screen elements could not be selected when the function finished.

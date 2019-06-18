@@ -61,7 +61,7 @@
 	 */
 	N.context.attr("architecture", {
 		/**
-		 * Natural-JS 의 구동영역(지정 필수)
+		 * Natural-JS Page Context(지정 필수, 메인 컨텐츠가 들어갈 자리를 지정 해 주세요.)
 		 * Documents 컴포넌트를 사용하면 따로 지정 하지 않아도 됩니다.
 		 */
 		"page" : {
@@ -810,9 +810,9 @@
 				 */
 				"resizableCorrectionWidth" : N.browser.is("safari") ? -10 : -11,
 				/**
-				 * 헤더고정형 중 마지막 컬럼 클릭 시 다른컬럼이 밀릴때 아래 수치 조절(기본값 : 0)
+				 * 헤더고정형 중 마지막 컬럼 리사이즈 시 다른컬럼이 밀릴때 아래 수치 조절(기본값 : 0)
 				 */
-				"resizableLastCellCorrectionWidth" : 0,
+				"resizableLastCellCorrectionWidth" : 12,
 				/**
 				 * 리사이즈바의 left 포지션이 컬럼 보더를 기준으로 가운데에 위치하지 않을때 아래 수치 조절(기본값 : 0)
 				 */
