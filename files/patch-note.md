@@ -35,9 +35,10 @@
  * N.ui.draggable.events : Fixed a bug where screen elements could not be selected when the function finished.
  
 ## Natural-ARCHITECTURE v0.13.10
+ * N.comm : Changed the "submit" method to return Controller(IN.const) object to argument of callback function when html page is requested.  
  * N.comm.request : Fixed a bug where the parameter was not sent to the server if you specified the parameter directly in the "data" option.
  * N.comm.request : Complemented the feature that can be send all types parameters(such as FormData) to server, in addition to object and string.
-
+ 
 ## Natural-DATA v0.10.56
  * N.formatter.date : Fixed a bug where date format would not be applied unless you opened the date picker dialog and clicked on the date element.
  * N.formatter : Changed the "rrn", "ssn", "kbrn", "zipcode" and "phone" methods to detect and handle only numbers and asterisks(*).

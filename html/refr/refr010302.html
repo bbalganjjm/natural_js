@@ -116,7 +116,7 @@
 			<td align="center">-</td>
 			<td style="max-width: 299px;">
 				<p>서버에서 요청이 처리되고 응답이 완료된 다음 실행되는 콜백 함수입니다.</p>
-				<p>콜백의 인자로 data 또는 html 과 Communicator.request 객체가 반환 됩니다.</p>
+				<p>HTML을 요청 하면 콜백 함수의 인자로 불러온 페이지의 Contoller(N.cont) 오브젝트가 반환되고 그외 요청은 data 와 Communicator.request 객체가 반환 됩니다.</p>
 				<pre><code class="language-javascript">
 // 데이터 요청 시
 N.comm("url").submit(function(data, request) {
@@ -124,8 +124,8 @@ N.comm("url").submit(function(data, request) {
 });
 
 // 페이지 요청 시
-N("selector").comm("url").submit(function(html, request) {
-	N.log(html, request);
+N("selector").comm("url").submit(function(cont) {
+	N.log(cont);
 });
 </code></pre>
 			</td>
@@ -160,9 +160,9 @@ N("selector").comm("url").submit(function(html, request) {
 				<pre><code class="language-javascript">
 // 데이터 요청 시
 N.comm("url").error(function(e, request, xhr, textStatus, callback) {
-	// 2. 아래의 col01.length 에 대한 첫번째 요류 처리 
+	// 2. 아래의 col01.length 에 대한 첫번째 오류 처리 
 }).error(function(e, request, xhr, textStatus, callback) {
-	// 3. 아래의 col01.length 에 대한 두번째 요류 처리 
+	// 3. 아래의 col01.length 에 대한 두번째 오류 처리 
 }).submit(function(data, request) {
 	var col01;
 	col01.length; // 1. undefined 오류 발생
