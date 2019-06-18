@@ -1,5 +1,5 @@
 /*!
- * Natural-ARCHITECTURE v0.13.10
+ * Natural-ARCHITECTURE v0.13.11
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-ARCHITECTURE"] = "0.13.10";
+    N.version["Natural-ARCHITECTURE"] = "0.13.11";
 
     $.fn.extend($.extend(N.prototype, {
         ajax : function(opts) {
@@ -192,6 +192,7 @@
                         });
                         if(isFilterStopped) return false;
 
+                        var cont;
                         if (!N.isElement(obj)) {
                             if (obj.request.options.urlSync && obj.request.options.referrer.replace(/!/g, "") != window.location.href.replace(/!/g, "")) {
                                 xhr.abort();
@@ -221,9 +222,10 @@
                             if (obj.request.options.effect) {
                                 obj.hide()[obj.request.options.effect[0]](obj.request.options.effect[1], obj.request.options.effect[2]);
                             }
+                            
                             if(obj.request.options.replace){
                                 if(obj.nextAll(".view_context__:first").length > 0){
-                                    var cont = obj.nextAll(".view_context__:first").instance("cont");
+                                    cont = obj.nextAll(".view_context__:first").instance("cont");
                                     if(cont !== undefined){
                                         // triggering "init" method
                                         Controller.trInit.call(this, cont, obj.request);
@@ -231,7 +233,7 @@
                                 }
                                 obj.remove();
                             } else if(obj.children(".view_context__:last").length > 0) {
-                                var cont = obj.children(".view_context__:last").instance("cont");
+                                cont = obj.children(".view_context__:last").instance("cont");
                                 if(cont !== undefined) {
                                     // triggering "init" method
                                     Controller.trInit.call(this, cont, obj.request);
@@ -241,7 +243,12 @@
 
                         if (callback !== undefined) {
                             try {
-                                callback.call(obj, data, obj.request);
+                                if (!N.isElement(obj)) {
+                                    callback.call(obj, data, obj.request);
+                                } else {
+                                    callback.call(obj, cont);
+                                }
+                                cont = undefined;
                             } catch (e) {
                                 if(obj.errorHandlers.length > 0) {
                                     $(obj.errorHandlers).each(function(i, errorHandler) {
