@@ -543,7 +543,7 @@
 				/**
 				 * 헤더고정형 중 마지막 컬럼 리사이즈 시 다른컬럼이 밀릴때 아래 수치 조절(기본값 : 0)
 				 */
-				"resizableLastCellCorrectionWidth" : 12,
+		        "resizableLastCellCorrectionWidth" : N.browser.is("ie") || N.browser.is("firefox") ? 10.8 : 12,
 				/**
 				 * 리사이즈바의 left 포지션이 컬럼 보더를 기준으로 가운데에 위치하지 않을때 아래 수치 조절(기본값 : 0)
 				 */
