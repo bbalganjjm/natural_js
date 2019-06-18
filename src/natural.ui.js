@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.38.196
+ * Natural-UI v0.38.197
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "0.38.196";
+	N.version["Natural-UI"] = "0.38.197";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -5591,15 +5591,17 @@
 
 					this.thead.bind("mouseover.grid.resize touchstart.grid.resize", function() {
 						resizeBarHeight = (opts.height > 0 ? self.contextEle.closest(".grid_wrap__").height() - 3 : self.contextEle.height() + resizeBarCorrectionHeight) + 1 + opts.misc.resizeBarCorrectionHeight;
-						theadCells.each(function() {
+						var lastResizeBar = theadCells.each(function() {
 							var cellEle = $(this);
 							cellEle.find("> .resize_bar__").css({
 								"top" : cellEle.position().top + 1,
 								"left" : (cellEle.position().left + cellEle.outerWidth() - resizeBarWidth / 2 + opts.misc.resizeBarCorrectionLeft) + "px"
 							});
-						}).last().find("> .resize_bar__").css({
-                            "width" : Math.round(resizeBarWidth / 2)
-                        });
+						}).last().find("> .resize_bar__");
+						lastResizeBar.css({
+                            "left" : parseInt(lastResizeBar.css("left")) - (resizeBarWidth / 2)
+                        })
+                        lastResizeBar = undefined;
 	        		});
 
 					var isFirstTimeLastClick = true;
@@ -5630,10 +5632,10 @@
 			            		currResizeBarEle = $(this);
 			            		currCellEle = currResizeBarEle.parent("th");
 			            		currNextCellEle = currCellEle.next();
-			            		var islast = false;
+			            		var isLast = false;
 			            		if(currNextCellEle.length === 0) {
 			            			currNextCellEle = context;
-			            			islast = true;
+			            			isLast = true;
 			            		}
 
 			            		if(opts.height > 0) {
@@ -5645,33 +5647,36 @@
 			            			}
 			            		}
 			            		// Convert flexible cell width to absolute cell width when the clicked resizeBar is last last resizeBar
-			            		if(isFirstTimeLastClick && islast) {
+			            		if(isFirstTimeLastClick && isLast) {
+			            		    var thisWidth;
 			            			theadCells.each(function(i) {
-		            					$(this).width(Math.floor($(this).width()) + (opts.height > 0 ? opts.misc.resizableLastCellCorrectionWidth : 0) + opts.misc.resizableCorrectionWidth).removeAttr("width");
+			            			    thisWidth = $(this).width();
+		            					$(this).width(thisWidth + (opts.height > 0 ? opts.misc.resizableLastCellCorrectionWidth : 0) + opts.misc.resizableCorrectionWidth).removeAttr("width");
 
 		            					if(targetCellEle !== undefined) {
-		            						opts.context.find("thead th:eq(" + theadCells.index(this) + ")").width(Math.floor($(this).width()) + opts.misc.resizableCorrectionWidth).removeAttr("width");
+		            						opts.context.find("thead th:eq(" + theadCells.index(this) + ")").width(thisWidth + (opts.height > 0 ? opts.misc.resizableLastCellCorrectionWidth : 0) + opts.misc.resizableCorrectionWidth).removeAttr("width");
 		            					}
 		            					if(opts.height > 0 && targetTfootCellEle !== undefined) {
-		            						opts.context.parent().parent(".grid_wrap__").find("tfoot > tr > td:eq(" + theadCells.index(this) + ")").width(Math.floor($(this).width()) + opts.misc.resizableCorrectionWidth).removeAttr("width");
+		            						opts.context.parent().parent(".grid_wrap__").find("tfoot > tr > td:eq(" + theadCells.index(this) + ")").width(thisWidth + (opts.height > 0 ? opts.misc.resizableLastCellCorrectionWidth : 0) + opts.misc.resizableCorrectionWidth).removeAttr("width");
 		            					}
 			    					});
 			            			isFirstTimeLastClick = false;
+			            			thisWidth = undefined;
 		            			}
 
 			            		// to block sort event
 			            		currCellEle.data("sortLock", true);
 
 			            		defWidth = Math.floor(currCellEle.outerWidth()) + opts.misc.resizableCorrectionWidth;
-			            		nextDefWidth = !islast ? Math.floor(currNextCellEle.outerWidth()) + opts.misc.resizableCorrectionWidth : Math.floor(context.width());
+			            		nextDefWidth = !isLast ? Math.floor(currNextCellEle.outerWidth()) + opts.misc.resizableCorrectionWidth : Math.floor(context.width());
 
 			            		$(document).bind("dragstart.grid.resize selectstart.grid.resize", function() {
 			            			return false;
 			            		});
 			            		isPressed = true;
 
-			            		minPx = !islast ? Math.floor(currNextCellEle.offset().left) : Math.floor(currCellEle.offset().left) + Math.floor(currCellEle.outerWidth());
-			            		maxPx = minPx + (!islast ? Math.floor(currNextCellEle.outerWidth()) : 7680);
+			            		minPx = !isLast ? Math.floor(currNextCellEle.offset().left) : Math.floor(currCellEle.offset().left) + Math.floor(currCellEle.outerWidth());
+			            		maxPx = minPx + (!isLast ? Math.floor(currNextCellEle.outerWidth()) : 7680);
 			            		movedPx = defPx = Math.floor(currResizeBarEle.parent("th").offset().left);
 			            		$(window.document).bind("mousemove.grid.resize touchmove.grid.resize", function(e) {
 			            			var mte;
@@ -5684,7 +5689,7 @@
 			            				if(defPx < mPageX && maxPx > mPageX) {
 			            					movedPx = mPageX - startOffsetX;
 		            						currWidth = defWidth + movedPx;
-		            						nextCurrWidth = !islast ? nextDefWidth - movedPx : nextDefWidth + movedPx;
+		            						nextCurrWidth = !isLast ? nextDefWidth - movedPx : nextDefWidth + movedPx;
 			            					if(currWidth > 0 && nextCurrWidth > 0) {
 			            						currCellEle.css("width", currWidth + "px");
 		            							currNextCellEle.css("width", nextCurrWidth + "px");
@@ -5707,11 +5712,13 @@
 			            		var currResizeBar = $(this);
 			            		$(window.document).bind("mouseup.grid.resize touchend.grid.resize", function(e) {
 			            			currResizeBar.animate({
-		            					"height" : String(cellEle.outerHeight()) + "px"
+		            					"height" : String(theadCells.filter(":eq(0)").outerHeight()) + "px"
 		            				}, 200, function() {
 	            						$(this).css({
 	            							"opacity": "0"
 	            						});
+	            						
+	            						currResizeBar = undefined;
 		            				});
 
 			            			$(document).unbind("dragstart.grid.resize selectstart.grid.resize mousemove.grid.resize touchmove.grid.resize mouseup.grid.resize touchend.grid.resize");
@@ -5720,6 +5727,11 @@
 			            	}
 			        	});
 					});
+					
+					resizeBar = currResizeBar = resizeBarHeight = cellEle = currCellEle = currNextCellEle = targetCellEle = targetNextCellEle =
+                    targetTfootCellEle = targetNextTfootCellEle = currResizeBarEle = 
+                    defWidth = nextDefWidth = currWidth = nextCurrWidth = startOffsetX =
+                    minPx = maxPx = defPx = movedPx = undefined;
 //        		}
 			},
         	sort : function() {
