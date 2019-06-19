@@ -46,6 +46,7 @@
  
 ## Natural-CORE v0.17.18
  * N.tpBind : Changed the $.bind method to the $.on method and made all the functionality of the $ .on method available.
+ * N.debug, N.log, N.info, N.warn : Changed the functionality to accurately show where the message originated.
 
 ## Natural-UI.Shell v0.9.39
  * N.notify : Fixed a bug where the position option does not apply in some status.
@@ -63,5 +64,8 @@
 ## natural.ui.css
  * ".entire_load_indicator" in N.docs related styles changed.
  * N.tab related styles changed.
+
+## natural.config.js
+ * Message levels setting value(N.context.attr("core").consoleLogLevel) of N.debug, N.log, N.info, and N.warn methods have been removed.
 
 ## For more information on added and changed features, refer to the API manual(http://bbalganjjm.github.io/natural_js/)
