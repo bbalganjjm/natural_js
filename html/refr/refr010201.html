@@ -368,14 +368,32 @@ N("div#sample1").instance("name", instance);</code></pre>
 			<td>"en_US", "ko_KR" 등의 로케일 문자열</td>
 		</tr>
 		<tr>
+			<td>N.debug</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>undefined</td>
+			<td>
+				<p>브라우저 콘솔에 DEBUG 메시지를 보여 줍니다</p>
+				<p class="alert">window.console.debug 함수와 같습니다. 브라우저에서 window.console.debug 함수를 지원하지 않으면 메시지가 표시되지 않습니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>msg</td>
+			<td>string</td>
+			<td></td>
+			<td>
+				<p>메시지</p>
+			</td>
+		</tr>
+		<tr>
 			<td>N.log</td>
 			<td align="center">-</td>
 			<td align="center">-</td>
 			<td>undefined</td>
 			<td>
-				<p>콘솔창에 로깅(Logging) 메시지를 보여 줍니다</p>
-				<p class="alert">console.log 를 Wrapping 한 함수로서 console.log 와 사용법이 동일 합니다.</p>
-				<p class="alert">브라우저에서 console.log를 지원하지 않으면 메시지가 표시되지 않습니다.</p>
+				<p>브라우저 콘솔에 LOG 메시지를 보여 줍니다</p>
+				<p class="alert">window.console.log 함수와 같습니다. 브라우저에서 window.console.log 함수를 지원하지 않으면 메시지가 표시되지 않습니다.</p>
 			</td>
 		</tr>
 		<tr>
@@ -393,9 +411,8 @@ N("div#sample1").instance("name", instance);</code></pre>
 			<td align="center">-</td>
 			<td>undefined</td>
 			<td>
-				<p>콘솔창에 Warnning 메시지를 보여 줍니다</p>
-				<p class="alert">console.info 를 Wrapping 한 함수로서 console.log 와 사용법이 동일 합니다.</p>
-				<p class="alert">브라우저에서 console.info을 지원하지 않으면 메시지가 표시되지 않습니다.</p>
+				<p>브라우저 콘솔에 INFO 메시지를 보여 줍니다</p>
+				<p class="alert">window.console.info 함수와 같습니다. 브라우저에서 window.console.info 함수를 지원하지 않으면 메시지가 표시되지 않습니다.</p>
 			</td>
 		</tr>
 		<tr>
@@ -413,9 +430,8 @@ N("div#sample1").instance("name", instance);</code></pre>
 			<td align="center">-</td>
 			<td>undefined</td>
 			<td>
-				<p>콘솔창에 Warnning 메시지를 보여 줍니다</p>
-				<p class="alert">console.warn 를 Wrapping 한 함수로서 console.log 와 사용법이 동일 합니다.</p>
-				<p class="alert">브라우저에서 console.warn을 지원하지 않으면 메시지가 표시되지 않습니다.</p>
+				<p>브라우저 콘솔에 WARN 메시지를 보여 줍니다</p>
+				<p class="alert">window.console.warn 함수와 같습니다. 브라우저에서 window.console.warn 함수를 지원하지 않으면 메시지가 표시되지 않습니다.</p>
 			</td>
 		</tr>
 		<tr>
@@ -433,7 +449,7 @@ N("div#sample1").instance("name", instance);</code></pre>
 			<td align="center">-</td>
 			<td>ErrorThrown</td>
 			<td>
-				<p>에러를 발생 시키고 에러 메시지를 브라우저 콘솔창에 보여줍니다.</p>
+				<p>에러를 발생 시키고 에러 메시지를 브라우저 브라우저 콘솔에 보여줍니다.</p>
 				<p class="alert">N.error 함수는 ErrorThrown 객체를 반환하기 때문에 함수 앞에 throw 구문을 선언을 해야 에러가 발생 합니다.</p>
 				<pre class="line-numbers"><code class="language-javascript">
 throw N.error("오류가 발생 했습니다.");</code></pre>
