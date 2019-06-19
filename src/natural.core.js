@@ -1,5 +1,5 @@
 /*!
- * Natural-CORE v0.17.18
+ * Natural-CORE v0.17.22
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -302,7 +302,7 @@
 		// N local variables
 		$.extend(N, {
 			version : {
-				"Natural-CORE" : "0.17.18"
+				"Natural-CORE" : "0.17.22"
 			},
 			/**
 			 * Set and get locale value
@@ -312,68 +312,6 @@
 					return N.context.attr("core").locale;
 				} else {
 					N.context.attr("core").locale = str;
-				}
-			},
-			/**
-			 * Display the debug log to console
-			 */
-			debug : function() {
-				if(N.context.attr("core").consoleLogLevel !== undefined 
-						&& "log|info|warn|off".split("|").indexOf(N.context.attr("core").consoleLogLevel) > -1) {
-					return;
-				}
-				if(typeof console !== "undefined") {
-					if(typeof console.debug !== "undefined" && typeof console.debug.apply !== "undefined") {
-						console.debug.apply(console, arguments);
-					} else {
-						N.log(console);
-					}
-				}
-			},
-			/**
-			 * Display the log to console
-			 */
-			log : function() {
-				if(N.context.attr("core").consoleLogLevel !== undefined 
-						&& "info|warn|off".split("|").indexOf(N.context.attr("core").consoleLogLevel) > -1) {
-					return;
-				}
-				if(typeof console !== "undefined") {
-					if(typeof console.log !== "undefined" && typeof console.log.apply !== "undefined") {
-						console.log.apply(console, arguments);
-					}
-				}
-			},
-			/**
-			 * Display the info log to console
-			 */
-			info : function() {
-				if(N.context.attr("core").consoleLogLevel !== undefined 
-						&& "warn|off".split("|").indexOf(N.context.attr("core").consoleLogLevel) > -1) {
-					return;
-				}
-				if(typeof console !== "undefined") {
-					if(typeof console.info !== "undefined" && typeof console.info.apply !== "undefined") {
-						console.info.apply(console, arguments);
-					} else {
-						N.log(console);
-					}
-				}
-			},
-			/**
-			 * Display the warnning log to console
-			 */
-			warn : function() {
-				if(N.context.attr("core").consoleLogLevel !== undefined 
-						&& "off" === N.context.attr("core").consoleLogLevel) {
-					return;
-				}
-				if(typeof console !== "undefined") {
-					if(typeof console.warn !== "undefined" && typeof console.warn.apply !== "undefined") {
-						console.warn.apply(console, arguments);
-					} else {
-						N.log(console);
-					}
 				}
 			},
 			/**
@@ -1797,6 +1735,11 @@
 
 	};
 
+	N.debug = console && console.debug ? console.debug.bind(window.console) : function() {};
+	N.log = console && console.debug ? console.log.bind(window.console) : function() {};
+	N.info = console && console.debug ? console.info.bind(window.console) : function() {};
+	N.warn = console && console.debug ? console.warn.bind(window.console) : function() {};
+    
 	window.$.N = window.N = N;
 
 })(window, jQuery);
