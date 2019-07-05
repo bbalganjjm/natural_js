@@ -1,5 +1,5 @@
-## Natural-UI v0.38.197
- *
+## Natural-UI v0.38.198
+ * N.form,N.grid,N.list : Fixed a bug where calling the validate function after selecting an empty value and then selecting the non-empty value did not change the underlying data from the select element with the "required" validation rule applied.
 
 ## Natural-ARCHITECTURE v0.13.11
  *
