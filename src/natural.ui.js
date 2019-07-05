@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.38.197
+ * Natural-UI v0.38.198
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-	N.version["Natural-UI"] = "0.38.197";
+	N.version["Natural-UI"] = "0.38.198";
 
 	$.fn.extend($.extend(N.prototype, {
 		alert : function(msg, vars) {
@@ -3353,6 +3353,14 @@
                             }
 
                             if ((vals[currEle.attr("id")] === null ? "" : vals[currEle.attr("id")]) !== currVal) {
+                                
+                                // remove validator's dregs
+                                currEle.removeClass("validate_false__");
+                                if(currEle.instance("alert") !== undefined) {
+                                    currEle.instance("alert").remove();
+                                    currEle.removeData("alert__");
+                                }
+                                
                                 if (!currEle.prop("disabled") && !currEle.prop("readonly") && (!opts.validate || (opts.validate && !currEle.hasClass("validate_false__")))) {
                                     // update dataset value
                                     vals[currEle.attr("id")] = currVal;
