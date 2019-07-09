@@ -1,5 +1,5 @@
 /*!
- * Natural-TEMPLATE v0.0.7
+ * Natural-TEMPLATE v0.0.8
  *
  * Released under the LGPL v2.1 license
  * Date: 2019-02-28T18:00Z
@@ -7,7 +7,7 @@
  * Copyright 2019 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-TEMPLATE"] = "0.0.7";
+    N.version["Natural-TEMPLATE"] = "0.0.8";
 
     (function(N) {
 
@@ -325,6 +325,10 @@
                         // 대상요소가 버튼요소(a, button, input[type=button]) 이면 N.button 컴포넌트가 적용 됨.
                         if(targetEle.is("a, button, input[type=button]")) {
                             targetEle.button();
+                        } else {
+                            if(eventName && eventName.indexof("click") > -1) {
+                                targetEle.css("cursor", "pointer");
+                            }
                         }
 
                         if(compInst) {
