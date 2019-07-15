@@ -1,5 +1,9 @@
 /*!
+<<<<<<< HEAD
  * Natural-TEMPLATE v0.0.9
+=======
+ * Natural-TEMPLATE v0.0.8
+>>>>>>> branch 'master' of https://github.com/bbalganjjm/natural_js.git
  *
  * Released under the LGPL v2.1 license
  * Date: 2019-02-28T18:00Z
@@ -7,7 +11,11 @@
  * Copyright 2019 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
+<<<<<<< HEAD
     N.version["Natural-TEMPLATE"] = "0.0.9";
+=======
+    N.version["Natural-TEMPLATE"] = "0.0.8";
+>>>>>>> branch 'master' of https://github.com/bbalganjjm/natural_js.git
 
     (function(N) {
 
@@ -326,7 +334,11 @@
                         if(targetEle.is("a, button, input[type=button]")) {
                             targetEle.button();
                         } else {
+<<<<<<< HEAD
                             if(eventName && eventName.indexOf("click") > -1) {
+=======
+                            if(eventName && eventName.indexof("click") > -1) {
+>>>>>>> branch 'master' of https://github.com/bbalganjjm/natural_js.git
                                 targetEle.css("cursor", "pointer");
                             }
                         }
