@@ -236,6 +236,7 @@
 				<p>contentEle : 활성화된 탭 컨텐츠 요소</p>
 				<p>tabEles : 전체 탭 요소</p>
 				<p>contentEles : 전체 컨텐츠 요소</p>
+                <p class="alert">탭 컨텐츠가 처음 로딩 될 때는 N.cont 오브젝트의 init 함수가 실행 된 다음 onActive 이벤트가 실행 됩니다.</p>
 			</td>
 		</tr>
 		<tr>
@@ -290,6 +291,8 @@
 				<p>onOpen 이벤트를 지정한 탭이 열릴때마다 불러온 컨텐츠에서 실행될 이벤트 핸들러 함수의 이름을 문자열로 지정 합니다.</p>
 				<p class="alert">onOpen 이벤트 핸들러 함수는 불러올 페이지의 Controller 에 지정한 이름으로 정의 되어 있어야 합니다.</p>
 				<p class="alert">onOpen 이벤트 핸들러 함수는의 첫번째 인자는 N.popup 과 마찬가지로 open 함수를 호출할때 두번째 인자로 지정한 onOpenData 가 전달 됩니다.</p>
+                <p class="alert">탭 컨텐츠가 처음 로딩 될 때는 N.cont 오브젝트의 init 함수가 실행 된 다음 onOpen 함수가 실행 됩니다.</p>
+                <p class="alert">onActive 이벤트 정의 되어 있으면 onActive 함수가 실행 된 다음 onOpen 함수가 실행 됩니다.</p>
 			</td>
 		</tr>
 		<tr>
