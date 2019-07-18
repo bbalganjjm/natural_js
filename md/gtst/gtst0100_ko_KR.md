@@ -59,6 +59,10 @@ Natrual-JS 에서 JSON 은 아주 중요 합니다. 서버와 송수신하는 �
 
 다시 본론으로... Natural-JS의 환경설정값은 Context(N.context) 객체에 저장 됩니다. 환경설정값중 위 구문에 해당하는 N.context.attr("architecture").page.context 값은 아주 중요한 값입니다. 이 값은 Natural-JS의 컴포넌트 요소들이 적재 될 컨테이너 요소를 jQuery Selector 문자열로 지정하면 됩니다. 쉽게말해 페이지 컨텐츠들을 표시 할 동적으로 변하지 않는 박스 요소를 지정 하면 됩니다. 더불어, N.context.attr("ui").alert.context 값에 N.alert HTML 요소를 저장하는 컨테이너 요소의 selector 를 지정 해 주세요. 보통 N.context.attr("architecture").page.context 값과 같은 요소를 지정하면 됩니다. Tab(N.tab) 이나 Popup(N.popup), Datepicker(N.datepicker)등 Natural-UI에서 지원하는 컴포넌트들의 자원이 여기(N.context.attr...context)에서 지정한 영역에 생성되고 페이지가 전환 될 때 이 영역에 다시 덮어 씌움으로서 브라우저의 자원을 반환하게 됩니다. 페이지 Redirect를 하지 않는 Single Page Web Application을 개발 할 때 브라우저 리소스를 따로 관리 하지 않아도 되어서 편리 하겠죠? 그 외 환경설정 값들은 [API/DEMO] > [Natural-CORE] > [Config 탭]의 내용중 [Config 예시] 부분을 참고 하세요.
 
+>Documents(N.docs) 컴포넌트를 사용하면 따로 지정 하지 않아도 됩니다.
+
+>SPA(Single Page Application)가 아니면 "body" 로 설정 해 주세요.
+
 N.config(natural.config.js) 에는 대부분 UI 컴포넌트들의 전역 설정값들이 지정 되어 있고 모든 컴포넌트들은 여기에서 설정한 옵션값들을 기본으로 구동 됩니다.
 
 Natural-JS의 컴포넌트 옵션의 적용 우선순위는 다음과 같습니다.
