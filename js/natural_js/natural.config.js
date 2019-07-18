@@ -59,6 +59,7 @@
 		/**
 		 * Natural-JS Page Context(지정 필수, 메인 컨텐츠가 들어갈 자리를 지정 해 주세요.)
 		 * Documents 컴포넌트를 사용하면 따로 지정 하지 않아도 됩니다.
+		 * SPA(Single Page Application) 가 아니면 "body" 로 설정 해 주세요.
 		 */
 		"page" : {
 			"context" : ".docs__ > .docs_contents__.visible__"
@@ -537,6 +538,7 @@
 			 * N.alert, N.popup 컴포넌트의 요소들이 저장 되는 영역(지정 필수)
 			 * N.context.attr("architecture").page.context 와 같게 설정해도 됩니다.
 			 * Documents 컴포넌트를 사용하면 따로 지정 하지 않아도 됩니다.
+			 * SPA(Single Page Application) 가 아니면 "body" 로 설정 해 주세요.
 			 */
 			"container" : ".docs__ > .docs_contents__.visible__",
 			/**
