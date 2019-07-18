@@ -100,6 +100,7 @@
 		/**
 		 * Natural-JS Page Context(지정 필수, 메인 컨텐츠가 들어갈 자리를 지정 해 주세요.)
 		 * Documents 컴포넌트를 사용하면 따로 지정 하지 않아도 됩니다.
+		 * SPA(Single Page Application) 가 아니면 "body" 로 설정 해 주세요. 
 		 */
 		"page" : {
 			"context" : ".docs__ > .docs_contents__.visible__"
@@ -183,7 +184,7 @@
 			* 여기에서 지정한 pageFilter, dataFilter 는 상수값이 아니므로 자유롭게 지정하면 됨.
 			*/
 			"filters" : {
-				"exFilter1" : {
+				"basicFilter" : {
 					/**
 					 * 필터 실행 순서
 					 */
@@ -325,103 +326,103 @@
 			 * 다른언어 추가 시 해당언어의 로케일 값을 오브젝트명으로 하고 동인한 속성명들에 해당언어로 된 메시지를 추가하면 됨.
 			 */
 			"message" : {
-				"ko_KR" : {
-					global : "필드검증에 통과하지 못했습니다.",
-					required : "필수입력 필드 입니다.",
-					alphabet : "영문자만 입력 할 수 있습니다.",
-					integer : "숫자(정수)만 입력 할 수 있습니다.",
-					korean : "한글만 입력 할 수 있습니다.",
-					alphabet_integer : "영문자와 숫자(정수)만 입력 할 수 있습니다.",
-					integer_korean : "숫자(정수)와 한글만 입력 할 수 있습니다.",
-					alphabet_korean : "영문자와 한글만 입력 할 수 있습니다.",
-					alphabet_integer_korean : "영문자, 숫자(정수), 한글만 입력 할 수 있습니다.",
-					dash_integer : "숫자(정수), 대쉬(-) 만 입력 할 수 있습니다.",
-					commas_integer : "숫자(정수), 콤마(,) 만 입력 할 수 있습니다.",
-					number : "숫자(+-,. 포함)만 입력 할 수 있습니다.",
-					email : "e-mail 형식에 맞지 않습니다.",
-					url : "URL 형식에 맞지 않습니다.",
-					zipcode : "우편번호 형식에 맞지 않습니다.",
-					decimal : "(유한)소수만 입력 할 수 있습니다.",
+                "ko_KR" : {
+                    global : "필드검증에 통과하지 못했습니다.",
+                    required : "필수입력 필드 입니다.",
+                    alphabet : "영문자만 입력 할 수 있습니다.",
+                    integer : "숫자(정수)만 입력 할 수 있습니다.",
+                    korean : "한글만 입력 할 수 있습니다.",
+                    alphabet_integer : "영문자와 숫자(정수)만 입력 할 수 있습니다.",
+                    integer_korean : "숫자(정수)와 한글만 입력 할 수 있습니다.",
+                    alphabet_korean : "영문자와 한글만 입력 할 수 있습니다.",
+                    alphabet_integer_korean : "영문자, 숫자(정수), 한글만 입력 할 수 있습니다.",
+                    dash_integer : "숫자(정수), 대쉬(-) 만 입력 할 수 있습니다.",
+                    commas_integer : "숫자(정수), 콤마(,) 만 입력 할 수 있습니다.",
+                    number : "숫자(+-,. 포함)만 입력 할 수 있습니다.",
+                    email : "e-mail 형식에 맞지 않습니다.",
+                    url : "URL 형식에 맞지 않습니다.",
+                    zipcode : "우편번호 형식에 맞지 않습니다.",
+                    decimal : "(유한)소수만 입력 할 수 있습니다.",
                     decimal_ : "(유한)소수 {0}번째 자리까지 입력 할 수 있습니다.", // TODO
-					phone : "전화번호 형식이 아닙니다.",
-					rrn : "주민등록번호 형식에 맞지 않습니다.",
-					ssn : "주민등록번호 형식에 맞지 않습니다.", // Deprecated
-					frn : "외국인등록번호 형식에 맞지 않습니다.",
-					frn_rrn : "주민번호나 외국인등록번호 형식에 맞지 않습니다.", // Deprecated
-					frn_ssn : "주민번호나 외국인등록번호 형식에 맞지 않습니다.",
-					cno : "사업자등록번호 형식에 맞지 않습니다.", // Deprecated
-					kbrn : "사업자등록번호 형식에 맞지 않습니다.",
-					cpno : "법인번호 형식에 맞지 않습니다.", // Deprecated
-					kcn : "법인번호 형식에 맞지 않습니다.",
-					date : "날짜 형식에 맞지 않습니다.",
-					time : "시간 형식에 맞지 않습니다.",
-					accept : "\"{0}\" 값만 입력 할 수 있습니다.",
-					match : "\"{0}\" 이(가) 포함된 값만 입력 할 수 있습니다.",
-					acceptFileExt : "\"{0}\" 이(가) 포함된 확장자만 입력 할 수 있습니다.",
-					notAccept : "\"{0}\" 값은 입력 할 수 없습니다.",
-					notMatch : "\"{0}\" 이(가) 포함된 값은 입력 할 수 없습니다.",
-					notAcceptFileExt : "\"{0}\" 이(가) 포함된 확장자는 입력 할 수없습니다.",
-					equalTo : "\"{1}\" 의 값과 같아야 합니다.",
-					maxlength : "{0} 글자 이하만 입력 가능합니다.",
-					minlength : "{0} 글자 이상만 입력 가능합니다.",
-					rangelength : "{0} 글자 에서 {1} 글자 까지만 입력 가능합니다.",
-					maxbyte : "{0} 바이트 이하만 입력 가능합니다.<br> - 영문, 숫자 : 1 바이트<br> - 한글, 특수문자 : {1} 바이트",
-					minbyte : "{0} 바이트 이상만 입력 가능합니다.<br> - 영문, 숫자 : 1 바이트<br> - 한글, 특수문자 : {1} 바이트",
-					rangebyte : "{0} 바이트 에서 {1} 바이트 까지만 입력 가능합니다.<br> - 영문, 숫자 한글자 : 1 바이트<br> - 한글, 특수문자 : {2} 바이트",
-					maxvalue : "{0} 이하의 값만 입력 가능합니다.",
-					minvalue : "{0} 이상의 값만 입력 가능합니다.",
-					rangevalue : "{0} 에서 {1} 사이의 값만 입력 가능합니다.",
-					regexp : "{2}"
-				},
-				"en_US" : {
-					global : "It Can't pass the field verification.",
-					required : "It is a field to input obligatorily.",
-					alphabet : "Can enter only alphabetical characters.",
-					integer : "Can enter only number(integer).",
-					korean : "Can enter only Korean alphabet.",
-					alphabet_integer : "Can enter only alphabetical characters and number(integer).",
-					integer_korean : "Can enter only number(integer) and Korean alphabet.",
-					alphabet_korean : "Can enter only alphabetical characters and Korean alphabet.",
-					alphabet_integer_korean : "Can enter only alphabetical characters and number(integer) and Korean alphabet.",
-					dash_integer : "Can enter only number(integer) and dash(-).",
-					commas_integer : "Can enter only number(integer) and commas(,).",
-					number : "Can enter only number and (+-,.)",
-					email : "Don't conform to the format of E-mail.",
-					url : "Don't conform to the format of URL.",
-					zipcode : "Don't conform to the format of zip code.",
-					decimal : "Can enter only (finite)decimal",
+                    phone : "전화번호 형식이 아닙니다.",
+                    rrn : "주민등록번호 형식에 맞지 않습니다.",
+                    ssn : "주민등록번호 형식에 맞지 않습니다.", // Deprecated
+                    frn : "외국인등록번호 형식에 맞지 않습니다.",
+                    frn_rrn : "주민번호나 외국인등록번호 형식에 맞지 않습니다.", // Deprecated
+                    frn_ssn : "주민번호나 외국인등록번호 형식에 맞지 않습니다.",
+                    cno : "사업자등록번호 형식에 맞지 않습니다.", // Deprecated
+                    kbrn : "사업자등록번호 형식에 맞지 않습니다.",
+                    cpno : "법인번호 형식에 맞지 않습니다.", // Deprecated
+                    kcn : "법인번호 형식에 맞지 않습니다.",
+                    date : "날짜 형식에 맞지 않습니다.",
+                    time : "시간 형식에 맞지 않습니다.",
+                    accept : "\"{0}\" 값만 입력 할 수 있습니다.",
+                    match : "\"{0}\" 이(가) 포함된 값만 입력 할 수 있습니다.",
+                    acceptFileExt : "\"{0}\" 이(가) 포함된 확장자만 입력 할 수 있습니다.",
+                    notAccept : "\"{0}\" 값은 입력 할 수 없습니다.",
+                    notMatch : "\"{0}\" 이(가) 포함된 값은 입력 할 수 없습니다.",
+                    notAcceptFileExt : "\"{0}\" 이(가) 포함된 확장자는 입력 할 수없습니다.",
+                    equalTo : "\"{1}\" 의 값과 같아야 합니다.",
+                    maxlength : "{0} 글자 이하만 입력 가능합니다.",
+                    minlength : "{0} 글자 이상만 입력 가능합니다.",
+                    rangelength : "{0} 글자 에서 {1} 글자 까지만 입력 가능합니다.",
+                    maxbyte : "{0} 바이트 이하만 입력 가능합니다.<br> - 영문, 숫자 : 1 바이트<br> - 한글, 특수문자 : {1} 바이트",
+                    minbyte : "{0} 바이트 이상만 입력 가능합니다.<br> - 영문, 숫자 : 1 바이트<br> - 한글, 특수문자 : {1} 바이트",
+                    rangebyte : "{0} 바이트 에서 {1} 바이트 까지만 입력 가능합니다.<br> - 영문, 숫자 한글자 : 1 바이트<br> - 한글, 특수문자 : {2} 바이트",
+                    maxvalue : "{0} 이하의 값만 입력 가능합니다.",
+                    minvalue : "{0} 이상의 값만 입력 가능합니다.",
+                    rangevalue : "{0} 에서 {1} 사이의 값만 입력 가능합니다.",
+                    regexp : "{2}"
+                },
+                "en_US" : {
+                    global : "It Can't pass the field verification.",
+                    required : "It is a field to input obligatorily.",
+                    alphabet : "Can enter only alphabetical characters.",
+                    integer : "Can enter only number(integer).",
+                    korean : "Can enter only Korean alphabet.",
+                    alphabet_integer : "Can enter only alphabetical characters and number(integer).",
+                    integer_korean : "Can enter only number(integer) and Korean alphabet.",
+                    alphabet_korean : "Can enter only alphabetical characters and Korean alphabet.",
+                    alphabet_integer_korean : "Can enter only alphabetical characters and number(integer) and Korean alphabet.",
+                    dash_integer : "Can enter only number(integer) and dash(-).",
+                    commas_integer : "Can enter only number(integer) and commas(,).",
+                    number : "Can enter only number and (+-,.)",
+                    email : "Don't conform to the format of E-mail.",
+                    url : "Don't conform to the format of URL.",
+                    zipcode : "Don't conform to the format of zip code.",
+                    decimal : "Can enter only (finite)decimal",
                     decimal_ : "Can enter up to {0} places of (finite)decimal.", // TODO
-					phone : "There is no format of phone number.",
-					rrn : "Don't fit the format of the resident registration number.",
-					ssn : "Don't fit the format of the resident registration number.", // Deprecated.
-					frn : "Don't fit the format of foreign registration number.",
-					frn_rrn : "Don't fit the format of the resident registration number or foreign registration number.",
-					frn_ssn : "Don't fit the format of the resident registration number or foreign registration number.", // Deprecated.
-					cno : "Don't fit the format of registration of enterpreneur.", // Deprecated
-					kbrn : "Don't fit the format of registration of enterpreneur.",
-					cpno : "Don't fit the format of corporation number.", // Deprecated
-					kcn : "Don't fit the format of corporation number.",
-					date : "Don't fit the format of date.",
-					time : "Don't fit the format of time.",
-					accept : "Can enter only \"{0}\" value.",
-					match : "Can enter only value ​​that contains \"{0}\".",
-					acceptFileExt : "Can enter only extension that includes \"{0}\".",
-					notAccept : "Can't enter \"{0}\" value.",
-					notMatch : "Can't enter only value ​​that contains \"{0}\".",
-					notAcceptFileExt : "Can't enter only extension that includes \"{0}\".",
-					equalTo : "Must be the same as \"{1}\" value.",
-					maxlength : "Can enter only below {0} letters.",
-					minlength : "Can enter only more than {0} letters.",
-					rangelength : "It can be entered from {0} to {1} letters.",
-					maxbyte : "Can enter only below {0} bytes.",
-					minbyte : "Can enter only more than {0} bytes.",
-					rangebyte : "It can be entered from {0} to {1} bytes.",
-					maxvalue : "Can enter only below {0} value.",
-					minvalue : "Can enter only more than {0} value.",
-					rangevalue : "Can be entered value from {0} to {1}.",
-					regexp : "{2}"
-				}
-			}
+                    phone : "There is no format of phone number.",
+                    rrn : "Don't fit the format of the resident registration number.",
+                    ssn : "Don't fit the format of the resident registration number.", // Deprecated.
+                    frn : "Don't fit the format of foreign registration number.",
+                    frn_rrn : "Don't fit the format of the resident registration number or foreign registration number.",
+                    frn_ssn : "Don't fit the format of the resident registration number or foreign registration number.", // Deprecated.
+                    cno : "Don't fit the format of registration of enterpreneur.", // Deprecated
+                    kbrn : "Don't fit the format of registration of enterpreneur.",
+                    cpno : "Don't fit the format of corporation number.", // Deprecated
+                    kcn : "Don't fit the format of corporation number.",
+                    date : "Don't fit the format of date.",
+                    time : "Don't fit the format of time.",
+                    accept : "Can enter only \"{0}\" value.",
+                    match : "Can enter only value ​​that contains \"{0}\".",
+                    acceptFileExt : "Can enter only extension that includes \"{0}\".",
+                    notAccept : "Can't enter \"{0}\" value.",
+                    notMatch : "Can't enter only value ​​that contains \"{0}\".",
+                    notAcceptFileExt : "Can't enter only extension that includes \"{0}\".",
+                    equalTo : "Must be the same as \"{1}\" value.",
+                    maxlength : "Can enter only below {0} letters.",
+                    minlength : "Can enter only more than {0} letters.",
+                    rangelength : "It can be entered from {0} to {1} letters.",
+                    maxbyte : "Can enter only below {0} bytes.",
+                    minbyte : "Can enter only more than {0} bytes.",
+                    rangebyte : "It can be entered from {0} to {1} bytes.",
+                    maxvalue : "Can enter only below {0} value.",
+                    minvalue : "Can enter only more than {0} value.",
+                    rangevalue : "Can be entered value from {0} to {1}.",
+                    regexp : "{2}"
+                }
+            }
 		}
 	});
 	// 아래 extend 구문은 사용자 정의 룰 정의 시 적용되게 하는 코드이므로 사용자 정의 룰을 정의 했다면 절대 지우면 안됨.
@@ -437,6 +438,7 @@
 			 * N.alert, N.popup 컴포넌트의 요소들이 저장 되는 영역(지정 필수)
 			 * N.context.attr("architecture").page.context 와 같게 설정해도 됩니다.
 			 * Documents 컴포넌트를 사용하면 따로 지정 하지 않아도 됩니다.
+			 * SPA(Single Page Application) 가 아니면 "body" 로 설정 해 주세요.
 			 */
 			"container" : ".docs__ > .docs_contents__.visible__",
 			/**
@@ -576,11 +578,11 @@
 				/**
 				 * 컬럼 리사이즈 시 다른컬럼이 밀릴때 아래 수치 조절(기본값 : 0)
 				 */
-				"resizableCorrectionWidth" : N.browser.is("chrome") ? 1 : N.browser.is("safari") ? 2 : 0,
+				"resizableCorrectionWidth" : N.browser.is("safari") ? 1 : 0,
 				/**
 				 * 헤더고정형 중 마지막 컬럼 리사이즈 시 다른컬럼이 밀릴때 아래 수치 조절(기본값 : 0)
 				 */
-				"resizableLastCellCorrectionWidth" : 0,
+		        "resizableLastCellCorrectionWidth" : N.browser.is("ie") || N.browser.is("firefox") ? 10.8 : 12,
 				/**
 				 * 리사이즈바의 left 포지션이 컬럼 보더를 기준으로 가운데에 위치하지 않을때 아래 수치 조절(기본값 : 0)
 				 */
@@ -600,11 +602,11 @@
 				/**
 				 * 컬럼 고정 시 고정 된 헤더 셀(TH)의 높이가 맞지 않을때 아래 수치 조절(기본값 : 0)
 				 */
-				"fixedcolHeadHeight" : N.browser.is("ie") ? 0.5 : 0,
+				"fixedcolHeadHeight" : 0,
 				/**
 				 * 컬럼 고정 시 고정 된 바디 셀(TD)의 상단 위치가 맞지 않을때 아래 수치 조절(기본값 : 0)
 				 */
-				"fixedcolBodyMarginTop" : N.browser.is("firefox") ? -1 : 0,
+				"fixedcolBodyMarginTop" : N.browser.is("ie") || N.browser.is("firefox") ? -1 : 0,
 				/**
 				 * 컬럼 고정 시 고정 된 바디 셀(TD)의 좌측 위치가 맞지 않을때 아래 수치 조절(기본값 : 0)
 				 */
@@ -612,7 +614,7 @@
 				/**
 				 * 컬럼 고정 시 데이터를 바인드 할 때 고정 된 바디 셀(TD)의 높이가 맞지 않을때 아래 수치 조절(기본값 : 0)
 				 */
-				"fixedcolBodyBindHeight" : N.browser.is("ie") || N.browser.is("firefox") ? 0.33 : 1,
+				"fixedcolBodyBindHeight" : N.browser.is("ie") || N.browser.is("firefox") ? 1 : 1,
 				/**
 				 * 컬럼 고정 시 데이터를 Add 할 때 고정 된 바디 셀(TD)의 높이가 맞지 않을때 아래 수치 조절(기본값 : 1)
 				 */
@@ -655,7 +657,7 @@
 					"close" : "메뉴 닫기",
 					"closeConf" : "\"{0}\" 메뉴에 편집중인 항목이 있습니다. 무시하고 메뉴를 닫겠습니까?",
 					"maxTabs" : "최대 {0} 개의 메뉴 만 열 수 있습니다. <br>다른 메뉴 탭을 닫고 다시 시도 하세요.",
-					"maxStateful" : "선택한 메뉴가 활성화 되면 설정 된 최대 상태유지 메뉴 개수({1} 개)가 초과되어<br>마지막으로 선택 된 \"{0}\" 메뉴의 상태가 초기화 됩니다.<br>메뉴를 선택 하겠습니까?"
+					"maxStateful" : "선택한 메뉴가 활성화 되면 설정 된 최대 상태유지 메뉴 개수(최대 {1} 개)가 초과 되어 마지막으로 선택 된 \"{0}\" 메뉴 페이지가 다시 로딩 됩니다.<br>메뉴를 선택 하겠습니까?"
 				},
 				"en_US" : {
 					"closeAllTitle" : "Close all menus",
@@ -668,7 +670,7 @@
 					"close" : "Close the menu",
 					"closeConf" : "There is an item being edited in the \"{0}\" memu. Are you sure you want to close the menu?",
 					"maxTabs" : "You can only open up to {0} menus. <br>Close other menu tabs and try again.",
-					"maxStateful" : "선택한 메뉴가 활성화 되면 설정 된 최대 상태유지 메뉴 개수({1} 개)가 초과되어<br>마지막으로 선택 된 \"{0}\" 메뉴의 상태가 초기화 됩니다.<br>메뉴를 선택 하겠습니까?"
+					"maxStateful" : "When the selected menu is activated, the maximum number of menu items (maximum of {1}) is exceeded and the last selected menu page \"{0}\" will be  reloaded.<br>Do you want to select the menu?"
 				}
 			}
 		}
