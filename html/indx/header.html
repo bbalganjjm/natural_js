@@ -11,6 +11,12 @@
 	left: 50%;
 	transform: translate(-50%, -60%);
 	display: inline-block;
+    transition: top 0.7s cubic-bezier(0.5, 0, 0.5, 1.5);
+}
+
+.header .header_logo #logo {
+    height : 150px;
+    transition: height 0.7s cubic-bezier(0.5, 0, 0.5, 1.5);
 }
 
 .header #i18nButtons {
@@ -168,11 +174,66 @@
 	animation-name: navFixOn;
 	animation-duration: 0.5s;
 }
+
+.header .tips {
+    position: absolute;
+    right: 0;
+    bottom: 41px;
+    height: 0;
+    width: 573px;
+    background-color: #C8E6C9;
+    z-index: 1;
+    color: #fff;
+    opacity: 0.85;
+    overflow-y: hidden;
+    transition: height 0.7s cubic-bezier(0.5, 0, 0.5, 1.5);
+}
+
+.header .tips .title {
+    position: absolute;
+    width: 40px;
+    height: 100%;
+    font-weight: bold;
+    padding: 5px 10px;
+    background-color: #2E7D32;
+    display: inline-block;
+}
+
+.header .tips .subject {
+    position: absolute;
+    margin-left: 60px;
+    width: 100px;
+    height: 100%;
+    padding: 5px 10px;
+    background-color: #388E3C;
+    display: inline-block;
+    font-size: 0.9em;
+}
+
+.header .tips .content {
+    position: absolute;
+    margin-left: 180px;
+    height: 100%;
+    padding: 5px 10px;
+    display: inline-block;
+}
+
+.header .tips .content pre, .header .tips .content code {
+    padding: 0;
+    background: none;
+    margin: 0;
+}
+
 </style>
-<div class="header">
+<article class="header">
+    <div class="tips">
+        <div class="title">Tips</div>
+        <div class="subject"></div>
+        <div class="content"><pre class="line-numbers"><code class="language-javascript"></code></pre></div>
+    </div>
 	<div class="hgroup-back"></div>
 	<div class="header_logo">
-		<a href="./index.html"><img id="logo" src="images/natural_js.png" height="150" /></a>
+		<a href="./index.html"><img id="logo" src="images/natural_js.png"></a>
 	</div>
 	<div id="i18nButtons">
 		<a id="korean" href="#" class="link">한국어</a> | <a id="english" href="#" class="link">English</a>
@@ -287,11 +348,25 @@
 		</ul>
 		<a class="touchstartDummy" style="cursor: pointer;"></a>
 	</nav>
-</div>
+</article>
 
 <script type="text/javascript">
 	N(".header").cont({
 		init : function(view, request) {
+		    N.comm("js/tips.json").submit(function(data) {
+		        var idx = Math.floor((Math.random() * ((data.length - 1) - 0 + 1)) + 0);
+		        N(".tips .subject", view).html(data[idx].subject);
+		        N(".tips .content code", view).html(data[idx].content);
+		        
+		        Prism.highlightElement($(".tips code", view).get(0));
+		        
+		        setTimeout(function() {
+			        N(".tips", view).css("height", 155);
+			        N(".header_logo", view).css("top", "25%");
+			        N(".header_logo #logo", view).css("height", 100);
+			    }, 1500);
+		    });
+		    
 			CommonUtilController.setPageLinks("nav > ul > li > ul a, nav > ul > li.home > a", view);
 
 			var headerHeight = view.outerHeight() -  N("nav", view).height();
