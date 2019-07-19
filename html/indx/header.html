@@ -197,6 +197,14 @@
     padding: 5px 10px;
     background-color: #2E7D32;
     display: inline-block;
+    line-height: 210%;
+}
+
+.header .tips .title .prev, .header .tips .title .next {
+    font-weight: normal;
+    font-size: 0.9em;
+    display: block;
+    color: #E8F5E9;
 }
 
 .header .tips .subject {
@@ -227,7 +235,12 @@
 </style>
 <article class="header">
     <div class="tips">
-        <div class="title">Tips</div>
+        <div class="title">
+            Tips
+            <br><br>
+            <a href="#" class="prev">Prev</a>
+            <a href="#" class="next">Next</a>
+        </div>
         <div class="subject"></div>
         <div class="content"><pre class="line-numbers"><code class="language-javascript"></code></pre></div>
     </div>
@@ -352,19 +365,42 @@
 
 <script type="text/javascript">
 	N(".header").cont({
+	    makeTips : function(view, idx) {
+	        var data = this.tipsData;
+	        
+	        if(idx === undefined) {
+	            idx = this.idx = Math.floor((Math.random() * ((data.length - 1) - 0 + 1)) + 0);
+	        } else {
+	            this.idx = idx;
+	        }
+	        
+	        N(".tips .subject", view).html(data[idx].subject);
+	        N(".tips .content code", view).html(data[idx].content);
+	        
+	        Prism.highlightElement($(".tips code", view).get(0));
+	        
+	        setTimeout(function() {
+		        N(".tips", view).css("height", 155);
+		        N(".header_logo", view).css("top", "25%");
+		        N(".header_logo #logo", view).css("height", 100);
+		    }, 1500);
+	    },
 		init : function(view, request) {
+		    var self = this;
 		    N.comm("js/tips.json").submit(function(data) {
-		        var idx = Math.floor((Math.random() * ((data.length - 1) - 0 + 1)) + 0);
-		        N(".tips .subject", view).html(data[idx].subject);
-		        N(".tips .content code", view).html(data[idx].content);
+		        self.tipsData = data;
+		        self.makeTips(view);
 		        
-		        Prism.highlightElement($(".tips code", view).get(0));
+		        N(".tips .prev", view).click(function(e) {
+		            e.preventDefault();
+		            self.makeTips(view, data.length < self.idx + 2 ? 0 : self.idx + 1);
+		        });
 		        
-		        setTimeout(function() {
-			        N(".tips", view).css("height", 155);
-			        N(".header_logo", view).css("top", "25%");
-			        N(".header_logo #logo", view).css("height", 100);
-			    }, 1500);
+		        N(".tips .next", view).click(function(e) {
+		            e.preventDefault();
+		            
+		            self.makeTips(view, data.length > self.idx + 3 ? data.length - 1 : self.idx - 1);
+		        });
 		    });
 		    
 			CommonUtilController.setPageLinks("nav > ul > li > ul a, nav > ul > li.home > a", view);
