@@ -7,16 +7,14 @@
 
 .header .header_logo {
 	position: absolute;
-	top: 50%;
-	left: 50%;
+	top: 25%;
+	left: 400px;
 	transform: translate(-50%, -60%);
 	display: inline-block;
-    transition: top 0.7s cubic-bezier(0.5, 0, 0.5, 1.5);
 }
 
 .header .header_logo #logo {
-    height : 150px;
-    transition: height 0.7s cubic-bezier(0.5, 0, 0.5, 1.5);
+    height : 100px;
 }
 
 .header #i18nButtons {
@@ -175,7 +173,28 @@
 	animation-duration: 0.5s;
 }
 
+.header .awards {
+	left : 10px;
+	bottom: 51px;
+    position: absolute;
+}
+
+.header .awards .icon {
+	float: left;
+}
+
+.header .awards .text {
+	margin-left: 131px;
+}
+
+.header .awards .text h5 {
+    padding: 0 0 0 18px;
+    background: url(images/icon/h3_leaf.gif) no-repeat 0px 2px;
+    margin: 17px 0px;
+}
+
 .header .tips {
+	clear: both;
     position: absolute;
     right: 0;
     bottom: 41px;
@@ -231,9 +250,16 @@
     background: none;
     margin: 0;
 }
-
 </style>
 <article class="header">
+	<div class="awards">
+		<div class="icon"><img src="images/icon/award.png"></div>
+		<div class="text">
+			<h5>2018 제12회 공개SW 개발자대회 금상</h5>
+			<h5>2016 제10회 공개SW 개발자대회 동상</h5>
+			<h5>2012 제24회 글로벌 소프트웨어 공모대전 동상</h5>
+		</div>
+	</div>
     <div class="tips">
         <div class="title">
             Tips
@@ -367,22 +393,20 @@
 	N(".header").cont({
 	    makeTips : function(view, idx) {
 	        var data = this.tipsData;
-	        
+
 	        if(idx === undefined) {
 	            idx = this.idx = Math.floor((Math.random() * ((data.length - 1) - 0 + 1)) + 0);
 	        } else {
 	            this.idx = idx;
 	        }
-	        
+
 	        N(".tips .subject", view).html(data[idx].subject);
 	        N(".tips .content code", view).html(data[idx].content);
-	        
+
 	        Prism.highlightElement($(".tips code", view).get(0));
-	        
+
 	        setTimeout(function() {
 		        N(".tips", view).css("height", 155);
-		        N(".header_logo", view).css("top", "25%");
-		        N(".header_logo #logo", view).css("height", 100);
 		    }, 1500);
 	    },
 		init : function(view, request) {
@@ -390,19 +414,19 @@
 		    N.comm("js/tips.json").submit(function(data) {
 		        self.tipsData = data;
 		        self.makeTips(view);
-		        
+
 		        N(".tips .prev", view).click(function(e) {
 		            e.preventDefault();
 		            self.makeTips(view, data.length < self.idx + 2 ? 0 : self.idx + 1);
 		        });
-		        
+
 		        N(".tips .next", view).click(function(e) {
 		            e.preventDefault();
-		            
+
 		            self.makeTips(view, data.length > self.idx + 3 ? data.length - 1 : self.idx - 1);
 		        });
 		    });
-		    
+
 			CommonUtilController.setPageLinks("nav > ul > li > ul a, nav > ul > li.home > a", view);
 
 			var headerHeight = view.outerHeight() -  N("nav", view).height();
