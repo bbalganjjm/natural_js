@@ -197,6 +197,7 @@
                         // Common file popup
                         if(props[1] === "popup" && props[2] === "file") {
                             opts.url = "file/manager.view";
+                            opts.top = 20;
                             opts.onOpen = "onOpen";
                             opts.overlayClose = false;
                             opts.escClose = false;
