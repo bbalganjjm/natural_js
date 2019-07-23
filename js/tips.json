@@ -12,5 +12,5 @@
 	"content": "jQuery 로 요소를 선택할 때는 반드시 view 에서 find 하거나\nview를 context 로 지정 해 줘야 합니다.\nN(\".pageId\").cont({\n\tinit: function(view, request) {\n\t\t$(\"selector\", view);\n\t\tview.find(\"selector\");\n\t}\n});"
 }, {
 	"subject": "jQuery 기능 사용 제한",
-	"content": "1.jQuery.ajax 함수를 사용하면 Communication Filter 기능을\n&nbsp;&nbsp;사용 할 수 없습니다. 반드시 서버와의 통신은\n&nbsp;&nbsp;Communicator(N.comm)를 사용 해야 합니다.\n\n2.컴포넌트를 데이터를 바인딩 한 입력요소에\n&nbsp;&nbsp;jQuery.val 함수를 사용하여 값을 변경하면\n&nbsp;&nbsp;화면의 값만 변경 되고 내부 데이터는 변경 되지 않습니다.\n&nbsp;&nbsp;반드시 컴포넌트의 val 메서드를 사용 해야 합니다."
+	"content": "1.jQuery.ajax 함수를 사용하면 Communication Filter 기능을\n&nbsp;&nbsp;사용 할 수 없습니다. 반드시 서버와의 통신은\n&nbsp;&nbsp;Communicator(N.comm)를 사용 해야 합니다.\n\n2.UI 컴포넌트로 데이터를 바인딩 한 입력요소에\n&nbsp;&nbsp;jQuery.val 함수를 사용하여 값을 변경하면\n&nbsp;&nbsp;화면의 값만 변경 되고 내부 데이터는 변경 되지 않습니다.\n&nbsp;&nbsp;반드시 컴포넌트의 val 메서드를 사용 해야 합니다."
 }]
