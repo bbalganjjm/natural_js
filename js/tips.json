@@ -8,7 +8,7 @@
 	"subject": "N.gird 의 변경 된 데이터 목록을 서버로 전송하기",
 	"content": "var masterGrid = N([]).grid(\".masterGrid\").add();\nN(masterGrid.data(\"modified\")).comm({\n\t\"dataIsArray\": true,\n\t\"url\": \"getSampleList.json\"\n}).submit(function(data) {\n\tmasterGrid.bind(data);\n});"
 }, {
-	"subject": "jQuery 로 요소 선택 시 주의 점",
+	"subject": "jQuery 로 요소 선택 시 주의 사항",
 	"content": "jQuery 로 요소를 선택할 때는 반드시 view 에서 find 하거나\nview를 context 로 지정 해 줘야 합니다.\nN(\".pageId\").cont({\n\tinit: function(view, request) {\n\t\t$(\"selector\", view);\n\t\tview.find(\"selector\");\n\t}\n});"
 }, {
 	"subject": "jQuery 기능 사용 제한",
