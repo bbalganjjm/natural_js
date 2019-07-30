@@ -40,6 +40,8 @@
 	    
 		아울러 MyBatis Mapper XML 에서는 ${} 로 변수를 치환하면 절대 안되고 #{} 로 변수를 바인딩 해야 합니다. 치환하면 SQL Injection 공격에 그대로 노출 됩니다.
 	    SQL 에 테이블 명을 동적으로 받는 등 어쩔수 없이 ${} 를 사용해야 한다면 변수값에 대해 SQL Injection 공격 문자열을 치환 해 주는 처리를 별도로 해 줘야 합니다.
+	    
+	    최신 가이드 문서(file/documents.html) 파일도 올려 놓았으니 엎퍼 쳐 주세요. ^^  
 
 5. Natural-TEMPLATE 패키지(natural.template.js)가 업데이트 되었습니다. GitHub 에서 받아서 패치 해 주세요.
 	
