@@ -1,5 +1,5 @@
 /*!
- * Natural-TEMPLATE v0.0.9
+ * Natural-TEMPLATE v0.0.10
  *
  * Released under the LGPL v2.1 license
  * Date: 2019-02-28T18:00Z
@@ -7,7 +7,7 @@
  * Copyright 2019 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-TEMPLATE"] = "0.0.9";
+    N.version["Natural-TEMPLATE"] = "0.0.10";
 
     (function(N) {
 
@@ -301,7 +301,7 @@
                         var listCompEle = targetEle.closest(".list__, .grid__");
 
                         var compInst;
-                        if(listCompEle.length > 0) {
+                        if(listCompEle.length > 0 && targetEle.closest("header").length === 0) {
                             if(listCompEle.hasClass("list__")) {
                                 compInst = listCompEle.instance("list");
                             } else if(listCompEle.hasClass("grid__")) {
