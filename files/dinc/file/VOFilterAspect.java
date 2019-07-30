@@ -162,7 +162,6 @@ public class VOFilterAspect {
 
 		HttpSession session = request.getSession();
 		// TODO Put session parameters to VO
-		vo.put("abc", 123);
 	}
 
 	@SuppressWarnings("unchecked")
