@@ -398,7 +398,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .list__ > .row_data_changed__ input, 
 .list__ > .row_data_changed__ select, 
 .list__ > .row_data_changed__ textarea {
-	text-shadow: 1px 1px 0 #C8E6C9;
+    text-shadow: 0px 0px 0 #C8E6C9;
 }
 
 .list__.list_hover__ > li:hover,
@@ -417,7 +417,6 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .list__.list_select__ > .list_selected__ select,
 .list__.list_select__ > .list_selected__ textarea {
 	background-color: #E8F5E9;
-	text-shadow: 1px 1px 0 #C8E6C9;
 }
 
 .list__ li.empty__ {
@@ -442,15 +441,15 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .grid__ > .row_data_changed__ input, 
 .grid__ > .row_data_changed__ select, 
 .grid__ > .row_data_changed__ textarea {
-	text-shadow: 1px 1px 0 #C8E6C9;
+	text-shadow: 0px 0px 0 #C8E6C9;
 }
 
 .grid__ > tbody.row_data_changed__>tr:first-child>td:first-child {
-	background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAALtJREFUeNqkkrENwyAQAN/UdO48AHPQ0XgCmqRiKKpkBxo6z8EATEBP8siOjJM3KH4JPUjc8TwMOWe4Eqy1wVr7wPGXYAVvOCgJ64BhmiagJKwFCyFgnmdSwlqwlBKWZYEY408J64FDCGQlrBfeV/J1hWPDKBjXazyNMXecDPiR3oLqN6EET2rB5CtsDWvBlWAcR9Bal7xJnHOncCVQSgHnvOR9JWdwJfDeQ0qp5EOQMNnEXvgjuBIvAQYAyQyVrHfXjNAAAAAASUVORK5CYII=") no-repeat 1px 3px;
+	background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAwklEQVQoz43RPS4FURgG4GcmJ9xNSCxAJacQnU4oRcQ2LIBcnd4+XGoLmOI7jcQOLALB0czcTIbkzle+ed7zy4yJiMNSygKaGfgED3jGWbMBH+MRW320aiJiOXHfuEfu8aLPP3He4npSeMH+BH/hIuf8lCDnfDPoUkqqtb7+g1fQjpfuuq6ttV7hFG89vsTPYNK4kFLaxR12cIS9nPMqIj6w/WcHHKDrL/g+HGP0SkREnfEXa5P6YLmpNEyL2xlubX4BL0tBXgAp37oAAAAASUVORK5CYII=") no-repeat 1px 3px;
 }
 
 .grid__ > tbody.row_data_deleted__>tr:first-child>td:first-child {
-	background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAALlJREFUeNpi/P//PwM2MGvWLAck7oe0tLQL2NQxYjMAqLkASPWjCRtiM4SJATsQAOKLQOwIxTAx/C4A2rwASIGcLo/D4IdAfADokgRcLojHo5kBKhePzwuNUKfjAhehauCABU3BASAGBdQD9AADes8ASCmAYgSfASD/10M14HJFI9QivLFANEA34AMRej7gM+ACEQZcICYhke2FATYAGPeg6DmIR/1BqBqCuRGUcQzQAw+oGSOWAAIMAHRmOlxoNr5jAAAAAElFTkSuQmCC") no-repeat 1px 3px;
+	background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAlklEQVQoz42O0QnDMAxEL8VzNNAZDvKbJbxMPxKadbyEfwOCbBBo5+hHfy6gGgUiMH6STtx1aMrM3gDuaj8ke7/vJHq52QRgCRgk5yQe9VcvcHzskZwQJGcE5RPcguUj4tbBC1YzyxoVMxu85s+B5A4gAyh6WbP44EpFkYpcLkcaSFaSVXwaKbkjNJzQwCb750n07xHzBySYOv4iJxqqAAAAAElFTkSuQmCC") no-repeat 1px 3px;
 }
 
 .grid__.grid_hover__ > tbody:hover,
@@ -469,7 +468,6 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .grid__.grid_select__ > .grid_selected__ select,
 .grid__.grid_select__ > .grid_selected__ textarea {
 	background-color: #E8F5E9;
-	text-shadow: 1px 1px 0 #C8E6C9;
 }
 
 .grid__ td.empty__ {
