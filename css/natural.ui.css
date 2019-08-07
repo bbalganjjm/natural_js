@@ -1513,10 +1513,11 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 .docs__>.docs_tab_context__>.docs_tabs__>.docs_tab__ {
 	display: inline-block;
-	margin-right: 2px;
+	margin-left: 1px;
+	margin-right: 1px;
 	padding: 0;
 	border-top: 1px solid #66BB6A;
-	border-left: 10px solid #66BB6A;
+	border-left: 5px solid #66BB6A;
 	border-right: 1px solid #66BB6A;
 	border-bottom: 1px solid #66BB6A;
 	text-align: center;
@@ -1555,7 +1556,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .docs__>.docs_tab_context__>.docs_tabs__>.docs_tab__>.docs_tab_active_btn__ {
 	color : rgba(0, 0, 0, 0.87);
 	text-decoration: none;
-	padding: 0 5px;
+	padding: 0 12px 0 5px;
 }
 
 .docs__>.docs_tab_context__>.docs_tabs__>.docs_tab__>.docs_tab_active_btn__>span {
@@ -1569,8 +1570,8 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 .docs__>.docs_tab_context__>.docs_tabs__>.docs_tab__>.docs_tab_close_btn__>span {
 	position: absolute;
-	margin-top: -2px;
-    margin-left: -10px;
+	margin-top: 6px;
+    margin-left: -12px;
 	height: 12px;
 	width: 12px;
 	background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAe0lEQVQoz81RwQqDUAxLRPyRHfZnFvGyuc8QcZcJ+UB/wsOyyw7lIYOdNKeWpElLgXND0iSpTf0gacyauphZbUtSDaCxPZHssoA7KTfbMwCQ7CNiyXy1s9mW6qYkq8K9tf0ieSfZ254lDb9uuJJ8RMTza/AGcDniAX/gA+szLixcVpjRAAAAAElFTkSuQmCC");
