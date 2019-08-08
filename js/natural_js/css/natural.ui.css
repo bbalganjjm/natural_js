@@ -386,7 +386,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .row_data_deleted__, .row_data_deleted__ input, .row_data_deleted__ select, .row_data_deleted__ textarea {
-	color: #81C784 !important;
+	color : rgba(0, 0, 0, 0.6);
 }
 
 .data_changed__ {
@@ -403,13 +403,6 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 .list__ > .row_data_changed__ {
 	background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAwklEQVQoz43RPS4FURgG4GcmJ9xNSCxAJacQnU4oRcQ2LIBcnd4+XGoLmOI7jcQOLALB0czcTIbkzle+ed7zy4yJiMNSygKaGfgED3jGWbMBH+MRW320aiJiOXHfuEfu8aLPP3He4npSeMH+BH/hIuf8lCDnfDPoUkqqtb7+g1fQjpfuuq6ttV7hFG89vsTPYNK4kFLaxR12cIS9nPMqIj6w/WcHHKDrL/g+HGP0SkREnfEXa5P6YLmpNEyL2xlubX4BL0tBXgAp37oAAAAASUVORK5CYII=") no-repeat 99% 50%;
-}
-
-.list__ > .row_data_deleted__, 
-.list__ > .row_data_deleted__ input, 
-.list__ > .row_data_deleted__ select, 
-.list__ > .row_data_deleted__ textarea {
-    color : rgba(0, 0, 0, 0.5);
 }
 
 .list__ > .row_data_deleted__ {
@@ -461,13 +454,6 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 .grid__ > .row_data_changed__>tr:first-child>td:first-child {
 	background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAwklEQVQoz43RPS4FURgG4GcmJ9xNSCxAJacQnU4oRcQ2LIBcnd4+XGoLmOI7jcQOLALB0czcTIbkzle+ed7zy4yJiMNSygKaGfgED3jGWbMBH+MRW320aiJiOXHfuEfu8aLPP3He4npSeMH+BH/hIuf8lCDnfDPoUkqqtb7+g1fQjpfuuq6ttV7hFG89vsTPYNK4kFLaxR12cIS9nPMqIj6w/WcHHKDrL/g+HGP0SkREnfEXa5P6YLmpNEyL2xlubX4BL0tBXgAp37oAAAAASUVORK5CYII=") no-repeat 1% 50%;
-}
-
-.grid__ > .row_data_deleted__, 
-.grid__ > .row_data_deleted__ input, 
-.grid__ > .row_data_deleted__ select, 
-.grid__ > .row_data_deleted__ textarea {
-	color : rgba(0, 0, 0, 0.5);
 }
 
 .grid__ > .row_data_deleted__>tr:first-child>td:first-child {
