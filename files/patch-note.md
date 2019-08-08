@@ -20,7 +20,7 @@
  *
 
 ## natural.ui.css
- * Changed N.list, N.grid, N.docs related styles.
+ * Changed N.tab, N.list, N.grid, N.docs related styles.
 
 ## natural.config.js
  *
