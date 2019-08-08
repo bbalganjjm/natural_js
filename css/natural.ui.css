@@ -816,7 +816,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .tab__>ul>li {
 	float: left;
 	margin-right: 1px;
-	padding: 4px;
+	padding: 2px 4px;
     border: 1px solid #66BB6A;
 	cursor: pointer;
 	min-width: 80px;
@@ -874,14 +874,18 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .tab__>ul>li>a {
-	font-weight: bold;
+    color: rgba(255, 255, 255, 0.9);
 	text-decoration: none;
-	line-height: 25px;
+	line-height: 20px;
 }
 
 .tab__>ul>li.tab_active__ {
 	background-color: #FFFFFF;
 	border-bottom: 1px solid #FFFFFF;
+}
+
+.tab__>ul>li.tab_active__>a {
+	color: inherit;
 }
 
 .tab__>div {
