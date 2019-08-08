@@ -566,6 +566,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.2);
 	padding: 4px;
 	margin: 0;
+	color : rgba(0, 0, 0, 0.87);
 }
 
 .grid__>thead .data_filter_panel__.visible__ {
