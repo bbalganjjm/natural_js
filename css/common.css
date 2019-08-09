@@ -250,6 +250,7 @@ article .alert {
 	background-color: #E8F5E9;
 	border-radius: 3px;
 	margin: 0 0 15px 0;
+	opacity: 0.8;
 }
 
 article .alert ul {
