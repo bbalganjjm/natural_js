@@ -1543,12 +1543,12 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .docs__>.docs_tab_context__>.docs_tabs__>.docs_tab__.inactive__ {
-	background-color: #81C784;
+	background-color: #C8E6C9;
 }
 
 .docs__>.docs_tab_context__>.docs_tabs__>.docs_tab__.inactive__>.docs_tab_active_btn__>span {
-	color: rgba(255, 255, 255, 0.87);
-	text-shadow: 0 1px 0 #66BB6A;
+    color: rgba(0, 0, 0, 0.87);
+	text-shadow: 0 1px 0 #E8F5E9;
 }
 
 .docs__>.docs_tab_context__>.docs_tabs__>.docs_tab__.active__ {
