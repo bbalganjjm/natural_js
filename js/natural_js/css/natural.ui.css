@@ -1593,7 +1593,6 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 .docs__>.docs_tab_context__>ul.docs_tab_utils__>li {
 	float: left;
-	margin-left: 2px;
 	padding: 0;
 	border: 1px solid #66BB6A;
 	border-bottom: none;
@@ -1617,6 +1616,10 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     width: 12px;
     height: 12px;
     background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAmElEQVQoz4WSQQrEIAxFxdUcr4iUrkqRUnqfLlz0pg19zkYhBJ1xJf8/kx+MExEPZGBygwOcQBYR74AbKIAAoQMf1S/A5YBdCQJEBSfjBW28yliAzWjRttbAa+7zaLhVgQ1eNOPNm6dT5zOqHmvWXqRk4WDgtQ6u4x0Nngy8qUKz8gpwuvrLTUh/omZXV+MG9h+rEYBLRPwXXH9L1C69EugAAAAASUVORK5CYII=");    
+}
+
+.docs__>.docs_tab_context__>ul.docs_tab_utils__>li.docs_tab_list_item__ {
+    margin-left: 1px;
 }
 
 .docs__>.docs_tab_context__>ul.docs_tab_utils__>li.docs_tab_list_item__>a {
