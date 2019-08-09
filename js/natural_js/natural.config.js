@@ -547,10 +547,10 @@
 			"global" : {
 				"okBtnStyle" : {
 					color : "yellowgreen",
-					size : "large"
+					size : "medium"
 				},
 				"cancelBtnStyle" : {
-					size : "large"
+					size : "medium"
 				}
 			},
 			/**
@@ -606,7 +606,7 @@
 			}
 		},
 		"button" : {
-			"size" : "large"
+			"size" : "medium"
 		},
 		"popup" : {
 			"draggable" : true,

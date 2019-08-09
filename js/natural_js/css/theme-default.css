@@ -16,7 +16,7 @@ a {
 
 /* input element styles */
 input[type='text'], input[type='number'], input[type='tel'], input[type='password'], select, textarea {
-	padding: 4px;
+	padding: 2px;
 	border: 1px solid #A5D6A7;
 	font-size: 13px;
 	font-family: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", "dotum", "Segoe UI", sans-serif;
