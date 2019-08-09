@@ -2,14 +2,13 @@ var IndexController = {
 	docs : null,
 	init : function(window) {
 		this.setLocale();
-		if(!window.localStorage.themeColor || window.localStorage.themeColor === "undefined") {
-			window.localStorage.themeColor = "green";
-		}
-		this.reloadCss();
 		//this.loadWebFont();
 		this.loadHeader();
 		this.loadFooter();
 		this.docs = $("#docsContainer__").docs();
+
+		this.reloadCss();
+
 		if(location.hostname === "bbalganjjm.github.io") {
 			this.googleAnalytics();
 		}
@@ -43,6 +42,10 @@ var IndexController = {
 	 * CSS 를 다시 불러오면 filter 에서 컬러값을 치환 함.
 	 */
 	reloadCss : function() {
+		if(!window.localStorage.themeColor || window.localStorage.themeColor === "undefined") {
+			window.localStorage.themeColor = "green";
+		}
+
 		if(window.localStorage.themeColor !== "green") {
 			$("head > link[rel=stylesheet]").each(function() {
 				N.comm({
