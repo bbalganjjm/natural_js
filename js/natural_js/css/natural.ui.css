@@ -831,7 +831,8 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	min-width: 80px;
 	font-size: 12px;
 	text-align: center;
-	background-color: #A5D6A7;
+	background-color: #81C784;
+    border-radius: 0 3px 0 0;
 }
 
 .tab__>ul.tab_scroll__.effect__ {
@@ -883,7 +884,8 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .tab__>ul>li>a {
-    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 1px 0 #66BB6A;
+    color: rgba(255, 255, 255, 0.87);
 	text-decoration: none;
 	line-height: 20px;
 }
@@ -895,6 +897,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 .tab__>ul>li.tab_active__>a {
 	color: inherit;
+	text-shadow: none;
 }
 
 .tab__>div {
@@ -1527,7 +1530,6 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .docs__>.docs_tab_context__>.docs_tabs__>.docs_tab__ {
 	display: inline-block;
 	margin-left: 1px;
-	margin-right: 1px;
 	padding: 0;
 	border-top: 1px solid #66BB6A;
 	border-left: 5px solid #66BB6A;
@@ -1541,11 +1543,12 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .docs__>.docs_tab_context__>.docs_tabs__>.docs_tab__.inactive__ {
-	background-color: #C8E6C9;
+	background-color: #81C784;
 }
 
 .docs__>.docs_tab_context__>.docs_tabs__>.docs_tab__.inactive__>.docs_tab_active_btn__>span {
-	color: rgba(0, 0, 0, 0.75);
+	color: rgba(255, 255, 255, 0.87);
+	text-shadow: 0 1px 0 #66BB6A;
 }
 
 .docs__>.docs_tab_context__>.docs_tabs__>.docs_tab__.active__ {
@@ -1555,6 +1558,11 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	background-color: #fff;
 	border-bottom: 1px solid #fff;
 	transition: background-color 0.5s ease, border-bottom-color 0.3s ease;
+}
+
+.docs__>.docs_tab_context__>.docs_tabs__>.docs_tab__.active__>.docs_tab_active_btn__>span {
+    color: rgba(0, 0, 0, 0.87);
+    text-shadow: none;
 }
 
 .docs__>.docs_tab_context__>.docs_tabs__>.docs_tab__.stateless__>.docs_tab_active_btn__>span {
