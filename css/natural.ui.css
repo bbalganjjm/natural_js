@@ -125,8 +125,8 @@
 .alert_tooltip__.msg__ ul.msg_line_box__ li {
 	font-size: 11px;
 	line-height: 12px;
-	padding: 1px 1px 1px 13px;
-	background:	url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAvElEQVQoz7WRLW5CYRREz/1CEASBQDcIgmUHiIqqLoDKOnaEqkJUVTQoREnYQlNR0RTfFbR5vHNrIOGvooJxk8zN3JmBSyP2idoBJsAQ+AIegE9gU0r55kh8pS7U66qqmmpfvVFX6vOJlTpTe2p3y1vqS2b+qLc7Xdm7aQPdiFirE+ApIkaZeQ+870SNI6O3zFxGxBTYZOYd0AEGwMdfLzXVR3Vc13VR59syTjKcCz1Tx/+qtZTyevFxD/ALNrGGAZ7BYBgAAAAASUVORK5CYII=') no-repeat 0 2px;
+	padding: 1px 1px 1px 15px;
+	background:	url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAvElEQVQoz7WRLW5CYRREz/1CEASBQDcIgmUHiIqqLoDKOnaEqkJUVTQoREnYQlNR0RTfFbR5vHNrIOGvooJxk8zN3JmBSyP2idoBJsAQ+AIegE9gU0r55kh8pS7U66qqmmpfvVFX6vOJlTpTe2p3y1vqS2b+qLc7Xdm7aQPdiFirE+ApIkaZeQ+870SNI6O3zFxGxBTYZOYd0AEGwMdfLzXVR3Vc13VR59syTjKcCz1Tx/+qtZTyevFxD/ALNrGGAZ7BYBgAAAAASUVORK5CYII=') no-repeat 3px 2px;
 	color : rgba(255, 255, 255, 0.87);
 	margin-right: 5px;
 	font-style: italic;
