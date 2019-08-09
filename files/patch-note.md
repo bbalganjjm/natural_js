@@ -22,7 +22,7 @@
  *
 
 ## natural.ui.css
- * Changed N.alert, N.tab, N.list, N.grid, N.docs related styles.
+ * Changed N.alert, N.tab, N.list, N.grid, N.notify, N.docs related styles.
 
 ## natural.config.js
  *
