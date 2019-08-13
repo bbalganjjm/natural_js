@@ -88,6 +88,6 @@
  		위 col01 과 col02 는 natural.config.js 파일의 N.context.attr("ui").select.key 와 N.context.attr("ui").select.val 로 설정한 값을 넣어 주세요.
  		select 컴포넌트의 "key" 옵션과 "val" 옵션으로 직접 지정 해 주셔도 되구요.
 
-7. natural.js.min.js 파일 다시 받아 주세요. 
+7. natural.js.min.js 파일 다시 받아 주세요(아직 릴리즈는 안됐고 github 들어가서 dist 폴더 안에 들어있는것 받아주세요). 
 
     A : 입력값 유효성 검증 시 첫번째 검증 할 때 검증 메시지가 표시 되지 않는 버그가 수정 되었습니다.
