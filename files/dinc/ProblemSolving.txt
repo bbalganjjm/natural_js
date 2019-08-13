@@ -49,6 +49,43 @@
 
 --------------------------------------------------------------------------------------------------------------------------------------------------
 
-6. natural.js.min.js 파일 다시 받아주세요. 
+6. radio 요소가 form 이랑 연동되지 않습니다.
+	A : form 은 요소의 id 속성과 컬럼 값을 연결합니다.
+	    <input name="abc" value="Y">
+	    <input name="abc" value="N"> 만 하면 id 값이 없기 때문에 연결되지 않습니다.
+	    
+	    <input id="abc" name="abc" value="Y">
+	    <input name="abc" value="N"> 와 같이 첫번째 선택요소에 id 값을 name 속성값과 같은 값으로 넣어 주시면 됩니다.
+	    
+	    좀더 formal 하게 작성하는건 다음과 같습니다.
+	    <label><input id="abc" name="abc" value="Y"><span>예</span></label>
+	    <label><input name="abc" value="N"><span>아니오</span></label>
+	    
+	    checkbox도 기본은 radio와 동일 하나
+	    체크박스는 요소가 1개만 있을때는 값이 1이나 Y, on 이면 체크되고 0이나 N, off 이면 체크가 해제 됩니다.
+	    체크박스 요소가 2개 이상이면 컬럼 데이터가 Array 이면 Array 안에 있는 여러개 값을 한번에 선택 해 주고 String 으로 단일 값이 있으면 해단 값에 해당하는 요소를 선택 해 줍니다.
+	     * 1이나 Y, on 등 예/아니오 값의 기본값은 natural.config.js 파일의 N.context.attr("core").sgChkdVal 과 N.context.attr("core").sgUnChkdVal 에 설정 바랍니다.
+	    
+	    제일 권장하는 방법은 모든 선택 요소를 select 컴포넌트로 처리하면 위와 같은 오류를 방지 할 수 있고 소스정리도 깔끔하게 처리 할 수 있습니다.
+		<input id="abc" value="Y">
+	
+		<script type="text/javascript">
+		(function() {
+
+	    var cont = N(".type0401").cont({
+	        "p.select.abc" : {
+	            data : [{
+	                col01 : "예",
+	                col02 : "Y"
+	            }, {
+	                col01 : "아니오",
+	                col02 : "N"
+	            }]
+	        },
+ 		...
+ 		위 col01 과 col02 는 natural.config.js 파일의 N.context.attr("ui").select.key 와 N.context.attr("ui").select.val 로 설정한 값을 넣어 주세요.
+ 		select 컴포넌트의 "key" 옵션과 "val" 옵션으로 직접 지정 해 주셔도 되구요.
+
+7. natural.js.min.js 파일 다시 받아 주세요. 
 
     A : 입력값 유효성 검증 시 맨처음에는 검증 메시지가 표시 되지 않는 버그가 수정 되었습니다.
