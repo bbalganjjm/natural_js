@@ -57,7 +57,7 @@
 	    <input id="abc" name="abc" value="Y">
 	    <input name="abc" value="N"> 와 같이 첫번째 선택요소에 id 값을 name 속성값과 같은 값으로 넣어 주시면 됩니다.
 	    
-	    좀더 formal 하게 작성하는건 다음과 같습니다.
+	    좀더 formal 하게 작성하는건 다음과 같습니다(<span> 태그를 안넣어서 라디오 선택지가 사라졌을 수도 있습니다).
 	    <label><input id="abc" name="abc" value="Y"><span>예</span></label>
 	    <label><input name="abc" value="N"><span>아니오</span></label>
 	    
