@@ -272,7 +272,7 @@
 		<span lang="ko_KR">함수</span>
 		<span lang="en_US">Methods</span>
 	</h3>
-	<table>
+	<table style="width: auto;">
 		<tr>
 			<th>Name</th>
 			<th>Arguments</th>
@@ -749,6 +749,29 @@ var data = [{
     // 2. 폼 바인드
 	N(data).form("#formExample40").bind();
 </script></xmp></code></pre>
+
+    <h4 class="notIndex">5. N.select 를 사용하지 않고 radio, checkbox 입력요소를 N.form 과 연동</h4>
+    <p class="alert">radio 와 checkbox 입력요소의 첫번째 요소에 name 속성값과 같은 id 속성값을 반드시 표기 해야 합니다.</p>
+    <pre class="line-numbers"><code class="language-markup"><xmp>
+<div class="radio">
+    <label><input id="age" name="age" value="10"><span>10대</span></label>
+    <label><input name="age" value="20"><span>20대</span></label>
+    <label><input name="age" value="30"><span>30대</span></label>
+</div>
+<div class="checkbox">
+    <label><input id="color" name="color" value="red"><span>빨간색</span></label>
+    <label><input name="color" value="blue"><span>파란색</span></label>
+    <label><input name="color" value="green"><span>녹색</span></label>
+</div>
+
+<script type="text/javascript">
+    var data = {
+        age : 10,
+        color : ["red", "green"]
+    };
+    // 1. 폼 바인드
+    N(data).form("#formExample40").bind();
+</script></xmp></code></pre>  
 
 </article>
 
