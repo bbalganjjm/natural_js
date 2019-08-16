@@ -7,7 +7,7 @@
  *
 
 ## Natural-DATA v0.10.70
- *
+ * N.formatter.date : Fixed a bug that the date format was not removed when clicking the screen after the datepicker was displayed.
 
 ## Natural-CORE v0.17.22
  *
