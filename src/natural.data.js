@@ -1,5 +1,5 @@
 /*!
- * Natural-DATA v0.10.70
+ * Natural-DATA v0.10.71
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-		N.version["Natural-DATA"] = "0.10.70";
+		N.version["Natural-DATA"] = "0.10.71";
 
 	$.fn.extend($.extend(N.prototype, {
 		datafilter : function(callBack) {
@@ -400,6 +400,7 @@
 
 						var orgOnBeforeHide = opts.onBeforeHide;
 						opts.onBeforeHide = function(context, contents) {
+						    context.val(context.val().replace(/[^0-9]/g, ""));
 							context.trigger("focusout.dataSync.form").trigger("focusout.form.format");
 
 							if(orgOnBeforeHide !== null) {
