@@ -837,7 +837,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 .tab__>a.tab_scroll_prev__, .tab__>a.tab_scroll_next__ {
 	line-height: 16px;
-	padding: 8px 0 9px 0;
+	padding: 4px 0;
 	border-top: 1px solid #66BB6A;
 	border-left: 1px solid #66BB6A;
 	border-right: 1px solid #66BB6A;
