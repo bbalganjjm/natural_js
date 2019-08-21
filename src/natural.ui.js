@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.38.201
+ * Natural-UI v0.38.202
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-UI"] = "0.38.201";
+    N.version["Natural-UI"] = "0.38.202";
 
     $.fn.extend($.extend(N.prototype, {
         alert : function(msg, vars) {
@@ -2731,8 +2731,8 @@
                 var scrollBtnEles = opts.context.find(">a");
                 var prevBtnEle;
                 var nextBtnEle;
-                var lastDistance = 0;
                 var liMarginRight = parseInt(N.string.trimToZero(tabContainerEle.find(">li:first").css("margin-right")));
+                var lastDistance = 0 + liMarginRight;
                 
                 if(scrollBtnEles.length > 1) {
                     opts.context.css("position", "relative");
@@ -2744,8 +2744,8 @@
                     prevBtnEle = scrollBtnEles.eq(0).addClass("tab_scroll_prev__").css("left", 0).bind("click" + eventNameSpace,  function(e) {
                         e.preventDefault();
                         tabContainerEle.addClass("effect__");
-                        lastDistance = prevBtnEle.outerWidth();
-                        tabContainerEle.css("margin-left", (lastDistance + liMarginRight) + "px");
+                        lastDistance = prevBtnEle.outerWidth() + liMarginRight;
+                        tabContainerEle.css("margin-left", lastDistance + "px");
                         nextBtnEle.removeClass("disabled__");
                         prevBtnEle.addClass("disabled__");
                     });
@@ -2758,7 +2758,7 @@
                         nextBtnEle.addClass("disabled__");
                     });
 
-                    lastDistance = prevBtnEle.outerWidth();
+                    lastDistance = prevBtnEle.outerWidth() + liMarginRight;
                 }
 
                 N(window).bind("resize" + eventNameSpace, function() {
@@ -2813,7 +2813,7 @@
                     if(distance > prevDefGap || opts.context.outerWidth() >= tabContainerEle_.width() + nextDefGap + distance) {
                         return false;
                     } else {
-                        lastDistance = distance;
+                        lastDistance = distance + liMarginRight;
                         tabContainerEle_.css("margin-left", distance + "px");
                         isMoved = true;
                     }
@@ -2821,11 +2821,11 @@
                     if(isMoved) {
                         if(lastDistance + (scrollBtnEles.length > 1 ? 0 : 30) >= 0 && lastDistance <= prevDefGap) {
                             if(scrollBtnEles.length > 1) {
-                                lastDistance = prevDefGap;
+                                lastDistance = prevDefGap + liMarginRight;
                                 nextBtnEle.removeClass("disabled__");
                                 prevBtnEle.addClass("disabled__");
                             } else {
-                                lastDistance = 0;
+                                lastDistance = 0 + liMarginRight;
                             }
                             tabContainerEle_.addClass("effect__").css("margin-left", lastDistance + "px");
                             isMoved = false;
