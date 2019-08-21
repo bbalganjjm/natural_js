@@ -821,11 +821,12 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	padding: 2px 4px;
     border: 1px solid #66BB6A;
 	cursor: pointer;
-	min-width: 80px;
+	min-width: 60px;
 	font-size: 12px;
 	text-align: center;
 	background-color: #81C784;
     border-radius: 0 3px 0 0;
+    line-height: 20px;
 }
 
 .tab__>ul.tab_scroll__.effect__ {
@@ -862,7 +863,8 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .tab__>ul {
-    margin-bottom: -1px;    
+    margin-bottom: -1px;
+    padding: 0 1px;
 }
 
 .tab__>ul li.tab_disabled__ {
@@ -877,7 +879,6 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     text-shadow: 0 1px 0 #66BB6A;
     color: rgba(255, 255, 255, 0.87);
 	text-decoration: none;
-	line-height: 20px;
 }
 
 .tab__>ul>li.tab_active__ {
