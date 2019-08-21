@@ -836,24 +836,21 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .tab__>a.tab_scroll_prev__, .tab__>a.tab_scroll_next__ {
-	line-height: 16px;
-	padding: 4px 0;
-	border-top: 1px solid #66BB6A;
-	border-left: 1px solid #66BB6A;
-	border-right: 1px solid #66BB6A;
-	background-color: #C8E6C9;
-	font-size: 12px;
+	border: 1px solid #66BB6A;
+    background-color: #C8E6C9;
 	color : rgba(0, 0, 0, 0.87);
 }
 
 .tab__>a.tab_scroll_prev__ span {
-	padding: 0 10px 0 10px;
-	background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACrSURBVChTY/Sa5+XAwMBgB8SHtiVtOwCksQKgujAgJcIEJECKG6E0BvCe7y0GVLwayFwJxGANOAHI1P///18FMkMgIgwMWDWgmwoWhAIMDdhMRQbIGsRxmYoM8PoBG0DW8BIYrKFAOhyI34BFsAAMG4CaVjEyMmoDmWsgIqgAq5O2Jm59BbUNhF+BBaEArx+AmtYwMjDqAplw20AaDgFxPZTGAFuTkG1jeAMAAW42soB/2q4AAAAASUVORK5CYII=') no-repeat 50%;
+    line-height: 24px;
+    padding: 4px 11px 4px 10px;
+	background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAtUlEQVQoz8XRodJBcRDG4d/+RxAE4QvuAU00siCZMYJ+dlyKIJ/Zc7Iqy4KZL0mKKxAEV3Be5RhGE4yNT3jf2V34yZRl2YyI3rtHxCBFhN5wWFXVUdLsYUVRtCJiDfw3XrAtaQVMgPNLwFhSDhyAlGqcSjoBmFlX0t7M/iJiA+TA0t0XAOnT/RKAu2/NrAsg6WRmI0nXOnUJ5HXbsyHLspu7OzAHOg93952Z9YELUH181u8/9Q42dk+9nXu6TQAAAABJRU5ErkJggg==') no-repeat 50%;
 }
 
 .tab__>a.tab_scroll_next__ span {
-	padding: 0 10px 0 10px;
-	background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAXklEQVQoz2PwmueVBcQhDHgAUN4BiOtANAOU8R+IV3vP8xbDoQGmpg6ZA8IvsdmGT8N/uG3zEbYRowGEXwNxGCka4LYB8VSaaCDJSUR7Gm4qMcGKYio+DVnYTMWVNAAjHMpWChoQfAAAAABJRU5ErkJggg==') no-repeat 50%;
+    line-height: 24px;
+    padding: 4px 11px 4px 10px;
+	background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAsUlEQVQoz7WQsQ4BYRCEv70oFAqFwjugU4paLRGF/jYeRi3zX63QeAjRqBTiHRRK9a3myEU0Ir5ydmdms/B3JA0/aP2iKJqf9jPgKGmVUmo9xYiYlWV5kjR6C4qsMnUj4ixpUptfga0kpZTa9QbcfQEsgbWkjZl1ImJvZr2q8SJp+jJ8Q1bdtgHWwNLdFxFxM7NxRFwAzKzn7juABlACVzMb5Hl+r4V1gbm7H3566/95AGM+TQjURIitAAAAAElFTkSuQmCC') no-repeat 50%;
 }
 
 .tab__>a.tab_scroll_prev__.disabled__ span, .tab__>a.tab_scroll_next__.disabled__ span {
