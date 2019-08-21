@@ -864,7 +864,6 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 .tab__>ul {
     margin-bottom: -1px;
-    padding: 0 1px;
 }
 
 .tab__>ul li.tab_disabled__ {
