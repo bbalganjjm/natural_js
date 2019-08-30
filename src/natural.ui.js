@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.38.202
+ * Natural-UI v0.38.204
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-UI"] = "0.38.202";
+    N.version["Natural-UI"] = "0.38.204";
 
     $.fn.extend($.extend(N.prototype, {
         alert : function(msg, vars) {
@@ -4706,7 +4706,7 @@
                 if(val === undefined) {
                     return this.options.data[row][key];
                 }
-                this.options.context.find(">li:eq(" + String(row) + ")").instance("form").val(key, val);
+                this.options.context.find(">.form__:eq(" + String(row) + ")").instance("form").val(key, val);
                 return this;
             },
             move : function(fromRow, toRow) {
@@ -6604,7 +6604,7 @@
                 if(val === undefined) {
                     return this.options.data[row][key];
                 }
-                this.options.context.find(">tbody:eq(" + String(row) + ")").instance("form").val(key, val);
+                this.options.context.find(">.form__:eq(" + String(row) + ")").instance("form").val(key, val);
                 return this;
             },
             move : function(fromRow, toRow) {
