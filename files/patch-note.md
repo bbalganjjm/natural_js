@@ -5,6 +5,7 @@
    * The same applies to N.grid and N.list using N.form.
  * N.tab : Added a margin to the scroll button.
  * N.tab : Fixed a bug where tab scroll buttons were displayed when tabs did not exceed the screen when the "tabScroll" option was specified.
+ * N.tab : Fixed a bug that sometimes caused tabs to break in appearance.
  
 ## Natural-ARCHITECTURE v0.13.11
  *
