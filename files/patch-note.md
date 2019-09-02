@@ -4,8 +4,8 @@
  * N.form.prototype.bindEvents.dataSync : Fixed a bug that didn't show the validation message when you first called the validate method.
    * The same applies to N.grid and N.list using N.form.
  * N.tab : Added a margin to the scroll button.
- * N.tab : Fixed a bug where tab scroll buttons were displayed when tabs did not exceed the screen when the "tabScroll" option was specified.
- * N.tab : Fixed a bug that sometimes caused tabs to break in appearance.
+ * N.tab : Fixed a bug where tab scroll buttons were displayed when tabs did not exceed the screen when the "tabScroll" option was enabled.
+ * N.tab : Fixed a bug that sometimes caused tabs to break in appearance when the "tabScroll" option was enabled.
  
 ## Natural-ARCHITECTURE v0.13.11
  *
