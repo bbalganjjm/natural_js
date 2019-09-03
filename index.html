@@ -25,6 +25,10 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
+        if($(window).width() <= 560) {
+            N(".content-wrap").css("margin-left", "0");
+        }
+        
         APP.indx.init();
     });
 </script>
