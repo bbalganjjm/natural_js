@@ -1,0 +1,44 @@
+<article class="refr0202 apiDoc" >
+	<h1>Natural-ARCHITECTURE - Controller(N.cont)</h1>
+
+    <div id="naTab">
+        <a href="#"><span></span></a>
+    	<ul>
+    		<li data-opts='{ "url" : "html/naturaljs/refr/refr020201.html" }'>
+                <a href="#overview" lang="ko_KR">개요</a>
+                <a href="#overview" lang="en_US">Overview</a>
+            </li>
+            <li data-opts='{ "url" : "html/naturaljs/refr/refr020202.html" }'>
+                <a href="#pointcuts" lang="ko_KR">pointcuts 객체</a>
+                <a href="#pointcuts" lang="en_US">pointcuts Object</a>
+            </li>
+            <li data-opts='{ "url" : "html/naturaljs/refr/refr020203.html" }'>
+                <a href="#advisors" lang="ko_KR">advisors 객체</a>
+                <a href="#advisors" lang="en_US">advisors Object</a>
+            </li>
+            <li data-opts='{ "url" : "html/naturaljs/refr/refr020204.html" }'>
+                <a href="#examples" lang="ko_KR">예제</a>
+                <a href="#examples" lang="en_US">Examples</a>
+            </li>
+    	</ul>
+        <a href="#"><span></span></a>
+    	<div id="overview"></div>
+        <div id="pointcuts"></div>
+        <div id="advisors"></div>
+        <div id="examples"></div>
+    </div>
+
+</article>
+
+<script type="text/javascript">
+
+N(".refr0202").cont({
+    init : function(view, request) {
+    	// init tab
+    	N("div#naTab", view).tab({
+    	    tabScroll : true
+    	});
+    }
+});
+
+</script>

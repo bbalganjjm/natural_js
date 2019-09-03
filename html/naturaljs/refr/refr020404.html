@@ -1,0 +1,30 @@
+<article class="refr020404 apiDoc" >
+	<h2>
+		<span lang="ko_KR">예제</span>
+		<span lang="en_US">Examples</span>
+	</h2>
+
+	<h4 class="notIndex">1. 지정한 영역에 다른 페이지 불러오면서 불러온 페이지에 데이터 전달 하기</h4>
+
+<p>1.1. Communicator 초기 화 후 submit 전에 request.attr("attribute name", object) 명령을 실행.</p>
+	<pre class="line-numbers"><code class="language-markup">&lt;section id="section"&gt;&lt;/section&gt;
+
+&lt;script type="text/javascript"&gt;N("#section").comm("page.html").request.attr("data1", { data : ["1", "2"] }).request.attr("data2", ["3", "4"]).submit();
+&lt;/script&gt;</code></pre>
+
+<p>1.2. 불러온 페이지의 Controller 오브젝트의 init 메서드의 두번째 인자인 request 에서 request.attr("attribute name") 명령으로 전달 된 데이터를 꺼냄.</p>
+	<pre class="line-numbers"><code class="language-javascript">N("page selector").cont({
+	init : function(view, request) {
+		var data1 = request.attr("data1");
+		var data2 = request.attr("data2");
+	}
+});</code></pre>
+</article>
+
+<script type="text/javascript">
+N(".refr020404").cont({
+    init : function(view, request) {
+
+    }
+});
+</script>

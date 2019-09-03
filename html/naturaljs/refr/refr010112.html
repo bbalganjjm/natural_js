@@ -1,0 +1,82 @@
+<article class="refr010112" class="apiDoc">
+
+    <h2>
+        <span lang="ko_KR">N.json 객체의 함수</span>
+        <span lang="en_US">Function of N.json Object</span>
+    </h2>
+    <p>"N.json.아래함수명(arg[0...N])" 과 같이 사용하면 됩니다.</p>
+    <table>
+        <tr>
+            <th style="width: 10%;">Name</th>
+            <th style="width: 9%;">Arguments</th>
+            <th style="width: 9%;">Type</th>
+            <th style="width: 9%;">Return</th>
+            <th style="width: auto;">Description</th>
+        </tr>
+        <tr>
+            <td>mergeJsonArray</td>
+            <td align="center">-</td>
+            <td align="center">-</td>
+            <td align="center">-</td>
+            <td>
+                <p>json object 가 담겨 있는 array 두개를 병합 합니다.</p>
+                <p>arr1 인자를 기준으로 arr2 를 병합 하고 중복되는 요소가 있으면 해당 요소는 병합하지 않습니다.</p>
+                <p>세번째 인자로 오브젝트의 프로퍼티명을 지정 하면 해당 프로퍼티를 기준으로 중복된 값이 있다면 해당 오브젝트는 병합 하지 않습니다.</p>
+                <p class="alert">병합할 때 원본 데이터를 확장하는 개념이어서 원본 데이터의 메모리 참조는 변경 되지 않고 유지 됩니다.</p>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>arr1</td>
+            <td>array[json object]</td>
+            <td align="center">-</td>
+            <td>원본 array[json object]</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>arr2</td>
+            <td>array[json object]</td>
+            <td align="center">-</td>
+            <td>병합 할 array[json object]</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>key</td>
+            <td>string</td>
+            <td align="center">-</td>
+            <td>병합 할 기준 프로퍼티명(필수 인자 아님)</td>
+        </tr>
+        <tr>
+            <td>format</td>
+            <td align="center">-</td>
+            <td align="center">-</td>
+            <td align="center">-</td>
+            <td>json object 를 보기 좋게 format 해 줍니다.</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>oData</td>
+            <td>json object</td>
+            <td align="center">-</td>
+            <td>json object</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>sIndent</td>
+            <td>number</td>
+            <td align="center">-</td>
+            <td>indent, 코드 그룹 간 공백 개수</td>
+        </tr>
+    </table>
+    
+</article>
+
+<script type="text/javascript">
+
+N(".refr010112").cont({
+    init : function(view, request) {
+
+    }
+});
+
+</script>

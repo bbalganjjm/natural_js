@@ -1,0 +1,40 @@
+<article class="refr020306 apiDoc" >
+	<h2>
+		<span lang="ko_KR">예제</span>
+		<span lang="en_US">Examples</span>
+	</h2>
+
+    <h4 class="notIndex">1. 서버에서 데이터 조회</h4>
+    <pre class="line-numbers"><code class="language-markup">&lt;script type="text/javascript"&gt;
+    N.comm("retrieve.json").submit(function(data) {
+        N.log(data); // 서버에서 조회된 데이터가 console 에 표시 됨.
+    });
+&lt;/script&gt;</code></pre>
+
+    <h4 class="notIndex">2. 서버에 파라미터 전달 및 결과 데이터 조회</h4>
+    <pre class="line-numbers"><code class="language-markup">&lt;script type="text/javascript"&gt;
+    // N 함수의 인자가 파라미터로 전달 됨.
+    N({ "param1": 1, "param2": "Mark" }).comm("retrieve.json").submit(function(data) {
+        N.log(data); // 서버에서 조회된 데이터가 console 에 표시 됨.
+    });
+&lt;/script&gt;</code></pre>
+
+    <h4 class="notIndex">3. 지정한 영역에 다른 페이지 불러오기</h4>
+    <pre class="line-numbers"><code class="language-markup">&lt;section id="section"&gt;&lt;/section&gt;
+
+&lt;script type="text/javascript"&gt;
+    // #section 영역에 page.html 페이지를 넣어 주고 불러오는 페이지의 컨트롤러에 init 메서드가 있다면 페이지 로딩완료 후에 init 메서드를 실행 시켜 줌.
+    N("#section").comm("page.html").submit(function() {
+        // [생략가능] 페이지 주입이 완료 된 후 실행됨.
+    });
+&lt;/script&gt;</code></pre>
+
+</article>
+
+<script type="text/javascript">
+N(".refr020306").cont({
+    init : function(view, request) {
+
+    }
+});
+</script>

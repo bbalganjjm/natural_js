@@ -1,0 +1,75 @@
+<style>
+.index-header .header-back {
+    position: absolute;
+    width: 100%;
+    height: 100px;
+    z-index: 0;
+    background: url("images/header-back.png");
+}
+
+.index-header .i18n-select {
+    position: relative;
+	margin: 13px 10px 0 0;
+	float: right;
+	color : #66BB6A;
+    z-index: 1;
+}
+
+.index-header .i18n-select a {
+    color: #2E7D32;
+}
+
+.index-header .theme-color {
+	margin: 10px 10px 0 0;
+	float: right;
+    padding-bottom: 3px;
+    width: auto;
+    opacity: 0.8;
+    z-index: 1;
+}
+</style>
+
+<article class="index-header">
+    <div class="header-back"></div>
+
+    <select class="theme-color"></select>
+
+	<div class="i18n-select">
+		<a class="korean" href="#" class="link">한국어</a> | <a class="english" href="#" class="link">English</a>
+	</div>
+</article>
+
+<script type="text/javascript">
+    N(".index-header").cont({
+        init : function(view, request) {
+			// 언어선택
+        	view.find(".korean").click(function(e) {
+				e.preventDefault();
+				window.sessionStorage.locale = "ko_KR";
+				window.location.reload();
+			});
+        	view.find(".english").click(function(e) {
+				e.preventDefault();
+				window.sessionStorage.locale = "en_US";
+				window.location.reload();
+			});
+
+			// 컬러테마 선택
+            var colorSelect = N(".theme-color", view);
+			for(var k in APP.indx.colorPalette) {
+				var selected="";
+				if(k === window.localStorage.themeColor) {
+					selected = 'selected="selected"';
+				} else {
+					selected = "";
+				}
+				colorSelect.append('<option value="' + k + '" ' + selected + '>' + k + '</option>')
+			};
+
+			colorSelect.change(function() {
+				window.localStorage.themeColor = $(this).val();
+				location.reload();
+			});
+        }
+    });
+</script>

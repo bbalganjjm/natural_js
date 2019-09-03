@@ -1,0 +1,134 @@
+<article class="refr040605 apiDoc" >
+	<h2>
+		<span lang="ko_KR">함수</span>
+		<span lang="en_US">Methods</span>
+	</h2>
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Arguments</th>
+			<th>Type</th>
+			<th>Return</th>
+			<th style="width: auto;">Description</th>
+		</tr>
+		<tr>
+			<td>data</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>array[json object]|jquery object</td>
+			<td>컴포넌트에 바인드 되어 있는 최종 데이터를 반환 합니다.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>selFlag</td>
+			<td>boolean</td>
+			<td align="center">-</td>
+			<td>
+				반환되는 데이터의 타입을 결정하는 구분자 입니다.
+				<div class="alert">
+					<p>selFlag 인자 값에 따라 다음과 같은 타입의 데이터를 반환 합니다.</p>
+					<ul>
+						<li>입력하지 않았거나 undefined : array[json object] 타입의 가공 된 데이터를 반환 합니다.</li>
+						<li>true : 선택된 요소에 해당하는 데이터만 추출하여 반환 합니다.</li>
+						<li>
+							<p>false : 바인드 되어 있는 원형(jquery object 타입)의 데이터를 반환 합니다.</p>
+							<p class="alert">다른 데이터 관련 컴포넌트와 양방향 데이터 바인딩을 가능하게 하려면 반드시 false 인자값을 넣어 줘야 합니다.</p>
+						</li>
+					</ul>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>context</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>jquery object</td>
+			<td>컴포넌트를 적용한 요소를 반환 합니다.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>selector</td>
+			<td>string</td>
+			<td align="center">-</td>
+			<td>selector 문자열을 입력하면 context 옵션으로 지정한 요소에서 선택된 요소를 반환 합니다.</td>
+		</tr>
+		<tr>
+			<td>bind</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>N.select</td>
+			<td>
+				<p>지정된 context에 데이터를 바인드 합니다.</p>
+				<p class="alert">요소가 체크박스 일 경우 템플릿 요소가 체크된 상태라면 바인드 될 때 생성되는 요소들도 체크된 상태로 생성 됩니다.</p>
+				<p class="alert">
+					라디오나 체크박스 요소에서, 데이터가 바인드 되면 context 요소에는 id 속성이 있지만 추가로 생성 된 선택지 요소에는 id 속성이 추가 되지 않고 name 속성이 추가 됩니다.
+					생성 된 체크박스나 라디오에 이벤트를 바인드 할때는 id selector 로 요소를 선택하면 맨처음 1개 요소에만 이벤트가 적용되니 attribute 셀렉터로 $("[name=id값]").click(function() {}) 과 같이 요소를 선택하여 이벤트를 바인드 해 주세요.
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>data</td>
+			<td>array[json object]</td>
+			<td align="center">-</td>
+			<td>data 인자를 지정하면 컴포넌트에 바인드 된 데이터가 지정한 데이터로 치환되어 바인드 됩니다.</td>
+		</tr>
+		<tr>
+			<td>val</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>string|array</td>
+			<td>선택 된 값을 가져 옵니다.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>val</td>
+			<td>string</td>
+			<td align="center">-</td>
+			<td>val 인자가 undefined 가 아니면 val 값에 해당하는 요소를 선택 해 줍니다.</td>
+		</tr>
+		<tr>
+			<td>index</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>number|array(number)</td>
+			<td>선택 된 요소의 index를 가져 옵니다.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>index</td>
+			<td>number|array(number)</td>
+			<td>N.select</td>
+			<td>index 인자가 undefined 가 아니면 index 값에 해당하는 요소를 선택 해 줍니다.</td>
+		</tr>
+		<tr>
+			<td>remove</td>
+			<td>val</td>
+			<td>number</td>
+			<td>N.select</td>
+			<td>val 값에 해당하는 선택 요소를 제거 해 줍니다.</td>
+		</tr>
+		<tr>
+			<td>reset</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>N.select</td>
+			<td>선택 입력요소의 선택을 초기화 합니다.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>selFlag</td>
+			<td>boolean</td>
+			<td align="center">-</td>
+			<td>true 이면 아무것 선택하지 않고 false 이면 SELECT 요소의 경우 기본 입력값으로 선택 됩니다.</td>
+		</tr>
+	</table>
+</article>
+
+<script type="text/javascript">
+N(".refr040605").cont({
+    init : function(view, request) {
+
+    }
+});
+</script>

@@ -1,0 +1,313 @@
+<article class="exap0800 view-code" >
+	<h1 lang="ko_KR">마스터 그리드(N.grid)와 디테일 폼(N.form)이 조합 된 화면 예제</h1>
+	<h1 lang="en_US">Example of combining a detail form(N.form) with a master grid(N.grid)</h1>
+	<div class="intro">
+		<p lang="ko_KR" class="smallContTit">마스터 그리드와 상세 수정 화면 폼을 조합 한 화면 예제 입니다.</p>
+		<p lang="en_US" class="smallContTit">This example is combination of the master data grid and detail form</p>
+		<p lang="ko_KR" class="smallContTit">우측 섹션의 상세 폼(N.form)에 바인드 되는 데이터는 좌측 섹션의 데이터 그리드(N.grid)에 바인드 되어 있는 데이터가 바인드 됩니다. 
+			이렇게 컴포넌트들에 같은 데이터를 바인드 하면 컴포넌트 간에 실시간으로 데이터가 동기화 됩니다.</p>
+		<p lang="en_US" class="smallContTit">The bound data of the form(N.form) on the left section is the bound data of the data grid(N.grid) on the right section. 
+			This way, when you bind the same data to the components, the data is synchronized in real time between the components.</p>
+	</div>
+
+	<div id="subContext" style="overflow: hidden;">
+		<div id="masterDiv" style="width: 30%; float: left; margin-right: 2%;">
+			<div class="searchBox">
+				<ul>
+					<li class="inputs" style="overflow: hidden;">
+						<label>Name<input id="name" type="text" data-validate='[["alphabet+integer"]]'></label>
+						<a lang="ko_KR" id="btnSearch" href="#" style="float: right; margin-right: 10px;">조회</a>
+						<a lang="en_US" id="btnSearch" href="#" style="float: right; margin-right: 10px;">Retrieve</a>
+					</li>
+				</ul>
+			</div>
+
+			<table id="grid" class="grid" style="width: 100%;">
+				<thead>
+					<tr>
+						<th width="20%">Index</th>
+						<th width="60%">Name</th>
+						<th width="20%">Active</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td id="index" style="text-align: center;"></td>
+						<td><input id="name" type="text" data-validate='[["required"]]'></td>
+						<td style="text-align: center;"><input id="isActive" type="checkbox"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div id="detailDiv" style="width: 68%; display: inline-block;">
+			<div class="searchBox" style="padding: 1px;">
+				<ul>
+					<li lang="ko_KR" class="buttons">
+						<a id="btnAdd" href="#" data-opts='{ "color": "green" }'>추가</a>
+						<a id="btnDelete" href="#" data-opts='{ "color": "green" }'>삭제</a>
+						<a id="btnSave" href="#" data-opts='{ "color" : "gray" }'>저장</a>
+						<a id="btnRevert" href="#" data-opts='{ "color": "white" }'>되돌리기</a>
+					</li>
+					<li lang="en_US" class="buttons">
+						<a id="btnAdd" href="#" data-opts='{ "color": "green" }'>New</a>
+						<a id="btnDelete" href="#" data-opts='{ "color": "green" }'>Delete</a>
+						<a id="btnSave" href="#" data-opts='{ "color" : "gray" }'>Save</a>
+						<a id="btnRevert" href="#" data-opts='{ "color": "white" }'>Revert</a>
+					</li>
+				</ul>
+			</div>
+
+			<table id="detail" class="form" style="width: 100%;">
+				<tr>
+					<th rowspan="5" style="width: 15%; text-align: right;">picture</th>
+					<td rowspan="5" style="width: 35%; text-align: center; vertical-align: middle;"><img id="picture" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D" height="110"></td>
+					<th style="width: 15%;"><label for="name">Name</label></th>
+					<td style="width: 35%;"><input id="name" type="text" data-validate='[["required"]]'></td>
+				</tr>
+				<tr>
+					<th><label for="email">Email</label></th>
+					<td><input id="email" type="text" data-validate='[["required"], ["email"]]'></td>
+				</tr>
+				<tr>
+					<th><label for="key">Password</label></th>
+					<td><input id="key" type="text" data-format='[["generic", "@@＊＊＊＊＊＊"]]' data-validate='[["required"]]'></td>
+				</tr>
+				<tr>
+					<th><label for="balance">Balance</label></th>
+					<td><input id="balance" type="text" data-format='[["numeric", "$#,###.##0"]]' data-validate='[["required"], ["number"]]'></td>
+				</tr>
+				<tr>
+					<th><label for="phone">Phone</label></th>
+					<td><input id="phone" type="text" data-validate='[["required"]]'></td>
+				</tr>
+				<tr>
+					<th><label for="age">Age</label></th>
+					<td><input id="age" type="text" data-validate='[["required"], ["integer"]]'></td>
+					<th><label for="eyeColor">Eye color</label></th>
+					<td>
+						<select id="eyeColor" data-validate='[["required"]]'>
+							<option lang="ko_KR">선택</option>
+							<option lang="en_US">Select</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<th rowspan="3"><label for="company">Company</label></th>
+					<td rowspan="3"><select id="company" multiple="multiple" data-validate='[["required"]]' style="height: 117px;"></select></td>
+					<th><label for="gender">Gender</label></th>
+					<td><input id="gender" type="radio"></td>
+				</tr>
+				<tr>
+					<th><label for="favoriteFruit">Favorite fruit</label></th>
+					<td><input id="favoriteFruit" type="checkbox" data-validate='[["required"]]'></td>
+				</tr>
+				<tr>
+					<th><label for="registered">Registered</label></th>
+					<td><input id="registered" type="text" data-format='[["date", 8, "date"]]' data-validate='[["required"]]'></td>
+				</tr>
+				<tr>
+					<th><label for="about">About</label></th>
+					<td colspan="3"><textarea id="about" style="width: 100%;" rows="3" data-validate='[["required"]]'></textarea></td>
+				</tr>
+				<tr>
+					<th><label for="greeting">Greeting</label></th>
+					<td colspan="3"><textarea id="greeting" style="width: 100%;" rows="3" data-validate='[["required"]]'></textarea></td>
+				</tr>
+				<tr>
+					<th><label for="isActive">Active</label></th>
+					<td colspan="3"><input id="isActive" type="checkbox"></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</article>
+
+<script type="text/javascript">
+N(".exap0800").cont({
+    init : function(view, request) {
+    	this.setCodes(this, [ "gender", "eyeColor", "company", "favoriteFruit" ], function() {
+    		// The N.select component must be initialized before data-related components such as N.grid or N.form are initialized.
+    		this.setComponents(this);
+        	this.setEvents(this);
+    	});
+    },
+    setCodes : function(cont, codeParams, afterCodeInitFn) {
+    	// 1. initialize N.select and bind the code data.
+    	N({ codes : codeParams }).comm("html/naturaljs/exap/data/code.json").submit(function(data, request) {
+    		N(codeParams).each(function(i, code) {
+    			N(data).datafilter("code === '" + code + "'").select(N("#detail #" + code, cont.view)).bind();
+    		});
+    		
+    		afterCodeInitFn.call(cont);
+     	});
+    },
+    setComponents : function(cont) {
+    	// 2. initialize buttons
+    	N(".searchBox a", cont.view).button();
+		
+		// 3. initialize forms
+    	// 3-1. initialize search form and add new row data
+    	cont.searchForm = N([]).form({
+    		context : N("div.searchBox li.inputs", cont.view)
+    	}).add();
+    	// 3-2. initialize detail form
+    	cont.detailForm = N([]).form({
+    		context : N("#detail", cont.view),
+    		revert : true,
+    		autoUnbind : true
+    	});
+
+    	// 4. initialize N.grid and bind empty data for data list
+    	cont.grid = N([]).grid({
+       		context : N("#grid", cont.view),
+       		data : [],
+       		height : 500,
+       		resizable : true,
+       		sortable : true,
+       		addSelect : false,
+       		selectScroll : false,
+       		select : true,
+       		filter : true,
+       		unselect : false,
+       		selectScroll : false,
+       		addTop : true,
+       		onSelect : function(index, rowEle, data, beforeRow) {
+       			// Grid row select event
+       			
+       			// cont.detailForm.row() = -1 is unbind flag
+       			if(cont.detailForm.row() > -1 && data[index].rowStatus !== "insert") {
+	       			if(!cont.detailForm.validate()) {
+	       				return false;
+	       			}
+       			}
+
+  				if(this.context("> tbody:eq(" + beforeRow + ")").hasClass("row_data_changed__")) {
+  					if(index !== cont.detailForm.row()) {
+  						N(window).alert({
+	      					msg : N.message.get(cont.messages, "EXAP0800-0003"),
+	      					confirm : true,
+	      					onOk : function() {
+	      						// 5. bind data to detail form;
+	      						cont.detailForm.bind(index, data);
+	      						rowEle.click();
+	      					}
+	      				}).show();
+  					}
+      			} else {
+      				// 5. bind data to detail form;
+      				cont.detailForm.bind(index, data);
+      			}
+        	},
+        	onBind : function(context, data, isFirstPage, isLastPage) {
+                if(isFirstPage) {
+                    this.select(0);
+                }
+            }
+       	});
+    },
+    setEvents : function(cont) {
+    	// 6. bind events
+    	// 6-1. Search button
+    	N("#btnSearch", cont.view).click(function(e) {
+            e.preventDefault();
+            if(cont.searchForm.validate()) {
+            	N(cont.searchForm.data()).comm("html/naturaljs/exap/data/sample.json").submit(function(data) {
+      				// N.grid bind
+               		cont.grid.bind(data);
+               	});
+            }
+        }).click(); // Auto retrieve
+
+    	// 6-2. Save button
+    	N("#btnSave", cont.view).click(function(e) {
+    		e.preventDefault();
+
+            if(cont.grid.data("modified").length === 0) {
+            	N(window).alert(N.message.get(cont.messages, "EXAP0800-0001")).show();
+            	return false;
+            }
+
+         	// do validate;
+         	// cont.detailForm.row() = -1 is unbind flag
+            if(cont.detailForm.row() > -1) {
+            	if(!cont.detailForm.validate()) {
+            		return false;
+            	}
+            }
+
+            N(window).alert({
+        		msg : N.message.get(cont.messages, "EXAP0800-0005"),
+        		confirm : true,
+        		onOk : function() {
+        			N(cont.grid.data("modified")).comm({
+        				type : "PUT",
+        				dataIsArray : true, // When sending multiple rows of data(array<json object>).
+        				url : "html/naturaljs/exap/data/sample.json"
+        			}).submit(function(data) {
+        				var msg = N.message.get(cont.messages, "EXAP0800-0002") + "<br>";
+        				msg += N.message.get(cont.messages, "EXAP0800-0006", [data.insert]) + "<br>";
+        				msg += N.message.get(cont.messages, "EXAP0800-0007", [data.update]) + "<br>";
+        				msg += N.message.get(cont.messages, "EXAP0800-0008", [data.delete]);
+        				N(window).alert({
+        					msg : msg,
+        					onOk : function() {
+        						N("#btnSearch", cont.view).click();
+        					}
+        				}).show();
+        			});
+        		}
+        	}).show();
+    	});
+
+    	// 6-3 New button
+    	N("#btnAdd", cont.view).click(function(e) {
+    		e.preventDefault();
+    		
+    		if(cont.detailForm.validate()) {
+	    		// Add row from N.form
+	    		cont.detailForm.add();
+    		}
+    	});
+
+    	// 6-4 Delete button
+    	N("#btnDelete", cont.view).click(function(e) {
+    		e.preventDefault();
+    		
+    		// Remove row from N.grid
+            cont.detailForm.remove();
+    	});
+
+    	// 6-5 Revert button
+    	N("#btnRevert", cont.view).click(function(e) {
+    		e.preventDefault();
+
+    		if(cont.grid.data("modified").length === 0) {
+            	N(window).alert(N.message.get(cont.messages, "EXAP0800-0001")).show();
+            	return false;
+            }
+
+    		cont.detailForm.revert();
+    	});
+    },
+    messages : {
+		"ko_KR" : {
+			"EXAP0800-0001" : "변경된 데이터가 없습니다.",
+			"EXAP0800-0002" : "저장이 완료 되었습니다.",
+			"EXAP0800-0003" : "데이터를 수정 중 입니다. 선택한 행의 데이터를 조회 하겠습니까?",
+			"EXAP0800-0005" : "저장 하겠습니까?",
+			"EXAP0800-0006" : " - 입력 : {0} 건",
+			"EXAP0800-0007" : " - 수정 : {0} 건",
+			"EXAP0800-0008" : " - 삭제 : {0} 건"
+		},
+		"en_US" : {
+			"EXAP0800-0001" : "No changed data",
+			"EXAP0800-0002" : "Saving is complete.",
+			"EXAP0800-0003" : "You are on the editing the data. are you sure you want to retrieve the data from the selected row?",
+			"EXAP0800-0005" : "Do you want to save it?",
+			"EXAP0800-0006" : " - Create : {0} rows",
+			"EXAP0800-0007" : " - Update : {0} rows",
+			"EXAP0800-0008" : " - Delete : {0} rows"
+		}
+	}
+});
+</script>

@@ -1,0 +1,407 @@
+<article class="refr010104" class="apiDoc">
+    <h2>
+        <span lang="ko_KR">N 객체의 함수</span>
+        <span lang="en_US">Function of N Object</span>
+    </h2>
+    <table>
+        <tr>
+            <th style="width: 10%;">Name</th>
+            <th style="width: 9%;">Arguments</th>
+            <th style="width: 9%;">Type</th>
+            <th style="width: 9%;">Return</th>
+            <th style="width: auto;">Description</th>
+        </tr>
+        <tr>
+            <td>N</td>
+            <td align="center">-</td>
+            <td align="center">-</td>
+            <td>jquery object</td>
+            <td>
+                <p>Natural-JS 의 플러그인 타입으로 제공되는 라이브러리들과 N 객체의 멤버변수나 함수가 정의 되어있는 핵심 클래스입니다.</p>
+                <p>N(selector) 를 호출하면 jQuery 의 init 메서드가 호출되어 Naturl-JS 와 jQuery가 동시에 초기화(Initialize) 됩니다.</p>
+                <pre><code class="language-javascript">var divs = N("div");</code></pre>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>selector</td>
+            <td>jquery object |selector |function |element |object</td>
+            <td align="center">-</td>
+            <td>json object 나 selector 등.</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>context</td>
+            <td>jquery object</td>
+            <td align="center">-</td>
+            <td>element를 지정할 때 지정된 element 가 속해있는 element 영역을 지정할 수 있습니다.</td>
+        </tr>
+        <tr>
+            <td>N.version ["package name"]</td>
+            <td align="center">-</td>
+            <td align="center">-</td>
+            <td>string</td>
+            <td>
+                Natural-JS 의 패키지별 버전을 가져 올 수 있습니다.
+                <ul>
+                    <li>Natural-CORE 패키지의 버전 : N.version["Natural-CORE"]</li>
+                    <li>Natural-ARCHITECTURE 패키지의 버전 : N.version["Natural-ARCHITECTURE"]</li>
+                    <li>Natural-DATA 패키지의 버전 : N.version["Natural-DATA"]</li>
+                    <li>Natural-UI 패키지의 버전 : N.version["Natural-UI"]</li>
+                    <li>Natural-UI.Shell 패키지의 버전 : N.version["Natural-UI.Shell"]</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>N.locale</td>
+            <td align="center">-</td>
+            <td align="center">-</td>
+            <td>undefined</td>
+            <td>Natural-JS 의 현제 로케일을 설정 합니다. 설정한 로케일에 따라 프레임워크에서 사용자에게 보여주는 메시지들도 다국어처리가 됩니다. 현제 등록된 다국어 메시지 리소스는 en_US, ko_KR 만 있습니다. 메시지 세트는 config에서 손쉽게 추가 할 수 있습니다.</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>str</td>
+            <td>string</td>
+            <td></td>
+            <td>"en_US", "ko_KR" 등의 로케일 문자열</td>
+        </tr>
+        <tr>
+            <td>N.debug</td>
+            <td align="center">-</td>
+            <td align="center">-</td>
+            <td>undefined</td>
+            <td>
+                <p>브라우저 콘솔에 DEBUG 메시지를 보여 줍니다</p>
+                <p class="alert">window.console.debug 함수와 같습니다. 브라우저에서 window.console.debug 함수를 지원하지 않으면 메시지가 표시되지 않습니다.</p>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>msg</td>
+            <td>string</td>
+            <td></td>
+            <td>
+                <p>메시지</p>
+            </td>
+        </tr>
+        <tr>
+            <td>N.log</td>
+            <td align="center">-</td>
+            <td align="center">-</td>
+            <td>undefined</td>
+            <td>
+                <p>브라우저 콘솔에 LOG 메시지를 보여 줍니다</p>
+                <p class="alert">window.console.log 함수와 같습니다. 브라우저에서 window.console.log 함수를 지원하지 않으면 메시지가 표시되지 않습니다.</p>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>msg</td>
+            <td>string</td>
+            <td></td>
+            <td>
+                <p>텍스트 메시지</p>
+            </td>
+        </tr>
+        <tr>
+            <td>N.info</td>
+            <td align="center">-</td>
+            <td align="center">-</td>
+            <td>undefined</td>
+            <td>
+                <p>브라우저 콘솔에 INFO 메시지를 보여 줍니다</p>
+                <p class="alert">window.console.info 함수와 같습니다. 브라우저에서 window.console.info 함수를 지원하지 않으면 메시지가 표시되지 않습니다.</p>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>msg</td>
+            <td>string</td>
+            <td></td>
+            <td>
+                <p>텍스트 메시지</p>
+            </td>
+        </tr>
+        <tr>
+            <td>N.warn</td>
+            <td align="center">-</td>
+            <td align="center">-</td>
+            <td>undefined</td>
+            <td>
+                <p>브라우저 콘솔에 WARN 메시지를 보여 줍니다</p>
+                <p class="alert">window.console.warn 함수와 같습니다. 브라우저에서 window.console.warn 함수를 지원하지 않으면 메시지가 표시되지 않습니다.</p>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>msg</td>
+            <td>string</td>
+            <td></td>
+            <td>
+                <p>텍스트 메시지</p>
+            </td>
+        </tr>
+        <tr>
+            <td>N.error</td>
+            <td align="center">-</td>
+            <td align="center">-</td>
+            <td>ErrorThrown</td>
+            <td>
+                <p>에러를 발생 시키고 에러 메시지를 브라우저 브라우저 콘솔에 보여줍니다.</p>
+                <p class="alert">N.error 함수는 ErrorThrown 객체를 반환하기 때문에 함수 앞에 throw 구문을 선언을 해야 에러가 발생 합니다.</p>
+                <pre class="line-numbers"><code class="language-javascript">
+throw N.error("오류가 발생 했습니다.");</code></pre>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>msg</td>
+            <td>string</td>
+            <td></td>
+            <td>에러 텍스트 메시지</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>e</td>
+            <td>ErrorThrown</td>
+            <td align="center">-</td>
+            <td>에러 발생시 생성되는 ErrorThrown 객체를 입력하면 해당 객체를 기반으로 처리 합니다.</td>
+        </tr>
+        <tr>
+            <td>type</td>
+            <td align="center">-</td>
+            <td align="center">-</td>
+            <td>string</td>
+            <td>"number", "string", "array", "object", "function", "date" 등의 객체 타입을 반환 합니다.</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>obj</td>
+            <td>object</td>
+            <td></td>
+            <td>검사 할 object</td>
+        </tr>
+        <tr>
+            <td>isString</td>
+            <td align="center">-</td>
+            <td align="center">-</td>
+            <td>boolean</td>
+            <td>입력한 객체가 string 타입인지 검사 합니다.</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>obj</td>
+            <td>object</td>
+            <td></td>
+            <td>검사 할 object</td>
+        </tr>
+        <tr>
+            <td>isNumeric</td>
+            <td align="center">-</td>
+            <td align="center">-</td>
+            <td>boolean</td>
+            <td>
+                <p>입력한 객체가 숫자 타입인지 검사 합니다.</p>
+                <p class="alert">N.isNumeric 은 jQuery 의 $.isNumeric 함수를 그대로 사용 합니다.</p>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>obj</td>
+            <td>object</td>
+            <td></td>
+            <td>검사 할 object</td>
+        </tr>
+        <tr>
+            <td>isPlainObject</td>
+            <td align="center">-</td>
+            <td align="center">-</td>
+            <td>boolean</td>
+            <td>
+                <p>입력한 객체가 순수한 객체 타입인지 검사 합니다.</p>
+                <p class="alert">
+                    typeof N() 나 N.type(N()) 을 실행하면 "object" 로 반환 되지만 N.isPlainObject 이러한 오브젝트를 순수한 오브젝트로 평가 하지 않습니다.
+                    new Object() 나 객체 생성 리터럴({})로 생성한 오브젝트만 true 가 반환 됩니다.
+                </p>
+                <p class="alert">N.isPlainObject 은 jQuery 의 $.isPlainObject 함수를 그대로 사용 합니다.</p>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>obj</td>
+            <td>object</td>
+            <td></td>
+            <td>검사 할 object</td>
+        </tr>
+        <tr>
+            <td>isEmptyObject</td>
+            <td align="center">-</td>
+            <td align="center">-</td>
+            <td>boolean</td>
+            <td>
+                <p>입력한 객체가 비어 있는 객체인지 검사 합니다.</p>
+                <p class="alert">
+                    "" 나 {}, [] 는 모두 비어 있는 객체여서 true를 반환 하지만 [{}] 안에 있는 객체가 비어 있으므로 false 가 반환 됩니다.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>obj</td>
+            <td>object</td>
+            <td></td>
+            <td>검사 할 object</td>
+        </tr>
+        <tr>
+            <td>isArray</td>
+            <td align="center">-</td>
+            <td align="center">-</td>
+            <td>boolean</td>
+            <td>
+                <p>입력한 객체가 array 타입인지 검사 합니다.</p>
+                <p class="alert">N.isArray 은 jQuery 의 $.isArray 함수를 그대로 사용 합니다.</p>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>obj</td>
+            <td>object</td>
+            <td></td>
+            <td>검사 할 object</td>
+        </tr>
+        <tr>
+            <td>isArraylike</td>
+            <td align="center">-</td>
+            <td align="center">-</td>
+            <td>boolean</td>
+            <td>
+                <p>입력한 객체가 array 와 비슷한 타입인지 검사 합니다.</p>
+                <p class="alert">jquery object 도 겉 보기에는 array 와 유사하여 true 를 반환 합니다. array, jquery object 를 둘다 같은 오브젝트로 평가하고 싶을 때 사용 하세요.</p>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>obj</td>
+            <td>object</td>
+            <td></td>
+            <td>검사 할 object</td>
+        </tr>
+        <tr>
+            <td>isWrappedSet</td>
+            <td align="center">-</td>
+            <td align="center">-</td>
+            <td>boolean</td>
+            <td>
+                <p>입력한 객체가 N() 이나 $(), jQuery() 로 초기화 한 jquery object 타입인지 검사 합니다.</p>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>obj</td>
+            <td>object</td>
+            <td></td>
+            <td>검사 할 object</td>
+        </tr>
+        <tr>
+            <td>isElement</td>
+            <td align="center">-</td>
+            <td align="center">-</td>
+            <td>boolean</td>
+            <td>
+                <p>N() 이나 $(), jQuery() 의 인자로 지정한 객체가 HTML 요소 인지 검사 합니다.</p>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>obj</td>
+            <td>jquery object</td>
+            <td></td>
+            <td>검사 할 jquery object</td>
+        </tr>
+        <tr>
+            <td>N.serialExecute</td>
+            <td align="center">-</td>
+            <td align="center">-</td>
+            <td>[jQuery Deferred Objects]</td>
+            <td>
+                <p>순서대로 실행되어야 하는 비동기 실행 로직들의 계층적 콜백 들을 $.Deferred 를 사용하여 직렬로 표기 할 수 있게 해 주는 함수 입니다.</p>
+                <ul>
+                    <li>비동기로 작동하는 로직과 그 로직의 전처리, 후처리 로직을 하나의 함수 블록으로 만들어 N.serialExecute 함수에 개수 상관없이 인자로 넣어 주면 됩니다.</li>
+                    <li>기입된 인자의 순서대로 함수들이 실행 되고 다음 인자로 정의한 함수 블록을 실행 하기 위해서는 해당 비동기 로직이 끝나는 시점(다음 함수가 실행되어야 하는 시점)에 함수 블록의 인자로 반환되는 Deferred 객체에서 resolve 함수를 실행 시켜 주어야 합니다.</li>
+                    <li>인자로 정의되는 함수 블록에서 defer.resolve 의 인자들은 그 다음 실행 될 함수 블록의 두번째 인자부터 순서대로 배당 됩니다.</li>
+                    <li>각 함수 블록의 this 와 Return 객체는 인자로 정의 된 함수 블록 들의 jQuery Deferred 객체들이 담겨 있는 array 입니다.</li>
+                    <li>이 this 를 가지고 첫번째 함수 블록의 비동기 로직의 완료 시점(시작 시점에서는 아직 다음 함수 블록의 Deferred 객체가 생성되지 않았기 때문에 해당 함수 블록 앞에 정의 된 함수 블록들은 참조 가능하나 이후에 정의 된 함수 블록은 참조가 불 가능)에 this[2].resolve() 와 같이 호출하면 두번째, 세번째 함수 블록을 건너 뛰고 네번째 함수 블록을 실행 시킬 수 있습니다.</li>
+                </ul>
+                <p>예)</p>
+                <p>다음과 같은 일반적인 비동기 실행 로직이 있습니다.</p>
+                <pre class="line-numbers"><code class="language-javascript">
+setTimeout(function() {
+    setTimeout(function() {
+        N.comm("url").submit(function() {
+            setTimeout(function() {
+                N.log("4 번 로직 완료");
+            }, 500);
+            N.log("3 번 로직 완료");
+        });
+        N.log("2 번 로직 완료");
+    }, 500);
+    N.log("1 번 로직 완료");
+}, 500);</code></pre>
+                <p>N.serialExecute를 사용하면 위와 같은 계층적 비동기 로직을 아래와 같이 직렬로 선언 할 수 있습니다.</p>
+                <pre class="line-numbers"><code class="language-javascript">
+var defers = N.serialExecute(
+    function(defer){
+        setTimeout(function() {
+            defer.resolve(arg0, arg1);
+            N.log("1 번 로직 완료");
+        }, 500);
+    },
+    function(defer, arg0, arg1){
+        setTimeout(function() {
+            defer.resolve();
+            N.log("2 번 로직 완료");
+        }, 500);
+    },
+    function(defer){
+        N.comm("url").submit(function() {
+            defer.resolve(arg0);
+            N.log("3 번 로직 완료");
+        });
+    },
+    function(defer, arg0){
+        setTimeout(function() {
+            defer.resolve();
+            N.log("4 번 로직 완료");
+        }, 500);
+    }
+);</code></pre>
+                <p>추가로, jQuery $.when을 이용 하여 위 소스코드 에서 반환된 defers 변수 객체로 함수 블록 들을 그룹 지어 해당 그룹의 함수 블록 들이 모두 완료 된 후 로직을 실행 시킬 수도 있습니다.</p>
+                <pre class="line-numbers"><code class="language-javascript">
+// 두번째, 세번째 함수 블록이 모두 완료 되면 로직을 실행
+$.when(defers[1], defers[2]).done(function(arg0, agr1) {
+    // agr0, arg1 은 각 함수 블록에서 defer.resolve 함수를
+    // 호출 할 때 인자로 지정한 오브젝트들
+    N.log("2번, 3번 로직 모두 완료");
+});
+
+// 전체 함수 블록들이 모두 완료 되면 로직을 실행
+$.when.apply($, defers).done(function(arg0, agr1, arg2, agr3) {
+    // agr0, arg1, agr2, arg3 은 각 함수 블록에서
+    // defer.resolve 함수를 호출 할 때 인자로 지정한 오브젝트들
+    N.log("1번, 2번, 3번, 4번 로직 모두 완료");
+});</code></pre>
+            </td>
+        </tr>
+    </table>
+</article>
+
+<script type="text/javascript">
+
+N(".refr010104").cont({
+    init : function(view, request) {
+
+    }
+});
+
+</script>

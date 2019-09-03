@@ -1,0 +1,59 @@
+<article class="refr040905 apiDoc" >
+	<h2>
+		<span lang="ko_KR">선언형옵션</span>
+		<span lang="en_US">Declarative Options</span>
+	</h2>
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Type</th>
+			<th>Default</th>
+			<th style="width: auto;">Description</th>
+		</tr>
+		<tr>
+			<td>data-format</td>
+			<td>array[array[string|number]] 타입의 문자열</td>
+			<td>undefined</td>
+			<td>포맷룰을 지정 합니다. API/DEMO > Natural-DATA 메뉴의 Formatter 와 Format Rules 참고</td>
+		</tr>
+		<tr>
+			<td>data-validate</td>
+			<td>array[array[string|number]] 타입의 문자열</td>
+			<td>undefined</td>
+			<td>검증룰을 지정 합니다. API/DEMO > Natural-DATA 메뉴의 Validator 와 Validation Rules 참고</td>
+		</tr>
+		<tr>
+			<td>data-filter</td>
+			<td>string</td>
+			<td>undefined</td>
+			<td>
+				<p>filter 옵션값을 false 로 정의 하고 table thead 의 th 에 data-filter="true" 속성을 정의 하면 해당 컬럼만 필터 기능이 활성 화 됩니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>data-rowspan</td>
+			<td>string</td>
+			<td>undefined</td>
+			<td>
+				<p>열(컬럼)을 기준으로 같은 값이 들어 있는 셀 들을 병합 합니다.</p>
+				<p>thead 의 열을 병합 할 열(th 태그)들에 data-rowspan="true" 속성을 추가 하면 됩니다.</p>
+				<p class="alert">물리적으로 요소들이 병합되지 않고 보이는 부분만 병합 된 것처럼 보입니다.</p>
+				<p class="alert">병합할 열의 바로 앞 열도 병합 되어 있다면 바로 앞 열의 병합이 풀리는 기준에 따라 해당 열도 병합이 풀려 자연 스러운 열이 병합 된 테이블을 만들어 줍니다.</p>
+				<p class="alert">해당 셀에 입력 요소가 있으면 병합은 되나 입력요소의 값이 병합 된 행의 첫번째 행의 입력요소만 메모리의 데이터 세트와 동기화 됩니다(병합 된 나머지 셀의 입력요소는 제거 됨)</p>
+				<p class="alert">
+					병합 되는 컬럼 정보는 내부적으로 tbody 의 td 나 td 안에 있는 요소들의 id 값을 가져와 사용 합니다.
+					tbody 의 td 안에 id 속성을 가진 요소가 2개 이상 이거나 헤더와 바디의 요소 구성이 많이 다를 경우는 병합이 정상적으로 수행 되지 않을 수 있습니다.
+					이때는 thead 의 th 요소에 data-id 속성에 정렬 될 데이터 컬럼명을 정의 해 주면 정상적으로 작동 됩니다.
+				</p>
+			</td>
+		</tr>
+	</table>
+</article>
+
+<script type="text/javascript">
+N(".refr040905").cont({
+    init : function(view, request) {
+
+    }
+});
+</script>

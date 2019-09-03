@@ -1,0 +1,142 @@
+<article class="refr020201 apiDoc" >
+	<h2>
+		<span lang="ko_KR">advisors 객체</span>
+		<span lang="en_US">advisors Object</span>
+	</h2>
+	<p lang="ko_KR" class="alert">natural.config.js 파일의 N.context.attr("architecture").cont.advisors 속성에 정의 합니다.</p>
+	<p lang="en_US" class="alert">Define to N.context.attr("architecture").cont.advisors property of natural.config.js file</p>
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Type</th>
+			<th>Default</th>
+			<th>Required</th>
+			<th style="width: auto;">Description</th>
+		</tr>
+		<tr>
+			<td>pointcut</td>
+			<td>object key string|object</td>
+			<td>undefined</td>
+			<td align="center">○</td>
+			<td style="max-width: 299px;">
+				<p>advisor가 적용될 pointcut을 정의 합니다.</p>
+				<pre class="line-numbers"><code class="language-javascript">...
+"pointcut" : {
+	"type" : "regexp"
+	"param" : "something"
+}
+...</code></pre>
+				<p>위의 경우 pointcuts에서 regexp pointcut의 param 속성에 정의된 객체를 파라미터로 전달 합니다.</p>
+<pre class="line-numbers"><code class="language-javascript">...
+"pointcut" : "someregexp"
+...</code></pre>	
+				<p>위와 같이 pointcut의 값이 객체가 아니고 regexp 문자열인 경우 내장 된 "regexp" pointcut을 기본값으로 사용 합니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>adviceType</td>
+			<td>string</td>
+			<td>undefined</td>
+			<td align="center">○</td>
+			<td>
+				<p>함수의 실행 시점을 지정 합니다.</p>
+				<ul>
+					<li>before : 원본 함수를 실행하기 전에 실행 됩니다.</li>
+				 	<li>after : 원본 함수가 실행 된 후 실행 됩니다. 원본 함수의 반환값이 함께 전달 됩니다.</li>
+					<li>around : 원본 함수를 실행할 수 있는 joinPoint가 파라미터로 전달 됩니다.</li>				
+					<li>error : 원본 함수에서 예외 발생 시 실행 됩니다.</li>
+				</ul>
+		</tr>
+		<tr>
+			<td>fn</td>
+			<td>function</td>
+			<td>undefined</td>
+			<td align="center">○</td>
+			<td style="max-width: 299px;">
+				<p>실행 될 함수를 정의 합니다.</p>
+				<p>adviceType 별 함수의 인자는 다음과 같습니다.</p>
+				<br>
+				<p style="font-weight: bold;">before</p>
+				<ul>
+					<li>cont : 컨트롤러(N.cont) 객체</li>
+				 	<li>fnChain : 함수(명)체인 문자열</li>
+					<li>args : 함수의 인자</li>				
+				</ul>
+<pre class="line-numbers"><code class="language-javascript">...
+"advisors" : [{
+	"pointcut" : "^init$",
+	"adviceType" : "before",
+	"fn" : function(cont, fnChain, args) {
+		// 페이지 로딩 후 init 함수가 자동으로 호출 되기 전 마다 실행 됨.
+	}
+}]
+...</code></pre>
+				<p style="font-weight: bold;">after</p>
+				<ul>
+					<li>cont : 컨트롤러(N.cont) 객체</li>
+				 	<li>fnChain : 함수(명)체인 문자열</li>
+					<li>args : 함수의 인자</li>				
+					<li>result : 반환값</li>
+				</ul>
+<pre class="line-numbers"><code class="language-javascript">...
+"advisors" : [{
+	"pointcut" : "^init$",
+	"adviceType" : "after",
+	"fn" : function(cont, fnChain, args, result) {
+		// 페이지 로딩 후 init 함수 호출이 끝날 때 마다 실행 됨.
+	}
+}]
+...</code></pre>
+				<p style="font-weight: bold;">around</p>
+				<p>joinPoint.proceed() 함수로 원본 함수를 실행 합니다.</p>
+				<ul>
+					<li>cont : 컨트롤러(N.cont) 객체</li>
+				 	<li>fnChain : 함수(명)체인 문자열</li>
+					<li>args : 함수의 인자</li>	
+					<li>joinPoint : 원본 함수 실행 객체</li>
+				</ul>
+<pre class="line-numbers"><code class="language-javascript">...
+"advisors" : [{
+	"pointcut" : "^init$",
+	"adviceType" : "around",
+	"fn" : function(cont, fnChain, args, joinPoint) {
+		// 페이지 로딩 후 init 함수가 자동으로 호출 되기 전 마다 실행 됨.
+		
+		// before
+		var result = joinPoint.proceed();
+		// after
+	}
+}]
+...</code></pre>
+				<p style="font-weight: bold;">error</p>
+				<ul>
+					<li>cont : 컨트롤러(N.cont) 객체</li>
+				 	<li>fnChain : 함수(명)체인 문자열</li>
+					<li>args : 함수의 인자</li>				
+					<li>e : errorThrown 객체</li>
+				</ul>
+<pre class="line-numbers"><code class="language-javascript">...
+"advisors" : [{
+	"pointcut" : {
+		"type" : "errorPointcut", // pointcuts 객체 설명의 
+								  // errorPointcut 참고(무조건 다 허용)
+		"param" : ""
+	},
+	"adviceType" : "error",
+	"fn" : function(cont, fnChain, args, result, e) {
+		// N.cont 의 함수 들 중에서 에러가 발생 할 때 마다 실행.
+	}
+}]
+...</code></pre>
+			</td>
+		</tr>
+	</table>
+</article>
+
+<script type="text/javascript">
+N(".refr020201").cont({
+    init : function(view, request) {
+
+    }
+});
+</script>

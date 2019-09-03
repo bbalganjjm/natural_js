@@ -1,0 +1,46 @@
+<article class="refr020105 apiDoc" >
+	<h2>
+		<span lang="ko_KR">Controller(N.cont) 객체 함수</span>
+		<span lang="en_US">Controller(N.cont) object's functions</span>
+	</h2>
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Arguments</th>
+			<th>Type</th>
+			<th>Return</th>
+			<th style="width: auto;">Description</th>
+		</tr>
+		<tr>
+			<td>init</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>user define</td>
+			<td>N.cont 에 의해 등록된 callback 이 초기화 된 후 최초 실행 되는 함수입니다.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>view</td>
+			<td>jquery object</td>
+			<td align="center">-</td>
+			<td>
+				<p>view 요소를 반환 합니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>request</td>
+			<td>Communicator.request</td>
+			<td align="center">-</td>
+			<td>현재 페이지의 요청 정보와 페이지 호출 시 전달 한 데이터를 얻을 수 있는 Communicator.request 객체를 반환 합니다.</td>
+		</tr>
+	</table>
+</article>
+
+<script type="text/javascript">
+N(".refr020105").cont({
+    init : function(view, request) {
+
+    }
+});
+</script>

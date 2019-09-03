@@ -1,0 +1,121 @@
+<article class="refr041104 apiDoc" >
+	<h2>
+		<span lang="ko_KR">기본옵션</span>
+		<span lang="en_US">Default Options</span>
+	</h2>
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Type</th>
+			<th>Default</th>
+			<th>Required</th>
+			<th style="width: auto;">Description</th>
+		</tr>
+		<tr>
+			<td>data</td>
+			<td>array[json object]</td>
+			<td>undefined</td>
+			<td align="center">○</td>
+			<td>context(HTML Templete)요소에 바인드 할 데이터</td>
+		</tr>
+		<tr>
+			<td>context</td>
+			<td>jquery object</td>
+			<td>null</td>
+			<td align="center">○</td>
+			<td>Tree 를 적용할 컨텍스트 요소를 지정합니다.</td>
+		</tr>
+		<tr>
+			<td>key</td>
+			<td>string</td>
+			<td>null</td>
+			<td align="center">○</td>
+			<td>노드명으로 표시될 데이터의 컬럼명(key)을 지정 합니다.</td>
+		</tr>
+		<tr>
+			<td>val</td>
+			<td>string</td>
+			<td>null</td>
+			<td align="center">○</td>
+			<td>노드값으로 표시될 데이터의 컬럼명(key)을 지정 합니다.</td>
+		</tr>
+		<tr>
+			<td>level</td>
+			<td>string</td>
+			<td>level</td>
+			<td align="center"></td>
+			<td>
+				노드 레벨로 표현될 데이터의 컬럼명(key)을 지정 합니다.
+				<p class="alert">데이터 자체에 LEVEL정보를 가지고 있다면 level정보를 갖고 있는 컬럼(key)명 지정 시 트리 렌더링 속도가 더 빨라집니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>parent</td>
+			<td>string</td>
+			<td>null</td>
+			<td align="center">○</td>
+			<td>부모노드 값으로 참조될 컬럼명(key)을 지정 합니다.</td>
+		</tr>
+		<tr>
+			<td>folderSelectable</td>
+			<td>string</td>
+			<td>false</td>
+			<td align="center"></td>
+			<td>
+				폴더 노드 선택 여부
+				<p class="alert">true 이면 [+] 아이콘을 클릭하여 폴더를 확장할 수 있고 노드명을 클릭하면 선택(onSelect 이벤트 실행)이 됩니다. false 이면 폴더노드명을 클릭하면 폴더가 확장되고 선택이 되지 않습니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>checkbox</td>
+			<td>boolean</td>
+			<td>false</td>
+			<td align="center"></td>
+			<td>노드명 앞에 체크박스 표시 여부, 체크박스를 표시하면 선택된 노드의 값들만 추출 할 수 있습니다.</td>
+		</tr>
+		<tr>
+			<td>onSelect</td>
+			<td>function</td>
+			<td>null</td>
+			<td align="center"></td>
+			<td style="max-width: 299px;">
+			노드가 선택되었을때 발생되는 이벤트 입니다.
+				<pre><code class="language-javascript">onSelect : function(selNodeIndex, selNodeEle, selNodeData) {
+	// this 는 N.tree 인스턴스
+	// selNodeIndex 는 선택된 노드의 index
+	// selNodeEle 는 선택된 노드의 요소
+	// selNodeData 는 선택된 노드의 row data
+}</code></pre>
+			</td>
+		</tr>
+		<tr>
+			<td>onCheck</td>
+			<td>function</td>
+			<td>null</td>
+			<td align="center"></td>
+			<td style="max-width: 299px;">
+			노드 앞의 체크박스가 선택 되었을때 발생되는 이벤트 입니다.
+				<pre><code class="language-javascript">onCheck : function(selNodeIndex, selNodeEle, selNodeData
+					, checkedElesIndexes, checkedEles, checkedElesData
+					, checkFlag) {
+	// this 는 N.tree 인스턴스
+	// selNodeIndex 는 선택된 노드의 index
+	// selNodeEle 는 선택된 노드의 요소
+	// selNodeData 는 선택된 노드의 row data
+	// checkedElesIndexes 는 체크된 노드들의 index
+	// selNodeEle 는 체크된된 노드들의 요소
+	// selNodeData 는 체크된 노드들의 row data
+	// checkFlag 는 체크 여부
+}</code></pre>
+			</td>
+		</tr>
+	</table>
+</article>
+
+<script type="text/javascript">
+N(".refr041104").cont({
+    init : function(view, request) {
+
+    }
+});
+</script>

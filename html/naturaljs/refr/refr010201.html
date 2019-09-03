@@ -1,0 +1,44 @@
+<article class="refr010201" class="apiDoc">
+
+    <h2>
+		<span lang="ko_KR">개요</span>
+		<span lang="en_US">Overview</span>
+	</h2>
+	<p>Config(N.config)는 Natural-JS 의 구동 환경 설정 값 / AOP 설정 / Filter 설정 / 컴포넌트의 기본 옵션 값 등을 저장하는 공간 입니다.</p>
+	<p>natural.config.js 파일에 정의 되어 있으며 설정 값은 N.context 에 각 패키지 별 속성 값으로 따로 저장 됩니다.</p>
+	<ul>
+		<li>N.context.attr(&quot;core&quot;) : Natural-CORE 패키지에 속한 라이브러리들의 기본 설정 값.</li>
+		<li>N.context.attr(&quot;architecture&quot;) : Natural-ARCHITECTURE 패키지에 속한 라이브러리들의 기본 설정 값. </li>
+		<li>N.context.attr(&quot;data&quot;) : Natural-DATA 패키지에 속한 라이브러리들의 기본 설정 값.</li>
+		<li>N.context.attr(&quot;ui&quot;) : Natural-UI 패키지에 속한 라이브러리들의 기본 설정 값.</li>
+		<li>N.context.attr(&quot;ui.shell&quot;) : Natural-UI.Shell 패키지에 속한 라이브러리들의 기본 설정 값.</li>
+	</ul>
+
+	<p>Natural-JS 적용 시 설정 해야 할 기본 속성값은 다음 두가지 입니다.</p>
+	<ol>
+		<li>N.context.attr("architecture").page.context : 사이트의 페이지 컨텐츠가 표시 되는 영역
+			<p class="alert">Documents 컴포넌트를 사용하면 따로 지정하지 않아도 됩니다.</p>
+		</li>
+		<li>N.context.attr("ui").alert.container : N.alert, N.popup 컴포넌트의 요소들이 저장 되는 영역
+			<p class="alert">Documents 컴포넌트를 사용하면 따로 지정하지 않아도 됩니다.</p>
+		</li>
+	</ol>
+
+	<p>사이트 전역으로 설정되는 컴포넌트 기본 옵션값의 적용 순서는 다음과 같습니다.</p>
+	<ol>
+		<li>컴포넌트를 초기화 할 때 지정한 옵션 값</li>
+		<li>환경설정(N.config)에서 지정한 옵션 값</li>
+		<li>컴포넌트의 기본 옵션 값</li>
+	</ol>
+    
+</article>
+
+<script type="text/javascript">
+
+N(".refr010201").cont({
+    init : function(view, request) {
+
+    }
+});
+
+</script>

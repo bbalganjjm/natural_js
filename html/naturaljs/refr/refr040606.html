@@ -1,0 +1,93 @@
+<article class="refr040606 apiDoc" >
+	<h2>
+		<span lang="ko_KR">예제</span>
+		<span lang="en_US">Examples</span>
+	</h2>
+
+	<p class="alert">예제 데이터</p>
+	<pre class="line-numbers"><code class="language-markup">
+var data = [{
+		"key" : "blue",
+		"val" : "blue"
+	},{
+		"key" : "brown",
+		"val" : "brown"
+	},{
+		"key" : "green",
+		"val" : "green"
+}]</code></pre>
+
+<p class="alert">key 옵션과 val 옵션은 N.config(natural.config.js) 에 다음과 같이 전역옵션으로 설정하면 N(data).select("#eyeColor").bind(); 와 같이 간편하게 사용할 수 있습니다. 다음 예제들은 N.config에 다음과 같이 설정되어 있다는 가정하에 구동되는 예제 입니다. 그렇지 않다면 컴포넌트 초기화 시 key, val 옵션을 지정 해야 합니다.</p>
+<pre class="line-numbers"><code class="language-markup">
+N.context.attr("ui", {
+    ...
+	"select": {
+		"key": "key",
+		"val": "val"
+	}
+	...
+});</code></pre>
+
+	<h4 class="notIndex">1. SELECT 요소에 데이터 바인드</h4>
+		<pre class="line-numbers"><code class="language-markup">&lt;select id="eyeColor"&gt;
+	&lt;option&gt;선택&lt;/option&gt;
+&lt;/select&gt;
+&lt;script type="text/javascript"&gt;
+	N(data).select("#eyeColor").bind();
+&lt;/script&gt;</code></pre>
+
+	<p>1.1. SELECT 요소에 데이터 바인드하고 기본값으로 "brown" 선택하기</p>
+		<pre class="line-numbers"><code class="language-markup">&lt;select id="eyeColor"&gt;
+	&lt;option&gt;선택&lt;/option&gt;
+&lt;/select&gt;
+&lt;script type="text/javascript"&gt;
+	N(data).select("#eyeColor").bind().val("brown");
+&lt;/script&gt;</code></pre>
+
+	<h4 class="notIndex">2. SELECT[multiple=multiple] 요소에 데이터 바인드</h4>
+		<pre class="line-numbers"><code class="language-markup">&lt;select id="eyeColor" multiple="multiple"&gt;&lt;/select&gt;
+&lt;script type="text/javascript"&gt;
+	N(data).select("#eyeColor").bind();
+&lt;/script&gt;</code></pre>
+
+	<p>2.1. SELECT[multiple=multiple] 요소에 데이터 바인드하고 기본값으로 "brown" 과 "green" 선택하기</p>
+		<pre class="line-numbers"><code class="language-markup">&lt;select id="eyeColor" multiple="multiple"&gt;&lt;/select&gt;
+&lt;script type="text/javascript"&gt;
+	N(data).select("#eyeColor").bind().val(["brown", "green"]);
+&lt;/script&gt;</code></pre>
+
+	<h4 class="notIndex">3. INPUT[type=radio] 요소에 데이터 바인드</h4>
+		<pre class="line-numbers"><code class="language-markup">&lt;input id="eyeColor" type="radio"&gt;
+&lt;script type="text/javascript"&gt;
+	N(data).select("#eyeColor").bind();
+&lt;/script&gt;</code></pre>
+
+	<p>3.1. INPUT[type=radio] 요소에 데이터 바인드하고 기본값으로 "brown" 선택하기</p>
+		<pre class="line-numbers"><code class="language-markup">&lt;input id="eyeColor" type="radio"&gt;
+&lt;script type="text/javascript"&gt;
+	N(data).select("#eyeColor").bind().val("brown");
+&lt;/script&gt;</code></pre>
+
+	<h4 class="notIndex">4. INPUT[type=checkbox] 요소에 데이터 바인드</h4>
+		<pre class="line-numbers"><code class="language-markup">&lt;input id="eyeColor" type="checkbox"&gt;
+&lt;script type="text/javascript"&gt;
+	N(data).select("#eyeColor").bind();
+&lt;/script&gt;</code></pre>
+
+	<p>4.1. INPUT[type=checkbox] 요소에 데이터 바인드하고 기본값으로 "brown" 과 "green" 선택하기</p>
+		<pre class="line-numbers"><code class="language-markup">&lt;input id="eyeColor" type="checkbox"&gt;
+&lt;script type="text/javascript"&gt;
+	N(data).select("#eyeColor").bind().val(["brown", "green"]);
+&lt;/script&gt;</code></pre>
+
+<p class="alert">1 ~ 4 예제는 대상 요소는 다르지만 컴포넌트 초기화 방법은 동일 합니다.</p>
+
+</article>
+
+<script type="text/javascript">
+N(".refr040606").cont({
+    init : function(view, request) {
+
+    }
+});
+</script>

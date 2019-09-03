@@ -1,0 +1,244 @@
+<style>
+.exap0500 #checkAll, .exap0500 .checkAllTarget {
+	padding: 0; 
+	margin: 0;
+}
+</style>
+<article class="exap0500 view-code" >
+	<h1 lang="ko_KR">데이터 그리드(N.grid(헤더고정형)) 에서 입력, 조회, 수정, 삭제 예제</h1>
+	<h1 lang="en_US">Example of create, read, update and delete the data in data grid(N.grid(fixed header type)).</h1>
+	<div class="intro">
+		<p lang="ko_KR" class="smallContTit">데이터 그리드(N.grid(헤더고정형)) 에서 직접 입력 조회 수정 삭제를 처리하는 예제 입니다.</p>
+		<p lang="en_US" class="smallContTit">This is an example that handles create, read, update, and delete the data directly in data grid(N.grid(fixed header type)).</p>
+	</div>
+
+	<div class="searchBox">
+		<ul>
+			<li class="inputs">
+				<label>Name<input id="name" type="text" data-validate='[["alphabet+integer"]]'></label>
+				<label>Gender<input id="gender" type="radio"></label>
+				<label>Eye Color<select id="eyeColor"><option></option></select></label>
+			</li>
+			<li class="buttons">
+				<a id="btnAdd" href="#" data-opts='{ "color": "green" }'>
+					<span lang="ko_KR">추가</span>
+					<span lang="en_US">Add</span>
+				</a>
+				<a id="btnDelete" href="#" data-opts='{ "color": "green" }'>
+					<span lang="ko_KR">삭제</span>
+					<span lang="en_US">Delete</span>
+				</a>
+				<a id="btnSave" href="#" data-opts='{ "color" : "gray" }'>
+					<span lang="ko_KR">저장</span>
+					<span lang="en_US">Save</span>
+				</a>
+				<a id="btnSearch" href="#">
+					<span lang="ko_KR">조회</span>
+					<span lang="en_US">Search</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+
+	<table id="grid" class="grid" style="width: 100%;">
+		<colgroup>
+			<col style="width: 3%;">
+			<col style="width: 5%;">
+			<col style="width: 10%;">
+			<col style="width: auto;">
+			<col style="width: 10%;">
+			<col style="width: 10%;">
+			<col style="width: 5%;">
+			<col style="width: 15%;">
+			<col style="width: 10%;">
+		</colgroup>
+		<thead>
+			<tr>
+				<th rowspan="3">
+					<input lang="ko_KR" id="checkAll" type="checkbox" title="전체 체크">
+					<input lang="en_US" id="checkAll" type="checkbox" title="Check all">
+				</th>
+				<th rowspan="3">Index</th>
+				<th colspan="7">Privacy</th>
+			</tr>
+			<tr>
+				<th rowspan="2">Name</th>
+				<th>Email</th>
+				<th data-filter="true">Gender</th>
+				<th data-filter="true">Eye Color</th>
+				<th rowspan="2" data-filter="true">Age</th>
+				<th data-filter="true">Registered</th>
+				<th data-filter="true">Active</th>
+			</tr>
+			<tr>
+				<th colspan="3">About</th>
+				<th colspan="2">Greeting</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td rowspan="2" style="text-align: center;"><input class="checkAllTarget" type="checkbox"></td>
+				<td id="index" style="text-align: center;" rowspan="2"></td>
+				<td rowspan="2"><input id="name" type="text" data-validate='[["required"]]'></td>
+				<td><input id="email" type="text" data-validate='[["required"], ["email"]]'></td>
+				<td style="text-align: center;">
+					<select id="gender" data-validate='[["required"]]'>
+						<option></option>
+					</select>
+				</td>
+				<td style="text-align: center;">
+					<select id="eyeColor" data-validate='[["required"]]'>
+						<option></option>
+					</select>
+				</td>
+				<td rowspan="2" style="text-align: center;"><input id="age" type="text" data-validate='[["required"], ["integer"]]'></td>
+				<td><input id="registered" type="text" data-format='[["date", 8, "date"]]' data-validate='[["required"]]'></td>
+				<td style="text-align: center;"><input id="isActive" type="checkbox"></td>
+			</tr>
+			<tr>
+				<td id="about" colspan="3"></td>
+				<td id="greeting" colspan="2"></td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td id="about" colspan="9">&nbsp;</td>
+			</tr>
+		</tfoot>
+	</table>
+
+</article>
+<script type="text/javascript">
+N(".exap0500").cont({
+    init : function(view, request) {
+    	this.setCodes(this, [ "gender", "eyeColor" ], function() {
+    		// The N.select component must be initialized before data-related components such as N.grid or N.form are initialized.
+    		this.setComponents(this);
+        	this.setEvents(this);
+    	});
+    },
+    setCodes : function(cont, codeParams, afterCodeInitFn) {
+    	// 1. initialize N.select and bind the code data.
+    	N({ codes : codeParams }).comm("html/naturaljs/exap/data/code.json").submit(function(data, request) {
+    		N(codeParams).each(function(i, code) {
+    			var filterdData = N(data).datafilter("code === '" + code + "'");
+    			filterdData.select(N(".searchBox #" + code, cont.view)).bind();
+    			filterdData.select(N(".grid #" + code, cont.view)).bind();
+    		});
+    		
+    		afterCodeInitFn.call(cont);
+     	});
+    },
+    setComponents : function(cont) {
+    	// 2. initialize buttons
+    	N(".buttons a", cont.view).button();
+    	
+    	// 3. initialize N.form and add new row data for search box
+    	cont.form = N([]).form({
+    		context : N(".searchBox", cont.view),
+    		revert : true
+    	}).add();
+
+    	// 4. initialize N.grid and bind empty data for data list
+    	cont.grid = N([]).grid({
+       		context : N("#grid", cont.view),
+       		height : 350,
+       		resizable : false,
+       		sortable : true,
+       		more : true,
+       		checkAll : "#checkAll",
+			checkAllTarget : ".checkAllTarget"
+       	}).bind();
+    },
+    setEvents : function(cont) {
+    	// 5. bind events
+    	// 5-1. Search button
+    	N("#btnSearch", cont.view).click(function(e) {
+            e.preventDefault();
+            if(cont.form.validate()) {
+    			N(cont.form.data(true)).comm("html/naturaljs/exap/data/sample.json").submit(function(data, request) {
+             		// Data bind by N.grid
+             		cont.grid.bind(data);
+             	});
+            }
+        });
+    	// 5-2. Add button
+    	N("#btnAdd", cont.view).click(function(e) {
+            e.preventDefault();
+            cont.grid.add();
+    	});
+    	// 5-3. Delete button
+    	N("#btnDelete", cont.view).click(function(e) {
+            e.preventDefault();
+            var checkedIndexs = cont.grid.check();
+            if(checkedIndexs.length > 0) {
+	            N(window).alert({
+	        		msg : N.message.get(cont.messages, "EXAP0500-0001"),
+	        		confirm : true,
+	        		onOk : function() {
+	        			cont.grid.remove(checkedIndexs);
+	        		}
+	        	}).show();
+            } else {
+				N(window).alert(N.message.get(cont.messages, "EXAP0500-0004")).show();
+			}
+    	});
+    	// 5-4. Save delete
+    	N("#btnSave", cont.view).click(function(e) {
+            e.preventDefault();
+
+            if(cont.grid.data("modified").length === 0) {
+            	N(window).alert(N.message.get(cont.messages, "EXAP0500-0003")).show();
+            	return false;
+            }
+
+            if(cont.grid.validate()) {
+            	N(window).alert({
+            		msg : N.message.get(cont.messages, "EXAP0500-0005"),
+            		confirm : true,
+            		onOk : function() {
+            			N(cont.grid.data("modified")).comm({
+            				type : "PUT",
+            				dataIsArray : true, // When sending multiple rows of data(array<json object>).
+            				url : "html/naturaljs/exap/data/sample.json"
+            			}).submit(function(data) {
+            				var msg = N.message.get(cont.messages, "EXAP0500-0002") + "<br>";
+            				msg += N.message.get(cont.messages, "EXAP0500-0006", [data.insert]) + "<br>";
+            				msg += N.message.get(cont.messages, "EXAP0500-0007", [data.update]) + "<br>";
+            				msg += N.message.get(cont.messages, "EXAP0500-0008", [data.delete]);
+            				N(window).alert({
+            					msg : msg,
+            					onOk : function() {
+            						N("#btnSearch", cont.view).click();
+            					}
+            				}).show();
+            			});
+            		}
+            	}).show();
+            }
+    	});
+    },
+    messages : {
+		"ko_KR" : {
+			"EXAP0500-0001" : "삭제 하겠습니까?<br/>저장 버튼을 누르기 전까지는 DB 에 반영 되지 않습니다.",
+			"EXAP0500-0002" : "저장이 완료 되었습니다.",
+			"EXAP0500-0003" : "변경된 데이터가 없습니다.",
+			"EXAP0500-0004" : "선택된 행이 없습니다.",
+			"EXAP0500-0005" : "저장 하겠습니까?",
+			"EXAP0500-0006" : " - 입력 : {0} 건",
+			"EXAP0500-0007" : " - 수정 : {0} 건",
+			"EXAP0500-0008" : " - 삭제 : {0} 건"
+		},
+		"en_US" : {
+			"EXAP0500-0001" : "Do you want to delete it?<br/>It will not be stored in the DB until you press the save button.",
+			"EXAP0500-0002" : "Saving is complete.",
+			"EXAP0500-0003" : "No changed data.",
+			"EXAP0500-0004" : "No rows selected.",
+			"EXAP0500-0005" : "Do you want to save it?",
+			"EXAP0500-0006" : " - Create : {0} rows",
+			"EXAP0500-0007" : " - Update : {0} rows",
+			"EXAP0500-0008" : " - Delete : {0} rows"
+		}
+	}
+});
+</script>

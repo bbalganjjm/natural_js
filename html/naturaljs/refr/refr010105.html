@@ -1,0 +1,48 @@
+<article class="refr010105" class="apiDoc">
+
+    <h2>
+        <span lang="ko_KR">N.gc 객체의 함수</span>
+        <span lang="en_US">Function of N.gc Object</span>
+    </h2>
+    <p>"N.gc.아래함수명(arg[0...N])" 과 같이 사용하면 됩니다.</p>
+    <table>
+        <tr>
+            <th style="width: 10%;">Name</th>
+            <th style="width: 9%;">Arguments</th>
+            <th style="width: 9%;">Type</th>
+            <th style="width: 9%;">Return</th>
+            <th style="width: auto;">Description</th>
+        </tr>
+        <tr>
+            <td>minimum</td>
+            <td align="center">-</td>
+            <td align="center">-</td>
+            <td>object</td>
+            <td>
+                <p>Natural-JS 의 컴포넌트와 라이브러리에서 사용되는(하는) 요소와 이벤트에 대한 최소한의 자원을 회수합니다.</p>
+                <p class="alert">natural.config.js 에서 설정한 page context(N.context.attr("architecture").page.context) 영역에 N.comm로 페이지를 불러올경우 N.gc.minimum() 이 자동으로 호출 됩니다.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>full</td>
+            <td align="center">-</td>
+            <td align="center">-</td>
+            <td>object</td>
+            <td>
+                <p>Natural-JS 의 컴포넌트와 라이브러리에서 사용되는(하는) 요소와 이벤트에 대한 모든 자원을 회수합니다.</p>
+                <p>페이지가 redirect 되지않고 N.comm 으로 블록 페이지를 불러오는 방식(SPA(Single Page Application) 방식)으로 사이트를 제작할때 브라우저의 메모리가 사용할 수록 증가한다면 N.gc.full()을 호출하면 브라우저 환경을 쾌적하게 유지 시킬 수 있습니다. N.gc.full()이 호출될 타이밍은 제작되는 사이트의 환경에 따라 적절하게 catch 하여  사용하기 바랍니다.</p>
+            </td>
+        </tr>
+    </table>
+    
+</article>
+
+<script type="text/javascript">
+
+N(".refr010105").cont({
+    init : function(view, request) {
+
+    }
+});
+
+</script>

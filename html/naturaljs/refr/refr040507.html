@@ -1,0 +1,75 @@
+<article class="refr040507 apiDoc" >
+	<h2>
+		<span lang="ko_KR">예제</span>
+		<span lang="en_US">Examples</span>
+	</h2>
+
+	<h4 class="notIndex">1. 선언형으로 탭 생성</h4>
+		<pre class="line-numbers"><code class="language-markup">&lt;div id="tab"&gt;
+	&lt;ul&gt;
+		&lt;!-- Tabs --&gt;
+		&lt;li&gt;&lt;a href="#tab1"&gt;Tab1&lt;/a&gt;&lt;/li&gt;
+		&lt;!-- a 태그의 href 속성에 연결할 탭 컨텐츠의 id 속성값을 입력하고 data-opts 속성에 url 등의 옵션을 지정 --&gt;
+		&lt;li data-opts='{ "url" : "html/naturaljs/apid/form.html", "onOpen" : "onOpen", "preload" : true }'&gt;&lt;a href="#tab2"&gt;Form&lt;/a&gt;&lt;/li&gt;
+		&lt;li data-opts='{ "url" : "html/naturaljs/apid/button.html", "active" : true }'&gt;&lt;a href="#tab3"&gt;Button&lt;/a&gt;&lt;/li&gt;
+	&lt;/ul&gt;
+	&lt;!-- Tab Contents --&gt;
+	&lt;div id="tab1"&gt;Hello~ Tab1&lt;/div&gt;
+	&lt;div id="tab2"&gt;&lt;/div&gt;
+	&lt;div id="tab3"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script type="text/javascript"&gt;
+	N("#tab").tab();
+&lt;/script&gt;</code></pre>
+
+	<h4 class="notIndex">2. 명령형으로 탭 생성</h4>
+		<pre class="line-numbers"><code class="language-markup">&lt;div id="tab"&gt;
+	&lt;ul&gt;
+		&lt;li&gt;&lt;a href="#tab1"&gt;Tab1&lt;/a&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;a href="#tab2"&gt;Form&lt;/a&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;a href="#tab3"&gt;Button&lt;/a&gt;&lt;/li&gt;
+	&lt;/ul&gt;
+	&lt;div id="tab1"&gt;Hello~ Tab1&lt;/div&gt;
+	&lt;div id="tab2"&gt;&lt;/div&gt;
+	&lt;div id="tab3"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script type="text/javascript"&gt;
+	N("#tab").tab({
+		tabOpts : [
+			{}, //Tab1,
+			{ "url" : "html/naturaljs/apid/form.html", "onOpen" : "onOpen", "preload" : true }, //Tab2
+			{ "url" : "html/naturaljs/apid/button.html", "active" : true }  //Tab3
+    	]
+	});
+&lt;/script&gt;</code></pre>
+
+	<h4 class="notIndex">3. 좌우 스크롤 가능한 탭 생성</h4>
+		<pre class="line-numbers"><code class="language-markup">&lt;div id="tab"&gt;
+	&lt;a href="#"&gt;&lt;span&gt;&lt;/span&gt;&lt;/a&gt; &lt;!-- 처음으로 가기 버튼 --&gt;
+	&lt;ul&gt;
+		&lt;li&gt;&lt;a href="#tab1"&gt;Tab1&lt;/a&gt;&lt;/li&gt;
+		&lt;li data-opts='{ "url" : "html/naturaljs/apid/form.html", "onOpen" : "onOpen", "preload" : true }'&gt;&lt;a href="#tab2"&gt;Form&lt;/a&gt;&lt;/li&gt;
+		&lt;li data-opts='{ "url" : "html/naturaljs/apid/button.html", "active" : true }'&gt;&lt;a href="#tab3"&gt;Button&lt;/a&gt;&lt;/li&gt;
+	&lt;/ul&gt;
+	&lt;a href="#"&gt;&lt;span&gt;&lt;/span&gt;&lt;/a&gt; &lt;!-- 마지막으로 가기 버튼 --&gt;
+	&lt;div id="tab1"&gt;Hello~ Tab1&lt;/div&gt;
+	&lt;div id="tab2"&gt;&lt;/div&gt;
+	&lt;div id="tab3"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script type="text/javascript"&gt;
+	N("#tab").tab({
+		tabScroll : true
+	});
+&lt;/script&gt;</code></pre>
+</article>
+
+<script type="text/javascript">
+N(".refr040507").cont({
+    init : function(view, request) {
+
+    }
+});
+</script>

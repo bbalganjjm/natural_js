@@ -1,0 +1,181 @@
+<article class="refr010103" class="apiDoc">
+    <h2>
+        <span lang="ko_KR">jQuery plugin 확장 함수</span>
+        <span lang="en_US">jQuery plugin extension function</span>
+    </h2>
+    <p>jQuery plugin 타입으로 제공 되는 CORE 유틸리티 함수들은 다음과 같습니다.</p>
+    <table>
+        <thead>
+        <tr>
+            <th style="width: 10%;">Name</th>
+            <th style="width: 9%;">Arguments</th>
+            <th style="width: 9%;">Type</th>
+            <th style="width: 9%;">Return</th>
+            <th style="width: auto;">Description</th>
+        </tr>
+        </thead>
+        <tr>
+            <td>N("selector") .instance</td>
+            <td align="center">-</td>
+            <td align="center">-</td>
+            <td>object</td>
+            <td>
+                <p>Natural-JS 는 기본적으로 컴포넌트나 라이브러리들에 의해 생성된 인스턴스를 대상 HTML element(context 옵션, 이하 요소)가 있다면 대상요소에 인스턴스를 저장 합니다.</p>
+                <p>N().instance 메서드는 이 인스턴스를 요소에 저장하고 가져오는 역할을 수행 합니다.</p>
+                <p>arguments 의 개수와 타입에 따라 다음과 같이 라이브러리 인스터스를 가져 올 수 있습니다.</p>
+                <pre><code class="language-javascript">// 조회한 요소에 저장되어 있는 모든 인스턴스를 array 로 모두 반환 합니다.
+var all = N("div#sample1", "div#sample2").instance();</code></pre>
+                <pre><code class="language-javascript">// 조회한 요소에 저장되어 있는 모든 요소를 지정한 콜백에 반환 합니다.
+var all = N("div#sample1", "div#sample2")
+            .instance(function(instanceId, instance) {
+    // this : instance
+    // instanceId : 저장 된 인스턴스의 식별자
+    // instance : 저장 된 인스턴스
+});</code></pre>
+                <pre><code class="language-javascript">// 조회한 요소에 instanceId 가 "name" 으로 저장되어 있는 모든 요소를 반환 합니다.
+// 반환된 인스턴스가 1개 이면 인스턴스 원형을 반환하고
+// 1개 이상이면 array 에 담아 반환 하고
+// 반환된 인스턴스가 없다면 undefined 를 반환 합니다.
+var all = N("div#sample1", "div#sample2").instance("name");</code></pre>
+                <pre><code class="language-javascript">// 조회한 요소에 instanceId 가 "name" 으로 저장되어 있는 모든 요소를
+//지정한 콜백에 반환 합니다.
+var all = N("div#sample1", "div#sample2")
+            .instance("name", function(instanceId, instance) {
+    // this : instance
+    // instanceId : 저장 된 인스턴스의 식별자
+    // instance : 저장 된 인스턴스
+});</code></pre>
+                <pre><code class="language-javascript">// 조회한 요소에 instanceId 가 "name" 으로 instance 를 저장 합니다.
+N("div#sample1").instance("name", instance);</code></pre>
+                <p class="alert">인스턴스 저장 시 instance 인자가 function 타입이면 정상작동 하지 않을 수 있습니다. function 타입을 제외한 object 나 string 과 같은 타입을 instance 인자로 지정하기 바랍니다.</p>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>name</td>
+            <td>string</td>
+            <td align="center">-</td>
+            <td>인스턴스 명</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>instance</td>
+            <td>object|jquery object</td>
+            <td align="center">-</td>
+            <td>
+                <p>인스턴스나 인스턴스를 가져올 callback</p>
+                <p class="alert">callback의 인자는 index(arguments[0])와 각각의 instance(arguments[1])가 들어옵니다. 이 callback 안의 this 는 각각의 instance를 가리킵니다.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>N("selector") .tpBind</td>
+            <td align="center">-</td>
+            <td align="center">-</td>
+            <td>jquery object</td>
+            <td>
+                <p>선택 한 요소에 지정 한 이벤트 명과 같은 이벤트가 미리 정의 되어 있더라도 정의한 이벤트가 제일 먼저 실행 되게 해 줍니다.</p>
+                <p>기본적인 사용법은 jQuery().bind 메서드와 같습니다.</p>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>event</td>
+            <td>string</td>
+            <td align="center">-</td>
+            <td>이벤트 명</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>handler</td>
+            <td>function</td>
+            <td align="center">-</td>
+            <td>이벤트 핸들러 함수</td>
+        </tr>
+        <tr>
+            <td>N("selector") .vals</td>
+            <td align="center">-</td>
+            <td align="center">-</td>
+            <td>string|array|jquery object</td>
+            <td>
+                <p>select, select[multiple=multiple], input[type=radio], input[type=checkbox] 와 같은 선택 요소의 선택된 값을 가져오거나 명령으로 선택 할 수 있게 해 주는 함수 입니다.</p>
+                <ul>
+                    <li>vals 인자를 지정하지 않으면 선택된 value 들을 가져오고 vals를 지정하면 입력한 값들과 일치하는 선택지 요소들을 선택 해 줍니다.</li>
+                    <li>선택 된 값을 가져올 때 1개만 선택 되어 있으면 string 타입의 값 1개만 반환하고 2개 이상 일 경우 값 들을 array 에 담아 반환 합니다.</li>
+                    <li>checkbox 의 경우 선택지가 1개만 있다면 Y나 N 또는 1, 0 과 같이 여부를 판단하는 모드로 작동하게 됩니다. Y/N 인지 1/0 인지 on/off 인지 설정은
+                    natural.config.js 의 N.context.attr("core").sgChkdVal(체크값) 변수와 N.context.attr("core").sgUnChkdVal(언체크값) 변수 값으로 설정 할 수 있습니다.  </li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>vals</td>
+            <td>array|string|function</td>
+            <td align="center">-</td>
+            <td>
+                단일 값을 지정 할 때는 string 타입으로 값을 지정하고 2개 이상의 선택지를 선택 할 때는 array 에 string 을 담아 지정 합니다.
+                function 타입을 지정하면 요소 개수 만큼 지정한 콜백 함수를 실행 해 줍니다. 콜백함수의 인자는 다음과 같습니다.
+                <ul>
+                    <li>this : 선택 된 선택지 요소</li>
+                    <li>arguments[0] : 선택 된 선택지 요소의 index</li>
+                    <li>arguments[1] : 선택 된 선택지 요소</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>N(array) .remove_</td>
+            <td align="center">-</td>
+            <td align="center">-</td>
+            <td>jquery object</td>
+            <td>셀럭터로 지정한 array 의 특정 요소를 제거 합니다.</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>idx</td>
+            <td>number</td>
+            <td align="center">-</td>
+            <td>배열 에서 제거 할 요소의 Index</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>length</td>
+            <td>number</td>
+            <td align="center">-</td>
+            <td>제거 할 배열 요소들의 개수</td>
+        </tr>
+        <tr>
+            <td>N(selector) .events</td>
+            <td align="center">-</td>
+            <td align="center">-</td>
+            <td>object similar to array|array|undefined</td>
+            <td>
+                <p>셀렉터로 지정한 요소에 바인드 되어 있는 이벤트들을 반환 합니다.</p>
+                <p class="alert">eventName 인자와 namespace 인자를 둘다 입력 하지 않으면 모든 이벤트들을 반환하고 namespace 를 입력 하지 않으면 지정한 eventName 에 해당하는 이벤트들만 반환 합니다.</p>
+                <p class="alert">namespace 인자가 입력 되면 array 타입으로 이벤트를 반환 하고 그렇지 않은 경우에는 array 와 비슷한 object 타입으로 이벤트들을 반환 합니다. 바인드되어 있는 이벤트가 없으면 undefined 를 반환 합니다.</p>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>eventName</td>
+            <td>string</td>
+            <td align="center">-</td>
+            <td>이벤트 명</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>namespace</td>
+            <td>string</td>
+            <td align="center">-</td>
+            <td>이벤트 네임스페이스</td>
+        </tr>
+    </table>
+</article>
+
+<script type="text/javascript">
+
+N(".refr010103").cont({
+    init : function(view, request) {
+
+    }
+});
+
+</script>

@@ -1,0 +1,32 @@
+<article class="refr0102 apiDoc" >
+	<h1>Natural-CORE - Config(N.config)</h1>
+
+    <div id="naTab">
+    	<ul>
+    		<li data-opts='{ "url" : "html/naturaljs/refr/refr010201.html" }'>
+                <a href="#overview" lang="ko_KR">개요</a>
+                <a href="#overview" lang="en_US">Overview</a>
+            </li>
+    		<li data-opts='{ "url" : "html/naturaljs/refr/refr010202.html" }'>
+                <a href="#examples" lang="ko_KR">예제</a>
+                <a href="#examples" lang="en_US">Examples</a>
+            </li>
+    	</ul>
+    	<div id="overview"></div>
+    	<div id="examples"></div>
+    </div>
+
+</article>
+
+<script type="text/javascript">
+
+N(".refr0102").cont({
+    init : function(view, request) {
+    	// init tab
+    	N("div#naTab", view).tab({
+    	    tabScroll : true
+    	});
+    }
+});
+
+</script>

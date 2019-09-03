@@ -1,0 +1,62 @@
+<article class="refr020201 apiDoc" >
+	<h2>
+		<span lang="ko_KR">pointcuts 객체</span>
+		<span lang="en_US">pointcuts Object</span>
+	</h2>
+	<p lang="ko_KR" class="alert">natural.config.js 파일의 N.context.attr("architecture").cont.pointcuts 속성에 정의 합니다.</p>
+	<p lang="en_US" class="alert">Define to N.context.attr("architecture").cont.pointcuts property of natural.config.js file</p>
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Type</th>
+			<th>Default</th>
+			<th>Required</th>
+			<th style="width: auto;">Description</th>
+		</tr>
+		<tr>
+			<td>pointcut name</td>
+			<td>object key string</td>
+			<td>undefined</td>
+			<td></td>
+			<td style="max-width: 299px;">
+				<p>advisor에서 참조할 pointcut을 정의 합니다.</p>
+				<ul>
+					<li>pointcut은 반드시 fn 속성에 param(정규표현식 문자열 혹은 RegExp 객체), cont(컨트롤러 객체), fnChain(컨트롤러에 정의된 함수체인(뷰의selector:fnName.fnName...)) 인자를 가진 함수로 정의 해야 합니다.</li>
+					<li>함수 수행 결과(boolean)는 advice의 적용 여부를 판단하는데 사용 됩니다.</li>
+				</ul>
+				<pre class="line-numbers"><code class="language-javascript">...
+"pointcuts" : {
+	/** pointcut 객체는 유일한 속성명으로 정의 합니다. */
+	"regexp" : {
+		/**
+		 * 정규표현식으로 평가하는 사용자 포인트 컷
+		 * (Built-in 함수를 제외한 사용자가 정의한 함수만 대상으로 합니다)
+		 */
+		"fn" : function(param, cont, fnChain){
+			var regexp = param instanceof RegExp ? param : new RegExp(param);
+			return regexp.test(fnChain);
+		}
+	},
+	"errorPointcut" : {
+		"fn" : function(param, cont, fnChain){
+			// 무조건 허용
+			return true;
+		}
+	}
+}
+...</code></pre>
+				<p class="alert">
+					Natrual-JS 의 AOP 에는 정규식으로 평가하는 regexp 포인트컷이 기본 내장 되어 있어 특별한 경우가 아니면 포인트컷을 따로 지정 하지 않아도 됩니다.
+				</p>
+			</td>
+		</tr>
+	</table>
+</article>
+
+<script type="text/javascript">
+N(".refr020201").cont({
+    init : function(view, request) {
+
+    }
+});
+</script>

@@ -1,0 +1,32 @@
+<article class="refr050106 apiDoc" >
+	<h2>
+		<span lang="ko_KR">예제</span>
+		<span lang="en_US">Examples</span>
+	</h2>
+
+	<h4 class="notIndex">1. 메시지를 표시하기 위한 세가지 방법</h4>
+	<pre class="line-numbers"><code class="language-markup">&lt;script type="text/javascript"&gt;
+	// 옵션을 지정 하면서 메시지 표시
+	N.notify(opts).add(msg, url);
+	// 옵션 지정 없이 기본 옶션으로 메시지 표시
+	N.notify.add(msg, url);
+	// 메시지 대화 상자의 위치를 지정 하고 옵션을 지정 하면서 메시지 표시
+	N(position).notify(opts).add(msg, url);
+&lt;/script&gt;</code></pre>
+
+	<h4 class="notIndex">2. 하단 우측에 메시지 표시, 메시지 클릭 시 페이지 이동</h4>
+	<pre class="line-numbers"><code class="language-markup">&lt;script type="text/javascript"&gt;
+	N({
+		top : 5,
+		right : 10
+	}).notify().add("Natural-JS API 문서가 업데이트 되었습니다.", "http://bbalganjjm.github.io/natural_js/");
+&lt;/script&gt;</code></pre>
+</article>
+
+<script type="text/javascript">
+N(".refr050106").cont({
+    init : function(view, request) {
+
+    }
+});
+</script>

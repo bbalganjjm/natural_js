@@ -1,0 +1,120 @@
+<article class="exap0100 view-code">
+	<h1 lang="ko_KR">데이터 목록 조회 예제</h1>
+	<h1 lang="en_US">Data list view example</h1>
+	<div class="intro">
+		<p lang="ko_KR" class="smallContTit">검색박스(N.form)와 데이터 그리드(N.grid)가 조합된 데이터 목록 예제 입니다.</p>
+		<p lang="en_US" class="smallContTit">An example of a data list that combines a search box(N.form) and a data grid(N.grid).</p>
+	</div>
+
+	<div class="searchBox">
+		<ul>
+			<li class="inputs">
+				<label>Name<input id="name" type="text" data-validate='[["alphabet+integer"]]' /></label>
+				<label>Gender<input id="gender" type="radio" /></label>
+				<label>Eye Color<select id="eyeColor"><option></option></select></label>
+			</li>
+			<li class="buttons">
+				<a id="btnSearch" href="#">
+					<span lang="ko_KR">조회</span>
+					<span lang="en_US">Search</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+
+	<table id="grid" class="grid" style="width: 100%;">
+		<colgroup>
+			<col style="width: 9%;">
+			<col style="width: 17%;">
+			<col style="width: auto;">
+			<col style="width: 11%;">
+			<col style="width: 13%;">
+			<col style="width: 7%;">
+			<col style="width: 13%;">
+			<col style="width: 12%;">
+		</colgroup>
+		<thead>
+			<tr>
+				<th>Index</th>
+				<th>Name</th>
+				<th>Email</th>
+				<th>Gender</th>
+				<th>Eye Color</th>
+				<th>Age</th>
+				<th>Company</th>
+				<th>Active</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td id="index" style="text-align: center;"></td>
+				<td id="name"></td>
+				<td id="email"></td>
+				<td id="gender" style="text-align: center;"></td>
+				<td id="eyeColor" style="text-align: center;"></td>
+				<td id="age"></td>
+				<td id="company"></td>
+				<td id="isActive" style="text-align: center;"></td>
+			</tr>
+		</tbody>
+	</table>
+</article>
+
+<script type="text/javascript">
+N(".exap0100").cont({
+    init : function(view, request) {
+    	this.setCodes(this, [ "gender", "eyeColor" ], function() {
+    		// The N.select component must be initialized before data-related components such as N.grid or N.form are initialized.
+    		this.setComponents(this);
+        	this.setEvents(this);
+    	});
+    },
+    setCodes : function(cont, codeParams, afterCodeInitFn) {
+    	// 1. initialize N.select and bind the code data.
+    	N({ codes : codeParams }).comm("html/naturaljs/exap/data/code.json").submit(function(data, request) {
+    		N(codeParams).each(function(i, code) {
+    			N(data).datafilter("code === '" + code + "'").select(N(".searchBox #" + code, cont.view)).bind();
+    		});
+    		
+    		afterCodeInitFn.call(cont);
+     	});
+    },
+    setComponents : function(cont) {
+    	// 2. initialize N.button
+    	N(".buttons a", cont.view).button();
+    	
+    	// 3. initialize N.form and add new row data
+    	cont.form = N([]).form({
+    		context : N("div.searchBox li.inputs", cont.view),
+    		revert : true
+    	}).add();
+    	
+    	// 4. initialize N.grid and bind empty data
+    	cont.grid = N([]).grid({
+       		context : N("#grid", cont.view),
+       		data : [],
+       		height : 350,
+       		resizable : true,
+       		sortable : true,
+       		filter : true
+       	}).bind();
+    },
+    setEvents : function(cont) {
+    	// 5. bind events
+    	N("#btnSearch", cont.view).click(function(e) {
+            e.preventDefault();
+            if(cont.form.validate()) {
+    			N(cont.form.data(true)).comm("html/naturaljs/exap/data/sample.json").submit(function(data, request) {
+    				cont.grid.bind(data);
+             	});
+            }
+        });
+    },
+    messages : {
+		"ko_KR" : {
+		},
+		"en_US" : {
+		}
+	}
+});
+</script>

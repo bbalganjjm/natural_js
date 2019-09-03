@@ -1,0 +1,311 @@
+<style>
+.index-lefter {
+    position: relative;
+    height: 100%;
+}
+
+.index-lefter .logo {
+    height: 100px;
+    background-color: #66BB6A;
+}
+
+.index-lefter .logo .home>span {
+    display: inline-block;
+    width: 250px;
+    height: 100px;
+    background: url("images/natural_js.png") no-repeat 50% 50%;
+    background-size: auto 75px;
+}
+
+.index-lefter .logo .lefter-toggle-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transition: margin-right 0.5s ease;
+}
+
+.index-lefter .logo .lefter-toggle-button>span {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    opacity: 0.5;
+    background: url("images/lefter-toggle-button.png") no-repeat 50% 50%;
+    transition: transform 0.3s ease;
+}
+
+.index-lefter .logo .lefter-toggle-button:hover>span {
+    will-change: transform;
+}
+
+.index-lefter .left-menu::-webkit-scrollbar {
+    width: 10px;
+}
+
+.index-lefter .left-menu:hover::-webkit-scrollbar-track {
+    background: #2E7D32; 
+}
+ 
+.index-lefter .left-menu:hover::-webkit-scrollbar-thumb {
+    background: #43A047;
+    border-radius: 5px;
+}
+
+.index-lefter .left-menu {
+    padding: 0.7em 0 0.7em 1em;
+    overflow: auto;
+}
+
+.index-lefter .left-menu ul {
+    margin: 0;
+    padding: 0.4em 0 0.4em 1em;
+    list-style: none;
+}
+
+.index-lefter .left-menu > ul {
+    padding-left: 0;
+}
+
+.index-lefter .left-menu ul li {
+    margin: 0;
+    padding: 0.3em 0;
+}
+
+.index-lefter .left-menu > ul > li > a > span {
+    font-size: 1em;
+    font-weight: 600;
+}
+
+.index-lefter .left-menu > ul > li > ul > li > a {
+    font-size: .9em;
+}
+
+.index-lefter .left-menu > ul > li > ul > li > ul > li > a {
+    font-size: .9em;
+}
+
+.index-lefter .left-menu ul > li > a > span {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.index-lefter .left-menu ul > li.leaf-node > a > span {
+    font-size: 1em;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+</style>
+
+<article class="index-lefter">
+    <div class="logo">
+        <a class="home" href="./"><span></span></a>
+        <a class="lefter-toggle-button" href="#" data-status="show"><span></span></a>
+    </div>
+    <div class="left-menu">
+        <ul>
+            <li>
+                <a href="#">
+                    <span lang="ko_KR">소개</span>
+                    <span lang="en_US">Introduction</span>
+                </a>
+                <ul>
+                    <li class="leaf-node"><a href="html/naturaljs/intr/intr0100.html" data-pageid="intr0100">
+                        <span lang="ko_KR">Natural-JS 소개</span>
+                        <span lang="en_US">About Natural-JS</span>
+                    </a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">
+                    <span lang="ko_KR">시작하기</span>
+                    <span lang="en_US">Getting Started</span>
+                </a>
+                <ul>
+                    <li class="leaf-node"><a href="html/naturaljs/gtst/gtst0100.html" data-pageid="gtst0100">
+                        <span lang="ko_KR">Natural-JS 시작하기</span>
+                        <span lang="en_US">Getting Started with Natural-JS</span>
+                    </a></li>
+                    <li class="leaf-node"><a href="html/naturaljs/gtst/gtst0200.html" data-pageid="gtst0200">
+                        <span lang="ko_KR">샘플 프로젝트로 시작하기</span>
+                        <span lang="en_US">Getting Started with Sample project</span>
+                    </a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#"><span>API/DEMO</span></a>
+                <ul>
+                    <li class="leaf-node"><a href="html/naturaljs/refr/refr0001.html" data-pageid="refr0001">
+                        <span lang="ko_KR">API 문서 안내</span>
+                        <span lang="en_US">API documentation guide</span>
+                    </a></li>
+                    <li>
+                        <a href="#"><span>Natural-CORE</span></a>
+                        <ul>
+                            <li class="leaf-node"><a href="html/naturaljs/refr/refr0101.html" data-pageid="refr0101"><span>N</span></a></li>
+                            <li class="leaf-node"><a href="html/naturaljs/refr/refr0102.html" data-pageid="refr0102"><span>Config</span></a></li>
+                        </ul>    
+                    </li>
+                    <li>
+                        <a href="#"><span>Natural-ARCHITECTURE</span></a>
+                        <ul>
+                            <li class="leaf-node"><a href="html/naturaljs/refr/refr0201.html" data-pageid="refr0201"><span>Controller</span></a></li>
+                            <li class="leaf-node"><a href="html/naturaljs/refr/refr0202.html" data-pageid="refr0202"><span>AOP</span></a></li>
+                            <li class="leaf-node"><a href="html/naturaljs/refr/refr0203.html" data-pageid="refr0203"><span>Communicator</span></a></li>
+                            <li class="leaf-node"><a href="html/naturaljs/refr/refr0204.html" data-pageid="refr0204"><span>Communicator.request</span></a></li>
+                            <li class="leaf-node"><a href="html/naturaljs/refr/refr0205.html" data-pageid="refr0205"><span>Communication Filter</span></a></li>
+                            <li class="leaf-node"><a href="html/naturaljs/refr/refr0206.html" data-pageid="refr0206"><span>Context</span></a></li>
+                        </ul>    
+                    </li>
+                    <li>
+                        <a href="#"><span>Natural-DATA</span></a>
+                        <ul>
+                            <li class="leaf-node"><a href="html/naturaljs/refr/refr0301.html" data-pageid="refr0301"><span>Formatter</span></a></li>
+                            <li class="leaf-node"><a href="html/naturaljs/refr/refr0302.html" data-pageid="refr0302"><span>Validator</span></a></li>
+                            <li class="leaf-node"><a href="html/naturaljs/refr/refr0303.html" data-pageid="refr0303"><span>Natural-DATA Libraries</span></a></li>
+                        </ul>    
+                    </li>
+                    <li>
+                        <a href="#"><span>Natural-UI</span></a>
+                        <ul>
+                            <li class="leaf-node"><a href="html/naturaljs/refr/refr0401.html" data-pageid="refr0401"><span>Alert</span></a></li>
+                            <li class="leaf-node"><a href="html/naturaljs/refr/refr0402.html" data-pageid="refr0402"><span>Button</span></a></li>
+                            <li class="leaf-node"><a href="html/naturaljs/refr/refr0403.html" data-pageid="refr0403"><span>Datepicker</span></a></li>
+                            <li class="leaf-node"><a href="html/naturaljs/refr/refr0404.html" data-pageid="refr0404"><span>Popup</span></a></li>
+                            <li class="leaf-node"><a href="html/naturaljs/refr/refr0405.html" data-pageid="refr0405"><span>Tab</span></a></li>
+                            <li class="leaf-node"><a href="html/naturaljs/refr/refr0406.html" data-pageid="refr0406"><span>Select</span></a></li>
+                            <li class="leaf-node"><a href="html/naturaljs/refr/refr0407.html" data-pageid="refr0407"><span>Form</span></a></li>
+                            <li class="leaf-node"><a href="html/naturaljs/refr/refr0408.html" data-pageid="refr0408"><span>List</span></a></li>
+                            <li class="leaf-node"><a href="html/naturaljs/refr/refr0409.html" data-pageid="refr0409"><span>Grid</span></a></li>
+                            <li class="leaf-node"><a href="html/naturaljs/refr/refr0410.html" data-pageid="refr0410"><span>Pagination</span></a></li>
+                            <li class="leaf-node"><a href="html/naturaljs/refr/refr0411.html" data-pageid="refr0411"><span>Tree</span></a></li>
+                        </ul>    
+                    </li>
+                    <li>
+                        <a href="#"><span>Natural-UI.Shell</span></a>
+                        <ul>
+                            <li class="leaf-node"><a href="html/naturaljs/refr/refr0501.html" data-pageid="refr0501"><span>Notify</span></a></li>
+                            <li class="leaf-node"><a href="html/naturaljs/refr/refr0502.html" data-pageid="refr0502"><span>Documents</span></a></li>
+                        </ul>    
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">
+                    <span lang="ko_KR">예제</span>
+                    <span lang="en_US">Examples</span>
+                </a>
+                <ul>
+                    <li class="leaf-node"><a href="html/naturaljs/exap/exap0100.html" data-pageid="exap0100">
+                        <span lang="ko_KR">데이터 목록 조회</span>
+                        <span lang="en_US">Data list view</span>
+                    </a></li>
+                    <li class="leaf-node"><a href="html/naturaljs/exap/exap0200.html" data-pageid="exap0200">
+                        <span lang="ko_KR">폼 데이터 조회</span>
+                        <span lang="en_US">Retrieving Form Data</span>
+                    </a></li>
+                    <li class="leaf-node"><a href="html/naturaljs/exap/exap0300.html" data-pageid="exap0300">
+                        <span lang="ko_KR">폼 데이터 입력</span>
+                        <span lang="en_US">Insert form data</span>
+                    </a></li>
+                    <li class="leaf-node"><a href="html/naturaljs/exap/exap0400.html" data-pageid="exap0400">
+                        <span lang="ko_KR">폼 데이터 수정</span>
+                        <span lang="en_US">Update Form Data</span>
+                    </a></li>
+                    <li class="leaf-node"><a href="html/naturaljs/exap/exap0500.html" data-pageid="exap0500">
+                        <span lang="ko_KR">데이터 그리드 CRUD(헤더고정형)</span>
+                        <span lang="en_US">CRUD in data grid(Fixed Header Type)</span>
+                    </a></li>
+                    <li class="leaf-node"><a href="html/naturaljs/exap/exap0510.html" data-pageid="exap0510">
+                        <span lang="ko_KR">데이터 그리드 CRUD(리스트형)</span>
+                        <span lang="en_US">CRUD in data grid(List Type)</span>
+                    </a></li>
+                    <li class="leaf-node"><a href="html/naturaljs/exap/exap0600.html" data-pageid="exap0600">
+                        <span lang="ko_KR">화면전환 CRUD(페이징)</span>
+                        <span lang="en_US">CRUD on transition views(Pagination)</span>
+                    </a></li>
+                    <li class="leaf-node"><a href="html/naturaljs/exap/exap0700.html" data-pageid="exap0700">
+                        <span lang="ko_KR">팝업 CRUD</span>
+                        <span lang="en_US">CRUD on popup view</span>
+                    </a></li>
+                    <li class="leaf-node"><a href="html/naturaljs/exap/exap0800.html" data-pageid="exap0800">
+                        <span lang="ko_KR">마스터 그리드 &amp; 디테일 폼</span>
+                        <span lang="en_US">Master Grid &amp; Detail Form</span>
+                    </a></li>
+                    <li class="leaf-node"><a href="html/naturaljs/exap/exap0900.html" data-pageid="exap0900">
+                        <span lang="ko_KR">멀티 폼 바인드</span>
+                        <span lang="en_US">Multi Form Bind</span>
+                    </a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</article>
+
+<script type="text/javascript">
+    N(".index-lefter").cont({
+        init : function(view, request) {
+            N(window).on("resize.left-menu", function() {
+                N(".left-menu", view).innerHeight(N(this).height() - N(".logo", view).height());
+            }).trigger("resize.left-menu");
+            
+            N(".left-menu", view).on("click.left-menu", "a", function(e) {
+                e.preventDefault();
+
+                // .leaf-node a[data-pageid]
+                var selfEle = N(this);
+                
+                if(selfEle.is(".leaf-node a[data-pageid]")) {
+                 	// FIXME 메뉴 DB 만들어 지고 페이지 불러오는 서비스 만들어지면 encodeURIComponent(selfEle.attr("href")) 제거 바람.
+                    location.hash = btoa(encodeURIComponent(selfEle.data("pageid") + "$" + selfEle.find("span").text()) + "$" + encodeURIComponent(selfEle.attr("href")));                    
+                }
+
+                selfEle = undefined;
+                
+                if($(window).width() <= 560) {
+    	            N(".lefter-toggle-button", view).trigger("click.lefter");               
+                }
+            });
+
+            N(".lefter-toggle-button>span", view).bind("mouseover.lefter", function() {
+                $(this).css("transform", "rotate(90deg)");
+            }).bind("mouseout.lefter", function() {
+                $(this).css("transform", "");
+            });
+
+            N(".lefter-toggle-button", view).on("click.lefter", function(e) {
+                e.preventDefault();
+
+                var selfEle = N(this);
+                var mainNav = view.closest(".main-nav");
+
+                if (selfEle.data("status") === "show") {
+				    N(".lefter-toggle-button>span", view).css("transform", "").off("mouseover.lefter").off("mouseout.lefter");
+
+                    mainNav.css("margin-left", "-" + mainNav.width() + "px");
+                    if($(window).width() > 560) {
+    					mainNav.siblings(".content-wrap").css("margin-left", "0");
+                    }
+				    selfEle.data("status", "hide").css("margin-right", "-24px");
+                } else {
+                    if($(window).width() > 560) {
+                        mainNav.siblings(".content-wrap").css("margin-left", "");
+                    }
+                    mainNav.css("margin-left", "");
+                    selfEle.data("status", "show").css("margin-right", "");
+
+                    N(".lefter-toggle-button>span", view).on("mouseover.lefter", function() {
+                        $(this).css("transform", "rotate(90deg)");
+                    }).on("mouseout.lefter", function() {
+                        $(this).css("transform", "");
+                    });
+                }
+
+                mainNav = undefined;
+                selfEle = undefined;
+            });
+
+            if($(window).width() <= 560) {
+	            N(".lefter-toggle-button", view).trigger("click.lefter");
+	            view.closest(".main-nav").siblings(".content-wrap").css("margin-left", "0");
+            }
+        }
+    });
+</script>

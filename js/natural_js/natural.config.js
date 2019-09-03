@@ -62,151 +62,35 @@
 		 * SPA(Single Page Application) 가 아니면 "body" 로 설정 해 주세요.
 		 */
 		"page" : {
-			"context" : ".docs__ > .docs_contents__.visible__"
+			"context" : ".main-contents"
 		},
 		/**
 		 * N.cont(Controller)에 정의한 오브젝트들을 대상으로 하는 관점 지향 프로그래밍(AOP) 설정
 		 *   - 아래는 AOP 관련 된 예제코드 이므로 사용하지 않는다면 cont 하위의 모든 구문을 삭제하고 사용 바랍니다.
 		 */
 		"cont" : {
-			"advisors" : [{ // md 파일 변환
-				"pointcut" : [
-					".intr0100",
-					".gtst0100",
-					".gtst0200:init$"
-				].join(","),
-				"adviceType" : "before",
-				"fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 함수명, args 인자 */
-					/* markdown 파일 로딩 후  html 로 변환 */
-					N.comm({
-						url : cont.request.options.url.replace(/html/g, "md").replace(/\.md/g, "_" + N.locale() + ".md"),
-						dataType : "text",
-						type : "GET"
-					}).submit(function(data) {
-						cont.view.addClass("markdown-body").html((new showdown.Converter()).makeHtml(data));
-						CommonUtilController.setIndex(cont.view);
-					});
-				}
-			}, {
-				"pointcut" : [
-					".refr010201",
-					".refr010202",
-					".refr010301",
-					".refr010302",
-					".refr010303",
-					".refr010311",
-					".refr010312",
-					".refr010401",
-					".refr010402",
-					".refr010403",
-					".refr010404",
-					".refr010405",
-					".refr010501",
-					".refr010502",
-					".refr010503",
-					".refr010504",
-					".refr010505",
-					".refr010506",
-					".refr010507",
-					".refr010508",
-					".refr010511",
-					".refr010509",
-					".refr010510",
-					".refr010601",
-					".refr010602:init$"
-				].join(","),
-				"adviceType" : "before",
-				"fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 함수명, args 인자 */
-					var view = args[0];
-					// code highlight
-			    	if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {
-						view.find("code").each(function() {
-							Prism.highlightElement(this);
-				    	});
-			    	}
+			"advisors" : [{
+                "pointcut" : "^init$",
+                "adviceType" : "around",
+                "fn" : function(cont, fnChain, args, joinPoint) {
+                	// 다국어 처리
+			    	APP.indx.i18n(undefined, cont.request.options.target);
 
-			    	//load api demo page
-			    	N(".apidemo", view).each(function() {
-			    		N(this).comm("html/apid/" + N(this).data("page") + ".html").submit(function() {
-			    			var view_ = view.find(".view_context__");
-
-			    			// inject description to option inputs
-			    			if(view.closest(".refr0104").length === 0) {
-			    				var descTableEle;
-			    				if(view.closest(".refr010302").length === 0) {
-			    					descTableEle = $("h3:contains('기본옵션'), h3:contains('Default Options')", view).next("table:first");
-			    				} else {
-			    					descTableEle = $("h4:contains('기본옵션'), h4:contains('Default Options')", view).next("table:first");
-			    				}
-				         		var optNm;
-				         		N(".form:first, .form#otherPage", view_).find(":input[id]").each(function() {
-				    	     		optNm = this.id;
-				    	     		$(this).after('<div class="demo-desc">' + $.trim(descTableEle.find("tr").find(">td:first").filter(":contains('" + optNm + "'):first").siblings(":last").html()) + '</div>');
-				    	     	});
-			    			}
-			    		});
-			    	});
-				}
-			}, {
-				"pointcut" : [
-					".refr0101",
-					".gtst0100:init$"
-				].join(","),
-				"adviceType" : "before",
-				"fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 함수명, args 인자 */
-					var view = args[0];
-
-					// code highlight
-			    	if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {
-						view.find("code").each(function() {
-							Prism.highlightElement(this);
-				    	});
-			    	}
-
-			    	CommonUtilController.setPageLinks("a.link", view);
-				}
-			}, {
-				"pointcut" : [
-					".home0100",
-					".refr0102",
-					".refr0103",
-					".refr0104",
-					".refr0105:init$"
-				].join(","),
-				"adviceType" : "before",
-				"fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 함수명, args 인자 */
-					var view = args[0];
-
-			    	CommonUtilController.setPageLinks("a.link", view);
-				}
-			}, {
-				"pointcut" : "^init$",
-				"adviceType" : "before",
-				"fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 함수명, args 인자 */
-					var view = args[0];
-
-					CommonUtilController.setPageLinks("a.link", view);
-
-			    	if(cont.view.hasClass("view-code")) {
-			    		CommonUtilController.sourceCode(cont.view, cont.request.get("url"));
-			    	}
-				}
-			}, {
-				"pointcut" : [
-					".intr0100",
-					"[class*=refr]:init$"
-				].join(","),
-				"adviceType" : "before",
-				/**
-				 * Create Index
-				 */
-				"fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 함수명, args 인자 */
-					// Multilingual handling
-			    	CommonUtilController.i18n(undefined, cont.request.options.target);
-
-			    	CommonUtilController.setIndex(cont.view);
-				}
-			}]
+                	N.template.aop.codes(cont, joinPoint);
+            	}
+            }, { // 팝업이나 탭에서 지연 된 init 이 실행 된 후에 onOpen을 실행하기 위해서.
+                "pointcut" : "^onOpen",
+                "adviceType" : "around",
+                "fn" : function(cont, fnChain, args, joinPoint) {
+                    if(cont.onOpenDefer || (cont.caller && cont.caller.options.preload)) {
+                        joinPoint.proceed();
+                    } else {
+                        cont.onOpenDefer = $.Deferred().done(function() {
+                            joinPoint.proceed();
+                        });
+                    }
+                }
+            }]
 		},
 		"comm" : {
 			/**
@@ -230,84 +114,98 @@
 					 * N.comm 이 초기화 된 후 실행됨(N.cont 의 init 아님).
 					 */
 					afterInit : function(request) {
-						if(request.options.dataType === "html" && request.options.target !== null && request.options.append === false) {
-							if(request.options.url !== "html/indx/header.html") {
-								request.options.target.children(".view_context__:last").removeClass("visible__");
-							}
-						}
 					},
 					/**
 					 * 서버에 요청을 보내기 전 실행됨.
 					 */
 					beforeSend : function(request, xhr, settings) {
-						// github pages 는 GET 요청 만 보낼 수 있어서 서버로 데이터를 전송하는 예제는 여기서 파라미터 정보만 보여주고 요청을 중단 함.
-						if(request.options.type !== "GET" || (request.options.data != null && request.options.data.indexOf("q=%7B%22name%22") > -1)) {
-							var msg;
-							if(request.options.type !== "GET") {
-								msg = request.options.data;
-								xhr.abort();
-							} else {
-								msg = JSON.parse(decodeURIComponent(request.options.data.replace("q=", "")));
-							}
-
-							N(window).alert({
-								title : N.message.get({
-									"ko_KR" : {
-										"COMM_TITLE" : "이 예제는 DB 서버와 연동 되지 않음 / 서버로 전송 되는 파라미터 확인"
-									},
-									"en_US" : {
-										"COMM_TITLE" : "This example does not work with the DB server / Check parameters sent to the server"
-									}
-								}, "COMM_TITLE"),
-								msg : "<pre style='white-space: pre-wrap;'>" + N.json.format(msg) + "</pre>",
-								width : 480
-							}).show();
-						}
-
-						if(request.options.dataType === "html" && request.options.target !== null && request.options.append === false) {
-							request.options.target.html('<div style="text-align: center;vertical-align: middle;border: 0; border: none;width: 100%;height: 100%;"><img src="images/loading.gif" height="24"></div>');
-						}
 					},
 					/**
 					 * 서버에 요청이 성공 했을 경우 실행됨.
+					 * return data 를 하면 N.comm.submit 의 콜백의 인자로 넘어오는 data 가 리턴한 데이터로 치환 됨.
 					 */
 					success : function(request, data, textStatus, xhr) {
-						// return data 를 하면 N.comm.submit 의 콜백의 인자로 넘어오는 data 가 리턴한 데이터로 치환 됨.
+						if(location.hostname === "localhost" || location.hostname === "127.0.0.1") {
+							var opts = request.options;
+							if((opts.target && N.isElement(opts.target)) || opts.dataType === "html" || opts.contentType === "text/css") {
+							    if(data.indexOf("<script") > -1) {
+	                                // Natural-CODE : 코드 인스펙션
+							        var excludes = [
+                                        ".index-header",                        // view 컨텍스트 정의 안함.
+                                        ".page-header",                         // view 컨텍스트 정의 안함.
+                                        ".index-lefter",                        // view 컨텍스트 정의 안함.
+                                        ".index-contents",                      // view 컨텍스트 정의 안함.
+                                        ".docs-contents-side",                  // view 컨텍스트 정의 안함.
+                                        ".index-footer",                        // view 컨텍스트 정의 안함.
 
-						/* 디버깅 지원을 위한 컨트롤러의 sourceURL 자동 삽입 처리 */
-						var opts = request.options;
-						if((opts.target && N.isElement(opts.target)) || opts.dataType === "html" || opts.contentType === "text/css") {
-							var cutIndex = data.lastIndexOf("\n</script>");
-							if(cutIndex < 0) {
-								cutIndex = data.lastIndexOf("\t</script>");
+                                        'N("#selectDocs", view)).bind().val'    // jQuery val 을 사용하여 입력 값을 수정
+                                    ];
+
+	                                var inspectionReport = N.code.inspection.test(data, excludes);
+
+	                                var color = "black";
+	                                N(inspectionReport).each(function() {
+	                                    if(this.level === "ERROR") {
+	                                        color = "red";
+	                                    } else if(this.level === "ERROR") {
+                                            color = "blue";
+                                        }
+	                                    N[this.level.toLowerCase()]("%c[" + this.level + "] " + opts.url + " - " + this.line + " : " + this.code, "color: " + color + "; font-weight: bold; line-height: 200%;",
+	                                            "\n" + this.message);
+	                                });
+							    }
+
+							    // color theme
+	                            if(window.localStorage.themeColor !== "green") {
+	                                $(APP.indx.colorPalette.green).each(function(i, color) {
+	                                    data = data.replace(new RegExp(color, "gi"), APP.indx.colorPalette[window.localStorage.themeColor][i]);
+
+	                                    if(opts.contentType === "text/css") {
+	                                        data = data.replace(/url\(/gi, "*url(");
+	                                    }
+	                                });
+	                            }
+
+							    // Natural-CODE : 디버깅 지원을 위한 컨트롤러의 sourceURL 자동 삽입 처리
+								return N.code.addSourceURL(data, opts.url);
 							}
-							if(cutIndex < 0) {
-								cutIndex = data.lastIndexOf(" </script>");
-							}
-
-							// color theme
-							if(window.localStorage.themeColor !== "green") {
-								$(IndexController.colorPalette.green).each(function(i, color) {
-									data = data.replace(new RegExp(color, "gi"), IndexController.colorPalette[window.localStorage.themeColor][i]);
-
-									if(opts.contentType === "text/css") {
-										data = data.replace(/url\(/gi, "*url(");
-									}
-								});
-							}
-
-							return data = [data.slice(0, cutIndex), '\n//# sourceURL=' + opts.url + "\n", data.slice(cutIndex)].join("");
 						}
 					},
 					/**
 					 * 서버에 요청 후 서버에러가 발생 했을 경우 실행됨.
 					 */
 					error : function(request, xhr, textStatus, errorThrown) {
-						if(request.options.dataType === "html") {
+						if((xhr.getResponseHeader("Content-Type") && xhr.getResponseHeader("Content-Type").indexOf("html") > -1) || request.options.dataType === "html") {
 							if(request.options.target.html !== undefined) {
 								request.options.target.html('<div align="center" style="margin-top: 140px;margin-bottom: 140px;">[ ' + request.options.url + ' ] 페이지를 불러오는 도중 에러가 발생 했습니다.</div>');
 							} else {
 								N(window).alert('[ ' + request.options.url + ' ] 페이지를 불러오는 도중 에러가 발생 했습니다.').show();
+							}
+							if(request.options.target.is(".docs_contents")) {
+							    request.options.target.removeClass("hidden__").addClass("visible__")
+							        .siblings(".docs_contents__").removeClass("visible__").addClass("hidden__");
+							}
+						} else {
+							var code;
+							var message;
+							if(xhr.responseJSON) {
+							    if(xhr.responseJSON.error) {
+							        code = xhr.responseJSON.error.code;
+	                                message = xhr.responseJSON.error.message;
+							    } else {
+							        if(xhr.responseJSON.message) {
+	                                    message = xhr.responseJSON.message;
+	                                }
+							    }
+							}
+							if(xhr.status == 500 || xhr.status == 413) {
+								if(message) {
+									N.notify({
+										html : true
+									}).add('<div style="white-space: pre-line;">' + message + '</div>');
+								}
+							} else if(xhr.status == 412) {
+								N(window).alert(message).show();
 							}
 						}
 					},
@@ -315,10 +213,6 @@
 					 * 모든 요청완료 후 실행 됨.
 					 */
 					complete : function(request, xhr, textStatus) {
-						if(request.options.dataType === "html") {
-							// Multilingual handling
-					    	CommonUtilController.i18n(undefined, request.options.target);
-						}
 					}
 				}
 			},
@@ -426,103 +320,103 @@
 			 * 다른언어 추가 시 해당언어의 로케일 값을 오브젝트명으로 하고 동인한 속성명들에 해당언어로 된 메시지를 추가하면 됨.
 			 */
 			"message" : {
-                "ko_KR" : {
-                    global : "필드검증에 통과하지 못했습니다.",
-                    required : "필수입력 필드 입니다.",
-                    alphabet : "영문자만 입력 할 수 있습니다.",
-                    integer : "숫자(정수)만 입력 할 수 있습니다.",
-                    korean : "한글만 입력 할 수 있습니다.",
-                    alphabet_integer : "영문자와 숫자(정수)만 입력 할 수 있습니다.",
-                    integer_korean : "숫자(정수)와 한글만 입력 할 수 있습니다.",
-                    alphabet_korean : "영문자와 한글만 입력 할 수 있습니다.",
-                    alphabet_integer_korean : "영문자, 숫자(정수), 한글만 입력 할 수 있습니다.",
-                    dash_integer : "숫자(정수), 대쉬(-) 만 입력 할 수 있습니다.",
-                    commas_integer : "숫자(정수), 콤마(,) 만 입력 할 수 있습니다.",
-                    number : "숫자(+-,. 포함)만 입력 할 수 있습니다.",
-                    email : "e-mail 형식에 맞지 않습니다.",
-                    url : "URL 형식에 맞지 않습니다.",
-                    zipcode : "우편번호 형식에 맞지 않습니다.",
-                    decimal : "(유한)소수만 입력 할 수 있습니다.",
+				"ko_KR" : {
+					global : "필드검증에 통과하지 못했습니다.",
+					required : "필수입력 필드 입니다.",
+					alphabet : "영문자만 입력 할 수 있습니다.",
+					integer : "숫자(정수)만 입력 할 수 있습니다.",
+					korean : "한글만 입력 할 수 있습니다.",
+					alphabet_integer : "영문자와 숫자(정수)만 입력 할 수 있습니다.",
+					integer_korean : "숫자(정수)와 한글만 입력 할 수 있습니다.",
+					alphabet_korean : "영문자와 한글만 입력 할 수 있습니다.",
+					alphabet_integer_korean : "영문자, 숫자(정수), 한글만 입력 할 수 있습니다.",
+					dash_integer : "숫자(정수), 대쉬(-) 만 입력 할 수 있습니다.",
+					commas_integer : "숫자(정수), 콤마(,) 만 입력 할 수 있습니다.",
+					number : "숫자(+-,. 포함)만 입력 할 수 있습니다.",
+					email : "e-mail 형식에 맞지 않습니다.",
+					url : "URL 형식에 맞지 않습니다.",
+					zipcode : "우편번호 형식에 맞지 않습니다.",
+					decimal : "(유한)소수만 입력 할 수 있습니다.",
                     decimal_ : "(유한)소수 {0}번째 자리까지 입력 할 수 있습니다.", // TODO
-                    phone : "전화번호 형식이 아닙니다.",
-                    rrn : "주민등록번호 형식에 맞지 않습니다.",
-                    ssn : "주민등록번호 형식에 맞지 않습니다.", // Deprecated
-                    frn : "외국인등록번호 형식에 맞지 않습니다.",
-                    frn_rrn : "주민번호나 외국인등록번호 형식에 맞지 않습니다.", // Deprecated
-                    frn_ssn : "주민번호나 외국인등록번호 형식에 맞지 않습니다.",
-                    cno : "사업자등록번호 형식에 맞지 않습니다.", // Deprecated
-                    kbrn : "사업자등록번호 형식에 맞지 않습니다.",
-                    cpno : "법인번호 형식에 맞지 않습니다.", // Deprecated
-                    kcn : "법인번호 형식에 맞지 않습니다.",
-                    date : "날짜 형식에 맞지 않습니다.",
-                    time : "시간 형식에 맞지 않습니다.",
-                    accept : "\"{0}\" 값만 입력 할 수 있습니다.",
-                    match : "\"{0}\" 이(가) 포함된 값만 입력 할 수 있습니다.",
-                    acceptFileExt : "\"{0}\" 이(가) 포함된 확장자만 입력 할 수 있습니다.",
-                    notAccept : "\"{0}\" 값은 입력 할 수 없습니다.",
-                    notMatch : "\"{0}\" 이(가) 포함된 값은 입력 할 수 없습니다.",
-                    notAcceptFileExt : "\"{0}\" 이(가) 포함된 확장자는 입력 할 수없습니다.",
-                    equalTo : "\"{1}\" 의 값과 같아야 합니다.",
-                    maxlength : "{0} 글자 이하만 입력 가능합니다.",
-                    minlength : "{0} 글자 이상만 입력 가능합니다.",
-                    rangelength : "{0} 글자 에서 {1} 글자 까지만 입력 가능합니다.",
-                    maxbyte : "{0} 바이트 이하만 입력 가능합니다.<br> - 영문, 숫자 : 1 바이트<br> - 한글, 특수문자 : {1} 바이트",
-                    minbyte : "{0} 바이트 이상만 입력 가능합니다.<br> - 영문, 숫자 : 1 바이트<br> - 한글, 특수문자 : {1} 바이트",
-                    rangebyte : "{0} 바이트 에서 {1} 바이트 까지만 입력 가능합니다.<br> - 영문, 숫자 한글자 : 1 바이트<br> - 한글, 특수문자 : {2} 바이트",
-                    maxvalue : "{0} 이하의 값만 입력 가능합니다.",
-                    minvalue : "{0} 이상의 값만 입력 가능합니다.",
-                    rangevalue : "{0} 에서 {1} 사이의 값만 입력 가능합니다.",
-                    regexp : "{2}"
-                },
-                "en_US" : {
-                    global : "It Can't pass the field verification.",
-                    required : "It is a field to input obligatorily.",
-                    alphabet : "Can enter only alphabetical characters.",
-                    integer : "Can enter only number(integer).",
-                    korean : "Can enter only Korean alphabet.",
-                    alphabet_integer : "Can enter only alphabetical characters and number(integer).",
-                    integer_korean : "Can enter only number(integer) and Korean alphabet.",
-                    alphabet_korean : "Can enter only alphabetical characters and Korean alphabet.",
-                    alphabet_integer_korean : "Can enter only alphabetical characters and number(integer) and Korean alphabet.",
-                    dash_integer : "Can enter only number(integer) and dash(-).",
-                    commas_integer : "Can enter only number(integer) and commas(,).",
-                    number : "Can enter only number and (+-,.)",
-                    email : "Don't conform to the format of E-mail.",
-                    url : "Don't conform to the format of URL.",
-                    zipcode : "Don't conform to the format of zip code.",
-                    decimal : "Can enter only (finite)decimal",
+					phone : "전화번호 형식이 아닙니다.",
+					rrn : "주민등록번호 형식에 맞지 않습니다.",
+					ssn : "주민등록번호 형식에 맞지 않습니다.", // Deprecated
+					frn : "외국인등록번호 형식에 맞지 않습니다.",
+					frn_rrn : "주민번호나 외국인등록번호 형식에 맞지 않습니다.", // Deprecated
+					frn_ssn : "주민번호나 외국인등록번호 형식에 맞지 않습니다.",
+					cno : "사업자등록번호 형식에 맞지 않습니다.", // Deprecated
+					kbrn : "사업자등록번호 형식에 맞지 않습니다.",
+					cpno : "법인번호 형식에 맞지 않습니다.", // Deprecated
+					kcn : "법인번호 형식에 맞지 않습니다.",
+					date : "날짜 형식에 맞지 않습니다.",
+					time : "시간 형식에 맞지 않습니다.",
+					accept : "\"{0}\" 값만 입력 할 수 있습니다.",
+					match : "\"{0}\" 이(가) 포함된 값만 입력 할 수 있습니다.",
+					acceptFileExt : "\"{0}\" 이(가) 포함된 확장자만 입력 할 수 있습니다.",
+					notAccept : "\"{0}\" 값은 입력 할 수 없습니다.",
+					notMatch : "\"{0}\" 이(가) 포함된 값은 입력 할 수 없습니다.",
+					notAcceptFileExt : "\"{0}\" 이(가) 포함된 확장자는 입력 할 수없습니다.",
+					equalTo : "\"{1}\" 의 값과 같아야 합니다.",
+					maxlength : "{0} 글자 이하만 입력 가능합니다.",
+					minlength : "{0} 글자 이상만 입력 가능합니다.",
+					rangelength : "{0} 글자 에서 {1} 글자 까지만 입력 가능합니다.",
+					maxbyte : "{0} 바이트 이하만 입력 가능합니다.<br> - 영문, 숫자 : 1 바이트<br> - 한글, 특수문자 : {1} 바이트",
+					minbyte : "{0} 바이트 이상만 입력 가능합니다.<br> - 영문, 숫자 : 1 바이트<br> - 한글, 특수문자 : {1} 바이트",
+					rangebyte : "{0} 바이트 에서 {1} 바이트 까지만 입력 가능합니다.<br> - 영문, 숫자 한글자 : 1 바이트<br> - 한글, 특수문자 : {2} 바이트",
+					maxvalue : "{0} 이하의 값만 입력 가능합니다.",
+					minvalue : "{0} 이상의 값만 입력 가능합니다.",
+					rangevalue : "{0} 에서 {1} 사이의 값만 입력 가능합니다.",
+					regexp : "{2}"
+				},
+				"en_US" : {
+					global : "It Can't pass the field verification.",
+					required : "It is a field to input obligatorily.",
+					alphabet : "Can enter only alphabetical characters.",
+					integer : "Can enter only number(integer).",
+					korean : "Can enter only Korean alphabet.",
+					alphabet_integer : "Can enter only alphabetical characters and number(integer).",
+					integer_korean : "Can enter only number(integer) and Korean alphabet.",
+					alphabet_korean : "Can enter only alphabetical characters and Korean alphabet.",
+					alphabet_integer_korean : "Can enter only alphabetical characters and number(integer) and Korean alphabet.",
+					dash_integer : "Can enter only number(integer) and dash(-).",
+					commas_integer : "Can enter only number(integer) and commas(,).",
+					number : "Can enter only number and (+-,.)",
+					email : "Don't conform to the format of E-mail.",
+					url : "Don't conform to the format of URL.",
+					zipcode : "Don't conform to the format of zip code.",
+					decimal : "Can enter only (finite)decimal",
                     decimal_ : "Can enter up to {0} places of (finite)decimal.", // TODO
-                    phone : "There is no format of phone number.",
-                    rrn : "Don't fit the format of the resident registration number.",
-                    ssn : "Don't fit the format of the resident registration number.", // Deprecated.
-                    frn : "Don't fit the format of foreign registration number.",
-                    frn_rrn : "Don't fit the format of the resident registration number or foreign registration number.",
-                    frn_ssn : "Don't fit the format of the resident registration number or foreign registration number.", // Deprecated.
-                    cno : "Don't fit the format of registration of enterpreneur.", // Deprecated
-                    kbrn : "Don't fit the format of registration of enterpreneur.",
-                    cpno : "Don't fit the format of corporation number.", // Deprecated
-                    kcn : "Don't fit the format of corporation number.",
-                    date : "Don't fit the format of date.",
-                    time : "Don't fit the format of time.",
-                    accept : "Can enter only \"{0}\" value.",
-                    match : "Can enter only value ​​that contains \"{0}\".",
-                    acceptFileExt : "Can enter only extension that includes \"{0}\".",
-                    notAccept : "Can't enter \"{0}\" value.",
-                    notMatch : "Can't enter only value ​​that contains \"{0}\".",
-                    notAcceptFileExt : "Can't enter only extension that includes \"{0}\".",
-                    equalTo : "Must be the same as \"{1}\" value.",
-                    maxlength : "Can enter only below {0} letters.",
-                    minlength : "Can enter only more than {0} letters.",
-                    rangelength : "It can be entered from {0} to {1} letters.",
-                    maxbyte : "Can enter only below {0} bytes.",
-                    minbyte : "Can enter only more than {0} bytes.",
-                    rangebyte : "It can be entered from {0} to {1} bytes.",
-                    maxvalue : "Can enter only below {0} value.",
-                    minvalue : "Can enter only more than {0} value.",
-                    rangevalue : "Can be entered value from {0} to {1}.",
-                    regexp : "{2}"
-                }
-            }
+					phone : "There is no format of phone number.",
+					rrn : "Don't fit the format of the resident registration number.",
+					ssn : "Don't fit the format of the resident registration number.", // Deprecated.
+					frn : "Don't fit the format of foreign registration number.",
+					frn_rrn : "Don't fit the format of the resident registration number or foreign registration number.",
+					frn_ssn : "Don't fit the format of the resident registration number or foreign registration number.", // Deprecated.
+					cno : "Don't fit the format of registration of enterpreneur.", // Deprecated
+					kbrn : "Don't fit the format of registration of enterpreneur.",
+					cpno : "Don't fit the format of corporation number.", // Deprecated
+					kcn : "Don't fit the format of corporation number.",
+					date : "Don't fit the format of date.",
+					time : "Don't fit the format of time.",
+					accept : "Can enter only \"{0}\" value.",
+					match : "Can enter only value ​​that contains \"{0}\".",
+					acceptFileExt : "Can enter only extension that includes \"{0}\".",
+					notAccept : "Can't enter \"{0}\" value.",
+					notMatch : "Can't enter only value ​​that contains \"{0}\".",
+					notAcceptFileExt : "Can't enter only extension that includes \"{0}\".",
+					equalTo : "Must be the same as \"{1}\" value.",
+					maxlength : "Can enter only below {0} letters.",
+					minlength : "Can enter only more than {0} letters.",
+					rangelength : "It can be entered from {0} to {1} letters.",
+					maxbyte : "Can enter only below {0} bytes.",
+					minbyte : "Can enter only more than {0} bytes.",
+					rangebyte : "It can be entered from {0} to {1} bytes.",
+					maxvalue : "Can enter only below {0} value.",
+					minvalue : "Can enter only more than {0} value.",
+					rangevalue : "Can be entered value from {0} to {1}.",
+					regexp : "{2}"
+				}
+			}
 		}
 	});
 	// 아래 extend 구문은 사용자 정의 룰 정의 시 적용되게 하는 코드이므로 사용자 정의 룰을 정의 했다면 절대 지우면 안됨.
@@ -546,7 +440,6 @@
 			 */
 			"global" : {
 				"okBtnStyle" : {
-					color : "yellowgreen",
 					size : "medium"
 				},
 				"cancelBtnStyle" : {
@@ -587,10 +480,10 @@
 			 * html 인식 여부
 			 */
 			html : true,
-            /**
-             * 메모리를 절약 해 준다.
-             */
-            "saveMemory" : true,
+			/**
+			 * 메모리를 절약 해 준다.
+			 */
+			"saveMemory" : true,
 			/**
 			 * 다국어 메시지
 			 */
@@ -605,39 +498,21 @@
 				}
 			}
 		},
-		"button" : {
-			"size" : "medium"
-		},
 		"popup" : {
 			"draggable" : true,
 			"alwaysOnTop" : true,
-            /**
+			"button" : false,
+			"windowScrollLock" : false,
+			/**
              * 메모리를 절약 해 준다.
              */
             "saveMemory" : true
 		},
 		"tab" : {
-			onActive : function(tabIdx, tabEle, contentEle, tabEles, contentEles) {
-    			if(contentEle.find("> .view_context__").length > 0) {
-    				var url = contentEle.find("> .view_context__").instance("cont").request.options.url;
-    				var fixedHash = location.hash;
-    				if(fixedHash.indexOf("_T_") > -1) {
-    					fixedHash = fixedHash.substring(0, fixedHash.indexOf("_T_"));
-    				}
-    				var hash = fixedHash + "_T_" + url.replace("html/", "").replace(".html", "");
-    				if(location.hostname === "bbalganjjm.github.io") {
-    					try {
-    						ga('create', 'UA-58001949-2', 'auto');
-    						ga('set', 'location', location.href);
-    						ga('set', 'title', tabEle.find("a").text());
-    						ga('send', {
-    							'hitType': 'pageview',
-    							'page': hash
-    						});
-    					} catch (e) {}
-    				}
-    			}
-    		}
+		    "tabScrollCorrection" : {
+		        tabContainerWidthCorrectionPx : 1,
+		        tabContainerWidthReCalcDelayTime : 0
+		    }
 		},
 		"datepicker" : {
 			"focusin" : true,
@@ -669,12 +544,12 @@
 			"yearsPanelPosition" : "top",
 			"monthsPanelPosition" : "top",
 			/**
-             * monthonly 옵션이 true 일때 전역 옵션
-             */
-            "monthonlyOpts" : {
-                "yearsPanelPosition" : "left",
-                "monthsPanelPosition" : "left",
-            },
+			 * monthonly 옵션이 true 일때 전역 옵션
+			 */
+			"monthonlyOpts" : {
+			    "yearsPanelPosition" : "left",
+	            "monthsPanelPosition" : "left",
+			},
 			"yearChangeInput" : true,
 			"monthChangeInput" : true,
 			"touchMonthChange" : true,
@@ -698,7 +573,7 @@
 			/**
 			 * 바인드된 데이터의 html 을 인식 할건지 여부
 			 */
-			"html" : false,
+			"html" : true,
 			/**
 			 * 실시간 데이터 검증을 할 건지 여부
 			 */
@@ -706,7 +581,51 @@
 			/**
 			 * 바인드된 데이터의 새로운 row 생성시 위치를 최상단에 만들건지 여부
 			 */
-			"addTop" : true
+			"addTop" : true,
+			/**
+			 * XSS 필터링 목록
+			 */
+			"xssReverseChars" : [
+			    ["&amp;", "&"],
+			    ["&#x2F;", "/"],
+			    ["&lt;", "<"], ["&gt;", ">"],
+			    ["&#x27;", "'"],
+			    ["&quot;", '"']
+			],
+			/**
+			 * 서버에서 XSS 필터링 된 값을 입력 요소에 바인드 할때는 원복해서 바인드하는 이벤트 핸들러.
+			 *
+			 * onBeforeBindValue 이벤트
+			 *  - 값이 바인드 되기전 실행 되는 이벤트, 반드시 val 을 (가공 후) 다시 리턴 해야 함.
+			 *  - N.form 을 사용하는 N.grid, N.list 에도 같이 적용 됨.
+			 *    - ele : 바인드 될 요소
+			 *    - ele : 바인드 될 값
+			 *    - ele : 호출 함수 명 - "bind" | "val"
+			 */
+			"onBeforeBindValue" : function(ele, val, action) {
+			    if(ele.is(":input")) {
+    			    if(N.type(val) === "array") {
+    			        for (var j = 0; j < val.length; j++) {
+    			            if(N.type(val[j]) === "string"){
+    			                for (var i = 0; i < this.options.xssReverseChars.length; i++) {
+                                    val[j] = val[j].replace(new RegExp(this.options.xssReverseChars[i][0], "g"), this.options.xssReverseChars[i][1]);
+                                }
+    			            }
+    			        }
+    			        return val;
+    			    } else if(N.type(val) === "string"){
+    		            for (var i = 0; i < this.options.xssReverseChars.length; i++) {
+    		                val = val.replace(new RegExp(this.options.xssReverseChars[i][0], "g"), this.options.xssReverseChars[i][1]);
+    		            }
+    		            return val;
+    			    } else {
+    			        return val;
+    			    }
+			    } else {
+                    return val;
+                }
+			},
+			"tpBind" : true
 		},
 		"list" : {
 			/**
@@ -725,15 +644,16 @@
 			 */
 			"addTop" : true,
 			/**
-			 * 스크롤 페이징 시 한번에 몇개를 가져올 것인지 설정
+			 * 스크롤 페이징 시 한번에 몇개를 가져올것인지 설정
 			 */
 			"scrollPaging" : {
-				"size" : N.browser.is("ie") ? 20 : 50
+				"size" : 30
 			},
-			/**
-			 * 행을 그릴때 마다의 딜레이 타임
-			 */
-			"createRowDelay" : N.browser.is("ie") ? 0 : 1,
+            "unselect" : false,
+       		"addSelect" : false,
+       		"addTop" : true,
+       		"html" : true,
+       		"tpBind" : false
 		},
 		"grid" : {
 			/**
@@ -748,23 +668,17 @@
 			 */
 			"addTop" : true,
 			/**
-			 * 스크롤 페이징 시 한번에 몇개를 가져올 것인지 설정
+			 * 컬럼 넓이조절 기능 활성화 여부
 			 */
-			"scrollPaging" : {
-				"size" : N.browser.is("ie") ? 20 : 50
-			},
-			/**
-			 * 행을 그릴때 마다의 딜레이 타임
-			 */
-			"createRowDelay" : N.browser.is("ie") ? 0 : 1,
-			/**
-			 * 세로 길이조절 기능 활성화 여부
-			 */
-			"vResizable" : false,
+			"resizable" : true,
 			/**
 			 * 소트 기능 활성화 여부
 			 */
-			"sortable" : false,
+			"sortable" : true,
+			/**
+			 * 필터 기능 활성화 여부
+			 */
+			"filter" : true,
 			/**
 			 * 소트기능 활설화 시 표시 구분자(html 태그 가능)
 			 */
@@ -772,6 +686,19 @@
 				"asc" : "▼",
 				"desc" : "▲"
 			},
+			/**
+			 * 스크롤 페이징 시 한번에 몇개를 가져올것인지 설정
+			 */
+			"scrollPaging" : {
+				"size" : 30
+			},
+            "unselect" : false,
+            "resizable" : true,
+       		"sortable" : true,
+       		"addSelect" : false,
+       		"addTop" : true,
+       		"html" : true,
+       		"tpBind" : false,
 			/**
 			 * 다국어 메시지
 			 */
@@ -806,11 +733,11 @@
 				/**
 				 * 컬럼 리사이즈 시 다른컬럼이 밀릴때 아래 수치 조절(기본값 : 0)
 				 */
-				"resizableCorrectionWidth" : N.browser.is("safari") ? -10 : -11,
+				"resizableCorrectionWidth" : N.browser.is("safari") ? -6 : -7,
 				/**
 				 * 헤더고정형 중 마지막 컬럼 리사이즈 시 다른컬럼이 밀릴때 아래 수치 조절(기본값 : 0)
 				 */
-		        "resizableLastCellCorrectionWidth" : N.browser.is("ie") || N.browser.is("firefox") ? 10.8 : 12,
+				"resizableLastCellCorrectionWidth" : 8,
 				/**
 				 * 리사이즈바의 left 포지션이 컬럼 보더를 기준으로 가운데에 위치하지 않을때 아래 수치 조절(기본값 : 0)
 				 */
@@ -822,7 +749,7 @@
 				/**
 				 * 컬럼 고정 시 고정 된 헤더 셀(TH)의 상단 위치가 맞지 않을때 아래 수치 조절(기본값 : 0)
 				 */
-				"fixedcolHeadMarginTop" : N.browser.is("ie") || N.browser.is("firefox") ? -1 : 0,
+				"fixedcolHeadMarginTop" : N.browser.is("ie") || N.browser.is("firefox") ? 1 : 2,
 				/**
 				 * 컬럼 고정 시 고정 된 헤더 셀(TH)의 좌측 위치가 맞지 않을때 아래 수치 조절(기본값 : 0)
 				 */
@@ -830,11 +757,11 @@
 				/**
 				 * 컬럼 고정 시 고정 된 헤더 셀(TH)의 높이가 맞지 않을때 아래 수치 조절(기본값 : 0)
 				 */
-				"fixedcolHeadHeight" : 0,
+				"fixedcolHeadHeight" : N.browser.is("ie") || N.browser.is("firefox") ? 0 : -1,
 				/**
 				 * 컬럼 고정 시 고정 된 바디 셀(TD)의 상단 위치가 맞지 않을때 아래 수치 조절(기본값 : 0)
 				 */
-				"fixedcolBodyMarginTop" : N.browser.is("ie") || N.browser.is("firefox") ? -1 : 0,
+				"fixedcolBodyMarginTop" : N.browser.is("ie") ? -0.5 : N.browser.is("firefox") ? -1 : 0,
 				/**
 				 * 컬럼 고정 시 고정 된 바디 셀(TD)의 좌측 위치가 맞지 않을때 아래 수치 조절(기본값 : 0)
 				 */
@@ -842,7 +769,7 @@
 				/**
 				 * 컬럼 고정 시 데이터를 바인드 할 때 고정 된 바디 셀(TD)의 높이가 맞지 않을때 아래 수치 조절(기본값 : 0)
 				 */
-				"fixedcolBodyBindHeight" : N.browser.is("ie") || N.browser.is("firefox") ? 1 : 1,
+				"fixedcolBodyBindHeight" : N.browser.is("ie") ? 1.3 : 1,
 				/**
 				 * 컬럼 고정 시 데이터를 Add 할 때 고정 된 바디 셀(TD)의 높이가 맞지 않을때 아래 수치 조절(기본값 : 1)
 				 */
@@ -875,13 +802,14 @@
 		},
 		"docs" : {
 			"alwaysOnTop" : true,
-			"maxStateful" : 10,
-			"maxTabs" : 20,
+			"maxStateful" : 20,
+			"maxTabs" : 0,
 			"entireLoadIndicator" : true,
 			"entireLoadScreenBlock" : true,
 			"addLast" : true,
 			"tabScroll" : true,
 			"closeAllRedirectURL" : "./",
+			"entireLoadExcludeURLs" : ["contents.html", "footer.html"],
 			/*
 			"onBeforeLoad" : function(docId, target) {
 			},
@@ -891,29 +819,21 @@
 			},
 			"onEntireLoad" : function(docId) {
 			},
-			"onBeforeActive" : function(docId, isFromDocsTabList, isNotLoaded) {
-			},
 			*/
-			"onActive" : function(docId, isFromDocsTabList, isNotLoaded) {
-				var cont = this.cont(docId);
-				var url = cont.request.options.url;
-				var hash = url.replace("html/", "").replace(".html", "");
-				if(location.hash.split("/").length < 3) {
-					location.hash = hash;
-				}
-				if(location.hostname === "bbalganjjm.github.io") {
-					try {
-						ga('create', 'UA-58001949-2', 'auto');
-						ga('set', 'location', location.href);
-						ga('set', 'title', this.doc(docId).docNm);
-						ga('send', {
-							'hitType': 'pageview',
-							'page': "#" + hash
-						});
-					} catch (e) {}
-				}
+			"onBeforeActive" : function(docId, isFromDocsTabList, isNotLoaded) {
+			    if(!isNotLoaded) {
+			        // FIXME 메뉴 DB 만들어 지고 페이지 불러오는 서비스 만들어지면 아래 url 제거 바람.
+			        var url = N(".index-lefter.view_context__ a[data-pageid='" + docId + "']").attr("href");
+
+			        var hashVal = docId + "$" + this.options.docs[docId].docNm + "$" + url;
+			        if(decodeURIComponent(atob(location.hash.replace("#", ""))) != hashVal) {
+			            location.hash = btoa(encodeURIComponent(hashVal));
+			        }
+                }
 			},
 			/*
+			"onActive" : function(docId, isFromDocsTabList, isNotLoaded) {
+			},
 			"onBeforeInactive" : function(docId) {
 			},
 			"onInactive" : function(docId) {
@@ -957,5 +877,90 @@
 			}
 		}
 	});
+
+	// Natural-JS API 메뉴얼 용 advisors
+	N.context.attr("architecture").cont.advisors.push({ // md 파일 변환
+        "pointcut" : [
+            ".intr0100",
+            ".gtst0100",
+            ".gtst0200",
+            ".refr0001:init$"
+        ].join(","),
+        "adviceType" : "before",
+        "fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 함수명, args 인자 */
+            /* markdown 파일 로딩 후  html 로 변환 */
+            if(typeof showdown == "undefined") {
+                N.comm({
+                    url : "js/lib/markdown/github-markdown.css",
+                    contentType : "text/css",
+                    dataType : "html"
+                }).submit(function(data) {
+                    $('<style type="text/css">\n' + data + '</style>').appendTo("head");
+                    $.getScript("js/lib/markdown/showdown.min.js", function() {
+                        N.comm({
+                            url : cont.request.options.url.replace(/.html/, ".md").replace(/\.md/g, "_" + N.locale() + ".md"),
+                            dataType : "text",
+                            type : "GET"
+                        }).submit(function(data) {
+                            cont.view.addClass("markdown-body").html((new showdown.Converter()).makeHtml(data));
+                        });
+                    }); 
+                });
+            } else {
+                N.comm({
+                    url : cont.request.options.url.replace(/\.html/, ".md").replace(/\.md/g, "_" + N.locale() + ".md"),
+                    dataType : "text",
+                    type : "GET"
+                }).submit(function(data) {
+                    cont.view.addClass("markdown-body").html((new showdown.Converter()).makeHtml(data));
+                });
+            }
+        }
+    }, { // API DEMO 페이지 자동 삽입.
+        "pointcut" : [
+            ".refr020102",
+            ".refr020302",
+            ".refr030102",
+            ".refr030202",
+            ".refr040102",
+            ".refr040202",
+            ".refr040302",
+            ".refr040402",
+            ".refr040502",
+            ".refr040602",
+            ".refr040702",
+            ".refr040802",
+            ".refr040902",
+            ".refr041002",
+            ".refr041102",
+            ".refr050102:init$"
+        ].join(","),
+        "adviceType" : "before",
+        "fn" : function(cont, fnChain, args){
+            var view = args[0];
+
+            //load api demo page
+            N(".apidemo", view).each(function() {
+                N(this).comm("html/naturaljs/apid/" + N(this).data("page") + ".html").submit(function() {
+                    var view_ = view.find(".view_context__");
+
+                    // inject description to option inputs
+                    if(view.closest(".refr0104").length === 0) {
+                        var descTableEle;
+                        if(view.closest(".refr010302").length === 0) {
+                            descTableEle = $("h3:contains('기본옵션'), h3:contains('Default Options')", view).next("table:first");
+                        } else {
+                            descTableEle = $("h4:contains('기본옵션'), h4:contains('Default Options')", view).next("table:first");
+                        }
+                        var optNm;
+                        N(".form:first, .form#otherPage", view_).find(":input[id]").each(function() {
+                            optNm = this.id;
+                            $(this).after('<div class="demo-desc">' + $.trim(descTableEle.find("tr").find(">td:first").filter(":contains('" + optNm + "'):first").siblings(":last").html()) + '</div>');
+                        });
+                    }
+                });
+            });
+        }
+    });
 
 })(N);

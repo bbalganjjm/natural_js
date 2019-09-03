@@ -1,0 +1,228 @@
+<article class="refr050205 apiDoc" >
+	<h2>
+		<span lang="ko_KR">함수</span>
+		<span lang="en_US">Methods</span>
+	</h2>
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Arguments</th>
+			<th>Type</th>
+			<th>Return</th>
+			<th style="width: auto;">Description</th>
+		</tr>
+		<tr>
+			<td>context</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>jquery object</td>
+			<td>컴포넌트를 적용한 요소를 반환 합니다.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>selector</td>
+			<td>string</td>
+			<td align="center">-</td>
+			<td>selector 문자열을 입력하면 context 옵션으로 지정한 요소에서 선택된 요소를 반환 합니다.</td>
+		</tr>
+		<tr>
+			<td>add</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>N.docs</td>
+			<td>새로운 컨텐츠과 컨텐츠 탭을 추가 합니다.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>docId</td>
+			<td>string</td>
+			<td align="center">-</td>
+			<td>
+				<p>컨텐츠(페이지) 아이디를 입력 합니다.</p>
+				<p class="alert">이미 같은 아이디로 지정 된 컨텐츠가 있다면 해당 컨텐츠가 활성화 됩니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>docNm</td>
+			<td>string</td>
+			<td align="center">-</td>
+			<td>컨텐츠 명(페이지 명)을 입력 합니다.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>docOpts</td>
+			<td>object</td>
+			<td align="center">-</td>
+			<td style="max-width: 299px;">
+				<p>컨테츠 옵션(페이지 옵션)을 입력 합니다.</p>
+<pre><code class="language-javascript">var docOpts = {
+	url : "url", // 컨텐츠(페이지) URL
+    urlSync : true, // 서버로 요청 할 때의 location.href 와 서버에서 응답이 왔을 때의 location.href 이 같은지 비교하여 다르면 응답을 차단 합니다.
+	docId : docId, // 컨텐츠(페이지) 아이디
+	docNm : docNm, // 컨텐츠(페이지) 명
+	onBeforeLoad : function(docId, target) {
+		// 추가 되는 컨텐츠(페이지) 에만 적용되는 onBeforeLoad 이벤트.
+	},
+	onLoad : function(docId) {
+		// 추가 되는 컨텐츠(페이지) 에만 적용되는 onLoad 이벤트.
+	},
+	onBeforeActive : function(docId) {
+		// 추가 되는 컨텐츠(페이지) 에만 적용되는 onBeforeActive 이벤트.
+	},
+	onActive : function(docId) {
+		// 추가 되는 컨텐츠(페이지) 에만 적용되는 onActive 이벤트.
+	},
+	onBeforeInactive : function(docId) {
+		// 추가 되는 컨텐츠(페이지) 에만 적용되는 onBeforeInactive 이벤트.
+	},
+	onInactive : function(docId) {
+		// 추가 되는 컨텐츠(페이지) 에만 적용되는 onInactive 이벤트.
+	},
+	onBeforeRemoveState : function(docId) {
+		// 추가 되는 컨텐츠(페이지) 에만 적용되는 onBeforeRemoveState 이벤트.
+	},
+	onRemoveState : function(docId) {
+		// 추가 되는 컨텐츠(페이지) 에만 적용되는 onRemoveState 이벤트.
+	},
+	onBeforeRemove : function(docId) {
+		// 추가 되는 컨텐츠(페이지) 에만 적용되는 onBeforeRemove 이벤트.
+	},
+	onRemove : function(docId) {
+		// 추가 되는 컨텐츠(페이지) 에만 적용되는 onRemove 이벤트.
+	},
+	stateless : false // 상태유지 여부
+}
+</code></pre>
+				<p class="alert">개별 이벤트들은 전역 이벤트가 실행 된 후 실행 됩니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>active</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>N.docs</td>
+			<td>선택한 컨텐츠과 컨텐츠 탭을 활성화 합니다.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>docId</td>
+			<td>string</td>
+			<td align="center">-</td>
+			<td>컨텐츠(페이지) 아이디를 입력 합니다.</td>
+		</tr>
+		<tr>
+			<td>removeState</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>N.docs</td>
+			<td>선택한 컨텐츠의 상태를 제거 합니다.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>docId</td>
+			<td>string</td>
+			<td align="center">-</td>
+			<td>컨텐츠의 상태를 제거할 컨텐츠(페이지) 아이디를 입력 합니다.</td>
+		</tr>
+		<tr>
+			<td>remove</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>N.docs</td>
+			<td>선택한 컨텐츠과 컨텐츠 탭을 제거 합니다.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>docId</td>
+			<td>string</td>
+			<td align="center">-</td>
+			<td>컨텐츠(페이지) 아이디를 입력 합니다.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>unconditional</td>
+			<td>boolean</td>
+			<td align="center">-</td>
+			<td>true 를 입력 하면 수정 중인 입력이 있더라도 무조건 제거 합니다.</td>
+		</tr>
+		<tr>
+			<td>doc</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>object|array</td>
+			<td>
+				<p>선택한 컨텐츠의 정보(docOpts)를 가져 옵니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>docId</td>
+			<td>string</td>
+			<td align="center">-</td>
+			<td>
+				<p>정보를 가져 올 컨텐츠(페이지) 아이디를 입력 합니다.</p>
+				<p>입력하지 않으면 모든 컨텐츠의 정보를 array 로 반환 합니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>cont</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>object</td>
+			<td>
+				<p>선택한 컨텐츠의 Controller(N.cont) 오브젝트를 가져 옵니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>docId</td>
+			<td>string</td>
+			<td align="center">-</td>
+			<td>
+				<p>Controller를 가져 올 컨텐츠(페이지) 아이디를 입력 합니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>reload</td>
+			<td align="center">-</td>
+			<td align="center">-</td>
+			<td>N.docs</td>
+			<td>
+				<p>선택한 컨텐츠(페이지)를 리로드 합니다.</p>
+				<p class="alert">reload 함수 호출 전에 request.attr 함수로 값을 지정하지 않았다면 리로드 전의 request 객체의 값은 리로드 해도 유지 됩니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>docId</td>
+			<td>string</td>
+			<td align="center">-</td>
+			<td>
+				<p>리로드 할 컨텐츠(페이지) 아이디를 입력 합니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>callback</td>
+			<td>string</td>
+			<td align="center">-</td>
+			<td style="max-width: 299px;">
+				<p>리로드가 완료 되면 실행 되는 콜백을 지정 합니다. 필요 없으면 지정 하지 않아도 됩니다.</p>
+				<p>콜백의 인자로 html 과 Communicator.request 객체가 반환 됩니다.</p>
+				<pre><code class="language-javascript">docsInstance.reload("docId", function(html, request) {
+	N.log(html, request);
+});
+</code></pre>
+			</td>
+		</tr>
+	</table>
+</article>
+
+<script type="text/javascript">
+N(".refr050205").cont({
+    init : function(view, request) {
+
+    }
+});
+</script>

@@ -1,0 +1,197 @@
+<article class="refr040304 apiDoc" >
+	<h2>
+		<span lang="ko_KR">기본옵션</span>
+		<span lang="en_US">Default Options</span>
+	</h2>
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Type</th>
+			<th>Default</th>
+			<th>Required</th>
+			<th style="width: auto;">Description</th>
+		</tr>
+		<tr>
+			<td>context</td>
+			<td>jquery object</td>
+			<td>null</td>
+			<td align="center">○</td>
+			<td>데이트피커를 적용할 입력 요소를 지정 합니다.</td>
+		</tr>
+		<tr>
+			<td>yearsPanelPosition</td>
+			<td>string(left|top)</td>
+			<td>left</td>
+			<td></td>
+			<td>년 선택 요소의 위치를 지정 합니다.</td>
+		</tr>
+		<tr>
+			<td>monthsPanelPosition</td>
+			<td>string(left|top)</td>
+			<td>left</td>
+			<td></td>
+			<td>월 선택 요소의 위치를 지정 합니다.</td>
+		</tr>
+		<tr>
+			<td>minYear</td>
+			<td>number</td>
+			<td>200</td>
+			<td></td>
+			<td>yearsPanelPosition 옵션 값이 "top" 일 때 선택 할 수 있는 년의 시작 년도를 지정 합니다.</td>
+		</tr>
+		<tr>
+			<td>maxYear</td>
+			<td>number</td>
+			<td>200</td>
+			<td></td>
+			<td>yearsPanelPosition 옵션 값이 "top" 일 때 선택 할 수 있는 년의 마지막 년도를 지정 합니다.</td>
+		</tr>
+		<tr>
+			<td>yearChangeInput</td>
+			<td>boolean</td>
+			<td>false</td>
+			<td></td>
+			<td>년 선택 시 입력요소에 바로 반영하여 보여 줄지 여부를 지정 합니다.</td>
+		</tr>
+		<tr>
+			<td>monthChangeInput</td>
+			<td>boolean</td>
+			<td>false</td>
+			<td></td>
+			<td>월 선택 시 입력요소에 바로 반영하여 보여 줄지 여부를 지정 합니다.</td>
+		</tr>
+		<tr>
+			<td>monthonly</td>
+			<td>boolean</td>
+			<td>false</td>
+			<td></td>
+			<td>월 만 선택 할 수 있는 Monthpicker 로 표시 할 것인지 여부를 지정 합니다.</td>
+		</tr>
+		<tr>
+			<td>focusin</td>
+			<td>boolean</td>
+			<td>true</td>
+			<td></td>
+			<td>데이트픽커가 적용 된 입력요소가 선택 되었을때 Datepicker 를 표시할 것 인지 여부를 지정 합니다.</td>
+		</tr>
+		<tr>
+			<td>shareEle</td>
+			<td>boolean</td>
+			<td>true</td>
+			<td></td>
+			<td>
+				<p>데이트픽커 대화상자 요소를 모든 N.datepicker 요소들이 공유할것인지 인스턴스마다 따로 만들것인지 여부를 지정 합니다.</p>
+				<p class="alert">false 로 지정하면 N.grid 와 연동하여 사용 시 그리드 렌더링과 페이지 반응속도가 느려질 수 있습니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>onSelect</td>
+			<td>function</td>
+			<td>null</td>
+			<td></td>
+			<td style="max-width: 299px;">
+				날짜나 월(monthonly:true)이 선택되었을 때 발생하는 이벤트입니다.
+				<pre><code class="language-javascript">onSelect : function(context, selDate, monthonly) {
+	// this 는 N.datepicker instance
+	// context 는 날짜가 입력되는 입력요소
+	// selDate 는 선택한 날짜의 Date 객체
+	// monthonly 는 옵션으로 지정한 monthonly 값
+}</code></pre>
+			</td>
+		</tr>
+		<tr>
+			<td>onBeforeShow</td>
+			<td>function</td>
+			<td>null</td>
+			<td></td>
+			<td style="max-width: 299px;">
+				데이트피커 판넬이 표시되기 전에 발생 되는 이벤트 입니다.
+				<pre><code class="language-javascript">onBeforeShow : function(context, contents) {
+	// this 는 N.datepicker instance
+	// context 는 날짜가 입력되는 입력요소
+	// contents 는 데이트피커 판넬
+}</code></pre>
+			</td>
+		</tr>
+		<tr>
+			<td>onShow</td>
+			<td>function</td>
+			<td>null</td>
+			<td></td>
+			<td style="max-width: 299px;">
+				데이트피커 판넬이 표시된 후 발생 되는 이벤트 입니다.
+				<pre><code class="language-javascript">onShow : function(context, contents) {
+	// this 는 N.datepicker instance
+	// context 는 날짜가 입력되는 입력요소
+	// contents 는 데이트피커 판넬
+}</code></pre>
+			</td>
+		</tr>
+		<tr>
+			<td>onBeforeHide</td>
+			<td>function</td>
+			<td>null</td>
+			<td></td>
+			<td style="max-width: 299px;">
+				데이트피커 판넬이 닫히기 전에 발생 되는 이벤트 입니다.
+				<pre><code class="language-javascript">onBeforeHide : function(context, contents) {
+	// this 는 N.datepicker instance
+	// context 는 날짜가 입력되는 입력요소
+	// contents 는 데이트피커 판넬
+}</code></pre>
+			</td>
+		</tr>
+		<tr>
+			<td>onHide</td>
+			<td>function</td>
+			<td>null</td>
+			<td></td>
+			<td style="max-width: 299px;">
+				데이트피커 판넬이 닫히고 나서(닫히는 효과 완료 후) 발생 되는 이벤트 입니다.
+				<pre><code class="language-javascript">onHide : function(context) {
+	// this 는 N.datepicker instance
+	// context 는 날짜가 입력되는 입력요소
+}</code></pre>
+			</td>
+		</tr>
+		<tr>
+			<td>onChangeYear</td>
+			<td>function</td>
+			<td>null</td>
+			<td></td>
+			<td style="max-width: 299px;">
+				년도가 변경 되었을 때 발생 되는 이벤트 입니다.
+				<pre><code class="language-javascript">onChangeYear : function(context, year, e) {
+	// this 는 N.datepicker instance
+	// context 는 날짜가 입력되는 입력요소
+	// year 선택 된 년도
+	// e 는 실행 된 이벤트 객체
+}</code></pre>
+			</td>
+		</tr>
+		<tr>
+			<td>onChangeMonth</td>
+			<td>function</td>
+			<td>null</td>
+			<td></td>
+			<td style="max-width: 299px;">
+				월이 변경 되었을 때 발생 되는 이벤트 입니다.
+				<pre><code class="language-javascript">onChangeMonth : function(context, month, year, e) {
+	// this 는 N.datepicker instance
+	// context 는 날짜가 입력되는 입력요소
+	// month 는 선택 된 월
+	// year 선택 된 년도
+	// e 는 실행 된 이벤트 객체
+}</code></pre>
+			</td>
+		</tr>
+	</table>
+</article>
+
+<script type="text/javascript">
+N(".refr040304").cont({
+    init : function(view, request) {
+
+    }
+});
+</script>

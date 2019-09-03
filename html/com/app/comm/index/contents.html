@@ -1,0 +1,86 @@
+<style>
+.index-contents {
+	height: 100%;
+}
+
+.index-contents .docs-container {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+
+    height: 100%;
+}
+
+.index-contents .docs_contents__>.view_context__ {
+    padding: 20px 20px 220px 20px;
+}
+
+.index-contents .docs-container {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+}
+
+.index-contents .docs-contents {
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+
+    -webkit-box-ordinal-group: 1;
+    -moz-box-ordinal-group: 1;
+    -ms-flex-order: 1;
+    -webkit-order: 1;
+    order: 1;
+
+    height: 100%;
+}
+
+.index-contents .docs-contents-side {
+    display: none;
+    border-left: 8px double #eee;
+
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+
+    -webkit-box-ordinal-group: 2;
+    -moz-box-ordinal-group: 2;
+    -ms-flex-order: 2;
+    -webkit-order: 2;
+    order: 2;
+
+    height: 100%;
+}
+</style>
+
+<article class="index-contents">
+    <div class="docs-container">
+        <div class="docs-contents"></div>
+        <div class="docs-contents-side"></div>
+    </div>
+</article>
+
+<script type="text/javascript">
+    N(".index-contents").cont({
+        init : function(view, request) {
+            this.initDocs(this, view);
+
+            if(N.string.trim(location.hash).length > 0 && N.string.trim(location.hash).length <= 35) {
+            	location.href = "./";
+            } else {
+	            $(window).trigger("hashchange.index");
+            }
+        },
+        initDocs : function(cont, view) {
+            APP.indx.docs = N(".docs-contents", view).docs();
+        }
+    });
+</script>
