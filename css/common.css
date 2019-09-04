@@ -478,6 +478,10 @@ article .btnBox {
 	padding-top: 0;
 }
 
+.docs_contents__>.view_context__ .formGroup {
+	margin-bottom: 10px;
+}
+
 .docs_contents__>.view_context__ .searchBox li>label {
 	margin: 0 10px 0 10px;
 	font-weight: bold;
