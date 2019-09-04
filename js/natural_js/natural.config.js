@@ -831,9 +831,20 @@
 			        }
                 }
 			},
-			/*
 			"onActive" : function(docId, isFromDocsTabList, isNotLoaded) {
+                if(location.hostname === "bbalganjjm.github.io") {
+                    try {
+                        ga('create', 'UA-58001949-2', 'auto');
+                        ga('set', 'location', location.href);
+                        ga('set', 'title', this.doc(docId).docNm);
+                        ga('send', {
+                            'hitType': 'pageview',
+                            'page': "#" + location.hash
+                        });
+                    } catch (e) {}
+                }
 			},
+			/*
 			"onBeforeInactive" : function(docId) {
 			},
 			"onInactive" : function(docId) {
