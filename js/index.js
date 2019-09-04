@@ -108,11 +108,11 @@
 
             if(window.localStorage.themeColor !== "green") {
                 $("head > link[rel=stylesheet]").each(function() {
-                    alert($(this).attr("href"));
                     N.comm({
                         url : $(this).attr("href"),
                         contentType : "text/css",
-                        dataType : "html"
+                        dataType : "html",
+                        type : "GET"
                     }).submit(function(data) {
                         $('<style type="text/css">\n' + data + '</style>').appendTo("head");
                     });
