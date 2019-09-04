@@ -176,9 +176,10 @@
 	resize: both;
 }
 
-/* To prevent inheritance on iOS */
 .popup__.alert__.block_overlay_msg__ > .msg_box__ > .view_context__ {
-	-webkit-overflow-scrolling: auto;
+    /* To prevent inheritance on iOS */
+    -webkit-overflow-scrolling: auto;
+	position: relative;
 	resize: none;
 }
 
