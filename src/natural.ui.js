@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.38.205
+ * Natural-UI v0.38.206
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-UI"] = "0.38.205";
+    N.version["Natural-UI"] = "0.38.206";
 
     $.fn.extend($.extend(N.prototype, {
         alert : function(msg, vars) {
@@ -3314,13 +3314,6 @@
                 validate : function(ele, opts, type, isTextInput) {
                     if(ele.data("validate") !== undefined) {
                         if (type !== "hidden") {
-                            // remove validator's dregs for rebind
-                            ele.removeClass("validate_false__");
-                            if(ele.instance("alert") !== undefined) {
-                                ele.instance("alert").remove();
-                                ele.removeData("alert__");
-                            }
-
                             N().validator(opts.vRules !== null ? opts.vRules : ele);
                             
                             if(isTextInput && N.isEmptyObject(ele.events("focusout", "form.validate"))) {
@@ -3358,7 +3351,24 @@
                             }
 
                             if ((vals[currEle.attr("id")] === null ? "" : vals[currEle.attr("id")]) !== currVal) {
+                                
+                                if(eleType === "select") {
+                                    // remove validator's dregs
+                                    currEle.removeClass("validate_false__");
+                                    if(currEle.instance("alert") !== undefined) {
+                                        currEle.instance("alert").remove();
+                                        currEle.removeData("alert__");
+                                    }
+                                }
+                                
                                 if (!currEle.prop("disabled") && !currEle.prop("readonly") && (!opts.validate || (opts.validate && !currEle.hasClass("validate_false__")))) {
+                                    // remove validator's dregs
+                                    currEle.removeClass("validate_false__");
+                                    if(currEle.instance("alert") !== undefined) {
+                                        currEle.instance("alert").remove();
+                                        currEle.removeData("alert__");
+                                    }
+                                    
                                     // update dataset value
                                     vals[currEle.attr("id")] = currVal;
 
