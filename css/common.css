@@ -447,25 +447,10 @@ article .btnBox {
 }
 
 /* Examples */
-.docs_contents__>.view_context__ .intro {
-	padding: 10px;
-	background-color: #E8F5E9;
-	border-radius: 3px;
-	margin-bottom: 20px;
-}
-
-.docs_contents__>.view_context__ .smallContTit {
-	margin: 10px 0 5px 20px;
-	display: list-item;
-	list-style-type: disc;
-	font-weight: 600;
-}
-
 .docs_contents__>.view_context__ .searchBox {
-	border: 1px solid #A5D6A7;
 	background-color: #E8F5E9;
 	border-radius: 3px;
-	margin-bottom: 15px;
+	margin-bottom: 10px;
 }
 
 .docs_contents__>.view_context__ .searchBox ul {
@@ -487,6 +472,10 @@ article .btnBox {
 .docs_contents__>.view_context__ .searchBox ul li.buttons {
 	padding: 5px;
 	text-align: right;
+}
+
+.docs_contents__>.view_context__ .searchBox ul li:first-child.buttons {
+	padding-top: 0;
 }
 
 .docs_contents__>.view_context__ .searchBox li>label {
