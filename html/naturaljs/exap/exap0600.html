@@ -44,7 +44,7 @@
 			</ul>
 		</div>
 
-		<div class="list-box">
+		<div class="list-box" style="height: 386px; margin-bottom: 10px;">
 			<table id="grid" class="grid">
 				<colgroup>
 					<col style="width: 50px;">
@@ -163,6 +163,7 @@ N(".exap0600").cont({
     	// 5. initialize N.pagination
     	cont.pagination = N().pagination({
 			context : $("#pagination", cont.view),
+			countPerPage : 15,
 			onChange : function(pageNo, selEle, selData, currPageNavInfo) {
 				// Data bind with N.grid
          		cont.grid.bind(selData);

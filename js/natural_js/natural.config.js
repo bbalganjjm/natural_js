@@ -119,6 +119,38 @@
 					 * 서버에 요청을 보내기 전 실행됨.
 					 */
 					beforeSend : function(request, xhr, settings) {
+					    // github pages 는 GET 요청 만 보낼 수 있어서 서버로 데이터를 전송하는 예제는 여기서 파라미터 정보만 보여주고 요청을 중단 함.
+                        if(request.options.type !== "GET" || (request.options.data != null && request.options.data.indexOf("q=%7B%22name%22") > -1)) {
+                            var msg;
+                            if(request.options.type !== "GET") {
+                                msg = request.options.data;
+                                xhr.abort();
+                            } else {
+                                msg = JSON.parse(decodeURIComponent(request.options.data.replace("q=", "")));
+                            }
+
+                            N(window).alert({
+                                title : N.message.get({
+                                    "ko_KR" : {
+                                        "COMM_TITLE" : "이 예제는 DB 서버와 연동 되지 않음 / 서버로 전송 되는 파라미터 확인"
+                                    },
+                                    "en_US" : {
+                                        "COMM_TITLE" : "This example does not work with the DB server / Check parameters sent to the server"
+                                    }
+                                }, "COMM_TITLE"),
+                                msg : "<pre style='white-space: pre-wrap;'>" + N.json.format(msg) + "</pre>",
+                                width : 480
+                            }).show();
+                            
+                            setTimeout(function() {
+                                N.docs.removeLoadIndicator.call(APP.indx.docs);
+                            }, 500);
+                        }
+                        
+                        // Display page loading image.
+                        if(request.options.dataType === "html" && request.options.target !== null && request.options.append === false) {
+                            request.options.target.html('<div style="text-align: center;vertical-align: middle;border: 0; border: none;width: 100%;height: 100%;"><img src="images/loading.gif" height="24"></div>');
+                        }
 					},
 					/**
 					 * 서버에 요청이 성공 했을 경우 실행됨.

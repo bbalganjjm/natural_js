@@ -27,8 +27,9 @@
  *
 
 ## natural.ui.css
+ * N.grid : Fixed a bug that caused the table to crash intermittently when the "fixedcol" option was applied.
  * Changed N.alert, N.tab, N.list, N.grid, N.notify, N.docs related styles.
-
+ 
 ## natural.config.js
  *
 
