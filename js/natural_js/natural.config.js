@@ -125,21 +125,21 @@
 					 * return data 를 하면 N.comm.submit 의 콜백의 인자로 넘어오는 data 가 리턴한 데이터로 치환 됨.
 					 */
 					success : function(request, data, textStatus, xhr) {
-						if(location.hostname === "localhost" || location.hostname === "127.0.0.1") {
-							var opts = request.options;
-							if((opts.target && N.isElement(opts.target)) || opts.dataType === "html" || opts.contentType === "text/css") {
-							    if(data.indexOf("<script") > -1) {
+						var opts = request.options;
+						if((opts.target && N.isElement(opts.target)) || opts.dataType === "html" || opts.contentType === "text/css") {
+						    if(location.hostname === "localhost" || location.hostname === "127.0.0.1") {
+						        if(data.indexOf("<script") > -1) {
 	                                // Natural-CODE : 코드 인스펙션
-							        var excludes = [
-                                        ".index-header",                        // view 컨텍스트 정의 안함.
-                                        ".page-header",                         // view 컨텍스트 정의 안함.
-                                        ".index-lefter",                        // view 컨텍스트 정의 안함.
-                                        ".index-contents",                      // view 컨텍스트 정의 안함.
-                                        ".docs-contents-side",                  // view 컨텍스트 정의 안함.
-                                        ".index-footer",                        // view 컨텍스트 정의 안함.
+	                                var excludes = [
+	                                    ".index-header",                        // view 컨텍스트 정의 안함.
+	                                    ".page-header",                         // view 컨텍스트 정의 안함.
+	                                    ".index-lefter",                        // view 컨텍스트 정의 안함.
+	                                    ".index-contents",                      // view 컨텍스트 정의 안함.
+	                                    ".docs-contents-side",                  // view 컨텍스트 정의 안함.
+	                                    ".index-footer",                        // view 컨텍스트 정의 안함.
 
-                                        'N("#selectDocs", view)).bind().val'    // jQuery val 을 사용하여 입력 값을 수정
-                                    ];
+	                                    'N("#selectDocs", view)).bind().val'    // jQuery val 을 사용하여 입력 값을 수정
+	                                ];
 
 	                                var inspectionReport = N.code.inspection.test(data, excludes);
 
@@ -148,27 +148,27 @@
 	                                    if(this.level === "ERROR") {
 	                                        color = "red";
 	                                    } else if(this.level === "ERROR") {
-                                            color = "blue";
-                                        }
+	                                        color = "blue";
+	                                    }
 	                                    N[this.level.toLowerCase()]("%c[" + this.level + "] " + opts.url + " - " + this.line + " : " + this.code, "color: " + color + "; font-weight: bold; line-height: 200%;",
 	                                            "\n" + this.message);
 	                                });
-							    }
-
-							    // color theme
-	                            if(window.localStorage.themeColor !== "green") {
-	                                $(APP.indx.colorPalette.green).each(function(i, color) {
-	                                    data = data.replace(new RegExp(color, "gi"), APP.indx.colorPalette[window.localStorage.themeColor][i]);
-
-	                                    if(opts.contentType === "text/css") {
-	                                        data = data.replace(/url\(/gi, "*url(");
-	                                    }
-	                                });
 	                            }
+						    }
 
-							    // Natural-CODE : 디버깅 지원을 위한 컨트롤러의 sourceURL 자동 삽입 처리
-								return N.code.addSourceURL(data, opts.url);
-							}
+						    // color theme
+                            if(window.localStorage.themeColor !== "green") {
+                                $(APP.indx.colorPalette.green).each(function(i, color) {
+                                    data = data.replace(new RegExp(color, "gi"), APP.indx.colorPalette[window.localStorage.themeColor][i]);
+
+                                    if(opts.contentType === "text/css") {
+                                        data = data.replace(/url\(/gi, "*url(");
+                                    }
+                                });
+                            }
+
+						    // Natural-CODE : 디버깅 지원을 위한 컨트롤러의 sourceURL 자동 삽입 처리
+							return N.code.addSourceURL(data, opts.url);
 						}
 					},
 					/**
