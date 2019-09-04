@@ -108,6 +108,7 @@
 
             if(window.localStorage.themeColor !== "green") {
                 $("head > link[rel=stylesheet]").each(function() {
+                    alert($(this).attr("href"));
                     N.comm({
                         url : $(this).attr("href"),
                         contentType : "text/css",
