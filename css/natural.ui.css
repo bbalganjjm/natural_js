@@ -685,6 +685,10 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 /* Grid - Column fixed */
+.grid_container__ {
+    position: relative;
+}
+
 .grid_container__ > .grid_wrap__ {
 	/* -webkit-overflow-scrolling: touch; */
 }
