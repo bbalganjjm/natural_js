@@ -612,7 +612,6 @@ article .btnBox {
     line-height: 1.65;
     font-size: 0.9em;
 
-    white-space: pre-wrap; /* ios safari */
     word-wrap: break-word; /* ios safari */
     text-align: justify; /* ios safari */
 }
