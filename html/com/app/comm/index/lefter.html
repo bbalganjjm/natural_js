@@ -278,7 +278,7 @@
                 var mainNav = view.closest(".main-nav");
 
                 if (selfEle.data("status") === "show") {
-                    N(".content-wrap").unbind("click.lefter");
+                    N(".content-wrap").off("click.lefter");
                     
                     N(".lefter-toggle-button>span", view).css("transform", "").off("mouseover.lefter").off("mouseout.lefter");
 
