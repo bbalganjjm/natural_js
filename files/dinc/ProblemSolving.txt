@@ -91,3 +91,52 @@
 7. natural.js.min.js 파일 다시 받아 주세요(아직 릴리즈는 안됐고 GitHub 들어가서 dist 폴더 안에 들어있는것 받아주세요). 
 
     A : 입력값 유효성 검증 시 첫번째 검증 할 때 검증 메시지가 표시 되지 않는 버그가 수정 되었습니다.
+
+
+20190905 ----------------------------------------------------------------------------------------------------------------------------------------------
+    
+8. natural.config.js 파일을 수정 바랍니다.
+
+	A : Template 프로젝트에 XSS 공격에 대한 치명적인 보안 결함이 있었습니다. 다음 순서대로 변경 바랍니다.
+	
+		1. N.context.attr("ui").form 의 "html" 프로퍼티의 값을 false 로 변경.
+		2. N.context.attr("ui").list 의 "html" 프로퍼티를 제거.
+		3. N.context.attr("ui").grid 의 "html" 프로퍼티를 제거.
+		4. N.context.attr("ui").form.onBeforeBindValue 함수를 다음과 같이 변경.
+		
+			...
+			/**
+			 * 서버에서 XSS 필터링 된 값을 입력 요소에 바인드 할때는 원복해서 바인드하는 이벤트 핸들러.
+			 *
+			 * onBeforeBindValue 이벤트
+			 *  - 값이 바인드 되기전 실행 되는 이벤트, 반드시 val 을 (가공 후) 다시 리턴 해야 함.
+			 *  - N.form 을 사용하는 N.grid, N.list 에도 같이 적용 됨.
+			 *    - ele : 바인드 될 요소
+			 *    - ele : 바인드 될 값
+			 *    - ele : 호출 함수 명 - "bind" | "val"
+			 */
+			"onBeforeBindValue" : function(ele, val, action) {
+			    if(N.type(val) === "array") {
+			        for (var j = 0; j < val.length; j++) {
+			            if(N.type(val[j]) === "string"){
+			                for (var i = 0; i < this.options.xssReverseChars.length; i++) {
+	                            val[j] = val[j].replace(new RegExp(this.options.xssReverseChars[i][0], "g"), this.options.xssReverseChars[i][1]);
+	                        }
+			            }
+			        }
+			        return val;
+			    } else if(N.type(val) === "string"){
+		            for (var i = 0; i < this.options.xssReverseChars.length; i++) {
+		                val = val.replace(new RegExp(this.options.xssReverseChars[i][0], "g"), this.options.xssReverseChars[i][1]);
+		            }
+		            return val;
+			    } else {
+			        return val;
+			    }
+			},
+		...
+		
+9. natural.js.min.js 파일 다시 받아 주세요(아직 릴리즈는 안됐고 GitHub 들어가서 dist 폴더 안에 들어있는것 받아주세요).
+
+	A : 여러가지 버그가 Fix 됐습니다.
+
