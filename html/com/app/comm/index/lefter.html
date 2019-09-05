@@ -278,7 +278,7 @@
                 var mainNav = view.closest(".main-nav");
 
                 if (selfEle.data("status") === "show") {
-                    N(".content-wrap").off("click.lefter");
+                    N(".content-wrap", "body").off("click.lefter");
                     
                     N(".lefter-toggle-button>span", view).css("transform", "").off("mouseover.lefter").off("mouseout.lefter");
 
@@ -301,7 +301,7 @@
                         $(this).css("transform", "");
                     });
                     
-                    N(".content-wrap").on("click.lefter", function(e) {
+                    N(".content-wrap", "body").on("click.lefter", function(e) {
 				        e.preventDefault();
 				        N(".lefter-toggle-button", view).trigger("click.lefter");
 				    });
