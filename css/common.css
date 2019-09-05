@@ -604,7 +604,7 @@ article .btnBox {
     margin-bottom: 0;
 }
 
-.docs_contents__>.view_context__ .highlight pre, .docs_contents__>.view_context__ pre {
+.docs_contents__>.view_context__ pre {
     padding: 16px;
     overflow: auto;
     background-color: #E8F5E9B3;
@@ -613,13 +613,18 @@ article .btnBox {
     font-size: 0.9em;
 }
 
-.docs_contents__>.view_context__ code {
-    font-family: Consolas, monospace;
+.docs_contents__>.view_context__ pre code {
+    display: inline;
+    max-width: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
 }
 
 /* Mobile */
 @media screen and (max-width: 414px) {
     .apiDoc pre {
+        box-sizing: border-box;
         max-width: 308px;
     }
     
@@ -750,18 +755,21 @@ article .btnBox {
 
 @media screen and (max-width: 375px) {
     .apiDoc pre {
+        box-sizing: border-box;
         max-width: 269px;
     }
 }
 
 @media screen and (max-width: 360px) {
     .apiDoc pre {
+        box-sizing: border-box;
         max-width: 254px;
     }
 }
 
 @media screen and (max-width: 320px) {
     .apiDoc pre {
+        box-sizing: border-box;
         max-width: 214px;
     }
 }
