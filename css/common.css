@@ -81,6 +81,7 @@ input[type='radio'], input[type='checkbox'] {
 table {
     border-spacing: 0;
     border-collapse: collapse;
+    table-layout: fixed;
     width: 100%;
 }
 
@@ -614,4 +615,98 @@ article .btnBox {
 
 .docs_contents__>.view_context__ code {
     font-family: Consolas, monospace;
+}
+
+/* Mobile */
+@media screen and (max-width: 414px) {
+    .apiDoc .api.form {
+        display: block;
+    }
+    
+    .apiDoc .api.form tr {
+        display: block;
+    }
+    
+    .apiDoc .api.form th {
+        display: none;
+    }
+    
+    .apiDoc .api.form td {
+        display: list-item;
+        list-style: none;
+        width: 100%;
+        border: none;
+        margin: 0;
+        padding: 3px 17px;
+        box-sizing: border-box;
+        background: none;
+        border-bottom: 1px dotted #B2EBF2;
+        text-shadow: none;
+        color: rgba(0, 0, 0, 0.87);
+        text-align: left;
+        font-size: 0.9em;
+    }
+    
+    .apiDoc .api.form tr>td:first-child {
+        font-size: 1em;
+        border-bottom: none;
+        padding: 0 5px;
+        line-height: 2;
+        background-color: #80DEEA;
+        text-shadow: 0 1px 0 #4DD0E1;
+        font-weight: 300;
+        color: #FFFFFF;
+    }
+    
+    .apiDoc .api.form tr>td:last-child {
+        margin-bottom: 20px;
+    }
+    
+    #constructor .apiDoc .api.form td:nth-child(2):before {
+        content: 'arguments : ';
+        font-weight: 600;
+    }
+    #constructor .apiDoc .api.form td:nth-child(3):before {
+        content: 'type : ';
+        font-weight: 600;
+    }
+    #constructor .apiDoc .api.form td:nth-child(4):before {
+        content: 'return : ';
+        font-weight: 600;
+    }
+    
+    #defaultoptions .apiDoc .api.form td:nth-child(2):before {
+        content: 'type : ';
+        font-weight: 600;
+    }
+    #defaultoptions .apiDoc .api.form td:nth-child(3):before {
+        content: 'default : ';
+        font-weight: 600;
+    }
+    #defaultoptions .apiDoc .api.form td:nth-child(4):before {
+        content: 'required : ';
+        font-weight: 600;
+    }
+    
+    #declarativeoptions .apiDoc .api.form td:nth-child(2):before {
+        content: 'type : ';
+        font-weight: 600;
+    }
+    #declarativeoptions .apiDoc .api.form td:nth-child(3):before {
+        content: 'default : ';
+        font-weight: 600;
+    }
+    
+    #methods .apiDoc .api.form td:nth-child(2):before {
+        content: 'arguments : ';
+        font-weight: 600;
+    }
+    #methods .apiDoc .api.form td:nth-child(3):before {
+        content: 'type : ';
+        font-weight: 600;
+    }
+    #methods .apiDoc .api.form td:nth-child(4):before {
+        content: 'return : ';
+        font-weight: 600;
+    }
 }

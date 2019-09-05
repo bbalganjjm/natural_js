@@ -68,7 +68,7 @@
 			<td>boolean</td>
 			<td>false</td>
 			<td></td>
-			<td style="max-width: 299px;">
+			<td>
 				<p>탭들을 마우스 드래그나 터치로 스크롤 하는 기능 활성화 여부</p>
 				<p class="alert">
 					사이트의 CSS 적용 방식에 따라 마지막 탭이 잘리거나 여백이 생길 수 있습니다. 이때는 다음 옵션값을 조정하여 정상적으로 표시 할 수 있습니다.
@@ -143,7 +143,7 @@
 			<td>function</td>
 			<td>null</td>
 			<td></td>
-			<td style="max-width: 299px;">
+			<td>
 				<p>컨텐츠가 로딩 되기 전 실행 되는 이벤트 입니다.</p>
 				<pre><code class="language-javascript">onBeforeLoad : function(docId, target) {
 	// docId : Document Id
@@ -161,7 +161,7 @@
 			<td>function</td>
 			<td>null</td>
 			<td></td>
-			<td style="max-width: 299px;">
+			<td>
 				<p>컨텐츠가 로딩 된 후 실행 되는 이벤트 입니다.</p>
 				<pre><code class="language-javascript">onLoad : function(docId) {
 	// docId : Document Id
@@ -181,7 +181,7 @@
 			<td>function</td>
 			<td>null</td>
 			<td></td>
-			<td style="max-width: 299px;">
+			<td>
 				<p>컨텐츠 로딩 시 동시에 실행 되는 여러 서버 요청(N.comm.submit)들 중 최초 요청이 실행 되기 전 실행되는 이벤트</p>
 				<pre><code class="language-javascript">onBeforeEntireLoad : function(docId) {
 	// docId : Document Id
@@ -197,7 +197,7 @@
 			<td>function</td>
 			<td>null</td>
 			<td></td>
-			<td style="max-width: 299px;">
+			<td>
 				<p>컨텐츠 로딩 시 동시에 실행 되는 여러 서버 요청(N.comm.submit)들 중 에러가 발생 했을때 실행되는 이벤트</p>
 				<pre><code class="language-javascript">onErrorEntireLoad : function(e, request, xhr, textStatus, callback) {
 	// e(arguments[0]) : ErrorThrown
@@ -214,7 +214,7 @@
 			<td>function</td>
 			<td>null</td>
 			<td></td>
-			<td style="max-width: 299px;">
+			<td>
 				<p>컨텐츠 로딩 시 동시에 실행 되는 여러 서버 요청(N.comm.submit)들이 모두 완료 되었을 때 실행되는 이벤트</p>
 				<pre><code class="language-javascript">onEntireLoad : function(docId) {
 	// docId : Document Id
@@ -233,7 +233,7 @@
 			<td>function</td>
 			<td>null</td>
 			<td></td>
-			<td style="max-width: 299px;">
+			<td>
 				<p>선택한 탭이 활성화 되기 전 마다 실행 되는 이벤트</p>
 				<pre><code class="language-javascript">onBeforeActive : function(docId) {
 	// docId : Document Id
@@ -252,7 +252,7 @@
 			<td>function</td>
 			<td>null</td>
 			<td></td>
-			<td style="max-width: 299px;">
+			<td>
 				<p>선택한 탭이 활성화 될 때 마다 실행 되는 이벤트</p>
 				<pre><code class="language-javascript">onActive : function(docId) {
 	// docId : Document Id
@@ -271,7 +271,7 @@
 			<td>function</td>
 			<td>null</td>
 			<td></td>
-			<td style="max-width: 299px;">
+			<td>
 				<p>선택한 탭이 비활성화 되기 전 마다 실행 되는 이벤트</p>
 				<pre><code class="language-javascript">onBeforeInactive : function(docId) {
 	// docId : Document Id
@@ -290,7 +290,7 @@
 			<td>function</td>
 			<td>null</td>
 			<td></td>
-			<td style="max-width: 299px;">
+			<td>
 				<p>선택한 탭이 비활성화 될 때 마다 실행 되는 이벤트</p>
 				<pre><code class="language-javascript">onInactive : function(docId) {
 	// docId : Document Id
@@ -309,7 +309,7 @@
 			<td>function</td>
 			<td>null</td>
 			<td></td>
-			<td style="max-width: 299px;">
+			<td>
 				<p>선택한 탭의 상태가 제거 되기 전 마다 실행 되는 이벤트</p>
 				<pre><code class="language-javascript">onBeforeRemoveState : function(docId) {
 	// docId : Document Id
@@ -328,7 +328,7 @@
 			<td>function</td>
 			<td>null</td>
 			<td></td>
-			<td style="max-width: 299px;">
+			<td>
 				<p>선택한 탭의 상태가 제거 될 때 마다 실행 되는 이벤트</p>
 				<pre><code class="language-javascript">onRemoveState : function(docId) {
 	// docId : Document Id
@@ -347,7 +347,7 @@
 			<td>function</td>
 			<td>null</td>
 			<td></td>
-			<td style="max-width: 299px;">
+			<td>
 				<p>선택한 탭이 제거 되기 전 마다 실행 되는 이벤트</p>
 				<pre><code class="language-javascript">onBeforeRemove : function(docId) {
 	// docId : Document Id
@@ -366,7 +366,7 @@
 			<td>function</td>
 			<td>null</td>
 			<td></td>
-			<td style="max-width: 299px;">
+			<td>
 				<p>선택한 탭이 제거 될 때 마다 실행 되는 이벤트</p>
 				<pre><code class="language-javascript">onRemove : function(docId) {
 	// docId : Document Id

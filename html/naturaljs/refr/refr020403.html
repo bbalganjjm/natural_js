@@ -16,7 +16,7 @@
 			<td align="center">-</td>
 			<td align="center">-</td>
 			<td>Controller.request|Value object</td>
-			<td style="max-width: 299px;">
+			<td>
 				<p>호출한 페이지에 값을 전달할 때 사용합니다.</p>
 				<p>* 값전달 : </p>
 				<pre><code class="language-javascript">N(selector).comm(url).request.attr("param", { paramA : "A" }).submit()</code></pre>
@@ -71,7 +71,7 @@
 			<td align="center">-</td>
 			<td align="center">-</td>
 			<td>Controller object</td>
-			<td style="max-width: 299px;">
+			<td>
 				<p>해당 블록 페이지를 다시 로드 합니다.</p>
 				<p class="alert">reload 함수 호출 전에 request.attr 함수로 값을 지정하지 않았다면 리로드 전의 request 객체의 값은 리로드 해도 유지 됩니다.</p>
 				<p class="alert">reload 되는 페이지에 값을 전달 하려면 request.attr() 로 전달 할 값을 저장 후 reload 함수를 호출 하면 됩니다.</p>
@@ -86,7 +86,7 @@ request.reload();
 			<td>callback</td>
 			<td>string</td>
 			<td align="center">-</td>
-			<td style="max-width: 299px;">
+			<td>
 				<p>리로드가 완료 되면 실행 되는 콜백을 지정 합니다. 필요 없으면 지정 하지 않아도 됩니다.</p>
 				<p>콜백의 인자로 html 과 Communicator.request 객체가 반환 됩니다.</p>
 				<pre><code class="language-javascript">request.reload(function(html, request) {
