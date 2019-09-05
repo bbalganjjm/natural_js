@@ -867,7 +867,7 @@
                         ga('set', 'title', this.doc(docId).docNm);
                         ga('send', {
                             'hitType': 'pageview',
-                            'page': "#" + location.hash
+                            'page': location.hash
                         });
                     } catch (e) {}
                 }
