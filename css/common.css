@@ -611,9 +611,6 @@ article .btnBox {
     border-radius: 3px;
     line-height: 1.65;
     font-size: 0.9em;
-
-    word-wrap: break-word; /* ios safari */
-    text-align: justify; /* ios safari */
 }
 
 .docs_contents__>.view_context__ code {
@@ -623,7 +620,6 @@ article .btnBox {
 /* Mobile */
 @media screen and (max-width: 414px) {
     .apiDoc pre {
-        box-sizing: border-box;
         max-width: 308px;
     }
     
@@ -754,21 +750,18 @@ article .btnBox {
 
 @media screen and (max-width: 375px) {
     .apiDoc pre {
-        box-sizing: border-box;
         max-width: 269px;
     }
 }
 
 @media screen and (max-width: 360px) {
     .apiDoc pre {
-        box-sizing: border-box;
         max-width: 254px;
     }
 }
 
 @media screen and (max-width: 320px) {
     .apiDoc pre {
-        box-sizing: border-box;
         max-width: 214px;
     }
 }
