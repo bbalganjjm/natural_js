@@ -561,6 +561,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	padding: 4px;
 	margin: 0;
 	color : rgba(0, 0, 0, 0.87);
+	text-shadow: none;
 }
 
 .grid__>thead .data_filter_panel__.visible__ {
@@ -636,9 +637,10 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	max-width: 500px;
 	text-align: left;
 	list-style: none;
-	overflow: auto;
 	padding: 0 0 1px 0;
 	margin: 0;
+	overflow: auto;
+	-webkit-overflow-scrolling: touch;
 }
 
 .grid__>thead .data_filter_panel__ .data_filter_list__ li {
@@ -739,6 +741,8 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	padding: 5px;
 	text-align: left;
 	z-index: 1;
+	color : rgba(0, 0, 0, 0.87);
+	text-shadow: none;
 }
 
 .grid__ .grid_more_thead_col__ .grid_more_panel__.visible__ {
@@ -764,11 +768,14 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	padding: 0;
 	margin: 0;
 	list-style: none;
+	max-height: 350px;
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
 }
 
 .grid__ .grid_more_thead_col__ .grid_more_panel__ > .grid_more_col_list__ > .grid_more_cols__ {
 	padding: 0;
-	margin: 3px 0 0 0;
+	margin: 5px 0 0 0;
 }
 
 .grid_more_popup_contents__ > .grid_more_contents__ {

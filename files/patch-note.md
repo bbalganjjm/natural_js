@@ -1,6 +1,7 @@
 ## Natural-UI v0.38.198
  * N.form,N.grid,N.list : Fixed a bug where calling the validate function after selecting an empty value and then selecting the non-empty value did not change the underlying data from the select element with the "required" validation rule applied.
  * N.grid, N.list : Improved performance of the "val" method.
+ * N.grid : Changed the filter panel to not recognize HTML to block XSS attacks.
  * N.form.prototype.bindEvents.dataSync : Fixed a bug that didn't show the validation message when you first called the validate method.
    * The same applies to N.grid and N.list using N.form.
  * N.tab : Added a margin to the scroll button.
@@ -27,7 +28,9 @@
  *
 
 ## natural.ui.css
- * N.grid : Fixed a bug that caused the table to crash intermittently when the "fixedcol" option was applied.
+ * Fixed a bug that caused the table to crash intermittently when the N.grid's "fixedcol" option was applied.
+ * Changed styles related to N.grid's "filter" functionality.
+ * Changed styles related to N.grid's "more" functionality.
  * Changed N.alert, N.tab, N.list, N.grid, N.notify, N.docs related styles.
  
 ## natural.config.js
