@@ -619,6 +619,11 @@ article .btnBox {
 
 /* Mobile */
 @media screen and (max-width: 414px) {
+    .apiDoc pre {
+        box-sizing: border-box;
+        max-width: 342px;
+    }
+    
     .apiDoc .api.form {
         display: block;
     }
@@ -637,7 +642,7 @@ article .btnBox {
         width: 100%;
         border: none;
         margin: 0;
-        padding: 3px 17px;
+        padding: 3px 0;
         box-sizing: border-box;
         background: none;
         border-bottom: 1px dotted #B2EBF2;
@@ -708,5 +713,26 @@ article .btnBox {
     #methods .apiDoc .api.form td:nth-child(4):before {
         content: 'return : ';
         font-weight: 600;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .apiDoc pre {
+        box-sizing: border-box;
+        max-width: 303px;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .apiDoc pre {
+        box-sizing: border-box;
+        max-width: 288px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .apiDoc pre {
+        box-sizing: border-box;
+        max-width: 249px;
     }
 }
