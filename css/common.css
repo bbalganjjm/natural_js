@@ -611,6 +611,7 @@ article .btnBox {
     border-radius: 3px;
     line-height: 1.65;
     font-size: 0.9em;
+    word-wrap: normal;
 }
 
 .docs_contents__>.view_context__ pre>code {
