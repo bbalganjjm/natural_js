@@ -611,7 +611,10 @@ article .btnBox {
     border-radius: 3px;
     line-height: 1.65;
     font-size: 0.9em;
-    word-wrap: normal;
+
+    white-space: pre-wrap; /* ios safari */
+    word-wrap: break-word; /* ios safari */
+    text-align: justify; /* ios safari */
 }
 
 .docs_contents__>.view_context__ code {
