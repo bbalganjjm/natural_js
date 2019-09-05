@@ -605,7 +605,7 @@
 			/**
 			 * 바인드된 데이터의 html 을 인식 할건지 여부
 			 */
-			"html" : true,
+			"html" : false,
 			/**
 			 * 실시간 데이터 검증을 할 건지 여부
 			 */
@@ -635,27 +635,23 @@
 			 *    - ele : 호출 함수 명 - "bind" | "val"
 			 */
 			"onBeforeBindValue" : function(ele, val, action) {
-			    if(ele.is(":input")) {
-    			    if(N.type(val) === "array") {
-    			        for (var j = 0; j < val.length; j++) {
-    			            if(N.type(val[j]) === "string"){
-    			                for (var i = 0; i < this.options.xssReverseChars.length; i++) {
-                                    val[j] = val[j].replace(new RegExp(this.options.xssReverseChars[i][0], "g"), this.options.xssReverseChars[i][1]);
-                                }
-    			            }
-    			        }
-    			        return val;
-    			    } else if(N.type(val) === "string"){
-    		            for (var i = 0; i < this.options.xssReverseChars.length; i++) {
-    		                val = val.replace(new RegExp(this.options.xssReverseChars[i][0], "g"), this.options.xssReverseChars[i][1]);
-    		            }
-    		            return val;
-    			    } else {
-    			        return val;
-    			    }
+			    if(N.type(val) === "array") {
+			        for (var j = 0; j < val.length; j++) {
+			            if(N.type(val[j]) === "string"){
+			                for (var i = 0; i < this.options.xssReverseChars.length; i++) {
+                                val[j] = val[j].replace(new RegExp(this.options.xssReverseChars[i][0], "g"), this.options.xssReverseChars[i][1]);
+                            }
+			            }
+			        }
+			        return val;
+			    } else if(N.type(val) === "string"){
+		            for (var i = 0; i < this.options.xssReverseChars.length; i++) {
+		                val = val.replace(new RegExp(this.options.xssReverseChars[i][0], "g"), this.options.xssReverseChars[i][1]);
+		            }
+		            return val;
 			    } else {
-                    return val;
-                }
+			        return val;
+			    }
 			},
 			"tpBind" : true
 		},
@@ -684,7 +680,7 @@
             "unselect" : false,
        		"addSelect" : false,
        		"addTop" : true,
-       		"html" : true,
+       		"html" : false,
        		"tpBind" : false
 		},
 		"grid" : {
@@ -729,7 +725,7 @@
        		"sortable" : true,
        		"addSelect" : false,
        		"addTop" : true,
-       		"html" : true,
+       		"html" : false,
        		"tpBind" : false,
 			/**
 			 * 다국어 메시지
