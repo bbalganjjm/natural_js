@@ -278,15 +278,18 @@
                 var mainNav = view.closest(".main-nav");
 
                 if (selfEle.data("status") === "show") {
-				    N(".lefter-toggle-button>span", view).css("transform", "").off("mouseover.lefter").off("mouseout.lefter");
+                    N(".content-wrap").unbind("click.lefter");
+                    
+                    N(".lefter-toggle-button>span", view).css("transform", "").off("mouseover.lefter").off("mouseout.lefter");
 
                     mainNav.css("margin-left", "-" + mainNav.width() + "px");
-                    if($(window).width() > 560) {
+                    if($(window).width() > 414 && -1 < "win16|win32|win64|mac".indexOf(navigator.platform.toLowerCase())) {
     					mainNav.siblings(".content-wrap").css("margin-left", "0");
                     }
 				    selfEle.data("status", "hide").css("margin-right", "-24px");
+				    
                 } else {
-                    if($(window).width() > 560) {
+                    if($(window).width() > 414 && -1 < "win16|win32|win64|mac".indexOf(navigator.platform.toLowerCase())) {
                         mainNav.siblings(".content-wrap").css("margin-left", "");
                     }
                     mainNav.css("margin-left", "");
@@ -297,13 +300,18 @@
                     }).on("mouseout.lefter", function() {
                         $(this).css("transform", "");
                     });
+                    
+                    N(".content-wrap").on("click.lefter", function(e) {
+				        e.preventDefault();
+				        N(".lefter-toggle-button", view).trigger("click.lefter");
+				    });
                 }
 
                 mainNav = undefined;
                 selfEle = undefined;
             });
 
-            if($(window).width() <= 560) {
+            if($(window).width() <= 414 || 0 > "win16|win32|win64|mac".indexOf(navigator.platform.toLowerCase())) {
 	            N(".lefter-toggle-button", view).trigger("click.lefter");
             }
         }
