@@ -613,11 +613,12 @@ article .btnBox {
     font-size: 0.9em;
 }
 
-.docs_contents__>.view_context__ pre code {
+.docs_contents__>.view_context__ pre>code {
+    font-family: Consolas, monospace;
     display: inline;
-    max-width: auto;
-    padding: 0;
-    margin: 0;
+    word-break: normal;
+    word-wrap: normal;
+    white-space: pre;
     overflow: visible;
 }
 
