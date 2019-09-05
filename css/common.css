@@ -621,7 +621,7 @@ article .btnBox {
 @media screen and (max-width: 414px) {
     .apiDoc pre {
         box-sizing: border-box;
-        max-width: 342px;
+        max-width: 308px;
     }
     
     .apiDoc .api.form {
@@ -642,7 +642,7 @@ article .btnBox {
         width: 100%;
         border: none;
         margin: 0;
-        padding: 3px 0;
+        padding: 5px 17px;
         box-sizing: border-box;
         background: none;
         border-bottom: 1px dotted #B2EBF2;
@@ -657,8 +657,8 @@ article .btnBox {
         border-bottom: none;
         padding: 0 5px;
         line-height: 2;
-        background-color: #80DEEA;
-        text-shadow: 0 1px 0 #4DD0E1;
+        background-color: #A5D6A7;
+        text-shadow: 0 1px 0 #81C784;
         font-weight: 300;
         color: #FFFFFF;
     }
@@ -719,20 +719,20 @@ article .btnBox {
 @media screen and (max-width: 375px) {
     .apiDoc pre {
         box-sizing: border-box;
-        max-width: 303px;
+        max-width: 269px;
     }
 }
 
 @media screen and (max-width: 360px) {
     .apiDoc pre {
         box-sizing: border-box;
-        max-width: 288px;
+        max-width: 254px;
     }
 }
 
 @media screen and (max-width: 320px) {
     .apiDoc pre {
         box-sizing: border-box;
-        max-width: 249px;
+        max-width: 214px;
     }
 }
