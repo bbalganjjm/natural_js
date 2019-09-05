@@ -561,6 +561,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	padding: 4px;
 	margin: 0;
 	color : rgba(0, 0, 0, 0.87);
+	text-shadow: none;
 }
 
 .grid__>thead .data_filter_panel__.visible__ {
@@ -636,9 +637,10 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	max-width: 500px;
 	text-align: left;
 	list-style: none;
-	overflow: auto;
 	padding: 0 0 1px 0;
 	margin: 0;
+	overflow: auto;
+	-webkit-overflow-scrolling: touch;
 }
 
 .grid__>thead .data_filter_panel__ .data_filter_list__ li {
