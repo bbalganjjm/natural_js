@@ -610,7 +610,6 @@ article .btnBox {
     background-color: #E8F5E9B3;
     border-radius: 3px;
     line-height: 1.65;
-    font-size: 0.9em;
     word-wrap: normal;
 }
 
@@ -621,6 +620,7 @@ article .btnBox {
     word-wrap: normal;
     white-space: pre;
     overflow: visible;
+    font-size: 100%;
 }
 
 /* Mobile */
