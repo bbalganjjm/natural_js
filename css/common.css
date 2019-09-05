@@ -702,14 +702,47 @@ article .btnBox {
         font-weight: 600;
     }
     
+    #pluginExtention .apiDoc .api.form td:nth-child(2):before,
+    #n .apiDoc .api.form td:nth-child(2):before,
+    #gc .apiDoc .api.form td:nth-child(2):before,
+    #string .apiDoc .api.form td:nth-child(2):before,
+    #element .apiDoc .api.form td:nth-child(2):before,
+    #date .apiDoc .api.form td:nth-child(2):before,
+    #browser .apiDoc .api.form td:nth-child(2):before,
+    #message .apiDoc .api.form td:nth-child(2):before,
+    #array .apiDoc .api.form td:nth-child(2):before,
+    #json .apiDoc .api.form td:nth-child(2):before,
+    #event .apiDoc .api.form td:nth-child(2):before,
     #methods .apiDoc .api.form td:nth-child(2):before {
         content: 'arguments : ';
         font-weight: 600;
     }
+    #pluginExtention .apiDoc .api.form td:nth-child(3):before,
+    #n .apiDoc .api.form td:nth-child(3):before,
+    #gc .apiDoc .api.form td:nth-child(3):before,
+    #string .apiDoc .api.form td:nth-child(3):before,
+    #element .apiDoc .api.form td:nth-child(3):before,
+    #date .apiDoc .api.form td:nth-child(3):before,
+    #browser .apiDoc .api.form td:nth-child(3):before,
+    #message .apiDoc .api.form td:nth-child(3):before,
+    #array .apiDoc .api.form td:nth-child(3):before,
+    #json .apiDoc .api.form td:nth-child(3):before,
+    #event .apiDoc .api.form td:nth-child(3):before,
     #methods .apiDoc .api.form td:nth-child(3):before {
         content: 'type : ';
         font-weight: 600;
     }
+    #pluginExtention .apiDoc .api.form td:nth-child(4):before,
+    #n .apiDoc .api.form td:nth-child(4):before,
+    #gc .apiDoc .api.form td:nth-child(4):before,
+    #string .apiDoc .api.form td:nth-child(4):before,
+    #element .apiDoc .api.form td:nth-child(4):before,
+    #date .apiDoc .api.form td:nth-child(4):before,
+    #browser .apiDoc .api.form td:nth-child(4):before,
+    #message .apiDoc .api.form td:nth-child(4):before,
+    #array .apiDoc .api.form td:nth-child(4):before,
+    #json .apiDoc .api.form td:nth-child(4):before,
+    #event .apiDoc .api.form td:nth-child(4):before,
     #methods .apiDoc .api.form td:nth-child(4):before {
         content: 'return : ';
         font-weight: 600;
