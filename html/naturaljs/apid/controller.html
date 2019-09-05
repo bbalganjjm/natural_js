@@ -1,4 +1,4 @@
-<article class="demo_controller">
+<article class="demo controller">
 	<div class="demoBox">
 		<p class="smallContTit">View Info :</p>
 		<pre class="line-numbers"><code id="view" class="language-javascript"></code></pre>
@@ -8,7 +8,7 @@
 </article>
 
 <script type="text/javascript">
-	N(".demo_controller").cont({
+	N(".demo.controller").cont({
 	    init : function(view, request) {
 	    	// view info
 	    	N("#view", view).text('<article id="controller">' + view.html() + "</article>");
