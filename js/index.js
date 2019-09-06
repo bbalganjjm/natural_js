@@ -167,6 +167,8 @@
             // API 문서 모바일 용 보기 처리 이벤트
             N(window).on("resize.mobile", function(e, view) {
                 
+		if ($(e.target).is(window)) {
+		
                 N(".agrsIndex", view).remove();
                 N(".function-desc", view).removeClass("function-desc");
                 
@@ -198,6 +200,9 @@
                         "line-height" : ""
                     });
                 }
+		
+		}
+			
             });
             
         }
