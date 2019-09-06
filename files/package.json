@@ -1,0 +1,36 @@
+{
+	"name": "@bbalganjjm/natural_js",
+	"version": "0.80.218",
+	"description": "Javascript UI Architecture Framework",
+	"author": "KIM HWANG MAN <bbalganjjm@gmail.com> (http://bbalganjjm.github.io/natural_js)",
+	"contributors": [
+		"bbalganjjm <bbalganjjm@gmail.com>",
+		"lemonfish <lemonfish@gmail.com>"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/bbalganjjm/natural_js.git"
+	},
+	"bugs": {
+		"url": "https://github.com/bbalganjjm/natural_js/issues"
+	},
+	"dependencies": {
+		"jquery": "1.12.4"
+	},
+	"license": "LGPL-2.1",
+	"keywords": [
+		"Natural-JS",
+		"natural-js",
+		"natural_js",
+		"naturaljs",
+		"jquery-plugin",
+		"ui framework",
+		"javascript ui framework",
+		"enterprise web application ui"
+	],
+	"homepage": "http://bbalganjjm.github.io/natural_js",
+	"main": "natural.js.min.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	}
+}
