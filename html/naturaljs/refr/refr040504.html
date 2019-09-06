@@ -73,19 +73,18 @@
 				<p></p>
 				<p>이전/다음 버튼을 활성화 하려면 다음과 같이 ul 태그 안에 li 태그의 처음과 끝에</p>
 				<p>&lt;a href="#"&gt;&lt;span&gt;&lt;/span&gt;&lt;/a&gt; 태그를 넣어 주면 됩니다.</p>
-				<pre><code class="language-markup">
-<div>
-	<a href="#"><span></span></a> <!-- 이전 버튼 -->
-	<ul>
-		<li><a href="#tab1">tab1</a></li>
-		<li><a href="#tab2">tab2</a></li>
-		<li><a href="#tab3">tab3</a></li>
-	</ul>
-	<a href="#"><span></span></a> <!-- 다음 버튼 -->
-	<div id="tab1">tab1</div>
-	<div id="tab2">tab2</div>
-	<div id="tab3">tab3</div>
-</div>
+				<pre><code class="language-markup">&lt;div&gt;
+	&lt;a href="#"&gt;&lt;span&gt;&lt;/span&gt;&lt;/a&gt; &lt;!-- 이전 버튼 --&gt;
+	&lt;ul&gt;
+		&lt;li&gt;&lt;a href="#tab1"&gt;tab1&lt;/a&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;a href="#tab2"&gt;tab2&lt;/a&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;a href="#tab3"&gt;tab3&lt;/a&gt;&lt;/li&gt;
+	&lt;/ul&gt;
+	&lt;a href="#"&gt;&lt;span&gt;&lt;/span&gt;&lt;/a&gt; &lt;!-- 다음 버튼 --&gt;
+	&lt;div id="tab1"&gt;tab1&lt;/div&gt;
+	&lt;div id="tab2"&gt;tab2&lt;/div&gt;
+	&lt;div id="tab3"&gt;tab3&lt;/div&gt;
+&lt;/div&gt;
 </code></pre>
 				<p class="alert">이전/다음 버튼 태그(a, span 태그)가 없으면 탭을 드래그나 터치 만 가능 하게 생성 합니다.</p>
 				<p class="alert">
