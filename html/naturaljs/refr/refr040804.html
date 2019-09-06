@@ -15,21 +15,21 @@
 			<td>data</td>
 			<td>array[json object]</td>
 			<td>undefined</td>
-			<td align="center">○</td>
+			<td style="text-align: center;">O</td>
 			<td>context(HTML Templete)요소에 바인드 할 데이터</td>
 		</tr>
 		<tr>
 			<td>context</td>
 			<td>jquery object</td>
 			<td>null</td>
-			<td align="center">○</td>
+			<td style="text-align: center;">O</td>
 			<td>리스트를 적용할 리스트 블록(Block)요소(UL)를 지정합니다.</td>
 		</tr>
 		<tr>
 			<td>height</td>
 			<td>number</td>
 			<td>0</td>
-			<td>X</td>
+			<td style="text-align: center;">X</td>
 			<td>
 				<p>리스트 바디(body)의 높이를 지정 합니다.</p>
 				<p>입력한 값이 0보다 크면 리스트의 높이를 입력한 값으로 고정하고 스크롤을 표시 해 줍니다. 0을 입력하면 스크롤 없이 전체 데이터를 표시 해 줍니다.</p>
@@ -39,21 +39,21 @@
 			<td>validate</td>
 			<td>boolean</td>
 			<td>true</td>
-			<td>X</td>
+			<td style="text-align: center;">X</td>
 			<td>입력요소의 실시간 검증을 할건지 여부를 지정 합니다.</td>
 		</tr>
 		<tr>
 			<td>html</td>
 			<td>boolean</td>
 			<td>false</td>
-			<td>X</td>
+			<td style="text-align: center;">X</td>
 			<td>bind 시 HTML 태그를 인식할건지 그대로 표시할건지 여부를 지정 합니다.</td>
 		</tr>
 		<tr>
 			<td>addTop</td>
 			<td>boolean</td>
 			<td>false</td>
-			<td>X</td>
+			<td style="text-align: center;">X</td>
 			<td>
 				<p>add 메서드를 호출했을 때 새로운 행요소와 데이터세트를 리스트의 상단에 추가할건지 하단에 추가할건지를 결정 합니다.</p>
 				<p>true 이면 상단에 추가하고 false 이면 하단에 추가 합니다.</p>
@@ -64,21 +64,21 @@
 			<td>resizable</td>
 			<td>boolean</td>
 			<td>false</td>
-			<td>X</td>
+			<td style="text-align: center;">X</td>
 			<td>컬럼 리사이징 기능 활성화 여부</td>
 		</tr>
 		<tr>
 			<td>vResizable</td>
 			<td>boolean</td>
 			<td>false</td>
-			<td>X</td>
+			<td style="text-align: center;">X</td>
 			<td>리스트 높이 리사이징 기능 활성화 여부</td>
 		</tr>
 		<tr>
 			<td>windowScrollLock</td>
 			<td>boolean</td>
 			<td>true</td>
-			<td>X</td>
+			<td style="text-align: center;">X</td>
 			<td>
 				<p>리스트 바디 영역에 mouseover 시 윈도우 스크롤을 비활설화 할 것인지 여부</p>
 				<p>리스트안에서 마우스 스크롤 시 리스트의 끝 영역이나 시작영역에 가면 브라우저 윈도우 스크롤이 자동으로 올라가거나 내려가서 리스트가 표시된 부분이 넘어가게 됩니다. 때문에 리스트 바디영역에 마우스가 올라가면 윈도우 스크롤을 비활성 시킵니다. false로 지정하면 브라우저 기본모드로 동작 됩니다.</p>
@@ -88,7 +88,7 @@
 			<td>revert</td>
 			<td>boolean</td>
 			<td>false</td>
-			<td>X</td>
+			<td style="text-align: center;">X</td>
 			<td>
 				<p>revert 기능을 활성(true), 비활성(false) 시킵니다.</p>
 				<p class="alert">revert 기능을 활성화 하면 최초 바인딩된 데이터를 메모리에 적제 하므로 데이터 바인딩 성능이 저하될 수 있습니다.</p>
@@ -98,7 +98,7 @@
 			<td>select</td>
 			<td>boolean</td>
 			<td>false</td>
-			<td>X</td>
+			<td style="text-align: center;">X</td>
 			<td>
 				<p>특정 행을 선택하는 효과 적용 여부, 한건만 선택 됨.</p>
 				<p>행이 선택 되면 해당 요소(LI)의 class 속성에 "list_selected__" 값이 추가 되고 해제되면 "list_selected__" 값이 제거 됩니다.</p>
@@ -108,7 +108,7 @@
 			<td>unselect</td>
 			<td>boolean</td>
 			<td>true</td>
-			<td>X</td>
+			<td style="text-align: center;">X</td>
 			<td>
 				<p>select 기능이 활성화(true) 되었을 경우 선택된 행을 다시 선택하여 선택을 취소 할 것인지 여부를 설정</p>
 				<p class="alert">multiselect 옵션이 true 일 경우에는 unselect 옵션이 적용 되지 않습니다.</p>
@@ -118,7 +118,7 @@
 			<td>multiselect</td>
 			<td>boolean</td>
 			<td>false</td>
-			<td>X</td>
+			<td style="text-align: center;">X</td>
 			<td>
 				<p>특정 행을 선택하는 효과 적용 여부, 여러건 선택 가능</p>
 				<p>행이 선택 되면 해당 요소(LI)의 class 속성에 "list_selected__" 값이 추가 되고 해제되면 "list_selected__" 값이 제거 됩니다.</p>
@@ -128,7 +128,7 @@
 			<td>checkAll</td>
 			<td>jquery object</td>
 			<td>null</td>
-			<td>X</td>
+			<td style="text-align: center;">X</td>
 			<td>
 				<p>리스트의 행을 선택하기 위한 체크박스를 모두 선택하는 checkbox input 요소 지정 합니다.</p>
 				<p class="alert">N.grid 와 달리 문자열로 지정하지 않고 정확하게 해당 요소를 Select 하여 jquery object 타입으로 지정 바랍니다.</p>
@@ -139,7 +139,7 @@
 			<td>checkAllTarget</td>
 			<td>string</td>
 			<td>null</td>
-			<td>X</td>
+			<td style="text-align: center;">X</td>
 			<td>
 				<p>리스트의 행을 선택하기 위한 체크박스 요소들을 지정(멀티 선택) 합니다.</p>
 				<p class="alert">jQuery selector 문자열로 지정하며 selector 의 context는 리스트 body(li) 로 자동 지정 됩니다.</p>
@@ -152,7 +152,7 @@
 			<td>checkSingleTarget</td>
 			<td>string</td>
 			<td>null</td>
-			<td>X</td>
+			<td style="text-align: center;">X</td>
 			<td>
 				<p>리스트의 행을 선택하기 위한 체크박스 요소들을 지정(단일 선택) 합니다.</p>
 				<p class="alert">jQuery selector 문자열로 지정하며 selector 의 context는 리스트 body(li) 로 자동 지정 됩니다.</p>
@@ -165,7 +165,7 @@
 			<td>hover</td>
 			<td>boolean</td>
 			<td>false</td>
-			<td>X</td>
+			<td style="text-align: center;">X</td>
 			<td>
 				<p>리스트 행들의 HOVER 효과 적용 여부</p>
 				<p class="alert">리스트 행에 mouseover 시 해당 행의 LI요소에 "list_hover__" 스타일클래스가 생성되고 선택이 해제되면 생성된 스타일클래스가 제거 됩니다.</p>
@@ -175,7 +175,7 @@
 			<td>createRowDelay</td>
 			<td>number(ms)</td>
 			<td>1</td>
-			<td>X</td>
+			<td style="text-align: center;">X</td>
 			<td>
 				<p>행 요소들이 생성될 때마다의 딜레이를 지정 할수 있습니다.</p>
 				<p class="alert">0 지정시 모든행을 한번에 만들어 표현 합니다. 이렇게 되면 브라우저는 모든행이 생성될때까지 멈춰있게 됩니다.</p>
@@ -185,7 +185,7 @@
 			<td>scrollPaging.size<p style="display: none;">scrollPagingSize</p></td>
 			<td>number</td>
 			<td>100</td>
-			<td>X</td>
+			<td style="text-align: center;">X</td>
 			<td>
 				<p>헤더고정형 리스트에서는 스크롤페이징이 기본으로 적용됩니다. 페이징시 한번에 바인드하는 행수를 지정 합니다.</p>
 				<p>0 을 지정 하면 스크롤 페이징 기능이 비 활성화 됩니다.</p>
@@ -197,70 +197,70 @@
 			<td>fRules</td>
 			<td>array</td>
 			<td>null</td>
-			<td>X</td>
+			<td style="text-align: center;">X</td>
 			<td>포맷룰을 지정 합니다. API/DEMO > Natural-DATA 메뉴의 Formatter 와 Format Rules 참고</td>
 		</tr>
 		<tr>
 			<td>vRules</td>
 			<td>array</td>
 			<td>null</td>
-			<td>X</td>
+			<td style="text-align: center;">X</td>
 			<td>검증룰을 지정 합니다. API/DEMO > Natural-DATA 메뉴의 Validator 와 Validation Rules 참고</td>
 		</tr>
 		<tr>
 			<td>addSelect</td>
 			<td>boolean</td>
 			<td>false</td>
-			<td>X</td>
+			<td style="text-align: center;">X</td>
 			<td>select 옵션이 true 이고 행이 add 메서드를 호출 했을때 추가 된 행을 자동으로 선택 할 것 인지 여부</td>
 		</tr>
 		<tr>
 			<td>addScroll</td>
 			<td>boolean</td>
 			<td>true</td>
-			<td>X</td>
+			<td style="text-align: center;">X</td>
 			<td>add 메서드를 호출 했을 때 추가 된 행으로 스크롤 할 것 인지 여부</td>
 		</tr>
 		<tr>
 			<td>selectScroll</td>
 			<td>boolean</td>
 			<td>true</td>
-			<td>X</td>
+			<td style="text-align: center;">X</td>
 			<td>select 메서드를 호출 했을 때 선택 된 마지막 행으로 스크롤 할 것 인지 여부</td>
 		</tr>
 		<tr>
 			<td>checkScroll</td>
 			<td>boolean</td>
 			<td>true</td>
-			<td>X</td>
+			<td style="text-align: center;">X</td>
 			<td>check 메서드를 호출 했을 때 체크 된 마지막 행으로 스크롤 할 것 인지 여부</td>
 		</tr>
 		<tr>
 			<td>validateScroll</td>
 			<td>boolean</td>
 			<td>true</td>
-			<td>X</td>
+			<td style="text-align: center;">X</td>
 			<td>validate 메서드를 호출 했을 때 값검증에 실패한 마지막 행으로 스크롤 할 것 인지 여부</td>
 		</tr>
 		<tr>
 			<td>appendScroll</td>
 			<td>boolean</td>
 			<td>true</td>
-			<td>X</td>
+			<td style="text-align: center;">X</td>
 			<td>"append" 옵션 적용 된 bind 메서드를 호출 할때 추가 된 행으로 자동 스크롤 할 것 인지 여부</td>
 		</tr>
         <tr>
             <td>tpBind</td>
             <td>boolean</td>
             <td>false</td>
-            <td>X</td>
+            <td style="text-align: center;">X</td>
             <td>컴포넌트와 관련 된 이벤트들(format, validate, dataSync 등)을 데이터 바인드 전에 바인딩 된 사용자 이벤트들 보다 먼저 실행 시켜 입력컨트롤들의 값과 내부(메모리) 데이터가 한템포 늦게 동기화 되는 문제를 해결 해 줍니다.</td>
         </tr>
 		<tr>
 			<td>rowHandlerBeforeBind</td>
 			<td>function</td>
 			<td>null</td>
-			<td>X</td>
+			<td style="text-align: center;">X</td>
 			<td>
 				<p>리스트에서 data를 bind 하거나 add 할때 행이 렌더링 될 때 마다 발생 하는 이벤트 입니다. 이벤트 콜백 메서드의 인자로 생성될 당시의 row index, 행 요소, 로우 데이터를 넣어줍니다.</p>
 				<pre><code class="language-javascript">rowHandlerBeforeBind : function(rowIdx, rowEle, rowData) {
@@ -276,7 +276,7 @@
 			<td>rowHandler</td>
 			<td>function</td>
 			<td>null</td>
-			<td>X</td>
+			<td style="text-align: center;">X</td>
 			<td>
 				<p>리스트에서 data를 bind 하거나 add 할때 행이 렌더링 될 때 마다 발생 하는 이벤트 입니다. 이벤트 콜백 메서드의 인자로 생성될 당시의 row index, 행 요소, 로우 데이터를 넣어줍니다.</p>
 				<pre><code class="language-javascript">rowHandler : function(rowIdx, rowEle, rowData) {
@@ -292,7 +292,7 @@
 			<td>onSelect</td>
 			<td>function</td>
 			<td>null</td>
-			<td>X</td>
+			<td style="text-align: center;">X</td>
 			<td>
 				<p>리스트의 행이 선택될때마다 발생되는 이벤트이다. 이벤트 콜백 메서드의 인자로 선택한 행의 row index, 행 요소, 로우 데이터, 바로전에 선택한 row index를  넣어준다.</p>
 				<pre><code class="language-javascript">onSelect : function(rowIdx, rowEle, rowData, beforeRowIdx, e) {
@@ -314,7 +314,7 @@
 			<td>onBind</td>
 			<td>function</td>
 			<td>null</td>
-			<td>X</td>
+			<td style="text-align: center;">X</td>
 			<td>
 				<p>데이터가 바인드 될 때마다 발생되는 이벤트입니다. 이벤트 핸들러 함수의 인자로 context, data, isFirstPage, isLastPage 가 반환 됩니다.</p>
 				<pre><code class="language-javascript">onBind : function(context, data, isFirstPage, isLastPage) {
