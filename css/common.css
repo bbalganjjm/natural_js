@@ -620,15 +620,14 @@ article .btnBox {
     word-wrap: normal;
     white-space: pre;
     overflow: visible;
-    font-size: 0.89em;
+    font-size: 12px;
 }
 
 /* Mobile */
 @media screen and (max-width: 414px) {
-    .apiDoc .api.form {
-        display: block;
-    }
     
+    .apiDoc .api.form,
+    .apiDoc .api.form tbody,
     .apiDoc .api.form tr {
         display: block;
     }
@@ -648,7 +647,7 @@ article .btnBox {
         border-left: 0.25em solid #A5D6A7;
         text-shadow: none;
         color: rgba(0, 0, 0, 0.87);
-        text-align: left;
+        text-align: left !important;
         font-size: 0.9em;
     }
     
@@ -717,6 +716,7 @@ article .btnBox {
     #array .apiDoc .api.form tr>td:first-child,
     #json .apiDoc .api.form tr>td:first-child,
     #event .apiDoc .api.form tr>td:first-child,
+    #functions .apiDoc .api.form tr>td:first-child,
     #methods .apiDoc .api.form tr>td:first-child {
         margin-bottom: 0;
     }
@@ -731,6 +731,7 @@ article .btnBox {
     #array .apiDoc .api.form td:nth-child(2):before,
     #json .apiDoc .api.form td:nth-child(2):before,
     #event .apiDoc .api.form td:nth-child(2):before,
+    #functions .apiDoc .api.form td:nth-child(2):before,
     #methods .apiDoc .api.form td:nth-child(2):before {
         content: 'arguments';
         font-weight: 600;
@@ -746,6 +747,7 @@ article .btnBox {
     #array .apiDoc .api.form td:nth-child(3):before,
     #json .apiDoc .api.form td:nth-child(3):before,
     #event .apiDoc .api.form td:nth-child(3):before,
+    #functions .apiDoc .api.form td:nth-child(3):before,
     #methods .apiDoc .api.form td:nth-child(3):before {
         content: 'type : ';
         font-weight: 600;
@@ -761,6 +763,7 @@ article .btnBox {
     #array .apiDoc .api.form td:nth-child(4):before,
     #json .apiDoc .api.form td:nth-child(4):before,
     #event .apiDoc .api.form td:nth-child(4):before,
+    #functions .apiDoc .api.form td:nth-child(4):before,
     #methods .apiDoc .api.form td:nth-child(4):before {
         content: 'return : ';
         font-weight: 600;
