@@ -625,6 +625,22 @@ article .btnBox {
 
 /* Mobile */
 @media screen and (max-width: 414px) {
+    .demo .form.options colgroup col:nth-child(2n-1) {
+        width: 22% !important;
+    }
+    .demo .form.options colgroup col:nth-child(2n) {
+        width: auto !important;
+    }
+    
+    .demo .form.methods colgroup col:nth-child(1) {
+        width: 20% !important;
+    }
+    .demo .form.methods colgroup col:nth-child(2) {
+        width: 32% !important;
+    }
+    .demo .form.methods colgroup col:nth-child(3) {
+        width: auto !important;
+    }
     
     .apiDoc .api.form,
     .apiDoc .api.form tbody,
