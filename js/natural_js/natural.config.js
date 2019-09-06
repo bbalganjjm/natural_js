@@ -1000,6 +1000,43 @@
                 });
             });
         }
+    }, { // API 문서 모바일 용 보기 처리
+        "pointcut" : [
+            ".refr010103",
+            ".refr010104",
+            ".refr010105",
+            ".refr010106",
+            ".refr010107",
+            ".refr010108",
+            ".refr010109",
+            ".refr010110",
+            ".refr010111",
+            ".refr010112",
+            ".refr010113",
+            ".refr020105",
+            ".refr020103",
+            ".refr020305",
+            ".refr020303",
+            ".refr020403",
+            ".refr020602",
+            ".refr030302",
+            ".refr040103",
+            ".refr040203",
+            ".refr040303",
+            ".refr040403",
+            ".refr040503",
+            ".refr040603",
+            ".refr040703",
+            ".refr040803",
+            ".refr040903",
+            ".refr041003",
+            ".refr041103",
+            ".refr050103:init$"
+        ].join(","),
+        "adviceType" : "before",
+        "fn" : function(cont, fnChain, args){
+            N(window).trigger("resize.mobile", [ cont.view ]);
+        }
     });
 
 })(N);

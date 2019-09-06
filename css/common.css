@@ -650,8 +650,7 @@ article .btnBox {
         margin: 0;
         padding: 5px 17px;
         box-sizing: border-box;
-        background: none;
-        border-bottom: 1px dotted #B2EBF2;
+        border-left: 0.25em solid #A5D6A7;
         text-shadow: none;
         color: rgba(0, 0, 0, 0.87);
         text-align: left;
@@ -660,19 +659,23 @@ article .btnBox {
     
     .apiDoc .api.form tr>td:first-child {
         font-size: 1em;
-        border-bottom: none;
-        padding: 0 5px;
-        line-height: 2;
+        border: none;
+        padding: 0 10px;
+        line-height: 2.5;
         background-color: #A5D6A7;
         text-shadow: 0 1px 0 #81C784;
         font-weight: 300;
         color: #FFFFFF;
+        margin-bottom: 15px;
     }
     
     .apiDoc .api.form tr>td:last-child {
         margin-bottom: 20px;
     }
     
+    #constructor .apiDoc .api.form tr>td:first-child {
+        margin-bottom: 0;
+    }
     #constructor .apiDoc .api.form td:nth-child(2):before {
         content: 'arguments : ';
         font-weight: 600;
@@ -708,6 +711,20 @@ article .btnBox {
         font-weight: 600;
     }
     
+    #pluginExtention .apiDoc .api.form tr>td:first-child,
+    #n .apiDoc .api.form tr>td:first-child,
+    #gc .apiDoc .api.form tr>td:first-child,
+    #string .apiDoc .api.form tr>td:first-child,
+    #element .apiDoc .api.form tr>td:first-child,
+    #date .apiDoc .api.form tr>td:first-child,
+    #browser .apiDoc .api.form tr>td:first-child,
+    #message .apiDoc .api.form tr>td:first-child,
+    #array .apiDoc .api.form tr>td:first-child,
+    #json .apiDoc .api.form tr>td:first-child,
+    #event .apiDoc .api.form tr>td:first-child,
+    #methods .apiDoc .api.form tr>td:first-child {
+        margin-bottom: 0;
+    }
     #pluginExtention .apiDoc .api.form td:nth-child(2):before,
     #n .apiDoc .api.form td:nth-child(2):before,
     #gc .apiDoc .api.form td:nth-child(2):before,
@@ -720,7 +737,7 @@ article .btnBox {
     #json .apiDoc .api.form td:nth-child(2):before,
     #event .apiDoc .api.form td:nth-child(2):before,
     #methods .apiDoc .api.form td:nth-child(2):before {
-        content: 'arguments : ';
+        content: 'arguments';
         font-weight: 600;
     }
     #pluginExtention .apiDoc .api.form td:nth-child(3):before,
@@ -774,4 +791,9 @@ article .btnBox {
         box-sizing: border-box;
         max-width: 214px;
     }
+}
+
+.apiDoc .function-desc {
+    background-color: #C8E6C9;
+    border: none !important;
 }

@@ -22,7 +22,7 @@
 			<td>multi</td>
 			<td>boolean</td>
 			<td>true</td>
-			<td></td>
+			<td>X</td>
 			<td>
 				<p>MDI, SDI 여부</p>
 				<p>true 이면 MDI 타입으로 탭 링크들과 컨텐츠들을 표시하고 false 이면 컨텐츠 탭 링크는 표시 하지 않고 단 한 개의 컨텐츠만 표시 합니다.</p>
@@ -32,7 +32,7 @@
 			<td>maxStateful</td>
 			<td>number</td>
 			<td>0</td>
-			<td></td>
+			<td>X</td>
 			<td>
 				<p>MDI 방식으로 사용할 때 탭 컨텐츠가 열릴수록 웹 브라우저의 속도가 느려지는 현상을 방지하기 위해 최대 상태유지 컨텐츠 개수를 설정 할 수 있습니다.</p>
 				<p class="alert">
@@ -46,7 +46,7 @@
 			<td>maxTabs</td>
 			<td>number</td>
 			<td>0</td>
-			<td></td>
+			<td>X</td>
 			<td>
 				<p>MDI 방식으로 사용할 때 탭 컨텐츠가 열릴수록 웹 브라우저의 속도가 느려지는 현상을 방지하기 위해 최대 탭 컨텐츠 개수를 설정 할 수 있습니다.</p>
 				<p class="alert">
@@ -58,7 +58,7 @@
 			<td>addLast</td>
 			<td>boolean</td>
 			<td>false</td>
-			<td></td>
+			<td>X</td>
 			<td>
 				<p>add 메서드를 호출 해서 새로운 페이지가 추가 되었을 때 탭을 뒤로 추가 할 것인 지 여부</p>
 			</td>
@@ -67,7 +67,7 @@
 			<td>tabScroll</td>
 			<td>boolean</td>
 			<td>false</td>
-			<td></td>
+			<td>X</td>
 			<td>
 				<p>탭들을 마우스 드래그나 터치로 스크롤 하는 기능 활성화 여부</p>
 				<p class="alert">
@@ -87,7 +87,7 @@
 			<td>closeAllRedirectURL</td>
 			<td>string</td>
 			<td>null</td>
-			<td></td>
+			<td>X</td>
 			<td>
 				<p>"전체 닫기" 버튼을 눌렀을 때 closeAllRedirectURL 옵션 값이 null 이면 활성 화 된 탭을 남겨 두고 나머지 탭들을 닫아 주고 url 문자열을 입력 하면 해당 url 로 리다이렉트 됩니다.</p>
 				<p class="alert">SPA(Single Page Application) 방식으로 사이트를 개발 할 때는 메인(홈) 화면의 url 을 입력 하여 브라우저의 가비지 리소스들을 정리하기 위해 페이지 리다이렉션을 유도 하는것이 좋습니다.</p>
@@ -97,7 +97,7 @@
 			<td>entireLoadIndicator</td>
 			<td>boolean</td>
 			<td>false</td>
-			<td></td>
+			<td>X</td>
 			<td>
 				<p>컨텐츠와 컨텐츠의 데이터등이 로딩 되는 동안 로딩 상태 바를 보여 줄 것인 지 여부</p>
 			</td>
@@ -106,7 +106,7 @@
 			<td>entireLoadScreenBlock</td>
 			<td>boolean</td>
 			<td>false</td>
-			<td></td>
+			<td>X</td>
 			<td>
 				<p>컨텐츠와 컨텐츠의 데이터등이 로딩 되는 동안 컨텐츠 화면을 차단 할 것인 지 여부</p>
 			</td>
@@ -115,7 +115,7 @@
 			<td>entireLoadExcludeURLs</td>
 			<td>array</td>
 			<td>[]</td>
-			<td></td>
+			<td>X</td>
 			<td>
 				<p>entireLoad 관련 이벤트나 옵션에서 캡쳐 되는 요청 중 entireLoadExcludeURLs 로 지정 한 URL 들은 캡쳐에서 제외 합니다.</p>
 				<p class="alert">등록 된 URL 들은 entireLoadIndicator 옵션과 entireLoadScreenBlock 옵션에도 연동 되어 표시 됩니다.</p>
@@ -125,14 +125,14 @@
 			<td>alwaysOnTop</td>
 			<td>boolean</td>
 			<td>false</td>
-			<td></td>
+			<td>X</td>
 			<td>"메뉴목록" 대화상자를 항상 최 상위에 표시 할건 지 여부</td>
 		</tr>
 		<tr>
 			<td>alwaysOnTopCalcTarget</td>
 			<td>string</td>
 			<td>"div, span, ul, p, nav, article, section"</td>
-			<td></td>
+			<td>X</td>
 			<td>
 				alwaysOnTop 옵션 적용 시 최 상위 z-index를 계산하기 위한 대상 요소지정
 				<p class="alert">jQuery selector 문자열로 지정 합니다</p>
@@ -142,7 +142,7 @@
 			<td>onBeforeLoad</td>
 			<td>function</td>
 			<td>null</td>
-			<td></td>
+			<td>X</td>
 			<td>
 				<p>컨텐츠가 로딩 되기 전 실행 되는 이벤트 입니다.</p>
 				<pre><code class="language-javascript">onBeforeLoad : function(docId, target) {
@@ -160,7 +160,7 @@
 			<td>onLoad</td>
 			<td>function</td>
 			<td>null</td>
-			<td></td>
+			<td>X</td>
 			<td>
 				<p>컨텐츠가 로딩 된 후 실행 되는 이벤트 입니다.</p>
 				<pre><code class="language-javascript">onLoad : function(docId) {
@@ -180,7 +180,7 @@
 			<td>onBeforeEntireLoad</td>
 			<td>function</td>
 			<td>null</td>
-			<td></td>
+			<td>X</td>
 			<td>
 				<p>컨텐츠 로딩 시 동시에 실행 되는 여러 서버 요청(N.comm.submit)들 중 최초 요청이 실행 되기 전 실행되는 이벤트</p>
 				<pre><code class="language-javascript">onBeforeEntireLoad : function(docId) {
@@ -196,7 +196,7 @@
 			<td>onErrorEntireLoad</td>
 			<td>function</td>
 			<td>null</td>
-			<td></td>
+			<td>X</td>
 			<td>
 				<p>컨텐츠 로딩 시 동시에 실행 되는 여러 서버 요청(N.comm.submit)들 중 에러가 발생 했을때 실행되는 이벤트</p>
 				<pre><code class="language-javascript">onErrorEntireLoad : function(e, request, xhr, textStatus, callback) {
@@ -213,7 +213,7 @@
 			<td>onEntireLoad</td>
 			<td>function</td>
 			<td>null</td>
-			<td></td>
+			<td>X</td>
 			<td>
 				<p>컨텐츠 로딩 시 동시에 실행 되는 여러 서버 요청(N.comm.submit)들이 모두 완료 되었을 때 실행되는 이벤트</p>
 				<pre><code class="language-javascript">onEntireLoad : function(docId) {
@@ -232,7 +232,7 @@
 			<td>onBeforeActive</td>
 			<td>function</td>
 			<td>null</td>
-			<td></td>
+			<td>X</td>
 			<td>
 				<p>선택한 탭이 활성화 되기 전 마다 실행 되는 이벤트</p>
 				<pre><code class="language-javascript">onBeforeActive : function(docId) {
@@ -251,7 +251,7 @@
 			<td>onActive</td>
 			<td>function</td>
 			<td>null</td>
-			<td></td>
+			<td>X</td>
 			<td>
 				<p>선택한 탭이 활성화 될 때 마다 실행 되는 이벤트</p>
 				<pre><code class="language-javascript">onActive : function(docId) {
@@ -270,7 +270,7 @@
 			<td>onBeforeInactive</td>
 			<td>function</td>
 			<td>null</td>
-			<td></td>
+			<td>X</td>
 			<td>
 				<p>선택한 탭이 비활성화 되기 전 마다 실행 되는 이벤트</p>
 				<pre><code class="language-javascript">onBeforeInactive : function(docId) {
@@ -289,7 +289,7 @@
 			<td>onInactive</td>
 			<td>function</td>
 			<td>null</td>
-			<td></td>
+			<td>X</td>
 			<td>
 				<p>선택한 탭이 비활성화 될 때 마다 실행 되는 이벤트</p>
 				<pre><code class="language-javascript">onInactive : function(docId) {
@@ -308,7 +308,7 @@
 			<td>onBeforeRemoveState</td>
 			<td>function</td>
 			<td>null</td>
-			<td></td>
+			<td>X</td>
 			<td>
 				<p>선택한 탭의 상태가 제거 되기 전 마다 실행 되는 이벤트</p>
 				<pre><code class="language-javascript">onBeforeRemoveState : function(docId) {
@@ -327,7 +327,7 @@
 			<td>onRemoveState</td>
 			<td>function</td>
 			<td>null</td>
-			<td></td>
+			<td>X</td>
 			<td>
 				<p>선택한 탭의 상태가 제거 될 때 마다 실행 되는 이벤트</p>
 				<pre><code class="language-javascript">onRemoveState : function(docId) {
@@ -346,7 +346,7 @@
 			<td>onBeforeRemove</td>
 			<td>function</td>
 			<td>null</td>
-			<td></td>
+			<td>X</td>
 			<td>
 				<p>선택한 탭이 제거 되기 전 마다 실행 되는 이벤트</p>
 				<pre><code class="language-javascript">onBeforeRemove : function(docId) {
@@ -365,7 +365,7 @@
 			<td>onRemove</td>
 			<td>function</td>
 			<td>null</td>
-			<td></td>
+			<td>X</td>
 			<td>
 				<p>선택한 탭이 제거 될 때 마다 실행 되는 이벤트</p>
 				<pre><code class="language-javascript">onRemove : function(docId) {

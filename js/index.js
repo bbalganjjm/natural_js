@@ -3,6 +3,7 @@
     var IndexController = {
         docs : null,
         init : function() {
+            this.mobileResponsiveView();
         	this.setLocale();
             this.loadHeader();
             this.loadLefter();
@@ -160,6 +161,45 @@
                 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
                 })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
             }
+        },
+        mobileResponsiveView : function() {
+            
+            // API 문서 모바일 용 보기 처리 이벤트
+            N(window).on("resize.mobile", function(e, view) {
+                
+                N(".agrsIndex", view).remove();
+                N(".function-desc", view).removeClass("function-desc");
+                
+                if($(window).width() <= 414 || 0 > "win16|win32|win64|mac".indexOf(navigator.platform.toLowerCase())) {
+                    $("td:contains('N/A')", view).css({
+                        "visibility": "hidden",
+                        "padding" : 0,
+                        "margin" : 0,
+                        "height" : 0,
+                        "line-height" : 0
+                    });
+                    
+                    var idx = -1;
+                    $("tr", view).each(function() {
+                        if($(this).find(">td:eq(0)").text().length > 0) {
+                            idx = -1;
+                            $(this).find(">td:eq(0)").siblings("td").addClass("function-desc");
+                        }
+                        $(this).find(">td:eq(1)").prepend('<strong class="agrsIndex">[' + idx + '] : </strong>');
+                        idx++;
+                    });
+                    
+                } else {
+                    $("td:contains('N/A')", view).css({
+                        "visibility": "visible",
+                        "padding" : "",
+                        "margin" : "",
+                        "height" : "",
+                        "line-height" : ""
+                    });
+                }
+            });
+            
         }
     };
 

@@ -13,8 +13,8 @@
 		</tr>
 		<tr>
 			<td>data</td>
-			<td align="center">-</td>
-			<td align="center">-</td>
+			<td align="center">N/A</td>
+			<td align="center">N/A</td>
 			<td>array[json object]</td>
 			<td>컴포넌트에 바인드 되어 있는 최종 데이터를 반환 합니다.</td>
 		</tr>
@@ -22,7 +22,7 @@
 			<td></td>
 			<td>selFlag</td>
 			<td>boolean</td>
-			<td align="center">-</td>
+			<td align="center">N/A</td>
 			<td>
 				반환되는 데이터의 타입을 결정하는 구분자 입니다.
 				<div class="alert">
@@ -47,7 +47,7 @@
 				<p>...arguments[n]</p>
 			</td>
 			<td>string</td>
-			<td align="center">-</td>
+			<td align="center">N/A</td>
 			<td>
 				<p>data 메서드의 두번째 인자부터 n 번째 인자까지 데이터의 컬럼명을 지정하면 해당 컬럼에 해당하는 데이터만 추출하여 반환 합니다.</p>
 				<pre><code class="language-javascript">/** bind 되어 있는 데이터
@@ -73,15 +73,15 @@ formInstance.data(true, "col01", "col02", "col03");
 		</tr>
 		<tr>
 			<td>row</td>
-			<td align="center">-</td>
-			<td align="center">-</td>
+			<td align="center">N/A</td>
+			<td align="center">N/A</td>
 			<td>number</td>
 			<td>현재 바인드되어 있는 데이터의 row index를 가져옵니다.</td>
 		</tr>
 		<tr>
 			<td>context</td>
-			<td align="center">-</td>
-			<td align="center">-</td>
+			<td align="center">N/A</td>
+			<td align="center">N/A</td>
 			<td>jquery object</td>
 			<td>컴포넌트를 적용한 요소를 반환 합니다.</td>
 		</tr>
@@ -89,13 +89,13 @@ formInstance.data(true, "col01", "col02", "col03");
 			<td></td>
 			<td>selector</td>
 			<td>string</td>
-			<td align="center">-</td>
+			<td align="center">N/A</td>
 			<td>selector 문자열을 입력하면 context 옵션으로 지정한 요소에서 선택된 요소를 반환 합니다.</td>
 		</tr>
 		<tr>
 			<td>bind</td>
-			<td align="center">-</td>
-			<td align="center">-</td>
+			<td align="center">N/A</td>
+			<td align="center">N/A</td>
 			<td>N.form</td>
 			<td>
 				<p>지정된 context에 데이터를 바인드 합니다.</p>
@@ -186,7 +186,7 @@ init : function() {
 			<td></td>
 			<td>row</td>
 			<td>number</td>
-			<td align="center">-</td>
+			<td align="center">N/A</td>
 			<td>
 				<p>row index 를 지정 하면 컴포넌트에 바인드 되어있는 데이터 리스트에서 지정한 row index 에 해당하는 데이터를 바인드 합니다.</p>
 				<p class="alert">같은 context 에 data 만 바꿔서 재 바인드 했을때 Datepicker 등이 정상 동작 하지 않을 수 있습니다. 이 때는 bind 하기 전에 unbind 를 호출 해 주고 bind 해 주세요.</p>
@@ -196,7 +196,7 @@ init : function() {
 			<td></td>
 			<td>data</td>
 			<td>array[json object]</td>
-			<td align="center">-</td>
+			<td align="center">N/A</td>
 			<td>
 				<p>data인자를 지정하면 컴포넌트에 바인드 된 데이터가 지정한 데이터로 치환되어 바인드 됩니다.</p>
 				<p class="alert">같은 context 에 data 만 바꿔서 재 바인드 했을때 Datepicker 등이 정상 동작 하지 않을 수 있습니다. 이 때는 bind 하기 전에 unbind 를 호출 해 주고 bind 해 주세요.</p>
@@ -211,7 +211,7 @@ init : function() {
 				<p>...arguments[n]</p>
 			</td>
 			<td>string</td>
-			<td align="center">-</td>
+			<td align="center">N/A</td>
 			<td>
 				<p>bind 메서드의 세번째 인자부터 n 번째 인자까지 데이터의 컬럼명을 지정하면 해당 컬럼에 해당하는 요소에만 바인드 합니다.</p>
 				<pre><code class="language-javascript">// 바인드 할 데이터
@@ -236,8 +236,8 @@ formInstance.bind(0, data, "col01", "col02", "col03");</code></pre>
 		</tr>
 		<tr>
 			<td>unbind</td>
-			<td align="center">-</td>
-			<td align="center">-</td>
+			<td align="center">N/A</td>
+			<td align="center">N/A</td>
 			<td>N.form</td>
 			<td>
 				<p>N.form 의 context로 지정한 블록 요소의 bind 관련 이벤트나 상태, 스타일등을 제거하여  bind 하기 전 상태로 되돌려 줍니다.</p>
@@ -246,8 +246,8 @@ formInstance.bind(0, data, "col01", "col02", "col03");</code></pre>
 		</tr>
 		<tr>
 			<td>add</td>
-			<td align="center">-</td>
-			<td align="center">-</td>
+			<td align="center">N/A</td>
+			<td align="center">N/A</td>
 			<td>N.form</td>
 			<td colspan="2">
 				<p>새로운 로우 데이터를 생성 합니다.</p>
@@ -261,7 +261,7 @@ formInstance.bind(0, data, "col01", "col02", "col03");</code></pre>
 			<td></td>
 			<td>data</td>
 			<td>object</td>
-			<td align="center">-</td>
+			<td align="center">N/A</td>
 			<td>
 				새로운 행을 생성할 때 컬럼값들의 기본값을 지정 할 수 있습니다.
 				<p class="alert">인자로 지정된 데이터는 add 호출 시 생성된 기본 데이터를 확장 합니다.</p>
@@ -272,29 +272,29 @@ formInstance.bind(0, data, "col01", "col02", "col03");</code></pre>
 			<td></td>
 			<td>row</td>
 			<td>object</td>
-			<td align="center">-</td>
+			<td align="center">N/A</td>
 			<td>
 				<p>새로운 데이터를 추가 할 내부 데이터의 행 인덱스를 지정 합니다. 지정한 행 인덱스 앞에 데이터가 추가 됩니다.</p>
 			</td>
 		</tr>
 		<tr>
 			<td>revert</td>
-			<td align="center">-</td>
-			<td align="center">-</td>
+			<td align="center">N/A</td>
+			<td align="center">N/A</td>
 			<td>N.form</td>
 			<td>bind 했을 때의 초기 데이터나 add 시 생성 된 초기 데이터 상태로 복원 합니다.</td>
 		</tr>
 		<tr>
 			<td>validate</td>
-			<td align="center">-</td>
-			<td align="center">-</td>
+			<td align="center">N/A</td>
+			<td align="center">N/A</td>
 			<td>N.form</td>
 			<td>수정되거나 입력된 데이터 전체를 검증하여 검증결과를 반환 합니다. 검증 메시지는 입력요소 옆에 툴팁으로 표시 됩니다.</td>
 		</tr>
 		<tr>
 			<td>val</td>
-			<td align="center">-</td>
-			<td align="center">-</td>
+			<td align="center">N/A</td>
+			<td align="center">N/A</td>
 			<td>value object|N.form</td>
 			<td colspan="2">
 				<p>선택한 컬럼의 원래 값을 가져오거나 입력(수정) 합니다.</p>
@@ -306,14 +306,14 @@ formInstance.bind(0, data, "col01", "col02", "col03");</code></pre>
 			<td></td>
 			<td>key</td>
 			<td>string</td>
-			<td align="center">-</td>
+			<td align="center">N/A</td>
 			<td>가져올 값의 key 컬럼명</td>
 		</tr>
 		<tr>
 			<td></td>
 			<td>val</td>
 			<td>string | number | boolean | null</td>
-			<td align="center">-</td>
+			<td align="center">N/A</td>
 			<td>
 				<p>저장할 값</p>
 				<p class="alert">key 인자 값과 같은 id 속성값을 가진 HTML 요소가 있다면 null 은 빈 문자열 숫자는 숫자 문자열, Boolean 은 "true" 나 "false" 문자열로 변환 되어 저장 되고 대상 HTML 요소가 없다면 원형 그대로 저장 됩니다.</p>
