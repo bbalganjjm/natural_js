@@ -16,8 +16,8 @@
         </thead>
         <tr>
             <td>N("selector") .instance</td>
-            <td align="center">N/A</td>
-            <td align="center">N/A</td>
+            <td style="text-align: center;">N/A</td>
+            <td style="text-align: center;">N/A</td>
             <td>object</td>
             <td>
                 <p>Natural-JS 는 기본적으로 컴포넌트나 라이브러리들에 의해 생성된 인스턴스를 대상 HTML element(context 옵션, 이하 요소)가 있다면 대상요소에 인스턴스를 저장 합니다.</p>
@@ -54,14 +54,14 @@ N("div#sample1").instance("name", instance);</code></pre>
             <td></td>
             <td>name</td>
             <td>string</td>
-            <td align="center">N/A</td>
+            <td style="text-align: center;">N/A</td>
             <td>인스턴스 명</td>
         </tr>
         <tr>
             <td></td>
             <td>instance</td>
             <td>object|jquery object</td>
-            <td align="center">N/A</td>
+            <td style="text-align: center;">N/A</td>
             <td>
                 <p>인스턴스나 인스턴스를 가져올 callback</p>
                 <p class="alert">callback의 인자는 index(arguments[0])와 각각의 instance(arguments[1])가 들어옵니다. 이 callback 안의 this 는 각각의 instance를 가리킵니다.</p>
@@ -69,8 +69,8 @@ N("div#sample1").instance("name", instance);</code></pre>
         </tr>
         <tr>
             <td>N("selector") .tpBind</td>
-            <td align="center">N/A</td>
-            <td align="center">N/A</td>
+            <td style="text-align: center;">N/A</td>
+            <td style="text-align: center;">N/A</td>
             <td>jquery object</td>
             <td>
                 <p>선택 한 요소에 지정 한 이벤트 명과 같은 이벤트가 미리 정의 되어 있더라도 정의한 이벤트가 제일 먼저 실행 되게 해 줍니다.</p>
@@ -81,20 +81,20 @@ N("div#sample1").instance("name", instance);</code></pre>
             <td></td>
             <td>event</td>
             <td>string</td>
-            <td align="center">N/A</td>
+            <td style="text-align: center;">N/A</td>
             <td>이벤트 명</td>
         </tr>
         <tr>
             <td></td>
             <td>handler</td>
             <td>function</td>
-            <td align="center">N/A</td>
+            <td style="text-align: center;">N/A</td>
             <td>이벤트 핸들러 함수</td>
         </tr>
         <tr>
             <td>N("selector") .vals</td>
-            <td align="center">N/A</td>
-            <td align="center">N/A</td>
+            <td style="text-align: center;">N/A</td>
+            <td style="text-align: center;">N/A</td>
             <td>string|array|jquery object</td>
             <td>
                 <p>select, select[multiple=multiple], input[type=radio], input[type=checkbox] 와 같은 선택 요소의 선택된 값을 가져오거나 명령으로 선택 할 수 있게 해 주는 함수 입니다.</p>
@@ -110,7 +110,7 @@ N("div#sample1").instance("name", instance);</code></pre>
             <td></td>
             <td>vals</td>
             <td>array|string|function</td>
-            <td align="center">N/A</td>
+            <td style="text-align: center;">N/A</td>
             <td>
                 단일 값을 지정 할 때는 string 타입으로 값을 지정하고 2개 이상의 선택지를 선택 할 때는 array 에 string 을 담아 지정 합니다.
                 function 타입을 지정하면 요소 개수 만큼 지정한 콜백 함수를 실행 해 줍니다. 콜백함수의 인자는 다음과 같습니다.
@@ -123,8 +123,8 @@ N("div#sample1").instance("name", instance);</code></pre>
         </tr>
         <tr>
             <td>N(array) .remove_</td>
-            <td align="center">N/A</td>
-            <td align="center">N/A</td>
+            <td style="text-align: center;">N/A</td>
+            <td style="text-align: center;">N/A</td>
             <td>jquery object</td>
             <td>셀럭터로 지정한 array 의 특정 요소를 제거 합니다.</td>
         </tr>
@@ -132,20 +132,20 @@ N("div#sample1").instance("name", instance);</code></pre>
             <td></td>
             <td>idx</td>
             <td>number</td>
-            <td align="center">N/A</td>
+            <td style="text-align: center;">N/A</td>
             <td>배열 에서 제거 할 요소의 Index</td>
         </tr>
         <tr>
             <td></td>
             <td>length</td>
             <td>number</td>
-            <td align="center">N/A</td>
+            <td style="text-align: center;">N/A</td>
             <td>제거 할 배열 요소들의 개수</td>
         </tr>
         <tr>
             <td>N(selector) .events</td>
-            <td align="center">N/A</td>
-            <td align="center">N/A</td>
+            <td style="text-align: center;">N/A</td>
+            <td style="text-align: center;">N/A</td>
             <td>object similar to array|array|undefined</td>
             <td>
                 <p>셀렉터로 지정한 요소에 바인드 되어 있는 이벤트들을 반환 합니다.</p>
@@ -157,14 +157,14 @@ N("div#sample1").instance("name", instance);</code></pre>
             <td></td>
             <td>eventName</td>
             <td>string</td>
-            <td align="center">N/A</td>
+            <td style="text-align: center;">N/A</td>
             <td>이벤트 명</td>
         </tr>
         <tr>
             <td></td>
             <td>namespace</td>
             <td>string</td>
-            <td align="center">N/A</td>
+            <td style="text-align: center;">N/A</td>
             <td>이벤트 네임스페이스</td>
         </tr>
     </table>

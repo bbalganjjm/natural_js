@@ -13,8 +13,8 @@
 		</tr>
 		<tr>
 			<td>data</td>
-			<td align="center">N/A</td>
-			<td align="center">N/A</td>
+			<td style="text-align: center;">N/A</td>
+			<td style="text-align: center;">N/A</td>
 			<td>array[json object]|jquery object</td>
 			<td>컴포넌트에 바인드 되어 있는 최종 데이터를 반환 합니다.</td>
 		</tr>
@@ -22,7 +22,7 @@
 			<td></td>
 			<td>rowStatus</td>
 			<td>boolean|string</td>
-			<td align="center">N/A</td>
+			<td style="text-align: center;">N/A</td>
 			<td>
 				반환되는 데이터의 타입을 결정하거나 데이터를 필터링 하기 위한 구분자 입니다.
 				<div class="alert">
@@ -52,7 +52,7 @@
 				<p>...arguments[n]</p>
 			</td>
 			<td>string</td>
-			<td align="center">N/A</td>
+			<td style="text-align: center;">N/A</td>
 			<td>
 				<p>data 메서드의 두번째 인자부터 n 번째 인자까지 데이터의 컬럼명을 지정하면 해당 컬럼에 해당하는 데이터만 추출하여 반환 합니다.</p>
 				<pre><code class="language-javascript">/** bind 되어 있는 데이터
@@ -91,8 +91,8 @@ listInstance.data("modified", "col01", "col02", "col03");
 		</tr>
 		<tr>
 			<td>context</td>
-			<td align="center">N/A</td>
-			<td align="center">N/A</td>
+			<td style="text-align: center;">N/A</td>
+			<td style="text-align: center;">N/A</td>
 			<td>jquery object</td>
 			<td>컴포넌트를 적용한 요소를 반환 합니다.</td>
 		</tr>
@@ -100,13 +100,13 @@ listInstance.data("modified", "col01", "col02", "col03");
 			<td></td>
 			<td>selector</td>
 			<td>string</td>
-			<td align="center">N/A</td>
+			<td style="text-align: center;">N/A</td>
 			<td>selector 문자열을 입력하면 context 옵션으로 지정한 요소에서 선택된 요소를 반환 합니다.</td>
 		</tr>
 		<tr>
 			<td>contextBodyTemplate</td>
-			<td align="center">N/A</td>
-			<td align="center">N/A</td>
+			<td style="text-align: center;">N/A</td>
+			<td style="text-align: center;">N/A</td>
 			<td>jquery object</td>
 			<td>
 				<p>리스트 bind 전 초기화 시 지정된 리스트 바디 템플릿 요소를 반환 합니다.</p>
@@ -119,13 +119,13 @@ listInstance.data("modified", "col01", "col02", "col03");
 			<td></td>
 			<td>selector</td>
 			<td>string</td>
-			<td align="center">N/A</td>
+			<td style="text-align: center;">N/A</td>
 			<td>selector 문자열을 입력하면 리스트 바디 템플릿 요소에서 선택된 요소를 반환 합니다.</td>
 		</tr>
 		<tr>
 			<td>bind</td>
-			<td align="center">N/A</td>
-			<td align="center">N/A</td>
+			<td style="text-align: center;">N/A</td>
+			<td style="text-align: center;">N/A</td>
 			<td>N.list</td>
 			<td>
 				<p>지정된 context에 데이터를 바인드 합니다.</p>
@@ -214,14 +214,14 @@ init : function() {
 			<td></td>
 			<td>data</td>
 			<td>array[json object]</td>
-			<td align="center">N/A</td>
+			<td style="text-align: center;">N/A</td>
 			<td>data인자를 지정하면 컴포넌트에 바인드 된 데이터가 지정한 데이터로 치환되어 바인드 됩니다.</td>
 		</tr>
 		<tr>
 			<td></td>
 			<td>"append"</td>
 			<td>string</td>
-			<td align="center">N/A</td>
+			<td style="text-align: center;">N/A</td>
 			<td>
 				두번째 인자에 "append" 라는 문자열을 지정하면 처음 바인드 되어 있던 데이터에 다시 바인드 한 데이터를 합쳐 주고 첫번째 인자로 지정한 data를 리스트에 추가로 표시 해 줍니다.
 				<p class="alert">"append" 인자가 입력 되면 scrollPaging.size 옵션 값 자동으로 0 으로 지정 되어 스크롤 페이징 기능이 비활성화 됩니다.</p>
@@ -229,8 +229,8 @@ init : function() {
 		</tr>
 		<tr>
 			<td>add</td>
-			<td align="center">N/A</td>
-			<td align="center">N/A</td>
+			<td style="text-align: center;">N/A</td>
+			<td style="text-align: center;">N/A</td>
 			<td>N.list</td>
 			<td>
 				<p>새로운 로우 데이터를 생성 합니다.</p>
@@ -241,7 +241,7 @@ init : function() {
 			<td></td>
 			<td>data</td>
 			<td>object</td>
-			<td align="center">N/A</td>
+			<td style="text-align: center;">N/A</td>
 			<td>
 				새로운 행을 생성할 때 컬럼값들의 기본값을 지정 할 수 있습니다.
 				<p class="alert">인자로 지정된 데이터는 add 호출 시 생성된 기본 데이터를 확장 합니다.</p>
@@ -252,15 +252,15 @@ init : function() {
 			<td></td>
 			<td>row</td>
 			<td>object</td>
-			<td align="center">N/A</td>
+			<td style="text-align: center;">N/A</td>
 			<td>
 				<p>새로운 데이터를 추가 할 행 인덱스를 지정 합니다. 지정한 행 인덱스 앞에 행 요소와 데이터가 추가 됩니다.</p>
 			</td>
 		</tr>
 		<tr>
 			<td>remove</td>
-			<td align="center">N/A</td>
-			<td align="center">N/A</td>
+			<td style="text-align: center;">N/A</td>
+			<td style="text-align: center;">N/A</td>
 			<td>N.list</td>
 			<td>선택한 행 요소와 데이터를 삭제 합니다.</td>
 		</tr>
@@ -268,13 +268,13 @@ init : function() {
 			<td></td>
 			<td>row</td>
 			<td>number|array</td>
-			<td align="center">N/A</td>
+			<td style="text-align: center;">N/A</td>
 			<td>제거할 행 인덱스를 지정 합니다. index 들을 array에 담아 인자로 지정 하면 한번에 여러 행을 제거 합니다.</td>
 		</tr>
 		<tr>
 			<td>revert</td>
-			<td align="center">N/A</td>
-			<td align="center">N/A</td>
+			<td style="text-align: center;">N/A</td>
+			<td style="text-align: center;">N/A</td>
 			<td>N.list</td>
 			<td>bind 했을 때의 초기 데이터나 add 시 생성 된 초기 데이터 상태로 복원 합니다.</td>
 		</tr>
@@ -282,7 +282,7 @@ init : function() {
 			<td></td>
 			<td>row</td>
 			<td>number|array</td>
-			<td align="center">N/A</td>
+			<td style="text-align: center;">N/A</td>
 			<td>
 				<p>row index를 입력하면 해당 행 데이터만 복원 하고 입력하지 않으면 전체 행 데이터를 복원 합니다.</p>
 				<p>index 들을 array에 담아 인자로 지정 하면 한번에 여러 행을 복원 합니다.</p>
@@ -290,8 +290,8 @@ init : function() {
 		</tr>
 		<tr>
 			<td>validate</td>
-			<td align="center">N/A</td>
-			<td align="center">N/A</td>
+			<td style="text-align: center;">N/A</td>
+			<td style="text-align: center;">N/A</td>
 			<td>N.list</td>
 			<td>수정되거나 입력된 데이터 전체를 검증하여 검증결과를 반환 합니다. 검증 메시지는 입력요소 옆에 툴팁으로 표시 됩니다.</td>
 		</tr>
@@ -299,13 +299,13 @@ init : function() {
 			<td></td>
 			<td>row</td>
 			<td>number</td>
-			<td align="center">N/A</td>
+			<td style="text-align: center;">N/A</td>
 			<td>row index를 입력하면 해당 행데이터만 검증하고 입력하지 않으면 전체 데이터를 검증합니다.</td>
 		</tr>
 		<tr>
 			<td>val</td>
-			<td align="center">N/A</td>
-			<td align="center">N/A</td>
+			<td style="text-align: center;">N/A</td>
+			<td style="text-align: center;">N/A</td>
 			<td>value object|N.list</td>
 			<td>
 				<p>선택한 컬럼의 원래 값을 가져오거나 입력(수정) 합니다.</p>
@@ -317,21 +317,21 @@ init : function() {
 			<td></td>
 			<td>row</td>
 			<td>number</td>
-			<td align="center">N/A</td>
+			<td style="text-align: center;">N/A</td>
 			<td>가져올 값의 row index</td>
 		</tr>
 		<tr>
 			<td></td>
 			<td>key</td>
 			<td>string</td>
-			<td align="center">N/A</td>
+			<td style="text-align: center;">N/A</td>
 			<td>가져올 값의 key 컬럼명</td>
 		</tr>
 		<tr>
 			<td></td>
 			<td>val</td>
 			<td>string | number | boolean | null</td>
-			<td align="center">N/A</td>
+			<td style="text-align: center;">N/A</td>
 			<td>
 				<p>저장할 값</p>
 				<p class="alert">key 인자 값과 같은 id 속성값을 가진 HTML 요소가 있다면 null 은 빈 문자열 숫자는 숫자 문자열, Boolean 은 "true" 나 "false" 문자열로 변환 되어 저장 되고 대상 HTML 요소가 없다면 원형 그대로 저장 됩니다.</p>
@@ -339,8 +339,8 @@ init : function() {
 		</tr>
 		<tr>
 			<td>select</td>
-			<td align="center">N/A</td>
-			<td align="center">N/A</td>
+			<td style="text-align: center;">N/A</td>
+			<td style="text-align: center;">N/A</td>
 			<td>array</td>
 			<td>
 				<p>select 나 multiselect 옵션 지정 시 리스트 안의 행을 명령으로 선택 할 수 있습니다.</p>
@@ -353,7 +353,7 @@ init : function() {
 			<td></td>
 			<td>row</td>
 			<td>array|number</td>
-			<td align="center">N/A</td>
+			<td style="text-align: center;">N/A</td>
 			<td>
 				<p>선택할 row index</p>
 				<ul>
@@ -366,15 +366,15 @@ init : function() {
 			<td></td>
 			<td>isAppend</td>
 			<td>boolean</td>
-			<td align="center">N/A</td>
+			<td style="text-align: center;">N/A</td>
 			<td>
 				<p>true 를 입력 하면 이전에 선택 된 행들을 선택 취소 하지 않고 추가로 선택 합니다. false 를 입력 하면 이전에 선택 된 행들을 모두 선택 취소 후 선택 합니다.</p>
 			</td>
 		</tr>
 		<tr>
 			<td>check</td>
-			<td align="center">N/A</td>
-			<td align="center">N/A</td>
+			<td style="text-align: center;">N/A</td>
+			<td style="text-align: center;">N/A</td>
 			<td>string</td>
 			<td>
 				<p>checkAllTarget 과 checkSingleTarget 옵션으로 지정 한 체크박스 들을 명령으로 선택 할 수 있습니다.</p>
@@ -387,7 +387,7 @@ init : function() {
 			<td></td>
 			<td>row</td>
 			<td>array|number</td>
-			<td align="center">N/A</td>
+			<td style="text-align: center;">N/A</td>
 			<td>
 				<p>체크할 체크박스들의 row index</p>
 				<ul>
@@ -400,15 +400,15 @@ init : function() {
 			<td></td>
 			<td>isAppend</td>
 			<td>boolean</td>
-			<td align="center">N/A</td>
+			<td style="text-align: center;">N/A</td>
 			<td>
 				<p>true 를 입력 하면 이전에 선택 된 체크박스 들을 선택 취소 하지 않고 추가로 선택 합니다. false 를 입력 하면 이전에 선택 된 체크박스 들을 모두 선택 취소 후 선택 합니다.</p>
 			</td>
 		</tr>
 		<tr>
 			<td>move</td>
-			<td align="center">N/A</td>
-			<td align="center">N/A</td>
+			<td style="text-align: center;">N/A</td>
+			<td style="text-align: center;">N/A</td>
 			<td>N.list</td>
 			<td>
 				<p>선택한 행을 이동 합니다.</p>
@@ -418,7 +418,7 @@ init : function() {
 			<td></td>
 			<td>fromRow</td>
 			<td>number</td>
-			<td align="center">N/A</td>
+			<td style="text-align: center;">N/A</td>
 			<td>
 				<p>이동 대상 행의 인덱스를 입력 합니다.</p>
 			</td>
@@ -427,7 +427,7 @@ init : function() {
 			<td></td>
 			<td>toRow</td>
 			<td>number</td>
-			<td align="center">N/A</td>
+			<td style="text-align: center;">N/A</td>
 			<td>
 				<p>이동 할 위치의 행 인덱스를 입력 합니다.</p>
 				<p class="alert">
@@ -440,8 +440,8 @@ init : function() {
 		</tr>
 		<tr>
 			<td>copy</td>
-			<td align="center">N/A</td>
-			<td align="center">N/A</td>
+			<td style="text-align: center;">N/A</td>
+			<td style="text-align: center;">N/A</td>
 			<td>N.list</td>
 			<td>
 				<p>선택한 행을 복사 합니다.</p>
@@ -451,7 +451,7 @@ init : function() {
 			<td></td>
 			<td>fromRow</td>
 			<td>number</td>
-			<td align="center">N/A</td>
+			<td style="text-align: center;">N/A</td>
 			<td>
 				<p>복사 대상 행의 인덱스를 입력 합니다.</p>
 			</td>
@@ -460,7 +460,7 @@ init : function() {
 			<td></td>
 			<td>toRow</td>
 			<td>number</td>
-			<td align="center">N/A</td>
+			<td style="text-align: center;">N/A</td>
 			<td>
 				<p>복사 할 위치의 행 인덱스를 입력 합니다.</p>
 				<p class="alert">

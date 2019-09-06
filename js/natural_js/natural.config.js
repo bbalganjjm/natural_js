@@ -149,7 +149,7 @@
                         
                         // Display page loading image.
                         if(request.options.dataType === "html" && request.options.target !== null && request.options.append === false) {
-                            request.options.target.html('<div style="text-align: center;vertical-align: middle;border: 0; border: none;width: 100%;height: 100%;"><img src="images/loading.gif" height="24"></div>');
+                            request.options.target.html('<div style="text-align: center; vertical-align: middle;border: 0; border: none;width: 100%;height: 100%;"><img src="images/loading.gif" height="24"></div>');
                         }
 					},
 					/**
@@ -209,7 +209,7 @@
 					error : function(request, xhr, textStatus, errorThrown) {
 						if((xhr.getResponseHeader("Content-Type") && xhr.getResponseHeader("Content-Type").indexOf("html") > -1) || request.options.dataType === "html") {
 							if(request.options.target.html !== undefined) {
-								request.options.target.html('<div align="center" style="margin-top: 140px;margin-bottom: 140px;">[ ' + request.options.url + ' ] 페이지를 불러오는 도중 에러가 발생 했습니다.</div>');
+								request.options.target.html('<div style="text-align: center; margin-top: 140px;margin-bottom: 140px;">[ ' + request.options.url + ' ] 페이지를 불러오는 도중 에러가 발생 했습니다.</div>');
 							} else {
 								N(window).alert('[ ' + request.options.url + ' ] 페이지를 불러오는 도중 에러가 발생 했습니다.').show();
 							}
