@@ -62,10 +62,6 @@ References
 =========
 * Home page : http://bbalganjjm.github.io/natural_js
 
-----------------------------------------------
-
-* 홈페이지 : http://bbalganjjm.github.io/natural_js
-
 Installs
 =========
 * Bower :
