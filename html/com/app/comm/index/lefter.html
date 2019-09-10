@@ -42,9 +42,9 @@
 }
 
 .index-lefter .left-menu:hover::-webkit-scrollbar-track {
-    background: #2E7D32; 
+    background: #2E7D32;
 }
- 
+
 .index-lefter .left-menu:hover::-webkit-scrollbar-thumb {
     background: #43A047;
     border-radius: 5px;
@@ -148,7 +148,7 @@
                         <ul>
                             <li class="leaf-node"><a href="html/naturaljs/refr/refr0101.html" data-pageid="refr0101"><span>N</span></a></li>
                             <li class="leaf-node"><a href="html/naturaljs/refr/refr0102.html" data-pageid="refr0102"><span>Config</span></a></li>
-                        </ul>    
+                        </ul>
                     </li>
                     <li>
                         <a href="#"><span>Natural-ARCHITECTURE</span></a>
@@ -159,7 +159,7 @@
                             <li class="leaf-node"><a href="html/naturaljs/refr/refr0204.html" data-pageid="refr0204"><span>Communicator.request</span></a></li>
                             <li class="leaf-node"><a href="html/naturaljs/refr/refr0205.html" data-pageid="refr0205"><span>Communication Filter</span></a></li>
                             <li class="leaf-node"><a href="html/naturaljs/refr/refr0206.html" data-pageid="refr0206"><span>Context</span></a></li>
-                        </ul>    
+                        </ul>
                     </li>
                     <li>
                         <a href="#"><span>Natural-DATA</span></a>
@@ -167,7 +167,7 @@
                             <li class="leaf-node"><a href="html/naturaljs/refr/refr0301.html" data-pageid="refr0301"><span>Formatter</span></a></li>
                             <li class="leaf-node"><a href="html/naturaljs/refr/refr0302.html" data-pageid="refr0302"><span>Validator</span></a></li>
                             <li class="leaf-node"><a href="html/naturaljs/refr/refr0303.html" data-pageid="refr0303"><span>Natural-DATA Libraries</span></a></li>
-                        </ul>    
+                        </ul>
                     </li>
                     <li>
                         <a href="#"><span>Natural-UI</span></a>
@@ -183,14 +183,14 @@
                             <li class="leaf-node"><a href="html/naturaljs/refr/refr0409.html" data-pageid="refr0409"><span>Grid</span></a></li>
                             <li class="leaf-node"><a href="html/naturaljs/refr/refr0410.html" data-pageid="refr0410"><span>Pagination</span></a></li>
                             <li class="leaf-node"><a href="html/naturaljs/refr/refr0411.html" data-pageid="refr0411"><span>Tree</span></a></li>
-                        </ul>    
+                        </ul>
                     </li>
                     <li>
                         <a href="#"><span>Natural-UI.Shell</span></a>
                         <ul>
                             <li class="leaf-node"><a href="html/naturaljs/refr/refr0501.html" data-pageid="refr0501"><span>Notify</span></a></li>
                             <li class="leaf-node"><a href="html/naturaljs/refr/refr0502.html" data-pageid="refr0502"><span>Documents</span></a></li>
-                        </ul>    
+                        </ul>
                     </li>
                 </ul>
             </li>
@@ -252,19 +252,19 @@
             N(window).on("resize.left-menu", function() {
                 N(".left-menu", view).innerHeight(N(this).height() - N(".logo", view).height());
             }).trigger("resize.left-menu");
-            
+
             N(".left-menu", view).on("click.left-menu", "a", function(e) {
                 e.preventDefault();
 
                 // .leaf-node a[data-pageid]
                 var selfEle = N(this);
-                
+
                 if(selfEle.parent().is(".leaf-node") && selfEle.is("[data-pageid]")) {
                  	// FIXME 메뉴 DB 만들어 지고 페이지 불러오는 서비스 만들어지면 encodeURIComponent(selfEle.attr("href")) 제거 바람.
                     location.hash = btoa(encodeURIComponent(selfEle.data("pageid") + "$" + selfEle.find("span").text()) + "$" + encodeURIComponent(selfEle.attr("href")));
-                    
+
                  	if($(window).width() <= 560) {
-        	            N(".lefter-toggle-button", view).trigger("click.lefter");               
+        	            N(".lefter-toggle-button", view).trigger("click.lefter");
                     }
                 }
 
@@ -284,8 +284,10 @@
                 var mainNav = view.closest(".main-nav");
 
                 if (selfEle.data("status") === "show") {
-                    N(".content-wrap", "body").off("click.lefter");
-                    
+                	if($(window).width() <= 414 || 0 > "win16|win32|win64|mac".indexOf(navigator.platform.toLowerCase())) {
+                		N(".content-wrap", "body").off("click.lefter");
+                	}
+
                     N(".lefter-toggle-button>span", view).css("transform", "").off("mouseover.lefter").off("mouseout.lefter");
 
                     mainNav.css("margin-left", "-" + mainNav.width() + "px");
@@ -293,7 +295,7 @@
     					mainNav.siblings(".content-wrap").css("margin-left", "0");
                     }
 				    selfEle.data("status", "hide").css("margin-right", "-32px");
-				    
+
                 } else {
                     if($(window).width() > 414 && -1 < "win16|win32|win64|mac".indexOf(navigator.platform.toLowerCase())) {
                         mainNav.siblings(".content-wrap").css("margin-left", "");
@@ -306,11 +308,13 @@
                     }).on("mouseout.lefter", function() {
                         $(this).css("transform", "");
                     });
-                    
-                    N(".content-wrap", "body").on("click.lefter", function(e) {
-				        e.preventDefault();
-				        N(".lefter-toggle-button", view).trigger("click.lefter");
-				    });
+
+                    if($(window).width() <= 414 || 0 > "win16|win32|win64|mac".indexOf(navigator.platform.toLowerCase())) {
+                    	N(".content-wrap", "body").on("click.lefter", function(e) {
+    				        e.preventDefault();
+    				        N(".lefter-toggle-button", view).trigger("click.lefter");
+    				    });
+                    }
                 }
 
                 mainNav = undefined;
