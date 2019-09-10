@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.38.212
+ * Natural-UI v0.38.213
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-UI"] = "0.38.212";
+    N.version["Natural-UI"] = "0.38.213";
 
     $.fn.extend($.extend(N.prototype, {
         alert : function(msg, vars) {
@@ -2799,6 +2799,9 @@
                             if(!tabContainerEle.parent().hasClass("tab_native_scroll__")) {
                                 tabContainerEle.wrap('<div class="tab_native_scroll__" style="margin-left: ' + (prevBtnEle.outerWidth() + liMarginRight) + 'px;margin-right: ' + (nextBtnEle.outerWidth() - liMarginRight) + 'px;"></div>');
                             }
+                            if(scrollBtnEles.length > 1) {
+                                scrollBtnEles.show();
+                            }
                         }
                         
                         tabContainerEle.addClass("tab_scroll__").width(ulWidth);
@@ -2810,7 +2813,12 @@
                                 prevBtnEle.removeClass("disabled__");
                                 scrollBtnEles.hide();
                             }
+                        } else {
+                            if(scrollBtnEles.length > 1) {
+                                scrollBtnEles.hide();
+                            }
                         }
+                        
                         if(tabContainerEle.parent().hasClass("tab_native_scroll__")) {
                             tabContainerEle.unwrap();
                         }
