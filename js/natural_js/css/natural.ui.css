@@ -820,14 +820,16 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 /* Tab */
-.tab__>ul {
+.tab__>ul,
+.tab__>.tab_native_scroll__>ul {
 	list-style: none;
 	overflow: hidden;
 	margin: 0;
 	padding: 0;
 }
 
-.tab__>ul>li {
+.tab__>ul>li,
+.tab__>.tab_native_scroll__>ul>li {
 	float: left;
 	margin-right: 1px;
 	padding: 2px 4px;
@@ -839,6 +841,33 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	background-color: #81C784;
     border-radius: 0 3px 0 0;
     line-height: 20px;
+}
+
+.tab__>ul>li>a,
+.tab__>.tab_native_scroll__>ul>li>a {
+    text-shadow: 0 1px 0 #66BB6A;
+    color: rgba(255, 255, 255, 0.87);
+	text-decoration: none;
+}
+
+.tab__>ul>li.tab_active__,
+.tab__>.tab_native_scroll__>ul>li.tab_active__ {
+	background-color: #FFFFFF;
+	border-bottom: 1px solid #FFFFFF;
+}
+
+.tab__>ul>li.tab_active__>a,
+.tab__>.tab_native_scroll__>ul>li.tab_active__>a {
+	color: inherit;
+	text-shadow: none;
+}
+
+.tab__>.tab_native_scroll__ {
+    overflow-x: scroll;
+    padding: 0;
+    margin: 0 0 -1px 0;
+    border: none;
+    -webkit-overflow-scrolling: touch;
 }
 
 .tab__>ul.tab_scroll__.effect__ {
@@ -884,22 +913,6 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	
 	opacity: 0.6;
 	transition: opacity 0.3s ease;
-}
-
-.tab__>ul>li>a {
-    text-shadow: 0 1px 0 #66BB6A;
-    color: rgba(255, 255, 255, 0.87);
-	text-decoration: none;
-}
-
-.tab__>ul>li.tab_active__ {
-	background-color: #FFFFFF;
-	border-bottom: 1px solid #FFFFFF;
-}
-
-.tab__>ul>li.tab_active__>a {
-	color: inherit;
-	text-shadow: none;
 }
 
 .tab__>div {
