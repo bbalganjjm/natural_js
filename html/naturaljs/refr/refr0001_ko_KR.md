@@ -34,7 +34,7 @@ API 문서는 Natural-JS 의 컴포넌트와 라이브러리에서 제공하는 
 <p class="alert">선언형 옵션은 JSON 표준 양식을 정확히 지켜줘야 합니다. 예를 들면 key 값에도 큰따옴표(")로 무조건 감싸줘야 하는 등 JSON 표준 양식을 지키지 않으면 선언형 옵션이 인식되지 않거나 오류가 발생합니다.</p>
 
 <p class="alert">data-format 이나 data-validate 등 선언형 옵션으로 실행되는 룰 들의 인자들(arguments)은 배열(array) 타입으로 정의하고 인자 순서대로 나열 합니다.
-<p class="alert">예) data-format='[["date", 8], ["lpad", 10, "@"]]'</p></p>
+<span class="alert">예) data-format='[["date", 8], ["lpad", 10, "@"]]'</span></p>
 
 * __함수__ : 컴포넌트나 라이브러리 인스턴스에서 제공하는 기능과 arguments 에 대한 설명
 
