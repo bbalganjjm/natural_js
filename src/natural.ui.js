@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.38.207
+ * Natural-UI v0.38.211
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-UI"] = "0.38.207";
+    N.version["Natural-UI"] = "0.38.211";
 
     $.fn.extend($.extend(N.prototype, {
         alert : function(msg, vars) {
@@ -260,16 +260,16 @@
                 events : function(eventNameSpace, startHandler, moveHandler, endHandler) {
                     var selfEle = this;
 
-                    this.bind("mousedown" + eventNameSpace + " touchstart" + eventNameSpace, function(e) {
+                    this.on("mousedown" + eventNameSpace + " touchstart" + eventNameSpace, function(e) {
                         var se = e.originalEvent.touches ? e.originalEvent.touches[0] : e;
-
                         if(e.originalEvent.touches || (e.which || e.button) === 1) {
                             var isContinue;
                             if(startHandler !== undefined) {
                                 isContinue = startHandler.call(this, e, selfEle, se.pageX, se.pageY)
                             }
+                            
                             if(isContinue !== false) {
-                                $(document).bind("mousemove" + eventNameSpace + " touchmove" + eventNameSpace, function(e) {
+                                $(document).on("mousemove" + eventNameSpace + " touchmove" + eventNameSpace, function(e) {
                                     $(document).bind("dragstart" + eventNameSpace + " selectstart" + eventNameSpace, function() {
                                         return false;
                                     });
@@ -290,7 +290,7 @@
                                     }
                                 });
 
-                                $(document).bind("mouseup" + eventNameSpace + " touchend" + eventNameSpace, function(e) {
+                                $(document).on("mouseup" + eventNameSpace + " touchend" + eventNameSpace, function(e) {
                                     $(document).unbind("dragstart" + eventNameSpace + " selectstart" + eventNameSpace + " mousemove" + eventNameSpace + " touchmove" + eventNameSpace + " mouseup" + eventNameSpace + " touchend" + eventNameSpace);
 
                                     if(endHandler !== undefined) {
@@ -2597,13 +2597,13 @@
                 });
 
                 var marginLeft;
-                opts.links.bind("mousedown.tab touchstart.tab", function(e) {
+                opts.links.bind("mousedown.tab" + (N.browser.scrollbarWidth() > 0 ? "touchstart.tab" : ""), function(e) {
                     e.preventDefault();
 
                     marginLeft = parseInt(opts.context.find(">ul").css("margin-left"));
                 });
 
-                opts.links.bind("click.tab touchend.tab", function(e, onOpenData, isFirst) {
+                opts.links.bind("click.tab" + (N.browser.scrollbarWidth() > 0 ? "touchend.tab" : ""), function(e, onOpenData, isFirst) {
                     e.preventDefault();
 
                     if(marginLeft !== undefined && Math.abs(parseInt(opts.context.find(">ul").css("margin-left")) - marginLeft) > 15 && isFirst !== true) {
@@ -2743,19 +2743,31 @@
 
                     prevBtnEle = scrollBtnEles.eq(0).addClass("tab_scroll_prev__").css("left", 0).bind("click" + eventNameSpace,  function(e) {
                         e.preventDefault();
-                        tabContainerEle.addClass("effect__");
-                        lastDistance = prevBtnEle.outerWidth() + liMarginRight;
-                        tabContainerEle.css("margin-left", lastDistance + "px");
-                        nextBtnEle.removeClass("disabled__");
-                        prevBtnEle.addClass("disabled__");
+                        if(N.browser.scrollbarWidth() > 0) {
+                            tabContainerEle.addClass("effect__");
+                            lastDistance = prevBtnEle.outerWidth() + liMarginRight;
+                            tabContainerEle.css("margin-left", lastDistance + "px");
+                            nextBtnEle.removeClass("disabled__");    
+                            prevBtnEle.addClass("disabled__");
+                        } else {
+                            tabContainerEle.parent(".tab_native_scroll__").animate({ 
+                                scrollLeft: 0 
+                                }, 300, "swing");
+                        }
                     });
                     nextBtnEle = scrollBtnEles.eq(1).addClass("tab_scroll_next__").css("right", 0).bind("click" + eventNameSpace,  function(e) {
                         e.preventDefault();
-                        tabContainerEle.addClass("effect__");
-                        lastDistance = opts.context.outerWidth() - tabContainerEle.width() - nextBtnEle.outerWidth() + liMarginRight;
-                        tabContainerEle.css("margin-left", lastDistance + "px");
-                        prevBtnEle.removeClass("disabled__");
-                        nextBtnEle.addClass("disabled__");
+                        if(N.browser.scrollbarWidth() > 0) {
+                            tabContainerEle.addClass("effect__");
+                            lastDistance = opts.context.outerWidth() - tabContainerEle.width() - nextBtnEle.outerWidth() + liMarginRight;
+                            tabContainerEle.css("margin-left", lastDistance + "px");
+                            prevBtnEle.removeClass("disabled__");
+                            nextBtnEle.addClass("disabled__");
+                        } else {
+                            tabContainerEle.parent(".tab_native_scroll__").animate({ 
+                                scrollLeft: tabContainerEle.outerWidth()
+                                }, 300, "swing");
+                        }
                     });
 
                     lastDistance = prevBtnEle.outerWidth() + liMarginRight;
@@ -2773,22 +2785,37 @@
                     ulWidth += opts.tabScrollCorrection.tabContainerWidthCorrectionPx;
 
                     if(ulWidth > 0 && ulWidth > opts.context.width() + liMarginRight) {
-                        opts.context.css("overflow", "hidden");
+                        if(N.browser.scrollbarWidth() > 0) {
+                            opts.context.css("overflow", "hidden");
+                            if(tabContainerEle.parent().hasClass("tab_native_scroll__")) {
+                                tabContainerEle.unwrap();
+                            }
+                            if(scrollBtnEles.length > 1) {
+                                tabContainerEle.css("margin-left", (prevBtnEle.outerWidth() + liMarginRight) + "px");
+                                prevBtnEle.addClass("disabled__");
+                                scrollBtnEles.show();
+                            }
+                        } else {
+                            tabContainerEle.wrap('<div class="tab_native_scroll__" style="margin-left: ' + (prevBtnEle.outerWidth() + liMarginRight) + 'px;margin-right: ' + (nextBtnEle.outerWidth() - liMarginRight) + 'px;"></div>');
+                        }
+                        
                         tabContainerEle.addClass("tab_scroll__").width(ulWidth);
-                        if(scrollBtnEles.length > 1) {
-                            tabContainerEle.css("margin-left", (prevBtnEle.outerWidth() + liMarginRight) + "px");
-                            prevBtnEle.addClass("disabled__");
-                            scrollBtnEles.show();
-                        }
                     } else {
-                        opts.context.css("overflow", "");
-                        tabContainerEle.css("width", "");
-                        if(scrollBtnEles.length > 1) {
-                            tabContainerEle.css("margin-left", "");
-                            prevBtnEle.removeClass("disabled__");
-                            scrollBtnEles.hide();
+                        if(N.browser.scrollbarWidth() > 0) {
+                            opts.context.css("overflow", "");
+                            if(scrollBtnEles.length > 1) {
+                                tabContainerEle.css("margin-left", "");
+                                prevBtnEle.removeClass("disabled__");
+                                scrollBtnEles.hide();
+                            }
                         }
+                        if(tabContainerEle.parent().hasClass("tab_native_scroll__")) {
+                            tabContainerEle.unwrap();
+                        }
+                        
+                        tabContainerEle.css("width", "");
                     }
+                    
                 }).trigger("resize" + eventNameSpace);
 
                 if(opts.tabScrollCorrection.tabContainerWidthReCalcDelayTime > 0) {
@@ -2797,56 +2824,58 @@
                     }, opts.tabScrollCorrection.tabContainerWidthReCalcDelayTime);
                 }
 
-                var sPageX;
-                var prevDefGap = 0;
-                var nextDefGap = 0;
-                var isMoved = false;
-                if(scrollBtnEles.length > 1) {
-                    prevDefGap = prevBtnEle.outerWidth();
-                    nextDefGap = nextBtnEle.outerWidth();
-                }
+                if(N.browser.scrollbarWidth() > 0) {
+                    var sPageX;
+                    var prevDefGap = 0;
+                    var nextDefGap = 0;
+                    var isMoved = false;
+                    if(scrollBtnEles.length > 1) {
+                        prevDefGap = prevBtnEle.outerWidth();
+                        nextDefGap = nextBtnEle.outerWidth();
+                    }
 
-                UI.draggable.events.call(tabContainerEle, eventNameSpace, function(e, tabContainerEle_, pageX, pageY) { // start
-                    tabContainerEle_.removeClass("effect__");
-                    if(tabContainerEle_.outerWidth() <= opts.context.innerWidth()) {
-                        return false;
-                    }
-                    sPageX = pageX - lastDistance;
-                }, function(e, tabContainerEle_, pageX, pageY) { // move
-                    var distance = (sPageX - pageX) * -1;
-                    if(distance > prevDefGap || opts.context.outerWidth() >= tabContainerEle_.width() + nextDefGap + distance) {
-                        return false;
-                    } else {
-                        lastDistance = distance + liMarginRight;
-                        tabContainerEle_.css("margin-left", distance + "px");
-                        isMoved = true;
-                    }
-                }, function(e, tabContainerEle_) { //end
-                    if(isMoved) {
-                        if(lastDistance + (scrollBtnEles.length > 1 ? 0 : 30) >= 0 && lastDistance <= prevDefGap) {
-                            if(scrollBtnEles.length > 1) {
-                                lastDistance = prevDefGap + liMarginRight;
-                                nextBtnEle.removeClass("disabled__");
-                                prevBtnEle.addClass("disabled__");
-                            } else {
-                                lastDistance = 0 + liMarginRight;
-                            }
-                            tabContainerEle_.addClass("effect__").css("margin-left", lastDistance + "px");
-                            isMoved = false;
-                        } else if(nextDefGap + (scrollBtnEles.length > 1 ? 0 : 30) >= tabContainerEle_.width() - (opts.context.outerWidth() + lastDistance * -1)) {
-                            lastDistance = (tabContainerEle_.width() - opts.context.outerWidth() - 1) * -1;
-                            if(scrollBtnEles.length > 1) {
-                                lastDistance -= nextDefGap;
-                                prevBtnEle.removeClass("disabled__");
-                                nextBtnEle.addClass("disabled__");
-                            }
-                            tabContainerEle_.addClass("effect__").css("margin-left", lastDistance + "px");
-                            isMoved = false;
-                        } else {
-                            scrollBtnEles.removeClass("disabled__");
+                    UI.draggable.events.call(tabContainerEle, eventNameSpace, function(e, tabContainerEle_, pageX, pageY) { // start
+                        tabContainerEle_.removeClass("effect__");
+                        if(tabContainerEle_.outerWidth() <= opts.context.innerWidth()) {
+                            return false;
                         }
-                    }
-                });
+                        sPageX = pageX - lastDistance;
+                    }, function(e, tabContainerEle_, pageX, pageY) { // move
+                        var distance = (sPageX - pageX) * -1;
+                        if(distance > prevDefGap || opts.context.outerWidth() >= tabContainerEle_.width() + nextDefGap + distance) {
+                            return false;
+                        } else {
+                            lastDistance = distance + liMarginRight;
+                            tabContainerEle_.css("margin-left", distance + "px");
+                            isMoved = true;
+                        }
+                    }, function(e, tabContainerEle_) { //end
+                        if(isMoved) {
+                            if(lastDistance + (scrollBtnEles.length > 1 ? 0 : 30) >= 0 && lastDistance <= prevDefGap) {
+                                if(scrollBtnEles.length > 1) {
+                                    lastDistance = prevDefGap + liMarginRight;
+                                    nextBtnEle.removeClass("disabled__");
+                                    prevBtnEle.addClass("disabled__");
+                                } else {
+                                    lastDistance = 0 + liMarginRight;
+                                }
+                                tabContainerEle_.addClass("effect__").css("margin-left", lastDistance + "px");
+                                isMoved = false;
+                            } else if(nextDefGap + (scrollBtnEles.length > 1 ? 0 : 30) >= tabContainerEle_.width() - (opts.context.outerWidth() + lastDistance * -1)) {
+                                lastDistance = (tabContainerEle_.width() - opts.context.outerWidth() - 1) * -1;
+                                if(scrollBtnEles.length > 1) {
+                                    lastDistance -= nextDefGap;
+                                    prevBtnEle.removeClass("disabled__");
+                                    nextBtnEle.addClass("disabled__");
+                                }
+                                tabContainerEle_.addClass("effect__").css("margin-left", lastDistance + "px");
+                                isMoved = false;
+                            } else {
+                                scrollBtnEles.removeClass("disabled__");
+                            }
+                        }
+                    });
+                }
             },
             loadContent : function(url, targetIdx, callback, isFirst) {
                 var opts = this.options;
