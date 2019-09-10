@@ -293,9 +293,9 @@ th, tfoot td {
     padding: 0.3em 0.5em;
     font-size: 0.95em;
     line-height: 1.7;
-    border-radius: 3px;
     opacity: 0.85;
     background-color: #E8F5E9;
+    box-shadow: inset 0px 1px 1px #A5D6A7;
 }
 
 article ul.contents {
@@ -632,7 +632,7 @@ article .btnBox {
     .demo .form.options colgroup col:nth-child(2n) {
         width: auto !important;
     }
-    
+
     .demo .form.methods colgroup col:nth-child(1) {
         width: 20% !important;
     }
@@ -642,17 +642,17 @@ article .btnBox {
     .demo .form.methods colgroup col:nth-child(3) {
         width: auto !important;
     }
-    
+
     .apiDoc .api.form,
     .apiDoc .api.form tbody,
     .apiDoc .api.form tr {
         display: block;
     }
-    
+
     .apiDoc .api.form th {
         display: none;
     }
-    
+
     .apiDoc .api.form td {
         display: list-item;
         list-style: none;
@@ -667,7 +667,7 @@ article .btnBox {
         text-align: left !important;
         font-size: 0.9em;
     }
-    
+
     .apiDoc .api.form tr>td:first-child {
         font-size: 1em;
         border: none;
@@ -679,11 +679,11 @@ article .btnBox {
         color: #FFFFFF;
         margin-bottom: 15px;
     }
-    
+
     .apiDoc .api.form tr>td:last-child {
         margin-bottom: 20px;
     }
-    
+
     #constructor .apiDoc .api.form tr>td:first-child {
         margin-bottom: 0;
     }
@@ -699,7 +699,7 @@ article .btnBox {
         content: 'return : ';
         font-weight: 600;
     }
-    
+
     #defaultoptions .apiDoc .api.form td:nth-child(2):before {
         content: 'type : ';
         font-weight: 600;
@@ -712,7 +712,7 @@ article .btnBox {
         content: 'required : ';
         font-weight: 600;
     }
-    
+
     #declarativeoptions .apiDoc .api.form td:nth-child(2):before {
         content: 'type : ';
         font-weight: 600;
@@ -721,7 +721,7 @@ article .btnBox {
         content: 'default : ';
         font-weight: 600;
     }
-    
+
     #pluginExtention .apiDoc .api.form tr>td:first-child,
     #n .apiDoc .api.form tr>td:first-child,
     #gc .apiDoc .api.form tr>td:first-child,
