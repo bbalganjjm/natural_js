@@ -9,9 +9,9 @@ API 문서는 Natural-JS 의 컴포넌트와 라이브러리에서 제공하는 
 
 * __API DEMO__ : 해당 라이브러리나 컴포넌트를 실시간으로 테스트 할 수 있는 데모 프로그램
 
->Grid 나 Form, Popup 등의 컴포넌트 디자인은 사이트에서 전역으로 정의한 table, div, input 등 각 __컴포넌트의 생성을 위한 템플릿 요소에 정의된 Style 속성에 따라 UI 컴포넌트의 모양 및 색상이 결정__ 됩니다. UI 컴포넌트들의 상세 디자인을 변경하려면 __"natural_js/css/natural.ui.css"__ 파일을 수정하기 바랍니다.
+<p class="alert">Grid 나 Form, Popup 등의 컴포넌트 디자인은 사이트에서 전역으로 정의한 table, div, input 등 각 __컴포넌트의 생성을 위한 템플릿 요소에 정의된 Style 속성에 따라 UI 컴포넌트의 모양 및 색상이 결정__ 됩니다. UI 컴포넌트들의 상세 디자인을 변경하려면 __"natural_js/css/natural.ui.css"__ 파일을 수정하기 바랍니다.</p>
 
->Internet Explorer 8 브라우저에서만 textarea에 text로 지정된 구문이 실제 Function객체로 인스턴스화 되지않아 오류가 발생합니다. 이는 데모페이지안에서 컴포넌트들의 이벤트 콜백을 지정하는 부분에서만 발생하는 오류이므로 안심하고 사용해도 됩니다. 실제 개발에서는 이런오류가 발생하지 않습니다.
+<p class="alert">Internet Explorer 8 브라우저에서만 textarea에 text로 지정된 구문이 실제 Function객체로 인스턴스화 되지않아 오류가 발생합니다. 이는 데모페이지안에서 컴포넌트들의 이벤트 콜백을 지정하는 부분에서만 발생하는 오류이므로 안심하고 사용해도 됩니다. 실제 개발에서는 이런오류가 발생하지 않습니다.</p>
 
 
 * __생성자__ : 컴포넌트나 라이브러리를 생성할 때 실행되는 기능과 생성자 arguments 에 대한 설명
@@ -31,11 +31,10 @@ API 문서는 Natural-JS 의 컴포넌트와 라이브러리에서 제공하는 
 		2. 검증 룰(Validation Rules) : data-validate
 		3. a, b를 제외한 모든 컴포넌트 옵션 : data-opts
 
->선언형 옵션은 JSON 표준 양식을 정확히 지켜줘야 합니다. 예를 들면 key 값에도 큰따옴표(")로 무조건 감싸줘야 하는 등 JSON 표준 양식을 지키지 않으면 선언형 옵션이 인식되지 않거나 오류가 발생합니다.
+<p class="alert">선언형 옵션은 JSON 표준 양식을 정확히 지켜줘야 합니다. 예를 들면 key 값에도 큰따옴표(")로 무조건 감싸줘야 하는 등 JSON 표준 양식을 지키지 않으면 선언형 옵션이 인식되지 않거나 오류가 발생합니다.</p>
 
->data-format 이나 data-validate 등 선언형 옵션으로 실행되는 룰 들의 인자들(arguments)은 배열(array) 타입으로 정의하고 인자 순서대로 나열 합니다.
->>예) data-format='[["date", 8], ["lpad", 10, "@"]]'
-
+<div class="alert">data-format 이나 data-validate 등 선언형 옵션으로 실행되는 룰 들의 인자들(arguments)은 배열(array) 타입으로 정의하고 인자 순서대로 나열 합니다.
+<p class="alert">예) data-format='[["date", 8], ["lpad", 10, "@"]]'</p></div>
 * __함수__ : 컴포넌트나 라이브러리 인스턴스에서 제공하는 기능과 arguments 에 대한 설명
 
 	예) N([]).grid( { resizeable : true } ).__revert__[<sup>5)</sup>](#fn5)(__3__[<sup>6)</sup>](#fn6))
