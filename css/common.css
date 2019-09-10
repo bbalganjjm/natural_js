@@ -289,12 +289,13 @@ th, tfoot td {
 }
 
 .alert {
-	margin: 5px;
-	padding: 0 0.7em;
-    color: rgba(0, 0, 0, 0.7);
+    margin: 5px;
+    padding: 0.3em 0.5em;
     font-size: 0.95em;
-    border-left: 0.25em solid #A5D6A7;
     line-height: 1.7;
+    border-radius: 3px;
+    opacity: 0.85;
+    background-color: #E8F5E9;
 }
 
 article ul.contents {
