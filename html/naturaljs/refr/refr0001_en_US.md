@@ -1,7 +1,7 @@
-API 문서 안내
+API documentation guide
 ===
 
-API 문서는 Natural-JS 의 컴포넌트와 라이브러리에서 제공하는 기능과 옵션에 대한 사용법과 설명을 제공하는 문서입니다.
+API documentation is a document that provides usage and descriptions of the features and options supported by Natural-JS's components and libraries.
 
 문서는 컴포넌트 라이브러리 단위로 메뉴가 구분 되어 있고 메뉴 별 단락은 다음과 같이 구성 되어 있습니다.
 
