@@ -62,7 +62,7 @@
                             url = menuInfo[2];
                         }
                     }
-alert(url);
+
                     if(self.docs) {
                         if(self.docs.options.order[0] !== docId) {
                             // N.docs MDI 탭 닫을 때 페이지에서 사용된 라이브러리 제거
