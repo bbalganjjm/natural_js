@@ -136,7 +136,7 @@
 			},
 		...
 		
-9. natural.js.min.js 와 natural.ui.css 파일을 다시 받아 주세요(아직 릴리즈는 안됐고 GitHub 들어가서 dist 폴더와 css 폴더에 있는 파일을 받아 주세요).
+9. dist/natural.js.min.js 와 css/natural.ui.css 파일을 다시 받아 주세요(아직 릴리즈는 안됐고 GitHub 들어가서 dist 폴더와 css 폴더에 있는 파일을 받아 주세요).
 
 	A : 여러가지 버그가 Fix 되고 기능이 추가 되었습니다.
 		natural.ui.css 은 변경이 되어서 엎어 칠 수 없다면 823 ~ 871 라인은 필수로 적용 바랍니다(엎퍼 치는게 제일 좋음).
