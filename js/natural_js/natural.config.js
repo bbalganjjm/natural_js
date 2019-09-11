@@ -850,9 +850,13 @@
 			*/
 			"onBeforeActive" : function(docId, isFromDocsTabList, isNotLoaded) {
 			    if(!isNotLoaded) {
-			        // FIXME 메뉴 DB 만들어 지고 페이지 불러오는 서비스 만들어지면 아래 url 제거 바람.
+			        // FIXME 메뉴 DB 만들어 지고 페이지 불러오는 서비스 만들어지면 아래 코드(var hashVal 이전) 제거 바람.
 			        var url = N(".index-lefter.view_context__ a[data-pageid='" + docId + "']").attr("href");
-
+			        if (N.string.trim(location.hash).length === 0 || docId === "home0100") {
+			            docId = "home0100";
+			            url = "html/naturaljs/" + docId.substring(0, 4) + "/" + docId + ".html";
+			        }
+			        
 			        var hashVal = docId + "$" + this.options.docs[docId].docNm + "$" + url;
 			        if(decodeURIComponent(atob(location.hash.replace("#", ""))) != hashVal) {
 			            location.hash = btoa(encodeURIComponent(hashVal));
