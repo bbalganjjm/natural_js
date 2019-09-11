@@ -268,8 +268,8 @@ To convert a parameter string of JSON type to an object such as Map or List on t
 If look at the requested URL after refreshing the page on [Fiddler](https://www.telerik.com/fiddler) or select the Network tab of the developer tool provided by your browser, you can see that the text { "param1" : "This is parameter 1"} is sent to the requested URL
 
 If an HTML element or a jQuery select string is specified as an argument of N() function in N().comm, the HTML block page loaded in the specified element is inserted and If the object of JSON type is specified, it becomes a request parameter of the requested URL.
-Please refer to the [Natural-ARCHITECTURE API Documents](html/refr/refr0103.html) for details on the features provided by N.comm and N.cont.
+Please refer to the [Communicator](#cmVmcjAyMDMlMjRDb21tdW5pY2F0b3IkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDIwMy5odG1s) and [Controller](#cmVmcjAyMDElMjRDb250cm9sbGVyJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAyMDEuaHRtbA==) API Documents of Natural-ARCHITECTURE for details on the features provided by N.comm and N.cont.
 
-Now that you know the basic structure, let's try to develop it with reference to the [API document](html/refr/refr0101.html).
+Now that you know the basic structure, let's try to develop it with reference to the [API document](#cmVmcjAwMDElMjRBUEklMjBEb2N1bWVudGF0aW9uJTIwR3VpZGUkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDAwMS5odG1s).
 
 This site is developed with Natural-JS. A reference to the source code of this site can be found in [Github's "gh-pages" branch](https://github.com/bbalganjjm/natural\_js/tree/gh-pages).

@@ -267,8 +267,8 @@ Natural-JS 의 컴포넌트 데이터 및 데이터 송수신을 위한 데이�
 [Fiddler](https://www.telerik.com/fiddler)나 브라우저에서 제공하는 개발자 도구의 Network 탭을 선택하고 페이지를 리프레쉬 한 다음 요청한 URL을 확인 해 보면 { "param1" : "This is parameter 1" } 라는 텍스트가 요청 한 URL 로 전송 되는 것을 확인 할 수 있습니다.
 
 N().comm 에서 N() 함수의 인자로 HTML 요소나 jQuery select 문자열이 지정 되면 지정 한 요소 안에 불러 온 HTML 블록 페이지를 넣어주고 JSON 형태의 오브젝트를 지정 하면 요청한 URL의 요청 파라미터가 됩니다.
-N.comm 과 N.cont 에서 제공되는 기능에 대한 자세한 내용은 [Natural-ARCHITECTURE API 문서](html/refr/refr0103.html)를 참고 하세요.
+N.comm 과 N.cont 에서 제공되는 기능에 대한 자세한 내용은 Natural-ARCHITECTURE 의 [Communicator](#cmVmcjAyMDMlMjRDb21tdW5pY2F0b3IkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDIwMy5odG1s) 와 [Controller](#cmVmcjAyMDElMjRDb250cm9sbGVyJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAyMDEuaHRtbA==) 의 API 문서 내용을 참고 하세요.
 
-이제 기본 구조를 알았으니 [API 문서](html/refr/refr0101.html)를 참고 해서 신나게 개발 해 볼까요?
+이제 기본 구조를 알았으니 [API 문서](#cmVmcjAwMDElMjRBUEklMjAlRUIlQUMlQjglRUMlODQlOUMlMjAlRUMlOTUlODglRUIlODIlQjQkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDAwMS5odG1s)를 참고 해서 신나게 개발 해 볼까요?
 
 지금 보고 있는 이 사이트도 Natural-JS 로 개발 된 사이트 입니다. 이 사이트의 소스 코드는 [Github 의 gh-pages 브랜치](https://github.com/bbalganjjm/natural_js/tree/gh-pages)에 공개 되어 있으니 참고 바랍니다.
