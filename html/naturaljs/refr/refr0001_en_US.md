@@ -1,4 +1,4 @@
-API documentation guide
+API Documentation Guide
 ===
 
 API documentation is a document that provides usage and descriptions of the features and options supported by Natural-JS's components and libraries.
