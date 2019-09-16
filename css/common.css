@@ -299,6 +299,10 @@ th, tfoot td {
     border: 1px solid #C8E6C9;
 }
 
+.alert p {
+    margin: 0;
+}
+
 article ul.contents {
 	margin: 0 0 15px 0;
 }
