@@ -927,7 +927,9 @@
             ".intr0100",
             ".gtst0100",
             ".gtst0200",
-            ".refr0001:init$"
+            ".refr0001",
+            ".refr060101",
+            ".refr060102:init$"
         ].join(","),
         "adviceType" : "before",
         "fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 함수명, args 인자 */
