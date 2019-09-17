@@ -92,7 +92,7 @@ N.context.attr("ui", {
 
 Natural-JS는 페이지 블록의 소스코드에서 개발영역과 디자인영역을 구분하고 요소(Element)간, 스크립트 간 영역(scope)을 보장 해 주기위한 간단한 소스코드의 구성 규칙이 있습니다. 별로 어렵지 않습니다. 다음과 같이 View 영역과 Controller 영역을 구분하고 순서대로 배치만 해 주면 됩니다.
 
-<p class="alert">View 와 Controller 에 대한 자세한 내용은 <a href="#cmVmcjAyMDElMjRDb250cm9sbGVyJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAyMDEuaHRtbA==">Controller</a> 메뉴의 내용를 참고 해 주세요.</a>
+<p class="alert">View 와 Controller 에 대한 자세한 내용은 <a href="#cmVmcjAyMDElMjRDb250cm9sbGVyJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAyMDEuaHRtbA==">Controller</a> 메뉴를 참고 해 주세요.</a>
 
 **block01.html**
 
@@ -121,7 +121,7 @@ Natural-ARCHITECTURE 기반의 모든 페이지나 페이지 블록 들은 반�
 
 N(".block01").cont object 의 init 함수의 N.comm 함수는 서버에서 데이터를 조회 하는 구문 입니다.
 
-<p class="alert">Natural-JS는 서버와의 데이터 및 파일을 송수신 하는데 Communicator(N.comm) 모듈을 사용 합니다. N.comm 에 대한 자세한 내용은 <a href="#cmVmcjAyMDMlMjRDb21tdW5pY2F0b3IkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDIwMy5odG1s">Communicator</a> 메뉴의 내용를 참고 해 주세요.</p>
+<p class="alert">Natural-JS는 서버와의 데이터 및 파일을 송수신 하는데 Communicator(N.comm) 모듈을 사용 합니다. N.comm 에 대한 자세한 내용은 <a href="#cmVmcjAyMDMlMjRDb21tdW5pY2F0b3IkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDIwMy5odG1s">Communicator</a> 메뉴를 참고 해 주세요.</p>
 
 Natural-JS 의 컴포넌트 데이터 및 데이터 송수신을 위한 데이터 타입은 JSON 이라고 했었죠?
 
