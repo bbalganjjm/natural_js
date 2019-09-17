@@ -1,7 +1,7 @@
 Getting Started Natural-JS
 ===
 
-## Config of Natural-JS and Communicator(N.comm), Controller(N.cont)
+## Configuring Natural-JS Execution Environment
 
 First, download the Natural-JS library files in one of the following ways.
 
@@ -34,7 +34,7 @@ The dependencies for each package are as follows.
 *   When using only Natural-UI : natural.core.js, natural.data.js, natural.ui.js
 *   When using only Natural-UI.Shell : natural.core.js, natural.ui.js, natural.ui.shell.js
 
-Importing only natural.js.min.js does not have a significant impact on performance, as natural.js.min.js has a combined capacity of 210kb for all Natural-JS libraries.
+Importing only natural.js.min.js does not have a significant impact on performance, as natural.js.min.js has a combined capacity of 214kb for all Natural-JS libraries.
 
 Now that you have imported the library, let's set up the environment for running Natural-JS.
 
@@ -44,13 +44,13 @@ Open the natural.config.js file that is a configuration file of Natural-JS.
 /* Natural-ARCHITECTURE Config */
 N.context.attr("architecture", {
 	"page" : {
-		"context" : "#natural_contents"
+		"context" : "#contents"
 	},
 	...
 /* Natural-UI Config */
 N.context.attr("ui", {
 	"alert" : {
-		"container" : "#natural_contents"
+		"container" : "#contents"
 	...
 ```
 
@@ -86,95 +86,52 @@ N.context.attr("ui", {
 	...
 ```
 
-"..." is an ellipsis, so do not put it in. :)
-So now we have finished setting up the environment, so let's start development in earnest.
+You have finished configuring your execution environment. Now let's write some sample code.
+
+##Controller(N.cont) and Communicator(N.comm)
 
 Natural-JS has a simple source code composition rule to separate development areas and design areas within a source code of page block and to guarantee the scope between elements and scripts. It is not so difficult. You just need to separate the view area and the Controller area as shown below and arrange them in order.
 
-[c:/natural\_js/test\_html.html]
+<p class="alert">View 와 Controller 에 대한 자세한 내용은 <a href="#cmVmcjAyMDElMjRDb250cm9sbGVyJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAyMDEuaHRtbA==">Controller</a> 메뉴의 내용를 참고 해 주세요.</a>
+
+**block01.html**
 
 ```
-<!-- View Context -->
-<div id="viewCont">
+<!-- View -->
+<article id="block01">
 	<div id="result">
 	</div>
-</div>
-<!-- View Context -->
+</article>
 
 <script type="text/javascript">
-N("#viewCont").cont({
-	/* Controller Context */
+N(".block01").cont({ // Controller Object
 	init : function(view, request) {
-    	// Start here.
-    }
-    /* Controller Context */
-});
-
-</script>
-```
-
-All pages or page blocks based on Natural-ARCHITECTURE must be composed of the above code form.
-
-Save the above codes as "c:/natural\_js/test\_html.html" and save the codes below as "c:/natural\_js/index.html".
-I will load the "c:/natural\_js/test\_html.html" file from the "c:/natural_js/index.html" file.
-
-[c:/natural\_js/index.html]
-
-```
-<!DOCTYPE html>
-<html>
-<head>
-<meta content="text/html; charset=utf-8" />
-<title>Natural-JS</title>
-<script type="text/javascript" src="js/natural_js/lib/jquery-1.12.4.min.js"></script>
-<link rel="stylesheet" type="text/css" href="js/natural_js/css/natural.ui.css" />
-<script type="text/javascript" src="js/natural_js/natural.js.min.js"></script>
-<script type="text/javascript" src="js/natural_js/natural.config.js"></script>
-
-<script type="text/javascript">
-$(document).ready(function() {
-    ...
+    	N.comm("data.json").submit(function(data) {
+			// data is received data from the server
+			N("#result", view).text(JSON.stringify(data));
+		});
+	}
 });
 </script>
-
-</head>
-<body>
-	<div id="header">
-		<a id="logo" href="index.html">Natural-JS</a>
-	</div>
-	<div id="natural_contents">
-		<!-- This area is the page context(N.context.attr("architecture").page.context). -->
-	</div>
-</body>
-</html>
 ```
 
-$(document).ready is a function provided by jQuery that executes the callback function specified by the argument after the DOM elements of the loaded HTML file are loaded into the browser.
+Natural-ARCHITECTURE 기반의 모든 페이지나 페이지 블록 들은 반드시 위와 같은 코드 폼으로 구성되어 있어야 합니다.
 
-Now I will load the contents of the test\_html.html file created above on the main page. Natural-JS uses the Communicator(N.comm) module to send and receive data and files with the server. For more information about Communicator, see [API / DEMO> Natural-ARCHITECTURE> Communicator Tab] screen.
-Change the contents of the callback argument of the $(document).ready() function to the syntax below.
+위 코드를 **block01.html** 파일로 저장 해 주세요.
 
-```
-...
-$(document).ready(function() {
-	N(N.context.attr("architecture").page.context).comm("test_html.html").submit()
-})
-...
-```
+N(".block01").cont object 의 init 함수의 N.comm 함수는 서버에서 데이터를 조회 하는 구문 입니다.
 
-Now, if you run the "index.html" file, import the contents of the HTML file via N.comm into the "#natural_contents" element and then execute the N.cont's init function immediately.
+<p class="alert">Natural-JS는 서버와의 데이터 및 파일을 송수신 하는데 Communicator(N.comm) 모듈을 사용 합니다. N.comm 에 대한 자세한 내용은 <a href="#cmVmcjAyMDMlMjRDb21tdW5pY2F0b3IkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDIwMy5odG1s">Communicator</a> 메뉴의 내용를 참고 해 주세요.</p>
 
-Now that page is loaded, let's try to load the data using N.comm.
+Natural-JS 의 컴포넌트 데이터 및 데이터 송수신을 위한 데이터 타입은 JSON 이라고 했었죠?
 
-The data type for sending and receiving and components data of Natural-JS is the JSON, right?
+먼저 json 타입으로 데이터를 서비스 해 주는 서버가 필요 하지만 이 문서에서는 데이터를 서비스 해 주는 서버단의 작업에 대해서는 생략 하겠습니다. Spring MVC 나 PHP 로 간단하게 List 나 Map 타입의 객체를 JSON 타입으로 변환 해 주는 모듈들이 많이 있습니다. 아래 사이트에 방문하면 프로그래밍 언어별 변환모듈에 대한 정보가 많이 있습니다.
 
-First, It need a server to serve data in json format, but in this document, I will skip the operation of the server that serves the data. There are a number of modules that simply convert List or Map type objects to JSON types using Spring MVC or PHP. Please refer to the following site for information on conversion modules for each programming language.
+[http://www.json.org/json-ko.html](http://www.json.org/json-ko.html)
 
-[http://www.json.org](http://www.json.org)
+데이터를 임의로 받기 위해 JSON 문자열로 구성 된 데이터 파일(data.json)을 다음과 같이 생성 하고 저장 합니다.
 
-Now create and save a data file (c: /natural\_js/test\_data.json) consisting of the following JSON string.
-
-[c:/natural\_js/test\_data.json]
+**data.json**
 
 ```
 [
@@ -247,47 +204,56 @@ Now create and save a data file (c: /natural\_js/test\_data.json) consisting of 
 ]
 ```
 
-It is normal to run the above files on the web server, but for the easily test, let's try to load the local files with the web browser.
+이제 블록 페이지 1개가 완성 되었습니다. 이 페이지는 Tab 이나 Popup, Documents 컴포넌트로 불러올 수 있고 N.comm 으로 원하는 위치에 넣어 줄 수 있습니다.
 
-Most web browsers are blocked from referencing local files with Ajax. But Firefox is just opened? If IE displays a security warning message, you can allow it. Chrome also has a way to disable it, so you can find it. ^^ Let's start by using Firefox.
+간단하게 인덱스 페이지를 만들고 N.comm 으로 **block01.html** 페이지를 원하는 위치에 불러 와 볼까요? 
 
-```
-...
-N("#viewCont").cont({
-	init : function(view, request) {
-		N.comm("test_data.json").submit(function(data) {
-			// data is received data from the server
-			N("#result", view).text(JSON.stringify(data));
-		});
-    }
-});
-```
+다음 코드를 **index.html** 파일로 저장 해 주세요.
 
-Let's open the pre-written "c: /natural\_js/index.html" file in a web browser. The "c:/natural\_js/test_html.html" file will be loaded by the index page and the init function of the object specified in the argument of N.cont will be executed.
-Then the above code will be executed and the contents of the file loaded into the div element with id as "result" will be displayed.
-If you have a server that can query data, you can enter the URL of the service instead of "c:/natural\_js/test\_data.json".
-If you want to send a parameter to the server, you should put the JSON type parameter as an argument of N() function as follows. That way, the value will be sent to the server in the HTTP Request Body.
-
-To convert a parameter string of JSON type to an object such as Map or List on the server, you must have a [JSON conversion module](http://www.json.org).
-
+**index.html**
 
 ```
-...
-N("#viewCont").cont({
-	init : function(view, request) {
-		N({ "param1" : "This is parameter 1" }).comm("test_data.json").submit(function(data) {
-			// data is received data from the server
-			N("#result", view).text(JSON.stringify(data));
-		});
-    }
-});
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html; charset=utf-8" />
+<title>Natural-JS</title>
+<script type="text/javascript" src="js/natural_js/lib/jquery-1.12.4.min.js"></script>
+<link rel="stylesheet" type="text/css" href="js/natural_js/css/natural.ui.css" />
+<script type="text/javascript" src="js/natural_js/natural.js.min.js"></script>
+<script type="text/javascript" src="js/natural_js/natural.config.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		N(N.context.attr("architecture").page.context).comm("block01.html").submit()
+	});
+</script>
+
+</head>
+<body>
+	<!-- Page Context(N.context.attr("architecture").page.context) elelemt. -->
+	<div id="contents"></div>
+</body>
+</html>
 ```
 
-If look at the requested URL after refreshing the page on [Fiddler](https://www.telerik.com/fiddler) or select the Network tab of the developer tool provided by your browser, you can see that the text { "param1" : "This is parameter 1"} is sent to the requested URL
+**index.html** 파일의 $(document).ready 함수의 콜백 인자는 Communicator(N.comm) 를 이용하여 **block01.html** 페이지를 **#contents**(N.context.attr("architecture").page.context) 요소 안에 불러오는 코드 입니다. N.comm 은 **block01.html** 페이지 로딩이 완료 되면 Controller(N.cont) object 의 init 함수를 실행 해 줍니다.
 
-If an HTML element or a jQuery select string is specified as an argument of N() function in N().comm, the HTML block page loaded in the specified element is inserted and If the object of JSON type is specified, it becomes a request parameter of the requested URL.
-Please refer to the [Communicator](#cmVmcjAyMDMlMjRDb21tdW5pY2F0b3IkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDIwMy5odG1s) and [Controller](#cmVmcjAyMDElMjRDb250cm9sbGVyJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAyMDEuaHRtbA==) API Documents of Natural-ARCHITECTURE for details on the features provided by N.comm and N.cont.
+<p class="alert">$(document).ready는 불러 온 HTML 파일의 DOM 요소들이 브라우저에 적재가 완료 된 다음에 인자로 지정한 콜백함수를 실행 시켜주는 jQuery 에서 제공하는 함수 입니다.</p>
 
-Now that you know the basic structure, let's try to develop it with reference to the [API Documentation](#cmVmcjAwMDElMjRBUEklMjBEb2N1bWVudGF0aW9uJTIwR3VpZGUkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDAwMS5odG1s).
+이제 Natural-JS 를 구동하기 위한 소스 코드 작성이 모두 완료 되었습니다.
 
-This site is developed with Natural-JS. A reference to the source code of this site can be found in [Github's "gh-pages" branch](https://github.com/bbalganjjm/natural\_js/tree/gh-pages).
+지금 까지 작성한 코드들을 실행 하려면 웹서버가 필요 합니다. 
+
+먼저 웹 서버를 설치 하고 웹 Context Root 에 위 index.html, block01.html, data.json 파일을 복사 합니다. 그 다음 웹서버를 구동하고 브라우저로 **index.html** 파일의 주소(URL)를 입력하여 페이지를 열어 보세요. 
+
+index.html 페이지에 의해 **block01.html** 파일이 로딩되고 N.cont 의 인자로 지정 한 오브젝트의 init 함수가 실행 될 것 입니다. 그 다음 **block01.html** 페이지의 id 가 result 인 div 요소 안에 서버에서 전달 된 데이터가 표시 될 것 입니다.
+
+<p class="alert">데이터를 조회 할 수 있는 서버가 있다면 N.comm 의 url 옵션에 <strong>data.json</strong> 대신 해당 서비스의 URL 을 입력 하면 됩니다.</p>
+<p class="alert">서버에서 JSON 타입의 파라미터 문자열을 Map 이나 List 같은 객체로 변환 해서 사용하려면 <a href="http://www.json.org/json-ko.html" target="blank">JSON 변환 모듈</a> 이 있어야 합니다.</p>
+
+이제 기본 환경 구성과 실행 방법을 알았으니 블록 페이지 들이 구동 될 환경을 만들어 볼까요?
+
+[N.docs 로 SPA 환경 구축]() 메뉴를 클릭 해 주세요.
+
+<p class="alert">이 사이트는 Natural-JS 로 개발 된 사이트 입니다. 이 사이트의 소스 코드는 <a href="https://github.com/bbalganjjm/natural_js/tree/gh-pages">Github 의 gh-pages 브랜치</a>에 공개 되어 있으니 참고 바랍니다.
