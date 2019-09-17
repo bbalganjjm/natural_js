@@ -186,7 +186,7 @@
 					/**
 					 * 기본 Request Method
 					 * GET 으로 되어 있으면 JSON 형태의 파라미터가 q라는 파라미터명으로 q={a:1} 와 같이 전달 됩니다.
-					 * JSON Object String 을 Request Body에 온전히 서버로 전송하려면 반드시 POST로 설정 바랍니다.
+					 * JSON Object String 을 Request Body 에 담아 전송하려면 반드시 POST로 설정 바랍니다.
 					 */
 					"type" : "POST",
 					/**
