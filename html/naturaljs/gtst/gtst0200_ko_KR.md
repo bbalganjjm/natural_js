@@ -12,7 +12,7 @@ Documents(N.docs) 컴포넌트를 사용하여 일반적인 업무용 프로그�
  * /js/natural_js/css
  * /html
 
-폴더 생성이 완료 되었으면 다음 파일들을 [GitHub](https://github.com/bbalganjjm/natural_js) 의 dist 와 css, lib 폴더에서 Natural-JS 를 다운로드 하여 복사 합니다. 
+폴더 생성이 완료 되었으면 다음 파일들을 [GitHub](https://github.com/bbalganjjm/natural_js) 의 dist 와 css, lib 폴더에서 다운로드 하여 해당 위치에 복사 합니다. 
 
  * js/natural_js/lib/jquery-1.12.4.min.js
  * js/natural_js/css/natural.ui.css
