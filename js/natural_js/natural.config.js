@@ -926,6 +926,7 @@
         "pointcut" : [
             ".intr0100",
             ".gtst0100",
+            ".gtst0200",
             ".gtst2000",
             ".refr0001",
             ".refr060101",
