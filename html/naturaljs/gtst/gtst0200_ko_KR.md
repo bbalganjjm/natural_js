@@ -1,6 +1,8 @@
 Documents 로 메뉴 프로그램 연동하기(작업 중..)
 ===
 
+[img-0]: ./images/gtst/gtst0200/0.png
+
 Documents(N.docs) 컴포넌트를 사용하여 메뉴를 배치하고 우측에 MDI 형태로 페이지를 표시 해 주는 웹 어플리케이션을 개발 해 보겠습니다.
 <p class="alert">Documents(N.docs) 에 대한 자세한 내용은 <a href="#cmVmcjA1MDIlMjREb2N1bWVudHMkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDUwMi5odG1s">Documents</a> 메뉴를 참고 해 주세요.</p>
 
@@ -20,8 +22,10 @@ Documents(N.docs) 컴포넌트를 사용하여 메뉴를 배치하고 우측에 
  * js/natural_js/natural.config.js
 
 
+![개발 프로젝트 구성][img-0]
 
-프로젝트 구성이 완료 되었으면 다음 코드를 **/html/index.html** 파일로 저장 해 주세요.
+
+프로젝트 구성이 완료 되었으면 다음 코드를 **/index.html** 파일로 저장 해 주세요.
 
 **index.html**
 
