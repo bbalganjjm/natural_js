@@ -7,16 +7,16 @@
 [eclipse-download]: https://www.eclipse.org/downloads/eclipse-packages/
 [jdk]: http://www.oracle.com/technetwork/java/javase/downloads/index.html
 
-[img-0]: ./images/gtst/gtst0200/0.png
-[img-1]: ./images/gtst/gtst0200/1.png
-[img-2]: ./images/gtst/gtst0200/2.png
-[img-3]: ./images/gtst/gtst0200/3.png
-[img-4]: ./images/gtst/gtst0200/4.png
-[img-5]: ./images/gtst/gtst0200/5.png
-[img-6]: ./images/gtst/gtst0200/6.png
-[img-7]: ./images/gtst/gtst0200/7.png
-[img-8]: ./images/gtst/gtst0200/8.png
-[img-9]: ./images/gtst/gtst0200/9.png
+[img-0]: ./images/gtst/gtst2000/0.png
+[img-1]: ./images/gtst/gtst2000/1.png
+[img-2]: ./images/gtst/gtst2000/2.png
+[img-3]: ./images/gtst/gtst2000/3.png
+[img-4]: ./images/gtst/gtst2000/4.png
+[img-5]: ./images/gtst/gtst2000/5.png
+[img-6]: ./images/gtst/gtst2000/6.png
+[img-7]: ./images/gtst/gtst2000/7.png
+[img-8]: ./images/gtst/gtst2000/8.png
+[img-9]: ./images/gtst/gtst2000/9.png
 
 ## 샘플 프로젝트 구성
 
