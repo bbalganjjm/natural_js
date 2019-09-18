@@ -208,12 +208,12 @@
 					 */
 					error : function(request, xhr, textStatus, errorThrown) {
 						if((xhr.getResponseHeader("Content-Type") && xhr.getResponseHeader("Content-Type").indexOf("html") > -1) || request.options.dataType === "html") {
-							if(request.options.target.html !== undefined) {
+							if(request.options.target != null && request.options.target.html !== undefined) {
 								request.options.target.html('<div style="text-align: center; margin-top: 140px;margin-bottom: 140px;">[ ' + request.options.url + ' ] 페이지를 불러오는 도중 에러가 발생 했습니다.</div>');
 							} else {
 								N(window).alert('[ ' + request.options.url + ' ] 페이지를 불러오는 도중 에러가 발생 했습니다.').show();
 							}
-							if(request.options.target.is(".docs_contents")) {
+							if(request.options.target != null && request.options.target.is(".docs_contents")) {
 							    request.options.target.removeClass("hidden__").addClass("visible__")
 							        .siblings(".docs_contents__").removeClass("visible__").addClass("hidden__");
 							}
