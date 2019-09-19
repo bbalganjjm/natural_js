@@ -1,7 +1,7 @@
-Linking menu programs with Documents
+Create a web application base frame
 ===
 
-Documents(N.docs) 컴포넌트를 사용하여 메뉴를 배치하고 우측에 MDI 형태로 페이지를 표시 해 주는 Single Page Web Application 을 개발 해 보겠습니다.
+메뉴를 좌측에 배치하고 우측에  MDI 형태로 페이지를 표시 해 주는 Documents(N.docs) 컴포넌트를 적용 하여 Single Page Web Application 을 개발 해 보겠습니다.
 
 <p class="alert">Documents(N.docs) 에 대한 자세한 내용은 <a href="#cmVmcjA1MDIlMjREb2N1bWVudHMkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDUwMi5odG1s">Documents</a> 메뉴를 참고 해 주세요.</p>
 
@@ -36,8 +36,8 @@ Documents(N.docs) 컴포넌트를 사용하여 메뉴를 배치하고 우측에 
 <title>Natural-JS</title>
 <script type="text/javascript" src="js/natural_js/lib/jquery-1.12.4.min.js"></script>
 <link rel="stylesheet" type="text/css" href="js/natural_js/css/natural.ui.css" />
-<script type="text/javascript" src="js/natural_js/natural.js.min.js"></script>
-<script type="text/javascript" src="js/natural_js/natural.config.js"></script>
+<script type="text/javascript" src="js/natural_js/natural.js.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/natural_js/natural.config.js" charset="utf-8"></script>
 
 <style type="text/css">
 html {
@@ -289,8 +289,4 @@ N(".page01").cont({
 
 전체 소스코드는 [여기](html/naturaljs/gtst/codes/natural_js_gtst.zip) 에서 다운로드 할 수 있습니다. 
 
-다음 단계 에서는 Natural-UI 패키지에서 제공하는 컴포넌트들로 이 컨텐츠 영역을 채워 보겠습니다.
-
- * [N.grid 로 데이터 CRUD 하기](#a)
- * [N.grid 와 N.form 연동하기](#b)
- * [N.form 과 N.popup 연동하기](#c)
+다음 단계([N.grid 로 CRUD 하기](#Z3RzdDAzMDAlMjRDUlVEJTIwd2l0aCUyMEdyaWQkaHRtbCUyRm5hdHVyYWxqcyUyRmd0c3QlMkZndHN0MDMwMC5odG1s)) 에서는 Natural-UI 패키지에서 제공하는 컴포넌트들로 이 컨텐츠 영역을 채워 보겠습니다.

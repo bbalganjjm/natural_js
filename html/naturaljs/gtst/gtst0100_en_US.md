@@ -20,8 +20,8 @@ Now you can create a top-level HTML file and import the above files into the pag
 ```
 <script type="text/javascript" src="js/natural_js/lib/jquery-1.12.4.min.js"></script>
 <link rel="stylesheet" type="text/css" href="js/natural_js/css/natural.ui.css" />
-<script type="text/javascript" src="js/natural_js/natural.js.min.js"></script>
-<script type="text/javascript" src="js/natural_js/natural.config.js"></script>
+<script type="text/javascript" src="js/natural_js/natural.js.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/natural_js/natural.config.js" charset="utf-8"></script>
 ```
 
 If you want to use the entire CORE, ARCHITECTURE, DATA, UI, UI.Shell, import natural.js.min.js and if you want to use it separately for each package, you can import it separately.

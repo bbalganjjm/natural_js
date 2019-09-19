@@ -20,8 +20,8 @@ Natural-JS 시작하기
 ```
 <script type="text/javascript" src="js/natural_js/lib/jquery-1.12.4.min.js"></script>
 <link rel="stylesheet" type="text/css" href="js/natural_js/css/natural.ui.css" />
-<script type="text/javascript" src="js/natural_js/natural.js.min.js"></script>
-<script type="text/javascript" src="js/natural_js/natural.config.js"></script>
+<script type="text/javascript" src="js/natural_js/natural.js.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/natural_js/natural.config.js" charset="utf-8"></script>
 ```
 
 CORE, ARCHITECTURE, DATA, UI, UI.Shell 전체를 사용하기 원한다면 natural.js.min.js 를 임포트(Import) 하고 각 패키지 별로 따로 사용하기 원한다면 따로 임포트 하면 됩니다.
