@@ -146,18 +146,18 @@ Grid 로 CRUD 하기
 </script>
 ```
 
-코드가 길어서 그렇지 Style, View 영역과 Controller 영역을 구분 해 보면 간단 해 집니다. 30초만 집중 해서 봐 봅시다. 매트릭스 네오처럼 코드들이 한눈에 들어오지 않나요? -.-; 
+코드가 길어서 그렇지 Style, View 영역과 Controller 영역을 구분 해 보면 간단 해 집니다. 30초만 집중 해서 봅시다. 매트릭스 네오처럼 코드들이 한눈에 들어오지 않나요? -.-; 
 
 실제 Style 을 공통 css 파일로 통합 하면 위 Style 영역은 없어도 되는데 Natural-JS 의 Data 관련 컴포넌트들은 정의 된 요소의 스타일을 그대로 따르니 단독으로 실행 시켜보기 위해 Style 을 정의 할 수 밖에 없었습니다.
-<p class="alert">Natural-JS 기반의 프로젝트를 진행 할 때는 HTML 과 CSS 로 화면을 퍼블리싱 해 주는 퍼블리셔와 함께하면 UI 품질과 생산성을 동시에 얻을 수 있습니다. 퍼블리셔는 Natural-JS 를 위한 별도의 학습이 필요도 없고 웹 표준대로만 퍼블리싱 해 주면 됩니다.</p>
+<p class="alert">Natural-JS 로 프로젝트를 진행 할 때는 HTML 과 CSS 로 화면을 퍼블리싱 해 주는 퍼블리셔와 함께하면 UI 품질과 생산성을 동시에 얻을 수 있습니다. 퍼블리셔는 Natural-JS 를 위한 별도의 학습과정이 필요 없고 웹 표준에 맞춰 퍼블리싱 해 주면 됩니다.</p>
 
 위 코드에서 집중해야 할 부분은 View 영역 입니다. Controller 부분은 일부러 틀만 만들고 비워 놓았습니다. 하나씩 채워 가려구요.
 
-맨위에 **.search-conditions** 요소는 검색조건을 입력 할 검색 박스 입니다. 그 아래 **.buttons** 요소에는 버튼들이 배치 되고 **.result** 요소에는 조회된 결과 데이터를 Grid 로 표현하기 위해 N.grid 의 context 요소인 Table 태그를 정의 했습니다. N.grid 컴포넌트를 적용하려면 반드시 그리드로 만들어질 **table** 태그가 있어야 하고 table 태그에 반드시 **thead**(그리드 헤더) 와 **tbody**(그리드 바디) 요소가 있어야 합니다. N.grid 의 행 들은 **tbody** 요소를 그대로 복제하여 데이터의 행 수 만큼 표시 해 줍니다. 각 컴포넌트에 대한 상세한 내용은 관련 문서를 참고 하기 바랍니다.
+맨위에 **.search-conditions** 요소는 검색조건을 입력 할 검색 박스 입니다. 그 아래 **.buttons** 요소에는 버튼들이 배치 되고 **.result** 요소에는 조회 된 결과 데이터를 Grid 로 표현하기 위해 N.grid 의 context 요소인 Table 을 만들었습니다. N.grid 컴포넌트를 적용하려면 반드시 그리드로 만들어질 **table** 태그가 있어야 하고 table 태그에 **thead**(그리드 헤더) 와 **tbody**(그리드 바디) 요소가 있어야 합니다. N.grid 의 행 들은 **tbody** 요소를 그대로 복제하여 데이터의 행 수 만큼 표시 해 줍니다. 각 컴포넌트에 대한 상세한 내용은 관련 문서를 참고 하기 바랍니다.
 
 ##Controller 영역 코딩
 
-Controller 영역을 보면 기존 방식과 다르게
+이번 예제에서 Controller 영역을 보면 기존 방식과 다르게 cont 변수에 Controller Object 인스턴스를 담는 코드와 이를 함수로 감싸서 바로 실행하는 코드가 작성 되어 있습니다.
 
 ```
 (function() {
@@ -169,13 +169,14 @@ Controller 영역을 보면 기존 방식과 다르게
 })();
 ```
 
-와 같이 Controller 영역을 정의 했습니다. 이유는 어떠한 Function Scope 에서나 Contoller(N.cont) Object 를 접근하기 위해  cont 라는 변수로 Contoller(N.cont) Object 인스턴스를 담아 놓았습니다. Natural-JS 에서는 init 함수만 다루지만 init 함수에 모든 코드를 넣는다면 가독성이 떨어져 개발이 어려워 져 용도별로 함수 셋들을 나누고 싶어 할 것 입니다. 함수 셋들이 여러개로 나뉘어 지고 함수 셋의 하위 함수나 이벤트 핸들러, 콜백 함수안에서는 this 가 달라지기 때문에 Contoller Object 에 접근하기 위한 추가 코드들이 필요 합니다. 
+이유는 어떠한 Function Scope 에서나 Contoller(N.cont) Object 에 접근하기 위해서 입니다.
+이 페이지를 불러오는 Communicator 는 init 함수에만 관련 있지만 init 함수에 이 페이지와 관련 된 모든 코드를 넣는다면 가독성이 떨어져 개발이 어려워질 것 입니다. 자연스럽게 함수 셋들이 여러개로 나뉘어 지고 함수 셋의 하위 함수나 이벤트 핸들러, 콜백 함수안에서는 this 가 바라보는 객체가 달라져 Contoller Object 에 접근하기 위한 추가 코드들이 필요하게 될 것 입니다.
 
 위와 같이 Controller 를 정의하하고 cont 변수에 N().cont() 함수 를 실행 하면 함수의 어떤 위치에서나 cont 변수로 Controller Object 에 접근 할 수 있습니다.
 <p class="alert">실제 Natural-JS 로 프로젝트를 진행하다 보면 view 나 request, caller 등의 Controller 오브젝트에 담겨있는 고유 객체들을 참고하거나 페이지 전역변수를 담기 위해 Controller Object 에 접근해야 할 때가 많습니다.</p>
-<p class="alert">SPA 로 메뉴 컨텐츠 들을 개발 할 때는 최상위 객체인 window 객체는 없다라고 생각 해 주세요. Controller Object 가 해당 페이지의 최상위 객체라 생각하고 페이지 별 전역변수를 정의 해야 합니다. 만일 window 객체에 전역변수를 무분별하게 정의 하면 프로그램을 쓰면 쓸수록 느려 질 것 입니다. Natural-JS 는 Controller Object 에 대해서는 리소스 관리를 해 주지만 window 객체에 바인딩 되어 있는 전역 변수들에 대해서는 리소스 관리를 하지 않습니다.</p>
+<p class="alert">SPA 로 메뉴 컨텐츠 들을 개발 할 때는 최상위 객체인 window 객체는 없다라고 생각 해 주세요. Controller Object 가 해당 페이지의 최상위 객체라 생각하고 페이지 별 전역변수를 정의 해야 합니다. 만일 window 객체에 전역변수를 무분별하게 정의 하면 프로그램을 쓰면 쓸수록 느려 지는 문제가 발생 합니다. Natural-JS 는 Controller Object 에 대해서는 리소스 관리를 해 주지만 window 객체에 바인딩 되어 있는 전역 변수들에 대해서는 리소스 관리를 하지 않습니다.</p>
 
-이제 각 요소들에 다음과 같은 컴포넌트들를 적용하여 생명을 불어 넣어 줘 보겠습니다.
+이제 각 요소들에 다음과 같은 컴포넌트들를 적용하여 생명을 불어 넣어 보겠습니다.
 
  * .search-conditions : **N.form**
  * .search-conditions #gender : **N.select**
