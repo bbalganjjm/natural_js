@@ -148,7 +148,7 @@ Grid 로 CRUD 하기
 
 코드가 길어서 그렇지 Style, View 영역과 Controller 영역을 구분 해 보면 간단 해 집니다. 30초만 집중 해서 봅시다. 매트릭스 네오처럼 코드들이 한눈에 들어오지 않나요? -.-; 
 
-Style 영역을 공통 css 파일로 통합 하면 위 Style 영역은 없어도 되는데 Natural-JS 의 Data 관련 컴포넌트들은 정의 된 요소의 스타일을 그대로 따르니 단독으로 실행 시켜보기 위해 Style 을 정의 할 수 밖에 없었습니다.
+Style 영역을 공통 css 파일로 통합 하면 위 Style 영역은 없어도 되는데 Natural-JS 의 Data 관련 컴포넌트들은 정의 된 context 요소의 스타일이 그대로 적용 되는것을 보기 위해 페이지에 Style 을 정의 했습니다.
 <p class="alert">Natural-JS 로 프로젝트를 진행 할 때는 HTML 과 CSS 로 화면을 퍼블리싱 해 주는 퍼블리셔와 함께하면 UI 품질과 생산성을 동시에 얻을 수 있습니다. 퍼블리셔는 Natural-JS 를 위한 별도의 학습과정이 필요 없고 웹 표준에 맞춰 퍼블리싱 해 주면 됩니다.</p>
 
 위 코드에서 집중해야 할 부분은 View 영역 입니다. Controller 부분은 일부러 틀만 만들고 비워 놓았습니다. 하나씩 채워 가려구요.
@@ -170,7 +170,7 @@ Style 영역을 공통 css 파일로 통합 하면 위 Style 영역은 없어도
 ```
 
 이유는 어떠한 Function Scope 에서나 Contoller(N.cont) Object 에 접근하기 위해서 입니다.
-이 페이지를 불러오는 Communicator 는 init 함수에만 관련 있지만 init 함수에 이 페이지와 관련 된 모든 코드를 넣는다면 가독성이 떨어져 개발이 어려워질 것 입니다. 자연스럽게 함수 셋들이 여러개로 나뉘어 지고 함수 셋의 하위 함수나 이벤트 핸들러, 콜백 함수안에서는 this 가 바라보는 객체가 달라져 Contoller Object 에 접근하기 위한 추가 코드들이 필요하게 될 것 입니다.
+만약 init 함수에 이 페이지와 관련 된 모든 코드를 넣는다면 가독성이 떨어져 개발이 어려워질 것 입니다. 자연스럽게 함수 셋들이 여러개로 나누어 지고 함수 셋의 하위 함수나 이벤트 핸들러, 콜백 함수 안 에서는 this 가 바라보는 객체가 달라져 Contoller Object 에 접근하기 위한 추가 코드들이 필요하게 될 것 입니다.
 
 위와 같이 Controller 를 정의하하고 cont 변수에 N().cont() 함수 를 실행 하면 함수의 어떤 위치에서나 cont 변수로 Controller Object 에 접근 할 수 있습니다.
 <p class="alert">실제 Natural-JS 로 프로젝트를 진행하다 보면 view 나 request, caller 등의 Controller 오브젝트에 담겨있는 고유 객체들을 참고하거나 페이지 전역변수를 담기 위해 Controller Object 에 접근해야 할 때가 많습니다.</p>
