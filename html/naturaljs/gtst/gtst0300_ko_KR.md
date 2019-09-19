@@ -181,7 +181,8 @@ Controller 영역을 보면 기존 방식과 다르게
  * .result .grid : **N.grid**
  * .result .grid #eyeColor : **N.select**
  
- 작업중....
+ 
+<p class="alert">문서 작업이 진행 중 입니다.</p>
  
  
 
