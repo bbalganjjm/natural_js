@@ -25,6 +25,8 @@ N.grid 로 데이터 CRUD(입력/조회/수정/삭제) 하기
 ...
 ```
 
+##View 영역 코딩
+
 메뉴 추가가 완료 되었으면
 **/html/contents/page6.html** 파일을 생성하고 다음과 같이 코드를 작성 합니다.
 
@@ -153,6 +155,8 @@ N.grid 로 데이터 CRUD(입력/조회/수정/삭제) 하기
 
 맨위에 **.search-conditions** 요소는 검색조건을 입력 할 검색 박스 입니다. 그 아래 **.buttons** 요소에는 버튼들이 배치 되고 **.result** 요소에는 조회된 결과 데이터를 Grid 로 표현하기 위해 N.grid 의 context 요소인 Table 태그를 정의 했습니다. N.grid 컴포넌트를 적용하려면 반드시 그리드로 만들어질 **table** 태그가 있어야 하고 table 태그에 반드시 **thead**(그리드 헤더) 와 **tbody**(그리드 바디) 요소가 있어야 합니다. N.grid 의 행 들은 **tbody** 요소를 그대로 복제하여 데이터의 행 수 만큼 표시 해 줍니다. 각 컴포넌트에 대한 상세한 내용은 관련 문서를 참고 하기 바랍니다.
 
+##Controller 영역 코딩
+
 Controller 영역을 보면 기존 방식과 다르게
 
 ```
@@ -165,7 +169,10 @@ Controller 영역을 보면 기존 방식과 다르게
 })();
 ```
 
-와 같이 정의를 했습니다. 이유는 어떠한 Function Scope 에서나 Contoller(N.cont) Object 를 접근하기 위해  cont 라는 변수로 Contoller(N.cont) Object 인스턴스를 담아 놓았습니다. Natural-JS 에서는 init 함수만 다루지만 init 함수에 모든 코드를 넣는다면 가독성이 떨어져 개발이 어려워 져 용도별로 함수 셋들을 나누고 싶어 할 것 입니다. 함수 셋들이 여러개로 나뉘어 지고 함수 셋의 하위 함수나 이벤트 핸들러, 콜백 함수들은 this 가 다르기 때문에 Contoller Object 에 접근하기 위한 추가 코드들이 필요 합니다. 실제 Natural-JS 로 프로젝트를 진행하다 보면 view 나 request, caller 등의 Controller 오브젝트에 담겨있는 고유 객체들을 참고하거나 전역 변수를 담기 위해 Controller Object 에 접근해야 할 때가 많습니다.
+와 같이 Controller 영역을 정의 했습니다. 이유는 어떠한 Function Scope 에서나 Contoller(N.cont) Object 를 접근하기 위해  cont 라는 변수로 Contoller(N.cont) Object 인스턴스를 담아 놓았습니다. Natural-JS 에서는 init 함수만 다루지만 init 함수에 모든 코드를 넣는다면 가독성이 떨어져 개발이 어려워 져 용도별로 함수 셋들을 나누고 싶어 할 것 입니다. 함수 셋들이 여러개로 나뉘어 지고 함수 셋의 하위 함수나 이벤트 핸들러, 콜백 함수안에서는 this 가 달라지기 때문에 Contoller Object 에 접근하기 위한 추가 코드들이 필요 합니다. 
+
+위와 같이 Controller 를 정의하하고 cont 변수에 N().cont() 함수 를 실행 하면 함수의 어떤 위치에서나 cont 변수로 Controller Object 에 접근 할 수 있습니다.
+<p class="alert">실제 Natural-JS 로 프로젝트를 진행하다 보면 view 나 request, caller 등의 Controller 오브젝트에 담겨있는 고유 객체들을 참고하거나 페이지 전역변수를 담기 위해 Controller Object 에 접근해야 할 때가 많습니다.</p>
 <p class="alert">SPA 로 메뉴 컨텐츠 들을 개발 할 때는 최상위 객체인 window 객체는 없다라고 생각 해 주세요. Controller Object 가 해당 페이지의 최상위 객체라 생각하고 페이지 별 전역변수를 정의 해야 합니다. 만일 window 객체에 전역변수를 무분별하게 정의 하면 프로그램을 쓰면 쓸수록 느려 질 것 입니다. Natural-JS 는 Controller Object 에 대해서는 리소스 관리를 해 주지만 window 객체에 바인딩 되어 있는 전역 변수들에 대해서는 리소스 관리를 하지 않습니다.</p>
 
 이제 각 요소들에 다음과 같은 컴포넌트들를 적용하여 생명을 불어 넣어 줘 보겠습니다.
@@ -181,4 +188,8 @@ Controller 영역을 보면 기존 방식과 다르게
  * .result .grid : **N.grid**
  * .result .grid #eyeColor : **N.select**
  
+ 
 <p class="alert">문서 작업이 진행 중 입니다.</p>
+ 
+ 
+
