@@ -413,5 +413,6 @@ bindEvents : function() {
 5. 저장 완료 후 N.notify 컴포넌트로 전역 메시지 표시
 6. 조회버튼을 클릭 하여 변경 된 데이터 재 조회
 
-<p class=“alert”>이 문서는 완성 된 문서가 아닙니다.<p>
+
+<p class=“alert”>이 문서는 완성 된 문서가 아닙니다.</p>
 
