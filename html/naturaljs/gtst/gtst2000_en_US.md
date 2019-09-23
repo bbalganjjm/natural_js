@@ -1,4 +1,4 @@
-샘플 프로젝트로 시작하기(작업 중)
+샘플 프로젝트로 시작하기
 ===
 
 <ul class="contents links" style="margin-left: -267px;width: 237px;"></ul>
@@ -103,7 +103,3 @@ http://localhost/index.html
 
 ## 예제
 현재 보고 있는 Natural-JS 홈페이지의 예제는 서버와 연동되어 있지 않는 클라이언트 소스 예제이지만 `natural-js-spring-boot` 프로젝트의 예제는 서버(DB)와 연동되어 CRUD(생성, 조회, 수정, 삭제) 가 물리적으로 처리되는 예제입니다.
-
-다음은 예제 소스코드들에 대한 설명입니다.
-
-#작업 중...

@@ -1,7 +1,7 @@
 Retrieving / Modifying Data with Grid
 ===
 
-Grid 로 입력/조회/수정/삭제를 처리 하기 위해 조회조건 영역과 조회 결과 Grid 로 이루어진 프로그램을 개발 해 보겠습니다.
+Grid 로 생성/조회/수정/삭제를 처리 하기 위해 조회조건 영역과 조회 결과 Grid 로 이루어진 프로그램을 개발 해 보겠습니다.
 
 코드 데이터들은 [Select](#cmVmcjA0MDYlMjRTZWxlY3QkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDQwNi5odG1s)(N.select) 컴포넌트를 사용하여 데이터를 바인딩 하고 [Form](#cmVmcjA0MDclMjRGb3JtJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjA0MDcuaHRtbA==)(N.form) 컴포넌트로 조회조건 영역을 폼으로 생성하고  [Grid](#cmVmcjA0MDklMjRHcmlkJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjA0MDkuaHRtbA==)(N.grid) 컴포넌트로 입력/조회/수정/삭제 할 수 있는 그리드를 생성 할 것 입니다.
 버튼 들은 [Button](#cmVmcjA0MDIlMjRCdXR0b24kaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDQwMi5odG1s)(N.button) 컴포넌트를 사용 합니다.
