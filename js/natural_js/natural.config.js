@@ -1064,7 +1064,7 @@
         "fn" : function(cont, fnChain, args){
             N(window).trigger("resize.mobile", [ cont.view ]);
         }
-    }, {
+    }, { // 소스보기 버튼 처리
         "pointcut" : "^init$",
         "adviceType" : "before",
         "fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 함수명, args 인자 */
