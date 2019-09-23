@@ -65,7 +65,7 @@
 <script type="text/javascript">
     N(".index-header").cont({
         init : function(view, request) {
-			// 언어선택
+			// Language link
         	view.find(".korean").click(function(e) {
 				e.preventDefault();
 				window.sessionStorage.locale = "ko_KR";
@@ -77,7 +77,7 @@
 				window.location.reload();
 			});
 
-			// 컬러테마 선택
+			// Color select
             var colorSelect = N(".theme-color", view);
 			for(var k in APP.indx.colorPalette) {
 				var selected="";

@@ -276,7 +276,6 @@
                 var selfEle = N(this);
 
                 if(selfEle.parent().is(".leaf-node") && selfEle.is("[data-pageid]")) {
-                 	// FIXME 메뉴 DB 만들어 지고 페이지 불러오는 서비스 만들어지면 encodeURIComponent(selfEle.attr("href")) 제거 바람.
                     location.hash = btoa(encodeURIComponent(selfEle.data("pageid") + "$" + selfEle.find("span").text()) + "$" + encodeURIComponent(selfEle.attr("href")));
 
                  	if($(window).width() <= 560) {
