@@ -1064,6 +1064,37 @@
         "fn" : function(cont, fnChain, args){
             N(window).trigger("resize.mobile", [ cont.view ]);
         }
+    }, {
+        "pointcut" : "^init$",
+        "adviceType" : "before",
+        "fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 함수명, args 인자 */
+            var view = args[0];
+            var url = cont.request.get("url");
+            
+            if(cont.view.hasClass("view-code")) {
+                var btnEle = N('<a class="click">View Source Code</a>');
+                if(view.find(btnEle).length === 0) {
+                    view.append(btnEle);
+                    view.append('<pre id="sourceCodeBox" class="line-numbers" style="display: none;"><code id="sourceCode" class="language-markup"></code></pre>');
+                    btnEle.click(function() {
+                        var sourceCodeBox = btnEle.next("#sourceCodeBox");
+                        if(!sourceCodeBox.is(":visible")) {
+                            sourceCodeBox.slideDown();
+                        } else {
+                            sourceCodeBox.slideUp();
+                        }
+                    });
+                    N.comm({
+                        url : url,
+                        contentType : "text/plain; charset=UTF-8",
+                        dataType : "text",
+                        type : "GET"
+                    }).submit(function(html) {
+                        N("#sourceCode", view).text(html);
+                    });
+                }
+            }
+        }
     });
 
 })(N);
