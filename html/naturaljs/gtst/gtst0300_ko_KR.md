@@ -275,7 +275,7 @@ initComponents : function() {
 이 생성 된 데이터는 입력요소의 값이 바뀔 때 마다 동기화 됩니다. 때문에 다음과 같이 서버에서 데이터를 조회 할 때 다음과 같이 선언만 해 놓으면 마지막 입력한 검색조건이 서버로 전달이 됩니다.
 
 ```
-N(cont.form.data()).comm("getSampleList.json").submit(function(data) {
+N(cont.form.data()).comm("data.json").submit(function(data) {
 	N.log(data);
 });
 ```
@@ -315,7 +315,7 @@ bindEvents : function() {
 	    e.preventDefault();
 	    if(cont.form.validate()) {
 	    	cont.form.data(false).comm({
-	    	    url : "getSampleList.json",
+	    	    url : "data.json",
 	    	    type : "GET"
 	    	}).submit(function(data) {
 	     		// Data bind by N.grid
@@ -356,14 +356,14 @@ bindEvents : function() {
 		var checkedIndexs = cont.grid.check();
 		if(checkedIndexs.length > 0) {
 		    N(window).alert({
-				msg : "삭제 하겠습니까?<br/>저장 버튼을 누르기 전까지는 DB 에 반영 되지 않습니다.",
+				msg : "Are you sure you want to delete?<br/>It will not be saved in DBMS until you press the Save button.",
 				confirm : true,
 				onOk : function() {
 					cont.grid.remove(checkedIndexs);
 				}
 			}).show();
 		} else {
-			N(window).alert("선택된 행이 없습니다.").show();
+			N(window).alert("No rows selected.").show();
 		}
 	}).button();
 }
@@ -380,21 +380,21 @@ bindEvents : function() {
 		e.preventDefault();
 		
 		if(cont.grid.data("modified").length === 0) {
-			N(window).alert("변경된 데이터가 없습니다.").show();
+			N(window).alert("No data has been changed.").show();
 			return false;
 		}
 		
 		if(cont.grid.validate()) {
 			N(window).alert({
-				msg : "저장 하겠습니까?",
+				msg : "Do you want to save?",
 				confirm : true,
 				onOk : function() {
 					N(cont.grid.data("modified")).comm({
 					   type : "GET",
 						dataIsArray : true,
-						url : "getSampleList.json"
+						url : "data.json"
 					}).submit(function(data) {
-						N.notify.add("저장이 완료 되었습니다.");
+						N.notify.add("Save completed.");
 						N("#btnSearch", cont.view).click();
 					});
 				}
@@ -404,7 +404,9 @@ bindEvents : function() {
 }
 ```
 
-저장 이벤트의 로직은 다음 순서로 진행 이 됩니다.
+<p class="alert">위 코드 에서 N.comm 의 옵션 중 type 은 웹 서버에 POST 방식으로 요청을 할 수 없어 임의로 정의 한 옵션 입니다. WAS 나 PHP 와 연동하여 사용 할 경우에는 natural.config.js 에 type 의 기본값이 "POST" 로 정의 되어 있으니 type 옵션을 제거 바랍니다. type 옵션 에 대한 자세한 내용은 <a href="#cmVmcjAyMDQlMjRDb21tdW5pY2F0b3IucmVxdWVzdCRodG1sJTJGbmF0dXJhbGpzJTJGcmVmciUyRnJlZnIwMjA0Lmh0bWw=">Communicator.request</a> 문서의 [기본옵션]탭을 참고 해 주세요.</p>
+
+저장 이벤트의 실행 로직은 다음과 같습니다.
 
 1. 변경된 데이터 체크 : ```if(cont.grid.data("modified").length === 0) {```
 2. 추가, 수정 된 입력 값에 대한 유효성 체크 :  ```if(cont.grid.validate()) {```
@@ -412,7 +414,6 @@ bindEvents : function() {
 4. N.comm 의 파라미터로 그리드의 변경 된 데이터만 추출(```cont.grid.data("modified")```)하여 서버에 전송.
 5. 저장 완료 후 N.notify 컴포넌트로 전역 메시지 표시
 6. 조회버튼을 클릭 하여 변경 된 데이터 재 조회
-
 
 <p class=“alert”>이 문서는 완성 된 문서가 아닙니다.</p>
 
