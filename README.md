@@ -39,4 +39,4 @@ Installs
 
 License
 =======
-This software is licensed under the LGPL v2.1. &copy; KIM HWANG MAN(bbalganjjm@gmail.com) 
+This software is licensed under the LGPL v2.1. &copy; [KIM HWANG MAN](bbalganjjm@gmail.com) 
