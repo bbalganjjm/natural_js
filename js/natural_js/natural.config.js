@@ -167,7 +167,6 @@
 	                                    ".page-header",                         // view 컨텍스트 정의 안함.
 	                                    ".index-lefter",                        // view 컨텍스트 정의 안함.
 	                                    ".index-contents",                      // view 컨텍스트 정의 안함.
-	                                    ".docs-contents-side",                  // view 컨텍스트 정의 안함.
 	                                    ".index-footer",                        // view 컨텍스트 정의 안함.
 
 	                                    'N("#selectDocs", view)).bind().val'    // jQuery val 을 사용하여 입력 값을 수정
