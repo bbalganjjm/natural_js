@@ -30,7 +30,7 @@ Features
 
 Documentation
 =========
-* API/DEMO : http://bbalganjjm.github.io/natural_js
+* Introduction and API/DEMO Site : http://bbalganjjm.github.io/natural_js
 
 Installs
 =========
