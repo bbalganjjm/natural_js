@@ -318,7 +318,7 @@ bindEvents : function() {
 	N("#btnSearch", cont.view).click(function(e) {
 	    e.preventDefault();
 	    if(cont.form.validate()) {
-	    	cont.form.data(false).comm({
+	    	N(cont.form.data(true)).comm({
 	    	    url : "data.json",
 	    	    type : "GET"
 	    	}).submit(function(data) {
@@ -423,7 +423,6 @@ bindEvents : function() {
 <p class="alert">입력요소의 값을 변경하거나 cont.grid.val() 메서드로 데이터를 변경하면 <strong>rowStatus</strong> 프로퍼티가 생성되고, 입력은 "insert", 수정은 "update", 삭제는 "delete" 값이 입력 됩니다. <strong>서버 에서는</strong> 행 데이터 객체 마다 정의 되어 있는 <strong>rowStatus 값으로 입력/수정/삭제 를 구분 해서 처리</strong> 하면 됩니다.</p>
 6. 조회버튼을 클릭 하여 변경 된 데이터 재 조회
 
-
 웹 서버에 지금까지 작성한 소스 파일들을 배포한 다음 **/index.html** 에 접속 한 다음 [Grid CRUD] 메뉴를 클릭하면 지금까지 작성한 코드를 실행 해 볼 수 있습니다.
 
 다음과 같은 화면이 표시 되면 실습 성공!
@@ -431,3 +430,5 @@ bindEvents : function() {
 ![완료 화면](images/gtst/gtst0300/0.png) 
 
 전체 소스코드는 [여기](html/naturaljs/gtst/codes/natural_js_gtst0300.zip) 에서 다운로드 할 수 있습니다.
+
+이제 느낌이 좀 온다면 예제 메뉴에 있는 여러 예제들의 소스코드들을 확인 하면서 학습 해 보기 바랍니다. 

@@ -318,7 +318,7 @@ bindEvents : function() {
 	N("#btnSearch", cont.view).click(function(e) {
 	    e.preventDefault();
 	    if(cont.form.validate()) {
-	    	cont.form.data(false).comm({
+	    	N(cont.form.data(true)).comm({
 	    	    url : "data.json",
 	    	    type : "GET"
 	    	}).submit(function(data) {
@@ -431,4 +431,4 @@ bindEvents : function() {
 
 전체 소스코드는 [여기](html/naturaljs/gtst/codes/natural_js_gtst0300.zip) 에서 다운로드 할 수 있습니다.
 
-이제 감이 조금 조금 오나요?
+이제 느낌이 좀 온다면 예제 메뉴에 있는 여러 예제들의 소스코드들을 확인 하면서 학습 해 보기 바랍니다. 
