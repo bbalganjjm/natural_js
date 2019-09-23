@@ -28,9 +28,9 @@ Features
 	* Documents, Notify
 * Data-related UI components support bidirectional data binding, allowing data to be synchronized and interacted in real time.
 
-References
+Documentation
 =========
-* API/DEMO and documentation : http://bbalganjjm.github.io/natural_js
+* API/DEMO : http://bbalganjjm.github.io/natural_js
 
 Installs
 =========
@@ -39,8 +39,4 @@ Installs
 
 License
 =======
-Released under the LGPL v2.1 license.
-
-<hr/>
-
-<p align="right">&copy; 2014 KIM HWANG MAN(bbalganjjm@gmail.com)</p>
+This software is licensed under the LGPL v2.1. &copy; 2014 KIM HWANG MAN(bbalganjjm@gmail.com) 
