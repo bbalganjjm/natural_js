@@ -1,4 +1,4 @@
-Getting Started Natural-JS
+Getting Started
 ===
 
 ## Configuring Natural-JS Execution Environment

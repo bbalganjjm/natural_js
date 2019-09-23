@@ -287,6 +287,6 @@ N(".page01").cont({
 
 ![완료 화면](images/gtst/gtst0200/1.png) 
 
-전체 소스코드는 [여기](html/naturaljs/gtst/codes/natural_js_gtst.zip) 에서 다운로드 할 수 있습니다. 
+전체 소스코드는 [여기](html/naturaljs/gtst/codes/natural_js_gtst0200.zip) 에서 다운로드 할 수 있습니다. 
 
 다음 단계([N.grid 로 CRUD 하기](#Z3RzdDAzMDAlMjRHcmlkJTIwJUVCJUExJTlDJTIwQ1JVRCUyMCVFRCU5NSU5OCVFQSVCOCVCMCRodG1sJTJGbmF0dXJhbGpzJTJGZ3RzdCUyRmd0c3QwMzAwLmh0bWw=)) 에서는 Natural-UI 패키지에서 제공하는 컴포넌트들로 이 컨텐츠 영역을 채워 보겠습니다.

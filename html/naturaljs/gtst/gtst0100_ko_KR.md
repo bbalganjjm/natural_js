@@ -1,4 +1,4 @@
-Natural-JS 시작하기
+시작하기
 ===
 
 ## Natural-JS 실행 환경 구성
