@@ -39,4 +39,4 @@ Installs
 
 License
 =======
-This software is licensed under the [LGPL v2.1](https://github.com/bbalganjjm/natural_js/blob/master/LICENSE) &copy; [KIM HWANG MAN]<bbalganjjm@gmail.com> 
+This software is licensed under the [LGPL v2.1](https://github.com/bbalganjjm/natural_js/blob/master/LICENSE) &copy; KIM HWANG MAN&lt;<bbalganjjm@gmail.com>&gt; 
