@@ -66,15 +66,15 @@ CVC 아키텍처 패턴은 기존 MVC로 구현된 서버중심 웹 어플리케
 
 #### 2) Natural Architecture Framework
 
-Natural Architecture Framework 는 CVC Architecture Pattern 을 구현한 아키텍쳐 프레임워크로서 Communicator 영역을 N.comm 모듈로 구현 하고, Controller 영역을 N.cont 모듈로 구현 하였습니다. View 는 별도의 구현체는 존재하지 않고 단순히 HTML 영역을 view 로 정의 하고 있습니다. 또한 Natural-JS 의 전역 컨텍스트 객체(N.context)를 제공 합니다.
+Natural Architecture Framework 는 CVC Architecture Pattern 을 구현한 아키텍쳐 프레임워크로서 Communicator 영역을 N.comm 모듈로 구현 하고, Controller 영역을 N.cont 모듈로 구현 하였습니다. View 영역은 별도의 구현체는 존재하지 않고 단순히 HTML 영역을 view 로 정의 하였고 추가로 Natural-JS 의 생명주기(Life-Cycle) 안의 데이터 저장소 역할을 수행하는 Context(N.context) 가 구현 되어 있습니다.
 
-`N.comm`(Communicator)은 서버에 JSON 형태의 데이터를 송·수신 하고 블록 페이지들을 불러오는 역할을 담당 합니다. 또한 블록 페이지 요청 간 전송 되는 파라미터 데이터와 요청 정보들을 확인 할 수 있는 `N.comm.request`객체를 제공 하고 N.comm 으로 통신하는 모든 요청과 응답 사이에 공통 실행 로직 이나 공통 데이터 처리기를 적용 할 수 있는 `Communication Filter`기능을 제공 합니다.
+[Communicator(N.comm)](#cmVmcjAyMDMlMjRDb21tdW5pY2F0b3IkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDIwMy5odG1s) 는 서버에 JSON 형태의 데이터를 송·수신 하고 블록 페이지들을 불러오는 역할을 담당 합니다. Communicator 는 블록 페이지 요청 간 전송 되는 파라미터 데이터와 요청 정보들을 확인 할 수 있는 [Communicator.request](#cmVmcjAyMDQlMjRDb21tdW5pY2F0b3IucmVxdWVzdCRodG1sJTJGbmF0dXJhbGpzJTJGcmVmciUyRnJlZnIwMjA0Lmh0bWw=) 객체를 제공 하고 Communicator 로 통신하는 모든 요청과 응답 사이에 공통 실행 로직 이나 공통 데이터 처리기를 적용 할 수 있는 [Communication Filter](#cmVmcjAyMDUlMjRDb21tdW5pY2F0aW9uJTIwRmlsdGVyJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAyMDUuaHRtbA==) 를 제공 합니다.
 
-`N.cont`(Controller) 는 블록 페이지 단위로 jQuery 와 Natural-JS 의 여러 컴포넌트들을 이용하여 View 의 요소들과 데이터를 제어/편집 할 수 있는 공간 입니다. N.cont 에 구현 되는 Controller 오브젝트의 모든 메서드들에 대해서  `AOP(Aspect-Oriented Programming)`를 지원 하여 웹 UI 개발 생산성을 획기적으로 증대 시킬 수 있습니다.
+[Controller(N.cont)](#cmVmcjAyMDElMjRDb250cm9sbGVyJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAyMDEuaHRtbA==) 는 View 의 요소들과 Communicator 로 조회 한 데이터를 제어 하고 비즈니스 로직을 구현 할 수 있는 Controller object 를 실행 해 주는 역할을 담당 합니다. 또한 Controller Object 의 모든 메서드들에 대해서  [AOP(Aspect-Oriented Programming)](#cmVmcjAyMDIlMjRBT1AkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDIwMi5odG1s) 를 적용 할 수 있어 웹 UI 개발 생산성을 획기적으로 개선 할 수 있습니다.
 
-`View`는 별도의 구현체는 없고 단순하게 블록 페이지의 HTML 요소 영역을  View로 정의하였고 HTML 요소 블록들을 논리적으로 나눌 수 있는 방법을 Natural-ARCHITECTURE 에서 지원 하고 있습니다.
+View 는 별도의 구현체는 없고 단순하게 HTML 요소 영역을  View 로 정의 하였습니다.
 
-`N.context`(Natural Application Context)는 Natural-JS 의 생명주기(Life-Cycle) 안의 데이터 저장소 역할을 수행 하며 컴포넌트들의 전역 옵션 값을 설정하고 메시지 리소스 등을 저장 하고 관리할 수 있는 기능을 제공 합니다.
+[Context(N.context)](#cmVmcjAyMDYlMjRDb250ZXh0JGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAyMDYuaHRtbA==) 는 Natural-JS 의 생명주기(Life-Cycle) 안의 데이터 저장소 역할을 수행 하며 기본으로 컴포넌트들의 전역 옵션 설정 값, 메시지 리소스 등이 저장/관리 됩니다.
 
 ![](images/intr/pic6.png)
 
