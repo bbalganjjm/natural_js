@@ -1072,7 +1072,9 @@
                         dataType : "text",
                         type : "GET"
                     }).submit(function(html) {
-                        N("#sourceCode", view).text(html);
+                        var tempView = $("<div>" + html + "</div>");
+                        APP.indx.i18n(undefined, tempView);
+                        N("#sourceCode", view).text(tempView.html().replace(/&quot;/g, '"'));
                     });
                 }
             }
