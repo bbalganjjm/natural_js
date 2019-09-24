@@ -8,7 +8,7 @@ Grid 로 생성/조회/수정/삭제를 처리 하기 위해 조회조건 영역
 
 [웹 어플리케이션 기본 프레임 만들기](#Z3RzdDAyMDAlMjQlRUMlOUIlQjklMjAlRUMlOTYlQjQlRUQlOTQlOEMlRUIlQTYlQUMlRUMlQkMlODAlRUMlOUQlQjQlRUMlODUlOTglMjAlRUElQjglQjAlRUIlQjMlQjglMjAlRUQlOTQlODQlRUIlQTAlODglRUMlOUUlODQlMjAlRUIlQTclOEMlRUIlOTMlQTQlRUElQjglQjAkaHRtbCUyRm5hdHVyYWxqcyUyRmd0c3QlMkZndHN0MDIwMC5odG1s) 에서 생성한 기본 프레임에 메뉴를 추가하여 실습을 진행 해 보겠습니다.
 
-먼저 **/html/index/lefter.html** 파일을 열어 다음과 같이 ul 태그의 마지막 자식요소 li 요소를 추가 하고 지금부터 작업 할 메뉴링크(page6.html)를 추가 해 줍니다.
+먼저 **/html/index/lefter.html** 파일을 열어 다음과 같이 ul 태그의 마지막에 li 요소를 추가 하고 지금부터 작업 할 메뉴링크(page6.html)를 추가 해 줍니다.
 
 ```
 ...
@@ -26,8 +26,8 @@ Grid 로 생성/조회/수정/삭제를 처리 하기 위해 조회조건 영역
 ```
 
 메뉴 추가가 끝났으면 데이터 조회 및 저장을 실행 하기 위해 [data.json](html/naturaljs/gtst/data/data.json) 파일을 다운로드하여 프로젝트의 Context Root 에 저장 합니다.
-<p class="alert">data.json 파일 링크를 클릭 했는데 다운로드 되지 않으면 data.json 링크를 마우스 오른버튼 클릭하여 컨텍스트 메뉴에서 [다른 이름으로 링크 저장]을 클릭 해 주세요.</p>
-<p class="alert">이 학습서는 Web Server 에서 구동 되는 예제로 조회 파라미터나 저장 / 수정 / 삭제된 데이터가 반영 / 저장 되지 않습니다. 서버로 전송 되는 파라미터만 개발자도구의 네트워크 탭에서 확인 바랍니다. 서버(DBMS)와 연동 되는 예제는 <a href="#Z3RzdDIwMDAlMjQlRUMlODMlOTglRUQlOTQlOEMlMjAlRUQlOTQlODQlRUIlQTElOUMlRUMlQTAlOUQlRUQlOEElQjglRUIlQTElOUMlMjAlRUMlOEIlOUMlRUMlOUUlOTElRUQlOTUlOTglRUElQjglQjAkaHRtbCUyRm5hdHVyYWxqcyUyRmd0c3QlMkZndHN0MjAwMC5odG1s">샘플 프로젝트로 시작하기</a> 문서를 참고 바랍니다.</p>
+<p class="alert">data.json 파일 링크를 클릭 했는데 다운로드 되지 않으면 data.json 링크를 마우스 오른버튼 클릭하면 표시되는 컨텍스트 메뉴에서 [다른 이름으로 링크 저장]을 클릭 해 주세요.</p>
+<p class="alert">이 학습서는 Web Server 에서 구동 되는 예제로 조회 파라미터나 저장/수정/삭제 된 데이터가 저장 되지 않습니다. 서버로 전송 되는 파라미터만 개발자도구의 네트워크 탭에서 확인 바랍니다. 서버(DBMS)와 연동 되는 예제는 <a href="#Z3RzdDIwMDAlMjQlRUMlODMlOTglRUQlOTQlOEMlMjAlRUQlOTQlODQlRUIlQTElOUMlRUMlQTAlOUQlRUQlOEElQjglRUIlQTElOUMlMjAlRUMlOEIlOUMlRUMlOUUlOTElRUQlOTUlOTglRUElQjglQjAkaHRtbCUyRm5hdHVyYWxqcyUyRmd0c3QlMkZndHN0MjAwMC5odG1s">샘플 프로젝트로 시작하기</a> 문서를 참고 바랍니다.</p>
 
 
 ##View 영역 코딩
@@ -85,10 +85,10 @@ Grid 로 생성/조회/수정/삭제를 처리 하기 위해 조회조건 영역
 	</div>
 
     <div class="buttons">
-        <a id="btnAdd" href="#" data-opts='{ "color": "green" }'>추가</a>
-        <a id="btnDelete" href="#" data-opts='{ "color": "green" }'>삭제</a>
-        <a id="btnSave" href="#" data-opts='{ "color" : "gray" }'>저장</a>
-        <a id="btnSearch" href="#">조회</a>
+        <a id="btnAdd" href="#" data-opts='{ "color": "green" }'>New</a>
+        <a id="btnDelete" href="#" data-opts='{ "color": "green" }'>Delete</a>
+        <a id="btnSave" href="#" data-opts='{ "color" : "gray" }'>Save</a>
+        <a id="btnSearch" href="#">Retrieve</a>
     </div>
     
     <div class="result">
@@ -104,7 +104,7 @@ Grid 로 생성/조회/수정/삭제를 처리 하기 위해 조회조건 영역
     		</colgroup>
     		<thead>
     			<tr>
-    				<th><input lang="ko_KR" id="checkAll" type="checkbox" title="전체 체크"></th>
+    				<th><input lang="ko_KR" id="checkAll" type="checkbox" title="Check All"></th>
     				<th>Name</th>
     				<th data-filter="true">Email</th>
     				<th data-filter="true">Eye Color</th>
@@ -120,7 +120,7 @@ Grid 로 생성/조회/수정/삭제를 처리 하기 위해 조회조건 영역
     				<td><input id="email" type="text" data-validate='[["required"], ["email"]]'></td>
     				<td style="text-align: center;">
     					<select id="eyeColor" data-validate='[["required"]]'>
-    						<option value="">선택</option>
+    						<option value=""></option>
     					</select>
     				</td>
     				<td><input id="age" type="text" data-validate='[["required"], ["integer"]]'></td>
@@ -150,12 +150,12 @@ Grid 로 생성/조회/수정/삭제를 처리 하기 위해 조회조건 영역
 </script>
 ```
 
-코드가 길어서 그렇지 Style, View 영역과 Controller 영역을 구분 해 보면 간단 해 집니다. 30초만 집중 해서 봅시다. 매트릭스 네오처럼 코드들이 한눈에 들어오지 않나요? -.-; 
+코드가 좀 기네요? Style, View 영역과 Controller 영역을 구분 해 보면 간단 해 집니다. 30초만 집중 해서 봅시다. 매트릭스 네오처럼 코드들이 한눈에 들어오지 않나요? -.-; 
 
-Style 영역을 공통 css 파일로 통합 하면 위 Style 영역은 없어도 되는데 Natural-JS 의 Data 관련 컴포넌트들에 정의 된 context 요소의 스타일이 그대로 적용 되는것을 보기 위해 페이지에 Style 을 정의 했습니다.
-<p class="alert">Natural-JS 로 프로젝트를 진행 할 때는 HTML 과 CSS 로 화면을 퍼블리싱 해 주는 퍼블리셔와 함께하면 UI 품질과 생산성을 동시에 얻을 수 있습니다. 퍼블리셔는 Natural-JS 를 위한 별도의 학습과정이 필요 없고 웹 표준에 맞춰 퍼블리싱 해 주면 됩니다.</p>
+Style 영역을 공통 css 파일로 통합 하면 위 Style 영역은 없어도 되는데 Natural-JS 의 컴포넌트에 정의 된 context 요소의 스타일이 그대로 적용 되는것을 간단하게 보기 위해서 페이지에 Style 을 정의 했습니다.
+<p class="alert">Natural-JS 로 프로젝트를 진행 할 때는 HTML 과 CSS 로 화면을 퍼블리싱 해 주는 퍼블리셔와 함께하면 UI 품질과 생산성을 동시에 얻을 수 있습니다. 퍼블리셔는 Natural-JS 를 위한 별도의 학습이 필요 없고 웹 표준에 맞춰 퍼블리싱 하면 됩니다.</p>
 
-위 코드에서 집중해야 할 부분은 View 영역 입니다. Controller 부분은 일부러 틀만 만들고 비워 놓았습니다. 하나씩 채워 가려구요.
+위 코드에서 집중해야 할 부분은 View 영역 입니다. Controller 부분은 일부러 틀만 만들고 비워 놓았습니다. 하나씩 채워가면서 진행 하려구요.
 
 View 의 하위 요소 중 첫번째에 있는 **.search-conditions** 요소는 검색조건을 입력 할 검색 박스 입니다. 그 아래 **.buttons** 요소에는 버튼들이 배치 되고 **.result** 요소에는 조회 된 결과 데이터를 Grid 로 표현하기 위해 N.grid 의 context 요소인 Table 을 만들었습니다. N.grid 컴포넌트를 적용하려면 반드시 그리드로 만들어질 **table** 태그가 있어야 하고 table 태그에 **thead**(그리드 헤더) 와 **tbody**(그리드 바디) 요소가 있어야 합니다. N.grid 의 행 들은 **tbody** 요소를 그대로 복제하여 데이터의 행 수 만큼 표시 해 줍니다. 각 컴포넌트에 대한 상세한 내용은 관련 문서를 참고 하기 바랍니다.
 
@@ -173,8 +173,8 @@ View 의 하위 요소 중 첫번째에 있는 **.search-conditions** 요소는 
 })();
 ```
 
-이유는 어떠한 Function Scope 에서나 Contoller(N.cont) Object 에 접근하기 위해서 입니다.
-만약 init 함수에 이 페이지와 관련 된 모든 코드를 넣는다면 가독성이 떨어져 개발이 어려워질 것 입니다. 자연스럽게 함수 셋들이 여러개로 나누어 지고 함수 셋의 하위 함수나 이벤트 핸들러, 콜백 함수 안 에서는 this 가 바라보는 객체가 달라져 Contoller Object 에 접근하기 위한 추가 코드들이 필요하게 될 것 입니다.
+이유는 Function Scope 에 상관 없이 Contoller(N.cont) Object 에 접근하기 위해서 입니다.
+만약 init 함수에 이 페이지와 관련 된 모든 코드를 넣는다면 가독성이 떨어져 개발이 어려워질 것 입니다. 자연스럽게 함수 셋들이 여러개로 나누어 지고 함수 셋의 하위 함수나 이벤트 핸들러, 콜백 함수의 this 마다 바라보는 객체가 달라져 Contoller Object 에 접근하기 위한 추가 코드들이 필요하게 될 것 입니다.
 
 위와 같이 Controller 를 정의하하고 cont 변수에 N().cont() 함수 를 실행 하면 함수의 어떤 위치에서나 cont 변수로 Controller Object 에 접근 할 수 있습니다.
 <p class="alert">Natural-JS 로 프로젝트를 진행하다 보면 view 나 request, caller 등의 Controller 오브젝트에 담겨있는 고유 객체들을 참고하거나 페이지 전역변수를 담기 위해 Controller Object 에 접근해야 할 때가 많습니다.</p>
@@ -311,7 +311,7 @@ bind()를 호출 하지 않으면 기본 행이 아무 의미없이 표시 되�
 
 이벤트 바인딩은 jQuery 에서 제공하는 기능을 사용 합니다. 
 
-#### [조회] 버튼 이벤트
+#### [Retrieve] 버튼 이벤트
 
 ```
 bindEvents : function() {
@@ -336,7 +336,7 @@ bindEvents : function() {
 ```cont.form.validate()``` 메서드는 검색 폼의 입력 요소의 태그에 선언 된 data-validate 옵션([Form](#cmVmcjA0MDclMjRGb3JtJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjA0MDcuaHRtbA==) 문서의 [선언형옵션] 참고)을 한번에 체크하여 입력 데이터에 대한 유효성 검증을 실행하는 메서드 입니다. 유효성 검증에 모두 통과 해야만 true 를 반환해서 위 코드와 같이 if 조건으로 선언해 놓으면 "필수 입력 체크" 등의 귀찮은 작업들을 편리하게 처리 할 수 있습니다.  
 그리고 구문의 끝 부분에 .button() 메서드를 호출 하여 이벤트 바인딩하는 요소에 버튼 컴포넌를 적용 했습니다.
 
-#### [추가] 버튼 이벤트
+#### [New] 버튼 이벤트
 
 ```
 bindEvents : function() {
@@ -350,7 +350,7 @@ bindEvents : function() {
 
 N.grid 컴포넌트의 인스턴스에서 add() 메서드를 호출 하면 그리드에 행이 추가 됩니다.
 
-#### [삭제] 버튼 이벤트
+#### [Delete] 버튼 이벤트
 
 ```
 bindEvents : function() {
@@ -375,7 +375,7 @@ bindEvents : function() {
 
 cont.grid.check() 메서드를 호출 하면 그리드 첫번째 컬럼의 체크박스가 체크 된 행 인덱스를 반환 하고 반환 된 인덱스를  cont.grid.remove() 메서드의 인자로 전달하면 그리드에서 선택 된 행이 삭제 됩니다.
 
-#### [저장] 버튼 이벤트
+#### [Save] 버튼 이벤트
 
 ```
 bindEvents : function() {
