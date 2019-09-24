@@ -1,7 +1,7 @@
 Tips
 ===
 
-###데이터 관련 컴포넌트에 비어있는 객체를 바인드하여 초기화 하기
+###Initialize by binding empty objects to data-related components
 ```
 nFormInstance.unbind().bind(0, []); // N.form
 nGridInstance.bind([]); // N.grid
