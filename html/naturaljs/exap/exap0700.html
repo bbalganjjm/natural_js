@@ -118,7 +118,7 @@ N(".exap0700").cont({
     		e.preventDefault();
 
             if(cont.grid.data("modified").length === 0) {
-            	N(window).alert(N.message.get(cont.messages, "EXAP0700-0003")).show();
+                N.notify.add(N.message.get(cont.messages, "EXAP0700-0003"));
             	return false;
             }
 

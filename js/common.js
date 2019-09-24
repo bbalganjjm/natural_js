@@ -93,7 +93,7 @@
 		save : function(opts) {
 	   		if(opts.changed) {
 	   			if(opts.cont[opts.changed].data("modified").length === 0) {
-		        	N(window).alert(N.message.get(APP.comm.messages, "COMM-0001")).show();
+	   			    N.notify.add(N.message.get(APP.comm.messages, "COMM-0001"));
 		        	return false;
 		        }	   			
 	   		}
