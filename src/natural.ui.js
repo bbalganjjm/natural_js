@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.38.213
+ * Natural-UI v0.38.214
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-UI"] = "0.38.213";
+    N.version["Natural-UI"] = "0.38.214";
 
     $.fn.extend($.extend(N.prototype, {
         alert : function(msg, vars) {
@@ -3250,7 +3250,7 @@
                 autoUnbind : false,
                 state : null, // add, bind, revert, update
                 html : false,
-                addTop : false,
+                addTop : true,
                 fRules : null,
                 vRules : null,
                 extObj : null, // extObj : for N.grid
@@ -4155,7 +4155,7 @@
                 height : 0,
                 validate : true,
                 html : false,
-                addTop : false,
+                addTop : true,
                 addSelect : false,
                 vResizable : false,
                 windowScrollLock : true,
@@ -4804,7 +4804,7 @@
                 more : false, // true or column names array
                 validate : true,
                 html : false,
-                addTop : false,
+                addTop : true,
                 addSelect : false,
                 filter : false,
                 resizable : false,
