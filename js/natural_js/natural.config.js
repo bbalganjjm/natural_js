@@ -610,10 +610,6 @@
 			 */
 			"validate" : true,
 			/**
-			 * 바인드된 데이터의 새로운 row 생성시 위치를 최상단에 만들건지 여부
-			 */
-			"addTop" : true,
-			/**
 			 * XSS 필터링 목록
 			 */
 			"xssReverseChars" : [
@@ -667,10 +663,6 @@
 				}
 			},
 			/**
-			 * 바인드된 데이터의 새로운 row 생성시 위치를 최상단에 만들건지 여부
-			 */
-			"addTop" : true,
-			/**
 			 * 스크롤 페이징 시 한번에 몇개를 가져올것인지 설정
 			 */
 			"scrollPaging" : {
@@ -678,7 +670,6 @@
 			},
             "unselect" : false,
        		"addSelect" : false,
-       		"addTop" : true,
        		"html" : false,
        		"tpBind" : false
 		},
@@ -687,13 +678,6 @@
 			 * 그리드에서 스크롤할때 위, 아래 끝에 다다르면 전체 페이지가(window scroll) 스크롤 되는것을 방지하기 위한 기능 활성 여부
 			 */
 			"windowScrollLock" : true,
-			/**
-			 * 헤더픽스형일 경우 스크롤 페이징 사이즈(대용량 데이터 처리)
-			 */
-			/**
-			 * 바인드된 데이터의 새로운 row 생성시 위치를 최상단에 만들건지 여부
-			 */
-			"addTop" : true,
 			/**
 			 * 컬럼 넓이조절 기능 활성화 여부
 			 */
@@ -723,7 +707,6 @@
             "resizable" : true,
        		"sortable" : true,
        		"addSelect" : false,
-       		"addTop" : true,
        		"html" : false,
        		"tpBind" : false,
 			/**
