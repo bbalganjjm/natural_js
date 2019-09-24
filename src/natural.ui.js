@@ -4886,7 +4886,7 @@
             // set garbage rows count in table
             this.options.misc.withoutTbodyLength = this.options.context.children().length - this.options.context.children("tbody").length - this.options.context.children("tfoot").length;
 
-            // If the value of the opts.scrollPaging.size option is greater than 0, the addTop option is unconditionally set to true.
+            // If the value of the opts.scrollPaging.size value is greater than 0, the addTop option is unconditionally set to true.
             if(!this.options.addTop) {
                 this.options.scrollPaging.size = 0;
                 this.options.createRowDelay = 0;
