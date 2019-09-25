@@ -905,7 +905,7 @@
 
 	// Natural-JS API 메뉴얼 용 advisors
 	N.context.attr("architecture").cont.advisors.push({ // md 파일 변환
-        "pointcut" : ".markdown:^init$",
+        "pointcut" : ".view-markdown:^init$",
         "adviceType" : "before",
         "fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 함수명, args 인자 */
             /* markdown 파일 로딩 후  html 로 변환 */
