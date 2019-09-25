@@ -905,24 +905,7 @@
 
 	// Natural-JS API 메뉴얼 용 advisors
 	N.context.attr("architecture").cont.advisors.push({ // md 파일 변환
-        "pointcut" : [
-            ".intr0100",
-            ".gtst0100",
-            ".gtst0200",
-            ".gtst0300",
-            ".gtst2000",
-            ".refr0001",
-            ".refr010101",
-            ".refr010201",
-            ".refr020101",
-            ".refr020201",
-            ".refr020301",
-            ".refr020401",
-            ".refr020501",
-            ".refr020601",
-            ".refr060101",
-            ".refr060102:init$"
-        ].join(","),
+        "pointcut" : ".markdown:^init$",
         "adviceType" : "before",
         "fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 함수명, args 인자 */
             /* markdown 파일 로딩 후  html 로 변환 */
@@ -970,7 +953,7 @@
             ".refr040902",
             ".refr041002",
             ".refr041102",
-            ".refr050102:init$"
+            ".refr050102:^init$"
         ].join(","),
         "adviceType" : "before",
         "fn" : function(cont, fnChain, args){
@@ -1048,43 +1031,41 @@
             ".refr050105",
             ".refr050202",
             ".refr050205",
-            ".refr050206:init$"
+            ".refr050206:^init$"
         ].join(","),
         "adviceType" : "before",
         "fn" : function(cont, fnChain, args){
             N(window).trigger("resize.mobile", [ cont.view ]);
         }
     }, { // 소스보기 버튼 처리
-        "pointcut" : "^init$",
+        "pointcut" : ".view-code:^init$",
         "adviceType" : "before",
         "fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 함수명, args 인자 */
             var view = args[0];
             var url = cont.request.get("url");
             
-            if(cont.view.hasClass("view-code")) {
-                var btnEle = N('<a class="click">View Source Code</a>');
-                if(view.find(btnEle).length === 0) {
-                    view.append(btnEle);
-                    view.append('<pre id="sourceCodeBox" class="line-numbers" style="display: none;"><code id="sourceCode" class="language-markup"></code></pre>');
-                    btnEle.click(function() {
-                        var sourceCodeBox = btnEle.next("#sourceCodeBox");
-                        if(!sourceCodeBox.is(":visible")) {
-                            sourceCodeBox.slideDown();
-                        } else {
-                            sourceCodeBox.slideUp();
-                        }
-                    });
-                    N.comm({
-                        url : url,
-                        contentType : "text/plain; charset=UTF-8",
-                        dataType : "text",
-                        type : "GET"
-                    }).submit(function(html) {
-                        var tempView = $("<div>" + html + "</div>");
-                        APP.indx.i18n(undefined, tempView);
-                        N("#sourceCode", view).text(tempView.html().replace(/&quot;/g, '"'));
-                    });
-                }
+            var btnEle = N('<br><a class="click">View Source Code</a>');
+            if(view.find(btnEle).length === 0) {
+                view.append(btnEle);
+                view.append('<pre id="sourceCodeBox" class="line-numbers" style="display: none;"><code id="sourceCode" class="language-markup"></code></pre>');
+                btnEle.click(function() {
+                    var sourceCodeBox = btnEle.next("#sourceCodeBox");
+                    if(!sourceCodeBox.is(":visible")) {
+                        sourceCodeBox.slideDown();
+                    } else {
+                        sourceCodeBox.slideUp();
+                    }
+                });
+                N.comm({
+                    url : url,
+                    contentType : "text/plain; charset=UTF-8",
+                    dataType : "text",
+                    type : "GET"
+                }).submit(function(html) {
+                    var tempView = $("<div>" + html + "</div>");
+                    APP.indx.i18n(undefined, tempView);
+                    N("#sourceCode", view).text(tempView.html().replace(/&quot;/g, '"'));
+                });
             }
         }
     });
