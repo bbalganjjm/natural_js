@@ -3,6 +3,9 @@
 
 Controller(N.cont) 는 CVC Architecture Pattern 의 Controller 레이어를 구현한 클래스 입니다.
 
+![](images/intr/pic4.png)
+<center>[ Natural-ARCHITECTURE ]</center>
+
 N.cont 는 Controller object 의 init 함수를 실행 해 주고 Controller object 를 반환 합니다.
 <p class="alert">Controller object 는 View 의 요소들과 Communicator 에서 검색 한 데이터를 제어하는 객체 입니다.</p>
 

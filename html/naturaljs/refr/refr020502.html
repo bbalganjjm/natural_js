@@ -24,7 +24,7 @@
 			<td>undefined</td>
 			<td style="text-align: center;">X</td>
 			<td>
-				<p>모든 N.comm 이 초기화 전 실행 되는 함수 입니다.</p>
+				<p>모든 N.comm 이 초기화 되기 전 실행 되는 함수 입니다.</p>
 
 				<p class="alert">Controller(N.cont) object 의 init 이 아니고 N.comm 에서 submit 함수를 호출하기 전 N.comm 라이브러리가 초기화 되기 전 실행 되는 함수 입니다.</p>
 				<p>인자는 다음과 같은 객체가 반환 됩니다.</p>
@@ -96,7 +96,7 @@ beforeSend : function(request, data, textStatus, xhr) {
 			<td>undefined</td>
 			<td style="text-align: center;">X</td>
 			<td>
-				<p>요청이 성공 했을 경우 실행 되는 함수 입니다.</p>
+				<p>요청이 성공 했을 때 실행 되는 함수 입니다.</p>
 				<p class="alert">받은 데이터를 가공하여 return 하면 가공 된 데이터를 모든 N.comm 을 이용한 요청에 대한 응답 데이터로 전달 합니다.</p>
 				<p>인자는 다음과 같은 객체들이 반환 됩니다.</p>
 				<ul>
@@ -121,7 +121,7 @@ success : function(request, data, textStatus, xhr) {
 			<td>undefined</td>
 			<td style="text-align: center;">X</td>
 			<td>
-				<p>요청이 성공 했을 경우 실행 되는 함수 입니다.</p>
+				<p>서버에서 에러가 발생 했을 때 실행 되는 함수 입니다.</p>
 				<p>인자는 다음과 같은 객체들이 반환 됩니다.</p>
 				<ul>
 					<li>request(arguments[0]) : Communicator.request</li>
@@ -145,7 +145,7 @@ error : function(request, data, textStatus, xhr) {
 			<td>undefined</td>
 			<td style="text-align: center;">X</td>
 			<td>
-				<p>요청이 성공 했을 경우 실행 되는 함수 입니다.</p>
+				<p>서버의 응답이 완료 되었을 때 실행 되는 함수 입니다.</p>
 				<p>인자는 다음과 같은 객체들이 반환 됩니다.</p>
 				<ul>
 					<li>request(arguments[0]) : Communicator.request</li>
