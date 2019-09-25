@@ -739,6 +739,8 @@ article .btnBox {
     #array .apiDoc .api.form tr>td:first-child,
     #json .apiDoc .api.form tr>td:first-child,
     #event .apiDoc .api.form tr>td:first-child,
+    #advisors .apiDoc .api.form tr>td:first-child,
+    #pointcuts .apiDoc .api.form tr>td:first-child,
     #functions .apiDoc .api.form tr>td:first-child,
     #methods .apiDoc .api.form tr>td:first-child {
         margin-bottom: 0;
@@ -754,6 +756,8 @@ article .btnBox {
     #array .apiDoc .api.form td:nth-child(2):before,
     #json .apiDoc .api.form td:nth-child(2):before,
     #event .apiDoc .api.form td:nth-child(2):before,
+    #advisors .apiDoc .api.form td:nth-child(2):before,
+    #pointcuts .apiDoc .api.form td:nth-child(2):before,
     #functions .apiDoc .api.form td:nth-child(2):before,
     #methods .apiDoc .api.form td:nth-child(2):before {
         content: 'arguments';
@@ -770,6 +774,8 @@ article .btnBox {
     #array .apiDoc .api.form td:nth-child(3):before,
     #json .apiDoc .api.form td:nth-child(3):before,
     #event .apiDoc .api.form td:nth-child(3):before,
+    #advisors .apiDoc .api.form td:nth-child(3):before,
+    #pointcuts .apiDoc .api.form td:nth-child(3):before,
     #functions .apiDoc .api.form td:nth-child(3):before,
     #methods .apiDoc .api.form td:nth-child(3):before {
         content: 'type : ';
@@ -786,6 +792,8 @@ article .btnBox {
     #array .apiDoc .api.form td:nth-child(4):before,
     #json .apiDoc .api.form td:nth-child(4):before,
     #event .apiDoc .api.form td:nth-child(4):before,
+    #advisors .apiDoc .api.form td:nth-child(4):before,
+    #pointcuts .apiDoc .api.form td:nth-child(4):before,
     #functions .apiDoc .api.form td:nth-child(4):before,
     #methods .apiDoc .api.form td:nth-child(4):before {
         content: 'return : ';
