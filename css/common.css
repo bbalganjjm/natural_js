@@ -288,7 +288,7 @@ th, tfoot td {
     margin-bottom: 10px;
 }
 
-.alert {
+.alert:not(article) {
     display: inline-block;
     margin: 5px;
     padding: 0.23em 0.5em 0.3em 1.8em;
