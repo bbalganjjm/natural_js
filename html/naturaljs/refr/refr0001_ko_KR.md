@@ -24,7 +24,7 @@ API 문서는 Natural-JS 의 컴포넌트와 라이브러리에서 지원하는 
 	* 선언형 옵션은 다음과 같은 속성으로 정의 할 수 있습니다.
 		1. 포멧 룰(Format Rules) : data-format
 		2. 검증 룰(Validation Rules) : data-validate
-		3. 1 과 2를 제외한 모든 컴포넌트 옵션 : data-opts
+		3. a 와 b 를 제외한 모든 컴포넌트 옵션 : data-opts
 
 <p class="alert">선언적 옵션은 JSON 표준 형식을 정확하게 준수해야합니다 (예 : 키 값은 큰 따옴표로 묶어야합니다). JSON 표준 양식을 지키지 않으면 선언형 옵션이 인식되지 않거나 오류가 발생합니다.</p>
 
