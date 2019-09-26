@@ -77,7 +77,7 @@ Grid 로 생성/조회/수정/삭제를 처리 하기 위해 조회조건 영역
 </style>
 
 <!-- View -->
-<article class="page6" >
+<article class="page6">
 
 	<div class="search-conditions">
 		<label>Name<input id="name" type="text" data-validate='[["alphabet+integer"]]'></label>
