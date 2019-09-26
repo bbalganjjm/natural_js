@@ -1,6 +1,8 @@
 Overview
 ===
 
-Validator(N.validator) 는 입력 한 데이터 셋(array[json object]에 대한 유효성 검증을 수행하고 수행 한 결과 데이터 셋을 반환 해 주는 라이브러리입니다.
-<p class="alert">룰셋 대신 data-validate 속성으로 검증 룰들이 선언된 입력 요소들을 감싸고 있는 요소를 인자로 입력 하면 focusout 될 때 해당 요소에 입력 된 값을 유효성 검증 하고 검증 실패 시 입력요소 근처에 오류 메시지를 툴팁 형태로 표시 해 줍니다.</p>
-<p class="alert">데이터셋이 아닌 단위 문자열도 유효성 검증 할 수도 있습니다.</p>
+Validator(N.validator) is a library that validates the input data set(array [json object]) and returns a validation result data set.
+<p class="alert">If you enter an element as an argument that wraps the input element where the validation rule is declared with the data-validate attribute instead of the rule set, When the cursor of an input element is focused out, the value entered in that element is validated and if validation fails, an error message is displayed in the form of a tooltip near the input element.</p>
+<p class="alert">You can also validate by string, not by dataset.</p>
+
+
