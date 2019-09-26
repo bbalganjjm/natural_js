@@ -18,7 +18,7 @@ body {
 
 a {
     text-decoration: none;
-    color: rgba(0, 0, 0, 0.87);
+    color: #0366d6;
 }
 
 [lang] {
@@ -310,11 +310,6 @@ article ul.contents {
 
 article p {
 	margin: 0 0 10px 0;
-}
-
-article a.link {
-	color: rgba(0, 136, 0, 0.87);
-	font-size: 1em;
 }
 
 article div.grid_wrap__ {
