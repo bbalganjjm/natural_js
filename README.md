@@ -47,7 +47,7 @@ Features
 	<img src="https://bbalganjjm.github.io/natural_js/images/intr/pic7.png">
 </p>
 <p align="center">
-	[ Natural-ARCHITECTURE ]
+	[ Natural-UI ]
 </p>
 
 Documentation
