@@ -14,7 +14,12 @@ Structure
 **Natural-DATA** provides a module for data processing and data synchronization.
 **Natural-UI** provides a variety of components such as HTML-based Grid, List, Form, Popup.
 
-![Natural-JS](https://bbalganjjm.github.io/natural_js/images/intr/pic3.png)
+<p align="center">
+	<img src="https://bbalganjjm.github.io/natural_js/images/intr/pic3.png">
+</p>
+<p align="center">
+	[ Natural-JS ]
+</p>
 
 Features
 ========
