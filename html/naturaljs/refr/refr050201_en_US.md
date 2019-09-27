@@ -1,4 +1,6 @@
 Overview
 ===
 
-Documents(N.docs) 는 Natural-JS 로 제작 된 메뉴 페이지들을 MDI(Multi Document Interface) 나 SDI(Single Document Interface) 형태로 표현 해 주는 페이지 컨테이너 입니다.
+Documents(N.docs) is a page container that displays Natural-JS based menu pages in MDI(Multi Document Interface) or SDI(Single Document Interface) structure.
+
+<p class="alert">You can specify options such as the maximum number of tabs and the maximum number of states and you can also display loading indicators for N.comm's requests and responses.</a>
