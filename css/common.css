@@ -606,7 +606,8 @@ article .btnBox {
     margin-bottom: 0;
 }
 
-.docs_contents__>.view_context__ pre {
+.docs_contents__>.view_context__ pre,
+pre.shell {
     padding: 16px;
     overflow: auto;
     background-color: #E8F5E9B3;
@@ -615,7 +616,8 @@ article .btnBox {
     word-wrap: normal;
 }
 
-.docs_contents__>.view_context__ pre>code {
+.docs_contents__>.view_context__ pre>code,
+pre.shell>code {
     font-family: Consolas, monospace;
     display: inline;
     word-break: normal;

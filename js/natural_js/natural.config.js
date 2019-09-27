@@ -132,14 +132,14 @@
                             N(window).alert({
                                 title : N.message.get({
                                     "ko_KR" : {
-                                        "COMM_TITLE" : "이 예제는 DB 서버와 연동 되지 않음 / 서버로 전송 되는 파라미터 확인"
+                                        "COMM_TITLE" : "이 예제는 DBMS 와 연동 되지 않음 / 서버로 전송 되는 파라미터 확인"
                                     },
                                     "en_US" : {
-                                        "COMM_TITLE" : "This example does not work with the DB server / Check parameters sent to the server"
+                                        "COMM_TITLE" : "This example does not work with the DBMS / Check parameters sent to the server"
                                     }
                                 }, "COMM_TITLE"),
-                                msg : "<pre style='white-space: pre-wrap;'>" + N.json.format(msg) + "</pre>",
-                                width : 480
+                                msg : "<pre class=\"shell\"><code>" + N.json.format(msg) + "</code></pre>",
+                                width : 327
                             }).show();
                             
                             setTimeout(function() {
