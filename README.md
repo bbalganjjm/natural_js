@@ -34,7 +34,7 @@ Features
 	[ Natural-ARCHITECTURE ]
 </p>
 
-* Provide various UI-Components.
+* Provides various libraries and UI components
 	* Controller, Communicator
 	* Formatter, Validator
 	* Grid, List, Form, Select
