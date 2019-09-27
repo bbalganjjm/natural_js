@@ -14,6 +14,8 @@ Structure
 **Natural-DATA** provides a module for data processing and data synchronization.
 **Natural-UI** provides a variety of components such as HTML-based Grid, List, Form, Popup.
 
+![Natural-JS](/natural_js/images/intr/pic3.png)
+
 Features
 ========
 * CVC Architecture Provides a pattern-based UI architecture framework.
