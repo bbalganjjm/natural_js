@@ -52,7 +52,7 @@ Features
 
 Documentation
 =========
-* Introduction and API/DEMO Site : https://bbalganjjm.github.io/natural_js
+* API/DEMO and Examples : https://bbalganjjm.github.io/natural_js
 
 Installs
 =========
