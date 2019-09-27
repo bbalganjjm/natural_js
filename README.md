@@ -23,9 +23,17 @@ Structure
 
 Features
 ========
-* CVC Architecture Provides a pattern-based UI architecture framework.
+* Provides a pattern-based UI architecture framework.
 * Supports SPA (Single Page Application) and mobile web development.
 * Supports AOP (Aspect-Oriented Programming), Communication Filter.
+
+<p align="center">
+	<img src="https://bbalganjjm.github.io/natural_js/images/intr/pic4.png">
+</p>
+<p align="center">
+	[ Natural-ARCHITECTURE ]
+</p>
+
 * Provide various UI-Components.
 	* Controller, Communicator
 	* Formatter, Validator
@@ -34,6 +42,13 @@ Features
 	* Alert, Popup, Tab, Button, DatePicker
 	* Documents, Notify
 * Data-related UI components support bidirectional data binding, allowing data to be synchronized and interacted in real time.
+
+<p align="center">
+	<img src="https://bbalganjjm.github.io/natural_js/images/intr/pic7.png">
+</p>
+<p align="center">
+	[ Natural-ARCHITECTURE ]
+</p>
 
 Documentation
 =========
