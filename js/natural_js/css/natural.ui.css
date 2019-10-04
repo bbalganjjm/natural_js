@@ -1737,7 +1737,6 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	position: absolute;
 	margin-top: -15px;
 	opacity: 0;
-	transition: margin-top 0.15s linear;
 }
 
 .docs__>.docs_contents__.remove__ {

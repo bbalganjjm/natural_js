@@ -21,7 +21,8 @@
  *
 
 ## Natural-UI.Shell v0.9.45
- *
+ * N.docs : Fixed a bug that caused scrolling in content to move to the top when the Tab was active.
+ * N.docs : The functionality has been changed so that when you click on a tab that is already displayed, the logic that displays the content does not run again.
 
 ## Natural-CODE v0.1.4
  *
