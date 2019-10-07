@@ -1,7 +1,7 @@
 Overview
 ===
 
-Communication Filter is feature that can execute common logic at the all request and response or error generation stage with the server communicating with N.comm.
+Communication Filter is a function that executes common logic in all request and response or error generation stages that communicate with server with N.comm.
 
 The declaration of a filter can be defined in the properties of the N.context.attr("architecture").comm.filters object in [Config(N.config)](#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s) and the steps for the filter are as follows:
 * **beforeInit** : Runs before N.comm is initialized.
