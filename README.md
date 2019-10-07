@@ -23,7 +23,7 @@ Structure
 
 Features
 ========
-* Provides a pattern-based UI architecture framework.
+* Provides a CVC(Communicator-View-Controller) Architecture Pattern based UI architecture framework.
 * Supports SPA (Single Page Application) and mobile web development.
 * Supports AOP (Aspect-Oriented Programming), Communication Filter.
 
