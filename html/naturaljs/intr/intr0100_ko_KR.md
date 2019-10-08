@@ -52,7 +52,7 @@ CVC 패턴을 적용하면 클라이언트 브라우저 구현 기술이 서버 
 
 ![CVC Architecture Pattern](images/intr/pic5.png)
 
-<center>[ CVC Architecture Pattern ]</center>
+<center>[ Communicator-View-Controller(CVC) Architecture Pattern ]</center>
 
 ###Natural Architecture Framework
 
@@ -187,7 +187,7 @@ Natural-UI 가 컨텐츠 영역의 UI 개발을 지원 한다면 Natural-UI.Shel
 
 ###교육 및 지원
 
-* bbalganjjm@gmail.com 으로 문의 바랍니다.
+* <bbalganjjm@gmail.com> 으로 문의 바랍니다.
 
 ###라이센스
 This software is licensed under the [LGPL v2.1](https://github.com/bbalganjjm/natural_js/blob/master/LICENSE) &copy; KIM HWANG MAN&lt;<bbalganjjm@gmail.com>&gt;

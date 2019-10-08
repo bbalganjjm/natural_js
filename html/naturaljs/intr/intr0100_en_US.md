@@ -54,7 +54,7 @@ The complexity of development can be reduced by completely separating the design
 
 ![CVC Architecture Pattern](images/intr/pic5.png)
 
-<center>[ CVC Architecture Pattern ]</center>
+<center>[ Communicator-View-Controller(CVC) Architecture Pattern ]</center>
 
 ###Natural Architecture Framework
 
@@ -190,7 +190,7 @@ Supports
 
 ###Training and support
 
-* Please contact us at bbalganjjm@gmail.com.
+* Please contact us at <bbalganjjm@gmail.com>.
 
 ###license
 This software is licensed under the [LGPL v2.1](https://github.com/bbalganjjm/natural_js/blob/master/LICENSE) &copy; KIM HWANG MAN&lt;<bbalganjjm@gmail.com>&gt;
