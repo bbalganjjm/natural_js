@@ -16,28 +16,28 @@ Natural-JS consists of the Natural-CORE, Natural-ARCHITECTURE, Natural-DATA, and
 Natural-CORE is a common library package used globally by Natural-JS.
 
 ###CORE Utitlities - N() & N
-N() 은 Natural-JS 코어 메서드 입니다. 전달 된 인수를 기반으로 DOM 에서 요소를 찾거나 HTML 문자열을 전달하여 생성 된 일치하는 요소의 컬렉션을 반환합니다.
+N() is a Natural-JS core method. Return a collection of matched elements either found in the DOM based on passed argument(s) or created by passing an HTML string.
 
-N 은 Natural-JS 의 코어 함수들이 정의 되어 있는 오브젝트 클래스 입니다.
+N is an object class that defines the core functions of Natural-JS.
 
-[N() 과 N](#cmVmcjAxMDElMjROKCklMjAlMjYlMjBOJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAxMDEuaHRtbA==) 은 다음과 같은 jQuery 확장 기능과 유틸리티 클래스를 제공 합니다.
+[N() and N](#cmVmcjAxMDElMjROKCklMjAlMjYlMjBOJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAxMDEuaHRtbA==) provide the following jQuery extensions and utility classes:
 
-* jQuery selector 확장 : style 이나 data 속성으로도 selector 를 정의 할 수 있는 jQuery selector 확장 기능 
-* jQuery plugin 확장 메서드 : jQuery Plugin 으로 제작된 Natural-JS 유틸리티 메서드
-* N : Natural-JS 의 코어 함수들이 정의 되어 있는 오브젝트 클래스
-* N.gc : Natural-JS 내부 Garbage Collection 관련 유틸리티 집합 클래스
-* N.string : 문자열 조작 관련 함수 집합 클래스
-* N.element : HTML 요소 제어에 관련된 함수 집합 클래스
-* N.date : 날짜 관련 함수 집합 클래스
-* N.browser : 웹 브라우저와 관련 된 함수 집합 클래스
-* N.message : 메시지(다국어) 처리 관련 함수 집합 클래스
-* N.array : Array 데이터 조작 관련 함수 집합 클래스
-* N.json : JSON 데이터 조작 관련 함수 집합 클래스
-* N.event : 이벤트 관련 함수 집합 클래스
+* jQuery selector extensions : JQuery selector extension for defining selectors with attributes such as style or data 
+* jQuery plugin extension methods : Natural-JS utility method created with jQuery Plugin
+* N : Object class that defines the core functions of Natural-JS
+* N.gc : Function set class for Natural-JS internal garbage collection
+* N.string : Function set class for string control
+* N.element : Function set class for controlling HTML elements
+* N.date : Function set class for date control
+* N.browser : Web Browser information related function set class
+* N.message : Function set class for handling messages(multilingual)
+* N.array : Function set class for manipulating Array data
+* N.json : Function set class for manipulating JSON data
+* N.event : Function set class for event control
 
 ###Natural Config - Config(N.config)
 
-[Config(N.config)](#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s) 는 Natural-JS 의 운영 환경 설정, AOP 설정, Communication Filter 설정, UI 컴포넌트의 기본 옵션 값 등을 저장하는 공간 입니다.
+[Config(N.config)](#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s) is a place to save Natural-JS operation environment setting, AOP setting, Communication Filter setting, UI option value, etc.
 
 ##Natural-ARCHITECTURE
 
@@ -47,9 +47,10 @@ Natural-ARCHITECTURE is a library package that makes up the architecture of Natu
 
 <center>[ Natural-ARCHITECTURE ]</center>
 
-###CVC Architecture Pattern
+###Communicator-View-Controller(CVC) Architecture Pattern
 
-CVC(Communicator-View-Controller) 패턴은 MVC(Model-View-Controlelr) 패턴을 변형한 아키텍처 패턴 으로서 아래 그림과 같이 클라이언트 브라우저 영역을 Communicator-View-Controller 아키텍처로 구성 하고 서버를 전체를 Model 영역으로 정의하는 클라이언트 중심의 아키텍처 패턴 입니다. CVC(Communicator-View-Controller) 패턴을 적용하면 클라이언트 브라우저의 구현 기술들이 서버 기술과 아키텍처의 종속성으로부터 벗어날 수 있고 디자인영역과 개발영역을 완벽하게 분리하여 개발의 복잡도를 낮출 수 있습니다.
+The CVC pattern is an architectural pattern based on the Model-View-Controlelr(MVC) pattern. As shown in the figure below, it is a client-centric architectural pattern that configures the client browser area as the Communicator-View-Controller architecture and defines the server as a model area. Applying the CVC pattern allows client browser implementation technologies to deviate from server technology and server architecture dependencies and 
+The complexity of development can be reduced by completely separating the design and development areas.
 
 ![CVC Architecture Pattern](images/intr/pic5.png)
 
@@ -57,32 +58,35 @@ CVC(Communicator-View-Controller) 패턴은 MVC(Model-View-Controlelr) 패턴을
 
 ###Natural Architecture Framework
 
-Natural Architecture Framework 는 CVC Architecture Pattern 을 구현한 아키텍쳐 프레임워크 입니다.
-<p class="alert">Natural Architecture Framework 는 개발 업무 영역을 명확하게 구분 해 주어 각 영역별 전문가들로 분업 할 수 있는 기반을 제공 합니다.</p>
+Natural Architecture Framework is an architectural framework that implements the CVC Architecture Pattern.
 
 ![Natural Architecture Framework](images/intr/pic6.png)
 
 <center>[ Natural Architecture Framework ]</center>
 
+Natural Architecture Framework provides a clear separation of the areas of development, providing a foundation for division of work among professionals in each area.
+
 #### Controller
 
-[Controller(N.cont)](#cmVmcjAyMDElMjRDb250cm9sbGVyJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAyMDEuaHRtbA==) 는 CVC Architecture Pattern 의 Controller 레이어를 구현한 클래스 입니다.
- * N.cont 는 Controller object 의 init 함수를 실행 해 주고 Controller object 를 반환 합니다.
-   <p class="alert">Controller object 는 View 의 요소들과 Communicator 에서 검색 한 데이터를 제어하는 객체 입니다.</p> 
- * Natural-ARCHITECTURE 는 Controller object 를 대상으로 AOP(Aspect-Oriented Programming) 를 지원 합니다.
+[Controller(N.cont)](#cmVmcjAyMDElMjRDb250cm9sbGVyJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAyMDEuaHRtbA==) is a class that implements Controller layer of ​​CVC Architecture Pattern.
+ * N.cont executes the init function of the Controller object and returns a Controller object.
+   <p class="alert">The Controller object is the object that controls the elements of the View and the data retrieved by Communicator.</p> 
+ * Natural-ARCHITECTURE supports AOP (Aspect-Oriented Programming) for Controller objects.
  
-View 는 별도의 구현체는 없고 단순하게 HTML 요소 영역이  View 로 정의 되어 있습니다.
+#### View
+
+View has no implementation and simply defines the HTML element area as View.
 
 #### Communicator
  
-[Communicator(N.comm)](#cmVmcjAyMDMlMjRDb21tdW5pY2F0b3IkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDIwMy5odG1s) 는 CVC Architecture Pattern 의 Communicator 레이어를 구현한 클래스 입니다.
- * N.comm 은 서버에 컨텐츠나 데이터를 요청하거나 파라미터를 전달 하는 등 서버와의 Ajax 통신을 지원하는 라이브러리 입니다.
- * N.comm 을 통해 서버와 통신하는 모든 요청과 응답 또는 에러 발생 단계에서 공통 로직을 실행 할 수 있는 [Communication Filter](#cmVmcjAyMDUlMjRDb21tdW5pY2F0aW9uJTIwRmlsdGVyJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAyMDUuaHRtbA==) 기능을 제공 합니다.
+[Communicator(N.comm)](#cmVmcjAyMDMlMjRDb21tdW5pY2F0b3IkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDIwMy5odG1s) is a class that implements Communicator layer of ​​CVC Architecture Pattern.
+ * N.comm is a library that supports Ajax communication with the server, such as requesting content or data from the server, or passing parameters.
+ * N.comm provides a [Communication Filter](#cmVmcjAyMDUlMjRDb21tdW5pY2F0aW9uJTIwRmlsdGVyJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAyMDUuaHRtbA==) feature that can execute common logic in every request and response or error generation phase that communicates with the server. 
 
 #### Context 
 
-[Context(N.context)](#cmVmcjAyMDYlMjRDb250ZXh0JGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAyMDYuaHRtbA==) 는 Natural-JS 기반 어플리케이션의 Life-Cycle(페이지가 적제 되고 다른 URL로 redirect 되기 전까지) 안 에서 데이터의 영속성을 보장 하는 공간 입니다.
- * N.context 에는 Natural-JS 의 환경설정 값([Config(N.config)](#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s)), 프레임워크 공통 메시지 등이 N.context 객체에 저장 됩니다.
+Context(N.context) is a space that ensures data persistence within the Life-Cycle(Until the page is loaded and redirected to another URL) of a Natural-JS-based application.
+ * Natural-JS configuration values​([Config(N.config)](#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s)), global configuration values, common messages of framework, etc. are stored in N.context objects.
 
  
 ##Natural-DATA
@@ -91,20 +95,20 @@ Natural-DATA is a library package that supports data synchronization, formatting
 
 ###DataSync
 
-DataSync 는 컴포넌트나 라이브러리에 의해 변경 된 데이터를 실시간으로 동기화 해 주는 라이브러리 입니다.
-<p class="alert">DataSync 는 컴포넌트간 양방향 데이터 바인딩을 지원 합니다.</p>
+DataSync is a library that synchronizes data changed by components or libraries in real time.
+<p class="alert">DataSync supports bidirectional data binding between components.</p>
 
 ###Formatter
 
-[Formatter(N.formatter)](#cmVmcjAzMDElMjRGb3JtYXR0ZXIkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDMwMS5odG1s) 는 입력 한 데이터 셋(array[json object]을 포멧팅 하고 포멧팅 된 데이터 셋을 반환 해 주는 라이브러리 입니다.
+[Formatter(N.formatter)](#cmVmcjAzMDElMjRGb3JtYXR0ZXIkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDMwMS5odG1s) is a library that formats the input data set(array [json object]) and returns the formatted data set.
 
 ###Validator
 
-[Validator(N.validator)](#cmVmcjAzMDIlMjRWYWxpZGF0b3IkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDMwMi5odG1s) 는 입력 한 데이터 셋(array[json object]에 대한 유효성을 검사하고 검사 결과 데이터 셋을 반환 해 주는 라이브러리 입니다.
+[Validator(N.validator)](#cmVmcjAzMDIlMjRWYWxpZGF0b3IkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDMwMi5odG1s) is a library that validates the input data set(array [json object]) and returns a validation result data set.
 
-###Natural-DATA Libraries
+###Natural-DATA Library
 
-[Natural-DATA Libraries](#cmVmcjAzMDMlMjROYXR1cmFsLURBVEElMjBMaWJyYXJpZXMkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDMwMy5odG1s) 는 array[json object] 유형의 데이터를 정렬, 필터링 및 정제 하기위한 메소드 및 함수를 제공합니다.
+[Natural-DATA Library](#cmVmcjAzMDMlMjROYXR1cmFsLURBVEElMjBMaWJyYXJpZXMkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDMwMy5odG1s) provides methods and functions for sorting, filtering, and refining data of type array[json object].
 
 
 ##Natural-UI
@@ -117,77 +121,76 @@ Natural-UI is a library package that supports HTML-based UI components.
 
 ###Alert
 
-[Alert(N.alert)](#cmVmcjA0MDElMjRBbGVydCRodG1sJTJGbmF0dXJhbGpzJTJGcmVmciUyRnJlZnIwNDAxLmh0bWw=) 은 window.alert 이나 window.confirm 같은 메시지 대화상자를 레이어 팝업 형태로 표현 해 주는 UI 컴포넌트 입니다.
+[Alert(N.alert)](#cmVmcjA0MDElMjRBbGVydCRodG1sJTJGbmF0dXJhbGpzJTJGcmVmciUyRnJlZnIwNDAxLmh0bWw=) is a UI component that displays message dialogs such as window.alert or window.confirm in the form of layer popups.
 
 ###Button
 
-[Button(N.button)](#cmVmcjA0MDIlMjRCdXR0b24kaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDQwMi5odG1s) 은 context 옵션으로 지정된 "a, input[type=button], button" 요소를 사용하여 버튼을 만드는 UI 컴포넌트 입니다.
+[Button(N.button)](#cmVmcjA0MDIlMjRCdXR0b24kaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDQwMi5odG1s) is a UI component that creates a button with a "a, input[type=button], button" element specified as a context option.
 
 ###Datepicker
 
-[Datepicker(N.datepicker)](#cmVmcjA0MDMlMjREYXRlcGlja2VyJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjA0MDMuaHRtbA==) 는 context 옵션으로 지정 한 텍스트 입력요소에 날짜나 월을 선택 해서 입력 할 수 있는 달력 팝업을 표시 해 주는 UI 컴포넌트 입니다.
+[Datepicker(N.datepicker)](#cmVmcjA0MDMlMjREYXRlcGlja2VyJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjA0MDMuaHRtbA==) a UI component that displays a calendar popup for selecting a date or month in the text input element specified by the context option.
 
 ###Popup
 
-[Popup(N.popup)](#cmVmcjA0MDQlMjRQb3B1cCRodG1sJTJGbmF0dXJhbGpzJTJGcmVmciUyRnJlZnIwNDA0Lmh0bWw=) 은 context 옵션으로 지정 한 내부 요소나 url 옵션으로 지정한 페이지를 레이어 팝업 형태로 만들어 주는 UI 컴포넌트입니다.
+[Popup(N.popup)](#cmVmcjA0MDQlMjRQb3B1cCRodG1sJTJGbmF0dXJhbGpzJTJGcmVmciUyRnJlZnIwNDA0Lmh0bWw=) is a UI component that makes a layer popup form the internal element specified by the context option or the page specified by the url option.
 
 ###Tab
 
-[Tab(N.tab)](#cmVmcjA0MDUlMjRUYWIkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDQwNS5odG1s) 은  div>ul>li 태그로 구성 된 요소를 context 옵션으로 지정하여 탭 페이지 뷰를 만들어 주는 UI 컴포넌트입니다.
+[Tab(N.tab)](#cmVmcjA0MDUlMjRUYWIkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDQwNS5odG1s) is a UI component that creates a tab page view by specifying an element consisting of div>ul>li tags as the context option.
 
 ###Select
 
-[Select(N.select)](#cmVmcjA0MDYlMjRTZWxlY3QkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDQwNi5odG1s) 는 select, input[type=checkbox], input[type=radio] 요소에 데이터를 바인딩 하여 선택요소를 만들어 주고 해당 컨트롤의 기능을 확장 해 주는 UI 컴포넌트입니다.
+[Select(N.select)](#cmVmcjA0MDYlMjRTZWxlY3QkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDQwNi5odG1s) is a UI component that binds data to select, input[type=checkbox], and input[type=radio] elements to create a selection and extend the functionality of that control.
 
 ###Form
 
-[Form(N.form)](#cmVmcjA0MDclMjRGb3JtJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjA0MDcuaHRtbA==) 은 context 옵션으로 지정한 요소(div, table 등의 block 요소)에 단건 로우 데이터를 바인드하거나 생성하는  UI 컴포넌트입니다.
-
+[Form(N.form)](#cmVmcjA0MDclMjRGb3JtJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjA0MDcuaHRtbA==) is a UI component that binds or creates single row data to an element(block elements such as div and table) specified by the context option.
 ###List
 
-[List(N.list)](#cmVmcjA0MDglMjRMaXN0JGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjA0MDguaHRtbA==) 는 ul>li 요소를 context 옵션으로 지정하여 단일 컬럼 형태로 데이터 목록을 생성 해 주는 UI 컴포넌트입니다.
+[List(N.list)](#cmVmcjA0MDglMjRMaXN0JGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjA0MDguaHRtbA==) is a UI component that creates a list of data in the form of a single column by specifying the ul>li element as the context option.
 
 ###Grid
 
-[Grid(N.grid)](#cmVmcjA0MDklMjRHcmlkJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjA0MDkuaHRtbA==) 는 table 요소를 context 옵션으로 지정하여 멀티 컬럼 형태로 데이터 목록을 생성 해 주는 UI 컴포넌트입니다.
+[Grid(N.grid)](#cmVmcjA0MDklMjRHcmlkJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjA0MDkuaHRtbA==) is a UI component that creates a list of data in a multi-column form by specifying a table element as a context option.
 
 ###Pagination
 
-[Pagination(N.pagination)](#cmVmcjA0MTAlMjRQYWdpbmF0aW9uJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjA0MTAuaHRtbA==) 은 목록 데이터나 전체 행 수로 페이징 인덱스를 생성 해 주는 UI 컴포넌트입니다.
+[Pagination(N.pagination)](#cmVmcjA0MTAlMjRQYWdpbmF0aW9uJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjA0MTAuaHRtbA==) is a UI component that creates paging indexes from list data or the total count of rows.
 
 ###Tree
 
-[Tree(N.tree)](#cmVmcjA0MTElMjRUcmVlJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjA0MTEuaHRtbA==) 는 계층적 데이터를 트리 요소로 만들어 주는 UI 컴포넌트입니다.
+[Tree(N.tree)](#cmVmcjA0MTElMjRUcmVlJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjA0MTEuaHRtbA==) is a UI component that makes hierarchical data into tree elements.
 
 ##Natural-UI.Shell
 
-Natural-UI 가 컨텐츠 영역의 UI 개발을 지원 한다면 Natural-UI.Shell 은 컨텐츠영역 바깥의 쉘(Shell) 영역의 개발을 지원 하는 컴포넌트 패키지 입니다.
+While Natural-UI supports UI development in the content area, Natural-UI.Shell is a component package that supports the development of shell areas outside the content area.
 
 ###Notify(N.notify)
 
-[Notify(N.notify)](#cmVmcjA1MDElMjROb3RpZnkkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDUwMS5odG1s) 는 사용자의 확인 과정이 필요없는 전역 알림 메시지를 지정 한 위치에 표시 해주는 UI 컴포넌트 입니다.
+[Notify(N.notify)](#cmVmcjA1MDElMjROb3RpZnkkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDUwMS5odG1s) is a UI component that displays a global notification message in a specified location that does not require user confirmation.
 
 ###Documents(N.docs)
 
-[Documents(N.docs)](#cmVmcjA1MDIlMjREb2N1bWVudHMkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDUwMi5odG1s) 는 Natural-JS 기반의 메뉴 페이지를 MDI (Multi Document Interface) 또는 SDI (Single Document Interface) 구조로 표시하는 페이지 컨테이너입니다.
+[Documents(N.docs)](#cmVmcjA1MDIlMjREb2N1bWVudHMkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDUwMi5odG1s) is a page container that displays Natural-JS based menu pages in MDI(Multi Document Interface) or SDI(Single Document Interface) structure.
 
-지원
+Supports
 ===
 
-###개발 언어
+###Development language
 
-* ECMA Script 4 이상 / jQuery 1.12.4
+* Javascript(ECMAScript 3 or later) / jQuery 1.12.4
 * HTML / DHTML / HTML5
 * CSS2 / CSS3
 
-###지원 브라우저
+###Support browsers
 
-* PC : Internet Explorer 8 이상(Internet Explorer 9 이상에 최적화 되어 있음), Chrome, Firefox, Safari(OSX), Opera 최신 버전
-* 모바일 : iOS Safari, iOS UIWebView, Android Browser, Android Chrome, Android WebView
+* PC : Internet Explorer 8 or later(Optimized for Internet Explorer 9 or later), Chrome, Firefox, Safari(OSX), Opera latest version
+* Mobile : iOS Safari, iOS UIWebView, Android Browser, Android Chrome, Android WebView
 
-###교육 및 지원
+###Training and support
 
-* bbalganjjm@gmail.com 으로 문의
+* Please contact us at bbalganjjm@gmail.com.
 
-###라이센스
+###license
 This software is licensed under the [LGPL v2.1](https://github.com/bbalganjjm/natural_js/blob/master/LICENSE) &copy; KIM HWANG MAN&lt;<bbalganjjm@gmail.com>&gt;

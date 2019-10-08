@@ -23,15 +23,15 @@ N 은 Natural-JS 의 코어 함수들이 정의 되어 있는 오브젝트 클�
 * jQuery selector 확장 : style 이나 data 속성으로도 selector 를 정의 할 수 있는 jQuery selector 확장 기능 
 * jQuery plugin 확장 메서드 : jQuery Plugin 으로 제작된 Natural-JS 유틸리티 메서드
 * N : Natural-JS 의 코어 함수들이 정의 되어 있는 오브젝트 클래스
-* N.gc : Natural-JS 내부 Garbage Collection 관련 유틸리티 집합 클래스
-* N.string : 문자열 조작 관련 함수 집합 클래스
-* N.element : HTML 요소 제어에 관련된 함수 집합 클래스
-* N.date : 날짜 관련 함수 집합 클래스
-* N.browser : 웹 브라우저와 관련 된 함수 집합 클래스
-* N.message : 메시지(다국어) 처리 관련 함수 집합 클래스
-* N.array : Array 데이터 조작 관련 함수 집합 클래스
-* N.json : JSON 데이터 조작 관련 함수 집합 클래스
-* N.event : 이벤트 관련 함수 집합 클래스
+* N.gc : Natural-JS 내부 Garbage Collection 을 위한 유틸리티 집합 클래스
+* N.string : 문자열 제어를 위한 함수 집합 클래스
+* N.element : HTML 요소 제어를 위한 함수 집합 클래스
+* N.date : 날짜  제어를 위한 함수 집합 클래스
+* N.browser : 웹 브라우저 정보 관련 함수 집합 클래스
+* N.message : 메시지(다국어) 처리를 위한 함수 집합 클래스
+* N.array : Array 데이터 조작을 위한 함수 집합 클래스
+* N.json : JSON 데이터 조작을 위한 함수 집합 클래스
+* N.event : 이벤트 제어를 위한 함수 집합 클래스
 
 ###Natural Config - Config(N.config)
 
@@ -45,9 +45,10 @@ Natural-ARCHITECTURE 는 Natural-JS 의 아키텍처를 구성 하는 라이브�
 
 <center>[ Natural-ARCHITECTURE ]</center>
 
-###CVC Architecture Pattern
+###Communicator-View-Controller(CVC) Architecture Pattern
 
-CVC(Communicator-View-Controller) 패턴은 MVC(Model-View-Controlelr) 패턴을 변형한 아키텍처 패턴 으로서 아래 그림과 같이 클라이언트 브라우저 영역을 Communicator-View-Controller 아키텍처로 구성 하고 서버를 전체를 Model 영역으로 정의하는 클라이언트 중심의 아키텍처 패턴 입니다. CVC(Communicator-View-Controller) 패턴을 적용하면 클라이언트 브라우저의 구현 기술들이 서버 기술과 아키텍처의 종속성으로부터 벗어날 수 있고 디자인영역과 개발영역을 완벽하게 분리하여 개발의 복잡도를 낮출 수 있습니다.
+CVC 패턴은 Model-View-Controlelr(MVC) 패턴을 기반으로 하는 아키텍처 패턴 입니다. 아래 그림과 같이 클라이언트 브라우저 영역을 Communicator-View-Controller 아키텍처로 구성 하고 서버 전체를 Model 영역으로 정의하는 클라이언트 중심의 아키텍처 패턴 입니다. 
+CVC 패턴을 적용하면 클라이언트 브라우저 구현 기술이 서버 기술 및 서버 아키텍처 종속성에서 벗어날 수 있고 디자인영역과 개발영역을 완벽하게 분리하여 개발의 복잡도를 낮출 수 있습니다.
 
 ![CVC Architecture Pattern](images/intr/pic5.png)
 
@@ -56,11 +57,12 @@ CVC(Communicator-View-Controller) 패턴은 MVC(Model-View-Controlelr) 패턴을
 ###Natural Architecture Framework
 
 Natural Architecture Framework 는 CVC Architecture Pattern 을 구현한 아키텍쳐 프레임워크 입니다.
-<p class="alert">Natural Architecture Framework 는 개발 업무 영역을 명확하게 구분 해 주어 각 영역별 전문가들로 분업 할 수 있는 기반을 제공 합니다.</p>
 
 ![Natural Architecture Framework](images/intr/pic6.png)
 
 <center>[ Natural Architecture Framework ]</center>
+
+Natural Architecture Framework 는 개발 업무 영역을 명확하게 구분 해 주어 각 영역별 전문가들로 분업 할 수 있는 기반을 제공 합니다.
 
 #### Controller
 
@@ -68,19 +70,19 @@ Natural Architecture Framework 는 CVC Architecture Pattern 을 구현한 아키
  * N.cont 는 Controller object 의 init 함수를 실행 해 주고 Controller object 를 반환 합니다.
    <p class="alert">Controller object 는 View 의 요소들과 Communicator 에서 검색 한 데이터를 제어하는 객체 입니다.</p> 
  * Natural-ARCHITECTURE 는 Controller object 를 대상으로 AOP(Aspect-Oriented Programming) 를 지원 합니다.
- 
+
+#### View
+
 View 는 별도의 구현체는 없고 단순하게 HTML 요소 영역이  View 로 정의 되어 있습니다.
 
 #### Communicator
  
 [Communicator(N.comm)](#cmVmcjAyMDMlMjRDb21tdW5pY2F0b3IkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDIwMy5odG1s) 는 CVC Architecture Pattern 의 Communicator 레이어를 구현한 클래스 입니다.
  * N.comm 은 서버에 컨텐츠나 데이터를 요청하거나 파라미터를 전달 하는 등 서버와의 Ajax 통신을 지원하는 라이브러리 입니다.
- * N.comm 을 통해 서버와 통신하는 모든 요청과 응답 또는 에러 발생 단계에서 공통 로직을 실행 할 수 있는 [Communication Filter](#cmVmcjAyMDUlMjRDb21tdW5pY2F0aW9uJTIwRmlsdGVyJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAyMDUuaHRtbA==) 기능을 제공 합니다.
-
-#### Context 
+ * N.comm 은 서버와 통신하는 모든 요청 및 응답 또는 오류 생성 단계에서 공통 로직을 실행할 수있는 [Communication Filter](#cmVmcjAyMDUlMjRDb21tdW5pY2F0aW9uJTIwRmlsdGVyJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAyMDUuaHRtbA==) 기능을 제공합니다. 
 
 [Context(N.context)](#cmVmcjAyMDYlMjRDb250ZXh0JGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAyMDYuaHRtbA==) 는 Natural-JS 기반 어플리케이션의 Life-Cycle(페이지가 적제 되고 다른 URL로 redirect 되기 전까지) 안 에서 데이터의 영속성을 보장 하는 공간 입니다.
- * N.context 에는 Natural-JS 의 환경설정 값([Config(N.config)](#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s)), 프레임워크 공통 메시지 등이 N.context 객체에 저장 됩니다.
+ * Natural-JS 의 환경설정 값([Config(N.config)](#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s)), 프레임워크 공통 메시지 등이 N.context 객체에 저장 됩니다.
 
  
 ##Natural-DATA
@@ -90,7 +92,7 @@ Natural-DATA 는 데이터의 동기화, Formatting,  Validation, 가공을 지�
 ###DataSync
 
 DataSync 는 컴포넌트나 라이브러리에 의해 변경 된 데이터를 실시간으로 동기화 해 주는 라이브러리 입니다.
-<p class="alert">DataSync 는 컴포넌트간 양방향 데이터 바인딩을 지원 합니다.</p>
+<p class="alert">DataSync 는 컴포넌트 간 양방향 데이터 바인딩을 지원 합니다.</p>
 
 ###Formatter
 
@@ -100,9 +102,9 @@ DataSync 는 컴포넌트나 라이브러리에 의해 변경 된 데이터를 �
 
 [Validator(N.validator)](#cmVmcjAzMDIlMjRWYWxpZGF0b3IkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDMwMi5odG1s) 는 입력 한 데이터 셋(array[json object]에 대한 유효성을 검사하고 검사 결과 데이터 셋을 반환 해 주는 라이브러리 입니다.
 
-###Natural-DATA Libraries
+###Natural-DATA Library
 
-[Natural-DATA Libraries](#cmVmcjAzMDMlMjROYXR1cmFsLURBVEElMjBMaWJyYXJpZXMkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDMwMy5odG1s) 는 array[json object] 유형의 데이터를 정렬, 필터링 및 정제 하기위한 메소드 및 함수를 제공합니다.
+[Natural-DATA Library](#cmVmcjAzMDMlMjROYXR1cmFsLURBVEElMjBMaWJyYXJpZXMkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDMwMy5odG1s) 는 array[json object] 유형의 데이터를 정렬, 필터링 및 정제 하기위한 메서드 및 함수를 제공합니다.
 
 
 ##Natural-UI
@@ -174,7 +176,7 @@ Natural-UI 가 컨텐츠 영역의 UI 개발을 지원 한다면 Natural-UI.Shel
 
 ###개발 언어
 
-* ECMA Script 4 이상 / jQuery 1.12.4
+* Javascript(ECMAScript 3 이상) / jQuery 1.12.4
 * HTML / DHTML / HTML5
 * CSS2 / CSS3
 
@@ -185,7 +187,7 @@ Natural-UI 가 컨텐츠 영역의 UI 개발을 지원 한다면 Natural-UI.Shel
 
 ###교육 및 지원
 
-* bbalganjjm@gmail.com 으로 문의
+* bbalganjjm@gmail.com 으로 문의 바랍니다.
 
 ###라이센스
 This software is licensed under the [LGPL v2.1](https://github.com/bbalganjjm/natural_js/blob/master/LICENSE) &copy; KIM HWANG MAN&lt;<bbalganjjm@gmail.com>&gt;
