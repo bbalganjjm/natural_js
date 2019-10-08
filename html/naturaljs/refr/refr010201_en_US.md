@@ -12,11 +12,11 @@ Defined in the natural.config.js file and the configuration values ​​are sto
 
 There are two essential attribute values ​​to set when applying Natural-JS.
  1. N.context.attr("architecture").page.context : Specify as a jQuery selector string the container area (element) where the contents of the web application are displayed.
-	<span class="alert">If you use the Documents(N.docs) component, it is filled in automatically.</span>
-	<span class="alert">If the web application is built with a single page application (SPA) structure, specify the element that contains the menu page, otherwise enter "body" or an element that wraps the entire content.</span>
+	<div class="alert" style="display: block;">If you use the Documents(N.docs) component, it is filled in automatically.</div>
+	<div class="alert" style="display: block;">If the web application is built with a single page application (SPA) structure, specify the element that contains the menu page, otherwise enter "body" or an element that wraps the entire content.</div>
  2. N.context.attr("ui").alert.container : Specify as a jQuery selector strings the area (element) in which the elements of N.alert and N.popup components will be stored.
-	<span class="alert">If you use the Documents(N.docs) component, it is filled in automatically.</span>
-	<span class="alert">If the web application is built with a single page application (SPA) structure, specify the element that contains the menu page, otherwise enter "body" or an element that wraps the entire content.</span>
+	<div class="alert" style="display: block;">If you use the Documents(N.docs) component, it is filled in automatically.</div>
+	<div class="alert" style="display: block;">If the web application is built with a single page application (SPA) structure, specify the element that contains the menu page, otherwise enter "body" or an element that wraps the entire content.</div>
 
 The order in which the component options are applied is as follows.
 

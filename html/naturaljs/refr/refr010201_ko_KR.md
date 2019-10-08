@@ -12,11 +12,11 @@ natural.config.js 파일에 정의 되어 있으며 설정 값은 N.context 에 
 
 Natural-JS 적용 시 설정 해야 할 필수 속성값은 다음 두가지 입니다.
  1. N.context.attr("architecture").page.context : 웹 어플리케이션의 컨텐츠가 표시 되는 컨테이너 영역(요소)을 jQuery selector 문자열로 지정 합니다.
-	<span class="alert">Documents(N.docs) 컴포넌트를 사용하면 자동으로 입력 됩니다.</span>
-	<span class="alert">SPA(Single Page Application) 구조로 제작되는 웹 어플리케이션 이라면 메뉴 페이지를 적제하는 요소를 지정 하고 아니라면 "body" 나 전체 컨텐츠를 감싸고 있는 요소를 입력 해 주세요.</span>
+	<div class="alert" style="display: block;">Documents(N.docs) 컴포넌트를 사용하면 자동으로 입력 됩니다.</div>
+	<div class="alert" style="display: block;">SPA(Single Page Application) 구조로 제작되는 웹 어플리케이션 이라면 메뉴 페이지를 적제하는 요소를 지정 하고 아니라면 "body" 나 전체 컨텐츠를 감싸고 있는 요소를 입력 해 주세요.</div>
  2. N.context.attr("ui").alert.container : N.alert, N.popup 컴포넌트의 요소들이 저장 될 영역(요소)을 jQuery selector 문자열로 지정 합니다.
-	<span class="alert">Documents(N.docs) 컴포넌트를 사용하면 자동으로 입력 됩니다.</span>
-	<span class="alert">SPA(Single Page Application) 구조로 제작되는 웹 어플리케이션 이라면 메뉴 페이지를 적제하는 요소를 지정 하고 아니라면 "body" 나 전체 컨텐츠를 감싸고 있는 요소를 입력 해 주세요.</span>
+	<div class="alert" style="display: block;">Documents(N.docs) 컴포넌트를 사용하면 자동으로 입력 됩니다.</div>
+	<div class="alert" style="display: block;">SPA(Single Page Application) 구조로 제작되는 웹 어플리케이션 이라면 메뉴 페이지를 적제하는 요소를 지정 하고 아니라면 "body" 나 전체 컨텐츠를 감싸고 있는 요소를 입력 해 주세요.</div>
 
 컴포넌트 옵션이 적용 되는 순서는 다음과 같습니다.
 
