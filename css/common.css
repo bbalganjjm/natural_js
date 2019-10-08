@@ -629,6 +629,10 @@ pre.shell>code {
 
 /* Mobile */
 @media screen and (max-width: 414px) {
+    .main-nav {
+        display : none;
+    }
+    
     .demo .form.options colgroup col:nth-child(2n-1) {
         width: 22% !important;
     }

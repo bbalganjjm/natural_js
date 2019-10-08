@@ -336,11 +336,12 @@
                 N(".left-menu", view).innerHeight(N(this).height() - N(".logo", view).height());
                 
                 if($(window).width() <= 414 || 0 > "win16|win32|win64|mac".indexOf(navigator.platform.toLowerCase())) {
+                    N(".lefter-toggle-button", view).data("status", "show");
                     N(".content-wrap", "body").css({
                         "transition": "none",
                         "margin-left": "0"
                     });
-    	            N(".main-nav", "body").css({
+    	            N(".main-nav", "body").show().css({
     	                "transition": "none" 	                
     	            });
     	            N(".lefter-toggle-button", view).trigger("click.lefter");
@@ -348,6 +349,8 @@
     	                N(".main-nav", "body").css("transition", "");
     		            N(".content-wrap", "body").css("transition", "");	                
     	            }, 0);
+                } else {
+                    N(".lefter-toggle-button", view).data("status", "hide").trigger("click.lefter");
                 }
             }).trigger("resize.left-menu");
         }
