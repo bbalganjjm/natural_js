@@ -3,6 +3,7 @@
  * N.form,N.list,N.grid : Changed the default value of the "addTop" option to true.
  * N.grid, N.list : Improved performance of the "val" method.
  * N.grid : Changed the filter panel to not recognize HTML to block XSS attacks.
+ * N.grid : Multilingual has been applied to the title of popups generated when additional options are applied.
  * N.form.prototype.bindEvents.dataSync : Fixed a bug that didn't show the validation message when you first called the validate method.
    * The same applies to N.grid and N.list using N.form.
  * N.tab : Added a margin to the scroll button.
