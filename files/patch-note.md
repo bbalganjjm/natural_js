@@ -10,7 +10,8 @@
  * N.tab : Fixed a bug where tab scroll buttons were displayed when tabs did not exceed the screen when the "tabScroll" option was enabled.
  * N.tab : Fixed a bug that sometimes caused tabs to break in appearance when the "tabScroll" option was enabled.
  * N.tab : Changed the feature to use the native scrolling when the tab scroll option is enabled in a browser with a zero scroll size(mobile, etc.).
-
+ * N.tab : Changed the logic that is processed when the tabScroll option is enabled.
+ 
 ## Natural-ARCHITECTURE v0.13.11
  *
 
