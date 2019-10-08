@@ -10,7 +10,7 @@ Natural-JS consists of the Natural-CORE, Natural-ARCHITECTURE, Natural-DATA, and
 <p align="center">
 	<img src="https://bbalganjjm.github.io/natural_js/images/intr/pic3.png" alt="Structure of Natural-JS">
 </p>
-<center>[ Structure of Natural-JS ]</center>
+<p align="center">[ Structure of Natural-JS ]</p>
 
 ## Natural-CORE
 
@@ -47,7 +47,7 @@ Natural-ARCHITECTURE is a library package that makes up the architecture of Natu
 <p align="center">
 	<img src="https://bbalganjjm.github.io/natural_js/images/intr/pic4.png" alt="Natural-ARCHITECTURE">
 </p>
-<center>[ Natural-ARCHITECTURE ]</center>
+<p align="center">[ Natural-ARCHITECTURE ]</p>
 
 ### Communicator-View-Controller(CVC) Architecture Pattern
 
@@ -57,7 +57,7 @@ The complexity of development can be reduced by completely separating the design
 <p align="center">
 	<img src="https://bbalganjjm.github.io/natural_js/images/intr/pic5.png" alt="Communicator-View-Controller(CVC) Architecture Pattern">
 </p>
-<center>[ Communicator-View-Controller(CVC) Architecture Pattern ]</center>
+<p align="center">[ Communicator-View-Controller(CVC) Architecture Pattern ]</p>
 
 ### Natural Architecture Framework
 
@@ -66,7 +66,7 @@ Natural Architecture Framework is an architectural framework that implements the
 <p align="center">
 	<img src="https://bbalganjjm.github.io/natural_js/images/intr/pic6.png" alt="Natural Architecture Framework">
 </p>
-<center>[ Natural Architecture Framework ]</center>
+<p align="center">[ Natural Architecture Framework ]</p>
 
 Natural Architecture Framework provides a clear separation of the areas of development, providing a foundation for division of work among professionals in each area.
 
@@ -122,7 +122,7 @@ Natural-UI is a library package that supports HTML-based UI components.
 <p align="center">
 	<img src="https://bbalganjjm.github.io/natural_js/images/intr/pic7.png" alt="Natural-UI">
 </p>
-<center>[ Natural-UI ]</center>
+<p align="center">[ Natural-UI ]</p>
 
 ### Alert
 
