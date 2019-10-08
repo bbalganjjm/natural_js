@@ -265,10 +265,6 @@
 <script type="text/javascript">
     N(".index-lefter").cont({
         init : function(view, request) {
-            N(window).on("resize.left-menu", function() {
-                N(".left-menu", view).innerHeight(N(this).height() - N(".logo", view).height());
-            }).trigger("resize.left-menu");
-
             N(".left-menu", view).on("click.left-menu", "a", function(e) {
                 e.preventDefault();
 
@@ -336,9 +332,24 @@
                 selfEle = undefined;
             });
 
-            if($(window).width() <= 414 || 0 > "win16|win32|win64|mac".indexOf(navigator.platform.toLowerCase())) {
-	            N(".lefter-toggle-button", view).trigger("click.lefter");
-            }
+            N(window).on("resize.left-menu", function() {
+                N(".left-menu", view).innerHeight(N(this).height() - N(".logo", view).height());
+                
+                if($(window).width() <= 414 || 0 > "win16|win32|win64|mac".indexOf(navigator.platform.toLowerCase())) {
+                    N(".content-wrap", "body").css({
+                        "transition": "none",
+                        "margin-left": "0"
+                    });
+    	            N(".main-nav", "body").css({
+    	                "transition": "none" 	                
+    	            });
+    	            N(".lefter-toggle-button", view).trigger("click.lefter");
+    	            setTimeout(function() {
+    	                N(".main-nav", "body").css("transition", "");
+    		            N(".content-wrap", "body").css("transition", "");	                
+    	            }, 0);
+                }
+            }).trigger("resize.left-menu");
         }
     });
 </script>
