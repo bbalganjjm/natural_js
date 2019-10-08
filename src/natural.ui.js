@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.38.216
+ * Natural-UI v0.38.217
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-UI"] = "0.38.216";
+    N.version["Natural-UI"] = "0.38.217";
 
     $.fn.extend($.extend(N.prototype, {
         alert : function(msg, vars) {
@@ -2728,7 +2728,7 @@
                 var eventNameSpace = ".tab.scroll";
                 var tabContainerEle = opts.context.find(">ul").addClass("effect__");
 
-                var scrollBtnEles = opts.context.find(">a");
+                var scrollBtnEles = opts.context.find(">a").hide();
                 var prevBtnEle;
                 var nextBtnEle;
                 var liMarginRight = parseInt(N.string.trimToZero(tabContainerEle.find(">li:first").css("margin-right")));
