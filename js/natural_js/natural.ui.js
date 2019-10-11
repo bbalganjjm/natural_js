@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.38.217
+ * Natural-UI v0.38.218
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-UI"] = "0.38.217";
+    N.version["Natural-UI"] = "0.38.218";
 
     $.fn.extend($.extend(N.prototype, {
         alert : function(msg, vars) {
@@ -2784,8 +2784,6 @@
                     });
                     ulWidth += opts.tabScrollCorrection.tabContainerWidthCorrectionPx;
 
-                    N.notify.add(prevBtnEle.outerWidth() + "|" + liMarginRight);
-                    
                     if(ulWidth > 0 && ulWidth > opts.context.width() + liMarginRight) {
                         if(N.browser.scrollbarWidth() > 0) {
                             opts.context.css("overflow", "hidden");
