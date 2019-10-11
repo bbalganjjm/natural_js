@@ -2885,7 +2885,7 @@
                     });
                 }
                 
-                alert(tabContainerEle.css("margin-left"));
+                alert(opts.context.find(">ul").css("margin-left") + "||");
             },
             loadContent : function(url, targetIdx, callback, isFirst) {
                 var opts = this.options;
