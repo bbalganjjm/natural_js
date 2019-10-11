@@ -159,32 +159,12 @@
 						var opts = request.options;
 						if((opts.target && N.isElement(opts.target)) || opts.dataType === "html" || opts.contentType === "text/css") {
 						    if(location.hostname === "localhost" || location.hostname === "127.0.0.1") {
-						        if(data.indexOf("<script") > -1) {
-	                                // Natural-CODE : 코드 인스펙션
-	                                var excludes = [
-	                                    ".index-header",                        // view 컨텍스트 정의 안함.
-	                                    ".page-header",                         // view 컨텍스트 정의 안함.
-	                                    ".index-lefter",                        // view 컨텍스트 정의 안함.
-	                                    ".index-contents",                      // view 컨텍스트 정의 안함.
-	                                    ".index-footer",                        // view 컨텍스트 정의 안함.
-
-	                                    'N("#selectDocs", view)).bind().val'    // jQuery val 을 사용하여 입력 값을 수정
-	                                ];
-
-	                                var inspectionReport = N.code.inspection.test(data, excludes);
-
-	                                var color = "black";
-	                                N(inspectionReport).each(function() {
-	                                    if(this.level === "ERROR") {
-	                                        color = "red";
-	                                    } else if(this.level === "ERROR") {
-	                                        color = "blue";
-	                                    }
-	                                    N[this.level.toLowerCase()]("%c[" + this.level + "] " + opts.url + " - " + this.line + " : " + this.code, "color: " + color + "; font-weight: bold; line-height: 200%;",
-	                                            "\n" + this.message);
-	                                });
-	                            }
-						    }
+                                // [ Natural-CODE ] 코드 인스펙션
+                                N.code.inspection.report.console(N.code.inspection.test(data), opts.url);
+                                
+                                // [ Natural-CODE ] 디버깅 지원을 위한 컨트롤러의 sourceURL 자동 삽입 처리
+                                data = N.code.addSourceURL(data, opts.url);
+                            }
 
 						    // color theme
                             if(window.localStorage.themeColor !== "green") {
@@ -197,8 +177,7 @@
                                 });
                             }
 
-						    // Natural-CODE : 디버깅 지원을 위한 컨트롤러의 sourceURL 자동 삽입 처리
-							return N.code.addSourceURL(data, opts.url);
+                            return data;
 						}
 					},
 					/**
@@ -902,6 +881,90 @@
 		}
 	});
 
+	/**
+     * Natural-TEMPLATE Config
+     */
+    N.context.attr("template", {
+        aop : {
+            /**
+             * 공통코드 조회 정보
+             * 
+             * @codeUrl 공통코드 조회 URL
+             * @codeKey : 그룹코드 프로퍼티 명
+             */
+            codes : {
+                codeUrl : "sample/code/getSampleCodeList.json",
+                codeKey : "code"
+            }
+        },
+        /**
+         * 다국어 메시지
+         */
+        "message" : {
+            "ko_KR" : {
+                "MSG-0001" : "data 옵션을 정의 해 주세요.",
+                "MSG-0002" : "서버 오류가 발생하여 공통 코드 목록을 조회 하지 못했습니다.",
+                "MSG-0003" : "데이터 코드 목록을 조회하는 N.comm({0}) 이 없습니다.",
+                "MSG-0004" : "서버 오류가 발생하여 데이터 코드 목록을 조회 하지 못했습니다.",
+                "MSG-0005" : "컴포넌트({0})가 잘못 지정 되었습니다.",
+                "MSG-0006" : "이벤트({0})가 잘못 지정 되었습니다."
+            },
+            "en_US" : {
+                "MSG-0001" : "Define the data option.",
+                "MSG-0002" : "The common code list could not be queried because a server error occurred.",
+                "MSG-0003" : "There is no N.comm({0}) to query the data code list.",
+                "MSG-0004" : "The data code list could not be queried because a server error occurred.",
+                "MSG-0005" : "Component({0}) was incorrectly specified.",
+                "MSG-0006" : "Event({0}) was incorrectly specified."
+            }
+        }
+    });
+    
+    /**
+     * Natural-CODE Config
+     */
+    N.context.attr("code", {
+        /**
+         * 검사 제외 구문
+         * 
+         * 검출 된 코드 내용 중 일치하는 부분을 입력.
+         */
+        excludes : [
+            ".index-header", // view 컨텍스트 정의 안함.
+            ".page-header", // view 컨텍스트 정의 안함.
+            ".index-lefter", // view 컨텍스트 정의 안함.
+            ".index-contents", // view 컨텍스트 정의 안함.
+            ".index-footer" // view 컨텍스트 정의 안함.
+        ],
+        /**
+         * 다국어 메시지
+         */
+        "message" : {
+            "ko_KR" : {
+                "NoContextSpecifiedInSelector" : 'Controller 안에서 jQuery 로 요소를 선택할 때는 반드시 $ 나 N 함수의 두번째 인자(context)에 view 를 넣어 주거나 view 에서 find 해야 합니다. '
+                    + 'view(context) 를 지정하지 않으면 다른 페이지에있는 요소까지 선택 되어 의도하지 않은 오류를 발생 시킬 수 있습니다. '
+                    + '\nex) N("selector", cont.view).hide();'
+                    + '\n    cont.view.find("selector").hide();',
+                "UseTheComponentsValMethod" : 'jQuery 의 val 메서드를 사용하여 입력요소의 value 를 수정하면 컴포넌트에 바인드 되어 있는 데이터는 업데이트 되지 않습니다. '
+                    + '데이터와 관련있는 HTML 컨트롤은 N.form 이나 N.grid, N.list 등의 컴포넌트에서 제공하는 val 메서드를 사용해야 합니다.'
+                    + '\nex) cont["p.form.id"].val("columnName", "value")'
+                    + '\n    cont["p.grid.id"].val(index, "columnName", "value")'
+                    + '\n    cont["p.list.id"].val(index, "columnName", "value")'
+            },
+            "en_US" : {
+                "NoContextSpecifiedInSelector" : 'Controller 안에서 jQuery 로 요소를 선택할 때는 반드시 $ 나 N 함수의 두번째 인자(context)에 view 를 넣어 주거나 view 에서 find 해야 합니다. '
+                    + 'view(context) 를 지정하지 않으면 다른 페이지에있는 요소까지 선택 되어 의도하지 않은 오류를 발생 시킬 수 있습니다. '
+                    + '\nex) N("selector", cont.view).hide();'
+                    + '\n    cont.view.find("selector").hide();',
+                "UseTheComponentsValMethod" : 'jQuery 의 val 메서드를 사용하여 입력요소의 value 를 수정하면 컴포넌트에 바인드 되어 있는 데이터는 업데이트 되지 않습니다. '
+                    + '데이터와 관련있는 HTML 컨트롤은 N.form 이나 N.grid, N.list 등의 컴포넌트에서 제공하는 val 메서드를 사용해야 합니다.'
+                    + '\nex) cont["p.form.id"].val("columnName", "value")'
+                    + '\n    cont["p.grid.id"].val(index, "columnName", "value")'
+                    + '\n    cont["p.list.id"].val(index, "columnName", "value")'
+            }
+        }
+    });
+    
 	// Natural-JS API 메뉴얼 용 advisors
 	N.context.attr("architecture").cont.advisors.push({ // md 파일 변환
         "pointcut" : ".view-markdown:^init$",

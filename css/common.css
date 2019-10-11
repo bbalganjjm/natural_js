@@ -20,6 +20,9 @@ a {
     text-decoration: none;
     color: #0366d6;
 }
+.pagination__ a {
+    color: rgba(0, 0, 0, 0.87);
+}
 
 [lang] {
 	display: none;

@@ -1,5 +1,5 @@
 /*!
- * Natural-TEMPLATE v0.0.10
+ * Natural-TEMPLATE v0.1.10
  *
  * Released under the LGPL v2.1 license
  * Date: 2019-02-28T18:00Z
@@ -7,7 +7,7 @@
  * Copyright 2019 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-TEMPLATE"] = "0.0.10";
+    N.version["Natural-TEMPLATE"] = "0.1.10";
 
     (function(N) {
 
@@ -15,26 +15,24 @@
             aop : {
                 codes : function(cont, joinPoint, opts) {
                     var options = {
-                        codeUrl : function(cont) {
-                            return "sample/code/getSampleCodeList.json";
-                        },
-                        codeKey : "code",
+                        codeUrl : null,
+                        codeKey : null
                     }
 
-                    if(opts) {
-                        try {
-                            $.extend(true, options, opts);
-                        } catch (e) {
-                            throw N.error("N.template", e);
-                        }
+                    try {
+                        $.extend(true, options, N.context.attr("template").aop.codes);
+                    } catch (e) {
+                        throw N.error("N.tab", e);
                     }
+                    
+                    $.extend(true, options, opts);
 
                     var codeList = [];
                     var commList = [];
                     var selectList = [];
                     for(var prop in cont) {
                         if(N.type(prop) === "string" && N.string.startsWith(prop, "p.select.")) {
-                            // 파라미터가 Array 로 들어왔을때.
+                            // When the parameter is an array.
                             if(N.type(cont[prop]) === "array" && cont[prop].length > 0) {
                                 if(cont[prop].length > 2) {
                                     cont[prop] = {
@@ -81,7 +79,7 @@
                                     return select;
                                 }).get();
                             } else {
-                                throw N.error("data 옵션을 정의 해 주세요.");
+                                throw N.error(N.message.get(N.context.attr("template"), "MSG-0001"));
                             }
                         });
                     }
@@ -89,7 +87,7 @@
                     if(codeList.length > 0 || commList.length > 0) {
                         var xhrs = [];
 
-                        // 공통코드
+                        // Common code list
                         if(codeList.length > 0) {
                             var codeParam = N(codeList).map(function(i, codeInfo) {
                                 return codeInfo.split("|")[1];
@@ -97,7 +95,7 @@
                             xhrs.push(N({
                                 codes : codeParam != null && codeParam.length === 0 ? undefined : codeParam
                             }).comm({
-                                url : options.codeUrl(cont)
+                                url : options.codeUrl
                             }).submit(function(data) {
                                 N(codeList).each(function(i, codeInfo) {
                                     var codeInfoArr = codeInfo.split("|");
@@ -118,16 +116,16 @@
                                 });
                             }).error(function(e) {
                                 N.warn(e);
-                                throw N.error("서버에러가 발생하여 공통코드를 조회하지 못했습니다.");
+                                throw N.error(N.message.get(N.context.attr("template"), "MSG-0002"));
                             }).request.obj.xhr);
                         }
 
-                        // 데이터 코드
+                        // Data code list
                         N(commList).each(function(i, commStr) {
                             var codeInfoArr = commStr.split("|");
 
                             if(!cont[codeInfoArr[1]]) {
-                                throw N.error("데이터 코드를 조회하는 N.comm(" + codeInfoArr[1] + ") 이 없습니다.");
+                                throw N.error(N.message.get(N.context.attr("template"), "MSG-0003", [ codeInfoArr[1] ]));
                             }
 
                             xhrs.push(cont[codeInfoArr[1]]().submit(function(data) {
@@ -144,7 +142,7 @@
                                 }).get();
                             }).error(function(e) {
                                 N.warn(e);
-                                throw N.error("서버에러가 발생하여 데이터[" + codeInfoArr[0] + "] 코드를 조회하지 못했습니다.");
+                                throw N.error(N.message.get(N.context.attr("template"), "MSG-0004", [ codeInfoArr[0] ]));
                             }).request.obj.xhr);
                         });
 
@@ -177,7 +175,7 @@
 
                     joinPoint.proceed();
 
-                    // 팝업이나 탭에서 지연 된 init 이 실행 된 후에 onOpen을 실행하기 위해서.
+                    // In order to run onOpen after a delayed init is executed in a popup or tab.
                     setTimeout(function() {
                         if(cont.onOpenDefer) {
                             cont.onOpenDefer.resolve();
@@ -273,10 +271,10 @@
                                 }));
                             }
                         } else {
-                            throw N.error("컴포넌트(" + cont.view.data("pageid") + ":" + prop + ")가 잘못 지정 되었습니다.");
+                            throw N.error(N.message.get(N.context.attr("template"), "MSG-0005", [ cont.view.data("pageid") + ":" + prop ]));
                         }
                     } else {
-                        throw N.error("컴포넌트(" + cont.view.data("pageid") + ":" + prop + ")가 잘못 지정 되었습니다.");
+                        throw N.error(N.message.get(N.context.attr("template"), "MSG-0005", [ cont.view.data("pageid") + ":" + prop ]));
                     }
                 },
                 events : function(cont, prop) {
@@ -294,7 +292,7 @@
                             targetProp = cont[prop].target;
                             handler = cont[prop].handler;
                         } else {
-                            throw N.error("이벤트(" + cont.view.data("pageid") + ":" + prop + ")가 잘못 지정 되었습니다.");
+                            throw N.error(N.message.get(N.context.attr("template"), "MSG-0006", [ cont.view.data("pageid") + ":" + prop ]));
                         }
 
                         var targetEle = N(idSelector + targetProp, cont.view);
@@ -311,19 +309,19 @@
                             if(compInst) {
                                 targetEle = compInst.tempRowEle.find(idSelector + targetProp);
 
-                                // 대상요소가 checkbox 나 radio 이면 name selector 로 요소가 지정 됨(#eleId -> [name='eleId']).
+                                // If the target element is a checkbox or radio, the element is imported by name selector.(#eleId -> [name='eleId']).
                                 if(targetEle.is(":radio, :checkbox") && N("[name='" + targetProp + "']", compInst.tempRowEle).length > 1) {
                                     targetEle = N("[name='" + targetProp + "']", compInst.tempRowEle);
                                 }
                             }
                         } else {
-                            // 대상요소가 checkbox 나 radio 이면 name selector 로 요소가 지정 됨(#eleId -> [name='eleId']).
+                            // If the target element is a checkbox or radio, the element is imported by name selector.(#eleId -> [name='eleId']).
                             if(targetEle.is(":radio, :checkbox") && N("[name='" + targetProp + "']", cont.view).length > 1) {
                                 targetEle = N("[name='" + targetProp + "']", cont.view);
                             }
                         }
 
-                        // 대상요소가 버튼요소(a, button, input[type=button]) 이면 N.button 컴포넌트가 적용 됨.
+                        // If the target element is a button element(a, button, input[type=button]), the N.button component is automatically applied.
                         if(targetEle.is("a, button, input[type=button]")) {
                             targetEle.button();
                         } else {
@@ -349,7 +347,7 @@
                             cont[prop] = targetEle.on(eventName + "." + cont.view.data("pageid"), handler);
                         }
                     } else {
-                        throw N.error("이벤트(" + cont.view.data("pageid") + ":" + prop + ")가 잘못 지정 되었습니다.");
+                        throw N.error(N.message.get(N.context.attr("template"), "MSG-0006", [ cont.view.data("pageid") + ":" + prop ]));
                     }
                 }
             }
