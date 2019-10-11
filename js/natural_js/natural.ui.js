@@ -2809,13 +2809,11 @@
                         alert(1);
                         if(scrollBtnEles.length > 1) {
                             scrollBtnEles.hide();
+                            tabContainerEle.css("margin-left", "");
+                            prevBtnEle.removeClass("disabled__");
                         }
                         if(N.browser.scrollbarWidth() > 0) {
                             opts.context.css("overflow", "");
-                            if(scrollBtnEles.length > 1) {
-                                tabContainerEle.css("margin-left", "");
-                                prevBtnEle.removeClass("disabled__");
-                            }
                         }
                         
                         if(tabContainerEle.parent().hasClass("tab_native_scroll__")) {
