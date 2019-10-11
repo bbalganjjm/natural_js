@@ -2791,7 +2791,7 @@
                                 tabContainerEle.unwrap();
                             }
                             if(scrollBtnEles.length > 1) {
-                                N.notify.all(prevBtnEle.outerWidth() + "|" + liMarginRight);
+                                N.notify.add(prevBtnEle.outerWidth() + "|" + liMarginRight);
                                 tabContainerEle.css("margin-left", (prevBtnEle.outerWidth() + liMarginRight) + "px");
                                 prevBtnEle.addClass("disabled__");
                                 scrollBtnEles.show();
