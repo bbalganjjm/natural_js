@@ -2790,21 +2790,17 @@
                             if(tabContainerEle.parent().hasClass("tab_native_scroll__")) {
                                 tabContainerEle.unwrap();
                             }
-                            if(scrollBtnEles.length > 1) {
-                                tabContainerEle.css("margin-left", (prevBtnEle.outerWidth() + liMarginRight) + "px");
-                                prevBtnEle.addClass("disabled__");
-                                scrollBtnEles.show();
-                            }
                         } else {
                             N.notify.add(prevBtnEle.outerWidth() + "|" + liMarginRight);
                             if(!tabContainerEle.parent().hasClass("tab_native_scroll__")) {
                                 tabContainerEle.wrap('<div class="tab_native_scroll__" style="margin-left: ' + (prevBtnEle.outerWidth() + liMarginRight) + 'px;margin-right: ' + (nextBtnEle.outerWidth() - liMarginRight) + 'px;"></div>');
                             }
-                            if(scrollBtnEles.length > 1) {
-                                tabContainerEle.css("margin-left", (prevBtnEle.outerWidth() + liMarginRight) + "px");
-                                prevBtnEle.addClass("disabled__");
-                                scrollBtnEles.show();
-                            }
+                        }
+                        
+                        if(scrollBtnEles.length > 1) {
+                            tabContainerEle.css("margin-left", (prevBtnEle.outerWidth() + liMarginRight) + "px");
+                            prevBtnEle.addClass("disabled__");
+                            scrollBtnEles.show();
                         }
                         
                         tabContainerEle.addClass("tab_scroll__").width(ulWidth);
