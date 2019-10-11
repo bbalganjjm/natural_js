@@ -2752,7 +2752,7 @@
                         } else {
                             tabContainerEle.parent(".tab_native_scroll__").animate({ 
                                 scrollLeft: 0 
-                                }, 300, "swing");
+                            }, 300, "swing");
                         }
                     });
                     nextBtnEle = scrollBtnEles.eq(1).addClass("tab_scroll_next__").css("right", 0).bind("click" + eventNameSpace,  function(e) {
@@ -2766,7 +2766,7 @@
                         } else {
                             tabContainerEle.parent(".tab_native_scroll__").animate({ 
                                 scrollLeft: tabContainerEle.outerWidth()
-                                }, 300, "swing");
+                            }, 300, "swing");
                         }
                     });
 
@@ -2797,7 +2797,7 @@
                             }
                         } else {
                             if(!tabContainerEle.parent().hasClass("tab_native_scroll__")) {
-                                tabContainerEle.wrap('<div class="tab_native_scroll__" style="margin-left: ' + (prevBtnEle.outerWidth() + liMarginRight) + 'px;margin-right: ' + (nextBtnEle.outerWidth() - liMarginRight) + 'px;"></div>');
+                                tabContainerEle.wrap('<div class="tab_native_scroll__" style=""></div>');
                             }
                             if(scrollBtnEles.length > 1) {
                                 scrollBtnEles.show();
