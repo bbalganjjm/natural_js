@@ -2784,8 +2784,7 @@
                     });
                     ulWidth += opts.tabScrollCorrection.tabContainerWidthCorrectionPx;
 
-                    liMarginRight = parseInt(N.string.trimToZero(tabContainerEle.find(">li:first").css("margin-right")));
-                    
+                    alert(prevBtnEle.outerWidth() + "|" + liMarginRight);
                     if(ulWidth > 0 && ulWidth > opts.context.width() + liMarginRight) {
                         if(N.browser.scrollbarWidth() > 0) {
                             opts.context.css("overflow", "hidden");
