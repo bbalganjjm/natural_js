@@ -2797,7 +2797,7 @@
                             }
                         } else {
                             if(!tabContainerEle.parent().hasClass("tab_native_scroll__")) {
-                                tabContainerEle.wrap('<div class="tab_native_scroll__"></div>');
+                                tabContainerEle.wrap('<div class="tab_native_scroll__" style="margin-left: ' + (prevBtnEle.outerWidth() + liMarginRight) + 'px;margin-right: ' + (nextBtnEle.outerWidth() - liMarginRight) + 'px;"></div>');
                             }
                             if(scrollBtnEles.length > 1) {
                                 scrollBtnEles.show();
@@ -2832,6 +2832,7 @@
                     }, opts.tabScrollCorrection.tabContainerWidthReCalcDelayTime);
                 }
 
+                alert(N.browser.scrollbarWidth());
                 if(N.browser.scrollbarWidth() > 0) {
                     var sPageX;
                     var prevDefGap = 0;
