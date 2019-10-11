@@ -2797,7 +2797,7 @@
                             }
                         } else {
                             if(!tabContainerEle.parent().hasClass("tab_native_scroll__")) {
-                                tabContainerEle.wrap('<div class="tab_native_scroll__" style="margin-left: ' + (prevBtnEle.outerWidth() + liMarginRight) + 'px;margin-right: ' + (nextBtnEle.outerWidth() - liMarginRight) + 'px;"></div>');
+                                tabContainerEle.wrap('<div class="tab_native_scroll__"></div>');
                             }
                             if(scrollBtnEles.length > 1) {
                                 scrollBtnEles.show();
