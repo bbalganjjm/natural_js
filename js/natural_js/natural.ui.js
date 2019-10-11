@@ -2806,7 +2806,7 @@
                         
                         tabContainerEle.addClass("tab_scroll__").width(ulWidth);
                     } else {
-                        alert(1);
+                        alert(2);
                         if(scrollBtnEles.length > 1) {
                             scrollBtnEles.hide();
                             tabContainerEle.css("margin-left", "");
