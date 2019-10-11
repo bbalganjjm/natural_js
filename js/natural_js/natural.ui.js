@@ -2806,21 +2806,7 @@
                         
                         tabContainerEle.addClass("tab_scroll__").width(ulWidth);
                     } else {
-                        if(scrollBtnEles.length > 1) {
-                            scrollBtnEles.hide();
-                            tabContainerEle.css("margin-left", "");
-                            prevBtnEle.removeClass("disabled__");
-                        }
-                        
-                        if(N.browser.scrollbarWidth() > 0) {
-                            opts.context.css("overflow", "");
-                        }
-                        
-                        if(tabContainerEle.parent().hasClass("tab_native_scroll__")) {
-                            tabContainerEle.unwrap();
-                        }
-                        
-                        tabContainerEle.css("width", "");
+                        alert(opts.context.find(">ul").css("margin-left") + "1");
                     }
                     
                 }).trigger("resize" + eventNameSpace);
@@ -2884,8 +2870,6 @@
                         }
                     });
                 }
-                
-                alert(opts.context.find(">ul").css("margin-left") + "||");
             },
             loadContent : function(url, targetIdx, callback, isFirst) {
                 var opts = this.options;
