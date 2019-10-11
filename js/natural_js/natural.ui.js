@@ -2832,7 +2832,6 @@
                     }, opts.tabScrollCorrection.tabContainerWidthReCalcDelayTime);
                 }
 
-                alert(N.browser.scrollbarWidth());
                 if(N.browser.scrollbarWidth() > 0) {
                     var sPageX;
                     var prevDefGap = 0;
