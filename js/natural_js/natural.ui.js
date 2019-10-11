@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.38.218
+ * Natural-UI v0.38.217
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-UI"] = "0.38.218";
+    N.version["Natural-UI"] = "0.38.217";
 
     $.fn.extend($.extend(N.prototype, {
         alert : function(msg, vars) {
@@ -2791,16 +2791,18 @@
                             if(tabContainerEle.parent().hasClass("tab_native_scroll__")) {
                                 tabContainerEle.unwrap();
                             }
+                            if(scrollBtnEles.length > 1) {
+                                tabContainerEle.css("margin-left", (prevBtnEle.outerWidth() + liMarginRight) + "px");
+                                prevBtnEle.addClass("disabled__");
+                                scrollBtnEles.show();
+                            }
                         } else {
                             if(!tabContainerEle.parent().hasClass("tab_native_scroll__")) {
                                 tabContainerEle.wrap('<div class="tab_native_scroll__" style="margin-left: ' + (prevBtnEle.outerWidth() + liMarginRight) + 'px;margin-right: ' + (nextBtnEle.outerWidth() - liMarginRight) + 'px;"></div>');
                             }
-                        }
-                        
-                        if(scrollBtnEles.length > 1) {
-                            tabContainerEle.css("margin-left", (prevBtnEle.outerWidth() + liMarginRight) + "px");
-                            prevBtnEle.addClass("disabled__");
-                            scrollBtnEles.show();
+                            if(scrollBtnEles.length > 1) {
+                                scrollBtnEles.show();
+                            }
                         }
                         
                         tabContainerEle.addClass("tab_scroll__").width(ulWidth);
@@ -2828,6 +2830,7 @@
                 }).trigger("resize" + eventNameSpace);
 
                 if(opts.tabScrollCorrection.tabContainerWidthReCalcDelayTime > 0) {
+                    N.log(opts.tabScrollCorrection.tabContainerWidthReCalcDelayTime);
                     setTimeout(function() {
                         N(window).trigger("resize" + eventNameSpace);
                     }, opts.tabScrollCorrection.tabContainerWidthReCalcDelayTime);
