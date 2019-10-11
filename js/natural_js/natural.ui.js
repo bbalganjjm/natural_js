@@ -2784,7 +2784,6 @@
                     });
                     ulWidth += opts.tabScrollCorrection.tabContainerWidthCorrectionPx;
 
-                    alert(prevBtnEle.outerWidth() + "|" + liMarginRight);
                     if(ulWidth > 0 && ulWidth > opts.context.width() + liMarginRight) {
                         if(N.browser.scrollbarWidth() > 0) {
                             opts.context.css("overflow", "hidden");
