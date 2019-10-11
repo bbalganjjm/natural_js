@@ -2774,6 +2774,10 @@
                 }
 
                 N(window).bind("resize" + eventNameSpace, function() {
+                    if(!tabContainerEle.is(":visible")) {
+                        return false;
+                    }
+                    
                     var ulWidth = 0;
                     opts.links.each(function() {
                         ulWidth += ($(this).outerWidth() + parseInt(N.string.trimToZero($(this).css("margin-left"))) + parseInt(N.string.trimToZero($(this).css("margin-right"))));
