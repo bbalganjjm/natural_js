@@ -2784,6 +2784,8 @@
                     });
                     ulWidth += opts.tabScrollCorrection.tabContainerWidthCorrectionPx;
 
+                    N.notify.add(prevBtnEle.outerWidth() + "|" + liMarginRight);
+                    
                     if(ulWidth > 0 && ulWidth > opts.context.width() + liMarginRight) {
                         if(N.browser.scrollbarWidth() > 0) {
                             opts.context.css("overflow", "hidden");
@@ -2791,7 +2793,6 @@
                                 tabContainerEle.unwrap();
                             }
                         } else {
-                            N.notify.add(prevBtnEle.outerWidth() + "|" + liMarginRight);
                             if(!tabContainerEle.parent().hasClass("tab_native_scroll__")) {
                                 tabContainerEle.wrap('<div class="tab_native_scroll__" style="margin-left: ' + (prevBtnEle.outerWidth() + liMarginRight) + 'px;margin-right: ' + (nextBtnEle.outerWidth() - liMarginRight) + 'px;"></div>');
                             }
