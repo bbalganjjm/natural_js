@@ -2806,12 +2806,12 @@
                         
                         tabContainerEle.addClass("tab_scroll__").width(ulWidth);
                     } else {
-                        alert(2);
                         if(scrollBtnEles.length > 1) {
                             scrollBtnEles.hide();
                             tabContainerEle.css("margin-left", "");
                             prevBtnEle.removeClass("disabled__");
                         }
+                        
                         if(N.browser.scrollbarWidth() > 0) {
                             opts.context.css("overflow", "");
                         }
@@ -2884,6 +2884,8 @@
                         }
                     });
                 }
+                
+                alert(3);
             },
             loadContent : function(url, targetIdx, callback, isFirst) {
                 var opts = this.options;
