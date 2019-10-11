@@ -1,5 +1,5 @@
 /*!
- * Natural-CODE v0.1.4
+ * Natural-CODE v0.2.4
  *
  * Released under the LGPL v2.1 license
  * Date: 2019-02-28T18:00Z
@@ -7,22 +7,25 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-CODE"] = "0.1.4";
+    N.version["Natural-CODE"] = "0.2.4";
 
     (function(N) {
 
         var Code = N.code = {
             inspection : {
-                test : function(sourceCode, excludes, rules) {
+                test : function(codes, rules) {
+                    if(codes.indexOf("<script") < 0) {
+                        return false;
+                    }
                     var report = []
                     
                     if(rules) {
                         N(rules).each(function() {
-                            Code.inspection.rules[this](sourceCode, excludes, report);                          
+                            Code.inspection.rules[this](codes, N.context.attr("code").excludes, report);                          
                         });
                     } else {
                         for(var k in Code.inspection.rules) {
-                            Code.inspection.rules[k](sourceCode, excludes, report);
+                            Code.inspection.rules[k](codes, N.context.attr("code").excludes, report);
                         }
                     }
                     
@@ -32,10 +35,10 @@
                     /**
                      * jQuery Selector 에 view 를 context 로 지정하지 않은 코드 검출
                      */
-                    "NoContextSpecifiedInSelector" : function(sourceCode, excludes, report) {
+                    "NoContextSpecifiedInSelector" : function(codes, excludes, report) {
                         var regex = /[N$]\((.*?)\)(.*)/gm;
                         var match;
-                        while (match=regex.exec(sourceCode)) {
+                        while (match=regex.exec(codes)) {
                             var isExclude = false;
                             N(excludes).each(function(i, str) {
                                 if(match[0].indexOf(str) > -1) {
@@ -73,16 +76,13 @@
                                 if(!isExclude) {
                                     var script = "";
                                     try {
-                                        script = sourceCode.substring(sourceCode.indexOf("<script"), sourceCode.indexOf("</script>"));
+                                        script = codes.substring(codes.indexOf("<script"), codes.indexOf("</script>"));
                                     } catch(e) { N.warn(e) };
                                     if(script.indexOf(match[0]) > -1) {
                                         report.push({
                                             "level" : "WARN",
-                                            "message" : 'Controller 안에서 jQuery 로 요소를 선택할 때는 반드시 $ 나 N 함수의 두번째 인자(context)에 view 를 넣어 주거나 view 에서 find 해야 합니다. ' +
-                                                    'view(context) 를 지정하지 않으면 다른 페이지에있는 요소까지 선택 되어 의도하지 않은 오류를 발생 시킬 수 있습니다. ' +
-                                                    '\nex) N("selector", cont.view).hide();' +
-                                                    '\n    cont.view.find("selector").hide();',
-                                            "line" : sourceCode.substring(0, regex.lastIndex).split("\n").length,
+                                            "message" : N.message.get(N.context.attr("code").message, "NoContextSpecifiedInSelector"),
+                                            "line" : codes.substring(0, regex.lastIndex).split("\n").length,
                                             "code" : match[0],
                                         });
                                     }
@@ -93,10 +93,10 @@
                     /**
                      * Natural-UI 컴포넌트의 val을 사용하지 않고 jQuery val 을 사용한 코드 검출
                      */
-                    "UseTheComponentsValMethod" : function(sourceCode, excludes, report) {
+                    "UseTheComponentsValMethod" : function(codes, excludes, report) {
                         var regex = /[N$]\((.*?)\)\.val\((.*?)\)(.*)/gm;
                         var match;
-                        while (match=regex.exec(sourceCode)) {
+                        while (match=regex.exec(codes)) {
                             var isExclude = false;
                             N(excludes).each(function(i, str) {
                                 if(match[0].indexOf(str) > -1) {
@@ -115,35 +115,52 @@
                             if(!isExclude) {
                                 var script = "";
                                 try {
-                                    script = sourceCode.substring(sourceCode.indexOf("<script"), sourceCode.indexOf("</script>"));
+                                    script = codes.substring(codes.indexOf("<script"), codes.indexOf("</script>"));
                                 } catch(e) { N.warn(e) };
                                 if(script.indexOf(match[0]) > -1) {
                                     report.push({
                                         "level" : "INFO",
-                                        "message" : 'jQuery 의 val 메서드를 사용하여 입력요소의 value 를 수정하면 컴포넌트에 바인드 되어 있는 데이터는 업데이트 되지 않습니다. ' +
-                                                '데이터와 관련있는 HTML 컨트롤은 N.form 이나 N.grid, N.list 등의 컴포넌트에서 제공하는 val 메서드를 사용해야 합니다.' +
-                                                '\nex) cont["p.form.id"].val("columnName", "value")' +
-                                                '\n    cont["p.grid.id"].val(index, "columnName", "value")' +
-                                                '\n    cont["p.list.id"].val(index, "columnName", "value")',
-                                        "line" : sourceCode.substring(0, regex.lastIndex).split("\n").length,
+                                        "message" : N.message.get(N.context.attr("code").message, "UseTheComponentsValMethod"),
+                                        "line" : codes.substring(0, regex.lastIndex).split("\n").length,
                                         "code" : match[0],
                                     });
                                 }
                             }
                         }
                     }
+                },
+                report : {
+                    console : function(data, url) {
+                        if(!data) {
+                            return false;
+                        }
+                        var color = "black";
+                        N(data).each(function() {
+                            if(this.level === "ERROR") {
+                                color = "red";
+                            } else if(this.level === "WARN") {
+                                color = "blue";
+                            }
+                            N[this.level.toLowerCase()]("%c[" + this.level + "] " + url + " - " + this.line + " : " + this.code, "color: " + color + "; font-weight: bold; line-height: 200%;",
+                                    "\n" + this.message);
+                        });
+                    }
                 }
             },
-            addSourceURL : function(sourceCode, sourceURL) {
-                var cutIndex = sourceCode.lastIndexOf("\n</script>");
+            addSourceURL : function(codes, sourceURL) {
+                if(codes.indexOf("<script") < 0) {
+                    return false;
+                }
+                
+                var cutIndex = codes.lastIndexOf("\n</script>");
                 if(cutIndex < 0) {
-                    cutIndex = sourceCode.lastIndexOf("\t</script>");
+                    cutIndex = codes.lastIndexOf("\t</script>");
                 }
                 if(cutIndex < 0) {
-                    cutIndex = sourceCode.lastIndexOf(" </script>");
+                    cutIndex = codes.lastIndexOf(" </script>");
                 }
 
-                return [sourceCode.slice(0, cutIndex), '\n//# sourceURL=' + sourceURL + "\n", sourceCode.slice(cutIndex)].join("");
+                return [codes.slice(0, cutIndex), '\n//# sourceURL=' + sourceURL + "\n", codes.slice(cutIndex)].join("");
             }
         };
 
