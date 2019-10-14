@@ -24,6 +24,12 @@ a {
     color: rgba(0, 0, 0, 0.87);
 }
 
+img {
+	max-width: 100%;
+	display: block;
+   	margin: 0 auto;
+}
+
 [lang] {
 	display: none;
 }

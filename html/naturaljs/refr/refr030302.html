@@ -59,7 +59,7 @@
 	{ name : "Mike", age : 16 },
 	{ name : "Mike", age : 14 }
 ], function(item) {
-    return item.name === "Mike" &amp;&amp; age === 16;
+    return item.name === "Mike" &amp;&amp; item.age === 16;
 });
 
 /*
@@ -83,7 +83,7 @@ fData의 값(결과값) :
 ]
 */</code></pre>
 				<p class="alert">필터링 속도는 문자열로 조건을 입력하는 것 보다 콜백으로 조건을 입력하는 방식이 더 빠릅니다.</p>
-				<p class="alert">(추후 지원 예정)문자열로 조건을 입력하는 방식은 and(&amp;&amp;) 나 or(||) 연산식을 지원하지 않고 단일 조건식만 지원 합니다.</p>
+				<p class="alert">문자열로 조건을 입력하는 방식은 and(&amp;&amp;) 나 or(||) 연산식을 지원하지 않고 단일 조건식만 지원 합니다(추후 지원 예정).</p>
 				<p class="alert">$([ { col01 : 1 }, { col01 : 2 } ]).datafilter("col01 === 1") 와 같이 jQuery object 타입의 배열은 datafilter 명령어로 사용하면 됩니다.</p>
 			</td>
 		</tr>
