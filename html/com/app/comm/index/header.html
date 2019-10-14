@@ -1,4 +1,9 @@
 <style>
+
+.index-header {
+	text-align: right;
+}
+
 .index-header .header-back {
     position: absolute;
     width: 100%;
@@ -9,12 +14,15 @@
 
 .index-header .i18n-select,
 .index-header .links {
-    position: relative;
+	position: relative;
     display: inline-block;
 	margin: 10px 20px 0 0;
-	float: right;
 	color : #66BB6A;
     z-index: 1;
+}
+
+.index-header .links {
+	margin-left: 100px;
 }
 
 .index-header .i18n-select a {
@@ -22,8 +30,10 @@
 }
 
 .index-header .theme-color {
-	margin: 7px 20px 0 0;
-	float: right;
+	position: relative;
+	height: 25px;
+	line-height: 25px;
+	margin: 0 20px 0 0;
     padding-bottom: 3px;
     width: auto;
     opacity: 0.8;
@@ -50,16 +60,16 @@
 <article class="index-header">
     <div class="header-back"></div>
 
+    <div class="links">
+        <a class="github-link" href="https://github.com/bbalganjjm/natural_js" target="blank"><span>Source Code</span></a>
+        <a class="community-link" href="https://www.facebook.com/groups/1927201360891679" target="blank"><span>Community</span></a>
+    </div>
+
 	<div class="i18n-select">
 		<a class="korean" href="#" class="link">한국어</a> | <a class="english" href="#" class="link">English</a>
 	</div>
 
     <select class="theme-color"></select>
-
-    <div class="links">
-        <a class="github-link" href="https://github.com/bbalganjjm/natural_js" target="blank"><span>Source Code</span></a>
-        <a class="community-link" href="https://www.facebook.com/groups/1927201360891679" target="blank"><span>Community</span></a>
-    </div>
 </article>
 
 <script type="text/javascript">

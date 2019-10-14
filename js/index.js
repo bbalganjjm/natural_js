@@ -163,16 +163,16 @@
             }
         },
         mobileResponsiveView : function() {
-            
+
             // API 문서 모바일 용 보기 처리 이벤트
             N(window).on("resize.mobile", function(e, view) {
-                
+
         		if ($(e.target).is(window) || view) { // 모바일에서 scroll 시 resize 이벤트가 firing 되서(ios, android 동일).
-        	
+
                     N(".agrsIndex", view).remove();
                     N(".function-desc", view).removeClass("function-desc");
-                    
-                    if($(window).width() <= 414 || 0 > "win16|win32|win64|mac".indexOf(navigator.platform.toLowerCase())) {
+
+                    if($(window).width() <= 414) {
                         $("td:contains('N/A')", view).css({
                             "visibility": "hidden",
                             "padding" : 0,
@@ -180,7 +180,7 @@
                             "height" : 0,
                             "line-height" : 0
                         });
-                        
+
                         var idx = -1;
                         $("tr", view).each(function() {
                             if($(this).find(">td:eq(0)").text().length > 0) {
@@ -190,7 +190,7 @@
                             $(this).find(">td:eq(1)").prepend('<strong class="agrsIndex">[' + idx + '] : </strong>');
                             idx++;
                         });
-                        
+
                     } else {
                         $("td:contains('N/A')", view).css({
                             "visibility": "visible",
@@ -200,11 +200,11 @@
                             "line-height" : ""
                         });
                     }
-        		
+
         		}
-			
+
             });
-            
+
         }
     };
 
