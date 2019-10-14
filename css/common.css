@@ -631,11 +631,11 @@ pre.shell>code {
 }
 
 /* Mobile */
-@media screen and (max-width: 414px) {
+@media screen and (max-width: 610px) {
     .main-nav {
         display : none;
     }
-    
+
     .demo .form.options colgroup col:nth-child(2n-1) {
         width: 22% !important;
     }
@@ -766,7 +766,7 @@ pre.shell>code {
     #event .apiDoc .api.form td:nth-child(2):before,
     #functions .apiDoc .api.form td:nth-child(2):before,
     #methods .apiDoc .api.form td:nth-child(2):before {
-        content: 'arguments';
+        content: 'arguments : ';
         font-weight: 600;
     }
     #pluginExtention .apiDoc .api.form td:nth-child(3):before,
