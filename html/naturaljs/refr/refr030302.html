@@ -71,13 +71,15 @@ fData의 값(결과값) :
 				<p>인자로 조건 문자열을 입력 하면 조건에 맞는 행들 만 반환 합니다.</p>
 				<pre><code class="language-javascript">var fData = N.data.filter([
 	{ name : "홍길동", age : 18 },
-	{ name : "Mike", age : 16 }
+	{ name : "Mike", age : 16 },
+	{ name : "Mike", age : 14 }
 ], 'name === "Mike"');
 
 /*
 fData의 값(결과값) :
 [
-	{ name : "Mike" }
+	{ name : "Mike", age : 16 },
+	{ name : "Mike", age : 14 }
 ]
 */</code></pre>
 				<p class="alert">필터링 속도는 문자열로 조건을 입력하는 것 보다 콜백으로 조건을 입력하는 방식이 더 빠릅니다.</p>
