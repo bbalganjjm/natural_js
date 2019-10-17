@@ -74,16 +74,16 @@
 	transform: translateZ(0)\0; /* for ie 8+ */    
 }
 
-.alert__.hidden__ {
-	opacity: 0;
-	transform: scale(0.7);
-	transition: opacity 0.15s linear, transform 0.15s linear;
-}
-
 .alert__.visible__ {
 	opacity: 1;
 	transform: scale(1);
 	transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.alert__.hidden__ {
+	opacity: 0;
+	transform: scale(0.7);
+	transition: opacity 0.15s linear, transform 0.15s linear;
 }
 
 .alert__.orgin_left__ {
@@ -557,7 +557,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .grid__>thead .data_filter_panel__ {
-    will-change: transform;
+    will-change: opacity, transform;
 	transform: translateZ(0)\0; /* for ie 8+ */
 	
     border: 1px solid #A5D6A7;
@@ -574,13 +574,17 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .grid__>thead .data_filter_panel__.visible__ {
 	transform: scale(1);
 	transform-origin: top left;
-	transition: transform 0.3s ease;
+	opacity: 1;
+	
+	transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .grid__>thead .data_filter_panel__.hidden__ {
 	transform: scale(0.7);
 	transform-origin: top left;
-	transition: transform 0.15s linear;
+	opacity: 0;
+	
+	transition: opacity 0.15s linear, transform 0.15s linear;
 }
 
 .grid__>thead .data_filter_panel__ .data_filter_search__ {
@@ -739,9 +743,9 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .grid__ .grid_more_thead_col__ .grid_more_panel__ {
-    will-change: transform;
+    will-change: opacity, transform;
 	transform: translateZ(0)\0; /* for ie 8+ */
-
+	
 	border: 1px solid #A5D6A7;
 	background-color: #E8F5E9;
 	box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.2);
@@ -755,13 +759,17 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .grid__ .grid_more_thead_col__ .grid_more_panel__.visible__ {
 	transform: scale(1);
 	transform-origin: top right;
-	transition: transform 0.3s ease;
+	opacity: 1;
+	
+	transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .grid__ .grid_more_thead_col__ .grid_more_panel__.hidden__ {
 	transform: scale(0.7);
 	transform-origin: top right;
-	transition: transform 0.15s linear;
+	opacity: 0;
+	
+	transition: opacity 0.15s linear, transform 0.15s linear;
 }
 
 .grid__ .grid_more_thead_col__ .grid_more_panel__ input[type=checkbox] {
@@ -942,7 +950,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 /* Datepicker */
 .datepicker_contents__ {
-    will-change: transform;
+    will-change: opacity, transform;
 	transform: translateZ(0)\0; /* for ie 8+ */
 	
     border: 1px solid #A5D6A7;
@@ -979,12 +987,14 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 .datepicker_contents__.visible__ {
 	transform: scale(1);
-	transition: transform 0.3s ease;
+	opacity: 1;
+	transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .datepicker_contents__.hidden__ {
 	transform: scale(0.7);
-	transition: transform 0.15s linear;
+	opacity: 0;
+	transition: opacity 0.3s linear, transform 0.15s linear;
 }
 
 .datepicker_contents__.orgin_left__ {
@@ -1100,9 +1110,6 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .datepicker_contents__ .datepicker_year_item__:hover,
 .datepicker_contents__ .datepicker_month_item__:hover,
 .datepicker_contents__ .datepicker_day_item__:hover {
-	will-change: background-color;
-	transform: translateZ(0)\0; /* for ie 8+ */
-	
 	background-color: #C8E6C9;
 	border-radius: 50%;
 }
