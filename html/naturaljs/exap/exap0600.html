@@ -32,7 +32,7 @@
 			</ul>
 		</div>
 
-		<div class="list-box" style="height: 386px; margin-bottom: 10px;">
+		<div class="list-box" style="min-height: 386px; margin-bottom: 10px;">
 			<table id="grid" class="grid__">
 				<colgroup>
 					<col style="width: 50px;">
@@ -152,7 +152,6 @@ N(".exap0600").cont({
        		sortable : true,
        		select : true,
        		fixedcol : 2,
-       		createRowDelay : 0,
        		onSelect : function(index, rowEle, data) {
        			// Grid row select event
             	N("#subContext", cont.view).comm("html/naturaljs/exap/exap0601.html")
