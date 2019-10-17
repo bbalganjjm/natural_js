@@ -50,6 +50,8 @@
 	font-size: 13px;
 	line-height: 20px;
 	display: block;
+	
+	overflow-x: auto;
 	-webkit-overflow-scrolling: touch;
 }
 
@@ -67,12 +69,14 @@
 	display: inline-block;
 }
 
+.alert__ {
+    will-change: opacity, transform;
+	transform: translateZ(0)\0; /* for ie 8+ */    
+}
+
 .alert__.hidden__ {
-	will-change: opacity, transform;
-	transform: translateZ(0)\0; /* for ie 8+ */
-	
 	opacity: 0;
-	transform: scale(0);
+	transform: scale(0.7);
 	transition: opacity 0.15s linear, transform 0.15s linear;
 }
 
@@ -198,7 +202,7 @@
 
 /* Button */
 a.btn_common__, input[type='button'].btn_common__, button.btn_common__ {
-	display: inline-block;
+    display: inline-block;
 	margin-bottom: 2px 0 2px 0 !important;
 	overflow: visible;
 	cursor: pointer;
@@ -209,10 +213,10 @@ a.btn_common__, input[type='button'].btn_common__, button.btn_common__ {
 }
 
 a.btn_disabled__, input.btn_disabled__, button.btn_disabled__ {
-	will-change: opacity;
+    will-change: opacity;
 	transform: translateZ(0)\0; /* for ie 8+ */
 	
-	opacity: 0.6;
+    opacity: 0.6;
 	transition: opacity 0.3s ease;
 	cursor: default;
 }
@@ -553,7 +557,10 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .grid__>thead .data_filter_panel__ {
-	border: 1px solid #A5D6A7;
+    will-change: transform;
+	transform: translateZ(0)\0; /* for ie 8+ */
+	
+    border: 1px solid #A5D6A7;
 	max-width: 300px;
 	position: absolute;
 	background-color: #E8F5E9;
@@ -571,10 +578,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .grid__>thead .data_filter_panel__.hidden__ {
-	will-change: transform;
-	transform: translateZ(0)\0; /* for ie 8+ */
-	
-	transform: scale(0);
+	transform: scale(0.7);
 	transform-origin: top left;
 	transition: transform 0.15s linear;
 }
@@ -735,6 +739,9 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .grid__ .grid_more_thead_col__ .grid_more_panel__ {
+    will-change: transform;
+	transform: translateZ(0)\0; /* for ie 8+ */
+
 	border: 1px solid #A5D6A7;
 	background-color: #E8F5E9;
 	box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.2);
@@ -752,10 +759,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .grid__ .grid_more_thead_col__ .grid_more_panel__.hidden__ {
-	will-change: transform;
-	transform: translateZ(0)\0; /* for ie 8+ */
-	
-	transform: scale(0);
+	transform: scale(0.7);
 	transform-origin: top right;
 	transition: transform 0.15s linear;
 }
@@ -938,7 +942,10 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 /* Datepicker */
 .datepicker_contents__ {
-	border: 1px solid #A5D6A7;
+    will-change: transform;
+	transform: translateZ(0)\0; /* for ie 8+ */
+	
+    border: 1px solid #A5D6A7;
 	box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.2);
 	background-color: #FFFFFF;
 	font-size: 12px;
@@ -976,10 +983,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .datepicker_contents__.hidden__ {
-	will-change: transform;
-	transform: translateZ(0)\0; /* for ie 8+ */
-	
-	transform: scale(0);
+	transform: scale(0.7);
 	transition: transform 0.15s linear;
 }
 
@@ -995,7 +999,8 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	width: 102px;
 }
 
-.datepicker_contents__ .datepicker_year_item__, .datepicker_contents__ .datepicker_year_paging__ {
+.datepicker_contents__ .datepicker_year_item__,
+.datepicker_contents__ .datepicker_year_paging__ {
 	border: 1px solid transparent;
 	cursor: pointer;
 	line-height: 25px;
@@ -1030,8 +1035,13 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	float: left;
 }
 
-.datepicker_contents__ .datepicker_day_item__, .datepicker_contents__ .datepicker_prev_day_item__, .datepicker_contents__ .datepicker_next_day_item__ {
-	float: left;
+.datepicker_contents__ .datepicker_day_item__,
+.datepicker_contents__ .datepicker_prev_day_item__,
+.datepicker_contents__ .datepicker_next_day_item__ {
+    will-change: opacity, transform;
+	transform: translateZ(0)\0; /* for ie 8+ */
+    
+    float: left;
 	border: 1px solid transparent;
 	cursor: pointer;
 	background-color: #ffffff;
@@ -1049,9 +1059,6 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .datepicker_contents__ .datepicker_day_item__.visible__,
 .datepicker_contents__ .datepicker_prev_day_item__.visible__,
 .datepicker_contents__ .datepicker_next_day_item__.visible__ {
-	will-change: opacity, transform;
-	transform: translateZ(0)\0; /* for ie 8+ */
-	
 	opacity: 1;
 	transform: scaleX(1);
 	transition: transform 0.3s ease;
@@ -1064,7 +1071,9 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	text-align: center;
 }
 
-.datepicker_contents__ .datepicker_year_title__, .datepicker_contents__ .datepicker_month_title__, .datepicker_contents__ .datepicker_day_title__ {
+.datepicker_contents__ .datepicker_year_title__,
+.datepicker_contents__ .datepicker_month_title__,
+.datepicker_contents__ .datepicker_day_title__ {
 	border: 1px solid #A5D6A7;
     background-color: #A5D6A7;
     line-height: 25px;
@@ -1088,7 +1097,9 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     border-radius: 50%;
 }
 
-.datepicker_contents__ .datepicker_year_item__:hover, .datepicker_contents__ .datepicker_month_item__:hover, .datepicker_contents__ .datepicker_day_item__:hover {
+.datepicker_contents__ .datepicker_year_item__:hover,
+.datepicker_contents__ .datepicker_month_item__:hover,
+.datepicker_contents__ .datepicker_day_item__:hover {
 	will-change: background-color;
 	transform: translateZ(0)\0; /* for ie 8+ */
 	
@@ -1460,12 +1471,15 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .notify__ .notify_msg__ {
-	padding: 2px 15px 6px 8px;
+    will-change: opacity, transform;
+	transform: translateZ(0)\0; /* for ie 8+ */
+	
+    padding: 2px 15px 6px 8px;
 	line-height: 16px;
 	text-align: left;
 	word-break: break-all;
 	box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.2);
-	transform: scale(0);
+	transform: scale(0.7);
 	opacity: 0;
 	background-color: #2E7D32;
 	margin-bottom: 5px;
@@ -1478,10 +1492,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .notify__ .notify_msg__.hidden__ {
-	will-change: opacity, transform;
-	transform: translateZ(0)\0; /* for ie 8+ */
-	
-	transform: scale(0);
+	transform: scale(0.7);
 	opacity: 0;
 	transition: opacity 0.3s linear, transform 0.3s linear;
 }
@@ -1554,7 +1565,8 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .docs__>.docs_tab_context__>.docs_tabs__>.docs_tab__ {
-
+    will-change: background-color, border-bottom-color;
+	transform: translateZ(0)\0; /* for ie 8+ */
 }
 
 .docs__>.docs_tab_context__>.docs_tabs__>.docs_tab__.inactive__ {
@@ -1567,9 +1579,6 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .docs__>.docs_tab_context__>.docs_tabs__>.docs_tab__.active__ {
-	will-change: background-color, border-bottom-color;
-	transform: translateZ(0)\0; /* for ie 8+ */
-	
 	background-color: #fff;
 	border-bottom: 1px solid #fff;
 	transition: background-color 0.5s ease, border-bottom-color 0.3s ease;
@@ -1651,7 +1660,10 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .docs__>.docs_tab_context__>ul.docs_tab_utils__>.docs_tab_list_item__ .docs_tab_list__ {
-	position: absolute;
+    will-change: opacity, transform;
+	transform: translateZ(0)\0; /* for ie 8+ */
+	
+    position: absolute;
 	text-indent: 0;
 	top: 23px;
 	right: 0;
@@ -1661,7 +1673,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	box-shadow: -3px 3px 0px rgba(0, 0, 0, 0.2);
 	padding: 2px 6px 2px 6px;
 	margin: 2px 0 0 0;
-	transform: scale(0);
+	transform: scale(0.7);
 	opacity: 0;
 }
 
@@ -1673,10 +1685,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .docs__>.docs_tab_context__>ul.docs_tab_utils__>.docs_tab_list_item__ .docs_tab_list__.hidden__ {
-	will-change: opacity, transform;
-	transform: translateZ(0)\0; /* for ie 8+ */
-	
-	transform: scale(0);
+	transform: scale(0.7);
 	opacity: 0;
 	transform-origin: top right;
 	transition: transform 0.15s linear, opacity 0.15s linear;
@@ -1721,30 +1730,22 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .docs__>.docs_contents__ {
-	margin: 0;
 	background-color: #fff;
 }
 
 .docs__>.docs_contents__.visible__ {
 	opacity: 1;
-	transition: margin-top 0.5s ease, opacity 0.5s ease;
+	transition: transform 0.5s ease, opacity 0.5s ease;
 }
 
 .docs__>.docs_contents__.hidden__  {
-	will-change: opacity, margin-top;
-	transform: translateZ(0)\0; /* for ie 8+ */
+	will-change: opacity, transform;
 	
-	position: absolute;
-	margin-top: -15px;
+	transform: translateY(-15px);
 	opacity: 0;
 }
 
 .docs__>.docs_contents__.remove__ {
-	position: absolute;
-	margin-top: 115px;
-	opacity: 0;
-	width: 100%;
-	transition: margin-top 0.3s ease, opacity 0.3s ease;
 }
 
 .entire_load_screen_block__ {
@@ -1761,6 +1762,9 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .docs__>.entire_load_indicator__ {
+    will-change: transform;
+	transform: translateZ(0)\0; /* for ie 8+ */
+	
 	position: fixed;
 	left: 0;
 	top: 0;
@@ -1784,9 +1788,6 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .docs__>.entire_load_indicator__.hidden__ {
-	will-change: transform;
-	transform: translateZ(0)\0; /* for ie 8+ */
-
 	transform: translateY(-3px);
 	transition: transform 0.4s cubic-bezier(1, 0, 1, 1);
 }

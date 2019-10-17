@@ -520,7 +520,7 @@ article .btnBox {
 	width: 100%;
 }
 
-.docs_contents__>.view_context__ .click {
+.docs_contents__ .view_context__ .click {
 	margin-top: 30px;
 	padding: 5px 40px 5px 15px;
 	background: url("../images/comm/icon/click.png") no-repeat 160px 6px;
@@ -615,7 +615,7 @@ article .btnBox {
     margin-bottom: 0;
 }
 
-.docs_contents__>.view_context__ pre,
+.docs_contents__ .view_context__ pre,
 pre.shell {
     padding: 16px;
     overflow: auto;
@@ -625,7 +625,7 @@ pre.shell {
     word-wrap: normal;
 }
 
-.docs_contents__>.view_context__ pre>code,
+.docs_contents__ .view_context__ pre>code,
 pre.shell>code {
     font-family: Consolas, monospace;
     display: inline;
