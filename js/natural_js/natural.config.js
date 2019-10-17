@@ -124,26 +124,25 @@
                             if(request.options.type !== "GET") {
                                 msg = request.options.data;
                                 xhr.abort();
+                                
+                                setTimeout(function() {
+                                    N.docs.removeLoadIndicator.call(APP.indx.docs);
+                                }, 1000);
                             } else {
                                 msg = JSON.parse(decodeURIComponent(request.options.data.replace("q=", "")));
                             }
 
-                            N(window).alert({
-                                title : N.message.get({
+                            N.notify({
+                                html: true
+                            }).add("<strong>" + N.message.get({
                                     "ko_KR" : {
-                                        "COMM_TITLE" : "이 예제는 DBMS 와 연동 되지 않음 / 서버로 전송 되는 파라미터 확인"
+                                        "COMM_TITLE" : "이 예제의 파라미터는 서버에 전송 되지 않습니다. 서버로 전송 되는 파라미터 만 확인 바랍니다."
                                     },
                                     "en_US" : {
-                                        "COMM_TITLE" : "This example does not work with the DBMS / Check parameters sent to the server"
+                                        "COMM_TITLE" : "The parameters in this example are not sent to the server. Check only the parameters sent to the server."
                                     }
-                                }, "COMM_TITLE"),
-                                msg : "<pre class=\"shell\"><code>" + N.json.format(msg) + "</code></pre>",
-                                width : 327
-                            }).show();
-                            
-                            setTimeout(function() {
-                                N.docs.removeLoadIndicator.call(APP.indx.docs);
-                            }, 500);
+                                }, "COMM_TITLE") + "</strong><br><br>" + "<pre class=\"shell\" style=\"max-height: 500px; overflow-y: auto;\"><code>" + N.json.format(msg) + "</code></pre>"
+                            );
                         }
                         
                         // Display page loading image.
