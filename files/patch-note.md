@@ -27,7 +27,7 @@
  * N.docs : The functionality has been changed so that when you click on a tab that is already displayed, the logic that displays the content does not run again.
 
 ## Natural-CODE v0.1.4
- *
+ * If the detected code was a comment, it was excluded.
 
 ## Natural-TEMPLATE v0.0.7
  *
