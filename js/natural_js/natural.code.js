@@ -1,5 +1,5 @@
 /*!
- * Natural-CODE v0.2.4
+ * Natural-CODE v0.2.5
  *
  * Released under the LGPL v2.1 license
  * Date: 2019-02-28T18:00Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-CODE"] = "0.2.4";
+    N.version["Natural-CODE"] = "0.2.5";
 
     (function(N) {
 
@@ -36,7 +36,7 @@
                      * jQuery Selector 에 view 를 context 로 지정하지 않은 코드 검출
                      */
                     "NoContextSpecifiedInSelector" : function(codes, excludes, report) {
-                        var regex = /[N$]\((.*?)\)(.*)/gm;
+                        var regex = /\/{2}.*|[N$]\((.*?)\)(.*)/gm;
                         var match;
                         while (match=regex.exec(codes)) {
                             var isExclude = false;
@@ -47,7 +47,11 @@
                                 }
                             });
                             
-                            if(match.length > 2 && match[2].replace(/ /g, "").indexOf("view)") > -1) {
+                            if(match.length > 2 && match[2] && match[2].replace(/ /g, "").indexOf("view)") > -1) {
+                                isExclude = true;
+                            }
+                            
+                            if(N.string.startsWith(match[0], "//")) {
                                 isExclude = true;
                             }
                             
@@ -94,7 +98,7 @@
                      * Natural-UI 컴포넌트의 val을 사용하지 않고 jQuery val 을 사용한 코드 검출
                      */
                     "UseTheComponentsValMethod" : function(codes, excludes, report) {
-                        var regex = /[N$]\((.*?)\)\.val\((.*?)\)(.*)/gm;
+                        var regex = /\/{2}.*|[N$]\((.*?)\)\.val\((.*?)\)(.*)/gm;
                         var match;
                         while (match=regex.exec(codes)) {
                             var isExclude = false;
@@ -110,6 +114,10 @@
                                 if(N.string.isEmpty(args)) {
                                     isExclude = true;
                                 }                       
+                            }
+                            
+                            if(N.string.startsWith(match[0], "//")) {
+                                isExclude = true;
                             }
                             
                             if(!isExclude) {
