@@ -26,12 +26,6 @@
  * N.docs : Fixed a bug that caused scrolling in content to move to the top when the Tab was active.
  * N.docs : The functionality has been changed so that when you click on a tab that is already displayed, the logic that displays the content does not run again.
 
-## Natural-CODE v0.1.4
- * If the detected code was a comment, it was excluded.
-
-## Natural-TEMPLATE v0.0.7
- *
-
 ## natural.ui.css
  * Fixed a bug that caused the table to crash intermittently when the N.grid's "fixedcol" option was applied.
  * Changed styles related to N.grid's "filter" functionality.
