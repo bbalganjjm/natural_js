@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.38.218
+ * Natural-UI v0.38.219
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-UI"] = "0.38.218";
+    N.version["Natural-UI"] = "0.38.219";
 
     $.fn.extend($.extend(N.prototype, {
         alert : function(msg, vars) {
@@ -464,6 +464,7 @@
                 overlayColor : null,
                 overlayClose : true,
                 escClose : true,
+                spaceClose : true,
                 "confirm" : false,
                 alwaysOnTop : false,
                 alwaysOnTopCalcTarget : "div, span, ul, p, nav, article, section, header, footer, aside",
@@ -990,10 +991,11 @@
                     }
                 }
 
-                // if press the "ESC" key, alert dialog will be removed
+                // if press the "ESC" key or "SPACEBAR" key, alert dialog will be removed
                 if(opts.escClose) {
                     opts.keyupHandler = function(e) {
-                        if ((e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode)) == 27) {
+                        var keyCode = (e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode));
+                        if (keyCode == 27 || (opts.spaceClose && opts.isInput === false && keyCode == 32)) {
                             if (opts.onCancelG !== null) {
                                 opts.onCancelG.call(self, opts.msgContext, opts.msgContents);
                             }
@@ -2265,6 +2267,7 @@
                 // use alert
                 // opts.context is alert message
                 opts.html = true;
+                opts.spaceClose = false;
                 opts.msg = opts.context;
                 
                 // To prevent the onShowG event from running when popup.
@@ -2308,6 +2311,7 @@
 
                     // opts.context is alert message;
                     opts.html = true;
+                    opts.spaceClose = false;
                     opts.msg = opts.context;
                     opts.onRemove = function() {
                         opts.context = null;
