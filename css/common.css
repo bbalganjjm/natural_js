@@ -42,7 +42,6 @@ input[type='text'], input[type='number'], input[type='tel'], input[type='passwor
     width: 100%;
     padding: 0 3px 3px 3px;
     border: 1px solid #C8E6C9;
-    font-weight: 400;
     line-height: 17px;
 }
 
