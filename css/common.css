@@ -12,7 +12,6 @@ body {
     font-family: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", "dotum", "Segoe UI", sans-serif;
     color: rgba(0, 0, 0, 0.87);
     font-size: 13px;
-    font-weight: 300;
     line-height: 1.7;
 }
 
@@ -43,7 +42,7 @@ input[type='text'], input[type='number'], input[type='tel'], input[type='passwor
     width: 100%;
     padding: 0 3px 3px 3px;
     border: 1px solid #C8E6C9;
-    font-weight: 300;
+    font-weight: 400;
     line-height: 17px;
 }
 
@@ -108,7 +107,7 @@ th, td {
 th, tfoot td {
 	background-color: #A5D6A7;
 	text-shadow: 0 1px 0 #81C784;
-    font-weight: 300;
+    font-weight: 400;
     color: #FFFFFF;
 }
 
@@ -689,9 +688,9 @@ pre.shell>code {
         border: none;
         padding: 0 10px;
         line-height: 2.5;
-        background-color: #A5D6A7;
+        background-color: #4006A7;
         text-shadow: 0 1px 0 #81C784;
-        font-weight: 300;
+        font-weight: 400;
         color: #FFFFFF;
         margin-bottom: 15px;
     }
