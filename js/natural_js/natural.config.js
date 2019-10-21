@@ -947,23 +947,23 @@
              */
             "message" : {
                 "ko_KR" : {
-                    "NoContextSpecifiedInSelector" : 'Controller 안에서 jQuery 로 요소를 선택할 때는 반드시 $ 나 N 함수의 두번째 인자(context)에 view 를 넣어 주거나 view 에서 find 해야 합니다. '
-                        + 'view(context) 를 지정하지 않으면 다른 페이지에있는 요소까지 선택 되어 의도하지 않은 오류를 발생 시킬 수 있습니다. '
+                    "NoContextSpecifiedInSelector" : 'Controller object 의 함수 안 에서 요소를 선택할 때는 반드시 $() 나 N() 함수의 두번째 인자(context)에 view 요소를 입력 하거나 view 요소에서 find 해야 합니다. '
+                        + 'view(context) 요소를 입력하지 않으면 다른 View 의 요소까지 선택 되어 의도하지 않은 오류가 발생 할 수 있습니다. '
                         + '\nex) N("selector", cont.view).hide();'
                         + '\n    cont.view.find("selector").hide();',
-                    "UseTheComponentsValMethod" : 'jQuery 의 val 메서드를 사용하여 입력요소의 value 를 수정하면 컴포넌트에 바인드 되어 있는 데이터는 업데이트 되지 않습니다. '
-                        + '데이터와 관련있는 HTML 컨트롤은 N.form 이나 N.grid, N.list 등의 컴포넌트에서 제공하는 val 메서드를 사용해야 합니다.'
+                    "UseTheComponentsValMethod" : 'jQuery 의 val 메서드로 입력 요소의 value 속성 값을 변경하면 컴포넌트에 바인드 되어 있는 데이터는 업데이트 되지 않습니다. '
+                        + '컴포넌트의 내부 데이터와 연동 된 입력 요소들은 적용 된 데이터 관련 컴포넌트(N.form, N.grid 등)에서 제공하는 val 메서드를 사용해야 합니다.'
                         + '\nex) cont["p.form.id"].val("columnName", "value")'
                         + '\n    cont["p.grid.id"].val(index, "columnName", "value")'
                         + '\n    cont["p.list.id"].val(index, "columnName", "value")'
                 },
                 "en_US" : {
-                    "NoContextSpecifiedInSelector" : 'Controller 안에서 jQuery 로 요소를 선택할 때는 반드시 $ 나 N 함수의 두번째 인자(context)에 view 를 넣어 주거나 view 에서 find 해야 합니다. '
-                        + 'view(context) 를 지정하지 않으면 다른 페이지에있는 요소까지 선택 되어 의도하지 않은 오류를 발생 시킬 수 있습니다. '
+                    "NoContextSpecifiedInSelector" : 'When selecting an element within a function of a Controller object, you must input the view element in the second argument of the $ () or N () function or find it in the view element. '
+                        + "If you don't type view(context) element, you can get unintended errors as the elements of other views are also selected. "
                         + '\nex) N("selector", cont.view).hide();'
                         + '\n    cont.view.find("selector").hide();',
-                    "UseTheComponentsValMethod" : 'jQuery 의 val 메서드를 사용하여 입력요소의 value 를 수정하면 컴포넌트에 바인드 되어 있는 데이터는 업데이트 되지 않습니다. '
-                        + '데이터와 관련있는 HTML 컨트롤은 N.form 이나 N.grid, N.list 등의 컴포넌트에서 제공하는 val 메서드를 사용해야 합니다.'
+                    "UseTheComponentsValMethod" : "If you change the value of an input element's value attribute using jQuery's val method, the data bound to the component will not be updated. "
+                        + 'Input elements linked with the internal data of the component should use the val method provided by the applied data-related components(N.form, N.grid, etc.).'
                         + '\nex) cont["p.form.id"].val("columnName", "value")'
                         + '\n    cont["p.grid.id"].val(index, "columnName", "value")'
                         + '\n    cont["p.list.id"].val(index, "columnName", "value")'
