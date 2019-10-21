@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.38.218
+ * Natural-UI v0.38.220
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-UI"] = "0.38.218";
+    N.version["Natural-UI"] = "0.38.220";
 
     $.fn.extend($.extend(N.prototype, {
         alert : function(msg, vars) {
@@ -601,8 +601,8 @@
                 var buttonBox = '';
                 if(opts.button) {
                     buttonBox = '<div class="buttonBox__">' +
-                        '<a href="#" class="confirm__"><span>' + N.message.get(opts.message, "confirm") + '</span></a>' +
-                        '<a href="#" class="cancel__"><span>' + N.message.get(opts.message, "cancel") + '</span></a>' +
+                        '<button class="confirm__">' + N.message.get(opts.message, "confirm") + '</button>' +
+                        '<button class="cancel__">' + N.message.get(opts.message, "cancel") + '</button>' +
                         '</div>';
                 }
 
@@ -651,8 +651,8 @@
                 }
                 
                 //set confirm button style and bind click event
-                opts.msgContents.find(".buttonBox__ a.confirm__").button(opts.global.okBtnStyle);
-                opts.msgContents.find(".buttonBox__ a.confirm__").bind("click.alert", function(e) {
+                opts.msgContents.find(".buttonBox__ .confirm__").button(opts.global.okBtnStyle);
+                opts.msgContents.find(".buttonBox__ .confirm__").bind("click.alert", function(e) {
                     e.preventDefault();
                     if (opts.onOkG !== null) {
                         opts.onOkG.call(self, opts.msgContext, opts.msgContents);
@@ -688,8 +688,8 @@
 
                 // set cancel button style and bind click event
                 if(opts.confirm) {
-                    opts.msgContents.find(".buttonBox__ a.cancel__").button(opts.global.cancelBtnStyle);
-                    opts.msgContents.find(".buttonBox__ a.cancel__").bind("click.alert", function(e) {
+                    opts.msgContents.find(".buttonBox__ .cancel__").button(opts.global.cancelBtnStyle);
+                    opts.msgContents.find(".buttonBox__ .cancel__").bind("click.alert", function(e) {
                         e.preventDefault();
                         if (opts.onCancelG !== null) {
                             opts.onCancelG.call(self, opts.msgContext, opts.msgContents);
@@ -967,7 +967,7 @@
                     }
 
                     if(opts.button === true) {
-                        opts.msgContents.find(".buttonBox__ a.confirm__").get(0).focus();
+                        opts.msgContents.find(".buttonBox__ .confirm__").get(0).focus();
                     }
 
                     opts.msgContents.removeClass("hidden__").addClass("visible__");
@@ -2958,10 +2958,10 @@
                         var tabContainerEle = opts.context.find(">ul");
                         if(tabContainerEle.outerWidth() > opts.context.innerWidth()) {
                             var marginLeft = parseInt(tabContainerEle.css("margin-left")) - $(opts.links.get(idx)).position().left + (opts.context.innerWidth() / 2 - $(opts.links.get(idx)).outerWidth() / 2);
-                            var prevBtnEle = opts.context.find(">a.tab_scroll_prev__");
-                            var nextBtnEle = opts.context.find(">a.tab_scroll_next__");
+                            var prevBtnEle = opts.context.find(">.tab_scroll_prev__");
+                            var nextBtnEle = opts.context.find(">.tab_scroll_next__");
 
-                            if(marginLeft > opts.context.find(">a.tab_scroll_prev__").outerWidth()) {
+                            if(marginLeft > opts.context.find(">.tab_scroll_prev__").outerWidth()) {
                                 marginLeft = prevBtnEle.length > 0 ? prevBtnEle.outerWidth() : 0;
                                 nextBtnEle.removeClass("disabled__");
                                 prevBtnEle.addClass("disabled__");
