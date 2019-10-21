@@ -1,5 +1,5 @@
 /*!
- * Natural-CODE v0.2.5
+ * Natural-CODE v0.2.7
  *
  * Released under the LGPL v2.1 license
  * Date: 2019-02-28T18:00Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-CODE"] = "0.2.5";
+    N.version["Natural-CODE"] = "0.2.7";
 
     (function(N) {
 
@@ -19,13 +19,17 @@
                     }
                     var report = []
                     
+                    if(!N.context.attr("code") || (N.context.attr("code") && !N.context.attr("code").inspection)) {
+                        throw N.error("Define Natiral-CODE options and message resources in N.context.attr(\"code\").inspection in the natural.config.js file.");
+                    }
+                    
                     if(rules) {
                         N(rules).each(function() {
-                            Code.inspection.rules[this](codes, N.context.attr("code").excludes, report);                          
+                            Code.inspection.rules[this](codes, N.context.attr("code").inspection.excludes, report);                          
                         });
                     } else {
                         for(var k in Code.inspection.rules) {
-                            Code.inspection.rules[k](codes, N.context.attr("code").excludes, report);
+                            Code.inspection.rules[k](codes, N.context.attr("code").inspection.excludes, report);
                         }
                     }
                     
@@ -33,7 +37,7 @@
                 },
                 rules : {
                     /**
-                     * jQuery Selector 에 view 를 context 로 지정하지 않은 코드 검출
+                     * Detect code that does not specify view in the context of jQuery Selector.
                      */
                     "NoContextSpecifiedInSelector" : function(codes, excludes, report) {
                         var regex = /\/{2}.*|[N$]\((.*?)\)(.*)/gm;
@@ -84,8 +88,8 @@
                                     } catch(e) { N.warn(e) };
                                     if(script.indexOf(match[0]) > -1) {
                                         report.push({
-                                            "level" : "WARN",
-                                            "message" : N.message.get(N.context.attr("code").message, "NoContextSpecifiedInSelector"),
+                                            "level" : "ERROR",
+                                            "message" : N.message.get(N.context.attr("code").inspection.message, "NoContextSpecifiedInSelector"),
                                             "line" : codes.substring(0, regex.lastIndex).split("\n").length,
                                             "code" : match[0],
                                         });
@@ -95,7 +99,7 @@
                         }
                     },
                     /**
-                     * Natural-UI 컴포넌트의 val을 사용하지 않고 jQuery val 을 사용한 코드 검출
+                     * Detects code using jQuery's val method instead of the val method of the Natural-UI component.
                      */
                     "UseTheComponentsValMethod" : function(codes, excludes, report) {
                         var regex = /\/{2}.*|[N$]\((.*?)\)\.val\((.*?)\)(.*)/gm;
@@ -127,8 +131,8 @@
                                 } catch(e) { N.warn(e) };
                                 if(script.indexOf(match[0]) > -1) {
                                     report.push({
-                                        "level" : "INFO",
-                                        "message" : N.message.get(N.context.attr("code").message, "UseTheComponentsValMethod"),
+                                        "level" : "WARN",
+                                        "message" : N.message.get(N.context.attr("code").inspection.message, "UseTheComponentsValMethod"),
                                         "line" : codes.substring(0, regex.lastIndex).split("\n").length,
                                         "code" : match[0],
                                     });
@@ -144,13 +148,22 @@
                         }
                         var color = "black";
                         N(data).each(function() {
-                            if(this.level === "ERROR") {
-                                color = "red";
-                            } else if(this.level === "WARN") {
-                                color = "blue";
+                            if(N.context.attr("code").inspection.abortOnError && this.level === "ERROR") {
+                                throw N.error("[" + this.level + "] " + url + " - " + this.line + " : " + this.code + "\n" + this.message + "\n\n");
+                            } else {
+                                if(N.browser.is("ie")) {
+                                    N[this.level.toLowerCase()]("[" + this.level + "] " + url + " - " + this.line + " : " + this.code, "\n" + this.message);
+                                } else {
+                                    if(this.level === "ERROR") {
+                                        color = "red";
+                                    } else if(this.level === "WARN") {
+                                        color = "blue";
+                                    }
+                                    
+                                    N[this.level.replace("ERROR", "WARN").toLowerCase()]("%c[" + this.level + "] " + url + " - " + this.line + " : " + this.code, "color: " + color + "; font-weight: bold; line-height: 200%;",
+                                            "\n" + this.message);                                
+                                }                                
                             }
-                            N[this.level.toLowerCase()]("%c[" + this.level + "] " + url + " - " + this.line + " : " + this.code, "color: " + color + "; font-weight: bold; line-height: 200%;",
-                                    "\n" + this.message);
                         });
                     }
                 }
