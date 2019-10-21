@@ -925,21 +925,23 @@
     N.context.attr("code", {
         inspection : {
             /**
-             * ERROR 유형의 코드가 검출 되었을 때 로직을 중단 할지 여부
+             * ERROR 유형의 코드가 검출 되었을 때 ERROR 를 발생하여 로직을 중단 할지 여부를 지정 합니다.
              */
             abortOnError : false,
             /**
-             * 검사 제외 구문
+             * 검사 대상에서 제외 할 구문들을 문자열로 정의 합니다.
              * 
-             * 검출 된 코드 내용 중 일치하는 부분을 입력.
+             * 검출 된 코드 내용 중 다음 문자열이 포함 되어 있으면 제외 처리 됩니다.
+             *  ex) excludes : [ ".index-header", ".page-header", ".index-lefter", ".index-contents", ".index-footer" ]
              */
             excludes : [
-                ".index-header", // view 컨텍스트 정의 안함.
-                ".page-header", // view 컨텍스트 정의 안함.
-                ".index-lefter", // view 컨텍스트 정의 안함.
-                ".index-contents", // view 컨텍스트 정의 안함.
-                ".index-footer" // view 컨텍스트 정의 안함.
+                ".index-header",
+                ".page-header",
+                ".index-lefter",
+                ".index-contents",
+                ".index-footer"
             ],
+            /**
             /**
              * 다국어 메시지
              */
