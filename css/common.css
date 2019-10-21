@@ -354,6 +354,11 @@ article .btnBox {
 .apiDoc ul, .apiDoc ol {
     padding-left: 30px;
 }
+.apiDoc .tab__>ul,
+.apiDoc ul.list__,
+.apiDoc .pagination__ > ul {
+	padding-left: inherit;
+}
 
 .apiDoc table th {
 	width: 11%;
