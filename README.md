@@ -1,4 +1,4 @@
-Natural-JS
+[Natural-JS](https://bbalganjjm.github.io/natural_js)
 ===
 Natural-JS is a Javascript framework library that can be easily and quickly development the enterprise web application UI such as ERP, CRM, etc.
 
@@ -23,7 +23,7 @@ N is an object class that defines the core functions of Natural-JS.
 
 [N() and N](https://bbalganjjm.github.io/natural_js/#cmVmcjAxMDElMjROKCklMjAlMjYlMjBOJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAxMDEuaHRtbA==) provide the following jQuery extensions and utility classes:
 
-* jQuery selector extensions : JQuery selector extension for defining selectors with attributes such as style or data 
+* jQuery selector extensions : JQuery selector extension for defining selectors with attributes such as style or data
 * jQuery plugin extension methods : Natural-JS utility method created with jQuery Plugin
 * N : Object class that defines the core functions of Natural-JS
 * N.gc : Function set class for Natural-JS internal garbage collection
@@ -51,7 +51,7 @@ Natural-ARCHITECTURE is a library package that makes up the architecture of Natu
 
 ### Communicator-View-Controller(CVC) Architecture Pattern
 
-The CVC pattern is an architectural pattern based on the Model-View-Controlelr(MVC) pattern. As shown in the figure below, it is a client-centric architectural pattern that configures the client browser area as the Communicator-View-Controller architecture and defines the server as a model area. Applying the CVC pattern allows client browser implementation technologies to deviate from server technology and server architecture dependencies and 
+The CVC pattern is an architectural pattern based on the Model-View-Controlelr(MVC) pattern. As shown in the figure below, it is a client-centric architectural pattern that configures the client browser area as the Communicator-View-Controller architecture and defines the server as a model area. Applying the CVC pattern allows client browser implementation technologies to deviate from server technology and server architecture dependencies and
 The complexity of development can be reduced by completely separating the design and development areas.
 
 <p align="center">
@@ -74,25 +74,25 @@ Natural Architecture Framework provides a clear separation of the areas of devel
 
 [Controller(N.cont)](https://bbalganjjm.github.io/natural_js/#cmVmcjAyMDElMjRDb250cm9sbGVyJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAyMDEuaHRtbA==) is a class that implements Controller layer of ​​CVC Architecture Pattern.
  * N.cont executes the init function of the Controller object and returns a Controller object.
-   <p class="alert">The Controller object is the object that controls the elements of the View and the data retrieved by Communicator.</p> 
+   <p class="alert">The Controller object is the object that controls the elements of the View and the data retrieved by Communicator.</p>
  * Natural-ARCHITECTURE supports AOP (Aspect-Oriented Programming) for Controller objects.
- 
+
 #### View
 
 View has no implementation and simply defines the HTML element area as View.
 
 #### Communicator
- 
+
 [Communicator(N.comm)](https://bbalganjjm.github.io/natural_js/#cmVmcjAyMDMlMjRDb21tdW5pY2F0b3IkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDIwMy5odG1s) is a class that implements Communicator layer of ​​CVC Architecture Pattern.
  * N.comm is a library that supports Ajax communication with the server, such as requesting content or data from the server, or passing parameters.
- * N.comm provides a [Communication Filter](https://bbalganjjm.github.io/natural_js/#cmVmcjAyMDUlMjRDb21tdW5pY2F0aW9uJTIwRmlsdGVyJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAyMDUuaHRtbA==) feature that can execute common logic in every request and response or error generation phase that communicates with the server. 
+ * N.comm provides a [Communication Filter](https://bbalganjjm.github.io/natural_js/#cmVmcjAyMDUlMjRDb21tdW5pY2F0aW9uJTIwRmlsdGVyJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAyMDUuaHRtbA==) feature that can execute common logic in every request and response or error generation phase that communicates with the server.
 
-#### Context 
+#### Context
 
 Context(N.context) is a space that ensures data persistence within the Life-Cycle(Until the page is loaded and redirected to another URL) of a Natural-JS-based application.
  * Natural-JS configuration values​([Config(N.config)](https://bbalganjjm.github.io/natural_js/#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s)), global configuration values, common messages of framework, etc. are stored in N.context objects.
 
- 
+
 ## Natural-DATA
 
 Natural-DATA is a library package that supports data synchronization, formatting, validation, and processing.
