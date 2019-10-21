@@ -1,5 +1,5 @@
 /*!
- * Natural-CODE v0.2.7
+ * Natural-CODE v0.2.8
  *
  * Released under the LGPL v2.1 license
  * Date: 2019-02-28T18:00Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-CODE"] = "0.2.7";
+    N.version["Natural-CODE"] = "0.2.8";
 
     (function(N) {
 
@@ -18,21 +18,21 @@
                         return false;
                     }
                     var report = []
-                    
+
                     if(!N.context.attr("code") || (N.context.attr("code") && !N.context.attr("code").inspection)) {
                         throw N.error("Define Natiral-CODE options and message resources in N.context.attr(\"code\").inspection in the natural.config.js file.");
                     }
-                    
+
                     if(rules) {
                         N(rules).each(function() {
-                            Code.inspection.rules[this](codes, N.context.attr("code").inspection.excludes, report);                          
+                            Code.inspection.rules[this](codes, N.context.attr("code").inspection.excludes, report);
                         });
                     } else {
                         for(var k in Code.inspection.rules) {
                             Code.inspection.rules[k](codes, N.context.attr("code").inspection.excludes, report);
                         }
                     }
-                    
+
                     return report;
                 },
                 rules : {
@@ -50,15 +50,15 @@
                                     return false;
                                 }
                             });
-                            
+
                             if(match.length > 2 && match[2] && match[2].replace(/ /g, "").indexOf("view)") > -1) {
                                 isExclude = true;
                             }
-                            
+
                             if(N.string.startsWith(match[0], "//")) {
                                 isExclude = true;
                             }
-                            
+
                             // selector excludes
                             var selector = N.string.trim(match[1]).replace(/ /g, "");
                             if((/^["']/g).test(selector)) {
@@ -66,21 +66,21 @@
                                     if((/[\(\)]|,view|,cont\.view|",|',|^"<|^'<|>"$|>'$|html|body/g).test(selector)) {
                                         isExclude = true;
                                     }
-                                    
+
                                     if(!(/,view|,cont.view/g).test(selector)
                                             && (/"\+|'\+|\+"|\+'/g).test(selector)) {
                                         isExclude = false;
                                     }
                                 }
-                            
+
                                 // method excludes
                                 if(!isExclude) {
                                     var method = match[2];
                                     if((/^\.cont\(|^\.comm\(|^\.select\(|^\.form\(|^\.list\(|^\.grid\(|^\.pagination\(|^\.tree\(|^\.instance\(/g).test(method)) {
                                         isExclude = true;
-                                    }                       
+                                    }
                                 }
-                            
+
                                 if(!isExclude) {
                                     var script = "";
                                     try {
@@ -117,13 +117,13 @@
                                 var args = match[2];
                                 if(N.string.isEmpty(args)) {
                                     isExclude = true;
-                                }                       
+                                }
                             }
-                            
+
                             if(N.string.startsWith(match[0], "//")) {
                                 isExclude = true;
                             }
-                            
+
                             if(!isExclude) {
                                 var script = "";
                                 try {
@@ -159,10 +159,10 @@
                                     } else if(this.level === "WARN") {
                                         color = "blue";
                                     }
-                                    
+
                                     N[this.level.replace("ERROR", "WARN").toLowerCase()]("%c[" + this.level + "] " + url + " - " + this.line + " : " + this.code, "color: " + color + "; font-weight: bold; line-height: 200%;",
-                                            "\n" + this.message);                                
-                                }                                
+                                            "\n" + this.message);
+                                }
                             }
                         });
                     }
@@ -170,9 +170,9 @@
             },
             addSourceURL : function(codes, sourceURL) {
                 if(codes.indexOf("<script") < 0) {
-                    return false;
+                    return codes;
                 }
-                
+
                 var cutIndex = codes.lastIndexOf("\n</script>");
                 if(cutIndex < 0) {
                     cutIndex = codes.lastIndexOf("\t</script>");

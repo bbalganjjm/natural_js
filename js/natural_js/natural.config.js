@@ -96,7 +96,7 @@
             /**
              * Communication Filter
              *  - N.comm 으로 호출되는 모든요청이 아래에서 정의한 필터를 통과하게 되므로 서버 요청 시 공통적으로 적용해야 할 부분을 정의 하면 됨.
-             *  - 필터 인자 중 request 인자에 요청에 대한 유용한 정보가 담겨 있음. 
+             *  - 필터 인자 중 request 인자에 요청에 대한 유용한 정보가 담겨 있음.
              *  - request 객체에서 제공 해 주는 정보는 http://bbalganjjm.github.io/natural_js/ 에서 Communicator.request 메뉴를 참고 바람.
              *  - 필터를 여러개 걸수 있으며 단위 필터명은 아무거나 지정하면 됨.
              *  - 수행 순서는 order 속성(숫자가 적을 수록 먼저 실행 됨)이 정의 된 필터가 실행 된 다음 order 속성이 정의 되지 않은 필터들이 실행 됨.
@@ -124,7 +124,7 @@
                             if(request.options.type !== "GET") {
                                 msg = request.options.data;
                                 xhr.abort();
-                                
+
                                 setTimeout(function() {
                                     N.docs.removeLoadIndicator.call(APP.indx.docs);
                                 }, 1000);
@@ -144,7 +144,7 @@
                                 }, "COMM_TITLE") + "</strong><br><br>" + "<pre class=\"shell\" style=\"max-height: 500px; overflow-y: auto;\"><code>" + N.json.format(msg) + "</code></pre>"
                             );
                         }
-                        
+
                         // Display page loading image.
                         if(request.options.dataType === "html" && request.options.target !== null && request.options.append === false) {
                             request.options.target.html('<div style="text-align: center; vertical-align: middle;border: 0; border: none;width: 100%;height: 100%;"><img src="images/loading.gif" height="24"></div>');
@@ -160,8 +160,8 @@
 						    if(location.hostname === "localhost" || location.hostname === "127.0.0.1") {
                                 // [ Natural-CODE ] 코드 인스펙션
                                 N.code.inspection.report.console(N.code.inspection.test(data), opts.url);
-                                
-                                // [ Natural-CODE ] 디버깅 지원을 위한 컨트롤러의 sourceURL 자동 삽입 처리
+
+                                // [ Natural-CODE ] Controller object 의 디버깅을 위해 HTML 요청 마다 sourceURL 을 자동으로 삽입.
                                 data = N.code.addSourceURL(data, opts.url);
                             }
 
@@ -815,7 +815,7 @@
 			            docId = "home0100";
 			            url = "html/naturaljs/" + docId.substring(0, 4) + "/" + docId + ".html";
 			        }
-			        
+
 			        var hashVal = docId + "$" + this.options.docs[docId].docNm + "$" + url;
 			        if(decodeURIComponent(atob(location.hash.replace("#", ""))) != hashVal) {
 			            location.hash = btoa(encodeURIComponent(hashVal));
@@ -887,7 +887,7 @@
         aop : {
             /**
              * 공통코드 조회 정보
-             * 
+             *
              * @codeUrl 공통코드 조회 URL
              * @codeKey : 그룹코드 프로퍼티 명
              */
@@ -918,7 +918,7 @@
             }
         }
     });
-    
+
     /**
      * Natural-CODE Config
      */
@@ -930,7 +930,7 @@
             abortOnError : false,
             /**
              * 검사 대상에서 제외 할 구문들을 문자열로 정의 합니다.
-             * 
+             *
              * 검출 된 코드 내용 중 다음 문자열이 포함 되어 있으면 제외 처리 됩니다.
              *  ex) excludes : [ ".index-header", ".page-header", ".index-lefter", ".index-contents", ".index-footer" ]
              */
@@ -971,7 +971,7 @@
             }
         }
     });
-    
+
 	// Natural-JS API 메뉴얼 용 advisors
 	N.context.attr("architecture").cont.advisors.push({ // md 파일 변환
         "pointcut" : ".view-markdown:^init$",
@@ -993,7 +993,7 @@
                         }).submit(function(data) {
                             cont.view.addClass("markdown-body").html((new showdown.Converter()).makeHtml(data));
                         });
-                    }); 
+                    });
                 });
             } else {
                 N.comm({
@@ -1045,7 +1045,7 @@
         "fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 함수명, args 인자 */
             var view = args[0];
             var url = cont.request.get("url");
-            
+
             var btnEle = N('<br><a class="click">View Source Code</a>');
             if(view.find(btnEle).length === 0) {
                 view.append(btnEle);
