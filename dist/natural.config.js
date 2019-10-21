@@ -59,7 +59,7 @@
 		/**
 		 * Natural-JS Page Context(지정 필수, 메인 컨텐츠가 들어갈 자리를 지정 해 주세요.)
 		 * Documents 컴포넌트를 사용하면 따로 지정 하지 않아도 됩니다.
-		 * SPA(Single Page Application) 가 아니면 "body" 로 설정 해 주세요. 
+		 * SPA(Single Page Application) 가 아니면 "body" 로 설정 해 주세요.
 		 */
 		"page" : {
 			"context" : ".docs__ > .docs_contents__.visible__"
@@ -69,7 +69,7 @@
 		 *  - 아래는 샘플코드 이므로 사용하지 않는다면 cont 하위의 모든 구문을 삭제하고 사용 바랍니다.
 		 */
 		"cont" : {
-			/** 
+			/**
 			 * advisor 에서 참조할 pointcut 을 정의 합니다.
 			 * pointcut 은 반드시 fn 속성에 param, cont, fnChain 인자를 가진 함수로 정의 해야 합니다.
 			 * 함수 수행 결과(boolean)는 advice의 적용 여부를 판단하는데 사용 됩니다.
@@ -136,7 +136,7 @@
 			/**
 			 * Communication Filter
 			 *  - N.comm 으로 호출되는 모든요청이 아래에서 정의한 필터를 통과하게 되므로 서버 요청 시 공통적으로 적용해야 할 부분을 정의 하면 됨.
-			 *  - 필터 인자 중 request 인자에 요청에 대한 유용한 정보가 담겨 있음. 
+			 *  - 필터 인자 중 request 인자에 요청에 대한 유용한 정보가 담겨 있음.
 			 *  - request 객체에서 제공 해 주는 정보는 http://bbalganjjm.github.io/natural_js/ 에서 Communicator.request 메뉴를 참고 바람.
 			 *  - 필터를 여러개 걸수 있으며 단위 필터명은 아무거나 지정하면 됨.
 			 *  - 수행 순서는 order 속성(숫자가 적을 수록 먼저 실행 됨)이 정의 된 필터가 실행 된 다음 order 속성이 정의 되지 않은 필터들이 실행 됨.
@@ -167,7 +167,7 @@
 					 * 서버에 요청이 성공 했을 경우 실행됨.
 					 */
 					success : function(request, data, textStatus, xhr) {
-						// return data 를 하면 N.comm.submit 의 콜백의 인자로 넘어오는 data 가 리턴한 데이터로 치환 됨.
+						// data 를 가공하여 return 하면 N.comm.submit callback 함수의 data 인자로 전달 됨.
 					},
 					/**
 					 * 서버에 요청 후 서버에러가 발생 했을 경우 실행됨.
@@ -226,10 +226,10 @@
 			"userRules" : {
 			    /*
 			     * 함수 명이 룰 명이 됨.
-			     * 
+			     *
 			     * str : 포멧 대상 문자열
 			     * args : 포멧 옵션
-			     * 
+			     *
 			     * return : 포멧된 문자열을 반환
 			    "userRule" : function(str, args) {
 	                return str
@@ -289,10 +289,10 @@
 			    /*
                  * 함수 명이 룰 명이 됨.
                  * 검증 실패 메시지는 아래 N.context.attr("data").validator.message 객체에 언어별로 함수명과 같은 프로퍼티명으로 정의.
-                 * 
+                 *
                  * str : 검증 대상 문자열
                  * args : 검증 옵션
-                 * 
+                 *
                  * return : 검증에 성공하면 true를 실패하면 false를 반환
                 "userRule" : function(str, args) {
                     return true;
@@ -403,7 +403,7 @@
             }
 		}
 	});
-	
+
 	// 아래 extend 구문은 사용자 정의 룰 정의 시 적용되게 하는 코드이므로 사용자 정의 룰을 정의 했다면 절대 지우지 마십시오.
 	$.extend(N.formatter, N.context.attr("data").formatter.userRules);
 	$.extend(N.validator, N.context.attr("data").validator.userRules);
@@ -662,7 +662,7 @@
         aop : {
             /**
              * Common code request information
-             * 
+             *
              * @codeUrl Common Code request URL
              * @codeKey : Group code property name
              */
@@ -693,7 +693,7 @@
             }
         }
     });
-    
+
     /**
      * Natural-CODE Config
      */
@@ -705,7 +705,7 @@
             "abortOnError" : false,
             /**
              * Defines the statements to exclude from the scan as a string.
-             * 
+             *
              * If the detected code contains the following string, it is excluded.
              *  ex) excludes : [ ".index-header", ".page-header", ".index-lefter", ".index-contents", ".index-footer" ]
              */
@@ -739,5 +739,5 @@
             }
         }
     });
-    
+
 })(N);
