@@ -94,7 +94,8 @@
 }
 
 /* Mobile */
-@media screen and (max-width: 610px) {
+/* 610 - 27px[padding?] */
+@media screen and (max-width: 593px) {
     .index-lefter .left-menu {
         font-size: 1.3em;
     }
@@ -295,20 +296,20 @@
                 var mainNav = view.closest(".main-nav");
 
                 if (selfEle.data("status") === "show") {
-                	if($(window).width() <= 610) {
+                	if($(window).width() <= 593) { // 610 - 27px(padding?)
                 		N(".content-wrap", "body").off("click.lefter");
                 	}
 
                     N(".lefter-toggle-button>span", view).css("transform", "").off("mouseover.lefter").off("mouseout.lefter");
 
                     mainNav.css("margin-left", "-" + mainNav.width() + "px");
-                    if($(window).width() > 610) {
+                    if($(window).width() > 593) { // 610 - 27px(padding?)
     					mainNav.siblings(".content-wrap").css("margin-left", "0");
                     }
 				    selfEle.data("status", "hide").css("margin-right", "-32px");
 
                 } else {
-                    if($(window).width() > 610) {
+                    if($(window).width() > 593) { // 610 - 27px(padding?)
                         mainNav.siblings(".content-wrap").css("margin-left", "");
                     }
                     mainNav.css("margin-left", "");
@@ -320,7 +321,7 @@
                         $(this).css("transform", "");
                     });
 
-                    if($(window).width() <= 610) {
+                    if($(window).width() <= 593) { // 610 - 27px(padding?)
                     	N(".content-wrap", "body").on("click.lefter", function(e) {
     				        e.preventDefault();
     				        N(".lefter-toggle-button", view).trigger("click.lefter");
@@ -335,7 +336,7 @@
             N(window).on("resize.left-menu", function() {
                 N(".left-menu", view).innerHeight(N(this).height() - N(".logo", view).height());
 
-                if($(window).width() <= 610) {
+                if($(window).width() <= 593) { // 610 - 27px(padding?)
                     N(".lefter-toggle-button", view).data("status", "show");
                     N(".content-wrap", "body").css({
                         "transition": "none",
@@ -353,6 +354,7 @@
                     N(".lefter-toggle-button", view).data("status", "hide").trigger("click.lefter");
                 }
             }).trigger("resize.left-menu");
+            
         }
     });
 </script>

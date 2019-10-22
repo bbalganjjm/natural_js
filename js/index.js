@@ -172,7 +172,7 @@
                     N(".agrsIndex", view).remove();
                     N(".function-desc", view).removeClass("function-desc");
 
-                    if($(window).width() <= 610) {
+                    if($(window).width() <= 593) { // 610 - 27px(padding?)
                         $("td:contains('N/A')", view).css({
                             "visibility": "hidden",
                             "padding" : 0,
