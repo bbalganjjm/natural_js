@@ -163,11 +163,11 @@
             }
         },
         mobileResponsiveView : function() {
-
+            
             // API 문서 모바일 용 보기 처리 이벤트
             N(window).on("resize.mobile", function(e, view) {
 
-        		if ($(e.target).is(window) || view) { // 모바일에서 scroll 시 resize 이벤트가 firing 되서(ios, android 동일).
+                if (e.target == window || view) { // 모바일에서 scroll 시 resize 이벤트가 firing 되서(ios, android 동일).
 
                     N(".agrsIndex", view).remove();
                     N(".function-desc", view).removeClass("function-desc");
@@ -190,10 +190,12 @@
                             $(this).find(">td:eq(1)").prepend('<strong class="agrsIndex">[' + idx + '] : </strong>');
                             idx++;
                         });
-
                     } else {
-                        $("td:contains('N/A')", view).css({
-                            "visibility": "visible",
+                        $("[id='methods'] tr .function-desc").removeClass("function-desc");
+                        $("[id='methods'] tr .agrsIndex").remove();
+                        
+                        $("[id='methods'] td:contains('N/A')").css({
+                            "visibility": "",
                             "padding" : "",
                             "margin" : "",
                             "height" : "",
