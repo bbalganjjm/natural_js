@@ -640,7 +640,7 @@ pre.shell>code {
 }
 
 /* Mobile */
-@media screen and (max-width: 610px) {
+@media screen and (max-width: 768px) {
     .main-nav {
         display : none;
     }
