@@ -169,7 +169,7 @@
                 
                 if (e.target == window || view) { // 모바일에서 scroll 시 resize 이벤트가 firing 되서(ios, android 동일).
                     
-                    if(view.closest("#defaultoptions").length > 0) {
+                    if($("#declarativeoptions").hasClass("visible__") || $("#defaultoptions").hasClass("visible__")) {
                         return false;
                     }
                     
@@ -198,7 +198,7 @@
                         $("[id='methods'] tr .function-desc").removeClass("function-desc");
                         $("[id='methods'] tr .agrsIndex").remove();
                         
-                        $("[id='methods'] td:contains('N/A')").css({
+                        $("[id='methods'], [id='constructor']").find("td:contains('N/A')").css({
                             "visibility": "",
                             "padding" : "",
                             "margin" : "",
