@@ -195,8 +195,8 @@
                             idx++;
                         });
                     } else {
-                        $("[id='methods'] tr .function-desc").removeClass("function-desc");
-                        $("[id='methods'] tr .agrsIndex").remove();
+                        $("[id='methods'], [id='constructor']").find("tr .function-desc").removeClass("function-desc");
+                        $("[id='methods'], [id='constructor']").find("tr .agrsIndex").remove();
                         
                         $("[id='methods'], [id='constructor']").find("td:contains('N/A')").css({
                             "visibility": "",
