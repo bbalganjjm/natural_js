@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.38.220
+ * Natural-UI v0.38.221
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-UI"] = "0.38.220";
+    N.version["Natural-UI"] = "0.38.221";
 
     $.fn.extend($.extend(N.prototype, {
         alert : function(msg, vars) {
@@ -806,7 +806,7 @@
                     // reset message context(overlay) position
                     var msgContextCss = {
                         "height" : opts.isWindow ? (window.innerHeight ? window.innerHeight : windowHeight) : opts.context.outerHeight() + "px",
-                        "width" : opts.isWindow ? (window.innerWidth ? window.innerWidth : windowWidth) : opts.context.outerWidth() + "px"
+                        "width" : opts.isWindow ? windowWidth : opts.context.outerWidth() + "px"
                     }
                     var marginLeft = 0;
                     if(opts.isWindow) {
@@ -828,27 +828,23 @@
                                 msgContentsCss.top = String(opts.top) + "px";
                             } else {
                                 msgContentsCss.top = "0";
-                                msgContentsCss["margin-top"] = String(opts.msgContext.height() / 2 - msgContentsHeight / 2) + "px";
-                            }
-                            if(opts.left !== undefined) {
-                                msgContentsCss.left = String(opts.left) + "px";
-                            } else {
-                                msgContentsCss.left = "0";
+                                msgContentsCss["margin-top"] = String(Math.floor(opts.msgContext.height() / 2 - msgContentsHeight / 2) - 1) + "px";
                             }
                         } else {
                             if(opts.top !== undefined) {
                                 msgContentsCss.position = "absolute";
                                 msgContentsCss.top = String(opts.top) + "px";
                             } else {
-                                msgContentsCss["margin-top"] = "-" + String(opts.msgContext.height() / 2 + msgContentsHeight / 2 + parseFloat(opts.context.css("margin-bottom"))) + "px";
+                                msgContentsCss["margin-top"] = "-" + String(Math.floor(opts.msgContext.height() / 2 + msgContentsHeight / 2 + parseFloat(opts.context.css("margin-bottom"))) + 1) + "px";
                             }
                         }
+
                         if(opts.left !== undefined) {
                             msgContentsCss.left = String(opts.left) + "px";
                         } else {
-                            msgContentsCss.left = String(opts.context.position().left + marginLeft + (opts.msgContext.width() / 2 - msgContentsWidth / 2)) + "px";
+                            msgContentsCss.left = String(Math.floor(opts.context.position().left + marginLeft + (opts.msgContext.width() / 2 - msgContentsWidth / 2)) - 1) + "px";
                         }
-
+                        
                         if(msgContentsHeight > windowHeight) {
                             msgContentsCss["margin-top"] = String($(window).scrollTop()) + "px";
                             msgContentsCss.position = "absolute";
