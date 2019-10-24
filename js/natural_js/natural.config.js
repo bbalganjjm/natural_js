@@ -242,7 +242,7 @@
 					"cache" : true,
 					/**
 					 * Single Page Application(SPA) 개발 시 N.comm(async) 으로 데이터를 요청하고 요청이 오기전에 다른 페이지로 전환 했을때
-					 * 요청할 때 location.href 와 응답 올때 location.href 을 비교하여 틀리면 요청을 중지 할 건지 여부
+					 * 요청할 때 location.href 와 응답 올때 location.href 을 비교하여 틀리면 요청을 중지 할지 여부
 					 */
 					"urlSync" : true,
 					/**
@@ -250,7 +250,7 @@
 					 */
 					"browserHistory" : false,
 					/**
-					 * 특정 영역에 html 페이지를 불러올때 덮어 쓸건지 더할건지 여부
+					 * 특정 영역에 html 페이지를 불러올때 덮어 쓸지 더할지 여부
 					 */
 					"append" : false
 				}
@@ -573,17 +573,17 @@
 			 */
 			"val" : "val",
 			/**
-			 * select 요소에 option 을 덮어쓸건지 더할건지 지정
+			 * select 요소에 option 을 덮어쓸지 더할지 여부
 			 */
 			"append" : true
 		},
 		"form" : {
 			/**
-			 * 바인드된 데이터의 html 을 인식 할건지 여부
+			 * 바인드된 데이터의 html 을 인식할지 여부
 			 */
 			"html" : false,
 			/**
-			 * 실시간 데이터 검증을 할 건지 여부
+			 * 실시간 데이터 검증을할지 여부
 			 */
 			"validate" : true,
 			/**
