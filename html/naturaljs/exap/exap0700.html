@@ -92,8 +92,9 @@ N(".exap0700").cont({
        		select : true,
        		unselect : false,
        		onSelect : function(index, rowEle, data) { // Grid row select event
-       			// 5. initialize N.popup and open.
-       	    	N().popup({
+       			
+       		    // 5. initialize N.popup and open.
+       		    var popupOpts = {
        	    		url : "html/naturaljs/exap/exap0701.html",
        	    		title : N.message.get(cont.messages, "EXAP0700-0001"),
        	    		alwaysOnTop : true,
@@ -101,7 +102,28 @@ N(".exap0700").cont({
        	    		closeMode : "remove",
        	    		onOpen : "onOpen",
        	    		opener : cont
-       	    	}).open({
+       	    	};
+       			
+       			// Full size popup option for mobile
+           		if($(window).width() <= 414) {
+           		 	popupOpts.draggable = false;
+           		 	popupOpts.onShow = function(msgContext, msgContents) {
+           		 		window.scrollTop = $(window).scrollTop();
+						$("html, body").css("overflow", "hidden");
+               		}
+           		 	popupOpts.onRemove = function(msgContext, msgContents) {
+           		 		$("html, body").css("overflow", "");
+           		 		$(window).scrollTop(window.scrollTop);
+            		}
+           			popupOpts.width = function(msgContext, msgContents) {
+						return $(window).width(); 
+					};
+					popupOpts.height = function(msgContext, msgContents) {
+						return $(window).height() - msgContents.show().find(".msg_title_box__").height(); 
+               		};
+           		}
+       		
+       	    	N().popup(popupOpts).open({
        	    		grid : cont.grid,
        				data : data,
        				row : index

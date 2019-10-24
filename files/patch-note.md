@@ -16,6 +16,7 @@
  * N.alert, N.popup : The center position of the message dialog has been adjusted more precisely.
  * N.alert, N.popup : Fixed a bug where the dialog would stick to the right side if the "width" option was not specified.
  * N.alert, N.popup : Added ability to specify "width" and "height" options as function return values. 
+ * N.popup : Added onShow, onHide, onRemove options.
  
 ## Natural-ARCHITECTURE v0.13.11
  *

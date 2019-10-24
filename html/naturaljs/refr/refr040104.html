@@ -86,8 +86,8 @@
             <td>
                 <p>메시지 대화상자의 넓이</p>
                 <ul>
-                    <li>수치(number)로 지정 시 지정한 수치만큼(px) 넓이가 지정 됩니다.</li>
-                    <li>function 으로 지정 시 msgContext(modal 옵션이 true 일때 바닥에 깔리는 요소), msgContents(메시지 컨텐츠 요소) 가 인자로 전달 되고 return 된 값으로 넓이가 지정 됩니다.
+                    <li>number 타입 일 경우 지정한 수치만큼(px) 넓이가 지정 됩니다.</li>
+                    <li>function 일 경우 msgContext(modal 옵션이 true 일때 바닥에 깔리는 요소), msgContents(메시지 컨텐츠 요소) 가 인자로 전달 되고 return 된 값으로 넓이가 지정 됩니다.
                         <pre><code class="language-javascript">...
 // 대화상자의 넓이를 화면에 꽉 채우기
 width : function(msgContext, msgContents) {
@@ -106,8 +106,8 @@ width : function(msgContext, msgContents) {
             <td>
                 <p>메시지 대화상자에서 타이틀 영역을 제외한 컨텐츠의 높이</p>
                 <ul>
-                    <li>수치(number)로 지정 시 지정한 수치만큼(px) 높이가 지정 됩니다.</li>
-                    <li>function 으로 지정 시 msgContext(modal 옵션이 true 일때 바닥에 깔리는 요소), msgContents(메시지 컨텐츠 요소) 가 인자로 전달 되고 return 된 값으로 높이가 지정 됩니다.
+                    <li>number 타입 일 경우 지정한 수치만큼(px) 높이가 지정 됩니다.</li>
+                    <li>function 일 경우 msgContext(modal 옵션이 true 일때 바닥에 깔리는 요소), msgContents(메시지 컨텐츠 요소) 가 인자로 전달 되고 return 된 값으로 높이가 지정 됩니다.
                         <pre><code class="language-javascript">...
 // 대화상자의 높이를 화면에 꽉 채우기
 height: function(msgContext, msgContents) {
@@ -282,6 +282,7 @@ height: function(msgContext, msgContents) {
 	// msgContext : 메시지 오버레이 요소
 	// msgContents : 메시지 대화상자 요소
 }</code></pre>
+                <p class="alert">closeMode 옵션 값이 "remove" 일 경우 onHide 이벤트는 실행 되지 않습니다.</p>
             </td>
         </tr>
         <tr>
@@ -296,6 +297,7 @@ height: function(msgContext, msgContents) {
 	// msgContext : 메시지 오버레이 요소
 	// msgContents : 메시지 대화상자 요소
 }</code></pre>
+                <p class="alert">closeMode 옵션 값이 "hide" 일 경우 onRemove 이벤트는 실행 되지 않습니다.</p>
             </td>
         </tr>
     </table>

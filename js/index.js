@@ -169,7 +169,7 @@
                 
                 if (e.target == window || view) { // 모바일에서 scroll 시 resize 이벤트가 firing 되서(ios, android 동일).
                     
-                    if($("#declarativeoptions").hasClass("visible__") || $("#defaultoptions").hasClass("visible__")) {
+                    if(!$("#methods").hasClass("visible__") && !$("#constructor").hasClass("visible__")) {
                         return false;
                     }
                     
@@ -177,7 +177,7 @@
                     N(".function-desc", view).removeClass("function-desc");
 
                     if($(window).width() <= 751) { // 768 - 17px(?)
-                        $("td:contains('N/A')", view).css({
+                        $("td:contains('N/A'):visible", view).css({
                             "visibility": "hidden",
                             "padding" : 0,
                             "margin" : 0,
@@ -186,7 +186,7 @@
                         });
 
                         var idx = -1;
-                        $("tr", view).each(function() {
+                        $("tr:visible", view).each(function() {
                             if($(this).find(">td:eq(0)").text().length > 0) {
                                 idx = -1;
                                 $(this).find(">td:eq(0)").siblings("td").addClass("function-desc");
