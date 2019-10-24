@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.38.223
+ * Natural-UI v0.38.227
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-UI"] = "0.38.223";
+    N.version["Natural-UI"] = "0.38.227";
 
     $.fn.extend($.extend(N.prototype, {
         alert : function(msg, vars) {
@@ -2175,6 +2175,9 @@
                 onOkG : null, // DEPRECATED
                 onCancel : null,
                 onCancelG : null, // DEPRECATED
+                onShow : null,
+                onHide : null,
+                onRemove : null,
                 onOpen : null,
                 onOpenG : null, // DEPRECATED
                 onOpenData : null,
@@ -2224,6 +2227,9 @@
             // Wraps the global event options in N.config and event options for this component.
             UI.utils.wrapHandler(opts, "popup", "onOk");
             UI.utils.wrapHandler(opts, "popup", "onCancel");
+            UI.utils.wrapHandler(opts, "popup", "onShow");
+            UI.utils.wrapHandler(opts, "popup", "onHide");
+            UI.utils.wrapHandler(opts, "popup", "onRemove");
             UI.utils.wrapHandler(opts, "popup", "onOpen");
             UI.utils.wrapHandler(opts, "popup", "onClose");
             UI.utils.wrapHandler(opts, "popup", "onLoad");
@@ -2314,9 +2320,17 @@
                     // opts.context is alert message;
                     opts.html = true;
                     opts.msg = opts.context;
-                    opts.onRemove = function() {
-                        opts.context = null;
-                    };
+                    if(opts.onRemove != null) {
+                        var orgFn = opts.onRemove; 
+                        opts.onRemove = function() {
+                            opts.context = null;
+                            return orgFn.apply(this, arguments);
+                        }
+                    } else {
+                        opts.onRemove = function() {
+                            opts.context = null;
+                        };                        
+                    }
                     
                     // To prevent the onShowG event from running when popup.
                     opts.onShowG = null; // DEPRECATED
