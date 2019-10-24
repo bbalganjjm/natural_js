@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.38.227
+ * Natural-UI v0.38.231
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-UI"] = "0.38.227";
+    N.version["Natural-UI"] = "0.38.231";
 
     $.fn.extend($.extend(N.prototype, {
         alert : function(msg, vars) {
@@ -455,10 +455,13 @@
                 onOkG : null, // DEPRECATED
                 onCancel : null,
                 onCancelG : null, // DEPRECATED
+                onBeforeShow : null,
                 onShow : null,
                 onShowG : null, // DEPRECATED
+                onBeforeHide : null,
                 onHide : null,
                 onHideG : null, // DEPRECATED
+                onBeforeRemove : null,
                 onRemove : null,
                 onRemoveG : null, // DEPRECATED
                 overlayColor : null,
@@ -504,8 +507,11 @@
                 // Wraps the global event options in N.config and event options for this component.
                 UI.utils.wrapHandler(msg, "alert", "onOk");
                 UI.utils.wrapHandler(msg, "alert", "onCancel");
+                UI.utils.wrapHandler(msg, "alert", "onBeforeShow");
                 UI.utils.wrapHandler(msg, "alert", "onShow");
+                UI.utils.wrapHandler(msg, "alert", "onBeforeHide");
                 UI.utils.wrapHandler(msg, "alert", "onHide");
+                UI.utils.wrapHandler(msg, "alert", "onBeforeRemove");
                 UI.utils.wrapHandler(msg, "alert", "onRemove");
                 
                 $.extend(true, this.options, msg);
@@ -949,6 +955,10 @@
                 var opts = this.options;
                 var self = this;
 
+                if (opts.onBeforeShow !== null) {
+                    opts.onBeforeShow.call(self, opts.msgContext, opts.msgContents);
+                }
+                
                 // for N.docs transition effect
                 N(".docs__>.docs_tab_context__").css("z-index", "0");
                 
@@ -1014,17 +1024,25 @@
                     $(document).unbind("keyup.alert", opts.keyupHandler).bind("keyup.alert", opts.keyupHandler);
                 }
 
+                opts.msgContents.one(N.event.whichTransitionEvent(opts.msgContents), function(e){
+                    if (opts.onShow !== null) {
+                        opts.onShow.call(self, opts.msgContext, opts.msgContents);
+                    }
+                }).trigger("nothing");
+                
+                // DEPRECATED
                 if (opts.onShowG !== null) {
                     opts.onShowG.call(self, opts.msgContext, opts.msgContents);
                 }
-                if (opts.onShow !== null) {
-                    opts.onShow.call(self, opts.msgContext, opts.msgContents);
-                }
-
+                
                 return this;
             },
             "hide" : function() {
                 var opts = this.options;
+                
+                if (opts.onBeforeHide !== null) {
+                    opts.onBeforeHide.call(this, opts.msgContext, opts.msgContents);
+                }
                 
                 // for N.docs transition effect
                 N(".docs__>.docs_tab_context__").css("z-index", "");
@@ -1039,9 +1057,11 @@
                     opts.msgContents.one(N.event.whichTransitionEvent(opts.msgContents), function(e){
                         opts.msgContents.hide();
                         
+                        // DEPRECATED
                         if (opts.onHideG !== null) {
                             opts.onHideG.call(this, opts.msgContext, opts.msgContents);
                         }
+                        
                         if (opts.onHide !== null) {
                             opts.onHide.call(this, opts.msgContext, opts.msgContents);
                         }
@@ -1053,9 +1073,11 @@
                         clearTimeout(opts.iTime);
                         opts.msgContext.remove();
                         
+                        // DEPRECATED
                         if (opts.onHideG !== null) {
                             opts.onHideG.call(this, opts.msgContext, opts.msgContents);
                         }
+                        
                         if (opts.onHide !== null) {
                             opts.onHide.call(this, opts.msgContext, opts.msgContents);
                         }
@@ -1071,6 +1093,10 @@
             },
             "remove" : function() {
                 var opts = this.options;
+                
+                if (opts.onBeforeRemove !== null) {
+                    opts.onBeforeRemove.call(this, opts.msgContext, opts.msgContents);
+                }
                 
                 // for N.docs transition effect
                 N(".docs__>.docs_tab_context__").css("z-index", "");
@@ -1091,9 +1117,11 @@
                             N.gc.ds();
                         }
                         
+                        // DEPRECATED
                         if (opts.onRemoveG !== null) {
                             opts.onRemoveG.call(this, opts.msgContext, opts.msgContents);
                         }
+                        
                         if (opts.onRemove !== null) {
                             opts.onRemove.call(this, opts.msgContext, opts.msgContents);
                         }
@@ -1104,9 +1132,11 @@
                         clearTimeout(opts.iTime);
                         opts.msgContext.remove();
                         
+                        // DEPRECATED
                         if (opts.onRemoveG !== null) {
                             opts.onRemoveG.call(this, opts.msgContext, opts.msgContents);
                         }
+                        
                         if (opts.onRemove !== null) {
                             opts.onRemove.call(this, opts.msgContext, opts.msgContents);
                         }
@@ -2175,8 +2205,11 @@
                 onOkG : null, // DEPRECATED
                 onCancel : null,
                 onCancelG : null, // DEPRECATED
+                onBeforeShow : null,
                 onShow : null,
+                onBeforeHide : null,
                 onHide : null,
+                onBeforeRemove : null,
                 onRemove : null,
                 onOpen : null,
                 onOpenG : null, // DEPRECATED
@@ -2227,8 +2260,11 @@
             // Wraps the global event options in N.config and event options for this component.
             UI.utils.wrapHandler(opts, "popup", "onOk");
             UI.utils.wrapHandler(opts, "popup", "onCancel");
+            UI.utils.wrapHandler(opts, "popup", "onBeforeShow");
             UI.utils.wrapHandler(opts, "popup", "onShow");
+            UI.utils.wrapHandler(opts, "popup", "onBeforeHide");
             UI.utils.wrapHandler(opts, "popup", "onHide");
+            UI.utils.wrapHandler(opts, "popup", "onBeforeRemove");
             UI.utils.wrapHandler(opts, "popup", "onRemove");
             UI.utils.wrapHandler(opts, "popup", "onOpen");
             UI.utils.wrapHandler(opts, "popup", "onClose");
