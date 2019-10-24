@@ -108,12 +108,12 @@ N(".exap0700").cont({
            		if($(window).width() <= 414) {
            		 	popupOpts.draggable = false;
            		 	popupOpts.onShow = function(msgContext, msgContents) {
-           		 		window.scrollTop = $(window).scrollTop();
+           		 	cont.scrollTop = $(window).scrollTop();
 						$("html, body").css("overflow", "hidden");
                		}
            		 	popupOpts.onRemove = function(msgContext, msgContents) {
            		 		$("html, body").css("overflow", "");
-           		 		$(window).scrollTop(window.scrollTop);
+           		 		$(window).scrollTop(cont.scrollTop);
             		}
            			popupOpts.width = function(msgContext, msgContents) {
 						return $(window).width(); 
