@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.38.221
+ * Natural-UI v0.38.223
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-UI"] = "0.38.221";
+    N.version["Natural-UI"] = "0.38.223";
 
     $.fn.extend($.extend(N.prototype, {
         alert : function(msg, vars) {
@@ -637,13 +637,21 @@
                 opts.msgContents.find(".msg_box__")[ opts.html ? "html" : "text" ](opts.msg);
 
                 // set width
-                if(opts.width > 0) {
-                    opts.msgContents.find(".msg_box__").width(opts.width);
+                if(N.type(opts.width) === "function" || opts.width > 0) {
+                    if(N.type(opts.width) === "function") {
+                        opts.msgContents.find(".msg_box__").width(opts.width.call(self, opts.msgContext, opts.msgContents));
+                    } else {
+                        opts.msgContents.find(".msg_box__").width(opts.width);
+                    }
                 }
 
                 // set height
-                if(opts.height > 0) {
-                    opts.msgContents.find(".msg_box__").height(opts.height).css("overflow-y", "auto");
+                if(N.type(opts.height) === "function" || opts.height > 0) {
+                    if(N.type(opts.width) === "function") {
+                        opts.msgContents.find(".msg_box__").height(opts.height.call(self, opts.msgContext, opts.msgContents)).css("overflow-y", "auto");
+                    } else {
+                        opts.msgContents.find(".msg_box__").height(opts.height).css("overflow-y", "auto");
+                    }
                 }
 
                 if(opts.modal && opts.windowScrollLock) {
@@ -842,6 +850,7 @@
                         if(opts.left !== undefined) {
                             msgContentsCss.left = String(opts.left) + "px";
                         } else {
+                            opts.msgContents.width(msgContentsWidth);
                             msgContentsCss.left = String(Math.floor(opts.context.position().left + marginLeft + (opts.msgContext.width() / 2 - msgContentsWidth / 2)) - 1) + "px";
                         }
                         
