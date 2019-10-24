@@ -106,7 +106,7 @@
 &lt;/script&gt;</code></pre>
 
 	<h4 class="notIndex">4. N.pagination과 N.grid 를 연동하여 서버(DB) 페이징</h4>
-	<p class="alert">서버에서 DB 쿼리로 페이징 시  먼저 조회하고자 하는 전체 행수를 가져오고 onChange 이벤트 핸들러의 인자로 들어오는 currPageNavInfo 정보로 선택될 DB 로우의 시작값(currPageNavInfo.startRowNum)과 얼마만큼 가져올건지의 정보(currPageNavInfo.countPerPage) 등을 서버에 파라미터로 던져 해당 행수 만큼만 가져와 N.grid 에 bind하는 타입으로 서버단 페이징을 처리 할 수 있습니다.</p>
+	<p class="alert">서버에서 DB 쿼리로 페이징 시  먼저 조회하고자 하는 전체 행수를 가져오고 onChange 이벤트 핸들러의 인자로 들어오는 currPageNavInfo 정보로 선택될 DB 로우의 시작값(currPageNavInfo.startRowNum)과 얼마만큼 가져올지 등의 정보(currPageNavInfo.countPerPage)를 서버에 파라미터로 전송한 결과 데이터를 N.grid 에 bind하는 형태로 DB 페이징을 처리 할 수 있습니다.</p>
 	<pre class="line-numbers"><code class="language-markup">&lt;table id="paginationExample41"&gt;
 	&lt;thead&gt;&lt;!-- 컬럼 타이틀 영역 --&gt;
 		&lt;tr&gt;

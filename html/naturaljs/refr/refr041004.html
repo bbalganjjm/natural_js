@@ -77,7 +77,7 @@
 	// selData 는 선택한 페이지가 가지고 있는 데이터 리스트
 	// currPageNavInfo 는 이벤트가 발생할 시점의 페이징 정보
 }</code></pre>
-				<p class="alert">서버에서 DB 쿼리로 페이징 시  먼저 조회하고자 하는 전체 행수를 가져오고 onChange 이벤트 핸들러의 인자로 들어오는 currPageNavInfo 정보로 선택될 DB 로우의 시작값(currPageNavInfo.startRowNum)과 얼마만큼 가져올건지의 정보(currPageNavInfo.countPerPage) 등을 서버에 파라미터로 던져 해당 행수 만큼만 가져와 N.grid 에 bind하는 타입으로 서버단 페이징을 처리 할 수 있습니다.</p>
+				<p class="alert">서버에서 DB 쿼리로 페이징 시  먼저 조회하고자 하는 전체 행수를 가져오고 onChange 이벤트 핸들러의 인자로 들어오는 currPageNavInfo 정보로 선택될 DB 로우의 시작값(currPageNavInfo.startRowNum)과 얼마만큼 가져올지 등의 정보(currPageNavInfo.countPerPage)를 서버에 파라미터로 전송한 결과 데이터를 N.grid 에 bind하는 형태로 DB 페이징을 처리 할 수 있습니다.</p>
 				<p class="alert">blockOnChangeWhenBind 옵션이 true 이면 페이징 버튼들을 클릭 할 때만 이벤트가 실행 됩니다.</p>
 				<p class="alert">
 					currPageNavInfo 정보<br>
