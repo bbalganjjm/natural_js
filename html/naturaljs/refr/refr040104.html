@@ -257,6 +257,20 @@ height: function(msgContext, msgContents) {
             </td>
         </tr>
         <tr>
+            <td>onBeforeShow</td>
+            <td>function</td>
+            <td>null</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p>메시지 대화상자가 표시 되기 전 실행되는 이벤트</p>
+                <pre><code class="language-javascript">onBeforeShow : function(msgContext, msgContents) {
+	// this : N.alert 인스턴스
+	// msgContext : 메시지 오버레이 요소
+	// msgContents : 메시지 대화상자 요소
+}</code></pre>
+            </td>
+        </tr>
+        <tr>
             <td>onShow</td>
             <td>function</td>
             <td>null</td>
@@ -268,6 +282,21 @@ height: function(msgContext, msgContents) {
 	// msgContext : 메시지 오버레이 요소
 	// msgContents : 메시지 대화상자 요소
 }</code></pre>
+            </td>
+        </tr>
+        <tr>
+            <td>onBeforeHide</td>
+            <td>function</td>
+            <td>null</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p>메시지 대화상자가 감춰지기 전 실행되는 이벤트</p>
+                <pre><code class="language-javascript">onBeforeHide : function(msgContext, msgContents) {
+	// this : N.alert 인스턴스
+	// msgContext : 메시지 오버레이 요소
+	// msgContents : 메시지 대화상자 요소
+}</code></pre>
+                <p class="alert">closeMode 옵션 값이 "remove" 일 경우 onBeforeHide 이벤트는 실행 되지 않습니다.</p>
             </td>
         </tr>
         <tr>
@@ -283,6 +312,21 @@ height: function(msgContext, msgContents) {
 	// msgContents : 메시지 대화상자 요소
 }</code></pre>
                 <p class="alert">closeMode 옵션 값이 "remove" 일 경우 onHide 이벤트는 실행 되지 않습니다.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>onBeforeRemove</td>
+            <td>function</td>
+            <td>null</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p>메시지 대화상자가 제거 되기 전 실행되는 이벤트</p>
+                <pre><code class="language-javascript">onBeforeRemove : function(msgContext, msgContents) {
+	// this : N.alert 인스턴스
+	// msgContext : 메시지 오버레이 요소
+	// msgContents : 메시지 대화상자 요소
+}</code></pre>
+                <p class="alert">closeMode 옵션 값이 "hide" 일 경우 onBeforeRemove 이벤트는 실행 되지 않습니다.</p>
             </td>
         </tr>
         <tr>
