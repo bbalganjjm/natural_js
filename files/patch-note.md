@@ -13,7 +13,9 @@
  * N.tab : Changed the logic that is processed when the tabScroll option is enabled.
  * N.tab : The jQuery selector string has changed for performance.
  * N.alert : Changed OK and Cancel buttons from "a" tag to "button" tag.
- * N.alert : The center position of the message dialog has been adjusted more precisely.
+ * N.alert, N.popup : The center position of the message dialog has been adjusted more precisely.
+ * N.alert, N.popup : Fixed a bug where the dialog would stick to the right side if the "width" option was not specified.
+ * N.alert, N.popup : Added ability to specify "width" and "height" options as function return values. 
  
 ## Natural-ARCHITECTURE v0.13.11
  *
