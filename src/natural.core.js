@@ -1,5 +1,5 @@
 /*!
- * Natural-CORE v0.17.22
+ * Natural-CORE v0.17.24
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -42,7 +42,7 @@
 			return this;
 		},
 		/**
-		 * Event bind to the top priority
+		 * Bind an event to top priority
 		 */
 		tpBind : function() {
 		    var args = arguments;
@@ -61,7 +61,7 @@
 			});
 	    },
 	    /**
-	     * Get instances form component context elements
+	     * Get instance from context element of component or library
 	     */
 	    instance : function(name, instance) {
 	    	if(arguments.length === 0) {
@@ -241,7 +241,7 @@
 	    	return "";
 	    },
 	    /**
-		 * Returns the event bound to an element.
+		 * Returns the event bound to the element.
 	     */
 	    events : function(eventName, namespace) {
 	    	var ele = $(this);
@@ -302,7 +302,7 @@
 		// N local variables
 		$.extend(N, {
 			version : {
-				"Natural-CORE" : "0.17.22"
+				"Natural-CORE" : "0.17.24"
 			},
 			/**
 			 * Set and get locale value
@@ -350,7 +350,7 @@
 			 */
 			isPlainObject : $.isPlainObject,
 			/**
-			 * Check if object is empty
+			 * Check whether object is empty
 			 */
 			isEmptyObject : function(obj) {
 				if(obj !== undefined && this.isString(obj)) {
@@ -397,7 +397,7 @@
 				return obj !== undefined && obj.getElementsByTagName ? true : false;
 			},
 			/**
-			 * serialize async execution
+			 * Run asynchronous execution sequentially
 			 */
 			serialExecute : function() {
 				var self = this;
@@ -447,7 +447,7 @@
 					return true;
 				},
 				/**
-				 * Removes garbage instances from obserables of N.ds 
+				 * Removes garbage instances from observables of N.ds 
 				 */
 				ds : function() {
 					if($(N.context.attr("architecture").page.context).find(">#data_sync_temp__").length > 0) {
@@ -1072,8 +1072,8 @@
 				            // Allow: Special Keys
 				        else if (specialKeys.indexOf(key) != -1) {
 				            // Fix Issue: right arrow & Delete & ins in FireFox
-				            if ((key == 39 || key == 45 || key == 46)) {
-				                return (navigator.userAgent.indexOf("Firefox") != -1 && e.keyCode != undefined && e.keyCode > 0);
+				            if (navigator.userAgent.indexOf("Firefox") != -1 && (key == 39 || key == 45 || key == 46)) {
+				                return e.keyCode != undefined && e.keyCode > 0;
 				            }
 				                // DisAllow : "#" & "$" & "%"
 				            else if (e.shiftKey && (key == 35 || key == 36 || key == 37)) {
@@ -1736,9 +1736,9 @@
 	};
 
 	N.debug = console && console.debug ? console.debug.bind(window.console) : function() {};
-	N.log = console && console.debug ? console.log.bind(window.console) : function() {};
-	N.info = console && console.debug ? console.info.bind(window.console) : function() {};
-	N.warn = console && console.debug ? console.warn.bind(window.console) : function() {};
+	N.log = console && console.log ? console.log.bind(window.console) : function() {};
+	N.info = console && console.info ? console.info.bind(window.console) : function() {};
+	N.warn = console && console.warn ? console.warn.bind(window.console) : function() {};
     
 	window.$.N = window.N = N;
 
