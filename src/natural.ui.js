@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.38.231
+ * Natural-UI v0.38.235
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-UI"] = "0.38.231";
+    N.version["Natural-UI"] = "0.38.235";
 
     $.fn.extend($.extend(N.prototype, {
         alert : function(msg, vars) {
@@ -986,6 +986,17 @@
                     }
 
                     opts.msgContents.removeClass("hidden__").addClass("visible__");
+                    
+                    opts.msgContents.one(N.event.whichTransitionEvent(opts.msgContents), function(e){
+                        if (opts.onShow !== null) {
+                            opts.onShow.call(self, opts.msgContext, opts.msgContents);
+                        }
+                    }).trigger("nothing");
+                    
+                    // DEPRECATED
+                    if (opts.onShowG !== null) {
+                        opts.onShowG.call(self, opts.msgContext, opts.msgContents);
+                    }
                 } else {
                     if (!N.isEmptyObject(opts.msg)) {
                         opts.context.parent().css({
@@ -1024,17 +1035,6 @@
                     $(document).unbind("keyup.alert", opts.keyupHandler).bind("keyup.alert", opts.keyupHandler);
                 }
 
-                opts.msgContents.one(N.event.whichTransitionEvent(opts.msgContents), function(e){
-                    if (opts.onShow !== null) {
-                        opts.onShow.call(self, opts.msgContext, opts.msgContents);
-                    }
-                }).trigger("nothing");
-                
-                // DEPRECATED
-                if (opts.onShowG !== null) {
-                    opts.onShowG.call(self, opts.msgContext, opts.msgContents);
-                }
-                
                 return this;
             },
             "hide" : function() {
@@ -1400,7 +1400,7 @@
                     if(!N.event.isNumberRelatedKeys(e) || opts.context.val().length > 8) {
                         e.preventDefault();
                         return false;
-                    } else if (keyCode == 13) { // When press the ENTER key
+                    } else if (keyCode == 13 || keyCode == 9) { // When press the ENTER key
                         opts.context.get(0).blur();
                         self.hide();
                     }
@@ -1413,7 +1413,7 @@
                     var format = (!opts.monthonly ? N.context.attr("data").formatter.date.Ymd() : N.context.attr("data").formatter.date.Ym()).replace(/[^Y|^m|^d]/g, "");
                     
                     // when press the number keys
-                    if (value.length%2 === 0) {
+                    if ((value.length > 2 && value.length%2 === 0) && keyCode != 35 && keyCode != 36 && keyCode != 37 && keyCode != 39 && keyCode != 9 && keyCode != 27) {
                         var dateStrArr = N.date.strToDateStrArr(value, format);
                         var dateStrStrArr = N.date.strToDateStrArr(value, format, true);
 
@@ -1451,7 +1451,7 @@
                         }
                     }
 
-                    if (keyCode == 9 && keyCode == 27) { // When press the TAB key & ESC key
+                    if (keyCode == 27) { // When press the TAB key & ESC key
                         e.preventDefault();
                         self.hide();
                     }
@@ -2011,6 +2011,10 @@
                 });
             },
             selectItems : function(opts, value, format, yearsPanel, monthsPanel, daysPanel) {
+                if(value.length > 2 && value.length%2 !== 0) {
+                    value = (new Date()).formatDate(format);
+                }
+                
                 var dateStrArr = N.date.strToDateStrArr(value, format);
                 var dateStrStrArr = N.date.strToDateStrArr(value, format, true);
 
@@ -2135,7 +2139,9 @@
                         $(this).removeClass("hidden__").addClass("visible__");
                         $(this).one(N.event.whichTransitionEvent(opts.contents), function(e){
                             $(document).unbind("click.datepicker").bind("click.datepicker", function(e) {
-                                self.hide();
+                                if(!document.hasFocus()) {
+                                    self.hide();
+                                }
                             });
     
                             if(opts.onShow !== null) {
