@@ -206,7 +206,7 @@ Natural-JS 의 컴포넌트 데이터 및 데이터 송수신을 위한 데이�
 
 이제 블록 페이지 1개가 완성 되었습니다. 이 페이지는 Tab 이나 Popup, Documents 컴포넌트로 불러올 수 있고 N.comm 으로 원하는 위치에 넣어 줄 수 있습니다.
 
-간단하게 인덱스 페이지를 만들고 N.comm 으로 **block01.html** 페이지를 원하는 위치에 불러 와 볼까요? 
+간단하게 인덱스 페이지를 만들고 N.comm 으로 **block01.html** 페이지를 원하는 위치에 불러 와 볼까요?
 
 다음 코드를 **index.html** 파일로 저장 해 주세요.
 
@@ -243,9 +243,9 @@ Natural-JS 의 컴포넌트 데이터 및 데이터 송수신을 위한 데이�
 
 이제 Natural-JS 를 구동하기 위한 소스 코드 작성이 모두 완료 되었습니다.
 
-지금 까지 작성한 코드들을 실행 하려면 웹서버가 필요 합니다. 
+지금 까지 작성한 코드들을 실행 하려면 웹서버가 필요 합니다.
 
-먼저 웹 서버를 설치 하고 웹 Context Root 에 위 index.html, block01.html, data.json 파일을 복사 합니다. 그 다음 웹서버를 구동하고 브라우저로 **index.html** 파일의 주소(URL)를 입력하여 페이지를 열어 보세요. 
+먼저 웹 서버를 설치 하고 웹 Context Root 에 위 index.html, block01.html, data.json 파일을 복사 합니다. 그 다음 웹서버를 구동하고 브라우저로 **index.html** 파일의 주소(URL)를 입력하여 페이지를 열어 보세요.
 
 index.html 페이지에 의해 **block01.html** 파일이 로딩되고 N.cont 의 인자로 지정 한 오브젝트의 init 함수가 실행 될 것 입니다. 그 다음 **block01.html** 페이지의 id 가 result 인 div 요소 안에 서버에서 전달 된 데이터가 표시 될 것 입니다.
 
@@ -254,6 +254,6 @@ index.html 페이지에 의해 **block01.html** 파일이 로딩되고 N.cont �
 
 이제 기본 환경 구성과 실행 방법을 알았으니 블록 페이지 들이 구동 될 환경을 만들어 볼까요?
 
-[Documents 로 메뉴 프로그램 연동하기](#Z3RzdDAyMDAlMjREb2N1bWVudHMlMjAlRUIlQTElOUMlMjAlRUIlQTklOTQlRUIlODklQjQlMjAlRUQlOTQlODQlRUIlQTElOUMlRUElQjclQjglRUIlOUUlQTglMjAlRUMlOTclQjAlRUIlOEYlOTklRUQlOTUlOTglRUElQjglQjAkaHRtbCUyRm5hdHVyYWxqcyUyRmd0c3QlMkZndHN0MDIwMC5odG1s) 메뉴를 클릭 해 주세요.
+[Create a web application base frame](#Z3RzdDAyMDAlMjRDcmVhdGUlMjBhJTIwd2ViJTIwYXBwbGljYXRpb24lMjBiYXNlJTIwZnJhbWUkaHRtbCUyRm5hdHVyYWxqcyUyRmd0c3QlMkZndHN0MDIwMC5odG1s) 메뉴를 클릭 해 주세요.
 
 <p class="alert">이 사이트는 Natural-JS 로 개발 된 사이트 입니다. 이 사이트의 소스 코드는 <a href="https://github.com/bbalganjjm/natural_js/tree/gh-pages">Github 의 gh-pages 브랜치</a>에 공개 되어 있으니 참고 바랍니다.

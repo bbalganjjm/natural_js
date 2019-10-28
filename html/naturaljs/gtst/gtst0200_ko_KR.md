@@ -13,7 +13,7 @@
  * /html/contents - 메뉴 컨텐츠 파일 폴더
  * /html/index - 메인 인덱스와 관련 된 파일 폴더
 
-폴더 생성이 완료 되었으면 다음 파일들을 [GitHub](https://github.com/bbalganjjm/natural_js) 의 master 브랜치에서 다운로드 하여 해당 위치에 복사 합니다. 
+폴더 생성이 완료 되었으면 다음 파일들을 [GitHub](https://github.com/bbalganjjm/natural_js) 의 master 브랜치에서 다운로드 하여 해당 위치에 복사 합니다.
 
  * js/natural_js/lib/jquery-1.12.4.min.js - GitHub 의 master 브랜치에서 다운로드 한 압축 파일의 lib 폴더에 있음
  * js/natural_js/css/natural.ui.css - GitHub 의 master 브랜치에서 다운로드 한 압축 파일의 css 폴더에 있음
@@ -68,11 +68,11 @@ body {
 <script type="text/javascript">
 	// Global N.docs instance.
 	window.docs;
-	
+
 	$(document).ready(function() {
 	    // Import left menu page.
 	    N("#lefter").comm("html/index/lefter.html").submit(function() {
-	        // Create new N.docs instance; 
+	        // Create new N.docs instance;
 	        docs = N("#docs").docs();
 	    });
 
@@ -97,11 +97,11 @@ $(document).ready 함수의 콜백 함수의 내용을 봐 주세요.
 ```
 	// Global N.docs instance.
 	window.docs;
-	
+
 	$(document).ready(function() {
 	    // Import left menu page.
 	    N("#lefter").comm("html/index/lefter.html").submit(function() {
-	        // Create new N.docs instance; 
+	        // Create new N.docs instance;
 	        docs = N("#docs").docs();
 	    });
 
@@ -140,10 +140,10 @@ N(".index-lefter").cont({
     init : function(view, request) {
 		N(".menu", view).on("click", "a", function(e) {
 		    e.preventDefault();
-		    
+
 			window.docs.add(N(this).data("docid"), N(this).text(), {
 			    url : N(this).attr("href")
-			}); 
+			});
 		});
     }
 });
@@ -168,7 +168,7 @@ N.docs 인스턴스로 ```add(페이지ID, 페이지명, { url : "페이지URL" 
  * **/html/contents/page3.html**
  * **/html/contents/page4.html**
  * **/html/contents/page5.html**
- 
+
 위 파일들은 View 와 Controller 구조로만 이루어진 아주 아주 아주 아주..간단한 내용으로 구성 된 페이지들 입니다.
 
 **/html/contents/page1.html**
@@ -280,13 +280,13 @@ N(".page01").cont({
 });
 </script>
 ```
- 
+
 웹 서버에 지금까지 작성한 소스 파일들을 배포한 다음 **/index.html** 에 접속 하면 웹 어플리케이션을 실행 해 볼 수 있습니다.
 
 다음과 같은 화면이 표시 되면 실습 성공!
 
-![완료 화면](images/gtst/gtst0200/1.png) 
+![완료 화면](images/gtst/gtst0200/1.png)
 
-전체 소스코드는 [여기](html/naturaljs/gtst/codes/natural_js_gtst0200.zip) 에서 다운로드 할 수 있습니다. 
+전체 소스코드는 [여기](html/naturaljs/gtst/codes/natural_js_gtst0200.zip) 에서 다운로드 할 수 있습니다.
 
-다음 단계([N.grid 로 CRUD 하기](#Z3RzdDAzMDAlMjRHcmlkJTIwJUVCJUExJTlDJTIwQ1JVRCUyMCVFRCU5NSU5OCVFQSVCOCVCMCRodG1sJTJGbmF0dXJhbGpzJTJGZ3RzdCUyRmd0c3QwMzAwLmh0bWw=)) 에서는 Natural-UI 패키지에서 제공하는 컴포넌트들로 이 컨텐츠 영역을 채워 보겠습니다.
+다음 단계([Grid 로 데이터 조회/변경 하기](#Z3RzdDAzMDAlMjRHcmlkJTIwJUVCJUExJTlDJTIwJUVCJThEJUIwJUVDJTlEJUI0JUVEJTg0JUIwJTIwJUVDJUExJUIwJUVEJTlBJThDJTJGJUVCJUIzJTgwJUVBJUIyJUJEJTIwJUVEJTk1JTk4JUVBJUI4JUIwJGh0bWwlMkZuYXR1cmFsanMlMkZndHN0JTJGZ3RzdDAzMDAuaHRtbA==)) 에서는 Natural-UI 패키지에서 제공하는 컴포넌트들로 이 컨텐츠 영역을 채워 보겠습니다.
