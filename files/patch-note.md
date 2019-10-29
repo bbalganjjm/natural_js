@@ -23,7 +23,7 @@
  * N.datepicker : Fixed a bug that caused Datepicker to be recreated even when moving the cursor from side to side in an input element.
  * N.datepicker : Fixed bug where Datepicker did not close when ESC or TAB key was pressed.
  * N.datepicker : Fixed a bug that caused the Datepicker to break when entering an incomplete date value.
- * N.datepicker(해야됨) : 입력요소에서 날짜를 마우스로 선택할때 입력요소 영역 밖에서 mouseup 이 되면 Datepicker 가 닫히는 버그가 수정 되었습니다. 
+ * N.datepicker : Changed the feature so that when you select a date with the mouse, the focus of the input element is removed when you move the mouse out of the input element area. 
  
 ## Natural-ARCHITECTURE v0.13.11
  *
