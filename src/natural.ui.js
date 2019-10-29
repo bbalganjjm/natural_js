@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.38.235
+ * Natural-UI v0.38.236
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-UI"] = "0.38.235";
+    N.version["Natural-UI"] = "0.38.236";
 
     $.fn.extend($.extend(N.prototype, {
         alert : function(msg, vars) {
@@ -2139,9 +2139,8 @@
                         $(this).removeClass("hidden__").addClass("visible__");
                         $(this).one(N.event.whichTransitionEvent(opts.contents), function(e){
                             $(document).unbind("click.datepicker").bind("click.datepicker", function(e) {
-                                if(!document.hasFocus()) {
-                                    self.hide();
-                                }
+                                opts.context.get(0).blur();
+                                self.hide();
                             });
     
                             if(opts.onShow !== null) {
