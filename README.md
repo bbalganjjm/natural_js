@@ -64,7 +64,7 @@ The complexity of development can be reduced by completely separating the design
 Natural Architecture Framework is an architectural framework that implements the CVC Architecture Pattern.
 
 <p align="center">
-	<img src="https://bbalganjjm.github.io/natural_js/images/intr/pic6.png" alt="Natural Architecture Framework">
+	<img src="https://bbalganjjm.github.io/natural_js/images/intr/pic7.png" alt="Natural Architecture Framework">
 </p>
 <p align="center">[ Natural Architecture Framework ]</p>
 
