@@ -1,4 +1,4 @@
-## Natural-UI v0.38.198
+## Natural-UI v0.38.236
  * N.form,N.list,N.grid : Fixed a bug where calling the validate function after selecting an empty value and then selecting the non-empty value did not change the underlying data from the select element with the "required" validation rule applied.
  * N.form,N.list,N.grid : Changed the default value of the "addTop" option to true.
  * N.grid, N.list : Improved performance of the "val" method.
@@ -13,30 +13,27 @@
  * N.tab : Changed the logic that is processed when the tabScroll option is enabled.
  * N.tab : The jQuery selector string has changed for performance.
  * N.alert : Changed OK and Cancel buttons from "a" tag to "button" tag.
- * N.alert : Changed start time so that the "onShow" event fires after the popup is fully displayed. 
+ * N.alert : Changed start time so that the "onShow" event fires after the popup is fully displayed.
  * N.alert, N.popup : The center position of the message dialog has been adjusted more precisely.
  * N.alert, N.popup : Fixed a bug where the dialog would stick to the right side if the "width" option was not specified.
- * N.alert, N.popup : Added ability to specify "width" and "height" options as function return values. 
+ * N.alert, N.popup : Added ability to specify "width" and "height" options as function return values.
  * N.alert, N.popup : Added onBeforeShow, onBeforeHide, onBeforeRemove options.
  * N.popup : Added onShow, onHide, onRemove options.
  * N.alert : Fixed a bug that when N.datepicker and N.validator are used together, if there is no value, a validation message is displayed and an error occurs.
  * N.datepicker : Fixed a bug that caused Datepicker to be recreated even when moving the cursor from side to side in an input element.
  * N.datepicker : Fixed bug where Datepicker did not close when ESC or TAB key was pressed.
  * N.datepicker : Fixed a bug that caused the Datepicker to break when entering an incomplete date value.
- * N.datepicker : Changed the feature so that when you select a date with the mouse, the focus of the input element is removed when you move the mouse out of the input element area. 
- 
-## Natural-ARCHITECTURE v0.13.11
- *
+ * N.datepicker : Changed the feature so that when you select a date with the mouse, the focus of the input element is removed when you move the mouse out of the input element area.
 
-## Natural-DATA v0.10.70
+## Natural-DATA v0.10.72
  * N.formatter.date : Fixed a bug that the date format was not removed when clicking the screen after the datepicker was displayed.
  * N.formatter.phone : Changed a function so that phone numbers masked with an asterisk(*) can also be formatted.
 
 ## Natural-CORE v0.17.24
  * N.event.isNumberRelatedKeys : Fixed a bug where some key codes were handled incorrectly
- * N.log, N.info, N.warn : Incorrect condition test corrected. 
- 
-## Natural-UI.Shell v0.9.45
+ * N.log, N.info, N.warn : Incorrect condition test corrected.
+
+## Natural-UI.Shell v0.9.47
  * N.docs : Fixed a bug that caused scrolling in content to move to the top when the Tab was active.
  * N.docs : The functionality has been changed so that when you click on a tab that is already displayed, the logic that displays the content does not run again.
 
@@ -45,8 +42,5 @@
  * Changed styles related to N.grid's "filter" functionality.
  * Changed styles related to N.grid's "more" functionality.
  * Changed N.alert, N.tab, N.list, N.grid, N.notify, N.docs related styles.
- 
-## natural.config.js
- *
 
 ## For more information on added and changed features, refer to the API manual(http://bbalganjjm.github.io/natural_js/)
