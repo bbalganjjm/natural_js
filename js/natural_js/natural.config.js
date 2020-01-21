@@ -136,7 +136,7 @@
                                 html: true
                             }).add("<strong>" + N.message.get({
                                     "ko_KR" : {
-                                        "COMM_TITLE" : "이 예제는 DB 에 저장 되지 않고 Web Server 에서만 구동 됩니다. 서버로 전송 되는 파라미터 만 확인 바랍니다."
+                                        "COMM_TITLE" : "이 예제의 데이터는 서버에 저장 되지 않습니다. 서버로 전송 되는 파라미터 만 확인 바랍니다."
                                     },
                                     "en_US" : {
                                         "COMM_TITLE" : "The parameters in this example are not sent to the server. Check only the parameters sent to the server."
