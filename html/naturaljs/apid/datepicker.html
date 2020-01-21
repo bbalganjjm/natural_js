@@ -46,6 +46,16 @@
 				</td>
 			</tr>
 			<tr>
+				<th><label for="touchMonthChange">touchMonthChange</label></th>
+				<td>
+					<input id="touchMonthChange" type="checkbox">
+				</td>
+				<th><label for="scrollMonthChange">scrollMonthChange</label></th>
+				<td>
+					<input id="scrollMonthChange" type="checkbox">
+				</td>
+			</tr>
+			<tr>
 				<th><label for="monthonly">monthonly</label></th>
 				<td>
 					<input id="monthonly" type="checkbox">
@@ -166,6 +176,8 @@
        					parseInt(N("input#maxYear", view).val()) : undefined,
    					yearChangeInput : N("input#yearChangeInput", view).is(":checked"),
    	           		monthChangeInput : N("input#monthChangeInput", view).is(":checked"),
+   	           		touchMonthChange : N("input#touchMonthChange", view).is(":checked"),
+   	           		scrollMonthChange : N("input#scrollMonthChange", view).is(":checked"),
 	           		monthonly : N("input#monthonly", view).is(":checked"),
 	           		focusin : N("input#focusin", view).is(":checked"),
 	           		onSelect : N.string.trimToNull(N("textarea#onSelect", view).val()) !== null ?
