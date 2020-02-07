@@ -1,5 +1,5 @@
 ## Natural-UI v0.38.236
- *
+ * N.grid : Fixed a bug where columns were not merged correctly when the rowSpan option was declared.
 
 ## Natural-DATA v0.10.72
  *
