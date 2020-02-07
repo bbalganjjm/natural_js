@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.38.236
+ * Natural-UI v0.38.237
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-UI"] = "0.38.236";
+    N.version["Natural-UI"] = "0.38.237";
 
     $.fn.extend($.extend(N.prototype, {
         alert : function(msg, vars) {
@@ -6182,7 +6182,7 @@
             rowSpan : function(i, rowEle, bfRowEle, rowData, bfRowData, colId) {
                 var opts = this.options;
                 if(bfRowData !== undefined && rowData[colId] === bfRowData[colId]) {
-                    var bfRowCell = bfRowEle.find("#" + colId + ", .grid_rowspan__").closest("td");
+                    var bfRowCell = bfRowEle.find("#" + colId).closest("td");
                     var prevColId;
                     var prevBfRowCell = bfRowCell.prev("td");
                     if(prevBfRowCell.length > 0) {
