@@ -1,5 +1,5 @@
 /*!
- * Natural-CORE v0.17.24
+ * Natural-CORE v0.17.25
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -302,7 +302,7 @@
 		// N local variables
 		$.extend(N, {
 			version : {
-				"Natural-CORE" : "0.17.24"
+				"Natural-CORE" : "0.17.25"
 			},
 			/**
 			 * Set and get locale value
@@ -1116,6 +1116,9 @@
 			     * Detect the duration of animation or transition of css3 
 			     */
 			    getMaxDuration : function(ele, css) {
+			    	if(!ele.css(css)) {
+			    		return 0;
+			    	}
 			    	return duration = Math.max.apply(undefined, $(ele.css(css).split(",")).map(function() {
 		    			if(this.indexOf("ms") > -1) {
 		    				return parseInt(N.string.trimToZero(this));
