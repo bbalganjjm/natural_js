@@ -5,7 +5,7 @@
  *
 
 ## Natural-CORE v0.17.24
- *
+ * N.event.getMaxDuration : Fixed a bug that caused an error if the specified element style did not have a "transition" attribute.
 
 ## Natural-UI.Shell v0.9.47
  *
