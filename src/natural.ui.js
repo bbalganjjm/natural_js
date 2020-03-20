@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.38.237
+ * Natural-UI v0.38.238
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-UI"] = "0.38.237";
+    N.version["Natural-UI"] = "0.38.238";
 
     $.fn.extend($.extend(N.prototype, {
         alert : function(msg, vars) {
@@ -127,7 +127,7 @@
                         opts.isBinding = false;
                         opts.context.dequeue("bind");
                     }
-                    
+
                     tempRowEleClone = undefined;
                 },
                 select : function(compNm) {
@@ -267,15 +267,15 @@
                             if(startHandler !== undefined) {
                                 isContinue = startHandler.call(this, e, selfEle, se.pageX, se.pageY)
                             }
-                            
+
                             if(isContinue !== false) {
                                 $(document).on("mousemove" + eventNameSpace + " touchmove" + eventNameSpace, function(e) {
                                     $(document).bind("dragstart" + eventNameSpace + " selectstart" + eventNameSpace, function() {
                                         return false;
                                     });
-                                    
+
                                     var me = e.originalEvent.touches ? e.originalEvent.touches[0] : e;
-                                    
+
                                     if(moveHandler !== undefined) {
                                         moveHandler.call(this, e, selfEle, me.pageX, me.pageY);
                                     }
@@ -399,17 +399,17 @@
                  */
                 wrapHandler : function(opts, compNm, eventNm) {
                     if(N.context.attr("ui")[compNm] && N.context.attr("ui")[compNm][eventNm] && opts[eventNm]) {
-                        var localEventHandler = opts[eventNm]; 
+                        var localEventHandler = opts[eventNm];
                         opts[eventNm] = function() {
                             if(eventNm === "onBeforeBindValue") {
                                 var rVal = localEventHandler.apply(this, arguments);
-                                return N.context.attr("ui")[compNm][eventNm].call(this, arguments[0], rVal);                                
+                                return N.context.attr("ui")[compNm][eventNm].call(this, arguments[0], rVal);
                             } else {
                                 var rVal = localEventHandler.apply(this, arguments);
                                 if(rVal === false) {
                                     return rVal;
                                 } else {
-                                    return N.context.attr("ui")[compNm][eventNm].apply(this, arguments);    
+                                    return N.context.attr("ui")[compNm][eventNm].apply(this, arguments);
                                 }
                             }
                         }
@@ -425,7 +425,7 @@
                         // The date type does not support formatting, so it does not support it.
                         // || type === "date" || type === "datetime-local" || type === "month" || type === "time" || type === "week"
                         || type === "range"
-                        || type === "url" ? true : false; 
+                        || type === "url" ? true : false;
                 }
             }
         };
@@ -513,7 +513,7 @@
                 UI.utils.wrapHandler(msg, "alert", "onHide");
                 UI.utils.wrapHandler(msg, "alert", "onBeforeRemove");
                 UI.utils.wrapHandler(msg, "alert", "onRemove");
-                
+
                 $.extend(true, this.options, msg);
                 if(N.isString(this.options.container)) {
                     this.options.container = N(this.options.container);
@@ -534,7 +534,7 @@
 
                 // set this instance to msgContext element
                 this.options.msgContents.instance("alert", this);
-                
+
                 if(this.options.saveMemory) {
                     this.options.msg = null;
                     this.options.vars = null;
@@ -663,7 +663,7 @@
                 if(opts.modal && opts.windowScrollLock) {
                     N.event.windowScrollLock(opts.msgContext);
                 }
-                
+
                 //set confirm button style and bind click event
                 opts.msgContents.find(".buttonBox__ .confirm__").button(opts.global.okBtnStyle);
                 opts.msgContents.find(".buttonBox__ .confirm__").bind("click.alert", function(e) {
@@ -859,7 +859,7 @@
                             opts.msgContents.width(msgContentsWidth);
                             msgContentsCss.left = String(Math.floor(opts.context.position().left + marginLeft + (opts.msgContext.width() / 2 - msgContentsWidth / 2)) - 1) + "px";
                         }
-                        
+
                         if(msgContentsHeight > windowHeight) {
                             msgContentsCss["margin-top"] = String($(window).scrollTop()) + "px";
                             msgContentsCss.position = "absolute";
@@ -958,10 +958,10 @@
                 if (opts.onBeforeShow !== null) {
                     opts.onBeforeShow.call(self, opts.msgContext, opts.msgContents);
                 }
-                
+
                 // for N.docs transition effect
                 N(".docs__>.docs_tab_context__").css("z-index", "0");
-                
+
                 if (!opts.isInput) {
                     if(opts.dynPos && !opts.isWindow) {
                         Alert.resetOffSetEle(opts);
@@ -986,13 +986,13 @@
                     }
 
                     opts.msgContents.removeClass("hidden__").addClass("visible__");
-                    
+
                     opts.msgContents.one(N.event.whichTransitionEvent(opts.msgContents), function(e){
                         if (opts.onShow !== null) {
                             opts.onShow.call(self, opts.msgContext, opts.msgContents);
                         }
                     }).trigger("nothing");
-                    
+
                     // DEPRECATED
                     if (opts.onShowG !== null) {
                         opts.onShowG.call(self, opts.msgContext, opts.msgContents);
@@ -1039,14 +1039,14 @@
             },
             "hide" : function() {
                 var opts = this.options;
-                
+
                 if (opts.onBeforeHide !== null) {
                     opts.onBeforeHide.call(this, opts.msgContext, opts.msgContents);
                 }
-                
+
                 // for N.docs transition effect
                 N(".docs__>.docs_tab_context__").css("z-index", "");
-                
+
                 if (!opts.isInput) {
                     if(!opts.isWindow) {
                         opts.msgContext.closest(".msg_box__").css("position", "");
@@ -1056,12 +1056,12 @@
                     opts.msgContents.removeClass("visible__").addClass("hidden__");
                     opts.msgContents.one(N.event.whichTransitionEvent(opts.msgContents), function(e){
                         opts.msgContents.hide();
-                        
+
                         // DEPRECATED
                         if (opts.onHideG !== null) {
                             opts.onHideG.call(this, opts.msgContext, opts.msgContents);
                         }
-                        
+
                         if (opts.onHide !== null) {
                             opts.onHide.call(this, opts.msgContext, opts.msgContents);
                         }
@@ -1072,12 +1072,12 @@
                     opts.msgContents.one(N.event.whichTransitionEvent(opts.msgContents), function(e){
                         clearTimeout(opts.iTime);
                         opts.msgContext.remove();
-                        
+
                         // DEPRECATED
                         if (opts.onHideG !== null) {
                             opts.onHideG.call(this, opts.msgContext, opts.msgContents);
                         }
-                        
+
                         if (opts.onHide !== null) {
                             opts.onHide.call(this, opts.msgContext, opts.msgContents);
                         }
@@ -1093,14 +1093,14 @@
             },
             "remove" : function() {
                 var opts = this.options;
-                
+
                 if (opts.onBeforeRemove !== null) {
                     opts.onBeforeRemove.call(this, opts.msgContext, opts.msgContents);
                 }
-                
+
                 // for N.docs transition effect
                 N(".docs__>.docs_tab_context__").css("z-index", "");
-                
+
                 if (!opts.isInput) {
                     clearInterval(opts.time);
                     if(!opts.isWindow) {
@@ -1116,12 +1116,12 @@
                             // Removes garbage instances from obserables of N.ds
                             N.gc.ds();
                         }
-                        
+
                         // DEPRECATED
                         if (opts.onRemoveG !== null) {
                             opts.onRemoveG.call(this, opts.msgContext, opts.msgContents);
                         }
-                        
+
                         if (opts.onRemove !== null) {
                             opts.onRemove.call(this, opts.msgContext, opts.msgContents);
                         }
@@ -1131,12 +1131,12 @@
                     opts.msgContext.one(N.event.whichTransitionEvent(opts.msgContext), function(e){
                         clearTimeout(opts.iTime);
                         opts.msgContext.remove();
-                        
+
                         // DEPRECATED
                         if (opts.onRemoveG !== null) {
                             opts.onRemoveG.call(this, opts.msgContext, opts.msgContents);
                         }
-                        
+
                         if (opts.onRemove !== null) {
                             opts.onRemove.call(this, opts.msgContext, opts.msgContents);
                         }
@@ -1357,7 +1357,7 @@
                 UI.utils.wrapHandler(opts, "datepicker", "onShow");
                 UI.utils.wrapHandler(opts, "datepicker", "onBeforeHide");
                 UI.utils.wrapHandler(opts, "datepicker", "onHide");
-                
+
                 $.extend(this.options, opts);
             }
 
@@ -1372,7 +1372,7 @@
 
             // bind events
             Datepicker.wrapEle.call(this);
-            
+
             // set this instance to context element
             this.options.context.instance("datepicker", this);
 
@@ -1386,7 +1386,7 @@
             wrapEle : function() {
                 var opts = this.options;
                 var self = this;
-                
+
                 // bind focusin event
                 if(opts.focusin && !opts.context.prop("readonly") && !opts.context.prop("disabled")) {
                     opts.context.unbind("focusin.datepicker").bind("focusin.datepicker", function() {
@@ -1411,7 +1411,7 @@
                     var value = opts.context.val();
                     var keyCode = e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode);
                     var format = (!opts.monthonly ? N.context.attr("data").formatter.date.Ymd() : N.context.attr("data").formatter.date.Ym()).replace(/[^Y|^m|^d]/g, "");
-                    
+
                     // when press the number keys
                     if ((value.length > 2 && value.length%2 === 0) && keyCode != 35 && keyCode != 36 && keyCode != 37 && keyCode != 39 && keyCode != 9 && keyCode != 27) {
                         var dateStrArr = N.date.strToDateStrArr(value, format);
@@ -1431,11 +1431,11 @@
                             opts.context.val(value.replace(dateStrStrArr[2], ""));
                             return false;
                         }
-                        
+
                         var yearsPanel = opts.contents.find(".datepicker_years_panel__");
                         var monthsPanel = opts.contents.find(".datepicker_months_panel__");
                         var daysPanel = opts.contents.find(".datepicker_days_panel__");
-                        
+
                         if((format.length === 3 && format.indexOf("md") > -1) || format.length === 2) {
                             Datepicker.selectItems(opts, value, format, yearsPanel, monthsPanel, daysPanel);
                         } else {
@@ -1545,7 +1545,7 @@
                                     }
                                 }
                             }
-                            
+
                             if(!opts.monthonly) {
                                 monthsPanel.find(".datepicker_month_item__.datepicker_month_selected__").trigger("click.datepicker");
                             }
@@ -1790,7 +1790,7 @@
                 // bind the click event to month items
                 monthsPanel.on("click.datepicker", ".datepicker_month_item__", function(e, ke) {
                     e.preventDefault();
-                    
+
                     var selectedMonthItemEle = monthsPanel.find(".datepicker_month_item__.datepicker_month_selected__").removeClass("datepicker_month_selected__");
                     $(this).addClass("datepicker_month_selected__");
 
@@ -2014,7 +2014,7 @@
                 if(value.length > 2 && value.length%2 !== 0) {
                     value = (new Date()).formatDate(format);
                 }
-                
+
                 var dateStrArr = N.date.strToDateStrArr(value, format);
                 var dateStrStrArr = N.date.strToDateStrArr(value, format, true);
 
@@ -2046,7 +2046,7 @@
                                 }
                             }
                             if(!N.string.isEmpty(opts.context.val())) {
-                                yearItem.trigger("change.datepicker");                              
+                                yearItem.trigger("change.datepicker");
                             }
                         }
                     }
@@ -2086,10 +2086,10 @@
                         }
                     });
                 }
-                
+
                 if(opts.context.next(".datepicker_contents__.visible").length === 0) {
                     Datepicker.createContents.call(this);
-                
+
                     // auto select datepicker items from before input value
                     var dateStr;
                     if(!N.string.isEmpty(opts.context.val())) {
@@ -2104,7 +2104,7 @@
                             opts.contents.find(".datepicker_years_panel__"),
                             opts.contents.find(".datepicker_months_panel__"),
                             opts.contents.find(".datepicker_days_panel__"));
-                        
+
                     if(opts.onBeforeShow !== null) {
                         var result = opts.onBeforeShow.call(this, opts.context, opts.contents);
                         if(result !== undefined && result === false) {
@@ -2112,7 +2112,7 @@
                         }
                     }
                     opts.context.trigger("onBeforeShow", [opts.context, opts.contents]);
-    
+
                     // set datepicker position
                     $(window).bind("resize.datepicker", function() {
                         var leftOfs = opts.context.position().left;
@@ -2133,7 +2133,7 @@
                             opts.contents.removeClass("orgin_right__").addClass("orgin_left__");
                         }
                     }).trigger("resize.datepicker");
-                    
+
                     var self = this;
                     opts.contents.show(0, function() {
                         $(this).removeClass("hidden__").addClass("visible__");
@@ -2142,16 +2142,16 @@
                                 opts.context.get(0).blur();
                                 self.hide();
                             });
-    
+
                             if(opts.onShow !== null) {
                                 opts.onShow.call(self, opts.context, opts.contents);
                             }
                             opts.context.trigger("onShow", [opts.context, opts.contents]);
                         }).trigger("nothing");
                     });
-                
+
                 }
-                
+
                 return this;
             },
             hide : function() {
@@ -2173,14 +2173,14 @@
                     opts.context.unbind("blur.datepicker");
 
                     opts.contents.removeClass("visible__").addClass("hidden__");
-                    
+
                     opts.contents.one(N.event.whichTransitionEvent(opts.contents), function(e){
                         $(this).remove();
                         if(opts.onHide !== null) {
                             opts.onHide.call(self, opts.context);
                         }
                         opts.context.trigger("onHide", [opts.context]);
-                    }).trigger("nothing");                      
+                    }).trigger("nothing");
                 }
 
                 return this;
@@ -2244,7 +2244,7 @@
                 opts.opener = undefined;
                 isOpenerHas = true;
             }
-            
+
             try {
                 $.extend(true, this.options, N.context.attr("ui").popup);
             } catch (e) {
@@ -2274,9 +2274,9 @@
             UI.utils.wrapHandler(opts, "popup", "onOpen");
             UI.utils.wrapHandler(opts, "popup", "onClose");
             UI.utils.wrapHandler(opts, "popup", "onLoad");
-            
+
             $.extend(true, this.options, opts);
-            
+
             // To prevent "maximum call stack size exceeded" error in jQuery's extend method when define the opener option.
             if(isOpenerHas) {
                 opts.opener = opener;
@@ -2295,9 +2295,9 @@
 
                         // set this instance to context element
                         this.options.context.instance("popup", this);
-                        
+
                         this.options.isLoaded = true;
-                    });                 
+                    });
                 }
             } else {
                 Popup.wrapEle.call(this);
@@ -2318,7 +2318,7 @@
                 // opts.context is alert message
                 opts.html = true;
                 opts.msg = opts.context;
-                
+
                 // To prevent the onShowG event from running when popup.
                 opts.onShowG = null; // DEPRECATED
 
@@ -2332,7 +2332,7 @@
                 this.alert = N(window).alert(opts);
                 this.alert.options.msgContext.addClass("popup_overlay__");
                 this.alert.options.msgContents.addClass("popup__");
-                
+
                 if(opts.saveMemory) {
                     this.alert.options.msg = null;
                 }
@@ -2362,7 +2362,7 @@
                     opts.html = true;
                     opts.msg = opts.context;
                     if(opts.onRemove != null) {
-                        var orgFn = opts.onRemove; 
+                        var orgFn = opts.onRemove;
                         opts.onRemove = function() {
                             opts.context = null;
                             return orgFn.apply(this, arguments);
@@ -2370,20 +2370,20 @@
                     } else {
                         opts.onRemove = function() {
                             opts.context = null;
-                        };                        
+                        };
                     }
-                    
+
                     // To prevent the onShowG event from running when popup.
                     opts.onShowG = null; // DEPRECATED
 
                     var opener;
                     if(opts.opener) {
                         opener = opts.opener;
-                        opts.opener = undefined;                        
+                        opts.opener = undefined;
                     }
-                    
+
                     self.alert = N(window).alert(opts);
-                    
+
                     if(opener) {
                         opts.opener = opener;
                         opener = undefined;
@@ -2394,7 +2394,7 @@
                     if(opts.saveMemory) {
                         self.alert.options.msg = null;
                     }
-                    
+
                     // set request target
                     this.request.options.target = opts.context.parent();
 
@@ -2442,7 +2442,7 @@
                 self.alert.show();
 
                 var onOpenProcFn__ = function() {
-                    
+
                     // DEPRECATED
                     // execute "onOpenG" event handler
                     if(opts.onOpenG !== null) {
@@ -2459,7 +2459,7 @@
                         }
                     }
                 };
-                
+
                 if(opts.delayContInit && cont !== undefined) {
                     cont.onOpenProcFn__ = onOpenProcFn__; // WILL BE DEPRECATED
                 } else {
@@ -2488,16 +2488,16 @@
                         opts.context.instance("popup", this);
 
                         Popup.popOpen.call(self, onOpenData, cont);
-                        
+
                         if(opts.closeMode !== "remove") {
                             opts.isLoaded = true;
                         }
-                    });                             
+                    });
                 } else {
                     Popup.popOpen.call(this, onOpenData);
                     if(opts.preload && opts.closeMode === "remove") {
                         opts.isLoaded = false;
-                    }                        
+                    }
                 }
                 return this;
             },
@@ -2517,7 +2517,7 @@
                 if(opts.onClose !== null) {
                     opts.onClose.call(this, onCloseData);
                 }
-                
+
                 this.alert[opts.closeMode]();
 
                 return this;
@@ -2562,7 +2562,7 @@
                 opts.opener = undefined;
                 isOpenerHas = true;
             }
-            
+
             try {
                 $.extend(true, this.options, N.context.attr("ui").tab);
             } catch (e) {
@@ -2573,7 +2573,7 @@
                 // Wraps the global event options in N.config and event options for this component.
                 UI.utils.wrapHandler(opts, "tab", "onActive");
                 UI.utils.wrapHandler(opts, "tab", "onLoad");
-                
+
                 $.extend(true, this.options, obj);
                 this.options.context = N(obj.context);
             }
@@ -2602,7 +2602,7 @@
                 this.options.opener = opts.opener;
                 opener = undefined;
             }
-            
+
             // set style class name to context element
             this.options.context.addClass("tab__");
 
@@ -2793,7 +2793,7 @@
                 var nextBtnEle;
                 var liMarginRight = parseInt(N.string.trimToZero(tabContainerEle.find(">li:first").css("margin-right")));
                 var lastDistance = 0 + liMarginRight;
-                
+
                 if(scrollBtnEles.length > 1) {
                     opts.context.css("position", "relative");
                     scrollBtnEles.css({
@@ -2807,11 +2807,11 @@
                             tabContainerEle.addClass("effect__");
                             lastDistance = prevBtnEle.outerWidth() + liMarginRight;
                             tabContainerEle.css("margin-left", lastDistance + "px");
-                            nextBtnEle.removeClass("disabled__");    
+                            nextBtnEle.removeClass("disabled__");
                             prevBtnEle.addClass("disabled__");
                         } else {
-                            tabContainerEle.parent(".tab_native_scroll__").animate({ 
-                                scrollLeft: 0 
+                            tabContainerEle.parent(".tab_native_scroll__").animate({
+                                scrollLeft: 0
                             }, 300, "swing");
                         }
                     });
@@ -2824,7 +2824,7 @@
                             prevBtnEle.removeClass("disabled__");
                             nextBtnEle.addClass("disabled__");
                         } else {
-                            tabContainerEle.parent(".tab_native_scroll__").animate({ 
+                            tabContainerEle.parent(".tab_native_scroll__").animate({
                                 scrollLeft: tabContainerEle.outerWidth()
                             }, 300, "swing");
                         }
@@ -2837,7 +2837,7 @@
                     if(!tabContainerEle.is(":visible")) {
                         return false;
                     }
-                    
+
                     var ulWidth = 0;
                     opts.links.each(function() {
                         ulWidth += ($(this).outerWidth() + parseInt(N.string.trimToZero($(this).css("margin-left"))) + parseInt(N.string.trimToZero($(this).css("margin-right"))));
@@ -2863,7 +2863,7 @@
                                 scrollBtnEles.show();
                             }
                         }
-                        
+
                         tabContainerEle.addClass("tab_scroll__").width(ulWidth);
                     } else {
                         if(scrollBtnEles.length > 1) {
@@ -2871,18 +2871,18 @@
                             tabContainerEle.css("margin-left", "");
                             prevBtnEle.removeClass("disabled__");
                         }
-                        
+
                         if(N.browser.scrollbarWidth() > 0) {
                             opts.context.css("overflow", "");
                         }
-                        
+
                         if(tabContainerEle.parent().hasClass("tab_native_scroll__")) {
                             tabContainerEle.unwrap();
                         }
-                        
+
                         tabContainerEle.css("width", "");
                     }
-                    
+
                 }).trigger("resize" + eventNameSpace);
 
                 if(opts.tabScrollCorrection.tabContainerWidthReCalcDelayTime > 0) {
@@ -2969,7 +2969,7 @@
                         if(opts.opener != null) {
                             cont.opener = opts.opener;
                         }
-                        
+
                         // if delayContInit options is true, *ProcFn__ function is must set to Controller's attribute before the aop processing
                         if(opts.delayContInit) { // WILL BE DEPRECATED
                             callback.call(this, cont, selContentEle);
@@ -3043,7 +3043,7 @@
                             tab : opts.links.filter(".tab_active__"),
                             content : opts.context.find("> div.tab_content_active__"),
                             cont : opts.context.find("> div.tab_content_active__ > .view_context__").instance("cont")
-                        }                       
+                        }
                     } else {
                         return {
                             index : opts.beforeOpenIdx,
@@ -3086,13 +3086,13 @@
                 } else {
                     cont = opts.context.find("> .tab_content_active__ > .view_context__").instance("cont");
                 }
-                
+
                 if(cont === undefined) {
                     N.warn("Tab content has not been loaded yet or Controller(N.cont) object is missing.");
                 }
-                
+
                 return cont;
-            } 
+            }
         });
 
         // Select
@@ -3334,7 +3334,7 @@
                 UI.utils.wrapHandler(opts, "form", "onBeforeBindValue");
                 UI.utils.wrapHandler(opts, "form", "onBeforeBind");
                 UI.utils.wrapHandler(opts, "form", "onBind");
-                
+
                 //convert data to wrapped set
                 opts.data = N.type(opts.data) === "array" ? N(opts.data) : opts.data;
 
@@ -3412,14 +3412,14 @@
                     if(ele.data("validate") !== undefined) {
                         if (type !== "hidden") {
                             N().validator(opts.vRules !== null ? opts.vRules : ele);
-                            
+
                             if(isTextInput && N.isEmptyObject(ele.events("focusout", "form.validate"))) {
                                 ele[opts.tpBind ? "tpBind" : "on"]("focusout.form.validate", function() {
                                     var currEle = $(this);
                                     if (!currEle.prop("disabled") && !currEle.prop("readonly") && opts.validate) {
                                         currEle.trigger("validate.validator");
                                     }
-                                    
+
                                     currEle = undefined;
                                 });
                             }
@@ -3431,24 +3431,24 @@
                  */
                 dataSync : function(ele, opts, vals, eleType) {
                     var self = this;
-                    
+
                     var eventName = "focusout";
                     if(eleType === "select") {
                         eventName = "change";
                     }
-                    
+
                     if(N.isEmptyObject(ele.events(eventName, "dataSync.form"))) {
                         ele[opts.tpBind ? "tpBind" : "on"](eventName + ".form.dataSync", function(e) {
                             var currEle = $(this);
                             var currVal = currEle.val();
-                            
+
                             // for val method
                             if(vals !== opts.data[opts.row]) {
                                 vals = opts.data[opts.row];
                             }
 
                             if ((vals[currEle.attr("id")] === null ? "" : vals[currEle.attr("id")]) !== currVal) {
-                                
+
                                 if(eleType === "select") {
                                     // remove validator's dregs
                                     currEle.removeClass("validate_false__");
@@ -3457,7 +3457,7 @@
                                         currEle.removeData("alert__");
                                     }
                                 }
-                                
+
                                 if (!currEle.prop("disabled") && !currEle.prop("readonly") && (!opts.validate || (opts.validate && !currEle.hasClass("validate_false__")))) {
                                     // remove validator's dregs
                                     currEle.removeClass("validate_false__");
@@ -3465,7 +3465,7 @@
                                         currEle.instance("alert").remove();
                                         currEle.removeData("alert__");
                                     }
-                                    
+
                                     // update dataset value
                                     vals[currEle.attr("id")] = currVal;
 
@@ -3483,11 +3483,11 @@
                                     N.ds.instance(opts.extObj !== null ? opts.extObj : self).notify(opts.extRow > -1 ? opts.extRow : opts.row, currEle.attr("id"));
                                 }
                             }
-                            
+
                             currEle = currVal = undefined;
                         });
                     }
-                    
+
                     eventName = undefined;
                 },
                 /**
@@ -3516,13 +3516,13 @@
                             var eventNames = ["focusin", "focusout"];
                             var formats = ["unformat", "format"];
                             var bindMethod = "on";
-                            
+
                             if(opts.tpBind) {
                                 eventNames.reverse();
                                 formats.reverse();
                                 bindMethod = "tpBind";
                             }
-                            
+
                             if(N.isEmptyObject(ele.events(eventNames[0], "form." + formats[0]))) {
                                 ele[bindMethod](eventNames[0] + ".form." + formats[0], function() {
                                     var currEle = $(this);
@@ -3542,7 +3542,7 @@
                                     currEle = undefined;
                                 });
                             }
-                            
+
                             eventNames = bindMethod = undefined;
                         }
                     } else {
@@ -3624,7 +3624,7 @@
                             N.warn('[N.form.bind]Within the context, there is an element with an id attribute value of ""(blank).');
                             continue;
                         }
-                        ele = idContext.filter("#" + key);                          
+                        ele = idContext.filter("#" + key);
 
                         if(opts.onBeforeBindValue !== null) {
                             var filteredVal = opts.onBeforeBindValue.call(self, ele, vals[key], "bind");
@@ -3632,7 +3632,7 @@
                                 vals[key] = filteredVal;
                             }
                         }
-                        
+
                         if (ele.length > 0) {
                             // add data changed flag
                             if (vals.rowStatus === "update") {
@@ -3646,11 +3646,11 @@
                             if (UI.utils.isTextInput(tagName, type)) {
                                 if(opts.tpBind) {
                                     self.bindEvents.format.call(self, ele, opts, type, vals, key);
-                                    
+
                                     self.bindEvents.enterKey.call(self, ele, opts);
-                                    
+
                                     self.bindEvents.dataSync.call(self, ele, opts, vals);
-                                    
+
                                     self.bindEvents.validate.call(self, ele, opts, type, true);
                                 } else {
                                     self.bindEvents.validate.call(self, ele, opts, type, true);
@@ -3658,14 +3658,14 @@
                                     self.bindEvents.dataSync.call(self, ele, opts, vals);
 
                                     self.bindEvents.enterKey.call(self, ele, opts);
-                                    
+
                                     self.bindEvents.format.call(self, ele, opts, type, vals, key);
                                 }
                             } else if(tagName === "select") {
                                 self.bindEvents.validate.call(self, ele, opts, type, false);
 
                                 self.bindEvents.dataSync.call(self, ele, opts, vals, "select");
-                                
+
                                 // select value
                                 ele.vals(vals[key] != null ? String(vals[key]) : "");
                             } else if(tagName === "img") {
@@ -3709,7 +3709,7 @@
                                 eles.off("click.form.dataSync select.form.dataSync");
                                 eles.on("click.form.dataSync select.form.dataSync", function(e) {
                                     var currEle = $(this);
-                                    var currEles = opts.context.find("[name='" + currEle.attr("id") + "']");
+                                    var currEles = opts.context.find("[name='" + currEle.attr("name") + "']");
                                     if(currEles.length === 0) {
                                         currEles = $(this);
                                     }
@@ -3892,7 +3892,7 @@
                     var pagingSize = opts.extObj.options.scrollPaging.size;
                     var rest = rowEleLength % pagingSize;
                     opts.extObj.options.scrollPaging.idx = parseInt(rowEleLength / pagingSize) * pagingSize - pagingSize + rest;
-                    
+
                     // for rowHandlerBeforeBind of N.list and N.grid
                     if(opts.extObj.options.rowHandlerBeforeBind !== null) {
                         opts.extObj.options.rowHandlerBeforeBind.call(opts.extObj, opts.extRow, opts.context, opts.data[opts.row]);
@@ -3917,7 +3917,7 @@
                     opts.data.splice(opts.row, 1);
                     opts.row = -1;
                     N.ds.instance(opts.extObj !== null ? opts.extObj : this).notify();
-                    
+
                     this.unbind();
                 } else {
                     opts.data[opts.row].rowStatus = "delete";
@@ -3987,7 +3987,7 @@
                         vals[key] = filteredVal;
                     }
                 }
-                
+
                 if (ele.length > 0) {
                     tagName = ele.get(0).tagName.toLowerCase();
                     type = N.string.trimToEmpty(ele.attr("type")).toLowerCase();
@@ -4257,7 +4257,7 @@
                 // Wraps the global event options in N.config and event options for this component.
                 UI.utils.wrapHandler(opts, "list", "onSelect");
                 UI.utils.wrapHandler(opts, "list", "onBind");
-                
+
                 //convert data to wrapped set
                 opts.data = N.type(opts.data) === "array" ? N(opts.data) : opts.data;
 
@@ -4707,7 +4707,7 @@
                 }
 
                 tempRowEleClone = undefined;
-                
+
                 return this;
             },
             remove : function(row) {
@@ -4747,7 +4747,7 @@
                 }
 
                 var self = this;
-                
+
                 if(row !== undefined) {
                     if(N.type(row) !== "array") {
                         row = [row];
@@ -4755,13 +4755,13 @@
                     $(row).each(function() {
                         var i = this;
                         var context = opts.context.find(">li:eq(" + String(this) + ")");
-                        var form = context.instance("form"); 
+                        var form = context.instance("form");
                         if(opts.rowHandlerBeforeBind !== null) {
                             opts.rowHandlerBeforeBind.call(self, i, context, form.options.revertData);
                         }
-                        
+
                         form.revert();
-                        
+
                         if(opts.rowHandler !== null) {
                             opts.rowHandler.call(self, i, context, opts.data[i]);
                         }
@@ -4925,7 +4925,7 @@
                 // Wraps the global event options in N.config and event options for this component.
                 UI.utils.wrapHandler(opts, "grid", "onSelect");
                 UI.utils.wrapHandler(opts, "grid", "onBind");
-                
+
                 //convert data to wrapped set
                 opts.data = N.type(opts.data) === "array" ? N(opts.data) : opts.data;
 
@@ -5134,11 +5134,11 @@
                         }
                         var theadCell = $(tableMap.thead[i+nextCnt][j]);
                         var tbodyCell = $(cell);
-                        
+
                         if(nextCnt === 0 && tbodyCell.attr("colspan") !== theadCell.attr("colspan")) {
-                            theadCell = $(tableMap.thead[i+1][j]);               
+                            theadCell = $(tableMap.thead[i+1][j]);
                         }
-                        
+
                         if(tbodyCell.attr("colspan") === theadCell.attr("colspan")) {
                             var id = tbodyCell.attr("id");
                             if(id === undefined) {
@@ -5548,7 +5548,7 @@
                             }
                             calibDialogItems(thisBtn, panel);
                         });
-                        
+
                         $(self.tableMap.thead[0]).each(function(i) {
                             var thisEleClone = $(this).clone();
                             if(!thisEleClone.hasClass("grid_more_thead_col__")) {
@@ -5687,11 +5687,11 @@
                         theadCells.css("padding-left", "0");
                         theadCells.css("padding-right", "0");
                     }
-                    
+
                     if(opts.context.css("table-layout") != "fixed") {
                         opts.context.css("table-layout", "fixed");
                     }
-                    
+
                     var resizeBarWidth = 5;
                     var resizeBarCorrectionHeight = N.browser.is("ie") ? -2 : 0;
                     var context;
@@ -5829,7 +5829,7 @@
                                         $(this).css({
                                             "opacity": "0"
                                         });
-                                        
+
                                         currResizeBar = undefined;
                                     });
 
@@ -5839,9 +5839,9 @@
                             }
                         });
                     });
-                    
+
                     resizeBar = currResizeBar = resizeBarHeight = cellEle = currCellEle = currNextCellEle = targetCellEle = targetNextCellEle =
-                    targetTfootCellEle = targetNextTfootCellEle = currResizeBarEle = 
+                    targetTfootCellEle = targetNextTfootCellEle = currResizeBarEle =
                     defWidth = nextDefWidth = currWidth = nextCurrWidth = startOffsetX =
                     minPx = maxPx = defPx = movedPx = undefined;
 //              }
@@ -6072,7 +6072,7 @@
                                         + '<span class="data_filter_item_name__"></span><span class="data_filter_cnt__">(' + String(length) + ')</span></label></li>');
 
                                 filterItemEle.find(".data_filter_item_name__").text(k.replace(id + "_", ""));
-                                
+
                                 filterItemEle.find(".data_filter_checkbox__")
                                 .data("rowIdxs", filterKeys[k])
                                 .data("length", length)
@@ -6160,7 +6160,7 @@
 
                         $(document).unbind("click.grid.dataFilter");
                         $(document).bind("click.grid.dataFilter", function(e) {
-                            if($(e.target).closest(".data_filter_panel__, .btn_data_filter__").length === 0 
+                            if($(e.target).closest(".data_filter_panel__, .btn_data_filter__").length === 0
                                     && !$(e.target).hasClass("btn_data_filter__")
                                     && !$(e.target).hasClass("form__")) {
                                 var panel = thead.find(".data_filter_panel__.visible__");
@@ -6301,7 +6301,7 @@
                     N.warn("[N.grid.select]The \"select\" option value is false. please enable the select feature.");
                     return false;
                 }
-                
+
                 if(row === undefined) {
                     var rowEles = this.contextEle.find(">tbody.form__");
                     var rtnArr = rowEles.filter(".grid_selected__").map(function() {
@@ -6502,7 +6502,7 @@
                                 emptyCellEle.parent("tr").css("height", emptyCellEle.outerHeight());
                             }, 0);
                         }
-                        
+
                         if(opts.onBind !== null && callType !== "grid.update") {
                             opts.onBind.call(this, opts.context, opts.data, true, true);
                         }
@@ -6606,7 +6606,7 @@
                 }
 
                 tempRowEleClone = undefined;
-                
+
                 return this;
             },
             remove : function(row) {
@@ -6647,7 +6647,7 @@
                 }
 
                 var self = this;
-                
+
                 if(row !== undefined) {
                     if(N.type(row) !== "array") {
                         row = [row];
@@ -6659,9 +6659,9 @@
                         if(opts.rowHandlerBeforeBind !== null) {
                             opts.rowHandlerBeforeBind.call(self, i, context, form.options.revertData);
                         }
-                        
+
                         form.revert();
-                        
+
                         if(opts.rowHandler !== null) {
                             opts.rowHandler.call(self, i, context, opts.data[i]);
                         }
@@ -6861,7 +6861,7 @@
             if (N.isPlainObject(opts)) {
                 // Wraps the global event options in N.config and event options for this component.
                 UI.utils.wrapHandler(opts, "pagination", "onChange");
-                
+
                 //convert data to wrapped set
                 opts.data = N.type(opts.data) === "array" ? N(opts.data) : opts.data;
 
@@ -6914,7 +6914,7 @@
                 }
 
                 opts.currPageNavInfo = Pagination.changePageSet(linkEles, opts);
-                
+
                 return linkEles;
             },
             changePageSet : function(linkEles, opts, isRemake) {
@@ -7176,7 +7176,7 @@
                 // Wraps the global event options in N.config and event options for this component.
                 UI.utils.wrapHandler(opts, "tree", "onSelect");
                 UI.utils.wrapHandler(opts, "tree", "onCheck");
-                
+
                 //convert data to wrapped set
                 opts.data = N.type(opts.data) === "array" ? N(opts.data) : opts.data;
 
@@ -7197,7 +7197,7 @@
 
             // register this to N.ds for realtime data synchronization
             N.ds.instance(this, true);
-            
+
             return this;
         };
 
