@@ -611,6 +611,7 @@
 	 */
 	N.context.attr("ui.shell", {
 		"notify" : {
+		    "alwaysOnTop" : true,
 			/**
 			 * 다국어 메시지
 			 */
