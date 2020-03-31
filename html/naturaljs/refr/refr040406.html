@@ -55,8 +55,8 @@
 N(".POPUP01").cont({
     init : function(view, request) {
     	var caller = this.caller; // caller는 현제 팝업페이지를 열어준 N.popup 인스턴스
-    	N("#close", this.view).click(function() { // 닫기버튼에 이벤트 바인드
-    		caller.close("Hello~ parent's Opener"); // close 함수의 첫번째 인자로 onOpenData 데이터 전달
+    	N("#close", this.view).click(function(onCloseData) { // 닫기버튼에 이벤트 바인드
+    		caller.close("Hello~ parent's Opener"); // close 함수의 첫번째 인자로 onCloseData 데이터 전달
     	});
     },
     // 팝업이 열릴때마다 실행될 함수
