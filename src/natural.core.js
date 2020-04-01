@@ -1,9 +1,9 @@
 /*!
- * Natural-CORE v0.17.25
+ * Natural-CORE v0.18.25
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
- *  
+ *
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  *
  * Includes formatdate.js & Mask JavaScript API
@@ -302,7 +302,7 @@
 		// N local variables
 		$.extend(N, {
 			version : {
-				"Natural-CORE" : "0.17.25"
+				"Natural-CORE" : "0.18.25"
 			},
 			/**
 			 * Set and get locale value
@@ -320,12 +320,12 @@
 			error : function(msg, e) {
 				if(N.type(e) !== "error") {
 					e = new Error(msg);
-					
+
 					if(Error.captureStackTrace !== undefined) {
-						Error.captureStackTrace(e, N.error);					
+						Error.captureStackTrace(e, N.error);
 					}
 				} else {
-					e.message = (msg != null ? "[" + msg + "]" : "") + e.message;					
+					e.message = (msg != null ? "[" + msg + "]" : "") + e.message;
 				}
 				return e;
 			},
@@ -447,12 +447,12 @@
 					return true;
 				},
 				/**
-				 * Removes garbage instances from observables of N.ds 
+				 * Removes garbage instances from observables of N.ds
 				 */
 				ds : function() {
 					if($(N.context.attr("architecture").page.context).find(">#data_sync_temp__").length > 0) {
 						$(N.context.attr("architecture").page.context).find(">#data_sync_temp__").instance("ds").obserable
-							= $.unique($(".grid__, .list__, .form__:not('.grid__>tbody, .list__>li'), .tree__", N.context.attr("architecture").page.context).instance());						
+							= $.unique($(".grid__, .list__, .form__:not('.grid__>tbody, .list__>li'), .tree__", N.context.attr("architecture").page.context).instance());
 					}
 				}
 			},
@@ -670,6 +670,69 @@
 					} else {
 						return new Date(tsNum);
 					}
+				},
+				/**
+                 * Get a list of monthly dates
+                 *
+                 * @param year
+                 * @param month
+                 * @return array[array[object]]
+                 *      date object
+                 *          day : day
+                 *          type : 1 - Previous month's dates, 2 - Current month's dates, 3 - Next month's dates
+                 */
+				dateList : function(year, month) {
+				    var weekArr = [];
+				    var lastDay = new Date(year, month, 0).getDate();
+				    var dayOfWeek = N.date.strToDate(String(year) + "-" + N.string.lpad(String(month), 2, "0") + "-01").obj.getDay();
+				    var bfMonth = month - 1;
+				    var bfLastDay = new Date(year, bfMonth, 0).getDate();
+				    var bfLastDayOfWeek = N.date.strToDate(String(year) + "-" + N.string.lpad(String(bfMonth), 2, "0") + "-" + N.string.lpad(String(bfLastDay))).obj.getDay();
+
+				    var daysOfWeek = [];
+
+				    for(var i=bfLastDay-bfLastDayOfWeek;i<=bfLastDay;i++) {
+				        daysOfWeek.push({
+				            day : i,
+				            type : 1
+				        });
+				    }
+
+				    for(var i=1;i<=lastDay;i++) {
+				        daysOfWeek.push({
+				            day : i,
+				            type : 2
+				        });
+				        if(i > 0 && daysOfWeek.length === 7) {
+				            weekArr.push(daysOfWeek);
+				            daysOfWeek = [];
+				        }
+				    }
+
+				    weekArr.push(daysOfWeek);
+
+				    var daysOfLastWeek = weekArr[weekArr.length-1];
+				    var lastDayOfCalendar;
+				    for(var i=1, length=daysOfLastWeek.length;i<=7-length;i++) {
+				        daysOfLastWeek.push({
+				            day : i,
+				            type : 3
+				        });
+				        lastDayOfCalendar = i;
+				    }
+				    if(weekArr.length === 5) {
+				        daysOfLastWeek = [];
+				        for(var i=lastDayOfCalendar+1;i<=lastDayOfCalendar+7;i++) {
+				            daysOfLastWeek.push({
+				                day : i,
+				                type : 3
+				            });
+				        }
+				        weekArr.push(daysOfLastWeek);
+				    }
+
+				    daysOfWeek = undefined;
+				    return weekArr;
 				}
 			},
 			/**
@@ -1097,7 +1160,7 @@
 					try {
 						e.preventDefault();
 				        e.stopImmediatePropagation();
-				        e.stopPropagation();						
+				        e.stopPropagation();
 					} catch(e) {}
 			        return false;
 			    },
@@ -1113,7 +1176,7 @@
         		    });
 			    },
 			    /**
-			     * Detect the duration of animation or transition of css3 
+			     * Detect the duration of animation or transition of css3
 			     */
 			    getMaxDuration : function(ele, css) {
 			    	if(!ele.css(css)) {
@@ -1742,7 +1805,7 @@
 	N.log = console && console.log ? console.log.bind(window.console) : function() {};
 	N.info = console && console.info ? console.info.bind(window.console) : function() {};
 	N.warn = console && console.warn ? console.warn.bind(window.console) : function() {};
-    
+
 	window.$.N = window.N = N;
 
 })(window, jQuery);
