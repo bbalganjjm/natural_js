@@ -691,11 +691,13 @@
 
 				    var daysOfWeek = [];
 
-				    for(var i=bfLastDay-bfLastDayOfWeek;i<=bfLastDay;i++) {
-				        daysOfWeek.push({
-				            day : i,
-				            type : 1
-				        });
+				    if(bfLastDayOfWeek !== 6) {
+				        for(var i=bfLastDay-bfLastDayOfWeek;i<=bfLastDay;i++) {
+	                        daysOfWeek.push({
+	                            day : i,
+	                            type : 1
+	                        });
+	                    }
 				    }
 
 				    for(var i=1;i<=lastDay;i++) {
