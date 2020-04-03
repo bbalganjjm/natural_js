@@ -1,5 +1,5 @@
 /*!
- * Natural-CORE v0.18.25
+ * Natural-CORE v0.18.26
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -302,7 +302,7 @@
 		// N local variables
 		$.extend(N, {
 			version : {
-				"Natural-CORE" : "0.18.25"
+				"Natural-CORE" : "0.18.26"
 			},
 			/**
 			 * Set and get locale value
@@ -676,35 +676,31 @@
                  *
                  * @param year
                  * @param month
-                 * @return array[array[object]]
-                 *      date object
-                 *          day : day
-                 *          type : 1 - Previous month's dates, 2 - Current month's dates, 3 - Next month's dates
+                 * @return array[array[date]]
                  */
 				dateList : function(year, month) {
 				    var weekArr = [];
-				    var lastDay = new Date(year, month, 0).getDate();
-				    var dayOfWeek = N.date.strToDate(String(year) + "-" + N.string.lpad(String(month), 2, "0") + "-01").obj.getDay();
-				    var bfMonth = month - 1;
-				    var bfLastDay = new Date(year, bfMonth, 0).getDate();
-				    var bfLastDayOfWeek = N.date.strToDate(String(year) + "-" + N.string.lpad(String(bfMonth), 2, "0") + "-" + N.string.lpad(String(bfLastDay))).obj.getDay();
+				    var prevDate = new Date(year, month-1, 0);
+				    var currDate = new Date(year, month, 0);
+				    var nextDate = new Date(year, month+1, 0);
+
+				    var lastDay = currDate.getDate();
+				    var dayOfWeek = N.date.strToDate(String(year) + "-" + currDate.formatDate("m") + "-01").obj.getDay();
+				    var prevLastDay = prevDate.getDate();
+				    var prevLastDayOfWeek = N.date.strToDate(String(year) + "-" + prevDate.formatDate("m") + "-" + N.string.lpad(String(prevLastDay))).obj.getDay();
 
 				    var daysOfWeek = [];
 
-				    if(bfLastDayOfWeek !== 6) {
-				        for(var i=bfLastDay-bfLastDayOfWeek;i<=bfLastDay;i++) {
-	                        daysOfWeek.push({
-	                            day : i,
-	                            type : 1
-	                        });
-	                    }
+				    if(prevLastDayOfWeek !== 6) {
+				        for(var i=prevLastDay-prevLastDayOfWeek;i<=prevLastDay;i++) {
+				            prevDate.setDate(i);
+				            daysOfWeek.push(new Date(prevDate));
+				        }
 				    }
 
 				    for(var i=1;i<=lastDay;i++) {
-				        daysOfWeek.push({
-				            day : i,
-				            type : 2
-				        });
+				        currDate.setDate(i);
+				        daysOfWeek.push(new Date(currDate));
 				        if(i > 0 && daysOfWeek.length === 7) {
 				            weekArr.push(daysOfWeek);
 				            daysOfWeek = [];
@@ -716,24 +712,20 @@
 				    var daysOfLastWeek = weekArr[weekArr.length-1];
 				    var lastDayOfCalendar;
 				    for(var i=1, length=daysOfLastWeek.length;i<=7-length;i++) {
-				        daysOfLastWeek.push({
-				            day : i,
-				            type : 3
-				        });
+				        nextDate.setDate(i);
+				        daysOfLastWeek.push(new Date(nextDate));
 				        lastDayOfCalendar = i;
 				    }
 				    if(weekArr.length === 5) {
 				        daysOfLastWeek = [];
 				        for(var i=lastDayOfCalendar+1;i<=lastDayOfCalendar+7;i++) {
-				            daysOfLastWeek.push({
-				                day : i,
-				                type : 3
-				            });
+				            nextDate.setDate(i);
+				            daysOfLastWeek.push(new Date(nextDate));
 				        }
 				        weekArr.push(daysOfLastWeek);
 				    }
 
-				    daysOfWeek = undefined;
+				    prevDate = currDate = nextDate = lastDay = dayOfWeek = prevLastDay = prevLastDayOfWeek = daysOfWeek = undefined;
 				    return weekArr;
 				}
 			},
