@@ -672,7 +672,7 @@
 					}
 				},
 				/**
-                 * Get a list of monthly dates
+                 * Get a list of monthly date objects
                  *
                  * @param year
                  * @param month
