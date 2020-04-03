@@ -14,4 +14,8 @@
 ## natural.ui.css
  *
 
+##natural.config.js
+ * Added N.context.attr("ui").list.message property and value.
+ * Added N.context.attr("ui.shell").notify.alwaysOnTop property and value.
+
 ## For more information on added and changed features, refer to the API manual(http://bbalganjjm.github.io/natural_js/)
