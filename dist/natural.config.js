@@ -515,6 +515,19 @@
 		"form" : {
 
 		},
+        "list" : {
+            /**
+             * 다국어 메시지
+             */
+            "message" : {
+                "ko_KR" : {
+                    "empty" : "조회를 하지 않았거나 조회된 데이터가 없습니다."
+                },
+                "en_US" : {
+                    "empty" : "No inquired data or no data available."
+                }
+            }
+        },
 		"grid" : {
 			/**
 			 * 소트기능 활성화 시 표시 구분자(html 태그 입력 가능)
