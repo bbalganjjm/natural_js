@@ -11,6 +11,16 @@ nPaginationInstance.bind([]); // N.pagination
 nTreeInstance.bind([]); // N.tree
 ```
 
+###Get list of dates for this month
+The N.date.dateList function makes it easy to create content that requires a calendar, such as a schedule management.
+```
+var dateList = N.date.dateList(2020, 04);
+N(dateList).each(function(i, week) {
+    N(week).each(function(j, date) {
+        N.log(date.formatDate("Y-m-d"), "week : " + i, "day : " + j);
+    });
+});
+
 ###Fill the screen with pop-up on the small screen(mobile, etc.)
 ```
 var cont = this;
@@ -20,21 +30,21 @@ popupOpts = {
 	opener : cont
 };
 
-if($(window).width() <= 414) {
+if(N(window).width() <= 414) {
 	popupOpts.draggable = false;
 	popupOpts.onShow = function(msgContext, msgContents) {
-		cont.scrollTop = $(window).scrollTop();
-		$("html, body").css("overflow", "hidden");
+		cont.scrollTop = N(window).scrollTop();
+		N("html, body").css("overflow", "hidden");
 	}
 	popupOpts.onBeforeRemove = function(msgContext, msgContents) {
-		$("html, body").css("overflow", "");
-		$(window).scrollTop(cont.scrollTop);
+		N("html, body").css("overflow", "");
+		N(window).scrollTop(cont.scrollTop);
 	}
 	popupOpts.width = function(msgContext, msgContents) {
-		return $(window).width(); 
+		return N(window).width();
 	};
 	popupOpts.height = function(msgContext, msgContents) {
-		return $(window).height() - msgContents.show().find(".msg_title_box__").height(); 
+		return N(window).height() - msgContents.show().find(".msg_title_box__").height();
 	};
 }
 
