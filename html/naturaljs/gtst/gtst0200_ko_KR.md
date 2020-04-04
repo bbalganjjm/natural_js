@@ -1,7 +1,7 @@
 웹 어플리케이션 기본 프레임 만들기
 ===
 
-메뉴를 좌측에 배치하고 우측에  MDI 형태로 페이지를 표시 해 주는 Documents(N.docs) 컴포넌트를 적용 하여 Single Page Web Application 을 개발 해 보겠습니다.
+메뉴를 좌측에 배치하고 우측에  MDI 형태로 페이지를 표시 해 주는 Documents(N.docs) 컴포넌트를 사용 하여 Single Page Web Application 을 개발 해 보겠습니다.
 
 <p class="alert">Documents(N.docs) 에 대한 자세한 내용은 <a href="#cmVmcjA1MDIlMjREb2N1bWVudHMkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDUwMi5odG1s">Documents</a> 메뉴를 참고 해 주세요.</p>
 
@@ -9,22 +9,22 @@
 
  * /js/natural_js - Natural-JS Javascript 라이브러리 파일 폴더
  * /js/natural_js/lib - jQuery 라이브러리 파일 폴더
- * /js/natural_js/css - Natural-JS UI 컴포넌트 기본 CSS 파일 폴더
+ * /js/natural_js/css - Natural-JS UI 컴포넌트들의 기본 CSS 파일 폴더
  * /html/contents - 메뉴 컨텐츠 파일 폴더
  * /html/index - 메인 인덱스와 관련 된 파일 폴더
 
-폴더 생성이 완료 되었으면 다음 파일들을 [GitHub](https://github.com/bbalganjjm/natural_js) 의 master 브랜치에서 다운로드 하여 해당 위치에 복사 합니다.
+폴더 생성이 완료 되었으면 [GitHub](https://github.com/bbalganjjm/natural_js)의 마스터 브랜치에서 다음 파일을 다운로드하여 해당 경로로 복사하십시오.
 
  * js/natural_js/lib/jquery-1.12.4.min.js - GitHub 의 master 브랜치에서 다운로드 한 압축 파일의 lib 폴더에 있음
  * js/natural_js/css/natural.ui.css - GitHub 의 master 브랜치에서 다운로드 한 압축 파일의 css 폴더에 있음
  * js/natural_js/natural.js.min.js - GitHub 의 master 브랜치에서 다운로드 한 압축 파일의 dist 폴더에 있음
  * js/natural_js/natural.config.js - GitHub 의 master 브랜치에서 다운로드 한 압축 파일의 dist 폴더에 있음
 
-최종 프로젝트 폴더 및 파일은 다음과 같이 구성 됩니다. 파일들은 하나씩 채우면서 설명 할 계획이니 일단 폴더만 만들어 주세요.
+최종 프로젝트 폴더 및 파일은 다음과 같이 구성 됩니다. 파일은 하나씩 채우면서 설명 할 계획이니 일단 폴더만 만들어 주세요.
 
 ![개발 프로젝트 구성](images/gtst/gtst0200/0.png)
 
-개발 프로젝트 구성이 완료 되었으면 다음 코드를 **/index.html** 파일로 저장 해 주세요.
+개발 프로젝트 환경설정이 완료 되었으면 다음 코드를 **/index.html** 파일로 저장 해 주세요.
 
 **/index.html**
 
@@ -90,7 +90,7 @@ body {
 
 **/index.html** 는 이 어플리케이션으로 접속하는 메인 인덱스 페이지 입니다. SPA(Single Page Application) 이기 때문에 브라우저 URL 은 웹 어플리케이션을 사용하는 동안 변동되지 않을 것 입니다.
 
-**/index.html** 상단에 head 태그 영역에는 Javascript 와 CSS 파일들을 로딩하는 구문들이 배치 됩니다. 이 파일들은 어플리케이션을 사용하는동안 1번만 로딩되어 이후 불러오는 페이지들과 기능을 공유하게 될 것 입니다.
+**/index.html** 상단에 head 태그 영역에는 Javascript 와 CSS 파일들을 로딩하는 구문들이 배치 됩니다. 이 파일들은 어플리케이션을 사용하는동안 한번만 로딩되어 이후 불러오는 페이지들과 기능을 공유하게 될 것 입니다.
 
 $(document).ready 함수의 콜백 함수의 내용을 봐 주세요.
 
