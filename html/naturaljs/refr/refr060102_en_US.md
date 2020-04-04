@@ -20,6 +20,7 @@ N(dateList).each(function(i, week) {
         N.log(date.formatDate("Y-m-d"), "week : " + i, "day : " + j);
     });
 });
+```
 
 ###Fill the screen with pop-up on the small screen(mobile, etc.)
 ```
