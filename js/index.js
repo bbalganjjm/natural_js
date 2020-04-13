@@ -125,6 +125,7 @@
         },
         setLocale : function() {
     		N.locale(window.sessionStorage.locale !== undefined ? window.sessionStorage.locale : IndexController.getLocale().toLowerCase().indexOf("ko") > -1 ? "ko_KR" : "en_US");
+    		N("html").attr("lang", N.locale().substring(0, 2));
     	},
         getLocale : function() {
         	if(navigator) {
@@ -166,7 +167,7 @@
             // 웹 폰트
             var fontFamily = "Noto Sans KR:300,400,600";
             if(locale == "en") {
-                fontFamily = "Noto Sans:300,400,600";
+                fontFamily = "Noto Sans:400,600";
             }
             WebFont.load({
                 google: {
