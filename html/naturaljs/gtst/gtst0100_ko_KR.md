@@ -119,17 +119,17 @@ Natural-ARCHITECTURE 기반의 모든 페이지나 페이지 블록 들은 반�
 
 위 코드를 **block01.html** 파일로 저장 해 주세요.
 
-N(".block01").cont object 의 init 함수의 N.comm 함수는 서버에서 데이터를 조회 하는 구문 입니다.
+".block01" controller object 의 init 함수 안에 있는 N.comm 함수는 서버에서 데이터를 조회 하는 구문 입니다.
 
 <p class="alert">Natural-JS는 서버와의 데이터 및 파일을 송수신 하는데 Communicator(N.comm) 모듈을 사용 합니다. N.comm 에 대한 자세한 내용은 <a href="#cmVmcjAyMDMlMjRDb21tdW5pY2F0b3IkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDIwMy5odG1s">Communicator</a> 메뉴를 참고 해 주세요.</p>
 
-Natural-JS 의 컴포넌트 데이터 및 데이터 송수신을 위한 데이터 타입은 JSON 이라고 했었죠?
+앞에서 Natural-JS 의 컴포넌트 데이터 및 데이터 송수신을 위한 데이터 타입은 JSON 이라고 했었습니다.
 
-먼저 json 타입으로 데이터를 서비스 해 주는 서버가 필요 하지만 이 문서에서는 데이터를 서비스 해 주는 서버단의 작업에 대해서는 생략 하겠습니다. Spring MVC 나 PHP 로 간단하게 List 나 Map 타입의 객체를 JSON 타입으로 변환 해 주는 모듈들이 많이 있습니다. 아래 사이트에 방문하면 프로그래밍 언어별 변환모듈에 대한 정보가 많이 있습니다.
+먼저 json 타입으로 데이터를 서비스 해 주는 서버가 필요 하지만 이 문서에서는 서버 작업에 대한 설명은 생략 하겠습니다. Spring MVC 나 PHP 로 간단하게 List 나 Map 타입의 객체를 JSON 타입으로 변환 해 주는 모듈들이 많이 있습니다. 프로그래밍 언어 별 JSON 변환 모듈에 대한 정보를 얻으려면 아래 사이트를 방문 해 보기 바랍니다.
 
 [http://www.json.org/json-ko.html](http://www.json.org/json-ko.html)
 
-데이터를 임의로 받기 위해 JSON 문자열로 구성 된 데이터 파일(data.json)을 다음과 같이 생성 하고 저장 합니다.
+임시로 데이터를 수신하기 위해 다음과 같이 JSON 문자열로 구성된 데이터 파일(data.json)을 작성하고 저장 합니다.
 
 **data.json**
 
@@ -204,9 +204,9 @@ Natural-JS 의 컴포넌트 데이터 및 데이터 송수신을 위한 데이�
 ]
 ```
 
-이제 블록 페이지 1개가 완성 되었습니다. 이 페이지는 Tab 이나 Popup, Documents 컴포넌트로 불러올 수 있고 N.comm 으로 원하는 위치에 넣어 줄 수 있습니다.
+이제 하나의 블록 페이지가 완성되었습니다. 이 페이지는 Tab(N.tab) 이나 Popup(N.popup), Documents(N.docs) 컴포넌트로 불러올 수 있고 Communicator(N.comm)를 사용하여이 이 페이지의 요소를 원하는 위치에 추가 할 수 있습니다.
 
-간단하게 인덱스 페이지를 만들고 N.comm 으로 **block01.html** 페이지를 원하는 위치에 불러 와 볼까요?
+간단한 인덱스 페이지를 만들고 **block 01.html** 페이지를 N.comm을 사용하여 원하는 위치에 추가 해 볼까요?
 
 다음 코드를 **index.html** 파일로 저장 해 주세요.
 
@@ -237,23 +237,22 @@ Natural-JS 의 컴포넌트 데이터 및 데이터 송수신을 위한 데이�
 </html>
 ```
 
-**index.html** 파일의 $(document).ready 함수의 콜백 인자는 Communicator(N.comm) 를 이용하여 **block01.html** 페이지를 **#contents**(N.context.attr("architecture").page.context) 요소 안에 불러오는 코드 입니다. N.comm 은 **block01.html** 페이지 로딩이 완료 되면 Controller(N.cont) object 의 init 함수를 실행 해 줍니다.
+**index.html** 파일의 $(document).ready 함수의 콜백 인자는 N.comm을 이용하여 **block01.html** 페이지를 **#contents**(N.context.attr("architecture").page.context) 요소 안에 불러오는 코드 입니다. N.comm 은 **block01.html** 페이지 로딩이 완료 되면 Controller(N.cont) object 의 init 함수를 실행 해 줍니다.
 
-<p class="alert">$(document).ready는 불러 온 HTML 파일의 DOM 요소들이 브라우저에 적재가 완료 된 다음에 인자로 지정한 콜백함수를 실행 시켜주는 jQuery 에서 제공하는 함수 입니다.</p>
+<p class="alert">$ (document).ready는 페이지 요소를로드 한 후 인자로 지정된 콜백 함수를 실행 해 주는 jQuery에서 제공하는 함수입니다.</p>
 
-이제 Natural-JS 를 구동하기 위한 소스 코드 작성이 모두 완료 되었습니다.
+이제 Natural-JS를 실행하기위한 모든 작업을 완료했습니다.
 
 지금 까지 작성한 코드들을 실행 하려면 웹서버가 필요 합니다.
 
 먼저 웹 서버를 설치 하고 웹 Context Root 에 위 index.html, block01.html, data.json 파일을 복사 합니다. 그 다음 웹서버를 구동하고 브라우저로 **index.html** 파일의 주소(URL)를 입력하여 페이지를 열어 보세요.
 
-index.html 페이지에 의해 **block01.html** 파일이 로딩되고 N.cont 의 인자로 지정 한 오브젝트의 init 함수가 실행 될 것 입니다. 그 다음 **block01.html** 페이지의 id 가 result 인 div 요소 안에 서버에서 전달 된 데이터가 표시 될 것 입니다.
+** block01.html ** 파일은 index.html 페이지에 의해 로드되고 N.cont의 인자로 지정된 객체의 init 함수가 실행 될 것입니다. 그 다음 **block01.html** 페이지의 요소 id 가 result 인 div 요소 안에 서버에서 조회 된 데이터가 표시 될 것 입니다.
 
-<p class="alert">데이터를 조회 할 수 있는 서버가 있다면 N.comm 의 url 옵션에 <strong>data.json</strong> 대신 해당 서비스의 URL 을 입력 하면 됩니다.</p>
-<p class="alert">서버에서 JSON 타입의 파라미터 문자열을 Map 이나 List 같은 객체로 변환 해서 사용하려면 <a href="http://www.json.org/json-ko.html" target="blank">JSON 변환 모듈</a> 이 있어야 합니다.</p>
+<p class="alert">데이터를 조회 할 수있는 서버가있는 경우 N.comm의 url 옵션에서 <strong>data.json</ strong> 대신 서비스 URL을 입력 하세요.</p>
 
-이제 기본 환경 구성과 실행 방법을 알았으니 블록 페이지 들이 구동 될 환경을 만들어 볼까요?
+이제 Natural-JS의 기본 환경을 구성하고 실행하는 방법을 알았으니 블록 페이지가 실행 될 사이트 환경을 만들어 볼까요?
 
 [웹 어플리케이션 기본 프레임 만들기](#Z3RzdDAyMDAlMjREb2N1bWVudHMlMjAlRUIlQTElOUMlMjAlRUIlQTklOTQlRUIlODklQjQlMjAlRUQlOTQlODQlRUIlQTElOUMlRUElQjclQjglRUIlOUUlQTglMjAlRUMlOTclQjAlRUIlOEYlOTklRUQlOTUlOTglRUElQjglQjAkaHRtbCUyRm5hdHVyYWxqcyUyRmd0c3QlMkZndHN0MDIwMC5odG1s) 메뉴를 클릭 해 주세요.
 
-<p class="alert">이 사이트는 Natural-JS 로 개발 된 사이트 입니다. 이 사이트의 소스 코드는 <a href="https://github.com/bbalganjjm/natural_js/tree/gh-pages">Github 의 gh-pages 브랜치</a>에 공개 되어 있으니 참고 바랍니다.
+<p class="alert">이 사이트는 Natural-JS로 개발되었습니다. 이 사이트의 소스 코드는 <a href="https://github.com/bbalganjjm/natural_js/tree/gh-pages">Github 의 gh-pages 브랜치</a>에 공개 되어 있으니 참고 바랍니다.

@@ -92,7 +92,7 @@ You have finished configuring your execution environment. Now let's write some s
 
 Natural-JS has a simple source code composition rule to separate development areas and design areas within a source code of page block and to guarantee the scope between elements and scripts. It is not so difficult. You just need to separate the view area and the Controller area as shown below and arrange them in order.
 
-<p class="alert">View 와 Controller 에 대한 자세한 내용은 <a href="#cmVmcjAyMDElMjRDb250cm9sbGVyJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAyMDEuaHRtbA==">Controller</a> 메뉴를 참고 해 주세요.</a>
+<p class="alert">For more information about View and Controller, please refer to the <a href="#cmVmcjAyMDElMjRDb250cm9sbGVyJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAyMDEuaHRtbA==">Controller</a> menu.</a>
 
 **block01.html**
 
@@ -115,21 +115,21 @@ N(".block01").cont({ // Controller Object
 </script>
 ```
 
-Natural-ARCHITECTURE 기반의 모든 페이지나 페이지 블록 들은 반드시 위와 같은 코드 폼으로 구성되어 있어야 합니다.
+All pages or page blocks based on Natural-ARCHITECTURE must be composed of the above code form.
 
-위 코드를 **block01.html** 파일로 저장 해 주세요.
+Please save the above code as **block01.html** file.
 
-N(".block01").cont object 의 init 함수의 N.comm 함수는 서버에서 데이터를 조회 하는 구문 입니다.
+The N.comm function in the init function of the ".block01" controller object is a statement that retrieves data from the server.
 
-<p class="alert">Natural-JS는 서버와의 데이터 및 파일을 송수신 하는데 Communicator(N.comm) 모듈을 사용 합니다. N.comm 에 대한 자세한 내용은 <a href="#cmVmcjAyMDMlMjRDb21tdW5pY2F0b3IkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDIwMy5odG1s">Communicator</a> 메뉴를 참고 해 주세요.</p>
+<p class="alert">Natural-JS uses the Communicator(N.comm) module to send and receive data and files with the server. For more information about N.comm, please refer to the <a href="#cmVmcjAyMDMlMjRDb21tdW5pY2F0b3IkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDIwMy5odG1s">Communicator</a> menu.</p>
 
-Natural-JS 의 컴포넌트 데이터 및 데이터 송수신을 위한 데이터 타입은 JSON 이라고 했었죠?
+I mentioned earlier that the data type for sending and receiving component data and data of Natural-JS is JSON.
 
-먼저 json 타입으로 데이터를 서비스 해 주는 서버가 필요 하지만 이 문서에서는 데이터를 서비스 해 주는 서버단의 작업에 대해서는 생략 하겠습니다. Spring MVC 나 PHP 로 간단하게 List 나 Map 타입의 객체를 JSON 타입으로 변환 해 주는 모듈들이 많이 있습니다. 아래 사이트에 방문하면 프로그래밍 언어별 변환모듈에 대한 정보가 많이 있습니다.
+First, we need a server that serves data in the json type, but we will omit the description of the server operation in this document. There are many modules that convert List or Map type object to JSON type simply with Spring MVC or PHP. For information on JSON conversion modules by programming language, please visit the site below.
 
 [http://www.json.org/json-ko.html](http://www.json.org/json-ko.html)
 
-데이터를 임의로 받기 위해 JSON 문자열로 구성 된 데이터 파일(data.json)을 다음과 같이 생성 하고 저장 합니다.
+To receive data temporarily, create and save a data file (data.json) composed of JSON strings as follows.
 
 **data.json**
 
@@ -204,11 +204,11 @@ Natural-JS 의 컴포넌트 데이터 및 데이터 송수신을 위한 데이�
 ]
 ```
 
-이제 블록 페이지 1개가 완성 되었습니다. 이 페이지는 Tab 이나 Popup, Documents 컴포넌트로 불러올 수 있고 N.comm 으로 원하는 위치에 넣어 줄 수 있습니다.
+Now one block page is complete. This page can be imported as a Tab(N.tab), Popup(N.popup), or Documents(N.docs) component, and Communicator(N.comm) can be used to add elements of this page to the desired location.
 
-간단하게 인덱스 페이지를 만들고 N.comm 으로 **block01.html** 페이지를 원하는 위치에 불러 와 볼까요?
+Let's create a simple index page and add the ** block 01.html ** page to the desired position using N.comm.
 
-다음 코드를 **index.html** 파일로 저장 해 주세요.
+Save the following code as **index.html** file.
 
 **index.html**
 
@@ -237,23 +237,22 @@ Natural-JS 의 컴포넌트 데이터 및 데이터 송수신을 위한 데이�
 </html>
 ```
 
-**index.html** 파일의 $(document).ready 함수의 콜백 인자는 Communicator(N.comm) 를 이용하여 **block01.html** 페이지를 **#contents**(N.context.attr("architecture").page.context) 요소 안에 불러오는 코드 입니다. N.comm 은 **block01.html** 페이지 로딩이 완료 되면 Controller(N.cont) object 의 init 함수를 실행 해 줍니다.
+When the callback function of $(document).ready function is executed, use the N.comm, import  the **block01.html** page to **# contents**(N.context.attr("architecture").page.context) element. N.comm executes the init function of Controller(N.cont) object after DOM loading of the loaded page is completed.
 
-<p class="alert">$(document).ready는 불러 온 HTML 파일의 DOM 요소들이 브라우저에 적재가 완료 된 다음에 인자로 지정한 콜백함수를 실행 시켜주는 jQuery 에서 제공하는 함수 입니다.</p>
+<p class="alert">$(document).ready is a function provided by jQuery that executes the callback function specified as an argument after loading the page elements.</p>
 
-이제 Natural-JS 를 구동하기 위한 소스 코드 작성이 모두 완료 되었습니다.
+Now you have done everything to run Natural-JS.
 
-지금 까지 작성한 코드들을 실행 하려면 웹서버가 필요 합니다.
+A web server is required to run the codes written so far.
 
-먼저 웹 서버를 설치 하고 웹 Context Root 에 위 index.html, block01.html, data.json 파일을 복사 합니다. 그 다음 웹서버를 구동하고 브라우저로 **index.html** 파일의 주소(URL)를 입력하여 페이지를 열어 보세요.
+First, install the web server and copy the above index.html, block01.html, data.json files to the web context root. Next, start the web server and open the page by entering the address (URL) of the **index.html** file in a browser.
 
-index.html 페이지에 의해 **block01.html** 파일이 로딩되고 N.cont 의 인자로 지정 한 오브젝트의 init 함수가 실행 될 것 입니다. 그 다음 **block01.html** 페이지의 id 가 result 인 div 요소 안에 서버에서 전달 된 데이터가 표시 될 것 입니다.
+The **block01.html** file is loaded by the index.html page, and the init function of the object specified as the argument of N.cont will be executed. Next, the data retrieved from the server will be displayed in the div element with the element id is "result" on the **block01.html** page.
 
-<p class="alert">데이터를 조회 할 수 있는 서버가 있다면 N.comm 의 url 옵션에 <strong>data.json</strong> 대신 해당 서비스의 URL 을 입력 하면 됩니다.</p>
-<p class="alert">서버에서 JSON 타입의 파라미터 문자열을 Map 이나 List 같은 객체로 변환 해서 사용하려면 <a href="http://www.json.org/json-ko.html" target="blank">JSON 변환 모듈</a> 이 있어야 합니다.</p>
+<p class="alert">If you have a server that can retrieve data, enter the URL of the service in place of <strong>data.json</strong> in the url option of N.comm.</p>
 
-이제 기본 환경 구성과 실행 방법을 알았으니 블록 페이지 들이 구동 될 환경을 만들어 볼까요?
+Now that we know how to configure and run the default environment for Natural-JS, let's create a site environment where the block page will run?
 
-[Create a web application base frame](#Z3RzdDAyMDAlMjRDcmVhdGUlMjBhJTIwd2ViJTIwYXBwbGljYXRpb24lMjBiYXNlJTIwZnJhbWUkaHRtbCUyRm5hdHVyYWxqcyUyRmd0c3QlMkZndHN0MDIwMC5odG1s) 메뉴를 클릭 해 주세요.
+Click the [Create a web application base frame](#Z3RzdDAyMDAlMjRDcmVhdGUlMjBhJTIwd2ViJTIwYXBwbGljYXRpb24lMjBiYXNlJTIwZnJhbWUkaHRtbCUyRm5hdHVyYWxqcyUyRmd0c3QlMkZndHN0MDIwMC5odG1s) menu.
 
-<p class="alert">이 사이트는 Natural-JS 로 개발 된 사이트 입니다. 이 사이트의 소스 코드는 <a href="https://github.com/bbalganjjm/natural_js/tree/gh-pages">Github 의 gh-pages 브랜치</a>에 공개 되어 있으니 참고 바랍니다.
+<p class="alert">This site was developed with Natural-JS. Please refer to the source code of this site as it is published in <a href="https://github.com/bbalganjjm/natural_js/tree/gh-pages">gh-pages branch of github</a>.
