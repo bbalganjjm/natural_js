@@ -6,10 +6,18 @@ html {
     overflow-y: scroll;
 }
 
+:lang(ko) {
+    font-family: 'Noto Sans KR', 'Malgun Gothic', 'AppleGothicNeoSD', 'Apple SD 산돌고딕 Neo', 'Microsoft NeoGothic';
+    font-weight: 300;
+}
+:lang(en) {
+    font-family: 'Noto Sans', 'Segoe UI', 'AppleGothicNeoSD', 'Microsoft NeoGothic';
+    font-weight: 300;
+}
+
 body {
     height: 100%;
     margin: 0;
-    font-family: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", "dotum", "Segoe UI", sans-serif;
     color: rgba(0, 0, 0, 0.87);
     font-size: 13px;
     line-height: 1.7;
@@ -35,7 +43,6 @@ img {
 
 /* input element styles */
 input[type='text'], input[type='number'], input[type='tel'], input[type='password'], select, textarea {
-	font-family: "Malgun Gothic", "dotum", "Noto Sans KR", "Apple SD Gothic Neo", "Segoe UI", sans-serif;
     color: rgba(0, 0, 0, 0.87);
     vertical-align: middle;
     box-sizing: border-box;

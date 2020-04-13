@@ -162,17 +162,29 @@
                 })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
             }
         },
+        webFont : function(locale) {
+            // 웹 폰트
+            var fontFamily = "Noto Sans KR:300,400,600";
+            if(locale == "en") {
+                fontFamily = "Noto Sans:300,400,600";
+            }
+            WebFont.load({
+                google: {
+                   families: [fontFamily]
+                }
+            });
+        },
         mobileResponsiveView : function() {
-            
+
             // API 문서 모바일 용 보기 처리 이벤트
             N(window).on("resize.mobile", function(e, view) {
-                
+
                 if (e.target == window || view) { // 모바일에서 scroll 시 resize 이벤트가 firing 되서(ios, android 동일).
-                    
+
                     if(!$("#methods").hasClass("visible__") && !$("#constructor").hasClass("visible__")) {
                         return false;
                     }
-                    
+
                     N(".agrsIndex", view).remove();
                     N(".function-desc", view).removeClass("function-desc");
 
@@ -197,7 +209,7 @@
                     } else {
                         $("[id='methods'], [id='constructor']").find("tr .function-desc").removeClass("function-desc");
                         $("[id='methods'], [id='constructor']").find("tr .agrsIndex").remove();
-                        
+
                         $("[id='methods'], [id='constructor']").find("td:contains('N/A')").css({
                             "visibility": "",
                             "padding" : "",
