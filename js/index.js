@@ -112,14 +112,17 @@
 
             if(window.localStorage.themeColor !== "green") {
                 $("head > link[rel=stylesheet]").each(function() {
-                    N.comm({
-                        url : $(this).attr("href"),
-                        contentType : "text/css",
-                        dataType : "html",
-                        type : "GET"
-                    }).submit(function(data) {
-                        $('<style type="text/css">\n' + data + '</style>').appendTo("head");
-                    });
+                    var cssUrl = $(this).attr("href");
+                    if(!N.string.startsWith(cssUrl, "http")) {
+                        N.comm({
+                            url : cssUrl,
+                            contentType : "text/css",
+                            dataType : "html",
+                            type : "GET"
+                        }).submit(function(data) {
+                            $('<style type="text/css">\n' + data + '</style>').appendTo("head");
+                        });
+                    }
                 });
             }
         },
@@ -165,9 +168,9 @@
         },
         webFont : function(locale) {
             // 웹 폰트
-            var fontFamily = "Noto Sans KR:300,400,600";
+            var fontFamily = "Lato:300,400,600";
             if(locale == "en") {
-                fontFamily = "Noto Sans:400,600";
+                fontFamily = "Lato:400,600";
             }
             WebFont.load({
                 google: {

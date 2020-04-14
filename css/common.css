@@ -1,5 +1,10 @@
 @charset "utf-8";
 
+@font-face {
+	font-family: 'NanumSquare';
+	src: local(※), url(../images/font/nanumsquarer.woff) format('woff')
+}
+
 html {
     height: 100%;
     margin: 0;
@@ -7,19 +12,17 @@ html {
 }
 
 :lang(ko) {
-    font-family: 'Noto Sans KR', 'Malgun Gothic', 'AppleGothicNeoSD', 'Apple SD 산돌고딕 Neo', 'Microsoft NeoGothic';
-    font-weight: 300;
+    font-family: 'NanumSquare', '맑은 고딕', 'Malgun Gothic', 'Apple SD 산돌고딕 Neo', 'Apple SD Gothic Neo', 'Microsoft NeoGothic', sans-serif;
 }
 :lang(en) {
-    font-family: 'Noto Sans', 'Segoe UI', 'AppleGothicNeoSD', 'Microsoft NeoGothic';
-    font-weight: 400;
+    font-family: 'NanumSquare', 'Segoe UI', 'Microsoft NeoGothic', sans-serif;
 }
 
 body {
     height: 100%;
     margin: 0;
     color: rgba(0, 0, 0, 0.87);
-    font-size: 13px;
+    font-size: 14px;
     line-height: 1.7;
 }
 
