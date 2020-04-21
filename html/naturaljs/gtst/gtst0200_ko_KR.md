@@ -110,9 +110,9 @@ $(document).ready 함수의 콜백 함수의 내용을 봐 주세요.
 
 **/index.html** 의 DOM 이 모두 로딩 된 다음 N.comm 으로 #lefter 요소에 좌측 블록 페이지를 불러와 넣어주는 구문입니다. **/html/index/lefter.html** 파일은 좌측 메뉴의 링크 요소와 이를 활성 화 시켜 주는 Controller(N.cont) Object 가 들어 있습니다.
 N("#lefter").comm("html/index/lefter.html").submit 함수의 인자는 **/html/index/lefter.html** 파일 로딩이 완료 된 후 실행 되는 콜백 함수 입니다. 여기에서 N.docs 컴포넌트로 #docs 요소 안에 MDI 페이지 컨테이너를 생성 해 주고 있습니다. N.docs 컴포넌트의 인스턴스는 어플리케이션당 1개만 생성 되므로 window 객체에 담아 전역으로 사용 할 것입니다.
-<p class="alert">N.docs 인스턴스는 반드시 window 가 아니더라도 어플리케이션에서 정의한 전역으로 접근할 수 있는 아무 객체에 담아도 됩니다.</p>
+<p class="alert">N.docs 인스턴스는 반드시 window 객체가 아니더라도 어플리케이션에서 정의한 전역으로 접근할 수 있는 아무 객체에 담아도 됩니다.</p>
 
-이제 이 N.docs 인스턴스에서 제공 하는 기능들로 링크를 클릭하면 우측 컨텐츠 영역에 메뉴 페이지가 추가되는 왼쪽 메뉴 블록 페이지(/html/index/lefter.html)를 작성 해 보겠습니다.
+이제 이 N.docs 인스턴스에서 제공 하는 기능으로 메뉴 컨텐츠를 불러오는 좌측 메뉴 블록 페이지(/html/index/lefter.html)를 생성 해 보겠습니다.
 
 다음 코드를 **/html/index/lefter.html** 파일로 저장 해 주세요.
 
@@ -150,10 +150,9 @@ N(".index-lefter").cont({
 </script>
 ```
 
-위 코드를 보면 특이한 부분이 있습니다.
-view 영역 위에 style 태그가 추가 되어 있습니다. 이 영역은 이 페이지의 view 에만 적용되는 스타일을 정의 하기 위한 부분 입니다.
-주의해야 할 부분은 ```.index-lefter .menu a { ... }``` 의 **.index-lefter** 처럼  CSS 셀렉터를 정의 할 때 반드시 view 를 가리키는 class(.) 나 id(#) 로 시작 해야 이 페이지에서만 스타일이 적용 됩니다.
-<p class="alert">이렇게 정의한 스타일은 페이지가 닫히면 해당 자원도 메모리에서 제거 되어 스타일이 사라집니다.</p>
+위 코드의 style 코드 블록은 이 페이지의 view 에만 적용되는 스타일을 정의 하기 위한 부분 입니다.
+<p class="alert">이 페이지에서만 스타일이 적용 되게 하려면 ```.index-lefter .menu a { ... }``` 의 **.index-lefter** 처럼  CSS 셀렉터를 정의 할 때 반드시 view 요소 셀렉터 부터 시작 해야 합니다.</p>
+<p class="alert">페이지가 닫히면 스타일도 같이 제거 됩니다.</p>
 
 N.cont 오브젝트의 init 함수에는 메뉴링크 요소를 클릭하면 **/index.html** 에서 window 객체에 담아둔 N.docs 인스턴스로 선택한 메뉴 컨텐츠를 여는 구문이 있습니다.
 
