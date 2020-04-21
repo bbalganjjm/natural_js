@@ -151,14 +151,13 @@ N(".index-lefter").cont({
 ```
 
 위 코드의 style 코드 블록은 이 페이지의 view 에만 적용되는 스타일을 정의 하기 위한 부분 입니다.
-<p class="alert">이 페이지에서만 스타일이 적용 되게 하려면 ```.index-lefter .menu a { ... }``` 의 **.index-lefter** 처럼  CSS 셀렉터를 정의 할 때 반드시 view 요소 셀렉터 부터 시작 해야 합니다.</p>
+<p class="alert">이 페이지에서만 스타일이 적용 되게 하려면 <code>.index-lefter .menu a { ... }</code> 의 **.index-lefter** 처럼  CSS 셀렉터를 정의 할 때 반드시 view 요소 셀렉터 부터 시작 해야 합니다.</p>
 <p class="alert">페이지가 닫히면 스타일도 같이 제거 됩니다.</p>
 
-N.cont 오브젝트의 init 함수에는 메뉴링크 요소를 클릭하면 **/index.html** 에서 window 객체에 담아둔 N.docs 인스턴스로 선택한 메뉴 컨텐츠를 여는 구문이 있습니다.
+N.cont 오브젝트의 init 함수에는 메뉴링크 요소를 클릭했을 때  **/index.html** 에서 window 객체에 담아둔 N.docs 인스턴스의 add 메서드로 메뉴 컨텐츠를 불러오는 코드가 작성 되어 있습니다. N.docs 인스턴스로 ```add("페이지ID", "페이지명", { url : "페이지URL" }``` 함수 를 실행 하면 우측 MDI 영역에 페이지가 추가 됩니다.
+```N(".menu", view).on("click", "a", function(e) { ... }, N(this).data("docid"), N(this).text(), N(this).attr("href")``` 는 모두 jQuery 에서 제공 하는 기능이니 [jQuery API 메뉴얼](https://api.jquery.com)을 참고 바랍니다.
 
-N.docs 인스턴스로 ```add(페이지ID, 페이지명, { url : "페이지URL" }``` 함수 를 실행 하면 우측 MDI 영역에 페이지가 추가 됩니다. ```N(".menu", view).on("click", "a", function(e) { ... }, N(this).data("docid"), N(this).text(), N(this).attr("href")``` 는 모두 jQuery 에서 제공 하는 기능이니 [jQuery API 메뉴얼](https://api.jquery.com)을 참고 바랍니다.
-
-이제 기반 작업은 끝났 습니다. 메뉴 링크로 걸려있는 컨텐츠 파일들만 만들어 주면 모든 작업이 완료 됩니다.
+위 파일들은 View 와 Controller 구조로만 이루어진 아주 간단한 내용으로 구성 된 페이지 입니다.
 
 아래 메뉴 컨텐츠 파일들을 생성 해 주세요.
 
@@ -168,7 +167,7 @@ N.docs 인스턴스로 ```add(페이지ID, 페이지명, { url : "페이지URL" 
  * **/html/contents/page4.html**
  * **/html/contents/page5.html**
 
-위 파일들은 View 와 Controller 구조로만 이루어진 아주 아주 아주 아주..간단한 내용으로 구성 된 페이지들 입니다.
+위 파일들은 View 와 Controller 구조로만 이루어진 아주 간단한 내용으로 구성 된 페이지 입니다.
 
 **/html/contents/page1.html**
 ```
@@ -280,9 +279,7 @@ N(".page01").cont({
 </script>
 ```
 
-웹 서버에 지금까지 작성한 소스 파일들을 배포한 다음 **/index.html** 에 접속 하면 웹 어플리케이션을 실행 해 볼 수 있습니다.
-
-다음과 같은 화면이 표시 되면 실습 성공!
+지금까지 작성한 소스 파일들을 웹 서버에 배포한 다음 **/index.html** 에 접속 했을때 다음과 같은 화면이 표시 되면 실습을 성공 한 것 입니다.
 
 ![완료 화면](images/gtst/gtst0200/1.png)
 

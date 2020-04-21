@@ -150,16 +150,15 @@ N(".index-lefter").cont({
 ```
 
 The style code block in the code above is for defining the style that is applied only to the view of this page.
-<p class="alert">If you want the style to be applied on this page only, you must start with the view element selector when defining a CSS selector like  **.index-lefter** in ```.index-lefter .menu a { ... }```.</p>
-<p class="alert">When this page is closed, the style is also removed.</p>
+<p class="alert">If you want the style to be applied on this page only, you must start with the view element selector when defining a CSS selector like  **.index-lefter** in <code>.index-lefter .menu a { ... }</code>.</p>
+<p class="alert">The style is also removed when you close this page.</p>
 
-N.cont 오브젝트의 init 함수에는 메뉴링크 요소를 클릭하면 **/index.html** 에서 window 객체에 담아둔 N.docs 인스턴스로 선택한 메뉴 컨텐츠를 여는 구문이 있습니다.
+In the init function of the N.cont object, the code to load the menu contents is written use add method of the N.docs instance stored in the window object in **/index.html** when the menu link element is clicked. If ```add("page id", "page name", { url : "pageURL" }``` function is executed with N.docs instance, the page is added to the right MDI area.
+Since ```N(".menu", view).on("click", "a", function(e) { ... }, N(this).data("docid"), N(this).text(), N(this).attr("href")``` is a function provided by jQuery, please refer to [jQuery API Manual](https://api.jquery.com).
 
-N.docs 인스턴스로 ```add(페이지ID, 페이지명, { url : "페이지URL" }``` 함수 를 실행 하면 우측 MDI 영역에 페이지가 추가 됩니다. ```N(".menu", view).on("click", "a", function(e) { ... }, N(this).data("docid"), N(this).text(), N(this).attr("href")``` 는 모두 jQuery 에서 제공 하는 기능이니 [jQuery API 메뉴얼](https://api.jquery.com)을 참고 바랍니다.
+The basic operation is now complete. If you create only the content files to be linked to the menu, everything is done.
 
-이제 기반 작업은 끝났 습니다. 메뉴 링크로 걸려있는 컨텐츠 파일들만 만들어 주면 모든 작업이 완료 됩니다.
-
-아래 메뉴 컨텐츠 파일들을 생성 해 주세요.
+Please create the following menu content files.
 
  * **/html/contents/page1.html**
  * **/html/contents/page2.html**
@@ -167,7 +166,7 @@ N.docs 인스턴스로 ```add(페이지ID, 페이지명, { url : "페이지URL" 
  * **/html/contents/page4.html**
  * **/html/contents/page5.html**
 
-위 파일들은 View 와 Controller 구조로만 이루어진 아주 아주 아주 아주..간단한 내용으로 구성 된 페이지들 입니다.
+The above files are pages composed of very simple contents consisting only of the View and Controller structures.
 
 **/html/contents/page1.html**
 ```
@@ -279,12 +278,10 @@ N(".page01").cont({
 </script>
 ```
 
-웹 서버에 지금까지 작성한 소스 파일들을 배포한 다음 **/index.html** 에 접속 하면 웹 어플리케이션을 실행 해 볼 수 있습니다.
+After deploying the source files created so far to the web server and accessing **/index.html**, if the following screen is displayed, it is a success.
 
-다음과 같은 화면이 표시 되면 실습 성공!
+![Completion screen](images/gtst/gtst0200/1.png)
 
-![완료 화면](images/gtst/gtst0200/1.png)
+Full source code can be downloaded from [here](html/naturaljs/gtst/codes/natural_js_gtst0200.zip).
 
-전체 소스코드는 [여기](html/naturaljs/gtst/codes/natural_js_gtst0200.zip) 에서 다운로드 할 수 있습니다.
-
-다음 단계([Retrieving / Modifying Data with Grid](#Z3RzdDAzMDAlMjRSZXRyaWV2aW5nJTJGTW9kaWZ5aW5nJTIwRGF0YSUyMHdpdGglMjBHcmlkJGh0bWwlMkZuYXR1cmFsanMlMkZndHN0JTJGZ3RzdDAzMDAuaHRtbA==)) 에서는 Natural-UI 패키지에서 제공하는 컴포넌트들로 이 컨텐츠 영역을 채워 보겠습니다.
+In the next step([Retrieving / Modifying Data with Grid](#Z3RzdDAzMDAlMjRSZXRyaWV2aW5nJTJGTW9kaWZ5aW5nJTIwRGF0YSUyMHdpdGglMjBHcmlkJGh0bWwlMkZuYXR1cmFsanMlMkZndHN0JTJGZ3RzdDAzMDAuaHRtbA==)), we will fill this content area with the components provided by the Natural-UI package.
