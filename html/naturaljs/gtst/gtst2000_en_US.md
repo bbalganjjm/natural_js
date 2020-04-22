@@ -1,4 +1,4 @@
-샘플 프로젝트로 시작하기
+Getting Started with Sample project
 ===
 
 <ul class="contents links" style="margin-left: -267px;width: 237px;"></ul>
@@ -18,20 +18,21 @@
 [img-8]: ./images/gtst/gtst2000/8.png
 [img-9]: ./images/gtst/gtst2000/9.png
 
-## 샘플 프로젝트 구성
+## Sample project configuration
 
-샘플 프로젝트의 기술 요소들은 다음과 같이 구성되어 있습니다.
+The basic technologies of the sample project are organized as follows.
+
 * **Front-End**
-     * 기반기술 : HTML, CSS, Javascript
-     * 프레임워크 : Natural-JS
+     * language : HTML, CSS, Javascript
+     * Framework : Natural-JS
 * **Back-End**
-     * 기반기술 : JAVA
-     * 프레임워크 : Spring Boot
+     * language : JAVA
+     * Framework : Spring Boot
      * DB : HSQLDB
 
-## 설치
+## Installation
 
-### 1. 이클립스 설치
+### 1. Install Eclipse
 [이클립스][eclipse] 사이트에서 Eclipse IDE for Java EE Developers를 [다운로드][eclipse-download] 받아 압축을 해제하고 eclipse.exe 파일을 실행합니다.
 >이클립스를 구동하기 위해서는 [Java SE Development Kit][jdk] 이 OS 에 설치되어 있어야 합니다.
 
@@ -44,7 +45,7 @@
 
 설치가 완료되면 이클립스를 재기동합니다.
 
-### 2. 샘플 프로젝트 내려받기
+### 2. Download the sample project
 이클립스 설치가 완료되었으면 이클립스에서 다음 순서대로 실행합니다.
 
 먼저 아래 URL을 선택 후 복사(Ctrl + C)합니다. 복사만 해 두면 됩니다.
@@ -101,5 +102,5 @@ http://localhost/index.html
 ```
 현재 보고 있는 Natural-JS 사이트가 정상적으로 표시되면 설치가 완료된 것입니다.
 
-## 예제
+## Examples
 현재 보고 있는 Natural-JS 홈페이지의 예제는 서버와 연동되어 있지 않는 클라이언트 소스 예제이지만 `natural-js-spring-boot` 프로젝트의 예제는 서버(DB)와 연동되어 CRUD(생성, 조회, 수정, 삭제) 가 물리적으로 처리되는 예제입니다.

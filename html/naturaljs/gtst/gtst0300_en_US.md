@@ -1,14 +1,13 @@
 Retrieving / Modifying Data with Grid
 ===
 
-Grid 로 생성/조회/수정/삭제를 처리 하기 위해 조회조건 영역과 조회 결과 Grid 로 이루어진 프로그램을 개발 해 보겠습니다.
+In order to process creation / retrieval / modification / deletion with Grid, we will develop a program consisting of the search condition area and the search result Grid.
 
-코드 데이터들은 [Select](#cmVmcjA0MDYlMjRTZWxlY3QkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDQwNi5odG1s)(N.select) 컴포넌트를 사용하여 데이터를 바인딩 하고 [Form](#cmVmcjA0MDclMjRGb3JtJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjA0MDcuaHRtbA==)(N.form) 컴포넌트로 조회조건 영역을 폼으로 생성하고  [Grid](#cmVmcjA0MDklMjRHcmlkJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjA0MDkuaHRtbA==)(N.grid) 컴포넌트로 입력/조회/수정/삭제 할 수 있는 그리드를 생성 할 것 입니다.
-버튼 들은 [Button](#cmVmcjA0MDIlMjRCdXR0b24kaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDQwMi5odG1s)(N.button) 컴포넌트를 사용 합니다.
+Code data will use [Select](#cmVmcjA0MDYlMjRTZWxlY3QkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDQwNi5odG1s)(N.select) component to bind data, [Form](#cmVmcjA0MDclMjRGb3JtJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjA0MDcuaHRtbA==)(N.form) component will create search condition area as form, and [Grid](#cmVmcjA0MDklMjRHcmlkJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjA0MDkuaHRtbA==)(N.grid) component will create a grid that can be input / viewed / modified / deleted. Buttons use the[Button](#cmVmcjA0MDIlMjRCdXR0b24kaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDQwMi5odG1s)(N.button) component.
 
-[웹 어플리케이션 기본 프레임 만들기](#Z3RzdDAyMDAlMjQlRUMlOUIlQjklMjAlRUMlOTYlQjQlRUQlOTQlOEMlRUIlQTYlQUMlRUMlQkMlODAlRUMlOUQlQjQlRUMlODUlOTglMjAlRUElQjglQjAlRUIlQjMlQjglMjAlRUQlOTQlODQlRUIlQTAlODglRUMlOUUlODQlMjAlRUIlQTclOEMlRUIlOTMlQTQlRUElQjglQjAkaHRtbCUyRm5hdHVyYWxqcyUyRmd0c3QlMkZndHN0MDIwMC5odG1s) 에서 생성한 기본 프레임에 메뉴를 추가하여 실습을 진행 해 보겠습니다.
+Let's practice by adding a menu to the basic frame created in [Create a web application base frame](#Z3RzdDAyMDAlMjRDcmVhdGUlMjBhJTIwd2ViJTIwYXBwbGljYXRpb24lMjBiYXNlJTIwZnJhbWUkaHRtbCUyRm5hdHVyYWxqcyUyRmd0c3QlMkZndHN0MDIwMC5odG1s).
 
-먼저 **/html/index/lefter.html** 파일을 열어 다음과 같이 ul 태그의 마지막에 li 요소를 추가 하고 지금부터 작업 할 메뉴링크(page6.html)를 추가 해 줍니다.
+First, open the  **/html/index/lefter.html** file, add the li element to the end of the ul tag as follows, and add a menu link(page6.html) to work from now on.
 
 ```
 ...
@@ -18,21 +17,21 @@ Grid 로 생성/조회/수정/삭제를 처리 하기 위해 조회조건 영역
     <li><a href="html/contents/page3.html" data-docid="page3">MENU-3</a></li>
     <li><a href="html/contents/page4.html" data-docid="page4">MENU-4</a></li>
     <li><a href="html/contents/page5.html" data-docid="page5">MENU-5</a></li>
-    
+
     <li><a href="html/contents/page6.html" data-docid="page6">Grid CRUD</a></li>
-    
+
 </ul>
 ...
 ```
 
-메뉴 추가가 끝났으면 데이터 조회 및 저장을 실행 하기 위해 [data.json](html/naturaljs/gtst/data/data.json) 파일을 다운로드하여 프로젝트의 Context Root 에 저장 합니다.
-<p class="alert">data.json 파일 링크를 클릭 했는데 다운로드 되지 않으면 data.json 링크를 마우스 오른버튼 클릭하면 표시되는 컨텍스트 메뉴에서 [다른 이름으로 링크 저장]을 클릭 해 주세요.</p>
-<p class="alert">이 학습서는 Web Server 에서 구동 되는 예제로 조회 파라미터나 저장/수정/삭제 된 데이터가 저장 되지 않습니다. 서버로 전송 되는 파라미터만 개발자도구의 네트워크 탭에서 확인 바랍니다. 서버(DBMS)와 연동 되는 예제는 <a href="#Z3RzdDIwMDAlMjQlRUMlODMlOTglRUQlOTQlOEMlMjAlRUQlOTQlODQlRUIlQTElOUMlRUMlQTAlOUQlRUQlOEElQjglRUIlQTElOUMlMjAlRUMlOEIlOUMlRUMlOUUlOTElRUQlOTUlOTglRUElQjglQjAkaHRtbCUyRm5hdHVyYWxqcyUyRmd0c3QlMkZndHN0MjAwMC5odG1s">샘플 프로젝트로 시작하기</a> 문서를 참고 바랍니다.</p>
+When the menu addition is complete, download the [data.json](html/naturaljs/gtst/data/data.json) file and save it in the context root of your project for the execute data searching and saving.
+<p class="alert">If the data.json file is not downloaded when you click the link, right-click on the data.json link, then click [Save Link As].</p>
+<p class="alert">This tutorial is an example running on the Web Server, and the inquiry parameter or saved / modified / deleted data is not saved. Please check only the parameters transmitted to the server in the network tab of the developer tool. For an example that works with a server(DBMS), please refer to the document <a href="#Z3RzdDIwMDAlMjRHZXR0aW5nJTIwU3RhcnRlZCUyMHdpdGglMjBTYW1wbGUlMjBwcm9qZWN0JGh0bWwlMkZuYXR1cmFsanMlMkZndHN0JTJGZ3RzdDIwMDAuaHRtbA==">Getting Started with Sample project</a>.</p>
 
 
-##View 영역 코딩
+##Coding the view area
 
-**/html/contents/page6.html** 파일을 생성하고 다음과 같이 코드를 작성 합니다.
+Create the **/html/contents/page6.html** file and write the code as follows.
 
 ```
 <!-- Style -->
@@ -40,7 +39,7 @@ Grid 로 생성/조회/수정/삭제를 처리 하기 위해 조회조건 영역
     .page6 {
         padding: 15px;
     }
-    
+
     .page6 .search-conditions {
         border: 1px solid #000;
         padding: 10px;
@@ -52,12 +51,12 @@ Grid 로 생성/조회/수정/삭제를 처리 하기 위해 조회조건 영역
     .page6 .search-conditions select {
         margin-left: 10px;
     }
-    
+
     .page6 .buttons {
         padding: 10px;
         text-align: right;
     }
-    
+
     /* Grid Style */
     .page6 .result input {
         width: 90%;
@@ -69,7 +68,7 @@ Grid 로 생성/조회/수정/삭제를 처리 하기 위해 조회조건 영역
         table-layout: fixed;
         width: 100%;
     }
-    .page6 table th, 
+    .page6 table th,
     .page6 table td {
         border: 1px solid #000;
         box-sizing: border-box;
@@ -90,7 +89,7 @@ Grid 로 생성/조회/수정/삭제를 처리 하기 위해 조회조건 영역
         <a id="btnSave" href="#" data-opts='{ "color" : "gray" }'>Save</a>
         <a id="btnSearch" href="#">Retrieve</a>
     </div>
-    
+
     <div class="result">
     	<table class="grid">
     		<colgroup>
@@ -150,18 +149,19 @@ Grid 로 생성/조회/수정/삭제를 처리 하기 위해 조회조건 영역
 </script>
 ```
 
-코드가 좀 기네요? Style, View 영역과 Controller 영역을 구분 해 보면 간단 해 집니다. 30초만 집중 해서 봅시다. 매트릭스 네오처럼 코드들이 한눈에 들어오지 않나요? -.-; 
+The code is long? It becomes simple by separating Style, View area and Controller area. Let's focus on just 30 seconds. Isn't the code at a glance like Matrix Neo? -.-;
 
-Style 영역을 공통 css 파일로 통합 하면 위 Style 영역은 없어도 되는데 Natural-JS 의 컴포넌트에 정의 된 context 요소의 스타일이 그대로 적용 되는것을 간단하게 보기 위해서 페이지에 Style 을 정의 했습니다.
-<p class="alert">Natural-JS 로 프로젝트를 진행 할 때는 HTML 과 CSS 로 화면을 퍼블리싱 해 주는 퍼블리셔와 함께하면 UI 품질과 생산성을 동시에 얻을 수 있습니다. 퍼블리셔는 Natural-JS 를 위한 별도의 학습이 필요 없고 웹 표준에 맞춰 퍼블리싱 하면 됩니다.</p>
+If the above style area is integrated into a common css file, the style area is unnecessary. However, to make it simple to see that the style of the context element defined in the Natural-JS component is applied as it is, the Style is defined on the page.
+<p class="alert">If you collaborating with web publishers when working on a project with Natural-JS can simultaneously improve UI quality and development productivity. Web publishers do not need to learn Natural-JS, they just publish according to web standards.</p>
 
-위 코드에서 집중해야 할 부분은 View 영역 입니다. Controller 부분은 일부러 틀만 만들고 비워 놓았습니다. 하나씩 채워가면서 진행 하려구요.
+The part to focus on in the code above is the view area. Controller deliberately made a frame and left it empty. I'm going to fill in one by one.
 
-View 의 하위 요소 중 첫번째에 있는 **.search-conditions** 요소는 검색조건을 입력 할 검색 박스 입니다. 그 아래 **.buttons** 요소에는 버튼들이 배치 되고 **.result** 요소에는 조회 된 결과 데이터를 Grid 로 표현하기 위해 N.grid 의 context 요소인 Table 을 만들었습니다. N.grid 컴포넌트를 적용하려면 반드시 그리드로 만들어질 **table** 태그가 있어야 하고 table 태그에 **thead**(그리드 헤더) 와 **tbody**(그리드 바디) 요소가 있어야 합니다. N.grid 의 행 들은 **tbody** 요소를 그대로 복제하여 데이터의 행 수 만큼 표시 해 줍니다. 각 컴포넌트에 대한 상세한 내용은 관련 문서를 참고 하기 바랍니다.
+The **.search-conditions** element at the first of the sub-elements on View is a search form where you can enter search conditions. Below, buttons are placed in the **.buttons** element, and in the **.result** element, a table, the context element of N.grid, is created to express the searched result data in a grid. To apply N.grid component, **table** tag to be created as grid must be written, and **thead** (grid header) and **tbody** tag must be written in table tag. The rows of N.grid represent the **tbody** element by duplicating as much as the length of the list data.
+For more information about each component, please refer to the related document.
 
-##Controller 영역 코딩
+##Controller area coding
 
-Controller 영역을 보면 이전 예제들과 다르게 cont 변수에 Controller Object 인스턴스를 담는 코드와 이를 함수로 감싸서 바로 실행하는 코드가 작성 되어 있습니다.
+Looking at the Controller area, unlike the previous examples, the code that contains the Controller Object instance in the cont variable and the code that wraps it in a function and executes it are written.
 
 ```
 (function() {
@@ -173,30 +173,30 @@ Controller 영역을 보면 이전 예제들과 다르게 cont 변수에 Control
 })();
 ```
 
-이유는 Function Scope 에 상관 없이 Contoller(N.cont) Object 에 접근하기 위해서 입니다.
-위와 같이 Controller 를 정의하하고 cont 변수를 선언하고 N().cont() 함수를 실행하면 함수의 어떤 위치에서나 cont 변수로 Controller Object 에 접근 할 수 있습니다.
-<p class="alert">Natural-JS 로 프로젝트를 진행하다 보면 view 나 request, caller 등의 Controller 오브젝트에 담겨있는 고유 객체들을 참고하거나 페이지 전역변수를 담기 위해 Controller Object 에 접근해야 할 때가 많이 있습니다.</p>
-<p class="alert">SPA 로 메뉴 컨텐츠 들을 개발 할 때는 Controller Object 가 해당 페이지의 최상위 객체라 생각하고 페이지 별 전역변수를 정의 해야 합니다. 그렇게 하지 않고 window 객체에 전역변수를 무분별하게 선언 하면 프로그램을 쓰면 쓸수록 느려 지는 문제가 발생 합니다. Natural-JS 는 Controller Object 에 대해서 리소스 관리를 해 주지만 window 객체에 바인딩 되어 있는 전역 변수들에 대해서는 관여 하지 않습니다.</p>
+The reason is to access the Contoller(N.cont) Object regardless of the function scope.
+Define Controller as above, declare cont variable and execute N().cont() function, you can access Controller Object with cont variable at any position of function.
+<p class="alert">When working on a project with Natural-JS, there are many times when you need to access the Controller Object to refer to the constant objects contained in the Controller object such as view, request, and caller, or to save or reference the page global variables.</p>
+<p class="alert">When developing page contents with SPA, think that the Controller Object is the top-level object of the page and define global variables for each page. If you don't do so, declaring a global variable in the window object can cause data is twisted or a large increase in memory usage. Natural-JS manages the resource for the Controller Object, but does not participate in global variables bound to the window object.</p>
 
-###컴포넌트 초기화
-이제 View 에서 선언 한 각 요소들에 다음과 같은 컴포넌트를 적용하여 생명을 불어 넣어 보겠습니다.
+###Component initialization
+Now, let's breathe the life by applying the following components to each element declared in View.
 
  * .search-conditions : **N.form**
  * .search-conditions #gender : **N.select**
- 
+
  * .buttons #btnAdd : **N.button**
  * .buttons #btnDelete : **N.button**
  * .buttons #btnSave : **N.button**
  * .buttons #btnSearch : **N.button**
- 
+
  * .result .grid : **N.grid**
  * .result .grid #eyeColor : **N.select**
- 
-#### N.select 초기화
 
-**N.select** 컴포넌트로 **.search-conditions #gender** 요소와  **.result .grid #eyeColor** 요소에 코드 데이터 들을 바인딩 해 보겠습니다.
+#### N.select initialization
 
-initComponents 함수에 다음 코드를 작성 합니다.
+Let's bind the code data to the  **.search-conditions #gender** element and the **.result .grid #eyeColor** element with the **N.select** component.
+
+Write the following code in the initComponents function.
 
 ```
 ...
@@ -208,7 +208,7 @@ initComponents : function() {
     ]).select({
         context : N("#eyeColor", cont.view)
     }).bind();
-    
+
     cont.gender = N([
         { key: "female", val: "GENDER_01" },
         { key: "male", val: "GENDER_02"}
@@ -219,13 +219,13 @@ initComponents : function() {
 ...
 ```
 
-<p class="alert">Natural-JS 의 모든 함수/메서드 들은 N([]).select.bind() 와 같이 명령을 연달아 실행 할 수 있는 메서드체이닝을 지원 합니다.</a> 
+<p class="alert">All functions and methods of Natural-JS support method chaining that can execute commands one after another, such as N([]).select.bind().</a>
 
-N.select 와 같은 데이터 관련 컴포넌트들은 컴포넌트 초기화와 데이터 바인딩이 분리 되어 있습니다. ```var grid = N([object, object, ...]).grid()``` 명령을 실행하면 컴포넌트 인스턴스가 반환되고 컴포넌트 인스턴스에서 bind() 메서드를 실행하면 데이터가 바인딩 되고 add() 메서드를 호출 하면 새로운 행 데이터가 생성 됩니다.
-  
+Data-related components such as N.select are separated from component initialization and data binding. ```var grid = N([object, object, ...]).grid()``` The "a" command returns the component instance, the bind() method on the component instance binds the data, and the add() method calls creates new row data.
+
 N() 함수의 첫번째 인자에 JSON(array[object]) 타입의 데이터를 입력하고 bind() 메서드를 호출하면 인스턴스 생성 시 입력 된 데이터가 바인딩 되고 데이터를 동적으로 바인딩 해야 한다면 N() 함수에 ```var grid = N([]).grid()``` 처럼 비어있는 array 를 입력하고 bind() 메서드의 첫번째 인자에 json array 타입의 데이터를 입력 하면 됩니다.
 
-N.select 에 바인딩 할 데이터를 서버에서 조회 해 온다면 다음 코드와 비슷하게 변경하면 됩니다. 
+N.select 에 바인딩 할 데이터를 서버에서 조회 해 온다면 다음 코드와 비슷하게 변경하면 됩니다.
 
 ```
 ...
@@ -240,7 +240,7 @@ initComponents : function() {
 		key : "option 태그의 text 로 표시 될 프로퍼티명",
 		val : "option 태그의 value 속성으로 표시 될 프로퍼티명"
 	});
-    
+
    N.comm("조회URL").submit(function(data) {
    		cont.eyeColor.bind(data["eyeColor 데이터 리스트"]);
    		cont.gender.bind(data["gender 데이터 리스트"]);
@@ -257,7 +257,7 @@ initComponents : function() {
 ...
 initComponents : function() {
    ...
-   
+
    cont.form = N([]).form({
 		context : N(".search-conditions", cont.view)
 	}).add();
@@ -303,13 +303,13 @@ initComponents : function() {
 ...
 ```
 
-앞에서 설명 한 N.form 과 옵션만 다르고 선언 방식이 비슷합니다. 
+앞에서 설명 한 N.form 과 옵션만 다르고 선언 방식이 비슷합니다.
 
-N.grid 는 비어있는 array 객체를 바인딩 하면 "조회를 하지 않았거나 조회된 데이터가 없습니다." 라는 메시지를 그리드에 표시 해 줍니다. 페이지 로딩 완료 후 서버에서 조회 한 데이터를 그리드에 즉시 바인딩 해야 되는 경우라면 컴포넌트 인스턴스 생성만 하면 되지만 사용자가 조회를 직접 실행 할 때는 기본 행이 아무 의미없이 표시 되니 bind() 메서드를 호출 해서 자연스러운 그리드의 모양을 만들어 주세요. 
+N.grid 는 비어있는 array 객체를 바인딩 하면 "조회를 하지 않았거나 조회된 데이터가 없습니다." 라는 메시지를 그리드에 표시 해 줍니다. 페이지 로딩 완료 후 서버에서 조회 한 데이터를 그리드에 즉시 바인딩 해야 되는 경우라면 컴포넌트 인스턴스 생성만 하면 되지만 사용자가 조회를 직접 실행 할 때는 기본 행이 아무 의미없이 표시 되니 bind() 메서드를 호출 해서 자연스러운 그리드의 모양을 만들어 주세요.
 
 ###이벤트 바인딩
 
-이벤트 바인딩은 jQuery 에서 제공하는 기능을 사용 합니다. 
+이벤트 바인딩은 jQuery 에서 제공하는 기능을 사용 합니다.
 
 #### [Retrieve] 버튼 이벤트
 
@@ -335,8 +335,8 @@ bindEvents : function() {
 조회 버튼의 이벤트 핸들러는 다음과 같은 로직을 실행 합니다.
  1. 검색 폼(cont.form)의 데이터를 파라미터로 서버에서 데이터 조회
  2. 그리드(cont.grid)에 조회한 데이터를 바인딩
- 
-```cont.form.validate()``` 메서드는 검색 폼의 입력 요소의 태그에 선언 된 data-validate 옵션([Form](#cmVmcjA0MDclMjRGb3JtJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjA0MDcuaHRtbA==) 문서의 [선언형옵션] 참고)을 한번에 체크하여 입력 데이터에 대한 유효성 검증을 실행하는 메서드 입니다. 유효성 검증에 모두 통과 해야만 true 를 반환해서 위 코드와 같이 if 조건으로 선언해 놓으면 "필수 입력 체크" 등의 귀찮은 작업들을 편리하게 처리 할 수 있습니다.  
+
+```cont.form.validate()``` 메서드는 검색 폼의 입력 요소의 태그에 선언 된 data-validate 옵션([Form](#cmVmcjA0MDclMjRGb3JtJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjA0MDcuaHRtbA==) 문서의 [선언형옵션] 참고)을 한번에 체크하여 입력 데이터에 대한 유효성 검증을 실행하는 메서드 입니다. 유효성 검증에 모두 통과 해야만 true 를 반환해서 위 코드와 같이 if 조건으로 선언해 놓으면 "필수 입력 체크" 등의 귀찮은 작업들을 편리하게 처리 할 수 있습니다.
 그리고 구문의 끝 부분에 .button() 메서드를 실행 해서 이벤트 타겟 요소에 Button(N.button) 컴포넌를 적용 했습니다.
 
 #### [New] 버튼 이벤트
@@ -385,12 +385,12 @@ bindEvents : function() {
 	...
 	N("#btnSave", cont.view).click(function(e) {
 		e.preventDefault();
-		
+
 		if(cont.grid.data("modified").length === 0) {
 			N.notify.add("No data has been changed.");
 			return false;
 		}
-		
+
 		if(cont.grid.validate()) {
 			N(window).alert({
 				msg : "Do you want to save?",
@@ -417,7 +417,7 @@ bindEvents : function() {
 
 2. 추가, 수정 된 입력 값에 대한 유효성 체크 :  ```if(cont.grid.validate()) {```
 
-3. 저장 할 것인지 물어보는 Confirm 다이얼로그 표시: 
+3. 저장 할 것인지 물어보는 Confirm 다이얼로그 표시:
 ```
 ...
 N(window).alert({
@@ -437,8 +437,8 @@ N(window).alert({
 
 다음과 같은 화면이 표시 되면 실습 성공!
 
-![완료 화면](images/gtst/gtst0300/0.png) 
+![완료 화면](images/gtst/gtst0300/0.png)
 
 전체 소스코드는 [여기](html/naturaljs/gtst/codes/natural_js_gtst0300.zip) 에서 다운로드 할 수 있습니다.
 
-학습을 계속 하기 원한다면 예제 메뉴에 있는 여러 예제들의 소스코드들을 분석 해 보기 바랍니다. 
+학습을 계속 하기 원한다면 예제 메뉴에 있는 여러 예제들의 소스코드들을 분석 해 보기 바랍니다.

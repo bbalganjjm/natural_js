@@ -20,12 +20,12 @@
 
 ## 샘플 프로젝트 구성
 
-샘플 프로젝트의 기술 요소들은 다음과 같이 구성되어 있습니다.
+샘플 프로젝트의 기반 기술은 다음과 같이 구성되어 있습니다.
 * **Front-End**
-     * 기반기술 : HTML, CSS, Javascript
+     * 언어 : HTML, CSS, Javascript
      * 프레임워크 : Natural-JS
 * **Back-End**
-     * 기반기술 : JAVA
+     * 언어 : JAVA
      * 프레임워크 : Spring Boot
      * DB : HSQLDB
 
