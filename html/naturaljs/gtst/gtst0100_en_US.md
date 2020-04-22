@@ -156,8 +156,7 @@ To receive data temporarily, create and save a data file (data.json) composed of
     "longitude": 87.110498,
     "greeting": "Hello, Dean Stanley! You have 1 unread messages.",
     "favoriteFruit": "strawberry"
-  },
-  {
+  }, {
     "key": "53e21cba47868d69889d7910",
     "index": 1,
     "guid": "9b855e26-2903-4b9a-b04a-e96544db2543",
@@ -178,8 +177,7 @@ To receive data temporarily, create and save a data file (data.json) composed of
     "longitude": -153.640872,
     "greeting": "Hello, Howard Kramer! You have 9 unread messages.",
     "favoriteFruit": "apple"
-  },
-  {
+  }, {
     "key": "53e21cba7a3cbdd773b7449d",
     "index": 2,
     "guid": "95b45a67-64ae-4bd6-a61f-c9226cfdf5af",
