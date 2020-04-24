@@ -223,7 +223,7 @@ initComponents : function() {
 
 N.select 와 같은 데이터 관련 컴포넌트들은 컴포넌트 초기화와 데이터 바인딩이 분리 되어 있습니다. ```var grid = N([object, object, ...]).grid()``` 명령을 실행하면 컴포넌트 인스턴스가 반환되고 컴포넌트 인스턴스에서 bind() 메서드를 실행하면 데이터가 바인딩 되고 add() 메서드를 호출 하면 새로운 행 데이터가 생성 됩니다.
 
-N() 함수의 첫번째 인자에 JSON(array[object]) 타입의 데이터를 입력하고 bind() 메서드를 호출하면 인스턴스 생성 시 입력 된 데이터가 바인딩 되고 데이터를 동적으로 바인딩 해야 한다면 N() 함수에 ```var grid = N([]).grid()``` 처럼 비어있는 array 를 입력하고 bind() 메서드의 첫번째 인자에 json array 타입의 데이터를 입력 하면 됩니다.
+N() 함수의 첫번째 인자에 JSON Array 타입의 데이터를 입력 한 다음 bind() 메서드를 호출하면 인스턴스 생성 시 입력 된 데이터가 바인딩 됩니다. 데이터를 동적으로 바인딩 해야 한다면 N() 함수에 ```var grid = N([]).grid()``` 처럼 비어있는 array 를 입력하여 컴포넌트를 초기화 하고 bind() 메서드의 첫번째 인자에 json array 타입의 데이터를 입력 하여 호출하면 됩니다.
 
 N.select 에 바인딩 할 데이터를 서버에서 조회 해 온다면 다음 코드와 비슷하게 변경하면 됩니다.
 
@@ -232,18 +232,18 @@ N.select 에 바인딩 할 데이터를 서버에서 조회 해 온다면 다음
 initComponents : function() {
    cont.eyeColor = N([]).select({
 		context : N("#eyeColor", cont.view),
-		key : "option 태그의 text 로 표시 될 프로퍼티명",
-		val : "option 태그의 value 속성으로 표시 될 프로퍼티명"
+		key : "codeName", // option 태그의 text 로 표시 될 프로퍼티명
+		val : "codeValue" // option 태그의 value 속성으로 표시 될 프로퍼티명
 	});
    cont.gender = N([]).select({
 		context : N("#gender", cont.view),
-		key : "option 태그의 text 로 표시 될 프로퍼티명",
-		val : "option 태그의 value 속성으로 표시 될 프로퍼티명"
+		key : "codeName",
+		val : "codeValue"
 	});
 
-   N.comm("조회URL").submit(function(data) {
-   		cont.eyeColor.bind(data["eyeColor 데이터 리스트"]);
-   		cont.gender.bind(data["gender 데이터 리스트"]);
+   N.comm("data/url.json").submit(function(data) {
+   		cont.eyeColor.bind(data["eyeColorList"]);
+      cont.gender.bind(data["genderList"]);
    })
 },
 ...
@@ -265,7 +265,7 @@ initComponents : function() {
 ...
 ```
 
-**.search-conditions** 요소에 N.form 컴포넌틀를 적용하고 .add() 메서드를 호출하여 비어있는 데이터를 생성 했습니다. .add() 메서드를 호출 했기 때문에 cont.form 인스턴스에 다음과 같은 데이터가 생성 되었을 것입니다. ```cont.form.data()``` 메서드를 실행하면 확인 할 수 있습니다.
+**.search-conditions** 요소에 N.form 컴포넌틀를 적용하고 add() 메서드를 호출하여 비어있는 데이터를 생성 했습니다. add() 메서드를 호출 했기 때문에 cont.form 인스턴스에 다음과 같은 데이터가 생성 되었을 것입니다. ```cont.form.data()``` 메서드를 실행하면 확인 할 수 있습니다.
 
 ```
 [{
@@ -303,11 +303,11 @@ initComponents : function() {
 ...
 ```
 
-앞에서 설명 한 N.form 과 옵션만 다르고 선언 방식이 비슷합니다.
+앞에서 설명한 N.form 과 옵션만 다르고 선언 방식이 비슷합니다.
 
 N.grid 는 비어있는 array 객체를 바인딩 하면 "조회를 하지 않았거나 조회된 데이터가 없습니다." 라는 메시지를 그리드에 표시 해 줍니다. 페이지 로딩 완료 후 서버에서 조회 한 데이터를 그리드에 즉시 바인딩 해야 되는 경우라면 컴포넌트 인스턴스 생성만 하면 되지만 사용자가 조회를 직접 실행 할 때는 기본 행이 아무 의미없이 표시 되니 bind() 메서드를 호출 해서 자연스러운 그리드의 모양을 만들어 주세요.
 
-###이벤트 바인딩
+### 이벤트 바인딩
 
 이벤트 바인딩은 jQuery 에서 제공하는 기능을 사용 합니다.
 
@@ -330,13 +330,13 @@ bindEvents : function() {
 }
 ```
 
-<p class="alert">위 코드 에서 N.comm 의 옵션 중 type 은 웹 서버에 POST 방식으로 요청 할 수 없어서 임의로 정의 한 옵션 입니다. WAS 나 PHP 와 연동하여 사용 할 경우에는 natural.config.js 에 type 의 기본값이 "POST" 로 정의 되어 있으니 type 옵션을 제거 바랍니다. type 옵션 에 대한 자세한 내용은 <a href="#cmVmcjAyMDQlMjRDb21tdW5pY2F0b3IucmVxdWVzdCRodG1sJTJGbmF0dXJhbGpzJTJGcmVmciUyRnJlZnIwMjA0Lmh0bWw=">Communicator.request</a> 문서의 [기본옵션] 탭을 참고 해 주세요.</p>
+<p class="alert">위 코드 에서 N.comm 의 옵션들 중 type 프로퍼티는 웹 서버에 POST 방식으로 요청 할 수 없어서 임의로 정의 한 옵션 입니다. 서버가 POST 요청을 처리 할 수 있는 환경이라면 natural.config.js 에 type 의 기본값이 "POST" 로 정의 되어 있으니 type 옵션을 제거 바랍니다. type 옵션 에 대한 자세한 내용은 <a href="#cmVmcjAyMDQlMjRDb21tdW5pY2F0b3IucmVxdWVzdCRodG1sJTJGbmF0dXJhbGpzJTJGcmVmciUyRnJlZnIwMjA0Lmh0bWw=">Communicator.request</a> 문서의 [기본옵션] 탭을 참고 해 주세요.</p>
 
 조회 버튼의 이벤트 핸들러는 다음과 같은 로직을 실행 합니다.
  1. 검색 폼(cont.form)의 데이터를 파라미터로 서버에서 데이터 조회
  2. 그리드(cont.grid)에 조회한 데이터를 바인딩
 
-```cont.form.validate()``` 메서드는 검색 폼의 입력 요소의 태그에 선언 된 data-validate 옵션([Form](#cmVmcjA0MDclMjRGb3JtJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjA0MDcuaHRtbA==) 문서의 [선언형옵션] 참고)을 한번에 체크하여 입력 데이터에 대한 유효성 검증을 실행하는 메서드 입니다. 유효성 검증에 모두 통과 해야만 true 를 반환해서 위 코드와 같이 if 조건으로 선언해 놓으면 "필수 입력 체크" 등의 귀찮은 작업들을 편리하게 처리 할 수 있습니다.
+```cont.form.validate()``` 메서드는 검색 폼의 입력 요소의 태그에 선언 된 data-validate 옵션([Form](#cmVmcjA0MDclMjRGb3JtJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjA0MDcuaHRtbA==) 문서의 [선언형옵션] 참고)을 한번에 체크하여 입력 데이터에 대한 유효성 검증을 실행하는 메서드 입니다. validate() 메서드는 유효성 검증을 모두 통과 해야만 true 를 반환하므로 위 코드와 같이 if 조건으로 선언해 놓으면 "필수 입력 체크" 등의 귀찮은 작업들을 편리하게 처리 할 수 있습니다.
 그리고 구문의 끝 부분에 .button() 메서드를 실행 해서 이벤트 타겟 요소에 Button(N.button) 컴포넌를 적용 했습니다.
 
 #### [New] 버튼 이벤트
@@ -417,7 +417,7 @@ bindEvents : function() {
 
 2. 추가, 수정 된 입력 값에 대한 유효성 체크 :  ```if(cont.grid.validate()) {```
 
-3. 저장 할 것인지 물어보는 Confirm 다이얼로그 표시:
+3. 저장 할 것인지 물어보는 Confirm 다이얼로그 표시 :
 ```
 ...
 N(window).alert({
@@ -426,16 +426,14 @@ N(window).alert({
 ...
 ```
 
-4. N.comm 의 파라미터로 그리드의 변경 된 데이터만 추출(```cont.grid.data("modified")```)하여 서버에 전송.
-<p class="alert">위 코드 에서 N.comm 의 옵션 중 type 은 웹 서버에 POST 방식으로 요청 할 수 없어서 임의로 정의 한 옵션 입니다. WAS 나 PHP 와 연동하여 사용 할 경우에는 natural.config.js 에 type 의 기본값이 "POST" 로 정의 되어 있으니 type 옵션을 제거 바랍니다. type 옵션 에 대한 자세한 내용은 <a href="#cmVmcjAyMDQlMjRDb21tdW5pY2F0b3IucmVxdWVzdCRodG1sJTJGbmF0dXJhbGpzJTJGcmVmciUyRnJlZnIwMjA0Lmh0bWw=">Communicator.request</a> 문서의 [기본옵션] 탭을 참고 해 주세요.</p>
-<p class="alert">서버로 object 가 아닌 array[object] 형태의 파라미터를 전달 하려면 dataIsArray 을 활성 화 해 주어야 합니다. dataIsArray 옵션에 대한 자세한 내용은 <a href="#cmVmcjAyMDQlMjRDb21tdW5pY2F0b3IucmVxdWVzdCRodG1sJTJGbmF0dXJhbGpzJTJGcmVmciUyRnJlZnIwMjA0Lmh0bWw=">Communicator.request</a> 문서의 [기본옵션] 탭을 참고 해 주세요.</p>
-5. 저장 완료 후 N.notify 컴포넌트로 메시지 표시
-<p class="alert">입력요소의 값을 변경하거나 cont.grid.val() 메서드로 데이터를 변경하면 <strong>rowStatus</strong> 프로퍼티가 생성되고, 입력은 "insert", 수정은 "update", 삭제는 "delete" 값이 입력 됩니다. <strong>서버 에서는</strong> 행 데이터 객체 마다 정의 되어 있는 <strong>rowStatus 값으로 입력/수정/삭제 를 구분 해서 처리</strong> 하면 됩니다.</p>
-6. 조회버튼을 클릭 하여 변경 된 데이터 재 조회
+4. N.comm 을 이용하여 그리드의 변경 된 데이터(```cont.grid.data("modified")```)를 서버파라미터로 전송.
+<p class="alert">위 코드 에서 N.comm 의 옵션들 중 "type" 은 웹 서버에 POST 방식으로 요청 할 수 없어서 임의로 정의 한 옵션 입니다. 서버가 POST 요청을 처리 할 수 있는 환경이라면 natural.config.js 에 type 의 기본값이 "POST" 로 정의 되어 있으니 type 옵션을 제거 바랍니다. type 옵션 에 대한 자세한 내용은 <a href="#cmVmcjAyMDQlMjRDb21tdW5pY2F0b3IucmVxdWVzdCRodG1sJTJGbmF0dXJhbGpzJTJGcmVmciUyRnJlZnIwMjA0Lmh0bWw=">Communicator.request</a> 문서의 [기본옵션] 탭을 참고 해 주세요.</p>
+<p class="alert">서버로 object 가 아닌 array[object] 형태의 파라미터를 전달 하려면 dataIsArray 옵션을 활성화 해 주어야 합니다. dataIsArray 옵션에 대한 자세한 내용은 <a href="#cmVmcjAyMDQlMjRDb21tdW5pY2F0b3IucmVxdWVzdCRodG1sJTJGbmF0dXJhbGpzJTJGcmVmciUyRnJlZnIwMjA0Lmh0bWw=">Communicator.request</a> 문서의 [기본옵션] 탭을 참고 해 주세요.</p>
+5. 저장 완료 후 N.notify 컴포넌트를 사용하여 메시지 표시
+<p class="alert">입력요소의 값을 변경하거나 cont.grid.val() 메서드로 데이터를 변경하면 <strong>rowStatus</strong> 프로퍼티가 생성 됩니다. rowStatus 값은 "insert", "update", "delete" 중 하나가 됩니다. <strong>서버 에서는</strong> 행 데이터 객체 마다 정의 되어 있는 <strong>rowStatus 값으로 입력/수정/삭제 를 구분 해서 처리</strong> 하면 됩니다.</p>
+6. Retrieve 버튼을 클릭 하여 변경 된 데이터 재 조회
 
-웹 서버에 지금까지 작성한 소스 파일들을 배포한 다음 **/index.html** 에 접속 한 다음 [Grid CRUD] 메뉴를 클릭하면 지금까지 작성한 코드를 실행 해 볼 수 있습니다.
-
-다음과 같은 화면이 표시 되면 실습 성공!
+지금까지 작성한 소스 파일들을 웹 서버에 배포한 다음 **/index.html** 에 접속 했을때 다음과 같은 화면이 표시 되면 실습을 성공 한 것 입니다.
 
 ![완료 화면](images/gtst/gtst0300/0.png)
 
