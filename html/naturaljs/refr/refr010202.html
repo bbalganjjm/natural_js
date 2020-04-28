@@ -6,14 +6,71 @@
     </h2>
     <table class="api form">
         <tr>
-            <th style="width: 30%;">Property</th>
-            <th style="width: 70%;">Description</th>
+            <th style="width: 25%;">Property</th>
+            <th style="width: 15%;">Default Value</th>
+            <th style="width: 60%;">Description</th>
         </tr>
         <tr>
-            <td></td>
+            <td>locale</td>
+            <td>ko_KR</td>
             <td>
-                <p lang="ko_KR"></p>
-                <p lang="en_US"></p>
+                <p lang="ko_KR">기본 로케일(N.locale 함수로 정의)</p>
+                <p lang="en_US">기본 로케일(N.locale 함수로 정의)</p>
+            </td>
+        </tr>
+        <tr>
+            <td>message</td>
+            <td><pre style="margin: 0;"><code class="language-javascript">{
+    "ko_KR" : {},
+    "en_US" : {}
+}</code></pre>
+            </td>
+            <td>
+                <p lang="ko_KR">전역 다국어 메시지</p>
+                <p lang="en_US">전역 다국어 메시지</p>
+            </td>
+        </tr>
+        <tr>
+            <td>sgChkdVal</td>
+            <td>Y</td>
+            <td>
+                Y, 1, on
+                <p lang="ko_KR">체크박스가 1개 일 경우 선택 했을 때 기본 값</p>
+                <p lang="en_US">체크박스가 1개 일 경우 선택 했을 때 기본 값</p>
+            </td>
+        </tr>
+        <tr>
+            <td>sgUnChkdVal</td>
+            <td>N</td>
+            <td>
+                N, 0, off
+                <p lang="ko_KR">체크박스가 1개 일 경우 선택 안 했을 때 기본 값</p>
+                <p lang="en_US">체크박스가 1개 일 경우 선택 안 했을 때 기본 값</p>
+            </td>
+        </tr>
+        <tr>
+            <td>spltSepa</td>
+            <td>$@^</td>
+            <td>
+                <p lang="ko_KR">문자열 구분자</p>
+                <p lang="en_US">문자열 구분자</p>
+            </td>
+        </tr>
+        <tr>
+            <td>gcMode</td>
+            <td>full</td>
+            <td>
+                minimum, full
+                <p lang="ko_KR">N.context.attr("architecture").page.context 로 페이지가 전환될때 마다 실행될 가비지 컬렉터의 모드</p>
+                <p lang="en_US">N.context.attr("architecture").page.context 로 페이지가 전환될때 마다 실행될 가비지 컬렉터의 모드</p>
+            </td>
+        </tr>
+        <tr>
+            <td>charByteLength</td>
+            <td>3</td>
+            <td>
+                <p lang="ko_KR">N.string.byteLength 함수 및 maxbyte / minbyte / rangebyte 룰에서 영문, 숫자, 기본 특수문자등을 제외한 한글, 한글특수 문자 등의 기본 바이트 길이를 설정</p>
+                <p lang="en_US">N.string.byteLength 함수 및 maxbyte / minbyte / rangebyte 룰에서 영문, 숫자, 기본 특수문자등을 제외한 한글, 한글특수 문자 등의 기본 바이트 길이를 설정</p>
             </td>
         </tr>
     </table>
