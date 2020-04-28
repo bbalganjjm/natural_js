@@ -1,21 +1,43 @@
 <article class="refr010207 apiDoc">
 
     <h2>
-        <span lang="ko_KR">N.context.attr("template") 패키지 환경설정</span>
-        <span lang="en_US">N.context.attr("template") package configurations</span>
+        <span lang="ko_KR">N.context.attr("template") - Natural-TEMPLATE 환경설정</span>
+        <span lang="en_US">N.context.attr("template") - Configurations of Natural-TEMPLATE</span>
     </h2>
     <table class="api form">
         <tr>
-            <th style="width: 25%;">Property</th>
-            <th style="width: 15%;">Default Value</th>
+            <th style="width: 15%;">Property</th>
+            <th style="width: 25%;">Default Value</th>
             <th style="width: 60%;">Description</th>
         </tr>
         <tr>
-            <td></td>
-            <td></td>
+            <td>codes</td>
+            <td><pre style="margin: 0;"><code class="language-javascript">{
+    codeUrl : null,
+    codeKey : null
+}</code></pre></td>
             <td>
-                <p lang="ko_KR"></p>
-                <p lang="en_US"></p>
+                <p lang="ko_KR">Common code request information</p>
+                <ul lang="ko_KR">
+                    <li>codeUrl : Common Code request URL</li>
+                    <li>codeKey : Group code property name</li>
+                </ul>
+                <p lang="en_US">Common code request information</p>
+                <ul lang="en_US">
+                    <li>codeUrl : Common Code request URL</li>
+                    <li>codeKey : Group code property name</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>message</td>
+            <td><pre style="margin: 0;"><code class="language-javascript">{
+    "ko_KR" : { ... },
+    "en_US" : { ... }
+}</code></pre></td>
+            <td>
+                <p lang="ko_KR">Natural-TEMPLATE 의 다국어 메시지</p>
+                <p lang="en_US">Multilingual Message of Natural-TEMPLATE</p>
             </td>
         </tr>
     </table>

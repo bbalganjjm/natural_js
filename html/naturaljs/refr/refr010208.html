@@ -1,21 +1,45 @@
 <article class="refr010208 apiDoc">
 
     <h2>
-        <span lang="ko_KR">N.context.attr("code") 패키지 환경설정</span>
-        <span lang="en_US">N.context.attr("code") package configurations</span>
+        <span lang="ko_KR">N.context.attr("code") - Natural-CODE 환경설정</span>
+        <span lang="en_US">N.context.attr("code") - Configurations of Natural-CODE</span>
     </h2>
     <table class="api form">
         <tr>
-            <th style="width: 25%;">Property</th>
-            <th style="width: 15%;">Default Value</th>
+            <th style="width: 15%;">Property</th>
+            <th style="width: 25%;">Default Value</th>
             <th style="width: 60%;">Description</th>
         </tr>
         <tr>
-            <td></td>
-            <td></td>
+            <td>abortOnError</td>
+            <td>false</td>
             <td>
-                <p lang="ko_KR"></p>
-                <p lang="en_US"></p>
+                <p lang="ko_KR">Specifies whether to stop the logic by throwing an ERROR when a code of ERROR type is detected.</p>
+                <p lang="en_US">Specifies whether to stop the logic by throwing an ERROR when a code of ERROR type is detected.</p>
+                <p lang="ko_KR">If the detected code contains the following string, it is excluded.</p>
+                <p lang="en_US">If the detected code contains the following string, it is excluded.</p>
+                <pre><code class="language-javascript">...
+    excludes : [ ".index-header", ".page-header", ".index-lefter", ".index-contents", ".index-footer" ]
+...</code></pre>
+            </td>
+        </tr>
+        <tr>
+            <td>excludes</td>
+            <td>[]</td>
+            <td>
+                <p lang="ko_KR">Defines the statements to exclude from the scan as a string.</p>
+                <p lang="en_US">Defines the statements to exclude from the scan as a string.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>message</td>
+            <td><pre style="margin: 0;"><code class="language-javascript">{
+    "ko_KR" : { ... },
+    "en_US" : { ... }
+}</code></pre></td>
+            <td>
+                <p lang="ko_KR">코드 검사 다국어 메시지</p>
+                <p lang="en_US">Multilingual Message of Code inspection</p>
             </td>
         </tr>
     </table>
