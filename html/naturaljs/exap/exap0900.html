@@ -3,7 +3,7 @@
 		padding: 40px;
 	    background-color: #E8F5E9;
 	}
-	
+
 	.exap0900 .formGroup input[type='text'], .exap0900 .formGroup input[type='number'], .exap0900 .formGroup input[type='tel'] {
 		width: 100%;
 	}
@@ -18,7 +18,7 @@
 		background-color: yellow;
 		opacity : 0.8;
 	}
-	
+
 	.exap0900 .form03,
     .exap0900 .form03 th  {
 		background-color: blue;
@@ -94,7 +94,7 @@
 				<td><input id="balance" type="text" data-format='[["numeric", "$#,###.##0"]]' data-validate='[["required"], ["number"]]'></td>
 			</tr>
 		</table>
-	
+
 		<table class="form__">
 			<colgroup>
 				<col style="width: 15%;">
@@ -119,7 +119,7 @@
 				<td class="form01"><select id="company" multiple="multiple" data-validate='[["required"]]' style="height: 117px;"></select></td>
 			</tr>
 		</table>
-	
+
 		<table class="form__ form03" style="width: 100%;">
 			<colgroup>
 				<col style="width: 15%;">
@@ -140,7 +140,7 @@
 				<td><textarea id="about" style="width: 100%;" rows="3" data-format='[["limit", "100", "..."]]' data-validate='[["required"]]'></textarea></td>
 			</tr>
 		</table>
-	
+
 		<table class="form__" style="width: 100%;">
 			<colgroup>
 				<col style="width: 15%;">
@@ -156,10 +156,10 @@
 			</tr>
 		</table>
 	</div>
-    
+
 	<div class="alert">
 		<p lang="ko_KR">여러 폼 블록에 같은 데이터를 바인드 하는 예제 입니다. 개별 폼들에 값이 바인드되는 요소의 id 속성 값은 하나의 데이터 오브젝트를 여러 폼들이 참조 하고 있으므로 중복 없이 유일 해야 합니다.</p>
-		<p lang="en_US">This is an example of binding the same data to multiple form blocks. The id attribute value of an element whose value is bound to individual forms must be unique without duplicates since multiple forms refer to a single data.</p>
+		<p lang="en_US">This is an example of binding the same data to multiple form blocks. The id attribute value of an element which value is bound to individual forms must be unique without duplicates since multiple forms refer to a single data.</p>
 		<p lang="ko_KR">N.form 컴포넌트의 인스턴스는 배경색으로 구분 된 빨간색(.form01), 노란색(.form02) 및 파란색(.form03) 요소 각각에 대해 만들어지고 하나의 데이터 오브젝트가 이 컴포넌트들에 바인딩 됩니다.</p>
 		<p lang="en_US">N.form component instances are created for each of the red(.form01), yellow(.form02), and blue(.form03) elements separated by a background color, and one data object is bound to these components.</p>
 		<p lang="ko_KR">폼(N.form)들은 모두 하나의 데이터 오브젝트를 참조 하고 있으므로 데이터가 변경 되면 자동으로 동기화 됩니다.</p>
@@ -167,7 +167,7 @@
 		<p lang="ko_KR">서버와 연동 되지 않은 UI 코딩 예제 입니다. 저장 시 서버로 전송 되는 폼 데이터만 확인 바랍니다.</p>
 		<p lang="en_US">This is UI coding example that does not work with the server. Please check only the form data sent to the server when saving.</p>
 	</div>
-    
+
 </article>
 
 <script type="text/javascript">
@@ -202,7 +202,7 @@ N(".exap0900").cont({
     		N(codeParams).each(function(i, code) {
     			N(data).datafilter("code === '" + code + "'").select(N("#" + code, cont.view)).bind();
     		});
-    		
+
     		afterCodeInitFn.call(cont);
      	});
     },
@@ -233,7 +233,7 @@ N(".exap0900").cont({
 				N("#btnSaveAll", cont.view).instance("button").enable();
 			}
 		});
-    	
+
     	// 3-2. bind data to form01
     	N("#btnBindData01", cont.view).click(function(e) {
             e.preventDefault();
