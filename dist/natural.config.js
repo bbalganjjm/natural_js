@@ -1,18 +1,10 @@
 /**
- * Natural-JS에서 제공하는 라이브러리 및 컴포넌트의 전역 옵션 값 설정
- * 여기에 기본으로 정의 된 값들은 제거하면 안 됨. 추가만 가능
+ * Config(N.config) is a place to save Natural-JS operation environment setting, AOP setting, Communication Filter setting, UI global option value, etc.
  *
- * 컴포넌트들의 옵션 적용 순서
- * 1. 컴포넌트 초기화시 지정한 옵션 값
+ * For more information on settings, please refer to the
+ * [ Natural-CORE > Config(N.config) ](https://bbalganjjm.github.io/natural_js/#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s)
+ * menu on the Natural-JS site.
  *
- * 2. 여기(N.Config)에서 지정한 옵션 값
- *    2.1. 각 영역별로 지정 하세요. 컴포넌트 초기화 시 각 영역별 값들을 자동으로 기본옵션으로 지정 해 줍니다.
- *         ex) 2.1.1 모든 N.grid의 높이를 300으로 지정하고 싶음.
- *                   - N.context.attr("ui") 의 grid 키에 height 속성을 추가하고 값은 300 을 지정
- *             2.1.2 모든 N.form에 html을 인식 시키고 싶음.
- *                   - N.context.attr("ui") 의 form 키에 html 속성을 추가하고 값은 true 로 지정
- *
- * 3. 컴포넌트 클래스의 기본 옵션 값
  */
 (function(N) {
 	/**
@@ -49,11 +41,11 @@
 	 * Natural-ARCHITECTURE Config
 	 */
 	N.context.attr("architecture", {
-		/**
-		 * Natural-JS Page Context(지정 필수, 메인 컨텐츠가 들어갈 자리를 지정 해 주세요.)
-		 * Documents 컴포넌트를 사용하면 따로 지정 하지 않아도 됩니다.
-		 * SPA(Single Page Application) 가 아니면 "body" 로 설정 해 주세요.
-		 */
+        /**
+         * Specify the element to insert the main content in jQuery Selector syntax.
+         *  - If you use the Documents(N.docs) component, you don't have to specify it, but otherwise you must.
+         *  - If it is not SPA(Single Page Application), please set it to "body".
+         */
 		"page" : {
 			"context" : ".docs__ > .docs_contents__.visible__"
 		},
