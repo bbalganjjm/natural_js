@@ -329,6 +329,10 @@ article p {
 	margin: 0 0 10px 0;
 }
 
+article p:last-child {
+    margin: 0;
+}
+
 article div.grid_wrap__ {
 	margin-bottom: 15px;
 }

@@ -138,7 +138,7 @@
             <td>object|function</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p lang="ko_KR">선택 한 요소에 저장할 인스턴스나 인스턴스를 가져올 callback function.</p>
+                <p lang="ko_KR">선택한 요소에 저장할 인스턴스나 인스턴스를 가져올 callback function.</p>
                 <p lang="en_US">Callback function to get the instance or instance to be saved in the selected element.</p>
                 <p lang="ko_KR" class="alert">callback의 인자로 index(arguments[0])와 각각의 instance(arguments[1])가 반환 됩니다. 이 callback function 의 "this" 는 각각의 instance를 가리킵니다.</p>
                 <p lang="en_US" class="alert">As the argument of callback, index(arguments[0]) and each instance(arguments[1]) are returned. This callback function's "this" points to each instance.</p>
@@ -150,8 +150,10 @@
             <td style="text-align: center;">N/A</td>
             <td>jquery object</td>
             <td>
-                <p>선택 한 요소에 지정 한 이벤트 명과 같은 이벤트가 미리 정의 되어 있더라도 정의한 이벤트가 제일 먼저 실행 되게 해 줍니다.</p>
-                <p>기본적인 사용법은 jQuery().bind 메서드와 같습니다.</p>
+                <p lang="ko_KR">선택한 요소에 같은 이름의 이벤트 정의 되어 있더라도 tpBind 로 정의한 이벤트가 제일 먼저 실행 되게 해 줍니다.</p>
+                <p lang="en_US">Even if an event of the same name is defined in the selected element, the event defined by tpBind is executed first.</p>
+                <p lang="ko_KR">기본적인 사용법은 <a href="//api.jquery.com/bind"><strong>jQuery().bind</strong></a> 메서드와 같습니다.</p>
+                <p lang="en_US">The basic usage is the same as the <a href="//api.jquery.com/bind"><strong>jQuery().bind</strong></a> method.</p>
             </td>
         </tr>
         <tr>
@@ -159,14 +161,20 @@
             <td>event</td>
             <td>string</td>
             <td style="text-align: center;">N/A</td>
-            <td>이벤트 명</td>
+            <td>
+                <p lang="ko_KR">이벤트 명</p>
+                <p lang="en_US">Event name</p>
+            </td>
         </tr>
         <tr>
             <td></td>
             <td>handler</td>
             <td>function</td>
             <td style="text-align: center;">N/A</td>
-            <td>이벤트 핸들러 함수</td>
+            <td>
+                <p lang="ko_KR">이벤트 핸들러</p>
+                <p lang="en_US">Event handler</p>
+            </td>
         </tr>
         <tr>
             <td>N("selector").vals</td>
@@ -174,13 +182,20 @@
             <td style="text-align: center;">N/A</td>
             <td>string|array|jquery object</td>
             <td>
-                <p>select, select[multiple=multiple], input[type=radio], input[type=checkbox] 와 같은 선택 요소의 선택된 값을 가져오거나 명령으로 선택 할 수 있게 해 주는 함수 입니다.</p>
+                <p lang="ko_KR">select, select[multiple=multiple], input[type=radio], input[type=checkbox] 와 같은 선택 요소의 선택된 값을 가져오거나 선택 합니다.</p>
+                <p lang="en_US">Gets or selects the selected value of a selection element such as select, select[multiple=multiple], input[type=radio], input[type=checkbox].</p>
                 <ul>
-                    <li>vals 인자를 지정하지 않으면 선택된 value 들을 가져오고 vals를 지정하면 입력한 값들과 일치하는 선택지 요소들을 선택 해 줍니다.</li>
-                    <li>선택 된 값을 가져올 때 1개만 선택 되어 있으면 string 타입의 값 1개만 반환하고 2개 이상 일 경우 값 들을 array 에 담아 반환 합니다.</li>
-                    <li>checkbox 의 경우 선택지가 1개만 있다면 Y나 N 또는 1, 0 과 같이 여부를 판단하는 모드로 작동하게 됩니다. Y/N 인지 1/0 인지 on/off 인지 설정은
-                    natural.config.js 의 N.context.attr("core").sgChkdVal(체크값) 변수와 N.context.attr("core").sgUnChkdVal(언체크값) 변수 값으로 설정 할 수 있습니다.  </li>
+                    <li lang="ko_KR">vals 인자를 입력하지 않으면 선택한 값이 반환됩니다. vals 인자가 지정되면 입력 한 값과 일치하는 선택 요소가 선택됩니다.</li>
+                    <li lang="en_US">If the vals argument is not entered, the selected values ​​are returned. If the vals argument is specified, option elements that match the entered values ​​are selected.</li>
+                    <li lang="ko_KR">하나만 선택하면 string 유형의 값이 하나만 반환되고 둘 이상인 경우 값이 배열로 반환됩니다.</li>
+                    <li lang="en_US">If only one is selected, only one value of type string is returned, and if it is more than two, values ​​are returned in an array.</li>
                 </ul>
+                <div class="alert">
+                    <p lang="ko_KR">checkbox 의 경우 선택지가 1개만 있다면 Y/N 또는 1/0 과 같이 여부를 결정하는 모드로 작동하게 됩니다.</p>
+                    <p lang="en_US">In the case of checkbox, if there is only one option, it works in decision mode like Y/N or 1/0.</p>
+                    <p lang="ko_KR">단일 선택의 표준 값이 Y/N 인지 1/0 인지 on/off 인지 설정은 natural.config.js 의 <strong>N.context.attr("core").sgChkdVal("체크값")</strong> 변수와 <strong>N.context.attr("core").sgUnChkdVal("언체크값")</strong> 변수 값으로 설정 할 수 있습니다.</p>
+                    <p lang="en_US">Whether the standard value of a single selection is Y / N, 1/0, or on / off can be set to the <strong>N.context.attr("core").sgChkdVal("check value")</strong> and <strong>N.context.attr("core").sgChkdVal("uncheck value")</strong> variable values ​​of natural.config.js.</p>
+                </div>
             </td>
         </tr>
         <tr>
@@ -189,12 +204,17 @@
             <td>array|string|function</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                단일 값을 지정 할 때는 string 타입으로 값을 지정하고 2개 이상의 선택지를 선택 할 때는 array 에 string 을 담아 지정 합니다.
-                function 타입을 지정하면 요소 개수 만큼 지정한 콜백 함수를 실행 해 줍니다. 콜백함수의 인자는 다음과 같습니다.
+                <p lang="ko_KR">단일 값을 지정 할 때는 문자열로 값을 지정하고 둘 이상의 선택지를 선택 할 때는 배열에 문자열을 담아 값을 지정 합니다.</p>
+                <p lang="en_US">When specifying a single value, specify the value as a string and when selecting two or more options, specify the value by storing the string in an array.</p>
+                <p lang="ko_KR">function 지정하면 선택 된 선택지 요소 개수 만큼 지정한 콜백 함수를 실행 해 줍니다. 콜백함수의 인자는 다음과 같습니다.</p>
+                <p lang="en_US">If function is specified, the specified callback function is executed as many as the number of selected option elements. The arguments of the callback function are as follows.</p>
                 <ul>
-                    <li>this : 선택 된 선택지 요소</li>
-                    <li>arguments[0] : 선택 된 선택지 요소의 index</li>
-                    <li>arguments[1] : 선택 된 선택지 요소</li>
+                    <li lang="ko_KR">this : 선택 된 선택지 요소</li>
+                    <li lang="en_US">this : Selected option element</li>
+                    <li lang="ko_KR">arguments[0] : 선택 된 선택지 요소의 index</li>
+                    <li lang="en_US">arguments[0] : Index of selected option element</li>
+                    <li lang="ko_KR">arguments[1] : 선택 된 선택지 요소</li>
+                    <li lang="en_US">arguments[1] : Selected option element</li>
                 </ul>
             </td>
         </tr>
@@ -203,21 +223,30 @@
             <td style="text-align: center;">N/A</td>
             <td style="text-align: center;">N/A</td>
             <td>jquery object</td>
-            <td>셀럭터로 지정한 array 의 특정 요소를 제거 합니다.</td>
+            <td>
+                <p lang="ko_KR">인자로 지정한 array 의 요소를 제거 합니다.</p>
+                <p lang="en_US">Removes the elements of the array specified as arguments.</p>
+            </td>
         </tr>
         <tr>
             <td></td>
             <td>idx</td>
             <td>number</td>
             <td style="text-align: center;">N/A</td>
-            <td>배열 에서 제거 할 요소의 Index</td>
+            <td>
+                <p lang="ko_KR">배열 에서 제거 할 요소의 Index</p>
+                <p lang="en_US">Index of elements to remove from the array</p>
+            </td>
         </tr>
         <tr>
             <td></td>
             <td>length</td>
             <td>number</td>
             <td style="text-align: center;">N/A</td>
-            <td>제거 할 배열 요소들의 개수</td>
+            <td>
+                <p lang="ko_KR">제거 할 배열 요소들의 개수</p>
+                <p lang="en_US">Number of array elements to remove</p>
+            </td>
         </tr>
         <tr>
             <td>N(selector).events</td>
@@ -225,9 +254,12 @@
             <td style="text-align: center;">N/A</td>
             <td>object similar to array|array|undefined</td>
             <td>
-                <p>셀렉터로 지정한 요소에 바인드 되어 있는 이벤트들을 반환 합니다.</p>
-                <p class="alert">eventName 인자와 namespace 인자를 둘다 입력 하지 않으면 모든 이벤트들을 반환하고 namespace 를 입력 하지 않으면 지정한 eventName 에 해당하는 이벤트들만 반환 합니다.</p>
-                <p class="alert">namespace 인자가 입력 되면 array 타입으로 이벤트를 반환 하고 그렇지 않은 경우에는 array 와 비슷한 object 타입으로 이벤트들을 반환 합니다. 바인드되어 있는 이벤트가 없으면 undefined 를 반환 합니다.</p>
+                <p lang="ko_KR">선택한 요소에 바인드 되어 있는 이벤트들을 반환 합니다.</p>
+                <p lang="en_US">Returns the events bound to the selected element.</p>
+                <p lang="ko_KR" class="alert">eventName 인자와 namespace 인자를 둘다 입력 하지 않으면 모든 이벤트들을 반환하고 namespace 를 입력 하지 않으면 지정한 eventName 에 해당하는 이벤트들만 반환 합니다.</p>
+                <p lang="en_US" class="alert">If both the eventName and namespace arguments are not entered, all events are returned. If no namespace is entered, only the events corresponding to the specified eventName are returned.</p>
+                <p lang="ko_KR" class="alert">namespace 인자가 입력 되면 배열 객체 타입으로 이벤트를 반환 하고 그렇지 않은 경우에는 jquery object 타입으로 이벤트들을 반환 합니다. 바인드되어 있는 이벤트가 없으면 undefined 를 반환 합니다.</p>
+                <p lang="en_US" class="alert">If the namespace argument is entered, the event is returned as an array object type. Otherwise, the event is returned as a jquery object type. If there are no bound events, undefined is returned.</p>
             </td>
         </tr>
         <tr>
@@ -235,14 +267,20 @@
             <td>eventName</td>
             <td>string</td>
             <td style="text-align: center;">N/A</td>
-            <td>이벤트 명</td>
+            <td>
+                <p lang="ko_KR">이벤트 명</p>
+                <p lang="en_US">Event name</p>
+            </td>
         </tr>
         <tr>
             <td></td>
             <td>namespace</td>
             <td>string</td>
             <td style="text-align: center;">N/A</td>
-            <td>이벤트 네임스페이스</td>
+            <td>
+                <p lang="ko_KR">이벤트 네임스페이스</p>
+                <p lang="en_US">Event namespace</p>
+            </td>
         </tr>
     </table>
 </article>
