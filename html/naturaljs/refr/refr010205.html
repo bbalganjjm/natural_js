@@ -14,14 +14,14 @@
             <td>alert.container</td>
             <td>.docs__ > .docs_contents__.visible__</td>
             <td>
-                <p lang="ko_KR">N.alert, N.popup 컴포넌트의 요소들이 저장 되는 영역(지정 필수)</p>
-                <p lang="en_US">N.alert, N.popup 컴포넌트의 요소들이 저장 되는 영역(지정 필수)</p>
-                <p lang="ko_KR">N.context.attr("architecture").page.context 와 같게 설정해도 됩니다.</p>
-                <p lang="en_US">N.context.attr("architecture").page.context 와 같게 설정해도 됩니다.</p>
-                <p lang="ko_KR">Documents 컴포넌트를 사용하면 따로 지정 하지 않아도 됩니다.</p>
-                <p lang="en_US">Documents 컴포넌트를 사용하면 따로 지정 하지 않아도 됩니다.</p>
-                <p lang="ko_KR">SPA(Single Page Application) 가 아니면 "body" 로 설정 해 주세요.</p>
-                <p lang="en_US">SPA(Single Page Application) 가 아니면 "body" 로 설정 해 주세요.</p>
+                <p lang="ko_KR">N.alert, N.popup 컴포넌트의 요소들이 저장 될 요소를 jQuery Selector 문법으로 지정 합니다.</p>
+                <p lang="en_US">Set the element to save the elements of N.alert and N.popup components using jQuery Selector syntax.</p>
+                <p lang="ko_KR">특별한 경우가 아니면 N.context.attr("architecture").page.context 값과 같은 값을 정의 해 주세요.</p>
+                <p lang="en_US">Define the same value as the value of N.context.attr("architecture").page.context unless it is a special case.</p>
+                <p lang="ko_KR" class="alert">Documents(N.docs) 컴포넌트를 사용하면 따로 지정 하지 않아도 되지만 그렇지 않은 경우에는 <strong>반드시 지정</strong> 해야 합니다.</p>
+                <p lang="en_US" class="alert">If you use the Documents(N.docs) component, you don't have to specify it, but otherwise <strong>you must</strong>.</p>
+                <p lang="ko_KR" class="alert">SPA(Single Page Application) 가 아니면 "body" 로 설정 해 주세요.</p>
+                <p lang="en_US" class="alert">If it is not SPA(Single Page Application), please set it to "body".</p>
             </td>
         </tr>
         <tr>
@@ -31,8 +31,10 @@
     size : "medium"
 }</code></pre></td>
             <td>
-                <p lang="ko_KR">N.alert 의 확인 버튼 스타일, 버튼 컴포넌트의 옵션으로 지정</p>
-                <p lang="en_US">N.alert 의 확인 버튼 스타일, 버튼 컴포넌트의 옵션으로 지정</p>
+                <p lang="ko_KR">N.alert 의 확인 버튼 스타일</p>
+                <p lang="en_US">N.alert's OK button style</p>
+                <p lang="ko_KR">버튼 컴포넌트의 옵션으로 지정 합니다.</p>
+                <p lang="en_US">It is specified as an option of the Button(N.button) component.</p>
             </td>
         </tr>
         <tr>
@@ -41,8 +43,10 @@
     size : "medium"
 }</code></pre></td>
             <td>
-                <p lang="ko_KR">N.alert 의 취소 버튼 스타일, 버튼 컴포넌트의 옵션으로 지정</p>
-                <p lang="en_US">N.alert 의 취소 버튼 스타일, 버튼 컴포넌트의 옵션으로 지정</p>
+                <p lang="ko_KR">N.alert 의 취소 버튼 스타일</p>
+                <p lang="en_US">N.alert's Cancel button style</p>
+                <p lang="ko_KR">버튼 컴포넌트의 옵션으로 지정 합니다.</p>
+                <p lang="en_US">It is specified as an option of the Button(N.button) component.</p>
             </td>
         </tr>
         <tr>
@@ -53,7 +57,7 @@
 }</code></pre></td>
             <td>
                 <p lang="ko_KR">N.alert 의 다국어 메시지</p>
-                <p lang="en_US">N.alert 의 다국어 메시지</p>
+                <p lang="en_US">Multilingual messages of N.alert</p>
             </td>
         </tr>
         <tr>
@@ -64,7 +68,7 @@
 }</code></pre></td>
             <td>
                 <p lang="ko_KR">N.datepicker 의 다국어 메시지</p>
-                <p lang="en_US">N.datepicker 의 다국어 메시지</p>
+                <p lang="en_US">Multilingual messages of N.datepicker</p>
             </td>
         </tr>
         <tr>
@@ -75,7 +79,7 @@
 }</code></pre></td>
             <td>
                 <p lang="ko_KR">N.list 의 다국어 메시지</p>
-                <p lang="en_US">N.list 의 다국어 메시지</p>
+                <p lang="en_US">Multilingual messages of N.list</p>
             </td>
         </tr>
         <tr>
@@ -85,8 +89,8 @@
     "desc" : "▲"
 }</code></pre></td>
             <td>
-                <p lang="ko_KR">소트기능 활성화 시 표시 구분자(html 태그 입력 가능)</p>
-                <p lang="en_US">소트기능 활성화 시 표시 구분자(html 태그 입력 가능)</p>
+                <p lang="ko_KR">Sort 기능이 활성화 되었을 때 정렬 방향 표시 구분자, HTML 태그를 입력 해도 됩니다</p>
+                <p lang="en_US">Sort sort indicator when sort function is activated, You can also enter HTML tags</p>
             </td>
         </tr>
         <tr>
@@ -97,7 +101,7 @@
 }</code></pre></td>
             <td>
                 <p lang="ko_KR">N.grid 의 다국어 메시지</p>
-                <p lang="en_US">N.grid 의 다국어 메시지</p>
+                <p lang="en_US">Multilingual messages of N.grid</p>
             </td>
         </tr>
     </table>

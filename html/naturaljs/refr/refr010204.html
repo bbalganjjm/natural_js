@@ -15,7 +15,7 @@
             <td style="text-align: center;">-</td>
             <td>
                 <p lang="ko_KR">사용자 정의 포멧 룰</p>
-                <p lang="en_US">사용자 정의 포멧 룰</p>
+                <p lang="en_US">Custom format rules</p>
                 <pre lang="ko_KR"><code class="language-javascript">"userRules" : {
     /*
      * 함수 명이 룰 명이 됨.
@@ -31,12 +31,12 @@
 }</code></pre>
                 <pre lang="en_US"><code class="language-javascript">"userRules" : {
     /*
-     * 함수 명이 룰 명이 됨.
+     * Function name becomes rule name.
      *
-     * str : 포멧 대상 문자열
-     * args : 포멧 옵션
+     * str : Target string of format
+     * args : Format option
      *
-     * return : 포멧된 문자열을 반환
+     * return : Returns a formatted string
     */
     "userRule" : function(str, args) {
         return str
@@ -45,37 +45,29 @@
             </td>
         </tr>
         <tr>
-            <td>formatter.userRules</td>
-            <td style="text-align: center;">-</td>
-            <td>
-                <p lang="ko_KR">사용자 정의 포멧 룰</p>
-                <p lang="en_US">사용자 정의 포멧 룰</p>
-            </td>
-        </tr>
-        <tr>
             <td>formatter.date</td>
             <td style="text-align: center;">-</td>
             <td>
-                <p lang="ko_KR">사이트 전역으로 사용할 날짜포멧 지정</p>
-                <p lang="en_US">사이트 전역으로 사용할 날짜포멧 지정</p>
-                <p lang="ko_KR">Y : 년, m : 월, d : 일, H : 시, i : 분, s : 초</p>
-                <p lang="en_US">Y : 년, m : 월, d : 일, H : 시, i : 분, s : 초</p>
+                <p lang="ko_KR">응용 프로그램에 전체적으로 사용될 날짜 형식을 지정합니다.</p>
+                <p lang="en_US">Specifies the date format to be used globally for the application.</p>
+                <p lang="ko_KR" class="alert">날짜/시간 포멧 : Y : 년, m : 월, d : 일, H : 시, i : 분, s : 초</p>
+                <p lang="en_US" class="alert">Date/time format : Y : year, m : month, d : day, H : hour, i : minute, s : second</p>
             </td>
         </tr>
         <tr>
             <td>formatter.date.dateSepa</td>
             <td>-</td>
             <td>
-                <p lang="ko_KR">년월일 구분 문자</p>
-                <p lang="en_US">년월일 구분 문자</p>
+                <p lang="ko_KR">년, 월, 일 구분 문자</p>
+                <p lang="en_US">Year, month, day separator</p>
             </td>
         </tr>
         <tr>
             <td>formatter.date.timeSepa</td>
             <td>:</td>
             <td>
-                <p lang="ko_KR">시간 구분 문자</p>
-                <p lang="en_US">시간 구분 문자</p>
+                <p lang="ko_KR">시, 분, 초 구분 문자</p>
+                <p lang="en_US">Hour, minute, second separator</p>
             </td>
         </tr>
         <tr>
@@ -84,8 +76,8 @@
     return "Y" + this.dateSepa + "m";
 }</code></pre></td>
             <td>
-                <p lang="ko_KR">년월 날짜포멧 함수, return 구문에서 포멧을 지정</p>
-                <p lang="en_US">년월 날짜포멧 함수, return 구문에서 포멧을 지정</p>
+                <p lang="ko_KR">년, 월 포멧 함수, return 구문에서 포멧을 지정 합니다.</p>
+                <p lang="en_US">Year, month format function, The format is specified in the return statement.</p>
             </td>
         </tr>
         <tr>
@@ -94,8 +86,8 @@
     return "Y" + this.dateSepa + "m" + this.dateSepa + "d";
 }</code></pre></td>
             <td>
-                <p lang="ko_KR">년월일 날짜포멧 함수, return 구문에서 포멧을 지정</p>
-                <p lang="en_US">년월일 날짜포멧 함수, return 구문에서 포멧을 지정</p>
+                <p lang="ko_KR">년, 월, 일 Format 함수, return 구문에서 포멧을 지정 합니다.</p>
+                <p lang="en_US">Year, month, day Format function, The format is specified in the return statement.</p>
             </td>
         </tr>
         <tr>
@@ -104,8 +96,8 @@
     return this.Ymd() + " H";
 }</code></pre></td>
             <td>
-                <p lang="ko_KR">년월일 시 날짜포멧 함수, return 구문에서 포멧을 지정</p>
-                <p lang="en_US">년월일 시 날짜포멧 함수, return 구문에서 포멧을 지정</p>
+                <p lang="ko_KR">년, 월, 일, 시 Format 함수, return 구문에서 포멧을 지정 합니다.</p>
+                <p lang="en_US">Year, month, day, hour Format function, The format is specified in the return statement.</p>
             </td>
         </tr>
         <tr>
@@ -114,8 +106,8 @@
     return this.Ymd() + " H" + this.timeSepa + "i";
 }</code></pre></td>
             <td>
-                <p lang="ko_KR">년월일 시분 날짜포멧 함수, return 구문에서 포멧을 지정</p>
-                <p lang="en_US">년월일 시분 날짜포멧 함수, return 구문에서 포멧을 지정</p>
+                <p lang="ko_KR">년, 월, 일, 시, 분 Format 함수, return 구문에서 포멧을 지정 합니다.</p>
+                <p lang="en_US">Year, month, day, hour, minute Format function, The format is specified in the return statement.</p>
             </td>
         </tr>
         <tr>
@@ -124,25 +116,25 @@
     return this.Ymd() + " H" + this.timeSepa + "i" + this.timeSepa + "s";
 }</code></pre></td>
             <td>
-                <p lang="ko_KR">시분초 날짜포멧 날짜포멧 함수, return 구문에서 포멧을 지정</p>
-                <p lang="en_US">시분초 날짜포멧 날짜포멧 함수, return 구문에서 포멧을 지정</p>
+                <p lang="ko_KR">시, 분, 초 Format 함수, return 구문에서 포멧을 지정 합니다.</p>
+                <p lang="en_US">Hour, minute, second Format function, The format is specified in the return statement.</p>
             </td>
         </tr>
         <tr>
             <td>validator.userRules</td>
             <td style="text-align: center;">-</td>
             <td>
-                <p lang="ko_KR">사용자 정의 검증 룰</p>
-                <p lang="en_US">사용자 정의 검증 룰</p>
+                <p lang="ko_KR">사용자 정의 유효성 검증 룰</p>
+                <p lang="en_US">Custom validation rules</p>
                 <pre lang="ko_KR"><code class="language-javascript">"userRules" : {
 	/*
 	 * 함수 명이 룰 명이 됨.
 	 * 검증 실패 메시지는 아래 N.context.attr("data").validator.message 객체에 언어별로 함수명과 같은 프로퍼티명으로 정의.
 	 *
-	 * str : 검증 대상 문자열
-	 * args : 검증 옵션
+	 * str : 유효성 검증 대상 문자열
+	 * args : 유효성 검증 옵션
 	 *
-	 * return : 검증에 성공하면 true를 실패하면 false를 반환
+	 * return : 유효성 검증에 성공하면 true를, 실패하면 false를 반환 합니다.
      */
 	"userRule" : function(str, args) {
 	    return true;
@@ -150,13 +142,13 @@
 }</code></pre>
                 <pre lang="en_US"><code class="language-javascript">"userRules" : {
     /*
-     * 함수 명이 룰 명이 됨.
-     * 검증 실패 메시지는 아래 N.context.attr("data").validator.message 객체에 언어별로 함수명과 같은 프로퍼티명으로 정의.
+     * Function name becomes rule name.
+     * The validation failure message is defined in the following N.context.attr("data").validator.message object with a property name same a function name for each language.
      *
-     * str : 검증 대상 문자열
-     * args : 검증 옵션
+     * str : Target string of validation
+     * args : validation options
      *
-     * return : 검증에 성공하면 true를 실패하면 false를 반환
+     * return : Returns true if validation succeeds, false if it fails.
      */
     "userRule" : function(str, args) {
         return true;
@@ -171,10 +163,10 @@
     "en_US" : { ... }
 }</code></pre></td>
             <td>
-                <p lang="ko_KR">데이터 검증 오류 다국어 메시지</p>
-                <p lang="en_US">데이터 검증 오류 다국어 메시지</p>
-                <p lang="ko_KR" class="alert">다른언어 추가 시 해당언어의 로케일 값을 오브젝트명으로 하고 동일한 속성명에 해당 언어로 된 메시지를 추가하면 됨.</p>
-                <p lang="en_US" class="alert">다른언어 추가 시 해당언어의 로케일 값을 오브젝트명으로 하고 동일한 속성명에 해당 언어로 된 메시지를 추가하면 됨.</p>
+                <p lang="ko_KR">유효성 검증 오류 다국어 메시지</p>
+                <p lang="en_US">Validation error multilingual message</p>
+                <p lang="ko_KR" class="alert">언어를 추가 하려면 언어 세트를 복사하고 언어 세트 오브젝트 프로퍼티 명을 해당 로케일 문자열로 지정하고 메시지를 정의 합니다.</p>
+                <p lang="en_US" class="alert">To add a language, copy the language set, specify the language set object property name as its locale string, and define the message.</p>
             </td>
         </tr>
     </table>

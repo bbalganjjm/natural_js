@@ -16,53 +16,58 @@
             <td>
                 <p lang="ko_KR">기본 로케일</p>
                 <p lang="en_US">Default locale</p>
-                <p class="alert" lang="ko_KR">Natural-JS 는 이 설정값으로 다국어 메시지를 처리 합니다.</p>
-                <p class="alert" lang="en_US">Natural-JS handles multilingual messages with this setting value.</p>
-                <p class="alert" lang="ko_KR">ko_KR 처럼 Full Locale 을 지정 해야 하고 N.locale 함수로 설정값을 명령으로 변경 할 수 있습니다.</p>
-                <p class="alert" lang="en_US">You should specify Full Locale like en_US and you can change the setting value with N.locale function.</p>
+                <p lang="ko_KR" class="alert">Natural-JS 는 이 설정값으로 다국어 메시지를 처리 합니다.</p>
+                <p lang="en_US" class="alert">Natural-JS handles multilingual messages with this setting value.</p>
+                <p lang="ko_KR" class="alert">ko_KR 처럼 Full Locale 을 지정 해야 하고 N.locale 함수로 설정값을 명령으로 변경 할 수 있습니다.</p>
+                <p lang="en_US" class="alert">You should specify Full Locale like en_US and you can change the setting value with N.locale function.</p>
             </td>
         </tr>
         <tr>
             <td>sgChkdVal</td>
             <td>Y</td>
             <td>
-                Y, 1, on
-                <p lang="ko_KR">체크박스가 1개 일 경우 선택 했을 때 기본 값</p>
-                <p lang="en_US">체크박스가 1개 일 경우 선택 했을 때 기본 값</p>
+                <p lang="ko_KR">N().vals 메서드에서 체크박스가 한개 일 경우 체크 되었을 때 기본 값</p>
+                <p lang="en_US">Default value when one checkbox is checked in N().vals method</p>
+                <p lang="ko_KR" class="alert">"Y", "1", "on" 등 프로젝트 데이터 표준에 맞춰 정의 바랍니다.</p>
+                <p lang="en_US" class="alert">Define according to the project data standards such as "Y", "1", and "on".</p>
             </td>
         </tr>
         <tr>
             <td>sgUnChkdVal</td>
             <td>N</td>
             <td>
-                N, 0, off
-                <p lang="ko_KR">체크박스가 1개 일 경우 선택 안 했을 때 기본 값</p>
-                <p lang="en_US">체크박스가 1개 일 경우 선택 안 했을 때 기본 값</p>
+                <p lang="ko_KR">N().vals 메서드에서 체크박스가 한개 일 경우 체크 해제 되었을 때 기본 값</p>
+                <p lang="en_US">Default value when one checkbox is unchecked in N().vals method</p>
+                <p lang="ko_KR">"N", "0", "off" 등 프로젝트 데이터 표준에 맞춰 정의 바랍니다.</p>
+                <p lang="en_US">Define according to the project data standards such as "N", "0", and "off".</p>
             </td>
         </tr>
         <tr>
             <td>spltSepa</td>
             <td>$@^</td>
             <td>
-                <p lang="ko_KR">문자열 구분자</p>
-                <p lang="en_US">문자열 구분자</p>
+                <p lang="ko_KR">Natural-JS 에서 사용하는 문자열 구분자</p>
+                <p lang="en_US">String separator used in Natural-JS</p>
             </td>
         </tr>
         <tr>
             <td>gcMode</td>
             <td>full</td>
             <td>
-                minimum, full
-                <p lang="ko_KR">N.context.attr("architecture").page.context 로 페이지가 전환될때 마다 실행될 가비지 컬렉터의 모드</p>
-                <p lang="en_US">N.context.attr("architecture").page.context 로 페이지가 전환될때 마다 실행될 가비지 컬렉터의 모드</p>
+                <p lang="ko_KR">N.gc 함수의 가비지 컬렉션 모드</p>
+                <p lang="en_US">Garbage collection mode of N.gc function</p>
+                <p lang="ko_KR">자세한 내용은 <a href="#cmVmcjAxMDElMjROKCklMjAlMjYlMjBOJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAxMDEuaHRtbA==">N() &amp; N</a> 메뉴의 [N.gc 객체의 함수] 탭을 참고 하세요.</p>
+                <p lang="en_US">For more information, refer to the [Function of N.gc Object] tab in the <a href="#cmVmcjAxMDElMjROKCklMjAlMjYlMjBOJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAxMDEuaHRtbA==">N() &amp; N</a> menu.</p>
             </td>
         </tr>
         <tr>
             <td>charByteLength</td>
             <td>3</td>
             <td>
-                <p lang="ko_KR">N.string.byteLength 함수 및 maxbyte / minbyte / rangebyte 룰에서 영문, 숫자, 기본 특수문자등을 제외한 한글, 한글특수 문자 등의 기본 바이트 길이를 설정</p>
-                <p lang="en_US">N.string.byteLength 함수 및 maxbyte / minbyte / rangebyte 룰에서 영문, 숫자, 기본 특수문자등을 제외한 한글, 한글특수 문자 등의 기본 바이트 길이를 설정</p>
+                <p lang="ko_KR">영문, 숫자등 1바이트 문자를 제외한 문자들의 기본 바이트 길이를 설정 합니다.</p>
+                <p lang="en_US">Set the default byte length of characters except single-byte characters such as English and numeric characters.</p>
+                <p lang="ko_KR">charByteLength 는 N.string.byteLength 함수 및 maxbyte, minbyte, rangebyte 검증 룰등 문자열의 길이를 체크하는 로직에서 사용 합니다.</p>
+                <p lang="en_US">charByteLength is used in logic that checks the length of a string, such as N.string.byteLength function and maxbyte, minbyte, rangebyte verification rules, etc.</p>
             </td>
         </tr>
     </table>
