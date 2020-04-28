@@ -1,11 +1,11 @@
 개요
 ===
 
-Config(N.config)는 Natural-JS 의 운영 환경 설정, AOP 설정, Communication Filter 설정, UI 컴포넌트의 기본 옵션 값 등을 저장하는 공간 입니다.
+Config(N.config)는 Natural-JS 의 운영 환경 설정, AOP 설정, Communication Filter 설정, UI 컴포넌트의 전역 옵션 값 등을 저장하는 공간 입니다.
 
 natural.config.js 파일에 정의 되어 있으며 설정 값은 N.context 에 각 패키지 별 속성 값으로 별도로 저장 됩니다.
  * N.context.attr("core") : Natural-CORE 패키지 라이브러리들의 기본 설정 값.
- * N.context.attr("architecture") : Natural-ARCHITECTURE 패키지 라이브러리들의 기본 설정 값. 
+ * N.context.attr("architecture") : Natural-ARCHITECTURE 패키지 라이브러리들의 기본 설정 값.
  * N.context.attr("data") : Natural-DATA 패키지 라이브러리들의 기본 설정 값.
  * N.context.attr("ui") : Natural-UI 패키지 라이브러리들의 기본 설정 값.
  * N.context.attr("ui.shell") : Natural-UI.Shell 패키지 라이브러리들의 기본 설정 값.

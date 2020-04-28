@@ -11,11 +11,170 @@
             <th style="width: 60%;">Description</th>
         </tr>
         <tr>
-            <td></td>
-            <td></td>
+            <td>formatter.userRules</td>
+            <td style="text-align: center;">-</td>
             <td>
-                <p lang="ko_KR"></p>
-                <p lang="en_US"></p>
+                <p lang="ko_KR">사용자 정의 포멧 룰</p>
+                <p lang="en_US">사용자 정의 포멧 룰</p>
+                <pre lang="ko_KR"><code class="language-javascript">"userRules" : {
+    /*
+     * 함수 명이 룰 명이 됨.
+     *
+     * str : 포멧 대상 문자열
+     * args : 포멧 옵션
+     *
+     * return : 포멧된 문자열을 반환
+    */
+    "userRule" : function(str, args) {
+        return str
+    }
+}</code></pre>
+                <pre lang="en_US"><code class="language-javascript">"userRules" : {
+    /*
+     * 함수 명이 룰 명이 됨.
+     *
+     * str : 포멧 대상 문자열
+     * args : 포멧 옵션
+     *
+     * return : 포멧된 문자열을 반환
+    */
+    "userRule" : function(str, args) {
+        return str
+    }
+}</code></pre>
+            </td>
+        </tr>
+        <tr>
+            <td>formatter.userRules</td>
+            <td style="text-align: center;">-</td>
+            <td>
+                <p lang="ko_KR">사용자 정의 포멧 룰</p>
+                <p lang="en_US">사용자 정의 포멧 룰</p>
+            </td>
+        </tr>
+        <tr>
+            <td>formatter.date</td>
+            <td style="text-align: center;">-</td>
+            <td>
+                <p lang="ko_KR">사이트 전역으로 사용할 날짜포멧 지정</p>
+                <p lang="en_US">사이트 전역으로 사용할 날짜포멧 지정</p>
+                <p lang="ko_KR">Y : 년, m : 월, d : 일, H : 시, i : 분, s : 초</p>
+                <p lang="en_US">Y : 년, m : 월, d : 일, H : 시, i : 분, s : 초</p>
+            </td>
+        </tr>
+        <tr>
+            <td>formatter.date.dateSepa</td>
+            <td>-</td>
+            <td>
+                <p lang="ko_KR">년월일 구분 문자</p>
+                <p lang="en_US">년월일 구분 문자</p>
+            </td>
+        </tr>
+        <tr>
+            <td>formatter.date.timeSepa</td>
+            <td>:</td>
+            <td>
+                <p lang="ko_KR">시간 구분 문자</p>
+                <p lang="en_US">시간 구분 문자</p>
+            </td>
+        </tr>
+        <tr>
+            <td>formatter.date.Ym</td>
+            <td><pre style="margin: 0;"><code class="language-javascript">function() {
+    return "Y" + this.dateSepa + "m";
+}</code></pre></td>
+            <td>
+                <p lang="ko_KR">년월 날짜포멧 함수, return 구문에서 포멧을 지정</p>
+                <p lang="en_US">년월 날짜포멧 함수, return 구문에서 포멧을 지정</p>
+            </td>
+        </tr>
+        <tr>
+            <td>formatter.date.Ymd</td>
+            <td><pre style="margin: 0;"><code class="language-javascript">function() {
+    return "Y" + this.dateSepa + "m" + this.dateSepa + "d";
+}</code></pre></td>
+            <td>
+                <p lang="ko_KR">년월일 날짜포멧 함수, return 구문에서 포멧을 지정</p>
+                <p lang="en_US">년월일 날짜포멧 함수, return 구문에서 포멧을 지정</p>
+            </td>
+        </tr>
+        <tr>
+            <td>formatter.date.YmdH</td>
+            <td><pre style="margin: 0;"><code class="language-javascript">function() {
+    return this.Ymd() + " H";
+}</code></pre></td>
+            <td>
+                <p lang="ko_KR">년월일 시 날짜포멧 함수, return 구문에서 포멧을 지정</p>
+                <p lang="en_US">년월일 시 날짜포멧 함수, return 구문에서 포멧을 지정</p>
+            </td>
+        </tr>
+        <tr>
+            <td>formatter.date.YmdHi</td>
+            <td><pre style="margin: 0;"><code class="language-javascript">function() {
+    return this.Ymd() + " H" + this.timeSepa + "i";
+}</code></pre></td>
+            <td>
+                <p lang="ko_KR">년월일 시분 날짜포멧 함수, return 구문에서 포멧을 지정</p>
+                <p lang="en_US">년월일 시분 날짜포멧 함수, return 구문에서 포멧을 지정</p>
+            </td>
+        </tr>
+        <tr>
+            <td>formatter.date.YmdHis</td>
+            <td><pre style="margin: 0;"><code class="language-javascript">function() {
+    return this.Ymd() + " H" + this.timeSepa + "i" + this.timeSepa + "s";
+}</code></pre></td>
+            <td>
+                <p lang="ko_KR">시분초 날짜포멧 날짜포멧 함수, return 구문에서 포멧을 지정</p>
+                <p lang="en_US">시분초 날짜포멧 날짜포멧 함수, return 구문에서 포멧을 지정</p>
+            </td>
+        </tr>
+        <tr>
+            <td>validator.userRules</td>
+            <td style="text-align: center;">-</td>
+            <td>
+                <p lang="ko_KR">사용자 정의 검증 룰</p>
+                <p lang="en_US">사용자 정의 검증 룰</p>
+                <pre lang="ko_KR"><code class="language-javascript">"userRules" : {
+	/*
+	 * 함수 명이 룰 명이 됨.
+	 * 검증 실패 메시지는 아래 N.context.attr("data").validator.message 객체에 언어별로 함수명과 같은 프로퍼티명으로 정의.
+	 *
+	 * str : 검증 대상 문자열
+	 * args : 검증 옵션
+	 *
+	 * return : 검증에 성공하면 true를 실패하면 false를 반환
+     */
+	"userRule" : function(str, args) {
+	    return true;
+	}
+}</code></pre>
+                <pre lang="en_US"><code class="language-javascript">"userRules" : {
+    /*
+     * 함수 명이 룰 명이 됨.
+     * 검증 실패 메시지는 아래 N.context.attr("data").validator.message 객체에 언어별로 함수명과 같은 프로퍼티명으로 정의.
+     *
+     * str : 검증 대상 문자열
+     * args : 검증 옵션
+     *
+     * return : 검증에 성공하면 true를 실패하면 false를 반환
+     */
+    "userRule" : function(str, args) {
+        return true;
+    }
+}</code></pre>
+            </td>
+        </tr>
+        <tr>
+            <td>validator.message</td>
+            <td><pre style="margin: 0;"><code class="language-javascript">{
+    "ko_KR" : { ... },
+    "en_US" : { ... }
+}</code></pre></td>
+            <td>
+                <p lang="ko_KR">데이터 검증 오류 다국어 메시지</p>
+                <p lang="en_US">데이터 검증 오류 다국어 메시지</p>
+                <p lang="ko_KR" class="alert">다른언어 추가 시 해당언어의 로케일 값을 오브젝트명으로 하고 동일한 속성명에 해당 언어로 된 메시지를 추가하면 됨.</p>
+                <p lang="en_US" class="alert">다른언어 추가 시 해당언어의 로케일 값을 오브젝트명으로 하고 동일한 속성명에 해당 언어로 된 메시지를 추가하면 됨.</p>
             </td>
         </tr>
     </table>

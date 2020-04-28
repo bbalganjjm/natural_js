@@ -1,7 +1,7 @@
 Overview
 ===
 
-Config(N.config) is a place to save Natural-JS operation environment setting, AOP setting, Communication Filter setting, UI option value, etc.
+Config(N.config) is a place to save Natural-JS operation environment setting, AOP setting, Communication Filter setting, UI global option value, etc.
 
 Defined in the natural.config.js file and the configuration values ​​are stored separately in N.context as property values ​​for each package.
  * N.context.attr("core") : Default values ​​for the libraries in the Natural-CORE package.
