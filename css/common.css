@@ -50,13 +50,14 @@ input[type='text'], input[type='number'], input[type='tel'], input[type='passwor
     vertical-align: middle;
     box-sizing: border-box;
     width: 100%;
-    padding: 0 3px 3px 3px;
+    padding: 3px;
     border: 1px solid #C8E6C9;
-    line-height: 17px;
+    line-height: 16px;
 }
 
 select {
     padding: 0;
+    height: 24px;
 }
 
 .searchBox select {
@@ -111,7 +112,8 @@ th, td {
 .form__ th, .form__ td,
 .grid__ th, .grid__ td {
     padding: 2px 3px;
-    line-height: 18px;
+    line-height: 16px;
+    height: 24px;
 }
 
 th, tfoot td {

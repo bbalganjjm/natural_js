@@ -1,74 +1,70 @@
 /**
- * Natural-JS에서 제공하는 라이브러리 및 컴포넌트의 전역 옵션 값 설정
- * 여기에 기본으로 정의 된 값들은 제거하면 안 됨. 추가만 가능
+ * Config(N.config) is a place to save Natural-JS operation environment setting, AOP setting, Communication Filter setting, UI global option value, etc.
  *
- * 컴포넌트들의 옵션 적용 순서
- * 1. 컴포넌트 초기화시 지정한 옵션 값
- *
- * 2. 여기(N.Config)에서 지정한 옵션 값
- *    2.1. 각 영역별로 지정 하세요. 컴포넌트 초기화 시 각 영역별 값들을 자동으로 기본옵션으로 지정 해 줍니다.
- *         ex) 2.1.1 모든 N.grid의 높이를 300으로 지정하고 싶음.
- *                   - N.context.attr("ui") 의 grid 키에 height 속성을 추가하고 값은 300 을 지정
- *             2.1.2 모든 N.form에 html을 인식 시키고 싶음.
- *                   - N.context.attr("ui") 의 form 키에 html 속성을 추가하고 값은 true 로 지정
- *
- * 3. 컴포넌트 클래스의 기본 옵션 값
+ * For more information on settings, please refer to the
+ * [ Natural-CORE > Config(N.config) ](https://bbalganjjm.github.io/natural_js/#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s)
+ * menu on the Natural-JS site.
  */
 (function(N) {
-	/**
-	 * Natural-CORE Config
-	 */
-	N.context.attr("core", {
-		/**
-		 * 기본 로케일(N.locale 함수로 정의)
-		 */
-		"locale" : "ko_KR",
-		/**
-	     * 체크박스가 1개 일 경우 선택 했을 때 기본 값
-	     */
-	    sgChkdVal : "Y", //Y, 1, on
-	    /**
-	     * 체크박스가 1개 일 경우 선택 안 했을 때 기본 값
-	     */
-	    sgUnChkdVal : "N", //N, 0, off
-	    /**
-	     * 문자열 구분자
-	     */
-	    spltSepa : "$@^",
-	    /**
-	     * N.context.attr("architecture").page.context 로 페이지가 전환될때 마다 실행될 가비지 컬렉터의 모드
-	     */
-	    gcMode : "full", //minimum, full
-	    /**
-	     * N.string.byteLength 함수 및 maxbyte / minbyte / rangebyte 룰에서 영문, 숫자, 기본 특수문자등을 제외한 한글, 한글특수 문자 등의 기본 바이트 길이를 설정
-	     */
-	    charByteLength : 3
-	});
+    /**
+     * Natural-CORE Config
+     */
+    N.context.attr("core", {
+        /**
+         * Default locale
+         */
+        "locale" : "ko_KR",
+        /**
+         * Default value when one checkbox is checked in N().vals method
+         *  - Define according to the project data standards such as "Y", "1", and "on".
+         */
+        "sgChkdVal" : "Y",
+        /**
+         * Default value when one checkbox is unchecked in N().vals method
+         *  - Define according to the project data standards such as "N", "0", and "off".
+         */
+        "sgUnChkdVal" : "N",
+        /**
+         * String separator used in Natural-JS
+         */
+        "spltSepa" : "$@^",
+        /**
+         * Garbage collection mode of N.gc function
+         *  - minimum, full
+         */
+        "gcMode" : "full",
+        /**
+         * Set the default byte length of characters except single-byte characters such as English and numeric characters.
+         *  - charByteLength is used in logic that checks the length of a string, such as N.string.byteLength function and maxbyte, minbyte, rangebyte verification rules, etc.
+         */
+        "charByteLength" : 3
+    });
 
 	/**
 	 * Natural-ARCHITECTURE Config
 	 */
 	N.context.attr("architecture", {
-		/**
-		 * Natural-JS Page Context(지정 필수, 메인 컨텐츠가 들어갈 자리를 지정 해 주세요.)
-		 * Documents 컴포넌트를 사용하면 따로 지정 하지 않아도 됩니다.
-		 * SPA(Single Page Application) 가 아니면 "body" 로 설정 해 주세요.
-		 */
-		"page" : {
-			"context" : ".main-contents"
-		},
-		/**
-		 * N.cont(Controller)에 정의한 오브젝트들을 대상으로 하는 관점 지향 프로그래밍(AOP) 설정
-		 *   - 아래는 AOP 관련 된 예제코드 이므로 사용하지 않는다면 cont 하위의 모든 구문을 삭제하고 사용 바랍니다.
-		 */
+	    /**
+         * Specify the element to insert the main content in jQuery Selector syntax.
+         *  - If you use the Documents(N.docs) component, you don't have to specify it, but otherwise you must.
+         *  - If it is not SPA(Single Page Application), please set it to "body".
+         */
+        "page" : {
+            "context" : ".docs__ > .docs_contents__.visible__"
+        },
+        /**
+         * Controller AOP related settings.
+         *  - Refer to the
+         *    https://bbalganjjm.github.io/natural_js/#cmVmcjAyMDIlMjRBT1AkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDIwMi5odG1s
+         */
 		"cont" : {
 			"advisors" : [{
                 "pointcut" : "^init$",
                 "adviceType" : "around",
                 "fn" : function(cont, fnChain, args, joinPoint) {
-                	// 다국어 처리
+                	// Multilingual processing
 			    	APP.indx.i18n(undefined, cont.request.options.target);
-
+			    	// Natural-CODE
                 	N.template.aop.codes(cont, joinPoint);
             	}
             }, { // 팝업이나 탭에서 지연 된 init 이 실행 된 후에 onOpen을 실행하기 위해서.
@@ -86,14 +82,10 @@
             }]
 		},
 		"comm" : {
-            /**
-             * Communication Filter
-             *  - N.comm 으로 호출되는 모든요청이 아래에서 정의한 필터를 통과하게 되므로 서버 요청 시 공통적으로 적용해야 할 부분을 정의 하면 됨.
-             *  - 필터 인자 중 request 인자에 요청에 대한 유용한 정보가 담겨 있음.
-             *  - request 객체에서 제공 해 주는 정보는 http://bbalganjjm.github.io/natural_js/ 에서 Communicator.request 메뉴를 참고 바람.
-             *  - 필터를 여러개 걸수 있으며 단위 필터명은 아무거나 지정하면 됨.
-             *  - 수행 순서는 order 속성(숫자가 적을 수록 먼저 실행 됨)이 정의 된 필터가 실행 된 다음 order 속성이 정의 되지 않은 필터들이 실행 됨.
-             *  - 아래 예제에서 지정 한 basicFilter 는 상수값이 아니므로 자유롭게 지정하면 됨.
+		    /**
+             * Communication Filter related settings.
+             *  - Refer to the
+             *    https://bbalganjjm.github.io/natural_js/#cmVmcjAyMDUlMjRDb21tdW5pY2F0aW9uJTIwRmlsdGVyJTI0aHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDIwNS5odG1s
              */
 			"filters" : {
 				"basicFilter" : {
@@ -218,33 +210,17 @@
 				}
 			},
 			"request" : {
+			    /**
+                 * Global options of Communicator.request.
+                 *  - Refer to the
+                 *    https://bbalganjjm.github.io/natural_js/#cmVmcjAyMDQlMjRDb21tdW5pY2F0b3IucmVxdWVzdCUyNGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAyMDQuaHRtbA==
+                 */
 				"options" : {
-                    /**
-                     * 기본 Request Method
-                     * GET 으로 되어 있으면 JSON 형태의 파라미터가 q라는 파라미터명으로 q={a:1} 와 같이 전달 됩니다.
-                     * JSON Object String 을 Request Body 에 담아 전송하려면 반드시 POST로 설정 바랍니다.
-                     */
 					"type" : "GET",
-					/**
-					 * 기본 contentType
-					 */
 					"contentType" : "application/json; charset=utf-8",
-					/**
-					 * Ajax 통신 시 브라우저 캐시 적용 여부, 운영 시에는 true로 변경 바람
-					 */
 					"cache" : true,
-					/**
-					 * Single Page Application(SPA) 개발 시 N.comm(async) 으로 데이터를 요청하고 요청이 오기전에 다른 페이지로 전환 했을때
-					 * 요청할 때 location.href 와 응답 올때 location.href 을 비교하여 틀리면 요청을 중지 할지 여부
-					 */
 					"urlSync" : true,
-					/**
-					 * 특정 영역에 html 페이지를 불러올때 browser history(뒤로가기버튼) 를 적용할 지 여부
-					 */
 					"browserHistory" : false,
-					/**
-					 * 특정 영역에 html 페이지를 불러올때 덮어 쓸지 더할지 여부
-					 */
 					"append" : false
 				}
 			}
@@ -256,70 +232,89 @@
 	 */
 	N.context.attr("data", {
 		"formatter" : {
-			/**
-			 * 사용자 정의 포멧 룰 - 기본제공되는 데이터 포멧 룰 외에 추가로 지정하고 싶을 때 작성
-			 * userRules 오브젝트 안에 function 명이 룰 명이 되고 포멧된 값을 반환(return)하면 됨.
-			 */
-			"userRules" : {
-				// 함수 첫번째 인자는 검증 데이터가 들어오고 두번째 인자는 옵션값이 들어옴. natural.data.js 소스의 Formatter 부분 참고
-			},
-			/**
-			 * 사이트 전역으로 사용할 날짜포멧 지정
-			 * Y : 년, m : 월, d : 일, H : 시, i : 분, s : 초
-			 */
+		    /**
+             * Custom format rules
+             */
+            "userRules" : {
+                /*
+                 * Function name becomes rule name.
+                 *
+                 * str : Target string of format
+                 * args : Format option
+                 *
+                 * return : Returns a formatted string
+                "userRule" : function(str, args) {
+                    return str;
+                }
+                 */
+            },
+            /**
+             * Specifies the date format to be used globally for the application.
+             *  - Date/time format : Y : year, m : month, d : day, H : hour, i : minute, s : second
+             */
 			"date" : {
-				/**
-				 * 년월일 구분 문자
-				 */
-				dateSepa : "-",
-				/**
-				 * 시간 구분 문자
-				 */
-				timeSepa : ":",
-				/**
-				 * 년월 날짜포멧
-				 */
-				Ym : function() {
-					return "Y" + this.dateSepa + "m";
-				},
-				/**
-				 * 년월일 날짜포멧
-				 */
-				Ymd : function() {
-					return "Y" + this.dateSepa + "m" + this.dateSepa + "d";
-				},
-				/**
-				 * 년월일 시 날짜포멧
-				 */
-				YmdH : function() {
-					return this.Ymd() + " H";
-				},
-				/**
-				 * 년월일 시분 날짜포멧
-				 */
-				YmdHi : function() {
-					return this.Ymd() + " H" + this.timeSepa + "i";
-				},
-				/**
-				 * 년월일 시분초 날짜포멧
-				 */
-				YmdHis : function() {
-					return this.Ymd() + " H" + this.timeSepa + "i" + this.timeSepa + "s";
-				}
+			    /**
+                 * Year, month, day separator
+                 */
+                "dateSepa" : "-",
+                /**
+                 * Hour, minute, second separator
+                 */
+                "timeSepa" : ":",
+                /**
+                 * Year, month format function, The format is specified in the return statement.
+                 */
+                "Ym" : function() {
+                    return "Y" + this.dateSepa + "m";
+                },
+                /**
+                 * Year, month, day Format function, The format is specified in the return statement.
+                 */
+                "Ymd" : function() {
+                    return "Y" + this.dateSepa + "m" + this.dateSepa + "d";
+                },
+                /**
+                 * Year, month, day, hour Format function, The format is specified in the return statement.
+                 */
+                "YmdH" : function() {
+                    return this.Ymd() + " H";
+                },
+                /**
+                 * Year, month, day, hour, minute Format function, The format is specified in the return statement.
+                 */
+                "YmdHi" : function() {
+                    return this.Ymd() + " H" + this.timeSepa + "i";
+                },
+                /**
+                 * Hour, minute, second Format function, The format is specified in the return statement.
+                 */
+                "YmdHis" : function() {
+                    return this.Ymd() + " H" + this.timeSepa + "i" + this.timeSepa + "s";
+                }
 			}
 		},
 		"validator" : {
-			/**
-			 * 사용자 정의 검증 룰 - 기본제공되는 데이터 검증 룰 외에 추가로 지정하고 싶을 때 작성
-			 * userRules 오브젝트 안에 function 명이 룰 명이 되고 검증에 성공하면 true를 실패하면 false를 반환(return)하면 됨.
-			 */
-			"userRules" : {
-				// 함수 첫번째 인자는 검증 데이터가 들어오고 두번째 인자는 옵션값이 들어옴. natural.data.js 소스의 Validator 부분 참고
-			},
-			/**
-			 * 데이터 검증 오류 다국어 메시지
-			 * 다른언어 추가 시 해당언어의 로케일 값을 오브젝트명으로 하고 동인한 속성명들에 해당언어로 된 메시지를 추가하면 됨.
-			 */
+		    /**
+             * Custom validation rules
+             */
+            "userRules" : {
+                /*
+                 * Function name becomes rule name.
+                 * The validation failure message is defined in the following N.context.attr("data").validator.message object with a property name same a function name for each language.
+                 *
+                 * str : Target string of validation
+                 * args : validation options
+                 *
+                 * return : Returns true if validation succeeds, false if it fails.
+                "userRule" : function(str, args) {
+                    return true;
+                }
+                 */
+            },
+            /**
+             * Validation error multilingual message
+             *  - To add a language, copy the language set, specify the language set object property name as its locale string, and define the message.
+             */
 			"message" : {
 				"ko_KR" : {
 					global : "필드검증에 통과하지 못했습니다.",
@@ -420,33 +415,41 @@
 			}
 		}
 	});
-	// 아래 extend 구문은 사용자 정의 룰 정의 시 적용되게 하는 코드이므로 사용자 정의 룰을 정의 했다면 절대 지우면 안됨.
-	$.extend(N.formatter, N.context.attr("data").formatter.userRules);
-	$.extend(N.validator, N.context.attr("data").validator.userRules);
+
+	// The extend statement below should never be deleted if you have defined a custom format rule.
+    $.extend(N.formatter, N.context.attr("data").formatter.userRules);
+    // The extend statement below should never be deleted if you have defined a custom validation rule.
+    $.extend(N.validator, N.context.attr("data").validator.userRules);
 
 	/**
 	 * Natural-UI Config
 	 */
 	N.context.attr("ui", {
 		"alert" : {
-			/**
-			 * N.alert, N.popup 컴포넌트의 요소들이 저장 되는 영역(지정 필수)
-			 * N.context.attr("architecture").page.context 와 같게 설정해도 됩니다.
-			 * Documents 컴포넌트를 사용하면 따로 지정 하지 않아도 됩니다.
-			 * SPA(Single Page Application) 가 아니면 "body" 로 설정 해 주세요.
-			 */
+		    /**
+             * Set the element to save the elements of N.alert and N.popup components using jQuery Selector syntax.
+             * Define the same value as the value of N.context.attr("architecture").page.context unless it is a special case.
+             *  - If you use the Documents(N.docs) component, you don't have to specify it, but otherwise you must.
+             *  - If it is not SPA(Single Page Application), please set it to "body".
+             */
 			"container" : ".docs__ > .docs_contents__.visible__",
-			/**
-			 * 버튼 스타일(Required)
-			 */
 			"global" : {
-				"okBtnStyle" : {
-					size : "medium"
-				},
-				"cancelBtnStyle" : {
-					size : "medium"
-				}
-			},
+                /**
+                 * N.alert's OK button style
+                 *  - It is specified as an option of the Button(N.button) component.
+                 */
+                "okBtnStyle" : {
+                    color : "yellowgreen",
+                    size : "medium"
+                },
+                /**
+                 * N.alert's Cancel button style
+                 *  - It is specified as an option of the Button(N.button) component.
+                 */
+                "cancelBtnStyle" : {
+                    size : "medium"
+                }
+            },
 			/**
 			 * 드래그하면서 다이얼로그가 window영역을 벗어날때 다시 돌아올 위치를 추가로 지정(기본값은 0, 드래그 시 횡 스크롤이 생겨 화면이 지저분 해질때 조절바람)
 			 * N.popup 도 적용가능
@@ -468,15 +471,15 @@
 			 * 인풋 메시지 설정
 			 */
 			"input" : {
-				/**
-				 * 메시지 표시시간(ms)
-				 */
-				displayTimeout : 7000,
-				/**
-				 * 닫기 버튼 디자인(html 태그 입력 가능)
-				 */
-				closeBtn : "&times;"
-			},
+                /**
+                 * Display time of message dialog displayed when input element is specified in context option(ms)
+                 */
+                displayTimeout : 7000,
+                /**
+                 * Design of the close button of the message dialog displayed when an input element is specified in the context option(html tags can be entered)
+                 */
+                closeBtn : "&times;"
+            },
 			/**
 			 * html 인식 여부
 			 */
@@ -486,8 +489,8 @@
 			 */
 			"saveMemory" : true,
 			/**
-			 * 다국어 메시지
-			 */
+             * Multilingual messages of N.alert
+             */
 			"message" : {
 				"ko_KR" : {
 					"confirm" : "확인",
@@ -518,8 +521,8 @@
 		"datepicker" : {
 			"focusin" : true,
 			/**
-			 * 다국어 메시지
-			 */
+             * Multilingual messages of N.datepicker
+             */
 			"message" : {
 				"ko_KR" : {
 					"year" : "년",
@@ -621,9 +624,9 @@
 			"tpBind" : true
 		},
 		"list" : {
-			/**
-			 * 다국어 메시지
-			 */
+		    /**
+             * Multilingual messages of N.list
+             */
 			"message" : {
 				"ko_KR" : {
 					"empty" : "조회를 하지 않았거나 조회된 데이터가 없습니다."
@@ -661,8 +664,8 @@
 			 */
 			"filter" : true,
 			/**
-			 * 소트기능 활설화 시 표시 구분자(html 태그 가능)
-			 */
+             * Sort sort indicator when sort function is activated, You can also enter HTML tags
+             */
 			"sortableItem" : {
 				"asc" : "▼",
 				"desc" : "▲"
@@ -679,9 +682,9 @@
        		"addSelect" : false,
        		"html" : false,
        		"tpBind" : false,
-			/**
-			 * 다국어 메시지
-			 */
+       		/**
+             * Multilingual messages of N.grid
+             */
 			"message" : {
 				"ko_KR" : {
 					"empty" : "조회를 하지 않았거나 조회된 데이터가 없습니다.",
@@ -707,56 +710,81 @@
 				}
 			},
 			/**
-			 * 기타 설정
-			 */
+             * Miscellaneous settings
+             */
 			"misc" : {
-				/**
-				 * 컬럼 리사이즈 시 다른컬럼이 밀릴때 아래 수치 조절(기본값 : 0)
-				 */
+			    /**
+                 * Global misc.resizableCorrectionWidth option of N.grid
+                 *  - The grid body column width and grid header column width may not match when the resizable option is activated.
+                 *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
+                 */
 				"resizableCorrectionWidth" : N.browser.is("safari") ? -6 : -7,
-				/**
-				 * 헤더고정형 중 마지막 컬럼 리사이즈 시 다른컬럼이 밀릴때 아래 수치 조절(기본값 : 0)
-				 */
+		        /**
+                 * Global misc.resizableLastCellCorrectionWidth option of N.grid
+                 *  - Clicking on the last column may cause other columns to be pushed when the resizable option is enabled in the header fixed grid.
+                 *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
+                 */
 				"resizableLastCellCorrectionWidth" : 8,
 				/**
-				 * 리사이즈바의 left 포지션이 컬럼 보더를 기준으로 가운데에 위치하지 않을때 아래 수치 조절(기본값 : 0)
-				 */
+                 * Global misc.resizeBarCorrectionLeft option of N.grid
+                 *  - The left position of the resize bar may not be centered relative to the column border when the resizable option is activated. At this time,
+                 *    it is an option to correct by increasing or decreasing the value by 0.1.
+                 */
 				"resizeBarCorrectionLeft" : N.browser.is("firefox") ? -1 : N.browser.is("safari") ? 1 : 0,
-				/**
-				 * 리사이즈바의 높이가 밑에까지 꽉 차지 않을때 아래 수치 조절(기본값 : 0)
-				 */
+		        /**
+                 * Global misc.resizeBarCorrectionHeight option of N.grid
+                 *  - The height of the resizing bar may not be full when the resizable option is activated.
+                 *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
+                 */
 				"resizeBarCorrectionHeight" : 0,
 				/**
-				 * 컬럼 고정 시 고정 된 헤더 셀(TH)의 상단 위치가 맞지 않을때 아래 수치 조절(기본값 : 0)
-				 */
+                 * Global misc.fixedcolHeadMarginTop option of N.grid
+                 *  - The top position of the fixed header cell(th) may not match when the fixedcol option is activated.
+                 *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
+                 */
 				"fixedcolHeadMarginTop" : N.browser.is("ie") || N.browser.is("firefox") ? 1 : 2,
-				/**
-				 * 컬럼 고정 시 고정 된 헤더 셀(TH)의 좌측 위치가 맞지 않을때 아래 수치 조절(기본값 : 0)
-				 */
+		        /**
+                 * Global misc.fixedcolHeadMarginLeft option of N.grid
+                 *  - The left position of the fixed header cell(th) may not match when the fixedcol option is activated.
+                 *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
+                 */
 				"fixedcolHeadMarginLeft" : N.browser.is("ie") || N.browser.is("firefox") ? -1 : 0,
-				/**
-				 * 컬럼 고정 시 고정 된 헤더 셀(TH)의 높이가 맞지 않을때 아래 수치 조절(기본값 : 0)
-				 */
+		        /**
+                 * Global misc.fixedcolHeadHeight option of N.grid
+                 *  - The height of the fixed header cell(th) may not match when the fixedcol option is activated.
+                 *    At this time, it is an option to correct by increasing or decreasing the value by 0.1..
+                 */
 				"fixedcolHeadHeight" : N.browser.is("ie") || N.browser.is("firefox") ? 0 : -1,
-				/**
-				 * 컬럼 고정 시 고정 된 바디 셀(TD)의 상단 위치가 맞지 않을때 아래 수치 조절(기본값 : 0)
-				 */
+		        /**
+                 * Global misc.fixedcolBodyMarginTop option of N.grid
+                 *  - The top position of the fixed body cell(td) may not match when the fixedcol option is activated.
+                 *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
+                 */
 				"fixedcolBodyMarginTop" : N.browser.is("ie") ? -0.5 : N.browser.is("firefox") ? -1 : 0,
-				/**
-				 * 컬럼 고정 시 고정 된 바디 셀(TD)의 좌측 위치가 맞지 않을때 아래 수치 조절(기본값 : 0)
-				 */
+		        /**
+                 * Global misc.fixedcolBodyMarginLeft option of N.grid
+                 *  - The left position of the fixed body cell(td) may not match when the fixedcol option is activated.
+                 *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
+                 */
 				"fixedcolBodyMarginLeft" : N.browser.is("ie") || N.browser.is("firefox") ? -1 : 0,
-				/**
-				 * 컬럼 고정 시 데이터를 바인드 할 때 고정 된 바디 셀(TD)의 높이가 맞지 않을때 아래 수치 조절(기본값 : 0)
-				 */
+		        /**
+                 * Global misc.fixedcolBodyBindHeight option of N.grid
+                 *  - The height of the fixed body cell(td) may not match when the fixedcol option is activated.
+                 *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
+                 */
 				"fixedcolBodyBindHeight" : N.browser.is("ie") ? 1.3 : 1,
-				/**
-				 * 컬럼 고정 시 데이터를 Add 할 때 고정 된 바디 셀(TD)의 높이가 맞지 않을때 아래 수치 조절(기본값 : 1)
-				 */
+		        /**
+                 * Global misc.fixedcolBodyAddHeight option of N.grid
+                 *  - The height of the cell(td) of the added row may not match when the fixedcol option is activated.
+                 *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
+                 */
 				"fixedcolBodyAddHeight" : 1,
 				/**
-				 * 컬럼 고정 시 그리드 위에 있는 요소가 동적으로 높이가 조절 될때 그리드 모양이 깨지면 동적으로 높이가 조절 되는 요소와 그리드 요소를 모두 포함하고 있는 요소를 jQuery selector 문자열로 지정.
-				 */
+                 * Global misc.fixedcolRootContainer option of N.grid
+                 *  - After creating a grid instance by applying the fixed col option, the grid shape may break when the height of the element wrapping the grid is dynamically changed.
+                 *    At this time, if you specify the element whose height is changed in this option, the grid shape will not be broken.
+                 *  - Specify an element with the jQuery selector string.
+                 */
 				"fixedcolRootContainer" : ".view_context__"
 			}
 		}
@@ -769,8 +797,8 @@
 		"notify" : {
 			"alwaysOnTop" : true,
 			/**
-			 * 다국어 메시지
-			 */
+             * Multilingual messages of N.notify
+             */
 			"message" : {
 				"ko_KR" : {
 					"close" : "닫기"
@@ -842,6 +870,9 @@
 			"onRemove" : function(docId) {
 			},
 			*/
+			/**
+             * Multilingual messages of N.docs
+             */
 			"message" : {
 				"ko_KR" : {
 					"closeAllTitle" : "메뉴 전체 닫기",
@@ -882,7 +913,7 @@
              * 공통코드 조회 정보
              *
              * @codeUrl 공통코드 조회 URL
-             * @codeKey : 그룹코드 프로퍼티 명
+             * @codeKey 그룹코드 프로퍼티 명
              */
             codes : {
                 codeUrl : "sample/code/getSampleCodeList.json",
@@ -918,13 +949,13 @@
     N.context.attr("code", {
         inspection : {
             /**
-             * ERROR 유형의 코드가 검출 되었을 때 ERROR 를 발생하여 로직을 중단 할지 여부를 지정 합니다.
+             * Specifies whether to stop the logic by throwing an ERROR when a code of ERROR type is detected.
              */
             abortOnError : false,
             /**
-             * 검사 대상에서 제외 할 구문들을 문자열로 정의 합니다.
+             * Defines the statements to exclude from the scan as a string.
              *
-             * 검출 된 코드 내용 중 다음 문자열이 포함 되어 있으면 제외 처리 됩니다.
+             * If the detected code contains the following string, it is excluded.
              *  ex) excludes : [ ".index-header", ".page-header", ".index-lefter", ".index-contents", ".index-footer" ]
              */
             excludes : [
@@ -935,8 +966,7 @@
                 ".index-footer"
             ],
             /**
-            /**
-             * 다국어 메시지
+             * Multilingual Message
              */
             "message" : {
                 "ko_KR" : {

@@ -36,7 +36,7 @@
             <td>undefined</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p>메시지의 변수를 vars로 지정한 값으로 치환 해줍니다.</p> 
+                <p>메시지의 변수를 vars로 지정한 값으로 치환 해줍니다.</p>
                 <pre><code class="language-javascript">N(window).alert({
 	msg : &quot;{0} 저는 {1}입니다.&quot;,
 	vars : [&quot;안녕하세요&quot;, &quot;홍길동&quot;]
@@ -91,7 +91,7 @@
                         <pre><code class="language-javascript">...
 // 대화상자의 넓이를 화면에 꽉 채우기
 width : function(msgContext, msgContents) {
-    return $(window).width(); 
+    return $(window).width();
 },
 ...</code></pre>
                     </li>
@@ -112,7 +112,7 @@ width : function(msgContext, msgContents) {
 // 대화상자의 높이를 화면에 꽉 채우기
 height: function(msgContext, msgContents) {
     // 팝업이 열릴때 msgContents 는 감춰진 상태여서 show() 함수를 호출 한다음 타이틀 영역의 높이를 가져옴.
-    return $(window).height() - msgContents.show().find(".msg_title_box__").height(); 
+    return $(window).height() - msgContents.show().find(".msg_title_box__").height();
 },
 ...</code></pre>
                     </li>
@@ -158,7 +158,10 @@ height: function(msgContext, msgContents) {
             <td>boolean</td>
             <td>false</td>
             <td style="text-align: center;">X</td>
-            <td>메시지 대화상자를 항상 최 상위에 표시 할지 여부</td>
+            <td>
+                <p lang="ko_KR">메시지 대화상자를 항상 최 상위에 표시 할지 여부</p>
+                <p lang="en_US">Whether the message dialog will always be displayed at the top</p>
+            </td>
         </tr>
         <tr>
             <td>alwaysOnTopCalcTarget</td>
@@ -232,7 +235,7 @@ height: function(msgContext, msgContents) {
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p>확인버튼을 눌렀을때 실행되는 이벤트</p> 
+                <p>확인버튼을 눌렀을때 실행되는 이벤트</p>
                 <pre><code class="language-javascript">onOk : function(msgContext, msgContents) {
 	// this : N.alert 인스턴스
 	// msgContext : 메시지 오버레이 요소

@@ -103,4 +103,4 @@ http://localhost/index.html
 If the Natural-JS site you are currently viewing is displayed normally, installation is complete.
 
 ## Examples
-The example of the Natural-JS homepage you are currently viewing is an example of a client source that is not connected to the application server. However, the example of the `natural-js-spring-boot` project is an example in which CRUD (create, query, modify, delete) is physically processed by the application server and the DBMS.
+The example of the Natural-JS homepage you are currently viewing is an example of a client source that is not connected to the application server. However, the example of the `natural-js-spring-boot` project is an example in whose CRUD (create, query, modify, delete) is physically processed by the application server and the DBMS.
