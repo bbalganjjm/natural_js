@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.38.238
+ * Natural-UI v0.38.239
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-UI"] = "0.38.238";
+    N.version["Natural-UI"] = "0.38.239";
 
     $.fn.extend($.extend(N.prototype, {
         alert : function(msg, vars) {
@@ -2793,6 +2793,9 @@
                 var nextBtnEle;
                 var liMarginRight = parseInt(N.string.trimToZero(tabContainerEle.find(">li:first").css("margin-right")));
                 var lastDistance = 0 + liMarginRight;
+                var prevBtnEleOuterWidth = 0;
+                var nextBtnEleOuterWidth = 0;
+                var tabNativeScroll;
 
                 if(scrollBtnEles.length > 1) {
                     opts.context.css("position", "relative");
@@ -2805,32 +2808,35 @@
                         e.preventDefault();
                         if(N.browser.scrollbarWidth() > 0) {
                             tabContainerEle.addClass("effect__");
-                            lastDistance = prevBtnEle.outerWidth() + liMarginRight;
+                            lastDistance = prevBtnEleOuterWidth + liMarginRight;
                             tabContainerEle.css("margin-left", lastDistance + "px");
                             nextBtnEle.removeClass("disabled__");
                             prevBtnEle.addClass("disabled__");
                         } else {
-                            tabContainerEle.parent(".tab_native_scroll__").animate({
+                        	tabNativeScroll.animate({
                                 scrollLeft: 0
                             }, 300, "swing");
                         }
                     });
+                    prevBtnEleOuterWidth = prevBtnEle.outerWidth();
+
                     nextBtnEle = scrollBtnEles.eq(1).addClass("tab_scroll_next__").css("right", 0).bind("click" + eventNameSpace,  function(e) {
                         e.preventDefault();
                         if(N.browser.scrollbarWidth() > 0) {
                             tabContainerEle.addClass("effect__");
-                            lastDistance = opts.context.outerWidth() - tabContainerEle.width() - nextBtnEle.outerWidth() + liMarginRight;
+                            lastDistance = opts.context.outerWidth() - tabContainerEle.width() - nextBtnEleOuterWidth + liMarginRight;
                             tabContainerEle.css("margin-left", lastDistance + "px");
                             prevBtnEle.removeClass("disabled__");
                             nextBtnEle.addClass("disabled__");
                         } else {
-                            tabContainerEle.parent(".tab_native_scroll__").animate({
+                        	tabNativeScroll.animate({
                                 scrollLeft: tabContainerEle.outerWidth()
                             }, 300, "swing");
                         }
                     });
+                    nextBtnEleOuterWidth = nextBtnEle.outerWidth();
 
-                    lastDistance = prevBtnEle.outerWidth() + liMarginRight;
+                    lastDistance = prevBtnEleOuterWidth + liMarginRight;
                 }
 
                 N(window).bind("resize" + eventNameSpace, function() {
@@ -2850,14 +2856,20 @@
                             if(tabContainerEle.parent().hasClass("tab_native_scroll__")) {
                                 tabContainerEle.unwrap();
                             }
-                            if(scrollBtnEles.length > 1) {
-                                tabContainerEle.css("margin-left", (prevBtnEle.outerWidth() + liMarginRight) + "px");
+                            if(scrollBtnEles.length > 1 && prevBtnEleOuterWidth > 0 && nextBtnEleOuterWidth > 0) {
+                                tabContainerEle.css("margin-left", (prevBtnEleOuterWidth + liMarginRight) + "px");
                                 prevBtnEle.addClass("disabled__");
                                 scrollBtnEles.show();
                             }
                         } else {
                             if(!tabContainerEle.parent().hasClass("tab_native_scroll__")) {
-                                tabContainerEle.wrap('<div class="tab_native_scroll__" style="margin-left: ' + (prevBtnEle.outerWidth() + liMarginRight) + 'px;margin-right: ' + (nextBtnEle.outerWidth() - liMarginRight) + 'px;"></div>');
+                            	tabNativeScroll = tabContainerEle.wrap('<div class="tab_native_scroll__"></div>').parent();
+                            	if(prevBtnEleOuterWidth > 0) {
+                            		tabNativeScroll.css("margin-left", prevBtnEleOuterWidth + liMarginRight);
+                            	}
+                            	if(nextBtnEleOuterWidth > 0) {
+                            		tabNativeScroll.css("margin-right", nextBtnEleOuterWidth - liMarginRight);
+                            	}
                             }
                             if(scrollBtnEles.length > 1) {
                                 scrollBtnEles.show();
@@ -2866,7 +2878,7 @@
 
                         tabContainerEle.addClass("tab_scroll__").width(ulWidth);
                     } else {
-                        if(scrollBtnEles.length > 1) {
+                        if(scrollBtnEles.length > 1 && prevBtnEleOuterWidth > 0 && nextBtnEleOuterWidth > 0) {
                             scrollBtnEles.hide();
                             tabContainerEle.css("margin-left", "");
                             prevBtnEle.removeClass("disabled__");
@@ -2898,8 +2910,8 @@
                     var nextDefGap = 0;
                     var isMoved = false;
                     if(scrollBtnEles.length > 1) {
-                        prevDefGap = prevBtnEle.outerWidth();
-                        nextDefGap = nextBtnEle.outerWidth();
+                        prevDefGap = prevBtnEleOuterWidth;
+                        nextDefGap = nextBtnEleOuterWidth;
                     }
 
                     UI.draggable.events.call(tabContainerEle, eventNameSpace, function(e, tabContainerEle_, pageX, pageY) { // start
@@ -2921,11 +2933,17 @@
                         if(isMoved) {
                             if(lastDistance + (scrollBtnEles.length > 1 ? 0 : 30) >= 0 && lastDistance <= prevDefGap) {
                                 if(scrollBtnEles.length > 1) {
-                                    lastDistance = prevDefGap + liMarginRight;
+                                	lastDistance = prevDefGap;
+                                	if(prevBtnEleOuterWidth > 0 && nextBtnEleOuterWidth > 0) {
+                                		lastDistance += liMarginRight;
+                                    }
                                     nextBtnEle.removeClass("disabled__");
                                     prevBtnEle.addClass("disabled__");
                                 } else {
-                                    lastDistance = 0 + liMarginRight;
+                                    lastDistance = 0;
+                                    if(prevBtnEleOuterWidth > 0 && nextBtnEleOuterWidth > 0) {
+                                		lastDistance += liMarginRight;
+                                    }
                                 }
                                 tabContainerEle_.addClass("effect__").css("margin-left", lastDistance + "px");
                                 isMoved = false;
@@ -3026,7 +3044,7 @@
                                 nextBtnEle.removeClass("disabled__");
                                 prevBtnEle.addClass("disabled__");
                             } else if(opts.context.innerWidth() > tabContainerEle.outerWidth() + marginLeft) {
-                                marginLeft = -(tabContainerEle.outerWidth() - opts.context.innerWidth() + (nextBtnEle.length > 0 ? nextBtnEle.outerWidth() : 0) - 1);
+                                marginLeft = -(tabContainerEle.outerWidth() - opts.context.innerWidth() + (nextBtnEle.length > 0 ? nextBtnEleOuterWidth : 0) - 1);
                                 prevBtnEle.removeClass("disabled__");
                                 nextBtnEle.addClass("disabled__");
                             } else {
