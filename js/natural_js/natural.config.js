@@ -67,7 +67,7 @@
 			    	// Natural-CODE
                 	N.template.aop.codes(cont, joinPoint);
             	}
-            }, { // 팝업이나 탭에서 지연 된 init 이 실행 된 후에 onOpen을 실행하기 위해서.
+            }, { // Pointcut for executing onOpen after a delayed init on a popup or tab
                 "pointcut" : "^onOpen",
                 "adviceType" : "around",
                 "fn" : function(cont, fnChain, args, joinPoint) {
@@ -90,17 +90,17 @@
 			"filters" : {
 				"basicFilter" : {
 					/**
-					 * N.comm 이 초기화 되기 전 실행됨(N.cont 의 init 아님). string 으로 변환되지 않은 원형의 파라미터를 꺼내올 수 있음.
+					 * This function is executed before N.comm is initialized.
 					 */
 					beforeInit : function(obj) {
 					},
 					/**
-					 * N.comm 이 초기화 된 후 실행됨(N.cont 의 init 아님).
+					 * This function is executed after N.comm is initialized.
 					 */
 					afterInit : function(request) {
 					},
 					/**
-					 * 서버에 요청을 보내기 전 실행됨.
+					 * This function is executed before sending a request to the server.
 					 */
 					beforeSend : function(request, xhr, settings) {
 					    // github pages 는 GET 요청 만 보낼 수 있어서 서버로 데이터를 전송하는 예제는 여기서 파라미터 정보만 보여주고 요청을 중단 함.
@@ -136,8 +136,8 @@
                         }
 					},
 					/**
-					 * 서버에 요청이 성공 했을 경우 실행됨.
-					 * return data 를 하면 N.comm.submit 의 콜백의 인자로 넘어오는 data 가 리턴한 데이터로 치환 됨.
+					 * This function is executed when the request is successful.
+					 *  - If you return by modifying the data argument, you can receive the modified data as response data of all N.comm.
 					 */
 					success : function(request, data, textStatus, xhr) {
 						var opts = request.options;
@@ -165,7 +165,7 @@
 						}
 					},
 					/**
-					 * 서버에 요청 후 서버에러가 발생 했을 경우 실행됨.
+					 * This function is executed when an error occurs on the server.
 					 */
 					error : function(request, xhr, textStatus, errorThrown) {
 						if((xhr.getResponseHeader("Content-Type") && xhr.getResponseHeader("Content-Type").indexOf("html") > -1) || request.options.dataType === "html") {
@@ -203,7 +203,7 @@
 						}
 					},
 					/**
-					 * 모든 요청완료 후 실행 됨.
+					 * This function is executed when the server response is completed.
 					 */
 					complete : function(request, xhr, textStatus) {
 					}
@@ -471,14 +471,6 @@
              *  - If set to true, The message dialog is always displayed at the top.
              */
 			"alwaysOnTop" : true,
-			/**
-			 * 페이지의 요소들이 동적으로 사이즈가 조절될 때 N.alert 의 모달오버레이와 메시지 박스의 위치를 자동으로 맞춰줄지 여부
-			 *  주) 성능적으로 최적화하기 위해서는 false로 지정하는게 좋고 false로 지정 시 탭(N.tab)이 전환되거나 페이지가 리다이렉트 되지않고 논리적으로 전환될때 N.alert 의 요소가 남아있음.
-			 */
-			"dynPos" : true,
-			/**
-			 * 인풋 메시지 설정
-			 */
 			"input" : {
                 /**
                  * Display time of message dialog displayed when input element is specified in context option(ms)
@@ -490,9 +482,10 @@
                 closeBtn : "&times;"
             },
 			/**
-			 * html 인식 여부
+			 * Global html option
+			 * - If set to true, the HTML of the message is applied.
 			 */
-			html : true,
+			"html" : true,
 			/**
              * Global saveMemory option
              *  - If set to true, save memory usage by removing unnecessary reference elements.
@@ -570,11 +563,16 @@
 			},
 			"yearsPanelPosition" : "top",
 			"monthsPanelPosition" : "top",
-			/**
-			 * monthonly 옵션이 true 일때 전역 옵션
-			 */
 			"monthonlyOpts" : {
+			    /**
+			     * Global yearsPanelPosition option when monthonly option is true.
+			     *  - Specifies the position of the year selection element when the monthonly option is true.
+			     */
 			    "yearsPanelPosition" : "left",
+			    /**
+			     * Global monthsPanelPosition option when monthonly option is true.
+                 *  - Specifies the position of the month selection element when the monthonly option is true.
+                 */
 	            "monthsPanelPosition" : "left",
 			},
 			"yearChangeInput" : true,
@@ -597,10 +595,6 @@
 			"append" : true
 		},
 		"form" : {
-			/**
-			 * 바인드된 데이터의 html 을 인식할지 여부
-			 */
-			"html" : false,
 			/**
 			 * 실시간 데이터 검증을할지 여부
 			 */
@@ -666,7 +660,6 @@
 			},
             "unselect" : false,
        		"addSelect" : false,
-       		"html" : false,
        		"tpBind" : false
 		},
 		"grid" : {
@@ -703,7 +696,6 @@
             "resizable" : true,
        		"sortable" : true,
        		"addSelect" : false,
-       		"html" : false,
        		"tpBind" : false,
        		/**
              * Multilingual messages
