@@ -23,7 +23,6 @@
 	background: none;
 	padding: 0 0 0 12px;
 	margin: 0;
-	font-size: 13px;
 	color: #fff;
 	text-shadow: 0 1px 0 #4CAF50;
 	line-height: 34px;
@@ -47,7 +46,6 @@
 .alert__.block_overlay_msg__ .msg_box__ {
 	padding: 15px 15px 0 15px;
 	color : rgba(0, 0, 0, 0.87);
-	font-size: 13px;
 	line-height: 20px;
 	display: block;
 
@@ -127,7 +125,7 @@
 }
 
 .alert_tooltip__.msg__ ul.msg_line_box__ li {
-	font-size: 11px;
+	font-size: 95%;
 	line-height: 12px;
 	padding: 1px 1px 1px 15px;
 	background:	url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAvElEQVQoz7WRLW5CYRREz/1CEASBQDcIgmUHiIqqLoDKOnaEqkJUVTQoREnYQlNR0RTfFbR5vHNrIOGvooJxk8zN3JmBSyP2idoBJsAQ+AIegE9gU0r55kh8pS7U66qqmmpfvVFX6vOJlTpTe2p3y1vqS2b+qLc7Xdm7aQPdiFirE+ApIkaZeQ+870SNI6O3zFxGxBTYZOYd0AEGwMdfLzXVR3Vc13VR59syTjKcCz1Tx/+qtZTyevFxD/ALNrGGAZ7BYBgAAAAASUVORK5CYII=') no-repeat 3px 2px;
@@ -604,7 +602,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	height: 28px;
 	padding: 3px 3px;
 	border: 1px solid #A5D6A7;
-	font-size: 12px;
+	font-size: 95%;
 	line-height: 100%;
 	box-sizing: border-box;
 }
@@ -828,7 +826,6 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 .grid_more_popup_contents__ .btn_box__ .page__ {
 	margin: 0 10px;
-	font-size: 13px;
 }
 
 /* Tab */
@@ -848,7 +845,6 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     border: 1px solid #66BB6A;
 	cursor: pointer;
 	min-width: 60px;
-	font-size: 12px;
 	text-align: center;
 	background-color: #81C784;
     border-radius: 0 3px 0 0;
@@ -956,7 +952,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     border: 1px solid #A5D6A7;
 	box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.2);
 	background-color: #FFFFFF;
-	font-size: 12px;
+	font-size: 95%;
 	z-index: 1;
 	padding: 2px;
 	width: 314px;
@@ -1446,7 +1442,6 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .pagination__ .pagination_body__ li.pagination_page__ {
 	margin: 0 3px 0 3px;
 	line-height: 16px;
-	font-size: 13px;
 }
 
 .pagination__ .pagination_body__ li.pagination_page__>a {
@@ -1475,7 +1470,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     will-change: opacity, transform;
 	transform: translateZ(0)\0; /* for ie 8+ */
 
-    padding: 2px 15px 6px 8px;
+    padding: 5px 15px 5px 8px;
 	line-height: 16px;
 	text-align: left;
 	word-break: break-all;
@@ -1503,12 +1498,12 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	color : rgba(255, 255, 255, 0.87);
 	font-weight: normal;
 	text-decoration: none;
-	font-size: 12px;
+	font-size: 95%;
 }
 
 .notify__ .notify_msg__ .notify_msg_close__ span {
 	position: absolute;
-	top: 5px;
+	top: 7px;
 	right: 1px;
 	height: 12px;
 	width: 12px;
@@ -1606,7 +1601,6 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .docs__>.docs_tab_context__>.docs_tabs__>.docs_tab__>.docs_tab_active_btn__>span {
-	font-size: 13px;
 	line-height: 24px;
 }
 
@@ -1640,7 +1634,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     text-indent: -9999px;
     display: inline-block;
 	color: #fff;
-	font-size: 10px;
+	font-size: 95%;
 	margin-top: 6px;
 }
 
@@ -1708,7 +1702,6 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .docs__>.docs_tab_context__>ul.docs_tab_utils__>.docs_tab_list_item__ .docs_tab_list__>.docs_tab__>.docs_tab_active_btn__>span {
 	color : rgba(0, 0, 0, 0.87);
 	white-space: nowrap;
-	font-size: 13px;
 	line-height: 22px;
 	padding-right: 18px;
 }
