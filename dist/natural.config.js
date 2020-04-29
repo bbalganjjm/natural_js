@@ -2,7 +2,7 @@
  * Config(N.config) is a place to save Natural-JS operation environment setting, AOP setting, Communication Filter setting, UI global option value, etc.
  *
  * For more information on settings, please refer to the
- * [ Natural-CORE > Config(N.config) ](https://bbalganjjm.github.io/natural_js/#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s)
+ * Natural-CORE > Config( https://bbalganjjm.github.io/natural_js/#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s )
  * menu on the Natural-JS site.
  */
 (function(N) {
