@@ -13,80 +13,113 @@
 		</tr>
 		<tr>
 			<td>context</td>
-			<td>jquery object</td>
+			<td>jquery object|jquery selector string</td>
 			<td>null</td>
 			<td style="text-align: center;">O</td>
-			<td>데이트피커를 적용할 입력 요소를 지정 합니다.</td>
+			<td>
+                <p lang="ko_KR">Datepicker가 적용 될 입력 요소를 지정 합니다.</p>
+                <p lang="en_US">Specifies the input element to which the Datepicker is applied.</p>
+            </td>
 		</tr>
 		<tr>
 			<td>yearsPanelPosition</td>
 			<td>string(left|top)</td>
 			<td>left</td>
 			<td></td>
-			<td>년 선택 요소의 위치를 지정 합니다.</td>
+			<td>
+			    <p lang="ko_KR">top으로 설정하면 년도 선택 요소가 상단에 생성 됩니다.</p>
+			    <p lang="en_US">If set to top, the year selection element is created at the top.</p>
+			</td>
 		</tr>
 		<tr>
 			<td>monthsPanelPosition</td>
 			<td>string(left|top)</td>
 			<td>left</td>
 			<td></td>
-			<td>월 선택 요소의 위치를 지정 합니다.</td>
+			<td>
+                <p lang="ko_KR">top으로 설정하면 월 선택 요소가 상단에 생성 됩니다.</p>
+                <p lang="en_US">If set to top, the month selection element is created at the top.</p>
+            </td>
 		</tr>
 		<tr>
 			<td>minYear</td>
 			<td>number</td>
 			<td>200</td>
 			<td></td>
-			<td>yearsPanelPosition 옵션 값이 "top" 일 때 선택 할 수 있는 년의 시작 년도를 지정 합니다.</td>
+			<td>
+                <p lang="ko_KR">yearsPanelPosition 옵션 값이 "top" 일 때 선택 할 수 있는 시작 년도를 지정 합니다.</p>
+                <p lang="en_US">yearsPanelPosition Specifies the starting year that can be selected when the value is "top".</p>
+            </td>
 		</tr>
 		<tr>
 			<td>maxYear</td>
 			<td>number</td>
 			<td>200</td>
 			<td></td>
-			<td>yearsPanelPosition 옵션 값이 "top" 일 때 선택 할 수 있는 년의 마지막 년도를 지정 합니다.</td>
+			<td>
+                <p lang="ko_KR">yearsPanelPosition 옵션 값이 "top" 일 때 선택 할 수 있는 마지막 년도를 지정 합니다.</p>
+                <p lang="en_US">yearsPanelPosition Specifies the last year that can be selected when the value is "top".</p>
+            </td>
 		</tr>
 		<tr>
 			<td>yearChangeInput</td>
 			<td>boolean</td>
 			<td>false</td>
 			<td></td>
-			<td>년 선택 시 입력요소에 바로 반영하여 보여 줄 것인지 여부.</td>
+			<td>
+                <p lang="ko_KR">true로 설정하면 년도 변경 시 변경된 날짜가 입력요소에 바로 반영 됩니다.</p>
+                <p lang="en_US">If set to true, the changed date is applied immediately to the input element when the year is changed.</p>
+            </td>
 		</tr>
 		<tr>
 			<td>monthChangeInput</td>
 			<td>boolean</td>
 			<td>false</td>
 			<td></td>
-			<td>월 선택 시 입력요소에 바로 반영하여 보여 줄 것 인지 여부.</td>
+			<td>
+                <p lang="ko_KR">true로 설정하면 월 변경 시 변경된 날짜가 입력요소에 바로 반영 됩니다.</p>
+                <p lang="en_US">If set to true, the changed date is applied immediately to the input element when the month is changed.</p>
+            </td>
 		</tr>
 		<tr>
 			<td>touchMonthChange</td>
 			<td>boolean</td>
 			<td>false</td>
 			<td></td>
-			<td>좌 / 우 터치 드레그 이벤트로 월을 변경 할 것 인지 여부.</td>
+			<td>
+                <p lang="ko_KR">true로 설정하면 좌우로 터치 드래그 했을 때 월이 변경 됩니다.</p>
+                <p lang="en_US">If set to true, the month changes when you touch-drag left or right.</p>
+            </td>
 		</tr>
 		<tr>
 			<td>scrollMonthChange</td>
 			<td>boolean</td>
 			<td>false</td>
 			<td></td>
-			<td>마우스 스크롤 이벤트로 월을 변경 할 것 인지 여부.</td>
+			<td>
+                <p lang="ko_KR">true로 설정하면 마우스 휠을 스크롤 했을 때 월이 변경 됩니다.</p>
+                <p lang="en_US">If set to true, the month will change when the mouse wheel is scrolled.</p>
+            </td>
 		</tr>
 		<tr>
 			<td>monthonly</td>
 			<td>boolean</td>
 			<td>false</td>
 			<td></td>
-			<td>월 만 선택 할 수 있는 Monthpicker 로 표시 할 것 인지 여부.</td>
+			<td>
+                <p lang="ko_KR">true로 설정하면 년도와 월만 선택 할 수 있는 Monthpicker 가 표시 됩니다.</p>
+                <p lang="en_US">When set to true, the Monthpicker is displayed, allowing you to select only the year and month.</p>
+            </td>
 		</tr>
 		<tr>
 			<td>focusin</td>
 			<td>boolean</td>
 			<td>true</td>
 			<td></td>
-			<td>데이트픽커가 적용 된 입력요소가 선택 되었을때 Datepicker 를 표시할 것 인지 여부.</td>
+			<td>
+                <p lang="ko_KR">false로 설정하면 입력요소에 커서가 Focus 되었을때 Datepicker가 표시 되지 않습니다.</p>
+                <p lang="en_US">If set to false, the datepicker is not displayed when the cursor is focused on the input element.</p>
+            </td>
 		</tr>
 		<tr>
 			<td>onSelect</td>

@@ -535,7 +535,6 @@
 		    }
 		},
 		"datepicker" : {
-			"focusin" : true,
 			/**
              * Multilingual messages of N.datepicker
              */
@@ -561,7 +560,15 @@
 					"next" : "Next"
 				}
 			},
+			/**
+             * Global yearsPanelPosition option.
+             *  - If set to top, the year selection element is created at the top.
+             */
 			"yearsPanelPosition" : "top",
+			/**
+             * Global monthsPanelPosition option.
+             *  - If set to top, the month selection element is created at the top.
+             */
 			"monthsPanelPosition" : "top",
 			"monthonlyOpts" : {
 			    /**
@@ -575,30 +582,45 @@
                  */
 	            "monthsPanelPosition" : "left",
 			},
+			/**
+             * Global yearChangeInput option.
+             *  - If set to true, the changed date is applied immediately to the input element when the year is changed.
+             */
 			"yearChangeInput" : true,
+			/**
+             * Global monthChangeInput option.
+             *  - If set to true, the changed date is applied immediately to the input element when the month is changed.
+             */
 			"monthChangeInput" : true,
+			/**
+             * Global touchMonthChange option.
+             *  - If set to true, the month changes when you touch-drag left or right.
+             */
 			"touchMonthChange" : true,
+			/**
+             * Global scrollMonthChange option.
+             *  - If set to true, the month will change when the mouse wheel is scrolled.
+             */
 			"scrollMonthChange" : true
 		},
 		"select" : {
-			/**
-			 * 기본 key 값
-			 */
+		    /**
+             * Global key option.
+             *  -Specifies the property name of the data to be bound to the name attribute of the selection element
+             */
 			"key" : "key",
 			/**
-			 * 기본 value 값
-			 */
+             * Global val option.
+             *  - Specifies the property name of the data to be bound to the value attribute of the selection element.
+             */
 			"val" : "val",
 			/**
-			 * select 요소에 option 을 덮어쓸지 더할지 여부
-			 */
+             * Global append option.
+             *  - If set to false, empty the default options in the select element and then bind the data.
+             */
 			"append" : true
 		},
 		"form" : {
-			/**
-			 * 실시간 데이터 검증을할지 여부
-			 */
-			"validate" : true,
 			/**
 			 * XSS 필터링 목록
 			 */
@@ -658,9 +680,7 @@
 			"scrollPaging" : {
 				"size" : 30
 			},
-            "unselect" : false,
-       		"addSelect" : false,
-       		"tpBind" : false
+            "unselect" : false
 		},
 		"grid" : {
 			/**
@@ -695,8 +715,6 @@
             "unselect" : false,
             "resizable" : true,
        		"sortable" : true,
-       		"addSelect" : false,
-       		"tpBind" : false,
        		/**
              * Multilingual messages
              */
@@ -1022,7 +1040,7 @@
 	N.context.attr("architecture").cont.advisors.push({ // md 파일 변환
         "pointcut" : ".view-markdown:^init$",
         "adviceType" : "before",
-        "fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 함수명, args 인자 */
+        "fn" : function(cont, fnChain, args){
             /* markdown 파일 로딩 후  html 로 변환 */
             if(typeof showdown == "undefined") {
                 N.comm({
@@ -1088,7 +1106,7 @@
     }, { // 소스보기 버튼 처리
         "pointcut" : ".view-code:^init$",
         "adviceType" : "before",
-        "fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 함수명, args 인자 */
+        "fn" : function(cont, fnChain, args){
             var view = args[0];
             var url = cont.request.get("url");
 
