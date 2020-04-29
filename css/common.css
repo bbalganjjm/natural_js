@@ -317,6 +317,10 @@ th, tfoot td {
     border: 1px solid #C8E6C9;
 }
 
+.alert:not(article):last-child {
+    margin: 5px 5px 0 5px;
+}
+
 .alert p {
     margin: 0;
 }
