@@ -32,7 +32,7 @@
 			</ul>
 		</div>
 
-		<div class="list-box" style="min-height: 386px; margin-bottom: 10px;">
+		<div class="list-box" style="min-height: 482px; margin-bottom: 10px;">
 			<table id="grid" class="grid__">
 				<colgroup>
 					<col style="width: 50px;">
@@ -76,7 +76,7 @@
 				</tbody>
 			</table>
 		</div>
-		
+
 		<div style="text-align: center;">
 			<div id="pagination">
 				<ul>
@@ -92,7 +92,7 @@
 				</ul>
 			</div>
 		</div>
-        
+
         <div class="alert">
             <p lang="ko_KR">목록(N.grid) 화면 에서 입력, 조회(삭제), 수정 화면으로 전환되는 예제 입니다.</p>
             <p lang="en_US">This is an example of switching from the list (N.grid) view to the create, read(delete) and update view.</p>
@@ -105,7 +105,7 @@
                 <span class="alert">The following example is a pagination for the entire data received in the browser, see the N.pagination API documentation for how to handle DB pagination.</span>
             </p>
         </div>
-    
+
 	</div>
 
 </article>
@@ -125,14 +125,14 @@ N(".exap0600").cont({
     		N(codeParams).each(function(i, code) {
     			N(data).datafilter("code === '" + code + "'").select(N(".searchBox #" + code, cont.view)).bind();
     		});
-    		
+
     		afterCodeInitFn.call(cont);
      	});
     },
     setComponents : function(cont) {
     	// 2. initialize buttons
     	N(".buttons a", cont.view).button();
-    	
+
     	// 3. initialize N.form and add new row data for search box
     	cont.form = N([]).form({
     		context : N("div.searchBox li.inputs", cont.view),

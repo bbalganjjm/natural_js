@@ -17,24 +17,35 @@
             <td>minimum</td>
             <td style="text-align: center;">N/A</td>
             <td style="text-align: center;">N/A</td>
-            <td>object</td>
+            <td>boolean</td>
             <td>
-                <p>Natural-JS 의 컴포넌트와 라이브러리에서 사용되는(하는) 요소와 이벤트에 대한 최소한의 자원을 회수합니다.</p>
-                <p class="alert">natural.config.js 에서 설정한 page context(N.context.attr("architecture").page.context) 영역에 N.comm로 페이지를 불러올경우 N.gc.minimum() 이 자동으로 호출 됩니다.</p>
+                <p>Natural-JS 의 컴포넌트와 라이브러리에서 사용되는 요소와 이벤트에 대한 최소한의 자원을 회수합니다.</p>
+                <p class="alert">N.comm 으로 Config(natural.config.js)의 N.context.attr("architecture").page.context 영역에 페이지를 불러 올 경우 N.gc[N.context.attr("core").gcMode]() 가 자동으로 호출 됩니다.</p>
             </td>
         </tr>
         <tr>
             <td>full</td>
             <td style="text-align: center;">N/A</td>
             <td style="text-align: center;">N/A</td>
-            <td>object</td>
+            <td>boolean</td>
             <td>
-                <p>Natural-JS 의 컴포넌트와 라이브러리에서 사용되는(하는) 요소와 이벤트에 대한 모든 자원을 회수합니다.</p>
+                <p>Natural-JS 의 컴포넌트와 라이브러리에서 사용되는 요소와 이벤트에 대한 모든 자원을 회수합니다.</p>
                 <p>페이지가 redirect 되지않고 N.comm 으로 블록 페이지를 불러오는 방식(SPA(Single Page Application) 방식)으로 사이트를 제작할때 브라우저의 메모리가 사용할 수록 증가한다면 N.gc.full()을 호출하면 브라우저 환경을 쾌적하게 유지 시킬 수 있습니다. N.gc.full()이 호출될 타이밍은 제작되는 사이트의 환경에 따라 적절하게 catch 하여  사용하기 바랍니다.</p>
             </td>
         </tr>
+        <tr>
+            <td>ds</td>
+            <td style="text-align: center;">N/A</td>
+            <td style="text-align: center;">N/A</td>
+            <td>undefined</td>
+            <td>
+            	<p lang="ko_KR">N.ds 의 observable 들 에서 가비지 인스턴스를 제거합니다.</p>
+                <p lang="en_US">Removes garbage instances from observables of N.ds</p>
+                <p class="alert">N.comm 으로 Config(natural.config.js)의 N.context.attr("architecture").page.context 영역이 아닌 곳에 페이지를 불러 올 경우 N.gc.ds() 가 자동으로 호출 됩니다.</p>
+            </td>
+        </tr>
     </table>
-    
+
 </article>
 
 <script type="text/javascript">
