@@ -1158,9 +1158,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .datepicker_contents__.years_panel_position_top__ .datepicker_year_item__, .datepicker_contents__.years_panel_position_top__ .datepicker_year_paging__ {
     display: inline;
 	cursor: pointer;
-	line-height: 16px;
-	font-size: 14px;
-	padding-bottom: 3px;
+	line-height: 95%;
 	font-weight: bold;
 }
 
@@ -1217,9 +1215,6 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .datepicker_contents__.months_panel_position_top__ .datepicker_month_item__, .datepicker_contents__.months_panel_position_top__ .datepicker_month_paging__ {
     display: inline;
     cursor: pointer;
-    line-height: 16px;
-    font-size: 14px;
-    padding-bottom: 3px;
     font-weight: bold;
 }
 
@@ -1230,7 +1225,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 .datepicker_contents__.months_panel_position_top__ .datepicker_month_paging__ > a > span {
     padding: 0 10px;
-    line-height: 16px;
+    line-height: 95%;
     font-weight: bold;
 }
 
@@ -1263,9 +1258,8 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 .datepicker_contents__.years_panel_position_top__.months_panel_position_top__ .datepicker_days_panel__ {
 	clear: both;
-	margin-left: 0;
 	text-align: center;
-	margin-top: 4px;
+	margin: 0;
 	overflow: hidden;
 }
 

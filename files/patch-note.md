@@ -14,7 +14,8 @@
 
 
 ## natural.ui.css
- * Changed N.pagination realted styles.
+ * Changed N.pagination, N.datepicker realted styles.
+ * Fixed font-size has been removed.
 
 ##natural.config.js
  *
