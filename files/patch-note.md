@@ -14,7 +14,7 @@
 
 
 ## natural.ui.css
- *
+ * Changed N.pagination realted styles.
 
 ##natural.config.js
  *
