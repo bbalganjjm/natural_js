@@ -563,11 +563,13 @@
 			/**
              * Global yearsPanelPosition option.
              *  - If set to top, the year selection element is created at the top.
+             *  - Set to "left" or "top".
              */
 			"yearsPanelPosition" : "top",
 			/**
              * Global monthsPanelPosition option.
              *  - If set to top, the month selection element is created at the top.
+             *  - Set to "left" or "top".
              */
 			"monthsPanelPosition" : "top",
 			"monthonlyOpts" : {

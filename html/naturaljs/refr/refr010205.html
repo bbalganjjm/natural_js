@@ -6,13 +6,15 @@
     </h2>
     <table class="api form">
         <tr>
-            <th style="width: 15%;">Property</th>
-            <th style="width: 25%;">Default Value</th>
-            <th style="width: 60%;">Description</th>
+            <th style="width: 15%;">Name</th>
+            <th style="width: 25%;">Default</th>
+            <th style="width: 10%;">Required</th>
+            <th style="width: 50%;">Description</th>
         </tr>
         <tr>
             <td>alert.container</td>
             <td>.docs__ > .docs_contents__.visible__</td>
+            <td style="text-align: center;">O</td>
             <td>
                 <p lang="ko_KR">N.alert, N.popup 컴포넌트의 요소들이 저장 될 요소를 jQuery Selector 문법으로 지정 합니다.</p>
                 <p lang="en_US">Set the element to save the elements of N.alert and N.popup components using jQuery Selector syntax.</p>
@@ -30,6 +32,7 @@
     color : "yellowgreen",
     size : "medium"
 }</code></pre></td>
+            <td style="text-align: center;">X</td>
             <td>
                 <p lang="ko_KR">N.alert 의 확인 버튼 스타일</p>
                 <p lang="en_US">N.alert's OK button style</p>
@@ -42,6 +45,7 @@
             <td><pre style="margin: 0;"><code class="language-javascript">{
     size : "medium"
 }</code></pre></td>
+            <td style="text-align: center;">X</td>
             <td>
                 <p lang="ko_KR">N.alert 의 취소 버튼 스타일</p>
                 <p lang="en_US">N.alert's Cancel button style</p>
@@ -52,6 +56,7 @@
         <tr>
             <td>alert.input.displayTimeout</td>
             <td>7000</td>
+            <td style="text-align: center;">O</td>
             <td>
                 <p lang="ko_KR">context 옵션에 입력요소를 지정 했을때 표시되는 메시지 다이얼로그의 표시 시간(ms)</p>
                 <p lang="en_US">Display time of message dialog displayed when input element is specified in context option(ms)</p>
@@ -60,6 +65,7 @@
         <tr>
             <td>alert.input.closeBtn</td>
             <td><xmp>&times;</xmp></td>
+            <td style="text-align: center;">O</td>
             <td>
                 <p lang="ko_KR">context 옵션에 입력요소를 지정 했을때 표시되는 메시지 다이얼로그의 닫기 버튼 디자인, html 태그 입력 가능</p>
                 <p lang="en_US">Design of the close button of the message dialog displayed when an input element is specified in the context option, You can also enter HTML tags</p>
@@ -71,6 +77,7 @@
     "ko_KR" : { ... },
     "en_US" : { ... }
 }</code></pre></td>
+            <td style="text-align: center;">O</td>
             <td>
                 <p lang="ko_KR">N.alert 의 다국어 메시지</p>
                 <p lang="en_US">Multilingual messages of N.alert</p>
@@ -79,17 +86,23 @@
         <tr>
             <td>datepicker.monthonlyOpts.yearsPanelPosition</td>
             <td>top</td>
+            <td style="text-align: center;">O</td>
             <td>
                 <p lang="ko_KR">monthonly 옵션이 true 일때 년도 선택 요소의 위치를 지정 합니다.</p>
                 <p lang="en_US">Specifies the position of the year selection element when the monthonly option is true.</p>
+                <p lang="ko_KR">"left" 나 "top" 으로 설정 해 주세요.</p>
+                <p lang="en_US">Set to "left" or "top"</p>
             </td>
         </tr>
         <tr>
             <td>datepicker.monthonlyOpts.monthsPanelPosition</td>
             <td>top</td>
+            <td style="text-align: center;">O</td>
             <td>
                 <p lang="ko_KR">monthonly 옵션이 true 일때 월 선택 요소의 위치를 지정 합니다.</p>
                 <p lang="en_US">Specifies the position of the month selection element when the monthonly option is true.</p>
+                <p lang="ko_KR">"left" 나 "top" 으로 설정 해 주세요.</p>
+                <p lang="en_US">Set to "left" or "top"</p>
             </td>
         </tr>
         <tr>
@@ -98,6 +111,7 @@
     "ko_KR" : { ... },
     "en_US" : { ... }
 }</code></pre></td>
+            <td style="text-align: center;">O</td>
             <td>
                 <p lang="ko_KR">N.datepicker 의 다국어 메시지</p>
                 <p lang="en_US">Multilingual messages of N.datepicker</p>
@@ -109,6 +123,7 @@
     "ko_KR" : { ... },
     "en_US" : { ... }
 }</code></pre></td>
+            <td style="text-align: center;">O</td>
             <td>
                 <p lang="ko_KR">N.list 의 다국어 메시지</p>
                 <p lang="en_US">Multilingual messages of N.list</p>
@@ -120,6 +135,7 @@
     "asc" : "▼",
     "desc" : "▲"
 }</code></pre></td>
+            <td style="text-align: center;">O</td>
             <td>
                 <p lang="ko_KR">Sort 기능이 활성화 되었을 때 정렬 방향 표시 구분자, HTML 태그를 입력 해도 됩니다</p>
                 <p lang="en_US">Sort sort indicator when sort function is activated, You can also enter HTML tags</p>
@@ -131,6 +147,7 @@
     "ko_KR" : { ... },
     "en_US" : { ... }
 }</code></pre></td>
+            <td style="text-align: center;">O</td>
             <td>
                 <p lang="ko_KR">N.grid 의 다국어 메시지</p>
                 <p lang="en_US">Multilingual messages of N.grid</p>

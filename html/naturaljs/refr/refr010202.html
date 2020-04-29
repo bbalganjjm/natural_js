@@ -6,13 +6,15 @@
     </h2>
     <table class="api form">
         <tr>
-            <th style="width: 15%;">Property</th>
-            <th style="width: 25%;">Default Value</th>
-            <th style="width: 60%;">Description</th>
+            <th style="width: 15%;">Name</th>
+            <th style="width: 25%;">Default</th>
+            <th style="width: 10%;">Required</th>
+            <th style="width: 50%;">Description</th>
         </tr>
         <tr>
             <td>locale</td>
             <td>ko_KR</td>
+            <td style="text-align: center;">O</td>
             <td>
                 <p lang="ko_KR">기본 로케일</p>
                 <p lang="en_US">Default locale</p>
@@ -25,6 +27,7 @@
         <tr>
             <td>sgChkdVal</td>
             <td>Y</td>
+            <td style="text-align: center;">O</td>
             <td>
                 <p lang="ko_KR">N().vals 메서드에서 체크박스가 한개 일 경우 체크 되었을 때 기본 값</p>
                 <p lang="en_US">Default value when one checkbox is checked in N().vals method</p>
@@ -35,6 +38,7 @@
         <tr>
             <td>sgUnChkdVal</td>
             <td>N</td>
+            <td style="text-align: center;">O</td>
             <td>
                 <p lang="ko_KR">N().vals 메서드에서 체크박스가 한개 일 경우 체크 해제 되었을 때 기본 값</p>
                 <p lang="en_US">Default value when one checkbox is unchecked in N().vals method</p>
@@ -45,6 +49,7 @@
         <tr>
             <td>spltSepa</td>
             <td>$@^</td>
+            <td style="text-align: center;">O</td>
             <td>
                 <p lang="ko_KR">Natural-JS 에서 사용하는 문자열 구분자</p>
                 <p lang="en_US">String separator used in Natural-JS</p>
@@ -53,6 +58,7 @@
         <tr>
             <td>gcMode</td>
             <td>full</td>
+            <td style="text-align: center;">O</td>
             <td>
                 <p lang="ko_KR">N.gc 함수의 가비지 컬렉션 모드</p>
                 <p lang="en_US">Garbage collection mode of N.gc function</p>
@@ -63,6 +69,7 @@
         <tr>
             <td>charByteLength</td>
             <td>3</td>
+            <td style="text-align: center;">O</td>
             <td>
                 <p lang="ko_KR">영문, 숫자등 1바이트 문자를 제외한 문자들의 기본 바이트 길이를 설정 합니다.</p>
                 <p lang="en_US">Set the default byte length of characters except single-byte characters such as English and numeric characters.</p>

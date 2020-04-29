@@ -6,13 +6,15 @@
     </h2>
     <table class="api form">
         <tr>
-            <th style="width: 15%;">Property</th>
-            <th style="width: 25%;">Default Value</th>
-            <th style="width: 60%;">Description</th>
+            <th style="width: 15%;">Name</th>
+            <th style="width: 25%;">Default</th>
+            <th style="width: 10%;">Required</th>
+            <th style="width: 50%;">Description</th>
         </tr>
         <tr>
             <td>abortOnError</td>
             <td>false</td>
+            <td style="text-align: center;">O</td>
             <td>
                 <p lang="ko_KR">ERROR 유형의 코드가 검출 되었을 때 ERROR 를 발생하여 로직을 중단 할지 여부를 지정 합니다.</p>
                 <p lang="en_US">Specifies whether to stop the logic by throwing an ERROR when a code of ERROR type is detected.</p>
@@ -21,6 +23,7 @@
         <tr>
             <td>excludes</td>
             <td>[]</td>
+            <td style="text-align: center;">O</td>
             <td>
                 <p lang="ko_KR">검사 대상에서 제외 할 구문들을 문자열로 정의 합니다.</p>
                 <p lang="en_US">Defines the statements to exclude from the scan as a string.</p>
@@ -37,6 +40,7 @@
     "ko_KR" : { ... },
     "en_US" : { ... }
 }</code></pre></td>
+            <td style="text-align: center;">O</td>
             <td>
                 <p lang="ko_KR">코드 검사 다국어 메시지</p>
                 <p lang="en_US">Multilingual Message of Code inspection</p>

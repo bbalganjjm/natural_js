@@ -830,6 +830,27 @@ pre.shell>code {
         content: 'return : ';
         font-weight: 600;
     }
+
+    #conf_core .apiDoc .api.form td:nth-child(2):before,
+    #conf_architecture .apiDoc .api.form td:nth-child(2):before,
+    #conf_data .apiDoc .api.form td:nth-child(2):before,
+    #conf_ui .apiDoc .api.form td:nth-child(2):before,
+    #conf_ui_shell .apiDoc .api.form td:nth-child(2):before,
+    #conf_template .apiDoc .api.form td:nth-child(2):before,
+    #conf_code .apiDoc .api.form td:nth-child(2):before {
+        content: 'default : ';
+        font-weight: 600;
+    }
+    #conf_core .apiDoc .api.form td:nth-child(3):before,
+    #conf_architecture .apiDoc .api.form td:nth-child(3):before,
+    #conf_data .apiDoc .api.form td:nth-child(3):before,
+    #conf_ui .apiDoc .api.form td:nth-child(3):before,
+    #conf_ui_shell .apiDoc .api.form td:nth-child(3):before,
+    #conf_template .apiDoc .api.form td:nth-child(3):before,
+    #conf_code .apiDoc .api.form td:nth-child(3):before {
+        content: 'required : ';
+        font-weight: 600;
+    }
 }
 
 .apiDoc .function-desc {

@@ -12,174 +12,174 @@
  * menu on the Natural-JS site.
  */
 (function(N) {
-    /**
-     * Natural-CORE Config
-     */
-    N.context.attr("core", {
-        /**
-         * Default locale
-         */
-        "locale" : "ko_KR",
-        /**
-         * Default value when one checkbox is checked in N().vals method
-         *  - Define according to the project data standards such as "Y", "1", and "on".
-         */
-        "sgChkdVal" : "Y",
-        /**
-         * Default value when one checkbox is unchecked in N().vals method
-         *  - Define according to the project data standards such as "N", "0", and "off".
-         */
-        "sgUnChkdVal" : "N",
-        /**
-         * String separator used in Natural-JS
-         */
-        "spltSepa" : "$@^",
-        /**
-         * Garbage collection mode of N.gc function
-         *  - minimum, full
-         */
-        "gcMode" : "full",
-        /**
-         * Set the default byte length of characters except single-byte characters such as English and numeric characters.
-         *  - charByteLength is used in logic that checks the length of a string, such as N.string.byteLength function and maxbyte, minbyte, rangebyte verification rules, etc.
-         */
-        "charByteLength" : 3
-    });
+	/**
+	 * Natural-CORE Config
+	 */
+	N.context.attr("core", {
+		/**
+		 * Default locale
+		 */
+		"locale" : "ko_KR",
+		/**
+	     * Default value when one checkbox is checked in N().vals method
+	     *  - Define according to the project data standards such as "Y", "1", and "on".
+	     */
+	    "sgChkdVal" : "Y",
+	    /**
+	     * Default value when one checkbox is unchecked in N().vals method
+	     *  - Define according to the project data standards such as "N", "0", and "off".
+	     */
+	    "sgUnChkdVal" : "N",
+	    /**
+	     * String separator used in Natural-JS
+	     */
+	    "spltSepa" : "$@^",
+	    /**
+	     * Garbage collection mode of N.gc function
+	     *  - minimum, full
+	     */
+	    "gcMode" : "full",
+	    /**
+	     * Set the default byte length of characters except single-byte characters such as English and numeric characters.
+	     *  - charByteLength is used in logic that checks the length of a string, such as N.string.byteLength function and maxbyte, minbyte, rangebyte verification rules, etc.
+	     */
+	    "charByteLength" : 3
+	});
 
-    /**
-     * Natural-ARCHITECTURE Config
-     */
-    N.context.attr("architecture", {
+	/**
+	 * Natural-ARCHITECTURE Config
+	 */
+	N.context.attr("architecture", {
         /**
          * Specify the element to insert the main content in jQuery Selector syntax.
          *  - If you use the Documents(N.docs) component, you don't have to specify it, but otherwise you must.
          *  - If it is not SPA(Single Page Application), please set it to "body".
          */
-        "page" : {
-            "context" : ".docs__ > .docs_contents__.visible__"
-        },
-        /**
-         * Controller AOP related settings.
-         *  - Refer to the
-         *    https://bbalganjjm.github.io/natural_js/#cmVmcjAyMDIlMjRBT1AkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDIwMi5odG1s
-         */
-        "cont" : {
-        },
-        "comm" : {
-            /**
-             * Communication Filter related settings.
-             *  - Refer to the
-             *    https://bbalganjjm.github.io/natural_js/#cmVmcjAyMDUlMjRDb21tdW5pY2F0aW9uJTIwRmlsdGVyJTI0aHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDIwNS5odG1s
-             */
-            "filters" : {
-            },
-            "request" : {
-                /**
-                 * Global options of Communicator.request.
-                 *  - Refer to the
-                 *    https://bbalganjjm.github.io/natural_js/#cmVmcjAyMDQlMjRDb21tdW5pY2F0b3IucmVxdWVzdCUyNGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAyMDQuaHRtbA==
-                 */
-                "options" : {
-                    "type" : "POST",
-                    "contentType" : "application/json; charset=utf-8",
-                    "cache" : true,
-                    "urlSync" : true,
-                    "browserHistory" : false,
-                    "append" : false
-                }
-            }
-        }
-    });
+		"page" : {
+			"context" : ".docs__ > .docs_contents__.visible__"
+		},
+		/**
+		 * Controller AOP related settings.
+		 *  - Refer to the
+		 *    https://bbalganjjm.github.io/natural_js/#cmVmcjAyMDIlMjRBT1AkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDIwMi5odG1s
+		 */
+		"cont" : {
+		},
+		"comm" : {
+			/**
+			 * Communication Filter related settings.
+			 *  - Refer to the
+			 *    https://bbalganjjm.github.io/natural_js/#cmVmcjAyMDUlMjRDb21tdW5pY2F0aW9uJTIwRmlsdGVyJTI0aHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDIwNS5odG1s
+			 */
+			"filters" : {
+			},
+			"request" : {
+			    /**
+			     * Global options of Communicator.request.
+			     *  - Refer to the
+			     *    https://bbalganjjm.github.io/natural_js/#cmVmcjAyMDQlMjRDb21tdW5pY2F0b3IucmVxdWVzdCUyNGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAyMDQuaHRtbA==
+			     */
+				"options" : {
+					"type" : "POST",
+					"contentType" : "application/json; charset=utf-8",
+					"cache" : true,
+					"urlSync" : true,
+					"browserHistory" : false,
+					"append" : false
+				}
+			}
+		}
+	});
 
-    /**
-     * Natural-DATA Config
-     */
-    N.context.attr("data", {
-        "formatter" : {
-            /**
-             * Custom format rules
-             */
-            "userRules" : {
-                /*
-                 * Function name becomes rule name.
-                 *
-                 * str : Target string of format
-                 * args : Format option
-                 *
-                 * return : Returns a formatted string
-                "userRule" : function(str, args) {
-                    return str;
-                }
-                 */
-            },
-            /**
-             * Specifies the date format to be used globally for the application.
-             *  - Date/time format : Y : year, m : month, d : day, H : hour, i : minute, s : second
-             */
-            "date" : {
-                /**
-                 * Year, month, day separator
-                 */
-                "dateSepa" : "-",
-                /**
-                 * Hour, minute, second separator
-                 */
-                "timeSepa" : ":",
-                /**
-                 * Year, month format function, The format is specified in the return statement.
-                 */
-                "Ym" : function() {
-                    return "Y" + this.dateSepa + "m";
-                },
-                /**
-                 * Year, month, day Format function, The format is specified in the return statement.
-                 */
-                "Ymd" : function() {
-                    return "Y" + this.dateSepa + "m" + this.dateSepa + "d";
-                },
-                /**
-                 * Year, month, day, hour Format function, The format is specified in the return statement.
-                 */
-                "YmdH" : function() {
-                    return this.Ymd() + " H";
-                },
-                /**
-                 * Year, month, day, hour, minute Format function, The format is specified in the return statement.
-                 */
-                "YmdHi" : function() {
-                    return this.Ymd() + " H" + this.timeSepa + "i";
-                },
-                /**
-                 * Hour, minute, second Format function, The format is specified in the return statement.
-                 */
-                "YmdHis" : function() {
-                    return this.Ymd() + " H" + this.timeSepa + "i" + this.timeSepa + "s";
-                }
-            }
-        },
-        "validator" : {
-            /**
-             * Custom validation rules
-             */
-            "userRules" : {
-                /*
-                 * Function name becomes rule name.
-                 * The validation failure message is defined in the following N.context.attr("data").validator.message object with a property name same a function name for each language.
-                 *
-                 * str : Target string of validation
-                 * args : validation options
-                 *
-                 * return : Returns true if validation succeeds, false if it fails.
-                "userRule" : function(str, args) {
-                    return true;
-                }
-                 */
-            },
-            /**
-             * Validation error multilingual message
-             *  - To add a language, copy the language set, specify the language set object property name as its locale string, and define the message.
-             */
-            "message" : {
+	/**
+	 * Natural-DATA Config
+	 */
+	N.context.attr("data", {
+		"formatter" : {
+			/**
+			 * Custom format rules
+			 */
+		    "userRules" : {
+		        /*
+		         * Function name becomes rule name.
+		         *
+		         * str : Target string of format
+		         * args : Format option
+		         *
+		         * return : Returns a formatted string
+		        "userRule" : function(str, args) {
+		            return str;
+		        }
+		         */
+		    },
+			/**
+			 * Specifies the date format to be used globally for the application.
+			 *  - Date/time format : Y : year, m : month, d : day, H : hour, i : minute, s : second
+			 */
+			"date" : {
+				/**
+				 * Year, month, day separator
+				 */
+				"dateSepa" : "-",
+				/**
+				 * Hour, minute, second separator
+				 */
+				"timeSepa" : ":",
+				/**
+				 * Year, month format function, The format is specified in the return statement.
+				 */
+				"Ym" : function() {
+					return "Y" + this.dateSepa + "m";
+				},
+				/**
+				 * Year, month, day Format function, The format is specified in the return statement.
+				 */
+				"Ymd" : function() {
+					return "Y" + this.dateSepa + "m" + this.dateSepa + "d";
+				},
+				/**
+				 * Year, month, day, hour Format function, The format is specified in the return statement.
+				 */
+				"YmdH" : function() {
+					return this.Ymd() + " H";
+				},
+				/**
+				 * Year, month, day, hour, minute Format function, The format is specified in the return statement.
+				 */
+				"YmdHi" : function() {
+					return this.Ymd() + " H" + this.timeSepa + "i";
+				},
+				/**
+				 * Hour, minute, second Format function, The format is specified in the return statement.
+				 */
+				"YmdHis" : function() {
+					return this.Ymd() + " H" + this.timeSepa + "i" + this.timeSepa + "s";
+				}
+			}
+		},
+		"validator" : {
+			/**
+			 * Custom validation rules
+			 */
+		    "userRules" : {
+		        /*
+		         * Function name becomes rule name.
+		         * The validation failure message is defined in the following N.context.attr("data").validator.message object with a property name same a function name for each language.
+		         *
+		         * str : Target string of validation
+		         * args : validation options
+		         *
+		         * return : Returns true if validation succeeds, false if it fails.
+		        "userRule" : function(str, args) {
+		            return true;
+		        }
+		         */
+		    },
+			/**
+			 * Validation error multilingual message
+			 *  - To add a language, copy the language set, specify the language set object property name as its locale string, and define the message.
+			 */
+			"message" : {
                 "ko_KR" : {
                     global : "필드검증에 통과하지 못했습니다.",
                     required : "필수입력 필드 입니다.",
@@ -277,59 +277,59 @@
                     regexp : "{2}"
                 }
             }
-        }
-    });
+		}
+	});
 
-    // The extend statement below should never be deleted if you have defined a custom format rule.
-    $.extend(N.formatter, N.context.attr("data").formatter.userRules);
-    // The extend statement below should never be deleted if you have defined a custom validation rule.
-    $.extend(N.validator, N.context.attr("data").validator.userRules);
+	// The extend statement below should never be deleted if you have defined a custom format rule.
+	$.extend(N.formatter, N.context.attr("data").formatter.userRules);
+	// The extend statement below should never be deleted if you have defined a custom validation rule.
+	$.extend(N.validator, N.context.attr("data").validator.userRules);
 
-    /**
-     * Natural-UI Config
-     */
-    N.context.attr("ui", {
-        "alert" : {
-            /**
-             * Set the element to save the elements of N.alert and N.popup components using jQuery Selector syntax.
-             * Define the same value as the value of N.context.attr("architecture").page.context unless it is a special case.
-             *  - If you use the Documents(N.docs) component, you don't have to specify it, but otherwise you must.
-             *  - If it is not SPA(Single Page Application), please set it to "body".
-             */
-            "container" : ".docs__ > .docs_contents__.visible__",
-            "global" : {
-                /**
-                 * N.alert's OK button style
-                 *  - It is specified as an option of the Button(N.button) component.
-                 */
-                "okBtnStyle" : {
-                    color : "yellowgreen",
-                    size : "medium"
-                },
-                /**
-                 * N.alert's Cancel button style
-                 *  - It is specified as an option of the Button(N.button) component.
-                 */
-                "cancelBtnStyle" : {
-                    size : "medium"
-                }
-            },
-            "input" : {
-                /**
-                 * Display time of message dialog displayed when input element is specified in context option(ms)
-                 */
-                displayTimeout : 7000,
-                /**
-                 * Design of the close button of the message dialog displayed when an input element is specified in the context option(html tags can be entered)
-                 */
-                closeBtn : "&times;"
-            },
-            /**
-             * Global alwaysOnTop option
-             *  - If set to true, The message dialog is always displayed at the top.
-             */
-            "alwaysOnTop" : true,
-            /**
+	/**
+	 * Natural-UI Config
+	 */
+	N.context.attr("ui", {
+		"alert" : {
+			/**
+			 * Set the element to save the elements of N.alert and N.popup components using jQuery Selector syntax.
+			 * Define the same value as the value of N.context.attr("architecture").page.context unless it is a special case.
+			 *  - If you use the Documents(N.docs) component, you don't have to specify it, but otherwise you must.
+			 *  - If it is not SPA(Single Page Application), please set it to "body".
+			 */
+			"container" : ".docs__ > .docs_contents__.visible__",
+			"global" : {
+			    /**
+			     * N.alert's OK button style
+			     *  - It is specified as an option of the Button(N.button) component.
+			     */
+				"okBtnStyle" : {
+					color : "yellowgreen",
+					size : "medium"
+				},
+				/**
+				 * N.alert's Cancel button style
+				 *  - It is specified as an option of the Button(N.button) component.
+				 */
+				"cancelBtnStyle" : {
+					size : "medium"
+				}
+			},
+			"input" : {
+				/**
+				 * Display time of message dialog displayed when input element is specified in context option(ms)
+				 */
+				displayTimeout : 7000,
+				/**
+				 * Design of the close button of the message dialog displayed when an input element is specified in the context option(html tags can be entered)
+				 */
+				closeBtn : "&times;"
+			},
+			/**
+	         * Global alwaysOnTop option
+	         *  - If set to true, The message dialog is always displayed at the top.
+	         */
+			"alwaysOnTop" : true,
+			/**
              * Global draggableOverflowCorrectionAddValues option
              *  - Specifies the position to move to inside when the message dialog is dropped off the screen.
              *  - Correct the position of the message dialog  by incrementing or decrementing by 1 when a scroll bar appears on the screen because the message dialog  does not completely return to the inside.
@@ -363,36 +363,50 @@
                     "cancel" : "Cancel"
                 }
             }
-        },
-        "datepicker" : {
-            /**
-             * Multilingual messages of N.datepicker
-             */
-            "message" : {
-                "ko_KR" : {
-                    "year" : "년",
-                    "month" : "월",
-                    "days" : "일,월,화,수,목,금,토",
-                    "yearNaN" : "년도는 서기 100년 이하는 입력 할 수 없습니다.",
-                    "monthNaN" : "월은 1월 부터 12월 까지 입력 할 수 있습니다.",
-                    "dayNaN" : "일은 1일부터 {0}일 까지 입력 할 수 있습니다.",
-                    "prev" : "이전",
-                    "next" : "다음"
-                },
-                "en_US" : {
-                    "year" : "Year",
-                    "month" : "Month",
-                    "days" : "Sun,Mon,Tue,Wed,Thu,Fri,Sat",
-                    "yearNaN" : "You can not enter less AD 100 years",
-                    "monthNaN" : "You can enter 1 to 12 months value",
-                    "dayNaN" : "You can enter 1 to {0} days value",
-                    "prev" : "Previous",
-                    "next" : "Next"
-                }
-            }
-        },
-        "popup" : {
-            /**
+		},
+		"datepicker" : {
+		    "monthonlyOpts" : {
+                /**
+                 * Global yearsPanelPosition option when monthonly option is true.
+                 *  - Specifies the position of the year selection element when the monthonly option is true.
+                 *  - Set to "left" or "top".
+                 */
+                "yearsPanelPosition" : "left",
+                /**
+                 * Global monthsPanelPosition option when monthonly option is true.
+                 *  - Specifies the position of the month selection element when the monthonly option is true.
+                 *  - Set to "left" or "top".
+                 */
+                "monthsPanelPosition" : "left",
+            },
+			/**
+			 * Multilingual messages of N.datepicker
+			 */
+			"message" : {
+				"ko_KR" : {
+					"year" : "년",
+					"month" : "월",
+					"days" : "일,월,화,수,목,금,토",
+					"yearNaN" : "년도는 서기 100년 이하는 입력 할 수 없습니다.",
+					"monthNaN" : "월은 1월 부터 12월 까지 입력 할 수 있습니다.",
+					"dayNaN" : "일은 1일부터 {0}일 까지 입력 할 수 있습니다.",
+					"prev" : "이전",
+					"next" : "다음"
+				},
+				"en_US" : {
+					"year" : "Year",
+					"month" : "Month",
+					"days" : "Sun,Mon,Tue,Wed,Thu,Fri,Sat",
+					"yearNaN" : "You can not enter less AD 100 years",
+					"monthNaN" : "You can enter 1 to 12 months value",
+					"dayNaN" : "You can enter 1 to {0} days value",
+					"prev" : "Previous",
+					"next" : "Next"
+				}
+			}
+		},
+		"popup" : {
+		    /**
              * Global alwaysOnTop option
              *  - If set to true, The popup dialog is always displayed at the top.
              */
@@ -412,8 +426,8 @@
              *  - If set to false, It does not create basic button(OK/Cancel buttons) related elements.
              */
             "button" : false
-        },
-        "tab" : {
+		},
+		"tab" : {
             "tabScrollCorrection" : {
                 tabContainerWidthCorrectionPx : 1,
                 tabContainerWidthReCalcDelayTime : 0
@@ -432,185 +446,185 @@
                 }
             }
         },
-        "grid" : {
-            /**
-             * Sort sort indicator when sort function is activated, You can also enter HTML tags
-             */
-            "sortableItem" : {
-                "asc" : "▼",
-                "desc" : "▲"
-            },
-            /**
-             * Multilingual messages
-             */
-            "message" : {
-                "ko_KR" : {
-                    "empty" : "조회를 하지 않았거나 조회된 데이터가 없습니다.",
-                    "search" : "검색",
-                    "selectAll" : "전체선택",
-                    "dFilter" : "데이터 필터",
-                    "more" : "더보기",
-                    "column" : "열",
-                    "showHide" : "열 감추기 / 보이기",
-                    "prev" : "이전",
-                    "next" : "다음"
-                },
-                "en_US" : {
-                    "empty" : "No inquired data or no data available.",
-                    "search" : "Search",
-                    "selectAll" : "Select all",
-                    "dFilter" : "Data filter",
-                    "more" : "MORE",
-                    "column" : "Column",
-                    "showHide" : "Hide and show columns",
-                    "prev" : "Previous",
-                    "next" : "Next"
-                }
-            },
-            /**
-             * Miscellaneous settings
-             */
-            "misc" : {
-                /**
-                 * Global misc.resizableCorrectionWidth option
-                 *  - The grid body column width and grid header column width may not match when the resizable option is activated.
-                 *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
-                 */
-                "resizableCorrectionWidth" : N.browser.is("safari") ? 1 : 0,
-                /**
-                 * Global misc.resizableLastCellCorrectionWidth option
+		"grid" : {
+			/**
+			 * Sort sort indicator when sort function is activated, You can also enter HTML tags
+			 */
+			"sortableItem" : {
+				"asc" : "▼",
+				"desc" : "▲"
+			},
+			/**
+			 * Multilingual messages
+			 */
+			"message" : {
+				"ko_KR" : {
+					"empty" : "조회를 하지 않았거나 조회된 데이터가 없습니다.",
+					"search" : "검색",
+					"selectAll" : "전체선택",
+					"dFilter" : "데이터 필터",
+					"more" : "더보기",
+					"column" : "열",
+					"showHide" : "열 감추기 / 보이기",
+					"prev" : "이전",
+					"next" : "다음"
+				},
+				"en_US" : {
+					"empty" : "No inquired data or no data available.",
+					"search" : "Search",
+					"selectAll" : "Select all",
+					"dFilter" : "Data filter",
+					"more" : "MORE",
+					"column" : "Column",
+					"showHide" : "Hide and show columns",
+					"prev" : "Previous",
+					"next" : "Next"
+				}
+			},
+			/**
+			 * Miscellaneous settings
+			 */
+			"misc" : {
+				/**
+				 * Global misc.resizableCorrectionWidth option
+				 *  - The grid body column width and grid header column width may not match when the resizable option is activated.
+				 *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
+				 */
+				"resizableCorrectionWidth" : N.browser.is("safari") ? 1 : 0,
+				/**
+				 * Global misc.resizableLastCellCorrectionWidth option
                  *  - Clicking on the last column may cause other columns to be pushed when the resizable option is enabled in the header fixed grid.
                  *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
-                 */
-                "resizableLastCellCorrectionWidth" : N.browser.is("ie") || N.browser.is("firefox") ? 10.8 : 12,
-                /**
-                 * Global misc.resizeBarCorrectionLeft option
+				 */
+		        "resizableLastCellCorrectionWidth" : N.browser.is("ie") || N.browser.is("firefox") ? 10.8 : 12,
+				/**
+				 * Global misc.resizeBarCorrectionLeft option
                  *  - The left position of the resize bar may not be centered relative to the column border when the resizable option is activated. At this time,
                  *    it is an option to correct by increasing or decreasing the value by 0.1.
-                 */
-                "resizeBarCorrectionLeft" : N.browser.is("firefox") ? -1 : N.browser.is("safari") ? 1 : 0,
-                /**
-                 * Global misc.resizeBarCorrectionHeight option
+				 */
+				"resizeBarCorrectionLeft" : N.browser.is("firefox") ? -1 : N.browser.is("safari") ? 1 : 0,
+				/**
+				 * Global misc.resizeBarCorrectionHeight option
                  *  - The height of the resizing bar may not be full when the resizable option is activated.
                  *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
-                 */
-                "resizeBarCorrectionHeight" : 0,
-                /**
-                 * Global misc.fixedcolHeadMarginTop option
+				 */
+				"resizeBarCorrectionHeight" : 0,
+				/**
+				 * Global misc.fixedcolHeadMarginTop option
                  *  - The top position of the fixed header cell(th) may not match when the fixedcol option is activated.
                  *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
-                 */
-                "fixedcolHeadMarginTop" : N.browser.is("ie") || N.browser.is("firefox") ? -1 : 0,
-                /**
-                 * Global misc.fixedcolHeadMarginLeft option
+				 */
+				"fixedcolHeadMarginTop" : N.browser.is("ie") || N.browser.is("firefox") ? -1 : 0,
+				/**
+				 * Global misc.fixedcolHeadMarginLeft option
                  *  - The left position of the fixed header cell(th) may not match when the fixedcol option is activated.
                  *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
-                 */
-                "fixedcolHeadMarginLeft" : N.browser.is("ie") || N.browser.is("firefox") ? -1 : 0,
-                /**
-                 * Global misc.fixedcolHeadHeight option
+				 */
+				"fixedcolHeadMarginLeft" : N.browser.is("ie") || N.browser.is("firefox") ? -1 : 0,
+				/**
+				 * Global misc.fixedcolHeadHeight option
                  *  - The height of the fixed header cell(th) may not match when the fixedcol option is activated.
                  *    At this time, it is an option to correct by increasing or decreasing the value by 0.1..
-                 */
-                "fixedcolHeadHeight" : 0,
-                /**
-                 * Global misc.fixedcolBodyMarginTop option
+				 */
+				"fixedcolHeadHeight" : 0,
+				/**
+				 * Global misc.fixedcolBodyMarginTop option
                  *  - The top position of the fixed body cell(td) may not match when the fixedcol option is activated.
                  *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
-                 */
-                "fixedcolBodyMarginTop" : N.browser.is("ie") || N.browser.is("firefox") ? -1 : 0,
-                /**
-                 * Global misc.fixedcolBodyMarginLeft option
+				 */
+				"fixedcolBodyMarginTop" : N.browser.is("ie") || N.browser.is("firefox") ? -1 : 0,
+				/**
+				 * Global misc.fixedcolBodyMarginLeft option
                  *  - The left position of the fixed body cell(td) may not match when the fixedcol option is activated.
                  *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
-                 */
-                "fixedcolBodyMarginLeft" : N.browser.is("ie") || N.browser.is("firefox") ? -1 : 0,
-                /**
-                 * Global misc.fixedcolBodyBindHeight option
+				 */
+				"fixedcolBodyMarginLeft" : N.browser.is("ie") || N.browser.is("firefox") ? -1 : 0,
+				/**
+				 * Global misc.fixedcolBodyBindHeight option
                  *  - The height of the fixed body cell(td) may not match when the fixedcol option is activated.
                  *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
-                 */
-                "fixedcolBodyBindHeight" : N.browser.is("ie") || N.browser.is("firefox") ? 1 : 1,
-                /**
-                 * Global misc.fixedcolBodyAddHeight option
+				 */
+				"fixedcolBodyBindHeight" : N.browser.is("ie") || N.browser.is("firefox") ? 1 : 1,
+				/**
+				 * Global misc.fixedcolBodyAddHeight option
                  *  - The height of the cell(td) of the added row may not match when the fixedcol option is activated.
                  *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
-                 */
-                "fixedcolBodyAddHeight" : 1,
-                /**
-                 * Global misc.fixedcolRootContainer option
+				 */
+				"fixedcolBodyAddHeight" : 1,
+				/**
+				 * Global misc.fixedcolRootContainer option
                  *  - After creating a grid instance by applying the fixed col option, the grid shape may break when the height of the element wrapping the grid is dynamically changed.
                  *    At this time, if you specify the element whose height is changed in this option, the grid shape will not be broken.
                  *  - Specify an element with the jQuery selector string.
-                 */
-                "fixedcolRootContainer" : ".view_context__"
-            }
-        }
-    });
+				 */
+				"fixedcolRootContainer" : ".view_context__"
+			}
+		}
+	});
 
-    /**
-     * Natural-UI.Shell Config
-     */
-    N.context.attr("ui.shell", {
-        "notify" : {
-            /**
+	/**
+	 * Natural-UI.Shell Config
+	 */
+	N.context.attr("ui.shell", {
+		"notify" : {
+		    /**
              * Global alwaysOnTop option
              *  - If set to true, The message dialog is always displayed at the top.
              */
-            "alwaysOnTop" : true,
-            /**
-             * Multilingual messages
-             */
-            "message" : {
-                "ko_KR" : {
-                    "close" : "닫기"
-                },
-                "en_US" : {
-                    "close" : "Close"
-                }
-            }
-        },
-        "docs" : {
-            /**
+		    "alwaysOnTop" : true,
+			/**
+			 * Multilingual messages
+			 */
+			"message" : {
+				"ko_KR" : {
+					"close" : "닫기"
+				},
+				"en_US" : {
+					"close" : "Close"
+				}
+			}
+		},
+		"docs" : {
+		    /**
              * Global alwaysOnTop option
              *  - If set to true, The menu list dialog is always displayed at the top.
              */
-            "alwaysOnTop" : true,
-            /**
-             * Multilingual messages
-             */
-            "message" : {
-                "ko_KR" : {
-                    "closeAllTitle" : "메뉴 전체 닫기",
-                    "closeAll" : "전체 닫기",
-                    "closeAllQ" : "선택한 메뉴를 제외하고 열린 메뉴 전체를 닫겠습니까?",
-                    "closeAllDQ" : "열려있는 메뉴 전체를 닫고 메인(홈) 화면으로 이동 하겠습니까?",
-                    "docListTitle" : "열린 메뉴 목록",
-                    "docList" : "메뉴 목록",
-                    "selDocument" : "{0} 메뉴 선택",
-                    "close" : "메뉴 닫기",
-                    "closeConf" : "\"{0}\" 메뉴에 편집중인 항목이 있습니다. 무시하고 메뉴를 닫겠습니까?",
-                    "maxTabs" : "최대 {0} 개의 메뉴 만 열 수 있습니다. <br>다른 메뉴 탭을 닫고 다시 시도 하세요.",
-                    "maxStateful" : "선택한 메뉴가 활성화 되면 설정 된 최대 상태유지 메뉴 개수(최대 {1} 개)가 초과 되어 마지막으로 선택 된 \"{0}\" 메뉴 페이지가 다시 로딩 됩니다.<br>메뉴를 선택 하겠습니까?"
-                },
-                "en_US" : {
-                    "closeAllTitle" : "Close all menus",
-                    "closeAll" : "Close all",
-                    "closeAllQ" : "Are you sure you want to close the all open menus except for the selected menu?",
-                    "closeAllDQ" : "Are you sure you want to close the all open menus and go to home page?",
-                    "docListTitle" : "Opened menu list",
-                    "docList" : "Menu list",
-                    "selDocument" : "Select the {0} menu",
-                    "close" : "Close the menu",
-                    "closeConf" : "There is an item being edited in the \"{0}\" memu. Are you sure you want to close the menu?",
-                    "maxTabs" : "You can only open up to {0} menus. <br>Close other menu tabs and try again.",
-                    "maxStateful" : "When the selected menu is activated, the maximum number of menu items (maximum of {1}) is exceeded and the last selected menu page \"{0}\" will be  reloaded.<br>Do you want to select the menu?"
-                }
-            }
-        }
-    });
+		    "alwaysOnTop" : true,
+		    /**
+		     * Multilingual messages
+		     */
+			"message" : {
+				"ko_KR" : {
+					"closeAllTitle" : "메뉴 전체 닫기",
+					"closeAll" : "전체 닫기",
+					"closeAllQ" : "선택한 메뉴를 제외하고 열린 메뉴 전체를 닫겠습니까?",
+					"closeAllDQ" : "열려있는 메뉴 전체를 닫고 메인(홈) 화면으로 이동 하겠습니까?",
+					"docListTitle" : "열린 메뉴 목록",
+					"docList" : "메뉴 목록",
+					"selDocument" : "{0} 메뉴 선택",
+					"close" : "메뉴 닫기",
+					"closeConf" : "\"{0}\" 메뉴에 편집중인 항목이 있습니다. 무시하고 메뉴를 닫겠습니까?",
+					"maxTabs" : "최대 {0} 개의 메뉴 만 열 수 있습니다. <br>다른 메뉴 탭을 닫고 다시 시도 하세요.",
+					"maxStateful" : "선택한 메뉴가 활성화 되면 설정 된 최대 상태유지 메뉴 개수(최대 {1} 개)가 초과 되어 마지막으로 선택 된 \"{0}\" 메뉴 페이지가 다시 로딩 됩니다.<br>메뉴를 선택 하겠습니까?"
+				},
+				"en_US" : {
+					"closeAllTitle" : "Close all menus",
+					"closeAll" : "Close all",
+					"closeAllQ" : "Are you sure you want to close the all open menus except for the selected menu?",
+					"closeAllDQ" : "Are you sure you want to close the all open menus and go to home page?",
+					"docListTitle" : "Opened menu list",
+					"docList" : "Menu list",
+					"selDocument" : "Select the {0} menu",
+					"close" : "Close the menu",
+					"closeConf" : "There is an item being edited in the \"{0}\" memu. Are you sure you want to close the menu?",
+					"maxTabs" : "You can only open up to {0} menus. <br>Close other menu tabs and try again.",
+					"maxStateful" : "When the selected menu is activated, the maximum number of menu items (maximum of {1}) is exceeded and the last selected menu page \"{0}\" will be  reloaded.<br>Do you want to select the menu?"
+				}
+			}
+		}
+	});
 
-    /**
+	/**
      * Natural-TEMPLATE Config
      */
     N.context.attr("template", {
