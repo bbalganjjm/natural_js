@@ -650,7 +650,7 @@ pre.shell {
 
 .docs_contents__ .view_context__ pre>code,
 pre.shell>code {
-    font-family: Consolas, monospace;
+    font-family: Consolas, "NanumSquare", monospace;
     display: inline;
     word-break: normal;
     word-wrap: normal;
