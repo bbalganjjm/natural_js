@@ -359,6 +359,18 @@
             }
 		},
 		"datepicker" : {
+		    "monthonlyOpts" : {
+                /**
+                 * Global yearsPanelPosition option when monthonly option is true.
+                 *  - Specifies the position of the year selection element when the monthonly option is true.
+                 */
+                "yearsPanelPosition" : "left",
+                /**
+                 * Global monthsPanelPosition option when monthonly option is true.
+                 *  - Specifies the position of the month selection element when the monthonly option is true.
+                 */
+                "monthsPanelPosition" : "left",
+            },
 			/**
 			 * Multilingual messages of N.datepicker
 			 */
