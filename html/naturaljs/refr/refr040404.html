@@ -46,7 +46,10 @@
 			<td>boolean</td>
 			<td>true</td>
 			<td style="text-align: center;">X</td>
-			<td>버튼 표시 여부</td>
+			<td>
+                <p lang="ko_KR">false로 설정 하면 기본 버튼(확인/취소 버튼) 관련 요소들을 생성하지 않습니다.</p>
+                <p lang="en_US">If set to false, It does not create basic button(OK/Cancel buttons) related elements.</p>
+            </td>
 		</tr>
 		<tr>
 			<td>closeMode</td>
@@ -54,10 +57,12 @@
 			<td>hide</td>
 			<td style="text-align: center;">X</td>
 			<td>
-				팝업이 닫힐 때 hide 메서드를 호출 할 것인지 remove 메서드를 호출 할 것인지 지정<br>
-				 - hide : hide 메서드를 호출하여 팝업 요소를 숨겨 줌.<br>
-				 - remove : remove 메서드를 호출하여 팝업 요소를 제거 함(이전 상태가 사라짐).
-			</td>
+                <p>팝업이 닫혔을 때 팝업 요소에 대한 처리 방법을 지정 합니다.</p>
+                <ul>
+                    <li>hide : 팝업 요소를 숨겨 이전 상태를 유지 합니다.</li>
+                    <li>remove : 팝업 요소를 제거하여 상태를 초기화 합니다.</li>
+                </ul>
+            </td>
 		</tr>
 		<tr>
 			<td>modal</td>
@@ -127,8 +132,8 @@ height: function(msgContext, msgContents) {
 			<td>false</td>
 			<td style="text-align: center;">X</td>
 			<td>
-                <p lang="ko_KR">메시지 대화상자를 항상 최 상위에 표시 할지 여부</p>
-                <p lang="en_US">Whether the popup will always be displayed at the top</p>
+                <p lang="ko_KR">true로 설정하면 팝업을 항상 최 상위에 표시 합니다.</p>
+                <p lang="en_US">If set to true, The popup dialog is always displayed at the top.</p>
             </td>
 		</tr>
 		<tr>
@@ -143,15 +148,38 @@ height: function(msgContext, msgContents) {
 			<td>boolean</td>
 			<td>false</td>
 			<td style="text-align: center;">X</td>
-			<td>팝업 창 드래그 가능 여부</td>
+			<td>
+                <p lang="ko_KR">true로 설정하면 제목 표시 줄로 팝업 대화 상자를 드래그 할 수 있습니다.</p>
+                <p lang="en_US">If set to true, the popup dialog will be draggable by the title bar.</p>
+            </td>
 		</tr>
 		<tr>
 			<td>draggableOverflowCorrection</td>
 			<td>boolean</td>
 			<td>true</td>
 			<td style="text-align: center;">X</td>
-			<td>이동 시 팝업이 화면바깥으로 벗어났을때 자동으로 안으로 이동 시킬지 여부</td>
+			<td>
+			    <p lang="ko_KR">false로 설정하면 팝업을 화면 바깥으로 드롭 했을 때 자동으로 내부로 이동 시키지 않습니다.</p>
+			    <p lang="en_US">If set to false, the popup will not automatically move inside when dropped off the screen.</p>
+			</td>
 		</tr>
+        <tr>
+            <td>draggableOverflowCorrectionAddValues</td>
+            <td>object</td>
+            <td><pre><code class="language-javascript">{
+    top : 0,
+    bottom : 0,
+    left : 0,
+    right : 0
+}</code></pre></td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p lang="ko_KR">팝업을 화면 바깥으로 드롭 했을 때 내부로 이동 할 위치를 지정 합니다.</p>
+                <p lang="en_US">Specifies the position to move to inside when the popup is dropped off the screen.</p>
+                <p lang="ko_KR" class="alert">팝업이 내부로 완전하게 돌아오지 않아 화면에 스크롤바가 생겼을 때 1씩 증감하여 팝업의 위치를 보정 하세요.</p>
+                <p lang="en_US" class="alert">Correct the position of the popup  by incrementing or decrementing by 1 when a scroll bar appears on the screen because the popup  does not completely return to the inside.</p>
+            </td>
+        </tr>
 		<tr>
 			<td>overlayClose</td>
 			<td>boolean</td>
@@ -195,7 +223,10 @@ height: function(msgContext, msgContents) {
             <td>boolean</td>
             <td>false</td>
             <td style="text-align: center;">X</td>
-            <td>필요없는 참조 요소를 제거하여 메모리를 절약 할 것인지 여부</td>
+            <td>
+                <p lang="ko_KR">true로 설정하면 필요없는 참조 요소를 제거하여 메모리 사용을 절약 합니다.</p>
+                <p lang="en_US">If set to true, save memory usage by removing unnecessary reference elements.</p>
+            </td>
         </tr>
 		<tr>
 			<td>onOk</td>

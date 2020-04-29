@@ -450,17 +450,26 @@
                     size : "medium"
                 }
             },
-			/**
-			 * 드래그하면서 다이얼로그가 window영역을 벗어날때 다시 돌아올 위치를 추가로 지정(기본값은 0, 드래그 시 횡 스크롤이 생겨 화면이 지저분 해질때 조절바람)
-			 * N.popup 도 적용가능
-			 */
+            /**
+             * Global draggableOverflowCorrectionAddValues option
+             *  - Specifies the position to move to inside when the message dialog is dropped off the screen.
+             *  - Correct the position of the message dialog  by incrementing or decrementing by 1 when a scroll bar appears on the screen because the message dialog  does not completely return to the inside.
+             */
 			"draggableOverflowCorrectionAddValues" : {
 				top : 0,
 				bottom : 0,
 				left : +2,
 				right : -2
 			},
+			/**
+             * Global draggable option
+             *  - If set to true, the message dialog will be draggable by the title bar.
+             */
 			"draggable" : true,
+			/**
+             * Global alwaysOnTop option
+             *  - If set to true, The message dialog is always displayed at the top.
+             */
 			"alwaysOnTop" : true,
 			/**
 			 * 페이지의 요소들이 동적으로 사이즈가 조절될 때 N.alert 의 모달오버레이와 메시지 박스의 위치를 자동으로 맞춰줄지 여부
@@ -485,11 +494,12 @@
 			 */
 			html : true,
 			/**
-			 * 메모리를 절약 해 준다.
-			 */
+             * Global saveMemory option
+             *  - If set to true, save memory usage by removing unnecessary reference elements.
+             */
 			"saveMemory" : true,
 			/**
-             * Multilingual messages of N.alert
+             * Multilingual messages
              */
 			"message" : {
 				"ko_KR" : {
@@ -503,12 +513,25 @@
 			}
 		},
 		"popup" : {
+		    /**
+             * Global draggable option
+             *  - If set to true, the popup dialog will be draggable by the title bar.
+             */
 			"draggable" : true,
+			/**
+             * Global alwaysOnTop option
+             *  - If set to true, The popup dialog is always displayed at the top.
+             */
 			"alwaysOnTop" : true,
+			/**
+             * Global button option
+             *  - If set to false, It does not create basic button(OK/Cancel buttons) related elements.
+             */
 			"button" : false,
 			"windowScrollLock" : false,
 			/**
-             * 메모리를 절약 해 준다.
+             * Global saveMemory option
+             *  - If set to true, save memory usage by removing unnecessary reference elements.
              */
             "saveMemory" : true
 		},
@@ -625,7 +648,7 @@
 		},
 		"list" : {
 		    /**
-             * Multilingual messages of N.list
+             * Multilingual messages
              */
 			"message" : {
 				"ko_KR" : {
@@ -683,7 +706,7 @@
        		"html" : false,
        		"tpBind" : false,
        		/**
-             * Multilingual messages of N.grid
+             * Multilingual messages
              */
 			"message" : {
 				"ko_KR" : {
@@ -714,73 +737,73 @@
              */
 			"misc" : {
 			    /**
-                 * Global misc.resizableCorrectionWidth option of N.grid
+                 * Global misc.resizableCorrectionWidth option
                  *  - The grid body column width and grid header column width may not match when the resizable option is activated.
                  *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
                  */
 				"resizableCorrectionWidth" : N.browser.is("safari") ? -6 : -7,
 		        /**
-                 * Global misc.resizableLastCellCorrectionWidth option of N.grid
+                 * Global misc.resizableLastCellCorrectionWidth option
                  *  - Clicking on the last column may cause other columns to be pushed when the resizable option is enabled in the header fixed grid.
                  *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
                  */
 				"resizableLastCellCorrectionWidth" : 8,
 				/**
-                 * Global misc.resizeBarCorrectionLeft option of N.grid
+                 * Global misc.resizeBarCorrectionLeft option
                  *  - The left position of the resize bar may not be centered relative to the column border when the resizable option is activated. At this time,
                  *    it is an option to correct by increasing or decreasing the value by 0.1.
                  */
 				"resizeBarCorrectionLeft" : N.browser.is("firefox") ? -1 : N.browser.is("safari") ? 1 : 0,
 		        /**
-                 * Global misc.resizeBarCorrectionHeight option of N.grid
+                 * Global misc.resizeBarCorrectionHeight option
                  *  - The height of the resizing bar may not be full when the resizable option is activated.
                  *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
                  */
 				"resizeBarCorrectionHeight" : 0,
 				/**
-                 * Global misc.fixedcolHeadMarginTop option of N.grid
+                 * Global misc.fixedcolHeadMarginTop option
                  *  - The top position of the fixed header cell(th) may not match when the fixedcol option is activated.
                  *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
                  */
 				"fixedcolHeadMarginTop" : N.browser.is("ie") || N.browser.is("firefox") ? 1 : 2,
 		        /**
-                 * Global misc.fixedcolHeadMarginLeft option of N.grid
+                 * Global misc.fixedcolHeadMarginLeft option
                  *  - The left position of the fixed header cell(th) may not match when the fixedcol option is activated.
                  *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
                  */
 				"fixedcolHeadMarginLeft" : N.browser.is("ie") || N.browser.is("firefox") ? -1 : 0,
 		        /**
-                 * Global misc.fixedcolHeadHeight option of N.grid
+                 * Global misc.fixedcolHeadHeight option
                  *  - The height of the fixed header cell(th) may not match when the fixedcol option is activated.
                  *    At this time, it is an option to correct by increasing or decreasing the value by 0.1..
                  */
 				"fixedcolHeadHeight" : N.browser.is("ie") || N.browser.is("firefox") ? 0 : -1,
 		        /**
-                 * Global misc.fixedcolBodyMarginTop option of N.grid
+                 * Global misc.fixedcolBodyMarginTop option
                  *  - The top position of the fixed body cell(td) may not match when the fixedcol option is activated.
                  *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
                  */
 				"fixedcolBodyMarginTop" : N.browser.is("ie") ? -0.5 : N.browser.is("firefox") ? -1 : 0,
 		        /**
-                 * Global misc.fixedcolBodyMarginLeft option of N.grid
+                 * Global misc.fixedcolBodyMarginLeft option
                  *  - The left position of the fixed body cell(td) may not match when the fixedcol option is activated.
                  *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
                  */
 				"fixedcolBodyMarginLeft" : N.browser.is("ie") || N.browser.is("firefox") ? -1 : 0,
 		        /**
-                 * Global misc.fixedcolBodyBindHeight option of N.grid
+                 * Global misc.fixedcolBodyBindHeight option
                  *  - The height of the fixed body cell(td) may not match when the fixedcol option is activated.
                  *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
                  */
 				"fixedcolBodyBindHeight" : N.browser.is("ie") ? 1.3 : 1,
 		        /**
-                 * Global misc.fixedcolBodyAddHeight option of N.grid
+                 * Global misc.fixedcolBodyAddHeight option
                  *  - The height of the cell(td) of the added row may not match when the fixedcol option is activated.
                  *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
                  */
 				"fixedcolBodyAddHeight" : 1,
 				/**
-                 * Global misc.fixedcolRootContainer option of N.grid
+                 * Global misc.fixedcolRootContainer option
                  *  - After creating a grid instance by applying the fixed col option, the grid shape may break when the height of the element wrapping the grid is dynamically changed.
                  *    At this time, if you specify the element whose height is changed in this option, the grid shape will not be broken.
                  *  - Specify an element with the jQuery selector string.
@@ -795,9 +818,13 @@
 	 */
 	N.context.attr("ui.shell", {
 		"notify" : {
+		    /**
+             * Global alwaysOnTop option
+             *  - If set to true, The message dialog is always displayed at the top.
+             */
 			"alwaysOnTop" : true,
 			/**
-             * Multilingual messages of N.notify
+             * Multilingual messages
              */
 			"message" : {
 				"ko_KR" : {
@@ -809,6 +836,10 @@
 			}
 		},
 		"docs" : {
+		    /**
+             * Global alwaysOnTop option
+             *  - If set to true, The menu list dialog is always displayed at the top.
+             */
 			"alwaysOnTop" : true,
 			"maxStateful" : 20,
 			"maxTabs" : 0,
@@ -871,7 +902,7 @@
 			},
 			*/
 			/**
-             * Multilingual messages of N.docs
+             * Multilingual messages
              */
 			"message" : {
 				"ko_KR" : {
