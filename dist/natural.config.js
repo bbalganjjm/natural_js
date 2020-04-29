@@ -363,11 +363,13 @@
                 /**
                  * Global yearsPanelPosition option when monthonly option is true.
                  *  - Specifies the position of the year selection element when the monthonly option is true.
+                 *  - Set to "left" or "top".
                  */
                 "yearsPanelPosition" : "left",
                 /**
                  * Global monthsPanelPosition option when monthonly option is true.
                  *  - Specifies the position of the month selection element when the monthonly option is true.
+                 *  - Set to "left" or "top".
                  */
                 "monthsPanelPosition" : "left",
             },
