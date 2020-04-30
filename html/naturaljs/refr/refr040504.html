@@ -87,21 +87,29 @@
 &lt;/div&gt;
 </code></pre>
 				<p class="alert">이전/다음 버튼 태그(a, span 태그)가 없으면 탭을 드래그나 터치 만 가능 하게 생성 합니다.</p>
-				<p class="alert">
-					사이트의 CSS 적용 방식에 따라 마지막 탭이 잘리거나 여백이 생길 수 있습니다. 이때는 다음 옵션값들을 조정하여 정상적으로 표시 할 수 있습니다.
-				</p>
+			</td>
+		</tr>
+		<tr>
+			<td>tabScrollCorrection</td>
+			<td>boolean</td>
+			<td>false</td>
+			<td style="text-align: center;">X</td>
+			<td>
+				<p lang="ko_KR">탭 요소에 영향을 주는 스타일(CSS)에 의해 마지막 탭이 잘리거나 여백이 생길 수 있습니다. 이때 tabScrollCorrection 객체의 속성으로 다음 옵션 값들을 설정하여 정상적으로 표시되게 할 수 있습니다.</p>
+				<p lang="en_US">The style (CSS) affecting the tab element may cause the last tab to be truncated or margins. At this time, you can set the following option values ​​as properties of the tabScrollCorrection object to display normally.</p>
+				<ul>
+					<li lang="ko_KR">tabContainerWidthCorrectionPx : 마지막 탭이 잘리거나 여백이 생길때 1씩 증감하여 보정 합니다.</li>
+					<li lang="en_US">tabContainerWidthCorrectionPx : 마지막 탭이 잘리거나 여백이 생길때 1씩 증감하여 보정 합니다.</li>
+					<li lang="ko_KR">tabContainerWidthReCalcDelayTime : 탭이 처음 표시 될 때만(브라우저 크기가 변동되면 정상적으로 보일 때) 탭이 잘리거나 여백이 생길때 1씩 증감하여 보정 합니다.</li>
+					<li lang="en_US">tabContainerWidthReCalcDelayTime : 탭이 처음 표시 될 때만(브라우저 크기가 변동되면 정상적으로 보일 때) 탭이 잘리거나 여백이 생길때 1씩 증감하여 보정 합니다.</li>
+				</ul>
 				<pre><code class="language-javascript">N("#tab").tab({
 	tabScrollCorrection : {
-		// 마지막 탭이 잘리거나 여백이 생길때
-		// 이 값을 1씩 증가시키거나 빼서 조정 해 주세요.
-		tabContainerWidthCorrectionPx : 0,
-		// 처음 표시될때만(브라우저 크기가 변동되면 정상적으로 보일때)
-		// 탭이 잘리거나 여백이 생길때
-		// 정상적으로 표시 될 때까지 숫자를 증가 시켜 주세요.
+		tabContainerWidthCorrectionPx : 1,
 		tabContainerWidthReCalcDelayTime : 0
 	}
 });</code></pre>
-				<p class="alert">natural.config.js 의 N.context.attr("ui").tab 에 위 옵션을 기입하면 전체 N.tab 컴포넌트에 적용 됩니다.</p>
+				<p class="alert">natural.config.js 의 N.context.attr("ui").tab 에 tabScrollCorrection 옵션을 적용하면 전체 N.tab 컴포넌트에 적용 됩니다.</p>
 			</td>
 		</tr>
 		<tr>

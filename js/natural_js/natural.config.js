@@ -623,45 +623,6 @@
 			"append" : true
 		},
 		"form" : {
-			/**
-			 * XSS 필터링 목록
-			 */
-			"xssReverseChars" : [
-			    ["&amp;", "&"],
-			    ["&#x2F;", "/"],
-			    ["&lt;", "<"], ["&gt;", ">"],
-			    ["&#x27;", "'"],
-			    ["&quot;", '"']
-			],
-			/**
-			 * 서버에서 XSS 필터링 된 값을 입력 요소에 바인드 할때는 원복해서 바인드하는 이벤트 핸들러.
-			 *
-			 * onBeforeBindValue 이벤트
-			 *  - 값이 바인드 되기전 실행 되는 이벤트, 반드시 val 을 (가공 후) 다시 리턴 해야 함.
-			 *  - N.form 을 사용하는 N.grid, N.list 에도 같이 적용 됨.
-			 *    - ele : 바인드 될 요소
-			 *    - ele : 바인드 될 값
-			 *    - ele : 호출 함수 명 - "bind" | "val"
-			 */
-			"onBeforeBindValue" : function(ele, val, action) {
-			    if(N.type(val) === "array") {
-			        for (var j = 0; j < val.length; j++) {
-			            if(N.type(val[j]) === "string"){
-			                for (var i = 0; i < this.options.xssReverseChars.length; i++) {
-                                val[j] = val[j].replace(new RegExp(this.options.xssReverseChars[i][0], "g"), this.options.xssReverseChars[i][1]);
-                            }
-			            }
-			        }
-			        return val;
-			    } else if(N.type(val) === "string"){
-		            for (var i = 0; i < this.options.xssReverseChars.length; i++) {
-		                val = val.replace(new RegExp(this.options.xssReverseChars[i][0], "g"), this.options.xssReverseChars[i][1]);
-		            }
-		            return val;
-			    } else {
-			        return val;
-			    }
-			},
 			"tpBind" : true
 		},
 		"list" : {
