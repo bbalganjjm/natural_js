@@ -122,6 +122,11 @@ th, td {
     height: 24px;
 }
 
+th.grid_head_fixed__,
+td.grid_body_fixed__ {
+    padding: 6px 3px;
+}
+
 th, tfoot td {
 	background-color: #A5D6A7;
 	text-shadow: 0 1px 0 #81C784;
