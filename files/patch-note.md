@@ -16,8 +16,10 @@
 ## natural.ui.css
  * Changed N.pagination, N.datepicker realted styles.
  * Fixed font-size has been removed.
+ * Changed fixedcol option related styles of N.grid.
 
 ##natural.config.js
- *
+ * Changed misc option related values of N.grid.
+ * Removed unnecessary setting values ​​and edited a comment.
 
 ## For more information on added and changed features, refer to the API manual(http://bbalganjjm.github.io/natural_js/)

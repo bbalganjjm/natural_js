@@ -745,7 +745,7 @@
                  *  - The top position of the fixed header cell(th) may not match when the fixedcol option is activated.
                  *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
                  */
-                "fixedcolHeadMarginTop" : N.browser.is("ie") || N.browser.is("firefox") ? 1 : 2,
+                "fixedcolHeadMarginTop" : N.browser.is("ie") || N.browser.is("firefox") ? 0 : 1,
                 /**
                  * Global misc.fixedcolHeadMarginLeft option
                  *  - The left position of the fixed header cell(th) may not match when the fixedcol option is activated.
@@ -757,7 +757,7 @@
                  *  - The height of the fixed header cell(th) may not match when the fixedcol option is activated.
                  *    At this time, it is an option to correct by increasing or decreasing the value by 0.1..
                  */
-                "fixedcolHeadHeight" : N.browser.is("ie") || N.browser.is("firefox") ? 0 : -1,
+                "fixedcolHeadHeight" : N.browser.is("ie") || N.browser.is("firefox") ? 1 : 0,
                 /**
                  * Global misc.fixedcolBodyMarginTop option
                  *  - The top position of the fixed body cell(td) may not match when the fixedcol option is activated.
@@ -943,7 +943,7 @@
              * @codeKey Group code property name
              */
             codes : {
-                codeUrl : "sample/code/getSampleCodeList.json",
+                codeUrl : "html/naturaljs/exap/data/code.json",
                 codeKey : "code"
             }
         },

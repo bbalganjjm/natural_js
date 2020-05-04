@@ -51,11 +51,11 @@
 						<th>index</th>
 						<th>name</th>
 						<th>email</th>
-						<th>gender</th>
-						<th>eye color</th>
-						<th>age</th>
-						<th>company</th>
-						<th>active</th>
+						<th data-filter="true">gender</th>
+						<th data-filter="true">eye color</th>
+						<th data-filter="true">age</th>
+						<th data-filter="true">company</th>
+						<th data-filter="true">active</th>
 						<th>about</th>
 						<th>greeting</th>
 					</tr>
@@ -152,6 +152,7 @@ N(".exap0600").cont({
        		sortable : true,
        		select : true,
        		fixedcol : 2,
+       		filter : false,
        		onSelect : function(index, rowEle, data) {
        			// Grid row select event
             	N("#subContext", cont.view).comm("html/naturaljs/exap/exap0601.html")

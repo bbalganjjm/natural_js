@@ -701,10 +701,6 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	/* -webkit-overflow-scrolling: touch; */
 }
 
-.grid__ > thead > tr > th.grid_head_fixed__ {
-	border-top-width: 2px;
-}
-
 /* Details popup */
 .grid__ .grid_more_colgroup_col__,
 .grid__ .grid_more_thead_col__ {
