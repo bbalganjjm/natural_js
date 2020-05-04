@@ -26,6 +26,12 @@ body {
     line-height: 1.7;
 }
 
+@media screen and (max-width: 768px) {
+    body {
+        font-size: 15px;
+    }
+}
+
 a {
     text-decoration: none;
     color: #0366d6;
