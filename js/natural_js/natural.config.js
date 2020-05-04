@@ -833,22 +833,22 @@
 			"maxTabs" : 0,
 			/**
              * Global entireLoadIndicator option
-             *  -
+             *  - If set to true, the progress bar is displayed until all Ajax requests executed when the page is loaded are completed.
              */
 			"entireLoadIndicator" : true,
 			/**
              * Global entireLoadScreenBlock option
-             *  -
+             *  - If set to true, double submission is prevented by blocking the screen until all Ajax requests executed when the page is loaded are completed.
              */
 			"entireLoadScreenBlock" : true,
 			/**
              * Global addLast option
-             *  -
+             *  - If set to true, a new tab is added last when the add method is called.
              */
 			"addLast" : true,
 			/**
              * Global tabScroll option
-             *  -
+             *  - If set to true, tabs can be scrolled by dragging the mouse or touching.
              */
 			"tabScroll" : true,
 			/**
@@ -858,7 +858,7 @@
 			"closeAllRedirectURL" : "./",
 			/**
              * Global entireLoadExcludeURLs option
-             *  -
+             *  - Excludes URLs specified by entireLoadExcludeURLs from the entireLoad(entireLoadIndicator, entireLoadScreenBlock, etc.) related event or option.
              */
 			"entireLoadExcludeURLs" : ["contents.html", "footer.html"],
 			/*

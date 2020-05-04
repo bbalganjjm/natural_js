@@ -98,10 +98,10 @@
 				<p lang="ko_KR">탭 요소에 영향을 주는 스타일(CSS)에 의해 마지막 탭이 잘리거나 여백이 생길 수 있습니다. 이때 tabScrollCorrection 객체의 속성으로 다음 옵션 값들을 조절하여 정상적으로 표시되게 할 수 있습니다.</p>
 				<p lang="en_US">The style (CSS) affecting the tab element may cause the last tab to be truncated or margins. At this time, you can adjust the following option values ​​as properties of the tabScrollCorrection object to display normally.</p>
 				<ul>
-					<li lang="ko_KR">tabContainerWidthCorrectionPx : 마지막 탭이 잘리거나 여백이 생길때 1씩 증감하여 보정 합니다.</li>
-					<li lang="en_US">tabContainerWidthCorrectionPx : 마지막 탭이 잘리거나 여백이 생길때 1씩 증감하여 보정 합니다.</li>
-					<li lang="ko_KR">tabContainerWidthReCalcDelayTime : 탭이 처음 표시 될 때만(브라우저 크기가 변동되면 정상적으로 보일 때) 탭이 잘리거나 여백이 생길때 1씩 증감하여 보정 합니다.</li>
-					<li lang="en_US">tabContainerWidthReCalcDelayTime : 탭이 처음 표시 될 때만(브라우저 크기가 변동되면 정상적으로 보일 때) 탭이 잘리거나 여백이 생길때 1씩 증감하여 보정 합니다.</li>
+					<li lang="ko_KR">tabContainerWidthCorrectionPx : 마지막 탭이 잘리거나 여백이 생겼을 때 1씩 증감하여 탭의 모양을 보정 할 수 있는 옵션 입니다.</li>
+					<li lang="en_US">tabContainerWidthCorrectionPx : This option allows you to correct the shape of the tab by increasing or decreasing by 1 when the last tab is cut or a margin is created.</li>
+					<li lang="ko_KR">tabContainerWidthReCalcDelayTime : 탭이 처음 표시 될 때 탭이 잘리거나 여백이 생겼을 때 1씩 증감해서 탭의 모양을 보정 할 수 있는 옵션 입니다.</li>
+					<li lang="en_US">tabContainerWidthReCalcDelayTime : This is an option to correct the shape of the tab by incrementing by 1 when the tab is cut or a margin is created when the tab is first displayed.</li>
 				</ul>
 				<pre><code class="language-javascript">N("#tab").tab({
 	tabScrollCorrection : {
@@ -109,7 +109,8 @@
 		tabContainerWidthReCalcDelayTime : 0
 	}
 });</code></pre>
-				<p class="alert">natural.config.js 의 N.context.attr("ui").tab 에 tabScrollCorrection 옵션을 적용하면 전체 N.tab 컴포넌트에 적용 됩니다.</p>
+				<p lang="ko_KR" class="alert">Config(natural.config.js) 의 N.context.attr("ui").tab 프로퍼티에 tabScrollCorrection 옵션을 설정하면 전체 N.tab 컴포넌트에 적용 됩니다.</p>
+				<p lang="en_US" class="alert">Setting the tabScrollCorrection option in the N.context.attr("ui").tab property of Config(natural.config.js) applies to all N.tab components.</p>
 			</td>
 		</tr>
 		<tr>

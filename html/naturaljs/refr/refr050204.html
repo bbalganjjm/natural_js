@@ -3,12 +3,12 @@
 		<span>Documents.request</span>
 	</h2>
 	<p>Document.request(N.docs.request) 는 단독으로 사용될 수 없고 N.docs 로 컨텐츠를 열때 마다 생성 되는 모듈입니다. request는 요청에 대한 옵션을 지정 할 수 있고 요청정보를 가지고 있고 페이지간 데이터 전달을 위한 attr 메서드가 구현 되어 있습니다. </p>
-	<p>add 나 reload 함수를 호출 하기 전에 다음과 같이 request attribute 를 정의 하면</p>
+	<p>add 나 reload 함수를 호출 하기 전에 다음과 같이 request.attr 로 파라미터를 설정 하면</p>
 	<pre><code class="language-javascript">var docs = N("container selector").docs();
 docs.request.attr("pageParam", { a : 1 }).add("page id", "page name", { url : "url" });
 // docs.request.attr("pageParam", { a : 1 }).reload();
 </code></pre>
-		<p>불러와진 컨텐츠의 Controller(N.cont) 오브젝트의 init 함수의 두번째 인자(request)로  불러 올 수 있습니다.</p>
+		<p>불러온 컨텐츠의 Controller(N.cont) 오브젝트의 init 함수의 두번째 인자인 request 객체에서 파라미터를 꺼낼 수 있습니다.</p>
 		<pre><code class="language-javascript">N("page id").cont({
 	init : function(view, request) {
 		N.log(request.attr("pageParam")); // --> { a : 1 }
@@ -16,7 +16,7 @@ docs.request.attr("pageParam", { a : 1 }).add("page id", "page name", { url : "u
 	}
 })
 </code></pre>
-	<p class="alert">Documents.request 는 Communicator.request 모듈을 그대로 사용 합니다. Documents.request 에 대한 자세한 내용은 <a href="#cmVmcjAyMDQlMjRDb21tdW5pY2F0b3IucmVxdWVzdCRodG1sJTJGbmF0dXJhbGpzJTJGcmVmciUyRnJlZnIwMjA0Lmh0bWw=">Communicator.request</a> 메뉴를 참고 바랍니다.</p>
+	<p class="alert">Documents.request 는 Communicator.request 모듈을 사용 합니다. Documents.request 에 대한 자세한 내용은 <a href="#cmVmcjAyMDQlMjRDb21tdW5pY2F0b3IucmVxdWVzdCRodG1sJTJGbmF0dXJhbGpzJTJGcmVmciUyRnJlZnIwMjA0Lmh0bWw=">Communicator.request</a> 메뉴를 참고 바랍니다.</p>
 </article>
 
 <script type="text/javascript">
