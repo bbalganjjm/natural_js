@@ -1061,21 +1061,14 @@
         "fn" : function(cont, fnChain, args){
             var view = args[0];
 
-            //load api demo page
+            // Loading the API demo page
             N(".apidemo", view).each(function() {
-                N(this).comm("html/naturaljs/apid/" + N(this).data("page") + ".html").submit(function() {
-                    var view_ = view.find(".view_context__");
-
-                    // inject description to option inputs
-                    if(view.closest(".refr0104").length === 0) {
-                        var descTableEle;
-                        if(view.closest(".refr010302").length === 0) {
-                            descTableEle = $("h3:contains('기본옵션'), h3:contains('Default Options')", view).next("table:first");
-                        } else {
-                            descTableEle = $("h4:contains('기본옵션'), h4:contains('Default Options')", view).next("table:first");
-                        }
+                N(this).comm("html/naturaljs/apid/" + N(this).data("page") + ".html").submit(function(apiCont) {
+                    if(apiCont && !apiCont.view.is(".demo.formatter, .demo.validator, .demo.communicator")) {
+                        // Insert a description into the option input elements.
+                        var descTableEle = view.closest(".docs_contents__").find("#defaultoptions .api.form");
                         var optNm;
-                        N(".form:first, .form#otherPage", view_).find(":input[id]").each(function() {
+                        N(".form:first, .form#otherPage", apiCont.view).find(":input[id]").each(function() {
                             optNm = this.id;
                             $(this).after('<div class="demo-desc">' + $.trim(descTableEle.find("tr").find(">td:first").filter(":contains('" + optNm + "'):first").siblings(":last").html()) + '</div>');
                         });

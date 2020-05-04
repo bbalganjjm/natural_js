@@ -468,12 +468,11 @@ article .btnBox {
     background-color: #fff;
     border: 1px solid #81C784;
     box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.2);
-    background-color: #E8F5E9;
+    background-color: #E8F5E9EE;
 	z-index: 1;
 	opacity: 0;
-	font-size: 12px;
+	font-size: 13px;
 	transform : scale(0);
-	transition: transform 0.15s linear, opacity 0.15s linear;
 	transform-origin: top left;
 }
 
@@ -484,7 +483,7 @@ article .btnBox {
 	margin-bottom: 15px;
 	opacity: 1;
 	transform : scale(1);
-	transition: transform 0.3s ease, opacity 0.3s ease;
+	transition: transform 0.5s ease, opacity 0.5s ease;
 	transform-origin: top left;
 }
 
@@ -550,7 +549,9 @@ article .btnBox {
 	width: 85px;
 }
 
-.docs_contents__>.view_context__ .form input[type='text'], .docs_contents__>.view_context__ .form input[type='number'], .docs_contents__>.view_context__ .form input[type='tel'] {
+.docs_contents__>.view_context__ .form input[type='text'],
+.docs_contents__>.view_context__ .form input[type='number'],
+.docs_contents__>.view_context__ .form input[type='tel'] {
 	width: 100%;
 }
 

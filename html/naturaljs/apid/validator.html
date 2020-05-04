@@ -1,3 +1,13 @@
+<style type="text/css">
+    .demo.validator .form input[type='text'],
+    .demo.validator .form input[type='number'],
+    .demo.validator .form input[type='tel'],
+    .demo.validator .form input[type='password'],
+    .demo.validator .form select, .demo textarea {
+        width: auto;
+    }
+</style>
+
 <article class="demo validator">
 	<p lang="ko_KR" class="smallContTit">데이터 : </p>
 	<p lang="en_US" class="smallContTit">Data : </p>
@@ -70,7 +80,7 @@
 
 <script type="text/javascript">
 
-N(".demo validator").cont({
+N(".demo.validator").cont({
     init : function(view, request) {
     	// initialize buttons in div.btnBox
     	N("div.btnBox a", view).button();
