@@ -1,90 +1,90 @@
 <article class="refr050203 apiDoc">
-	<h2>
-		<span lang="ko_KR">기본옵션</span>
-		<span lang="en_US">Default Options</span>
-	</h2>
-	<table class="api form">
-		<tr>
-			<th>Name</th>
-			<th>Type</th>
-			<th>Default</th>
-			<th>Required</th>
-			<th style="width: auto;">Description</th>
-		</tr>
-		<tr>
-			<td>context</td>
-			<td>jquery object|jquery selector string</td>
-			<td>null</td>
-			<td style="text-align: center;">O</td>
-			<td>
-				<p lang="ko_KR">N.docs를 적용 할 context 요소를 지정 합니다.</p>
-				<p lang="en_US">Specify the context element to apply N.docs.</p>
-			</td>
-		</tr>
-		<tr>
-			<td>multi</td>
-			<td>boolean</td>
-			<td>true</td>
-			<td style="text-align: center;">X</td>
-			<td>
-				<p lang="ko_KR">true로 설정하면 탭 기반 Multiple-Document Interface(MDI) 형태로 N.docs가 생성되고 false로 설정하면 일반적인 Single-Document Interface(SDI) 형태로 N.docs가 생성됩니다.</p>
-				<p lang="en_US">If set to true, N.docs are generated as a tab-based Multiple Document Interface(MDI) type, and when set to false, N.docs are generated as a generic Single Document Interface(SDI) type.</p>
-				<ul>
-					<li lang="ko_KR">true : 탭과 페이지 컨텐츠들을 표시 합니다.</li>
-					<li lang="en_US">true : Displays tabs and page contents.</li>
-					<li lang="ko_KR">false : 탭은 표시 하지 않고 단 한 개의 페이지 컨텐츠만 표시 합니다.</li>
-					<li lang="en_US">false : The tab is not displayed, and only one page content is displayed.</li>
-				</ul>
-			</td>
-		</tr>
-		<tr>
-			<td>maxStateful</td>
-			<td>number</td>
-			<td>0</td>
-			<td style="text-align: center;">X</td>
-			<td>
-				<p lang="ko_KR">multi 옵션이 true 인 경우 추가 탭 컨텐츠를 열 때마다 웹 브라우저가 느려지지 않도록 최대 상태 유지 탭 컨텐츠 수를 설정할 수 있습니다.</p>
-				<p lang="en_US">If the multi option is true, the maximum number of stateful tab contents can be set to prevent the web browser from slowing down whenever additional tab contents are opened.</p>
-				<p lang="ko_KR" class="alert">새로운 컨텐츠를 열때 열려있는 탭 컨텐츠의 개수가 최대 상태유지 개수를 초과 하면 제일 먼저 열린 탭 컨텐츠의 상태가 제거되고 상태유지가 제거 된 탭을 클릭 하면 해당 컨텐츠가 다시 로딩 됩니다.</p>
-				<p lang="en_US" class="alert">When opening the new content, if the number of open tab contents exceeds the maximum stateful count, the state of the first opened tab content is removed, and  clicking on the tab with the removed state, it will reload the content.</p>
-				<p lang="ko_KR" class="alert">값이 0 이면 최대 상태유지 컨텐츠 수를 제한 하지 않습니다.</p>
+    <h2>
+        <span lang="ko_KR">기본옵션</span>
+        <span lang="en_US">Default Options</span>
+    </h2>
+    <table class="api form">
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Required</th>
+            <th style="width: auto;">Description</th>
+        </tr>
+        <tr>
+            <td>context</td>
+            <td>jquery object|jquery selector string</td>
+            <td>null</td>
+            <td style="text-align: center;">O</td>
+            <td>
+                <p lang="ko_KR">N.docs를 적용 할 context 요소를 지정 합니다.</p>
+                <p lang="en_US">Specify the context element to apply N.docs.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>multi</td>
+            <td>boolean</td>
+            <td>true</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p lang="ko_KR">true로 설정하면 탭 기반 Multiple-Document Interface(MDI) 형태로 N.docs가 생성되고 false로 설정하면 일반적인 Single-Document Interface(SDI) 형태로 N.docs가 생성됩니다.</p>
+                <p lang="en_US">If set to true, N.docs are generated as a tab-based Multiple Document Interface(MDI) type, and when set to false, N.docs are generated as a generic Single Document Interface(SDI) type.</p>
+                <ul>
+                    <li lang="ko_KR">true : 탭과 페이지 컨텐츠들을 표시 합니다.</li>
+                    <li lang="en_US">true : Displays tabs and page contents.</li>
+                    <li lang="ko_KR">false : 탭은 표시 하지 않고 단 한 개의 페이지 컨텐츠만 표시 합니다.</li>
+                    <li lang="en_US">false : The tab is not displayed, and only one page content is displayed.</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>maxStateful</td>
+            <td>number</td>
+            <td>0</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p lang="ko_KR">multi 옵션이 true 인 경우 추가 탭 컨텐츠를 열 때마다 웹 브라우저가 느려지지 않도록 최대 상태 유지 탭 컨텐츠 수를 설정할 수 있습니다.</p>
+                <p lang="en_US">If the multi option is true, the maximum number of stateful tab contents can be set to prevent the web browser from slowing down whenever additional tab contents are opened.</p>
+                <p lang="ko_KR" class="alert">새로운 컨텐츠를 열때 열려있는 탭 컨텐츠의 개수가 최대 상태유지 개수를 초과 하면 제일 먼저 열린 탭 컨텐츠의 상태가 제거되고 상태유지가 제거 된 탭을 클릭 하면 해당 컨텐츠가 다시 로딩 됩니다.</p>
+                <p lang="en_US" class="alert">When opening the new content, if the number of open tab contents exceeds the maximum stateful count, the state of the first opened tab content is removed, and  clicking on the tab with the removed state, it will reload the content.</p>
+                <p lang="ko_KR" class="alert">값이 0 이면 최대 상태유지 컨텐츠 수를 제한 하지 않습니다.</p>
                 <p lang="en_US" class="alert">A value of 0 does not limit the maximum number of stateful content.</p>
-			</td>
-		</tr>
-		<tr>
-			<td>maxTabs</td>
-			<td>number</td>
-			<td>0</td>
-			<td style="text-align: center;">X</td>
-			<td>
-				<p lang="ko_KR">multi 옵션이 true 인 경우 추가 탭 컨텐츠를 열 때마다 웹 브라우저가 느려지지 않도록 최대 탭 컨텐츠 수를 설정할 수 있습니다.</p>
-				<p lang="en_US">If the multi option is true, the maximum number of tab contents can be set to prevent the web browser from slowing down whenever additional tab contents are opened.</p>
-				<p lang="ko_KR" class="alert">새로운 컨텐츠를 열때 열려있는 탭 컨텐츠의 개수가 최대 탭 개수를 초과 하면 더이상 탭 컨텐츠를 열 수 없습니다. 새로운 컨텐츠를 열려면 기존 탭 중에 하나를 닫아야 합니다.</p>
-				<p lang="en_US" class="alert">When opening new content, if the number of open tab contents exceeds the maximum tabs count, the tab contents can no longer be opened. To open new content, you must close one of the existing tabs.</p>
-			    <p lang="ko_KR" class="alert">값이 0 이면 최대 컨텐츠 수를 제한 하지 않습니다.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>maxTabs</td>
+            <td>number</td>
+            <td>0</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p lang="ko_KR">multi 옵션이 true 인 경우 추가 탭 컨텐츠를 열 때마다 웹 브라우저가 느려지지 않도록 최대 탭 컨텐츠 수를 설정할 수 있습니다.</p>
+                <p lang="en_US">If the multi option is true, the maximum number of tab contents can be set to prevent the web browser from slowing down whenever additional tab contents are opened.</p>
+                <p lang="ko_KR" class="alert">새로운 컨텐츠를 열때 열려있는 탭 컨텐츠의 개수가 최대 탭 개수를 초과 하면 더이상 탭 컨텐츠를 열 수 없습니다. 새로운 컨텐츠를 열려면 기존 탭 중에 하나를 닫아야 합니다.</p>
+                <p lang="en_US" class="alert">When opening new content, if the number of open tab contents exceeds the maximum tabs count, the tab contents can no longer be opened. To open new content, you must close one of the existing tabs.</p>
+                <p lang="ko_KR" class="alert">값이 0 이면 최대 컨텐츠 수를 제한 하지 않습니다.</p>
                 <p lang="en_US" class="alert">If the value is 0, the maximum number of contents is not limited.</p>
-			</td>
-		</tr>
-		<tr>
-			<td>addLast</td>
-			<td>boolean</td>
-			<td>false</td>
-			<td style="text-align: center;">X</td>
-			<td>
-				<p lang="ko_KR">true로 설정 하면 add 메서드를 호출 했을 때 새로운 탭이 마지막에 추가 됩니다.</p>
-				<p lang="en_US">If set to true, a new tab is added last when the add method is called.</p>
-			</td>
-		</tr>
-		<tr>
-			<td>tabScroll</td>
-			<td>boolean</td>
-			<td>false</td>
-			<td style="text-align: center;">X</td>
-			<td>
-				<p lang="ko_KR">true로 설정 하면 탭들을 마우스 드래그나 터치로 스크롤 할 수 있습니다.</p>
-				<p lang="en_US">If set to true, tabs can be scrolled by dragging the mouse or touching.</p>
-			</td>
-		</tr>
+            </td>
+        </tr>
+        <tr>
+            <td>addLast</td>
+            <td>boolean</td>
+            <td>false</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p lang="ko_KR">true로 설정 하면 add 메서드를 호출 했을 때 새로운 탭이 마지막에 추가 됩니다.</p>
+                <p lang="en_US">If set to true, a new tab is added last when the add method is called.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>tabScroll</td>
+            <td>boolean</td>
+            <td>false</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p lang="ko_KR">true로 설정 하면 탭들을 마우스 드래그나 터치로 스크롤 할 수 있습니다.</p>
+                <p lang="en_US">If set to true, tabs can be scrolled by dragging the mouse or touching.</p>
+            </td>
+        </tr>
         <tr>
             <td>tabScrollCorrection</td>
             <td>boolean</td>
@@ -99,342 +99,342 @@
                 </ul>
                 <pre><code class="language-javascript">N("#docs").docs({
     tabScrollCorrection : {
-		rightCorrectionPx : 1
-	}
+        rightCorrectionPx : 1
+    }
 });</code></pre>
-				<p lang="ko_KR" class="alert">Config(natural.config.js) 의 N.context.attr("ui.shell").docs 프로퍼티에 tabScrollCorrection 옵션을 설정하면 전체 N.docs 컴포넌트에 적용 됩니다.</p>
-				<p lang="en_US" class="alert">Setting the tabScrollCorrection option in the N.context.attr("ui.shell").docs property of Config(natural.config.js) applies to all N.docs components.</p>
+                <p lang="ko_KR" class="alert">Config(natural.config.js) 의 N.context.attr("ui.shell").docs 프로퍼티에 tabScrollCorrection 옵션을 설정하면 전체 N.docs 컴포넌트에 적용 됩니다.</p>
+                <p lang="en_US" class="alert">Setting the tabScrollCorrection option in the N.context.attr("ui.shell").docs property of Config(natural.config.js) applies to all N.docs components.</p>
             </td>
         </tr>
-		<tr>
-			<td>closeAllRedirectURL</td>
-			<td>string</td>
-			<td>null</td>
-			<td style="text-align: center;">X</td>
-			<td>
-				<p lang="ko_KR">"전체 닫기" 버튼을 클릭 했을 경우 closeAllRedirectURL 옵션 값이 null 이면 활성 화 된 탭을 제외한 나머지 탭들을 닫아고 url 문자열을 입력 하면 해당 url 로 리다이렉트 됩니다.</p>
-				<p lang="en_US">When the "Close All" button is clicked, if the value of the closeAllRedirectURL option is null, all other tabs except the active tab are closed and if you input the url string, it  will be redirect to the url.</p>
-				<p lang="ko_KR" class="alert">SPA(Single Page Application) 로  개발 할 때  홈(메인 인덱스)으로 이동하는 url 을 입력 하여 탭 전체가 닫힐때 만 이라도 페이지 리다이렉션이 일어나서 브라우저의 가비지 리소스들이 정리 되게 하는것을 권장 합니다.</p>
-				<p lang="en_US" class="alert">When developing with SPA(Single Page Application), it is recommended to enter the url to go to the home(Main index page) so that even when the entire tab is closed, page redirection occurs, so that the garbage resources of the browser are cleaned.</p>
-			</td>
-		</tr>
-		<tr>
-			<td>entireLoadIndicator</td>
-			<td>boolean</td>
-			<td>false</td>
-			<td style="text-align: center;">X</td>
-			<td>
-				<p lang="ko_KR">true로 설정 하면 페이지가 로딩 될 때 실행 되는 Ajax 요청들이 모두 완료 될때 까지 진행 상태 바를 보여 줍니다.</p>
-				<p lang="en_US">If set to true, the progress bar is displayed until all Ajax requests executed when the page is loaded are completed.</p>
-			</td>
-		</tr>
-		<tr>
-			<td>entireLoadScreenBlock</td>
-			<td>boolean</td>
-			<td>false</td>
-			<td style="text-align: center;">X</td>
-			<td>
-				<p lang="ko_KR">true로 설정 하면 페이지가 로딩 될 때 실행 되는 Ajax 요청들이 모두 완료 될때 까지 화면을 차단하여 Double Submit 을 방지 합니다.</p>
-				<p lang="en_US">If set to true, double submission is prevented by blocking the screen until all Ajax requests executed when the page is loaded are completed.</p>
-			</td>
-		</tr>
-		<tr>
-			<td>entireLoadExcludeURLs</td>
-			<td>array</td>
-			<td>[]</td>
-			<td style="text-align: center;">X</td>
-			<td>
-				<p lang="ko_KR">entireLoad 관련 이벤트나 옵션(entireLoadIndicator, entireLoadScreenBlock 등)에서 entireLoadExcludeURLs 로 지정한 URL 들을 캡쳐 대상에서 제외 합니다.</p>
-				<p lang="en_US">Excludes URLs specified by entireLoadExcludeURLs from the entireLoad(entireLoadIndicator, entireLoadScreenBlock, etc.) related event or option.</p>
-				<p lang="ko_KR" class="alert">페이지가 처음 로딩 될 때 N.docs 컨텍스트 바깥에서 로딩되는 Ajax 호출을 제외하고 싶을 때 설정 바랍니다.</p>
-				<p lang="en_US" class="alert">Set this when you want to exclude Ajax calls that are loaded outside of the N.docs context when the page is first loaded.</p>
-			</td>
-		</tr>
-		<tr>
-			<td>alwaysOnTop</td>
-			<td>boolean</td>
-			<td>false</td>
-			<td style="text-align: center;">X</td>
-			<td>
-			    <p lang="ko_KR">true로 설정하면 메뉴목록 대화상자를 항상 최 상위에 표시 합니다.</p>
+        <tr>
+            <td>closeAllRedirectURL</td>
+            <td>string</td>
+            <td>null</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p lang="ko_KR">"전체 닫기" 버튼을 클릭 했을 경우 closeAllRedirectURL 옵션 값이 null 이면 활성 화 된 탭을 제외한 나머지 탭들을 닫아고 url 문자열을 입력 하면 해당 url 로 리다이렉트 됩니다.</p>
+                <p lang="en_US">When the "Close All" button is clicked, if the value of the closeAllRedirectURL option is null, all other tabs except the active tab are closed and if you input the url string, it  will be redirect to the url.</p>
+                <p lang="ko_KR" class="alert">SPA(Single Page Application) 로  개발 할 때  홈(메인 인덱스)으로 이동하는 url 을 입력 하여 탭 전체가 닫힐때 만 이라도 페이지 리다이렉션이 일어나서 브라우저의 가비지 리소스들이 정리 되게 하는것을 권장 합니다.</p>
+                <p lang="en_US" class="alert">When developing with SPA(Single Page Application), it is recommended to enter the url to go to the home(Main index page) so that even when the entire tab is closed, page redirection occurs, so that the garbage resources of the browser are cleaned.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>entireLoadIndicator</td>
+            <td>boolean</td>
+            <td>false</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p lang="ko_KR">true로 설정 하면 페이지가 로딩 될 때 실행 되는 Ajax 요청들이 모두 완료 될때 까지 진행 상태 바를 보여 줍니다.</p>
+                <p lang="en_US">If set to true, the progress bar is displayed until all Ajax requests executed when the page is loaded are completed.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>entireLoadScreenBlock</td>
+            <td>boolean</td>
+            <td>false</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p lang="ko_KR">true로 설정 하면 페이지가 로딩 될 때 실행 되는 Ajax 요청들이 모두 완료 될때 까지 화면을 차단하여 Double Submit 을 방지 합니다.</p>
+                <p lang="en_US">If set to true, double submission is prevented by blocking the screen until all Ajax requests executed when the page is loaded are completed.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>entireLoadExcludeURLs</td>
+            <td>array</td>
+            <td>[]</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p lang="ko_KR">entireLoad 관련 이벤트나 옵션(entireLoadIndicator, entireLoadScreenBlock 등)에서 entireLoadExcludeURLs 로 지정한 URL 들을 캡쳐 대상에서 제외 합니다.</p>
+                <p lang="en_US">Excludes URLs specified by entireLoadExcludeURLs from the entireLoad(entireLoadIndicator, entireLoadScreenBlock, etc.) related event or option.</p>
+                <p lang="ko_KR" class="alert">페이지가 처음 로딩 될 때 N.docs 컨텍스트 바깥에서 로딩되는 Ajax 호출을 제외하고 싶을 때 설정 바랍니다.</p>
+                <p lang="en_US" class="alert">Set this when you want to exclude Ajax calls that are loaded outside of the N.docs context when the page is first loaded.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>alwaysOnTop</td>
+            <td>boolean</td>
+            <td>false</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p lang="ko_KR">true로 설정하면 메뉴목록 대화상자를 항상 최 상위에 표시 합니다.</p>
                 <p lang="en_US">If set to true, The menu list dialog is always displayed at the top.</p>
-			</td>
-		</tr>
-		<tr>
-			<td>alwaysOnTopCalcTarget</td>
-			<td>string</td>
-			<td>div, span, ul, p, nav, article, section, header, footer, aside</td>
-			<td style="text-align: center;">X</td>
-			<td>
-				<p lang="ko_KR">alwaysOnTop 옵션 적용 시 최 상위 z-index를 계산하기 위한 대상 요소들을 지정 합니다.</p>
-				<p lang="en_US">When applying the alwaysOnTop option, specify the target elements for calculating the highest z-index.</p>
-				<p lang="ko_KR" class="alert">jQuery selector 구문으로 지정 합니다.</p>
-				<p lang="en_US" class="alert">It is specified using jQuery selector syntax.</p>
-				<p lang="ko_KR" class="alert">N.docs 관련 요소들이 다른 요소에 의해 가려 질 때 가리고 있는 요소 셀렉터를 추가 해 주세요.</p>
-				<p lang="en_US" class="alert">Add an element selector that is obscured when elements related to N.docs are obscured by other elements.</p>
-			</td>
-		</tr>
-		<tr>
-			<td>onBeforeLoad</td>
-			<td>function</td>
-			<td>null</td>
-			<td style="text-align: center;">X</td>
-			<td>
-				<p lang="ko_KR">컨텐츠가 로딩 되기 전 실행 되는 이벤트 입니다.</p>
-				<p lang="en_US">This event is executed before the content is loaded.</p>
-				<pre><code class="language-javascript">onBeforeLoad : function(docId, target) {
-	// docId : Document Id
-	// target : Elements to be loaded content
+            </td>
+        </tr>
+        <tr>
+            <td>alwaysOnTopCalcTarget</td>
+            <td>string</td>
+            <td>div, span, ul, p, nav, article, section, header, footer, aside</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p lang="ko_KR">alwaysOnTop 옵션 적용 시 최 상위 z-index를 계산하기 위한 대상 요소들을 지정 합니다.</p>
+                <p lang="en_US">When applying the alwaysOnTop option, specify the target elements for calculating the highest z-index.</p>
+                <p lang="ko_KR" class="alert">jQuery selector 구문으로 지정 합니다.</p>
+                <p lang="en_US" class="alert">It is specified using jQuery selector syntax.</p>
+                <p lang="ko_KR" class="alert">N.docs 관련 요소들이 다른 요소에 의해 가려 질 때 가리고 있는 요소 셀렉터를 추가 해 주세요.</p>
+                <p lang="en_US" class="alert">Add an element selector that is obscured when elements related to N.docs are obscured by other elements.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>onBeforeLoad</td>
+            <td>function</td>
+            <td>null</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p lang="ko_KR">컨텐츠가 로딩 되기 전 실행 되는 이벤트 입니다.</p>
+                <p lang="en_US">This event is executed before the content is loaded.</p>
+                <pre><code class="language-javascript">onBeforeLoad : function(docId, target) {
+    // docId : Document Id
+    // target : Elements to be loaded content
 
-	// get document info
-	var doc = this.doc(docId);
+    // get document info
+    var doc = this.doc(docId);
 }</code></pre>
-				<p lang="ko_KR" class="alert">열린 페이지가 닫히기 전 까지 다시 호출 되지 않습니다.</p>
-				<p lang="en_US" class="alert">It is not called again until the opened page is closed.</p>
-				<p lang="ko_KR" class="alert">페이지가 로딩되기 전에 실행 되므로 cont 메서드로 불러온 페이지의 Controller 를 가져 올 수 없습니다.</p>
-				<p lang="en_US" class="alert">It is executed before the page is loaded, so you cannot get the Controller object of the page called by the cont method.</p>
-			</td>
-		</tr>
-		<tr>
-			<td>onLoad</td>
-			<td>function</td>
-			<td>null</td>
-			<td style="text-align: center;">X</td>
-			<td>
-				<p lang="ko_KR">페이지가 로딩 된 후 실행 되는 이벤트 입니다.</p>
-				<p lang="en_US">This event is executed after the content is loaded.</p>
-				<pre><code class="language-javascript">onLoad : function(docId) {
-	// docId : Document Id
+                <p lang="ko_KR" class="alert">열린 페이지가 닫히기 전 까지 다시 호출 되지 않습니다.</p>
+                <p lang="en_US" class="alert">It is not called again until the opened page is closed.</p>
+                <p lang="ko_KR" class="alert">페이지가 로딩되기 전에 실행 되므로 cont 메서드로 불러온 페이지의 Controller 를 가져 올 수 없습니다.</p>
+                <p lang="en_US" class="alert">It is executed before the page is loaded, so you cannot get the Controller object of the page called by the cont method.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>onLoad</td>
+            <td>function</td>
+            <td>null</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p lang="ko_KR">페이지가 로딩 된 후 실행 되는 이벤트 입니다.</p>
+                <p lang="en_US">This event is executed after the content is loaded.</p>
+                <pre><code class="language-javascript">onLoad : function(docId) {
+    // docId : Document Id
 
-	// get document info
-	var doc = this.doc(docId);
-	// get document's Controller
-	var cont = this.cont(docId);
-	var view = cont.view;
-	var request = cont.request;
+    // get document info
+    var doc = this.doc(docId);
+    // get document's Controller
+    var cont = this.cont(docId);
+    var view = cont.view;
+    var request = cont.request;
 }</code></pre>
-				<p lang="ko_KR" class="alert">열린 페이지가 닫히기 전 까지 다시 호출 되지 않습니다.</p>
-				<p lang="en_US" class="alert">It is not called again until the opened page is closed.</p>
-			</td>
-		</tr>
-		<tr>
-			<td>onBeforeEntireLoad</td>
-			<td>function</td>
-			<td>null</td>
-			<td style="text-align: center;">X</td>
-			<td>
-				<p lang="ko_KR">페이지가 로딩 될 때 실행 되는 Ajax 요청들이 캡쳐 되기 전에 실행되는 이벤트 입니다.</p>
-				<p lang="en_US">This event fires before the Ajax request is captured when the page is loaded.</p>
-				<pre><code class="language-javascript">onBeforeEntireLoad : function(docId) {
-	// docId : Document Id
+                <p lang="ko_KR" class="alert">열린 페이지가 닫히기 전 까지 다시 호출 되지 않습니다.</p>
+                <p lang="en_US" class="alert">It is not called again until the opened page is closed.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>onBeforeEntireLoad</td>
+            <td>function</td>
+            <td>null</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p lang="ko_KR">페이지가 로딩 될 때 실행 되는 Ajax 요청들이 캡쳐 되기 전에 실행되는 이벤트 입니다.</p>
+                <p lang="en_US">This event fires before the Ajax request is captured when the page is loaded.</p>
+                <pre><code class="language-javascript">onBeforeEntireLoad : function(docId) {
+    // docId : Document Id
 
-	// get document info
-	var doc = this.doc(docId);
+    // get document info
+    var doc = this.doc(docId);
 }</code></pre>
-				<p lang="ko_KR" class="alert">컨텐츠 로딩 전 최초 한번은 컨텐츠가 로딩되기 전에 이벤트가 실행 되므로 cont 메서드로 불러온 페이지의 Controller object 를 가져 올 수 없습니다.</p>
-				<p lang="en_US" class="alert">The first time before loading the content, the event is fired before the content is loaded, so you cannot get the Controller object of the page called by the cont method.</p>
-			</td>
-		</tr>
-		<tr>
-			<td>onErrorEntireLoad</td>
-			<td>function</td>
-			<td>null</td>
-			<td style="text-align: center;">X</td>
-			<td>
-				<p lang="ko_KR">페이지가 로딩 될 때 실행 되는 Ajax 요청들이 모두 완료되기 전에 에러가 발생 되었을때 실행되는 이벤트 입니다.</p>
-				<p lang="en_US">This event fires when an error occurs before all Ajax requests complete when the page loads.</p>
-				<pre><code class="language-javascript">onErrorEntireLoad : function(e, request, xhr, textStatus, callback) {
-	// e(arguments[0]) : ErrorThrown
+                <p lang="ko_KR" class="alert">컨텐츠 로딩 전 최초 한번은 컨텐츠가 로딩되기 전에 이벤트가 실행 되므로 cont 메서드로 불러온 페이지의 Controller object 를 가져 올 수 없습니다.</p>
+                <p lang="en_US" class="alert">The first time before loading the content, the event is fired before the content is loaded, so you cannot get the Controller object of the page called by the cont method.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>onErrorEntireLoad</td>
+            <td>function</td>
+            <td>null</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p lang="ko_KR">페이지가 로딩 될 때 실행 되는 Ajax 요청들이 모두 완료되기 전에 에러가 발생 되었을때 실행되는 이벤트 입니다.</p>
+                <p lang="en_US">This event fires when an error occurs before all Ajax requests complete when the page loads.</p>
+                <pre><code class="language-javascript">onErrorEntireLoad : function(e, request, xhr, textStatus, callback) {
+    // e(arguments[0]) : ErrorThrown
     // request(arguments[1]) : Communicator.request
     // xhr(arguments[2]) : jQuery XMLHTTORequest
-    // textStatus(arguments[3]) : "success"(submit 콜백에서 에러 발생 시) 또는 "error"(서버에서 오류 발생 시)
-    // callback(arguments[4]) : textStatus 값이 "success" 일때 submit 메서드의 인자로 지정한 콜백 함수
+    // textStatus(arguments[3]) : "success"(When an error occurs in submit callback) or "error"(When an error occurs on the server)
+    // callback(arguments[4]) : Callback function specified as argument of submit method when textStatus value is "success"
 }</code></pre>
                 <p lang="ko_KR" class="alert">onErrorEntireLoad의 이벤트 핸들러 함수는 N.comm.error 메서드의 callback 과 같습니다.</p>
                 <p lang="ko_KR" class="alert">The event handler function of onErrorEntireLoad is the same as the callback of the N.comm.error method.</p>
-			</td>
-		</tr>
-		<tr>
-			<td>onEntireLoad</td>
-			<td>function</td>
-			<td>null</td>
-			<td style="text-align: center;">X</td>
-			<td>
-				<p lang="ko_KR">페이지가 로딩 될 때 실행 되는 Ajax 요청들이 모두 완료된 후에 실행되는 이벤트 입니다.</p>
-				<p lang="en_US">This event fires after all Ajax requests complete when the page loads.</p>
-				<pre><code class="language-javascript">onEntireLoad : function(docId) {
-	// docId : Document Id
+            </td>
+        </tr>
+        <tr>
+            <td>onEntireLoad</td>
+            <td>function</td>
+            <td>null</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p lang="ko_KR">페이지가 로딩 될 때 실행 되는 Ajax 요청들이 모두 완료된 후에 실행되는 이벤트 입니다.</p>
+                <p lang="en_US">This event fires after all Ajax requests complete when the page loads.</p>
+                <pre><code class="language-javascript">onEntireLoad : function(docId) {
+    // docId : Document Id
 
-	// get document info
-	var doc = this.doc(docId);
-	// get document's Controller
-	var cont = this.cont(docId);
-	var view = cont.view;
-	var request = cont.request;
+    // get document info
+    var doc = this.doc(docId);
+    // get document's Controller
+    var cont = this.cont(docId);
+    var view = cont.view;
+    var request = cont.request;
 }</code></pre>
-			</td>
-		</tr>
-		<tr>
-			<td>onBeforeActive</td>
-			<td>function</td>
-			<td>null</td>
-			<td style="text-align: center;">X</td>
-			<td>
-				<p lang="ko_KR">선택한 탭이 활성화되기 전에 실행 되는 이벤트 입니다.</p>
-				<p lang="en_US">This event is executed before the selected tab is activated.</p>
-				<pre><code class="language-javascript">onBeforeActive : function(docId) {
-	// docId : Document Id
+            </td>
+        </tr>
+        <tr>
+            <td>onBeforeActive</td>
+            <td>function</td>
+            <td>null</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p lang="ko_KR">선택한 탭이 활성화되기 전에 실행 되는 이벤트 입니다.</p>
+                <p lang="en_US">This event is executed before the selected tab is activated.</p>
+                <pre><code class="language-javascript">onBeforeActive : function(docId) {
+    // docId : Document Id
 
-	// get document info
-	var doc = this.doc(docId);
-	// get document's Controller
-	var cont = this.cont(docId);
-	var view = cont.view;
-	var request = cont.request;
+    // get document info
+    var doc = this.doc(docId);
+    // get document's Controller
+    var cont = this.cont(docId);
+    var view = cont.view;
+    var request = cont.request;
 }</code></pre>
-			</td>
-		</tr>
-		<tr>
-			<td>onActive</td>
-			<td>function</td>
-			<td>null</td>
-			<td style="text-align: center;">X</td>
-			<td>
-				<p lang="ko_KR">선택한 탭이 활성화된 후에 실행 되는 이벤트 입니다.</p>
-				<p lang="en_US">This event is executed after the selected tab is activated.</p>
-				<pre><code class="language-javascript">onActive : function(docId) {
-	// docId : Document Id
+            </td>
+        </tr>
+        <tr>
+            <td>onActive</td>
+            <td>function</td>
+            <td>null</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p lang="ko_KR">선택한 탭이 활성화된 후에 실행 되는 이벤트 입니다.</p>
+                <p lang="en_US">This event is executed after the selected tab is activated.</p>
+                <pre><code class="language-javascript">onActive : function(docId) {
+    // docId : Document Id
 
-	// get document info
-	var doc = this.doc(docId);
-	// get document's Controller
-	var cont = this.cont(docId);
-	var view = cont.view;
-	var request = cont.request;
+    // get document info
+    var doc = this.doc(docId);
+    // get document's Controller
+    var cont = this.cont(docId);
+    var view = cont.view;
+    var request = cont.request;
 }</code></pre>
-			</td>
-		</tr>
-		<tr>
-			<td>onBeforeInactive</td>
-			<td>function</td>
-			<td>null</td>
-			<td style="text-align: center;">X</td>
-			<td>
-				<p lang="ko_KR">선택한 탭이 비활성화되기 전에 실행 되는 이벤트 입니다.</p>
-				<p lang="en_US">This event is executed before the selected tab is deactivated.</p>
-				<pre><code class="language-javascript">onBeforeInactive : function(docId) {
-	// docId : Document Id
+            </td>
+        </tr>
+        <tr>
+            <td>onBeforeInactive</td>
+            <td>function</td>
+            <td>null</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p lang="ko_KR">선택한 탭이 비활성화되기 전에 실행 되는 이벤트 입니다.</p>
+                <p lang="en_US">This event is executed before the selected tab is deactivated.</p>
+                <pre><code class="language-javascript">onBeforeInactive : function(docId) {
+    // docId : Document Id
 
-	// get document info
-	var doc = this.doc(docId);
-	// get document's Controller
-	var cont = this.cont(docId);
-	var view = cont.view;
-	var request = cont.request;
+    // get document info
+    var doc = this.doc(docId);
+    // get document's Controller
+    var cont = this.cont(docId);
+    var view = cont.view;
+    var request = cont.request;
 }</code></pre>
-			</td>
-		</tr>
-		<tr>
-			<td>onInactive</td>
-			<td>function</td>
-			<td>null</td>
-			<td style="text-align: center;">X</td>
-			<td>
-				<p lang="ko_KR">선택한 탭이 비활성화된 후에 실행 되는 이벤트 입니다.</p>
-				<p lang="en_US">This event is executed after the selected tab is deactivated.</p>
-				<pre><code class="language-javascript">onInactive : function(docId) {
-	// docId : Document Id
+            </td>
+        </tr>
+        <tr>
+            <td>onInactive</td>
+            <td>function</td>
+            <td>null</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p lang="ko_KR">선택한 탭이 비활성화된 후에 실행 되는 이벤트 입니다.</p>
+                <p lang="en_US">This event is executed after the selected tab is deactivated.</p>
+                <pre><code class="language-javascript">onInactive : function(docId) {
+    // docId : Document Id
 
-	// get document info
-	var doc = this.doc(docId);
-	// get document's Controller
-	var cont = this.cont(docId);
-	var view = cont.view;
-	var request = cont.request;
+    // get document info
+    var doc = this.doc(docId);
+    // get document's Controller
+    var cont = this.cont(docId);
+    var view = cont.view;
+    var request = cont.request;
 }</code></pre>
-			</td>
-		</tr>
-		<tr>
-			<td>onBeforeRemoveState</td>
-			<td>function</td>
-			<td>null</td>
-			<td style="text-align: center;">X</td>
-			<td>
-				<p lang="ko_KR">선택한 탭의 상태가 제거되기 전에 실행 되는 이벤트 입니다.</p>
-				<p lang="en_US">This event is executed before the state of selected tab is removed.</p>
-				<pre><code class="language-javascript">onBeforeRemoveState : function(docId) {
-	// docId : Document Id
+            </td>
+        </tr>
+        <tr>
+            <td>onBeforeRemoveState</td>
+            <td>function</td>
+            <td>null</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p lang="ko_KR">선택한 탭의 상태가 제거되기 전에 실행 되는 이벤트 입니다.</p>
+                <p lang="en_US">This event is executed before the state of selected tab is removed.</p>
+                <pre><code class="language-javascript">onBeforeRemoveState : function(docId) {
+    // docId : Document Id
 
-	// get document info
-	var doc = this.doc(docId);
-	// get document's Controller
-	var cont = this.cont(docId);
-	var view = cont.view;
-	var request = cont.request;
+    // get document info
+    var doc = this.doc(docId);
+    // get document's Controller
+    var cont = this.cont(docId);
+    var view = cont.view;
+    var request = cont.request;
 }</code></pre>
-			</td>
-		</tr>
-		<tr>
-			<td>onRemoveState</td>
-			<td>function</td>
-			<td>null</td>
-			<td style="text-align: center;">X</td>
-			<td>
-				<p lang="ko_KR">선택한 탭의 상태가 제거된 후에 실행 되는 이벤트 입니다.</p>
-				<p lang="en_US">This event is executed after the state of selected tab is removed.</p>
-				<pre><code class="language-javascript">onRemoveState : function(docId) {
-	// docId : Document Id
+            </td>
+        </tr>
+        <tr>
+            <td>onRemoveState</td>
+            <td>function</td>
+            <td>null</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p lang="ko_KR">선택한 탭의 상태가 제거된 후에 실행 되는 이벤트 입니다.</p>
+                <p lang="en_US">This event is executed after the state of selected tab is removed.</p>
+                <pre><code class="language-javascript">onRemoveState : function(docId) {
+    // docId : Document Id
 
-	// get document info
-	var doc = this.doc(docId);
-	// get document's Controller
-	var cont = this.cont(docId);
-	var view = cont.view;
-	var request = cont.request;
+    // get document info
+    var doc = this.doc(docId);
+    // get document's Controller
+    var cont = this.cont(docId);
+    var view = cont.view;
+    var request = cont.request;
 }</code></pre>
-			</td>
-		</tr>
-		<tr>
-			<td>onBeforeRemove</td>
-			<td>function</td>
-			<td>null</td>
-			<td style="text-align: center;">X</td>
-			<td>
-				<p lang="ko_KR">선택한 탭의 상태가 제거된 전에 실행 되는 이벤트 입니다.</p>
-				<p lang="en_US">This event is executed before the selected tab is removed.</p>
-				<pre><code class="language-javascript">onBeforeRemove : function(docId) {
-	// docId : Document Id
+            </td>
+        </tr>
+        <tr>
+            <td>onBeforeRemove</td>
+            <td>function</td>
+            <td>null</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p lang="ko_KR">선택한 탭의 상태가 제거된 전에 실행 되는 이벤트 입니다.</p>
+                <p lang="en_US">This event is executed before the selected tab is removed.</p>
+                <pre><code class="language-javascript">onBeforeRemove : function(docId) {
+    // docId : Document Id
 
-	// get document info
-	var doc = this.doc(docId);
-	// get document's Controller
-	var cont = this.cont(docId);
-	var view = cont.view;
-	var request = cont.request;
+    // get document info
+    var doc = this.doc(docId);
+    // get document's Controller
+    var cont = this.cont(docId);
+    var view = cont.view;
+    var request = cont.request;
 }</code></pre>
-			</td>
-		</tr>
-		<tr>
-			<td>onRemove</td>
-			<td>function</td>
-			<td>null</td>
-			<td style="text-align: center;">X</td>
-			<td>
-				<p lang="ko_KR">선택한 탭이 제거된 후에 실행 되는 이벤트 입니다.</p>
-				<p lang="en_US">This event is executed after the selected tab is removed.</p>
-				<pre><code class="language-javascript">onRemove : function(docId) {
-	// docId : Document Id
+            </td>
+        </tr>
+        <tr>
+            <td>onRemove</td>
+            <td>function</td>
+            <td>null</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p lang="ko_KR">선택한 탭이 제거된 후에 실행 되는 이벤트 입니다.</p>
+                <p lang="en_US">This event is executed after the selected tab is removed.</p>
+                <pre><code class="language-javascript">onRemove : function(docId) {
+    // docId : Document Id
 
-	// get document info
-	var doc = this.doc(docId);
-	// get document's Controller
-	var cont = this.cont(docId);
-	var view = cont.view;
-	var request = cont.request;
+    // get document info
+    var doc = this.doc(docId);
+    // get document's Controller
+    var cont = this.cont(docId);
+    var view = cont.view;
+    var request = cont.request;
 }</code></pre>
-			</td>
-		</tr>
-	</table>
+            </td>
+        </tr>
+    </table>
 </article>
 
 <script type="text/javascript">
