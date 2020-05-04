@@ -180,16 +180,19 @@
 			<td>null</td>
 			<td style="text-align: center;">X</td>
 			<td>
-				<p>컨텐츠가 로딩 되기 전 실행 되는 이벤트 입니다.</p>
+				<p lang="ko_KR">컨텐츠가 로딩 되기 전 실행 되는 이벤트 입니다.</p>
+				<p lang="en_US">This event is executed before the content is loaded.</p>
 				<pre><code class="language-javascript">onBeforeLoad : function(docId, target) {
 	// docId : Document Id
-	// target : 컨텐츠가 로딩 될 요소
+	// target : Elements to be loaded content
 
 	// get document info
 	var doc = this.doc(docId);
 }</code></pre>
-				<p class="alert">해당 컨텐츠가 닫히기 전 까지 다시 호출 되지 않습니다.</p>
-				<p class="alert">컨텐츠가 로딩되기 전에 실행 되므로 cont 메서드로 컨텐츠의 Controller 를 가져 올 수 없습니다.</p>
+				<p lang="ko_KR" class="alert">열린 페이지가 닫히기 전 까지 다시 호출 되지 않습니다.</p>
+				<p lang="en_US" class="alert">It is not called again until the opened page is closed.</p>
+				<p lang="ko_KR" class="alert">페이지가 로딩되기 전에 실행 되므로 cont 메서드로 불러온 페이지의 Controller 를 가져 올 수 없습니다.</p>
+				<p lang="en_US" class="alert">It is executed before the page is loaded, so you cannot get the Controller object of the page called by the cont method.</p>
 			</td>
 		</tr>
 		<tr>
@@ -198,18 +201,20 @@
 			<td>null</td>
 			<td style="text-align: center;">X</td>
 			<td>
-				<p>컨텐츠가 로딩 된 후 실행 되는 이벤트 입니다.</p>
+				<p lang="ko_KR">페이지가 로딩 된 후 실행 되는 이벤트 입니다.</p>
+				<p lang="en_US">This event is executed after the content is loaded.</p>
 				<pre><code class="language-javascript">onLoad : function(docId) {
 	// docId : Document Id
 
 	// get document info
 	var doc = this.doc(docId);
 	// get document's Controller
-	var docCont = this.cont(docId);
-	var docView = this.cont(docId).view;
-	var docRequest = this.cont(docId).request;
+	var cont = this.cont(docId);
+	var view = cont.view;
+	var request = cont.request;
 }</code></pre>
-				<p class="alert">해당 컨텐츠가 닫히기 전 까지 다시 호출 되지 않습니다.</p>
+				<p lang="ko_KR" class="alert">열린 페이지가 닫히기 전 까지 다시 호출 되지 않습니다.</p>
+				<p lang="en_US" class="alert">It is not called again until the opened page is closed.</p>
 			</td>
 		</tr>
 		<tr>
@@ -218,14 +223,16 @@
 			<td>null</td>
 			<td style="text-align: center;">X</td>
 			<td>
-				<p>컨텐츠 로딩 시 동시에 실행 되는 여러 서버 요청(N.comm.submit)들 중 최초 요청이 실행 되기 전 실행되는 이벤트</p>
+				<p lang="ko_KR">페이지가 로딩 될 때 실행 되는 Ajax 요청들이 캡쳐 되기 전에 실행되는 이벤트 입니다.</p>
+				<p lang="en_US">This event fires before the Ajax request is captured when the page is loaded.</p>
 				<pre><code class="language-javascript">onBeforeEntireLoad : function(docId) {
 	// docId : Document Id
 
 	// get document info
 	var doc = this.doc(docId);
 }</code></pre>
-				<p class="alert">컨텐츠 로딩 전 최초 한번은 컨텐츠가 로딩되기 전에 이벤트가 실행 되므로 cont 메서드로 컨텐츠의 Controller 를 가져 올 수 없습니다.</p>
+				<p lang="ko_KR" class="alert">컨텐츠 로딩 전 최초 한번은 컨텐츠가 로딩되기 전에 이벤트가 실행 되므로 cont 메서드로 불러온 페이지의 Controller object 를 가져 올 수 없습니다.</p>
+				<p lang="en_US" class="alert">The first time before loading the content, the event is fired before the content is loaded, so you cannot get the Controller object of the page called by the cont method.</p>
 			</td>
 		</tr>
 		<tr>
@@ -234,7 +241,8 @@
 			<td>null</td>
 			<td style="text-align: center;">X</td>
 			<td>
-				<p>컨텐츠 로딩 시 동시에 실행 되는 여러 서버 요청(N.comm.submit)들 중 에러가 발생 했을때 실행되는 이벤트</p>
+				<p lang="ko_KR">페이지가 로딩 될 때 실행 되는 Ajax 요청들이 모두 완료되기 전에 에러가 발생 되었을때 실행되는 이벤트 입니다.</p>
+				<p lang="en_US">This event fires when an error occurs before all Ajax requests complete when the page loads.</p>
 				<pre><code class="language-javascript">onErrorEntireLoad : function(e, request, xhr, textStatus, callback) {
 	// e(arguments[0]) : ErrorThrown
     // request(arguments[1]) : Communicator.request
@@ -242,7 +250,8 @@
     // textStatus(arguments[3]) : "success"(submit 콜백에서 에러 발생 시) 또는 "error"(서버에서 오류 발생 시)
     // callback(arguments[4]) : textStatus 값이 "success" 일때 submit 메서드의 인자로 지정한 콜백 함수
 }</code></pre>
-                <p class="alert">onErrorEntireLoad의 이벤트 핸들러 함수는 N.comm.error 메서드의 callback 과 같습니다.</p>
+                <p lang="ko_KR" class="alert">onErrorEntireLoad의 이벤트 핸들러 함수는 N.comm.error 메서드의 callback 과 같습니다.</p>
+                <p lang="ko_KR" class="alert">The event handler function of onErrorEntireLoad is the same as the callback of the N.comm.error method.</p>
 			</td>
 		</tr>
 		<tr>
@@ -251,16 +260,17 @@
 			<td>null</td>
 			<td style="text-align: center;">X</td>
 			<td>
-				<p>컨텐츠 로딩 시 동시에 실행 되는 여러 서버 요청(N.comm.submit)들이 모두 완료 되었을 때 실행되는 이벤트</p>
+				<p lang="ko_KR">페이지가 로딩 될 때 실행 되는 Ajax 요청들이 모두 완료된 후에 실행되는 이벤트 입니다.</p>
+				<p lang="en_US">This event fires after all Ajax requests complete when the page loads.</p>
 				<pre><code class="language-javascript">onEntireLoad : function(docId) {
 	// docId : Document Id
 
 	// get document info
 	var doc = this.doc(docId);
 	// get document's Controller
-	var docCont = this.cont(docId);
-	var docView = this.cont(docId).view;
-	var docRequest = this.cont(docId).request;
+	var cont = this.cont(docId);
+	var view = cont.view;
+	var request = cont.request;
 }</code></pre>
 			</td>
 		</tr>
@@ -278,9 +288,9 @@
 	// get document info
 	var doc = this.doc(docId);
 	// get document's Controller
-	var docCont = this.cont(docId);
-	var docView = this.cont(docId).view;
-	var docRequest = this.cont(docId).request;
+	var cont = this.cont(docId);
+	var view = cont.view;
+	var request = cont.request;
 }</code></pre>
 			</td>
 		</tr>
@@ -290,7 +300,7 @@
 			<td>null</td>
 			<td style="text-align: center;">X</td>
 			<td>
-				<p lang="ko_KR">선택한 탭이 활성화되기 전에 실행 되는 이벤트 입니다.</p>
+				<p lang="ko_KR">선택한 탭이 활성화된 후에 실행 되는 이벤트 입니다.</p>
 				<p lang="en_US">This event is executed after the selected tab is activated.</p>
 				<pre><code class="language-javascript">onActive : function(docId) {
 	// docId : Document Id
@@ -298,9 +308,9 @@
 	// get document info
 	var doc = this.doc(docId);
 	// get document's Controller
-	var docCont = this.cont(docId);
-	var docView = this.cont(docId).view;
-	var docRequest = this.cont(docId).request;
+	var cont = this.cont(docId);
+	var view = cont.view;
+	var request = cont.request;
 }</code></pre>
 			</td>
 		</tr>
@@ -310,16 +320,17 @@
 			<td>null</td>
 			<td style="text-align: center;">X</td>
 			<td>
-				<p>선택한 탭이 비활성화 되기 전 마다 실행 되는 이벤트</p>
+				<p lang="ko_KR">선택한 탭이 비활성화되기 전에 실행 되는 이벤트 입니다.</p>
+				<p lang="en_US">This event is executed before the selected tab is deactivated.</p>
 				<pre><code class="language-javascript">onBeforeInactive : function(docId) {
 	// docId : Document Id
 
 	// get document info
 	var doc = this.doc(docId);
 	// get document's Controller
-	var docCont = this.cont(docId);
-	var docView = this.cont(docId).view;
-	var docRequest = this.cont(docId).request;
+	var cont = this.cont(docId);
+	var view = cont.view;
+	var request = cont.request;
 }</code></pre>
 			</td>
 		</tr>
@@ -329,16 +340,17 @@
 			<td>null</td>
 			<td style="text-align: center;">X</td>
 			<td>
-				<p>선택한 탭이 비활성화 될 때 마다 실행 되는 이벤트</p>
+				<p lang="ko_KR">선택한 탭이 비활성화된 후에 실행 되는 이벤트 입니다.</p>
+				<p lang="en_US">This event is executed after the selected tab is deactivated.</p>
 				<pre><code class="language-javascript">onInactive : function(docId) {
 	// docId : Document Id
 
 	// get document info
 	var doc = this.doc(docId);
 	// get document's Controller
-	var docCont = this.cont(docId);
-	var docView = this.cont(docId).view;
-	var docRequest = this.cont(docId).request;
+	var cont = this.cont(docId);
+	var view = cont.view;
+	var request = cont.request;
 }</code></pre>
 			</td>
 		</tr>
@@ -348,16 +360,17 @@
 			<td>null</td>
 			<td style="text-align: center;">X</td>
 			<td>
-				<p>선택한 탭의 상태가 제거 되기 전 마다 실행 되는 이벤트</p>
+				<p lang="ko_KR">선택한 탭의 상태가 제거되기 전에 실행 되는 이벤트 입니다.</p>
+				<p lang="en_US">This event is executed before the state of selected tab is removed.</p>
 				<pre><code class="language-javascript">onBeforeRemoveState : function(docId) {
 	// docId : Document Id
 
 	// get document info
 	var doc = this.doc(docId);
 	// get document's Controller
-	var docCont = this.cont(docId);
-	var docView = this.cont(docId).view;
-	var docRequest = this.cont(docId).request;
+	var cont = this.cont(docId);
+	var view = cont.view;
+	var request = cont.request;
 }</code></pre>
 			</td>
 		</tr>
@@ -367,16 +380,17 @@
 			<td>null</td>
 			<td style="text-align: center;">X</td>
 			<td>
-				<p>선택한 탭의 상태가 제거 될 때 마다 실행 되는 이벤트</p>
+				<p lang="ko_KR">선택한 탭의 상태가 제거된 후에 실행 되는 이벤트 입니다.</p>
+				<p lang="en_US">This event is executed after the state of selected tab is removed.</p>
 				<pre><code class="language-javascript">onRemoveState : function(docId) {
 	// docId : Document Id
 
 	// get document info
 	var doc = this.doc(docId);
 	// get document's Controller
-	var docCont = this.cont(docId);
-	var docView = this.cont(docId).view;
-	var docRequest = this.cont(docId).request;
+	var cont = this.cont(docId);
+	var view = cont.view;
+	var request = cont.request;
 }</code></pre>
 			</td>
 		</tr>
@@ -386,16 +400,17 @@
 			<td>null</td>
 			<td style="text-align: center;">X</td>
 			<td>
-				<p>선택한 탭이 제거 되기 전 마다 실행 되는 이벤트</p>
+				<p lang="ko_KR">선택한 탭의 상태가 제거된 전에 실행 되는 이벤트 입니다.</p>
+				<p lang="en_US">This event is executed before the selected tab is removed.</p>
 				<pre><code class="language-javascript">onBeforeRemove : function(docId) {
 	// docId : Document Id
 
 	// get document info
 	var doc = this.doc(docId);
 	// get document's Controller
-	var docCont = this.cont(docId);
-	var docView = this.cont(docId).view;
-	var docRequest = this.cont(docId).request;
+	var cont = this.cont(docId);
+	var view = cont.view;
+	var request = cont.request;
 }</code></pre>
 			</td>
 		</tr>
@@ -405,16 +420,17 @@
 			<td>null</td>
 			<td style="text-align: center;">X</td>
 			<td>
-				<p>선택한 탭이 제거 될 때 마다 실행 되는 이벤트</p>
+				<p lang="ko_KR">선택한 탭이 제거된 후에 실행 되는 이벤트 입니다.</p>
+				<p lang="en_US">This event is executed after the selected tab is removed.</p>
 				<pre><code class="language-javascript">onRemove : function(docId) {
 	// docId : Document Id
 
 	// get document info
 	var doc = this.doc(docId);
 	// get document's Controller
-	var docCont = this.cont(docId);
-	var docView = this.cont(docId).view;
-	var docRequest = this.cont(docId).request;
+	var cont = this.cont(docId);
+	var view = cont.view;
+	var request = cont.request;
 }</code></pre>
 			</td>
 		</tr>
