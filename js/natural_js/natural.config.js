@@ -861,16 +861,10 @@
              *  - Excludes URLs specified by entireLoadExcludeURLs from the entireLoad(entireLoadIndicator, entireLoadScreenBlock, etc.) related event or option.
              */
 			"entireLoadExcludeURLs" : ["contents.html", "footer.html"],
-			/*
-			"onBeforeLoad" : function(docId, target) {
-			},
-			"onLoad" : function(docId) {
-			},
-			"onBeforeEntireLoad" : function(docId) {
-			},
-			"onEntireLoad" : function(docId) {
-			},
-			*/
+			/**
+             * Global onBeforeActive event
+             *  - This event is executed before the selected tab is activated.
+             */
 			"onBeforeActive" : function(docId, isFromDocsTabList, isNotLoaded) {
 			    if(!isNotLoaded) {
 			        // FIXME 메뉴 DB 만들어 지고 페이지 불러오는 서비스 만들어지면 아래 코드(var hashVal 이전) 제거 바람.
@@ -886,6 +880,10 @@
 			        }
                 }
 			},
+			/**
+             * Global onActive event
+             *  - This event is executed after the selected tab is activated.
+             */
 			"onActive" : function(docId, isFromDocsTabList, isNotLoaded) {
                 if(location.hostname === "bbalganjjm.github.io") {
                     try {
@@ -899,20 +897,6 @@
                     } catch (e) {}
                 }
 			},
-			/*
-			"onBeforeInactive" : function(docId) {
-			},
-			"onInactive" : function(docId) {
-			},
-			"onBeforeRemoveState" : function(docId) {
-			},
-			"onRemoveState" : function(docId) {
-			},
-			"onBeforeRemove" : function(docId) {
-			},
-			"onRemove" : function(docId) {
-			},
-			*/
 			/**
              * Multilingual messages
              */
