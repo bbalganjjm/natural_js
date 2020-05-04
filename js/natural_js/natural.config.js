@@ -40,11 +40,11 @@
         "charByteLength" : 3
     });
 
-	/**
-	 * Natural-ARCHITECTURE Config
-	 */
-	N.context.attr("architecture", {
-	    /**
+    /**
+     * Natural-ARCHITECTURE Config
+     */
+    N.context.attr("architecture", {
+        /**
          * Specify the element to insert the main content in jQuery Selector syntax.
          *  - If you use the Documents(N.docs) component, you don't have to specify it, but otherwise you must.
          *  - If it is not SPA(Single Page Application), please set it to "body".
@@ -57,16 +57,16 @@
          *  - Refer to the
          *    https://bbalganjjm.github.io/natural_js/#cmVmcjAyMDIlMjRBT1AkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDIwMi5odG1s
          */
-		"cont" : {
-			"advisors" : [{
+        "cont" : {
+            "advisors" : [{
                 "pointcut" : "^init$",
                 "adviceType" : "around",
                 "fn" : function(cont, fnChain, args, joinPoint) {
-                	// Multilingual processing
-			    	APP.indx.i18n(undefined, cont.request.options.target);
-			    	// Natural-CODE
-                	N.template.aop.codes(cont, joinPoint);
-            	}
+                    // Multilingual processing
+                    APP.indx.i18n(undefined, cont.request.options.target);
+                    // Natural-CODE
+                    N.template.aop.codes(cont, joinPoint);
+                }
             }, { // Pointcut for executing onOpen after a delayed init on a popup or tab
                 "pointcut" : "^onOpen",
                 "adviceType" : "around",
@@ -80,30 +80,30 @@
                     }
                 }
             }]
-		},
-		"comm" : {
-		    /**
+        },
+        "comm" : {
+            /**
              * Communication Filter related settings.
              *  - Refer to the
              *    https://bbalganjjm.github.io/natural_js/#cmVmcjAyMDUlMjRDb21tdW5pY2F0aW9uJTIwRmlsdGVyJTI0aHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDIwNS5odG1s
              */
-			"filters" : {
-				"basicFilter" : {
-					/**
-					 * This function is executed before N.comm is initialized.
-					 */
-					beforeInit : function(obj) {
-					},
-					/**
-					 * This function is executed after N.comm is initialized.
-					 */
-					afterInit : function(request) {
-					},
-					/**
-					 * This function is executed before sending a request to the server.
-					 */
-					beforeSend : function(request, xhr, settings) {
-					    // github pages 는 GET 요청 만 보낼 수 있어서 서버로 데이터를 전송하는 예제는 여기서 파라미터 정보만 보여주고 요청을 중단 함.
+            "filters" : {
+                "basicFilter" : {
+                    /**
+                     * This function is executed before N.comm is initialized.
+                     */
+                    beforeInit : function(obj) {
+                    },
+                    /**
+                     * This function is executed after N.comm is initialized.
+                     */
+                    afterInit : function(request) {
+                    },
+                    /**
+                     * This function is executed before sending a request to the server.
+                     */
+                    beforeSend : function(request, xhr, settings) {
+                        // github pages can only send GET requests, so an example of sending data to the server shows only the parameter information here and stops the request.
                         if(request.options.type !== "GET" || (request.options.data != null && request.options.data.indexOf("q=%7B%22name%22") > -1)) {
                             var msg;
                             if(request.options.type !== "GET") {
@@ -134,23 +134,23 @@
                         if(request.options.dataType === "html" && request.options.target !== null && request.options.append === false) {
                             request.options.target.html('<div style="text-align: center; vertical-align: middle;border: 0; border: none;width: 100%;height: 100%;"><img src="images/loading.gif" height="24"></div>');
                         }
-					},
-					/**
-					 * This function is executed when the request is successful.
-					 *  - If you return by modifying the data argument, you can receive the modified data as response data of all N.comm.
-					 */
-					success : function(request, data, textStatus, xhr) {
-						var opts = request.options;
-						if((opts.target && N.isElement(opts.target)) || opts.dataType === "html" || opts.contentType === "text/css") {
-						    if(location.hostname === "localhost" || location.hostname === "127.0.0.1") {
-                                // [ Natural-CODE ] 코드 인스펙션
+                    },
+                    /**
+                     * This function is executed when the request is successful.
+                     *  - If you return by modifying the data argument, you can receive the modified data as response data of all N.comm.
+                     */
+                    success : function(request, data, textStatus, xhr) {
+                        var opts = request.options;
+                        if((opts.target && N.isElement(opts.target)) || opts.dataType === "html" || opts.contentType === "text/css") {
+                            if(location.hostname === "localhost" || location.hostname === "127.0.0.1") {
+                                // [ Natural-CODE ] Code inspection
                                 N.code.inspection.report.console(N.code.inspection.test(data), opts.url);
 
-                                // [ Natural-CODE ] Controller object 의 디버깅을 위해 HTML 요청 마다 sourceURL 을 자동으로 삽입.
+                                // [ Natural-CODE ] For debugging controller object, sourceURL is automatically inserted for every HTML request.
                                 data = N.code.addSourceURL(data, opts.url);
                             }
 
-						    // color theme
+                            // color theme
                             if(window.localStorage.themeColor !== "green") {
                                 $(APP.indx.colorPalette.green).each(function(i, color) {
                                     data = data.replace(new RegExp(color, "gi"), APP.indx.colorPalette[window.localStorage.themeColor][i]);
@@ -162,77 +162,77 @@
                             }
 
                             return data;
-						}
-					},
-					/**
-					 * This function is executed when an error occurs on the server.
-					 */
-					error : function(request, xhr, textStatus, errorThrown) {
-						if((xhr.getResponseHeader("Content-Type") && xhr.getResponseHeader("Content-Type").indexOf("html") > -1) || request.options.dataType === "html") {
-							if(request.options.target != null && request.options.target.html !== undefined) {
-								request.options.target.html('<div style="text-align: center; margin-top: 140px;margin-bottom: 140px;">[ ' + request.options.url + ' ] 페이지를 불러오는 도중 에러가 발생 했습니다.</div>');
-							} else {
-								N(window).alert('[ ' + request.options.url + ' ] 페이지를 불러오는 도중 에러가 발생 했습니다.').show();
-							}
-							if(request.options.target != null && request.options.target.is(".docs_contents")) {
-							    request.options.target.removeClass("hidden__").addClass("visible__")
-							        .siblings(".docs_contents__").removeClass("visible__").addClass("hidden__");
-							}
-						} else {
-							var code;
-							var message;
-							if(xhr.responseJSON) {
-							    if(xhr.responseJSON.error) {
-							        code = xhr.responseJSON.error.code;
-	                                message = xhr.responseJSON.error.message;
-							    } else {
-							        if(xhr.responseJSON.message) {
-	                                    message = xhr.responseJSON.message;
-	                                }
-							    }
-							}
-							if(xhr.status == 500 || xhr.status == 413) {
-								if(message) {
-									N.notify({
-										html : true
-									}).add('<div style="white-space: pre-line;">' + message + '</div>');
-								}
-							} else if(xhr.status == 412) {
-								N(window).alert(message).show();
-							}
-						}
-					},
-					/**
-					 * This function is executed when the server response is completed.
-					 */
-					complete : function(request, xhr, textStatus) {
-					}
-				}
-			},
-			"request" : {
-			    /**
+                        }
+                    },
+                    /**
+                     * This function is executed when an error occurs on the server.
+                     */
+                    error : function(request, xhr, textStatus, errorThrown) {
+                        if((xhr.getResponseHeader("Content-Type") && xhr.getResponseHeader("Content-Type").indexOf("html") > -1) || request.options.dataType === "html") {
+                            if(request.options.target != null && request.options.target.html !== undefined) {
+                                request.options.target.html('<div style="text-align: center; margin-top: 140px;margin-bottom: 140px;">[ ' + request.options.url + ' ] 페이지를 불러오는 도중 에러가 발생 했습니다.</div>');
+                            } else {
+                                N(window).alert('An error occurred while loading the "' + request.options.url + '" page.').show();
+                            }
+                            if(request.options.target != null && request.options.target.is(".docs_contents")) {
+                                request.options.target.removeClass("hidden__").addClass("visible__")
+                                    .siblings(".docs_contents__").removeClass("visible__").addClass("hidden__");
+                            }
+                        } else {
+                            var code;
+                            var message;
+                            if(xhr.responseJSON) {
+                                if(xhr.responseJSON.error) {
+                                    code = xhr.responseJSON.error.code;
+                                    message = xhr.responseJSON.error.message;
+                                } else {
+                                    if(xhr.responseJSON.message) {
+                                        message = xhr.responseJSON.message;
+                                    }
+                                }
+                            }
+                            if(xhr.status == 500 || xhr.status == 413) {
+                                if(message) {
+                                    N.notify({
+                                        html : true
+                                    }).add('<div style="white-space: pre-line;">' + message + '</div>');
+                                }
+                            } else if(xhr.status == 412) {
+                                N(window).alert(message).show();
+                            }
+                        }
+                    },
+                    /**
+                     * This function is executed when the server response is completed.
+                     */
+                    complete : function(request, xhr, textStatus) {
+                    }
+                }
+            },
+            "request" : {
+                /**
                  * Global options of Communicator.request.
                  *  - Refer to the
                  *    https://bbalganjjm.github.io/natural_js/#cmVmcjAyMDQlMjRDb21tdW5pY2F0b3IucmVxdWVzdCUyNGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAyMDQuaHRtbA==
                  */
-				"options" : {
-					"type" : "GET",
-					"contentType" : "application/json; charset=utf-8",
-					"cache" : true,
-					"urlSync" : true,
-					"browserHistory" : false,
-					"append" : false
-				}
-			}
-		}
-	});
+                "options" : {
+                    "type" : "GET",
+                    "contentType" : "application/json; charset=utf-8",
+                    "cache" : true,
+                    "urlSync" : true,
+                    "browserHistory" : false,
+                    "append" : false
+                }
+            }
+        }
+    });
 
-	/**
-	 * Natural-DATA Config
-	 */
-	N.context.attr("data", {
-		"formatter" : {
-		    /**
+    /**
+     * Natural-DATA Config
+     */
+    N.context.attr("data", {
+        "formatter" : {
+            /**
              * Custom format rules
              */
             "userRules" : {
@@ -252,8 +252,8 @@
              * Specifies the date format to be used globally for the application.
              *  - Date/time format : Y : year, m : month, d : day, H : hour, i : minute, s : second
              */
-			"date" : {
-			    /**
+            "date" : {
+                /**
                  * Year, month, day separator
                  */
                 "dateSepa" : "-",
@@ -291,10 +291,10 @@
                 "YmdHis" : function() {
                     return this.Ymd() + " H" + this.timeSepa + "i" + this.timeSepa + "s";
                 }
-			}
-		},
-		"validator" : {
-		    /**
+            }
+        },
+        "validator" : {
+            /**
              * Custom validation rules
              */
             "userRules" : {
@@ -315,125 +315,125 @@
              * Validation error multilingual message
              *  - To add a language, copy the language set, specify the language set object property name as its locale string, and define the message.
              */
-			"message" : {
-				"ko_KR" : {
-					global : "필드검증에 통과하지 못했습니다.",
-					required : "필수입력 필드 입니다.",
-					alphabet : "영문자만 입력 할 수 있습니다.",
-					integer : "숫자(정수)만 입력 할 수 있습니다.",
-					korean : "한글만 입력 할 수 있습니다.",
-					alphabet_integer : "영문자와 숫자(정수)만 입력 할 수 있습니다.",
-					integer_korean : "숫자(정수)와 한글만 입력 할 수 있습니다.",
-					alphabet_korean : "영문자와 한글만 입력 할 수 있습니다.",
-					alphabet_integer_korean : "영문자, 숫자(정수), 한글만 입력 할 수 있습니다.",
-					dash_integer : "숫자(정수), 대쉬(-) 만 입력 할 수 있습니다.",
-					commas_integer : "숫자(정수), 콤마(,) 만 입력 할 수 있습니다.",
-					number : "숫자(+-,. 포함)만 입력 할 수 있습니다.",
-					email : "e-mail 형식에 맞지 않습니다.",
-					url : "URL 형식에 맞지 않습니다.",
-					zipcode : "우편번호 형식에 맞지 않습니다.",
-					decimal : "(유한)소수만 입력 할 수 있습니다.",
+            "message" : {
+                "ko_KR" : {
+                    global : "필드검증에 통과하지 못했습니다.",
+                    required : "필수입력 필드 입니다.",
+                    alphabet : "영문자만 입력 할 수 있습니다.",
+                    integer : "숫자(정수)만 입력 할 수 있습니다.",
+                    korean : "한글만 입력 할 수 있습니다.",
+                    alphabet_integer : "영문자와 숫자(정수)만 입력 할 수 있습니다.",
+                    integer_korean : "숫자(정수)와 한글만 입력 할 수 있습니다.",
+                    alphabet_korean : "영문자와 한글만 입력 할 수 있습니다.",
+                    alphabet_integer_korean : "영문자, 숫자(정수), 한글만 입력 할 수 있습니다.",
+                    dash_integer : "숫자(정수), 대쉬(-) 만 입력 할 수 있습니다.",
+                    commas_integer : "숫자(정수), 콤마(,) 만 입력 할 수 있습니다.",
+                    number : "숫자(+-,. 포함)만 입력 할 수 있습니다.",
+                    email : "e-mail 형식에 맞지 않습니다.",
+                    url : "URL 형식에 맞지 않습니다.",
+                    zipcode : "우편번호 형식에 맞지 않습니다.",
+                    decimal : "(유한)소수만 입력 할 수 있습니다.",
                     decimal_ : "(유한)소수 {0}번째 자리까지 입력 할 수 있습니다.", // TODO
-					phone : "전화번호 형식이 아닙니다.",
-					rrn : "주민등록번호 형식에 맞지 않습니다.",
-					ssn : "주민등록번호 형식에 맞지 않습니다.", // Deprecated
-					frn : "외국인등록번호 형식에 맞지 않습니다.",
-					frn_rrn : "주민번호나 외국인등록번호 형식에 맞지 않습니다.", // Deprecated
-					frn_ssn : "주민번호나 외국인등록번호 형식에 맞지 않습니다.",
-					cno : "사업자등록번호 형식에 맞지 않습니다.", // Deprecated
-					kbrn : "사업자등록번호 형식에 맞지 않습니다.",
-					cpno : "법인번호 형식에 맞지 않습니다.", // Deprecated
-					kcn : "법인번호 형식에 맞지 않습니다.",
-					date : "날짜 형식에 맞지 않습니다.",
-					time : "시간 형식에 맞지 않습니다.",
-					accept : "\"{0}\" 값만 입력 할 수 있습니다.",
-					match : "\"{0}\" 이(가) 포함된 값만 입력 할 수 있습니다.",
-					acceptFileExt : "\"{0}\" 이(가) 포함된 확장자만 입력 할 수 있습니다.",
-					notAccept : "\"{0}\" 값은 입력 할 수 없습니다.",
-					notMatch : "\"{0}\" 이(가) 포함된 값은 입력 할 수 없습니다.",
-					notAcceptFileExt : "\"{0}\" 이(가) 포함된 확장자는 입력 할 수없습니다.",
-					equalTo : "\"{1}\" 의 값과 같아야 합니다.",
-					maxlength : "{0} 글자 이하만 입력 가능합니다.",
-					minlength : "{0} 글자 이상만 입력 가능합니다.",
-					rangelength : "{0} 글자 에서 {1} 글자 까지만 입력 가능합니다.",
-					maxbyte : "{0} 바이트 이하만 입력 가능합니다.<br> - 영문, 숫자 : 1 바이트<br> - 한글, 특수문자 : {1} 바이트",
-					minbyte : "{0} 바이트 이상만 입력 가능합니다.<br> - 영문, 숫자 : 1 바이트<br> - 한글, 특수문자 : {1} 바이트",
-					rangebyte : "{0} 바이트 에서 {1} 바이트 까지만 입력 가능합니다.<br> - 영문, 숫자 한글자 : 1 바이트<br> - 한글, 특수문자 : {2} 바이트",
-					maxvalue : "{0} 이하의 값만 입력 가능합니다.",
-					minvalue : "{0} 이상의 값만 입력 가능합니다.",
-					rangevalue : "{0} 에서 {1} 사이의 값만 입력 가능합니다.",
-					regexp : "{2}"
-				},
-				"en_US" : {
-					global : "It Can't pass the field verification.",
-					required : "It is a field to input obligatorily.",
-					alphabet : "Can enter only alphabetical characters.",
-					integer : "Can enter only number(integer).",
-					korean : "Can enter only Korean alphabet.",
-					alphabet_integer : "Can enter only alphabetical characters and number(integer).",
-					integer_korean : "Can enter only number(integer) and Korean alphabet.",
-					alphabet_korean : "Can enter only alphabetical characters and Korean alphabet.",
-					alphabet_integer_korean : "Can enter only alphabetical characters and number(integer) and Korean alphabet.",
-					dash_integer : "Can enter only number(integer) and dash(-).",
-					commas_integer : "Can enter only number(integer) and commas(,).",
-					number : "Can enter only number and (+-,.)",
-					email : "Don't conform to the format of E-mail.",
-					url : "Don't conform to the format of URL.",
-					zipcode : "Don't conform to the format of zip code.",
-					decimal : "Can enter only (finite)decimal",
+                    phone : "전화번호 형식이 아닙니다.",
+                    rrn : "주민등록번호 형식에 맞지 않습니다.",
+                    ssn : "주민등록번호 형식에 맞지 않습니다.", // Deprecated
+                    frn : "외국인등록번호 형식에 맞지 않습니다.",
+                    frn_rrn : "주민번호나 외국인등록번호 형식에 맞지 않습니다.", // Deprecated
+                    frn_ssn : "주민번호나 외국인등록번호 형식에 맞지 않습니다.",
+                    cno : "사업자등록번호 형식에 맞지 않습니다.", // Deprecated
+                    kbrn : "사업자등록번호 형식에 맞지 않습니다.",
+                    cpno : "법인번호 형식에 맞지 않습니다.", // Deprecated
+                    kcn : "법인번호 형식에 맞지 않습니다.",
+                    date : "날짜 형식에 맞지 않습니다.",
+                    time : "시간 형식에 맞지 않습니다.",
+                    accept : "\"{0}\" 값만 입력 할 수 있습니다.",
+                    match : "\"{0}\" 이(가) 포함된 값만 입력 할 수 있습니다.",
+                    acceptFileExt : "\"{0}\" 이(가) 포함된 확장자만 입력 할 수 있습니다.",
+                    notAccept : "\"{0}\" 값은 입력 할 수 없습니다.",
+                    notMatch : "\"{0}\" 이(가) 포함된 값은 입력 할 수 없습니다.",
+                    notAcceptFileExt : "\"{0}\" 이(가) 포함된 확장자는 입력 할 수없습니다.",
+                    equalTo : "\"{1}\" 의 값과 같아야 합니다.",
+                    maxlength : "{0} 글자 이하만 입력 가능합니다.",
+                    minlength : "{0} 글자 이상만 입력 가능합니다.",
+                    rangelength : "{0} 글자 에서 {1} 글자 까지만 입력 가능합니다.",
+                    maxbyte : "{0} 바이트 이하만 입력 가능합니다.<br> - 영문, 숫자 : 1 바이트<br> - 한글, 특수문자 : {1} 바이트",
+                    minbyte : "{0} 바이트 이상만 입력 가능합니다.<br> - 영문, 숫자 : 1 바이트<br> - 한글, 특수문자 : {1} 바이트",
+                    rangebyte : "{0} 바이트 에서 {1} 바이트 까지만 입력 가능합니다.<br> - 영문, 숫자 한글자 : 1 바이트<br> - 한글, 특수문자 : {2} 바이트",
+                    maxvalue : "{0} 이하의 값만 입력 가능합니다.",
+                    minvalue : "{0} 이상의 값만 입력 가능합니다.",
+                    rangevalue : "{0} 에서 {1} 사이의 값만 입력 가능합니다.",
+                    regexp : "{2}"
+                },
+                "en_US" : {
+                    global : "It Can't pass the field verification.",
+                    required : "It is a field to input obligatorily.",
+                    alphabet : "Can enter only alphabetical characters.",
+                    integer : "Can enter only number(integer).",
+                    korean : "Can enter only Korean alphabet.",
+                    alphabet_integer : "Can enter only alphabetical characters and number(integer).",
+                    integer_korean : "Can enter only number(integer) and Korean alphabet.",
+                    alphabet_korean : "Can enter only alphabetical characters and Korean alphabet.",
+                    alphabet_integer_korean : "Can enter only alphabetical characters and number(integer) and Korean alphabet.",
+                    dash_integer : "Can enter only number(integer) and dash(-).",
+                    commas_integer : "Can enter only number(integer) and commas(,).",
+                    number : "Can enter only number and (+-,.)",
+                    email : "Don't conform to the format of E-mail.",
+                    url : "Don't conform to the format of URL.",
+                    zipcode : "Don't conform to the format of zip code.",
+                    decimal : "Can enter only (finite)decimal",
                     decimal_ : "Can enter up to {0} places of (finite)decimal.", // TODO
-					phone : "There is no format of phone number.",
-					rrn : "Don't fit the format of the resident registration number.",
-					ssn : "Don't fit the format of the resident registration number.", // Deprecated.
-					frn : "Don't fit the format of foreign registration number.",
-					frn_rrn : "Don't fit the format of the resident registration number or foreign registration number.",
-					frn_ssn : "Don't fit the format of the resident registration number or foreign registration number.", // Deprecated.
-					cno : "Don't fit the format of registration of enterpreneur.", // Deprecated
-					kbrn : "Don't fit the format of registration of enterpreneur.",
-					cpno : "Don't fit the format of corporation number.", // Deprecated
-					kcn : "Don't fit the format of corporation number.",
-					date : "Don't fit the format of date.",
-					time : "Don't fit the format of time.",
-					accept : "Can enter only \"{0}\" value.",
-					match : "Can enter only value ​​that contains \"{0}\".",
-					acceptFileExt : "Can enter only extension that includes \"{0}\".",
-					notAccept : "Can't enter \"{0}\" value.",
-					notMatch : "Can't enter only value ​​that contains \"{0}\".",
-					notAcceptFileExt : "Can't enter only extension that includes \"{0}\".",
-					equalTo : "Must be the same as \"{1}\" value.",
-					maxlength : "Can enter only below {0} letters.",
-					minlength : "Can enter only more than {0} letters.",
-					rangelength : "It can be entered from {0} to {1} letters.",
-					maxbyte : "Can enter only below {0} bytes.",
-					minbyte : "Can enter only more than {0} bytes.",
-					rangebyte : "It can be entered from {0} to {1} bytes.",
-					maxvalue : "Can enter only below {0} value.",
-					minvalue : "Can enter only more than {0} value.",
-					rangevalue : "Can be entered value from {0} to {1}.",
-					regexp : "{2}"
-				}
-			}
-		}
-	});
+                    phone : "There is no format of phone number.",
+                    rrn : "Don't fit the format of the resident registration number.",
+                    ssn : "Don't fit the format of the resident registration number.", // Deprecated.
+                    frn : "Don't fit the format of foreign registration number.",
+                    frn_rrn : "Don't fit the format of the resident registration number or foreign registration number.",
+                    frn_ssn : "Don't fit the format of the resident registration number or foreign registration number.", // Deprecated.
+                    cno : "Don't fit the format of registration of enterpreneur.", // Deprecated
+                    kbrn : "Don't fit the format of registration of enterpreneur.",
+                    cpno : "Don't fit the format of corporation number.", // Deprecated
+                    kcn : "Don't fit the format of corporation number.",
+                    date : "Don't fit the format of date.",
+                    time : "Don't fit the format of time.",
+                    accept : "Can enter only \"{0}\" value.",
+                    match : "Can enter only value ​​that contains \"{0}\".",
+                    acceptFileExt : "Can enter only extension that includes \"{0}\".",
+                    notAccept : "Can't enter \"{0}\" value.",
+                    notMatch : "Can't enter only value ​​that contains \"{0}\".",
+                    notAcceptFileExt : "Can't enter only extension that includes \"{0}\".",
+                    equalTo : "Must be the same as \"{1}\" value.",
+                    maxlength : "Can enter only below {0} letters.",
+                    minlength : "Can enter only more than {0} letters.",
+                    rangelength : "It can be entered from {0} to {1} letters.",
+                    maxbyte : "Can enter only below {0} bytes.",
+                    minbyte : "Can enter only more than {0} bytes.",
+                    rangebyte : "It can be entered from {0} to {1} bytes.",
+                    maxvalue : "Can enter only below {0} value.",
+                    minvalue : "Can enter only more than {0} value.",
+                    rangevalue : "Can be entered value from {0} to {1}.",
+                    regexp : "{2}"
+                }
+            }
+        }
+    });
 
-	// The extend statement below should never be deleted if you have defined a custom format rule.
+    // The extend statement below should never be deleted if you have defined a custom format rule.
     $.extend(N.formatter, N.context.attr("data").formatter.userRules);
     // The extend statement below should never be deleted if you have defined a custom validation rule.
     $.extend(N.validator, N.context.attr("data").validator.userRules);
 
-	/**
-	 * Natural-UI Config
-	 */
-	N.context.attr("ui", {
-		"alert" : {
-		    /**
+    /**
+     * Natural-UI Config
+     */
+    N.context.attr("ui", {
+        "alert" : {
+            /**
              * Set the element to save the elements of N.alert and N.popup components using jQuery Selector syntax.
              * Define the same value as the value of N.context.attr("architecture").page.context unless it is a special case.
              *  - If you use the Documents(N.docs) component, you don't have to specify it, but otherwise you must.
              *  - If it is not SPA(Single Page Application), please set it to "body".
              */
-			"container" : ".docs__ > .docs_contents__.visible__",
-			"global" : {
+            "container" : ".docs__ > .docs_contents__.visible__",
+            "global" : {
                 /**
                  * N.alert's OK button style
                  *  - It is specified as an option of the Button(N.button) component.
@@ -455,23 +455,23 @@
              *  - Specifies the position to move to inside when the message dialog is dropped off the screen.
              *  - Correct the position of the message dialog  by incrementing or decrementing by 1 when a scroll bar appears on the screen because the message dialog  does not completely return to the inside.
              */
-			"draggableOverflowCorrectionAddValues" : {
-				top : 0,
-				bottom : 0,
-				left : +2,
-				right : -2
-			},
-			/**
+            "draggableOverflowCorrectionAddValues" : {
+                top : 0,
+                bottom : 0,
+                left : +2,
+                right : -2
+            },
+            /**
              * Global draggable option
              *  - If set to true, the message dialog will be draggable by the title bar.
              */
-			"draggable" : true,
-			/**
+            "draggable" : true,
+            /**
              * Global alwaysOnTop option
              *  - If set to true, The message dialog is always displayed at the top.
              */
-			"alwaysOnTop" : true,
-			"input" : {
+            "alwaysOnTop" : true,
+            "input" : {
                 /**
                  * Display time of message dialog displayed when input element is specified in context option(ms)
                  */
@@ -481,184 +481,184 @@
                  */
                 closeBtn : "&times;"
             },
-			/**
-			 * Global html option
-			 * - If set to true, the HTML of the message is applied.
-			 */
-			"html" : true,
-			/**
+            /**
+             * Global html option
+             * - If set to true, the HTML of the message is applied.
+             */
+            "html" : true,
+            /**
              * Global saveMemory option
              *  - If set to true, save memory usage by removing unnecessary reference elements.
              */
-			"saveMemory" : true,
-			/**
+            "saveMemory" : true,
+            /**
              * Multilingual messages
              */
-			"message" : {
-				"ko_KR" : {
-					"confirm" : "확인",
-					"cancel" : "취소"
-				},
-				"en_US" : {
-					"confirm" : "OK",
-					"cancel" : "Cancel"
-				}
-			}
-		},
-		"popup" : {
-		    /**
+            "message" : {
+                "ko_KR" : {
+                    "confirm" : "확인",
+                    "cancel" : "취소"
+                },
+                "en_US" : {
+                    "confirm" : "OK",
+                    "cancel" : "Cancel"
+                }
+            }
+        },
+        "popup" : {
+            /**
              * Global draggable option
              *  - If set to true, the popup dialog will be draggable by the title bar.
              */
-			"draggable" : true,
-			/**
+            "draggable" : true,
+            /**
              * Global alwaysOnTop option
              *  - If set to true, The popup dialog is always displayed at the top.
              */
-			"alwaysOnTop" : true,
-			/**
+            "alwaysOnTop" : true,
+            /**
              * Global button option
              *  - If set to false, It does not create basic button(OK/Cancel buttons) related elements.
              */
-			"button" : false,
-			"windowScrollLock" : false,
-			/**
+            "button" : false,
+            "windowScrollLock" : false,
+            /**
              * Global saveMemory option
              *  - If set to true, save memory usage by removing unnecessary reference elements.
              */
             "saveMemory" : true
-		},
-		"tab" : {
-		    "tabScrollCorrection" : {
-		        tabContainerWidthCorrectionPx : 1,
-		        tabContainerWidthReCalcDelayTime : 0
-		    }
-		},
-		"datepicker" : {
-			/**
+        },
+        "tab" : {
+            "tabScrollCorrection" : {
+                tabContainerWidthCorrectionPx : 1,
+                tabContainerWidthReCalcDelayTime : 0
+            }
+        },
+        "datepicker" : {
+            /**
              * Multilingual messages of N.datepicker
              */
-			"message" : {
-				"ko_KR" : {
-					"year" : "년",
-					"month" : "월",
-					"days" : "일,월,화,수,목,금,토",
-					"yearNaN" : "년도는 서기 100년 이하는 입력 할 수 없습니다.",
-					"monthNaN" : "월은 1월 부터 12월 까지 입력 할 수 있습니다.",
-					"dayNaN" : "일은 1일부터 {0}일 까지 입력 할 수 있습니다.",
-					"prev" : "이전",
-					"next" : "다음"
-				},
-				"en_US" : {
-					"year" : "Year",
-					"month" : "Month",
-					"days" : "Sun,Mon,Tue,Wed,Thu,Fri,Sat",
-					"yearNaN" : "You can not enter less AD 100 years",
-					"monthNaN" : "You can enter 1 to 12 months value",
-					"dayNaN" : "You can enter 1 to {0} days value",
-					"prev" : "Previous",
-					"next" : "Next"
-				}
-			},
-			/**
+            "message" : {
+                "ko_KR" : {
+                    "year" : "년",
+                    "month" : "월",
+                    "days" : "일,월,화,수,목,금,토",
+                    "yearNaN" : "년도는 서기 100년 이하는 입력 할 수 없습니다.",
+                    "monthNaN" : "월은 1월 부터 12월 까지 입력 할 수 있습니다.",
+                    "dayNaN" : "일은 1일부터 {0}일 까지 입력 할 수 있습니다.",
+                    "prev" : "이전",
+                    "next" : "다음"
+                },
+                "en_US" : {
+                    "year" : "Year",
+                    "month" : "Month",
+                    "days" : "Sun,Mon,Tue,Wed,Thu,Fri,Sat",
+                    "yearNaN" : "You can not enter less AD 100 years",
+                    "monthNaN" : "You can enter 1 to 12 months value",
+                    "dayNaN" : "You can enter 1 to {0} days value",
+                    "prev" : "Previous",
+                    "next" : "Next"
+                }
+            },
+            /**
              * Global yearsPanelPosition option.
              *  - If set to top, the year selection element is created at the top.
              *  - Set to "left" or "top".
              */
-			"yearsPanelPosition" : "top",
-			/**
+            "yearsPanelPosition" : "top",
+            /**
              * Global monthsPanelPosition option.
              *  - If set to top, the month selection element is created at the top.
              *  - Set to "left" or "top".
              */
-			"monthsPanelPosition" : "top",
-			"monthonlyOpts" : {
-			    /**
-			     * Global yearsPanelPosition option when monthonly option is true.
-			     *  - Specifies the position of the year selection element when the monthonly option is true.
-			     */
-			    "yearsPanelPosition" : "left",
-			    /**
-			     * Global monthsPanelPosition option when monthonly option is true.
+            "monthsPanelPosition" : "top",
+            "monthonlyOpts" : {
+                /**
+                 * Global yearsPanelPosition option when monthonly option is true.
+                 *  - Specifies the position of the year selection element when the monthonly option is true.
+                 */
+                "yearsPanelPosition" : "left",
+                /**
+                 * Global monthsPanelPosition option when monthonly option is true.
                  *  - Specifies the position of the month selection element when the monthonly option is true.
                  */
-	            "monthsPanelPosition" : "left",
-			},
-			/**
+                "monthsPanelPosition" : "left",
+            },
+            /**
              * Global yearChangeInput option.
              *  - If set to true, the changed date is applied immediately to the input element when the year is changed.
              */
-			"yearChangeInput" : true,
-			/**
+            "yearChangeInput" : true,
+            /**
              * Global monthChangeInput option.
              *  - If set to true, the changed date is applied immediately to the input element when the month is changed.
              */
-			"monthChangeInput" : true,
-			/**
+            "monthChangeInput" : true,
+            /**
              * Global touchMonthChange option.
              *  - If set to true, the month changes when you touch-drag left or right.
              */
-			"touchMonthChange" : true,
-			/**
+            "touchMonthChange" : true,
+            /**
              * Global scrollMonthChange option.
              *  - If set to true, the month will change when the mouse wheel is scrolled.
              */
-			"scrollMonthChange" : true
-		},
-		"select" : {
-		    /**
+            "scrollMonthChange" : true
+        },
+        "select" : {
+            /**
              * Global key option.
              *  -Specifies the property name of the data to be bound to the name attribute of the selection element
              */
-			"key" : "key",
-			/**
+            "key" : "key",
+            /**
              * Global val option.
              *  - Specifies the property name of the data to be bound to the value attribute of the selection element.
              */
-			"val" : "val",
-			/**
+            "val" : "val",
+            /**
              * Global append option.
              *  - If set to false, empty the default options in the select element and then bind the data.
              */
-			"append" : true
-		},
-		"form" : {
-			"tpBind" : true
-		},
-		"list" : {
-		    /**
+            "append" : true
+        },
+        "form" : {
+            "tpBind" : true
+        },
+        "list" : {
+            /**
              * Multilingual messages
              */
-			"message" : {
-				"ko_KR" : {
-					"empty" : "조회를 하지 않았거나 조회된 데이터가 없습니다."
-				},
-				"en_US" : {
-					"empty" : "No inquired data or no data available."
-				}
-			},
-			/**
-			 * Global scrollPaging.size option.
-			 *  - Specifies the number of rows to bind at a time when scroll paging.
-			 */
-			"scrollPaging" : {
-				"size" : 30
-			},
-			/**
-			 * Global unselect option.
-			 *  - If set to false, when the select option is true, selecting the selected row again does not cancel the selection.
-			 */
+            "message" : {
+                "ko_KR" : {
+                    "empty" : "조회를 하지 않았거나 조회된 데이터가 없습니다."
+                },
+                "en_US" : {
+                    "empty" : "No inquired data or no data available."
+                }
+            },
+            /**
+             * Global scrollPaging.size option.
+             *  - Specifies the number of rows to bind at a time when scroll paging.
+             */
+            "scrollPaging" : {
+                "size" : 30
+            },
+            /**
+             * Global unselect option.
+             *  - If set to false, when the select option is true, selecting the selected row again does not cancel the selection.
+             */
             "unselect" : false
-		},
-		"grid" : {
-		    /**
+        },
+        "grid" : {
+            /**
              * Sort sort indicator when sort function is activated, You can also enter HTML tags
              */
             "sortableItem" : {
                 "asc" : "▼",
                 "desc" : "▲"
             },
-		    /**
+            /**
              * Multilingual messages
              */
             "message" : {
@@ -685,22 +685,22 @@
                     "next" : "Next"
                 }
             },
-			/**
-			 * Global resizable option.
+            /**
+             * Global resizable option.
              *  - If set to true, the width of the column can be resized.
-			 */
-			"resizable" : true,
-			/**
-			 * Global sortable option.
+             */
+            "resizable" : true,
+            /**
+             * Global sortable option.
              *  - If set to true, data can be sorted based on the selected column.
-			 */
-			"sortable" : true,
-			/**
-			 * Global filter option.
+             */
+            "sortable" : true,
+            /**
+             * Global filter option.
              *  - If set to true, data can be filtered based on the selected column.
-			 */
-			"filter" : true,
-			/**
+             */
+            "filter" : true,
+            /**
              * Global scrollPaging.size option.
              *  - Specifies the number of rows to bind at a time when scroll paging.
              */
@@ -712,179 +712,179 @@
              *  - If set to false, when the select option is true, selecting the selected row again does not cancel the selection.
              */
             "unselect" : false,
-			/**
+            /**
              * Miscellaneous settings
              */
-			"misc" : {
-			    /**
+            "misc" : {
+                /**
                  * Global misc.resizableCorrectionWidth option
                  *  - The grid body column width and grid header column width may not match when the resizable option is activated.
                  *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
                  */
-				"resizableCorrectionWidth" : N.browser.is("safari") ? -6 : -7,
-		        /**
+                "resizableCorrectionWidth" : N.browser.is("safari") ? -6 : -7,
+                /**
                  * Global misc.resizableLastCellCorrectionWidth option
                  *  - Clicking on the last column may cause other columns to be pushed when the resizable option is enabled in the header fixed grid.
                  *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
                  */
-				"resizableLastCellCorrectionWidth" : 8,
-				/**
+                "resizableLastCellCorrectionWidth" : 8,
+                /**
                  * Global misc.resizeBarCorrectionLeft option
                  *  - The left position of the resize bar may not be centered relative to the column border when the resizable option is activated. At this time,
                  *    it is an option to correct by increasing or decreasing the value by 0.1.
                  */
-				"resizeBarCorrectionLeft" : N.browser.is("firefox") ? -1 : N.browser.is("safari") ? 1 : 0,
-		        /**
+                "resizeBarCorrectionLeft" : N.browser.is("firefox") ? -1 : N.browser.is("safari") ? 1 : 0,
+                /**
                  * Global misc.resizeBarCorrectionHeight option
                  *  - The height of the resizing bar may not be full when the resizable option is activated.
                  *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
                  */
-				"resizeBarCorrectionHeight" : 0,
-				/**
+                "resizeBarCorrectionHeight" : 0,
+                /**
                  * Global misc.fixedcolHeadMarginTop option
                  *  - The top position of the fixed header cell(th) may not match when the fixedcol option is activated.
                  *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
                  */
-				"fixedcolHeadMarginTop" : N.browser.is("ie") || N.browser.is("firefox") ? 1 : 2,
-		        /**
+                "fixedcolHeadMarginTop" : N.browser.is("ie") || N.browser.is("firefox") ? 1 : 2,
+                /**
                  * Global misc.fixedcolHeadMarginLeft option
                  *  - The left position of the fixed header cell(th) may not match when the fixedcol option is activated.
                  *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
                  */
-				"fixedcolHeadMarginLeft" : N.browser.is("ie") || N.browser.is("firefox") ? -1 : 0,
-		        /**
+                "fixedcolHeadMarginLeft" : N.browser.is("ie") || N.browser.is("firefox") ? -1 : 0,
+                /**
                  * Global misc.fixedcolHeadHeight option
                  *  - The height of the fixed header cell(th) may not match when the fixedcol option is activated.
                  *    At this time, it is an option to correct by increasing or decreasing the value by 0.1..
                  */
-				"fixedcolHeadHeight" : N.browser.is("ie") || N.browser.is("firefox") ? 0 : -1,
-		        /**
+                "fixedcolHeadHeight" : N.browser.is("ie") || N.browser.is("firefox") ? 0 : -1,
+                /**
                  * Global misc.fixedcolBodyMarginTop option
                  *  - The top position of the fixed body cell(td) may not match when the fixedcol option is activated.
                  *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
                  */
-				"fixedcolBodyMarginTop" : N.browser.is("ie") ? -0.5 : N.browser.is("firefox") ? -1 : 0,
-		        /**
+                "fixedcolBodyMarginTop" : N.browser.is("ie") ? -0.5 : N.browser.is("firefox") ? -1 : 0,
+                /**
                  * Global misc.fixedcolBodyMarginLeft option
                  *  - The left position of the fixed body cell(td) may not match when the fixedcol option is activated.
                  *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
                  */
-				"fixedcolBodyMarginLeft" : N.browser.is("ie") || N.browser.is("firefox") ? -1 : 0,
-		        /**
+                "fixedcolBodyMarginLeft" : N.browser.is("ie") || N.browser.is("firefox") ? -1 : 0,
+                /**
                  * Global misc.fixedcolBodyBindHeight option
                  *  - The height of the fixed body cell(td) may not match when the fixedcol option is activated.
                  *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
                  */
-				"fixedcolBodyBindHeight" : N.browser.is("ie") ? 1.3 : 1,
-		        /**
+                "fixedcolBodyBindHeight" : N.browser.is("ie") ? 1.3 : 1,
+                /**
                  * Global misc.fixedcolBodyAddHeight option
                  *  - The height of the cell(td) of the added row may not match when the fixedcol option is activated.
                  *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
                  */
-				"fixedcolBodyAddHeight" : 1,
-				/**
+                "fixedcolBodyAddHeight" : 1,
+                /**
                  * Global misc.fixedcolRootContainer option
                  *  - After creating a grid instance by applying the fixed col option, the grid shape may break when the height of the element wrapping the grid is dynamically changed.
                  *    At this time, if you specify the element whose height is changed in this option, the grid shape will not be broken.
                  *  - Specify an element with the jQuery selector string.
                  */
-				"fixedcolRootContainer" : ".view_context__"
-			}
-		}
-	});
+                "fixedcolRootContainer" : ".view_context__"
+            }
+        }
+    });
 
-	/**
-	 * Natural-UI.Shell Config
-	 */
-	N.context.attr("ui.shell", {
-		"notify" : {
-		    /**
+    /**
+     * Natural-UI.Shell Config
+     */
+    N.context.attr("ui.shell", {
+        "notify" : {
+            /**
              * Global alwaysOnTop option
              *  - If set to true, The message dialog is always displayed at the top.
              */
-			"alwaysOnTop" : true,
-			/**
+            "alwaysOnTop" : true,
+            /**
              * Multilingual messages
              */
-			"message" : {
-				"ko_KR" : {
-					"close" : "닫기"
-				},
-				"en_US" : {
-					"close" : "Close"
-				}
-			}
-		},
-		"docs" : {
-		    /**
+            "message" : {
+                "ko_KR" : {
+                    "close" : "닫기"
+                },
+                "en_US" : {
+                    "close" : "Close"
+                }
+            }
+        },
+        "docs" : {
+            /**
              * Global alwaysOnTop option
              *  - If set to true, The menu list dialog is always displayed at the top.
              */
-			"alwaysOnTop" : true,
-			/**
+            "alwaysOnTop" : true,
+            /**
              * Global maxStateful option
              *  - If the multi option is true, the maximum number of stateful tab contents can be set to prevent the web browser from slowing down whenever additional tab contents are opened.
              */
-			"maxStateful" : 20,
-			/**
+            "maxStateful" : 20,
+            /**
              * Global maxTabs option
              *  - If the multi option is true, the maximum number of tab contents can be set to prevent the web browser from slowing down whenever additional tab contents are opened.
              */
-			"maxTabs" : 0,
-			/**
+            "maxTabs" : 0,
+            /**
              * Global entireLoadIndicator option
              *  - If set to true, the progress bar is displayed until all Ajax requests executed when the page is loaded are completed.
              */
-			"entireLoadIndicator" : true,
-			/**
+            "entireLoadIndicator" : true,
+            /**
              * Global entireLoadScreenBlock option
              *  - If set to true, double submission is prevented by blocking the screen until all Ajax requests executed when the page is loaded are completed.
              */
-			"entireLoadScreenBlock" : true,
-			/**
+            "entireLoadScreenBlock" : true,
+            /**
              * Global addLast option
              *  - If set to true, a new tab is added last when the add method is called.
              */
-			"addLast" : true,
-			/**
+            "addLast" : true,
+            /**
              * Global tabScroll option
              *  - If set to true, tabs can be scrolled by dragging the mouse or touching.
              */
-			"tabScroll" : true,
-			/**
+            "tabScroll" : true,
+            /**
              * Global closeAllRedirectURL option
              *  - When the "Close All" button is clicked, if the value of the closeAllRedirectURL option is null, all other tabs except the active tab are closed and if you input the url string, it  will be redirect to the url.
              */
-			"closeAllRedirectURL" : "./",
-			/**
+            "closeAllRedirectURL" : "./",
+            /**
              * Global entireLoadExcludeURLs option
              *  - Excludes URLs specified by entireLoadExcludeURLs from the entireLoad(entireLoadIndicator, entireLoadScreenBlock, etc.) related event or option.
              */
-			"entireLoadExcludeURLs" : ["contents.html", "footer.html"],
-			/**
+            "entireLoadExcludeURLs" : ["contents.html", "footer.html"],
+            /**
              * Global onBeforeActive event
              *  - This event is executed before the selected tab is activated.
              */
-			"onBeforeActive" : function(docId, isFromDocsTabList, isNotLoaded) {
-			    if(!isNotLoaded) {
-			        // FIXME 메뉴 DB 만들어 지고 페이지 불러오는 서비스 만들어지면 아래 코드(var hashVal 이전) 제거 바람.
-			        var url = N(".index-lefter.view_context__ a[data-pageid='" + docId + "']").attr("href");
-			        if (N.string.trim(location.hash).length === 0 || docId === "home0100") {
-			            docId = "home0100";
-			            url = "html/naturaljs/" + docId.substring(0, 4) + "/" + docId + ".html";
-			        }
+            "onBeforeActive" : function(docId, isFromDocsTabList, isNotLoaded) {
+                if(!isNotLoaded) {
+                    // FIXME When the menu DB is created and the page loading service is created, remove the code below (before var hashVal).
+                    var url = N(".index-lefter.view_context__ a[data-pageid='" + docId + "']").attr("href");
+                    if (N.string.trim(location.hash).length === 0 || docId === "home0100") {
+                        docId = "home0100";
+                        url = "html/naturaljs/" + docId.substring(0, 4) + "/" + docId + ".html";
+                    }
 
-			        var hashVal = docId + "$" + this.options.docs[docId].docNm + "$" + url;
-			        if(decodeURIComponent(atob(location.hash.replace("#", ""))) != hashVal) {
-			            location.hash = btoa(encodeURIComponent(hashVal));
-			        }
+                    var hashVal = docId + "$" + this.options.docs[docId].docNm + "$" + url;
+                    if(decodeURIComponent(atob(location.hash.replace("#", ""))) != hashVal) {
+                        location.hash = btoa(encodeURIComponent(hashVal));
+                    }
                 }
-			},
-			/**
+            },
+            /**
              * Global onActive event
              *  - This event is executed after the selected tab is activated.
              */
-			"onActive" : function(docId, isFromDocsTabList, isNotLoaded) {
+            "onActive" : function(docId, isFromDocsTabList, isNotLoaded) {
                 if(location.hostname === "bbalganjjm.github.io") {
                     try {
                         ga('create', 'UA-58001949-2', 'auto');
@@ -896,42 +896,42 @@
                         });
                     } catch (e) {}
                 }
-			},
-			/**
+            },
+            /**
              * Multilingual messages
              */
-			"message" : {
-				"ko_KR" : {
-					"closeAllTitle" : "메뉴 전체 닫기",
-					"closeAll" : "전체 닫기",
-					"closeAllQ" : "선택한 메뉴를 제외하고 열린 메뉴 전체를 닫겠습니까?",
-					"closeAllDQ" : "열려있는 메뉴 전체를 닫고 메인(홈) 화면으로 이동 하겠습니까?",
-					"docListTitle" : "열린 메뉴 목록",
-					"docList" : "메뉴 목록",
-					"selDocument" : "{0} 메뉴 선택",
-					"close" : "메뉴 닫기",
-					"closeConf" : "\"{0}\" 메뉴에 편집중인 항목이 있습니다. 무시하고 메뉴를 닫겠습니까?",
-					"maxTabs" : "최대 {0} 개의 메뉴 만 열 수 있습니다. <br>다른 메뉴 탭을 닫고 다시 시도 하세요.",
-					"maxStateful" : "선택한 메뉴가 활성화 되면 설정 된 최대 상태유지 메뉴 개수(최대 {1} 개)가 초과 되어 마지막으로 선택 된 \"{0}\" 메뉴 페이지가 다시 로딩 됩니다.<br>메뉴를 선택 하겠습니까?"
-				},
-				"en_US" : {
-					"closeAllTitle" : "Close all menus",
-					"closeAll" : "Close all",
-					"closeAllQ" : "Are you sure you want to close the all open menus except for the selected menu?",
-					"closeAllDQ" : "Are you sure you want to close the all open menus and go to home page?",
-					"docListTitle" : "Opened menu list",
-					"docList" : "Menu list",
-					"selDocument" : "Select the {0} menu",
-					"close" : "Close the menu",
-					"closeConf" : "There is an item being edited in the \"{0}\" memu. Are you sure you want to close the menu?",
-					"maxTabs" : "You can only open up to {0} menus. <br>Close other menu tabs and try again.",
-					"maxStateful" : "When the selected menu is activated, the maximum number of menu items (maximum of {1}) is exceeded and the last selected menu page \"{0}\" will be  reloaded.<br>Do you want to select the menu?"
-				}
-			}
-		}
-	});
+            "message" : {
+                "ko_KR" : {
+                    "closeAllTitle" : "메뉴 전체 닫기",
+                    "closeAll" : "전체 닫기",
+                    "closeAllQ" : "선택한 메뉴를 제외하고 열린 메뉴 전체를 닫겠습니까?",
+                    "closeAllDQ" : "열려있는 메뉴 전체를 닫고 메인(홈) 화면으로 이동 하겠습니까?",
+                    "docListTitle" : "열린 메뉴 목록",
+                    "docList" : "메뉴 목록",
+                    "selDocument" : "{0} 메뉴 선택",
+                    "close" : "메뉴 닫기",
+                    "closeConf" : "\"{0}\" 메뉴에 편집중인 항목이 있습니다. 무시하고 메뉴를 닫겠습니까?",
+                    "maxTabs" : "최대 {0} 개의 메뉴 만 열 수 있습니다. <br>다른 메뉴 탭을 닫고 다시 시도 하세요.",
+                    "maxStateful" : "선택한 메뉴가 활성화 되면 설정 된 최대 상태유지 메뉴 개수(최대 {1} 개)가 초과 되어 마지막으로 선택 된 \"{0}\" 메뉴 페이지가 다시 로딩 됩니다.<br>메뉴를 선택 하겠습니까?"
+                },
+                "en_US" : {
+                    "closeAllTitle" : "Close all menus",
+                    "closeAll" : "Close all",
+                    "closeAllQ" : "Are you sure you want to close the all open menus except for the selected menu?",
+                    "closeAllDQ" : "Are you sure you want to close the all open menus and go to home page?",
+                    "docListTitle" : "Opened menu list",
+                    "docList" : "Menu list",
+                    "selDocument" : "Select the {0} menu",
+                    "close" : "Close the menu",
+                    "closeConf" : "There is an item being edited in the \"{0}\" memu. Are you sure you want to close the menu?",
+                    "maxTabs" : "You can only open up to {0} menus. <br>Close other menu tabs and try again.",
+                    "maxStateful" : "When the selected menu is activated, the maximum number of menu items (maximum of {1}) is exceeded and the last selected menu page \"{0}\" will be  reloaded.<br>Do you want to select the menu?"
+                }
+            }
+        }
+    });
 
-	/**
+    /**
      * Natural-TEMPLATE Config
      */
     N.context.attr("template", {
@@ -1022,12 +1022,12 @@
         }
     });
 
-	// Natural-JS API 메뉴얼 용 advisors
-	N.context.attr("architecture").cont.advisors.push({ // md 파일 변환
+    // Advisors for Natural-JS API manuals.
+    N.context.attr("architecture").cont.advisors.push({ // md file conversion.
         "pointcut" : ".view-markdown:^init$",
         "adviceType" : "before",
         "fn" : function(cont, fnChain, args){
-            /* markdown 파일 로딩 후  html 로 변환 */
+            /* Load markdown file and convert to html */
             if(typeof showdown == "undefined") {
                 N.comm({
                     url : "js/lib/markdown/github-markdown.css",
@@ -1055,7 +1055,7 @@
                 });
             }
         }
-    }, { // API DEMO 페이지 자동 삽입.
+    }, { // Automatically include API DEMO pages.
         "pointcut" : ".view-apidemo:^init$",
         "adviceType" : "before",
         "fn" : function(cont, fnChain, args){
@@ -1083,13 +1083,13 @@
                 });
             });
         }
-    }, { // API 문서 모바일 용 보기 처리
+    }, { // Processing the API document view on mobile
         "pointcut" : ".view-mobile-layout:^init$",
         "adviceType" : "before",
         "fn" : function(cont, fnChain, args){
             N(window).trigger("resize.mobile", [ cont.view ]);
         }
-    }, { // 소스보기 버튼 처리
+    }, { // Source view button handling
         "pointcut" : ".view-code:^init$",
         "adviceType" : "before",
         "fn" : function(cont, fnChain, args){
