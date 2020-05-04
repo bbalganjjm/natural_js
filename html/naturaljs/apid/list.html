@@ -1,24 +1,39 @@
 <style>
-.demo_list ul#list {
+.demo.list ul#list {
 	list-style: none;
 	padding: 0;
 	margin: 0;
 	border: 1px solid #4CAF50;
 }
 
-.demo_list ul#list > li {
+.demo.list ul#list > li {
 	margin: 0;
 	padding: 10px;
+    border-top: none;
 	border-bottom: 1px solid #4CAF50;
 }
 
-.demo_list .context_wrap__ {
+.demo.list ul#list > li:last-child {
+    border-bottom: none;
+}
+
+.demo.list .context_wrap__ {
 	border: 1px solid #4CAF50;
 }
 
-.demo_list .context_wrap__ > ul#list {
+.demo.list .context_wrap__ > ul#list {
 	border: none;
 }
+
+.demo.list input[type='text'],
+.demo.list input[type='number'],
+.demo.list input[type='tel'],
+.demo.list input[type='password'],
+.demo.list select,
+.demo.list textarea {
+    width: auto;
+}
+
 </style>
 <article class="demo list">
 	<p lang="ko_KR" class="smallContTit">데이터 : </p>
