@@ -647,10 +647,6 @@
 		},
 		"grid" : {
 			/**
-			 * 그리드에서 스크롤할때 위, 아래 끝에 다다르면 전체 페이지가(window scroll) 스크롤 되는것을 방지하기 위한 기능 활성 여부
-			 */
-			"windowScrollLock" : true,
-			/**
 			 * 컬럼 넓이조절 기능 활성화 여부
 			 */
 			"resizable" : true,
@@ -676,8 +672,6 @@
 				"size" : 30
 			},
             "unselect" : false,
-            "resizable" : true,
-       		"sortable" : true,
        		/**
              * Multilingual messages
              */
