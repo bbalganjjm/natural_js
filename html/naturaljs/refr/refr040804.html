@@ -40,7 +40,10 @@
 			<td>boolean</td>
 			<td>true</td>
 			<td style="text-align: center;">X</td>
-			<td>입력요소의 실시간 검증을 할지 여부를 지정 합니다.</td>
+			<td>
+                <p lang="ko_KR">false로 설정 하면 입력 요소에서 focus-out 되었을 때 입력 값에 대한 유효성 검증을 실행 하지 않습니다.</p>
+                <p lang="en_US">If set to false, validation is not performed on the input value when the input element is focus-out.</p>
+            </td>
 		</tr>
 		<tr>
 			<td>html</td>
@@ -64,18 +67,14 @@
 			</td>
 		</tr>
 		<tr>
-			<td>resizable</td>
-			<td>boolean</td>
-			<td>false</td>
-			<td style="text-align: center;">X</td>
-			<td>컬럼 리사이징 기능 활성화 여부</td>
-		</tr>
-		<tr>
 			<td>vResizable</td>
 			<td>boolean</td>
 			<td>false</td>
 			<td style="text-align: center;">X</td>
-			<td>리스트 높이 리사이징 기능 활성화 여부</td>
+			<td>
+                <p lang="ko_KR">true로 설정 하면 그리드 바디의 높이를 조절 할 수 있습니다.</p>
+                <p lang="en_US">If set to true, height of the grid body can be resized.</p>
+            </td>
 		</tr>
 		<tr>
 			<td>windowScrollLock</td>
@@ -113,8 +112,10 @@
 			<td>true</td>
 			<td style="text-align: center;">X</td>
 			<td>
-				<p>select 기능이 활성화(true) 되었을 경우 선택된 행을 다시 선택하여 선택을 취소 할 것인지 여부를 설정</p>
-				<p class="alert">multiselect 옵션이 true 일 경우에는 unselect 옵션이 적용 되지 않습니다.</p>
+			    <p lang="ko_KR">false로 설정 하면 select 옵션이 true 일때 선택 된 행을 다시 선택해도 선택이 취소 되지 않습니다.</p>
+                <p lang="en_US">If set to false, when the select option is true, selecting the selected row again does not cancel the selection.</p>
+				<p lang="ko_KR" class="alert">multiselect 옵션이 true 일 경우에는 unselect 옵션이 적용 되지 않습니다.</p>
+				<p lang="en_US" class="alert">If the multiselect option is true, the unselect option has no apply.</p>
 			</td>
 		</tr>
 		<tr>
@@ -190,10 +191,21 @@
 			<td>100</td>
 			<td style="text-align: center;">X</td>
 			<td>
-				<p>헤더고정형 리스트에서는 스크롤페이징이 기본으로 적용됩니다. 페이징시 한번에 바인드하는 행수를 지정 합니다.</p>
-				<p>0 을 지정 하면 스크롤 페이징 기능이 비 활성화 됩니다.</p>
-				<p class="alert">너무 작게 지정하면 스크롤 이벤트가 감지 되지 않아 데이터가 모두 표시 되지 않습니다. 반드시 행 들이 리스트 바디를 넘칠 수 있는 양을 지정 해 주세요.</p>
-				<p class="alert">너무 크게 지정하면 스크롤 페이징이 작동될때 브라우저에 부하가 발생되므로 리스트에 입력요소나 이미지가 들어 있다면 200 이하로 그렇지 않다면 1000 이하로 설정하는 것을 권장합니다.</p>
+				<p lang="ko_KR">스크롤 페이징 할때 한번에 바인드하는 행수를 지정 합니다.</p>
+				<p lang="en_US">Specifies the number of rows to bind at a time when scroll paging.</p>
+				<p lang="ko_KR">N.list 는 스크롤 페이징 기능이 기본적으로 활성화 되며 0 을 지정하면 스크롤 페이징 기능이 비 활성화 됩니다.</p>
+				<p lang="en_US">In N.list, the scroll paging feature is enabled by default, if 0 is specified, the scroll paging feature is disabled.</p>
+				<p lang="ko_KR">size 옵션 값은 다음과 같이 scrollPaging 옵션 객체의 하위 속성으로 지정해야합니다.</p>
+				<p lang="en_US">The size option value must be specified as a sub-property of the scrollPaging option object as follows.</p>
+                <pre><code class="language-javascript">...
+    scrollPaging : {
+        size : 50
+    }
+...</code></pre>
+				<p lang="ko_KR" class="alert">너무 작게 지정하면 스크롤이 생성 되지 않아 데이터가 모두 표시 되지 않습니다. 반드시 행 들이 리스트 바디를 넘칠 수 있는 양을 지정 해 주어야 합니다.</p>
+				<p lang="en_US" class="alert">If it is set too small, scrolling is not created and all data is not displayed. You must specify the amount by which rows can overflow the list body.</p>
+				<p lang="ko_KR" class="alert">너무 크게 지정하면 스크롤 페이징이 작동될때 브라우저에 부하가 발생되므로 리스트에 입력요소나 이미지가 들어 있다면 100 이하로 설정하고 그렇지 않다면 1000 이하로 설정하는 것을 권장합니다.</p>
+				<p lang="en_US" class="alert">If set too large, browser performance is overhead when scroll paging is enabled, so it is recommended to set it to 100 or less if the input element or image is included in the list, otherwise 1000 or less.</p>
 			</td>
 		</tr>
 		<tr>

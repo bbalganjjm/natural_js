@@ -638,67 +638,80 @@
 				}
 			},
 			/**
-			 * 스크롤 페이징 시 한번에 몇개를 가져올것인지 설정
+			 * Global scrollPaging.size option.
+			 *  - Specifies the number of rows to bind at a time when scroll paging.
 			 */
 			"scrollPaging" : {
 				"size" : 30
 			},
+			/**
+			 * Global unselect option.
+			 *  - If set to false, when the select option is true, selecting the selected row again does not cancel the selection.
+			 */
             "unselect" : false
 		},
 		"grid" : {
+		    /**
+             * Sort sort indicator when sort function is activated, You can also enter HTML tags
+             */
+            "sortableItem" : {
+                "asc" : "▼",
+                "desc" : "▲"
+            },
+		    /**
+             * Multilingual messages
+             */
+            "message" : {
+                "ko_KR" : {
+                    "empty" : "조회를 하지 않았거나 조회된 데이터가 없습니다.",
+                    "search" : "검색",
+                    "selectAll" : "전체선택",
+                    "dFilter" : "데이터 필터",
+                    "more" : "더보기",
+                    "column" : "열",
+                    "showHide" : "열 감추기 / 보이기",
+                    "prev" : "이전",
+                    "next" : "다음"
+                },
+                "en_US" : {
+                    "empty" : "No inquired data or no data available.",
+                    "search" : "Search",
+                    "selectAll" : "Select all",
+                    "dFilter" : "Data filter",
+                    "more" : "MORE",
+                    "column" : "Column",
+                    "showHide" : "Hide and show columns",
+                    "prev" : "Previous",
+                    "next" : "Next"
+                }
+            },
 			/**
-			 * 컬럼 넓이조절 기능 활성화 여부
+			 * Global resizable option.
+             *  - If set to true, the width of the column can be resized.
 			 */
 			"resizable" : true,
 			/**
-			 * 소트 기능 활성화 여부
+			 * Global sortable option.
+             *  - If set to true, data can be sorted based on the selected column.
 			 */
 			"sortable" : true,
 			/**
-			 * 필터 기능 활성화 여부
+			 * Global filter option.
+             *  - If set to true, data can be filtered based on the selected column.
 			 */
 			"filter" : true,
 			/**
-             * Sort sort indicator when sort function is activated, You can also enter HTML tags
+             * Global scrollPaging.size option.
+             *  - Specifies the number of rows to bind at a time when scroll paging.
              */
-			"sortableItem" : {
-				"asc" : "▼",
-				"desc" : "▲"
-			},
-			/**
-			 * 스크롤 페이징 시 한번에 몇개를 가져올것인지 설정
-			 */
-			"scrollPaging" : {
-				"size" : 30
-			},
+            "scrollPaging" : {
+                "size" : 30
+            },
+            /**
+             * Global unselect option.
+             *  - If set to false, when the select option is true, selecting the selected row again does not cancel the selection.
+             */
             "unselect" : false,
-       		/**
-             * Multilingual messages
-             */
-			"message" : {
-				"ko_KR" : {
-					"empty" : "조회를 하지 않았거나 조회된 데이터가 없습니다.",
-					"search" : "검색",
-					"selectAll" : "전체선택",
-					"dFilter" : "데이터 필터",
-					"more" : "더보기",
-					"column" : "열",
-					"showHide" : "열 감추기 / 보이기",
-					"prev" : "이전",
-					"next" : "다음"
-				},
-				"en_US" : {
-					"empty" : "No inquired data or no data available.",
-					"search" : "Search",
-					"selectAll" : "Select all",
-					"dFilter" : "Data filter",
-					"more" : "MORE",
-					"column" : "Column",
-					"showHide" : "Hide and show columns",
-					"prev" : "Previous",
-					"next" : "Next"
-				}
-			},
 			/**
              * Miscellaneous settings
              */

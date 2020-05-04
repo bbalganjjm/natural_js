@@ -46,14 +46,8 @@
 				<p>0을 입력하면 열을 고정하지 않고 0이상 숫자를 입력 하면 해당 숫자(열개수) 만큼 앞에서 부터 열을 고정 해 줍니다.</p>
 				<p class="alert">헤더(thead) 영역은 반드시 있어야 하고 푸터(tfoot) 영역은 없어야 합니다.</p>
 				<p class="alert">그리드의 헤더나 바디가 2행 이상 세트로 구성있거나 height 옵션이 0보다 크면 작동하지 않습니다.</p>
-				<p class="alert">고정 된 셀 들이 비 정상적으로 표시되면 아래
-					misc.fixedcolHeadMarginTop /
-					misc.fixedcolHeadMarginLeft /
-					misc.fixedcolHeadHeight /
-					misc.fixedcolBodyMarginTop /
-					misc.fixedcolBodyMarginLeft /
-					fixedcolBodyBindHeight /
-					fixedcolBodyAddHeight 옵션 값 들을 1씩 가감 하여 조절 해 주세요.</p>
+				<p lang="ko_KR" class="alert">고정 된 셀 들이 비 정상적으로 표시되면 misc.fixedcolHeadMarginTop, misc.fixedcolHeadMarginLeft, misc.fixedcolHeadHeight, misc.fixedcolBodyMarginTop, misc.fixedcolBodyMarginLeft, fixedcolBodyBindHeight, fixedcolBodyAddHeight 옵션 값 들을 조절 해 주세요.</p>
+                <p lang="en_US" class="alert">If the fixed cells are displayed abnormally, adjust the misc.fixedcolHeadMarginTop, misc.fixedcolHeadMarginLeft, misc.fixedcolHeadHeight, misc.fixedcolBodyMarginTop, misc.fixedcolBodyMarginLeft, fixedcolBodyBindHeight and fixedcolBodyAddHeight option values.</p>
 			</td>
 		</tr>
 		<tr>
@@ -83,7 +77,10 @@
 			<td>boolean</td>
 			<td>true</td>
 			<td style="text-align: center;">X</td>
-			<td>입력요소의 실시간 검증을 할지 여부를 지정 합니다.</td>
+			<td>
+                <p lang="ko_KR">false로 설정 하면 입력 요소에서 focus-out 되었을 때 입력 값에 대한 유효성 검증을 실행 하지 않습니다.</p>
+                <p lang="en_US">If set to false, validation is not performed on the input value when the input element is focus-out.</p>
+            </td>
 		</tr>
 		<tr>
 			<td>html</td>
@@ -112,19 +109,20 @@
 			<td>false</td>
 			<td style="text-align: center;">X</td>
 			<td>
-				<p>컬럼 리사이징 기능 활성화 여부</p>
-				<p class="alert">
-					colgroup 태그와 col 태그를 이용하여 셀의 넓이를 지정했을때 resizable 옵션이 true 라면 내부적으로 col 태그에 정의 되어 있는 셀의 넓이 값을 thead 의 th 에 이관하고 colgroup 태그를 제거 합니다.
-					때문에 컬럼 리사이징 기능을 사용하려면 col 태그에 넓이를 지정하지 말고 thead 의 th 에 컬럼의 넓이를 지정 하는것을 권장 합니다.
+			    <p lang="ko_KR">true로 설정 하면 컬럼의 넓이를 조절 할 수 있습니다.</p>
+                <p lang="en_US">If set to true, the width of the column can be resized.</p>
+				<p lang="ko_KR" class="alert">
+					colgroup 의 col 태그를 사용하여 셀의 넓이를 지정했을때 resizable 옵션이 true 이면 그리드가 초기화 될 때 col 태그에 정의 되어 있는 셀의 넓이 값을 thead 의 th 에 이관 하고 colgroup 태그를 제거 합니다.
+					때문에 컬럼 리사이징 기능을 사용하려면 col 태그에 넓이를 지정하지 말고 thead 의 th 에 컬럼 넓이를 설정 하는것을 권장 합니다.
 				</p>
-				<p class="alert">
-					thaed 의 th 에 colspan 속성이 있을경우 컬럼 리사이즈 기능이 정상적으로 작동하지 않을 수 있습니다.
-				</p>
-				<p class="alert">리사이즈 된 셀 들이 비 정상적으로 표시되면 아래
-					misc.resizableCorrectionWidth /
-					misc.resizableLastCellCorrectionWidth /
-					misc.resizeBarCorrectionLeft /
-					misc.resizeBarCorrectionHeight 옵션 값 들을 1씩 가감하여 조절 해 주세요.</p>
+				<p lang="en_US" class="alert">
+                    If the resizable option is true when the cell width is set using the col tag of the colgroup, when the grid is initialized, the cell width value defined in the col tag is moved to th of thead and then the colgroup tag is removed.
+                    Therefore, to use the column resizing feature, it is recommended that you do not set the width in the col tag, but set the column width in th of thead.
+                </p>
+				<p lang="ko_KR" class="alert">thead 의 th 에 colspan 속성이 있을경우 컬럼 리사이즈 기능이 제대로 작동하지 않을 수 있습니다.</p>
+				<p lang="en_US" class="alert">If thead's th has a colspan attribute, the column resizing feature may not work properly.</p>
+				<p lang="ko_KR" class="alert">컬럼 리사이징 할 때 그리드의 모양이 깨지면 misc.resizableCorrectionWidth, misc.resizableLastCellCorrectionWidth, misc.resizeBarCorrectionLeft, misc.resizeBarCorrectionHeight 옵션 값 들을 조절 해 주세요.</p>
+				<p lang="en_US" class="alert">If the grid's shape is broken when resizing the column, adjust the misc.resizableCorrectionWidth, misc.resizableLastCellCorrectionWidth, misc.resizeBarCorrectionLeft and misc.resizeBarCorrectionHeight option values.</p>
 			</td>
 		</tr>
 		<tr>
@@ -132,7 +130,10 @@
 			<td>boolean</td>
 			<td>false</td>
 			<td style="text-align: center;">X</td>
-			<td>그리드 높이 리사이징 기능 활성화 여부</td>
+			<td>
+			    <p lang="ko_KR">true로 설정 하면 그리드 바디의 높이를 조절 할 수 있습니다.</p>
+                <p lang="en_US">If set to true, height of the grid body can be resized.</p>
+			</td>
 		</tr>
 		<tr>
 			<td>sortable</td>
@@ -140,12 +141,18 @@
 			<td>false</td>
 			<td style="text-align: center;">X</td>
 			<td>
-				<p>컬럼 정렬 기능 활성화 여부</p>
-				<p class="alert">
-					정렬 되는 컬럼 정보는 내부적으로 tbody 의 td 나 td 안에 있는 요소들의 id 값을 가져와 사용 합니다.
-					tbody 의 td 안에 id 속성을 가진 요소가 2개 이상 이거나 헤더와 바디의 요소 구성이 많이 다를 경우는 정렬이 정상적으로 작동되지 않을 수 있습니다.
-					이때는 thead 의 th 요소에 data-id 속성에 정렬 될 데이터 컬럼명을 정의 해 주면 정상적으로 작동 됩니다.
+                <p lang="ko_KR">true로 설정 하면 선택 한 컬럼을 기준으로 데이터를 정렬 할 수 있습니다.</p>
+                <p lang="en_US">If set to true, data can be sorted based on the selected column.</p>
+				<p lang="ko_KR" class="alert">
+					정렬 될 컬럼의 정보는 tbody 의 td 나 td 안에 있는 요소들의 id 값을 기준으로 정렬 합니다.
+					그러나 tbody 의 td 안에 id 속성을 가진 요소가 2개 이상 존재 하거나 그리드 헤더와 바디의 요소 구성이 많이 다를 경우에는 제대로 정렬이 되지 않을 수 있습니다.
+					이때는 th 요소의 data-id 속성에 정렬 될 컬럼명을 선언 해 주면 정상적으로 작동 됩니다.
 				</p>
+				<p lang="en_US" class="alert">
+		            The information in the column to sort is sorted based on the id value of the elements in td or td of tbody.
+		            However, if there are two or more elements with the id attribute in td of tbody, or if the element construction of the grid header and body is very different, it may not be properly sorted.
+		            In this case, if the column name to be sorted is declared in the data-id attribute of th element, it works normally.
+                </p>
 			</td>
 		</tr>
 		<tr>
@@ -154,16 +161,20 @@
 			<td>false</td>
 			<td style="text-align: center;">X</td>
 			<td>
-				<p>데이터 필터 기능 활성화 여부</p>
-				<p class="alert">
-					filter 옵션이 false 인 상태에서 thead 의 th 에   data-filter="string|number|date" 속성을 추가 하면 컬럼별로 필터 기능을 활성화 할 수 있습니다.
-					(data-filter 속성 값인 string, number, date 에 따라 검색조건을 다양화 하려고 합니다. 현재는 string 으로만 인식되며 number, date 는 개발 하는대로 릴리즈 할 예정 입니다.)
-				</p>
-				<p class="alert">
-					필터링 되는 컬럼 정보는 내부적으로 tbody 의 td 나 td 안에 있는 요소들의 id 값을 가져와 사용 합니다.
-					tbody 의 td 안에 id 속성을 가진 요소가 2개 이상 이거나 헤더와 바디의 요소 구성이 많이 다를 경우는 데이터 필터링이 정상적으로 작동되지 않을 수 있습니다.
-					이때는 thead 의 th 요소에 data-id 속성에 정렬 될 데이터 컬럼명을 정의 해 주면 정상적으로 작동 됩니다.
-				</p>
+				<p lang="ko_KR">true로 설정 하면 선택 한 컬럼을 기준으로 데이터를 필터링 할 수 있습니다.</p>
+                <p lang="en_US">If set to true, data can be filtered based on the selected column.</p>
+				<p lang="ko_KR" class="alert">filter 옵션이 false 인 상태에서 th 요소의 속성으로 data-filter="true" 옵션을 선언 해 주면 컬럼별로 필터 기능을 활성화 할 수 있습니다.</p>
+				<p lang="en_US" class="alert">If the filter option is false, you can enable the filter feature for each column by declaring the data-filter="true" option as an attribute of the th element.</p>
+				<p lang="ko_KR" class="alert">
+		                    필터 될 컬럼의 정보는 tbody 의 td 나 td 안에 있는 요소들의 id 값을 기준으로 필터 합니다.
+		                    그러나 tbody 의 td 안에 id 속성을 가진 요소가 2개 이상 존재 하거나 그리드 헤더와 바디의 요소 구성이 많이 다를 경우에는 제대로 필터링 되지 않을 수 있습니다.
+		                    이때는 th 요소의 data-id 속성에 필터링 될 컬럼명을 선언 해 주면 정상적으로 작동 됩니다.
+                </p>
+                <p lang="en_US" class="alert">
+                    The information in the column to filter is filtered based on the id value of the elements in td or td of tbody.
+                    However, if there are two or more elements with the id attribute in td of tbody, or if the element construction of the grid header and body is very different, it may not be properly filtered.
+                    In this case, if the column name to be filtered is declared in the data-id attribute of th element, it works normally.
+                </p>
 			</td>
 		</tr>
 		<tr>
@@ -202,8 +213,10 @@
 			<td>true</td>
 			<td style="text-align: center;">X</td>
 			<td>
-				<p>select 기능이 활성화(true) 되었을 경우 선택된 행을 다시 선택하여 선택을 취소 할 것인지 여부를 설정</p>
-				<p class="alert">multiselect 옵션이 true 일 경우에는 unselect 옵션이 적용 되지 않습니다.</p>
+				<p lang="ko_KR">false로 설정 하면 select 옵션이 true 일때 선택 된 행을 다시 선택해도 선택이 취소 되지 않습니다.</p>
+                <p lang="en_US">If set to false, when the select option is true, selecting the selected row again does not cancel the selection.</p>
+                <p lang="ko_KR" class="alert">multiselect 옵션이 true 일 경우에는 unselect 옵션이 적용 되지 않습니다.</p>
+                <p lang="en_US" class="alert">If the multiselect option is true, the unselect option has no apply.</p>
 			</td>
 		</tr>
 		<tr>
@@ -280,16 +293,21 @@
 			<td>100</td>
 			<td style="text-align: center;">X</td>
 			<td>
-				<p>헤더고정형 그리드에서는 스크롤페이징이 기본으로 적용됩니다. 페이징시 한번에 바인드하는 행수를 지정 합니다.</p>
-				<p>0 을 지정 하면 스크롤 페이징 기능이 비 활성화 됩니다.</p>
-                <p>다음과 같이 scrollPaging 옵션의 하위 객체로 size 를 선언하여 정의 해 주어야 합니다</p>
+			    <p lang="ko_KR">스크롤 페이징 할때 한번에 바인드하는 행수를 지정 합니다.</p>
+                <p lang="en_US">Specifies the number of rows to bind at a time when scroll paging.</p>
+                <p lang="ko_KR">헤더 고정형 N.list 는 스크롤 페이징 기능이 기본적으로 활성화 되며 0 을 지정하면 스크롤 페이징 기능이 비 활성화 됩니다.</p>
+                <p lang="en_US">In Header fixed type N.grid, the scroll paging feature is enabled by default, if 0 is specified, the scroll paging feature is disabled.</p>
+                <p lang="ko_KR">size 옵션 값은 다음과 같이 scrollPaging 옵션 객체의 하위 속성으로 지정해야합니다.</p>
+                <p lang="en_US">The size option value must be specified as a sub-property of the scrollPaging option object as follows.</p>
                 <pre><code class="language-javascript">...
     scrollPaging : {
         size : 50
     }
 ...</code></pre>
-				<p class="alert">너무 작게 지정하면 스크롤 이벤트가 감지 되지 않아 데이터가 모두 표시 되지 않습니다. 반드시 행 들이 그리드 바디를 넘칠 수 있는 양을 지정 해 주세요.</p>
-				<p class="alert">너무 크게 지정하면 스크롤 페이징이 작동 될 때 브라우저에 부하가 발생되므로 그리드에 입력요소나 이미지가 들어 있다면 200 이하로 그렇지 않다면 1000 이하로 설정하는 것을 권장합니다.</p>
+				<p lang="ko_KR" class="alert">너무 작게 지정하면 스크롤이 생성 되지 않아 데이터가 모두 표시 되지 않습니다. 반드시 행 들이 그리드 바디를 넘칠 수 있는 양을 지정 해 주어야 합니다.</p>
+                <p lang="en_US" class="alert">If it is set too small, scrolling is not created and all data is not displayed. You must specify the amount by which rows can overflow the grid body.</p>
+				<p lang="ko_KR" class="alert">너무 크게 지정하면 스크롤 페이징이 작동될때 브라우저에 부하가 발생되므로 그리드에 입력요소나 이미지가 들어 있다면 100 이하로 설정하고 그렇지 않다면 1000 이하로 설정하는 것을 권장합니다.</p>
+                <p lang="en_US" class="alert">If set too large, browser performance is overhead when scroll paging is enabled, so it is recommended to set it to 100 or less if the input element or image is included in the grid, otherwise 1000 or less.</p>
 			</td>
 		</tr>
 		<tr>
