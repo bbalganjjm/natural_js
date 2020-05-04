@@ -10,4 +10,4 @@ Form(N.form) 은 context 옵션으로 지정한 요소(div, table 등의 block �
 <pre style="margin-bottom: 0;"><code>var formInst = N([]).form().add();
 formInst.unbind().bind(0, [{ "col01" : "abcd" }])</code></pre>
 </div>
-<p class="alert">입력요소의 값을 변경하거나 val 메서드로 데이터를 변경되면 rowStatus 프로퍼티가 생성되고 입력은 "insert", 수정은 "update", 삭제는 "delete" 값이 입력 됩니다.</p>
+<p class="alert">입력요소의 값을 변경하거나 val 메서드로 데이터가 변경되면 rowStatus 프로퍼티가 생성되고 입력은 "insert", 수정은 "update", 삭제는 "delete" 값이 입력 됩니다.</p>
