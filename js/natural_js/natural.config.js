@@ -821,13 +821,45 @@
              *  - If set to true, The menu list dialog is always displayed at the top.
              */
 			"alwaysOnTop" : true,
+			/**
+             * Global maxStateful option
+             *  - If the multi option is true, the maximum number of stateful tab contents can be set to prevent the web browser from slowing down whenever additional tab contents are opened.
+             */
 			"maxStateful" : 20,
+			/**
+             * Global maxTabs option
+             *  - If the multi option is true, the maximum number of tab contents can be set to prevent the web browser from slowing down whenever additional tab contents are opened.
+             */
 			"maxTabs" : 0,
+			/**
+             * Global entireLoadIndicator option
+             *  -
+             */
 			"entireLoadIndicator" : true,
+			/**
+             * Global entireLoadScreenBlock option
+             *  -
+             */
 			"entireLoadScreenBlock" : true,
+			/**
+             * Global addLast option
+             *  -
+             */
 			"addLast" : true,
+			/**
+             * Global tabScroll option
+             *  -
+             */
 			"tabScroll" : true,
+			/**
+             * Global closeAllRedirectURL option
+             *  - When the "Close All" button is clicked, if the value of the closeAllRedirectURL option is null, all other tabs except the active tab are closed and if you input the url string, it  will be redirect to the url.
+             */
 			"closeAllRedirectURL" : "./",
+			/**
+             * Global entireLoadExcludeURLs option
+             *  -
+             */
 			"entireLoadExcludeURLs" : ["contents.html", "footer.html"],
 			/*
 			"onBeforeLoad" : function(docId, target) {
@@ -921,10 +953,10 @@
     N.context.attr("template", {
         aop : {
             /**
-             * 공통코드 조회 정보
+             * Common code request information
              *
-             * @codeUrl 공통코드 조회 URL
-             * @codeKey 그룹코드 프로퍼티 명
+             * @codeUrl Common Code request URL
+             * @codeKey Group code property name
              */
             codes : {
                 codeUrl : "sample/code/getSampleCodeList.json",
@@ -932,7 +964,7 @@
             }
         },
         /**
-         * 다국어 메시지
+         * Multilingual Message
          */
         "message" : {
             "ko_KR" : {
