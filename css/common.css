@@ -455,10 +455,6 @@ article .btnBox {
 	margin-bottom: 15px;
 }
 
-.apiDoc .apidemo .form td {
-	position: relative;
-}
-
 .apiDoc .apidemo .form .demo-desc {
 	position: absolute;
     padding: 5px;
@@ -472,8 +468,9 @@ article .btnBox {
 	z-index: 1;
 	opacity: 0;
 	font-size: 13px;
-	transform : scale(0);
-	transform-origin: top left;
+	transform : scaleY(0);
+	transform-origin: top;
+	transition: transform 0.5s ease, opacity 0.5s ease;
 }
 
 .apiDoc .apidemo .form select:focus+.demo-desc,
@@ -482,9 +479,8 @@ article .btnBox {
 	will-change: transform, opacity;
 	margin-bottom: 15px;
 	opacity: 1;
-	transform : scale(1);
-	transition: transform 0.5s ease, opacity 0.5s ease;
-	transform-origin: top left;
+	transform : scaleY(1);
+
 }
 
 .docs_contents__>.view_context__ {
@@ -862,6 +858,10 @@ pre.shell>code {
     #conf_code .apiDoc .api.form td:nth-child(3):before {
         content: 'required : ';
         font-weight: 600;
+    }
+
+    .apiDoc .apidemo .form .demo-desc {
+        left : 0;
     }
 }
 
