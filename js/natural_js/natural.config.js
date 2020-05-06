@@ -623,6 +623,10 @@
             "append" : true
         },
         "form" : {
+            /**
+             * Global tpBind option.
+             *  -
+             */
             "tpBind" : true
         },
         "list" : {
