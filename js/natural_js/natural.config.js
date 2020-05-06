@@ -625,7 +625,7 @@
         "form" : {
             /**
              * Global tpBind option.
-             *  -
+             *  - If set to true, it prevents the conflict of the event bound to the input element before component initialization and the component event such as format, validate, and dataSync.
              */
             "tpBind" : true
         },

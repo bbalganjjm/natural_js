@@ -1,90 +1,90 @@
 <article class="refr040904 apiDoc">
-	<h2>
-		<span lang="ko_KR">기본옵션</span>
-		<span lang="en_US">Default Options</span>
-	</h2>
-	<table class="api form">
-		<tr>
-			<th>Name</th>
-			<th>Type</th>
-			<th>Default</th>
-			<th>Required</th>
-			<th style="width: auto;">Description</th>
-		</tr>
-		<tr>
-			<td>data</td>
-			<td>array[json object]</td>
-			<td>undefined</td>
-			<td style="text-align: center;">O</td>
-			<td>
+    <h2>
+        <span lang="ko_KR">기본옵션</span>
+        <span lang="en_US">Default Options</span>
+    </h2>
+    <table class="api form">
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Required</th>
+            <th style="width: auto;">Description</th>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>array[json object]</td>
+            <td>undefined</td>
+            <td style="text-align: center;">O</td>
+            <td>
                 <p lang="ko_KR">N.grid에 바인딩 할 데이터를 지정 합니다.</p>
                 <p lang="en_US">Specifies the data to bind to N.grid.</p>
             </td>
-		</tr>
-		<tr>
-			<td>context</td>
-			<td>jquery object|jquery selector string</td>
-			<td>null</td>
-			<td style="text-align: center;">O</td>
-			<td>
+        </tr>
+        <tr>
+            <td>context</td>
+            <td>jquery object|jquery selector string</td>
+            <td>null</td>
+            <td style="text-align: center;">O</td>
+            <td>
                 <p lang="ko_KR">N.grid를 적용 할 context 요소를 지정 합니다.</p>
                 <p lang="en_US">Specifies the context element to apply N.grid.</p>
             </td>
-		</tr>
-		<tr>
-			<td>height</td>
-			<td>number</td>
-			<td>0</td>
-			<td style="text-align: center;">X</td>
-			<td>
-				<p lang="ko_KR">그리드 body의 높이를 지정 합니다.</p>
+        </tr>
+        <tr>
+            <td>height</td>
+            <td>number</td>
+            <td>0</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p lang="ko_KR">그리드 body의 높이를 지정 합니다.</p>
                 <p lang="en_US">Specifies the height of the grid body.</p>
-				<p lang="ko_KR">설정한 값이 0보다 크면 헤더가 고정되고 그리드 바디에 스크롤바가 생기면서 설정한 높이로 고정 됩니다. 0으로 설정하면 헤더를 고정 하지 않고 모든 데이터를 그리드 바디에 보여 줍니다.</p>
+                <p lang="ko_KR">설정한 값이 0보다 크면 헤더가 고정되고 그리드 바디에 스크롤바가 생기면서 설정한 높이로 고정 됩니다. 0으로 설정하면 헤더를 고정 하지 않고 모든 데이터를 그리드 바디에 보여 줍니다.</p>
                 <p lang="en_US">If the set value is greater than 0, the header is fixed and a scroll bar is created on the grid body, and it is fixed at the set height. If set to 0, all data is shown in the grid body without fixing the header.</p>
-				<p lang="ko_KR" class="alert">Pagination(N.pagination) 컴포넌트와 결합하여 페이징 된 데이터를 그리드에 바인딩 할 때는 0으로 설정하여 모든 데이터를 한번에 표시 하는것을 권장 합니다.</p>
+                <p lang="ko_KR" class="alert">Pagination(N.pagination) 컴포넌트와 결합하여 페이징 된 데이터를 그리드에 바인딩 할 때는 0으로 설정하여 모든 데이터를 한번에 표시 하는것을 권장 합니다.</p>
                 <p lang="en_US" class="alert">When binding paged data to the grid in combination with the Pagination(N.pagination) component, it is recommended to display all data at once by setting it to 0.</p>
-			</td>
-		</tr>
-		<tr>
-			<td>fixedcol</td>
-			<td>number</td>
-			<td>0</td>
-			<td style="text-align: center;">X</td>
-			<td>
+            </td>
+        </tr>
+        <tr>
+            <td>fixedcol</td>
+            <td>number</td>
+            <td>0</td>
+            <td style="text-align: center;">X</td>
+            <td>
                 <p lang="ko_KR">지정 한 열들은 고정되고 다른 열 들은 가로로 스크롤 될 수 있게 해 줍니다.</p>
                 <p lang="en_US">The specified column is fixed and the other columns scroll horizontally.</p>
                 <p lang="ko_KR">0으로 설정하면 열을 고정하지 않고 1이상의 숫자로 설정 하면 첫번째 열부터 설정한 숫자(열 개수)만큼 열을 고정 해 줍니다.</p>
                 <p lang="en_US">If set to 0, the column is not fixed, but if set to 1 or more, the column is fixed as much as the number (number of columns) set from the first column.</p>
-				<p lang="ko_KR" class="alert">헤더(thead) 영역은 반드시 있어야 하고 푸터(tfoot) 영역은 없어야 합니다.</p>
+                <p lang="ko_KR" class="alert">헤더(thead) 영역은 반드시 있어야 하고 푸터(tfoot) 영역은 없어야 합니다.</p>
                 <p lang="en_US" class="alert">There must be a header(thead) area and no footer(tfoot) area.</p>
-				<p lang="ko_KR" class="alert">그리드의 헤더나 바디가 2행 이상의 세트로 구성 되어 있거나 height 옵션이 0보다 크면 작동하지 않습니다.</p>
+                <p lang="ko_KR" class="alert">그리드의 헤더나 바디가 2행 이상의 세트로 구성 되어 있거나 height 옵션이 0보다 크면 작동하지 않습니다.</p>
                 <p lang="en_US" class="alert">It does not work if the grid's header or body consists of a set of 2 or more rows, or if the height option is greater than 0.</p>
-				<p lang="ko_KR" class="alert">고정 된 셀 들이 비 정상적으로 표시되면 misc.fixedcolHeadMarginTop, misc.fixedcolHeadMarginLeft, misc.fixedcolHeadHeight, misc.fixedcolBodyMarginTop, misc.fixedcolBodyMarginLeft, fixedcolBodyBindHeight, fixedcolBodyAddHeight 옵션 값 들을 조절 해 주세요.</p>
+                <p lang="ko_KR" class="alert">고정 된 셀 들이 비 정상적으로 표시되면 misc.fixedcolHeadMarginTop, misc.fixedcolHeadMarginLeft, misc.fixedcolHeadHeight, misc.fixedcolBodyMarginTop, misc.fixedcolBodyMarginLeft, fixedcolBodyBindHeight, fixedcolBodyAddHeight 옵션 값 들을 조절 해 주세요.</p>
                 <p lang="en_US" class="alert">If the fixed cells are displayed abnormally, adjust the misc.fixedcolHeadMarginTop, misc.fixedcolHeadMarginLeft, misc.fixedcolHeadHeight, misc.fixedcolBodyMarginTop, misc.fixedcolBodyMarginLeft, fixedcolBodyBindHeight and fixedcolBodyAddHeight option values.</p>
-			</td>
-		</tr>
-		<tr>
-			<td>more</td>
-			<td>boolean|array</td>
-			<td>false</td>
-			<td style="text-align: center;">X</td>
-			<td>
-				<p lang="ko_KR">true로 설정 하면 컬럼을 숨기거나 보이게 할 수 있는 기능과 상세팝업을 자동으로 생성 해 주는 기능이 활성 화 됩니다.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>more</td>
+            <td>boolean|array</td>
+            <td>false</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p lang="ko_KR">true로 설정 하면 컬럼을 숨기거나 보이게 할 수 있는 기능과 상세팝업을 자동으로 생성 해 주는 기능이 활성 화 됩니다.</p>
                 <p lang="en_US">If set to true, the function to hide or show the column and the function to automatically generate the detail popup are enabled.</p>
                 <p lang="ko_KR">그리드의 마지막 열 다음에 위의 기능을 실행하는 버튼을 해 줍니다.</p>
                 <p lang="en_US">Create a button that executes the above function after the last column in the grid.</p>
-				<p lang="ko_KR">true로 설정 하면 그리드 헤더에 정의 되어 있는 모든 컬럼들을 모두 상세팝업에 보여주고 array에 컬럼 명 들을 지정하여 옵션으로 설정 하면 지정한 컬럼들만 보여 줍니다.</p>
+                <p lang="ko_KR">true로 설정 하면 그리드 헤더에 정의 되어 있는 모든 컬럼들을 모두 상세팝업에 보여주고 array에 컬럼 명 들을 지정하여 옵션으로 설정 하면 지정한 컬럼들만 보여 줍니다.</p>
                 <p lang="en_US">If set to true, all columns defined in the grid header are shown in the detail popup and if you specify the column names in the array and set them as options, only the specified columns are shown.</p>
-				<p lang="ko_KR" class="alert">
-					컬럼들의 제목은 그리드 헤더의 제목 텍스트를 그대로 사용 하기 때문에 그리드 헤더에 정의 되어 있지 않은 컬럼은 표시 되지 않습니다.
-					그리드 헤더에 없는 컬럼을 상세팝업에 표시 하려면 그리드에 컬럼을 추가하고 그리드를 초기화 한 다음 hide 메서드로 추가한 컬럼을 숨기면 상세팝업에서만 볼 수 있습니다.
-				</p>
+                <p lang="ko_KR" class="alert">
+                    컬럼들의 제목은 그리드 헤더의 제목 텍스트를 그대로 사용 하기 때문에 그리드 헤더에 정의 되어 있지 않은 컬럼은 표시 되지 않습니다.
+                    그리드 헤더에 없는 컬럼을 상세팝업에 표시 하려면 그리드에 컬럼을 추가하고 그리드를 초기화 한 다음 hide 메서드로 추가한 컬럼을 숨기면 상세팝업에서만 볼 수 있습니다.
+                </p>
                 <p lang="en_US" class="alert">
                     Because the title of the column uses the title text of the grid header as it is, columns not defined in the grid header are not displayed.
                     If you want to display columns that are not in the grid header in the detail popup, you can add them to the grid, initialize the grid, and hide the columns added with the hide method, so that they are visible only in the detail popup.
                 </p>
                 <p lang="ko_KR" class="alert">fixedcol 옵션으로 열이 고정 된 경우 컬럼 숨기기/보이기 기능이 제대로 작동하지 않을 수 있습니다.</p>
-				<p lang="en_US" class="alert">If the column is fixed by the fixedcol option, the hide / show column function may not work properly.</p>
+                <p lang="en_US" class="alert">If the column is fixed by the fixedcol option, the hide / show column function may not work properly.</p>
                 <p lang="ko_KR" class="alert">
                                    상세팝업의 컬럼 타이틀 정보는 tbody 의 td 나 td 안에 있는 요소들의 id 값을 기준으로 추출 됩니다.
                                    그러나 tbody 의 td 안에 id 속성을 가진 요소가 2개 이상 존재 하거나 그리드 헤더와 바디의 요소 구성이 많이 다를 경우에는 제대로 추출이 되지 않을 수 있습니다.
@@ -95,231 +95,235 @@
                     However, if there are two or more elements with the id attribute in td of tbody, or if the element construction of the grid header and body is very different, it may not be properly extracted.
                     In this case, if the column name to be extracted is declared in the data-id attribute of th element, it works normally.
                 </p>
-			</td>
-		</tr>
-		<tr>
-			<td>validate</td>
-			<td>boolean</td>
-			<td>true</td>
-			<td style="text-align: center;">X</td>
-			<td>
+            </td>
+        </tr>
+        <tr>
+            <td>validate</td>
+            <td>boolean</td>
+            <td>true</td>
+            <td style="text-align: center;">X</td>
+            <td>
                 <p lang="ko_KR">false로 설정 하면 입력 요소에서 focus-out 되었을 때 입력 값에 대한 유효성 검증을 실행 하지 않습니다.</p>
                 <p lang="en_US">If set to false, validation is not performed on the input value when the input element is focus-out.</p>
             </td>
-		</tr>
-		<tr>
-			<td>html</td>
-			<td>boolean</td>
-			<td>false</td>
-			<td style="text-align: center;">X</td>
-			<td>
+        </tr>
+        <tr>
+            <td>html</td>
+            <td>boolean</td>
+            <td>false</td>
+            <td style="text-align: center;">X</td>
+            <td>
                 <p lang="ko_KR">true로 설정 하면 data 를 bind 할 때 데이터의 HTML 이 적용 됩니다.</p>
                 <p lang="en_US">If set to true, HTML of data is applied when binding data.</p>
             </td>
-		</tr>
-		<tr>
-			<td>addTop</td>
-			<td>boolean</td>
-			<td>false</td>
-			<td style="text-align: center;">X</td>
-			<td>
-				<p lang="ko_KR">true로 설정 하면 add 메서드를 호출했을때 행 요소와 로우 데이터가 목록의 맨 앞에 추가 됩니다.</p>
-				<p lang="en_US">If set to true, row elements and row data created to the top of the list when the add method is called.</p>
-				<p lang="ko_KR" class="alert">addTop 옵션을 false 설정 하면 데이터 동기화 문제가 발생하여 scrollPaging.size 와 createRowDelay 옵션의 설정 값이 0으로 강제 설정 됩니다. 이로인해 데이터 바인딩 성능이 저하 될 수 있습니다.</p>
-				<p lang="en_US" class="alert">Setting the addTop option to false causes data synchronization issues, which forces the setting values ​​of scrollPaging.size and createRowDelay options to zero. This can degrade the performance of data binding.</p>
-			</td>
-		</tr>
-		<tr>
-			<td>resizable</td>
-			<td>boolean</td>
-			<td>false</td>
-			<td style="text-align: center;">X</td>
-			<td>
-			    <p lang="ko_KR">true로 설정 하면 컬럼의 넓이를 조절 할 수 있습니다.</p>
+        </tr>
+        <tr>
+            <td>addTop</td>
+            <td>boolean</td>
+            <td>false</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p lang="ko_KR">true로 설정 하면 add 메서드를 호출했을때 행 요소와 로우 데이터가 목록의 맨 앞에 추가 됩니다.</p>
+                <p lang="en_US">If set to true, row elements and row data created to the top of the list when the add method is called.</p>
+                <p lang="ko_KR" class="alert">addTop 옵션을 false 설정 하면 데이터 동기화 문제가 발생하여 scrollPaging.size 와 createRowDelay 옵션의 설정 값이 0으로 강제 설정 됩니다. 이로인해 데이터 바인딩 성능이 저하 될 수 있습니다.</p>
+                <p lang="en_US" class="alert">Setting the addTop option to false causes data synchronization issues, which forces the setting values ​​of scrollPaging.size and createRowDelay options to zero. This can degrade the performance of data binding.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>resizable</td>
+            <td>boolean</td>
+            <td>false</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p lang="ko_KR">true로 설정 하면 컬럼의 넓이를 조절 할 수 있습니다.</p>
                 <p lang="en_US">If set to true, the width of the column can be resized.</p>
-				<p lang="ko_KR" class="alert">
-					colgroup 의 col 태그를 사용하여 셀의 넓이를 지정했을때 resizable 옵션이 true 이면 그리드가 초기화 될 때 col 태그에 정의 되어 있는 셀의 넓이 값을 thead 의 th 에 이관 하고 colgroup 태그를 제거 합니다.
-					때문에 컬럼 리사이징 기능을 사용하려면 col 태그에 넓이를 지정하지 말고 thead 의 th 에 컬럼 넓이를 설정 하는것을 권장 합니다.
-				</p>
-				<p lang="en_US" class="alert">
+                <p lang="ko_KR" class="alert">
+                    colgroup 의 col 태그를 사용하여 셀의 넓이를 지정했을때 resizable 옵션이 true 이면 그리드가 초기화 될 때 col 태그에 정의 되어 있는 셀의 넓이 값을 thead 의 th 에 이관 하고 colgroup 태그를 제거 합니다.
+                    때문에 컬럼 리사이징 기능을 사용하려면 col 태그에 넓이를 지정하지 말고 thead 의 th 에 컬럼 넓이를 설정 하는것을 권장 합니다.
+                </p>
+                <p lang="en_US" class="alert">
                     If the resizable option is true when the cell width is set using the col tag of the colgroup, when the grid is initialized, the cell width value defined in the col tag is moved to th of thead and then the colgroup tag is removed.
                     Therefore, to use the column resizing feature, it is recommended that you do not set the width in the col tag, but set the column width in th of thead.
                 </p>
-				<p lang="ko_KR" class="alert">thead 의 th 에 colspan 속성이 있을경우 컬럼 리사이즈 기능이 제대로 작동하지 않을 수 있습니다.</p>
-				<p lang="en_US" class="alert">If thead's th has a colspan attribute, the column resizing feature may not work properly.</p>
-				<p lang="ko_KR" class="alert">컬럼 리사이징 할 때 그리드의 모양이 깨지면 misc.resizableCorrectionWidth, misc.resizableLastCellCorrectionWidth, misc.resizeBarCorrectionLeft, misc.resizeBarCorrectionHeight 옵션 값 들을 조절 해 주세요.</p>
-				<p lang="en_US" class="alert">If the grid's shape is broken when resizing the column, adjust the misc.resizableCorrectionWidth, misc.resizableLastCellCorrectionWidth, misc.resizeBarCorrectionLeft and misc.resizeBarCorrectionHeight option values.</p>
-			</td>
-		</tr>
-		<tr>
-			<td>vResizable</td>
-			<td>boolean</td>
-			<td>false</td>
-			<td style="text-align: center;">X</td>
-			<td>
-			    <p lang="ko_KR">true로 설정 하면 그리드 바디의 높이를 조절 할 수 있습니다.</p>
+                <p lang="ko_KR" class="alert">thead 의 th 에 colspan 속성이 있을경우 컬럼 리사이즈 기능이 제대로 작동하지 않을 수 있습니다.</p>
+                <p lang="en_US" class="alert">If thead's th has a colspan attribute, the column resizing feature may not work properly.</p>
+                <p lang="ko_KR" class="alert">컬럼 리사이징 할 때 그리드의 모양이 깨지면 misc.resizableCorrectionWidth, misc.resizableLastCellCorrectionWidth, misc.resizeBarCorrectionLeft, misc.resizeBarCorrectionHeight 옵션 값 들을 조절 해 주세요.</p>
+                <p lang="en_US" class="alert">If the grid's shape is broken when resizing the column, adjust the misc.resizableCorrectionWidth, misc.resizableLastCellCorrectionWidth, misc.resizeBarCorrectionLeft and misc.resizeBarCorrectionHeight option values.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>vResizable</td>
+            <td>boolean</td>
+            <td>false</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p lang="ko_KR">true로 설정 하면 그리드 바디의 높이를 조절 할 수 있습니다.</p>
                 <p lang="en_US">If set to true, height of the grid body can be resized.</p>
-			</td>
-		</tr>
-		<tr>
-			<td>sortable</td>
-			<td>boolean</td>
-			<td>false</td>
-			<td style="text-align: center;">X</td>
-			<td>
+            </td>
+        </tr>
+        <tr>
+            <td>sortable</td>
+            <td>boolean</td>
+            <td>false</td>
+            <td style="text-align: center;">X</td>
+            <td>
                 <p lang="ko_KR">true로 설정 하면 선택 한 컬럼을 기준으로 데이터를 정렬 할 수 있습니다.</p>
                 <p lang="en_US">If set to true, data can be sorted based on the selected column.</p>
-				<p lang="ko_KR" class="alert">
-					정렬 될 컬럼의 정보는 tbody 의 td 나 td 안에 있는 요소들의 id 값을 기준으로 정렬 합니다.
-					그러나 tbody 의 td 안에 id 속성을 가진 요소가 2개 이상 존재 하거나 그리드 헤더와 바디의 요소 구성이 많이 다를 경우에는 제대로 정렬이 되지 않을 수 있습니다.
-					이때는 th 요소의 data-id 속성에 정렬 될 컬럼명을 선언 해 주면 정상적으로 작동 됩니다.
-				</p>
-				<p lang="en_US" class="alert">
-		            The information in the column to sort is sorted based on the id value of the elements in td or td of tbody.
-		            However, if there are two or more elements with the id attribute in td of tbody, or if the element construction of the grid header and body is very different, it may not be properly sorted.
-		            In this case, if the column name to be sorted is declared in the data-id attribute of th element, it works normally.
+                <p lang="ko_KR" class="alert">
+                    정렬 될 컬럼의 정보는 tbody 의 td 나 td 안에 있는 요소들의 id 값을 기준으로 정렬 합니다.
+                    그러나 tbody 의 td 안에 id 속성을 가진 요소가 2개 이상 존재 하거나 그리드 헤더와 바디의 요소 구성이 많이 다를 경우에는 제대로 정렬이 되지 않을 수 있습니다.
+                    이때는 th 요소의 data-id 속성에 정렬 될 컬럼명을 선언 해 주면 정상적으로 작동 됩니다.
                 </p>
-			</td>
-		</tr>
-		<tr>
-			<td>filter</td>
-			<td>boolean</td>
-			<td>false</td>
-			<td style="text-align: center;">X</td>
-			<td>
-				<p lang="ko_KR">true로 설정 하면 선택 한 컬럼을 기준으로 데이터를 필터링 할 수 있습니다.</p>
+                <p lang="en_US" class="alert">
+                    The information in the column to sort is sorted based on the id value of the elements in td or td of tbody.
+                    However, if there are two or more elements with the id attribute in td of tbody, or if the element construction of the grid header and body is very different, it may not be properly sorted.
+                    In this case, if the column name to be sorted is declared in the data-id attribute of th element, it works normally.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>filter</td>
+            <td>boolean</td>
+            <td>false</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p lang="ko_KR">true로 설정 하면 선택 한 컬럼을 기준으로 데이터를 필터링 할 수 있습니다.</p>
                 <p lang="en_US">If set to true, data can be filtered based on the selected column.</p>
-				<p lang="ko_KR" class="alert">filter 옵션이 false 인 상태에서 th 요소의 속성으로 data-filter="true" 옵션을 선언 해 주면 컬럼별로 필터 기능을 활성화 할 수 있습니다.</p>
-				<p lang="en_US" class="alert">If the filter option is false, you can enable the filter feature for each column by declaring the data-filter="true" option as an attribute of the th element.</p>
-				<p lang="ko_KR" class="alert">
-		                    필터 될 컬럼의 정보는 tbody 의 td 나 td 안에 있는 요소들의 id 값을 기준으로 필터 합니다.
-		                    그러나 tbody 의 td 안에 id 속성을 가진 요소가 2개 이상 존재 하거나 그리드 헤더와 바디의 요소 구성이 많이 다를 경우에는 제대로 필터링 되지 않을 수 있습니다.
-		                    이때는 th 요소의 data-id 속성에 필터링 될 컬럼명을 선언 해 주면 정상적으로 작동 됩니다.
+                <p lang="ko_KR" class="alert">filter 옵션이 false 인 상태에서 th 요소의 속성으로 data-filter="true" 옵션을 선언 해 주면 컬럼별로 필터 기능을 활성화 할 수 있습니다.</p>
+                <p lang="en_US" class="alert">If the filter option is false, you can enable the filter feature for each column by declaring the data-filter="true" option as an attribute of the th element.</p>
+                <p lang="ko_KR" class="alert">
+                            필터 될 컬럼의 정보는 tbody 의 td 나 td 안에 있는 요소들의 id 값을 기준으로 필터 합니다.
+                            그러나 tbody 의 td 안에 id 속성을 가진 요소가 2개 이상 존재 하거나 그리드 헤더와 바디의 요소 구성이 많이 다를 경우에는 제대로 필터링 되지 않을 수 있습니다.
+                            이때는 th 요소의 data-id 속성에 필터링 될 컬럼명을 선언 해 주면 정상적으로 작동 됩니다.
                 </p>
                 <p lang="en_US" class="alert">
                     The information in the column to filter is filtered based on the id value of the elements in td or td of tbody.
                     However, if there are two or more elements with the id attribute in td of tbody, or if the element construction of the grid header and body is very different, it may not be properly filtered.
                     In this case, if the column name to be filtered is declared in the data-id attribute of th element, it works normally.
                 </p>
-			</td>
-		</tr>
-		<tr>
-			<td>windowScrollLock</td>
-			<td>boolean</td>
-			<td>true</td>
-			<td style="text-align: center;">X</td>
-			<td>
-				<p>그리드 바디 영역에 mouseover 시 윈도우 스크롤을 비활설화 할 것인지 여부</p>
-				<p>그리드안에서 마우스 스크롤 시 그리드의 끝 영역이나 시작영역에 가면 브라우저 윈도우 스크롤이 자동으로 올라가거나 내려가서 그리드가 표시된 부분이 넘어가게 됩니다. 때문에 그리드 바디영역에 마우스가 올라가면 윈도우 스크롤을 비활성 시킵니다. false로 지정하면 브라우저 기본모드로 동작 됩니다.</p>
-			</td>
-		</tr>
-		<tr>
-			<td>revert</td>
-			<td>boolean</td>
-			<td>false</td>
-			<td style="text-align: center;">X</td>
-			<td>
-				<p>revert 기능을 활성(true), 비활성(false) 시킵니다.</p>
-				<p class="alert">revert 기능을 활성화 하면 최초 바인딩된 데이터를 메모리에 적제 하므로 데이터 바인딩 성능이 저하될 수 있습니다.</p>
-			</td>
-		</tr>
-		<tr>
-			<td>select</td>
-			<td>boolean</td>
-			<td>false</td>
-			<td style="text-align: center;">X</td>
-			<td>
+            </td>
+        </tr>
+        <tr>
+            <td>windowScrollLock</td>
+            <td>boolean</td>
+            <td>true</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p lang="ko_KR">true로 설정 하면 데이터 목록 요소 위에서 마우스 휠로 스크롤 할 때 브라우저의 윈도우 스크롤을 비활성화 합니다.</p>
+                <p lang="en_US">If set to true, disables browser window scrolling when scrolling with the mouse wheel over data list elements.</p>
+                <p lang="ko_KR">데이터 목록 요소가 처음이나 마지막으로 스크롤 되었을 때 브라우저 윈도우 스크롤이 위나 아래로 스크롤되는 브라우저의 기본 동작을 차단 합니다.</p>
+                <p lang="en_US">Blocks the browser's default behavior of scrolling the browser window up or down when the data list element is scrolled first or last.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>revert</td>
+            <td>boolean</td>
+            <td>false</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p lang="ko_KR">true로 설정 하면 revert 기능이 활성 화 되고 revert 메서드를 사용 할 수 있습니다.</p>
+                <p lang="en_US">If set to true, the revert function is enabled and the revert method can be used.</p>
+                <p lang="ko_KR" class="alert">revert 기능이 활성화 되면 최초 바인딩된 데이터가 메모리에 적제되므로 메모리 사용량이 증가 합니다.</p>
+                <p lang="en_US" class="alert">When the revert function is activated, the memory usage increases because the first bound data is loaded into the memory.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>select</td>
+            <td>boolean</td>
+            <td>false</td>
+            <td style="text-align: center;">X</td>
+            <td>
                 <p lang="ko_KR">true로 설정 하면 행을 선택(단일 행 선택) 했을 때 onSelect 이벤트가 발생 하고 행 요소(tbody)의 class 속성에  grid_selected__ 값이 토글 됩니다.</p>
                 <p lang="en_US">If set to true, the onSelect event fires when a row is selected(Single row selection), and the grid_selected__ value is toggled in the class attribute of the row element(tbody).</p>
-			</td>
-		</tr>
-		<tr>
-			<td>unselect</td>
-			<td>boolean</td>
-			<td>true</td>
-			<td style="text-align: center;">X</td>
-			<td>
-				<p lang="ko_KR">false로 설정 하면 select 옵션이 true 일때 선택 된 행을 다시 선택해도 선택이 취소 되지 않습니다.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>unselect</td>
+            <td>boolean</td>
+            <td>true</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p lang="ko_KR">false로 설정 하면 select 옵션이 true 일때 선택 된 행을 다시 선택해도 선택이 취소 되지 않습니다.</p>
                 <p lang="en_US">If set to false, when the select option is true, selecting the selected row again does not cancel the selection.</p>
                 <p lang="ko_KR" class="alert">multiselect 옵션이 true 일 경우에는 unselect 옵션이 적용 되지 않습니다.</p>
                 <p lang="en_US" class="alert">If the multiselect option is true, the unselect option has no apply.</p>
-			</td>
-		</tr>
-		<tr>
-			<td>multiselect</td>
-			<td>boolean</td>
-			<td>false</td>
-			<td style="text-align: center;">X</td>
-			<td>
+            </td>
+        </tr>
+        <tr>
+            <td>multiselect</td>
+            <td>boolean</td>
+            <td>false</td>
+            <td style="text-align: center;">X</td>
+            <td>
                 <p lang="ko_KR">true로 설정 하면 행을 선택(다중 행 선택) 했을 때 onSelect 이벤트가 발생 하고 행 요소(tbody)의 class 속성에  grid_selected__ 값이 토글 됩니다.</p>
                 <p lang="en_US">If set to true, the onSelect event fires when a row is selected(Multiple row selection), and the grid_selected__ value is toggled in the class attribute of the row element(tbody).</p>
-			</td>
-		</tr>
-		<tr>
-			<td>checkAll</td>
-			<td>string</td>
-			<td>null</td>
-			<td style="text-align: center;">X</td>
-			<td>
-				<p>그리드의 행을 선택하기 위한 체크박스를 모두 선택하는 checkbox input 요소 지정 합니다.</p>
-				<p class="alert">jQuery selector 문자열로 지정하며 selector 의 context는 그리드 header 로 자동 지정 됩니다.</p>
-				<p class="alert">checkAll 대상 요소는 반드시 thead 영역에 있어야 합니다.</p>
-				<p class="alert">전체 선택 만 해 주고 체크박스의 클릭 이벤트는 발생 시키지 않습니다.</p>
-			</td>
-		</tr>
-		<tr>
-			<td>checkAllTarget</td>
-			<td>string</td>
-			<td>null</td>
-			<td style="text-align: center;">X</td>
-			<td>
-				<p>그리드의 행을 선택하기 위한 체크박스 요소들을 지정(다중 선택) 합니다.</p>
-				<p class="alert">jQuery selector 문자열로 지정하며 selector 의 context는 그리드 행 요소(tbody)로 자동 지정 됩니다.</p>
-				<p class="alert">checkAllTarget 대상 요소는 반드시 tbody 영역에 있어야 합니다.</p>
-				<p class="alert">checkAllTarget 옵션과 checkSingleTarget 옵션은 둘중 하나만 사용 할 수 있습니다.</p>
-				<p class="alert">id 속성을 지정하여 데이터를 바인드 하면 정상적으로 작동하지 않습니다. 선택 된 행의 인덱스를 가져오는 용도로만 사용 바랍니다.</p>
-			</td>
-		</tr>
-		<tr>
-			<td>checkSingleTarget</td>
-			<td>string</td>
-			<td>null</td>
-			<td style="text-align: center;">X</td>
-			<td>
-				<p>그리드의 행을 선택하기 위한 체크박스 요소들을 지정(단일 선택) 합니다.</p>
-				<p class="alert">jQuery selector 문자열로 지정하며 selector 의 context는 그리드의 행 요소로 자동 지정 됩니다.</p>
-				<p class="alert">checkSingleTarget 대상 요소는 반드시 tbody 영역에 있어야 합니다.</p>
-				<p class="alert">checkAllTarget 옵션과 checkSingleTarget 옵션은 둘중 하나만 사용 할 수 있습니다.</p>
-				<p class="alert">id 속성을 지정하여 데이터를 바인드 하면 정상적으로 작동하지 않습니다. 선택 된 행의 인덱스를 가져오는 용도로만 사용 바랍니다.</p>
-			</td>
-		</tr>
-		<tr>
-			<td>hover</td>
-			<td>boolean</td>
-			<td>false</td>
-			<td style="text-align: center;">X</td>
-			<td>
-				<p>그리드 행들의 HOVER 효과 적용 여부</p>
-				<p class="alert">그리드 행에 mouseover 시 해당 행의 TBODY요소에 "grid_hover__" 스타일클래스가 생성되고 선택이 해제되면 생성된 스타일클래스가 제거 됩니다.</p>
-			</td>
-		</tr>
-		<tr>
-			<td>createRowDelay</td>
-			<td>number(ms)</td>
-			<td>1</td>
-			<td style="text-align: center;">X</td>
-			<td>
-				<p>행 요소들이 생성될 때마다의 딜레이를 지정 할수 있습니다.</p>
-				<p class="alert">0 지정시 모든행을 한번에 만들어 표현 합니다. 이렇게 되면 브라우저는 모든 행이 생성 될 때까지 멈춰있게 됩니다.</p>
-			</td>
-		</tr>
-		<tr>
-			<td>scrollPaging.size<p style="display: none;">scrollPagingSize</p></td>
-			<td>number</td>
-			<td>100</td>
-			<td style="text-align: center;">X</td>
-			<td>
-			    <p lang="ko_KR">스크롤 페이징 할때 한번에 바인드하는 행수를 지정 합니다.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>checkAll</td>
+            <td>string</td>
+            <td>null</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p>그리드의 행을 선택하기 위한 체크박스를 모두 선택하는 checkbox input 요소 지정 합니다.</p>
+                <p class="alert">jQuery selector 문자열로 지정하며 selector 의 context는 그리드 header 로 자동 지정 됩니다.</p>
+                <p class="alert">checkAll 대상 요소는 반드시 thead 영역에 있어야 합니다.</p>
+                <p class="alert">전체 선택 만 해 주고 체크박스의 클릭 이벤트는 발생 시키지 않습니다.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>checkAllTarget</td>
+            <td>string</td>
+            <td>null</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p>그리드의 행을 선택하기 위한 체크박스 요소들을 지정(다중 선택) 합니다.</p>
+                <p class="alert">jQuery selector 문자열로 지정하며 selector 의 context는 그리드 행 요소(tbody)로 자동 지정 됩니다.</p>
+                <p class="alert">checkAllTarget 대상 요소는 반드시 tbody 영역에 있어야 합니다.</p>
+                <p class="alert">checkAllTarget 옵션과 checkSingleTarget 옵션은 둘중 하나만 사용 할 수 있습니다.</p>
+                <p class="alert">id 속성을 지정하여 데이터를 바인드 하면 정상적으로 작동하지 않습니다. 선택 된 행의 인덱스를 가져오는 용도로만 사용 바랍니다.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>checkSingleTarget</td>
+            <td>string</td>
+            <td>null</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p>그리드의 행을 선택하기 위한 체크박스 요소들을 지정(단일 선택) 합니다.</p>
+                <p class="alert">jQuery selector 문자열로 지정하며 selector 의 context는 그리드의 행 요소로 자동 지정 됩니다.</p>
+                <p class="alert">checkSingleTarget 대상 요소는 반드시 tbody 영역에 있어야 합니다.</p>
+                <p class="alert">checkAllTarget 옵션과 checkSingleTarget 옵션은 둘중 하나만 사용 할 수 있습니다.</p>
+                <p class="alert">id 속성을 지정하여 데이터를 바인드 하면 정상적으로 작동하지 않습니다. 선택 된 행의 인덱스를 가져오는 용도로만 사용 바랍니다.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>hover</td>
+            <td>boolean</td>
+            <td>false</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p>그리드 행들의 HOVER 효과 적용 여부</p>
+                <p class="alert">그리드 행에 mouseover 시 해당 행의 TBODY요소에 "grid_hover__" 스타일클래스가 생성되고 선택이 해제되면 생성된 스타일클래스가 제거 됩니다.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>createRowDelay</td>
+            <td>number(ms)</td>
+            <td>1</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p>행 요소들이 생성될 때마다의 딜레이를 지정 할수 있습니다.</p>
+                <p class="alert">0 지정시 모든행을 한번에 만들어 표현 합니다. 이렇게 되면 브라우저는 모든 행이 생성 될 때까지 멈춰있게 됩니다.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>scrollPaging.size<p style="display: none;">scrollPagingSize</p></td>
+            <td>number</td>
+            <td>100</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p lang="ko_KR">스크롤 페이징 할때 한번에 바인딩 할 행 수를 지정 합니다.</p>
                 <p lang="en_US">Specifies the number of rows to bind at a time when scroll paging.</p>
                 <p lang="ko_KR">헤더 고정형 N.list 는 스크롤 페이징 기능이 기본적으로 활성화 되며 0 을 지정하면 스크롤 페이징 기능이 비 활성화 됩니다.</p>
                 <p lang="en_US">In Header fixed type N.grid, the scroll paging feature is enabled by default, if 0 is specified, the scroll paging feature is disabled.</p>
@@ -330,313 +334,328 @@
         size : 50
     }
 ...</code></pre>
-				<p lang="ko_KR" class="alert">너무 작게 지정하면 스크롤이 생성 되지 않아 데이터가 모두 표시 되지 않습니다. 반드시 행 들이 그리드 바디를 넘칠 수 있는 양을 지정 해 주어야 합니다.</p>
+                <p lang="ko_KR" class="alert">너무 작게 지정하면 스크롤이 생성 되지 않아 데이터가 모두 표시 되지 않습니다. 반드시 행 들이 그리드 바디를 넘칠 수 있는 양을 지정 해 주어야 합니다.</p>
                 <p lang="en_US" class="alert">If it is set too small, scrolling is not created and all data is not displayed. You must specify the amount by which rows can overflow the grid body.</p>
-				<p lang="ko_KR" class="alert">너무 크게 지정하면 스크롤 페이징이 작동될때 브라우저에 부하가 발생되므로 그리드에 입력요소나 이미지가 들어 있다면 100 이하로 설정하고 그렇지 않다면 1000 이하로 설정하는 것을 권장합니다.</p>
+                <p lang="ko_KR" class="alert">너무 크게 지정하면 스크롤 페이징이 작동될때 브라우저에 부하가 발생되므로 그리드에 입력요소나 이미지가 들어 있다면 100 이하로 설정하고 그렇지 않다면 1000 이하로 설정하는 것을 권장합니다.</p>
                 <p lang="en_US" class="alert">If set too large, browser performance is overhead when scroll paging is enabled, so it is recommended to set it to 100 or less if the input element or image is included in the grid, otherwise 1000 or less.</p>
-			</td>
-		</tr>
-		<tr>
-			<td>fRules</td>
-			<td>array</td>
-			<td>null</td>
-			<td style="text-align: center;">X</td>
-			<td>포맷룰을 지정 합니다. API/DEMO > Natural-DATA > <a href="#cmVmcjAzMDElMjRGb3JtYXR0ZXIlMjRodG1sJTJGbmF0dXJhbGpzJTJGcmVmciUyRnJlZnIwMzAxLmh0bWw=">Formatter</a> 메뉴의 [포멧 룰 목록] 탭 참고</td>
-		</tr>
-		<tr>
-			<td>vRules</td>
-			<td>array</td>
-			<td>null</td>
-			<td style="text-align: center;">X</td>
-			<td>검증룰을 지정 합니다. API/DEMO > Natural-DATA > <a href="#cmVmcjAzMDIlMjRWYWxpZGF0b3IkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDMwMi5odG1s">Validator</a> 메뉴의 [검증 룰 목록] 탭 참고</td>
-		</tr>
-		<tr>
-			<td>addSelect</td>
-			<td>boolean</td>
-			<td>false</td>
-			<td style="text-align: center;">X</td>
-			<td>select 옵션이 true 이고 행이 add 메서드를 호출 했을때 추가 된 행을 자동으로 선택 할 것 인지 여부</td>
-		</tr>
-		<tr>
-			<td>addScroll</td>
-			<td>boolean</td>
-			<td>true</td>
-			<td style="text-align: center;">X</td>
-			<td>add 메서드를 호출 했을 때 추가 된 행으로 스크롤 할 것 인지 여부</td>
-		</tr>
-		<tr>
-			<td>selectScroll</td>
-			<td>boolean</td>
-			<td>true</td>
-			<td style="text-align: center;">X</td>
-			<td>select 메서드를 호출 했을 때 선택 된 마지막 행으로 스크롤 할 것 인지 여부</td>
-		</tr>
-		<tr>
-			<td>checkScroll</td>
-			<td>boolean</td>
-			<td>true</td>
-			<td style="text-align: center;">X</td>
-			<td>check 메서드를 호출 했을 때 체크 된 마지막 행으로 스크롤 할 것 인지 여부</td>
-		</tr>
-		<tr>
-			<td>validateScroll</td>
-			<td>boolean</td>
-			<td>true</td>
-			<td style="text-align: center;">X</td>
-			<td>validate 메서드를 호출 했을 때 값검증에 실패한 마지막 행으로 스크롤 할 것 인지 여부</td>
-		</tr>
-		<tr>
-			<td>appendScroll</td>
-			<td>boolean</td>
-			<td>true</td>
-			<td style="text-align: center;">X</td>
-			<td>"append" 옵션 적용 된 bind 메서드를 호출 할때 추가 된 행으로 자동 스크롤 할 것 인지 여부</td>
-		</tr>
+            </td>
+        </tr>
+        <tr>
+            <td>fRules</td>
+            <td>object</td>
+            <td>null</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p lang="ko_KR">데이터가 바인딩 되는 요소의 id 프로퍼티에 포맷룰을 지정 합니다.</p>
+                <p lang="en_US">Specify the format rule in the id property of the element to which data is bound.</p>
+                <p lang="ko_KR" class="alert">옵션 오브젝트는 <a href="#cmVmcjAzMDElMjRGb3JtYXR0ZXIkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDMwMS5odG1s">Formatter</a> 메뉴의 [ 생성자 ] 탭의 rules 인자의 설명을 참고해서 작성 바랍니다.</p>
+                <p lang="en_US" class="alert">Create an option object by referring to the description of the rules argument in the [ Constructor ] tab of the <a href="#cmVmcjAzMDElMjRGb3JtYXR0ZXIkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDMwMS5odG1s">Formatter</a> menu.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>vRules</td>
+            <td>object</td>
+            <td>null</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p lang="ko_KR">데이터가 바인딩 되는 요소의 id 프로퍼티에 유효성 검증룰을 지정 합니다.</p>
+                <p lang="en_US">Specify the validation rule in the id property of the element to which data is bound.</p>
+                <p lang="ko_KR" class="alert">옵션 오브젝트는 <a href="#cmVmcjAzMDIlMjRWYWxpZGF0b3IkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDMwMi5odG1s">Validator</a> 메뉴의 [ 생성자 ] 탭의 rules 인자의 설명을 참고해서 작성 바랍니다.</p>
+                <p lang="en_US" class="alert">Create an option object by referring to the description of the rules argument in the [ Constructor ] tab of the <a href="#cmVmcjAzMDIlMjRWYWxpZGF0b3IkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDMwMi5odG1s">Validator</a> menu.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>addSelect</td>
+            <td>boolean</td>
+            <td>false</td>
+            <td style="text-align: center;">X</td>
+            <td>select 옵션이 true 이고 행이 add 메서드를 호출 했을때 추가 된 행을 자동으로 선택 할 것 인지 여부</td>
+        </tr>
+        <tr>
+            <td>addScroll</td>
+            <td>boolean</td>
+            <td>true</td>
+            <td style="text-align: center;">X</td>
+            <td>add 메서드를 호출 했을 때 추가 된 행으로 스크롤 할 것 인지 여부</td>
+        </tr>
+        <tr>
+            <td>selectScroll</td>
+            <td>boolean</td>
+            <td>true</td>
+            <td style="text-align: center;">X</td>
+            <td>select 메서드를 호출 했을 때 선택 된 마지막 행으로 스크롤 할 것 인지 여부</td>
+        </tr>
+        <tr>
+            <td>checkScroll</td>
+            <td>boolean</td>
+            <td>true</td>
+            <td style="text-align: center;">X</td>
+            <td>check 메서드를 호출 했을 때 체크 된 마지막 행으로 스크롤 할 것 인지 여부</td>
+        </tr>
+        <tr>
+            <td>validateScroll</td>
+            <td>boolean</td>
+            <td>true</td>
+            <td style="text-align: center;">X</td>
+            <td>validate 메서드를 호출 했을 때 값검증에 실패한 마지막 행으로 스크롤 할 것 인지 여부</td>
+        </tr>
+        <tr>
+            <td>appendScroll</td>
+            <td>boolean</td>
+            <td>true</td>
+            <td style="text-align: center;">X</td>
+            <td>"append" 옵션 적용 된 bind 메서드를 호출 할때 추가 된 행으로 자동 스크롤 할 것 인지 여부</td>
+        </tr>
         <tr>
             <td>tpBind</td>
             <td>boolean</td>
             <td>false</td>
             <td style="text-align: center;">X</td>
-            <td>컴포넌트와 관련 된 이벤트들(format, validate, dataSync 등)을 데이터 바인드 전에 바인딩 된 사용자 이벤트들 보다 먼저 실행 시켜 입력컨트롤들의 값과 내부(메모리) 데이터가 한템포 늦게 동기화 되는 문제를 해결 해 줍니다.</td>
+            <td>
+                <p lang="ko_KR">true로 설정 하면 컴포넌트 초기화 전에 입력요소에 바인딩 되어 있는 이벤트와 format, validate, dataSync등의 컴포넌트 이벤트의 충돌을 방지 해 줍니다.</p>
+                <p lang="en_US">If set to true, it prevents the conflict of the event bound to the input element before component initialization and the component event such as format, validate, and dataSync.</p>
+                <p lang="ko_KR" class="alert">format 이 정상적으로 동작하지 않거나 바인딩 되어 있는 데이터가 의도한대로 g핸들링 되지 등, 알수 없는 오류가 발생 했을 때 true 로 설정 바랍니다.</p>
+                <p lang="en_US" class="alert">Set to true when an unknown error occurs, such as the format not working properly or the bound data is not handled as intended.</p>
+            </td>
         </tr>
-		<tr>
-			<td>rowHandlerBeforeBind</td>
-			<td>function</td>
-			<td>null</td>
-			<td style="text-align: center;">X</td>
-			<td>
-				<p>그리드에서 data를 bind 하거나 add 할때 행이 렌더링 될 때 마다 발생 하는 이벤트 입니다. 이벤트 콜백 메서드의 인자로 생성될 당시의 row index, 행 요소, 로우 데이터를 넣어줍니다.</p>
-				<pre><code class="language-javascript">rowHandlerBeforeBind : function(rowIdx, rowEle, rowData) {
-	// this : N.grid 인스턴스
-	// rowIdx : 생성되는 행의 index
-	// rowEle : 생성되는 행의 row element(tbody)
-	// rowData : 생성되는 행의 row data
+        <tr>
+            <td>rowHandlerBeforeBind</td>
+            <td>function</td>
+            <td>null</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p>그리드에서 data를 bind 하거나 add 할때 행이 렌더링 될 때 마다 발생 하는 이벤트 입니다. 이벤트 콜백 메서드의 인자로 생성될 당시의 row index, 행 요소, 로우 데이터를 넣어줍니다.</p>
+                <pre><code class="language-javascript">rowHandlerBeforeBind : function(rowIdx, rowEle, rowData) {
+    // this : N.grid 인스턴스
+    // rowIdx : 생성되는 행의 index
+    // rowEle : 생성되는 행의 row element(tbody)
+    // rowData : 생성되는 행의 row data
 }</code></pre>
-				<p class="alert">rowHandlerBeforeBind 는 행 마다 값이 바인드 되기 전 실행 됩니다.</p>
-			</td>
-		</tr>
-		<tr>
-			<td>rowHandler</td>
-			<td>function</td>
-			<td>null</td>
-			<td style="text-align: center;">X</td>
-			<td>
-				<p>그리드에서 data를 bind 하거나 add 할때 행이 렌더링 될 때 마다 발생 하는 이벤트 입니다. 이벤트 콜백 메서드의 인자로 생성될 당시의 row index, 행 요소, 로우 데이터를 넣어줍니다.</p>
-				<pre><code class="language-javascript">rowHandler : function(rowIdx, rowEle, rowData) {
-	// this : N.grid 인스턴스
-	// rowIdx : 생성되는 행의 index
-	// rowEle : 생성되는 행의 row element(tbody)
-	// rowData : 생성되는 행의 row data
+                <p class="alert">rowHandlerBeforeBind 는 행 마다 값이 바인드 되기 전 실행 됩니다.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>rowHandler</td>
+            <td>function</td>
+            <td>null</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p>그리드에서 data를 bind 하거나 add 할때 행이 렌더링 될 때 마다 발생 하는 이벤트 입니다. 이벤트 콜백 메서드의 인자로 생성될 당시의 row index, 행 요소, 로우 데이터를 넣어줍니다.</p>
+                <pre><code class="language-javascript">rowHandler : function(rowIdx, rowEle, rowData) {
+    // this : N.grid 인스턴스
+    // rowIdx : 생성되는 행의 index
+    // rowEle : 생성되는 행의 row element(tbody)
+    // rowData : 생성되는 행의 row data
 }</code></pre>
-				<p class="alert">rowHandler 는 행 마다 값이 바인드 된 후 실행 됩니다.</p>
-			</td>
-		</tr>
-		<tr>
-			<td>onSelect</td>
-			<td>function</td>
-			<td>null</td>
-			<td style="text-align: center;">X</td>
-			<td>
-				<p>그리드의 행이 선택 될 때 마다 발생되는 이벤트 입니다. 지정한 이벤트 핸들러의 인자로 선택한 행의 row index, 행 요소, 로우 데이터, 바로전에 선택한 row index를 반환 합니다.</p>
-				<pre><code class="language-javascript">onSelect : function(rowIdx, rowEle, rowData, beforeRowIdx, e) {
-	// this : N.grid 인스턴스
-	// rowIdx : 선택된 행의 index
-	// rowEle : 선택된 행의 row element(tbody)
-	// rowData : 선택된 행의 row data
-	// beforeRowIdx : 이전 선택된 행의 index
-	// e : Click event object
+                <p class="alert">rowHandler 는 행 마다 값이 바인드 된 후 실행 됩니다.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>onSelect</td>
+            <td>function</td>
+            <td>null</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p>그리드의 행이 선택 될 때 마다 발생되는 이벤트 입니다. 지정한 이벤트 핸들러의 인자로 선택한 행의 row index, 행 요소, 로우 데이터, 바로전에 선택한 row index를 반환 합니다.</p>
+                <pre><code class="language-javascript">onSelect : function(rowIdx, rowEle, rowData, beforeRowIdx, e) {
+    // this : N.grid 인스턴스
+    // rowIdx : 선택된 행의 index
+    // rowEle : 선택된 행의 row element(tbody)
+    // rowData : 선택된 행의 row data
+    // beforeRowIdx : 이전 선택된 행의 index
+    // e : Click event object
 }</code></pre>
-				<p class="alert">select 옵션이 true 일 때만 발생 됩니다.</p>
-				<p class="alert">
-					unselect 옵션이 false(기본값) 이면 선택이 해제 되었을 때 rowIdx 인자 값에 -1을 반환 하고 선택 되었을 때는 선택 된 행의 인덱스를 반환 합니다.
-					unselect 옵션이 true 이면 선택 해제 기능이 비활성화 되기 때문에 rowIdx 값은 항상 선택 된 행의 인덱스를 반환 합니다.
-				</p>
-			</td>
-		</tr>
-		<tr>
-			<td>onBind</td>
-			<td>function</td>
-			<td>null</td>
-			<td style="text-align: center;">X</td>
-			<td>
-				<p>데이터가 바인드 될 때마다 발생되는 이벤트입니다. 이벤트 핸들러 함수의 인자로 context, data, isFirstPage, isLastPage 가 반환 됩니다.</p>
-				<pre><code class="language-javascript">onBind : function(context, data, isFirstPage, isLastPage) {
-	// this : N.grid 인스턴스
-	// context : context(그리드 컨텍스트 요소)
-	// rowData : 그리드에 바인드 된 데이터
+                <p class="alert">select 옵션이 true 일 때만 발생 됩니다.</p>
+                <p class="alert">
+                    unselect 옵션이 false(기본값) 이면 선택이 해제 되었을 때 rowIdx 인자 값에 -1을 반환 하고 선택 되었을 때는 선택 된 행의 인덱스를 반환 합니다.
+                    unselect 옵션이 true 이면 선택 해제 기능이 비활성화 되기 때문에 rowIdx 값은 항상 선택 된 행의 인덱스를 반환 합니다.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>onBind</td>
+            <td>function</td>
+            <td>null</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p>데이터가 바인드 될 때마다 발생되는 이벤트입니다. 이벤트 핸들러 함수의 인자로 context, data, isFirstPage, isLastPage 가 반환 됩니다.</p>
+                <pre><code class="language-javascript">onBind : function(context, data, isFirstPage, isLastPage) {
+    // this : N.grid 인스턴스
+    // context : context(그리드 컨텍스트 요소)
+    // rowData : 그리드에 바인드 된 데이터
     // isFirstPage : 스크롤 페이징 시 첫번째 페이지 여부(스크롤 페이징 하지 않으면 true 반환)
     // isLastPage : 스크롤 페이징 시 마지막 페이지 여부(스크롤 페이징 하지 않으면 true 반환)
 }</code></pre>
-				<p class="alert">스크롤페이징에 의해 페이징 될 때도 해당 페이징 사이즈 만큼 행들이 완성 될 때마다 발생합니다.</p>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="5" style="background-color: #81C784;color: #388E3C;"><b>기타 상수</b>(기본옵션에 포함되어 있는 상수 값)</td>
-		</tr>
-		<tr>
-			<td>
-				<p class="depricated">misc.withoutTbodyLength</p>
-				<p>Deprecated</p>
-			</td>
-			<td class="depricated">number</td>
-			<td class="depricated">0</td>
-			<td style="text-align: center;">X</td>
-			<td class="depricated">
-				데이터를 표현하지 않는 숨어있는 행 수
-				<p class="alert">
-					그리드 에서 클릭한 행의 Index 를 자동으로 가져오기위해 $("selector").index() 메서드 사용 시 반환된 Index 값은 클릭한 행의 인덱스에 1이 더해져 있습니다.
-					또한 colGroup 등 tbody 태그 레벨에 기입되는 요소가 있다면 그러한 요소 갯수만큼 Index가 더해져서 반환됩니다. 이를 보정하기 위한 값으로 withoutTbodyLength 를 제공합니다.
-					 $("selector").index() - gridInstance.options.misc.withoutTbodyLength 와 같이 사용한다면 정확한 Index 값을 가져 올 수 있습니다.
-				</p>
-			</td>
-		</tr>
-		<tr>
-			<td>misc.resizableCorrectionWidth</td>
-			<td>number</td>
-			<td>0</td>
-			<td style="text-align: center;">X</td>
-			<td>
-			    <p lang="ko_KR">resizable 옵션이 활성화 되었을 때 그리드 바디 컬럼의 넓이와 그리드 헤더 컬럼 넓이가 일치하지 않을 수 있습니다. 이때 값을 0.1 씩 증가 또는 감소시켜 보정하는 옵션입니다.</p>
-			    <p lang="en_US">The grid body column width and grid header column width may not match when the resizable option is activated. At this time, it is an option to correct by increasing or decreasing the value by 0.1.</p>
-			    <p lang="ko_KR" class="alert">그리드 열의 너비/높이는 td, th와 같은 테이블 관련 요소에 적용되는 스타일(padding, box-sizing 등)에 따라 변경 될 수 있습니다.</p>
-			    <p lang="en_US" class="alert">The width/height of the grid column may be changed due to the style(padding, box-sizing, etc.) applied to table-related elements such as td and th.</p>
-			</td>
-		</tr>
-		<tr>
-			<td>misc.resizableLastCellCorrectionWidth</td>
-			<td>number</td>
-			<td>0</td>
-			<td style="text-align: center;">X</td>
-			<td>
-			    <p lang="ko_KR">헤더 고정형 그리드에서 resizable 옵션이 활성화 되었을 때 마지막 컬럼을 클릭 하면 다른 컬럼들이 밀릴 수 있습니다. 이때 값을 0.1 씩 증가 또는 감소시켜 보정하는 옵션입니다.</p>
+                <p class="alert">스크롤페이징에 의해 페이징 될 때도 해당 페이징 사이즈 만큼 행들이 완성 될 때마다 발생합니다.</p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="5" style="background-color: #81C784;color: #388E3C;"><b>기타 상수</b>(기본옵션에 포함되어 있는 상수 값)</td>
+        </tr>
+        <tr>
+            <td>
+                <p class="depricated">misc.withoutTbodyLength</p>
+                <p>Deprecated</p>
+            </td>
+            <td class="depricated">number</td>
+            <td class="depricated">0</td>
+            <td style="text-align: center;">X</td>
+            <td class="depricated">
+                데이터를 표현하지 않는 숨어있는 행 수
+                <p class="alert">
+                    그리드 에서 클릭한 행의 Index 를 자동으로 가져오기위해 $("selector").index() 메서드 사용 시 반환된 Index 값은 클릭한 행의 인덱스에 1이 더해져 있습니다.
+                    또한 colGroup 등 tbody 태그 레벨에 기입되는 요소가 있다면 그러한 요소 갯수만큼 Index가 더해져서 반환됩니다. 이를 보정하기 위한 값으로 withoutTbodyLength 를 제공합니다.
+                     $("selector").index() - gridInstance.options.misc.withoutTbodyLength 와 같이 사용한다면 정확한 Index 값을 가져 올 수 있습니다.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>misc.resizableCorrectionWidth</td>
+            <td>number</td>
+            <td>0</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p lang="ko_KR">resizable 옵션이 활성화 되었을 때 그리드 바디 컬럼의 넓이와 그리드 헤더 컬럼 넓이가 일치하지 않을 수 있습니다. 이때 값을 0.1 씩 증가 또는 감소시켜 보정하는 옵션입니다.</p>
+                <p lang="en_US">The grid body column width and grid header column width may not match when the resizable option is activated. At this time, it is an option to correct by increasing or decreasing the value by 0.1.</p>
+                <p lang="ko_KR" class="alert">그리드 열의 너비/높이는 td, th와 같은 테이블 관련 요소에 적용되는 스타일(padding, box-sizing 등)에 따라 변경 될 수 있습니다.</p>
+                <p lang="en_US" class="alert">The width/height of the grid column may be changed due to the style(padding, box-sizing, etc.) applied to table-related elements such as td and th.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>misc.resizableLastCellCorrectionWidth</td>
+            <td>number</td>
+            <td>0</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p lang="ko_KR">헤더 고정형 그리드에서 resizable 옵션이 활성화 되었을 때 마지막 컬럼을 클릭 하면 다른 컬럼들이 밀릴 수 있습니다. 이때 값을 0.1 씩 증가 또는 감소시켜 보정하는 옵션입니다.</p>
                 <p lang="en_US">Clicking on the last column may cause other columns to be pushed when the resizable option is enabled in the header fixed grid. At this time, it is an option to correct by increasing or decreasing the value by 0.1.</p>
                 <p lang="ko_KR" class="alert">그리드 열의 너비/높이는 td, th와 같은 테이블 관련 요소에 적용되는 스타일(padding, box-sizing 등)에 따라 변경 될 수 있습니다.</p>
                 <p lang="en_US" class="alert">The width/height of the grid column may be changed due to the style(padding, box-sizing, etc.) applied to table-related elements such as td and th.</p>
-			</td>
-		</tr>
-		<tr>
-			<td>misc.resizeBarCorrectionLeft</td>
-			<td>number</td>
-			<td>0</td>
-			<td style="text-align: center;">X</td>
-			<td>
-			    <p lang="ko_KR">resizable 옵션이 활성화 되었을 때 리사이즈바의 left 포지션이 컬럼 보더를 기준으로 가운데에 위치하지 않을 수 있습니다. 이때 값을 0.1 씩 증가 또는 감소시켜 보정하는 옵션입니다.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>misc.resizeBarCorrectionLeft</td>
+            <td>number</td>
+            <td>0</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p lang="ko_KR">resizable 옵션이 활성화 되었을 때 리사이즈바의 left 포지션이 컬럼 보더를 기준으로 가운데에 위치하지 않을 수 있습니다. 이때 값을 0.1 씩 증가 또는 감소시켜 보정하는 옵션입니다.</p>
                 <p lang="en_US">The left position of the resize bar may not be centered relative to the column border when the resizable option is activated. At this time, it is an option to correct by increasing or decreasing the value by 0.1.</p>
                 <p lang="ko_KR" class="alert">그리드 열의 너비/높이는 td, th와 같은 테이블 관련 요소에 적용되는 스타일(padding, box-sizing 등)에 따라 변경 될 수 있습니다.</p>
                 <p lang="en_US" class="alert">The width/height of the grid column may be changed due to the style(padding, box-sizing, etc.) applied to table-related elements such as td and th.</p>
-			</td>
-		</tr>
-		<tr>
-			<td>misc.resizeBarCorrectionHeight</td>
-			<td>number</td>
-			<td>0</td>
-			<td style="text-align: center;">X</td>
-			<td>
+            </td>
+        </tr>
+        <tr>
+            <td>misc.resizeBarCorrectionHeight</td>
+            <td>number</td>
+            <td>0</td>
+            <td style="text-align: center;">X</td>
+            <td>
                 <p lang="ko_KR">resizable 옵션이 활성화 되었을 때 리사이즈 바의 높이가 꽉 차지 않을 수 있습니다. 이때 값을 0.1 씩 증가 또는 감소시켜 보정하는 옵션입니다.</p>
                 <p lang="en_US">The height of the resizing bar may not be full when the resizable option is activated. At this time, it is an option to correct by increasing or decreasing the value by 0.1.</p>
                 <p lang="ko_KR" class="alert">그리드 열의 너비/높이는 td, th와 같은 테이블 관련 요소에 적용되는 스타일(padding, box-sizing 등)에 따라 변경 될 수 있습니다.</p>
                 <p lang="en_US" class="alert">The width/height of the grid column may be changed due to the style(padding, box-sizing, etc.) applied to table-related elements such as td and th.</p>
             </td>
-		</tr>
-		<tr>
-			<td>misc.fixedcolHeadMarginTop</td>
-			<td>number</td>
-			<td>0</td>
-			<td style="text-align: center;">X</td>
-			<td>
+        </tr>
+        <tr>
+            <td>misc.fixedcolHeadMarginTop</td>
+            <td>number</td>
+            <td>0</td>
+            <td style="text-align: center;">X</td>
+            <td>
                 <p lang="ko_KR">fixedcol 옵션이 활성화 되었을 때 고정 된 헤더 셀(th)의 상단 위치가 맞지 않을 수 있습니다. 이때 값을 0.1 씩 증가 또는 감소시켜 보정하는 옵션입니다.</p>
                 <p lang="en_US">The top position of the fixed header cell(th) may not match when the fixedcol option is activated. At this time, it is an option to correct by increasing or decreasing the value by 0.1.</p>
                 <p lang="ko_KR" class="alert">그리드 열의 너비/높이는 td, th와 같은 테이블 관련 요소에 적용되는 스타일(padding, box-sizing 등)에 따라 변경 될 수 있습니다.</p>
                 <p lang="en_US" class="alert">The width/height of the grid column may be changed due to the style(padding, box-sizing, etc.) applied to table-related elements such as td and th.</p>
             </td>
-		</tr>
-		<tr>
-			<td>misc.fixedcolHeadMarginLeft</td>
-			<td>number</td>
-			<td>0</td>
-			<td style="text-align: center;">X</td>
-			<td>
+        </tr>
+        <tr>
+            <td>misc.fixedcolHeadMarginLeft</td>
+            <td>number</td>
+            <td>0</td>
+            <td style="text-align: center;">X</td>
+            <td>
                 <p lang="ko_KR">fixedcol 옵션이 활성화 되었을 때 고정 된 헤더 셀(th)의 좌측 위치가 맞지 않을 수 있습니다. 이때 값을 0.1 씩 증가 또는 감소시켜 보정하는 옵션입니다.</p>
                 <p lang="en_US">The left position of the fixed header cell(th) may not match when the fixedcol option is activated. At this time, it is an option to correct by increasing or decreasing the value by 0.1.</p>
                 <p lang="ko_KR" class="alert">그리드 열의 너비/높이는 td, th와 같은 테이블 관련 요소에 적용되는 스타일(padding, box-sizing 등)에 따라 변경 될 수 있습니다.</p>
                 <p lang="en_US" class="alert">The width/height of the grid column may be changed due to the style(padding, box-sizing, etc.) applied to table-related elements such as td and th.</p>
             </td>
-		</tr>
-		<tr>
-			<td>misc.fixedcolHeadHeight</td>
-			<td>number</td>
-			<td>0</td>
-			<td style="text-align: center;">X</td>
-			<td>
+        </tr>
+        <tr>
+            <td>misc.fixedcolHeadHeight</td>
+            <td>number</td>
+            <td>0</td>
+            <td style="text-align: center;">X</td>
+            <td>
                 <p lang="ko_KR">fixedcol 옵션이 활성화 되었을 때 고정 된 헤더 셀(th)의 높이가 맞지 않을 수 있습니다. 이때 값을 0.1 씩 증가 또는 감소시켜 보정하는 옵션입니다.</p>
                 <p lang="en_US">The height of the fixed header cell(th) may not match when the fixedcol option is activated. At this time, it is an option to correct by increasing or decreasing the value by 0.1.</p>
                 <p lang="ko_KR" class="alert">그리드 열의 너비/높이는 td, th와 같은 테이블 관련 요소에 적용되는 스타일(padding, box-sizing 등)에 따라 변경 될 수 있습니다.</p>
                 <p lang="en_US" class="alert">The width/height of the grid column may be changed due to the style(padding, box-sizing, etc.) applied to table-related elements such as td and th.</p>
             </td>
-		</tr>
-		<tr>
-			<td>misc.fixedcolBodyMarginTop</td>
-			<td>number</td>
-			<td>0</td>
-			<td style="text-align: center;">X</td>
-			<td>
+        </tr>
+        <tr>
+            <td>misc.fixedcolBodyMarginTop</td>
+            <td>number</td>
+            <td>0</td>
+            <td style="text-align: center;">X</td>
+            <td>
                 <p lang="ko_KR">fixedcol 옵션이 활성화 되었을 때 고정 된 바디 셀(td)의 상단 위치가 맞지 않을 수 있습니다. 이때 값을 0.1 씩 증가 또는 감소시켜 보정하는 옵션입니다.</p>
                 <p lang="en_US">The top position of the fixed body cell(td) may not match when the fixedcol option is activated. At this time, it is an option to correct by increasing or decreasing the value by 0.1.</p>
                 <p lang="ko_KR" class="alert">그리드 열의 너비/높이는 td, th와 같은 테이블 관련 요소에 적용되는 스타일(padding, box-sizing 등)에 따라 변경 될 수 있습니다.</p>
                 <p lang="en_US" class="alert">The width/height of the grid column may be changed due to the style(padding, box-sizing, etc.) applied to table-related elements such as td and th.</p>
             </td>
-		</tr>
-		<tr>
-			<td>misc.fixedcolBodyMarginLeft</td>
-			<td>number</td>
-			<td>0</td>
-			<td style="text-align: center;">X</td>
-			<td>
+        </tr>
+        <tr>
+            <td>misc.fixedcolBodyMarginLeft</td>
+            <td>number</td>
+            <td>0</td>
+            <td style="text-align: center;">X</td>
+            <td>
                 <p lang="ko_KR">fixedcol 옵션이 활성화 되었을 때 고정 된 바디 셀(td)의 좌측 위치가 맞지 않을 수 있습니다. 이때 값을 0.1 씩 증가 또는 감소시켜 보정하는 옵션입니다.</p>
                 <p lang="en_US">The left position of the fixed body cell(td) may not match when the fixedcol option is activated. At this time, it is an option to correct by increasing or decreasing the value by 0.1.</p>
                 <p lang="ko_KR" class="alert">그리드 열의 너비/높이는 td, th와 같은 테이블 관련 요소에 적용되는 스타일(padding, box-sizing 등)에 따라 변경 될 수 있습니다.</p>
                 <p lang="en_US" class="alert">The width/height of the grid column may be changed due to the style(padding, box-sizing, etc.) applied to table-related elements such as td and th.</p>
             </td>
-		</tr>
-		<tr>
-			<td>misc.fixedcolBodyBindHeight</td>
-			<td>number</td>
-			<td>0</td>
-			<td style="text-align: center;">X</td>
-			<td>
+        </tr>
+        <tr>
+            <td>misc.fixedcolBodyBindHeight</td>
+            <td>number</td>
+            <td>0</td>
+            <td style="text-align: center;">X</td>
+            <td>
                 <p lang="ko_KR">fixedcol 옵션이 활성화 되었을 때 고정 된 바디 셀(td)의 높이가 맞지 않을 수 있습니다. 이때 값을 0.1 씩 증가 또는 감소시켜 보정하는 옵션입니다.</p>
                 <p lang="en_US">The height of the fixed body cell(td) may not match when the fixedcol option is activated. At this time, it is an option to correct by increasing or decreasing the value by 0.1.</p>
                 <p lang="ko_KR" class="alert">그리드 열의 너비/높이는 td, th와 같은 테이블 관련 요소에 적용되는 스타일(padding, box-sizing 등)에 따라 변경 될 수 있습니다.</p>
                 <p lang="en_US" class="alert">The width/height of the grid column may be changed due to the style(padding, box-sizing, etc.) applied to table-related elements such as td and th.</p>
             </td>
-		</tr>
-		<tr>
-			<td>misc.fixedcolBodyAddHeight</td>
-			<td>number</td>
-			<td>1</td>
-			<td style="text-align: center;">X</td>
-			<td>
-				<p lang="ko_KR">fixedcol 옵션이 활성화 되었을 때 추가 된 행의 셀(td)의 높이가 맞지 않을 수 있습니다. 이때 값을 0.1 씩 증가 또는 감소시켜 보정하는 옵션입니다.</p>
+        </tr>
+        <tr>
+            <td>misc.fixedcolBodyAddHeight</td>
+            <td>number</td>
+            <td>1</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p lang="ko_KR">fixedcol 옵션이 활성화 되었을 때 추가 된 행의 셀(td)의 높이가 맞지 않을 수 있습니다. 이때 값을 0.1 씩 증가 또는 감소시켜 보정하는 옵션입니다.</p>
                 <p lang="en_US">The height of the cell(td) of the added row may not match when the fixedcol option is activated. At this time, it is an option to correct by increasing or decreasing the value by 0.1.</p>
                 <p lang="ko_KR" class="alert">그리드 열의 너비/높이는 td, th와 같은 테이블 관련 요소에 적용되는 스타일(padding, box-sizing 등)에 따라 변경 될 수 있습니다.</p>
                 <p lang="en_US" class="alert">The width/height of the grid column may be changed due to the style(padding, box-sizing, etc.) applied to table-related elements such as td and th.</p>
-			</td>
-		</tr>
-		<tr>
-			<td>misc.fixedcolRootContainer</td>
-			<td>string</td>
-			<td>null</td>
-			<td style="text-align: center;">X</td>
-			<td>
-				<p lang="ko_KR">fixed col 옵션을 적용하여 그리드 인스턴스를 생성한 이후 그리드를 감싸고 있는 요소의 높이가 동적으로 변경 되었을 때 그리드의 모양이 깨질 수 있습니다. 이때 이 옵션에 높이가 변경 되는 요소 지정 해 주면 그리드 모양이 깨지지 않습니다.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>misc.fixedcolRootContainer</td>
+            <td>string</td>
+            <td>null</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p lang="ko_KR">fixed col 옵션을 적용하여 그리드 인스턴스를 생성한 이후 그리드를 감싸고 있는 요소의 높이가 동적으로 변경 되었을 때 그리드의 모양이 깨질 수 있습니다. 이때 이 옵션에 높이가 변경 되는 요소 지정 해 주면 그리드 모양이 깨지지 않습니다.</p>
                 <p lang="en_US">After creating a grid instance by applying the fixed col option, the grid shape may break when the height of the element wrapping the grid is dynamically changed. At this time, if you specify the element whose height is changed in this option, the grid shape will not be broken.</p>
-				<p lang="ko_KR">jQuery selector 문자열로 요소를 지정 합니다.</p>
+                <p lang="ko_KR">jQuery selector 문자열로 요소를 지정 합니다.</p>
                 <p lang="en_US">Specify an element with the jQuery selector string.</p>
                 <p lang="ko_KR" class="alert">그리드 열의 너비/높이는 td, th와 같은 테이블 관련 요소에 적용되는 스타일(padding, box-sizing 등)에 따라 변경 될 수 있습니다.</p>
                 <p lang="en_US" class="alert">The width/height of the grid column may be changed due to the style(padding, box-sizing, etc.) applied to table-related elements such as td and th.</p>
-			</td>
-		</tr>
-	</table>
+            </td>
+        </tr>
+    </table>
 </article>
 
 <script type="text/javascript">
