@@ -11,7 +11,7 @@
  *
 
 ## Natural-UI.Shell v0.9.47
-
+ * Edited comments and error messages.
 
 ## natural.ui.css
  * Changed N.pagination, N.datepicker realted styles.
