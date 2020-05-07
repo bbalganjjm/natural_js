@@ -17,8 +17,11 @@
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p>같은 페이지 내에 있는 블록(Block) 요소를 지정 합니다.</p>
-                <p class="alert">같은 페이지 내의 요소를 팝업으로 만들어 주므로 url 옵션을 지정 하면 안됩니다.</p>
+                <p lang="ko_KR">N.popup으로 생성 할 페이지 안에 있는 Block 요소를 지정 합니다.</p>
+                <p lang="en_US">Specify the Block element in the page to be created with N.popup.</p>
+                <p lang="ko_KR" class="alert">페이지 안의 요소를 팝업으로 만들기 때문에 url 옵션을 설정 하면 안 됩니다.</p>
+                <p lang="en_US" class="alert">The url option should not be set because it will make the popup  from element in the page.</p>
+                <pre><code>N("context").popup();</code></pre>
             </td>
         </tr>
         <tr>
@@ -27,8 +30,13 @@
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p>팝업으로 표시 할 페이지의 URL을 지정 합니다.</p>
-                <p class="alert">불러온 페이지의 컨트롤러(N.cont의 콜백)메서드 중 init 이라 명명된 메서드가 있으면 페이지 로딩 완료 후 init 메서드를 자동으로 호출 합니다.</p>
+                <p lang="ko_KR">팝업으로 만들 페이지의 url을 지정 합니다.</p>
+                <p lang="en_US">Specify the url of the page to be created as a popup.</p>
+                <p lang="ko_KR" class="alert">팝업 페이지 로딩이 완료되면 팝업 페이지의 init 메서드가 호출 됩니다.</p>
+                <p lang="en_US" class="alert">When the popup page loading is completed, the init method of the popup page is called.</p>
+                <p lang="ko_KR" class="alert">다른 페이지를 로드하여 팝업을 생성하기 때문에 context 옵션을 지정 하면 안 됩니다.</p>
+                <p lang="en_US" class="alert">Don't specify the context option, because it creates a popup by loading another page.</p>
+                <pre><code>N().popup("url");</code></pre>
             </td>
         </tr>
         <tr>
@@ -37,8 +45,9 @@
             <td>undefined</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p>팝업의 제목</p>
-                <p class="alert">title 옵션이 undefined 이면 타이틀바를 표시하지 않고 context로 지정한 요소의 title 속성에 값이 있으면 해당 값으로 지정 됩니다.</p>
+                <p>팝업의 제목을 설정 합니다. 설정하지 않으면 타이틀바가 생성 되지 않습니다.</p>
+                <p class="alert">팝업의 제목은 url 옵션을 설정한 경우 불러오는 페이지의 view 요소의 title 속성으로도 설정 할 수 있습니다.
+                    context를 지정하여 팝업을 생성하는 경우에는 context 요소의 title 속성으로 설정 할 수 있습니다.</p>
             </td>
         </tr>
         <tr>
