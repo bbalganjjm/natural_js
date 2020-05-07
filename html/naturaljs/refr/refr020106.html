@@ -4,18 +4,19 @@
         <span lang="en_US">Examples</span>
     </h2>
 
-    <h4 class="notIndex">1. 뷰(view)와 컨트롤러 정의</h4>
+    <h4 lang="ko_KR" class="notIndex">1. View 와 Controller 정의</h4>
+    <h4 lang="en_US" class="notIndex">1. Define View and Controller</h4>
     <pre class="line-numbers"><code class="language-markup">&lt;!-- View area start --&gt;
-&lt;div id="view"&gt;
-    &lt;p&gt;View 영역&lt;/p&gt;
-&lt;/div&gt;
+&lt;article class="view"&gt;
+    &lt;p&gt;View&lt;/p&gt;
+&lt;/article&gt;
 &lt;!-- View area end --&gt;
 
 &lt;script type="text/javascript"&gt;
     // Controller area start
-    N("#view").cont({
+    N(".view").cont({
         init : function(view, request) {
-            // 페이지 로딩 후 최초 실행되는 영역
+            N("p", view).css("padding", "10px");
         }
     });
     // Controller area end
