@@ -4291,7 +4291,7 @@
                 this.options.context = N(opts);
             }
 
-            // If the value of the opts.scrollPaging.size option is greater than 0, the addTop option is unconditionally set to true.
+            // If the addTop option is set to false, the setting values ​​of scrollPaging.size and createRowDelay options are forced to 0.
             if(!this.options.addTop) {
                 this.options.scrollPaging.size = 0;
                 this.options.createRowDelay = 0;
@@ -4480,7 +4480,7 @@
             select : function(row, isAppend) {
                 var opts = this.options;
                 if(!opts.select && !opts.multiselect) {
-                    N.warn("[N.list.select]The \"select\" option value is false. please enable the select feature.");
+                    N.warn("[N.list.select]The \"select\" or \"multiselect\" option is disabled. To use this method, set the value of the \"select\" or \"multiselect\" option to true.");
                     return false;
                 }
                 if(row === undefined) {
@@ -6316,7 +6316,7 @@
             select : function(row, isAppend) {
                 var opts = this.options;
                 if(!opts.select && !opts.multiselect) {
-                    N.warn("[N.grid.select]The \"select\" option value is false. please enable the select feature.");
+                    N.warn("[N.grid.select]The \"select\" or \"multiselect\" option is disabled. To use this method, set the value of the \"select\" or \"multiselect\" option to true.");
                     return false;
                 }
 
