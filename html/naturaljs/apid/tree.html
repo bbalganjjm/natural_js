@@ -93,17 +93,17 @@
         <tr>
             <th align="right"><label for="context">context</label></th>
             <td colspan="3">
-                <input id="context" type="text" value="#tree" readonly="readonly" />
+                <input id="context" type="text" value="#tree" readonly="readonly">
             </td>
         </tr>
         <tr>
             <th align="right"><label for="context">key</label></th>
             <td>
-                <input id="key" type="text" value="key" />
+                <input id="key" type="text" value="key">
             </td>
             <th align="right"><label for="val">val</label></th>
             <td>
-                <input id="val" type="text" value="val" />
+                <input id="val" type="text" value="val">
             </td>
         </tr>
         <tr>
@@ -113,17 +113,17 @@
             </td>
             <th align="right"><label for="parent">parent</label></th>
             <td>
-                <input id="parent" type="text" value="parent" />
+                <input id="parent" type="text" value="parent">
             </td>
         </tr>
         <tr>
             <th align="right"><label for="folderSelectable">folderSelectable</label></th>
             <td>
-                <input id="folderSelectable" type="checkbox" />
+                <input id="folderSelectable" type="checkbox">
             </td>
             <th align="right"><label for="checkbox">checkbox</label></th>
             <td>
-                <input id="checkbox" type="checkbox" />
+                <input id="checkbox" type="checkbox">
             </td>
         </tr>
         <tr>
@@ -180,7 +180,7 @@
             <th>select</th>
             <th><label for="nodeVal">arguments[0]</label></th>
             <td>
-                <input id="nodeVal" type="text" value="4" />
+                <input id="nodeVal" type="text" value="4">
                 <label for="nodeVal" lang="ko_KR">선택 할 노드 값(Value)을 입력 합니다.</label>
                 <label for="nodeVal" lang="en_US">Input the node value to select.</label>
             </td>
@@ -189,7 +189,7 @@
             <th>closeAll</th>
             <th><label for="isFirstNodeOpen">arguments[0]</label></th>
             <td>
-                <input id="isFirstNodeOpen" type="checkbox" />
+                <input id="isFirstNodeOpen" type="checkbox">
                 <label for="isFirstNodeOpen" lang="ko_KR">체크(true)하면 모두 닫지 않고 ROOT 노드의 자식 노드들은 남겨 놓습니다.</label>
                 <label for="isFirstNodeOpen" lang="en_US">If this checkbox with check(true), does not close all and open the ROOT node's children</label>
             </td>
@@ -264,7 +264,7 @@
                 e.preventDefault();
                 tree.bind();
             });
-            
+
             N("#btnSelect", view).click(function(e) {
                 e.preventDefault();
                 if(N.string.trimToUndefined(N("#nodeVal", view).val())) {

@@ -14,9 +14,9 @@
             </colgroup>
             <tr>
                 <th>url</th>
-                <td><input id="url" type="text" value="html/naturaljs/apid/data/grid.json" /></td>
+                <td><input id="url" type="text" value="html/naturaljs/apid/data/grid.json"></td>
                 <th>dataType</th>
-                <td><input id="dataType" type="text" value="json" readonly="readonly" /> Response data type<br></td>
+                <td><input id="dataType" type="text" value="json" readonly="readonly"> Response data type<br></td>
             </tr>
         </table>
 
@@ -37,7 +37,7 @@
 }</textarea><br> Submit callback function</td>
             </tr>
         </table>
-        
+
         <div class="btnBox" style="text-align: center;">
             <a id="btnGetJson" href="#" data-opts='{ "color" : "gray", "size": "large" }'>Submit</a>
         </div>
@@ -61,13 +61,13 @@
             </colgroup>
             <tr>
                 <th>context</th>
-                <td><input id="context" type="text" value="div.result" readonly="readonly" /> Target context</td>
+                <td><input id="context" type="text" value="div.result" readonly="readonly"> Target context</td>
                 <th>url</th>
-                <td><input id="url" type="text" value="html/naturaljs/apid/datepicker.html" /> Page url</td>
+                <td><input id="url" type="text" value="html/naturaljs/apid/datepicker.html"> Page url</td>
             </tr>
             <tr>
                 <th>dataType</th>
-                <td colspan="3"><input id="dataType" type="text" value="html" readonly="readonly" /> Response data type<br></td>
+                <td colspan="3"><input id="dataType" type="text" value="html" readonly="readonly"> Response data type<br></td>
             </tr>
         </table>
 
@@ -115,25 +115,25 @@
         setEvents : function(view, cont) {
             N("#btnGetJson", view).click(function(e) {
                 e.preventDefault();
-                
+
                 var opts = {
                     url : view.find(".form.data #url").val(),
                     type : "GET",
                     dataType : view.find(".form.data #dataType").val()
                 };
-                
+
                 N.comm(opts).submit(eval("(" + view.find(".form.data #jsonCallback").val() + ")"));
             });
 
             N("#btnGetPage", view).click(function(e) {
                 e.preventDefault();
-                
+
                 var opts = {
                     url : view.find(".form.html #url").val(),
                     type : "GET",
                     dataType : view.find(".form.html #dataType").val()
                 };
-                
+
                 N(view.find(".form.html #context").val(), view).comm(opts).request.attr("hello", view.find(".form.html #request").val()).submit(eval("(" + view.find(".form.html #pageCallback").val() + ")"));
                 N("#btnGetPage", view).instance("button").disable();
             });
