@@ -1,7 +1,7 @@
 <style>
 
 .index-header {
-	text-align: right;
+    text-align: right;
 }
 
 .index-header .header-back {
@@ -14,15 +14,15 @@
 
 .index-header .i18n-select,
 .index-header .links {
-	position: relative;
+    position: relative;
     display: inline-block;
-	margin: 10px 15px 0 0;
-	color : #66BB6A;
+    margin: 10px 15px 0 0;
+    color : #66BB6A;
     z-index: 1;
 }
 
 .index-header .links {
-	margin-left: 109px;
+    margin-left: 109px;
 }
 
 .index-header .i18n-select a {
@@ -30,10 +30,10 @@
 }
 
 .index-header .theme-color {
-	position: relative;
-	height: 25px;
-	line-height: 25px;
-	margin: 0 15px 0 0;
+    position: relative;
+    height: 25px;
+    line-height: 25px;
+    margin: 0 15px 0 0;
     padding-bottom: 3px;
     width: auto;
     opacity: 0.8;
@@ -65,9 +65,9 @@
         <a class="community-link" href="https://www.facebook.com/groups/1927201360891679" target="blank"><span>Community</span></a>
     </div>
 
-	<div class="i18n-select">
-		<a class="korean" href="#" class="link">한국어</a> | <a class="english" href="#" class="link">English</a>
-	</div>
+    <div class="i18n-select">
+        <a class="korean" href="#" class="link">한국어</a> | <a class="english" href="#" class="link">English</a>
+    </div>
 
     <select class="theme-color"></select>
 </article>
@@ -75,34 +75,34 @@
 <script type="text/javascript">
     N(".index-header").cont({
         init : function(view, request) {
-			// Language link
-        	view.find(".korean").click(function(e) {
-				e.preventDefault();
-				window.sessionStorage.locale = "ko_KR";
-				window.location.reload();
-			});
-        	view.find(".english").click(function(e) {
-				e.preventDefault();
-				window.sessionStorage.locale = "en_US";
-				window.location.reload();
-			});
+            // Language link
+            view.find(".korean").click(function(e) {
+                e.preventDefault();
+                window.sessionStorage.locale = "ko_KR";
+                window.location.reload();
+            });
+            view.find(".english").click(function(e) {
+                e.preventDefault();
+                window.sessionStorage.locale = "en_US";
+                window.location.reload();
+            });
 
-			// Color select
+            // Color select
             var colorSelect = N(".theme-color", view);
-			for(var k in APP.indx.colorPalette) {
-				var selected="";
-				if(k === window.localStorage.themeColor) {
-					selected = 'selected="selected"';
-				} else {
-					selected = "";
-				}
-				colorSelect.append('<option value="' + k + '" ' + selected + '>' + k + '</option>')
-			};
+            for(var k in APP.indx.colorPalette) {
+                var selected="";
+                if(k === window.localStorage.themeColor) {
+                    selected = 'selected="selected"';
+                } else {
+                    selected = "";
+                }
+                colorSelect.append('<option value="' + k + '" ' + selected + '>' + k + '</option>')
+            };
 
-			colorSelect.change(function() {
-				window.localStorage.themeColor = $(this).val();
-				location.reload();
-			});
+            colorSelect.change(function() {
+                window.localStorage.themeColor = $(this).val();
+                location.reload();
+            });
         }
     });
 </script>

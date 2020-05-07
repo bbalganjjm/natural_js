@@ -4,29 +4,29 @@
     };
 
     var CommonMessages = {
-		"ko_KR" : {
-			"COMM-0001" : "변경된 데이터가 없습니다.",
-			"COMM-0002" : "저장이 완료 되었습니다.",
-			"COMM-0003" : "데이터를 수정 중 입니다. 선택한 행의 데이터를 조회 하겠습니까?",
-			"COMM-0005" : "저장 하겠습니까?",
-			"COMM-0006" : " - 입력 : {0} 건",
-			"COMM-0007" : " - 수정 : {0} 건",
-			"COMM-0008" : " - 삭제 : {0} 건",
-			"COMM-0009" : "삭제 하겠습니까?<br/>저장 버튼을 누르기 전까지는 DB 에 반영 되지 않습니다.",
-			"COMM-0010" : "선택된 행이 없습니다."
-		},
-		"en_US" : {
-			"COMM-0001" : "No changed data",
-			"COMM-0002" : "Saving is complete.",
-			"COMM-0003" : "You are on the editing the data. are you sure you want to retrieve the data from the selected row?",
-			"COMM-0005" : "Do you want to save it?",
-			"COMM-0006" : " - Create : {0} rows",
-			"COMM-0007" : " - Update : {0} rows",
-			"COMM-0008" : " - Delete : {0} rows",
-			"COMM-0009" : "Do you want to delete it?<br/>It will not be stored in the DB until you press the save button.",
-			"COMM-0010" : "No rows selected."
-		}
-	}
+        "ko_KR" : {
+            "COMM-0001" : "변경된 데이터가 없습니다.",
+            "COMM-0002" : "저장이 완료 되었습니다.",
+            "COMM-0003" : "데이터를 수정 중 입니다. 선택한 행의 데이터를 조회 하겠습니까?",
+            "COMM-0005" : "저장 하겠습니까?",
+            "COMM-0006" : " - 입력 : {0} 건",
+            "COMM-0007" : " - 수정 : {0} 건",
+            "COMM-0008" : " - 삭제 : {0} 건",
+            "COMM-0009" : "삭제 하겠습니까?<br/>저장 버튼을 누르기 전까지는 DB 에 반영 되지 않습니다.",
+            "COMM-0010" : "선택된 행이 없습니다."
+        },
+        "en_US" : {
+            "COMM-0001" : "No changed data",
+            "COMM-0002" : "Saving is complete.",
+            "COMM-0003" : "You are on the editing the data. are you sure you want to retrieve the data from the selected row?",
+            "COMM-0005" : "Do you want to save it?",
+            "COMM-0006" : " - Create : {0} rows",
+            "COMM-0007" : " - Update : {0} rows",
+            "COMM-0008" : " - Delete : {0} rows",
+            "COMM-0009" : "Do you want to delete it?<br/>It will not be stored in the DB until you press the save button.",
+            "COMM-0010" : "No rows selected."
+        }
+    }
     
     var CommonUtils = {
         /**
@@ -38,15 +38,15 @@
          * @opts.before : 선택한 행을 삭제하기 전 실행 할 함수. 핸들러 함수의 인자로 체크한 행의 index 들을 반환 합니다.
          * @opts.after : 선택한 행을 삭제 한 후 실행 할 함수. 
         */
-		del : function(opts) {
-			var checkedIndexs = opts.cont[opts.inst].check();
-			if(N.isEmptyObject(checkedIndexs)) {
-			    checkedIndexs = opts.cont[opts.inst].select();
-			}
-	        if(opts.before) {
-	   			opts.before.call(opts.cont, checkedIndexs);
-	   		}
-	        
+        del : function(opts) {
+            var checkedIndexs = opts.cont[opts.inst].check();
+            if(N.isEmptyObject(checkedIndexs)) {
+                checkedIndexs = opts.cont[opts.inst].select();
+            }
+            if(opts.before) {
+                   opts.before.call(opts.cont, checkedIndexs);
+               }
+            
             if(checkedIndexs.length > 0) {
                 var isAllAddedLine = true;
                 $(checkedIndexs).each(function() {
@@ -75,112 +75,112 @@
                     }).show(); 
                 }
             } else {
-				N(window).alert(N.message.get(APP.comm.messages, "COMM-0010")).show();
-			}
-		},
-		/**
-		 * 추가, 수정, 삭제된 데이터를 저장 하는 함수 - 저장 전 데이터 검증, 변경 된 데이터 확인, 저장 메시지 다이얼로그 표시등 데이터 저장에 대한 반복적인 루틴들을 한번에 처리 해 줍니다.
-		 * 
-		 * @this : 호출한 함수 인스턴스
-		 * @opts.cont : N.cont object
-		 * @opts.comm : 데이터 저장을 처리하는 N.comm 이 정의 된 함수명.
-		 * @opts.msg : 저장 확인 메시지, undefined 이면 기본 메시지가 표시 됨.
-		 * @opts.changed : 변경 된 데이터 유무를 참조 할 컴포넌트 인스턴스 명.
-		 * @opts.validate : 추가/수정 된 데이터의 유효성을 검증할 컴포넌트 인스턴스 명. 
-		 * @opts.before : 서버에 저장 하기 전 실행 할 함수. 
-		 * @opts.after : 서버에 저장 한 후 실행 할 함수. 
-		 */
-		save : function(opts) {
-	   		if(opts.changed) {
-	   			if(opts.cont[opts.changed].data("modified").length === 0) {
-	   			    N.notify.add(N.message.get(APP.comm.messages, "COMM-0001"));
-		        	return false;
-		        }	   			
-	   		}
+                N(window).alert(N.message.get(APP.comm.messages, "COMM-0010")).show();
+            }
+        },
+        /**
+         * 추가, 수정, 삭제된 데이터를 저장 하는 함수 - 저장 전 데이터 검증, 변경 된 데이터 확인, 저장 메시지 다이얼로그 표시등 데이터 저장에 대한 반복적인 루틴들을 한번에 처리 해 줍니다.
+         * 
+         * @this : 호출한 함수 인스턴스
+         * @opts.cont : N.cont object
+         * @opts.comm : 데이터 저장을 처리하는 N.comm 이 정의 된 함수명.
+         * @opts.msg : 저장 확인 메시지, undefined 이면 기본 메시지가 표시 됨.
+         * @opts.changed : 변경 된 데이터 유무를 참조 할 컴포넌트 인스턴스 명.
+         * @opts.validate : 추가/수정 된 데이터의 유효성을 검증할 컴포넌트 인스턴스 명. 
+         * @opts.before : 서버에 저장 하기 전 실행 할 함수. 
+         * @opts.after : 서버에 저장 한 후 실행 할 함수. 
+         */
+        save : function(opts) {
+               if(opts.changed) {
+                   if(opts.cont[opts.changed].data("modified").length === 0) {
+                       N.notify.add(N.message.get(APP.comm.messages, "COMM-0001"));
+                    return false;
+                }                   
+               }
 
-	   		if(opts.validate) {
-	   			if(opts.cont[opts.validate] instanceof N.form) {
-	   				if(opts.cont[opts.validate].row() > -1) {
-			        	if(!opts.cont[opts.validate].validate()) {
-			        		return false;
-			        	}
-			        }	   				
-	   			} else {
-	   				if(!opts.cont[opts.validate].validate()) {
-		        		return false;
-		        	}
-	   			}
-	   		}
+               if(opts.validate) {
+                   if(opts.cont[opts.validate] instanceof N.form) {
+                       if(opts.cont[opts.validate].row() > -1) {
+                        if(!opts.cont[opts.validate].validate()) {
+                            return false;
+                        }
+                    }                       
+                   } else {
+                       if(!opts.cont[opts.validate].validate()) {
+                        return false;
+                    }
+                   }
+               }
 
-	   		if(opts.before) {
-	   			opts.before.call(opts.cont);
-	   		}
-	   		
-	        N(window).alert({
-	    		msg : opts.msg ? opts.msg : N.message.get(APP.comm.messages, "COMM-0005"),
-	    		confirm : true,
-	    		onOk : function() {
-	    			opts.cont[opts.comm]().submit(function(data) {
-	    				var msg = N.message.get(APP.comm.messages, "COMM-0002");
-	    				if(data.insert !== undefined && data.update !== undefined && data.delete !== undefined) {
-		    				msg += "<br>" + N.message.get(APP.comm.messages, "COMM-0006", [data.insert]);
-		    				msg += "<br>" + N.message.get(APP.comm.messages, "COMM-0007", [data.update]);
-		    				msg += "<br>" + N.message.get(APP.comm.messages, "COMM-0008", [data.delete]);
-	    				}
-	    				
-	    				N.notify({
-	    				    html : true
-	    				}).add(msg);
-	    				
-	    				opts.after.call(opts.cont, data);
-	    			});
-	    		}
-	    	}).show();
-	   	},
-	   	/**
-	   	 * N.grid 나 N.list 의 행을 선택했을 때(onSelect 이벤트 핸들러 함수 이용) N.form 컴포넌트에 같은 데이터를 연동하기 위한 반복적인 루틴들을 한번에 처리 해 줍니다.
-	   	 * 
-	   	 * @this : 호출한 함수 인스턴스 - onSelect 함수의 this 이므로 N.grid나 N.list 인스턴스
-	   	 * @opts.cont : N.cont object
+               if(opts.before) {
+                   opts.before.call(opts.cont);
+               }
+               
+            N(window).alert({
+                msg : opts.msg ? opts.msg : N.message.get(APP.comm.messages, "COMM-0005"),
+                confirm : true,
+                onOk : function() {
+                    opts.cont[opts.comm]().submit(function(data) {
+                        var msg = N.message.get(APP.comm.messages, "COMM-0002");
+                        if(data.insert !== undefined && data.update !== undefined && data.delete !== undefined) {
+                            msg += "<br>" + N.message.get(APP.comm.messages, "COMM-0006", [data.insert]);
+                            msg += "<br>" + N.message.get(APP.comm.messages, "COMM-0007", [data.update]);
+                            msg += "<br>" + N.message.get(APP.comm.messages, "COMM-0008", [data.delete]);
+                        }
+                        
+                        N.notify({
+                            html : true
+                        }).add(msg);
+                        
+                        opts.after.call(opts.cont, data);
+                    });
+                }
+            }).show();
+           },
+           /**
+            * N.grid 나 N.list 의 행을 선택했을 때(onSelect 이벤트 핸들러 함수 이용) N.form 컴포넌트에 같은 데이터를 연동하기 위한 반복적인 루틴들을 한번에 처리 해 줍니다.
+            * 
+            * @this : 호출한 함수 인스턴스 - onSelect 함수의 this 이므로 N.grid나 N.list 인스턴스
+            * @opts.cont : N.cont object
          * @opts.form : 데이터를 연동 할 N.form 인스턴스 명.
          */
-	   	selectNBind : function(opts) {
-	   		if(opts.args === undefined) {
-	   			opts.args = arguments.callee.caller.arguments; 
-	   		}
-	   		if((opts.args[2][opts.args[0]] !== undefined && opts.args[2][opts.args[0]].rowStatus !== "insert") && opts.cont[opts.form] > -1  && !opts.cont[opts.form].validate()) {
-   				return false;
-   			}
+           selectNBind : function(opts) {
+               if(opts.args === undefined) {
+                   opts.args = arguments.callee.caller.arguments; 
+               }
+               if((opts.args[2][opts.args[0]] !== undefined && opts.args[2][opts.args[0]].rowStatus !== "insert") && opts.cont[opts.form] > -1  && !opts.cont[opts.form].validate()) {
+                   return false;
+               }
 
-			if(this.context("> " + (this instanceof N.grid ? "tbody" : "li") + ":eq(" + opts.args[3] + ")").hasClass("row_data_changed__")) {
-				if(opts.args[0] !== opts.cont[opts.form].row()) {
-					var self = this;
-					N(window).alert({
-	  					msg : N.message.get(APP.comm.messages, "COMM-0003"),
-	   					confirm : true,
-	   					onOk : function() {
-	   						// bind data to detail form;
-	   					    if(opts.dataSync === false) {
-	   					        opts.cont[opts.form].bind(0, [opts.args[2][opts.args[0]]]);
-	   					    } else {
-	   					        opts.cont[opts.form].bind(opts.args[0], opts.args[2]);
-	   					    }
-	   						opts.args[1].click();
-	   					},
-	   					onCancel : function() {
-	   						self.select(opts.args[3]);
-	   					}
-   					}).show();
-				}
-  			} else {
-  			    if(opts.dataSync === false) {
-  			        opts.cont[opts.form].bind(0, [opts.args[2][opts.args[0]]]);
-  			    } else {
-  			        opts.cont[opts.form].bind(opts.args[0], opts.args[2]);
-  			    }
-  			}
-	   	},
-	   	/**
+            if(this.context("> " + (this instanceof N.grid ? "tbody" : "li") + ":eq(" + opts.args[3] + ")").hasClass("row_data_changed__")) {
+                if(opts.args[0] !== opts.cont[opts.form].row()) {
+                    var self = this;
+                    N(window).alert({
+                          msg : N.message.get(APP.comm.messages, "COMM-0003"),
+                           confirm : true,
+                           onOk : function() {
+                               // bind data to detail form;
+                               if(opts.dataSync === false) {
+                                   opts.cont[opts.form].bind(0, [opts.args[2][opts.args[0]]]);
+                               } else {
+                                   opts.cont[opts.form].bind(opts.args[0], opts.args[2]);
+                               }
+                               opts.args[1].click();
+                           },
+                           onCancel : function() {
+                               self.select(opts.args[3]);
+                           }
+                       }).show();
+                }
+              } else {
+                  if(opts.dataSync === false) {
+                      opts.cont[opts.form].bind(0, [opts.args[2][opts.args[0]]]);
+                  } else {
+                      opts.cont[opts.form].bind(opts.args[0], opts.args[2]);
+                  }
+              }
+           },
+           /**
          * 엑셀 다운로드
          * 
          * 
@@ -237,28 +237,28 @@
             
             CommonUtils.fileDownload(url);
         },
-	   	/**
-	   	 * 엑셀 대용량 데이터 다운로드
-	   	 * 
-	   	 * 대용량 엑셀 데이터 조회시 Heap 메모리 Full 을 발생시키지 않고 빠르게 다운로드 함. 그러나
-	   	 * Service 나 Controller 에서 파라미터는 조작 가능하지만 리턴 데이터는 MyBatis 에서 엑셀파일을 바로 생성하기 때문에 조작이 불가능함. 
-	   	 */
+           /**
+            * 엑셀 대용량 데이터 다운로드
+            * 
+            * 대용량 엑셀 데이터 조회시 Heap 메모리 Full 을 발생시키지 않고 빠르게 다운로드 함. 그러나
+            * Service 나 Controller 에서 파라미터는 조작 가능하지만 리턴 데이터는 MyBatis 에서 엑셀파일을 바로 생성하기 때문에 조작이 불가능함. 
+            */
         excelStreaming : function(params, url, filename, columnNames, extColumnNames) {
-	   	    N.browser.cookie("n-excel-stream", btoa("true"));
-	   	    CommonUtils.excelDownload(params, url, filename, columnNames, extColumnNames);
-	   	},
-	   	fileDownload : function(url) {
-	   	    location.href = url;
-	   	},
-	   	/**
-	   	 * 파일 요약 목록을 만들어 준다.
-	   	 * @fileList : 파일 목록 Array
-	   	 * @fileNameCol : 파일명 컬럼명
-	   	 * @length : 파일 목록 문자열을 자를 기준 길이
-	   	 * @fileButton : 파일팝업 버튼(입력하지 않으면 파일요약목록 문자열을 반환하고 입력하면 버튼 옆에 목록을 표시 해 준다)
-	   	 */
-	   	createFileSummaryList : function(fileList, fileNameCol, length, fileButton) {
-    	   	if(!N.isEmptyObject(fileList)) {
+               N.browser.cookie("n-excel-stream", btoa("true"));
+               CommonUtils.excelDownload(params, url, filename, columnNames, extColumnNames);
+           },
+           fileDownload : function(url) {
+               location.href = url;
+           },
+           /**
+            * 파일 요약 목록을 만들어 준다.
+            * @fileList : 파일 목록 Array
+            * @fileNameCol : 파일명 컬럼명
+            * @length : 파일 목록 문자열을 자를 기준 길이
+            * @fileButton : 파일팝업 버튼(입력하지 않으면 파일요약목록 문자열을 반환하고 입력하면 버튼 옆에 목록을 표시 해 준다)
+            */
+           createFileSummaryList : function(fileList, fileNameCol, length, fileButton) {
+               if(!N.isEmptyObject(fileList)) {
                 var fileListStr = N.formatter.limit(N(fileList).map(function() {
                     return this[fileNameCol];
                 }).get().join(", "), [length, "..."]);
@@ -276,8 +276,8 @@
                     fileButton.next(".fileSummaryList").text("(0)");                    
                 }
             }
-	   	},
-	   	/**
+           },
+           /**
          * fileId 로 서버에서 업로드 된 파일을 조회 후 파일 요약 목록을 만들어 준다.
          * @fileId : 파일 아이디
          * @fileNameCol : 파일명 컬럼명

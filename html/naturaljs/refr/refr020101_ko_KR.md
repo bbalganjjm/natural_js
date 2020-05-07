@@ -13,15 +13,15 @@ N.cont 는 다음과 같이 페이지의 View 영역 바로 아래 선언 되어
 
 ```
 <div id="view">
-	<p>View 영역</p>
+    <p>View 영역</p>
 </div>
 
 <script type="text/javascript">
-	N("#view").cont({ //  Controller object
-		init : function(view, request) {
-			// 페이지 로딩 후 최초 실행되는 영역
-		}
-	});
+    N("#view").cont({ //  Controller object
+        init : function(view, request) {
+            // 페이지 로딩 후 최초 실행되는 영역
+        }
+    });
 </script>
 ```
 

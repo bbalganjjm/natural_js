@@ -1,81 +1,81 @@
 <article class="refr020503 apiDoc">
-	<h2>
-		<span lang="ko_KR">예제</span>
-		<span lang="en_US">Examples</span>
-	</h2>
+    <h2>
+        <span lang="ko_KR">예제</span>
+        <span lang="en_US">Examples</span>
+    </h2>
 
-	<h4 class="notIndex">1. 필터 선언</h4>
-	<ul>
-		<li>N.comm 으로 호출되는 모든 요청이 정의한 필터를 통과하게 되므로 서버 요청 시 공통적으로 적용해야 할 부분을 정의 하면 됩니다.</li>
-		<li>
-			필터 인자 중 request 인자에 Ajax 요청에 대한 여러가지 유용한 정보가 있습니다. 
-			request 객체에 대한 자세한 내용은 <a href="#cmVmcjAyMDQlMjRDb21tdW5pY2F0b3IucmVxdWVzdCRodG1sJTJGbmF0dXJhbGpzJTJGcmVmciUyRnJlZnIwMjA0Lmh0bWw=">Communicator.request</a> 메뉴를 참고 바랍니다.
-		</li>
-		<li>필터를 여러개 선언 할 수 있으며 단위 필터 오브젝트의 명칭(object key)은 자유롭게 지정 하면 됩니다.</li>
-		<li>
-			단위 필터 오브젝트에 order 속성으로 우선순위를 숫자로 정의 하면 해당 순서대로 필터들이 수행 됩니다.
-			<p class="alert">필터의 수행 순서는 order 속성(숫자가 적을 수록 먼저 실행 됨)이 정의 된 필터가 실행 된 다음 order 속성이 정의 되지 않은 필터들이 실행 됩니다.</p>
-		</li>
-		<li>natural.config.js 파일의 N.context.attr("architecture").comm.filters 속성에 다음과 같은 타입의 오브젝트로 정의 하면 됩니다.</li>
-	</ul>
+    <h4 class="notIndex">1. 필터 선언</h4>
+    <ul>
+        <li>N.comm 으로 호출되는 모든 요청이 정의한 필터를 통과하게 되므로 서버 요청 시 공통적으로 적용해야 할 부분을 정의 하면 됩니다.</li>
+        <li>
+            필터 인자 중 request 인자에 Ajax 요청에 대한 여러가지 유용한 정보가 있습니다. 
+            request 객체에 대한 자세한 내용은 <a href="#cmVmcjAyMDQlMjRDb21tdW5pY2F0b3IucmVxdWVzdCRodG1sJTJGbmF0dXJhbGpzJTJGcmVmciUyRnJlZnIwMjA0Lmh0bWw=">Communicator.request</a> 메뉴를 참고 바랍니다.
+        </li>
+        <li>필터를 여러개 선언 할 수 있으며 단위 필터 오브젝트의 명칭(object key)은 자유롭게 지정 하면 됩니다.</li>
+        <li>
+            단위 필터 오브젝트에 order 속성으로 우선순위를 숫자로 정의 하면 해당 순서대로 필터들이 수행 됩니다.
+            <p class="alert">필터의 수행 순서는 order 속성(숫자가 적을 수록 먼저 실행 됨)이 정의 된 필터가 실행 된 다음 order 속성이 정의 되지 않은 필터들이 실행 됩니다.</p>
+        </li>
+        <li>natural.config.js 파일의 N.context.attr("architecture").comm.filters 속성에 다음과 같은 타입의 오브젝트로 정의 하면 됩니다.</li>
+    </ul>
 
-	<pre class="line-numbers"><code class="language-javascript">N.context.attr("architecture", {
-	"comm" : {
-		"filters" : {
-			"exFilter1" : {
-				/**
-				 * 필터 실행 순서
-				 */
-				order : 1,
-				/**
-				 * N.comm 이 초기화 되기 전 실행됨(N.cont 의 init 아님). string 으로 변환되지 않은 원형의 파라미터를 꺼내올 수 있음.
-				 */
-				beforeInit : function(obj) {
-				},
-				/**
-				 * N.comm 이 초기화 된 후 실행됨(N.cont 의 init 아님)
-				 */
-				afterInit : function(request) {
-				},
-				/**
-				 * 서버에 요청을 보내기 전 실행됨.
-				 */
-				beforeSend : function(request, xhr, settings) {
-				},
-				/**
-				 * 서버에 요청이 성공 했을 경우 실행됨.
-				 */
-				success : function(request, data, textStatus, xhr) {
-					// return data 를 하면 N.comm.submit 의 콜백의 인자로 넘어오는 data 가 리턴한 데이터로 치환 됨.
-				},
-				/**
-				 * 서버에 요청 후 서버에러가 발생 했을 경우 실행됨.
-				 */
-				error : function(request, xhr, textStatus, errorThrown) {
-				},
-				/**
-				 * 모든 요청완료 후 실행 됨.
-				 */
-				complete : function(request, xhr, textStatus) {
-				}
-			},
-			"exFilter2" : {
-				order : 2,
-				beforeInit : function(obj) {
-				},
-				afterInit : function(request) {
-				},
-				beforeSend : function(request, xhr, settings) {
-				},
-				success : function(request, data, textStatus, xhr) {
-				},
-				error : function(request, xhr, textStatus, errorThrown) {
-				},
-				complete : function(request, xhr, textStatus) {
-				}
-			}
-		}
-	}
+    <pre class="line-numbers"><code class="language-javascript">N.context.attr("architecture", {
+    "comm" : {
+        "filters" : {
+            "exFilter1" : {
+                /**
+                 * 필터 실행 순서
+                 */
+                order : 1,
+                /**
+                 * N.comm 이 초기화 되기 전 실행됨(N.cont 의 init 아님). string 으로 변환되지 않은 원형의 파라미터를 꺼내올 수 있음.
+                 */
+                beforeInit : function(obj) {
+                },
+                /**
+                 * N.comm 이 초기화 된 후 실행됨(N.cont 의 init 아님)
+                 */
+                afterInit : function(request) {
+                },
+                /**
+                 * 서버에 요청을 보내기 전 실행됨.
+                 */
+                beforeSend : function(request, xhr, settings) {
+                },
+                /**
+                 * 서버에 요청이 성공 했을 경우 실행됨.
+                 */
+                success : function(request, data, textStatus, xhr) {
+                    // return data 를 하면 N.comm.submit 의 콜백의 인자로 넘어오는 data 가 리턴한 데이터로 치환 됨.
+                },
+                /**
+                 * 서버에 요청 후 서버에러가 발생 했을 경우 실행됨.
+                 */
+                error : function(request, xhr, textStatus, errorThrown) {
+                },
+                /**
+                 * 모든 요청완료 후 실행 됨.
+                 */
+                complete : function(request, xhr, textStatus) {
+                }
+            },
+            "exFilter2" : {
+                order : 2,
+                beforeInit : function(obj) {
+                },
+                afterInit : function(request) {
+                },
+                beforeSend : function(request, xhr, settings) {
+                },
+                success : function(request, data, textStatus, xhr) {
+                },
+                error : function(request, xhr, textStatus, errorThrown) {
+                },
+                complete : function(request, xhr, textStatus) {
+                }
+            }
+        }
+    }
 });</code></pre>
 </article>
 

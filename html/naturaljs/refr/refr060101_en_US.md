@@ -9,9 +9,9 @@ When you select an element with jQuery, you must find in view or set view as con
 
 ```
 N(".pageId").cont({
-	init: function(view, request) {
-		$("selector", view);
-		view.find("selector");
-	}
+    init: function(view, request) {
+        $("selector", view);
+        view.find("selector");
+    }
 });
 ```

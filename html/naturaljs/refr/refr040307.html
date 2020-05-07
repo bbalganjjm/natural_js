@@ -1,33 +1,33 @@
 <article class="refr040307 apiDoc">
-	<h2>
-		<span lang="ko_KR">예제</span>
-		<span lang="en_US">Examples</span>
-	</h2>
+    <h2>
+        <span lang="ko_KR">예제</span>
+        <span lang="en_US">Examples</span>
+    </h2>
 
-	<h4 class="notIndex">1. Datepicker 생성</h4>
-		<pre class="line-numbers"><code class="language-markup">&lt;input id="datepicker" type="text"&gt;
-
-&lt;script type="text/javascript"&gt;
-	N("#datepicker").datepicker();
-&lt;/script&gt;</code></pre>
-
-	<h4 class="notIndex">2. Monthpicker 생성</h4>
-		<pre class="line-numbers"><code class="language-markup">&lt;input id="datepicker" type="text"&gt;
+    <h4 class="notIndex">1. Datepicker 생성</h4>
+        <pre class="line-numbers"><code class="language-markup">&lt;input id="datepicker" type="text"&gt;
 
 &lt;script type="text/javascript"&gt;
-	N("#datepicker").datepicker({
-		monthonly : true
-	});
+    N("#datepicker").datepicker();
 &lt;/script&gt;</code></pre>
 
-	<h4 class="notIndex">3. 선언형 생성 : Format 룰로 지정하여 N.form 이나 N.grid 초기화시 자동으로 Datepicker 생성</h4>
-		<pre class="line-numbers"><code class="language-markup">&lt;div id="form"&gt;
-	&lt;!-- 첫번째 인자로 "date"룰을 지정하고 세번째 인자로 "date" 나 "month"(Monthpicker가 표시 됨) 지정 --&gt;
-	&lt;input id="datepicker" type="text" data-format='[["date", 8, "date"]]'&gt;
+    <h4 class="notIndex">2. Monthpicker 생성</h4>
+        <pre class="line-numbers"><code class="language-markup">&lt;input id="datepicker" type="text"&gt;
+
+&lt;script type="text/javascript"&gt;
+    N("#datepicker").datepicker({
+        monthonly : true
+    });
+&lt;/script&gt;</code></pre>
+
+    <h4 class="notIndex">3. 선언형 생성 : Format 룰로 지정하여 N.form 이나 N.grid 초기화시 자동으로 Datepicker 생성</h4>
+        <pre class="line-numbers"><code class="language-markup">&lt;div id="form"&gt;
+    &lt;!-- 첫번째 인자로 "date"룰을 지정하고 세번째 인자로 "date" 나 "month"(Monthpicker가 표시 됨) 지정 --&gt;
+    &lt;input id="datepicker" type="text" data-format='[["date", 8, "date"]]'&gt;
 &lt;/div&gt;
 
 &lt;script type="text/javascript"&gt;
-	N({ datepicker : "20141212" }).form("#form").bind();
+    N({ datepicker : "20141212" }).form("#form").bind();
 &lt;/script&gt;</code></pre>
 </article>
 

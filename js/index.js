@@ -4,7 +4,7 @@
         docs : null,
         init : function() {
             this.mobileResponsiveView();
-        	this.setLocale();
+            this.setLocale();
             this.loadHeader();
             this.loadLefter();
             this.loadBody();
@@ -106,9 +106,9 @@
             // blackWhite : ["#000000", "#000000", "#000000", "#000000", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "", "", "", ""]
         },
         reloadCss : function() {
-        	if(!window.localStorage.themeColor || window.localStorage.themeColor === "undefined") {
-    			window.localStorage.themeColor = "green";
-    		}
+            if(!window.localStorage.themeColor || window.localStorage.themeColor === "undefined") {
+                window.localStorage.themeColor = "green";
+            }
 
             if(window.localStorage.themeColor !== "green") {
                 $("head > link[rel=stylesheet]").each(function() {
@@ -127,35 +127,35 @@
             }
         },
         setLocale : function() {
-    		N.locale(window.sessionStorage.locale !== undefined ? window.sessionStorage.locale : IndexController.getLocale().toLowerCase().indexOf("ko") > -1 ? "ko_KR" : "en_US");
-    		N("html").attr("lang", N.locale().substring(0, 2));
-    	},
+            N.locale(window.sessionStorage.locale !== undefined ? window.sessionStorage.locale : IndexController.getLocale().toLowerCase().indexOf("ko") > -1 ? "ko_KR" : "en_US");
+            N("html").attr("lang", N.locale().substring(0, 2));
+        },
         getLocale : function() {
-        	if(navigator) {
-	   			if (navigator.language) {
-	   				return navigator.language;
-	   			} else if (navigator.browserLanguage) {
-	   				return navigator.browserLanguage;
-	   			} else if (navigator.systemLanguage) {
-	   				return navigator.systemLanguage;
-	   			} else if (navigator.userLanguage) {
-	   				return navigator.userLanguage;
-	   			}
-	   		}
-	   	},
+            if(navigator) {
+                   if (navigator.language) {
+                       return navigator.language;
+                   } else if (navigator.browserLanguage) {
+                       return navigator.browserLanguage;
+                   } else if (navigator.systemLanguage) {
+                       return navigator.systemLanguage;
+                   } else if (navigator.userLanguage) {
+                       return navigator.userLanguage;
+                   }
+               }
+           },
         i18n : function(locale, view) {
-    		if(locale === undefined) {
-    			locale = N.locale();
-    		}
-    		if(locale === "ko_KR") {
-        		$("[lang='ko_KR']", view).show();
-    			$("[lang='en_US']", view).remove();
-    		} else {
-    			$("[lang='en_US']", view).show();
-    			$("[lang='ko_KR']", view).remove();
-    		}
-    	},
-    	/**
+            if(locale === undefined) {
+                locale = N.locale();
+            }
+            if(locale === "ko_KR") {
+                $("[lang='ko_KR']", view).show();
+                $("[lang='en_US']", view).remove();
+            } else {
+                $("[lang='en_US']", view).show();
+                $("[lang='ko_KR']", view).remove();
+            }
+        },
+        /**
          * Google Analytics
          */
         googleAnalytics : function() {
@@ -223,7 +223,7 @@
                         });
                     }
 
-        		}
+                }
 
             });
 

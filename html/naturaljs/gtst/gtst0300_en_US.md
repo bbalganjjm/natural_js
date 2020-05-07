@@ -78,10 +78,10 @@ Create the **/html/contents/page6.html** file and write the code as follows.
 <!-- View -->
 <article class="page6">
 
-	<div class="search-conditions">
-		<label>Name<input id="name" type="text" data-validate='[["alphabet+integer"]]'></label>
-		<label>Gender<input id="gender" type="radio"></label>
-	</div>
+    <div class="search-conditions">
+        <label>Name<input id="name" type="text" data-validate='[["alphabet+integer"]]'></label>
+        <label>Gender<input id="gender" type="radio"></label>
+    </div>
 
     <div class="buttons">
         <a id="btnAdd" href="#" data-opts='{ "color": "green" }'>New</a>
@@ -91,43 +91,43 @@ Create the **/html/contents/page6.html** file and write the code as follows.
     </div>
 
     <div class="result">
-    	<table class="grid">
-    		<colgroup>
-    			<col style="width: 50px;">
-    			<col style="width: 120px;">
-    			<col style="width: auto;">
-    			<col style="width: 90px;">
-    			<col style="width: 50px;">
-    			<col style="width: 110px;">
-    			<col style="width: 60px;">
-    		</colgroup>
-    		<thead>
-    			<tr>
-    				<th><input lang="ko_KR" id="checkAll" type="checkbox" title="Check All"></th>
-    				<th>Name</th>
-    				<th data-filter="true">Email</th>
-    				<th data-filter="true">Eye Color</th>
-    				<th data-filter="true">Age</th>
-    				<th data-filter="true">Registered</th>
-    				<th data-filter="true">Active</th>
-    			</tr>
-    		</thead>
-    		<tbody>
-    			<tr>
-    				<td style="text-align: center;"><input class="checkAllTarget" type="checkbox"></td>
-    				<td><input id="name" type="text" data-validate='[["required"]]'></td>
-    				<td><input id="email" type="text" data-validate='[["required"], ["email"]]'></td>
-    				<td style="text-align: center;">
-    					<select id="eyeColor" data-validate='[["required"]]'>
-    						<option value=""></option>
-    					</select>
-    				</td>
-    				<td><input id="age" type="text" data-validate='[["required"], ["integer"]]'></td>
-    				<td><input id="registered" type="text" data-format='[["date", 8, "date"]]' data-validate='[["required"]]'></td>
-    				<td style="text-align: center;"><input id="isActive" type="checkbox"></td>
-    			</tr>
-    		</tbody>
-    	</table>
+        <table class="grid">
+            <colgroup>
+                <col style="width: 50px;">
+                <col style="width: 120px;">
+                <col style="width: auto;">
+                <col style="width: 90px;">
+                <col style="width: 50px;">
+                <col style="width: 110px;">
+                <col style="width: 60px;">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th><input lang="ko_KR" id="checkAll" type="checkbox" title="Check All"></th>
+                    <th>Name</th>
+                    <th data-filter="true">Email</th>
+                    <th data-filter="true">Eye Color</th>
+                    <th data-filter="true">Age</th>
+                    <th data-filter="true">Registered</th>
+                    <th data-filter="true">Active</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="text-align: center;"><input class="checkAllTarget" type="checkbox"></td>
+                    <td><input id="name" type="text" data-validate='[["required"]]'></td>
+                    <td><input id="email" type="text" data-validate='[["required"], ["email"]]'></td>
+                    <td style="text-align: center;">
+                        <select id="eyeColor" data-validate='[["required"]]'>
+                            <option value=""></option>
+                        </select>
+                    </td>
+                    <td><input id="age" type="text" data-validate='[["required"], ["integer"]]'></td>
+                    <td><input id="registered" type="text" data-format='[["date", 8, "date"]]' data-validate='[["required"]]'></td>
+                    <td style="text-align: center;"><input id="isActive" type="checkbox"></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
 </article>
@@ -231,19 +231,19 @@ If the data to be bound to N.select is retrieved from the server, change it simi
 ...
 initComponents : function() {
    cont.eyeColor = N([]).select({
-		context : N("#eyeColor", cont.view),
-		key : "codeName", // Property name to be displayed as text of option tag
-		val : "codeValue" // The property name to be displayed as the value attribute of the option tag
-	});
+        context : N("#eyeColor", cont.view),
+        key : "codeName", // Property name to be displayed as text of option tag
+        val : "codeValue" // The property name to be displayed as the value attribute of the option tag
+    });
    cont.gender = N([]).select({
-		context : N("#gender", cont.view),
-		key : "codeName",
-		val : "codeValue"
-	});
+        context : N("#gender", cont.view),
+        key : "codeName",
+        val : "codeValue"
+    });
 
    N.comm("data/url.json").submit(function(data) {
-   		cont.eyeColor.bind(data["eyeColorList"]);
-   		cont.gender.bind(data["genderList"]);
+           cont.eyeColor.bind(data["eyeColorList"]);
+           cont.gender.bind(data["genderList"]);
    })
 },
 ...
@@ -259,8 +259,8 @@ initComponents : function() {
    ...
 
    cont.form = N([]).form({
-		context : N(".search-conditions", cont.view)
-	}).add();
+        context : N(".search-conditions", cont.view)
+    }).add();
 },
 ...
 ```
@@ -269,9 +269,9 @@ I created an empty data by applying an N.form component to the **.search-conditi
 
 ```
 [{
-	"name" : "",
-	"gender" : "",
-	"rowStatus" : "insert"
+    "name" : "",
+    "gender" : "",
+    "rowStatus" : "insert"
 }]
 ```
 
@@ -279,7 +279,7 @@ This generated data is synchronized with the internal dataset whenever the value
 
 ```
 N(cont.form.data()).comm("data.json").submit(function(data) {
-	N.log(data);
+    N.log(data);
 });
 ```
 
@@ -290,15 +290,15 @@ To apply the N.grid component to the table element in the grid area(.grid), add 
 ```
 ...
 initComponents : function() {
-	...
-	cont.grid = N([]).grid({
-		context : N(".grid", cont.view),
-		height : 300,
-		resizable : true,
-		sortable : true,
-		checkAll : "#checkAll",
-		checkAllTarget : ".checkAllTarget"
-	}).bind();
+    ...
+    cont.grid = N([]).grid({
+        context : N(".grid", cont.view),
+        height : 300,
+        resizable : true,
+        sortable : true,
+        checkAll : "#checkAll",
+        checkAllTarget : ".checkAllTarget"
+    }).bind();
 },
 ...
 ```
@@ -315,18 +315,18 @@ Event binding uses the functionality provided by jQuery.
 
 ```
 bindEvents : function() {
-	N("#btnSearch", cont.view).click(function(e) {
-	    e.preventDefault();
-	    if(cont.form.validate()) {
-	    	N(cont.form.data(true)).comm({
-	    	    url : "data.json",
-	    	    type : "GET"
-	    	}).submit(function(data) {
-	     		// Data bind by N.grid
-	     		cont.grid.bind(data);
-	     	});
-	    }
-	}).button();
+    N("#btnSearch", cont.view).click(function(e) {
+        e.preventDefault();
+        if(cont.form.validate()) {
+            N(cont.form.data(true)).comm({
+                url : "data.json",
+                type : "GET"
+            }).submit(function(data) {
+                 // Data bind by N.grid
+                 cont.grid.bind(data);
+             });
+        }
+    }).button();
 }
 ```
 
@@ -343,11 +343,11 @@ and, at the end of the statement, the .button() method was executed to apply the
 
 ```
 bindEvents : function() {
-	...
-	N("#btnAdd", cont.view).click(function(e) {
-		e.preventDefault();
-		cont.grid.add();
-	}).button();
+    ...
+    N("#btnAdd", cont.view).click(function(e) {
+        e.preventDefault();
+        cont.grid.add();
+    }).button();
 }
 ```
 
@@ -357,22 +357,22 @@ If the add() method is called on an instance of the N.grid component, a row is a
 
 ```
 bindEvents : function() {
-	...
-	N("#btnDelete", cont.view).click(function(e) {
-		e.preventDefault();
-		var checkedIndexs = cont.grid.check();
-		if(checkedIndexs.length > 0) {
-		    N(window).alert({
-				msg : "Are you sure you want to delete?<br/>It will not be saved in DBMS until you press the Save button.",
-				confirm : true,
-				onOk : function() {
-					cont.grid.remove(checkedIndexs);
-				}
-			}).show();
-		} else {
-			N(window).alert("No rows selected.").show();
-		}
-	}).button();
+    ...
+    N("#btnDelete", cont.view).click(function(e) {
+        e.preventDefault();
+        var checkedIndexs = cont.grid.check();
+        if(checkedIndexs.length > 0) {
+            N(window).alert({
+                msg : "Are you sure you want to delete?<br/>It will not be saved in DBMS until you press the Save button.",
+                confirm : true,
+                onOk : function() {
+                    cont.grid.remove(checkedIndexs);
+                }
+            }).show();
+        } else {
+            N(window).alert("No rows selected.").show();
+        }
+    }).button();
 }
 ```
 When the cont.grid.check() method is called, the checkbox of the first column of the grid returns the checked row index, and passing the returned index as an argument of the cont.grid.remove() method, the selected row is deleted from the grid.
@@ -381,32 +381,32 @@ When the cont.grid.check() method is called, the checkbox of the first column of
 
 ```
 bindEvents : function() {
-	...
-	N("#btnSave", cont.view).click(function(e) {
-		e.preventDefault();
+    ...
+    N("#btnSave", cont.view).click(function(e) {
+        e.preventDefault();
 
-		if(cont.grid.data("modified").length === 0) {
-			N.notify.add("No data has been changed.");
-			return false;
-		}
+        if(cont.grid.data("modified").length === 0) {
+            N.notify.add("No data has been changed.");
+            return false;
+        }
 
-		if(cont.grid.validate()) {
-			N(window).alert({
-				msg : "Do you want to save?",
-				confirm : true,
-				onOk : function() {
-					N(cont.grid.data("modified")).comm({
-					   type : "GET",
-						dataIsArray : true,
-						url : "data.json"
-					}).submit(function(data) {
-						N.notify.add("Save completed.");
-						N("#btnSearch", cont.view).click();
-					});
-				}
-			}).show();
-		}
-	}).button();
+        if(cont.grid.validate()) {
+            N(window).alert({
+                msg : "Do you want to save?",
+                confirm : true,
+                onOk : function() {
+                    N(cont.grid.data("modified")).comm({
+                       type : "GET",
+                        dataIsArray : true,
+                        url : "data.json"
+                    }).submit(function(data) {
+                        N.notify.add("Save completed.");
+                        N("#btnSearch", cont.view).click();
+                    });
+                }
+            }).show();
+        }
+    }).button();
 }
 ```
 
@@ -420,8 +420,8 @@ The execution logic of the save event is as follows.
 ```
 ...
 N(window).alert({
-	msg : "Do you want to save?",
-	confirm : true,
+    msg : "Do you want to save?",
+    confirm : true,
 ...
 ```
 

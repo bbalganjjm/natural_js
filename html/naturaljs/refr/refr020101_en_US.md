@@ -13,15 +13,15 @@ N.cont should be declared just below the View area of ​​the page as follows:
 
 ```
 <div id="view">
-	<p>View area</p>
+    <p>View area</p>
 </div>
 
 <script type="text/javascript">
-	N("#view").cont({ //  Controller object
-		init : function(view, request) {
-			// This area runs first after the page loads.
-		}
-	});
+    N("#view").cont({ //  Controller object
+        init : function(view, request) {
+            // This area runs first after the page loads.
+        }
+    });
 </script>
 ```
 

@@ -8,9 +8,9 @@
 jQuery 로 요소를 선택할 때는 반드시 view 에서 find 하거나 view를 context 로 지정 해 줘야 합니다.
 ```
 N(".pageId").cont({
-	init: function(view, request) {
-		$("selector", view);
-		view.find("selector");
-	}
+    init: function(view, request) {
+        $("selector", view);
+        view.find("selector");
+    }
 });
 ```

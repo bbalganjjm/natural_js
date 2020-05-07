@@ -138,18 +138,18 @@
                 <p lang="ko_KR">사용자 정의 유효성 검증 룰</p>
                 <p lang="en_US">Custom validation rules</p>
                 <pre lang="ko_KR"><code class="language-javascript">"userRules" : {
-	/*
-	 * 함수 명이 룰 명이 됨.
-	 * 검증 실패 메시지는 아래 N.context.attr("data").validator.message 객체에 언어별로 함수명과 같은 프로퍼티명으로 정의.
-	 *
-	 * str : 유효성 검증 대상 문자열
-	 * args : 유효성 검증 옵션
-	 *
-	 * return : 유효성 검증에 성공하면 true를, 실패하면 false를 반환 합니다.
+    /*
+     * 함수 명이 룰 명이 됨.
+     * 검증 실패 메시지는 아래 N.context.attr("data").validator.message 객체에 언어별로 함수명과 같은 프로퍼티명으로 정의.
+     *
+     * str : 유효성 검증 대상 문자열
+     * args : 유효성 검증 옵션
+     *
+     * return : 유효성 검증에 성공하면 true를, 실패하면 false를 반환 합니다.
      */
-	"userRule" : function(str, args) {
-	    return true;
-	}
+    "userRule" : function(str, args) {
+        return true;
+    }
 }</code></pre>
                 <pre lang="en_US"><code class="language-javascript">"userRules" : {
     /*

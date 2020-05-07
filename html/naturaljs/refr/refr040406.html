@@ -1,94 +1,94 @@
 <article class="refr040406 apiDoc">
-	<h2>
-		<span lang="ko_KR">예제</span>
-		<span lang="en_US">Examples</span>
-	</h2>
+    <h2>
+        <span lang="ko_KR">예제</span>
+        <span lang="en_US">Examples</span>
+    </h2>
 
-	<h4 class="notIndex">1. 지정한 영역(.popupArea)을 팝업으로 띄우기</h4>
-	<pre class="line-numbers"><code class="language-markup">&lt;div title="Popup Example" class="popupArea" style="height: 200px;border: 3px dotted #4CAF50;"&gt;이 블록이 팝업으로 보이나요?&lt;/div&gt;
+    <h4 class="notIndex">1. 지정한 영역(.popupArea)을 팝업으로 띄우기</h4>
+    <pre class="line-numbers"><code class="language-markup">&lt;div title="Popup Example" class="popupArea" style="height: 200px;border: 3px dotted #4CAF50;"&gt;이 블록이 팝업으로 보이나요?&lt;/div&gt;
 
 &lt;script type="text/javascript"&gt;
-   	N(".popupArea").popup().open();
+       N(".popupArea").popup().open();
 &lt;/script&gt;</code></pre>
 
-	<h4 class="notIndex">2. 다른 (블록)페이지를 팝업으로 띄우기</h4>
-	<pre class="line-numbers"><code class="language-markup">&lt;script type="text/javascript"&gt;
-	var popup = N().popup("html/indx/header.html");
-	popup.open();
+    <h4 class="notIndex">2. 다른 (블록)페이지를 팝업으로 띄우기</h4>
+    <pre class="line-numbers"><code class="language-markup">&lt;script type="text/javascript"&gt;
+    var popup = N().popup("html/indx/header.html");
+    popup.open();
 &lt;/script&gt;</code></pre>
-	<h4 class="notIndex">3. 다른 (블록)페이지를 드래그 가능한 팝업으로 띄우기</h4>
-	<pre class="line-numbers"><code class="language-markup">&lt;script type="text/javascript"&gt;
-   	var popup = N().popup({
-   		url: "html/indx/header.html",
-   		title: "Global Navigation Bar",
-   		width: 800,
-   		draggable: true
-   	});
-   	popup.open();
-&lt;/script&gt;</code></pre>
-
-	<h4 class="notIndex">4. 다른 (블록)페이지를 팝업으로 띄우기(상태가 유지 되지 않고 매번 팝업을 다시 불러옴)</h4>
-	<pre class="line-numbers"><code class="language-markup">&lt;script type="text/javascript"&gt;
-   	N().popup({
-   		url: "html/indx/header.html",
-   		title: "Global Navigation Bar",
-   		width: 800,
-   		closeMode: "remove" // "hide" 는 팝업의 상태를 유지 하고 "remove" 는 팝업을 닫을 때 마다 팝업 요소를 제거 함.
-   	}).open();
+    <h4 class="notIndex">3. 다른 (블록)페이지를 드래그 가능한 팝업으로 띄우기</h4>
+    <pre class="line-numbers"><code class="language-markup">&lt;script type="text/javascript"&gt;
+       var popup = N().popup({
+           url: "html/indx/header.html",
+           title: "Global Navigation Bar",
+           width: 800,
+           draggable: true
+       });
+       popup.open();
 &lt;/script&gt;</code></pre>
 
-	<h4 class="notIndex">5. 팝업에 데이터 전달하고 팝업으로부터 데이터 받기</h4>
-	<p>5.1. 팝업페이지(popup.html)</p>
-	<pre class="line-numbers"><code class="language-markup">&lt;!-- Style --&gt;
+    <h4 class="notIndex">4. 다른 (블록)페이지를 팝업으로 띄우기(상태가 유지 되지 않고 매번 팝업을 다시 불러옴)</h4>
+    <pre class="line-numbers"><code class="language-markup">&lt;script type="text/javascript"&gt;
+       N().popup({
+           url: "html/indx/header.html",
+           title: "Global Navigation Bar",
+           width: 800,
+           closeMode: "remove" // "hide" 는 팝업의 상태를 유지 하고 "remove" 는 팝업을 닫을 때 마다 팝업 요소를 제거 함.
+       }).open();
+&lt;/script&gt;</code></pre>
+
+    <h4 class="notIndex">5. 팝업에 데이터 전달하고 팝업으로부터 데이터 받기</h4>
+    <p>5.1. 팝업페이지(popup.html)</p>
+    <pre class="line-numbers"><code class="language-markup">&lt;!-- Style --&gt;
 &lt;style&gt;
-	.POPUP01 #result { width: 400px; height: 300px; border: 1px solid #4CAF50; }
+    .POPUP01 #result { width: 400px; height: 300px; border: 1px solid #4CAF50; }
 &lt;/style&gt;
 
 &lt;!-- View --&gt;
 &lt;article class="POPUP01" title="onOpen Example"&gt;
-	&lt;p id="result"&gt;&lt;/p&gt;
-	&lt;button id="close"&gt;닫기&lt;/button&gt;
+    &lt;p id="result"&gt;&lt;/p&gt;
+    &lt;button id="close"&gt;닫기&lt;/button&gt;
 &lt;/article&gt;
 
 &lt;!-- Controller --&gt;
 &lt;script type="text/javascript"&gt;
 N(".POPUP01").cont({
     init : function(view, request) {
-    	var caller = this.caller; // caller는 현제 팝업페이지를 열어준 N.popup 인스턴스
-    	N("#close", this.view).click(function(onCloseData) { // 닫기버튼에 이벤트 바인드
-    		caller.close("Hello~ parent's Opener"); // close 함수의 첫번째 인자로 onCloseData 데이터 전달
-    	});
+        var caller = this.caller; // caller는 현제 팝업페이지를 열어준 N.popup 인스턴스
+        N("#close", this.view).click(function(onCloseData) { // 닫기버튼에 이벤트 바인드
+            caller.close("Hello~ parent's Opener"); // close 함수의 첫번째 인자로 onCloseData 데이터 전달
+        });
     },
     // 팝업이 열릴때마다 실행될 함수
     onOpenFunc : function(onOpenData) {
-    	N("#result", this.view).text(onOpenData);
+        N("#result", this.view).text(onOpenData);
     }
 });
 &lt;/script&gt;</code></pre>
 
-	<p>5.2. 부모페이지(parent.html)</p>
-	<pre class="line-numbers"><code class="language-markup">&lt;!-- Style --&gt;
+    <p>5.2. 부모페이지(parent.html)</p>
+    <pre class="line-numbers"><code class="language-markup">&lt;!-- Style --&gt;
 &lt;style&gt;
-	.POPUP01 #result { width: 400px; height: 300px; border: 1px solid #4CAF50; }
+    .POPUP01 #result { width: 400px; height: 300px; border: 1px solid #4CAF50; }
 &lt;/style&gt;
 
 &lt;!-- View --&gt;
 &lt;article class="POPUP02" title="onOpen Example"&gt;
-	&lt;p id="result"&gt;&lt;/p&gt;
+    &lt;p id="result"&gt;&lt;/p&gt;
 &lt;/article&gt;
 
 &lt;!-- Controller --&gt;
 &lt;script type="text/javascript"&gt;
 N(".POPUP02").cont({
     init : function(view, request) {
-	   	var popup = N().popup({
-	   		url: "./popup.html",
-	   		onOpen: "onOpenFunc", // 팝업이 열릴때마다 실행될 함수명
-	   		onClose: function(onCloseData) { // 팝업이 닫힐때마다 실행 될 onClose 이벤트 핸들러
-	   			N("#result", this.view).text(onCloseData);
-	   		}
-	   	});
-	   	popup.open("Hello~ popup's onOpen!"); // open 함수의 첫번째 인자로 onOpenData 데이터 전달
+           var popup = N().popup({
+               url: "./popup.html",
+               onOpen: "onOpenFunc", // 팝업이 열릴때마다 실행될 함수명
+               onClose: function(onCloseData) { // 팝업이 닫힐때마다 실행 될 onClose 이벤트 핸들러
+                   N("#result", this.view).text(onCloseData);
+               }
+           });
+           popup.open("Hello~ popup's onOpen!"); // open 함수의 첫번째 인자로 onOpenData 데이터 전달
     }
 });
 &lt;/script&gt;</code></pre>

@@ -43,15 +43,15 @@ Open the natural.config.js file that is a configuration file of Natural-JS.
 ```
 /* Natural-ARCHITECTURE Config */
 N.context.attr("architecture", {
-	"page" : {
-		"context" : "#contents"
-	},
-	...
+    "page" : {
+        "context" : "#contents"
+    },
+    ...
 /* Natural-UI Config */
 N.context.attr("ui", {
-	"alert" : {
-		"container" : "#contents"
-	...
+    "alert" : {
+        "container" : "#contents"
+    ...
 ```
 
 You will see the syntax of above look like JSON format. you might known what is the JSON. that is very easy. if you don't know, refer to the following URL
@@ -77,13 +77,13 @@ Option values ​​not specified in the configuration file (natural.config.js) 
 
 ```
 N.context.attr("ui", {
-	...
-	"grid" : {
-		...
-		"height" : 300,
-		...
-	}
-	...
+    ...
+    "grid" : {
+        ...
+        "height" : 300,
+        ...
+    }
+    ...
 ```
 
 You have finished configuring your execution environment. Now let's write some sample code.
@@ -99,18 +99,18 @@ Natural-JS has a simple source code composition rule to separate development are
 ```
 <!-- View -->
 <article id="block01">
-	<div id="result">
-	</div>
+    <div id="result">
+    </div>
 </article>
 
 <script type="text/javascript">
 N(".block01").cont({ // Controller Object
-	init : function(view, request) {
-    	N.comm("data.json").submit(function(data) {
-			// data is received data from the server
-			N("#result", view).text(JSON.stringify(data));
-		});
-	}
+    init : function(view, request) {
+        N.comm("data.json").submit(function(data) {
+            // data is received data from the server
+            N("#result", view).text(JSON.stringify(data));
+        });
+    }
 });
 </script>
 ```
@@ -222,15 +222,15 @@ Save the following code as **index.html** file.
 <script type="text/javascript" src="js/natural_js/natural.config.js"></script>
 
 <script type="text/javascript">
-	$(document).ready(function() {
-		N(N.context.attr("architecture").page.context).comm("block01.html").submit()
-	});
+    $(document).ready(function() {
+        N(N.context.attr("architecture").page.context).comm("block01.html").submit()
+    });
 </script>
 
 </head>
 <body>
-	<!-- Page Context(N.context.attr("architecture").page.context) elelemt. -->
-	<div id="contents"></div>
+    <!-- Page Context(N.context.attr("architecture").page.context) elelemt. -->
+    <div id="contents"></div>
 </body>
 </html>
 ```

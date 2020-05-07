@@ -1,158 +1,158 @@
 <article class="refr020204 apiDoc">
-	<h2>
-		<span lang="ko_KR">예제</span>
-		<span lang="en_US">Examples</span>
-	</h2>
+    <h2>
+        <span lang="ko_KR">예제</span>
+        <span lang="en_US">Examples</span>
+    </h2>
 
-	<h4 class="notIndex">1. AOP 선언</h4>
-	<ul>
-		<li>natural.config.js 파일의 N.context.attr("architecture").cont 속성에 다음과 같은 타입의 오브젝트로 정의 하면 됩니다.</li>
-	</ul>
+    <h4 class="notIndex">1. AOP 선언</h4>
+    <ul>
+        <li>natural.config.js 파일의 N.context.attr("architecture").cont 속성에 다음과 같은 타입의 오브젝트로 정의 하면 됩니다.</li>
+    </ul>
 
-	<pre class="line-numbers"><code class="language-javascript">N.context.attr("architecture", {
-	...
-	"cont" : {
-		/** advisor에서 참조할 pointcut을 정의 합니다.
-		 * pointcut은 반드시 fn 속성에 param, cont, fnChain 인자를 가진 함수로 정의 해야 합니다.
-		 * 함수 수행 결과(boolean)는 advice의 적용 여부를 판단하는데 사용 됩니다.
-		 */
-		"pointcuts" : {
-			/** pointcut 객체는 유일한 속성명으로 정의 합니다. */
-			"regexp" : {
-				/**
-				 * 정규표현식으로 평가하는 사용자 포인트 컷(기본으로 내장 포인트컷으로 삭제 해도 됩니다)
-				 * param : 정규표현식 문자열 혹은 RegExp 객체,
-				 * cont : 컨트롤러 객체
-				 * fnChain : 컨트롤러에 정의된 함수체인(뷰의selector:functionName.functionName...)(Built-in 함수를 제외한 사용자가 정의한 함수만 대상으로 합니다)
-				 */
-				"fn" : function(param, cont, fnChain){
-					var regexp = param instanceof RegExp ? param : new RegExp(param);
-					return regexp.test(fnChain);
-				}
-			},
-			"errorPointcut" : {
-				"fn" : function(param, cont, fnChain){
-					// 무조건 허용
-					return true;
-				}
-			}
-		},
-		/** 컨트롤러(N.cont)의 함수에 적용하고자 하는 기능을 정의 합니다. */
-		"advisors" : [{
-			/**
-			 * advisor가 적용될 pointcut을 정의 합니다.
-			 * "pointcut" : {
-			 *     "type" : "regexp"
-			 *     "param" : "something"
-			 * }
-			 * 위의 경우 pointcuts에서 regexp pointcut에 param 속성에 정의된 객체를 파라미터로 전달 합니다.
-			 * "pointcut" : "someregexp"
-			 * 위와 같이 pointcut의 값이 객체가 아닌 경우 "regexp" pointcut을 기본값으로 사용 합니다.
-			 */
-			"pointcut" : "^before.*",
-			/**
-			 * adviecType 은 아래와 같습니다.
-			 * before : 원본 함수를 실행하기 전에 실행 됩니다.
-			 * after : 원본 함수가 실행 된 후 실행 됩니다. 원본 함수의 반환값이 함께 전달 됩니다.
-			 * error : 원본 함수에서 예외 발생 시 실행 됩니다.
-			 * around : 원본 함수를 실행할 수 있는 joinPoint가 파라미터로 전달 됩니다.
-			 * 각 adviecType의 사용 방법은 아래의 예제들을 참고 바랍니다.
-			 */
-			"adviceType" : "before",
-			"fn" : function(cont, fnChain, args){ /* cont : 컨트롤러, fnChain : 함수체인, args : 인자 */
-				console.log("call me before %s", fnChain);
-			}
-		}, {
-			"pointcut" : "^after.*",
-			"adviceType" : "after",
-			"fn" : function(cont, fnChain, args, result){ /* cont : 컨트롤러, fnChain : 함수체인, args : 인자, result : 반환값 */
-				console.log("call me after %s", fnChain);
-				console.log("reuslt", result);
-			}
-		}, {
-			"pointcut" : "^around.*",
-			"adviceType" : "around",
-			"fn" : function(cont, fnChain, args, joinPoint){ /* cont : 컨트롤러, fnChain : 함수체인, args : 인자, joinPoint : 원본 함수 실행 객체 */
-				console.log("call me around %s", fnChain);
-				var result = joinPoint.proceed();
-				console.log("result ", result);
-				return result;
-			}
-		}, {
-			"pointcut" : {
-				"type" : "errorPointcut",
-				"param" : ""
-			},
-			"adviceType" : "error",
-			"fn" : function(cont, fnChain, args, result, e) { /* cont : 컨트롤러, fnChain : 함수체인, args : 인자, e : errorThrown 객체 */
-				console.log("call me error %s", fnChain);
-			}
-		}]
-	},
-	...
+    <pre class="line-numbers"><code class="language-javascript">N.context.attr("architecture", {
+    ...
+    "cont" : {
+        /** advisor에서 참조할 pointcut을 정의 합니다.
+         * pointcut은 반드시 fn 속성에 param, cont, fnChain 인자를 가진 함수로 정의 해야 합니다.
+         * 함수 수행 결과(boolean)는 advice의 적용 여부를 판단하는데 사용 됩니다.
+         */
+        "pointcuts" : {
+            /** pointcut 객체는 유일한 속성명으로 정의 합니다. */
+            "regexp" : {
+                /**
+                 * 정규표현식으로 평가하는 사용자 포인트 컷(기본으로 내장 포인트컷으로 삭제 해도 됩니다)
+                 * param : 정규표현식 문자열 혹은 RegExp 객체,
+                 * cont : 컨트롤러 객체
+                 * fnChain : 컨트롤러에 정의된 함수체인(뷰의selector:functionName.functionName...)(Built-in 함수를 제외한 사용자가 정의한 함수만 대상으로 합니다)
+                 */
+                "fn" : function(param, cont, fnChain){
+                    var regexp = param instanceof RegExp ? param : new RegExp(param);
+                    return regexp.test(fnChain);
+                }
+            },
+            "errorPointcut" : {
+                "fn" : function(param, cont, fnChain){
+                    // 무조건 허용
+                    return true;
+                }
+            }
+        },
+        /** 컨트롤러(N.cont)의 함수에 적용하고자 하는 기능을 정의 합니다. */
+        "advisors" : [{
+            /**
+             * advisor가 적용될 pointcut을 정의 합니다.
+             * "pointcut" : {
+             *     "type" : "regexp"
+             *     "param" : "something"
+             * }
+             * 위의 경우 pointcuts에서 regexp pointcut에 param 속성에 정의된 객체를 파라미터로 전달 합니다.
+             * "pointcut" : "someregexp"
+             * 위와 같이 pointcut의 값이 객체가 아닌 경우 "regexp" pointcut을 기본값으로 사용 합니다.
+             */
+            "pointcut" : "^before.*",
+            /**
+             * adviecType 은 아래와 같습니다.
+             * before : 원본 함수를 실행하기 전에 실행 됩니다.
+             * after : 원본 함수가 실행 된 후 실행 됩니다. 원본 함수의 반환값이 함께 전달 됩니다.
+             * error : 원본 함수에서 예외 발생 시 실행 됩니다.
+             * around : 원본 함수를 실행할 수 있는 joinPoint가 파라미터로 전달 됩니다.
+             * 각 adviecType의 사용 방법은 아래의 예제들을 참고 바랍니다.
+             */
+            "adviceType" : "before",
+            "fn" : function(cont, fnChain, args){ /* cont : 컨트롤러, fnChain : 함수체인, args : 인자 */
+                console.log("call me before %s", fnChain);
+            }
+        }, {
+            "pointcut" : "^after.*",
+            "adviceType" : "after",
+            "fn" : function(cont, fnChain, args, result){ /* cont : 컨트롤러, fnChain : 함수체인, args : 인자, result : 반환값 */
+                console.log("call me after %s", fnChain);
+                console.log("reuslt", result);
+            }
+        }, {
+            "pointcut" : "^around.*",
+            "adviceType" : "around",
+            "fn" : function(cont, fnChain, args, joinPoint){ /* cont : 컨트롤러, fnChain : 함수체인, args : 인자, joinPoint : 원본 함수 실행 객체 */
+                console.log("call me around %s", fnChain);
+                var result = joinPoint.proceed();
+                console.log("result ", result);
+                return result;
+            }
+        }, {
+            "pointcut" : {
+                "type" : "errorPointcut",
+                "param" : ""
+            },
+            "adviceType" : "error",
+            "fn" : function(cont, fnChain, args, result, e) { /* cont : 컨트롤러, fnChain : 함수체인, args : 인자, e : errorThrown 객체 */
+                console.log("call me error %s", fnChain);
+            }
+        }]
+    },
+    ...
 }</code></pre>
 
-	<h4 class="notIndex">2. 모든 페이지에 공통코드를 불러와 N.select 컴포넌트로 요소들에 바인드 한 후 컨트롤러의 init 을 지연 실행 하기</h4>
-	<pre class="line-numbers"><code class="language-javascript">N.context.attr("architecture", {
-	...
-	"cont" : {
-		"advisors" : [{
-			"pointcut" : "^init$",
-			"adviceType" : "around",
-			"fn" : function(cont, fnChain, args, joinPoint){
-				// 1. 공통코드 데이터 가져오기
-				N.comm("getCommCodeList.json").submit(function(data) {
-					// 2. N.select 로 공통코드 바인드
-					N(data).select({
-						context : N("#select", cont.view)
-					}).bind()
-					
-					// 3. init 함수 실행.
-					joinPoint.proceed();
-				});
-			}
-		}]
-	},
-	...
+    <h4 class="notIndex">2. 모든 페이지에 공통코드를 불러와 N.select 컴포넌트로 요소들에 바인드 한 후 컨트롤러의 init 을 지연 실행 하기</h4>
+    <pre class="line-numbers"><code class="language-javascript">N.context.attr("architecture", {
+    ...
+    "cont" : {
+        "advisors" : [{
+            "pointcut" : "^init$",
+            "adviceType" : "around",
+            "fn" : function(cont, fnChain, args, joinPoint){
+                // 1. 공통코드 데이터 가져오기
+                N.comm("getCommCodeList.json").submit(function(data) {
+                    // 2. N.select 로 공통코드 바인드
+                    N(data).select({
+                        context : N("#select", cont.view)
+                    }).bind()
+                    
+                    // 3. init 함수 실행.
+                    joinPoint.proceed();
+                });
+            }
+        }]
+    },
+    ...
 }</code></pre>
 
-	<h4 class="notIndex">3. 불러온 페이지의 버튼, 폼, 그리드, 리스트 컴포넌트들을 자동으로 초기화(적용) 해 준 후 init 을 실행 하기.</h4>
-	<pre class="line-numbers"><code class="language-javascript">N.context.attr("architecture", {
-	...
-	"cont" : {
-		"advisors" : [{
-			"pointcut" : "^init$",
-			"adviceType" : "around",
-			"fn" : function(cont, fnChain, args, joinPoint){
-				// 1. 버튼 컴포넌트 초기화
-				N(".button").button();				
-				
-				// 2. 폼 컴포넌트 초기화
-				N(".form", cont.view).each(function() {
-					N([]).form(this);				
-				})
-				
-				// 3. 리스트 컴포넌트 초기화
-				N(".list", cont.view).each(function() {
-					N([]).list(this);				
-				})
-				
-				// 4. 그리드 컴포넌트 초기화
-				N(".grid", cont.view).each(function() {
-					N([]).grid(this);				
-				})
-					
-				// 5. init 함수 실행.
-				joinPoint.proceed();
-				
-				// 6. 이후에 각 컴포넌트의 인스턴스는 context 에서 꺼내와서 사용.
-				// Natural-CORE 의 instance 메서드 참고.
-				var grid01 = N("#grid01", cont.view).instance("grid"); 
-				grid01.bind([]);
-			}
-		}]
-	},
-	...
+    <h4 class="notIndex">3. 불러온 페이지의 버튼, 폼, 그리드, 리스트 컴포넌트들을 자동으로 초기화(적용) 해 준 후 init 을 실행 하기.</h4>
+    <pre class="line-numbers"><code class="language-javascript">N.context.attr("architecture", {
+    ...
+    "cont" : {
+        "advisors" : [{
+            "pointcut" : "^init$",
+            "adviceType" : "around",
+            "fn" : function(cont, fnChain, args, joinPoint){
+                // 1. 버튼 컴포넌트 초기화
+                N(".button").button();                
+                
+                // 2. 폼 컴포넌트 초기화
+                N(".form", cont.view).each(function() {
+                    N([]).form(this);                
+                })
+                
+                // 3. 리스트 컴포넌트 초기화
+                N(".list", cont.view).each(function() {
+                    N([]).list(this);                
+                })
+                
+                // 4. 그리드 컴포넌트 초기화
+                N(".grid", cont.view).each(function() {
+                    N([]).grid(this);                
+                })
+                    
+                // 5. init 함수 실행.
+                joinPoint.proceed();
+                
+                // 6. 이후에 각 컴포넌트의 인스턴스는 context 에서 꺼내와서 사용.
+                // Natural-CORE 의 instance 메서드 참고.
+                var grid01 = N("#grid01", cont.view).instance("grid"); 
+                grid01.bind([]);
+            }
+        }]
+    },
+    ...
 }</code></pre>
 </article>
 

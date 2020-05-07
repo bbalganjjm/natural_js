@@ -1,169 +1,169 @@
 <article class="refr020402 apiDoc">
-	<h2 id="refr/refr0103/refr020402/communicator.request/defaultoptions">
-		<span lang="ko_KR">기본옵션</span>
-		<span lang="en_US">Default Options</span>
-	</h2>
-	<table class="api form">
-		<tr>
-			<th>Name</th>
-			<th>Type</th>
-			<th>Default</th>
-			<th>Required</th>
-			<th style="width: auto;">Description</th>
-		</tr>
-		<tr>
-			<td>contentType</td>
-			<td>string</td>
-			<td>application/json; charset=utf-8</td>
-			<td style="text-align: center;">O</td>
-			<td>
-				<p>Ajax request 에 대한 contentType을 지정 합니다</p>
-				<p class="alert">
-					contentType 은 jQuery.ajax 함수의 옵션이 그대로 적용 됩니다.
-					<a class="link" target="blank_" href="http://api.jquery.com/jquery.ajax/">jQuery.ajax</a>
-					메뉴얼의 settings 부분에서 contentType 속성을 참고 하세요.
-				</p>
-			</td>
-		</tr>
-		<tr>
-			<td>cache</td>
-			<td>boolean</td>
-			<td>false</td>
-			<td style="text-align: center;">X</td>
-			<td>
-				<p>브라우저 캐시 적용 여부</p>
-				<p class="alert">
-					cache 는 jQuery.ajax 함수의 옵션이 그대로 적용 됩니다.
-					<a class="link" target="blank_" href="http://api.jquery.com/jquery.ajax/">jQuery.ajax</a>
-					메뉴얼의 settings 부분에서 cache 속성을 참고 하세요.
-				</p>
-			</td>
-		</tr>
-		<tr>
-			<td>async</td>
-			<td>boolean</td>
-			<td>true</td>
-			<td style="text-align: center;">X</td>
-			<td>
-				<p>Ajax 요청을 비동기 방식으로 처리할지 동기방식으로 처리할지 지정 합니다</p>
-				<p class="alert">
-					async 는 jQuery.ajax 함수의 옵션이 그대로 적용 됩니다.
-					<a class="link" target="blank_" href="http://api.jquery.com/jquery.ajax/">jQuery.ajax</a>
-					메뉴얼의 settings 부분에서 async 속성을 참고 하세요.
-				</p>
-			</td>
-		</tr>
-		<tr>
-			<td>type</td>
-			<td>string</td>
-			<td>POST</td>
-			<td style="text-align: center;">X</td>
-			<td>
-				<p>Ajax 요청에 대한 HTTP Method를 지정 합니다</p>
-				<p class="alert">
-					type 은 jQuery.ajax 함수의 옵션이 그대로 적용 됩니다.
-					<a class="link" target="blank_" href="http://api.jquery.com/jquery.ajax/">jQuery.ajax</a>
-					메뉴얼의 settings 부분에서 type 속성을 참고 하세요.
-				</p>
-			</td>
-		</tr>
-		<tr>
-			<td>data</td>
-			<td>array[json object]<a href="#jsonarray"><sup>1)</sup></a>|json object</td>
-			<td>null</td>
-			<td style="text-align: center;">X</td>
-			<td>
-				<p>요청 파라미터를 지정 합니다.</p>
-				<p class="alert">
-					data 는 jQuery.ajax 함수의 옵션이 그대로 적용 됩니다.
-					<a class="link" target="blank_" href="http://api.jquery.com/jquery.ajax/">jQuery.ajax</a>
-					메뉴얼의 settings 부분에서 data 속성을 참고 하세요.
-				</p>
-			</td>
-		</tr>
-		<tr>
-			<td>dataIsArray</td>
-			<td>boolean</td>
-			<td>false</td>
-			<td style="text-align: center;">X</td>
-			<td>
-				요청 파라미터의 객체 타입이 array 일 경우 array 자체를 서버에 보내고 싶을때 true로 설정
-				<p class="alert">
-					N(params).comm(url).submit() 와 같이 사용할 때 params의 객체타입이 array 일때 dataIsArray 옵션이 false 로 지정되어 있다면 array 의 첫번째 오브젝트만 전달 됩니다.
-					해당 문제는 N(params) 구문에 의해 params를 jquery object로 변환되는 과정에서 $([{}]) 와 같이 하나 $({}) 와 같이 하나 get 했을때 [{}] 로만 반환이 되어서 생기는 문제 입니다.
-					불편하더라도 array 를 넘길때는 dataIsArray 를 true로 설정하거나 object 에 array를 담아서 사용 바랍니다.
-				</p>
-				<p class="alert">
-					N.comm(params, url).submit() 와 같이 사용하면 dataIsArray 옵션을 true로 지정하지 않아도 params를 jquery object화 하지않기 때문에 params의 객체타입이 array 더라도 그대로 전송 됩니다.
-				</p>
-				<p class="alert">Natural-ARCHITECTURE v0.8.1.4 버전 이후부터 적용</p>
-			</td>
-		</tr>
-		<tr>
-			<td>dataType</td>
-			<td>string</td>
-			<td>"json"</td>
-			<td style="text-align: center;">X</td>
-			<td>
-				<p>응답받을 데이터의 타입을 지정합니다</p>
-				<p class="alert">
-					dataType 은 jQuery.ajax 함수의 옵션이 그대로 적용 됩니다.
-					<a class="link" target="blank_" href="http://api.jquery.com/jquery.ajax/">jQuery.ajax</a>
-					메뉴얼의 settings 부분에서 dataType 속성을 참고 하세요.
-				</p>
-			</td>
-		</tr>
-		<tr>
-			<td>urlSync</td>
-			<td>boolean</td>
-			<td>true</td>
-			<td style="text-align: center;">X</td>
-			<td>서버로 요청 할 때의 location.href 와 서버에서 응답이 왔을 때의 location.href 이 같은지 비교하여 다르면 응답을 차단 합니다.</td>
-		</tr>
-		<tr>
-			<td>crossDomain</td>
-			<td>boolean</td>
-			<td>false</td>
-			<td style="text-align: center;">X</td>
-			<td>JSONP 같은 기술을 사용하여 다른 도메인의 자원을 가져오게 할지 여부를 설정 합니다(jQuery.ajax 의 옵션).</td>
-		</tr>
-		<tr>
-			<td>append</td>
-			<td>boolean</td>
-			<td>false</td>
-			<td style="text-align: center;">X</td>
-			<td>HTML 컨텐츠를 가져올 때 지정한 영역에 더할지 덮어 쓸지를 결정 합니다.</td>
-		</tr>
-		<tr>
-			<td>
-				<p class="depricated">effect</p>
-				<p>Deprecated</p>
-			</td>
-			<td class="depricated">boolean|json object</td>
-			<td class="depricated">false</td>
-			<td class="depricated"></td>
-			<td class="depricated">
-				<p>HTML 컨텐츠를 가져올 때 전환 효과를 보여줄지 여부를 설정 합니다.</p>
-				<p>효과를 적용하지 않으려면 false를 입력하고 효과를 입력하려면 다음과 같이 입력합니다.</p>
-				<p>["이펙트", "시간(ms)", "이펙트가 끝날 때 마다 실행 될 콜백함수"]</p>
-				<pre><code class="language-javascript">["slideDown", 300, null]</code></pre>
-				<p>이펙트 종류 : show, hide, slideUp, slideDown, fadeIn, fadeOut</p>
-			</td>
-		</tr>
-		<tr>
-			<td>target</td>
-			<td>jquery object</td>
-			<td>null</td>
-			<td style="text-align: center;">X</td>
-			<td>
-				HTML 컨텐츠를 가져올 때 가져온 컨텐츠를 자동으로 삽입할 요소를 지정 합니다.
-				<p class="alert">
-					N("#block").comm("page.html").submit(); 과 같이 HTML 페이지를 불러올 경우 자동으로 target 속성 값은 N("#block") 오브젝트로 지정 됩니다.
-				</p>
-			</td>
-		</tr>
-	</table>
-	<p>※ 위 기본옵션 외에 N.comm은 jQuery $.ajax 모듈을 사용하여 $.ajax에서 제공하는 옵션중 이벤트 관련 부분(beforeSend, success, error, complete)을 제외한 모든 옵션을 그대로 제공합니다.</p>
+    <h2 id="refr/refr0103/refr020402/communicator.request/defaultoptions">
+        <span lang="ko_KR">기본옵션</span>
+        <span lang="en_US">Default Options</span>
+    </h2>
+    <table class="api form">
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Required</th>
+            <th style="width: auto;">Description</th>
+        </tr>
+        <tr>
+            <td>contentType</td>
+            <td>string</td>
+            <td>application/json; charset=utf-8</td>
+            <td style="text-align: center;">O</td>
+            <td>
+                <p>Ajax request 에 대한 contentType을 지정 합니다</p>
+                <p class="alert">
+                    contentType 은 jQuery.ajax 함수의 옵션이 그대로 적용 됩니다.
+                    <a class="link" target="blank_" href="http://api.jquery.com/jquery.ajax/">jQuery.ajax</a>
+                    메뉴얼의 settings 부분에서 contentType 속성을 참고 하세요.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>cache</td>
+            <td>boolean</td>
+            <td>false</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p>브라우저 캐시 적용 여부</p>
+                <p class="alert">
+                    cache 는 jQuery.ajax 함수의 옵션이 그대로 적용 됩니다.
+                    <a class="link" target="blank_" href="http://api.jquery.com/jquery.ajax/">jQuery.ajax</a>
+                    메뉴얼의 settings 부분에서 cache 속성을 참고 하세요.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>async</td>
+            <td>boolean</td>
+            <td>true</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p>Ajax 요청을 비동기 방식으로 처리할지 동기방식으로 처리할지 지정 합니다</p>
+                <p class="alert">
+                    async 는 jQuery.ajax 함수의 옵션이 그대로 적용 됩니다.
+                    <a class="link" target="blank_" href="http://api.jquery.com/jquery.ajax/">jQuery.ajax</a>
+                    메뉴얼의 settings 부분에서 async 속성을 참고 하세요.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>type</td>
+            <td>string</td>
+            <td>POST</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p>Ajax 요청에 대한 HTTP Method를 지정 합니다</p>
+                <p class="alert">
+                    type 은 jQuery.ajax 함수의 옵션이 그대로 적용 됩니다.
+                    <a class="link" target="blank_" href="http://api.jquery.com/jquery.ajax/">jQuery.ajax</a>
+                    메뉴얼의 settings 부분에서 type 속성을 참고 하세요.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>array[json object]<a href="#jsonarray"><sup>1)</sup></a>|json object</td>
+            <td>null</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p>요청 파라미터를 지정 합니다.</p>
+                <p class="alert">
+                    data 는 jQuery.ajax 함수의 옵션이 그대로 적용 됩니다.
+                    <a class="link" target="blank_" href="http://api.jquery.com/jquery.ajax/">jQuery.ajax</a>
+                    메뉴얼의 settings 부분에서 data 속성을 참고 하세요.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>dataIsArray</td>
+            <td>boolean</td>
+            <td>false</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                요청 파라미터의 객체 타입이 array 일 경우 array 자체를 서버에 보내고 싶을때 true로 설정
+                <p class="alert">
+                    N(params).comm(url).submit() 와 같이 사용할 때 params의 객체타입이 array 일때 dataIsArray 옵션이 false 로 지정되어 있다면 array 의 첫번째 오브젝트만 전달 됩니다.
+                    해당 문제는 N(params) 구문에 의해 params를 jquery object로 변환되는 과정에서 $([{}]) 와 같이 하나 $({}) 와 같이 하나 get 했을때 [{}] 로만 반환이 되어서 생기는 문제 입니다.
+                    불편하더라도 array 를 넘길때는 dataIsArray 를 true로 설정하거나 object 에 array를 담아서 사용 바랍니다.
+                </p>
+                <p class="alert">
+                    N.comm(params, url).submit() 와 같이 사용하면 dataIsArray 옵션을 true로 지정하지 않아도 params를 jquery object화 하지않기 때문에 params의 객체타입이 array 더라도 그대로 전송 됩니다.
+                </p>
+                <p class="alert">Natural-ARCHITECTURE v0.8.1.4 버전 이후부터 적용</p>
+            </td>
+        </tr>
+        <tr>
+            <td>dataType</td>
+            <td>string</td>
+            <td>"json"</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p>응답받을 데이터의 타입을 지정합니다</p>
+                <p class="alert">
+                    dataType 은 jQuery.ajax 함수의 옵션이 그대로 적용 됩니다.
+                    <a class="link" target="blank_" href="http://api.jquery.com/jquery.ajax/">jQuery.ajax</a>
+                    메뉴얼의 settings 부분에서 dataType 속성을 참고 하세요.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>urlSync</td>
+            <td>boolean</td>
+            <td>true</td>
+            <td style="text-align: center;">X</td>
+            <td>서버로 요청 할 때의 location.href 와 서버에서 응답이 왔을 때의 location.href 이 같은지 비교하여 다르면 응답을 차단 합니다.</td>
+        </tr>
+        <tr>
+            <td>crossDomain</td>
+            <td>boolean</td>
+            <td>false</td>
+            <td style="text-align: center;">X</td>
+            <td>JSONP 같은 기술을 사용하여 다른 도메인의 자원을 가져오게 할지 여부를 설정 합니다(jQuery.ajax 의 옵션).</td>
+        </tr>
+        <tr>
+            <td>append</td>
+            <td>boolean</td>
+            <td>false</td>
+            <td style="text-align: center;">X</td>
+            <td>HTML 컨텐츠를 가져올 때 지정한 영역에 더할지 덮어 쓸지를 결정 합니다.</td>
+        </tr>
+        <tr>
+            <td>
+                <p class="depricated">effect</p>
+                <p>Deprecated</p>
+            </td>
+            <td class="depricated">boolean|json object</td>
+            <td class="depricated">false</td>
+            <td class="depricated"></td>
+            <td class="depricated">
+                <p>HTML 컨텐츠를 가져올 때 전환 효과를 보여줄지 여부를 설정 합니다.</p>
+                <p>효과를 적용하지 않으려면 false를 입력하고 효과를 입력하려면 다음과 같이 입력합니다.</p>
+                <p>["이펙트", "시간(ms)", "이펙트가 끝날 때 마다 실행 될 콜백함수"]</p>
+                <pre><code class="language-javascript">["slideDown", 300, null]</code></pre>
+                <p>이펙트 종류 : show, hide, slideUp, slideDown, fadeIn, fadeOut</p>
+            </td>
+        </tr>
+        <tr>
+            <td>target</td>
+            <td>jquery object</td>
+            <td>null</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                HTML 컨텐츠를 가져올 때 가져온 컨텐츠를 자동으로 삽입할 요소를 지정 합니다.
+                <p class="alert">
+                    N("#block").comm("page.html").submit(); 과 같이 HTML 페이지를 불러올 경우 자동으로 target 속성 값은 N("#block") 오브젝트로 지정 됩니다.
+                </p>
+            </td>
+        </tr>
+    </table>
+    <p>※ 위 기본옵션 외에 N.comm은 jQuery $.ajax 모듈을 사용하여 $.ajax에서 제공하는 옵션중 이벤트 관련 부분(beforeSend, success, error, complete)을 제외한 모든 옵션을 그대로 제공합니다.</p>
     
     <hr>
     <p><strong>주석</strong></p>

@@ -28,14 +28,14 @@
                 <p lang="ko_KR">다음과 같이 인자의 개수와 타입에 따라서 다르게 작동 됩니다.</p>
                 <p lang="en_US">It works differently depending on the number and type of parameters as follows.</p>
                 <ol>
-                	<li>
-                	    <p lang="ko_KR">선택한 요소에 저장되어 있는 모든 인스턴스를 반환.</p>
-                	    <p lang="en_US">Returns all instances stored in the specified element.</p>
-                	    <p lang="ko_KR">반환 된 인스턴스가 1이면 원래 인스턴스 객체가 반환됩니다. 인스턴스가 두 개 이상인 경우 배열에 저장되어 반환 됩니다. 반환 된 인스턴스가 없으면 undefined가 반환됩니다.</p>
+                    <li>
+                        <p lang="ko_KR">선택한 요소에 저장되어 있는 모든 인스턴스를 반환.</p>
+                        <p lang="en_US">Returns all instances stored in the specified element.</p>
+                        <p lang="ko_KR">반환 된 인스턴스가 1이면 원래 인스턴스 객체가 반환됩니다. 인스턴스가 두 개 이상인 경우 배열에 저장되어 반환 됩니다. 반환 된 인스턴스가 없으면 undefined가 반환됩니다.</p>
                         <p lang="en_US">If the returned instance is 1, the original instance object is returned. If there are more than one instance, they are stored in an array  and returned. If no instance is returned, undefined is returned.</p>
-		                <pre><code class="language-javascript">var all = N(".grid01", ".grid02").instance();</code></pre>
-		            </li>
-		            <li>
+                        <pre><code class="language-javascript">var all = N(".grid01", ".grid02").instance();</code></pre>
+                    </li>
+                    <li>
                         <p lang="ko_KR">선택한 요소에 저장되어 있는 모든 인스턴스를 콜백의 함수의 인자로 반환.</p>
                         <p lang="en_US">Returns all instances stored in the selected element as arguments of the callback function.</p>
                         <p lang="ko_KR" class="alert">인스턴스의 개수 만큼 콜백함수가 실행 됩니다.</p>
@@ -45,33 +45,33 @@
     // instanceId : <span lang="ko_KR">lang="ko_KR">저장 된 인스턴스의 식별자</span><span lang="en_US">Identifier of the stored instance</span>
     // instance : <span lang="ko_KR">저장 된 인스턴스</span><span lang="en_US">Stored instance</span>
 });</code></pre>
-					</li>
-					<li>
-					    <p lang="ko_KR">선택한 요소에 instanceId 가 "name" 으로 저장되어 있는 모든 인스턴스를 반환.</p>
-					    <p lang="en_US">Returns all instances whose instanceId is stored as "name" in the selected element.</p>
-					    <p lang="ko_KR">반환 된 인스턴스가 1이면 원래 인스턴스 객체가 반환됩니다. 인스턴스가 두 개 이상인 경우 배열에 저장되어 반환 됩니다. 반환 된 인스턴스가 없으면 undefined가 반환됩니다.</p>
-					    <p lang="en_US">If the returned instance is 1, the original instance object is returned. If there are more than one instance, they are stored in an array  and returned. If no instance is returned, undefined is returned.</p>
-		                <pre><code class="language-javascript">var all = N(".grid01", ".grid02").instance("name");</code></pre>
-					</li>
-					<li>
-					    <p lang="ko_KR">선택한 요소에 instanceId 가 "name" 으로 저장되어 있는 모든 인스턴스를 콜백 함수의 인자로 반환.</p>
-					    <p lang="en_US">Return all instances where instanceId is stored as "name" in the selected element as argument of callback function.</p>
-					    <p lang="ko_KR" class="alert">인스턴스의 개수 만큼 콜백함수가 실행 됩니다.</p>
+                    </li>
+                    <li>
+                        <p lang="ko_KR">선택한 요소에 instanceId 가 "name" 으로 저장되어 있는 모든 인스턴스를 반환.</p>
+                        <p lang="en_US">Returns all instances whose instanceId is stored as "name" in the selected element.</p>
+                        <p lang="ko_KR">반환 된 인스턴스가 1이면 원래 인스턴스 객체가 반환됩니다. 인스턴스가 두 개 이상인 경우 배열에 저장되어 반환 됩니다. 반환 된 인스턴스가 없으면 undefined가 반환됩니다.</p>
+                        <p lang="en_US">If the returned instance is 1, the original instance object is returned. If there are more than one instance, they are stored in an array  and returned. If no instance is returned, undefined is returned.</p>
+                        <pre><code class="language-javascript">var all = N(".grid01", ".grid02").instance("name");</code></pre>
+                    </li>
+                    <li>
+                        <p lang="ko_KR">선택한 요소에 instanceId 가 "name" 으로 저장되어 있는 모든 인스턴스를 콜백 함수의 인자로 반환.</p>
+                        <p lang="en_US">Return all instances where instanceId is stored as "name" in the selected element as argument of callback function.</p>
+                        <p lang="ko_KR" class="alert">인스턴스의 개수 만큼 콜백함수가 실행 됩니다.</p>
                         <p lang="en_US" class="alert">Callback function is executed as many as the number of instances.</p>
-		                <pre><code class="language-javascript">var all = N(".grid01", ".grid02").instance("name", function(instanceId, instance) {
+                        <pre><code class="language-javascript">var all = N(".grid01", ".grid02").instance("name", function(instanceId, instance) {
     // this : instance
     // instanceId : <span lang="ko_KR">lang="ko_KR">저장 된 인스턴스의 식별자</span><span lang="en_US">Identifier of the stored instance</span>
     // instance : <span lang="ko_KR">저장 된 인스턴스</span><span lang="en_US">Stored instance</span>
 });</code></pre>
-					</li>
-					<li>
-					    <p lang="ko_KR">선택한 요소에  instance 를 "name" 으로 저장.</p>
-					    <p lang="en_US">Store instance as "name" in the selected element.</p>
-		                <pre><code class="language-javascript">N(".grid01").instance("name", instance);</code></pre>
-		                <p lang="ko_KR" class="alert">인스턴스 저장 시 instance 인자가 function 타입이면 정상작동 하지 않을 수 있습니다. function 타입을 제외한 object 나 string 과 같은 타입을 instance 인자로 지정 해야 합니다.</p>
-		                <p lang="en_US" class="alert">When saving an instance, if the instance argument is a function type, it may not work properly. Types such as object or string, except the function type, should be specified as instance arguments.</p>
-            		</li>
-            	</ol>
+                    </li>
+                    <li>
+                        <p lang="ko_KR">선택한 요소에  instance 를 "name" 으로 저장.</p>
+                        <p lang="en_US">Store instance as "name" in the selected element.</p>
+                        <pre><code class="language-javascript">N(".grid01").instance("name", instance);</code></pre>
+                        <p lang="ko_KR" class="alert">인스턴스 저장 시 instance 인자가 function 타입이면 정상작동 하지 않을 수 있습니다. function 타입을 제외한 object 나 string 과 같은 타입을 instance 인자로 지정 해야 합니다.</p>
+                        <p lang="en_US" class="alert">When saving an instance, if the instance argument is a function type, it may not work properly. Types such as object or string, except the function type, should be specified as instance arguments.</p>
+                    </li>
+                </ol>
             </td>
         </tr>
         <tr>
@@ -80,56 +80,56 @@
             <td>string</td>
             <td style="text-align: center;">N/A</td>
             <td>
-            	<p lang="ko_KR">인스턴스 명</p>
-            	<p lang="en_US">Instance name</p>
-            	<div class="alert">
-	            	<p lang="ko_KR">미리 정의 되어 있는 인스턴스 명은 다음과 같습니다.</p>
-	            	<p lang="en_US">The predefined instance names are as follows.</p>
-	            	<ul>
-	            		<li lang="ko_KR">N.cont 의 Controller object : cont</li>
-	            		<li lang="en_US">Controller object of N.cont : cont</li>
-	            		<li>
-	            			<p lang="ko_KR">N.alert 의 instance : alert</p>
-	            			<p lang="en_US">Instance of N.alert : alert</p>
-	            			<p lang="ko_KR" class="alert">.block_overlay_msg__ 요소에 저장 되어 있음.</p>
-	            			<p lang="en_US" class="alert">It is stored in the .block_overlay_msg__ element.</p>
-	            		</li>
-	            		<li lang="ko_KR">N.button 의 instance : button</li>
-	            		<li lang="en_US">Instance of N.button : button</li>
-	            		<li lang="ko_KR">N.datepicker 의 instance : datepicker</li>
-	            		<li lang="en_US">Instance of N.datepicker : datepicker</li>
-	            		<li>
-	            			<p lang="ko_KR">N.popup 의 instance : popup</p>
-	            			<p lang="en_US">Instance of N.popup : popup</p>
-	            			<p lang="ko_KR" class="alert">로드 된 팝업 컨텐츠의 Controller object 는 .block_overlay_msg__ &gt; .msg_box__ &gt; .view_context__ 요소에 저장 되어 있음.</p>
-	            			<p lang="en_US" class="alert">The controller object of the loaded pop-up content is stored in the .block_overlay_msg__ &gt; .msg_box__ &gt; .view_context__ element.</p>
-	            		</li>
-	            		<li>
-	            			<p lang="ko_KR">N.tab 의 instance : tab</p>
-	            			<p lang="en_US">Instance of N.tab : tab</p>
-	            			<p lang="ko_KR" class="alert">로드 된 탭 컨텐츠의 Controller object 는 .tab__ &gt; .{tab 컨텐츠 요소 id} &gt; .view_context__ 요소에 저장 되어 있음.</p>
-	            			<p lang="ko_KR" class="alert">The controller object of the loaded tab content is stored in the .tab__ &gt; .{tab 컨텐츠 요소 id} &gt; .view_context__ element.</p>
-	            		</li>
-	            		<li lang="ko_KR">N.select 의 instance : select</li>
-	            		<li lang="en_US">Instance of N.select : select</li>
-	            		<li lang="ko_KR">N.form 의 instance : form</li>
-	            		<li lang="en_US">Instance of N.form : form</li>
-	            		<li lang="ko_KR">N.list 의 instance : list</li>
-	            		<li lang="en_US">Instance of N.list : list</li>
-	            		<li lang="ko_KR">N.grid 의 instance : grid</li>
-	            		<li lang="en_US">Instance of N.grid : grid</li>
-	            		<li lang="ko_KR">N.pagination 의 instance : pagination</li>
-	            		<li lang="en_US">Instance of N.pagination : pagination</li>
-	            		<li lang="ko_KR">N.tree 의 instance : tree</li>
-	            		<li lang="en_US">Instance of N.tree : tree</li>
-	            		<li lang="ko_KR">N.notify 의 instance : notify</li>
-	            		<li lang="en_US">Instance of N.notify : notify</li>
-	            		<li lang="ko_KR">N.docs 의 instance : docs</li>
-	            		<li lang="en_US">Instance of N.docs : docs</li>
-	            	</ul>
-	            	<p lang="ko_KR" class="alert">인스턴스의 저장 위치가 별도로 명시되어 있지 않은 컴포넌트는 context 옵션으로 지정한 요소에 저장 됩니다.</p>
-	            	<p lang="en_US" class="alert">Components that do not specify where to store the instance are stored in the element specified by the context option.</p>
-            	</div>
+                <p lang="ko_KR">인스턴스 명</p>
+                <p lang="en_US">Instance name</p>
+                <div class="alert">
+                    <p lang="ko_KR">미리 정의 되어 있는 인스턴스 명은 다음과 같습니다.</p>
+                    <p lang="en_US">The predefined instance names are as follows.</p>
+                    <ul>
+                        <li lang="ko_KR">N.cont 의 Controller object : cont</li>
+                        <li lang="en_US">Controller object of N.cont : cont</li>
+                        <li>
+                            <p lang="ko_KR">N.alert 의 instance : alert</p>
+                            <p lang="en_US">Instance of N.alert : alert</p>
+                            <p lang="ko_KR" class="alert">.block_overlay_msg__ 요소에 저장 되어 있음.</p>
+                            <p lang="en_US" class="alert">It is stored in the .block_overlay_msg__ element.</p>
+                        </li>
+                        <li lang="ko_KR">N.button 의 instance : button</li>
+                        <li lang="en_US">Instance of N.button : button</li>
+                        <li lang="ko_KR">N.datepicker 의 instance : datepicker</li>
+                        <li lang="en_US">Instance of N.datepicker : datepicker</li>
+                        <li>
+                            <p lang="ko_KR">N.popup 의 instance : popup</p>
+                            <p lang="en_US">Instance of N.popup : popup</p>
+                            <p lang="ko_KR" class="alert">로드 된 팝업 컨텐츠의 Controller object 는 .block_overlay_msg__ &gt; .msg_box__ &gt; .view_context__ 요소에 저장 되어 있음.</p>
+                            <p lang="en_US" class="alert">The controller object of the loaded pop-up content is stored in the .block_overlay_msg__ &gt; .msg_box__ &gt; .view_context__ element.</p>
+                        </li>
+                        <li>
+                            <p lang="ko_KR">N.tab 의 instance : tab</p>
+                            <p lang="en_US">Instance of N.tab : tab</p>
+                            <p lang="ko_KR" class="alert">로드 된 탭 컨텐츠의 Controller object 는 .tab__ &gt; .{tab 컨텐츠 요소 id} &gt; .view_context__ 요소에 저장 되어 있음.</p>
+                            <p lang="ko_KR" class="alert">The controller object of the loaded tab content is stored in the .tab__ &gt; .{tab 컨텐츠 요소 id} &gt; .view_context__ element.</p>
+                        </li>
+                        <li lang="ko_KR">N.select 의 instance : select</li>
+                        <li lang="en_US">Instance of N.select : select</li>
+                        <li lang="ko_KR">N.form 의 instance : form</li>
+                        <li lang="en_US">Instance of N.form : form</li>
+                        <li lang="ko_KR">N.list 의 instance : list</li>
+                        <li lang="en_US">Instance of N.list : list</li>
+                        <li lang="ko_KR">N.grid 의 instance : grid</li>
+                        <li lang="en_US">Instance of N.grid : grid</li>
+                        <li lang="ko_KR">N.pagination 의 instance : pagination</li>
+                        <li lang="en_US">Instance of N.pagination : pagination</li>
+                        <li lang="ko_KR">N.tree 의 instance : tree</li>
+                        <li lang="en_US">Instance of N.tree : tree</li>
+                        <li lang="ko_KR">N.notify 의 instance : notify</li>
+                        <li lang="en_US">Instance of N.notify : notify</li>
+                        <li lang="ko_KR">N.docs 의 instance : docs</li>
+                        <li lang="en_US">Instance of N.docs : docs</li>
+                    </ul>
+                    <p lang="ko_KR" class="alert">인스턴스의 저장 위치가 별도로 명시되어 있지 않은 컴포넌트는 context 옵션으로 지정한 요소에 저장 됩니다.</p>
+                    <p lang="en_US" class="alert">Components that do not specify where to store the instance are stored in the element specified by the context option.</p>
+                </div>
             </td>
         </tr>
         <tr>

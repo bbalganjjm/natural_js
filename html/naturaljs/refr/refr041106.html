@@ -1,116 +1,116 @@
 <article class="refr041106 apiDoc">
-	<h2>
-		<span lang="ko_KR">예제</span>
-		<span lang="en_US">Examples</span>
-	</h2>
+    <h2>
+        <span lang="ko_KR">예제</span>
+        <span lang="en_US">Examples</span>
+    </h2>
 
-	<h4>⊙ 예제 데이터</h4>
-	<pre class="line-numbers"><code class="language-markup">var data = [
-	{
-    	"key": "Root",
-	    "val": "0",
-	    "level": 1,
-	    "parent": null
-	}, {
-	    "key": "Key(node name) 1",
-	    "val": "1",
-	    "level": 2,
-	    "parent": "0"
-	}, {
-	    "key": "Key(node name) 2",
-	    "val": "2",
-	    "level": 2,
-	    "parent": "0"
-	}, {
-	    "key": "Key(node name) 3",
-	    "val": "3",
-	    "level": 2,
-	    "parent": "0"
-	}, {
-	    "key": "Key(node name) 4",
-	    "val": "4",
-	    "level": 2,
-	    "parent": "0"
-	}, {
-	    "key": "Key(node name) 1-1",
-	    "val": "11",
-	    "level": 3,
-	    "parent": "1"
-	}, {
-	    "key": "Key(node name) 2-1",
-	    "val": "21",
-	    "level": 3,
-	    "parent": "2"
-	}, {
-	    "key": "Key(node name) 2-2",
-	    "val": "22",
-	    "level": 3,
-	    "parent": "2"
-	}, {
-	    "key": "Key(node name) 2-3",
-	    "val": "23",
-	    "level": 4,
-	    "parent": "2"
-	}, {
-	    "key": "Key(node name) 3-1",
-	    "val": "31",
-	    "level": 4,
-	    "parent": "3"
-	}, {
-	    "key": "Key(node name) 2-2-1",
-	    "val": "221",
-	    "level": 4,
-	    "parent": "22"
-	}, {
-	    "key": "Key(node name) 2-2-2",
-	    "val": "222",
-	    "level": 4,
-	    "parent": "22"
-	}, {
-	    "key": "Key(node name) 2-2-1-1",
-	    "val": "2211",
-	    "level": 5,
-	    "parent": "221"
-	}, {
-	    "key": "Key(node name) 2-2-1-2",
-	    "val": "2212",
-	    "level": 5,
-	    "parent": "221"
-	}, {
-	    "key": "Key(node name) 2-2-1-3",
-	    "val": "2213",
-	    "level": 5,
-	    "parent": "221"
-	}
+    <h4>⊙ 예제 데이터</h4>
+    <pre class="line-numbers"><code class="language-markup">var data = [
+    {
+        "key": "Root",
+        "val": "0",
+        "level": 1,
+        "parent": null
+    }, {
+        "key": "Key(node name) 1",
+        "val": "1",
+        "level": 2,
+        "parent": "0"
+    }, {
+        "key": "Key(node name) 2",
+        "val": "2",
+        "level": 2,
+        "parent": "0"
+    }, {
+        "key": "Key(node name) 3",
+        "val": "3",
+        "level": 2,
+        "parent": "0"
+    }, {
+        "key": "Key(node name) 4",
+        "val": "4",
+        "level": 2,
+        "parent": "0"
+    }, {
+        "key": "Key(node name) 1-1",
+        "val": "11",
+        "level": 3,
+        "parent": "1"
+    }, {
+        "key": "Key(node name) 2-1",
+        "val": "21",
+        "level": 3,
+        "parent": "2"
+    }, {
+        "key": "Key(node name) 2-2",
+        "val": "22",
+        "level": 3,
+        "parent": "2"
+    }, {
+        "key": "Key(node name) 2-3",
+        "val": "23",
+        "level": 4,
+        "parent": "2"
+    }, {
+        "key": "Key(node name) 3-1",
+        "val": "31",
+        "level": 4,
+        "parent": "3"
+    }, {
+        "key": "Key(node name) 2-2-1",
+        "val": "221",
+        "level": 4,
+        "parent": "22"
+    }, {
+        "key": "Key(node name) 2-2-2",
+        "val": "222",
+        "level": 4,
+        "parent": "22"
+    }, {
+        "key": "Key(node name) 2-2-1-1",
+        "val": "2211",
+        "level": 5,
+        "parent": "221"
+    }, {
+        "key": "Key(node name) 2-2-1-2",
+        "val": "2212",
+        "level": 5,
+        "parent": "221"
+    }, {
+        "key": "Key(node name) 2-2-1-3",
+        "val": "2213",
+        "level": 5,
+        "parent": "221"
+    }
 ]</code></pre>
 
 <p class="alert">key, val, level, parent 옵션은 N.config(natural.config.js) 에 다음과 같이 전역옵션으로 설정하면 N(data).tree("#eyeColor").bind(); 와 같이 간편하게 사용할 수 있습니다. 다음 예제들은 N.config에 다음과 같이 설정되어 있다는 가정하에 구동되는 예제 입니다. 그렇지 않다면 컴포넌트 초기화 시 key, val, level, parent 옵션을 지정 해야 합니다.</p>
 <pre class="line-numbers"><code class="language-markup">N.context.attr("ui", {
     ...
-	"tree": {
-		"key": "key",
-		"val": "val",
-		"level": "level",
-		"parent": "parent"
-	}
-	...
+    "tree": {
+        "key": "key",
+        "val": "val",
+        "level": "level",
+        "parent": "parent"
+    }
+    ...
 });</code></pre>
 
-	<h4 class="notIndex">1. 기본 Tree 생성</h4>
-		<pre class="line-numbers"><code class="language-markup">&lt;div id="treeBlock"&gt;&lt;/div&gt;
+    <h4 class="notIndex">1. 기본 Tree 생성</h4>
+        <pre class="line-numbers"><code class="language-markup">&lt;div id="treeBlock"&gt;&lt;/div&gt;
 
 &lt;script type="text/javascript"&gt;
-	N(data).tree("#treeBlock").bind();
+    N(data).tree("#treeBlock").bind();
 &lt;/script&gt;</code></pre>
 
-	<h4 class="notIndex">2. 체크박스 Tree 생성</h4>
-		<pre class="line-numbers"><code class="language-markup">&lt;div id="treeBlock"&gt;&lt;/div&gt;
+    <h4 class="notIndex">2. 체크박스 Tree 생성</h4>
+        <pre class="line-numbers"><code class="language-markup">&lt;div id="treeBlock"&gt;&lt;/div&gt;
 
 &lt;script type="text/javascript"&gt;
-	N(data).tree({
-		context: "#treeBlock",
-		checkbox: true
-	}).bind();
+    N(data).tree({
+        context: "#treeBlock",
+        checkbox: true
+    }).bind();
 &lt;/script&gt;</code></pre>
 </article>
 

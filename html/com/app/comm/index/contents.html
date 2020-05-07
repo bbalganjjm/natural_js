@@ -1,6 +1,6 @@
 <style>
 .index-contents {
-	height: 100%;
+    height: 100%;
 }
 
 .index-contents .docs-container {
@@ -54,9 +54,9 @@
             this.initDocs(this, view);
 
             if(N.string.trim(location.hash).length > 0 && N.string.trim(location.hash).length <= 35) {
-            	location.href = "./";
+                location.href = "./";
             } else {
-	            $(window).trigger("hashchange.index");
+                $(window).trigger("hashchange.index");
             }
         },
         initDocs : function(cont, view) {

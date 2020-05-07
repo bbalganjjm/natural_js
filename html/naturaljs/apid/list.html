@@ -1,16 +1,16 @@
 <style type="text/css">
 .demo.list ul#list {
-	list-style: none;
-	padding: 0;
-	margin: 0;
-	border: 1px solid #4CAF50;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #4CAF50;
 }
 
 .demo.list ul#list > li {
-	margin: 0;
-	padding: 10px;
+    margin: 0;
+    padding: 10px;
     border-top: none;
-	border-bottom: 1px solid #4CAF50;
+    border-bottom: 1px solid #4CAF50;
 }
 
 .demo.list ul#list > li:last-child {
@@ -18,11 +18,11 @@
 }
 
 .demo.list .context_wrap__ {
-	border: 1px solid #4CAF50;
+    border: 1px solid #4CAF50;
 }
 
 .demo.list .context_wrap__ > ul#list {
-	border: none;
+    border: none;
 }
 
 .demo.list input[type='text'],
@@ -35,548 +35,548 @@
 </style>
 
 <article class="demo list">
-	<p lang="ko_KR" class="smallContTit">데이터 : </p>
-	<p lang="en_US" class="smallContTit">Data : </p>
-	<div class="dataBox">
-		/natural_js/html/naturaljs/apid/data/list.json
-	</div>
-	<p lang="ko_KR" class="smallContTit">기본 옵션 : </p>
-	<p lang="en_US" class="smallContTit">Default options : </p>
-	<table class="form options">
-		<colgroup>
-			<col style="width: 12%">
-			<col style="width: 38%">
-			<col style="width: 12%">
-			<col style="width: 38%">
-		</colgroup>
-		<tr>
-			<th><label for="context">context</label></th>
-			<td>
-				<input id="context" type="text" value="#list" readonly="readonly" />
-			</td>
-			<th><label for="height">height</label></th>
-			<td>
-				<input id="height" type="text" value="395" style="width: 50px;" />
-			</td>
-		</tr>
-		<tr>
-			<th><label for="validate">validate</label></th>
-			<td>
-				<input id="validate" type="checkbox" checked="checked" />
-			</td>
-			<th><label for="html">html</label></th>
-			<td>
-				<input id="html" type="checkbox" />
-			</td>
-		</tr>
-		<tr>
-			<th><label for="addTop">addTop</label></th>
-			<td colspan="3">
-				<input id="addTop" type="checkbox" checked="checked" />
-			</td>
-		</tr>
-		<tr>
-			<th><label for="vResizable">vResizable</label></th>
-			<td colspan="3">
-				<input id="vResizable" type="checkbox" />
-			</td>
-		</tr>
-		<tr>
-			<th><label for="select">select</label></th>
-			<td>
-				<input id="select" type="checkbox" />
-			</td>
-			<th><label for="unselect">unselect</label></th>
-			<td>
-				<input id="unselect" type="checkbox" checked="checked" />
-			</td>
-		</tr>
-		<tr>
-			<th><label for="multiselect">multiselect</label></th>
-			<td colspan="3">
-				<input id="multiselect" type="checkbox" />
-			</td>
-		</tr>
-		<tr>
-			<th><label for="checkAll">checkAll</label></th>
-			<td>
-				<input id="checkAll" type="text" value="#checkAll" />
-			</td>
-			<th><label for="checkAllTarget">checkAllTarget</label></th>
-			<td>
-				<input id="checkAllTarget" type="text" value=".checkAllTarget" />
-			</td>
-		</tr>
-		<tr>
-			<th><label for="hover">hover</label></th>
-			<td>
-				<input id="hover" type="checkbox" />
-			</td>
-			<th><label for="createRowDelay">createRowDelay</label></th>
-			<td>
-				<input id="createRowDelay" type="text" value="1" />
-			</td>
-		</tr>
-		<tr>
-			<th><label for="scrollPagingSize">scrollPaging.size</label></th>
-			<td colspan="3">
-				<input id="scrollPagingSize" type="text" value="50" />
-				<p class="alert" lang="ko_KR">0 이면 스크롤 페이징 하지 않습니다.</p>
-				<p class="alert" lang="en_US">If the value is 0 it does not scroll paging.</p>
-			</td>
-		</tr>
-		<tr>
-			<th><label for="rowHandlerBeforeBind">rowHandlerBeforeBind</label></th>
-			<td>
-				<textarea id="rowHandlerBeforeBind" style="height: 124px;;">function(rowIdx, rowEle, rowData) {
-	N.log("rowHandlerBeforeBind", rowIdx);
-	N.log(rowEle);
-	N.log(rowData);
+    <p lang="ko_KR" class="smallContTit">데이터 : </p>
+    <p lang="en_US" class="smallContTit">Data : </p>
+    <div class="dataBox">
+        /natural_js/html/naturaljs/apid/data/list.json
+    </div>
+    <p lang="ko_KR" class="smallContTit">기본 옵션 : </p>
+    <p lang="en_US" class="smallContTit">Default options : </p>
+    <table class="form options">
+        <colgroup>
+            <col style="width: 12%">
+            <col style="width: 38%">
+            <col style="width: 12%">
+            <col style="width: 38%">
+        </colgroup>
+        <tr>
+            <th><label for="context">context</label></th>
+            <td>
+                <input id="context" type="text" value="#list" readonly="readonly" />
+            </td>
+            <th><label for="height">height</label></th>
+            <td>
+                <input id="height" type="text" value="395" style="width: 50px;" />
+            </td>
+        </tr>
+        <tr>
+            <th><label for="validate">validate</label></th>
+            <td>
+                <input id="validate" type="checkbox" checked="checked" />
+            </td>
+            <th><label for="html">html</label></th>
+            <td>
+                <input id="html" type="checkbox" />
+            </td>
+        </tr>
+        <tr>
+            <th><label for="addTop">addTop</label></th>
+            <td colspan="3">
+                <input id="addTop" type="checkbox" checked="checked" />
+            </td>
+        </tr>
+        <tr>
+            <th><label for="vResizable">vResizable</label></th>
+            <td colspan="3">
+                <input id="vResizable" type="checkbox" />
+            </td>
+        </tr>
+        <tr>
+            <th><label for="select">select</label></th>
+            <td>
+                <input id="select" type="checkbox" />
+            </td>
+            <th><label for="unselect">unselect</label></th>
+            <td>
+                <input id="unselect" type="checkbox" checked="checked" />
+            </td>
+        </tr>
+        <tr>
+            <th><label for="multiselect">multiselect</label></th>
+            <td colspan="3">
+                <input id="multiselect" type="checkbox" />
+            </td>
+        </tr>
+        <tr>
+            <th><label for="checkAll">checkAll</label></th>
+            <td>
+                <input id="checkAll" type="text" value="#checkAll" />
+            </td>
+            <th><label for="checkAllTarget">checkAllTarget</label></th>
+            <td>
+                <input id="checkAllTarget" type="text" value=".checkAllTarget" />
+            </td>
+        </tr>
+        <tr>
+            <th><label for="hover">hover</label></th>
+            <td>
+                <input id="hover" type="checkbox" />
+            </td>
+            <th><label for="createRowDelay">createRowDelay</label></th>
+            <td>
+                <input id="createRowDelay" type="text" value="1" />
+            </td>
+        </tr>
+        <tr>
+            <th><label for="scrollPagingSize">scrollPaging.size</label></th>
+            <td colspan="3">
+                <input id="scrollPagingSize" type="text" value="50" />
+                <p class="alert" lang="ko_KR">0 이면 스크롤 페이징 하지 않습니다.</p>
+                <p class="alert" lang="en_US">If the value is 0 it does not scroll paging.</p>
+            </td>
+        </tr>
+        <tr>
+            <th><label for="rowHandlerBeforeBind">rowHandlerBeforeBind</label></th>
+            <td>
+                <textarea id="rowHandlerBeforeBind" style="height: 124px;;">function(rowIdx, rowEle, rowData) {
+    N.log("rowHandlerBeforeBind", rowIdx);
+    N.log(rowEle);
+    N.log(rowData);
 }</textarea>
-			</td>
-			<th><label for="rowHandler">rowHandler</label></th>
-			<td>
-				<textarea id="rowHandler" style="height: 124px;">function(rowIdx, rowEle, rowData) {
-	N.log("rowHandler", rowIdx);
-	N.log(rowEle);
-	N.log(rowData);
+            </td>
+            <th><label for="rowHandler">rowHandler</label></th>
+            <td>
+                <textarea id="rowHandler" style="height: 124px;">function(rowIdx, rowEle, rowData) {
+    N.log("rowHandler", rowIdx);
+    N.log(rowEle);
+    N.log(rowData);
 }</textarea>
-			</td>
-		</tr>
-		<tr>
-			<th><label for="onSelect">onSelect</label></th>
-			<td>
-				<textarea id="onSelect" style="height: 124px;">function(rowIdx, rowEle, rowData, beforeRowIdx, e) {
-	N.log("onSelect", rowIdx);
-	N.log(rowEle);
-	N.log(rowData);
-	N.log(beforeRowIdx);
-	N.log(e); // Click event object
+            </td>
+        </tr>
+        <tr>
+            <th><label for="onSelect">onSelect</label></th>
+            <td>
+                <textarea id="onSelect" style="height: 124px;">function(rowIdx, rowEle, rowData, beforeRowIdx, e) {
+    N.log("onSelect", rowIdx);
+    N.log(rowEle);
+    N.log(rowData);
+    N.log(beforeRowIdx);
+    N.log(e); // Click event object
 }</textarea>
-			</td>
-			<th><label for="onBind">onBind</label></th>
-			<td>
-				<textarea id="onBind" style="height: 124px;">function(context, data, isFirstPage, isLastPage) {
-	N.log("onBind", context);
-	N.log(data);
+            </td>
+            <th><label for="onBind">onBind</label></th>
+            <td>
+                <textarea id="onBind" style="height: 124px;">function(context, data, isFirstPage, isLastPage) {
+    N.log("onBind", context);
+    N.log(data);
     N.log(isFirstPage);
     N.log(isLastPage);
 }</textarea>
-			</td>
-		</tr>
-		<tr>
-			<th><label for="windowScrollLock">windowScroll Lock</label></th>
-			<td>
-				<input id="windowScrollLock" type="checkbox" checked="checked" />
-			</td>
-			<th><label for="revert">revert</label></th>
-			<td>
-				<input id="revert" type="checkbox" checked="checked" />
-			</td>
-		</tr>
-	</table>
+            </td>
+        </tr>
+        <tr>
+            <th><label for="windowScrollLock">windowScroll Lock</label></th>
+            <td>
+                <input id="windowScrollLock" type="checkbox" checked="checked" />
+            </td>
+            <th><label for="revert">revert</label></th>
+            <td>
+                <input id="revert" type="checkbox" checked="checked" />
+            </td>
+        </tr>
+    </table>
 
-	<p lang="ko_KR" class="smallContTit">함수 옵션 : </p>
-	<p lang="en_US" class="smallContTit">Method options : </p>
-	<table class="form methods">
-		<colgroup>
-			<col style="width: 12%">
-			<col style="width: 12%">
-			<col style="width: 76%">
-		</colgroup>
-		<tr>
-			<th>bind</th>
-			<th><label for="append">arguments[1]</label></th>
-			<td>
-				<select id="append">
-					<option value=""></option>
-					<option value="append">append</option>
-				</select>
-				<label for="append" lang="ko_KR">append를 선택 하면 기존 데이터를 남겨두고 추가로 바인드 합니다.</label>
-				<label for="append" lang="en_US">If input "append" string, it does append the data</label>
-			</td>
-		</tr>
-		<tr>
-			<th>add</th>
-			<th><label for="addRow">arguments[0]</label></th>
-			<td>
-				<input id="addRow" type="number" value="" />
-				<label for="addRow" lang="ko_KR">추가할 행 인덱스, 입력하지 않으면 addTop 옵션의 설정이 적용 됨.</label>
-				<label for="addRow" lang="en_US">The row index to add, If not, the setting of addTop option is applied.</label>
-			</td>
-		</tr>
-		<tr>
-			<th>revert</th>
-			<th><label for="rvtRow">arguments[0]</label></th>
-			<td>
-				<input id="rvtRow" type="text" value="[0, 2, 3]" />
-				<label for="rvtRow" lang="ko_KR">복원 할 행 인덱스, 빈값 입력 시 모든 행 데이터 복원</label>
-				<label for="rvtRow" lang="en_US">The row index to revert, if set empty value, revert the all row data</label>
-			</td>
-		</tr>
-		<tr>
-			<th>remove</th>
-			<th><label for="rmvRow">arguments[0]</label></th>
-			<td>
-				<input id="rmvRow" type="text" value="[0, 2, 3]" />
-				<label for="rmvRow" lang="ko_KR">삭제 할 행 인덱스</label>
-				<label for="rmvRow" lang="en_US">The row index to remove</label>
-			</td>
-		</tr>
-		<tr>
-			<th width="10%" rowspan="3">val</th>
-			<th><label for="row">arguments[0]</label></th>
-			<td>
-				<input id="row" type="number" value="0" />
-				<label for="row" lang="ko_KR">대상 행 인덱스</label>
-				<label for="row" lang="en_US">Target row index</label>
-			</td>
-		</tr>
-		<tr>
-			<th><label for="key">arguments[1]</label></th>
-			<td>
-				<input id="key" type="text" value="company" />
-				<label for="key" lang="ko_KR">대상 키(컬럼) 명</label>
-				<label for="key" lang="en_US">Target key(column) name</label>
-			</td>
-		</tr>
-		<tr>
-			<th><label for="val">arguments[2]</label></th>
-			<td>
-				<input id="val" type="text" value="NATURAL COMPANY" />
-				<label for="val" lang="ko_KR">대상 키에 해당하는 값</label>
-				<label for="val" lang="en_US">The value of target key</label>
-			</td>
-		</tr>
-		<tr>
-			<th>data</th>
-			<th><label for="data">arguments[0]</label></th>
-			<td>
-				<select id="data">
-					<option value="modified">modified</option>
-					<option value="insert">insert</option>
-					<option value="update">update</option>
-					<option value="delete">delete</option>
-					<option value="selected">selected</option>
-					<option value="checked">checked</option>
-					<option value="">undefined(pure object array)</option>
-					<option value="false">false(jquery object)</option>
-				</select><br>
-				<label for="data" lang="ko_KR">
-					modified : 수정된 데이터를 반환 합니다.<br>
-					insert : 입력된 데이터를 반환 합니다.<br>
-					update : 수정된 데이터를 반환 합니다.<br>
-					delete : 삭제된 데이터를 반환 합니다.<br>
-					selected : 선택된 데이터를 반환 합니다.<br>
-					checked : 체크된 데이터를 반환 합니다.<br>
-					false : jquery object 타입의 모든 데이터를 반환합니다.<br>
-					undefined : array[json object] 타입의 모든 데이터를 반환합니다.<br>
-				</label>
-				<label for="data" lang="en_US">
-					modified : Return the modified all row datas.<br>
-					insert : Return the inserted row datas.<br>
-					update : Return the updated row datas.<br>
-					delete : Return the deleted row datas.<br>
-					selected : Return the selected row datas.<br>
-					checked : Return the checked row datas.<br>
-					true : Return selected row data.<br>
-					false : Return all data of jquery object type.<br>
-					undefined : Return all data of pure array[json object] type.
-				</label>
-			</td>
-		</tr>
-		<tr>
-			<th width="10%" rowspan="2">select</th>
-			<th><label for="selectIndex">arguments[0]</label></th>
-			<td>
-				<input id="selectIndex" type="text" value="[0, 2]" />
-				<label for="selectIndex" lang="ko_KR">선택 할 행 인덱스</label>
-				<label for="selectIndex" lang="en_US">The row index to select</label>
-			</td>
-		</tr>
-		<tr>
-			<th><label for="selectIsAppend">arguments[1]</label></th>
-			<td>
-				<input id="selectIsAppend" type="checkbox" />
-				<label for="selectIsAppend" lang="ko_KR">추가 선택 할 지 다시 선택 할 지 여부</label>
-				<label for="selectIsAppend" lang="en_US">Whether to append or choose again</label>
-			</td>
-		</tr>
-		<tr>
-			<th width="10%" rowspan="2">check</th>
-			<th><label for="checkIndex">arguments[0]</label></th>
-			<td>
-				<input id="checkIndex" type="text" value="[1, 3]" />
-				<label for="checkIndex" lang="ko_KR">체크 할 행 인덱스</label>
-				<label for="checkIndex" lang="en_US">The row index to check</label>
-			</td>
-		</tr>
-		<tr>
-			<th><label for="checkIsAppend">arguments[1]</label></th>
-			<td>
-				<input id="checkIsAppend" type="checkbox" />
-				<label for="checkIsAppend" lang="ko_KR">추가 선택 할 지 다시 선택 할 지 여부</label>
-				<label for="checkIsAppend" lang="en_US">Whether to append or choose again</label>
-			</td>
-		</tr>
-		<tr>
-			<th rowspan="2">move</th>
-			<th><label for="moveFrom">arguments[0]</label></th>
-			<td>
-				<input id="moveFrom" type="number" value="4"  />
-				<label for="moveFrom" lang="ko_KR">이동 대상 행의 인덱스</label>
-				<label for="moveFrom" lang="en_US">Index of row to be moved</label>
-			</td>
-		</tr>
-		<tr>
-			<th><label for="moveTo">arguments[1]</label></th>
-			<td>
-				<input id="moveTo" type="number" value="1" />
-				<label for="moveTo" lang="ko_KR">이동 할 행의 인덱스</label>
-				<label for="moveTo" lang="en_US">Index of row to move</label>
-			</td>
-		</tr>
-		<tr>
-			<th rowspan="2">copy</th>
-			<th><label for="copyFrom">arguments[0]</label></th>
-			<td>
-				<input id="copyFrom" type="number" value="4"  />
-				<label for="copyFrom" lang="ko_KR">복사 대상 행의 인덱스</label>
-				<label for="copyFrom" lang="en_US">Index of row to be copied</label>
-			</td>
-		</tr>
-		<tr>
-			<th><label for="copyTo">arguments[1]</label></th>
-			<td>
-				<input id="copyTo" type="number" value="1" />
-				<label for="copyTo" lang="ko_KR">복사 할 행의 인덱스</label>
-				<label for="copyTo" lang="en_US">Index of row to copy</label>
-			</td>
-		</tr>
-		<tr>
-			<th>validate</th>
-			<th><label for="vldRow">arguments[0]</label></th>
-			<td>
-				<input id="vldRow" type="text" />
-				<label for="vldRow" lang="ko_KR">검사 할 행 인덱스, 빈값 입력 시 모든 행 데이터 검사</label>
-				<label for="vldRow" lang="en_US">The row index to validate, if set empty value, validate the all row data</label>
-			</td>
-		</tr>
-	</table>
+    <p lang="ko_KR" class="smallContTit">함수 옵션 : </p>
+    <p lang="en_US" class="smallContTit">Method options : </p>
+    <table class="form methods">
+        <colgroup>
+            <col style="width: 12%">
+            <col style="width: 12%">
+            <col style="width: 76%">
+        </colgroup>
+        <tr>
+            <th>bind</th>
+            <th><label for="append">arguments[1]</label></th>
+            <td>
+                <select id="append">
+                    <option value=""></option>
+                    <option value="append">append</option>
+                </select>
+                <label for="append" lang="ko_KR">append를 선택 하면 기존 데이터를 남겨두고 추가로 바인드 합니다.</label>
+                <label for="append" lang="en_US">If input "append" string, it does append the data</label>
+            </td>
+        </tr>
+        <tr>
+            <th>add</th>
+            <th><label for="addRow">arguments[0]</label></th>
+            <td>
+                <input id="addRow" type="number" value="" />
+                <label for="addRow" lang="ko_KR">추가할 행 인덱스, 입력하지 않으면 addTop 옵션의 설정이 적용 됨.</label>
+                <label for="addRow" lang="en_US">The row index to add, If not, the setting of addTop option is applied.</label>
+            </td>
+        </tr>
+        <tr>
+            <th>revert</th>
+            <th><label for="rvtRow">arguments[0]</label></th>
+            <td>
+                <input id="rvtRow" type="text" value="[0, 2, 3]" />
+                <label for="rvtRow" lang="ko_KR">복원 할 행 인덱스, 빈값 입력 시 모든 행 데이터 복원</label>
+                <label for="rvtRow" lang="en_US">The row index to revert, if set empty value, revert the all row data</label>
+            </td>
+        </tr>
+        <tr>
+            <th>remove</th>
+            <th><label for="rmvRow">arguments[0]</label></th>
+            <td>
+                <input id="rmvRow" type="text" value="[0, 2, 3]" />
+                <label for="rmvRow" lang="ko_KR">삭제 할 행 인덱스</label>
+                <label for="rmvRow" lang="en_US">The row index to remove</label>
+            </td>
+        </tr>
+        <tr>
+            <th width="10%" rowspan="3">val</th>
+            <th><label for="row">arguments[0]</label></th>
+            <td>
+                <input id="row" type="number" value="0" />
+                <label for="row" lang="ko_KR">대상 행 인덱스</label>
+                <label for="row" lang="en_US">Target row index</label>
+            </td>
+        </tr>
+        <tr>
+            <th><label for="key">arguments[1]</label></th>
+            <td>
+                <input id="key" type="text" value="company" />
+                <label for="key" lang="ko_KR">대상 키(컬럼) 명</label>
+                <label for="key" lang="en_US">Target key(column) name</label>
+            </td>
+        </tr>
+        <tr>
+            <th><label for="val">arguments[2]</label></th>
+            <td>
+                <input id="val" type="text" value="NATURAL COMPANY" />
+                <label for="val" lang="ko_KR">대상 키에 해당하는 값</label>
+                <label for="val" lang="en_US">The value of target key</label>
+            </td>
+        </tr>
+        <tr>
+            <th>data</th>
+            <th><label for="data">arguments[0]</label></th>
+            <td>
+                <select id="data">
+                    <option value="modified">modified</option>
+                    <option value="insert">insert</option>
+                    <option value="update">update</option>
+                    <option value="delete">delete</option>
+                    <option value="selected">selected</option>
+                    <option value="checked">checked</option>
+                    <option value="">undefined(pure object array)</option>
+                    <option value="false">false(jquery object)</option>
+                </select><br>
+                <label for="data" lang="ko_KR">
+                    modified : 수정된 데이터를 반환 합니다.<br>
+                    insert : 입력된 데이터를 반환 합니다.<br>
+                    update : 수정된 데이터를 반환 합니다.<br>
+                    delete : 삭제된 데이터를 반환 합니다.<br>
+                    selected : 선택된 데이터를 반환 합니다.<br>
+                    checked : 체크된 데이터를 반환 합니다.<br>
+                    false : jquery object 타입의 모든 데이터를 반환합니다.<br>
+                    undefined : array[json object] 타입의 모든 데이터를 반환합니다.<br>
+                </label>
+                <label for="data" lang="en_US">
+                    modified : Return the modified all row datas.<br>
+                    insert : Return the inserted row datas.<br>
+                    update : Return the updated row datas.<br>
+                    delete : Return the deleted row datas.<br>
+                    selected : Return the selected row datas.<br>
+                    checked : Return the checked row datas.<br>
+                    true : Return selected row data.<br>
+                    false : Return all data of jquery object type.<br>
+                    undefined : Return all data of pure array[json object] type.
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <th width="10%" rowspan="2">select</th>
+            <th><label for="selectIndex">arguments[0]</label></th>
+            <td>
+                <input id="selectIndex" type="text" value="[0, 2]" />
+                <label for="selectIndex" lang="ko_KR">선택 할 행 인덱스</label>
+                <label for="selectIndex" lang="en_US">The row index to select</label>
+            </td>
+        </tr>
+        <tr>
+            <th><label for="selectIsAppend">arguments[1]</label></th>
+            <td>
+                <input id="selectIsAppend" type="checkbox" />
+                <label for="selectIsAppend" lang="ko_KR">추가 선택 할 지 다시 선택 할 지 여부</label>
+                <label for="selectIsAppend" lang="en_US">Whether to append or choose again</label>
+            </td>
+        </tr>
+        <tr>
+            <th width="10%" rowspan="2">check</th>
+            <th><label for="checkIndex">arguments[0]</label></th>
+            <td>
+                <input id="checkIndex" type="text" value="[1, 3]" />
+                <label for="checkIndex" lang="ko_KR">체크 할 행 인덱스</label>
+                <label for="checkIndex" lang="en_US">The row index to check</label>
+            </td>
+        </tr>
+        <tr>
+            <th><label for="checkIsAppend">arguments[1]</label></th>
+            <td>
+                <input id="checkIsAppend" type="checkbox" />
+                <label for="checkIsAppend" lang="ko_KR">추가 선택 할 지 다시 선택 할 지 여부</label>
+                <label for="checkIsAppend" lang="en_US">Whether to append or choose again</label>
+            </td>
+        </tr>
+        <tr>
+            <th rowspan="2">move</th>
+            <th><label for="moveFrom">arguments[0]</label></th>
+            <td>
+                <input id="moveFrom" type="number" value="4"  />
+                <label for="moveFrom" lang="ko_KR">이동 대상 행의 인덱스</label>
+                <label for="moveFrom" lang="en_US">Index of row to be moved</label>
+            </td>
+        </tr>
+        <tr>
+            <th><label for="moveTo">arguments[1]</label></th>
+            <td>
+                <input id="moveTo" type="number" value="1" />
+                <label for="moveTo" lang="ko_KR">이동 할 행의 인덱스</label>
+                <label for="moveTo" lang="en_US">Index of row to move</label>
+            </td>
+        </tr>
+        <tr>
+            <th rowspan="2">copy</th>
+            <th><label for="copyFrom">arguments[0]</label></th>
+            <td>
+                <input id="copyFrom" type="number" value="4"  />
+                <label for="copyFrom" lang="ko_KR">복사 대상 행의 인덱스</label>
+                <label for="copyFrom" lang="en_US">Index of row to be copied</label>
+            </td>
+        </tr>
+        <tr>
+            <th><label for="copyTo">arguments[1]</label></th>
+            <td>
+                <input id="copyTo" type="number" value="1" />
+                <label for="copyTo" lang="ko_KR">복사 할 행의 인덱스</label>
+                <label for="copyTo" lang="en_US">Index of row to copy</label>
+            </td>
+        </tr>
+        <tr>
+            <th>validate</th>
+            <th><label for="vldRow">arguments[0]</label></th>
+            <td>
+                <input id="vldRow" type="text" />
+                <label for="vldRow" lang="ko_KR">검사 할 행 인덱스, 빈값 입력 시 모든 행 데이터 검사</label>
+                <label for="vldRow" lang="en_US">The row index to validate, if set empty value, validate the all row data</label>
+            </td>
+        </tr>
+    </table>
 
-	<p lang="ko_KR" class="smallContTit">실행 : </p>
-	<p lang="en_US" class="smallContTit">Run : </p>
-	<div class="btnBox">
-		<a id="btnInit" href="#" data-opts='{ "color": "green", "size": "large" }'>
-			<span lang="ko_KR">List 생성</span>
-			<span lang="en_US">Create List</span>
-		</a>
-		<a id="btnAdd" href="#" data-opts='{ "color" : "gray", "size": "large", "disable": true }'>add</a>
-		<a id="btnBind" href="#" data-opts='{ "color" : "gray", "size": "large", "disable": true }'>bind</a>
-		<br>
-		<a id="btnRevert" href="#" data-opts='{ "color" : "gray", "size": "large", "disable": true }'>revert</a>
-		<a id="btnRemove" href="#" data-opts='{ "color" : "gray", "size": "large", "disable": true }'>remove</a>
-		<a id="btnVal" href="#" data-opts='{ "color" : "gray", "size": "large", "disable": true }'>val</a>
-		<a id="btnData" href="#" data-opts='{ "color" : "gray", "size": "large", "disable": true }'>data</a>
-		<a id="btnSelect" href="#" data-opts='{ "color" : "gray", "size": "large", "disable": true }'>select</a>
-		<a id="btnCheck" href="#" data-opts='{ "color" : "gray", "size": "large", "disable": true }'>check</a>
-		<a id="btnMove" href="#" data-opts='{ "color" : "gray", "size": "large", "disable": true }'>move</a>
-		<a id="btnCopy" href="#" data-opts='{ "color" : "gray", "size": "large", "disable": true }'>copy</a>
-		<a id="btnValidate" href="#" data-opts='{ "color" : "gray", "size": "large", "disable": true }'>validate</a>
-		<a id="btnReload" href="#" data-opts='{ "color": "white", "size": "large" }'>
-			<span lang="ko_KR">DEMO 초기화</span>
-			<span lang="en_US">Reset DEMO</span>
-		</a>
-	</div>
+    <p lang="ko_KR" class="smallContTit">실행 : </p>
+    <p lang="en_US" class="smallContTit">Run : </p>
+    <div class="btnBox">
+        <a id="btnInit" href="#" data-opts='{ "color": "green", "size": "large" }'>
+            <span lang="ko_KR">List 생성</span>
+            <span lang="en_US">Create List</span>
+        </a>
+        <a id="btnAdd" href="#" data-opts='{ "color" : "gray", "size": "large", "disable": true }'>add</a>
+        <a id="btnBind" href="#" data-opts='{ "color" : "gray", "size": "large", "disable": true }'>bind</a>
+        <br>
+        <a id="btnRevert" href="#" data-opts='{ "color" : "gray", "size": "large", "disable": true }'>revert</a>
+        <a id="btnRemove" href="#" data-opts='{ "color" : "gray", "size": "large", "disable": true }'>remove</a>
+        <a id="btnVal" href="#" data-opts='{ "color" : "gray", "size": "large", "disable": true }'>val</a>
+        <a id="btnData" href="#" data-opts='{ "color" : "gray", "size": "large", "disable": true }'>data</a>
+        <a id="btnSelect" href="#" data-opts='{ "color" : "gray", "size": "large", "disable": true }'>select</a>
+        <a id="btnCheck" href="#" data-opts='{ "color" : "gray", "size": "large", "disable": true }'>check</a>
+        <a id="btnMove" href="#" data-opts='{ "color" : "gray", "size": "large", "disable": true }'>move</a>
+        <a id="btnCopy" href="#" data-opts='{ "color" : "gray", "size": "large", "disable": true }'>copy</a>
+        <a id="btnValidate" href="#" data-opts='{ "color" : "gray", "size": "large", "disable": true }'>validate</a>
+        <a id="btnReload" href="#" data-opts='{ "color": "white", "size": "large" }'>
+            <span lang="ko_KR">DEMO 초기화</span>
+            <span lang="en_US">Reset DEMO</span>
+        </a>
+    </div>
 
-	<p lang="ko_KR" class="smallContTit">결과 : </p>
-	<p lang="en_US" class="smallContTit">Result : </p>
+    <p lang="ko_KR" class="smallContTit">결과 : </p>
+    <p lang="en_US" class="smallContTit">Result : </p>
 
-	checkAll : <input id="checkAll" type="checkbox" />
+    checkAll : <input id="checkAll" type="checkbox" />
 
-	<ul id="list" class="list__">
-		<li>
-			<span style="margin-right: 25px;"><input class="checkAllTarget" type="checkbox" /></span>
-			index : <span id="index" style="margin-right: 55px;"></span>
-			name : <span id="name" style="margin-right: 55px;"></span>
-			<span>gender : <input id="gender" type="radio" /></span>
-			<p style="line-height: 5px;"></p>
-			<label style="margin-left: 56px; margin-right: 25px;">eyeColor : <input id="eyeColor" type="text" /></label>
-			<label style="margin-right: 25px;">company : <input id="company" type="text" data-validate='[["required"]]' /></label>
-			<label style="margin-right: 25px;">email : <input id="email" type="text" data-validate='[["required"], ["email"]]' style="width: 200px;" /></label>
-			<p style="line-height: 5px;"></p>
-			<label style="margin-left: 56px; margin-right: 25px;">registered : <input id="registered" type="tel" data-format='[["date", 8, "date"]]' /></label>
-			<label>isActive : <input id="isActive" type="checkbox" /></label>
-		</li>
-	</ul>
+    <ul id="list" class="list__">
+        <li>
+            <span style="margin-right: 25px;"><input class="checkAllTarget" type="checkbox" /></span>
+            index : <span id="index" style="margin-right: 55px;"></span>
+            name : <span id="name" style="margin-right: 55px;"></span>
+            <span>gender : <input id="gender" type="radio" /></span>
+            <p style="line-height: 5px;"></p>
+            <label style="margin-left: 56px; margin-right: 25px;">eyeColor : <input id="eyeColor" type="text" /></label>
+            <label style="margin-right: 25px;">company : <input id="company" type="text" data-validate='[["required"]]' /></label>
+            <label style="margin-right: 25px;">email : <input id="email" type="text" data-validate='[["required"], ["email"]]' style="width: 200px;" /></label>
+            <p style="line-height: 5px;"></p>
+            <label style="margin-left: 56px; margin-right: 25px;">registered : <input id="registered" type="tel" data-format='[["date", 8, "date"]]' /></label>
+            <label>isActive : <input id="isActive" type="checkbox" /></label>
+        </li>
+    </ul>
 </article>
 
 <script type="text/javascript">
-	N(".demo.list").cont({
-	    init : function(view, request) {
-	    	// initialize buttons in div.btnBox
-	    	N("div.btnBox a", view).button();
+    N(".demo.list").cont({
+        init : function(view, request) {
+            // initialize buttons in div.btnBox
+            N("div.btnBox a", view).button();
 
-	    	// initialize N.select
-	    	N([{
-	        	"key" : "male",
-	        	"val" : "male"
-			},{
-		        "key" : "female",
-		        "val" : "female"
-		    }]).select(N("#gender", view)).bind();
+            // initialize N.select
+            N([{
+                "key" : "male",
+                "val" : "male"
+            },{
+                "key" : "female",
+                "val" : "female"
+            }]).select(N("#gender", view)).bind();
 
-	    	// bind events
-	    	var list;
-	    	N("#btnInit", view).click(function(e) {
-	            e.preventDefault();
-	       		var opts = {
-	       			context : view.find(N("#context", view).val()),
-	       			height : parseInt(N.string.trimToZero(N("#height", view).val())),
-	       			validate : N("#validate", view).is(":checked"),
-	       			html : N("#html", view).is(":checked"),
-	       			addTop : N("#addTop", view).is(":checked"),
-	       			resizable : N("#resizable", view).is(":checked"),
-	       			vResizable : N("#vResizable", view).is(":checked"),
-	       			select : N("#select", view).is(":checked"),
-	       			unselect : N("#unselect", view).is(":checked"),
-	       			multiselect : N("#multiselect", view).is(":checked"),
-	       			checkAll : N.string.trimToNull(N("#checkAll", view).val()) !== null ?
-		       				N(N("#checkAll", view).val() + ":checkbox", view) : null,
-       				checkAllTarget : N.string.trimToNull(N("#checkAllTarget", view).val()) !== null ?
-    	       				N("#checkAllTarget", view).val() : null,
-	       			hover : N("#hover", view).is(":checked"),
-	       			createRowDelay : N.string.trimToNull(N("#createRowDelay", view).val()) !== null ?
-	       				parseInt(N("#createRowDelay", view).val()) : 1,
-	       			scrollPaging : {
-	       				size : N.string.trimToNull(N("#scrollPagingSize", view).val()) !== null ?
-	       					parseInt(N("#scrollPagingSize", view).val()) : 100
-	       			},
-	       			rowHandlerBeforeBind : N.string.trimToNull(N("#rowHandlerBeforeBind", view).val()) !== null ?
-	       				eval("(" + N("#rowHandlerBeforeBind", view).val() + ")") : null,
-	       			rowHandler : N.string.trimToNull(N("#rowHandler", view).val()) !== null ?
-	       				eval("(" + N("#rowHandler", view).val() + ")") : null,
-    				onSelect : N.string.trimToNull(N("#onSelect", view).val()) !== null ?
-        				eval("(" + N("#onSelect", view).val() + ")") : null,
-        			onBind : N.string.trimToNull(N("#onBind", view).val()) !== null ?
-	        				eval("(" + N("#onBind", view).val() + ")") : null,
-	        		windowScrollLock : N("#windowScrollLock", view).is(":checked"),
-	        		revert : N("#revert", view).is(":checked")
-	       		}
-	       		list = N([]).list(opts).bind();
+            // bind events
+            var list;
+            N("#btnInit", view).click(function(e) {
+                e.preventDefault();
+                   var opts = {
+                       context : view.find(N("#context", view).val()),
+                       height : parseInt(N.string.trimToZero(N("#height", view).val())),
+                       validate : N("#validate", view).is(":checked"),
+                       html : N("#html", view).is(":checked"),
+                       addTop : N("#addTop", view).is(":checked"),
+                       resizable : N("#resizable", view).is(":checked"),
+                       vResizable : N("#vResizable", view).is(":checked"),
+                       select : N("#select", view).is(":checked"),
+                       unselect : N("#unselect", view).is(":checked"),
+                       multiselect : N("#multiselect", view).is(":checked"),
+                       checkAll : N.string.trimToNull(N("#checkAll", view).val()) !== null ?
+                               N(N("#checkAll", view).val() + ":checkbox", view) : null,
+                       checkAllTarget : N.string.trimToNull(N("#checkAllTarget", view).val()) !== null ?
+                               N("#checkAllTarget", view).val() : null,
+                       hover : N("#hover", view).is(":checked"),
+                       createRowDelay : N.string.trimToNull(N("#createRowDelay", view).val()) !== null ?
+                           parseInt(N("#createRowDelay", view).val()) : 1,
+                       scrollPaging : {
+                           size : N.string.trimToNull(N("#scrollPagingSize", view).val()) !== null ?
+                               parseInt(N("#scrollPagingSize", view).val()) : 100
+                       },
+                       rowHandlerBeforeBind : N.string.trimToNull(N("#rowHandlerBeforeBind", view).val()) !== null ?
+                           eval("(" + N("#rowHandlerBeforeBind", view).val() + ")") : null,
+                       rowHandler : N.string.trimToNull(N("#rowHandler", view).val()) !== null ?
+                           eval("(" + N("#rowHandler", view).val() + ")") : null,
+                    onSelect : N.string.trimToNull(N("#onSelect", view).val()) !== null ?
+                        eval("(" + N("#onSelect", view).val() + ")") : null,
+                    onBind : N.string.trimToNull(N("#onBind", view).val()) !== null ?
+                            eval("(" + N("#onBind", view).val() + ")") : null,
+                    windowScrollLock : N("#windowScrollLock", view).is(":checked"),
+                    revert : N("#revert", view).is(":checked")
+                   }
+                   list = N([]).list(opts).bind();
 
-	       		N("#btnAdd", view).instance("button").enable();
-	            N("#btnBind", view).instance("button").enable();
+                   N("#btnAdd", view).instance("button").enable();
+                N("#btnBind", view).instance("button").enable();
 
-	            N("#btnInit", view).instance("button").disable();
-	        });
+                N("#btnInit", view).instance("button").disable();
+            });
 
-	    	N("#btnAdd", view).click(function(e) {
-	            e.preventDefault();
-	            var addRowIdx = N.string.trimToUndefined(N("#addRow", view).val());
-	            if(addRowIdx !== undefined) {
-	            	addRowIdx = parseInt(addRowIdx);
-	            }
-	        	list.add(addRowIdx);
+            N("#btnAdd", view).click(function(e) {
+                e.preventDefault();
+                var addRowIdx = N.string.trimToUndefined(N("#addRow", view).val());
+                if(addRowIdx !== undefined) {
+                    addRowIdx = parseInt(addRowIdx);
+                }
+                list.add(addRowIdx);
 
-	        	N("div.btnBox", view).find("a").instance("button", function(u) {
-	            	if(!this.context().is("#btnAdd") && !this.context().is("#btnBind")) {
-	            		if(this.context().is("a#btnInit")) {
-	    					this.disable();
-	    				} else {
-	    					this.enable();
-	    				}
-	            	}
-				});
-	        });
+                N("div.btnBox", view).find("a").instance("button", function(u) {
+                    if(!this.context().is("#btnAdd") && !this.context().is("#btnBind")) {
+                        if(this.context().is("a#btnInit")) {
+                            this.disable();
+                        } else {
+                            this.enable();
+                        }
+                    }
+                });
+            });
 
-	    	N("#btnBind", view).click(function(e) {
-	            e.preventDefault();
-	            N.comm("html/naturaljs/apid/data/grid.json").submit(function(data) {
-	            	list.bind(data, N.string.trimToUndefined(N("#append", view).val()));
-		       	});
+            N("#btnBind", view).click(function(e) {
+                e.preventDefault();
+                N.comm("html/naturaljs/apid/data/grid.json").submit(function(data) {
+                    list.bind(data, N.string.trimToUndefined(N("#append", view).val()));
+                   });
 
-	            N("div.btnBox", view).find("a").instance("button", function(u) {
-	            	if(!this.context().is("#btnAdd") && !this.context().is("#btnBind")) {
-	            		if(this.context().is("a#btnInit")) {
-	    					this.disable();
-	    				} else {
-	    					this.enable();
-	    				}
-	            	}
-				});
-	        });
+                N("div.btnBox", view).find("a").instance("button", function(u) {
+                    if(!this.context().is("#btnAdd") && !this.context().is("#btnBind")) {
+                        if(this.context().is("a#btnInit")) {
+                            this.disable();
+                        } else {
+                            this.enable();
+                        }
+                    }
+                });
+            });
 
-	    	N("#btnRevert", view).click(function(e) {
-	            e.preventDefault();
-	       		list.revert(eval(N.string.trimToUndefined(N("#rvtRow", view).val())));
-	        });
+            N("#btnRevert", view).click(function(e) {
+                e.preventDefault();
+                   list.revert(eval(N.string.trimToUndefined(N("#rvtRow", view).val())));
+            });
 
-	    	N("#btnRemove", view).click(function(e) {
-	            e.preventDefault();
-	            list.remove(eval(N.string.trimToUndefined(N("#rmvRow", view).val())));
-	        });
+            N("#btnRemove", view).click(function(e) {
+                e.preventDefault();
+                list.remove(eval(N.string.trimToUndefined(N("#rmvRow", view).val())));
+            });
 
-	    	N("#btnVal", view).click(function(e) {
-	            e.preventDefault();
-	            var row = N.string.trimToZero(N("#row", view).val());
-	            var key = N.string.trimToNull(N("#key", view).val());
-	            var value = N.string.trimToNull(N("#val", view).val());
-	        	if(value !== null) {
-	        		list.val(row, key, value);
-	        	} else {
-	        		list.context().parent().alert(list.val(row, key)).show();
-	        	}
-	        });
+            N("#btnVal", view).click(function(e) {
+                e.preventDefault();
+                var row = N.string.trimToZero(N("#row", view).val());
+                var key = N.string.trimToNull(N("#key", view).val());
+                var value = N.string.trimToNull(N("#val", view).val());
+                if(value !== null) {
+                    list.val(row, key, value);
+                } else {
+                    list.context().parent().alert(list.val(row, key)).show();
+                }
+            });
 
-	    	N("#btnData", view).click(function(e) {
-	    		e.preventDefault();
-	    		list.context().parent().alert({
-	        		msg : '<pre class="pre">' + N.json.format(list.data(N("select#data", view).val() === "false" ? false : N.string.trimToUndefined(N("select#data", view).val()))) + '</pre>',
-	        		width : 400,
-	        		height : 250
-	        	}).show();
-	        });
+            N("#btnData", view).click(function(e) {
+                e.preventDefault();
+                list.context().parent().alert({
+                    msg : '<pre class="pre">' + N.json.format(list.data(N("select#data", view).val() === "false" ? false : N.string.trimToUndefined(N("select#data", view).val()))) + '</pre>',
+                    width : 400,
+                    height : 250
+                }).show();
+            });
 
-	    	N("#btnSelect", view).click(function(e) {
-	    		e.preventDefault();
-	        	var value = N.string.trimToNull(N("#selectIndex", view).val());
-	        	if(value !== null) {
-	        		list.select(eval(value), N("#selectIsAppend", view).is(":checked"));
-	        	} else {
-	        		list.context().parent().alert(JSON.stringify(list.select())).show();
-	        	}
-	        })
+            N("#btnSelect", view).click(function(e) {
+                e.preventDefault();
+                var value = N.string.trimToNull(N("#selectIndex", view).val());
+                if(value !== null) {
+                    list.select(eval(value), N("#selectIsAppend", view).is(":checked"));
+                } else {
+                    list.context().parent().alert(JSON.stringify(list.select())).show();
+                }
+            })
 
-	    	N("#btnCheck", view).click(function(e) {
-	    		e.preventDefault();
-	        	var value = N.string.trimToNull(N("#checkIndex", view).val());
-	        	if(value !== null) {
-	        		list.check(eval(value), N("#checkIsAppend", view).is(":checked"));
-	        	} else {
-	        		list.context().parent().alert(JSON.stringify(list.check())).show();
-	        	}
-	        })
+            N("#btnCheck", view).click(function(e) {
+                e.preventDefault();
+                var value = N.string.trimToNull(N("#checkIndex", view).val());
+                if(value !== null) {
+                    list.check(eval(value), N("#checkIsAppend", view).is(":checked"));
+                } else {
+                    list.context().parent().alert(JSON.stringify(list.check())).show();
+                }
+            })
 
-	        N("#btnMove", view).click(function(e) {
-	            e.preventDefault();
-	            list.move(eval(N.string.trimToUndefined(N("#moveFrom", view).val())), eval(N.string.trimToUndefined(N("#moveTo", view).val())));
-	        });
+            N("#btnMove", view).click(function(e) {
+                e.preventDefault();
+                list.move(eval(N.string.trimToUndefined(N("#moveFrom", view).val())), eval(N.string.trimToUndefined(N("#moveTo", view).val())));
+            });
 
-	    	N("#btnCopy", view).click(function(e) {
-	            e.preventDefault();
-	            list.copy(eval(N.string.trimToUndefined(N("#copyFrom", view).val())), eval(N.string.trimToUndefined(N("#copyTo", view).val())));
-	        });
+            N("#btnCopy", view).click(function(e) {
+                e.preventDefault();
+                list.copy(eval(N.string.trimToUndefined(N("#copyFrom", view).val())), eval(N.string.trimToUndefined(N("#copyTo", view).val())));
+            });
 
-	    	N("#btnValidate", view).click(function(e) {
-	            e.preventDefault();
-	            list.context().parent().alert(String(list.validate(N.string.trimToUndefined(N("#vldRow", view).val())))).show();
-	        });
+            N("#btnValidate", view).click(function(e) {
+                e.preventDefault();
+                list.context().parent().alert(String(list.validate(N.string.trimToUndefined(N("#vldRow", view).val())))).show();
+            });
 
-	    	N("#btnReload", view).click(function(e) {
-	        	e.preventDefault();
-	        	N(view.parent()).comm(request.get("url")).submit();
-	        });
-	    }
-	});
+            N("#btnReload", view).click(function(e) {
+                e.preventDefault();
+                N(view.parent()).comm(request.get("url")).submit();
+            });
+        }
+    });
 </script>

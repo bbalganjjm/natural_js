@@ -1,117 +1,117 @@
 <article class="refr041004 apiDoc">
-	<h2>
-		<span lang="ko_KR">기본옵션</span>
-		<span lang="en_US">Default Options</span>
-	</h2>
-	<table class="api form">
-		<tr>
-			<th>Name</th>
-			<th>Type</th>
-			<th>Default</th>
-			<th>Required</th>
-			<th style="width: auto;">Description</th>
-		</tr>
-		<tr>
-			<td>data</td>
-			<td>array[json object]</td>
-			<td>undefined</td>
-			<td style="text-align: center;">O</td>
-			<td>
+    <h2>
+        <span lang="ko_KR">기본옵션</span>
+        <span lang="en_US">Default Options</span>
+    </h2>
+    <table class="api form">
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Required</th>
+            <th style="width: auto;">Description</th>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>array[json object]</td>
+            <td>undefined</td>
+            <td style="text-align: center;">O</td>
+            <td>
                 <p lang="ko_KR">N.pagination에 바인딩 할 데이터를 지정 합니다.</p>
                 <p lang="en_US">Specifies the data to bind to N.pagination.</p>
-				<p class="alert">data가 입력되면 totalCount 값이 자동으로 계산되어 들어가므로 totalCount 값을 0으로 지정하거나 지정하지 않아야 합니다.</p>
-				<p class="alert">
-					서버에서 DB 쿼리로 페이징 시 에는 data 옵션을 지정하지 말고 totalCount 값만 서버에서 얻어와 지정하기 바랍니다.<br>
-					ex) N().pagination({ totalCount : 1234 });
-				</p>
-			</td>
-		</tr>
-		<tr>
-			<td>context</td>
-			<td>jquery object|jquery selector string</td>
-			<td>null</td>
-			<td style="text-align: center;">O</td>
-			<td>
+                <p class="alert">data가 입력되면 totalCount 값이 자동으로 계산되어 들어가므로 totalCount 값을 0으로 지정하거나 지정하지 않아야 합니다.</p>
+                <p class="alert">
+                    서버에서 DB 쿼리로 페이징 시 에는 data 옵션을 지정하지 말고 totalCount 값만 서버에서 얻어와 지정하기 바랍니다.<br>
+                    ex) N().pagination({ totalCount : 1234 });
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>context</td>
+            <td>jquery object|jquery selector string</td>
+            <td>null</td>
+            <td style="text-align: center;">O</td>
+            <td>
                 <p lang="ko_KR">N.pagination을 적용 할 context 요소를 지정 합니다.</p>
                 <p lang="en_US">Specifies the context element to apply N.pagination.</p>
             </td>
-		</tr>
-		<tr>
-			<td>totalCount</td>
-			<td>number</td>
-			<td>0</td>
-			<td style="text-align: center;">O</td>
-			<td>
-				<p>페이징 될 전체 로우 카운트를 지정 합니다.</p>
-				<p class="alert">서버에서 DB 쿼리로 페이징 시 에는 data 옵션을 지정하지 말고 totalCount 값만 서버에서 얻어와 지정하기 바랍니다.</p>
-			</td>
-		</tr>
-		<tr>
-			<td>countPerPage</td>
-			<td>number</td>
-			<td>10</td>
-			<td></td>
-			<td>한번에 몇개의 로우데이터를 반환 할 것인지 지정 합니다.</td>
-		</tr>
-		<tr>
-			<td>countPerPageSet</td>
-			<td>number</td>
-			<td>10</td>
-			<td></td>
-			<td>페이징 번호를 몇개를 표시할 것인지 지정 합니다.</td>
-		</tr>
-		<tr>
-			<td>pageNo</td>
-			<td>number</td>
-			<td>1</td>
-			<td></td>
-			<td>초기화시 처음 표시 할 페이지 번호를 지정 합니다.</td>
-		</tr>
-		<tr>
-			<td>onChange</td>
-			<td>function</td>
-			<td>null</td>
-			<td></td>
-			<td>
-			페이지가 전환 될때 발생되는 이벤트 입니다.
-				<pre><code class="language-javascript">onChange : function(pageNo, selEle, selData, currPageNavInfo) {
-	// this 는 N.pagination 인스턴스
-	// pageNo 는 선택한 페이지 번호
-	// selEle 는 선택한 페이지 링크 요소
-	// selData 는 선택한 페이지가 가지고 있는 데이터 리스트
-	// currPageNavInfo 는 이벤트가 발생할 시점의 페이징 정보
+        </tr>
+        <tr>
+            <td>totalCount</td>
+            <td>number</td>
+            <td>0</td>
+            <td style="text-align: center;">O</td>
+            <td>
+                <p>페이징 될 전체 로우 카운트를 지정 합니다.</p>
+                <p class="alert">서버에서 DB 쿼리로 페이징 시 에는 data 옵션을 지정하지 말고 totalCount 값만 서버에서 얻어와 지정하기 바랍니다.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>countPerPage</td>
+            <td>number</td>
+            <td>10</td>
+            <td></td>
+            <td>한번에 몇개의 로우데이터를 반환 할 것인지 지정 합니다.</td>
+        </tr>
+        <tr>
+            <td>countPerPageSet</td>
+            <td>number</td>
+            <td>10</td>
+            <td></td>
+            <td>페이징 번호를 몇개를 표시할 것인지 지정 합니다.</td>
+        </tr>
+        <tr>
+            <td>pageNo</td>
+            <td>number</td>
+            <td>1</td>
+            <td></td>
+            <td>초기화시 처음 표시 할 페이지 번호를 지정 합니다.</td>
+        </tr>
+        <tr>
+            <td>onChange</td>
+            <td>function</td>
+            <td>null</td>
+            <td></td>
+            <td>
+            페이지가 전환 될때 발생되는 이벤트 입니다.
+                <pre><code class="language-javascript">onChange : function(pageNo, selEle, selData, currPageNavInfo) {
+    // this 는 N.pagination 인스턴스
+    // pageNo 는 선택한 페이지 번호
+    // selEle 는 선택한 페이지 링크 요소
+    // selData 는 선택한 페이지가 가지고 있는 데이터 리스트
+    // currPageNavInfo 는 이벤트가 발생할 시점의 페이징 정보
 }</code></pre>
-				<p class="alert">서버에서 DB 쿼리로 페이징 시  먼저 조회하고자 하는 전체 행수를 가져오고 onChange 이벤트 핸들러의 인자로 들어오는 currPageNavInfo 정보로 선택될 DB 로우의 시작값(currPageNavInfo.startRowNum)과 얼마만큼 가져올지 등의 정보(currPageNavInfo.countPerPage)를 서버에 파라미터로 전송한 결과 데이터를 N.grid 에 bind하는 형태로 DB 페이징을 처리 할 수 있습니다.</p>
-				<p class="alert">blockOnChangeWhenBind 옵션이 true 이면 페이징 버튼들을 클릭 할 때만 이벤트가 실행 됩니다.</p>
-				<p class="alert">
-					currPageNavInfo 정보<br>
-					&nbsp;&nbsp;-&nbsp;pageNo : 선택한 페이지 번호<br>
-					&nbsp;&nbsp;-&nbsp;countPerPage : 페이지당 행 수<br>
-					&nbsp;&nbsp;-&nbsp;countPerPageSet : 페이지 세트당 페이지 수<br>
-					&nbsp;&nbsp;-&nbsp;currSelPageSet : 현재 페이지세트(페이지 그룹) 번호<br>
-					&nbsp;&nbsp;-&nbsp;pageCount : 전체 페이지 개수<br>
-					&nbsp;&nbsp;-&nbsp;pageSetCount : 전체 페이지세트(페이지 그룹) 개수<br>
-					&nbsp;&nbsp;-&nbsp;totalCount : 전체 행 개수<br>
-					&nbsp;&nbsp;-&nbsp;startPage : 현재 페이지세트(페이지 그룹) 중 첫번째 페이지 번호<br>
-					&nbsp;&nbsp;-&nbsp;startRowIndex : 선택한 페이지의 첫번째 행 인덱스<br>
-					&nbsp;&nbsp;-&nbsp;startRowNum : 선택한 페이지의 첫번째 행 번호<br>
-					&nbsp;&nbsp;-&nbsp;endPage : 현재 페이지세트(페이지 그룹) 중 마지막 페이지 번호<br>
-					&nbsp;&nbsp;-&nbsp;endRowIndex : 선택한 페이지의 마지막 행 인덱스<br>
-					&nbsp;&nbsp;-&nbsp;endRowNum : 선택한 페이지의 마지막 행 번호<br>
-				</p>
-			</td>
-		</tr>
-		<tr>
-			<td>blockOnChangeWhenBind</td>
-			<td>boolean</td>
-			<td>false</td>
-			<td></td>
-			<td>
-				<p lang="ko_KR">bind 함수를 호출 할 때 onChange 이벤트를 차단 할지 여부</p>
-				<p lang="en_US">Whether to block onChange event when call the bind method</p>
-			</td>
-		</tr>
-	</table>
+                <p class="alert">서버에서 DB 쿼리로 페이징 시  먼저 조회하고자 하는 전체 행수를 가져오고 onChange 이벤트 핸들러의 인자로 들어오는 currPageNavInfo 정보로 선택될 DB 로우의 시작값(currPageNavInfo.startRowNum)과 얼마만큼 가져올지 등의 정보(currPageNavInfo.countPerPage)를 서버에 파라미터로 전송한 결과 데이터를 N.grid 에 bind하는 형태로 DB 페이징을 처리 할 수 있습니다.</p>
+                <p class="alert">blockOnChangeWhenBind 옵션이 true 이면 페이징 버튼들을 클릭 할 때만 이벤트가 실행 됩니다.</p>
+                <p class="alert">
+                    currPageNavInfo 정보<br>
+                    &nbsp;&nbsp;-&nbsp;pageNo : 선택한 페이지 번호<br>
+                    &nbsp;&nbsp;-&nbsp;countPerPage : 페이지당 행 수<br>
+                    &nbsp;&nbsp;-&nbsp;countPerPageSet : 페이지 세트당 페이지 수<br>
+                    &nbsp;&nbsp;-&nbsp;currSelPageSet : 현재 페이지세트(페이지 그룹) 번호<br>
+                    &nbsp;&nbsp;-&nbsp;pageCount : 전체 페이지 개수<br>
+                    &nbsp;&nbsp;-&nbsp;pageSetCount : 전체 페이지세트(페이지 그룹) 개수<br>
+                    &nbsp;&nbsp;-&nbsp;totalCount : 전체 행 개수<br>
+                    &nbsp;&nbsp;-&nbsp;startPage : 현재 페이지세트(페이지 그룹) 중 첫번째 페이지 번호<br>
+                    &nbsp;&nbsp;-&nbsp;startRowIndex : 선택한 페이지의 첫번째 행 인덱스<br>
+                    &nbsp;&nbsp;-&nbsp;startRowNum : 선택한 페이지의 첫번째 행 번호<br>
+                    &nbsp;&nbsp;-&nbsp;endPage : 현재 페이지세트(페이지 그룹) 중 마지막 페이지 번호<br>
+                    &nbsp;&nbsp;-&nbsp;endRowIndex : 선택한 페이지의 마지막 행 인덱스<br>
+                    &nbsp;&nbsp;-&nbsp;endRowNum : 선택한 페이지의 마지막 행 번호<br>
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>blockOnChangeWhenBind</td>
+            <td>boolean</td>
+            <td>false</td>
+            <td></td>
+            <td>
+                <p lang="ko_KR">bind 함수를 호출 할 때 onChange 이벤트를 차단 할지 여부</p>
+                <p lang="en_US">Whether to block onChange event when call the bind method</p>
+            </td>
+        </tr>
+    </table>
 </article>
 
 <script type="text/javascript">

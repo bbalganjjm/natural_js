@@ -43,15 +43,15 @@ Natural-JS 의 환경설정 파일인 natural.config.js 파일을 열어보세�
 ```
 /* Natural-ARCHITECTURE Config */
 N.context.attr("architecture", {
-	"page" : {
-		"context" : "#contents"
-	},
-	...
+    "page" : {
+        "context" : "#contents"
+    },
+    ...
 /* Natural-UI Config */
 N.context.attr("ui", {
-	"alert" : {
-		"container" : "#contents"
-	...
+    "alert" : {
+        "container" : "#contents"
+    ...
 ```
 
 위와 같은 JSON 타입의 구문이 보일겁니다. JSON 이 뭔지는 아시죠? 아주 쉬워요. 모르시면 아래 URL 을 클릭 해서 참고 하시구요.
@@ -77,13 +77,13 @@ Natural-JS의 컴포넌트 옵션의 적용 우선순위는 다음과 같습니�
 
 ```
 N.context.attr("ui", {
-	...
-	"grid" : {
-		...
-		"height" : 300,
-		...
-	}
-	...
+    ...
+    "grid" : {
+        ...
+        "height" : 300,
+        ...
+    }
+    ...
 ```
 
 실행 환경 구성을 완료 했습니다. 이제 샘플 코드를 작성 해 봅시다.
@@ -99,18 +99,18 @@ Natural-JS는 페이지 블록의 소스코드에서 개발영역과 디자인�
 ```
 <!-- View -->
 <article id="block01">
-	<div id="result">
-	</div>
+    <div id="result">
+    </div>
 </article>
 
 <script type="text/javascript">
 N(".block01").cont({ // Controller Object
-	init : function(view, request) {
-    	N.comm("data.json").submit(function(data) {
-			// data is received data from the server
-			N("#result", view).text(JSON.stringify(data));
-		});
-	}
+    init : function(view, request) {
+        N.comm("data.json").submit(function(data) {
+            // data is received data from the server
+            N("#result", view).text(JSON.stringify(data));
+        });
+    }
 });
 </script>
 ```
@@ -222,15 +222,15 @@ Natural-ARCHITECTURE 기반의 모든 페이지나 페이지 블록 들은 반�
 <script type="text/javascript" src="js/natural_js/natural.config.js"></script>
 
 <script type="text/javascript">
-	$(document).ready(function() {
-		N(N.context.attr("architecture").page.context).comm("block01.html").submit()
-	});
+    $(document).ready(function() {
+        N(N.context.attr("architecture").page.context).comm("block01.html").submit()
+    });
 </script>
 
 </head>
 <body>
-	<!-- Page Context(N.context.attr("architecture").page.context) elelemt. -->
-	<div id="contents"></div>
+    <!-- Page Context(N.context.attr("architecture").page.context) elelemt. -->
+    <div id="contents"></div>
 </body>
 </html>
 ```

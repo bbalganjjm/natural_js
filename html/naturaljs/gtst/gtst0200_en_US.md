@@ -53,37 +53,37 @@ body {
 }
 
 #lefter {
-	flex: 1;
+    flex: 1;
     max-width: 200px;
     border-right: 1px solid #66BB6A;
     height: 100%;
 }
 
 #docs {
-	flex: 1;
+    flex: 1;
     height: 100%;
 }
 </style>
 
 <script type="text/javascript">
-	// Global N.docs instance.
-	window.docs;
+    // Global N.docs instance.
+    window.docs;
 
-	$(document).ready(function() {
-	    // Import left menu page.
-	    N("#lefter").comm("html/index/lefter.html").submit(function() {
-	        // Create new N.docs instance;
-	        docs = N("#docs").docs();
-	    });
+    $(document).ready(function() {
+        // Import left menu page.
+        N("#lefter").comm("html/index/lefter.html").submit(function() {
+            // Create new N.docs instance;
+            docs = N("#docs").docs();
+        });
 
-	});
+    });
 </script>
 </head>
 <body>
     <!-- lefter -->
-	<div id="lefter"></div>
-	<!-- N.docs context elelemt. -->
-	<div id="docs"></div>
+    <div id="lefter"></div>
+    <!-- N.docs context elelemt. -->
+    <div id="docs"></div>
 </body>
 </html>
 ```
@@ -95,17 +95,17 @@ body {
 See the callback function in the $(document).ready function.
 
 ```
-	// Global N.docs instance.
-	window.docs;
+    // Global N.docs instance.
+    window.docs;
 
-	$(document).ready(function() {
-	    // Import left menu page.
-	    N("#lefter").comm("html/index/lefter.html").submit(function() {
-	        // Create new N.docs instance;
-	        docs = N("#docs").docs();
-	    });
+    $(document).ready(function() {
+        // Import left menu page.
+        N("#lefter").comm("html/index/lefter.html").submit(function() {
+            // Create new N.docs instance;
+            docs = N("#docs").docs();
+        });
 
-	});
+    });
 ```
 
 This is the syntax to load the left block page into the #lefter element with N.comm after the DOM of **/index.html** is loaded. **/html/index/lefter.html** file contains the link element of the left menu and the Controller (N.cont) Object that activates it. N("#lefter").comm("html/index/lefter.html").submit function is a callback function that is executed after the **/html/index/lefter.html** file loading is completed. Here, the N.docs component creates an MDI page container inside the #docs element. Only one instance of N.docs component is created per application, so we will use it globally in the window object.
@@ -137,13 +137,13 @@ Save the following code as **/html/index/lefter.html** file.
 <script type="text/javascript">
 N(".index-lefter").cont({
     init : function(view, request) {
-		N(".menu", view).on("click", "a", function(e) {
-		    e.preventDefault();
+        N(".menu", view).on("click", "a", function(e) {
+            e.preventDefault();
 
-			window.docs.add(N(this).data("docid"), N(this).text(), {
-			    url : N(this).attr("href")
-			});
-		});
+            window.docs.add(N(this).data("docid"), N(this).text(), {
+                url : N(this).attr("href")
+            });
+        });
     }
 });
 </script>

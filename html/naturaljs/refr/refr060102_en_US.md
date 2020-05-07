@@ -27,26 +27,26 @@ N(dateList).each(function(i, week) {
 var cont = this;
 
 popupOpts = {
-	closeMode : "remove",
-	opener : cont
+    closeMode : "remove",
+    opener : cont
 };
 
 if(N(window).width() <= 414) {
-	popupOpts.draggable = false;
-	popupOpts.onShow = function(msgContext, msgContents) {
-		cont.scrollTop = N(window).scrollTop();
-		N("html, body").css("overflow", "hidden");
-	}
-	popupOpts.onBeforeRemove = function(msgContext, msgContents) {
-		N("html, body").css("overflow", "");
-		N(window).scrollTop(cont.scrollTop);
-	}
-	popupOpts.width = function(msgContext, msgContents) {
-		return N(window).width();
-	};
-	popupOpts.height = function(msgContext, msgContents) {
-		return N(window).height() - msgContents.show().find(".msg_title_box__").height();
-	};
+    popupOpts.draggable = false;
+    popupOpts.onShow = function(msgContext, msgContents) {
+        cont.scrollTop = N(window).scrollTop();
+        N("html, body").css("overflow", "hidden");
+    }
+    popupOpts.onBeforeRemove = function(msgContext, msgContents) {
+        N("html, body").css("overflow", "");
+        N(window).scrollTop(cont.scrollTop);
+    }
+    popupOpts.width = function(msgContext, msgContents) {
+        return N(window).width();
+    };
+    popupOpts.height = function(msgContext, msgContents) {
+        return N(window).height() - msgContents.show().find(".msg_title_box__").height();
+    };
 }
 
 N().popup(popupOpts).open();

@@ -53,37 +53,37 @@ body {
 }
 
 #lefter {
-	flex: 1;
+    flex: 1;
     max-width: 200px;
     border-right: 1px solid #66BB6A;
     height: 100%;
 }
 
 #docs {
-	flex: 1;
+    flex: 1;
     height: 100%;
 }
 </style>
 
 <script type="text/javascript">
-	// Global N.docs instance.
-	window.docs;
+    // Global N.docs instance.
+    window.docs;
 
-	$(document).ready(function() {
-	    // Import left menu page.
-	    N("#lefter").comm("html/index/lefter.html").submit(function() {
-	        // Create new N.docs instance;
-	        docs = N("#docs").docs();
-	    });
+    $(document).ready(function() {
+        // Import left menu page.
+        N("#lefter").comm("html/index/lefter.html").submit(function() {
+            // Create new N.docs instance;
+            docs = N("#docs").docs();
+        });
 
-	});
+    });
 </script>
 </head>
 <body>
     <!-- lefter -->
-	<div id="lefter"></div>
-	<!-- N.docs context elelemt. -->
-	<div id="docs"></div>
+    <div id="lefter"></div>
+    <!-- N.docs context elelemt. -->
+    <div id="docs"></div>
 </body>
 </html>
 ```
@@ -95,17 +95,17 @@ body {
 $(document).ready 함수의 콜백 함수의 내용을 봐 주세요.
 
 ```
-	// Global N.docs instance.
-	window.docs;
+    // Global N.docs instance.
+    window.docs;
 
-	$(document).ready(function() {
-	    // Import left menu page.
-	    N("#lefter").comm("html/index/lefter.html").submit(function() {
-	        // Create new N.docs instance;
-	        docs = N("#docs").docs();
-	    });
+    $(document).ready(function() {
+        // Import left menu page.
+        N("#lefter").comm("html/index/lefter.html").submit(function() {
+            // Create new N.docs instance;
+            docs = N("#docs").docs();
+        });
 
-	});
+    });
 ```
 
 **/index.html** 의 DOM 이 모두 로딩 된 다음 N.comm 으로 #lefter 요소에 좌측 블록 페이지를 불러와 넣어주는 구문입니다. **/html/index/lefter.html** 파일은 좌측 메뉴의 링크 요소와 이를 활성 화 시켜 주는 Controller(N.cont) Object 가 들어 있습니다.
@@ -138,13 +138,13 @@ N("#lefter").comm("html/index/lefter.html").submit 함수의 인자는 **/html/i
 <script type="text/javascript">
 N(".index-lefter").cont({
     init : function(view, request) {
-		N(".menu", view).on("click", "a", function(e) {
-		    e.preventDefault();
+        N(".menu", view).on("click", "a", function(e) {
+            e.preventDefault();
 
-			window.docs.add(N(this).data("docid"), N(this).text(), {
-			    url : N(this).attr("href")
-			});
-		});
+            window.docs.add(N(this).data("docid"), N(this).text(), {
+                url : N(this).attr("href")
+            });
+        });
     }
 });
 </script>

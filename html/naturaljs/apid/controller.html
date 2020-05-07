@@ -1,26 +1,26 @@
 <article class="demo controller">
-	<div class="demoBox">
-		<p class="smallContTit">View Info :</p>
-		<pre class="line-numbers"><code id="view" class="language-javascript"></code></pre>
-		<p class="smallContTit">Request Info :</p>
-		<pre><code id="request" class="language-javascript"></code></pre>
-	</div>
+    <div class="demoBox">
+        <p class="smallContTit">View Info :</p>
+        <pre class="line-numbers"><code id="view" class="language-javascript"></code></pre>
+        <p class="smallContTit">Request Info :</p>
+        <pre><code id="request" class="language-javascript"></code></pre>
+    </div>
 </article>
 
 <script type="text/javascript">
-	N(".demo.controller").cont({
-	    init : function(view, request) {
-	    	// view info
-	    	N("#view", view).text('<article id="controller">' + view.html() + "</article>");
+    N(".demo.controller").cont({
+        init : function(view, request) {
+            // view info
+            N("#view", view).text('<article id="controller">' + view.html() + "</article>");
 
-	    	// request info
-	    	var requestInfo = request.get();
-	    	delete requestInfo.beforeSend;
-	    	delete requestInfo.complete;
-	    	delete requestInfo.error;
-	    	delete requestInfo.success;
-	    	requestInfo.target = ["jquery object"];
-	    	N("#request", view).text(N.json.format(requestInfo));
-	    }
-	});
+            // request info
+            var requestInfo = request.get();
+            delete requestInfo.beforeSend;
+            delete requestInfo.complete;
+            delete requestInfo.error;
+            delete requestInfo.success;
+            requestInfo.target = ["jquery object"];
+            N("#request", view).text(N.json.format(requestInfo));
+        }
+    });
 </script>
