@@ -41,13 +41,13 @@
     <p>5.1. 팝업페이지(popup.html)</p>
     <pre class="line-numbers"><code class="language-markup">&lt;!-- Style --&gt;
 &lt;style&gt;
-    .POPUP01 #result { width: 400px; height: 300px; border: 1px solid #4CAF50; }
+    .POPUP01 .result { width: 400px; height: 300px; border: 1px solid #4CAF50; }
 &lt;/style&gt;
 
 &lt;!-- View --&gt;
 &lt;article class="POPUP01" title="onOpen Example"&gt;
-    &lt;p id="result"&gt;&lt;/p&gt;
-    &lt;button id="close"&gt;닫기&lt;/button&gt;
+    &lt;p class="result"&gt;&lt;/p&gt;
+    &lt;button class="close"&gt;닫기&lt;/button&gt;
 &lt;/article&gt;
 
 &lt;!-- Controller --&gt;
@@ -55,13 +55,13 @@
 N(".POPUP01").cont({
     init : function(view, request) {
         var caller = this.caller; // caller는 현제 팝업페이지를 열어준 N.popup 인스턴스
-        N("#close", this.view).click(function(onCloseData) { // 닫기버튼에 이벤트 바인드
+        N(".close", this.view).click(function(onCloseData) { // 닫기버튼에 이벤트 바인드
             caller.close("Hello~ parent's Opener"); // close 함수의 첫번째 인자로 onCloseData 데이터 전달
         });
     },
     // 팝업이 열릴때마다 실행될 함수
     onOpenFunc : function(onOpenData) {
-        N("#result", this.view).text(onOpenData);
+        N(".result", this.view).text(onOpenData);
     }
 });
 &lt;/script&gt;</code></pre>
@@ -69,12 +69,12 @@ N(".POPUP01").cont({
     <p>5.2. 부모페이지(parent.html)</p>
     <pre class="line-numbers"><code class="language-markup">&lt;!-- Style --&gt;
 &lt;style&gt;
-    .POPUP01 #result { width: 400px; height: 300px; border: 1px solid #4CAF50; }
+    .POPUP01 .result { width: 400px; height: 300px; border: 1px solid #4CAF50; }
 &lt;/style&gt;
 
 &lt;!-- View --&gt;
 &lt;article class="POPUP02" title="onOpen Example"&gt;
-    &lt;p id="result"&gt;&lt;/p&gt;
+    &lt;p class="result"&gt;&lt;/p&gt;
 &lt;/article&gt;
 
 &lt;!-- Controller --&gt;
@@ -85,7 +85,7 @@ N(".POPUP02").cont({
                url: "./popup.html",
                onOpen: "onOpenFunc", // 팝업이 열릴때마다 실행될 함수명
                onClose: function(onCloseData) { // 팝업이 닫힐때마다 실행 될 onClose 이벤트 핸들러
-                   N("#result", this.view).text(onCloseData);
+                   N(".result", this.view).text(onCloseData);
                }
            });
            popup.open("Hello~ popup's onOpen!"); // open 함수의 첫번째 인자로 onOpenData 데이터 전달

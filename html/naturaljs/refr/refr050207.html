@@ -5,18 +5,18 @@
     </h2>
 
     <h4 class="notIndex">1. Documents 생성 및 페이지 추가</h4>
-    <pre class="line-numbers"><code class="language-markup">&lt;section id="docsContainer"&gt;&lt;/section&gt;
+    <pre class="line-numbers"><code class="language-markup">&lt;section class="docsContainer"&gt;&lt;/section&gt;
 
 &lt;script type="text/javascript"&gt;
-       var docs = N("#docsContainer").docs();
+       var docs = N(".docsContainer").docs();
        docs.add("ex", "예제", { url : "ex.html" });
 &lt;/script&gt;</code></pre>
 
     <h4 class="notIndex">2. 페이지에 파라미터 전달</h4>
-    <pre class="line-numbers"><code class="language-markup">&lt;section id="docsContainer"&gt;&lt;/section&gt;
+    <pre class="line-numbers"><code class="language-markup">&lt;section class="docsContainer"&gt;&lt;/section&gt;
 
 &lt;script type="text/javascript"&gt;
-       var docs = N("#docsContainer").docs();
+       var docs = N(".docsContainer").docs();
        docs.request.attr("a", 1).request.attr("b", 2).add("ex", "예제", { url : "ex.html" });
 
        // ex.html 의 N.cont 오브젝트의 init 함수의 두번째 인자인 request 객체에서

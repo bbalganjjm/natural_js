@@ -26,7 +26,7 @@
 }]</code></pre>
 
     <h4 class="notIndex">1. 리스트 생성 후 데이터 바인드</h4>
-    <pre class="line-numbers"><code class="language-markup">&lt;ul id="listExample10"&gt;
+    <pre class="line-numbers"><code class="language-markup">&lt;ul class="listExample10"&gt;
     &lt;li&gt;
         &lt;input id="name" type="text"&gt;
         &lt;input id="age" type="text"&gt;
@@ -36,12 +36,12 @@
 &lt;/ul&gt;
 
 &lt;script type="text/javascript"&gt;
-    N(data).list("#listExample10").bind();
+    N(data).list(".listExample10").bind();
 &lt;/script&gt;</code></pre>
 
     <h4 class="notIndex">1.1. 리스트에 데이터 바인드(Row Handler 적용)</h4>
     <p class="alert">rowHandler 이벤트는 리스트 렌더링 시 행이 만들어질때마다 발생하는 이벤트 입니다. 기본 제공하는 리스트의 기능을 확장하기 위해 사용됩니다.</p>
-    <pre class="line-numbers"><code class="language-markup">&lt;ul id="listExample12"&gt;
+    <pre class="line-numbers"><code class="language-markup">&lt;ul class="listExample12"&gt;
     &lt;li&gt;
         &lt;input id="name" type="text"&gt;
         &lt;input id="age" type="text"&gt;
@@ -52,7 +52,7 @@
 
 &lt;script type="text/javascript"&gt;
     N(data).list({
-        context : "#listExample12",
+        context : ".listExample12",
         height : 200,
         rowHandler : function(index, row, data) {
             // age 가 28 이상이면 해당 셀의 배경색을 red 로 설정
@@ -64,7 +64,7 @@
 &lt;/script&gt;</code></pre>
 
     <h4 class="notIndex">2. 신규 행 추가</h4>
-    <pre class="line-numbers"><code class="language-markup">&lt;ul id="listExample20"&gt;
+    <pre class="line-numbers"><code class="language-markup">&lt;ul class="listExample20"&gt;
     &lt;li&gt;
         &lt;input id="name" type="text"&gt;
         &lt;input id="age" type="text" data-validate='[ ["required"], ["integer"] ]'&gt; &lt;!-- 필수입력과 숫자만 입력 체크 --&gt;
@@ -72,19 +72,19 @@
         &lt;input id="registered" type="text" data-format='[ ["date", 8, "date"] ]'&gt; &lt;!-- 날자포멧 및 데이트피커 적용 --&gt;
     &lt;/li&gt;
 &lt;/ul&gt;
-&lt;button id="btnListExample20"&gt;행추가&lt;/button&gt;
+&lt;button class="btnListExample20"&gt;행추가&lt;/button&gt;
 
 &lt;script type="text/javascript"&gt;
-    var list = N(data).list("#listExample20").bind();
+    var list = N(data).list(".listExample20").bind();
 
     // 행추가
-    N("#btnListExample20").click(function() {
+    N(".btnListExample20").click(function() {
         list.add(); //add 메서드를 호출하면 id 속성을 가지고 있는 입력요소를 기반으로 { "age": "", "email": "", "registered" : "" } 와 같은 데이터가 추가됨.
     });
 &lt;/script&gt;</code></pre>
 
     <h4 class="notIndex">3. 리스트에 데이터 바인드 및 데이터 포메팅(N.formatter)&nbsp; >>&nbsp; 저장 메시지 출력(N.alert) 후 리스트 일괄 검증(N.validator)&nbsp; >>&nbsp; 저장(N.comm)</h4>
-    <pre class="line-numbers"><code class="language-markup">&lt;ul id="listExample30"&gt;
+    <pre class="line-numbers"><code class="language-markup">&lt;ul class="listExample30"&gt;
     &lt;li&gt;
         &lt;input id="name" type="text"&gt;
         &lt;input id="age" type="text" data-validate='[ ["required"], ["integer"] ]'&gt; &lt;!-- 필수입력과 숫자만 입력 체크 --&gt;
@@ -92,12 +92,12 @@
         &lt;input id="registered" type="text" data-format='[ ["date", 8, "date"] ]'&gt; &lt;!-- 날자포멧 및 데이트피커 적용 --&gt;
     &lt;/li&gt;
 &lt;/ul&gt;
-&lt;button id="btnListExample30"&gt;저장&lt;/button&gt;
+&lt;button class="btnListExample30"&gt;저장&lt;/button&gt;
 
 &lt;script type="text/javascript"&gt;
-    var list = N(data).list("#listExample30").bind();
+    var list = N(data).list(".listExample30").bind();
 
-    N("#btnListExample30").click(function() {
+    N(".btnListExample30").click(function() {
         N(window).alert({ // 1. confirm 메시지 출력
             msg : "저장 하겠습니까?",
             confirm : true,
@@ -112,7 +112,7 @@
 
     <h4 class="notIndex">4. N.select 와 N.list 연동</h4>
     <p class="alert">N.select 와 N.list을 연동하여 사용할 때는 반드시 N.select 를 먼저 초기화 하고 N.list 를 그 다음에 초기화 해야 합니다.</p>
-    <pre class="line-numbers"><code class="language-markup">&lt;ul id="listExample40"&gt;
+    <pre class="line-numbers"><code class="language-markup">&lt;ul class="listExample40"&gt;
     &lt;li&gt;&lt;!-- 데이터가 반복되면서 바인드 되는 부분 --&gt;
         &lt;input id="name" type="text"&gt;
         &lt;input id="age" type="text"&gt;
@@ -131,33 +131,35 @@
          "key" : "female",
          "val" : "female"
     }]).select({
-        context : "#listExample40 #gender",
+        context : ".listExample40 #gender",
         key : "key",
         val : "val"
     })
 
     // 2. 리스트 바인드
-    N(data).list("#listExample40").bind();
+    N(data).list(".listExample40").bind();
 &lt;/script&gt;</code></pre>
 
     <h4 class="notIndex">5. onSelect 이벤트를 이용하지 않고 행 의 특정 요소 클릭 시 동작하는 이벤트 핸들러를 jQuery on 을 이용하여 직접 정의.</h4>
     <p class="alert">N.list 의 행 요소들은 다시 바인드 하면 사라지고 다시 생성 되므로 bind나 click 대신 on 메서드를 이용하여 이벤트를 바인드 해야 합니다.</p>
 <pre class="line-numbers"><code class="language-javascript">// Controller
 N("selector").cont(function() {
-    // 1. 리스트 바인드
-    var list = N(data).list(N("selector"), view).bind();
+    init : function(view, request) {
+        // 1. 리스트 바인드
+	    var list = N(data).list(N("selector", view)).bind();
 
-    // 2. 행의 특정 요소(#col01) 클릭 시 동작하는 이벤트 핸들러 정의
-    list.context("li").on("click", "#col01", function() {
+	    // 2. 행의 특정 요소(#col01) 클릭 시 동작하는 이벤트 바인딩
+	    list.context().on("click", "li #col01", function() {
 
-        // 3. 행 인덱스 얻어오기
-        var rowEle = $(this).closest("li");
-        var idx = list.context("li").index(rowEle);
-        var rowData = list.data()[idx];
+	        // 3. 행 인덱스 얻어오기
+	        var rowEle = $(this).closest("li");
+	        var idx = list.context("li").index(rowEle);
+	        var rowData = list.data()[idx];
 
-        // 4. 가져 온 행 인덱스와 행 요소, 행 데이터를 이용하여 로직을 처리
-        N.log(idx, rowEle, rowData);
-    });
+	        // 4. 가져 온 행 인덱스와 행 요소, 행 데이터를 이용하여 로직을 처리
+	        N.log(idx, rowEle, rowData);
+	    });
+    }
 });
 </code></pre>
 </article>
@@ -165,7 +167,6 @@ N("selector").cont(function() {
 <script type="text/javascript">
 N(".refr040807").cont({
     init : function(view, request) {
-
     }
 });
 </script>

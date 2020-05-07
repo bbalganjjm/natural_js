@@ -84,7 +84,7 @@
     }
 ]</code></pre>
 
-<p class="alert">key, val, level, parent 옵션은 N.config(natural.config.js) 에 다음과 같이 전역옵션으로 설정하면 N(data).tree("#eyeColor").bind(); 와 같이 간편하게 사용할 수 있습니다. 다음 예제들은 N.config에 다음과 같이 설정되어 있다는 가정하에 구동되는 예제 입니다. 그렇지 않다면 컴포넌트 초기화 시 key, val, level, parent 옵션을 지정 해야 합니다.</p>
+<p class="alert">key, val, level, parent 옵션은 N.config(natural.config.js) 에 다음과 같이 전역옵션으로 설정하면 N(data).tree("selector").bind(); 와 같이 간편하게 사용할 수 있습니다. 다음 예제들은 N.config에 다음과 같이 설정되어 있다는 가정하에 구동되는 예제 입니다. 그렇지 않다면 컴포넌트 초기화 시 key, val, level, parent 옵션을 지정 해야 합니다.</p>
 <pre class="line-numbers"><code class="language-markup">N.context.attr("ui", {
     ...
     "tree": {
@@ -97,18 +97,18 @@
 });</code></pre>
 
     <h4 class="notIndex">1. 기본 Tree 생성</h4>
-        <pre class="line-numbers"><code class="language-markup">&lt;div id="treeBlock"&gt;&lt;/div&gt;
+        <pre class="line-numbers"><code class="language-markup">&lt;div class="treeBlock"&gt;&lt;/div&gt;
 
 &lt;script type="text/javascript"&gt;
-    N(data).tree("#treeBlock").bind();
+    N(data).tree(".treeBlock").bind();
 &lt;/script&gt;</code></pre>
 
     <h4 class="notIndex">2. 체크박스 Tree 생성</h4>
-        <pre class="line-numbers"><code class="language-markup">&lt;div id="treeBlock"&gt;&lt;/div&gt;
+        <pre class="line-numbers"><code class="language-markup">&lt;div class="treeBlock"&gt;&lt;/div&gt;
 
 &lt;script type="text/javascript"&gt;
     N(data).tree({
-        context: "#treeBlock",
+        context: ".treeBlock",
         checkbox: true
     }).bind();
 &lt;/script&gt;</code></pre>

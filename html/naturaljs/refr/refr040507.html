@@ -5,7 +5,7 @@
     </h2>
 
     <h4 class="notIndex">1. 선언형으로 탭 생성</h4>
-        <pre class="line-numbers"><code class="language-markup">&lt;div id="tab"&gt;
+        <pre class="line-numbers"><code class="language-markup">&lt;div class="tab"&gt;
     &lt;ul&gt;
         &lt;!-- Tabs --&gt;
         &lt;li&gt;&lt;a href="#tab1"&gt;Tab1&lt;/a&gt;&lt;/li&gt;
@@ -20,11 +20,11 @@
 &lt;/div&gt;
 
 &lt;script type="text/javascript"&gt;
-    N("#tab").tab();
+    N(".tab").tab();
 &lt;/script&gt;</code></pre>
 
     <h4 class="notIndex">2. 명령형으로 탭 생성</h4>
-        <pre class="line-numbers"><code class="language-markup">&lt;div id="tab"&gt;
+        <pre class="line-numbers"><code class="language-markup">&lt;div class="tab"&gt;
     &lt;ul&gt;
         &lt;li&gt;&lt;a href="#tab1"&gt;Tab1&lt;/a&gt;&lt;/li&gt;
         &lt;li&gt;&lt;a href="#tab2"&gt;Form&lt;/a&gt;&lt;/li&gt;
@@ -36,7 +36,7 @@
 &lt;/div&gt;
 
 &lt;script type="text/javascript"&gt;
-    N("#tab").tab({
+    N(".tab").tab({
         tabOpts : [
             {}, //Tab1,
             { "url" : "html/naturaljs/apid/form.html", "onOpen" : "onOpen", "preload" : true }, //Tab2
@@ -46,7 +46,7 @@
 &lt;/script&gt;</code></pre>
 
     <h4 class="notIndex">3. 좌우 스크롤 가능한 탭 생성</h4>
-        <pre class="line-numbers"><code class="language-markup">&lt;div id="tab"&gt;
+        <pre class="line-numbers"><code class="language-markup">&lt;div class="tab"&gt;
     &lt;a href="#"&gt;&lt;span&gt;&lt;/span&gt;&lt;/a&gt; &lt;!-- 처음으로 가기 버튼 --&gt;
     &lt;ul&gt;
         &lt;li&gt;&lt;a href="#tab1"&gt;Tab1&lt;/a&gt;&lt;/li&gt;
@@ -60,7 +60,7 @@
 &lt;/div&gt;
 
 &lt;script type="text/javascript"&gt;
-    N("#tab").tab({
+    N(".tab").tab({
         tabScroll : true
     });
 &lt;/script&gt;</code></pre>
@@ -69,7 +69,6 @@
 <script type="text/javascript">
 N(".refr040507").cont({
     init : function(view, request) {
-
     }
 });
 </script>
