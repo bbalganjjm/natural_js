@@ -19,11 +19,10 @@
             <td>
                 <p lang="ko_KR">N.pagination에 바인딩 할 데이터를 지정 합니다.</p>
                 <p lang="en_US">Specifies the data to bind to N.pagination.</p>
-                <p class="alert">data가 입력되면 totalCount 값이 자동으로 계산되어 들어가므로 totalCount 값을 0으로 지정하거나 지정하지 않아야 합니다.</p>
-                <p class="alert">
-                    서버에서 DB 쿼리로 페이징 시 에는 data 옵션을 지정하지 말고 totalCount 값만 서버에서 얻어와 지정하기 바랍니다.<br>
-                    ex) N().pagination({ totalCount : 1234 });
-                </p>
+                <p lang="ko_KR" class="alert">data옵션이 지정되면 totalCount 값이 자동으로 계산되어 설정되므로 totalCount 값을 0으로 설정하거나 설정하지 않아야 합니다.</p>
+                <p lang="en_US" class="alert">If the data option is specified, the totalCount value is automatically calculated and set, so the totalCount value must be set to 0 or not.</p>
+                <p lang="ko_KR" class="alert">DB 페이징을 하는 경우 data 옵션을 지정하지 말고 totalCount 값만 서버에서 가져와 설정하기 바랍니다.</p>
+                <p lang="en_US" class="alert">In case of DB paging, do not specify the data option but get the totalCount value from the server and set it.</p>
             </td>
         </tr>
         <tr>
@@ -34,20 +33,27 @@
             <td>
                 <p lang="ko_KR">N.pagination을 적용 할 context 요소를 지정 합니다.</p>
                 <p lang="en_US">Specifies the context element to apply N.pagination.</p>
-
                 <p lang="ko_KR">N.pagination의 context 요소는 반드시 div 태그 안에 ul, li 태그로 작성 해야 합니다.</p>
                 <p lang="en_US">The context element of N.pagination must be written with ul, li tag in div tag.</p>
                 <ul>
-                    <li>첫 페이지, 마지막 페이지, 이전 페이지, 다음페이지
+                    <li>
+                        <span lang="ko_KR">처음 페이지, 마지막 페이지, 이전 페이지, 다음페이지</span>
+                        <span lang="en_US">First page, Last page, Previous page, Next page</span>
                         <ul>
-                            <li>ul 태그의 li 태그에 a 태그를 넣어서 사용 합니다.</li>
-                            <li>첫 페이지, 이전 페이지 요소와 마지막페이지, 다음페이지 요소는 ul 태그를 분리하여 구성 합니다.</li>
-                            <li>첫 페이지, 마지막페이지 요소는 필요하지 않다면 해당 li 태그를 작성하지 않으면 해당 기능이 비활성화 됩니다.</li>
+                            <li lang="ko_KR">ul 태그의 li 태그에 a 태그를 넣어서 작성 합니다.</li>
+                            <li lang="en_US">Write "a" tag by inserting "a" tag in li tag of ul tag.</li>
+                            <li lang="ko_KR">처음 페이지와 이전 페이지 요소, 마지막페이지와 다음페이지 요소는 ul 태그를 분리하여 작성 합니다.</li>
+                            <li lang="en_US">Write the first and previous page elements and the last and next page elements in separate ul tags.</li>
+                            <li lang="ko_KR">처음 페이지, 마지막페이지 링크와 관련 된 태그들을 작성하지 않으면 관련 기능이 비활성화 됩니다.</li>
+                            <li lang="en_US">If you do not write tags related to the first page or last page link, the related feature is disabled.</li>
                         </ul>
                     </li>
-                    <li>페이지 인덱스
+                    <li>
+                        <span lang="ko_KR">페이지 인덱스</span>
+                        <span lang="en_US">Page index</span>
                         <ul>
-                            <li>ul 태그의 li 태그에 a 태그를 넣어서 사용 합니다.</li>
+                            <li lang="ko_KR">ul 태그의 li 태그에 a 태그를 넣어서 작성 합니다.</li>
+                            <li lang="en_US">Write by inserting a tag in li tag of ul tag.</li>
                         </ul>
                     </li>
                 </ul>
@@ -72,8 +78,10 @@
             <td>0</td>
             <td style="text-align: center;">O</td>
             <td>
-                <p>페이징 될 전체 로우 카운트를 지정 합니다.</p>
-                <p class="alert">서버에서 DB 쿼리로 페이징 시 에는 data 옵션을 지정하지 말고 totalCount 값만 서버에서 얻어와 지정하기 바랍니다.</p>
+                <p lang="ko_KR">페이징 될 목록의 전체 행 수를 설정 합니다.</p>
+                <p lang="en_US">Sets the total number of rows in the list to be paged.</p>
+                <p lang="ko_KR" class="alert">DB 페이징을 하는 경우 data 옵션을 지정하지 말고 totalCount 값만 서버에서 가져와 설정하기 바랍니다.</p>
+                <p lang="en_US" class="alert">In case of DB paging, do not specify the data option but get the totalCount value from the server and set it.</p>
             </td>
         </tr>
         <tr>
@@ -81,21 +89,30 @@
             <td>number</td>
             <td>10</td>
             <td></td>
-            <td>한번에 몇개의 로우데이터를 반환 할 것인지 지정 합니다.</td>
+            <td>
+                <p lang="ko_KR">페이지 당 행 수를 설정 합니다.</p>
+                <p lang="en_US">Set the number of rows per page.</p>
+            </td>
         </tr>
         <tr>
             <td>countPerPageSet</td>
             <td>number</td>
             <td>10</td>
             <td></td>
-            <td>페이징 번호를 몇개를 표시할 것인지 지정 합니다.</td>
+            <td>
+                <p lang="ko_KR">페이지 세트당 페이지 수를 설정 합니다.</p>
+                <p lang="en_US">Set the number of pages per page set.</p>
+            </td>
         </tr>
         <tr>
             <td>pageNo</td>
             <td>number</td>
             <td>1</td>
             <td></td>
-            <td>초기화시 처음 표시 할 페이지 번호를 지정 합니다.</td>
+            <td>
+                <p lang="ko_KR">N.pagination 을 초기화 한다음 최초로 표시 할 페이지의 번호를 설정 합니다.</p>
+                <p lang="en_US">After initializing N.pagination, set the page number to be displayed first.</p>
+            </td>
         </tr>
         <tr>
             <td>onChange</td>
@@ -103,32 +120,64 @@
             <td>null</td>
             <td></td>
             <td>
-            페이지가 전환 될때 발생되는 이벤트 입니다.
+                <p lang="ko_KR">페이지가 전환 될 때 발생되는 이벤트 입니다.</p>
+                <p lang="en_US">This event is fired when the page is switched.</p>
                 <pre><code class="language-javascript">onChange : function(pageNo, selEle, selData, currPageNavInfo) {
-    // this 는 N.pagination 인스턴스
-    // pageNo 는 선택한 페이지 번호
-    // selEle 는 선택한 페이지 링크 요소
-    // selData 는 선택한 페이지가 가지고 있는 데이터 리스트
-    // currPageNavInfo 는 이벤트가 발생할 시점의 페이징 정보
+    // this : N.pagination instance
+    // pageNo : Page number
+    // selEle : Selected page link element
+    // selData : Data list of the selected page
+    // currPageNavInfo : Paging information when the event occurs
 }</code></pre>
-                <p class="alert">서버에서 DB 쿼리로 페이징 시  먼저 조회하고자 하는 전체 행수를 가져오고 onChange 이벤트 핸들러의 인자로 들어오는 currPageNavInfo 정보로 선택될 DB 로우의 시작값(currPageNavInfo.startRowNum)과 얼마만큼 가져올지 등의 정보(currPageNavInfo.countPerPage)를 서버에 파라미터로 전송한 결과 데이터를 N.grid 에 bind하는 형태로 DB 페이징을 처리 할 수 있습니다.</p>
-                <p class="alert">blockOnChangeWhenBind 옵션이 true 이면 페이징 버튼들을 클릭 할 때만 이벤트가 실행 됩니다.</p>
-                <p class="alert">
-                    currPageNavInfo 정보<br>
-                    &nbsp;&nbsp;-&nbsp;pageNo : 선택한 페이지 번호<br>
-                    &nbsp;&nbsp;-&nbsp;countPerPage : 페이지당 행 수<br>
-                    &nbsp;&nbsp;-&nbsp;countPerPageSet : 페이지 세트당 페이지 수<br>
-                    &nbsp;&nbsp;-&nbsp;currSelPageSet : 현재 페이지세트(페이지 그룹) 번호<br>
-                    &nbsp;&nbsp;-&nbsp;pageCount : 전체 페이지 개수<br>
-                    &nbsp;&nbsp;-&nbsp;pageSetCount : 전체 페이지세트(페이지 그룹) 개수<br>
-                    &nbsp;&nbsp;-&nbsp;totalCount : 전체 행 개수<br>
-                    &nbsp;&nbsp;-&nbsp;startPage : 현재 페이지세트(페이지 그룹) 중 첫번째 페이지 번호<br>
-                    &nbsp;&nbsp;-&nbsp;startRowIndex : 선택한 페이지의 첫번째 행 인덱스<br>
-                    &nbsp;&nbsp;-&nbsp;startRowNum : 선택한 페이지의 첫번째 행 번호<br>
-                    &nbsp;&nbsp;-&nbsp;endPage : 현재 페이지세트(페이지 그룹) 중 마지막 페이지 번호<br>
-                    &nbsp;&nbsp;-&nbsp;endRowIndex : 선택한 페이지의 마지막 행 인덱스<br>
-                    &nbsp;&nbsp;-&nbsp;endRowNum : 선택한 페이지의 마지막 행 번호<br>
-                </p>
+                <p lang="ko_KR">currPageNavInfo 객체 정보</p>
+                <p lang="en_US">currPageNavInfo object information</p>
+                <ul>
+                    <li lang="ko_KR">pageNo : 현재 페이지 번호.</li>
+                    <li lang="en_US">pageNo : Current page numbe.r</li>
+                    <li lang="ko_KR">countPerPage : 페이지 당 행 수</li>
+                    <li lang="en_US">countPerPage : number of rows per page.</li>
+                    <li lang="ko_KR">countPerPageSet : 페이지 세트당 페이지 수.</li>
+                    <li lang="en_US">countPerPageSet : number of pages per page set.</li>
+                    <li lang="ko_KR">currSelPageSet : 현재 페이지 세트 번호.</li>
+                    <li lang="en_US">currSelPageSet : Current page set number.</li>
+                    <li lang="ko_KR">pageCount : 전체 페이지 수.</li>
+                    <li lang="en_US">pageCount : Total number of pages.</li>
+                    <li lang="ko_KR">pageSetCount : 전체 페이지 세트 수.</li>
+                    <li lang="en_US">pageSetCount : Total number of page sets.</li>
+                    <li lang="ko_KR">totalCount : 전체 행 수.</li>
+                    <li lang="en_US">totalCount : Total number of rows.</li>
+                    <li lang="ko_KR">startPage : 현재 페이지 세트 중 첫번째 페이지 번호.</li>
+                    <li lang="en_US">startPage : Number of the first page in the current page set.</li>
+                    <li lang="ko_KR">startRowIndex : 선택한 페이지의 첫번째 행 인덱스.</li>
+                    <li lang="en_US">startRowIndex : Index of the first row on the selected page.</li>
+                    <li lang="ko_KR">startRowNum : 선택한 페이지의 첫번째 행 번호</li>
+                    <li lang="en_US">startRowNum : Number of the first row of the selected page.</li>
+                    <li lang="ko_KR">endPage : 현재 페이지 세트 중 마지막 페이지 번호.</li>
+                    <li lang="en_US">endPage : Number of the last page in the current page set.</li>
+                    <li lang="ko_KR">endRowIndex : 선택한 페이지의 마지막 행 인덱스.</li>
+                    <li lang="en_US">endRowIndex : Index of the last row on the selected page.</li>
+                    <li lang="ko_KR">endRowNum : 선택한 페이지의 마지막 행 번호.</li>
+                    <li lang="en_US">endRowNum : Number of the last row of the selected page.</li>
+                </ul>
+                <p lang="ko_KR">DB 페이징을 하는 경우 서버에서 totalCount 값을 먼저 가져온 다음 onChange 이벤트 핸들러의 currPageNavInfo 인자 값을 서버에 파라미터로 전송하여 페이징 된 데이터를 조회 할 수 있습니다.</p>
+                <p lang="en_US">In case of DB paging, get the totalCount value from the server first. and then you can retrive the paged data by sending the value of the currPageNavInfo argument of the onChange event handler as a parameter to the server.</p>
+                <p lang="ko_KR">이 페이징 된 데이터를 onChange 이벤트에서 N.grid 나 N.list 에 페이지가 바뀔 때마다 바인딩 해 주면 됩니다.</p>
+                <p lang="en_US">Bind this paged data to N.grid or N.list in onChange event whenever the page changes.</p>
+                <pre><code>var grid = N(data).grid(".grid-context");
+
+    N.comm("getTotalCnt.json").submit(function(data){
+        N(data).pagination({
+            context: ".pagination-context",
+            totalCount: data.totalCount,
+            onChange: function(pageNo, selEle, selData, currPageNavInfo) {
+                N(currPageNavInfo).comm("getPagedDataList.json").submit(function(data){
+                    grid.bind(selData);
+                });
+            }
+        }).bind();
+    });</code></pre>
+                <p class="alert" lang="ko_KR">blockOnChangeWhenBind 옵션이 true 로 설정 되어있을 경우 페이징 버튼들을 클릭 할 때만 이벤트가 실행 됩니다.</p>
+                <p class="alert" lang="en_US">If the blockOnChangeWhenBind option is set to true, the event is executed only when the paging buttons are clicked.</p>
             </td>
         </tr>
         <tr>
@@ -137,8 +186,8 @@
             <td>false</td>
             <td></td>
             <td>
-                <p lang="ko_KR">bind 함수를 호출 할 때 onChange 이벤트를 차단 할지 여부</p>
-                <p lang="en_US">Whether to block onChange event when call the bind method</p>
+                <p lang="ko_KR">true로 설정하면 bind 메서드를 호출 할 때 onChange 이벤트를 실행 하지 않습니다.</p>
+                <p lang="en_US">If set to true, the onChange event is not fired when the bind method is called.</p>
             </td>
         </tr>
     </table>
@@ -147,7 +196,6 @@
 <script type="text/javascript">
 N(".refr041004").cont({
     init : function(view, request) {
-
     }
 });
 </script>

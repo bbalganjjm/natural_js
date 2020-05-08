@@ -33,31 +33,44 @@
                 <p lang="ko_KR">N.grid의 context 요소는 반드시 table 태그로 작성 해야 합니다.</p>
                 <p lang="en_US">The context element of N.grid must be written with table tag.</p>
                 <ul>
-                    <li>thead - header
+                    <li>thead - Grid header
                         <ul>
-                            <li>그리드의 컬럼명을 입력 합니다.</li>
-                            <li>thead 의 셀은 th 태그를 사용 합니다.</li>
-                            <li>header 가 필요 없으면 작성하지 않아도 되지만 헤더에서 구동 되는 sortable 나 filter 등의 옵션은 사용 할 수 없습니다.</li>
-                            <li>tr 을 여러개 입력 할 수 있습니다.</li>
+                            <li lang="ko_KR">그리드의 컬럼 타이틀을 작성 합니다.</li>
+                            <li lang="en_US">Write the column title of the grid.</li>
+                            <li lang="ko_KR">thead 의 셀은 th 태그를 사용 합니다.</li>
+                            <li lang="en_US">Thead's cells use the th tag.</li>
+                            <li lang="ko_KR">header 가 필요 없으면 작성하지 않아도 되지만 헤더에서 구동 되는 sortable 나 filter 등의 옵션은 사용 할 수 없습니다.</li>
+                            <li lang="en_US">If you don't need a header, you don't have to write it, but you can't use options like sortable or filter that work on headers.</li>
+                            <li lang="ko_KR">thead 태그 안에 tr 태그를 여러개 작성 할 수 있습니다.</li>
+                            <li lang="en_US">You can write multiple tr tags inside thead tag.</li>
                         </ul>
                     </li>
-                    <li>tbody - body
+                    <li>tbody - Grid body
                         <ul>
-                            <li>행을 표현하는 최상위 요소는 tbody 이고 목록 데이터의 길이만큼 tbody 가 복제 됩니다.</li>
-                            <li>tbody 의 셀은 td 태그를 사용 합니다.</li>
+                            <li lang="ko_KR">행을 표현하는 최상위 요소는 tbody 이고 목록 데이터의 길이만큼 tbody 가 복제 됩니다.</li>
+                            <li lang="en_US">The top element representing the row is tbody, and tbody is duplicated by the length of the list data.</li>
+                            <li lang="ko_KR">tbody 의 셀은 td 태그를 사용 합니다.</li>
+                            <li lang="en_US">Cells in tbody use td tags.</li>
                             <li>
-                                <p>바인딩 된 데이터의 프로퍼티명과 요소의 id 속성값이 같으면 데이터가 바인딩 됩니다.</p>
+                                <p lang="ko_KR"><strong>행 데이터의 프로퍼티명과 요소의 id 속성값이 같으면 데이터가 바인딩 됩니다.</strong></p>
+                                <p lang="en_US"><strong>If the property name of the row data and the value of the id attribute of the element are the same, the data is bound.</strong></p>
                                 <p lang="ko_KR" class="alert" style="margin: 5px;">Natural-JS 의 모든 데이터 관련 컴포넌트는 빠른 바인딩 속도를 위해 어쩔수 없이 id 속성을 사용 합니다.</p>
                                 <p lang="en_US" class="alert" style="margin: 5px;">All data-related components of Natural-JS inevitably use id attribute for fast binding speed.</p>
-                                <p class="alert">셀(td) 안에 2개 이상의 컬럼 데이터를 바인딩 하려면 요소를 2개 이상 만들고 id 속성값을 추가 해 주면 됩니다. 이때 thead 의 th 에 data-id 속성값에 정렬/필터등의 기준이 되는 데이터 프로퍼티명을 설정 해 주어야 합니다.</p>
+                                <p lang="ko_KR" class="alert">1개의 셀(td) 안에 2개 이상의 컬럼 데이터를 바인딩 하려면 셀안에 요소를 2개 이상 만들고 id 속성값을 추가 해 주면 됩니다.
+                                                            이때 thead 의 th 에 data-id 속성값에 정렬/필터등의 기준이 되는 데이터 프로퍼티명을 설정 해 주어야 합니다.</p>
+                                <p lang="en_US" class="alert">To bind two or more column data in one cell (td), create two or more elements in the cell and add the id attribute value.
+                                                            At this time, you must set the data property name that is the basis for sorting / filtering and etc. on the data-id attribute value in th of thead.</p>
                             </li>
-                            <li>tr 을 여러개 입력 할 수 있습니다.</li>
+                            <li lang="ko_KR">tbody 태그 안에 tr 태그를 여러개 작성 하여 행 그룹을 만들 수 있습니다.</li>
+                            <li lang="en_US">You can create a group of rows by creating multiple tr tags inside a tbody tag.</li>
                         </ul>
                     </li>
-                    <li>tfoot - footer
+                    <li>tfoot - Grid footer
                         <ul>
-                            <li>tfoot 관련 된 기능이 없어 필요 없으면 작성하지 않아도 됩니다.</li>
-                            <li>tfoot 의 셀은 td 태그를 사용 합니다.</li>
+                            <li lang="ko_KR">Grid footer가 필요 없으면 작성하지 않아도 됩니다.</li>
+                            <li lang="en_US">If you don't need Grid footer, you don't need to write it.</li>
+                            <li lang="ko_KR">tfoot 의 셀은 td 태그를 사용 합니다.</li>
+                            <li lang="en_US">Cells in tfoot use td tags.</li>
                         </ul>
                     </li>
                 </ul>
