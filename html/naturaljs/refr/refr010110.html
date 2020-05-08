@@ -19,7 +19,7 @@
             <td style="text-align: center;">N/A</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p>입력 된 메시지 리소스에서 프레임웍에 설정 된 로케일에 맞는 메시지를 반환 해 줍니다.</p>
+                <p>입력 된 메시지 리소스에서 N.config에 설정 된 로케일에 맞는 메시지를 반환 해 줍니다.</p>
                 <p class="alert">프레임웍의 기본 로케일은 N.config(natural.config.js) 의 N.context.attr("core").locale 속성값으로 정의 할 수 있고 N.locale 함수로 로케일 값을 가져오거나 변경 가능 합니다.</p>
             </td>
         </tr>
@@ -29,19 +29,22 @@
             <td>object</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p>메시지 리소스 객체를 지정 합니다.</p>
-                <p>메시지 리소스는 object 타입으로 만들면 되고 다음과 같이 메시지 세트를 구성 해야 합니다.</p>
+                <p lang="ko_KR">메시지 리소스 객체를 지정 합니다.</p>
+                <p lang="en_US">Specifies the message resource object.</p>
+                <p lang="ko_KR">메시지 리소스는 object 타입으로 생성하고 다음과 같이 로케일별 메시지 세트를 구성 해야 합니다.</p>
+                <p lang="en_US">Message resource must be created as object type and the message set for each locale should be composed as follows.</p>
                 <pre><code class="language-javascript">var message = {
-    &quot;ko_KR&quot; : {
-        key : ＂메시지{0}＂
+    "ko_KR" : {
+        key : "안녕 {0}."
     },
-    &quot;en_US&quot; : {
-        key : ＂message{0}＂
+    "en_US" : {
+        key : "Hello {0}."
     }
 }
 
-var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
-                <p>결과 : msg = "메시지 입니다"
+var msg = N.message.get(message, "key", ["Natural-JS"]);
+
+// msg : "Hello Natural-JS."</code></pre>
             </td>
         </tr>
         <tr>
@@ -49,14 +52,22 @@ var msg = N.message.get(message, "key", [" 입니다"]);</code></pre>
             <td>key</td>
             <td>string</td>
             <td style="text-align: center;">N/A</td>
-            <td>메시지 키</td>
+            <td>
+                <p lang="ko_KR">메시지 프로퍼티명.</p>
+                <p lang="en_US">Message property name.</p>
+            </td>
         </tr>
         <tr>
             <td></td>
             <td>vars</td>
             <td>array</td>
             <td style="text-align: center;">N/A</td>
-            <td>메시지 변수를 치환할 값</td>
+            <td>
+                <p lang="ko_KR">메시지의 변수를 입력 한 값으로 치환 해 줍니다.</p>
+                <p lang="en_US">The variable of the message is replaced with the entered value.</p>
+                <p lang="ko_KR" class="alert">메시지에 선언 된 {index} 와 같은 변수가 vars 옵션으로 설정 한 array 의 index 에 해당 하는 값으로 치환 됩니다.</p>
+                <p lang="en_US" class="alert">Variables such as {index} declared in the message are replaced with the value corresponding to the index of the array set with the vars option.</p>
+            </td>
         </tr>
     </table>
 
