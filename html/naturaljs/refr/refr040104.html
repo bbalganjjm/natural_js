@@ -104,10 +104,13 @@
                 <p lang="ko_KR">메시지 대화상자의 넓이.</p>
                 <p lang="en_US">The width of the message dialog.</p>
                 <ul>
-                    <li>number 타입 일 경우 지정한 수치만큼(px) 넓이가 지정 됩니다.</li>
-                    <li>function 일 경우 msgContext(modal 옵션이 true 일때 바닥에 깔리는 요소), msgContents(메시지 컨텐츠 요소) 가 인자로 전달 되고 return 된 값으로 넓이가 지정 됩니다.
-                        <pre><code class="language-javascript">...
-// 대화상자의 넓이를 화면에 꽉 채우기
+                    <li lang="ko_KR">number 타입으로 설정 할 경우 입력한 수치(px)가 요소의 넓이로 설정 됩니다.</li>
+                    <li lang="en_US">If set to number type, the entered value(px) is set as the element width.</li>
+                    <li>
+                        <p lang="ko_KR">function 타입 으로 설정 할 경우 msgContext(modal 옵션이 true 일때 화면에 덮는 요소), msgContents(메시지 컨텐츠 요소) 가 인자로 전달 되고 return 된 값으로 요소의 넓이가 설정 됩니다.</p>
+                        <p lang="en_US">If set to function type, msgContext (the element that covers the screen when the modal option is true) and msgContents (the message content element) are passed as arguments, and the width of the element is set as the returned value.</p>
+                        <pre><code class="language-javascript">...<span lang="ko_KR">// 대화상자의 넓이를 화면에 꽉 채우기</span>
+<span lang="en_US">// Fully fill the width of the dialog on the screen.</span>
 width : function(msgContext, msgContents) {
     return $(window).width();
 },
@@ -125,12 +128,15 @@ width : function(msgContext, msgContents) {
                 <p lang="ko_KR">메시지 대화상자의 타이틀 영역을 제외한 컨텐츠의 높이.</p>
                 <p lang="en_US">The height of the content, excluding the title area of ​​the message dialog.</p>
                 <ul>
-                    <li>number 타입 일 경우 지정한 수치만큼(px) 높이가 지정 됩니다.</li>
-                    <li>function 일 경우 msgContext(modal 옵션이 true 일때 바닥에 깔리는 요소), msgContents(메시지 컨텐츠 요소) 가 인자로 전달 되고 return 된 값으로 높이가 지정 됩니다.
-                        <pre><code class="language-javascript">...
-// 대화상자의 높이를 화면에 꽉 채우기
-height: function(msgContext, msgContents) {
-    // 팝업이 열릴때 msgContents 는 감춰진 상태여서 show() 함수를 호출 한다음 타이틀 영역의 높이를 가져옴.
+                    <li lang="ko_KR">number 타입으로 설정 할 경우 입력한 수치(px)가 요소의 높이로 설정 됩니다.</li>
+                    <li lang="en_US">When set to number type, the entered value(px) is set as the element height.</li>
+                    <li>
+                        <p lang="ko_KR">function 타입 으로 설정 할 경우 msgContext(modal 옵션이 true 일때 화면에 덮는 요소), msgContents(메시지 컨텐츠 요소) 가 인자로 전달 되고 return 된 값으로 요소의 높이가 설정 됩니다.</p>
+                        <p lang="en_US">If set to function type, msgContext(the element that covers the screen when the modal option is true) and msgContents(the message content element) are passed as arguments, and the height of the element is set as the returned value.</p>
+                        <pre><code class="language-javascript">...<span lang="ko_KR">// 대화상자의 높이를 화면에 꽉 채우기</span>
+<span lang="en_US">// Fully fill the height of the dialog on the screen.</span>
+height: function(msgContext, msgContents) {<span lang="ko_KR">    // 메시지 대화상자가 열릴 때 msgContents 는 숨겨져 있기 때문에 show() 함수를 호출 한 다음 타이틀 영역의 높이를 가져와야 합니다.</span>
+    <span lang="en_US">// You need to call the show () function and then get the height of the title area because the message Content is hidden when the message dialog opens.</span>
     return $(window).height() - msgContents.show().find(".msg_title_box__").height();
 },
 ...</code></pre>
@@ -166,10 +172,13 @@ height: function(msgContext, msgContents) {
             <td>remove</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p>메시지 대화상자가 닫혔을 때 대화상자 요소에 대한 처리 방법을 지정 합니다.</p>
+                <p lang="ko_KR">메시지 대화상자가 닫혔을 때 대화상자 요소를 감출 것 인지, 제거 할 것 인지를 설정 합니다.</p>
+                <p lang="en_US">Set whether to hide or remove the dialog element when the message dialog is closed.</p>
                 <ul>
-                    <li>hide : 메시지 대화상자 요소를 숨겨 이전 상태를 유지 합니다.</li>
-                    <li>remove : 메시지 대화상자 요소를 제거하여 상태를 초기화 합니다.</li>
+                    <li lang="ko_KR">hide : 메시지 대화상자 요소를 숨겨서 이전 상태를 유지 합니다.</li>
+                    <li lang="en_US">hide : Hides the message dialog element to maintain its previous state.</li>
+                    <li lang="ko_KR">remove : 메시지 대화상자 요소를 제거하여 상태를 초기화 합니다.</li>
+                    <li lang="en_US">remove : Initializes the state by removing the message dialog element.</li>
                 </ul>
             </td>
         </tr>
@@ -179,7 +188,8 @@ height: function(msgContext, msgContents) {
             <td>true</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p>true로 설정하면 context 로 지정한 요소를 가리는 overlay 요소를 생성하여 메시지 대화상자의 확인 버튼 외에 모든 요소의 이벤트를 차단 합니다.</p>
+                <p lang="ko_KR">true로 설정하면 context 로 지정한 요소를 가리는 overlay 요소를 생성하여 메시지 대화상자의 컨텐츠를 제외하고 모든 이벤트를 차단 합니다.</p>
+                <p lang="en_US">If set to true, creates an overlay element that covers the element specified by context to block all events except the content of the message dialog.</p>
             </td>
         </tr>
         <tr>
@@ -212,7 +222,7 @@ height: function(msgContext, msgContents) {
             <td>true</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">false로 설정하면 브라우저의 크기를 조절 하거나 부모 컨텐츠의 높이가 동적으로 변경 되었을때 블록 오버레이의 크기와 메시지 대화상자의 위치를 자동으로 조정 되지 않습니다.</p>
+                <p lang="ko_KR">false로 설정하면 브라우저의 크기를 조절 하거나 부모 컨텐츠의 높이가 동적으로 변경 되었을때 블록 오버레이의 크기와 메시지 대화상자의 위치를 자동으로 조정 하지 않습니다.</p>
                 <p lang="en_US">If set to false, It does not automatically adjust the size of the block overlay and the location of the message dialog when the browser is resized or the height of the parent content is dynamically changed.</p>
             </td>
         </tr>
@@ -258,14 +268,20 @@ height: function(msgContext, msgContents) {
             <td>boolean</td>
             <td>true</td>
             <td style="text-align: center;">X</td>
-            <td>오버레이 요소를 클릭 했을 때 메세지 대화상자를 닫을지 여부</td>
+            <td>
+                <p lang="ko_KR">false로 설정하면 msgContext(modal 옵션이 true 일때 화면에 덮는 요소) 를 클릭 해도 메시지 대화상자가 닫히지 않습니다.</p>
+                <p lang="en_US">If set to false, message dialog does not close when clicking msgContext(the element that covers the screen when the modal option is true).</p>
+            </td>
         </tr>
         <tr>
             <td>escClose</td>
             <td>boolean</td>
             <td>true</td>
             <td style="text-align: center;">X</td>
-            <td>"ESC" 키를 눌렀을 때 메세지 대화상자를 닫을지 여부</td>
+            <td>
+                <p lang="ko_KR">false로 설정하면 ESC 키를 눌러도 메시지 대화상자가 닫히지 않습니다.</p>
+                <p lang="en_US">If set to false, message dialog does not close when pressing ESC key.</p>
+            </td>
         </tr>
         <tr>
             <td>windowScrollLock</td>
@@ -297,13 +313,22 @@ height: function(msgContext, msgContents) {
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p>확인버튼을 눌렀을때 실행되는 이벤트</p>
-                <pre><code class="language-javascript">onOk : function(msgContext, msgContents) {
+                <p lang="ko_KR">확인버튼을 클릭 했을 때 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="en_US">Defines an event handler that is executed when the OK button is clicked.</p>
+                <pre lang="ko_KR"><code class="language-javascript">onOk : function(msgContext, msgContents) {
     // this : N.alert 인스턴스
     // msgContext : 메시지 오버레이 요소
     // msgContents : 메시지 대화상자 요소
 }</code></pre>
-                <p class="alert">이벤트 핸들러 함수 에서 0을 반환 하면 대화 상자를 닫지 않습니다.</p>
+                <pre lang="en_US"><code class="language-javascript">onOk : function(msgContext, msgContents) {
+    // this : N.alert instance
+    // msgContext : Message overlay element
+    // msgContents : Message dialog element
+}</code></pre>
+                <p lang="ko_KR" class="alert">0을 return 하면 이벤트 핸들러만 실행 되고 대화 상자를 닫지 않습니다.</p>
+                <p lang="en_US" class="alert">If it returns 0, only the event handler is executed and the dialog box is not closed.</p>
+                <p lang="ko_KR" class="alert">button 옵션을 true 로 설정 했을 때 생성 되는 확인 버튼에서 작동 됩니다.</p>
+                <p lang="en_US" class="alert">It works on the Ok button created when the button option is set to true.</p>
             </td>
         </tr>
         <tr>
@@ -312,13 +337,22 @@ height: function(msgContext, msgContents) {
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p>취소 버튼을 누르거나 X 버튼을 눌렀을때 또는 메시지 오버레이를 클릭하여 메시지 대화상자가 닫혔을때 실행되는 이벤트</p>
-                <pre><code class="language-javascript">onCancel : function(msgContext, msgContents) {
+                <p lang="ko_KR">취소 버튼 클릭 하거나 X 버튼을 클릭 하거나 메시지 오버레이 요소 클릭 하거나 ESC 키를 눌러서 메시지 대화상자가 닫혔을 때 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="en_US">Defines an event handler that is executed when the message dialog box is closed by clicking the Cancel button, clicking the X button, clicking the message overlay element, or pressing the ESC key.</p>
+                <pre lang="ko_KR"><code class="language-javascript">onCancel : function(msgContext, msgContents) {
     // this : N.alert 인스턴스
     // msgContext : 메시지 오버레이 요소
     // msgContents : 메시지 대화상자 요소
 }</code></pre>
-                <p class="alert">이벤트 핸들러 함수 에서 0을 반환 하면 대화 상자를 닫지 않습니다.</p>
+                <pre lang="en_US"><code class="language-javascript">onCancel : function(msgContext, msgContents) {
+    // this : N.alert instance
+    // msgContext : Message overlay element
+    // msgContents : Message dialog element
+}</code></pre>
+                <p lang="ko_KR" class="alert">0을 return 하면 이벤트 핸들러만 실행 되고 메시지 대화상자를 닫지 않습니다.</p>
+                <p lang="en_US" class="alert">If it returns 0, only the event handler is executed and the message dialog is not closed.</p>
+                <p lang="ko_KR" class="alert">button 옵션을 true 로 설정 했을 때 생성 되는 취소 버튼에서 작동 됩니다.</p>
+                <p lang="en_US" class="alert">It works on the Cancel button created when the button option is set to true.</p>
             </td>
         </tr>
         <tr>
@@ -327,11 +361,17 @@ height: function(msgContext, msgContents) {
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p>메시지 대화상자가 표시 되기 전 실행되는 이벤트</p>
-                <pre><code class="language-javascript">onBeforeShow : function(msgContext, msgContents) {
+                <p lang="ko_KR">메시지 대화상자가 표시 되기 전에 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="en_US">Defines an event handler that is executed before the message dialog is displayed.</p>
+                <pre lang="ko_KR"><code class="language-javascript">onBeforeShow : function(msgContext, msgContents) {
     // this : N.alert 인스턴스
     // msgContext : 메시지 오버레이 요소
     // msgContents : 메시지 대화상자 요소
+}</code></pre>
+                <pre lang="en_US"><code class="language-javascript">onBeforeShow : function(msgContext, msgContents) {
+    // this : N.alert instance
+    // msgContext : Message overlay element
+    // msgContents : Message dialog element
 }</code></pre>
             </td>
         </tr>
@@ -341,11 +381,17 @@ height: function(msgContext, msgContents) {
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p>메시지 대화상자가 표시 된 후 실행되는 이벤트</p>
-                <pre><code class="language-javascript">onShow : function(msgContext, msgContents) {
+                <p lang="ko_KR">메시지 대화상자가 표시 된 후에 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="en_US">Defines an event handler that is executed after the message dialog is displayed.</p>
+                <pre lang="ko_KR"><code class="language-javascript">onShow : function(msgContext, msgContents) {
     // this : N.alert 인스턴스
     // msgContext : 메시지 오버레이 요소
     // msgContents : 메시지 대화상자 요소
+}</code></pre>
+                <pre lang="en_US"><code class="language-javascript">onShow : function(msgContext, msgContents) {
+    // this : N.alert instance
+    // msgContext : Message overlay element
+    // msgContents : Message dialog element
 }</code></pre>
             </td>
         </tr>
@@ -355,13 +401,20 @@ height: function(msgContext, msgContents) {
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p>메시지 대화상자가 감춰지기 전 실행되는 이벤트</p>
-                <pre><code class="language-javascript">onBeforeHide : function(msgContext, msgContents) {
+                <p lang="ko_KR">메시지 대화상자가 숨겨지기 전에 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="en_US">Defines an event handler that is executed before the message dialog is hidden.</p>
+                <pre lang="ko_KR"><code class="language-javascript">onBeforeHide : function(msgContext, msgContents) {
     // this : N.alert 인스턴스
     // msgContext : 메시지 오버레이 요소
     // msgContents : 메시지 대화상자 요소
 }</code></pre>
-                <p class="alert">closeMode 옵션 값이 "remove" 일 경우 onBeforeHide 이벤트는 실행 되지 않습니다.</p>
+                <pre lang="en_US"><code class="language-javascript">onBeforeHide : function(msgContext, msgContents) {
+    // this : N.alert instance
+    // msgContext : Message overlay element
+    // msgContents : Message dialog element
+}</code></pre>
+                <p lang="ko_KR" class="alert">closeMode 옵션이 remove로 설정 된 경우 onBeforeHide 이벤트는 실행 되지 않습니다.</p>
+                <p lang="en_US" class="alert">The onBeforeHide event is not fired when the closeMode option is set to remove.</p>
             </td>
         </tr>
         <tr>
@@ -370,13 +423,20 @@ height: function(msgContext, msgContents) {
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p>메시지 대화상자가 감춰진 후 실행되는 이벤트</p>
-                <pre><code class="language-javascript">onHide : function(msgContext, msgContents) {
+                <p lang="ko_KR">메시지 대화상자가 숨겨진 후에 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="en_US">Defines an event handler that is executed after the message dialog is hidden.</p>
+                <pre lang="ko_KR"><code class="language-javascript">onHide : function(msgContext, msgContents) {
     // this : N.alert 인스턴스
     // msgContext : 메시지 오버레이 요소
     // msgContents : 메시지 대화상자 요소
 }</code></pre>
-                <p class="alert">closeMode 옵션 값이 "remove" 일 경우 onHide 이벤트는 실행 되지 않습니다.</p>
+                <pre lang="en_US"><code class="language-javascript">onHide : function(msgContext, msgContents) {
+    // this : N.alert instance
+    // msgContext : Message overlay element
+    // msgContents : Message dialog element
+}</code></pre>
+                <p lang="ko_KR" class="alert">closeMode 옵션이 remove로 설정 된 경우 onHide 이벤트는 실행 되지 않습니다.</p>
+                <p lang="en_US" class="alert">The onHide event is not fired when the closeMode option is set to remove.</p>
             </td>
         </tr>
         <tr>
@@ -385,13 +445,20 @@ height: function(msgContext, msgContents) {
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p>메시지 대화상자가 제거 되기 전 실행되는 이벤트</p>
-                <pre><code class="language-javascript">onBeforeRemove : function(msgContext, msgContents) {
+                <p lang="ko_KR">메시지 대화상자가 제거 되기 전에 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="en_US">Defines an event handler that is executed before the message dialog is removed.</p>
+                <pre lang="ko_KR"><code class="language-javascript">onBeforeRemove : function(msgContext, msgContents) {
     // this : N.alert 인스턴스
     // msgContext : 메시지 오버레이 요소
     // msgContents : 메시지 대화상자 요소
 }</code></pre>
-                <p class="alert">closeMode 옵션 값이 "hide" 일 경우 onBeforeRemove 이벤트는 실행 되지 않습니다.</p>
+                <pre lang="en_US"><code class="language-javascript">onBeforeRemove : function(msgContext, msgContents) {
+    // this : N.alert instance
+    // msgContext : Message overlay element
+    // msgContents : Message dialog element
+}</code></pre>
+                <p lang="ko_KR" class="alert">closeMode 옵션이 hide로 설정 된 경우 onBeforeRemove 이벤트는 실행 되지 않습니다.</p>
+                <p lang="en_US" class="alert">The onBeforeRemove event is not fired when the closeMode option is set to hide.</p>
             </td>
         </tr>
         <tr>
@@ -400,13 +467,20 @@ height: function(msgContext, msgContents) {
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p>메시지 대화상자가 제거 된 후 실행되는 이벤트</p>
-                <pre><code class="language-javascript">onRemove : function(msgContext, msgContents) {
+                <p lang="ko_KR">메시지 대화상자가 제거 된 후에 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="en_US">Defines an event handler that is executed after the message dialog is removed.</p>
+                <pre lang="ko_KR"><code class="language-javascript">onRemove : function(msgContext, msgContents) {
     // this : N.alert 인스턴스
     // msgContext : 메시지 오버레이 요소
     // msgContents : 메시지 대화상자 요소
 }</code></pre>
-                <p class="alert">closeMode 옵션 값이 "hide" 일 경우 onRemove 이벤트는 실행 되지 않습니다.</p>
+                <pre lang="en_US"><code class="language-javascript">onRemove : function(msgContext, msgContents) {
+    // this : N.alert instance
+    // msgContext : Message overlay element
+    // msgContents : Message dialog element
+}</code></pre>
+                <p lang="ko_KR" class="alert">closeMode 옵션이 hide로 설정 된 경우 onRemove 이벤트는 실행 되지 않습니다.</p>
+                <p lang="en_US" class="alert">The closeMode event is not fired when the closeMode option is set to hide.</p>
             </td>
         </tr>
     </table>

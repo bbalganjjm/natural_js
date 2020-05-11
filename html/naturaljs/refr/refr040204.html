@@ -32,29 +32,32 @@
         <tr>
             <td>size</td>
             <td>string</td>
-            <td>&quot;medium&quot;</td>
+            <td>medium</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p>크기</p>
-                <p>smaller, small, medium, large, big</p>
+                <p lang="ko_KR">버튼의 크기를 설정 합니다.</p>
+                <p lang="en_US">Set the size of the button.</p>
+                <p lang="ko_KR">크기는 "smaller", "small", "medium", "large", "big" 중 하나를 지정 할 수 있습니다.</p>
+                <p lang="en_US">The size can be one of "smaller", "small", "medium", "large" and "big".</p>
             </td>
         </tr>
         <tr>
             <td>color</td>
             <td>string</td>
-            <td>&quot;white&quot;</td>
+            <td>white</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p>색깔</p>
-                <p>white, blue, skyblue, gray, green, yellowgreen</p>
-                <p class="alert">
-                    css/natural.ui.css 파일에 다음과 같이 클래스 스타일을 추가 하면 컬러를 간단하게 확장 할 수 있습니다.<br>
-                    a.btn_컬러명__,input[type='button'].btn_컬러명__,button.btn_컬러명__ {<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;color: #컬러값 !important;<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;background-color: #컬러값;<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;border: 1px solid #컬러값;<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;...<br>
-                    }</p>
+                <p lang="ko_KR">버튼의 컬러를 설정 합니다.</p>
+                <p lang="en_US">Set the color of the button.</p>
+                <p lang="ko_KR">컬러는 "white", "blue", "skyblue", "gray", "green", "yellowgreen" 중 하나를 지정 할 수 있습니다.</p>
+                <p lang="en_US">The color can be one of "white", "blue", "skyblue", "gray", "green" and "yellowgreen".</p>
+                <p lang="ko_KR">natural.ui.css 파일에 다음과 같이 클래스 스타일을 추가 하면 컬러를 간단하게 확장 할 수 있습니다.</p>
+                <p lang="en_US">You can simply extend the color by adding a class style to the natural.ui.css file as follows</p>
+<pre><code>a.btn_{color}__,input[type='button'].btn_{color}__,button.btn_{color}__ {
+    color: #000 !important;
+    background-color: #fff;
+    border: 1px solid #000;
+}</code></pre>
             </td>
         </tr>
         <tr>
@@ -62,7 +65,10 @@
             <td>boolean</td>
             <td>false</td>
             <td style="text-align: center;">X</td>
-            <td>초기화시 비활성 여부</td>
+            <td>
+                <p lang="ko_KR">true로 설정 하면 버튼이 비활성화 된 상태로 생성 됩니다.</p>
+                <p lang="en_US">If set to true, the button is created in a disabled state.</p>
+            </td>
         </tr>
         <tr>
             <td>customStyle</td>
@@ -70,16 +76,16 @@
             <td>false</td>
             <td style="text-align: center;">X</td>
             <td>
-                사용자 정의 스타일 적용 여부
-                <p class="alert">
-                    값이 true 이면<br>
-                    css/natural.ui.css 파일에 정의된<br>
-                    a.btn_mouseover__, input[type='button'].btn_mouseover__, button.btn_mouseover__<br>
-                    a.btn_mousedown__, input[type='button'].btn_mousedown__, button.btn_mousedown__<br>
-                    a.btn_mouseup__, input[type='button'].btn_mouseup__, button.btn_mouseup__<br>
-                    a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__<br>
-                    스타일이 적용 됩니다.
-                </p>
+                <p lang="ko_KR">true로 설정하면 사용자 정의 버튼 스타일을 적용 할 수 있습니다.</p>
+                <p lang="en_US">If set to true, custom button styles can be applied.</p>
+                <p lang="ko_KR">true 로 설정 하면 버튼의 마우스 이벤트에 따라 natural.ui.css 파일의 다음과 같은 스타일 클래스가 적용 됩니다.</p>
+                <p lang="en_US">When set to true, the following style classes in the natural.ui.css file are applied according to the mouse event of the button.</p>
+                <ul>
+                    <li>mouseover : a.btn_mouseover__, input[type='button'].btn_mouseover__, button.btn_mouseover__</li>
+                    <li>mousedown : a.btn_mousedown__, input[type='button'].btn_mousedown__, button.btn_mousedown__</li>
+                    <li>mouseup : a.btn_mouseup__, input[type='button'].btn_mouseup__, button.btn_mouseup__</li>
+                    <li>mouseout : a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__</li>
+                </ul>
             </td>
         </tr>
     </table>

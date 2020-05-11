@@ -190,14 +190,26 @@
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p>탭이 활성화 될 때마다 실행되는 이벤트입니다.</p>
-                <p>이벤트 콜백 함수의 인자는 다음과 같이 반환 됩니다.</p>tabIdx, tabEle, contentEle, tabEles, contentEles
-                <p>tabIdx : 활성화된 탭 Index</p>
-                <p>tabEle : 활성화된 탭 요소</p>
-                <p>contentEle : 활성화된 탭 컨텐츠 요소</p>
-                <p>tabEles : 전체 탭 요소</p>
-                <p>contentEles : 전체 컨텐츠 요소</p>
-                <p class="alert">탭 컨텐츠가 처음 로딩 될 때는 N.cont 오브젝트의 init 함수가 실행 된 다음 onActive 이벤트가 실행 됩니다.</p>
+                <p lang="ko_KR">탭이 활성화 될 때마다 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="en_US">Define an event handler that is executed whenever the tab is activated.</p>
+                <pre lang="ko_KR"><code class="language-javascript">onActive : function(cont) {
+    // this : N.tab 인스턴스
+    // tabIdx : 활성화된 탭의 Index
+    // tabEle : 활성화된 탭의 요소
+    // contentEle : 활성화된 탭의 컨텐츠 요소
+    // tabEles : 전체 탭 요소
+    // contentEles : 전체 컨텐츠 요소
+}</code></pre>
+                <pre lang="en_US"><code class="language-javascript">onActive : function(cont) {
+    // this : N.tab instance
+    // tabIdx : Index of active tab
+    // tabEle : Element of active tab
+    // contentEle : Content element of active tab
+    // tabEles : Entire tab element
+    // contentEles : Entire content elements
+}</code></pre>
+                <p lang="ko_KR" class="alert">탭 컨텐츠가 처음 로딩 될 경우 Controller object 의 init 함수가 실행 된 다음 onActive 함수가 실행 됩니다.</p>
+                <p lang="en_US" class="alert">If the tab content is loaded for the first time, the init function of the Controller object is executed, and then the onActive function is executed.</p>
             </td>
         </tr>
         <tr>
@@ -206,13 +218,22 @@
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p>탭에 URL 을 지정하여 다른 페이지를 불러올 때 로딩이 완료 된 후 실행되는 이벤트입니다.</p>
-                <p>이벤트 콜백 함수의 인자는 다음과 같이 반환 됩니다.</p>tabIdx, tabEle, contentEle, cont
-                <p>tabIdx : 로딩 된 탭 Index</p>
-                <p>tabEle : 로딩 된 탭 요소</p>
-                <p>contentEle : 로딩 된 탭 컨텐츠 요소</p>
-                <p>cont : 로딩 된 페이지의 Controller 오브젝트</p>
-                <p class="alert">preload 옵션에 의해 탭이 활성화 되기 전에 페이지를 로딩 할 경우에도 해당 탭 컨텐츠가 불러와지면 onLoad 이벤트가 발생 됩니다.</p>
+                <p lang="ko_KR">탭 컨텐츠 로딩이 완료 되었을 때 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="en_US">Defines an event handler that is executed when tab content loading is completed.</p>
+                <pre lang="ko_KR"><code class="language-javascript">onLoad : function(cont) {
+    // this : N.tab 인스턴스
+    // tabIdx : 활성화된 탭의 Index
+    // tabEle : 활성화된 탭의 요소
+    // contentEle : 활성화된 탭의 컨텐츠 요소
+    // cont : 로딩 된 탭 컨텐츠의 Controller object
+}</code></pre>
+                <pre lang="en_US"><code class="language-javascript">onLoad : function(cont) {
+    // this : N.tab instance
+    // tabIdx : Index of active tab
+    // tabEle : Element of active tab
+    // contentEle : Content element of active tab
+    // cont : Controller object of the loaded tab content
+}</code></pre>
             </td>
         </tr>
     </table>

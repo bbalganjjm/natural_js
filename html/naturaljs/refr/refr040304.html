@@ -29,7 +29,7 @@
             <td>left</td>
             <td></td>
             <td>
-                <p lang="ko_KR">top으로 설정하면 년도 선택 요소가 상단에 생성 됩니다.</p>
+                <p lang="ko_KR">top으로 설정하면 연도 선택 요소가 상단에 생성 됩니다.</p>
                 <p lang="en_US">If set to top, the year selection element is created at the top.</p>
             </td>
         </tr>
@@ -49,7 +49,7 @@
             <td>200</td>
             <td></td>
             <td>
-                <p lang="ko_KR">yearsPanelPosition 옵션 값이 "top" 일 때 선택 할 수 있는 시작 년도를 지정 합니다.</p>
+                <p lang="ko_KR">yearsPanelPosition 옵션 값이 "top" 일 때 선택 할 수 있는 시작 연도를 지정 합니다.</p>
                 <p lang="en_US">yearsPanelPosition Specifies the starting year that can be selected when the value is "top".</p>
             </td>
         </tr>
@@ -59,7 +59,7 @@
             <td>200</td>
             <td></td>
             <td>
-                <p lang="ko_KR">yearsPanelPosition 옵션 값이 "top" 일 때 선택 할 수 있는 마지막 년도를 지정 합니다.</p>
+                <p lang="ko_KR">yearsPanelPosition 옵션 값이 "top" 일 때 선택 할 수 있는 마지막 연도를 지정 합니다.</p>
                 <p lang="en_US">yearsPanelPosition Specifies the last year that can be selected when the value is "top".</p>
             </td>
         </tr>
@@ -69,7 +69,7 @@
             <td>false</td>
             <td></td>
             <td>
-                <p lang="ko_KR">true로 설정하면 년도 변경 시 변경된 날짜가 입력요소에 바로 반영 됩니다.</p>
+                <p lang="ko_KR">true로 설정하면 연도 변경 시 변경된 날짜가 입력요소에 바로 반영 됩니다.</p>
                 <p lang="en_US">If set to true, the changed date is applied immediately to the input element when the year is changed.</p>
             </td>
         </tr>
@@ -109,7 +109,7 @@
             <td>false</td>
             <td></td>
             <td>
-                <p lang="ko_KR">true로 설정하면 년도와 월만 선택 할 수 있는 Monthpicker 가 표시 됩니다.</p>
+                <p lang="ko_KR">true로 설정하면 연도와 월만 선택 할 수 있는 Monthpicker 가 표시 됩니다.</p>
                 <p lang="en_US">When set to true, the Monthpicker is displayed, allowing you to select only the year and month.</p>
             </td>
         </tr>
@@ -129,12 +129,19 @@
             <td>null</td>
             <td></td>
             <td>
-                날짜나 월(monthonly:true)이 선택되었을 때 발생하는 이벤트입니다.
-                <pre><code class="language-javascript">onSelect : function(context, selDate, monthonly) {
-    // this 는 N.datepicker instance
-    // context 는 날짜가 입력되는 입력요소
-    // selDate 는 선택한 날짜의 Date 객체
-    // monthonly 는 옵션으로 지정한 monthonly 값
+                <p lang="ko_KR">날짜나 월(monthonly 옵션이 true로 설정 되었을 경우)이 선택 되었을 때 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="en_US">Defines an event handler that is executed when a date or month(if the monthonly option is set to true) is selected.</p>
+                <pre lang="ko_KR"><code class="language-javascript">onSelect : function(context, selDate, monthonly) {
+    // this : N.datepicker 인스턴스
+    // context : context 요소
+    // selDate : 선택 된 날짜의 Date 객체
+    // monthonly : monthonly 옵션 값
+}</code></pre>
+                <pre lang="en_US"><code class="language-javascript">onSelect : function(context, selDate, monthonly) {
+    // this : N.datepicker instance
+    // context : context element
+    // selDate : The Date object of the selected date
+    // monthonly : monthonly option value
 }</code></pre>
             </td>
         </tr>
@@ -144,11 +151,17 @@
             <td>null</td>
             <td></td>
             <td>
-                데이트피커 판넬이 표시되기 전에 발생 되는 이벤트 입니다.
-                <pre><code class="language-javascript">onBeforeShow : function(context, contents) {
-    // this 는 N.datepicker instance
-    // context 는 날짜가 입력되는 입력요소
-    // contents 는 데이트피커 판넬
+                <p lang="ko_KR">데이트피커가 표시되기 전에 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="en_US">Define an event handler that is executed before the date picker is displayed.</p>
+                <pre lang="ko_KR"><code class="language-javascript">onBeforeShow : function(context, contents) {
+    // this : N.datepicker 인스턴스
+    // context : context 요소
+    // contents : Datepicker 판넬 요소
+}</code></pre>
+                <pre lang="en_US"><code class="language-javascript">onBeforeShow : function(context, contents) {
+    // this : N.datepicker instance
+    // context : context element
+    // contents : Datepicker panel element
 }</code></pre>
             </td>
         </tr>
@@ -158,11 +171,17 @@
             <td>null</td>
             <td></td>
             <td>
-                데이트피커 판넬이 표시된 후 발생 되는 이벤트 입니다.
-                <pre><code class="language-javascript">onShow : function(context, contents) {
-    // this 는 N.datepicker instance
-    // context 는 날짜가 입력되는 입력요소
-    // contents 는 데이트피커 판넬
+                <p lang="ko_KR">데이트피커가 표시된 후에 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="en_US">Define an event handler that is executed after the date picker is displayed.</p>
+                <pre lang="ko_KR"><code class="language-javascript">onShow : function(context, contents) {
+    // this : N.datepicker 인스턴스
+    // context : context 요소
+    // contents : Datepicker 판넬 요소
+}</code></pre>
+                <pre lang="en_US"><code class="language-javascript">onShow : function(context, contents) {
+    // this : N.datepicker instance
+    // context : context element
+    // contents : Datepicker panel element
 }</code></pre>
             </td>
         </tr>
@@ -172,11 +191,17 @@
             <td>null</td>
             <td></td>
             <td>
-                데이트피커 판넬이 닫히기 전에 발생 되는 이벤트 입니다.
-                <pre><code class="language-javascript">onBeforeHide : function(context, contents) {
-    // this 는 N.datepicker instance
-    // context 는 날짜가 입력되는 입력요소
-    // contents 는 데이트피커 판넬
+                <p lang="ko_KR">데이트피커가 닫히기 전에 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="en_US">Defines an event handler that is executed before the datepicker closes.</p>
+                <pre lang="ko_KR"><code class="language-javascript">onBeforeHide : function(context, contents) {
+    // this : N.datepicker 인스턴스
+    // context : context 요소
+    // contents : Datepicker 판넬 요소
+}</code></pre>
+                <pre lang="en_US"><code class="language-javascript">onBeforeHide : function(context, contents) {
+    // this : N.datepicker instance
+    // context : context element
+    // contents : Datepicker panel element
 }</code></pre>
             </td>
         </tr>
@@ -186,10 +211,15 @@
             <td>null</td>
             <td></td>
             <td>
-                데이트피커 판넬이 닫히고 나서(닫히는 효과 완료 후) 발생 되는 이벤트 입니다.
-                <pre><code class="language-javascript">onHide : function(context) {
-    // this 는 N.datepicker instance
-    // context 는 날짜가 입력되는 입력요소
+                <p lang="ko_KR">데이트피커가 닫힌 후에(닫히는 효과가 끝난 후) 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="en_US">Define an event handler that is executed after the datepicker is closed(after the closing effect is over).</p>
+                <pre lang="ko_KR"><code class="language-javascript">onHide : function(context) {
+    // this : N.datepicker 인스턴스
+    // context : context 요소
+}</code></pre>
+                <pre lang="en_US"><code class="language-javascript">onHide : function(context) {
+    // this : N.datepicker instance
+    // context : context element
 }</code></pre>
             </td>
         </tr>
@@ -199,12 +229,19 @@
             <td>null</td>
             <td></td>
             <td>
-                년도가 변경 되었을 때 발생 되는 이벤트 입니다.
-                <pre><code class="language-javascript">onChangeYear : function(context, year, e) {
-    // this 는 N.datepicker instance
-    // context 는 날짜가 입력되는 입력요소
-    // year 선택 된 년도
-    // e 는 실행 된 이벤트 객체
+                <p lang="ko_KR">연도가 변경 되었을 때 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="ko_KR">Defines an event handler that is executed when the year is changed.</p>
+                <pre lang="en_US"><code class="language-javascript">onChangeYear : function(context, year, e) {
+    // this : N.datepicker 인스턴스
+    // context : context 요소
+    // year : 선택 된 연도
+    // e : 이벤트 객체
+}</code></pre>
+                <pre lang="en_US"><code class="language-javascript">onChangeYear : function(context, year, e) {
+    // this : N.datepicker instance
+    // context : context element
+    // year : Selected year
+    // e : Event object
 }</code></pre>
             </td>
         </tr>
@@ -214,13 +251,21 @@
             <td>null</td>
             <td></td>
             <td>
-                월이 변경 되었을 때 발생 되는 이벤트 입니다.
-                <pre><code class="language-javascript">onChangeMonth : function(context, month, year, e) {
-    // this 는 N.datepicker instance
-    // context 는 날짜가 입력되는 입력요소
-    // month 는 선택 된 월
-    // year 선택 된 년도
-    // e 는 실행 된 이벤트 객체
+                <p lang="ko_KR">월이 변경 되었을 때 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="en_US">Defines an event handler that is executed when the month is changed.</p>
+                <pre lang="ko_KR"><code class="language-javascript">onChangeMonth : function(context, month, year, e) {
+    // this : N.datepicker 인스턴스
+    // context : context 요소
+    // month : 선택 된 월
+    // year : 선택 된 연도
+    // e : 이벤트 객체
+}</code></pre>
+                <pre lang="en_US"><code class="language-javascript">onChangeMonth : function(context, month, year, e) {
+    // this : N.datepicker instance
+    // context : context element
+    // month : Selected month
+    // year : Selected year
+    // e : Event object
 }</code></pre>
             </td>
         </tr>

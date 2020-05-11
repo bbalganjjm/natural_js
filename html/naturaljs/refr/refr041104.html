@@ -85,12 +85,12 @@
             <td>null</td>
             <td></td>
             <td>
-            노드가 선택되었을때 발생되는 이벤트 입니다.
+            노드가 선택 되었을때 실행되는 이벤트 핸들러를 정의 합니다.
                 <pre><code class="language-javascript">onSelect : function(selNodeIndex, selNodeEle, selNodeData) {
-    // this 는 N.tree 인스턴스
-    // selNodeIndex 는 선택된 노드의 index
-    // selNodeEle 는 선택된 노드의 요소
-    // selNodeData 는 선택된 노드의 row data
+    // this : N.tree 인스턴스
+    // selNodeIndex : 선택된 노드의 index
+    // selNodeEle : 선택된 노드의 요소
+    // selNodeData : 선택된 노드의 row data
 }</code></pre>
             </td>
         </tr>
@@ -100,18 +100,18 @@
             <td>null</td>
             <td></td>
             <td>
-            노드 앞의 체크박스가 선택 되었을때 발생되는 이벤트 입니다.
+            노드 앞의 체크박스가 선택 되었을때 실행되는 이벤트 핸들러를 정의 합니다.
                 <pre><code class="language-javascript">onCheck : function(selNodeIndex, selNodeEle, selNodeData
                     , checkedElesIndexes, checkedEles, checkedElesData
                     , checkFlag) {
-    // this 는 N.tree 인스턴스
-    // selNodeIndex 는 선택된 노드의 index
-    // selNodeEle 는 선택된 노드의 요소
-    // selNodeData 는 선택된 노드의 row data
-    // checkedElesIndexes 는 체크된 노드들의 index
-    // selNodeEle 는 체크된된 노드들의 요소
-    // selNodeData 는 체크된 노드들의 row data
-    // checkFlag 는 체크 여부
+    // this : N.tree 인스턴스
+    // selNodeIndex : 선택된 노드의 index
+    // selNodeEle : 선택된 노드의 요소
+    // selNodeData : 선택된 노드의 row data
+    // checkedElesIndexes : 체크된 노드들의 index
+    // selNodeEle : 체크된된 노드들의 요소
+    // selNodeData : 체크된 노드들의 row data
+    // checkFlag : 체크 여부
 }</code></pre>
             </td>
         </tr>

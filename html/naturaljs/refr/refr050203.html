@@ -124,7 +124,7 @@
             <td>false</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">true로 설정 하면 페이지가 로딩 될 때 실행 되는 Ajax 요청들이 모두 완료 될때 까지 진행 상태 바를 보여 줍니다.</p>
+                <p lang="ko_KR">true로 설정 하면 페이지가 로딩 될 때 실행되는 Ajax 요청들이 모두 완료 될때 까지 진행 상태 바를 보여 줍니다.</p>
                 <p lang="en_US">If set to true, the progress bar is displayed until all Ajax requests executed when the page is loaded are completed.</p>
             </td>
         </tr>
@@ -134,7 +134,7 @@
             <td>false</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">true로 설정 하면 페이지가 로딩 될 때 실행 되는 Ajax 요청들이 모두 완료 될때 까지 화면을 차단하여 Double Submit 을 방지 합니다.</p>
+                <p lang="ko_KR">true로 설정 하면 페이지가 로딩 될 때 실행되는 Ajax 요청들이 모두 완료 될때 까지 화면을 차단하여 Double Submit 을 방지 합니다.</p>
                 <p lang="en_US">If set to true, double submission is prevented by blocking the screen until all Ajax requests executed when the page is loaded are completed.</p>
             </td>
         </tr>
@@ -180,10 +180,10 @@
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">컨텐츠가 로딩 되기 전 실행 되는 이벤트 입니다.</p>
-                <p lang="en_US">This event is executed before the content is loaded.</p>
+                <p lang="ko_KR">컨텐츠가 로딩 되기 전 실행되는 이벤트 입니다.</p>
+                <p lang="en_US">Define an event handler that is excuted before the content is loaded.</p>
                 <pre><code class="language-javascript">onBeforeLoad : function(docId, target) {
-    // docId : Document Id
+    // docId : Document id
     // target : Elements to be loaded content
 
     // get document info
@@ -201,10 +201,10 @@
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">페이지가 로딩 된 후 실행 되는 이벤트 입니다.</p>
-                <p lang="en_US">This event is executed after the content is loaded.</p>
+                <p lang="ko_KR">페이지가 로딩 된 후 실행되는 이벤트 입니다.</p>
+                <p lang="en_US">Define an event handler that is excuted after the content is loaded.</p>
                 <pre><code class="language-javascript">onLoad : function(docId) {
-    // docId : Document Id
+    // docId : Document id
 
     // get document info
     var doc = this.doc(docId);
@@ -223,10 +223,10 @@
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">페이지가 로딩 될 때 실행 되는 Ajax 요청들이 캡쳐 되기 전에 실행되는 이벤트 입니다.</p>
-                <p lang="en_US">This event fires before the Ajax request is captured when the page is loaded.</p>
+                <p lang="ko_KR">페이지가 로딩 될 때 실행되는 Ajax 요청들이 캡쳐 되기 전에 실행되는 이벤트 입니다.</p>
+                <p lang="en_US">Define an event handler that is excuted before the Ajax request is captured when the page is loaded.</p>
                 <pre><code class="language-javascript">onBeforeEntireLoad : function(docId) {
-    // docId : Document Id
+    // docId : Document id
 
     // get document info
     var doc = this.doc(docId);
@@ -241,8 +241,8 @@
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">페이지가 로딩 될 때 실행 되는 Ajax 요청들이 모두 완료되기 전에 에러가 발생 되었을때 실행되는 이벤트 입니다.</p>
-                <p lang="en_US">This event fires when an error occurs before all Ajax requests complete when the page loads.</p>
+                <p lang="ko_KR">페이지가 로딩 될 때 실행되는 Ajax 요청들이 모두 완료되기 전에 에러가 발생 되었을때 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="en_US">Define an event handler that is excuted when an error occurs before all Ajax requests complete when the page loads.</p>
                 <pre><code class="language-javascript">onErrorEntireLoad : function(e, request, xhr, textStatus, callback) {
     // e(arguments[0]) : ErrorThrown
     // request(arguments[1]) : Communicator.request
@@ -260,10 +260,10 @@
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">페이지가 로딩 될 때 실행 되는 Ajax 요청들이 모두 완료된 후에 실행되는 이벤트 입니다.</p>
-                <p lang="en_US">This event fires after all Ajax requests complete when the page loads.</p>
+                <p lang="ko_KR">페이지가 로딩 될 때 실행되는 Ajax 요청들이 모두 완료된 후에 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="en_US">Define an event handler that is excuted after all Ajax requests complete when the page loads.</p>
                 <pre><code class="language-javascript">onEntireLoad : function(docId) {
-    // docId : Document Id
+    // docId : Document id
 
     // get document info
     var doc = this.doc(docId);
@@ -280,10 +280,10 @@
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">선택한 탭이 활성화되기 전에 실행 되는 이벤트 입니다.</p>
-                <p lang="en_US">This event is executed before the selected tab is activated.</p>
+                <p lang="ko_KR">선택한 탭이 활성화되기 전에 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="en_US">Define an event handler that is excuted before the selected tab is activated.</p>
                 <pre><code class="language-javascript">onBeforeActive : function(docId) {
-    // docId : Document Id
+    // docId : Document id
 
     // get document info
     var doc = this.doc(docId);
@@ -300,10 +300,10 @@
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">선택한 탭이 활성화된 후에 실행 되는 이벤트 입니다.</p>
-                <p lang="en_US">This event is executed after the selected tab is activated.</p>
+                <p lang="ko_KR">선택한 탭이 활성화된 후에 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="en_US">Define an event handler that is excuted after the selected tab is activated.</p>
                 <pre><code class="language-javascript">onActive : function(docId) {
-    // docId : Document Id
+    // docId : Document id
 
     // get document info
     var doc = this.doc(docId);
@@ -320,10 +320,10 @@
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">선택한 탭이 비활성화되기 전에 실행 되는 이벤트 입니다.</p>
-                <p lang="en_US">This event is executed before the selected tab is deactivated.</p>
+                <p lang="ko_KR">선택한 탭이 비활성화되기 전에 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="en_US">Define an event handler that is excuted before the selected tab is deactivated.</p>
                 <pre><code class="language-javascript">onBeforeInactive : function(docId) {
-    // docId : Document Id
+    // docId : Document id
 
     // get document info
     var doc = this.doc(docId);
@@ -340,10 +340,10 @@
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">선택한 탭이 비활성화된 후에 실행 되는 이벤트 입니다.</p>
-                <p lang="en_US">This event is executed after the selected tab is deactivated.</p>
+                <p lang="ko_KR">선택한 탭이 비활성화된 후에 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="en_US">Define an event handler that is excuted after the selected tab is deactivated.</p>
                 <pre><code class="language-javascript">onInactive : function(docId) {
-    // docId : Document Id
+    // docId : Document id
 
     // get document info
     var doc = this.doc(docId);
@@ -360,10 +360,10 @@
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">선택한 탭의 상태가 제거되기 전에 실행 되는 이벤트 입니다.</p>
-                <p lang="en_US">This event is executed before the state of selected tab is removed.</p>
+                <p lang="ko_KR">선택한 탭의 상태가 제거되기 전에 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="en_US">Define an event handler that is excuted before the state of selected tab is removed.</p>
                 <pre><code class="language-javascript">onBeforeRemoveState : function(docId) {
-    // docId : Document Id
+    // docId : Document id
 
     // get document info
     var doc = this.doc(docId);
@@ -380,10 +380,10 @@
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">선택한 탭의 상태가 제거된 후에 실행 되는 이벤트 입니다.</p>
-                <p lang="en_US">This event is executed after the state of selected tab is removed.</p>
+                <p lang="ko_KR">선택한 탭의 상태가 제거된 후에 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="en_US">Define an event handler that is excuted after the state of selected tab is removed.</p>
                 <pre><code class="language-javascript">onRemoveState : function(docId) {
-    // docId : Document Id
+    // docId : Document id
 
     // get document info
     var doc = this.doc(docId);
@@ -400,10 +400,10 @@
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">선택한 탭의 상태가 제거된 전에 실행 되는 이벤트 입니다.</p>
-                <p lang="en_US">This event is executed before the selected tab is removed.</p>
+                <p lang="ko_KR">선택한 탭의 상태가 제거된 전에 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="en_US">Define an event handler that is excuted before the selected tab is removed.</p>
                 <pre><code class="language-javascript">onBeforeRemove : function(docId) {
-    // docId : Document Id
+    // docId : Document id
 
     // get document info
     var doc = this.doc(docId);
@@ -420,10 +420,10 @@
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">선택한 탭이 제거된 후에 실행 되는 이벤트 입니다.</p>
-                <p lang="en_US">This event is executed after the selected tab is removed.</p>
+                <p lang="ko_KR">선택한 탭이 제거된 후에 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="en_US">Define an event handler that is excuted after the selected tab is removed.</p>
                 <pre><code class="language-javascript">onRemove : function(docId) {
-    // docId : Document Id
+    // docId : Document id
 
     // get document info
     var doc = this.doc(docId);

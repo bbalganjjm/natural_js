@@ -115,13 +115,23 @@
             </td>
         </tr>
         <tr>
+            <td>blockOnChangeWhenBind</td>
+            <td>boolean</td>
+            <td>false</td>
+            <td></td>
+            <td>
+                <p lang="ko_KR">true로 설정하면 bind 메서드를 호출 할 때 onChange 이벤트를 실행 하지 않습니다.</p>
+                <p lang="en_US">If set to true, the onChange event is not fired when the bind method is called.</p>
+            </td>
+        </tr>
+        <tr>
             <td>onChange</td>
             <td>function</td>
             <td>null</td>
             <td></td>
             <td>
-                <p lang="ko_KR">페이지가 전환 될 때 발생되는 이벤트 입니다.</p>
-                <p lang="en_US">This event is fired when the page is switched.</p>
+                <p lang="ko_KR">페이지가 전환 될 때 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="en_US">Define an event handler that is excuted when the page is switched.</p>
                 <pre><code class="language-javascript">onChange : function(pageNo, selEle, selData, currPageNavInfo) {
     // this : N.pagination instance
     // pageNo : Page number
@@ -178,16 +188,6 @@
     });</code></pre>
                 <p class="alert" lang="ko_KR">blockOnChangeWhenBind 옵션이 true 로 설정 되어있을 경우 페이징 버튼들을 클릭 할 때만 이벤트가 실행 됩니다.</p>
                 <p class="alert" lang="en_US">If the blockOnChangeWhenBind option is set to true, the event is executed only when the paging buttons are clicked.</p>
-            </td>
-        </tr>
-        <tr>
-            <td>blockOnChangeWhenBind</td>
-            <td>boolean</td>
-            <td>false</td>
-            <td></td>
-            <td>
-                <p lang="ko_KR">true로 설정하면 bind 메서드를 호출 할 때 onChange 이벤트를 실행 하지 않습니다.</p>
-                <p lang="en_US">If set to true, the onChange event is not fired when the bind method is called.</p>
             </td>
         </tr>
     </table>

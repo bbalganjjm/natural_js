@@ -60,7 +60,7 @@ N(".POPUP01").cont({
         });
     },
     // 팝업이 열릴때마다 실행될 함수
-    onOpenFunc : function(onOpenData) {
+    onOpenFn : function(onOpenData) {
         N(".result", this.view).text(onOpenData);
     }
 });
@@ -81,14 +81,14 @@ N(".POPUP01").cont({
 &lt;script type="text/javascript"&gt;
 N(".POPUP02").cont({
     init : function(view, request) {
-           var popup = N().popup({
-               url: "./popup.html",
-               onOpen: "onOpenFunc", // 팝업이 열릴때마다 실행될 함수명
-               onClose: function(onCloseData) { // 팝업이 닫힐때마다 실행 될 onClose 이벤트 핸들러
-                   N(".result", this.view).text(onCloseData);
-               }
-           });
-           popup.open("Hello~ popup's onOpen!"); // open 함수의 첫번째 인자로 onOpenData 데이터 전달
+        var popup = N().popup({
+            url: "./popup.html",
+            onOpen: "onOpenFn", // 팝업이 열릴때마다 실행될 함수명
+            onClose: function(onCloseData) { // 팝업이 닫힐때마다 실행 될 onClose 이벤트 핸들러
+                N(".result", this.view).text(onCloseData);
+            }
+        });
+        popup.open("Hello~ popup's onOpen!"); // open 함수의 첫번째 인자로 onOpenData 데이터 전달
     }
 });
 &lt;/script&gt;</code></pre>
