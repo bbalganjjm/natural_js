@@ -67,6 +67,8 @@
     </div>
 </article>
 
+<script type="text/javascript" charset="utf-8" src="https://bbalganjjm.github.io/natural_js/js/seo.js"></script>
+
 <script type="text/javascript">
 N(".exap0701").cont({
     init : function(view, request) {
@@ -85,10 +87,10 @@ N(".exap0701").cont({
          // 3-1 Go to create page
         N("#btnAdd", cont.view).click(function(e) {
             e.preventDefault();
-            
+
             // FIXME remove this code.
             N.ds.instance(cont.form).remove();
-            
+
             // Grid row select event
             cont.view.parent().comm("html/naturaljs/exap/exap0702.html")
                 .request.attr("selData", cont.selData) // send seleted row data
@@ -99,7 +101,7 @@ N(".exap0701").cont({
          // 3-2 Go to edit page
         N("#btnEdit", cont.view).click(function(e) {
             e.preventDefault();
-            
+
             // Grid row select event
             cont.view.parent().comm("html/naturaljs/exap/exap0702.html")
                 .request.attr("selData", cont.selData) // send seleted row data
@@ -129,7 +131,7 @@ N(".exap0701").cont({
     onOpen : function(onOpenData) {
         var cont = this;
         cont.selData = onOpenData;
-        
+
         // 4. Data bind that transfered by onOpen's argument
         cont.form.bind(cont.selData.row, cont.selData.data);
     },

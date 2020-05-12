@@ -1,6 +1,6 @@
 <article class="exap0500 view-code">
-    <h1 lang="ko_KR">데이터 그리드(N.grid(리스트형)) 에서 입력, 조회, 수정, 삭제 예제</h1>
-    <h1 lang="en_US">Example of create, read, update and delete the data in data grid(N.grid(list type)).</h1>
+    <h1 lang="ko_KR">데이터 그리드 CRUD(리스트형)</h1>
+    <h1 lang="en_US">CRUD in data grid(List type)</h1>
 
     <div class="searchBox">
         <ul>
@@ -77,12 +77,14 @@
             </tr>
         </tbody>
     </table>
-    
+
     <div class="alert">
         <p lang="ko_KR">데이터 그리드(N.grid(리스트형)) 에서 직접 입력 조회 수정 삭제를 처리하는 예제 입니다.</p>
         <p lang="en_US">This is an example that handles create, read, update, and delete the data directly in data grid(N.grid(list type)).</p>
     </div>
 </article>
+
+<script type="text/javascript" charset="utf-8" src="https://bbalganjjm.github.io/natural_js/js/seo.js"></script>
 
 <script type="text/javascript">
 N(".exap0500").cont({
@@ -101,14 +103,14 @@ N(".exap0500").cont({
                 filterdData.select(N(".searchBox #" + code, cont.view)).bind();
                 filterdData.select(N(".grid__ #" + code, cont.view)).bind();
             });
-            
+
             afterCodeInitFn.call(cont);
          });
     },
     setComponents : function(cont) {
         // 2. initialize buttons
         N(".buttons a", cont.view).button();
-        
+
         // 3. initialize N.form and add new row data for search box
         cont.form = N([]).form({
             context : N("div.searchBox li.inputs", cont.view),

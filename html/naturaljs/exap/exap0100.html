@@ -1,6 +1,6 @@
 <article class="exap0100 view-code">
-    <h1 lang="ko_KR">데이터 목록 조회 예제</h1>
-    <h1 lang="en_US">Data list view example</h1>
+    <h1 lang="ko_KR">데이터 목록 조회</h1>
+    <h1 lang="en_US">Data list view</h1>
     <div class="searchBox">
         <ul>
             <li class="inputs">
@@ -53,12 +53,14 @@
             </tr>
         </tbody>
     </table>
-    
+
     <div class="alert">
         <p lang="ko_KR">검색박스(N.form)와 데이터 그리드(N.grid)가 조합된 데이터 목록 예제 입니다.</p>
         <p lang="en_US">An example of a data list that combines a search box(N.form) and a data grid(N.grid).</p>
     </div>
 </article>
+
+<script type="text/javascript" charset="utf-8" src="https://bbalganjjm.github.io/natural_js/js/seo.js"></script>
 
 <script type="text/javascript">
 N(".exap0100").cont({
@@ -75,20 +77,20 @@ N(".exap0100").cont({
             N(codeParams).each(function(i, code) {
                 N(data).datafilter("code === '" + code + "'").select(N(".searchBox #" + code, cont.view)).bind();
             });
-            
+
             afterCodeInitFn.call(cont);
          });
     },
     setComponents : function(cont) {
         // 2. initialize N.button
         N(".buttons a", cont.view).button();
-        
+
         // 3. initialize N.form and add new row data
         cont.form = N([]).form({
             context : N("div.searchBox li.inputs", cont.view),
             revert : true
         }).add();
-        
+
         // 4. initialize N.grid and bind empty data
         cont.grid = N([]).grid({
                context : N("#grid", cont.view),

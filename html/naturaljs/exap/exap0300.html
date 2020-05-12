@@ -1,6 +1,6 @@
 <article class="exap0300 view-code">
-    <h1 lang="ko_KR">상세 데이터 입력 예제</h1>
-    <h1 lang="en_US">Detail data input example</h1>
+    <h1 lang="ko_KR">폼 데이터 입력</h1>
+    <h1 lang="en_US">Insert form data</h1>
 
     <div class="searchBox">
         <ul>
@@ -85,13 +85,15 @@
             <td colspan="3"><input id="isActive" type="checkbox"></td>
         </tr>
     </table>
-    
+
     <div class="alert">
         <p lang="ko_KR">폼(N.form)을 이용하여 새로운 데이터를 생성하는 예제 입니다.</p>
         <p lang="en_US">This is an example of creating new detail data using the form(N.form).</p>
     </div>
-    
+
 </article>
+
+<script type="text/javascript" charset="utf-8" src="https://bbalganjjm.github.io/natural_js/js/seo.js"></script>
 
 <script type="text/javascript">
 N(".exap0300").cont({
@@ -108,14 +110,14 @@ N(".exap0300").cont({
             N(codeParams).each(function(i, code) {
                 N(data).datafilter("code === '" + code + "'").select(N("#detail #" + code, cont.view)).bind();
             });
-            
+
             afterCodeInitFn.call(cont);
          });
     },
     setComponents : function(cont) {
         // 2. initialize N.button.
         N(".buttons a", cont.view).button();
-        
+
         // 3. initialize N.form and generate new data
         cont.form = N([]).form({
             context : N("#detail", cont.view),

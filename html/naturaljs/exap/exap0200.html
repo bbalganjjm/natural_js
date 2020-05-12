@@ -1,6 +1,6 @@
 <article class="exap0200 view-code">
-    <h1 lang="ko_KR">상세 데이터 조회 예제</h1>
-    <h1 lang="en_US">Detail data view example</h1>
+    <h1 lang="ko_KR">폼 데이터 조회</h1>
+    <h1 lang="en_US">Retrieving form data</h1>
 
     <table id="detail" class="form__" style="width: 100%;">
         <tr>
@@ -62,12 +62,14 @@
             <td id="isActive" colspan="3"></td>
         </tr>
     </table>
-    
+
     <div class="alert">
-        <p lang="ko_KR">폼(N.form)을 이용하여 상세 데이터를 조회 하는 예제 입니다.</p>
+        <p lang="ko_KR">폼(N.form)을 이용하여 폼 데이터를 조회 하는 예제 입니다.</p>
         <p lang="en_US">This is an example of detail data view using the form(N.form).</p>
     </div>
 </article>
+
+<script type="text/javascript" charset="utf-8" src="https://bbalganjjm.github.io/natural_js/js/seo.js"></script>
 
 <script type="text/javascript">
 N(".exap0200").cont({
@@ -78,10 +80,10 @@ N(".exap0200").cont({
     setComponents : function(cont) {
         // 1. initialize buttons
         N(".buttons a", cont.view).button();
-        
+
         // 2. initialize N.form
         cont.form = N([]).form(N("#detail", cont.view));
-        
+
         // 2-1. Bind form data
         N.comm("html/naturaljs/exap/data/" + cont._key + ".json").submit(function(data) {
                // Data bind by N.form

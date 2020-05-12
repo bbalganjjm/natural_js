@@ -75,6 +75,8 @@
     </table>
 </article>
 
+<script type="text/javascript" charset="utf-8" src="https://bbalganjjm.github.io/natural_js/js/seo.js"></script>
+
 <script type="text/javascript">
 N(".exap0602").cont({
     init : function(view, request) {
@@ -90,14 +92,14 @@ N(".exap0602").cont({
             N(codeParams).each(function(i, code) {
                 N(data).datafilter("code === '" + code + "'").select(N("#detail #" + code, cont.view)).bind();
             });
-            
+
             afterCodeInitFn.call(cont);
          });
     },
     setComponents : function(cont) {
         // 2. initialize buttons
         N(".buttons a", cont.view).button();
-        
+
         // 3. initialize N.form
         cont.form = N([]).form({
             context : N("#detail", cont.view),
