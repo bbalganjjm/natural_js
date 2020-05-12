@@ -5,14 +5,14 @@ if(location.href.indexOf("index.html") < 0) {
         var host = href.substring(0, href.indexOf("/html/"));
         var contentUrl = href.substring(href.indexOf("/html/") + 1);
         var docId = contentUrl.substring(contentUrl.lastIndexOf("/") + 1, contentUrl.lastIndexOf(".html"));
-        var title = document.getElementsByTagName("h1")[0].innerText;
+        var docNm;
         if(document.getElementsByTagName("h1")[1]) {
-            title = document.getElementsByTagName("h1")[1].innerText;
+            docNm = document.getElementsByTagName("h1")[1].innerText;
+        } else if(document.getElementsByTagName("h1")[0]) {
+            docNm = document.getElementsByTagName("h1")[0].innerText;
+        } else {
+            docNm = docId;
         }
-        if(!title) {
-            title = docId;
-        }
-        var docNm = title;
         var hash = docId + "$" + docNm + "$" + contentUrl;
         hash = btoa(encodeURIComponent(hash));
 
