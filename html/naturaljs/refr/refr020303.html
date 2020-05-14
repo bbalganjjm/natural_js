@@ -21,40 +21,39 @@
         <tr>
             <td></td>
             <td>obj</td>
-            <td>jquery object(selector|element)|json object|jquery object(json object)</td>
+            <td>jquery object|string|array|object</td>
             <td style="text-align: center;">N/A</td>
             <td>
                 <p>jquery object(selector|element) 타입의 인자로 지정하고 두 번째인자로 특정 페이지의 URL을 지정하면 가져온 HTML 컨텐츠를 지정한 요소 안에 넣어줍니다.</p>
                 <p>json object  타입의 인자로 지정하면 Communicator.request 의 옵션으로 지정 됩니다.</p>
                 <p>jquery object(json object) 타입의 인자로 지정하면 지정한 값을 서버로 전송한 파라미터로 인식하여 서버에 요청을 보낼 때 전송 해 줍니다.</p>
-                <p>* PAGE: </p>
-                <pre><code class="language-javascript">N.comm(N("#contents"), "page.html").submit()</code></pre>
-                <p>* DATA: </p>
-                <pre><code class="language-javascript">N.comm("data.json").submit(function(data) {})</code></pre>
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>url</td>
-            <td>string</td>
-            <td style="text-align: center;">N/A</td>
-            <td>호출할 URL을 지정 합니다.</td>
-        </tr>
-        <tr>
-            <td>N(obj).comm</td>
-            <td style="text-align: center;">N/A</td>
-            <td style="text-align: center;">N/A</td>
-            <td>N.comm</td>
-            <td>
-                <p>N.comm을 플러그인 방식으로의 초기화 방식입니다.</p>
-                <p>N.comm과 동작되는 로직은 같으며 실제 N() 의 인자로 들어온 값이 N.comm()의 첫 번째 인자로 지정 됩니다.</p>
-                <p>* PAGE 를 불러올때: </p>
-                <pre><code class="language-javascript">N("#contents").comm("page.html").submit()</code></pre>
-                <p>* DATA 를 불러올때: </p>
-                <pre><code class="language-javascript">N([{ parameter : "param1" }, { parameter : "param2" }]).comm("data.json").submit(function(data) {})</code></pre>
-                <p class="alert">N() 의 인자로 지정한 파라미터는 Communicator.request.options 의 data 속성으로 저정되어 파라미터로 전달 됩니다.</p>
+	            <ul>
+	                <li>
+	                <p>html page 요청 : </p>
+	                <pre><code class="language-javascript">N.comm(N("#contents"), "page.html").submit();
+
+// 페이지 파라미터 전송(불러오는 페이지의 Controller object 의 init 함수의 request 인자(arguments[1])로 받을 수 있음)
+N.comm(N("#contents"), "page.html").request.attr("pageParam", "value").submit();
+</code></pre>
+	                </li>
+	                <li>
+	                <p>JSON data 요청 : </p>
+	                <pre><code class="language-javascript">// obj 인자가 string 이면 url 옵션으로 설정 됩니다.
+N.comm("data.json").submit(function(data) {});
+
+// obj 인자가 array 나 object 이면 요청 파라미터로 설정 됩니다.
+N.comm({ dataParam : "value" }, "data.json").submit(function(data) {});
+
+// url 인자가 object 이면 기본 옵션으로 설정 됩니다.
+N.comm({ dataParam : "value" }, {
+    url : "data.json"
+}).submit(function(data) {});
+</code></pre>
+	                </li>
+	            </ul>
+                <p class="alert">인자가 파라미터로 작동할 경우에는 Communicator.request.options 의 data 속성으로 저정되어 전달 됩니다.</p>
                 <p class="alert">
-                    N() 의 인자로 지정한 파라미터는 요청 타입(type, HTTP 에서는 Method)이 GET 일 경우 지정한 파라미터 타입이 JSON 문자열 이나 array[json object] 문자열 이면 q 라는 파라미터 변수명에 해당 문자열을(URL Encode 함) 담아 보냅니다.<br>
+                    파라미터는 요청 타입(type, HTTP 에서는 Method)이 GET 일 경우 지정한 파라미터 타입이 JSON 문자열 이나 array[json object] 문자열 이면 q 라는 파라미터 변수값으로 해당 문자열을(URL Encode 함) 지정 합니다.<br>
                     예) text.html?q=[{"a" : 1}, {"a" : 2}]<br>
                     브라우저마다 GET 파라미터로 보낼수 있는 양이 정해져 있어 파라미터가 잘릴 수 있으니 브라우저별 GET 파라미터 최대 전송량을 파악하여 사용하기 바랍니다.
                 </p>
@@ -63,7 +62,48 @@
         <tr>
             <td></td>
             <td>url</td>
-            <td>string</td>
+            <td>string|object</td>
+            <td style="text-align: center;">N/A</td>
+            <td>
+                <p>string을 입력하면 Communicator.request 객체의 기본 옵션 중 url옵션으로 설정 됩니다.</p>
+                <p>object를 입력하면 Communicator.request 객체의 기본 옵션으로 설정 됩니다.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>N(obj).comm</td>
+            <td style="text-align: center;">N/A</td>
+            <td style="text-align: center;">N/A</td>
+            <td>N.comm</td>
+            <td>
+                <p lang="ko_KR">N.comm의 객체 인스턴스를 jQuery 플러그인 방식으로 생성합니다.</p>
+                <p lang="en_US">Create an object instance of N.comm with jQuery plugin method.</p>
+                <p lang="ko_KR">객체 인스턴스를 생성하는 방식은 다르지만 new N.comm() 로 생성한 인스턴스와 N().comm 로 생성한 인스턴스는 동일 합니다.
+                    N() 함수의 첫번째 인자가 new N.comm 생성자의 첫 번째 인자로 설정 됩니다.</p>
+                <p lang="en_US">The method of creating object instances is different, but the instance created with newcomm and the instance created with comm are the same.
+                    The first argument of the N () function is set as the first argument of the new N.comm constructor.</p>
+                <ul>
+                    <li>
+                    <p>html page 요청 : </p>
+                    <pre><code class="language-javascript">N("#contents").comm("page.html").submit();
+
+// 페이지 파라미터 전송(불러오는 페이지의 Controller object 의 init 함수의 request 인자(arguments[1])로 받을 수 있음)
+N("#contents").comm("page.html").request.attr("pageParam", "value").submit();</code></pre>
+                    </li>
+                    <li>
+                    <p>JSON data 요청 : </p>
+                    <pre><code class="language-javascript">N({ dataParam : "value" }).comm("data.json").submit(function(data) {});
+// comm 메서드의 첫번째 인자가 object 이면 기본 옵션으로 설정 됩니다.
+N({ dataParam : "value" }).comm({
+    url : "data.json"
+}).submit(function(data) {});</code></pre>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>url</td>
+            <td>string|object</td>
             <td style="text-align: center;">N/A</td>
             <td>N.comm 의 url 인자 와 같습니다.</td>
         </tr>
