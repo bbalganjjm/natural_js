@@ -9,21 +9,29 @@
     <p lang="ko_KR">add 나 reload 함수를 호출 하기 전에 다음과 같이 request.attr 로 파라미터를 설정 하면</p>
     <p lang="en_US">If you set the parameter with request.attr as follows before calling add or reload function</p>
     <pre><code class="language-javascript">var docs = N("container selector").docs();
-docs.request.attr("pageParam", { a : 1 }).add("page id", "page name", { url : "url" });
-// docs.request.attr("pageParam", { a : 1 }).reload();
+docs.request.attr("pageParam", { "param" : 1 }).add("page id", "page name", { url : "url" });
+
+docs.request.attr("pageParam", { "param" : 1 }).reload();
 </code></pre>
     <p lang="ko_KR">로드 된 컨텐츠의 Controller object의 init 함수 request 인자로 파라미터를 얻을 수 있습니다.</p>
     <p lang="en_US">You can get the parameter as the request argument of the init function of the Controller object on the loaded content.</p>
-    <pre><code class="language-javascript">N("page id").cont({
+    <pre lang="ko_KR"><code class="language-javascript">N("page id").cont({
     init : function(view, request) {
         N.log(request.attr("pageParam")); // --> { a : 1 }
-        // The request object is also bound to the Controller object and can be referenced by this.request.
+        // request 객체는 Controller object에서 this.request 속성으로도 참조 할 수 있습니다.
+    }
+})
+</code></pre>
+    <pre lang="en_US"><code class="language-javascript">N("page id").cont({
+    init : function(view, request) {
+        N.log(request.attr("pageParam")); // --> { a : 1 }
+        // The request object can also be referenced by the this.request property in the Controller object.
     }
 })
 </code></pre>
     <p lang="ko_KR" class="alert">Documents.request 는 Communicator.request 모듈을 사용 합니다.
         Documents.request 에 대한 자세한 내용은 <a href="#cmVmcjAyMDQlMjRDb21tdW5pY2F0b3IucmVxdWVzdCRodG1sJTJGbmF0dXJhbGpzJTJGcmVmciUyRnJlZnIwMjA0Lmh0bWw=">Communicator.request</a> 메뉴를 참고 바랍니다.</p>
-    <p lang="ko_KR" class="alert">Documents.request uses the Communicator.request module.
+    <p lang="en_US" class="alert">Documents.request uses the Communicator.request module.
         For more information on Documents.request, please refer to the <a href="#cmVmcjAyMDQlMjRDb21tdW5pY2F0b3IucmVxdWVzdCRodG1sJTJGbmF0dXJhbGpzJTJGcmVmciUyRnJlZnIwMjA0Lmh0bWw=">Communicator.request</a> menu.</p>
 </article>
 
