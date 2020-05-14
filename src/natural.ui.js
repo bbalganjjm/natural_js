@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.38.239
+ * Natural-UI v0.38.240
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-UI"] = "0.38.239";
+    N.version["Natural-UI"] = "0.38.240";
 
     $.fn.extend($.extend(N.prototype, {
         alert : function(msg, vars) {
@@ -446,8 +446,8 @@
                 width : 0,
                 height : 0,
                 isInput : false,
-                isWindow : obj.get(0) === window || obj.is(window.document) || obj.is("body"),
-                title : obj.get(0) === window || obj.get(0) === window.document ? undefined : obj.attr("title"),
+                isWindow : obj === window || obj.get(0) === window || obj.is("body"),
+                title : obj === window || obj.get(0) === window || obj.get(0) === window.document || obj.is("body") ? undefined : obj.attr("title"),
                 button : true,
                 closeMode : "remove", // closeMode : hide - keep element, remove - remove element
                 modal : true,
@@ -500,7 +500,7 @@
                 throw N.error("[N.alert]Container element is missing. please specify the correct element selector that will contain the message dialog's element. it can be defined in the \"N.context.attr(\"ui\").alert.container\" property of \"natural.config.js\" file.");
             }
 
-            if (obj.is(":input")) {
+            if (N(obj).is(":input")) {
                 this.options.isInput = true;
             }
             if(msg !== undefined && N.isPlainObject(msg)) {
