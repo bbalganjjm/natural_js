@@ -16,7 +16,11 @@
             <td style="text-align: center;">N/A</td>
             <td style="text-align: center;">N/A</td>
             <td>N.comm</td>
-            <td>N.comm 객체를 생성 합니다.</td>
+            <td>
+                <p lang="ko_KR">N.comm 인스턴스를 생성합니다.</p>
+                <p lang="en_US">Create an N.comm instance.</p>
+                <pre><code>var comm = N.comm(param, opts|url);</code></pre>
+            </td>
         </tr>
         <tr>
             <td></td>
@@ -42,10 +46,10 @@ N.comm(N("#contents"), "page.html").request.attr("pageParam", "value").submit();
 N.comm("data.json").submit(function(data) {});
 
 // obj 인자가 array 나 object 이면 요청 파라미터로 설정 됩니다.
-N.comm({ dataParam : "value" }, "data.json").submit(function(data) {});
+N.comm({ "param" : "value" }, "data.json").submit(function(data) {});
 
 // url 인자가 object 이면 기본 옵션으로 설정 됩니다.
-N.comm({ dataParam : "value" }, {
+N.comm({ "param" : "value" }, {
     url : "data.json"
 }).submit(function(data) {});
 </code></pre>
@@ -61,8 +65,8 @@ N.comm({ dataParam : "value" }, {
         </tr>
         <tr>
             <td></td>
-            <td>url</td>
-            <td>string|object</td>
+            <td>opts|url</td>
+            <td>object|string</td>
             <td style="text-align: center;">N/A</td>
             <td>
                 <p>string을 입력하면 Communicator.request 객체의 기본 옵션 중 url옵션으로 설정 됩니다.</p>
@@ -77,7 +81,7 @@ N.comm({ dataParam : "value" }, {
             <td>
                 <p lang="ko_KR">N.comm의 객체 인스턴스를 jQuery 플러그인 방식으로 생성합니다.</p>
                 <p lang="en_US">Create an object instance of N.comm with jQuery plugin method.</p>
-                <pre><code>var docs = N(context).docs(opts);</code></pre>
+                <pre><code>var comm = N(param).comm(opts|url);</code></pre>
                 <p lang="ko_KR">객체 인스턴스를 생성하는 방식은 다르지만 new N.comm() 로 생성한 인스턴스와 N().comm 로 생성한 인스턴스는 동일 합니다.
                     N() 함수의 첫번째 인자가 new N.comm 생성자의 첫 번째 인자로 설정 됩니다.</p>
                 <p lang="en_US">The method of creating object instances is different, but the instance created with newcomm and the instance created with comm are the same.
@@ -92,9 +96,9 @@ N("#contents").comm("page.html").request.attr("pageParam", "value").submit();</c
                     </li>
                     <li>
                     <p>JSON data 요청 : </p>
-                    <pre><code class="language-javascript">N({ dataParam : "value" }).comm("data.json").submit(function(data) {});
+                    <pre><code class="language-javascript">N({ "param" : "value" }).comm("data.json").submit(function(data) {});
 // comm 메서드의 첫번째 인자가 object 이면 기본 옵션으로 설정 됩니다.
-N({ dataParam : "value" }).comm({
+N({ "param" : "value" }).comm({
     url : "data.json"
 }).submit(function(data) {});</code></pre>
                     </li>
@@ -103,8 +107,8 @@ N({ dataParam : "value" }).comm({
         </tr>
         <tr>
             <td></td>
-            <td>url</td>
-            <td>string|object</td>
+            <td>opts|url</td>
+            <td>object|string</td>
             <td style="text-align: center;">N/A</td>
             <td>N.comm 의 url 인자 와 같습니다.</td>
         </tr>

@@ -26,7 +26,7 @@ API 문서는 Natural-JS 의 컴포넌트와 라이브러리에서 지원하는 
         2. 검증 룰(Validation Rules) : data-validate
         3. a 와 b 를 제외한 모든 컴포넌트 옵션 : data-opts
 
-<p class="alert">선언적 옵션은 JSON 표준 형식을 정확하게 준수해야합니다 (예 : 키 값은 큰 따옴표로 묶어야합니다). JSON 표준 양식을 지키지 않으면 선언형 옵션이 인식되지 않거나 오류가 발생합니다.</p>
+<p class="alert">선언적 옵션은 JSON 표준 형식을 정확하게 준수해야합니다 (예 : 키 값은 큰 따옴표로 묶어야합니다). JSON 표준 포멧을 지키지 않으면 선언형 옵션이 인식되지 않거나 오류가 발생합니다.</p>
 
 <div class="alert">
     data-format 이나 data-validate 등 선언형 옵션으로 실행되는 룰은 배열 형태의 문자열로 정의하고 룰명 다음에 인자들을 순서대로 나열 합니다.
