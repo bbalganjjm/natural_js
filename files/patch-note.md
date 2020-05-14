@@ -1,5 +1,6 @@
 ## Natural-UI v0.38.238
  * N.tab : Fixed a bug where the tab scroll element's margin value was set incorrectly or an error occurred on mobile when the tab scroll option was true and there was no tab scroll related element("a" tag).
+ * N.alert : Fixed a bug that caused an error when specifying the context as a window object when creating an instance of N.alert directly with new.
 
 ## Natural-DATA v0.10.72
  *
