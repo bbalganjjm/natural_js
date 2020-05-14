@@ -36,23 +36,19 @@
             <td>string</td>
             <td>null</td>
             <td style="text-align: center;">O</td>
-            <td>노드 명으로 표시 될 데이터의 프로퍼티명을 지정 합니다.</td>
+            <td>
+                <p lang="ko_KR">노드 명으로 표시 될 데이터의 프로퍼티명을 지정 합니다.</p>
+                <p lang="en_US">Specifies the property name of the data to be displayed as a node name.</p>
+            </td>
         </tr>
         <tr>
             <td>val</td>
             <td>string</td>
             <td>null</td>
             <td style="text-align: center;">O</td>
-            <td>노드 값으로 설정 될 데이터의 프로퍼티명을 지정 합니다.</td>
-        </tr>
-        <tr>
-            <td>level</td>
-            <td>string</td>
-            <td>level</td>
-            <td></td>
             <td>
-                노드 레벨로 설정 될 데이터의 프로퍼티명을 지정 합니다.
-                <p class="alert">level 옵션은 필수 옵션이 아닙니다. 그러나 지정 하면 트리 렌더링 속도가 더 빨라집니다.</p>
+                <p lang="ko_KR">노드 값으로 설정 될 데이터의 프로퍼티명을 지정 합니다.</p>
+                <p lang="en_US">Specifies the property name of the data to be set as the node value.</p>
             </td>
         </tr>
         <tr>
@@ -60,7 +56,22 @@
             <td>string</td>
             <td>null</td>
             <td style="text-align: center;">O</td>
-            <td>부모노드 값으로 설정 될 데이터의 프로퍼티명을 지정 합니다.</td>
+            <td>
+                <p lang="ko_KR">부모노드 값으로 설정 될 데이터의 프로퍼티명을 지정 합니다.</p>
+                <p lang="en_US">Specifies the property name of the data to be set as the parent node value.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>level</td>
+            <td>string</td>
+            <td>level</td>
+            <td></td>
+            <td>
+                <p lang="ko_KR">노드 레벨로 설정 될 데이터의 프로퍼티명을 지정 합니다.</p>
+                <p lang="en_US">Specifies the property name of the data to be set at the node level.</p>
+                <p lang="ko_KR" class="alert">level 옵션은 필수 옵션이 아니지만 지정 하면 트리 렌더링 속도가 더 빨라집니다.</p>
+                <p lang="en_US" class="alert">The level option is not a required option, but specifying it will make the tree render faster.</p>
+            </td>
         </tr>
         <tr>
             <td>folderSelectable</td>
@@ -68,8 +79,12 @@
             <td>false</td>
             <td></td>
             <td>
-                폴더 노드 선택 여부
-                <p class="alert">true 이면 [+] 아이콘을 클릭하여 폴더를 확장할 수 있고 노드명을 클릭하면 선택(onSelect 이벤트 실행)이 됩니다. false 이면 폴더노드명을 클릭하면 폴더가 확장되고 선택이 되지 않습니다.</p>
+                <p lang="ko_KR">true로 설정 하면 폴더노드를 선택 할 수 있습니다.</p>
+                <p lang="en_US">If set to true, a folder node can be selected.</p>
+                <p lang="ko_KR" class="alert">옵션 값이 true 이면 [+]아이콘을 클릭하여 폴더를 확장할 수 있고 노드명을 클릭하면 노드가 선택 됩니다.
+                                옵션 값이 false 이면 폴더 노드명을 클릭 했을 때 폴더가 선택 되지 않고 폴더를 확장 합니다.</p>
+                <p lang="en_US" class="alert">If the option value is true, you can expand the folder by clicking the [+] icon, and clicking the node name selects the node.
+                    If the option value is false, the folder is not selected and the folder is expanded when the folder node name is clicked.</p>
             </td>
         </tr>
         <tr>
@@ -77,7 +92,12 @@
             <td>boolean</td>
             <td>false</td>
             <td></td>
-            <td>노드명 앞에 체크박스 표시 여부, 체크박스를 표시하면 선택된 노드의 값들만 추출 할 수 있습니다.</td>
+            <td>
+                <p lang="ko_KR">true로 설정하면 체크박스가 노드명 앞에 추가됩니다.</p>
+                <p lang="en_US">When set to true, a check box is prepended to the node name.</p>
+                <p lang="ko_KR" class="alert">체크박스가 체크 되면 하위 노드들이 모두 체크 되고 onCheck 이벤트 핸들러가 실행 됩니다.</p>
+                <p lang="en_US" class="alert">When the checkbox is checked, all child nodes are checked and the onCheck event handler is executed.</p>
+            </td>
         </tr>
         <tr>
             <td>onSelect</td>
@@ -85,12 +105,19 @@
             <td>null</td>
             <td></td>
             <td>
-            노드가 선택 되었을때 실행되는 이벤트 핸들러를 정의 합니다.
-                <pre><code class="language-javascript">onSelect : function(selNodeIndex, selNodeEle, selNodeData) {
+                <p lang="ko_KR">노드가 선택 되었을때 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="en_US">Defines an event handler that is executed when a node is selected.</p>
+                <pre lang="ko_KR"><code class="language-javascript">onSelect : function(selNodeIndex, selNodeEle, selNodeData) {
     // this : N.tree 인스턴스
-    // selNodeIndex : 선택된 노드의 index
-    // selNodeEle : 선택된 노드의 요소
-    // selNodeData : 선택된 노드의 row data
+    // selNodeIndex : 선택 된 노드의 index
+    // selNodeEle : 선택 된 노드의 요소
+    // selNodeData : 선택 된 노드의 row data
+}</code></pre>
+                <pre lang="en_US"><code class="language-javascript">onSelect : function(selNodeIndex, selNodeEle, selNodeData) {
+    // this : N.tree instance
+    // selNodeIndex : Index of the selected node
+    // selNodeEle : Element of selected node
+    // selNodeData : Row data of the selected node
 }</code></pre>
             </td>
         </tr>
@@ -100,18 +127,31 @@
             <td>null</td>
             <td></td>
             <td>
-            노드 앞의 체크박스가 선택 되었을때 실행되는 이벤트 핸들러를 정의 합니다.
-                <pre><code class="language-javascript">onCheck : function(selNodeIndex, selNodeEle, selNodeData
+                <p lang="ko_KR">노드가 체크 되었을때 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="en_US">Defines an event handler that is executed when a node is checked.</p>
+                <pre lang="ko_KR"><code class="language-javascript">onCheck : function(selNodeIndex, selNodeEle, selNodeData
                     , checkedElesIndexes, checkedEles, checkedElesData
                     , checkFlag) {
     // this : N.tree 인스턴스
-    // selNodeIndex : 선택된 노드의 index
-    // selNodeEle : 선택된 노드의 요소
-    // selNodeData : 선택된 노드의 row data
+    // selNodeIndex : 선택 된 노드의 index
+    // selNodeEle : 선택 된 노드의 요소
+    // selNodeData : 선택 된 노드의 row data
     // checkedElesIndexes : 체크된 노드들의 index
-    // selNodeEle : 체크된된 노드들의 요소
-    // selNodeData : 체크된 노드들의 row data
+    // selNodeEle : 체크된 된 노드들의 요소
+    // selNodeData : 체크 된 노드들의 row data
     // checkFlag : 체크 여부
+}</code></pre>
+                <pre lang="en_US"><code class="language-javascript">onCheck : function(selNodeIndex, selNodeEle, selNodeData
+                    , checkedElesIndexes, checkedEles, checkedElesData
+                    , checkFlag) {
+    // this : N.tree instance
+    // selNodeIndex : Index of the selected node
+    // selNodeEle : Element of selected node
+    // selNodeData : Row data of the selected node
+    // checkedElesIndexes : Index of checked nodes
+    // selNodeEle : Elements of checked nodes
+    // selNodeData : Row data of checked nodes
+    // checkFlag : Check whether
 }</code></pre>
             </td>
         </tr>
