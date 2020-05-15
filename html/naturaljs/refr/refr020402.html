@@ -12,16 +12,77 @@
             <th style="width: auto;">Description</th>
         </tr>
         <tr>
+            <td>append</td>
+            <td>boolean</td>
+            <td>false</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p lang="ko_KR">true로 설정하면 로드 한 페이지를 덮어쓰지 않고 첨부 합니다.</p>
+                <p lang="en_US">If set to true, the loaded page is appended without being overwritten.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>urlSync</td>
+            <td>boolean</td>
+            <td>true</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p lang="ko_KR">false로 설정하면 서버로 요청 할 때의 location.href 와 서버에서 응답을 받았을 때의 location.href 이 다르더라도 응답을 차단 하지 않습니다.</p>
+                <p lang="en_US">If set to false, the response will not be blocked even if location.href when requesting to the server and location.href when receiving a response from the server are different.</p>
+                <p lang="ko_KR" class="alert">알수 없는 이유로 서버 응답이 차단 되었을 경우 이 옵션을 false 로 설정 해서 테스트 해 보세요.</p>
+                <p lang="en_US" class="alert">If the server response is blocked for unknown reasons, set this option to false to test.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>dataIsArray</td>
+            <td>boolean</td>
+            <td>false</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p lang="ko_KR">true로 설정하면 N().comm 에서 N 함수의 인자로 지정한 파라미터 객체를  array 타입으로 지정 할 수 있습니다.</p>
+                <p lang="en_US">If set to true, the parameter object specified as an argument of N function in N().comm can be specified as an array type.</p>
+                <p lang="ko_KR" class="alert">
+                    Communicator를 N(params).comm(url).submit(); 와 같이 사용할 때 params의 객체 타입이 array 일때 dataIsArray 옵션이 false 로 지정되어 있다면 array 의 첫번째 오브젝트만 전송 됩니다.
+                    이 문제의 원인은 jQuery 함수의 인자를 array(jQuery([{}])) 또는 object($({})) 로 설정 한 후에 get 함수를 호출하면 둘다 array([{}]) 를 반환하기 때문 입니다.
+                    불편하더라도 array 를 서버에 전송 할 때는 dataIsArray 를 true로 설정하거나 object 에 array를 담아서 사용 바랍니다.
+                </p>
+                <p lang="ko_KR" class="alert">
+                    If Communicator is used as N(params).comm(url).submit();, only the first object in the array is sent when the object type of params is array and the dataIsArray option is set to false.
+                    The cause of this problem is that if you call get function after setting the argument of jQuery function to array(jQuery([{}])) or object($({})), both return array ([{}]).
+                    Even if inconvenient, when sending an array to the server, set dataIsArray to true or use an object in an array.
+                </p>
+                <p lang="ko_KR" class="alert">Communicator를 N.comm(params, url).submit(); 와 같이 사용하면 dataIsArray 옵션을 true로 지정하지 않아도 params를 jquery object 로 만들지 않기 때문에 array 타입으로 전송 됩니다.</p>
+                <p lang="en_US" class="alert">When Communicator is used as N.comm(params, url).submit();, params are not created as jquery objects even if the dataIsArray option is not set to true, so they are sent as an array type.</p>
+                <p lang="ko_KR" class="alert">Natural-ARCHITECTURE v0.8.1.4 버전 이후에 적용 되었습니다.</p>
+                <p lang="en_US" class="alert">Natural-ARCHITECTURE v0.8.1.4 or later.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>target</td>
+            <td>jquery object</td>
+            <td>null</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p lang="ko_KR">HTML 컨텐츠를 삽입할 요소를 지정 합니다.</p>
+                <p lang="en_US">Specifies the element to insert HTML content.</p>
+                <p lang="ko_KR" class="alert">Communicator를 N(".block").comm("page.html").submit(); 와 같이 사용 할 경우 N("#block") 요소 오브젝트가 target 속성 값으로 지정 됩니다.</p>
+                <p lang="en_US" class="alert">If Communicator is used as N(".block").comm("page.html").submit();, the N(".block") element object is assigned as the target attribute value.</p>
+            </td>
+        </tr>
+        <tr>
             <td>contentType</td>
             <td>string</td>
             <td>application/json; charset=utf-8</td>
             <td style="text-align: center;">O</td>
             <td>
-                <p>Ajax request 에 대한 contentType을 지정 합니다</p>
-                <p class="alert">
-                    contentType 은 jQuery.ajax 함수의 옵션이 그대로 적용 됩니다.
+                <p lang="ko_KR">서버 요청에 대한 contentType을 지정 합니다.</p>
+                <p lang="en_US">Specifies the contentType for server requests.</p>
+                <p lang="ko_KR" class="alert">contentType 옵션은 jQuery.ajax 함수의 옵션이 그대로 적용 됩니다.
                     <a class="link" target="blank_" href="http://api.jquery.com/jquery.ajax/">jQuery.ajax</a>
                     메뉴얼의 settings 부분에서 contentType 속성을 참고 하세요.
+                </p>
+                <p lang="en_US" class="alert">The contentType option remains the same as the jQuery.ajax function option.
+                    See the contentType property in the settings section of the <a class="link" target="blank_" href="http://api.jquery.com/jquery.ajax/">jQuery.ajax</a> manual.
                 </p>
             </td>
         </tr>
@@ -31,25 +92,14 @@
             <td>false</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p>브라우저 캐시 적용 여부</p>
-                <p class="alert">
-                    cache 는 jQuery.ajax 함수의 옵션이 그대로 적용 됩니다.
+                <p lang="ko_KR">true로 설정하면 요청 된 페이지가 브라우저에 의해 캐시 됩니다.</p>
+                <p lang="en_US">If set to true, it will force requested pages to be cached by the browser.</p>
+                <p lang="ko_KR" class="alert">cache 옵션은 jQuery.ajax 함수의 옵션이 그대로 적용 됩니다.
                     <a class="link" target="blank_" href="http://api.jquery.com/jquery.ajax/">jQuery.ajax</a>
                     메뉴얼의 settings 부분에서 cache 속성을 참고 하세요.
                 </p>
-            </td>
-        </tr>
-        <tr>
-            <td>async</td>
-            <td>boolean</td>
-            <td>true</td>
-            <td style="text-align: center;">X</td>
-            <td>
-                <p>Ajax 요청을 비동기 방식으로 처리할지 동기방식으로 처리할지 지정 합니다</p>
-                <p class="alert">
-                    async 는 jQuery.ajax 함수의 옵션이 그대로 적용 됩니다.
-                    <a class="link" target="blank_" href="http://api.jquery.com/jquery.ajax/">jQuery.ajax</a>
-                    메뉴얼의 settings 부분에서 async 속성을 참고 하세요.
+                <p lang="en_US" class="alert">The cache option remains the same as the jQuery.ajax function option.
+                    See the cache property in the settings section of the <a class="link" target="blank_" href="http://api.jquery.com/jquery.ajax/">jQuery.ajax</a> manual.
                 </p>
             </td>
         </tr>
@@ -59,11 +109,14 @@
             <td>POST</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p>Ajax 요청에 대한 HTTP Method를 지정 합니다</p>
-                <p class="alert">
-                    type 은 jQuery.ajax 함수의 옵션이 그대로 적용 됩니다.
+                <p lang="ko_KR">요청에 사용 할 HTTP method(예 : "POST", "GET", "PUT")</p>
+                <p lang="en_US">The HTTP method to use for the request (e.g. "POST", "GET", "PUT").</p>
+                <p lang="ko_KR" class="alert">type 옵션은 jQuery.ajax 함수의 옵션이 그대로 적용 됩니다.
                     <a class="link" target="blank_" href="http://api.jquery.com/jquery.ajax/">jQuery.ajax</a>
                     메뉴얼의 settings 부분에서 type 속성을 참고 하세요.
+                </p>
+                <p lang="en_US" class="alert">The type option remains the same as the jQuery.ajax function option.
+                    See the type property in the settings section of the <a class="link" target="blank_" href="http://api.jquery.com/jquery.ajax/">jQuery.ajax</a> manual.
                 </p>
             </td>
         </tr>
@@ -73,66 +126,50 @@
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p>요청 파라미터를 지정 합니다.</p>
-                <p class="alert">
-                    data 는 jQuery.ajax 함수의 옵션이 그대로 적용 됩니다.
+                <p lang="ko_KR">서버로 전송 될 데이터. string 이 아닌 경우 string 으로 변환 됩니다.</p>
+                <p lang="en_US">Data to be sent to the server. It is converted to a string, if not already a string.</p>
+                <p lang="ko_KR" class="alert">data 옵션은 jQuery.ajax 함수의 옵션이 그대로 적용 됩니다.
                     <a class="link" target="blank_" href="http://api.jquery.com/jquery.ajax/">jQuery.ajax</a>
                     메뉴얼의 settings 부분에서 data 속성을 참고 하세요.
                 </p>
-            </td>
-        </tr>
-        <tr>
-            <td>dataIsArray</td>
-            <td>boolean</td>
-            <td>false</td>
-            <td style="text-align: center;">X</td>
-            <td>
-                요청 파라미터의 객체 타입이 array 일 경우 array 자체를 서버에 보내고 싶을때 true로 설정
-                <p class="alert">
-                    N(params).comm(url).submit() 와 같이 사용할 때 params의 객체타입이 array 일때 dataIsArray 옵션이 false 로 지정되어 있다면 array 의 첫번째 오브젝트만 전달 됩니다.
-                    해당 문제는 N(params) 구문에 의해 params를 jquery object로 변환되는 과정에서 $([{}]) 와 같이 하나 $({}) 와 같이 하나 get 했을때 [{}] 로만 반환이 되어서 생기는 문제 입니다.
-                    불편하더라도 array 를 넘길때는 dataIsArray 를 true로 설정하거나 object 에 array를 담아서 사용 바랍니다.
+                <p lang="en_US" class="alert">The data option remains the same as the jQuery.ajax function option.
+                    See the data property in the settings section of the <a class="link" target="blank_" href="http://api.jquery.com/jquery.ajax/">jQuery.ajax</a> manual.
                 </p>
-                <p class="alert">
-                    N.comm(params, url).submit() 와 같이 사용하면 dataIsArray 옵션을 true로 지정하지 않아도 params를 jquery object화 하지않기 때문에 params의 객체타입이 array 더라도 그대로 전송 됩니다.
-                </p>
-                <p class="alert">Natural-ARCHITECTURE v0.8.1.4 버전 이후부터 적용</p>
             </td>
         </tr>
         <tr>
             <td>dataType</td>
-            <td>string</td>
+            <td>string(xml, json, script, or html)</td>
             <td>"json"</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p>응답받을 데이터의 타입을 지정합니다</p>
-                <p class="alert">
-                    dataType 은 jQuery.ajax 함수의 옵션이 그대로 적용 됩니다.
+                <p lang="ko_KR">서버 응답 데이터의 유형(xml, json, script, or html)을 설정 합니다.</p>
+                <p lang="en_US">Set the server response data type(xml, json, script, or html).</p>
+                <p lang="ko_KR" class="alert">dataType 옵션은 jQuery.ajax 함수의 옵션이 그대로 적용 됩니다.
                     <a class="link" target="blank_" href="http://api.jquery.com/jquery.ajax/">jQuery.ajax</a>
                     메뉴얼의 settings 부분에서 dataType 속성을 참고 하세요.
                 </p>
+                <p lang="en_US" class="alert">The dataType option remains the same as the jQuery.ajax function option.
+                    See the dataType property in the settings section of the <a class="link" target="blank_" href="http://api.jquery.com/jquery.ajax/">jQuery.ajax</a> manual.
+                </p>
             </td>
-        </tr>
-        <tr>
-            <td>urlSync</td>
-            <td>boolean</td>
-            <td>true</td>
-            <td style="text-align: center;">X</td>
-            <td>서버로 요청 할 때의 location.href 와 서버에서 응답이 왔을 때의 location.href 이 같은지 비교하여 다르면 응답을 차단 합니다.</td>
         </tr>
         <tr>
             <td>crossDomain</td>
             <td>boolean</td>
             <td>false</td>
             <td style="text-align: center;">X</td>
-            <td>JSONP 같은 기술을 사용하여 다른 도메인의 자원을 가져오게 할지 여부를 설정 합니다(jQuery.ajax 의 옵션).</td>
-        </tr>
-        <tr>
-            <td>append</td>
-            <td>boolean</td>
-            <td>false</td>
-            <td style="text-align: center;">X</td>
-            <td>HTML 컨텐츠를 가져올 때 지정한 영역에 더할지 덮어 쓸지를 결정 합니다.</td>
+            <td>
+                <p lang="ko_KR">동일한 도메인에서 crossDomain 요청 (예 : JSONP)을 강제로 수행하려면 crossDomain 값을 true로 설정 하세요. 이를 통해서 다른 도메인으로 서버 사이드 리다이렉션 하는 것 등이 가능 해 집니다.</p>
+                <p lang="en_US">If you wish to force a crossDomain request(such as JSONP) on the same domain, set the value of crossDomain to true. This allows, for example, server-side redirection to another domain.</p>
+                <p lang="ko_KR" class="alert">crossDomain 옵션은 jQuery.ajax 함수의 옵션이 그대로 적용 됩니다.
+                    <a class="link" target="blank_" href="http://api.jquery.com/jquery.ajax/">jQuery.ajax</a>
+                    메뉴얼의 settings 부분에서 crossDomain 속성을 참고 하세요.
+                </p>
+                <p lang="en_US" class="alert">The crossDomain option remains the same as the jQuery.ajax function option.
+                    See the crossDomain property in the settings section of the <a class="link" target="blank_" href="http://api.jquery.com/jquery.ajax/">jQuery.ajax</a> manual.
+                </p>
+            </td>
         </tr>
         <tr>
             <td>
@@ -151,25 +188,34 @@
             </td>
         </tr>
         <tr>
-            <td>target</td>
-            <td>jquery object</td>
-            <td>null</td>
-            <td style="text-align: center;">X</td>
             <td>
-                HTML 컨텐츠를 가져올 때 가져온 컨텐츠를 자동으로 삽입할 요소를 지정 합니다.
-                <p class="alert">
-                    N("#block").comm("page.html").submit(); 과 같이 HTML 페이지를 불러올 경우 자동으로 target 속성 값은 N("#block") 오브젝트로 지정 됩니다.
+                <p class="depricated">async</p>
+                <p>Deprecated</p>
+            </td>
+            <td class="depricated">boolean</td>
+            <td class="depricated">true</td>
+            <td class="depricated" style="text-align: center;">X</td>
+            <td class="depricated">
+                <p>false 로 설정 하면 Ajax 요청을 동기 방식으로 처리 합니다.</p>
+                <p lang="ko_KR" class="alert">async 옵션은 jQuery.ajax 함수의 옵션이 그대로 적용 됩니다.
+                    <a class="link" target="blank_" href="http://api.jquery.com/jquery.ajax/">jQuery.ajax</a>
+                    메뉴얼의 settings 부분에서 async 속성을 참고 하세요.
+                </p>
+                <p lang="en_US" class="alert">The async option remains the same as the jQuery.ajax function option.
+                    See the async property in the settings section of the <a class="link" target="blank_" href="http://api.jquery.com/jquery.ajax/">jQuery.ajax</a> manual.
                 </p>
             </td>
         </tr>
     </table>
-    <p>※ 위 기본옵션 외에 N.comm은 jQuery $.ajax 모듈을 사용하여 $.ajax에서 제공하는 옵션중 이벤트 관련 부분(beforeSend, success, error, complete)을 제외한 모든 옵션을 그대로 제공합니다.</p>
-    
+    <p lang="ko_KR" class="alert">N.comm은 jQuery.ajax 모듈을 사용하여 Ajax 요청을 처리 합니다. jQuery.ajax 의 beforeSend, success, error, complete 옵션을 제외 한 옵션들은 N.comm 에서도 그대로 적용 됩니다.</p>
+    <p lang="en_US" class="alert">N.comm uses the jQuery.ajax module to process Ajax requests. The options in jQuery.ajax also apply to N.comm except for beforeSend, success, error and complete options.</p>
+
     <hr>
     <p><strong>주석</strong></p>
     <ol>
         <li>
-            <span id="jsonarray">JSON 타입의 object 가 담겨있는 array 객체</span>
+            <span lang="ko_KR" id="jsonarray">JSON 포멧의 object 들이 담겨있는 array 객체.</span>
+            <span lang="en_US" id="jsonarray">An array object containing JSON format objects.</span>
         </li>
     </ol>
 </article>

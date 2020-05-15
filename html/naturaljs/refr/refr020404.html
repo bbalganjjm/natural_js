@@ -4,19 +4,26 @@
         <span lang="en_US">Examples</span>
     </h2>
 
-    <h4 class="notIndex">1. 지정한 영역에 다른 페이지 불러오면서 불러온 페이지에 데이터 전달 하기</h4>
+    <h4 lang="ko_KR" class="notIndex">1. 로드 할 페이지에 데이터(페이지 파라미터) 전달 하기</h4>
+    <h4 lang="en_US" class="notIndex">1. Passing data(page parameters) to the page to load</h4>
 
-<p>1.1. Communicator 초기 화 후 submit 전에 request.attr("attribute name", object) 명령을 실행.</p>
-    <pre class="line-numbers"><code class="language-markup">&lt;section id="section"&gt;&lt;/section&gt;
-
-&lt;script type="text/javascript"&gt;N("#section").comm("page.html").request.attr("data1", { data : ["1", "2"] }).request.attr("data2", ["3", "4"]).submit();
-&lt;/script&gt;</code></pre>
-
-<p>1.2. 불러온 페이지의 Controller 오브젝트의 init 메서드의 두번째 인자인 request 에서 request.attr("attribute name") 명령으로 전달 된 데이터를 꺼냄.</p>
-    <pre class="line-numbers"><code class="language-javascript">N("page selector").cont({
+    <p lang="ko_KR">1.1. submit 메서드를 호출하기 전에 (Comunicator instance).request.attr("name", object) 명령을 실행 합니다.</p>
+    <p lang="en_US">1.1. Execute the (Comunicator instance).request.attr("name", object) command before calling the submit method.</p>
+    <pre><code>N(".view").cont({
     init : function(view, request) {
-        var data1 = request.attr("data1");
-        var data2 = request.attr("data2");
+        N("#section").comm("page.html")
+            .request.attr("data1", { data : ["1", "2"] })
+            .request.attr("data2", ["3", "4"])
+                .submit();
+    }
+});</code></pre>
+
+    <p lang="ko_KR">1.2. 로딩 된 페이지의 Controller object 의 init 메서드에서 Communicator.request 인스턴스의 attr 메서드로 전달 된 데이터 가져 옵니다.</p>
+    <p lang="en_US">1.2. Get the data passed from the init method of the Controller object of the loaded page to the attr method of the Communicator.request instance.</p>
+    <pre><code class="language-javascript">N(".view").cont({
+    init : function(view, request) {
+        var data1 = request.attr("data1"); // { data : ["1", "2"] }
+        var data2 = request.attr("data2"); // ["3", "4"]
     }
 });</code></pre>
 </article>

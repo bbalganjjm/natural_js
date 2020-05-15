@@ -15,13 +15,31 @@
             <td>attr</td>
             <td style="text-align: center;">N/A</td>
             <td style="text-align: center;">N/A</td>
-            <td>Controller.request|Value object</td>
+            <td>set:Controller.request|get:anything</td>
             <td>
-                <p>호출 한 페이지로 전달 할 파라미터 객체를 지정 하거나 전달 된 파라미터 객체를 얻어 옵니다.</p>
-                <p>* 파라미터 전달 : </p>
-                <pre><code class="language-javascript">N(selector).comm(url).request.attr("param", { paramA : "A" }).submit()</code></pre>
-                <p>* 파라미터 받기 : </p>
-                <pre><code class="language-javascript">(호출된 페이지의 Controller).request.attr("param")</code></pre>
+                <p lang="ko_KR">로드 할 페이지로 전달 할 데이터를 지정 하거나 전달 된 데이터를 가져 옵니다.</p>
+                <p lang="en_US">Specifies the data to be passed to the page to be loaded or get the delivered data.</p>
+                <p lang="ko_KR" class="alert">attr 메서드의 인자의 개수가 2개이면 set 으로 작동하고 1개이면 get 으로 작동 합니다.</p>
+                <p lang="en_US" class="alert">If the number of arguments of the attr method is 2, it works as set, and if 1, it works as get.</p>
+                <p lang="ko_KR">데이터 전달 하기 :</p>
+                <p lang="en_US">Passing data :</p>
+                <pre><code>N(".view").cont({
+    init : function(view, request) {
+        N("#section").comm("page.html")
+            .request.attr("data1", { data : ["1", "2"] })
+            .request.attr("data2", ["3", "4"])
+                .submit();
+    }
+});</code></pre>
+
+                <p lang="ko_KR">로딩 된 페이지에서 데이터 가져오기 :</p>
+                <p lang="en_US">Get data from the loaded page :</p>
+                <pre><code>N(".view").cont({
+    init : function(view, request) {
+        var data1 = request.attr("data1"); // { data : ["1", "2"] }
+        var data2 = request.attr("data2"); // ["3", "4"]
+    }
+});</code></pre>
             </td>
         </tr>
         <tr>
@@ -29,42 +47,62 @@
             <td>name</td>
             <td>string</td>
             <td style="text-align: center;">N/A</td>
-            <td>전달할 값의 key를 입력 합니다.</td>
+            <td>
+                <p lang="ko_KR">데이터명을 지정 합니다.</p>
+                <p lang="en_US">Specifies the data name.</p>
+            </td>
         </tr>
         <tr>
             <td></td>
-            <td>obj</td>
-            <td>object</td>
+            <td>value</td>
+            <td>anything</td>
             <td style="text-align: center;">N/A</td>
-            <td>전달할 값에 해당하는 object를 지정 한다. obj 인자를 지정하지 않으면 값을 가져오고 지정하면 해당 값으로 저장합니다.</td>
+            <td>
+                <p lang="ko_KR">데이터값을 지정 합니다.</p>
+                <p lang="en_US">Specifies the data value.</p>
+            </td>
         </tr>
         <tr>
             <td>param</td>
             <td style="text-align: center;">N/A</td>
             <td style="text-align: center;">N/A</td>
-            <td>string</td>
-            <td>현재 페이지의 URL에 표출된 GET 파라미터에서 값을 추출 합니다.</td>
+            <td>string|object</td>
+            <td>
+                <p lang="ko_KR">브라우저의 URL 에서 GET 파라미터 값을 추출 합니다.</p>
+                <p lang="en_US">Extracts the GET parameter value from the browser URL.</p>
+            </td>
         </tr>
         <tr>
             <td></td>
             <td>name</td>
             <td>string</td>
             <td style="text-align: center;">N/A</td>
-            <td>GET 파라미터의 name을 지정 합니다. 지정하지 않으면 GET 파라미터 전체 값을 object 타입으로 반환 합니다.</td>
+            <td>
+                <p lang="ko_KR">파라미터의 key를 지정 합니다. 지정하지 않으면 GET 파라미터 전체를 object 타입으로 반환 합니다.</p>
+                <p lang="en_US">Specifies the key of the parameter. If not specified, the entire GET parameter is returned as an object type.</p>
+            </td>
         </tr>
         <tr>
             <td>get</td>
             <td style="text-align: center;">N/A</td>
             <td style="text-align: center;">N/A</td>
             <td>Value object</td>
-            <td>요청마다 생성되는 request 객체에서 요청정보를 가져옵니다.</td>
+            <td>
+                <p lang="ko_KR">Communicator.request 인스턴스에 설정 된 기본 옵션 정보를 가져옵니다.</p>
+                <p lang="en_US">Get the default option information set on the Communicator.request instance.</p>
+                <p lang="ko_KR">기본 옵션 외에도 "referrer"(submit 메서드를 호출 할 때의 브라우저 URL) 값을 추가로 가져 올 수 있습니다.</p>
+                <p lang="en_US">In addition to the default options, you can get "referrer"(Browser URL when submit method is called) value.</p>
+            </td>
         </tr>
         <tr>
             <td></td>
             <td>key</td>
             <td>string</td>
             <td style="text-align: center;">N/A</td>
-            <td>key를 지정하지 않으면 전체 요청정보를 가져오고 key 값을 지정하면 해당 정보만 가져옵니다. key 값은 기본옵션과 같고 referrer(호출한 페이지 URL) 값만 추가 됩니다.</td>
+            <td>
+                <p lang="ko_KR">기본 옵션명을 지정 합니다. 지정하지 않으면 기본 옵션 객체가 반환 됩니다.</p>
+                <p lang="en_US">Specifies the default option name. If not specified, default option object is returned</p>
+            </td>
         </tr>
         <tr>
             <td>reload</td>
@@ -72,13 +110,18 @@
             <td style="text-align: center;">N/A</td>
             <td>Controller object</td>
             <td>
-                <p>해당 블록 페이지를 다시 로드 합니다.</p>
-                <p class="alert">reload 함수 호출 전에 request.attr 함수로 값을 지정하지 않았다면 리로드 전의 request 객체의 값은 리로드 해도 유지 됩니다.</p>
-                <p class="alert">reload 되는 페이지에 값을 전달 하려면 request.attr() 로 전달 할 값을 저장 후 reload 함수를 호출 하면 됩니다.</p>
-                <pre><code class="language-javascript">request.attr("param", { param : 1 });
-request.reload();
-</code></pre>
-                <p class="alert">request.attr("param", { param : 1 }).reload() 와 같이 메서드 체이닝을 지원하지 않습니다.</p>
+                <p lang="ko_KR">Communicator 로 로드 한 블록 페이지를 다시 로드 옵니다.</p>
+                <p lang="en_US">Reloads the block page loaded by Communicator.</p>
+                <p lang="ko_KR" class="alert">reload 메서드를 호출하기 전에 attr 메서드로 값을 지정하지 않았다면 reload 전의 request 객체의 값은 reload 해도 유지 됩니다.</p>
+                <p lang="en_US" class="alert">If the value is not specified with the attr method before calling the reload method, the value of the request object before reload is retained even when reloading.</p>
+                <p lang="ko_KR" class="alert">attr 메서드로 reload 되는 페이지의 Communicator.request 데이터를 다시 지정 할 수 있습니다.</p>
+                <p lang="en_US" class="alert">The request data of the page reloaded by the attr method can be specified again.</p>
+                <pre><code>request.attr("param", { param : 1 });
+request.reload();</code></pre>
+                <p lang="ko_KR" class="alert">reload 함수는 메서드 체이닝을 지원하지 않습니다.</p>
+                <p lang="en_US" class="alert">The reload function does not support method chaining.</p>
+                <pre lang="ko_KR"><code>request.attr("param", { param : 1 }).reload(); // 이렇게 사용 할 수 없습니다.</code></pre>
+                <pre lang="en_US"><code>request.attr("param", { param : 1 }).reload(); // Can not be used like this.</code></pre>
             </td>
         </tr>
         <tr>
@@ -87,9 +130,9 @@ request.reload();
             <td>string</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p>리로드가 완료 되면 실행 되는 콜백을 지정 합니다. 필요 없으면 지정 하지 않아도 됩니다.</p>
-                <p>콜백의 인자로 html 과 Communicator.request 객체가 반환 됩니다.</p>
-                <pre><code class="language-javascript">request.reload(function(html, request) {
+                <p lang="ko_KR">리로드가 완료 되면 실행 되는 콜백을 지정 합니다. 필요 없으면 지정 하지 않아도 됩니다.</p>
+                <p lang="en_US">Specifies the callback to be executed when reloading is complete. You do not need to specify it if you do not need it.</p>
+                <pre><code>request.reload(function(html, request) {
     N.log(html, request);
 });
 </code></pre>
