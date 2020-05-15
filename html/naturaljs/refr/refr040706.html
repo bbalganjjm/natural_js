@@ -15,8 +15,11 @@
             <td>data</td>
             <td style="text-align: center;">N/A</td>
             <td style="text-align: center;">N/A</td>
-            <td>array[json object]</td>
-            <td>컴포넌트에 바인드 되어 있는 최종 데이터를 반환 합니다.</td>
+            <td>array[json object]|jquery object[array[json object]]</td>
+            <td>
+                <p lang="ko_KR">컴포넌트에 바인드 되어 있는 가장 최근 상태의 데이터를 반환 합니다.</p>
+                <p lang="en_US">Returns the data of the most recent state bound to the component.</p>
+            </td>
         </tr>
         <tr>
             <td></td>
@@ -24,15 +27,21 @@
             <td>boolean</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                반환되는 데이터의 타입을 결정하는 구분자 입니다.
+                <p lang="ko_KR">반환되는 데이터의 타입을 결정하는 구분값 입니다.</p>
+                <p lang="en_US">This is a division value that determines the type of data returned.</p>
                 <div class="alert">
-                    <p>selFlag 인자 값에 따라 다음과 같은 타입의 데이터를 반환 합니다.</p>
+                    <p lang="ko_KR">selFlag 인자 값에 따라 다음과 같은 데이터를 반환 합니다.</p>
+                    <p lang="en_US">The following data is returned according to the value of the selFlag argument.</p>
                     <ul>
-                        <li>입력하지 않았거나 undefined : array[json object] 타입의 가공 된 데이터를 반환 합니다.</li>
-                        <li>true : 폼에 바인드되어 있는 데이터만 추출하여 반환 합니다.</li>
+                        <li lang="ko_KR">undefined(selFlag 옵션이 설정되지 않은 경우) : array[json object] 타입의 데이터를 반환 합니다.</li>
+                        <li lang="en_US">undefined(When the selFlag option is not set) : Returns data of type array [json object].</li>
+                        <li lang="ko_KR">true : 폼에 바인드 되어 있는 데이터만 추출하여 반환 합니다.</li>
+                        <li lang="ko_KR">true : It extracts and returns only the data bound to the form.</li>
                         <li>
-                            <p>false : 바인드 되어 있는 원형(jquery object 타입)의 데이터를 반환 합니다.</p>
-                            <p class="alert">다른 데이터 관련 컴포넌트와 양방향 데이터 바인딩을 가능하게 하려면 반드시 false 인자값을 넣어 줘야 합니다.</p>
+                            <p lang="ko_KR">false : 컴포넌트에 바인딩 되어 있는 jquery object[array[json object]] 타입의 원래 유형의 데이터를 반환 합니다.</p>
+                            <p lang="en_US">false : Returns the data of the original type of the jquery object[array[json object]] type bound to the component.</p>
+                            <p lang="ko_KR" class="alert">data 메서드로 가져온 데이터를 다른 데이터 관련 컴포넌트에 바인딩 할 때는 반드시 "false" 로 설정하여 원래 유형의 데이터를 바인딩 해야 양방향 데이터 바인딩이 활성 화 됩니다.</p>
+                            <p lang="en_US" class="alert">When binding data imported by the data method to other data-related components, you must set "false" to bind the original type of data to enable two way databinding.</p>
                         </li>
                     </ul>
                 </div>
@@ -83,14 +92,20 @@ formInstance.data(true, "col01", "col02", "col03");
             <td style="text-align: center;">N/A</td>
             <td style="text-align: center;">N/A</td>
             <td>jquery object</td>
-            <td>컴포넌트를 적용한 요소를 반환 합니다.</td>
+            <td>
+                <p lang="ko_KR">context 요소를 반환 합니다.</p>
+                <p lang="en_US">Returns the context element.</p>
+            </td>
         </tr>
         <tr>
             <td></td>
             <td>selector</td>
             <td>string</td>
             <td style="text-align: center;">N/A</td>
-            <td>selector 문자열을 입력하면 context 옵션으로 지정한 요소에서 선택된 요소를 반환 합니다.</td>
+            <td>
+                <p lang="ko_KR">jQuery selector 구문을 입력하면 context 요소에서 지정한 요소를 찾아서 반환 합니다.</p>
+                <p lang="en_US">If you enter jQuery selector syntax, the element specified in the context element is found and returned.</p>
+            </td>
         </tr>
         <tr>
             <td>bind</td>

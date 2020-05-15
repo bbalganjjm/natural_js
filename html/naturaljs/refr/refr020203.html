@@ -30,12 +30,12 @@
                 <p>위의 경우 pointcuts에서 regexp pointcut의 param 속성에 정의된 객체를 파라미터로 전달 합니다.</p>
 <pre class="line-numbers"><code class="language-javascript">...
 "pointcut" : "^init$"
-...</code></pre>    
+...</code></pre>
                 <p>위와 같이 pointcut의 값이 객체가 아니고 regexp 문자열인 경우 내장 된 "regexp" pointcut을 기본값으로 사용 합니다.</p>
-                <p>pointcut param 속성 값 앞에 콜론(:) 으로 구분하여 View 요소을 식별 할 수 있는 jQuery selector 문자열을 입력하면 선택 된 페이지만 적용 됩니다.</p>
+                <p>pointcut param 속성 값 앞에 콜론(:) 으로 구분하여 View 요소을 식별 할 수 있는 jQuery selector 구문을 입력하면 선택 된 페이지만 적용 됩니다.</p>
 <pre class="line-numbers"><code class="language-javascript">...
 "pointcut" : ".page01,#page02,.page03:^init$"
-...</code></pre>                
+...</code></pre>
             </td>
         </tr>
         <tr>
@@ -47,8 +47,8 @@
                 <p>함수의 실행 시점을 지정 합니다.</p>
                 <ul>
                     <li>before : 원본 함수를 실행하기 전에 실행 됩니다.</li>
-                     <li>after : 원본 함수가 실행 된 후 실행 됩니다. 원본 함수의 반환값이 함께 전달 됩니다.</li>
-                    <li>around : 원본 함수를 실행할 수 있는 joinPoint가 파라미터로 전달 됩니다.</li>                
+                    <li>after : 원본 함수가 실행 된 후 실행 됩니다. 원본 함수의 반환값이 함께 전달 됩니다.</li>
+                    <li>around : 원본 함수를 실행할 수 있는 joinPoint가 파라미터로 전달 됩니다.</li>
                     <li>error : 원본 함수에서 예외 발생 시 실행 됩니다.</li>
                 </ul>
         </tr>
@@ -65,7 +65,7 @@
                 <ul>
                     <li>cont : 컨트롤러(N.cont) 객체</li>
                      <li>fnChain : 함수(명)체인 문자열</li>
-                    <li>args : 함수의 인자</li>                
+                    <li>args : 함수의 인자</li>
                 </ul>
 <pre class="line-numbers"><code class="language-javascript">...
 "advisors" : [{
@@ -80,7 +80,7 @@
                 <ul>
                     <li>cont : 컨트롤러(N.cont) 객체</li>
                      <li>fnChain : 함수(명)체인 문자열</li>
-                    <li>args : 함수의 인자</li>                
+                    <li>args : 함수의 인자</li>
                     <li>result : 반환값</li>
                 </ul>
 <pre class="line-numbers"><code class="language-javascript">...
@@ -97,7 +97,7 @@
                 <ul>
                     <li>cont : 컨트롤러(N.cont) 객체</li>
                      <li>fnChain : 함수(명)체인 문자열</li>
-                    <li>args : 함수의 인자</li>    
+                    <li>args : 함수의 인자</li>
                     <li>joinPoint : 원본 함수 실행 객체</li>
                 </ul>
 <pre class="line-numbers"><code class="language-javascript">...
@@ -106,7 +106,7 @@
     "adviceType" : "around",
     "fn" : function(cont, fnChain, args, joinPoint) {
         // 페이지 로딩 후 init 함수가 자동으로 호출 되기 전 마다 실행 됨.
-        
+
         // before
         var result = joinPoint.proceed();
         // after
@@ -117,13 +117,13 @@
                 <ul>
                     <li>cont : 컨트롤러(N.cont) 객체</li>
                      <li>fnChain : 함수(명)체인 문자열</li>
-                    <li>args : 함수의 인자</li>                
+                    <li>args : 함수의 인자</li>
                     <li>e : errorThrown 객체</li>
                 </ul>
 <pre class="line-numbers"><code class="language-javascript">...
 "advisors" : [{
     "pointcut" : {
-        "type" : "errorPointcut", // pointcuts 객체 설명의 
+        "type" : "errorPointcut", // pointcuts 객체 설명의
                                   // errorPointcut 참고(무조건 다 허용)
         "param" : ""
     },

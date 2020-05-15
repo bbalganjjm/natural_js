@@ -140,7 +140,7 @@
              *  - request 객체에서 제공 해 주는 정보는 http://bbalganjjm.github.io/natural_js/ 에서 Communicator.request 메뉴를 참고 바람.
              *  - 필터를 여러개 걸수 있으며 단위 필터명은 아무거나 지정하면 됨.
              *  - 수행 순서는 order 속성(숫자가 적을 수록 먼저 실행 됨)이 정의 된 필터가 실행 된 다음 order 속성이 정의 되지 않은 필터들이 실행 됨.
-             *  - 아래 예제에서 지정 한 basicFilter 는 상수값이 아니므로 자유롭게 지정하면 됨.
+             *  - 아래 예제에서 지정한 basicFilter 는 상수값이 아니므로 자유롭게 지정하면 됨.
              */
             "filters" : {
                 "basicFilter" : {

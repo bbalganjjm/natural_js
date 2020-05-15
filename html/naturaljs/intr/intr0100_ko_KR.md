@@ -125,11 +125,11 @@ Natural-UI 는 HTML 기반의 UI 컴포넌트를 지원하는 라이브러리 �
 
 ### Datepicker
 
-[Datepicker(N.datepicker)](#cmVmcjA0MDMlMjREYXRlcGlja2VyJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjA0MDMuaHRtbA==) 는 context 옵션으로 지정 한 텍스트 입력요소에 날짜나 월을 선택 해서 입력 할 수 있는 달력 팝업을 표시 해 주는 UI 컴포넌트 입니다.
+[Datepicker(N.datepicker)](#cmVmcjA0MDMlMjREYXRlcGlja2VyJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjA0MDMuaHRtbA==) 는 context 옵션으로 지정한 텍스트 입력요소에 날짜나 월을 선택 해서 입력 할 수 있는 달력 팝업을 표시 해 주는 UI 컴포넌트 입니다.
 
 ### Popup
 
-[Popup(N.popup)](#cmVmcjA0MDQlMjRQb3B1cCRodG1sJTJGbmF0dXJhbGpzJTJGcmVmciUyRnJlZnIwNDA0Lmh0bWw=) 은 context 옵션으로 지정 한 내부 요소나 url 옵션으로 지정한 페이지를 레이어 팝업 형태로 만들어 주는 UI 컴포넌트입니다.
+[Popup(N.popup)](#cmVmcjA0MDQlMjRQb3B1cCRodG1sJTJGbmF0dXJhbGpzJTJGcmVmciUyRnJlZnIwNDA0Lmh0bWw=) 은 context 옵션으로 지정한 내부 요소나 url 옵션으로 지정한 페이지를 레이어 팝업 형태로 만들어 주는 UI 컴포넌트입니다.
 
 ### Tab
 
@@ -165,7 +165,7 @@ Natural-UI 가 컨텐츠 영역의 UI 개발을 지원 한다면 Natural-UI.Shel
 
 ### Notify(N.notify)
 
-[Notify(N.notify)](#cmVmcjA1MDElMjROb3RpZnkkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDUwMS5odG1s) 는 사용자의 확인 과정이 필요없는 전역 알림 메시지를 지정 한 위치에 표시 해주는 UI 컴포넌트 입니다.
+[Notify(N.notify)](#cmVmcjA1MDElMjROb3RpZnkkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDUwMS5odG1s) 는 사용자의 확인 과정이 필요없는 전역 알림 메시지를 지정한 위치에 표시 해주는 UI 컴포넌트 입니다.
 
 ### Documents(N.docs)
 
