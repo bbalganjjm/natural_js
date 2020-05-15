@@ -19,8 +19,10 @@
             <td>
                 <p lang="ko_KR">N.comm 인스턴스를 생성합니다.</p>
                 <p lang="en_US">Create an N.comm instance.</p>
-                <p class="alert">N.comm 은 new 연산자로 인스턴스를 생성하지 않고 N.comm 객체를 바로 사용 할 수 있습니다.</p>
-                <p class="alert">N.comm 객체에서 submit 함수를 호출 하면 Communicator.request 객체 인스턴스가 요청마다 생성 됩니다.</p>
+                <p lang="ko_KR" class="alert">N.comm 은 new 연산자로 인스턴스를 생성하지 않고 N.comm 객체를 직접 사용 할 수 있습니다.</p>
+                <p lang="en_US" class="alert">N.comm can use N.comm objects directly without instantiating them with the new operator.</p>
+                <p lang="ko_KR" class="alert">N.comm 함수가 호출 되거나 new 연산자로 N.comm 인스턴스를 생성 하면 객체의 request 속성값에 Communicator.request 객체 인스턴스가 생성 되어 바인딩 됩니다.</p>
+                <p lang="en_US" class="alert">If the N.comm function is called or the N.comm instance is created with the new operator, the Communicator.request object instance is created and bound to the request property value of the object.</p>
                 <pre><code>var comm = N.comm(param|element|url, opts|url);</code></pre>
             </td>
         </tr>
@@ -30,31 +32,39 @@
             <td>jquery object[array[object]]|jquery object[object]|jquery object[element]|object|string</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p>첫번째 인자에 object 나 array[object] 타입의 객체가 들어있는 jquery object 로 설정 하고 두번째 인자(url) 에 JSON 데이터를 반환하는 서버 URL 을 설정 하면 설정 된 객체를 문자열로 변환 한 후에 서버에 GET 이나 POST 파라미터로 전달 합니다.
+                <p lang="ko_KR">첫번째 인자에 object 나 array[object] 타입의 객체가 들어있는 jquery object 로 설정 하고 두번째 인자(url) 에 JSON 데이터를 반환하는 서버 URL 을 설정 하면 설정 된 객체를 문자열로 변환 한 후에 서버에 GET 이나 POST 파라미터로 전달 합니다.
                     이때 이 인자값은 Communicator.request 의 기본 옵션의 data 속성 값으로 설정 됩니다.</p>
-                <pre><code class="language-javascript">N.comm({ "param" : "value" }, "data.json").submit(function(data) {});</code></pre>
-                <p class="alert">
-                    type(HTTP METHOD) 옵션이 GET 일 경우 data 속성 값(param)이 object 이거나 array[object] 타입이면 q 라는 파라미터 키에 URL encoding 된 파라미터 문자열이 값으로 설정 됩니다.<br>
+                <p lang="en_US">If you set a jquery object that contains an object of type object or array [object] in the first argument, and set a server URL that returns JSON data in the second argument (url), it converts the set object to a string and then passes it to the server as a GET or POST parameter.
+                    At this time, the value of this parameter is set as the value of the data property of the default option of Communicator.request.</p>
+                <pre><code>N.comm({ "param" : "value" }, "data.json").submit(function(data) {});</code></pre>
+                <p lang="ko_KR" class="alert">
+                    type(HTTP METHOD) 옵션이 GET 일 경우 data 속성 값(param)이 object 이거나 array[object] 타입이면 "q" 파라미터 키에 URL encoding 된 파라미터 문자열이 값으로 설정 됩니다.<br>
                     &nbsp;&nbsp;ex) <strong>data.json?q=%5B%7B%22param%22%3A%22value%22%7D%5D</strong> // q=[{"param":"value"}]<br>
-                    GET 파라미터는 최대 전송 할 수 있는 양이 정해져 있기 때문에 브라우저별 GET 파라미터의 최대 전송량을 파악하여 사용하기 바랍니다.<br>
+                    GET 파라미터는 전송 할 수 있는 데이터의 최대값이 있기 때문에 브라우저별 GET 파라미터의 최대 전송량을 파악하여 사용하기 바랍니다.<br>
+                </p>
+                <p lang="en_US" class="alert">
+                    If the type (HTTP METHOD) option is GET, if the data attribute value (param) is object or array [object] type, the URL-encoded parameter string is set as the value in the "q" parameter key.<br>
+                    &nbsp;&nbsp;ex) <strong>data.json?q=%5B%7B%22param%22%3A%22value%22%7D%5D</strong> // q=[{"param":"value"}]<br>
+                    Since the GET parameter has the maximum value of the data that can be transferred, please check and use the maximum amount of GET parameters for each browser.<br>
                 </p>
 
-                <p>첫번째 인자에 HTML 요소가 담겨있는 jquery object 타입을 설정 하고 두번째 인자(url) 에 HTML 페이지를 반환하는 서버 URL 을 설정 하면 지정한 요소에 불러온 페이지를 추가 해 줍니다.</p>
-                <p>페이지에 파라미터를 전달하는 경우에는 Communicator.request 객체의 attr 메서드를 사용 합니다.</p>
-                <pre><code class="language-javascript">N.comm(N("#contents"), "page.html").submit();
+                <p lang="ko_KR">첫번째 인자에 HTML 요소가 담겨있는 jquery object 타입을 설정 하고 두번째 인자(url) 에 HTML 페이지를 반환하는 서버 URL 을 설정 하면 로드 된 페이지가 지정된 요소에 삽입됩니다.</p>
+                <p lang="en_US">If you set the jquery object type that contains the HTML element in the first argument and the server URL that returns the HTML page in the second argument (url), the loaded page is inserted to the specified element.</p>
+                <pre><code>N.comm(N("#contents"), "page.html").submit();</code></pre>
+                <p lang="ko_KR">페이지에 파라미터를 전달하는 경우에는 Communicator.request 객체의 attr 메서드를 사용 하세요.</p>
+                <p lang="en_US">If passing parameters to a page, use the attr method of the Communicator.request object.</p>
+                <pre><code>N.comm(N("#contents"), "page.html").request.attr("pageParam", "value").submit();</code></pre>
 
-// 페이지 파라미터 전송
-// 불러오는 페이지의 Controller object 의 init 함수의 request 인자(arguments[1])로 받을 수 있습니다.
-N.comm(N("#contents"), "page.html").request.attr("pageParam", "value").submit();
-</code></pre>
-
-                <p>object 타입을 설정 하면 Communicator.request 객체의의 기본 옵션으로 지정 됩니다.</p>
-                <pre><code class="language-javascript">N.comm({ "param" : "value" }, {
+                <p lang="ko_KR">object 타입을 설정 하면 Communicator.request 객체의 기본 옵션으로 설정 됩니다.</p>
+                <p lang="en_US">If object type is set, it is set as the default option for Communicator.request objects.</p>
+                <pre><code>N.comm({ "param" : "value" }, {
     url : "data.json"
 }).submit(function(data) {});
 </code></pre>
-                <p>string 타입을 설정 하면 Communicator.request 객체의 기본 옵션의 url 옵션으로 설정 됩니다.</p>
-                <pre><code class="language-javascript">N.comm("data.json").submit(function(data) {});</code></pre>
+
+                <p lang="ko_KR">string 타입을 설정 하면 Communicator.request 객체의 기본 옵션의 url옵션으로 설정 됩니다.</p>
+                <p lang="en_US">If string type is set, it is set as url option of default option of Communicator.request object.</p>
+                <pre><code>N.comm("data.json").submit(function(data) {});</code></pre>
             </td>
         </tr>
         <tr>
@@ -63,8 +73,10 @@ N.comm(N("#contents"), "page.html").request.attr("pageParam", "value").submit();
             <td>object|string</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p>object 타입을 설정 하면 Communicator.request 객체의 기본 옵션으로 설정 됩니다.</p>
-                <p>string 타입을 설정 하면 Communicator.request 객체의 기본 옵션의 url옵션으로 설정 됩니다.</p>
+                <p lang="ko_KR">object 타입을 설정 하면 Communicator.request 객체의 기본 옵션으로 설정 됩니다.</p>
+                <p lang="en_US">If object type is set, it is set as the default option for Communicator.request objects.</p>
+                <p lang="ko_KR">string 타입을 설정 하면 Communicator.request 객체의 기본 옵션의 url옵션으로 설정 됩니다.</p>
+                <p lang="en_US">If string type is set, it is set as url option of default option of Communicator.request object.</p>
             </td>
         </tr>
         <tr>
@@ -80,8 +92,8 @@ N.comm(N("#contents"), "page.html").request.attr("pageParam", "value").submit();
                     N() 함수의 첫번째 인자가 new N.comm 생성자의 첫 번째 인자로 설정 됩니다.</p>
                 <p lang="en_US">The method of creating object instances is different, but the instance created with "new N.comm()" and the instance created with "N().comm" are the same.
                     The first argument of the N () function is set as the first argument of the new N.comm constructor.</p>
-                <p lang="ko_KR">N() 함수의 인자 타입 중에 string 타입은 N.comm 생성자의 첫 번째 인자(url)로 설정 되지 않습니다.</p>
-                <p lang="en_US">N() 함수의 인자 타입 중에 string 타입은 N.comm 생성자의 첫 번째 인자(url)로 설정 되지 않습니다.</p>
+                <p lang="ko_KR" class="alert">N() 함수의 인자 타입 중에서 string 타입은 N.comm 생성자의 첫 번째 인자(url)로 설정 되지 않습니다.</p>
+                <p lang="en_US" class="alert">Among the argument types of the N() function, the string type is not set as the first argument (url) of the N.comm constructor.</p>
             </td>
         </tr>
         <tr>

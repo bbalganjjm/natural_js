@@ -1,7 +1,7 @@
 <article class="refr020105 apiDoc view-mobile-layout">
     <h2>
-        <span lang="ko_KR">Controller(N.cont) 객체 함수</span>
-        <span lang="en_US">Controller(N.cont) object's functions</span>
+        <span lang="ko_KR">Controller object 의 함수</span>
+        <span lang="en_US">Controller object's functions</span>
     </h2>
     <table class="api form">
         <tr>
@@ -15,8 +15,18 @@
             <td>init</td>
             <td style="text-align: center;">N/A</td>
             <td style="text-align: center;">N/A</td>
-            <td>object(user define)</td>
-            <td>N.cont 에 의해 등록된 callback 이 초기화 된 후 최초 실행 되는 함수입니다.</td>
+            <td>
+                <p lang="ko_KR">function(사용자 정의)</p>
+                <p lang="en_US">function(user-defined)</p>
+            </td>
+            <td>
+                <p lang="ko_KR">view 로딩과 Controller object 초기화가 완료 된 다음 호출 되는 사용자 정의 함수 입니다.</p>
+                <p lang="en_US">This is a user-defined function that is called after the view loading and Controller object initialization are complete.</p>
+                <pre><code>N(".view").cont({
+    init : function(view, request) {
+    }
+});</code></pre>
+            </td>
         </tr>
         <tr>
             <td></td>
@@ -24,7 +34,8 @@
             <td>jquery object</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p>view 요소를 반환 합니다.</p>
+                <p lang="ko_KR">view 요소 입니다.</p>
+                <p lang="en_US">view element.</p>
             </td>
         </tr>
         <tr>
@@ -32,7 +43,10 @@
             <td>request</td>
             <td>Communicator.request</td>
             <td style="text-align: center;">N/A</td>
-            <td>현재 페이지의 요청 정보와 페이지 호출 시 전달 한 데이터를 얻을 수 있는 Communicator.request 객체를 반환 합니다.</td>
+            <td>
+                <p lang="ko_KR">이 페이지를 로드 한 Communicator(N.comm) 의 Communicator.request 객체 입니다.</p>
+                <p lang="en_US">This is the Communicator.request object for the Communicator (N.comm) that loaded this page.</p>
+            </td>
         </tr>
     </table>
 </article>

@@ -16,23 +16,31 @@
             <td style="text-align: center;">N/A</td>
             <td style="text-align: center;">N/A</td>
             <td>N.comm</td>
-            <td>컨트롤러의 실행정보가 정의되어 초기화 된 다음 서버에 요청을 보내는 메서드입니다.</td>
+            <td>
+                <p lang="ko_KR">서버에 요청을 보내고 성공 한 서버 응답이 수신 될 때 실행 될 콜백 함수를 등록 합니다.</p>
+                <p lang="en_US">Send a request to the server and register a callback function to be executed when a successful server response is received.</p>
+            </td>
         </tr>
         <tr>
             <td></td>
             <td>callback</td>
-            <td>function</td>
+            <td>
+                <p lang="ko_KR">function(사용자 정의)</p>
+                <p lang="en_US">function(user-defined)</p>
+            </td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p>서버에서 요청이 처리되고 응답이 완료된 다음 실행되는 콜백 함수입니다.</p>
-                <p>HTML을 요청 하면 콜백 함수의 인자로 불러온 페이지의 Contoller(N.cont) 오브젝트가 반환되고 그외 요청은 data 와 Communicator.request 객체가 반환 됩니다.</p>
-                <pre><code class="language-javascript">// 데이터 요청 시
-N.comm("url").submit(function(data, request) {
+                <p lang="ko_KR">요청이 성공 했을 때 서버의 응답을 처리 하는 콜백 함수를 정의 합니다.</p>
+                <p lang="en_US">Define a callback function that handles the server's response when the request is successful.</p>
+                <p lang="ko_KR">HTML 페이지를 요청 하면 콜백 함수의 인자로 로드 한 페이지의 Contoller object 가 반환되고 이 외의 요청은 data 객체와 Communicator.request 객체가 반환 됩니다.</p>
+                <p lang="en_US">If an HTML page is requested, the controller object of the page loaded as the argument of the callback function is returned. For other requests, the data object and the Communicator.request object are returned.</p>
+                <pre><code class="language-javascript">// Data
+N.comm("data.json").submit(function(data, request) {
     N.log(data, request);
 });
 
-// 페이지 요청 시
-N("selector").comm("url").submit(function(cont) {
+// HTML page
+N(".targetElement").comm("page.html").submit(function(cont) {
     N.log(cont);
 });
 </code></pre>
@@ -44,35 +52,52 @@ N("selector").comm("url").submit(function(cont) {
             <td style="text-align: center;">N/A</td>
             <td>N.comm</td>
             <td>
-                <p>에러가 발생 했을때 지정한 에러 핸들러 콜백 함수를 실행 해 줍니다.</p>
-                <p class="alert">error 메서드를 여러번 호출하여 에러 핸들러를 여러개 등록 할 수 있습니다.</p>                    
+                <p lang="ko_KR">submit 함수 호출 후 서버에서 Error 응답이 수신 되거나 submit 메서드의 콜백 함수에서 에러가 발생 했을 때 실행 될 콜백 함수를 등록 합니다.</p>
+                <p lang="en_US">After the submit function is called, registers a callback function to be executed when an error response is received from the server or an error occurs in the callback function of the submit method.</p>
+                <p lang="ko_KR" class="alert">error 메서드를 여러번 호출하여 콜백 함수를 여러 개 등록 할 수 있습니다.</p>
+                <p lang="en_US" class="alert">You can register multiple callback functions by calling the error method multiple times.</p>
             </td>
         </tr>
         <tr>
             <td></td>
             <td>callback</td>
-            <td>function</td>
+            <td>
+                <p lang="ko_KR">function(사용자 정의)</p>
+                <p lang="en_US">function(user-defined)</p>
+            </td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p>N.comm 으로 요청 시 에러가 발생하면 실행 될 에러 핸들러 콜백 함수를 정의 합니다.</p>
-                <p class="alert">404, 500 등의 서버 에러 뿐 아니라 요청에 성공(200) 했더라도 submit 함수를 호출 할때 지정 한 콜백에서 에러가 발생 하면 지정 한 에러 핸들러 콜백 함수를 실행 시켜 줍니다.</p>
-                
-                <p>콜백 함수의 this 는 생성 된 N.comm 인스턴스 이고 다음과 같은 인자를 반환 합니다.</p>
+                <p lang="ko_KR">에러가 발생 했을 때 에러를 처리 하는 콜백 함수를 정의 합니다.</p>
+                <p lang="en_US">Defines a callback function that handles errors when an error occurs.</p>
+                <p lang="ko_KR">콜백 함수의 this 는 생성 된 N.comm 인스턴스 이고 다음과 같은 인자를 반환 합니다.</p>
+                <p lang="en_US">this of the callback function is the created N.comm instance and returns the following arguments.</p>
                 <ul>
                     <li>e(arguments[0]) : ErrorThrown</li>
                     <li>request(arguments[1]) : Communicator.request</li>
                     <li>xhr(arguments[2]) : jQuery XMLHTTORequest</li>
-                    <li>textStatus(arguments[3]) : "success"(submit 콜백에서 에러 발생 시) 또는 "error"(서버에서 오류 발생 시)</li>
-                    <li>callback(arguments[4]) : textStatus 값이 "success" 일때 submit 메서드의 인자로 지정한 콜백 함수</li>
+                    <li lang="ko_KR">textStatus(arguments[3]) : "success"(submit 콜백에서 에러 발생 시) 또는 "error"(서버에서 오류 발생 시)</li>
+                    <li lang="en_US">textStatus(arguments[3]) : "success"(When an error occurs in submit callback) or "error"(When an error occurs on the server)</li>
+                    <li lang="ko_KR">callback(arguments[4]) : textStatus 값이 "success" 일때 submit 메서드의 인자로 지정한 콜백 함수.</li>
+                    <li lang="en_US">callback(arguments[4]) : Callback function specified as argument of submit method when textStatus value is "success".</li>
                 </ul>
-                <pre><code class="language-javascript">// 데이터 요청 시
-N.comm("url").error(function(e, request, xhr, textStatus, callback) {
-    // 2. 아래의 col01.length 에 대한 첫번째 오류 처리 
+                <pre lang="ko_KR"><code class="language-javascript">
+N.comm("data.json").error(function(e, request, xhr, textStatus, callback) {
+    // 2. col01.length 오류에 대한 첫번째 오류 처리
 }).error(function(e, request, xhr, textStatus, callback) {
-    // 3. 아래의 col01.length 에 대한 두번째 오류 처리 
+    // 3. col01.length 오류에 대한 두번째 오류 처리
 }).submit(function(data, request) {
     var col01;
-    col01.length; // 1. undefined 오류 발생
+    col01.length; // 1. undefined 관련 오류 발생
+});
+</code></pre>
+                <pre lang="en_US"><code class="language-javascript">
+N.comm("data.json").error(function(e, request, xhr, textStatus, callback) {
+    // 2. First error handling for col01.length error
+}).error(function(e, request, xhr, textStatus, callback) {
+    // 3. Second error handling for col01.length error
+}).submit(function(data, request) {
+    var col01;
+    col01.length; // 1. Error related to undefined
 });
 </code></pre>
             </td>

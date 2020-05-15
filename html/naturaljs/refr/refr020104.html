@@ -1,8 +1,10 @@
 <article class="refr020104 apiDoc">
     <h2>
-        <span lang="ko_KR">Controller(N.cont) 객체의 상수</span>
-        <span lang="en_US">Constant for the Controller(N.cont) object</span>
+        <span lang="ko_KR">Controller object 의 상수</span>
+        <span lang="en_US">Constant for the Controller object</span>
     </h2>
+    <span lang="ko_KR">Controller object 에는 다음과 같은 상수 값들이 정의 되어 있습니다.</span>
+    <span lang="en_US">The following constant values are defined in the Controller object.</span>
     <table class="api form">
         <tr>
             <th>Name</th>
@@ -12,24 +14,39 @@
         <tr>
             <td>view</td>
             <td>jquery object</td>
-            <td>view 요소가 정의 되어 있습니다.</td>
+            <td>
+                <p lang="ko_KR">view 요소 입니다.</p>
+                <p lang="en_US">view element.</p>
+                <p lang="ko_KR">init 함수의 첫번째 인자 값과 동일 합니다.</p>
+                <p lang="en_US">It is the same as the value of the first argument of the init function.</p>
+            </td>
         </tr>
         <tr>
             <td>request</td>
             <td>Communicator.request</td>
-            <td> Communicator.request 객체가 정의 되어 있습니다.</td>
+            <td>
+                <p lang="ko_KR">Communicator.request 객체 인스턴스 입니다.</p>
+                <p lang="en_US">Communicator.request object instance.</p>
+                <p lang="ko_KR">init 함수의 두번째 인자 값과 동일 합니다.</p>
+                <p lang="en_US">It is the same as the value of the second argument of the init function.</p>
+            </td>
         </tr>
         <tr>
             <td>caller</td>
-            <td>N.popup instance | N.tab instance</td>
-            <td>N.popup 이나 N.tab 컴포넌트에 의해 호출 된 페이지 일 경우 자신을 호출 한 N.popup 이나 N.tab 인스턴스가 정의 되어 있습니다.</td>
+            <td>N.popup instance|N.tab instance</td>
+            <td>
+                <p lang="ko_KR">N.popup 이나 N.tab 컴포넌트로 호출 된 페이지 일 경우 이 페이지를 로드 한 N.popup 이나 N.tab 인스턴스가 정의 되어 있습니다.</p>
+                <p lang="en_US">In the case of a page called with an N.popup or N.tab component, the N.popup or N.tab instance that loaded this page is defined.</p>
+            </td>
         </tr>
         <tr>
             <td>opener</td>
             <td>N.cont's object</td>
             <td>
-                <p>N.popup 이나 N.tab 컴포넌트에 의해 호출 된 페이지 일 경우 자신을 호출 한 N.popup 이나 N.tab 인스턴스가 포함된 컨트롤러(부모 페이지의 컨트롤러) 오브젝트가 정의 되어 있습니다.</p>
-                <p class="alert">opener 속성은 N.popup 이나 N.tab 컴포넌트 초기화 시 opener 옵션으로 지정한 Controller Object 가 지정 되어 있습니다.</p>
+                <p lang="ko_KR">N.popup 이나 N.tab 컴포넌트로 호출 된 페이지 일 경우 이 페이지를 로드 한 N.popup 이나 N.tab 인스턴스가 포함된 Controller object(부모 페이지의 Controller object)가 정의 되어 있습니다.</p>
+                <p lang="en_US">In the case of a page called with an N.popup or N.tab component, a Controller object (Controller object of the parent page) containing the N.popup or N.tab instance that loaded this page is defined.</p>
+                <p lang="ko_KR" class="alert">opener 속성은 N.popup 이나 N.tab 컴포넌트 인스턴스를 생성 할 때 opener 옵션으로 해당 페이지의 Controller Object 를 지정 해 줘야 합니다.</p>
+                <p lang="en_US" class="alert">When creating an N.popup or N.tab component instance, the opener property must specify the controller object of the corresponding page with the opener option.</p>
             </td>
         </tr>
     </table>

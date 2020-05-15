@@ -1,4 +1,5 @@
 <article class="refr020106 apiDoc">
+
     <h2>
         <span lang="ko_KR">예제</span>
         <span lang="en_US">Examples</span>
@@ -6,21 +7,42 @@
 
     <h4 lang="ko_KR" class="notIndex">1. View 와 Controller 정의</h4>
     <h4 lang="en_US" class="notIndex">1. Define View and Controller</h4>
-    <pre class="line-numbers"><code class="language-markup">&lt;!-- View area start --&gt;
+    <pre class="line-numbers"><code class="language-markup">&lt;!-- View --&gt;
 &lt;article class="view"&gt;
     &lt;p&gt;View&lt;/p&gt;
 &lt;/article&gt;
-&lt;!-- View area end --&gt;
 
+&lt;!-- Controller --&gt;
 &lt;script type="text/javascript"&gt;
-    // Controller area start
     N(".view").cont({
         init : function(view, request) {
             N("p", view).css("padding", "10px");
         }
     });
-    // Controller area end
 &lt;/script&gt;</code></pre>
+
+    <h4 lang="ko_KR" class="notIndex">2.
+Controller object 에 구현 된 모든 함수의 scope 에서 Controller object 참조 하기</h4>
+    <h4 lang="en_US" class="notIndex">2. Referencing the controller object in the scope of all functions implemented in the controller object</h4>
+    <pre class="line-numbers"><code class="language-markup">&lt;article class="view"&gt;
+    &lt;p&gt;View&lt;/p&gt;
+&lt;/article&gt;
+
+&lt;script type="text/javascript"&gt;
+(function() {
+
+    var cont = N(".view").cont({
+        init : function(view, request) {
+            this.fn();
+        },
+        fn : function() {
+           N("p", cont.view).css("padding", "10px");
+        }
+    });
+
+})();
+&lt;/script&gt;</code></pre>
+
 </article>
 
 <script type="text/javascript">
