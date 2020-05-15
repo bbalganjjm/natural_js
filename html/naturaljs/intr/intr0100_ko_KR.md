@@ -5,7 +5,7 @@ Natural-JS 는 ERP, CRM 등의 기업용 웹 어플리케이션 UI를 쉽고 빠
 구조
 ===
 
-Natural-JS 는 Natural-CORE, Natural-ARCHITECTURE, Natural-DATA, Natural-UI 라이브러리 패키지로 구성 됩니다. Natural-CORE 는 Natural-JS 에서 전역으로 사용하는 공통 라이브러리 패키지 이고 Natural-ARCHITECTURE 는 Natural-JS 의 아키텍처를 구성 하는 라이브러리 패키지 입니다. Natural-DATA 는 데이터의 동기화, Formatting,  Validation, 가공을 지원하는 라이브러리 패키지 이고 Natural-UI 는 HTML 기반의 UI 컴포넌트를 지원하는 라이브러리 패키지 입니다. 
+Natural-JS 는 Natural-CORE, Natural-ARCHITECTURE, Natural-DATA, Natural-UI 라이브러리 패키지로 구성 됩니다. Natural-CORE 는 Natural-JS 에서 전역으로 사용하는 공통 라이브러리 패키지 이고 Natural-ARCHITECTURE 는 Natural-JS 의 아키텍처를 구성 하는 라이브러리 패키지 입니다. Natural-DATA 는 데이터의 동기화, Formatting,  Validation, 가공을 지원하는 라이브러리 패키지 이고 Natural-UI 는 HTML 기반의 UI 컴포넌트를 지원하는 라이브러리 패키지 입니다.
 
 ![Natural-JS 구조](images/intr/pic3.png)
 
@@ -20,7 +20,7 @@ N 은 Natural-JS 의 코어 함수들이 정의 되어 있는 오브젝트 클�
 
 [N() 과 N](#cmVmcjAxMDElMjROKCklMjAlMjYlMjBOJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAxMDEuaHRtbA==) 은 다음과 같은 jQuery 확장 기능과 유틸리티 클래스를 제공 합니다.
 
-* jQuery selector 확장 : style 이나 data 속성으로도 selector 를 정의 할 수 있는 jQuery selector 확장 기능 
+* jQuery selector 확장 : style 이나 data 속성으로도 selector 를 정의 할 수 있는 jQuery selector 확장 기능
 * jQuery plugin 확장 메서드 : jQuery Plugin 으로 제작된 Natural-JS 유틸리티 메서드
 * N : Natural-JS 의 코어 함수들이 정의 되어 있는 오브젝트 클래스
 * N.gc : Natural-JS 내부 Garbage Collection 을 위한 유틸리티 집합 클래스
@@ -47,7 +47,7 @@ Natural-ARCHITECTURE 는 Natural-JS 의 아키텍처를 구성 하는 라이브�
 
 ### Communicator-View-Controller(CVC) Architecture Pattern
 
-CVC 패턴은 Model-View-Controlelr(MVC) 패턴을 기반으로 하는 아키텍처 패턴 입니다. 아래 그림과 같이 클라이언트 브라우저 영역을 Communicator-View-Controller 아키텍처로 구성 하고 서버 전체를 Model 영역으로 정의하는 클라이언트 중심의 아키텍처 패턴 입니다. 
+CVC 패턴은 Model-View-Controlelr(MVC) 패턴을 기반으로 하는 아키텍처 패턴 입니다. 아래 그림과 같이 클라이언트 브라우저 영역을 Communicator-View-Controller 아키텍처로 구성 하고 서버 전체를 Model 영역으로 정의하는 클라이언트 중심의 아키텍처 패턴 입니다.
 CVC 패턴을 적용하면 클라이언트 브라우저 구현 기술이 서버 기술 및 서버 아키텍처 종속성에서 벗어날 수 있고 디자인영역과 개발영역을 완벽하게 분리하여 개발의 복잡도를 낮출 수 있습니다.
 
 ![CVC Architecture Pattern](images/intr/pic5.png)
@@ -68,7 +68,7 @@ Natural Architecture Framework 는 개발 업무 영역을 명확하게 구분 �
 
 [Controller(N.cont)](#cmVmcjAyMDElMjRDb250cm9sbGVyJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAyMDEuaHRtbA==) 는 CVC Architecture Pattern 의 Controller 레이어를 구현한 클래스 입니다.
  * N.cont 는 Controller object 의 init 함수를 실행 해 주고 Controller object 를 반환 합니다.
-   <p class="alert">Controller object 는 View 의 요소들과 Communicator 에서 검색 한 데이터를 제어하는 객체 입니다.</p> 
+   <p class="alert">Controller object 는 View 의 요소들과 Communicator 에서 검색 한 데이터를 제어하는 객체 입니다.</p>
  * Natural-ARCHITECTURE 는 Controller object 를 대상으로 AOP(Aspect-Oriented Programming) 를 지원 합니다.
 
 #### View
@@ -76,18 +76,18 @@ Natural Architecture Framework 는 개발 업무 영역을 명확하게 구분 �
 View 는 별도의 구현체는 없고 단순하게 HTML 요소 영역이  View 로 정의 되어 있습니다.
 
 #### Communicator
- 
+
 [Communicator(N.comm)](#cmVmcjAyMDMlMjRDb21tdW5pY2F0b3IkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDIwMy5odG1s) 는 CVC Architecture Pattern 의 Communicator 레이어를 구현한 클래스 입니다.
  * N.comm 은 서버에 컨텐츠나 데이터를 요청하거나 파라미터를 전달 하는 등 서버와의 Ajax 통신을 지원하는 라이브러리 입니다.
- * N.comm 은 서버와 통신하는 모든 요청 및 응답 또는 오류 생성 단계에서 공통 로직을 실행할 수있는 [Communication Filter](#cmVmcjAyMDUlMjRDb21tdW5pY2F0aW9uJTIwRmlsdGVyJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAyMDUuaHRtbA==) 기능을 제공합니다. 
+ * N.comm 은 서버와 통신하는 모든 요청 및 응답 또는 오류 생성 단계에서 공통 로직을 실행할 수있는 [Communication Filter](#cmVmcjAyMDUlMjRDb21tdW5pY2F0aW9uJTIwRmlsdGVyJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAyMDUuaHRtbA==) 기능을 제공합니다.
 
 [Context(N.context)](#cmVmcjAyMDYlMjRDb250ZXh0JGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAyMDYuaHRtbA==) 는 Natural-JS 기반 어플리케이션의 Life-Cycle(페이지가 적제 되고 다른 URL로 redirect 되기 전까지) 안 에서 데이터의 영속성을 보장 하는 공간 입니다.
  * Natural-JS 의 환경설정 값([Config(N.config)](#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s)), 프레임워크 공통 메시지 등이 N.context 객체에 저장 됩니다.
 
- 
+
 ## Natural-DATA
 
-Natural-DATA 는 데이터의 동기화, Formatting,  Validation, 가공을 지원하는 라이브러리 패키지 입니다. 
+Natural-DATA 는 데이터의 동기화, Formatting,  Validation, 가공을 지원하는 라이브러리 패키지 입니다.
 
 ### DataSync
 
@@ -109,7 +109,7 @@ DataSync 는 컴포넌트나 라이브러리에 의해 변경 된 데이터를 �
 
 ## Natural-UI
 
-Natural-UI 는 HTML 기반의 UI 컴포넌트를 지원하는 라이브러리 패키지 입니다. 
+Natural-UI 는 HTML 기반의 UI 컴포넌트를 지원하는 라이브러리 패키지 입니다.
 
 ![Natural-UI](images/intr/pic7.png)
 
@@ -182,7 +182,7 @@ Natural-UI 가 컨텐츠 영역의 UI 개발을 지원 한다면 Natural-UI.Shel
 
 ### 지원 브라우저
 
-* PC : Internet Explorer 8 이상(Internet Explorer 9 이상에 최적화 되어 있음), Chrome, Firefox, Safari(OSX), Opera 최신 버전
+* PC : Internet Explorer 8 이상(Internet Explorer 9 이상에 최적화 되어 있음), Chrome, Firefox, Safari, Opera 최신 버전
 * 모바일 : iOS Safari, iOS UIWebView, Android Browser, Android Chrome, Android WebView
 
 ### 교육 및 지원
