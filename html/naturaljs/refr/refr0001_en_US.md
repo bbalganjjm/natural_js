@@ -9,7 +9,7 @@ Documents are divided into pages by component, and page paragraphs are separated
 
 * __API DEMO__ : Demo program for testing components or libraries in real time
 
-* __Constructor__ : A description of the function and constructor arguments that are executed when the component or library is created.
+* __Constructor__ : A description of the function and constructor arguments that are executed when the component instance or library instance is created.
 
     ex) __N.grid__[<sup>1)</sup>](#fn1)(___argument[0]___[<sup>2)</sup>](#fn2)), __N().grid__(___argument[0]___)
 
