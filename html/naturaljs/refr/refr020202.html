@@ -19,18 +19,21 @@
             <td>undefined</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p>advisor에서 참조할 pointcut을 정의 합니다.</p>
+                <p lang="ko_KR">advisor에서 사용 할 사용자 pointcut 을 정의 합니다.</p>
+                <p lang="en_US">Define user pointcut to be used in advisor.</p>
                 <ul>
-                    <li>pointcut은 반드시 fn 속성에 param(정규표현식 문자열 혹은 RegExp 객체), cont(컨트롤러 객체), fnChain(컨트롤러에 정의된 함수체인(뷰의selector:fnName.fnName...)) 인자를 가진 함수로 정의 해야 합니다.</li>
-                    <li>함수 수행 결과(boolean)는 advice의 적용 여부를 판단하는데 사용 됩니다.</li>
+                    <li lang="ko_KR">pointcut은 반드시 fn 속성에 param(정규표현식 문자열 혹은 RegExp 객체), cont(Controller object), fnChain(Controller object 의 함수 체인(뷰의 selector:fnName.fnName...)) 인자를 갖고 있는 함수로 정의 해야 합니다.</li>
+                    <li lang="en_US">pointcut must be defined as a function that has param(Regular expression string or RegExp object), cont(Controller object), and fnChain(Function chain(selector of view:fnName.fnName...) of Controller object) parameters in the fn attribute.</li>
+                    <li lang="ko_KR">함수 수행 결과(boolean)는 advice의 적용 여부를 판단하는데 사용 됩니다.</li>
+                    <li lang="en_US">The function execution result(boolean) is used to determine whether advice is applied.</li>
                 </ul>
-                <pre class="line-numbers"><code class="language-javascript">...
+                <pre lang="ko_KR"><code>...
 "pointcuts" : {
-    /** pointcut 객체는 유일한 속성명으로 정의 합니다. */
+    /** pointcut 객체를 유일한 속성명으로 정의 합니다. */
     "regexp" : {
         /**
-         * 정규표현식으로 평가하는 사용자 포인트 컷
-         * (Built-in 함수를 제외한 사용자가 정의한 함수만 대상으로 합니다)
+         * 정규 표현식으로 평가하는 사용자 포인트컷 입니다.
+         * (Built-in 함수를 제외하고 사용자가 정의한 함수에만 적용됩니다.)
          */
         "fn" : function(param, cont, fnChain){
             var regexp = param instanceof RegExp ? param : new RegExp(param);
@@ -45,9 +48,29 @@
     }
 }
 ...</code></pre>
-                <p class="alert">
-                    Natrual-JS 의 AOP 에는 정규식으로 평가하는 regexp 포인트컷이 기본 내장 되어 있어 특별한 경우가 아니면 포인트컷을 따로 지정 하지 않아도 됩니다.
-                </p>
+                <pre lang="en_US"><code>...
+"pointcuts" : {
+    /** Define the pointcut object as a unique property name. */
+    "regexp" : {
+        /**
+         * User pointcut to evaluate with regular expression.
+         * (It only applies to functions defined by the user, excluding built-in functions.)
+         */
+        "fn" : function(param, cont, fnChain){
+            var regexp = param instanceof RegExp ? param : new RegExp(param);
+            return regexp.test(fnChain);
+        }
+    },
+    "errorPointcut" : {
+        "fn" : function(param, cont, fnChain){
+            // Unconditionally allowed
+            return true;
+        }
+    }
+}
+...</code></pre>
+                <p lang="ko_KR" class="alert">Natrual-ARCHITECTUE 의 AOP 에는 정규식으로 평가하는 regexp 포인트컷이 기본 내장 되어 있어 특별한 경우가 아니면 포인트컷을 따로 지정 하지 않아도 됩니다.</p>
+                <p lang="en_US" class="alert">Natrual-ARCHITECTUE's AOP has a built-in regexp pointcut that evaluates as a regular expression, so there is no need to specify a pointcut unless it is a special case.</p>
             </td>
         </tr>
     </table>
