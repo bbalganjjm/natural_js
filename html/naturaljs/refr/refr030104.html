@@ -15,8 +15,21 @@
             <td>format</td>
             <td style="text-align: center;">N/A</td>
             <td style="text-align: center;">N/A</td>
-            <td>서식화된 데이터세트(JSON)</td>
-            <td>데이터 서식화를 실행합니다.</td>
+            <td>array[object]</td>
+            <td>
+                <p lang="ko_KR">서식화를 실행 합니다.</p>
+                <p lang="en_US">Executes the format.</p>
+                <ul>
+                    <li>
+                        <p lang="ko_KR">룰들을 객체 옵션으로 지정 할 경우 : 서식화 된 데이터 목록 객체를 반환 합니다.</p>
+                        <p lang="en_US">If specifying rules as object options : Returns a formatted data list object.</p>
+                    </li>
+                    <li>
+                        <p lang="ko_KR">data-validate 속성이 정의 된 요소가 포함 된 context 요소를 jquery object 로 지정 할 경우 : 서식화 된 데이터 값을 지정 한 요소에 보여 줍니다.</p>
+                        <p lang="en_US">If a context element containing an element with data-validate property defined is specified as a jquery object : Shows the formatted data values ​​in an element.</p>
+                    </li>
+                </ul>
+            </td>
         </tr>
         <tr>
             <td></td>
@@ -24,30 +37,59 @@
             <td>number</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p>서식화 할 데이터의 row, </p>
-                <p>입력하지 않으면 무조건 첫 번째 데이터를 서식화 합니다.</p>
+                <p lang="ko_KR">서식화 할 데이터 목록의 행 index.</p>
+                <p lang="en_US">Row index of the list of data to be formatted.</p>
+                <p lang="ko_KR">row 인자가 설정되지 않은 경우 다음과 같이 작동합니다.</p>
+                <p lang="en_US">If the row argument is not set, it works as follows.</p>
+                <ul>
+                    <li>
+                        <p lang="ko_KR">룰들을 객체 옵션으로 지정 할 경우 : 모든 행 데이터를 서식화 합니다.</p>
+                        <p lang="en_US">If specifying rules as object options : Formats all row data.</p>
+                    </li>
+                    <li>
+                        <p lang="ko_KR">data-validate 속성이 정의 된 요소가 포함 된 context 요소를 jquery object 로 지정 할 경우 : 첫번째 행 인덱스로 자동 지정 됩니다.</p>
+                        <p lang="en_US">If a context element containing an element with data-validate property defined is specified as a jquery object : It is automatically specified as the first row index.</p>
+                    </li>
+                </ul>
+                <p lang="ko_KR">룰들을 객체 옵션으로 지정 했을 경우 다음과 같은 폼으로 데이터를 반환 합니다.</p>
+                <p lang="en_US">If specifying rules as object options, it returns data in the following form :</p>
+                <pre lang="ko_KR"><code>[{
+    "컬럼 프로퍼티 명" : "서식화 된 데이터 값"
+}]</code></pre>
+                <pre lang="en_US"><code>[{
+    "Column property name" : "Formatted data value"
+}]</code></pre>
             </td>
         </tr>
         <tr>
             <td>unformat</td>
             <td style="text-align: center;">N/A</td>
             <td style="text-align: center;">N/A</td>
-            <td>서식화 되지않은 데이터(JSON)</td>
-            <td>원(元)데이터를 반환합니다.</td>
+            <td>array[object]</td>
+            <td>
+                <p lang="ko_KR">원래 데이터로 치환 하거나 반환 합니다.</p>
+                <p lang="en_US">Replaces or returns with original data.</p>
+            </td>
         </tr>
         <tr>
             <td></td>
             <td>row</td>
             <td>number</td>
             <td style="text-align: center;">N/A</td>
-            <td>서식화 되지않은 원(元)데이터를 반환 할 row</td>
+            <td>
+                <p lang="ko_KR">데이터 목록에서 unformat 할 행의 index.</p>
+                <p lang="en_US">Index of the row to unformat in the data list.</p>
+            </td>
         </tr>
         <tr>
             <td></td>
             <td>key</td>
             <td>string</td>
             <td style="text-align: center;">N/A</td>
-            <td>서식화 되지않은 원(元)데이터(object)의 key 값</td>
+            <td>
+                <p lang="ko_KR">행 데이터에서 unformat 할 컬럼 프로퍼티 명.</p>
+                <p lang="en_US">Name of the column property to be unformatted in the row data.</p>
+            </td>
         </tr>
     </table>
 </article>

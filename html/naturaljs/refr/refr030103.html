@@ -19,38 +19,82 @@
             <td>
                 <p lang="ko_KR">N.formatter 인스턴스를 생성합니다.</p>
                 <p lang="en_US">Create an N.formatter instance.</p>
-                <pre><code>var formatter = N.formatter(data, rules);</code></pre>
+                <pre><code>var formatter = N.formatter(data, rules|context);</code></pre>
             </td>
         </tr>
         <tr>
             <td></td>
             <td>data</td>
-            <td>object</td>
+            <td>array[object]</td>
             <td style="text-align: center;">N/A</td>
-            <td>서식화 할 데이터를 지정 합니다. 데이터는 array[object] 타입으로 입력 해야 합니다.</td>
+            <td>
+                <p lang="ko_KR">서식화 할 데이터를 지정 합니다.</p>
+                <p lang="en_US">Specifies the data to be formatted.</p>
+            </td>
         </tr>
         <tr>
             <td></td>
-            <td>rules</td>
-            <td>object|jquery object(elements)</td>
+            <td>rules|context</td>
+            <td>object|jquery object</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p>룰은 다음과 같이 두가지 타입으로 지정 가능 합니다.</p>
-                <p style="font-weight: bold;">* 라이브러리 초기화 시 명령형 옵션으로 지정 : </p>
-                <pre><code class="language-javascript">// { "컬럼명" : [[룰명, arg0, arg1...], [룰명, arg0, arg1...]] }
-{
+                <p lang="ko_KR">다음과 같이 두 가지 유형으로 포멧 rule 을 지정할 수 있습니다.</p>
+                <p lang="en_US">The format rule can be specified in two types as follows.</p>
+                <ul>
+                    <li>
+                        <p lang="ko_KR">룰들을 객체 옵션으로 지정 할 경우 : </p>
+                        <p lang="en_US">If specifying rules as object options : </p>
+		                <pre lang="ko_KR"><code>// { "컬럼속성명" : [["룰명", arguments[0], arguments[1]... ] }
+N.formatter(data, {
     &quot;numeric&quot; : [[&quot;trimtoempty&quot;], [&quot;numeric&quot;, &quot;#,###.##0000&quot;]],
     &quot;generic&quot; : [[&quot;trimtoempty&quot;], [&quot;generic&quot;, &quot;@@ABCD&quot;]],
     &quot;limit&quot; : [[&quot;trimtoempty&quot;], [&quot;limit&quot;, &quot;13&quot;, &quot;...&quot;]],
     &quot;etc&quot; : [[&quot;date&quot;, 12]]
-}</code></pre>
-                <p style="font-weight: bold;">* data-format 속성에 선언형 옵션으로 지정 : </p>
-                <pre><code class="language-markup">&lt;input id="limit" type="text"
-    data-format='[[&quot;trimtoempty&quot;], [&quot;limit&quot;, &quot;13&quot;, &quot;...&quot; ]]' /&gt;
-&lt;!-- [ ["룰명", "룰arguments[0]", "룰 arguments[1]"], ... ] --&gt;</code></pre>
+}).format();</code></pre>
+                        <pre lang="en_US"><code>// { "Column property name" : [["Rule name", arguments[0], arguments[1]... ] }
+N.formatter(data, {
+    &quot;numeric&quot; : [[&quot;trimtoempty&quot;], [&quot;numeric&quot;, &quot;#,###.##0000&quot;]],
+    &quot;generic&quot; : [[&quot;trimtoempty&quot;], [&quot;generic&quot;, &quot;@@ABCD&quot;]],
+    &quot;limit&quot; : [[&quot;trimtoempty&quot;], [&quot;limit&quot;, &quot;13&quot;, &quot;...&quot;]],
+    &quot;etc&quot; : [[&quot;date&quot;, 12]]
+}.format();</code></pre>
+                    </li>
+                    <li>
+                        <p lang="ko_KR">data-validate 속성이 정의 된 요소가 포함 된 context 요소를 jquery object 로 지정 할 경우 : </p>
+                        <p lang="en_US">If a context element containing an element with data-validate property defined is specified as a jquery object : </p>
+                        <pre lang="ko_KR"><code class="language-markup">...
+&lt;div class="formatter-context"&gt;
+    &lt;!-- [ ["룰명", "arguments[0]", "arguments[1]"], ... ] --&gt;
+	&lt;input id="limit" type="text" data-format='[[&quot;trimtoempty&quot;], [&quot;limit&quot;, &quot;13&quot;, &quot;...&quot; ]]' /&gt;
+&lt;/div&gt;
+...
 
-                <p class="alert">선언형으로 포멧 룰 지정 시 동적으로 포멧 룰을 변경 하려면 다음과 같이 해당 입력 요소에 "format" 이라는 속성에 담겨있는 data(rules)를 변경 하면 됩니다.</p>
-                <pre><code class="language-javascript">N("#limit").data("format", [[&quot;trimtoempty&quot;]])</code></pre>
+&lt;script type="text/javascript"&gt;
+N(".formatter").cont({
+    init : function(view, request) {
+        <strong>N.formatter(data, N(".formatter-context", view)).format();</strong>
+    }
+});
+&lt;/script&gt;</code></pre>
+                        <pre lang="en_US"><code class="language-markup">...
+&lt;div class="formatter-context"&gt;
+    &lt;!-- [ ["Rule name", "arguments[0]", "arguments[1]"], ... ] --&gt;
+    &lt;input id="limit" type="text" data-format='[[&quot;trimtoempty&quot;], [&quot;limit&quot;, &quot;13&quot;, &quot;...&quot; ]]' /&gt;
+&lt;/div&gt;
+...
+
+&lt;script type="text/javascript"&gt;
+N(".formatter").cont({
+    init : function(view, request) {
+        <strong>N.formatter(data, N(".formatter-context", view)).format();</strong>
+    }
+});
+&lt;/script&gt;</code></pre>
+                    </li>
+                </ul>
+                <p lang="ko_KR">선언형으로 포멧 룰 지정 시 동적으로 포멧 룰을 변경 하려면 다음과 같이 해당 입력 요소의 "format" 데이터 속성 값에 포멧 룰을 다시 지정 하면 됩니다.</p>
+                <p lang="en_US">If you want to change the format rule dynamically when you specify the format rule declaratively, you can specify the format rule again in the "format" data attribute value of the corresponding input element as follows.</p>
+                <pre><code>N("#limit").data("format", [[&quot;trimtoempty&quot;]])</code></pre>
             </td>
         </tr>
         <tr>
@@ -61,7 +105,7 @@
             <td>
                 <p lang="ko_KR">N.formatter의 객체 인스턴스를 jQuery 플러그인 방식으로 생성합니다.</p>
                 <p lang="en_US">Create an object instance of N.formatter with jQuery plugin method.</p>
-                <pre><code>var formatter = N(data).formatter(rules);</code></pre>
+                <pre><code>var formatter = N(data).formatter(rules|context);</code></pre>
                 <p lang="ko_KR">객체 인스턴스를 생성하는 방식은 다르지만 "new N.formatter()" 로 생성한 인스턴스와 "N().formatter" 로 생성한 인스턴스는 동일 합니다.
                     N() 함수의 첫번째 인자가 new N.formatter 생성자의 첫 번째 인자로 설정 됩니다.</p>
                 <p lang="en_US">The method of creating object instances is different, but the instance created with "new N.formatter()" and the instance created with "N().formatter" are the same.
@@ -71,7 +115,7 @@
         <tr>
             <td></td>
             <td>rules</td>
-            <td>object|jquery object(elements)</td>
+            <td>object|jquery object</td>
             <td style="text-align: center;">N/A</td>
             <td>
                 <p lang="ko_KR">N.formatter 함수의 두번째 인자(rules)와 같습니다.</p>
