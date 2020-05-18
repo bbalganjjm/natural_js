@@ -3,86 +3,142 @@
         <span lang="ko_KR">검증 룰 목록</span>
         <span lang="en_US">Validation rule list</span>
     </h2>
-    
-    <p class="alert">룰 명은 대소문자를 가리지 않습니다.</p>
-    
+
+    <p lang="ko_KR" class="alert">룰 명은 대문자와 소문자를 다르게 인식하지 않습니다.</p>
+    <p lang="en_US" class="alert">Rule names do not recognize uppercase and lowercase letters differently.</p>
+
     <table class="api form">
         <colgroup>
             <col style="width: 36%">
             <col style="width: 64%">
         </colgroup>
         <tr>
-            <th>룰명</th>
-            <th>설명</th>
+            <th>
+                <p lang="ko_KR">룰명</p>
+                <p lang="en_US">설명</p>
+            </th>
+            <th>
+                <p lang="ko_KR">Rule name</p>
+                <p lang="en_US">Description</p>
+            </th>
         </tr>
         <tr>
             <td>["required"]</td>
-            <td>필수입력</td>
+            <td>
+                <p lang="ko_KR">필수입력</p>
+                <p lang="en_US">필수입력</p>
+            </td>
         </tr>
         <tr>
             <td>["alphabet"]</td>
-            <td>영문자만 입력 가능</td>
+            <td>
+                <p lang="ko_KR">영문자만 입력 가능</p>
+                <p lang="en_US">영문자만 입력 가능</p>
+            </td>
         </tr>
         <tr>
             <td>["integer"]</td>
-            <td>숫자(정수)만 입력가능</td>
+            <td>
+                <p lang="ko_KR">숫자(정수)만 입력가능</p>
+                <p lang="en_US">숫자(정수)만 입력가능</p>
+            </td>
         </tr>
         <tr>
             <td>["korean"]</td>
-            <td>한글만 입력 가능</td>
+            <td>
+                <p lang="ko_KR">한글만 입력 가능</p>
+                <p lang="en_US">한글만 입력 가능</p>
+            </td>
         </tr>
         <tr>
             <td>["alphabet+integer"]</td>
-            <td>영문자와 숫자(정수)만 입력 가능(+로 구분하고 순서는 관계없음)</td>
+            <td>
+                <p lang="ko_KR">영문자와 숫자(정수)만 입력 가능(+로 구분하고 순서는 관계없음)</p>
+                <p lang="en_US">영문자와 숫자(정수)만 입력 가능(+로 구분하고 순서는 관계없음)</p>
+            </td>
         </tr>
         <tr>
             <td>["integer+korean"]</td>
-            <td>숫자(정수)와 한글만 입력 가능(+로 구분하고 순서는 관계없음)</td>
+            <td>
+                <p lang="ko_KR">숫자(정수)와 한글만 입력 가능(+로 구분하고 순서는 관계없음)</p>
+                <p lang="en_US">숫자(정수)와 한글만 입력 가능(+로 구분하고 순서는 관계없음)</p>
+            </td>
         </tr>
         <tr>
             <td>["alphabet+korean"]</td>
-            <td>영문자와 한글만 입력 가능(+로 구분하고 순서는 관계없음)</td>
+            <td>
+                <p lang="ko_KR">영문자와 한글만 입력 가능(+로 구분하고 순서는 관계없음)</p>
+                <p lang="en_US">영문자와 한글만 입력 가능(+로 구분하고 순서는 관계없음)</p>
+            </td>
         </tr>
         <tr>
             <td>["alphabet+integer+korean"]</td>
-            <td>영문자, 숫자(정수), 한글만 입력 가능(+로 구분하고 순서는 관계없음)</td>
+            <td>
+                <p lang="ko_KR">영문자, 숫자(정수), 한글만 입력 가능(+로 구분하고 순서는 관계없음)</p>
+                <p lang="en_US">영문자, 숫자(정수), 한글만 입력 가능(+로 구분하고 순서는 관계없음)</p>
+            </td>
         </tr>
         <tr>
             <td>["integer+dash"]</td>
-            <td>숫자(정수), 대시(-)만 입력가능(+로 구분하고 순서는 관계없음)</td>
+            <td>
+                <p lang="ko_KR">숫자(정수), 대시(-)만 입력가능(+로 구분하고 순서는 관계없음)</p>
+                <p lang="en_US">숫자(정수), 대시(-)만 입력가능(+로 구분하고 순서는 관계없음)</p>
+            </td>
         </tr>
         <tr>
             <td>["integer+commas"]</td>
-            <td>숫자(정수), 콤마(,)만 입력가능(+로 구분하고 순서는 관계없음)</td>
+            <td>
+                <p lang="ko_KR">숫자(정수), 콤마(,)만 입력가능(+로 구분하고 순서는 관계없음)</p>
+                <p lang="en_US">숫자(정수), 콤마(,)만 입력가능(+로 구분하고 순서는 관계없음)</p>
+            </td>
         </tr>
         <tr>
             <td>["number"]</td>
-            <td>숫자(정수), 대시(,), 점(.)만 입력가능</td>
+            <td>
+                <p lang="ko_KR">숫자(정수), 대시(,), 점(.)만 입력가능</p>
+                <p lang="en_US">숫자(정수), 대시(,), 점(.)만 입력가능</p>
+            </td>
         </tr>
         <tr>
             <td>["decimal(length)"]</td>
-            <td>(유한)소수 length 번째 자리까지 입력 가능</td>
+            <td>
+                <p lang="ko_KR">(유한)소수 length 번째 자리까지 입력 가능</p>
+                <p lang="en_US">(유한)소수 length 번째 자리까지 입력 가능</p>
+            </td>
         </tr>
         <tr>
             <td>["email"]</td>
-            <td>e-mail 형식에 맞는지 검사</td>
+            <td>
+                <p lang="ko_KR">e-mail 형식에 맞는지 검사</p>
+                <p lang="en_US">e-mail 형식에 맞는지 검사</p>
+            </td>
         </tr>
         <tr>
             <td>["url"]</td>
-            <td>URL 형식에 맞는지 검사</td>
+            <td>
+                <p lang="ko_KR">URL 형식에 맞는지 검사</p>
+                <p lang="en_US">URL 형식에 맞는지 검사</p>
+            </td>
         </tr>
         <tr>
             <td>["zipcode"]</td>
-            <td>우편번호 형식에 맞는지 검사</td>
+            <td>
+                <p lang="ko_KR">우편번호 형식에 맞는지 검사</p>
+                <p lang="en_US">우편번호 형식에 맞는지 검사</p>
+            </td>
         </tr>
         <tr>
             <td>["rrn"]</td>
-            <td>주민등록번호 형식에 맞는지 검사</td>
+            <td>
+                <p lang="ko_KR">주민등록번호 형식에 맞는지 검사</p>
+                <p lang="en_US">주민등록번호 형식에 맞는지 검사</p>
+            </td>
         </tr>
         <tr>
             <td>
                 <p class="depricated">["ssn"]</p>
-                <p>Deprecated. rrn 룰로 변경(2017.07.27)</p>
+                <p lang="ko_KR">Deprecated. "rrn" 룰로 변경(2017.07.27)</p>
+                <p lang="en_US">Deprecated. Changed to "rrn" rule(2017.07.27)</p>
             </td>
             <td>
                 <p class="depricated">주민등록번호 형식에 맞는지 검사</p>
@@ -91,16 +147,23 @@
         </tr>
         <tr>
             <td>["frn"]</td>
-            <td>외국인등록번호 형식에 맞는지 검사</td>
+            <td>
+                <p lang="ko_KR">외국인등록번호 형식에 맞는지 검사</p>
+                <p lang="en_US">외국인등록번호 형식에 맞는지 검사</p>
+            </td>
         </tr>
         <tr>
             <td>["frn_rrn"]</td>
-            <td>외국인등록번호 또는 주민등록번호 형식에 맞는지 검사</td>
+            <td>
+                <p lang="ko_KR">외국인등록번호 또는 주민등록번호 형식에 맞는지 검사</p>
+                <p lang="en_US">외국인등록번호 또는 주민등록번호 형식에 맞는지 검사</p>
+            </td>
         </tr>
         <tr>
             <td>
                 <p class="depricated">["cno"]</p>
-                <p>Deprecated. "kbrn" 룰로 변경(2017.09.26)</p>
+                <p lang="ko_KR">Deprecated. "kbrn" 룰로 변경(2017.09.26)</p>
+                <p lang="en_US">Deprecated. Changed to "kbrn" rule(2017.09.26)</p>
             </td>
             <td class="depricated">사업자등록번호 형식에 맞는지 검사</td>
         </tr>
@@ -111,61 +174,101 @@
         <tr>
             <td>
                 <p class="depricated">["cpno"]</p>
-                <p>Deprecated. "kcn" 룰로 변경(2017.09.26)</p>
+                <p lang="ko_KR">Deprecated. "kcn" 룰로 변경(2017.09.26)</p>
+                <p lang="en_US">Deprecated. Changed to "kcn" rule(2017.09.26)</p>
             </td>
             <td class="depricated">법인번호 형식에 맞는지 검사</td>
         </tr>
         <tr>
             <td>["kcn"]</td>
-            <td>법인번호 형식에 맞는지 검사</td>
+            <td>
+                <p lang="ko_KR">법인번호 형식에 맞는지 검사</p>
+                <p lang="en_US">법인번호 형식에 맞는지 검사</p>
+            </td>
         </tr>
         <tr>
             <td>["date"]</td>
-            <td>날짜 형식에 맞는지 검사</td>
+            <td>
+                <p lang="ko_KR">날짜 형식에 맞는지 검사</p>
+                <p lang="en_US">날짜 형식에 맞는지 검사</p>
+            </td>
         </tr>
         <tr>
             <td>["time"]</td>
-            <td>시간 형식에 맞는지 검사</td>
+            <td>
+                <p lang="ko_KR">시간 형식에 맞는지 검사</p>
+                <p lang="en_US">시간 형식에 맞는지 검사</p>
+            </td>
         </tr>
         <tr>
             <td>["accept", "word"]</td>
-            <td>word 값만 입력 가능</td>
+            <td>
+                <p lang="ko_KR">word 값만 입력 가능</p>
+                <p lang="en_US">word 값만 입력 가능</p>
+            </td>
         </tr>
         <tr>
             <td>["match", "word"]</td>
-            <td>word 값이 포함된 값만 입력 가능</td>
+            <td>
+                <p lang="ko_KR">word 값이 포함된 값만 입력 가능</p>
+                <p lang="en_US">word 값이 포함된 값만 입력 가능</p>
+            </td>
         </tr>
         <tr>
             <td>["acceptFileExt", "ext"]</td>
-            <td>ext 값이 포함된 확장자만 입력 가능</td>
+            <td>
+                <p lang="ko_KR">ext 값이 포함된 확장자만 입력 가능</p>
+                <p lang="en_US">ext 값이 포함된 확장자만 입력 가능</p>
+            </td>
         </tr>
         <tr>
             <td>["notAccept", "word""]</td>
-            <td>word 값만 입력 불가능</td>
+            <td>
+                <p lang="ko_KR">word 값만 입력 불가능</p>
+                <p lang="en_US">word 값만 입력 불가능</p>
+            </td>
         </tr>
         <tr>
             <td>["notMatch", "word"]</td>
-            <td>word 가 포함된 값은 입력 불가능</td>
+            <td>
+                <p lang="ko_KR">word 가 포함된 값은 입력 불가능</p>
+                <p lang="en_US">word 가 포함된 값은 입력 불가능</p>
+            </td>
         </tr>
         <tr>
             <td>["notAcceptFileExt", "ext"]</td>
-            <td>ext 가 포함된 확장자는 입력 불가능</td>
+            <td>
+                <p lang="ko_KR">ext 가 포함된 확장자는 입력 불가능</p>
+                <p lang="en_US">ext 가 포함된 확장자는 입력 불가능</p>
+            </td>
         </tr>
         <tr>
             <td>["equalTo", "input"]</td>
-            <td>input 의 값과 같아야 함</td>
+            <td>
+                <p lang="ko_KR">input 의 값과 같아야 함</p>
+                <p lang="en_US">input 의 값과 같아야 함</p>
+            </td>
         </tr>
         <tr>
             <td>["maxlength", "length"]</td>
-            <td>length 글자 이하만 입력 가능</td>
+            <td>
+                <p lang="ko_KR">length 글자 이하만 입력 가능</p>
+                <p lang="en_US">length 글자 이하만 입력 가능</p>
+            </td>
         </tr>
         <tr>
             <td>["minlength", "length"]</td>
-            <td>length 글자 이상만 입력 가능</td>
+            <td>
+                <p lang="ko_KR">length 글자 이상만 입력 가능</p>
+                <p lang="en_US">length 글자 이상만 입력 가능</p>
+            </td>
         </tr>
         <tr>
             <td>["rangelength", "startLength", "endLength"]</td>
-            <td>stratLength 글자 에서   endLength 글자 까지만 입력 가능</td>
+            <td>
+                <p lang="ko_KR">stratLength 글자 에서   endLength 글자 까지만 입력 가능</p>
+                <p lang="en_US">stratLength 글자 에서   endLength 글자 까지만 입력 가능</p>
+            </td>
         </tr>
         <tr>
             <td>["maxbyte", "byteLength", charByteLength]</td>
@@ -190,15 +293,24 @@
         </tr>
         <tr>
             <td>["maxvalue", "value"]</td>
-            <td>value 이하의 값만 입력 가능</td>
+            <td>
+                <p lang="ko_KR">value 이하의 값만 입력 가능</p>
+                <p lang="en_US">value 이하의 값만 입력 가능</p>
+            </td>
         </tr>
         <tr>
             <td>["minvalue", "value"]</td>
-            <td>value 이상의 값만 입력 가능</td>
+            <td>
+                <p lang="ko_KR">value 이상의 값만 입력 가능</p>
+                <p lang="en_US">value 이상의 값만 입력 가능</p>
+            </td>
         </tr>
         <tr>
             <td>["rangevalue", "stratValue,endValue"]</td>
-            <td>stratValue 값 에서   endValue 값 까지만 입력 가능</td>
+            <td>
+                <p lang="ko_KR">stratValue 값 에서   endValue 값 까지만 입력 가능</p>
+                <p lang="en_US">stratValue 값 에서   endValue 값 까지만 입력 가능</p>
+            </td>
         </tr>
         <tr>
             <td>["regexp", "regexp", "flag", "message"]</td>
