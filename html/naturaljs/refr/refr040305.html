@@ -1,100 +1,139 @@
 <article class="refr040305 apiDoc">
     <h2 lang="ko_KR">jQuery 이벤트</h2>
     <h2 lang="en_US">jQuery Events</h2>
-    
-    <p class="alert">Datepicker 의 context 로 지정된 입력 요소에 다음과 같은 이벤트(jQuery Event)들을 바인딩 할 수 있습니다.</p>
-    <p class="alert">컴포넌트 초기화 시 같은 이름의 이벤트가 이미 바인딩 되어 있다면 초기화 시 지정한 이벤트가 먼저 실행됩니다.</p>
+
+    <p lang="ko_KR" class="alert">Datepicker 의 context 로 지정된 입력 요소에 다음과 같은 이벤트 핸들러를 바인딩 할 수 있습니다.</p>
+    <p lang="en_US" class="alert">You can bind the following event handler to the input element specified by the Datepicker 's context.</p>
+    <p lang="ko_KR" class="alert">컴포넌트 초기화 시 같은 이름의 이벤트가 이미 바인딩 되어 있다면 초기화 시 지정한 이벤트가 먼저 실행됩니다.</p>
+    <p lang="en_US" class="alert">If an event of the same name is already bound at component initialization, the event specified at initialization is executed first.</p>
     <table class="api form">
         <tr>
-            <th style="width: 100px;">Event Name</th>
+            <th style="width: 120px;">Event Name</th>
             <th style="width: auto;">Description</th>
         </tr>
         <tr>
             <td>onSelect</td>
             <td>
-                날짜나 월(monthonly:true)이 선택되었을 때 발생하는 이벤트입니다.
-                <pre><code class="language-javascript">$("selector").bind("onSelect", function(e, context, selDate, monthonly) {
-    // e 는 이벤트 오브젝트
-    // context 는 날짜가 입력되는 입력요소
-    // selDate 는 선택한 날짜의 Date 객체
-    // monthonly 는 옵션으로 지정한 monthonly 값
+                <p lang="ko_KR">날짜나 월(monthonly 옵션이 true로 설정 되었을 경우)이 선택 되었을 때 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="en_US">Defines an event handler that is executed when a date or month(if the monthonly option is set to true) is selected.</p>
+                <pre lang="ko_KR"><code class="language-javascript">$("selector").bind("onSelect", function(e, context, selDate, monthonly) {
+    // e : 이벤트 객체
+    // context : context 요소
+    // selDate : 선택 된 날짜의 Date 객체
+    // monthonly : monthonly 옵션 값
 });</code></pre>
-                <p class="alert">selector 는 Datepicker 가 적용 되는 입력 요소를 지정 해 주세요.</p>
+                <pre lang="en_US"><code class="language-javascript">$("context").bind("onSelect", function(e, context, selDate, monthonly) {
+    // e : Event object
+    // context : context element
+    // selDate : The Date object of the selected date
+    // monthonly : monthonly option value
+});</code></pre>
             </td>
         </tr>
         <tr>
             <td>onBeforeShow</td>
             <td>
-                데이트피커 판넬이 표시되기 전에 발생 되는 이벤트 입니다.
-                <pre><code class="language-javascript">$("selector").bind("onBeforeShow", function(e, context, contents) {
-    // e 는 이벤트 오브젝트
-    // context 는 날짜가 입력되는 입력요소
-    // contents 는 데이트피커 판넬
+                <p lang="ko_KR">데이트피커가 표시되기 전에 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="en_US">Define an event handler that is executed before the date picker is displayed.</p>
+                <pre lang="ko_KR"><code class="language-javascript">$("context").bind("onBeforeShow", function(e, context, contents) {
+    // e : 이벤트 객체
+    // context : context 요소
+    // contents : Datepicker 판넬 요소
 });</code></pre>
-                <p class="alert">selector 는 Datepicker 가 적용 되는 입력 요소를 지정 해 주세요.</p>
+                <pre lang="en_US"><code class="language-javascript">$("context").bind("onBeforeShow", function(e, context, contents) {
+    // e : Event object
+    // context : context element
+    // contents : Datepicker panel element
+});</code></pre>
             </td>
         </tr>
         <tr>
             <td>onShow</td>
             <td>
-                데이트피커 판넬이 표시된 후 발생 되는 이벤트 입니다.
-                <pre><code class="language-javascript">$("selector").bind("onShow", function(e, context, contents) {
-    // e 는 이벤트 오브젝트
-    // context 는 날짜가 입력되는 입력요소
-    // contents 는 데이트피커 판넬
+                <p lang="ko_KR">데이트피커가 표시된 후에 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="en_US">Define an event handler that is executed after the date picker is displayed.</p>
+                <pre lang="ko_KR"><code class="language-javascript">$("context").bind("onShow", function(e, context, contents) {
+    // e : 이벤트 객체
+    // context : context 요소
+    // contents : Datepicker 판넬 요소
 });</code></pre>
-                <p class="alert">selector 는 Datepicker 가 적용 되는 입력 요소를 지정 해 주세요.</p>
+                <pre lang="en_US"><code class="language-javascript">$("context").bind("onShow", function(e, context, contents) {
+    // e : Event object
+    // context : context element
+    // contents : Datepicker panel element
+});</code></pre>
             </td>
         </tr>
         <tr>
             <td>onBeforeHide</td>
             <td>
-                데이트피커 판넬이 닫히기 전에 발생 되는 이벤트 입니다.
-                <pre><code class="language-javascript">$("selector").bind("onBeforeHide", function(e, context, contents) {
-    // e 는 이벤트 오브젝트
-    // context 는 날짜가 입력되는 입력요소
-    // contents 는 데이트피커 판넬
+                <p lang="ko_KR">데이트피커가 닫히기 전에 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="en_US">Defines an event handler that is executed before the datepicker closes.</p>
+                <pre lang="ko_KR"><code class="language-javascript">$("context").bind("onBeforeHide", function(e, context, contents) {
+    // e : 이벤트 객체
+    // context : context 요소
+    // contents : Datepicker 판넬 요소
 });</code></pre>
-                <p class="alert">selector 는 Datepicker 가 적용 되는 입력 요소를 지정 해 주세요.</p>
+                <pre lang="en_US"><code class="language-javascript">$("context").bind("onBeforeHide", function(e, context, contents) {
+    // e : Event object
+    // context : context element
+    // contents : Datepicker panel element
+});</code></pre>
             </td>
         </tr>
         <tr>
             <td>onHide</td>
             <td>
-                데이트피커 판넬이 닫히고 나서(닫히는 효과 완료 후) 발생 되는 이벤트 입니다.
-                <pre><code class="language-javascript">$("selector").bind("onHide", function(e, context, contents) {
-    // e 는 이벤트 오브젝트
-    // context 는 날짜가 입력되는 입력요소
-    // contents 는 데이트피커 판넬
+                <p lang="ko_KR">데이트피커가 닫힌 후에(닫히는 효과가 끝난 후) 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="en_US">Define an event handler that is executed after the datepicker is closed(after the closing effect is over).</p>
+                <pre lang="ko_KR"><code class="language-javascript">$("context").bind("onHide", function(e, context) {
+    // e : 이벤트 객체
+    // context : context 요소
 });</code></pre>
-                <p class="alert">selector 는 Datepicker 가 적용 되는 입력 요소를 지정 해 주세요.</p>
+                <pre lang="en_US"><code class="language-javascript">$("context").bind("onHide", function(e, context) {
+    // e : Event object
+    // context : context element
+});</code></pre>
             </td>
         </tr>
         <tr>
             <td>onChangeYear</td>
             <td>
-                연도가 변경 되었을 때 발생 되는 이벤트 입니다.
-                <pre><code class="language-javascript">$("selector").bind("onHide", function(e, context, year, oe) {
-    // e 는 이벤트 오브젝트
-    // context 는 날짜가 입력되는 입력요소
-    // year 선택 된 연도
-    // oe 는 Original 이벤트 오브젝트
+                <p lang="ko_KR">연도가 변경 되었을 때 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="ko_KR">Defines an event handler that is executed when the year is changed.</p>
+                <pre lang="ko_KR"><code class="language-javascript">$("context").bind("onHide", function(e, context, year, oe) {
+    // e : 이벤트 객체
+    // context : context 요소
+    // year : 선택 된 연도
+    // oe : Original 이벤트 객체
 });</code></pre>
-                <p class="alert">selector 는 Datepicker 가 적용 되는 입력 요소를 지정 해 주세요.</p>
+                <pre lang="en_US"><code class="language-javascript">$("context").bind("onHide", function(e, context, year, oe) {
+    // e : Event object
+    // context : context element
+    // year : Selected year
+    // oe : Original Event object
+});</code></pre>
             </td>
         </tr>
         <tr>
             <td>onChangeMonth</td>
             <td>
-                월이 변경 되었을 때 발생 되는 이벤트 입니다.
-                <pre><code class="language-javascript">$("selector").bind("onHide", function(e, month, year, oe) {
-    // e 는 이벤트 오브젝트
-    // context 는 날짜가 입력되는 입력요소
-    // month 는 선택 된 월
-    // year 선택 된 연도
-    // oe 는 Original 이벤트 오브젝트
+                <p lang="ko_KR">월이 변경 되었을 때 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="en_US">Defines an event handler that is executed when the month is changed.</p>
+                <pre lang="ko_KR"><code class="language-javascript">$("context").bind("onHide", function(e, month, year, oe) {
+    // e : 이벤트 객체
+    // context : context 요소
+    // month : 선택 된 월
+    // year : 선택 된 연도
+    // oe : Original 이벤트 객체
 });</code></pre>
-                <p class="alert">selector 는 Datepicker 가 적용 되는 입력 요소를 지정 해 주세요.</p>
+                <pre lang="en_US"><code class="language-javascript">$("context").bind("onHide", function(e, month, year, oe) {
+    // e : Event object
+    // context : context element
+    // month : Selected month
+    // year : Selected year
+    // oe : Original Event object
+});</code></pre>
             </td>
         </tr>
     </table>

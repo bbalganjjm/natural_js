@@ -26,7 +26,7 @@ Documents are divided into pages by component, and page paragraphs are separated
         2. Validation Rules : data-validate
         3. All component options except a and b : data-opts
 
-<p class="alert">Declarative options must conform exactly to the JSON standard format (ex : the key value must be enclosed in double quotes). If you do not adhere to the JSON standard form, the declarative options are not recognized or an error occurs.</p>
+<p class="alert">Declarative options must conform exactly to the JSON standard format(Property names must be enclosed in double quotes). If you do not comply with the JSON standard format, the declarative options are not recognized or an error occurs.</p>
 
 <div class="alert">
     Rules executed with declarative options such as data-format or data-validate are defined in an array type string and the arguments are listed in order after the rule name.

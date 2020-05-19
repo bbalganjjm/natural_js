@@ -3,6 +3,15 @@
         <span lang="ko_KR">선언형옵션</span>
         <span lang="en_US">Declarative Options</span>
     </h2>
+    <p lang="ko_KR">N.button 의 선언형옵션은 요소의 data-opts 속성에 설정하는 옵션 입니다.</p>
+    <p lang="en_US">The declarative option of N.button is set in the element's data-opts attribute.</p>
+    <pre><code>&lt;a data-opts='{ "color" : "white", "size" : "big" }'&gt;a&lt;/a&gt;
+&lt;input type="button" value="input button" data-opts='{ "color" : "gray" }'&gt;
+&lt;button data-opts='{ "color" : "green", "size" : "large" }'&gt;button&lt;/button&gt;</code></pre>
+    <p lang="ko_KR" class="alert">선언형옵션은 JSON 표준 형식을 정확하게 준수해야합니다(프로퍼티 명은 반드시 큰 따옴표로 감싸야 합니다). JSON 표준 포멧을 준수하지 않으면 선언형 옵션이 인식되지 않거나 오류가 발생합니다.</p>
+    <p lang="en_US" class="alert">Declarative options must conform exactly to the JSON standard format(Property names must be enclosed in double quotes). If you do not comply with the JSON standard format, the declarative options are not recognized or an error occurs.</p>
+    <p lang="ko_KR" class="alert">선언형 옵션에 대한 설명은 <a href="#cmVmcjAwMDElMjRBUEklMjAlRUIlQUMlQjglRUMlODQlOUMlMjAlRUMlOTUlODglRUIlODIlQjQkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDAwMS5odG1s">API 문서 안내</a> 메뉴의 <strong>선언형옵션</strong> 섹션을 참고 하세요.</p>
+    <p lang="en_US" class="alert">For a description of the declarative options, see the <strong>Declarative Options</strong> section of the <a href="#cmVmcjAwMDElMjRBUEklMjBEb2N1bWVudGF0aW9uJTIwR3VpZGUkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDAwMS5odG1s">API Documentation Guide</a> menu.</p>
     <table class="api form">
         <tr>
             <th>Name</th>
@@ -15,8 +24,10 @@
             <td>string</td>
             <td>&quot;medium&quot;</td>
             <td>
-                <p>크기</p>
-                <p>smaller, small, medium, large, big</p>
+                <p lang="ko_KR">버튼의 크기를 설정 합니다.</p>
+                <p lang="en_US">Sets the size of the button.</p>
+                <p lang="ko_KR">"smaller", "small", "medium", "large", "big" 중 하나를 지정 할 수 있습니다.</p>
+                <p lang="en_US">You can specify "smaller", "small", "medium", "large" or "big".</p>
             </td>
         </tr>
         <tr>
@@ -24,21 +35,22 @@
             <td>string</td>
             <td>&quot;white&quot;</td>
             <td>
-                <p>색깔</p>
-                <p>white, blue, skyblue, gray</p>
+                <p lang="ko_KR">버튼의 색상을 설정 합니다.</p>
+                <p lang="en_US">Sets the color of the button.</p>
+                <p lang="ko_KR">"white", "blue", "skyblue", "gray", "green", "yellowgreen" 중 하나를 지정 할 수 있습니다.</p>
+                <p lang="en_US">You can specify "white", "blue", "skyblue", "gray", "green", or "yellowgreen".</p>
             </td>
         </tr>
         <tr>
             <td>disable</td>
             <td>boolean</td>
             <td>false</td>
-            <td>초기화시 비활성 여부</td>
+            <td>
+                <p lang="ko_KR">true로 설정하면 버튼이 비활성화 된 상태로 생성됩니다.</p>
+                <p lang="en_US">If set to true, the button will be created with disabled.</p>
+            </td>
         </tr>
     </table>
-
-    <p lang="ko_KR" class="alert">선언형 옵션에 대한 안내는 <a href="#cmVmcjAwMDElMjRBUEklMjAlRUIlQUMlQjglRUMlODQlOUMlMjAlRUMlOTUlODglRUIlODIlQjQkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDAwMS5odG1s">API 문서 안내</a> 메뉴의 <strong>선언형옵션</strong> 섹션을 참고 하세요.</p>
-    <p lang="en_US" class="alert">For information on declarative options, see the <strong>Declarative Options</strong> section of the <a href="#cmVmcjAwMDElMjRBUEklMjBEb2N1bWVudGF0aW9uJTIwR3VpZGUkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDAwMS5odG1s">API Documentation Guide</a> menu.</p>
-
 </article>
 
 <script type="text/javascript">

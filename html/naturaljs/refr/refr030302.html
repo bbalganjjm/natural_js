@@ -48,7 +48,7 @@
             <td>array[json object]</td>
             <td>
                 <p lang="ko_KR">지정한 조건과 일치하는 데이터를 추출 합니다.</p>
-                <p lang="en_US">지정한 조건과 일치하는 데이터를 추출 합니다.</p>
+                <p lang="en_US">Extract data matching specified conditions.</p>
                 <pre><code>var filteredData = N.data.filter(data, condition);</code></pre>
             </td>
         </tr>
@@ -59,7 +59,7 @@
             <td style="text-align: center;">N/A</td>
             <td>
                 <p lang="ko_KR">필터링 할 data</p>
-                <p lang="en_US">필터링 할 data</p>
+                <p lang="en_US">Data to be filtered</p>
             </td>
         </tr>
         <tr>
@@ -68,10 +68,10 @@
             <td>function|string</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p lang="ko_KR">필터링 조건을 입력 합니다.</p>
-                <p lang="en_US">필터링 조건을 입력 합니다.</p>
-                <p lang="ko_KR">인자로 함수를 입력 하면 함수에서 true 를 반환한 행들 만 필터링 합니다.</p>
-                <p lang="en_US">인자로 함수를 입력 하면 함수에서 true 를 반환한 행들 만 필터링 합니다.</p>
+                <p lang="ko_KR">필터링 조건을 지정 합니다.</p>
+                <p lang="en_US">Specifies filtering conditions.</p>
+                <p lang="ko_KR">인자로 함수를 지정 하면 함수에서 true 를 반환한 행들 만 필터링 합니다.</p>
+                <p lang="en_US">If a function is specified as an argument, only rows that return true in the function are filtered.</p>
                 <pre><code class="language-javascript">var fData = N.data.filter([
     { name : "John", age : 18 },
     { name : "Mike", age : 16 },
@@ -81,8 +81,8 @@
 });
 
 console.log(fData); // [{ name : "Mike", age : 16 }]</code></pre>
-                <p lang="ko_KR">인자로 조건 문자열을 입력 하면 조건에 맞는 행들 만 필터링 합니다.</p>
-                <p lang="en_US">인자로 조건 문자열을 입력 하면 조건에 맞는 행들 만 필터링 합니다.</p>
+                <p lang="ko_KR">인자로 조건 문자열을 지정 하면 조건에 맞는 행들 만 필터링 합니다.</p>
+                <p lang="en_US">If a condition string is specified as an argument, only rows matching the condition are filtered.</p>
                 <pre><code class="language-javascript">var fData = N.data.filter([
     { name : "John", age : 18 },
     { name : "Mike", age : 16 },
@@ -90,10 +90,10 @@ console.log(fData); // [{ name : "Mike", age : 16 }]</code></pre>
 ], 'name === "Mike"');
 
 console.log(fData); // [{ name : "Mike", age : 16 }, { name : "Mike", age : 14 }]</code></pre>
-                <p lang="ko_KR" class="alert">문자열로 조건을 입력하는 것 보다 함수로 조건을 처리하는 방식이 더 빠릅니다.</p>
-                <p lang="en_US" class="alert">문자열로 조건을 입력하는 것 보다 함수로 조건을 처리하는 방식이 더 빠릅니다.</p>
-                <p lang="ko_KR" class="alert">문자열로 조건을 입력하는 방식은 and(&amp;&amp;) 나 or(||) 연산식을 지원하지 않고 단일 조건식만 지원 합니다.</p>
-                <p lang="en_US" class="alert">문자열로 조건을 입력하는 방식은 and(&amp;&amp;) 나 or(||) 연산식을 지원하지 않고 단일 조건식만 지원 합니다.</p>
+                <p lang="ko_KR" class="alert">문자열로 조건을 지정하는것 보다 함수로 조건을 처리하는 방식이 더 빠릅니다.</p>
+                <p lang="en_US" class="alert">It is faster to handle conditions with functions than to specify conditions with strings.</p>
+                <p lang="ko_KR" class="alert">문자열로 조건을 지정하는 방식은 and(&amp;&amp;) 나 or(||) 연산식을 지원하지 않고 단일 조건식만 지원 합니다.</p>
+                <p lang="en_US" class="alert">The method of specifying a condition as a string does not support the expressions of and(&amp;&amp;) and or(||), but only a single conditional expression.</p>
             </td>
         </tr>
         <tr>
@@ -102,8 +102,8 @@ console.log(fData); // [{ name : "Mike", age : 16 }, { name : "Mike", age : 14 }
             <td style="text-align: center;">N/A</td>
             <td>array[json object]</td>
             <td>
-                <p lang="ko_KR">지정한 key 인자값을 기준으로 데이터를 정렬 합니다.</p>
-                <p lang="en_US">지정한 key 인자값을 기준으로 데이터를 정렬 합니다.</p>
+                <p lang="ko_KR">지정한 "key" 인자값을 기준으로 데이터를 정렬 합니다.</p>
+                <p lang="en_US">Sorts data based on the specified "key" argument value.</p>
                 <pre><code>var sortedData = N.data.sort(data, key, reverse);</code></pre>
             </td>
         </tr>
@@ -114,7 +114,7 @@ console.log(fData); // [{ name : "Mike", age : 16 }, { name : "Mike", age : 14 }
             <td style="text-align: center;">N/A</td>
             <td>
                 <p lang="ko_KR">정렬 할 data</p>
-                <p lang="en_US">정렬 할 data</p>
+                <p lang="en_US">Data to be sorted</p>
             </td>
         </tr>
         <tr>
@@ -124,7 +124,7 @@ console.log(fData); // [{ name : "Mike", age : 16 }, { name : "Mike", age : 14 }
             <td style="text-align: center;">N/A</td>
             <td>
                 <p lang="ko_KR">정렬 기준이 될 object 의 프로퍼티 명</p>
-                <p lang="en_US">정렬 기준이 될 object 의 프로퍼티 명</p>
+                <p lang="en_US">Property name of the object to be sorted by</p>
             </td>
         </tr>
         <tr>
@@ -133,8 +133,8 @@ console.log(fData); // [{ name : "Mike", age : 16 }, { name : "Mike", age : 14 }
             <td>boolean</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p lang="ko_KR">true 로 설정하면 오름차순으로 정렬 됩니다.</p>
-                <p lang="en_US">true 로 설정하면 오름차순으로 정렬 됩니다.</p>
+                <p lang="ko_KR">true 로 설정하면 내림차순으로 정렬 됩니다.</p>
+                <p lang="en_US">If set to true, it is sorted in descending order.</p>
             </td>
         </tr>
         <tr>
@@ -179,7 +179,7 @@ console.log(fData); // [{ name : "Mike", age : 16 }, { name : "Mike", age : 14 }
             <td style="text-align: center;">N/A</td>
             <td>
                 <p lang="ko_KR">N.data.filter의 condition 인자 와 같습니다.</p>
-                <p lang="en_US">N.data.filter의 condition 인자 와 같습니다.</p>
+                <p lang="en_US">Same as the condition argument of N.data.filter.</p>
             </td>
         </tr>
         <tr>
@@ -202,7 +202,7 @@ console.log(fData); // [{ name : "Mike", age : 16 }, { name : "Mike", age : 14 }
             <td style="text-align: center;">N/A</td>
             <td>
                 <p lang="ko_KR">N.data.sort의 key 인자 와 같습니다.</p>
-                <p lang="en_US">N.data.sort의 key 인자 와 같습니다.</p>
+                <p lang="en_US">Same as the key argument of N.data.sort.</p>
             </td>
         </tr>
         <tr>
@@ -212,7 +212,7 @@ console.log(fData); // [{ name : "Mike", age : 16 }, { name : "Mike", age : 14 }
             <td style="text-align: center;">N/A</td>
             <td>
                 <p lang="ko_KR">N.data.sort의 reverse 인자 와 같습니다.</p>
-                <p lang="en_US">N.data.sort의 reverse 인자 와 같습니다.</p>
+                <p lang="en_US">Same as the reverse argument of N.data.sort.</p>
             </td>
         </tr>
     </table>
