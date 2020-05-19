@@ -12,39 +12,55 @@
             <th style="width: auto;">Description</th>
         </tr>
         <tr>
-            <td>N.data.refine</td>
-            <td style="text-align: center;">N/A</td>
-            <td style="text-align: center;">N/A</td>
-            <td>array[json object]</td>
-            <td>서버나 JSON 데이터가 담긴 파일에서 가져온 JSON 데이터를 Natural-JS에서 사용할수 있는 타입의 json 타입으로 만들어 줍니다.</td>
+            <td>
+                <p class="depricated">N.data.refine</p>
+                <p>Deprecated.</p>
+            </td>
+            <td class="depricated" style="text-align: center;">N/A</td>
+            <td class="depricated" style="text-align: center;">N/A</td>
+            <td class="depricated">array[json object]</td>
+            <td class="depricated">
+                <p>서버에서 조회 한 data 객체에서 데이터 관련 컴포넌트에 바인딩 할 수 있는 형태의 데이터를 추출 합니다.</p>
+            </td>
         </tr>
         <tr>
             <td></td>
-            <td>obj</td>
-            <td>array[json object]</td>
-            <td style="text-align: center;">N/A</td>
-            <td>정제 할 데이터</td>
+            <td class="depricated">data</td>
+            <td class="depricated">array[json object]</td>
+            <td class="depricated" style="text-align: center;">N/A</td>
+            <td class="depricated">
+                <p>정제 할 데이터</p>
+            </td>
         </tr>
         <tr>
             <td></td>
-            <td>listId</td>
-            <td>string</td>
-            <td style="text-align: center;">N/A</td>
-            <td>서버나 JSON 데이터가 담긴 파일에서 여러개의 리스트를 반환했을경우의 해당 리스트의 ID 값</td>
+            <td class="depricated">listId</td>
+            <td class="depricated">string</td>
+            <td class="depricated" style="text-align: center;">N/A</td>
+            <td class="depricated">
+                <p>data 객체의 리스트 데이터 Id</p>
+            </td>
         </tr>
         <tr>
             <td>N.data.filter</td>
             <td style="text-align: center;">N/A</td>
             <td style="text-align: center;">N/A</td>
             <td>array[json object]</td>
-            <td>지정한 조건으로 array[json object] 에서 또다른 array[json object] 데이터를 추출 합니다.</td>
+            <td>
+                <p lang="ko_KR">지정한 조건과 일치하는 데이터를 추출 합니다.</p>
+                <p lang="en_US">지정한 조건과 일치하는 데이터를 추출 합니다.</p>
+                <pre><code>var filteredData = N.data.filter(data, condition);</code></pre>
+            </td>
         </tr>
         <tr>
             <td></td>
-            <td>arr</td>
+            <td>data</td>
             <td>array[json object]</td>
             <td style="text-align: center;">N/A</td>
-            <td>필터링 할 데이터</td>
+            <td>
+                <p lang="ko_KR">필터링 할 data</p>
+                <p lang="en_US">필터링 할 data</p>
+            </td>
         </tr>
         <tr>
             <td></td>
@@ -52,39 +68,32 @@
             <td>function|string</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p>필터링 조건을 입력 합니다.</p>
-                <p>인자로 콜백 펑션을 입력 하면 콜백에서 true 를 반환한 행들 만 반환 합니다.</p>
+                <p lang="ko_KR">필터링 조건을 입력 합니다.</p>
+                <p lang="en_US">필터링 조건을 입력 합니다.</p>
+                <p lang="ko_KR">인자로 함수를 입력 하면 함수에서 true 를 반환한 행들 만 필터링 합니다.</p>
+                <p lang="en_US">인자로 함수를 입력 하면 함수에서 true 를 반환한 행들 만 필터링 합니다.</p>
                 <pre><code class="language-javascript">var fData = N.data.filter([
-    { name : "홍길동", age : 18 },
+    { name : "John", age : 18 },
     { name : "Mike", age : 16 },
     { name : "Mike", age : 14 }
 ], function(item) {
     return item.name === "Mike" &amp;&amp; item.age === 16;
 });
 
-/*
-fData의 값(결과값) :
-[
-    { name : "Mike", age : 16 }
-]
-*/</code></pre>
-                <p>인자로 조건 문자열을 입력 하면 조건에 맞는 행들 만 반환 합니다.</p>
+console.log(fData); // [{ name : "Mike", age : 16 }]</code></pre>
+                <p lang="ko_KR">인자로 조건 문자열을 입력 하면 조건에 맞는 행들 만 필터링 합니다.</p>
+                <p lang="en_US">인자로 조건 문자열을 입력 하면 조건에 맞는 행들 만 필터링 합니다.</p>
                 <pre><code class="language-javascript">var fData = N.data.filter([
-    { name : "홍길동", age : 18 },
+    { name : "John", age : 18 },
     { name : "Mike", age : 16 },
     { name : "Mike", age : 14 }
 ], 'name === "Mike"');
 
-/*
-fData의 값(결과값) :
-[
-    { name : "Mike", age : 16 },
-    { name : "Mike", age : 14 }
-]
-*/</code></pre>
-                <p class="alert">필터링 속도는 문자열로 조건을 입력하는 것 보다 콜백으로 조건을 입력하는 방식이 더 빠릅니다.</p>
-                <p class="alert">문자열로 조건을 입력하는 방식은 and(&amp;&amp;) 나 or(||) 연산식을 지원하지 않고 단일 조건식만 지원 합니다(추후 지원 예정).</p>
-                <p class="alert">$([ { col01 : 1 }, { col01 : 2 } ]).datafilter("col01 === 1") 와 같이 jQuery object 타입의 배열은 datafilter 명령어로 사용하면 됩니다.</p>
+console.log(fData); // [{ name : "Mike", age : 16 }, { name : "Mike", age : 14 }]</code></pre>
+                <p lang="ko_KR" class="alert">문자열로 조건을 입력하는 것 보다 함수로 조건을 처리하는 방식이 더 빠릅니다.</p>
+                <p lang="en_US" class="alert">문자열로 조건을 입력하는 것 보다 함수로 조건을 처리하는 방식이 더 빠릅니다.</p>
+                <p lang="ko_KR" class="alert">문자열로 조건을 입력하는 방식은 and(&amp;&amp;) 나 or(||) 연산식을 지원하지 않고 단일 조건식만 지원 합니다.</p>
+                <p lang="en_US" class="alert">문자열로 조건을 입력하는 방식은 and(&amp;&amp;) 나 or(||) 연산식을 지원하지 않고 단일 조건식만 지원 합니다.</p>
             </td>
         </tr>
         <tr>
@@ -92,54 +101,75 @@ fData의 값(결과값) :
             <td style="text-align: center;">N/A</td>
             <td style="text-align: center;">N/A</td>
             <td>array[json object]</td>
-            <td>array[json object] 를 지정한 특정 key 명으로 정렬 합니다.</td>
+            <td>
+                <p lang="ko_KR">지정한 key 인자값을 기준으로 데이터를 정렬 합니다.</p>
+                <p lang="en_US">지정한 key 인자값을 기준으로 데이터를 정렬 합니다.</p>
+                <pre><code>var sortedData = N.data.sort(data, key, reverse);</code></pre>
+            </td>
         </tr>
         <tr>
             <td></td>
-            <td>arr</td>
+            <td>data</td>
             <td>array[json object]</td>
             <td style="text-align: center;">N/A</td>
-            <td>정렬 할 데이터</td>
+            <td>
+                <p lang="ko_KR">정렬 할 data</p>
+                <p lang="en_US">정렬 할 data</p>
+            </td>
         </tr>
         <tr>
             <td></td>
             <td>key</td>
             <td>string</td>
             <td style="text-align: center;">N/A</td>
-            <td>정렬 기준이 될 key(컬럼) 명</td>
+            <td>
+                <p lang="ko_KR">정렬 기준이 될 object 의 프로퍼티 명</p>
+                <p lang="en_US">정렬 기준이 될 object 의 프로퍼티 명</p>
+            </td>
         </tr>
         <tr>
             <td></td>
             <td>reverse</td>
             <td>boolean</td>
             <td style="text-align: center;">N/A</td>
-            <td>오름차순(true), 내림차순(false) 선택</td>
+            <td>
+                <p lang="ko_KR">true 로 설정하면 오름차순으로 정렬 됩니다.</p>
+                <p lang="en_US">true 로 설정하면 오름차순으로 정렬 됩니다.</p>
+            </td>
         </tr>
         <tr>
-            <td>N(obj).datarefine</td>
-            <td style="text-align: center;">N/A</td>
-            <td style="text-align: center;">N/A</td>
-            <td>jquery object[json object]</td>
             <td>
+                <p class="depricated">N(obj).datarefine</p>
+                <p>Deprecated.</p>
+            </td>
+            <td class="depricated" style="text-align: center;">N/A</td>
+            <td class="depricated" style="text-align: center;">N/A</td>
+            <td class="depricated">jquery object[json object]</td>
+            <td class="depricated">
                 <p>N.data.refine을 플러그인 방식으로 초기화 하는 방식입니다.</p>
-                <p>N.data.refine과 동작되는 로직은 같으며 실제 N() 의 인자로 들어온 값이 N.data.refine()의 첫 번째 인자로 설정 됩니다.</p>
+                <p>N.data.refine과 동작되는 로직은 같으며 N() 의 인자값이 N.data.refine()의 첫 번째 인자로 설정 됩니다.</p>
             </td>
         </tr>
         <tr>
             <td></td>
-            <td>listId</td>
-            <td>string</td>
-            <td style="text-align: center;">N/A</td>
-            <td>N.data.refine의 listId 인자 와 같습니다.</td>
+            <td class="depricated">listId</td>
+            <td class="depricated">string</td>
+            <td class="depricated" style="text-align: center;">N/A</td>
+            <td class="depricated">
+                <p>N.data.refine의 listId 인자 와 같습니다.</p>
+            </td>
         </tr>
         <tr>
-            <td>N(obj).datafilter</td>
+            <td>N(data).datafilter</td>
             <td style="text-align: center;">N/A</td>
             <td style="text-align: center;">N/A</td>
             <td>jquery object[json object]</td>
             <td>
-                <p>N.data.filter를 플러그인 방식으로 초기화 하는 방식입니다.</p>
-                <p>N.data.filter와 동작되는 로직은 같으며 실제 N() 의 인자로 들어온 값이 N.data.filter()의 첫 번째 인자로 설정 됩니다.</p>
+                <p lang="ko_KR">N.data.filter 함수를 jQuery 플러그인 방식으로 실행 합니다.</p>
+                <p lang="en_US">Executes the N.data.filter function using the jQuery plugin method.</p>
+                <pre><code>var filteredData = N(data).datafilter(condition);</code></pre>
+                <p lang="ko_KR">N() 함수의 첫번째 인자가 new N.data.filter 생성자의 첫 번째 인자로 설정 됩니다.</p>
+                <p lang="en_US">The first argument of the N () function is set as the first argument of the new N.data.filter constructor.</p>
             </td>
         </tr>
         <tr>
@@ -147,16 +177,22 @@ fData의 값(결과값) :
             <td>condition</td>
             <td>function|string</td>
             <td style="text-align: center;">N/A</td>
-            <td>N.data.filter의 condition 인자 와 같습니다.</td>
+            <td>
+                <p lang="ko_KR">N.data.filter의 condition 인자 와 같습니다.</p>
+                <p lang="en_US">N.data.filter의 condition 인자 와 같습니다.</p>
+            </td>
         </tr>
         <tr>
-            <td>N(obj).datasort</td>
+            <td>N(data).datasort</td>
             <td style="text-align: center;">N/A</td>
             <td style="text-align: center;">N/A</td>
             <td>jquery object[json object]</td>
             <td>
-                <p>N.data.sort를 플러그인 방식으로 초기화 하는 방식입니다.</p>
-                <p>N.data.sort와 동작되는 로직은 같으며 실제 N() 의 인자로 들어온 값이 N.data.sort()의 첫 번째 인자로 설정 됩니다.</p>
+                <p lang="ko_KR">N.data.sort 함수를 jQuery 플러그인 방식으로 실행 합니다.</p>
+                <p lang="en_US">Executes the N.data.sort function using the jQuery plugin method.</p>
+                <pre><code>var sortedData = N(data).datasort(condition);</code></pre>
+                <p lang="ko_KR">N() 함수의 첫번째 인자가 new N.data.sort 생성자의 첫 번째 인자로 설정 됩니다.</p>
+                <p lang="en_US">The first argument of the N () function is set as the first argument of the new N.data.sort constructor.</p>
             </td>
         </tr>
         <tr>
@@ -164,14 +200,20 @@ fData의 값(결과값) :
             <td>key</td>
             <td>string</td>
             <td style="text-align: center;">N/A</td>
-            <td>N.data.sort의 key 인자 와 같습니다.</td>
+            <td>
+                <p lang="ko_KR">N.data.sort의 key 인자 와 같습니다.</p>
+                <p lang="en_US">N.data.sort의 key 인자 와 같습니다.</p>
+            </td>
         </tr>
         <tr>
             <td></td>
             <td>reverse</td>
             <td>boolean</td>
             <td style="text-align: center;">N/A</td>
-            <td>N.data.sort의 reverse 인자 와 같습니다.</td>
+            <td>
+                <p lang="ko_KR">N.data.sort의 reverse 인자 와 같습니다.</p>
+                <p lang="en_US">N.data.sort의 reverse 인자 와 같습니다.</p>
+            </td>
         </tr>
     </table>
 </article>
