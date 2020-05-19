@@ -29,22 +29,21 @@
             <td>
                 <p lang="ko_KR">반환되는 데이터의 타입을 결정하는 구분값 입니다.</p>
                 <p lang="en_US">This is a division value that determines the type of data returned.</p>
-                <div class="alert">
-                    <p lang="ko_KR">selFlag 인자 값에 따라 다음과 같은 데이터를 반환 합니다.</p>
-                    <p lang="en_US">The following data is returned according to the value of the selFlag argument.</p>
-                    <ul>
-                        <li lang="ko_KR">undefined(selFlag 옵션이 설정되지 않은 경우) : array[json object] 타입의 데이터를 반환 합니다.</li>
-                        <li lang="en_US">undefined(When the selFlag option is not set) : Returns data of type array [json object].</li>
-                        <li lang="ko_KR">true : 폼에 바인드 되어 있는 데이터만 추출하여 반환 합니다.</li>
-                        <li lang="ko_KR">true : It extracts and returns only the data bound to the form.</li>
-                        <li>
-                            <p lang="ko_KR">false : 컴포넌트에 바인딩 되어 있는 jquery object[array[json object]] 타입의 원래 유형의 데이터를 반환 합니다.</p>
-                            <p lang="en_US">false : Returns the data of the original type of the jquery object[array[json object]] type bound to the component.</p>
-                            <p lang="ko_KR" class="alert">data 메서드로 가져온 데이터를 다른 데이터 관련 컴포넌트에 바인딩 할 때는 반드시 "false" 로 설정하여 원래 유형의 데이터를 바인딩 해야 양방향 데이터 바인딩이 활성 화 됩니다.</p>
-                            <p lang="en_US" class="alert">When binding data imported by the data method to other data-related components, you must set "false" to bind the original type of data to enable two way databinding.</p>
-                        </li>
-                    </ul>
-                </div>
+
+                <p lang="ko_KR">selFlag 인자 값에 따라 다음과 같은 데이터를 반환 합니다.</p>
+                <p lang="en_US">The following data is returned according to the value of the selFlag argument.</p>
+                <ul>
+                    <li lang="ko_KR">undefined(selFlag 옵션이 설정되지 않은 경우) : array[json object] 타입의 데이터를 반환 합니다.</li>
+                    <li lang="en_US">undefined(When the selFlag option is not set) : Returns data of type array [json object].</li>
+                    <li lang="ko_KR">true : 폼에 바인드 되어 있는 데이터만 추출하여 반환 합니다.</li>
+                    <li lang="ko_KR">true : It extracts and returns only the data bound to the form.</li>
+                    <li>
+                        <p lang="ko_KR">false : 컴포넌트에 바인딩 되어 있는 jquery object[array[json object]] 타입의 원래 유형의 데이터를 반환 합니다.</p>
+                        <p lang="en_US">false : Returns the data of the original type of the jquery object[array[json object]] type bound to the component.</p>
+                        <p lang="ko_KR" class="alert">data 메서드로 가져온 데이터를 다른 데이터 관련 컴포넌트에 바인딩 할 때는 반드시 "false" 로 설정하여 원래 유형의 데이터를 바인딩 해야 양방향 데이터 바인딩이 활성 화 됩니다.</p>
+                        <p lang="en_US" class="alert">When binding data imported by the data method to other data-related components, you must set "false" to bind the original type of data to enable two way databinding.</p>
+                    </li>
+                </ul>
             </td>
         </tr>
         <tr>
@@ -58,26 +57,14 @@
             <td>string</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p>data 메서드의 두번째 인자부터 n 번째 인자까지 데이터의 컬럼명을 지정하면 해당 컬럼에 해당하는 데이터만 추출하여 반환 합니다.</p>
-                <pre><code>/** bind 되어 있는 데이터
-[{
-    col01 : "",
-     col02 : "",
-     col03 : "",
-     col04 : "",
-     col05 : "",
-     col06 : ""
-}]
-*/
-formInstance.data(true, "col01", "col02", "col03");
-/** 결과 데이터
-[{
-     col01 : "",
-     col02 : "",
-     col03 : ""
-}]
-*/</code></pre>
-                <p class="alert">첫번째 인자로 true 를 지정 했을 때만 작동 됩니다.</p>
+                <p lang="ko_KR">data 메서드의 두번째 인자부터 n 번째 인자까지 데이터의 프로퍼티명을 인자로 지정하면 지정한 프로퍼티 값만 추출한 객체를 반환 합니다.</p>
+                <p lang="en_US">If you specify the property name of the data from the second argument to the nth argument of the data method as an argument, the object that extracts only the specified property value is returned.</p>
+                <pre><code>var formInst = N([]).form(".context")
+    .bind(0, [{ col01 : "", col02 : "", col03 : "", col04 : "", col05 : "", col06 : "" }]);
+formInst.data(true, "col01", "col02", "col03");
+    // [{ col01 : "", col02 : "", col03 : "" }]</code></pre>
+                <p lang="ko_KR" class="alert">첫번째 인자를 true로 설정 했을 때만 작동 됩니다.</p>
+                <p lang="en_US" class="alert">It works only when the first argument is set to true.</p>
             </td>
         </tr>
         <tr>
@@ -85,7 +72,10 @@ formInstance.data(true, "col01", "col02", "col03");
             <td style="text-align: center;">N/A</td>
             <td style="text-align: center;">N/A</td>
             <td>number</td>
-            <td>현재 바인드되어 있는 데이터의 row index를 가져옵니다.</td>
+            <td>
+                <p lang="ko_KR">바인딩 되어 있는 데이터 오브젝트의 index 를 반환 합니다.</p>
+                <p lang="en_US">Returns the index of the bound data object.</p>
+            </td>
         </tr>
         <tr>
             <td>context</td>
@@ -113,88 +103,13 @@ formInstance.data(true, "col01", "col02", "col03");
             <td style="text-align: center;">N/A</td>
             <td>N.form</td>
             <td>
-                <p>지정된 context에 데이터를 바인드 합니다.</p>
-                <br>
-                <p>data 관련 컴포넌트들 끼리 같은 데이터를 바인드 한 다음 데이터를 완벽하게 동기화 하기 위해서는 다음 사항들을 유의 하여 사용 바랍니다.</p>
-                <p>Natural-JS 의 데이터 관련 컴포넌트들은 내부적으로 data 는 jQuery Object 화 하여 사용합니다.</p>
-                <p>"컴포넌트인스턴스.bind(data)" 와 같이 data 를 bind 메서드의 인자로 입력 하면 data는 내부적으로 N(data) 와 같이 jQuery Object로 변환 되고
-                    "N(data).컴포넌트" 와 같이 jQuery Object 화 되어 있는 데이터를 입력 하면 별다른 처리 없이 컴포넌트에서 사용 될 data 로 지정 됩니다.</p>
-                <p>때문에 다음과 같이 data 를 Controller object 에 따로 담아 놓고 공유 해서 사용하는 경우 컴포넌트의 add 메서드를 통해 새로운 데이터를 생성했을 때 따로 담아 둔 데이터가 동기화 되지 않는 문제가 발생 됩니다.</p>
-                <pre><code>...
-data : [{
-    col01 : 1,
-    col01 : 2,
-}, {
-    col01 : 3,
-    col01 : 4,
-}],
-init : function() {
-    var form = N([]).form();
-    form.bind(0, this.data);
+                <p lang="ko_KR">context 옵션으로 지정한 요소 안에서 id 속성값을 갖고 있는 요소들에 데이터를 바인딩 합니다.</p>
+                <p lang="en_US">Binds data to elements that have id attribute value in the element specified by context option.</p>
 
-    form.data() === this.data //-> false
-
-    // array 자체는 false 이지만 array 안의 요소들은 같은 참조로 연결됨.
-    // 때문에 Form 에서 val 메서드로 데이터 수정 시 값이 동기화 됨.
-    form.data()[0] === this.data[0] //-> true
-
-    // 하지만 다음과 같이 add 할 때는 동기화 되지 않음.
-    form.add();
-    form.data().length //-> 3
-    this.length //-> 2
-},
-...
-</code></pre>
-                <p>위와 같은 문제를 해결하기 위해서 "컴포넌트인스턴스.bind(row, data)" 메서드로 바인드 할 데이터를 jQuery Object 화 하여 바인드 하면 데이터 연동 문제가 해결 됩니다.</p>
-                <pre><code>...
-data : [{
-    col01 : 1,
-    col01 : 2,
-}, {
-    col01 : 3,
-    col01 : 4,
-}],
-init : function() {
-    // 순수한 데이터 Array 를 jQuery Object 로 변환
-    this.data = N(this.data);
-
-    var form = N([]).form();
-    form.bind(0, this.data);
-
-    form.data() === this.data //-> true
-    form.data()[0] === this.data[0] //-> true
-
-    form.add();
-    form.data().length //-> 3
-    this.length //-> 3
-},
-...
-</code></pre>
-                <p>여러 컴포넌트에 같은 데이터를 바인드 하여 자동으로 데이터들이 연동 되도록 할 경우에는 데이터를 따로 변수에 담아놓고 사용하지 말고 데이터를 최초 바인드 한 컴포넌트에서 data() 메서드를 통해 data 를 꺼내어 연동 할 컴포넌트에 바인드하는 방법을 추천 합니다.</p>
-                <pre><code>...
-init : function() {
-    // 아래 구문 추가
-    this.data = N(this.data);
-
-    // 컴포넌트 초기화
-    var form = N([]).form();
-    var grid = N([]).grid();
-
-    // 데이터 조회
-    N.comm("data url").submit(function(data) {
-        // form 에 데이터 바인드
-        form.bind(0, data);
-
-        // grid 에 form 의 데이터를 바인드
-        // grid 와 form 의 데이터가 양방향 바인딩이 되기 위해서는 form.data() 함수 호출 시
-        // false 인자를 지정 하여 데이터 원형이 반환 되도록 해야 합니다.
-        grid.bind(form.data(false));
-    });
-
-    // form.data() === grid.data() //-> true
-},
-...
-</code></pre>
+                <p lang="ko_KR" class="alert">data 만 바꿔서 다시 바인드 하면 N.form 이 제대로 동작 하지 않을 수 있습니다.
+                    데이터가 바인딩 된 context 요소에 다시 바인드 할 때는 unbind 메서드를 먼저 실행 한 다음 bind 메서드를 실행 해야 합니다.</p>
+                <p lang="en_US" class="alert">If you change data only and bind again, N.form may not work properly.
+                    When rebinding to the context element to which the data is bound, the unbind method must be executed first, then the bind method.</p>
             </td>
         </tr>
         <tr>
@@ -203,8 +118,8 @@ init : function() {
             <td>number</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p>row index 를 지정 하면 컴포넌트에 바인드 되어있는 데이터 리스트에서 지정한 row index 에 해당하는 데이터를 바인드 합니다.</p>
-                <p class="alert">같은 context 에 data 만 바꿔서 재 바인드 했을때 Datepicker 등이 정상 동작 하지 않을 수 있습니다. 이 때는 bind 하기 전에 unbind 를 호출 해 주고 bind 해 주세요.</p>
+                <p lang="ko_KR">지정한 data(array[json object]) 에서 바인딩 할 데이터 오브젝트의 행 index를 설정 합니다.</p>
+                <p lang="en_US">Set the row index of the data object to be bound in the specified data(array[json object]).</p>
             </td>
         </tr>
         <tr>
@@ -213,8 +128,8 @@ init : function() {
             <td>array[json object]</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p>data인자를 지정하면 컴포넌트에 바인드 된 데이터가 지정한 데이터로 치환되어 바인드 됩니다.</p>
-                <p class="alert">같은 context 에 data 만 바꿔서 재 바인드 했을때 Datepicker 등이 정상 동작 하지 않을 수 있습니다. 이 때는 bind 하기 전에 unbind 를 호출 해 주고 bind 해 주세요.</p>
+                <p lang="ko_KR">바인딩 할 데이터를 지정 합니다.</p>
+                <p lang="en_US">Specifies the data to be bound.</p>
             </td>
         </tr>
         <tr>
@@ -230,18 +145,10 @@ init : function() {
             <td>
                 <p>bind 메서드의 세번째 인자부터 n 번째 인자까지 데이터의 컬럼명을 지정하면 해당 컬럼에 해당하는 요소에만 바인드 합니다.</p>
                 <pre><code>// 바인드 할 데이터
-var data = [{
-    col01 : "",
-     col02 : "",
-     col03 : "",
-     col04 : "",
-     col05 : "",
-     col06 : ""
-}]
-// "col01", "col02", "col03" 아이디 속성값을 갖고 있는 요소에만 바인드.
+var data = [{ col01 : "", col02 : "", col03 : "", col04 : "", col05 : "", col06 : "" }]
+// "col01", "col02", "col03" id 속성값을 갖고 있는 요소에만 바인드.
 formInstance.bind(0, data, "col01", "col02", "col03");</code></pre>
-                <pre><code>// 바인드 되어 있는 데이터를 직접 수정 한 후
-// "col01", "col02", "col03" 아이디 속성값을 갖고 있는 요소에만 바인드.
+                <pre><code>// 바인드 되어 있는 데이터를 직접 수정 한 후 "col01", "col02", "col03" 아이디 속성값을 갖고 있는 요소에만 바인드.
 var data = formInstance.data()[formInstance.row()]
 data.col01 = "abc";
 data.col02 = "123";
@@ -255,8 +162,10 @@ formInstance.bind(0, data, "col01", "col02", "col03");</code></pre>
             <td style="text-align: center;">N/A</td>
             <td>N.form</td>
             <td>
-                <p>N.form 의 context로 지정한 블록 요소의 bind 관련 이벤트나 상태, 스타일등을 제거하여  bind 하기 전 상태로 되돌려 줍니다.</p>
-                <p class="alert">폼에 바인드 되어있는 data는 제거 되지 않고 this.options.row 변수 값도 그대로 유지 됩니다.</p>
+                <p lang="ko_KR">context로 지정한 요소에서 N.form 관련 이벤트나 상태, 스타일등을 제거하여  bind 하기 전 상태로 되돌려 줍니다.</p>
+                <p lang="en_US">Removes N.form-related events, states, styles, etc. from the element specified as context and revert  to the state of before binding.</p>
+                <p lang="ko_KR" class="alert">폼에 바인드 되어있는 data는 제거 되지 않고 선택 된 row 값(this.options.row)도 그대로 유지 됩니다.</p>
+                <p lang="en_US" class="alert">The data bound to the form is not removed and the selected row value(this.options.row) is also retained.</p>
             </td>
         </tr>
         <tr>

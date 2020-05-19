@@ -29,22 +29,21 @@
             <td>
                 <p lang="ko_KR">반환되는 데이터의 타입을 결정하는 구분값 입니다.</p>
                 <p lang="en_US">This is a division value that determines the type of data returned.</p>
-                <div class="alert">
-                    <p lang="ko_KR">selFlag 인자 값에 따라 다음과 같은 데이터를 반환 합니다.</p>
-                    <p lang="en_US">The following data is returned according to the value of the selFlag argument.</p>
-                    <ul>
-                        <li lang="ko_KR">undefined(selFlag 옵션이 설정되지 않은 경우) : array[json object] 타입의 데이터를 반환 합니다.</li>
-                        <li lang="en_US">undefined(When the selFlag option is not set) : Returns data of type array [json object].</li>
-                        <li lang="ko_KR">true : 현재 선택 된 row 데이터만 추출하여 array 타입으로 반환 합니다.</li>
-                        <li lang="en_US">true : Only the currently selected row data is extracted and returned as an array type.</li>
-                        <li>
-                            <p lang="ko_KR">false : 컴포넌트에 바인딩 되어 있는 jquery object[array[json object]] 타입의 원래 유형의 데이터를 반환 합니다.</p>
-                            <p lang="en_US">false : Returns the data of the original type of the jquery object[array[json object]] type bound to the component.</p>
-                            <p lang="ko_KR" class="alert">data 메서드로 가져온 데이터를 다른 데이터 관련 컴포넌트에 바인딩 할 때는 반드시 "false" 로 설정하여 원래 유형의 데이터를 바인딩 해야 양방향 데이터 바인딩이 활성 화 됩니다.</p>
-                            <p lang="en_US" class="alert">When binding data imported by the data method to other data-related components, you must set "false" to bind the original type of data to enable two way databinding.</p>
-                        </li>
-                    </ul>
-                </div>
+
+                <p lang="ko_KR">selFlag 인자 값에 따라 다음과 같은 데이터를 반환 합니다.</p>
+                <p lang="en_US">The following data is returned according to the value of the selFlag argument.</p>
+                <ul>
+                    <li lang="ko_KR">undefined(selFlag 옵션이 설정되지 않은 경우) : array[json object] 타입의 데이터를 반환 합니다.</li>
+                    <li lang="en_US">undefined(When the selFlag option is not set) : Returns data of type array [json object].</li>
+                    <li lang="ko_KR">true : 현재 선택 된 row 데이터만 추출하여 array 타입으로 반환 합니다.</li>
+                    <li lang="en_US">true : Only the currently selected row data is extracted and returned as an array type.</li>
+                    <li>
+                        <p lang="ko_KR">false : 컴포넌트에 바인딩 되어 있는 jquery object[array[json object]] 타입의 원래 유형의 데이터를 반환 합니다.</p>
+                        <p lang="en_US">false : Returns the data of the original type of the jquery object[array[json object]] type bound to the component.</p>
+                        <p lang="ko_KR" class="alert">data 메서드로 가져온 데이터를 다른 데이터 관련 컴포넌트에 바인딩 할 때는 반드시 "false" 로 설정하여 원래 유형의 데이터를 바인딩 해야 양방향 데이터 바인딩이 활성 화 됩니다.</p>
+                        <p lang="en_US" class="alert">When binding data imported by the data method to other data-related components, you must set "false" to bind the original type of data to enable two way databinding.</p>
+                    </li>
+                </ul>
             </td>
         </tr>
         <tr>
@@ -73,7 +72,9 @@
             <td style="text-align: center;">N/A</td>
             <td>N.select</td>
             <td>
-                <p>지정된 context에 데이터를 바인드 합니다.</p>
+                <p lang="ko_KR">context 옵션으로 지정한 요소에 데이터를 바인딩 합니다.</p>
+                <p lang="en_US">Binds data to the element specified by context option.</p>
+
                 <p class="alert">요소가 체크박스 일 경우 템플릿 요소가 체크된 상태라면 바인드 될 때 생성되는 요소들도 체크된 상태로 생성 됩니다.</p>
                 <p class="alert">
                     라디오나 체크박스 요소에서, 데이터가 바인드 되면 context 요소에는 id 속성이 있지만 추가로 생성 된 선택지 요소에는 id 속성이 추가 되지 않고 name 속성이 추가 됩니다.
@@ -86,7 +87,10 @@
             <td>data</td>
             <td>array[json object]</td>
             <td style="text-align: center;">N/A</td>
-            <td>data 인자를 지정하면 컴포넌트에 바인드 된 데이터가 지정한 데이터로 치환되어 바인드 됩니다.</td>
+            <td>
+                <p lang="ko_KR">바인딩 할 데이터를 지정 합니다.</p>
+                <p lang="en_US">Specifies the data to be bound.</p>
+            </td>
         </tr>
         <tr>
             <td>val</td>

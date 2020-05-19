@@ -29,26 +29,31 @@
             <td>
                 <p lang="ko_KR">반환되는 데이터의 타입을 결정하거나 데이터를 필터링 하기 위한 구분값 입니다.</p>
                 <p lang="en_US">It is a division value to determine the type of data returned or to filter the data.</p>
-                <div class="alert">
-                    <p lang="ko_KR">selFlag 인자 값에 따라 다음과 같은 데이터를 반환 합니다.</p>
-                    <p lang="en_US">The following data is returned according to the value of the selFlag argument.</p>
-                    <ul>
-                        <li lang="ko_KR">undefined(selFlag 옵션이 설정되지 않은 경우) : array[json object] 타입의 데이터를 반환 합니다.</li>
-                        <li lang="en_US">undefined(When the selFlag option is not set) : Returns data of type array [json object].</li>
-                        <li>
-                            <p lang="ko_KR">false : 컴포넌트에 바인딩 되어 있는 jquery object[array[json object]] 타입의 원래 유형의 데이터를 반환 합니다.</p>
-                            <p lang="en_US">false : Returns the data of the original type of the jquery object[array[json object]] type bound to the component.</p>
-                            <p lang="ko_KR" class="alert">data 메서드로 가져온 데이터를 다른 데이터 관련 컴포넌트에 바인딩 할 때는 반드시 "false" 로 설정하여 원래 유형의 데이터를 바인딩 해야 양방향 데이터 바인딩이 활성 화 됩니다.</p>
-                            <p lang="en_US" class="alert">When binding data imported by the data method to other data-related components, you must set "false" to bind the original type of data to enable two way databinding.</p>
-                        </li>
-                        <li>"modified" : array[json object] 타입의 추가, 수정, 삭제된 데이터를 반환 합니다.</li>
-                        <li>"selected" : select 옵션이나 multiselect 옵션 지정 시 array[json object] 타입의 체크된 데이터를 반환 합니다.</li>
-                        <li>"checked" : checkAll 옵션과 checkAllTarget 옵션을 지정 했거나  checkOnlyTarget 옵션 지정 시 array[json object] 타입의 체크된 데이터를 반환 합니다.</li>
-                        <li>"insert" : array[json object] 타입의 추가된 데이터를 반환 합니다.</li>
-                        <li>"update" : array[json object] 타입의 수정된 데이터를 반환 합니다.</li>
-                        <li>"delete" : array[json object] 타입의 삭제된 데이터를 반환 합니다.</li>
-                    </ul>
-                </div>
+
+                <p lang="ko_KR">selFlag 인자 값에 따라 다음과 같은 데이터를 반환 합니다.</p>
+                <p lang="en_US">The following data is returned according to the value of the selFlag argument.</p>
+                <ul>
+                    <li lang="ko_KR">undefined(selFlag 옵션이 설정되지 않은 경우) : array[json object] 타입의 데이터를 반환 합니다.</li>
+                    <li lang="en_US">undefined(When the selFlag option is not set) : Returns data of type array [json object].</li>
+                    <li>
+                        <p lang="ko_KR">false : 컴포넌트에 바인딩 되어 있는 jquery object[array[json object]] 타입의 원래 유형의 데이터를 반환 합니다.</p>
+                        <p lang="en_US">false : Returns the data of the original type of the jquery object[array[json object]] type bound to the component.</p>
+                        <p lang="ko_KR" class="alert">data 메서드로 가져온 데이터를 다른 데이터 관련 컴포넌트에 바인딩 할 때는 반드시 "false" 로 설정하여 원래 유형의 데이터를 바인딩 해야 양방향 데이터 바인딩이 활성 화 됩니다.</p>
+                        <p lang="en_US" class="alert">When binding data imported by the data method to other data-related components, you must set "false" to bind the original type of data to enable two way databinding.</p>
+                    </li>
+                    <li lang="ko_KR">"modified" : 추가, 수정, 삭제 된 데이터를 반환 합니다(array[json object] 타입).</li>
+                    <li lang="en_US">"modified" : Returns data that has been inserted, updated, or deleted.(array[json object] type).</li>
+                    <li lang="ko_KR">"selected" : select 옵션이나 multiselect 옵션을 설정 했을 때 선택된 데이터를 반환 합니다(array[json object] 타입).</li>
+                    <li lang="en_US">"selected" : Returns data selected when the select or multiselect option is set(array[json object] type).</li>
+                    <li lang="ko_KR">"checked" : checkAll 옵션과 checkAllTarget 옵션 이나 checkOnlyTarget 옵션을 설정 했을 때 체크된 데이터를 반환 합니다(array[json object] 타입).</li>
+                    <li lang="en_US">"checked" : Checked data is returned when the checkAll option and checkAllTarget option or checkOnlyTarget option are set(array[json object] type).</li>
+                    <li lang="ko_KR">"insert" : 추가된 데이터를 반환 합니다(array[json object] 타입).</li>
+                    <li lang="en_US">"insert" : Returns the inserted data(array[json object] type).</li>
+                    <li lang="ko_KR">"update" : 수정된 데이터를 반환 합니다(array[json object] 타입).</li>
+                    <li lang="en_US">"update" : Returns the updated data(array[json object] type).</li>
+                    <li lang="ko_KR">"delete" : 타입의 삭제된 데이터를 반환 합니다(array[json object] 타입).</li>
+                    <li lang="en_US">"delete" : Returns the deleted data(array[json object] type).</li>
+                </ul>
             </td>
         </tr>
         <tr>
@@ -62,37 +67,14 @@
             <td>string</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p>data 메서드의 두번째 인자부터 n 번째 인자까지 데이터의 컬럼명을 지정하면 해당 컬럼에 해당하는 데이터만 추출하여 반환 합니다.</p>
-                <pre><code>/** bind 되어 있는 데이터
-[{
-    col01 : "",
-     col02 : "",
-     col03 : "",
-     col04 : "",
-     col05 : "",
-     col06 : ""
-}, {
-     col01 : "",
-     col02 : "",
-     col03 : "",
-     col04 : "",
-     col05 : "",
-     col06 : ""
-}]
-*/
-gridInstance.data("modified", "col01", "col02", "col03");
-/** 결과 데이터
-[{
-    col01 : "",
-     col02 : "",
-     col03 : ""
-}, {
-     col01 : "",
-     col02 : "",
-     col03 : ""
-}]
-*/</code></pre>
-                <p class="alert">첫번째 인자로 "modified", "selected", "checked", "insert", "update", "delete" 를 지정 했을 때만 작동 됩니다.</p>
+	            <p lang="ko_KR">data 메서드의 두번째 인자부터 n 번째 인자까지 데이터의 프로퍼티명을 인자로 지정하면 지정한 프로퍼티 값만 추출한 객체를 반환 합니다.</p>
+                <p lang="en_US">If you specify the property name of the data from the second argument to the nth argument of the data method as an argument, the object that extracts only the specified property value is returned.</p>
+                <pre><code>var gridInst = N([]).grid(".context")
+    .bind([{ col01 : "", col02 : "", col03 : "", col04 : "", col05 : "", col06 : "" }]);
+gridInst.data("modified", "col01", "col02", "col03");
+    // [{ col01 : "", col02 : "", col03 : "" }]</code></pre>
+                <p lang="ko_KR" class="alert">첫번째 인자를 "modified", "selected", "checked", "insert", "update", "delete" 로 설정 했을 때만 작동 됩니다.</p>
+                <p lang="en_US" class="alert">It works only when the first argument is set to "modified", "selected", "checked", "insert", "update" or "delete".</p>
             </td>
         </tr>
         <tr>
@@ -157,88 +139,8 @@ gridInstance.data("modified", "col01", "col02", "col03");
             <td>N/A</td>
             <td>N.grid</td>
             <td>
-                <p>지정된 context에 데이터를 바인드 합니다.</p>
-                <br>
-                <p>data 관련 컴포넌트들 끼리 같은 데이터를 바인드 한 다음 데이터를 완벽하게 동기화 하기 위해서는 다음 사항들을 유의 하여 사용 바랍니다.</p>
-                <p>Natural-JS 의 데이터 관련 컴포넌트들은 내부적으로 data 는 jQuery Object 화 하여 사용합니다.</p>
-                <p>"컴포넌트인스턴스.bind(data)" 와 같이 data 를 bind 메서드의 인자로 입력 하면 data는 내부적으로 N(data) 와 같이 jQuery Object로 변환 되고
-                    "N(data).컴포넌트" 와 같이 jQuery Object 화 되어 있는 데이터를 입력 하면 별다른 처리 없이 컴포넌트에서 사용 될 data 로 지정 됩니다.</p>
-                <p>때문에 다음과 같이 data 를 따로 담아 놓고 공유 해서 사용하는 경우 컴포넌트의 add 메서드를 통해 새로운 데이터를 생성했을 때 따로 담아 둔 데이터가 동기화 되지 않는 문제가 발생 됩니다.</p>
-                <pre><code>...
-data : [{
-    col01 : 1,
-    col01 : 2,
-}, {
-    col01 : 3,
-    col01 : 4,
-}],
-init : function() {
-    var grid = N([]).grid();
-    grid.bind(this.data);
-
-    grid.data() === this.data //-> false
-
-    // array 자체는 false 이지만 array 안의 요소들은 같은 참조로 연결됨.
-    // 때문에 Form 에서 val 메서드로 데이터 수정 시 값이 동기화 됨.
-    grid.data()[0] === this.data[0] //-> true
-
-    // 하지만 다음과 같이 add 할 때는 동기화 되지 않음.
-    grid.add();
-    grid.data().length //-> 3
-    this.length //-> 2
-},
-...
-</code></pre>
-                <p>위와 같은 문제를 해결하기 위해서 "컴포넌트인스턴스.bind(data)" 메서드로 바인드 할 데이터를 jQuery Object 화 하여 바인드 하면 데이터 연동 문제가 해결 됩니다.</p>
-                <pre><code>...
-data : [{
-    col01 : 1,
-    col01 : 2,
-}, {
-    col01 : 3,
-    col01 : 4,
-}],
-init : function() {
-    // 순수한 데이터 Array 를 jQuery Object 로 변환
-    this.data = N(this.data);
-
-    var grid = N([]).grid();
-    grid.bind(this.data);
-
-    grid.data() === this.data //-> true
-    grid.data()[0] === this.data[0] //-> true
-
-    grid.add();
-    grid.data().length //-> 3
-    this.length //-> 3
-},
-...
-</code></pre>
-                <p>여러 컴포넌트에 같은 데이터를 바인드 하여 자동으로 데이터들이 연동 되도록 할 경우에는 데이터를 따로 변수에 담아놓고 사용하지 말고 데이터를 최초 바인드 한 컴포넌트에서 data() 메서드를 통해 data 를 꺼내여 연동 할 컴포넌트에 바인드하는 방법을 추천 합니다.</p>
-                <pre><code>...
-init : function() {
-    // 아래 구문 추가
-    this.data = N(this.data);
-
-    // 컴포넌트 초기화
-    var form = N([]).form();
-    var grid = N([]).grid();
-
-    // 데이터 조회
-    N.comm("data url").submit(function(data) {
-        // form 에 데이터 바인드
-        form.bind(0, data);
-
-        // grid 에 form 의 데이터를 바인드
-        // grid 와 form 의 데이터가 양방향 바인딩이 되기 위해서는 form.data() 함수 호출 시
-        // false 인자를 지정 하여 데이터 원형이 반환 되도록 해야 합니다.
-        grid.bind(form.data(false));
-    });
-
-    // form.data() === grid.data() //-> true
-},
-...
-</code></pre>
+                <p lang="ko_KR">context 옵션으로 지정한 요소 안에서 id 속성값을 갖고 있는 요소들에 데이터를 바인딩 하고 data 의 길이만큼 행 요소를 생성 합니다.</p>
+                <p lang="en_US">Binds data to elements that have id attribute value in the element specified by context option and creates the row elements as long as the data length.</p>
             </td>
         </tr>
         <tr>
@@ -246,7 +148,10 @@ init : function() {
             <td>data</td>
             <td>array[json object]</td>
             <td style="text-align: center;">N/A</td>
-            <td>data인자를 지정하면 컴포넌트에 바인드 된 데이터가 지정한 데이터로 치환되어 바인드 됩니다.</td>
+            <td>
+                <p lang="ko_KR">바인딩 할 데이터를 지정 합니다.</p>
+                <p lang="en_US">Specifies the data to be bound.</p>
+            </td>
         </tr>
         <tr>
             <td></td>
@@ -254,8 +159,10 @@ init : function() {
             <td>string</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                두번째 인자에 "append" 라는 문자열을 지정하면 처음 바인드 되어 있던 데이터에 다시 바인드 한 데이터를 합쳐 주고 첫번째 인자로 지정한 data를 그리드에 추가로 표시 해 줍니다.
-                <p class="alert">"append" 인자가 입력 되면 scrollPaging.size 옵션 값 자동으로 0 으로 지정 되어 스크롤 페이징 기능이 비활성화 됩니다.</p>
+                <p lang="ko_KR">"append" 문자열을 인자로 설정 하여 바인딩 하면 이전에 바인드 된 데이터와 새로 바인드 한 데이터를 병합하고 이전에 생성된 행 요소에 새로운 행 요소를 추가 해 줍니다.</p>
+                <p lang="en_US">When binding by setting the "append" string as an argument, it merges the previously bound data with the newly bound data and appends the new row element to the previously created row element.</p>
+                <p lang="ko_KR" class="alert">"append" 인자 값이 설정 되면 scrollPaging.size 옵션 값 자동으로 0 으로 지정 되어 스크롤 페이징 기능이 비활성화 됩니다.</p>
+                <p lang="en_US" class="alert">When the "append" argument value is set, the scrollPaging.size option value is automatically set to 0 to disable the scroll paging feature.</p>
             </td>
         </tr>
         <tr>
