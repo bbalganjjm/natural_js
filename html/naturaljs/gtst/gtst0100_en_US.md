@@ -62,7 +62,7 @@ JSON is very important on Natrual-JS. The data type that send and receive to ser
 
 Back to the point... Natural-JS environment settings are stored in the Context(N.context) object. N.context.attr("architecture").page.context value in the above syntaxes is a very important value among the environment settings. This value is specify for jQuery-selector string of the container element that contained Natural-JS's component elements. In other words, specify the dynamically unchanging element box that contained page content. In addition, Specify the container element selector that stores the N.alert HTML element in N.context.attr("ui").alert.context value. You specify the same element usually as the N.context.attr("architecture").page.context value. Resources of components supported by Natural-UI such as Tab (N.tab), Popup (N.popup), and Datepicker (N.datepicker) are created in the area specified here(N.context.attr...context) and when the page is changed, it will return the browser's resources by overwriting it again. When developing a Single Page Web Application that does not redirect pages, you don't have to manage browser resources separately. For other environment setting values, refer to [Config Example] in [API/DEMO] > [Natural-CORE] > [[Config](#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s)] menu.
 
-<p class="alert">If you are using the Documents(N.docs) component, you do not need to specify it.</p>
+<p class="alert">If you are using the <a href="#cmVmcjA1MDIlMjREb2N1bWVudHMkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDUwMi5odG1s">Documents</a>(N.docs) component, you do not need to specify it.</p>
 <p class="alert">If it is not a SPA(Single Page Application), set it to "body".</p>
 
 In <a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a>, the global settings for most UI components are specified, and all components are based on the options set here.
@@ -202,7 +202,7 @@ To receive data temporarily, create and save a data file (data.json) composed of
 ]
 ```
 
-Now one block page is complete. This page can be imported as a Tab(N.tab), Popup(N.popup), or Documents(N.docs) component, and Communicator(N.comm) can be used to add elements of this page to the desired location.
+Now one block page is complete. This page can be imported as a Tab(N.tab), Popup(N.popup), or <a href="#cmVmcjA1MDIlMjREb2N1bWVudHMkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDUwMi5odG1s">Documents</a>(N.docs) component, and Communicator(N.comm) can be used to add elements of this page to the desired location.
 
 Let's create a simple index page and add the ** block 01.html ** page to the desired position using N.comm.
 
