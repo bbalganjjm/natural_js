@@ -13,6 +13,9 @@
 		datafilter : function(callBack) {
 			return N.data.filter(this, callBack);
 		},
+		/**
+		 * @deprecated 2020.05.19.
+		 */
 		datarefine : function(listId) {
 			return N.data.refine(this, listId);
 		},
@@ -30,6 +33,9 @@
 	(function(N) {
 
 		N.data = {
+            /**
+             * @deprecated 2020.05.19.
+             */
 			refine : function(obj, listId) {
 				if (N.isWrappedSet(obj)) {
 					if (obj.length == 1) {
