@@ -1,7 +1,7 @@
 개요
 ===
 
-Config(N.config)는 Natural-JS 의 운영 환경 설정, AOP 설정, Communication Filter 설정, UI 컴포넌트의 전역 옵션 값 등을 저장하는 공간 입니다.
+<a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a>는 Natural-JS 의 운영 환경 설정, AOP 설정, Communication Filter 설정, UI 컴포넌트의 전역 옵션 값 등을 저장하는 공간 입니다.
 
 natural.config.js 파일에 정의 되어 있으며 설정 값은 N.context 에 각 패키지 별 속성 값으로 별도로 저장 됩니다.
  * N.context.attr("core") : Natural-CORE 패키지 라이브러리들의 기본 설정 값.
@@ -21,6 +21,6 @@ Natural-JS 적용 시 설정 해야 할 필수 속성값은 다음 두가지 입
 컴포넌트 옵션이 적용 되는 순서는 다음과 같습니다.
 
 1. 컴포넌트를 초기화 할 때 지정한 옵션 값.
-2. Config(N.config)에서 지정한 옵션 값.
+2. <a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a>에서 지정한 옵션 값.
 3. 컴포넌트의 기본 옵션 값.
     <div class="alert" style="display: block;">전역 이벤트 옵션을 설정하면 전역 이벤트가 먼저 실행 된 다음 컴포넌트 초기화 시 지정한 이벤트가 실행 됩니다.</div>

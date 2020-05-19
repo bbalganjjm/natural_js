@@ -37,43 +37,63 @@
             <td style="text-align: center;">N/A</td>
             <td>N.tab|object</td>
             <td>
-                <p>탭을 명령으로 오픈 합니다.</p>
-                <p>인자들을 입력하지 않으면 다음과 같은 탭 상태 정보가 object 타입으로 반환 됩니다.</p>
-                <ul>
-                    <li>index : 활성화 된 탭의 index 값</li>
-                    <li>tab : 활성화 된 탭의 탭 요소</li>
-                    <li>content : 활성화 된 컨텐츠 요소</li>
-                    <li>cont : 활성화 된 컨텐츠 요소의 컨트롤러(N.cont) 오브젝트</li>
+                <p lang="ko_KR">탭을 오픈 합니다.</p>
+                <p lang="en_US">Opens the tab.</p>
+                <p lang="ko_KR">인자들을 지정하지 않으면 다음과 같은 탭의 상태 정보가 object 타입으로 반환 됩니다.</p>
+                <p lang="en_US">If no arguments are specified, the following tab status information is returned as the object type.</p>
+                <ul lang="ko_KR">
+                    <li>index : 활성화 된 탭의 index</li>
+                    <li>tab : 활성화 된 탭 요소</li>
+                    <li>content : 활성화 된 탭 컨텐츠 요소</li>
+                    <li>cont : 활성화 된 탭 컨텐츠의 Controller object</li>
+                </ul>
+                <ul lang="en_US">
+                    <li>index : Activated tab index</li>
+                    <li>tab : Activated tab element</li>
+                    <li>content : Activated tab content element</li>
+                    <li>cont : Controller object of Activated tab content</li>
                 </ul>
             </td>
         </tr>
         <tr>
             <td></td>
-            <td>idx</td>
+            <td>index</td>
             <td>number</td>
             <td style="text-align: center;">N/A</td>
-            <td>오픈 할 탭의 index 를 입력 하면 해당 탭과 탭 컨텐츠가 활성화 됩니다.</td>
+            <td>
+                <p lang="ko_KR">index 로 지정 한 탭과 탭 컨텐츠가 오픈 됩니다.</p>
+                <p lang="en_US">The tab and tab contents specified by index are opened.</p>
+            </td>
         </tr>
         <tr>
             <td></td>
             <td>onOpenData</td>
             <td>object</td>
             <td style="text-align: center;">N/A</td>
-            <td>불러올 페이지의 onOpen 이벤트 헨들러 함수의 첫번째 인자에 지정한 onOpenData를 전달 합니다.</td>
+            <td>
+                <p lang="ko_KR">페이지가 열릴 때마다 실행 되는 onOpen 이벤트 헨들러 함수의 첫번째 인자로 전달 할 데이터를 지정 합니다.</p>
+                <p lang="en_US">Specifies the data to be passed as the first argument of the onOpen event handler function, which is executed whenever the page is opened.</p>
+            </td>
         </tr>
         <tr>
             <td>enable</td>
-            <td>idx</td>
+            <td>index</td>
             <td>number</td>
             <td>N.tab</td>
-            <td>지정한 index 번째 탭을 활성화 합니다.</td>
+            <td>
+                <p lang="ko_KR">index 로 지정한 탭을 활성화 합니다.</p>
+                <p lang="en_US">Enables the tab specified by index.</p>
+            </td>
         </tr>
         <tr>
             <td>disable</td>
-            <td>idx</td>
+            <td>index</td>
             <td>number</td>
             <td>N.tab</td>
-            <td>지정한 index 번째 탭을 비활성화 합니다.</td>
+            <td>
+                <p lang="ko_KR">index 로 지정한 탭을 비활성화 합니다.</p>
+                <p lang="en_US">Disables the tab specified by index.</p>
+            </td>
         </tr>
         <tr>
             <td>cont</td>
@@ -81,17 +101,20 @@
             <td style="text-align: center;">N/A</td>
             <td>N.cont's object</td>
             <td>
-                <p>생성 된 탭 컨텐츠(자식 페이지)의 Controller 오브젝트를 반환 합니다.</p>
-                <p class="alert">다른 페이지를 불러오지 않고 내부에서 생성된 탭 컨텐츠 이거나 preload 옵션이 false 일때 한번도 활성화 되지 않은 탭 컨텐츠는 Controller Object 가 없는 상태이기 때문에 undefined 가 반환 됩니다.</p>
+                <p lang="ko_KR">탭 컨텐츠의 Controller object 를 반환 합니다.</p>
+                <p lang="en_US">Returns the Controller object of the tab content.</p>
+                <p lang="ko_KR" class="alert">내부에서 생성된 탭 컨텐츠 이거나 preload 옵션이 false 이면 Controller Object 가 없는 상태이기 때문에 undefined 가 반환 됩니다.</p>
+                <p lang="en_US" class="alert">If the tab content is created internally or the preload option is false, undefined is returned because there is no Controller Object.</p>
             </td>
         </tr>
         <tr>
             <td></td>
-            <td>idx</td>
+            <td>index</td>
             <td>number</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p>idx 인자를 입력하지 않으면 활성화 된 탭의 Controller 오브젝트를 반환하고 idx 인자를 입력하면 지정한 index 번째 탭 컨텐츠의 Controller 오브젝트를 반환 합니다.</p>
+                <p lang="ko_KR">index 인자를 지정하지 않으면 활성화 된 탭의 Controller object 를 반환하고 index 인자를 지정하면 index 로 지정한 탭 컨텐츠의 Controller object 를 반환 합니다.</p>
+                <p lang="en_US">If the index argument is not specified, the controller object of the active tab is returned. If the index argument is specified, the controller object of the tab content specified by index is returned.</p>
             </td>
         </tr>
     </table>

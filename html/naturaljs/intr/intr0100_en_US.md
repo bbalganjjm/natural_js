@@ -35,9 +35,9 @@ N is an object class that defines the core functions of Natural-JS.
 * N.json : Function set class for manipulating JSON data
 * N.event : Function set class for event control
 
-### Natural Config - Config(N.config)
+### Natural Config - Config(natural.config.js)
 
-[Config(N.config)](#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s) is a place to save Natural-JS operation environment setting, AOP setting, Communication Filter setting, UI option value, etc.
+[Config(natural.config.js)](#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s) is a place to save Natural-JS operation environment setting, AOP setting, Communication Filter setting, UI option value, etc.
 
 ## Natural-ARCHITECTURE
 
@@ -86,7 +86,7 @@ View has no implementation and simply defines the HTML element area as View.
 #### Context
 
 Context(N.context) is a space that ensures data persistence within the Life-Cycle(Until the page is loaded and redirected to another URL) of a Natural-JS-based application.
- * Natural-JS configuration values​([Config(N.config)](#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s)), global configuration values, common messages of framework, etc. are stored in N.context objects.
+ * Natural-JS configuration values​([Config(natural.config.js)](#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s)), global configuration values, common messages of framework, etc. are stored in N.context objects.
 
 
 ## Natural-DATA

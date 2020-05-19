@@ -33,9 +33,9 @@ N 은 Natural-JS 의 코어 함수들이 정의 되어 있는 오브젝트 클�
 * N.json : JSON 데이터 조작을 위한 함수 집합 클래스
 * N.event : 이벤트 제어를 위한 함수 집합 클래스
 
-### Natural Config - Config(N.config)
+### Natural Config - Config(natural.config.js)
 
-[Config(N.config)](#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s) 는 Natural-JS 의 운영 환경 설정, AOP 설정, Communication Filter 설정, UI 컴포넌트의 기본 옵션 값 등을 저장하는 공간 입니다.
+[Config(natural.config.js)](#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s) 는 Natural-JS 의 운영 환경 설정, AOP 설정, Communication Filter 설정, UI 컴포넌트의 기본 옵션 값 등을 저장하는 공간 입니다.
 
 ## Natural-ARCHITECTURE
 
@@ -82,7 +82,7 @@ View 는 별도의 구현체는 없고 단순하게 HTML 요소 영역이  View 
  * N.comm 은 서버와 통신하는 모든 요청 및 응답 또는 오류 생성 단계에서 공통 로직을 실행할 수있는 [Communication Filter](#cmVmcjAyMDUlMjRDb21tdW5pY2F0aW9uJTIwRmlsdGVyJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAyMDUuaHRtbA==) 기능을 제공합니다.
 
 [Context(N.context)](#cmVmcjAyMDYlMjRDb250ZXh0JGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAyMDYuaHRtbA==) 는 Natural-JS 기반 어플리케이션의 Life-Cycle(페이지가 적제 되고 다른 URL로 redirect 되기 전까지) 안 에서 데이터의 영속성을 보장 하는 공간 입니다.
- * Natural-JS 의 환경설정 값([Config(N.config)](#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s)), 프레임워크 공통 메시지 등이 N.context 객체에 저장 됩니다.
+ * Natural-JS 의 환경설정 값([Config(natural.config.js)](#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s)), 프레임워크 공통 메시지 등이 N.context 객체에 저장 됩니다.
 
 
 ## Natural-DATA

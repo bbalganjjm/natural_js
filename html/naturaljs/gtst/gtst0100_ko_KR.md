@@ -62,18 +62,18 @@ Natrual-JS 에서 JSON 은 아주 중요 합니다. 서버와 송수신하는 �
 
 다시 본론으로... Natural-JS의 환경설정값은 Context(N.context) 객체에 저장 됩니다. 환경설정값중 위 구문에 해당하는 N.context.attr("architecture").page.context 값은 아주 중요한 값입니다. 이 값은 Natural-JS의 컴포넌트 요소들이 적재 될 컨테이너 요소를 jQuery Selector 문자열로 지정하면 됩니다. 쉽게말해 페이지 컨텐츠들을 표시 할 동적으로 변하지 않는 박스 요소를 지정 하면 됩니다. 더불어, N.context.attr("ui").alert.context 값에 N.alert HTML 요소를 저장하는 컨테이너 요소의 selector 를 지정 해 주세요. 보통 N.context.attr("architecture").page.context 값과 같은 요소를 지정하면 됩니다. Tab(N.tab) 이나 Popup(N.popup), Datepicker(N.datepicker)등 Natural-UI에서 지원하는 컴포넌트들의 자원이 여기(N.context.attr...context)에서 지정한 영역에 생성되고 페이지가 전환 될 때 이 영역에 다시 덮어 씌움으로서 브라우저의 자원을 반환하게 됩니다. 페이지 Redirect를 하지 않는 Single Page Web Application을 개발 할 때 브라우저 리소스를 따로 관리 하지 않아도 되어서 편리 하겠죠? 그 외 환경설정 값들은 [Config](#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s) 메뉴의 내용을 참고 해 주세요.
 
-<p class="alert">Documents (N.docs) 컴포넌트를 사용하는 경우에는 지정할 필요가 없습니다.</p>
+<p class="alert">Documents(N.docs) 컴포넌트를 사용하는 경우에는 지정할 필요가 없습니다.</p>
 <p class="alert">SPA(Single Page Application)가 아니면 "body" 로 설정 해 주세요.</p>
 
-N.config(natural.config.js) 에는 대부분 UI 컴포넌트들의 전역 설정값들이 지정 되어 있고 모든 컴포넌트들은 여기에서 설정한 옵션값들을 기본으로 구동 됩니다.
+<a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a> 에는 대부분 UI 컴포넌트들의 전역 설정값들이 지정 되어 있고 모든 컴포넌트들은 여기에서 설정한 옵션값들을 기본으로 구동 됩니다.
 
 Natural-JS의 컴포넌트 옵션의 적용 우선순위는 다음과 같습니다.
 
 1.  컴포넌트를 초기화 할 때 지정한 옵션 값
-2.  환경설정(N.config)에서 지정한 옵션 값
+2.  <a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a>에서 지정한 옵션 값
 3.  컴포넌트의 기본 옵션 값
 
-컴포넌트 클래스의 기본 옵션값중 환경설정 파일(natural.config.js)에 지정되지 않은 옵션값들은 컴포넌트 초기화 시 따로 옵션을 지정하지 않았다면 컴포넌트 클래스의 기본옵션값으로 동작 됩니다. 환경설정 파일에 정의되지 않은 컴포넌트 클래스의 기본 옵션값을 사이트 전역 옵션값으로 설정하고 싶다면 환경설정 파일의 해당 컴포넌트 부분에 추가 하면 됩니다. 예를 들어 사이트내에서 동작되는 모든 그리드 컴포넌트 Body영역의 높이를 300픽셀로 기본값을 설정하고 싶다면 N.context.attr("ui").grid 부분에 다음과 같이 추가하면 됩니다.
+컴포넌트 클래스의 기본 옵션값중 <a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a>에 지정되지 않은 옵션값들은 컴포넌트 초기화 시 따로 옵션을 지정하지 않았다면 컴포넌트 클래스의 기본옵션값으로 동작 됩니다. 환경설정 파일에 정의되지 않은 컴포넌트 클래스의 기본 옵션값을 사이트 전역 옵션값으로 설정하고 싶다면 환경설정 파일의 해당 컴포넌트 부분에 추가 하면 됩니다. 예를 들어 사이트내에서 동작되는 모든 그리드 컴포넌트 Body영역의 높이를 300픽셀로 기본값을 설정하고 싶다면 N.context.attr("ui").grid 부분에 다음과 같이 추가하면 됩니다.
 
 ```
 N.context.attr("ui", {
