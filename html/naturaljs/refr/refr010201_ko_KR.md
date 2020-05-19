@@ -21,6 +21,6 @@ Natural-JS 적용 시 설정 해야 할 필수 속성값은 다음 두가지 입
 컴포넌트 옵션이 적용 되는 순서는 다음과 같습니다.
 
 1. 컴포넌트를 초기화 할 때 지정한 옵션 값.
-2. <a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a>에서 지정한 옵션 값.
+2. Config(natural.config.js)에서 지정한 옵션 값.
 3. 컴포넌트의 기본 옵션 값.
     <div class="alert" style="display: block;">전역 이벤트 옵션을 설정하면 전역 이벤트가 먼저 실행 된 다음 컴포넌트 초기화 시 지정한 이벤트가 실행 됩니다.</div>

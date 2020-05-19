@@ -164,14 +164,13 @@
                     <li>H : 시</li>
                     <li>i : 분</li>
                     <li>s : 초</li>
-                    <li>예) N.date.format("19991231120159", "Y-m-d H:i:s") -> "1999-12-31 12:01:59"</li>
-                    <li>예) N.date.format("19991231120159", "Y/m/d H:i:s") -> "1999/12/31 12:01:59"</li>
-                    <li>예) N.date.format("19991231120159", "Y.m.d H:i") -> "1999.12.31 12:01"</li>
-                    <li>
-                        예) N.date.format("19991231120159", N.context.attr("data").formatter.date.YmdHis()) -> "1999-12-31 12:01:59"
-                        <p class="alert">N.context.attr("data").formatter.date 오브젝트는 <a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a> 에 정의 되어 있습니다. 날짜/시간 구분 문자는 해당 위치에서 변경 가능 합니다.</p>
-                    </li>
                 </ul>
+                <pre><code>N.date.format("19991231120159", "Y-m-d H:i:s") // "1999-12-31 12:01:59"
+N.date.format("19991231120159", "Y/m/d H:i:s") // "1999/12/31 12:01:59"
+N.date.format("19991231120159", "Y.m.d H:i") // "1999.12.31 12:01"
+N.date.format("19991231120159", N.context.attr("data").formatter.date.YmdHis()) // "1999-12-31 12:01:59"
+</code></pre>
+                <p class="alert">N.context.attr("data").formatter.date 오브젝트는 <a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a> 에 정의 되어 있습니다. 날짜/시간 구분 문자는 해당 위치에서 변경 가능 합니다.</p>
             </td>
         </tr>
         <tr>

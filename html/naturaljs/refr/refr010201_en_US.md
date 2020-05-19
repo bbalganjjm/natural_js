@@ -21,6 +21,6 @@ There are two essential attribute values ​​to set when applying Natural-JS.
 The order in which the component options are applied is as follows.
 
 1. Option value specified when initializing the component.
-2. Option value specified in <a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a>.
+2. Option value specified in Config(natural.config.js).
 3. Default option value of the component.
     <div class="alert" style="display: block;">If you set the global event option, the global event is executed first, and then the event specified when the component is initialized.</div>
