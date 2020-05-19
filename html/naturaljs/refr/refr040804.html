@@ -26,7 +26,7 @@
                                 <p lang="en_US"><strong>If the property name of the row data and the value of the id attribute of the element are the same, the data is bound.</strong></p>
                 <p lang="ko_KR" class="alert">Natural-JS 의 모든 데이터 관련 컴포넌트는 빠른 바인딩 속도를 위해 어쩔수 없이 id 속성을 사용 합니다.</p>
                 <p lang="en_US" class="alert">All data-related components of Natural-JS inevitably use id attribute for fast binding speed.</p>
-                <pre><code class="language-markup">&lt;ul class="list-context"&gt;
+                <pre><code>&lt;ul class="list-context"&gt;
     &lt;li&gt;
         &lt;input id="name" type="text"&gt;
         &lt;input id="age" type="text"&gt;
@@ -246,7 +246,7 @@
                 <p lang="en_US">In N.list, the scroll paging feature is enabled by default, if 0 is specified, the scroll paging feature is disabled.</p>
                 <p lang="ko_KR">size 옵션 값은 다음과 같이 scrollPaging 옵션 객체의 하위 속성으로 지정해야합니다.</p>
                 <p lang="en_US">The size option value must be specified as a sub-property of the scrollPaging option object as follows.</p>
-                <pre><code class="language-javascript">...
+                <pre><code>...
     scrollPaging : {
         size : 50
     }
@@ -363,13 +363,13 @@
             <td>
                 <p lang="ko_KR">bind 하거나 add 했을 때 생성 된 행 요소에 데이터가 바인딩 되기 전에 실행되는 이벤트 핸들러를 정의 합니다.</p>
                 <p lang="en_US">Defines an event handler that is executed before data is bound to the row element created when bind or add.</p>
-                <pre lang="ko_KR"><code class="language-javascript">rowHandlerBeforeBind : function(rowIdx, rowEle, rowData) {
+                <pre lang="ko_KR"><code>rowHandlerBeforeBind : function(rowIdx, rowEle, rowData) {
     // this : N.list 인스턴스
     // rowIdx : 생성 된 행 index
     // rowEle : 생성 된 행 요소(li)
     // rowData : 생성 될 행의 Data
 }</code></pre>
-                <pre lang="en_US"><code class="language-javascript">rowHandlerBeforeBind : function(rowIdx, rowEle, rowData) {
+                <pre lang="en_US"><code>rowHandlerBeforeBind : function(rowIdx, rowEle, rowData) {
     // this : N.list instance
     // rowIdx : Created row index
     // rowEle : Created row element(li)
@@ -387,13 +387,13 @@
             <td>
                 <p lang="ko_KR">bind 하거나 add 했을 때 생성 된 행 요소에 데이터가 바인딩 된 후에 실행되는 이벤트 핸들러를 정의 합니다.</p>
                 <p lang="en_US">Defines an event handler that is executed after data is bound to the row element created when bind or add.</p>
-                <pre lang="ko_KR"><code class="language-javascript">rowHandler : function(rowIdx, rowEle, rowData) {
+                <pre lang="ko_KR"><code>rowHandler : function(rowIdx, rowEle, rowData) {
     // this : N.list 인스턴스
     // rowIdx : 생성 된 행 index
     // rowEle : 생성 된 행 요소(li)
     // rowData : 생성 된 행의 Data
 }</code></pre>
-                <pre lang="en_US"><code class="language-javascript">rowHandler : function(rowIdx, rowEle, rowData) {
+                <pre lang="en_US"><code>rowHandler : function(rowIdx, rowEle, rowData) {
     // this : N.list instance
     // rowIdx : Created row index
     // rowEle : Created row element(li)
@@ -411,7 +411,7 @@
             <td>
                 <p lang="ko_KR">행이 선택 되었을 때 실행되는 이벤트 핸들러를 정의 합니다.</p>
                 <p lang="en_US">Defines an event handler that is executed when a row is selected.</p>
-                <pre lang="ko_KR"><code class="language-javascript">onSelect : function(rowIdx, rowEle, rowData, beforeRowIdx, e) {
+                <pre lang="ko_KR"><code>onSelect : function(rowIdx, rowEle, rowData, beforeRowIdx, e) {
     // this : N.list 인스턴스
     // rowIdx : 선택 된 행 index
     // rowEle : 선택 된 행 요소(li)
@@ -419,7 +419,7 @@
     // beforeRowIdx : 바로 전에 선택 된 행의 index
     // e : click 이벤트 객체
 }</code></pre>
-                <pre lang="en_US"><code class="language-javascript">onSelect : function(rowIdx, rowEle, rowData, beforeRowIdx, e) {
+                <pre lang="en_US"><code>onSelect : function(rowIdx, rowEle, rowData, beforeRowIdx, e) {
     // this : N.list instance
     // rowIdx : Selected row index
     // rowEle : Selected row element(li)
@@ -441,14 +441,14 @@
             <td>
                 <p lang="ko_KR">데이터가 바인딩이 완료 된 후에 실행 되는 이벤트 핸들러를 정의 합니다.</p>
                 <p lang="en_US">Define an event handler that is executed after data is bound.</p>
-                <pre lang="ko_KR"><code class="language-javascript">onBind : function(context, data, isFirstPage, isLastPage) {
+                <pre lang="ko_KR"><code>onBind : function(context, data, isFirstPage, isLastPage) {
     // this : N.list 인스턴스
     // context : context 요소
     // data : 바인딩 된 데이터
     // isFirstPage : 스크롤 페이징 할 때 첫 페이지인지 여부(스크롤 페이징 하지 않으면 true 반환)
     // isLastPage : 스크롤 페이징 할 때 마지막 페이지 인지 여부(스크롤 페이징 하지 않으면 true 반환)
 }</code></pre>
-                <pre lang="en_US"><code class="language-javascript">onBind : function(context, data, isFirstPage, isLastPage) {
+                <pre lang="en_US"><code>onBind : function(context, data, isFirstPage, isLastPage) {
     // this : N.list instance
     // context : context element
     // data : Bound data

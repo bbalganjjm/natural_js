@@ -82,7 +82,7 @@
                     <div>
                        <p lang="ko_KR">정규 표현식 문자열입니다. 큰따옴표나 작은따옴표로 감싸지 않아야 합니다.</p>
                        <p lang="en_US">Regular expression string. It should not be enclosed in double or single quotation marks.</p>
-<pre><code class="language-javascript"><span lang="ko_KR">/* href 속성에 "Mr.Lee" 혹은 "Mr.Kim" 을 포함하는 모든 a 태그 추출 */</span><span lang="en_US">/* Extract all a tags that contain "Mr.Lee" or "Mr.Kim" in the href attribute. */</span>
+<pre><code><span lang="ko_KR">/* href 속성에 "Mr.Lee" 혹은 "Mr.Kim" 을 포함하는 모든 a 태그 추출 */</span><span lang="en_US">/* Extract all a tags that contain "Mr.Lee" or "Mr.Kim" in the href attribute. */</span>
 N("a:regexp(href, 'Mr\\.(Lee|Kim)')"); // (X)
 N('a:regexp(href, "Mr\\.(Lee|Kim)")'); // (X)
 N("a:regexp(href, Mr\\.(Lee|Kim))"); // (O)
@@ -101,11 +101,11 @@ N("a:regexp(href, Mr\\.(Lee|Kim))"); // (O)
     <p lang="ko_KR">1. 다중 class 속성 값을 가진 요소 필터링</p>
     <p lang="en_US">1. Filtering elements with multiple class attribute values</p>
 
-    <pre><code class="language-javascript">&lt;div class="someClassA classB"&gt;&lt;/div&gt;
+    <pre><code>&lt;div class="someClassA classB"&gt;&lt;/div&gt;
 
 N("div:regexp(class, ^someClass)")</code></pre>
 
-    <pre><code class="language-javascript">&lt;div class="searchBtn"&gt;&lt;/div&gt;
+    <pre><code>&lt;div class="searchBtn"&gt;&lt;/div&gt;
 &lt;div class="searchBtn"&gt;&lt;/div&gt;
 &lt;div class="searchButton"&gt;&lt;/div&gt;
 
@@ -113,20 +113,20 @@ N("div:regexp(class, Btn$|Button$)")</code></pre>
 
     <p lang="ko_KR">2. data 속성의 프로퍼티 명으로 필터링</p>
     <p lang="en_US">2. Filter by property name of data attribute</p>
-    <pre><code class="language-javascript">&lt;div data-sample="test-1"&gt;&lt;/div&gt;
+    <pre><code>&lt;div data-sample="test-1"&gt;&lt;/div&gt;
 &lt;div data-sample="test-2"&gt;&lt;/div&gt;
 
 N("div:regexp(data:sample, test-[1-2])")</code></pre>
 
     <p lang="ko_KR">3. css 속성의 프로퍼티 명으로 필터링</p>
     <p lang="en_US">3. Filter by property name of css attribute</p>
-<pre><code class="language-javascript">&lt;div style="width:128px;"&gt;&lt;/div&gt;
+<pre><code>&lt;div style="width:128px;"&gt;&lt;/div&gt;
 
 N("div:regexp(css:width, ^128px)")</code></pre>
 
     <p lang="ko_KR">4. id 속성 값으로 필터링</p>
     <p lang="en_US">4. Filter by id attribute value</p>
-<pre><code class="language-javascript">&lt;div id="page-1"&gt;&lt;div id="page-2"&gt;&lt;div id="page-3"&gt;
+<pre><code>&lt;div id="page-1"&gt;&lt;div id="page-2"&gt;&lt;div id="page-3"&gt;
 
 N("div:regexp(id, page-[0-9])")</code></pre>
 

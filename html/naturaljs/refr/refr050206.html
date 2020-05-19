@@ -19,7 +19,7 @@
             <td>
                 <p>원하는 시점에 로딩바와 화면클릭을 차단하는 요소를 생성 할 수 있습니다.</p>
                 <p class="alert">다음과 같이 호출하여 N.doc.createLoadIndicator 함수의 this 를 생성된 N.docs 인스턴스로 지정 합니다.</p>
-                <pre><code class="language-javascript">var docsInst = N("#docsContainer").docs();
+                <pre><code>var docsInst = N("#docsContainer").docs();
 ...
 N.docs.createLoadIndicator.call(docsInst);
 </code></pre>
@@ -34,7 +34,7 @@ N.docs.createLoadIndicator.call(docsInst);
             <td>
                 <p>원하는 시점에 로딩바의 진행률을 업데이트 할 수 있습니다.</p>
                 <p class="alert">다음과 같이 호출하여 N.doc.updateLoadIndicator 함수의 this 를 생성된 N.docs 인스턴스로 지정 합니다.</p>
-                <pre><code class="language-javascript">var docsInst = N("#docsContainer").docs();
+                <pre><code>var docsInst = N("#docsContainer").docs();
 ...
 N.docs.createLoadIndicator.call(docsInst);
 ...
@@ -76,7 +76,7 @@ N.docs.updateLoadIndicator.call(docsInst, 0, 2);
             <td>
                 <p>>원하는 시점에 로딩바와 화면클릭을 차단하는 요소를 제거(Hide) 할 수 있습니다.</p>
                 <p class="alert">다음과 같이 호출하여 N.doc.removeLoadIndicator 함수의 this 를 생성된 N.docs 인스턴스로 지정 합니다.</p>
-                <pre><code class="language-javascript">var docsInst = N("#docsContainer").docs();
+                <pre><code>var docsInst = N("#docsContainer").docs();
 ...
 N.docs.createLoadIndicator.call(docsInst);
 ...

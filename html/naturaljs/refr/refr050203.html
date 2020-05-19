@@ -97,7 +97,7 @@
                     <li lang="ko_KR">rightCorrectionPx : 마지막 탭이 잘리거나 여백이 생겼을 때 1씩 증감하여 탭의 모양을 보정 할 수 있는 옵션 입니다.</li>
                     <li lang="en_US">rightCorrectionPx : This option allows you to correct the shape of the tab by increasing or decreasing by 1 when the last tab is cut or a margin is created.</li>
                 </ul>
-                <pre><code class="language-javascript">N("#docs").docs({
+                <pre><code>N("#docs").docs({
     tabScrollCorrection : {
         rightCorrectionPx : 1
     }
@@ -182,13 +182,13 @@
             <td>
                 <p lang="ko_KR">컨텐츠가 로딩 되기 전 실행되는 이벤트 입니다.</p>
                 <p lang="en_US">Define an event handler that is excuted before the content is loaded.</p>
-                <pre lang="ko_KR"><code class="language-javascript">onBeforeLoad : function(docId, target) {
+                <pre lang="ko_KR"><code>onBeforeLoad : function(docId, target) {
     // docId : document id
     // target : 로드 된 컨텐츠를 넣어 줄 요소
 
     var doc = this.doc(docId); // document 정보 가져오기
 }</code></pre>
-                <pre lang="en_US"><code class="language-javascript">onBeforeLoad : function(docId, target) {
+                <pre lang="en_US"><code>onBeforeLoad : function(docId, target) {
     // docId : document id
     // target : Element to put loaded content
 
@@ -208,7 +208,7 @@
             <td>
                 <p lang="ko_KR">페이지가 로딩 된 후 실행되는 이벤트 입니다.</p>
                 <p lang="en_US">Define an event handler that is excuted after the content is loaded.</p>
-                <pre lang="ko_KR"><code class="language-javascript">onLoad : function(docId) {
+                <pre lang="ko_KR"><code>onLoad : function(docId) {
     // docId : document id
 
     var doc = this.doc(docId); // document 정보 가져오기
@@ -216,7 +216,7 @@
     var view = cont.view;
     var request = cont.request;
 }</code></pre>
-                <pre lang="en_US"><code class="language-javascript">onLoad : function(docId) {
+                <pre lang="en_US"><code>onLoad : function(docId) {
     // docId : document id
 
     var doc = this.doc(docId); // get document info
@@ -236,12 +236,12 @@
             <td>
                 <p lang="ko_KR">페이지가 로딩 될 때 실행되는 Ajax 요청들이 캡쳐 되기 전에 실행되는 이벤트 입니다.</p>
                 <p lang="en_US">Define an event handler that is excuted before the Ajax request is captured when the page is loaded.</p>
-                <pre lang="ko_KR"><code class="language-javascript">onBeforeEntireLoad : function(docId) {
+                <pre lang="ko_KR"><code>onBeforeEntireLoad : function(docId) {
     // docId : document id
 
     var doc = this.doc(docId); // document 정보 가져오기
 }</code></pre>
-                <pre lang="en_US"><code class="language-javascript">onBeforeEntireLoad : function(docId) {
+                <pre lang="en_US"><code>onBeforeEntireLoad : function(docId) {
 
     var doc = this.doc(docId); // get document info
 }</code></pre>
@@ -257,14 +257,14 @@
             <td>
                 <p lang="ko_KR">페이지가 로딩 될 때 실행되는 Ajax 요청들이 모두 완료되기 전에 에러가 발생 되었을때 실행되는 이벤트 핸들러를 정의 합니다.</p>
                 <p lang="en_US">Define an event handler that is excuted when an error occurs before all Ajax requests complete when the page loads.</p>
-                <pre lang="ko_KR"><code class="language-javascript">onErrorEntireLoad : function(e, request, xhr, textStatus, callback) {
+                <pre lang="ko_KR"><code>onErrorEntireLoad : function(e, request, xhr, textStatus, callback) {
     // e(arguments[0]) : ErrorThrown
     // request(arguments[1]) : Communicator.request
     // xhr(arguments[2]) : jQuery XMLHTTORequest
     // textStatus(arguments[3]) : "success"(요청이 성공 했을 경우) 나 "error"(요청 시 submit callback 에서(서버에서) 오류가 발생하는 경우)
     // callback(arguments[4]) : textStatus 값이 "success"인 경우 submit 메소드의 인자로 지정된 콜백 함수.
 }</code></pre>
-                <pre lang="ko_KR"><code class="language-javascript">onErrorEntireLoad : function(e, request, xhr, textStatus, callback) {
+                <pre lang="ko_KR"><code>onErrorEntireLoad : function(e, request, xhr, textStatus, callback) {
     // e(arguments[0]) : ErrorThrown
     // request(arguments[1]) : Communicator.request
     // xhr(arguments[2]) : jQuery XMLHTTORequest
@@ -283,7 +283,7 @@
             <td>
                 <p lang="ko_KR">페이지가 로딩 될 때 실행되는 Ajax 요청들이 모두 완료된 후에 실행되는 이벤트 핸들러를 정의 합니다.</p>
                 <p lang="en_US">Define an event handler that is excuted after all Ajax requests complete when the page loads.</p>
-                <pre lang="ko_KR"><code class="language-javascript">onEntireLoad : function(docId) {
+                <pre lang="ko_KR"><code>onEntireLoad : function(docId) {
     // docId : document id
 
     var doc = this.doc(docId); // document 정보 가져오기
@@ -291,7 +291,7 @@
     var view = cont.view;
     var request = cont.request;
 }</code></pre>
-                <pre lang="en_US"><code class="language-javascript">onEntireLoad : function(docId) {
+                <pre lang="en_US"><code>onEntireLoad : function(docId) {
     // docId : document id
 
     var doc = this.doc(docId); // get document info
@@ -309,7 +309,7 @@
             <td>
                 <p lang="ko_KR">선택한 탭이 활성화되기 전에 실행되는 이벤트 핸들러를 정의 합니다.</p>
                 <p lang="en_US">Define an event handler that is excuted before the selected tab is activated.</p>
-                <pre lang="ko_KR"><code class="language-javascript">onBeforeActive : function(docId) {
+                <pre lang="ko_KR"><code>onBeforeActive : function(docId) {
     // docId : document id
 
     var doc = this.doc(docId); // document 정보 가져오기
@@ -317,7 +317,7 @@
     var view = cont.view;
     var request = cont.request;
 }</code></pre>
-                <pre lang="en_US"><code class="language-javascript">onBeforeActive : function(docId) {
+                <pre lang="en_US"><code>onBeforeActive : function(docId) {
     // docId : document id
 
     var doc = this.doc(docId); // get document info
@@ -335,7 +335,7 @@
             <td>
                 <p lang="ko_KR">선택한 탭이 활성화된 후에 실행되는 이벤트 핸들러를 정의 합니다.</p>
                 <p lang="en_US">Define an event handler that is excuted after the selected tab is activated.</p>
-                <pre lang="ko_KR"><code class="language-javascript">onActive : function(docId) {
+                <pre lang="ko_KR"><code>onActive : function(docId) {
     // docId : document id
 
     var doc = this.doc(docId); // document 정보 가져오기
@@ -343,7 +343,7 @@
     var view = cont.view;
     var request = cont.request;
 }</code></pre>
-                <pre lang="en_US"><code class="language-javascript">onActive : function(docId) {
+                <pre lang="en_US"><code>onActive : function(docId) {
     // docId : document id
 
     var doc = this.doc(docId); // get document info
@@ -361,7 +361,7 @@
             <td>
                 <p lang="ko_KR">선택한 탭이 비활성화되기 전에 실행되는 이벤트 핸들러를 정의 합니다.</p>
                 <p lang="en_US">Define an event handler that is excuted before the selected tab is deactivated.</p>
-                <pre lang="ko_KR"><code class="language-javascript">onBeforeInactive : function(docId) {
+                <pre lang="ko_KR"><code>onBeforeInactive : function(docId) {
     // docId : document id
 
     var doc = this.doc(docId); // document 정보 가져오기
@@ -369,7 +369,7 @@
     var view = cont.view;
     var request = cont.request;
 }</code></pre>
-                <pre lang="en_US"><code class="language-javascript">onBeforeInactive : function(docId) {
+                <pre lang="en_US"><code>onBeforeInactive : function(docId) {
     // docId : document id
 
     var doc = this.doc(docId); // get document info
@@ -387,7 +387,7 @@
             <td>
                 <p lang="ko_KR">선택한 탭이 비활성화된 후에 실행되는 이벤트 핸들러를 정의 합니다.</p>
                 <p lang="en_US">Define an event handler that is excuted after the selected tab is deactivated.</p>
-                <pre lang="ko_KR"><code class="language-javascript">onInactive : function(docId) {
+                <pre lang="ko_KR"><code>onInactive : function(docId) {
     // docId : document id
 
     var doc = this.doc(docId); // document 정보 가져오기
@@ -395,7 +395,7 @@
     var view = cont.view;
     var request = cont.request;
 }</code></pre>
-                <pre lang="en_US"><code class="language-javascript">onInactive : function(docId) {
+                <pre lang="en_US"><code>onInactive : function(docId) {
     // docId : document id
 
     var doc = this.doc(docId); // get document info
@@ -413,7 +413,7 @@
             <td>
                 <p lang="ko_KR">선택한 탭의 상태가 제거되기 전에 실행되는 이벤트 핸들러를 정의 합니다.</p>
                 <p lang="en_US">Define an event handler that is excuted before the state of selected tab is removed.</p>
-                <pre lang="ko_KR"><code class="language-javascript">onBeforeRemoveState : function(docId) {
+                <pre lang="ko_KR"><code>onBeforeRemoveState : function(docId) {
     // docId : document id
 
     var doc = this.doc(docId); // document 정보 가져오기
@@ -421,7 +421,7 @@
     var view = cont.view;
     var request = cont.request;
 }</code></pre>
-                <pre lang="en_US"><code class="language-javascript">onBeforeRemoveState : function(docId) {
+                <pre lang="en_US"><code>onBeforeRemoveState : function(docId) {
     // docId : document id
 
     var doc = this.doc(docId); // get document info
@@ -439,7 +439,7 @@
             <td>
                 <p lang="ko_KR">선택한 탭의 상태가 제거된 후에 실행되는 이벤트 핸들러를 정의 합니다.</p>
                 <p lang="en_US">Define an event handler that is excuted after the state of selected tab is removed.</p>
-                <pre lang="ko_KR"><code class="language-javascript">onRemoveState : function(docId) {
+                <pre lang="ko_KR"><code>onRemoveState : function(docId) {
     // docId : document id
 
     var doc = this.doc(docId); // document 정보 가져오기
@@ -447,7 +447,7 @@
     var view = cont.view;
     var request = cont.request;
 }</code></pre>
-                <pre lang="en_US"><code class="language-javascript">onRemoveState : function(docId) {
+                <pre lang="en_US"><code>onRemoveState : function(docId) {
     // docId : document id
 
     var doc = this.doc(docId); // get document info
@@ -465,7 +465,7 @@
             <td>
                 <p lang="ko_KR">선택한 탭의 상태가 제거된 전에 실행되는 이벤트 핸들러를 정의 합니다.</p>
                 <p lang="en_US">Define an event handler that is excuted before the selected tab is removed.</p>
-                <pre lang="ko_KR"><code class="language-javascript">onBeforeRemove : function(docId) {
+                <pre lang="ko_KR"><code>onBeforeRemove : function(docId) {
     // docId : document id
 
     var doc = this.doc(docId); // document 정보 가져오기
@@ -473,7 +473,7 @@
     var view = cont.view;
     var request = cont.request;
 }</code></pre>
-                <pre lang="en_US"><code class="language-javascript">onBeforeRemove : function(docId) {
+                <pre lang="en_US"><code>onBeforeRemove : function(docId) {
     // docId : document id
 
     var doc = this.doc(docId); // get document info
@@ -491,7 +491,7 @@
             <td>
                 <p lang="ko_KR">선택한 탭이 제거된 후에 실행되는 이벤트 핸들러를 정의 합니다.</p>
                 <p lang="en_US">Define an event handler that is excuted after the selected tab is removed.</p>
-                <pre lang="ko_KR"><code class="language-javascript">onRemove : function(docId) {
+                <pre lang="ko_KR"><code>onRemove : function(docId) {
     // docId : document id
 
     var doc = this.doc(docId); // document 정보 가져오기
@@ -499,7 +499,7 @@
     var view = cont.view;
     var request = cont.request;
 }</code></pre>
-                <pre lang="en_US"><code class="language-javascript">onRemove : function(docId) {
+                <pre lang="en_US"><code>onRemove : function(docId) {
     // docId : document id
 
     var doc = this.doc(docId); // get document info

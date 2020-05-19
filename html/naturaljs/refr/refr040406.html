@@ -4,91 +4,150 @@
         <span lang="en_US">Examples</span>
     </h2>
 
-    <h4 class="notIndex">1. 지정한 영역(.popupArea)을 팝업으로 띄우기</h4>
-    <pre class="line-numbers"><code class="language-markup">&lt;div title="Popup Example" class="popupArea" style="height: 200px;border: 3px dotted #4CAF50;"&gt;이 블록이 팝업으로 보이나요?&lt;/div&gt;
+    <h4 lang="ko_KR" class="notIndex">1. 지정한 요소(.popupArea)로 팝업으로 생성 하기</h4>
+    <h4 lang="en_US" class="notIndex">1. Creating the popup with specified element(.popupArea)</h4>
+    <pre><code>&lt;div title="Popup Example" class="popupArea" style="height: 200px;border: 3px dotted #4CAF50;"&gt;Popup Block...&lt;/div&gt;
 
 &lt;script type="text/javascript"&gt;
-       N(".popupArea").popup().open();
+       <strong>N(".popupArea")</strong>.popup().open();
 &lt;/script&gt;</code></pre>
 
-    <h4 class="notIndex">2. 다른 (블록)페이지를 팝업으로 띄우기</h4>
-    <pre class="line-numbers"><code class="language-markup">&lt;script type="text/javascript"&gt;
-    var popup = N().popup("html/indx/header.html");
+    <h4 lang="ko_KR" class="notIndex">2. 페이지 불러와서 팝업으로 생성 하기</h4>
+    <h4 lang="en_US" class="notIndex">2. Load page and create it as a popup</h4>
+    <pre><code>&lt;script type="text/javascript"&gt;
+    var popup = N().popup(<strong>"page.html"</strong>);
     popup.open();
 &lt;/script&gt;</code></pre>
-    <h4 class="notIndex">3. 다른 (블록)페이지를 드래그 가능한 팝업으로 띄우기</h4>
-    <pre class="line-numbers"><code class="language-markup">&lt;script type="text/javascript"&gt;
+    <h4 lang="ko_KR" class="notIndex">3. 페이지 불러와서 드래그 가능한 팝업으로 생성 하기</h4>
+    <h4 lang="en_US" class="notIndex">3. Load page and create it as draggable popup</h4>
+    <pre><code>&lt;script type="text/javascript"&gt;
        var popup = N().popup({
-           url: "html/indx/header.html",
-           title: "Global Navigation Bar",
+           <strong>url: "page.html",</strong>
+           title: "Title",
            width: 800,
-           draggable: true
+           <strong>draggable: true</strong>
        });
        popup.open();
 &lt;/script&gt;</code></pre>
 
-    <h4 class="notIndex">4. 다른 (블록)페이지를 팝업으로 띄우기(상태가 유지 되지 않고 매번 팝업을 다시 불러옴)</h4>
-    <pre class="line-numbers"><code class="language-markup">&lt;script type="text/javascript"&gt;
+    <h4 lang="ko_KR" class="notIndex">4. 팝업이 열릴 때 마다 페이지가 다시 로드 되는 팝업 생성 하기</h4>
+    <h4 lang="en_US" class="notIndex">4. Create a popup that reloads the page every time a popup is opened</h4>
+    <pre lang="ko_KR"><code>&lt;script type="text/javascript"&gt;
        N().popup({
-           url: "html/indx/header.html",
-           title: "Global Navigation Bar",
+           <strong>url: "page.html",</strong>
+           title: "Title",
            width: 800,
-           closeMode: "remove" // "hide" 는 팝업의 상태를 유지 하고 "remove" 는 팝업을 닫을 때 마다 팝업 요소를 제거 함.
+           <strong>closeMode: "remove"</strong>
        }).open();
 &lt;/script&gt;</code></pre>
 
-    <h4 class="notIndex">5. 팝업에 데이터 전달하고 팝업으로부터 데이터 받기</h4>
-    <p>5.1. 팝업페이지(popup.html)</p>
-    <pre class="line-numbers"><code class="language-markup">&lt;!-- Style --&gt;
+    <h4 lang="ko_KR" class="notIndex">5. 팝업에 데이터를 전달하고 받기</h4>
+    <h4 lang="en_US" class="notIndex">5. Passing and receiving data in popups</h4>
+
+    <p lang="ko_KR">5.1. 팝업 페이지(popup.html)</p>
+    <p lang="en_US">5.1. Popup page(popup.html)</p>
+    <pre lang="ko_KR"><code>&lt;!-- Style --&gt;
 &lt;style&gt;
-    .POPUP01 .result { width: 400px; height: 300px; border: 1px solid #4CAF50; }
+    .popup-0001 .result { width: 400px; height: 300px; border: 1px solid #4CAF50; }
 &lt;/style&gt;
 
 &lt;!-- View --&gt;
-&lt;article class="POPUP01" title="onOpen Example"&gt;
+&lt;article class="popup-0001" title="onOpen Example"&gt;
     &lt;p class="result"&gt;&lt;/p&gt;
-    &lt;button class="close"&gt;닫기&lt;/button&gt;
+    &lt;button class="btn-ok"&gt;Ok&lt;/button&gt;
 &lt;/article&gt;
 
 &lt;!-- Controller --&gt;
 &lt;script type="text/javascript"&gt;
-N(".POPUP01").cont({
+N(".popup-0001").cont({
     init : function(view, request) {
-        var caller = this.caller; // caller는 현제 팝업페이지를 열어준 N.popup 인스턴스
-        N(".close", this.view).click(function(onCloseData) { // 닫기버튼에 이벤트 바인드
-            caller.close("Hello~ parent's Opener"); // close 함수의 첫번째 인자로 onCloseData 데이터 전달
+        var caller = this.caller; // caller는 이 팝업 페이지를 열어준 N.popup 인스턴스
+        N(".btn-ok", view).click(function(onCloseData) { // Ok 버튼에 이벤트 바인드
+            <strong>caller.close</strong>("Hello onClose."); // close 함수의 첫번째 인자로 onCloseData 데이터 전달
         });
     },
     // 팝업이 열릴때마다 실행될 함수
-    onOpenFn : function(onOpenData) {
+    <strong>onOpenFn</strong> : function(onOpenData) {
+        N(".result", this.view).text(onOpenData);
+    }
+});
+&lt;/script&gt;</code></pre>
+    <pre lang="en_US"><code>&lt;!-- Style --&gt;
+&lt;style&gt;
+    .popup-0001 .result { width: 400px; height: 300px; border: 1px solid #4CAF50; }
+&lt;/style&gt;
+
+&lt;!-- View --&gt;
+&lt;article class="popup-0001" title="onOpen Example"&gt;
+    &lt;p class="result"&gt;&lt;/p&gt;
+    &lt;button class="btn-ok"&gt;Ok&lt;/button&gt;
+&lt;/article&gt;
+
+&lt;!-- Controller --&gt;
+&lt;script type="text/javascript"&gt;
+N(".popup-0001").cont({
+    init : function(view, request) {
+        var caller = this.caller; // caller is the N.popup instance that opened this popup page.
+        N(".btn-ok", view).click(function(onCloseData) { // Binds event to Ok button
+            <strong>caller.close</strong>("Hello onClose."); // Passes the onCloseData data as the first argument of the close function.
+        });
+    },
+    // This function is executed whenever a popup is opened.
+    <strong>onOpenFn</strong> : function(onOpenData) {
         N(".result", this.view).text(onOpenData);
     }
 });
 &lt;/script&gt;</code></pre>
 
-    <p>5.2. 부모페이지(parent.html)</p>
-    <pre class="line-numbers"><code class="language-markup">&lt;!-- Style --&gt;
+    <p lang="ko_KR">5.2. 부모 페이지(parent.html)</p>
+    <p lang="en_US">5.2. Parent page(parent.html)</p>
+    <pre lang="ko_KR"><code>&lt;!-- Style --&gt;
 &lt;style&gt;
-    .POPUP01 .result { width: 400px; height: 300px; border: 1px solid #4CAF50; }
+    .parent-0001 .result { width: 400px; height: 300px; border: 1px solid #4CAF50; }
 &lt;/style&gt;
 
 &lt;!-- View --&gt;
-&lt;article class="POPUP02" title="onOpen Example"&gt;
+&lt;article class="parent-0001" title="onOpen Example"&gt;
     &lt;p class="result"&gt;&lt;/p&gt;
 &lt;/article&gt;
 
 &lt;!-- Controller --&gt;
 &lt;script type="text/javascript"&gt;
-N(".POPUP02").cont({
+N(".parent-0001").cont({
     init : function(view, request) {
         var popup = N().popup({
             url: "./popup.html",
-            onOpen: "onOpenFn", // 팝업이 열릴때마다 실행될 함수명
-            onClose: function(onCloseData) { // 팝업이 닫힐때마다 실행 될 onClose 이벤트 핸들러
-                N(".result", this.view).text(onCloseData);
+            <strong>onOpen</strong>: "onOpenFn", // 팝업이 열릴때마다 실행될 함수명
+            <strong>onClose</strong>: function(onCloseData) { // 팝업이 닫힐때마다 실행 될 onClose 이벤트 핸들러
+                N(".result", view).text(onCloseData);
             }
         });
-        popup.open("Hello~ popup's onOpen!"); // open 함수의 첫번째 인자로 onOpenData 데이터 전달
+        popup.open("Hello onOpen."); // open 함수의 첫번째 인자로 onOpenData 데이터 전달
+    }
+});
+&lt;/script&gt;</code></pre>
+    <pre lang="en_US"><code>&lt;!-- Style --&gt;
+&lt;style&gt;
+    .parent-0001 .result { width: 400px; height: 300px; border: 1px solid #4CAF50; }
+&lt;/style&gt;
+
+&lt;!-- View --&gt;
+&lt;article class="parent-0001" title="onOpen Example"&gt;
+    &lt;p class="result"&gt;&lt;/p&gt;
+&lt;/article&gt;
+
+&lt;!-- Controller --&gt;
+&lt;script type="text/javascript"&gt;
+N(".parent-0001").cont({
+    init : function(view, request) {
+        var popup = N().popup({
+            url: "./popup.html",
+            <strong>onOpen</strong>: "onOpenFn", // Function name to be executed each time a popup is opened
+            <strong>onClose</strong>: function(onCloseData) { // onClose event handler to be fired whenever the popup is closed
+                N(".result", view).text(onCloseData);
+            }
+        });
+        popup.open("Hello onOpen."); // Passes the onOpenData data as the first argument of the open function.
     }
 });
 &lt;/script&gt;</code></pre>

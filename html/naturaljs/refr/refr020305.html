@@ -34,7 +34,7 @@
                 <p lang="en_US">Define a callback function that handles the server's response when the request is successful.</p>
                 <p lang="ko_KR">HTML 페이지를 요청 하면 콜백 함수의 인자로 로드 한 페이지의 Contoller object 가 반환되고 이 외의 요청은 data 객체와 Communicator.request 객체가 반환 됩니다.</p>
                 <p lang="en_US">If an HTML page is requested, the controller object of the page loaded as the argument of the callback function is returned. For other requests, the data object and the Communicator.request object are returned.</p>
-                <pre><code class="language-javascript">// Data
+                <pre><code>// Data
 N.comm("data.json").submit(function(data, request) {
     N.log(data, request);
 });
@@ -80,7 +80,7 @@ N(".targetElement").comm("page.html").submit(function(cont) {
                     <li lang="ko_KR">callback(arguments[4]) : textStatus 값이 "success" 일때 submit 메서드의 인자로 지정한 콜백 함수.</li>
                     <li lang="en_US">callback(arguments[4]) : Callback function specified as argument of submit method when textStatus value is "success".</li>
                 </ul>
-                <pre lang="ko_KR"><code class="language-javascript">
+                <pre lang="ko_KR"><code>
 N.comm("data.json").error(function(e, request, xhr, textStatus, callback) {
     // 2. col01.length 오류에 대한 첫번째 오류 처리
 }).error(function(e, request, xhr, textStatus, callback) {
@@ -90,7 +90,7 @@ N.comm("data.json").error(function(e, request, xhr, textStatus, callback) {
     col01.length; // 1. undefined 관련 오류 발생
 });
 </code></pre>
-                <pre lang="en_US"><code class="language-javascript">
+                <pre lang="en_US"><code>
 N.comm("data.json").error(function(e, request, xhr, textStatus, callback) {
     // 2. First error handling for col01.length error
 }).error(function(e, request, xhr, textStatus, callback) {

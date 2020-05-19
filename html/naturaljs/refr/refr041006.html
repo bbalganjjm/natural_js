@@ -5,7 +5,7 @@
     </h2>
 
     <h4 class="notIndex">1. Pagination 생성</h4>
-    <pre class="line-numbers"><code class="language-markup">&lt;div class="paginationExample10"&gt;
+    <pre><code>&lt;div class="paginationExample10"&gt;
     &lt;ul&gt;
         &lt;li&gt;&lt;a href="#" title="첫페이지"&gt;first&lt;/a&gt;&lt;/li&gt; &lt;!-- first 버튼 생략가능(표기하지 않으면 첫페이지로 가기 버튼이 보이지 않습니다) --&gt;
         &lt;li&gt;&lt;a href="#" title="이전"&gt;prev&lt;/a&gt;&lt;/li&gt;
@@ -31,7 +31,7 @@
 &lt;/script&gt;</code></pre>
 
     <h4 class="notIndex">2. [3] 페이지를 기본 선택하여 생성</h4>
-    <pre class="line-numbers"><code class="language-markup">&lt;div class="paginationExample20"&gt;
+    <pre><code>&lt;div class="paginationExample20"&gt;
     &lt;ul&gt;
         &lt;li&gt;&lt;a href="#" title="첫페이지"&gt;first&lt;/a&gt;&lt;/li&gt; &lt;!-- first 버튼 생략가능(표기하지 않으면 첫페이지로 가기 버튼이 보이지 않습니다) --&gt;
         &lt;li&gt;&lt;a href="#" title="이전페이지"&gt;prev&lt;/a&gt;&lt;/li&gt;
@@ -57,7 +57,7 @@
 &lt;/script&gt;</code></pre>
 
     <h4 class="notIndex">3. N.pagination과 N.grid 를 연동하여 그리드 데이터 페이징</h4>
-    <pre class="line-numbers"><code class="language-markup">&lt;table class="paginationExample31"&gt;
+    <pre><code>&lt;table class="paginationExample31"&gt;
     &lt;thead&gt;&lt;!-- 컬럼 타이틀 영역 --&gt;
         &lt;tr&gt;
             &lt;th&gt;name&lt;/th&gt;
@@ -107,7 +107,7 @@
 
     <h4 class="notIndex">4. N.pagination과 N.grid 를 연동하여 서버(DB) 페이징</h4>
     <p class="alert">서버에서 DB 쿼리로 페이징 시  먼저 조회하고자 하는 전체 행수를 가져오고 onChange 이벤트 핸들러의 인자로 들어오는 currPageNavInfo 정보로 선택될 DB 로우의 시작값(currPageNavInfo.startRowNum)과 얼마만큼 가져올지 등의 정보(currPageNavInfo.countPerPage)를 서버에 파라미터로 전송한 결과 데이터를 N.grid 에 bind하는 형태로 DB 페이징을 처리 할 수 있습니다.</p>
-    <pre class="line-numbers"><code class="language-markup">&lt;table class="paginationExample41"&gt;
+    <pre><code>&lt;table class="paginationExample41"&gt;
     &lt;thead&gt;&lt;!-- 컬럼 타이틀 영역 --&gt;
         &lt;tr&gt;
             &lt;th&gt;name&lt;/th&gt;
@@ -162,7 +162,7 @@
         DB 페이징 시 리스트 데이터에 totalCount 가 같이 전달 된다면 다음과 같이 N.grid 를 주(主)로 하고 pagination 인스턴스에서 bind(totalCnt) 메서드를 매번 호출하여 처리 할 수도 있습니다.
         이러한 방식의 데이터 페이징은 페이지가 바뀔 때마다 페이지네이션 인덱싱을 다시 한다는 단점이 있지만 데이터 조회 후 다른 사용자가 데이터를 추가하거나 삭제하여도 페이징을 정확하게 할 수 있는 장점이 있습니다.
     </p>
-<pre class="line-numbers"><code class="language-markup">&lt;script type="text/javascript"&gt;
+<pre><code>&lt;script type="text/javascript"&gt;
     var grid = N(data).grid(".paginationExample41"); // 1. N.grid 인스턴스 생성
 
     var pagination = N(data).pagination({ // 2. N.pagination 인스턴스 생성

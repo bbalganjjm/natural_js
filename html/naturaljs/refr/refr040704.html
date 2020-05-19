@@ -50,7 +50,7 @@
                                 <p lang="en_US"><strong>If the property name of the data and the value of the id attribute of the element are the same, the data is bound.</strong></p>
                 <p lang="ko_KR" class="alert">Natural-JS 의 모든 데이터 관련 컴포넌트는 빠른 바인딩 속도를 위해 어쩔수 없이 id 속성을 사용 합니다.</p>
                 <p lang="en_US" class="alert">All data-related components of Natural-JS inevitably use id attribute for fast binding speed.</p>
-                <pre><code class="language-markup">&lt;table class="form-context"&gt;
+                <pre><code>&lt;table class="form-context"&gt;
     &lt;tr&gt;
         &lt;th&gt;&lt;label for="name"&gt;name&lt;/label&gt;&lt;/th&gt;
         &lt;td&gt;&lt;input id="name" type="text"&gt;&lt;/td&gt;
@@ -198,14 +198,14 @@
                                 때문에 다른 이벤트 들 처럼 전역 으로 설정한 이벤트 핸들러를 컴포넌트 이벤트에서 중단 할 수 없습니다.</p>
                 <p lang="en_US" class="alert">If the onBeforeBindValue event is set as a global event option in N.config, the result value of the onBeforeBindValue event handler defined at component initialization is specified as the val (arguments [1]) parameter of the global event handler.
                     Therefore, you cannot stop the globally set event handler from the component event like other events.</p>
-                <pre lang="ko_KR"><code class="language-javascript">onBeforeBindValue : function(ele, val, action) {
+                <pre lang="ko_KR"><code>onBeforeBindValue : function(ele, val, action) {
     // this : N.form 인스턴스
     // ele : 바인드 될 요소
     // val : 바인드 될 값
     // action : N.form 인스턴스의 메서드 명 - "bind" | "val"
     return val; // 반드시 처리 된 값을 다시 리턴 해야 합니다.
 }</code></pre>
-                <pre lang="en_US"><code class="language-javascript">onBeforeBindValue : function(ele, val, action) {
+                <pre lang="en_US"><code>onBeforeBindValue : function(ele, val, action) {
     // this : N.form instance
     // ele : The element to be bound
     // val : The value to be bound
@@ -224,12 +224,12 @@
                 <p lang="en_US">Define an event handler that is executed before data is bound to the form.</p>
                 <p lang="ko_KR" class="alert">N.config(natural.config.js) 에 전역 옵션으로 설정 할 경우 N.form 을 사용하는 모든 컴포넌트(N.grid, N.list)들에서도 적용 됩니다.</p>
                 <p lang="en_US" class="alert">If you set it as a global option in N.config(natural.config.js), all components using N.form(N.grid, N.list) also apply.</p>
-                <pre lang="ko_KR"><code class="language-javascript">onBeforeBind : function(context, rowData) {
+                <pre lang="ko_KR"><code>onBeforeBind : function(context, rowData) {
     // this : N.form 인스턴스
     // context : context 요소
     // rowData : 폼에 바인드 될 데이터
 }</code></pre>
-                <pre lang="en_US"><code class="language-javascript">onBeforeBind : function(context, rowData) {
+                <pre lang="en_US"><code>onBeforeBind : function(context, rowData) {
     // this : N.form instance
     // context : context element
     // rowData : Data to be bound to the form
@@ -246,12 +246,12 @@
                 <p lang="en_US">Define an event handler that is executed after data is bound.</p>
                 <p lang="ko_KR" class="alert">N.config(natural.config.js) 에 전역 옵션으로 설정 할 경우 N.form 을 사용하는 모든 컴포넌트(N.grid, N.list)들에서도 적용 됩니다.</p>
                 <p lang="en_US" class="alert">If you set it as a global option in N.config(natural.config.js), all components using N.form(N.grid, N.list) also apply.</p>
-                <pre lang="ko_KR"><code class="language-javascript">onBind : function(context, rowData) {
+                <pre lang="ko_KR"><code>onBind : function(context, rowData) {
     // this : N.form 인스턴스
     // context : context 요소
     // rowData : 바인딩 된 데이터
 }</code></pre>
-                <pre lang="en_US"><code class="language-javascript">onBind : function(context, rowData) {
+                <pre lang="en_US"><code>onBind : function(context, rowData) {
     // this : N.form instance
     // context : context element
     // rowData : Bound data

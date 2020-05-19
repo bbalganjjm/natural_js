@@ -18,7 +18,7 @@
             <td>
                 <p lang="ko_KR">사용자 정의 포멧 룰</p>
                 <p lang="en_US">Custom format rules</p>
-                <pre lang="ko_KR"><code class="language-javascript">"userRules" : {
+                <pre lang="ko_KR"><code>"userRules" : {
     /*
      * 함수 명이 룰 명이 됨.
      *
@@ -31,7 +31,7 @@
         return str;
     }
 }</code></pre>
-                <pre lang="en_US"><code class="language-javascript">"userRules" : {
+                <pre lang="en_US"><code>"userRules" : {
     /*
      * Function name becomes rule name.
      *
@@ -77,7 +77,7 @@
         </tr>
         <tr>
             <td>formatter.date.Ym</td>
-            <td><pre style="margin: 0;"><code class="language-javascript">function() {
+            <td><pre style="margin: 0;"><code>function() {
     return "Y" + this.dateSepa + "m";
 }</code></pre></td>
             <td style="text-align: center;">O</td>
@@ -88,7 +88,7 @@
         </tr>
         <tr>
             <td>formatter.date.Ymd</td>
-            <td><pre style="margin: 0;"><code class="language-javascript">function() {
+            <td><pre style="margin: 0;"><code>function() {
     return "Y" + this.dateSepa + "m" + this.dateSepa + "d";
 }</code></pre></td>
             <td style="text-align: center;">O</td>
@@ -99,7 +99,7 @@
         </tr>
         <tr>
             <td>formatter.date.YmdH</td>
-            <td><pre style="margin: 0;"><code class="language-javascript">function() {
+            <td><pre style="margin: 0;"><code>function() {
     return this.Ymd() + " H";
 }</code></pre></td>
             <td style="text-align: center;">O</td>
@@ -110,7 +110,7 @@
         </tr>
         <tr>
             <td>formatter.date.YmdHi</td>
-            <td><pre style="margin: 0;"><code class="language-javascript">function() {
+            <td><pre style="margin: 0;"><code>function() {
     return this.Ymd() + " H" + this.timeSepa + "i";
 }</code></pre></td>
             <td style="text-align: center;">O</td>
@@ -121,7 +121,7 @@
         </tr>
         <tr>
             <td>formatter.date.YmdHis</td>
-            <td><pre style="margin: 0;"><code class="language-javascript">function() {
+            <td><pre style="margin: 0;"><code>function() {
     return this.Ymd() + " H" + this.timeSepa + "i" + this.timeSepa + "s";
 }</code></pre></td>
             <td style="text-align: center;">O</td>
@@ -137,7 +137,7 @@
             <td>
                 <p lang="ko_KR">사용자 정의 유효성 검증 룰</p>
                 <p lang="en_US">Custom validation rules</p>
-                <pre lang="ko_KR"><code class="language-javascript">"userRules" : {
+                <pre lang="ko_KR"><code>"userRules" : {
     /*
      * 함수 명이 룰 명이 됨.
      * 검증 실패 메시지는 아래 N.context.attr("data").validator.message 객체에 언어별로 함수명과 같은 프로퍼티명으로 정의.
@@ -151,7 +151,7 @@
         return true;
     }
 }</code></pre>
-                <pre lang="en_US"><code class="language-javascript">"userRules" : {
+                <pre lang="en_US"><code>"userRules" : {
     /*
      * Function name becomes rule name.
      * The validation failure message is defined in the following N.context.attr("data").validator.message object with a property name same a function name for each language.
@@ -169,7 +169,7 @@
         </tr>
         <tr>
             <td>validator.message</td>
-            <td><pre style="margin: 0;"><code class="language-javascript">{
+            <td><pre style="margin: 0;"><code>{
     "ko_KR" : { ... },
     "en_US" : { ... }
 }</code></pre></td>

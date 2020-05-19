@@ -19,7 +19,7 @@
             <td>
                 <p>Natural-JS 의 플러그인 타입으로 제공되는 라이브러리들과 N 객체의 멤버변수나 함수가 정의 되어있는 핵심 클래스입니다.</p>
                 <p>N(selector) 를 호출하면 jQuery 의 init 메서드가 호출되어 Naturl-JS 와 jQuery가 동시에 초기화(Initialize) 됩니다.</p>
-                <pre><code class="language-javascript">var divs = N("div");</code></pre>
+                <pre><code>var divs = N("div");</code></pre>
             </td>
         </tr>
         <tr>
@@ -155,7 +155,7 @@
             <td>
                 <p>에러를 발생 시키고 에러 메시지를 브라우저 브라우저 콘솔에 보여줍니다.</p>
                 <p class="alert">N.error 함수는 ErrorThrown 객체를 반환하기 때문에 함수 앞에 throw 구문을 선언을 해야 에러가 발생 합니다.</p>
-                <pre class="line-numbers"><code class="language-javascript">
+                <pre><code>
 throw N.error("오류가 발생 했습니다.");</code></pre>
             </td>
         </tr>
@@ -340,7 +340,7 @@ throw N.error("오류가 발생 했습니다.");</code></pre>
                 </ul>
                 <p>예)</p>
                 <p>다음과 같은 일반적인 비동기 실행 로직이 있습니다.</p>
-                <pre class="line-numbers"><code class="language-javascript">
+                <pre><code>
 setTimeout(function() {
     setTimeout(function() {
         N.comm("url").submit(function() {
@@ -354,7 +354,7 @@ setTimeout(function() {
     N.log("1 번 로직 완료");
 }, 500);</code></pre>
                 <p>N.serialExecute를 사용하면 위와 같은 계층적 비동기 로직을 아래와 같이 직렬로 선언 할 수 있습니다.</p>
-                <pre class="line-numbers"><code class="language-javascript">
+                <pre><code>
 var defers = N.serialExecute(
     function(defer){
         setTimeout(function() {
@@ -382,7 +382,7 @@ var defers = N.serialExecute(
     }
 );</code></pre>
                 <p>추가로, jQuery $.when을 이용 하여 위 소스코드 에서 반환된 defers 변수 객체로 함수 블록 들을 그룹 지어 해당 그룹의 함수 블록 들이 모두 완료 된 후 로직을 실행 시킬 수도 있습니다.</p>
-                <pre class="line-numbers"><code class="language-javascript">
+                <pre><code>
 // 두번째, 세번째 함수 블록이 모두 완료 되면 로직을 실행
 $.when(defers[1], defers[2]).done(function(arg0, agr1) {
     // agr0, arg1 은 각 함수 블록에서 defer.resolve 함수를

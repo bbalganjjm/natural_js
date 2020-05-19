@@ -49,7 +49,7 @@
                 <p lang="en_US" class="alert">If obj is modified and returned, the returned obj is applied to all Communicators.</p>
                 <p lang="ko_KR" class="alert">이벤트 핸들러 함수에서 Error 객체를 반환하면 다음 단계의 필터가 실행 되지 않습니다.</p>
                 <p lang="en_US" class="alert">If the Error object is returned from the event handler function, the filter in the next step is not executed.</p>
-                <pre class="line-numbers"><code class="language-javascript">...
+                <pre><code>...
 afterInit : function(obj) {
     if(data &amp;&amp; data.fail){
         return new Error("The filter stops executing after this.");
@@ -75,7 +75,7 @@ afterInit : function(obj) {
                 </ul>
                 <p lang="ko_KR" class="alert">이벤트 핸들러 함수에서 Error 객체를 반환하면 다음 단계의 필터가 실행 되지 않습니다.</p>
                 <p lang="en_US" class="alert">If the Error object is returned from the event handler function, the filter in the next step is not executed.</p>
-                <pre class="line-numbers"><code class="language-javascript">...
+                <pre><code>...
 afterInit : function(request) {
     if(data &amp;&amp; data.fail){
         return new Error("stop filter execution after this");
@@ -103,7 +103,7 @@ afterInit : function(request) {
                 </ul>
                 <p lang="ko_KR" class="alert">이벤트 핸들러 함수에서 Error 객체를 반환하면 다음 단계의 필터가 실행 되지 않습니다.</p>
                 <p lang="en_US" class="alert">If the Error object is returned from the event handler function, the filter in the next step is not executed.</p>
-                <pre class="line-numbers"><code class="language-javascript">...
+                <pre><code>...
 beforeSend : function(request, xhr, settings) {
     if(data &amp;&amp; data.fail){
         return new Error("stop filter execution after this");
@@ -134,7 +134,7 @@ beforeSend : function(request, xhr, settings) {
                 </ul>
                 <p lang="ko_KR" class="alert">이벤트 핸들러 함수에서 Error 객체를 반환하면 다음 단계의 필터가 실행 되지 않습니다.</p>
                 <p lang="en_US" class="alert">If the Error object is returned from the event handler function, the filter in the next step is not executed.</p>
-                <pre class="line-numbers"><code class="language-javascript">...
+                <pre><code>...
 success : function(request, data, textStatus, xhr) {
     if(data &amp;&amp; data.fail){
         return new Error("stop filter execution after this");
@@ -162,7 +162,7 @@ success : function(request, data, textStatus, xhr) {
                 </ul>
                 <p lang="ko_KR" class="alert">이벤트 핸들러 함수에서 Error 객체를 반환하면 다음 단계의 필터가 실행 되지 않습니다.</p>
                 <p lang="en_US" class="alert">If the Error object is returned from the event handler function, the filter in the next step is not executed.</p>
-                <pre class="line-numbers"><code class="language-javascript">...
+                <pre><code>...
 error : function(request, xhr, textStatus, errorThrown) {
     if(data &amp;&amp; data.fail){
         return new Error("stop filter execution after this");
@@ -189,7 +189,7 @@ error : function(request, xhr, textStatus, errorThrown) {
                 </ul>
                 <p lang="ko_KR" class="alert">이벤트 핸들러 함수에서 Error 객체를 반환하면 다음 단계의 필터가 실행 되지 않습니다.</p>
                 <p lang="en_US" class="alert">If the Error object is returned from the event handler function, the filter in the next step is not executed.</p>
-                <pre class="line-numbers"><code class="language-javascript">...
+                <pre><code>...
 complete : function(request, xhr, textStatus) {
     if(data &amp;&amp; data.fail){
         return new Error("stop filter execution after this");

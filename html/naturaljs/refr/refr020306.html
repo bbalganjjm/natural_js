@@ -6,7 +6,7 @@
 
     <h4 lang="ko_KR" class="notIndex">1. 서버에서 데이터 조회</h4>
     <h4 lang="en_US" class="notIndex">1. Query data from server</h4>
-    <pre class="line-numbers"><code class="language-markup">&lt;script type="text/javascript"&gt;
+    <pre><code>&lt;script type="text/javascript"&gt;
     N.comm("data.json").submit(function(data) {
         N.log(data);
     });
@@ -14,13 +14,13 @@
 
     <h4 lang="ko_KR" class="notIndex">2. 서버에 파라미터 전송 및 결과 데이터 조회</h4>
     <h4 lang="en_US" class="notIndex">2. Send parameter to server and query result data</h4>
-    <pre lang="ko_KR" class="line-numbers"><code class="language-markup">&lt;script type="text/javascript"&gt;
+    <pre lang="ko_KR"><code>&lt;script type="text/javascript"&gt;
     // N 함수의 인자가 파라미터로 전송 됩니다.
     N({ "param1": 1, "param2": "Mark" }).comm("data.json").submit(function(data) {
         N.log(data);
     });
 &lt;/script&gt;</code></pre>
-    <pre lang="en_US" class="line-numbers"><code class="language-markup">&lt;script type="text/javascript"&gt;
+    <pre lang="en_US"><code>&lt;script type="text/javascript"&gt;
     // The arguments of the N function are sent as parameters.
     N({ "param1": 1, "param2": "Mark" }).comm("data.json").submit(function(data) {
         N.log(data);
@@ -29,7 +29,7 @@
 
     <h4 lang="ko_KR" class="notIndex">3. 지정한 요소에 HTML 페이지 삽입하기</h4>
     <h4 lang="en_US" class="notIndex">3. Insert HTML page into specified element</h4>
-    <pre lang="ko_KR" class="line-numbers"><code class="language-markup">&lt;article class="view-0001"&gt;&lt;/article&gt;
+    <pre lang="ko_KR"><code>&lt;article class="view-0001"&gt;&lt;/article&gt;
 
 &lt;script type="text/javascript"&gt;
     // ".view-0001" 요소에 "page.html" 페이지를 로드하고 "page.html" 페이지의 Controller object 의 init 메서드를 실행 시켜 줍니다.
@@ -38,7 +38,7 @@
         // 필요 없으면 콜백 함수를 정의 하지 않아도 됩니다.
     });
 &lt;/script&gt;</code></pre>
-    <pre lang="en_US" class="line-numbers"><code class="language-markup">&lt;article class="view-0001"&gt;&lt;/article&gt;
+    <pre lang="en_US"><code>&lt;article class="view-0001"&gt;&lt;/article&gt;
 
 &lt;script type="text/javascript"&gt;
     // Load "page.html" page in ".view-0001" element and execute init method of Controller object on "page.html" page.

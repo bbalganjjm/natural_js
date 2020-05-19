@@ -44,7 +44,7 @@
                         </ul>
                     </li>
                 </ul>
-                <pre><code class="language-markup">&lt;div class=&quot;tab-context&quot;&gt;
+                <pre><code>&lt;div class=&quot;tab-context&quot;&gt;
     &lt;ul&gt;
         &lt;li&gt;&lt;a href=&quot;#tab1&quot;&gt;Tab1&lt;/a&gt;&lt;/li&gt;
         &lt;li data-opts='{ &quot;url&quot; : &quot;tab1.html&quot; }'&gt;
@@ -70,7 +70,7 @@
                 <p lang="en_US">Specify options for individual tabs by the array[object] type, not the data-opts attribute of the tab element.</p>
                 <p lang="ko_KR">옵션은 탭의 순서와 개수 만큼 옵션 object 로 설정 합니다.</p>
                 <p lang="en_US">Option is set as option object as much as the order and number of tabs.</p>
-                <pre><code class="language-javascript">N("#tab").tab({
+                <pre><code>N("#tab").tab({
     tabOpts : [
         { width: "auto", url: "tab1.html", preload: false, active: false }, //Tab1
         { width: "auto", url: "tab2.html", preload: false, active: false }, //Tab2
@@ -93,7 +93,7 @@
                 <p lang="en_US">If set to true, the tabs can be scrolled with mouse drag or touch or first / last button.</p>
                 <p lang="ko_KR">처음 / 마지막 버튼으로 탭들을 스크롤 하려면 ul 태그 처음과 마지막 자식 요소로 a 태그와 span 태그를 작성 해 주면 됩니다.</p>
                 <p lang="en_US">To scroll tabs with the first / last button, write a tag and span tag with the first and last child elements of the ul tag.</p>
-                <pre><code class="language-markup">&lt;div&gt;
+                <pre><code>&lt;div&gt;
     &lt;a href="#"&gt;&lt;span&gt;&lt;/span&gt;&lt;/a&gt; &lt;!-- First button --&gt;
     &lt;ul&gt;
         &lt;li&gt;&lt;a href="#tab1"&gt;tab1&lt;/a&gt;&lt;/li&gt;
@@ -122,7 +122,7 @@
                     <li lang="ko_KR">tabContainerWidthReCalcDelayTime : 탭이 처음 표시 될 때 탭이 잘리거나 여백이 생겼을 때 1씩 증감해서 탭의 모양을 보정 할 수 있는 옵션 입니다.</li>
                     <li lang="en_US">tabContainerWidthReCalcDelayTime : This is an option to correct the shape of the tab by incrementing by 1 when the tab is cut or a margin is created when the tab is first displayed.</li>
                 </ul>
-                <pre><code class="language-javascript">N("#tab").tab({
+                <pre><code>N("#tab").tab({
     tabScrollCorrection : {
         tabContainerWidthCorrectionPx : 1,
         tabContainerWidthReCalcDelayTime : 0
@@ -178,7 +178,7 @@
                 <p>탭 컨텐츠가 표시될때 전환 효과를 보여줄지 여부를 설정 합니다.</p>
                 <p>효과를 적용하지 않으려면 false를 입력하고 효과를 입력하려면 다음과 같이 입력합니다.</p>
                 <p>["이펙트", "시간(ms)", "이펙트가 끝날 때 마다 실행 될 콜백함수"]</p>
-                <pre><code class="language-javascript">N("#tab").tab({
+                <pre><code>N("#tab").tab({
     effect : ["slideDown", 300, null]
 });</code></pre>
                 <p>이펙트 종류 : show, hide, slideUp, slideDown, fadeIn, fadeOut</p>
@@ -192,7 +192,7 @@
             <td>
                 <p lang="ko_KR">탭이 활성화 될 때마다 실행되는 이벤트 핸들러를 정의 합니다.</p>
                 <p lang="en_US">Define an event handler that is executed whenever the tab is activated.</p>
-                <pre lang="ko_KR"><code class="language-javascript">onActive : function(cont) {
+                <pre lang="ko_KR"><code>onActive : function(cont) {
     // this : N.tab 인스턴스
     // tabIdx : 활성화된 탭의 Index
     // tabEle : 활성화된 탭의 요소
@@ -200,7 +200,7 @@
     // tabEles : 전체 탭 요소
     // contentEles : 전체 컨텐츠 요소
 }</code></pre>
-                <pre lang="en_US"><code class="language-javascript">onActive : function(cont) {
+                <pre lang="en_US"><code>onActive : function(cont) {
     // this : N.tab instance
     // tabIdx : Index of active tab
     // tabEle : Element of active tab
@@ -220,14 +220,14 @@
             <td>
                 <p lang="ko_KR">탭 컨텐츠 로딩이 완료 되었을 때 실행되는 이벤트 핸들러를 정의 합니다.</p>
                 <p lang="en_US">Defines an event handler that is executed when tab content loading is completed.</p>
-                <pre lang="ko_KR"><code class="language-javascript">onLoad : function(cont) {
+                <pre lang="ko_KR"><code>onLoad : function(cont) {
     // this : N.tab 인스턴스
     // tabIdx : 활성화된 탭의 Index
     // tabEle : 활성화된 탭의 요소
     // contentEle : 활성화된 탭의 컨텐츠 요소
     // cont : 로딩 된 탭 컨텐츠의 Controller object
 }</code></pre>
-                <pre lang="en_US"><code class="language-javascript">onLoad : function(cont) {
+                <pre lang="en_US"><code>onLoad : function(cont) {
     // this : N.tab instance
     // tabIdx : Index of active tab
     // tabEle : Element of active tab

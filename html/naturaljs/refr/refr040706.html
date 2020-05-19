@@ -59,7 +59,7 @@
             <td style="text-align: center;">N/A</td>
             <td>
                 <p>data 메서드의 두번째 인자부터 n 번째 인자까지 데이터의 컬럼명을 지정하면 해당 컬럼에 해당하는 데이터만 추출하여 반환 합니다.</p>
-                <pre><code class="language-javascript">/** bind 되어 있는 데이터
+                <pre><code>/** bind 되어 있는 데이터
 [{
     col01 : "",
      col02 : "",
@@ -120,7 +120,7 @@ formInstance.data(true, "col01", "col02", "col03");
                 <p>"컴포넌트인스턴스.bind(data)" 와 같이 data 를 bind 메서드의 인자로 입력 하면 data는 내부적으로 N(data) 와 같이 jQuery Object로 변환 되고
                     "N(data).컴포넌트" 와 같이 jQuery Object 화 되어 있는 데이터를 입력 하면 별다른 처리 없이 컴포넌트에서 사용 될 data 로 지정 됩니다.</p>
                 <p>때문에 다음과 같이 data 를 Controller object 에 따로 담아 놓고 공유 해서 사용하는 경우 컴포넌트의 add 메서드를 통해 새로운 데이터를 생성했을 때 따로 담아 둔 데이터가 동기화 되지 않는 문제가 발생 됩니다.</p>
-                <pre><code class="language-javascript">...
+                <pre><code>...
 data : [{
     col01 : 1,
     col01 : 2,
@@ -146,7 +146,7 @@ init : function() {
 ...
 </code></pre>
                 <p>위와 같은 문제를 해결하기 위해서 "컴포넌트인스턴스.bind(row, data)" 메서드로 바인드 할 데이터를 jQuery Object 화 하여 바인드 하면 데이터 연동 문제가 해결 됩니다.</p>
-                <pre><code class="language-javascript">...
+                <pre><code>...
 data : [{
     col01 : 1,
     col01 : 2,
@@ -171,7 +171,7 @@ init : function() {
 ...
 </code></pre>
                 <p>여러 컴포넌트에 같은 데이터를 바인드 하여 자동으로 데이터들이 연동 되도록 할 경우에는 데이터를 따로 변수에 담아놓고 사용하지 말고 데이터를 최초 바인드 한 컴포넌트에서 data() 메서드를 통해 data 를 꺼내어 연동 할 컴포넌트에 바인드하는 방법을 추천 합니다.</p>
-                <pre><code class="language-javascript">...
+                <pre><code>...
 init : function() {
     // 아래 구문 추가
     this.data = N(this.data);
@@ -229,7 +229,7 @@ init : function() {
             <td style="text-align: center;">N/A</td>
             <td>
                 <p>bind 메서드의 세번째 인자부터 n 번째 인자까지 데이터의 컬럼명을 지정하면 해당 컬럼에 해당하는 요소에만 바인드 합니다.</p>
-                <pre><code class="language-javascript">// 바인드 할 데이터
+                <pre><code>// 바인드 할 데이터
 var data = [{
     col01 : "",
      col02 : "",
@@ -240,7 +240,7 @@ var data = [{
 }]
 // "col01", "col02", "col03" 아이디 속성값을 갖고 있는 요소에만 바인드.
 formInstance.bind(0, data, "col01", "col02", "col03");</code></pre>
-                <pre><code class="language-javascript">// 바인드 되어 있는 데이터를 직접 수정 한 후
+                <pre><code>// 바인드 되어 있는 데이터를 직접 수정 한 후
 // "col01", "col02", "col03" 아이디 속성값을 갖고 있는 요소에만 바인드.
 var data = formInstance.data()[formInstance.row()]
 data.col01 = "abc";

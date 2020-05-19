@@ -62,7 +62,7 @@
             <td style="text-align: center;">N/A</td>
             <td>
                 <p>추가 되는 페이지의 옵션을 입력 합니다.</p>
-<pre><code class="language-javascript">var docOpts = {
+<pre><code>var docOpts = {
     url : "url", // document URL
     urlSync : true, // 서버로 요청 할 때의 location.href 와 서버에서 응답이 왔을 때의 location.href 이 같은지 비교하여 다르면 응답을 차단 합니다.
     docId : docId, // document 아이디
@@ -216,7 +216,7 @@
             <td>
                 <p>리로드가 완료 되면 실행 되는 콜백을 지정 합니다. 필요 없으면 지정 하지 않아도 됩니다.</p>
                 <p>콜백의 인자로 html 과 Communicator.request 객체가 반환 됩니다.</p>
-                <pre><code class="language-javascript">docsInstance.reload("docId", function(html, request) {
+                <pre><code>docsInstance.reload("docId", function(html, request) {
     N.log(html, request);
 });
 </code></pre>

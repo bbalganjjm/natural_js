@@ -5,7 +5,7 @@
     </h2>
 
     <h4>⊙ 예제 데이터</h4>
-    <pre class="line-numbers"><code class="language-markup">var data = [{
+    <pre><code>var data = [{
     "name": "Dean Stanley",
     "age": 26,
     "gender": "male",
@@ -16,7 +16,7 @@
     <h4 class="notIndex">1. 폼에 데이터 바인드</h4>
     <p class="alert">폼을 이루는 요소는 TABLE 이든 DIV 든 상관없습니다. 지정한 context 안에 데이터의 키(컬럼)명과 같은 id 속성을 가진 요소가 있다면 해당 요소에 값을 바인드 합니다.</p>
     <p class="alert">옵션을 오브젝트형이 아닌 string 형으로 context 만refr010511.html 지정하면 array[json object] 의 0 번째 행 데이터를 자동으로 바인드 합니다.<br></p>
-    <pre class="line-numbers"><code class="language-markup">&lt;table class="formExample10"&gt;
+    <pre><code>&lt;table class="formExample10"&gt;
     &lt;tr&gt;
         &lt;th&gt;&lt;label for="name"&gt;name&lt;/label&gt;&lt;/th&gt;
         &lt;td&gt;&lt;input id="name" type="text"&gt;&lt;/td&gt;
@@ -47,7 +47,7 @@
 &lt;/script&gt;</code></pre>
 
     <h4 class="notIndex">2. 폼에 데이터 바인드 및 데이터 포메팅(N.formatter)&nbsp; >>>&nbsp; 저장 메시지 출력(N.alert) 후 폼 일괄 검증(N.validator)&nbsp; >>>&nbsp; 저장(N.comm)</h4>
-    <pre class="line-numbers"><code class="language-markup">&lt;table class="formExample20"&gt;
+    <pre><code>&lt;table class="formExample20"&gt;
     &lt;tr&gt;
         &lt;th&gt;&lt;label for="name"&gt;name&lt;/label&gt;&lt;/th&gt;
         &lt;td&gt;&lt;input id="name" type="text"&gt;&lt;/td&gt;
@@ -84,7 +84,7 @@
 &lt;/script&gt;</code></pre>
 
     <h4 class="notIndex">3. 조회 블록(Block)에 N.form 을 적용 하여 검색을 간단하게 처리(신규입력 및 신규입력 데이터 생성)</h4>
-    <pre class="line-numbers"><code class="language-markup">&lt;table class="formExample30"&gt;
+    <pre><code>&lt;table class="formExample30"&gt;
     &lt;tr&gt;
         &lt;th&gt;&lt;label for="name"&gt;name&lt;/label&gt;&lt;/th&gt;
         &lt;td&gt;&lt;input id="name" type="text" data-validate='[ ["required"] ]'&gt;&lt;/td&gt; &lt;!-- 필수 조회조건 체크 --&gt;
@@ -107,7 +107,7 @@
 
     <h4 class="notIndex">4. N.select 와 N.form 연동</h4>
     <p class="alert">N.select 와 N.form을 연동하여 사용할 때는 반드시 N.select 를 먼저 초기화 하고 N.form 을 그다음에 초기화 해야 합니다.</p>
-    <pre class="line-numbers"><code class="language-markup">&lt;table class="formExample40"&gt;
+    <pre><code>&lt;table class="formExample40"&gt;
     &lt;tr&gt;
         &lt;th&gt;&lt;label for="name"&gt;name&lt;/label&gt;&lt;/th&gt;
         &lt;td&gt;&lt;input id="name" type="text"&gt;&lt;/td&gt;
@@ -150,7 +150,7 @@
 
     <h4 class="notIndex">5. N.select 를 사용하지 않고 radio, checkbox 입력요소를 N.form 과 연동</h4>
     <p class="alert">radio 와 checkbox 입력요소의 첫번째 요소에 name 속성값과 같은 id 속성값을 반드시 표기 해야 합니다.</p>
-    <pre class="line-numbers"><code class="language-markup">&lt;div class="formExample50"&gt;
+    <pre><code>&lt;div class="formExample50"&gt;
     &lt;label&gt;&lt;input id="age" name="age" value="10"&gt;&lt;span&gt;10대&lt;/span&gt;&lt;/label&gt;
     &lt;label&gt;&lt;input name="age" value="20"&gt;&lt;span&gt;20대&lt;/span&gt;&lt;/label&gt;
     &lt;label&gt;&lt;input name="age" value="30"&gt;&lt;span&gt;30대&lt;/span&gt;&lt;/label&gt;
