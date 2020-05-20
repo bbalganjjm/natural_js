@@ -14,10 +14,11 @@
     "registered": "20140727",
 }]</code></pre>
 
-    <h4 class="notIndex">1. 폼에 데이터 바인드</h4>
-    <p class="alert">폼의 context 요소는 table 이든 div 든 상관 없습니다. 지정한 context 안에 데이터의 키(컬럼)명과 같은 id 속성을 가진 요소가 있다면 해당 요소에 값을 바인드 합니다.</p>
-    <p class="alert">옵션을 오브젝트형이 아닌 string 형으로 context 만refr010511.html 지정하면 array[json object] 의 0 번째 행 데이터를 자동으로 바인드 합니다.<br></p>
-    <pre><code>&lt;table class="formExample10"&gt;
+    <h4 lang="ko_KR" class="notIndex">1. 폼에 데이터 바인드 하기</h4>
+    <h4 lang="en_US" class="notIndex">1. Binds the data to the form</h4>
+    <p lang="ko_KR" class="alert">폼의 context 요소는 table 이든 div 든 상관 없습니다. context 요소 안에 데이터 객체의 프로퍼티명과 같은 id 속성을 가진 요소가 있다면 해당 요소에 값을 바인드 합니다.</p>
+    <p lang="en_US" class="alert">The form's context element doesn't matter whether it's a table or a div. If there is an element with an id attribute equal to the property name of the data object in the context element, the value is bound to the element.</p>
+    <pre><code>&lt;table class="form"&gt;
     &lt;tr&gt;
         &lt;th&gt;&lt;label for="name"&gt;name&lt;/label&gt;&lt;/th&gt;
         &lt;td&gt;&lt;input id="name" type="text"&gt;&lt;/td&gt;
@@ -37,17 +38,17 @@
 &lt;/table&gt;
 
 &lt;script type="text/javascript"&gt;
-    N(data).form(".formExample10").bind();
+    N(data).form(".form").bind();
 
     /* 위 구문은 다음과 같습니다.
         N(data).form({
-            context: ".formExample10",
+            context: ".form",
             row: 0
         }).bind();
     */
 &lt;/script&gt;</code></pre>
 
-    <h4 class="notIndex">2. 폼에 데이터 바인드 및 데이터 포메팅(N.formatter)&nbsp; >>>&nbsp; 저장 메시지 출력(N.alert) 후 폼 일괄 검증(N.validator)&nbsp; >>>&nbsp; 저장(N.comm)</h4>
+    <h4 class="notIndex">2. 폼에 데이터 바인드 및 데이터 포멧팅&nbsp; >>>&nbsp; 저장 메시지 출력(N.alert) 후 폼 일괄 검증(N.validator)&nbsp; >>>&nbsp; 저장(N.comm)</h4>
     <pre><code>&lt;table class="formExample20"&gt;
     &lt;tr&gt;
         &lt;th&gt;&lt;label for="name"&gt;name&lt;/label&gt;&lt;/th&gt;
