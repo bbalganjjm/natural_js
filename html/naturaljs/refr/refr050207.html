@@ -4,25 +4,32 @@
         <span lang="en_US">Examples</span>
     </h2>
 
-    <h4 class="notIndex">1. Documents 생성 및 페이지 추가</h4>
+    <h4 lang="ko_KR" class="notIndex">1. Documents 인스턴스를 생성하고 페이지 추가하기.</h4>
+    <h4 lang="en_US" class="notIndex">1. Creating the Documents instance and add pages.</h4>
     <pre><code>&lt;section class="docsContainer"&gt;&lt;/section&gt;
 
 &lt;script type="text/javascript"&gt;
        var docs = N(".docsContainer").docs();
-       docs.add("ex", "예제", { url : "ex.html" });
+       docs.add("ex-0001", "Example page", { url : "ex.html" });
 &lt;/script&gt;</code></pre>
 
-    <h4 class="notIndex">2. 페이지에 파라미터 전달</h4>
-    <pre><code>&lt;section class="docsContainer"&gt;&lt;/section&gt;
+    <h4 lang="ko_KR" class="notIndex">2. Document에 파라미터 전달 하기</h4>
+    <h4 lang="en_US" class="notIndex">2. Passing parameters to the document</h4>
+    <pre lang="ko_KR"><code>&lt;section class="docsContainer"&gt;&lt;/section&gt;
 
 &lt;script type="text/javascript"&gt;
        var docs = N(".docsContainer").docs();
        docs.request.attr("a", 1).request.attr("b", 2).add("ex", "예제", { url : "ex.html" });
 
-       // ex.html 의 N.cont 오브젝트의 init 함수의 두번째 인자인 request 객체에서
-       // request.attr("a");
-       // request.attr("b");
-       // 로 받을 수 있음.
+       // ex.html 의 Controller object 의 init 함수의 두번째 인자인 request 객체에서 request.attr("a"); 와 request.attr("b"); 구문을 사용해서 파라미터를 얻을 수 있습니다.
+&lt;/script&gt;</code></pre>
+    <pre lang="en_US"><code>&lt;section class="docsContainer"&gt;&lt;/section&gt;
+
+&lt;script type="text/javascript"&gt;
+       var docs = N(".docsContainer").docs();
+       docs.request.attr("a", 1).request.attr("b", 2).add("ex", "예제", { url : "ex.html" });
+
+       // You can get parameter with "request.attr('a');" and "request.attr('b');" syntax of request object, which is the second argument of init function of Controller object in ex.html.
 &lt;/script&gt;</code></pre>
 </article>
 

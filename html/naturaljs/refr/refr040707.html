@@ -14,8 +14,8 @@
     "registered": "20140727",
 }]</code></pre>
 
-    <h4 lang="ko_KR" class="notIndex">1. 폼에 데이터 바인드 하기</h4>
-    <h4 lang="en_US" class="notIndex">1. Binds the data to the form</h4>
+    <h4 lang="ko_KR" class="notIndex">1. 폼에 데이터 바인드 하기.</h4>
+    <h4 lang="en_US" class="notIndex">1. Binds the data to the form.</h4>
     <p lang="ko_KR" class="alert">폼의 context 요소는 table 이든 div 든 상관 없습니다. context 요소 안에 데이터 객체의 프로퍼티명과 같은 id 속성을 가진 요소가 있다면 해당 요소에 값을 바인드 합니다.</p>
     <p lang="en_US" class="alert">The form's context element doesn't matter whether it's a table or a div. If there is an element with an id attribute equal to the property name of the data object in the context element, the value is bound to the element.</p>
     <pre><code>&lt;table class="form"&gt;
@@ -38,78 +38,129 @@
 &lt;/table&gt;
 
 &lt;script type="text/javascript"&gt;
-    N(data).form(".form").bind();
-
-    /* 위 구문은 다음과 같습니다.
-        N(data).form({
-            context: ".form",
-            row: 0
-        }).bind();
-    */
+    N(data).form(".form").bind(); // ==> N(data).form({ context: ".form", row: 0 }).bind();
 &lt;/script&gt;</code></pre>
 
-    <h4 class="notIndex">2. 폼에 데이터 바인드 및 데이터 포멧팅&nbsp; >>>&nbsp; 저장 메시지 출력(N.alert) 후 폼 일괄 검증(N.validator)&nbsp; >>>&nbsp; 저장(N.comm)</h4>
-    <pre><code>&lt;table class="formExample20"&gt;
+    <h4 lang="ko_KR" class="notIndex">2. 폼에 데이터 바인드 및 데이터 포멧팅 -&gt; 저장 확인 메시지 표시(N.alert) 후 폼의 전체 데이터 유효성 검증(N.validator) -&gt; 폼 데이터를 서버에 전송(N.comm)</h4>
+    <h4 lang="en_US" class="notIndex">2. Binds data to the form and format the data -&gt; Validates(N.validator) entire data in the form after displaying(N.alert) the save confirm message  -&gt; Submits(N.comm) the form data to the server.</h4>
+    <pre lang="ko_KR"><code>&lt;table class="form"&gt;
     &lt;tr&gt;
         &lt;th&gt;&lt;label for="name"&gt;name&lt;/label&gt;&lt;/th&gt;
         &lt;td&gt;&lt;input id="name" type="text"&gt;&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
         &lt;th&gt;&lt;label for="age"&gt;age&lt;/label&gt;&lt;/th&gt;
-        &lt;td&gt;&lt;input id="age" type="text" data-validate='[ ["required"], ["integer"] ]'&gt;&lt;/td&gt; &lt;!-- 필수입력과 숫자만 입력 체크 --&gt;
+        &lt;td&gt;&lt;input id="age" type="text" data-validate='[ ["required"], ["integer"] ]'&gt;&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
         &lt;th&gt;&lt;label for="email"&gt;email&lt;/label&gt;&lt;/th&gt;
-        &lt;td&gt;&lt;input id="email" type="text" data-validate='[ ["email"] ]'&gt;&lt;/td&gt; &lt;!-- 이메일 주소 체크 --&gt;
+        &lt;td&gt;&lt;input id="email" type="text" data-validate='[ ["email"] ]'&gt;&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
         &lt;th&gt;&lt;label for="registered"&gt;registered&lt;/label&gt;&lt;/th&gt;
-        &lt;td&gt;&lt;input id="registered" type="text" data-format='[ ["date", 8, "date"] ]'&gt;&lt;/td&gt; &lt;!-- 날자포멧 및 데이트피커 적용 --&gt;
+        &lt;td&gt;&lt;input id="registered" type="text" data-format='[ ["date", 8, "date"] ]'&gt;&lt;/td&gt;
     &lt;/tr&gt;
 &lt;/table&gt;
-&lt;button class="btnFormExample02"&gt;저장&lt;/button&gt;
+&lt;button class="btn-save"&gt;저장&lt;/button&gt;
 
 &lt;script type="text/javascript"&gt;
-    var form = N(data).form(".formExample20").bind();
+    var form = N(data).form(".form").bind();
 
-    N(".btnFormExample02").click(function() {
-        N(window).alert({ // 1. confirm 메시지 출력
+    N(".btn-save").click(function() {
+        N(window).alert({ // 1. 저장 확인 메시지 표시
             msg : "저장 하겠습니까?",
             confirm : true,
             onOk : function() {
-                if(form.validate()) { // 2. 폼에 입력된 데이터 검증
-                    N(form.data()).comm("save.json").submit(); // 3. 폼의 데이터를 저장
+                if(form.validate()) { // 2. 폼의 전체 데이터 유효성 검증
+                    N(form.data()).comm("save.json").submit(); // 3. 폼 데이터를 서버에 전송
                 }
             }
         });
     });
 &lt;/script&gt;</code></pre>
-
-    <h4 class="notIndex">3. 조회 블록(Block)에 N.form 을 적용 하여 검색을 간단하게 처리(신규입력 및 신규입력 데이터 생성)</h4>
-    <pre><code>&lt;table class="formExample30"&gt;
+    <pre lang="en_US"><code>&lt;table class="form"&gt;
     &lt;tr&gt;
         &lt;th&gt;&lt;label for="name"&gt;name&lt;/label&gt;&lt;/th&gt;
-        &lt;td&gt;&lt;input id="name" type="text" data-validate='[ ["required"] ]'&gt;&lt;/td&gt; &lt;!-- 필수 조회조건 체크 --&gt;
+        &lt;td&gt;&lt;input id="name" type="text"&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;th&gt;&lt;label for="age"&gt;age&lt;/label&gt;&lt;/th&gt;
+        &lt;td&gt;&lt;input id="age" type="text" data-validate='[ ["required"], ["integer"] ]'&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;th&gt;&lt;label for="email"&gt;email&lt;/label&gt;&lt;/th&gt;
+        &lt;td&gt;&lt;input id="email" type="text" data-validate='[ ["email"] ]'&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;th&gt;&lt;label for="registered"&gt;registered&lt;/label&gt;&lt;/th&gt;
+        &lt;td&gt;&lt;input id="registered" type="text" data-format='[ ["date", 8, "date"] ]'&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+&lt;button class="btn-save"&gt;Save&lt;/button&gt;
+
+&lt;script type="text/javascript"&gt;
+    var form = N(data).form(".form").bind();
+
+    N(".btn-save").click(function() {
+        N(window).alert({ // 1. displaying the save confirm message.
+            msg : "Do you want to save it?",
+            confirm : true,
+            onOk : function() {
+                if(form.validate()) { // 2. Validates(N.validator) entire data in the form.
+                    N(form.data()).comm("save.json").submit(); // 3. Submits the form data to the server.
+                }
+            }
+        });
+    });
+&lt;/script&gt;</code></pre>
+    <h4 lang="ko_KR" class="notIndex">3. 검색조건 블록에 N.form 을 적용 하여 조회 로직을 간단하게 만들기.</h4>
+    <h4 lang="en_US" class="notIndex">3. Making the search logic simply by applying N.form to search condition block.</h4>
+    <pre lang="ko_KR"><code>&lt;table class="form"&gt;
+    &lt;tr&gt;
+        &lt;th&gt;&lt;label for="name"&gt;name&lt;/label&gt;&lt;/th&gt;
+        &lt;td&gt;&lt;input id="name" type="text" data-validate='[ ["required"] ]'&gt;&lt;/td&gt;
         &lt;th&gt;&lt;label for="age"&gt;age&lt;/label&gt;&lt;/th&gt;
         &lt;td&gt;&lt;input id="age" type="text"&gt;&lt;/td&gt;
     &lt;/tr&gt;
 &lt;/table&gt;
-&lt;button class="btnFormExample30"&gt;조회&lt;/button&gt;
+&lt;button class="btn-search"&gt;검색&lt;/button&gt;
 
 &lt;script type="text/javascript"&gt;
-    //add 메서드를 호출하면 id 속성을 가지고 있는 입력요소를 기반으로 { "name": "", "age": "" } 와 같은 데이터가 생성됨.
-    var form = N(data).form(".formExample30").add();
+    // add 메서드를 실행하면 id 속성을 갖고 있는 입력요소들의 name 속성값과 value 속성값으로 data 객체를 생성 합니다.
+    var form = N(data).form(".form").add(); // { "name": "", "age": "" }
 
-    N(".btnFormExample30").click(function() {
-        if(form.validate()) { // 1. 조회 블록에 입력된 데이터 검증
-            N(form.data()).comm("retrieve.json").submit(); // 2. 폼의 데이터를 조건으로 하여 조회
+    N(".btn-search").click(function() {
+        if(form.validate()) { // 1. 검색 조건 블록에 입력 된 데이터를 유효성을 검사합니다
+            form.data(false).comm("retrieve.json").submit(); // 2. 폼의 데이터를 서버 파라미터로 전송 합니다.
+        }
+    });
+&lt;/script&gt;</code></pre>
+    <pre lang="en_US"><code>&lt;table class="form"&gt;
+    &lt;tr&gt;
+        &lt;th&gt;&lt;label for="name"&gt;name&lt;/label&gt;&lt;/th&gt;
+        &lt;td&gt;&lt;input id="name" type="text" data-validate='[ ["required"] ]'&gt;&lt;/td&gt;
+        &lt;th&gt;&lt;label for="age"&gt;age&lt;/label&gt;&lt;/th&gt;
+        &lt;td&gt;&lt;input id="age" type="text"&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+&lt;button class="btn-search"&gt;Search&lt;/button&gt;
+
+&lt;script type="text/javascript"&gt;
+    // When the add method is executed, a data object is created with the name and value attribute's value ​​of the input elements that have the id attribute.
+    var form = N(data).form(".form").add(); // { "name": "", "age": "" }
+
+    N(".btn-search").click(function() {
+        if(form.validate()) { // 1. Validate the data entered in the search condition block
+            form.data(false).comm("retrieve.json").submit(); // 2. Sends the form data to server parameters
         }
     });
 &lt;/script&gt;</code></pre>
 
-    <h4 class="notIndex">4. N.select 와 N.form 연동</h4>
-    <p class="alert">N.select 와 N.form을 연동하여 사용할 때는 반드시 N.select 를 먼저 초기화 하고 N.form 을 그다음에 초기화 해야 합니다.</p>
-    <pre><code>&lt;table class="formExample40"&gt;
+    <h4 lang="ko_KR" class="notIndex">4. N.select 와 N.form 연동 하기.</h4>
+    <h4 lang="en_US" class="notIndex">4. Linking N.select and N.form.</h4>
+    <p lang="ko_KR" class="alert">N.select 와 N.form을 연동하여 사용할 때는 반드시 N.select 를 먼저 초기화 한 다음 N.form 을 초기화 해야 합니다.</p>
+    <p lang="en_US" class="alert">When using N.select in link with N.form, N.select must be initialized first and then N.form initialized.</p>
+    <pre lang="ko_KR"><code>&lt;table class="form"&gt;
     &lt;tr&gt;
         &lt;th&gt;&lt;label for="name"&gt;name&lt;/label&gt;&lt;/th&gt;
         &lt;td&gt;&lt;input id="name" type="text"&gt;&lt;/td&gt;
@@ -141,26 +192,67 @@
          "key" : "female",
          "val" : "female"
     }]).select({
-        context : ".formExample40 #gender",
+        context : ".form #gender",
         key : "key",
         val : "val"
     })
 
-    // 2. 폼 바인드
-    N(data).form(".formExample40").bind();
+    // 2. 폼 데이터 바인드
+    N(data).form(".form").bind();
 &lt;/script&gt;</code></pre>
+    <pre lang="en_US"><code>&lt;table class="form"&gt;
+    &lt;tr&gt;
+        &lt;th&gt;&lt;label for="name"&gt;name&lt;/label&gt;&lt;/th&gt;
+        &lt;td&gt;&lt;input id="name" type="text"&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;th&gt;&lt;label for="age"&gt;age&lt;/label&gt;&lt;/th&gt;
+        &lt;td&gt;&lt;input id="age" type="text"&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;th&gt;&lt;label for="gender"&gt;gender&lt;/label&gt;&lt;/th&gt;
+        &lt;td&gt;&lt;input id="gender" type="radio"&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;th&gt;&lt;label for="email"&gt;email&lt;/label&gt;&lt;/th&gt;
+        &lt;td&gt;&lt;input id="email" type="text"&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;th&gt;registered&lt;/th&gt;
+        &lt;td id="registered"&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
 
-    <h4 class="notIndex">5. N.select 를 사용하지 않고 radio, checkbox 입력요소를 N.form 과 연동</h4>
-    <p class="alert">radio 와 checkbox 입력요소의 첫번째 요소에 name 속성값과 같은 id 속성값을 반드시 표기 해야 합니다.</p>
-    <pre><code>&lt;div class="formExample50"&gt;
-    &lt;label&gt;&lt;input id="age" name="age" value="10"&gt;&lt;span&gt;10대&lt;/span&gt;&lt;/label&gt;
-    &lt;label&gt;&lt;input name="age" value="20"&gt;&lt;span&gt;20대&lt;/span&gt;&lt;/label&gt;
-    &lt;label&gt;&lt;input name="age" value="30"&gt;&lt;span&gt;30대&lt;/span&gt;&lt;/label&gt;
+&lt;script type="text/javascript"&gt;
+    // 1. Create gender radio select
+    N([{
+         "key" : "male",
+         "val" : "male"
+     },{
+         "key" : "female",
+         "val" : "female"
+    }]).select({
+        context : ".form #gender",
+        key : "key",
+        val : "val"
+    })
+
+    // 2. Binding form data
+    N(data).form(".form").bind();
+&lt;/script&gt;</code></pre>
+    <h4 lang="ko_KR" class="notIndex">5. N.select 를 사용하지 않고 radio, checkbox 입력요소를 N.form 과 연동 하기.</h4>
+    <h4 lang="en_US" class="notIndex">5. Linking radio and checkbox input elements with N.form without using N.select.</h4>
+    <p lang="ko_KR" class="alert">radio 와 checkbox 입력요소의 첫번째 요소에 name 속성값과 같은 id 속성값을 반드시 정의 해야 합니다.</p>
+    <p lang="en_US" class="alert">The id element value, such as the name attribute value, must be defined in the first element of the radio and checkbox input elements.</p>
+    <pre><code>&lt;div class="form"&gt;
+    &lt;label&gt;&lt;input id="age" name="age" value="10"&gt;&lt;span&gt;10&lt;/span&gt;&lt;/label&gt;
+    &lt;label&gt;&lt;input name="age" value="20"&gt;&lt;span&gt;20&lt;/span&gt;&lt;/label&gt;
+    &lt;label&gt;&lt;input name="age" value="30"&gt;&lt;span&gt;30&lt;/span&gt;&lt;/label&gt;
 &lt;/div&gt;
 &lt;div class="form"&gt;
-    &lt;label&gt;&lt;input id="color" name="color" value="red"&gt;&lt;span&gt;빨간색&lt;/span&gt;&lt;/label&gt;
-    &lt;label&gt;&lt;input name="color" value="blue"&gt;&lt;span&gt;파란색&lt;/span&gt;&lt;/label&gt;
-    &lt;label&gt;&lt;input name="color" value="green"&gt;&lt;span&gt;녹색&lt;/span&gt;&lt;/label&gt;
+    &lt;label&gt;&lt;input id="color" name="color" value="red"&gt;&lt;span&gt;red&lt;/span&gt;&lt;/label&gt;
+    &lt;label&gt;&lt;input name="color" value="blue"&gt;&lt;span&gt;blue&lt;/span&gt;&lt;/label&gt;
+    &lt;label&gt;&lt;input name="color" value="green"&gt;&lt;span&gt;green&lt;/span&gt;&lt;/label&gt;
 &lt;/div&gt;
 
 &lt;script type="text/javascript"&gt;
@@ -168,8 +260,8 @@
         age : 10,
         color : ["red", "green"]
     };
-    // 1. 폼 바인드
-    N(data).form(".formExample50").bind();
+
+    N(data).form(".form").bind();
 &lt;/script&gt;</code></pre>
 
 </article>

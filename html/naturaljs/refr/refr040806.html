@@ -154,28 +154,32 @@ listInst.data("modified", "col01", "col02", "col03");
             <td style="text-align: center;">N/A</td>
             <td>N.list</td>
             <td>
-                <p>새로운 로우 데이터를 생성 합니다.</p>
-                <p>로우 데이터 생성 시 리스트요소안의 입력요소의 id 와 값들로 데이터를 생성합니다.</p>
+                <p lang="ko_KR">새로운 행 요소와 데이터를 추가 합니다.</p>
+                <p lang="en_US">Adds new row elements and data.</p>
+                <p lang="ko_KR">행 데이터 생성 시 context 요소안에 있는 입력요소들의 id 속성명과 값으로 데이터 객체를 생성합니다.</p>
+                <p lang="en_US">When creating row data, a data object is created with the id attribute name and value of the input elements in the context element.</p>
             </td>
         </tr>
         <tr>
             <td></td>
             <td>data</td>
-            <td>object</td>
+            <td>object|number</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                새로운 행을 생성할 때 컬럼값들의 기본값을 지정 할 수 있습니다.
-                <p class="alert">인자로 지정된 데이터는 add 호출 시 생성된 기본 데이터를 확장 합니다.</p>
-                <p class="alert">data 인자의 type 이 number 타입이면 다음 옵션인 row 로 인식 됩니다.</p>
+                <p lang="ko_KR">data 객체를 지정 하면 생성 된 데이터와 지정 한 data 가 병합 되어 바인딩 됩니다.</p>
+                <p lang="en_US">When a data object is specified, the added data and the specified data are merged and then bound.</p>
+                <p lang="ko_KR" class="alert">data 인자가 number 타입이면 row(arguments[1]) 인자로 지정 됩니다.</p>
+                <p lang="en_US" class="alert">If the data argument is of type number, it is specified as a row (arguments [1]) argument.</p>
             </td>
         </tr>
         <tr>
             <td></td>
             <td>row</td>
-            <td>object</td>
+            <td>number</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p>새로운 데이터를 추가 할 행 인덱스를 지정 합니다. 지정한 행 인덱스 앞에 행 요소와 데이터가 추가 됩니다.</p>
+                <p lang="ko_KR">새로운 데이터가 추가 될 행 인덱스를 row 인자로 지정 하면 지정한 행 인덱스 바로 앞에 행 데이터와 행 요소가 추가 됩니다.</p>
+                <p lang="en_US">If the row index to which new data is to be added is specified as the row argument, the row data and row elements is added right in front of the specified row index.</p>
             </td>
         </tr>
         <tr>
@@ -183,30 +187,45 @@ listInst.data("modified", "col01", "col02", "col03");
             <td style="text-align: center;">N/A</td>
             <td style="text-align: center;">N/A</td>
             <td>N.list</td>
-            <td>선택한 행 요소와 데이터를 삭제 합니다.</td>
+            <td>
+                <p lang="ko_KR">행 요소와 데이터를 제거 합니다.</p>
+                <p lang="en_US">Removes the row elements and data.</p>
+            </td>
         </tr>
         <tr>
             <td></td>
             <td>row</td>
-            <td>number|array</td>
+            <td>number|array[number]</td>
             <td style="text-align: center;">N/A</td>
-            <td>제거할 행 인덱스를 지정 합니다. index 들을 array에 담아 인자로 지정 하면 한번에 여러 행을 제거 합니다.</td>
+            <td>
+                <p lang="ko_KR">제거할 행의 index를 지정 합니다.</p>
+                <p lang="en_US">Specifies the index of the row to be removed.</p>
+                <p lang="ko_KR">행 index를 array에 담아 row 인자로 지정 하면 한번에 여러 행을 제거합니다.</p>
+                <p lang="en_US">If you specify the row index in the array as a row argument, multiple rows are removed at once.</p>
+            </td>
         </tr>
         <tr>
             <td>revert</td>
             <td style="text-align: center;">N/A</td>
             <td style="text-align: center;">N/A</td>
             <td>N.list</td>
-            <td>bind 했을 때의 초기 데이터나 add 시 생성 된 초기 데이터 상태로 복원 합니다.</td>
+            <td>
+                <p lang="ko_KR">최초 바인딩 된 초기 데이터나 add 시 생성 된 초기 데이터로 되돌립니다.</p>
+                <p lang="en_US">Reverts to the initial bound data or initial data created when add.</p>
+            </td>
         </tr>
         <tr>
             <td></td>
             <td>row</td>
-            <td>number|array</td>
+            <td>number|array[number]</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p>row index를 입력하면 해당 행 데이터만 복원 하고 입력하지 않으면 전체 행 데이터를 복원 합니다.</p>
-                <p>index 들을 array에 담아 인자로 지정 하면 한번에 여러 행을 복원 합니다.</p>
+                <p lang="ko_KR">되돌릴 행 index를 지정 합니다.</p>
+                <p lang="en_US">Specifies the row index to revert.</p>
+                <p lang="ko_KR">row 인자에 행 index를 지정하면 지정 된 행 데이터만 되돌리고 row 인자를 입력하지 않으면 전체 행 데이터를 되돌립니다.</p>
+                <p lang="en_US">If a row index is specified for the row argument, only the specified row data is reverted. If no row argument is entered, the entire row data is reverted.</p>
+                <p lang="ko_KR">행 index를 array에 담아 row 인자로 지정 하면 한번에 여러 행을 되돌립니다.</p>
+                <p lang="en_US">If you specify the row index in the array as a row argument, multiple rows are reverted at once.</p>
             </td>
         </tr>
         <tr>
@@ -224,7 +243,10 @@ listInst.data("modified", "col01", "col02", "col03");
             <td>row</td>
             <td>number</td>
             <td style="text-align: center;">N/A</td>
-            <td>row index를 입력하면 해당 행데이터만 검증하고 입력하지 않으면 전체 데이터를 검증합니다.</td>
+            <td>
+                <p lang="ko_KR">row 인자에 행 index를 지정하면 지정 된 행 데이터만 유효성 검증되고 row 인자를 입력하지 않으면 전체 행 데이터의 유효성이 검사됩니다.</p>
+                <p lang="en_US">If a row index is specified for the row argument, only the specified row data is validated. If no row argument is entered, the entire row data is validated.</p>
+            </td>
         </tr>
         <tr>
             <td>val</td>
@@ -267,22 +289,24 @@ listInst.data("modified", "col01", "col02", "col03");
             <td style="text-align: center;">N/A</td>
             <td>array</td>
             <td>
-                <p>그리드 행을 명령으로 선택 할 수 있습니다.</p>
-                <p>첫번째 인자(row)를 입력하지 않으면 선택 된 행 들의 행 index 들을 반환 하고 입력하면 입력 된 인덱스에 해당하는 행을 선택 합니다.</p>
-                <p class="alert">select 메서드를 사용 하려면 select 나 multiselect 옵션이 true 로 설정 되어 있어야 합니다.</p>
+                <p lang="ko_KR">행을 선택 하거나 선택된 행의 index를 반환 합니다.</p>
+                <p lang="en_US">Selects the row or returns the index of the selected row.</p>
+                <p lang="ko_KR">첫번째 인자(row)를 입력하지 않으면 선택 된 행 들의 index 들을 반환 하고 입력하면 지정 된 행을 선택 합니다.</p>
+                <p lang="en_US">If the first argument (row) is not entered, the indexes of the selected rows are returned, and if specified, the specified row is selected.</p>
+                <p lang="ko_KR" class="alert">select 메서드를 사용 하려면 select 나 multiselect 옵션이 true 로 설정 되어 있어야 합니다.</p>
+                <p lang="en_US" class="alert">To use the select method, the select or multiselect option must be set to true.</p>
             </td>
         </tr>
         <tr>
             <td></td>
             <td>row</td>
-            <td>array|number</td>
+            <td>number|array[number]</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p>선택할 row index</p>
-                <ul>
-                    <li>행 1개를 선택 하려면 인자를 number 타입 으로 지정해도 되고 array 타입 으로 지정해도 됩니다.</li>
-                    <li>행을 2개 이상 선택 하려면 인자를 array 타입 으로 지정해야 합니다.</li>
-                </ul>
+                <p lang="ko_KR">선택할 행 index를 지정 합니다.</p>
+                <p lang="en_US">Specifies the row index to select.</p>
+                <p lang="ko_KR">행 index를 array에 담아 row 인자로 지정 하면 한번에 여러 행을 선택합니다.</p>
+                <p lang="en_US">If you specify the row index in the array as a row argument, multiple rows are selected at once.</p>
             </td>
         </tr>
         <tr>
@@ -291,32 +315,32 @@ listInst.data("modified", "col01", "col02", "col03");
             <td>boolean</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p>true 를 입력 하면 이전에 선택 된 행들을 선택 취소 하지 않고 추가로 선택 합니다. false 를 입력 하면 이전에 선택 된 행들을 모두 선택 취소 후 선택 합니다.</p>
+                <p lang="ko_KR">입력하지 않거나 false 를 입력 하면 선택된 행들을 모두 선택해제한 후에 선택 하고 true 를 입력 하면 기존 선택에 추가로 선택합니다.</p>
+                <p lang="en_US">If you do not enter or enter false, select after all selected rows are deselected, and if you enter true, appends to the existing selected.</p>
             </td>
         </tr>
         <tr>
             <td>check</td>
             <td style="text-align: center;">N/A</td>
             <td style="text-align: center;">N/A</td>
-            <td>string</td>
+            <td>array</td>
             <td>
-                <p>checkAllTarget 과 checkSingleTarget 옵션으로 지정한 체크박스 들을 명령으로 선택 할 수 있습니다.</p>
-                <ul>
-                    <li>첫번째 인자(row)를 입력하지 않으면 선택 된 체크박스 가 속해 있는 행 index 들을 반환 하고 입력하면 입력 된 인덱스에 속해 있는 체크박스들을 선택 합니다.</li>
-                </ul>
+                <p lang="ko_KR">checkAllTarget 과 checkSingleTarget 옵션으로 지정한 요소들을 체크 하거나 체크된 행의 index를 반환 합니다.</p>
+                <p lang="en_US">Checks the elements specified by checkAllTarget and checkSingleTarget options or returns the index of the checked row.</p>
+                <p lang="ko_KR">첫번째 인자(row)를 입력하지 않으면 체크 된 행 들의 index 들을 반환 하고 입력하면 지정 된 행을 체크 합니다.</p>
+                <p lang="en_US">If the first argument (row) is not entered, the indexes of the checked rows are returned, and if specified, the specified row is checked.</p>
             </td>
         </tr>
         <tr>
             <td></td>
             <td>row</td>
-            <td>array|number</td>
+            <td>number|array[number]</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p>체크할 체크박스들의 row index</p>
-                <ul>
-                    <li>체크박스 1개를 선택 하려면 인자를 number 타입 으로 지정해도 되고 array 타입 으로 지정해도 됩니다.</li>
-                    <li>체크박스를 2개 이상 선택 하려면 인자를 array 타입 으로 지정해야 합니다.</li>
-                </ul>
+                <p lang="ko_KR">체크할 행 index를 지정 합니다.</p>
+                <p lang="en_US">Specifies the row index to check.</p>
+                <p lang="ko_KR">행 index를 array에 담아 row 인자로 지정 하면 한번에 여러 행을 체크합니다.</p>
+                <p lang="en_US">If you specify the row index in the array as a row argument, multiple rows are checked at once.</p>
             </td>
         </tr>
         <tr>
@@ -325,7 +349,8 @@ listInst.data("modified", "col01", "col02", "col03");
             <td>boolean</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p>true 를 입력 하면 이전에 선택 된 체크박스 들을 선택 취소 하지 않고 추가로 선택 합니다. false 를 입력 하면 이전에 선택 된 체크박스 들을 모두 선택 취소 후 선택 합니다.</p>
+                <p lang="ko_KR">입력하지 않거나 false 를 입력 하면 체크된 요소들을 모두 체크해제한 후에 체크 하고 true 를 입력 하면 기존 체크에 추가로 체크합니다.</p>
+                <p lang="en_US">If you do not enter or enter false, check after all checked rows are unchecked, and if you enter true, appends to the existing checked.</p>
             </td>
         </tr>
         <tr>
@@ -334,7 +359,8 @@ listInst.data("modified", "col01", "col02", "col03");
             <td style="text-align: center;">N/A</td>
             <td>N.list</td>
             <td>
-                <p>선택한 행을 이동 합니다.</p>
+                <p lang="ko_KR">선택한 행 요소와 데이터를 이동 합니다.</p>
+                <p lang="en_US">Moves the selected row element and data.</p>
             </td>
         </tr>
         <tr>
@@ -343,7 +369,8 @@ listInst.data("modified", "col01", "col02", "col03");
             <td>number</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p>이동 대상 행의 인덱스를 입력 합니다.</p>
+                <p lang="ko_KR">이동할 행의 index 를 입력 합니다.</p>
+                <p lang="en_US">Enters the index of the row to be moved.</p>
             </td>
         </tr>
         <tr>
@@ -352,22 +379,22 @@ listInst.data("modified", "col01", "col02", "col03");
             <td>number</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p>이동 할 위치의 행 인덱스를 입력 합니다.</p>
-                <p class="alert">
-                    지정한 행 이전으로 이동 됩니다. 마지막 행으로 이동 하려면 마지막 행 인덱스 값에 1을 더하여 입력 해 주세요.
-                </p>
-                <p class="alert">
-                    입력 한 값이 바인드 되어 있는 데이터의 전체 행 수 보다 클 경우 항상 마지막 행 다음으로 이동 됩니다.
-                </p>
+                <p lang="ko_KR">이동 할 위치의 행 index 입력 합니다.</p>
+                <p lang="en_US">Enter the row index of the position you want to move.</p>
+                <p lang="ko_KR" class="alert">지정한 행 바로 이전으로 이동 됩니다. 마지막 행으로 이동 하려면 마지막 행 index 값에 1을 더해서 입력 해 주세요.</p>
+                <p lang="en_US" class="alert">Moved to right in front of the specified row. To move to the last row, add 1 to the index value of the last row.</p>
+                <p lang="ko_KR" class="alert">입력 한 값이 바인드 되어 있는 데이터의 전체 행 수 보다 클 경우 항상 마지막 행 다음으로 이동 됩니다.</p>
+                <p lang="en_US" class="alert">If the entered value is greater than the total length of the bound data, it moves to the next row of last row.</p>
             </td>
         </tr>
         <tr>
             <td>copy</td>
             <td style="text-align: center;">N/A</td>
             <td style="text-align: center;">N/A</td>
-            <td>N.list</td>
+            <td>N.grid</td>
             <td>
-                <p>선택한 행을 복사 합니다.</p>
+                <p lang="ko_KR">선택한 행 요소와 데이터를 복사 합니다.</p>
+                <p lang="en_US">Copys the selected row element and data.</p>
             </td>
         </tr>
         <tr>
@@ -376,7 +403,8 @@ listInst.data("modified", "col01", "col02", "col03");
             <td>number</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p>복사 대상 행의 인덱스를 입력 합니다.</p>
+                <p lang="ko_KR">복사할 행의 index 를 입력 합니다.</p>
+                <p lang="en_US">Enters the index of the row to be copied.</p>
             </td>
         </tr>
         <tr>
@@ -385,13 +413,12 @@ listInst.data("modified", "col01", "col02", "col03");
             <td>number</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p>복사 할 위치의 행 인덱스를 입력 합니다.</p>
-                <p class="alert">
-                    지정한 행 이전으로 복사 됩니다. 마지막 행으로 복사 하려면 마지막 행 인덱스 값에 1을 더하여 입력 해 주세요.
-                </p>
-                <p class="alert">
-                    입력 한 값이 바인드 되어 있는 데이터의 전체 행 수 보다 클 경우 항상 마지막 행 다음으로 복사 됩니다.
-                </p>
+                <p lang="ko_KR">복사 할 위치의 행 index 입력 합니다.</p>
+                <p lang="en_US">Enter the row index of the position you want to copy.</p>
+                <p lang="ko_KR" class="alert">지정한 행 바로 이전으로 복사 됩니다. 마지막 행으로 복사 하려면 마지막 행 index 값에 1을 더해서 입력 해 주세요.</p>
+                <p lang="en_US" class="alert">Copied to right in front of the specified row. To copy to the last row, add 1 to the index value of the last row.</p>
+                <p lang="ko_KR" class="alert">입력 한 값이 바인드 되어 있는 데이터의 전체 행 수 보다 클 경우 항상 마지막 행 다음으로 복사 됩니다.</p>
+                <p lang="en_US" class="alert">If the entered value is greater than the total length of the bound data, it copies to the next row of last row.</p>
             </td>
         </tr>
     </table>
