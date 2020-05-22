@@ -1,5 +1,5 @@
 /*!
- * Natural-CORE v0.18.26
+ * Natural-CORE v0.18.27
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -302,7 +302,7 @@
 		// N local variables
 		$.extend(N, {
 			version : {
-				"Natural-CORE" : "0.18.26"
+				"Natural-CORE" : "0.18.27"
 			},
 			/**
 			 * Set and get locale value
@@ -694,13 +694,15 @@
 				    if(prevLastDayOfWeek !== 6) {
 				        for(var i=prevLastDay-prevLastDayOfWeek;i<=prevLastDay;i++) {
 				            prevDate.setDate(i);
-				            daysOfWeek.push(new Date(prevDate));
+				            var dArr = prevDate.formatDate("Y-m-d").split("-");
+                            daysOfWeek.push(new Date(dArr[0], dArr[1], dArr[2], 0));
 				        }
 				    }
 
 				    for(var i=1;i<=lastDay;i++) {
 				        currDate.setDate(i);
-				        daysOfWeek.push(new Date(currDate));
+				        var dArr = currDate.formatDate("Y-m-d").split("-");
+				        daysOfWeek.push(new Date(dArr[0], dArr[1], dArr[2], 0));
 				        if(i > 0 && daysOfWeek.length === 7) {
 				            weekArr.push(daysOfWeek);
 				            daysOfWeek = [];
@@ -713,7 +715,8 @@
 				    var lastDayOfCalendar;
 				    for(var i=1, length=daysOfLastWeek.length;i<=7-length;i++) {
 				        nextDate.setDate(i);
-				        daysOfLastWeek.push(new Date(nextDate));
+				        var dArr = currDate.formatDate("Y-m-d").split("-");
+				        daysOfLastWeek.push(new Date(dArr[0], dArr[1], dArr[2], 0));
 				        lastDayOfCalendar = i;
 				    }
 				    if(weekArr.length === 5) {
