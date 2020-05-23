@@ -96,7 +96,7 @@ Natural-DATA is a library package that supports data synchronization, formatting
 ### DataSync
 
 DataSync is a library that synchronizes data changed by components or libraries in real time.
-<p class="alert">DataSync supports bidirectional data binding between components.</p>
+<p class="alert">DataSync supports two way databinding between components.</p>
 
 ### Formatter
 
