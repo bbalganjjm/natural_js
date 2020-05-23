@@ -74,12 +74,17 @@
             <td>
                 <p lang="ko_KR">context 옵션으로 지정한 요소에 데이터를 바인딩 합니다.</p>
                 <p lang="en_US">Binds data to the element specified by context option.</p>
-
-                <p class="alert">요소가 체크박스 일 경우 템플릿 요소가 체크된 상태라면 바인드 될 때 생성되는 요소들도 체크된 상태로 생성 됩니다.</p>
-                <p class="alert">
-                    라디오나 체크박스 요소에서, 데이터가 바인드 되면 context 요소에는 id 속성이 있지만 추가로 생성 된 선택지 요소에는 id 속성이 추가 되지 않고 name 속성이 추가 됩니다.
-                    생성 된 체크박스나 라디오에 이벤트를 바인드 할때는 id selector 로 요소를 선택하면 맨처음 1개 요소에만 이벤트가 적용되니 attribute 셀렉터로 $("[name=id값]").click(function() {}) 과 같이 요소를 선택하여 이벤트를 바인드 해 주세요.
+                <p lang="ko_KR" class="alert">context 요소가 체크박스 일 경우 체크된 상태라면 데이터가 바인딩 될 때 생성되는 요소들도 체크된 상태로 생성 됩니다.</p>
+                <p lang="en_US" class="alert">If the context element is a checkbox, if it's state is checked, the elements created when the data is bound are also created as checked.</p>
+                <p lang="ko_KR" class="alert">
+                    radio 나 checkbox input 요소는 데이터가 바인드 되면 context 로 설정 한 요소에는 id 속성과 name 속성이 있고 추가로 생성되는 옵션 요소에는 name 속성만 추가 됩니다.
+                    생성 된 체크박스나 라디오에 이벤트를 바인드 할때 id selector 로 요소를 선택하면 첫 번째 옵션 요소에만 이벤트가 적용되니 name 속성으로 요소를 선택 바랍니다.
                 </p>
+                <p lang="en_US" class="alert">
+                    When the data is bound to the radio or checkbox input element, the element set as context has the id attribute and the name attribute, and only the name attribute is added to the additionally created option element.
+                    When selecting an element with the id selector when binding an event to the created checkbox or radio, the event is applied only to the first option element, so select the element with the name attribute.
+                </p>
+                <pre><code>$("input[name='name']").on("click", function(e) { ... });</code></pre>
             </td>
         </tr>
         <tr>
@@ -97,49 +102,70 @@
             <td style="text-align: center;">N/A</td>
             <td style="text-align: center;">N/A</td>
             <td>string|array</td>
-            <td>선택 된 값을 가져 옵니다.</td>
+            <td>
+                <p lang="ko_KR">선택된 요소의 값을 얻거나 선택 합니다.</p>
+                <p lang="en_US">Gets or selects the value of the selected option element.</p>
+            </td>
         </tr>
         <tr>
             <td></td>
             <td>val</td>
             <td>string</td>
             <td style="text-align: center;">N/A</td>
-            <td>val 인자가 undefined 가 아니면 val 값에 해당하는 요소를 선택 해 줍니다.</td>
+            <td>
+                <p lang="ko_KR">선택 할 값.</p>
+                <p lang="en_US">Value of option to select.</p>
+            </td>
         </tr>
         <tr>
             <td>index</td>
             <td style="text-align: center;">N/A</td>
             <td style="text-align: center;">N/A</td>
-            <td>number|array(number)</td>
-            <td>선택 된 요소의 index를 가져 옵니다.</td>
+            <td>number|array[number]</td>
+            <td>
+                <p lang="ko_KR">선택된 요소의 index 를 얻거나 선택 합니다.</p>
+                <p lang="en_US">Gets or selects the index of the selected option element.</p>
+            </td>
         </tr>
         <tr>
             <td></td>
             <td>index</td>
-            <td>number|array(number)</td>
-            <td>N.select</td>
-            <td>index 인자가 undefined 가 아니면 index 값에 해당하는 요소를 선택 해 줍니다.</td>
+            <td>number|array[number]</td>
+            <td style="text-align: center;">N/A</td>
+            <td>
+                <p lang="ko_KR">선택 할 index.</p>
+                <p lang="en_US">Index of option to select.</p>
+            </td>
         </tr>
         <tr>
             <td>remove</td>
             <td>val</td>
             <td>number</td>
             <td>N.select</td>
-            <td>val 값에 해당하는 선택 요소를 제거 해 줍니다.</td>
+            <td>
+                <p lang="ko_KR">val 인자로 지정한 값과 같은 옵션 요소와 데이터 객체를 제거 합니다.</p>
+                <p lang="en_US">Removes optional elements and data objects equal to the value specified by the val argument.</p>
+            </td>
         </tr>
         <tr>
             <td>reset</td>
             <td style="text-align: center;">N/A</td>
             <td style="text-align: center;">N/A</td>
             <td>N.select</td>
-            <td>선택 입력요소의 선택을 초기화 합니다.</td>
+            <td>
+                <p lang="ko_KR">선택을 재설정합니다.</p>
+                <p lang="en_US">Resets selection.</p>
+            </td>
         </tr>
         <tr>
             <td></td>
             <td>selFlag</td>
             <td>boolean</td>
             <td style="text-align: center;">N/A</td>
-            <td>true 이면 아무것 선택하지 않고 false 이면 SELECT 요소의 경우 기본 입력값으로 선택 됩니다.</td>
+            <td>
+                <p lang="ko_KR">select 요소의 경우 true 로 설정하면 아무것 선택하지 않고 false 로 설정하면 기본(첫 번째) 옵션 요소가 선택 됩니다.</p>
+                <p lang="en_US">For select elements, if set to true, nothing is selected; if set to false, the default (first) option element is selected.</p>
+            </td>
         </tr>
     </table>
 </article>

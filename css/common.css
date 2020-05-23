@@ -66,6 +66,10 @@ select {
     height: 24px;
 }
 
+select[multiple='multiple'] {
+    height: auto;
+}
+
 .searchBox select {
     width: auto;
 }
