@@ -34,8 +34,8 @@
                 <p lang="ko_KR" class="alert">Controller object 의 init 메서드가 실행 되기 전이 아니고 N.comm 이 인스턴스 화 되기 전에 실행 되는 이벤트 입니다.</p>
                 <p lang="en_US" class="alert">This event is executed before N.comm is instantiated, not before the controller object init method is executed.</p>
 
-                <p lang="ko_KR">다음과 같은 객체나 값이 이벤트 핸들러 함수의 인자로 반환 됩니다.</p>
-                <p lang="en_US">The following object or value is returned as an argument of the event handler function.</p>
+                <p lang="ko_KR">다음과 같은 객체나 값이 이벤트 핸들러 함수의 인자로 지정 됩니다.</p>
+                <p lang="en_US">The following object or value is specified as an argument of the event handler function.</p>
                 <ul>
                     <li>
                         <p lang="ko_KR">obj : Communicator 의 comm 메서드를 호출하기 전에 N() 함수의 인자로 지정된 파라미터 데이터 객체 또는 페이지가 삽입 될 요소 입니다.</p>
@@ -68,8 +68,8 @@ afterInit : function(obj) {
                 <p lang="en_US">This function is executed after N.comm is initialized.</p>
                 <p lang="ko_KR" class="alert">Controller object 의 init 메서드가 실행 되기 전이 아니고 N.comm 이 인스턴스 화 되기 전에 실행 되는 이벤트 입니다.</p>
                 <p lang="en_US" class="alert">This event is executed before N.comm is instantiated, not before the controller object init method is executed.</p>
-                <p lang="ko_KR">다음과 같은 객체나 값이 이벤트 핸들러 함수의 인자로 반환 됩니다.</p>
-                <p lang="en_US">The following object or value is returned as an argument of the event handler function.</p>
+                <p lang="ko_KR">다음과 같은 객체나 값이 이벤트 핸들러 함수의 인자로 지정 됩니다.</p>
+                <p lang="en_US">The following object or value is specified as an argument of the event handler function.</p>
                 <ul>
                     <li>request(arguments[0]) : Communicator.request</li>
                 </ul>
@@ -93,8 +93,8 @@ afterInit : function(request) {
                 <p lang="ko_KR">서버에 요청을 보내기 전에 실행되는 함수 입니다.</p>
                 <p lang="en_US">This function is executed before sending a request to the server.</p>
 
-                <p lang="ko_KR">다음과 같은 객체나 값이 이벤트 핸들러 함수의 인자로 반환 됩니다.</p>
-                <p lang="en_US">The following object or value is returned as an argument of the event handler function.</p>
+                <p lang="ko_KR">다음과 같은 객체나 값이 이벤트 핸들러 함수의 인자로 지정 됩니다.</p>
+                <p lang="en_US">The following object or value is specified as an argument of the event handler function.</p>
                 <ul>
                     <li>request(arguments[0]) : Communicator.request</li>
                     <li>xhr(arguments[1]) : jQuery XMLHTTPRequest</li>
@@ -122,8 +122,8 @@ beforeSend : function(request, xhr, settings) {
                 <p lang="en_US">This function is executed when the request is successful.</p>
                 <p lang="ko_KR" class="alert">data 인자를 수정해서 return 하면 수정 된 data 를 모든 N.comm 의 응답 data 로 받을 수 있습니다.</p>
                 <p lang="en_US" class="alert">If you return by modifying the data argument, you can receive the modified data as response data of all N.comm.</p>
-                <p lang="ko_KR">다음과 같은 객체나 값이 이벤트 핸들러 함수의 인자로 반환 됩니다.</p>
-                <p lang="en_US">The following object or value is returned as an argument of the event handler function.</p>
+                <p lang="ko_KR">다음과 같은 객체나 값이 이벤트 핸들러 함수의 인자로 지정 됩니다.</p>
+                <p lang="en_US">The following object or value is specified as an argument of the event handler function.</p>
                 <ul>
                     <li>request(arguments[0]) : Communicator.request</li>
                     <li lang="ko_KR">data(arguments[1]) : 서버 응답 데이터(JSON, HTML 등)</li>
@@ -151,8 +151,8 @@ success : function(request, data, textStatus, xhr) {
             <td>
                 <p lang="ko_KR">서버에서 에러가 발생 했을 때 실행 되는 함수 입니다.</p>
                 <p lang="en_US">This function is executed when an error occurs on the server.</p>
-                <p lang="ko_KR">다음과 같은 객체나 값이 이벤트 핸들러 함수의 인자로 반환 됩니다.</p>
-                <p lang="en_US">The following object or value is returned as an argument of the event handler function.</p>
+                <p lang="ko_KR">다음과 같은 객체나 값이 이벤트 핸들러 함수의 인자로 지정 됩니다.</p>
+                <p lang="en_US">The following object or value is specified as an argument of the event handler function.</p>
                 <ul>
                     <li>request(arguments[0]) : Communicator.request</li>
                     <li>xhr(arguments[1]) : jQuery XMLHTTPRequest</li>
@@ -179,8 +179,8 @@ error : function(request, xhr, textStatus, errorThrown) {
             <td>
                 <p lang="ko_KR">서버의 응답이 완료 되었을 때 실행 되는 함수 입니다.</p>
                 <p lang="en_US">This function is executed when the server response is completed.</p>
-                <p lang="ko_KR">다음과 같은 객체나 값이 이벤트 핸들러 함수의 인자로 반환 됩니다.</p>
-                <p lang="en_US">The following object or value is returned as an argument of the event handler function.</p>
+                <p lang="ko_KR">다음과 같은 객체나 값이 이벤트 핸들러 함수의 인자로 지정 됩니다.</p>
+                <p lang="en_US">The following object or value is specified as an argument of the event handler function.</p>
                 <ul>
                     <li>request(arguments[0]) : Communicator.request</li>
                     <li>xhr(arguments[1]) : jQuery XMLHTTPRequest</li>
