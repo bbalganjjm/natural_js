@@ -239,11 +239,12 @@ formInstance.bind(0, data, "col01", "col02", "col03");</code></pre>
             <td>val</td>
             <td style="text-align: center;">N/A</td>
             <td style="text-align: center;">N/A</td>
-            <td>value object|N.form</td>
+            <td>string|number|boolean|N.form</td>
             <td>
-                <p>선택한 컬럼의 원래 값을 가져오거나 입력(수정) 합니다.</p>
-                <p class="alert">val 인자를 입력하지 않으면 선택한 값을 반환하고 입력하면 선택한 키 컬럼의 값을 입력한 값으로 바꿔 줍니다.</p>
-                <p class="alert">값 입력 시 입력한 키 에 해당하는 데이터 없으면 새로운 컬럼 데이터를 생성 합니다.</p>
+                <p lang="ko_KR">컴포넌트에 바인딩 되어 있는 데이터의 프로퍼티 값을 얻어오거나 설정 합니다.</p>
+                <p lang="en_US">Gets or sets the property value of data bound to the component.</p>
+                <p lang="ko_KR" class="alert">val 인자가 설정되면 지정된 값을 바인딩 된 데이터에 세팅하거나 추가하고 val 인자가 설정 되지 않으면 지정된 값을 얻어 옵니다.</p>
+                <p lang="en_US" class="alert">If the val argument is set, the specified value is set or added to the bound data. If the val argument is not set, the specified value is get.</p>
             </td>
         </tr>
         <tr>
@@ -251,16 +252,23 @@ formInstance.bind(0, data, "col01", "col02", "col03");</code></pre>
             <td>key</td>
             <td>string</td>
             <td style="text-align: center;">N/A</td>
-            <td>가져올 값의 key 컬럼명</td>
+            <td>
+                <p lang="ko_KR">바인딩 된 데이터 객체의 프로퍼티명</p>
+                <p lang="en_US">Property name of the bound data object</p>
+            </td>
         </tr>
         <tr>
             <td></td>
             <td>val</td>
-            <td>string | number | boolean | null</td>
+            <td>string|number|boolean|null</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p>저장할 값</p>
-                <p class="alert">key 인자 값과 같은 id 속성값을 가진 HTML 요소가 있다면 null 은 빈 문자열 숫자는 숫자 문자열, Boolean 은 "true" 나 "false" 문자열로 변환 되어 저장 되고 대상 HTML 요소가 없다면 원형 그대로 저장 됩니다.</p>
+                <p lang="ko_KR">설정 값.</p>
+                <p lang="en_US">Setting value.</p>
+                <p lang="ko_KR" class="alert">데이터 값이 바인딩 된 요소가 있으면 null 은 빈 문자열로, number 타입은 숫자 문자열로, boolean 은 "true" 나 "false" 문자열로 변환 되어 설정 됩니다.
+	                바인딩 된 요소가 없으면 설정한 값의 원래 타입으로 저장 됩니다.</p>
+                <p lang="en_US" class="alert">If there is an element to which the data value is bound, null is converted to an empty string, number type is a numeric string, and boolean is converted to a "true" or "false" string and set.
+                    If there is no bound element, it is saved as the original type of the setting value.</p>
             </td>
         </tr>
     </table>

@@ -41,13 +41,13 @@ Documents are divided into pages by component, and page paragraphs are separated
 
 ---
 
-__용어__
+__Terms__
 * jquery object : Object returned by jQuery extension object or jQuery selector when executing jQuery() or $(), N() function.
 * selector : Strings or objects, arrays, html elements, and functions that you specify in CSS selector form in jQuery.
 
 ---
 
-__주석__
+__Note__
 1. <span id="fn1">Constructor</span>
 2. <span id="fn2">Constructor arguments</span>
 3. <span id="fn3">Default Option</span>
