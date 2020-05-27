@@ -115,6 +115,8 @@ DataSync is a library that synchronizes data changed by components or libraries 
 
 Natural-UI is a library package that supports HTML-based UI components.
 
+<p class="alert">Components such as Grid, List, and Form do not have their own style. If the style is defined in the context element(table, ul/li, etc.) of the component before initializing the component, the component is created according to the defined style.</p>
+
 ![Natural-UI](images/intr/pic7.png)
 
 <center>[ Natural-UI ]</center>
