@@ -69,13 +69,13 @@ Natural Architecture Framework provides a clear separation of the areas of devel
 #### Controller
 
 [Controller(N.cont)](#cmVmcjAyMDElMjRDb250cm9sbGVyJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAyMDEuaHRtbA==) is a class that implements Controller layer of ​​CVC Architecture Pattern.
- * N.cont executes the init function of the Controller object and returns a Controller object.
-   <p class="alert">The Controller object is the object that controls the elements of the View and the data retrieved by Communicator.</p>
+ * Controller object is an object in which user-defined functions that control block pages are implemented.
+   <p class="alert">N.cont executes the init function of the Controller object and returns a Controller object.</p>
  * Natural-ARCHITECTURE supports AOP (Aspect-Oriented Programming) for Controller objects.
 
 #### View
 
-View has no implementation and simply defines the HTML element area as View.
+There is no separate implementation of View, and the HTML element area of ​​the block page is defined as View.
 
 #### Communicator
 

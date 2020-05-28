@@ -67,13 +67,13 @@ Natural Architecture Framework 는 개발 업무 영역을 명확하게 구분 �
 #### Controller
 
 [Controller(N.cont)](#cmVmcjAyMDElMjRDb250cm9sbGVyJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAyMDEuaHRtbA==) 는 CVC Architecture Pattern 의 Controller 레이어를 구현한 클래스 입니다.
- * N.cont 는 Controller object 의 init 함수를 실행 해 주고 Controller object 를 반환 합니다.
-   <p class="alert">Controller object 는 View 의 요소들과 Communicator 에서 검색 한 데이터를 제어하는 객체 입니다.</p>
+ * Controller object 는 블록 페이지를 제어하는 사용자 정의 함수들이 구현 되는 객체 입니다.
+   <p class="alert">N.cont 는 Controller object 의 init 함수를 실행 해 주고 Controller object 를 반환 합니다.</p>
  * Natural-ARCHITECTURE 는 Controller object 를 대상으로 AOP(Aspect-Oriented Programming) 를 지원 합니다.
 
 #### View
 
-View 는 별도의 구현체는 없고 단순하게 HTML 요소 영역이  View 로 정의 되어 있습니다.
+View 는 별도의 구현체는 없고 블록 페이지의 HTML 요소 영역이  View 로 정의 됩니다.
 
 #### Communicator
 
