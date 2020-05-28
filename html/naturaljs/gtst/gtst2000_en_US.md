@@ -23,10 +23,10 @@ Getting Started with Sample project
 The basic technologies of the sample project are composed as follows.
 
 * **Front-End**
-     * language : HTML, CSS, Javascript
+     * Language : HTML, CSS, Javascript
      * Framework : Natural-JS
 * **Back-End**
-     * language : JAVA
+     * Language : JAVA
      * Framework : Spring Boot
      * DB : HSQLDB
 
