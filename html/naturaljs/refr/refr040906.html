@@ -103,8 +103,10 @@ gridInst.data("modified", "col01", "col02", "col03");
             <td style="text-align: center;">N/A</td>
             <td>jquery object</td>
             <td>
-                <p>그리드의 헤더 영역 요소를 반환 합니다.</p>
-                <p>동적으로 헤더의 모양을 바꿔야 된다면 contextHead 메서드와 jQuery 를 활용하여 템플릿을 수정하기 바랍니다.</p>
+                <p lang="ko_KR">context 옵션으로 지정한 요소의 헤더요소(thead)를 반환 합니다.</p>
+                <p lang="en_US">Returns the header element(thead) of the element specified by the context option.</p>
+                <p lang="ko_KR">contextHead 함수를 사용하면 N.grid 가 초기화 된 이후에도 그리드의 헤더를 수정 할 수 있습니다</p>
+                <p lang="en_US">The contextHead function allows you to modify the grid's header even after N.grid has been initialized.</p>
             </td>
         </tr>
         <tr>
@@ -112,7 +114,10 @@ gridInst.data("modified", "col01", "col02", "col03");
             <td>selector</td>
             <td>string</td>
             <td style="text-align: center;">N/A</td>
-            <td>selector 문자열을 입력하면 헤더 영역 요소에서 선택된 요소를 반환 합니다.</td>
+            <td>
+                <p lang="ko_KR">jQuery selector 구문을 입력하면 contextHead 요소에서 지정한 요소를 찾아서 반환 합니다.</p>
+                <p lang="en_US">If you enter jQuery selector syntax, the element specified in the contextHead element is found and returned.</p>
+            </td>
         </tr>
         <tr>
             <td>contextBodyTemplate</td>
@@ -120,10 +125,12 @@ gridInst.data("modified", "col01", "col02", "col03");
             <td style="text-align: center;">N/A</td>
             <td>jquery object</td>
             <td>
-                <p>그리드 bind 전 초기화 시 지정된 그리드 바디 템플릿 요소를 반환 합니다.</p>
-                <p class="alert">N.grid 는 이 요소를 복제하여 행들을 만듭니다.</p>
-                <p>contextBodyTemplate 메서드를 통해 반환 된 요소의 구성을 수정하고 다시 바인드 하면 수정된 모양의 그리드 바디가 만들어 집니다.</p>
-                <p>동적으로 그리드 바디의 모양을 바꿔야 된다면 contextBodyTemplate 메서드와 jQuery 를 활용하여 템플릿을 수정하기 바랍니다.</p>
+                <p lang="ko_KR">context 옵션으로 지정한 요소의 행요소(tbody)를 반환 합니다.</p>
+                <p lang="en_US">Returns the row element(li) of the element specified by the context option.</p>
+                <p lang="ko_KR">반환된 요소를 수정 한 다음 bind 함수를 실행 하면 수정된 요소로 행들이 생성 됩니다.</p>
+                <p lang="en_US">If you modify the returned element and then execute the bind function, rows are created with the modified element.</p>
+                <p lang="ko_KR">contextBodyTemplate 함수를 사용하면 N.grid 가 초기화 된 이후에도 N.grid 의 행 요소를 수정 할 수 있습니다</p>
+                <p lang="en_US">The contextBodyTemplate function allows you to modify the N.grid's row element even after N.grid has been initialized.</p>
             </td>
         </tr>
         <tr>
@@ -131,7 +138,10 @@ gridInst.data("modified", "col01", "col02", "col03");
             <td>selector</td>
             <td>string</td>
             <td style="text-align: center;">N/A</td>
-            <td>selector 문자열을 입력하면 그리드 바디 템플릿 요소에서 선택된 요소를 반환 합니다.</td>
+            <td>
+                <p lang="ko_KR">jQuery selector 구문을 입력하면 contextBodyTemplate 요소에서 지정한 요소를 찾아서 반환 합니다.</p>
+                <p lang="en_US">If you enter jQuery selector syntax, the element specified in the contextBodyTemplate element is found and returned.</p>
+            </td>
         </tr>
         <tr>
             <td>bind</td>
@@ -457,7 +467,7 @@ gridInst.data("modified", "col01", "col02", "col03");
             <td>number</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p lang="ko_KR">이동 할 위치의 행 index 입력 합니다.</p>
+                <p lang="ko_KR">이동 할 위치의 행 index를 입력 합니다.</p>
                 <p lang="en_US">Enter the row index of the position you want to move.</p>
                 <p lang="ko_KR" class="alert">지정한 행 바로 이전으로 이동 됩니다. 마지막 행으로 이동 하려면 마지막 행 index 값에 1을 더해서 입력 해 주세요.</p>
                 <p lang="en_US" class="alert">Moved to right in front of the specified row. To move to the last row, add 1 to the index value of the last row.</p>
@@ -491,7 +501,7 @@ gridInst.data("modified", "col01", "col02", "col03");
             <td>number</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p lang="ko_KR">복사 할 위치의 행 index 입력 합니다.</p>
+                <p lang="ko_KR">복사 할 위치의 행 index를 입력 합니다.</p>
                 <p lang="en_US">Enter the row index of the position you want to copy.</p>
                 <p lang="ko_KR" class="alert">지정한 행 바로 이전으로 복사 됩니다. 마지막 행으로 복사 하려면 마지막 행 index 값에 1을 더해서 입력 해 주세요.</p>
                 <p lang="en_US" class="alert">Copied to right in front of the specified row. To copy to the last row, add 1 to the index value of the last row.</p>
