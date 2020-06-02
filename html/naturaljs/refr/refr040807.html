@@ -26,8 +26,9 @@
     "registered": "20120616",
 }]</code></pre>
 
-    <h4 class="notIndex">1. 리스트 생성 후 데이터 바인드</h4>
-    <pre><code>&lt;ul class="listExample10"&gt;
+    <h4 lang="ko_KR" class="notIndex">1. 리스트에 데이터 바인딩 하기.</h4>
+    <h4 lang="en_US" class="notIndex">1. Binds the data to the list.</h4>
+    <pre><code>&lt;ul class="list"&gt;
     &lt;li&gt;
         &lt;input id="name" type="text"&gt;
         &lt;input id="age" type="text"&gt;
@@ -37,12 +38,14 @@
 &lt;/ul&gt;
 
 &lt;script type="text/javascript"&gt;
-    N(data).list(".listExample10").bind();
+    N(data).list(".list").bind();
 &lt;/script&gt;</code></pre>
 
-    <h4 class="notIndex">1.1. 리스트에 데이터 바인드(Row Handler 적용)</h4>
-    <p class="alert">rowHandler 이벤트는 리스트 렌더링 시 행이 만들어질때마다 발생하는 이벤트 입니다. 기본 제공하는 리스트의 기능을 확장하기 위해 사용됩니다.</p>
-    <pre><code>&lt;ul class="listExample12"&gt;
+    <h4 lang="ko_KR" class="notIndex">1.1. rowHandler 적용 하기.</h4>
+    <h4 lang="en_US" class="notIndex">1.1. Applying rowHandler.</h4>
+    <p lang="ko_KR" class="alert">rowHandler 이벤트는 리스트 렌더링 시 행이 만들어질때마다 실행되는 이벤트 입니다.</p>
+    <p lang="en_US" class="alert">The rowHandler event is an event that is executed whenever a row is created when the list is rendered.</p>
+    <pre><code>&lt;ul class="list"&gt;
     &lt;li&gt;
         &lt;input id="name" type="text"&gt;
         &lt;input id="age" type="text"&gt;
@@ -53,10 +56,9 @@
 
 &lt;script type="text/javascript"&gt;
     N(data).list({
-        context : ".listExample12",
+        context : ".list",
         height : 200,
         rowHandler : function(index, row, data) {
-            // age 가 28 이상이면 해당 셀의 배경색을 red 로 설정
             if(data.age &gt;= 28) {
                 row.find("#age").css("background-color", "red");
             }
@@ -64,57 +66,85 @@
     }).bind();
 &lt;/script&gt;</code></pre>
 
-    <h4 class="notIndex">2. 신규 행 추가</h4>
-    <pre><code>&lt;ul class="listExample20"&gt;
+    <h4 lang="ko_KR" class="notIndex">2. 행 추가 하기.</h4>
+    <h4 lang="en_US" class="notIndex">2. Adding rows.</h4>
+    <pre><code>&lt;ul class="list"&gt;
     &lt;li&gt;
         &lt;input id="name" type="text"&gt;
-        &lt;input id="age" type="text" data-validate='[ ["required"], ["integer"] ]'&gt; &lt;!-- 필수입력과 숫자만 입력 체크 --&gt;
-        &lt;input id="email" type="text" data-validate='[ ["email"] ]'&gt; &lt;!-- 이메일 주소 체크 --&gt;
-        &lt;input id="registered" type="text" data-format='[ ["date", 8, "date"] ]'&gt; &lt;!-- 날자포멧 및 데이트피커 적용 --&gt;
+        &lt;input id="age" type="text" data-validate='[ ["required"], ["integer"] ]'&gt;
+        &lt;input id="email" type="text" data-validate='[ ["email"] ]'&gt;
+        &lt;input id="registered" type="text" data-format='[ ["date", 8, "date"] ]'&gt;
     &lt;/li&gt;
 &lt;/ul&gt;
-&lt;button class="btnListExample20"&gt;행추가&lt;/button&gt;
+&lt;button class="btnAdd"&gt;Add Row&lt;/button&gt;
 
 &lt;script type="text/javascript"&gt;
-    var list = N(data).list(".listExample20").bind();
+    var list = N(data).list(".list").bind();
 
-    // 행추가
-    N(".btnListExample20").click(function() {
-        list.add(); //add 메서드를 호출하면 id 속성을 가지고 있는 입력요소를 기반으로 { "age": "", "email": "", "registered" : "" } 와 같은 데이터가 추가됨.
+    N(".btnAdd").click(function() {
+        list.add(); // list.data() ==> [{ "age": "", "email": "", "registered" : "" }]
     });
 &lt;/script&gt;</code></pre>
 
-    <h4 class="notIndex">3. 리스트에 데이터 바인드 및 데이터 포메팅(N.formatter) -&gt; 저장 메시지 출력(N.alert) 후 리스트 일괄 검증(N.validator) -&gt; 저장(N.comm)</h4>
-    <pre><code>&lt;ul class="listExample30"&gt;
+    <h4 lang="ko_KR" class="notIndex">3. 리스트에 데이터 바인드 및 데이터 포멧팅 -&gt; 저장 확인 메시지 표시(N.alert) 후 리스트의 전체 데이터 유효성 검증(N.validator) -&gt; 리스트 데이터를 서버에 전송(N.comm)</h4>
+    <h4 lang="en_US" class="notIndex">3. Binds data to the list and format the data -&gt; Validates(N.validator) entire data in the list after displaying(N.alert) the save confirm message  -&gt; Submits(N.comm) the list data to the server.</h4>
+    <pre lang="ko_KR"><code>&lt;ul class="list"&gt;
     &lt;li&gt;
         &lt;input id="name" type="text"&gt;
-        &lt;input id="age" type="text" data-validate='[ ["required"], ["integer"] ]'&gt; &lt;!-- 필수입력과 숫자만 입력 체크 --&gt;
-        &lt;input id="email" type="text" data-validate='[ ["email"] ]'&gt; &lt;!-- 이메일 주소 체크 --&gt;
-        &lt;input id="registered" type="text" data-format='[ ["date", 8, "date"] ]'&gt; &lt;!-- 날자포멧 및 데이트피커 적용 --&gt;
+        &lt;input id="age" type="text" data-validate='[ ["required"], ["integer"] ]'&gt;
+        &lt;input id="email" type="text" data-validate='[ ["email"] ]'&gt;
+        &lt;input id="registered" type="text" data-format='[ ["date", 8, "date"] ]'&gt;
     &lt;/li&gt;
 &lt;/ul&gt;
-&lt;button class="btnListExample30"&gt;저장&lt;/button&gt;
+&lt;button class="btnSave"&gt;Save&lt;/button&gt;
 
 &lt;script type="text/javascript"&gt;
-    var list = N(data).list(".listExample30").bind();
+    var list = N(data).list(".list").bind();
 
-    N(".btnListExample30").click(function() {
-        N(window).alert({ // 1. confirm 메시지 출력
-            msg : "저장 하겠습니까?",
+    N(".btnSave").click(function() {
+        N(window).alert({ // 1. confirm 메시지 표시.
+            msg : "저장 하시겠습니까?",
             confirm : true,
             onOk : function() {
-                if(list.validate()) { // 2. 리스트에 입력된 데이터 검증
-                    N(list.data()).comm("save.json").submit(); // 3. 리스트의 데이터를 저장
+                if(list.validate()) { // 2. 변경된 전체 데이터 유효성 검증.
+                    N(list.data("modified")).comm("save.json").submit(); // 3. 변경 된 데이터를 서버로 전송.
+                }
+            }
+        });
+    });
+&lt;/script&gt;</code></pre>
+    <pre lang="en_US"><code>&lt;ul class="list"&gt;
+    &lt;li&gt;
+        &lt;input id="name" type="text"&gt;
+        &lt;input id="age" type="text" data-validate='[ ["required"], ["integer"] ]'&gt;
+        &lt;input id="email" type="text" data-validate='[ ["email"] ]'&gt;
+        &lt;input id="registered" type="text" data-format='[ ["date", 8, "date"] ]'&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+&lt;button class="btnSave"&gt;Save&lt;/button&gt;
+
+&lt;script type="text/javascript"&gt;
+    var list = N(data).list(".list").bind();
+
+    N(".btnSave").click(function() {
+        N(window).alert({ // 1. Displays a confirm message.
+            msg : "Would you like to save?",
+            confirm : true,
+            onOk : function() {
+                if(list.validate()) { // 2. Validates all changed data.
+                    N(list.data("modified")).comm("save.json").submit(); // 3. Transfers the changed data to the server.
                 }
             }
         });
     });
 &lt;/script&gt;</code></pre>
 
-    <h4 class="notIndex">4. N.select 와 N.list 연동</h4>
-    <p class="alert">N.select 와 N.list을 연동하여 사용할 때는 반드시 N.select 를 먼저 초기화 하고 N.list 를 그 다음에 초기화 해야 합니다.</p>
-    <pre><code>&lt;ul class="listExample40"&gt;
-    &lt;li&gt;&lt;!-- 데이터가 반복되면서 바인드 되는 부분 --&gt;
+    <h4 lang="ko_KR" class="notIndex">4. N.select 와 N.list 연동하기.</h4>
+    <h4 lang="en_US" class="notIndex">4. Linking N.select and N.list.</h4>
+    <p lang="ko_KR" class="alert">N.select와 연동하려면 먼저 N.select를 초기화해야합니다. 그런 다음 N.list를 초기화하고 데이터를 바인드하십시오.</p>
+    <p lang="en_US" class="alert">To link with N.select, you need to initialize Then initialize N.list and bind the data.</p>
+    <pre lang="ko_KR"><code>&lt;ul class="list"&gt;
+    &lt;li&gt;&lt;!-- 이 요소는 행을 생성하기 위해 데이터의 길이만큼 복사됩니다. --&gt;
         &lt;input id="name" type="text"&gt;
         &lt;input id="age" type="text"&gt;
         &lt;input id="gender" type="radio"&gt;
@@ -124,7 +154,7 @@
 &lt;/ul&gt;
 
 &lt;script type="text/javascript"&gt;
-    // 1. gender 라디오 셀렉트 생성
+    // 1. gender 라디오 셀렉트 생성.
     N([{
          "key" : "male",
          "val" : "male"
@@ -132,37 +162,87 @@
          "key" : "female",
          "val" : "female"
     }]).select({
-        context : ".listExample40 #gender",
+        context : ".list #gender",
         key : "key",
         val : "val"
     })
 
-    // 2. 리스트 바인드
-    N(data).list(".listExample40").bind();
+    // 2. 데이터 바인딩.
+    N(data).list(".list").bind();
+&lt;/script&gt;</code></pre>
+    <pre lang="en_US"><code>&lt;ul class="list"&gt;
+    &lt;li&gt;&lt;!-- This element is copied much the length of the data to create the rows. --&gt;
+        &lt;input id="name" type="text"&gt;
+        &lt;input id="age" type="text"&gt;
+        &lt;input id="gender" type="radio"&gt;
+        &lt;input id="email" type="text"&gt;
+        &lt;span id="registered"&gt;&lt;/span&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;script type="text/javascript"&gt;
+    // 1. Create a gender radio selection.
+    N([{
+         "key" : "male",
+         "val" : "male"
+     },{
+         "key" : "female",
+         "val" : "female"
+    }]).select({
+        context : ".list #gender",
+        key : "key",
+        val : "val"
+    })
+
+    // 2. Data binding.
+    N(data).list(".list").bind();
 &lt;/script&gt;</code></pre>
 
-    <h4 class="notIndex">5. onSelect 이벤트를 이용하지 않고 행 의 특정 요소 클릭 시 동작하는 이벤트 핸들러를 jQuery on 을 이용하여 직접 정의.</h4>
-    <p class="alert">N.list 의 행 요소들은 다시 바인드 하면 사라지고 다시 생성 되므로 bind나 click 대신 on 메서드를 이용하여 이벤트를 바인드 해야 합니다.</p>
-<pre><code>// Controller
-N("selector").cont(function() {
+    <h4 lang="ko_KR" class="notIndex">5. jQuery 의 on 메서드를 사용하여 행 선택 이벤트를 바인딩 하기.</h4>
+    <h4 lang="en_US" class="notIndex">5. Binding a row selection event using jQuery's on method.</h4>
+    <p lang="ko_KR" class="alert">onSelect 이벤트에서 행 요소에 이벤트를 바인딩 하면 행 수 만큼 이벤트 객체가 생성 되어 속도가 느려 질 수 있습니다.
+        다음과 같이 이벤트 위임(Event Delegation, jQuery.on method)을 사용하면 성능저하 없이 행 요소들에 이벤트를 바인딩 할 수 있습니다.</p>
+    <p lang="en_US" class="alert">If you bind an event to a row element in the onSelect event, it can slow it down because event object is created as much the number of rows.
+    If you use the Event Delegation (jQuery.on method), you can bind events to row elements without performance degradation, as follows:</p>
+    <pre lang="ko_KR"><code>N("selector").cont(function() {
     init : function(view, request) {
-        // 1. 리스트 바인드
+        // 1. N.list 초기화 및 데이터 바인딩.
 	    var list = N(data).list(N("selector", view)).bind();
 
-	    // 2. 행의 특정 요소(#col01) 클릭 시 동작하는 이벤트 바인딩
+	    // 2. 지정한 요소에 이벤트 바인딩.
 	    list.context().on("click", "li #col01", function() {
 
-	        // 3. 행 인덱스 얻어오기
+	        // 3. 행 인덱스 가져오기.
 	        var rowEle = $(this).closest("li");
 	        var idx = list.context("li").index(rowEle);
+	        // 4. 행 데이터 가져오기.
 	        var rowData = list.data()[idx];
 
-	        // 4. 가져 온 행 인덱스와 행 요소, 행 데이터를 이용하여 로직을 처리
 	        N.log(idx, rowEle, rowData);
 	    });
     }
 });
 </code></pre>
+    <pre lang="en_US"><code>N("selector").cont(function() {
+    init : function(view, request) {
+        // 1. Initializes the N.list and binds the data.
+        var list = N(data).list(N("selector", view)).bind();
+
+        // 2. Event binding to the specified element.
+        list.context().on("click", "li #col01", function() {
+
+            // 3. Get the row index.
+            var rowEle = $(this).closest("li");
+            var idx = list.context("li").index(rowEle);
+            // 4. Get the row data.
+            var rowData = list.data()[idx];
+
+            N.log(idx, rowEle, rowData);
+        });
+    }
+});
+</code></pre>
+
 </article>
 
 <script type="text/javascript">
