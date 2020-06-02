@@ -4,22 +4,32 @@
         <span lang="en_US">Examples</span>
     </h2>
 
-    <h4 class="notIndex">1. 메시지를 표시하기 위한 세가지 방법</h4>
-    <pre><code>&lt;script type="text/javascript"&gt;
-    // 옵션을 지정 하면서 메시지 표시
+    <h4 lang="ko_KR" class="notIndex">1. 메시지를 표시하기 위한 세가지 방법</h4>
+    <h4 lang="en_US" class="notIndex">1. Three ways to display a message</h4>
+    <pre lang="ko_KR"><code>&lt;script type="text/javascript"&gt;
+    // 옵션을 지정해서 메시지 표시
     N.notify(opts).add(msg, url);
-    // 옵션 지정 없이 기본 옶션으로 메시지 표시
+    // 옵션 지정 없이 기본 옵션으로 메시지 표시
     N.notify.add(msg, url);
-    // 메시지 대화 상자의 위치를 지정 하고 옵션을 지정 하면서 메시지 표시
+    // 메시지 대화 상자의 위치를 지정 하고 옵션을 지정해서 메시지 표시
+    N(position).notify(opts).add(msg, url);
+&lt;/script&gt;</code></pre>
+    <pre lang="en_US"><code>&lt;script type="text/javascript"&gt;
+    // Displays the message by specifying options.
+    N.notify(opts).add(msg, url);
+    // Displays the message with default options without specifying options.
+    N.notify.add(msg, url);
+    // Specifies the position of the message dialog and displays the message by specifying options.
     N(position).notify(opts).add(msg, url);
 &lt;/script&gt;</code></pre>
 
-    <h4 class="notIndex">2. 하단 우측에 메시지 표시, 메시지 클릭 시 페이지 이동</h4>
+    <h4 lang="ko_KR" class="notIndex">2. 우측 하단에 메시지 표시, 메시지 클릭 시 페이지 이동</h4>
+    <h4 lang="en_US" class="notIndex">2. A message at the bottom right, Move page when message is clicked</h4>
     <pre><code>&lt;script type="text/javascript"&gt;
     N({
         top : 5,
         right : 10
-    }).notify().add("Natural-JS API 문서가 업데이트 되었습니다.", "http://bbalganjjm.github.io/natural_js/");
+    }).notify().add("The Natural-JS API manual has been updated.", "http://bbalganjjm.github.io/natural_js/");
 &lt;/script&gt;</code></pre>
 </article>
 

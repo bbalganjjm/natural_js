@@ -1,3 +1,9 @@
+<style type="text/css">
+.refr040606 strong {
+    color: blue;
+}
+</style>
+
 <article class="refr040606 apiDoc">
     <h2>
         <span lang="ko_KR">예제</span>
@@ -49,7 +55,7 @@ N.context.attr("ui", {
     &lt;option&gt;Select&lt;/option&gt;
 &lt;/select&gt;
 &lt;script type="text/javascript"&gt;
-    N(data).select(".eyeColor").bind().val("brown");
+    N(data).select(".eyeColor").bind().<strong>val</strong>("brown");
 &lt;/script&gt;</code></pre>
 
 <h4 lang="ko_KR" class="notIndex">2. select[multiple=multiple] 요소에 데이터 바인딩하기.</h4>
@@ -63,7 +69,7 @@ N.context.attr("ui", {
 <p lang="en_US">2.1. Data binding to the select[multiple=multiple] element and selecting "brown" and "green" as the default.</p>
     <pre><code>&lt;select class="eyeColor" multiple="multiple"&gt;&lt;/select&gt;
 &lt;script type="text/javascript"&gt;
-    N(data).select(".eyeColor").bind().val(["brown", "green"]);
+    N(data).select(".eyeColor").bind().<strong>val</strong>(["brown", "green"]);
 &lt;/script&gt;</code></pre>
 
 <h4 lang="ko_KR" class="notIndex">3. input[type=radio] 요소에 데이터 바인딩하기.</h4>
@@ -77,7 +83,7 @@ N.context.attr("ui", {
 <p lang="en_US">3.1. Data binding to the input[type=radio] element and selecting "brown" as the default.</p>
     <pre><code>&lt;input class="eyeColor" type="radio"&gt;
 &lt;script type="text/javascript"&gt;
-    N(data).select(".eyeColor").bind().val("brown");
+    N(data).select(".eyeColor").bind().<strong>val</strong>("brown");
 &lt;/script&gt;</code></pre>
 
 <h4 lang="ko_KR" class="notIndex">4. input[type=checkbox] 요소에 데이터 바인딩하기.</h4>
@@ -91,7 +97,7 @@ N.context.attr("ui", {
 <p lang="en_US">4.1. Data binding to the input[type=checkbox] element and selecting "brown" as the default.</p>
     <pre><code>&lt;input class="eyeColor" type="checkbox"&gt;
 &lt;script type="text/javascript"&gt;
-    N(data).select(".eyeColor").bind().val(["brown", "green"]);
+    N(data).select(".eyeColor").bind().<strong>val</strong>(["brown", "green"]);
 &lt;/script&gt;</code></pre>
 </article>
 

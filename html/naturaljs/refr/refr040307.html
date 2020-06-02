@@ -1,3 +1,9 @@
+<style type="text/css">
+.refr040307 strong {
+    color: blue;
+}
+</style>
+
 <article class="refr040307 apiDoc">
     <h2>
         <span lang="ko_KR">예제</span>
@@ -18,14 +24,14 @@
 
 &lt;script type="text/javascript"&gt;
     N(".datepicker").datepicker({
-        monthonly : true
+        <strong>monthonly : true</strong>
     });
 &lt;/script&gt;</code></pre>
 
     <h4 lang="ko_KR" class="notIndex">3. N.form 이나 N.grid, N.list 로 데이터를 바인딩 할 때 "date" Format 룰을 지정하여 자동으로 Datepicker 를 생성하기.</h4>
     <h4 lang="en_US" class="notIndex">3. When binding data with N.form, or N.grid, N.list, specify "date" format rule to automatically create Datepicker.</h4>
     <pre><code>&lt;div class="form"&gt;
-    &lt;input id="datepicker" type="text" data-format='[["date", 8, "date"]]'&gt;
+    &lt;input id="datepicker" type="text" data-format='<strong>[["date", 8, "date"]]</strong>'&gt;
 &lt;/div&gt;
 
 &lt;script type="text/javascript"&gt;

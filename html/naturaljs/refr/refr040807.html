@@ -1,3 +1,9 @@
+<style type="text/css">
+.refr040807 strong {
+    color: blue;
+}
+</style>
+
 <article class="refr040807 apiDoc">
     <h2>
         <span lang="ko_KR">예제</span>
@@ -58,11 +64,11 @@
     N(data).list({
         context : ".list",
         height : 200,
-        rowHandler : function(index, row, data) {
+        <strong>rowHandler : function(index, row, data) {</strong>
             if(data.age &gt;= 28) {
                 row.find("#age").css("background-color", "red");
             }
-        }
+        <strong>}</strong>
     }).bind();
 &lt;/script&gt;</code></pre>
 
@@ -82,7 +88,7 @@
     var list = N(data).list(".list").bind();
 
     N(".btnAdd").click(function() {
-        list.add(); // list.data() ==> [{ "age": "", "email": "", "registered" : "" }]
+        list.<strong>add</strong>(); // list.data() ==> [{ "age": "", "email": "", "registered" : "" }]
     });
 &lt;/script&gt;</code></pre>
 
@@ -102,15 +108,15 @@
     var list = N(data).list(".list").bind();
 
     N(".btnSave").click(function() {
-        N(window).alert({ // 1. confirm 메시지 표시.
+        <strong>N(window).alert</strong>({ // 1. confirm 메시지 표시.
             msg : "저장 하시겠습니까?",
-            confirm : true,
-            onOk : function() {
-                if(list.validate()) { // 2. 변경된 전체 데이터 유효성 검증.
-                    N(list.data("modified")).comm("save.json").submit(); // 3. 변경 된 데이터를 서버로 전송.
+            <strong>confirm : true</strong>,
+            <strong>onOk : function() {</strong>
+                if(<strong>list.validate()</strong>) { // 2. 변경된 전체 데이터 유효성 검증.
+                    N(<strong>list.data("modified")</strong>).comm("save.json").submit(); // 3. 변경 된 데이터를 서버로 전송.
                 }
-            }
-        });
+            <strong>}</strong>
+        }).show();
     });
 &lt;/script&gt;</code></pre>
     <pre lang="en_US"><code>&lt;ul class="list"&gt;
@@ -127,15 +133,15 @@
     var list = N(data).list(".list").bind();
 
     N(".btnSave").click(function() {
-        N(window).alert({ // 1. Displays a confirm message.
+        <strong>N(window).alert</strong>({ // 1. Displays a confirm message.
             msg : "Would you like to save?",
-            confirm : true,
-            onOk : function() {
-                if(list.validate()) { // 2. Validates all changed data.
-                    N(list.data("modified")).comm("save.json").submit(); // 3. Transfers the changed data to the server.
+            <strong>confirm : true</strong>,
+            <strong>onOk : function() {</strong>
+                if(<strong>list.validate()</strong>) { // 2. Validates all changed data.
+                    N(<strong>list.data("modified")</strong>).comm("save.json").submit(); // 3. Transfers the changed data to the server.
                 }
-            }
-        });
+            <strong>}</strong>
+        }).show();
     });
 &lt;/script&gt;</code></pre>
 
@@ -161,14 +167,14 @@
      },{
          "key" : "female",
          "val" : "female"
-    }]).select({
+    }]).<strong>select</strong>({
         context : ".list #gender",
         key : "key",
         val : "val"
     })
 
     // 2. 데이터 바인딩.
-    N(data).list(".list").bind();
+    N(data).<strong>list</strong>(".list").<strong>bind</strong>();
 &lt;/script&gt;</code></pre>
     <pre lang="en_US"><code>&lt;ul class="list"&gt;
     &lt;li&gt;&lt;!-- This element is copied much the length of the data to create the rows. --&gt;
@@ -188,14 +194,14 @@
      },{
          "key" : "female",
          "val" : "female"
-    }]).select({
+    }]).<strong>select</strong>({
         context : ".list #gender",
         key : "key",
         val : "val"
     })
 
     // 2. Data binding.
-    N(data).list(".list").bind();
+    N(data).<strong>list</strong>(".list").<strong>bind</strong>();
 &lt;/script&gt;</code></pre>
 
     <h4 lang="ko_KR" class="notIndex">5. jQuery 의 on 메서드를 사용하여 행 선택 이벤트를 바인딩 하기.</h4>
@@ -210,13 +216,13 @@
 	    var list = N(data).list(N("selector", view)).bind();
 
 	    // 2. 지정한 요소에 이벤트 바인딩.
-	    list.context().on("click", "li #col01", function() {
+	    <strong>list.context().on</strong>("click", <strong>"li #col01"</strong>, function() {
 
 	        // 3. 행 인덱스 가져오기.
 	        var rowEle = $(this).closest("li");
-	        var idx = list.context("li").index(rowEle);
+	        var idx = <strong>list.context("li").index(rowEle)</strong>;
 	        // 4. 행 데이터 가져오기.
-	        var rowData = list.data()[idx];
+	        var rowData = <strong>list.data()[idx]</strong>;
 
 	        N.log(idx, rowEle, rowData);
 	    });
@@ -229,13 +235,13 @@
         var list = N(data).list(N("selector", view)).bind();
 
         // 2. Event binding to the specified element.
-        list.context().on("click", "li #col01", function() {
+        <strong>list.context()</strong>.on("click", <strong>"li #col01"</strong>, function() {
 
             // 3. Get the row index.
             var rowEle = $(this).closest("li");
-            var idx = list.context("li").index(rowEle);
+            var idx = <strong>list.context("li").index(rowEle)</strong>;
             // 4. Get the row data.
-            var rowData = list.data()[idx];
+            var rowData = <strong>list.data()[idx]</strong>;
 
             N.log(idx, rowEle, rowData);
         });

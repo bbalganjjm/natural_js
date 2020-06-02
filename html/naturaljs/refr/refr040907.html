@@ -1,10 +1,16 @@
+<style type="text/css">
+.refr040907 strong {
+    color: blue;
+}
+</style>
+
 <article class="refr040907 apiDoc">
     <h2>
         <span lang="ko_KR">예제</span>
         <span lang="en_US">Examples</span>
     </h2>
 
-    <h4 lang="ko_KR" class="notIndex">1. 그리드에 데이터 바인드 하기.</h4>
+    <h4 lang="ko_KR" class="notIndex">1. 그리드에 데이터 바인딩 하기.</h4>
     <h4 lang="en_US" class="notIndex">1. Binds the data to the grid.</h4>
     <p class="codepen" data-height="387" data-theme-id="38781" data-default-tab="js,result" data-user="bbalganjjm" data-slug-hash="GRgazmj" style="height: 387px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Natural-JS Grid(N.grid)">
       <span>See the Pen <a href="https://codepen.io/bbalganjjm/pen/GRgazmj">
@@ -106,7 +112,7 @@
 &lt;script type="text/javascript"&gt;
     N(data).grid({
         context : ".grid",
-        height : 200 // 그리드 바디영역의 높이가 200px 로 고정 되고 스크롤바가 표시 됨.
+        <strong>height : 200</strong> // 그리드 바디영역의 높이가 200px 로 고정 되고 스크롤바가 표시 됨.
     }).bind();
 &lt;/script&gt;</code></pre>
     <pre lang="en_US"><code>&lt;table class="grid"&gt;
@@ -131,7 +137,7 @@
 &lt;script type="text/javascript"&gt;
     N(data).grid({
         context : ".grid",
-        height : 200 // The height of the grid body area is fixed at 200px and a scroll bar is displayed.
+        <strong>height : 200</strong> // The height of the grid body area is fixed at 200px and a scroll bar is displayed.
     }).bind();
 &lt;/script&gt;</code></pre>
     <h4 lang="ko_KR" class="notIndex">4. rowHandler 적용 하기.</h4>
@@ -161,11 +167,11 @@
     N(data).grid({
         context : ".grid",
         height : 200,
-        rowHandler : function(index, row, data) {
+        <strong>rowHandler : function(index, row, data) {</strong>
             if(data.age &gt;= 28) {
                 row.find("#age").css("background-color", "red");
             }
-        }
+        <strong>}</strong>
     }).bind();
 &lt;/script&gt;</code></pre>
 
@@ -195,7 +201,7 @@
     var grid = N(data).grid(".grid").bind();
 
     N(".btnAdd").click(function() {
-        grid.add(); // grid.data() ==> [{ "age": "", "email": "", "registered" : "" }]
+        grid.<strong>add()</strong>; // grid.data() ==> [{ "age": "", "email": "", "registered" : "" }]
     });
 &lt;/script&gt;</code></pre>
 
@@ -225,15 +231,15 @@
     var grid = N(data).grid(".grid").bind();
 
     N(".btnSave").click(function() {
-        N(window).alert({ // 1. confirm 메시지 표시.
+        <strong>N(window).alert</strong>({ // 1. confirm 메시지 표시.
             msg : "저장 하시겠습니까?",
-            confirm : true,
-            onOk : function() {
-                if(grid.validate()) { // 2. 변경된 전체 데이터 유효성 검증.
-                    N(grid.data()).comm("save.json").submit(); // 3. 변경 된 데이터를 서버로 전송.
+            <strong>confirm : true</strong>,
+            <strong>onOk : function() {</strong>
+                if(<strong>grid.validate()</strong>) { // 2. 변경된 전체 데이터 유효성 검증.
+                    N(<strong>grid.data("modified")</strong>).comm("save.json").submit(); // 3. 변경 된 데이터를 서버로 전송.
                 }
-            }
-        });
+            <strong>}</strong>
+        }).show();
     });
 &lt;/script&gt;</code></pre>
     <pre lang="en_US"><code>&lt;table class="grid"&gt;
@@ -260,15 +266,15 @@
     var grid = N(data).grid(".grid").bind();
 
     N(".btnSave").click(function() {
-        N(window).alert({ // 1. Displays a confirm message.
+        <strong>N(window).alert</strong>({ // 1. Displays a confirm message.
             msg : "Would you like to save?",
-            confirm : true,
-            onOk : function() {
-                if(grid.validate()) { // 2. Validates all changed data.
-                    N(grid.data()).comm("save.json").submit(); // 3. Transfers the changed data to the server.
+            <strong>confirm : true</strong>,
+            <strong>onOk : function() {</strong>
+                if(<strong>grid.validate()</strong>) { // 2. Validates all changed data.
+                    N(<strong>grid.data("modified")</strong>).comm("save.json").submit(); // 3. Transfers the changed data to the server.
                 }
-            }
-        });
+            <strong>}</strong>
+        }).show();
     });
 &lt;/script&gt;</code></pre>
 
@@ -305,14 +311,14 @@
      },{
          "key" : "female",
          "val" : "female"
-    }]).select({
+    }]).<strong>select</strong>({
         context : ".grid #gender",
         key : "key",
         val : "val"
     })
 
     // 2. 데이터 바인딩.
-    N(data).grid(".grid").bind();
+    N(data).<strong>grid</strong>(".grid").<strong>bind</strong>();
 &lt;/script&gt;</code></pre>
     <pre lang="en_US"><code>&lt;table class="grid"&gt;
     &lt;thead&gt;
@@ -343,14 +349,14 @@
      },{
          "key" : "female",
          "val" : "female"
-    }]).select({
+    }]).<strong>select</strong>({
         context : ".grid #gender",
         key : "key",
         val : "val"
     })
 
     // 2. Data binding.
-    N(data).grid(".grid").bind();
+    N(data).<strong>grid</strong>(".grid").<strong>bind</strong>();
 &lt;/script&gt;</code></pre>
 
     <h4 lang="ko_KR" class="notIndex">8. jQuery 의 on 메서드를 사용하여 행 선택 이벤트를 바인딩 하기.</h4>
@@ -365,13 +371,13 @@
         var grid = N(data).grid(N("selector", view)).bind();
 
         // 2. 지정한 요소에 이벤트 바인딩.
-        grid.context().on("click", "tbody td:eq(1)", function() {
+        <strong>grid.context().on</strong>("click", <strong>"tbody td:eq(1)"</strong>, function() {
 
             // 3. 행 인덱스 가져오기.
             var rowEle = $(this).closest("tbody");
-            var idx = grid.context("tbody").index(rowEle);
+            var idx = <strong>grid.context("tbody").index(rowEle)</strong>;
             // 4. 행 데이터 가져오기.
-            var rowData = grid.data()[idx];
+            var rowData = <strong>grid.data()[idx]</strong>;
 
             N.log(idx, rowEle, rowData);
         });
@@ -383,13 +389,13 @@
         var grid = N(data).grid(N("selector", view)).bind();
 
         // 2. Event binding to the specified element.
-        grid.context().on("click", "tbody td:eq(1)", function() {
+        <strong>grid.context().on</strong>("click", <strong>"tbody td:eq(1)"</strong>, function() {
 
             // 3. Get the row index.
             var rowEle = $(this).closest("tbody");
-            var idx = grid.context("tbody").index(rowEle);
+            var idx = <strong>grid.context("tbody").index(rowEle)</strong>;
             // 4. Get the row data.
-            var rowData = grid.data()[idx];
+            var rowData = <strong>grid.data()[idx]</strong>;
 
             N.log(idx, rowEle, rowData);
         });
@@ -401,8 +407,8 @@
     <pre><code>&lt;table class="grid"&gt;
     &lt;thead&gt;&lt;
         &lt;tr&gt;
-            &lt;th data-rowspan="true"&gt;age&lt;/th&gt;
-            &lt;th data-rowspan="true"&gt;registered&lt;/th&gt;
+            &lt;th <strong>data-rowspan="true"</strong>&gt;age&lt;/th&gt;
+            &lt;th <strong>data-rowspan="true"</strong>&gt;registered&lt;/th&gt;
             &lt;th&gt;name&lt;/th&gt;
             &lt;th&gt;email&lt;/th&gt;
         &lt;/tr&gt;

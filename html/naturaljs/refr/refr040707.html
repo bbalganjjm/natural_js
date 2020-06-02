@@ -1,3 +1,9 @@
+<style type="text/css">
+.refr040707 strong {
+    color: blue;
+}
+</style>
+
 <article class="refr040707 apiDoc">
     <h2>
         <span lang="ko_KR">예제</span>
@@ -67,15 +73,15 @@
     var form = N(data).form(".form").bind();
 
     N(".btn-save").click(function() {
-        N(window).alert({ // 1. 저장 확인 메시지 표시
+        <strong>N(window).alert</strong>({ // 1. 저장 확인 메시지 표시
             msg : "저장 하겠습니까?",
-            confirm : true,
-            onOk : function() {
-                if(form.validate()) { // 2. 폼의 전체 데이터 유효성 검증
-                    N(form.data()).comm("save.json").submit(); // 3. 폼 데이터를 서버에 전송
+            <strong>confirm : true</strong>,
+            <strong>onOk : function() {</strong>
+                if(<strong>form.validate()</strong>) { // 2. 폼의 전체 데이터 유효성 검증
+                    <strong>form.data(false)</strong>.comm("save.json").submit(); // 3. 폼 데이터를 서버에 전송
                 }
-            }
-        });
+            <strong>}</strong>
+        }).show();
     });
 &lt;/script&gt;</code></pre>
     <pre lang="en_US"><code>&lt;table class="form"&gt;
@@ -102,15 +108,15 @@
     var form = N(data).form(".form").bind();
 
     N(".btn-save").click(function() {
-        N(window).alert({ // 1. displaying the save confirm message.
+        <strong>N(window).alert</strong>({ // 1. displaying the save confirm message.
             msg : "Do you want to save it?",
-            confirm : true,
-            onOk : function() {
-                if(form.validate()) { // 2. Validates(N.validator) entire data in the form.
-                    N(form.data()).comm("save.json").submit(); // 3. Submits the form data to the server.
+            <strong>confirm : true</strong>,
+            <strong>onOk : function() {</strong>
+                if(<strong>form.validate()</strong>) { // 2. Validates(N.validator) entire data in the form.
+                    <strong>form.data(false)</strong>.comm("save.json").submit(); // 3. Submits the form data to the server.
                 }
-            }
-        });
+            <strong>}</strong>
+        }).show();
     });
 &lt;/script&gt;</code></pre>
     <h4 lang="ko_KR" class="notIndex">3. 검색조건 블록에 N.form 을 적용 하여 조회 로직을 간단하게 만들기.</h4>
@@ -127,11 +133,11 @@
 
 &lt;script type="text/javascript"&gt;
     // add 메서드를 실행하면 id 속성을 갖고 있는 입력요소들의 name 속성값과 value 속성값으로 data 객체를 생성 합니다.
-    var form = N(data).form(".form").add(); // { "name": "", "age": "" }
+    var form = N(data).form(".form").<strong>add</strong>(); // { "name": "", "age": "" }
 
     N(".btn-search").click(function() {
-        if(form.validate()) { // 1. 검색 조건 블록에 입력 된 데이터를 유효성을 검사합니다
-            form.data(false).comm("retrieve.json").submit(); // 2. 폼의 데이터를 서버 파라미터로 전송 합니다.
+        if(<strong>form.validate()</strong>) { // 1. 검색 조건 블록에 입력 된 데이터를 유효성을 검사합니다
+            <strong>form.data(false)</strong>.comm("data.json").submit(); // 2. 폼의 데이터를 서버 파라미터로 전송 합니다.
         }
     });
 &lt;/script&gt;</code></pre>
@@ -147,11 +153,11 @@
 
 &lt;script type="text/javascript"&gt;
     // When the add method is executed, a data object is created with the name and value attribute's value ​​of the input elements that have the id attribute.
-    var form = N(data).form(".form").add(); // { "name": "", "age": "" }
+    var form = N(data).form(".form").<strong>add</strong>(); // { "name": "", "age": "" }
 
     N(".btn-search").click(function() {
-        if(form.validate()) { // 1. Validate the data entered in the search condition block
-            form.data(false).comm("retrieve.json").submit(); // 2. Sends the form data to server parameters
+        if(<strong>form.validate()</strong>) { // 1. Validate the data entered in the search condition block
+            <strong>form.data(false)</strong>.comm("data.json").submit(); // 2. Sends the form data to server parameters
         }
     });
 &lt;/script&gt;</code></pre>
@@ -191,14 +197,14 @@
      },{
          "key" : "female",
          "val" : "female"
-    }]).select({
+    }]).<strong>select</strong>({
         context : ".form #gender",
         key : "key",
         val : "val"
     })
 
-    // 2. 폼 데이터 바인드
-    N(data).form(".form").bind();
+    // 2. 폼 데이터 바인딩
+    N(data).<strong>form</strong>(".form").<strong>bind</strong>();
 &lt;/script&gt;</code></pre>
     <pre lang="en_US"><code>&lt;table class="form"&gt;
     &lt;tr&gt;
@@ -231,14 +237,14 @@
      },{
          "key" : "female",
          "val" : "female"
-    }]).select({
+    }]).<strong>select</strong>({
         context : ".form #gender",
         key : "key",
         val : "val"
     })
 
-    // 2. Binding form data
-    N(data).form(".form").bind();
+    // 2. Binds the form data
+    N(data).<strong>form</strong>(".form").<strong>bind</strong>();
 &lt;/script&gt;</code></pre>
     <h4 lang="ko_KR" class="notIndex">5. N.select 를 사용하지 않고 radio, checkbox 입력요소를 N.form 과 연동 하기.</h4>
     <h4 lang="en_US" class="notIndex">5. Linking radio and checkbox input elements with N.form without using N.select.</h4>

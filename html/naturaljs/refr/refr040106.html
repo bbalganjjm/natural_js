@@ -1,3 +1,9 @@
+<style type="text/css">
+.refr040106 strong {
+    color: blue;
+}
+</style>
+
 <article class="refr040106 apiDoc">
     <h2>
         <span lang="ko_KR">예제</span>
@@ -9,13 +15,13 @@
     <pre><code>&lt;div class="alertArea" style="height: 200px;border: 3px dotted #4CAF50;"&gt;&lt;/div&gt;
 
 &lt;script type="text/javascript"&gt;
-       N(".alertArea").alert("Hello Natural-JS.").show();
+       N("<strong>.alertArea</strong>").alert("Hello Natural-JS.").show();
 &lt;/script&gt;</code></pre>
 
     <h4 lang="ko_KR" class="notIndex">2. 전체화면(window)에 메시지 표시하기.</h4>
     <h4 lang="en_US" class="notIndex">2. Displaying the message on full screen(window).</h4>
     <pre><code>&lt;script type="text/javascript"&gt;
-       N(window).alert("Hello Natural-JS.").show();
+       N(<strong>window</strong>).alert("Hello Natural-JS.").show();
 &lt;/script&gt;</code></pre>
 
     <h4 lang="ko_KR" class="notIndex">3. 전체화면(window)에 Confirm 메시지 대화상자를 표시 하고 드래그앤드롭 기능 활성화 하기</h4>
@@ -23,8 +29,8 @@
     <pre><code>&lt;script type="text/javascript"&gt;
        N(window).alert({
            msg : "Hello Natural-JS.",
-           confirm: true,
-           draggable: true
+           <strong>confirm: true</strong>,
+           <strong>draggable: true</strong>
        }).show();
 &lt;/script&gt;</code></pre>
 
@@ -33,7 +39,7 @@
     <pre><code>&lt;input class="alertInput" type="text" /&gt;
 
 &lt;script type="text/javascript"&gt;
-       N(".alertInput").alert("Hello Natural-JS.").show();
+       N("<strong>.alertInput</strong>").alert("Hello Natural-JS.").show();
 &lt;/script&gt;</code></pre>
 </article>
 
