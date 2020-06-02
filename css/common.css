@@ -791,7 +791,8 @@ pre.shell>code {
     #json .apiDoc .api.form tr>td:first-child,
     #event .apiDoc .api.form tr>td:first-child,
     #functions .apiDoc .api.form tr>td:first-child,
-    #methods .apiDoc .api.form tr>td:first-child {
+    #methods .apiDoc .api.form tr>td:first-child,
+    #utilities .apiDoc .api.form tr>td:first-child {
         margin-bottom: 0;
     }
     #pluginExtention .apiDoc .api.form td:nth-child(2):before,
@@ -806,7 +807,8 @@ pre.shell>code {
     #json .apiDoc .api.form td:nth-child(2):before,
     #event .apiDoc .api.form td:nth-child(2):before,
     #functions .apiDoc .api.form td:nth-child(2):before,
-    #methods .apiDoc .api.form td:nth-child(2):before {
+    #methods .apiDoc .api.form td:nth-child(2):before,
+    #utilities .apiDoc .api.form td:nth-child(2):before {
         content: 'arguments : ';
         font-weight: 600;
     }
@@ -822,7 +824,8 @@ pre.shell>code {
     #json .apiDoc .api.form td:nth-child(3):before,
     #event .apiDoc .api.form td:nth-child(3):before,
     #functions .apiDoc .api.form td:nth-child(3):before,
-    #methods .apiDoc .api.form td:nth-child(3):before {
+    #methods .apiDoc .api.form td:nth-child(3):before,
+    #utilities .apiDoc .api.form td:nth-child(3):before {
         content: 'type : ';
         font-weight: 600;
     }
@@ -838,7 +841,8 @@ pre.shell>code {
     #json .apiDoc .api.form td:nth-child(4):before,
     #event .apiDoc .api.form td:nth-child(4):before,
     #functions .apiDoc .api.form td:nth-child(4):before,
-    #methods .apiDoc .api.form td:nth-child(4):before {
+    #methods .apiDoc .api.form td:nth-child(4):before,
+    #utilities .apiDoc .api.form td:nth-child(4):before {
         content: 'return : ';
         font-weight: 600;
     }
