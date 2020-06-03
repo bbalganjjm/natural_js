@@ -19,24 +19,32 @@
             <td style="text-align: center;">N/A</td>
             <td>jquery object</td>
             <td>
-                <p>Natural-JS 의 플러그인 타입으로 제공되는 라이브러리들과 N 객체의 멤버변수나 함수가 정의 되어있는 핵심 클래스입니다.</p>
-                <p>N(selector) 를 호출하면 jQuery 의 init 메서드가 호출되어 Naturl-JS 와 jQuery가 동시에 초기화(Initialize) 됩니다.</p>
+                <p lang="ko_KR">Natural-JS 의 플러그인 타입으로 제공되는 라이브러리들과 N 객체의 멤버변수나 함수가 정의 되어있는 core 객체 입니다.</p>
+                <p lang="en_US">It is a core object that defines the library and N object member variables and functions provided as plug-in types of Natural-JS.</p>
+                <p lang="ko_KR">N(selector) 를 실행하면 jQuery 의 init 메서드의 인자로 selector가 입력되어 Naturl-JS 와 jQuery가 동시에 초기화 됩니다.</p>
+                <p lang="en_US">When N(selector) is executed, a selector is input as an argument of jQuery's init method, and Naturl-JS and jQuery are initialized at the same time.</p>
                 <pre><code>var divs = N("div");</code></pre>
             </td>
         </tr>
         <tr>
             <td></td>
             <td>selector</td>
-            <td>jquery object |selector |function |element |object</td>
+            <td>selector string|function|element|array[element]|jquery object|object</td>
             <td style="text-align: center;">N/A</td>
-            <td>json object 나 selector 등.</td>
+            <td>
+                <p lang="ko_KR">jQuery selector 와 같습니다. 자세한 내용은 <a href="https://api.jquery.com/jQuery/" target="_blank">jQuery()</a> 함수의 selector 인자의 설명을 참고 바랍니다.</p>
+                <p lang="en_US">Same as a jQuery selector. For details, see the description of the selector argument of the <a href="https://api.jquery.com/jQuery/" target="_blank">jQuery()</a> function.</p>
+            </td>
         </tr>
         <tr>
             <td></td>
             <td>context</td>
-            <td>jquery object</td>
+            <td>selector string|jquery object[element]</td>
             <td style="text-align: center;">N/A</td>
-            <td>element를 지정할 때 지정된 element 가 속해있는 element 영역을 지정할 수 있습니다.</td>
+            <td>
+                <p lang="ko_KR">selector 인자에 selector 문자열을 입력 했을 때 context 인자로 지정 된 요소 안에있는 요소만 선택 합니다.</p>
+                <p lang="en_US">If a selector string is inputed in the selector argument, only the elements within the element specified as the context argument are selected.</p>
+            </td>
         </tr>
         <tr>
             <td>N.version ["package name"]</td>
@@ -44,13 +52,21 @@
             <td style="text-align: center;">N/A</td>
             <td>string</td>
             <td>
-                Natural-JS 의 패키지별 버전을 가져 올 수 있습니다.
-                <ul>
-                    <li>Natural-CORE 패키지의 버전 : N.version["Natural-CORE"]</li>
-                    <li>Natural-ARCHITECTURE 패키지의 버전 : N.version["Natural-ARCHITECTURE"]</li>
-                    <li>Natural-DATA 패키지의 버전 : N.version["Natural-DATA"]</li>
-                    <li>Natural-UI 패키지의 버전 : N.version["Natural-UI"]</li>
-                    <li>Natural-UI.Shell 패키지의 버전 : N.version["Natural-UI.Shell"]</li>
+                <p lang="ko_KR">Natural-JS 의 패키지별 버전을 반환 합니다.</p>
+                <p lang="en_US">Returns the each package version of Natural-JS.</p>
+                <ul lang="ko_KR">
+                    <li>Natural-CORE 의 패키지의 버전 : N.version["Natural-CORE"]</li>
+                    <li>Natural-ARCHITECTURE 의 패키지의 버전 : N.version["Natural-ARCHITECTURE"]</li>
+                    <li>Natural-DATA 의 패키지의 버전 : N.version["Natural-DATA"]</li>
+                    <li>Natural-UI 의 패키지의 버전 : N.version["Natural-UI"]</li>
+                    <li>Natural-UI.Shell 의 패키지의 버전 : N.version["Natural-UI.Shell"]</li>
+                </ul>
+                <ul lang="en_US">
+                    <li>Package version of Natural-CORE : N.version["Natural-CORE"]</li>
+                    <li>Package version of Natural-ARCHITECTURE : N.version["Natural-ARCHITECTURE"]</li>
+                    <li>Package version of Natural-DATA : N.version["Natural-DATA"]</li>
+                    <li>Package version of Natural-UI : N.version["Natural-UI"]</li>
+                    <li>Package version of Natural-UI.Shell : N.version["Natural-UI.Shell"]</li>
                 </ul>
             </td>
         </tr>
@@ -60,18 +76,25 @@
             <td style="text-align: center;">N/A</td>
             <td>undefined</td>
             <td>
-                <p>프레임웍에 설정 된 로케일 값을 가져오거나 정의 할 수 있습니다.</p>
-                <p class="alert">정의 된 로케일 값에 따라 프레임워크의 기본 메시지들이 다국어 처리 됩니다.</p>
-                <p class="alert">미리 등록 된 다국어 메시지 세트는 en_US, ko_KR 이 있고 <a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a> 의 message 속성에서 수정 할 수 있습니다.
-                <p class="alert">프레임웍의 기본 로케일은 <a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a> 의 N.context.attr("core").locale 속성값으로 정의 할 수 있습니다.</p>
+                <p lang="ko_KR">프레임웍에 설정 된 로케일 값을 가져오거나 설정 할 수 있습니다.</p>
+                <p lang="en_US">You can get or set the locale value set in the framework.</p>
+                <p lang="ko_KR" class="alert">설정된 로케일 값에 따라서 프레임워크의 기본 메시지들이 다국어 처리 됩니다.</p>
+                <p lang="en_US" class="alert">The framework's default messages are processed in multilingual ​​according to the set locale value.</p>
+                <p lang="ko_KR" class="alert">미리 등록된 다국어 메시지 세트는 en_US, ko_KR 이 있고 <a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a> 의 message 속성에서 수정 할 수 있습니다.</p>
+                <p lang="en_US" class="alert">The pre-registered multilingual message set has en_US, ko_KR and can be edited in the message attribute of <a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a>.</p>
+                <p lang="ko_KR" class="alert">프레임웍의 기본 로케일은 <a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a> 의 N.context.attr("core").locale 속성값으로 설정 할 수 있습니다.</p>
+                <p lang="en_US" class="alert">The default locale of the framework can be set with the value of the N.context.attr("core").locale property of <a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a>.</p>
                </td>
         </tr>
         <tr>
             <td></td>
-            <td>str</td>
+            <td>locale</td>
             <td>string</td>
             <td style="text-align: center;">N/A</td>
-            <td>"en_US", "ko_KR" 등의 로케일 문자열</td>
+            <td>
+                <p lang="ko_KR">"en_US", "ko_KR" 등의 로케일 문자열</p>
+                <p lang="en_US">Locale strings such as "en_US", "ko_KR", etc.</p>
+            </td>
         </tr>
         <tr>
             <td>N.debug</td>
@@ -79,8 +102,10 @@
             <td style="text-align: center;">N/A</td>
             <td>undefined</td>
             <td>
-                <p>브라우저 콘솔에 DEBUG 메시지를 보여 줍니다</p>
-                <p class="alert">window.console.debug 함수와 같습니다. 브라우저에서 window.console.debug 함수를 지원하지 않으면 메시지가 표시되지 않습니다.</p>
+                <p lang="ko_KR">브라우저 콘솔에 debug 메시지를 출력 합니다.</p>
+                <p lang="en_US">Prints the debug messages in the browser console.</p>
+                <p lang="ko_KR" class="alert">window.console.debug 함수와 같습니다. 브라우저에서 window.console.debug 함수를 지원하지 않으면 메시지가 출력되지 않습니다.</p>
+                <p lang="en_US" class="alert">Same as a window.console.debug function. If the browser does not support the window.console.debug function, no message is printed.</p>
             </td>
         </tr>
         <tr>
@@ -89,7 +114,8 @@
             <td>string</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p>메시지</p>
+                <p lang="ko_KR">메시지 텍스트.</p>
+                <p lang="en_US">Message text.</p>
             </td>
         </tr>
         <tr>
@@ -98,8 +124,10 @@
             <td style="text-align: center;">N/A</td>
             <td>undefined</td>
             <td>
-                <p>브라우저 콘솔에 LOG 메시지를 보여 줍니다</p>
-                <p class="alert">window.console.log 함수와 같습니다. 브라우저에서 window.console.log 함수를 지원하지 않으면 메시지가 표시되지 않습니다.</p>
+                <p lang="ko_KR">브라우저 콘솔에 log 메시지를 출력 합니다.</p>
+                <p lang="en_US">Prints the log messages in the browser console.</p>
+                <p lang="ko_KR" class="alert">window.console.log 함수와 같습니다. 브라우저에서 window.console.log 함수를 지원하지 않으면 메시지가 출력되지 않습니다.</p>
+                <p lang="en_US" class="alert">Same as a window.console.log function. If the browser does not support the window.console.log function, no message is printed.</p>
             </td>
         </tr>
         <tr>
@@ -108,7 +136,8 @@
             <td>string</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p>텍스트 메시지</p>
+                <p lang="ko_KR">메시지 텍스트.</p>
+                <p lang="en_US">Message text.</p>
             </td>
         </tr>
         <tr>
@@ -117,8 +146,10 @@
             <td style="text-align: center;">N/A</td>
             <td>undefined</td>
             <td>
-                <p>브라우저 콘솔에 INFO 메시지를 보여 줍니다</p>
-                <p class="alert">window.console.info 함수와 같습니다. 브라우저에서 window.console.info 함수를 지원하지 않으면 메시지가 표시되지 않습니다.</p>
+                <p lang="ko_KR">브라우저 콘솔에 info 메시지를 출력 합니다.</p>
+                <p lang="en_US">Prints the info messages in the browser console.</p>
+                <p lang="ko_KR" class="alert">window.console.info 함수와 같습니다. 브라우저에서 window.console.info 함수를 지원하지 않으면 메시지가 출력되지 않습니다.</p>
+                <p lang="en_US" class="alert">Same as a window.console.info function. If the browser does not support the window.console.info function, no message is printed.</p>
             </td>
         </tr>
         <tr>
@@ -127,7 +158,8 @@
             <td>string</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p>텍스트 메시지</p>
+                <p lang="ko_KR">메시지 텍스트.</p>
+                <p lang="en_US">Message text.</p>
             </td>
         </tr>
         <tr>
@@ -136,8 +168,10 @@
             <td style="text-align: center;">N/A</td>
             <td>undefined</td>
             <td>
-                <p>브라우저 콘솔에 WARN 메시지를 보여 줍니다</p>
-                <p class="alert">window.console.warn 함수와 같습니다. 브라우저에서 window.console.warn 함수를 지원하지 않으면 메시지가 표시되지 않습니다.</p>
+                <p lang="ko_KR">브라우저 콘솔에 warn 메시지를 출력 합니다.</p>
+                <p lang="en_US">Prints the warn messages in the browser console.</p>
+                <p lang="ko_KR" class="alert">window.console.warn 함수와 같습니다. 브라우저에서 window.console.warn 함수를 지원하지 않으면 메시지가 출력되지 않습니다.</p>
+                <p lang="en_US" class="alert">Same as a window.console.warn function. If the browser does not support the window.console.warn function, no message is printed.</p>
             </td>
         </tr>
         <tr>
@@ -146,7 +180,8 @@
             <td>string</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p>텍스트 메시지</p>
+                <p lang="ko_KR">메시지 텍스트.</p>
+                <p lang="en_US">Message text.</p>
             </td>
         </tr>
         <tr>
@@ -155,10 +190,11 @@
             <td style="text-align: center;">N/A</td>
             <td>ErrorThrown</td>
             <td>
-                <p>에러를 발생 시키고 에러 메시지를 브라우저 브라우저 콘솔에 보여줍니다.</p>
-                <p class="alert">N.error 함수는 ErrorThrown 객체를 반환하기 때문에 함수 앞에 throw 구문을 선언을 해야 에러가 발생 합니다.</p>
-                <pre><code>
-throw N.error("오류가 발생 했습니다.");</code></pre>
+                <p lang="ko_KR">에러를 발생 시키고 에러 메시지를 브라우저 콘솔에 출력 합니다.</p>
+                <p lang="en_US">It occurs an error and then prints an error message to the browser console.</p>
+                <p lang="ko_KR" class="alert">N.error 함수는 ErrorThrown 객체를 반환하기 때문에 오류를 발생 시키려면  N.error 함수 앞에 throw 구문을 선언해야 합니다.</p>
+                <p lang="en_US" class="alert">The N.error function returns an ErrorThrown object, so to throw an error you must declare a throw statement previous the N.error function.</p>
+                <pre><code>throw N.error("An error has occurred.");</code></pre>
             </td>
         </tr>
         <tr>
@@ -166,28 +202,40 @@ throw N.error("오류가 발생 했습니다.");</code></pre>
             <td>msg</td>
             <td>string</td>
             <td style="text-align: center;">N/A</td>
-            <td>에러 텍스트 메시지</td>
+            <td>
+                <p lang="ko_KR">에러 메시지 텍스트.</p>
+                <p lang="en_US">Error message text.</p>
+            </td>
         </tr>
         <tr>
             <td></td>
             <td>e</td>
             <td>ErrorThrown</td>
             <td style="text-align: center;">N/A</td>
-            <td>에러 발생시 생성되는 ErrorThrown 객체를 입력하면 해당 객체를 기반으로 처리 합니다.</td>
+            <td>
+                <p lang="ko_KR">ErrorThrown 객체가 지정된 경우 지정된 객체를 사용하여 오류를 발생 시킵니다.</p>
+                <p lang="en_US">If an ErrorThrown object is specified, an error is thrown using the specified object.</p>
+            </td>
         </tr>
         <tr>
             <td>type</td>
             <td style="text-align: center;">N/A</td>
             <td style="text-align: center;">N/A</td>
             <td>string</td>
-            <td>"number", "string", "array", "object", "function", "date" 등의 객체 타입을 반환 합니다.</td>
+            <td>
+                <p lang="ko_KR">지정한 객체의 타입("number", "string", "array", "object", "function", "date")을 반환 합니다.</p>
+                <p lang="en_US">Returns the type("number", "string", "array", "object", "function", "date") of the specified object.</p>
+            </td>
         </tr>
         <tr>
             <td></td>
             <td>obj</td>
-            <td>object</td>
+            <td>anything</td>
             <td style="text-align: center;">N/A</td>
-            <td>검사 할 object</td>
+            <td>
+                <p lang="ko_KR">유형을 확인할 객체</p>
+                <p lang="en_US">Object to check the type</p>
+            </td>
         </tr>
         <tr>
             <td>isString</td>
@@ -199,9 +247,12 @@ throw N.error("오류가 발생 했습니다.");</code></pre>
         <tr>
             <td></td>
             <td>obj</td>
-            <td>object</td>
+            <td>anything</td>
             <td style="text-align: center;">N/A</td>
-            <td>검사 할 object</td>
+            <td>
+                <p lang="ko_KR">유형을 확인할 객체</p>
+                <p lang="en_US">Object to check the type</p>
+            </td>
         </tr>
         <tr>
             <td>isNumeric</td>
@@ -216,9 +267,12 @@ throw N.error("오류가 발생 했습니다.");</code></pre>
         <tr>
             <td></td>
             <td>obj</td>
-            <td>object</td>
+            <td>anything</td>
             <td style="text-align: center;">N/A</td>
-            <td>검사 할 object</td>
+            <td>
+                <p lang="ko_KR">유형을 확인할 객체</p>
+                <p lang="en_US">Object to check the type</p>
+            </td>
         </tr>
         <tr>
             <td>isPlainObject</td>
@@ -237,9 +291,12 @@ throw N.error("오류가 발생 했습니다.");</code></pre>
         <tr>
             <td></td>
             <td>obj</td>
-            <td>object</td>
+            <td>anything</td>
             <td style="text-align: center;">N/A</td>
-            <td>검사 할 object</td>
+            <td>
+                <p lang="ko_KR">유형을 확인할 객체</p>
+                <p lang="en_US">Object to check the type</p>
+            </td>
         </tr>
         <tr>
             <td>isEmptyObject</td>
@@ -256,9 +313,12 @@ throw N.error("오류가 발생 했습니다.");</code></pre>
         <tr>
             <td></td>
             <td>obj</td>
-            <td>object</td>
+            <td>anything</td>
             <td style="text-align: center;">N/A</td>
-            <td>검사 할 object</td>
+            <td>
+                <p lang="ko_KR">유형을 확인할 객체</p>
+                <p lang="en_US">Object to check the type</p>
+            </td>
         </tr>
         <tr>
             <td>isArray</td>
@@ -273,9 +333,12 @@ throw N.error("오류가 발생 했습니다.");</code></pre>
         <tr>
             <td></td>
             <td>obj</td>
-            <td>object</td>
+            <td>anything</td>
             <td style="text-align: center;">N/A</td>
-            <td>검사 할 object</td>
+            <td>
+                <p lang="ko_KR">유형을 확인할 객체</p>
+                <p lang="en_US">Object to check the type</p>
+            </td>
         </tr>
         <tr>
             <td>isArraylike</td>
@@ -290,9 +353,12 @@ throw N.error("오류가 발생 했습니다.");</code></pre>
         <tr>
             <td></td>
             <td>obj</td>
-            <td>object</td>
+            <td>anything</td>
             <td style="text-align: center;">N/A</td>
-            <td>검사 할 object</td>
+            <td>
+                <p lang="ko_KR">유형을 확인할 객체</p>
+                <p lang="en_US">Object to check the type</p>
+            </td>
         </tr>
         <tr>
             <td>isWrappedSet</td>
@@ -306,9 +372,12 @@ throw N.error("오류가 발생 했습니다.");</code></pre>
         <tr>
             <td></td>
             <td>obj</td>
-            <td>object</td>
+            <td>anything</td>
             <td style="text-align: center;">N/A</td>
-            <td>검사 할 object</td>
+            <td>
+                <p lang="ko_KR">유형을 확인할 객체</p>
+                <p lang="en_US">Object to check the type</p>
+            </td>
         </tr>
         <tr>
             <td>isElement</td>
@@ -324,7 +393,10 @@ throw N.error("오류가 발생 했습니다.");</code></pre>
             <td>obj</td>
             <td>jquery object</td>
             <td style="text-align: center;">N/A</td>
-            <td>검사 할 jquery object</td>
+            <td>
+                <p lang="ko_KR">유형을 확인할 jQuery object</p>
+                <p lang="en_US">jQuery object to check the type</p>
+            </td>
         </tr>
         <tr>
             <td>N.serialExecute</td>
