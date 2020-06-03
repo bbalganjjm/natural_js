@@ -17,13 +17,16 @@
             <td style="text-align: center;">N/A</td>
             <td>N.docs</td>
             <td>
-                <p>원하는 시점에 로딩바와 화면클릭을 차단하는 요소를 생성 할 수 있습니다.</p>
-                <p class="alert">다음과 같이 호출하여 N.doc.createLoadIndicator 함수의 this 를 생성된 N.docs 인스턴스로 지정 합니다.</p>
+                <p lang="ko_KR">로딩바와 화면클릭을 차단하는 요소를 원하는 지점에서 생성 할 수 있습니다.</p>
+                <p lang="en_US">You can create elements that loading indicator and block the screen click at any point you want.</p>
+                <p lang="ko_KR" class="alert">N.doc.createLoadIndicator 함수의 this를 call 이나 apply 함수를 사용해서 N.docs 인스턴스로 지정해서 실행 합니다.</p>
+                <p lang="en_US" class="alert">Execute this by specifying "this" of N.doc.createLoadIndicator function as an N.docs instance using call or apply function.</p>
                 <pre><code>var docsInst = N("#docsContainer").docs();
 ...
 N.docs.createLoadIndicator.call(docsInst);
 </code></pre>
-                <p class="alert">N.doc.createLoadIndicator 와 N.doc.updateLoadIndicator, N.doc.removeLoadIndicator 함수를 override 하면 서버로 요청 시 자동으로 표시되는 로딩바와 화면클릭을 차단하는 요소를 다른 스타일로 표시 할 수 있습니다.</p>
+                <p lang="ko_KR" class="alert">N.doc.createLoadIndicator 와 N.doc.updateLoadIndicator, N.doc.removeLoadIndicator 함수를 override 하면 로딩바와 화면클릭을 차단하는 요소를 다른 스타일로 표시 할 수 있습니다.</p>
+                <p lang="en_US" class="alert">By overriding the N.doc.createLoadIndicator, N.doc.updateLoadIndicator, and N.doc.removeLoadIndicator functions, elements that loading indicator and block the screen click can be displayed in different styles.</p>
             </td>
         </tr>
          <tr>
@@ -32,8 +35,10 @@ N.docs.createLoadIndicator.call(docsInst);
             <td style="text-align: center;">N/A</td>
             <td>N.docs</td>
             <td>
-                <p>원하는 시점에 로딩바의 진행률을 업데이트 할 수 있습니다.</p>
-                <p class="alert">다음과 같이 호출하여 N.doc.updateLoadIndicator 함수의 this 를 생성된 N.docs 인스턴스로 지정 합니다.</p>
+                <p lang="ko_KR">로딩바의 진행률을 원하는 지점에서 업데이트 할 수 있습니다.</p>
+                <p lang="en_US">You can update the progress of the loading indicator at any point you want.</p>
+                <p lang="ko_KR" class="alert">N.doc.updateLoadIndicator 함수의 this를 call 이나 apply 함수를 사용해서 N.docs 인스턴스로 지정해서 실행 합니다.</p>
+                <p lang="en_US" class="alert">Execute this by specifying "this" of N.doc.updateLoadIndicator function as an N.docs instance using call or apply function.</p>
                 <pre><code>var docsInst = N("#docsContainer").docs();
 ...
 N.docs.createLoadIndicator.call(docsInst);
@@ -46,7 +51,8 @@ N.docs.updateLoadIndicator.call(docsInst, 1, 2);
 N.docs.updateLoadIndicator.call(docsInst, 0, 2);
 ...
 </code></pre>
-                <p class="alert">N.doc.createLoadIndicator 와 N.doc.updateLoadIndicator, N.doc.removeLoadIndicator 함수를 override 하면 서버로 요청 시 자동으로 표시되는 로딩바와 화면클릭을 차단하는 요소를 다른 스타일로 표시 할 수 있습니다.</p>
+                <p lang="ko_KR" class="alert">N.doc.createLoadIndicator 와 N.doc.updateLoadIndicator, N.doc.removeLoadIndicator 함수를 override 하면 로딩바와 화면클릭을 차단하는 요소를 다른 스타일로 표시 할 수 있습니다.</p>
+                <p lang="en_US" class="alert">By overriding the N.doc.createLoadIndicator, N.doc.updateLoadIndicator, and N.doc.removeLoadIndicator functions, elements that loading indicator and block the screen click can be displayed in different styles.</p>
             </td>
         </tr>
         <tr>
@@ -55,8 +61,10 @@ N.docs.updateLoadIndicator.call(docsInst, 0, 2);
             <td>number</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p>남은 진행 프로세스 수</p>
-                <p class="alert">완료 될 때 까지 1씩 차감 합니다.</p>
+                <p lang="ko_KR">남은 로딩 프로세스 수</p>
+                <p lang="en_US">Number of loading processes remaining</p>
+                <p lang="ko_KR" class="alert">완료 될 때까지 1 씩 감소합니다.</p>
+                <p lang="en_US" class="alert">It is decreased by 1 until completion.</p>
             </td>
         </tr>
         <tr>
@@ -65,7 +73,8 @@ N.docs.updateLoadIndicator.call(docsInst, 0, 2);
             <td>number</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p>전체 진행 프로세스 수</p>
+                <p lang="ko_KR">전체 로딩 프로세스 수</p>
+                <p lang="en_US">Number of total loading processe</p>
             </td>
         </tr>
          <tr>
@@ -74,8 +83,10 @@ N.docs.updateLoadIndicator.call(docsInst, 0, 2);
             <td style="text-align: center;">N/A</td>
             <td>N.docs</td>
             <td>
-                <p>원하는 시점에 로딩바와 화면클릭을 차단하는 요소를 제거(Hide) 할 수 있습니다.</p>
-                <p class="alert">다음과 같이 호출하여 N.doc.removeLoadIndicator 함수의 this 를 생성된 N.docs 인스턴스로 지정 합니다.</p>
+                <p lang="ko_KR">로딩바와 화면클릭을 차단하는 요소를 원하는 지점에서 숨길 수 있습니다.</p>
+                <p lang="en_US">You can hide elements that loading indicator and block the screen click at any point you want.</p>
+                <p lang="ko_KR" class="alert">N.doc.removeLoadIndicator 함수의 this를 call 이나 apply 함수를 사용해서 N.docs 인스턴스로 지정해서 실행 합니다.</p>
+                <p lang="en_US" class="alert">Execute this by specifying "this" of N.doc.removeLoadIndicator function as an N.docs instance using call or apply function.</p>
                 <pre><code>var docsInst = N("#docsContainer").docs();
 ...
 N.docs.createLoadIndicator.call(docsInst);
@@ -89,7 +100,8 @@ N.docs.updateLoadIndicator.call(docsInst, 0, 2);
 ...
 N.docs.removeLoadIndicator.call(docsInst);
 </code></pre>
-                <p class="alert">N.doc.createLoadIndicator 와 N.doc.updateLoadIndicator, N.doc.removeLoadIndicator 함수를 override 하면 서버로 요청 시 자동으로 표시되는 로딩바와 화면클릭을 차단하는 요소를 다른 스타일로 표시 할 수 있습니다.</p>
+                <p lang="ko_KR" class="alert">N.doc.createLoadIndicator 와 N.doc.updateLoadIndicator, N.doc.removeLoadIndicator 함수를 override 하면 로딩바와 화면클릭을 차단하는 요소를 다른 스타일로 표시 할 수 있습니다.</p>
+                <p lang="en_US" class="alert">By overriding the N.doc.createLoadIndicator, N.doc.updateLoadIndicator, and N.doc.removeLoadIndicator functions, elements that loading indicator and block the screen click can be displayed in different styles.</p>
             </td>
         </tr>
     </table>
