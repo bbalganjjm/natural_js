@@ -43,7 +43,7 @@
             <td style="text-align: center;">N/A</td>
             <td>
                 <p lang="ko_KR">selector 인자에 selector 문자열을 입력 했을 때 context 인자로 지정 된 요소 안에있는 요소만 선택 합니다.</p>
-                <p lang="en_US">If a selector string is inputed in the selector argument, only the elements within the element specified as the context argument are selected.</p>
+                <p lang="en_US">If a selector string is input in the selector argument, only the elements within the element specified as the context argument are selected.</p>
             </td>
         </tr>
         <tr>
@@ -194,7 +194,8 @@
                 <p lang="en_US">It occurs an error and then prints an error message to the browser console.</p>
                 <p lang="ko_KR" class="alert">N.error 함수는 ErrorThrown 객체를 반환하기 때문에 오류를 발생 시키려면  N.error 함수 앞에 throw 구문을 선언해야 합니다.</p>
                 <p lang="en_US" class="alert">The N.error function returns an ErrorThrown object, so to throw an error you must declare a throw statement previous the N.error function.</p>
-                <pre><code>throw N.error("An error has occurred.");</code></pre>
+                <pre lang="ko_KR"><code>throw N.error("에러가 발생 했습니다.");</code></pre>
+                <pre lang="en_US"><code>throw N.error("An error has occurred.");</code></pre>
             </td>
         </tr>
         <tr>
@@ -233,7 +234,7 @@
             <td>anything</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p lang="ko_KR">유형을 확인할 객체</p>
+                <p lang="ko_KR">타입을 확인할 객체</p>
                 <p lang="en_US">Object to check the type</p>
             </td>
         </tr>
@@ -242,7 +243,10 @@
             <td style="text-align: center;">N/A</td>
             <td style="text-align: center;">N/A</td>
             <td>boolean</td>
-            <td>입력한 객체가 string 타입인지 검사 합니다.</td>
+            <td>
+                <p lang="ko_KR">입력한 객체가 string 타입인지 검사 합니다.</p>
+                <p lang="en_US">Checks whether the input object is of type string.</p>
+            </td>
         </tr>
         <tr>
             <td></td>
@@ -250,7 +254,7 @@
             <td>anything</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p lang="ko_KR">유형을 확인할 객체</p>
+                <p lang="ko_KR">타입을 확인할 객체</p>
                 <p lang="en_US">Object to check the type</p>
             </td>
         </tr>
@@ -260,8 +264,10 @@
             <td style="text-align: center;">N/A</td>
             <td>boolean</td>
             <td>
-                <p>입력한 객체가 숫자 타입인지 검사 합니다.</p>
-                <p class="alert">N.isNumeric 은 jQuery 의 $.isNumeric 함수를 그대로 사용 합니다.</p>
+                <p lang="ko_KR">입력한 객체가 숫자 타입인지 검사 합니다.</p>
+                <p lang="en_US">Checks whether the input object is of type numeric.</p>
+                <p lang="ko_KR" class="alert">N.isNumeric 은 jQuery.isNumeric 함수를 그대로 사용 합니다.</p>
+                <p lang="en_US" class="alert">N.isNumeric uses jQuery.isNumeric function as it is</p>
             </td>
         </tr>
         <tr>
@@ -270,7 +276,7 @@
             <td>anything</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p lang="ko_KR">유형을 확인할 객체</p>
+                <p lang="ko_KR">타입을 확인할 객체</p>
                 <p lang="en_US">Object to check the type</p>
             </td>
         </tr>
@@ -280,12 +286,14 @@
             <td style="text-align: center;">N/A</td>
             <td>boolean</td>
             <td>
-                <p>입력한 객체가 순수한 객체 타입인지 검사 합니다.</p>
-                <p class="alert">
-                    typeof N() 나 N.type(N()) 을 실행하면 "object" 로 반환 되지만 N.isPlainObject 이러한 오브젝트를 순수한 오브젝트로 평가 하지 않습니다.
-                    new Object() 나 객체 생성 리터럴({})로 생성한 오브젝트만 true 가 반환 됩니다.
-                </p>
-                <p class="alert">N.isPlainObject 은 jQuery 의 $.isPlainObject 함수를 그대로 사용 합니다.</p>
+                <p lang="ko_KR">입력한 객체가 순수한 객체 타입인지 검사 합니다.</p>
+                <p lang="en_US">Checks whether the input object is a pure object type.</p>
+                <p lang="ko_KR" class="alert">typeof N() 나 N.type(N()) 을 실행하면 "object" 로 반환 되지만 N.isPlainObject 이러한 오브젝트를 순수한 오브젝트로 평가 하지 않습니다.
+                    new Object() 나 객체 리터럴({})로 생성한 오브젝트만 true 가 반환 됩니다.</p>
+                <p lang="en_US" class="alert">Excuting typeof N() or N.type(N()) returns "object" but N.isPlainObject does not evaluate these objects as pure objects.
+                    Only objects created with new Object() or object literals({}) return true.</p>
+                <p lang="ko_KR" class="alert">N.isPlainObject 은 jQuery.isPlainObject 함수를 그대로 사용 합니다.</p>
+                <p lang="en_US" class="alert">N.isPlainObject uses jQuery.isPlainObject function as it is</p>
             </td>
         </tr>
         <tr>
@@ -294,7 +302,7 @@
             <td>anything</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p lang="ko_KR">유형을 확인할 객체</p>
+                <p lang="ko_KR">타입을 확인할 객체</p>
                 <p lang="en_US">Object to check the type</p>
             </td>
         </tr>
@@ -304,10 +312,10 @@
             <td style="text-align: center;">N/A</td>
             <td>boolean</td>
             <td>
-                <p>입력한 객체가 비어 있는 객체인지 검사 합니다.</p>
-                <p class="alert">
-                    "" 나 {}, [] 는 모두 비어 있는 객체여서 true를 반환 하지만 [{}] 안에 있는 객체가 비어 있으므로 false 가 반환 됩니다.
-                </p>
+                <p lang="ko_KR">입력한 객체가 비어 있는 객체인지 검사 합니다.</p>
+                <p lang="en_US">Checks whether the input object is an empty object.</p>
+                <p lang="ko_KR" class="alert">"" 나 {}, [] 는 모두 비어 있는 객체 에서 true를 반환 하지만 [{}] 는 객체안에 다른 빈 객체가 있으므로 false 가 반환 됩니다./p>
+                <p lang="en_US" class="alert">"" or {}, [] both return true from an empty object, but [{}] returns false because there is another empty object in the object./p>
             </td>
         </tr>
         <tr>
@@ -316,7 +324,7 @@
             <td>anything</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p lang="ko_KR">유형을 확인할 객체</p>
+                <p lang="ko_KR">타입을 확인할 객체</p>
                 <p lang="en_US">Object to check the type</p>
             </td>
         </tr>
@@ -326,8 +334,10 @@
             <td style="text-align: center;">N/A</td>
             <td>boolean</td>
             <td>
-                <p>입력한 객체가 array 타입인지 검사 합니다.</p>
-                <p class="alert">N.isArray 은 jQuery 의 $.isArray 함수를 그대로 사용 합니다.</p>
+                <p lang="ko_KR">입력한 객체가 array 타입인지 검사 합니다.</p>
+                <p lang="ko_KR">Checks whether the input object is an array type.</p>
+                <p lang="ko_KR" class="alert">N.isArray 은 jQuery.isArray 함수를 그대로 사용 합니다.</p>
+                <p lang="en_US" class="alert">N.isArray uses jQuery.isArray function as it is</p>
             </td>
         </tr>
         <tr>
@@ -336,7 +346,7 @@
             <td>anything</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p lang="ko_KR">유형을 확인할 객체</p>
+                <p lang="ko_KR">타입을 확인할 객체</p>
                 <p lang="en_US">Object to check the type</p>
             </td>
         </tr>
@@ -346,8 +356,10 @@
             <td style="text-align: center;">N/A</td>
             <td>boolean</td>
             <td>
-                <p>입력한 객체가 array 와 비슷한 타입인지 검사 합니다.</p>
-                <p class="alert">jquery object 도 겉 보기에는 array 와 유사하여 true 를 반환 합니다. array, jquery object 를 둘다 같은 오브젝트로 평가하고 싶을 때 사용 하세요.</p>
+                <p lang="ko_KR">입력한 객체가 array 와 비슷한 타입인지 검사 합니다.</p>
+                <p lang="en_US">Checks whether the entered object is of a type similar to array.</p>
+                <p lang="ko_KR" class="alert">jquery object 도 겉 보기에는 array 와 유사하여 true 를 반환 합니다. array, jquery object 를 둘다 같은 오브젝트로 평가하고 싶을 때 사용 하세요.</p>
+                <p lang="en_US" class="alert">The jquery object is also apparently similar to an array, returning true. Use this when you want to evaluate both array and jquery objects as the same object.</p>
             </td>
         </tr>
         <tr>
@@ -356,7 +368,7 @@
             <td>anything</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p lang="ko_KR">유형을 확인할 객체</p>
+                <p lang="ko_KR">타입을 확인할 객체</p>
                 <p lang="en_US">Object to check the type</p>
             </td>
         </tr>
@@ -366,7 +378,8 @@
             <td style="text-align: center;">N/A</td>
             <td>boolean</td>
             <td>
-                <p>입력한 객체가 N() 이나 $(), jQuery() 로 초기화 한 jquery object 타입인지 검사 합니다.</p>
+                <p lang="ko_KR">입력한 객체가 N() 이나 $(), jQuery()로 초기화 한 jquery object 타입인지 검사 합니다.</p>
+                <p lang="en_US">Checks whether the input object is a jquery object type initialized with N(), $(), or jQuery().</p>
             </td>
         </tr>
         <tr>
@@ -375,7 +388,7 @@
             <td>anything</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p lang="ko_KR">유형을 확인할 객체</p>
+                <p lang="ko_KR">타입을 확인할 객체</p>
                 <p lang="en_US">Object to check the type</p>
             </td>
         </tr>
@@ -385,7 +398,8 @@
             <td style="text-align: center;">N/A</td>
             <td>boolean</td>
             <td>
-                <p>N() 이나 $(), jQuery() 의 인자로 지정한 객체가 HTML 요소 인지 검사 합니다.</p>
+                <p lang="ko_KR">N() 이나 $(), jQuery() 의 인자로 지정된 객체가 HTML 요소인지 검사 합니다.</p>
+                <p lang="en_US">Checks whether the object specified by N(), $(), or jQuery() is an HTML element.</p>
             </td>
         </tr>
         <tr>
@@ -404,71 +418,135 @@
             <td style="text-align: center;">N/A</td>
             <td>[jQuery Deferred Objects]</td>
             <td>
-                <p>순서대로 실행되어야 하는 비동기 실행 로직들의 계층적 콜백 들을 $.Deferred 를 사용하여 직렬로 표기 할 수 있게 해 주는 함수 입니다.</p>
-                <ul>
-                    <li>비동기로 작동하는 로직과 그 로직의 전처리, 후처리 로직을 하나의 함수 블록으로 만들어 N.serialExecute 함수에 개수 상관없이 인자로 넣어 주면 됩니다.</li>
-                    <li>기입된 인자의 순서대로 함수들이 실행 되고 다음 인자로 정의한 함수 블록을 실행 하기 위해서는 해당 비동기 로직이 끝나는 시점(다음 함수가 실행되어야 하는 시점)에 함수 블록의 인자로 지정되는 Deferred 객체에서 resolve 함수를 실행 시켜 주어야 합니다.</li>
-                    <li>인자로 정의되는 함수 블록에서 defer.resolve 의 인자들은 그 다음 실행 될 함수 블록의 두번째 인자부터 순서대로 배당 됩니다.</li>
-                    <li>각 함수 블록의 this 와 Return 객체는 인자로 정의 된 함수 블록 들의 jQuery Deferred 객체들이 담겨 있는 array 입니다.</li>
-                    <li>이 this 를 가지고 첫번째 함수 블록의 비동기 로직의 완료 시점(시작 시점에서는 아직 다음 함수 블록의 Deferred 객체가 생성되지 않았기 때문에 해당 함수 블록 앞에 정의 된 함수 블록들은 참조 가능하나 이후에 정의 된 함수 블록은 참조가 불 가능)에 this[2].resolve() 와 같이 호출하면 두번째, 세번째 함수 블록을 건너 뛰고 네번째 함수 블록을 실행 시킬 수 있습니다.</li>
+                <p lang="ko_KR">비동기 실행로직들의 계층적 콜백들을 jQuery.Deferred 를 사용하여 직렬로 표기할 수 있게 해 주는 함수 입니다.</p>
+                <p lang="en_US">This is a function that posibles hierarchical callbacks of asynchronous execution logics to be serialized using jQuery.Deferred.</p>
+                <ul lang="ko_KR">
+                    <li>비동기로 작동하는 로직과 그 로직의 전처리, 후처리 로직을 하나의 함수 블록으로 만들어 N.serialExecute 함수의 인자로 입력하면 됩니다.</li>
+                    <li>입력된 인자의 순서대로 함수들이 실행 되고 다음 인자로 정의한 함수 블록을 실행 하기 위해서는 비동기 로직이 끝나는 시점 또는 다음 함수가 실행되어야 하는 시점에 defer(Deferred) 인자에서 resolve 함수를 실행해야 합니다.</li>
+                    <li>defer.resolve 메서드의 인자들은 그 다음 실행 될 함수 블록의 두번째 인자부터 순서대로 지정 됩니다.</li>
+                    <li>각 함수 블록의 this 와 return 객체는 인자로 입력된 함수 블록들의 Deferred 객체들이 담겨 있는 array 객체 입니다.</li>
+                    <li>
+                        <p>이 this 를 이용해서 첫번째 함수 블록의 비동기 로직의 완료 시점에 this[2].resolve() 와 같이 실행하면 두번째, 세번째 함수 블록을 건너 뛰고 네번째 함수 블록을 실행 시킬 수 있습니다.</p>
+                        <p class="alert">비동기 로직의 시작 시점에서는 아직 다음 함수 블록의 Deferred 객체가 생성되지 않았기 때문에 해당 함수 블록 앞에 정의 된 함수 블록들은 참조 가능하나 이후에 정의 된 함수 블록은 참조가 불가능 합니다.</p>
+                    </li>
                 </ul>
-                <p>예)</p>
-                <p>다음과 같은 일반적인 비동기 실행 로직이 있습니다.</p>
-                <pre><code>
+                <ul lang="en_US">
+                    <li>비동기로 작동하는 로직과 그 로직의 전처리, 후처리 로직을 하나의 함수 블록으로 만들어 N.serialExecute 함수의 인자로 입력하면 됩니다.</li>
+                    <li>입력된 인자의 순서대로 함수들이 실행 되고 다음 인자로 정의한 함수 블록을 실행 하기 위해서는 비동기 로직이 끝나는 시점 또는 다음 함수가 실행되어야 하는 시점에 defer(Deferred) 인자에서 resolve 함수를 실행해야 합니다.</li>
+                    <li>defer.resolve 메서드의 인자들은 그 다음 실행 될 함수 블록의 두번째 인자부터 순서대로 지정 됩니다.</li>
+                    <li>The this and return objects of each function block are array objects that contain Deferred objects of the function blocks entered as arguments.</li>
+                    <li>
+                        <p>이 this 를 이용해서 첫번째 함수 블록의 비동기 로직의 완료 시점에 this[2].resolve() 와 같이 실행하면 두번째, 세번째 함수 블록을 건너 뛰고 네번째 함수 블록을 실행 시킬 수 있습니다.</p>
+                        <p class="alert">비동기 로직의 시작 시점에서는 아직 다음 함수 블록의 Deferred 객체가 생성되지 않았기 때문에 해당 함수 블록 앞에 정의 된 함수 블록들은 참조 가능하나 이후에 정의 된 함수 블록은 참조가 불가능 합니다.</p>
+                    </li>
+                </ul>
+                <p lang="ko_KR">◎ 예제</p>
+                <p lang="en_US">◎ Examples</p>
+                <p lang="ko_KR">다음과 같은 일반적인 비동기 실행 로직이 있습니다.</p>
+                <p lang="en_US">Here is the general asynchronous execution logic:</p>
+                <pre lang="ko_KR"><code>
 setTimeout(function() {
     setTimeout(function() {
         N.comm("url").submit(function() {
             setTimeout(function() {
-                N.log("4 번 로직 완료");
+                N.log("4번 로직 완료");
             }, 500);
-            N.log("3 번 로직 완료");
+            N.log("3번 로직 완료");
         });
-        N.log("2 번 로직 완료");
+        N.log("2번 로직 완료");
     }, 500);
-    N.log("1 번 로직 완료");
+    N.log("1번 로직 완료");
 }, 500);</code></pre>
-                <p>N.serialExecute를 사용하면 위와 같은 계층적 비동기 로직을 아래와 같이 직렬로 선언 할 수 있습니다.</p>
-                <pre><code>
-var defers = N.serialExecute(
+                <pre lang="en_US"><code>
+setTimeout(function() {
+    setTimeout(function() {
+        N.comm("url").submit(function() {
+            setTimeout(function() {
+                N.log("Logic 4 complete.");
+            }, 500);
+            N.log("Logic 3 complete.");
+        });
+        N.log("Logic 2 complete.");
+    }, 500);
+    N.log("Logic 1 complete.");
+}, 500);</code></pre>
+                <p lang="ko_KR">N.serialExecute를 사용하면 위와 같은 계층적 비동기 로직을 아래와 같이 직렬로 선언 할 수 있습니다.</p>
+                <p lang="en_US">Using N.serialExecute, you can declare hierarchical asynchronous logic like this in serial as below:</p>
+                <pre lang="ko_KR"><code>var defers = N.serialExecute(
     function(defer){
         setTimeout(function() {
             defer.resolve(arg0, arg1);
-            N.log("1 번 로직 완료");
+            N.log("1번 로직 완료");
         }, 500);
     },
     function(defer, arg0, arg1){
         setTimeout(function() {
             defer.resolve();
-            N.log("2 번 로직 완료");
+            N.log("2번 로직 완료");
         }, 500);
     },
     function(defer){
         N.comm("url").submit(function() {
             defer.resolve(arg0);
-            N.log("3 번 로직 완료");
+            N.log("3번 로직 완료");
         });
     },
     function(defer, arg0){
         setTimeout(function() {
             defer.resolve();
-            N.log("4 번 로직 완료");
+            N.log("4번 로직 완료");
         }, 500);
     }
 );</code></pre>
-                <p>추가로, jQuery $.when을 이용 하여 위 소스코드 에서 반환된 defers 변수 객체로 함수 블록 들을 그룹 지어 해당 그룹의 함수 블록 들이 모두 완료 된 후 로직을 실행 시킬 수도 있습니다.</p>
-                <pre><code>
-// 두번째, 세번째 함수 블록이 모두 완료 되면 로직을 실행
-$.when(defers[1], defers[2]).done(function(arg0, agr1) {
-    // agr0, arg1 은 각 함수 블록에서 defer.resolve 함수를
-    // 호출 할 때 인자로 지정한 오브젝트들
-    N.log("2번, 3번 로직 모두 완료");
+                <pre lang="en_US"><code>var defers = N.serialExecute(
+    function(defer){
+        setTimeout(function() {
+            defer.resolve(arg0, arg1);
+            N.log("Logic 1 complete.");
+        }, 500);
+    },
+    function(defer, arg0, arg1){
+        setTimeout(function() {
+            defer.resolve();
+            N.log("Logic 2 complete.");
+        }, 500);
+    },
+    function(defer){
+        N.comm("url").submit(function() {
+            defer.resolve(arg0);
+            N.log("Logic 3 complete.");
+        });
+    },
+    function(defer, arg0){
+        setTimeout(function() {
+            defer.resolve();
+            N.log("Logic 4 complete.");
+        }, 500);
+    }
+);</code></pre>
+                <p lang="ko_KR">추가로, jQuery $.when을 사용하면 위 소스코드 에서 반환된 defers 변수 객체로 함수블록들을 그룹지어 해당 그룹의 함수블록들이 모두 완료 된 후 로직을 실행 시킬 수도 있습니다.</p>
+                <p lang="en_US">Using jQuery $.when, you can group the function blocks with the defers variable object returned from the above source code, and also execute the logic after all the function blocks of the corresponding group are completed.</p>
+                <pre lang="ko_KR"><code>// 두번째, 세번째 함수 블록이 모두 완료 되면 로직을 실행
+$.when(defers[1], defers[2]).done(function(arguments[0], arguments[1]) {
+    // arguments[0], arguments[1] 은 각 함수 블록에서 defer.resolve 함수를 실행할 때 인자로 지정한 오브젝트들 입니다.
+    N.log("2번, 3번 로직 모두 완료.");
 });
 
 // 전체 함수 블록들이 모두 완료 되면 로직을 실행
-$.when.apply($, defers).done(function(arg0, agr1, arg2, agr3) {
-    // agr0, arg1, agr2, arg3 은 각 함수 블록에서
-    // defer.resolve 함수를 호출 할 때 인자로 지정한 오브젝트들
-    N.log("1번, 2번, 3번, 4번 로직 모두 완료");
+$.when.apply($, defers).done(function(arguments[0], arguments[1], arguments[2], arguments[3]) {
+    // arguments[0], arguments[1], arguments[2], arguments[3] 은 각 함수 블록에서 defer.resolve 함수를 호출 할 때 인자로 지정한 오브젝트들 입니다.
+    N.log("1번, 2번, 3번, 4번 전체 로직 완료.");
+});</code></pre>
+                <pre lang="en_US"><code>// Executes logic when the second and third function blocks are completed
+$.when(defers[1], defers[2]).done(function(arguments[0], arguments[1]) {
+    // arguments[0] and arguments[1] are objects specified as arguments when executing the defer.resolve function in each function block.
+    N.log("Completed logic 2 and 3.");
+});
+
+// Executes logic when all function blocks are completed
+$.when.apply($, defers).done(function(arguments[0], arguments[1], arguments[2], arguments[3]) {
+    // arguments[0], arguments[1], arguments[2] and arguments[3] are objects specified as arguments when executing the defer.resolve function in each function block.
+    N.log("Completed entire logic 1, 2, 3 and 4.");
 });</code></pre>
             </td>
         </tr>
