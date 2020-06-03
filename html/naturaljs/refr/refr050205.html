@@ -28,7 +28,7 @@
             <td style="text-align: center;">N/A</td>
             <td>
                 <p lang="ko_KR">jQuery selector 구문을 입력하면 context 요소에서 지정한 요소를 찾아서 반환 합니다.</p>
-                <p lang="en_US">If you enter jQuery selector syntax, the element specified in the context element is found and returned.</p>
+                <p lang="en_US">If you input jQuery selector syntax, the element specified in the context element is found and returned.</p>
             </td>
         </tr>
         <tr>
@@ -36,7 +36,10 @@
             <td style="text-align: center;">N/A</td>
             <td style="text-align: center;">N/A</td>
             <td>N.docs</td>
-            <td>새로운 컨텐츠과 컨텐츠 탭을 추가 합니다.</td>
+            <td>
+                <p lang="ko_KR">새로운 탭 컨텐츠를 추가 합니다.</p>
+                <p lang="en_US">Adds new tab content.</p>
+            </td>
         </tr>
         <tr>
             <td></td>
@@ -44,8 +47,10 @@
             <td>string</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p>document 아이디를 입력 합니다.</p>
-                <p class="alert">이미 같은 아이디로 지정된 컨텐츠가 있다면 해당 컨텐츠가 활성화 됩니다.</p>
+                <p lang="ko_KR">document 아이디를 입력 합니다.</p>
+                <p lang="en_US">Inputs the document id.</p>
+                <p lang="ko_KR" class="alert">동일한 아이디를 가진 탭 컨텐츠가 이미 있으면 컨텐츠가 활성화됩니다.</p>
+                <p lang="en_US" class="alert">If there is already tab content with the same id, the content is activated.</p>
             </td>
         </tr>
         <tr>
@@ -53,7 +58,10 @@
             <td>docNm</td>
             <td>string</td>
             <td style="text-align: center;">N/A</td>
-            <td>document 이름을 입력 합니다.</td>
+            <td>
+                <p lang="ko_KR">document 이름을 입력 합니다.</p>
+                <p lang="en_US">Inputs the document name.</p>
+            </td>
         </tr>
         <tr>
             <td></td>
@@ -61,14 +69,23 @@
             <td>object</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p>추가 되는 페이지의 옵션을 입력 합니다.</p>
-<pre><code>var docOpts = {
+                <p lang="ko_KR">추가되는 페이지에만 적용되는 옵션을 입력 합니다.</p>
+                <p lang="en_US">Input options that apply only to the page being added.</p>
+                <pre lang="ko_KR"><code>var docOpts = {
     url : "url", // document URL
-    urlSync : true, // 서버로 요청 할 때의 location.href 와 서버에서 응답이 왔을 때의 location.href 이 같은지 비교하여 다르면 응답을 차단 합니다.
+    urlSync : true, // 서버로 요청 할 때의 location.href 와 서버에서 응답을 받았을 때의 location.href 가 다르면 응답을 차단합니다.
     docId : docId, // document 아이디
     docNm : docNm, // document 명
     onBeforeLoad : function(docId, target) {
         // 추가 되는 document 에만 적용되는 onBeforeLoad 이벤트.
+
+        // docId : document id
+        // target : 로드 된 컨텐츠를 넣어 줄 요소
+
+        var doc = this.doc(docId); // document 정보 가져오기
+	    var cont = this.cont(docId); // document의 Controller object 가져오기
+	    var view = cont.view;
+	    var request = cont.request;
     },
     onLoad : function(docId) {
         // 추가 되는 document 에만 적용되는 onLoad 이벤트.
@@ -97,10 +114,57 @@
     onRemove : function(docId) {
         // 추가 되는 document 에만 적용되는 onRemove 이벤트.
     },
-    stateless : false // 상태유지 여부
+    stateless : false // 탭 컨텐츠의 상태유지 여부
 }
 </code></pre>
-                <p class="alert">개별 이벤트들은 전역 이벤트가 실행 된 후 실행 됩니다.</p>
+                <pre lang=en_US><code>var docOpts = {
+    url : "url", // document URL
+    urlSync : true, // The response will be blocked if location.href when requesting to the server and location.href when receiving a response from the server are different.
+    docId : docId, // document id
+    docNm : docNm, // document name
+    onBeforeLoad : function(docId, target) {
+        // onBeforeLoad event that applies only to the document being added.
+
+        // docId : document id
+        // target : Element to put loaded content
+
+	    var doc = this.doc(docId); // get document info
+	    var cont = this.cont(docId); // get document's Controller object
+	    var view = cont.view;
+	    var request = cont.request;
+    },
+    onLoad : function(docId) {
+        // onLoad event that applies only to the document being added.
+    },
+    onBeforeActive : function(docId) {
+        // onBeforeActive event that applies only to the document being added.
+    },
+    onActive : function(docId) {
+        // onActive event that applies only to the document being added.
+    },
+    onBeforeInactive : function(docId) {
+        // onBeforeInactive event that applies only to the document being added.
+    },
+    onInactive : function(docId) {
+        // onInactive event that applies only to the document being added.
+    },
+    onBeforeRemoveState : function(docId) {
+        // onBeforeRemoveState event that applies only to the document being added.
+    },
+    onRemoveState : function(docId) {
+        // onRemoveState event that applies only to the document being added.
+    },
+    onBeforeRemove : function(docId) {
+        // onBeforeRemove event that applies only to the document being added.
+    },
+    onRemove : function(docId) {
+        // onRemove event that applies only to the document being added.
+    },
+    stateless : false // Whether the tab content is maintained
+}
+</code></pre>
+                <p lang="ko_KR" class="alert">여기에 설정 된 이벤트들은 전역 이벤트가 실행 된 다음 실행 됩니다.</p>
+                <p lang="en_US" class="alert">Events set here are executed after the global event.</p>
             </td>
         </tr>
         <tr>
@@ -108,57 +172,9 @@
             <td style="text-align: center;">N/A</td>
             <td style="text-align: center;">N/A</td>
             <td>N.docs</td>
-            <td>선택한 컨텐츠과 컨텐츠 탭을 활성화 합니다.</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>docId</td>
-            <td>string</td>
-            <td style="text-align: center;">N/A</td>
-            <td>document 아이디를 입력 합니다.</td>
-        </tr>
-        <tr>
-            <td>removeState</td>
-            <td style="text-align: center;">N/A</td>
-            <td style="text-align: center;">N/A</td>
-            <td>N.docs</td>
-            <td>선택한 컨텐츠의 상태를 제거 합니다.</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>docId</td>
-            <td>string</td>
-            <td style="text-align: center;">N/A</td>
-            <td>컨텐츠의 상태를 제거할 document 아이디를 입력 합니다.</td>
-        </tr>
-        <tr>
-            <td>remove</td>
-            <td style="text-align: center;">N/A</td>
-            <td style="text-align: center;">N/A</td>
-            <td>N.docs</td>
-            <td>선택한 컨텐츠과 컨텐츠 탭을 제거 합니다.</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>docId</td>
-            <td>string</td>
-            <td style="text-align: center;">N/A</td>
-            <td>document 아이디를 입력 합니다.</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>unconditional</td>
-            <td>boolean</td>
-            <td style="text-align: center;">N/A</td>
-            <td>true 를 입력 하면 수정 중인 입력이 있더라도 무조건 제거 합니다.</td>
-        </tr>
-        <tr>
-            <td>doc</td>
-            <td style="text-align: center;">N/A</td>
-            <td style="text-align: center;">N/A</td>
-            <td>object|array</td>
             <td>
-                <p>선택한 컨텐츠의 정보(docOpts)를 가져 옵니다.</p>
+                <p lang="ko_KR">지정한 탭 컨텐츠를 활성화 합니다.</p>
+                <p lang="en_US">Activates the specified tab content.</p>
             </td>
         </tr>
         <tr>
@@ -167,8 +183,80 @@
             <td>string</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p>정보를 가져 올 document 아이디를 입력 합니다.</p>
-                <p>입력하지 않으면 모든 컨텐츠의 정보를 array 로 반환 합니다.</p>
+                <p lang="ko_KR">document 아이디를 입력 합니다.</p>
+                <p lang="en_US">Inputs the document id.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>removeState</td>
+            <td style="text-align: center;">N/A</td>
+            <td style="text-align: center;">N/A</td>
+            <td>N.docs</td>
+            <td>
+                <p lang="ko_KR">지정한 탭 컨텐츠의 상태를 제거 합니다.</p>
+                <p lang="en_US">Removes the state of the specified tab content.</p>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>docId</td>
+            <td>string</td>
+            <td style="text-align: center;">N/A</td>
+            <td>
+                <p lang="ko_KR">document 아이디를 입력 합니다.</p>
+                <p lang="en_US">Inputs the document id.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>remove</td>
+            <td style="text-align: center;">N/A</td>
+            <td style="text-align: center;">N/A</td>
+            <td>N.docs</td>
+            <td>
+                <p lang="ko_KR">지정한 탭 컨텐츠를 제거 합니다.</p>
+                <p lang="en_US">Removes the specified tab content.</p>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>docId</td>
+            <td>string</td>
+            <td style="text-align: center;">N/A</td>
+            <td>
+                <p lang="ko_KR">document 아이디를 입력 합니다.</p>
+                <p lang="en_US">Inputs the document id.</p>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>unconditional</td>
+            <td>boolean</td>
+            <td style="text-align: center;">N/A</td>
+            <td>
+                <p lang="ko_KR">true 를 입력 하면 페이지에 수정 된 데이터가 있더라도 무조건 제거 합니다.</p>
+                <p lang="en_US">If you input true, even if there is modified data on the page, it will be removed unconditionally.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>doc</td>
+            <td style="text-align: center;">N/A</td>
+            <td style="text-align: center;">N/A</td>
+            <td>object|array</td>
+            <td>
+                <p lang="ko_KR">지정한 탭 컨텐츠의 정보(docOpts)를 가져 옵니다.</p>
+                <p lang="en_US">Get information(docOpts) of the specified tab content.</p>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>docId</td>
+            <td>string</td>
+            <td style="text-align: center;">N/A</td>
+            <td>
+                <p lang="ko_KR">document 아이디를 입력 합니다.</p>
+                <p lang="en_US">Inputs the document id.</p>
+                <p lang="ko_KR">입력하지 않으면 모든 탭 컨텐츠의 정보를 배열로 반환 합니다.</p>
+                <p lang="en_US">If not input, information of all tab contents is returned as an array.</p>
             </td>
         </tr>
         <tr>
@@ -177,7 +265,8 @@
             <td style="text-align: center;">N/A</td>
             <td>object</td>
             <td>
-                <p>선택한 컨텐츠의 Controller(N.cont) 오브젝트를 가져 옵니다.</p>
+                <p lang="ko_KR">지정한 탭 컨텐츠의 Controller object를 가져 옵니다.</p>
+                <p lang="en_US">Gets the Controller object of the specified tab content.</p>
             </td>
         </tr>
         <tr>
@@ -186,7 +275,8 @@
             <td>string</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p>Controller를 가져 올 document 아이디를 입력 합니다.</p>
+                <p lang="ko_KR">document 아이디를 입력 합니다.</p>
+                <p lang="en_US">Inputs the document id.</p>
             </td>
         </tr>
         <tr>
@@ -195,8 +285,10 @@
             <td style="text-align: center;">N/A</td>
             <td>N.docs</td>
             <td>
-                <p>선택한 document를 리로드 합니다.</p>
-                <p class="alert">reload 함수 호출 전에 request.attr 함수로 값을 지정하지 않았다면 리로드 전의 request 객체의 값은 리로드 해도 유지 됩니다.</p>
+                <p lang="ko_KR">지정한 탭 컨텐츠를 다시 불러옵니다.</p>
+                <p lang="en_US">Reloads the specified tab content.</p>
+                <p lang="ko_KR" class="alert">reload 함수를 실행하기 전에 request.attr 함수로 값을 지정하지 않았다면 리로드 전의 request 객체의 값은 리로드 해도 계속 유지 됩니다.</p>
+                <p lang="en_US" class="alert">If the value is not specified by request.attr before executing the reload function, the value of the request object before the reload is retained even after reloading.</p>
             </td>
         </tr>
         <tr>
@@ -205,17 +297,20 @@
             <td>string</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p>리로드 할 document 아이디를 입력 합니다.</p>
+                <p lang="ko_KR">document 아이디를 입력 합니다.</p>
+                <p lang="en_US">Inputs the document id.</p>
             </td>
         </tr>
         <tr>
             <td></td>
             <td>callback</td>
-            <td>string</td>
+            <td>function</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p>리로드가 완료 되면 실행 되는 콜백을 지정 합니다. 필요 없으면 지정 하지 않아도 됩니다.</p>
-                <p>콜백의 인자로 html 과 Communicator.request 객체가 반환 됩니다.</p>
+                <p lang="ko_KR">리로드가 완료 되면 실행 될 콜백을 지정 합니다. 필요 없으면 지정 하지 않아도 됩니다.</p>
+                <p lang="en_US">Callback to be executed when reload is completed. If you don't need it, you don't need to specify it.</p>
+                <p lang="ko_KR">콜백 함수의 인자로 html 과 Communicator.request 객체가 입력 됩니다.</p>
+                <p lang="en_US">The html and Communicator.request objects are inputed to the  arguments of callback function.</p>
                 <pre><code>docsInstance.reload("docId", function(html, request) {
     N.log(html, request);
 });
