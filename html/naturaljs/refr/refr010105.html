@@ -22,8 +22,10 @@
             <td style="text-align: center;">N/A</td>
             <td>boolean</td>
             <td>
-                <p>Natural-JS 의 컴포넌트와 라이브러리에서 사용되는 요소와 이벤트에 대한 최소한의 자원을 회수합니다.</p>
-                <p class="alert">N.comm 으로 <a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a>의 N.context.attr("architecture").page.context 영역에 페이지를 불러 올 경우 N.gc[N.context.attr("core").gcMode]() 가 자동으로 호출 됩니다.</p>
+                <p lang="ko_KR">Natural-JS 의 컴포넌트와 라이브러리에서 사용되는 요소와 이벤트에 대한 최소한의 자원을 회수합니다.</p>
+                <p lang="en_US">Collections minimal resources for elements and events used in Natural-JS components and libraries.</p>
+                <p lang="ko_KR" class="alert">N.comm 으로 <a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a>의 N.context.attr("architecture").page.context 영역에 페이지를 불러 올 경우 N.gc[N.context.attr("core").gcMode]() 가 자동으로 실행됩니다.</p>
+                <p lang="en_US" class="alert">When a page is loaded in the N.context.attr("architecture").page.context area of ​​<a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a> using N.comm,  N.gc[N.context.attr("core").gcMode]() is automatically executed.</p>
             </td>
         </tr>
         <tr>
@@ -32,8 +34,12 @@
             <td style="text-align: center;">N/A</td>
             <td>boolean</td>
             <td>
-                <p>Natural-JS 의 컴포넌트와 라이브러리에서 사용되는 요소와 이벤트에 대한 모든 자원을 회수합니다.</p>
-                <p>페이지가 redirect 되지않고 N.comm 으로 블록 페이지를 불러오는 방식(SPA(Single Page Application) 방식)으로 사이트를 제작할때 브라우저의 메모리가 사용할 수록 증가한다면 N.gc.full()을 호출하면 브라우저 환경을 쾌적하게 유지 시킬 수 있습니다. N.gc.full()이 호출될 타이밍은 제작되는 사이트의 환경에 따라 적절하게 catch 하여  사용하기 바랍니다.</p>
+                <p lang="ko_KR">Natural-JS 의 컴포넌트와 라이브러리에서 사용되는 요소와 이벤트에 대한 모든 자원을 회수합니다.</p>
+                <p lang="en_US">Collections all resources for elements and events used in Natural-JS components and libraries.</p>
+                <p lang="ko_KR" class="alert">SPA(Single Page Application)로 사이트를 제작할때 브라우저의 메모리가 페이지를 열 때마다 증가한다면 어딘가에서 메모리 누수가 발생 하는 것 입니다.
+                    N.comm 에서 자동으로 포착할 수 없는 부분을 파악하여 N.gc.full()을 실행 해 주면 해당 현상이 개선 될 수 있습니다.</p>
+                <p lang="en_US" class="alert">When creating a site with SPA, if your browser's memory increases each time you open the page, it is a memory leak somewhere.
+                    If N.comm find the part that cannot be catched automatically and executes N.gc.full(), the phenomenon may be improved.</p>
             </td>
         </tr>
         <tr>
@@ -44,7 +50,8 @@
             <td>
                 <p lang="ko_KR">N.ds 의 observable 들 에서 가비지 인스턴스를 제거합니다.</p>
                 <p lang="en_US">Removes garbage instances from observables of N.ds</p>
-                <p class="alert">N.comm 으로 <a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a>의 N.context.attr("architecture").page.context 영역이 아닌 곳에 페이지를 불러 올 경우 N.gc.ds() 가 자동으로 호출 됩니다.</p>
+                <p lang="ko_KR" class="alert">N.comm 으로 <a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a>의 N.context.attr("architecture").page.context 영역이 아닌 곳에 페이지를 불러 올 경우 N.gc.ds()가 자동으로 실행됩니다.</p>
+                <p lang="en_US" class="alert">N.gc.ds() is automatically executed when the page is loaded outside of the N.context.attr("architecture").page.context area of <a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a> with N.comm.</p>
             </td>
         </tr>
     </table>

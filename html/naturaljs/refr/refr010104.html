@@ -421,31 +421,30 @@
                 <p lang="ko_KR">비동기 실행로직들의 계층적 콜백들을 jQuery.Deferred 를 사용하여 직렬로 표기할 수 있게 해 주는 함수 입니다.</p>
                 <p lang="en_US">This is a function that posibles hierarchical callbacks of asynchronous execution logics to be serialized using jQuery.Deferred.</p>
                 <ul lang="ko_KR">
-                    <li>비동기로 작동하는 로직과 그 로직의 전처리, 후처리 로직을 하나의 함수 블록으로 만들어 N.serialExecute 함수의 인자로 입력하면 됩니다.</li>
-                    <li>입력된 인자의 순서대로 함수들이 실행 되고 다음 인자로 정의한 함수 블록을 실행 하기 위해서는 비동기 로직이 끝나는 시점 또는 다음 함수가 실행되어야 하는 시점에 defer(Deferred) 인자에서 resolve 함수를 실행해야 합니다.</li>
+                    <li>비동기로 작동하는 로직과 그 로직의 전처리, 후처리 로직을 하나의 함수 블록으로 만들어서 N.serialExecute 함수의 인자로 입력하면 됩니다.</li>
+                    <li>입력된 인자의 순서대로 함수들이 실행 됩니다. 다음 인자로 정의한 함수 블록을 실행 하기 위해서는 비동기 로직이 끝나는 시점 또는 다음 함수가 실행되어야 하는 시점에 defer(Deferred)인자의 resolve 메서드를 실행해야 합니다.</li>
                     <li>defer.resolve 메서드의 인자들은 그 다음 실행 될 함수 블록의 두번째 인자부터 순서대로 지정 됩니다.</li>
                     <li>각 함수 블록의 this 와 return 객체는 인자로 입력된 함수 블록들의 Deferred 객체들이 담겨 있는 array 객체 입니다.</li>
                     <li>
-                        <p>이 this 를 이용해서 첫번째 함수 블록의 비동기 로직의 완료 시점에 this[2].resolve() 와 같이 실행하면 두번째, 세번째 함수 블록을 건너 뛰고 네번째 함수 블록을 실행 시킬 수 있습니다.</p>
-                        <p class="alert">비동기 로직의 시작 시점에서는 아직 다음 함수 블록의 Deferred 객체가 생성되지 않았기 때문에 해당 함수 블록 앞에 정의 된 함수 블록들은 참조 가능하나 이후에 정의 된 함수 블록은 참조가 불가능 합니다.</p>
+                        <p>이 this 를 이용해서 첫번째 함수 블록의 비동기 로직의 완료 시점에 this[3].resolve() 와 같이 실행하면 두번째, 세번째 함수 블록을 건너 뛰고 네번째 함수 블록을 실행 시킬 수 있습니다.</p>
+                        <p class="alert">비동기 로직의 시작 시점에는 아직 다음 함수 블록의 Deferred 객체가 생성되지 않았기 때문에 해당 함수 블록 앞에 정의 된 함수 블록들은 참조 가능하나 이후에 정의 된 함수 블록은 참조가 불가능 합니다.</p>
                     </li>
                 </ul>
                 <ul lang="en_US">
-                    <li>비동기로 작동하는 로직과 그 로직의 전처리, 후처리 로직을 하나의 함수 블록으로 만들어 N.serialExecute 함수의 인자로 입력하면 됩니다.</li>
-                    <li>입력된 인자의 순서대로 함수들이 실행 되고 다음 인자로 정의한 함수 블록을 실행 하기 위해서는 비동기 로직이 끝나는 시점 또는 다음 함수가 실행되어야 하는 시점에 defer(Deferred) 인자에서 resolve 함수를 실행해야 합니다.</li>
-                    <li>defer.resolve 메서드의 인자들은 그 다음 실행 될 함수 블록의 두번째 인자부터 순서대로 지정 됩니다.</li>
+                    <li>You make the logic that works asynchronously and the pre and post processing logic of the logic into one function block and input it as an argument of the N.serialExecute function.</li>
+                    <li>The functions are executed in the order of the input arguments. To execute the function block defined with the next argument, the resolve method of the defer(Deferred) argument must be executed at the point where the asynchronous logic ends or the next function should be executed.</li>
+                    <li>The arguments of the defer.resolve method are specified in order from the second argument of the next function block to be executed.</li>
                     <li>The this and return objects of each function block are array objects that contain Deferred objects of the function blocks entered as arguments.</li>
                     <li>
-                        <p>이 this 를 이용해서 첫번째 함수 블록의 비동기 로직의 완료 시점에 this[2].resolve() 와 같이 실행하면 두번째, 세번째 함수 블록을 건너 뛰고 네번째 함수 블록을 실행 시킬 수 있습니다.</p>
-                        <p class="alert">비동기 로직의 시작 시점에서는 아직 다음 함수 블록의 Deferred 객체가 생성되지 않았기 때문에 해당 함수 블록 앞에 정의 된 함수 블록들은 참조 가능하나 이후에 정의 된 함수 블록은 참조가 불가능 합니다.</p>
+                        <p>When "this" is used to execute this[3].resolve() when the asynchronous logic of the first function block is completed, the second and third function blocks can be skipped and the fourth function block can be executed.</p>
+                        <p class="alert">Because at the start point of asynchronous logic, the Deferred object of the next function block has not been created yet, function blocks defined before the corresponding function block can be referenced, but function blocks defined after it cannot be referenced.</p>
                     </li>
                 </ul>
                 <p lang="ko_KR">◎ 예제</p>
                 <p lang="en_US">◎ Examples</p>
                 <p lang="ko_KR">다음과 같은 일반적인 비동기 실행 로직이 있습니다.</p>
                 <p lang="en_US">Here is the general asynchronous execution logic:</p>
-                <pre lang="ko_KR"><code>
-setTimeout(function() {
+                <pre lang="ko_KR"><code>setTimeout(function() {
     setTimeout(function() {
         N.comm("url").submit(function() {
             setTimeout(function() {
@@ -457,8 +456,7 @@ setTimeout(function() {
     }, 500);
     N.log("1번 로직 완료");
 }, 500);</code></pre>
-                <pre lang="en_US"><code>
-setTimeout(function() {
+                <pre lang="en_US"><code>setTimeout(function() {
     setTimeout(function() {
         N.comm("url").submit(function() {
             setTimeout(function() {
