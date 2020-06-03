@@ -11,7 +11,7 @@ nPaginationInstance.bind([]); // N.pagination
 nTreeInstance.bind([]); // N.tree
 ```
 
-###⊙ Get list of dates for this month
+###⊙ Getting a list of dates for the specified year and month.
 The N.date.dateList function makes it easy to create content that requires a calendar, such as a schedule management.
 ```
 var dateList = N.date.dateList(2020, 04);

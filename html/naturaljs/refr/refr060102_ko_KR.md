@@ -11,10 +11,10 @@ nPaginationInstance.bind([]); // N.pagination
 nTreeInstance.bind([]); // N.tree
 ```
 
-###⊙ 이달의 날짜 목록 가져오기
-N.date.dateList 함수를 사용하면 일정관리 등의 달력 이 필요한 컨텐츠를 쉽게 만들 수 있습니다.
+###⊙ 지정한 연도와 월에 해당하는 날짜 목록을 가져오기
+N.date.dateList 함수를 사용하면 일정관리등의 달력 이 필요한 컨텐츠를 쉽게 만들 수 있습니다.
 ```
-var dateList = N.date.dateList(2020, 04);
+var dateList = N.date.dateList(2020, 5);
 N(dateList).each(function(i, week) {
     N(week).each(function(j, date) {
         N.log(date.formatDate("Y-m-d"), "week : " + i, "day : " + j);
