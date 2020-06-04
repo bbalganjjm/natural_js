@@ -48,11 +48,11 @@
                     <li>45 : Ins &amp; -</li>
                 </ul>
                 <pre><code>$("input").on("keydown", function(e) {
-                    var keyCode = e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode);
-                    if(N.event.isNumberRelatedKeys(e)) {
-                        // TODO
-                    }
-                });</code></pre>
+    var keyCode = e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode);
+    if(N.event.isNumberRelatedKeys(e)) {
+        // TODO
+    }
+});</code></pre>
                 <p lang="ko_KR" class="alert">Datepicker(N.datepicker)에서 숫자와 관련 키입력을 차단하기 위해 사용합니다.</p>
                 <p lang="en_US" class="alert">Used by Datepicker (N.datepicker) to block numbers and related keystrokes.</p>
             </td>
