@@ -1071,10 +1071,10 @@
                     if(apiCont && !apiCont.view.is(".demo.formatter, .demo.validator, .demo.communicator")) {
                         // Insert a description into the option input elements.
                         var descTableEle = view.closest(".docs_contents__").find("#defaultoptions .api.form");
-                        var optNm;
-                        N(".form:first, .form#otherPage", apiCont.view).find(":input[id]").each(function() {
-                            optNm = this.id;
-                            $(this).after('<div class="demo-desc">' + $.trim(descTableEle.find("tr").find(">td:first").filter(":contains('" + optNm + "'):first").siblings(":last").html()) + '</div>');
+                        var optOrMethodNm;
+                        N(".form.options", apiCont.view).find(":input[id]").each(function() {
+                            optOrMethodNm = this.id;
+                            $(this).after('<div class="demo-desc">' + $.trim(descTableEle.find("tr").find(">td:first").filter(":contains('" + optOrMethodNm + "'):first").siblings(":last").html()) + '</div>');
                         });
                     }
                 });

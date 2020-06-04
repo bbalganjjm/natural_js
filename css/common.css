@@ -475,6 +475,8 @@ article .btnBox {
     transform : scaleY(0);
     transform-origin: top;
     transition: transform 0.5s ease, opacity 0.5s ease;
+    overflow: auto;
+    max-height: 300px;
 }
 
 .apiDoc .apidemo .form select:focus+.demo-desc,
