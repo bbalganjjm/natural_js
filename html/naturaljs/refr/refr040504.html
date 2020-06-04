@@ -192,7 +192,7 @@
             <td>
                 <p lang="ko_KR">탭이 활성화 될 때마다 실행되는 이벤트 핸들러를 정의 합니다.</p>
                 <p lang="en_US">Define an event handler that is executed whenever the tab is activated.</p>
-                <pre lang="ko_KR"><code>onActive : function(cont) {
+                <pre lang="ko_KR"><code>onActive : function(tabIdx, tabEle, contentEle, tabEles, contentEles) {
     // this : N.tab 인스턴스
     // tabIdx : 활성화된 탭의 Index
     // tabEle : 활성화된 탭의 요소
@@ -200,7 +200,7 @@
     // tabEles : 전체 탭 요소
     // contentEles : 전체 컨텐츠 요소
 }</code></pre>
-                <pre lang="en_US"><code>onActive : function(cont) {
+                <pre lang="en_US"><code>onActive : function(tabIdx, tabEle, contentEle, tabEles, contentEles) {
     // this : N.tab instance
     // tabIdx : Index of active tab
     // tabEle : Element of active tab
@@ -220,14 +220,14 @@
             <td>
                 <p lang="ko_KR">탭 컨텐츠 로딩이 완료 되었을 때 실행되는 이벤트 핸들러를 정의 합니다.</p>
                 <p lang="en_US">Defines an event handler that is executed when tab content loading is completed.</p>
-                <pre lang="ko_KR"><code>onLoad : function(cont) {
+                <pre lang="ko_KR"><code>onLoad : function(tabIdx, tabEle, contentEle, cont) {
     // this : N.tab 인스턴스
     // tabIdx : 활성화된 탭의 Index
     // tabEle : 활성화된 탭의 요소
     // contentEle : 활성화된 탭의 컨텐츠 요소
     // cont : 로딩 된 탭 컨텐츠의 Controller object
 }</code></pre>
-                <pre lang="en_US"><code>onLoad : function(cont) {
+                <pre lang="en_US"><code>onLoad : function(tabIdx, tabEle, contentEle, cont) {
     // this : N.tab instance
     // tabIdx : Index of active tab
     // tabEle : Element of active tab

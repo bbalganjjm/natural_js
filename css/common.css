@@ -879,3 +879,193 @@ pre.shell>code {
     background-color: #C8E6C9;
     border: none !important;
 }
+
+
+/* API View Type */
+.apiDoc.api-view-list-type .api.form,
+.apiDoc.api-view-list-type .api.form tbody,
+.apiDoc.api-view-list-type .api.form tr {
+    display: block;
+}
+
+.apiDoc.api-view-list-type .api.form th {
+    display: none;
+}
+
+.apiDoc.api-view-list-type .api.form td {
+    display: list-item;
+    list-style: none;
+    width: 100%;
+    border: none;
+    margin: 0;
+    padding: 5px 17px;
+    box-sizing: border-box;
+    border-left: 0.25em solid #A5D6A7;
+    text-shadow: none;
+    color: rgba(0, 0, 0, 0.87);
+    text-align: left !important;
+    font-size: 0.9em;
+}
+
+.apiDoc.api-view-list-type .api.form tr>td:first-child {
+    font-size: 1em;
+    border: none;
+    padding: 0 10px;
+    line-height: 2.5;
+    background-color: #A5D6A7;
+    text-shadow: 0 1px 0 #81C784;
+    font-weight: 400;
+    color: #FFFFFF;
+    margin-bottom: 15px;
+}
+
+.apiDoc.api-view-list-type .api.form tr>td:last-child {
+    margin-bottom: 20px;
+}
+
+#constructor .apiDoc.api-view-list-type .api.form tr>td:first-child {
+    margin-bottom: 0;
+}
+#constructor .apiDoc.api-view-list-type .api.form td:nth-child(2):before {
+    content: 'arguments : ';
+    font-weight: 600;
+}
+#constructor .apiDoc.api-view-list-type .api.form td:nth-child(3):before {
+    content: 'type : ';
+    font-weight: 600;
+}
+#constructor .apiDoc.api-view-list-type .api.form td:nth-child(4):before {
+    content: 'return : ';
+    font-weight: 600;
+}
+
+#advisors .apiDoc.api-view-list-type .api.form td:nth-child(2):before,
+#pointcuts .apiDoc.api-view-list-type .api.form td:nth-child(2):before,
+#defaultoptions .apiDoc.api-view-list-type .api.form td:nth-child(2):before {
+    content: 'type : ';
+    font-weight: 600;
+}
+#advisors .apiDoc.api-view-list-type .api.form td:nth-child(3):before,
+#pointcuts .apiDoc.api-view-list-type .api.form td:nth-child(3):before,
+#defaultoptions .apiDoc.api-view-list-type .api.form td:nth-child(3):before {
+    content: 'default : ';
+    font-weight: 600;
+}
+#advisors .apiDoc.api-view-list-type .api.form td:nth-child(4):before,
+#pointcuts .apiDoc.api-view-list-type .api.form td:nth-child(4):before,
+#defaultoptions .apiDoc.api-view-list-type .api.form td:nth-child(4):before {
+    content: 'required : ';
+    font-weight: 600;
+}
+
+#declarativeoptions .apiDoc.api-view-list-type .api.form td:nth-child(2):before {
+    content: 'type : ';
+    font-weight: 600;
+}
+#declarativeoptions .apiDoc.api-view-list-type .api.form td:nth-child(3):before {
+    content: 'default : ';
+    font-weight: 600;
+}
+
+#pluginExtention .apiDoc.api-view-list-type .api.form tr>td:first-child,
+#n .apiDoc.api-view-list-type .api.form tr>td:first-child,
+#gc .apiDoc.api-view-list-type .api.form tr>td:first-child,
+#string .apiDoc.api-view-list-type .api.form tr>td:first-child,
+#element .apiDoc.api-view-list-type .api.form tr>td:first-child,
+#date .apiDoc.api-view-list-type .api.form tr>td:first-child,
+#browser .apiDoc.api-view-list-type .api.form tr>td:first-child,
+#message .apiDoc.api-view-list-type .api.form tr>td:first-child,
+#array .apiDoc.api-view-list-type .api.form tr>td:first-child,
+#json .apiDoc.api-view-list-type .api.form tr>td:first-child,
+#event .apiDoc.api-view-list-type .api.form tr>td:first-child,
+#functions .apiDoc.api-view-list-type .api.form tr>td:first-child,
+#methods .apiDoc.api-view-list-type .api.form tr>td:first-child,
+#utilities .apiDoc.api-view-list-type .api.form tr>td:first-child {
+    margin-bottom: 0;
+}
+#pluginExtention .apiDoc.api-view-list-type .api.form td:nth-child(2):before,
+#n .apiDoc.api-view-list-type .api.form td:nth-child(2):before,
+#gc .apiDoc.api-view-list-type .api.form td:nth-child(2):before,
+#string .apiDoc.api-view-list-type .api.form td:nth-child(2):before,
+#element .apiDoc.api-view-list-type .api.form td:nth-child(2):before,
+#date .apiDoc.api-view-list-type .api.form td:nth-child(2):before,
+#browser .apiDoc.api-view-list-type .api.form td:nth-child(2):before,
+#message .apiDoc.api-view-list-type .api.form td:nth-child(2):before,
+#array .apiDoc.api-view-list-type .api.form td:nth-child(2):before,
+#json .apiDoc.api-view-list-type .api.form td:nth-child(2):before,
+#event .apiDoc.api-view-list-type .api.form td:nth-child(2):before,
+#functions .apiDoc.api-view-list-type .api.form td:nth-child(2):before,
+#methods .apiDoc.api-view-list-type .api.form td:nth-child(2):before,
+#utilities .apiDoc.api-view-list-type .api.form td:nth-child(2):before {
+    content: 'arguments : ';
+    font-weight: 600;
+}
+#pluginExtention .apiDoc.api-view-list-type .api.form td:nth-child(3):before,
+#n .apiDoc.api-view-list-type .api.form td:nth-child(3):before,
+#gc .apiDoc.api-view-list-type .api.form td:nth-child(3):before,
+#string .apiDoc.api-view-list-type .api.form td:nth-child(3):before,
+#element .apiDoc.api-view-list-type .api.form td:nth-child(3):before,
+#date .apiDoc.api-view-list-type .api.form td:nth-child(3):before,
+#browser .apiDoc.api-view-list-type .api.form td:nth-child(3):before,
+#message .apiDoc.api-view-list-type .api.form td:nth-child(3):before,
+#array .apiDoc.api-view-list-type .api.form td:nth-child(3):before,
+#json .apiDoc.api-view-list-type .api.form td:nth-child(3):before,
+#event .apiDoc.api-view-list-type .api.form td:nth-child(3):before,
+#functions .apiDoc.api-view-list-type .api.form td:nth-child(3):before,
+#methods .apiDoc.api-view-list-type .api.form td:nth-child(3):before,
+#utilities .apiDoc.api-view-list-type .api.form td:nth-child(3):before {
+    content: 'type : ';
+    font-weight: 600;
+}
+#pluginExtention .apiDoc.api-view-list-type .api.form td:nth-child(4):before,
+#n .apiDoc.api-view-list-type .api.form td:nth-child(4):before,
+#gc .apiDoc.api-view-list-type .api.form td:nth-child(4):before,
+#string .apiDoc.api-view-list-type .api.form td:nth-child(4):before,
+#element .apiDoc.api-view-list-type .api.form td:nth-child(4):before,
+#date .apiDoc.api-view-list-type .api.form td:nth-child(4):before,
+#browser .apiDoc.api-view-list-type .api.form td:nth-child(4):before,
+#message .apiDoc.api-view-list-type .api.form td:nth-child(4):before,
+#array .apiDoc.api-view-list-type .api.form td:nth-child(4):before,
+#json .apiDoc.api-view-list-type .api.form td:nth-child(4):before,
+#event .apiDoc.api-view-list-type .api.form td:nth-child(4):before,
+#functions .apiDoc.api-view-list-type .api.form td:nth-child(4):before,
+#methods .apiDoc.api-view-list-type .api.form td:nth-child(4):before,
+#utilities .apiDoc.api-view-list-type .api.form td:nth-child(4):before {
+    content: 'return : ';
+    font-weight: 600;
+}
+
+#conf_core .apiDoc.api-view-list-type .api.form td:nth-child(2):before,
+#conf_architecture .apiDoc.api-view-list-type .api.form td:nth-child(2):before,
+#conf_data .apiDoc.api-view-list-type .api.form td:nth-child(2):before,
+#conf_ui .apiDoc.api-view-list-type .api.form td:nth-child(2):before,
+#conf_ui_shell .apiDoc.api-view-list-type .api.form td:nth-child(2):before,
+#conf_template .apiDoc.api-view-list-type .api.form td:nth-child(2):before,
+#conf_code .apiDoc.api-view-list-type .api.form td:nth-child(2):before {
+    content: 'default : ';
+    font-weight: 600;
+}
+#conf_core .apiDoc.api-view-list-type .api.form td:nth-child(3):before,
+#conf_architecture .apiDoc.api-view-list-type .api.form td:nth-child(3):before,
+#conf_data .apiDoc.api-view-list-type .api.form td:nth-child(3):before,
+#conf_ui .apiDoc.api-view-list-type .api.form td:nth-child(3):before,
+#conf_ui_shell .apiDoc.api-view-list-type .api.form td:nth-child(3):before,
+#conf_template .apiDoc.api-view-list-type .api.form td:nth-child(3):before,
+#conf_code .apiDoc.api-view-list-type .api.form td:nth-child(3):before {
+    content: 'required : ';
+    font-weight: 600;
+}
+
+.apiDoc.api-view-list-type .apidemo .form .demo-desc {
+    left : 0;
+}
+
+.api-view-type-select {
+    float: right;
+}
+
+.api-view-type-select span {
+    font-weight: normal;
+    font-size: 14px;
+    cursor: pointer;
+}

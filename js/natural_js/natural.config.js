@@ -532,6 +532,13 @@
             "tabScrollCorrection" : {
                 tabContainerWidthCorrectionPx : 1,
                 tabContainerWidthReCalcDelayTime : 0
+            },
+            "onActive" : function(tabIdx, tabEle, contentEle, tabEles, contentEles) {
+                if(localStorage.getItem("isListTypeView") == "Y") {
+                    contentEle.find(".api-view-type-select :checkbox").prop("checked", true).trigger("change.aop");
+                } else {
+                    contentEle.find(".api-view-type-select :checkbox").prop("checked", false).trigger("change.aop");
+                }
             }
         },
         "datepicker" : {
@@ -1079,6 +1086,38 @@
                     }
                 });
             });
+        }
+    }, { // Automatically include API View Type.
+        "pointcut" : ".apiDoc:^init$",
+        "adviceType" : "before",
+        "fn" : function(cont, fnChain, args){
+            var view = args[0];
+
+            if(view.closest("#constructor, #advisors, #pointcuts, #defaultoptions, #declarativeoptions, #pluginExtention, " +
+            		"#n, #gc, #string, #element, #date, #browser, #message, #array, #json, #event, #functions, #methods, #utilities, " +
+            		"#conf_core, #conf_architecture, #conf_data, #conf_ui, #conf_ui_shell, #conf_template, #conf_code").length > 0) {
+                var select = N('<label class="api-view-type-select"><input type="checkbox"><span>' + N.message.get({
+                    "ko_KR" : {
+                        "AOP-0001" : "리스트로 보기"
+                    },
+                    "en_US" : {
+                        "AOP-0001" : "List type view"
+                    }
+                }, "AOP-0001") +'</span></label>');
+                select.find(":checkbox").on("change.aop", function() {
+                    if(N(this).is(":checked")) {
+                        localStorage.setItem("isListTypeView", "Y");
+                        view.addClass("api-view-list-type");
+                    } else {
+                        localStorage.setItem("isListTypeView", "N");
+                        view.removeClass("api-view-list-type");
+                    }
+                });
+                view.find("h2:first").append(select);
+                if(localStorage.getItem("isListTypeView") == "Y") {
+                    select.find(":checkbox").prop("checked", true).trigger("change.aop");
+                }
+            }
         }
     }, { // Processing the API document view on mobile
         "pointcut" : ".view-mobile-layout:^init$",
