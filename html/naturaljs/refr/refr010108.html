@@ -21,7 +21,8 @@
             <td style="text-align: center;">N/A</td>
             <td>string</td>
             <td>
-                <p>입력 한 두 날짜 간 일수 차이를 반환 합니다.</p>
+                <p lang="ko_KR">입력 한 두 날짜 간 일수 차이를 반환 합니다.</p>
+                <p lang="en_US">Returns the difference in days between two input dates.</p>
             </td>
         </tr>
         <tr>
@@ -29,14 +30,20 @@
             <td>refDateStr</td>
             <td>string</td>
             <td style="text-align: center;">N/A</td>
-            <td>기준 날짜 문자열(예) "19991231")</td>
+            <td>
+                <p lang="ko_KR">기준 날짜를 8자리 날짜 문자열(YYYYmmdd)로 입력 합니다.</p>
+                <p lang="en_US">Inputs the base date as an 8-digit date string (YYYYmmdd).</p>
+            </td>
         </tr>
         <tr>
             <td></td>
             <td>targetDateStr</td>
             <td>string</td>
             <td style="text-align: center;">N/A</td>
-            <td>차수를 구할 대상 날짜 문자열(예) "19991231")</td>
+            <td>
+                <p lang="ko_KR">계산할 날짜를 8자리 날짜 문자열(YYYYmmdd)로 입력 합니다.</p>
+                <p lang="en_US">Inputs the date to be calculated as an 8-digit date string (YYYYmmdd).</p>
+            </td>
         </tr>
         <tr>
             <td>strToDateStrArr</td>
@@ -44,7 +51,7 @@
             <td style="text-align: center;">N/A</td>
             <td>array</td>
             <td>
-                <p>입력 된 날짜 문자열을 입력된 서식을 기준으로 array 타입으로 [년(number), 월(number), 일(number)] 로 반환 합니다.</p>
+                <p>입력 된 날짜 문자열과 입력된 날짜 서식을 기준으로 array 타입의 날짜 객체[년(number|string), 월(number|string), 일(number|string)]를 생성 합니다.</p>
             </td>
         </tr>
         <tr>
@@ -52,7 +59,10 @@
             <td>str</td>
             <td>string</td>
             <td style="text-align: center;">N/A</td>
-            <td>날짜 문자열</td>
+            <td>
+                <p lang="ko_KR">날짜 문자열을 입력 합니다.</p>
+                <p lang="en_US">Inputs the date string.</p>
+            </td>
         </tr>
         <tr>
             <td></td>
@@ -60,8 +70,17 @@
             <td>string</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                입력한 날짜 문자열의 포멧(필수 입력)
-                <ul>
+                <p lang="ko_KR">입력한 날짜 문자열의 서식(format)을 입력(필수입력) 합니다.</p>
+                <p lang="en_US">입력한 날짜 문자열의 서식(format)을 입력(필수입력) 합니다.</p>
+                <ul lang="ko_KR">
+                    <li>Y : 년</li>
+                    <li>m : 월</li>
+                    <li>d : 일</li>
+                    <li>예) "19991231" : "Ymd"</li>
+                    <li>예) "3112" : "dm"</li>
+                    <li>예) "12311999" : "mdY"</li>
+                </ul>
+                <ul lang="en_US">
                     <li>Y : 년</li>
                     <li>m : 월</li>
                     <li>d : 일</li>
@@ -74,9 +93,12 @@
         <tr>
             <td></td>
             <td>isString</td>
-            <td>string</td>
+            <td>boolean</td>
             <td style="text-align: center;">N/A</td>
-            <td>년월일을 결과 array 에 number 타입 으로 담을지 string 타입으로 담을 지 여부(입력하지 않거나 false 이면 number 타입으로 담음)</td>
+            <td>
+                <p lang="ko_KR">true 를 입력하면 결과 array 객체에 날짜를 number 타입이 아닌 string 타입으로 저장 합니다.</p>
+                <p lang="en_US">true 를 입력하면 결과 array 객체에 날짜를 number 타입이 아닌 string 타입으로 저장 합니다.</p>
+            </td>
         </tr>
         <tr>
             <td>strToDate</td>
@@ -182,7 +204,7 @@ N.date.format("19991231120159", N.context.attr("data").formatter.date.YmdHis()) 
             <td style="text-align: center;">N/A</td>
             <td>number</td>
             <td>
-                <p>입력 된 date 객체를 timestamp number 로 바꿔 줍니다.</p>
+                <p>입력 된 date 객체를 Timestamp 로 바꿔 줍니다.</p>
                 <p>dateObj 인자를 입력하지 않으면 현재 날짜와 시간으로 전환 합니다.</p>
             </td>
         </tr>
@@ -191,7 +213,7 @@ N.date.format("19991231120159", N.context.attr("data").formatter.date.YmdHis()) 
             <td>dateObj</td>
             <td>date object</td>
             <td style="text-align: center;">N/A</td>
-            <td>timestamp number 로 전환 할 date object</td>
+            <td>Timestamp 로 전환 할 date object</td>
         </tr>
         <tr>
             <td>tsToDate</td>
@@ -199,7 +221,7 @@ N.date.format("19991231120159", N.context.attr("data").formatter.date.YmdHis()) 
             <td style="text-align: center;">N/A</td>
             <td>date object</td>
             <td>
-                <p>입력 된 timestamp number 를 date 객체로 바꿔 줍니다.</p>
+                <p>입력 된 Timestamp 를 date 객체로 바꿔 줍니다.</p>
                 <p>tsNum 인자를 입력하지 않으면 현재 날짜와 시간으로 전환 합니다.</p>
             </td>
         </tr>
@@ -208,7 +230,7 @@ N.date.format("19991231120159", N.context.attr("data").formatter.date.YmdHis()) 
             <td>tsNum</td>
             <td>number</td>
             <td style="text-align: center;">N/A</td>
-            <td>date object 로 전환 할 timestamp number</td>
+            <td>date object 로 전환 할 Timestamp</td>
         </tr>
         <tr>
             <td>dateList</td>
@@ -240,7 +262,7 @@ N.date.format("19991231120159", N.context.attr("data").formatter.date.YmdHis()) 
             <td style="text-align: center;">N/A</td>
             <td>date object</td>
             <td>
-                <p>입력 된 timestamp number 를 date 객체로 바꿔 줍니다.</p>
+                <p>입력 된 Timestamp 를 date 객체로 바꿔 줍니다.</p>
                 <p>tsNum 인자를 입력하지 않으면 현재 날짜와 시간으로 전환 합니다.</p>
             </td>
         </tr>
@@ -249,7 +271,7 @@ N.date.format("19991231120159", N.context.attr("data").formatter.date.YmdHis()) 
             <td>tsNum</td>
             <td>number</td>
             <td style="text-align: center;">N/A</td>
-            <td>date object 로 전환 할 timestamp number</td>
+            <td>date object 로 전환 할 Timestamp</td>
         </tr>
     </table>
 
