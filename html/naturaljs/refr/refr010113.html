@@ -21,30 +21,40 @@
             <td style="text-align: center;">N/A</td>
             <td>boolean</td>
             <td>
-                <p>눌러진 키가 숫자와 관련된 키들인지 여부를 리턴</p>
-                <p class="alert">내부적으로 Datepicker 에서 숫자 관련 키들을 제외한 입력을 차단할 때 사용 합니다.</p>
-                <p class="alert">숫자 키 외에 다음과 같은 키들을 인식 합니다.<br>
-                    97 : a Ctrl + a Select All<br>
-                    65 : A Ctrl + A Select All<br>
-                    99 : c Ctrl + c Copy<br>
-                    67 : C Ctrl + C Copy<br>
-                    118 : v Ctrl + v paste<br>
-                    86 : V Ctrl + V paste<br>
-                    115 : s Ctrl + s save<br>
-                    83 : S Ctrl + S save<br>
-                    112 : p Ctrl + p print<br>
-                    80 // P Ctrl + P print<br>
-                    8 : backspace<br>
-                    9 : tab<br>
-                    27 : escape<br>
-                    13 : enter<br>
-                    35 : Home &amp; shiftKey + #<br>
-                    36 : End &amp; shiftKey + $<br>
-                    37 : left arrow &amp; shiftKey + %<br>
-                    39 : right arrow &amp; '<br>
-                    46 : delete &amp; .<br>
-                    45 : Ins &amp; -<br>
-                </p>
+                <p lang="ko_KR">눌러진 키가 숫자와 관련된 키이면 true를 반환 합니다.</p>
+                <p lang="en_US">Returns true if the key pressed is a number-related key.</p>
+                <p lang="ko_KR">숫자키와 관련된 키 목록은 다음과 같습니다.</p>
+                <p lang="en_US">The following is a list of keys related to numeric keys.</p>
+                <ul>
+                    <li>97 : a Ctrl + a Select All</li>
+                    <li>65 : A Ctrl + A Select All</li>
+                    <li>99 : c Ctrl + c Copy</li>
+                    <li>67 : C Ctrl + C Copy</li>
+                    <li>118 : v Ctrl + v paste</li>
+                    <li>86 : V Ctrl + V paste</li>
+                    <li>115 : s Ctrl + s save</li>
+                    <li>83 : S Ctrl + S save</li>
+                    <li>112 : p Ctrl + p print</li>
+                    <li>80 // P Ctrl + P print</li>
+                    <li>8 : backspace</li>
+                    <li>9 : tab</li>
+                    <li>27 : escape</li>
+                    <li>13 : enter</li>
+                    <li>35 : Home &amp; shiftKey + #</li>
+                    <li>36 : End &amp; shiftKey + $</li>
+                    <li>37 : left arrow &amp; shiftKey + %</li>
+                    <li>39 : right arrow &amp; '</li>
+                    <li>46 : delete &amp; .</li>
+                    <li>45 : Ins &amp; -</li>
+                </ul>
+                <pre><code>$("input").on("keydown", function(e) {
+                    var keyCode = e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode);
+                    if(N.event.isNumberRelatedKeys(e)) {
+                        // TODO
+                    }
+                });</code></pre>
+                <p lang="ko_KR" class="alert">Datepicker(N.datepicker)에서 숫자와 관련 키입력을 차단하기 위해 사용합니다.</p>
+                <p lang="en_US" class="alert">Used by Datepicker (N.datepicker) to block numbers and related keystrokes.</p>
             </td>
         </tr>
         <tr>
@@ -52,7 +62,10 @@
             <td>e</td>
             <td>Event</td>
             <td style="text-align: center;">N/A</td>
-            <td>키 Event Object</td>
+            <td>
+                <p lang="ko_KR">Key Event 객체를 입력 합니다.</p>
+                <p lang="en_US">Inputs the Key Event object.</p>
+            </td>
         </tr>
         <tr>
             <td>disable</td>
@@ -60,10 +73,18 @@
             <td style="text-align: center;">N/A</td>
             <td>boolean</td>
             <td>
-                <p>지정한 요소에 바인드 되어 있는 이벤트들의 실행을 중단 시킬 수 있는 이벤트 핸들러 입니다. N().tpBind 메서드를 사용하여 이벤트 중 제일 앞단에 disable 이벤트 핸들러를 바인드 합니다.</p>
-                <pre><code>// 요소에 클릭 방지 처리
+                <p lang="ko_KR">지정한 요소에 바인드 되어 있는 이벤트들의 실행을 차단 할 수 있는 이벤트 핸들러 입니다.
+                    N().tpBind 메서드를 사용해서 요소 이벤트의 제일 앞단에 N.event.disable 이벤트 핸들러를 바인딩합니다.</p>
+                <p lang="en_US">This is an event handler that can block the execution of events bound to the specified element.
+                    Use the N().tpBind method to bind the N.event.disable event handler to the front of the element events.</p>
+                <pre lang="ko_KR"><code>// 클릭 방지
 $("selector").tpBind("click", N.event.disable);
-// 클릭 방지 처리 해제
+// 클릭 방지 해제
+$("selector").unbind("click", N.event.disable);
+</code></pre>
+                <pre lang="en_US"><code>// Enable the click protection.
+$("selector").tpBind("click", N.event.disable);
+// Disable the click protection.
 $("selector").unbind("click", N.event.disable);
 </code></pre>
             </td>
@@ -73,7 +94,10 @@ $("selector").unbind("click", N.event.disable);
             <td>e</td>
             <td>Event</td>
             <td style="text-align: center;">N/A</td>
-            <td>Event Object</td>
+            <td>
+                <p lang="ko_KR">이벤트 핸들러의 Event 객체 인자를 입력 합니다.</p>
+                <p lang="en_US">Inputs the event object argument of the event handler.</p>
+            </td>
         </tr>
     </table>
 </article>
