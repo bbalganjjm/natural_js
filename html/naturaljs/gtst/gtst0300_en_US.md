@@ -87,7 +87,7 @@ Create the **/html/contents/page6.html** file and write the code as follows.
         <a id="btnAdd" href="#" data-opts='{ "color": "green" }'>New</a>
         <a id="btnDelete" href="#" data-opts='{ "color": "green" }'>Delete</a>
         <a id="btnSave" href="#" data-opts='{ "color" : "gray" }'>Save</a>
-        <a id="btnSearch" href="#">Retrieve</a>
+        <a id="btnSearch" href="#">Search</a>
     </div>
 
     <div class="result">
@@ -311,7 +311,7 @@ If N.grid binds an empty array object, the message "No inquired data or no data 
 
 Event binding uses the functionality provided by jQuery.
 
-#### [Retrieve] button event
+#### [Search] button event
 
 ```
 bindEvents : function() {
@@ -332,7 +332,7 @@ bindEvents : function() {
 
 <p class="alert">In the above code, among the options of N.comm, the "type" is an option that is arbitrarily defined because it cannot be requested through the POST method to the web server. If the server can handle POST requests, remove the type option because the default value of type is defined as "POST" in natural.config.js. For more information about the type option, refer to the [Default Options] tab in the <a href="#cmVmcjAyMDQlMjRDb21tdW5pY2F0b3IucmVxdWVzdCRodG1sJTJGbmF0dXJhbGpzJTJGcmVmciUyRnJlZnIwMjA0Lmh0bWw=">Communicator.request</a> document.</p>
 
-The event handler of the Retrieve button executes the following logic.
+The event handler of the Search button executes the following logic.
  1. Retrieve data from the server using the data of the search form(cont.form) as a parameter.
  2. Bind the retrieved data to the grid (cont.grid).
 
@@ -430,7 +430,7 @@ N(window).alert({
 <p class="alert">To send parameters of type array[object], not object, to server, you must enable dataIsArray option. For more information about the dataIsArray option, refer to the [Default Options] tab in the <a href="#cmVmcjAyMDQlMjRDb21tdW5pY2F0b3IucmVxdWVzdCRodG1sJTJGbmF0dXJhbGpzJTJGcmVmciUyRnJlZnIwMjA0Lmh0bWw=">Communicator.request</a> document.</p>
 5. After saving, display the message using the N.notify component.
 <p class="alert"><strong>rowStatus</strong> property is created when the value of input element is changed or data is changed by cont.grid.val () method. The rowStatus value can be one of "insert", "update", or "delete". <strong>insert / update / delete on the server can be handled with the rowStatus value</strong> defined in each row data object.
-6. Click the Retrieve button to retrieve the changed data again.
+6. Click the Search button to retrieve the changed data again.
 
 After deploying the source files created so far to the web server and accessing **/index.html**, if the following screen is displayed, it is a success.
 

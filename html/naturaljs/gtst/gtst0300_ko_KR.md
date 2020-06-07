@@ -88,7 +88,7 @@ Grid 로 생성/조회/수정/삭제를 처리 하기 위해 조회조건 영역
         <a id="btnAdd" href="#" data-opts='{ "color": "green" }'>New</a>
         <a id="btnDelete" href="#" data-opts='{ "color": "green" }'>Delete</a>
         <a id="btnSave" href="#" data-opts='{ "color" : "gray" }'>Save</a>
-        <a id="btnSearch" href="#">Retrieve</a>
+        <a id="btnSearch" href="#">Search</a>
     </div>
 
     <div class="result">
@@ -311,7 +311,7 @@ N.grid 는 비어있는 array 객체를 바인딩 하면 "조회를 하지 않�
 
 이벤트 바인딩은 jQuery 에서 제공하는 기능을 사용 합니다.
 
-#### [Retrieve] 버튼 이벤트
+#### [Search] 버튼 이벤트
 
 ```
 bindEvents : function() {
@@ -431,7 +431,7 @@ N(window).alert({
 <p class="alert">서버로 object 가 아닌 array[object] 형태의 파라미터를 전달 하려면 dataIsArray 옵션을 활성화 해 주어야 합니다. dataIsArray 옵션에 대한 자세한 내용은 <a href="#cmVmcjAyMDQlMjRDb21tdW5pY2F0b3IucmVxdWVzdCRodG1sJTJGbmF0dXJhbGpzJTJGcmVmciUyRnJlZnIwMjA0Lmh0bWw=">Communicator.request</a> 문서의 [기본옵션] 탭을 참고 해 주세요.</p>
 5. 저장 완료 후 N.notify 컴포넌트를 사용하여 메시지 표시
 <p class="alert">입력요소의 값을 변경하거나 cont.grid.val() 메서드로 데이터를 변경하면 <strong>rowStatus</strong> 프로퍼티가 생성 됩니다. rowStatus 값은 "insert", "update", "delete" 중 하나가 됩니다. <strong>서버 에서는</strong> 행 데이터 객체 마다 정의 되어 있는 <strong>rowStatus 값으로 입력/수정/삭제 를 구분 해서 처리</strong> 하면 됩니다.</p>
-6. Retrieve 버튼을 클릭 하여 변경 된 데이터 재 조회
+6. Search 버튼을 클릭 하여 변경 된 데이터 재 조회
 
 지금까지 작성한 소스 파일들을 웹 서버에 배포한 다음 **/index.html** 에 접속 했을때 다음과 같은 화면이 표시 되면 실습을 성공 한 것 입니다.
 
