@@ -1115,7 +1115,7 @@
                             localStorage.setItem("isListTypeView", "N");
                             view.removeClass("api-view-list-type");
                         }
-                        N(window).trigger("resize.mobile");
+                        N(window).trigger("resize.mobile", [ view ]);
                     });
                     view.find("h2:first").append(select);
                     if(localStorage.getItem("isListTypeView") == "Y") {
@@ -1130,14 +1130,14 @@
                 } else {
                     N(".view_context__ h2 .api-view-type-select").hide();
                 }
-                N(window).trigger("resize.mobile");
+                N(window).trigger("resize.mobile", [ view ]);
             });
         }
     }, { // Processing the API document view on mobile
         "pointcut" : ".view-mobile-layout:^init$",
         "adviceType" : "before",
         "fn" : function(cont, fnChain, args){
-            N(window).trigger("resize.mobile");
+            N(window).trigger("resize.mobile", [ args[0] ]);
         }
     }, { // Source view button handling
         "pointcut" : ".view-code:^init$",

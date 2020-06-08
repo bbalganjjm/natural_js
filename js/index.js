@@ -189,7 +189,7 @@
                         view = N(".view-mobile-layout").filter(":visible");
                     }
 
-                    if(!N("#methods").hasClass("visible__") && !N("#constructor").hasClass("visible__")) {
+                    if(!view) {
                         return false;
                     }
 
