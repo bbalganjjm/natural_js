@@ -183,17 +183,21 @@
             // API 문서 모바일 용 보기 처리 이벤트
             N(window).on("resize.mobile", function(e, view) {
 
-                if (e.target == window || view) { // 모바일에서 scroll 시 resize 이벤트가 firing 되서(ios, android 동일).
+                if (e.target == window || view) { // 모바일에서 scroll 시 resize 이벤트가 실행되서(ios, android 동일).
 
-                    if(!$("#methods").hasClass("visible__") && !$("#constructor").hasClass("visible__")) {
+                    if(view === undefined) {
+                        view = N(".view-mobile-layout").filter(":visible");
+                    }
+
+                    if(!N("#methods").hasClass("visible__") && !N("#constructor").hasClass("visible__")) {
                         return false;
                     }
 
                     N(".agrsIndex", view).remove();
                     N(".function-desc", view).removeClass("function-desc");
 
-                    if($(window).width() <= 751) { // 768 - 17px(?)
-                        $("td:contains('N/A'):visible", view).css({
+                    if(N(window).width() <= 751 || view.hasClass("api-view-list-type")) { // 768 - 17px(?)
+                        N("td:contains('N/A'):visible", view).css({
                             "visibility": "hidden",
                             "padding" : 0,
                             "margin" : 0,
@@ -202,19 +206,20 @@
                         });
 
                         var idx = -1;
-                        $("tr:visible", view).each(function() {
-                            if($(this).find(">td:eq(0)").text().length > 0) {
+                        N("tr:visible", view).each(function() {
+                            var selfEle = N(this);
+                            if(N(this).find(">td:eq(0)").text().length > 0) {
                                 idx = -1;
-                                $(this).find(">td:eq(0)").siblings("td").addClass("function-desc");
+                                N(this).find(">td:eq(0)").siblings("td").addClass("function-desc");
                             }
-                            $(this).find(">td:eq(1)").prepend('<strong class="agrsIndex">[' + idx + '] : </strong>');
+                            N(this).find(">td:eq(1)").prepend('<strong class="agrsIndex">[' + idx + '] : </strong>');
                             idx++;
                         });
                     } else {
-                        $("[id='methods'], [id='constructor']").find("tr .function-desc").removeClass("function-desc");
-                        $("[id='methods'], [id='constructor']").find("tr .agrsIndex").remove();
+                        N("tr .function-desc", view).removeClass("function-desc");
+                        N("tr .agrsIndex", view).remove();
 
-                        $("[id='methods'], [id='constructor']").find("td:contains('N/A')").css({
+                        N("td:contains('N/A')", view).css({
                             "visibility": "",
                             "padding" : "",
                             "margin" : "",

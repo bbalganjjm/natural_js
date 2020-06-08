@@ -1115,6 +1115,7 @@
                             localStorage.setItem("isListTypeView", "N");
                             view.removeClass("api-view-list-type");
                         }
+                        N(window).trigger("resize.mobile");
                     });
                     view.find("h2:first").append(select);
                     if(localStorage.getItem("isListTypeView") == "Y") {
@@ -1129,6 +1130,7 @@
                 } else {
                     N(".view_context__ h2 .api-view-type-select").hide();
                 }
+                N(window).trigger("resize.mobile");
             });
         }
     }, { // Processing the API document view on mobile
