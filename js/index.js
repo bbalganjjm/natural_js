@@ -200,7 +200,7 @@
                     N(".function-desc", view).removeClass("function-desc");
 
                     if(N(window).width() <= 751 || view.hasClass("api-view-list-type")) { // 768 - 17px(?)
-                        N("td:contains('N/A'):visible", view).css({
+                        N("td:contains('N/A')", view).css({
                             "visibility": "hidden",
                             "padding" : 0,
                             "margin" : 0,
@@ -209,7 +209,7 @@
                         });
 
                         var idx = -1;
-                        N("tr:visible", view).each(function() {
+                        N("tr", view).each(function() {
                             var selfEle = N(this);
                             if(N(this).find(">td:eq(0)").text().length > 0) {
                                 idx = -1;
