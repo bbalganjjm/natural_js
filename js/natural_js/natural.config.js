@@ -1104,7 +1104,7 @@
                             "AOP-0001" : "리스트로 보기"
                         },
                         "en_US" : {
-                            "AOP-0001" : "List type view"
+                            "AOP-0001" : "List view"
                         }
                     }, "AOP-0001") +'</span></label>');
                     select.find(":checkbox").on("change.aop", function() {
