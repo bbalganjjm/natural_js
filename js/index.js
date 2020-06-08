@@ -192,6 +192,9 @@
                     if(!view) {
                         return false;
                     }
+                    if(!view.hasClass("view-mobile-layout")) {
+                        return false;
+                    }
 
                     N(".agrsIndex", view).remove();
                     N(".function-desc", view).removeClass("function-desc");

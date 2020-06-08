@@ -741,7 +741,7 @@ pre.shell>code {
         margin-bottom: 0;
     }
     #constructor .apiDoc .api.form td:nth-child(2):before {
-        content: 'arguments : ';
+        content: 'arguments';
         font-weight: 600;
     }
     #constructor .apiDoc .api.form td:nth-child(3):before {
@@ -811,7 +811,7 @@ pre.shell>code {
     #functions .apiDoc .api.form td:nth-child(2):before,
     #methods .apiDoc .api.form td:nth-child(2):before,
     #utilities .apiDoc .api.form td:nth-child(2):before {
-        content: 'arguments : ';
+        content: 'arguments';
         font-weight: 600;
     }
     #pluginExtention .apiDoc .api.form td:nth-child(3):before,
@@ -927,7 +927,7 @@ pre.shell>code {
     margin-bottom: 0;
 }
 #constructor .apiDoc.api-view-list-type .api.form td:nth-child(2):before {
-    content: 'arguments : ';
+    content: 'arguments';
     font-weight: 600;
 }
 #constructor .apiDoc.api-view-list-type .api.form td:nth-child(3):before {
@@ -997,7 +997,7 @@ pre.shell>code {
 #functions .apiDoc.api-view-list-type .api.form td:nth-child(2):before,
 #methods .apiDoc.api-view-list-type .api.form td:nth-child(2):before,
 #utilities .apiDoc.api-view-list-type .api.form td:nth-child(2):before {
-    content: 'arguments : ';
+    content: 'arguments';
     font-weight: 600;
 }
 #pluginExtention .apiDoc.api-view-list-type .api.form td:nth-child(3):before,
