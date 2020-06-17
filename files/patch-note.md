@@ -18,6 +18,7 @@
  * Changed N.pagination, N.datepicker realted styles.
  * Fixed font-size has been removed.
  * Changed fixedcol option related styles of N.grid.
+ * Added scrollbar style on webkit based browsers.
 
 ##natural.config.js
  * Changed misc option related values of N.grid.
