@@ -1069,3 +1069,20 @@ pre.shell>code {
     font-size: 14px;
     cursor: pointer;
 }
+
+/* Webkit scrollbars */
+textarea::-webkit-scrollbar,
+select::-webkit-scrollbar {
+    width: 6px;
+    background-color: #E8F5E9;
+}
+
+textarea:hover::-webkit-scrollbar-track,
+select:hover::-webkit-scrollbar-track {
+    background-color: #E8F5E9;
+}
+
+textarea:hover::-webkit-scrollbar-thumb,
+select:hover::-webkit-scrollbar-thumb{
+    background-color: #A5D6A7;
+}
