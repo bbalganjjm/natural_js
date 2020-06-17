@@ -791,6 +791,10 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     padding: 10px;
 }
 
+.grid_more_popup_contents__ > .grid_more_contents__ > table {
+	width: auto;
+}
+
 .grid_more_popup_contents__ > .grid_more_contents__ th {
     text-align: right;
     min-width: 100px;
