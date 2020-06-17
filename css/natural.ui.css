@@ -1775,3 +1775,23 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 	transform: translateY(-3px);
 	transition: transform 0.4s cubic-bezier(1, 0, 1, 1);
 }
+
+/* Webkit scrollbars */
+.antiscroll-inner::-webkit-scrollbar,
+.tbody_wrap__::-webkit-scrollbar,
+.context_wrap__::-webkit-scrollbar {
+    width: 6px;
+    background-color: #E8F5E9;
+}
+
+.antiscroll-inner:hover::-webkit-scrollbar-track,
+.tbody_wrap__:hover::-webkit-scrollbar-track,
+.context_wrap__:hover::-webkit-scrollbar-track {
+    background-color: #E8F5E9;
+}
+
+.antiscroll-inner:hover::-webkit-scrollbar-thumb,
+.tbody_wrap__:hover::-webkit-scrollbar-thumb,
+.context_wrap__:hover::-webkit-scrollbar-thumb {
+    background-color: #A5D6A7;
+}
