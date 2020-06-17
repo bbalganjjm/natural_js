@@ -19,6 +19,7 @@
  * Fixed font-size has been removed.
  * Changed fixedcol option related styles of N.grid.
  * Added scrollbar style on webkit based browsers.
+ * Changed detail view of more option style.
 
 ##natural.config.js
  * Changed misc option related values of N.grid.
