@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.38.240
+ * Natural-UI v0.39.242
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-UI"] = "0.38.240";
+    N.version["Natural-UI"] = "0.39.242";
 
     $.fn.extend($.extend(N.prototype, {
         alert : function(msg, vars) {
@@ -4835,7 +4835,16 @@
                 if(val === undefined) {
                     return this.options.data[row][key];
                 }
-                this.options.context.find(">.form__:eq(" + String(row) + ")").instance("form").val(key, val);
+                var inst = this.options.context.find(">.form__:eq(" + String(row) + ")").instance("form");
+                if(inst) {
+                    inst.val(key, val);
+                } else {
+                    if(this.options.data[row]) {
+                        this.options.data[row][key] = val;
+                    } else {
+                        throw N.error("[N.list.prototype.val]There is no row data that is " + row + " index");
+                    }
+                }
                 return this;
             },
             move : function(fromRow, toRow) {
@@ -4911,6 +4920,7 @@
                 validateScroll : true,
                 cache : true,
                 tpBind : false,
+                pastiable : true,
                 rowHandlerBeforeBind : null,
                 rowHandler : null,
                 onSelect : null,
@@ -5057,6 +5067,10 @@
                     this.thead.find("> tr th").attr("data-filter", "true");
                 }
                 Grid.dataFilter.call(this);
+            }
+
+            if(this.options.pastiable) {
+                Grid.paste.call(this);
             }
 
             // set this instance to context element
@@ -6235,6 +6249,56 @@
                         }
                     }
                 }
+            },
+            paste : function() {
+                var self = this;
+                self.tempRowEle.find("[id]").not(":input").attr("contenteditable", "true").on("keydown.grid.paste", function(e) {
+                    if(!e.ctrlKey) {
+                        e.target.blur();
+                        e.preventDefault();
+                        return false;
+                    }
+                });
+                self.context().on("paste", ".form__ [id]", function(e) {
+                    e.preventDefault();
+
+                    var content;
+                    if (window.clipboardData) {
+                        content = window.clipboardData.getData('Text');
+                        if (window.getSelection) {
+                            var selObj = window.getSelection();
+                            var selRange = selObj.getRangeAt(0);
+                            selRange.deleteContents();
+                            selRange.insertNode(document.createTextNode(content));
+                        }
+                    } else if (e.originalEvent.clipboardData) {
+                        content = (e.originalEvent || e).clipboardData.getData('text/plain');
+                    }
+
+                    if (!content && content.length) {
+                        return false;
+                    }
+
+                    var thisEle = N(this);
+                    var currRowIndex = self.context(".form__").index(thisEle.closest(".form__"));
+                    var currCellIndex = self.context(".form__:eq(" + currRowIndex + ") [id]").index(thisEle);
+
+                    var rows = content.replace(/"((?:[^"]*(?:\r\n|\n\r|\n|\r))+[^"]+)"/mg, function (match, p1) {
+                        return p1.replace(/""/g, '"').replace(/\r\n|\n\r|\n|\r/g, ' ');
+                    }).split(/\r\n|\n\r|\n|\r/g);
+                    var columns = self.tempRowEle.find("[id]").map(function() {
+                        return N(this).attr("id");
+                    });
+                    for (var i = 0; i < rows.length; i++) {
+                        if(N.isEmptyObject(rows[i])) continue;
+
+                        var data = rows[i].split('\t');
+                        for (var j = 0; j < data.length; j++) {
+                            self.val(currRowIndex + i, columns.get(currCellIndex + j), data[j]);
+                        }
+
+                    }
+                });
             }
         });
 
@@ -6735,7 +6799,17 @@
                 if(val === undefined) {
                     return this.options.data[row][key];
                 }
-                this.options.context.find(">.form__:eq(" + String(row) + ")").instance("form").val(key, val);
+
+                var inst = this.options.context.find(">.form__:eq(" + String(row) + ")").instance("form");
+                if(inst) {
+                    inst.val(key, val);
+                } else {
+                    if(this.options.data[row]) {
+                        this.options.data[row][key] = val;
+                    } else {
+                        throw N.error("[N.grid.prototype.val]There is no row data that is " + row + " index");
+                    }
+                }
                 return this;
             },
             move : function(fromRow, toRow) {
