@@ -5,6 +5,8 @@
  * N.grid, N.list : The val method has been enhanced to change the values ​​of rows that have not yet been created by scroll paging.
  * N.grid, N.list : Added an error message about errors that occur when a row index that is not in the data is specified with the val method.
  * N.datepicker : yearsPanelPosition true 로 설정 되었을때 yearChangeInput 옵션이 false 이면 연도를 바꿔도 달력이 갱신되지 않는 버그가 수정 되었습니다.
+ * N.datepicker : minDate 와 maxDate 옵션이 되었습니다. 이 옵션들을 통해서 선택할 수 있는 일자를 지정 할 수 있습니다.
+ * N.datepicker : holiday 옵션이 추가되 었습니다. 이 옵션에 휴일 데이터 객체를 넣으면 Datepicker 에 표시 해 줍니다.
 
 ## Natural-DATA v0.10.72
  *

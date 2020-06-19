@@ -66,6 +66,35 @@
                 </td>
             </tr>
             <tr>
+                <th><label for="monthonly">minDate</label></th>
+                <td>
+                    <input id="minDate" type="number" placeholder="20200619">
+                </td>
+                <th><label for="maxDate">maxDate</label></th>
+                <td>
+                    <input id="maxDate" type="number" placeholder="20200819">
+                </td>
+            </tr>
+            <tr>
+                <th><label for="holiday">holiday</label></th>
+                <td colspan="3">
+                    <textarea id="holiday" style="height: 150px;">{
+    "repeat" : {
+        "0619" : "Holiday1",
+        "0620" : "Holiday3",
+        "0621" : ["Holiday6", "Holiday7"],
+        "0622" : ["Holiday9", "Holiday10"]
+    },
+    "once" : {
+	    "20200619" : "Holiday2",
+	    "20200620" : ["Holiday4", "Holiday5"],
+	    "20200621" : "Holiday8",
+	    "20200622" : ["Holiday11", "Holiday12"]
+    }
+}</textarea>
+                </td>
+            </tr>
+            <tr>
                 <th><label for="onSelect">onSelect</label></th>
                 <td colspan="3">
                     <textarea id="onSelect" style="height: 56px;">function(context, selDate, monthonly) {
@@ -168,36 +197,42 @@
                 e.preventDefault();
 
                 var opts = {
-                    yearsPanelPosition : N("select#yearsPanelPosition", view).val(),
-                    monthsPanelPosition : N("select#monthsPanelPosition", view).val(),
+                    yearsPanelPosition : N("#yearsPanelPosition", view).val(),
+                    monthsPanelPosition : N("#monthsPanelPosition", view).val(),
                     minYear : N.string.trimToNull(N("#minYear", view).val()) !== null ?
-                           parseInt(N("input#minYear", view).val()) : undefined,
+                            parseInt(N("#minYear", view).val()) : undefined,
                     maxYear : N.string.trimToNull(N("#maxYear", view).val()) !== null ?
-                           parseInt(N("input#maxYear", view).val()) : undefined,
-                       yearChangeInput : N("input#yearChangeInput", view).is(":checked"),
-                          monthChangeInput : N("input#monthChangeInput", view).is(":checked"),
-                          touchMonthChange : N("input#touchMonthChange", view).is(":checked"),
-                          scrollMonthChange : N("input#scrollMonthChange", view).is(":checked"),
-                       monthonly : N("input#monthonly", view).is(":checked"),
-                       focusin : N("input#focusin", view).is(":checked"),
-                       onSelect : N.string.trimToNull(N("textarea#onSelect", view).val()) !== null ?
-                           eval("(" + N("textarea#onSelect", view).val() + ")") : null,
-                       onBeforeShow : N.string.trimToNull(N("textarea#onBeforeShow", view).val()) !== null ?
-                        eval("(" + N("textarea#onBeforeShow", view).val() + ")") : null,
-                      onShow : N.string.trimToNull(N("textarea#onShow", view).val()) !== null ?
-                           eval("(" + N("textarea#onShow", view).val() + ")") : null,
-                      onBeforeHide : N.string.trimToNull(N("textarea#onBeforeHide", view).val()) !== null ?
-                           eval("(" + N("textarea#onBeforeHide", view).val() + ")") : null,
-                      onHide : N.string.trimToNull(N("textarea#onHide", view).val()) !== null ?
-                          eval("(" + N("textarea#onHide", view).val() + ")") : null,
-                       onChangeYear : N.string.trimToNull(N("textarea#onChangeYear", view).val()) !== null ?
-                           eval("(" + N("textarea#onChangeYear", view).val() + ")") : null,
-                       onChangeMonth : N.string.trimToNull(N("textarea#onChangeMonth", view).val()) !== null ?
-                           eval("(" + N("textarea#onChangeMonth", view).val() + ")") : null
+                            parseInt(N("#maxYear", view).val()) : undefined,
+                    yearChangeInput : N("#yearChangeInput", view).is(":checked"),
+                    monthChangeInput : N("#monthChangeInput", view).is(":checked"),
+                    touchMonthChange : N("#touchMonthChange", view).is(":checked"),
+                    scrollMonthChange : N("#scrollMonthChange", view).is(":checked"),
+                    monthonly : N("#monthonly", view).is(":checked"),
+                    focusin : N("#focusin", view).is(":checked"),
+                    minDate : N.string.trimToNull(N("#minDate", view).val()) !== null ?
+                            parseInt(N("#minDate", view).val()) : undefined,
+                    maxDate : N.string.trimToNull(N("#maxDate", view).val()) !== null ?
+                            parseInt(N("#maxDate", view).val()) : undefined,
+                    holiday : N.string.trimToNull(N("#holiday", view).val()) !== null ?
+                            JSON.parse(N("#holiday", view).val().replace(/\n|\t/g, "")) : null,
+                    onSelect : N.string.trimToNull(N("#onSelect", view).val()) !== null ?
+                            eval("(" + N("#onSelect", view).val() + ")") : null,
+                    onBeforeShow : N.string.trimToNull(N("#onBeforeShow", view).val()) !== null ?
+                            eval("(" + N("#onBeforeShow", view).val() + ")") : null,
+                    onShow : N.string.trimToNull(N("#onShow", view).val()) !== null ?
+                            eval("(" + N("#onShow", view).val() + ")") : null,
+                    onBeforeHide : N.string.trimToNull(N("#onBeforeHide", view).val()) !== null ?
+                            eval("(" + N("#onBeforeHide", view).val() + ")") : null,
+                    onHide : N.string.trimToNull(N("#onHide", view).val()) !== null ?
+                            eval("(" + N("#onHide", view).val() + ")") : null,
+                    onChangeYear : N.string.trimToNull(N("#onChangeYear", view).val()) !== null ?
+                            eval("(" + N("#onChangeYear", view).val() + ")") : null,
+                    onChangeMonth : N.string.trimToNull(N("#onChangeMonth", view).val()) !== null ?
+                            eval("(" + N("#onChangeMonth", view).val() + ")") : null
                    };
 
                 try {
-                    cont.datepicker = N("input#datepicker", view).datepicker(opts);
+                    cont.datepicker = N("#datepicker", view).datepicker(opts);
                 } catch(e) {
                     N(window).alert(e).show();
                     throw N.error(e);
