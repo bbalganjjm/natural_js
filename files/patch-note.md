@@ -1,6 +1,9 @@
 ## Natural-UI v0.38.238
  * N.tab : Fixed a bug where the tab scroll element's margin value was set incorrectly or an error occurred on mobile when the tab scroll option was true and there was no tab scroll related element("a" tag).
  * N.alert : Fixed a bug that caused an error when specifying the context as a window object when creating an instance of N.alert directly with new.
+ * N.grid : A "pastiable" option for pasting cell data copied from Excel to the grid has been added.
+ * N.grid, N.list : The val method has been enhanced to change the values ​​of rows that have not yet been created by scroll paging.
+ * N.grid, N.list : Added an error message about errors that occur when a row index that is not in the data is specified with the val method.
 
 ## Natural-DATA v0.10.72
  *
