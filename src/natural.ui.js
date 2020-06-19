@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.39.242
+ * Natural-UI v0.39.243
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-UI"] = "0.39.242";
+    N.version["Natural-UI"] = "0.39.243";
 
     $.fn.extend($.extend(N.prototype, {
         alert : function(msg, vars) {
@@ -1330,6 +1330,9 @@
                 monthChangeInput : false,
                 touchMonthChange : false,
                 scrollMonthChange : false,
+                minDate : null,
+                maxDate : null,
+                holiday : null,
                 onChangeYear : null,
                 onChangeMonth : null,
                 onSelect : null,
@@ -1510,7 +1513,7 @@
                         yearsPanel.append(yearItemClone.text(N.string.lpad(String(i), 4, "0")));
                     }
 
-                    // bind the click event to year items
+                    // Binds click event to year items
                     yearsPanel.on("click.datepicker", ".datepicker_year_item__", function(e, isForceUpdate) {
                         e.preventDefault();
                         var selectedYearItemEle = yearsPanel.find(".datepicker_year_item__.datepicker_year_selected__").removeClass("datepicker_year_selected__");
@@ -1518,7 +1521,7 @@
 
                         var selYearStr = $(this).text();
                         if(selYearStr != selectedYearItemEle.text() || isForceUpdate) {
-                            // immediately apply changed year
+                            // immediately applys the changed year
                             if(opts.yearChangeInput) {
                                 var dateVal = opts.context.val().replace(/[^\d]/g,"");
 
@@ -1606,7 +1609,7 @@
                     yearItem.addClass("datepicker_year_item__ datepicker_year_selected__").bind("change.datepicker", function(e) {
                         var selYearStr = $(this).val();
 
-                        // immediately apply changed year
+                        // immediately applys the changed year
                         if(opts.yearChangeInput) {
                             var dateVal = opts.context.val().replace(/[^\d]/g,"");
 
@@ -1778,7 +1781,7 @@
 
                 var monthItem = $('<div></div>');
                 monthsPanel.append(monthItem.clone().addClass("datepicker_month_title__").text(N.message.get(opts.message, "month")));
-                // render month items
+                // rendering the month items
                 for(i=1;i<=12;i++) {
                     monthsPanel.append(monthItem.clone(true).addClass("datepicker_month_item__").text(String(i)));
                     if(monthsPanel.find(".datepicker_month_selected__").length === 0) {
@@ -1787,7 +1790,7 @@
                 }
                 opts.contents.append(monthsPanel);
 
-                // bind the click event to month items
+                // Binds click event to month items
                 monthsPanel.on("click.datepicker", ".datepicker_month_item__", function(e, ke) {
                     e.preventDefault();
 
@@ -1797,7 +1800,7 @@
                     var selYearStr = yearsPanel.find(".datepicker_year_selected__")[opts.yearsPanelPosition === "left" ? "text" : "val"]();
                     var selMonthStr = $(this).text();
                     if(selMonthStr != selectedMonthItemEle.text()) {
-                        // immediately apply changed month
+                        // immediately applys the changed month
                         if(opts.monthChangeInput) {
                             var dateVal = opts.context.val().replace(/[^\d]/g,"");
 
@@ -1848,7 +1851,7 @@
 
                     if(opts.monthonly) {
                         var selDate = N.date.strToDate(N.string.lpad(selYearStr, 4, "0") + N.string.lpad($(this).text(), 2, "0"), "Ym");
-                        // set date format of global config
+                        // sets the date format by the global config.
                         selDate.format = N.context.attr("data").formatter.date.Ym().replace(/[^Y|^m|^d]/g, "");
 
                         var onSelectContinue;
@@ -1892,7 +1895,7 @@
                         var prevEndDate = prevEndDateCls.obj.getDate();
                         var date;
                         var dateItem;
-                        //render date items
+                        // rendering the date items
                         for(j=1-startDay;j<=42-startDay;j++) {
                             date = String(j);
                             dateItem = dayItem.clone(true);
@@ -1914,7 +1917,7 @@
                             }, i*10);
                         });
 
-                        // auto day select
+                        // automatic day selection
                         var dateVal = opts.context.val().replace(/[^\d]/g,"");
                         if(!N.string.isEmpty(dateVal) && dateVal.length === 8) {
                             var selDate = N.date.strToDate(dateVal, dateFormat = N.context.attr("data").formatter.date.Ymd().replace(/[^Y|^m|^d]/g, ""));
@@ -1930,14 +1933,14 @@
                 });
 
                 if(!opts.monthonly) {
-                    // create day items
+                    // creates the day items
                     var days = N.message.get(opts.message, "days").split(",");
                     var daysPanel = $('<div class="datepicker_days_panel__"></div>');
                     var dayItem = $('<div></div>');
 
                     opts.contents.append(daysPanel);
 
-                    // bind the click event to day items
+                    // Binds click event to day items
                     daysPanel.on("click.datepicker", ".datepicker_day_item__, .datepicker_prev_day_item__, .datepicker_next_day_item__", function(e, ke) {
                         e.preventDefault();
                         var thisEle = $(this);
@@ -1958,7 +1961,7 @@
 
                         opts.lastSelectedDay = thisEle.text();
 
-                        // set date format of global config
+                        // sets the date format by the global config
                         selDate.format = N.context.attr("data").formatter.date.Ymd().replace(/[^Y|^m|^d]/g, "");
 
                         var onSelectContinue;
@@ -4920,7 +4923,7 @@
                 validateScroll : true,
                 cache : true,
                 tpBind : false,
-                pastiable : true,
+                pastiable : false,
                 rowHandlerBeforeBind : null,
                 rowHandler : null,
                 onSelect : null,
@@ -6293,8 +6296,13 @@
                         if(N.isEmptyObject(rows[i])) continue;
 
                         var data = rows[i].split('\t');
+                        var rowEle = self.context(".form__:eq(" + String(i) + ")");
                         for (var j = 0; j < data.length; j++) {
-                            self.val(currRowIndex + i, columns.get(currCellIndex + j), data[j]);
+                            var colNm = columns.get(currCellIndex + j);
+                            var colEle = rowEle.find("#" + colNm);
+                            if(!colEle.prop("readonly") && !colEle.prop("disabled")) {
+                                self.val(currRowIndex + i, columns.get(currCellIndex + j), data[j]);
+                            }
                         }
 
                     }
