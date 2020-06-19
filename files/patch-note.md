@@ -4,6 +4,7 @@
  * N.grid : A "pastiable" option for pasting cell data copied from Excel to the grid has been added.
  * N.grid, N.list : The val method has been enhanced to change the values ​​of rows that have not yet been created by scroll paging.
  * N.grid, N.list : Added an error message about errors that occur when a row index that is not in the data is specified with the val method.
+ * N.datepicker : yearsPanelPosition true 로 설정 되었을때 yearChangeInput 옵션이 false 이면 연도를 바꿔도 달력이 갱신되지 않는 버그가 수정 되었습니다.
 
 ## Natural-DATA v0.10.72
  *

@@ -1044,7 +1044,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .datepicker_contents__ .datepicker_day_item__,
 .datepicker_contents__ .datepicker_prev_day_item__,
 .datepicker_contents__ .datepicker_next_day_item__ {
-    will-change: opacity, transform;
+    will-change: transform;
     transform: translateZ(0)\0; /* for ie 8+ */
 
     float: left;
@@ -1054,20 +1054,37 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     line-height: 25px;
     width: 28px;
     text-align: center;
-    opacity: 0;
     transform: scaleX(0);
 }
 
-.datepicker_contents__ .datepicker_prev_day_item__, .datepicker_contents__ .datepicker_next_day_item__ {
-    color: #00000088;
+.datepicker_contents__ .datepicker_day_item__.datepicker_holiday__,
+.datepicker_contents__ .datepicker_prev_day_item__.datepicker_holiday__,
+.datepicker_contents__ .datepicker_next_day_item__.datepicker_holiday__ {
+    color: red;
 }
 
 .datepicker_contents__ .datepicker_day_item__.visible__,
 .datepicker_contents__ .datepicker_prev_day_item__.visible__,
 .datepicker_contents__ .datepicker_next_day_item__.visible__ {
-    opacity: 1;
     transform: scaleX(1);
     transition: transform 0.3s ease;
+}
+
+.datepicker_contents__ .datepicker_prev_day_item__,
+.datepicker_contents__ .datepicker_next_day_item__ {
+    opacity: 0.5;
+}
+
+.datepicker_contents__ .datepicker_day_item__.datepicker_min_date__,
+.datepicker_contents__ .datepicker_prev_day_item__.datepicker_min_date__,
+.datepicker_contents__ .datepicker_next_day_item__.datepicker_min_date__ {
+    opacity: 0.1;
+}
+
+.datepicker_contents__ .datepicker_day_item__.datepicker_max_date__,
+.datepicker_contents__ .datepicker_prev_day_item__.datepicker_max_date__,
+.datepicker_contents__ .datepicker_next_day_item__.datepicker_max_date__ {
+    opacity: 0.1;
 }
 
 .datepicker_contents__ .datepicker_day_title__ {
