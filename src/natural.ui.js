@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.39.243
+ * Natural-UI v0.42.244
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-UI"] = "0.39.243";
+    N.version["Natural-UI"] = "0.42.244";
 
     $.fn.extend($.extend(N.prototype, {
         alert : function(msg, vars) {
@@ -1332,7 +1332,10 @@
                 scrollMonthChange : false,
                 minDate : null,
                 maxDate : null,
-                holiday : null,
+                holiday : {
+                    "repeat" : null,
+                    "once" : null
+                },
                 onChangeYear : null,
                 onChangeMonth : null,
                 onSelect : null,
@@ -1386,6 +1389,59 @@
             context : function() {
                 return this.options.context;
             },
+            checkMinMaxDate : function() {
+                var opts = this.options;
+                var value = opts.context.val();
+
+                if(value.length === 4) {
+                    if(opts.minDate != null && opts.minDate.length >= 4) {
+                        if(Number(value) < Number(opts.minDate.substring(0, 4))) {
+                            opts.context.val(opts.minDate.substring(0, 4)).trigger("keyup.datepicker", [true]);
+                            opts.context.alert(N.message.get(opts.message, "minDate", [ opts.minDate ])).show();
+                            return false;
+                        }
+                    }
+                    if(opts.maxDate != null && opts.maxDate.length >= 4) {
+                        if(Number(value) > Number(opts.maxDate.substring(0, 4))) {
+                            opts.context.val(opts.maxDate.substring(0, 4)).trigger("keyup.datepicker", [true]);
+                            opts.context.alert(N.message.get(opts.message, "maxDate", [ opts.maxDate ])).show();
+                            return false;
+                        }
+                    }
+                } else if(value.length === 6) {
+                    if(opts.minDate != null && opts.minDate.length >= 6) {
+                        if(Number(value) < Number(opts.minDate.substring(0, 6))) {
+                            opts.context.val(opts.minDate.substring(0, 6)).trigger("keyup.datepicker", [true]);
+                            opts.context.alert(N.message.get(opts.message, "minDate", [ opts.minDate ])).show();
+                            return false;
+                        }
+                    }
+                    if(opts.maxDate != null && opts.maxDate.length >= 6) {
+                        if(Number(value) > Number(opts.maxDate.substring(0, 6))) {
+                            opts.context.val(opts.maxDate.substring(0, 6)).trigger("keyup.datepicker", [true]);
+                            opts.context.alert(N.message.get(opts.message, "maxDate", [ opts.maxDate ])).show();
+                            return false;
+                        }
+                    }
+                } else if(value.length === 8) {
+                    if(opts.minDate != null && opts.minDate.length === 8) {
+                        if(Number(value) < Number(opts.minDate)) {
+                            opts.context.val(opts.minDate).trigger("keyup.datepicker", [true]);
+                            opts.context.alert(N.message.get(opts.message, "minDate", [ opts.minDate ])).show();
+                            return false;
+                        }
+                    }
+                    if(opts.maxDate != null && opts.maxDate.length === 8) {
+                        if(Number(value) > Number(opts.maxDate)) {
+                            opts.context.val(opts.maxDate).trigger("keyup.datepicker", [true]);
+                            opts.context.alert(N.message.get(opts.message, "maxDate", [ opts.maxDate ])).show();
+                            return false;
+                        }
+                    }
+                }
+
+                return true;
+            },
             wrapEle : function() {
                 var opts = this.options;
                 var self = this;
@@ -1407,7 +1463,7 @@
                         opts.context.get(0).blur();
                         self.hide();
                     }
-                }).unbind("keyup.datepicker").bind("keyup.datepicker", function(e) {
+                }).unbind("keyup.datepicker").bind("keyup.datepicker", function(e, isPassCheckMinMaxDate) {
                     // Hangul does not apply e.preventDefault() of keydown event
                     e.target.value = e.target.value.replace(/[^0-9]/g, "");
 
@@ -1435,6 +1491,11 @@
                             return false;
                         }
 
+                        // minDate, maxDate
+                        if(!isPassCheckMinMaxDate && !Datepicker.checkMinMaxDate.call(self)) {
+                            return false;
+                        }
+
                         var yearsPanel = opts.contents.find(".datepicker_years_panel__");
                         var monthsPanel = opts.contents.find(".datepicker_months_panel__");
                         var daysPanel = opts.contents.find(".datepicker_days_panel__");
@@ -1454,7 +1515,7 @@
                         }
                     }
 
-                    if (keyCode == 27) { // When press the TAB key & ESC key
+                    if (keyCode == 27) { // When press the ESC key
                         e.preventDefault();
                         self.hide();
                     }
@@ -1521,7 +1582,7 @@
 
                         var selYearStr = $(this).text();
                         if(selYearStr != selectedYearItemEle.text() || isForceUpdate) {
-                            // immediately applys the changed year
+                            // immediately applys the changed year to the context element
                             if(opts.yearChangeInput) {
                                 var dateVal = opts.context.val().replace(/[^\d]/g,"");
 
@@ -1546,6 +1607,11 @@
                                         dateVal = selDate.obj.formatDate(tempFormat).replace(selDate.obj.formatDate("Y"), selYearStr).replace(/\-/g, "");
                                         opts.context.val(dateVal);
                                     }
+                                }
+
+                                // minDate, maxDate
+                                if(!Datepicker.checkMinMaxDate.call(self)) {
+                                    return false;
                                 }
                             }
 
@@ -1574,11 +1640,11 @@
                     yearsPanel.append(yearPaging);
                 } else if(opts.yearsPanelPosition === "top") {
                     var prevYearBtn = $('<div class="datepicker_year_paging__"><a href="#" class="datepicker_year_prev__" title="' + N.message.get(opts.message, "prev") + '"><span>&lt;</span></a></div>').appendTo(yearsPanel)
-                        .find("> .datepicker_year_prev__").bind("click.datepicker", function(e) {
+                        .find("> .datepicker_year_prev__").bind("click.datepicker", function(e, isPrevYearBtn) {
                             e.preventDefault();
                             var selectedYear = parseInt(yearItem.val());
                             if(selectedYear > opts.currYear - opts.minYear) {
-                                yearItem.val(N.string.lpad(String(selectedYear - 1), 4, "0")).trigger("change.datepicker");
+                                yearItem.val(N.string.lpad(String(selectedYear - 1), 4, "0")).trigger("change.datepicker", isPrevYearBtn ? [ isPrevYearBtn ] : undefined);
                             } else {
                                 yearItem.empty();
                                 selectedYear--;
@@ -1597,7 +1663,7 @@
                                     }
                                     yearItem.append('<option value="' + N.string.lpad(String(i), 4, "0") + '" ' + selected + '>' + N.string.lpad(String(i), 4, "0") +'</option>');
                                 }
-                                yearItem.trigger("change.datepicker");
+                                yearItem.trigger("change.datepicker", isPrevYearBtn ? [ isPrevYearBtn ] : undefined);
                             }
                         });
 
@@ -1606,10 +1672,10 @@
                     for(var i=opts.currYear-opts.minYear;i<=opts.currYear+opts.maxYear;i++) {
                         yearItem.append('<option value="' + N.string.lpad(String(i), 4, "0") +'"' + (i === opts.currYear ? 'selected="selected"' : "") + '>' + N.string.lpad(String(i), 4, "0") +'</option>');
                     }
-                    yearItem.addClass("datepicker_year_item__ datepicker_year_selected__").bind("change.datepicker", function(e) {
+                    yearItem.addClass("datepicker_year_item__ datepicker_year_selected__").bind("change.datepicker", function(e, isPrevNextYearBtn) {
                         var selYearStr = $(this).val();
 
-                        // immediately applys the changed year
+                        // immediately applys the changed year to the context element
                         if(opts.yearChangeInput) {
                             var dateVal = opts.context.val().replace(/[^\d]/g,"");
 
@@ -1633,12 +1699,19 @@
                                     });
                                     dateVal = selDate.obj.formatDate(tempFormat).replace(selDate.obj.formatDate("Y"), selYearStr).replace(/\-/g, "");
                                     opts.context.val(dateVal);
-
-                                    if(topMonthItem !== undefined) {
-                                        topMonthItem.trigger("change.datepicker");
-                                    }
                                 }
                             }
+
+                            // minDate, maxDate
+                            if(!isPrevNextYearBtn) {
+                                if(!Datepicker.checkMinMaxDate.call(self)) {
+                                    return false;
+                                }
+                            }
+                        }
+
+                        if(topMonthItem !== undefined) {
+                            topMonthItem.trigger("change.datepicker");
                         }
 
                         if(opts.onChangeYear !== null) {
@@ -1649,12 +1722,12 @@
                     }).appendTo(yearsPanel);
 
                     var nextYearBtn = $('<div class="datepicker_year_paging__"><a href="#" class="datepicker_year_next__" title="' + N.message.get(opts.message, "next") + '"><span>&gt;</span></a></div>').appendTo(yearsPanel)
-                        .find("> .datepicker_year_next__").bind("click.datepicker", function(e) {
+                        .find("> .datepicker_year_next__").bind("click.datepicker", function(e, isNextYearBtn) {
                             e.preventDefault();
                             var selectedYear = parseInt(yearItem.val());
 
                             if(selectedYear < opts.currYear + opts.maxYear && opts.currYear + opts.maxYear > opts.minYear + opts.maxYear) {
-                                yearItem.val(N.string.lpad(String(selectedYear + 1), 4, "0")).trigger("change.datepicker");
+                                yearItem.val(N.string.lpad(String(selectedYear + 1), 4, "0")).trigger("change.datepicker", isNextYearBtn ? [ isNextYearBtn ] : undefined);
                             } else {
                                 yearItem.empty();
                                 selectedYear++;
@@ -1670,7 +1743,7 @@
                                     }
                                     yearItem.append('<option value="' + N.string.lpad(String(i), 4, "0") + '" ' + selected + '>' + N.string.lpad(String(i), 4, "0") +'</option>');
                                 }
-                                yearItem.trigger("change.datepicker");
+                                yearItem.trigger("change.datepicker", isNextYearBtn ? [ isNextYearBtn ] : undefined);
                             }
                         });
                 }
@@ -1702,7 +1775,7 @@
                                 }
                                 yearsPanel.find(".datepicker_year_item__:contains('" + N.string.lpad(String(yearStr), 4, "0") + "')").click();
                             } else if(opts.yearsPanelPosition === "top") {
-                                yearPrevBtnEle.trigger("click.datepicker");
+                                yearPrevBtnEle.trigger("click.datepicker", [ true ]);
                             }
 
                             prevMonth = 12;
@@ -1729,7 +1802,7 @@
                                 }
                                 yearsPanel.find(".datepicker_year_item__:contains('" + N.string.lpad(String(yearStr), 4, "0") + "')").click();
                             } else if(opts.yearsPanelPosition === "top") {
-                                yearNextBtnEle.trigger("click.datepicker");
+                                yearNextBtnEle.trigger("click.datepicker", [ true ]);
                             }
 
                             nextMonth = 1;
@@ -1800,7 +1873,7 @@
                     var selYearStr = yearsPanel.find(".datepicker_year_selected__")[opts.yearsPanelPosition === "left" ? "text" : "val"]();
                     var selMonthStr = $(this).text();
                     if(selMonthStr != selectedMonthItemEle.text()) {
-                        // immediately applys the changed month
+                        // immediately applys the changed month to the context element
                         if(opts.monthChangeInput) {
                             var dateVal = opts.context.val().replace(/[^\d]/g,"");
 
@@ -1839,6 +1912,11 @@
                                     dateVal = dateVal.replace(/\-/g, "");
 
                                     opts.context.val(dateVal);
+                                }
+
+                                // minDate, maxDate
+                                if(!Datepicker.checkMinMaxDate.call(self)) {
+                                    return false;
                                 }
                             }
                         }
@@ -1893,22 +1971,67 @@
 
                         var prevEndDateCls = N.date.strToDate(N.string.lpad(selYearStr, 4, "0") +  N.string.lpad($(this).text(), 2, "0") + "00", "Ymd");
                         var prevEndDate = prevEndDateCls.obj.getDate();
-                        var date;
-                        var dateItem;
-                        // rendering the date items
+                        var day;
+                        var dayItemT;
+                        // rendering the day items
                         for(j=1-startDay;j<=42-startDay;j++) {
-                            date = String(j);
-                            dateItem = dayItem.clone(true);
+                            day = String(j);
+                            dayItemT = dayItem.clone(true);
                             if(j<=0) {
-                                dateItem.addClass("datepicker_prev_day_item__");
-                                date = String(prevEndDate + j);
+                                dayItemT.addClass("datepicker_prev_day_item__");
+                                day = String(prevEndDate + j);
+                                dayItemT.data("year", prevEndDateCls.obj.getFullYear())
+                                    .data("month", prevEndDateCls.obj.getMonth() + 1)
+                                    .data("day", day);
                             } else if(j > endDate) {
-                                dateItem.addClass("datepicker_next_day_item__");
-                                date = String(j-endDate);
+                                dayItemT.addClass("datepicker_next_day_item__");
+                                day = String(j-endDate);
+                                dayItemT.data("year", endDateCls.obj.getMonth() + 1 == 12 ?  endDateCls.obj.getFullYear() + 1 : endDateCls.obj.getFullYear())
+                                    .data("month", endDateCls.obj.getMonth() + 2 == 13 ? 1 : endDateCls.obj.getMonth() + 2)
+                                    .data("day", day);
                             } else {
-                                dateItem.addClass("datepicker_day_item__");
+                                dayItemT.addClass("datepicker_day_item__");
+                                dayItemT.data("year", endDateCls.obj.getFullYear())
+                                    .data("month", endDateCls.obj.getMonth() + 1)
+                                    .data("day", day);
                             }
-                            daysPanel.append(dateItem.text(date));
+
+                            var date = N.string.lpad(String(dayItemT.data("year")), 4, "0") +
+                                    N.string.lpad(String(dayItemT.data("month")), 2, "0") +
+                                    N.string.lpad(String(dayItemT.data("day")), 2, "0");
+
+                            if(opts.minDate && Number(date) < Number(opts.minDate)) {
+                                dayItemT.addClass("datepicker_min_date__");
+                                dayItemT.tpBind("click", N.event.disable);
+                            } else if(opts.maxDate && Number(date) > Number(opts.maxDate)) {
+                                dayItemT.addClass("datepicker_max_date__");
+                                dayItemT.tpBind("click", N.event.disable);
+                            }
+
+                            // holiday
+                            var repeatDate = date.substring(4, 8);
+                            var holidayValues = [];
+                            if(opts.holiday.repeat && opts.holiday.repeat[repeatDate]) {
+                                var repeatValue = opts.holiday.repeat[repeatDate];
+                                if(N.type(repeatValue) === "array") {
+                                    holidayValues.push(repeatValue.join(", "));
+                                } else {
+                                    holidayValues.push(repeatValue);
+                                }
+                            }
+                            if(opts.holiday.once && opts.holiday.once[date]) {
+                                var onceValue = opts.holiday.once[date];
+                                if(N.type(onceValue) === "array") {
+                                    holidayValues.push(onceValue.join(", "));
+                                } else {
+                                    holidayValues.push(onceValue);
+                                }
+                            }
+                            if(!N.isEmptyObject(holidayValues)) {
+                                dayItemT.addClass("datepicker_holiday__").attr("title", holidayValues.join(", "));
+                            }
+
+                            daysPanel.append(dayItemT.text(day));
                         }
 
                         daysPanel.find(".datepicker_prev_day_item__, .datepicker_day_item__, .datepicker_next_day_item__").each(function(i, ele) {
@@ -1947,17 +2070,9 @@
 
                         daysPanel.find(".datepicker_prev_day_item__.datepicker_day_selected__, .datepicker_day_item__.datepicker_day_selected__, .datepicker_next_day_item__.datepicker_day_selected__").removeClass("datepicker_day_selected__");
                         thisEle.addClass("datepicker_day_selected__");
-                        var selMonth;
-                        if(thisEle.hasClass("datepicker_prev_day_item__")) {
-                            selMonth = String(parseInt(monthsPanel.find(".datepicker_month_selected__").text()) - 1);
-                        } else if(thisEle.hasClass("datepicker_next_day_item__")) {
-                            selMonth = String(parseInt(monthsPanel.find(".datepicker_month_selected__").text()) + 1);
-                        } else {
-                            selMonth = monthsPanel.find(".datepicker_month_selected__").text();
-                        }
-                        var selDate = N.date.strToDate(N.string.lpad(yearsPanel.find(".datepicker_year_selected__")[opts.yearsPanelPosition === "left" ? "text" : "val"](), 4, "0") +
-                                N.string.lpad(selMonth, 2, "0") +
-                                N.string.lpad(thisEle.text(), 2, "0"), "Ymd");
+                        var selDate = N.date.strToDate(N.string.lpad(String(thisEle.data("year")), 4, "0") +
+                                N.string.lpad(String(thisEle.data("month")), 2, "0") +
+                                N.string.lpad(String(thisEle.data("day")), 2, "0"), "Ymd");
 
                         opts.lastSelectedDay = thisEle.text();
 
@@ -2816,7 +2931,7 @@
                             nextBtnEle.removeClass("disabled__");
                             prevBtnEle.addClass("disabled__");
                         } else {
-                        	tabNativeScroll.animate({
+                            tabNativeScroll.animate({
                                 scrollLeft: 0
                             }, 300, "swing");
                         }
@@ -2832,7 +2947,7 @@
                             prevBtnEle.removeClass("disabled__");
                             nextBtnEle.addClass("disabled__");
                         } else {
-                        	tabNativeScroll.animate({
+                            tabNativeScroll.animate({
                                 scrollLeft: tabContainerEle.outerWidth()
                             }, 300, "swing");
                         }
@@ -2866,13 +2981,13 @@
                             }
                         } else {
                             if(!tabContainerEle.parent().hasClass("tab_native_scroll__")) {
-                            	tabNativeScroll = tabContainerEle.wrap('<div class="tab_native_scroll__"></div>').parent();
-                            	if(prevBtnEleOuterWidth > 0) {
-                            		tabNativeScroll.css("margin-left", prevBtnEleOuterWidth + liMarginRight);
-                            	}
-                            	if(nextBtnEleOuterWidth > 0) {
-                            		tabNativeScroll.css("margin-right", nextBtnEleOuterWidth - liMarginRight);
-                            	}
+                                tabNativeScroll = tabContainerEle.wrap('<div class="tab_native_scroll__"></div>').parent();
+                                if(prevBtnEleOuterWidth > 0) {
+                                    tabNativeScroll.css("margin-left", prevBtnEleOuterWidth + liMarginRight);
+                                }
+                                if(nextBtnEleOuterWidth > 0) {
+                                    tabNativeScroll.css("margin-right", nextBtnEleOuterWidth - liMarginRight);
+                                }
                             }
                             if(scrollBtnEles.length > 1) {
                                 scrollBtnEles.show();
@@ -2901,7 +3016,6 @@
                 }).trigger("resize" + eventNameSpace);
 
                 if(opts.tabScrollCorrection.tabContainerWidthReCalcDelayTime > 0) {
-                    N.log(opts.tabScrollCorrection.tabContainerWidthReCalcDelayTime);
                     setTimeout(function() {
                         N(window).trigger("resize" + eventNameSpace);
                     }, opts.tabScrollCorrection.tabContainerWidthReCalcDelayTime);
@@ -2936,16 +3050,16 @@
                         if(isMoved) {
                             if(lastDistance + (scrollBtnEles.length > 1 ? 0 : 30) >= 0 && lastDistance <= prevDefGap) {
                                 if(scrollBtnEles.length > 1) {
-                                	lastDistance = prevDefGap;
-                                	if(prevBtnEleOuterWidth > 0 && nextBtnEleOuterWidth > 0) {
-                                		lastDistance += liMarginRight;
+                                    lastDistance = prevDefGap;
+                                    if(prevBtnEleOuterWidth > 0 && nextBtnEleOuterWidth > 0) {
+                                        lastDistance += liMarginRight;
                                     }
                                     nextBtnEle.removeClass("disabled__");
                                     prevBtnEle.addClass("disabled__");
                                 } else {
                                     lastDistance = 0;
                                     if(prevBtnEleOuterWidth > 0 && nextBtnEleOuterWidth > 0) {
-                                		lastDistance += liMarginRight;
+                                        lastDistance += liMarginRight;
                                     }
                                 }
                                 tabContainerEle_.addClass("effect__").css("margin-left", lastDistance + "px");
