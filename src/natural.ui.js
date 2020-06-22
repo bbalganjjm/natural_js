@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.42.244
+ * Natural-UI v0.42.245
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-UI"] = "0.42.244";
+    N.version["Natural-UI"] = "0.42.245";
 
     $.fn.extend($.extend(N.prototype, {
         alert : function(msg, vars) {
@@ -2931,7 +2931,7 @@
                             nextBtnEle.removeClass("disabled__");
                             prevBtnEle.addClass("disabled__");
                         } else {
-                            tabNativeScroll.animate({
+                        	tabNativeScroll.animate({
                                 scrollLeft: 0
                             }, 300, "swing");
                         }
@@ -2947,7 +2947,7 @@
                             prevBtnEle.removeClass("disabled__");
                             nextBtnEle.addClass("disabled__");
                         } else {
-                            tabNativeScroll.animate({
+                        	tabNativeScroll.animate({
                                 scrollLeft: tabContainerEle.outerWidth()
                             }, 300, "swing");
                         }
@@ -2981,13 +2981,13 @@
                             }
                         } else {
                             if(!tabContainerEle.parent().hasClass("tab_native_scroll__")) {
-                                tabNativeScroll = tabContainerEle.wrap('<div class="tab_native_scroll__"></div>').parent();
-                                if(prevBtnEleOuterWidth > 0) {
-                                    tabNativeScroll.css("margin-left", prevBtnEleOuterWidth + liMarginRight);
-                                }
-                                if(nextBtnEleOuterWidth > 0) {
-                                    tabNativeScroll.css("margin-right", nextBtnEleOuterWidth - liMarginRight);
-                                }
+                            	tabNativeScroll = tabContainerEle.wrap('<div class="tab_native_scroll__"></div>').parent();
+                            	if(prevBtnEleOuterWidth > 0) {
+                            		tabNativeScroll.css("margin-left", prevBtnEleOuterWidth + liMarginRight);
+                            	}
+                            	if(nextBtnEleOuterWidth > 0) {
+                            		tabNativeScroll.css("margin-right", nextBtnEleOuterWidth - liMarginRight);
+                            	}
                             }
                             if(scrollBtnEles.length > 1) {
                                 scrollBtnEles.show();
@@ -3050,16 +3050,16 @@
                         if(isMoved) {
                             if(lastDistance + (scrollBtnEles.length > 1 ? 0 : 30) >= 0 && lastDistance <= prevDefGap) {
                                 if(scrollBtnEles.length > 1) {
-                                    lastDistance = prevDefGap;
-                                    if(prevBtnEleOuterWidth > 0 && nextBtnEleOuterWidth > 0) {
-                                        lastDistance += liMarginRight;
+                                	lastDistance = prevDefGap;
+                                	if(prevBtnEleOuterWidth > 0 && nextBtnEleOuterWidth > 0) {
+                                		lastDistance += liMarginRight;
                                     }
                                     nextBtnEle.removeClass("disabled__");
                                     prevBtnEle.addClass("disabled__");
                                 } else {
                                     lastDistance = 0;
                                     if(prevBtnEleOuterWidth > 0 && nextBtnEleOuterWidth > 0) {
-                                        lastDistance += liMarginRight;
+                                		lastDistance += liMarginRight;
                                     }
                                 }
                                 tabContainerEle_.addClass("effect__").css("margin-left", lastDistance + "px");
@@ -6410,7 +6410,7 @@
                         if(N.isEmptyObject(rows[i])) continue;
 
                         var data = rows[i].split('\t');
-                        var rowEle = self.context(".form__:eq(" + String(i) + ")");
+                        var rowEle = self.context(".form__:eq(" + String(currRowIndex + i) + ")");
                         for (var j = 0; j < data.length; j++) {
                             var colNm = columns.get(currCellIndex + j);
                             var colEle = rowEle.find("#" + colNm);
