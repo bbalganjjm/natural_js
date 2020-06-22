@@ -68,11 +68,11 @@
             <tr>
                 <th><label for="monthonly">minDate</label></th>
                 <td>
-                    <input id="minDate" type="number" placeholder="20200619">
+                    <input id="minDate" type="number">
                 </td>
                 <th><label for="maxDate">maxDate</label></th>
                 <td>
-                    <input id="maxDate" type="number" placeholder="20200819">
+                    <input id="maxDate" type="number">
                 </td>
             </tr>
             <tr>
@@ -210,9 +210,9 @@
                     monthonly : N("#monthonly", view).is(":checked"),
                     focusin : N("#focusin", view).is(":checked"),
                     minDate : N.string.trimToNull(N("#minDate", view).val()) !== null ?
-                            parseInt(N("#minDate", view).val()) : undefined,
+                            N("#minDate", view).val() : undefined,
                     maxDate : N.string.trimToNull(N("#maxDate", view).val()) !== null ?
-                            parseInt(N("#maxDate", view).val()) : undefined,
+                            N("#maxDate", view).val() : undefined,
                     holiday : N.string.trimToNull(N("#holiday", view).val()) !== null ?
                             JSON.parse(N("#holiday", view).val().replace(/\n|\t/g, "")) : null,
                     onSelect : N.string.trimToNull(N("#onSelect", view).val()) !== null ?
@@ -242,6 +242,14 @@
                    N("#btnShow", view).instance("button").enable();
                    N("#btnHide", view).instance("button").enable();
             });
+
+            N("#monthonly", view).change(function() {
+                if(N(this).is(":checked")) {
+                    N("#minDate, #maxDate", view).attr("placeholder", "YYYYMM");
+                } else {
+                    N("#minDate, #maxDate", view).attr("placeholder", "YYYYMMDD");
+                }
+            }).change();
 
             N("#yearsPanelPosition", view).change(function() {
                 if($(this).val() === "top") {

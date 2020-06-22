@@ -124,6 +124,63 @@
             </td>
         </tr>
         <tr>
+            <td>minDate</td>
+            <td>string</td>
+            <td>null</td>
+            <td></td>
+            <td>
+                <p lang="ko_KR">설정된 날짜보다 빠른 날짜를 선택하거나 입력하면 입력이 차단됩니다.</p>
+                <p lang="en_US">If a date earlier than the set date is selected or entered, the input is blocked.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>maxDate</td>
+            <td>string</td>
+            <td>null</td>
+            <td></td>
+            <td>
+                <p lang="ko_KR">설정된 날짜 이후의 날짜를 선택하거나 입력하면 입력이 차단됩니다.</p>
+                <p lang="en_US">If a date later than the set date is selected or entered, the input is blocked.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>holiday</td>
+            <td>object[object[string|array]]</td>
+            <td><pre><code>{
+    "repeat" : null,
+    "once" : null
+}</code></pre></td>
+            <td></td>
+            <td>
+                <p lang="ko_KR">holiday 옵션을 설정하면 Datepicker에 휴일을 표시 해 줍니다.</p>
+                <p lang="en_US">Setting the holiday option displays the holiday in the Datepicker.</p>
+                <p lang="ko_KR">아래와 같이 repeat 객체와 once 객체로 휴일들을 설정 할 수 있습니다.</p>
+                <p lang="en_US">Holidays can be set as repeat object and once object as below.</p>
+                <pre><code>{
+    "repeat" : {
+        "0619" : "Holiday1",
+        "0620" : "Holiday3",
+        "0621" : ["Holiday6", "Holiday7"],
+        "0622" : ["Holiday9", "Holiday10"]
+    },
+    "once" : {
+        "20200619" : "Holiday2",
+        "20200620" : ["Holiday4", "Holiday5"],
+        "20200621" : "Holiday8",
+        "20200622" : ["Holiday11", "Holiday12"]
+    }
+}</code></pre>
+                <p lang="ko_KR">repeat 객체에는 매년 반복되는 휴일들을 연도를 제외하고 입력 합니다. once 객체는 매년 반복되지 않는 휴일들을 년월일 형식으로 입력 합니다.</p>
+                <p lang="en_US">In the repeat object, enter holidays that repeat every year, excluding the year. In the once object, enter holidays that are not repeated every year in the form of year, month, day.</p>
+                <p lang="ko_KR">같은 날짜에 휴일이 2개 이상일 경우 Array 타입으로 휴일명을 여러개 지정하면 됩니다.</p>
+                <p lang="en_US">If there are two or more holidays on the same day, you can specify multiple holiday names in the Array type.</p>
+                <p lang="ko_KR">휴일로 표시되는 요소에는 "datepicker_holiday__" class 속성값이 추가 됩니다.</p>
+                <p lang="en_US">"Datepicker_holiday__" class attribute value is added to elements displayed as holidays./p>
+                <p lang="ko_KR" class="alert"><a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a> 의 N.context.attr("ui").datepicker.holiday 프로퍼티에 설정 하면 모든 Datepicker 에 적용 됩니다.</p>
+                <p lang="en_US" class="alert">If set in the N.context.attr("ui").datepicker.holiday property of <a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a>, it applies to all Datepickers.</p>
+            </td>
+        </tr>
+        <tr>
             <td>onSelect</td>
             <td>function</td>
             <td>null</td>

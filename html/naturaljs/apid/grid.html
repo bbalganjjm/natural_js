@@ -52,6 +52,12 @@
             </td>
         </tr>
         <tr>
+            <th><label for="pastiable">pastiable</label></th>
+            <td colspan="3">
+                <input id="pastiable" type="checkbox">
+            </td>
+        </tr>
+        <tr>
             <th><label for="resizable">resizable</label></th>
             <td>
                 <input id="resizable" type="checkbox">
@@ -468,6 +474,7 @@
                        validate : N("#validate", view).is(":checked"),
                        html : N("#html", view).is(":checked"),
                        addTop : N("#addTop", view).is(":checked"),
+                       pastiable : N("#pastiable", view).is(":checked"),
                        resizable : N("#resizable", view).is(":checked"),
                        vResizable : N("#vResizable", view).is(":checked"),
                        filter : N("#filter", view).is(":checked"),
