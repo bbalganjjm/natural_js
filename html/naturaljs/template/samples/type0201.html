@@ -1,4 +1,4 @@
-<article class="type0201">
+<article class="type0201 view-code">
     <div class="view-intro">
         <h1>조회폼+그리드(CRUD)</h1>
         <ul class="view-desc">
@@ -9,7 +9,7 @@
             <li>그리드(N.grid)안에서 버튼을 통해 N.popup(부서조회 팝업) 과 연동하는 방법을 알 수 있습니다.</li>
         </ul>
     </div>
-    
+
     <h3>N.form</h3>
     <div id="search" class="form__">
         <table>
@@ -41,8 +41,8 @@
             <a id="btnSearch" href="#" class="R btn-search">조회</a>
             <a id="btnExcelImport" href="#" class="R">엑셀임포트</a>
             <a id="btnExcel" href="#" class="R">엑셀다운로드</a>
-            <a id="btnAdd" href="#" class="C">추가</a> 
-            <a id="btnDelete" href="#" class="D">삭제</a> 
+            <a id="btnAdd" href="#" class="C">추가</a>
+            <a id="btnDelete" href="#" class="D">삭제</a>
             <a id="btnSave" href="#" class="S">저장</a>
         </div>
     </div>
@@ -109,7 +109,7 @@
             </tr>
         </tfoot>
     </table>
-    
+
 </article>
 
 <script type="text/javascript">
@@ -199,7 +199,7 @@
         },
         "e.btnAdd.click" : function(e) {
             e.preventDefault();
-            
+
             cont["p.grid.master"].add();
         },
         "e.btnDelete.click" : function(e) {
@@ -212,13 +212,13 @@
         },
         "e.btnDept.click" : function(e, idx) {
             e.preventDefault();
-            
+
             cont.selIdx = idx;
             cont["p.popup.dept"].open(cont["p.grid.master"].data()[idx]);
         },
         "e.registered.onSelect" : function(e, inputEle, selDate, isMonthonly, idx) {
             e.preventDefault();
-            // 선택한 날짜가 오늘 날짜보다 크면 #isActive 요소 체크, 아니면 체크 해제. 
+            // 선택한 날짜가 오늘 날짜보다 크면 #isActive 요소 체크, 아니면 체크 해제.
             //  - 입력 요소를 jQuery val 메서드로 직접 다루지 말고 반드시 바인드 되어 있는 컴포넌트의 val 메서드로 값을 세팅 해 주세요.
             //  - 입력 요소를 jQuery val 메서드로 직접 다루면 컴포넌트 내부 데이터셋과 동기화 되지 않습니다.
             if(N.date.diff((new Date()).formatDate("Ymd"), selDate.obj.formatDate(selDate.format)) > 0) {
@@ -229,11 +229,11 @@
         },
         "e.btnExcelImport.click" : function(e) {
             e.preventDefault();
-			
-            cont["p.grid.master"].bindExcel([ 
-                "key", "deptCd", "deptNm", "index", "guid", "active", "balance", 
+
+            cont["p.grid.master"].bindExcel([
+                "key", "deptCd", "deptNm", "index", "guid", "active", "balance",
                 "picture", "age", "eyeColor", "name", "gender", "company", "email",
-                "phone", "address", "about", "registered", "latitude", "longitude", 
+                "phone", "address", "about", "registered", "latitude", "longitude",
                 "greeting", "favoriteFruit" // 엑셀 컬럼 순서대로 JSON Object 의 키값을 정의
             ], {
                 start : 1, // 데이터로 추출 할 시작 엑셀 행 인덱스
@@ -251,7 +251,7 @@
 				// 부모 페이지 컨트롤러의 검색 버튼 클릭
                 cont.opener["e.btnSearch.click"].click();
             } else {
-                cont["e.btnSearch.click"].click();                
+                cont["e.btnSearch.click"].click();
             }
         }
     });

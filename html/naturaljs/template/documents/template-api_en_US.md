@@ -92,7 +92,7 @@ N.context.attr("template", {
 
 ##Basic code writing rules for each file
 
-각각의 html 파일은 다음과 같이 구성 됩니다.
+Each page block is written as follows.
 
 ```javascript
 <style>

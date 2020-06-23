@@ -1,4 +1,4 @@
-<article class="type0402">
+<article class="type0402 view-code">
     <div class="view-intro">
         <h1>조회폼+그리드+상세폼(수직배치)</h1>
         <ul class="view-desc">
@@ -9,7 +9,7 @@
             <li>폼(N.form)에서 버튼을 통해 N.popup(부서조회 팝업) 과 연동하는 방법을 알 수 있습니다.</li>
         </ul>
     </div>
-    
+
     <h3>N.form</h3>
     <div id="search" class="form__">
         <table>
@@ -97,7 +97,7 @@
             <tbody>
                 <tr>
                     <th rowspan="7">Picture</th>
-                    <td rowspan="7" style="text-align: center; vertical-align: middle;"><img 
+                    <td rowspan="7" style="text-align: center; vertical-align: middle;"><img
                         src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D" height="110"></td>
                     <th>Name</th>
                     <td><input id="name" type="text" data-validate='[["required"]]'></td>
@@ -208,7 +208,7 @@
                     cont : cont,
                     form : "p.form.detail"
                 });
-                
+
              	// TODO 후처리
             },
             onBind : function(context, data, isFirstPage, isLastPage) {
@@ -318,7 +318,7 @@
              	// 부모 페이지 컨트롤러의 검색 버튼 클릭
                 cont.opener["e.btnSearch.click"].click();
             } else {
-                cont["e.btnSearch.click"].click();                
+                cont["e.btnSearch.click"].click();
             }
         }
     });

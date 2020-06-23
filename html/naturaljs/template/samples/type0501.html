@@ -1,4 +1,4 @@
-<article class="type0501">
+<article class="type0501 view-code">
     <div class="view-intro">
         <h1>조회폼+리스트+그리드+상세폼</h1>
         <ul class="view-desc">
@@ -8,7 +8,7 @@
             <li>폼(N.form)에서 버튼을 통해 N.popup(부서조회 팝업) 과 연동하는 방법을 알 수 있습니다.</li>
         </ul>
     </div>
-    
+
     <h3>N.form</h3>
     <div id="search" class="form__">
         <table>
@@ -89,7 +89,7 @@
                 <tbody>
                     <tr>
                         <th rowspan="7">Picture</th>
-                        <td rowspan="7" style="text-align: center; vertical-align: middle;"><img 
+                        <td rowspan="7" style="text-align: center; vertical-align: middle;"><img
                             src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D" height="110"></td>
                         <th>Name</th>
                         <td><input id="name" type="text" data-validate='[["required"]]'></td>
@@ -191,7 +191,7 @@
                 if(isFirstPage) {
                     this.select(0);
                 }
-                
+
              	// 2.2. 로딩바 업데이트
                 N.docs.updateLoadIndicator.call(APP.indx.docs, 1, 2);
             }
@@ -202,19 +202,19 @@
             selectScroll : false,
             onSelect : function(index, rowEle, data, beforeRow, e) {
              	// TODO 전처리
-                
+
                 APP.comm.utils.selectNBind.call(this, {
                     cont : cont,
                     form : "p.form.detail"
                 });
-             	
+
              	// TODO 후처리
             },
             onBind : function(context, data, isFirstPage, isLastPage) {
                 if(isFirstPage) {
                     this.select(0);
                 }
-                
+
              	// 2.1. 로딩바 업데이트
                 N.docs.updateLoadIndicator.call(APP.indx.docs, 2, 2);
             }
@@ -247,10 +247,10 @@
         },
         "e.btnSearch.click" : function(e) {
             e.preventDefault();
-            
+
             // 1. 로딩바 생성
             N.docs.createLoadIndicator.call(APP.indx.docs);
-            
+
             if (cont["p.form.search"].validate()) {
                 cont["c.getSampleCodeCompanyList"]().submit(function(data) {
                     cont["p.list.codeMaster"].bind(data);
