@@ -134,7 +134,7 @@
         },
         "c.getSampleList" : function() {
             return N($.extend(cont["p.form.search"].data()[0], cont["p.pagination.masterPagination"].currPageNavInfo())).comm(
-                    "sample/getSampleList.json");
+                    "sample/getSamplePaginationList.json");
         },
         "e.btnSearch.click" : function(e) {
             e.preventDefault();
