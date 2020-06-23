@@ -38,7 +38,7 @@
                     url = "html/naturaljs/" + docId.substring(0, 4) + "/" + docId + ".html";
                 }
 
-                if ((docId === "home0100" || N.string.trim(location.hash).length > 35) && !N.string.endsWith(location.href, "#")) {
+                if ((docId === "home0100" || N.string.trim(location.hash).length > 67) && !N.string.endsWith(location.href, "#")) {
                     var menuInfoStr = "";
                     var menuInfo = "";
                     try {

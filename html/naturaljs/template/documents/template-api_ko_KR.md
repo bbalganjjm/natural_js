@@ -4,34 +4,33 @@ Natural-TEMPLATE
 목차
 ===
 * [**개요**](#-1)
-* [**프로젝트 구성**](#-2)
-* [**설치**](#-3)
-* [**API**](#api)
-	* [UI 파일 별 기본 코드 작성 규칙](#ui)
+* [**설치**](#-2)
+* [**API 매뉴얼**](#api)
+	* [파일 별 기본 코드 작성 규칙](#ui)
 
-	* [N.cont(Controller Object) 작성 규칙](#ncontcontrollerobject)
+	* [Controller Object 의 속성명 작성 규칙](#ncontcontrollerobject)
 
         * [1. "p." 으로 시작(UI 컴포넌트 초기화)](#1pui)
-            * [1.1. N.select - 공통코드 조회 시](#11nselect)
-            * [1.2. N.select - 일반 목록 데이터를 선택요소(select, radio, checkbox) 에 바인드 시](#12nselectselectradiocheckbox)
+            * [1.1. N.select - 공통코드 데이터 바인딩](#11nselect)
+            * [1.2. N.select - 일반 목록데이터를 선택요소(select, radio, checkbox)에 바인딩](#12nselectselectradiocheckbox)
             * [1.3. N.form](#13nform)
-            * [1.4. 기타 모든 컴포넌트](#14)
+            * [1.4. 다른 모든 컴포넌트](#14)
 
-        * [2. "c." 으로 시작(N.comm(커뮤니케이터) 정의)](#2cncomm)
+        * [2. "c." 으로 시작(Communicator(N.comm) 선언)](#2cncomm)
 
-        * [3. "e." 으로 시작(이벤트 바인드)](#3e)
+        * [3. "e." 으로 시작(이벤트 바인딩)](#3e)
 
 # 개요
-Natural-TEMPLATE 은 Natural-JS 기반의 웹 어플리케이션 UI 개발을 정형화 하여 개발생산성과 편의성을 개선 해 주는 패키지 입니다.
-
-# 프로젝트 구성
-
-Natural-TEMPLATE 은 다음과 같은 환경에서 구동 됩니다.
- * 기반기술 : HTML5, CSS3, Javascript(ECMA4+), jQuery v1.12.4, Natural-JS
- * 지원브라우저 : Internet Explorer 11, Chrome, Opera, Firefox, Eage
+Natural-TEMPLATE 은 Natural-JS 기반 웹 어플리케이션 개발을 정형화 해 주는 패키지 입니다. Natural-TEMPLATE 은 코드 가독성과 개발 생산성을 크게 향상시켜줍니다.
 
 #설치
-Config(natural.config.js) 에 다음 설정을 추가 합니다.
+1. [Github](https://github.com/bbalganjjm/natural_js/tree/master/dist) 에서 natural.template.min.js 파일을 다운로드 받아 다음과 같이 라이브러리를 로딩 합니다.
+
+```
+<script type="text/javascript" src="js/natural_js/natural.template.min.js" charset="utf-8"></script>
+```
+
+2. Config(natural.config.js) 에 다음 설정을 추가 합니다.
 
 ```javascript
 /**
@@ -66,7 +65,7 @@ N.context.attr("template", {
 });
 ```
 
-Natural-TEMPLATE 설정이 추가 되었으면 다음과 같이 AOP 포인트컷을 추가 하면 설치가 완료 됩니다.
+3. 마지막으로 다음과 같이 AOP 포인트컷을 추가 하면 설치가 완료 됩니다.
 
 ```javascript
 ...
@@ -89,11 +88,9 @@ Natural-TEMPLATE 설정이 추가 되었으면 다음과 같이 AOP 포인트컷
 ```
 
 
-#API
-###Natrual-JS 의 기본적인 사용법과 컴포넌트의 옵션은 [API/DEMO](#cmVmcjAwMDElMjRBUEklMjAlRUIlQUMlQjglRUMlODQlOUMlMjAlRUMlOTUlODglRUIlODIlQjQkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDAwMS5odG1s) 메뉴를 참고 바랍니다.
+#API 매뉴얼
 
-
-##UI 파일 별 기본 코드 작성 규칙
+##파일 별 기본 코드 작성 규칙
 
 각각의 html 파일은 다음과 같이 구성 됩니다.
 
@@ -125,7 +122,7 @@ Natural-TEMPLATE 설정이 추가 되었으면 다음과 같이 AOP 포인트컷
 </script>
 ```
 
-##N.cont(Controller Object) 작성 규칙
+##Controller Object 의 속성명 작성 규칙
 N.cont 함수의 인자인 컨트롤러 객체는 미리 정의 된 속성명 룰 들이 있습니다. 미리 정의 된 속성명으로 객체 변수명을 선언 하고 객체나 함수등을 할당하면 AOP에 의해 N.cont 객체의 init 함수가 실행 되기 전에 정의한 작업들을 처리 해 줍니다.
 
 ###1. "p." 으로 시작(UI 컴포넌트 초기화)
@@ -176,7 +173,7 @@ var cont = N(".page-id").cont({
 컴포넌트 옵션은 Natural-UI 의 컴포넌트별 기본 옵션 외에 해당 컴포넌트의 용도를 지정 하거나 초기화 후 바로 실행 할 함수 등을 지정 할 수 있는 옵션이 더 추가 되어 있습니다.
 N.cont의 컴포넌트 별 추가 옵션들은 다음과 같습니다.
 
-###1.1. N.select - 공통코드 조회 시
+###1.1. N.select - 공통코드 데이터 바인딩
 | 속성명 | 옵션명 | 변수타입 | 필수여부 | 기능 | 설명 |
 | :--: | :--: | :--: | :--: | :--: | -- |
 | p.select.{id} | - | - | - | - | N.select 컴포넌트를 초기화 한다 |
@@ -185,7 +182,7 @@ N.cont의 컴포넌트 별 추가 옵션들은 다음과 같습니다.
 | - | selected | string | | 기본 선택 코드 값 | 데이터를 바인드 한 후 기본으로 선택할 값. |
 >p.select.{id} : [ "code", filterFunction ] 처럼 Array 타입으로도 간단하게 선언 할 수 있습니다.. filter 가 필요 없으면 [ "code" ] 만 선언 해도 됩니다.
 
-###1.2. N.select - 일반 목록 데이터를 선택요소(select, radio, checkbox) 에 바인드 시
+###1.2. N.select - 일반 목록데이터를 선택요소(select, radio, checkbox)에 바인딩
 | 속성명 | 옵션명 | 변수타입 | 필수여부 | 기능 | 설명 |
 | :--: | :--: | :--: | :--: | :--: | -- |
 | p.select.{id} | - | - | - | - | N.select 컴포넌트를 초기화 한다 |
@@ -240,13 +237,13 @@ N.cont의 컴포넌트 별 추가 옵션들은 다음과 같습니다.
 ...
 ```
 
-###1.4. 기타 모든 컴포넌트
+###1.4. 다른 모든 컴포넌트
 | 속성명 | 추가옵션 | 변수타입 | 필수여부 | 기능 | 설명 |
 | :--: | :--: | :--: | :--: | :--: | -- |
 | p.{component}.{id} | - | - | - | - | 지정한 컴포넌트를 초기화 한다. N.alert 을 제외한 모든 컴포넌트를 이와 같은 방법으로 초기화 가능 하다. |
 
 
-##2. "c." 으로 시작(N.comm(커뮤니케이터) 정의)
+##2. "c." 으로 시작(Communicator(N.comm) 선언)
 해당 컨트롤러 내에서 서버와 통신하는 모든 N.comm(Communicator) 들을 모두 정의 합니다.
 N.comm 의 초기화 속성명은 다음과 같이 조합하여 사용할 수 있습니다.
 
@@ -282,7 +279,7 @@ var cont = N(".page-id").cont({
 >커뮤니케이터의 파라미터를 위 예제와 같이 N.form 이나 N.grid / N.list 의 data() 메서드에 연결(정의) 해 놓으면 커뮤케이터의 submit 메서드가 호출 되는 시점의 컴포넌트 데이터를 서버로의 요청 파라미터로 쉽게 추출 할 수 있습니다.
 
 
-##3. "e." 으로 시작(이벤트 바인드)
+##3. "e." 으로 시작(이벤트 바인딩)
 페이지(View) 안의 모든 요소들에 이벤트를 간단하게 정의 할 수 있습니다.
 >a, button, input[type=button] 요소에 이벤트를 정의 하면 N.button 컴포넌트가 자동으로 초기화 되어 버튼으로 생성 됩니다.
 
