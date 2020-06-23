@@ -1,9 +1,9 @@
 Natural-TEMPLATE
 ===
+Natural-TEMPLATE is a package that formalizes the development of Natural-JS-based web applications. Natural-TEMPLATE significantly improves code readability and development productivity.
 
 목차
 ===
-* [**Summary**](#summary)
 * [**Install**](#install)
 * [**API Menual**](#apimenual)
     * [Basic code writing rules for each file](#basiccodewritingrulesforeachfile)
@@ -19,9 +19,6 @@ Natural-TEMPLATE
         * [2. Starts with "c."(Communicator(N.comm) declaration)](#2startswithccommunicatorncommdeclaration)
 
         * [3. Starts with "e."(Event binding)](#3startswitheeventbinding)
-
-# Summary
-Natural-TEMPLATE is a package that formalizes the development of Natural-JS-based web applications. Natural-TEMPLATE significantly improves code readability and development productivity.
 
 #Install
 1. Download the natural.template.min.js file from [Github](https://github.com/bbalganjjm/natural_js/tree/master/dist) and load the library as follows.

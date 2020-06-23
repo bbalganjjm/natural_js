@@ -1,9 +1,9 @@
 Natural-TEMPLATE
 ===
+Natural-TEMPLATE 은 Natural-JS 기반 웹 어플리케이션 개발을 정형화 해 주는 패키지 입니다. Natural-TEMPLATE 은 코드 가독성과 개발 생산성을 크게 향상시켜줍니다.
 
 목차
 ===
-* [**개요**](#-1)
 * [**설치**](#-2)
 * [**API 매뉴얼**](#api)
 	* [파일 별 기본 코드 작성 규칙](#ui)
@@ -19,9 +19,6 @@ Natural-TEMPLATE
         * [2. "c." 으로 시작(Communicator(N.comm) 선언)](#2cncomm)
 
         * [3. "e." 으로 시작(이벤트 바인딩)](#3e)
-
-# 개요
-Natural-TEMPLATE 은 Natural-JS 기반 웹 어플리케이션 개발을 정형화 해 주는 패키지 입니다. Natural-TEMPLATE 은 코드 가독성과 개발 생산성을 크게 향상시켜줍니다.
 
 #설치
 1. [Github](https://github.com/bbalganjjm/natural_js/tree/master/dist) 에서 natural.template.min.js 파일을 다운로드 받아 다음과 같이 라이브러리를 로딩 합니다.
