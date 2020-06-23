@@ -54,14 +54,6 @@ N.context.attr("template", {
      * Multilingual Message
      */
     "message" : {
-        "ko_KR" : {
-            "MSG-0001" : "data 옵션을 정의 해 주세요.",
-            "MSG-0002" : "서버 오류가 발생하여 공통 코드 목록을 조회 하지 못했습니다.",
-            "MSG-0003" : "데이터 코드 목록을 조회하는 N.comm({0}) 이 없습니다.",
-            "MSG-0004" : "서버 오류가 발생하여 데이터 코드 목록을 조회 하지 못했습니다.",
-            "MSG-0005" : "컴포넌트({0})가 잘못 지정 되었습니다.",
-            "MSG-0006" : "이벤트({0})가 잘못 지정 되었습니다."
-        },
         "en_US" : {
             "MSG-0001" : "Define the data option.",
             "MSG-0002" : "The common code list could not be queried because a server error occurred.",

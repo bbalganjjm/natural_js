@@ -61,14 +61,6 @@ N.context.attr("template", {
             "MSG-0004" : "서버 오류가 발생하여 데이터 코드 목록을 조회 하지 못했습니다.",
             "MSG-0005" : "컴포넌트({0})가 잘못 지정 되었습니다.",
             "MSG-0006" : "이벤트({0})가 잘못 지정 되었습니다."
-        },
-        "en_US" : {
-            "MSG-0001" : "Define the data option.",
-            "MSG-0002" : "The common code list could not be queried because a server error occurred.",
-            "MSG-0003" : "There is no N.comm({0}) to query the data code list.",
-            "MSG-0004" : "The data code list could not be queried because a server error occurred.",
-            "MSG-0005" : "Component({0}) was incorrectly specified.",
-            "MSG-0006" : "Event({0}) was incorrectly specified."
         }
     }
 });
@@ -98,7 +90,7 @@ Natural-TEMPLATE 설정이 추가 되었으면 다음과 같이 AOP 포인트컷
 
 
 #API
-###Natrual-JS 의 기본적인 사용법과 컴포넌트의 옵션은 [Natrual-JS 홈페이지의 API/DEMO](https://bbalganjjm.github.io/natural_js) 를 참고 바랍니다.
+###Natrual-JS 의 기본적인 사용법과 컴포넌트의 옵션은 [API/DEMO](#cmVmcjAwMDElMjRBUEklMjAlRUIlQUMlQjglRUMlODQlOUMlMjAlRUMlOTUlODglRUIlODIlQjQkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDAwMS5odG1s) 메뉴를 참고 바랍니다.
 
 
 ##UI 파일 별 기본 코드 작성 규칙
