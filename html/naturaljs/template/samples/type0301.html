@@ -1,0 +1,175 @@
+<article class="type0301">
+    <div class="view-intro">
+        <h1>조회폼+그리드+DB페이징</h1>
+        <ul class="view-desc">
+            <li>조회폼(N.form)과 그리드(N.grid), 페이지네이션(N.pagination) 으로 구성 된 예제 입니다.</li>
+            <li>공통코드 데이터를 자동으로 조회 한 후 N.select 컴포넌트를 초기화 하고 코드 데이터를 바인드 합니다.</li>
+        </ul>
+    </div>
+    <h3>N.form</h3>
+    <div id="search" class="form__">
+        <table>
+            <colgroup>
+                <col style="width: 10%;">
+                <col style="width: 23%;">
+                <col style="width: 10%;">
+                <col style="width: 23%;">
+                <col style="width: 10%;">
+                <col style="width: 23%;">
+            </colgroup>
+            <tbody>
+                <tr>
+                    <th>Name</th>
+                    <td><input id="name" type="text"></td>
+                    <th>Gender</th>
+                    <td><input id="gender" type="radio"></td>
+                    <th>Eye Color</th>
+                    <td><select id="eyeColor"><option value="">선택</option></select></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="flex-horizental">
+        <h3>N.grid + N.pagination(DB)</h3>
+        <div class="btn-box">
+            <a id="btnSearch" href="#" class="R btn-search">조회</a>
+            <a id="btnExcel" href="#" class="R">엑셀</a>
+        </div>
+    </div>
+
+    <div style="position: relative; min-height: 483px;">
+        <table id="master" class="grid__">
+            <colgroup>
+                <col style="width: 50px;">
+                <col style="width: 110px;">
+                <col style="width: 100px;">
+                <col style="width: 170px;">
+                <col style="width: 70px;">
+                <col style="width: 70px;">
+                <col style="width: 50px;">
+                <col style="width: 100px;">
+                <col style="width: 50px;">
+                <col style="width: 900px;">
+                <col style="width: 300px;">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>Index</th>
+                    <th>Name</th>
+                    <th>Department</th>
+                    <th>Email</th>
+                    <th data-filter="true">Gender</th>
+                    <th data-filter="true">Eye Color</th>
+                    <th data-filter="true">Age</th>
+                    <th data-filter="true">Company</th>
+                    <th data-filter="true">Active</th>
+                    <th>About</th>
+                    <th>Greeting</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td id="index" style="text-align: center;"></td>
+                    <td id="name"></td>
+                    <td id="deptNm"></td>
+                    <td id="email"></td>
+                    <td id="gender" style="text-align: center;"></td>
+                    <td id="eyeColor" style="text-align: center;"></td>
+                    <td id="age" style="text-align: center;"></td>
+                    <td id="company"></td>
+                    <td id="isActive" style="text-align: center;"></td>
+                    <td id="about"></td>
+                    <td id="greeting"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="pagination-box">
+        <div id="masterPagination">
+            <ul>
+                <li><a href="#" title="처음">first</a></li>
+                <li><a href="#" title="이전">prev</a></li>
+            </ul>
+            <ul>
+                <li><a href="#"><span>1</span></a></li>
+            </ul>
+            <ul>
+                <li><a href="#" title="다음">next</a></li>
+                <li><a href="#" title="마지막">last</a></li>
+            </ul>
+        </div>
+    </div>
+
+</article>
+
+<script type="text/javascript">
+(function() {
+
+    var cont = N(".type0301").cont({
+        "p.select.gender" : [ "gender" ],
+        "p.select.eyeColor" : [ "eyeColor" ],
+        "p.form.search" : {
+            "usage" : "search-box"
+        },
+        "p.grid.master" : {
+            resizable : true,
+            filter : false,
+            fixedcol : 3,
+            checkAll : "#checkAll",
+            checkAllTarget : ".checkAllTarget",
+            createRowDelay : 0
+        },
+        "p.pagination.masterPagination" : {
+            blockOnChangeWhenBind : true,
+            countPerPage : 15,
+            onChange : function(pageNo, selEle, selData, currPageNavInfo) {
+                cont["c.getSampleList"]().submit(function(data) {
+                    cont["p.pagination.masterPagination"].bind(data[0] && data[0].totalCount ? data[0].totalCount : 0 );
+                    cont["p.grid.master"].bind(data);
+                });
+            }
+        },
+        "c.getSampleList" : function() {
+            return N($.extend(cont["p.form.search"].data()[0], cont["p.pagination.masterPagination"].currPageNavInfo())).comm(
+                    "sample/getSampleList.json");
+        },
+        "e.btnSearch.click" : function(e) {
+            e.preventDefault();
+
+            if (cont["p.form.search"].validate()) {
+                cont["p.pagination.masterPagination"].pageNo(1).bind();
+                cont["c.getSampleList"]().submit(function(data) {
+                    cont["p.pagination.masterPagination"].bind(data[0] && data[0].totalCount ? data[0].totalCount : 0 );
+                    cont["p.grid.master"].bind(data);
+                });
+            }
+        },
+        "e.eyeColor.change" : {
+        	target : "#search #eyeColor",
+        	handler : function(e) {
+        	    cont["e.btnSearch.click"].click();
+            }
+        },
+        "e.btnExcel.click" : function(e) {
+            e.preventDefault();
+
+            if (cont["p.form.search"].validate()) {
+                cont["c.getSampleList"]().excelStreaming([ "샘플 목록", cont["p.grid.master"] ]);
+            }
+        },
+        init : function(view, request) {
+			// cont.opener 는 탭이 포함된 부모페이지의 Controller Object.
+            if(cont.opener) {
+                cont["p.form.search"].context().hide().prev("h3").hide().prev(".view-intro").hide();
+             	// 부모 페이지 컨트롤러의 검색 버튼 클릭
+                cont.opener["e.btnSearch.click"].click();
+            } else {
+                cont["e.btnSearch.click"].click();
+            }
+        }
+    });
+
+})();
+</script>

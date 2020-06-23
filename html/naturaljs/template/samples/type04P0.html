@@ -1,0 +1,116 @@
+<style>
+    .type04P0 #master tbody {
+        -ms-user-select: none; 
+        -moz-user-select: -moz-none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        user-select: none;
+    }
+</style>
+
+<article class="type04P0" title="부서조회" style="width: 400px;">
+    <div class="view-intro">
+        <h1>부서조회 팝업</h1>
+        <ul class="view-desc">
+            <li>조회폼(N.form)과 그리드(N.grid) 로 구성 된 팝업 예제 입니다.</li>
+            <li>N.popup 의 onOpen, cont.close 함수 들의 사용예제를 참고 할 수 있습니다.</li>
+        </ul>
+    </div>
+    
+    <div id="search" class="form__">
+        <table>
+            <colgroup>
+                <col style="width: 50%;">
+                <col style="width: auto;">
+            </colgroup>
+            <tbody>
+                <tr>
+                    <th>Department Name</th>
+                    <td><input id="deptNm" type="text"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="flex-horizental">
+        <h3 style="max-width: 50px;">N.grid</h3>
+        <div class="btn-box">
+            <a id="btnSearch" href="#" class="R btn-search">조회</a>
+        </div>
+    </div>
+    <table id="master" class="grid__">
+        <colgroup>
+            <col style="width: 30%;">
+            <col style="width: auto;">
+        </colgroup>
+        <thead>
+            <tr>
+                <th>Code</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr id="row">
+                <td id="deptCd" style="text-align: center;"></td>
+                <td id="deptNm" style="text-align: center;"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="btn-box" style="text-align: center;">
+        <a id="btnOk" href="#" data-opts='{ "color" : "green" }'>확인</a>
+        <a id="btnCancel" href="#">취소</a>
+    </div>
+
+</article>
+
+<script type="text/javascript">
+(function() {
+
+    var cont = N(".type04P0").cont({
+        "p.form.search" : {
+            "usage" : "search-box"
+        },
+        "p.grid.master" : {
+            height : 300,
+            select : true,
+            onBind : function(context, data) {
+                if (data.length == 1) {
+                    this.select(0);
+                    cont["e.btnOk.click"].click();
+                }
+            }
+        },
+        "c.getSampleDeptList" : function() {
+            cont["p.form.search"].val("isList", true);
+            return cont["p.form.search"].data(false).comm("sample/getSampleDeptList.json");
+        },
+        "e.btnSearch.click" : function(e) {
+            e.preventDefault();
+            if (cont["p.form.search"].validate()) {
+                cont["c.getSampleDeptList"]().submit(function(data) {
+                    // N.grid bind
+                    cont["p.grid.master"].bind(data);
+                });
+            }
+        },
+        "e.btnOk.click" : function(e) {
+            e.preventDefault();
+            cont.caller.close(cont["p.grid.master"].data()[cont["p.grid.master"].select()]);
+        },
+        "e.btnCancel.click" : function(e) {
+            e.preventDefault();
+            cont.caller.close();
+        },
+        "e.row.dblclick" : function(e) {
+            cont["e.btnOk.click"].click();
+        },
+        init : function(view, request) {
+            cont["e.btnSearch.click"].click();
+        },
+        onOpen : function(onOpenData) {
+        }
+    });
+
+})();
+</script>

@@ -1,0 +1,335 @@
+<article class="type0401">
+    <div class="view-intro">
+        <h1>조회폼+그리드+상세폼(수평배치)</h1>
+        <ul class="view-desc">
+            <li>조회폼(N.form)과 그리드(N.grid)와 연동 된 상세 데이터 폼(N.form) 으로 구성 된 예제 입니다.</li>
+            <li>N.grid(또는 N.list)의 onSelect 이벤트 옵션을 통해 N.grid(또는 N.list) 와 N.form 컴포넌트를 연동 하는 방법을 알 수 있습니다.</li>
+            <li>공통코드 데이터를 자동으로 조회 한 후 N.select 컴포넌트를 초기화 하고 코드 데이터를 바인드(Array 타입으로 파라미터 정의) 합니다.</li>
+            <li>공통코드 외에 다른 목록 데이터를 선택요소에 데이터 바인딩 하는 방법(Array 타입으로 파라미터 정의)을 알 수 있습니다.</li>
+            <li>폼(N.form)에서 버튼을 통해 N.popup(부서조회 팝업) 과 연동하는 방법을 알 수 있습니다.</li>
+        </ul>
+    </div>
+
+    <h3>N.form</h3>
+    <div id="search" class="form__">
+        <table>
+            <colgroup>
+                <col style="width: 10%;">
+                <col style="width: 15%;">
+                <col style="width: 10%;">
+                <col style="width: 15%;">
+                <col style="width: 10%;">
+                <col style="width: 15%;">
+                <col style="width: 10%;">
+                <col style="width: 15%;">
+            </colgroup>
+            <tbody>
+                <tr>
+                    <th>Name</th>
+                    <td><input id="name" type="text"></td>
+                    <th>Age</th>
+                    <td><select id="age"><option value="">선택</option></select></td>
+                    <th>Gender</th>
+                    <td><input id="gender" type="radio"></td>
+                    <th>Eye Color</th>
+                    <td><select id="eyeColor"><option value="">선택</option></select></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="flex-horizental">
+        <div style="max-width: 33%;">
+            <div class="flex-horizental">
+                <h3 style="max-width: 50px;">N.grid</h3>
+                <div class="btn-box">
+                    <a id="btnSearch" href="#" class="R btn-search">조회</a>
+                    <a id="btnSave" href="#" class="S">저장</a>
+                </div>
+            </div>
+            <table id="master" class="grid__">
+                <colgroup>
+                    <col style="width: 20%;">
+                    <col style="width: 60%;">
+                    <col style="width: 20%;">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>Index</th>
+                        <th>Name</th>
+                        <th>Active</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td id="index" style="text-align: center;"></td>
+                        <td id="name"></td>
+                        <td id="isActive" style="text-align: center;"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div>
+            <div class="flex-horizental">
+                <h3>N.form</h3>
+                <div class="btn-box">
+                    <a id="btnAdd" href="#" class="C">추가</a>
+                    <a id="btnDelete" href="#" class="D">삭제</a>
+                    <a id="btnRevert" href="#" class="U">초기화</a>
+                </div>
+            </div>
+
+            <table id="detail" class="form__">
+                <colgroup>
+                    <col style="width: 15%;">
+                    <col style="width: 35%;">
+                    <col style="width: 15%;">
+                    <col style="width: 35%;">
+                </colgroup>
+                <tbody>
+                    <tr>
+                        <th rowspan="7">Picture</th>
+                        <td rowspan="7" style="text-align: center; vertical-align: middle;"><img
+                            src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D" height="110"></td>
+                        <th>Name</th>
+                        <td><input id="name" type="text" data-validate='[["required"]]'></td>
+                    </tr>
+                    <tr>
+                        <th>Department</th>
+                        <td><input id="deptNm" type="text" data-validate='[["required"]]' style="width: 50%;" readonly="readonly"> <a id="btnDept" href="#"
+                            data-opts='{ "size" : "small" }' class="R">조회</a></td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td><input id="email" type="text" data-validate='[["required"], ["email"]]'></td>
+                    </tr>
+                    <tr>
+                        <th>Password</th>
+                        <td><input id="key" type="text" data-format='[["generic", "@@＊＊＊＊＊＊"]]' data-validate='[["required"]]'></td>
+                    </tr>
+                    <tr>
+                        <th>Balance</th>
+                        <td><input id="balance" type="text" data-format='[["numeric", "$#,###.##0"]]' data-validate='[["required"], ["number"]]'></td>
+                    </tr>
+                    <tr>
+                        <th>Phone</th>
+                        <td><input id="phone" type="text" data-validate='[["required"]]'></td>
+                    </tr>
+                    <tr>
+                        <th>Eye color</th>
+                        <td><select id="eyeColor" data-validate='[["required"]]'><option>선택</option></select></td>
+                    </tr>
+                    <tr>
+                        <th rowspan="4">Company</th>
+                        <td rowspan="4"><select id="company" multiple="multiple" data-validate='[["required"]]' style="height: 95px;"></select></td>
+                        <th>Gender</th>
+                        <td><input id="gender" type="radio"></td>
+                    </tr>
+                    <tr>
+                        <th>Age</th>
+                        <td><input id="age" type="text" data-validate='[["required"], ["integer"]]'></td>
+                    </tr>
+                    <tr>
+                        <th>Favorite fruit</th>
+                        <td><input id="favoriteFruit" type="checkbox" data-validate='[["required"]]'></td>
+                    </tr>
+                    <tr>
+                        <th>Registered</th>
+                        <td><input id="registered" type="text" data-format='[["date", 8, "date"]]' data-validate='[["required"]]'></td>
+                    </tr>
+                    <tr>
+                        <th>About</th>
+                        <td colspan="3"><textarea id="about" style="width: 100%;" rows="3" data-validate='[["required"]]'></textarea></td>
+                    </tr>
+                    <tr>
+                        <th>Greeting</th>
+                        <td colspan="3"><textarea id="greeting" style="width: 100%;" rows="3" data-validate='[["required"]]'></textarea></td>
+                    </tr>
+                    <tr>
+                        <th>Active</th>
+                        <td colspan="3"><input id="isActive" type="checkbox"></td>
+                    </tr>
+                    <tr>
+                        <th>File</th>
+                        <td colspan="3"><a id="btnFile" href="#">File</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</article>
+
+<script type="text/javascript">
+(function() {
+
+    var cont = N(".type0401").cont({
+        "p.select.gender" : [ "gender" ],
+        "p.select.eyeColor" : [ "eyeColor" ],
+        "p.select.company" : [ "company" ],
+        "p.select.favoriteFruit" : [ "favoriteFruit" ],
+        "p.select.age" : [ "c.getSampleCodeList", "age", "age", function(data) {
+            return N(N.array.deduplicate(data, "age")).datasort("age");
+        }],
+        "p.form.search" : {
+            "usage" : {
+                "search-box" : {
+                    "defaultButton" : ".btn-search",
+                    "events" : [{
+                        "event" : "focusin",
+                        "target" : "#name",
+                        "handler" : function(e) {
+                            N.log(e);
+                        }
+                    }]
+                }
+            }
+        },
+        "p.form.detail" : {
+            revert : true,
+            autoUnbind : true
+        },
+        "p.grid.master" : {
+            height : 442,
+            select : true,
+            selectScroll : false,
+            onSelect : function(index, rowEle, data, beforeRow, e) {
+                // TODO 전처리
+
+                APP.comm.utils.selectNBind.call(this, {
+                    cont : cont,
+                    form : "p.form.detail"
+                });
+
+                // 파일 요약 목록 생성
+                if(data.length > 0) {
+                    APP.comm.utils.getFileSummaryList(cont["p.form.detail"].val("fileId"), "fileName", 60, cont["e.btnFile.click"]);
+                }
+
+                // TODO 후처리
+            },
+            onBind : function(context, data, isFirstPage, isLastPage) {
+                if(isFirstPage) {
+                    this.select(0);
+                }
+            }
+        },
+        "p.popup.dept" : {
+            url : "html/com/app/sample/type04P0.html",
+            onOpen : "onOpen",
+            onClose : function(onCloseData) {
+                if (onCloseData) {
+                    cont["p.form.detail"]
+                    .val("deptNm", onCloseData.deptNm)
+                    .val("deptCd", onCloseData.deptCd);
+                }
+            }
+        },
+        /**
+         * 공통 파일 팝업.
+         */
+        "p.popup.file" : {
+            onClose : function(onCloseData) {
+                if(onCloseData) {
+                    cont["p.form.detail"].val("fileId", onCloseData.fileId);
+
+                	// 파일 요약 목록 생성
+                    APP.comm.utils.createFileSummaryList(onCloseData.downloadList, "fileName", 60, cont["e.btnFile.click"]);
+                }
+            }
+        },
+        "c.getSampleCodeList" : function() {
+            return N.comm("sample/getSampleList.json");
+        },
+        "c.getSampleList" : function() {
+            return cont["p.form.search"].data(false).comm("sample/getSampleList.json");
+        },
+        "c.saveSample" : function() {
+            return N(cont["p.grid.master"].data("modified")).comm({
+                dataIsArray : true,dataIsArray : true, // Array 타입의 여러 행데이터가 1 개 일때는 자동으로 Object 로 변환 됩니다. 자동으로 변환되지 않게 하려면 dataIsArray 옵션을 true 로 지정 해 주세요.
+                url : "sample/saveSample.json"
+            });
+        },
+        "e.btnSearch.click" : function(e) {
+            e.preventDefault();
+
+            if (cont["p.form.search"].validate()) {
+                cont["c.getSampleList"]().submit(function(data) {
+                    // N.grid bind
+                    cont["p.grid.master"].bind(data);
+                });
+            }
+        },
+        "e.age.change" : {
+        	target : "#search #age",
+        	handler : function(e) {
+        	    cont["e.btnSearch.click"].click();
+            }
+        },
+        "e.eyeColor.change" : {
+        	target : "#search #eyeColor",
+        	handler : function(e) {
+        	    cont["e.btnSearch.click"].click();
+            }
+        },
+        "e.btnDept.click" : function(e) {
+            e.preventDefault();
+            cont["p.popup.dept"].open(cont["p.form.detail"].data(true)[0]);
+        },
+        "e.btnSave.click" : function(e) {
+            e.preventDefault();
+
+            return APP.comm.utils.save.call(this, {
+                cont : cont,
+                comm : "c.saveSample",
+                changed : "p.grid.master",
+                validate : "p.form.detail",
+                before : function() {
+                    // TODO
+                },
+                after : function(data) {
+                    cont["e.btnSearch.click"].click();
+                }
+            });
+        },
+        "e.btnAdd.click" : function(e) {
+            e.preventDefault();
+
+            if (cont["p.form.detail"].validate()) {
+                cont["p.form.detail"].add();
+            }
+        },
+        "e.btnDelete.click" : function(e) {
+            e.preventDefault();
+
+            cont["p.form.detail"].remove();
+        },
+        "e.btnRevert.click" : function(e) {
+            e.preventDefault();
+
+            if (cont["p.grid.master"].data("modified").length === 0) {
+                N(window).alert(N.message.get(APP.comm.messages, "COMM-0001")).show();
+                return false;
+            }
+
+            cont["p.form.detail"].revert();
+        },
+        "e.btnFile.click" : function(e) {
+            e.preventDefault();
+
+            cont["p.popup.file"].open(cont["p.form.detail"].val("fileId"));
+        },
+        init : function(view, request) {
+			// cont.opener 는 탭이 포함된 부모페이지의 Controller Object.
+            if(cont.opener) {
+                cont["p.form.search"].context().hide().prev("h3").hide().prev(".view-intro").hide();
+				// 부모 페이지 컨트롤러의 검색 버튼 클릭
+                cont.opener["e.btnSearch.click"].click();
+            } else {
+                cont["e.btnSearch.click"].click();
+            }
+        }
+    });
+
+})();
+</script>

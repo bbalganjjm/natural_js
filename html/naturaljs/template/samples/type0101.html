@@ -1,0 +1,138 @@
+<article class="type0101">
+    <div class="view-intro">
+        <h1>조회폼+그리드</h1>
+        <ul class="view-desc">
+            <li>조회폼(N.form)과 그리드(N.grid) 로 구성 된 간단한 예제 입니다.</li>
+            <li>공통코드 데이터를 자동으로 조회 한 후 N.select 컴포넌트를 초기화 하고 코드 데이터를 바인드 합니다.</li>
+            <li>11만건 이상의 데이터가 바인드 됩니다. 대용량 데이터도 빠른속도로 바인딩 되고 소팅, 필터링도 빠른 속도로 처리 가능 합니다.</li>
+        </ul>
+    </div>
+    
+    <h3>N.form</h3>
+    <div id="search" class="form__">
+        <table>
+            <colgroup>
+                <col style="width: 10%;">
+                <col style="width: 23%;">
+                <col style="width: 10%;">
+                <col style="width: 23%;">
+                <col style="width: 10%;">
+                <col style="width: 23%;">
+            </colgroup>
+            <tbody>
+                <tr>
+                    <th>Name</th>
+                    <td><input id="name" type="text"></td>
+                    <th>Gender</th>
+                    <td><input id="gender" type="radio"></td>
+                    <th>Eye Color</th>
+                    <td><select id="eyeColor"><option value="">선택</option></select></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="flex-horizental">
+        <h3>N.grid</h3>
+        <div class="btn-box">
+            <a id="btnSearch" href="#" class="R btn-search">조회</a>
+            <a id="btnExcel" href="#" class="R">엑셀</a>
+        </div>
+    </div>
+    <table id="master" class="grid__">
+        <colgroup>
+            <col style="width: 12%;">
+            <col style="width: 15%;">
+            <col style="width: 15%;">
+            <col style="width: auto;">
+            <col style="width: 6%;">
+            <col style="width: 10%;">
+            <col style="width: 10%;">
+            <col style="width: 12%;">
+        </colgroup>
+        <thead>
+            <tr>
+                <th>Index</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th data-filter="true">Age</th>
+                <th data-filter="true">Gender</th>
+                <th data-filter="true">Eye Color</th>
+                <th data-filter="true">Favorite Fruit</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="text-align: center;">
+                <td id="index"></td>
+                <td id="name" style="text-align: left;"></td>
+                <td id="phone"></td>
+                <td id="email" style="text-align: left;"></td>
+                <td id="age"></td>
+                <td id="gender"></td>
+                <td id="eyeColor"></td>
+                <td id="favoriteFruit"></td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="11" style="text-align: right;"><span>조회 : </span> <span id="totalCnt">0</span> 건</td>
+            </tr>
+        </tfoot>
+    </table>
+</article>
+
+<script type="text/javascript">
+(function() {
+
+    var cont = N(".type0101").cont({
+        "p.select.gender" : [ "gender" ],
+        "p.select.eyeColor" : [ "eyeColor" ],
+        "p.select.favoriteFruit" : [ "favoriteFruit" ],
+        "p.form.search" : {
+            "usage" : "search-box"
+        },
+        "p.grid.master" : {
+            "action" : "bind",
+            filter : false,
+            height : 350,
+            onBind : function(context, data) {
+                N("#totalCnt", cont.view).text(N.formatter.commas(String(data.length)));
+            }
+        },
+        "c.getSampleList" : function() {
+            return cont["p.form.search"].data(false).comm("sample/getSampleBigList.json");
+        },
+        "e.btnSearch.click" : function(e) {
+            e.preventDefault();
+
+            if (cont["p.form.search"].validate()) {
+                cont["c.getSampleList"]().submit(function(data) {
+                    // N.grid bind
+                    cont["p.grid.master"].bind(data);
+                });
+            }
+        },
+        "e.eyeColor.change" : {
+        	target : "#search #eyeColor",
+        	handler : function(e) {
+        	    cont["e.btnSearch.click"].click();
+            }
+        },
+        "e.btnExcel.click" : function(e) {
+            e.preventDefault();
+
+            if (cont["p.form.search"].validate()) {
+                cont["c.getSampleList"]().excelStreaming([ "대용량 샘플 목록", cont["p.grid.master"] ]);
+            }
+        },
+        init : function(view, request) {
+            // cont.opener 는 탭이 포함된 부모페이지의 Controller Object.
+            if(cont.opener) {
+                cont["p.form.search"].context().hide().prev("h3").hide().prev(".view-intro").hide();
+            }
+        }
+    });
+
+})();
+</script>

@@ -1060,7 +1060,7 @@
                             dataType : "text",
                             type : "GET"
                         }).submit(function(data) {
-                            cont.view.addClass("markdown-body").html((new showdown.Converter()).makeHtml(data));
+                            cont.view.addClass("markdown-body").html((new showdown.Converter({ "tables": true })).makeHtml(data));
                         });
                     });
                 });
@@ -1070,7 +1070,7 @@
                     dataType : "text",
                     type : "GET"
                 }).submit(function(data) {
-                    cont.view.addClass("markdown-body").html((new showdown.Converter()).makeHtml(data));
+                    cont.view.addClass("markdown-body").html((new showdown.Converter({ "tables": true })).makeHtml(data));
                 });
             }
         }

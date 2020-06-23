@@ -1,0 +1,260 @@
+<article class="type0201">
+    <div class="view-intro">
+        <h1>조회폼+그리드(CRUD)</h1>
+        <ul class="view-desc">
+            <li>조회폼(N.form)과 그리드(N.grid) 로 구성 된 예제 입니다.</li>
+            <li>그리드(N.grid)로 입력/조회/수정/삭제를 할 수 있습니다.</li>
+            <li>공통코드 데이터를 자동으로 조회 한 후 N.select 컴포넌트를 초기화 하고 코드 데이터를 바인드 합니다.</li>
+            <li>N.grid 의 rowHandler(BeforeBind) 와 이벤트로 그리드 행 안의 버튼이나 요소를 컨트롤 할 수 있는 방법을 알 수 있습니다.</li>
+            <li>그리드(N.grid)안에서 버튼을 통해 N.popup(부서조회 팝업) 과 연동하는 방법을 알 수 있습니다.</li>
+        </ul>
+    </div>
+    
+    <h3>N.form</h3>
+    <div id="search" class="form__">
+        <table>
+            <colgroup>
+                <col style="width: 10%;">
+                <col style="width: 23%;">
+                <col style="width: 10%;">
+                <col style="width: 23%;">
+                <col style="width: 10%;">
+                <col style="width: 23%;">
+            </colgroup>
+            <tbody>
+                <tr>
+                    <th>Name</th>
+                    <td><input id="name" type="text"></td>
+                    <th>Gender</th>
+                    <td><input id="gender" type="radio"></td>
+                    <th>Eye Color</th>
+                    <td><select id="eyeColor"><option value="">선택</option></select></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <div class="flex-horizental">
+        <h3 style="max-width: 100px;">N.grid</h3>
+        <div class="btn-box">
+            <a id="btnSearch" href="#" class="R btn-search">조회</a>
+            <a id="btnExcelImport" href="#" class="R">엑셀임포트</a>
+            <a id="btnExcel" href="#" class="R">엑셀다운로드</a>
+            <a id="btnAdd" href="#" class="C">추가</a> 
+            <a id="btnDelete" href="#" class="D">삭제</a> 
+            <a id="btnSave" href="#" class="S">저장</a>
+        </div>
+    </div>
+
+    <table id="master" class="grid__">
+        <colgroup>
+            <col style="width: 3%;">
+            <col style="width: 5%;">
+            <col style="width: 10%;">
+            <col style="width: auto;">
+            <col style="width: 10%;">
+            <col style="width: 10%;">
+            <col style="width: 5%;">
+            <col style="width: 15%;">
+            <col style="width: 10%;">
+        </colgroup>
+        <thead>
+            <tr>
+                <th rowspan="3"><input id="checkAll" type="checkbox" title="Check all"></th>
+                <th rowspan="3">Index</th>
+                <th colspan="7">Privacy</th>
+            </tr>
+            <tr>
+                <th rowspan="2">Name</th>
+                <th>Email</th>
+                <th data-filter="true">Gender</th>
+                <th data-filter="true">Eye Color</th>
+                <th rowspan="2" data-filter="true">Age</th>
+                <th data-filter="true">Registered</th>
+                <th data-filter="true">Active</th>
+            </tr>
+            <tr>
+                <th>About</th>
+                <th colspan="2">Department</th>
+                <th colspan="2">Greeting</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td rowspan="2" style="text-align: center;"><input class="checkAllTarget" type="checkbox"></td>
+                <td id="index" style="text-align: center;" rowspan="2"></td>
+                <td rowspan="2"><input id="name" type="text" data-validate='[["required"]]'></td>
+                <td><input id="email" type="text" data-validate='[["required"], ["email"]]'></td>
+                <td style="text-align: center;"><select id="gender" data-validate='[["required"]]'>
+                        <option>선택</option>
+                </select></td>
+                <td style="text-align: center;"><select id="eyeColor" data-validate='[["required"]]'>
+                        <option>선택</option>
+                </select></td>
+                <td rowspan="2" style="text-align: center;"><input id="age" type="text" data-validate='[["required"], ["integer"]]'></td>
+                <td><input id="registered" type="text" data-format='[["date", 8, "date"]]' data-validate='[["required"]]'></td>
+                <td style="text-align: center;"><input id="isActive" type="checkbox"></td>
+            </tr>
+            <tr>
+                <td><input id="about" type="text"></td>
+                <td colspan="2"><input id="deptNm" type="text" data-validate='[["required"]]' style="width: 75%;" readonly="readonly"> <a id="btnDept" href="#"
+                            data-opts='{ "size" : "small" }' class="R">조회</a></td>
+                <td colspan="2"><input id="greeting" type="text"></td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td id="about" colspan="9">&nbsp;</td>
+            </tr>
+        </tfoot>
+    </table>
+    
+</article>
+
+<script type="text/javascript">
+(function() {
+
+    var cont = N(".type0201").cont({
+        "p.select.gender" : [ "gender" ],
+        "p.select.eyeColor" : [ "eyeColor" ],
+        "p.form.search" : {
+            "usage" : "search-box"
+        },
+        "p.grid.master" : {
+            height : 350,
+            resizable : false,
+            checkAll : "#checkAll",
+            checkAllTarget : ".checkAllTarget",
+            scrollPaging : {
+                size : 15
+            },
+            rowHandlerBeforeBind : function(rowIdx, rowEle, rowData) {
+             	// 선택한 날짜가 오늘 날짜보다 크면 #isActive 요소 체크, 아니면 체크 해제.
+             	// rowHandlerBeforeBind 는 행에 데이터가 바인드 되기 전에 실행 되는 핸들러 함수 이므로 바인드 될 데이터의 값을 바꾸어 주면 바뀐 데이터로 바인드 됨.
+                if(!N.string.isEmpty(rowData.registered)) {
+                    if(N.date.diff((new Date()).formatDate("Ymd"), rowData.registered) > 0) {
+                        rowData.isActive = "Y";
+                    } else {
+                        rowData.isActive = "N";
+                    }
+                }
+            }
+        },
+        "p.popup.dept" : {
+            url : "html/com/app/sample/type04P0.html",
+            onOpen : "onOpen",
+            onClose : function(onCloseData) {
+                if (onCloseData) {
+                    cont["p.grid.master"]
+                    .val(cont.selIdx, "deptNm", onCloseData.deptNm)
+                    .val(cont.selIdx, "deptCd", onCloseData.deptCd);
+                }
+            }
+        },
+        "c.getSampleList" : function() {
+            return cont["p.form.search"].data(false).comm("sample/getSampleList.json");
+        },
+        "c.saveSample" : function() {
+            return N(cont["p.grid.master"].data("modified")).comm({
+                dataIsArray : true,dataIsArray : true, // Array 타입의 여러 행데이터가 1 개 일때는 자동으로 Object 로 변환 됩니다. 자동으로 변환되지 않게 하려면 dataIsArray 옵션을 true 로 지정 해 주세요.
+                url : "sample/saveSample.json"
+            });
+        },
+        "e.btnSearch.click" : function(e) {
+            e.preventDefault();
+
+            if (cont["p.form.search"].validate()) {
+                cont["c.getSampleList"]().submit(function(data) {
+                    // N.grid bind
+                    cont["p.grid.master"].bind(data);
+                });
+            }
+        },
+        "e.eyeColor.change" : {
+        	target : "#search #eyeColor",
+        	handler : function(e) {
+        	    cont["e.btnSearch.click"].click();
+            }
+        },
+        "e.btnExcel.click" : function(e) {
+            e.preventDefault();
+
+            if (cont["p.form.search"].validate()) {
+                cont["c.getSampleList"]().excelStreaming([ "샘플 목록", cont["p.grid.master"] ]);
+            }
+        },
+        "e.btnSave.click" : function(e) {
+            e.preventDefault();
+
+            return APP.comm.utils.save.call(this, {
+                cont : cont,
+                comm : "c.saveSample",
+                changed : "p.grid.master",
+                validate : "p.grid.master",
+                after : function(data) {
+                    cont["e.btnSearch.click"].click();
+                }
+            });
+        },
+        "e.btnAdd.click" : function(e) {
+            e.preventDefault();
+            
+            cont["p.grid.master"].add();
+        },
+        "e.btnDelete.click" : function(e) {
+            e.preventDefault();
+
+            return APP.comm.utils.del.call(this, {
+                cont : cont,
+                inst : "p.grid.master"
+            });
+        },
+        "e.btnDept.click" : function(e, idx) {
+            e.preventDefault();
+            
+            cont.selIdx = idx;
+            cont["p.popup.dept"].open(cont["p.grid.master"].data()[idx]);
+        },
+        "e.registered.onSelect" : function(e, inputEle, selDate, isMonthonly, idx) {
+            e.preventDefault();
+            // 선택한 날짜가 오늘 날짜보다 크면 #isActive 요소 체크, 아니면 체크 해제. 
+            //  - 입력 요소를 jQuery val 메서드로 직접 다루지 말고 반드시 바인드 되어 있는 컴포넌트의 val 메서드로 값을 세팅 해 주세요.
+            //  - 입력 요소를 jQuery val 메서드로 직접 다루면 컴포넌트 내부 데이터셋과 동기화 되지 않습니다.
+            if(N.date.diff((new Date()).formatDate("Ymd"), selDate.obj.formatDate(selDate.format)) > 0) {
+                cont["p.grid.master"].val(idx, "isActive", "Y");
+            } else {
+                cont["p.grid.master"].val(idx, "isActive", "N");
+            }
+        },
+        "e.btnExcelImport.click" : function(e) {
+            e.preventDefault();
+			
+            cont["p.grid.master"].bindExcel([ 
+                "key", "deptCd", "deptNm", "index", "guid", "active", "balance", 
+                "picture", "age", "eyeColor", "name", "gender", "company", "email",
+                "phone", "address", "about", "registered", "latitude", "longitude", 
+                "greeting", "favoriteFruit" // 엑셀 컬럼 순서대로 JSON Object 의 키값을 정의
+            ], {
+                start : 1, // 데이터로 추출 할 시작 엑셀 행 인덱스
+                mode : "update", // insert 이면 무조건 INSERT, update 면 pk 로 지정한 행 데이터가 있으면 UPDATE, 없으면 INSERT
+                pk : [ "key" ], // mode 옵션이 update 일 때의 기준 키 컬럼 명
+                after : function(data) {
+                    N.log(data); // 엑셀 데이터 추출 완료 후 실행.
+                }
+            });
+        },
+        init : function(view, request) {
+			// cont.opener 는 탭이 포함된 부모페이지의 Controller Object.
+            if(cont.opener) {
+                cont["p.form.search"].context().hide().prev("h3").hide().prev(".view-intro").hide();
+				// 부모 페이지 컨트롤러의 검색 버튼 클릭
+                cont.opener["e.btnSearch.click"].click();
+            } else {
+                cont["e.btnSearch.click"].click();                
+            }
+        }
+    });
+
+})();
+</script>
