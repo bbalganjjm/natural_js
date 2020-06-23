@@ -27,7 +27,7 @@ Natural-TEMPLATE is a package that formalizes the development of Natural-JS-base
 <script type="text/javascript" src="js/natural_js/natural.template.min.js" charset="utf-8"></script>
 ```
 
-2. Add the following setting to Config(natural.config.js).
+2. Add the following setting to [Config(natural.config.js)](#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s). For a description of properties, refer to the **N.context.attr("template")** tab in the [Config(natural.config.js)](#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s) menu.
 
 ```javascript
 /**
