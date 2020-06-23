@@ -151,10 +151,6 @@
                         <th>Active</th>
                         <td colspan="3"><input id="isActive" type="checkbox"></td>
                     </tr>
-                    <tr>
-                        <th>File</th>
-                        <td colspan="3"><a id="btnFile" href="#">File</a></td>
-                    </tr>
                 </tbody>
             </table>
         </div>
@@ -202,11 +198,6 @@
                     form : "p.form.detail"
                 });
 
-                // 파일 요약 목록 생성
-                if(data.length > 0) {
-                    APP.comm.utils.getFileSummaryList(cont["p.form.detail"].val("fileId"), "fileName", 60, cont["e.btnFile.click"]);
-                }
-
                 // TODO 후처리
             },
             onBind : function(context, data, isFirstPage, isLastPage) {
@@ -224,19 +215,6 @@
                     cont["p.form.detail"]
                     .val("deptNm", onCloseData.deptNm)
                     .val("deptCd", onCloseData.deptCd);
-                }
-            }
-        },
-        /**
-         * 공통 파일 팝업.
-         */
-        "p.popup.file" : {
-            onClose : function(onCloseData) {
-                if(onCloseData) {
-                    cont["p.form.detail"].val("fileId", onCloseData.fileId);
-
-                	// 파일 요약 목록 생성
-                    APP.comm.utils.createFileSummaryList(onCloseData.downloadList, "fileName", 60, cont["e.btnFile.click"]);
                 }
             }
         },
@@ -315,11 +293,6 @@
             }
 
             cont["p.form.detail"].revert();
-        },
-        "e.btnFile.click" : function(e) {
-            e.preventDefault();
-
-            cont["p.popup.file"].open(cont["p.form.detail"].val("fileId"));
         },
         init : function(view, request) {
 			// cont.opener 는 탭이 포함된 부모페이지의 Controller Object.
