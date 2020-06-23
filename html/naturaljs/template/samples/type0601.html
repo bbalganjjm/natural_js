@@ -32,7 +32,6 @@
             <div class="flex-horizental">
                 <h3>N.grid</h3>
                 <div class="btn-box">
-                    <a id="btnExcel" href="#" class="R">엑셀</a>
                     <a id="btnAdd" href="#" class="C">추가</a>
                     <a id="btnDelete" href="#" class="D">삭제</a>
                     <a id="btnSave" href="#" class="S">저장</a>
@@ -138,11 +137,6 @@
         "e.btnClose.click" : function(e) {
             e.preventDefault();
             cont["p.tree.master"].closeAll(true);
-        },
-        "e.btnExcel.click" : function(e) {
-            e.preventDefault();
-
-            cont["c.getSampleList"](cont["p.tree.master"].data("selected", "deptCd")).excelStreaming([ "샘플 목록", cont["p.grid.master"] ]);
         },
         "e.btnSave.click" : function(e) {
             e.preventDefault();

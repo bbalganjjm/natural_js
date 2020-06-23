@@ -34,7 +34,6 @@
                 <h3 style="max-width: 50px;">N.list</h3>
                 <div class="btn-box">
                     <a id="btnSearch" href="#" class="R btn-search">조회</a>
-                    <a id="btnExcelList" href="#" class="R">엑셀</a>
                 </div>
             </div>
             <ul id="codeMaster" class="list__">
@@ -45,7 +44,6 @@
             <div class="flex-horizental">
                 <h3>N.grid</h3>
                 <div class="btn-box">
-                    <a id="btnExcelGrid" href="#" class="R">엑셀</a>
                     <a id="btnSave" href="#" class="S">저장</a>
                 </div>
             </div>
@@ -256,27 +254,6 @@
                 cont["c.getSampleCodeCompanyList"]().submit(function(data) {
                     cont["p.list.codeMaster"].bind(data);
                 });
-            }
-        },
-        "e.btnExcelList.click" : function(e) {
-            e.preventDefault();
-
-            if (cont["p.form.search"].validate()) {
-                cont["c.getSampleCodeCompanyList"]().excelStreaming([ "N.list 목록", {
-                    "code" : "코드구분",
-                    "key" : "회사명",
-                    "val" : "회사코드"
-                } ]);
-            }
-        },
-        "e.btnExcelGrid.click" : function(e) {
-            e.preventDefault();
-
-            if (cont["p.form.search"].validate()) {
-                cont["c.getSampleList"]().excelStreaming([ "N.grid 목록", cont["p.grid.master"], {
-                    "deptCd" : "부서코드",
-                    "deptNm" : "부서명"
-                } ]);
             }
         },
         "e.btnDept.click" : function(e) {

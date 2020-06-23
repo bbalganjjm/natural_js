@@ -40,8 +40,6 @@
         <h3 style="max-width: 100px;">N.grid</h3>
         <div class="btn-box">
             <a id="btnSearch" href="#" class="R btn-search">조회</a>
-            <a id="btnExcelImport" href="#" class="R">엑셀임포트</a>
-            <a id="btnExcel" href="#" class="R">엑셀다운로드</a>
             <a id="btnAdd" href="#" class="C">추가</a>
             <a id="btnDelete" href="#" class="D">삭제</a>
             <a id="btnSave" href="#" class="S">저장</a>
@@ -178,13 +176,6 @@
         	    cont["e.btnSearch.click"].click();
             }
         },
-        "e.btnExcel.click" : function(e) {
-            e.preventDefault();
-
-            if (cont["p.form.search"].validate()) {
-                cont["c.getSampleList"]().excelStreaming([ "샘플 목록", cont["p.grid.master"] ]);
-            }
-        },
         "e.btnSave.click" : function(e) {
             e.preventDefault();
 
@@ -227,23 +218,6 @@
             } else {
                 cont["p.grid.master"].val(idx, "isActive", "N");
             }
-        },
-        "e.btnExcelImport.click" : function(e) {
-            e.preventDefault();
-
-            cont["p.grid.master"].bindExcel([
-                "key", "deptCd", "deptNm", "index", "guid", "active", "balance",
-                "picture", "age", "eyeColor", "name", "gender", "company", "email",
-                "phone", "address", "about", "registered", "latitude", "longitude",
-                "greeting", "favoriteFruit" // 엑셀 컬럼 순서대로 JSON Object 의 키값을 정의
-            ], {
-                start : 1, // 데이터로 추출 할 시작 엑셀 행 인덱스
-                mode : "update", // insert 이면 무조건 INSERT, update 면 pk 로 지정한 행 데이터가 있으면 UPDATE, 없으면 INSERT
-                pk : [ "key" ], // mode 옵션이 update 일 때의 기준 키 컬럼 명
-                after : function(data) {
-                    N.log(data); // 엑셀 데이터 추출 완료 후 실행.
-                }
-            });
         },
         init : function(view, request) {
 			// cont.opener 는 탭이 포함된 부모페이지의 Controller Object.

@@ -43,7 +43,6 @@
         <h3>N.grid</h3>
         <div class="btn-box">
             <a id="btnSearch" href="#" class="R btn-search" class="S">조회</a>
-            <a id="btnExcel" href="#" class="R">엑셀</a>
             <a id="btnSave" href="#" class="S">저장</a>
         </div>
     </div>
@@ -219,8 +218,9 @@
             }
         },
         "p.popup.dept" : {
-            url : "html/com/app/sample/type04P0.html",
+            url : "html/naturaljs/template/samples/type04P0.html",
             onOpen : "onOpen",
+            height: 621,
             onClose : function(onCloseData) {
                 if (onCloseData) {
                     cont["p.form.detail"]
@@ -261,13 +261,6 @@
         	target : "#search #eyeColor",
         	handler : function(e) {
         	    cont["e.btnSearch.click"].click();
-            }
-        },
-        "e.btnExcel.click" : function(e) {
-            e.preventDefault();
-
-            if (cont["p.form.search"].validate()) {
-                cont["c.getSampleList"]().excelStreaming([ "샘플 목록", cont["p.grid.master"] ]);
             }
         },
         "e.btnDept.click" : function(e) {
