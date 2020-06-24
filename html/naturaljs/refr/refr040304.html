@@ -178,6 +178,17 @@
                 <p lang="en_US">"Datepicker_holiday__" class attribute value is added to elements displayed as holidays./p>
                 <p lang="ko_KR" class="alert"><a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a> 의 N.context.attr("ui").datepicker.holiday 프로퍼티에 설정 하면 모든 Datepicker 에 적용 됩니다.</p>
                 <p lang="en_US" class="alert">If set in the N.context.attr("ui").datepicker.holiday property of <a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a>, it applies to all Datepickers.</p>
+                <pre><code>N.comm("getHolidayList.json").submit(function(data) {
+    var once = {};
+    N(data).each(function() {
+        once[this.holidayDate] = this.holidayName;
+    });
+    if(N.context.attr("ui").datepicker.holiday === undefined) {
+        N.context.attr("ui").datepicker.holiday = {};
+    }
+    N.context.attr("ui").datepicker.holiday.once = once;
+});
+</code></pre>
             </td>
         </tr>
         <tr>
