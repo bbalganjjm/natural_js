@@ -174,10 +174,8 @@
                 <p lang="en_US">In the repeat object, enter holidays that repeat every year, excluding the year. In the once object, enter holidays that are not repeated every year in the form of year, month, day.</p>
                 <p lang="ko_KR">같은 날짜에 휴일이 2개 이상일 경우 Array 타입으로 휴일명을 여러개 지정하면 됩니다.</p>
                 <p lang="en_US">If there are two or more holidays on the same day, you can specify multiple holiday names in the Array type.</p>
-                <p lang="ko_KR">휴일로 표시되는 요소에는 "datepicker_holiday__" class 속성값이 추가 됩니다.</p>
-                <p lang="en_US">"Datepicker_holiday__" class attribute value is added to elements displayed as holidays./p>
-                <p lang="ko_KR" class="alert"><a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a> 의 N.context.attr("ui").datepicker.holiday 프로퍼티에 설정 하면 모든 Datepicker 에 적용 됩니다.</p>
-                <p lang="en_US" class="alert">If set in the N.context.attr("ui").datepicker.holiday property of <a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a>, it applies to all Datepickers.</p>
+                <p lang="ko_KR"><a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a> 의 N.context.attr("ui").datepicker.holiday 프로퍼티에 설정 하면 모든 Datepicker 에 적용 됩니다.</p>
+                <p lang="en_US">If set in the N.context.attr("ui").datepicker.holiday property of <a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a>, it applies to all Datepickers.</p>
                 <pre><code>N.comm("getHolidayList.json").submit(function(data) {
     var once = {};
     N(data).each(function() {
@@ -189,6 +187,8 @@
     N.context.attr("ui").datepicker.holiday.once = once;
 });
 </code></pre>
+                <p lang="ko_KR" class="alert">휴일로 표시되는 요소에는 "datepicker_holiday__" class 속성값이 추가 됩니다.</p>
+                <p lang="en_US" class="alert">"Datepicker_holiday__" class attribute value is added to elements displayed as holidays./p>
             </td>
         </tr>
         <tr>
