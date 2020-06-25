@@ -7,7 +7,7 @@
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   *color: #24292e;
-  font-family: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", "dotum", "Segoe UI Emoji", "Segoe UI Symbol", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji";
+  font-family: 'NanumSquare', 'Apple SD Gothic Neo', 'Malgun Gothic', 'dotum', 'Segoe UI Emoji', 'Segoe UI Symbol', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji';
   *font-size: 13px;
   *line-height: 1.5;
   word-wrap: break-word;
@@ -168,7 +168,7 @@
 .markdown-body code,
 .markdown-body kbd,
 .markdown-body pre {
-  font-family: Consolas, monospace;
+  font-family: Consolas, 'NanumSquare';
   font-size: 1.1em;
 }
 
@@ -278,14 +278,14 @@
 }
 
 .markdown-body code {
-  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, 'NanumSquare';
   font-size: 0.9em;
 }
 
 .markdown-body pre {
   margin-top: 0;
   margin-bottom: 0;
-  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, 'NanumSquare';
   font-size: 0.9em;
 }
 

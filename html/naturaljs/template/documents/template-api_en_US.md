@@ -87,69 +87,39 @@ N.context.attr("template", {
 
 #API Menual
 
-##Basic code writing rules for each file
+##Rules for creating property names for Controller object
+Natural-TEMPLATE functions can be executed using the naming convention for controller object property names. Automate repetitive tasks such as initializing components and binding events.
 
-Each page block is written as follows.
-
-```javascript
-<style>
-    .page-id {
-        /* View(CSS) - 퍼블리셔가 작성, 생략 가능하고 이 파일의 View 에만 스타일을 적용하고 싶을 때만 추가. */
-        /* CSS 셀렉터를 선언 할 때는 반드시 .page-id #target { } 처럼 .page-id 를 맨 앞에 적어 주세요. 안그러면 다른 페이지에도 영향을 미칩니다. */
-    }
-</style>
-
-<article class="page-id">
-    <!-- View - 퍼블리셔가 작성 -->
-    <!-- article 태그에 class 속성으로 page-id 를 지정 합니다. -->
-</article>
-
-<script type="text/javascript">
-    (function() {
-
-        // Controller - 업무 개발자가 작성
-        // N.cont 함수를 실행 시킬 때 N의 인자로 view 의 class 속성으로 정의 한 "page-id" 값을 넣어 줍니다.
-        var cont = N(".page-id").cont({
-            init : function(view, request) {
-                // 페이지 로딩 후 init 함수가 자동으로 실행 됩니다.
-            }
-        });
-
-    })();
-</script>
-```
-
-##Rules for creating property names for Controller Objects
-N.cont 함수의 인자인 컨트롤러 객체는 미리 정의 된 속성명 룰 들이 있습니다. 미리 정의 된 속성명으로 객체 변수명을 선언 하고 객체나 함수등을 할당하면 AOP에 의해 N.cont 객체의 init 함수가 실행 되기 전에 정의한 작업들을 처리 해 줍니다.
-
-###1. Starts with "p."(UI component initialization)
-Natural-UI 의 컴포넌트 들을 자동으로 초기 화 해 줍니다.
-컴포넌트 초기화 속성명은 다음과 같이 조합하여 사용할 수 있습니다.
+###1. Starts with "p." - UI component initialization
+Automatically initialize the components of Natural-UI.
+Component initialization property names can be used in combination as follows.
 
 ```
-"p.{컴포넌트명}.{요소ID}" : { 컴포넌트 옵션 }
+"p.{Component name}.{Element id}" : {
+    // Component options
+}
 ```
 
-초기화가 완료 되면 `p.{컴포넌트명}.{요소ID}` 속성값으로 지정한 컴포넌트 옵션 객체는 생성 된 컴포넌트의 인스턴스로 바뀝니다.
+When initialization is complete, the component option object specified by the `p.{Component name}.{Element id}` property value is replaced with an instance of the created component.
 
-> 공통코드등을 처리하는 `p.select.{id}` 선언(N.select 컴포넌트)은 해당 view 페이지 안에 해당 id 로 정의 된 모든 요소들에 같은 데이터를 바인드 한 후 Array 객체 타입으로 인스턴스들을 담아 줍니다. 생성된 N.select 인스턴스를 직접 사용 할 때는 `cont["p.select.{id}"][index]` 와 같이 인스턴스의 `index 를 지정` 해 줘야 합니다.
+> The `p.select.{id}` declaration initializes the Select(N.select) component for all selected elements that have the corresponding id attribute value in the page view, stores the created component instances in the Array, and replaces the property value. When using an instance of the Select component, an instance to be used such as `cont["p.select.{id}"][1]` must be taken out of the Array and used.
 
-> 컴포넌트 초기화 옵션은 `cont["p.{컴포넌트명}.{요소ID}"].options` 로 접근 할 수 있으나 옵션의 직접사용은 권장하지 않습니다. 컴포넌트의 안정성을 보장 받으려면 컴포넌트의 인스턴스에서 제공하는 메서드를 통해 기능을 사용 바랍니다.
+> Component initialization options can be accessed with `cont["p.{Component name}.{Element id}"].options`, but direct use of the options is not recommended.
 
 ```javascript
 ...
 var cont = N(".page-id").cont({
     "p.select.id" : {
-        // 컴포넌트 옵션
+        // Component options
     },
     init : function(view, request) {
-        N.log(cont["p.select.id"].val()); // 컴포넌트 인스턴스 사용.
+        N.log(cont["p.select.id"].val()); // Using component instances.
     }
 });
 ...
 ```
 
-컴포넌트의 context 옵션은 {id}로 지정한 요소가 자동으로 할당 되나 id 아닌 class 셀렉터등의 다른 셀렉터로 직접 지정하려면 컴포넌트 context 옵션을 선언 하면 됩니다.
+In the context option of the component, the element specified by {id} is automatically assigned, but if you want to specify another selector, such as a class selector other than id, you can set the context option directly.
 
 ```javascript
 ...
@@ -161,17 +131,19 @@ var cont = N(".page-id").cont({
 ...
 ```
 
-위와같이 context 옵션을 선언하면 내부에서는 `N(".detail", view)` 와 같이 view 안에서 찾아주는 구문을 자동으로 생성 해 줍니다.
+As above, even if no context is specified in the selector of the context option, the view element of the page is automatically specified as the context argument of the selector .
 
->**N.tab 과 N.popup 컴포넌트의 `onOpen 옵션의 함수명 문자열은 반드시 onOpen 으로 시작("onOpen", "onOpenABC" 등)` 해야 합니다. 그렇지 않으면 AOP 에 의해 init 이 지연 실행 되기 때문에 init 보다 onOpen 이 먼저 실행 되어 자동으로 초기화 된 컴포넌트 인스턴스들을 참조하지 못할 수 있습니다.**
+`context : ".detail"` => `context : N(".detail", cont.view)`
 
->**N.tab 컴포넌트의 onActive 옵션은 주의해서 사용바랍니다. init 지연 실행에 대한 대책이 아직 나오지 않아 onActive 가 init 보다 먼저 실행 됩니다. 안정적인 비슷한 기능을 원한다면 onOpen 을 사용 해 주세요.**
+>**The function name string of the `onOpen option of N.tab and N.popup components must start with onOpen (“onOpen”, “onOpenABC”, etc.). Otherwise, the onOpen function is executed before the init function of the Controller object, so you may not be able to reference component instances.**
 
-컴포넌트 옵션은 Natural-UI 의 컴포넌트별 기본 옵션 외에 해당 컴포넌트의 용도를 지정 하거나 초기화 후 바로 실행 할 함수 등을 지정 할 수 있는 옵션이 더 추가 되어 있습니다.
-N.cont의 컴포넌트 별 추가 옵션들은 다음과 같습니다.
+>**Use the onActive option of N.tab component with caution. There is no countermeasure against delayed execution of the init function, so onActive is executed before init. Use onOpen if you want a similar, stable feature.**
+
+As for component options, in addition to the default options for each component of Natural-UI, the option to specify the usage of the component or to execute the function immediately after initialization is added.
+Additional options for each component available only in Natural-TEMPLATE are as follows.
 
 ###1.1. N.select - Common code data binding
-| 속성명 | 옵션명 | 변수타입 | 필수여부 | 기능 | 설명 |
+| 속성명 | 옵션명 | 변수타입 | Required | 기능 | 설명 |
 | :--: | :--: | :--: | :--: | :--: | -- |
 | p.select.{id} | - | - | - | - | N.select 컴포넌트를 초기화 한다 |
 | - | code | string | O | 공통코드 분류코드 | 초기화 한 N.select 컴포넌트에 입력한 공통코드를 바인드 한다. |
@@ -180,11 +152,11 @@ N.cont의 컴포넌트 별 추가 옵션들은 다음과 같습니다.
 >p.select.{id} : [ "code", filterFunction ] 처럼 Array 타입으로도 간단하게 선언 할 수 있습니다.. filter 가 필요 없으면 [ "code" ] 만 선언 해도 됩니다.
 
 ###1.2. N.select - Binding general list data to select elements(select, radio, checkbox)
-| 속성명 | 옵션명 | 변수타입 | 필수여부 | 기능 | 설명 |
+| 속성명 | 옵션명 | 변수타입 | Required | 기능 | 설명 |
 | :--: | :--: | :--: | :--: | :--: | -- |
 | p.select.{id} | - | - | - | - | N.select 컴포넌트를 초기화 한다 |
 | - | comm | string | | 목록을 조회 할 N.comm(Communicator) | N.cont 오브젝트로 선언한 "c.{actionName}"(N.comm 참고) 을 입력한다. |
-| - | data | array[object] | | comm 옵션을 지정 하지 않고 data 옵션으로 [{}, {}] 와 같이 데이터를 직접 작성 하여 바인드 할 수 있다. |
+| - | data | array[object] | | 바인딩할 데이터 | comm 옵션을 지정 하지 않고 data 옵션으로 [{}, {}] 와 같이 데이터를 직접 작성 하여 바인드 할 수 있다. |
 | - | key | string | O | 선택 요소의 명칭에 바인드 될 데이터 컬럼 명 | 조회 데이터의 컬럼명을 입력한다. |
 | - | val | string | O | 선택 요소의 값에 바인드 될 데이터 컬럼 명 | 조회 데이터의 컬럼명을 입력한다. |
 | - | filter | function | | 데이터 필터 | 조회한 데이터를 가공하여 바인드 한다. |
@@ -240,7 +212,7 @@ N.cont의 컴포넌트 별 추가 옵션들은 다음과 같습니다.
 | p.{component}.{id} | - | - | - | - | 지정한 컴포넌트를 초기화 한다. N.alert 을 제외한 모든 컴포넌트를 이와 같은 방법으로 초기화 가능 하다. |
 
 
-##2. Starts with "c."(Communicator(N.comm) declaration)
+##2. Starts with "c." - Communicator(N.comm) declaration
 해당 컨트롤러 내에서 서버와 통신하는 모든 N.comm(Communicator) 들을 모두 정의 합니다.
 N.comm 의 초기화 속성명은 다음과 같이 조합하여 사용할 수 있습니다.
 
@@ -276,14 +248,14 @@ var cont = N(".page-id").cont({
 >커뮤니케이터의 파라미터를 위 예제와 같이 N.form 이나 N.grid / N.list 의 data() 메서드에 연결(정의) 해 놓으면 커뮤케이터의 submit 메서드가 호출 되는 시점의 컴포넌트 데이터를 서버로의 요청 파라미터로 쉽게 추출 할 수 있습니다.
 
 
-##3. Starts with "e."(Event binding)
+##3. Starts with "e." - Event binding
 페이지(View) 안의 모든 요소들에 이벤트를 간단하게 정의 할 수 있습니다.
 >a, button, input[type=button] 요소에 이벤트를 정의 하면 N.button 컴포넌트가 자동으로 초기화 되어 버튼으로 생성 됩니다.
 
 이벤트의 초기화 속성명은 다음과 같이 조합하여 사용할 수 있습니다.
 
 ```
-"e.{요소ID}.{이벤트명}" : 이벤트 핸들러
+"e.{요소id}.{이벤트명}" : 이벤트 핸들러
 ```
 
 또는
@@ -295,7 +267,7 @@ var cont = N(".page-id").cont({
 ```
 
 
-초기화가 완료 되면 `e.{요소ID}.{이벤트명}` 속성값으로 지정한 이벤트 핸들러 함수는 id로 지정한 요소(jQuery Object)로 바뀝니다.
+초기화가 완료 되면 `e.{요소id}.{이벤트명}` 속성값으로 지정한 이벤트 핸들러 함수는 id로 지정한 요소(jQuery Object)로 바뀝니다.
 
 ```javascript
 ...
