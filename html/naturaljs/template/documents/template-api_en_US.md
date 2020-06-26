@@ -143,7 +143,7 @@ As for component options, in addition to the default options for each component 
 Additional options for each component available only in Natural-TEMPLATE are as follows.
 
 ###1.1. N.select - Common code data binding
-| 속성명 | 옵션명 | 변수타입 | Required | 기능 | 설명 |
+| Property | Option name | Type | Required | Property value | Description |
 | :--: | :--: | :--: | :--: | :--: | -- |
 | p.select.{id} | - | - | - | - | N.select 컴포넌트를 초기화 한다 |
 | - | code | string | O | 공통코드 분류코드 | 초기화 한 N.select 컴포넌트에 입력한 공통코드를 바인드 한다. |
@@ -152,7 +152,7 @@ Additional options for each component available only in Natural-TEMPLATE are as 
 >p.select.{id} : [ "code", filterFunction ] 처럼 Array 타입으로도 간단하게 선언 할 수 있습니다.. filter 가 필요 없으면 [ "code" ] 만 선언 해도 됩니다.
 
 ###1.2. N.select - Binding general list data to select elements(select, radio, checkbox)
-| 속성명 | 옵션명 | 변수타입 | Required | 기능 | 설명 |
+| Property | Option name | Type | Required | Property value | Description |
 | :--: | :--: | :--: | :--: | :--: | -- |
 | p.select.{id} | - | - | - | - | N.select 컴포넌트를 초기화 한다 |
 | - | comm | string | | 목록을 조회 할 N.comm(Communicator) | N.cont 오브젝트로 선언한 "c.{actionName}"(N.comm 참고) 을 입력한다. |
@@ -174,7 +174,7 @@ Additional options for each component available only in Natural-TEMPLATE are as 
 >p.select.{id} : [ "comm", "key", "val", filterFunction ] 처럼 Array 타입으로도 간단하게 선언 할 수 있습니다. filter 가 필요 없으면 [ "comm", "key", "val" ] 만 선언 해도 됩니다.
 
 ###1.3. N.form
-| 속성명 | 옵션명 | 변수타입 | 필수여부 | 기능 | 설명 |
+| Property | Option name | Type | Required | Property value | Description |
 | :--: | :--: | :--: | :--: | :--: | -- |
 | p.form.{id} | - | - | - | - | N.form 컴포넌트를 초기화 한다 |
 | - | usage | string or object | O | Form 의 용도 | "search-box" 문자열 입력 시 지정한 영역을 검색박스 Form 으로 생성 해 준다. object 타입으로 좀 더 상세한 옵션을 지정할 수 있다(하단 설명 참고). |
@@ -207,7 +207,7 @@ Additional options for each component available only in Natural-TEMPLATE are as 
 ```
 
 ###1.4. All other components
-| 속성명 | 추가옵션 | 변수타입 | 필수여부 | 기능 | 설명 |
+| Property | Option name | Type | Required | Property value | Description |
 | :--: | :--: | :--: | :--: | :--: | -- |
 | p.{component}.{id} | - | - | - | - | 지정한 컴포넌트를 초기화 한다. N.alert 을 제외한 모든 컴포넌트를 이와 같은 방법으로 초기화 가능 하다. |
 
