@@ -29,7 +29,7 @@ Natural-TEMPLATE is a package that formalizes the development of Natural-JS-base
 
 2. Add the following setting to [Config(natural.config.js)](#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s). For a description of properties, refer to the **N.context.attr("template")** tab in the [Config(natural.config.js)](#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s) menu.
 
-```javascript
+```
 /**
  * Natural-TEMPLATE Config
  */
@@ -64,7 +64,7 @@ N.context.attr("template", {
 
 3. Finally, add AOP pointcut as follows to complete installation.
 
-```javascript
+```
 ...
 "cont" : {
     "advisors" : [{ // Pointcut for executing onOpen after a delayed init on a popup or tab
@@ -106,7 +106,7 @@ When initialization is complete, the component option object specified by the `p
 
 > Component initialization options can be accessed with `cont["p.{Component name}.{Element id}"].options`, but direct use of the options is not recommended.
 
-```javascript
+```
 ...
 var cont = N(".page-id").cont({
     "p.select.id" : {
@@ -121,7 +121,7 @@ var cont = N(".page-id").cont({
 
 In the context option of the component, the element specified by {id} is automatically assigned, but if you want to specify another selector, such as a class selector other than id, you can set the context option directly.
 
-```javascript
+```
 ...
 "p.form.detail" : {
     context : ".detail",
@@ -162,7 +162,7 @@ Additional options for each component available only in Natural-TEMPLATE are as 
 ...
 ```
 
->You can also simply declare by an array type option like p.select.{id} : [ "code", filterFunction ]. If you don't need a filter, you can also only declare ["code"].
+ * You can also simply declare by an array type option like p.select.{id} : [ "code", filterFunction ]. If you don't need a filter, you can also only declare ["code"].
 
 ```
 ...
@@ -170,8 +170,8 @@ Additional options for each component available only in Natural-TEMPLATE are as 
 ...
 ```
 
-####1.1.1. Example "filter" option
-```javascript
+ * Example "filter" option
+```
 ...
 "filter" : function (data) {
     // When the data (original data) is processed and returned, the processed data is bound.
@@ -205,7 +205,7 @@ Additional options for each component available only in Natural-TEMPLATE are as 
 ...
 ```
 
->You can also simply declare by an array type option like p.select.{id} : [ "comm", "key", "val", filterFunction ]. If you don't need a filter, you can also only declare [ "comm", "key", "val" ].
+ * You can also simply declare by an array type option like p.select.{id} : [ "comm", "key", "val", filterFunction ]. If you don't need a filter, you can also only declare [ "comm", "key", "val" ].
 
 ```
 ...
@@ -218,12 +218,37 @@ Additional options for each component available only in Natural-TEMPLATE are as 
 ###1.3. N.form
 | 속성 | 옵션명 | 타입 | 필수여부 | 속성값 | 설명 |
 | :--: | :--: | :--: | :--: | :--: | -- |
-| p.form.{id} | - | - | - | - | Initialize the N.form component. |
+| p.form.{id} | - | - | - | - | N.form 컴포넌트를 초기화 합니다. |
 | - | usage | string or object | O | Form 의 용도 | "search-box" 문자열 입력 시 지정한 영역을 검색박스 Form 으로 생성 해 줍니다. object 타입으로 좀 더 상세한 옵션을 지정할 수 있습니다.(하단 설명 참고). |
+
+ * 일반 폼 예제
+```
+...
+"p.form.detail" : { // N.form 컴포넌트의 옵션
+    revert : true,
+    autoUnbind : true
+},
+...
+```
+
+
+ * 검색 폼 예제
+
+```
+...
+"p.form.search" : {
+    "usage" : "search-box"
+},
+...
+```
+
 >엔터 키 이벤트를 자동으로 처리하기 위해서 반드시 "btn-search"(조회버튼) 라는 class 속성값을 갖고있는 버튼요소(a 요소) 를 view 안에 추가 해 주어야 합니다.
 
- * "search-box" 옵션을 object 타입으로 지정.
-```javascript
+다음예제와 같이 "search-box" 옵션을 object 타입으로 상세한 옵션을 설정할 수 있습니다.
+
+>"usage" 옵션이 "search-box" 로 설정된 Form 은 입력요소에 Enter 키를 눌렀을때 조회가 실행 되는 이벤트가 자동으로 바인딩 됩니다. 이 Enter 키 이벤트 핸들러의 실행을 차단하고 다른 이벤트 핸들러를 등록하려면 "search-box" 속성의 하위 옵션 중 "events" 속성에 이벤트 핸들러를 array 타입으로 순서대로 정의 해 주면 됩니다.
+
+```
 ...
 "p.form.search" : {
     "usage" : {
@@ -248,22 +273,66 @@ Additional options for each component available only in Natural-TEMPLATE are as 
 ...
 ```
 
-###1.4. All other components
+###1.4. 다른 모든 컴포넌트
 | 속성 | 옵션 | 타입 | 필수여부 | 속성값 | 설명 |
 | :--: | :--: | :--: | :--: | :--: | -- |
 | p.{component}.{id} | - | - | - | - | N.{component} 컴포넌트를 초기화 합니다. N.alert 을 제외한 모든 컴포넌트를 이와 같은 방법으로 초기화 가능합니다. |
 
+ * Tab(N.tab) 선언 예제
+
+```
+...
+"p.tab.master" : { },
+...
+```
+
+ * Popup(N.popup) 선언 예제
+
+```
+...
+"p.popup.dept" : {
+    url : "html/naturaljs/template/samples/type04P0.html",
+    onOpen : "onOpen",
+    height: 621,
+    onClose : function(onCloseData) {
+        if (onCloseData) {
+            cont["p.form.detail"]
+            .val("deptNm", onCloseData.deptNm)
+            .val("deptCd", onCloseData.deptCd);
+        }
+    }
+},
+...
+```
+
+ * Grid(N.grid) 선언 예제
+
+```
+...
+"p.grid.master" : {
+    height : 200,
+    select : true,
+    selectScroll : false,
+    onBind : function(context, data, isFirstPage, isLastPage) {
+        if(isFirstPage) {
+            this.select(0);
+        }
+    }
+},
+...
+```
 
 ##2. Starts with "c." - Communicator(N.comm) declaration
-해당 컨트롤러 내에서 서버와 통신하는 모든 N.comm(Communicator) 들을 모두 정의 합니다.
+서버와 통신하는 모든 Communicator(N.comm) 들을 Controller object 의 멤버변수로 정의 할 수 있습니다. Communicator를 미리 선언 해 놓으면 데이터의 흐름을 한눈에 확인할 수 있고 Communicator 들에 대한 AOP 설정이 가능 합니다.
 N.comm 의 초기화 속성명은 다음과 같이 조합하여 사용할 수 있습니다.
 
 ```
 "c.{액션명}" : function() { return N.comm; }
 ```
 
->액션명은 가능 하다면 호출하는 URL 의 액션명과 맞춰 주고 불가능 하면 반드시 목록 조회는 get{ActionName}List, 한건 조회는 get{ActionName}, 다건(CUD) 저장은 save{ActionName}, 입력은 insert{ActionName}, 수정은 update{ActionName}, 삭제는 delete{ActionName} 으로 정의 바랍니다.
-```javascript
+>가능 하다면 액션명은 호출하는 URL 의 서비스명과 맞춰 주고 불가능 하면 반드시 목록 조회는 get{ActionName}List, 한건 조회는 get{ActionName}, 입력은 insert{ActionName}, 수정은 update{ActionName}, 삭제는 delete{ActionName}, 입력/수정/삭제를 한번에 처리하는 Communicator는 save{ActionName}로 정의 바랍니다.
+
+```
 ...
 var cont = N(".page-id").cont({
     "c.PAGEID" : {
@@ -286,9 +355,9 @@ var cont = N(".page-id").cont({
 });
 ```
 
->커뮤니케이터들의 정의는 직접 오브젝트나 값을 대입하는것이 아닌 실행 함수를 지정 하는 방식이므로 사용시 `cont["c.{액션명}"]().submit` 와 같이 함수 실행 구문 `()` 을 추가하는것에 유의 바랍니다.
->커뮤니케이터의 파라미터를 위 예제와 같이 N.form 이나 N.grid / N.list 의 data() 메서드에 연결(정의) 해 놓으면 커뮤케이터의 submit 메서드가 호출 되는 시점의 컴포넌트 데이터를 서버로의 요청 파라미터로 쉽게 추출 할 수 있습니다.
+>N.comm의 선언은 직접 오브젝트나 값을 대입하는것이 아닌 함수를 선언하는 방식이므로 `cont["c.{액션명}"]().submit` 와 같이 선언된 함수를 실행해야 N.comm 인스턴스가 반환 됩니다.
 
+>N.comm의 파라미터를 위 예제와 같이 데이터관련 컴포넌트(Grid, List, Form 등)의 data() 메서드에 연결(정의) 해 놓으면 N.comm의 submit 메서드가 호출 되는 시점의 컴포넌트 데이터가 서버의 요청 파라미터로 전송 됩니다.
 
 ##3. Starts with "e." - Event binding
 페이지(View) 안의 모든 요소들에 이벤트를 간단하게 정의 할 수 있습니다.
@@ -308,10 +377,9 @@ var cont = N(".page-id").cont({
 }
 ```
 
-
 초기화가 완료 되면 `e.{요소id}.{이벤트명}` 속성값으로 지정한 이벤트 핸들러 함수는 id로 지정한 요소(jQuery Object)로 바뀝니다.
 
-```javascript
+```
 ...
 var cont = N(".page-id").cont({
     "e.id.click" : function(e) { // 선언한 이벤트 핸들러는 초기화 후(init 함수가 실행 되기 바로전) id 로 지정한 요소(jQuery Object)로 바뀝니다.
@@ -335,7 +403,7 @@ var cont = N(".page-id").cont({
 ```
 
 다음과 같이 컴포넌트에서 제공하는 이벤트도 적용 가능 합니다.
-```javascript
+```
 ...
 var cont = N(".page-id").cont({
     "e.dateInput.onSelect" : function(e, inputEle, selDate, isMonthonly, idx) { // N.datepicker 의 onSelect 이벤트
@@ -349,7 +417,7 @@ var cont = N(".page-id").cont({
 
 N.grid 나 N.list 컴포넌트 안의 요소를 지정 하면 이벤트 핸들러 함수의 마지막 인자에 `해당 요소가 속한 행 인덱스를 반환` 해 줍니다.
 >rowHandler 에서 행 요소마다 이벤트를 바인딩 하면 브라우저 Heap 메모리 사용량이 (이벤트 수 X 행 수) 만큼 늘어나 웹 어플리케이션 성능이 저하 됩니다. 아래 방법(내부적으로 Event Delegation 기법 적용)을 사용하면 이벤트에 의한 메모리 사용량을 크게 줄일 수 있습니다.
-```javascript
+```
 ...
 var cont = N(".page-id").cont({
     "e.id.click" : function(e, idx) {
@@ -363,7 +431,7 @@ var cont = N(".page-id").cont({
 
 > N.grid 나 N.list 컴포넌트 내부 요소의 id 와 다른 컴포넌트(N.form 등)의 id 가 중복되어 target 옵션으로 대상 요소를 직접 지정 할 때는 target 으로 지정한 selector 의 context 가 행(tbody 나 li) 요소로 자동 지정 됩니다. 때문에 이를 구분하기 위해서는 아래와 같이 대상요소에 class 속성을 추가하여 ".class#id" 와 같이 구분 해 줘야 합니다.
 
-```javascript
+```
 ...
 <div class="sampleForm">
     <input id="col01">
@@ -392,7 +460,7 @@ var cont = N(".page-id").cont({
 >Natural-JS 는 내부 데이터와 입력 된 데이터를 동기화 하기 위해서 select 요소는 change 이벤트를, radio, checkbox 요소는 click 이벤트를, 그외 text 나 textarea 등의 요소는 focusout 이벤트를 사용 합니다.
 때문에 대상 요소가 포함 된 컴포넌트의 내부 데이터를 가져올 때는 같은 이벤트로 바인딩 해 줘야 합니다. 그렇지 않으면 변경 되기 이전의 데이터가 반환 됩니다.
 
-```javascript
+```
 ...
 var cont = N(".page-id").cont({
     "e.selectInput.change" : function(e, idx) {
