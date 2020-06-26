@@ -242,9 +242,9 @@ Additional options for each component available only in Natural-TEMPLATE are as 
 ...
 ```
 
->엔터 키 이벤트를 자동으로 처리하기 위해서 반드시 "btn-search"(조회버튼) 라는 class 속성값을 갖고있는 버튼요소(a 요소) 를 view 안에 추가 해 주어야 합니다.
+>검색 폼에서 엔터 키 이벤트를 자동으로 처리하기 위해서 반드시 "btn-search"(조회버튼) 라는 class 속성값을 갖고있는 버튼요소(a 요소) 를 view 안에 추가 해 주어야 합니다.
 
-다음예제와 같이 "search-box" 옵션을 object 타입으로 상세한 옵션을 설정할 수 있습니다.
+다음예제와 같이 "search-box" 옵션을 object 타입으로 상세한 옵션을 설정할 수도 있습니다.
 
 >"usage" 옵션이 "search-box" 로 설정된 Form 은 입력요소에 Enter 키를 눌렀을때 조회가 실행 되는 이벤트가 자동으로 바인딩 됩니다. 이 Enter 키 이벤트 핸들러의 실행을 차단하고 다른 이벤트 핸들러를 등록하려면 "search-box" 속성의 하위 옵션 중 "events" 속성에 이벤트 핸들러를 array 타입으로 순서대로 정의 해 주면 됩니다.
 
