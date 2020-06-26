@@ -143,44 +143,83 @@ As for component options, in addition to the default options for each component 
 Additional options for each component available only in Natural-TEMPLATE are as follows.
 
 ###1.1. N.select - Common code data binding
+
+**To use this function, the service URL that provides common code data and the common code classification code column name must be set in the N.context.attr("template").codes property of [Config(natural.config.js)](#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s).**
+
 | Property | Option name | Type | Required | Property value | Description |
 | :--: | :--: | :--: | :--: | :--: | -- |
 | p.select.{id} | - | - | - | - | Initialize the N.select component. |
 | - | code | string | O | Common code classification code | Set the classification code value of the code list to be bound. |
 | - | filter | function | | Data filter | Filter and bind common code data. |
 | - | selected | string | | Default selection value | When initializing a component, set the value of the option to be selected by default. |
->You can also simply declare by an array type option like p.select.{id} : [ "code", filterFunction ]. If you don't need a filter, you can only declare ["code"].
 
->**To use this function, the service URL that provides common code data and the common code classification code column name must be set in the N.context.attr("template").codes property of [Config(natural.config.js)](#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s).**
+```
+...
+"p.select.gender" : {
+    "code" : "gender",
+    "selected" : "male"
+},
+...
+```
+
+>You can also simply declare by an array type option like p.select.{id} : [ "code", filterFunction ]. If you don't need a filter, you can also only declare ["code"].
+
+```
+...
+"p.select.gender" : [ "gender" ],
+...
+```
+
+####1.1.1. Example "filter" option
+```javascript
+...
+"filter" : function (data) {
+    // When the data (original data) is processed and returned, the processed data is bound.
+    return N(N.array.deduplicate(data, "age")).datasort("age"); // Sort after deduplication.
+}
+...
+```
 
 ###1.2. N.select - Binding general list data to select elements(select, radio, checkbox)
 | Property | Option name | Type | Required | Property value | Description |
 | :--: | :--: | :--: | :--: | :--: | -- |
 | p.select.{id} | - | - | - | - | Initialize the N.select component. |
-| - | comm | string | | 목록을 조회 할 N.comm(Communicator) | N.cont 오브젝트로 선언한 "c.{actionName}"(N.comm 참고) 을 입력합니다. |
-| - | data | array[object] | | 바인딩할 데이터 | comm 옵션을 지정 하지 않고 data 옵션으로 [{}, {}] 와 같이 데이터를 직접 작성 하여 바인드 할 수 있습니다. |
-| - | key | string | O | 선택 요소의 명칭에 바인드 될 데이터 컬럼 명 | 조회한 데이터에서 해당 컬럼명을 입력합니다. |
-| - | val | string | O | 선택 요소의 값에 바인드 될 데이터 컬럼 명 | 조회한 데이터에서 해당 컬럼명을 입력합니다. |
+| - | comm | string | | Communicator(N.comm) for get the list | Specify "c.{actionName}" declared in the Controller object. |
+| - | data | array[object] | | Data to bind | You can directly create and bind data such as [{}, {}] with the data option without specifying the comm option. |
+| - | key | string | O | Data property name to be bound to the name of the option element | Set the property name to be bound in the retrieved data object. |
+| - | val | string | O | Data property name to be bound to the value of the option element | Set the property name to be bound in the retrieved data object. |
 | - | filter | function | | Data filter | Filter and bind common code data. |
 | - | selected | string | | Default selection value | When initializing a component, set the value of the option to be selected by default. |
 
-####1.2.1. "filter" 옵션 예제
-```javascript
+```
 ...
-"filter" : function (data) {
-    // data : 원 데이터
-    // return : 가공 된 데이터
-    return N(N.array.deduplicate(data, "age")).datasort("age"); // 중복 제거 후 정렬
-}
+"p.select.age" : {
+    "comm" : "c.getSampleCodeList",
+    key : "age",
+    val : "age",
+    "filter" : function(data) {
+        return N(N.array.deduplicate(data, "age")).datasort("age");
+    },
+    "selected" : "22"
+},
 ...
 ```
->p.select.{id} : [ "comm", "key", "val", filterFunction ] 처럼 Array 타입으로도 간단하게 선언 할 수 있습니다. filter 가 필요 없으면 [ "comm", "key", "val" ] 만 선언 해도 됩니다.
+
+>You can also simply declare by an array type option like p.select.{id} : [ "comm", "key", "val", filterFunction ]. If you don't need a filter, you can also only declare [ "comm", "key", "val" ].
+
+```
+...
+"p.select.age" : [ "c.getSampleCodeList", "age", "age", function(data) {
+    return N(N.array.deduplicate(data, "age")).datasort("age");
+}],
+...
+```
 
 ###1.3. N.form
 | 속성 | 옵션명 | 타입 | 필수여부 | 속성값 | 설명 |
 | :--: | :--: | :--: | :--: | :--: | -- |
 | p.form.{id} | - | - | - | - | Initialize the N.form component. |
-| - | usage | string or object | O | Form 의 용도 | "search-box" 문자열 입력 시 지정한 영역을 검색박스 Form 으로 생성 해 준다. object 타입으로 좀 더 상세한 옵션을 지정할 수 있습니다.(하단 설명 참고). |
+| - | usage | string or object | O | Form 의 용도 | "search-box" 문자열 입력 시 지정한 영역을 검색박스 Form 으로 생성 해 줍니다. object 타입으로 좀 더 상세한 옵션을 지정할 수 있습니다.(하단 설명 참고). |
 >엔터 키 이벤트를 자동으로 처리하기 위해서 반드시 "btn-search"(조회버튼) 라는 class 속성값을 갖고있는 버튼요소(a 요소) 를 view 안에 추가 해 주어야 합니다.
 
  * "search-box" 옵션을 object 타입으로 지정.
