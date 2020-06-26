@@ -145,22 +145,25 @@ Additional options for each component available only in Natural-TEMPLATE are as 
 ###1.1. N.select - Common code data binding
 | Property | Option name | Type | Required | Property value | Description |
 | :--: | :--: | :--: | :--: | :--: | -- |
-| p.select.{id} | - | - | - | - | N.select 컴포넌트를 초기화 한다 |
-| - | code | string | O | 공통코드 분류코드 | 초기화 한 N.select 컴포넌트에 입력한 공통코드를 바인드 한다. |
-| - | filter | function | | 데이터 필터 | 조회한 데이터를 가공하여 바인드 한다. |
-| - | selected | string | | 기본 선택 코드 값 | 데이터를 바인드 한 후 기본으로 선택할 값. |
->p.select.{id} : [ "code", filterFunction ] 처럼 Array 타입으로도 간단하게 선언 할 수 있습니다.. filter 가 필요 없으면 [ "code" ] 만 선언 해도 됩니다.
+| p.select.{id} | - | - | - | - | Initialize the N.select component. |
+| - | code | string | O | Common code classification code | Set the classification code value of the code list to be bound. |
+| - | filter | function | | Data filter | Filter and bind common code data. |
+| - | selected | string | | Default selection value | When initializing a component, set the value of the option to be selected by default. |
+>You can also simply declare by an array type option like p.select.{id} : [ "code", filterFunction ]. If you don't need a filter, you can only declare ["code"].
+
+>**To use this function, the service URL that provides common code data and the common code classification code column name must be set in the N.context.attr("template").codes property of [Config(natural.config.js)](#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s).**
 
 ###1.2. N.select - Binding general list data to select elements(select, radio, checkbox)
 | Property | Option name | Type | Required | Property value | Description |
 | :--: | :--: | :--: | :--: | :--: | -- |
-| p.select.{id} | - | - | - | - | N.select 컴포넌트를 초기화 한다 |
-| - | comm | string | | 목록을 조회 할 N.comm(Communicator) | N.cont 오브젝트로 선언한 "c.{actionName}"(N.comm 참고) 을 입력한다. |
-| - | data | array[object] | | 바인딩할 데이터 | comm 옵션을 지정 하지 않고 data 옵션으로 [{}, {}] 와 같이 데이터를 직접 작성 하여 바인드 할 수 있다. |
-| - | key | string | O | 선택 요소의 명칭에 바인드 될 데이터 컬럼 명 | 조회 데이터의 컬럼명을 입력한다. |
-| - | val | string | O | 선택 요소의 값에 바인드 될 데이터 컬럼 명 | 조회 데이터의 컬럼명을 입력한다. |
-| - | filter | function | | 데이터 필터 | 조회한 데이터를 가공하여 바인드 한다. |
-| - | selected | string | | 기본 선택 코드 값 | 데이터를 바인드 한 후 기본으로 선택할 값. |
+| p.select.{id} | - | - | - | - | Initialize the N.select component. |
+| - | comm | string | | 목록을 조회 할 N.comm(Communicator) | N.cont 오브젝트로 선언한 "c.{actionName}"(N.comm 참고) 을 입력합니다. |
+| - | data | array[object] | | 바인딩할 데이터 | comm 옵션을 지정 하지 않고 data 옵션으로 [{}, {}] 와 같이 데이터를 직접 작성 하여 바인드 할 수 있습니다. |
+| - | key | string | O | 선택 요소의 명칭에 바인드 될 데이터 컬럼 명 | 조회한 데이터에서 해당 컬럼명을 입력합니다. |
+| - | val | string | O | 선택 요소의 값에 바인드 될 데이터 컬럼 명 | 조회한 데이터에서 해당 컬럼명을 입력합니다. |
+| - | filter | function | | Data filter | Filter and bind common code data. |
+| - | selected | string | | Default selection value | When initializing a component, set the value of the option to be selected by default. |
+
 ####1.2.1. "filter" 옵션 예제
 ```javascript
 ...
@@ -174,10 +177,10 @@ Additional options for each component available only in Natural-TEMPLATE are as 
 >p.select.{id} : [ "comm", "key", "val", filterFunction ] 처럼 Array 타입으로도 간단하게 선언 할 수 있습니다. filter 가 필요 없으면 [ "comm", "key", "val" ] 만 선언 해도 됩니다.
 
 ###1.3. N.form
-| Property | Option name | Type | Required | Property value | Description |
+| 속성 | 옵션명 | 타입 | 필수여부 | 속성값 | 설명 |
 | :--: | :--: | :--: | :--: | :--: | -- |
-| p.form.{id} | - | - | - | - | N.form 컴포넌트를 초기화 한다 |
-| - | usage | string or object | O | Form 의 용도 | "search-box" 문자열 입력 시 지정한 영역을 검색박스 Form 으로 생성 해 준다. object 타입으로 좀 더 상세한 옵션을 지정할 수 있다(하단 설명 참고). |
+| p.form.{id} | - | - | - | - | Initialize the N.form component. |
+| - | usage | string or object | O | Form 의 용도 | "search-box" 문자열 입력 시 지정한 영역을 검색박스 Form 으로 생성 해 준다. object 타입으로 좀 더 상세한 옵션을 지정할 수 있습니다.(하단 설명 참고). |
 >엔터 키 이벤트를 자동으로 처리하기 위해서 반드시 "btn-search"(조회버튼) 라는 class 속성값을 갖고있는 버튼요소(a 요소) 를 view 안에 추가 해 주어야 합니다.
 
  * "search-box" 옵션을 object 타입으로 지정.
@@ -207,9 +210,9 @@ Additional options for each component available only in Natural-TEMPLATE are as 
 ```
 
 ###1.4. All other components
-| Property | Option name | Type | Required | Property value | Description |
+| 속성 | 옵션 | 타입 | 필수여부 | 속성값 | 설명 |
 | :--: | :--: | :--: | :--: | :--: | -- |
-| p.{component}.{id} | - | - | - | - | 지정한 컴포넌트를 초기화 한다. N.alert 을 제외한 모든 컴포넌트를 이와 같은 방법으로 초기화 가능 하다. |
+| p.{component}.{id} | - | - | - | - | N.{component} 컴포넌트를 초기화 합니다. N.alert 을 제외한 모든 컴포넌트를 이와 같은 방법으로 초기화 가능합니다. |
 
 
 ##2. Starts with "c." - Communicator(N.comm) declaration

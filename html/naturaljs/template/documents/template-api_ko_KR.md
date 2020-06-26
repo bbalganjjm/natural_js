@@ -145,22 +145,25 @@ Natural-TEMPLATE에서만 사용 가능한 컴포넌트 별 추가 옵션들은 
 ###1.1. N.select - 공통코드 데이터 바인딩
 | 속성 | 옵션명 | 타입 | 필수여부 | 속성값 | 설명 |
 | :--: | :--: | :--: | :--: | :--: | -- |
-| p.select.{id} | - | - | - | - | N.select 컴포넌트를 초기화 한다 |
-| - | code | string | O | 공통코드 분류코드 | 초기화 한 N.select 컴포넌트에 입력한 공통코드를 바인드 한다. |
-| - | filter | function | | 데이터 필터 | 조회한 데이터를 가공하여 바인드 한다. |
-| - | selected | string | | 기본 선택 코드 값 | 데이터를 바인드 한 후 기본으로 선택할 값. |
->p.select.{id} : [ "code", filterFunction ] 처럼 Array 타입으로도 간단하게 선언 할 수 있습니다.. filter 가 필요 없으면 [ "code" ] 만 선언 해도 됩니다.
+| p.select.{id} | - | - | - | - | N.select 컴포넌트를 초기화 합니다. |
+| - | code | string | O | 공통코드 분류코드 | 바인딩 할 코드목록의 분류 코드값을 설정 합니다. |
+| - | filter | function | | 데이터 필터 | 공통코드 데이터를 필터링하여 바인딩 합니다. |
+| - | selected | string | | 기본 선택값 | 컴포넌트 초기화 시 기본으로 선택 될 선택지의 값을 설정합니다. |
+>p.select.{id} : [ "code", filterFunction ] 처럼 array 타입으로도 간단하게 선언 할 수 있습니다. filter 가 필요 없으면 [ "code" ] 만 선언 해도 됩니다.
+
+>**이 기능을 사용하려면 공통코드 데이터를 제공하는 서비스 URL 과  공통코드 분류코드 컬럼명을 [Config(natural.config.js)](#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s)의  N.context.attr("template").codes 속성에 설정 해 주어야 합니다.**
+
 
 ###1.2. N.select - 일반 목록데이터를 선택요소(select, radio, checkbox)에 바인딩
 | 속성 | 옵션명 | 타입 | 필수여부 | 속성값 | 설명 |
 | :--: | :--: | :--: | :--: | :--: | -- |
-| p.select.{id} | - | - | - | - | N.select 컴포넌트를 초기화 한다 |
-| - | comm | string | | 목록을 조회 할 N.comm(Communicator) | N.cont 오브젝트로 선언한 "c.{actionName}"(N.comm 참고) 을 입력한다. |
-| - | data | array[object] | | 바인딩할 데이터 | comm 옵션을 지정 하지 않고 data 옵션으로 [{}, {}] 와 같이 데이터를 직접 작성 하여 바인드 할 수 있다. |
-| - | key | string | O | 선택 요소의 명칭에 바인드 될 데이터 컬럼 명 | 조회 데이터의 컬럼명을 입력한다. |
-| - | val | string | O | 선택 요소의 값에 바인드 될 데이터 컬럼 명 | 조회 데이터의 컬럼명을 입력한다. |
-| - | filter | function | | 데이터 필터 | 조회한 데이터를 가공하여 바인드 한다. |
-| - | selected | string | | 기본 선택 코드 값 | 데이터를 바인드 한 후 기본으로 선택할 값. |
+| p.select.{id} | - | - | - | - | N.select 컴포넌트를 초기화 합니다. |
+| - | comm | string | | 목록을 조회 할 N.comm(Communicator) | N.cont 오브젝트로 선언한 "c.{actionName}"(N.comm 참고) 을 입력합니다. |
+| - | data | array[object] | | 바인딩할 데이터 | comm 옵션을 지정 하지 않고 data 옵션으로 [{}, {}] 와 같이 데이터를 직접 작성 하여 바인드 할 수 있습니다. |
+| - | key | string | O | 선택 요소의 명칭에 바인드 될 데이터 컬럼 명 | 조회한 데이터에서 해당 컬럼명을 입력합니다. |
+| - | val | string | O | 선택 요소의 값에 바인드 될 데이터 컬럼 명 | 조회한 데이터에서 해당 컬럼명을 입력합니다. |
+| - | filter | function | | 데이터 필터 | 공통코드 데이터를 필터링하여 바인딩 합니다. |
+| - | selected | string | | 기본 선택값 | 컴포넌트 초기화 시 기본으로 선택 될 선택지의 값을 설정합니다. |
 ####1.2.1. "filter" 옵션 예제
 ```javascript
 ...
@@ -176,8 +179,8 @@ Natural-TEMPLATE에서만 사용 가능한 컴포넌트 별 추가 옵션들은 
 ###1.3. N.form
 | 속성 | 옵션명 | 타입 | 필수여부 | 속성값 | 설명 |
 | :--: | :--: | :--: | :--: | :--: | -- |
-| p.form.{id} | - | - | - | - | N.form 컴포넌트를 초기화 한다 |
-| - | usage | string or object | O | Form 의 용도 | "search-box" 문자열 입력 시 지정한 영역을 검색박스 Form 으로 생성 해 준다. object 타입으로 좀 더 상세한 옵션을 지정할 수 있다(하단 설명 참고). |
+| p.form.{id} | - | - | - | - | N.form 컴포넌트를 초기화 합니다. |
+| - | usage | string or object | O | Form 의 용도 | "search-box" 문자열 입력 시 지정한 영역을 검색박스 Form 으로 생성 해 준다. object 타입으로 좀 더 상세한 옵션을 지정할 수 있습니다.(하단 설명 참고). |
 >엔터 키 이벤트를 자동으로 처리하기 위해서 반드시 "btn-search"(조회버튼) 라는 class 속성값을 갖고있는 버튼요소(a 요소) 를 view 안에 추가 해 주어야 합니다.
 
  * "search-box" 옵션을 object 타입으로 지정.
@@ -209,7 +212,7 @@ Natural-TEMPLATE에서만 사용 가능한 컴포넌트 별 추가 옵션들은 
 ###1.4. 다른 모든 컴포넌트
 | 속성 | 옵션 | 타입 | 필수여부 | 속성값 | 설명 |
 | :--: | :--: | :--: | :--: | :--: | -- |
-| p.{component}.{id} | - | - | - | - | 지정한 컴포넌트를 초기화 한다. N.alert 을 제외한 모든 컴포넌트를 이와 같은 방법으로 초기화 가능 하다. |
+| p.{component}.{id} | - | - | - | - | N.{component} 컴포넌트를 초기화 합니다. N.alert 을 제외한 모든 컴포넌트를 이와 같은 방법으로 초기화 가능합니다. |
 
 
 ##2. "c." 으로 시작 - Communicator(N.comm) 선언
