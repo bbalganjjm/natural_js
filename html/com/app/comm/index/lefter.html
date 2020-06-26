@@ -256,19 +256,19 @@
                 </ul>
             </li>
             <li>
-                <a href="#"><span>Natural-TEMPLATE</span> <sup>new</sup></a>
+                <a href="#"><span>Natural-TEMPLATE</span></a> <sup>new</sup>
                 <ul>
                     <li class="leaf-node">
                         <a href="html/naturaljs/template/documents/template-api.html" data-pageid="template-api">
-                            <span lang="ko_KR">API 문서 <sup>new</sup></span>
-                            <span lang="en_US">API Document <sup>new</sup></span>
-                        </a>
+                            <span lang="ko_KR">API 문서</span>
+                            <span lang="en_US">API Document</span>
+                        </a> <sup>new</sup>
                     </li>
                     <li>
                         <a href="#">
-                            <span lang="ko_KR">Natural-TEMPLATE 예제 <sup>new</sup></span>
-                            <span lang="en_US">Natural-TEMPLATE Examples <sup>new</sup></span>
-                        </a>
+                            <span lang="ko_KR">Natural-TEMPLATE 예제</span>
+                            <span lang="en_US">Natural-TEMPLATE Examples</span>
+                        </a> <sup>new</sup>
                         <ul class="folding">
                             <li class="leaf-node"><a href="html/naturaljs/template/samples/type0101.html" data-pageid="type0101">
 	                            <span lang="ko_KR">조회폼+그리드</span>
@@ -328,7 +328,7 @@
                 }
 
                 if(selfEle.closest(".leaf-node").length === 0) {
-                    selfEle.next("ul").toggleClass("folding");
+                    selfEle.siblings("ul:last").toggleClass("folding");
                 }
 
                 selfEle = undefined;
