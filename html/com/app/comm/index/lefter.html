@@ -88,6 +88,14 @@
 .index-lefter .left-menu ul > li.leaf-node > a > span {
     color: rgba(255, 255, 255, 0.8);
 }
+
+.index-lefter .left-menu .folding {
+    display: none;
+}
+
+.index-lefter .left-menu sup {
+    color: yellow;
+}
 </style>
 
 <article class="index-lefter">
@@ -126,7 +134,7 @@
                     </li>
                     <li>
                         <a href="#"><span>Natural-CORE</span></a>
-                        <ul>
+                        <ul class="folding">
                             <li class="leaf-node"><a href="html/naturaljs/refr/refr0101.html" data-pageid="refr0101"><span>N() &amp; N</span></a></li>
                             <li class="leaf-node"><a href="html/naturaljs/refr/refr0102.html" data-pageid="refr0102"><span>Config(natural.config.js)</span></a></li>
                         </ul>
@@ -144,7 +152,7 @@
                     </li>
                     <li>
                         <a href="#"><span>Natural-DATA</span></a>
-                        <ul>
+                        <ul class="folding">
                             <li class="leaf-node"><a href="html/naturaljs/refr/refr0301.html" data-pageid="refr0301"><span>Formatter</span></a></li>
                             <li class="leaf-node"><a href="html/naturaljs/refr/refr0302.html" data-pageid="refr0302"><span>Validator</span></a></li>
                             <li class="leaf-node"><a href="html/naturaljs/refr/refr0303.html" data-pageid="refr0303"><span>Natural-DATA Library</span></a></li>
@@ -152,7 +160,7 @@
                     </li>
                     <li>
                         <a href="#"><span>Natural-UI</span></a>
-                        <ul>
+                        <ul class="folding">
                             <li class="leaf-node"><a href="html/naturaljs/refr/refr0401.html" data-pageid="refr0401"><span>Alert</span></a></li>
                             <li class="leaf-node"><a href="html/naturaljs/refr/refr0402.html" data-pageid="refr0402"><span>Button</span></a></li>
                             <li class="leaf-node"><a href="html/naturaljs/refr/refr0403.html" data-pageid="refr0403"><span>Datepicker</span></a></li>
@@ -168,7 +176,7 @@
                     </li>
                     <li>
                         <a href="#"><span>Natural-UI.Shell</span></a>
-                        <ul>
+                        <ul class="folding">
                             <li class="leaf-node"><a href="html/naturaljs/refr/refr0501.html" data-pageid="refr0501"><span>Notify</span></a></li>
                             <li class="leaf-node"><a href="html/naturaljs/refr/refr0502.html" data-pageid="refr0502"><span>Documents</span></a></li>
                         </ul>
@@ -204,7 +212,7 @@
                     <span lang="ko_KR">예제</span>
                     <span lang="en_US">Examples</span>
                 </a>
-                <ul>
+                <ul class="folding">
                     <li class="leaf-node"><a href="html/naturaljs/exap/exap0100.html" data-pageid="exap0100">
                         <span lang="ko_KR">데이터 목록 조회</span>
                         <span lang="en_US">Data list view</span>
@@ -248,20 +256,20 @@
                 </ul>
             </li>
             <li>
-                <a href="#"><span>Natural-TEMPLATE</span></a>
+                <a href="#"><span>Natural-TEMPLATE</span> <sup>new</sup></a>
                 <ul>
                     <li class="leaf-node">
                         <a href="html/naturaljs/template/documents/template-api.html" data-pageid="template-api">
-                            <span lang="ko_KR">API 문서</span>
-                            <span lang="en_US">API Document</span>
+                            <span lang="ko_KR">API 문서 <sup>new</sup></span>
+                            <span lang="en_US">API Document <sup>new</sup></span>
                         </a>
                     </li>
                     <li>
                         <a href="#">
-                            <span lang="ko_KR">Natural-TEMPLATE 예제</span>
-                            <span lang="en_US">Natural-TEMPLATE Examples</span>
+                            <span lang="ko_KR">Natural-TEMPLATE 예제 <sup>new</sup></span>
+                            <span lang="en_US">Natural-TEMPLATE Examples <sup>new</sup></span>
                         </a>
-                        <ul>
+                        <ul class="folding">
                             <li class="leaf-node"><a href="html/naturaljs/template/samples/type0101.html" data-pageid="type0101">
 	                            <span lang="ko_KR">조회폼+그리드</span>
 	                            <span lang="en_US">Search form + Grid</span>
@@ -317,6 +325,10 @@
                      if($(window).width() <= 1001) { // 768 + 250 - 17px(?)
                         N(".lefter-toggle-button", view).trigger("click.lefter");
                     }
+                }
+
+                if(selfEle.closest(".leaf-node").length === 0) {
+                    selfEle.next("ul").toggleClass("folding");
                 }
 
                 selfEle = undefined;

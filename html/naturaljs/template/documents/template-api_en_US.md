@@ -425,12 +425,14 @@ var cont = N(".page-id").cont({
 ```
 
 If an element in the N.grid or N.list component is specified, the `index of the row containing the element` in the last argument of the event handler function is `returned`.
->rowHandler나 rowHandlerBeforeBind 에서 행 요소마다 이벤트를 바인딩 하면 브라우저 Heap 메모리 사용량이 (이벤트 수 X 행 수) 만큼 늘어나 웹 어플리케이션 성능이 저하 됩니다. 아래 방법(내부적으로 Event Delegation 으로 처리됨)을 사용하면 이벤트에 의한 메모리 사용량을 크게 줄일 수 있습니다.
+
+>If you bind events for each row in rowHandler or rowHandlerBeforeBind, the browser heap memory usage increases by the number of events X rows, which degrades web application performance. Using the method below(Event Delegation applies) can significantly reduce the memory usage by events.
+
 ```
 ...
 var cont = N(".page-id").cont({
     "e.id.click" : function(e, idx) {
-        e.preventDefault(); // e.preventDefault() 는 버튼 이벤트에는 반드시 추가 해 주세요.
+        e.preventDefault();
 
         N.log(cont["p.grid.id"].data()[idx]); // 클릭한 버튼이 속한 행 데이터를 브라우저 콘솔에 출력.
     }
@@ -438,54 +440,28 @@ var cont = N(".page-id").cont({
 ...
 ```
 
-> N.grid 나 N.list 컴포넌트 내부 요소의 id 와 다른 컴포넌트(N.form 등)의 id 가 중복되어 target 옵션으로 대상 요소를 직접 지정 할 때는 target 으로 지정한 selector 의 context 가 행(tbody 나 li) 요소로 자동 지정 됩니다. 때문에 이를 구분하기 위해서는 아래와 같이 대상요소에 class 속성을 추가하여 ".class#id" 와 같이 구분 해 줘야 합니다.
+> When an element is specified with the target property as shown below, the context of the selector is set to the row element (tbody) of N.grid, not the view element.
 
 ```
 ...
-<div class="sampleForm">
-    <input id="col01">
-</div>
-<table class="sampleGrid">
-    <tbody>
-        <tr>
-            <td>
-                <input class="col01" id="col01">
-            </td>
-        </tr>
-    </tbody>
-</table>
-...
-var cont = N(".page-id").cont({
-    "e.col01.click" : {
-        target : ".col01#col01", // "#grid #col01" 로 지정하면 찾지 못함. 최상위 요소는 N.grid 의 <tr> 이라고 생각해야 함.
-        handler : function(e, idx) {
-            // TODO
-        }
+"e.col01.click" : {
+    target : ".col01Ele", // The context of this selector is set to the row element (tbody) of N.grid, not the view element.
+    handler : function(e, idx) {
+        // TODO
     }
-});
+}
 ...
 ```
 
->Natural-JS 는 내부 데이터와 입력 된 데이터를 동기화 하기 위해서 select 요소는 change 이벤트를, radio, checkbox 요소는 click 이벤트를, 그외 text 나 textarea 등의 요소는 focusout 이벤트를 사용 합니다.
-때문에 대상 요소가 포함 된 컴포넌트의 내부 데이터를 가져올 때는 같은 이벤트로 바인딩 해 줘야 합니다. 그렇지 않으면 변경 되기 이전의 데이터가 반환 됩니다.
+>Natural-JS uses change event for select element, click event for radio, checkbox element, and focusout event for other text input elements (text, textarea, number, etc.) to synchronize internal data and input data. When getting the internal data of a component, it must be bound with the event name as above. Otherwise, data before the change is returned.
 
 ```
 ...
 var cont = N(".page-id").cont({
-    "e.selectInput.change" : function(e, idx) {
+    "e.textInput.focusout" : function(e, idx) { // When binding with the change event, the data before the change is returned.
         e.preventDefault();
 
-        N.log(cont["p.grid.id"].val(idx, "selectInput")); // focusin 이벤트로 바인딩 하면 변경 되기 전 데이터가 반환 됩니다.
-    },
-    "e.radioCheckboxInput.click" : function(e, idx) {
-        e.preventDefault();
-
-        N.log(cont["p.grid.id"].val(idx, "radioCheckboxInput")); // focusin 이벤트로 바인딩 하면 변경 되기 전 데이터가 반환 됩니다.
-    },
-    "e.textInput.focusout" : function(e, idx) {
-        e.preventDefault();
-
-        N.log(cont["p.grid.id"].val(idx, "textInput")); // change 이벤트로 바인딩 하면 변경 되기 전 데이터가 반환 됩니다.
+        N.log(cont["p.grid.id"].val(idx, "textInput"));
     }
 });
 ...
