@@ -340,7 +340,7 @@ var cont = N(".page-id").cont({
         return N(".box").comm("sample/PAGEID.html");
     },
     "c.getSampleList" : {
-        // cont["p.form.search"] 의 data 를 파라미터로 "sample/getSampleList.json" URL 호출
+        // cont["p.form.search"] 의 data 를 파라미터로 "sample/getSampleList.json" 서비스 호출
         return cont["p.form.search"].data(false).comm("sample/getSampleList.json");
     },
     init : function(view, request) {
@@ -360,7 +360,8 @@ var cont = N(".page-id").cont({
 >N.comm의 파라미터를 위 예제와 같이 데이터관련 컴포넌트(Grid, List, Form 등)의 data() 메서드에 연결(정의) 해 놓으면 N.comm의 submit 메서드가 호출 되는 시점의 컴포넌트 데이터가 서버의 요청 파라미터로 전송 됩니다.
 
 ##3. "e." 으로 시작 - 이벤트 바인딩
-페이지(View) 안의 모든 요소들에 이벤트를 간단하게 정의 할 수 있습니다.
+페이지의 view 요소 안에 있는 요소들에 이벤트 바인딩을 선언 할 수 있습니다.
+
 >a, button, input[type=button] 요소에 이벤트를 정의 하면 N.button 컴포넌트가 자동으로 초기화 되어 버튼으로 생성 됩니다.
 
 이벤트의 초기화 속성명은 다음과 같이 조합하여 사용할 수 있습니다.
@@ -370,6 +371,7 @@ var cont = N(".page-id").cont({
 ```
 
 또는
+
 ```
 "e.{이벤트구분자}.{이벤트명}" : {
     target : "{요소 Selector}",
@@ -377,8 +379,9 @@ var cont = N(".page-id").cont({
 }
 ```
 
+요소의 id 가 아닌 다른 속성으로 선택할 때는 target 속성에 jQuery selector 문자열을 지정 하면 됩니다. 이때 셀렉터의 context 에 view 요소를 지정하지 않아도 자동으로 지정 됩니다.
 
-초기화가 완료 되면 `e.{요소id}.{이벤트명}` 속성값으로 지정한 이벤트 핸들러 함수는 id로 지정한 요소(jQuery Object)로 바뀝니다.
+이벤트 바인딩이 완료 되면 `e.{요소id}.{이벤트명}` 속성값으로 지정한 이벤트 핸들러 함수는 id로 지정한 요소(jQuery object)로 바뀝니다.
 
 ```
 ...
@@ -404,6 +407,7 @@ var cont = N(".page-id").cont({
 ```
 
 다음과 같이 컴포넌트에서 제공하는 이벤트도 적용 가능 합니다.
+
 ```
 ...
 var cont = N(".page-id").cont({
@@ -416,7 +420,7 @@ var cont = N(".page-id").cont({
 ...
 ```
 
-N.grid 나 N.list 컴포넌트 안의 요소를 지정 하면 이벤트 핸들러 함수의 마지막 인자에 `해당 요소가 속한 행 인덱스를 반환` 해 줍니다.
+N.grid 나 N.list 컴포넌트 안의 요소를 지정 하면 이벤트 핸들러 함수의 마지막 인자에 `해당 요소가 포함된 행의 인덱스를 반환` 해 줍니다.
 >rowHandler 에서 행 요소마다 이벤트를 바인딩 하면 브라우저 Heap 메모리 사용량이 (이벤트 수 X 행 수) 만큼 늘어나 웹 어플리케이션 성능이 저하 됩니다. 아래 방법(내부적으로 Event Delegation 기법 적용)을 사용하면 이벤트에 의한 메모리 사용량을 크게 줄일 수 있습니다.
 ```
 ...
