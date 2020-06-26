@@ -632,8 +632,8 @@
             /**
              * Common code request information
              *
-             * @codeUrl Common Code request URL
-             * @codeKey Group code property name
+             * @codeUrl Common code request URL
+             * @codeKey Property name of common code classification code
              */
             codes : {
                 codeUrl : null,
