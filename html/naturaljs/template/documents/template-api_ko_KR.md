@@ -276,7 +276,7 @@ Natural-TEMPLATE에서만 사용 가능한 컴포넌트 별 추가 옵션들은 
 ###1.4. 다른 모든 컴포넌트
 | 속성 | 옵션 | 타입 | 필수여부 | 속성값 | 설명 |
 | :--: | :--: | :--: | :--: | :--: | -- |
-| p.{component}.{id} | - | - | - | - | N.{component} 컴포넌트를 초기화 합니다. N.alert 을 제외한 모든 컴포넌트를 이와 같은 방법으로 초기화 가능합니다. |
+| p.{component}.{id} | - | - | - | - | N.{component} 컴포넌트를 초기화 합니다. N.alert 을 제외한 모든 컴포넌트를 이와 같은 방법으로 초기화 할 수 있습니다. |
 
  * Tab(N.tab) 예제
 
@@ -323,31 +323,31 @@ Natural-TEMPLATE에서만 사용 가능한 컴포넌트 별 추가 옵션들은 
 ```
 
 ##2. "c." 으로 시작 - Communicator(N.comm) 선언
-서버와 통신하는 모든 Communicator(N.comm) 들을 Controller object 의 멤버변수로 정의 할 수 있습니다. Communicator를 미리 선언 해 놓으면 데이터의 흐름을 한눈에 확인할 수 있고 Communicator 들에 대한 AOP 설정이 가능 합니다.
-N.comm 의 초기화 속성명은 다음과 같이 조합하여 사용할 수 있습니다.
+서버와 통신하는 모든[Communicators(N.comm)](#cmVmcjAyMDMlMjRDb21tdW5pY2F0b3IkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDIwMy5odG1s)를 Controller object 의 멤버변수로 정의 할 수 있습니다. Communicator를 미리 선언 해 놓으면 데이터의 흐름을 한눈에 확인할 수 있고 선언된 Communicator들에 AOP를 적용 할 수 있습니다.
+N.comm의 초기화 속성명은 다음과 같이 조합하여 사용할 수 있습니다.
 
 ```
 "c.{액션명}" : function() { return N.comm; }
 ```
 
->가능 하다면 액션명은 호출하는 URL 의 서비스명과 맞춰 주고 불가능 하면 반드시 목록 조회는 get{ActionName}List, 한건 조회는 get{ActionName}, 입력은 insert{ActionName}, 수정은 update{ActionName}, 삭제는 delete{ActionName}, 입력/수정/삭제를 한번에 처리하는 Communicator는 save{ActionName}로 정의 바랍니다.
+>가능 하다면 액션명은 호출하는 URL 의 서비스명과 맞춰 주고 불가능 하면 반드시 목록 조회는 get + {ActionName} + List, 한건 조회는 get + {ActionName}, 입력은 insert + {ActionName}, 수정은 update + {ActionName}, 삭제는 delete + {ActionName}, 입력/수정/삭제를 한번에 처리하는 Communicator는 save + {ActionName}로 정의 바랍니다.
 
 ```
 ...
 var cont = N(".page-id").cont({
     "c.PAGEID" : {
-        // "sample/PAGEID.html" 페이지를 .box 요소안에 불러오는 커뮤니케이터 정의
+        // "sample/PAGEID.html" 페이지를 .box 요소안에 불러오는 Communicator 정의
         return N(".box").comm("sample/PAGEID.html");
     },
     "c.getSampleList" : {
-        // cont["p.form.search"] 의 data 를 파라미터로 "sample/getSampleList.json" 서비스 호출
+        // cont["p.form.search"] 의 data 를 파라미터로 사용하여 "sample/getSampleList.json" 서비스 호출
         return cont["p.form.search"].data(false).comm("sample/getSampleList.json");
     },
     init : function(view, request) {
-        // 커뮤니케이터로 다른 페이지 삽입
+        // Communicator를 사용하여 다른 페이지 삽입하기
         cont["c.PAGEID"]().submit();
 
-        // 커뮤니케이터로 데이터 불러오기
+        // Communicator를 사용하여 데이터 불러오기
         cont["c.getSampleList"]().submit(function(data) {
            cont["p.grid.master"].bind(data);
         });
@@ -355,9 +355,9 @@ var cont = N(".page-id").cont({
 });
 ```
 
->N.comm의 선언은 직접 오브젝트나 값을 대입하는것이 아닌 함수를 선언하는 방식이므로 `cont["c.{액션명}"]().submit` 와 같이 선언된 함수를 실행해야 N.comm 인스턴스가 반환 됩니다.
+N.comm의 선언은 오브젝트나 값을 직접 대입하는것이 아닌 함수를 선언하는 방식입니다. `cont["c.{액션명}"]().submit` 와 같이 선언된 함수를 실행해야 N.comm 인스턴스가 반환 됩니다.
 
->N.comm의 파라미터를 위 예제와 같이 데이터관련 컴포넌트(Grid, List, Form 등)의 data() 메서드에 연결(정의) 해 놓으면 N.comm의 submit 메서드가 호출 되는 시점의 컴포넌트 데이터가 서버의 요청 파라미터로 전송 됩니다.
+위 예제와 같이 N.comm의 파라미터를 데이터관련 컴포넌트(Grid, List, Form 등)의 data() 메서드와 연결해 놓으면 N.comm의 submit 메서드가 호출 되는 시점의 컴포넌트 데이터가 요청 파라미터로 서버에 전송 됩니다.
 
 ##3. "e." 으로 시작 - 이벤트 바인딩
 페이지의 view 요소 안에 있는 요소들에 이벤트 바인딩을 선언 할 수 있습니다.
@@ -367,40 +367,43 @@ var cont = N(".page-id").cont({
 이벤트의 초기화 속성명은 다음과 같이 조합하여 사용할 수 있습니다.
 
 ```
-"e.{요소id}.{이벤트명}" : 이벤트 핸들러
+"e.{요소id}.{이벤트명}" : function(e, [idx]) {
+    // 이벤트 핸들러
+}
 ```
 
 또는
 
 ```
 "e.{이벤트구분자}.{이벤트명}" : {
-    target : "{요소 Selector}",
-    handler : 이벤트 핸들러
+    target : "{요소 selector}",
+    handler : function(e, [idx]) {
+        // Event handler
+    }
 }
 ```
+id 이외의 속성을 가진 요소를 선택할 때는 target 속성에 jQuery selector 문자열을 지정 하면 됩니다. 이때 셀렉터의 context를 view 요소로 지정하지 않아도 view 요소가 context 인자로 자동으로 지정 됩니다.
 
-요소의 id 가 아닌 다른 속성으로 선택할 때는 target 속성에 jQuery selector 문자열을 지정 하면 됩니다. 이때 셀렉터의 context 에 view 요소를 지정하지 않아도 자동으로 지정 됩니다.
-
-이벤트 바인딩이 완료 되면 `e.{요소id}.{이벤트명}` 속성값으로 지정한 이벤트 핸들러 함수는 id로 지정한 요소(jQuery object)로 바뀝니다.
+이벤트 바인딩이 완료 되면 `e.{요소id}.{이벤트명}` 속성값으로 정의한 이벤트 핸들러 함수는 대상 요소(jQuery object)로 대체됩니다.
 
 ```
 ...
 var cont = N(".page-id").cont({
-    "e.id.click" : function(e) { // 선언한 이벤트 핸들러는 초기화 후(init 함수가 실행 되기 바로전) id 로 지정한 요소(jQuery Object)로 바뀝니다.
-        e.preventDefault(); // e.preventDefault() 는 버튼 이벤트에는 반드시 추가 해 주세요.
+    "e.id.click" : function(e) { // 이벤트 바인딩이 완료 되면 이 이벤트 핸들러 함수는 대상 요소(jQuery object)로 대체됩니다.
+        e.preventDefault();
 
         cont["p.popup.dept"].open();
     },
     "e.id.click" : {
         target : ".div #id",
-        handler : function(e) { // 선언한 이벤트 핸들러는 초기화 후(init 함수가 실행 되기 바로전) target 으로 지정한 요소(jQuery Object)로 바뀝니다.
-            e.preventDefault(); // e.preventDefault() 는 버튼 이벤트에는 반드시 추가 해 주세요.
+        handler : function(e) { // 이벤트 바인딩이 완료 되면 이 이벤트 핸들러 함수는 대상 요소(jQuery object)로 대체됩니다.
+            e.preventDefault();
 
             cont["p.popup.company"].open();
         }
     },
     init : function(view, request) {
-        cont["e.id.click"].click(); // 페이지 초기화가 완료 되면 이벤트 실행.
+        cont["e.id.click"].click(); // DOM 로딩이 완료되면 이 이벤트를 실행 합니다.
     }
 });
 ...

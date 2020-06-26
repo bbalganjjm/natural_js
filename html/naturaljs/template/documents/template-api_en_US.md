@@ -219,7 +219,7 @@ Additional options for each component available only in Natural-TEMPLATE are as 
 | Property | Option name | Type | Required | Property value | Description |
 | :--: | :--: | :--: | :--: | :--: | -- |
 | p.form.{id} | - | - | - | - | Initialize the N.form component. |
-| - | usage | string or object | O | Usage of Form | If you input the string "search-box", the specified area is created as a search box form. You can specify more detailed options with the object type(See description below). |
+| - | usage | string or object | O | Usage of Form | If you input the string "search-box", the specified area is created as a search box form.<br>You can specify more detailed options with the object type(See description below). |
 
  * General form example
 ```
@@ -276,7 +276,7 @@ To set more detailed options, you can specify the "search-box" option as object 
 ###1.4. All other components
 | Property | Option name | Type | Required | Property value | Description |
 | :--: | :--: | :--: | :--: | :--: | -- |
-| p.{component}.{id} | - | - | - | - | N.{component} 컴포넌트를 초기화 합니다. N.alert 을 제외한 모든 컴포넌트를 이와 같은 방법으로 초기화 가능합니다. |
+| p.{component}.{id} | - | - | - | - | Initialize the N.{component}. All components except N.alert can be initialized in this way. |
 
  * Tab(N.tab) example
 
@@ -323,31 +323,31 @@ To set more detailed options, you can specify the "search-box" option as object 
 ```
 
 ##2. Starts with "c." - Communicator(N.comm) declaration
-서버와 통신하는 모든 Communicator(N.comm) 들을 Controller object 의 멤버변수로 정의 할 수 있습니다. Communicator를 미리 선언 해 놓으면 데이터의 흐름을 한눈에 확인할 수 있고 Communicator 들에 대한 AOP 설정이 가능 합니다.
-N.comm 의 초기화 속성명은 다음과 같이 조합하여 사용할 수 있습니다.
+All [Communicators(N.comm)](#cmVmcjAyMDMlMjRDb21tdW5pY2F0b3IkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDIwMy5odG1s) that communicate with the server can be defined as member variables of the Controller object. If you pre-declare Communicator, you can check the flow of data at a glance and apply AOP to the declared Communicators.
+The initial property name of N.comm can be used in combination as follows.
 
 ```
 "c.{action name}" : function() { return N.comm; }
 ```
 
->가능 하다면 액션명은 호출하는 URL 의 서비스명과 맞춰 주고 불가능 하면 반드시 목록 조회는 get{ActionName}List, 한건 조회는 get{ActionName}, 입력은 insert{ActionName}, 수정은 update{ActionName}, 삭제는 delete{ActionName}, 입력/수정/삭제를 한번에 처리하는 Communicator는 save{ActionName}로 정의 바랍니다.
+>If possible, match the action name with the service name of the calling URL, and if not possible, define the property name to get + {ActionName} + List for list search, get + {ActionName} for single item search, insert + {ActionName} for input, update + {ActionName} for modification, delete + {ActionName} for deletion, and save + {ActionName} for handles input/modification/deletion at once with Communicator.
 
 ```
 ...
 var cont = N(".page-id").cont({
     "c.PAGEID" : {
-        // "sample/PAGEID.html" 페이지를 .box 요소안에 불러오는 커뮤니케이터 정의
+        // "sample/PAGEID.html" Define a Communicator that loads the page into the .box element
         return N(".box").comm("sample/PAGEID.html");
     },
     "c.getSampleList" : {
-        // cont["p.form.search"] 의 data 를 파라미터로 "sample/getSampleList.json" 서비스 호출
+        // Calling "sample/getSampleList.json" service with data of cont["p.form.search"] as a parameter.
         return cont["p.form.search"].data(false).comm("sample/getSampleList.json");
     },
     init : function(view, request) {
-        // 커뮤니케이터로 다른 페이지 삽입
+        // Inserting another page with Communicator
         cont["c.PAGEID"]().submit();
 
-        // 커뮤니케이터로 데이터 불러오기
+        // Getting data with Communicator
         cont["c.getSampleList"]().submit(function(data) {
            cont["p.grid.master"].bind(data);
         });
@@ -355,73 +355,77 @@ var cont = N(".page-id").cont({
 });
 ```
 
->N.comm의 선언은 직접 오브젝트나 값을 대입하는것이 아닌 함수를 선언하는 방식이므로 `cont["c.{액션명}"]().submit` 와 같이 선언된 함수를 실행해야 N.comm 인스턴스가 반환 됩니다.
+The declaration of N.comm is not a direct assignment of an object or value, but a way of function declaration. A function declared like `cont["c.{action name}"]().submit` must be executed to return an N.comm instance.
 
->N.comm의 파라미터를 위 예제와 같이 데이터관련 컴포넌트(Grid, List, Form 등)의 data() 메서드에 연결(정의) 해 놓으면 N.comm의 submit 메서드가 호출 되는 시점의 컴포넌트 데이터가 서버의 요청 파라미터로 전송 됩니다.
+As in the example above, if N.comm's parameters are connected to the data() method of data-related components(Grid, List, Form, etc.), component data at the time the submit method of N.comm is called is sent to the server as a request parameter.
 
 ##3. Starts with "e." - Event binding
-페이지의 view 요소 안에 있는 요소들에 이벤트 바인딩을 선언 할 수 있습니다.
+Event bindings can be declared for elements within the view element of the page.
 
->a, button, input[type=button] 요소에 이벤트를 정의 하면 N.button 컴포넌트가 자동으로 초기화 되어 버튼으로 생성 됩니다.
+>When an event is defined in a, button, and input[type=button] elements, the N.button component is automatically initialized and created as a button.
 
-이벤트의 초기화 속성명은 다음과 같이 조합하여 사용할 수 있습니다.
-
-```
-"e.{요소id}.{이벤트명}" : 이벤트 핸들러
-```
-
-또는
+The event initialization property name can be used in combination as follows.
 
 ```
-"e.{이벤트구분자}.{이벤트명}" : {
-    target : "{요소 Selector}",
-    handler : 이벤트 핸들러
+"e.{element id}.{event name}" : function(e, [idx]) {
+    // Event handler
 }
 ```
 
-요소의 id 가 아닌 다른 속성으로 선택할 때는 target 속성에 jQuery selector 문자열을 지정 하면 됩니다. 이때 셀렉터의 context 에 view 요소를 지정하지 않아도 자동으로 지정 됩니다.
+or
 
-이벤트 바인딩이 완료 되면 `e.{요소id}.{이벤트명}` 속성값으로 지정한 이벤트 핸들러 함수는 id로 지정한 요소(jQuery object)로 바뀝니다.
+```
+"e.{Event id}.{event name}" : {
+    target : "{element selector}",
+    handler : function(e, [idx]) {
+        // Event handler
+    }
+}
+```
+
+When selecting an element with an attribute other than id, you can specify the jQuery selector string in the target property. At this time, even if the selector's context is not specified as the view element, the view element is automatically specified as the context argument.
+
+When event binding is completed, the event handler function defined by the property value of `e.{elementid}.{eventname}` is replaced with the target element(jQuery object).
 
 ```
 ...
 var cont = N(".page-id").cont({
-    "e.id.click" : function(e) { // 선언한 이벤트 핸들러는 초기화 후(init 함수가 실행 되기 바로전) id 로 지정한 요소(jQuery Object)로 바뀝니다.
-        e.preventDefault(); // e.preventDefault() 는 버튼 이벤트에는 반드시 추가 해 주세요.
+    "e.id.click" : function(e) { // When event binding is completed, this event handler function is replaced with the target element(jQuery object).
+        e.preventDefault();
 
         cont["p.popup.dept"].open();
     },
     "e.id.click" : {
         target : ".div #id",
-        handler : function(e) { // 선언한 이벤트 핸들러는 초기화 후(init 함수가 실행 되기 바로전) target 으로 지정한 요소(jQuery Object)로 바뀝니다.
-            e.preventDefault(); // e.preventDefault() 는 버튼 이벤트에는 반드시 추가 해 주세요.
+        handler : function(e) { // When event binding is completed, this event handler function is replaced with the target element(jQuery object).
+            e.preventDefault();
 
             cont["p.popup.company"].open();
         }
     },
     init : function(view, request) {
-        cont["e.id.click"].click(); // 페이지 초기화가 완료 되면 이벤트 실행.
+        cont["e.id.click"].click(); // Fires this event when DOM loading is complete.
     }
 });
 ...
 ```
 
-다음과 같이 컴포넌트에서 제공하는 이벤트도 적용 가능 합니다.
+You can also apply events provided by components as follows.
 
 ```
 ...
 var cont = N(".page-id").cont({
-    "e.dateInput.onSelect" : function(e, inputEle, selDate, isMonthonly, idx) { // N.datepicker 의 onSelect 이벤트
+    "e.dateInput.onSelect" : function(e, inputEle, selDate, isMonthonly, idx) { // onSelect event of N.datepicker
         e.preventDefault();
 
-        N.log(selDate.obj.formatDate(selDate.format)); // 선택한 날짜를 설정된 데이트포멧으로 추출하여 브라우저 콘솔에 출력.
+        N.log(selDate.obj.formatDate(selDate.format)); // The selected date is extracted to the set date format and print to the browser console.
     },
 });
 ...
 ```
 
-N.grid 나 N.list 컴포넌트 안의 요소를 지정 하면 이벤트 핸들러 함수의 마지막 인자에 `해당 요소가 포함된 행의 인덱스를 반환` 해 줍니다.
->rowHandler 에서 행 요소마다 이벤트를 바인딩 하면 브라우저 Heap 메모리 사용량이 (이벤트 수 X 행 수) 만큼 늘어나 웹 어플리케이션 성능이 저하 됩니다. 아래 방법(내부적으로 Event Delegation 기법 적용)을 사용하면 이벤트에 의한 메모리 사용량을 크게 줄일 수 있습니다.
+If an element in the N.grid or N.list component is specified, the `index of the row containing the element` in the last argument of the event handler function is `returned`.
+>rowHandler나 rowHandlerBeforeBind 에서 행 요소마다 이벤트를 바인딩 하면 브라우저 Heap 메모리 사용량이 (이벤트 수 X 행 수) 만큼 늘어나 웹 어플리케이션 성능이 저하 됩니다. 아래 방법(내부적으로 Event Delegation 으로 처리됨)을 사용하면 이벤트에 의한 메모리 사용량을 크게 줄일 수 있습니다.
 ```
 ...
 var cont = N(".page-id").cont({
