@@ -216,15 +216,15 @@ Additional options for each component available only in Natural-TEMPLATE are as 
 ```
 
 ###1.3. N.form
-| 속성 | 옵션명 | 타입 | 필수여부 | 속성값 | 설명 |
+| Property | Option name | Type | Required | Property value | Description |
 | :--: | :--: | :--: | :--: | :--: | -- |
-| p.form.{id} | - | - | - | - | N.form 컴포넌트를 초기화 합니다. |
-| - | usage | string or object | O | Form 의 용도 | "search-box" 문자열 입력 시 지정한 영역을 검색박스 Form 으로 생성 해 줍니다. object 타입으로 좀 더 상세한 옵션을 지정할 수 있습니다.(하단 설명 참고). |
+| p.form.{id} | - | - | - | - | Initialize the N.form component. |
+| - | usage | string or object | O | Usage of Form | If you input the string "search-box", the specified area is created as a search box form. You can specify more detailed options with the object type(See description below). |
 
- * 일반 폼 예제
+ * General form example
 ```
 ...
-"p.form.detail" : { // N.form 컴포넌트의 옵션
+"p.form.detail" : { // N.form component options
     revert : true,
     autoUnbind : true
 },
@@ -232,7 +232,7 @@ Additional options for each component available only in Natural-TEMPLATE are as 
 ```
 
 
- * 검색 폼 예제
+ * Search form example
 
 ```
 ...
@@ -242,22 +242,22 @@ Additional options for each component available only in Natural-TEMPLATE are as 
 ...
 ```
 
->검색 폼에서 엔터 키 이벤트를 자동으로 처리하기 위해서 반드시 "btn-search"(조회버튼) 라는 class 속성값을 갖고있는 버튼요소(a 요소) 를 view 안에 추가 해 주어야 합니다.
+>In order to automatically handle the Enter key event in the search form, you must add a button element(a element) with a class attribute value of "btn-search"(search button) into the view element.
 
-다음예제와 같이 "search-box" 옵션을 object 타입으로 상세한 옵션을 설정할 수도 있습니다.
+To set more detailed options, you can specify the "search-box" option as object as in the following example.
 
->"usage" 옵션이 "search-box" 로 설정된 Form 은 입력요소에 Enter 키를 눌렀을때 조회가 실행 되는 이벤트가 자동으로 바인딩 됩니다. 이 Enter 키 이벤트 핸들러의 실행을 차단하고 다른 이벤트 핸들러를 등록하려면 "search-box" 속성의 하위 옵션 중 "events" 속성에 이벤트 핸들러를 array 타입으로 순서대로 정의 해 주면 됩니다.
+>Form with the "usage" option set to "search-box" is automatically bound to the event handler that is searched with the Enter key on the input element. To block the execution of this Enter key event handler and bind another event handler, define as many event handlers as necessary in the "events" property of the "search-box" option object.
 
 ```
 ...
 "p.form.search" : {
     "usage" : {
         "search-box" : {
-            "defaultButton" : ".btn-search", // 엔터키를 눌렀을때 클릭 될 버튼 요소 selector
-            "events" : [{ // 엔터키 이벤트가 실행되지 않고 입력요소의 이벤트를 직접 지정 하고 싶을 때 추가.
-                "event" : "focusin", // 이벤트 명
-                "target" : "#name", // 검색박스 안의 대상 요소 selector
-                "handler" : function(e) { // 이벤트 핸들러
+            "defaultButton" : ".btn-search", // A selector string that selects the button element to be clicked when the enter key is pressed.
+            "events" : [{ // Add when you want to block the Enter key event and assign the event directly to the input element.
+                "event" : "focusin", // Event name
+                "target" : "#name", // Selector string to select the target element in the search box
+                "handler" : function(e) { // Event handler
                     N.log(e);
                 }
             }, {
@@ -273,12 +273,12 @@ Additional options for each component available only in Natural-TEMPLATE are as 
 ...
 ```
 
-###1.4. 다른 모든 컴포넌트
-| 속성 | 옵션 | 타입 | 필수여부 | 속성값 | 설명 |
+###1.4. All other components
+| Property | Option name | Type | Required | Property value | Description |
 | :--: | :--: | :--: | :--: | :--: | -- |
 | p.{component}.{id} | - | - | - | - | N.{component} 컴포넌트를 초기화 합니다. N.alert 을 제외한 모든 컴포넌트를 이와 같은 방법으로 초기화 가능합니다. |
 
- * Tab(N.tab) 선언 예제
+ * Tab(N.tab) example
 
 ```
 ...
@@ -286,7 +286,7 @@ Additional options for each component available only in Natural-TEMPLATE are as 
 ...
 ```
 
- * Popup(N.popup) 선언 예제
+ * Popup(N.popup) example
 
 ```
 ...
@@ -305,7 +305,7 @@ Additional options for each component available only in Natural-TEMPLATE are as 
 ...
 ```
 
- * Grid(N.grid) 선언 예제
+ * Grid(N.grid) example
 
 ```
 ...
@@ -327,7 +327,7 @@ Additional options for each component available only in Natural-TEMPLATE are as 
 N.comm 의 초기화 속성명은 다음과 같이 조합하여 사용할 수 있습니다.
 
 ```
-"c.{액션명}" : function() { return N.comm; }
+"c.{action name}" : function() { return N.comm; }
 ```
 
 >가능 하다면 액션명은 호출하는 URL 의 서비스명과 맞춰 주고 불가능 하면 반드시 목록 조회는 get{ActionName}List, 한건 조회는 get{ActionName}, 입력은 insert{ActionName}, 수정은 update{ActionName}, 삭제는 delete{ActionName}, 입력/수정/삭제를 한번에 처리하는 Communicator는 save{ActionName}로 정의 바랍니다.
@@ -340,7 +340,7 @@ var cont = N(".page-id").cont({
         return N(".box").comm("sample/PAGEID.html");
     },
     "c.getSampleList" : {
-        // cont["p.form.search"] 의 data 를 파라미터로 "sample/getSampleList.json" URL 호출
+        // cont["p.form.search"] 의 data 를 파라미터로 "sample/getSampleList.json" 서비스 호출
         return cont["p.form.search"].data(false).comm("sample/getSampleList.json");
     },
     init : function(view, request) {

@@ -219,7 +219,7 @@ Natural-TEMPLATE에서만 사용 가능한 컴포넌트 별 추가 옵션들은 
 | 속성 | 옵션명 | 타입 | 필수여부 | 속성값 | 설명 |
 | :--: | :--: | :--: | :--: | :--: | -- |
 | p.form.{id} | - | - | - | - | N.form 컴포넌트를 초기화 합니다. |
-| - | usage | string or object | O | Form 의 용도 | "search-box" 문자열 입력 시 지정한 영역을 검색박스 Form 으로 생성 해 줍니다. object 타입으로 좀 더 상세한 옵션을 지정할 수 있습니다.(하단 설명 참고). |
+| - | usage | string or object | O | Form 의 용도 | "search-box" 문자열을 입력하면 지정한 영역을 검색박스 Form 으로 생성 해 줍니다. object 타입으로 좀 더 상세한 옵션을 지정할 수 있습니다.(하단 설명 참고). |
 
  * 일반 폼 예제
 ```
@@ -242,21 +242,21 @@ Natural-TEMPLATE에서만 사용 가능한 컴포넌트 별 추가 옵션들은 
 ...
 ```
 
->검색 폼에서 엔터 키 이벤트를 자동으로 처리하기 위해서 반드시 "btn-search"(조회버튼) 라는 class 속성값을 갖고있는 버튼요소(a 요소) 를 view 안에 추가 해 주어야 합니다.
+>검색 폼에서 엔터 키 이벤트를 자동으로 처리하기 위해서 반드시 "btn-search"(검색버튼) 라는 class 속성값을 갖고있는 버튼요소(a 요소) 를 view 안에 추가 해 주어야 합니다.
 
-다음예제와 같이 "search-box" 옵션을 object 타입으로 상세한 옵션을 설정할 수도 있습니다.
+좀더 상세한 옵션을 설정하려면 다음예제와 같이 "search-box" 옵션을 object로 지정 하면 됩니다.
 
->"usage" 옵션이 "search-box" 로 설정된 Form 은 입력요소에 Enter 키를 눌렀을때 조회가 실행 되는 이벤트가 자동으로 바인딩 됩니다. 이 Enter 키 이벤트 핸들러의 실행을 차단하고 다른 이벤트 핸들러를 등록하려면 "search-box" 속성의 하위 옵션 중 "events" 속성에 이벤트 핸들러를 array 타입으로 순서대로 정의 해 주면 됩니다.
+>"usage" 옵션이 "search-box" 로 설정된 Form 은 입력요소에 Enter 키로 조회하는 이벤트 핸들러가 자동으로 바인딩 됩니다. 이 Enter 키 이벤트 핸들러의 실행을 차단하고 다른 이벤트 핸들러를 등록하려면 "search-box" 옵션 객체의 "events" 속성에 이벤트 핸들러를 array 객체안에 필요한 만큼 정의 해 주면 됩니다.
 
 ```
 ...
 "p.form.search" : {
     "usage" : {
         "search-box" : {
-            "defaultButton" : ".btn-search", // 엔터키를 눌렀을때 클릭 될 버튼 요소 selector
-            "events" : [{ // 엔터키 이벤트가 실행되지 않고 입력요소의 이벤트를 직접 지정 하고 싶을 때 추가.
+            "defaultButton" : ".btn-search", // 엔터키를 눌렀을때 클릭 될 버튼 요소를 선택하는 selector 문자열
+            "events" : [{ // 엔터키 이벤트를 차단하고 입력요소에 이벤트를 직접 지정 하고 싶을 때 추가 합니다.
                 "event" : "focusin", // 이벤트 명
-                "target" : "#name", // 검색박스 안의 대상 요소 selector
+                "target" : "#name", // 검색박스 안의 대상 요소를 선택하는 selector 문자열
                 "handler" : function(e) { // 이벤트 핸들러
                     N.log(e);
                 }
