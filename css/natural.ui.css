@@ -304,7 +304,7 @@ a.btn_medium__, input[type='button'].btn_medium__, button.btn_medium__ {
     padding: 0px 10px 0px 10px;
     font-size: 12px;
     height: 26px;
-    line-height: 21px;
+    line-height: 24px;
 }
 
 a.btn_medium__ {
@@ -312,7 +312,7 @@ a.btn_medium__ {
 }
 
 input[type='button'].btn_medium__, button.btn_medium__ {
-    line-height: 25px\0; /* for ie 8+ */
+    line-height: 25px;
 }
 
 a.btn_large__, input[type='button'].btn_large__, button.btn_large__ {
@@ -792,7 +792,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .grid_more_popup_contents__ > .grid_more_contents__ > table {
-    width: auto;
+	width: auto;
 }
 
 .grid_more_popup_contents__ > .grid_more_contents__ th {
