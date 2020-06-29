@@ -29,11 +29,17 @@
                     <th>Name</th>
                     <td><input id="name" type="text"></td>
                     <th>Age</th>
-                    <td><select id="age"><option value="">선택</option></select></td>
+                    <td><select id="age">
+                        <option lang="ko_KR" value="">선택</option>
+                        <option lang="en_US" value="">Select</option>
+                    </select></td>
                     <th>Gender</th>
                     <td><input id="gender" type="radio"></td>
                     <th>Eye Color</th>
-                    <td><select id="eyeColor"><option value="">선택</option></select></td>
+                    <td><select id="eyeColor">
+                        <option lang="ko_KR" value="">선택</option>
+                        <option lang="en_US" value="">Select</option>
+                    </select></td>
                 </tr>
             </tbody>
         </table>
@@ -42,8 +48,14 @@
     <div class="flex-horizental">
         <h3>N.grid</h3>
         <div class="btn-box">
-            <a id="btnSearch" href="#" class="R btn-search" class="S">조회</a>
-            <a id="btnSave" href="#" class="S">저장</a>
+            <a id="btnSearch" href="#" class="R btn-search" class="S">
+                <span lang="ko_KR">조회</span>
+                <span lang="en_US">Search</span>
+            </a>
+            <a id="btnSave" href="#" class="S">
+                <span lang="ko_KR">저장</span>
+                <span lang="en_US">Save</span>
+            </a>
         </div>
     </div>
     <table id="master" class="grid__">
@@ -105,7 +117,10 @@
                 <tr>
                     <th>Department</th>
                     <td><input id="deptNm" type="text" data-validate='[["required"]]' style="width: 50%;" readonly="readonly"> <a id="btnDept" href="#"
-                        data-opts='{ "size" : "small" }' class="R">조회</a></td>
+                        data-opts='{ "size" : "small" }' class="R">
+		                <span lang="ko_KR">조회</span>
+		                <span lang="en_US">Find</span>
+		            </a></td>
                 </tr>
                 <tr>
                     <th>Email</th>
@@ -125,7 +140,10 @@
                 </tr>
                 <tr>
                     <th>Eye color</th>
-                    <td><select id="eyeColor" data-validate='[["required"]]'><option>선택</option></select></td>
+                    <td><select id="eyeColor" data-validate='[["required"]]'>
+                        <option lang="ko_KR" value="">선택</option>
+                        <option lang="en_US" value="">Select</option>
+                    </select></td>
                 </tr>
                 <tr>
                     <th rowspan="4">Company</th>

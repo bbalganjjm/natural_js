@@ -4,6 +4,10 @@
     padding: 5px 10px;
     min-height: 609px;
 }
+
+.type0601 .btn-box {
+    padding-top: 22px;
+}
 </style>
 <article class="type0601 view-code">
     <div class="view-intro">
@@ -22,7 +26,14 @@
             <div class="flex-horizental">
                 <h3 style="max-width: 45px">N.tree</h3>
                 <div class="btn-box">
-                    <a id="btnOpen" href="#">모두펼침</a> <a id="btnClose" href="#">모두줄임</a>
+                    <a id="btnOpen" href="#" data-opts='{ "size" : "smaller" }'>
+		                <span lang="ko_KR">모두펼침</span>
+		                <span lang="en_US">Expand all</span>
+		            </a>
+		            <a id="btnClose" href="#" data-opts='{ "size" : "smaller" }'>
+		                <span lang="ko_KR">모두줄임</span>
+		                <span lang="en_US">Collapse all</span>
+		            </a>
                 </div>
             </div>
             <div id="master"></div>
@@ -32,9 +43,18 @@
             <div class="flex-horizental">
                 <h3>N.grid</h3>
                 <div class="btn-box">
-                    <a id="btnAdd" href="#" class="C">추가</a>
-                    <a id="btnDelete" href="#" class="D">삭제</a>
-                    <a id="btnSave" href="#" class="S">저장</a>
+                    <a id="btnAdd" href="#" class="C">
+		                <span lang="ko_KR">추가</span>
+		                <span lang="en_US">Add</span>
+		            </a>
+                    <a id="btnDelete" href="#" class="D">
+		                <span lang="ko_KR">삭제</span>
+		                <span lang="en_US">Delete</span>
+		            </a>
+                    <a id="btnSave" href="#" class="S">
+		                <span lang="ko_KR">저장</span>
+		                <span lang="en_US">Save</span>
+		            </a>
                 </div>
             </div>
 
@@ -74,10 +94,12 @@
                         <td><input id="name" type="text" data-validate='[["required"]]'></td>
                         <td><input id="email" type="text" data-validate='[["required"], ["email"]]'></td>
                         <td style="text-align: center;"><select id="gender" data-validate='[["required"]]'>
-                                <option>선택</option>
+                            <option lang="ko_KR" value="">선택</option>
+                            <option lang="en_US" value="">Select</option>
                         </select></td>
                         <td style="text-align: center;"><select id="eyeColor" data-validate='[["required"]]'>
-                                <option>선택</option>
+                            <option lang="ko_KR" value="">선택</option>
+                            <option lang="en_US" value="">Select</option>
                         </select></td>
                         <td style="text-align: center;"><input id="age" type="text" data-validate='[["required"], ["integer"]]'></td>
                         <td><input id="registered" type="text" data-format='[["date", 8, "date"]]' data-validate='[["required"]]'></td>

@@ -7,7 +7,10 @@
             <li class="inputs">
                 <label>Name<input id="name" type="text" data-validate='[["alphabet+integer"]]'></label>
                 <label>Gender<input id="gender" type="radio"></label>
-                <label>Eye Color<select id="eyeColor"><option value="">선택</option></select></label>
+                <label>Eye Color<select id="eyeColor">
+                    <option lang="ko_KR" value="">선택</option>
+                    <option lang="en_US" value="">Select</option>
+                </select></label>
             </li>
             <li class="buttons">
                 <a id="btnAdd" href="#" data-opts='{ "color": "green" }'>
@@ -63,12 +66,14 @@
                 <td><input id="email" type="text" data-validate='[["required"], ["email"]]'></td>
                 <td style="text-align: center;">
                     <select id="gender" data-validate='[["required"]]'>
-                        <option value="">선택</option>
+                        <option lang="ko_KR" value="">선택</option>
+                        <option lang="en_US" value="">Select</option>
                     </select>
                 </td>
                 <td style="text-align: center;">
                     <select id="eyeColor" data-validate='[["required"]]'>
-                        <option value="">선택</option>
+                        <option lang="ko_KR" value="">선택</option>
+                        <option lang="en_US" value="">Select</option>
                     </select>
                 </td>
                 <td><input id="age" type="text" data-validate='[["required"], ["integer"]]'></td>
