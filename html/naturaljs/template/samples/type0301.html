@@ -37,7 +37,7 @@
     <div class="flex-horizental">
         <h3>N.grid + N.pagination(DB)</h3>
         <div class="btn-box">
-            <a id="btnSearch" href="#" class="R btn-search">
+            <a id="btnSearch" href="#" class="btn-search">
                 <span lang="ko_KR">조회</span>
                 <span lang="en_US">Search</span>
             </a>
@@ -162,6 +162,7 @@
 			// cont.opener 는 탭이 포함된 부모페이지의 Controller Object.
             if(cont.opener) {
                 cont["p.form.search"].context().hide().prev("h3").hide().prev(".view-intro").hide();
+                view.find("#btnSearch").hide();
              	// 부모 페이지 컨트롤러의 검색 버튼 클릭
                 cont.opener["e.btnSearch.click"].click();
             } else {
