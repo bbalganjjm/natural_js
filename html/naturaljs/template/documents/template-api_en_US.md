@@ -2,7 +2,7 @@ Natural-TEMPLATE
 ===
 Natural-TEMPLATE is a package that formalizes the development of Natural-JS-based web applications. Natural-TEMPLATE significantly improves code readability and development productivity.
 
-목차
+Contents
 ===
 * [**Install**](#install)
 * [**API Menual**](#apimenual)
