@@ -8,7 +8,7 @@
  *
 
 ## Natural-CORE v0.18.28
- *
+ * N.date.dateList : Fixed a bug where the date was returned as NaN in Internet Explorer browser.
 
 ## Natural-UI.Shell v0.9.47
  *
