@@ -1,5 +1,5 @@
 /*!
- * Natural-CORE v0.18.28
+ * Natural-CORE v0.18.29
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -302,7 +302,7 @@
         // N local variables
         $.extend(N, {
             version : {
-                "Natural-CORE" : "0.18.28"
+                "Natural-CORE" : "0.18.29"
             },
             /**
              * Set and get locale value
@@ -718,7 +718,7 @@
                         daysOfLastWeek = [];
                         for(var i=lastDayOfCalendar+1;i<=lastDayOfCalendar+7;i++) {
                             nextDate.setDate(i);
-                            daysOfLastWeek.push(new Date(nextDate));
+                            daysOfLastWeek.push(new Date(nextDate.getFullYear(), nextDate.getMonth(), nextDate.getDate(), 0));
                         }
                         weekArr.push(daysOfLastWeek);
                     }
