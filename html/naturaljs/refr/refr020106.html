@@ -1,3 +1,9 @@
+<style type="text/css">
+.refr020106 strong {
+    color: blue;
+}
+</style>
+
 <article class="refr020106 apiDoc">
 
     <h2>
@@ -36,7 +42,7 @@ Controller object 에 구현 된 모든 함수의 scope 에서 Controller object
             this.fn();
         },
         fn : function() {
-           N("p", cont.view).css("padding", "10px");
+           N("p", <strong>cont.</strong>view).css("padding", "10px");
         }
     });
 
