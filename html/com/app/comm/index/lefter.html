@@ -59,7 +59,7 @@
 
 .index-lefter .left-menu ul {
     margin: 0;
-    padding: 0.4em 0 0.4em 1em;
+    padding: 0.4em 0 0.4em 0.2em;
     list-style: none;
 }
 
@@ -70,6 +70,19 @@
 .index-lefter .left-menu ul li {
     margin: 0;
     padding: 0.3em 0;
+}
+
+.index-lefter .left-menu ul > li > ul > li {
+    padding-left: 1.1em;
+    background: url("images/comm/icon/right.png") no-repeat 0 8px;
+}
+
+.index-lefter .left-menu .expand {
+    background: url("images/comm/icon/down.png") no-repeat 0 8px;
+}
+
+.index-lefter .left-menu ul > li.leaf-node {
+    background: none;
 }
 
 .index-lefter .left-menu > ul > li > a > span {
@@ -132,14 +145,14 @@
                             <span lang="en_US">Restrictions and Tips</span>
                         </a>
                     </li>
-                    <li>
+                    <li class="expand">
                         <a href="#"><span>Natural-CORE</span></a>
-                        <ul class="folding">
+                        <ul>
                             <li class="leaf-node"><a href="html/naturaljs/refr/refr0101.html" data-pageid="refr0101"><span>N() &amp; N</span></a></li>
                             <li class="leaf-node"><a href="html/naturaljs/refr/refr0102.html" data-pageid="refr0102"><span>Config(natural.config.js)</span></a></li>
                         </ul>
                     </li>
-                    <li>
+                    <li class="expand">
                         <a href="#"><span>Natural-ARCHITECTURE</span></a>
                         <ul>
                             <li class="leaf-node"><a href="html/naturaljs/refr/refr0201.html" data-pageid="refr0201"><span>Controller</span></a></li>
@@ -328,6 +341,7 @@
                 }
 
                 if(selfEle.closest(".leaf-node").length === 0) {
+                    selfEle.parent("li").toggleClass("expand");
                     selfEle.siblings("ul:last").toggleClass("folding");
                 }
 
