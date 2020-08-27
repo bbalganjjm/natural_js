@@ -11,7 +11,7 @@
 다운로드 된 파일 들 중 Natural-JS 를 구동하기 위한 필수 라이브러리 파일들은 다음과 같습니다.
 
 1.  **jquery-1.12.4.min.js** - Natural-JS는 jQuery 를 기반으로 동작 하므로 반드시 임포트 해야합니다.
-2.  **natural.ui.css** - Natural-UI 디자인과 관련 된 스타일시트 파일 입니다.
+2.  **natural.ui.css** - Natural-UI 디자인과 관련된 스타일시트 파일 입니다.
 3.  **natural.js.min.js** - Natural-JS의 전체 라이브러리 파일들이 합쳐진 Minified 파일 입니다.
 4.  **natural.config.js** - Natural-JS의 환경설정 파일 입니다.
 
@@ -247,7 +247,7 @@ Natural-ARCHITECTURE 기반의 모든 페이지나 페이지 블록 들은 반�
 
 ** block01.html ** 파일은 index.html 페이지에 의해 로드되고 N.cont의 인자로 지정된 객체의 init 함수가 실행 될 것입니다. 그 다음 **block01.html** 페이지의 요소 id 가 result 인 div 요소 안에 서버에서 조회 된 데이터가 표시 될 것 입니다.
 
-<p class="alert">데이터를 조회 할 수있는 서버가있는 경우 N.comm의 url 옵션에서 <strong>data.json</ strong> 대신 서비스 URL을 입력 하세요.</p>
+<p class="alert">데이터를 조회 할 수 있는 서버가있는 경우 N.comm의 url 옵션에서 <strong>data.json</ strong> 대신 서비스 URL을 입력 하세요.</p>
 
 이제 Natural-JS의 기본 환경을 구성하고 실행하는 방법을 알았으니 블록 페이지가 실행 될 사이트 환경을 만들어 볼까요?
 

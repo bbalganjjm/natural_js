@@ -7,6 +7,6 @@ Datepicker(N.datepicker)는 context 옵션으로 지정한 텍스트 입력요�
 <a href="#cmVmcjA0MDclMjRGb3JtJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjA0MDcuaHRtbA==">Form</a>,
 <a href="#cmVmcjA0MDglMjRMaXN0JGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjA0MDguaHRtbA==">List</a>,
 <a href="#cmVmcjA0MDklMjRHcmlkJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjA0MDkuaHRtbA==">Grid</a> 메뉴의  [선언형옵션] 탭과
-<a href="#cmVmcjAzMDElMjRGb3JtYXR0ZXIkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDMwMS5odG1s">Formatter</a> 메뉴의 [포멧 룰 목록] 탭의 ["date", 4|6|8|10|12|14, "month"|"date"] 룰을 참고 하세요.
+<a href="#cmVmcjAzMDElMjRGb3JtYXR0ZXIkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDMwMS5odG1s">Formatter</a> 메뉴의 [포멧 룰 목록] 탭의 ["date", 4|6|8|10|12|14, "month"|"date"] 룰을 참고하세요.
 
-<p class="alert">선언형 옵션에 대한 설명은 <a href="#cmVmcjAwMDElMjRBUEklMjAlRUIlQUMlQjglRUMlODQlOUMlMjAlRUMlOTUlODglRUIlODIlQjQkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDAwMS5odG1s">API 문서 안내</a> 메뉴의 <strong>선언형옵션</strong> 섹션을 참고 하세요.</p>
+<p class="alert">선언형 옵션에 대한 설명은 <a href="#cmVmcjAwMDElMjRBUEklMjAlRUIlQUMlQjglRUMlODQlOUMlMjAlRUMlOTUlODglRUIlODIlQjQkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDAwMS5odG1s">API 문서 안내</a> 메뉴의 <strong>선언형옵션</strong> 섹션을 참고하세요.</p>

@@ -73,7 +73,7 @@ init : function() {
 },
 ...
 ```
-위와 같은 문제를 해결 하려면 미리 data 를 jquery object 로 변환 한 다음 바인딩 하면 됩니다.
+위와 같은 문제를 해결 하려면 미리 data 를 jquery object 로 변환 한 다음 바인딩하면 됩니다.
 
 ```
 ...

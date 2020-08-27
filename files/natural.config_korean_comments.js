@@ -65,7 +65,7 @@
             "context" : ".docs__ > .docs_contents__.visible__"
         },
         /**
-         * Controller object 를 대상으로 Aspect Oriented Programing(AOP) 를 적용 할 수 있습니다.
+         * Controller object 를 대상으로 Aspect Oriented Programing(AOP) 를 적용할 수 있습니다.
          *  - 아래는 샘플코드 이므로 사용하지 않는다면 cont 하위의 모든 구문을 삭제하고 사용 바랍니다.
          */
         "cont" : {

@@ -27,7 +27,7 @@ Natural-TEMPLATE 은 Natural-JS 기반 웹 어플리케이션 개발을 정형�
 <script type="text/javascript" src="js/natural_js/natural.template.min.js" charset="utf-8"></script>
 ```
 
-2. [Config(natural.config.js)](#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s) 에 다음 설정을 추가 합니다. 속성에 대한 설명은 [Config(natural.config.js)](#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s) 메뉴의 **N.context.attr("template")** 탭을 참고 하세요.
+2. [Config(natural.config.js)](#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s) 에 다음 설정을 추가 합니다. 속성에 대한 설명은 [Config(natural.config.js)](#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s) 메뉴의 **N.context.attr("template")** 탭을 참고하세요.
 
 ```
 /**
@@ -323,7 +323,7 @@ Natural-TEMPLATE에서만 사용 가능한 컴포넌트 별 추가 옵션들은 
 ```
 
 ##2. "c." 으로 시작 - Communicator(N.comm) 선언
-서버와 통신하는 모든[Communicators(N.comm)](#cmVmcjAyMDMlMjRDb21tdW5pY2F0b3IkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDIwMy5odG1s)를 Controller object 의 멤버변수로 정의 할 수 있습니다. Communicator를 미리 선언 해 놓으면 데이터의 흐름을 한눈에 확인할 수 있고 선언된 Communicator들에 AOP를 적용 할 수 있습니다.
+서버와 통신하는 모든[Communicators(N.comm)](#cmVmcjAyMDMlMjRDb21tdW5pY2F0b3IkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDIwMy5odG1s)를 Controller object 의 멤버변수로 정의 할 수 있습니다. Communicator를 미리 선언 해 놓으면 데이터의 흐름을 한눈에 확인할 수 있고 선언된 Communicator들에 AOP를 적용할 수 있습니다.
 N.comm의 초기화 속성명은 다음과 같이 조합하여 사용할 수 있습니다.
 
 ```
@@ -425,7 +425,7 @@ var cont = N(".page-id").cont({
 
 N.grid 나 N.list 컴포넌트 안의 요소를 지정 하면 이벤트 핸들러 함수의 마지막 인자에 `해당 요소가 포함된 행의 인덱스를 반환` 해 줍니다.
 
->rowHandler나 rowHandlerBeforeBind 에서 행마다 이벤트를 바인딩 하면 브라우저 Heap 메모리 사용량이 이벤트 수 X 행 수 만큼 늘어나 웹 어플리케이션 성능이 저하 됩니다. 아래 방법(이벤트 위임 적용)을 사용하면 이벤트에 의한 메모리 사용량을 크게 줄일 수 있습니다.
+>rowHandler나 rowHandlerBeforeBind 에서 행마다 이벤트를 바인딩하면 브라우저 Heap 메모리 사용량이 이벤트 수 X 행 수 만큼 늘어나 웹 어플리케이션 성능이 저하 됩니다. 아래 방법(이벤트 위임 적용)을 사용하면 이벤트에 의한 메모리 사용량을 크게 줄일 수 있습니다.
 
 ```
 ...
@@ -457,7 +457,7 @@ var cont = N(".page-id").cont({
 ```
 ...
 var cont = N(".page-id").cont({
-    "e.textInput.focusout" : function(e, idx) { // change 이벤트로 바인딩 하면 변경되기 이전의 데이터가 반환 됩니다.
+    "e.textInput.focusout" : function(e, idx) { // change 이벤트로 바인딩하면 변경되기 이전의 데이터가 반환 됩니다.
         e.preventDefault();
 
         N.log(cont["p.grid.id"].val(idx, "textInput"));

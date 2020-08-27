@@ -25,7 +25,7 @@
 N.formatter.date("20201011", [8]); // 2020-10-11
 </code></pre>
 
-    <h4 lang="ko_KR" class="notIndex">3. 요소에 바인딩 된 Formatter 관련 이벤트를 직접 실행 하기.</h4>
+    <h4 lang="ko_KR" class="notIndex">3. 요소에 바인딩된 Formatter 관련 이벤트를 직접 실행 하기.</h4>
     <h4 lang="en_US" class="notIndex">3. Let's excute Formatter related events directly bound to elements.</h4>
     <p lang="ko_KR">Formatter 는 룰 대신 입력요소를 지정하면 입력 요소에 "format" 이벤트와 "unformat" 이벤트를 생성 합니다. 이 이벤트들은 jQuery trigger 메서드로 직접 실행 할 수 있습니다.</p>
     <p lang="en_US">Formatter creates "format" and "unformat" events to input elements when an input element is specified instead of a rule. These events can be executed directly with the jQuery trigger method.</p>
@@ -38,7 +38,7 @@ N("input[name='formatEl']").trigger("format");</code></pre>
     <p lang="en_US" class="alert">For the code below to work, at least one format rule must be declared as a data-format attribute in the target element before binding data to the component.</p>
     <pre><code>N("selector").data("format", [[&quot;trimtoempty&quot;]]).trigger("format");</code></pre>
 
-    <p lang="ko_KR" class="alert">전체 포멧팅 룰에 대한 설명은 [포멧 룰 목록] 탭을 참고 하세요.</p>
+    <p lang="ko_KR" class="alert">전체 포멧팅 룰에 대한 설명은 [포멧 룰 목록] 탭을 참고하세요.</p>
     <p lang="en_US" class="alert">For a description of the entire formatting rule, see the [Format rule list] tab.</p>
 </article>
 

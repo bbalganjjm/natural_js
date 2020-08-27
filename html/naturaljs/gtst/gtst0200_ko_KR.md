@@ -11,7 +11,7 @@
  * /js/natural_js/lib - jQuery 라이브러리 파일 폴더
  * /js/natural_js/css - Natural-JS UI 컴포넌트들의 기본 CSS 파일 폴더
  * /html/contents - 메뉴 컨텐츠 파일 폴더
- * /html/index - 메인 인덱스와 관련 된 파일 폴더
+ * /html/index - 메인 인덱스와 관련된 파일 폴더
 
 폴더 생성이 완료 되었으면 [GitHub](https://github.com/bbalganjjm/natural_js)의 마스터 브랜치에서 다음 파일을 다운로드하여 해당 경로로 복사하십시오.
 
