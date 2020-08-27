@@ -1,11 +1,11 @@
 Natural-JS
 ===
-Natural-JS 는 ERP, CRM 등의 기업용 웹 어플리케이션 UI를 쉽고 빠르게 구현할 수 있는 Javascript 프레임워크 입니다.
+Natural-JS는 ERP, CRM 등의 기업용 웹 어플리케이션 UI를 쉽고 빠르게 구현할 수 있는 Javascript 프레임워크 입니다.
 
 구조
 ===
 
-Natural-JS 는 Natural-CORE, Natural-ARCHITECTURE, Natural-DATA, Natural-UI 라이브러리 패키지로 구성 됩니다. Natural-CORE 는 Natural-JS 에서 전역으로 사용하는 공통 라이브러리 패키지 이고 Natural-ARCHITECTURE 는 Natural-JS 의 아키텍처를 구성 하는 라이브러리 패키지 입니다. Natural-DATA 는 데이터의 동기화, Formatting,  Validation, 가공을 지원하는 라이브러리 패키지 이고 Natural-UI 는 HTML 기반의 UI 컴포넌트를 지원하는 라이브러리 패키지 입니다.
+Natural-JS는 Natural-CORE, Natural-ARCHITECTURE, Natural-DATA, Natural-UI 라이브러리 패키지로 구성 됩니다. Natural-CORE 는 Natural-JS 에서 전역으로 사용하는 공통 라이브러리 패키지 이고 Natural-ARCHITECTURE 는 Natural-JS의 아키텍처를 구성 하는 라이브러리 패키지 입니다. Natural-DATA 는 데이터의 동기화, Formatting,  Validation, 가공을 지원하는 라이브러리 패키지 이고 Natural-UI 는 HTML 기반의 UI 컴포넌트를 지원하는 라이브러리 패키지 입니다.
 
 ![Natural-JS 구조](images/intr/pic3.png)
 
@@ -16,13 +16,13 @@ Natural-JS 는 Natural-CORE, Natural-ARCHITECTURE, Natural-DATA, Natural-UI 라�
 ### CORE Utitlities - N() & N
 N() 은 Natural-JS 코어 메서드 입니다. 전달 된 인수를 기반으로 DOM 에서 요소를 찾거나 HTML 문자열을 전달하여 생성 된 일치하는 요소의 컬렉션을 반환합니다.
 
-N 은 Natural-JS 의 코어 함수들이 정의 되어 있는 오브젝트 클래스 입니다.
+N 은 Natural-JS의 코어 함수들이 정의 되어 있는 오브젝트 클래스 입니다.
 
-[N() 과 N](#cmVmcjAxMDElMjROKCklMjAlMjYlMjBOJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAxMDEuaHRtbA==) 은 다음과 같은 jQuery 확장 기능과 유틸리티 클래스를 제공 합니다.
+[N() 과 N](#cmVmcjAxMDElMjROKCklMjAlMjYlMjBOJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAxMDEuaHRtbA==) 은 다음과 같은 jQuery 확장 기능과 유틸리티 클래스를 제공합니다.
 
 * jQuery selector 확장 : style 이나 data 속성으로도 selector 를 정의 할 수 있는 jQuery selector 확장 기능
 * jQuery plugin 확장 메서드 : jQuery Plugin 으로 제작된 Natural-JS 유틸리티 메서드
-* N : Natural-JS 의 코어 함수들이 정의 되어 있는 오브젝트 클래스
+* N : Natural-JS의 코어 함수들이 정의 되어 있는 오브젝트 클래스
 * N.gc : Natural-JS 내부 Garbage Collection 을 위한 유틸리티 집합 클래스
 * N.string : 문자열 제어를 위한 함수 집합 클래스
 * N.element : HTML 요소 제어를 위한 함수 집합 클래스
@@ -35,11 +35,11 @@ N 은 Natural-JS 의 코어 함수들이 정의 되어 있는 오브젝트 클�
 
 ### Natural Config - Config(natural.config.js)
 
-[Config(natural.config.js)](#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s) 는 Natural-JS 의 운영 환경 설정, AOP 설정, Communication Filter 설정, UI 컴포넌트의 기본 옵션 값 등을 저장하는 공간 입니다.
+[Config(natural.config.js)](#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s) 는 Natural-JS의 운영 환경 설정, AOP 설정, Communication Filter 설정, UI 컴포넌트의 기본 옵션 값 등을 저장하는 공간 입니다.
 
 ## Natural-ARCHITECTURE
 
-Natural-ARCHITECTURE 는 Natural-JS 의 아키텍처를 구성 하는 라이브러리 패키지 입니다.
+Natural-ARCHITECTURE 는 Natural-JS의 아키텍처를 구성 하는 라이브러리 패키지 입니다.
 
 ![Natural-ARCHITECTURE](images/intr/pic4.png)
 
@@ -62,7 +62,7 @@ Natural Architecture Framework 는 CVC Architecture Pattern 을 구현한 아키
 
 <center>[ Natural Architecture Framework ]</center>
 
-Natural Architecture Framework 는 개발 업무 영역을 명확하게 구분 해 주어 각 영역별 전문가들로 분업 할 수 있는 기반을 제공 합니다.
+Natural Architecture Framework 는 개발 업무 영역을 명확하게 구분 해 주어 각 영역별 전문가들로 분업 할 수 있는 기반을 제공합니다.
 
 #### Controller
 
@@ -82,7 +82,7 @@ View 는 별도의 구현체는 없고 블록 페이지의 HTML 요소 영역이
  * N.comm 은 서버와 통신하는 모든 요청 및 응답 또는 오류 생성 단계에서 공통 로직을 실행할 수있는 [Communication Filter](#cmVmcjAyMDUlMjRDb21tdW5pY2F0aW9uJTIwRmlsdGVyJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAyMDUuaHRtbA==) 기능을 제공합니다.
 
 [Context(N.context)](#cmVmcjAyMDYlMjRDb250ZXh0JGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAyMDYuaHRtbA==) 는 Natural-JS 기반 어플리케이션의 Life-Cycle(페이지가 적제 되고 다른 URL로 redirect 되기 전까지) 안 에서 데이터의 영속성을 보장 하는 공간 입니다.
- * Natural-JS 의 환경설정 값([Config(natural.config.js)](#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s)), 프레임워크 공통 메시지 등이 N.context 객체에 저장 됩니다.
+ * Natural-JS의 환경설정 값([Config(natural.config.js)](#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s)), 프레임워크 공통 메시지 등이 N.context 객체에 저장 됩니다.
 
 
 ## Natural-DATA

@@ -152,8 +152,8 @@ Grid 로 생성/조회/수정/삭제를 처리 하기 위해 조회조건 영역
 
 코드가 좀 기네요? Style, View 영역과 Controller 영역을 구분 해 보면 간단 해 집니다. 30초만 집중 해서 봅시다. 매트릭스 네오처럼 코드들이 한눈에 들어오지 않나요? -.-;
 
-위 Style 영역을 공통 css 파일로 통합 하면 Style 영역은 필요 없습니다. 그러나 Natural-JS 의 컴포넌트에 정의 된 context 요소의 스타일이 그대로 적용 되는것을 간단하게 확인하기 위해서 페이지에 Style 을 정의 했습니다.
-<p class="alert">Natural-JS 로 프로젝트를 진행 할 때 웹 퍼블리셔와 협업하면 UI 품질과 개발 생산성을 동시에 향상 시킬 수 있습니다. 웹 퍼블리셔는 Natural-JS 를 위한 학습이 필요 없고 웹 표준에 따라 퍼블리싱 하면 됩니다.</p>
+위 Style 영역을 공통 css 파일로 통합 하면 Style 영역은 필요 없습니다. 그러나 Natural-JS의 컴포넌트에 정의 된 context 요소의 스타일이 그대로 적용 되는것을 간단하게 확인하기 위해서 페이지에 Style 을 정의 했습니다.
+<p class="alert">Natural-JS 로 프로젝트를 진행할 때 웹 퍼블리셔와 협업하면 UI 품질과 개발 생산성을 동시에 향상 시킬 수 있습니다. 웹 퍼블리셔는 Natural-JS 를 위한 학습이 필요 없고 웹 표준에 따라 퍼블리싱 하면 됩니다.</p>
 
 위 코드에서 집중해야 할 부분은 View 영역 입니다. Controller 는 일부러 틀만 만들고 비워 놓았습니다. 하나씩 채워가면서 진행 하려구요.
 
@@ -176,7 +176,7 @@ Controller 영역을 보면 이전 예제들과 다르게 cont 변수에 Control
 이유는 Function Scope 에 상관 없이 Contoller(N.cont) Object 에 접근하기 위해서 입니다.
 위와 같이 Controller 를 정의하하고 cont 변수를 선언하고 N().cont() 함수를 실행하면 함수의 어떤 위치에서나 cont 변수로 Controller Object 에 접근 할 수 있습니다.
 <p class="alert">Natural-JS 로 프로젝트를 진행하다 보면 view 나 request, caller 등의 Controller 오브젝트에 담겨있는 고유 객체들을 참고하거나 페이지 전역변수를 담기 위해 Controller Object 에 접근해야 할 때가 많이 있습니다.</p>
-<p class="alert">SPA 로 메뉴 컨텐츠 들을 개발 할 때는 Controller Object 가 해당 페이지의 최상위 객체라 생각하고 페이지 별 전역변수를 정의 해야 합니다. 그렇게 하지 않고 window 객체에 전역변수를 선언 하면 데이터가 꼬이거나 메모리 사용량이 크게 증가 하는 문제가 발생 할 수 있습니다. Natural-JS 는 Controller Object 에 대해서 리소스 관리를 해 주지만 window 객체에 바인딩 되어 있는 전역 변수들에 대해서는 관여 하지 않습니다.</p>
+<p class="alert">SPA 로 메뉴 컨텐츠 들을 개발할 때는 Controller Object 가 해당 페이지의 최상위 객체라 생각하고 페이지 별 전역변수를 정의 해야 합니다. 그렇게 하지 않고 window 객체에 전역변수를 선언 하면 데이터가 꼬이거나 메모리 사용량이 크게 증가 하는 문제가 발생 할 수 있습니다. Natural-JS는 Controller Object 에 대해서 리소스 관리를 해 주지만 window 객체에 바인딩 되어 있는 전역 변수들에 대해서는 관여 하지 않습니다.</p>
 
 ###컴포넌트 초기화
 이제 View 에서 선언 한 각 요소들에 다음과 같은 컴포넌트를 적용하여 생명을 불어 넣어 보겠습니다.
@@ -219,7 +219,7 @@ initComponents : function() {
 ...
 ```
 
-<p class="alert">Natural-JS 의 모든 함수 및 메서드 들은 N([]).select.bind() 와 같이 명령을 연달아 실행 할 수 있는 메서드체이닝을 지원 합니다.</a>
+<p class="alert">Natural-JS의 모든 함수 및 메서드 들은 N([]).select.bind() 와 같이 명령을 연달아 실행 할 수 있는 메서드체이닝을 지원 합니다.</a>
 
 N.select 와 같은 데이터 관련 컴포넌트들은 컴포넌트 초기화와 데이터 바인딩이 분리 되어 있습니다. ```var grid = N([object, object, ...]).grid()``` 명령을 실행하면 컴포넌트 인스턴스가 반환되고 컴포넌트 인스턴스에서 bind() 메서드를 실행하면 데이터가 바인딩 되고 add() 메서드를 호출 하면 새로운 행 데이터가 생성 됩니다.
 
@@ -437,6 +437,6 @@ N(window).alert({
 
 ![완료 화면](images/gtst/gtst0300/0.png)
 
-전체 소스코드는 [여기](html/naturaljs/gtst/codes/natural_js_gtst0300.zip) 에서 다운로드 할 수 있습니다.
+전체 소스코드는 [여기](html/naturaljs/gtst/codes/natural_js_gtst0300.zip) 에서 다운로드할 수 있습니다.
 
 학습을 계속 하기 원한다면 예제 메뉴에 있는 여러 예제들의 소스코드들을 분석 해 보기 바랍니다.

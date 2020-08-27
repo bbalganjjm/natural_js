@@ -53,7 +53,7 @@ N().popup(popupOpts).open();
 ```
 
 ###⊙ 데이터 관련 컴포넌트에서 add 메서드를 실행 했을 때 발생 하는 데이터 동기화 문제 해결 하기
-Natural-JS 의 데이터 관련 컴포넌트들은 array[object] 타입의 data 가 입력 되면 jquery object[array[object]] 형태로 변환(jquery object 로 변환) 하여 사용하기 때문에 data 를 Controller object 의 변수로 담아 놓고 공유 해서 사용하는 경우 컴포넌트의 add 메서드로 새로운 데이터를 생성했을 때 변수로 담아 놓은 데이터는 새로운 행 데이터가 생성 되지 않는 문제가 발생 됩니다.
+Natural-JS의 데이터 관련 컴포넌트들은 array[object] 타입의 data 가 입력 되면 jquery object[array[object]] 형태로 변환(jquery object 로 변환) 하여 사용하기 때문에 data 를 Controller object 의 변수로 담아 놓고 공유 해서 사용하는 경우 컴포넌트의 add 메서드로 새로운 데이터를 생성했을 때 변수로 담아 놓은 데이터는 새로운 행 데이터가 생성 되지 않는 문제가 발생 됩니다.
 
 ```
 ...

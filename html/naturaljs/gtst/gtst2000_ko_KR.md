@@ -64,7 +64,7 @@ https://github.com/bbalganjjm/natural_js.git
 
 ![img-3][]
 
-2.4. Natural-JS 의 Source Git Repository 접속 정보를 입력하는 화면입니다. 처음에 복사 해 둔 URL 에 의해 값들이 자동으로 입력되어 있을 겁니다. 입력이 되어 있지 않으면
+2.4. Natural-JS의 Source Git Repository 접속 정보를 입력하는 화면입니다. 처음에 복사 해 둔 URL 에 의해 값들이 자동으로 입력되어 있을 겁니다. 입력이 되어 있지 않으면
 ```md
 https://github.com/bbalganjjm/natural_js.git
 ```

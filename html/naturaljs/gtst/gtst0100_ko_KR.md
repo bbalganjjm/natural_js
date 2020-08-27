@@ -10,10 +10,10 @@
 
 다운로드 된 파일 들 중 Natural-JS 를 구동하기 위한 필수 라이브러리 파일들은 다음과 같습니다.
 
-1.  **jquery-1.12.4.min.js** - Natural-JS 는 jQuery 를 기반으로 동작 하므로 반드시 임포트 해야합니다.
+1.  **jquery-1.12.4.min.js** - Natural-JS는 jQuery 를 기반으로 동작 하므로 반드시 임포트 해야합니다.
 2.  **natural.ui.css** - Natural-UI 디자인과 관련 된 스타일시트 파일 입니다.
-3.  **natural.js.min.js** - Natural-JS 의 전체 라이브러리 파일들이 합쳐진 Minified 파일 입니다.
-4.  **natural.config.js** - Natural-JS 의 환경설정 파일 입니다.
+3.  **natural.js.min.js** - Natural-JS의 전체 라이브러리 파일들이 합쳐진 Minified 파일 입니다.
+4.  **natural.config.js** - Natural-JS의 환경설정 파일 입니다.
 
 이제 최상위 HTML 파일을 만들고 위 파일들을 다음과 같은 순서로 페이지에 Import 해 줍니다.
 
@@ -36,9 +36,9 @@ CORE, ARCHITECTURE, DATA, UI, UI.Shell 전체를 사용하기 원한다면 natur
 
 Natural-JS의 모든 라이브러리가 합쳐진 natural.js.min.js 의 용량이 214kb 정도 밖에 되지 않기 때문에 natural.js.min.js 만 임포트 해도 성능에 큰 영향을 미치지 않습니다.
 
-라이브러리를 임포트 했으니 Natural-JS 의 구동 환경을 설정 해 볼까요?
+라이브러리를 임포트 했으니 Natural-JS의 구동 환경을 설정 해 볼까요?
 
-Natural-JS 의 환경설정 파일인 natural.config.js 파일을 열어보세요.
+Natural-JS의 환경설정 파일인 natural.config.js 파일을 열어보세요.
 
 ```
 /* Natural-ARCHITECTURE Config */
@@ -60,7 +60,7 @@ N.context.attr("ui", {
 
 Natrual-JS 에서 JSON 은 아주 중요 합니다. 서버와 송수신하는 데이터 타입이 JSON 형태의 문자열이고 컴포넌트에 바인드 되는 데이터도 JSON 객체들로 구성 된 배열 객체 입니다.
 
-다시 본론으로... Natural-JS의 환경설정값은 Context(N.context) 객체에 저장 됩니다. 환경설정값중 위 구문에 해당하는 N.context.attr("architecture").page.context 값은 아주 중요한 값입니다. 이 값은 Natural-JS의 컴포넌트 요소들이 적재 될 컨테이너 요소를 jQuery Selector 문자열로 지정하면 됩니다. 쉽게말해 페이지 컨텐츠들을 표시 할 동적으로 변하지 않는 박스 요소를 지정 하면 됩니다. 더불어, N.context.attr("ui").alert.context 값에 N.alert HTML 요소를 저장하는 컨테이너 요소의 selector 를 지정 해 주세요. 보통 N.context.attr("architecture").page.context 값과 같은 요소를 지정하면 됩니다. Tab(N.tab) 이나 Popup(N.popup), Datepicker(N.datepicker)등 Natural-UI에서 지원하는 컴포넌트들의 자원이 여기(N.context.attr...context)에서 지정한 영역에 생성되고 페이지가 전환 될 때 이 영역에 다시 덮어 씌움으로서 브라우저의 자원을 반환하게 됩니다. 페이지 Redirect를 하지 않는 Single Page Web Application을 개발 할 때 브라우저 리소스를 따로 관리 하지 않아도 되어서 편리 하겠죠? 그 외 환경설정 값들은 [Config](#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s) 메뉴의 내용을 참고 해 주세요.
+다시 본론으로... Natural-JS의 환경설정값은 Context(N.context) 객체에 저장 됩니다. 환경설정값중 위 구문에 해당하는 N.context.attr("architecture").page.context 값은 아주 중요한 값입니다. 이 값은 Natural-JS의 컴포넌트 요소들이 적재 될 컨테이너 요소를 jQuery Selector 문자열로 지정하면 됩니다. 쉽게말해 페이지 컨텐츠들을 표시 할 동적으로 변하지 않는 박스 요소를 지정 하면 됩니다. 더불어, N.context.attr("ui").alert.context 값에 N.alert HTML 요소를 저장하는 컨테이너 요소의 selector 를 지정 해 주세요. 보통 N.context.attr("architecture").page.context 값과 같은 요소를 지정하면 됩니다. Tab(N.tab) 이나 Popup(N.popup), Datepicker(N.datepicker)등 Natural-UI에서 지원하는 컴포넌트들의 자원이 여기(N.context.attr...context)에서 지정한 영역에 생성되고 페이지가 전환 될 때 이 영역에 다시 덮어 씌움으로서 브라우저의 자원을 반환하게 됩니다. 페이지 Redirect를 하지 않는 Single Page Web Application을 개발할 때 브라우저 리소스를 따로 관리 하지 않아도 되어서 편리 하겠죠? 그 외 환경설정 값들은 [Config](#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s) 메뉴의 내용을 참고 해 주세요.
 
 <p class="alert"><a href="#cmVmcjA1MDIlMjREb2N1bWVudHMkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDUwMi5odG1s">Documents</a>(N.docs) 컴포넌트를 사용하는 경우에는 지정할 필요가 없습니다.</p>
 <p class="alert">SPA(Single Page Application)가 아니면 "body" 로 설정 해 주세요.</p>
@@ -123,7 +123,7 @@ Natural-ARCHITECTURE 기반의 모든 페이지나 페이지 블록 들은 반�
 
 <p class="alert">Natural-JS는 서버와의 데이터 및 파일을 송수신 하는데 Communicator(N.comm) 모듈을 사용 합니다. N.comm 에 대한 자세한 내용은 <a href="#cmVmcjAyMDMlMjRDb21tdW5pY2F0b3IkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDIwMy5odG1s">Communicator</a> 메뉴를 참고 해 주세요.</p>
 
-앞에서 Natural-JS 의 컴포넌트 데이터 및 데이터 송수신을 위한 데이터 타입은 JSON 이라고 했었습니다.
+앞에서 Natural-JS의 컴포넌트 데이터 및 데이터 송수신을 위한 데이터 타입은 JSON 이라고 했었습니다.
 
 먼저 json 타입으로 데이터를 서비스 해 주는 서버가 필요 하지만 이 문서에서는 서버 작업에 대한 설명은 생략 하겠습니다. Spring MVC 나 PHP 로 간단하게 List 나 Map 타입의 객체를 JSON 타입으로 변환 해 주는 모듈들이 많이 있습니다. 프로그래밍 언어 별 JSON 변환 모듈에 대한 정보를 얻으려면 아래 사이트를 방문 해 보기 바랍니다.
 
