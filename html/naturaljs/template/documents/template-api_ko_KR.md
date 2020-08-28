@@ -1,6 +1,6 @@
 Natural-TEMPLATE
 ===
-Natural-TEMPLATE 은 Natural-JS 기반 웹 어플리케이션 개발을 정형화 해 주는 패키지 입니다. Natural-TEMPLATE 은 코드 가독성과 개발 생산성을 크게 향상시켜줍니다.
+Natural-TEMPLATE 은 Natural-JS 기반 웹 어플리케이션 개발을 정형화 해 주는 패키지입니다. Natural-TEMPLATE 은 코드 가독성과 개발 생산성을 크게 향상시켜줍니다.
 
 목차
 ===
@@ -8,7 +8,7 @@ Natural-TEMPLATE 은 Natural-JS 기반 웹 어플리케이션 개발을 정형�
 * [**API 매뉴얼**](#api)
 	* [파일 별 기본 코드 작성 규칙](#ui)
 
-	* [Controller Object 의 속성명 작성 규칙](#ncontcontrollerobject)
+	* [Controller object의 속성명 작성 규칙](#ncontcontrollerobject)
 
         * [1. "p." 으로 시작(UI 컴포넌트 초기화)](#1pui)
             * [1.1. N.select - 공통코드 데이터 바인딩](#11nselect)
@@ -87,7 +87,7 @@ N.context.attr("template", {
 
 #API 매뉴얼
 
-##Controller object 의 속성명 작성 규칙
+##Controller object의 속성명 작성 규칙
 Natural-TEMPLATE 의 기능은 Controller object 프로퍼티명의 명명규칙으로 실행 할 수 있습니다. 컴포넌트를 초기화 하거나 이벤트를 바인딩하는 등의 반복적인 작업들을 자동화 시켜 줍니다.
 
 ###1. "p." 으로 시작 - UI 컴포넌트 초기화
@@ -100,7 +100,7 @@ Natural-UI 의 컴포넌트들을 자동으로 초기 화 해 줍니다.
 }
 ```
 
-초기화가 완료 되면 `p.{컴포넌트명}.{요소id}` 속성값으로 지정한 컴포넌트 옵션 객체는 생성 된 컴포넌트의 인스턴스로 대체됩니다.
+초기화가 완료 되면 `p.{컴포넌트명}.{요소id}` 속성값으로 지정한 컴포넌트 옵션 객체는 생성된 컴포넌트의 인스턴스로 대체됩니다.
 
 > `p.select.{id}` 선언은 페이지의 view 에서 해당 id 속성값을 갖고 있는 모든 선택요소에 Select(N.select) 컴포넌트를 초기화 하고 생성된 컴포넌트 인스턴스들을 Array에 저장한다음 속성값을 대체합니다. Select 컴포넌트의 인스턴스를 사용 할 때는 `cont["p.select.{id}"][1]` 와 같이 사용 할 인스턴스를 배열에서 꺼내어 사용해야합니다.
 
@@ -174,7 +174,7 @@ Natural-TEMPLATE에서만 사용 가능한 컴포넌트 별 추가 옵션들은 
 ```
 ...
 "filter" : function (data) {
-    // data(원래 데이터) 를 가공하여 return 하면 가공 된 데이터가 바인딩 됩니다.
+    // data(원래 데이터)를 가공하여 return 하면 가공 된 데이터가 바인딩 됩니다.
     return N(N.array.deduplicate(data, "age")).datasort("age"); // 중복 제거 후 정렬.
 }
 ...
@@ -242,11 +242,11 @@ Natural-TEMPLATE에서만 사용 가능한 컴포넌트 별 추가 옵션들은 
 ...
 ```
 
->검색 폼에서 엔터 키 이벤트를 자동으로 처리하기 위해서 반드시 "btn-search"(검색버튼) 라는 class 속성값을 갖고있는 버튼요소(a 요소) 를 view 안에 추가 해 주어야 합니다.
+>검색 폼에서 엔터 키 이벤트를 자동으로 처리하기 위해서 반드시 "btn-search"(검색버튼) 라는 class 속성값을 갖고있는 버튼요소(a 요소)를 view 안에 추가 해 주어야 합니다.
 
 좀더 상세한 옵션을 설정하려면 다음예제와 같이 "search-box" 옵션을 object로 지정 하면 됩니다.
 
->"usage" 옵션이 "search-box" 로 설정된 Form 은 입력요소에 Enter 키로 조회하는 이벤트 핸들러가 자동으로 바인딩 됩니다. 이 Enter 키 이벤트 핸들러의 실행을 차단하고 다른 이벤트 핸들러를 등록하려면 "search-box" 옵션 객체의 "events" 속성에 이벤트 핸들러를 array 객체안에 필요한 만큼 정의 해 주면 됩니다.
+>"usage" 옵션이 "search-box" 로 설정된 Form 은 입력 요소에 Enter 키로 조회하는 이벤트 핸들러가 자동으로 바인딩 됩니다. 이 Enter 키 이벤트 핸들러의 실행을 차단하고 다른 이벤트 핸들러를 등록하려면 "search-box" 옵션 객체의 "events" 속성에 이벤트 핸들러를 array 객체안에 필요한 만큼 정의 해 주면 됩니다.
 
 ```
 ...
@@ -254,7 +254,7 @@ Natural-TEMPLATE에서만 사용 가능한 컴포넌트 별 추가 옵션들은 
     "usage" : {
         "search-box" : {
             "defaultButton" : ".btn-search", // 엔터키를 눌렀을때 클릭 될 버튼 요소를 선택하는 selector 문자열
-            "events" : [{ // 엔터키 이벤트를 차단하고 입력요소에 이벤트를 직접 지정 하고 싶을 때 추가 합니다.
+            "events" : [{ // 엔터키 이벤트를 차단하고 입력 요소에 이벤트를 직접 지정 하고 싶을 때 추가 합니다.
                 "event" : "focusin", // 이벤트 명
                 "target" : "#name", // 검색박스 안의 대상 요소를 선택하는 selector 문자열
                 "handler" : function(e) { // 이벤트 핸들러
@@ -323,7 +323,7 @@ Natural-TEMPLATE에서만 사용 가능한 컴포넌트 별 추가 옵션들은 
 ```
 
 ##2. "c." 으로 시작 - Communicator(N.comm) 선언
-서버와 통신하는 모든[Communicators(N.comm)](#cmVmcjAyMDMlMjRDb21tdW5pY2F0b3IkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDIwMy5odG1s)를 Controller object 의 멤버변수로 정의 할 수 있습니다. Communicator를 미리 선언 해 놓으면 데이터의 흐름을 한눈에 확인할 수 있고 선언된 Communicator들에 AOP를 적용할 수 있습니다.
+서버와 통신하는 모든[Communicators(N.comm)](#cmVmcjAyMDMlMjRDb21tdW5pY2F0b3IkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDIwMy5odG1s)를 Controller object의 멤버변수로 정의할 수 있습니다. Communicator를 미리 선언 해 놓으면 데이터의 흐름을 한눈에 확인할 수 있고 선언된 Communicator들에 AOP를 적용할 수 있습니다.
 N.comm의 초기화 속성명은 다음과 같이 조합하여 사용할 수 있습니다.
 
 ```
@@ -362,7 +362,7 @@ N.comm의 선언은 오브젝트나 값을 직접 대입하는것이 아닌 함�
 ##3. "e." 으로 시작 - 이벤트 바인딩
 페이지의 view 요소 안에 있는 요소들에 이벤트 바인딩을 선언 할 수 있습니다.
 
->a, button, input[type=button] 요소에 이벤트를 정의 하면 N.button 컴포넌트가 자동으로 초기화 되어 버튼으로 생성 됩니다.
+>a, button, input[type=button] 요소에 이벤트를 정의 하면 N.button 컴포넌트가 자동으로 초기화 되어 버튼으로 생성됩니다.
 
 이벤트의 초기화 속성명은 다음과 같이 조합하여 사용할 수 있습니다.
 

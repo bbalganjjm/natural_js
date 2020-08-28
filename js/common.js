@@ -253,7 +253,7 @@
             * @fileList : 파일 목록 Array
             * @fileNameCol : 파일명 컬럼명
             * @length : 파일 목록 문자열을 자를 기준 길이
-            * @fileButton : 파일팝업 버튼(입력하지 않으면 파일요약목록 문자열을 반환하고 입력하면 버튼 옆에 목록을 표시 해 준다)
+            * @fileButton : 파일팝업 버튼(입력하지 않으면 파일요약목록 문자열을 반환하고 입력하면 버튼 옆에 목록을 표시해 준다)
             */
            createFileSummaryList : function(fileList, fileNameCol, length, fileButton) {
                if(!N.isEmptyObject(fileList)) {
@@ -280,7 +280,7 @@
          * @fileId : 파일 아이디
          * @fileNameCol : 파일명 컬럼명
          * @length : 파일 목록 문자열을 자를 기준 길이
-         * @fileButton : 파일팝업 버튼(입력하지 않으면 파일요약목록 문자열을 반환하고 입력하면 버튼 옆에 목록을 표시 해 준다)
+         * @fileButton : 파일팝업 버튼(입력하지 않으면 파일요약목록 문자열을 반환하고 입력하면 버튼 옆에 목록을 표시해 준다)
          */
         getFileSummaryList : function(fileId, fileNameCol, length, fileButton) {
             N({ "fileId" : fileId }).comm("file/getFileList.json").submit(function(fileList) {

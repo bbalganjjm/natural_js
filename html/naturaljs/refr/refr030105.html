@@ -7,10 +7,10 @@
     <h4 lang="ko_KR" class="notIndex">1. N.form 이나 N.grid 로 데이터를 바인드 하기 전에 컬럼 값이 바이드 될 요소의 data-format 속성에 포멧 룰을 선언 하기.</h4>
     <h4 lang="en_US" class="notIndex">1. Let's declare a format rule in the data-format attribute of the element to which the column value will be bound before binding data with N.form or N.grid.</h4>
     <pre><code>&lt;input id="startDate" type="text" data-format='[["date", 8]]'&gt;</code></pre>
-    <p lang="ko_KR">위와 같이 입력요소에 포멧 룰을 선언하면 입력 요소에 focus-in 되면 포멧이 해제 되고 focus-out 되면 다시 포멧팅 됩니다.</p>
+    <p lang="ko_KR">위와 같이 입력 요소에 포멧 룰을 선언하면 입력 요소에 focus-in 되면 포멧이 해제 되고 focus-out 되면 다시 포멧팅 됩니다.</p>
     <p lang="en_US">When the format rule is declared on the input element as above, unformatted when focus-in to the input element and reformatted when focus-out from  the input element.</p>
     <pre><code>&lt;span id="startDate" data-format='[["date", 8]]'&gt;&lt;/span&gt;</code></pre>
-    <p lang="ko_KR">위와 같이 입력요소가 아닌 요소에 포멧 룰을 선언하면 포멧 된 값이 요소의 text 로 입력 됩니다.</p>
+    <p lang="ko_KR">위와 같이 입력 요소가 아닌 요소에 포멧 룰을 선언하면 포멧 된 값이 요소의 text 로 입력 됩니다.</p>
     <p lang="en_US">If a format rule is declared on an element that is not an input element as above, the formatted value is put as the text of the element.</p>
     <p lang="ko_KR" class="alert">N.grid 나 N.form 의 data 매서드를 호출하여 컴포넌트의 데이터를 가져와 보면 포멧팅 되지 않은 값으로 세팅 되어 있을 것 입니다. 요소에 보이는 값들만 포멧팅 하기 때문에 서버에 데이터를 전송 할 때 unforamt 하지 않아도 됩니다.</p>
     <p lang="en_US" class="alert">If you call the data method of N.grid or N.form to get the component data, it will be set to the unformatted value. It only formats the values ​​shown in the element, so there is no need to unformat when sending data to the server.</p>
@@ -27,7 +27,7 @@ N.formatter.date("20201011", [8]); // 2020-10-11
 
     <h4 lang="ko_KR" class="notIndex">3. 요소에 바인딩된 Formatter 관련 이벤트를 직접 실행 하기.</h4>
     <h4 lang="en_US" class="notIndex">3. Let's excute Formatter related events directly bound to elements.</h4>
-    <p lang="ko_KR">Formatter 는 룰 대신 입력요소를 지정하면 입력 요소에 "format" 이벤트와 "unformat" 이벤트를 생성 합니다. 이 이벤트들은 jQuery trigger 메서드로 직접 실행 할 수 있습니다.</p>
+    <p lang="ko_KR">Formatter 는 룰 대신 입력 요소를 지정하면 입력 요소에 "format" 이벤트와 "unformat" 이벤트를 생성 합니다. 이 이벤트들은 jQuery trigger 메서드로 직접 실행 할 수 있습니다.</p>
     <p lang="en_US">Formatter creates "format" and "unformat" events to input elements when an input element is specified instead of a rule. These events can be executed directly with the jQuery trigger method.</p>
     <pre><code>N("input[name='formatEl']").trigger("unformat");
 N("input[name='formatEl']").trigger("format");</code></pre>

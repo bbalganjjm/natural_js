@@ -161,7 +161,7 @@ For more information about each component, please refer to the related document.
 
 ##Controller area coding
 
-Looking at the Controller area, unlike the previous examples, the code that contains the Controller Object instance in the cont variable and the code that wraps it in a function and executes it are written.
+Looking at the Controller area, unlike the previous examples, the code that contains the Controller object instance in the cont variable and the code that wraps it in a function and executes it are written.
 
 ```
 (function() {
@@ -174,9 +174,9 @@ Looking at the Controller area, unlike the previous examples, the code that cont
 ```
 
 The reason is to access the Contoller(N.cont) Object regardless of the function scope.
-Define Controller as above, declare cont variable and execute N().cont() function, you can access Controller Object with cont variable at any position of function.
-<p class="alert">When working on a project with Natural-JS, there are many times when you need to access the Controller Object to refer to the constant objects contained in the Controller object such as view, request, and caller, or to save or reference the page global variables.</p>
-<p class="alert">When developing page contents with SPA, think that the Controller Object is the top-level object of the page and define global variables for each page. If you don't do so, declaring a global variable in the window object can cause data is twisted or a large increase in memory usage. Natural-JS manages the resource for the Controller Object, but does not participate in global variables bound to the window object.</p>
+Define Controller as above, declare cont variable and execute N().cont() function, you can access Controller object with cont variable at any position of function.
+<p class="alert">When working on a project with Natural-JS, there are many times when you need to access the Controller object to refer to the constant objects contained in the Controller object such as view, request, and caller, or to save or reference the page global variables.</p>
+<p class="alert">When developing page contents with SPA, think that the Controller object is the top-level object of the page and define global variables for each page. If you don't do so, declaring a global variable in the window object can cause data is twisted or a large increase in memory usage. Natural-JS manages the resource for the Controller object, but does not participate in global variables bound to the window object.</p>
 
 ###Component initialization
 Now, let's breathe the life by applying the following components to each element declared in View.

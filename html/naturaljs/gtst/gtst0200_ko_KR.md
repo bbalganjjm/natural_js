@@ -1,7 +1,7 @@
 웹 어플리케이션 기본 프레임 만들기
 ===
 
-메뉴를 좌측에 배치하고 우측에  MDI 형태로 페이지를 표시 해 주는 <a href="#cmVmcjA1MDIlMjREb2N1bWVudHMkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDUwMi5odG1s">Documents</a>(N.docs) 컴포넌트를 사용 하여 Single Page Web Application 을 개발 해 보겠습니다.
+메뉴를 좌측에 배치하고 우측에  MDI 형태로 페이지를 표시해 주는 <a href="#cmVmcjA1MDIlMjREb2N1bWVudHMkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDUwMi5odG1s">Documents</a>(N.docs) 컴포넌트를 사용 하여 Single Page Web Application 을 개발 해 보겠습니다.
 
 <p class="alert">Documents(N.docs) 에 대한 자세한 내용은 <a href="#cmVmcjA1MDIlMjREb2N1bWVudHMkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDUwMi5odG1s">Documents</a> 메뉴를 참고 해 주세요.</p>
 
@@ -20,7 +20,7 @@
  * js/natural_js/natural.js.min.js - GitHub 의 master 브랜치에서 다운로드 한 압축 파일의 dist 폴더에 있음
  * js/natural_js/natural.config.js - GitHub 의 master 브랜치에서 다운로드 한 압축 파일의 dist 폴더에 있음
 
-최종 프로젝트 폴더 및 파일은 다음과 같이 구성 됩니다. 파일은 하나씩 채우면서 설명 할 계획이니 일단 폴더만 만들어 주세요.
+최종 프로젝트 폴더 및 파일은 다음과 같이 구성됩니다. 파일은 하나씩 채우면서 설명 할 계획이니 일단 폴더만 만들어 주세요.
 
 ![개발 프로젝트 구성](images/gtst/gtst0200/0.png)
 
@@ -151,7 +151,7 @@ N(".index-lefter").cont({
 ```
 
 위 코드의 style 코드 블록은 이 페이지의 view 에만 적용되는 스타일을 정의 하기 위한 부분 입니다.
-<p class="alert">이 페이지에서만 스타일이 적용 되게 하려면 <code>.index-lefter .menu a { ... }</code> 의 **.index-lefter** 처럼  CSS 셀렉터를 정의 할 때 반드시 view 요소 셀렉터 부터 시작 해야 합니다.</p>
+<p class="alert">이 페이지에서만 스타일이 적용 되게 하려면 <code>.index-lefter .menu a { ... }</code> 의 **.index-lefter** 처럼  CSS 셀렉터를 정의할 때 반드시 view 요소 셀렉터 부터 시작 해야 합니다.</p>
 <p class="alert">페이지가 닫히면 스타일도 같이 제거 됩니다.</p>
 
 N.cont 오브젝트의 init 함수에는 메뉴링크 요소를 클릭했을 때  **/index.html** 에서 window 객체에 담아둔 N.docs 인스턴스의 add 메서드로 메뉴 컨텐츠를 불러오는 코드가 작성 되어 있습니다. N.docs 인스턴스로 ```add("페이지ID", "페이지명", { url : "페이지URL" }``` 함수 를 실행 하면 우측 MDI 영역에 페이지가 추가 됩니다.

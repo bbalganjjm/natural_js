@@ -157,11 +157,11 @@ Grid 로 생성/조회/수정/삭제를 처리 하기 위해 조회조건 영역
 
 위 코드에서 집중해야 할 부분은 View 영역 입니다. Controller 는 일부러 틀만 만들고 비워 놓았습니다. 하나씩 채워가면서 진행 하려구요.
 
-View 의 하위 요소 중 첫번째에 있는 **.search-conditions** 요소는 검색조건을 입력 할 수 있는 검색 폼 입니다. 그 아래 **.buttons** 요소에는 버튼들이 배치 되고 **.result** 요소에는 조회 된 결과 데이터를 Grid 로 표현하기 위해 N.grid 의 context 요소인 Table 을 만들었습니다. N.grid 컴포넌트를 적용하려면 반드시 그리드로 생성 될 **table** 태그가 작성되어 있어야 하고 table 태그에 **thead**(그리드 헤더) 와 **tbody**(그리드 바디) 태그가 작성되어 있어야 합니다. N.grid 의 행 들은 **tbody** 요소를 리스트 데이터의 길이 만큼 복제 해서 표현 해 줍니다. 각 컴포넌트에 대한 자세한 내용은 관련 문서를 참고 하기 바랍니다.
+View 의 하위 요소 중 첫번째에 있는 **.search-conditions** 요소는 검색조건을 입력할 수 있는 검색 폼 입니다. 그 아래 **.buttons** 요소에는 버튼들이 배치 되고 **.result** 요소에는 조회 된 결과 데이터를 Grid 로 표현하기 위해 N.grid 의 context 요소인 Table 을 만들었습니다. N.grid 컴포넌트를 적용하려면 반드시 그리드로 생성 될 **table** 태그가 작성되어 있어야 하고 table 태그에 **thead**(그리드 헤더) 와 **tbody**(그리드 바디) 태그가 작성되어 있어야 합니다. N.grid 의 행 들은 **tbody** 요소를 리스트 데이터의 길이 만큼 복제 해서 표현해 줍니다. 각 컴포넌트에 대한 자세한 내용은 관련 문서를 참고 하기 바랍니다.
 
 ##Controller 영역 코딩
 
-Controller 영역을 보면 이전 예제들과 다르게 cont 변수에 Controller Object 인스턴스를 담는 코드와 이를 함수로 감싸서 바로 실행하는 코드가 작성 되어 있습니다.
+Controller 영역을 보면 이전 예제들과 다르게 cont 변수에 Controller object 인스턴스를 담는 코드와 이를 함수로 감싸서 바로 실행하는 코드가 작성 되어 있습니다.
 
 ```
 (function() {
@@ -174,9 +174,9 @@ Controller 영역을 보면 이전 예제들과 다르게 cont 변수에 Control
 ```
 
 이유는 Function Scope 에 상관 없이 Contoller(N.cont) Object 에 접근하기 위해서 입니다.
-위와 같이 Controller 를 정의하하고 cont 변수를 선언하고 N().cont() 함수를 실행하면 함수의 어떤 위치에서나 cont 변수로 Controller Object 에 접근 할 수 있습니다.
-<p class="alert">Natural-JS 로 프로젝트를 진행하다 보면 view 나 request, caller 등의 Controller 오브젝트에 담겨있는 고유 객체들을 참고하거나 페이지 전역변수를 담기 위해 Controller Object 에 접근해야 할 때가 많이 있습니다.</p>
-<p class="alert">SPA 로 메뉴 컨텐츠 들을 개발할 때는 Controller Object 가 해당 페이지의 최상위 객체라 생각하고 페이지 별 전역변수를 정의 해야 합니다. 그렇게 하지 않고 window 객체에 전역변수를 선언 하면 데이터가 꼬이거나 메모리 사용량이 크게 증가 하는 문제가 발생 할 수 있습니다. Natural-JS는 Controller Object 에 대해서 리소스 관리를 해 주지만 window 객체에 바인딩 되어 있는 전역 변수들에 대해서는 관여 하지 않습니다.</p>
+위와 같이 Controller 를 정의하하고 cont 변수를 선언하고 N().cont() 함수를 실행하면 함수의 어떤 위치에서나 cont 변수로 Controller object 에 접근 할 수 있습니다.
+<p class="alert">Natural-JS 로 프로젝트를 진행하다 보면 view 나 request, caller 등의 Controller 오브젝트에 담겨있는 고유 객체들을 참고하거나 페이지 전역변수를 담기 위해 Controller object 에 접근해야 할 때가 많이 있습니다.</p>
+<p class="alert">SPA 로 메뉴 컨텐츠 들을 개발할 때는 Controller object 가 해당 페이지의 최상위 객체라 생각하고 페이지 별 전역변수를 정의 해야 합니다. 그렇게 하지 않고 window 객체에 전역변수를 선언 하면 데이터가 꼬이거나 메모리 사용량이 크게 증가 하는 문제가 발생 할 수 있습니다. Natural-JS는 Controller object 에 대해서 리소스 관리를 해 주지만 window 객체에 바인딩 되어 있는 전역 변수들에 대해서는 관여 하지 않습니다.</p>
 
 ###컴포넌트 초기화
 이제 View 에서 선언 한 각 요소들에 다음과 같은 컴포넌트를 적용하여 생명을 불어 넣어 보겠습니다.
@@ -221,7 +221,7 @@ initComponents : function() {
 
 <p class="alert">Natural-JS의 모든 함수 및 메서드 들은 N([]).select.bind() 와 같이 명령을 연달아 실행 할 수 있는 메서드체이닝을 지원합니다.</a>
 
-N.select 와 같은 데이터 관련 컴포넌트들은 컴포넌트 초기화와 데이터 바인딩이 분리 되어 있습니다. ```var grid = N([object, object, ...]).grid()``` 명령을 실행하면 컴포넌트 인스턴스가 반환되고 컴포넌트 인스턴스에서 bind() 메서드를 실행하면 데이터가 바인딩 되고 add() 메서드를 호출 하면 새로운 행 데이터가 생성 됩니다.
+N.select 와 같은 데이터 관련 컴포넌트들은 컴포넌트 초기화와 데이터 바인딩이 분리 되어 있습니다. ```var grid = N([object, object, ...]).grid()``` 명령을 실행하면 컴포넌트 인스턴스가 반환되고 컴포넌트 인스턴스에서 bind() 메서드를 실행하면 데이터가 바인딩 되고 add() 메서드를 호출 하면 새로운 행 데이터가 생성됩니다.
 
 N() 함수의 첫번째 인자에 JSON Array 타입의 데이터를 입력 한 다음 bind() 메서드를 호출하면 인스턴스 생성 시 입력 된 데이터가 바인딩 됩니다. 데이터를 동적으로 바인딩 해야 한다면 N() 함수에 ```var grid = N([]).grid()``` 처럼 비어있는 array 를 입력하여 컴포넌트를 초기화 하고 bind() 메서드의 첫번째 인자에 json array 타입의 데이터를 입력 하여 호출하면 됩니다.
 
@@ -275,7 +275,7 @@ initComponents : function() {
 }]
 ```
 
-이 생성 된 데이터는 입력요소의 값이 바뀔 때 마다 내부 데이터셋과 동기화 되기 때문에 다음과 같이 선언만 해 놓으면 마지막 입력한 검색조건 데이터가 서버에 파라미터로 전달 됩니다.
+이 생성된 데이터는 입력 요소의 값이 바뀔 때 마다 내부 데이터셋과 동기화 되기 때문에 다음과 같이 선언만 해 놓으면 마지막 입력한 검색조건 데이터가 서버에 파라미터로 전달 됩니다.
 
 ```
 N(cont.form.data()).comm("data.json").submit(function(data) {
@@ -305,7 +305,7 @@ initComponents : function() {
 
 앞에서 설명한 N.form 과 옵션만 다르고 선언 방식이 비슷합니다.
 
-N.grid 는 비어있는 array 객체를 바인딩하면 "조회를 하지 않았거나 조회된 데이터가 없습니다." 라는 메시지를 그리드에 표시 해 줍니다. 페이지 로딩 완료 후 서버에서 조회 한 데이터를 그리드에 즉시 바인딩 해야 되는 경우라면 컴포넌트 인스턴스 생성만 하면 되지만 사용자가 조회를 직접 실행 할 때는 기본 행이 아무 의미없이 표시 되니 bind() 메서드를 호출 해서 자연스러운 그리드의 모양을 만들어 주세요.
+N.grid 는 비어있는 array 객체를 바인딩하면 "조회를 하지 않았거나 조회된 데이터가 없습니다." 라는 메시지를 그리드에 표시해 줍니다. 페이지 로딩 완료 후 서버에서 조회 한 데이터를 그리드에 즉시 바인딩 해야 되는 경우라면 컴포넌트 인스턴스 생성만 하면 되지만 사용자가 조회를 직접 실행 할 때는 기본 행이 아무 의미없이 표시 되니 bind() 메서드를 호출 해서 자연스러운 그리드의 모양을 만들어 주세요.
 
 ### 이벤트 바인딩
 
@@ -330,14 +330,14 @@ bindEvents : function() {
 }
 ```
 
-<p class="alert">위 코드 에서 N.comm 의 옵션들 중 type 프로퍼티는 웹 서버에 POST 방식으로 요청 할 수 없어서 임의로 정의 한 옵션 입니다. 서버가 POST 요청을 처리 할 수 있는 환경이라면 natural.config.js 에 type 의 기본값이 "POST" 로 정의 되어 있으니 type 옵션을 제거 바랍니다. type 옵션 에 대한 자세한 내용은 <a href="#cmVmcjAyMDQlMjRDb21tdW5pY2F0b3IucmVxdWVzdCRodG1sJTJGbmF0dXJhbGpzJTJGcmVmciUyRnJlZnIwMjA0Lmh0bWw=">Communicator.request</a> 문서의 [기본옵션] 탭을 참고 해 주세요.</p>
+<p class="alert">위 코드 에서 N.comm 의 옵션들 중 type 프로퍼티는 웹 서버에 POST 방식으로 요청 할 수 없어서 임의로 정의 한 옵션 입니다. 서버가 POST 요청을 처리 할 수 있는 환경이라면 natural.config.js 에 type 의 기본값이 "POST" 로 정의되어 있으니 type 옵션을 제거 바랍니다. type 옵션 에 대한 자세한 내용은 <a href="#cmVmcjAyMDQlMjRDb21tdW5pY2F0b3IucmVxdWVzdCRodG1sJTJGbmF0dXJhbGpzJTJGcmVmciUyRnJlZnIwMjA0Lmh0bWw=">Communicator.request</a> 문서의 [기본옵션] 탭을 참고 해 주세요.</p>
 
 조회 버튼의 이벤트 핸들러는 다음과 같은 로직을 실행 합니다.
  1. 검색 폼(cont.form)의 데이터를 파라미터로 서버에서 데이터 조회
  2. 그리드(cont.grid)에 조회한 데이터를 바인딩
 
-```cont.form.validate()``` 메서드는 검색 폼의 입력 요소의 태그에 선언 된 data-validate 옵션([Form](#cmVmcjA0MDclMjRGb3JtJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjA0MDcuaHRtbA==) 문서의 [선언형옵션] 참고)을 한번에 체크하여 입력 데이터에 대한 유효성 검증을 실행하는 메서드 입니다. validate() 메서드는 유효성 검증을 모두 통과 해야만 true 를 반환하므로 위 코드와 같이 if 조건으로 선언해 놓으면 "필수 입력 체크" 등의 귀찮은 작업들을 편리하게 처리 할 수 있습니다.
-그리고 구문의 끝 부분에 .button() 메서드를 실행 해서 이벤트 타겟 요소에 Button(N.button) 컴포넌를 적용 했습니다.
+```cont.form.validate()``` 메서드는 검색 폼의 입력 요소의 태그에 선언 된 data-validate 옵션([Form](#cmVmcjA0MDclMjRGb3JtJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjA0MDcuaHRtbA==) 문서의 [선언형옵션] 참고)을 한번에 체크하여 입력 데이터에 대한 유효성 검증을 실행하는 메서드입니다. validate() 메서드는 유효성 검증을 모두 통과 해야만 true 를 반환하므로 위 코드와 같이 if 조건으로 선언해 놓으면 "필수 입력 체크" 등의 귀찮은 작업들을 편리하게 처리 할 수 있습니다.
+그리고 구문의 끝 부분에 .button() 메서드를 실행해서 이벤트 타겟 요소에 Button(N.button) 컴포넌를 적용 했습니다.
 
 #### [New] 버튼 이벤트
 
@@ -426,12 +426,12 @@ N(window).alert({
 ...
 ```
 
-4. N.comm 을 이용하여 그리드의 변경 된 데이터(```cont.grid.data("modified")```)를 서버파라미터로 전송.
-<p class="alert">위 코드 에서 N.comm 의 옵션들 중 "type" 은 웹 서버에 POST 방식으로 요청 할 수 없어서 임의로 정의 한 옵션 입니다. 서버가 POST 요청을 처리 할 수 있는 환경이라면 natural.config.js 에 type 의 기본값이 "POST" 로 정의 되어 있으니 type 옵션을 제거 바랍니다. type 옵션 에 대한 자세한 내용은 <a href="#cmVmcjAyMDQlMjRDb21tdW5pY2F0b3IucmVxdWVzdCRodG1sJTJGbmF0dXJhbGpzJTJGcmVmciUyRnJlZnIwMjA0Lmh0bWw=">Communicator.request</a> 문서의 [기본옵션] 탭을 참고 해 주세요.</p>
+4. N.comm 을 이용하여 그리드의 변경된 데이터(```cont.grid.data("modified")```)를 서버파라미터로 전송.
+<p class="alert">위 코드 에서 N.comm 의 옵션들 중 "type" 은 웹 서버에 POST 방식으로 요청 할 수 없어서 임의로 정의 한 옵션 입니다. 서버가 POST 요청을 처리 할 수 있는 환경이라면 natural.config.js 에 type 의 기본값이 "POST" 로 정의되어 있으니 type 옵션을 제거 바랍니다. type 옵션 에 대한 자세한 내용은 <a href="#cmVmcjAyMDQlMjRDb21tdW5pY2F0b3IucmVxdWVzdCRodG1sJTJGbmF0dXJhbGpzJTJGcmVmciUyRnJlZnIwMjA0Lmh0bWw=">Communicator.request</a> 문서의 [기본옵션] 탭을 참고 해 주세요.</p>
 <p class="alert">서버로 object 가 아닌 array[object] 형태의 파라미터를 전달 하려면 dataIsArray 옵션을 활성화 해 주어야 합니다. dataIsArray 옵션에 대한 자세한 내용은 <a href="#cmVmcjAyMDQlMjRDb21tdW5pY2F0b3IucmVxdWVzdCRodG1sJTJGbmF0dXJhbGpzJTJGcmVmciUyRnJlZnIwMjA0Lmh0bWw=">Communicator.request</a> 문서의 [기본옵션] 탭을 참고 해 주세요.</p>
 5. 저장 완료 후 N.notify 컴포넌트를 사용하여 메시지 표시
-<p class="alert">입력요소의 값을 변경하거나 cont.grid.val() 메서드로 데이터를 변경하면 <strong>rowStatus</strong> 프로퍼티가 생성 됩니다. rowStatus 값은 "insert", "update", "delete" 중 하나가 됩니다. <strong>서버 에서는</strong> 행 데이터 객체 마다 정의 되어 있는 <strong>rowStatus 값으로 입력/수정/삭제 를 구분 해서 처리</strong> 하면 됩니다.</p>
-6. Search 버튼을 클릭 하여 변경 된 데이터 재 조회
+<p class="alert">입력 요소의 값을 변경하거나 cont.grid.val() 메서드로 데이터를 변경하면 <strong>rowStatus</strong> 프로퍼티가 생성됩니다. rowStatus 값은 "insert", "update", "delete" 중 하나가 됩니다. <strong>서버 에서는</strong> 행 데이터 객체 마다 정의되어 있는 <strong>rowStatus 값으로 입력/수정/삭제 를 구분 해서 처리</strong> 하면 됩니다.</p>
+6. Search 버튼을 클릭 하여 변경된 데이터 재 조회
 
 지금까지 작성한 소스 파일들을 웹 서버에 배포한 다음 **/index.html** 에 접속 했을때 다음과 같은 화면이 표시 되면 실습을 성공 한 것 입니다.
 

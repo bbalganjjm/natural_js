@@ -3,7 +3,7 @@
         <span lang="ko_KR">N.date 객체의 함수</span>
         <span lang="en_US">Function of N.date Object</span>
     </h2>
-    <p lang="ko_KR">N.date 은 날짜 제어 관련 유틸리티 함수들을 모아놓은 객체 입니다.</p>
+    <p lang="ko_KR">N.date 은 날짜 제어 관련 유틸리티 함수들을 모아놓은 객체입니다.</p>
     <p lang="en_US">N.gc is a collection object of utility functions related to date control.</p>
     <p lang="ko_KR">"N.date.{함수명}(arg[0...N])" 와 같이 사용 할 수 있습니다.</p>
     <p lang="en_US">You can use like "N.date.{function name}(arg[0...N])"</p>
@@ -21,7 +21,7 @@
             <td style="text-align: center;">N/A</td>
             <td>string</td>
             <td>
-                <p lang="ko_KR">입력 한 두 날짜 간 일수 차이를 반환 합니다.</p>
+                <p lang="ko_KR">입력 한 두 날짜 간 일수 차이를 반환합니다.</p>
                 <p lang="en_US">Returns the difference in days between two input dates.</p>
             </td>
         </tr>
@@ -107,7 +107,7 @@
             <td style="text-align: center;">N/A</td>
             <td>string</td>
             <td>
-                <p lang="ko_KR">입력 된 날짜/시간 문자열을 date 객체로 변환하고 객체의 속성에 저장하여 반환 합니다. 반환되는 객체의 속성은 다음과 같습니다.</p>
+                <p lang="ko_KR">입력 된 날짜/시간 문자열을 date 객체로 변환하고 객체의 속성에 저장하여 반환합니다. 반환되는 객체의 속성은 다음과 같습니다.</p>
                 <p lang="en_US">Converts the input date/time string to a date object and stores it in the object's properties to return. The properties of the returned object are:</p>
                 <pre><code>{
     obj : date object,
@@ -181,7 +181,7 @@
                     <li>12-digit : "Y-m-d H:i"</li>
                     <li>14-digit : "Y-m-d H:i:s"</li>
                 </ul>
-                <p lang="ko_KR" class="alert">대쉬(-), 콜론(:) 등의 날짜와 시간을 구분하는 문자는 <a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a> 의 N.context.attr("data").formatter.date 오브젝트의 함수들로 정의 되어 있습니다.
+                <p lang="ko_KR" class="alert">대쉬(-), 콜론(:) 등의 날짜와 시간을 구분하는 문자는 <a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a> 의 N.context.attr("data").formatter.date 오브젝트의 함수들로 정의되어 있습니다.
                     날짜/시간 구분 문자는 해당 함수의 return 문자열로 변경할 수 있습니다.</p>
                 <p lang="en_US" class="alert">Characters that separate date and time, such as dash(-) and colon(:), are defined as functions of N.context.attr("data").formatter.date object of <a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a>.
                     The date/time separator can be changed to the return string of the corresponding function.</p>
@@ -236,7 +236,7 @@ N.date.format("19991231120159", "Y/m/d H:i:s") // "1999/12/31 12:01:59"
 N.date.format("19991231120159", "Y.m.d H:i") // "1999.12.31 12:01"
 N.date.format("19991231120159", N.context.attr("data").formatter.date.YmdHis()) // "1999-12-31 12:01:59"
 </code></pre>
-                <p lang="ko_KR" class="alert">대쉬(-), 콜론(:) 등의 날짜와 시간을 구분하는 문자는 <a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a> 의 N.context.attr("data").formatter.date 오브젝트의 함수들로 정의 되어 있습니다.
+                <p lang="ko_KR" class="alert">대쉬(-), 콜론(:) 등의 날짜와 시간을 구분하는 문자는 <a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a> 의 N.context.attr("data").formatter.date 오브젝트의 함수들로 정의되어 있습니다.
                     날짜/시간 구분 문자는 해당 함수의 return 문자열로 변경할 수 있습니다.</p>
                 <p lang="en_US" class="alert">Characters that separate date and time, such as dash(-) and colon(:), are defined as functions of N.context.attr("data").formatter.date object of <a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a>.
                     The date/time separator can be changed to the return string of the corresponding function.</p>
@@ -292,7 +292,7 @@ N.date.format("19991231120159", N.context.attr("data").formatter.date.YmdHis()) 
             <td style="text-align: center;">N/A</td>
             <td>array[array[date]]</td>
             <td>
-                <p lang="ko_KR">연도 + 월별 날짜 객체 목록을 반환 합니다.</p>
+                <p lang="ko_KR">연도 + 월별 날짜 객체 목록을 반환합니다.</p>
                 <p lang="en_US">Returns a list of date objects by year + month.</p>
             </td>
         </tr>

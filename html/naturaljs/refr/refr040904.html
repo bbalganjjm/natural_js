@@ -139,10 +139,10 @@
                 <p lang="en_US">If set to true, the function to hide or show the column and the function to automatically generate the detail popup are enabled.</p>
                 <p lang="ko_KR">그리드의 마지막 열 다음에 위의 기능을 실행하는 버튼을 해 줍니다.</p>
                 <p lang="en_US">Create a button that executes the above function after the last column in the grid.</p>
-                <p lang="ko_KR">true로 설정하면 그리드 헤더에 정의 되어 있는 모든 컬럼들을 모두 상세팝업에 보여주고 array에 컬럼 명 들을 지정하여 옵션으로 설정 하면 지정한 컬럼들만 보여 줍니다.</p>
+                <p lang="ko_KR">true로 설정하면 그리드 헤더에 정의되어 있는 모든 컬럼들을 모두 상세팝업에 보여주고 array에 컬럼 명 들을 지정하여 옵션으로 설정 하면 지정한 컬럼들만 보여 줍니다.</p>
                 <p lang="en_US">If set to true, all columns defined in the grid header are shown in the detail popup and if you specify the column names in the array and set them as options, only the specified columns are shown.</p>
                 <p lang="ko_KR" class="alert">
-                    컬럼들의 제목은 그리드 헤더의 제목 텍스트를 그대로 사용 하기 때문에 그리드 헤더에 정의 되어 있지 않은 컬럼은 표시 되지 않습니다.
+                    컬럼들의 제목은 그리드 헤더의 제목 텍스트를 그대로 사용 하기 때문에 그리드 헤더에 정의되어 있지 않은 컬럼은 표시 되지 않습니다.
                     그리드 헤더에 없는 컬럼을 상세팝업에 표시 하려면 그리드에 컬럼을 추가하고 그리드를 초기화 한 다음 hide 메서드로 추가한 컬럼을 숨기면 상세팝업에서만 볼 수 있습니다.
                 </p>
                 <p lang="en_US" class="alert">
@@ -204,7 +204,7 @@
                 <p lang="ko_KR">true로 설정하면 컬럼의 넓이를 조절 할 수 있습니다.</p>
                 <p lang="en_US">If set to true, the width of the column can be resized.</p>
                 <p lang="ko_KR" class="alert">
-                    colgroup 의 col 태그를 사용하여 셀의 넓이를 지정했을때 resizable 옵션이 true 이면 그리드가 초기화 될 때 col 태그에 정의 되어 있는 셀의 넓이 값을 thead 의 th 에 이관 하고 colgroup 태그를 제거 합니다.
+                    colgroup 의 col 태그를 사용하여 셀의 넓이를 지정했을때 resizable 옵션이 true 이면 그리드가 초기화 될 때 col 태그에 정의되어 있는 셀의 넓이 값을 thead 의 th 에 이관 하고 colgroup 태그를 제거 합니다.
                     때문에 컬럼 리사이징 기능을 사용하려면 col 태그에 넓이를 지정하지 말고 thead 의 th 에 컬럼 넓이를 설정 하는것을 권장 합니다.
                 </p>
                 <p lang="en_US" class="alert">
@@ -422,7 +422,7 @@
 ...</code></pre>
                 <p lang="ko_KR" class="alert">너무 작게 지정하면 스크롤이 생성 되지 않아 데이터가 모두 표시 되지 않습니다. 반드시 행 들이 그리드 바디를 넘칠 수 있는 양을 지정 해 주어야 합니다.</p>
                 <p lang="en_US" class="alert">If it is set too small, scrolling is not created and all data is not displayed. You must specify the amount by which rows can overflow the grid body.</p>
-                <p lang="ko_KR" class="alert">너무 크게 지정하면 스크롤 페이징이 작동될때 브라우저에 부하가 발생되므로 그리드에 입력요소나 이미지가 들어 있다면 100 이하로 설정하고 그렇지 않다면 1000 이하로 설정하는 것을 권장합니다.</p>
+                <p lang="ko_KR" class="alert">너무 크게 지정하면 스크롤 페이징이 작동될때 브라우저에 부하가 발생되므로 그리드에 입력 요소나 이미지가 들어 있다면 100 이하로 설정하고 그렇지 않다면 1000 이하로 설정하는 것을 권장합니다.</p>
                 <p lang="en_US" class="alert">If set too large, browser performance is overhead when scroll paging is enabled, so it is recommended to set it to 100 or less if the input element or image is included in the grid, otherwise 1000 or less.</p>
             </td>
         </tr>
@@ -518,7 +518,7 @@
             <td>false</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">true로 설정하면 컴포넌트 초기화 전에 입력요소에 바인딩 되어 있는 이벤트와 format, validate, dataSync등의 컴포넌트 이벤트의 충돌을 방지 해 줍니다.</p>
+                <p lang="ko_KR">true로 설정하면 컴포넌트 초기화 전에 입력 요소에 바인딩 되어 있는 이벤트와 format, validate, dataSync등의 컴포넌트 이벤트의 충돌을 방지 해 줍니다.</p>
                 <p lang="en_US">If set to true, it prevents the conflict of the event bound to the input element before component initialization and the component event such as format, validate, and dataSync.</p>
                 <p lang="ko_KR" class="alert">format 이 정상적으로 동작하지 않거나 바인딩 되어 있는 데이터가 의도한대로 g핸들링 되지 등, 알수 없는 오류가 발생 했을 때 true 로 설정 바랍니다.</p>
                 <p lang="en_US" class="alert">Set to true when an unknown error occurs, such as the format not working properly or the bound data is not handled as intended.</p>
@@ -546,12 +546,12 @@
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">bind 하거나 add 했을 때 생성 된 행 요소에 데이터가 바인딩 되기 전에 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="ko_KR">bind 하거나 add 했을 때 생성된 행 요소에 데이터가 바인딩 되기 전에 실행되는 이벤트 핸들러를 정의 합니다.</p>
                 <p lang="en_US">Defines an event handler that is executed before data is bound to the row element created when bind or add.</p>
                 <pre lang="ko_KR"><code>rowHandlerBeforeBind : function(rowIdx, rowEle, rowData) {
     // this : N.grid 인스턴스
-    // rowIdx : 생성 된 행 index
-    // rowEle : 생성 된 행 요소(li)
+    // rowIdx : 생성된 행 index
+    // rowEle : 생성된 행 요소(li)
     // rowData : 생성 될 행의 Data
 }</code></pre>
                 <pre lang="en_US"><code>rowHandlerBeforeBind : function(rowIdx, rowEle, rowData) {
@@ -570,13 +570,13 @@
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">bind 하거나 add 했을 때 생성 된 행 요소에 데이터가 바인딩된 후에 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="ko_KR">bind 하거나 add 했을 때 생성된 행 요소에 데이터가 바인딩된 후에 실행되는 이벤트 핸들러를 정의 합니다.</p>
                 <p lang="en_US">Defines an event handler that is executed after data is bound to the row element created when bind or add.</p>
                 <pre lang="ko_KR"><code>rowHandler : function(rowIdx, rowEle, rowData) {
     // this : N.grid 인스턴스
-    // rowIdx : 생성 된 행 index
-    // rowEle : 생성 된 행 요소(li)
-    // rowData : 생성 된 행의 Data
+    // rowIdx : 생성된 행 index
+    // rowEle : 생성된 행 요소(li)
+    // rowData : 생성된 행의 Data
 }</code></pre>
                 <pre lang="en_US"><code>rowHandler : function(rowIdx, rowEle, rowData) {
     // this : N.grid instance
@@ -614,7 +614,7 @@
 }</code></pre>
                 <p lang="ko_KR" class="alert">select 나 multiselect 옵션 true로 설정 되었을 경우에만 실행 됩니다.</p>
                 <p lang="en_US" class="alert">It is executed only when the select or multiselect option is set to true.</p>
-                <p lang="ko_KR" class="alert">unselect 옵션이 false로 설정 되었을 경우 선택이 해제 되면 rowIdx 인자 값에 -1을 반환 하고 선택 되면 선택 된 행의 인덱스를 반환 합니다.</p>
+                <p lang="ko_KR" class="alert">unselect 옵션이 false로 설정 되었을 경우 선택이 해제 되면 rowIdx 인자 값에 -1을 반환 하고 선택 되면 선택 된 행의 인덱스를 반환합니다.</p>
                 <p lang="en_US" class="alert">If the unselect option is set to false, -1 is returned in the value of the rowIdx argument when the deselected, and when selected, the index of the selected row is returned.</p>
             </td>
         </tr>

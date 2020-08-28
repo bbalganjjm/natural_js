@@ -65,7 +65,7 @@
             "context" : ".docs__ > .docs_contents__.visible__"
         },
         /**
-         * Controller object 를 대상으로 Aspect Oriented Programing(AOP) 를 적용할 수 있습니다.
+         * Controller object를 대상으로 Aspect Oriented Programing(AOP)를 적용할 수 있습니다.
          *  - 아래는 샘플코드 이므로 사용하지 않는다면 cont 하위의 모든 구문을 삭제하고 사용 바랍니다.
          */
         "cont" : {
@@ -203,7 +203,7 @@
                      */
                     "urlSync" : true,
                     /**
-                     * 특정 영역에 html 페이지를 불러올때 browser history(뒤로가기버튼) 를 적용할 지 여부
+                     * 특정 영역에 html 페이지를 불러올때 browser history(뒤로가기버튼)를 적용할 지 여부
                      */
                     "browserHistory" : false,
                     /**
@@ -307,21 +307,21 @@
                 "ko_KR" : {
                     global : "필드검증에 통과하지 못했습니다.",
                     required : "필수입력 필드 입니다.",
-                    alphabet : "영문자만 입력 할 수 있습니다.",
-                    integer : "숫자(정수)만 입력 할 수 있습니다.",
-                    korean : "한글만 입력 할 수 있습니다.",
-                    alphabet_integer : "영문자와 숫자(정수)만 입력 할 수 있습니다.",
-                    integer_korean : "숫자(정수)와 한글만 입력 할 수 있습니다.",
-                    alphabet_korean : "영문자와 한글만 입력 할 수 있습니다.",
-                    alphabet_integer_korean : "영문자, 숫자(정수), 한글만 입력 할 수 있습니다.",
-                    dash_integer : "숫자(정수), 대쉬(-) 만 입력 할 수 있습니다.",
-                    commas_integer : "숫자(정수), 콤마(,) 만 입력 할 수 있습니다.",
-                    number : "숫자(+-,. 포함)만 입력 할 수 있습니다.",
+                    alphabet : "영문자만 입력할 수 있습니다.",
+                    integer : "숫자(정수)만 입력할 수 있습니다.",
+                    korean : "한글만 입력할 수 있습니다.",
+                    alphabet_integer : "영문자와 숫자(정수)만 입력할 수 있습니다.",
+                    integer_korean : "숫자(정수)와 한글만 입력할 수 있습니다.",
+                    alphabet_korean : "영문자와 한글만 입력할 수 있습니다.",
+                    alphabet_integer_korean : "영문자, 숫자(정수), 한글만 입력할 수 있습니다.",
+                    dash_integer : "숫자(정수), 대쉬(-) 만 입력할 수 있습니다.",
+                    commas_integer : "숫자(정수), 콤마(,) 만 입력할 수 있습니다.",
+                    number : "숫자(+-,. 포함)만 입력할 수 있습니다.",
                     email : "e-mail 형식에 맞지 않습니다.",
                     url : "URL 형식에 맞지 않습니다.",
                     zipcode : "우편번호 형식에 맞지 않습니다.",
-                    decimal : "(유한)소수만 입력 할 수 있습니다.",
-                    decimal_ : "(유한)소수 {0}번째 자리까지 입력 할 수 있습니다.", // TODO
+                    decimal : "(유한)소수만 입력할 수 있습니다.",
+                    decimal_ : "(유한)소수 {0}번째 자리까지 입력할 수 있습니다.", // TODO
                     phone : "전화번호 형식이 아닙니다.",
                     rrn : "주민등록번호 형식에 맞지 않습니다.",
                     ssn : "주민등록번호 형식에 맞지 않습니다.", // Deprecated
@@ -334,12 +334,12 @@
                     kcn : "법인번호 형식에 맞지 않습니다.",
                     date : "날짜 형식에 맞지 않습니다.",
                     time : "시간 형식에 맞지 않습니다.",
-                    accept : "\"{0}\" 값만 입력 할 수 있습니다.",
-                    match : "\"{0}\" 이(가) 포함된 값만 입력 할 수 있습니다.",
-                    acceptFileExt : "\"{0}\" 이(가) 포함된 확장자만 입력 할 수 있습니다.",
-                    notAccept : "\"{0}\" 값은 입력 할 수 없습니다.",
-                    notMatch : "\"{0}\" 이(가) 포함된 값은 입력 할 수 없습니다.",
-                    notAcceptFileExt : "\"{0}\" 이(가) 포함된 확장자는 입력 할 수없습니다.",
+                    accept : "\"{0}\" 값만 입력할 수 있습니다.",
+                    match : "\"{0}\" 이(가) 포함된 값만 입력할 수 있습니다.",
+                    acceptFileExt : "\"{0}\" 이(가) 포함된 확장자만 입력할 수 있습니다.",
+                    notAccept : "\"{0}\" 값은 입력할 수 없습니다.",
+                    notMatch : "\"{0}\" 이(가) 포함된 값은 입력할 수 없습니다.",
+                    notAcceptFileExt : "\"{0}\" 이(가) 포함된 확장자는 입력할 수없습니다.",
                     equalTo : "\"{1}\" 의 값과 같아야 합니다.",
                     maxlength : "{0} 글자 이하만 입력 가능합니다.",
                     minlength : "{0} 글자 이상만 입력 가능합니다.",
@@ -484,9 +484,9 @@
                     "year" : "년",
                     "month" : "월",
                     "days" : "일,월,화,수,목,금,토",
-                    "yearNaN" : "연도는 서기 100년 이하는 입력 할 수 없습니다.",
-                    "monthNaN" : "월은 1월 부터 12월 까지 입력 할 수 있습니다.",
-                    "dayNaN" : "일은 1일부터 {0}일 까지 입력 할 수 있습니다.",
+                    "yearNaN" : "연도는 서기 100년 이하는 입력할 수 없습니다.",
+                    "monthNaN" : "월은 1월 부터 12월 까지 입력할 수 있습니다.",
+                    "dayNaN" : "일은 1일부터 {0}일 까지 입력할 수 있습니다.",
                     "prev" : "이전",
                     "next" : "다음"
                 },
@@ -715,7 +715,7 @@
              */
             "message" : {
                 "ko_KR" : {
-                    "NoContextSpecifiedInSelector" : 'Controller object 의 함수 안 에서 요소를 선택할 때는 반드시 $() 나 N() 함수의 두번째 인자(context)에 view 요소를 입력 하거나 view 요소에서 find 해야 합니다. '
+                    "NoContextSpecifiedInSelector" : 'Controller object의 함수 안에서 요소를 선택할 때는 반드시 $() 나 N() 함수의 두번째 인자(context)에 view 요소를 입력 하거나 view 요소에서 find 해야 합니다. '
                         + 'view(context) 요소를 입력하지 않으면 다른 View 의 요소까지 선택 되어 의도하지 않은 오류가 발생 할 수 있습니다. '
                         + '\nex) N("selector", cont.view).hide();'
                         + '\n    cont.view.find("selector").hide();',

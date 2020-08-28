@@ -43,7 +43,7 @@
                 <p lang="en_US">If set to true, the parameter object specified as an argument of N function in N().comm can be specified as an array type.</p>
                 <p lang="ko_KR" class="alert">
                     Communicator를 N(params).comm(url).submit(); 와 같이 사용할 때 params의 객체 타입이 array 일때 dataIsArray 옵션이 false 로 지정되어 있다면 array 의 첫번째 오브젝트만 전송 됩니다.
-                    이 문제의 원인은 jQuery 함수의 인자를 array(jQuery([{}])) 또는 object($({})) 로 설정 한 후에 get 함수를 호출하면 둘다 array([{}]) 를 반환하기 때문 입니다.
+                    이 문제의 원인은 jQuery 함수의 인자를 array(jQuery([{}])) 또는 object($({})) 로 설정 한 후에 get 함수를 호출하면 둘다 array([{}])를 반환하기 때문 입니다.
                     불편하더라도 array 를 서버에 전송 할 때는 dataIsArray 를 true로 설정하거나 object 에 array를 담아서 사용 바랍니다.
                 </p>
                 <p lang="ko_KR" class="alert">
@@ -130,7 +130,7 @@
                 <p lang="en_US">Data to be sent to the server. It is converted to a string, if not already a string.</p>
                 <p lang="ko_KR" class="alert">data 옵션은 jQuery.ajax 함수의 옵션이 그대로 적용 됩니다.
                     <a class="link" target="blank_" href="http://api.jquery.com/jquery.ajax/">jQuery.ajax</a>
-                    메뉴얼의 settings 부분에서 data 속성을 참고하세요.
+                    메뉴얼의 settings 부분에서 data속성을 참고하세요.
                 </p>
                 <p lang="en_US" class="alert">The data option remains the same as the jQuery.ajax function option.
                     See the data property in the settings section of the <a class="link" target="blank_" href="http://api.jquery.com/jquery.ajax/">jQuery.ajax</a> manual.

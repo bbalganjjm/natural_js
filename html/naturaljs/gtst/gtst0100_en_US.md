@@ -104,7 +104,7 @@ Natural-JS has a simple source code composition rule to separate development are
 </article>
 
 <script type="text/javascript">
-N(".block01").cont({ // Controller Object
+N(".block01").cont({ // Controller object
     init : function(view, request) {
         N.comm("data.json").submit(function(data) {
             // data is received data from the server

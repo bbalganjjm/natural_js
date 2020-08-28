@@ -21,7 +21,7 @@ API 문서는 Natural-JS의 컴포넌트와 라이브러리에서 지원하는 �
 
     예) &lt;input id="date" type="text" __data-format='[["date", 8]]'__[<sup>4)</sup>](#fn4) /&gt;
 
-    * 선언형 옵션은 다음과 같은 속성으로 정의 할 수 있습니다.
+    * 선언형 옵션은 다음과 같은 속성으로 정의할 수 있습니다.
         1. 포멧 룰(Format Rules) : data-format
         2. 검증 룰(Validation Rules) : data-validate
         3. a 와 b 를 제외한 모든 컴포넌트 옵션 : data-opts

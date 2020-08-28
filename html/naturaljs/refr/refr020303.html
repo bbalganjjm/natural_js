@@ -33,12 +33,12 @@
             <td style="text-align: center;">N/A</td>
             <td>
                 <p lang="ko_KR">첫번째 인자에 object 나 array[object] 타입의 객체가 들어있는 jquery object 로 설정 하고 두번째 인자(url) 에 JSON 데이터를 반환하는 서버 URL 을 설정 하면 설정 된 객체를 문자열로 변환 한 후에 서버에 GET 이나 POST 파라미터로 전달 합니다.
-                    이때 이 인자값은 Communicator.request 의 기본 옵션의 data 속성 값으로 설정 됩니다.</p>
+                    이때 이 인자값은 Communicator.request 의 기본 옵션의 data속성 값으로 설정 됩니다.</p>
                 <p lang="en_US">If you set a jquery object that contains an object of type object or array [object] in the first argument, and set a server URL that returns JSON data in the second argument (url), it converts the set object to a string and then passes it to the server as a GET or POST parameter.
                     At this time, the value of this parameter is set as the value of the data property of the default option of Communicator.request.</p>
                 <pre><code>N.comm({ "param" : "value" }, "data.json").submit(function(data) {});</code></pre>
                 <p lang="ko_KR" class="alert">
-                    type(HTTP METHOD) 옵션이 GET 일 경우 data 속성 값(param)이 object 이거나 array[object] 타입이면 "q" 파라미터 키에 URL encoding 된 파라미터 문자열이 값으로 설정 됩니다.<br>
+                    type(HTTP METHOD) 옵션이 GET 일 경우 data속성 값(param)이 object 이거나 array[object] 타입이면 "q" 파라미터 키에 URL encoding 된 파라미터 문자열이 값으로 설정 됩니다.<br>
                     &nbsp;&nbsp;ex) <strong>data.json?q=%5B%7B%22param%22%3A%22value%22%7D%5D</strong> // q=[{"param":"value"}]<br>
                     GET 파라미터는 전송 할 수 있는 데이터의 최대값이 있기 때문에 브라우저별 GET 파라미터의 최대 전송량을 파악하여 사용하기 바랍니다.<br>
                 </p>

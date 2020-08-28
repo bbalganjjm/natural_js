@@ -1016,7 +1016,7 @@
              */
             "message" : {
                 "ko_KR" : {
-                    "NoContextSpecifiedInSelector" : 'Controller object 의 함수 안 에서 요소를 선택할 때는 반드시 $() 나 N() 함수의 두번째 인자(context)에 view 요소를 입력 하거나 view 요소에서 find 해야 합니다.'
+                    "NoContextSpecifiedInSelector" : 'Controller object의 함수 안에서 요소를 선택할 때는 반드시 $() 나 N() 함수의 두번째 인자(context)에 view 요소를 입력 하거나 view 요소에서 find 해야 합니다.'
                         + 'view(context) 요소를 입력하지 않으면 다른 View 의 요소까지 선택 되어 의도하지 않은 오류가 발생 할 수 있습니다.'
                         + '\nex) N("selector", cont.view).hide();'
                         + '\n    cont.view.find("selector").hide();',

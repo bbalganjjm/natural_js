@@ -253,7 +253,7 @@
 ...</code></pre>
                 <p lang="ko_KR" class="alert">너무 작게 지정하면 스크롤이 생성 되지 않아 데이터가 모두 표시 되지 않습니다. 반드시 행 들이 리스트 바디를 넘칠 수 있는 양을 지정 해 주어야 합니다.</p>
                 <p lang="en_US" class="alert">If it is set too small, scrolling is not created and all data is not displayed. You must specify the amount by which rows can overflow the list body.</p>
-                <p lang="ko_KR" class="alert">너무 크게 지정하면 스크롤 페이징이 작동될때 브라우저에 부하가 발생되므로 리스트에 입력요소나 이미지가 들어 있다면 100 이하로 설정하고 그렇지 않다면 1000 이하로 설정하는 것을 권장합니다.</p>
+                <p lang="ko_KR" class="alert">너무 크게 지정하면 스크롤 페이징이 작동될때 브라우저에 부하가 발생되므로 리스트에 입력 요소나 이미지가 들어 있다면 100 이하로 설정하고 그렇지 않다면 1000 이하로 설정하는 것을 권장합니다.</p>
                 <p lang="en_US" class="alert">If set too large, browser performance is overhead when scroll paging is enabled, so it is recommended to set it to 100 or less if the input element or image is included in the list, otherwise 1000 or less.</p>
             </td>
         </tr>
@@ -349,7 +349,7 @@
             <td>false</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">true로 설정하면 컴포넌트 초기화 전에 입력요소에 바인딩 되어 있는 이벤트와 format, validate, dataSync등의 컴포넌트 이벤트의 충돌을 방지 해 줍니다.</p>
+                <p lang="ko_KR">true로 설정하면 컴포넌트 초기화 전에 입력 요소에 바인딩 되어 있는 이벤트와 format, validate, dataSync등의 컴포넌트 이벤트의 충돌을 방지 해 줍니다.</p>
                 <p lang="en_US">If set to true, it prevents the conflict of the event bound to the input element before component initialization and the component event such as format, validate, and dataSync.</p>
                 <p lang="ko_KR" class="alert">format 이 정상적으로 동작하지 않거나 바인딩 되어 있는 데이터가 의도한대로 g핸들링 되지 등, 알수 없는 오류가 발생 했을 때 true 로 설정 바랍니다.</p>
                 <p lang="en_US" class="alert">Set to true when an unknown error occurs, such as the format not working properly or the bound data is not handled as intended.</p>
@@ -361,12 +361,12 @@
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">bind 하거나 add 했을 때 생성 된 행 요소에 데이터가 바인딩 되기 전에 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="ko_KR">bind 하거나 add 했을 때 생성된 행 요소에 데이터가 바인딩 되기 전에 실행되는 이벤트 핸들러를 정의 합니다.</p>
                 <p lang="en_US">Defines an event handler that is executed before data is bound to the row element created when bind or add.</p>
                 <pre lang="ko_KR"><code>rowHandlerBeforeBind : function(rowIdx, rowEle, rowData) {
     // this : N.list 인스턴스
-    // rowIdx : 생성 된 행 index
-    // rowEle : 생성 된 행 요소(li)
+    // rowIdx : 생성된 행 index
+    // rowEle : 생성된 행 요소(li)
     // rowData : 생성 될 행의 Data
 }</code></pre>
                 <pre lang="en_US"><code>rowHandlerBeforeBind : function(rowIdx, rowEle, rowData) {
@@ -385,13 +385,13 @@
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">bind 하거나 add 했을 때 생성 된 행 요소에 데이터가 바인딩된 후에 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="ko_KR">bind 하거나 add 했을 때 생성된 행 요소에 데이터가 바인딩된 후에 실행되는 이벤트 핸들러를 정의 합니다.</p>
                 <p lang="en_US">Defines an event handler that is executed after data is bound to the row element created when bind or add.</p>
                 <pre lang="ko_KR"><code>rowHandler : function(rowIdx, rowEle, rowData) {
     // this : N.list 인스턴스
-    // rowIdx : 생성 된 행 index
-    // rowEle : 생성 된 행 요소(li)
-    // rowData : 생성 된 행의 Data
+    // rowIdx : 생성된 행 index
+    // rowEle : 생성된 행 요소(li)
+    // rowData : 생성된 행의 Data
 }</code></pre>
                 <pre lang="en_US"><code>rowHandler : function(rowIdx, rowEle, rowData) {
     // this : N.list instance
@@ -429,7 +429,7 @@
 }</code></pre>
                 <p lang="ko_KR" class="alert">select 나 multiselect 옵션 true로 설정 되었을 경우에만 실행 됩니다.</p>
                 <p lang="en_US" class="alert">It is executed only when the select or multiselect option is set to true.</p>
-                <p lang="ko_KR" class="alert">unselect 옵션이 false로 설정 되었을 경우 선택이 해제 되면 rowIdx 인자 값에 -1을 반환 하고 선택 되면 선택 된 행의 인덱스를 반환 합니다.</p>
+                <p lang="ko_KR" class="alert">unselect 옵션이 false로 설정 되었을 경우 선택이 해제 되면 rowIdx 인자 값에 -1을 반환 하고 선택 되면 선택 된 행의 인덱스를 반환합니다.</p>
                 <p lang="en_US" class="alert">If the unselect option is set to false, -1 is returned in the value of the rowIdx argument when the deselected, and when selected, the index of the selected row is returned.</p>
             </td>
         </tr>

@@ -19,9 +19,9 @@
             <td style="text-align: center;">N/A</td>
             <td>jquery object</td>
             <td>
-                <p lang="ko_KR">Natural-JS의 플러그인 타입으로 제공되는 라이브러리들과 N 객체의 멤버변수나 함수가 정의 되어있는 core 객체 입니다.</p>
+                <p lang="ko_KR">Natural-JS의 플러그인 타입으로 제공되는 라이브러리들과 N 객체의 멤버변수나 함수가 정의되어있는 core 객체입니다.</p>
                 <p lang="en_US">It is a core object that defines the library and N object member variables and functions provided as plug-in types of Natural-JS.</p>
-                <p lang="ko_KR">N(selector) 를 실행하면 jQuery 의 init 메서드의 인자로 selector가 입력되어 Naturl-JS 와 jQuery가 동시에 초기화 됩니다.</p>
+                <p lang="ko_KR">N(selector)를 실행하면 jQuery 의 init 메서드의 인자로 selector가 입력되어 Naturl-JS 와 jQuery가 동시에 초기화 됩니다.</p>
                 <p lang="en_US">When N(selector) is executed, a selector is input as an argument of jQuery's init method, and Naturl-JS and jQuery are initialized at the same time.</p>
                 <pre><code>var divs = N("div");</code></pre>
             </td>
@@ -52,7 +52,7 @@
             <td style="text-align: center;">N/A</td>
             <td>string</td>
             <td>
-                <p lang="ko_KR">Natural-JS의 패키지별 버전을 반환 합니다.</p>
+                <p lang="ko_KR">Natural-JS의 패키지별 버전을 반환합니다.</p>
                 <p lang="en_US">Returns the each package version of Natural-JS.</p>
                 <ul lang="ko_KR">
                     <li>Natural-CORE 의 패키지의 버전 : N.version["Natural-CORE"]</li>
@@ -224,7 +224,7 @@
             <td style="text-align: center;">N/A</td>
             <td>string</td>
             <td>
-                <p lang="ko_KR">지정한 객체의 타입("number", "string", "array", "object", "function", "date")을 반환 합니다.</p>
+                <p lang="ko_KR">지정한 객체의 타입("number", "string", "array", "object", "function", "date")을 반환합니다.</p>
                 <p lang="en_US">Returns the type("number", "string", "array", "object", "function", "date") of the specified object.</p>
             </td>
         </tr>
@@ -358,7 +358,7 @@
             <td>
                 <p lang="ko_KR">입력한 객체가 array 와 비슷한 타입인지 검사 합니다.</p>
                 <p lang="en_US">Checks whether the entered object is of a type similar to array.</p>
-                <p lang="ko_KR" class="alert">jquery object 도 겉 보기에는 array 와 유사하여 true 를 반환 합니다. array, jquery object 를 둘다 같은 오브젝트로 평가하고 싶을 때 사용 하세요.</p>
+                <p lang="ko_KR" class="alert">jquery object 도 겉 보기에는 array 와 유사하여 true 를 반환합니다. array, jquery object를 둘다 같은 오브젝트로 평가하고 싶을 때 사용 하세요.</p>
                 <p lang="en_US" class="alert">The jquery object is also apparently similar to an array, returning true. Use this when you want to evaluate both array and jquery objects as the same object.</p>
             </td>
         </tr>
@@ -424,7 +424,7 @@
                     <li>비동기로 작동하는 로직과 그 로직의 전처리, 후처리 로직을 하나의 함수 블록으로 만들어서 N.serialExecute 함수의 인자로 입력하면 됩니다.</li>
                     <li>입력된 인자의 순서대로 함수들이 실행 됩니다. 다음 인자로 정의한 함수 블록을 실행 하기 위해서는 비동기 로직이 끝나는 시점 또는 다음 함수가 실행되어야 하는 시점에 defer(Deferred)인자의 resolve 메서드를 실행해야 합니다.</li>
                     <li>defer.resolve 메서드의 인자들은 그 다음 실행 될 함수 블록의 두번째 인자부터 순서대로 지정 됩니다.</li>
-                    <li>각 함수 블록의 this 와 return 객체는 인자로 입력된 함수 블록들의 Deferred 객체들이 담겨 있는 array 객체 입니다.</li>
+                    <li>각 함수 블록의 this 와 return 객체는 인자로 입력된 함수 블록들의 Deferred 객체들이 담겨 있는 array 객체입니다.</li>
                     <li>
                         <p>이 this 를 이용해서 첫번째 함수 블록의 비동기 로직의 완료 시점에 this[3].resolve() 와 같이 실행하면 두번째, 세번째 함수 블록을 건너 뛰고 네번째 함수 블록을 실행 시킬 수 있습니다.</p>
                         <p class="alert">비동기 로직의 시작 시점에는 아직 다음 함수 블록의 Deferred 객체가 생성되지 않았기 때문에 해당 함수 블록 앞에 정의 된 함수 블록들은 참조 가능하나 이후에 정의 된 함수 블록은 참조가 불가능 합니다.</p>

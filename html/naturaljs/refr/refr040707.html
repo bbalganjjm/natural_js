@@ -132,7 +132,7 @@
 &lt;button class="btn-search"&gt;검색&lt;/button&gt;
 
 &lt;script type="text/javascript"&gt;
-    // add 메서드를 실행하면 id 속성을 갖고 있는 입력요소들의 name 속성값과 value 속성값으로 data 객체를 생성 합니다.
+    // add 메서드를 실행하면 id 속성을 갖고 있는 입력 요소들의 name 속성값과 value 속성값으로 data 객체를 생성 합니다.
     var form = N(data).form(".form").<strong>add</strong>(); // { "name": "", "age": "" }
 
     N(".btn-search").click(function() {
@@ -246,9 +246,9 @@
     // 2. Binds the form data
     N(data).<strong>form</strong>(".form").<strong>bind</strong>();
 &lt;/script&gt;</code></pre>
-    <h4 lang="ko_KR" class="notIndex">5. N.select 를 사용하지 않고 radio, checkbox 입력요소를 N.form 과 연동 하기.</h4>
+    <h4 lang="ko_KR" class="notIndex">5. N.select 를 사용하지 않고 radio, checkbox 입력 요소를 N.form 과 연동 하기.</h4>
     <h4 lang="en_US" class="notIndex">5. Linking radio and checkbox input elements with N.form without using N.select.</h4>
-    <p lang="ko_KR" class="alert">radio 와 checkbox 입력요소의 첫번째 요소에 name 속성값과 같은 id 속성값을 반드시 정의 해야 합니다.</p>
+    <p lang="ko_KR" class="alert">radio 와 checkbox 입력 요소의 첫번째 요소에 name 속성값과 같은 id 속성값을 반드시 정의 해야 합니다.</p>
     <p lang="en_US" class="alert">The id element value, such as the name attribute value, must be defined in the first element of the radio and checkbox input elements.</p>
     <pre><code>&lt;div class="form"&gt;
     &lt;label&gt;&lt;input id="age" name="age" value="10"&gt;&lt;span&gt;10&lt;/span&gt;&lt;/label&gt;

@@ -58,9 +58,9 @@ N.context.attr("ui", {
 
 [http://www.json.org/json-ko.html](http://www.json.org/json-ko.html)
 
-Natrual-JS 에서 JSON 은 아주 중요 합니다. 서버와 송수신하는 데이터 타입이 JSON 형태의 문자열이고 컴포넌트에 바인드 되는 데이터도 JSON 객체들로 구성 된 배열 객체 입니다.
+Natrual-JS 에서 JSON 은 아주 중요 합니다. 서버와 송수신하는 데이터 타입이 JSON 형태의 문자열이고 컴포넌트에 바인드 되는 데이터도 JSON 객체들로 구성 된 배열 객체입니다.
 
-다시 본론으로... Natural-JS의 환경설정값은 Context(N.context) 객체에 저장 됩니다. 환경설정값중 위 구문에 해당하는 N.context.attr("architecture").page.context 값은 아주 중요한 값입니다. 이 값은 Natural-JS의 컴포넌트 요소들이 적재 될 컨테이너 요소를 jQuery Selector 문자열로 지정하면 됩니다. 쉽게말해 페이지 컨텐츠들을 표시 할 동적으로 변하지 않는 박스 요소를 지정 하면 됩니다. 더불어, N.context.attr("ui").alert.context 값에 N.alert HTML 요소를 저장하는 컨테이너 요소의 selector 를 지정 해 주세요. 보통 N.context.attr("architecture").page.context 값과 같은 요소를 지정하면 됩니다. Tab(N.tab) 이나 Popup(N.popup), Datepicker(N.datepicker)등 Natural-UI에서 지원하는 컴포넌트들의 자원이 여기(N.context.attr...context)에서 지정한 영역에 생성되고 페이지가 전환 될 때 이 영역에 다시 덮어 씌움으로서 브라우저의 자원을 반환하게 됩니다. 페이지 Redirect를 하지 않는 Single Page Web Application을 개발할 때 브라우저 리소스를 따로 관리 하지 않아도 되어서 편리 하겠죠? 그 외 환경설정 값들은 [Config](#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s) 메뉴의 내용을 참고 해 주세요.
+다시 본론으로... Natural-JS의 환경설정값은 Context(N.context) 객체에 저장됩니다. 환경설정값중 위 구문에 해당하는 N.context.attr("architecture").page.context 값은 아주 중요한 값입니다. 이 값은 Natural-JS의 컴포넌트 요소들이 적재 될 컨테이너 요소를 jQuery Selector 문자열로 지정하면 됩니다. 쉽게말해 페이지 컨텐츠들을 표시 할 동적으로 변하지 않는 박스 요소를 지정 하면 됩니다. 더불어, N.context.attr("ui").alert.context 값에 N.alert HTML 요소를 저장하는 컨테이너 요소의 selector를 지정 해 주세요. 보통 N.context.attr("architecture").page.context 값과 같은 요소를 지정하면 됩니다. Tab(N.tab) 이나 Popup(N.popup), Datepicker(N.datepicker)등 Natural-UI에서 지원하는 컴포넌트들의 자원이 여기(N.context.attr...context)에서 지정한 영역에 생성되고 페이지가 전환 될 때 이 영역에 다시 덮어 씌움으로서 브라우저의 자원을 반환하게 됩니다. 페이지 Redirect를 하지 않는 Single Page Web Application을 개발할 때 브라우저 리소스를 따로 관리 하지 않아도 되어서 편리 하겠죠? 그 외 환경설정 값들은 [Config](#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s) 메뉴의 내용을 참고 해 주세요.
 
 <p class="alert"><a href="#cmVmcjA1MDIlMjREb2N1bWVudHMkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDUwMi5odG1s">Documents</a>(N.docs) 컴포넌트를 사용하는 경우에는 지정할 필요가 없습니다.</p>
 <p class="alert">SPA(Single Page Application)가 아니면 "body" 로 설정 해 주세요.</p>
@@ -90,7 +90,7 @@ N.context.attr("ui", {
 
 ##Controller(N.cont) 와 Communicator(N.comm)
 
-Natural-JS는 페이지 블록의 소스코드에서 개발영역과 디자인영역을 구분하고 요소(Element)간, 스크립트 간 영역(scope)을 보장 해 주기위한 간단한 소스코드의 구성 규칙이 있습니다. 별로 어렵지 않습니다. 다음과 같이 View 영역과 Controller 영역을 구분하고 순서대로 배치만 해 주면 됩니다.
+Natural-JS는 페이지 블록의 소스코드에서 개발 영역과 디자인영역을 구분하고 요소(Element)간, 스크립트 간 영역(scope)을 보장 해 주기위한 간단한 소스코드의 구성 규칙이 있습니다. 별로 어렵지 않습니다. 다음과 같이 View 영역과 Controller 영역을 구분하고 순서대로 배치만 해 주면 됩니다.
 
 <p class="alert">View 와 Controller 에 대한 자세한 내용은 <a href="#cmVmcjAyMDElMjRDb250cm9sbGVyJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAyMDEuaHRtbA==">Controller</a> 메뉴를 참고 해 주세요.</a>
 
@@ -104,7 +104,7 @@ Natural-JS는 페이지 블록의 소스코드에서 개발영역과 디자인�
 </article>
 
 <script type="text/javascript">
-N(".block01").cont({ // Controller Object
+N(".block01").cont({ // Controller object
     init : function(view, request) {
         N.comm("data.json").submit(function(data) {
             // data is received data from the server
@@ -119,7 +119,7 @@ Natural-ARCHITECTURE 기반의 모든 페이지나 페이지 블록 들은 반�
 
 위 코드를 **block01.html** 파일로 저장 해 주세요.
 
-".block01" controller object 의 init 함수 안에 있는 N.comm 함수는 서버에서 데이터를 조회 하는 구문 입니다.
+".block01" controller object의 init 함수 안에 있는 N.comm 함수는 서버에서 데이터를 조회 하는 구문 입니다.
 
 <p class="alert">Natural-JS는 서버와의 데이터 및 파일을 송수신 하는데 Communicator(N.comm) 모듈을 사용 합니다. N.comm 에 대한 자세한 내용은 <a href="#cmVmcjAyMDMlMjRDb21tdW5pY2F0b3IkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDIwMy5odG1s">Communicator</a> 메뉴를 참고 해 주세요.</p>
 
@@ -235,11 +235,11 @@ Natural-ARCHITECTURE 기반의 모든 페이지나 페이지 블록 들은 반�
 </html>
 ```
 
-**index.html** 파일의 $(document).ready 함수의 콜백 인자는 N.comm을 이용하여 **block01.html** 페이지를 **#contents**(N.context.attr("architecture").page.context) 요소 안에 불러오는 코드 입니다. N.comm 은 **block01.html** 페이지 로딩이 완료 되면 Controller(N.cont) object 의 init 함수를 실행 해 줍니다.
+**index.html** 파일의 $(document).ready 함수의 콜백 인자는 N.comm을 이용하여 **block01.html** 페이지를 **#contents**(N.context.attr("architecture").page.context) 요소 안에 불러오는 코드 입니다. N.comm 은 **block01.html** 페이지 로딩이 완료 되면 Controller(N.cont) object의 init 함수를 실행해 줍니다.
 
-<p class="alert">$ (document).ready는 페이지 요소를로드 한 후 인자로 지정된 콜백 함수를 실행 해 주는 jQuery에서 제공하는 함수입니다.</p>
+<p class="alert">$ (document).ready는 페이지 요소를로드 한 후 인자로 지정된 콜백 함수를 실행해 주는 jQuery에서 제공하는 함수입니다.</p>
 
-이제 Natural-JS를 실행하기위한 모든 작업을 완료했습니다.
+이제 Natural-JS를 실행하기 위한 모든 작업을 완료했습니다.
 
 지금 까지 작성한 코드들을 실행 하려면 웹서버가 필요 합니다.
 

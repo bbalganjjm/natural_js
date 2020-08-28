@@ -8,7 +8,7 @@ Contents
 * [**API Menual**](#apimenual)
     * [Basic code writing rules for each file](#basiccodewritingrulesforeachfile)
 
-    * [Rules for creating property names for Controller Objects](#rulesforcreatingpropertynamesforcontrollerobjects)
+    * [Rules for creating property names for Controller objects](#rulesforcreatingpropertynamesforcontrollerobjects)
 
         * [1. Starts with "p."(UI component initialization)](#1startswithpuicomponentinitialization)
             * [1.1. N.select - Common code data binding](#11nselectcommoncodedatabinding)

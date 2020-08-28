@@ -23,7 +23,7 @@
             <td>
                 <p lang="ko_KR">UI 컴포넌트의 context 요소나 View 요소에서 컴포넌트 객체의 인스턴스 또는 Controller object를 반환 하거나 객체 인스턴스를 요소에 저장 합니다.</p>
                 <p lang="en_US">Returns the instance of the component object or the Controller object from the context element or View element of the UI component, or saves the object instance to the element.</p>
-                <p lang="ko_KR" class="alert">Natural-JS는 탭이나 팝업 등의 블록 컨텐츠를 쉽게 제어하기 위해서 컴포넌트나 라이브러리 초기화 시 지정한 템플릿(context 나 view) 요소에 생성 된 객체 인스턴스를 저장 합니다.</p>
+                <p lang="ko_KR" class="alert">Natural-JS는 탭이나 팝업 등의 블록 컨텐츠를 쉽게 제어하기 위해서 컴포넌트나 라이브러리 초기화 시 지정한 템플릿(context 나 view) 요소에 생성된 객체 인스턴스를 저장 합니다.</p>
                 <p lang="en_US" class="alert">Natural-JS stores the created object instance in the template (context or view) element specified when initializing the component or library to easily control block contents such as tabs or pop-ups.</p>
                 <p lang="ko_KR">다음과 같이 인자의 개수와 타입에 따라서 다르게 작동 됩니다.</p>
                 <p lang="en_US">It works differently depending on the number and type of parameters as follows.</p>
@@ -83,7 +83,7 @@
                 <p lang="ko_KR">인스턴스 명</p>
                 <p lang="en_US">Instance name</p>
                 <div class="alert">
-                    <p lang="ko_KR">미리 정의 되어 있는 인스턴스 명은 다음과 같습니다.</p>
+                    <p lang="ko_KR">미리 정의되어 있는 인스턴스 명은 다음과 같습니다.</p>
                     <p lang="en_US">The predefined instance names are as follows.</p>
                     <ul>
                         <li lang="ko_KR">N.cont 의 Controller object : cont</li>
@@ -101,13 +101,13 @@
                         <li>
                             <p lang="ko_KR">N.popup 의 instance : popup</p>
                             <p lang="en_US">Instance of N.popup : popup</p>
-                            <p lang="ko_KR" class="alert">로드 된 팝업 컨텐츠의 Controller object 는 .block_overlay_msg__ &gt; .msg_box__ &gt; .view_context__ 요소에 저장 되어 있음.</p>
+                            <p lang="ko_KR" class="alert">로드 된 팝업 컨텐츠의 Controller object는 .block_overlay_msg__ &gt; .msg_box__ &gt; .view_context__ 요소에 저장 되어 있음.</p>
                             <p lang="en_US" class="alert">The controller object of the loaded pop-up content is stored in the .block_overlay_msg__ &gt; .msg_box__ &gt; .view_context__ element.</p>
                         </li>
                         <li>
                             <p lang="ko_KR">N.tab 의 instance : tab</p>
                             <p lang="en_US">Instance of N.tab : tab</p>
-                            <p lang="ko_KR" class="alert">로드 된 탭 컨텐츠의 Controller object 는 .tab__ &gt; .{tab 컨텐츠 요소 id} &gt; .view_context__ 요소에 저장 되어 있음.</p>
+                            <p lang="ko_KR" class="alert">로드 된 탭 컨텐츠의 Controller object는 .tab__ &gt; .{tab 컨텐츠 요소 id} &gt; .view_context__ 요소에 저장 되어 있음.</p>
                             <p lang="ko_KR" class="alert">The controller object of the loaded tab content is stored in the .tab__ &gt; .{tab 컨텐츠 요소 id} &gt; .view_context__ element.</p>
                         </li>
                         <li lang="ko_KR">N.select 의 instance : select</li>
@@ -127,7 +127,7 @@
                         <li lang="ko_KR">N.docs 의 instance : docs</li>
                         <li lang="en_US">Instance of N.docs : docs</li>
                     </ul>
-                    <p lang="ko_KR" class="alert">인스턴스의 저장 위치가 별도로 명시되어 있지 않은 컴포넌트는 context 옵션으로 지정한 요소에 저장 됩니다.</p>
+                    <p lang="ko_KR" class="alert">인스턴스의 저장 위치가 별도로 명시되어 있지 않은 컴포넌트는 context 옵션으로 지정한 요소에 저장됩니다.</p>
                     <p lang="en_US" class="alert">Components that do not specify where to store the instance are stored in the element specified by the context option.</p>
                 </div>
             </td>
@@ -150,7 +150,7 @@
             <td style="text-align: center;">N/A</td>
             <td>jquery object</td>
             <td>
-                <p lang="ko_KR">선택한 요소에 같은 이름의 이벤트 정의 되어 있더라도 tpBind 로 정의한 이벤트가 제일 먼저 실행 되게 해 줍니다.</p>
+                <p lang="ko_KR">선택한 요소에 같은 이름의 이벤트 정의되어 있더라도 tpBind 로 정의한 이벤트가 제일 먼저 실행 되게 해 줍니다.</p>
                 <p lang="en_US">Even if an event of the same name is defined in the selected element, the event defined by tpBind is executed first.</p>
                 <p lang="ko_KR">기본적인 사용법은 <a href="//api.jquery.com/bind"><strong>jQuery().bind</strong></a> 메서드와 같습니다.</p>
                 <p lang="en_US">The basic usage is the same as the <a href="//api.jquery.com/bind"><strong>jQuery().bind</strong></a> method.</p>
@@ -206,7 +206,7 @@
             <td>
                 <p lang="ko_KR">단일 값을 지정 할 때는 문자열로 값을 지정하고 둘 이상의 선택지를 선택 할 때는 배열에 문자열을 담아 값을 지정 합니다.</p>
                 <p lang="en_US">When specifying a single value, specify the value as a string and when selecting two or more options, specify the value by storing the string in an array.</p>
-                <p lang="ko_KR">function 지정하면 선택 된 선택지 요소 개수 만큼 지정한 콜백 함수를 실행 해 줍니다. 콜백함수의 인자는 다음과 같습니다.</p>
+                <p lang="ko_KR">function 지정하면 선택 된 선택지 요소 개수 만큼 지정한 콜백 함수를 실행해 줍니다. 콜백함수의 인자는 다음과 같습니다.</p>
                 <p lang="en_US">If function is specified, the specified callback function is executed as many as the number of selected option elements. The arguments of the callback function are as follows.</p>
                 <ul>
                     <li lang="ko_KR">this : 선택 된 선택지 요소</li>
@@ -254,11 +254,11 @@
             <td style="text-align: center;">N/A</td>
             <td>object similar to array|array|undefined</td>
             <td>
-                <p lang="ko_KR">선택한 요소에 바인드 되어 있는 이벤트들을 반환 합니다.</p>
+                <p lang="ko_KR">선택한 요소에 바인드 되어 있는 이벤트들을 반환합니다.</p>
                 <p lang="en_US">Returns the events bound to the selected element.</p>
-                <p lang="ko_KR" class="alert">eventName 인자와 namespace 인자를 둘다 입력 하지 않으면 모든 이벤트들을 반환하고 namespace 를 입력 하지 않으면 지정한 eventName 에 해당하는 이벤트들만 반환 합니다.</p>
+                <p lang="ko_KR" class="alert">eventName 인자와 namespace 인자를 둘다 입력 하지 않으면 모든 이벤트들을 반환하고 namespace 를 입력 하지 않으면 지정한 eventName 에 해당하는 이벤트들만 반환합니다.</p>
                 <p lang="en_US" class="alert">If both the eventName and namespace arguments are not entered, all events are returned. If no namespace is entered, only the events corresponding to the specified eventName are returned.</p>
-                <p lang="ko_KR" class="alert">namespace 인자가 입력 되면 배열 객체 타입으로 이벤트를 반환 하고 그렇지 않은 경우에는 jquery object 타입으로 이벤트들을 반환 합니다. 바인드되어 있는 이벤트가 없으면 undefined 를 반환 합니다.</p>
+                <p lang="ko_KR" class="alert">namespace 인자가 입력 되면 배열 객체 타입으로 이벤트를 반환 하고 그렇지 않은 경우에는 jquery object 타입으로 이벤트들을 반환합니다. 바인드되어 있는 이벤트가 없으면 undefined 를 반환합니다.</p>
                 <p lang="en_US" class="alert">If the namespace argument is entered, the event is returned as an array object type. Otherwise, the event is returned as a jquery object type. If there are no bound events, undefined is returned.</p>
             </td>
         </tr>
