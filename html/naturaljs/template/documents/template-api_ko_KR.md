@@ -137,7 +137,7 @@ var cont = N(".page-id").cont({
 
 >**N.tab과 N.popup 컴포넌트의 `onOpen 옵션의 함수명 문자열은 반드시 onOpen 으로 시작("onOpen", "onOpenABC" 등)`해야 합니다. 그렇지 않으면 Controller object의 init 함수보다 onOpen 함수가 먼저 실행 되어서 컴포넌트 인스턴스등을 참조하지 못할 수 있습니다.**
 
->**N.tab 컴포넌트의 onActive 옵션은 주의해서 사용바랍니다. init 함수의 지연 실행에 대한 대책이 아직 없어서 onActive가 init 보다 먼저 실행됩니다. 비슷한 안정적인 기능을 원한다면 onOpen 을 사용해 주세요.**
+>**N.tab 컴포넌트의 onActive 옵션은 주의해서 사용바랍니다. init 함수의 지연 실행에 대한 대책이 아직 없어서 onActive가 init 보다 먼저 실행됩니다. 비슷한 안정적인 기능을 원한다면 onOpen을 사용해 주세요.**
 
 컴포넌트 옵션은 Natural-UI의 컴포넌트별 기본 옵션 외에 해당 컴포넌트의 용도를 지정 하거나 초기화 후 바로 실행할 함수 등을 지정할 수 있는 옵션이 더 추가 되어 있습니다.
 Natural-TEMPLATE에서만 사용 가능한 컴포넌트 별 추가 옵션들은 다음과 같습니다.
@@ -184,7 +184,7 @@ Natural-TEMPLATE에서만 사용 가능한 컴포넌트 별 추가 옵션들은 
 | 속성 | 옵션명 | 타입 | 필수여부 | 속성값 | 설명 |
 | :--: | :--: | :--: | :--: | :--: | -- |
 | p.select.{id} | - | - | - | - | N.select 컴포넌트를 초기화 합니다. |
-| - | comm | string | | 목록을 조회할 Communicator(N.comm) | Controller object에 선언한 "c.{actionName}" 을 지정합니다. |
+| - | comm | string | | 목록을 조회할 Communicator(N.comm) | Controller object에 선언한 "c.{actionName}"을 지정합니다. |
 | - | data | array[object] | | 바인딩할 데이터 | comm 옵션을 지정하지 않고 data 옵션으로 [{}, {}]와 같은 데이터를 직접 생성 하여 바인딩할 수 있습니다. |
 | - | key | string | O | 선택 요소의 명칭에 바인드 될 데이터 속성 명 | 조회한 데이터 객체에서 바인딩할 프로퍼티명을 설정합니다. |
 | - | val | string | O | 선택 요소의 값에 바인드 될 데이터 속성 명 | 조회한 데이터 객체에서 바인딩할 프로퍼티명을 설정합니다. |
@@ -276,7 +276,7 @@ Natural-TEMPLATE에서만 사용 가능한 컴포넌트 별 추가 옵션들은 
 ###1.4. 다른 모든 컴포넌트
 | 속성 | 옵션 | 타입 | 필수여부 | 속성값 | 설명 |
 | :--: | :--: | :--: | :--: | :--: | -- |
-| p.{component}.{id} | - | - | - | - | N.{component} 컴포넌트를 초기화 합니다. N.alert 을 제외한 모든 컴포넌트를 이와 같은 방법으로 초기화할 수 있습니다. |
+| p.{component}.{id} | - | - | - | - | N.{component} 컴포넌트를 초기화 합니다. N.alert을 제외한 모든 컴포넌트를 이와 같은 방법으로 초기화할 수 있습니다. |
 
  * Tab(N.tab) 예제
 

@@ -82,7 +82,7 @@
                     <div>
                        <p lang="ko_KR">정규 표현식 문자열입니다. 큰따옴표나 작은따옴표로 감싸지 않아야 합니다.</p>
                        <p lang="en_US">Regular expression string. It should not be enclosed in double or single quotation marks.</p>
-<pre><code><span lang="ko_KR">/* href 속성에 "Mr.Lee" 혹은 "Mr.Kim" 을 포함하는 모든 a 태그 추출 */</span><span lang="en_US">/* Extract all a tags that contain "Mr.Lee" or "Mr.Kim" in the href attribute. */</span>
+<pre><code><span lang="ko_KR">/* href 속성에 "Mr.Lee" 혹은 "Mr.Kim"을 포함하는 모든 a 태그 추출 */</span><span lang="en_US">/* Extract all a tags that contain "Mr.Lee" or "Mr.Kim" in the href attribute. */</span>
 N("a:regexp(href, 'Mr\\.(Lee|Kim)')"); // (X)
 N('a:regexp(href, "Mr\\.(Lee|Kim)")'); // (X)
 N("a:regexp(href, Mr\\.(Lee|Kim))"); // (O)

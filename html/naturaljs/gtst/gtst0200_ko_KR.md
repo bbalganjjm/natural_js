@@ -1,7 +1,7 @@
 웹 어플리케이션 기본 프레임 만들기
 ===
 
-메뉴를 좌측에 배치하고 우측에  MDI 형태로 페이지를 표시해 주는 <a href="#cmVmcjA1MDIlMjREb2N1bWVudHMkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDUwMi5odG1s">Documents</a>(N.docs) 컴포넌트를 사용 하여 Single Page Web Application 을 개발해 보겠습니다.
+메뉴를 좌측에 배치하고 우측에  MDI 형태로 페이지를 표시해 주는 <a href="#cmVmcjA1MDIlMjREb2N1bWVudHMkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDUwMi5odG1s">Documents</a>(N.docs) 컴포넌트를 사용 하여 Single Page Web Application을 개발해 보겠습니다.
 
 <p class="alert">Documents(N.docs)에 대한 자세한 내용은 <a href="#cmVmcjA1MDIlMjREb2N1bWVudHMkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDUwMi5odG1s">Documents</a> 메뉴를 참고해 주세요.</p>
 
@@ -13,7 +13,7 @@
  * /html/contents - 메뉴 컨텐츠 파일 폴더
  * /html/index - 메인 인덱스와 관련된 파일 폴더
 
-폴더 생성이 완료 되었으면 [GitHub](https://github.com/bbalganjjm/natural_js)의 마스터 브랜치에서 다음 파일을 다운로드하여 해당 경로로 복사하십시오.
+폴더 생성이 완료 되었으면 [GitHub](https://github.com/bbalganjjm/natural_js)의 마스터 브랜치에서 다음 파일을 다운로드하여 해당 경로로 복사해 주세요.
 
  * js/natural_js/lib/jquery-1.12.4.min.js - GitHub의 master 브랜치에서 다운로드 한 압축 파일의 lib 폴더에 있음
  * js/natural_js/css/natural.ui.css - GitHub의 master 브랜치에서 다운로드 한 압축 파일의 css 폴더에 있음

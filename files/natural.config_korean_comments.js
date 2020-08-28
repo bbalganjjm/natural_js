@@ -8,7 +8,7 @@
  * 2. 여기(N.Config)에서 지정한 옵션 값
  *    2.1. 각 영역별로 지정 하세요. 컴포넌트 초기화 시 각 영역별 값들을 자동으로 기본옵션으로 지정해 줍니다.
  *         ex) 2.1.1 모든 N.grid의 높이를 300으로 지정하고 싶음.
- *                   - N.context.attr("ui")의 grid 키에 height 속성을 추가하고 값은 300 을 지정
+ *                   - N.context.attr("ui")의 grid 키에 height 속성을 추가하고 값은 300을 지정
  *             2.1.2 모든 N.form에 html을 인식 시키고 싶음.
  *                   - N.context.attr("ui")의 form 키에 html 속성을 추가하고 값은 true로 지정
  *
@@ -70,7 +70,7 @@
          */
         "cont" : {
             /**
-             * advisor 에서 참조할 pointcut 을 정의 합니다.
+             * advisor 에서 참조할 pointcut을 정의 합니다.
              * pointcut 은 반드시 fn 속성에 param, cont, fnChain 인자를 가진 함수로 정의해야 합니다.
              * 함수 수행 결과(boolean)는 advice의 적용 여부를 판단하는데 사용 됩니다.
              */
@@ -186,7 +186,7 @@
                     /**
                      * 기본 Request Method
                      * GET 으로 되어 있으면 JSON 형태의 파라미터가 q라는 파라미터명으로 q={a:1}와 같이 전달 됩니다.
-                     * JSON Object String 을 Request Body에 담아 전송하려면 반드시 POST로 설정 바랍니다.
+                     * JSON Object String을 Request Body에 담아 전송하려면 반드시 POST로 설정 바랍니다.
                      */
                     "type" : "POST",
                     /**
@@ -199,7 +199,7 @@
                     "cache" : true,
                     /**
                      * Single Page Application(SPA) 개발 시 N.comm(async) 으로 데이터를 요청하고 요청이 오기전에 다른 페이지로 전환 했을때
-                     * 요청할 때 location.href와 응답 올때 location.href 을 비교하여 틀리면 요청을 중지 할지 여부
+                     * 요청할 때 location.href와 응답 올때 location.href을 비교하여 틀리면 요청을 중지 할지 여부
                      */
                     "urlSync" : true,
                     /**

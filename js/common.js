@@ -185,7 +185,7 @@
          */
         excelDownload : function(params, url, filename, columnNames, extColumnNames) {
             if(filename === undefined) {
-                return N.error("엑셀 파일명(arguments[0]) 을 입력 하세요.");
+                return N.error("엑셀 파일명(arguments[0])을 입력 하세요.");
             }
 
             if(params) {
@@ -238,7 +238,7 @@
         /**
          * 엑셀 대용량 데이터 다운로드
          *
-         * 대용량 엑셀 데이터 조회시 Heap 메모리 Full 을 발생시키지 않고 빠르게 다운로드 함. 그러나
+         * 대용량 엑셀 데이터 조회시 Heap 메모리 Full을 발생시키지 않고 빠르게 다운로드 함. 그러나
          * Service 나 Controller 에서 파라미터는 조작 가능하지만 리턴 데이터는 MyBatis 에서 엑셀파일을 바로 생성하기 때문에 조작이 불가능함.
          */
         excelStreaming : function(params, url, filename, columnNames, extColumnNames) {
@@ -299,7 +299,7 @@
     // N.comm에 Excel 다운로드 기능 확장
     N.comm.excelDownload = function(args) {
         if(args === undefined || args.length === 0) {
-            return N.error("엑셀 파일명(arguments[0]) 을 입력 하세요.");
+            return N.error("엑셀 파일명(arguments[0])을 입력 하세요.");
         }
         var url = this.request.options.url;
         if(url.indexOf(".") < 0) {
@@ -312,7 +312,7 @@
     };
     N.comm.excelStreaming = function(args) {
         if(args === undefined || args.length === 0) {
-            return N.error("엑셀 파일명(arguments[0]) 을 입력 하세요.");
+            return N.error("엑셀 파일명(arguments[0])을 입력 하세요.");
         }
         var url = this.request.options.url;
         if(url.indexOf(".") < 0) {

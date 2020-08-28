@@ -1,7 +1,7 @@
 1. VOFilterAspect.java 에서 파라미터 객체를 Deep 하게 구성 시 1레벨 오브젝트에만 추가 파라미터가 추가 되는 문제.
 
     A :  XSS 공격 문자열 제거도 1레벨 이상은 안되었더군요. 몇레벨이든 끝까지 추가 하도록 변경했습니다.
-        AOP Pointcut 을 Mapper에 적용하지 말고 첨부 된 file/VOFilterAspect.java 파일의 내용들을 같은 파일에 적용해 주세요.
+        AOP Pointcut을 Mapper에 적용하지 말고 첨부 된 file/VOFilterAspect.java 파일의 내용들을 같은 파일에 적용해 주세요.
 
 2. Excel Export 문의 - POST, 보안 관련
 
@@ -25,7 +25,7 @@
 3. Excel Import 문의 - getDataListFromXlsx
 
     A : getDataListFromXlsx 메서드가 XlsxToJSONController.java의 함수를 말씀하시는것 같은데 역할 은 Excel 파일을 브라우저에서 받아서
-        엑셀 데이터를 추출 한 다음 JSON 문자열 Stream 으로 쏴주는 역할 을 합니다.
+        엑셀 데이터를 추출 한 다음 JSON 문자열 Stream 으로 쏴주는 역할을 합니다.
         common.js의 N.grid.prototype.bindExcel 함수와 파라미터(파일, 데이터)가 유기적으로 역여 있는 프레임웍 기능이어서 단독으로 사용은
         어려울것 같아서 설명은 생략 하겠습니다. ^^;
 
@@ -112,8 +112,8 @@
              * 서버에서 XSS 필터링 된 값을 입력 요소에 바인드 할때는 원복해서 바인드하는 이벤트 핸들러.
              *
              * onBeforeBindValue 이벤트
-             *  - 값이 바인드 되기전 실행 되는 이벤트, 반드시 val 을 (가공 후) 다시 리턴해야 함.
-             *  - N.form 을 사용하는 N.grid, N.list 에도 같이 적용 됨.
+             *  - 값이 바인드 되기전 실행 되는 이벤트, 반드시 val을 (가공 후) 다시 리턴해야 함.
+             *  - N.form을 사용하는 N.grid, N.list 에도 같이 적용 됨.
              *    - ele : 바인드 될 요소
              *    - ele : 바인드 될 값
              *    - ele : 호출 함수 명 - "bind" | "val"

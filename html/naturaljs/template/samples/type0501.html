@@ -202,7 +202,7 @@
             height : 438,
             select : true,
             onSelect : function(index, rowEle, data, beforeRow, e) {
-                // onSelect 함수는 .data("selected") 함수 전에 실행 되므로 부자연 스럽지만 setTimeout(0) 을 넣어줌.
+                // onSelect 함수는 .data("selected") 함수 전에 실행 되므로 부자연 스럽지만 setTimeout(0)을 넣어줌.
                 setTimeout(function() {
                     cont["c.getSampleList"]().submit(function(data) {
                         cont["p.grid.master"].bind(data);
