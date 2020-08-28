@@ -269,7 +269,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 팝업이 �
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">팝업의 Controller object 에서 부모 페이지의 Controller object를 참조하기 위한 옵션 입니다.</p>
+                <p lang="ko_KR">팝업의 Controller object 에서 부모 페이지의 Controller object를 참조하기 위한 옵션입니다.</p>
                 <p lang="en_US">Option to refer to the Controller object of the parent page in the Controller object of the popup.</p>
                 <p lang="ko_KR">팝업 인스턴스를 생성하는 페이지의 Controller object를 opener 옵션으로 설정 하면 팝업의 Controller object의 opener 속성으로 전달 됩니다.</p>
                 <p lang="en_US">If the Controller object of the page creating the popup instance is set as the opener option, it is passed as the opener property of the Controller object of the popup.</p>
@@ -543,7 +543,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 팝업이 �
     // onCloseData : The first argument value of the (Controller object).caller.close function called from the popup is passed.
 }</code></pre>
                 <p lang="ko_KR" class="alert">
-                                팝업 컨텐츠 로딩이 완료 되면 팝업의 Controller object 에 caller 라는 속성이 생성됩니다. 이 caller 는 이 팝업을 생성한 부모페이지의 N.popup instance 입니다.<br>
+                                팝업 컨텐츠 로딩이 완료 되면 팝업의 Controller object 에 caller 라는 속성이 생성됩니다. 이 caller 는 이 팝업을 생성한 부모페이지의 N.popup instance입니다.<br>
                                 팝업에서 자체팝업을 닫을 때는 팝업의 Controller object 에서 "this.caller.close(onCloseData);" 명령을 실행 하면 됩니다. 이 명령을 실행하면 팝업이 닫히면서 onClose 이벤트 핸들러 함수의 첫번째 인자로 onCloseData 가 전달 됩니다.</p>
                 <p lang="en_US" class="alert">
                     When loading popup content is completed, a caller property is created in the controller object of the popup. This caller is the N.popup instance of the parent page that created this popup.<br>

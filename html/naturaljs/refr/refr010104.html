@@ -3,7 +3,7 @@
         <span lang="ko_KR">N 객체의 함수</span>
         <span lang="en_US">Function of N Object</span>
     </h2>
-    <p lang="ko_KR">N 객체의 코어 및 유틸리티 함수 입니다.</p>
+    <p lang="ko_KR">N 객체의 코어 및 유틸리티 함수입니다.</p>
     <p lang="en_US">This is a core and utility function of the N object.</p>
     <table class="api form">
         <tr>
@@ -418,7 +418,7 @@
             <td style="text-align: center;">N/A</td>
             <td>[jQuery Deferred Objects]</td>
             <td>
-                <p lang="ko_KR">비동기 실행로직들의 계층적 콜백들을 jQuery.Deferred 를 사용하여 직렬로 표기할 수 있게 해 주는 함수 입니다.</p>
+                <p lang="ko_KR">비동기 실행로직들의 계층적 콜백들을 jQuery.Deferred 를 사용하여 직렬로 표기할 수 있게 해 주는 함수입니다.</p>
                 <p lang="en_US">This is a function that posibles hierarchical callbacks of asynchronous execution logics to be serialized using jQuery.Deferred.</p>
                 <ul lang="ko_KR">
                     <li>비동기로 작동하는 로직과 그 로직의 전처리, 후처리 로직을 하나의 함수 블록으로 만들어서 N.serialExecute 함수의 인자로 입력하면 됩니다.</li>
@@ -526,13 +526,13 @@
                 <p lang="en_US">Using jQuery $.when, you can group the function blocks with the defers variable object returned from the above source code, and also execute the logic after all the function blocks of the corresponding group are completed.</p>
                 <pre lang="ko_KR"><code>// 두 번째, 세번째 함수 블록이 모두 완료 되면 로직을 실행
 $.when(defers[1], defers[2]).done(function(arguments[0], arguments[1]) {
-    // arguments[0], arguments[1] 은 각 함수 블록에서 defer.resolve 함수를 실행할 때 인자로 지정한 오브젝트들 입니다.
+    // arguments[0], arguments[1] 은 각 함수 블록에서 defer.resolve 함수를 실행할 때 인자로 지정한 오브젝트들입니다.
     N.log("2번, 3번 로직 모두 완료.");
 });
 
 // 전체 함수 블록들이 모두 완료 되면 로직을 실행
 $.when.apply($, defers).done(function(arguments[0], arguments[1], arguments[2], arguments[3]) {
-    // arguments[0], arguments[1], arguments[2], arguments[3] 은 각 함수 블록에서 defer.resolve 함수를 호출할 때 인자로 지정한 오브젝트들 입니다.
+    // arguments[0], arguments[1], arguments[2], arguments[3] 은 각 함수 블록에서 defer.resolve 함수를 호출할 때 인자로 지정한 오브젝트들입니다.
     N.log("1번, 2번, 3번, 4번 전체 로직 완료.");
 });</code></pre>
                 <pre lang="en_US"><code>// Executes logic when the second and third function blocks are completed

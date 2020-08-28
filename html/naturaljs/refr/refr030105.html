@@ -12,12 +12,12 @@
     <pre><code>&lt;span id="startDate" data-format='[["date", 8]]'&gt;&lt;/span&gt;</code></pre>
     <p lang="ko_KR">위와 같이 입력 요소가 아닌 요소에 포멧 룰을 선언하면 포멧 된 값이 요소의 text 로 입력 됩니다.</p>
     <p lang="en_US">If a format rule is declared on an element that is not an input element as above, the formatted value is put as the text of the element.</p>
-    <p lang="ko_KR" class="alert">N.grid 나 N.form 의 data 매서드를 호출하여 컴포넌트의 데이터를 가져와 보면 포멧팅 되지 않은 값으로 세팅 되어 있을 것 입니다. 요소에 보이는 값들만 포멧팅 하기 때문에 서버에 데이터를 전송할 때 unforamt 하지 않아도 됩니다.</p>
+    <p lang="ko_KR" class="alert">N.grid 나 N.form 의 data 매서드를 호출하여 컴포넌트의 데이터를 가져와 보면 포멧팅 되지 않은 값으로 세팅 되어 있을 것입니다. 요소에 보이는 값들만 포멧팅 하기 때문에 서버에 데이터를 전송할 때 unforamt 하지 않아도 됩니다.</p>
     <p lang="en_US" class="alert">If you call the data method of N.grid or N.form to get the component data, it will be set to the unformatted value. It only formats the values ​​shown in the element, so there is no need to unformat when sending data to the server.</p>
 
     <h4 lang="ko_KR" class="notIndex">2. N.formatter 라이브러리로 포멧팅 하기.</h4>
     <h4 lang="en_US" class="notIndex">2. Let's format it with the N.formatter library.</h4>
-    <p lang="ko_KR">요소에 포멧 룰을 선언할 때 data-format='[["date", 8]]' 속성 값에서 "date" 가 포멧팅룰 이고 8 이후 부터는 포멧 파라미터 이고  포멧팅할 문자열은 입력 요소의 value 값이나 그외 요소의 text 입니다.</p>
+    <p lang="ko_KR">요소에 포멧 룰을 선언할 때 data-format='[["date", 8]]' 속성 값에서 "date" 가 포멧팅룰 이고 8 이후 부터는 포멧 파라미터 이고  포멧팅할 문자열은 입력 요소의 value 값이나 그외 요소의 text입니다.</p>
     <p lang="en_US">When declaring a format rule on an element, in data-format='[["date", 8]]' attribute value, "date" is the formatting rule, and after 8 is the format parameters, and the string to be formatted is the value of the input element or the text of other element.</p>
     <p lang="ko_KR">이 선언을 명령으로 처리할 때는 다음와 같이 사용할 수 있습니다.</p>
     <p lang="en_US">When processing this declaration as a imperative, you can use it as follows:</p>

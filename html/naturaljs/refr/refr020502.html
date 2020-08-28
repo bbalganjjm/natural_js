@@ -29,16 +29,16 @@
             <td>undefined</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">N.comm 이 초기화 되기 전 실행 되는 함수 입니다.</p>
+                <p lang="ko_KR">N.comm 이 초기화 되기 전 실행 되는 함수입니다.</p>
                 <p lang="en_US">This function is executed before all N.comm is initialized.</p>
-                <p lang="ko_KR" class="alert">Controller object의 init 메서드가 실행 되기 전이 아니고 N.comm 이 인스턴스 화 되기 전에 실행 되는 이벤트 입니다.</p>
+                <p lang="ko_KR" class="alert">Controller object의 init 메서드가 실행 되기 전이 아니고 N.comm 이 인스턴스 화 되기 전에 실행 되는 이벤트입니다.</p>
                 <p lang="en_US" class="alert">This event is executed before N.comm is instantiated, not before the controller object init method is executed.</p>
 
                 <p lang="ko_KR">다음과 같은 객체나 값이 이벤트 핸들러 함수의 인자로 지정 됩니다.</p>
                 <p lang="en_US">The following object or value is specified as an argument of the event handler function.</p>
                 <ul>
                     <li>
-                        <p lang="ko_KR">obj : Communicator 의 comm 메서드를 호출하기 전에 N() 함수의 인자로 지정된 파라미터 데이터 객체 또는 페이지가 삽입 될 요소 입니다.</p>
+                        <p lang="ko_KR">obj : Communicator 의 comm 메서드를 호출하기 전에 N() 함수의 인자로 지정된 파라미터 데이터 객체 또는 페이지가 삽입 될 요소입니다.</p>
                         <p lang="en_US">obj : Argument of the N() function before calling the comm method of Communication that is the parameter data object or the element to insert page.</p>
                         <p lang="ko_KR" class="alert">파라미터 데이터가 object 타입 이면 Communicator 에서 문자열로 변환 하기 전의 원래 오브젝트(jquery object 타입)가 반환 되고 element 타입 이면 선택한 요소가 반환 됩니다.</p>
                         <p lang="en_US" class="alert">If the parameter data is of type object, the original object(jquery object type) before conversion to a string in Communicator is returned. If it is of element type, the selected element is returned.</p>
@@ -64,9 +64,9 @@ afterInit : function(obj) {
             <td>undefined</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">N.comm 이 초기화 된 후 실행 되는 함수 입니다.</p>
+                <p lang="ko_KR">N.comm 이 초기화 된 후 실행 되는 함수입니다.</p>
                 <p lang="en_US">This function is executed after N.comm is initialized.</p>
-                <p lang="ko_KR" class="alert">Controller object의 init 메서드가 실행 되기 전이 아니고 N.comm 이 인스턴스 화 되기 전에 실행 되는 이벤트 입니다.</p>
+                <p lang="ko_KR" class="alert">Controller object의 init 메서드가 실행 되기 전이 아니고 N.comm 이 인스턴스 화 되기 전에 실행 되는 이벤트입니다.</p>
                 <p lang="en_US" class="alert">This event is executed before N.comm is instantiated, not before the controller object init method is executed.</p>
                 <p lang="ko_KR">다음과 같은 객체나 값이 이벤트 핸들러 함수의 인자로 지정 됩니다.</p>
                 <p lang="en_US">The following object or value is specified as an argument of the event handler function.</p>
@@ -90,7 +90,7 @@ afterInit : function(request) {
             <td>undefined</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">서버에 요청을 보내기 전에 실행되는 함수 입니다.</p>
+                <p lang="ko_KR">서버에 요청을 보내기 전에 실행되는 함수입니다.</p>
                 <p lang="en_US">This function is executed before sending a request to the server.</p>
 
                 <p lang="ko_KR">다음과 같은 객체나 값이 이벤트 핸들러 함수의 인자로 지정 됩니다.</p>
@@ -118,7 +118,7 @@ beforeSend : function(request, xhr, settings) {
             <td>undefined</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">요청이 성공 했을 때 실행 되는 함수 입니다.</p>
+                <p lang="ko_KR">요청이 성공 했을 때 실행 되는 함수입니다.</p>
                 <p lang="en_US">This function is executed when the request is successful.</p>
                 <p lang="ko_KR" class="alert">data 인자를 수정해서 return 하면 수정 된 data 를 모든 N.comm 의 응답 data 로 받을 수 있습니다.</p>
                 <p lang="en_US" class="alert">If you return by modifying the data argument, you can receive the modified data as response data of all N.comm.</p>
@@ -149,7 +149,7 @@ success : function(request, data, textStatus, xhr) {
             <td>undefined</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">서버에서 에러가 발생 했을 때 실행 되는 함수 입니다.</p>
+                <p lang="ko_KR">서버에서 에러가 발생 했을 때 실행 되는 함수입니다.</p>
                 <p lang="en_US">This function is executed when an error occurs on the server.</p>
                 <p lang="ko_KR">다음과 같은 객체나 값이 이벤트 핸들러 함수의 인자로 지정 됩니다.</p>
                 <p lang="en_US">The following object or value is specified as an argument of the event handler function.</p>
@@ -177,7 +177,7 @@ error : function(request, xhr, textStatus, errorThrown) {
             <td>undefined</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">서버의 응답이 완료 되었을 때 실행 되는 함수 입니다.</p>
+                <p lang="ko_KR">서버의 응답이 완료 되었을 때 실행 되는 함수입니다.</p>
                 <p lang="en_US">This function is executed when the server response is completed.</p>
                 <p lang="ko_KR">다음과 같은 객체나 값이 이벤트 핸들러 함수의 인자로 지정 됩니다.</p>
                 <p lang="en_US">The following object or value is specified as an argument of the event handler function.</p>

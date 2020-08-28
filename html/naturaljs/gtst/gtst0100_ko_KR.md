@@ -11,9 +11,9 @@
 다운로드 된 파일 들 중 Natural-JS 를 구동하기 위한 필수 라이브러리 파일들은 다음과 같습니다.
 
 1.  **jquery-1.12.4.min.js** - Natural-JS는 jQuery 를 기반으로 동작 하므로 반드시 임포트 해야합니다.
-2.  **natural.ui.css** - Natural-UI 디자인과 관련된 스타일시트 파일 입니다.
-3.  **natural.js.min.js** - Natural-JS의 전체 라이브러리 파일들이 합쳐진 Minified 파일 입니다.
-4.  **natural.config.js** - Natural-JS의 환경설정 파일 입니다.
+2.  **natural.ui.css** - Natural-UI 디자인과 관련된 스타일시트 파일입니다.
+3.  **natural.js.min.js** - Natural-JS의 전체 라이브러리 파일들이 합쳐진 Minified 파일입니다.
+4.  **natural.config.js** - Natural-JS의 환경설정 파일입니다.
 
 이제 최상위 HTML 파일을 만들고 위 파일들을 다음과 같은 순서로 페이지에 Import 해 줍니다.
 
@@ -119,7 +119,7 @@ Natural-ARCHITECTURE 기반의 모든 페이지나 페이지 블록 들은 반�
 
 위 코드를 **block01.html** 파일로 저장 해 주세요.
 
-".block01" controller object의 init 함수 안에 있는 N.comm 함수는 서버에서 데이터를 조회 하는 구문 입니다.
+".block01" controller object의 init 함수 안에 있는 N.comm 함수는 서버에서 데이터를 조회 하는 구문입니다.
 
 <p class="alert">Natural-JS는 서버와의 데이터 및 파일을 송수신 하는데 Communicator(N.comm) 모듈을 사용 합니다. N.comm 에 대한 자세한 내용은 <a href="#cmVmcjAyMDMlMjRDb21tdW5pY2F0b3IkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDIwMy5odG1s">Communicator</a> 메뉴를 참고 해 주세요.</p>
 
@@ -235,7 +235,7 @@ Natural-ARCHITECTURE 기반의 모든 페이지나 페이지 블록 들은 반�
 </html>
 ```
 
-**index.html** 파일의 $(document).ready 함수의 콜백 인자는 N.comm을 이용하여 **block01.html** 페이지를 **#contents**(N.context.attr("architecture").page.context) 요소 안에 불러오는 코드 입니다. N.comm 은 **block01.html** 페이지 로딩이 완료 되면 Controller(N.cont) object의 init 함수를 실행해 줍니다.
+**index.html** 파일의 $(document).ready 함수의 콜백 인자는 N.comm을 이용하여 **block01.html** 페이지를 **#contents**(N.context.attr("architecture").page.context) 요소 안에 불러오는 코드입니다. N.comm 은 **block01.html** 페이지 로딩이 완료 되면 Controller(N.cont) object의 init 함수를 실행해 줍니다.
 
 <p class="alert">$ (document).ready는 페이지 요소를로드 한 후 인자로 지정된 콜백 함수를 실행해 주는 jQuery에서 제공하는 함수입니다.</p>
 
@@ -245,7 +245,7 @@ Natural-ARCHITECTURE 기반의 모든 페이지나 페이지 블록 들은 반�
 
 먼저 웹 서버를 설치 하고 웹 Context Root 에 위 index.html, block01.html, data.json 파일을 복사 합니다. 그 다음 웹서버를 구동하고 브라우저로 **index.html** 파일의 주소(URL)를 입력하여 페이지를 열어 보세요.
 
-** block01.html ** 파일은 index.html 페이지에 의해 로드되고 N.cont의 인자로 지정된 객체의 init 함수가 실행 될 것입니다. 그 다음 **block01.html** 페이지의 요소 id 가 result 인 div 요소 안에 서버에서 조회 된 데이터가 표시 될 것 입니다.
+** block01.html ** 파일은 index.html 페이지에 의해 로드되고 N.cont의 인자로 지정된 객체의 init 함수가 실행 될 것입니다. 그 다음 **block01.html** 페이지의 요소 id 가 result 인 div 요소 안에 서버에서 조회 된 데이터가 표시 될 것입니다.
 
 <p class="alert">데이터를 조회할 수 있는 서버가있는 경우 N.comm의 url 옵션에서 <strong>data.json</ strong> 대신 서비스 URL을 입력 하세요.</p>
 
