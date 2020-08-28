@@ -7,7 +7,7 @@ Documents are divided into pages by component, and page paragraphs are separated
 
 * __Overview__ : Overview of the component or library.
 
-* __API DEMO__ : Demo program for testing components or libraries in real time
+* __API DEMO__ : Demo program for testing components or libraries in real time.
 
 * __Constructor__ : A description of the function and constructor arguments that are executed when the component instance or library instance is created.
 

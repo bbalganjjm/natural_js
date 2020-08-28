@@ -155,7 +155,7 @@ N(".index-lefter").cont({
 <p class="alert">페이지가 닫히면 스타일도 같이 제거 됩니다.</p>
 
 N.cont 오브젝트의 init 함수에는 메뉴링크 요소를 클릭했을 때  **/index.html** 에서 window 객체에 담아둔 N.docs 인스턴스의 add 메서드로 메뉴 컨텐츠를 불러오는 코드가 작성 되어 있습니다. N.docs 인스턴스로 ```add("페이지ID", "페이지명", { url : "페이지URL" }``` 함수 를 실행 하면 우측 MDI 영역에 페이지가 추가 됩니다.
-```N(".menu", view).on("click", "a", function(e) { ... }, N(this).data("docid"), N(this).text(), N(this).attr("href")``` 는 모두 jQuery 에서 제공 하는 기능이니 [jQuery API 메뉴얼](https://api.jquery.com)을 참고 바랍니다.
+```N(".menu", view).on("click", "a", function(e) { ... }, N(this).data("docid"), N(this).text(), N(this).attr("href")``` 는 모두 jQuery에서 제공 하는 기능이니 [jQuery API 메뉴얼](https://api.jquery.com)을 참고 바랍니다.
 
 위 파일들은 View 와 Controller 구조로만 이루어진 아주 간단한 내용으로 구성된 페이지입니다.
 
