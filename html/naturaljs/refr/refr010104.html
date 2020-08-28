@@ -21,7 +21,7 @@
             <td>
                 <p lang="ko_KR">Natural-JS의 플러그인 타입으로 제공되는 라이브러리들과 N 객체의 멤버변수나 함수가 정의되어있는 core 객체입니다.</p>
                 <p lang="en_US">It is a core object that defines the library and N object member variables and functions provided as plug-in types of Natural-JS.</p>
-                <p lang="ko_KR">N(selector)를 실행하면 jQuery 의 init 메서드의 인자로 selector가 입력되어 Naturl-JS 와 jQuery가 동시에 초기화 됩니다.</p>
+                <p lang="ko_KR">N(selector)를 실행하면 jQuery의 init 메서드의 인자로 selector가 입력되어 Naturl-JS 와 jQuery가 동시에 초기화 됩니다.</p>
                 <p lang="en_US">When N(selector) is executed, a selector is input as an argument of jQuery's init method, and Naturl-JS and jQuery are initialized at the same time.</p>
                 <pre><code>var divs = N("div");</code></pre>
             </td>
@@ -423,10 +423,10 @@
                 <ul lang="ko_KR">
                     <li>비동기로 작동하는 로직과 그 로직의 전처리, 후처리 로직을 하나의 함수 블록으로 만들어서 N.serialExecute 함수의 인자로 입력하면 됩니다.</li>
                     <li>입력된 인자의 순서대로 함수들이 실행 됩니다. 다음 인자로 정의한 함수 블록을 실행 하기 위해서는 비동기 로직이 끝나는 시점 또는 다음 함수가 실행되어야 하는 시점에 defer(Deferred)인자의 resolve 메서드를 실행해야 합니다.</li>
-                    <li>defer.resolve 메서드의 인자들은 그 다음 실행 될 함수 블록의 두번째 인자부터 순서대로 지정 됩니다.</li>
+                    <li>defer.resolve 메서드의 인자들은 그 다음 실행 될 함수 블록의 두 번째 인자부터 순서대로 지정 됩니다.</li>
                     <li>각 함수 블록의 this 와 return 객체는 인자로 입력된 함수 블록들의 Deferred 객체들이 담겨 있는 array 객체입니다.</li>
                     <li>
-                        <p>이 this 를 이용해서 첫번째 함수 블록의 비동기 로직의 완료 시점에 this[3].resolve() 와 같이 실행하면 두번째, 세번째 함수 블록을 건너 뛰고 네번째 함수 블록을 실행 시킬 수 있습니다.</p>
+                        <p>이 this 를 이용해서 첫번째 함수 블록의 비동기 로직의 완료 시점에 this[3].resolve() 와 같이 실행하면 두 번째, 세번째 함수 블록을 건너 뛰고 네번째 함수 블록을 실행 시킬 수 있습니다.</p>
                         <p class="alert">비동기 로직의 시작 시점에는 아직 다음 함수 블록의 Deferred 객체가 생성되지 않았기 때문에 해당 함수 블록 앞에 정의 된 함수 블록들은 참조 가능하나 이후에 정의 된 함수 블록은 참조가 불가능 합니다.</p>
                     </li>
                 </ul>
@@ -524,7 +524,7 @@
 );</code></pre>
                 <p lang="ko_KR">추가로, jQuery $.when을 사용하면 위 소스코드 에서 반환된 defers 변수 객체로 함수블록들을 그룹지어 해당 그룹의 함수블록들이 모두 완료 된 후 로직을 실행 시킬 수도 있습니다.</p>
                 <p lang="en_US">Using jQuery $.when, you can group the function blocks with the defers variable object returned from the above source code, and also execute the logic after all the function blocks of the corresponding group are completed.</p>
-                <pre lang="ko_KR"><code>// 두번째, 세번째 함수 블록이 모두 완료 되면 로직을 실행
+                <pre lang="ko_KR"><code>// 두 번째, 세번째 함수 블록이 모두 완료 되면 로직을 실행
 $.when(defers[1], defers[2]).done(function(arguments[0], arguments[1]) {
     // arguments[0], arguments[1] 은 각 함수 블록에서 defer.resolve 함수를 실행할 때 인자로 지정한 오브젝트들 입니다.
     N.log("2번, 3번 로직 모두 완료.");

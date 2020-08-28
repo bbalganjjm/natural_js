@@ -327,7 +327,7 @@
     /**
      * N.grid 에 Excel 업로드 기능 확장
      *
-     * header : JSON Object 키값 - 엑셀 컬럼 순서대로 JSON Object 의 키값을 정의(필수)
+     * header : JSON Object 키값 - 엑셀 컬럼 순서대로 JSON object의 키값을 정의(필수)
      * opts : 추가 옵션 오브젝트(선택)
      *  - start : 데이터로 추출 할 시작 엑셀 행 인덱스
      *  - mode : 데이터 바인드 모드 - insert 면 무조건 INSERT, update 면 pk 로 지정한 행 데이터가 있으면 UPDATE, 없으면 INSERT

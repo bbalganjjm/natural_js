@@ -111,7 +111,7 @@ DataSync는 컴포넌트나 라이브러리에 의해 변경된 데이터를 실
 
 Natural-UI는 HTML 기반의 UI 컴포넌트를 지원하는 라이브러리 패키지입니다.
 
-<p class="alert">Grid, List, Form 등의 컴포넌트는 자체 스타일을 갖고 있지 않습니다. 컴포넌트를 초기화하기 전에 컴포넌트의 context 요소(table, ul/li 등)에 스타일을 정의 해 놓으면 정의된 스타일대로 컴포넌트가 생성됩니다.</p>
+<p class="alert">Grid, List, Form 등의 컴포넌트는 자체 스타일을 갖고 있지 않습니다. 컴포넌트를 초기화하기 전에 컴포넌트의 context 요소(table, ul/li 등)에 스타일을 정의해 놓으면 정의된 스타일대로 컴포넌트가 생성됩니다.</p>
 
 ![Natural-UI](images/intr/pic7.png)
 

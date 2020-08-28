@@ -157,7 +157,7 @@ Grid 로 생성/조회/수정/삭제를 처리 하기 위해 조회조건 영역
 
 위 코드에서 집중해야 할 부분은 View 영역 입니다. Controller 는 일부러 틀만 만들고 비워 놓았습니다. 하나씩 채워가면서 진행 하려구요.
 
-View 의 하위 요소 중 첫번째에 있는 **.search-conditions** 요소는 검색조건을 입력할 수 있는 검색 폼 입니다. 그 아래 **.buttons** 요소에는 버튼들이 배치 되고 **.result** 요소에는 조회 된 결과 데이터를 Grid 로 표현하기 위해 N.grid 의 context 요소인 Table 을 만들었습니다. N.grid 컴포넌트를 적용하려면 반드시 그리드로 생성 될 **table** 태그가 작성되어 있어야 하고 table 태그에 **thead**(그리드 헤더) 와 **tbody**(그리드 바디) 태그가 작성되어 있어야 합니다. N.grid 의 행 들은 **tbody** 요소를 리스트 데이터의 길이 만큼 복제 해서 표현해 줍니다. 각 컴포넌트에 대한 자세한 내용은 관련 문서를 참고 하기 바랍니다.
+View의 하위 요소 중 첫번째에 있는 **.search-conditions** 요소는 검색조건을 입력할 수 있는 검색 폼 입니다. 그 아래 **.buttons** 요소에는 버튼들이 배치 되고 **.result** 요소에는 조회 된 결과 데이터를 Grid 로 표현하기 위해 N.grid 의 context 요소인 Table 을 만들었습니다. N.grid 컴포넌트를 적용하려면 반드시 그리드로 생성 될 **table** 태그가 작성되어 있어야 하고 table 태그에 **thead**(그리드 헤더) 와 **tbody**(그리드 바디) 태그가 작성되어 있어야 합니다. N.grid 의 행 들은 **tbody** 요소를 리스트 데이터의 길이 만큼 복제 해서 표현해 줍니다. 각 컴포넌트에 대한 자세한 내용은 관련 문서를 참고 하기 바랍니다.
 
 ##Controller 영역 코딩
 
@@ -176,7 +176,7 @@ Controller 영역을 보면 이전 예제들과 다르게 cont 변수에 Control
 이유는 Function Scope 에 상관 없이 Contoller(N.cont) Object 에 접근하기 위해서 입니다.
 위와 같이 Controller 를 정의하하고 cont 변수를 선언하고 N().cont() 함수를 실행하면 함수의 어떤 위치에서나 cont 변수로 Controller object 에 접근 할 수 있습니다.
 <p class="alert">Natural-JS 로 프로젝트를 진행하다 보면 view 나 request, caller 등의 Controller 오브젝트에 담겨있는 고유 객체들을 참고하거나 페이지 전역변수를 담기 위해 Controller object 에 접근해야 할 때가 많이 있습니다.</p>
-<p class="alert">SPA 로 메뉴 컨텐츠 들을 개발할 때는 Controller object 가 해당 페이지의 최상위 객체라 생각하고 페이지 별 전역변수를 정의 해야 합니다. 그렇게 하지 않고 window 객체에 전역변수를 선언 하면 데이터가 꼬이거나 메모리 사용량이 크게 증가 하는 문제가 발생 할 수 있습니다. Natural-JS는 Controller object 에 대해서 리소스 관리를 해 주지만 window 객체에 바인딩 되어 있는 전역 변수들에 대해서는 관여 하지 않습니다.</p>
+<p class="alert">SPA 로 메뉴 컨텐츠 들을 개발할 때는 Controller object 가 해당 페이지의 최상위 객체라 생각하고 페이지 별 전역변수를 정의해야 합니다. 그렇게 하지 않고 window 객체에 전역변수를 선언 하면 데이터가 꼬이거나 메모리 사용량이 크게 증가 하는 문제가 발생할 수 있습니다. Natural-JS는 Controller object 에 대해서 리소스 관리를 해 주지만 window 객체에 바인딩 되어 있는 전역 변수들에 대해서는 관여 하지 않습니다.</p>
 
 ###컴포넌트 초기화
 이제 View 에서 선언 한 각 요소들에 다음과 같은 컴포넌트를 적용하여 생명을 불어 넣어 보겠습니다.
