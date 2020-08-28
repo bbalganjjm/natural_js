@@ -135,7 +135,7 @@
         "comm" : {
             /**
              * Communication Filter
-             *  - N.comm 으로 호출되는 모든요청이 아래에서 정의한 필터를 통과하게 되므로 서버 요청 시 공통적으로 적용해야 할 부분을 정의 하면 됨.
+             *  - N.comm 으로 호출되는 모든요청이 아래에서 정의한 필터를 통과하게 되므로 서버 요청 시 공통적으로 적용해야할 부분을 정의 하면 됨.
              *  - 필터 인자 중 request 인자에 요청에 대한 유용한 정보가 담겨 있음.
              *  - request 객체에서 제공 해 주는 정보는 http://bbalganjjm.github.io/natural_js/ 에서 Communicator.request 메뉴를 참고 바람.
              *  - 필터를 여러개 걸수 있으며 단위 필터명은 아무거나 지정하면 됨.
@@ -591,11 +591,11 @@
                  */
                 "fixedcolBodyMarginLeft" : N.browser.is("ie") || N.browser.is("firefox") ? -1 : 0,
                 /**
-                 * 컬럼 고정 시 데이터를 바인드 할 때 고정 된 바디 셀(TD)의 높이가 맞지 않을때 아래 수치 조절(기본값 : 0)
+                 * 컬럼 고정 시 데이터를 바인드할 때 고정 된 바디 셀(TD)의 높이가 맞지 않을때 아래 수치 조절(기본값 : 0)
                  */
                 "fixedcolBodyBindHeight" : N.browser.is("ie") || N.browser.is("firefox") ? 1 : 1,
                 /**
-                 * 컬럼 고정 시 데이터를 Add 할 때 고정 된 바디 셀(TD)의 높이가 맞지 않을때 아래 수치 조절(기본값 : 1)
+                 * 컬럼 고정 시 데이터를 Add할 때 고정 된 바디 셀(TD)의 높이가 맞지 않을때 아래 수치 조절(기본값 : 1)
                  */
                 "fixedcolBodyAddHeight" : 1,
                 /**
@@ -704,7 +704,7 @@
              */
             abortOnError : false,
             /**
-             * 검사 대상에서 제외 할 구문들을 문자열로 정의 합니다.
+             * 검사 대상에서 제외할 구문들을 문자열로 정의 합니다.
              *
              * 검출 된 코드 내용 중 다음 문자열이 포함 되어 있으면 제외 처리 됩니다.
              *  ex) excludes : [ ".index-header", ".page-header", ".index-lefter", ".index-contents", ".index-footer" ]

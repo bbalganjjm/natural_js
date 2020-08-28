@@ -17,7 +17,7 @@
             <td>undefined</td>
             <td style="text-align: center;">O</td>
             <td>
-                <p lang="ko_KR">N.list에 바인딩 할 데이터를 지정 합니다.</p>
+                <p lang="ko_KR">N.list에 바인딩할 데이터를 지정 합니다.</p>
                 <p lang="en_US">Specifies the data to bind to N.list.</p>
 
                 <p lang="ko_KR">N.list의 context 요소는 반드시 ul 과 li 태그로 작성 해야 합니다.</p>
@@ -56,7 +56,7 @@
                 <p lang="en_US">Specifies the height of the list body.</p>
                 <p lang="ko_KR">설정한 값이 0보다 크면 리스트 바디에 스크롤바가 생기면서 설정한 높이로 고정 됩니다. 0으로 설정하면 모든 데이터를 리스트 바디에 보여 줍니다.</p>
                 <p lang="en_US">If the set value is greater than 0, a scroll bar is created on the list body, and it is fixed at the set height. If set to 0, all data is shown in the list body.</p>
-                <p lang="ko_KR" class="alert">Pagination(N.pagination) 컴포넌트와 결합하여 페이징 된 데이터를 N.list에 바인딩 할 때는 0으로 설정하여 모든 데이터를 한번에 표시 하는것을 권장 합니다.</p>
+                <p lang="ko_KR" class="alert">Pagination(N.pagination) 컴포넌트와 결합하여 페이징 된 데이터를 N.list에 바인딩할 때는 0으로 설정하여 모든 데이터를 한번에 표시 하는것을 권장 합니다.</p>
                 <p lang="en_US" class="alert">When binding paged data to the N.list in combination with the Pagination(N.pagination) component, it is recommended to display all data at once by setting it to 0.</p>
             </td>
         </tr>
@@ -76,7 +76,7 @@
             <td>false</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">true로 설정하면 data 를 bind 할 때 데이터의 HTML 이 적용 됩니다.</p>
+                <p lang="ko_KR">true로 설정하면 data 를 bind할 때 데이터의 HTML 이 적용 됩니다.</p>
                 <p lang="en_US">If set to true, HTML of data is applied when binding data.</p>
             </td>
         </tr>
@@ -98,7 +98,7 @@
             <td>false</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">true로 설정하면 리스트 바디의 높이를 조절 할 수 있습니다.</p>
+                <p lang="ko_KR">true로 설정하면 리스트 바디의 높이를 조절할 수 있습니다.</p>
                 <p lang="en_US">If set to true, height of the list body can be resized.</p>
             </td>
         </tr>
@@ -108,7 +108,7 @@
             <td>true</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">true로 설정하면 데이터 목록 요소 위에서 마우스 휠로 스크롤 할 때 브라우저의 윈도우 스크롤을 비활성화 합니다.</p>
+                <p lang="ko_KR">true로 설정하면 데이터 목록 요소 위에서 마우스 휠로 스크롤할 때 브라우저의 윈도우 스크롤을 비활성화 합니다.</p>
                 <p lang="en_US">If set to true, disables browser window scrolling when scrolling with the mouse wheel over data list elements.</p>
                 <p lang="ko_KR">데이터 목록 요소가 처음이나 마지막으로 스크롤 되었을 때 브라우저 윈도우 스크롤이 위나 아래로 스크롤되는 브라우저의 기본 동작을 차단 합니다.</p>
                 <p lang="en_US">Blocks the browser's default behavior of scrolling the browser window up or down when the data list element is scrolled first or last.</p>
@@ -120,7 +120,7 @@
             <td>false</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">true로 설정하면 revert 기능이 활성 화 되고 revert 메서드를 사용 할 수 있습니다.</p>
+                <p lang="ko_KR">true로 설정하면 revert 기능이 활성 화 되고 revert 메서드를 사용할 수 있습니다.</p>
                 <p lang="en_US">If set to true, the revert function is enabled and the revert method can be used.</p>
                 <p lang="ko_KR" class="alert">revert 기능이 활성화 되면 최초 바인딩된 데이터가 메모리에 적제되므로 메모리 사용량이 증가 합니다.</p>
                 <p lang="en_US" class="alert">When the revert function is activated, the memory usage increases because the first bound data is loaded into the memory.</p>
@@ -180,13 +180,13 @@
             <td>
                 <p lang="ko_KR">리스트의 행을 다중 선택하기 위한 input[type=checkbox] 요소를 지정 합니다.</p>
                 <p lang="en_US">Specifies the input [type = checkbox] element for multiple selection of rows in the list.</p>+
-                <p lang="ko_KR">지정된 요소는 check 함수로 선택 된 행의 인덱스를 가져오거나 선택 할 수 있습니다.</p>
+                <p lang="ko_KR">지정된 요소는 check 함수로 선택 된 행의 인덱스를 가져오거나 선택할 수 있습니다.</p>
                 <p lang="en_US">The specified element can get or select the index of the selected row with the check function.</p>
                 <p lang="ko_KR" class="alert">checkSingleTarget 대상 요소는 반드시 li 요소 안에 있어야 합니다.</p>
                 <p lang="en_US" class="alert">The target element for checkSingleTarget must be inside a li element.</p>
                 <p lang="ko_KR" class="alert">jQuery selector 구문으로 지정하며 selector 의 context 는 리스트의 행 요소(li)로 자동 지정 됩니다.</p>
                 <p lang="en_US" class="alert">It is specified with jQuery selector syntax, and the context of the selector is automatically specified as the row element(li) of the list.</p>
-                <p lang="ko_KR" class="alert">checkAllTarget 옵션과 checkSingleTarget 옵션은 둘중 하나만 사용 할 수 있습니다.</p>
+                <p lang="ko_KR" class="alert">checkAllTarget 옵션과 checkSingleTarget 옵션은 둘중 하나만 사용할 수 있습니다.</p>
                 <p lang="en_US" class="alert">Only one of the checkAllTarget and checkSingleTarget options can be used.</p>
                 <p lang="ko_KR" class="alert">체크박스에 id 속성을 설정하여 데이터를 바인드 하면 제대로 작동하지 않을 수 있습니다. 선택 된 행의 인덱스를 가져오는 용도로만 사용 바랍니다.</p>
                 <p lang="en_US" class="alert">If you bind the data by setting the id attribute in the checkbox, it may not work properly. Please use it only to get the index of the selected row.</p>
@@ -200,13 +200,13 @@
             <td>
                 <p lang="ko_KR">리스트의 행을 단일 선택하기 위한 input[type=checkbox] 요소를 지정 합니다.</p>
                 <p lang="en_US">Specifies the input[type=checkbox] element for single selection of rows in the list.</p>
-                <p lang="ko_KR">지정된 요소는 check 함수로 선택 된 행의 인덱스를 가져오거나 선택 할 수 있습니다.</p>
+                <p lang="ko_KR">지정된 요소는 check 함수로 선택 된 행의 인덱스를 가져오거나 선택할 수 있습니다.</p>
                 <p lang="en_US">The specified element can get or select the index of the selected row with the check function.</p>
                 <p lang="ko_KR" class="alert">checkSingleTarget 대상 요소는 반드시 li 요소 안에 있어야 합니다.</p>
                 <p lang="en_US" class="alert">The target element for checkSingleTarget must be inside a li element.</p>
                 <p lang="ko_KR" class="alert">jQuery selector 구문으로 지정하며 selector 의 context 는 리스트의 행 요소(li)로 자동 지정 됩니다.</p>
                 <p lang="en_US" class="alert">It is specified with jQuery selector syntax, and the context of the selector is automatically specified as the row element(li) of the list.</p>
-                <p lang="ko_KR" class="alert">checkAllTarget 옵션과 checkSingleTarget 옵션은 둘중 하나만 사용 할 수 있습니다.</p>
+                <p lang="ko_KR" class="alert">checkAllTarget 옵션과 checkSingleTarget 옵션은 둘중 하나만 사용할 수 있습니다.</p>
                 <p lang="en_US" class="alert">Only one of the checkAllTarget and checkSingleTarget options can be used.</p>
                 <p lang="ko_KR" class="alert">체크박스에 id 속성을 설정하여 데이터를 바인드 하면 제대로 작동하지 않을 수 있습니다. 선택 된 행의 인덱스를 가져오는 용도로만 사용 바랍니다.</p>
                 <p lang="en_US" class="alert">If you bind the data by setting the id attribute in the checkbox, it may not work properly. Please use it only to get the index of the selected row.</p>
@@ -228,7 +228,7 @@
             <td>1</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">1 이상으로 설정하면 바인딩 할 때 리스트의 각 행이 별도로 생성됩니다. 이때 다음 행이 생성 되기 까지의 시간 간격을 설정 합니다.</p>
+                <p lang="ko_KR">1 이상으로 설정하면 바인딩할 때 리스트의 각 행이 별도로 생성됩니다. 이때 다음 행이 생성 되기 까지의 시간 간격을 설정 합니다.</p>
                 <p lang="en_US">If set to 1 or higher, each row of the list is created separately when binding. At this time, set the time interval until the next row is created.</p>
                 <p lang="ko_KR" class="alert">0 으로 설정하면 모든 행을 한번에 생성 하여 데이터를 바인딩 하는동안 브라우저가 멈출 수도 있습니다.</p>
                 <p lang="en_US" class="alert">If set to 0, the browser may hang while binding data by creating all rows at once.</p>
@@ -240,7 +240,7 @@
             <td>100</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">스크롤 페이징 할때 한번에 바인딩 할 행 수를 지정 합니다.</p>
+                <p lang="ko_KR">스크롤 페이징할때 한번에 바인딩할 행 수를 지정 합니다.</p>
                 <p lang="en_US">Specifies the number of rows to bind at a time when scroll paging.</p>
                 <p lang="ko_KR">N.list 는 스크롤 페이징 기능이 기본적으로 활성화 되며 0 을 지정하면 스크롤 페이징 기능이 비 활성화 됩니다.</p>
                 <p lang="en_US">In N.list, the scroll paging feature is enabled by default, if 0 is specified, the scroll paging feature is disabled.</p>
@@ -445,8 +445,8 @@
     // this : N.list 인스턴스
     // context : context 요소
     // data : 바인딩된 데이터
-    // isFirstPage : 스크롤 페이징 할 때 첫 페이지인지 여부(스크롤 페이징 하지 않으면 true 반환)
-    // isLastPage : 스크롤 페이징 할 때 마지막 페이지 인지 여부(스크롤 페이징 하지 않으면 true 반환)
+    // isFirstPage : 스크롤 페이징할 때 첫 페이지인지 여부(스크롤 페이징 하지 않으면 true 반환)
+    // isLastPage : 스크롤 페이징할 때 마지막 페이지 인지 여부(스크롤 페이징 하지 않으면 true 반환)
 }</code></pre>
                 <pre lang="en_US"><code>onBind : function(context, data, isFirstPage, isLastPage) {
     // this : N.list instance

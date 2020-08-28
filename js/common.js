@@ -34,9 +34,9 @@
          *
          * @this : 호출한 함수 인스턴스
          * @opts.cont : N.cont object
-         * @opts.inst : 행을 삭제 할 N.grid 인스턴스 명,
-         * @opts.before : 선택한 행을 삭제하기 전 실행 할 함수. 핸들러 함수의 인자로 체크한 행의 index 들을 반환 합니다.
-         * @opts.after : 선택한 행을 삭제 한 후 실행 할 함수.
+         * @opts.inst : 행을 삭제할 N.grid 인스턴스 명,
+         * @opts.before : 선택한 행을 삭제하기 전 실행할 함수. 핸들러 함수의 인자로 체크한 행의 index 들을 반환 합니다.
+         * @opts.after : 선택한 행을 삭제 한 후 실행할 함수.
         */
         del : function(opts) {
             var checkedIndexs = opts.cont[opts.inst].check();
@@ -85,10 +85,10 @@
          * @opts.cont : N.cont object
          * @opts.comm : 데이터 저장을 처리하는 N.comm 이 정의 된 함수명.
          * @opts.msg : 저장 확인 메시지, undefined 이면 기본 메시지가 표시 됨.
-         * @opts.changed : 변경 된 데이터 유무를 참조 할 컴포넌트 인스턴스 명.
+         * @opts.changed : 변경 된 데이터 유무를 참조할 컴포넌트 인스턴스 명.
          * @opts.validate : 추가/수정 된 데이터의 유효성을 검증할 컴포넌트 인스턴스 명.
-         * @opts.before : 서버에 저장 하기 전 실행 할 함수.
-         * @opts.after : 서버에 저장 한 후 실행 할 함수.
+         * @opts.before : 서버에 저장 하기 전 실행할 함수.
+         * @opts.after : 서버에 저장 한 후 실행할 함수.
          */
         save : function(opts) {
                if(opts.changed) {
@@ -142,7 +142,7 @@
         *
         * @this : 호출한 함수 인스턴스 - onSelect 함수의 this 이므로 N.grid나 N.list 인스턴스
         * @opts.cont : N.cont object
-        * @opts.form : 데이터를 연동 할 N.form 인스턴스 명.
+        * @opts.form : 데이터를 연동할 N.form 인스턴스 명.
         */
         selectNBind : function(opts) {
             if(opts.args === undefined) {
@@ -329,11 +329,11 @@
      *
      * header : JSON Object 키값 - 엑셀 컬럼 순서대로 JSON object의 키값을 정의(필수)
      * opts : 추가 옵션 오브젝트(선택)
-     *  - start : 데이터로 추출 할 시작 엑셀 행 인덱스
+     *  - start : 데이터로 추출할 시작 엑셀 행 인덱스
      *  - mode : 데이터 바인드 모드 - insert 면 무조건 INSERT, update 면 pk 로 지정한 행 데이터가 있으면 UPDATE, 없으면 INSERT
-     *  - pk : mode 옵션이 update 일 때 INSERT, UPDATE 를 판단 할 기준 키 컬럼 명
-     *  - server : JSON 데이터를 추출 하기 위해 Excel 파일을 Server 에 업로드 하여 처리 할 것인지 브라우저에서 javascript 로 처리 할 것인지 여부(boolean)
-     *  - after : 엑셀 데이터 추출 완료 후 실행 할 콜백 함수(함수의 첫번째 인자로 추출 된 JSON 타입의 엑셀 데이터가 반환 됨)
+     *  - pk : mode 옵션이 update 일 때 INSERT, UPDATE 를 판단할 기준 키 컬럼 명
+     *  - server : JSON 데이터를 추출 하기 위해 Excel 파일을 Server 에 업로드 하여 처리할 것인지 브라우저에서 javascript 로 처리할 것인지 여부(boolean)
+     *  - after : 엑셀 데이터 추출 완료 후 실행할 콜백 함수(함수의 첫번째 인자로 추출 된 JSON 타입의 엑셀 데이터가 반환 됨)
      */
     N.grid.prototype.bindExcel = function(header, opts) {
         var self = this;

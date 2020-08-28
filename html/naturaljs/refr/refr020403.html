@@ -17,7 +17,7 @@
             <td style="text-align: center;">N/A</td>
             <td>set:Controller.request|get:anything</td>
             <td>
-                <p lang="ko_KR">로드할 페이지로 전달 할 데이터를 지정 하거나 전달된 데이터를 가져 옵니다.</p>
+                <p lang="ko_KR">로드할 페이지로 전달할 데이터를 지정 하거나 전달된 데이터를 가져 옵니다.</p>
                 <p lang="en_US">Specifies the data to be passed to the page to be loaded or get the delivered data.</p>
                 <p lang="ko_KR" class="alert">attr 메서드의 인자의 개수가 2개이면 set 으로 작동하고 1개이면 get 으로 작동 합니다.</p>
                 <p lang="en_US" class="alert">If the number of arguments of the attr method is 2, it works as set, and if 1, it works as get.</p>
@@ -90,7 +90,7 @@
             <td>
                 <p lang="ko_KR">Communicator.request 인스턴스에 설정 된 기본 옵션 정보를 가져옵니다.</p>
                 <p lang="en_US">Get the default option information set on the Communicator.request instance.</p>
-                <p lang="ko_KR">기본 옵션 외에도 "referrer"(submit 메서드를 호출 할 때의 브라우저 URL) 값을 추가로 가져 올 수 있습니다.</p>
+                <p lang="ko_KR">기본 옵션 외에도 "referrer"(submit 메서드를 호출할 때의 브라우저 URL) 값을 추가로 가져 올 수 있습니다.</p>
                 <p lang="en_US">In addition to the default options, you can get "referrer"(Browser URL when submit method is called) value.</p>
             </td>
         </tr>
@@ -114,13 +114,13 @@
                 <p lang="en_US">Reloads the block page loaded by Communicator.</p>
                 <p lang="ko_KR" class="alert">reload 메서드를 호출하기 전에 attr 메서드로 값을 지정하지 않았다면 reload 전의 request 객체의 값은 reload 해도 유지 됩니다.</p>
                 <p lang="en_US" class="alert">If the value is not specified with the attr method before calling the reload method, the value of the request object before reload is retained even when reloading.</p>
-                <p lang="ko_KR" class="alert">attr 메서드로 reload 되는 페이지의 Communicator.request 데이터를 다시 지정 할 수 있습니다.</p>
+                <p lang="ko_KR" class="alert">attr 메서드로 reload 되는 페이지의 Communicator.request 데이터를 다시 지정할 수 있습니다.</p>
                 <p lang="en_US" class="alert">The request data of the page reloaded by the attr method can be specified again.</p>
                 <pre><code>request.attr("param", { param : 1 });
 request.reload();</code></pre>
                 <p lang="ko_KR" class="alert">reload 함수는 메서드 체이닝을 지원하지 않습니다.</p>
                 <p lang="en_US" class="alert">The reload function does not support method chaining.</p>
-                <pre lang="ko_KR"><code>request.attr("param", { param : 1 }).reload(); // 이렇게 사용 할 수 없습니다.</code></pre>
+                <pre lang="ko_KR"><code>request.attr("param", { param : 1 }).reload(); // 이렇게 사용할 수 없습니다.</code></pre>
                 <pre lang="en_US"><code>request.attr("param", { param : 1 }).reload(); // Can not be used like this.</code></pre>
             </td>
         </tr>

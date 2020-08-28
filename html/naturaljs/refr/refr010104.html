@@ -76,13 +76,13 @@
             <td style="text-align: center;">N/A</td>
             <td>undefined</td>
             <td>
-                <p lang="ko_KR">프레임웍에 설정 된 로케일 값을 가져오거나 설정 할 수 있습니다.</p>
+                <p lang="ko_KR">프레임웍에 설정 된 로케일 값을 가져오거나 설정할 수 있습니다.</p>
                 <p lang="en_US">You can get or set the locale value set in the framework.</p>
                 <p lang="ko_KR" class="alert">설정된 로케일 값에 따라서 프레임워크의 기본 메시지들이 다국어 처리 됩니다.</p>
                 <p lang="en_US" class="alert">The framework's default messages are processed in multilingual ​​according to the set locale value.</p>
-                <p lang="ko_KR" class="alert">미리 등록된 다국어 메시지 세트는 en_US, ko_KR 이 있고 <a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a> 의 message 속성에서 수정 할 수 있습니다.</p>
+                <p lang="ko_KR" class="alert">미리 등록된 다국어 메시지 세트는 en_US, ko_KR 이 있고 <a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a> 의 message 속성에서 수정할 수 있습니다.</p>
                 <p lang="en_US" class="alert">The pre-registered multilingual message set has en_US, ko_KR and can be edited in the message attribute of <a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a>.</p>
-                <p lang="ko_KR" class="alert">프레임웍의 기본 로케일은 <a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a> 의 N.context.attr("core").locale 속성값으로 설정 할 수 있습니다.</p>
+                <p lang="ko_KR" class="alert">프레임웍의 기본 로케일은 <a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a> 의 N.context.attr("core").locale 속성값으로 설정할 수 있습니다.</p>
                 <p lang="en_US" class="alert">The default locale of the framework can be set with the value of the N.context.attr("core").locale property of <a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a>.</p>
                </td>
         </tr>
@@ -468,7 +468,7 @@
     }, 500);
     N.log("Logic 1 complete.");
 }, 500);</code></pre>
-                <p lang="ko_KR">N.serialExecute를 사용하면 위와 같은 계층적 비동기 로직을 아래와 같이 직렬로 선언 할 수 있습니다.</p>
+                <p lang="ko_KR">N.serialExecute를 사용하면 위와 같은 계층적 비동기 로직을 아래와 같이 직렬로 선언할 수 있습니다.</p>
                 <p lang="en_US">Using N.serialExecute, you can declare hierarchical asynchronous logic like this in serial as below:</p>
                 <pre lang="ko_KR"><code>var defers = N.serialExecute(
     function(defer){
@@ -532,7 +532,7 @@ $.when(defers[1], defers[2]).done(function(arguments[0], arguments[1]) {
 
 // 전체 함수 블록들이 모두 완료 되면 로직을 실행
 $.when.apply($, defers).done(function(arguments[0], arguments[1], arguments[2], arguments[3]) {
-    // arguments[0], arguments[1], arguments[2], arguments[3] 은 각 함수 블록에서 defer.resolve 함수를 호출 할 때 인자로 지정한 오브젝트들 입니다.
+    // arguments[0], arguments[1], arguments[2], arguments[3] 은 각 함수 블록에서 defer.resolve 함수를 호출할 때 인자로 지정한 오브젝트들 입니다.
     N.log("1번, 2번, 3번, 4번 전체 로직 완료.");
 });</code></pre>
                 <pre lang="en_US"><code>// Executes logic when the second and third function blocks are completed

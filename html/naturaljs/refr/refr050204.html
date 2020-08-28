@@ -2,8 +2,8 @@
     <h2>
         <span>Documents.request</span>
     </h2>
-    <p lang="ko_KR">Document.request(N.docs.request)는 단독으로 사용될 수 없고 N.docs로 컨텐츠를 로딩 할 마다 생성 되는 객체입니다.
-        request는 요청 정보를 갖고 있고 attr 메서드로 document 간 파라미터를 전달 할 수 있습니다.</p>
+    <p lang="ko_KR">Document.request(N.docs.request)는 단독으로 사용될 수 없고 N.docs로 컨텐츠를 로딩할 마다 생성 되는 객체입니다.
+        request는 요청 정보를 갖고 있고 attr 메서드로 document 간 파라미터를 전달할 수 있습니다.</p>
     <p lang="en_US">Document.request(N.docs.request) is an object that can't be used alone and is created every time content is loaded using N.docs.
         request has request information and can pass parameters between documents with attr method.</p>
     <p lang="ko_KR">add 나 reload 함수를 호출 하기 전에 다음과 같이 request.attr 로 파라미터를 설정 하면</p>
@@ -18,7 +18,7 @@ docs.request.attr("pageParam", { "param" : 1 }).reload();
     <pre lang="ko_KR"><code>N("page id").cont({
     init : function(view, request) {
         N.log(request.attr("pageParam")); // --> { a : 1 }
-        // request 객체는 Controller object에서 this.request 속성으로도 참조 할 수 있습니다.
+        // request 객체는 Controller object에서 this.request 속성으로도 참조할 수 있습니다.
     }
 })
 </code></pre>

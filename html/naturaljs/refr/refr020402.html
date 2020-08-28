@@ -27,7 +27,7 @@
             <td>true</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">false로 설정하면 서버로 요청 할 때의 location.href 와 서버에서 응답을 받았을 때의 location.href 이 다르더라도 응답을 차단 하지 않습니다.</p>
+                <p lang="ko_KR">false로 설정하면 서버로 요청할 때의 location.href 와 서버에서 응답을 받았을 때의 location.href 이 다르더라도 응답을 차단 하지 않습니다.</p>
                 <p lang="en_US">If set to false, the response will not be blocked even if location.href when requesting to the server and location.href when receiving a response from the server are different.</p>
                 <p lang="ko_KR" class="alert">알수 없는 이유로 서버 응답이 차단 되었을 경우 이 옵션을 false 로 설정 해서 테스트 해 보세요.</p>
                 <p lang="en_US" class="alert">If the server response is blocked for unknown reasons, set this option to false to test.</p>
@@ -39,12 +39,12 @@
             <td>false</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">true로 설정하면 N().comm 에서 N 함수의 인자로 지정한 파라미터 객체를  array 타입으로 지정 할 수 있습니다.</p>
+                <p lang="ko_KR">true로 설정하면 N().comm 에서 N 함수의 인자로 지정한 파라미터 객체를  array 타입으로 지정할 수 있습니다.</p>
                 <p lang="en_US">If set to true, the parameter object specified as an argument of N function in N().comm can be specified as an array type.</p>
                 <p lang="ko_KR" class="alert">
                     Communicator를 N(params).comm(url).submit(); 와 같이 사용할 때 params의 객체 타입이 array 일때 dataIsArray 옵션이 false 로 지정되어 있다면 array 의 첫번째 오브젝트만 전송 됩니다.
                     이 문제의 원인은 jQuery 함수의 인자를 array(jQuery([{}])) 또는 object($({})) 로 설정 한 후에 get 함수를 호출하면 둘다 array([{}])를 반환하기 때문 입니다.
-                    불편하더라도 array 를 서버에 전송 할 때는 dataIsArray 를 true로 설정하거나 object 에 array를 담아서 사용 바랍니다.
+                    불편하더라도 array 를 서버에 전송할 때는 dataIsArray 를 true로 설정하거나 object 에 array를 담아서 사용 바랍니다.
                 </p>
                 <p lang="ko_KR" class="alert">
                     If Communicator is used as N(params).comm(url).submit();, only the first object in the array is sent when the object type of params is array and the dataIsArray option is set to false.
@@ -65,7 +65,7 @@
             <td>
                 <p lang="ko_KR">HTML 컨텐츠를 삽입할 요소를 지정 합니다.</p>
                 <p lang="en_US">Specifies the element to insert HTML content.</p>
-                <p lang="ko_KR" class="alert">Communicator를 N(".block").comm("page.html").submit(); 와 같이 사용 할 경우 N("#block") 요소 오브젝트가 target 속성 값으로 지정 됩니다.</p>
+                <p lang="ko_KR" class="alert">Communicator를 N(".block").comm("page.html").submit(); 와 같이 사용할 경우 N("#block") 요소 오브젝트가 target 속성 값으로 지정 됩니다.</p>
                 <p lang="en_US" class="alert">If Communicator is used as N(".block").comm("page.html").submit();, the N(".block") element object is assigned as the target attribute value.</p>
             </td>
         </tr>
@@ -109,7 +109,7 @@
             <td>POST</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">요청에 사용 할 HTTP method(예 : "POST", "GET", "PUT")</p>
+                <p lang="ko_KR">요청에 사용할 HTTP method(예 : "POST", "GET", "PUT")</p>
                 <p lang="en_US">The HTTP method to use for the request (e.g. "POST", "GET", "PUT").</p>
                 <p lang="ko_KR" class="alert">type 옵션은 jQuery.ajax 함수의 옵션이 그대로 적용 됩니다.
                     <a class="link" target="blank_" href="http://api.jquery.com/jquery.ajax/">jQuery.ajax</a>
