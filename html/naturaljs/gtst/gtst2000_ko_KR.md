@@ -33,7 +33,7 @@
 
 ### 1. 이클립스 설치
 [이클립스][eclipse] 사이트에서 Eclipse IDE for Java EE Developers를 [다운로드][eclipse-download] 받아 압축을 해제하고 eclipse.exe 파일을 실행합니다.
->이클립스를 구동하기 위해서는 [Java SE Development Kit][jdk] 이 설치되어 있어야 합니다.
+>이클립스를 구동하기 위해서는 [Java SE Development Kit][jdk]이 설치되어 있어야 합니다.
 
 이클립스 실행이 완료되면 `Spring Boot` 개발 지원을 위해 `Spring Tools` 플러그인을 다음과 같이 설치합니다.
 

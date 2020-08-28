@@ -54,7 +54,7 @@ N.context.attr("ui", {
     ...
 ```
 
-위와 같은 JSON 타입의 구문이 보일겁니다. JSON 이 뭔지는 아시죠? 아주 쉬워요. 모르시면 아래 URL 을 클릭 해서 참고 하시구요.
+위와 같은 JSON 타입의 구문이 보일겁니다. JSON이 뭔지는 아시죠? 아주 쉬워요. 모르시면 아래 URL 을 클릭 해서 참고 하시구요.
 
 [http://www.json.org/json-ko.html](http://www.json.org/json-ko.html)
 

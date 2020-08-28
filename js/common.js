@@ -83,7 +83,7 @@
          *
          * @this : 호출한 함수 인스턴스
          * @opts.cont : N.cont object
-         * @opts.comm : 데이터 저장을 처리하는 N.comm 이 정의 된 함수명.
+         * @opts.comm : 데이터 저장을 처리하는 N.comm이 정의 된 함수명.
          * @opts.msg : 저장 확인 메시지, undefined 이면 기본 메시지가 표시 됨.
          * @opts.changed : 변경 된 데이터 유무를 참조할 컴포넌트 인스턴스 명.
          * @opts.validate : 추가/수정 된 데이터의 유효성을 검증할 컴포넌트 인스턴스 명.

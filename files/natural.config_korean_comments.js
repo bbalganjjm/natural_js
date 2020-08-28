@@ -149,12 +149,12 @@
                      */
                     order : 1,
                     /**
-                     * N.comm 이 초기화 되기 전 실행됨(N.cont의 init 아님). string 으로 변환되지 않은 원형의 파라미터를 꺼내올 수 있음.
+                     * N.comm이 초기화 되기 전 실행됨(N.cont의 init 아님). string 으로 변환되지 않은 원형의 파라미터를 꺼내올 수 있음.
                      */
                     beforeInit : function(obj) {
                     },
                     /**
-                     * N.comm 이 초기화 된 후 실행됨(N.cont의 init 아님)
+                     * N.comm이 초기화 된 후 실행됨(N.cont의 init 아님)
                      */
                     afterInit : function(request) {
                     },
