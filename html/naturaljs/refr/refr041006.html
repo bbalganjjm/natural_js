@@ -187,7 +187,7 @@
 
     <h4 lang="ko_KR" class="notIndex">4. SQL 페이징 하기.</h4>
     <h4 lang="en_US" class="notIndex">4. SQL Paging.</h4>
-    <p lang="ko_KR" class="alert">SQL 페이징 시 먼저 totalCount값을 서버에서 가져온 다음 currPageNavInfo 정보를 서버에 전달해서 반환 된 페이징 데이터를 N.grid에 바인딩하는 방식로 SQL 페이징을 처리할 수 있습니다.</p>
+    <p lang="ko_KR" class="alert">SQL 페이징 시 먼저 totalCount값을 서버에서 가져온 다음 currPageNavInfo 정보를 서버에 전달해서 반환된 페이징 데이터를 N.grid에 바인딩하는 방식로 SQL 페이징을 처리할 수 있습니다.</p>
     <p lang="en_US" class="alert">When SQL paging, SQL paging can be worked by first getting the totalCount value from the server and then passing the currPageNavInfo information to the server to bind the returned paging data to the N.grid.</p>
     <pre lang="ko_KR"><code>&lt;table class="pagination"&gt;
     &lt;thead&gt;
@@ -309,7 +309,7 @@
     }).bind();
 
     N(".btn-search").click(function() { // 데이터 조회 버튼 이벤트
-        <strong>pagination.pageNo(1).bind()</strong>; // 3. 첫번째 페이지로 이동하여 currPageNavInfo 정보 초기화.
+        <strong>pagination.pageNo(1).bind()</strong>; // 3. 첫 번째 페이지로 이동하여 currPageNavInfo 정보 초기화.
         <strong>N(pagination.currPageNavInfo())</strong>.comm("data.json").submit(function(data){ // 4. totalCount 값이 포함 된 데이터 조회.
             <strong>pagination.bind(data[0] &amp;&amp; data[0].totalCount ? data[0].totalCount : 0 )</strong>; // 5. N.pagination 의 bind 메서드의 인자에 totalCount 를 입력 하여 페이징 인덱스 재 생성.
             <strong>grid.bind(data)</strong>; // 6. 페이징 된 데이터를 N.grid에 바인딩.

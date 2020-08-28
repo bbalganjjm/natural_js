@@ -1,7 +1,7 @@
 팁
 ===
 
-###⊙ 데이터 관련 컴포넌트에 비어있는 객체를 바인드하여 초기화 하기
+###⊙ 데이터 관련 컴포넌트에 비어있는 객체를 바인드 하여 초기화 하기
 ```
 nFormInstance.unbind().bind(0, []); // N.form
 nGridInstance.bind([]); // N.grid
@@ -52,8 +52,8 @@ if(N(window).width() <= 414) {
 N().popup(popupOpts).open();
 ```
 
-###⊙ 데이터 관련 컴포넌트에서 add 메서드를 실행 했을 때 발생 하는 데이터 동기화 문제 해결 하기
-Natural-JS의 데이터 관련 컴포넌트들은 array[object] 타입의 data 가 입력 되면 jquery object[array[object]] 형태로 변환(jquery object 로 변환) 하여 사용하기 때문에 data 를 Controller object의 변수로 담아 놓고 공유 해서 사용하는 경우 컴포넌트의 add 메서드로 새로운 데이터를 생성했을 때 변수로 담아 놓은 데이터는 새로운 행 데이터가 생성 되지 않는 문제가 발생 됩니다.
+###⊙ 데이터 관련 컴포넌트에서 add 메서드를 실행했을 때 발생하는 데이터 동기화 문제 해결 하기
+Natural-JS의 데이터 관련 컴포넌트들은 array[object] 타입의 data 가 입력되면 jQuery object[array[object]] 형태로 변환(jQuery object로 변환) 하여 사용하기 때문에 data를 Controller object의 변수로 담아 놓고 공유해서 사용하는 경우 컴포넌트의 add 메서드로 새로운 데이터를 생성했을 때 변수로 담아 놓은 데이터는 새로운 행 데이터가 생성되지 않는 문제가 발생됩니다.
 
 ```
 ...
@@ -73,13 +73,13 @@ init : function() {
 },
 ...
 ```
-위와 같은 문제를 해결 하려면 미리 data 를 jquery object 로 변환 한 다음 바인딩하면 됩니다.
+위와 같은 문제를 해결하려면 미리 data를 jQuery object로 변환 한 다음 바인딩하면 됩니다.
 
 ```
 ...
 data : [{ col01 : 1, col01 : 2 }, { col01 : 3, col01 : 4 }],
 init : function() {
-    // Converts to jquery object.
+    // Converts to jQuery object.
     <strong>this.data = N(this.data);</strong>
 
     var grid = N([]).grid();
@@ -95,7 +95,7 @@ init : function() {
 },
 ...
 ```
-data 메서드의 첫번째 인자를 false 로 설정해서 반환 된 데이터를 다른 컴포넌트에 바인딩 해도 문제가 해결 됩니다.
+data 메서드의 첫 번째 인자를 false로 설정해서 반환된 데이터를 다른 컴포넌트에 바인딩해도 문제가 해결됩니다.
 
 ```
 ...
@@ -105,7 +105,7 @@ init : function() {
 
     N.comm("data url").submit(function(data) {
         form.bind(0, data);
-        // 원래 유형의 데이터 객체가 반환 되도록 data 메소드의 첫 번째 인자를 false로 설정해야합니다.
+        // 원래 유형의 데이터 객체가 반환되도록 data 메소드의 첫 번째 인자를 false로 설정해야 합니다.
         grid.bind(form.data(false));
     });
 

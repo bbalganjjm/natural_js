@@ -15,7 +15,7 @@
             <td>data</td>
             <td style="text-align: center;">N/A</td>
             <td style="text-align: center;">N/A</td>
-            <td>array[json object]|jquery object[array[json object]]</td>
+            <td>array[json object]|jQuery object[array[json object]]</td>
             <td>
                 <p lang="ko_KR">컴포넌트에 바인드 되어 있는 가장 최근 상태의 데이터를 반환합니다.</p>
                 <p lang="en_US">Returns the data of the most recent state bound to the component.</p>
@@ -38,9 +38,9 @@
                     <li lang="ko_KR">true : 폼에 바인드 되어 있는 데이터만 추출하여 반환합니다.</li>
                     <li lang="ko_KR">true : It extracts and returns only the data bound to the form.</li>
                     <li>
-                        <p lang="ko_KR">false : 컴포넌트에 바인딩 되어 있는 jquery object[array[json object]] 타입의 원래 유형의 데이터를 반환합니다.</p>
-                        <p lang="en_US">false : Returns the data of the original type of the jquery object[array[json object]] type bound to the component.</p>
-                        <p lang="ko_KR" class="alert">data 메서드로 가져온 데이터를 다른 데이터 관련 컴포넌트에 바인딩할 때는 반드시 "false" 로 설정하여 원래 유형의 데이터를 바인딩 해야 양방향 데이터 바인딩이 활성 화 됩니다.</p>
+                        <p lang="ko_KR">false : 컴포넌트에 바인딩 되어 있는 jQuery object[array[json object]] 타입의 원래 유형의 데이터를 반환합니다.</p>
+                        <p lang="en_US">false : Returns the data of the original type of the jQuery object[array[json object]] type bound to the component.</p>
+                        <p lang="ko_KR" class="alert">data 메서드로 가져온 데이터를 다른 데이터 관련 컴포넌트에 바인딩할 때는 반드시 "false" 로 설정하여 원래 유형의 데이터를 바인딩해야 양방향 데이터 바인딩이 활성 화 됩니다.</p>
                         <p lang="en_US" class="alert">When binding data imported by the data method to other data-related components, you must set "false" to bind the original type of data to enable two way databinding.</p>
                     </li>
                 </ul>
@@ -63,7 +63,7 @@
     .bind(0, [{ col01 : "", col02 : "", col03 : "", col04 : "", col05 : "", col06 : "" }]);
 formInst.data(true, "col01", "col02", "col03");
     // [{ col01 : "", col02 : "", col03 : "" }]</code></pre>
-                <p lang="ko_KR" class="alert">첫번째 인자를 true로 설정 했을 때만 작동 됩니다.</p>
+                <p lang="ko_KR" class="alert">첫 번째 인자를 true로 설정 했을 때만 작동 됩니다.</p>
                 <p lang="en_US" class="alert">It works only when the first argument is set to true.</p>
             </td>
         </tr>
@@ -81,7 +81,7 @@ formInst.data(true, "col01", "col02", "col03");
             <td>context</td>
             <td style="text-align: center;">N/A</td>
             <td style="text-align: center;">N/A</td>
-            <td>jquery object</td>
+            <td>jQuery object</td>
             <td>
                 <p lang="ko_KR">context 요소를 반환합니다.</p>
                 <p lang="en_US">Returns the context element.</p>

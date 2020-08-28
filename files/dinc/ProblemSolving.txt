@@ -38,7 +38,7 @@
         OFFSET ${startRowNum - 1} ROWS FETCH NEXT ${countPerPage} ROWS ONLY 구문을
         OFFSET #{startRowIndex} ROWS FETCH NEXT #{countPerPage} ROWS ONLY 로 바꿔줘야 합니다.
 
-        아울러 MyBatis Mapper XML 에서는 ${} 로 변수를 치환하면 절대 안되고 #{} 로 변수를 바인딩 해야 합니다. 치환하면 SQL Injection 공격에 그대로 노출 됩니다.
+        아울러 MyBatis Mapper XML 에서는 ${} 로 변수를 치환하면 절대 안되고 #{} 로 변수를 바인딩해야 합니다. 치환하면 SQL Injection 공격에 그대로 노출 됩니다.
         SQL 에 테이블 명을 동적으로 받는 등 어쩔수 없이 ${} 를 사용해야 한다면 변수값에 대해 SQL Injection 공격 문자열을 치환 해 주는 처리를 별도로 해 줘야 합니다.
 
         최신 가이드 문서(file/documents.html) 파일도 올려 놓았으니 엎퍼 쳐 주세요. ^^
@@ -56,7 +56,7 @@
         <input name="abc" value="N"> 만 하면 id 값이 없기 때문에 연결되지 않습니다.
 
         <input id="abc" name="abc" value="Y">
-        <input name="abc" value="N"> 와 같이 첫번째 선택요소에 id 값을 name 속성값과 같은 값으로 넣어 주시면 됩니다.
+        <input name="abc" value="N"> 와 같이 첫 번째 선택요소에 id 값을 name 속성값과 같은 값으로 넣어 주시면 됩니다.
 
         좀더 formal 하게 작성하는건 다음과 같습니다(<span> 태그를 안넣어서 라디오 선택지가 사라졌을 수도 있습니다).
 
@@ -93,7 +93,7 @@
 
 7. natural.js.min.js 파일 다시 받아 주세요(아직 릴리즈는 안됐고 GitHub 들어가서 dist 폴더 안에 들어있는것 받아주세요).
 
-    A : 입력값 유효성 검증 시 첫번째 검증할 때 검증 메시지가 표시 되지 않는 버그가 수정 되었습니다.
+    A : 입력값 유효성 검증 시 첫 번째 검증할 때 검증 메시지가 표시 되지 않는 버그가 수정 되었습니다.
 
 
 20190911 ----------------------------------------------------------------------------------------------------------------------------------------------
@@ -102,7 +102,7 @@
 
     A : Template 프로젝트에 XSS 공격에 대한 치명적인 보안 결함이 있었습니다. 다음 순서대로 변경 바랍니다.
 
-        1. N.context.attr("ui").form 의 "html" 프로퍼티의 값을 false 로 변경.
+        1. N.context.attr("ui").form 의 "html" 프로퍼티의 값을 false로 변경.
         2. N.context.attr("ui").list 의 "html" 프로퍼티를 제거.
         3. N.context.attr("ui").grid 의 "html" 프로퍼티를 제거.
         4. N.context.attr("ui").form.onBeforeBindValue 함수를 다음과 같이 변경.
@@ -112,7 +112,7 @@
              * 서버에서 XSS 필터링 된 값을 입력 요소에 바인드 할때는 원복해서 바인드하는 이벤트 핸들러.
              *
              * onBeforeBindValue 이벤트
-             *  - 값이 바인드 되기전 실행 되는 이벤트, 반드시 val 을 (가공 후) 다시 리턴 해야 함.
+             *  - 값이 바인드 되기전 실행 되는 이벤트, 반드시 val 을 (가공 후) 다시 리턴해야 함.
              *  - N.form 을 사용하는 N.grid, N.list 에도 같이 적용 됨.
              *    - ele : 바인드 될 요소
              *    - ele : 바인드 될 값

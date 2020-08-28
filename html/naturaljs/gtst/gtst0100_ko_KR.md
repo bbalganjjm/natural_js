@@ -10,7 +10,7 @@
 
 다운로드 된 파일 들 중 Natural-JS 를 구동하기 위한 필수 라이브러리 파일들은 다음과 같습니다.
 
-1.  **jquery-1.12.4.min.js** - Natural-JS는 jQuery 를 기반으로 동작 하므로 반드시 임포트 해야합니다.
+1.  **jquery-1.12.4.min.js** - Natural-JS는 jQuery 를 기반으로 동작 하므로 반드시 임포트해야합니다.
 2.  **natural.ui.css** - Natural-UI 디자인과 관련된 스타일시트 파일입니다.
 3.  **natural.js.min.js** - Natural-JS의 전체 라이브러리 파일들이 합쳐진 Minified 파일입니다.
 4.  **natural.config.js** - Natural-JS의 환경설정 파일입니다.

@@ -333,7 +333,7 @@
      *  - mode : 데이터 바인드 모드 - insert 면 무조건 INSERT, update 면 pk 로 지정한 행 데이터가 있으면 UPDATE, 없으면 INSERT
      *  - pk : mode 옵션이 update 일 때 INSERT, UPDATE 를 판단할 기준 키 컬럼 명
      *  - server : JSON 데이터를 추출 하기 위해 Excel 파일을 Server 에 업로드 하여 처리할 것인지 브라우저에서 javascript 로 처리할 것인지 여부(boolean)
-     *  - after : 엑셀 데이터 추출 완료 후 실행할 콜백 함수(함수의 첫번째 인자로 추출 된 JSON 타입의 엑셀 데이터가 반환 됨)
+     *  - after : 엑셀 데이터 추출 완료 후 실행할 콜백 함수(함수의 첫 번째 인자로 추출 된 JSON 타입의 엑셀 데이터가 반환 됨)
      */
     N.grid.prototype.bindExcel = function(header, opts) {
         var self = this;

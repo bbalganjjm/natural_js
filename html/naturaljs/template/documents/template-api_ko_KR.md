@@ -102,7 +102,7 @@ Natural-UI 의 컴포넌트들을 자동으로 초기 화 해 줍니다.
 
 초기화가 완료 되면 `p.{컴포넌트명}.{요소id}` 속성값으로 지정한 컴포넌트 옵션 객체는 생성된 컴포넌트의 인스턴스로 대체됩니다.
 
-> `p.select.{id}` 선언은 페이지의 view 에서 해당 id 속성값을 갖고 있는 모든 선택요소에 Select(N.select) 컴포넌트를 초기화 하고 생성된 컴포넌트 인스턴스들을 Array에 저장한다음 속성값을 대체합니다. Select 컴포넌트의 인스턴스를 사용할 때는 `cont["p.select.{id}"][1]` 와 같이 사용할 인스턴스를 배열에서 꺼내어 사용해야합니다.
+> `p.select.{id}` 선언은 페이지의 view에서 해당 id 속성값을 갖고 있는 모든 선택요소에 Select(N.select) 컴포넌트를 초기화 하고 생성된 컴포넌트 인스턴스들을 Array에 저장한다음 속성값을 대체합니다. Select 컴포넌트의 인스턴스를 사용할 때는 `cont["p.select.{id}"][1]` 와 같이 사용할 인스턴스를 배열에서 꺼내어 사용해야합니다.
 
 > 컴포넌트 초기화 옵션은 `cont["p.{컴포넌트명}.{요소id}"].options` 로 접근할 수 있으나 옵션의 직접사용은 권장하지 않습니다.
 
@@ -135,7 +135,7 @@ var cont = N(".page-id").cont({
 
 `context : ".detail"` => `context : N(".detail", cont.view)`
 
->**N.tab 과 N.popup 컴포넌트의 `onOpen 옵션의 함수명 문자열은 반드시 onOpen 으로 시작("onOpen", "onOpenABC" 등)` 해야 합니다. 그렇지 않으면 Controller object의 init 함수보다 onOpen 함수가 먼저 실행 되어서 컴포넌트 인스턴스등을 참조하지 못할 수 있습니다.**
+>**N.tab 과 N.popup 컴포넌트의 `onOpen 옵션의 함수명 문자열은 반드시 onOpen 으로 시작("onOpen", "onOpenABC" 등)`해야 합니다. 그렇지 않으면 Controller object의 init 함수보다 onOpen 함수가 먼저 실행 되어서 컴포넌트 인스턴스등을 참조하지 못할 수 있습니다.**
 
 >**N.tab 컴포넌트의 onActive 옵션은 주의해서 사용바랍니다. init 함수의 지연 실행에 대한 대책이 아직 없어서 onActive 가 init 보다 먼저 실행 됩니다. 비슷한 안정적인 기능을 원한다면 onOpen 을 사용 해 주세요.**
 
@@ -340,7 +340,7 @@ var cont = N(".page-id").cont({
         return N(".box").comm("sample/PAGEID.html");
     },
     "c.getSampleList" : {
-        // cont["p.form.search"] 의 data 를 파라미터로 사용하여 "sample/getSampleList.json" 서비스 호출
+        // cont["p.form.search"] 의 data를 파라미터로 사용하여 "sample/getSampleList.json" 서비스 호출
         return cont["p.form.search"].data(false).comm("sample/getSampleList.json");
     },
     init : function(view, request) {

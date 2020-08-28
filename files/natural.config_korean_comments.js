@@ -167,7 +167,7 @@
                      * 서버에 요청이 성공 했을 경우 실행됨.
                      */
                     success : function(request, data, textStatus, xhr) {
-                        // return data 를 하면 N.comm.submit 의 콜백의 인자로 넘어오는 data 가 리턴한 데이터로 치환 됨.
+                        // return data를 하면 N.comm.submit 의 콜백의 인자로 넘어오는 data 가 리턴한 데이터로 치환 됨.
                     },
                     /**
                      * 서버에 요청 후 서버에러가 발생 했을 경우 실행됨.
@@ -715,7 +715,7 @@
              */
             "message" : {
                 "ko_KR" : {
-                    "NoContextSpecifiedInSelector" : 'Controller object의 함수 안에서 요소를 선택할 때는 반드시 $() 나 N() 함수의 두 번째 인자(context)에 view 요소를 입력하거나 view 요소에서 find 해야 합니다. '
+                    "NoContextSpecifiedInSelector" : 'Controller object의 함수 안에서 요소를 선택할 때는 반드시 $() 나 N() 함수의 두 번째 인자(context)에 view 요소를 입력하거나 view 요소에서 find해야 합니다. '
                         + 'view(context) 요소를 입력하지 않으면 다른 View의 요소까지 선택되어 의도하지 않은 오류가 발생할 수 있습니다. '
                         + '\nex) N("selector", cont.view).hide();'
                         + '\n    cont.view.find("selector").hide();',

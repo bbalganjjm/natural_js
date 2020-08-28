@@ -54,7 +54,7 @@ N().popup(popupOpts).open();
 
 ###⊙ Resolving data synchronization problems that occur when the add method is executed on a data-related component
 If data is stored as a variable of the Controller object and shared, when creating new data with the add method of the component, the problem that data in the variable is not created new row data.
-The reason for this problem is the data related components of Natural-JS are convert data of array[object] type to data of jquery object[array[object]] type when data is input.
+The reason for this problem is the data related components of Natural-JS are convert data of array[object] type to data of jQuery object[array[object]] type when data is input.
 
 ```
 ...
@@ -74,13 +74,13 @@ init : function() {
 },
 ...
 ```
-To solve the above problem, just convert the data to a jquery object in advance and then bind it.
+To solve the above problem, just convert the data to a jQuery object in advance and then bind it.
 
 ```
 ...
 data : [{ col01 : 1, col01 : 2 }, { col01 : 3, col01 : 4 }],
 init : function() {
-    // Converts to jquery object.
+    // Converts to jQuery object.
     <strong>this.data = N(this.data);</strong>
 
     var grid = N([]).grid();

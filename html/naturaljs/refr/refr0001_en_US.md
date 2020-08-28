@@ -42,7 +42,7 @@ Documents are divided into pages by component, and page paragraphs are separated
 ---
 
 __Terms__
-* jquery object : Object returned by jQuery extension object or jQuery selector when executing jQuery() or $(), N() function.
+* jQuery object : Object returned by jQuery extension object or jQuery selector when executing jQuery() or $(), N() function.
 * selector : Strings or objects, arrays, html elements, and functions that you specify in CSS selector form in jQuery.
 
 ---

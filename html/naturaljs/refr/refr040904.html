@@ -23,14 +23,14 @@
         </tr>
         <tr>
             <td>context</td>
-            <td>jquery object|jquery selector string</td>
+            <td>jQuery object|jquery selector string</td>
             <td>null</td>
             <td style="text-align: center;">O</td>
             <td>
                 <p lang="ko_KR">N.grid를 적용할 context 요소를 지정 합니다.</p>
                 <p lang="en_US">Specifies the context element to apply N.grid.</p>
 
-                <p lang="ko_KR">N.grid의 context 요소는 반드시 table 태그로 작성 해야 합니다.</p>
+                <p lang="ko_KR">N.grid의 context 요소는 반드시 table 태그로 작성해야 합니다.</p>
                 <p lang="en_US">The context element of N.grid must be written with table tag.</p>
                 <ul>
                     <li>thead - Grid header
@@ -119,7 +119,7 @@
             <td>
                 <p lang="ko_KR">지정한 열들은 고정되고 다른 열 들은 가로로 스크롤 될 수 있게 해 줍니다.</p>
                 <p lang="en_US">The specified column is fixed and the other columns scroll horizontally.</p>
-                <p lang="ko_KR">0으로 설정하면 열을 고정하지 않고 1이상의 숫자로 설정 하면 첫번째 열부터 설정한 숫자(열 개수)만큼 열을 고정 해 줍니다.</p>
+                <p lang="ko_KR">0으로 설정하면 열을 고정하지 않고 1이상의 숫자로 설정 하면 첫 번째 열부터 설정한 숫자(열 개수)만큼 열을 고정 해 줍니다.</p>
                 <p lang="en_US">If set to 0, the column is not fixed, but if set to 1 or more, the column is fixed as much as the number (number of columns) set from the first column.</p>
                 <p lang="ko_KR" class="alert">헤더(thead) 영역은 반드시 있어야 하고 푸터(tfoot) 영역은 없어야 합니다.</p>
                 <p lang="en_US" class="alert">There must be a header(thead) area and no footer(tfoot) area.</p>
@@ -179,7 +179,7 @@
             <td>false</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">true로 설정하면 data 를 bind할 때 데이터의 HTML 이 적용 됩니다.</p>
+                <p lang="ko_KR">true로 설정하면 data를 bind할 때 데이터의 HTML 이 적용 됩니다.</p>
                 <p lang="en_US">If set to true, HTML of data is applied when binding data.</p>
             </td>
         </tr>
@@ -420,7 +420,7 @@
         size : 50
     }
 ...</code></pre>
-                <p lang="ko_KR" class="alert">너무 작게 지정하면 스크롤이 생성 되지 않아 데이터가 모두 표시 되지 않습니다. 반드시 행 들이 그리드 바디를 넘칠 수 있는 양을 지정 해 주어야 합니다.</p>
+                <p lang="ko_KR" class="alert">너무 작게 지정하면 스크롤이 생성되지 않아 데이터가 모두 표시 되지 않습니다. 반드시 행 들이 그리드 바디를 넘칠 수 있는 양을 지정 해 주어야 합니다.</p>
                 <p lang="en_US" class="alert">If it is set too small, scrolling is not created and all data is not displayed. You must specify the amount by which rows can overflow the grid body.</p>
                 <p lang="ko_KR" class="alert">너무 크게 지정하면 스크롤 페이징이 작동될때 브라우저에 부하가 발생되므로 그리드에 입력 요소나 이미지가 들어 있다면 100 이하로 설정하고 그렇지 않다면 1000 이하로 설정하는 것을 권장합니다.</p>
                 <p lang="en_US" class="alert">If set too large, browser performance is overhead when scroll paging is enabled, so it is recommended to set it to 100 or less if the input element or image is included in the grid, otherwise 1000 or less.</p>

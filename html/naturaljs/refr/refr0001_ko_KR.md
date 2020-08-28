@@ -42,7 +42,7 @@ API 문서는 Natural-JS의 컴포넌트와 라이브러리에서 지원하는 �
 ---
 
 __용어__
-* jquery object : jQuery() 나  $(), N() 함수를 실행했을 때 반환되는 jQuery 확장 객체 나 jQuery selector.
+* jQuery object : jQuery() 나  $(), N() 함수를 실행했을 때 반환되는 jQuery 확장 객체 나 jQuery selector.
 * selector : jQuery에서 CSS selector 폼으로 지정하는 문자열이나 object, array, html element, function 등.
 
 ---
