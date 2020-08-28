@@ -17,7 +17,7 @@
             <td>null</td>
             <td style="text-align: center;">O</td>
             <td>
-                <p lang="ko_KR">N.docs를 적용할 block 요소를 지정 합니다.</p>
+                <p lang="ko_KR">N.docs를 적용할 block 요소를 지정합니다.</p>
                 <p lang="en_US">Specifies the block element to apply N.docs.</p>
             </td>
         </tr>
@@ -102,7 +102,7 @@
         rightCorrectionPx : 1
     }
 });</code></pre>
-                <p lang="ko_KR" class="alert"><a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a> 의 N.context.attr("ui.shell").docs 프로퍼티에 tabScrollCorrection 옵션을 설정하면 전체 N.docs 컴포넌트에 적용 됩니다.</p>
+                <p lang="ko_KR" class="alert"><a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a>의 N.context.attr("ui.shell").docs 프로퍼티에 tabScrollCorrection 옵션을 설정하면 전체 N.docs 컴포넌트에 적용 됩니다.</p>
                 <p lang="en_US" class="alert">Setting the tabScrollCorrection option in the N.context.attr("ui.shell").docs property of <a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a> applies to all N.docs components.</p>
             </td>
         </tr>
@@ -112,7 +112,7 @@
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">"전체 닫기" 버튼을 클릭 했을 경우 closeAllRedirectURL 옵션 값이 null 이면 활성 화 된 탭을 제외한 나머지 탭들을 닫아고 url 문자열을 입력 하면 해당 url 로 리다이렉트 됩니다.</p>
+                <p lang="ko_KR">"전체 닫기" 버튼을 클릭 했을 경우 closeAllRedirectURL 옵션 값이 null 이면 활성 화 된 탭을 제외한 나머지 탭들을 닫아고 url 문자열을 입력 하면 해당 url로 리다이렉트 됩니다.</p>
                 <p lang="en_US">When the "Close All" button is clicked, if the value of the closeAllRedirectURL option is null, all other tabs except the active tab are closed and if you input the url string, it  will be redirect to the url.</p>
                 <p lang="ko_KR" class="alert">SPA(Single Page Application)로  개발할 때  홈(메인 인덱스)으로 이동하는 url 을 입력 하여 탭 전체가 닫힐때 만 이라도 페이지 리다이렉션이 일어나서 브라우저의 가비지 리소스들이 정리 되게 하는것을 권장 합니다.</p>
                 <p lang="en_US" class="alert">When developing with SPA(Single Page Application), it is recommended to enter the url to go to the home(Main index page) so that even when the entire tab is closed, page redirection occurs, so that the garbage resources of the browser are cleaned.</p>
@@ -144,7 +144,7 @@
             <td>[]</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">entireLoad 관련 이벤트나 옵션(entireLoadIndicator, entireLoadScreenBlock 등)에서 entireLoadExcludeURLs 로 지정한 URL 들을 캡쳐 대상에서 제외 합니다.</p>
+                <p lang="ko_KR">entireLoad 관련 이벤트나 옵션(entireLoadIndicator, entireLoadScreenBlock 등)에서 entireLoadExcludeURLs로 지정한 URL 들을 캡쳐 대상에서 제외 합니다.</p>
                 <p lang="en_US">Excludes URLs specified by entireLoadExcludeURLs from the entireLoad(entireLoadIndicator, entireLoadScreenBlock, etc.) related event or option.</p>
                 <p lang="ko_KR" class="alert">페이지가 처음 로딩 될 때 N.docs 컨텍스트 바깥에서 로딩되는 Ajax 호출을 제외하고 싶을 때 설정 바랍니다.</p>
                 <p lang="en_US" class="alert">Set this when you want to exclude Ajax calls that are loaded outside of the N.docs context when the page is first loaded.</p>
@@ -166,11 +166,11 @@
             <td>div, span, ul, p, nav, article, section, header, footer, aside</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">alwaysOnTop 옵션 적용 시 최 상위 z-index를 계산하기 위한 대상 요소들을 지정 합니다.</p>
+                <p lang="ko_KR">alwaysOnTop 옵션 적용 시 최 상위 z-index를 계산하기 위한 대상 요소들을 지정합니다.</p>
                 <p lang="en_US">When applying the alwaysOnTop option, specify the target elements for calculating the highest z-index.</p>
-                <p lang="ko_KR" class="alert">jQuery selector 구문으로 지정 합니다.</p>
+                <p lang="ko_KR" class="alert">jQuery selector 구문으로 지정합니다.</p>
                 <p lang="en_US" class="alert">It is specified using jQuery selector syntax.</p>
-                <p lang="ko_KR" class="alert">N.docs 관련 요소들이 다른 요소에 의해 가려 질 때 가리고 있는 요소 셀렉터를 추가 해 주세요.</p>
+                <p lang="ko_KR" class="alert">N.docs 관련 요소들이 다른 요소에 의해 가려 질 때 가리고 있는 요소 셀렉터를 추가해 주세요.</p>
                 <p lang="en_US" class="alert">Add an element selector that is obscured when elements related to N.docs are obscured by other elements.</p>
             </td>
         </tr>
@@ -271,7 +271,7 @@
     // textStatus(arguments[3]) : "success"(When an error occurs in submit callback) or "error"(When an error occurs on the server)
     // callback(arguments[4]) : Callback function specified as argument of submit method when textStatus value is "success"
 }</code></pre>
-                <p lang="ko_KR" class="alert">onErrorEntireLoad의 이벤트 핸들러 함수는 N.comm.error 메서드의 callback 과 같습니다.</p>
+                <p lang="ko_KR" class="alert">onErrorEntireLoad의 이벤트 핸들러 함수는 N.comm.error 메서드의 callback과 같습니다.</p>
                 <p lang="en_US" class="alert">The event handler function of onErrorEntireLoad is the same as the callback of the N.comm.error method.</p>
             </td>
         </tr>

@@ -6,7 +6,7 @@
     </h2>
     <p lang="ko_KR">N.gc 는 Natural-JS의 가비지 컬렉션 관련 유틸리티 함수들을 모아놓은 객체입니다.</p>
     <p lang="en_US">N.gc is a collection object of utility functions related to garbage collection of Natural-JS.</p>
-    <p lang="ko_KR">"N.gc.{함수명}(arg[0...N])" 와 같이 사용할 수 있습니다.</p>
+    <p lang="ko_KR">"N.gc.{함수명}(arg[0...N])"와 같이 사용할 수 있습니다.</p>
     <p lang="en_US">You can use like "N.gc.{function name}(arg[0...N])"</p>
     <table class="api form">
         <tr>
@@ -24,7 +24,7 @@
             <td>
                 <p lang="ko_KR">Natural-JS의 컴포넌트와 라이브러리에서 사용되는 요소와 이벤트에 대한 최소한의 자원을 회수합니다.</p>
                 <p lang="en_US">Collections minimal resources for elements and events used in Natural-JS components and libraries.</p>
-                <p lang="ko_KR" class="alert">N.comm 으로 <a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a>의 N.context.attr("architecture").page.context 영역에 페이지를 불러 올 경우 N.gc[N.context.attr("core").gcMode]() 가 자동으로 실행됩니다.</p>
+                <p lang="ko_KR" class="alert">N.comm 으로 <a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a>의 N.context.attr("architecture").page.context 영역에 페이지를 불러 올 경우 N.gc[N.context.attr("core").gcMode]()가 자동으로 실행됩니다.</p>
                 <p lang="en_US" class="alert">When a page is loaded in the N.context.attr("architecture").page.context area of ​​<a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a> using N.comm,  N.gc[N.context.attr("core").gcMode]() is automatically executed.</p>
             </td>
         </tr>
@@ -48,7 +48,7 @@
             <td style="text-align: center;">N/A</td>
             <td>undefined</td>
             <td>
-                <p lang="ko_KR">N.ds 의 observable 들 에서 가비지 인스턴스를 제거합니다.</p>
+                <p lang="ko_KR">N.ds의 observable 들 에서 가비지 인스턴스를 제거합니다.</p>
                 <p lang="en_US">Removes garbage instances from observables of N.ds</p>
                 <p lang="ko_KR" class="alert">N.comm 으로 <a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a>의 N.context.attr("architecture").page.context 영역이 아닌 곳에 페이지를 불러 올 경우 N.gc.ds()가 자동으로 실행됩니다.</p>
                 <p lang="en_US" class="alert">N.gc.ds() is automatically executed when the page is loaded outside of the N.context.attr("architecture").page.context area of <a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a> with N.comm.</p>

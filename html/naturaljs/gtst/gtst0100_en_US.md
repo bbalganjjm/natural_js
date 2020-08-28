@@ -119,7 +119,7 @@ All pages or page blocks based on Natural-ARCHITECTURE must be composed of the a
 
 Please save the above code as **block01.html** file.
 
-The N.comm function in the init function of the ".block01" controller object is a statement that retrieves data from the server.
+The N.comm function in the init function of the ".block01" Controller object is a statement that retrieves data from the server.
 
 <p class="alert">Natural-JS uses the Communicator(N.comm) module to send and receive data and files with the server. For more information about N.comm, please refer to the <a href="#cmVmcjAyMDMlMjRDb21tdW5pY2F0b3IkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDIwMy5odG1s">Communicator</a> menu.</p>
 

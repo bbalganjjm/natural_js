@@ -74,7 +74,7 @@
             "fn" : function(cont, fnChain, args, joinPoint){
                 // 1. 공통코드 데이터 가져오기
                 N.comm("getCommCodeList.json").submit(function(data) {
-                    // 2. N.select 로 선택 요소에 공통코드 바인드
+                    // 2. N.select로 선택 요소에 공통코드 바인드
                     N(data).select({
                         context : N("#select", cont.view)
                     }).bind()
@@ -110,7 +110,7 @@
     ...
 }</code></pre>
 
-    <h4 lang="ko_KR" class="notIndex">3. 로드 된 페이지의 버튼, 폼, 그리드, 리스트 컴포넌트들을 자동으로 초기화 해 준 후에 init 함수 실행 하기.</h4>
+    <h4 lang="ko_KR" class="notIndex">3. 로드 된 페이지의 버튼, 폼, 그리드, 리스트 컴포넌트들을 자동으로 초기화해 준 후에 init 함수 실행 하기.</h4>
     <h4 lang="en_US" class="notIndex">3. Executing the init function after automatically initializing the button, form, grid, and list components of the loaded page.</h4>
     <pre lang="ko_KR"><code>N.context.attr("architecture", {
     ...
@@ -141,7 +141,7 @@
                 joinPoint.proceed();
 
                 // 6. 이후에 각 컴포넌트의 인스턴스는 context 에서 꺼내와서 사용.
-                var grid01 = N("#grid01", cont.view).instance("grid"); // Natural-CORE 의 instance 메서드 참고.
+                var grid01 = N("#grid01", cont.view).instance("grid"); // Natural-CORE의 instance 메서드 참고.
                 grid01.bind([]);
             }
         }]

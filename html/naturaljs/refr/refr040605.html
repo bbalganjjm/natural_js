@@ -35,12 +35,12 @@
                 <ul>
                     <li lang="ko_KR">undefined(selFlag 옵션이 설정되지 않은 경우) : array[json object] 타입의 데이터를 반환합니다.</li>
                     <li lang="en_US">undefined(When the selFlag option is not set) : Returns data of type array [json object].</li>
-                    <li lang="ko_KR">true : 현재 선택 된 row 데이터만 추출하여 array 타입으로 반환합니다.</li>
+                    <li lang="ko_KR">true : 현재 선택된 row 데이터만 추출하여 array 타입으로 반환합니다.</li>
                     <li lang="en_US">true : Only the currently selected row data is extracted and returned as an array type.</li>
                     <li>
                         <p lang="ko_KR">false : 컴포넌트에 바인딩 되어 있는 jQuery object[array[json object]] 타입의 원래 유형의 데이터를 반환합니다.</p>
                         <p lang="en_US">false : Returns the data of the original type of the jQuery object[array[json object]] type bound to the component.</p>
-                        <p lang="ko_KR" class="alert">data 메서드로 가져온 데이터를 다른 데이터 관련 컴포넌트에 바인딩할 때는 반드시 "false" 로 설정하여 원래 유형의 데이터를 바인딩해야 양방향 데이터 바인딩이 활성 화 됩니다.</p>
+                        <p lang="ko_KR" class="alert">data 메서드로 가져온 데이터를 다른 데이터 관련 컴포넌트에 바인딩할 때는 반드시 "false"로 설정하여 원래 유형의 데이터를 바인딩해야 양방향 데이터 바인딩이 활성 화 됩니다.</p>
                         <p lang="en_US" class="alert">When binding data imported by the data method to other data-related components, you must set "false" to bind the original type of data to enable two way databinding.</p>
                     </li>
                 </ul>
@@ -77,8 +77,8 @@
                 <p lang="ko_KR" class="alert">context 요소가 체크박스 일 경우 체크된 상태라면 데이터가 바인딩 될 때 생성되는 요소들도 체크된 상태로 생성됩니다.</p>
                 <p lang="en_US" class="alert">If the context element is a checkbox, if it's state is checked, the elements created when the data is bound are also created as checked.</p>
                 <p lang="ko_KR" class="alert">
-                    radio 나 checkbox input 요소는 데이터가 바인드 되면 context 로 설정 한 요소에는 id 속성과 name 속성이 있고 추가로 생성되는 옵션 요소에는 name 속성만 추가 됩니다.
-                    생성된 체크박스나 라디오에 이벤트를 바인드할때 id selector 로 요소를 선택하면 첫 번째 옵션 요소에만 이벤트가 적용되니 name 속성으로 요소를 선택 바랍니다.
+                    radio 나 checkbox input 요소는 데이터가 바인드 되면 context로 설정 한 요소에는 id 속성과 name 속성이 있고 추가로 생성되는 옵션 요소에는 name 속성만 추가 됩니다.
+                    생성된 체크박스나 라디오에 이벤트를 바인드할때 id selector로 요소를 선택하면 첫 번째 옵션 요소에만 이벤트가 적용되니 name 속성으로 요소를 선택 바랍니다.
                 </p>
                 <p lang="en_US" class="alert">
                     When the data is bound to the radio or checkbox input element, the element set as context has the id attribute and the name attribute, and only the name attribute is added to the additionally created option element.
@@ -93,7 +93,7 @@
             <td>array[json object]</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p lang="ko_KR">바인딩할 데이터를 지정 합니다.</p>
+                <p lang="ko_KR">바인딩할 데이터를 지정합니다.</p>
                 <p lang="en_US">Specifies the data to be bound.</p>
             </td>
         </tr>
@@ -103,7 +103,7 @@
             <td style="text-align: center;">N/A</td>
             <td>string|array</td>
             <td>
-                <p lang="ko_KR">선택된 요소의 값을 얻거나 선택 합니다.</p>
+                <p lang="ko_KR">선택된 요소의 값을 얻거나 선택합니다.</p>
                 <p lang="en_US">Gets or selects the value of the selected option element.</p>
             </td>
         </tr>
@@ -123,7 +123,7 @@
             <td style="text-align: center;">N/A</td>
             <td>number|array[number]</td>
             <td>
-                <p lang="ko_KR">선택된 요소의 index 를 얻거나 선택 합니다.</p>
+                <p lang="ko_KR">선택된 요소의 index를 얻거나 선택합니다.</p>
                 <p lang="en_US">Gets or selects the index of the selected option element.</p>
             </td>
         </tr>
@@ -143,7 +143,7 @@
             <td>number</td>
             <td>N.select</td>
             <td>
-                <p lang="ko_KR">val 인자로 지정한 값과 같은 옵션 요소와 데이터 객체를 제거 합니다.</p>
+                <p lang="ko_KR">val 인자로 지정한 값과 같은 옵션 요소와 데이터 객체를 제거합니다.</p>
                 <p lang="en_US">Removes optional elements and data objects equal to the value specified by the val argument.</p>
             </td>
         </tr>
@@ -163,7 +163,7 @@
             <td>boolean</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p lang="ko_KR">select 요소의 경우 true 로 설정하면 아무것 선택하지 않고 false로 설정하면 기본(첫 번째) 옵션 요소가 선택 됩니다.</p>
+                <p lang="ko_KR">select 요소의 경우 true로 설정하면 아무것 선택하지 않고 false로 설정하면 기본(첫 번째) 옵션 요소가 선택 됩니다.</p>
                 <p lang="en_US">For select elements, if set to true, nothing is selected; if set to false, the default (first) option element is selected.</p>
             </td>
         </tr>

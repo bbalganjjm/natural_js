@@ -12,7 +12,7 @@
             "COMM-0006" : " - 입력 : {0} 건",
             "COMM-0007" : " - 수정 : {0} 건",
             "COMM-0008" : " - 삭제 : {0} 건",
-            "COMM-0009" : "삭제 하겠습니까?<br/>저장 버튼을 누르기 전까지는 DB 에 반영 되지 않습니다.",
+            "COMM-0009" : "삭제 하겠습니까?<br/>저장 버튼을 누르기 전까지는 DB에 반영 되지 않습니다.",
             "COMM-0010" : "선택된 행이 없습니다."
         },
         "en_US" : {
@@ -30,7 +30,7 @@
 
     var CommonUtils = {
         /**
-         * N.grid 나 N.list 에서 체크(check)되거나 선택(select) 된 행들을 삭제하기 위한 함수 - 삭제 전 동의 메시지 다이얼로그 표시 후 remove 함수 호출 등의 반복적인 루틴들을 한번에 처리 해 줍니다.
+         * N.grid 나 N.list 에서 체크(check)되거나 선택(select) 된 행들을 삭제하기 위한 함수 - 삭제 전 동의 메시지 다이얼로그 표시 후 remove 함수 호출 등의 반복적인 루틴들을 한번에 처리해 줍니다.
          *
          * @this : 호출한 함수 인스턴스
          * @opts.cont : N.cont object
@@ -79,7 +79,7 @@
             }
         },
         /**
-         * 추가, 수정, 삭제된 데이터를 저장 하는 함수 - 저장 전 데이터 검증, 변경 된 데이터 확인, 저장 메시지 다이얼로그 표시등 데이터 저장에 대한 반복적인 루틴들을 한번에 처리 해 줍니다.
+         * 추가, 수정, 삭제된 데이터를 저장 하는 함수 - 저장 전 데이터 검증, 변경 된 데이터 확인, 저장 메시지 다이얼로그 표시등 데이터 저장에 대한 반복적인 루틴들을 한번에 처리해 줍니다.
          *
          * @this : 호출한 함수 인스턴스
          * @opts.cont : N.cont object
@@ -138,7 +138,7 @@
             }).show();
         },
         /**
-        * N.grid 나 N.list 의 행을 선택했을 때(onSelect 이벤트 핸들러 함수 이용) N.form 컴포넌트에 같은 데이터를 연동하기 위한 반복적인 루틴들을 한번에 처리 해 줍니다.
+        * N.grid 나 N.list의 행을 선택했을 때(onSelect 이벤트 핸들러 함수 이용) N.form 컴포넌트에 같은 데이터를 연동하기 위한 반복적인 루틴들을 한번에 처리해 줍니다.
         *
         * @this : 호출한 함수 인스턴스 - onSelect 함수의 this 이므로 N.grid나 N.list 인스턴스
         * @opts.cont : N.cont object
@@ -276,7 +276,7 @@
             }
         },
         /**
-         * fileId 로 서버에서 업로드 된 파일을 조회 후 파일 요약 목록을 만들어 준다.
+         * fileId로 서버에서 업로드 된 파일을 조회 후 파일 요약 목록을 만들어 준다.
          * @fileId : 파일 아이디
          * @fileNameCol : 파일명 컬럼명
          * @length : 파일 목록 문자열을 자를 기준 길이
@@ -296,7 +296,7 @@
     window.APP.comm.utils = CommonUtils;
     window.APP.comm.messages = CommonMessages;
 
-    // N.comm 에 Excel 다운로드 기능 확장
+    // N.comm에 Excel 다운로드 기능 확장
     N.comm.excelDownload = function(args) {
         if(args === undefined || args.length === 0) {
             return N.error("엑셀 파일명(arguments[0]) 을 입력 하세요.");
@@ -325,14 +325,14 @@
     };
 
     /**
-     * N.grid 에 Excel 업로드 기능 확장
+     * N.grid에 Excel 업로드 기능 확장
      *
      * header : JSON Object 키값 - 엑셀 컬럼 순서대로 JSON object의 키값을 정의(필수)
      * opts : 추가 옵션 오브젝트(선택)
      *  - start : 데이터로 추출할 시작 엑셀 행 인덱스
-     *  - mode : 데이터 바인드 모드 - insert 면 무조건 INSERT, update 면 pk 로 지정한 행 데이터가 있으면 UPDATE, 없으면 INSERT
-     *  - pk : mode 옵션이 update 일 때 INSERT, UPDATE 를 판단할 기준 키 컬럼 명
-     *  - server : JSON 데이터를 추출 하기 위해 Excel 파일을 Server 에 업로드 하여 처리할 것인지 브라우저에서 javascript 로 처리할 것인지 여부(boolean)
+     *  - mode : 데이터 바인드 모드 - insert 면 무조건 INSERT, update 면 pk로 지정한 행 데이터가 있으면 UPDATE, 없으면 INSERT
+     *  - pk : mode 옵션이 update 일 때 INSERT, UPDATE를 판단할 기준 키 컬럼 명
+     *  - server : JSON 데이터를 추출 하기 위해 Excel 파일을 Server에 업로드 하여 처리할 것인지 브라우저에서 javascript로 처리할 것인지 여부(boolean)
      *  - after : 엑셀 데이터 추출 완료 후 실행할 콜백 함수(함수의 첫 번째 인자로 추출 된 JSON 타입의 엑셀 데이터가 반환 됨)
      */
     N.grid.prototype.bindExcel = function(header, opts) {
@@ -373,7 +373,7 @@
                         }
                         keyObj = undefined;
                     } else {
-                        N.warn("데이터에 PK 로 지정한 \"" + k + "\" 컬럼이 없습니다.");
+                        N.warn("데이터에 PK로 지정한 \"" + k + "\" 컬럼이 없습니다.");
                     }
                 });
 
@@ -408,7 +408,7 @@
                     cache: false,
                     dataType: "json"
                 }).error(function() {
-                    N.notify.add("서버 오류가 발생 했거나 업로드 된 엑셀 파일이 양식에 맞지 않아 데이터 추출을 하지 못 했습니다.");
+                    N.notify.add("서버 오류가 발생 했거나 업로드 된 엑셀 파일이 양식에 맞지 않아 데이터 추출을 하지 못했습니다.");
                 }).submit(function(data) {
                     N(data).each(function(i, rowData) {
                         if(opts.mode === "insert" || $.isEmptyObject(opts.pk)) {

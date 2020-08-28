@@ -6,11 +6,11 @@
  * 1. 컴포넌트 초기화시 지정한 옵션 값
  *
  * 2. 여기(N.Config)에서 지정한 옵션 값
- *    2.1. 각 영역별로 지정 하세요. 컴포넌트 초기화 시 각 영역별 값들을 자동으로 기본옵션으로 지정 해 줍니다.
+ *    2.1. 각 영역별로 지정 하세요. 컴포넌트 초기화 시 각 영역별 값들을 자동으로 기본옵션으로 지정해 줍니다.
  *         ex) 2.1.1 모든 N.grid의 높이를 300으로 지정하고 싶음.
- *                   - N.context.attr("ui") 의 grid 키에 height 속성을 추가하고 값은 300 을 지정
+ *                   - N.context.attr("ui")의 grid 키에 height 속성을 추가하고 값은 300 을 지정
  *             2.1.2 모든 N.form에 html을 인식 시키고 싶음.
- *                   - N.context.attr("ui") 의 form 키에 html 속성을 추가하고 값은 true 로 지정
+ *                   - N.context.attr("ui")의 form 키에 html 속성을 추가하고 값은 true로 지정
  *
  * 3. 컴포넌트 클래스의 기본 옵션 값
  */
@@ -43,7 +43,7 @@
          */
         spltSepa : "$@^",
         /**
-         * N.context.attr("architecture").page.context 로 페이지가 전환될때 마다 실행될 가비지 컬렉터의 모드
+         * N.context.attr("architecture").page.context로 페이지가 전환될때 마다 실행될 가비지 컬렉터의 모드
          */
         gcMode : "full", //minimum, full
         /**
@@ -57,9 +57,9 @@
      */
     N.context.attr("architecture", {
         /**
-         * Natural-JS Page Context(지정 필수, 메인 컨텐츠가 들어갈 자리를 지정 해 주세요.)
-         * Documents 컴포넌트를 사용하면 따로 지정 하지 않아도 됩니다.
-         * SPA(Single Page Application) 가 아니면 "body" 로 설정 해 주세요.
+         * Natural-JS Page Context(지정 필수, 메인 컨텐츠가 들어갈 자리를 지정해 주세요.)
+         * Documents 컴포넌트를 사용하면 따로 지정하지 않아도 됩니다.
+         * SPA(Single Page Application)가 아니면 "body"로 설정해 주세요.
          */
         "page" : {
             "context" : ".docs__ > .docs_contents__.visible__"
@@ -104,9 +104,9 @@
                 "pointcut" : "^before.*",
                 /**
                  * adviecType 은 아래와 같습니다.
-                 * before : 원본 함수를 실행하기 전에 실행 됩니다.
-                 * after : 원본 함수가 실행 된 후 실행 됩니다. 원본 함수의 반환값이 함께 전달 됩니다.
-                 * error : 원본 함수에서 예외 발생 시 실행 됩니다.
+                 * before : 원본 함수를 실행하기 전에 실행됩니다.
+                 * after : 원본 함수가 실행 된 후 실행됩니다. 원본 함수의 반환값이 함께 전달 됩니다.
+                 * error : 원본 함수에서 예외 발생 시 실행됩니다.
                  * around : 원본 함수를 실행할 수 있는 joinPoint가 파라미터로 전달 됩니다.
                  * 각 adviecType의 사용 방법은 아래의 예제들을 참고 바랍니다.
                  */
@@ -137,7 +137,7 @@
              * Communication Filter
              *  - N.comm 으로 호출되는 모든요청이 아래에서 정의한 필터를 통과하게 되므로 서버 요청 시 공통적으로 적용해야할 부분을 정의 하면 됨.
              *  - 필터 인자 중 request 인자에 요청에 대한 유용한 정보가 담겨 있음.
-             *  - request 객체에서 제공 해 주는 정보는 http://bbalganjjm.github.io/natural_js/ 에서 Communicator.request 메뉴를 참고 바람.
+             *  - request 객체에서 제공해 주는 정보는 http://bbalganjjm.github.io/natural_js/ 에서 Communicator.request 메뉴를 참고 바람.
              *  - 필터를 여러개 걸수 있으며 단위 필터명은 아무거나 지정하면 됨.
              *  - 수행 순서는 order 속성(숫자가 적을 수록 먼저 실행 됨)이 정의 된 필터가 실행 된 다음 order 속성이 정의 되지 않은 필터들이 실행 됨.
              *  - 아래 예제에서 지정한 basicFilter 는 상수값이 아니므로 자유롭게 지정하면 됨.
@@ -149,12 +149,12 @@
                      */
                     order : 1,
                     /**
-                     * N.comm 이 초기화 되기 전 실행됨(N.cont 의 init 아님). string 으로 변환되지 않은 원형의 파라미터를 꺼내올 수 있음.
+                     * N.comm 이 초기화 되기 전 실행됨(N.cont의 init 아님). string 으로 변환되지 않은 원형의 파라미터를 꺼내올 수 있음.
                      */
                     beforeInit : function(obj) {
                     },
                     /**
-                     * N.comm 이 초기화 된 후 실행됨(N.cont 의 init 아님)
+                     * N.comm 이 초기화 된 후 실행됨(N.cont의 init 아님)
                      */
                     afterInit : function(request) {
                     },
@@ -167,7 +167,7 @@
                      * 서버에 요청이 성공 했을 경우 실행됨.
                      */
                     success : function(request, data, textStatus, xhr) {
-                        // return data를 하면 N.comm.submit 의 콜백의 인자로 넘어오는 data 가 리턴한 데이터로 치환 됨.
+                        // return data를 하면 N.comm.submit의 콜백의 인자로 넘어오는 data가 리턴한 데이터로 치환 됨.
                     },
                     /**
                      * 서버에 요청 후 서버에러가 발생 했을 경우 실행됨.
@@ -185,8 +185,8 @@
                 "options" : {
                     /**
                      * 기본 Request Method
-                     * GET 으로 되어 있으면 JSON 형태의 파라미터가 q라는 파라미터명으로 q={a:1} 와 같이 전달 됩니다.
-                     * JSON Object String 을 Request Body 에 담아 전송하려면 반드시 POST로 설정 바랍니다.
+                     * GET 으로 되어 있으면 JSON 형태의 파라미터가 q라는 파라미터명으로 q={a:1}와 같이 전달 됩니다.
+                     * JSON Object String 을 Request Body에 담아 전송하려면 반드시 POST로 설정 바랍니다.
                      */
                     "type" : "POST",
                     /**
@@ -199,7 +199,7 @@
                     "cache" : true,
                     /**
                      * Single Page Application(SPA) 개발 시 N.comm(async) 으로 데이터를 요청하고 요청이 오기전에 다른 페이지로 전환 했을때
-                     * 요청할 때 location.href 와 응답 올때 location.href 을 비교하여 틀리면 요청을 중지 할지 여부
+                     * 요청할 때 location.href와 응답 올때 location.href 을 비교하여 틀리면 요청을 중지 할지 여부
                      */
                     "urlSync" : true,
                     /**
@@ -415,9 +415,9 @@
         "alert" : {
             /**
              * N.alert, N.popup 컴포넌트의 요소들이 저장 되는 영역(지정 필수)
-             * N.context.attr("architecture").page.context 와 같게 설정해도 됩니다.
-             * Documents 컴포넌트를 사용하면 따로 지정 하지 않아도 됩니다.
-             * SPA(Single Page Application) 가 아니면 "body" 로 설정 해 주세요.
+             * N.context.attr("architecture").page.context와 같게 설정해도 됩니다.
+             * Documents 컴포넌트를 사용하면 따로 지정하지 않아도 됩니다.
+             * SPA(Single Page Application)가 아니면 "body"로 설정해 주세요.
              */
             "container" : ".docs__ > .docs_contents__.visible__",
             /**
@@ -636,7 +636,7 @@
                     "close" : "메뉴 닫기",
                     "closeConf" : "\"{0}\" 메뉴에 편집중인 항목이 있습니다. 무시하고 메뉴를 닫겠습니까?",
                     "maxTabs" : "최대 {0} 개의 메뉴 만 열 수 있습니다. <br>다른 메뉴 탭을 닫고 다시 시도 하세요.",
-                    "maxStateful" : "선택한 메뉴가 활성화 되면 설정 된 최대 상태유지 메뉴 개수(최대 {1} 개)가 초과 되어 마지막으로 선택 된 \"{0}\" 메뉴 페이지가 다시 로딩 됩니다.<br>메뉴를 선택 하겠습니까?"
+                    "maxStateful" : "선택한 메뉴가 활성화 되면 설정 된 최대 상태유지 메뉴 개수(최대 {1} 개)가 초과 되어 마지막으로 선택된 \"{0}\" 메뉴 페이지가 다시 로딩 됩니다.<br>메뉴를 선택 하겠습니까?"
                 },
                 "en_US" : {
                     "closeAllTitle" : "Close all menus",
@@ -700,7 +700,7 @@
     N.context.attr("code", {
         inspection : {
             /**
-             * ERROR 유형의 코드가 검출 되었을 때 ERROR 를 발생하여 로직을 중단 할지 여부를 지정 합니다.
+             * ERROR 유형의 코드가 검출 되었을 때 ERROR를 발생하여 로직을 중단 할지 여부를 지정합니다.
              */
             abortOnError : false,
             /**

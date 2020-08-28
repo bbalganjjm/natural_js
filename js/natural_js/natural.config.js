@@ -170,7 +170,7 @@
                     error : function(request, xhr, textStatus, errorThrown) {
                         if((xhr.getResponseHeader("Content-Type") && xhr.getResponseHeader("Content-Type").indexOf("html") > -1) || request.options.dataType === "html") {
                             if(request.options.target != null && request.options.target.html !== undefined) {
-                                request.options.target.html('<div style="text-align: center; margin-top: 140px;margin-bottom: 140px;">[ ' + request.options.url + ' ] 페이지를 불러오는 도중 에러가 발생 했습니다.</div>');
+                                request.options.target.html('<div style="text-align: center; margin-top: 140px;margin-bottom: 140px;">[ ' + request.options.url + ' ] 페이지를 불러오는 도중 에러가 발생했습니다.</div>');
                             } else {
                                 N(window).alert('An error occurred while loading the "' + request.options.url + '" page.').show();
                             }
@@ -557,7 +557,7 @@
                     "dayNaN" : "일은 1일부터 {0}일까지 입력할 수 있습니다.",
                     "minDate" : "\"{0}\" 이후의 날짜만 입력할 수 있습니다.",
                     "maxDate" : "\"{0}\" 이전의 날짜만 입력할 수 있습니다.",
-                    "minMaxDate" : "\"{0}\" 와 \"{1}\" 사이의 날짜만 입력할 수 있습니다.",
+                    "minMaxDate" : "\"{0}\"와 \"{1}\" 사이의 날짜만 입력할 수 있습니다.",
                     "prev" : "이전",
                     "next" : "다음"
                 },
@@ -931,7 +931,7 @@
                     "close" : "메뉴 닫기",
                     "closeConf" : "\"{0}\" 메뉴에 편집중인 항목이 있습니다. 무시하고 메뉴를 닫겠습니까?",
                     "maxTabs" : "최대 {0} 개의 메뉴 만 열 수 있습니다. <br>다른 메뉴 탭을 닫고 다시 시도 하세요.",
-                    "maxStateful" : "선택한 메뉴가 활성화 되면 설정 된 최대 상태유지 메뉴 개수(최대 {1} 개)가 초과 되어 마지막으로 선택 된 \"{0}\" 메뉴 페이지가 다시 로딩 됩니다.<br>메뉴를 선택 하겠습니까?"
+                    "maxStateful" : "선택한 메뉴가 활성화 되면 설정 된 최대 상태유지 메뉴 개수(최대 {1} 개)가 초과 되어 마지막으로 선택된 \"{0}\" 메뉴 페이지가 다시 로딩 됩니다.<br>메뉴를 선택 하겠습니까?"
                 },
                 "en_US" : {
                     "closeAllTitle" : "Close all menus",

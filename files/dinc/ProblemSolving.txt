@@ -1,32 +1,32 @@
 1. VOFilterAspect.java 에서 파라미터 객체를 Deep 하게 구성 시 1레벨 오브젝트에만 추가 파라미터가 추가 되는 문제.
 
-    A :  XSS 공격 문자열 제거도 1레벨 이상은 안되었더군요. 몇레벨이든 끝까지 추가 하도록 변경 했습니다.
-        AOP Pointcut 을 Mapper 에 적용하지 말고 첨부 된 file/VOFilterAspect.java 파일의 내용들을 같은 파일에 적용 해 주세요.
+    A :  XSS 공격 문자열 제거도 1레벨 이상은 안되었더군요. 몇레벨이든 끝까지 추가 하도록 변경했습니다.
+        AOP Pointcut 을 Mapper에 적용하지 말고 첨부 된 file/VOFilterAspect.java 파일의 내용들을 같은 파일에 적용해 주세요.
 
 2. Excel Export 문의 - POST, 보안 관련
 
     A : 파일 다운로드는 POST 방식으로 처리할 수 없습니다. 엑셀 파일 다운로드 시 파라미터를 전달하기 위해 쿠키에 파라미터를 담은 후 쿠키 값을
-        vo 로 변환 해 주는 로직이 내부에 있습니다. 이러한 내부 처리 때문에 엑셀 다운로드할때도 JSON 조회할때와 똑같은 방법으로 사용할 수
-        있습니다. required=false 는 RequestBody 에 파라미터가 전달 되지 않았을 경우 오류를 발생 시킬 것인가 아닌가를 지정하는 것입니다.
-        엑셀다운로드시에 required=false 를 지정하지 않아서 400 오류가 발생하면 required=false 를 넣어 주세요.
-        엑셀다운로드 시 파라미터와 엑셀컬럼정보는 Base64 로 엔코딩 하여 쿠키 값으로 보내기 때문에 완벽하지는 않지만 POST 보다는 보안이
+        vo로 변환해 주는 로직이 내부에 있습니다. 이러한 내부 처리 때문에 엑셀 다운로드할때도 JSON 조회할때와 똑같은 방법으로 사용할 수
+        있습니다. required=false 는 RequestBody에 파라미터가 전달 되지 않았을 경우 오류를 발생 시킬 것인가 아닌가를 지정하는 것입니다.
+        엑셀다운로드시에 required=false를 지정하지 않아서 400 오류가 발생하면 required=false를 넣어 주세요.
+        엑셀다운로드 시 파라미터와 엑셀컬럼정보는 Base64로 엔코딩 하여 쿠키 값으로 보내기 때문에 완벽하지는 않지만 POST 보다는 보안이
         강화 된 형태입니다. 안심하시고 쓰셔도 될 것 같습니다.
 
-         추가로 엑셀 컬럼정보가 길어질 수록 쿠키가 담겨있는 Request Header 의 길이가 길어져 WAS 나 WEB 서버에서 오류를 뿜는 경우가 생깁니다.
+         추가로 엑셀 컬럼정보가 길어질 수록 쿠키가 담겨있는 Request Header의 길이가 길어져 WAS 나 WEB 서버에서 오류를 뿜는 경우가 생깁니다.
          엑셀다운로드 개발 중에 로컬 톰켓에서 "Request Header too large" 오류가 발생 한다면
-        server.xml 의 maxHttpHeaderSize 의 크기를 다음과 같이 늘려 주세요.
+        server.xml의 maxHttpHeaderSize의 크기를 다음과 같이 늘려 주세요.
         <Connector port="8080" maxHttpHeaderSize="65536" protocol="HTTP/1.1" ... />
 
-        Jeus 는 디폴트 값이 0 으로 지정되어 무한으로 받아주는데 webtob 가 기본 8096 bite 로 성정되어 있어 엑셀 컬럼이 50개 정도가 넘어가면
+        Jeus 는 디폴트 값이 0 으로 지정되어 무한으로 받아주는데 webtob가 기본 8096 bite로 성정되어 있어 엑셀 컬럼이 50개 정도가 넘어가면
         "Bad Request" 오류를 뿜을 수 있습니다. 이때는 webtob설정에서 16192(최대값)로 늘려 줘야 합니다. max request 비스무리한 설정값 일
         꺼애요. 최대값이 16192 이어서 다운로드 되는 엑셀 컬럼의 개수는 대략 100 개 안쪽까지만 지정할 수 있습니다.
         100개를 지정 했는데 "Bad Request" 오류가 발생하면 어쩔수 없이 다운로드 되는 엑셀파일의 컬럼 개수를 줄여야 합니다. --;
 
 3. Excel Import 문의 - getDataListFromXlsx
 
-    A : getDataListFromXlsx 메서드가 XlsxToJSONController.java 의 함수 를 말씀하시는것 같은데 역할 은 Excel 파일을 브라우저에서 받아서
+    A : getDataListFromXlsx 메서드가 XlsxToJSONController.java의 함수를 말씀하시는것 같은데 역할 은 Excel 파일을 브라우저에서 받아서
         엑셀 데이터를 추출 한 다음 JSON 문자열 Stream 으로 쏴주는 역할 을 합니다.
-        common.js 의 N.grid.prototype.bindExcel 함수와 파라미터(파일, 데이터)가 유기적으로 역여 있는 프레임웍 기능이어서 단독으로 사용은
+        common.js의 N.grid.prototype.bindExcel 함수와 파라미터(파일, 데이터)가 유기적으로 역여 있는 프레임웍 기능이어서 단독으로 사용은
         어려울것 같아서 설명은 생략 하겠습니다. ^^;
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------
@@ -36,14 +36,14 @@
     A : 오라클 12c 이상에서 페이징 할 때 가이드를 정신줄 놓고 썼나 치명적인 보안 취약점을 노출 시켰네요? --;
 
         OFFSET ${startRowNum - 1} ROWS FETCH NEXT ${countPerPage} ROWS ONLY 구문을
-        OFFSET #{startRowIndex} ROWS FETCH NEXT #{countPerPage} ROWS ONLY 로 바꿔줘야 합니다.
+        OFFSET #{startRowIndex} ROWS FETCH NEXT #{countPerPage} ROWS ONLY로 바꿔줘야 합니다.
 
-        아울러 MyBatis Mapper XML 에서는 ${} 로 변수를 치환하면 절대 안되고 #{} 로 변수를 바인딩해야 합니다. 치환하면 SQL Injection 공격에 그대로 노출 됩니다.
-        SQL 에 테이블 명을 동적으로 받는 등 어쩔수 없이 ${} 를 사용해야 한다면 변수값에 대해 SQL Injection 공격 문자열을 치환 해 주는 처리를 별도로 해 줘야 합니다.
+        아울러 MyBatis Mapper XML 에서는 ${}로 변수를 치환하면 절대 안되고 #{}로 변수를 바인딩해야 합니다. 치환하면 SQL Injection 공격에 그대로 노출 됩니다.
+        SQL에 테이블 명을 동적으로 받는 등 어쩔수 없이 ${}를 사용해야 한다면 변수값에 대해 SQL Injection 공격 문자열을 치환해 주는 처리를 별도로해 줘야 합니다.
 
         최신 가이드 문서(file/documents.html) 파일도 올려 놓았으니 엎퍼 쳐 주세요. ^^
 
-5. Natural-TEMPLATE 패키지(natural.template.js)가 업데이트 되었습니다. GitHub 에서 받아서 패치 해 주세요.
+5. Natural-TEMPLATE 패키지(natural.template.js)가 업데이트 되었습니다. GitHub 에서 받아서 패치해 주세요.
 
     A : 그리드 헤더에 있는 요소에 e.{id}.{eventName} 으로 이벤트 바인드가 되지 않던 버그가 수정 되었습니다.
 
@@ -56,7 +56,7 @@
         <input name="abc" value="N"> 만 하면 id 값이 없기 때문에 연결되지 않습니다.
 
         <input id="abc" name="abc" value="Y">
-        <input name="abc" value="N"> 와 같이 첫 번째 선택요소에 id 값을 name 속성값과 같은 값으로 넣어 주시면 됩니다.
+        <input name="abc" value="N">와 같이 첫 번째 선택요소에 id 값을 name 속성값과 같은 값으로 넣어 주시면 됩니다.
 
         좀더 formal 하게 작성하는건 다음과 같습니다(<span> 태그를 안넣어서 라디오 선택지가 사라졌을 수도 있습니다).
 
@@ -67,9 +67,9 @@
 
         checkbox도 기본은 radio와 동일 하나
         체크박스는 요소가 1개만 있을때는 값이 1이나 Y, on 이면 체크되고 0이나 N, off 이면 체크가 해제 됩니다.
-         * 1이나 Y, on 등 예/아니오 값의 기본값은 natural.config.js 파일의 N.context.attr("core").sgChkdVal 과 N.context.attr("core").sgUnChkdVal 에 설정 바랍니다.
+         * 1이나 Y, on 등 예/아니오 값의 기본값은 natural.config.js 파일의 N.context.attr("core").sgChkdVal과 N.context.attr("core").sgUnChkdVal에 설정 바랍니다.
 
-        체크박스 요소가 2개 이상이면 컬럼 데이터가 Array 이면 Array 안에 있는 여러개 값을 한번에 선택 해 주고 String 으로 단일 값이 있으면 해단 값에 해당하는 요소를 선택 해 줍니다.
+        체크박스 요소가 2개 이상이면 컬럼 데이터가 Array 이면 Array 안에 있는 여러개 값을 한번에 선택해 주고 String 으로 단일 값이 있으면 해단 값에 해당하는 요소를 선택해 줍니다.
 
         제일 권장하는 방법은 모든 선택 요소를 select 컴포넌트로 처리하면 위와 같은 오류를 방지할 수 있고 소스정리도 깔끔하게할 수 있습니다.
         <input id="abc" value="Y">
@@ -88,8 +88,8 @@
                 }]
             },
          ...
-         위 col01 과 col02 는 natural.config.js 파일의 N.context.attr("ui").select.key 와 N.context.attr("ui").select.val 로 설정한 값을 넣어 주세요.
-         select 컴포넌트의 "key" 옵션과 "val" 옵션으로 직접 지정 해 주셔도 되구요.
+         위 col01과 col02 는 natural.config.js 파일의 N.context.attr("ui").select.key와 N.context.attr("ui").select.val로 설정한 값을 넣어 주세요.
+         select 컴포넌트의 "key" 옵션과 "val" 옵션으로 직접 지정해 주셔도 되구요.
 
 7. natural.js.min.js 파일 다시 받아 주세요(아직 릴리즈는 안됐고 GitHub 들어가서 dist 폴더 안에 들어있는것 받아주세요).
 
@@ -102,9 +102,9 @@
 
     A : Template 프로젝트에 XSS 공격에 대한 치명적인 보안 결함이 있었습니다. 다음 순서대로 변경 바랍니다.
 
-        1. N.context.attr("ui").form 의 "html" 프로퍼티의 값을 false로 변경.
-        2. N.context.attr("ui").list 의 "html" 프로퍼티를 제거.
-        3. N.context.attr("ui").grid 의 "html" 프로퍼티를 제거.
+        1. N.context.attr("ui").form의 "html" 프로퍼티의 값을 false로 변경.
+        2. N.context.attr("ui").list의 "html" 프로퍼티를 제거.
+        3. N.context.attr("ui").grid의 "html" 프로퍼티를 제거.
         4. N.context.attr("ui").form.onBeforeBindValue 함수를 다음과 같이 변경.
 
             ...
@@ -139,7 +139,7 @@
             },
         ...
 
-9. dist/natural.js.min.js 와 css/natural.ui.css 파일을 다시 받아 주세요(아직 릴리즈는 안됐고 GitHub 들어가서 dist 폴더와 css 폴더에 있는 파일을 받아 주세요).
+9. dist/natural.js.min.js와 css/natural.ui.css 파일을 다시 받아 주세요(아직 릴리즈는 안됐고 GitHub 들어가서 dist 폴더와 css 폴더에 있는 파일을 받아 주세요).
 
     A : 여러가지 버그가 Fix 되고 기능이 추가 되었습니다.
         natural.ui.css 은 변경이 되어서 엎어 칠 수 없다면 823 ~ 871 라인은 필수로 적용 바랍니다(엎퍼 치는게 제일 좋음).

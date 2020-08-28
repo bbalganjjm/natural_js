@@ -88,7 +88,7 @@ N.context.attr("template", {
 #API Menual
 
 ##Rules for creating property names for Controller object
-Natural-TEMPLATE functions can be executed using the naming convention for controller object property names. Automate repetitive tasks such as initializing components and binding events.
+Natural-TEMPLATE functions can be executed using the naming convention for Controller object property names. Automate repetitive tasks such as initializing components and binding events.
 
 ###1. Starts with "p." - UI component initialization
 Automatically initialize the components of Natural-UI.

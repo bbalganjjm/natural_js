@@ -28,28 +28,28 @@
                  */
                 order : 1,
                 /**
-                 * N.comm 이 초기화되기 전에 실행 됩니다. string 으로 변환되지 않은 원래 유형의 파라미터를 가져 올 수 있습니다.
+                 * N.comm 이 초기화되기 전에 실행됩니다. string 으로 변환되지 않은 원래 유형의 파라미터를 가져 올 수 있습니다.
                  */
                 beforeInit : function(obj) {
                 },
                 /**
-                 * N.comm 이 초기화 된 후에 실행 됩니다.(N.cont 의 "init"이 아닙니다.)
+                 * N.comm 이 초기화 된 후에 실행됩니다.(N.cont의 "init"이 아닙니다.)
                  */
                 afterInit : function(request) {
                 },
                 /**
-                 * 서버에 요청을 보내기 전에 실행 됩니다.
+                 * 서버에 요청을 보내기 전에 실행됩니다.
                  */
                 beforeSend : function(request, xhr, settings) {
                 },
                 /**
-                 * 서버에서 성공 응답이 전달 됐을 때 실행 됩니다.
+                 * 서버에서 성공 응답이 전달 됐을 때 실행됩니다.
                  */
                 success : function(request, data, textStatus, xhr) {
-                    // data를 수정 해서 반환 하면 모든 Communicator 의 submit 콜백 함수의 data 인자 값으로 반환 됩니다.
+                    // data를 수정 해서 반환 하면 모든 Communicator의 submit 콜백 함수의 data 인자 값으로 반환됩니다.
                 },
                 /**
-                 * 서버에서 에러 응답이 전달 됐을 때 실행 됩니다.
+                 * 서버에서 에러 응답이 전달 됐을 때 실행됩니다.
                  */
                 error : function(request, xhr, textStatus, errorThrown) {
                 },

@@ -47,7 +47,7 @@
 ### 2. 샘플 프로젝트 내려받기
 이클립스 실행이 완료되었으면 이클립스에서 다음 순서대로 실행합니다.
 
-먼저 아래 URL을 선택 후 복사(Ctrl + C)합니다. 복사만 해 두면 됩니다.
+먼저 아래 URL을 선택 후 복사(Ctrl + C)합니다. 복사만해 두면 됩니다.
 ```md
 https://github.com/bbalganjjm/natural_js.git
 ```
@@ -64,16 +64,16 @@ https://github.com/bbalganjjm/natural_js.git
 
 ![img-3][]
 
-2.4. Natural-JS의 Source Git Repository 접속 정보를 입력하는 화면입니다. 처음에 복사 해 둔 URL 에 의해 값들이 자동으로 입력되어 있을 겁니다. 입력이 되어 있지 않으면
+2.4. Natural-JS의 Source Git Repository 접속 정보를 입력하는 화면입니다. 처음에 복사해 둔 URL에 의해 값들이 자동으로 입력되어 있을 겁니다. 입력이 되어 있지 않으면
 ```md
 https://github.com/bbalganjjm/natural_js.git
 ```
 를 직접 입력 합니다.
-입력 항목 중 `User` 와 `Password` 는 Github 로그인 정보를 입력하면 됩니다. 인증 정보를 저장하려면 `Store in Secure Store`를 체크하고 `Finish` 버튼을 클릭합니다.
+입력 항목 중 `User`와 `Password` 는 Github 로그인 정보를 입력하면 됩니다. 인증 정보를 저장하려면 `Store in Secure Store`를 체크하고 `Finish` 버튼을 클릭합니다.
 
 ![img-4][]
 
-2.5. Natural-JS Source Git Repository 의 브랜치 목록에서 natural-js-spring-boot 브랜치 만 체크한 후 `Finish` 버튼을 클릭합니다.
+2.5. Natural-JS Source Git Repository의 브랜치 목록에서 natural-js-spring-boot 브랜치 만 체크한 후 `Finish` 버튼을 클릭합니다.
 
 ![img-5][]
 
@@ -102,4 +102,4 @@ http://localhost/index.html
 현재 보고 있는 Natural-JS 사이트가 정상적으로 표시되면 설치가 완료된 것입니다.
 
 ## 예제
-현재 보고 있는 Natural-JS 홈페이지의 예제는 어플리케이션 서버와 연동되어 있지 않는 클라이언트 소스 예제이지만 `natural-js-spring-boot` 프로젝트의 예제는 어플리케이션 서버와 DBMS가 연동되어 CRUD(생성, 조회, 수정, 삭제) 가 물리적으로 처리되는 예제입니다.
+현재 보고 있는 Natural-JS 홈페이지의 예제는 어플리케이션 서버와 연동되어 있지 않는 클라이언트 소스 예제이지만 `natural-js-spring-boot` 프로젝트의 예제는 어플리케이션 서버와 DBMS가 연동되어 CRUD(생성, 조회, 수정, 삭제)가 물리적으로 처리되는 예제입니다.

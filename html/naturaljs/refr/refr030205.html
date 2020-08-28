@@ -4,7 +4,7 @@
         <span lang="en_US">Examples</span>
     </h2>
 
-    <h4 lang="ko_KR" class="notIndex">1. N.form 이나 N.grid 로 데이터를 바인드 하기 전에 컬럼 값이 바이드 될 요소의 data-validate 속성에 유효성 검증 룰을 선언 하기.</h4>
+    <h4 lang="ko_KR" class="notIndex">1. N.form 이나 N.grid로 데이터를 바인드 하기 전에 컬럼 값이 바이드 될 요소의 data-validate 속성에 유효성 검증 룰을 선언 하기.</h4>
     <h4 lang="en_US" class="notIndex">1. Let's declare a validate rule in the data-validate attribute of the element to which the column value will be bound before binding data with N.form or N.grid.</h4>
     <pre><code>&lt;input id="col01" type="text" data-validate='[["required"]]'&gt;</code></pre>
     <p lang="ko_KR">위와 같이 입력 요소에 선언 하면 해당 요소에서 포커스 아웃 되면 유효성 검증이 실행 되고 유효성 검증 실패 시 실패 원인을 입력 요소 옆에 툴팁으로 보여 줍니다.</p>
@@ -12,7 +12,7 @@
 
     <h4 lang="ko_KR" class="notIndex">2. N.validator 라이브러리로 유효성 검증 하기.</h4>
     <h4 lang="en_US" class="notIndex">2. Let's validate it with the N.validator library.</h4>
-    <p lang="ko_KR">요소에 유효성 검증 룰을 선언할 때  data-validate='[["maxbyte", 8]]' 속성 값에서 "date" 가 유효성 검증 룰 이고 8 이후 부터는 유효성 검증 파라미터 이고 유효성 검증할 문자열은 입력 요소의 value 값이나 그외 요소의 text입니다.</p>
+    <p lang="ko_KR">요소에 유효성 검증 룰을 선언할 때  data-validate='[["maxbyte", 8]]' 속성 값에서 "date"가 유효성 검증 룰 이고 8 이후 부터는 유효성 검증 파라미터 이고 유효성 검증할 문자열은 입력 요소의 value 값이나 그외 요소의 text입니다.</p>
     <p lang="en_US">When declaring a validation rule on an element, in data-validate='[["maxbyte", 8]]' attribute value, "maxbyte" is the validation rule, and after 8 is the validate parameters, and the string to be validated is the value of the input element.</p>
     <p lang="ko_KR">이 선언을 명령으로 처리할 때는 다음와 같이 사용할 수 있습니다.</p>
     <p lang="en_US">When processing this declaration as a imperative, you can use it as follows:</p>

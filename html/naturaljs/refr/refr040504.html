@@ -17,10 +17,10 @@
             <td>null</td>
             <td style="text-align: center;">O</td>
             <td>
-                <p lang="ko_KR">N.tab을 적용할 context 요소를 지정 합니다.</p>
+                <p lang="ko_KR">N.tab을 적용할 context 요소를 지정합니다.</p>
                 <p lang="en_US">Specifies the context element to apply N.tab.</p>
 
-                <p lang="ko_KR">N.tab의 context 요소는 반드시 div 태그 안에 ul, li 와 div 태그로 작성해야 합니다.</p>
+                <p lang="ko_KR">N.tab의 context 요소는 반드시 div 태그 안에 ul, li와 div 태그로 작성해야 합니다.</p>
                 <p lang="en_US">The context element of N.tab must be written with ul, li and div tag in div tag.</p>
                 <ul>
                     <li>tab
@@ -35,7 +35,7 @@
                         <ul>
                             <li lang="ko_KR">tab contents 요소는 div 태그를 사용 합니다.</li>
                             <li lang="en_US">The tab contents element uses div tags.</li>
-                            <li lang="ko_KR">tab(li) 의 순서와 개수에 맞춰 tab contents(div)를 생성 합니다.</li>
+                            <li lang="ko_KR">tab(li)의 순서와 개수에 맞춰 tab contents(div)를 생성 합니다.</li>
                             <li lang="en_US">Create tab contents(div) according to the order and number of tab(li).</li>
                             <li lang="ko_KR">tab contents(div) 태그의 id 속성과 tab 링크(a 태그)의 href 속성값을 맞춰 줍니다.</li>
                             <li lang="en_US">Match the id attribute of the tab contents(div) tag with the value of the href attribute of the tab link(a tag).</li>
@@ -66,9 +66,9 @@
             <td>[]</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">탭 요소의 data-opts 속성이 아닌 array[object] 타입으로 개별 탭의 옵션을 지정 합니다.</p>
+                <p lang="ko_KR">탭 요소의 data-opts 속성이 아닌 array[object] 타입으로 개별 탭의 옵션을 지정합니다.</p>
                 <p lang="en_US">Specify options for individual tabs by the array[object] type, not the data-opts attribute of the tab element.</p>
-                <p lang="ko_KR">옵션은 탭의 순서와 개수 만큼 옵션 object로 설정 합니다.</p>
+                <p lang="ko_KR">옵션은 탭의 순서와 개수만큼 옵션 object로 설정 합니다.</p>
                 <p lang="en_US">Option is set as option object as much as the order and number of tabs.</p>
                 <pre><code>N("#tab").tab({
     tabOpts : [
@@ -91,7 +91,7 @@
             <td>
                 <p lang="ko_KR">true로 설정하면 마우스 드래그나 터치 또는 처음 / 마지막 버튼으로 탭들을 스크롤할 수 있습니다.</p>
                 <p lang="en_US">If set to true, the tabs can be scrolled with mouse drag or touch or first / last button.</p>
-                <p lang="ko_KR">처음 / 마지막 버튼으로 탭들을 스크롤 하려면 ul 태그 처음과 마지막 자식 요소로 a 태그와 span 태그를 작성 해 주면 됩니다.</p>
+                <p lang="ko_KR">처음 / 마지막 버튼으로 탭들을 스크롤 하려면 ul 태그 처음과 마지막 자식 요소로 a 태그와 span 태그를 작성해 주면 됩니다.</p>
                 <p lang="en_US">To scroll tabs with the first / last button, write a tag and span tag with the first and last child elements of the ul tag.</p>
                 <pre><code>&lt;div&gt;
     &lt;a href="#"&gt;&lt;span&gt;&lt;/span&gt;&lt;/a&gt; &lt;!-- First button --&gt;
@@ -128,7 +128,7 @@
         tabContainerWidthReCalcDelayTime : 0
     }
 });</code></pre>
-                <p lang="ko_KR" class="alert"><a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a> 의 N.context.attr("ui").tab 프로퍼티에 tabScrollCorrection 옵션을 설정하면 전체 N.tab 컴포넌트에 적용 됩니다.</p>
+                <p lang="ko_KR" class="alert"><a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a>의 N.context.attr("ui").tab 프로퍼티에 tabScrollCorrection 옵션을 설정하면 전체 N.tab 컴포넌트에 적용 됩니다.</p>
                 <p lang="en_US" class="alert">Setting the tabScrollCorrection option in the N.context.attr("ui").tab property of <a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a> applies to all N.tab components.</p>
             </td>
         </tr>
@@ -140,7 +140,7 @@
             <td>
                 <p lang="ko_KR">true로 설정하면 탭이 초기화 될 때 탭과 탭컨텐츠를 랜덤으로 보여줍니다. false로 설정하면 첫 번째 탭을 보여줍니다.</p>
                 <p lang="en_US">If set to true, the tab and tab contents are displayed randomly when the tab is initialized. If set to false, displayed the first tab.</p>
-                <p lang="ko_KR" class="alert">탭 옵션 중 active 옵션이 true 로 설정 되어 있으면 active 옵션이 먼저 적용 됩니다.</p>
+                <p lang="ko_KR" class="alert">탭 옵션 중 active 옵션이 true로 설정 되어 있으면 active 옵션이 먼저 적용 됩니다.</p>
                 <p lang="en_US" class="alert">If the active option among the tab options is set to true, the active option is applied first.</p>
             </td>
         </tr>
@@ -177,7 +177,7 @@
             <td class="depricated">
                 <p>탭 컨텐츠가 표시될때 전환 효과를 보여줄지 여부를 설정 합니다.</p>
                 <p>효과를 적용하지 않으려면 false를 입력하고 효과를 입력하려면 다음과 같이 입력합니다.</p>
-                <p>["이펙트", "시간(ms)", "이펙트가 끝날 때 마다 실행 될 콜백함수"]</p>
+                <p>["이펙트", "시간(ms)", "이펙트가 끝날 때 마다 실행 될 콜백 함수"]</p>
                 <pre><code>N("#tab").tab({
     effect : ["slideDown", 300, null]
 });</code></pre>
@@ -208,7 +208,7 @@
     // tabEles : Entire tab element
     // contentEles : Entire content elements
 }</code></pre>
-                <p lang="ko_KR" class="alert">탭 컨텐츠가 처음 로딩 될 경우 Controller object의 init 함수가 실행 된 다음 onActive 함수가 실행 됩니다.</p>
+                <p lang="ko_KR" class="alert">탭 컨텐츠가 처음 로딩 될 경우 Controller object의 init 함수가 실행 된 다음 onActive 함수가 실행됩니다.</p>
                 <p lang="en_US" class="alert">If the tab content is loaded for the first time, the init function of the Controller object is executed, and then the onActive function is executed.</p>
             </td>
         </tr>

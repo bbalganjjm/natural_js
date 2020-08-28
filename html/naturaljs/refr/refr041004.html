@@ -17,7 +17,7 @@
             <td>undefined</td>
             <td style="text-align: center;">O</td>
             <td>
-                <p lang="ko_KR">N.pagination에 바인딩할 데이터를 지정 합니다.</p>
+                <p lang="ko_KR">N.pagination에 바인딩할 데이터를 지정합니다.</p>
                 <p lang="en_US">Specifies the data to bind to N.pagination.</p>
                 <p lang="ko_KR" class="alert">data옵션이 지정되면 totalCount 값이 자동으로 계산되어 설정되므로 totalCount 값을 0으로 설정하거나 설정하지 않아야 합니다.</p>
                 <p lang="en_US" class="alert">If the data option is specified, the totalCount value is automatically calculated and set, so the totalCount value must be set to 0 or not.</p>
@@ -31,7 +31,7 @@
             <td>null</td>
             <td style="text-align: center;">O</td>
             <td>
-                <p lang="ko_KR">N.pagination을 적용할 context 요소를 지정 합니다.</p>
+                <p lang="ko_KR">N.pagination을 적용할 context 요소를 지정합니다.</p>
                 <p lang="en_US">Specifies the context element to apply N.pagination.</p>
                 <p lang="ko_KR">N.pagination의 context 요소는 반드시 div 태그 안에 ul, li 태그로 작성해야 합니다.</p>
                 <p lang="en_US">The context element of N.pagination must be written with ul, li tag in div tag.</p>
@@ -171,7 +171,7 @@
                 </ul>
                 <p lang="ko_KR">DB 페이징을 하는 경우 서버에서 totalCount 값을 먼저 가져온 다음 onChange 이벤트 핸들러의 currPageNavInfo 인자 값을 서버에 파라미터로 전송하여 페이징 된 데이터를 조회할 수 있습니다.</p>
                 <p lang="en_US">In case of DB paging, get the totalCount value from the server first. and then you can retrive the paged data by sending the value of the currPageNavInfo argument of the onChange event handler as a parameter to the server.</p>
-                <p lang="ko_KR">이 페이징 된 데이터를 onChange 이벤트에서 N.grid 나 N.list 에 페이지가 바뀔 때마다 바인딩 해 주면 됩니다.</p>
+                <p lang="ko_KR">이 페이징 된 데이터를 onChange 이벤트에서 N.grid 나 N.list에 페이지가 바뀔 때마다 바인딩해 주면 됩니다.</p>
                 <p lang="en_US">Bind this paged data to N.grid or N.list in onChange event whenever the page changes.</p>
                 <pre><code>var grid = N(data).grid(".grid-context");
 
@@ -186,7 +186,7 @@
             }
         }).bind();
     });</code></pre>
-                <p class="alert" lang="ko_KR">blockOnChangeWhenBind 옵션이 true 로 설정 되어있을 경우 페이징 버튼들을 클릭할 때만 이벤트가 실행 됩니다.</p>
+                <p class="alert" lang="ko_KR">blockOnChangeWhenBind 옵션이 true로 설정 되어있을 경우 페이징 버튼들을 클릭할 때만 이벤트가 실행됩니다.</p>
                 <p class="alert" lang="en_US">If the blockOnChangeWhenBind option is set to true, the event is executed only when the paging buttons are clicked.</p>
             </td>
         </tr>

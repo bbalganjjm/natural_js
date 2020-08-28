@@ -62,7 +62,7 @@ Natural Architecture Framework는 CVC Architecture Pattern을 구현한 아키�
 
 <center>[ Natural Architecture Framework ]</center>
 
-Natural Architecture Framework는 개발 업무 영역을 명확하게 구분 해 주어 각 영역별 전문가들로 분업할 수 있는 기반을 제공합니다.
+Natural Architecture Framework는 개발 업무 영역을 명확하게 구분해 주어 각 영역별 전문가들로 분업할 수 있는 기반을 제공합니다.
 
 #### Controller
 
@@ -163,7 +163,7 @@ Natural-UI는 HTML 기반의 UI 컴포넌트를 지원하는 라이브러리 패
 
 ## Natural-UI.Shell
 
-Natural-UI 가 컨텐츠 영역의 UI 개발을 지원한다면 Natural-UI.Shell 은 컨텐츠 영역 바깥의 쉘(Shell) 영역의 개발을 지원하는 컴포넌트 패키지입니다.
+Natural-UI가 컨텐츠 영역의 UI 개발을 지원한다면 Natural-UI.Shell 은 컨텐츠 영역 바깥의 쉘(Shell) 영역의 개발을 지원하는 컴포넌트 패키지입니다.
 
 ### Notify(N.notify)
 
