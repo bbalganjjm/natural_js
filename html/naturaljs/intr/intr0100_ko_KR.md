@@ -135,27 +135,27 @@ Natural-UI는 HTML 기반의 UI 컴포넌트를 지원하는 라이브러리 패
 
 ### Tab
 
-[Tab(N.tab)](#cmVmcjA0MDUlMjRUYWIkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDQwNS5odG1s)은  div>ul>li 태그로 구성 된 요소를 context 옵션으로 지정하여 탭 페이지 뷰를 만들어 주는 UI 컴포넌트입니다.
+[Tab(N.tab)](#cmVmcjA0MDUlMjRUYWIkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDQwNS5odG1s)은  div>ul>li 태그로 구성된 요소를 context 옵션으로 지정하여 탭 페이지 뷰를 만들어 주는 UI 컴포넌트입니다.
 
 ### Select
 
-[Select(N.select)](#cmVmcjA0MDYlMjRTZWxlY3QkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDQwNi5odG1s)는 select, input[type=checkbox], input[type=radio] 요소에 데이터를 바인딩 하여 선택요소를 만들어 주고 해당 컨트롤의 기능을 확장 해 주는 UI 컴포넌트입니다.
+[Select(N.select)](#cmVmcjA0MDYlMjRTZWxlY3QkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDQwNi5odG1s)는 select, input[type=checkbox], input[type=radio] 요소에 데이터를 바인딩하여 선택 요소를 만들어 주고 해당 컨트롤의 기능을 확장해 주는 UI 컴포넌트입니다.
 
 ### Form
 
-[Form(N.form)](#cmVmcjA0MDclMjRGb3JtJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjA0MDcuaHRtbA==)은 context 옵션으로 지정한 요소(div, table 등의 block 요소)에 단건 로우 데이터를 바인드하거나 생성하는  UI 컴포넌트입니다.
+[Form(N.form)](#cmVmcjA0MDclMjRGb3JtJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjA0MDcuaHRtbA==)은 context 옵션으로 지정한 요소(div, table 등의 block 요소)에 단건 로우 데이터를 바인드 하거나 생성하는  UI 컴포넌트입니다.
 
 ### List
 
-[List(N.list)](#cmVmcjA0MDglMjRMaXN0JGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjA0MDguaHRtbA==)는 ul>li 요소를 context 옵션으로 지정하여 단일 컬럼 형태로 데이터 목록을 생성 해 주는 UI 컴포넌트입니다.
+[List(N.list)](#cmVmcjA0MDglMjRMaXN0JGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjA0MDguaHRtbA==)는 ul>li 요소를 context 옵션으로 지정하여 단일 컬럼 형태로 데이터 목록을 생성해 주는 UI 컴포넌트입니다.
 
 ### Grid
 
-[Grid(N.grid)](#cmVmcjA0MDklMjRHcmlkJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjA0MDkuaHRtbA==)는 table 요소를 context 옵션으로 지정하여 멀티 컬럼 형태로 데이터 목록을 생성 해 주는 UI 컴포넌트입니다.
+[Grid(N.grid)](#cmVmcjA0MDklMjRHcmlkJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjA0MDkuaHRtbA==)는 table 요소를 context 옵션으로 지정하여 멀티 컬럼 형태로 데이터 목록을 생성해 주는 UI 컴포넌트입니다.
 
 ### Pagination
 
-[Pagination(N.pagination)](#cmVmcjA0MTAlMjRQYWdpbmF0aW9uJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjA0MTAuaHRtbA==)은 목록 데이터나 전체 행 수로 페이징 인덱스를 생성 해 주는 UI 컴포넌트입니다.
+[Pagination(N.pagination)](#cmVmcjA0MTAlMjRQYWdpbmF0aW9uJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjA0MTAuaHRtbA==)은 목록 데이터나 전체 행 수로 페이징 인덱스를 생성해 주는 UI 컴포넌트입니다.
 
 ### Tree
 
@@ -163,11 +163,11 @@ Natural-UI는 HTML 기반의 UI 컴포넌트를 지원하는 라이브러리 패
 
 ## Natural-UI.Shell
 
-Natural-UI 가 컨텐츠 영역의 UI 개발을 지원 한다면 Natural-UI.Shell 은 컨텐츠영역 바깥의 쉘(Shell) 영역의 개발을 지원 하는 컴포넌트 패키지입니다.
+Natural-UI 가 컨텐츠 영역의 UI 개발을 지원한다면 Natural-UI.Shell 은 컨텐츠 영역 바깥의 쉘(Shell) 영역의 개발을 지원하는 컴포넌트 패키지입니다.
 
 ### Notify(N.notify)
 
-[Notify(N.notify)](#cmVmcjA1MDElMjROb3RpZnkkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDUwMS5odG1s)는 사용자의 확인 과정이 필요없는 전역 알림 메시지를 지정한 위치에 표시해주는 UI 컴포넌트입니다.
+[Notify(N.notify)](#cmVmcjA1MDElMjROb3RpZnkkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDUwMS5odG1s)는 사용자의 확인 과정이 필요 없는 전역 알림 메시지를 지정한 위치에 표시해주는 UI 컴포넌트입니다.
 
 ### Documents(N.docs)
 
@@ -184,12 +184,12 @@ Natural-UI 가 컨텐츠 영역의 UI 개발을 지원 한다면 Natural-UI.Shel
 
 ### 지원 브라우저
 
-* PC : Internet Explorer 8 이상(Internet Explorer 9 이상에 최적화 되어 있음), Chrome, Firefox, Safari, Opera 최신 버전
+* PC : Internet Explorer 8 이상(Internet Explorer 9 이상에 최적화되어 있음), Chrome, Firefox, Safari, Opera 최신 버전
 * 모바일 : iOS Safari, iOS UIWebView, Android Browser, Android Chrome, Android WebView
 
 ### 교육 및 지원
 
-* <bbalganjjm@gmail.com> 으로 문의 바랍니다.
+* <bbalganjjm@gmail.com>으로 문의 바랍니다.
 
 ### 라이센스
 This software is licensed under the [LGPL v2.1](https://github.com/bbalganjjm/natural_js/blob/master/LICENSE) &copy; KIM HWANG MAN&lt;<bbalganjjm@gmail.com>&gt;
