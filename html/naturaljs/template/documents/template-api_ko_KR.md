@@ -88,7 +88,7 @@ N.context.attr("template", {
 #API 매뉴얼
 
 ##Controller object의 속성명 작성 규칙
-Natural-TEMPLATE의 기능은 Controller object 프로퍼티명의 명명규칙으로 실행할 수 있습니다. 컴포넌트를 초기화하거나 이벤트를 바인딩하는 등의 반복적인 작업들을 자동화 시켜 줍니다.
+Natural-TEMPLATE의 기능은 Controller object 프로퍼티명의 명명규칙으로 실행할 수 있습니다. 컴포넌트를 초기화하거나 이벤트를 바인딩하는 등의 반복적인 작업들을 자동화시켜 줍니다.
 
 ###1. "p."으로 시작 - UI 컴포넌트 초기화
 Natural-UI의 컴포넌트들을 자동으로 초기 화해 줍니다.
@@ -137,7 +137,7 @@ var cont = N(".page-id").cont({
 
 >**N.tab과 N.popup 컴포넌트의 `onOpen 옵션의 함수명 문자열은 반드시 onOpen으로 시작("onOpen", "onOpenABC" 등)`해야 합니다. 그렇지 않으면 Controller object의 init 함수보다 onOpen 함수가 먼저 실행 되어서 컴포넌트 인스턴스등을 참조하지 못할 수 있습니다.**
 
->**N.tab 컴포넌트의 onActive 옵션은 주의해서 사용바랍니다. init 함수의 지연 실행에 대한 대책이 아직 없어서 onActive가 init 보다 먼저 실행됩니다. 비슷한 안정적인 기능을 원한다면 onOpen을 사용해 주세요.**
+>**N.tab 컴포넌트의 onActive 옵션은 주의해서 사용 바랍니다. init 함수의 지연 실행에 대한 대책이 아직 없어서 onActive가 init 보다 먼저 실행됩니다. 비슷한 안정적인 기능을 원한다면 onOpen을 사용해 주세요.**
 
 컴포넌트 옵션은 Natural-UI의 컴포넌트별 기본 옵션 외에 해당 컴포넌트의 용도를 지정하거나 초기화 후 바로 실행할 함수 등을 지정할 수 있는 옵션이 더 추가되어 있습니다.
 Natural-TEMPLATE에서만 사용가능한 컴포넌트 별 추가 옵션들은 다음과 같습니다.
@@ -417,7 +417,7 @@ var cont = N(".page-id").cont({
     "e.dateInput.onSelect" : function(e, inputEle, selDate, isMonthonly, idx) { // N.datepicker의 onSelect 이벤트
         e.preventDefault();
 
-        N.log(selDate.obj.formatDate(selDate.format)); // 선택한 날짜를 설정된 데이트포멧으로 추출하여 브라우저 콘솔에 출력.
+        N.log(selDate.obj.formatDate(selDate.format)); // 선택한 날짜를 설정된 데이트포맷으로 추출하여 브라우저 콘솔에 출력.
     },
 });
 ...

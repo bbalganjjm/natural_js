@@ -78,8 +78,8 @@ View는 별도의 구현체는 없고 블록 페이지의 HTML 요소 영역이 
 #### Communicator
 
 [Communicator(N.comm)](#cmVmcjAyMDMlMjRDb21tdW5pY2F0b3IkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDIwMy5odG1s)는 CVC Architecture Pattern의 Communicator 레이어를 구현한 클래스입니다.
- * N.comm 은 서버에 컨텐츠나 데이터를 요청하거나 파라미터를 전달하는 등 서버와의 Ajax 통신을 지원하는 라이브러리입니다.
- * N.comm 은 서버와 통신하는 모든 요청 및 응답 또는 오류 생성 단계에서 공통 로직을 실행할 수 있는 [Communication Filter](#cmVmcjAyMDUlMjRDb21tdW5pY2F0aW9uJTIwRmlsdGVyJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAyMDUuaHRtbA==) 기능을 제공합니다.
+ * N.comm은 서버에 컨텐츠나 데이터를 요청하거나 파라미터를 전달하는 등 서버와의 Ajax 통신을 지원하는 라이브러리입니다.
+ * N.comm은 서버와 통신하는 모든 요청 및 응답 또는 오류 생성 단계에서 공통 로직을 실행할 수 있는 [Communication Filter](#cmVmcjAyMDUlMjRDb21tdW5pY2F0aW9uJTIwRmlsdGVyJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAyMDUuaHRtbA==) 기능을 제공합니다.
 
 [Context(N.context)](#cmVmcjAyMDYlMjRDb250ZXh0JGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAyMDYuaHRtbA==)는 Natural-JS 기반 어플리케이션의 Life-Cycle(페이지가 적제 되고 다른 URL로 redirect되기 전까지) 안에서 데이터의 영속성을 보장하는 공간입니다.
  * Natural-JS의 환경설정 값([Config(natural.config.js)](#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s)), 프레임워크 공통 메시지 등이 N.context 객체에 저장됩니다.
@@ -96,7 +96,7 @@ DataSync는 컴포넌트나 라이브러리에 의해 변경된 데이터를 실
 
 ### Formatter
 
-[Formatter(N.formatter)](#cmVmcjAzMDElMjRGb3JtYXR0ZXIkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDMwMS5odG1s)는 입력 한 데이터 셋(array[json object]을 포멧팅하고 포멧팅된 데이터 셋을 반환해 주는 라이브러리입니다.
+[Formatter(N.formatter)](#cmVmcjAzMDElMjRGb3JtYXR0ZXIkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDMwMS5odG1s)는 입력 한 데이터 셋(array[json object]을 포맷팅하고 포맷팅된 데이터 셋을 반환해 주는 라이브러리입니다.
 
 ### Validator
 

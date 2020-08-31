@@ -108,7 +108,7 @@ $(document).ready 함수의 콜백 함수의 내용을 봐 주세요.
     });
 ```
 
-**/index.html**의 DOM이 모두 로딩된 다음 N.comm으로 #lefter 요소에 좌측 블록 페이지를 불러와 넣어주는 구문입니다. **/html/index/lefter.html** 파일은 좌측 메뉴의 링크 요소와 이를 활성화 시켜 주는 Controller(N.cont) Object가 들어 있습니다.
+**/index.html**의 DOM이 모두 로딩된 다음 N.comm으로 #lefter 요소에 좌측 블록 페이지를 불러와 넣어주는 구문입니다. **/html/index/lefter.html** 파일은 좌측 메뉴의 링크 요소와 이를 활성화시켜 주는 Controller(N.cont) Object가 들어 있습니다.
 N("#lefter").comm("html/index/lefter.html").submit 함수의 인자는 **/html/index/lefter.html** 파일 로딩이 완료된 후 실행되는 콜백 함수입니다. 여기에서 N.docs 컴포넌트로 #docs 요소 안에 MDI 페이지 컨테이너를 생성해 주고 있습니다. N.docs 컴포넌트의 인스턴스는 어플리케이션당 1개만 생성 되므로 window 객체에 담아 전역으로 사용할 것입니다.
 <p class="alert">N.docs 인스턴스는 반드시 window 객체가 아니더라도 어플리케이션에서 정의한 전역으로 접근할 수 있는 아무 객체에 담아도 됩니다.</p>
 
@@ -155,7 +155,7 @@ N(".index-lefter").cont({
 <p class="alert">페이지가 닫히면 스타일도 같이 제거됩니다.</p>
 
 N.cont 오브젝트의 init 함수에는 메뉴링크 요소를 클릭했을 때  **/index.html**에서 window 객체에 담아둔 N.docs 인스턴스의 add 메서드로 메뉴 컨텐츠를 불러오는 코드가 작성되어 있습니다. N.docs 인스턴스로 ```add("페이지ID", "페이지명", { url : "페이지URL" }``` 함수를 실행하면 우측 MDI 영역에 페이지가 추가됩니다.
-```N(".menu", view).on("click", "a", function(e) { ... }, N(this).data("docid"), N(this).text(), N(this).attr("href")``` 는 모두 jQuery에서 제공하는 기능이니 [jQuery API 메뉴얼](https://api.jquery.com)을 참고 바랍니다.
+```N(".menu", view).on("click", "a", function(e) { ... }, N(this).data("docid"), N(this).text(), N(this).attr("href")``` 는 모두 jQuery에서 제공하는 기능이니 [jQuery API 매뉴얼](https://api.jquery.com)을 참고 바랍니다.
 
 위 파일들은 View와 Controller 구조로만 이루어진 아주 간단한 내용으로 구성된 페이지입니다.
 

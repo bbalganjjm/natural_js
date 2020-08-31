@@ -3,7 +3,7 @@
 
 ## Natural-JS 실행 환경 구성
 
-먼저 다음 중 한 가지 방법으로 Natural-JS 라이브러리 파일들을 다운로드 하세요.
+먼저 다음 중 한 가지 방법으로 Natural-JS 라이브러리 파일들을 다운로드하세요.
 
 1.  [GitHub](https://github.com/bbalganjjm/natural_js)에서 직접 다운로드
 2.  Bower : bower install natural_js
@@ -54,7 +54,7 @@ N.context.attr("ui", {
     ...
 ```
 
-위와 같은 JSON 타입의 구문이 보일겁니다. JSON이 뭔지는 아시죠? 아주 쉬워요. 모르시면 아래 URL을 클릭 해서 참고 하시구요.
+위와 같은 JSON 타입의 구문이 보일겁니다. JSON이 뭔지는 아시죠? 아주 쉬워요. 모르시면 아래 URL을 클릭해서 참고 하시구요.
 
 [http://www.json.org/json-ko.html](http://www.json.org/json-ko.html)
 
@@ -235,7 +235,7 @@ Natural-ARCHITECTURE 기반의 모든 페이지나 페이지 블록 들은 반�
 </html>
 ```
 
-**index.html** 파일의 $(document).ready 함수의 콜백 인자는 N.comm을 이용하여 **block01.html** 페이지를 **#contents**(N.context.attr("architecture").page.context) 요소 안에 불러오는 코드입니다. N.comm 은 **block01.html** 페이지 로딩이 완료되면 Controller(N.cont) object의 init 함수를 실행해 줍니다.
+**index.html** 파일의 $(document).ready 함수의 콜백 인자는 N.comm을 이용하여 **block01.html** 페이지를 **#contents**(N.context.attr("architecture").page.context) 요소 안에 불러오는 코드입니다. N.comm은 **block01.html** 페이지 로딩이 완료되면 Controller(N.cont) object의 init 함수를 실행해 줍니다.
 
 <p class="alert">$ (document).ready는 페이지 요소를로드 한 후 인자로 지정된 콜백 함수를 실행해 주는 jQuery에서 제공하는 함수입니다.</p>
 
@@ -247,7 +247,7 @@ Natural-ARCHITECTURE 기반의 모든 페이지나 페이지 블록 들은 반�
 
 ** block01.html ** 파일은 index.html 페이지에 의해 로드되고 N.cont의 인자로 지정된 객체의 init 함수가 실행될 것입니다. 그다음 **block01.html** 페이지의 요소 id가 result 인 div 요소 안에 서버에서 조회된 데이터가 표시될 것입니다.
 
-<p class="alert">데이터를 조회할 수 있는 서버가있는 경우 N.comm의 url 옵션에서 <strong>data.json</ strong> 대신 서비스 URL을 입력 하세요.</p>
+<p class="alert">데이터를 조회할 수 있는 서버가있는 경우 N.comm의 url 옵션에서 <strong>data.json</ strong> 대신 서비스 URL을 입력하세요.</p>
 
 이제 Natural-JS의 기본 환경을 구성하고 실행하는 방법을 알았으니 블록 페이지가 실행될 사이트 환경을 만들어 볼까요?
 

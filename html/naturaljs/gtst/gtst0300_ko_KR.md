@@ -150,14 +150,14 @@ Grid로 생성/조회/수정/삭제를 처리 하기 위해 조회조건 영역�
 </script>
 ```
 
-코드가 좀 기네요? Style, View 영역과 Controller 영역을 구분해 보면 간단해 집니다. 30초만 집중 해서 봅시다. 매트릭스 네오처럼 코드들이 한눈에 들어오지 않나요? -.-;
+코드가 좀 기네요? Style, View 영역과 Controller 영역을 구분해 보면 간단해 집니다. 30초만 집중해서 봅시다. 매트릭스 네오처럼 코드들이 한눈에 들어오지 않나요? -.-;
 
 위 Style 영역을 공통 css 파일로 통합하면 Style 영역은 필요 없습니다. 그러나 Natural-JS의 컴포넌트에 정의된 context 요소의 스타일이 그대로 적용되는것을 간단하게 확인하기 위해서 페이지에 Style을 정의했습니다.
 <p class="alert">Natural-JS로 프로젝트를 진행할 때 웹 퍼블리셔와 협업하면 UI 품질과 개발 생산성을 동시에 향상 시킬 수 있습니다. 웹 퍼블리셔는 Natural-JS를 위한 학습이 필요 없고 웹 표준에 따라 퍼블리싱하면 됩니다.</p>
 
 위 코드에서 집중해야할 부분은 View 영역입니다. Controller 는 일부러 틀만 만들고 비워 놓았습니다. 하나씩 채워가면서 진행 하려구요.
 
-View의 하위 요소 중 첫 번째에 있는 **.search-conditions** 요소는 검색조건을 입력할 수 있는 검색 폼입니다. 그 아래 **.buttons** 요소에는 버튼들이 배치 되고 **.result** 요소에는 조회된 결과 데이터를 Grid로 표현하기 위해 N.grid의 context 요소인 Table을 만들었습니다. N.grid 컴포넌트를 적용하려면 반드시 그리드로 생성될 **table** 태그가 작성되어 있어야하고 table 태그에 **thead**(그리드 헤더)와 **tbody**(그리드 바디) 태그가 작성되어 있어야 합니다. N.grid의 행 들은 **tbody** 요소를 리스트 데이터의 길이 만큼 복제 해서 표현해 줍니다. 각 컴포넌트에 대한 자세한 내용은 관련 문서를 참고 하기 바랍니다.
+View의 하위 요소 중 첫 번째에 있는 **.search-conditions** 요소는 검색조건을 입력할 수 있는 검색 폼입니다. 그 아래 **.buttons** 요소에는 버튼들이 배치 되고 **.result** 요소에는 조회된 결과 데이터를 Grid로 표현하기 위해 N.grid의 context 요소인 Table을 만들었습니다. N.grid 컴포넌트를 적용하려면 반드시 그리드로 생성될 **table** 태그가 작성되어 있어야하고 table 태그에 **thead**(그리드 헤더)와 **tbody**(그리드 바디) 태그가 작성되어 있어야 합니다. N.grid의 행 들은 **tbody** 요소를 리스트 데이터의 길이 만큼 복제해서 표현해 줍니다. 각 컴포넌트에 대한 자세한 내용은 관련 문서를 참고 하기 바랍니다.
 
 ##Controller 영역 코딩
 
@@ -305,7 +305,7 @@ initComponents : function() {
 
 앞에서 설명한 N.form과 옵션만 다르고 선언 방식이 비슷합니다.
 
-N.grid 는 비어있는 array 객체를 바인딩하면 "조회를 하지 않았거나 조회된 데이터가 없습니다." 라는 메시지를 그리드에 표시해 줍니다. 페이지 로딩 완료 후 서버에서 조회 한 데이터를 그리드에 즉시 바인딩해야되는 경우라면 컴포넌트 인스턴스 생성만하면 되지만 사용자가 조회를 직접 실행할 때는 기본 행이 아무 의미없이 표시 되니 bind() 메서드를 호출 해서 자연스러운 그리드의 모양을 만들어 주세요.
+N.grid 는 비어있는 array 객체를 바인딩하면 "조회를 하지 않았거나 조회된 데이터가 없습니다." 라는 메시지를 그리드에 표시해 줍니다. 페이지 로딩 완료 후 서버에서 조회 한 데이터를 그리드에 즉시 바인딩해야되는 경우라면 컴포넌트 인스턴스 생성만하면 되지만 사용자가 조회를 직접 실행할 때는 기본 행이 아무 의미없이 표시 되니 bind() 메서드를 호출해서 자연스러운 그리드의 모양을 만들어 주세요.
 
 ### 이벤트 바인딩
 
@@ -430,7 +430,7 @@ N(window).alert({
 <p class="alert">위 코드에서 N.comm의 옵션들 중 "type" 은 웹 서버에 POST 방식으로 요청할 수 없어서 임의로 정의 한 옵션입니다. 서버가 POST 요청을 처리할 수 있는 환경이라면 natural.config.js에 type의 기본값이 "POST"로 정의되어 있으니 type 옵션을 제거 바랍니다. type 옵션에 대한 자세한 내용은 <a href="#cmVmcjAyMDQlMjRDb21tdW5pY2F0b3IucmVxdWVzdCRodG1sJTJGbmF0dXJhbGpzJTJGcmVmciUyRnJlZnIwMjA0Lmh0bWw=">Communicator.request</a> 문서의 [기본옵션] 탭을 참고해 주세요.</p>
 <p class="alert">서버로 object가 아닌 array[object] 형태의 파라미터를 전달 하려면 dataIsArray 옵션을 활성화해 주어야 합니다. dataIsArray 옵션에 대한 자세한 내용은 <a href="#cmVmcjAyMDQlMjRDb21tdW5pY2F0b3IucmVxdWVzdCRodG1sJTJGbmF0dXJhbGpzJTJGcmVmciUyRnJlZnIwMjA0Lmh0bWw=">Communicator.request</a> 문서의 [기본옵션] 탭을 참고해 주세요.</p>
 5. 저장 완료 후 N.notify 컴포넌트를 사용하여 메시지 표시
-<p class="alert">입력 요소의 값을 변경하거나 cont.grid.val() 메서드로 데이터를 변경하면 <strong>rowStatus</strong> 프로퍼티가 생성됩니다. rowStatus 값은 "insert", "update", "delete" 중 하나가 됩니다. <strong>서버 에서는</strong> 행 데이터 객체 마다 정의되어 있는 <strong>rowStatus 값으로 입력/수정/삭제를 구분 해서 처리</strong>하면 됩니다.</p>
+<p class="alert">입력 요소의 값을 변경하거나 cont.grid.val() 메서드로 데이터를 변경하면 <strong>rowStatus</strong> 프로퍼티가 생성됩니다. rowStatus 값은 "insert", "update", "delete" 중 하나가 됩니다. <strong>서버 에서는</strong> 행 데이터 객체 마다 정의되어 있는 <strong>rowStatus 값으로 입력/수정/삭제를 구분해서 처리</strong>하면 됩니다.</p>
 6. Search 버튼을 클릭하여 변경된 데이터 재 조회
 
 지금까지 작성한 소스 파일들을 웹 서버에 배포한 다음 **/index.html**에 접속 했을때 다음과 같은 화면이 표시되면 실습을 성공 한 것입니다.

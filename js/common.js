@@ -6,7 +6,7 @@
     var CommonMessages = {
         "ko_KR" : {
             "COMM-0001" : "변경된 데이터가 없습니다.",
-            "COMM-0002" : "저장이 완료 되었습니다.",
+            "COMM-0002" : "저장이 완료되었습니다.",
             "COMM-0003" : "데이터를 수정 중입니다. 선택한 행의 데이터를 조회 하겠습니까?",
             "COMM-0005" : "저장 하겠습니까?",
             "COMM-0006" : " - 입력 : {0} 건",
@@ -185,7 +185,7 @@
          */
         excelDownload : function(params, url, filename, columnNames, extColumnNames) {
             if(filename === undefined) {
-                return N.error("엑셀 파일명(arguments[0])을 입력 하세요.");
+                return N.error("엑셀 파일명(arguments[0])을 입력하세요.");
             }
 
             if(params) {
@@ -299,7 +299,7 @@
     // N.comm에 Excel 다운로드 기능 확장
     N.comm.excelDownload = function(args) {
         if(args === undefined || args.length === 0) {
-            return N.error("엑셀 파일명(arguments[0])을 입력 하세요.");
+            return N.error("엑셀 파일명(arguments[0])을 입력하세요.");
         }
         var url = this.request.options.url;
         if(url.indexOf(".") < 0) {
@@ -312,7 +312,7 @@
     };
     N.comm.excelStreaming = function(args) {
         if(args === undefined || args.length === 0) {
-            return N.error("엑셀 파일명(arguments[0])을 입력 하세요.");
+            return N.error("엑셀 파일명(arguments[0])을 입력하세요.");
         }
         var url = this.request.options.url;
         if(url.indexOf(".") < 0) {

@@ -66,7 +66,7 @@
             <td>true</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">false로 설정하면 입력 요소에서 focus-out되었을 때 입력 값에 대한 유효성 검증을 실행 하지 않습니다.</p>
+                <p lang="ko_KR">false로 설정하면 입력 요소에서 focus-out되었을 때 입력 값에 대한 유효성 검증을 실행하지 않습니다.</p>
                 <p lang="en_US">If set to false, validation is not performed on the input value when the input element is focus-out.</p>
             </td>
         </tr>
@@ -188,7 +188,7 @@
                 <p lang="en_US" class="alert">It is specified with jQuery selector syntax, and the context of the selector is automatically specified as the row element(li) of the list.</p>
                 <p lang="ko_KR" class="alert">checkAllTarget 옵션과 checkSingleTarget 옵션은 둘중 하나만 사용할 수 있습니다.</p>
                 <p lang="en_US" class="alert">Only one of the checkAllTarget and checkSingleTarget options can be used.</p>
-                <p lang="ko_KR" class="alert">체크박스에 id 속성을 설정하여 데이터를 바인딩하면 제대로 작동하지 않을 수 있습니다. 선택된 행의 인덱스를 가져오는 용도로만 사용바랍니다.</p>
+                <p lang="ko_KR" class="alert">체크박스에 id 속성을 설정하여 데이터를 바인딩하면 제대로 작동하지 않을 수 있습니다. 선택된 행의 인덱스를 가져오는 용도로만 사용 바랍니다.</p>
                 <p lang="en_US" class="alert">If you bind the data by setting the id attribute in the checkbox, it may not work properly. Please use it only to get the index of the selected row.</p>
             </td>
         </tr>
@@ -208,7 +208,7 @@
                 <p lang="en_US" class="alert">It is specified with jQuery selector syntax, and the context of the selector is automatically specified as the row element(li) of the list.</p>
                 <p lang="ko_KR" class="alert">checkAllTarget 옵션과 checkSingleTarget 옵션은 둘중 하나만 사용할 수 있습니다.</p>
                 <p lang="en_US" class="alert">Only one of the checkAllTarget and checkSingleTarget options can be used.</p>
-                <p lang="ko_KR" class="alert">체크박스에 id 속성을 설정하여 데이터를 바인딩하면 제대로 작동하지 않을 수 있습니다. 선택된 행의 인덱스를 가져오는 용도로만 사용바랍니다.</p>
+                <p lang="ko_KR" class="alert">체크박스에 id 속성을 설정하여 데이터를 바인딩하면 제대로 작동하지 않을 수 있습니다. 선택된 행의 인덱스를 가져오는 용도로만 사용 바랍니다.</p>
                 <p lang="en_US" class="alert">If you bind the data by setting the id attribute in the checkbox, it may not work properly. Please use it only to get the index of the selected row.</p>
             </td>
         </tr>
@@ -351,7 +351,7 @@
             <td>
                 <p lang="ko_KR">true로 설정하면 컴포넌트 초기화 전에 입력 요소에 바인딩되어 있는 이벤트와 format, validate, dataSync등의 컴포넌트 이벤트의 충돌을 방지해 줍니다.</p>
                 <p lang="en_US">If set to true, it prevents the conflict of the event bound to the input element before component initialization and the component event such as format, validate, and dataSync.</p>
-                <p lang="ko_KR" class="alert">format이 정상적으로 동작하지 않거나 바인딩되어 있는 데이터가 의도한대로 핸들링되지 않을때, 알수 없는 오류가 발생했을 때 true로 설정 바랍니다.</p>
+                <p lang="ko_KR" class="alert">format이 정상적으로 동작하지 않거나 바인딩되어 있는 데이터가 의도한대로 핸들링되지 않을때, 알 수 없는 오류가 발생했을 때 true로 설정 바랍니다.</p>
                 <p lang="en_US" class="alert">Set to true when an unknown error occurs, such as the format not working properly or the bound data is not handled as intended.</p>
             </td>
         </tr>
@@ -445,15 +445,15 @@
     // this : N.list 인스턴스
     // context : context 요소
     // data : 바인딩된 데이터
-    // isFirstPage : 스크롤 페이징할 때 첫 페이지인지 여부(스크롤 페이징 하지 않으면 true 반환)
-    // isLastPage : 스크롤 페이징할 때 마지막 페이지 인지 여부(스크롤 페이징 하지 않으면 true 반환)
+    // isFirstPage : 스크롤 페이징할 때 첫 페이지인지 여부(스크롤 페이징하지 않으면 true 반환)
+    // isLastPage : 스크롤 페이징할 때 마지막 페이지 인지 여부(스크롤 페이징하지 않으면 true 반환)
 }</code></pre>
                 <pre lang="en_US"><code>onBind : function(context, data, isFirstPage, isLastPage) {
     // this : N.list instance
     // context : context element
     // data : Bound data
-    // isFirstPage : Whether it is the first page when scroll paging(스크롤 페이징 하지 않으면 true 반환)
-    // isLastPage : Whether it is the last page when scroll paging(스크롤 페이징 하지 않으면 true 반환)
+    // isFirstPage : Whether it is the first page when scroll paging(스크롤 페이징하지 않으면 true 반환)
+    // isLastPage : Whether it is the last page when scroll paging(스크롤 페이징하지 않으면 true 반환)
 }</code></pre>
                 <p lang="ko_KR" class="alert">스크롤 페이징이 활성화되었을 경우 페이징된 데이터가 바인딩될 때마다 실행됩니다.</p>
                 <p lang="en_US" class="alert">If scroll paging is enabled, it is executed whenever paged data is bound.</p>

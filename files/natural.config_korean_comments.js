@@ -6,7 +6,7 @@
  * 1. 컴포넌트 초기화시 지정한 옵션 값
  *
  * 2. 여기(N.Config)에서 지정한 옵션 값
- *    2.1. 각 영역별로 지정 하세요. 컴포넌트 초기화 시 각 영역별 값들을 자동으로 기본옵션으로 지정해 줍니다.
+ *    2.1. 각 영역별로 지정하세요. 컴포넌트 초기화 시 각 영역별 값들을 자동으로 기본옵션으로 지정해 줍니다.
  *         ex) 2.1.1 모든 N.grid의 높이를 300으로 지정하고 싶음.
  *                   - N.context.attr("ui")의 grid 키에 height 속성을 추가하고 값은 300을 지정
  *             2.1.2 모든 N.form에 html을 인식 시키고 싶음.
@@ -66,7 +66,7 @@
         },
         /**
          * Controller object를 대상으로 Aspect Oriented Programing(AOP)를 적용할 수 있습니다.
-         *  - 아래는 샘플코드 이므로 사용하지 않는다면 cont 하위의 모든 구문을 삭제하고 사용바랍니다.
+         *  - 아래는 샘플코드 이므로 사용하지 않는다면 cont 하위의 모든 구문을 삭제하고 사용 바랍니다.
          */
         "cont" : {
             /**
@@ -221,23 +221,23 @@
     N.context.attr("data", {
         "formatter" : {
             /**
-             * 사용자 정의 포멧 룰
+             * 사용자 정의 포맷 룰
              */
             "userRules" : {
                 /*
                  * 함수 명이 룰 명이 됨.
                  *
-                 * str : 포멧 대상 문자열
-                 * args : 포멧 옵션
+                 * str : 포맷 대상 문자열
+                 * args : 포맷 옵션
                  *
-                 * return : 포멧된 문자열을 반환
+                 * return : 포맷된 문자열을 반환
                 "userRule" : function(str, args) {
                     return str
                 }
                 */
             },
             /**
-             * 사이트 전역으로 사용할 날짜포멧 지정
+             * 사이트 전역으로 사용할 날짜포맷 지정
              * Y : 년, m : 월, d : 일, H : 시, i : 분, s : 초
              */
             "date" : {
@@ -250,31 +250,31 @@
                  */
                 timeSepa : ":",
                 /**
-                 * 년월 날짜포멧
+                 * 년월 날짜포맷
                  */
                 Ym : function() {
                     return "Y" + this.dateSepa + "m";
                 },
                 /**
-                 * 년월일 날짜포멧
+                 * 년월일 날짜포맷
                  */
                 Ymd : function() {
                     return "Y" + this.dateSepa + "m" + this.dateSepa + "d";
                 },
                 /**
-                 * 년월일 시 날짜포멧
+                 * 년월일 시 날짜포맷
                  */
                 YmdH : function() {
                     return this.Ymd() + " H";
                 },
                 /**
-                 * 년월일 시분 날짜포멧
+                 * 년월일 시분 날짜포맷
                  */
                 YmdHi : function() {
                     return this.Ymd() + " H" + this.timeSepa + "i";
                 },
                 /**
-                 * 년월일 시분초 날짜포멧
+                 * 년월일 시분초 날짜포맷
                  */
                 YmdHis : function() {
                     return this.Ymd() + " H" + this.timeSepa + "i" + this.timeSepa + "s";

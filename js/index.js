@@ -56,7 +56,7 @@
                             docNm = menuInfo[1];
                         }
 
-                        // FIXME 메뉴 DB 만들어 지고 페이지 불러오는 서비스 만들어지면 아래 url 수정 해서 살리고 url = menuInfo[2]; 는 제거 바람.
+                        // FIXME 메뉴 DB 만들어 지고 페이지 불러오는 서비스 만들어지면 아래 url 수정해서 살리고 url = menuInfo[2]; 는 제거 바람.
                         // url = "html/com/app/sample/" + docId + ".html";
                         if(menuInfo[2]) {
                             url = menuInfo[2];

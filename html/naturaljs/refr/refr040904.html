@@ -47,7 +47,7 @@
                     </li>
                     <li>tbody - Grid body
                         <ul>
-                            <li lang="ko_KR">행을 표현하는 최상위 요소는 tbody 이고 목록 데이터의 길이만큼 tbody가 복제됩니다.</li>
+                            <li lang="ko_KR">행을 표현하는 최상위 요소는 tbody이고 목록 데이터의 길이만큼 tbody가 복제됩니다.</li>
                             <li lang="en_US">The top element representing the row is tbody, and tbody is duplicated by the length of the list data.</li>
                             <li lang="ko_KR">tbody의 셀은 td 태그를 사용합니다.</li>
                             <li lang="en_US">Cells in tbody use td tags.</li>
@@ -57,7 +57,7 @@
                                 <p lang="ko_KR" class="alert" style="margin: 5px;">Natural-JS의 모든 데이터 관련 컴포넌트는 빠른 바인딩 속도를 위해 어쩔수 없이 id 속성을 사용합니다.</p>
                                 <p lang="en_US" class="alert" style="margin: 5px;">All data-related components of Natural-JS inevitably use id attribute for fast binding speed.</p>
                                 <p lang="ko_KR" class="alert">1개의 셀(td) 안에 2개 이상의 컬럼 데이터를 바인딩 하려면 셀안에 요소를 2개 이상 만들고 id 속성값을 추가해 주면 됩니다.
-                                                            이때 thead의 th에 data-id 속성값에 정렬/필터등의 기준이되는 데이터 프로퍼티명을 설정해 주어야 합니다.</p>
+                                                            이때 thead의 th에 data-id 속성 값에 정렬/필터등의 기준이되는 데이터 프로퍼티명을 설정해 주어야 합니다.</p>
                                 <p lang="en_US" class="alert">To bind two or more column data in one cell (td), create two or more elements in the cell and add the id attribute value.
                                                             At this time, you must set the data property name that is the basis for sorting / filtering and etc. on the data-id attribute value in th of thead.</p>
                             </li>
@@ -105,7 +105,7 @@
             <td>
                 <p lang="ko_KR">그리드 body의 높이를 지정합니다.</p>
                 <p lang="en_US">Specifies the height of the grid body.</p>
-                <p lang="ko_KR">설정한 값이 0보다 크면 헤더가 고정되고 그리드 바디에 스크롤바가 생기면서 설정한 높이로 고정됩니다. 0으로 설정하면 헤더를 고정 하지 않고 모든 데이터를 그리드 바디에 보여 줍니다.</p>
+                <p lang="ko_KR">설정한 값이 0보다 크면 헤더가 고정되고 그리드 바디에 스크롤바가 생기면서 설정한 높이로 고정됩니다. 0으로 설정하면 헤더를 고정하지 않고 모든 데이터를 그리드 바디에 보여 줍니다.</p>
                 <p lang="en_US">If the set value is greater than 0, the header is fixed and a scroll bar is created on the grid body, and it is fixed at the set height. If set to 0, all data is shown in the grid body without fixing the header.</p>
                 <p lang="ko_KR" class="alert">Pagination(N.pagination) 컴포넌트와 결합하여 페이징된 데이터를 N.list에 바인딩할 때는 0으로 설정하여 모든 데이터를 한번에 표시 하는것을 권장합니다.</p>
                 <p lang="en_US" class="alert">When binding paged data to the N.grid in combination with the Pagination(N.pagination) component, it is recommended to display all data at once by setting it to 0.</p>
@@ -169,7 +169,7 @@
             <td>true</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">false로 설정하면 입력 요소에서 focus-out되었을 때 입력 값에 대한 유효성 검증을 실행 하지 않습니다.</p>
+                <p lang="ko_KR">false로 설정하면 입력 요소에서 focus-out되었을 때 입력 값에 대한 유효성 검증을 실행하지 않습니다.</p>
                 <p lang="en_US">If set to false, validation is not performed on the input value when the input element is focus-out.</p>
             </td>
         </tr>
@@ -357,7 +357,7 @@
                 <p lang="en_US" class="alert">It is specified with jQuery selector syntax, and the context of the selector is automatically specified as the row element(tbody) of the grid.</p>
                 <p lang="ko_KR" class="alert">checkAllTarget 옵션과 checkSingleTarget 옵션은 둘중 하나만 사용할 수 있습니다.</p>
                 <p lang="en_US" class="alert">Only one of the checkAllTarget and checkSingleTarget options can be used.</p>
-                <p lang="ko_KR" class="alert">체크박스에 id 속성을 설정하여 데이터를 바인딩하면 제대로 작동하지 않을 수 있습니다. 선택된 행의 인덱스를 가져오는 용도로만 사용바랍니다.</p>
+                <p lang="ko_KR" class="alert">체크박스에 id 속성을 설정하여 데이터를 바인딩하면 제대로 작동하지 않을 수 있습니다. 선택된 행의 인덱스를 가져오는 용도로만 사용 바랍니다.</p>
                 <p lang="en_US" class="alert">If you bind the data by setting the id attribute in the checkbox, it may not work properly. Please use it only to get the index of the selected row.</p>
             </td>
         </tr>
@@ -377,7 +377,7 @@
                 <p lang="en_US" class="alert">It is specified with jQuery selector syntax, and the context of the selector is automatically specified as the row element(tbody) of the grid.</p>
                 <p lang="ko_KR" class="alert">checkAllTarget 옵션과 checkSingleTarget 옵션은 둘중 하나만 사용할 수 있습니다.</p>
                 <p lang="en_US" class="alert">Only one of the checkAllTarget and checkSingleTarget options can be used.</p>
-                <p lang="ko_KR" class="alert">체크박스에 id 속성을 설정하여 데이터를 바인딩하면 제대로 작동하지 않을 수 있습니다. 선택된 행의 인덱스를 가져오는 용도로만 사용바랍니다.</p>
+                <p lang="ko_KR" class="alert">체크박스에 id 속성을 설정하여 데이터를 바인딩하면 제대로 작동하지 않을 수 있습니다. 선택된 행의 인덱스를 가져오는 용도로만 사용 바랍니다.</p>
                 <p lang="en_US" class="alert">If you bind the data by setting the id attribute in the checkbox, it may not work properly. Please use it only to get the index of the selected row.</p>
             </td>
         </tr>
@@ -520,7 +520,7 @@
             <td>
                 <p lang="ko_KR">true로 설정하면 컴포넌트 초기화 전에 입력 요소에 바인딩되어 있는 이벤트와 format, validate, dataSync등의 컴포넌트 이벤트의 충돌을 방지해 줍니다.</p>
                 <p lang="en_US">If set to true, it prevents the conflict of the event bound to the input element before component initialization and the component event such as format, validate, and dataSync.</p>
-                <p lang="ko_KR" class="alert">format이 정상적으로 동작하지 않거나 바인딩되어 있는 데이터가 의도한대로핸들링되지 않을 때, 알수 없는 오류가 발생했을 때 true로 설정 바랍니다.</p>
+                <p lang="ko_KR" class="alert">format이 정상적으로 동작하지 않거나 바인딩되어 있는 데이터가 의도한대로핸들링되지 않을 때, 알 수 없는 오류가 발생했을 때 true로 설정 바랍니다.</p>
                 <p lang="en_US" class="alert">Set to true when an unknown error occurs, such as the format not working properly or the bound data is not handled as intended.</p>
             </td>
         </tr>
@@ -630,15 +630,15 @@
     // this : N.grid 인스턴스
     // context : context 요소
     // data : 바인딩된 데이터
-    // isFirstPage : 스크롤 페이징할 때 첫 페이지인지 여부(스크롤 페이징 하지 않으면 true 반환)
-    // isLastPage : 스크롤 페이징할 때 마지막 페이지 인지 여부(스크롤 페이징 하지 않으면 true 반환)
+    // isFirstPage : 스크롤 페이징할 때 첫 페이지인지 여부(스크롤 페이징하지 않으면 true 반환)
+    // isLastPage : 스크롤 페이징할 때 마지막 페이지 인지 여부(스크롤 페이징하지 않으면 true 반환)
 }</code></pre>
                 <pre lang="en_US"><code>onBind : function(context, data, isFirstPage, isLastPage) {
     // this : N.grid instance
     // context : context element
     // data : Bound data
-    // isFirstPage : Whether it is the first page when scroll paging(스크롤 페이징 하지 않으면 true 반환)
-    // isLastPage : Whether it is the last page when scroll paging(스크롤 페이징 하지 않으면 true 반환)
+    // isFirstPage : Whether it is the first page when scroll paging(스크롤 페이징하지 않으면 true 반환)
+    // isLastPage : Whether it is the last page when scroll paging(스크롤 페이징하지 않으면 true 반환)
 }</code></pre>
                 <p lang="ko_KR" class="alert">스크롤 페이징이 활성화되었을 경우 페이징된 데이터가 바인딩될 때마다 실행됩니다.</p>
                 <p lang="en_US" class="alert">If scroll paging is enabled, it is executed whenever paged data is bound.</p>
