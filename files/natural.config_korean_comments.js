@@ -97,7 +97,7 @@
                  *     "type" : "regexp"
                  *     "param" : "something"
                  * }
-                 * 위의 경우 pointcuts에서 regexp pointcut에 param 속성에 정의된 객체를 파라미터로 전달 합니다.
+                 * 위의 경우 pointcuts에서 regexp pointcut에 param 속성에 정의된 객체를 파라미터로 전달합니다.
                  * "pointcut" : "someregexp"
                  * 위와 같이 pointcut의 값이 객체가 아닌 경우 "regexp" pointcut을 기본값으로 사용합니다.
                  */
@@ -105,9 +105,9 @@
                 /**
                  * adviecType 은 아래와 같습니다.
                  * before : 원본 함수를 실행하기 전에 실행됩니다.
-                 * after : 원본 함수가 실행된 후 실행됩니다. 원본 함수의 반환값이 함께 전달 됩니다.
+                 * after : 원본 함수가 실행된 후 실행됩니다. 원본 함수의 반환값이 함께 전달됩니다.
                  * error : 원본 함수에서 예외 발생 시 실행됩니다.
-                 * around : 원본 함수를 실행할 수 있는 joinPoint가 파라미터로 전달 됩니다.
+                 * around : 원본 함수를 실행할 수 있는 joinPoint가 파라미터로 전달됩니다.
                  * 각 adviecType의 사용방법은 아래의 예제들을 참고 바랍니다.
                  */
                 "adviceType" : "before",
@@ -185,7 +185,7 @@
                 "options" : {
                     /**
                      * 기본 Request Method
-                     * GET 으로되어 있으면 JSON 형태의 파라미터가 q라는 파라미터명으로 q={a:1}와 같이 전달 됩니다.
+                     * GET 으로되어 있으면 JSON 형태의 파라미터가 q라는 파라미터명으로 q={a:1}와 같이 전달됩니다.
                      * JSON Object String을 Request Body에 담아 전송하려면 반드시 POST로 설정 바랍니다.
                      */
                     "type" : "POST",

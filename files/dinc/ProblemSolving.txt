@@ -38,7 +38,7 @@
         OFFSET ${startRowNum - 1} ROWS FETCH NEXT ${countPerPage} ROWS ONLY 구문을
         OFFSET #{startRowIndex} ROWS FETCH NEXT #{countPerPage} ROWS ONLY로 바꿔줘야 합니다.
 
-        아울러 MyBatis Mapper XML 에서는 ${}로 변수를 치환하면 절대 안되고 #{}로 변수를 바인딩해야 합니다. 치환하면 SQL Injection 공격에 그대로 노출 됩니다.
+        아울러 MyBatis Mapper XML 에서는 ${}로 변수를 치환하면 절대 안되고 #{}로 변수를 바인딩해야 합니다. 치환하면 SQL Injection 공격에 그대로 노출됩니다.
         SQL에 테이블 명을 동적으로 받는 등 어쩔수 없이 ${}를 사용해야 한다면 변수값에 대해 SQL Injection 공격 문자열을 치환해 주는 처리를 별도로해 줘야 합니다.
 
         최신 가이드 문서(file/documents.html) 파일도 올려 놓았으니 엎퍼 쳐 주세요. ^^
@@ -66,7 +66,7 @@
         </form>
 
         checkbox도 기본은 radio와 동일 하나
-        체크박스는 요소가 1개만 있을때는 값이 1이나 Y, on 이면 체크되고 0이나 N, off 이면 체크가 해제 됩니다.
+        체크박스는 요소가 1개만 있을때는 값이 1이나 Y, on 이면 체크되고 0이나 N, off 이면 체크가 해제됩니다.
          * 1이나 Y, on 등 예/아니오 값의 기본값은 natural.config.js 파일의 N.context.attr("core").sgChkdVal과 N.context.attr("core").sgUnChkdVal에 설정 바랍니다.
 
         체크박스 요소가 2개 이상이면 컬럼 데이터가 Array 이면 Array 안에 있는 여러개 값을 한번에 선택해 주고 String으로 단일 값이 있으면 해단 값에 해당하는 요소를 선택해 줍니다.

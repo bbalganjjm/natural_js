@@ -35,7 +35,7 @@
          * @this : 호출한 함수 인스턴스
          * @opts.cont : N.cont object
          * @opts.inst : 행을 삭제할 N.grid 인스턴스 명,
-         * @opts.before : 선택한 행을 삭제하기 전 실행할 함수. 핸들러 함수의 인자로 체크한 행의 index 들을 반환 합니다.
+         * @opts.before : 선택한 행을 삭제하기 전 실행할 함수. 핸들러 함수의 인자로 체크한 행의 index 들을 반환합니다.
          * @opts.after : 선택한 행을 삭제 한 후 실행할 함수.
         */
         del : function(opts) {
