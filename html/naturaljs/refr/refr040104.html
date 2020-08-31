@@ -107,7 +107,7 @@
                     <li lang="ko_KR">number 타입으로 설정할 경우 입력한 수치(px)가 요소의 넓이로 설정됩니다.</li>
                     <li lang="en_US">If set to number type, the entered value(px) is set as the element width.</li>
                     <li>
-                        <p lang="ko_KR">function 타입으로 설정할 경우 msgContext(modal 옵션이 true 일 때 화면에 덮는 요소), msgContents(메시지 컨텐츠 요소)가 인자로 전달 되고 return된 값으로 요소의 넓이가 설정됩니다.</p>
+                        <p lang="ko_KR">function 타입으로 설정할 경우 msgContext(modal 옵션이 true 일 때 화면에 덮는 요소), msgContents(메시지 컨텐츠 요소)가 인자로 전달되고 return된 값으로 요소의 넓이가 설정됩니다.</p>
                         <p lang="en_US">If set to function type, msgContext (the element that covers the screen when the modal option is true) and msgContents (the message content element) are passed as arguments, and the width of the element is set as the returned value.</p>
                         <pre><code>...<span lang="ko_KR">// 대화상자의 넓이를 화면에 꽉 채우기</span>
 <span lang="en_US">// Fully fill the width of the dialog on the screen.</span>
@@ -131,11 +131,11 @@ width : function(msgContext, msgContents) {
                     <li lang="ko_KR">number 타입으로 설정할 경우 입력한 수치(px)가 요소의 높이로 설정됩니다.</li>
                     <li lang="en_US">When set to number type, the entered value(px) is set as the element height.</li>
                     <li>
-                        <p lang="ko_KR">function 타입으로 설정할 경우 msgContext(modal 옵션이 true 일 때 화면에 덮는 요소), msgContents(메시지 컨텐츠 요소)가 인자로 전달 되고 return된 값으로 요소의 높이가 설정됩니다.</p>
+                        <p lang="ko_KR">function 타입으로 설정할 경우 msgContext(modal 옵션이 true 일 때 화면에 덮는 요소), msgContents(메시지 컨텐츠 요소)가 인자로 전달되고 return된 값으로 요소의 높이가 설정됩니다.</p>
                         <p lang="en_US">If set to function type, msgContext(the element that covers the screen when the modal option is true) and msgContents(the message content element) are passed as arguments, and the height of the element is set as the returned value.</p>
                         <pre><code>...<span lang="ko_KR">// 대화상자의 높이를 화면에 꽉 채우기</span>
 <span lang="en_US">// Fully fill the height of the dialog on the screen.</span>
-height: function(msgContext, msgContents) {<span lang="ko_KR">    // 메시지 대화상자가 열릴 때 msgContents 는 숨겨져 있기 때문에 show() 함수를 호출 한 다음 타이틀 영역의 높이를 가져와야 합니다.</span>
+height: function(msgContext, msgContents) {<span lang="ko_KR">    // 메시지 대화상자가 열릴 때 msgContents는 숨겨져 있기 때문에 show() 함수를 호출 한 다음 타이틀 영역의 높이를 가져와야 합니다.</span>
     <span lang="en_US">// You need to call the show () function and then get the height of the title area because the message Content is hidden when the message dialog opens.</span>
     return $(window).height() - msgContents.show().find(".msg_title_box__").height();
 },
@@ -325,7 +325,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 메시지 �
     // msgContext : Message overlay element
     // msgContents : Message dialog element
 }</code></pre>
-                <p lang="ko_KR" class="alert">0을 return하면 이벤트 핸들러만 실행 되고 대화 상자를 닫지 않습니다.</p>
+                <p lang="ko_KR" class="alert">0을 return 하면 이벤트 핸들러만 실행되고 대화 상자를 닫지 않습니다.</p>
                 <p lang="en_US" class="alert">If it returns 0, only the event handler is executed and the dialog box is not closed.</p>
                 <p lang="ko_KR" class="alert">button 옵션을 true로 설정했을 때 생성되는 확인 버튼에서 작동됩니다.</p>
                 <p lang="en_US" class="alert">It works on the Ok button created when the button option is set to true.</p>
@@ -349,7 +349,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 메시지 �
     // msgContext : Message overlay element
     // msgContents : Message dialog element
 }</code></pre>
-                <p lang="ko_KR" class="alert">0을 return하면 이벤트 핸들러만 실행 되고 메시지 대화 상자를 닫지 않습니다.</p>
+                <p lang="ko_KR" class="alert">0을 return 하면 이벤트 핸들러만 실행되고 메시지 대화 상자를 닫지 않습니다.</p>
                 <p lang="en_US" class="alert">If it returns 0, only the event handler is executed and the message dialog is not closed.</p>
                 <p lang="ko_KR" class="alert">button 옵션을 true로 설정했을 때 생성되는 취소 버튼에서 작동됩니다.</p>
                 <p lang="en_US" class="alert">It works on the Cancel button created when the button option is set to true.</p>

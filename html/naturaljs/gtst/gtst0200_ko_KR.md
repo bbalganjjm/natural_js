@@ -88,7 +88,7 @@ body {
 </html>
 ```
 
-**/index.html** 는 이 어플리케이션으로 접속하는 메인 인덱스 페이지입니다. SPA(Single Page Application) 이기 때문에 브라우저 URL 은 웹 어플리케이션을 사용하는 동안 변동되지 않을 것입니다.
+**/index.html**는 이 어플리케이션으로 접속하는 메인 인덱스 페이지입니다. SPA(Single Page Application) 이기 때문에 브라우저 URL 은 웹 어플리케이션을 사용하는 동안 변동되지 않을 것입니다.
 
 **/index.html** 상단에 head 태그 영역에는 Javascript와 CSS 파일들을 로딩하는 구문들이 배치됩니다. 이 파일들은 어플리케이션을 사용하는동안 한번만 로딩되어 이후 불러오는 페이지들과 기능을 공유하게될 것입니다.
 
@@ -155,7 +155,7 @@ N(".index-lefter").cont({
 <p class="alert">페이지가 닫히면 스타일도 같이 제거됩니다.</p>
 
 N.cont 오브젝트의 init 함수에는 메뉴링크 요소를 클릭했을 때  **/index.html**에서 window 객체에 담아둔 N.docs 인스턴스의 add 메서드로 메뉴 컨텐츠를 불러오는 코드가 작성되어 있습니다. N.docs 인스턴스로 ```add("페이지ID", "페이지명", { url : "페이지URL" }``` 함수를 실행하면 우측 MDI 영역에 페이지가 추가됩니다.
-```N(".menu", view).on("click", "a", function(e) { ... }, N(this).data("docid"), N(this).text(), N(this).attr("href")``` 는 모두 jQuery에서 제공하는 기능이니 [jQuery API 매뉴얼](https://api.jquery.com)을 참고 바랍니다.
+```N(".menu", view).on("click", "a", function(e) { ... }, N(this).data("docid"), N(this).text(), N(this).attr("href")```는 모두 jQuery에서 제공하는 기능이니 [jQuery API 매뉴얼](https://api.jquery.com)을 참고 바랍니다.
 
 위 파일들은 View와 Controller 구조로만 이루어진 아주 간단한 내용으로 구성된 페이지입니다.
 

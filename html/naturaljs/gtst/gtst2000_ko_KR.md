@@ -69,7 +69,7 @@ https://github.com/bbalganjjm/natural_js.git
 https://github.com/bbalganjjm/natural_js.git
 ```
 를 직접 입력합니다.
-입력 항목 중 `User`와 `Password` 는 Github 로그인 정보를 입력하면 됩니다. 인증 정보를 저장하려면 `Store in Secure Store`를 체크하고 `Finish` 버튼을 클릭합니다.
+입력 항목 중 `User`와 `Password`는 Github 로그인 정보를 입력하면 됩니다. 인증 정보를 저장하려면 `Store in Secure Store`를 체크하고 `Finish` 버튼을 클릭합니다.
 
 ![img-4][]
 

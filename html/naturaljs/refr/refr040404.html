@@ -121,7 +121,7 @@
                     <li lang="ko_KR">number 타입으로 설정할 경우 입력한 수치(px)가 요소의 넓이로 설정됩니다.</li>
                     <li lang="en_US">When set to number type, the entered value(px) is set as the element width.</li>
                     <li>
-                        <p lang="ko_KR">function 타입으로 설정할 경우 msgContext(modal 옵션이 true 일 때 화면에 덮는 요소), msgContents(메시지 컨텐츠 요소)가 인자로 전달 되고 return된 값으로 요소의 넓이가 설정됩니다.</p>
+                        <p lang="ko_KR">function 타입으로 설정할 경우 msgContext(modal 옵션이 true 일 때 화면에 덮는 요소), msgContents(메시지 컨텐츠 요소)가 인자로 전달되고 return된 값으로 요소의 넓이가 설정됩니다.</p>
                         <p lang="en_US">If set to function type, msgContext (the element that covers the screen when the modal option is true) and msgContents (the message content element) are passed as arguments, and the width of the element is set as the returned value.</p>
                         <pre><code>...<span lang="ko_KR">// 팝업의 넓이를 화면에 꽉 채우기</span>
 <span lang="en_US">// Fully fill the width of the popup on the screen.</span>
@@ -145,11 +145,11 @@ width : function(msgContext, msgContents) {
                     <li lang="ko_KR">number 타입으로 설정할 경우 입력한 수치(px)가 요소의 높이로 설정됩니다.</li>
                     <li lang="en_US">If set to number type, the entered value(px) is set as the element height.</li>
                     <li>
-                        <p lang="ko_KR">function 타입으로 설정할 경우 msgContext(modal 옵션이 true 일 때 화면에 덮는 요소), msgContents(메시지 컨텐츠 요소)가 인자로 전달 되고 return된 값으로 요소의높이가 설정됩니다.</p>
+                        <p lang="ko_KR">function 타입으로 설정할 경우 msgContext(modal 옵션이 true 일 때 화면에 덮는 요소), msgContents(메시지 컨텐츠 요소)가 인자로 전달되고 return된 값으로 요소의높이가 설정됩니다.</p>
                         <p lang="en_US">If set to function type, msgContext(the element that covers the screen when the modal option is true) and msgContents(the message content element) are passed as arguments, and the height of the element is set as the returned value.</p>
                         <pre><code>...<span lang="ko_KR">// 팝업의 높이를 화면에 꽉 채우기.</span>
 <span lang="en_US">// Fully fill the height of the popup on the screen.</span>
-height: function(msgContext, msgContents) {<span lang="ko_KR">    // 팝업이 열릴 때 msgContents 는 숨겨져 있기 때문에 show() 함수를 호출 한 다음 타이틀 영역의 높이를 가져와야 합니다.</span>
+height: function(msgContext, msgContents) {<span lang="ko_KR">    // 팝업이 열릴 때 msgContents는 숨겨져 있기 때문에 show() 함수를 호출 한 다음 타이틀 영역의 높이를 가져와야 합니다.</span>
     <span lang="en_US">// You need to call the show () function and then get the height of the title area because the popup Content is hidden when the popup opens.</span>
     return $(window).height() - msgContents.show().find(".msg_title_box__").height();
 },
@@ -305,7 +305,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 팝업이 �
     // msgContext : Popup overlay element
     // msgContents : Popup element
 }</code></pre>
-                <p lang="ko_KR" class="alert">0을 return하면 이벤트 핸들러만 실행 되고 대화 상자를 닫지 않습니다.</p>
+                <p lang="ko_KR" class="alert">0을 return 하면 이벤트 핸들러만 실행되고 대화 상자를 닫지 않습니다.</p>
                 <p lang="en_US" class="alert">If it returns 0, only the event handler is executed and the dialog box is not closed.</p>
                 <p lang="ko_KR" class="alert">button 옵션을 true로 설정했을 때 생성되는 확인 버튼에서 작동됩니다.</p>
                 <p lang="en_US" class="alert">It works on the Ok button created when the button option is set to true.</p>
@@ -329,7 +329,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 팝업이 �
     // msgContext : Popup overlay element
     // msgContents : Popup element
 }</code></pre>
-                <p lang="ko_KR" class="alert">0을 return하면 이벤트 핸들러만 실행 되고 팝업을 닫지 않습니다.</p>
+                <p lang="ko_KR" class="alert">0을 return 하면 이벤트 핸들러만 실행되고 팝업을 닫지 않습니다.</p>
                 <p lang="en_US" class="alert">If it returns 0, only the event handler is executed and the popup is not closed.</p>
                 <p lang="ko_KR" class="alert">button 옵션을 true로 설정했을 때 생성되는 취소 버튼에서 작동됩니다.</p>
                 <p lang="en_US" class="alert">It works on the Cancel button created when the button option is set to true.</p>
@@ -543,7 +543,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 팝업이 �
     // onCloseData : The first argument value of the (Controller object).caller.close function called from the popup is passed.
 }</code></pre>
                 <p lang="ko_KR" class="alert">
-                                팝업 컨텐츠 로딩이 완료되면 팝업의 Controller object에 caller 라는 속성이 생성됩니다. 이 caller 는 이 팝업을 생성한 부모페이지의 N.popup instance입니다.<br>
+                                팝업 컨텐츠 로딩이 완료되면 팝업의 Controller object에 caller 라는 속성이 생성됩니다. 이 caller는 이 팝업을 생성한 부모페이지의 N.popup instance입니다.<br>
                                 팝업에서 자체팝업을 닫을 때는 팝업의 Controller object에서 "this.caller.close(onCloseData);" 명령을 실행하면 됩니다. 이 명령을 실행하면 팝업이 닫히면서 onClose 이벤트 핸들러 함수의 첫 번째 인자로 onCloseData가 전달 됩니다.</p>
                 <p lang="en_US" class="alert">
                     When loading popup content is completed, a caller property is created in the Controller object of the popup. This caller is the N.popup instance of the parent page that created this popup.<br>

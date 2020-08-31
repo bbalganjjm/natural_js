@@ -31,7 +31,7 @@
             <td>
                 <p lang="ko_KR">N.comm이 초기화되기 전 실행되는 함수입니다.</p>
                 <p lang="en_US">This function is executed before all N.comm is initialized.</p>
-                <p lang="ko_KR" class="alert">Controller object의 init 메서드가 실행되기 전이 아니고 N.comm이 인스턴스화되기 전에 실행되는 이벤트입니다.</p>
+                <p lang="ko_KR" class="alert">Controller object의 init 메서드가 실행되기 전이 아니고 N.comm이 인스턴스화 되기 전에 실행되는 이벤트입니다.</p>
                 <p lang="en_US" class="alert">This event is executed before N.comm is instantiated, not before the Controller object init method is executed.</p>
 
                 <p lang="ko_KR">다음과 같은 객체나 값이 이벤트 핸들러 함수의 인자로 지정됩니다.</p>
@@ -40,7 +40,7 @@
                     <li>
                         <p lang="ko_KR">obj : Communicator의 comm 메서드를 호출하기 전에 N() 함수의 인자로 지정된 파라미터 데이터 객체 또는 페이지가 삽입될 요소입니다.</p>
                         <p lang="en_US">obj : Argument of the N() function before calling the comm method of Communication that is the parameter data object or the element to insert page.</p>
-                        <p lang="ko_KR" class="alert">파라미터 데이터가 object 타입 이면 Communicator에서 문자열로 변환 하기 전의 원래 오브젝트(jQuery object 타입)가 반환 되고 element 타입 이면 선택한 요소가 반환됩니다.</p>
+                        <p lang="ko_KR" class="alert">파라미터 데이터가 object 타입 이면 Communicator에서 문자열로 변환 하기 전의 원래 오브젝트(jQuery object 타입)가 반환되고 element 타입 이면 선택한 요소가 반환됩니다.</p>
                         <p lang="en_US" class="alert">If the parameter data is of type object, the original object(jQuery object type) before conversion to a string in Communicator is returned. If it is of element type, the selected element is returned.</p>
                     </li>
                 </ul>
@@ -66,7 +66,7 @@ afterInit : function(obj) {
             <td>
                 <p lang="ko_KR">N.comm이 초기화된 후 실행되는 함수입니다.</p>
                 <p lang="en_US">This function is executed after N.comm is initialized.</p>
-                <p lang="ko_KR" class="alert">Controller object의 init 메서드가 실행되기 전이 아니고 N.comm이 인스턴스화되기 전에 실행되는 이벤트입니다.</p>
+                <p lang="ko_KR" class="alert">Controller object의 init 메서드가 실행되기 전이 아니고 N.comm이 인스턴스화 되기 전에 실행되는 이벤트입니다.</p>
                 <p lang="en_US" class="alert">This event is executed before N.comm is instantiated, not before the Controller object init method is executed.</p>
                 <p lang="ko_KR">다음과 같은 객체나 값이 이벤트 핸들러 함수의 인자로 지정됩니다.</p>
                 <p lang="en_US">The following object or value is specified as an argument of the event handler function.</p>
@@ -120,7 +120,7 @@ beforeSend : function(request, xhr, settings) {
             <td>
                 <p lang="ko_KR">요청이 성공했을 때 실행되는 함수입니다.</p>
                 <p lang="en_US">This function is executed when the request is successful.</p>
-                <p lang="ko_KR" class="alert">data 인자를 수정해서 return하면 수정된 data를 모든 N.comm의 응답 data로 받을 수 있습니다.</p>
+                <p lang="ko_KR" class="alert">data 인자를 수정해서 return 하면 수정된 data를 모든 N.comm의 응답 data로 받을 수 있습니다.</p>
                 <p lang="en_US" class="alert">If you return by modifying the data argument, you can receive the modified data as response data of all N.comm.</p>
                 <p lang="ko_KR">다음과 같은 객체나 값이 이벤트 핸들러 함수의 인자로 지정됩니다.</p>
                 <p lang="en_US">The following object or value is specified as an argument of the event handler function.</p>

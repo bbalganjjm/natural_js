@@ -150,7 +150,7 @@
             },
             rowHandlerBeforeBind : function(rowIdx, rowEle, rowData) {
              	// 선택한 날짜가 오늘 날짜보다 크면 #isActive 요소 체크, 아니면 체크 해제.
-             	// rowHandlerBeforeBind 는 행에 데이터가 바인딩되기 전에 실행되는 핸들러 함수 이므로 바인딩될 데이터의 값을 바꾸어 주면 바뀐 데이터로 바인딩딩됨.
+             	// rowHandlerBeforeBind는 행에 데이터가 바인딩되기 전에 실행되는 핸들러 함수 이므로 바인딩될 데이터의 값을 바꾸어 주면 바뀐 데이터로 바인딩딩됨.
                 if(!N.string.isEmpty(rowData.registered)) {
                     if(N.date.diff((new Date()).formatDate("Ymd"), rowData.registered) > 0) {
                         rowData.isActive = "Y";
@@ -241,7 +241,7 @@
             }
         },
         init : function(view, request) {
-			// cont.opener 는 탭이 포함된 부모페이지의 Controller object.
+			// cont.opener는 탭이 포함된 부모페이지의 Controller object.
             if(cont.opener) {
                 cont["p.form.search"].context().hide().prev("h3").hide().prev(".view-intro").hide();
                 view.find("#btnSearch").hide();
