@@ -452,7 +452,7 @@ var cont = N(".page-id").cont({
 ...
 ```
 
->Natural-JS는 내부 데이터와 입력된 데이터를 동기화 하기 위해서 select 요소는 change 이벤트를, radio, checkbox 요소는 click 이벤트를, 그외 text 입력 요소(text, textarea, number등)는 focusout 이벤트를 사용합니다. 컴포넌트의 내부 데이터를 가져올 때는 반드시 위와같은 이벤트명으로 바인딩해 줘야 합니다. 그렇지 않으면 변경되기 이전의 데이터가 반환됩니다.
+>Natural-JS는 내부 데이터와 입력된 데이터를 동기화 하기 위해서 select 요소는 change 이벤트를, radio, checkbox 요소는 click 이벤트를, 그 외 text 입력 요소(text, textarea, number등)는 focusout 이벤트를 사용합니다. 컴포넌트의 내부 데이터를 가져올 때는 반드시 위와같은 이벤트명으로 바인딩해 줘야 합니다. 그렇지 않으면 변경되기 이전의 데이터가 반환됩니다.
 
 ```
 ...
