@@ -32,7 +32,7 @@ Grid로 생성/조회/수정/삭제를 처리 하기 위해 조회조건 영역�
 
 ##View 영역 코딩
 
-**/html/contents/page6.html** 파일을 생성하고 다음과 같이 코드를 작성 합니다.
+**/html/contents/page6.html** 파일을 생성하고 다음과 같이 코드를 작성합니다.
 
 ```
 <!-- Style -->
@@ -251,7 +251,7 @@ initComponents : function() {
 
 #### N.form 초기화
 
-검색 폼 영역(.search-conditions)에 N.form 컴포넌트를 적용하기 위해 initComponents 함수에 다음과 같은 코드를 추가 합니다.
+검색 폼 영역(.search-conditions)에 N.form 컴포넌트를 적용하기 위해 initComponents 함수에 다음과 같은 코드를 추가합니다.
 
 ```
 ...
@@ -285,7 +285,7 @@ N(cont.form.data()).comm("data.json").submit(function(data) {
 
 #### N.grid 초기화
 
-그리드 영역(.grid)에 있는 table 요소에 N.grid 컴포넌트를 적용하기 위해 initComponents 함수에 다음과 같은 코드를 추가 합니다.
+그리드 영역(.grid)에 있는 table 요소에 N.grid 컴포넌트를 적용하기 위해 initComponents 함수에 다음과 같은 코드를 추가합니다.
 
 ```
 ...
@@ -332,7 +332,7 @@ bindEvents : function() {
 
 <p class="alert">위 코드에서 N.comm의 옵션들 중 type 프로퍼티는 웹 서버에 POST 방식으로 요청할 수 없어서 임의로 정의 한 옵션입니다. 서버가 POST 요청을 처리할 수 있는 환경이라면 natural.config.js에 type의 기본값이 "POST"로 정의되어 있으니 type 옵션을 제거 바랍니다. type 옵션에 대한 자세한 내용은 <a href="#cmVmcjAyMDQlMjRDb21tdW5pY2F0b3IucmVxdWVzdCRodG1sJTJGbmF0dXJhbGpzJTJGcmVmciUyRnJlZnIwMjA0Lmh0bWw=">Communicator.request</a> 문서의 [기본옵션] 탭을 참고해 주세요.</p>
 
-조회 버튼의 이벤트 핸들러는 다음과 같은 로직을 실행 합니다.
+조회 버튼의 이벤트 핸들러는 다음과 같은 로직을 실행합니다.
  1. 검색 폼(cont.form)의 데이터를 파라미터로 서버에서 데이터 조회
  2. 그리드(cont.grid)에 조회한 데이터를 바인딩
 

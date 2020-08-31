@@ -241,9 +241,9 @@ Natural-ARCHITECTURE 기반의 모든 페이지나 페이지 블록 들은 반�
 
 이제 Natural-JS를 실행하기 위한 모든 작업을 완료했습니다.
 
-지금 까지 작성한 코드들을 실행 하려면 웹서버가 필요 합니다.
+지금 까지 작성한 코드들을 실행 하려면 웹서버가 필요합니다.
 
-먼저 웹 서버를 설치하고 웹 Context Root에 위 index.html, block01.html, data.json 파일을 복사 합니다. 그다음 웹서버를 구동하고 브라우저로 **index.html** 파일의 주소(URL)를 입력하여 페이지를 열어 보세요.
+먼저 웹 서버를 설치하고 웹 Context Root에 위 index.html, block01.html, data.json 파일을 복사합니다. 그다음 웹서버를 구동하고 브라우저로 **index.html** 파일의 주소(URL)를 입력하여 페이지를 열어 보세요.
 
 ** block01.html ** 파일은 index.html 페이지에 의해 로드되고 N.cont의 인자로 지정된 객체의 init 함수가 실행될 것입니다. 그다음 **block01.html** 페이지의 요소 id가 result 인 div 요소 안에 서버에서 조회된 데이터가 표시될 것입니다.
 

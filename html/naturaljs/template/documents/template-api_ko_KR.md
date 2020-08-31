@@ -21,7 +21,7 @@ Natural-TEMPLATE 은 Natural-JS 기반 웹 어플리케이션 개발을 정형�
         * [3. "e."으로 시작(이벤트 바인딩)](#3e)
 
 #설치
-1. [Github](https://github.com/bbalganjjm/natural_js/tree/master/dist)에서 natural.template.min.js 파일을 다운로드 받아 다음과 같이 라이브러리를 로딩 합니다.
+1. [Github](https://github.com/bbalganjjm/natural_js/tree/master/dist)에서 natural.template.min.js 파일을 다운로드 받아 다음과 같이 라이브러리를 로딩합니다.
 
 ```
 <script type="text/javascript" src="js/natural_js/natural.template.min.js" charset="utf-8"></script>
@@ -148,7 +148,7 @@ Natural-TEMPLATE에서만 사용가능한 컴포넌트 별 추가 옵션들은 �
 
 | 속성 | 옵션명 | 타입 | 필수여부 | 속성값 | 설명 |
 | :--: | :--: | :--: | :--: | :--: | -- |
-| p.select.{id} | - | - | - | - | N.select 컴포넌트를 초기화 합니다. |
+| p.select.{id} | - | - | - | - | N.select 컴포넌트를 초기화합니다. |
 | - | code | string | O | 공통코드 분류코드 | 바인딩할 코드목록의 분류 코드값을 설정 합니다. |
 | - | filter | function | | 데이터 필터 | 공통코드 데이터를 필터링하여 바인딩 합니다. |
 | - | selected | string | | 기본 선택값 | 컴포넌트 초기화 시 기본으로 선택될 선택지의 값을 설정합니다. |
@@ -183,7 +183,7 @@ Natural-TEMPLATE에서만 사용가능한 컴포넌트 별 추가 옵션들은 �
 ###1.2. N.select - 일반 목록데이터를 선택요소(select, radio, checkbox)에 바인딩
 | 속성 | 옵션명 | 타입 | 필수여부 | 속성값 | 설명 |
 | :--: | :--: | :--: | :--: | :--: | -- |
-| p.select.{id} | - | - | - | - | N.select 컴포넌트를 초기화 합니다. |
+| p.select.{id} | - | - | - | - | N.select 컴포넌트를 초기화합니다. |
 | - | comm | string | | 목록을 조회할 Communicator(N.comm) | Controller object에 선언한 "c.{actionName}"을 지정합니다. |
 | - | data | array[object] | | 바인딩할 데이터 | comm 옵션을 지정하지 않고 data 옵션으로 [{}, {}]와 같은 데이터를 직접 생성 하여 바인딩할 수 있습니다. |
 | - | key | string | O | 선택 요소의 명칭에 바인드될 데이터 속성 명 | 조회한 데이터 객체에서 바인딩할 프로퍼티명을 설정합니다. |
@@ -218,7 +218,7 @@ Natural-TEMPLATE에서만 사용가능한 컴포넌트 별 추가 옵션들은 �
 ###1.3. N.form
 | 속성 | 옵션명 | 타입 | 필수여부 | 속성값 | 설명 |
 | :--: | :--: | :--: | :--: | :--: | -- |
-| p.form.{id} | - | - | - | - | N.form 컴포넌트를 초기화 합니다. |
+| p.form.{id} | - | - | - | - | N.form 컴포넌트를 초기화합니다. |
 | - | usage | string or object | O | Form의 용도 | "search-box" 문자열을 입력하면 지정한 영역을 검색박스 Form으로 생성해 줍니다. object 타입으로 좀 더 상세한 옵션을 지정할 수 있습니다.(하단 설명 참고). |
 
  * 일반 폼 예제
@@ -276,7 +276,7 @@ Natural-TEMPLATE에서만 사용가능한 컴포넌트 별 추가 옵션들은 �
 ###1.4. 다른 모든 컴포넌트
 | 속성 | 옵션 | 타입 | 필수여부 | 속성값 | 설명 |
 | :--: | :--: | :--: | :--: | :--: | -- |
-| p.{component}.{id} | - | - | - | - | N.{component} 컴포넌트를 초기화 합니다. N.alert을 제외한 모든 컴포넌트를 이와 같은 방법으로 초기화할 수 있습니다. |
+| p.{component}.{id} | - | - | - | - | N.{component} 컴포넌트를 초기화합니다. N.alert을 제외한 모든 컴포넌트를 이와 같은 방법으로 초기화할 수 있습니다. |
 
  * Tab(N.tab) 예제
 
@@ -403,7 +403,7 @@ var cont = N(".page-id").cont({
         }
     },
     init : function(view, request) {
-        cont["e.id.click"].click(); // DOM 로딩이 완료되면 이 이벤트를 실행 합니다.
+        cont["e.id.click"].click(); // DOM 로딩이 완료되면 이 이벤트를 실행합니다.
     }
 });
 ...
