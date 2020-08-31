@@ -1,7 +1,7 @@
 Grid로 데이터 조회/변경 하기
 ===
 
-Grid로 생성/조회/수정/삭제를 처리 하기 위해 조회조건 영역과 조회 결과 Grid로 이루어진 프로그램을 개발해 보겠습니다.
+Grid로 생성/조회/수정/삭제를 처리하기 위해 조회조건 영역과 조회 결과 Grid로 이루어진 프로그램을 개발해 보겠습니다.
 
 코드 데이터들은 [Select](#cmVmcjA0MDYlMjRTZWxlY3QkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDQwNi5odG1s)(N.select) 컴포넌트를 사용하여 데이터를 바인딩하고 [Form](#cmVmcjA0MDclMjRGb3JtJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjA0MDcuaHRtbA==)(N.form) 컴포넌트로 조회조건 영역을 폼으로 생성하고  [Grid](#cmVmcjA0MDklMjRHcmlkJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjA0MDkuaHRtbA==)(N.grid) 컴포넌트로 입력/조회/수정/삭제할 수 있는 그리드를 생성할 것입니다.
 버튼 들은 [Button](#cmVmcjA0MDIlMjRCdXR0b24kaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDQwMi5odG1s)(N.button) 컴포넌트를 사용합니다.
@@ -157,7 +157,7 @@ Grid로 생성/조회/수정/삭제를 처리 하기 위해 조회조건 영역�
 
 위 코드에서 집중해야할 부분은 View 영역입니다. Controller는 일부러 틀만 만들고 비워 놓았습니다. 하나씩 채워가면서 진행 하려구요.
 
-View의 하위 요소 중 첫 번째에 있는 **.search-conditions** 요소는 검색조건을 입력할 수 있는 검색 폼입니다. 그 아래 **.buttons** 요소에는 버튼들이 배치되고 **.result** 요소에는 조회된 결과 데이터를 Grid로 표현하기 위해 N.grid의 context 요소인 Table을 만들었습니다. N.grid 컴포넌트를 적용하려면 반드시 그리드로 생성될 **table** 태그가 작성되어 있어야하고 table 태그에 **thead**(그리드 헤더)와 **tbody**(그리드 바디) 태그가 작성되어 있어야 합니다. N.grid의 행 들은 **tbody** 요소를 리스트 데이터의 길이 만큼 복제해서 표현해 줍니다. 각 컴포넌트에 대한 자세한 내용은 관련 문서를 참고 하기 바랍니다.
+View의 하위 요소 중 첫 번째에 있는 **.search-conditions** 요소는 검색조건을 입력할 수 있는 검색 폼입니다. 그 아래 **.buttons** 요소에는 버튼들이 배치되고 **.result** 요소에는 조회된 결과 데이터를 Grid로 표현하기 위해 N.grid의 context 요소인 Table을 만들었습니다. N.grid 컴포넌트를 적용하려면 반드시 그리드로 생성될 **table** 태그가 작성되어 있어야하고 table 태그에 **thead**(그리드 헤더)와 **tbody**(그리드 바디) 태그가 작성되어 있어야 합니다. N.grid의 행 들은 **tbody** 요소를 리스트 데이터의 길이 만큼 복제해서 표현해 줍니다. 각 컴포넌트에 대한 자세한 내용은 관련 문서를 참고하기 바랍니다.
 
 ##Controller 영역 코딩
 
@@ -439,4 +439,4 @@ N(window).alert({
 
 전체 소스코드는 [여기](html/naturaljs/gtst/codes/natural_js_gtst0300.zip)에서 다운로드할 수 있습니다.
 
-학습을 계속 하기 원한다면 예제 메뉴에 있는 여러 예제들의 소스코드들을 분석해 보기 바랍니다.
+학습을 계속하기 원한다면 예제 메뉴에 있는 여러 예제들의 소스코드들을 분석해 보기 바랍니다.

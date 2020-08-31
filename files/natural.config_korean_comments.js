@@ -47,7 +47,7 @@
          */
         gcMode : "full", //minimum, full
         /**
-         * N.string.byteLength 함수 및 maxbyte / minbyte / rangebyte 룰에서 영문, 숫자, 기본 특수문자등을 제외한 한글, 한글특수 문자 등의 기본 바이트 길이를 설정
+         * N.string.byteLength 함수 및 maxbyte / minbyte / rangebyte 룰에서 영문, 숫자, 기본 특수문자등을 제외한 한글, 한글 특수 문자 등의 기본 바이트 길이를 설정
          */
         charByteLength : 3
     });

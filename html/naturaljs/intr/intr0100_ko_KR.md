@@ -104,7 +104,7 @@ DataSync는 컴포넌트나 라이브러리에 의해 변경된 데이터를 실
 
 ### Natural-DATA Library
 
-[Natural-DATA Library](#cmVmcjAzMDMlMjROYXR1cmFsLURBVEElMjBMaWJyYXJpZXMkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDMwMy5odG1s)는 array[json object] 유형의 데이터를 정렬, 필터링 및 정제 하기 위한 메서드 및 함수를 제공합니다.
+[Natural-DATA Library](#cmVmcjAzMDMlMjROYXR1cmFsLURBVEElMjBMaWJyYXJpZXMkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDMwMy5odG1s)는 array[json object] 유형의 데이터를 정렬, 필터링 및 정제하기 위한 메서드 및 함수를 제공합니다.
 
 
 ## Natural-UI

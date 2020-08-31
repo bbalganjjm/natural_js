@@ -87,7 +87,7 @@
          * @opts.msg : 저장 확인 메시지, undefined 이면 기본 메시지가 표시 됨.
          * @opts.changed : 변경된 데이터 유무를 참조할 컴포넌트 인스턴스 명.
          * @opts.validate : 추가/수정된 데이터의 유효성을 검증할 컴포넌트 인스턴스 명.
-         * @opts.before : 서버에 저장 하기 전 실행할 함수.
+         * @opts.before : 서버에 저장하기 전 실행할 함수.
          * @opts.after : 서버에 저장 한 후 실행할 함수.
          */
         save : function(opts) {
@@ -332,7 +332,7 @@
      *  - start : 데이터로 추출할 시작 엑셀 행 인덱스
      *  - mode : 데이터 바인딩 모드 - insert 면 무조건 INSERT, update 면 pk로 지정한 행 데이터가 있으면 UPDATE, 없으면 INSERT
      *  - pk : mode 옵션이 update 일 때 INSERT, UPDATE를 판단할 기준 키 컬럼 명
-     *  - server : JSON 데이터를 추출 하기 위해 Excel 파일을 Server에 업로드하여 처리할 것인지 브라우저에서 javascript로 처리할 것인지 여부(boolean)
+     *  - server : JSON 데이터를 추출하기 위해 Excel 파일을 Server에 업로드하여 처리할 것인지 브라우저에서 javascript로 처리할 것인지 여부(boolean)
      *  - after : 엑셀 데이터 추출 완료 후 실행할 콜백 함수(함수의 첫 번째 인자로 추출된 JSON 타입의 엑셀 데이터가 반환 됨)
      */
     N.grid.prototype.bindExcel = function(header, opts) {

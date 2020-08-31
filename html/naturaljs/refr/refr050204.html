@@ -6,7 +6,7 @@
         request는 요청 정보를 갖고 있고 attr 메서드로 document 간 파라미터를 전달할 수 있습니다.</p>
     <p lang="en_US">Document.request(N.docs.request) is an object that can't be used alone and is created every time content is loaded using N.docs.
         request has request information and can pass parameters between documents with attr method.</p>
-    <p lang="ko_KR">add 나 reload 함수를 호출 하기 전에 다음과 같이 request.attr로 파라미터를 설정 하면</p>
+    <p lang="ko_KR">add 나 reload 함수를 호출하기 전에 다음과 같이 request.attr로 파라미터를 설정 하면</p>
     <p lang="en_US">If you set the parameter with request.attr as follows before calling add or reload function</p>
     <pre><code>var docs = N("container selector").docs();
 docs.request.attr("pageParam", { "param" : 1 }).add("page id", "page name", { url : "url" });

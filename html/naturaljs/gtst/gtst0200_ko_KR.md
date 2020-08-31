@@ -150,7 +150,7 @@ N(".index-lefter").cont({
 </script>
 ```
 
-위 코드의 style 코드 블록은 이 페이지의 view 에만 적용되는 스타일을 정의 하기 위한 부분입니다.
+위 코드의 style 코드 블록은 이 페이지의 view 에만 적용되는 스타일을 정의하기 위한 부분입니다.
 <p class="alert">이 페이지에서만 스타일이 적용 되게 하려면 <code>.index-lefter .menu a { ... }</code>의 **.index-lefter** 처럼  CSS 셀렉터를 정의할 때 반드시 view 요소 셀렉터 부터 시작해야 합니다.</p>
 <p class="alert">페이지가 닫히면 스타일도 같이 제거됩니다.</p>
 
