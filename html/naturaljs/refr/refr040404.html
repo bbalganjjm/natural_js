@@ -121,7 +121,7 @@
                     <li lang="ko_KR">number 타입으로 설정할 경우 입력한 수치(px)가 요소의 넓이로 설정됩니다.</li>
                     <li lang="en_US">When set to number type, the entered value(px) is set as the element width.</li>
                     <li>
-                        <p lang="ko_KR">function 타입으로 설정할 경우 msgContext(modal 옵션이 true 일 때 화면에 덮는 요소), msgContents(메시지 컨텐츠 요소)가 인자로 전달되고 return된 값으로 요소의 넓이가 설정됩니다.</p>
+                        <p lang="ko_KR">function 타입으로 설정할 경우 msgContext(modal 옵션이 true 일 때 화면에 덮는 요소), msgContents(메시지 컨텐츠 요소)가 인자로 전달되고 return 된 값으로 요소의 넓이가 설정됩니다.</p>
                         <p lang="en_US">If set to function type, msgContext (the element that covers the screen when the modal option is true) and msgContents (the message content element) are passed as arguments, and the width of the element is set as the returned value.</p>
                         <pre><code>...<span lang="ko_KR">// 팝업의 넓이를 화면에 꽉 채우기</span>
 <span lang="en_US">// Fully fill the width of the popup on the screen.</span>
@@ -145,7 +145,7 @@ width : function(msgContext, msgContents) {
                     <li lang="ko_KR">number 타입으로 설정할 경우 입력한 수치(px)가 요소의 높이로 설정됩니다.</li>
                     <li lang="en_US">If set to number type, the entered value(px) is set as the element height.</li>
                     <li>
-                        <p lang="ko_KR">function 타입으로 설정할 경우 msgContext(modal 옵션이 true 일 때 화면에 덮는 요소), msgContents(메시지 컨텐츠 요소)가 인자로 전달되고 return된 값으로 요소의높이가 설정됩니다.</p>
+                        <p lang="ko_KR">function 타입으로 설정할 경우 msgContext(modal 옵션이 true 일 때 화면에 덮는 요소), msgContents(메시지 컨텐츠 요소)가 인자로 전달되고 return 된 값으로 요소의높이가 설정됩니다.</p>
                         <p lang="en_US">If set to function type, msgContext(the element that covers the screen when the modal option is true) and msgContents(the message content element) are passed as arguments, and the height of the element is set as the returned value.</p>
                         <pre><code>...<span lang="ko_KR">// 팝업의 높이를 화면에 꽉 채우기.</span>
 <span lang="en_US">// Fully fill the height of the popup on the screen.</span>
@@ -174,7 +174,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 팝업이 �
             <td>true</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">false로 설정하면 브라우저의 크기를 조절하거나 부모 컨텐츠의 높이가 동적으로 변경 되었을때 블록 오버레이의 크기와 팝업의 위치를 자동으로 조정하지 않습니다.</p>
+                <p lang="ko_KR">false로 설정하면 브라우저의 크기를 조절하거나 부모 컨텐츠의 높이가 동적으로 변경되었을 때 블록 오버레이의 크기와 팝업의 위치를 자동으로 조정하지 않습니다.</p>
                 <p lang="en_US">If set to false, It does not automatically adjust the size of the block overlay and the position of the popup when the browser is resized or the height of the parent content is dynamically changed.</p>
             </td>
         </tr>
@@ -194,7 +194,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 팝업이 �
             <td>true</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">false로 설정하면 팝업을 화면 바깥으로 드롭했을 때 자동으로 내부로 이동 시키지 않습니다.</p>
+                <p lang="ko_KR">false로 설정하면 팝업을 화면 바깥으로 드롭했을 때 자동으로 내부로 이동시키지 않습니다.</p>
                 <p lang="en_US">If set to false, the popup will not automatically move inside when dropped off the screen.</p>
             </td>
         </tr>
@@ -221,7 +221,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 팝업이 �
             <td>true</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">false로 설정하면 msgContext(modal 옵션이 true 일 때 화면에 덮는 요소)를 클릭 해도 팝업이 닫히지 않습니다.</p>
+                <p lang="ko_KR">false로 설정하면 msgContext(modal 옵션이 true 일 때 화면에 덮는 요소)를 클릭해도 팝업이 닫히지 않습니다.</p>
                 <p lang="en_US">If set to false, popup does not close when clicking msgContext(the element that covers the screen when the modal option is true).</p>
             </td>
         </tr>
@@ -293,7 +293,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 팝업이 �
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">확인버튼을 클릭했을 때 실행되는 이벤트 핸들러를 정의합니다.</p>
+                <p lang="ko_KR">확인 버튼을 클릭했을 때 실행되는 이벤트 핸들러를 정의합니다.</p>
                 <p lang="en_US">Defines an event handler that is executed when the OK button is clicked.</p>
                 <pre lang="ko_KR"><code>onOk : function(msgContext, msgContents) {
     // this : N.alert 인스턴스

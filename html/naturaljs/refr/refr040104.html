@@ -19,7 +19,7 @@
                 <p lang="en_US">Specify the area where the N.alert message dialog will be displayed.</p>
                 <p lang="ko_KR">modal 옵션이 true로 설정되었을 때 N.alert의 overlay 요소가 context로 지정한 요소만큼 가려 줍니다.</p>
                 <p lang="en_US">When the modal option is set to true, the overlay element of N.alert covers as much as the element specified by context.</p>
-                <p lang="ko_KR" class="alert">window 객체를 지정하면 화면 전체를 덮어 주고 jquery selector 나 jQuery object를 입력하면 지정한 요소 만큼 만 가려줍니다.</p>
+                <p lang="ko_KR" class="alert">window 객체를 지정하면 화면 전체를 덮어 주고 jquery selector 나 jQuery object를 입력하면 지정한 요소만큼 만 가려줍니다.</p>
                 <p lang="en_US" class="alert">If a window object is specified, the entire screen is covered, and if a jquery selector or jQuery object is entered, only the specified elements are covered.</p>
                 <p lang="ko_KR">입력 요소(select, input, textarea 등)를 지정하면 입력 요소 옆에 툴팁으로 메시지를 표시해 줍니다.</p>
                 <p lang="en_US">If an input element(select, input, textarea, etc.) is specified, a message is displayed as a tool tip next to the input element.</p>
@@ -107,7 +107,7 @@
                     <li lang="ko_KR">number 타입으로 설정할 경우 입력한 수치(px)가 요소의 넓이로 설정됩니다.</li>
                     <li lang="en_US">If set to number type, the entered value(px) is set as the element width.</li>
                     <li>
-                        <p lang="ko_KR">function 타입으로 설정할 경우 msgContext(modal 옵션이 true 일 때 화면에 덮는 요소), msgContents(메시지 컨텐츠 요소)가 인자로 전달되고 return된 값으로 요소의 넓이가 설정됩니다.</p>
+                        <p lang="ko_KR">function 타입으로 설정할 경우 msgContext(modal 옵션이 true 일 때 화면에 덮는 요소), msgContents(메시지 컨텐츠 요소)가 인자로 전달되고 return 된 값으로 요소의 넓이가 설정됩니다.</p>
                         <p lang="en_US">If set to function type, msgContext (the element that covers the screen when the modal option is true) and msgContents (the message content element) are passed as arguments, and the width of the element is set as the returned value.</p>
                         <pre><code>...<span lang="ko_KR">// 대화상자의 넓이를 화면에 꽉 채우기</span>
 <span lang="en_US">// Fully fill the width of the dialog on the screen.</span>
@@ -131,7 +131,7 @@ width : function(msgContext, msgContents) {
                     <li lang="ko_KR">number 타입으로 설정할 경우 입력한 수치(px)가 요소의 높이로 설정됩니다.</li>
                     <li lang="en_US">When set to number type, the entered value(px) is set as the element height.</li>
                     <li>
-                        <p lang="ko_KR">function 타입으로 설정할 경우 msgContext(modal 옵션이 true 일 때 화면에 덮는 요소), msgContents(메시지 컨텐츠 요소)가 인자로 전달되고 return된 값으로 요소의 높이가 설정됩니다.</p>
+                        <p lang="ko_KR">function 타입으로 설정할 경우 msgContext(modal 옵션이 true 일 때 화면에 덮는 요소), msgContents(메시지 컨텐츠 요소)가 인자로 전달되고 return 된 값으로 요소의 높이가 설정됩니다.</p>
                         <p lang="en_US">If set to function type, msgContext(the element that covers the screen when the modal option is true) and msgContents(the message content element) are passed as arguments, and the height of the element is set as the returned value.</p>
                         <pre><code>...<span lang="ko_KR">// 대화상자의 높이를 화면에 꽉 채우기</span>
 <span lang="en_US">// Fully fill the height of the dialog on the screen.</span>
@@ -212,7 +212,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 메시지 �
                 <p lang="en_US">When applying the alwaysOnTop option, specify the target elements for calculating the highest z-index.</p>
                 <p lang="ko_KR" class="alert">jQuery selector 구문으로 지정합니다.</p>
                 <p lang="en_US" class="alert">It is specified using jQuery selector syntax.</p>
-                <p lang="ko_KR" class="alert">N.alert이나 N.popup 관련 요소들이 다른 요소에 의해 가려 질 때 가리고 있는 요소 셀렉터를 추가해 주세요.</p>
+                <p lang="ko_KR" class="alert">N.alert이나 N.popup 관련 요소들이 다른 요소에 의해 가려질 때 가리고 있는 요소 셀렉터를 추가해 주세요.</p>
                 <p lang="en_US" class="alert">Add an element selector that is obscured when elements related to N.alert or N.popup are obscured by other elements.</p>
             </td>
         </tr>
@@ -222,7 +222,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 메시지 �
             <td>true</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">false로 설정하면 브라우저의 크기를 조절하거나 부모 컨텐츠의 높이가 동적으로 변경 되었을때 블록 오버레이의 크기와 메시지 대화상자의 위치를 자동으로 조정하지 않습니다.</p>
+                <p lang="ko_KR">false로 설정하면 브라우저의 크기를 조절하거나 부모 컨텐츠의 높이가 동적으로 변경되었을 때 블록 오버레이의 크기와 메시지 대화상자의 위치를 자동으로 조정하지 않습니다.</p>
                 <p lang="en_US">If set to false, It does not automatically adjust the size of the block overlay and the location of the message dialog when the browser is resized or the height of the parent content is dynamically changed.</p>
             </td>
         </tr>
@@ -242,7 +242,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 메시지 �
             <td>true</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">false로 설정하면 메시지 대화 상자를 화면 바깥으로 드롭했을 때 자동으로 내부로 이동 시키지 않습니다.</p>
+                <p lang="ko_KR">false로 설정하면 메시지 대화 상자를 화면 바깥으로 드롭했을 때 자동으로 내부로 이동시키지 않습니다.</p>
                 <p lang="en_US">If set to false, the message dialog will not automatically move inside when dropped off the screen.</p>
             </td>
         </tr>
@@ -269,7 +269,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 메시지 �
             <td>true</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">false로 설정하면 msgContext(modal 옵션이 true 일 때 화면에 덮는 요소)를 클릭 해도 메시지 대화상자가 닫히지 않습니다.</p>
+                <p lang="ko_KR">false로 설정하면 msgContext(modal 옵션이 true 일 때 화면에 덮는 요소)를 클릭해도 메시지 대화상자가 닫히지 않습니다.</p>
                 <p lang="en_US">If set to false, message dialog does not close when clicking msgContext(the element that covers the screen when the modal option is true).</p>
             </td>
         </tr>
@@ -313,7 +313,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 메시지 �
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">확인버튼을 클릭했을 때 실행되는 이벤트 핸들러를 정의합니다.</p>
+                <p lang="ko_KR">확인 버튼을 클릭했을 때 실행되는 이벤트 핸들러를 정의합니다.</p>
                 <p lang="en_US">Defines an event handler that is executed when the OK button is clicked.</p>
                 <pre lang="ko_KR"><code>onOk : function(msgContext, msgContents) {
     // this : N.alert 인스턴스
