@@ -31,11 +31,11 @@
             "en_US" : {}
         },
         /**
-         * 체크박스가 1개 일 경우 선택 했을 때 기본 값
+         * 체크박스가 1개 일 경우 선택했을 때 기본 값
          */
         sgChkdVal : "Y", //Y, 1, on
         /**
-         * 체크박스가 1개 일 경우 선택 안 했을 때 기본 값
+         * 체크박스가 1개 일 경우 선택 안했을 때 기본 값
          */
         sgUnChkdVal : "N", //N, 0, off
         /**
@@ -164,13 +164,13 @@
                     beforeSend : function(request, xhr, settings) {
                     },
                     /**
-                     * 서버에 요청이 성공 했을 경우 실행됨.
+                     * 서버에 요청이 성공했을 경우 실행됨.
                      */
                     success : function(request, data, textStatus, xhr) {
                         // return data를하면 N.comm.submit의 콜백의 인자로 넘어오는 data가 리턴한 데이터로 치환 됨.
                     },
                     /**
-                     * 서버에 요청 후 서버에러가 발생 했을 경우 실행됨.
+                     * 서버에 요청 후 서버에러가 발생했을 경우 실행됨.
                      */
                     error : function(request, xhr, textStatus, errorThrown) {
                     },

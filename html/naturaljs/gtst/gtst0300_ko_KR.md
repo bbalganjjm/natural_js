@@ -26,7 +26,7 @@ Grid로 생성/조회/수정/삭제를 처리 하기 위해 조회조건 영역�
 ```
 
 메뉴 추가가 완료 되었으면 데이터 조회 및 저장을 실행하기 위해 [data.json](html/naturaljs/gtst/data/data.json) 파일을 다운로드하여 프로젝트의 Context Root에 저장합니다.
-<p class="alert">data.json 파일 링크를 클릭 했을 때 다운로드되지 않으면 data.json 링크에서 마우스 오른버튼을 클릭 한 다음 [다른 이름으로 링크 저장]을 클릭 주세요.</p>
+<p class="alert">data.json 파일 링크를 클릭했을 때 다운로드되지 않으면 data.json 링크에서 마우스 오른버튼을 클릭 한 다음 [다른 이름으로 링크 저장]을 클릭 주세요.</p>
 <p class="alert">이 자습서는 Web Server에서 구동 되는 예제로 조회 파라미터나 저장/수정/삭제된 데이터가 저장되지 않습니다. 서버로 전송 되는 파라미터만 개발자도구의 네트워크 탭에서 확인 바랍니다. 서버(DBMS)와 연동 되는 예제는 <a href="#Z3RzdDIwMDAlMjQlRUMlODMlOTglRUQlOTQlOEMlMjAlRUQlOTQlODQlRUIlQTElOUMlRUMlQTAlOUQlRUQlOEElQjglRUIlQTElOUMlMjAlRUMlOEIlOUMlRUMlOUUlOTElRUQlOTUlOTglRUElQjglQjAkaHRtbCUyRm5hdHVyYWxqcyUyRmd0c3QlMkZndHN0MjAwMC5odG1s">샘플 프로젝트로 시작하기</a> 문서를 참고 바랍니다.</p>
 
 
