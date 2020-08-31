@@ -62,7 +62,7 @@ N.context.attr("template", {
 });
 ```
 
-3. 마지막으로 다음과 같이 AOP 포인트컷을 추가 하면 설치가 완료 됩니다.
+3. 마지막으로 다음과 같이 AOP 포인트컷을 추가하면 설치가 완료 됩니다.
 
 ```
 ...
@@ -174,7 +174,7 @@ Natural-TEMPLATE에서만 사용가능한 컴포넌트 별 추가 옵션들은 �
 ```
 ...
 "filter" : function (data) {
-    // data(원래 데이터)를 가공하여 return 하면 가공된 데이터가 바인딩 됩니다.
+    // data(원래 데이터)를 가공하여 return하면 가공된 데이터가 바인딩 됩니다.
     return N(N.array.deduplicate(data, "age")).datasort("age"); // 중복 제거 후 정렬.
 }
 ...
@@ -244,7 +244,7 @@ Natural-TEMPLATE에서만 사용가능한 컴포넌트 별 추가 옵션들은 �
 
 >검색 폼에서 엔터 키 이벤트를 자동으로 처리하기 위해서 반드시 "btn-search"(검색버튼) 라는 class 속성값을 갖고 있는 버튼요소(a 요소)를 view 안에 추가해 주어야 합니다.
 
-좀더 상세한 옵션을 설정하려면 다음예제와 같이 "search-box" 옵션을 object로 지정 하면 됩니다.
+좀더 상세한 옵션을 설정하려면 다음예제와 같이 "search-box" 옵션을 object로 지정하면 됩니다.
 
 >"usage" 옵션이 "search-box"로 설정된 Form 은 입력 요소에 Enter 키로 조회하는 이벤트 핸들러가 자동으로 바인딩 됩니다. 이 Enter 키 이벤트 핸들러의 실행을 차단하고 다른 이벤트 핸들러를 등록하려면 "search-box" 옵션 객체의 "events" 속성에 이벤트 핸들러를 array 객체 안에 필요한 만큼 정의해 주면 됩니다.
 
@@ -330,7 +330,7 @@ N.comm의 초기화 속성명은 다음과 같이 조합하여 사용할 수 있
 "c.{액션명}" : function() { return N.comm; }
 ```
 
->가능 하다면 액션명은 호출하는 URL의 서비스명과 맞춰 주고 불가능 하면 반드시 목록 조회는 get + {ActionName} + List, 한건 조회는 get + {ActionName}, 입력은 insert + {ActionName}, 수정은 update + {ActionName}, 삭제는 delete + {ActionName}, 입력/수정/삭제를 한번에 처리하는 Communicator는 save + {ActionName}로 정의 바랍니다.
+>가능 하다면 액션명은 호출하는 URL의 서비스명과 맞춰 주고 불가능하면 반드시 목록 조회는 get + {ActionName} + List, 한건 조회는 get + {ActionName}, 입력은 insert + {ActionName}, 수정은 update + {ActionName}, 삭제는 delete + {ActionName}, 입력/수정/삭제를 한번에 처리하는 Communicator는 save + {ActionName}로 정의 바랍니다.
 
 ```
 ...
@@ -362,7 +362,7 @@ N.comm의 선언은 오브젝트나 값을 직접 대입하는것이 아닌 함�
 ##3. "e."으로 시작 - 이벤트 바인딩
 페이지의 view 요소 안에 있는 요소들에 이벤트 바인딩을 선언할 수 있습니다.
 
->a, button, input[type=button] 요소에 이벤트를 정의 하면 N.button 컴포넌트가 자동으로 초기화되어 버튼으로 생성됩니다.
+>a, button, input[type=button] 요소에 이벤트를 정의하면 N.button 컴포넌트가 자동으로 초기화되어 버튼으로 생성됩니다.
 
 이벤트의 초기화 속성명은 다음과 같이 조합하여 사용할 수 있습니다.
 
@@ -382,7 +382,7 @@ N.comm의 선언은 오브젝트나 값을 직접 대입하는것이 아닌 함�
     }
 }
 ```
-id 이외의 속성을 가진 요소를 선택할 때는 target 속성에 jQuery selector 문자열을 지정 하면 됩니다. 이때 셀렉터의 context를 view 요소로 지정하지 않아도 view 요소가 context 인자로 자동으로 지정됩니다.
+id 이외의 속성을 가진 요소를 선택할 때는 target 속성에 jQuery selector 문자열을 지정하면 됩니다. 이때 셀렉터의 context를 view 요소로 지정하지 않아도 view 요소가 context 인자로 자동으로 지정됩니다.
 
 이벤트 바인딩이 완료되면 `e.{요소id}.{이벤트명}` 속성 값으로 정의한 이벤트 핸들러 함수는 대상 요소(jQuery object)로 대체됩니다.
 
@@ -423,7 +423,7 @@ var cont = N(".page-id").cont({
 ...
 ```
 
-N.grid 나 N.list 컴포넌트 안의 요소를 지정 하면 이벤트 핸들러 함수의 마지막 인자에 `해당 요소가 포함된 행의 인덱스를 반환`해 줍니다.
+N.grid 나 N.list 컴포넌트 안의 요소를 지정하면 이벤트 핸들러 함수의 마지막 인자에 `해당 요소가 포함된 행의 인덱스를 반환`해 줍니다.
 
 >rowHandler나 rowHandlerBeforeBind에서 행마다 이벤트를 바인딩하면 브라우저 Heap 메모리 사용량이 이벤트 수 X 행 수 만큼 늘어나 웹 어플리케이션 성능이 저하 됩니다. 아래 방법(이벤트 위임 적용)을 사용하면 이벤트에 의한 메모리 사용량을 크게 줄일 수 있습니다.
 

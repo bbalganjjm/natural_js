@@ -45,7 +45,7 @@
             <td>
                 <p lang="ko_KR">multi 옵션이 true 인 경우 추가 탭 컨텐츠를 열 때마다 웹 브라우저가 느려지지 않도록 최대 상태 유지 탭 컨텐츠 수를 설정할 수 있습니다.</p>
                 <p lang="en_US">If the multi option is true, the maximum number of stateful tab contents can be set to prevent the web browser from slowing down whenever additional tab contents are opened.</p>
-                <p lang="ko_KR" class="alert">새로운 컨텐츠를 열때 열려있는 탭 컨텐츠의 개수가 최대 상태 유지 개수를 초과 하면 제일 먼저 열린 탭 컨텐츠의 상태가 제거되고 상태 유지가 제거된 탭을 클릭 하면 해당 컨텐츠가 다시 로딩됩니다.</p>
+                <p lang="ko_KR" class="alert">새로운 컨텐츠를 열때 열려있는 탭 컨텐츠의 개수가 최대 상태 유지 개수를 초과하면 제일 먼저 열린 탭 컨텐츠의 상태가 제거되고 상태 유지가 제거된 탭을 클릭하면 해당 컨텐츠가 다시 로딩됩니다.</p>
                 <p lang="en_US" class="alert">When opening the new content, if the number of open tab contents exceeds the maximum stateful count, the state of the first opened tab content is removed, and  clicking on the tab with the removed state, it will reload the content.</p>
                 <p lang="ko_KR" class="alert">값이 0 이면 최대 상태 유지 컨텐츠 수를 제한 하지 않습니다.</p>
                 <p lang="en_US" class="alert">A value of 0 does not limit the maximum number of stateful content.</p>
@@ -59,7 +59,7 @@
             <td>
                 <p lang="ko_KR">multi 옵션이 true 인 경우 추가 탭 컨텐츠를 열 때마다 웹 브라우저가 느려지지 않도록 최대 탭 컨텐츠 수를 설정할 수 있습니다.</p>
                 <p lang="en_US">If the multi option is true, the maximum number of tab contents can be set to prevent the web browser from slowing down whenever additional tab contents are opened.</p>
-                <p lang="ko_KR" class="alert">새로운 컨텐츠를 열때 열려있는 탭 컨텐츠의 개수가 최대 탭 개수를 초과 하면 더이상 탭 컨텐츠를 열 수 없습니다. 새로운 컨텐츠를 열려면 기존 탭 중에 하나를 닫아야 합니다.</p>
+                <p lang="ko_KR" class="alert">새로운 컨텐츠를 열때 열려있는 탭 컨텐츠의 개수가 최대 탭 개수를 초과하면 더이상 탭 컨텐츠를 열 수 없습니다. 새로운 컨텐츠를 열려면 기존 탭 중에 하나를 닫아야 합니다.</p>
                 <p lang="en_US" class="alert">When opening new content, if the number of open tab contents exceeds the maximum tabs count, the tab contents can no longer be opened. To open new content, you must close one of the existing tabs.</p>
                 <p lang="ko_KR" class="alert">값이 0 이면 최대 컨텐츠 수를 제한 하지 않습니다.</p>
                 <p lang="en_US" class="alert">If the value is 0, the maximum number of contents is not limited.</p>
@@ -112,7 +112,7 @@
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">"전체 닫기" 버튼을 클릭 했을 경우 closeAllRedirectURL 옵션 값이 null 이면 활성 화된 탭을 제외한 나머지 탭들을 닫아고 url 문자열을 입력 하면 해당 url로 리다이렉트 됩니다.</p>
+                <p lang="ko_KR">"전체 닫기" 버튼을 클릭 했을 경우 closeAllRedirectURL 옵션 값이 null 이면 활성 화된 탭을 제외한 나머지 탭들을 닫아고 url 문자열을 입력하면 해당 url로 리다이렉트 됩니다.</p>
                 <p lang="en_US">When the "Close All" button is clicked, if the value of the closeAllRedirectURL option is null, all other tabs except the active tab are closed and if you input the url string, it  will be redirect to the url.</p>
                 <p lang="ko_KR" class="alert">SPA(Single Page Application)로  개발할 때  홈(메인 인덱스)으로 이동하는 url을 입력 하여 탭 전체가 닫힐때 만 이라도 페이지 리다이렉션이 일어나서 브라우저의 가비지 리소스들이 정리 되게 하는것을 권장 합니다.</p>
                 <p lang="en_US" class="alert">When developing with SPA(Single Page Application), it is recommended to enter the url to go to the home(Main index page) so that even when the entire tab is closed, page redirection occurs, so that the garbage resources of the browser are cleaned.</p>
@@ -144,7 +144,7 @@
             <td>[]</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">entireLoad 관련 이벤트나 옵션(entireLoadIndicator, entireLoadScreenBlock 등)에서 entireLoadExcludeURLs로 지정한 URL 들을 캡쳐 대상에서 제외 합니다.</p>
+                <p lang="ko_KR">entireLoad 관련 이벤트나 옵션(entireLoadIndicator, entireLoadScreenBlock 등)에서 entireLoadExcludeURLs로 지정한 URL 들을 캡쳐 대상에서 제외합니다.</p>
                 <p lang="en_US">Excludes URLs specified by entireLoadExcludeURLs from the entireLoad(entireLoadIndicator, entireLoadScreenBlock, etc.) related event or option.</p>
                 <p lang="ko_KR" class="alert">페이지가 처음 로딩될 때 N.docs 컨텍스트 바깥에서 로딩되는 Ajax 호출을 제외하고 싶을 때 설정 바랍니다.</p>
                 <p lang="en_US" class="alert">Set this when you want to exclude Ajax calls that are loaded outside of the N.docs context when the page is first loaded.</p>

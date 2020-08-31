@@ -135,7 +135,7 @@
         "comm" : {
             /**
              * Communication Filter
-             *  - N.comm으로 호출되는 모든요청이 아래에서 정의한 필터를 통과하게 되므로 서버 요청 시 공통적으로 적용해야할 부분을 정의 하면 됨.
+             *  - N.comm으로 호출되는 모든요청이 아래에서 정의한 필터를 통과하게 되므로 서버 요청 시 공통적으로 적용해야할 부분을 정의하면 됨.
              *  - 필터 인자 중 request 인자에 요청에 대한 유용한 정보가 담겨 있음.
              *  - request 객체에서 제공해 주는 정보는 http://bbalganjjm.github.io/natural_js/에서 Communicator.request 메뉴를 참고 바람.
              *  - 필터를 여러개 걸수 있으며 단위 필터명은 아무거나 지정하면 됨.
@@ -167,7 +167,7 @@
                      * 서버에 요청이 성공 했을 경우 실행됨.
                      */
                     success : function(request, data, textStatus, xhr) {
-                        // return data를 하면 N.comm.submit의 콜백의 인자로 넘어오는 data가 리턴한 데이터로 치환 됨.
+                        // return data를하면 N.comm.submit의 콜백의 인자로 넘어오는 data가 리턴한 데이터로 치환 됨.
                     },
                     /**
                      * 서버에 요청 후 서버에러가 발생 했을 경우 실행됨.
@@ -719,7 +719,7 @@
                         + 'view(context) 요소를 입력하지 않으면 다른 View의 요소까지 선택되어 의도하지 않은 오류가 발생할 수 있습니다. '
                         + '\nex) N("selector", cont.view).hide();'
                         + '\n    cont.view.find("selector").hide();',
-                    "UseTheComponentsValMethod" : 'jQuery의 val 메서드로 입력 요소의 value 속성 값을 변경하면 컴포넌트에 바인드되어 있는 데이터는 업데이트되지 않습니다. '
+                    "UseTheComponentsValMethod" : 'jQuery의 val 메서드로 입력 요소의 value 속성 값을 변경하면 컴포넌트에 바인드 되어 있는 데이터는 업데이트되지 않습니다. '
                         + '컴포넌트의 내부 데이터와 연동된 입력 요소들은 적용된 데이터 관련 컴포넌트(N.form, N.grid 등)에서 제공하는 val 메서드를 사용해야 합니다.'
                         + '\nex) cont["p.form.id"].val("columnName", "value")'
                         + '\n    cont["p.grid.id"].val(index, "columnName", "value")'

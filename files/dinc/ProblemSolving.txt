@@ -53,7 +53,7 @@
 
     A : form 은 요소의 id 속성과 컬럼 값을 연결합니다.
         <input name="abc" value="Y">
-        <input name="abc" value="N"> 만 하면 id 값이 없기 때문에 연결되지 않습니다.
+        <input name="abc" value="N"> 만하면 id 값이 없기 때문에 연결되지 않습니다.
 
         <input id="abc" name="abc" value="Y">
         <input name="abc" value="N">와 같이 첫 번째 선택요소에 id 값을 name 속성값과 같은 값으로 넣어 주시면 됩니다.

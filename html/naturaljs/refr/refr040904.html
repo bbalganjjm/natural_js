@@ -119,7 +119,7 @@
             <td>
                 <p lang="ko_KR">지정한 열들은 고정되고 다른 열 들은 가로로 스크롤될 수 있게 해 줍니다.</p>
                 <p lang="en_US">The specified column is fixed and the other columns scroll horizontally.</p>
-                <p lang="ko_KR">0으로 설정하면 열을 고정하지 않고 1이상의 숫자로 설정 하면 첫 번째 열부터 설정한 숫자(열 개수)만큼 열을 고정해 줍니다.</p>
+                <p lang="ko_KR">0으로 설정하면 열을 고정하지 않고 1이상의 숫자로 설정하면 첫 번째 열부터 설정한 숫자(열 개수)만큼 열을 고정해 줍니다.</p>
                 <p lang="en_US">If set to 0, the column is not fixed, but if set to 1 or more, the column is fixed as much as the number (number of columns) set from the first column.</p>
                 <p lang="ko_KR" class="alert">헤더(thead) 영역은 반드시 있어야하고 푸터(tfoot) 영역은 없어야 합니다.</p>
                 <p lang="en_US" class="alert">There must be a header(thead) area and no footer(tfoot) area.</p>
@@ -139,7 +139,7 @@
                 <p lang="en_US">If set to true, the function to hide or show the column and the function to automatically generate the detail popup are enabled.</p>
                 <p lang="ko_KR">그리드의 마지막 열 다음에 위의 기능을 실행하는 버튼을 생성해 줍니다.</p>
                 <p lang="en_US">Create a button that executes the above function after the last column in the grid.</p>
-                <p lang="ko_KR">true로 설정하면 그리드 헤더에 정의되어 있는 모든 컬럼들을 모두 상세팝업에 보여주고 array에 컬럼 명 들을 지정하여 옵션으로 설정 하면 지정한 컬럼들만 보여 줍니다.</p>
+                <p lang="ko_KR">true로 설정하면 그리드 헤더에 정의되어 있는 모든 컬럼들을 모두 상세팝업에 보여주고 array에 컬럼 명 들을 지정하여 옵션으로 설정하면 지정한 컬럼들만 보여 줍니다.</p>
                 <p lang="en_US">If set to true, all columns defined in the grid header are shown in the detail popup and if you specify the column names in the array and set them as options, only the specified columns are shown.</p>
                 <p lang="ko_KR" class="alert">
                     컬럼들의 제목은 그리드 헤더의 제목 텍스트를 그대로 사용하기 때문에 그리드 헤더에 정의되어 있지 않은 컬럼은 표시 되지 않습니다.
@@ -169,7 +169,7 @@
             <td>true</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">false로 설정 하면 입력 요소에서 focus-out 되었을 때 입력 값에 대한 유효성 검증을 실행 하지 않습니다.</p>
+                <p lang="ko_KR">false로 설정하면 입력 요소에서 focus-out 되었을 때 입력 값에 대한 유효성 검증을 실행 하지 않습니다.</p>
                 <p lang="en_US">If set to false, validation is not performed on the input value when the input element is focus-out.</p>
             </td>
         </tr>
@@ -191,7 +191,7 @@
             <td>
                 <p lang="ko_KR">true로 설정하면 add 메서드를 호출했을때 행 요소와 로우 데이터가 목록의 맨 앞에 추가 됩니다.</p>
                 <p lang="en_US">If set to true, row elements and row data created to the top of the list when the add method is called.</p>
-                <p lang="ko_KR" class="alert">addTop 옵션을 false 설정 하면 데이터 동기화 문제가 발생하여 scrollPaging.size와 createRowDelay 옵션의 설정 값이 0으로 강제 설정됩니다. 이로인해 데이터 바인딩 성능이 저하될 수 있습니다.</p>
+                <p lang="ko_KR" class="alert">addTop 옵션을 false 설정하면 데이터 동기화 문제가 발생하여 scrollPaging.size와 createRowDelay 옵션의 설정 값이 0으로 강제 설정됩니다. 이로인해 데이터 바인딩 성능이 저하될 수 있습니다.</p>
                 <p lang="en_US" class="alert">Setting the addTop option to false causes data synchronization issues, which forces the setting values ​​of scrollPaging.size and createRowDelay options to zero. This can degrade the performance of data binding.</p>
             </td>
         </tr>
@@ -211,7 +211,7 @@
                     If the resizable option is true when the cell width is set using the col tag of the colgroup, when the grid is initialized, the cell width value defined in the col tag is moved to th of thead and then the colgroup tag is removed.
                     Therefore, to use the column resizing feature, it is recommended that you do not set the width in the col tag, but set the column width in th of thead.
                 </p>
-                <p lang="ko_KR" class="alert">thead의 th에 colspan 속성이 있을경우 컬럼 리사이즈 기능이 제대로 작동하지 않을 수 있습니다.</p>
+                <p lang="ko_KR" class="alert">thead의 th에 colspan 속성이 있을 경우 컬럼 리사이즈 기능이 제대로 작동하지 않을 수 있습니다.</p>
                 <p lang="en_US" class="alert">If thead's th has a colspan attribute, the column resizing feature may not work properly.</p>
                 <p lang="ko_KR" class="alert">컬럼 리사이징할 때 그리드의 모양이 깨지면 misc.resizableCorrectionWidth, misc.resizableLastCellCorrectionWidth, misc.resizeBarCorrectionLeft, misc.resizeBarCorrectionHeight 옵션 값 들을 조절해 주세요.</p>
                 <p lang="en_US" class="alert">If the grid's shape is broken when resizing the column, adjust the misc.resizableCorrectionWidth, misc.resizableLastCellCorrectionWidth, misc.resizeBarCorrectionLeft and misc.resizeBarCorrectionHeight option values.</p>
@@ -309,7 +309,7 @@
             <td>true</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">false로 설정 하면 select 옵션이 true 일때 선택된 행을 다시 선택해도 선택이 취소 되지 않습니다.</p>
+                <p lang="ko_KR">false로 설정하면 select 옵션이 true 일때 선택된 행을 다시 선택해도 선택이 취소 되지 않습니다.</p>
                 <p lang="en_US">If set to false, when the select option is true, selecting the selected row again does not cancel the selection.</p>
                 <p lang="ko_KR" class="alert">multiselect 옵션이 true 일 경우에는 unselect 옵션이 적용 되지 않습니다.</p>
                 <p lang="en_US" class="alert">If the multiselect option is true, the unselect option has no apply.</p>
@@ -357,7 +357,7 @@
                 <p lang="en_US" class="alert">It is specified with jQuery selector syntax, and the context of the selector is automatically specified as the row element(tbody) of the grid.</p>
                 <p lang="ko_KR" class="alert">checkAllTarget 옵션과 checkSingleTarget 옵션은 둘중 하나만 사용할 수 있습니다.</p>
                 <p lang="en_US" class="alert">Only one of the checkAllTarget and checkSingleTarget options can be used.</p>
-                <p lang="ko_KR" class="alert">체크박스에 id 속성을 설정하여 데이터를 바인드 하면 제대로 작동하지 않을 수 있습니다. 선택된 행의 인덱스를 가져오는 용도로만 사용바랍니다.</p>
+                <p lang="ko_KR" class="alert">체크박스에 id 속성을 설정하여 데이터를 바인드하면 제대로 작동하지 않을 수 있습니다. 선택된 행의 인덱스를 가져오는 용도로만 사용바랍니다.</p>
                 <p lang="en_US" class="alert">If you bind the data by setting the id attribute in the checkbox, it may not work properly. Please use it only to get the index of the selected row.</p>
             </td>
         </tr>
@@ -377,7 +377,7 @@
                 <p lang="en_US" class="alert">It is specified with jQuery selector syntax, and the context of the selector is automatically specified as the row element(tbody) of the grid.</p>
                 <p lang="ko_KR" class="alert">checkAllTarget 옵션과 checkSingleTarget 옵션은 둘중 하나만 사용할 수 있습니다.</p>
                 <p lang="en_US" class="alert">Only one of the checkAllTarget and checkSingleTarget options can be used.</p>
-                <p lang="ko_KR" class="alert">체크박스에 id 속성을 설정하여 데이터를 바인드 하면 제대로 작동하지 않을 수 있습니다. 선택된 행의 인덱스를 가져오는 용도로만 사용바랍니다.</p>
+                <p lang="ko_KR" class="alert">체크박스에 id 속성을 설정하여 데이터를 바인드하면 제대로 작동하지 않을 수 있습니다. 선택된 행의 인덱스를 가져오는 용도로만 사용바랍니다.</p>
                 <p lang="en_US" class="alert">If you bind the data by setting the id attribute in the checkbox, it may not work properly. Please use it only to get the index of the selected row.</p>
             </td>
         </tr>
@@ -468,7 +468,7 @@
             <td>true</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">false로 설정 하면 add 메서드를 호출 했을 때 추가된 행으로 스크롤 되지 않습니다.</p>
+                <p lang="ko_KR">false로 설정하면 add 메서드를 호출 했을 때 추가된 행으로 스크롤 되지 않습니다.</p>
                 <p lang="en_US">If set to false, it will not scroll to the row added when the add method is called.</p>
             </td>
         </tr>
@@ -478,7 +478,7 @@
             <td>true</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">false로 설정 하면 select 메서드를 호출 했을 때 선택된 마지막 행으로 스크롤 되지 않습니다.</p>
+                <p lang="ko_KR">false로 설정하면 select 메서드를 호출 했을 때 선택된 마지막 행으로 스크롤 되지 않습니다.</p>
                 <p lang="en_US">If set to false, it will not scroll to the last row selected when the select method is called.</p>
             </td>
         </tr>
@@ -488,7 +488,7 @@
             <td>true</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">false로 설정 하면 check 메서드를 호출 했을 때 체크된 마지막 행으로 스크롤 되지 않습니다.</p>
+                <p lang="ko_KR">false로 설정하면 check 메서드를 호출 했을 때 체크된 마지막 행으로 스크롤 되지 않습니다.</p>
                 <p lang="en_US">If set to false, it will not scroll to the last row checked when the check method is called.</p>
             </td>
         </tr>
@@ -498,7 +498,7 @@
             <td>true</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">false로 설정 하면 validate 메서드를 호출 했을 때 유효성 검증에 실패 한 마지막 행으로 스크롤 되지 않습니다.</p>
+                <p lang="ko_KR">false로 설정하면 validate 메서드를 호출 했을 때 유효성 검증에 실패 한 마지막 행으로 스크롤 되지 않습니다.</p>
                 <p lang="en_US">If set to false, it will not scroll to the last row that failed validation when the validate method is called.</p>
             </td>
         </tr>
@@ -508,7 +508,7 @@
             <td>true</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">false로 설정 하면 두 번째 인자에 "append" 옵션을 지정하여 bind 메서드를 호출 했을 때 append된 행으로 자동 스크롤 되지 않습니다.</p>
+                <p lang="ko_KR">false로 설정하면 두 번째 인자에 "append" 옵션을 지정하여 bind 메서드를 호출 했을 때 append된 행으로 자동 스크롤 되지 않습니다.</p>
                 <p lang="en_US">If set to false, when the bind method is called with the "append" option specified as the second argument, the scroll will not automatically scroll to the appended row.</p>
             </td>
         </tr>
@@ -685,7 +685,7 @@
             <td>0</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">헤더 고정형 그리드에서 resizable 옵션이 활성화 되었을 때 마지막 컬럼을 클릭 하면 다른 컬럼들이 밀릴 수 있습니다. 이때 값을 0.1 씩 증가 또는 감소시켜 보정하는 옵션입니다.</p>
+                <p lang="ko_KR">헤더 고정형 그리드에서 resizable 옵션이 활성화 되었을 때 마지막 컬럼을 클릭하면 다른 컬럼들이 밀릴 수 있습니다. 이때 값을 0.1 씩 증가 또는 감소시켜 보정하는 옵션입니다.</p>
                 <p lang="en_US">Clicking on the last column may cause other columns to be pushed when the resizable option is enabled in the header fixed grid. At this time, it is an option to correct by increasing or decreasing the value by 0.1.</p>
                 <p lang="ko_KR" class="alert">그리드 열의 너비/높이는 td, th와 같은 테이블 관련 요소에 적용되는 스타일(padding, box-sizing 등)에 따라 변경될 수 있습니다.</p>
                 <p lang="en_US" class="alert">The width/height of the grid column may be changed due to the style(padding, box-sizing, etc.) applied to table-related elements such as td and th.</p>

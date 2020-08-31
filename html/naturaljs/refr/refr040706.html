@@ -17,7 +17,7 @@
             <td style="text-align: center;">N/A</td>
             <td>array[json object]|jQuery object[array[json object]]</td>
             <td>
-                <p lang="ko_KR">컴포넌트에 바인드되어 있는 가장 최근 상태의 데이터를 반환합니다.</p>
+                <p lang="ko_KR">컴포넌트에 바인드 되어 있는 가장 최근 상태의 데이터를 반환합니다.</p>
                 <p lang="en_US">Returns the data of the most recent state bound to the component.</p>
             </td>
         </tr>
@@ -35,7 +35,7 @@
                 <ul>
                     <li lang="ko_KR">undefined(selFlag 옵션이 설정되지 않은 경우) : array[json object] 타입의 데이터를 반환합니다.</li>
                     <li lang="en_US">undefined(When the selFlag option is not set) : Returns data of type array [json object].</li>
-                    <li lang="ko_KR">true : 폼에 바인드되어 있는 데이터만 추출하여 반환합니다.</li>
+                    <li lang="ko_KR">true : 폼에 바인드 되어 있는 데이터만 추출하여 반환합니다.</li>
                     <li lang="ko_KR">true : It extracts and returns only the data bound to the form.</li>
                     <li>
                         <p lang="ko_KR">false : 컴포넌트에 바인딩되어 있는 jQuery object[array[json object]] 타입의 원래 유형의 데이터를 반환합니다.</p>
@@ -106,7 +106,7 @@ formInst.data(true, "col01", "col02", "col03");
                 <p lang="ko_KR">context 옵션으로 지정한 요소 안에서 id 속성값을 갖고 있는 요소들에 데이터를 바인딩 합니다.</p>
                 <p lang="en_US">Binds data to elements that have id attribute value in the element specified by context option.</p>
 
-                <p lang="ko_KR" class="alert">data 만 바꿔서 다시 바인드 하면 N.form이 제대로 동작 하지 않을 수 있습니다.
+                <p lang="ko_KR" class="alert">data 만 바꿔서 다시 바인드하면 N.form이 제대로 동작 하지 않을 수 있습니다.
                     데이터가 바인딩된 context 요소에 다시 바인드할 때는 unbind 메서드를 먼저 실행 한 다음 bind 메서드를 실행해야 합니다.</p>
                 <p lang="en_US" class="alert">If you change data only and bind again, N.form may not work properly.
                     When rebinding to the context element to which the data is bound, the unbind method must be executed first, then the bind method.</p>
@@ -153,7 +153,7 @@ formInstance.bind(0, data, "col01", "col02", "col03");</code></pre>
 var data = [{ col01 : "", col02 : "", col03 : "", col04 : "", col05 : "", col06 : "" }]
 // "col01", "col02", "col03" Only bound to elements that have an id attribute value.
 formInstance.bind(0, data, "col01", "col02", "col03");</code></pre>
-                <pre lang="ko_KR"><code>// 바인드되어 있는 데이터를 직접 수정 한 후 "col01", "col02", "col03" id 속성값을 갖고 있는 요소에만 바인딩.
+                <pre lang="ko_KR"><code>// 바인드 되어 있는 데이터를 직접 수정 한 후 "col01", "col02", "col03" id 속성값을 갖고 있는 요소에만 바인딩.
 var data = formInstance.data()[formInstance.row()]
 data.col01 = "abc";
 data.col02 = "123";
@@ -199,7 +199,7 @@ formInstance.bind(0, data, "col01", "col02", "col03");</code></pre>
             <td>object|number</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p lang="ko_KR">data 객체를 지정 하면 생성된 데이터와 지정 한 data가 병합되어 바인딩 됩니다.</p>
+                <p lang="ko_KR">data 객체를 지정하면 생성된 데이터와 지정 한 data가 병합되어 바인딩 됩니다.</p>
                 <p lang="en_US">When a data object is specified, the added data and the specified data are merged and then bound.</p>
                 <p lang="ko_KR" class="alert">data 인자가 number 타입이면 row(arguments[1]) 인자로 지정됩니다.</p>
                 <p lang="en_US" class="alert">If the data argument is of type number, it is specified as a row (arguments [1]) argument.</p>
@@ -211,7 +211,7 @@ formInstance.bind(0, data, "col01", "col02", "col03");</code></pre>
             <td>number</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p lang="ko_KR">새로운 데이터가 추가될 행 인덱스를 row 인자로 지정 하면 지정한 행 인덱스 바로 앞에 행 데이터가 추가 됩니다.</p>
+                <p lang="ko_KR">새로운 데이터가 추가될 행 인덱스를 row 인자로 지정하면 지정한 행 인덱스 바로 앞에 행 데이터가 추가 됩니다.</p>
                 <p lang="en_US">If the row index to which new data is to be added is specified as the row argument, the row data is added right in front of the specified row index.</p>
             </td>
         </tr>

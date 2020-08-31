@@ -19,7 +19,7 @@
             <td>
                 <p lang="ko_KR">N.popup으로 생성할 페이지 안에 있는 Block 요소를 지정합니다.</p>
                 <p lang="en_US">Specify the Block element in the page to be created with N.popup.</p>
-                <p lang="ko_KR" class="alert">페이지 안의 요소를 팝업으로 만들기 때문에 url 옵션을 설정 하면 안 됩니다.</p>
+                <p lang="ko_KR" class="alert">페이지 안의 요소를 팝업으로 만들기 때문에 url 옵션을 설정하면 안 됩니다.</p>
                 <p lang="en_US" class="alert">The url option should not be set because it will make the popup  from element in the page.</p>
                 <pre><code>N("context").popup();</code></pre>
             </td>
@@ -34,7 +34,7 @@
                 <p lang="en_US">Specify the url of the page to be created as a popup.</p>
                 <p lang="ko_KR" class="alert">팝업 페이지 로딩이 완료되면 팝업 페이지의 init 메서드가 호출 됩니다.</p>
                 <p lang="en_US" class="alert">When the popup page loading is completed, the init method of the popup page is called.</p>
-                <p lang="ko_KR" class="alert">다른 페이지를 로드하여 팝업을 생성하기 때문에 context 옵션을 지정 하면 안 됩니다.</p>
+                <p lang="ko_KR" class="alert">다른 페이지를 로드하여 팝업을 생성하기 때문에 context 옵션을 지정하면 안 됩니다.</p>
                 <p lang="en_US" class="alert">Don't specify the context option, because it creates a popup by loading another page.</p>
                 <pre><code>N().popup("url");</code></pre>
             </td>
@@ -59,7 +59,7 @@
             <td>true</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">false로 설정 하면 기본 버튼(확인/취소 버튼) 관련 요소들을 생성하지 않습니다.</p>
+                <p lang="ko_KR">false로 설정하면 기본 버튼(확인/취소 버튼) 관련 요소들을 생성하지 않습니다.</p>
                 <p lang="en_US">If set to false, It does not create basic button(OK/Cancel buttons) related elements.</p>
             </td>
         </tr>
@@ -271,7 +271,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 팝업이 �
             <td>
                 <p lang="ko_KR">팝업의 Controller object에서 부모 페이지의 Controller object를 참조하기 위한 옵션입니다.</p>
                 <p lang="en_US">Option to refer to the Controller object of the parent page in the Controller object of the popup.</p>
-                <p lang="ko_KR">팝업 인스턴스를 생성하는 페이지의 Controller object를 opener 옵션으로 설정 하면 팝업의 Controller object의 opener 속성으로 전달 됩니다.</p>
+                <p lang="ko_KR">팝업 인스턴스를 생성하는 페이지의 Controller object를 opener 옵션으로 설정하면 팝업의 Controller object의 opener 속성으로 전달 됩니다.</p>
                 <p lang="en_US">If the Controller object of the page creating the popup instance is set as the opener option, it is passed as the opener property of the Controller object of the popup.</p>
                 <p lang="ko_KR" class="alert">url 옵션을 설정 하여 다른 페이지를 팝업 컨텐츠로 생성 했을 때만 작동 합니다.</p>
                 <p lang="en_US" class="alert">It works only when other pages are created as pop-up content by setting the url option.</p>
@@ -305,7 +305,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 팝업이 �
     // msgContext : Popup overlay element
     // msgContents : Popup element
 }</code></pre>
-                <p lang="ko_KR" class="alert">0을 return 하면 이벤트 핸들러만 실행 되고 대화 상자를 닫지 않습니다.</p>
+                <p lang="ko_KR" class="alert">0을 return하면 이벤트 핸들러만 실행 되고 대화 상자를 닫지 않습니다.</p>
                 <p lang="en_US" class="alert">If it returns 0, only the event handler is executed and the dialog box is not closed.</p>
                 <p lang="ko_KR" class="alert">button 옵션을 true로 설정 했을 때 생성 되는 확인 버튼에서 작동됩니다.</p>
                 <p lang="en_US" class="alert">It works on the Ok button created when the button option is set to true.</p>
@@ -329,7 +329,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 팝업이 �
     // msgContext : Popup overlay element
     // msgContents : Popup element
 }</code></pre>
-                <p lang="ko_KR" class="alert">0을 return 하면 이벤트 핸들러만 실행 되고 팝업을 닫지 않습니다.</p>
+                <p lang="ko_KR" class="alert">0을 return하면 이벤트 핸들러만 실행 되고 팝업을 닫지 않습니다.</p>
                 <p lang="en_US" class="alert">If it returns 0, only the event handler is executed and the popup is not closed.</p>
                 <p lang="ko_KR" class="alert">button 옵션을 true로 설정 했을 때 생성 되는 취소 버튼에서 작동됩니다.</p>
                 <p lang="en_US" class="alert">It works on the Cancel button created when the button option is set to true.</p>
@@ -544,7 +544,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 팝업이 �
 }</code></pre>
                 <p lang="ko_KR" class="alert">
                                 팝업 컨텐츠 로딩이 완료되면 팝업의 Controller object에 caller 라는 속성이 생성됩니다. 이 caller 는 이 팝업을 생성한 부모페이지의 N.popup instance입니다.<br>
-                                팝업에서 자체팝업을 닫을 때는 팝업의 Controller object에서 "this.caller.close(onCloseData);" 명령을 실행 하면 됩니다. 이 명령을 실행하면 팝업이 닫히면서 onClose 이벤트 핸들러 함수의 첫 번째 인자로 onCloseData가 전달 됩니다.</p>
+                                팝업에서 자체팝업을 닫을 때는 팝업의 Controller object에서 "this.caller.close(onCloseData);" 명령을 실행하면 됩니다. 이 명령을 실행하면 팝업이 닫히면서 onClose 이벤트 핸들러 함수의 첫 번째 인자로 onCloseData가 전달 됩니다.</p>
                 <p lang="en_US" class="alert">
                     When loading popup content is completed, a caller property is created in the Controller object of the popup. This caller is the N.popup instance of the parent page that created this popup.<br>
                     When closing a self-popup in a popup, in the Controller object of the popup, "this.caller.close(onCloseData);" just run the command. When this command is executed, the popup is closed and onCloseData is passed as the first argument of the onClose event handler function.</p>

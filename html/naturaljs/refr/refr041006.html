@@ -299,7 +299,7 @@
 
     var pagination = N(data).pagination({ // 2. N.pagination 초기화.
         context: ".pagination",
-        blockOnChangeWhenBind : true, // bind 함수를 호출할 때 onChange 이벤트를 차단하기 위한 옵션(false로 설정 하면 무한루프에 빠짐)
+        blockOnChangeWhenBind : true, // bind 함수를 호출할 때 onChange 이벤트를 차단하기 위한 옵션(false로 설정하면 무한루프에 빠짐)
         <strong>onChange: function(pageNo, selEle, selData, currPageNavInfo)</strong> {
             <strong>N(currPageNavInfo)</strong>.comm("data.json").submit(function(data){ // 7. totalCount 값이 포함된 데이터 조회.
                 <strong>pagination.bind(data[0] &amp;&amp; data[0].totalCount ? data[0].totalCount : 0)</strong>; // 8. N.pagination의 bind 메서드의 인자에 totalCount를 입력 하여 페이징 인덱스 재 생성.

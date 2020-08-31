@@ -232,7 +232,7 @@
         "e.registered.onSelect" : function(e, inputEle, selDate, isMonthonly, idx) {
             e.preventDefault();
             // 선택한 날짜가 오늘 날짜보다 크면 #isActive 요소 체크, 아니면 체크 해제.
-            //  - 입력 요소를 jQuery val 메서드로 직접 다루지 말고 반드시 바인드되어 있는 컴포넌트의 val 메서드로 값을 세팅해 주세요.
+            //  - 입력 요소를 jQuery val 메서드로 직접 다루지 말고 반드시 바인드 되어 있는 컴포넌트의 val 메서드로 값을 세팅해 주세요.
             //  - 입력 요소를 jQuery val 메서드로 직접 다루면 컴포넌트 내부 데이터셋과 동기화 되지 않습니다.
             if(N.date.diff((new Date()).formatDate("Ymd"), selDate.obj.formatDate(selDate.format)) > 0) {
                 cont["p.grid.master"].val(idx, "isActive", "Y");
