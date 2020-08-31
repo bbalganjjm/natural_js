@@ -15,7 +15,7 @@
             <td>null</td>
             <td style="text-align: center;">O</td>
             <td>
-                <p lang="ko_KR">N.alert의 메시지 대화상자가 표시 될 영역을 지정합니다.</p>
+                <p lang="ko_KR">N.alert의 메시지 대화상자가 표시될 영역을 지정합니다.</p>
                 <p lang="en_US">Specify the area where the N.alert message dialog will be displayed.</p>
                 <p lang="ko_KR">modal 옵션이 true로 설정 되었을 때 N.alert의 overlay 요소가 context로 지정한 요소만큼 가려 줍니다.</p>
                 <p lang="en_US">When the modal option is set to true, the overlay element of N.alert covers as much as the element specified by context.</p>
@@ -45,7 +45,7 @@
             <td>
                 <p lang="ko_KR">메시지의 변수를 입력 한 값으로 치환해 줍니다.</p>
                 <p lang="en_US">The variable of the message is replaced with the entered value.</p>
-                <p lang="ko_KR" class="alert">메시지에 선언 된 {index}와 같은 변수가 vars 옵션으로 설정 한 array의 index에 해당 하는 값으로 치환 됩니다.</p>
+                <p lang="ko_KR" class="alert">메시지에 선언된 {index}와 같은 변수가 vars 옵션으로 설정 한 array의 index에 해당 하는 값으로 치환 됩니다.</p>
                 <p lang="en_US" class="alert">Variables such as {index} declared in the message are replaced with the value corresponding to the index of the array set with the vars option.</p>
                 <pre><code>N(window).alert({
     msg : &quot;{0} {1}-JS.&quot;,
@@ -104,10 +104,10 @@
                 <p lang="ko_KR">메시지 대화상자의 넓이.</p>
                 <p lang="en_US">The width of the message dialog.</p>
                 <ul>
-                    <li lang="ko_KR">number 타입으로 설정할 경우 입력한 수치(px)가 요소의 넓이로 설정 됩니다.</li>
+                    <li lang="ko_KR">number 타입으로 설정할 경우 입력한 수치(px)가 요소의 넓이로 설정됩니다.</li>
                     <li lang="en_US">If set to number type, the entered value(px) is set as the element width.</li>
                     <li>
-                        <p lang="ko_KR">function 타입 으로 설정할 경우 msgContext(modal 옵션이 true 일때 화면에 덮는 요소), msgContents(메시지 컨텐츠 요소)가 인자로 전달 되고 return 된 값으로 요소의 넓이가 설정 됩니다.</p>
+                        <p lang="ko_KR">function 타입으로 설정할 경우 msgContext(modal 옵션이 true 일때 화면에 덮는 요소), msgContents(메시지 컨텐츠 요소)가 인자로 전달 되고 return된 값으로 요소의 넓이가 설정됩니다.</p>
                         <p lang="en_US">If set to function type, msgContext (the element that covers the screen when the modal option is true) and msgContents (the message content element) are passed as arguments, and the width of the element is set as the returned value.</p>
                         <pre><code>...<span lang="ko_KR">// 대화상자의 넓이를 화면에 꽉 채우기</span>
 <span lang="en_US">// Fully fill the width of the dialog on the screen.</span>
@@ -128,10 +128,10 @@ width : function(msgContext, msgContents) {
                 <p lang="ko_KR">메시지 대화상자의 타이틀 영역을 제외한 컨텐츠의 높이.</p>
                 <p lang="en_US">The height of the content, excluding the title area of ​​the message dialog.</p>
                 <ul>
-                    <li lang="ko_KR">number 타입으로 설정할 경우 입력한 수치(px)가 요소의 높이로 설정 됩니다.</li>
+                    <li lang="ko_KR">number 타입으로 설정할 경우 입력한 수치(px)가 요소의 높이로 설정됩니다.</li>
                     <li lang="en_US">When set to number type, the entered value(px) is set as the element height.</li>
                     <li>
-                        <p lang="ko_KR">function 타입 으로 설정할 경우 msgContext(modal 옵션이 true 일때 화면에 덮는 요소), msgContents(메시지 컨텐츠 요소)가 인자로 전달 되고 return 된 값으로 요소의 높이가 설정 됩니다.</p>
+                        <p lang="ko_KR">function 타입으로 설정할 경우 msgContext(modal 옵션이 true 일때 화면에 덮는 요소), msgContents(메시지 컨텐츠 요소)가 인자로 전달 되고 return된 값으로 요소의 높이가 설정됩니다.</p>
                         <p lang="en_US">If set to function type, msgContext(the element that covers the screen when the modal option is true) and msgContents(the message content element) are passed as arguments, and the height of the element is set as the returned value.</p>
                         <pre><code>...<span lang="ko_KR">// 대화상자의 높이를 화면에 꽉 채우기</span>
 <span lang="en_US">// Fully fill the height of the dialog on the screen.</span>
@@ -293,7 +293,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 메시지 �
                 <p lang="en_US">If set to true, disables browser window scrolling when scrolling with the mouse wheel over message dialog elements.</p>
                 <p lang="ko_KR">메시지 대화상자 요소가 처음이나 마지막으로 스크롤 되었을 때 브라우저 윈도우 스크롤이 위나 아래로 스크롤되는 브라우저의 기본 동작을 차단 합니다.</p>
                 <p lang="en_US">Blocks the browser's default behavior of scrolling the browser window up or down when the message dialog element is scrolled first or last.</p>
-                <p lang="ko_KR" class="alert">modal 옵션이 true로 설정 되어 있을 때만 작동 합니다.</p>
+                <p lang="ko_KR" class="alert">modal 옵션이 true로 설정되어 있을 때만 작동 합니다.</p>
                 <p lang="en_US" class="alert">Only works when modal option is set to true.</p>
             </td>
         </tr>
@@ -381,7 +381,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 메시지 �
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">메시지 대화상자가 표시 된 후에 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="ko_KR">메시지 대화상자가 표시된 후에 실행되는 이벤트 핸들러를 정의 합니다.</p>
                 <p lang="en_US">Defines an event handler that is executed after the message dialog is displayed.</p>
                 <pre lang="ko_KR"><code>onShow : function(msgContext, msgContents) {
     // this : N.alert 인스턴스
@@ -413,7 +413,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 메시지 �
     // msgContext : Message overlay element
     // msgContents : Message dialog element
 }</code></pre>
-                <p lang="ko_KR" class="alert">closeMode 옵션이 remove로 설정 된 경우 onBeforeHide 이벤트는 실행 되지 않습니다.</p>
+                <p lang="ko_KR" class="alert">closeMode 옵션이 remove로 설정된 경우 onBeforeHide 이벤트는 실행 되지 않습니다.</p>
                 <p lang="en_US" class="alert">The onBeforeHide event is not fired when the closeMode option is set to remove.</p>
             </td>
         </tr>
@@ -435,7 +435,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 메시지 �
     // msgContext : Message overlay element
     // msgContents : Message dialog element
 }</code></pre>
-                <p lang="ko_KR" class="alert">closeMode 옵션이 remove로 설정 된 경우 onHide 이벤트는 실행 되지 않습니다.</p>
+                <p lang="ko_KR" class="alert">closeMode 옵션이 remove로 설정된 경우 onHide 이벤트는 실행 되지 않습니다.</p>
                 <p lang="en_US" class="alert">The onHide event is not fired when the closeMode option is set to remove.</p>
             </td>
         </tr>
@@ -457,7 +457,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 메시지 �
     // msgContext : Message overlay element
     // msgContents : Message dialog element
 }</code></pre>
-                <p lang="ko_KR" class="alert">closeMode 옵션이 hide로 설정 된 경우 onBeforeRemove 이벤트는 실행 되지 않습니다.</p>
+                <p lang="ko_KR" class="alert">closeMode 옵션이 hide로 설정된 경우 onBeforeRemove 이벤트는 실행 되지 않습니다.</p>
                 <p lang="en_US" class="alert">The onBeforeRemove event is not fired when the closeMode option is set to hide.</p>
             </td>
         </tr>
@@ -467,7 +467,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 메시지 �
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">메시지 대화상자가 제거 된 후에 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="ko_KR">메시지 대화상자가 제거된 후에 실행되는 이벤트 핸들러를 정의 합니다.</p>
                 <p lang="en_US">Defines an event handler that is executed after the message dialog is removed.</p>
                 <pre lang="ko_KR"><code>onRemove : function(msgContext, msgContents) {
     // this : N.alert 인스턴스
@@ -479,7 +479,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 메시지 �
     // msgContext : Message overlay element
     // msgContents : Message dialog element
 }</code></pre>
-                <p lang="ko_KR" class="alert">closeMode 옵션이 hide로 설정 된 경우 onRemove 이벤트는 실행 되지 않습니다.</p>
+                <p lang="ko_KR" class="alert">closeMode 옵션이 hide로 설정된 경우 onRemove 이벤트는 실행 되지 않습니다.</p>
                 <p lang="en_US" class="alert">The closeMode event is not fired when the closeMode option is set to hide.</p>
             </td>
         </tr>

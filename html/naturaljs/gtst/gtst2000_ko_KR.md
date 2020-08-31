@@ -64,11 +64,11 @@ https://github.com/bbalganjjm/natural_js.git
 
 ![img-3][]
 
-2.4. Natural-JS의 Source Git Repository 접속 정보를 입력하는 화면입니다. 처음에 복사해 둔 URL에 의해 값들이 자동으로 입력되어 있을 겁니다. 입력이 되어 있지 않으면
+2.4. Natural-JS의 Source Git Repository 접속 정보를 입력하는 화면입니다. 처음에 복사해 둔 URL에 의해 값들이 자동으로 입력되어 있을 겁니다. 입력이되어 있지 않으면
 ```md
 https://github.com/bbalganjjm/natural_js.git
 ```
-를 직접 입력 합니다.
+를 직접 입력합니다.
 입력 항목 중 `User`와 `Password` 는 Github 로그인 정보를 입력하면 됩니다. 인증 정보를 저장하려면 `Store in Secure Store`를 체크하고 `Finish` 버튼을 클릭합니다.
 
 ![img-4][]

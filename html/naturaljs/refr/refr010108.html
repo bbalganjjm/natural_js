@@ -31,7 +31,7 @@
             <td>string</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p lang="ko_KR">기준 날짜를 8자리 날짜 문자열(YYYYmmdd)로 입력 합니다.</p>
+                <p lang="ko_KR">기준 날짜를 8자리 날짜 문자열(YYYYmmdd)로 입력합니다.</p>
                 <p lang="en_US">Inputs the base date as an 8-digit date string (YYYYmmdd).</p>
             </td>
         </tr>
@@ -41,7 +41,7 @@
             <td>string</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p lang="ko_KR">계산할 날짜를 8자리 날짜 문자열(YYYYmmdd)로 입력 합니다.</p>
+                <p lang="ko_KR">계산할 날짜를 8자리 날짜 문자열(YYYYmmdd)로 입력합니다.</p>
                 <p lang="en_US">Inputs the date to be calculated as an 8-digit date string (YYYYmmdd).</p>
             </td>
         </tr>
@@ -51,7 +51,7 @@
             <td style="text-align: center;">N/A</td>
             <td>array</td>
             <td>
-                <p lang="ko_KR">입력 된 날짜 문자열과 입력된 날짜 서식을 기준으로 array 타입의 날짜 객체[년(number|string), 월(number|string), 일(number|string)]를 생성 합니다.</p>
+                <p lang="ko_KR">입력된 날짜 문자열과 입력된 날짜 서식을 기준으로 array 타입의 날짜 객체[년(number|string), 월(number|string), 일(number|string)]를 생성합니다.</p>
                 <p lang="en_US">Creates an array type date object[year(number|string), month(number|string), day(number|string)] based on the input date string and input date format.</p>
             </td>
         </tr>
@@ -61,7 +61,7 @@
             <td>string</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p lang="ko_KR">날짜 문자열을 입력 합니다.</p>
+                <p lang="ko_KR">날짜 문자열을 입력합니다.</p>
                 <p lang="en_US">Inputs the date string.</p>
             </td>
         </tr>
@@ -107,7 +107,7 @@
             <td style="text-align: center;">N/A</td>
             <td>string</td>
             <td>
-                <p lang="ko_KR">입력 된 날짜/시간 문자열을 date 객체로 변환하고 객체의 속성에 저장하여 반환합니다. 반환되는 객체의 속성은 다음과 같습니다.</p>
+                <p lang="ko_KR">입력된 날짜/시간 문자열을 date 객체로 변환하고 객체의 속성에 저장하여 반환합니다. 반환되는 객체의 속성은 다음과 같습니다.</p>
                 <p lang="en_US">Converts the input date/time string to a date object and stores it in the object's properties to return. The properties of the returned object are:</p>
                 <pre><code>{
     obj : date object,
@@ -121,7 +121,7 @@
             <td>string</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p lang="ko_KR">날짜 + 시간 문자열을 입력 합니다.</p>
+                <p lang="ko_KR">날짜 + 시간 문자열을 입력합니다.</p>
                 <p lang="en_US">Inputs the date + time string.</p>
                 <ul>
                     <li>"19991231" : "1999-12-31 00:00:00"</li>
@@ -163,7 +163,7 @@
                     <li>예) "12311999" : "mdY"</li>
                     <li>예) "19991231120159" : "YmdHis"</li>
                 </ul>
-                <p lang="ko_KR" class="alert">format 인자를 입력하지 않으면 입력한 날짜 문자열의 길이에 따라 다음과 같이 자동으로 설정 됩니다.</p>
+                <p lang="ko_KR" class="alert">format 인자를 입력하지 않으면 입력한 날짜 문자열의 길이에 따라 다음과 같이 자동으로 설정됩니다.</p>
                 <p lang="en_US" class="alert">If the format argument is not input, it is automatically set as follows according to the length of the input date string.</p>
                 <ul lang="ko_KR">
                     <li>4자리 : "Y"</li>
@@ -181,7 +181,7 @@
                     <li>12-digit : "Y-m-d H:i"</li>
                     <li>14-digit : "Y-m-d H:i:s"</li>
                 </ul>
-                <p lang="ko_KR" class="alert">대쉬(-), 콜론(:) 등의 날짜와 시간을 구분하는 문자는 <a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a>의 N.context.attr("data").formatter.date 오브젝트의 함수들로 정의되어 있습니다.
+                <p lang="ko_KR" class="alert">대시(-), 콜론(:) 등의 날짜와 시간을 구분하는 문자는 <a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a>의 N.context.attr("data").formatter.date 오브젝트의 함수들로 정의되어 있습니다.
                     날짜/시간 구분 문자는 해당 함수의 return 문자열로 변경할 수 있습니다.</p>
                 <p lang="en_US" class="alert">Characters that separate date and time, such as dash(-) and colon(:), are defined as functions of N.context.attr("data").formatter.date object of <a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a>.
                     The date/time separator can be changed to the return string of the corresponding function.</p>
@@ -193,7 +193,7 @@
             <td style="text-align: center;">N/A</td>
             <td>array</td>
             <td>
-                <p lang="ko_KR">입력된 날짜 + 시간 문자열을 입력된 날짜서식을 기준으로 서식화(format) 합니다.</p>
+                <p lang="ko_KR">입력된 날짜 + 시간 문자열을 입력된 날짜 서식을 기준으로 서식화(format) 합니다.</p>
                 <p lang="en_US">Formats the input date + time string based on the input date format.</p>
             </td>
         </tr>
@@ -203,7 +203,7 @@
             <td>string</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p lang="ko_KR">날짜 + 시간 문자열을 입력 합니다.</p>
+                <p lang="ko_KR">날짜 + 시간 문자열을 입력합니다.</p>
                 <p lang="en_US">Inputs the date + time string.</p>
             </td>
         </tr>
@@ -236,7 +236,7 @@ N.date.format("19991231120159", "Y/m/d H:i:s") // "1999/12/31 12:01:59"
 N.date.format("19991231120159", "Y.m.d H:i") // "1999.12.31 12:01"
 N.date.format("19991231120159", N.context.attr("data").formatter.date.YmdHis()) // "1999-12-31 12:01:59"
 </code></pre>
-                <p lang="ko_KR" class="alert">대쉬(-), 콜론(:) 등의 날짜와 시간을 구분하는 문자는 <a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a>의 N.context.attr("data").formatter.date 오브젝트의 함수들로 정의되어 있습니다.
+                <p lang="ko_KR" class="alert">대시(-), 콜론(:) 등의 날짜와 시간을 구분하는 문자는 <a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a>의 N.context.attr("data").formatter.date 오브젝트의 함수들로 정의되어 있습니다.
                     날짜/시간 구분 문자는 해당 함수의 return 문자열로 변경할 수 있습니다.</p>
                 <p lang="en_US" class="alert">Characters that separate date and time, such as dash(-) and colon(:), are defined as functions of N.context.attr("data").formatter.date object of <a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a>.
                     The date/time separator can be changed to the return string of the corresponding function.</p>
@@ -260,7 +260,7 @@ N.date.format("19991231120159", N.context.attr("data").formatter.date.YmdHis()) 
             <td>date object</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p lang="ko_KR">Timestamp로 변환할 date 객체를 입력 합니다.</p>
+                <p lang="ko_KR">Timestamp로 변환할 date 객체를 입력합니다.</p>
                 <p lang="en_US">Inputs the date object to be converted to Timestamp.</p>
             </td>
         </tr>
@@ -282,7 +282,7 @@ N.date.format("19991231120159", N.context.attr("data").formatter.date.YmdHis()) 
             <td>number</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p lang="ko_KR">date 객체로 변환할 Timestamp를 입력 합니다.</p>
+                <p lang="ko_KR">date 객체로 변환할 Timestamp를 입력합니다.</p>
                 <p lang="en_US">Inputs the Timestamp to be converted to date object.</p>
             </td>
         </tr>
@@ -302,7 +302,7 @@ N.date.format("19991231120159", N.context.attr("data").formatter.date.YmdHis()) 
             <td>number</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p lang="ko_KR">기준 연도를 입력 합니다.</p>
+                <p lang="ko_KR">기준 연도를 입력합니다.</p>
                 <p lang="en_US">Inputs the base year.</p>
             </td>
         </tr>
@@ -312,7 +312,7 @@ N.date.format("19991231120159", N.context.attr("data").formatter.date.YmdHis()) 
             <td>number</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p lang="ko_KR">기준 월을 입력 합니다.</p>
+                <p lang="ko_KR">기준 월을 입력합니다.</p>
                 <p lang="en_US">Inputs the base month.</p>
             </td>
         </tr>

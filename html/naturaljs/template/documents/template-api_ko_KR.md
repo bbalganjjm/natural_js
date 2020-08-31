@@ -21,7 +21,7 @@ Natural-TEMPLATE 은 Natural-JS 기반 웹 어플리케이션 개발을 정형�
         * [3. "e."으로 시작(이벤트 바인딩)](#3e)
 
 #설치
-1. [Github](https://github.com/bbalganjjm/natural_js/tree/master/dist) 에서 natural.template.min.js 파일을 다운로드 받아 다음과 같이 라이브러리를 로딩 합니다.
+1. [Github](https://github.com/bbalganjjm/natural_js/tree/master/dist)에서 natural.template.min.js 파일을 다운로드 받아 다음과 같이 라이브러리를 로딩 합니다.
 
 ```
 <script type="text/javascript" src="js/natural_js/natural.template.min.js" charset="utf-8"></script>
@@ -100,9 +100,9 @@ Natural-UI의 컴포넌트들을 자동으로 초기 화해 줍니다.
 }
 ```
 
-초기화가 완료 되면 `p.{컴포넌트명}.{요소id}` 속성값으로 지정한 컴포넌트 옵션 객체는 생성된 컴포넌트의 인스턴스로 대체됩니다.
+초기화가 완료되면 `p.{컴포넌트명}.{요소id}` 속성 값으로 지정한 컴포넌트 옵션 객체는 생성된 컴포넌트의 인스턴스로 대체됩니다.
 
-> `p.select.{id}` 선언은 페이지의 view에서 해당 id 속성값을 갖고 있는 모든 선택요소에 Select(N.select) 컴포넌트를 초기화 하고 생성된 컴포넌트 인스턴스들을 Array에 저장한다음 속성값을 대체합니다. Select 컴포넌트의 인스턴스를 사용할 때는 `cont["p.select.{id}"][1]`와 같이 사용할 인스턴스를 배열에서 꺼내어 사용해야합니다.
+> `p.select.{id}` 선언은 페이지의 view에서 해당 id 속성값을 갖고 있는 모든 선택요소에 Select(N.select) 컴포넌트를 초기화하고 생성된 컴포넌트 인스턴스들을 Array에 저장한다음 속성값을 대체합니다. Select 컴포넌트의 인스턴스를 사용할 때는 `cont["p.select.{id}"][1]`와 같이 사용할 인스턴스를 배열에서 꺼내어 사용해야합니다.
 
 > 컴포넌트 초기화 옵션은 `cont["p.{컴포넌트명}.{요소id}"].options`로 접근할 수 있으나 옵션의 직접사용은 권장하지 않습니다.
 
@@ -135,12 +135,12 @@ var cont = N(".page-id").cont({
 
 `context : ".detail"` => `context : N(".detail", cont.view)`
 
->**N.tab과 N.popup 컴포넌트의 `onOpen 옵션의 함수명 문자열은 반드시 onOpen 으로 시작("onOpen", "onOpenABC" 등)`해야 합니다. 그렇지 않으면 Controller object의 init 함수보다 onOpen 함수가 먼저 실행 되어서 컴포넌트 인스턴스등을 참조하지 못할 수 있습니다.**
+>**N.tab과 N.popup 컴포넌트의 `onOpen 옵션의 함수명 문자열은 반드시 onOpen으로 시작("onOpen", "onOpenABC" 등)`해야 합니다. 그렇지 않으면 Controller object의 init 함수보다 onOpen 함수가 먼저 실행 되어서 컴포넌트 인스턴스등을 참조하지 못할 수 있습니다.**
 
 >**N.tab 컴포넌트의 onActive 옵션은 주의해서 사용바랍니다. init 함수의 지연 실행에 대한 대책이 아직 없어서 onActive가 init 보다 먼저 실행됩니다. 비슷한 안정적인 기능을 원한다면 onOpen을 사용해 주세요.**
 
-컴포넌트 옵션은 Natural-UI의 컴포넌트별 기본 옵션 외에 해당 컴포넌트의 용도를 지정 하거나 초기화 후 바로 실행할 함수 등을 지정할 수 있는 옵션이 더 추가 되어 있습니다.
-Natural-TEMPLATE에서만 사용 가능한 컴포넌트 별 추가 옵션들은 다음과 같습니다.
+컴포넌트 옵션은 Natural-UI의 컴포넌트별 기본 옵션 외에 해당 컴포넌트의 용도를 지정 하거나 초기화 후 바로 실행할 함수 등을 지정할 수 있는 옵션이 더 추가되어 있습니다.
+Natural-TEMPLATE에서만 사용가능한 컴포넌트 별 추가 옵션들은 다음과 같습니다.
 
 ###1.1. N.select - 공통코드 데이터 바인딩
 
@@ -151,7 +151,7 @@ Natural-TEMPLATE에서만 사용 가능한 컴포넌트 별 추가 옵션들은 
 | p.select.{id} | - | - | - | - | N.select 컴포넌트를 초기화 합니다. |
 | - | code | string | O | 공통코드 분류코드 | 바인딩할 코드목록의 분류 코드값을 설정 합니다. |
 | - | filter | function | | 데이터 필터 | 공통코드 데이터를 필터링하여 바인딩 합니다. |
-| - | selected | string | | 기본 선택값 | 컴포넌트 초기화 시 기본으로 선택 될 선택지의 값을 설정합니다. |
+| - | selected | string | | 기본 선택값 | 컴포넌트 초기화 시 기본으로 선택될 선택지의 값을 설정합니다. |
 
 ```
 ...
@@ -174,7 +174,7 @@ Natural-TEMPLATE에서만 사용 가능한 컴포넌트 별 추가 옵션들은 
 ```
 ...
 "filter" : function (data) {
-    // data(원래 데이터)를 가공하여 return 하면 가공 된 데이터가 바인딩 됩니다.
+    // data(원래 데이터)를 가공하여 return 하면 가공된 데이터가 바인딩 됩니다.
     return N(N.array.deduplicate(data, "age")).datasort("age"); // 중복 제거 후 정렬.
 }
 ...
@@ -186,10 +186,10 @@ Natural-TEMPLATE에서만 사용 가능한 컴포넌트 별 추가 옵션들은 
 | p.select.{id} | - | - | - | - | N.select 컴포넌트를 초기화 합니다. |
 | - | comm | string | | 목록을 조회할 Communicator(N.comm) | Controller object에 선언한 "c.{actionName}"을 지정합니다. |
 | - | data | array[object] | | 바인딩할 데이터 | comm 옵션을 지정하지 않고 data 옵션으로 [{}, {}]와 같은 데이터를 직접 생성 하여 바인딩할 수 있습니다. |
-| - | key | string | O | 선택 요소의 명칭에 바인드 될 데이터 속성 명 | 조회한 데이터 객체에서 바인딩할 프로퍼티명을 설정합니다. |
-| - | val | string | O | 선택 요소의 값에 바인드 될 데이터 속성 명 | 조회한 데이터 객체에서 바인딩할 프로퍼티명을 설정합니다. |
+| - | key | string | O | 선택 요소의 명칭에 바인드될 데이터 속성 명 | 조회한 데이터 객체에서 바인딩할 프로퍼티명을 설정합니다. |
+| - | val | string | O | 선택 요소의 값에 바인드될 데이터 속성 명 | 조회한 데이터 객체에서 바인딩할 프로퍼티명을 설정합니다. |
 | - | filter | function | | 데이터 필터 | 공통코드 데이터를 필터링하여 바인딩 합니다. |
-| - | selected | string | | 기본 선택값 | 컴포넌트 초기화 시 기본으로 선택 될 선택지의 값을 설정합니다. |
+| - | selected | string | | 기본 선택값 | 컴포넌트 초기화 시 기본으로 선택될 선택지의 값을 설정합니다. |
 
 ```
 ...
@@ -219,7 +219,7 @@ Natural-TEMPLATE에서만 사용 가능한 컴포넌트 별 추가 옵션들은 
 | 속성 | 옵션명 | 타입 | 필수여부 | 속성값 | 설명 |
 | :--: | :--: | :--: | :--: | :--: | -- |
 | p.form.{id} | - | - | - | - | N.form 컴포넌트를 초기화 합니다. |
-| - | usage | string or object | O | Form의 용도 | "search-box" 문자열을 입력하면 지정한 영역을 검색박스 Form 으로 생성해 줍니다. object 타입으로 좀 더 상세한 옵션을 지정할 수 있습니다.(하단 설명 참고). |
+| - | usage | string or object | O | Form의 용도 | "search-box" 문자열을 입력하면 지정한 영역을 검색박스 Form으로 생성해 줍니다. object 타입으로 좀 더 상세한 옵션을 지정할 수 있습니다.(하단 설명 참고). |
 
  * 일반 폼 예제
 ```
@@ -246,15 +246,15 @@ Natural-TEMPLATE에서만 사용 가능한 컴포넌트 별 추가 옵션들은 
 
 좀더 상세한 옵션을 설정하려면 다음예제와 같이 "search-box" 옵션을 object로 지정 하면 됩니다.
 
->"usage" 옵션이 "search-box"로 설정된 Form 은 입력 요소에 Enter 키로 조회하는 이벤트 핸들러가 자동으로 바인딩 됩니다. 이 Enter 키 이벤트 핸들러의 실행을 차단하고 다른 이벤트 핸들러를 등록하려면 "search-box" 옵션 객체의 "events" 속성에 이벤트 핸들러를 array 객체안에 필요한 만큼 정의해 주면 됩니다.
+>"usage" 옵션이 "search-box"로 설정된 Form 은 입력 요소에 Enter 키로 조회하는 이벤트 핸들러가 자동으로 바인딩 됩니다. 이 Enter 키 이벤트 핸들러의 실행을 차단하고 다른 이벤트 핸들러를 등록하려면 "search-box" 옵션 객체의 "events" 속성에 이벤트 핸들러를 array 객체 안에 필요한 만큼 정의해 주면 됩니다.
 
 ```
 ...
 "p.form.search" : {
     "usage" : {
         "search-box" : {
-            "defaultButton" : ".btn-search", // 엔터키를 눌렀을때 클릭 될 버튼 요소를 선택하는 selector 문자열
-            "events" : [{ // 엔터키 이벤트를 차단하고 입력 요소에 이벤트를 직접 지정 하고 싶을 때 추가 합니다.
+            "defaultButton" : ".btn-search", // 엔터키를 눌렀을때 클릭될 버튼 요소를 선택하는 selector 문자열
+            "events" : [{ // 엔터키 이벤트를 차단하고 입력 요소에 이벤트를 직접 지정하고 싶을 때 추가 합니다.
                 "event" : "focusin", // 이벤트 명
                 "target" : "#name", // 검색박스 안의 대상 요소를 선택하는 selector 문자열
                 "handler" : function(e) { // 이벤트 핸들러
@@ -323,7 +323,7 @@ Natural-TEMPLATE에서만 사용 가능한 컴포넌트 별 추가 옵션들은 
 ```
 
 ##2. "c."으로 시작 - Communicator(N.comm) 선언
-서버와 통신하는 모든[Communicators(N.comm)](#cmVmcjAyMDMlMjRDb21tdW5pY2F0b3IkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDIwMy5odG1s)를 Controller object의 멤버변수로 정의할 수 있습니다. Communicator를 미리 선언해 놓으면 데이터의 흐름을 한눈에 확인할 수 있고 선언된 Communicator들에 AOP를 적용할 수 있습니다.
+서버와 통신하는 모든[Communicators(N.comm)](#cmVmcjAyMDMlMjRDb21tdW5pY2F0b3IkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDIwMy5odG1s)를 Controller object의 멤버 변수로 정의할 수 있습니다. Communicator를 미리 선언해 놓으면 데이터의 흐름을 한눈에 확인할 수 있고 선언된 Communicator들에 AOP를 적용할 수 있습니다.
 N.comm의 초기화 속성명은 다음과 같이 조합하여 사용할 수 있습니다.
 
 ```
@@ -362,7 +362,7 @@ N.comm의 선언은 오브젝트나 값을 직접 대입하는것이 아닌 함�
 ##3. "e."으로 시작 - 이벤트 바인딩
 페이지의 view 요소 안에 있는 요소들에 이벤트 바인딩을 선언할 수 있습니다.
 
->a, button, input[type=button] 요소에 이벤트를 정의 하면 N.button 컴포넌트가 자동으로 초기화 되어 버튼으로 생성됩니다.
+>a, button, input[type=button] 요소에 이벤트를 정의 하면 N.button 컴포넌트가 자동으로 초기화되어 버튼으로 생성됩니다.
 
 이벤트의 초기화 속성명은 다음과 같이 조합하여 사용할 수 있습니다.
 
@@ -382,21 +382,21 @@ N.comm의 선언은 오브젝트나 값을 직접 대입하는것이 아닌 함�
     }
 }
 ```
-id 이외의 속성을 가진 요소를 선택할 때는 target 속성에 jQuery selector 문자열을 지정 하면 됩니다. 이때 셀렉터의 context를 view 요소로 지정하지 않아도 view 요소가 context 인자로 자동으로 지정 됩니다.
+id 이외의 속성을 가진 요소를 선택할 때는 target 속성에 jQuery selector 문자열을 지정 하면 됩니다. 이때 셀렉터의 context를 view 요소로 지정하지 않아도 view 요소가 context 인자로 자동으로 지정됩니다.
 
-이벤트 바인딩이 완료 되면 `e.{요소id}.{이벤트명}` 속성값으로 정의한 이벤트 핸들러 함수는 대상 요소(jQuery object)로 대체됩니다.
+이벤트 바인딩이 완료되면 `e.{요소id}.{이벤트명}` 속성 값으로 정의한 이벤트 핸들러 함수는 대상 요소(jQuery object)로 대체됩니다.
 
 ```
 ...
 var cont = N(".page-id").cont({
-    "e.id.click" : function(e) { // 이벤트 바인딩이 완료 되면 이 이벤트 핸들러 함수는 대상 요소(jQuery object)로 대체됩니다.
+    "e.id.click" : function(e) { // 이벤트 바인딩이 완료되면 이 이벤트 핸들러 함수는 대상 요소(jQuery object)로 대체됩니다.
         e.preventDefault();
 
         cont["p.popup.dept"].open();
     },
     "e.id.click" : {
         target : ".div #id",
-        handler : function(e) { // 이벤트 바인딩이 완료 되면 이 이벤트 핸들러 함수는 대상 요소(jQuery object)로 대체됩니다.
+        handler : function(e) { // 이벤트 바인딩이 완료되면 이 이벤트 핸들러 함수는 대상 요소(jQuery object)로 대체됩니다.
             e.preventDefault();
 
             cont["p.popup.company"].open();
@@ -425,7 +425,7 @@ var cont = N(".page-id").cont({
 
 N.grid 나 N.list 컴포넌트 안의 요소를 지정 하면 이벤트 핸들러 함수의 마지막 인자에 `해당 요소가 포함된 행의 인덱스를 반환`해 줍니다.
 
->rowHandler나 rowHandlerBeforeBind 에서 행마다 이벤트를 바인딩하면 브라우저 Heap 메모리 사용량이 이벤트 수 X 행 수 만큼 늘어나 웹 어플리케이션 성능이 저하 됩니다. 아래 방법(이벤트 위임 적용)을 사용하면 이벤트에 의한 메모리 사용량을 크게 줄일 수 있습니다.
+>rowHandler나 rowHandlerBeforeBind에서 행마다 이벤트를 바인딩하면 브라우저 Heap 메모리 사용량이 이벤트 수 X 행 수 만큼 늘어나 웹 어플리케이션 성능이 저하 됩니다. 아래 방법(이벤트 위임 적용)을 사용하면 이벤트에 의한 메모리 사용량을 크게 줄일 수 있습니다.
 
 ```
 ...
@@ -439,12 +439,12 @@ var cont = N(".page-id").cont({
 ...
 ```
 
-> 아래와 같이 target 속성으로 요소를 지정하면 Selector의 context가 view 요소가 아닌 N.grid의 행 요소(tbody)로 설정 됩니다.
+> 아래와 같이 target 속성으로 요소를 지정하면 Selector의 context가 view 요소가 아닌 N.grid의 행 요소(tbody)로 설정됩니다.
 
 ```
 ...
 "e.col01.click" : {
-    target : ".col01", // Selector의 context가 view 요소가 아닌 N.grid의 행 요소(tbody)로 설정 됩니다.
+    target : ".col01", // Selector의 context가 view 요소가 아닌 N.grid의 행 요소(tbody)로 설정됩니다.
     handler : function(e, idx) {
         // TODO
     }
@@ -452,7 +452,7 @@ var cont = N(".page-id").cont({
 ...
 ```
 
->Natural-JS는 내부 데이터와 입력 된 데이터를 동기화 하기 위해서 select 요소는 change 이벤트를, radio, checkbox 요소는 click 이벤트를, 그외 text 입력 요소(text, textarea, number등)는 focusout 이벤트를 사용 합니다. 컴포넌트의 내부 데이터를 가져올 때는 반드시 위와같은 이벤트명으로 바인딩해 줘야 합니다. 그렇지 않으면 변경되기 이전의 데이터가 반환됩니다.
+>Natural-JS는 내부 데이터와 입력된 데이터를 동기화 하기 위해서 select 요소는 change 이벤트를, radio, checkbox 요소는 click 이벤트를, 그외 text 입력 요소(text, textarea, number등)는 focusout 이벤트를 사용합니다. 컴포넌트의 내부 데이터를 가져올 때는 반드시 위와같은 이벤트명으로 바인딩해 줘야 합니다. 그렇지 않으면 변경되기 이전의 데이터가 반환됩니다.
 
 ```
 ...

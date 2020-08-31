@@ -19,7 +19,7 @@
             <td>undefined</td>
             <td style="text-align: center;">O</td>
             <td>
-                <p lang="ko_KR">advisor가 적용 될 pointcut을 정의 합니다.</p>
+                <p lang="ko_KR">advisor가 적용될 pointcut을 정의 합니다.</p>
                 <p lang="en_US">Define pointcut to which advisor will be applied.</p>
                 <p lang="ko_KR">Controller object의 함수명을 대상으로 지정합니다.</p>
                 <p lang="en_US">Specifies the function name of the Controller object.</p>
@@ -34,9 +34,9 @@
 <pre><code>...
 "pointcut" : "^init$"
 ...</code></pre>
-                <p lang="ko_KR">위와 같이 pointcut의 값이 객체가 아니고 regexp 문자열인 경우 내장 된 "regexp" pointcut을 기본값으로 사용 합니다.</p>
+                <p lang="ko_KR">위와 같이 pointcut의 값이 객체가 아니고 regexp 문자열인 경우 내장된 "regexp" pointcut을 기본값으로 사용합니다.</p>
                 <p lang="en_US">As above, if the value of pointcut is not an object but a regexp string, the built-in "regexp" pointcut is used as the default.</p>
-                <p lang="ko_KR">pointcut param 속성 값 앞에 콜론(:) 으로 구분하여 view 요소를 식별할 수 있는 jQuery selector 구문을 입력하면 선택된 페이지만 적용 됩니다.</p>
+                <p lang="ko_KR">pointcut param 속성 값 앞에 콜론(:)으로 구분하여 view 요소를 식별할 수 있는 jQuery selector 구문을 입력하면 선택된 페이지만 적용 됩니다.</p>
                 <p lang="en_US">If you enter the jQuery selector syntax to identify the view element by separating it with a colon(:) before the pointcut param attribute value, only the selected page is applied.</p>
 <pre><code>...
 "pointcut" : ".page01,#page02,.page03:^init$"
@@ -52,13 +52,13 @@
                 <p lang="ko_KR">advisor의 실행 시점을 설정 합니다.</p>
                 <p lang="en_US">Sets when to execute the advisor.</p>
                 <ul>
-                    <li lang="ko_KR">before : pointcut 으로 지정한 함수가 실행되기 전에 실행됩니다.</li>
+                    <li lang="ko_KR">before : pointcut으로 지정한 함수가 실행되기 전에 실행됩니다.</li>
                     <li lang="en_US">before : Execute before executing the function specified in the pointcut.</li>
-                    <li lang="ko_KR">after : pointcut 으로 지정한 함수가 실행 된 후에 실행됩니다. pointcut 으로 지정한 함수의 반환값이 함께 전달 됩니다.</li>
+                    <li lang="ko_KR">after : pointcut으로 지정한 함수가 실행된 후에 실행됩니다. pointcut으로 지정한 함수의 반환값이 함께 전달 됩니다.</li>
                     <li lang="en_US">after : Execute after executing the function specified in the pointcut. The return value of the function specified by pointcut is also passed.</li>
-                    <li lang="ko_KR">around : pointcut 으로 지정한 함수를 실행할 수 있는 joinPoint가 인자로 전달 됩니다.</li>
+                    <li lang="ko_KR">around : pointcut으로 지정한 함수를 실행할 수 있는 joinPoint가 인자로 전달 됩니다.</li>
                     <li lang="en_US">around : Passed as an argument the joinPoint that can execute the function specified in the pointcut.</li>
-                    <li lang="ko_KR">error : pointcut 으로 지정한 함수에서 예외가 발생 했을 때 실행됩니다.</li>
+                    <li lang="ko_KR">error : pointcut으로 지정한 함수에서 예외가 발생 했을 때 실행됩니다.</li>
                     <li lang="en_US">error : It is executed when an exception occurs in the function specified in the pointcut.</li>
                 </ul>
         </tr>
@@ -86,7 +86,7 @@
     "pointcut" : "^init$",
     "adviceType" : "before",
     "fn" : function(cont, fnChain, args) {
-        // 페이지가 로딩 된 후 init 함수가 호출 되기 전에 실행됩니다.
+        // 페이지가 로딩된 후 init 함수가 호출 되기 전에 실행됩니다.
     }
 }]
 ...</code></pre>
@@ -114,7 +114,7 @@
     "pointcut" : "^init$",
     "adviceType" : "after",
     "fn" : function(cont, fnChain, args, result) {
-        // 페이지가 로딩 된 후 init 함수가 호출 된 후에 실행됩니다.
+        // 페이지가 로딩된 후 init 함수가 호출된 후에 실행됩니다.
     }
 }]
 ...</code></pre>
@@ -144,7 +144,7 @@
     "pointcut" : "^init$",
     "adviceType" : "around",
     "fn" : function(cont, fnChain, args, joinPoint) {
-        // 페이지가 로딩 된 후 init 함수가 호출 되기 전에 실행됩니다.
+        // 페이지가 로딩된 후 init 함수가 호출 되기 전에 실행됩니다.
 
         // before
         var result = joinPoint.proceed();

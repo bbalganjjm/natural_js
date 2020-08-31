@@ -5,10 +5,10 @@
 
 먼저 다음 중 한 가지 방법으로 Natural-JS 라이브러리 파일들을 다운로드 하세요.
 
-1.  [GitHub](https://github.com/bbalganjjm/natural_js) 에서 직접 다운로드
+1.  [GitHub](https://github.com/bbalganjjm/natural_js)에서 직접 다운로드
 2.  Bower : bower install natural_js
 
-다운로드 된 파일 들 중 Natural-JS를 구동하기 위한 필수 라이브러리 파일들은 다음과 같습니다.
+다운로드된 파일 들 중 Natural-JS를 구동하기 위한 필수 라이브러리 파일들은 다음과 같습니다.
 
 1.  **jquery-1.12.4.min.js** - Natural-JS는 jQuery를 기반으로 동작 하므로 반드시 임포트해야합니다.
 2.  **natural.ui.css** - Natural-UI 디자인과 관련된 스타일시트 파일입니다.
@@ -24,7 +24,7 @@
 <script type="text/javascript" src="js/natural_js/natural.config.js" charset="utf-8"></script>
 ```
 
-CORE, ARCHITECTURE, DATA, UI, UI.Shell 전체를 사용하기 원한다면 natural.js.min.js를 임포트(Import) 하고 각 패키지 별로 따로 사용하기 원한다면 따로 임포트 하면 됩니다.
+CORE, ARCHITECTURE, DATA, UI, UI.Shell 전체를 사용하기 원한다면 natural.js.min.js를 임포트(Import)하고 각 패키지 별로 따로 사용하기 원한다면 따로 임포트 하면 됩니다.
 
 각 패키지 별 의존 관계는 다음과 같습니다.
 
@@ -58,14 +58,14 @@ N.context.attr("ui", {
 
 [http://www.json.org/json-ko.html](http://www.json.org/json-ko.html)
 
-Natrual-JS 에서 JSON 은 아주 중요 합니다. 서버와 송수신하는 데이터 타입이 JSON 형태의 문자열이고 컴포넌트에 바인드 되는 데이터도 JSON 객체들로 구성된 배열 객체입니다.
+Natrual-JS에서 JSON 은 아주 중요 합니다. 서버와 송수신하는 데이터 타입이 JSON 형태의 문자열이고 컴포넌트에 바인드 되는 데이터도 JSON 객체들로 구성된 배열 객체입니다.
 
-다시 본론으로... Natural-JS의 환경설정값은 Context(N.context) 객체에 저장됩니다. 환경설정값중 위 구문에 해당하는 N.context.attr("architecture").page.context 값은 아주 중요한 값입니다. 이 값은 Natural-JS의 컴포넌트 요소들이 적재 될 컨테이너 요소를 jQuery Selector 문자열로 지정하면 됩니다. 쉽게말해 페이지 컨텐츠들을 표시할 동적으로 변하지 않는 박스 요소를 지정 하면 됩니다. 더불어, N.context.attr("ui").alert.context 값에 N.alert HTML 요소를 저장하는 컨테이너 요소의 selector를 지정해 주세요. 보통 N.context.attr("architecture").page.context 값과 같은 요소를 지정하면 됩니다. Tab(N.tab) 이나 Popup(N.popup), Datepicker(N.datepicker)등 Natural-UI에서 지원하는 컴포넌트들의 자원이 여기(N.context.attr...context)에서 지정한 영역에 생성되고 페이지가 전환 될 때 이 영역에 다시 덮어 씌움으로서 브라우저의 자원을 반환하게 됩니다. 페이지 Redirect를 하지 않는 Single Page Web Application을 개발할 때 브라우저 리소스를 따로 관리 하지 않아도 되어서 편리 하겠죠? 그 외 환경설정 값들은 [Config](#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s) 메뉴의 내용을 참고해 주세요.
+다시 본론으로... Natural-JS의 환경설정값은 Context(N.context) 객체에 저장됩니다. 환경설정값중 위 구문에 해당하는 N.context.attr("architecture").page.context 값은 아주 중요한 값입니다. 이 값은 Natural-JS의 컴포넌트 요소들이 적재될 컨테이너 요소를 jQuery Selector 문자열로 지정하면 됩니다. 쉽게말해 페이지 컨텐츠들을 표시할 동적으로 변하지 않는 박스 요소를 지정 하면 됩니다. 더불어, N.context.attr("ui").alert.context 값에 N.alert HTML 요소를 저장하는 컨테이너 요소의 selector를 지정해 주세요. 보통 N.context.attr("architecture").page.context 값과 같은 요소를 지정하면 됩니다. Tab(N.tab)이나 Popup(N.popup), Datepicker(N.datepicker)등 Natural-UI에서 지원하는 컴포넌트들의 자원이 여기(N.context.attr...context)에서 지정한 영역에 생성되고 페이지가 전환될 때 이 영역에 다시 덮어 씌움으로서 브라우저의 자원을 반환하게 됩니다. 페이지 Redirect를 하지 않는 Single Page Web Application을 개발할 때 브라우저 리소스를 따로 관리 하지 않아도 되어서 편리 하겠죠? 그 외 환경설정 값들은 [Config](#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s) 메뉴의 내용을 참고해 주세요.
 
 <p class="alert"><a href="#cmVmcjA1MDIlMjREb2N1bWVudHMkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDUwMi5odG1s">Documents</a>(N.docs) 컴포넌트를 사용하는 경우에는 지정할 필요가 없습니다.</p>
 <p class="alert">SPA(Single Page Application)가 아니면 "body"로 설정해 주세요.</p>
 
-<a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a> 에는 대부분 UI 컴포넌트들의 전역 설정값들이 지정 되어 있고 모든 컴포넌트들은 여기에서 설정한 옵션값들을 기본으로 구동 됩니다.
+<a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a> 에는 대부분 UI 컴포넌트들의 전역 설정값들이 지정되어 있고 모든 컴포넌트들은 여기에서 설정한 옵션값들을 기본으로 구동 됩니다.
 
 Natural-JS의 컴포넌트 옵션의 적용 우선순위는 다음과 같습니다.
 
@@ -121,7 +121,7 @@ Natural-ARCHITECTURE 기반의 모든 페이지나 페이지 블록 들은 반�
 
 ".block01" Controller object의 init 함수 안에 있는 N.comm 함수는 서버에서 데이터를 조회 하는 구문입니다.
 
-<p class="alert">Natural-JS는 서버와의 데이터 및 파일을 송수신 하는데 Communicator(N.comm) 모듈을 사용 합니다. N.comm에 대한 자세한 내용은 <a href="#cmVmcjAyMDMlMjRDb21tdW5pY2F0b3IkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDIwMy5odG1s">Communicator</a> 메뉴를 참고해 주세요.</p>
+<p class="alert">Natural-JS는 서버와의 데이터 및 파일을 송수신 하는데 Communicator(N.comm) 모듈을 사용합니다. N.comm에 대한 자세한 내용은 <a href="#cmVmcjAyMDMlMjRDb21tdW5pY2F0b3IkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDIwMy5odG1s">Communicator</a> 메뉴를 참고해 주세요.</p>
 
 앞에서 Natural-JS의 컴포넌트 데이터 및 데이터 송수신을 위한 데이터 타입은 JSON 이라고 했었습니다.
 
@@ -202,7 +202,7 @@ Natural-ARCHITECTURE 기반의 모든 페이지나 페이지 블록 들은 반�
 ]
 ```
 
-이제 하나의 블록 페이지가 완성되었습니다. 이 페이지는 Tab(N.tab) 이나 Popup(N.popup), <a href="#cmVmcjA1MDIlMjREb2N1bWVudHMkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDUwMi5odG1s">Documents</a>(N.docs) 컴포넌트로 불러올 수 있고 Communicator(N.comm)를 사용하여이 이 페이지의 요소를 원하는 위치에 추가할 수 있습니다.
+이제 하나의 블록 페이지가 완성되었습니다. 이 페이지는 Tab(N.tab)이나 Popup(N.popup), <a href="#cmVmcjA1MDIlMjREb2N1bWVudHMkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDUwMi5odG1s">Documents</a>(N.docs) 컴포넌트로 불러올 수 있고 Communicator(N.comm)를 사용하여이 이 페이지의 요소를 원하는 위치에 추가할 수 있습니다.
 
 간단한 인덱스 페이지를 만들고 **block 01.html** 페이지를 N.comm을 사용하여 원하는 위치에 추가해 볼까요?
 
@@ -235,7 +235,7 @@ Natural-ARCHITECTURE 기반의 모든 페이지나 페이지 블록 들은 반�
 </html>
 ```
 
-**index.html** 파일의 $(document).ready 함수의 콜백 인자는 N.comm을 이용하여 **block01.html** 페이지를 **#contents**(N.context.attr("architecture").page.context) 요소 안에 불러오는 코드입니다. N.comm 은 **block01.html** 페이지 로딩이 완료 되면 Controller(N.cont) object의 init 함수를 실행해 줍니다.
+**index.html** 파일의 $(document).ready 함수의 콜백 인자는 N.comm을 이용하여 **block01.html** 페이지를 **#contents**(N.context.attr("architecture").page.context) 요소 안에 불러오는 코드입니다. N.comm 은 **block01.html** 페이지 로딩이 완료되면 Controller(N.cont) object의 init 함수를 실행해 줍니다.
 
 <p class="alert">$ (document).ready는 페이지 요소를로드 한 후 인자로 지정된 콜백 함수를 실행해 주는 jQuery에서 제공하는 함수입니다.</p>
 
@@ -243,14 +243,14 @@ Natural-ARCHITECTURE 기반의 모든 페이지나 페이지 블록 들은 반�
 
 지금 까지 작성한 코드들을 실행 하려면 웹서버가 필요 합니다.
 
-먼저 웹 서버를 설치 하고 웹 Context Root에 위 index.html, block01.html, data.json 파일을 복사 합니다. 그 다음 웹서버를 구동하고 브라우저로 **index.html** 파일의 주소(URL)를 입력하여 페이지를 열어 보세요.
+먼저 웹 서버를 설치하고 웹 Context Root에 위 index.html, block01.html, data.json 파일을 복사 합니다. 그다음 웹서버를 구동하고 브라우저로 **index.html** 파일의 주소(URL)를 입력하여 페이지를 열어 보세요.
 
-** block01.html ** 파일은 index.html 페이지에 의해 로드되고 N.cont의 인자로 지정된 객체의 init 함수가 실행 될 것입니다. 그 다음 **block01.html** 페이지의 요소 id가 result 인 div 요소 안에 서버에서 조회 된 데이터가 표시 될 것입니다.
+** block01.html ** 파일은 index.html 페이지에 의해 로드되고 N.cont의 인자로 지정된 객체의 init 함수가 실행될 것입니다. 그다음 **block01.html** 페이지의 요소 id가 result 인 div 요소 안에 서버에서 조회된 데이터가 표시될 것입니다.
 
 <p class="alert">데이터를 조회할 수 있는 서버가있는 경우 N.comm의 url 옵션에서 <strong>data.json</ strong> 대신 서비스 URL을 입력 하세요.</p>
 
-이제 Natural-JS의 기본 환경을 구성하고 실행하는 방법을 알았으니 블록 페이지가 실행 될 사이트 환경을 만들어 볼까요?
+이제 Natural-JS의 기본 환경을 구성하고 실행하는 방법을 알았으니 블록 페이지가 실행될 사이트 환경을 만들어 볼까요?
 
 [웹 어플리케이션 기본 프레임 만들기](#Z3RzdDAyMDAlMjREb2N1bWVudHMlMjAlRUIlQTElOUMlMjAlRUIlQTklOTQlRUIlODklQjQlMjAlRUQlOTQlODQlRUIlQTElOUMlRUElQjclQjglRUIlOUUlQTglMjAlRUMlOTclQjAlRUIlOEYlOTklRUQlOTUlOTglRUElQjglQjAkaHRtbCUyRm5hdHVyYWxqcyUyRmd0c3QlMkZndHN0MDIwMC5odG1s) 메뉴를 클릭해 주세요.
 
-<p class="alert">이 사이트는 Natural-JS로 개발되었습니다. 이 사이트의 소스 코드는 <a href="https://github.com/bbalganjjm/natural_js/tree/gh-pages">Github의 gh-pages 브랜치</a>에 공개 되어 있으니 참고 바랍니다.
+<p class="alert">이 사이트는 Natural-JS로 개발되었습니다. 이 사이트의 소스 코드는 <a href="https://github.com/bbalganjjm/natural_js/tree/gh-pages">Github의 gh-pages 브랜치</a>에 공개되어 있으니 참고 바랍니다.

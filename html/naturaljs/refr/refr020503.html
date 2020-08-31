@@ -7,7 +7,7 @@
     <h4 lang="ko_KR" class="notIndex">1. 필터 선언</h4>
     <h4 lang="en_US" class="notIndex">1. Filter declaration</h4>
     <ul>
-        <li lang="ko_KR">N.comm 으로 호출되는 모든 요청과 응답이 정의 한 필터를 통과하게 되므로 서버 요청과 응답 사이에 공통으로 적용해야할 로직 등을 정의 하면 됩니다.</li>
+        <li lang="ko_KR">N.comm으로 호출되는 모든 요청과 응답이 정의 한 필터를 통과하게 되므로 서버 요청과 응답 사이에 공통으로 적용해야할 로직 등을 정의 하면 됩니다.</li>
         <li lang="en_US">All requests and responses called by N.comm will pass through the defined filter, so you can define the logic that should be commonly applied between the server request and response.</li>
         <li lang="ko_KR">필터 이벤트 핸들러 함수의 request 인자에는 Ajax 요청에 대한 유용한 정보가 포함되어 있습니다.
             request 객체에 대한 자세한 내용은 <a href="#cmVmcjAyMDQlMjRDb21tdW5pY2F0b3IucmVxdWVzdCRodG1sJTJGbmF0dXJhbGpzJTJGcmVmciUyRnJlZnIwMjA0Lmh0bWw=">Communicator.request</a> 메뉴를 참고 바랍니다.</li>
@@ -28,12 +28,12 @@
                  */
                 order : 1,
                 /**
-                 * N.comm이 초기화되기 전에 실행됩니다. string 으로 변환되지 않은 원래 유형의 파라미터를 가져 올 수 있습니다.
+                 * N.comm이 초기화되기 전에 실행됩니다. string으로 변환되지 않은 원래 유형의 파라미터를 가져 올 수 있습니다.
                  */
                 beforeInit : function(obj) {
                 },
                 /**
-                 * N.comm이 초기화 된 후에 실행됩니다.(N.cont의 "init"이 아닙니다.)
+                 * N.comm이 초기화된 후에 실행됩니다.(N.cont의 "init"이 아닙니다.)
                  */
                 afterInit : function(request) {
                 },
@@ -54,7 +54,7 @@
                 error : function(request, xhr, textStatus, errorThrown) {
                 },
                 /**
-                 * 서버의 응답이 완료 되면 실행됩니다.
+                 * 서버의 응답이 완료되면 실행됩니다.
                  */
                 complete : function(request, xhr, textStatus) {
                 }

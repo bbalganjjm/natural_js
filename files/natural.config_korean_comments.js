@@ -1,6 +1,6 @@
 /**
  * Natural-JS에서 제공하는 라이브러리 및 컴포넌트의 전역 옵션 값 설정
- * 여기에 기본으로 정의 된 값들은 제거하면 안 됨. 추가만 가능
+ * 여기에 기본으로 정의된 값들은 제거하면 안 됨. 추가만 가능
  *
  * 컴포넌트들의 옵션 적용 순서
  * 1. 컴포넌트 초기화시 지정한 옵션 값
@@ -66,13 +66,13 @@
         },
         /**
          * Controller object를 대상으로 Aspect Oriented Programing(AOP)를 적용할 수 있습니다.
-         *  - 아래는 샘플코드 이므로 사용하지 않는다면 cont 하위의 모든 구문을 삭제하고 사용 바랍니다.
+         *  - 아래는 샘플코드 이므로 사용하지 않는다면 cont 하위의 모든 구문을 삭제하고 사용바랍니다.
          */
         "cont" : {
             /**
-             * advisor 에서 참조할 pointcut을 정의 합니다.
+             * advisor에서 참조할 pointcut을 정의 합니다.
              * pointcut 은 반드시 fn 속성에 param, cont, fnChain 인자를 가진 함수로 정의해야 합니다.
-             * 함수 수행 결과(boolean)는 advice의 적용 여부를 판단하는데 사용 됩니다.
+             * 함수 수행 결과(boolean)는 advice의 적용 여부를 판단하는데 사용됩니다.
              */
             "pointcuts" : {
                 /** pointcut 객체는 유일한 속성명으로 정의 합니다. */
@@ -99,16 +99,16 @@
                  * }
                  * 위의 경우 pointcuts에서 regexp pointcut에 param 속성에 정의된 객체를 파라미터로 전달 합니다.
                  * "pointcut" : "someregexp"
-                 * 위와 같이 pointcut의 값이 객체가 아닌 경우 "regexp" pointcut을 기본값으로 사용 합니다.
+                 * 위와 같이 pointcut의 값이 객체가 아닌 경우 "regexp" pointcut을 기본값으로 사용합니다.
                  */
                 "pointcut" : "^before.*",
                 /**
                  * adviecType 은 아래와 같습니다.
                  * before : 원본 함수를 실행하기 전에 실행됩니다.
-                 * after : 원본 함수가 실행 된 후 실행됩니다. 원본 함수의 반환값이 함께 전달 됩니다.
+                 * after : 원본 함수가 실행된 후 실행됩니다. 원본 함수의 반환값이 함께 전달 됩니다.
                  * error : 원본 함수에서 예외 발생 시 실행됩니다.
                  * around : 원본 함수를 실행할 수 있는 joinPoint가 파라미터로 전달 됩니다.
-                 * 각 adviecType의 사용 방법은 아래의 예제들을 참고 바랍니다.
+                 * 각 adviecType의 사용방법은 아래의 예제들을 참고 바랍니다.
                  */
                 "adviceType" : "before",
                 "fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 함수체인, args 인자 */
@@ -135,11 +135,11 @@
         "comm" : {
             /**
              * Communication Filter
-             *  - N.comm 으로 호출되는 모든요청이 아래에서 정의한 필터를 통과하게 되므로 서버 요청 시 공통적으로 적용해야할 부분을 정의 하면 됨.
+             *  - N.comm으로 호출되는 모든요청이 아래에서 정의한 필터를 통과하게 되므로 서버 요청 시 공통적으로 적용해야할 부분을 정의 하면 됨.
              *  - 필터 인자 중 request 인자에 요청에 대한 유용한 정보가 담겨 있음.
-             *  - request 객체에서 제공해 주는 정보는 http://bbalganjjm.github.io/natural_js/ 에서 Communicator.request 메뉴를 참고 바람.
+             *  - request 객체에서 제공해 주는 정보는 http://bbalganjjm.github.io/natural_js/에서 Communicator.request 메뉴를 참고 바람.
              *  - 필터를 여러개 걸수 있으며 단위 필터명은 아무거나 지정하면 됨.
-             *  - 수행 순서는 order 속성(숫자가 적을 수록 먼저 실행 됨)이 정의 된 필터가 실행 된 다음 order 속성이 정의 되지 않은 필터들이 실행 됨.
+             *  - 수행 순서는 order 속성(숫자가 적을 수록 먼저 실행 됨)이 정의된 필터가 실행된 다음 order 속성이 정의 되지 않은 필터들이 실행 됨.
              *  - 아래 예제에서 지정한 basicFilter 는 상수값이 아니므로 자유롭게 지정하면 됨.
              */
             "filters" : {
@@ -149,12 +149,12 @@
                      */
                     order : 1,
                     /**
-                     * N.comm이 초기화 되기 전 실행됨(N.cont의 init 아님). string 으로 변환되지 않은 원형의 파라미터를 꺼내올 수 있음.
+                     * N.comm이 초기화 되기 전 실행됨(N.cont의 init 아님). string으로 변환되지 않은 원형의 파라미터를 꺼내올 수 있음.
                      */
                     beforeInit : function(obj) {
                     },
                     /**
-                     * N.comm이 초기화 된 후 실행됨(N.cont의 init 아님)
+                     * N.comm이 초기화된 후 실행됨(N.cont의 init 아님)
                      */
                     afterInit : function(request) {
                     },
@@ -185,7 +185,7 @@
                 "options" : {
                     /**
                      * 기본 Request Method
-                     * GET 으로 되어 있으면 JSON 형태의 파라미터가 q라는 파라미터명으로 q={a:1}와 같이 전달 됩니다.
+                     * GET 으로되어 있으면 JSON 형태의 파라미터가 q라는 파라미터명으로 q={a:1}와 같이 전달 됩니다.
                      * JSON Object String을 Request Body에 담아 전송하려면 반드시 POST로 설정 바랍니다.
                      */
                     "type" : "POST",
@@ -198,7 +198,7 @@
                      */
                     "cache" : true,
                     /**
-                     * Single Page Application(SPA) 개발 시 N.comm(async) 으로 데이터를 요청하고 요청이 오기전에 다른 페이지로 전환 했을때
+                     * Single Page Application(SPA) 개발 시 N.comm(async)으로 데이터를 요청하고 요청이 오기전에 다른 페이지로 전환 했을때
                      * 요청할 때 location.href와 응답 올때 location.href을 비교하여 틀리면 요청을 중지 할지 여부
                      */
                     "urlSync" : true,
@@ -301,7 +301,7 @@
             },
             /**
              * 데이터 검증 오류 다국어 메시지
-             * 다른언어 추가 시 해당언어의 로케일 값을 오브젝트명으로 하고 동일한 속성명에 해당 언어로 된 메시지를 추가하면 됨.
+             * 다른언어 추가 시 해당언어의 로케일 값을 오브젝트명으로하고 동일한 속성명에 해당 언어로된 메시지를 추가하면 됨.
              */
             "message" : {
                 "ko_KR" : {
@@ -314,7 +314,7 @@
                     integer_korean : "숫자(정수)와 한글만 입력할 수 있습니다.",
                     alphabet_korean : "영문자와 한글만 입력할 수 있습니다.",
                     alphabet_integer_korean : "영문자, 숫자(정수), 한글만 입력할 수 있습니다.",
-                    dash_integer : "숫자(정수), 대쉬(-)만 입력할 수 있습니다.",
+                    dash_integer : "숫자(정수), 대시(-)만 입력할 수 있습니다.",
                     commas_integer : "숫자(정수), 콤마(,)만 입력할 수 있습니다.",
                     number : "숫자(+-,. 포함)만 입력할 수 있습니다.",
                     email : "e-mail 형식에 맞지 않습니다.",
@@ -343,13 +343,13 @@
                     equalTo : "\"{1}\" 의 값과 같아야 합니다.",
                     maxlength : "{0} 글자 이하만 입력 가능합니다.",
                     minlength : "{0} 글자 이상만 입력 가능합니다.",
-                    rangelength : "{0} 글자 에서 {1} 글자 까지만 입력 가능합니다.",
+                    rangelength : "{0} 글자에서 {1} 글자 까지만 입력 가능합니다.",
                     maxbyte : "{0} 바이트 이하만 입력 가능합니다.<br> - 영문, 숫자 : 1 바이트<br> - 한글, 특수문자 : {1} 바이트",
                     minbyte : "{0} 바이트 이상만 입력 가능합니다.<br> - 영문, 숫자 : 1 바이트<br> - 한글, 특수문자 : {1} 바이트",
-                    rangebyte : "{0} 바이트 에서 {1} 바이트 까지만 입력 가능합니다.<br> - 영문, 숫자 한글자 : 1 바이트<br> - 한글, 특수문자 : {2} 바이트",
+                    rangebyte : "{0} 바이트에서 {1} 바이트 까지만 입력 가능합니다.<br> - 영문, 숫자 한글자 : 1 바이트<br> - 한글, 특수문자 : {2} 바이트",
                     maxvalue : "{0} 이하의 값만 입력 가능합니다.",
                     minvalue : "{0} 이상의 값만 입력 가능합니다.",
-                    rangevalue : "{0} 에서 {1} 사이의 값만 입력 가능합니다.",
+                    rangevalue : "{0}에서 {1} 사이의 값만 입력 가능합니다.",
                     regexp : "{2}"
                 },
                 "en_US" : {
@@ -571,31 +571,31 @@
                  */
                 "resizeBarCorrectionHeight" : 0,
                 /**
-                 * 컬럼 고정 시 고정 된 헤더 셀(TH)의 상단 위치가 맞지 않을때 아래 수치 조절(기본값 : 0)
+                 * 컬럼 고정 시 고정된 헤더 셀(TH)의 상단 위치가 맞지 않을때 아래 수치 조절(기본값 : 0)
                  */
                 "fixedcolHeadMarginTop" : N.browser.is("ie") || N.browser.is("firefox") ? -1 : 0,
                 /**
-                 * 컬럼 고정 시 고정 된 헤더 셀(TH)의 좌측 위치가 맞지 않을때 아래 수치 조절(기본값 : 0)
+                 * 컬럼 고정 시 고정된 헤더 셀(TH)의 좌측 위치가 맞지 않을때 아래 수치 조절(기본값 : 0)
                  */
                 "fixedcolHeadMarginLeft" : N.browser.is("ie") || N.browser.is("firefox") ? -1 : 0,
                 /**
-                 * 컬럼 고정 시 고정 된 헤더 셀(TH)의 높이가 맞지 않을때 아래 수치 조절(기본값 : 0)
+                 * 컬럼 고정 시 고정된 헤더 셀(TH)의 높이가 맞지 않을때 아래 수치 조절(기본값 : 0)
                  */
                 "fixedcolHeadHeight" : 0,
                 /**
-                 * 컬럼 고정 시 고정 된 바디 셀(TD)의 상단 위치가 맞지 않을때 아래 수치 조절(기본값 : 0)
+                 * 컬럼 고정 시 고정된 바디 셀(TD)의 상단 위치가 맞지 않을때 아래 수치 조절(기본값 : 0)
                  */
                 "fixedcolBodyMarginTop" : N.browser.is("ie") || N.browser.is("firefox") ? -1 : 0,
                 /**
-                 * 컬럼 고정 시 고정 된 바디 셀(TD)의 좌측 위치가 맞지 않을때 아래 수치 조절(기본값 : 0)
+                 * 컬럼 고정 시 고정된 바디 셀(TD)의 좌측 위치가 맞지 않을때 아래 수치 조절(기본값 : 0)
                  */
                 "fixedcolBodyMarginLeft" : N.browser.is("ie") || N.browser.is("firefox") ? -1 : 0,
                 /**
-                 * 컬럼 고정 시 데이터를 바인드할 때 고정 된 바디 셀(TD)의 높이가 맞지 않을때 아래 수치 조절(기본값 : 0)
+                 * 컬럼 고정 시 데이터를 바인드할 때 고정된 바디 셀(TD)의 높이가 맞지 않을때 아래 수치 조절(기본값 : 0)
                  */
                 "fixedcolBodyBindHeight" : N.browser.is("ie") || N.browser.is("firefox") ? 1 : 1,
                 /**
-                 * 컬럼 고정 시 데이터를 Add할 때 고정 된 바디 셀(TD)의 높이가 맞지 않을때 아래 수치 조절(기본값 : 1)
+                 * 컬럼 고정 시 데이터를 Add할 때 고정된 바디 셀(TD)의 높이가 맞지 않을때 아래 수치 조절(기본값 : 1)
                  */
                 "fixedcolBodyAddHeight" : 1,
                 /**
@@ -629,14 +629,14 @@
                     "closeAllTitle" : "메뉴 전체 닫기",
                     "closeAll" : "전체 닫기",
                     "closeAllQ" : "선택한 메뉴를 제외하고 열린 메뉴 전체를 닫겠습니까?",
-                    "closeAllDQ" : "열려있는 메뉴 전체를 닫고 메인(홈) 화면으로 이동 하겠습니까?",
+                    "closeAllDQ" : "열려있는 메뉴 전체를 닫고 메인(홈) 화면으로 이동하겠습니까?",
                     "docListTitle" : "열린 메뉴 목록",
                     "docList" : "메뉴 목록",
                     "selDocument" : "{0} 메뉴 선택",
                     "close" : "메뉴 닫기",
-                    "closeConf" : "\"{0}\" 메뉴에 편집중인 항목이 있습니다. 무시하고 메뉴를 닫겠습니까?",
-                    "maxTabs" : "최대 {0} 개의 메뉴 만 열 수 있습니다. <br>다른 메뉴 탭을 닫고 다시 시도 하세요.",
-                    "maxStateful" : "선택한 메뉴가 활성화 되면 설정 된 최대 상태유지 메뉴 개수(최대 {1} 개)가 초과 되어 마지막으로 선택된 \"{0}\" 메뉴 페이지가 다시 로딩 됩니다.<br>메뉴를 선택 하겠습니까?"
+                    "closeConf" : "\"{0}\" 메뉴에 편집 중인 항목이 있습니다. 무시하고 메뉴를 닫겠습니까?",
+                    "maxTabs" : "최대 {0} 개의 메뉴 만 열 수 있습니다. <br>다른 메뉴 탭을 닫고 다시 시도하세요.",
+                    "maxStateful" : "선택한 메뉴가 활성화되면 설정된 최대 상태 유지 메뉴 개수(최대 {1} 개)가 초과되어 마지막으로 선택된 \"{0}\" 메뉴 페이지가 다시 로딩됩니다.<br>메뉴를 선택하겠습니까?"
                 },
                 "en_US" : {
                     "closeAllTitle" : "Close all menus",
@@ -706,7 +706,7 @@
             /**
              * 검사 대상에서 제외할 구문들을 문자열로 정의 합니다.
              *
-             * 검출 된 코드 내용 중 다음 문자열이 포함 되어 있으면 제외 처리 됩니다.
+             * 검출된 코드 내용 중 다음 문자열이 포함되어 있으면 제외 처리됩니다.
              *  ex) excludes : [ ".index-header", ".page-header", ".index-lefter", ".index-contents", ".index-footer" ]
              */
             excludes : [],
@@ -719,7 +719,7 @@
                         + 'view(context) 요소를 입력하지 않으면 다른 View의 요소까지 선택되어 의도하지 않은 오류가 발생할 수 있습니다. '
                         + '\nex) N("selector", cont.view).hide();'
                         + '\n    cont.view.find("selector").hide();',
-                    "UseTheComponentsValMethod" : 'jQuery의 val 메서드로 입력 요소의 value 속성 값을 변경하면 컴포넌트에 바인드 되어 있는 데이터는 업데이트되지 않습니다. '
+                    "UseTheComponentsValMethod" : 'jQuery의 val 메서드로 입력 요소의 value 속성 값을 변경하면 컴포넌트에 바인드되어 있는 데이터는 업데이트되지 않습니다. '
                         + '컴포넌트의 내부 데이터와 연동된 입력 요소들은 적용된 데이터 관련 컴포넌트(N.form, N.grid 등)에서 제공하는 val 메서드를 사용해야 합니다.'
                         + '\nex) cont["p.form.id"].val("columnName", "value")'
                         + '\n    cont["p.grid.id"].val(index, "columnName", "value")'

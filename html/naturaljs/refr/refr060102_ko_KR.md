@@ -90,7 +90,7 @@ init : function() {
 
     grid.add();
     grid.data().length // 3
-    // 행 데이터가 추가 되어 있음
+    // 행 데이터가 추가되어 있음
     this.data.length // 3
 },
 ...

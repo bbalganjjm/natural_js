@@ -96,7 +96,7 @@ DataSync는 컴포넌트나 라이브러리에 의해 변경된 데이터를 실
 
 ### Formatter
 
-[Formatter(N.formatter)](#cmVmcjAzMDElMjRGb3JtYXR0ZXIkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDMwMS5odG1s)는 입력 한 데이터 셋(array[json object]을 포멧팅 하고 포멧팅 된 데이터 셋을 반환해 주는 라이브러리입니다.
+[Formatter(N.formatter)](#cmVmcjAzMDElMjRGb3JtYXR0ZXIkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDMwMS5odG1s)는 입력 한 데이터 셋(array[json object]을 포멧팅하고 포멧팅된 데이터 셋을 반환해 주는 라이브러리입니다.
 
 ### Validator
 

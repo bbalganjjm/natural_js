@@ -29,7 +29,7 @@
             <td>-1</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">data옵션으로 지정한 목록 데이터 에서 폼에 바인딩할 행의 index 값을 입력 합니다.</p>
+                <p lang="ko_KR">data옵션으로 지정한 목록 데이터에서 폼에 바인딩할 행의 index 값을 입력합니다.</p>
                 <p lang="en_US">Set the index value of the row to bind to the form from the list data specified with the data option.</p>
                 <p lang="ko_KR" class="alert">기본값은 –1 이지만 값을 입력하지 않으면 0으로 세팅되어 목록 데이터의 첫 번째 행 데이터를 바인딩 합니다.</p>
                 <p lang="en_US" class="alert">The default value is -1, but if not set, it is set to 0 to bind the first row data of the list data.</p>
@@ -48,7 +48,7 @@
                 <p lang="en_US">The context element of N.form can be written with tags that express areas such as table, div, section and etc.</p>
                 <p lang="ko_KR"><strong>데이터의 프로퍼티명과 요소의 id 속성값이 같으면 데이터가 바인딩 됩니다.</strong></p>
                                 <p lang="en_US"><strong>If the property name of the data and the value of the id attribute of the element are the same, the data is bound.</strong></p>
-                <p lang="ko_KR" class="alert">Natural-JS의 모든 데이터 관련 컴포넌트는 빠른 바인딩 속도를 위해 어쩔수 없이 id 속성을 사용 합니다.</p>
+                <p lang="ko_KR" class="alert">Natural-JS의 모든 데이터 관련 컴포넌트는 빠른 바인딩 속도를 위해 어쩔수 없이 id 속성을 사용합니다.</p>
                 <p lang="en_US" class="alert">All data-related components of Natural-JS inevitably use id attribute for fast binding speed.</p>
                 <pre><code>&lt;table class="form-context"&gt;
     &lt;tr&gt;
@@ -98,7 +98,7 @@
             <td>
                 <p lang="ko_KR">true로 설정하면 revert 기능이 활성 화 되고 revert 메서드를 사용할 수 있습니다.</p>
                 <p lang="en_US">If set to true, the revert function is enabled and the revert method can be used.</p>
-                <p lang="ko_KR" class="alert">revert 기능이 활성화 되면 최초 바인딩된 데이터가 메모리에 적제되므로 메모리 사용량이 증가 합니다.</p>
+                <p lang="ko_KR" class="alert">revert 기능이 활성화되면 최초 바인딩된 데이터가 메모리에 적제되므로 메모리 사용량이 증가 합니다.</p>
                 <p lang="en_US" class="alert">When the revert function is activated, the memory usage increases because the first bound data is loaded into the memory.</p>
             </td>
         </tr>
@@ -110,10 +110,10 @@
             <td>
                 <p lang="ko_KR">true로 설정하면 unbind 기능이 활성 화 되고 unbind 메서드를 사용할 수 있습니다.</p>
                 <p lang="en_US">If set to true, the unbind function is enabled and the unbind method can be used.</p>
-                <p lang="ko_KR" class="alert">unbind 기능이 활성화 되면 최초 바인딩된 데이터가 메모리에 적제되므로 메모리 사용량이 증가 합니다.</p>
+                <p lang="ko_KR" class="alert">unbind 기능이 활성화되면 최초 바인딩된 데이터가 메모리에 적제되므로 메모리 사용량이 증가 합니다.</p>
                 <p lang="en_US" class="alert">When the unbind function is activated, the memory usage increases because the first bound data is loaded into the memory.</p>
                 <p lang="ko_KR" class="alert">폼의 context 요소는 다시 생성되지 않기 때문에 원칙적으로 add 메서드와 bind 메서드는 용도에 따라 구분 해서 사용해야 합니다.
-                                 이미 데이터가 바인드 된 폼 요소에 unbind 메서드를 호출해도 완벽하게 이전 상태로 되 돌릴 수는 없습니다.
+                                 이미 데이터가 바인드된 폼 요소에 unbind 메서드를 호출해도 완벽하게 이전 상태로 되 돌릴 수는 없습니다.
                                  어쩔 수 없는 경우가 아니면 사용을 권장 하지 않습니다.</p>
                 <p lang="en_US" class="alert">Since the form's context element is not re-created, add and bind methods should be used separately according to the usage.
                    Calling the unbind method on a form element to which data has already been bound does not completely revert to the previous state.
@@ -126,10 +126,10 @@
             <td>false</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">true로 설정하면 폼에 데이터를 바인딩하거나 생성 한 다음 같은 폼 요소에 다시 데이터를 바인딩 하기 전에 unbind 메서드를 자동으로 호출해 주어서 폼 요소를 재 활용할 수 있게해 줍니다.</p>
+                <p lang="ko_KR">true로 설정하면 폼에 데이터를 바인딩하거나 생성 한 다음 같은 폼 요소에 다시 데이터를 바인딩 하기 전에 unbind 메서드를 자동으로 호출해 주어서 폼 요소를 재 활용할 수 있게 해 줍니다.</p>
                 <p lang="en_US">If set to true, form elements can be reused by automatically calling the unbind method before rebinding the data to the same form element after binding or creating data from the form.</p>
                 <p lang="ko_KR" class="alert">폼의 context 요소는 다시 생성되지 않기 때문에 원칙적으로 add 메서드와 bind 메서드는 용도에 따라 구분 해서 사용해야 합니다.
-                                 이미 데이터가 바인드 된 폼 요소에 unbind 메서드를 호출해도 완벽하게 이전 상태로 되 돌릴 수는 없습니다.
+                                 이미 데이터가 바인드된 폼 요소에 unbind 메서드를 호출해도 완벽하게 이전 상태로 되 돌릴 수는 없습니다.
                                  어쩔 수 없는 경우가 아니면 사용을 권장 하지 않습니다.</p>
                 <p lang="en_US" class="alert">Since the form's context element is not re-created, add and bind methods should be used separately according to the usage.
                    Calling the unbind method on a form element to which data has already been bound does not completely revert to the previous state.
@@ -152,9 +152,9 @@
             <td>false</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">true로 설정하면 컴포넌트 초기화 전에 입력 요소에 바인딩 되어 있는 이벤트와 format, validate, dataSync등의 컴포넌트 이벤트의 충돌을 방지해 줍니다.</p>
+                <p lang="ko_KR">true로 설정하면 컴포넌트 초기화 전에 입력 요소에 바인딩되어 있는 이벤트와 format, validate, dataSync등의 컴포넌트 이벤트의 충돌을 방지해 줍니다.</p>
                 <p lang="en_US">If set to true, it prevents the conflict of the event bound to the input element before component initialization and the component event such as format, validate, and dataSync.</p>
-                <p lang="ko_KR" class="alert">format이 정상적으로 동작하지 않거나 바인딩 되어 있는 데이터가 의도한대로 g핸들링 되지 등, 알수 없는 오류가 발생 했을 때 true로 설정 바랍니다.</p>
+                <p lang="ko_KR" class="alert">format이 정상적으로 동작하지 않거나 바인딩되어 있는 데이터가 의도한대로 g핸들링 되지 등, 알수 없는 오류가 발생 했을 때 true로 설정 바랍니다.</p>
                 <p lang="en_US" class="alert">Set to true when an unknown error occurs, such as the format not working properly or the bound data is not handled as intended.</p>
             </td>
         </tr>
@@ -194,16 +194,16 @@
                     onBeforeBindValue 이벤트를 사용하면 N.form, N.grid, N.list로 바인드 되는 모든 값들과 요소들을 한번에 핸들링할 수 있습니다.</p>
                 <p lang="en_US" class="alert">If you set it as a global option in <a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a>, all components using N.form(N.grid, N.list) also apply.
                     Using the onBeforeBindValue event, you can handle all column values ​​and elements bound to N.form, N.grid, and N.list at once.</p>
-                <p lang="ko_KR" class="alert">onBeforeBindValue 이벤트를 N.config에 전역 이벤트 옵션으로 설정하면 컴포넌트 초기화 시 정의 한 onBeforeBindValue 이벤트 핸들러의 결과값이 전역 이벤트 핸들러의 val(arguments[1]) 인자로 지정 됩니다.
-                                때문에 다른 이벤트 들 처럼 전역 으로 설정한 이벤트 핸들러를 컴포넌트 이벤트에서 중단할 수 없습니다.</p>
+                <p lang="ko_KR" class="alert">onBeforeBindValue 이벤트를 N.config에 전역 이벤트 옵션으로 설정하면 컴포넌트 초기화 시 정의 한 onBeforeBindValue 이벤트 핸들러의 결과값이 전역 이벤트 핸들러의 val(arguments[1]) 인자로 지정됩니다.
+                                때문에 다른 이벤트 들 처럼 전역으로 설정한 이벤트 핸들러를 컴포넌트 이벤트에서 중단할 수 없습니다.</p>
                 <p lang="en_US" class="alert">If the onBeforeBindValue event is set as a global event option in N.config, the result value of the onBeforeBindValue event handler defined at component initialization is specified as the val (arguments [1]) parameter of the global event handler.
                     Therefore, you cannot stop the globally set event handler from the component event like other events.</p>
                 <pre lang="ko_KR"><code>onBeforeBindValue : function(ele, val, action) {
     // this : N.form 인스턴스
-    // ele : 바인드 될 요소
-    // val : 바인드 될 값
+    // ele : 바인드될 요소
+    // val : 바인드될 값
     // action : N.form 인스턴스의 메서드 명 - "bind" | "val"
-    return val; // 반드시 처리 된 값을 다시 리턴해야 합니다.
+    return val; // 반드시 처리된 값을 다시 리턴해야 합니다.
 }</code></pre>
                 <pre lang="en_US"><code>onBeforeBindValue : function(ele, val, action) {
     // this : N.form instance
@@ -227,7 +227,7 @@
                 <pre lang="ko_KR"><code>onBeforeBind : function(context, rowData) {
     // this : N.form 인스턴스
     // context : context 요소
-    // rowData : 폼에 바인드 될 데이터
+    // rowData : 폼에 바인드될 데이터
 }</code></pre>
                 <pre lang="en_US"><code>onBeforeBind : function(context, rowData) {
     // this : N.form instance
@@ -242,7 +242,7 @@
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">데이터가 바인딩이 완료 된 후에 실행 되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="ko_KR">데이터가 바인딩이 완료된 후에 실행 되는 이벤트 핸들러를 정의 합니다.</p>
                 <p lang="en_US">Define an event handler that is executed after data is bound.</p>
                 <p lang="ko_KR" class="alert"><a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a>에 전역 옵션으로 설정할 경우 N.form을 사용하는 모든 컴포넌트(N.grid, N.list)들에서도 적용 됩니다.</p>
                 <p lang="en_US" class="alert">If you set it as a global option in <a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a>, all components using N.form(N.grid, N.list) also apply.</p>

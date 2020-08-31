@@ -30,7 +30,7 @@
 
     var CommonUtils = {
         /**
-         * N.grid 나 N.list 에서 체크(check)되거나 선택(select) 된 행들을 삭제하기 위한 함수 - 삭제 전 동의 메시지 다이얼로그 표시 후 remove 함수 호출 등의 반복적인 루틴들을 한번에 처리해 줍니다.
+         * N.grid 나 N.list에서 체크(check)되거나 선택(select)된 행들을 삭제하기 위한 함수 - 삭제 전 동의 메시지 다이얼로그 표시 후 remove 함수 호출 등의 반복적인 루틴들을 한번에 처리해 줍니다.
          *
          * @this : 호출한 함수 인스턴스
          * @opts.cont : N.cont object
@@ -79,14 +79,14 @@
             }
         },
         /**
-         * 추가, 수정, 삭제된 데이터를 저장 하는 함수 - 저장 전 데이터 검증, 변경 된 데이터 확인, 저장 메시지 다이얼로그 표시등 데이터 저장에 대한 반복적인 루틴들을 한번에 처리해 줍니다.
+         * 추가, 수정, 삭제된 데이터를 저장 하는 함수 - 저장 전 데이터 검증, 변경된 데이터 확인, 저장 메시지 다이얼로그 표시등 데이터 저장에 대한 반복적인 루틴들을 한번에 처리해 줍니다.
          *
          * @this : 호출한 함수 인스턴스
          * @opts.cont : N.cont object
-         * @opts.comm : 데이터 저장을 처리하는 N.comm이 정의 된 함수명.
+         * @opts.comm : 데이터 저장을 처리하는 N.comm이 정의된 함수명.
          * @opts.msg : 저장 확인 메시지, undefined 이면 기본 메시지가 표시 됨.
-         * @opts.changed : 변경 된 데이터 유무를 참조할 컴포넌트 인스턴스 명.
-         * @opts.validate : 추가/수정 된 데이터의 유효성을 검증할 컴포넌트 인스턴스 명.
+         * @opts.changed : 변경된 데이터 유무를 참조할 컴포넌트 인스턴스 명.
+         * @opts.validate : 추가/수정된 데이터의 유효성을 검증할 컴포넌트 인스턴스 명.
          * @opts.before : 서버에 저장 하기 전 실행할 함수.
          * @opts.after : 서버에 저장 한 후 실행할 함수.
          */
@@ -239,7 +239,7 @@
          * 엑셀 대용량 데이터 다운로드
          *
          * 대용량 엑셀 데이터 조회시 Heap 메모리 Full을 발생시키지 않고 빠르게 다운로드 함. 그러나
-         * Service 나 Controller 에서 파라미터는 조작 가능하지만 리턴 데이터는 MyBatis 에서 엑셀파일을 바로 생성하기 때문에 조작이 불가능함.
+         * Service 나 Controller에서 파라미터는 조작 가능하지만 리턴 데이터는 MyBatis에서 엑셀파일을 바로 생성하기 때문에 조작이 불가능함.
          */
         excelStreaming : function(params, url, filename, columnNames, extColumnNames) {
                N.browser.cookie("n-excel-stream", btoa("true"));
@@ -276,7 +276,7 @@
             }
         },
         /**
-         * fileId로 서버에서 업로드 된 파일을 조회 후 파일 요약 목록을 만들어 준다.
+         * fileId로 서버에서 업로드된 파일을 조회 후 파일 요약 목록을 만들어 준다.
          * @fileId : 파일 아이디
          * @fileNameCol : 파일명 컬럼명
          * @length : 파일 목록 문자열을 자를 기준 길이
@@ -333,7 +333,7 @@
      *  - mode : 데이터 바인드 모드 - insert 면 무조건 INSERT, update 면 pk로 지정한 행 데이터가 있으면 UPDATE, 없으면 INSERT
      *  - pk : mode 옵션이 update 일 때 INSERT, UPDATE를 판단할 기준 키 컬럼 명
      *  - server : JSON 데이터를 추출 하기 위해 Excel 파일을 Server에 업로드 하여 처리할 것인지 브라우저에서 javascript로 처리할 것인지 여부(boolean)
-     *  - after : 엑셀 데이터 추출 완료 후 실행할 콜백 함수(함수의 첫 번째 인자로 추출 된 JSON 타입의 엑셀 데이터가 반환 됨)
+     *  - after : 엑셀 데이터 추출 완료 후 실행할 콜백 함수(함수의 첫 번째 인자로 추출된 JSON 타입의 엑셀 데이터가 반환 됨)
      */
     N.grid.prototype.bindExcel = function(header, opts) {
         var self = this;
@@ -408,7 +408,7 @@
                     cache: false,
                     dataType: "json"
                 }).error(function() {
-                    N.notify.add("서버 오류가 발생 했거나 업로드 된 엑셀 파일이 양식에 맞지 않아 데이터 추출을 하지 못했습니다.");
+                    N.notify.add("서버 오류가 발생 했거나 업로드된 엑셀 파일이 양식에 맞지 않아 데이터 추출을 하지 못했습니다.");
                 }).submit(function(data) {
                     N(data).each(function(i, rowData) {
                         if(opts.mode === "insert" || $.isEmptyObject(opts.pk)) {

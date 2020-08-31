@@ -124,7 +124,7 @@ N(".parent-0001").cont({
         var popup = N().popup({
             url: "./popup.html",
             <strong>onOpen</strong>: "onOpenFn", // 팝업이 열릴때마다 실행될 함수명
-            <strong>onClose</strong>: function(onCloseData) { // 팝업이 닫힐때마다 실행 될 onClose 이벤트 핸들러
+            <strong>onClose</strong>: function(onCloseData) { // 팝업이 닫힐때마다 실행될 onClose 이벤트 핸들러
                 N(".result", view).text(onCloseData);
             }
         });

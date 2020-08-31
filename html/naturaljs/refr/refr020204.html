@@ -63,7 +63,7 @@
     ...
 }</code></pre>
 
-    <h4 lang="ko_KR" class="notIndex">2. 모든 페이지에 공통코드를 불러와 N.select 컴포넌트로 요소들에 바인드 한 후 Controller object의 init을 지연 실행 하기</h4>
+    <h4 lang="ko_KR" class="notIndex">2. 모든 페이지에 공통코드를 불러와 N.select 컴포넌트로 요소들에 바인드 한 후 Controller object의 init을 지연 실행하기</h4>
     <h4 lang="en_US" class="notIndex">2. Load common code on all pages, bind to elements with N.select component, and delay init of the Controller object</h4>
     <pre lang="ko_KR"><code>N.context.attr("architecture", {
     ...
@@ -110,7 +110,7 @@
     ...
 }</code></pre>
 
-    <h4 lang="ko_KR" class="notIndex">3. 로드 된 페이지의 버튼, 폼, 그리드, 리스트 컴포넌트들을 자동으로 초기화해 준 후에 init 함수 실행 하기.</h4>
+    <h4 lang="ko_KR" class="notIndex">3. 로드된 페이지의 버튼, 폼, 그리드, 리스트 컴포넌트들을 자동으로 초기화해 준 후에 init 함수 실행하기.</h4>
     <h4 lang="en_US" class="notIndex">3. Executing the init function after automatically initializing the button, form, grid, and list components of the loaded page.</h4>
     <pre lang="ko_KR"><code>N.context.attr("architecture", {
     ...
@@ -140,7 +140,7 @@
                 // 5. init 함수 실행.
                 joinPoint.proceed();
 
-                // 6. 이후에 각 컴포넌트의 인스턴스는 context 에서 꺼내와서 사용.
+                // 6. 이후에 각 컴포넌트의 인스턴스는 context에서 꺼내와서 사용.
                 var grid01 = N("#grid01", cont.view).instance("grid"); // Natural-CORE의 instance 메서드 참고.
                 grid01.bind([]);
             }
