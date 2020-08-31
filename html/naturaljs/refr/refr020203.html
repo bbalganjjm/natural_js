@@ -29,7 +29,7 @@
     "param" : "^init$"
 }
 ...</code></pre>
-                <p lang="ko_KR">위의 경우 pointcuts에서 regexp pointcut의 param 속성에 정의된 객체를 파라미터로 전달합니다.</p>
+                <p lang="ko_KR">위와 같은 경우 pointcuts에서 regexp pointcut의 param 속성에 정의된 객체를 파라미터로 전달합니다.</p>
                 <p lang="en_US">In the above case, the object defined in the param property of regexp pointcut is passed as a parameter in pointcuts.</p>
 <pre><code>...
 "pointcut" : "^init$"
@@ -54,7 +54,7 @@
                 <ul>
                     <li lang="ko_KR">before : pointcut으로 지정한 함수가 실행되기 전에 실행됩니다.</li>
                     <li lang="en_US">before : Execute before executing the function specified in the pointcut.</li>
-                    <li lang="ko_KR">after : pointcut으로 지정한 함수가 실행된 후에 실행됩니다. pointcut으로 지정한 함수의 반환값이 함께 전달됩니다.</li>
+                    <li lang="ko_KR">after : pointcut으로 지정한 함수가 실행된 후에 실행됩니다. pointcut으로 지정한 함수의 반환 값이 함께 전달됩니다.</li>
                     <li lang="en_US">after : Execute after executing the function specified in the pointcut. The return value of the function specified by pointcut is also passed.</li>
                     <li lang="ko_KR">around : pointcut으로 지정한 함수를 실행할 수 있는 joinPoint가 인자로 전달됩니다.</li>
                     <li lang="en_US">around : Passed as an argument the joinPoint that can execute the function specified in the pointcut.</li>
@@ -182,7 +182,7 @@
     },
     "adviceType" : "error",
     "fn" : function(cont, fnChain, args, result, e) {
-        // Controller object에 정의한 함수에서 에러가 발생할 때 마다 실행됩니다.
+        // Controller object에 정의한 함수에서 에러가 발생할 때마다 실행됩니다.
     }
 }]
 ...</code></pre>

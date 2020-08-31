@@ -1,7 +1,7 @@
 개요
 ===
 
-Communicator.request 는 N.comm이 초기화될 때마다 생성 되는 요청 정보 객체입니다.
+Communicator.request 는 N.comm이 초기화될 때마다 생성되는 요청 정보 객체입니다.
 
 N.comm() 함수의 옵션은 Communicator.request.options 객체에 저장이되어 서버 요청의 헤더나 파라미터로 전달됩니다.
 

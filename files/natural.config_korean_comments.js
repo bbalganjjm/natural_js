@@ -43,7 +43,7 @@
          */
         spltSepa : "$@^",
         /**
-         * N.context.attr("architecture").page.context로 페이지가 전환될때 마다 실행될 가비지 컬렉터의 모드
+         * N.context.attr("architecture").page.context로 페이지가 전환될 때마다 실행될 가비지 컬렉터의 모드
          */
         gcMode : "full", //minimum, full
         /**
@@ -72,7 +72,7 @@
             /**
              * advisor에서 참조할 pointcut을 정의합니다.
              * pointcut 은 반드시 fn 속성에 param, cont, fnChain 인자를 가진 함수로 정의해야 합니다.
-             * 함수 수행 결과(boolean)는 advice의 적용 여부를 판단하는데 사용됩니다.
+             * 함수 수행 결과(boolean)는 advice의 적용 여부를 판단하는 데 사용됩니다.
              */
             "pointcuts" : {
                 /** pointcut 객체는 유일한 속성명으로 정의합니다. */
@@ -97,7 +97,7 @@
                  *     "type" : "regexp"
                  *     "param" : "something"
                  * }
-                 * 위의 경우 pointcuts에서 regexp pointcut에 param 속성에 정의된 객체를 파라미터로 전달합니다.
+                 * 위와 같은 경우 pointcuts에서 regexp pointcut에 param 속성에 정의된 객체를 파라미터로 전달합니다.
                  * "pointcut" : "someregexp"
                  * 위와 같이 pointcut의 값이 객체가 아닌 경우 "regexp" pointcut을 기본값으로 사용합니다.
                  */
@@ -105,7 +105,7 @@
                 /**
                  * adviecType 은 아래와 같습니다.
                  * before : 원본 함수를 실행하기 전에 실행됩니다.
-                 * after : 원본 함수가 실행된 후 실행됩니다. 원본 함수의 반환값이 함께 전달됩니다.
+                 * after : 원본 함수가 실행된 후 실행됩니다. 원본 함수의 반환 값이 함께 전달됩니다.
                  * error : 원본 함수에서 예외 발생 시 실행됩니다.
                  * around : 원본 함수를 실행할 수 있는 joinPoint가 파라미터로 전달됩니다.
                  * 각 adviecType의 사용방법은 아래의 예제들을 참고 바랍니다.
@@ -414,7 +414,7 @@
     N.context.attr("ui", {
         "alert" : {
             /**
-             * N.alert, N.popup 컴포넌트의 요소들이 저장 되는 영역(지정 필수)
+             * N.alert, N.popup 컴포넌트의 요소들이 저장되는 영역(지정 필수)
              * N.context.attr("architecture").page.context와 같게 설정해도 됩니다.
              * Documents 컴포넌트를 사용하면 따로 지정하지 않아도 됩니다.
              * SPA(Single Page Application)가 아니면 "body"로 설정해 주세요.
@@ -599,7 +599,7 @@
                  */
                 "fixedcolBodyAddHeight" : 1,
                 /**
-                 * 컬럼 고정 시 그리드 위에 있는 요소가 동적으로 높이가 조절 될때 그리드 모양이 깨지면 동적으로 높이가 조절 되는 요소와 그리드 요소를 모두 포함하고 있는 요소를 jQuery selector 문자열로 지정.
+                 * 컬럼 고정 시 그리드 위에 있는 요소가 동적으로 높이가 조절 될때 그리드 모양이 깨지면 동적으로 높이가 조절되는 요소와 그리드 요소를 모두 포함하고 있는 요소를 jQuery selector 문자열로 지정.
                  */
                 "fixedcolRootContainer" : ".view_context__"
             }

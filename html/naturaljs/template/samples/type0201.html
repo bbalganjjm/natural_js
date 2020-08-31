@@ -150,7 +150,7 @@
             },
             rowHandlerBeforeBind : function(rowIdx, rowEle, rowData) {
              	// 선택한 날짜가 오늘 날짜보다 크면 #isActive 요소 체크, 아니면 체크 해제.
-             	// rowHandlerBeforeBind 는 행에 데이터가 바인딩되기 전에 실행 되는 핸들러 함수 이므로 바인딩될 데이터의 값을 바꾸어 주면 바뀐 데이터로 바인딩딩됨.
+             	// rowHandlerBeforeBind 는 행에 데이터가 바인딩되기 전에 실행되는 핸들러 함수 이므로 바인딩될 데이터의 값을 바꾸어 주면 바뀐 데이터로 바인딩딩됨.
                 if(!N.string.isEmpty(rowData.registered)) {
                     if(N.date.diff((new Date()).formatDate("Ymd"), rowData.registered) > 0) {
                         rowData.isActive = "Y";

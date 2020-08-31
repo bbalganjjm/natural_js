@@ -27,7 +27,7 @@ Grid로 생성/조회/수정/삭제를 처리 하기 위해 조회조건 영역�
 
 메뉴 추가가 완료 되었으면 데이터 조회 및 저장을 실행하기 위해 [data.json](html/naturaljs/gtst/data/data.json) 파일을 다운로드하여 프로젝트의 Context Root에 저장합니다.
 <p class="alert">data.json 파일 링크를 클릭했을 때 다운로드되지 않으면 data.json 링크에서 마우스 오른버튼을 클릭 한 다음 [다른 이름으로 링크 저장]을 클릭 주세요.</p>
-<p class="alert">이 자습서는 Web Server에서 구동 되는 예제로 조회 파라미터나 저장/수정/삭제된 데이터가 저장되지 않습니다. 서버로 전송 되는 파라미터만 개발자도구의 네트워크 탭에서 확인 바랍니다. 서버(DBMS)와 연동 되는 예제는 <a href="#Z3RzdDIwMDAlMjQlRUMlODMlOTglRUQlOTQlOEMlMjAlRUQlOTQlODQlRUIlQTElOUMlRUMlQTAlOUQlRUQlOEElQjglRUIlQTElOUMlMjAlRUMlOEIlOUMlRUMlOUUlOTElRUQlOTUlOTglRUElQjglQjAkaHRtbCUyRm5hdHVyYWxqcyUyRmd0c3QlMkZndHN0MjAwMC5odG1s">샘플 프로젝트로 시작하기</a> 문서를 참고 바랍니다.</p>
+<p class="alert">이 자습서는 Web Server에서 구동되는 예제로 조회 파라미터나 저장/수정/삭제된 데이터가 저장되지 않습니다. 서버로 전송되는 파라미터만 개발자도구의 네트워크 탭에서 확인 바랍니다. 서버(DBMS)와 연동되는 예제는 <a href="#Z3RzdDIwMDAlMjQlRUMlODMlOTglRUQlOTQlOEMlMjAlRUQlOTQlODQlRUIlQTElOUMlRUMlQTAlOUQlRUQlOEElQjglRUIlQTElOUMlMjAlRUMlOEIlOUMlRUMlOUUlOTElRUQlOTUlOTglRUElQjglQjAkaHRtbCUyRm5hdHVyYWxqcyUyRmd0c3QlMkZndHN0MjAwMC5odG1s">샘플 프로젝트로 시작하기</a> 문서를 참고 바랍니다.</p>
 
 
 ##View 영역 코딩
@@ -223,7 +223,7 @@ initComponents : function() {
 
 N.select와 같은 데이터 관련 컴포넌트들은 컴포넌트 초기화와 데이터 바인딩이 분리되어 있습니다. ```var grid = N([object, object, ...]).grid()``` 명령을 실행하면 컴포넌트 인스턴스가 반환되고 컴포넌트 인스턴스에서 bind() 메서드를 실행하면 데이터가 바인딩 되고 add() 메서드를 호출하면 새로운 행 데이터가 생성됩니다.
 
-N() 함수의 첫 번째 인자에 JSON Array 타입의 데이터를 입력 한 다음 bind() 메서드를 호출하면 인스턴스 생성 시 입력된 데이터가 바인딩됩니다. 데이터를 동적으로 바인딩해야 한다면 N() 함수에 ```var grid = N([]).grid()``` 처럼 비어있는 array를 입력하여 컴포넌트를 초기화하고 bind() 메서드의 첫 번째 인자에 json array 타입의 데이터를 입력 하여 호출하면됩니다.
+N() 함수의 첫 번째 인자에 JSON Array 타입의 데이터를 입력 한 다음 bind() 메서드를 호출하면 인스턴스 생성 시 입력된 데이터가 바인딩됩니다. 데이터를 동적으로 바인딩해야 한다면 N() 함수에 ```var grid = N([]).grid()``` 처럼 비어있는 array를 입력하여 컴포넌트를 초기화하고 bind() 메서드의 첫 번째 인자에 json array 타입의 데이터를 입력하여 호출하면됩니다.
 
 N.select에 바인딩할 데이터를 서버에서 조회해 온다면 다음 코드와 비슷하게 변경하면 됩니다.
 
@@ -275,7 +275,7 @@ initComponents : function() {
 }]
 ```
 
-이 생성된 데이터는 입력 요소의 값이 바뀔 때 마다 내부 데이터셋과 동기화되기 때문에 다음과 같이 선언만해 놓으면 마지막 입력한 검색조건 데이터가 서버에 파라미터로 전달됩니다.
+이 생성된 데이터는 입력 요소의 값이 바뀔 때마다 내부 데이터셋과 동기화되기 때문에 다음과 같이 선언만해 놓으면 마지막 입력한 검색조건 데이터가 서버에 파라미터로 전달됩니다.
 
 ```
 N(cont.form.data()).comm("data.json").submit(function(data) {
@@ -305,7 +305,7 @@ initComponents : function() {
 
 앞에서 설명한 N.form과 옵션만 다르고 선언 방식이 비슷합니다.
 
-N.grid 는 비어있는 array 객체를 바인딩하면 "조회를 하지 않았거나 조회된 데이터가 없습니다." 라는 메시지를 그리드에 표시해 줍니다. 페이지 로딩 완료 후 서버에서 조회 한 데이터를 그리드에 즉시 바인딩해야 되는 경우라면 컴포넌트 인스턴스 생성만하면 되지만 사용자가 조회를 직접 실행할 때는 기본 행이 아무 의미없이 표시 되니 bind() 메서드를 호출 해서 자연스러운 그리드의 모양을 만들어 주세요.
+N.grid 는 비어있는 array 객체를 바인딩하면 "조회를 하지 않았거나 조회된 데이터가 없습니다." 라는 메시지를 그리드에 표시해 줍니다. 페이지 로딩 완료 후 서버에서 조회 한 데이터를 그리드에 즉시 바인딩해야되는 경우라면 컴포넌트 인스턴스 생성만하면 되지만 사용자가 조회를 직접 실행할 때는 기본 행이 아무 의미없이 표시 되니 bind() 메서드를 호출 해서 자연스러운 그리드의 모양을 만들어 주세요.
 
 ### 이벤트 바인딩
 
@@ -431,7 +431,7 @@ N(window).alert({
 <p class="alert">서버로 object가 아닌 array[object] 형태의 파라미터를 전달 하려면 dataIsArray 옵션을 활성화해 주어야 합니다. dataIsArray 옵션에 대한 자세한 내용은 <a href="#cmVmcjAyMDQlMjRDb21tdW5pY2F0b3IucmVxdWVzdCRodG1sJTJGbmF0dXJhbGpzJTJGcmVmciUyRnJlZnIwMjA0Lmh0bWw=">Communicator.request</a> 문서의 [기본옵션] 탭을 참고해 주세요.</p>
 5. 저장 완료 후 N.notify 컴포넌트를 사용하여 메시지 표시
 <p class="alert">입력 요소의 값을 변경하거나 cont.grid.val() 메서드로 데이터를 변경하면 <strong>rowStatus</strong> 프로퍼티가 생성됩니다. rowStatus 값은 "insert", "update", "delete" 중 하나가 됩니다. <strong>서버 에서는</strong> 행 데이터 객체 마다 정의되어 있는 <strong>rowStatus 값으로 입력/수정/삭제를 구분 해서 처리</strong>하면 됩니다.</p>
-6. Search 버튼을 클릭 하여 변경된 데이터 재 조회
+6. Search 버튼을 클릭하여 변경된 데이터 재 조회
 
 지금까지 작성한 소스 파일들을 웹 서버에 배포한 다음 **/index.html**에 접속 했을때 다음과 같은 화면이 표시되면 실습을 성공 한 것입니다.
 

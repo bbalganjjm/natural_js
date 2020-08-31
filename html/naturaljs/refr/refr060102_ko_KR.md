@@ -1,7 +1,7 @@
 팁
 ===
 
-###⊙ 데이터 관련 컴포넌트에 비어있는 객체를 바인딩 하여 초기화 하기
+###⊙ 데이터 관련 컴포넌트에 비어있는 객체를 바인딩하여 초기화 하기
 ```
 nFormInstance.unbind().bind(0, []); // N.form
 nGridInstance.bind([]); // N.grid
@@ -53,7 +53,7 @@ N().popup(popupOpts).open();
 ```
 
 ###⊙ 데이터 관련 컴포넌트에서 add 메서드를 실행했을 때 발생하는 데이터 동기화 문제 해결 하기
-Natural-JS의 데이터 관련 컴포넌트들은 array[object] 타입의 data가 입력되면 jQuery object[array[object]] 형태로 변환(jQuery object로 변환) 하여 사용하기 때문에 data를 Controller object의 변수로 담아 놓고 공유해서 사용하는 경우 컴포넌트의 add 메서드로 새로운 데이터를 생성했을 때 변수로 담아 놓은 데이터는 새로운 행 데이터가 생성되지 않는 문제가 발생됩니다.
+Natural-JS의 데이터 관련 컴포넌트들은 array[object] 타입의 data가 입력되면 jQuery object[array[object]] 형태로 변환(jQuery object로 변환)하여 사용하기 때문에 data를 Controller object의 변수로 담아 놓고 공유해서 사용하는 경우 컴포넌트의 add 메서드로 새로운 데이터를 생성했을 때 변수로 담아 놓은 데이터는 새로운 행 데이터가 생성되지 않는 문제가 발생됩니다.
 
 ```
 ...
