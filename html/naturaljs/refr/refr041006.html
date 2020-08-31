@@ -233,7 +233,7 @@
             totalCount: data.totalCount,
             <strong>onChange: function(pageNo, selEle, selData, currPageNavInfo) {</strong>
                 <strong>N(currPageNavInfo)</strong>.comm("data.json").submit(function(data){ // 3. 페이징 정보를 서버로 전달하여 페이징된 데이터 조회
-                    <strong>grid.bind(selData)</strong>; // 4. 페이징된 데이터를 N.grid에 바인드
+                    <strong>grid.bind(selData)</strong>; // 4. 페이징된 데이터를 N.grid에 바인딩
                 });
             <strong>}</strong>
         }).bind();

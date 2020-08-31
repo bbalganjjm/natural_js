@@ -180,7 +180,7 @@
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">컨텐츠가 로딩 되기 전 실행되는 이벤트입니다.</p>
+                <p lang="ko_KR">컨텐츠가 로딩되기 전 실행되는 이벤트입니다.</p>
                 <p lang="en_US">Define an event handler that is excuted before the content is loaded.</p>
                 <pre lang="ko_KR"><code>onBeforeLoad : function(docId, target) {
     // docId : document id
@@ -194,7 +194,7 @@
 
     var doc = this.doc(docId); // get document info
 }</code></pre>
-                <p lang="ko_KR" class="alert">열린 페이지가 닫히기 전 까지 다시 호출 되지 않습니다.</p>
+                <p lang="ko_KR" class="alert">열린 페이지가 닫히기 전 까지 다시 호출되지 않습니다.</p>
                 <p lang="en_US" class="alert">It is not called again until the opened page is closed.</p>
                 <p lang="ko_KR" class="alert">페이지가 로딩되기 전에 실행 되므로 cont 메서드로 불러온 페이지의 Controller object를 가져 올 수 없습니다.</p>
                 <p lang="en_US" class="alert">It is executed before the page is loaded, so you cannot get the Controller object of the page called by the cont method.</p>
@@ -224,7 +224,7 @@
     var view = cont.view;
     var request = cont.request;
 }</code></pre>
-                <p lang="ko_KR" class="alert">열린 페이지가 닫히기 전 까지 다시 호출 되지 않습니다.</p>
+                <p lang="ko_KR" class="alert">열린 페이지가 닫히기 전 까지 다시 호출되지 않습니다.</p>
                 <p lang="en_US" class="alert">It is not called again until the opened page is closed.</p>
             </td>
         </tr>
@@ -234,7 +234,7 @@
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">페이지가 로딩될 때 실행되는 Ajax 요청들이 캡쳐 되기 전에 실행되는 이벤트입니다.</p>
+                <p lang="ko_KR">페이지가 로딩될 때 실행되는 Ajax 요청들이 캡쳐되기 전에 실행되는 이벤트입니다.</p>
                 <p lang="en_US">Define an event handler that is excuted before the Ajax request is captured when the page is loaded.</p>
                 <pre lang="ko_KR"><code>onBeforeEntireLoad : function(docId) {
     // docId : document id

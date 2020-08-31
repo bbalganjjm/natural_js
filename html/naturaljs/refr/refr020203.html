@@ -86,7 +86,7 @@
     "pointcut" : "^init$",
     "adviceType" : "before",
     "fn" : function(cont, fnChain, args) {
-        // 페이지가 로딩된 후 init 함수가 호출 되기 전에 실행됩니다.
+        // 페이지가 로딩된 후 init 함수가 호출되기 전에 실행됩니다.
     }
 }]
 ...</code></pre>
@@ -144,7 +144,7 @@
     "pointcut" : "^init$",
     "adviceType" : "around",
     "fn" : function(cont, fnChain, args, joinPoint) {
-        // 페이지가 로딩된 후 init 함수가 호출 되기 전에 실행됩니다.
+        // 페이지가 로딩된 후 init 함수가 호출되기 전에 실행됩니다.
 
         // before
         var result = joinPoint.proceed();

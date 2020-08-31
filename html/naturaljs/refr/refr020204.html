@@ -63,7 +63,7 @@
     ...
 }</code></pre>
 
-    <h4 lang="ko_KR" class="notIndex">2. 모든 페이지에 공통코드를 불러와 N.select 컴포넌트로 요소들에 바인드 한 후 Controller object의 init을 지연 실행하기</h4>
+    <h4 lang="ko_KR" class="notIndex">2. 모든 페이지에 공통코드를 불러와 N.select 컴포넌트로 요소들에 바인딩한 후 Controller object의 init을 지연 실행하기</h4>
     <h4 lang="en_US" class="notIndex">2. Load common code on all pages, bind to elements with N.select component, and delay init of the Controller object</h4>
     <pre lang="ko_KR"><code>N.context.attr("architecture", {
     ...
@@ -74,7 +74,7 @@
             "fn" : function(cont, fnChain, args, joinPoint){
                 // 1. 공통코드 데이터 가져오기
                 N.comm("getCommCodeList.json").submit(function(data) {
-                    // 2. N.select로 선택 요소에 공통코드 바인드
+                    // 2. N.select로 선택 요소에 공통코드 바인딩
                     N(data).select({
                         context : N("#select", cont.view)
                     }).bind()

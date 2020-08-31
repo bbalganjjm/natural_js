@@ -26,8 +26,8 @@ Grid로 생성/조회/수정/삭제를 처리 하기 위해 조회조건 영역�
 ```
 
 메뉴 추가가 완료 되었으면 데이터 조회 및 저장을 실행하기 위해 [data.json](html/naturaljs/gtst/data/data.json) 파일을 다운로드하여 프로젝트의 Context Root에 저장합니다.
-<p class="alert">data.json 파일 링크를 클릭 했을 때 다운로드 되지 않으면 data.json 링크에서 마우스 오른버튼을 클릭 한 다음 [다른 이름으로 링크 저장]을 클릭 주세요.</p>
-<p class="alert">이 자습서는 Web Server에서 구동 되는 예제로 조회 파라미터나 저장/수정/삭제된 데이터가 저장 되지 않습니다. 서버로 전송 되는 파라미터만 개발자도구의 네트워크 탭에서 확인 바랍니다. 서버(DBMS)와 연동 되는 예제는 <a href="#Z3RzdDIwMDAlMjQlRUMlODMlOTglRUQlOTQlOEMlMjAlRUQlOTQlODQlRUIlQTElOUMlRUMlQTAlOUQlRUQlOEElQjglRUIlQTElOUMlMjAlRUMlOEIlOUMlRUMlOUUlOTElRUQlOTUlOTglRUElQjglQjAkaHRtbCUyRm5hdHVyYWxqcyUyRmd0c3QlMkZndHN0MjAwMC5odG1s">샘플 프로젝트로 시작하기</a> 문서를 참고 바랍니다.</p>
+<p class="alert">data.json 파일 링크를 클릭 했을 때 다운로드되지 않으면 data.json 링크에서 마우스 오른버튼을 클릭 한 다음 [다른 이름으로 링크 저장]을 클릭 주세요.</p>
+<p class="alert">이 자습서는 Web Server에서 구동 되는 예제로 조회 파라미터나 저장/수정/삭제된 데이터가 저장되지 않습니다. 서버로 전송 되는 파라미터만 개발자도구의 네트워크 탭에서 확인 바랍니다. 서버(DBMS)와 연동 되는 예제는 <a href="#Z3RzdDIwMDAlMjQlRUMlODMlOTglRUQlOTQlOEMlMjAlRUQlOTQlODQlRUIlQTElOUMlRUMlQTAlOUQlRUQlOEElQjglRUIlQTElOUMlMjAlRUMlOEIlOUMlRUMlOUUlOTElRUQlOTUlOTglRUElQjglQjAkaHRtbCUyRm5hdHVyYWxqcyUyRmd0c3QlMkZndHN0MjAwMC5odG1s">샘플 프로젝트로 시작하기</a> 문서를 참고 바랍니다.</p>
 
 
 ##View 영역 코딩
@@ -176,7 +176,7 @@ Controller 영역을 보면 이전 예제들과 다르게 cont 변수에 Control
 이유는 Function Scope에 상관 없이 Contoller(N.cont) Object에 접근하기 위해서입니다.
 위와 같이 Controller를 정의하하고 cont 변수를 선언하고 N().cont() 함수를 실행하면 함수의 어떤 위치에서나 cont 변수로 Controller object에 접근할 수 있습니다.
 <p class="alert">Natural-JS로 프로젝트를 진행하다 보면 view 나 request, caller 등의 Controller 오브젝트에 담겨있는 고유 객체들을 참고하거나 페이지 전역변수를 담기 위해 Controller object에 접근해야할 때가 많이 있습니다.</p>
-<p class="alert">SPA로 메뉴 컨텐츠 들을 개발할 때는 Controller object가 해당 페이지의 최상위 객체라 생각하고 페이지 별 전역변수를 정의해야 합니다. 그렇게 하지 않고 window 객체에 전역변수를 선언하면 데이터가 꼬이거나 메모리 사용량이 크게 증가 하는 문제가 발생할 수 있습니다. Natural-JS는 Controller object에 대해서 리소스 관리를해 주지만 window 객체에 바인딩되어 있는 전역 변수들에 대해서는 관여 하지 않습니다.</p>
+<p class="alert">SPA로 메뉴 컨텐츠 들을 개발할 때는 Controller object가 해당 페이지의 최상위 객체라 생각하고 페이지 별 전역변수를 정의해야 합니다. 그렇게 하지 않고 window 객체에 전역변수를 선언하면 데이터가 꼬이거나 메모리 사용량이 크게 증가하는 문제가 발생할 수 있습니다. Natural-JS는 Controller object에 대해서 리소스 관리를해 주지만 window 객체에 바인딩되어 있는 전역 변수들에 대해서는 관여 하지 않습니다.</p>
 
 ###컴포넌트 초기화
 이제 View에서 선언 한 각 요소들에 다음과 같은 컴포넌트를 적용하여 생명을 불어 넣어 보겠습니다.
@@ -265,7 +265,7 @@ initComponents : function() {
 ...
 ```
 
-**.search-conditions** 요소에 N.form 컴포넌틀를 적용하고 add() 메서드를 호출하여 비어있는 데이터를 생성했습니다. add() 메서드를 호출 했기 때문에 cont.form 인스턴스에 다음과 같은 데이터가 생성 되었을 것입니다. ```cont.form.data()``` 메서드를 실행하면 확인할 수 있습니다.
+**.search-conditions** 요소에 N.form 컴포넌틀를 적용하고 add() 메서드를 호출하여 비어있는 데이터를 생성했습니다. add() 메서드를 호출 했기 때문에 cont.form 인스턴스에 다음과 같은 데이터가 생성되었을 것입니다. ```cont.form.data()``` 메서드를 실행하면 확인할 수 있습니다.
 
 ```
 [{
@@ -275,7 +275,7 @@ initComponents : function() {
 }]
 ```
 
-이 생성된 데이터는 입력 요소의 값이 바뀔 때 마다 내부 데이터셋과 동기화 되기 때문에 다음과 같이 선언만해 놓으면 마지막 입력한 검색조건 데이터가 서버에 파라미터로 전달됩니다.
+이 생성된 데이터는 입력 요소의 값이 바뀔 때 마다 내부 데이터셋과 동기화되기 때문에 다음과 같이 선언만해 놓으면 마지막 입력한 검색조건 데이터가 서버에 파라미터로 전달됩니다.
 
 ```
 N(cont.form.data()).comm("data.json").submit(function(data) {

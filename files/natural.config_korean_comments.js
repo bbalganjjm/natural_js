@@ -139,7 +139,7 @@
              *  - 필터 인자 중 request 인자에 요청에 대한 유용한 정보가 담겨 있음.
              *  - request 객체에서 제공해 주는 정보는 http://bbalganjjm.github.io/natural_js/에서 Communicator.request 메뉴를 참고 바람.
              *  - 필터를 여러개 걸수 있으며 단위 필터명은 아무거나 지정하면 됨.
-             *  - 수행 순서는 order 속성(숫자가 적을 수록 먼저 실행 됨)이 정의된 필터가 실행된 다음 order 속성이 정의 되지 않은 필터들이 실행 됨.
+             *  - 수행 순서는 order 속성(숫자가 적을 수록 먼저 실행 됨)이 정의된 필터가 실행된 다음 order 속성이 정의되지 않은 필터들이 실행 됨.
              *  - 아래 예제에서 지정한 basicFilter 는 상수값이 아니므로 자유롭게 지정하면 됨.
              */
             "filters" : {
@@ -149,7 +149,7 @@
                      */
                     order : 1,
                     /**
-                     * N.comm이 초기화 되기 전 실행됨(N.cont의 init 아님). string으로 변환되지 않은 원형의 파라미터를 꺼내올 수 있음.
+                     * N.comm이 초기화되기 전 실행됨(N.cont의 init 아님). string으로 변환되지 않은 원형의 파라미터를 꺼내올 수 있음.
                      */
                     beforeInit : function(obj) {
                     },
@@ -591,7 +591,7 @@
                  */
                 "fixedcolBodyMarginLeft" : N.browser.is("ie") || N.browser.is("firefox") ? -1 : 0,
                 /**
-                 * 컬럼 고정 시 데이터를 바인드할 때 고정된 바디 셀(TD)의 높이가 맞지 않을때 아래 수치 조절(기본값 : 0)
+                 * 컬럼 고정 시 데이터를 바인딩할 때 고정된 바디 셀(TD)의 높이가 맞지 않을때 아래 수치 조절(기본값 : 0)
                  */
                 "fixedcolBodyBindHeight" : N.browser.is("ie") || N.browser.is("firefox") ? 1 : 1,
                 /**
@@ -719,7 +719,7 @@
                         + 'view(context) 요소를 입력하지 않으면 다른 View의 요소까지 선택되어 의도하지 않은 오류가 발생할 수 있습니다. '
                         + '\nex) N("selector", cont.view).hide();'
                         + '\n    cont.view.find("selector").hide();',
-                    "UseTheComponentsValMethod" : 'jQuery의 val 메서드로 입력 요소의 value 속성 값을 변경하면 컴포넌트에 바인드 되어 있는 데이터는 업데이트되지 않습니다. '
+                    "UseTheComponentsValMethod" : 'jQuery의 val 메서드로 입력 요소의 value 속성 값을 변경하면 컴포넌트에 바인딩되어 있는 데이터는 업데이트되지 않습니다. '
                         + '컴포넌트의 내부 데이터와 연동된 입력 요소들은 적용된 데이터 관련 컴포넌트(N.form, N.grid 등)에서 제공하는 val 메서드를 사용해야 합니다.'
                         + '\nex) cont["p.form.id"].val("columnName", "value")'
                         + '\n    cont["p.grid.id"].val(index, "columnName", "value")'

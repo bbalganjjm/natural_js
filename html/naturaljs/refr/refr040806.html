@@ -17,7 +17,7 @@
             <td style="text-align: center;">N/A</td>
             <td>array[json object]|jQuery object[array[json object]]</td>
             <td>
-                <p lang="ko_KR">컴포넌트에 바인드 되어 있는 가장 최근 상태의 데이터를 반환합니다.</p>
+                <p lang="ko_KR">컴포넌트에 바인딩되어 있는 가장 최근 상태의 데이터를 반환합니다.</p>
                 <p lang="en_US">Returns the data of the most recent state bound to the component.</p>
             </td>
         </tr>
@@ -147,7 +147,7 @@ listInst.data("modified", "col01", "col02", "col03");
             <td>string</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p lang="ko_KR">"append" 문자열을 인자로 설정 하여 바인딩하면 이전에 바인드된 데이터와 새로 바인드 한 데이터를 병합하고 이전에 생성된 행 요소에 새로운 행 요소를 추가해 줍니다.</p>
+                <p lang="ko_KR">"append" 문자열을 인자로 설정 하여 바인딩하면 이전에 바인딩된 데이터와 새로 바인딩 한 데이터를 병합하고 이전에 생성된 행 요소에 새로운 행 요소를 추가해 줍니다.</p>
                 <p lang="en_US">When binding by setting the "append" string as an argument, it merges the previously bound data with the newly bound data and appends the new row element to the previously created row element.</p>
                 <p lang="ko_KR" class="alert">"append" 인자 값이 설정되면 scrollPaging.size 옵션 값 자동으로 0으로 지정되어 스크롤 페이징 기능이 비활성화됩니다.</p>
                 <p lang="en_US" class="alert">When the "append" argument value is set, the scrollPaging.size option value is automatically set to 0 to disable the scroll paging feature.</p>
@@ -261,7 +261,7 @@ listInst.data("modified", "col01", "col02", "col03");
             <td>
                 <p lang="ko_KR">컴포넌트에 바인딩되어 있는 데이터의 프로퍼티 값을 얻어오거나 설정합니다.</p>
                 <p lang="en_US">Gets or sets the property value of data bound to the component.</p>
-                <p lang="ko_KR" class="alert">val 인자가 설정되면 지정된 값을 바인딩된 데이터에 세팅하거나 추가하고 val 인자가 설정 되지 않으면 지정된 값을 얻어 옵니다.</p>
+                <p lang="ko_KR" class="alert">val 인자가 설정되면 지정된 값을 바인딩된 데이터에 세팅하거나 추가하고 val 인자가 설정되지 않으면 지정된 값을 얻어 옵니다.</p>
                 <p lang="en_US" class="alert">If the val argument is set, the specified value is set or added to the bound data. If the val argument is not set, the specified value is get.</p>
             </td>
         </tr>
@@ -305,7 +305,7 @@ listInst.data("modified", "col01", "col02", "col03");
             <td style="text-align: center;">N/A</td>
             <td>array</td>
             <td>
-                <p lang="ko_KR">행을 선택 하거나 선택된 행의 index를 반환합니다.</p>
+                <p lang="ko_KR">행을 선택하거나 선택된 행의 index를 반환합니다.</p>
                 <p lang="en_US">Selects the row or returns the index of the selected row.</p>
                 <p lang="ko_KR">첫 번째 인자(row)를 입력하지 않으면 선택된 행 들의 index 들을 반환하고 입력하면 지정된 행을 선택합니다.</p>
                 <p lang="en_US">If the first argument (row) is not entered, the indexes of the selected rows are returned, and if specified, the specified row is selected.</p>
@@ -341,7 +341,7 @@ listInst.data("modified", "col01", "col02", "col03");
             <td style="text-align: center;">N/A</td>
             <td>array</td>
             <td>
-                <p lang="ko_KR">checkAllTarget과 checkSingleTarget 옵션으로 지정한 요소들을 체크 하거나 체크된 행의 index를 반환합니다.</p>
+                <p lang="ko_KR">checkAllTarget과 checkSingleTarget 옵션으로 지정한 요소들을 체크하거나 체크된 행의 index를 반환합니다.</p>
                 <p lang="en_US">Checks the elements specified by checkAllTarget and checkSingleTarget options or returns the index of the checked row.</p>
                 <p lang="ko_KR">첫 번째 인자(row)를 입력하지 않으면 체크된 행 들의 index 들을 반환하고 입력하면 지정된 행을 체크합니다.</p>
                 <p lang="en_US">If the first argument (row) is not entered, the indexes of the checked rows are returned, and if specified, the specified row is checked.</p>
@@ -399,7 +399,7 @@ listInst.data("modified", "col01", "col02", "col03");
                 <p lang="en_US">Enter the row index of the position you want to move.</p>
                 <p lang="ko_KR" class="alert">지정한 행 바로 이전으로 이동됩니다. 마지막 행으로 이동 하려면 마지막 행 index 값에 1을 더해서 입력해 주세요.</p>
                 <p lang="en_US" class="alert">Moved to right in front of the specified row. To move to the last row, add 1 to the index value of the last row.</p>
-                <p lang="ko_KR" class="alert">입력 한 값이 바인드 되어 있는 데이터의 전체 행 수 보다 클 경우 항상 마지막 행 다음으로 이동됩니다.</p>
+                <p lang="ko_KR" class="alert">입력 한 값이 바인딩되어 있는 데이터의 전체 행 수 보다 클 경우 항상 마지막 행 다음으로 이동됩니다.</p>
                 <p lang="en_US" class="alert">If the entered value is greater than the total length of the bound data, it moves to the next row of last row.</p>
             </td>
         </tr>
@@ -433,7 +433,7 @@ listInst.data("modified", "col01", "col02", "col03");
                 <p lang="en_US">Enter the row index of the position you want to copy.</p>
                 <p lang="ko_KR" class="alert">지정한 행 바로 이전으로 복사됩니다. 마지막 행으로 복사 하려면 마지막 행 index 값에 1을 더해서 입력해 주세요.</p>
                 <p lang="en_US" class="alert">Copied to right in front of the specified row. To copy to the last row, add 1 to the index value of the last row.</p>
-                <p lang="ko_KR" class="alert">입력 한 값이 바인드 되어 있는 데이터의 전체 행 수 보다 클 경우 항상 마지막 행 다음으로 복사됩니다.</p>
+                <p lang="ko_KR" class="alert">입력 한 값이 바인딩되어 있는 데이터의 전체 행 수 보다 클 경우 항상 마지막 행 다음으로 복사됩니다.</p>
                 <p lang="en_US" class="alert">If the entered value is greater than the total length of the bound data, it copies to the next row of last row.</p>
             </td>
         </tr>

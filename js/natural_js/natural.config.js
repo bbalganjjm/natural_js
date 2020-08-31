@@ -121,7 +121,7 @@
                                 html: true
                             }).add("<strong>" + N.message.get({
                                     "ko_KR" : {
-                                        "COMM_TITLE" : "이 예제의 데이터는 서버에 저장 되지 않습니다. 서버로 전송 되는 파라미터 만 확인 바랍니다."
+                                        "COMM_TITLE" : "이 예제의 데이터는 서버에 저장되지 않습니다. 서버로 전송 되는 파라미터 만 확인 바랍니다."
                                     },
                                     "en_US" : {
                                         "COMM_TITLE" : "The parameters in this example are not sent to the server. Check only the parameters sent to the server."
@@ -1020,7 +1020,7 @@
                         + 'view(context) 요소를 입력하지 않으면 다른 View의 요소까지 선택되어 의도하지 않은 오류가 발생할 수 있습니다.'
                         + '\nex) N("selector", cont.view).hide();'
                         + '\n    cont.view.find("selector").hide();',
-                    "UseTheComponentsValMethod" : 'jQuery의 val 메서드로 입력 요소의 value 속성 값을 변경하면 컴포넌트에 바인드 되어 있는 데이터는 업데이트되지 않습니다.'
+                    "UseTheComponentsValMethod" : 'jQuery의 val 메서드로 입력 요소의 value 속성 값을 변경하면 컴포넌트에 바인딩되어 있는 데이터는 업데이트되지 않습니다.'
                         + '컴포넌트의 내부 데이터와 연동된 입력 요소들은 적용된 데이터 관련 컴포넌트(N.form, N.grid 등)에서 제공하는 val 메서드를 사용해야 합니다.'
                         + '\nex) cont["p.form.id"].val("columnName", "value")'
                         + '\n    cont["p.grid.id"].val(index, "columnName", "value")'

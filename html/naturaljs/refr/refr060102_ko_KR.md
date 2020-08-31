@@ -1,7 +1,7 @@
 팁
 ===
 
-###⊙ 데이터 관련 컴포넌트에 비어있는 객체를 바인드 하여 초기화 하기
+###⊙ 데이터 관련 컴포넌트에 비어있는 객체를 바인딩 하여 초기화 하기
 ```
 nFormInstance.unbind().bind(0, []); // N.form
 nGridInstance.bind([]); // N.grid
@@ -68,7 +68,7 @@ init : function() {
 
     grid.add();
     grid.data().length // 3
-    // 행 데이터가 추가 되지 않음.
+    // 행 데이터가 추가되지 않음.
     this.data.length // 2
 },
 ...

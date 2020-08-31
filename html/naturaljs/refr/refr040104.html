@@ -17,7 +17,7 @@
             <td>
                 <p lang="ko_KR">N.alert의 메시지 대화상자가 표시될 영역을 지정합니다.</p>
                 <p lang="en_US">Specify the area where the N.alert message dialog will be displayed.</p>
-                <p lang="ko_KR">modal 옵션이 true로 설정 되었을 때 N.alert의 overlay 요소가 context로 지정한 요소만큼 가려 줍니다.</p>
+                <p lang="ko_KR">modal 옵션이 true로 설정되었을 때 N.alert의 overlay 요소가 context로 지정한 요소만큼 가려 줍니다.</p>
                 <p lang="en_US">When the modal option is set to true, the overlay element of N.alert covers as much as the element specified by context.</p>
                 <p lang="ko_KR" class="alert">window 객체를 지정하면 화면 전체를 덮어 주고 jquery selector 나 jQuery object를 입력하면 지정한 요소 만큼 만 가려줍니다.</p>
                 <p lang="en_US" class="alert">If a window object is specified, the entire screen is covered, and if a jquery selector or jQuery object is entered, only the specified elements are covered.</p>
@@ -222,7 +222,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 메시지 �
             <td>true</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">false로 설정하면 브라우저의 크기를 조절 하거나 부모 컨텐츠의 높이가 동적으로 변경 되었을때 블록 오버레이의 크기와 메시지 대화상자의 위치를 자동으로 조정 하지 않습니다.</p>
+                <p lang="ko_KR">false로 설정하면 브라우저의 크기를 조절하거나 부모 컨텐츠의 높이가 동적으로 변경 되었을때 블록 오버레이의 크기와 메시지 대화상자의 위치를 자동으로 조정 하지 않습니다.</p>
                 <p lang="en_US">If set to false, It does not automatically adjust the size of the block overlay and the location of the message dialog when the browser is resized or the height of the parent content is dynamically changed.</p>
             </td>
         </tr>
@@ -291,7 +291,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 메시지 �
             <td>
                 <p lang="ko_KR">true로 설정하면 메시지 대화상자 요소 위에서 마우스 휠로 스크롤할 때 브라우저의 윈도우 스크롤을 비활성화합니다.</p>
                 <p lang="en_US">If set to true, disables browser window scrolling when scrolling with the mouse wheel over message dialog elements.</p>
-                <p lang="ko_KR">메시지 대화상자 요소가 처음이나 마지막으로 스크롤 되었을 때 브라우저 윈도우 스크롤이 위나 아래로 스크롤되는 브라우저의 기본 동작을 차단합니다.</p>
+                <p lang="ko_KR">메시지 대화상자 요소가 처음이나 마지막으로 스크롤되었을 때 브라우저 윈도우 스크롤이 위나 아래로 스크롤되는 브라우저의 기본 동작을 차단합니다.</p>
                 <p lang="en_US">Blocks the browser's default behavior of scrolling the browser window up or down when the message dialog element is scrolled first or last.</p>
                 <p lang="ko_KR" class="alert">modal 옵션이 true로 설정되어 있을 때만 작동합니다.</p>
                 <p lang="en_US" class="alert">Only works when modal option is set to true.</p>
@@ -337,7 +337,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 메시지 �
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">취소 버튼 클릭 하거나 X 버튼을 클릭 하거나 메시지 오버레이 요소 클릭 하거나 ESC 키를 눌러서 메시지 대화상자가 닫혔을 때 실행되는 이벤트 핸들러를 정의합니다.</p>
+                <p lang="ko_KR">취소 버튼 클릭하거나 X 버튼을 클릭하거나 메시지 오버레이 요소 클릭하거나 ESC 키를 눌러서 메시지 대화상자가 닫혔을 때 실행되는 이벤트 핸들러를 정의합니다.</p>
                 <p lang="en_US">Defines an event handler that is executed when the message dialog box is closed by clicking the Cancel button, clicking the X button, clicking the message overlay element, or pressing the ESC key.</p>
                 <pre lang="ko_KR"><code>onCancel : function(msgContext, msgContents) {
     // this : N.alert 인스턴스
@@ -361,7 +361,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 메시지 �
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">메시지 대화상자가 표시 되기 전에 실행되는 이벤트 핸들러를 정의합니다.</p>
+                <p lang="ko_KR">메시지 대화상자가 표시되기 전에 실행되는 이벤트 핸들러를 정의합니다.</p>
                 <p lang="en_US">Defines an event handler that is executed before the message dialog is displayed.</p>
                 <pre lang="ko_KR"><code>onBeforeShow : function(msgContext, msgContents) {
     // this : N.alert 인스턴스
@@ -413,7 +413,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 메시지 �
     // msgContext : Message overlay element
     // msgContents : Message dialog element
 }</code></pre>
-                <p lang="ko_KR" class="alert">closeMode 옵션이 remove로 설정된 경우 onBeforeHide 이벤트는 실행 되지 않습니다.</p>
+                <p lang="ko_KR" class="alert">closeMode 옵션이 remove로 설정된 경우 onBeforeHide 이벤트는 실행되지 않습니다.</p>
                 <p lang="en_US" class="alert">The onBeforeHide event is not fired when the closeMode option is set to remove.</p>
             </td>
         </tr>
@@ -435,7 +435,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 메시지 �
     // msgContext : Message overlay element
     // msgContents : Message dialog element
 }</code></pre>
-                <p lang="ko_KR" class="alert">closeMode 옵션이 remove로 설정된 경우 onHide 이벤트는 실행 되지 않습니다.</p>
+                <p lang="ko_KR" class="alert">closeMode 옵션이 remove로 설정된 경우 onHide 이벤트는 실행되지 않습니다.</p>
                 <p lang="en_US" class="alert">The onHide event is not fired when the closeMode option is set to remove.</p>
             </td>
         </tr>
@@ -445,7 +445,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 메시지 �
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">메시지 대화상자가 제거 되기 전에 실행되는 이벤트 핸들러를 정의합니다.</p>
+                <p lang="ko_KR">메시지 대화상자가 제거되기 전에 실행되는 이벤트 핸들러를 정의합니다.</p>
                 <p lang="en_US">Defines an event handler that is executed before the message dialog is removed.</p>
                 <pre lang="ko_KR"><code>onBeforeRemove : function(msgContext, msgContents) {
     // this : N.alert 인스턴스
@@ -457,7 +457,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 메시지 �
     // msgContext : Message overlay element
     // msgContents : Message dialog element
 }</code></pre>
-                <p lang="ko_KR" class="alert">closeMode 옵션이 hide로 설정된 경우 onBeforeRemove 이벤트는 실행 되지 않습니다.</p>
+                <p lang="ko_KR" class="alert">closeMode 옵션이 hide로 설정된 경우 onBeforeRemove 이벤트는 실행되지 않습니다.</p>
                 <p lang="en_US" class="alert">The onBeforeRemove event is not fired when the closeMode option is set to hide.</p>
             </td>
         </tr>
@@ -479,7 +479,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 메시지 �
     // msgContext : Message overlay element
     // msgContents : Message dialog element
 }</code></pre>
-                <p lang="ko_KR" class="alert">closeMode 옵션이 hide로 설정된 경우 onRemove 이벤트는 실행 되지 않습니다.</p>
+                <p lang="ko_KR" class="alert">closeMode 옵션이 hide로 설정된 경우 onRemove 이벤트는 실행되지 않습니다.</p>
                 <p lang="en_US" class="alert">The closeMode event is not fired when the closeMode option is set to hide.</p>
             </td>
         </tr>
