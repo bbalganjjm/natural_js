@@ -42,7 +42,7 @@
                 <p lang="ko_KR">true로 설정하면 N().comm에서 N 함수의 인자로 지정한 파라미터 객체를  array 타입으로 지정할 수 있습니다.</p>
                 <p lang="en_US">If set to true, the parameter object specified as an argument of N function in N().comm can be specified as an array type.</p>
                 <p lang="ko_KR" class="alert">
-                    Communicator를 N(params).comm(url).submit();와 같이 사용할 때 params의 객체 타입이 array 일때 dataIsArray 옵션이 false로 지정되어 있다면 array의 첫 번째 오브젝트만 전송 됩니다.
+                    Communicator를 N(params).comm(url).submit();와 같이 사용할 때 params의 객체 타입이 array 일 때 dataIsArray 옵션이 false로 지정되어 있다면 array의 첫 번째 오브젝트만 전송 됩니다.
                     이 문제의 원인은 jQuery 함수의 인자를 array(jQuery([{}])) 또는 object($({}))로 설정 한 후에 get 함수를 호출하면 둘 다 array([{}])를 반환하기 때문입니다.
                     불편하더라도 array를 서버에 전송할 때는 dataIsArray를 true로 설정하거나 object에 array를 담아서 사용바랍니다.
                 </p>
@@ -143,7 +143,7 @@
             <td>"json"</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">서버 응답 데이터의 유형(xml, json, script, or html)을 설정 합니다.</p>
+                <p lang="ko_KR">서버 응답 데이터의 유형(xml, json, script, or html)을 설정합니다.</p>
                 <p lang="en_US">Set the server response data type(xml, json, script, or html).</p>
                 <p lang="ko_KR" class="alert">dataType 옵션은 jQuery.ajax 함수의 옵션이 그대로 적용 됩니다.
                     <a class="link" target="blank_" href="http://api.jquery.com/jquery.ajax/">jQuery.ajax</a>
@@ -180,7 +180,7 @@
             <td class="depricated">false</td>
             <td class="depricated"></td>
             <td class="depricated">
-                <p>HTML 컨텐츠를 가져올 때 전환 효과를 보여줄지 여부를 설정 합니다.</p>
+                <p>HTML 컨텐츠를 가져올 때 전환 효과를 보여줄지 여부를 설정합니다.</p>
                 <p>효과를 적용하지 않으려면 false를 입력하고 효과를 입력하려면 다음과 같이 입력합니다.</p>
                 <p>["이펙트", "시간(ms)", "이펙트가 끝날 때 마다 실행될 콜백 함수"]</p>
                 <pre><code>["slideDown", 300, null]</code></pre>
@@ -196,7 +196,7 @@
             <td class="depricated">true</td>
             <td class="depricated" style="text-align: center;">X</td>
             <td class="depricated">
-                <p>false로 설정하면 Ajax 요청을 동기 방식으로 처리 합니다.</p>
+                <p>false로 설정하면 Ajax 요청을 동기 방식으로 처리합니다.</p>
                 <p lang="ko_KR" class="alert">async 옵션은 jQuery.ajax 함수의 옵션이 그대로 적용 됩니다.
                     <a class="link" target="blank_" href="http://api.jquery.com/jquery.ajax/">jQuery.ajax</a>
                     메뉴얼의 settings 부분에서 async 속성을 참고하세요.
@@ -207,7 +207,7 @@
             </td>
         </tr>
     </table>
-    <p lang="ko_KR" class="alert">N.comm은 jQuery.ajax 모듈을 사용하여 Ajax 요청을 처리 합니다. jQuery.ajax의 beforeSend, success, error, complete 옵션을 제외 한 옵션들은 N.comm 에서도 그대로 적용 됩니다.</p>
+    <p lang="ko_KR" class="alert">N.comm은 jQuery.ajax 모듈을 사용하여 Ajax 요청을 처리합니다. jQuery.ajax의 beforeSend, success, error, complete 옵션을 제외 한 옵션들은 N.comm 에서도 그대로 적용 됩니다.</p>
     <p lang="en_US" class="alert">N.comm uses the jQuery.ajax module to process Ajax requests. The options in jQuery.ajax also apply to N.comm except for beforeSend, success, error and complete options.</p>
 
     <hr>

@@ -142,7 +142,7 @@
             <td>true</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">false로 설정하면 select 옵션이 true 일때 선택된 행을 다시 선택해도 선택이 취소 되지 않습니다.</p>
+                <p lang="ko_KR">false로 설정하면 select 옵션이 true 일 때 선택된 행을 다시 선택해도 선택이 취소 되지 않습니다.</p>
                 <p lang="en_US">If set to false, when the select option is true, selecting the selected row again does not cancel the selection.</p>
                 <p lang="ko_KR" class="alert">multiselect 옵션이 true 일 경우에는 unselect 옵션이 적용 되지 않습니다.</p>
                 <p lang="en_US" class="alert">If the multiselect option is true, the unselect option has no apply.</p>
@@ -228,7 +228,7 @@
             <td>1</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">1 이상으로 설정하면 바인딩할 때 리스트의 각 행이 별도로 생성됩니다. 이때 다음 행이 생성 되기 까지의 시간 간격을 설정 합니다.</p>
+                <p lang="ko_KR">1 이상으로 설정하면 바인딩할 때 리스트의 각 행이 별도로 생성됩니다. 이때 다음 행이 생성 되기 까지의 시간 간격을 설정합니다.</p>
                 <p lang="en_US">If set to 1 or higher, each row of the list is created separately when binding. At this time, set the time interval until the next row is created.</p>
                 <p lang="ko_KR" class="alert">0으로 설정하면 모든 행을 한번에 생성 하여 데이터를 바인딩 하는동안 브라우저가 멈출 수도 있습니다.</p>
                 <p lang="en_US" class="alert">If set to 0, the browser may hang while binding data by creating all rows at once.</p>
@@ -361,7 +361,7 @@
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">bind 하거나 add 했을 때 생성된 행 요소에 데이터가 바인딩 되기 전에 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="ko_KR">bind 하거나 add 했을 때 생성된 행 요소에 데이터가 바인딩 되기 전에 실행되는 이벤트 핸들러를 정의합니다.</p>
                 <p lang="en_US">Defines an event handler that is executed before data is bound to the row element created when bind or add.</p>
                 <pre lang="ko_KR"><code>rowHandlerBeforeBind : function(rowIdx, rowEle, rowData) {
     // this : N.list 인스턴스
@@ -385,7 +385,7 @@
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">bind 하거나 add 했을 때 생성된 행 요소에 데이터가 바인딩된 후에 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="ko_KR">bind 하거나 add 했을 때 생성된 행 요소에 데이터가 바인딩된 후에 실행되는 이벤트 핸들러를 정의합니다.</p>
                 <p lang="en_US">Defines an event handler that is executed after data is bound to the row element created when bind or add.</p>
                 <pre lang="ko_KR"><code>rowHandler : function(rowIdx, rowEle, rowData) {
     // this : N.list 인스턴스
@@ -409,7 +409,7 @@
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">행이 선택 되었을 때 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="ko_KR">행이 선택 되었을 때 실행되는 이벤트 핸들러를 정의합니다.</p>
                 <p lang="en_US">Defines an event handler that is executed when a row is selected.</p>
                 <pre lang="ko_KR"><code>onSelect : function(rowIdx, rowEle, rowData, beforeRowIdx, e) {
     // this : N.list 인스턴스
@@ -439,7 +439,7 @@
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">데이터가 바인딩이 완료된 후에 실행 되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="ko_KR">데이터가 바인딩이 완료된 후에 실행 되는 이벤트 핸들러를 정의합니다.</p>
                 <p lang="en_US">Define an event handler that is executed after data is bound.</p>
                 <pre lang="ko_KR"><code>onBind : function(context, data, isFirstPage, isLastPage) {
     // this : N.list 인스턴스
@@ -455,7 +455,7 @@
     // isFirstPage : Whether it is the first page when scroll paging(스크롤 페이징 하지 않으면 true 반환)
     // isLastPage : Whether it is the last page when scroll paging(스크롤 페이징 하지 않으면 true 반환)
 }</code></pre>
-                <p lang="ko_KR" class="alert">스크롤 페이징이 활성화 되었을 경우 페이징된 데이터가 바인드될 때마다 실행됩니다.</p>
+                <p lang="ko_KR" class="alert">스크롤 페이징이 활성화되었을 경우 페이징된 데이터가 바인드될 때마다 실행됩니다.</p>
                 <p lang="en_US" class="alert">If scroll paging is enabled, it is executed whenever paged data is bound.</p>
             </td>
         </tr>

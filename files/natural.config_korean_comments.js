@@ -70,12 +70,12 @@
          */
         "cont" : {
             /**
-             * advisor에서 참조할 pointcut을 정의 합니다.
+             * advisor에서 참조할 pointcut을 정의합니다.
              * pointcut 은 반드시 fn 속성에 param, cont, fnChain 인자를 가진 함수로 정의해야 합니다.
              * 함수 수행 결과(boolean)는 advice의 적용 여부를 판단하는데 사용됩니다.
              */
             "pointcuts" : {
-                /** pointcut 객체는 유일한 속성명으로 정의 합니다. */
+                /** pointcut 객체는 유일한 속성명으로 정의합니다. */
                 "regexp" : {
                     /**
                      * 정규표현식으로 평가하는 사용자 포인트 컷(기본으로 내장 포인트컷으로 삭제 해도 됩니다)
@@ -89,10 +89,10 @@
                     }
                 }
             },
-            /** 컨트롤러(N.cont)의 함수에 적용하고자 하는 기능을 정의 합니다. */
+            /** 컨트롤러(N.cont)의 함수에 적용하고자 하는 기능을 정의합니다. */
             "advisors" : [{
                 /**
-                 * advisor가 적용될 pointcut을 정의 합니다.
+                 * advisor가 적용될 pointcut을 정의합니다.
                  * "pointcut" : {
                  *     "type" : "regexp"
                  *     "param" : "something"
@@ -700,11 +700,11 @@
     N.context.attr("code", {
         inspection : {
             /**
-             * ERROR 유형의 코드가 검출 되었을 때 ERROR를 발생하여 로직을 중단 할지 여부를 지정합니다.
+             * ERROR 유형의 코드가 검출되었을 때 ERROR를 발생하여 로직을 중단 할지 여부를 지정합니다.
              */
             abortOnError : false,
             /**
-             * 검사 대상에서 제외할 구문들을 문자열로 정의 합니다.
+             * 검사 대상에서 제외할 구문들을 문자열로 정의합니다.
              *
              * 검출된 코드 내용 중 다음 문자열이 포함되어 있으면 제외 처리됩니다.
              *  ex) excludes : [ ".index-header", ".page-header", ".index-lefter", ".index-contents", ".index-footer" ]

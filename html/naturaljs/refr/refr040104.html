@@ -107,7 +107,7 @@
                     <li lang="ko_KR">number 타입으로 설정할 경우 입력한 수치(px)가 요소의 넓이로 설정됩니다.</li>
                     <li lang="en_US">If set to number type, the entered value(px) is set as the element width.</li>
                     <li>
-                        <p lang="ko_KR">function 타입으로 설정할 경우 msgContext(modal 옵션이 true 일때 화면에 덮는 요소), msgContents(메시지 컨텐츠 요소)가 인자로 전달 되고 return된 값으로 요소의 넓이가 설정됩니다.</p>
+                        <p lang="ko_KR">function 타입으로 설정할 경우 msgContext(modal 옵션이 true 일 때 화면에 덮는 요소), msgContents(메시지 컨텐츠 요소)가 인자로 전달 되고 return된 값으로 요소의 넓이가 설정됩니다.</p>
                         <p lang="en_US">If set to function type, msgContext (the element that covers the screen when the modal option is true) and msgContents (the message content element) are passed as arguments, and the width of the element is set as the returned value.</p>
                         <pre><code>...<span lang="ko_KR">// 대화상자의 넓이를 화면에 꽉 채우기</span>
 <span lang="en_US">// Fully fill the width of the dialog on the screen.</span>
@@ -131,7 +131,7 @@ width : function(msgContext, msgContents) {
                     <li lang="ko_KR">number 타입으로 설정할 경우 입력한 수치(px)가 요소의 높이로 설정됩니다.</li>
                     <li lang="en_US">When set to number type, the entered value(px) is set as the element height.</li>
                     <li>
-                        <p lang="ko_KR">function 타입으로 설정할 경우 msgContext(modal 옵션이 true 일때 화면에 덮는 요소), msgContents(메시지 컨텐츠 요소)가 인자로 전달 되고 return된 값으로 요소의 높이가 설정됩니다.</p>
+                        <p lang="ko_KR">function 타입으로 설정할 경우 msgContext(modal 옵션이 true 일 때 화면에 덮는 요소), msgContents(메시지 컨텐츠 요소)가 인자로 전달 되고 return된 값으로 요소의 높이가 설정됩니다.</p>
                         <p lang="en_US">If set to function type, msgContext(the element that covers the screen when the modal option is true) and msgContents(the message content element) are passed as arguments, and the height of the element is set as the returned value.</p>
                         <pre><code>...<span lang="ko_KR">// 대화상자의 높이를 화면에 꽉 채우기</span>
 <span lang="en_US">// Fully fill the height of the dialog on the screen.</span>
@@ -150,7 +150,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 메시지 �
             <td>undefined</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">메시지 대화상자의 제목을 설정 합니다. 설정하지 않으면 타이틀바가 생성되지 않습니다.</p>
+                <p lang="ko_KR">메시지 대화상자의 제목을 설정합니다. 설정하지 않으면 타이틀바가 생성되지 않습니다.</p>
                 <p lang="en_US">Set the title of the message dialog. If not set, the title bar is not created.</p>
                 <p lang="ko_KR" class="alert">context 요소의 title 속성으로도 설정할 수 있습니다.</p>
                 <p lang="en_US" class="alert">It can also be set with the title attribute of the context element.</p>
@@ -172,7 +172,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 메시지 �
             <td>remove</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">메시지 대화상자가 닫혔을 때 대화상자 요소를 감출 것 인지, 제거할 것 인지를 설정 합니다.</p>
+                <p lang="ko_KR">메시지 대화상자가 닫혔을 때 대화상자 요소를 감출 것 인지, 제거할 것 인지를 설정합니다.</p>
                 <p lang="en_US">Set whether to hide or remove the dialog element when the message dialog is closed.</p>
                 <ul>
                     <li lang="ko_KR">hide : 메시지 대화상자 요소를 숨겨서 이전 상태를 유지 합니다.</li>
@@ -269,7 +269,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 메시지 �
             <td>true</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">false로 설정하면 msgContext(modal 옵션이 true 일때 화면에 덮는 요소)를 클릭 해도 메시지 대화상자가 닫히지 않습니다.</p>
+                <p lang="ko_KR">false로 설정하면 msgContext(modal 옵션이 true 일 때 화면에 덮는 요소)를 클릭 해도 메시지 대화상자가 닫히지 않습니다.</p>
                 <p lang="en_US">If set to false, message dialog does not close when clicking msgContext(the element that covers the screen when the modal option is true).</p>
             </td>
         </tr>
@@ -313,7 +313,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 메시지 �
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">확인버튼을 클릭 했을 때 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="ko_KR">확인버튼을 클릭 했을 때 실행되는 이벤트 핸들러를 정의합니다.</p>
                 <p lang="en_US">Defines an event handler that is executed when the OK button is clicked.</p>
                 <pre lang="ko_KR"><code>onOk : function(msgContext, msgContents) {
     // this : N.alert 인스턴스
@@ -337,7 +337,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 메시지 �
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">취소 버튼 클릭 하거나 X 버튼을 클릭 하거나 메시지 오버레이 요소 클릭 하거나 ESC 키를 눌러서 메시지 대화상자가 닫혔을 때 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="ko_KR">취소 버튼 클릭 하거나 X 버튼을 클릭 하거나 메시지 오버레이 요소 클릭 하거나 ESC 키를 눌러서 메시지 대화상자가 닫혔을 때 실행되는 이벤트 핸들러를 정의합니다.</p>
                 <p lang="en_US">Defines an event handler that is executed when the message dialog box is closed by clicking the Cancel button, clicking the X button, clicking the message overlay element, or pressing the ESC key.</p>
                 <pre lang="ko_KR"><code>onCancel : function(msgContext, msgContents) {
     // this : N.alert 인스턴스
@@ -361,7 +361,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 메시지 �
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">메시지 대화상자가 표시 되기 전에 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="ko_KR">메시지 대화상자가 표시 되기 전에 실행되는 이벤트 핸들러를 정의합니다.</p>
                 <p lang="en_US">Defines an event handler that is executed before the message dialog is displayed.</p>
                 <pre lang="ko_KR"><code>onBeforeShow : function(msgContext, msgContents) {
     // this : N.alert 인스턴스
@@ -381,7 +381,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 메시지 �
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">메시지 대화상자가 표시된 후에 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="ko_KR">메시지 대화상자가 표시된 후에 실행되는 이벤트 핸들러를 정의합니다.</p>
                 <p lang="en_US">Defines an event handler that is executed after the message dialog is displayed.</p>
                 <pre lang="ko_KR"><code>onShow : function(msgContext, msgContents) {
     // this : N.alert 인스턴스
@@ -401,7 +401,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 메시지 �
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">메시지 대화상자가 숨겨지기 전에 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="ko_KR">메시지 대화상자가 숨겨지기 전에 실행되는 이벤트 핸들러를 정의합니다.</p>
                 <p lang="en_US">Defines an event handler that is executed before the message dialog is hidden.</p>
                 <pre lang="ko_KR"><code>onBeforeHide : function(msgContext, msgContents) {
     // this : N.alert 인스턴스
@@ -423,7 +423,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 메시지 �
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">메시지 대화상자가 숨겨진 후에 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="ko_KR">메시지 대화상자가 숨겨진 후에 실행되는 이벤트 핸들러를 정의합니다.</p>
                 <p lang="en_US">Defines an event handler that is executed after the message dialog is hidden.</p>
                 <pre lang="ko_KR"><code>onHide : function(msgContext, msgContents) {
     // this : N.alert 인스턴스
@@ -445,7 +445,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 메시지 �
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">메시지 대화상자가 제거 되기 전에 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="ko_KR">메시지 대화상자가 제거 되기 전에 실행되는 이벤트 핸들러를 정의합니다.</p>
                 <p lang="en_US">Defines an event handler that is executed before the message dialog is removed.</p>
                 <pre lang="ko_KR"><code>onBeforeRemove : function(msgContext, msgContents) {
     // this : N.alert 인스턴스
@@ -467,7 +467,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 메시지 �
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">메시지 대화상자가 제거된 후에 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="ko_KR">메시지 대화상자가 제거된 후에 실행되는 이벤트 핸들러를 정의합니다.</p>
                 <p lang="en_US">Defines an event handler that is executed after the message dialog is removed.</p>
                 <pre lang="ko_KR"><code>onRemove : function(msgContext, msgContents) {
     // this : N.alert 인스턴스

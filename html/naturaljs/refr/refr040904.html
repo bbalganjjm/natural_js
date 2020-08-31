@@ -309,7 +309,7 @@
             <td>true</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">false로 설정하면 select 옵션이 true 일때 선택된 행을 다시 선택해도 선택이 취소 되지 않습니다.</p>
+                <p lang="ko_KR">false로 설정하면 select 옵션이 true 일 때 선택된 행을 다시 선택해도 선택이 취소 되지 않습니다.</p>
                 <p lang="en_US">If set to false, when the select option is true, selecting the selected row again does not cancel the selection.</p>
                 <p lang="ko_KR" class="alert">multiselect 옵션이 true 일 경우에는 unselect 옵션이 적용 되지 않습니다.</p>
                 <p lang="en_US" class="alert">If the multiselect option is true, the unselect option has no apply.</p>
@@ -397,7 +397,7 @@
             <td>1</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">1 이상으로 설정하면 바인딩할 때 그리드의 각 행이 별도로 생성됩니다. 이때 다음 행이 생성 되기 까지의 시간 간격을 설정 합니다.</p>
+                <p lang="ko_KR">1 이상으로 설정하면 바인딩할 때 그리드의 각 행이 별도로 생성됩니다. 이때 다음 행이 생성 되기 까지의 시간 간격을 설정합니다.</p>
                 <p lang="en_US">If set to 1 or higher, each row of the grid is created separately when binding. At this time, set the time interval until the next row is created.</p>
                 <p lang="ko_KR" class="alert">0으로 설정하면 모든 행을 한번에 생성 하여 데이터를 바인딩 하는동안 브라우저가 멈출 수도 있습니다.</p>
                 <p lang="en_US" class="alert">If set to 0, the browser may hang while binding data by creating all rows at once.</p>
@@ -546,7 +546,7 @@
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">bind 하거나 add 했을 때 생성된 행 요소에 데이터가 바인딩 되기 전에 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="ko_KR">bind 하거나 add 했을 때 생성된 행 요소에 데이터가 바인딩 되기 전에 실행되는 이벤트 핸들러를 정의합니다.</p>
                 <p lang="en_US">Defines an event handler that is executed before data is bound to the row element created when bind or add.</p>
                 <pre lang="ko_KR"><code>rowHandlerBeforeBind : function(rowIdx, rowEle, rowData) {
     // this : N.grid 인스턴스
@@ -570,7 +570,7 @@
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">bind 하거나 add 했을 때 생성된 행 요소에 데이터가 바인딩된 후에 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="ko_KR">bind 하거나 add 했을 때 생성된 행 요소에 데이터가 바인딩된 후에 실행되는 이벤트 핸들러를 정의합니다.</p>
                 <p lang="en_US">Defines an event handler that is executed after data is bound to the row element created when bind or add.</p>
                 <pre lang="ko_KR"><code>rowHandler : function(rowIdx, rowEle, rowData) {
     // this : N.grid 인스턴스
@@ -594,7 +594,7 @@
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">행이 선택 되었을 때 실행되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="ko_KR">행이 선택 되었을 때 실행되는 이벤트 핸들러를 정의합니다.</p>
                 <p lang="en_US">Defines an event handler that is executed when a row is selected.</p>
                 <pre lang="ko_KR"><code>onSelect : function(rowIdx, rowEle, rowData, beforeRowIdx, e) {
     // this : N.grid 인스턴스
@@ -624,7 +624,7 @@
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">데이터가 바인딩이 완료된 후에 실행 되는 이벤트 핸들러를 정의 합니다.</p>
+                <p lang="ko_KR">데이터가 바인딩이 완료된 후에 실행 되는 이벤트 핸들러를 정의합니다.</p>
                 <p lang="en_US">Define an event handler that is executed after data is bound.</p>
                 <pre lang="ko_KR"><code>onBind : function(context, data, isFirstPage, isLastPage) {
     // this : N.grid 인스턴스
@@ -640,7 +640,7 @@
     // isFirstPage : Whether it is the first page when scroll paging(스크롤 페이징 하지 않으면 true 반환)
     // isLastPage : Whether it is the last page when scroll paging(스크롤 페이징 하지 않으면 true 반환)
 }</code></pre>
-                <p lang="ko_KR" class="alert">스크롤 페이징이 활성화 되었을 경우 페이징된 데이터가 바인드될 때마다 실행됩니다.</p>
+                <p lang="ko_KR" class="alert">스크롤 페이징이 활성화되었을 경우 페이징된 데이터가 바인드될 때마다 실행됩니다.</p>
                 <p lang="en_US" class="alert">If scroll paging is enabled, it is executed whenever paged data is bound.</p>
             </td>
         </tr>
@@ -673,7 +673,7 @@
             <td>0</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">resizable 옵션이 활성화 되었을 때 그리드 바디 컬럼의 넓이와 그리드 헤더 컬럼 넓이가 일치하지 않을 수 있습니다. 이때 값을 0.1 씩 증가 또는 감소시켜 보정하는 옵션입니다.</p>
+                <p lang="ko_KR">resizable 옵션이 활성화되었을 때 그리드 바디 컬럼의 넓이와 그리드 헤더 컬럼 넓이가 일치하지 않을 수 있습니다. 이때 값을 0.1 씩 증가 또는 감소시켜 보정하는 옵션입니다.</p>
                 <p lang="en_US">The grid body column width and grid header column width may not match when the resizable option is activated. At this time, it is an option to correct by increasing or decreasing the value by 0.1.</p>
                 <p lang="ko_KR" class="alert">그리드 열의 너비/높이는 td, th와 같은 테이블 관련 요소에 적용되는 스타일(padding, box-sizing 등)에 따라 변경될 수 있습니다.</p>
                 <p lang="en_US" class="alert">The width/height of the grid column may be changed due to the style(padding, box-sizing, etc.) applied to table-related elements such as td and th.</p>
@@ -685,7 +685,7 @@
             <td>0</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">헤더 고정형 그리드에서 resizable 옵션이 활성화 되었을 때 마지막 컬럼을 클릭하면 다른 컬럼들이 밀릴 수 있습니다. 이때 값을 0.1 씩 증가 또는 감소시켜 보정하는 옵션입니다.</p>
+                <p lang="ko_KR">헤더 고정형 그리드에서 resizable 옵션이 활성화되었을 때 마지막 컬럼을 클릭하면 다른 컬럼들이 밀릴 수 있습니다. 이때 값을 0.1 씩 증가 또는 감소시켜 보정하는 옵션입니다.</p>
                 <p lang="en_US">Clicking on the last column may cause other columns to be pushed when the resizable option is enabled in the header fixed grid. At this time, it is an option to correct by increasing or decreasing the value by 0.1.</p>
                 <p lang="ko_KR" class="alert">그리드 열의 너비/높이는 td, th와 같은 테이블 관련 요소에 적용되는 스타일(padding, box-sizing 등)에 따라 변경될 수 있습니다.</p>
                 <p lang="en_US" class="alert">The width/height of the grid column may be changed due to the style(padding, box-sizing, etc.) applied to table-related elements such as td and th.</p>
@@ -697,7 +697,7 @@
             <td>0</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">resizable 옵션이 활성화 되었을 때 리사이즈바의 left 포지션이 컬럼 보더를 기준으로 가운데에 위치하지 않을 수 있습니다. 이때 값을 0.1 씩 증가 또는 감소시켜 보정하는 옵션입니다.</p>
+                <p lang="ko_KR">resizable 옵션이 활성화되었을 때 리사이즈바의 left 포지션이 컬럼 보더를 기준으로 가운데에 위치하지 않을 수 있습니다. 이때 값을 0.1 씩 증가 또는 감소시켜 보정하는 옵션입니다.</p>
                 <p lang="en_US">The left position of the resize bar may not be centered relative to the column border when the resizable option is activated. At this time, it is an option to correct by increasing or decreasing the value by 0.1.</p>
                 <p lang="ko_KR" class="alert">그리드 열의 너비/높이는 td, th와 같은 테이블 관련 요소에 적용되는 스타일(padding, box-sizing 등)에 따라 변경될 수 있습니다.</p>
                 <p lang="en_US" class="alert">The width/height of the grid column may be changed due to the style(padding, box-sizing, etc.) applied to table-related elements such as td and th.</p>
@@ -709,7 +709,7 @@
             <td>0</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">resizable 옵션이 활성화 되었을 때 리사이즈 바의 높이가 꽉 차지 않을 수 있습니다. 이때 값을 0.1 씩 증가 또는 감소시켜 보정하는 옵션입니다.</p>
+                <p lang="ko_KR">resizable 옵션이 활성화되었을 때 리사이즈 바의 높이가 꽉 차지 않을 수 있습니다. 이때 값을 0.1 씩 증가 또는 감소시켜 보정하는 옵션입니다.</p>
                 <p lang="en_US">The height of the resizing bar may not be full when the resizable option is activated. At this time, it is an option to correct by increasing or decreasing the value by 0.1.</p>
                 <p lang="ko_KR" class="alert">그리드 열의 너비/높이는 td, th와 같은 테이블 관련 요소에 적용되는 스타일(padding, box-sizing 등)에 따라 변경될 수 있습니다.</p>
                 <p lang="en_US" class="alert">The width/height of the grid column may be changed due to the style(padding, box-sizing, etc.) applied to table-related elements such as td and th.</p>
@@ -721,7 +721,7 @@
             <td>0</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">fixedcol 옵션이 활성화 되었을 때 고정된 헤더 셀(th)의 상단 위치가 맞지 않을 수 있습니다. 이때 값을 0.1 씩 증가 또는 감소시켜 보정하는 옵션입니다.</p>
+                <p lang="ko_KR">fixedcol 옵션이 활성화되었을 때 고정된 헤더 셀(th)의 상단 위치가 맞지 않을 수 있습니다. 이때 값을 0.1 씩 증가 또는 감소시켜 보정하는 옵션입니다.</p>
                 <p lang="en_US">The top position of the fixed header cell(th) may not match when the fixedcol option is activated. At this time, it is an option to correct by increasing or decreasing the value by 0.1.</p>
                 <p lang="ko_KR" class="alert">그리드 열의 너비/높이는 td, th와 같은 테이블 관련 요소에 적용되는 스타일(padding, box-sizing 등)에 따라 변경될 수 있습니다.</p>
                 <p lang="en_US" class="alert">The width/height of the grid column may be changed due to the style(padding, box-sizing, etc.) applied to table-related elements such as td and th.</p>
@@ -733,7 +733,7 @@
             <td>0</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">fixedcol 옵션이 활성화 되었을 때 고정된 헤더 셀(th)의 좌측 위치가 맞지 않을 수 있습니다. 이때 값을 0.1 씩 증가 또는 감소시켜 보정하는 옵션입니다.</p>
+                <p lang="ko_KR">fixedcol 옵션이 활성화되었을 때 고정된 헤더 셀(th)의 좌측 위치가 맞지 않을 수 있습니다. 이때 값을 0.1 씩 증가 또는 감소시켜 보정하는 옵션입니다.</p>
                 <p lang="en_US">The left position of the fixed header cell(th) may not match when the fixedcol option is activated. At this time, it is an option to correct by increasing or decreasing the value by 0.1.</p>
                 <p lang="ko_KR" class="alert">그리드 열의 너비/높이는 td, th와 같은 테이블 관련 요소에 적용되는 스타일(padding, box-sizing 등)에 따라 변경될 수 있습니다.</p>
                 <p lang="en_US" class="alert">The width/height of the grid column may be changed due to the style(padding, box-sizing, etc.) applied to table-related elements such as td and th.</p>
@@ -745,7 +745,7 @@
             <td>0</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">fixedcol 옵션이 활성화 되었을 때 고정된 헤더 셀(th)의 높이가 맞지 않을 수 있습니다. 이때 값을 0.1 씩 증가 또는 감소시켜 보정하는 옵션입니다.</p>
+                <p lang="ko_KR">fixedcol 옵션이 활성화되었을 때 고정된 헤더 셀(th)의 높이가 맞지 않을 수 있습니다. 이때 값을 0.1 씩 증가 또는 감소시켜 보정하는 옵션입니다.</p>
                 <p lang="en_US">The height of the fixed header cell(th) may not match when the fixedcol option is activated. At this time, it is an option to correct by increasing or decreasing the value by 0.1.</p>
                 <p lang="ko_KR" class="alert">그리드 열의 너비/높이는 td, th와 같은 테이블 관련 요소에 적용되는 스타일(padding, box-sizing 등)에 따라 변경될 수 있습니다.</p>
                 <p lang="en_US" class="alert">The width/height of the grid column may be changed due to the style(padding, box-sizing, etc.) applied to table-related elements such as td and th.</p>
@@ -757,7 +757,7 @@
             <td>0</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">fixedcol 옵션이 활성화 되었을 때 고정된 바디 셀(td)의 상단 위치가 맞지 않을 수 있습니다. 이때 값을 0.1 씩 증가 또는 감소시켜 보정하는 옵션입니다.</p>
+                <p lang="ko_KR">fixedcol 옵션이 활성화되었을 때 고정된 바디 셀(td)의 상단 위치가 맞지 않을 수 있습니다. 이때 값을 0.1 씩 증가 또는 감소시켜 보정하는 옵션입니다.</p>
                 <p lang="en_US">The top position of the fixed body cell(td) may not match when the fixedcol option is activated. At this time, it is an option to correct by increasing or decreasing the value by 0.1.</p>
                 <p lang="ko_KR" class="alert">그리드 열의 너비/높이는 td, th와 같은 테이블 관련 요소에 적용되는 스타일(padding, box-sizing 등)에 따라 변경될 수 있습니다.</p>
                 <p lang="en_US" class="alert">The width/height of the grid column may be changed due to the style(padding, box-sizing, etc.) applied to table-related elements such as td and th.</p>
@@ -769,7 +769,7 @@
             <td>0</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">fixedcol 옵션이 활성화 되었을 때 고정된 바디 셀(td)의 좌측 위치가 맞지 않을 수 있습니다. 이때 값을 0.1 씩 증가 또는 감소시켜 보정하는 옵션입니다.</p>
+                <p lang="ko_KR">fixedcol 옵션이 활성화되었을 때 고정된 바디 셀(td)의 좌측 위치가 맞지 않을 수 있습니다. 이때 값을 0.1 씩 증가 또는 감소시켜 보정하는 옵션입니다.</p>
                 <p lang="en_US">The left position of the fixed body cell(td) may not match when the fixedcol option is activated. At this time, it is an option to correct by increasing or decreasing the value by 0.1.</p>
                 <p lang="ko_KR" class="alert">그리드 열의 너비/높이는 td, th와 같은 테이블 관련 요소에 적용되는 스타일(padding, box-sizing 등)에 따라 변경될 수 있습니다.</p>
                 <p lang="en_US" class="alert">The width/height of the grid column may be changed due to the style(padding, box-sizing, etc.) applied to table-related elements such as td and th.</p>
@@ -781,7 +781,7 @@
             <td>0</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">fixedcol 옵션이 활성화 되었을 때 고정된 바디 셀(td)의 높이가 맞지 않을 수 있습니다. 이때 값을 0.1 씩 증가 또는 감소시켜 보정하는 옵션입니다.</p>
+                <p lang="ko_KR">fixedcol 옵션이 활성화되었을 때 고정된 바디 셀(td)의 높이가 맞지 않을 수 있습니다. 이때 값을 0.1 씩 증가 또는 감소시켜 보정하는 옵션입니다.</p>
                 <p lang="en_US">The height of the fixed body cell(td) may not match when the fixedcol option is activated. At this time, it is an option to correct by increasing or decreasing the value by 0.1.</p>
                 <p lang="ko_KR" class="alert">그리드 열의 너비/높이는 td, th와 같은 테이블 관련 요소에 적용되는 스타일(padding, box-sizing 등)에 따라 변경될 수 있습니다.</p>
                 <p lang="en_US" class="alert">The width/height of the grid column may be changed due to the style(padding, box-sizing, etc.) applied to table-related elements such as td and th.</p>
@@ -793,7 +793,7 @@
             <td>1</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">fixedcol 옵션이 활성화 되었을 때 추가된 행의 셀(td)의 높이가 맞지 않을 수 있습니다. 이때 값을 0.1 씩 증가 또는 감소시켜 보정하는 옵션입니다.</p>
+                <p lang="ko_KR">fixedcol 옵션이 활성화되었을 때 추가된 행의 셀(td)의 높이가 맞지 않을 수 있습니다. 이때 값을 0.1 씩 증가 또는 감소시켜 보정하는 옵션입니다.</p>
                 <p lang="en_US">The height of the cell(td) of the added row may not match when the fixedcol option is activated. At this time, it is an option to correct by increasing or decreasing the value by 0.1.</p>
                 <p lang="ko_KR" class="alert">그리드 열의 너비/높이는 td, th와 같은 테이블 관련 요소에 적용되는 스타일(padding, box-sizing 등)에 따라 변경될 수 있습니다.</p>
                 <p lang="en_US" class="alert">The width/height of the grid column may be changed due to the style(padding, box-sizing, etc.) applied to table-related elements such as td and th.</p>
