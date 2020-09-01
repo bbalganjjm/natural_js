@@ -688,7 +688,7 @@
                         + 'view(context) 요소를 입력하지 않으면 다른 View의 요소까지 선택되어 의도하지 않은 오류가 발생할 수 있습니다.'
                         + '\nex) N("selector", cont.view).hide();'
                         + '\n    cont.view.find("selector").hide();',
-                    "UseTheComponentsValMethod" : 'jQuery의 val 메서드로 입력 요소의 value 속성 값을 변경하면 컴포넌트에 바인딩되어 있는 데이터는 업데이트되지 않습니다.'
+                    "UseTheComponentsValMethod" : 'jQuery의 val 메서드로 입력 요소의 value 속성값을 변경하면 컴포넌트에 바인딩되어 있는 데이터는 업데이트되지 않습니다.'
                         + '컴포넌트의 내부 데이터와 연동된 입력 요소들은 적용된 데이터 관련 컴포넌트(N.form, N.grid 등)에서 제공하는 val 메서드를 사용해야 합니다.'
                         + '\nex) cont["p.form.id"].val("columnName", "value")'
                         + '\n    cont["p.grid.id"].val(index, "columnName", "value")'
