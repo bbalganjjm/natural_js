@@ -323,7 +323,7 @@ To set more detailed options, you can specify the "search-box" option as object 
 ```
 
 ##2. Starts with "c." - Communicator(N.comm) declaration
-All [Communicators(N.comm)](#cmVmcjAyMDMlMjRDb21tdW5pY2F0b3IkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDIwMy5odG1s) that communicate with the server can be defined as member variables of the Controller object. If you pre-declare Communicator, you can check the flow of data at a glance and apply AOP to the declared Communicators.
+All [Communicator(N.comm)](#cmVmcjAyMDMlMjRDb21tdW5pY2F0b3IkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDIwMy5odG1s) that communicate with the server can be defined as member variables of the Controller object. If you pre-declare Communicator, you can check the flow of data at a glance and apply AOP to the declared Communicators.
 The initial property name of N.comm can be used in combination as follows.
 
 ```

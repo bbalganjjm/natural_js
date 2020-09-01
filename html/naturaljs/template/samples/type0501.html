@@ -5,7 +5,7 @@
         <ul class="view-desc">
             <li>조회폼(N.form)과 리스트(N.list), 리스트와 연동된 그리드(N.grid), 그리드와 연동된 상세 데이터 폼(N.form)으로 구성된 예제입니다.</li>
             <li>N.grid(또는 N.list)의 onSelect 이벤트 옵션을 통해 N.list(또는 N.grid)와 N.list(또는 N.grid), N.form 컴포넌트를 연동하는 방법을 알 수 있습니다.</li>
-            <li>공통코드 데이터를 자동으로 조회 한 후 N.select 컴포넌트를 초기화하고 코드 데이터를 바인딩합니다.</li>
+            <li>공통코드 데이터를 자동으로 조회한 후 N.select 컴포넌트를 초기화하고 코드 데이터를 바인딩합니다.</li>
             <li>폼(N.form)에서 버튼을 통해 N.popup(부서조회 팝업)과 연동하는 방법을 알 수 있습니다.</li>
         </ul>
     </div>
@@ -202,7 +202,7 @@
             height : 438,
             select : true,
             onSelect : function(index, rowEle, data, beforeRow, e) {
-                // onSelect 함수는 .data("selected") 함수 전에 실행 되므로 부자연 스럽지만 setTimeout(0)을 넣어줌.
+                // onSelect 함수는 .data("selected") 함수 전에 실행되므로 부자연 스럽지만 setTimeout(0)을 넣어줌.
                 setTimeout(function() {
                     cont["c.getSampleList"]().submit(function(data) {
                         cont["p.grid.master"].bind(data);

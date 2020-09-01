@@ -14,7 +14,7 @@
     <h4 lang="en_US" class="notIndex">1. Binds the data to the pagination.</h4>
     <pre lang="ko_KR"><code>&lt;div class="pagination"&gt;
     &lt;ul&gt;
-        &lt;li&gt;&lt;a href="#" title="첫페이지"&gt;first&lt;/a&gt;&lt;/li&gt; &lt;!-- 첫 페이지로가기 버튼이 필요 없으면 이 태그는 작성하지 않아도 됩니다. --&gt;
+        &lt;li&gt;&lt;a href="#" title="첫페이지"&gt;first&lt;/a&gt;&lt;/li&gt; &lt;!-- 첫 페이지로 가기 버튼이 필요 없으면 이 태그는 작성하지 않아도 됩니다. --&gt;
         &lt;li&gt;&lt;a href="#" title="이전페이지"&gt;prev&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
     &lt;ul&gt;
@@ -22,7 +22,7 @@
     &lt;/ul&gt;
     &lt;ul&gt;
         &lt;li&gt;&lt;a href="#" title="다음페이지"&gt;next&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href="#" title="마지막페이지"&gt;last&lt;/a&gt;&lt;/li&gt; &lt;!-- 마지막 페이지로가기 버튼이 필요 없으면 이 태그는 작성하지 않아도 됩니다. --&gt;
+        &lt;li&gt;&lt;a href="#" title="마지막페이지"&gt;last&lt;/a&gt;&lt;/li&gt; &lt;!-- 마지막 페이지로 가기 버튼이 필요 없으면 이 태그는 작성하지 않아도 됩니다. --&gt;
     &lt;/ul&gt;
 &lt;/div&gt;
 
@@ -187,7 +187,7 @@
 
     <h4 lang="ko_KR" class="notIndex">4. SQL 페이징 하기.</h4>
     <h4 lang="en_US" class="notIndex">4. SQL Paging.</h4>
-    <p lang="ko_KR" class="alert">SQL 페이징 시 먼저 totalCount값을 서버에서 가져온 다음 currPageNavInfo 정보를 서버에 전달해서 반환된 페이징 데이터를 N.grid에 바인딩하는 방식로 SQL 페이징을 처리할 수 있습니다.</p>
+    <p lang="ko_KR" class="alert">SQL 페이징 시 먼저 totalCount값을 서버에서 가져온 다음 currPageNavInfo 정보를 서버에 전달해서 반환된 페이징 데이터를 N.grid에 바인딩하는 방식으로 SQL 페이징을 처리할 수 있습니다.</p>
     <p lang="en_US" class="alert">When SQL paging, SQL paging can be worked by first getting the totalCount value from the server and then passing the currPageNavInfo information to the server to bind the returned paging data to the N.grid.</p>
     <pre lang="ko_KR"><code>&lt;table class="pagination"&gt;
     &lt;thead&gt;
@@ -292,7 +292,7 @@
 
     <p lang="ko_KR">페이징 된 데이터에 totalCount 값이 있을 경우 다음과 같이 N.pagination의 bind 메서드에 totalCount 값을 입력하여 데이터가 조회될 때마다 페이징 인덱스를 생성할 수도 있습니다.</p>
     <p lang="en_US">If there is a totalCount value in the paged data, you can also create a paging index whenever data is retrieved by entering the totalCount value in the bind method of N.pagination as follows:</p>
-    <p lang="ko_KR" class="alert">이러한 페이징 방식은 페이지가 바뀔 때마다 페이지네이션 인덱싱을 다시 한다는 단점이 있는 반면 데이터 조회 후 다른 사용자가 데이터를 추가하거나 삭제하여도 페이징을 정확하게할 수 있는 장점이 있습니다.</p>
+    <p lang="ko_KR" class="alert">이러한 페이징 방식은 페이지가 바뀔 때마다 페이지네이션 인덱싱을 다시 한다는 단점이 있는 반면 데이터 조회 후 다른 사용자가 데이터를 추가하거나 삭제하여도 페이징을 정확하게 할 수 있는 장점이 있습니다.</p>
     <p lang="en_US" class="alert">This paging method has the disadvantage of reindexing pagination whenever the page changes, whereas it has the advantage of accurately paging even if another user adds or deletes data after data retrieval.</p>
     <pre lang="ko_KR"><code>&lt;script type="text/javascript"&gt;
     var grid = N(data).grid(".pagination"); // 1. N.grid 초기화.

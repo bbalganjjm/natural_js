@@ -32,7 +32,7 @@
 ## 설치
 
 ### 1. 이클립스 설치
-[이클립스][eclipse] 사이트에서 Eclipse IDE for Java EE Developers를 [다운로드][eclipse-download] 받아 압축을 해제하고 eclipse.exe 파일을 실행합니다.
+[이클립스][eclipse] 사이트에서 Eclipse IDE for Java EE Developers를 [다운로드][eclipse-download]해서 압축을 해제하고 eclipse.exe 파일을 실행합니다.
 >이클립스를 구동하기 위해서는 [Java SE Development Kit][jdk]이 설치되어 있어야 합니다.
 
 이클립스 실행이 완료되면 `Spring Boot` 개발 지원을 위해 `Spring Tools` 플러그인을 다음과 같이 설치합니다.
@@ -42,7 +42,7 @@
 
 ![Spring Tools 설치][img-0]
 
-설치가 완료 되었으면 이클립스를 재시작합니다.
+설치가 완료되었으면 이클립스를 재시작합니다.
 
 ### 2. 샘플 프로젝트 내려받기
 이클립스 실행이 완료되었으면 이클립스에서 다음 순서대로 실행합니다.
@@ -64,7 +64,7 @@ https://github.com/bbalganjjm/natural_js.git
 
 ![img-3][]
 
-2.4. Natural-JS의 Source Git Repository 접속 정보를 입력하는 화면입니다. 처음에 복사해 둔 URL에 의해 값들이 자동으로 입력되어 있을 겁니다. 입력이되어 있지 않으면
+2.4. Natural-JS의 Source Git Repository 접속 정보를 입력하는 화면입니다. 처음에 복사해 둔 URL에 의해 값들이 자동으로 입력되어 있을 겁니다. 입력이 되어 있지 않으면
 ```md
 https://github.com/bbalganjjm/natural_js.git
 ```
@@ -89,7 +89,7 @@ https://github.com/bbalganjjm/natural_js.git
 
 ![img-8][]
 
-Maven 프로젝트로 전환이 완료될 때 까지 기다립니다.
+Maven 프로젝트로 전환이 완료될 때까지 기다립니다.
 
 2.9. Maven 프로젝트로 전환이 완료되었으면 프로젝트명을 마우스 오른쪽 버튼으로 클릭한 후 `Run As` > `Spring Boot App` 메뉴를 선택하여 프로그램을 구동합니다.
 

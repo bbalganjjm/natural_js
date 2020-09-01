@@ -24,7 +24,7 @@
 <script type="text/javascript" src="js/natural_js/natural.config.js" charset="utf-8"></script>
 ```
 
-CORE, ARCHITECTURE, DATA, UI, UI.Shell 전체를 사용하기 원한다면 natural.js.min.js를 임포트(Import)하고 각 패키지 별로 따로 사용하기 원한다면 따로 임포트 하면 됩니다.
+CORE, ARCHITECTURE, DATA, UI, UI.Shell 전체를 사용하기 원한다면 natural.js.min.js를 임포트(Import)하고 각 패키지 별로 따로 사용하기 원한다면 따로 임포트하면 됩니다.
 
 각 패키지 별 의존 관계는 다음과 같습니다.
 
