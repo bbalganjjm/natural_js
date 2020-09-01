@@ -56,7 +56,7 @@
                 <p lang="en_US">Specifies the height of the list body.</p>
                 <p lang="ko_KR">설정한 값이 0보다 크면 리스트 바디에 스크롤바가 생기면서 설정한 높이로 고정됩니다. 0으로 설정하면 모든 데이터를 리스트 바디에 보여 줍니다.</p>
                 <p lang="en_US">If the set value is greater than 0, a scroll bar is created on the list body, and it is fixed at the set height. If set to 0, all data is shown in the list body.</p>
-                <p lang="ko_KR" class="alert">Pagination(N.pagination) 컴포넌트와 결합하여 페이징된 데이터를 N.list에 바인딩할 때는 0으로 설정하여 모든 데이터를 한 번에 표시 하는것을 권장합니다.</p>
+                <p lang="ko_KR" class="alert">Pagination(N.pagination) 컴포넌트와 결합하여 페이징 된 데이터를 N.list에 바인딩할 때는 0으로 설정하여 모든 데이터를 한 번에 표시하는 것을 권장합니다.</p>
                 <p lang="en_US" class="alert">When binding paged data to the N.list in combination with the Pagination(N.pagination) component, it is recommended to display all data at once by setting it to 0.</p>
             </td>
         </tr>
@@ -88,7 +88,7 @@
             <td>
                 <p lang="ko_KR">true로 설정하면 add 메서드를 호출했을 때 행 요소와 로우 데이터가 목록의 맨 앞에 추가됩니다.</p>
                 <p lang="en_US">If set to true, row elements and row data created to the top of the list when the add method is called.</p>
-                <p lang="ko_KR" class="alert">addTop 옵션을 false 설정하면 데이터 동기화 문제가 발생하여 scrollPaging.size와 createRowDelay 옵션의 설정 값이 0으로 강제 설정됩니다. 이로인해 데이터 바인딩 성능이 저하될 수 있습니다.</p>
+                <p lang="ko_KR" class="alert">addTop 옵션을 false 설정하면 데이터 동기화 문제가 발생하여 scrollPaging.size와 createRowDelay 옵션의 설정 값이 0으로 강제 설정됩니다. 이로 인해 데이터 바인딩 성능이 저하될 수 있습니다.</p>
                 <p lang="en_US" class="alert">Setting the addTop option to false causes data synchronization issues, which forces the setting values ​​of scrollPaging.size and createRowDelay options to zero. This can degrade the performance of data binding.</p>
             </td>
         </tr>
@@ -132,7 +132,7 @@
             <td>false</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">true로 설정하면 행을 선택(단일 행 선택)했을 때 onSelect 이벤트가 발생하고 행 요소(tbody)의 class 속성에  list_selected__ 값이 토글됩니다.</p>
+                <p lang="ko_KR">true로 설정하면 행을 선택(단일 행 선택)했을 때 onSelect 이벤트가 발생하고 행 요소(tbody)의 class 속성에  list_selected__ 값이 토글 됩니다.</p>
                 <p lang="en_US">If set to true, the onSelect event fires when a row is selected(Single row selection), and the list_selected__ value is toggled in the class attribute of the row element(tbody).</p>
             </td>
         </tr>
@@ -154,7 +154,7 @@
             <td>false</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">true로 설정하면 행을 선택(다중 행 선택)했을 때 onSelect 이벤트가 발생하고 행 요소(tbody)의 class 속성에  list_selected__ 값이 토글됩니다.</p>
+                <p lang="ko_KR">true로 설정하면 행을 선택(다중 행 선택)했을 때 onSelect 이벤트가 발생하고 행 요소(tbody)의 class 속성에  list_selected__ 값이 토글 됩니다.</p>
                 <p lang="en_US">If set to true, the onSelect event fires when a row is selected(Multiple row selection), and the list_selected__ value is toggled in the class attribute of the row element(tbody).</p>
             </td>
         </tr>
@@ -168,7 +168,7 @@
                 <p lang="en_US">Specifies the input[type=checkbox] element to select all checkboxes specified with the checkAllTarget option.</p>
                 <p lang="ko_KR" class="alert">N.grid와 달리 jQuery selector 문자열로 지정하지 않고 정확하게 해당 요소가 선택된 jQuery object 타입으로 지정해야 합니다.</p>
                 <p lang="en_US" class="alert">Unlike N.grid, it should be specified as the jQuery object type in which the corresponding element is selected instead of the jQuery selector string.</p>
-                <p lang="ko_KR" class="alert">체크박스를 체크만하고 클릭 이벤트를 발생 시키지 않습니다.</p>
+                <p lang="ko_KR" class="alert">체크박스를 체크만 하고 클릭 이벤트를 발생시키지 않습니다.</p>
                 <p lang="en_US" class="alert">It just checks the checkbox without triggering a click event.</p>
             </td>
         </tr>
@@ -179,14 +179,14 @@
             <td style="text-align: center;">X</td>
             <td>
                 <p lang="ko_KR">리스트의 행을 다중 선택하기 위한 input[type=checkbox] 요소를 지정합니다.</p>
-                <p lang="en_US">Specifies the input [type = checkbox] element for multiple selection of rows in the list.</p>+
+                <p lang="en_US">Specifies the input [type = checkbox] element for multiple selection of rows in the list.</p>
                 <p lang="ko_KR">지정된 요소는 check 함수로 선택된 행의 인덱스를 가져오거나 선택할 수 있습니다.</p>
                 <p lang="en_US">The specified element can get or select the index of the selected row with the check function.</p>
                 <p lang="ko_KR" class="alert">checkSingleTarget 대상 요소는 반드시 li 요소 안에 있어야 합니다.</p>
                 <p lang="en_US" class="alert">The target element for checkSingleTarget must be inside a li element.</p>
                 <p lang="ko_KR" class="alert">jQuery selector 구문으로 지정하며 selector의 context는 리스트의 행 요소(li)로 자동 지정됩니다.</p>
                 <p lang="en_US" class="alert">It is specified with jQuery selector syntax, and the context of the selector is automatically specified as the row element(li) of the list.</p>
-                <p lang="ko_KR" class="alert">checkAllTarget 옵션과 checkSingleTarget 옵션은 둘중 하나만 사용할 수 있습니다.</p>
+                <p lang="ko_KR" class="alert">checkAllTarget 옵션과 checkSingleTarget 옵션은 둘 중 하나만 사용할 수 있습니다.</p>
                 <p lang="en_US" class="alert">Only one of the checkAllTarget and checkSingleTarget options can be used.</p>
                 <p lang="ko_KR" class="alert">체크박스에 id 속성을 설정하여 데이터를 바인딩하면 제대로 작동하지 않을 수 있습니다. 선택된 행의 인덱스를 가져오는 용도로만 사용 바랍니다.</p>
                 <p lang="en_US" class="alert">If you bind the data by setting the id attribute in the checkbox, it may not work properly. Please use it only to get the index of the selected row.</p>
@@ -206,7 +206,7 @@
                 <p lang="en_US" class="alert">The target element for checkSingleTarget must be inside a li element.</p>
                 <p lang="ko_KR" class="alert">jQuery selector 구문으로 지정하며 selector의 context는 리스트의 행 요소(li)로 자동 지정됩니다.</p>
                 <p lang="en_US" class="alert">It is specified with jQuery selector syntax, and the context of the selector is automatically specified as the row element(li) of the list.</p>
-                <p lang="ko_KR" class="alert">checkAllTarget 옵션과 checkSingleTarget 옵션은 둘중 하나만 사용할 수 있습니다.</p>
+                <p lang="ko_KR" class="alert">checkAllTarget 옵션과 checkSingleTarget 옵션은 둘 중 하나만 사용할 수 있습니다.</p>
                 <p lang="en_US" class="alert">Only one of the checkAllTarget and checkSingleTarget options can be used.</p>
                 <p lang="ko_KR" class="alert">체크박스에 id 속성을 설정하여 데이터를 바인딩하면 제대로 작동하지 않을 수 있습니다. 선택된 행의 인덱스를 가져오는 용도로만 사용 바랍니다.</p>
                 <p lang="en_US" class="alert">If you bind the data by setting the id attribute in the checkbox, it may not work properly. Please use it only to get the index of the selected row.</p>
@@ -218,7 +218,7 @@
             <td>false</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">true로 설정하면 행에 마우스가 over되었을 때 행 요소에 "list_hover__" 클래스 속성 값이 추가되고 out되면 추가된 클래스 속성 값이 제거됩니다.</p>
+                <p lang="ko_KR">true로 설정하면 행에 마우스가 over 되었을 때 행 요소에 "list_hover__" 클래스 속성 값이 추가되고 out 되면 추가된 클래스 속성 값이 제거됩니다.</p>
                 <p lang="en_US">If set to true, the "list_hover__" class attribute value is appended to the row element when the mouse is over the row, and when it is out, the added class attribute value is removed.</p>
             </td>
         </tr>
@@ -228,9 +228,9 @@
             <td>1</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">1 이상으로 설정하면 바인딩할 때 리스트의 각 행이 별도로 생성됩니다. 이때 다음 행이 생성되기 까지의 시간 간격을 설정합니다.</p>
+                <p lang="ko_KR">1 이상으로 설정하면 바인딩할 때 리스트의 각 행이 별도로 생성됩니다. 이때 다음 행이 생성되기까지의 시간 간격을 설정합니다.</p>
                 <p lang="en_US">If set to 1 or higher, each row of the list is created separately when binding. At this time, set the time interval until the next row is created.</p>
-                <p lang="ko_KR" class="alert">0으로 설정하면 모든 행을 한 번에 생성하여 데이터를 바인딩 하는동안 브라우저가 멈출 수도 있습니다.</p>
+                <p lang="ko_KR" class="alert">0으로 설정하면 모든 행을 한 번에 생성하여 데이터를 바인딩하는 동안 브라우저가 멈출 수도 있습니다.</p>
                 <p lang="en_US" class="alert">If set to 0, the browser may hang while binding data by creating all rows at once.</p>
             </td>
         </tr>
@@ -240,11 +240,11 @@
             <td>100</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">스크롤 페이징할 때 한 번에 바인딩할 행 수를 지정합니다.</p>
+                <p lang="ko_KR">스크롤 페이징 할 때 한 번에 바인딩할 행 수를 지정합니다.</p>
                 <p lang="en_US">Specifies the number of rows to bind at a time when scroll paging.</p>
-                <p lang="ko_KR">N.list는 스크롤 페이징 기능이 기본적으로 활성화 되며 0을 지정하면 스크롤 페이징 기능이 비활성화됩니다.</p>
+                <p lang="ko_KR">N.list는 스크롤 페이징 기능이 기본적으로 활성화되며 0을 지정하면 스크롤 페이징 기능이 비활성화됩니다.</p>
                 <p lang="en_US">In N.list, the scroll paging feature is enabled by default, if 0 is specified, the scroll paging feature is disabled.</p>
-                <p lang="ko_KR">size 옵션 값은 다음과 같이 scrollPaging 옵션 객체의 하위 속성으로 지정해야합니다.</p>
+                <p lang="ko_KR">size 옵션 값은 다음과 같이 scrollPaging 옵션 객체의 하위 속성으로 지정해야 합니다.</p>
                 <p lang="en_US">The size option value must be specified as a sub-property of the scrollPaging option object as follows.</p>
                 <pre><code>...
     scrollPaging : {
@@ -253,7 +253,7 @@
 ...</code></pre>
                 <p lang="ko_KR" class="alert">너무 작게 지정하면 스크롤이 생성되지 않아 데이터가 모두 표시되지 않습니다. 반드시 행 들이 리스트 바디를 넘칠 수 있는 양을 지정해 주어야 합니다.</p>
                 <p lang="en_US" class="alert">If it is set too small, scrolling is not created and all data is not displayed. You must specify the amount by which rows can overflow the list body.</p>
-                <p lang="ko_KR" class="alert">너무 크게 지정하면 스크롤 페이징이 작동될때 브라우저에 부하가 발생되므로 리스트에 입력 요소나 이미지가 들어 있다면 100 이하로 설정하고 그렇지 않다면 1000 이하로 설정하는 것을 권장합니다.</p>
+                <p lang="ko_KR" class="alert">너무 크게 지정하면 스크롤 페이징이 작동될 때 브라우저에 부하가 발생되므로 리스트에 입력 요소나 이미지가 들어 있다면 100 이하로 설정하고 그렇지 않다면 1000 이하로 설정하는 것을 권장합니다.</p>
                 <p lang="en_US" class="alert">If set too large, browser performance is overhead when scroll paging is enabled, so it is recommended to set it to 100 or less if the input element or image is included in the list, otherwise 1000 or less.</p>
             </td>
         </tr>
@@ -339,7 +339,7 @@
             <td>true</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">false로 설정하면 두 번째 인자에 "append" 옵션을 지정하여 bind 메서드를 호출했을 때 append된 행으로 자동 스크롤되지 않습니다.</p>
+                <p lang="ko_KR">false로 설정하면 두 번째 인자에 "append" 옵션을 지정하여 bind 메서드를 호출했을 때 append 된 행으로 자동 스크롤되지 않습니다.</p>
                 <p lang="en_US">If set to false, when the bind method is called with the "append" option specified as the second argument, the scroll will not automatically scroll to the appended row.</p>
             </td>
         </tr>
@@ -361,7 +361,7 @@
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">bind하거나 add했을 때 생성된 행 요소에 데이터가 바인딩되기 전에 실행되는 이벤트 핸들러를 정의합니다.</p>
+                <p lang="ko_KR">bind 하거나 add 했을 때 생성된 행 요소에 데이터가 바인딩되기 전에 실행되는 이벤트 핸들러를 정의합니다.</p>
                 <p lang="en_US">Defines an event handler that is executed before data is bound to the row element created when bind or add.</p>
                 <pre lang="ko_KR"><code>rowHandlerBeforeBind : function(rowIdx, rowEle, rowData) {
     // this : N.list 인스턴스
@@ -385,7 +385,7 @@
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">bind하거나 add했을 때 생성된 행 요소에 데이터가 바인딩된 후에 실행되는 이벤트 핸들러를 정의합니다.</p>
+                <p lang="ko_KR">bind 하거나 add 했을 때 생성된 행 요소에 데이터가 바인딩된 후에 실행되는 이벤트 핸들러를 정의합니다.</p>
                 <p lang="en_US">Defines an event handler that is executed after data is bound to the row element created when bind or add.</p>
                 <pre lang="ko_KR"><code>rowHandler : function(rowIdx, rowEle, rowData) {
     // this : N.list 인스턴스
@@ -445,17 +445,17 @@
     // this : N.list 인스턴스
     // context : context 요소
     // data : 바인딩된 데이터
-    // isFirstPage : 스크롤 페이징할 때 첫 페이지인지 여부(스크롤 페이징하지 않으면 true 반환)
-    // isLastPage : 스크롤 페이징할 때 마지막 페이지 인지 여부(스크롤 페이징하지 않으면 true 반환)
+    // isFirstPage : 스크롤 페이징 할 때 첫 페이지인지 여부(스크롤 페이징 하지 않으면 true 반환)
+    // isLastPage : 스크롤 페이징 할 때 마지막 페이지 인지 여부(스크롤 페이징 하지 않으면 true 반환)
 }</code></pre>
                 <pre lang="en_US"><code>onBind : function(context, data, isFirstPage, isLastPage) {
     // this : N.list instance
     // context : context element
     // data : Bound data
-    // isFirstPage : Whether it is the first page when scroll paging(스크롤 페이징하지 않으면 true 반환)
-    // isLastPage : Whether it is the last page when scroll paging(스크롤 페이징하지 않으면 true 반환)
+    // isFirstPage : Whether it is the first page when scroll paging(스크롤 페이징 하지 않으면 true 반환)
+    // isLastPage : Whether it is the last page when scroll paging(스크롤 페이징 하지 않으면 true 반환)
 }</code></pre>
-                <p lang="ko_KR" class="alert">스크롤 페이징이 활성화되었을 경우 페이징된 데이터가 바인딩될 때마다 실행됩니다.</p>
+                <p lang="ko_KR" class="alert">스크롤 페이징이 활성화되었을 경우 페이징 된 데이터가 바인딩될 때마다 실행됩니다.</p>
                 <p lang="en_US" class="alert">If scroll paging is enabled, it is executed whenever paged data is bound.</p>
             </td>
         </tr>

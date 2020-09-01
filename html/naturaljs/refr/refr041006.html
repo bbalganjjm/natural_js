@@ -132,7 +132,7 @@
         N(data).pagination({ // 3. N.pagination 초기화.
             context: ".pagination",
             <strong>onChange: function(pageNo, selEle, selData, currPageNavInfo) {</strong>
-                <strong>grid.bind(selData)</strong>; // 4. 페이징된 데이터를 N.grid에 바인딩.
+                <strong>grid.bind(selData)</strong>; // 4. 페이징 된 데이터를 N.grid에 바인딩.
             <strong>}</strong>
         }).bind();
     });
@@ -232,8 +232,8 @@
             context: ".pagination",
             totalCount: data.totalCount,
             <strong>onChange: function(pageNo, selEle, selData, currPageNavInfo) {</strong>
-                <strong>N(currPageNavInfo)</strong>.comm("data.json").submit(function(data){ // 3. 페이징 정보를 서버로 전달하여 페이징된 데이터 조회
-                    <strong>grid.bind(selData)</strong>; // 4. 페이징된 데이터를 N.grid에 바인딩
+                <strong>N(currPageNavInfo)</strong>.comm("data.json").submit(function(data){ // 3. 페이징 정보를 서버로 전달하여 페이징 된 데이터 조회
+                    <strong>grid.bind(selData)</strong>; // 4. 페이징 된 데이터를 N.grid에 바인딩
                 });
             <strong>}</strong>
         }).bind();
@@ -290,7 +290,7 @@
     });
 &lt;/script&gt;</code></pre>
 
-    <p lang="ko_KR">페이징된 데이터에 totalCount 값이 있을 경우 다음과 같이 N.pagination의 bind 메서드에 totalCount 값을 입력하여 데이터가 조회될 때마다 페이징 인덱스를 생성할 수도 있습니다.</p>
+    <p lang="ko_KR">페이징 된 데이터에 totalCount 값이 있을 경우 다음과 같이 N.pagination의 bind 메서드에 totalCount 값을 입력하여 데이터가 조회될 때마다 페이징 인덱스를 생성할 수도 있습니다.</p>
     <p lang="en_US">If there is a totalCount value in the paged data, you can also create a paging index whenever data is retrieved by entering the totalCount value in the bind method of N.pagination as follows:</p>
     <p lang="ko_KR" class="alert">이러한 페이징 방식은 페이지가 바뀔 때마다 페이지네이션 인덱싱을 다시 한다는 단점이 있는 반면 데이터 조회 후 다른 사용자가 데이터를 추가하거나 삭제하여도 페이징을 정확하게할 수 있는 장점이 있습니다.</p>
     <p lang="en_US" class="alert">This paging method has the disadvantage of reindexing pagination whenever the page changes, whereas it has the advantage of accurately paging even if another user adds or deletes data after data retrieval.</p>
@@ -303,7 +303,7 @@
         <strong>onChange: function(pageNo, selEle, selData, currPageNavInfo)</strong> {
             <strong>N(currPageNavInfo)</strong>.comm("data.json").submit(function(data){ // 7. totalCount 값이 포함된 데이터 조회.
                 <strong>pagination.bind(data[0] &amp;&amp; data[0].totalCount ? data[0].totalCount : 0)</strong>; // 8. N.pagination의 bind 메서드의 인자에 totalCount를 입력하여 페이징 인덱스 재 생성.
-                <strong>grid.bind(data)</strong>; // 9. 페이징된 데이터를 N.grid에 바인딩.
+                <strong>grid.bind(data)</strong>; // 9. 페이징 된 데이터를 N.grid에 바인딩.
             });
         }
     }).bind();
@@ -312,7 +312,7 @@
         <strong>pagination.pageNo(1).bind()</strong>; // 3. 첫 번째 페이지로 이동하여 currPageNavInfo 정보 초기화.
         <strong>N(pagination.currPageNavInfo())</strong>.comm("data.json").submit(function(data){ // 4. totalCount 값이 포함된 데이터 조회.
             <strong>pagination.bind(data[0] &amp;&amp; data[0].totalCount ? data[0].totalCount : 0 )</strong>; // 5. N.pagination의 bind 메서드의 인자에 totalCount를 입력하여 페이징 인덱스 재 생성.
-            <strong>grid.bind(data)</strong>; // 6. 페이징된 데이터를 N.grid에 바인딩.
+            <strong>grid.bind(data)</strong>; // 6. 페이징 된 데이터를 N.grid에 바인딩.
         });
     });
 &lt;/script&gt;</code></pre>

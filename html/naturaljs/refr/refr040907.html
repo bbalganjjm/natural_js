@@ -112,7 +112,7 @@
 &lt;script type="text/javascript"&gt;
     N(data).grid({
         context : ".grid",
-        <strong>height : 200</strong> // 그리드 바디영역의 높이가 200px로 고정되고 스크롤바가 표시 됨.
+        <strong>height : 200</strong> // 그리드 바디 영역의 높이가 200px로 고정되고 스크롤바가 표시됨.
     }).bind();
 &lt;/script&gt;</code></pre>
     <pre lang="en_US"><code>&lt;table class="grid"&gt;
@@ -142,7 +142,7 @@
 &lt;/script&gt;</code></pre>
     <h4 lang="ko_KR" class="notIndex">4. rowHandler 적용 하기.</h4>
     <h4 lang="en_US" class="notIndex">4. Applying rowHandler.</h4>
-    <p lang="ko_KR" class="alert">rowHandler 이벤트는 리스트 렌더링 시 행이 만들어질때마다 실행되는 이벤트입니다.</p>
+    <p lang="ko_KR" class="alert">rowHandler 이벤트는 리스트 렌더링 시 행이 만들어질 때마다 실행되는 이벤트입니다.</p>
     <p lang="en_US" class="alert">The rowHandler event is an event that is executed whenever a row is created when the list is rendered.</p>
     <pre><code>&lt;table class="grid"&gt;
     &lt;thead&gt;
@@ -232,7 +232,7 @@
 
     N(".btnSave").click(function() {
         <strong>N(window).alert</strong>({ // 1. confirm 메시지 표시.
-            msg : "저장 하시겠습니까?",
+            msg : "저장하시겠습니까?",
             <strong>confirm : true</strong>,
             <strong>onOk : function() {</strong>
                 if(<strong>grid.validate()</strong>) { // 2. 변경된 전체 데이터 유효성 검증.
@@ -280,7 +280,7 @@
 
     <h4 lang="ko_KR" class="notIndex">7. N.select와 N.grid 연동하기.</h4>
     <h4 lang="en_US" class="notIndex">7. Linking N.select and N.grid.</h4>
-    <p lang="ko_KR" class="alert">N.select와 연동하려면 먼저 N.select를 초기화해야합니다. 그런 다음 N.grid를 초기화하고 데이터를 바인딩하십시오.</p>
+    <p lang="ko_KR" class="alert">N.select와 연동하려면 먼저 N.select를 초기화해야 합니다. 그런 다음 N.grid를 초기화하고 데이터를 바인딩하십시오.</p>
     <p lang="en_US" class="alert">To link with N.select, you need to initialize Then initialize N.grid and bind the data.</p>
     <pre lang="ko_KR"><code>&lt;table class="grid"&gt;
     &lt;thead&gt;
@@ -361,8 +361,8 @@
 
     <h4 lang="ko_KR" class="notIndex">8. jQuery의 on 메서드를 사용하여 행 선택 이벤트를 바인딩 하기.</h4>
     <h4 lang="en_US" class="notIndex">8. Binding a row selection event using jQuery's on method.</h4>
-    <p lang="ko_KR" class="alert">onSelect 이벤트에서 행 요소에 이벤트를 바인딩하면 행 수만큼 이벤트 객체가 생성되어 속도가 느려 질 수 있습니다.
-        다음과 같이 이벤트 위임(Event Delegation, jQuery.on method)을 사용하면 성능저하 없이 행 요소들에 이벤트를 바인딩할 수 있습니다.</p>
+    <p lang="ko_KR" class="alert">onSelect 이벤트에서 행 요소에 이벤트를 바인딩하면 행 수만큼 이벤트 객체가 생성되어 속도가 느려질 수 있습니다.
+        다음과 같이 이벤트 위임(Event Delegation, jQuery.on method)을 사용하면 성능 저하 없이 행 요소들에 이벤트를 바인딩할 수 있습니다.</p>
     <p lang="en_US" class="alert">If you bind an event to a row element in the onSelect event, it can slow it down because event object is created as much the number of rows.
     If you use the Event Delegation (jQuery.on method), you can bind events to row elements without performance degradation, as follows:</p>
     <pre lang="ko_KR"><code>N("selector").cont(function() {

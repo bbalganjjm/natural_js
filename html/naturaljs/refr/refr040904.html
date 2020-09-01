@@ -57,7 +57,7 @@
                                 <p lang="ko_KR" class="alert" style="margin: 5px;">Natural-JS의 모든 데이터 관련 컴포넌트는 빠른 바인딩 속도를 위해 어쩔 수 없이 id 속성을 사용합니다.</p>
                                 <p lang="en_US" class="alert" style="margin: 5px;">All data-related components of Natural-JS inevitably use id attribute for fast binding speed.</p>
                                 <p lang="ko_KR" class="alert">1개의 셀(td) 안에 2개 이상의 컬럼 데이터를 바인딩하려면 셀안에 요소를 2개 이상 만들고 id 속성 값을 추가해 주면 됩니다.
-                                                            이때 thead의 th에 data-id 속성 값에 정렬/필터등의 기준이되는 데이터 프로퍼티명을 설정해 주어야 합니다.</p>
+                                                            이때 thead의 th에 data-id 속성 값에 정렬/필터 등의 기준이 되는 데이터 프로퍼티명을 설정해 주어야 합니다.</p>
                                 <p lang="en_US" class="alert">To bind two or more column data in one cell (td), create two or more elements in the cell and add the id attribute value.
                                                             At this time, you must set the data property name that is the basis for sorting / filtering and etc. on the data-id attribute value in th of thead.</p>
                             </li>
@@ -107,7 +107,7 @@
                 <p lang="en_US">Specifies the height of the grid body.</p>
                 <p lang="ko_KR">설정한 값이 0보다 크면 헤더가 고정되고 그리드 바디에 스크롤바가 생기면서 설정한 높이로 고정됩니다. 0으로 설정하면 헤더를 고정하지 않고 모든 데이터를 그리드 바디에 보여 줍니다.</p>
                 <p lang="en_US">If the set value is greater than 0, the header is fixed and a scroll bar is created on the grid body, and it is fixed at the set height. If set to 0, all data is shown in the grid body without fixing the header.</p>
-                <p lang="ko_KR" class="alert">Pagination(N.pagination) 컴포넌트와 결합하여 페이징된 데이터를 N.list에 바인딩할 때는 0으로 설정하여 모든 데이터를 한 번에 표시 하는것을 권장합니다.</p>
+                <p lang="ko_KR" class="alert">Pagination(N.pagination) 컴포넌트와 결합하여 페이징 된 데이터를 N.list에 바인딩할 때는 0으로 설정하여 모든 데이터를 한 번에 표시하는 것을 권장합니다.</p>
                 <p lang="en_US" class="alert">When binding paged data to the N.grid in combination with the Pagination(N.pagination) component, it is recommended to display all data at once by setting it to 0.</p>
             </td>
         </tr>
@@ -119,9 +119,9 @@
             <td>
                 <p lang="ko_KR">지정한 열들은 고정되고 다른 열 들은 가로로 스크롤될 수 있게 해 줍니다.</p>
                 <p lang="en_US">The specified column is fixed and the other columns scroll horizontally.</p>
-                <p lang="ko_KR">0으로 설정하면 열을 고정하지 않고 1이상의 숫자로 설정하면 첫 번째 열부터 설정한 숫자(열 개수)만큼 열을 고정해 줍니다.</p>
+                <p lang="ko_KR">0으로 설정하면 열을 고정하지 않고 1 이상의 숫자로 설정하면 첫 번째 열부터 설정한 숫자(열 개수)만큼 열을 고정해 줍니다.</p>
                 <p lang="en_US">If set to 0, the column is not fixed, but if set to 1 or more, the column is fixed as much as the number (number of columns) set from the first column.</p>
-                <p lang="ko_KR" class="alert">헤더(thead) 영역은 반드시 있어야하고 푸터(tfoot) 영역은 없어야 합니다.</p>
+                <p lang="ko_KR" class="alert">헤더(thead) 영역은 반드시 있어야 하고 푸터(tfoot) 영역은 없어야 합니다.</p>
                 <p lang="en_US" class="alert">There must be a header(thead) area and no footer(tfoot) area.</p>
                 <p lang="ko_KR" class="alert">그리드의 헤더나 바디가 2행 이상의 세트로 구성되어 있거나 height 옵션이 0보다 크면 작동하지 않습니다.</p>
                 <p lang="en_US" class="alert">It does not work if the grid's header or body consists of a set of 2 or more rows, or if the height option is greater than 0.</p>
@@ -135,15 +135,15 @@
             <td>false</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">true로 설정하면 컬럼을 숨기거나 보이게할 수 있는 기능과 상세팝업을 자동으로 생성해 주는 기능이 활성화됩니다.</p>
+                <p lang="ko_KR">true로 설정하면 컬럼을 숨기거나 보이게 할 수 있는 기능과 상세 팝업을 자동으로 생성해 주는 기능이 활성화됩니다.</p>
                 <p lang="en_US">If set to true, the function to hide or show the column and the function to automatically generate the detail popup are enabled.</p>
                 <p lang="ko_KR">그리드의 마지막 열 다음에 위의 기능을 실행하는 버튼을 생성해 줍니다.</p>
                 <p lang="en_US">Create a button that executes the above function after the last column in the grid.</p>
-                <p lang="ko_KR">true로 설정하면 그리드 헤더에 정의되어 있는 모든 컬럼들을 모두 상세팝업에 보여주고 array에 컬럼 명 들을 지정하여 옵션으로 설정하면 지정한 컬럼들만 보여 줍니다.</p>
+                <p lang="ko_KR">true로 설정하면 그리드 헤더에 정의되어 있는 모든 컬럼들을 모두 상세 팝업에 보여주고 array에 컬럼 명 들을 지정하여 옵션으로 설정하면 지정한 컬럼들만 보여 줍니다.</p>
                 <p lang="en_US">If set to true, all columns defined in the grid header are shown in the detail popup and if you specify the column names in the array and set them as options, only the specified columns are shown.</p>
                 <p lang="ko_KR" class="alert">
                     컬럼들의 제목은 그리드 헤더의 제목 텍스트를 그대로 사용하기 때문에 그리드 헤더에 정의되어 있지 않은 컬럼은 표시되지 않습니다.
-                    그리드 헤더에 없는 컬럼을 상세팝업에 표시하려면 그리드에 컬럼을 추가하고 그리드를 초기화 한 다음 hide 메서드로 추가한 컬럼을 숨기면 상세팝업에서만 볼 수 있습니다.
+                    그리드 헤더에 없는 컬럼을 상세 팝업에 표시하려면 그리드에 컬럼을 추가하고 그리드를 초기화 한 다음 hide 메서드로 추가한 컬럼을 숨기면 상세 팝업에서만 볼 수 있습니다.
                 </p>
                 <p lang="en_US" class="alert">
                     Because the title of the column uses the title text of the grid header as it is, columns not defined in the grid header are not displayed.
@@ -152,8 +152,8 @@
                 <p lang="ko_KR" class="alert">fixedcol 옵션으로 열이 고정된 경우 컬럼 숨기기/보이기 기능이 제대로 작동하지 않을 수 있습니다.</p>
                 <p lang="en_US" class="alert">If the column is fixed by the fixedcol option, the hide / show column function may not work properly.</p>
                 <p lang="ko_KR" class="alert">
-                                   상세팝업의 컬럼 타이틀 정보는 tbody의 td 나 td 안에 있는 요소들의 id 값을 기준으로 추출됩니다.
-                                   그러나 tbody의 td 안에 id 속성을 가진 요소가 2개 이상 존재하거나 그리드 헤더와 바디의 요소 구성이 많이 다를 경우에는 제대로 추출이되지 않을 수 있습니다.
+                                   상세 팝업의 컬럼 타이틀 정보는 tbody의 td 나 td 안에 있는 요소들의 id 값을 기준으로 추출됩니다.
+                                   그러나 tbody의 td 안에 id 속성을 가진 요소가 2개 이상 존재하거나 그리드 헤더와 바디의 요소 구성이 많이 다를 경우에는 제대로 추출이 되지 않을 수 있습니다.
                                    이때는 th 요소의 data-id 속성에 추출될 컬럼명을 선언해 주면 정상적으로 작동됩니다.
                 </p>
                 <p lang="en_US" class="alert">
@@ -191,7 +191,7 @@
             <td>
                 <p lang="ko_KR">true로 설정하면 add 메서드를 호출했을 때 행 요소와 로우 데이터가 목록의 맨 앞에 추가됩니다.</p>
                 <p lang="en_US">If set to true, row elements and row data created to the top of the list when the add method is called.</p>
-                <p lang="ko_KR" class="alert">addTop 옵션을 false 설정하면 데이터 동기화 문제가 발생하여 scrollPaging.size와 createRowDelay 옵션의 설정 값이 0으로 강제 설정됩니다. 이로인해 데이터 바인딩 성능이 저하될 수 있습니다.</p>
+                <p lang="ko_KR" class="alert">addTop 옵션을 false 설정하면 데이터 동기화 문제가 발생하여 scrollPaging.size와 createRowDelay 옵션의 설정 값이 0으로 강제 설정됩니다. 이로 인해 데이터 바인딩 성능이 저하될 수 있습니다.</p>
                 <p lang="en_US" class="alert">Setting the addTop option to false causes data synchronization issues, which forces the setting values ​​of scrollPaging.size and createRowDelay options to zero. This can degrade the performance of data binding.</p>
             </td>
         </tr>
@@ -204,8 +204,8 @@
                 <p lang="ko_KR">true로 설정하면 컬럼의 넓이를 조절할 수 있습니다.</p>
                 <p lang="en_US">If set to true, the width of the column can be resized.</p>
                 <p lang="ko_KR" class="alert">
-                    colgroup의 col 태그를 사용하여 셀의 넓이를 지정했을때 resizable 옵션이 true 이면 그리드가 초기화될 때 col 태그에 정의되어 있는 셀의 넓이 값을 thead의 th에 이관하고 colgroup 태그를 제거합니다.
-                    때문에 컬럼 리사이징 기능을 사용하려면 col 태그에 넓이를 지정하지 말고 thead의 th에 컬럼 넓이를 설정 하는것을 권장합니다.
+                    colgroup의 col 태그를 사용하여 셀의 넓이를 지정했을 때 resizable 옵션이 true 이면 그리드가 초기화될 때 col 태그에 정의되어 있는 셀의 넓이 값을 thead의 th에 이관하고 colgroup 태그를 제거합니다.
+                    때문에 컬럼 리사이징 기능을 사용하려면 col 태그에 넓이를 지정하지 말고 thead의 th에 컬럼 넓이를 설정하는 것을 권장합니다.
                 </p>
                 <p lang="en_US" class="alert">
                     If the resizable option is true when the cell width is set using the col tag of the colgroup, when the grid is initialized, the cell width value defined in the col tag is moved to th of thead and then the colgroup tag is removed.
@@ -213,7 +213,7 @@
                 </p>
                 <p lang="ko_KR" class="alert">thead의 th에 colspan 속성이 있을 경우 컬럼 리사이즈 기능이 제대로 작동하지 않을 수 있습니다.</p>
                 <p lang="en_US" class="alert">If thead's th has a colspan attribute, the column resizing feature may not work properly.</p>
-                <p lang="ko_KR" class="alert">컬럼 리사이징할 때 그리드의 모양이 깨지면 misc.resizableCorrectionWidth, misc.resizableLastCellCorrectionWidth, misc.resizeBarCorrectionLeft, misc.resizeBarCorrectionHeight 옵션 값 들을 조절해 주세요.</p>
+                <p lang="ko_KR" class="alert">컬럼 리사이징 할 때 그리드의 모양이 깨지면 misc.resizableCorrectionWidth, misc.resizableLastCellCorrectionWidth, misc.resizeBarCorrectionLeft, misc.resizeBarCorrectionHeight 옵션 값 들을 조절해 주세요.</p>
                 <p lang="en_US" class="alert">If the grid's shape is broken when resizing the column, adjust the misc.resizableCorrectionWidth, misc.resizableLastCellCorrectionWidth, misc.resizeBarCorrectionLeft and misc.resizeBarCorrectionHeight option values.</p>
             </td>
         </tr>
@@ -237,7 +237,7 @@
                 <p lang="en_US">If set to true, data can be sorted based on the selected column.</p>
                 <p lang="ko_KR" class="alert">
                     정렬될 컬럼의 정보는 tbody의 td 나 td 안에 있는 요소들의 id 값을 기준으로 정렬합니다.
-                    그러나 tbody의 td 안에 id 속성을 가진 요소가 2개 이상 존재하거나 그리드 헤더와 바디의 요소 구성이 많이 다를 경우에는 제대로 정렬이되지 않을 수 있습니다.
+                    그러나 tbody의 td 안에 id 속성을 가진 요소가 2개 이상 존재하거나 그리드 헤더와 바디의 요소 구성이 많이 다를 경우에는 제대로 정렬이 되지 않을 수 있습니다.
                     이때는 th 요소의 data-id 속성에 정렬될 컬럼명을 선언해 주면 정상적으로 작동됩니다.
                 </p>
                 <p lang="en_US" class="alert">
@@ -255,7 +255,7 @@
             <td>
                 <p lang="ko_KR">true로 설정하면 선택 한 컬럼을 기준으로 데이터를 필터링할 수 있습니다.</p>
                 <p lang="en_US">If set to true, data can be filtered based on the selected column.</p>
-                <p lang="ko_KR" class="alert">filter 옵션이 false 인 상태에서 th 요소의 속성으로 data-filter="true" 옵션을 선언해 주면 컬럼별로 필터 기능을 활성화할 수 있습니다.</p>
+                <p lang="ko_KR" class="alert">filter 옵션이 false 인 상태에서 th 요소의 속성으로 data-filter="true" 옵션을 선언해 주면 컬럼 별로 필터 기능을 활성화할 수 있습니다.</p>
                 <p lang="en_US" class="alert">If the filter option is false, you can enable the filter feature for each column by declaring the data-filter="true" option as an attribute of the th element.</p>
                 <p lang="ko_KR" class="alert">
                             필터링될 컬럼의 정보는 tbody의 td 나 td 안에 있는 요소들의 id 값을 기준으로 필터링됩니다.
@@ -299,7 +299,7 @@
             <td>false</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">true로 설정하면 행을 선택(단일 행 선택)했을 때 onSelect 이벤트가 발생하고 행 요소(tbody)의 class 속성에  grid_selected__ 값이 토글됩니다.</p>
+                <p lang="ko_KR">true로 설정하면 행을 선택(단일 행 선택)했을 때 onSelect 이벤트가 발생하고 행 요소(tbody)의 class 속성에  grid_selected__ 값이 토글 됩니다.</p>
                 <p lang="en_US">If set to true, the onSelect event fires when a row is selected(Single row selection), and the grid_selected__ value is toggled in the class attribute of the row element(tbody).</p>
             </td>
         </tr>
@@ -321,7 +321,7 @@
             <td>false</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">true로 설정하면 행을 선택(다중 행 선택)했을 때 onSelect 이벤트가 발생하고 행 요소(tbody)의 class 속성에  grid_selected__ 값이 토글됩니다.</p>
+                <p lang="ko_KR">true로 설정하면 행을 선택(다중 행 선택)했을 때 onSelect 이벤트가 발생하고 행 요소(tbody)의 class 속성에  grid_selected__ 값이 토글 됩니다.</p>
                 <p lang="en_US">If set to true, the onSelect event fires when a row is selected(Multiple row selection), and the grid_selected__ value is toggled in the class attribute of the row element(tbody).</p>
             </td>
         </tr>
@@ -337,7 +337,7 @@
                 <p lang="en_US" class="alert">The element you specify must be in thead area.</p>
                 <p lang="ko_KR" class="alert">jQuery selector 구문으로 지정하며 selector의 context는 그리드의 헤더 요소(thead)로 자동 지정됩니다.</p>
                 <p lang="en_US" class="alert">It is specified with jQuery selector syntax, and the context of the selector is automatically specified as the header element(thead) of the grid.</p>
-                <p lang="ko_KR" class="alert">체크박스를 체크만하고 클릭 이벤트를 발생 시키지 않습니다.</p>
+                <p lang="ko_KR" class="alert">체크박스를 체크만 하고 클릭 이벤트를 발생시키지 않습니다.</p>
                 <p lang="en_US" class="alert">It just checks the checkbox without triggering a click event.</p>
             </td>
         </tr>
@@ -348,14 +348,14 @@
             <td style="text-align: center;">X</td>
             <td>
                 <p lang="ko_KR">그리드의 행을 다중 선택하기 위한 input[type=checkbox] 요소를 지정합니다.</p>
-                <p lang="en_US">Specifies the input [type = checkbox] element for multiple selection of rows in the grid.</p>+
+                <p lang="en_US">Specifies the input [type = checkbox] element for multiple selection of rows in the grid.</p>
                 <p lang="ko_KR">지정된 요소는 check 함수로 선택된 행의 인덱스를 가져오거나 선택할 수 있습니다.</p>
                 <p lang="en_US">The specified element can get or select the index of the selected row with the check function.</p>
                 <p lang="ko_KR" class="alert">checkSingleTarget 대상 요소는 반드시 tbody 요소 안에 있어야 합니다.</p>
                 <p lang="en_US" class="alert">The target element for checkSingleTarget must be inside a tbody element.</p>
                 <p lang="ko_KR" class="alert">jQuery selector 구문으로 지정하며 selector의 context는 그리드의 행 요소(tbody)로 자동 지정됩니다.</p>
                 <p lang="en_US" class="alert">It is specified with jQuery selector syntax, and the context of the selector is automatically specified as the row element(tbody) of the grid.</p>
-                <p lang="ko_KR" class="alert">checkAllTarget 옵션과 checkSingleTarget 옵션은 둘중 하나만 사용할 수 있습니다.</p>
+                <p lang="ko_KR" class="alert">checkAllTarget 옵션과 checkSingleTarget 옵션은 둘 중 하나만 사용할 수 있습니다.</p>
                 <p lang="en_US" class="alert">Only one of the checkAllTarget and checkSingleTarget options can be used.</p>
                 <p lang="ko_KR" class="alert">체크박스에 id 속성을 설정하여 데이터를 바인딩하면 제대로 작동하지 않을 수 있습니다. 선택된 행의 인덱스를 가져오는 용도로만 사용 바랍니다.</p>
                 <p lang="en_US" class="alert">If you bind the data by setting the id attribute in the checkbox, it may not work properly. Please use it only to get the index of the selected row.</p>
@@ -375,7 +375,7 @@
                 <p lang="en_US" class="alert">The target element for checkSingleTarget must be inside a tbody element.</p>
                 <p lang="ko_KR" class="alert">jQuery selector 구문으로 지정하며 selector의 context는 그리드의 행 요소(tbody)로 자동 지정됩니다.</p>
                 <p lang="en_US" class="alert">It is specified with jQuery selector syntax, and the context of the selector is automatically specified as the row element(tbody) of the grid.</p>
-                <p lang="ko_KR" class="alert">checkAllTarget 옵션과 checkSingleTarget 옵션은 둘중 하나만 사용할 수 있습니다.</p>
+                <p lang="ko_KR" class="alert">checkAllTarget 옵션과 checkSingleTarget 옵션은 둘 중 하나만 사용할 수 있습니다.</p>
                 <p lang="en_US" class="alert">Only one of the checkAllTarget and checkSingleTarget options can be used.</p>
                 <p lang="ko_KR" class="alert">체크박스에 id 속성을 설정하여 데이터를 바인딩하면 제대로 작동하지 않을 수 있습니다. 선택된 행의 인덱스를 가져오는 용도로만 사용 바랍니다.</p>
                 <p lang="en_US" class="alert">If you bind the data by setting the id attribute in the checkbox, it may not work properly. Please use it only to get the index of the selected row.</p>
@@ -387,7 +387,7 @@
             <td>false</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">true로 설정하면 행에 마우스가 over되었을 때 행 요소에 "list_hover__" 클래스 속성 값이 추가되고 out되면 추가된 클래스 속성 값이 제거됩니다.</p>
+                <p lang="ko_KR">true로 설정하면 행에 마우스가 over 되었을 때 행 요소에 "list_hover__" 클래스 속성 값이 추가되고 out 되면 추가된 클래스 속성 값이 제거됩니다.</p>
                 <p lang="en_US">If set to true, the "list_hover__" class attribute value is appended to the row element when the mouse is over the row, and when it is out, the added class attribute value is removed.</p>
             </td>
         </tr>
@@ -397,9 +397,9 @@
             <td>1</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">1 이상으로 설정하면 바인딩할 때 그리드의 각 행이 별도로 생성됩니다. 이때 다음 행이 생성되기 까지의 시간 간격을 설정합니다.</p>
+                <p lang="ko_KR">1 이상으로 설정하면 바인딩할 때 그리드의 각 행이 별도로 생성됩니다. 이때 다음 행이 생성되기까지의 시간 간격을 설정합니다.</p>
                 <p lang="en_US">If set to 1 or higher, each row of the grid is created separately when binding. At this time, set the time interval until the next row is created.</p>
-                <p lang="ko_KR" class="alert">0으로 설정하면 모든 행을 한 번에 생성하여 데이터를 바인딩 하는동안 브라우저가 멈출 수도 있습니다.</p>
+                <p lang="ko_KR" class="alert">0으로 설정하면 모든 행을 한 번에 생성하여 데이터를 바인딩하는 동안 브라우저가 멈출 수도 있습니다.</p>
                 <p lang="en_US" class="alert">If set to 0, the browser may hang while binding data by creating all rows at once.</p>
             </td>
         </tr>
@@ -409,11 +409,11 @@
             <td>100</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">스크롤 페이징할 때 한 번에 바인딩할 행 수를 지정합니다.</p>
+                <p lang="ko_KR">스크롤 페이징 할 때 한 번에 바인딩할 행 수를 지정합니다.</p>
                 <p lang="en_US">Specifies the number of rows to bind at a time when scroll paging.</p>
-                <p lang="ko_KR">헤더 고정형 N.list는 스크롤 페이징 기능이 기본적으로 활성화 되며 0을 지정하면 스크롤 페이징 기능이 비활성화됩니다.</p>
+                <p lang="ko_KR">헤더 고정형 N.list는 스크롤 페이징 기능이 기본적으로 활성화되며 0을 지정하면 스크롤 페이징 기능이 비활성화됩니다.</p>
                 <p lang="en_US">In Header fixed type N.grid, the scroll paging feature is enabled by default, if 0 is specified, the scroll paging feature is disabled.</p>
-                <p lang="ko_KR">size 옵션 값은 다음과 같이 scrollPaging 옵션 객체의 하위 속성으로 지정해야합니다.</p>
+                <p lang="ko_KR">size 옵션 값은 다음과 같이 scrollPaging 옵션 객체의 하위 속성으로 지정해야 합니다.</p>
                 <p lang="en_US">The size option value must be specified as a sub-property of the scrollPaging option object as follows.</p>
                 <pre><code>...
     scrollPaging : {
@@ -422,7 +422,7 @@
 ...</code></pre>
                 <p lang="ko_KR" class="alert">너무 작게 지정하면 스크롤이 생성되지 않아 데이터가 모두 표시되지 않습니다. 반드시 행 들이 그리드 바디를 넘칠 수 있는 양을 지정해 주어야 합니다.</p>
                 <p lang="en_US" class="alert">If it is set too small, scrolling is not created and all data is not displayed. You must specify the amount by which rows can overflow the grid body.</p>
-                <p lang="ko_KR" class="alert">너무 크게 지정하면 스크롤 페이징이 작동될때 브라우저에 부하가 발생되므로 그리드에 입력 요소나 이미지가 들어 있다면 100 이하로 설정하고 그렇지 않다면 1000 이하로 설정하는 것을 권장합니다.</p>
+                <p lang="ko_KR" class="alert">너무 크게 지정하면 스크롤 페이징이 작동될 때 브라우저에 부하가 발생되므로 그리드에 입력 요소나 이미지가 들어 있다면 100 이하로 설정하고 그렇지 않다면 1000 이하로 설정하는 것을 권장합니다.</p>
                 <p lang="en_US" class="alert">If set too large, browser performance is overhead when scroll paging is enabled, so it is recommended to set it to 100 or less if the input element or image is included in the grid, otherwise 1000 or less.</p>
             </td>
         </tr>
@@ -508,7 +508,7 @@
             <td>true</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">false로 설정하면 두 번째 인자에 "append" 옵션을 지정하여 bind 메서드를 호출했을 때 append된 행으로 자동 스크롤되지 않습니다.</p>
+                <p lang="ko_KR">false로 설정하면 두 번째 인자에 "append" 옵션을 지정하여 bind 메서드를 호출했을 때 append 된 행으로 자동 스크롤되지 않습니다.</p>
                 <p lang="en_US">If set to false, when the bind method is called with the "append" option specified as the second argument, the scroll will not automatically scroll to the appended row.</p>
             </td>
         </tr>
@@ -520,7 +520,7 @@
             <td>
                 <p lang="ko_KR">true로 설정하면 컴포넌트 초기화 전에 입력 요소에 바인딩되어 있는 이벤트와 format, validate, dataSync 등의 컴포넌트 이벤트의 충돌을 방지해 줍니다.</p>
                 <p lang="en_US">If set to true, it prevents the conflict of the event bound to the input element before component initialization and the component event such as format, validate, and dataSync.</p>
-                <p lang="ko_KR" class="alert">format이 정상적으로 동작하지 않거나 바인딩되어 있는 데이터가 의도한 대로핸들링되지 않을 때, 알 수 없는 오류가 발생했을 때 true로 설정 바랍니다.</p>
+                <p lang="ko_KR" class="alert">format이 정상적으로 동작하지 않거나 바인딩되어 있는 데이터가 의도한 대로 핸들링되지 않을 때, 알 수 없는 오류가 발생했을 때 true로 설정 바랍니다.</p>
                 <p lang="en_US" class="alert">Set to true when an unknown error occurs, such as the format not working properly or the bound data is not handled as intended.</p>
             </td>
         </tr>
@@ -534,7 +534,7 @@
                 <p lang="en_US">If set to true, you can paste(Ctrl + V) the cell data copied from Excel into the grid.</p>
                 <p lang="ko_KR" class="alert">Excel에서 복사 한 데이터 외에도 행을 엔터키(\n)로 구분하고 열을 탭키(\t)로 구분하여 텍스트를 붙여 넣을 수 있습니다</p>
                 <p lang="en_US" class="alert">In addition to the data copied from Excel, you can paste text with rows separated by enter key(\n) and columns separated by tab key(\t).</p>
-                <p lang="ko_KR" class="alert">텍스트 입력 커서가 표시되는 셀을 기준으로 id 속성을 갖고 있는 요소들에 순서대로 붙여넣기 합니다. 입력 요소가 아닌 경우에도 id 속성이 있으면 셀 값이 업데이트됩니다.</p>
+                <p lang="ko_KR" class="alert">텍스트 입력 커서가 표시되는 셀을 기준으로 id 속성을 갖고 있는 요소들에 순서대로 붙여 넣기 합니다. 입력 요소가 아닌 경우에도 id 속성이 있으면 셀 값이 업데이트됩니다.</p>
                 <p lang="en_US" class="alert">Based on the cell where the text input cursor is displayed, values ​​are pasted in order to the elements that have the id attribute. Even if it is not an input element, the cell value is updated if the id attribute is present.</p>
                 <p lang="ko_KR" class="alert">readonly 또는 disabled 속성을 갖고 있는 요소는 값을 입력하지 않습니다.</p>
                 <p lang="en_US" class="alert">No values ​​are input for elements with readonly or disabled attributes.</p>
@@ -546,7 +546,7 @@
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">bind하거나 add했을 때 생성된 행 요소에 데이터가 바인딩되기 전에 실행되는 이벤트 핸들러를 정의합니다.</p>
+                <p lang="ko_KR">bind 하거나 add 했을 때 생성된 행 요소에 데이터가 바인딩되기 전에 실행되는 이벤트 핸들러를 정의합니다.</p>
                 <p lang="en_US">Defines an event handler that is executed before data is bound to the row element created when bind or add.</p>
                 <pre lang="ko_KR"><code>rowHandlerBeforeBind : function(rowIdx, rowEle, rowData) {
     // this : N.grid 인스턴스
@@ -570,7 +570,7 @@
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">bind하거나 add했을 때 생성된 행 요소에 데이터가 바인딩된 후에 실행되는 이벤트 핸들러를 정의합니다.</p>
+                <p lang="ko_KR">bind 하거나 add 했을 때 생성된 행 요소에 데이터가 바인딩된 후에 실행되는 이벤트 핸들러를 정의합니다.</p>
                 <p lang="en_US">Defines an event handler that is executed after data is bound to the row element created when bind or add.</p>
                 <pre lang="ko_KR"><code>rowHandler : function(rowIdx, rowEle, rowData) {
     // this : N.grid 인스턴스
@@ -630,17 +630,17 @@
     // this : N.grid 인스턴스
     // context : context 요소
     // data : 바인딩된 데이터
-    // isFirstPage : 스크롤 페이징할 때 첫 페이지인지 여부(스크롤 페이징하지 않으면 true 반환)
-    // isLastPage : 스크롤 페이징할 때 마지막 페이지 인지 여부(스크롤 페이징하지 않으면 true 반환)
+    // isFirstPage : 스크롤 페이징 할 때 첫 페이지인지 여부(스크롤 페이징 하지 않으면 true 반환)
+    // isLastPage : 스크롤 페이징 할 때 마지막 페이지 인지 여부(스크롤 페이징 하지 않으면 true 반환)
 }</code></pre>
                 <pre lang="en_US"><code>onBind : function(context, data, isFirstPage, isLastPage) {
     // this : N.grid instance
     // context : context element
     // data : Bound data
-    // isFirstPage : Whether it is the first page when scroll paging(스크롤 페이징하지 않으면 true 반환)
-    // isLastPage : Whether it is the last page when scroll paging(스크롤 페이징하지 않으면 true 반환)
+    // isFirstPage : Whether it is the first page when scroll paging(스크롤 페이징 하지 않으면 true 반환)
+    // isLastPage : Whether it is the last page when scroll paging(스크롤 페이징 하지 않으면 true 반환)
 }</code></pre>
-                <p lang="ko_KR" class="alert">스크롤 페이징이 활성화되었을 경우 페이징된 데이터가 바인딩될 때마다 실행됩니다.</p>
+                <p lang="ko_KR" class="alert">스크롤 페이징이 활성화되었을 경우 페이징 된 데이터가 바인딩될 때마다 실행됩니다.</p>
                 <p lang="en_US" class="alert">If scroll paging is enabled, it is executed whenever paged data is bound.</p>
             </td>
         </tr>
@@ -661,8 +661,8 @@
             <td class="depricated">
                 데이터를 표현하지 않는 숨어있는 행 수
                 <p class="alert">
-                    그리드에서 클릭한 행의 Index를 자동으로 가져오기위해 $("selector").index() 메서드 사용시 반환된 Index 값은 클릭한 행의 인덱스에 1이 더해져 있습니다.
-                    또한 colGroup 등 tbody 태그 레벨에 기입되는 요소가 있다면 그러한 요소 갯수만큼 Index가 더해져서 반환됩니다. 이를 보정하기 위한 값으로 withoutTbodyLength를 제공합니다.
+                    그리드에서 클릭한 행의 Index를 자동으로 가져오기 위해 $("selector").index() 메서드 사용 시 반환된 Index 값은 클릭한 행의 인덱스에 1이 더해져 있습니다.
+                    또한 colGroup 등 tbody 태그 레벨에 기입되는 요소가 있다면 그러한 요소 개수만큼 Index가 더해져서 반환됩니다. 이를 보정하기 위한 값으로 withoutTbodyLength를 제공합니다.
                      $("selector").index() - gridInstance.options.misc.withoutTbodyLength와 같이 사용한다면 정확한 Index 값을 가져올 수 있습니다.
                 </p>
             </td>
