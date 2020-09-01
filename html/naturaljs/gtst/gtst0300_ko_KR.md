@@ -330,13 +330,13 @@ bindEvents : function() {
 }
 ```
 
-<p class="alert">위 코드에서 N.comm의 옵션들 중 type 프로퍼티는 웹 서버에 POST 방식으로 요청할 수 없어서 임의로 정의 한 옵션입니다. 서버가 POST 요청을 처리할 수 있는 환경이라면 natural.config.js에 type의 기본값이 "POST"로 정의되어 있으니 type 옵션을 제거 바랍니다. type 옵션에 대한 자세한 내용은 <a href="#cmVmcjAyMDQlMjRDb21tdW5pY2F0b3IucmVxdWVzdCRodG1sJTJGbmF0dXJhbGpzJTJGcmVmciUyRnJlZnIwMjA0Lmh0bWw=">Communicator.request</a> 문서의 [기본옵션] 탭을 참고해 주세요.</p>
+<p class="alert">위 코드에서 N.comm의 옵션들 중 type 프로퍼티는 웹 서버에 POST 방식으로 요청할 수 없어서 임의로 정의 한 옵션입니다. 서버가 POST 요청을 처리할 수 있는 환경이라면 natural.config.js에 type의 기본값이 "POST"로 정의되어 있으니 type 옵션을 제거 바랍니다. type 옵션에 대한 자세한 내용은 <a href="#cmVmcjAyMDQlMjRDb21tdW5pY2F0b3IucmVxdWVzdCRodG1sJTJGbmF0dXJhbGpzJTJGcmVmciUyRnJlZnIwMjA0Lmh0bWw=">Communicator.request</a> 문서의 [기본 옵션] 탭을 참고해 주세요.</p>
 
 조회 버튼의 이벤트 핸들러는 다음과 같은 로직을 실행합니다.
  1. 검색 폼(cont.form)의 데이터를 파라미터로 서버에서 데이터 조회
  2. 그리드(cont.grid)에 조회한 데이터를 바인딩
 
-```cont.form.validate()``` 메서드는 검색 폼의 입력 요소의 태그에 선언된 data-validate 옵션([Form](#cmVmcjA0MDclMjRGb3JtJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjA0MDcuaHRtbA==) 문서의 [선언형옵션] 참고)을 한 번에 체크하여 입력 데이터에 대한 유효성 검증을 실행하는 메서드입니다. validate() 메서드는 유효성 검증을 모두 통과해야만 true를 반환하므로 위 코드와 같이 if 조건으로 선언해 놓으면 "필수 입력 체크" 등의 귀찮은 작업들을 편리하게 처리할 수 있습니다.
+```cont.form.validate()``` 메서드는 검색 폼의 입력 요소의 태그에 선언된 data-validate 옵션([Form](#cmVmcjA0MDclMjRGb3JtJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjA0MDcuaHRtbA==) 문서의 [선언형 옵션] 참고)을 한 번에 체크하여 입력 데이터에 대한 유효성 검증을 실행하는 메서드입니다. validate() 메서드는 유효성 검증을 모두 통과해야만 true를 반환하므로 위 코드와 같이 if 조건으로 선언해 놓으면 "필수 입력 체크" 등의 귀찮은 작업들을 편리하게 처리할 수 있습니다.
 그리고 구문의 끝 부분에 .button() 메서드를 실행해서 이벤트 타겟 요소에 Button(N.button) 컴포넌를 적용했습니다.
 
 #### [New] 버튼 이벤트
@@ -427,8 +427,8 @@ N(window).alert({
 ```
 
 4. N.comm을 이용하여 그리드의 변경된 데이터(```cont.grid.data("modified")```)를 서버파라미터로 전송.
-<p class="alert">위 코드에서 N.comm의 옵션들 중 "type" 은 웹 서버에 POST 방식으로 요청할 수 없어서 임의로 정의 한 옵션입니다. 서버가 POST 요청을 처리할 수 있는 환경이라면 natural.config.js에 type의 기본값이 "POST"로 정의되어 있으니 type 옵션을 제거 바랍니다. type 옵션에 대한 자세한 내용은 <a href="#cmVmcjAyMDQlMjRDb21tdW5pY2F0b3IucmVxdWVzdCRodG1sJTJGbmF0dXJhbGpzJTJGcmVmciUyRnJlZnIwMjA0Lmh0bWw=">Communicator.request</a> 문서의 [기본옵션] 탭을 참고해 주세요.</p>
-<p class="alert">서버로 object가 아닌 array[object] 형태의 파라미터를 전달하려면 dataIsArray 옵션을 활성화해 주어야 합니다. dataIsArray 옵션에 대한 자세한 내용은 <a href="#cmVmcjAyMDQlMjRDb21tdW5pY2F0b3IucmVxdWVzdCRodG1sJTJGbmF0dXJhbGpzJTJGcmVmciUyRnJlZnIwMjA0Lmh0bWw=">Communicator.request</a> 문서의 [기본옵션] 탭을 참고해 주세요.</p>
+<p class="alert">위 코드에서 N.comm의 옵션들 중 "type" 은 웹 서버에 POST 방식으로 요청할 수 없어서 임의로 정의 한 옵션입니다. 서버가 POST 요청을 처리할 수 있는 환경이라면 natural.config.js에 type의 기본값이 "POST"로 정의되어 있으니 type 옵션을 제거 바랍니다. type 옵션에 대한 자세한 내용은 <a href="#cmVmcjAyMDQlMjRDb21tdW5pY2F0b3IucmVxdWVzdCRodG1sJTJGbmF0dXJhbGpzJTJGcmVmciUyRnJlZnIwMjA0Lmh0bWw=">Communicator.request</a> 문서의 [기본 옵션] 탭을 참고해 주세요.</p>
+<p class="alert">서버로 object가 아닌 array[object] 형태의 파라미터를 전달하려면 dataIsArray 옵션을 활성화해 주어야 합니다. dataIsArray 옵션에 대한 자세한 내용은 <a href="#cmVmcjAyMDQlMjRDb21tdW5pY2F0b3IucmVxdWVzdCRodG1sJTJGbmF0dXJhbGpzJTJGcmVmciUyRnJlZnIwMjA0Lmh0bWw=">Communicator.request</a> 문서의 [기본 옵션] 탭을 참고해 주세요.</p>
 5. 저장 완료 후 N.notify 컴포넌트를 사용하여 메시지 표시
 <p class="alert">입력 요소의 값을 변경하거나 cont.grid.val() 메서드로 데이터를 변경하면 <strong>rowStatus</strong> 프로퍼티가 생성됩니다. rowStatus 값은 "insert", "update", "delete" 중 하나가 됩니다. <strong>서버 에서는</strong> 행 데이터 객체 마다 정의되어 있는 <strong>rowStatus 값으로 입력/수정/삭제를 구분해서 처리</strong>하면 됩니다.</p>
 6. Search 버튼을 클릭하여 변경된 데이터 재 조회

@@ -22,7 +22,7 @@
 
     <h4 lang="ko_KR" class="notIndex">1. 폼에 데이터 바인딩 하기.</h4>
     <h4 lang="en_US" class="notIndex">1. Binds the data to the form.</h4>
-    <p lang="ko_KR" class="alert">폼의 context 요소는 table 이든 div 든 상관 없습니다. context 요소 안에 데이터 객체의 프로퍼티명과 같은 id 속성을 가진 요소가 있다면 해당 요소에 값을 바인딩합니다.</p>
+    <p lang="ko_KR" class="alert">폼의 context 요소는 table 이든 div 든 상관없습니다. context 요소 안에 데이터 객체의 프로퍼티명과 같은 id 속성을 가진 요소가 있다면 해당 요소에 값을 바인딩합니다.</p>
     <p lang="en_US" class="alert">The form's context element doesn't matter whether it's a table or a div. If there is an element with an id attribute equal to the property name of the data object in the context element, the value is bound to the element.</p>
     <pre><code>&lt;table class="form"&gt;
     &lt;tr&gt;
@@ -74,7 +74,7 @@
 
     N(".btn-save").click(function() {
         <strong>N(window).alert</strong>({ // 1. 저장 확인 메시지 표시
-            msg : "저장 하겠습니까?",
+            msg : "저장하시겠습니까?",
             <strong>confirm : true</strong>,
             <strong>onOk : function() {</strong>
                 if(<strong>form.validate()</strong>) { // 2. 폼의 전체 데이터 유효성 검증
@@ -132,7 +132,7 @@
 &lt;button class="btn-search"&gt;검색&lt;/button&gt;
 
 &lt;script type="text/javascript"&gt;
-    // add 메서드를 실행하면 id 속성을 갖고 있는 입력 요소들의 name 속성값과 value 속성값으로 data 객체를 생성합니다.
+    // add 메서드를 실행하면 id 속성을 갖고 있는 입력 요소들의 name 속성 값과 value 속성 값으로 data 객체를 생성합니다.
     var form = N(data).form(".form").<strong>add</strong>(); // { "name": "", "age": "" }
 
     N(".btn-search").click(function() {
@@ -248,7 +248,7 @@
 &lt;/script&gt;</code></pre>
     <h4 lang="ko_KR" class="notIndex">5. N.select를 사용하지 않고 radio, checkbox 입력 요소를 N.form과 연동 하기.</h4>
     <h4 lang="en_US" class="notIndex">5. Linking radio and checkbox input elements with N.form without using N.select.</h4>
-    <p lang="ko_KR" class="alert">radio와 checkbox 입력 요소의 첫 번째 요소에 name 속성값과 같은 id 속성값을 반드시 정의해야 합니다.</p>
+    <p lang="ko_KR" class="alert">radio와 checkbox 입력 요소의 첫 번째 요소에 name 속성 값과 같은 id 속성 값을 반드시 정의해야 합니다.</p>
     <p lang="en_US" class="alert">The id element value, such as the name attribute value, must be defined in the first element of the radio and checkbox input elements.</p>
     <pre><code>&lt;div class="form"&gt;
     &lt;label&gt;&lt;input id="age" name="age" value="10"&gt;&lt;span&gt;10&lt;/span&gt;&lt;/label&gt;

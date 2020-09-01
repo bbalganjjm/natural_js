@@ -6,7 +6,7 @@
  * 1. 컴포넌트 초기화시 지정한 옵션 값
  *
  * 2. 여기(N.Config)에서 지정한 옵션 값
- *    2.1. 각 영역별로 지정하세요. 컴포넌트 초기화 시 각 영역별 값들을 자동으로 기본옵션으로 지정해 줍니다.
+ *    2.1. 각 영역별로 지정하세요. 컴포넌트 초기화 시 각 영역별 값들을 자동으로 기본 옵션으로 지정해 줍니다.
  *         ex) 2.1.1 모든 N.grid의 높이를 300으로 지정하고 싶음.
  *                   - N.context.attr("ui")의 grid 키에 height 속성을 추가하고 값은 300을 지정
  *             2.1.2 모든 N.form에 html을 인식 시키고 싶음.
@@ -563,39 +563,39 @@
                  */
                 "resizableLastCellCorrectionWidth" : N.browser.is("ie") || N.browser.is("firefox") ? 10.8 : 12,
                 /**
-                 * 리사이즈바의 left 포지션이 컬럼 보더를 기준으로 가운데에 위치하지 않을때 아래 수치 조절(기본값 : 0)
+                 * 리사이즈바의 left 포지션이 컬럼 보더를 기준으로 가운데에 위치하지 않을 때 아래 수치 조절(기본값 : 0)
                  */
                 "resizeBarCorrectionLeft" : N.browser.is("firefox") ? -1 : N.browser.is("safari") ? 1 : 0,
                 /**
-                 * 리사이즈바의 높이가 밑에까지 꽉 차지 않을때 아래 수치 조절(기본값 : 0)
+                 * 리사이즈바의 높이가 밑에까지 꽉 차지 않을 때 아래 수치 조절(기본값 : 0)
                  */
                 "resizeBarCorrectionHeight" : 0,
                 /**
-                 * 컬럼 고정 시 고정된 헤더 셀(TH)의 상단 위치가 맞지 않을때 아래 수치 조절(기본값 : 0)
+                 * 컬럼 고정 시 고정된 헤더 셀(TH)의 상단 위치가 맞지 않을 때 아래 수치 조절(기본값 : 0)
                  */
                 "fixedcolHeadMarginTop" : N.browser.is("ie") || N.browser.is("firefox") ? -1 : 0,
                 /**
-                 * 컬럼 고정 시 고정된 헤더 셀(TH)의 좌측 위치가 맞지 않을때 아래 수치 조절(기본값 : 0)
+                 * 컬럼 고정 시 고정된 헤더 셀(TH)의 좌측 위치가 맞지 않을 때 아래 수치 조절(기본값 : 0)
                  */
                 "fixedcolHeadMarginLeft" : N.browser.is("ie") || N.browser.is("firefox") ? -1 : 0,
                 /**
-                 * 컬럼 고정 시 고정된 헤더 셀(TH)의 높이가 맞지 않을때 아래 수치 조절(기본값 : 0)
+                 * 컬럼 고정 시 고정된 헤더 셀(TH)의 높이가 맞지 않을 때 아래 수치 조절(기본값 : 0)
                  */
                 "fixedcolHeadHeight" : 0,
                 /**
-                 * 컬럼 고정 시 고정된 바디 셀(TD)의 상단 위치가 맞지 않을때 아래 수치 조절(기본값 : 0)
+                 * 컬럼 고정 시 고정된 바디 셀(TD)의 상단 위치가 맞지 않을 때 아래 수치 조절(기본값 : 0)
                  */
                 "fixedcolBodyMarginTop" : N.browser.is("ie") || N.browser.is("firefox") ? -1 : 0,
                 /**
-                 * 컬럼 고정 시 고정된 바디 셀(TD)의 좌측 위치가 맞지 않을때 아래 수치 조절(기본값 : 0)
+                 * 컬럼 고정 시 고정된 바디 셀(TD)의 좌측 위치가 맞지 않을 때 아래 수치 조절(기본값 : 0)
                  */
                 "fixedcolBodyMarginLeft" : N.browser.is("ie") || N.browser.is("firefox") ? -1 : 0,
                 /**
-                 * 컬럼 고정 시 데이터를 바인딩할 때 고정된 바디 셀(TD)의 높이가 맞지 않을때 아래 수치 조절(기본값 : 0)
+                 * 컬럼 고정 시 데이터를 바인딩할 때 고정된 바디 셀(TD)의 높이가 맞지 않을 때 아래 수치 조절(기본값 : 0)
                  */
                 "fixedcolBodyBindHeight" : N.browser.is("ie") || N.browser.is("firefox") ? 1 : 1,
                 /**
-                 * 컬럼 고정 시 데이터를 Add할 때 고정된 바디 셀(TD)의 높이가 맞지 않을때 아래 수치 조절(기본값 : 1)
+                 * 컬럼 고정 시 데이터를 Add할 때 고정된 바디 셀(TD)의 높이가 맞지 않을 때 아래 수치 조절(기본값 : 1)
                  */
                 "fixedcolBodyAddHeight" : 1,
                 /**
@@ -719,7 +719,7 @@
                         + 'view(context) 요소를 입력하지 않으면 다른 View의 요소까지 선택되어 의도하지 않은 오류가 발생할 수 있습니다. '
                         + '\nex) N("selector", cont.view).hide();'
                         + '\n    cont.view.find("selector").hide();',
-                    "UseTheComponentsValMethod" : 'jQuery의 val 메서드로 입력 요소의 value 속성값을 변경하면 컴포넌트에 바인딩되어 있는 데이터는 업데이트되지 않습니다. '
+                    "UseTheComponentsValMethod" : 'jQuery의 val 메서드로 입력 요소의 value 속성 값을 변경하면 컴포넌트에 바인딩되어 있는 데이터는 업데이트되지 않습니다. '
                         + '컴포넌트의 내부 데이터와 연동된 입력 요소들은 적용된 데이터 관련 컴포넌트(N.form, N.grid 등)에서 제공하는 val 메서드를 사용해야 합니다.'
                         + '\nex) cont["p.form.id"].val("columnName", "value")'
                         + '\n    cont["p.grid.id"].val(index, "columnName", "value")'
