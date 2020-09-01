@@ -336,7 +336,7 @@ bindEvents : function() {
  1. 검색 폼(cont.form)의 데이터를 파라미터로 서버에서 데이터 조회
  2. 그리드(cont.grid)에 조회한 데이터를 바인딩
 
-```cont.form.validate()``` 메서드는 검색 폼의 입력 요소의 태그에 선언된 data-validate 옵션([Form](#cmVmcjA0MDclMjRGb3JtJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjA0MDcuaHRtbA==) 문서의 [선언형옵션] 참고)을 한번에 체크하여 입력 데이터에 대한 유효성 검증을 실행하는 메서드입니다. validate() 메서드는 유효성 검증을 모두 통과해야만 true를 반환하므로 위 코드와 같이 if 조건으로 선언해 놓으면 "필수 입력 체크" 등의 귀찮은 작업들을 편리하게 처리할 수 있습니다.
+```cont.form.validate()``` 메서드는 검색 폼의 입력 요소의 태그에 선언된 data-validate 옵션([Form](#cmVmcjA0MDclMjRGb3JtJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjA0MDcuaHRtbA==) 문서의 [선언형옵션] 참고)을 한 번에 체크하여 입력 데이터에 대한 유효성 검증을 실행하는 메서드입니다. validate() 메서드는 유효성 검증을 모두 통과해야만 true를 반환하므로 위 코드와 같이 if 조건으로 선언해 놓으면 "필수 입력 체크" 등의 귀찮은 작업들을 편리하게 처리할 수 있습니다.
 그리고 구문의 끝 부분에 .button() 메서드를 실행해서 이벤트 타겟 요소에 Button(N.button) 컴포넌를 적용했습니다.
 
 #### [New] 버튼 이벤트

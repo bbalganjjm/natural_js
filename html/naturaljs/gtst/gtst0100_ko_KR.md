@@ -34,7 +34,7 @@ CORE, ARCHITECTURE, DATA, UI, UI.Shell 전체를 사용하기 원한다면 natur
 *   Natural-UI 만 사용할 경우 : natural.core.js, natural.data.js, natural.ui.js
 *   Natural-UI.Shell 만 사용할 경우 : natural.core.js, natural.ui.js, natural.ui.shell.js
 
-Natural-JS의 모든 라이브러리가 합쳐진 natural.js.min.js의 용량이 214kb 정도밖에 되지 않기 때문에 natural.js.min.js 만 임포트 해도 성능에 큰 영향을 미치지 않습니다.
+Natural-JS의 모든 라이브러리가 합쳐진 natural.js.min.js의 용량이 214kb 정도밖에 되지 않기 때문에 natural.js.min.js 만 임포트해도 성능에 큰 영향을 미치지 않습니다.
 
 라이브러리를 임포트 했으니 Natural-JS의 구동 환경을 설정해 볼까요?
 

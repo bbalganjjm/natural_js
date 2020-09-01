@@ -69,7 +69,7 @@
         체크박스는 요소가 1개만 있을때는 값이 1이나 Y, on 이면 체크되고 0이나 N, off 이면 체크가 해제됩니다.
          * 1이나 Y, on 등 예/아니오 값의 기본값은 natural.config.js 파일의 N.context.attr("core").sgChkdVal과 N.context.attr("core").sgUnChkdVal에 설정 바랍니다.
 
-        체크박스 요소가 2개 이상이면 컬럼 데이터가 Array 이면 Array 안에 있는 여러 개 값을 한번에 선택해 주고 String으로 단일 값이 있으면 해단 값에 해당하는 요소를 선택해 줍니다.
+        체크박스 요소가 2개 이상이면 컬럼 데이터가 Array 이면 Array 안에 있는 여러 개 값을 한 번에 선택해 주고 String으로 단일 값이 있으면 해단 값에 해당하는 요소를 선택해 줍니다.
 
         제일 권장하는 방법은 모든 선택 요소를 select 컴포넌트로 처리하면 위와 같은 오류를 방지할 수 있고 소스정리도 깔끔하게할 수 있습니다.
         <input id="abc" value="Y">

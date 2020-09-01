@@ -72,7 +72,7 @@ N(".popup-0001").cont({
             <strong>caller.close</strong>("Hello onClose."); // close 함수의 첫 번째 인자로 onCloseData 데이터 전달
         });
     },
-    // 팝업이 열릴때마다 실행될 함수
+    // 팝업이 열릴 때마다 실행될 함수
     <strong>onOpenFn</strong> : function(onOpenData) {
         N(".result", this.view).text(onOpenData);
     }
@@ -123,8 +123,8 @@ N(".parent-0001").cont({
     init : function(view, request) {
         var popup = N().popup({
             url: "./popup.html",
-            <strong>onOpen</strong>: "onOpenFn", // 팝업이 열릴때마다 실행될 함수명
-            <strong>onClose</strong>: function(onCloseData) { // 팝업이 닫힐때마다 실행될 onClose 이벤트 핸들러
+            <strong>onOpen</strong>: "onOpenFn", // 팝업이 열릴 때마다 실행될 함수명
+            <strong>onClose</strong>: function(onCloseData) { // 팝업이 닫힐 때마다 실행될 onClose 이벤트 핸들러
                 N(".result", view).text(onCloseData);
             }
         });

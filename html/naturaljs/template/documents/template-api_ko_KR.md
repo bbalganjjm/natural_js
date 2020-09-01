@@ -100,7 +100,7 @@ Natural-UI의 컴포넌트들을 자동으로 초기 화해 줍니다.
 }
 ```
 
-초기화가 완료되면 `p.{컴포넌트명}.{요소id}` 속성 값으로 지정한 컴포넌트 옵션 객체는 생성된 컴포넌트의 인스턴스로 대체됩니다.
+초기화가 완료되면 `p.{컴포넌트명}.{요소id}` 속성값으로 지정한 컴포넌트 옵션 객체는 생성된 컴포넌트의 인스턴스로 대체됩니다.
 
 > `p.select.{id}` 선언은 페이지의 view에서 해당 id 속성값을 갖고 있는 모든 선택요소에 Select(N.select) 컴포넌트를 초기화하고 생성된 컴포넌트 인스턴스들을 Array에 저장한다음 속성값을 대체합니다. Select 컴포넌트의 인스턴스를 사용할 때는 `cont["p.select.{id}"][1]`와 같이 사용할 인스턴스를 배열에서 꺼내어 사용해야합니다.
 
@@ -162,7 +162,7 @@ Natural-TEMPLATE에서만 사용가능한 컴포넌트 별 추가 옵션들은 �
 ...
 ```
 
- * p.select.{id} : [ "code", filterFunction ] 처럼 array 타입으로도 간단하게 선언할 수 있습니다. filter가 필요 없으면 [ "code" ] 만 선언 해도 됩니다.
+ * p.select.{id} : [ "code", filterFunction ] 처럼 array 타입으로도 간단하게 선언할 수 있습니다. filter가 필요 없으면 [ "code" ] 만 선언해도 됩니다.
 
 ```
 ...
@@ -205,7 +205,7 @@ Natural-TEMPLATE에서만 사용가능한 컴포넌트 별 추가 옵션들은 �
 ...
 ```
 
- * p.select.{id} : [ "comm", "key", "val", filterFunction ] 처럼 Array 타입으로도 간단하게 선언할 수 있습니다. filter가 필요 없으면 [ "comm", "key", "val" ] 만 선언 해도 됩니다.
+ * p.select.{id} : [ "comm", "key", "val", filterFunction ] 처럼 Array 타입으로도 간단하게 선언할 수 있습니다. filter가 필요 없으면 [ "comm", "key", "val" ] 만 선언해도 됩니다.
 
 ```
 ...
@@ -246,7 +246,7 @@ Natural-TEMPLATE에서만 사용가능한 컴포넌트 별 추가 옵션들은 �
 
 좀더 상세한 옵션을 설정하려면 다음예제와 같이 "search-box" 옵션을 object로 지정하면 됩니다.
 
->"usage" 옵션이 "search-box"로 설정된 Form 은 입력 요소에 Enter 키로 조회하는 이벤트 핸들러가 자동으로 바인딩 됩니다. 이 Enter 키 이벤트 핸들러의 실행을 차단하고 다른 이벤트 핸들러를 등록하려면 "search-box" 옵션 객체의 "events" 속성에 이벤트 핸들러를 array 객체 안에 필요한만큼 정의해 주면 됩니다.
+>"usage" 옵션이 "search-box"로 설정된 Form 은 입력 요소에 Enter 키로 조회하는 이벤트 핸들러가 자동으로 바인딩됩니다. 이 Enter 키 이벤트 핸들러의 실행을 차단하고 다른 이벤트 핸들러를 등록하려면 "search-box" 옵션 객체의 "events" 속성에 이벤트 핸들러를 array 객체 안에 필요한만큼 정의해 주면 됩니다.
 
 ```
 ...
@@ -330,7 +330,7 @@ N.comm의 초기화 속성명은 다음과 같이 조합하여 사용할 수 있
 "c.{액션명}" : function() { return N.comm; }
 ```
 
->가능 하다면 액션명은 호출하는 URL의 서비스명과 맞춰 주고 불가능하면 반드시 목록 조회는 get + {ActionName} + List, 한건 조회는 get + {ActionName}, 입력은 insert + {ActionName}, 수정은 update + {ActionName}, 삭제는 delete + {ActionName}, 입력/수정/삭제를 한번에 처리하는 Communicator는 save + {ActionName}로 정의 바랍니다.
+>가능 하다면 액션명은 호출하는 URL의 서비스명과 맞춰 주고 불가능하면 반드시 목록 조회는 get + {ActionName} + List, 한건 조회는 get + {ActionName}, 입력은 insert + {ActionName}, 수정은 update + {ActionName}, 삭제는 delete + {ActionName}, 입력/수정/삭제를 한 번에 처리하는 Communicator는 save + {ActionName}로 정의 바랍니다.
 
 ```
 ...
@@ -384,7 +384,7 @@ N.comm의 선언은 오브젝트나 값을 직접 대입하는것이 아닌 함�
 ```
 id 이외의 속성을 가진 요소를 선택할 때는 target 속성에 jQuery selector 문자열을 지정하면 됩니다. 이때 셀렉터의 context를 view 요소로 지정하지 않아도 view 요소가 context 인자로 자동으로 지정됩니다.
 
-이벤트 바인딩이 완료되면 `e.{요소id}.{이벤트명}` 속성 값으로 정의한 이벤트 핸들러 함수는 대상 요소(jQuery object)로 대체됩니다.
+이벤트 바인딩이 완료되면 `e.{요소id}.{이벤트명}` 속성값으로 정의한 이벤트 핸들러 함수는 대상 요소(jQuery object)로 대체됩니다.
 
 ```
 ...

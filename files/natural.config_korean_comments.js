@@ -78,7 +78,7 @@
                 /** pointcut 객체는 유일한 속성명으로 정의합니다. */
                 "regexp" : {
                     /**
-                     * 정규표현식으로 평가하는 사용자 포인트 컷(기본으로 내장 포인트컷으로 삭제 해도 됩니다)
+                     * 정규표현식으로 평가하는 사용자 포인트 컷(기본으로 내장 포인트컷으로 삭제해도 됩니다)
                      * param : 정규표현식 문자열 혹은 RegExp 객체,
                      * cont : 컨트롤러 객체
                      * fnChain : 컨트롤러에 정의된 함수체인(뷰의selector:functionName.functionName...)(Built-in 함수를 제외한 사용자가 정의한 함수만 대상으로 합니다)
@@ -242,7 +242,7 @@
              */
             "date" : {
                 /**
-                 * 년월일 구분 문자
+                 * 연월일 구분 문자
                  */
                 dateSepa : "-",
                 /**
@@ -256,25 +256,25 @@
                     return "Y" + this.dateSepa + "m";
                 },
                 /**
-                 * 년월일 날짜포맷
+                 * 연월일 날짜포맷
                  */
                 Ymd : function() {
                     return "Y" + this.dateSepa + "m" + this.dateSepa + "d";
                 },
                 /**
-                 * 년월일 시 날짜포맷
+                 * 연월일 시 날짜포맷
                  */
                 YmdH : function() {
                     return this.Ymd() + " H";
                 },
                 /**
-                 * 년월일 시분 날짜포맷
+                 * 연월일 시분 날짜포맷
                  */
                 YmdHi : function() {
                     return this.Ymd() + " H" + this.timeSepa + "i";
                 },
                 /**
-                 * 년월일 시분초 날짜포맷
+                 * 연월일 시분초 날짜포맷
                  */
                 YmdHis : function() {
                     return this.Ymd() + " H" + this.timeSepa + "i" + this.timeSepa + "s";
@@ -719,7 +719,7 @@
                         + 'view(context) 요소를 입력하지 않으면 다른 View의 요소까지 선택되어 의도하지 않은 오류가 발생할 수 있습니다. '
                         + '\nex) N("selector", cont.view).hide();'
                         + '\n    cont.view.find("selector").hide();',
-                    "UseTheComponentsValMethod" : 'jQuery의 val 메서드로 입력 요소의 value 속성 값을 변경하면 컴포넌트에 바인딩되어 있는 데이터는 업데이트되지 않습니다. '
+                    "UseTheComponentsValMethod" : 'jQuery의 val 메서드로 입력 요소의 value 속성값을 변경하면 컴포넌트에 바인딩되어 있는 데이터는 업데이트되지 않습니다. '
                         + '컴포넌트의 내부 데이터와 연동된 입력 요소들은 적용된 데이터 관련 컴포넌트(N.form, N.grid 등)에서 제공하는 val 메서드를 사용해야 합니다.'
                         + '\nex) cont["p.form.id"].val("columnName", "value")'
                         + '\n    cont["p.grid.id"].val(index, "columnName", "value")'
