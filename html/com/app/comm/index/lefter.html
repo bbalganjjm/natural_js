@@ -51,7 +51,7 @@
 }
 
 .index-lefter .left-menu {
-    padding: 0.7em 0 0.7em 1em;
+    padding: 0.7em 0 0.7em 0.5em;
     overflow: auto;
     -webkit-overflow-scrolling: touch;
     font-size: 0.9em;
@@ -69,10 +69,10 @@
 
 .index-lefter .left-menu ul li {
     margin: 0;
-    padding: 0.3em 0;
+    padding: 0.25em 0;
 }
 
-.index-lefter .left-menu ul > li > ul > li {
+.index-lefter .left-menu ul > li {
     padding-left: 1.1em;
     background: url("images/comm/icon/right.png") no-repeat 0 8px;
 }
@@ -118,7 +118,7 @@
     </div>
     <div class="left-menu">
         <ul>
-            <li>
+            <li class="expand">
                 <a href="#">
                     <span lang="ko_KR">소개</span>
                     <span lang="en_US">Introduction</span>
@@ -130,7 +130,7 @@
                     </a></li>
                 </ul>
             </li>
-            <li>
+            <li class="expand">
                 <a href="#"><span>API/DEMO</span></a>
                 <ul>
                     <li class="leaf-node">
@@ -196,7 +196,7 @@
                     </li>
                 </ul>
             </li>
-            <li>
+            <li class="expand">
                 <a href="#">
                     <span lang="ko_KR">자습서</span>
                     <span lang="en_US">Tutorials</span>
@@ -268,7 +268,7 @@
                     </a></li>
                 </ul>
             </li>
-            <li>
+            <li class="expand">
                 <a href="#"><span>Natural-TEMPLATE</span></a> <sup>new</sup>
                 <ul>
                     <li class="leaf-node">
