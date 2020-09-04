@@ -2,18 +2,35 @@
 
     var IndexController = {
         docs : null,
-        init : function() {
+        init : function(initPageId) {
             this.mobileResponsiveView();
             this.setLocale();
-            this.loadHeader();
-            this.loadLefter();
-            this.loadBody();
-            this.loadFooter();
+            if(initPageId) {
+                this.loadPageForSEO(initPageId);
+            } else {
+                this.loadHeader();
+                this.loadLefter();
+                this.loadBody();
+                this.loadFooter();
+            }
             this.reloadCss();
             this.initBrowserHistorySystem();
             if(location.hostname === "bbalganjjm.github.io") {
                 this.googleAnalytics();
             }
+        },
+        loadPageForSEO : function(initPageId) {
+            N("body").css("padding", "30px");
+            N('<a href="./"><span>Go Home</span></a>').css({
+                "padding": "0 0 5px 0",
+                "margin": "0 0 35px 0",
+                "display": "block",
+                "font-size": "20px",
+                "border-bottom": "3px double #ccc"
+            }).prependTo("body");
+            N(".page-wrap").comm({
+                url : initPageId
+            }).submit();
         },
         loadHeader : function() {
             N("header").comm("html/com/app/comm/index/header.html").submit();
