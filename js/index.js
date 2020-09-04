@@ -21,7 +21,7 @@
         },
         loadPageForSEO : function(initPageId) {
             N("body").css("padding", "30px");
-            N('<a href="./"><span>Go Home</span></a>').css({
+            N('<a href="./"><span>Go Home(https://bbalganjjm.github.io/natural_js/)</span></a>').css({
                 "padding": "0 0 5px 0",
                 "margin": "0 0 35px 0",
                 "display": "block",
