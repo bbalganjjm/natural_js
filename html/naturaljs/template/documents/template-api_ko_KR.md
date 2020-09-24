@@ -1,6 +1,6 @@
 Natural-TEMPLATE
 ===
-Natural-TEMPLATE 은 Natural-JS 기반 웹 어플리케이션 개발을 정형화해 주는 패키지입니다. Natural-TEMPLATE 은 코드 가독성과 개발 생산성을 크게 향상해 줍니다.
+Natural-TEMPLATE 은 Natural-JS 기반 웹 어플리케이션 개발을 정형화해주는 패키지입니다. Natural-TEMPLATE 은 코드 가독성과 개발 생산성을 크게 향상해 줍니다.
 
 목차
 ===
