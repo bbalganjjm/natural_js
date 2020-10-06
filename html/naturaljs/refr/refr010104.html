@@ -446,24 +446,24 @@
                 <p lang="en_US">Here is the general asynchronous execution logic:</p>
                 <pre lang="ko_KR"><code>setTimeout(function() {
     setTimeout(function() {
-        N.comm("url").submit(function() {
+        setTimeout(function() {
             setTimeout(function() {
                 N.log("4번 로직 완료");
             }, 500);
             N.log("3번 로직 완료");
-        });
+        }, 500);
         N.log("2번 로직 완료");
     }, 500);
     N.log("1번 로직 완료");
 }, 500);</code></pre>
                 <pre lang="en_US"><code>setTimeout(function() {
     setTimeout(function() {
-        N.comm("url").submit(function() {
+        setTimeout(function() {
             setTimeout(function() {
                 N.log("Logic 4 complete.");
             }, 500);
             N.log("Logic 3 complete.");
-        });
+        }, 500);
         N.log("Logic 2 complete.");
     }, 500);
     N.log("Logic 1 complete.");
@@ -473,52 +473,52 @@
                 <pre lang="ko_KR"><code>var defers = N.serialExecute(
     function(defer){
         setTimeout(function() {
-            defer.resolve(arg0, arg1);
+            defer.resolve("0", "1");
             N.log("1번 로직 완료");
         }, 500);
     },
     function(defer, arg0, arg1){
         setTimeout(function() {
-            defer.resolve();
-            N.log("2번 로직 완료");
+            defer.resolve(arg0, arg1);
+            N.log("2번 로직 완료", arg0, arg1);
         }, 500);
     },
-    function(defer){
-        N.comm("url").submit(function() {
-            defer.resolve(arg0);
-            N.log("3번 로직 완료");
-        });
+    function(defer, arg0, arg1){
+        setTimeout(function() {
+            defer.resolve(arg0, arg1);
+            N.log("3번 로직 완료", arg0, arg1);
+        }, 500);
     },
     function(defer, arg0){
         setTimeout(function() {
             defer.resolve();
-            N.log("4번 로직 완료");
+            N.log("4번 로직 완료", arg0);
         }, 500);
     }
 );</code></pre>
                 <pre lang="en_US"><code>var defers = N.serialExecute(
     function(defer){
         setTimeout(function() {
-            defer.resolve(arg0, arg1);
+            defer.resolve("0", "1");
             N.log("Logic 1 complete.");
         }, 500);
     },
     function(defer, arg0, arg1){
         setTimeout(function() {
-            defer.resolve();
-            N.log("Logic 2 complete.");
+            defer.resolve(arg0, arg1);
+            N.log("Logic 2 complete.", arg0, arg1);
         }, 500);
     },
-    function(defer){
-        N.comm("url").submit(function() {
-            defer.resolve(arg0);
-            N.log("Logic 3 complete.");
-        });
+    function(defer, arg0, arg1){
+        setTimeout(function() {
+            defer.resolve(arg0, arg1);
+            N.log("Logic 3 complete.", arg0, arg1);
+        }, 500);
     },
     function(defer, arg0){
         setTimeout(function() {
             defer.resolve();
-            N.log("Logic 4 complete.");
+            N.log("Logic 4 complete.", arg0);
         }, 500);
     }
 );</code></pre>
