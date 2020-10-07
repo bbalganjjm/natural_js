@@ -1,5 +1,5 @@
 ## Natural-UI v0.42.245
- *
+ * N.select : Changed the bind method to bind an empty("") value if the value is null.
 
 ## Natural-DATA v0.10.72
  *
