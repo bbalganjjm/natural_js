@@ -1481,7 +1481,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     will-change: opacity, transform;
     transform: translateZ(0)\0; /* for ie 8+ */
 
-    padding: 5px 15px 5px 8px;
+    padding: 8px 23px 9px 12px;
     line-height: 16px;
     text-align: left;
     word-break: break-all;
@@ -1490,6 +1490,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     opacity: 0;
     background-color: #2E7D32;
     margin-bottom: 5px;
+    border-radius: 5px;
 }
 
 .notify__ .notify_msg__.visible__ {
@@ -1514,8 +1515,8 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 .notify__ .notify_msg__ .notify_msg_close__ span {
     position: absolute;
-    top: 7px;
-    right: 1px;
+    top: 10px;
+    right: 7px;
     height: 12px;
     width: 12px;
     background:    url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAtElEQVQoz72RsarCUBBEzwYJEqzuN0mwEh8iYmntRwULC7EQfRYiftMUVmLh2NxACNZut8PszOwu/Kwk1ZJ2ksoOVkn6lzRusUFnZhMRU9uVpCVQAMeIqG0/gHt/YGX7GBEz2wegzOQzsG5J0Ys1zKoTANsXYJ5SerWcorfKG3h1+kGfU3TUS2Cf97javmSnk6Tqm0OT89+AP2Bu+xwRNbD/dqWt7RGwSik9s+vCdgM0v3vwB+cHXCGFSqtOAAAAAElFTkSuQmCC") no-repeat;
