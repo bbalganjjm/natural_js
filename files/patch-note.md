@@ -14,7 +14,7 @@
  *
 
 ## natural.ui.css
- *
+ * Changed the style of N.notify.
 
 ##natural.config.js
  *
