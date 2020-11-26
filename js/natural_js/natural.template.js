@@ -1,5 +1,5 @@
 /*!
- * Natural-TEMPLATE v0.1.10
+ * Natural-TEMPLATE v0.1.11
  *
  * Released under the LGPL v2.1 license
  * Date: 2019-02-28T18:00Z
@@ -24,7 +24,7 @@
                     } catch (e) {
                         throw N.error("N.tab", e);
                     }
-                    
+
                     $.extend(true, options, opts);
 
                     var codeList = [];
@@ -79,7 +79,7 @@
                                     return select;
                                 }).get();
                             } else {
-                                throw N.error(N.message.get(N.context.attr("template"), "MSG-0001"));
+                                throw N.error(N.message.get(N.context.attr("template").message, "MSG-0001"));
                             }
                         });
                     }
@@ -116,7 +116,7 @@
                                 });
                             }).error(function(e) {
                                 N.warn(e);
-                                throw N.error(N.message.get(N.context.attr("template"), "MSG-0002"));
+                                throw N.error(N.message.get(N.context.attr("template").message, "MSG-0002"));
                             }).request.obj.xhr);
                         }
 
@@ -125,7 +125,7 @@
                             var codeInfoArr = commStr.split("|");
 
                             if(!cont[codeInfoArr[1]]) {
-                                throw N.error(N.message.get(N.context.attr("template"), "MSG-0003", [ codeInfoArr[1] ]));
+                                throw N.error(N.message.get(N.context.attr("template").message, "MSG-0003", [ codeInfoArr[1] ]));
                             }
 
                             xhrs.push(cont[codeInfoArr[1]]().submit(function(data) {
@@ -142,7 +142,7 @@
                                 }).get();
                             }).error(function(e) {
                                 N.warn(e);
-                                throw N.error(N.message.get(N.context.attr("template"), "MSG-0004", [ codeInfoArr[0] ]));
+                                throw N.error(N.message.get(N.context.attr("template").message, "MSG-0004", [ codeInfoArr[0] ]));
                             }).request.obj.xhr);
                         });
 
@@ -271,10 +271,10 @@
                                 }));
                             }
                         } else {
-                            throw N.error(N.message.get(N.context.attr("template"), "MSG-0005", [ cont.view.data("pageid") + ":" + prop ]));
+                            throw N.error(N.message.get(N.context.attr("template").message, "MSG-0005", [ cont.view.data("pageid") + ":" + prop ]));
                         }
                     } else {
-                        throw N.error(N.message.get(N.context.attr("template"), "MSG-0005", [ cont.view.data("pageid") + ":" + prop ]));
+                        throw N.error(N.message.get(N.context.attr("template").message, "MSG-0005", [ cont.view.data("pageid") + ":" + prop ]));
                     }
                 },
                 events : function(cont, prop) {
@@ -292,7 +292,7 @@
                             targetProp = cont[prop].target;
                             handler = cont[prop].handler;
                         } else {
-                            throw N.error(N.message.get(N.context.attr("template"), "MSG-0006", [ cont.view.data("pageid") + ":" + prop ]));
+                            throw N.error(N.message.get(N.context.attr("template").message, "MSG-0006", [ cont.view.data("pageid") + ":" + prop ]));
                         }
 
                         var targetEle = N(idSelector + targetProp, cont.view);
@@ -347,7 +347,7 @@
                             cont[prop] = targetEle.on(eventName + "." + cont.view.data("pageid"), handler);
                         }
                     } else {
-                        throw N.error(N.message.get(N.context.attr("template"), "MSG-0006", [ cont.view.data("pageid") + ":" + prop ]));
+                        throw N.error(N.message.get(N.context.attr("template").message, "MSG-0006", [ cont.view.data("pageid") + ":" + prop ]));
                     }
                 }
             }
