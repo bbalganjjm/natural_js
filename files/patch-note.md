@@ -13,6 +13,9 @@
 ## Natural-UI.Shell v0.9.47
  *
 
+## Natural-TEMPLATE v0.1.11
+ * A bug where the error message was not displayed has been fixed.
+
 ## natural.ui.css
  * Changed the style of N.notify.
 
