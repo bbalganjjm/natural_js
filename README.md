@@ -1,4 +1,4 @@
-Let's start with [Natural-JS Boot](https://bbalganjjm.github.io/natural_js_boot)
+Let's start with [Natural-JS Boot](https://bbalganjjm.github.io/natural_js_boot)(https://bbalganjjm.github.io/natural_js_boot)
 ===
 
 [Natural-JS](https://bbalganjjm.github.io/natural_js)
