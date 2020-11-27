@@ -1,4 +1,5 @@
-## Let's start with [Natural-JS Boot](https://github.com/bbalganjjm/natural_js_boot)(https://github.com/bbalganjjm/natural_js_boot)
+## Natural-JS Boot가 새로 공개 됐습니다. [Natural-JS Boot](https://github.com/bbalganjjm/natural_js_boot)로 Natural-JS를 시작해 볼까요?
+## Natural-JS Boot is newly released. Shall we start Natural-JS with [Natural-JS Boot](https://github.com/bbalganjjm/natural_js_boot)?
 
 [Natural-JS](https://bbalganjjm.github.io/natural_js)
 ===
