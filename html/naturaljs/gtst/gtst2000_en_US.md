@@ -98,7 +98,7 @@ Wait for the conversion to Maven project to complete.
 
 2.10 When the program finishes running, open a web browser and enter the following address.
 ```md
-http://localhost/index.html
+http://localhost:8080/index.html
 ```
 If the Natural-JS site you are currently viewing is displayed normally, installation is complete.
 
