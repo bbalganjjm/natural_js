@@ -30,6 +30,7 @@
     "javascript-front",
     "datatables-plugin",
     "datagrid",
+    "grid",
     "tree",
     "tabs",
     "natural-js",
@@ -40,10 +41,14 @@
     "jquery": "1.12.4"
   },
   */
-  "author": "KIM HWANG MAN <bbalganjjm@gmail.com>",
-  "license": "LGPL-2.1",
+  "author": {
+    "name" : "KIM HWANG MAN",
+    "email" : "bbalganjjm@gmail.com"
+  },
+  "license": "LGPL-2.0-only",
   "bugs": {
-    "url": "https://github.com/bbalganjjm/natural_js/issues"
+    "url": "https://github.com/bbalganjjm/natural_js/issues",
+    "email": "bbalganjjm@gmail.com"
   },
   "homepage": "http://bbalganjjm.github.io/natural_js"
 }
