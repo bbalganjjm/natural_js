@@ -1,6 +1,6 @@
 {
   "name": "@bbalganjjm/natural_js",
-  "version": "0.92.406",
+  "version": "0.92.407",
   "description": "Natural-JS is a Javascript framework library that can be easily and quickly development the enterprise web application UI such as ERP, CRM, etc.",
   "main": "natural.js.min.js",
   "directories": {
