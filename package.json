@@ -3,9 +3,6 @@
   "version": "0.92.405",
   "description": "Natural-JS is a Javascript framework library that can be easily and quickly development the enterprise web application UI such as ERP, CRM, etc.",
   "main": "natural.js.min.js",
-  "directories": {
-    "lib": "lib"
-  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
