@@ -1,4 +1,3 @@
-### [Natural-JS Boot](https://github.com/bbalganjjm/natural_js_boot)가 공개 됐습니다. [Natural-JS Boot](https://github.com/bbalganjjm/natural_js_boot)로 Natural-JS기반 웹 어플리케이션을 손쉽게 제작해 보세요.
 ### [Natural-JS Boot](https://github.com/bbalganjjm/natural_js_boot) is released. Create Natural-JS-based web applications easily with [Natural-JS Boot](https://github.com/bbalganjjm/natural_js_boot).
 
 [Natural-JS](https://bbalganjjm.github.io/natural_js)
