@@ -102,7 +102,8 @@
     transition: transform 0.5s ease, box-shadow 0.5s ease;
 }
 
-.home0100 ul>li:hover {
+.home0100 ul>li:hover,
+.home0100 ul>li.hover {
     transform: translateY(-10px);
     box-shadow: 0 10px 10px #999;
 }
@@ -293,6 +294,11 @@
 
     var cont = N(".home0100").cont({
         init : function(view, request) {
+            var liEles = N(".features ul>li", view);
+            setInterval(function() {
+                N(".features ul>li.hover", view).removeClass("hover");
+	            liEles.eq(Math.floor(Math.random() * liEles.length) - 1).addClass("hover");
+            }, 3000);
         }
     });
 
