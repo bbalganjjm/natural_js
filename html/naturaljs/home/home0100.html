@@ -72,7 +72,7 @@
 }
 
 .home0100 .contents {
-    padding-left: 20px;
+    padding: 0 0 10px 20px;
 }
 
 .home0100 .contents h2 {
@@ -98,6 +98,13 @@
     margin: 10px;
     padding: 15px;
     min-width: 220px;
+    border-radius: 15px;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.home0100 ul>li:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 10px #999;
 }
 
 .home0100 ol>li {
@@ -118,8 +125,8 @@
     <h2>Natural-JS</h2>
 
     <div class="contents">
-        <p lang="ko_KR">Natural-JS는 ERP, CRM 등의 기업용 웹 어플리케이션 UI를 쉽고 빠르게 구현할 수 있는 오픈소스 Javascript 프레임워크 라이브러리입니다.</p>
-        <p lang="en_US">Natural-JS is an open source Javascript framework library that can be easily and quickly development the enterprise web application UI such as ERP, CRM, etc.</p>
+        <p lang="ko_KR"><strong>Natural-JS는 ERP, CRM 등의 기업용 웹 어플리케이션 UI를 쉽고 빠르게 구현할 수 있는 오픈소스 Javascript 프레임워크 라이브러리입니다.</strong></p>
+        <p lang="en_US"><strong>Natural-JS is an open source Javascript framework library that can be easily and quickly development the enterprise web application UI such as ERP, CRM, etc.</strong></p>
     </div>
 
     <h2 lang="ko_KR">Natural-JS의 특징</h2>
@@ -265,14 +272,16 @@
     <h2 lang="ko_KR">수상</h2>
     <h2 lang="en_US">Awards</h2>
 
-    <ol>
-        <li lang="ko_KR">2018 제12회 공개SW 개발자대회 - 금상</li>
-        <li lang="en_US">2018 OSS Grand Developers Challenge - Gold Award</li>
-        <li lang="ko_KR">2016 제10회 공개SW 개발자대회 - 동상</li>
-        <li lang="en_US">2016 OSS Grand Developers Challenge - Bronze Award</li>
-        <li lang="ko_KR">2012 제24회 글로벌 소프트웨어 공모대전 - 동상</li>
-        <li lang="en_US">2012 24th Global Software Contest - Bronze Award</li>
-    </ol>
+    <div class="contents awards">
+	    <ol>
+	        <li lang="ko_KR">2018 제12회 공개SW 개발자대회 - 금상</li>
+	        <li lang="en_US">2018 OSS Grand Developers Challenge - Gold Award</li>
+	        <li lang="ko_KR">2016 제10회 공개SW 개발자대회 - 동상</li>
+	        <li lang="en_US">2016 OSS Grand Developers Challenge - Bronze Award</li>
+	        <li lang="ko_KR">2012 제24회 글로벌 소프트웨어 공모대전 - 동상</li>
+	        <li lang="en_US">2012 24th Global Software Contest - Bronze Award</li>
+	    </ol>
+    </div>
 
     <br>
     <p lang="ko_KR">자세한 아키텍처 구조와 설명은 [ 소개 > <a class="link" href="#aW50cjAxMDAlMjROYXR1cmFsLUpTJTIwJUVDJTg2JThDJUVBJUIwJTlDJGh0bWwlMkZuYXR1cmFsanMlMkZpbnRyJTJGaW50cjAxMDAuaHRtbA==">Natural-JS 소개</a> ] 페이지의 내용을 참고하세요.</p>
