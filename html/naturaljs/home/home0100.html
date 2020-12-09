@@ -121,9 +121,36 @@
     max-width: 85%;
     margin-bottom: 10px;
 }
+
+.home0100 .notice {
+    font-size: 20px;
+    background-color: yellow;
+    padding: 15px;
+    border-radius: 0 0 10px 10px;
+    text-align: center;
+    word-break: keep-all;
+    opacity: 0;
+    transition: margin-top 0.5s ease, opacity 0.8s cubic-bezier(0.4, 0, 1, 1);
+    position: absolute;
+    margin-bottom: 24px;
+}
+
+.home0100 .notice.open {
+    opacity: 1;
+}
+
 </style>
 <article class="home0100">
-    <h2>Natural-JS</h2>
+    <div class="notice">
+        <p lang="ko_KR">
+            <a href="https://github.com/bbalganjjm/natural_js_boot" target="_blank">Natural-JS Boot</a>가 공개 됐습니다. <a href="https://github.com/bbalganjjm/natural_js_boot" target="_blank">Natural-JS Boot</a>로 Natural-JS기반 웹 어플리케이션을 손쉽게 제작해 보세요.
+        </p>
+        <p lang="en_US">
+            <a href="https://github.com/bbalganjjm/natural_js_boot" target="_blank">Natural-JS Boot</a> is released. Create Natural-JS-based web applications easily with <a href="https://github.com/bbalganjjm/natural_js_boot" target="_blank">Natural-JS Boot</a>.
+        </p>
+    </div>
+
+    <h1 style="margin-top: 0;">Natural-JS</h1>
 
     <div class="contents">
         <p lang="ko_KR"><strong>Natural-JS는 ERP, CRM 등의 기업용 웹 어플리케이션 UI를 쉽고 빠르게 구현할 수 있는 오픈소스 Javascript 프레임워크 라이브러리입니다.</strong></p>
@@ -299,6 +326,16 @@
                 N(".features ul>li.hover", view).removeClass("hover");
 	            liEles.eq(Math.floor(Math.random() * liEles.length) - 1).addClass("hover");
             }, 5000);
+
+
+            var noticeEle = N(".notice", view);
+            noticeEle.css("margin-top", "-" + String(noticeEle.outerHeight()) + "px");
+            setTimeout(function() {
+                noticeEle.css("position", "relative");
+                noticeEle.css("margin-top", "");
+	            noticeEle.addClass("open");
+            }, 2000);
+
         }
     });
 
