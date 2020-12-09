@@ -1,15 +1,15 @@
 Natural-JS
 ===
-Natural-JS는 ERP, CRM 등의 기업용 웹 어플리케이션 UI를 쉽고 빠르게 구현할 수 있는 Javascript 프레임워크입니다.
+Natural-JS는 ERP, CRM 등의 기업용 웹 어플리케이션 UI를 쉽고 빠르게 구현할 수 있는 오픈소스 Javascript 프레임워크 라이브러리입니다.
 
-구조
+구성
 ===
 
 Natural-JS는 Natural-CORE, Natural-ARCHITECTURE, Natural-DATA, Natural-UI 라이브러리 패키지로 구성됩니다. Natural-CORE는 Natural-JS에서 전역으로 사용하는 공통 라이브러리 패키지이고 Natural-ARCHITECTURE는 Natural-JS의 아키텍처를 구성하는 라이브러리 패키지입니다. Natural-DATA는 데이터의 동기화, Formatting, Validation, 가공을 지원하는 라이브러리 패키지이고 Natural-UI는 HTML 기반의 UI 컴포넌트를 지원하는 라이브러리 패키지입니다.
 
-![Natural-JS 구조](images/intr/pic3.png)
+![Natural-JS의 구성](images/intr/pic3.png)
 
-<center>[ Natural-JS 구조 ]</center>
+<center>[ Natural-JS의 구성 ]</center>
 
 ## Natural-CORE
 
