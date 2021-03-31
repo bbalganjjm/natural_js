@@ -1,0 +1,1 @@
+java -jar ./closure-compiler-v20210302.jar --js ../src/natural.ui.js --js_output_file ../dist/natural.ui.min.js
