@@ -180,7 +180,7 @@
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
-                gtag('config', 'UA-58001949-2');
+                gtag('config', 'G-GL64Q27TWZ');
             }
         },
         /**
