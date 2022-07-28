@@ -906,13 +906,17 @@
             "onActive" : function(docId, isFromDocsTabList, isNotLoaded) {
                 if(location.hostname === "bbalganjjm.github.io") {
                     try {
-                        ga('create', 'UA-58001949-2', 'auto');
-                        ga('set', 'location', location.href);
-                        ga('set', 'title', this.doc(docId).docNm);
-                        ga('send', {
-                            'hitType': 'pageview',
-                            'page': location.hash
-                        });
+                        // ga('create', 'UA-58001949-2', 'auto');
+                        // ga('set', 'location', location.href);
+                        // ga('set', 'title', this.doc(docId).docNm);
+                        // ga('send', {
+                        //     'hitType': 'pageview',
+                        //     'page': location.hash
+                        // });
+
+                        gtag('event', 'set', {'location': location.href});
+                        gtag('event', 'set', {'title': this.doc(docId).docNm});
+                        gtag('event', 'send', {'page': location.hash});
                     } catch (e) {}
                 }
             },
