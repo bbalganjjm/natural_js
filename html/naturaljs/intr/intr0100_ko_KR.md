@@ -7,9 +7,13 @@ Natural-JS는 ERP, CRM 등의 기업용 웹 어플리케이션 UI를 쉽고 빠�
 
 Natural-JS는 Natural-CORE, Natural-ARCHITECTURE, Natural-DATA, Natural-UI 라이브러리 패키지로 구성됩니다. Natural-CORE는 Natural-JS에서 전역으로 사용하는 공통 라이브러리 패키지이고 Natural-ARCHITECTURE는 Natural-JS의 아키텍처를 구성하는 라이브러리 패키지입니다. Natural-DATA는 데이터의 동기화, Formatting, Validation, 가공을 지원하는 라이브러리 패키지이고 Natural-UI는 HTML 기반의 UI 컴포넌트를 지원하는 라이브러리 패키지입니다.
 
-![Natural-JS의 구성](images/intr/pic3.png)
+![Natural-JS 의 구조](images/intr/pic3.png)
 
-<center>[ Natural-JS의 구성 ]</center>
+<center>[ Natural-JS 의 구조 ]</center>
+
+![Natural-JS Architecture Framework](images/intr/pic0.png)
+
+<center>[ Natural-JS Architecture Framework ]</center>
 
 ## Natural-CORE
 
@@ -47,7 +51,7 @@ Natural-ARCHITECTURE는 Natural-JS의 아키텍처를 구성하는 라이브러�
 
 ### Communicator-View-Controller(CVC) Architecture Pattern
 
-CVC 패턴은 Model-View-Controlelr(MVC) 패턴을 기반으로 하는 아키텍처 패턴입니다. 아래 그림과 같이 클라이언트 브라우저 영역을 Communicator-View-Controller 아키텍처로 구성하고 서버 전체를 Model 영역으로 정의하는 클라이언트 중심의 아키텍처 패턴입니다.
+CVC 패턴은 Model-View-Controller(MVC) 패턴을 기반으로 하는 아키텍처 패턴입니다. 아래 그림과 같이 클라이언트 브라우저 영역을 Communicator-View-Controller 아키텍처로 구성하고 서버 전체를 Model 영역으로 정의하는 클라이언트 중심의 아키텍처 패턴입니다.
 CVC 패턴을 적용하면 클라이언트 브라우저 구현 기술이 서버 기술 및 서버 아키텍처 종속성에서 벗어날 수 있고 디자인 영역과 개발 영역을 완벽하게 분리하여 개발의 복잡도를 낮출 수 있습니다.
 
 ![CVC Architecture Pattern](images/intr/pic5.png)
@@ -56,13 +60,13 @@ CVC 패턴을 적용하면 클라이언트 브라우저 구현 기술이 서버 
 
 ### Natural Architecture Framework
 
-Natural Architecture Framework는 CVC Architecture Pattern을 구현한 아키텍처 프레임워크입니다.
+Natural Architecture Framework 는 CVC Architecture Pattern 을 구현한 아키텍처 프레임워크입니다.
 
 ![Natural Architecture Framework](images/intr/pic6.png)
 
 <center>[ Natural Architecture Framework ]</center>
 
-Natural Architecture Framework는 개발 업무 영역을 명확하게 구분해 주어 각 영역별 전문가들로 분업할 수 있는 기반을 제공합니다.
+Natural Architecture Framework 는 개발 업무 영역을 명확하게 구분해 주어 각 영역별 전문가들로 분업할 수 있는 기반을 제공합니다.
 
 #### Controller
 
