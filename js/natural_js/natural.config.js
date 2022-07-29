@@ -916,10 +916,17 @@
                         // });
 
                         // GA4
-                        gtag('config', 'G-GL64Q27TWZ', {
+                        // gtag('config', 'G-GL64Q27TWZ', {
+                        //     'page_title' : this.doc(docId).docNm,
+                        //     'page_location' : location.href,
+                        //     'page_path': location.hash
+                        // });
+
+                        gtag('event', 'page_view', {
                             'page_title' : this.doc(docId).docNm,
                             'page_location' : location.href,
-                            'page_path': location.hash
+                            'page_path': location.hash,
+                            'send_to' : 'G-GL64Q27TWZ'
                         });
                     } catch (e) {}
                 }
