@@ -14,6 +14,11 @@ Natural-JS consists of the Natural-CORE, Natural-ARCHITECTURE, Natural-DATA, and
 </p>
 <p align="center">[ Structure of Natural-JS ]</p>
 
+<p align="center">
+	<img src="https://bbalganjjm.github.io/natural_js/images/intr/pic0.png" alt="Natural-JS Architecture Framework">
+</p>
+<p align="center">[ Natural-JS Architecture Framework ]</p>
+
 ## Natural-CORE
 
 Natural-CORE is a common library package used globally by Natural-JS.
