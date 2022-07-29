@@ -181,10 +181,10 @@
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
                 gtag('config', 'G-GL64Q27TWZ', {
-                    'send_page_view': false,
                     'page_title' : 'Home',
                     'page_location' : location.href,
-                    'page_path': location.hash
+                    'page_path': location.hash,
+                    'send_page_view': false
                 });
             }
         },
