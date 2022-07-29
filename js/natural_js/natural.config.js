@@ -906,6 +906,7 @@
             "onActive" : function(docId, isFromDocsTabList, isNotLoaded) {
                 if(location.hostname === "bbalganjjm.github.io") {
                     try {
+                        // GA3
                         // ga('create', 'UA-58001949-2', 'auto');
                         // ga('set', 'location', location.href);
                         // ga('set', 'title', this.doc(docId).docNm);
@@ -914,9 +915,12 @@
                         //     'page': location.hash
                         // });
 
-                        gtag('event', 'set', {'location': location.href});
-                        gtag('event', 'set', {'title': this.doc(docId).docNm});
-                        gtag('event', 'send', {'page': location.hash});
+                        // GA4
+                        gtag('config', 'G-GL64Q27TWZ', {
+                            'page_title' : this.doc(docId).docNm,
+                            'page_location' : location.href,
+                            'page_path': location.hash
+                        });
                     } catch (e) {}
                 }
             },
