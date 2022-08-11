@@ -922,7 +922,7 @@
                             'page_path': location.hash,
                             'send_to' : 'G-GL64Q27TWZ'
                         });
-                    } catch (e) {}
+                    } catch (e) { console.warn(e) }
                 }
             },
             /**

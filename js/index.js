@@ -178,7 +178,7 @@
         googleAnalytics : function() {
             if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 9) {
                 window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
+                window.gtag = function(){dataLayer.push(arguments);}
                 gtag('js', new Date());
                 gtag('config', 'G-GL64Q27TWZ', {
                     'page_title' : 'Home',
