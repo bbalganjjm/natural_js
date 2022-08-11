@@ -184,7 +184,7 @@
                     'page_title' : 'Home',
                     'page_location' : location.href,
                     'page_path': location.hash,
-                    'send_page_view': false
+                    'send_page_view': true
                 });
             }
         },
