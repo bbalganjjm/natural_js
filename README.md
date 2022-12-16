@@ -1,4 +1,4 @@
-\\<!--
+<!--
 ### [Natural-JS Boot](https://github.com/bbalganjjm/natural_js_boot) is released. Create Natural-JS-based web applications easily with [Natural-JS Boot](https://github.com/bbalganjjm/natural_js_boot).
 -->
 
