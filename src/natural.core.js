@@ -1,10 +1,10 @@
 /*!
- * Natural-CORE v0.18.29
+ * Natural-CORE v0.19.29
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
  *
- * Copyright 2014 KIM HWANG MAN(bbalganjjm@gmail.com)
+ * Copyright 2023 KIM HWANG MAN(bbalganjjm@gmail.com)
  *
  * Includes formatdate.js & Mask JavaScript API
  * formatdate.js : http://www.svendtofte.com/javascript/javascript-date-string-formatting/
@@ -304,7 +304,7 @@
         // N local variables
         $.extend(N, {
             version : {
-                "Natural-CORE" : "0.18.29"
+                "Natural-CORE" : "0.19.29"
             },
             /**
              * Set and get locale value
