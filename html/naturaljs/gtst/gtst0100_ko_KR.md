@@ -34,7 +34,7 @@ CORE, ARCHITECTURE, DATA, UI, UI.Shell 전체를 사용하기 원한다면 natur
 *   Natural-UI 만 사용할 경우 : natural.core.js, natural.data.js, natural.ui.js
 *   Natural-UI.Shell 만 사용할 경우 : natural.core.js, natural.ui.js, natural.ui.shell.js
 
-Natural-JS의 모든 라이브러리가 합쳐진 natural.js.min.js의 용량이 214kb 정도밖에 되지 않기 때문에 natural.js.min.js 만 임포트해도 성능에 큰 영향을 미치지 않습니다.
+Natural-JS의 모든 라이브러리가 합쳐진 natural.js.min.js의 용량이 145kb 정도밖에 되지 않기 때문에 natural.js.min.js 만 임포트해도 성능에 큰 영향을 미치지 않습니다.
 
 라이브러리를 임포트 했으니 Natural-JS의 구동 환경을 설정해 볼까요?
 
@@ -92,7 +92,7 @@ N.context.attr("ui", {
 
 Natural-JS는 페이지 블록의 소스코드에서 개발 영역과 디자인 영역을 구분하고 요소(Element) 간, 스크립트 간 영역(scope)을 보장해 주기 위한 간단한 소스코드의 구성 규칙이 있습니다. 별로 어렵지 않습니다. 다음과 같이 View 영역과 Controller 영역을 구분하고 순서대로 배치만 해 주면 됩니다.
 
-<p class="alert">View와 Controller에 대한 자세한 내용은 <a href="#cmVmcjAyMDElMjRDb250cm9sbGVyJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAyMDEuaHRtbA==">Controller</a> 메뉴를 참고해 주세요.</a>
+<p class="alert">View와 Controller에 대한 자세한 내용은 <a href="#cmVmcjAyMDElMjRDb250cm9sbGVyJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAyMDEuaHRtbA==">Controller</a> 메뉴를 참고해 주세요.</p>
 
 **block01.html**
 
@@ -247,7 +247,7 @@ Natural-ARCHITECTURE 기반의 모든 페이지나 페이지 블록 들은 반�
 
 ** block01.html ** 파일은 index.html 페이지에 의해 로드되고 N.cont의 인자로 지정된 객체의 init 함수가 실행될 것입니다. 그다음 **block01.html** 페이지의 요소 id가 result 인 div 요소 안에 서버에서 조회된 데이터가 표시될 것입니다.
 
-<p class="alert">데이터를 조회할 수 있는 서버가 있는 경우 N.comm의 url 옵션에서 <strong>data.json</ strong> 대신 서비스 URL을 입력하세요.</p>
+<p class="alert">데이터를 조회할 수 있는 서버가 있는 경우 N.comm의 url 옵션에서 <strong>data.json</strong> 대신 서비스 URL을 입력하세요.</p>
 
 이제 Natural-JS의 기본 환경을 구성하고 실행하는 방법을 알았으니 블록 페이지가 실행될 사이트 환경을 만들어 볼까요?
 
