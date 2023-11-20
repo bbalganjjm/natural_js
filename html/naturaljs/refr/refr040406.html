@@ -68,7 +68,7 @@
 N(".popup-0001").cont({
     init : function(view, request) {
         var caller = this.caller; // caller는 이 팝업 페이지를 열어준 N.popup 인스턴스
-        N(".btn-ok", view).click(function(onCloseData) { // Ok 버튼에 이벤트 바인딩
+        N(".btn-ok", view).on("click", function(onCloseData) { // Ok 버튼에 이벤트 바인딩
             <strong>caller.close</strong>("Hello onClose."); // close 함수의 첫 번째 인자로 onCloseData 데이터 전달
         });
     },
@@ -94,7 +94,7 @@ N(".popup-0001").cont({
 N(".popup-0001").cont({
     init : function(view, request) {
         var caller = this.caller; // caller is the N.popup instance that opened this popup page.
-        N(".btn-ok", view).click(function(onCloseData) { // Binds event to Ok button
+        N(".btn-ok", view).on("click", function(onCloseData) { // Binds event to Ok button
             <strong>caller.close</strong>("Hello onClose."); // Passes the onCloseData data as the first argument of the close function.
         });
     },

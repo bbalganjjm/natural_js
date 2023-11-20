@@ -227,7 +227,7 @@ N(".exap0900").cont({
     setEvents : function(cont) {
         // 3. bind events
         // 3-1. button handling.
-        N(".buttons a[id^=btnBindData]", cont.view).click(function() {
+        N(".buttons a[id^=btnBindData]", cont.view).on("click", function() {
             N("#" + this.id.replace("Bind", "Save")).instance("button").enable();
             if(!N(".buttons a[id^=btnSaveData]", cont.view).hasClass("btn_disabled__")) {
                 N("#btnSaveAll", cont.view).instance("button").enable();
@@ -235,23 +235,23 @@ N(".exap0900").cont({
         });
 
         // 3-2. bind data to form01
-        N("#btnBindData01", cont.view).click(function(e) {
+        N("#btnBindData01", cont.view).on("click", function(e) {
             e.preventDefault();
             cont.form01.bind(0, cont.data);
         });
         // 3-3. bind data to form02
-        N("#btnBindData02", cont.view).click(function(e) {
+        N("#btnBindData02", cont.view).on("click", function(e) {
             e.preventDefault();
             cont.form02.bind(0, cont.data);
         });
         // 3-4.bind data to form03
-        N("#btnBindData03", cont.view).click(function(e) {
+        N("#btnBindData03", cont.view).on("click", function(e) {
             e.preventDefault();
             cont.form03.bind(0, cont.data);
         });
 
         // 3-5. save the form01's data
-        N("#btnSaveData01", cont.view).click(function(e) {
+        N("#btnSaveData01", cont.view).on("click", function(e) {
             e.preventDefault();
 
                N(window).alert({
@@ -260,7 +260,7 @@ N(".exap0900").cont({
                }).show();
         });
         // 3-6. save the form02's data
-        N("#btnSaveData02", cont.view).click(function(e) {
+        N("#btnSaveData02", cont.view).on("click", function(e) {
             e.preventDefault();
 
             N(window).alert({
@@ -269,7 +269,7 @@ N(".exap0900").cont({
              }).show();
         });
         // 3-7. save the form03's data
-        N("#btnSaveData03", cont.view).click(function(e) {
+        N("#btnSaveData03", cont.view).on("click", function(e) {
             e.preventDefault();
 
              N(window).alert({
@@ -278,7 +278,7 @@ N(".exap0900").cont({
                }).show();
         });
         // 3-8. save the all forms data
-        N("#btnSaveAll", cont.view).click(function(e) {
+        N("#btnSaveAll", cont.view).on("click", function(e) {
             e.preventDefault();
 
              // cont.data and cont.form01.data(), cont.form02.data(), cont.form03.data() are the same because they are reference to the same memory address.

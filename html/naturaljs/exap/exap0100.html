@@ -101,7 +101,7 @@ N(".exap0100").cont({
     },
     setEvents : function(cont) {
         // 5. bind events
-        N("#btnSearch", cont.view).click(function(e) {
+        N("#btnSearch", cont.view).on("click", function(e) {
             e.preventDefault();
             if(cont.form.validate()) {
                 N(cont.form.data(true)).comm("html/naturaljs/exap/data/sample.json").submit(function(data, request) {

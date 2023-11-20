@@ -165,7 +165,7 @@
                         } else {
                             opts.cont[opts.form].bind(opts.args[0], opts.args[2]);
                         }
-                        opts.args[1].click();
+                        opts.args[1].trigger("click");
                         },
                         onCancel : function() {
                             self.select(opts.args[3]);
@@ -491,7 +491,7 @@
             }
         });
 
-        fileInput.click();
+        fileInput.trigger("click");
     }
 
 })(window, N);

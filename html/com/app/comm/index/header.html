@@ -89,12 +89,12 @@
     N(".index-header").cont({
         init : function(view, request) {
             // Language link
-            view.find(".korean").click(function(e) {
+            view.find(".korean").on("click", function(e) {
                 e.preventDefault();
                 window.sessionStorage.locale = "ko_KR";
                 window.location.reload();
             });
-            view.find(".english").click(function(e) {
+            view.find(".english").on("click", function(e) {
                 e.preventDefault();
                 window.sessionStorage.locale = "en_US";
                 window.location.reload();
@@ -112,7 +112,7 @@
                 colorSelect.append('<option value="' + k + '" ' + selected + '>' + k + '</option>')
             };
 
-            colorSelect.change(function() {
+            colorSelect.on("change", function() {
                 window.localStorage.themeColor = $(this).val();
                 location.reload();
             });

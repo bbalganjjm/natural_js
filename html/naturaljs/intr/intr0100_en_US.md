@@ -185,7 +185,7 @@ Supports
 
 ### Development language
 
-* Javascript(ECMAScript 3 or later) / jQuery 1.12.4
+* Javascript(ECMAScript 3 or later) / jQuery 3.7.1
 * HTML / DHTML / HTML5
 * CSS2 / CSS3
 

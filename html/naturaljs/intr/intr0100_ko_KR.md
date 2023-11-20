@@ -182,7 +182,7 @@ Natural-UI가 컨텐츠 영역의 UI 개발을 지원한다면 Natural-UI.Shell 
 
 ### 개발 언어
 
-* Javascript(ECMAScript 3 이상) / jQuery 1.12.4
+* Javascript(ECMAScript 3 이상) / jQuery 3.7.1
 * HTML / DHTML / HTML5
 * CSS2 / CSS3
 

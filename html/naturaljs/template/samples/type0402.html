@@ -281,13 +281,13 @@
         "e.age.change" : {
         	target : "#search #age",
         	handler : function(e) {
-        	    cont["e.btnSearch.click"].click();
+        	    cont["e.btnSearch.click"].trigger("click");
             }
         },
         "e.eyeColor.change" : {
         	target : "#search #eyeColor",
         	handler : function(e) {
-        	    cont["e.btnSearch.click"].click();
+        	    cont["e.btnSearch.click"].trigger("click");
             }
         },
         "e.btnDept.click" : function(e) {
@@ -306,7 +306,7 @@
                     // TODO
                 },
                 after : function(data) {
-                    cont["e.btnSearch.click"].click();
+                    cont["e.btnSearch.click"].trigger("click");
                 }
             });
         },
@@ -338,9 +338,9 @@
                 cont["p.form.search"].context().hide().prev("h3").hide().prev(".view-intro").hide();
                 view.find("#btnSearch").hide();
              	// 부모 페이지 컨트롤러의 검색 버튼 클릭
-                cont.opener["e.btnSearch.click"].click();
+                cont.opener["e.btnSearch.click"].trigger("click");
             } else {
-                cont["e.btnSearch.click"].click();
+                cont["e.btnSearch.click"].trigger("click");
             }
         }
     });

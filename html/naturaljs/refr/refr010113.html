@@ -79,12 +79,12 @@
                 <pre lang="ko_KR"><code>// 클릭 방지
 $("selector").tpBind("click", N.event.disable);
 // 클릭 방지 해제
-$("selector").unbind("click", N.event.disable);
+$("selector").off("click", N.event.disable);
 </code></pre>
                 <pre lang="en_US"><code>// Enable the click protection.
 $("selector").tpBind("click", N.event.disable);
 // Disable the click protection.
-$("selector").unbind("click", N.event.disable);
+$("selector").off("click", N.event.disable);
 </code></pre>
             </td>
         </tr>

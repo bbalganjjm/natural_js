@@ -172,7 +172,7 @@ N(".exap0600").cont({
     setEvents : function(cont) {
         // 6. bind events
         // 6-1. Search button
-        N("#btnSearch", cont.view).click(function(e) {
+        N("#btnSearch", cont.view).on("click", function(e) {
             e.preventDefault();
             if(cont.form.validate()) {
                 // Temporary code
@@ -181,10 +181,10 @@ N(".exap0600").cont({
                     cont.request.removeAttr("pageNo");
                  });
             }
-        }).click(); // Auto retrieve
+        }).trigger("click"); // Auto retrieve
 
         // 6-2. Add button
-        N("#btnAdd", cont.view).click(function(e) {
+        N("#btnAdd", cont.view).on("click", function(e) {
             e.preventDefault();
          // Grid row select event
             N("#subContext", cont.view).comm("html/naturaljs/exap/exap0602.html")

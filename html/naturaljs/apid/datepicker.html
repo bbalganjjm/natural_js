@@ -193,7 +193,7 @@
              }
         },
         setEvents : function(view, cont) {
-            N("#btnApply", view).click(function(e) {
+            N("#btnApply", view).on("click", function(e) {
                 e.preventDefault();
 
                 var opts = {
@@ -243,33 +243,33 @@
                    N("#btnHide", view).instance("button").enable();
             });
 
-            N("#monthonly", view).change(function() {
+            N("#monthonly", view).on("change", function() {
                 if(N(this).is(":checked")) {
                     N("#minDate, #maxDate", view).attr("placeholder", "YYYYMM");
                 } else {
                     N("#minDate, #maxDate", view).attr("placeholder", "YYYYMMDD");
                 }
-            }).change();
+            }).trigger("change");
 
-            N("#yearsPanelPosition", view).change(function() {
+            N("#yearsPanelPosition", view).on("change", function() {
                 if($(this).val() === "top") {
                     N(".minMaxYearLine", view).show();
                 } else {
                     N(".minMaxYearLine", view).hide();
                 }
-            }).change();
+            }).trigger("change");
 
-            N("#btnShow", view).click(function(e) {
+            N("#btnShow", view).on("click", function(e) {
                 e.preventDefault();
                 cont.datepicker.show();
             });
 
-            N("#btnHide", view).click(function(e) {
+            N("#btnHide", view).on("click", function(e) {
                 e.preventDefault();
                 cont.datepicker.hide();
             });
 
-            N("#btnReload", view).click(function(e) {
+            N("#btnReload", view).on("click", function(e) {
                 e.preventDefault();
                 N(view.parent()).comm(cont.request.get("url")).submit();
             });

@@ -103,12 +103,12 @@
                 N("#btnAdd", view).instance("button").enable();
             });
 
-            N("#btnAdd", view).click(function(e) {
+            N("#btnAdd", view).on("click", function(e) {
                 e.preventDefault();
                 notify.add(N("#msg", view).val(), N.string.trimToUndefined(N("#url", view).val()));
             });
 
-            N("#btnReload", view).click(function(e) {
+            N("#btnReload", view).on("click", function(e) {
                 e.preventDefault();
                 N("div.notify__", "body").remove();
                 N(view.parent()).comm(cont.request.get("url")).submit();

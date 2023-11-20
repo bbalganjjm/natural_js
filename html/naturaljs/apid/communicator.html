@@ -113,7 +113,7 @@
             this.setEvents(view, this);
         },
         setEvents : function(view, cont) {
-            N("#btnGetJson", view).click(function(e) {
+            N("#btnGetJson", view).on("click", function(e) {
                 e.preventDefault();
 
                 var opts = {
@@ -125,7 +125,7 @@
                 N.comm(opts).submit(eval("(" + view.find(".form.data #jsonCallback").val() + ")"));
             });
 
-            N("#btnGetPage", view).click(function(e) {
+            N("#btnGetPage", view).on("click", function(e) {
                 e.preventDefault();
 
                 var opts = {

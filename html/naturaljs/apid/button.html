@@ -69,7 +69,7 @@
             this.setEvents(view, this);
         },
         setEvents : function(view, cont) {
-            N("#btnMake", view).click(function(e) {
+            N("#btnMake", view).on("click", function(e) {
                 e.preventDefault();
                 var opts = {
                       color : N("select#color", view).val(),
@@ -83,21 +83,21 @@
                 });
             });
 
-            N("#btnDisable", view).click(function(e) {
+            N("#btnDisable", view).on("click", function(e) {
                 e.preventDefault();
                 N("div.result", view).find("a, button, input[type='button']").instance("button", function(u) {
                     this.disable();
                 });
             });
 
-            N("#btnEnable", view).click(function(e) {
+            N("#btnEnable", view).on("click", function(e) {
                 e.preventDefault();
                 N("div.result", view).find("a, button, input[type='button']").instance("button", function() {
                     this.enable();
                 });
             });
 
-            N("#btnReload", view).click(function(e) {
+            N("#btnReload", view).on("click", function(e) {
                 e.preventDefault();
                 N(view.parent()).comm(cont.request.get("url")).submit();
             });

@@ -160,7 +160,7 @@ N(".exap0500").cont({
     setEvents : function(cont) {
         // 5. bind events
         // 5-1. Search button
-        N("#btnSearch", cont.view).click(function(e) {
+        N("#btnSearch", cont.view).on("click", function(e) {
             e.preventDefault();
             if(cont.form.validate()) {
                 N(cont.form.data(true)).comm("html/naturaljs/exap/data/sample.json").submit(function(data, request) {
@@ -170,12 +170,12 @@ N(".exap0500").cont({
             }
         });
         // 5-2. Add button
-        N("#btnAdd", cont.view).click(function(e) {
+        N("#btnAdd", cont.view).on("click", function(e) {
             e.preventDefault();
             cont.grid.add();
         });
         // 5-3. Delete button
-        N("#btnDelete", cont.view).click(function(e) {
+        N("#btnDelete", cont.view).on("click", function(e) {
             e.preventDefault();
             var checkedIndexs = cont.grid.check();
             if(checkedIndexs.length > 0) {
@@ -191,7 +191,7 @@ N(".exap0500").cont({
             }
         });
         // 5-4. Save delete
-        N("#btnSave", cont.view).click(function(e) {
+        N("#btnSave", cont.view).on("click", function(e) {
             e.preventDefault();
 
             if(cont.grid.data("modified").length === 0) {
@@ -216,7 +216,7 @@ N(".exap0500").cont({
                             N(window).alert({
                                 msg : msg,
                                 onOk : function() {
-                                    N("#btnSearch", cont.view).click();
+                                    N("#btnSearch", cont.view).trigger("click");
                                 }
                             }).show();
                         });

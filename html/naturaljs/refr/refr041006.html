@@ -308,7 +308,7 @@
         }
     }).bind();
 
-    N(".btn-search").click(function() { // 데이터 조회 버튼 이벤트
+    N(".btn-search").on("click", function() { // 데이터 조회 버튼 이벤트
         <strong>pagination.pageNo(1).bind()</strong>; // 3. 첫 번째 페이지로 이동하여 currPageNavInfo 정보 초기화.
         <strong>N(pagination.currPageNavInfo())</strong>.comm("data.json").submit(function(data){ // 4. totalCount 값이 포함된 데이터 조회.
             <strong>pagination.bind(data[0] &amp;&amp; data[0].totalCount ? data[0].totalCount : 0 )</strong>; // 5. N.pagination의 bind 메서드의 인자에 totalCount를 입력하여 페이징 인덱스 재 생성.
@@ -330,7 +330,7 @@
         <strong>}</strong>
     }).bind();
 
-    N(".btn-search").click(function() { // Data inquiry button event
+    N(".btn-search").on("click", function() { // Data inquiry button event
         <strong>pagination.pageNo(1).bind()</strong>; // 3. Go to the first page and initialize the currPageNavInfo information.
         <strong>N(pagination.currPageNavInfo())</strong>.comm("data.json").submit(function(data){ // 4. Queries the data that contains the totalCount value.
             <strong>pagination.bind(data[0] &amp;&amp; data[0].totalCount ? data[0].totalCount : 0 )</strong>; // 5. Regenerates the paging index by entering totalCount in the argument of N.pagination's bind method.

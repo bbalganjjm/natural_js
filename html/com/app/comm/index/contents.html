@@ -53,7 +53,7 @@
         init : function(view, request) {
             this.initDocs(this, view);
 
-            if(N.string.trim(location.hash).length > 0 && N.string.trim(location.hash).length <= 35) {
+            if(N.string.trimToEmpty(location.hash).length > 0 && N.string.trimToEmpty(location.hash).length <= 35) {
                 location.href = "./";
             } else {
                 $(window).trigger("hashchange.index");

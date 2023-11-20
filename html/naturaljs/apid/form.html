@@ -385,7 +385,7 @@
         },
         setEvents : function(view, cont, data) {
             var form;
-            N("#btnInit", view).click(function(e) {
+            N("#btnInit", view).on("click", function(e) {
                 e.preventDefault();
 
                 var opts = {
@@ -413,7 +413,7 @@
                 });
             });
 
-            N("#btnAdd", view).click(function(e) {
+            N("#btnAdd", view).on("click", function(e) {
                 e.preventDefault();
                 var row = N.string.trimToUndefined(N("#addRow", view).val());
                 if(row !== undefined) {
@@ -422,7 +422,7 @@
                 form.add(row);
             });
 
-            N("#btnBind", view).click(function(e) {
+            N("#btnBind", view).on("click", function(e) {
                 e.preventDefault();
                 var row = N.string.trimToUndefined(N("#row", view).val());
                 if(row !== undefined) {
@@ -433,7 +433,7 @@
                 N("#btnRevert", view).instance("button").enable();
             });
 
-            N("#btnUnbind", view).click(function(e) {
+            N("#btnUnbind", view).on("click", function(e) {
                 e.preventDefault();
                 if(!form.options.unbind) {
                     N(".result", view).alert('You must check the "unbind" option checkbox before initializing the form').show();
@@ -442,7 +442,7 @@
                 form.unbind();
             });
 
-            N("#btnRevert", view).click(function(e) {
+            N("#btnRevert", view).on("click", function(e) {
                 e.preventDefault();
                 if(!form.options.revert) {
                     N(".result", view).alert('You must check the "revert" option checkbox before initializing the form').show();
@@ -451,7 +451,7 @@
                 form.revert();
             });
 
-            N("#btnVal", view).click(function(e) {
+            N("#btnVal", view).on("click", function(e) {
                 e.preventDefault();
                 var key = N.string.trimToNull(N("#key", view).val());
                 var value = N.string.trimToNull(N("#val", view).val());
@@ -462,7 +462,7 @@
                 }
             });
 
-            N("#btnData", view).click(function(e) {
+            N("#btnData", view).on("click", function(e) {
                 e.preventDefault();
                 N(".result", view).alert({
                     msg : '<pre class="pre">' + N.json.format(form.data(eval(N("select#data", view).val()))) + '</pre>',
@@ -471,12 +471,12 @@
                 }).show();
             });
 
-            N("#btnValidate", view).click(function(e) {
+            N("#btnValidate", view).on("click", function(e) {
                 e.preventDefault();
                 N(".result", view).alert('<b>전체 Validate 결과 : ' + form.validate() + '</b>').show()
             });
 
-            N("#btnReload", view).click(function(e) {
+            N("#btnReload", view).on("click", function(e) {
                 e.preventDefault();
                 N(view.parent()).comm(cont.request.get("url")).submit();
             });

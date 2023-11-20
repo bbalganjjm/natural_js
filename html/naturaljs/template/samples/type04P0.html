@@ -81,7 +81,7 @@
             onBind : function(context, data) {
                 if (data.length == 1) {
                     this.select(0);
-                    cont["e.btnOk.click"].click();
+                    cont["e.btnOk.click"].trigger("click");
                 }
             }
         },
@@ -107,10 +107,10 @@
             cont.caller.close();
         },
         "e.row.dblclick" : function(e) {
-            cont["e.btnOk.click"].click();
+            cont["e.btnOk.click"].trigger("click");
         },
         init : function(view, request) {
-            cont["e.btnSearch.click"].click();
+            cont["e.btnSearch.click"].trigger("click");
         },
         onOpen : function(onOpenData) {
         }

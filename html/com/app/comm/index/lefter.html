@@ -5,15 +5,22 @@
 }
 
 .index-lefter .logo {
-    height: 100px;
+    width: 250px;
+    text-align: center;
     background-color: #66BB6A;
 }
 
 .index-lefter .logo .home>span {
     display: inline-block;
-    width: 250px;
     height: 100px;
-    background: url("images/natural_js.png") no-repeat 50% 50%;
+    line-height: 100px;
+    font-family: cursive;
+    font-weight: 600;
+    font-size: 32px;
+    color: rgba(0,0,0,.87);
+    padding-left: 32px;
+    background: url("images/natural_js.png") no-repeat 0 50%;
+    background-size: 28px;
 }
 
 .index-lefter .logo .lefter-toggle-button {
@@ -112,7 +119,7 @@
 
 <article class="index-lefter">
     <div class="logo">
-        <a class="home" href="./"><span></span></a>
+        <a class="home" href="./"><span>Natural-JS</span></a>
         <a class="lefter-toggle-button" href="#" data-status="show"><span></span></a>
     </div>
     <div class="left-menu">
@@ -349,9 +356,9 @@
                 selfEle = undefined;
             });
 
-            N(".lefter-toggle-button>span", view).bind("mouseover.lefter", function() {
+            N(".lefter-toggle-button>span", view).on("mouseover.lefter", function() {
                 $(this).css("transform", "rotate(90deg)");
-            }).bind("mouseout.lefter", function() {
+            }).on("mouseout.lefter", function() {
                 $(this).css("transform", "");
             });
 

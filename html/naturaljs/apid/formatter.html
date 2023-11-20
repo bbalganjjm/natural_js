@@ -94,7 +94,7 @@
             this.setEvents(view);
         },
         setEvents : function(view) {
-            N("#btnFormatImperative", view).click(function(e) {
+            N("#btnFormatImperative", view).on("click", function(e) {
                 e.preventDefault();
 
                 var data = eval(N("code#data", view).text());
@@ -109,18 +109,18 @@
                 N("#result", view).text(N.json.format(pData));
             });
 
-            N("#btnFormatDeclarative", view).click(function(e) {
+            N("#btnFormatDeclarative", view).on("click", function(e) {
                 e.preventDefault();
                 var data = eval(N("code#data", view).text());
                 N(data).formatter(N("#inputBox", view)).format();
             });
 
-            N("#btnUnFormatEvent", view).click(function(e) {
+            N("#btnUnFormatEvent", view).on("click", function(e) {
                 e.preventDefault();
                 N("#inputBox :input", view).trigger("unformat");
             });
 
-            N("#btnFormatEvent", view).click(function(e) {
+            N("#btnFormatEvent", view).on("click", function(e) {
                 e.preventDefault();
                 N("#inputBox :input", view).trigger("format");
             });

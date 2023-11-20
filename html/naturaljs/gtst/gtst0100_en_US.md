@@ -10,7 +10,7 @@ First, download the Natural-JS library files in one of the following ways.
 
 Among the downloaded files, the necessary library files for running Natural-JS are as follows.
 
-1.  **jquery-1.12.4.min.js** - You must import the jQuery library. because Natural-JS operates based on jQuery.
+1.  **jquery-3.7.1.min.js** - You must import the jQuery library. because Natural-JS operates based on jQuery.
 2.  **natural.ui.css** - This is style sheet file related with the Natural-UI design.
 3.  **natural.js.min.js** - This is a minified file that combines the entire library files of Natural-JS.
 4.  **natural.config.js** - This is Natural-JS's configuration file.
@@ -18,7 +18,7 @@ Among the downloaded files, the necessary library files for running Natural-JS a
 Now you can create a top-level HTML file and import the above files into the page in the following order.
 
 ```
-<script type="text/javascript" src="js/natural_js/lib/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="js/natural_js/lib/jquery-3.7.1.min.js"></script>
 <link rel="stylesheet" type="text/css" href="js/natural_js/css/natural.ui.css" />
 <script type="text/javascript" src="js/natural_js/natural.js.min.js" charset="utf-8"></script>
 <script type="text/javascript" src="js/natural_js/natural.config.js" charset="utf-8"></script>
@@ -216,7 +216,7 @@ Save the following code as **index.html** file.
 <head>
 <meta content="text/html; charset=utf-8" />
 <title>Natural-JS</title>
-<script type="text/javascript" src="js/natural_js/lib/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="js/natural_js/lib/jquery-3.7.1.min.js"></script>
 <link rel="stylesheet" type="text/css" href="js/natural_js/css/natural.ui.css" />
 <script type="text/javascript" src="js/natural_js/natural.js.min.js"></script>
 <script type="text/javascript" src="js/natural_js/natural.config.js"></script>

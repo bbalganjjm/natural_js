@@ -169,7 +169,7 @@
                 changed : "p.grid.detail",
                 validate : "p.grid.detail",
                 after : function(data) {
-                    cont["p.tree.master"].context(".tree_active__").click();
+                    cont["p.tree.master"].context(".tree_active__").trigger("click");
                 }
             });
         },

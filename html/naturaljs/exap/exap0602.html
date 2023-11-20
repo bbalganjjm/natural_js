@@ -114,7 +114,7 @@ N(".exap0602").cont({
     setEvents : function(cont) {
         // 4. bind events
         // 4-1 Save data to server
-        N("#btnSave", cont.view).click(function(e) {
+        N("#btnSave", cont.view).on("click", function(e) {
             e.preventDefault();
             if(cont.form.data(true)[0].rowStatus === undefined) {
                 N(window).alert(N.message.get(cont.messages, "EXAP0602-0004")).show();
@@ -151,13 +151,13 @@ N(".exap0602").cont({
             }
         });
         // 4-2 Revert to initialized data
-        N("#btnRevert", cont.view).click(function(e) {
+        N("#btnRevert", cont.view).on("click", function(e) {
             e.preventDefault();
             cont.form.revert();
         });
 
         // 3-3 Go to list page
-        N("#btnList", cont.view).click(function(e) {
+        N("#btnList", cont.view).on("click", function(e) {
             e.preventDefault();
             // Return list page with search condition data
             N(N.context.attr("architecture").page.context).comm("html/naturaljs/exap/exap0600.html")

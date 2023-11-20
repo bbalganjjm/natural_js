@@ -404,7 +404,7 @@ var cont = N(".page-id").cont({
         }
     },
     init : function(view, request) {
-        cont["e.id.click"].click(); // Fires this event when DOM loading is complete.
+        cont["e.id.click"].trigger("click"); // Fires this event when DOM loading is complete.
     }
 });
 ...

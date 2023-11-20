@@ -141,7 +141,7 @@ N(".exap0700").cont({
     setEvents : function(cont) {
         // 6. bind events
         // 6-1. Save button
-        N("#btnSave", cont.view).click(function(e) {
+        N("#btnSave", cont.view).on("click", function(e) {
             e.preventDefault();
 
             if(cont.grid.data("modified").length === 0) {
@@ -166,7 +166,7 @@ N(".exap0700").cont({
                             N(window).alert({
                                 msg : msg,
                                 onOk : function() {
-                                    N("#btnSearch", cont.view).click();
+                                    N("#btnSearch", cont.view).trigger("click");
                                 }
                             }).show();
                         });
@@ -175,7 +175,7 @@ N(".exap0700").cont({
             }
         });
         // 6-2. Search button
-        N("#btnSearch", cont.view).click(function(e) {
+        N("#btnSearch", cont.view).on("click", function(e) {
             e.preventDefault();
             if(cont.form.validate()) {
                 N(cont.form.data(true)).comm("html/naturaljs/exap/data/sample.json").submit(function(data) {
@@ -183,7 +183,7 @@ N(".exap0700").cont({
                      cont.grid.bind(data);
                  });
             }
-        }).click(); // Auto retrieve
+        }).trigger("click"); // Auto retrieve
     },
     messages : {
         "ko_KR" : {

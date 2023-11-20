@@ -315,7 +315,7 @@ N.grid는 비어있는 array 객체를 바인딩하면 "조회를 하지 않았�
 
 ```
 bindEvents : function() {
-    N("#btnSearch", cont.view).click(function(e) {
+    N("#btnSearch", cont.view).on("click", function(e) {
         e.preventDefault();
         if(cont.form.validate()) {
             N(cont.form.data(true)).comm({
@@ -344,7 +344,7 @@ bindEvents : function() {
 ```
 bindEvents : function() {
     ...
-    N("#btnAdd", cont.view).click(function(e) {
+    N("#btnAdd", cont.view).on("click", function(e) {
         e.preventDefault();
         cont.grid.add();
     }).button();
@@ -358,7 +358,7 @@ N.grid 컴포넌트의 인스턴스에서 add() 메서드를 호출하면 그리
 ```
 bindEvents : function() {
     ...
-    N("#btnDelete", cont.view).click(function(e) {
+    N("#btnDelete", cont.view).on("click", function(e) {
         e.preventDefault();
         var checkedIndexs = cont.grid.check();
         if(checkedIndexs.length > 0) {
@@ -383,7 +383,7 @@ cont.grid.check() 메서드를 호출하면 그리드 첫 번째 컬럼의 체�
 ```
 bindEvents : function() {
     ...
-    N("#btnSave", cont.view).click(function(e) {
+    N("#btnSave", cont.view).on("click", function(e) {
         e.preventDefault();
 
         if(cont.grid.data("modified").length === 0) {
@@ -402,7 +402,7 @@ bindEvents : function() {
                         url : "data.json"
                     }).submit(function(data) {
                         N.notify.add("Save completed.");
-                        N("#btnSearch", cont.view).click();
+                        N("#btnSearch", cont.view).trigger("click");
                     });
                 }
             }).show();

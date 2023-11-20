@@ -576,7 +576,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 팝업이 �
     ...
     events : function() {
         var caller = this.caller;
-        N(".close", this.view).click(function(onCloseData) {
+        N(".close", this.view).on("click", function(onCloseData) {
 
             caller.close([1, 2, 3]);
 

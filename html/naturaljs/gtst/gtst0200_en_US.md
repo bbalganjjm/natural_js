@@ -15,7 +15,7 @@ First, create the following folders to structure the development project.
 
 When the folder creation is completed, download the following files from the master branch of [GitHub](https://github.com/bbalganjjm/natural_js) and copy them to the corresponding location.
 
- * js/natural_js/lib/jquery-1.12.4.min.js - In the "lib" folder of the compressed file downloaded from the master branch on GitHub
+ * js/natural_js/lib/jquery-3.7.1.min.js - In the "lib" folder of the compressed file downloaded from the master branch on GitHub
  * js/natural_js/css/natural.ui.css - In the "css" folder of the compressed file downloaded from the master branch on GitHub
  * js/natural_js/natural.js.min.js - In the "dist" folder of the compressed file downloaded from the master branch on GitHub
  * js/natural_js/natural.config.js - In the "dist" folder of the compressed file downloaded from the master branch on GitHub
@@ -34,7 +34,7 @@ When the development project configuration is completed, save the following code
 <head>
 <meta content="text/html; charset=utf-8" />
 <title>Natural-JS</title>
-<script type="text/javascript" src="js/natural_js/lib/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="js/natural_js/lib/jquery-3.7.1.min.js"></script>
 <link rel="stylesheet" type="text/css" href="js/natural_js/css/natural.ui.css" />
 <script type="text/javascript" src="js/natural_js/natural.js.min.js" charset="utf-8"></script>
 <script type="text/javascript" src="js/natural_js/natural.config.js" charset="utf-8"></script>

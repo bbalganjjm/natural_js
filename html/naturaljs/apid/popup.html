@@ -327,7 +327,7 @@ function(msgContext, msgContents) {
             N("#btnLogin", view).css("padding-bottom", "15px");
         },
         setEvents : function(view, cont) {
-            N("#btnInitLocal", view).click(function(e) {
+            N("#btnInitLocal", view).on("click", function(e) {
                 e.preventDefault();
 
                 var opts = {
@@ -359,12 +359,12 @@ function(msgContext, msgContents) {
                 N(this).instance("button").disable();
             });
 
-            N("#btnOpenLocal", view).click(function(e) {
+            N("#btnOpenLocal", view).on("click", function(e) {
                 e.preventDefault();
                 cont.localPopup.open();
             });
 
-            N("#btnInitOther", view).click(function(e) {
+            N("#btnInitOther", view).on("click", function(e) {
                 e.preventDefault();
 
                 var opts = {
@@ -409,7 +409,7 @@ function(msgContext, msgContents) {
                 }
             });
 
-            N("#btnOpenOther", view).click(function(e) {
+            N("#btnOpenOther", view).on("click", function(e) {
                 e.preventDefault();
                 cont.otherPopup.open();
 
@@ -418,7 +418,7 @@ function(msgContext, msgContents) {
                 }
             });
 
-            N("a[id='btnReload']", view).click(function(e) {
+            N("a[id='btnReload']", view).on("click", function(e) {
                 e.preventDefault();
                 N(view.parent()).comm(cont.request.get("url")).submit();
             });

@@ -200,7 +200,7 @@
 &lt;script type="text/javascript"&gt;
     var grid = N(data).grid(".grid").bind();
 
-    N(".btnAdd").click(function() {
+    N(".btnAdd").on("click", function() {
         grid.<strong>add()</strong>; // grid.data() ==> [{ "age": "", "email": "", "registered" : "" }]
     });
 &lt;/script&gt;</code></pre>
@@ -230,7 +230,7 @@
 &lt;script type="text/javascript"&gt;
     var grid = N(data).grid(".grid").bind();
 
-    N(".btnSave").click(function() {
+    N(".btnSave").on("click", function() {
         <strong>N(window).alert</strong>({ // 1. confirm 메시지 표시.
             msg : "저장하시겠습니까?",
             <strong>confirm : true</strong>,
@@ -265,7 +265,7 @@
 &lt;script type="text/javascript"&gt;
     var grid = N(data).grid(".grid").bind();
 
-    N(".btnSave").click(function() {
+    N(".btnSave").on("click", function() {
         <strong>N(window).alert</strong>({ // 1. Displays a confirm message.
             msg : "Would you like to save?",
             <strong>confirm : true</strong>,

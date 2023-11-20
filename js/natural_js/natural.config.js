@@ -888,7 +888,7 @@
                 if(!isNotLoaded) {
                     // FIXME When the menu DB is created and the page loading service is created, remove the code below (before var hashVal).
                     var url = N(".index-lefter.view_context__ a[data-pageid='" + docId + "']").attr("href");
-                    if (N.string.trim(location.hash).length === 0 || docId === "home0100") {
+                    if (N.string.trimToEmpty(location.hash).length === 0 || docId === "home0100") {
                         docId = "home0100";
                         url = "html/naturaljs/" + docId.substring(0, 4) + "/" + docId + ".html";
                     }
@@ -1098,7 +1098,7 @@
                         var optOrMethodNm;
                         N(".form.options", apiCont.view).find(":input[id]").each(function() {
                             optOrMethodNm = this.id;
-                            $(this).after('<div class="demo-desc">' + $.trim(descTableEle.find("tr").find(">td:first").filter(":contains('" + optOrMethodNm + "'):first").siblings(":last").html()) + '</div>');
+                            $(this).after('<div class="demo-desc">' + N.string.trimToEmpty(descTableEle.find("tr").find(">td:first").filter(":contains('" + optOrMethodNm + "'):first").siblings(":last").html()) + '</div>');
                         });
                     }
                 });
@@ -1165,7 +1165,7 @@
             if(view.find(btnEle).length === 0) {
                 view.append(btnEle);
                 view.append('<pre id="sourceCodeBox" class="line-numbers" style="display: none;"><code id="sourceCode" class="language-markup"></code></pre>');
-                btnEle.click(function() {
+                btnEle.on("click", function() {
                     var sourceCodeBox = btnEle.next("#sourceCodeBox");
                     if(!sourceCodeBox.is(":visible")) {
                         sourceCodeBox.slideDown();

@@ -403,7 +403,7 @@ var cont = N(".page-id").cont({
         }
     },
     init : function(view, request) {
-        cont["e.id.click"].click(); // DOM 로딩이 완료되면 이 이벤트를 실행합니다.
+        cont["e.id.click"].trigger("click"); // DOM 로딩이 완료되면 이 이벤트를 실행합니다.
     }
 });
 ...

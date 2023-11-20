@@ -91,7 +91,7 @@ N(".exap0601").cont({
     setEvents : function(cont) {
         // 3. bind events
          // 3-1 Go to edit page
-        N("#btnEdit", cont.view).click(function(e) {
+        N("#btnEdit", cont.view).on("click", function(e) {
             e.preventDefault();
             // Grid row select event
             cont.view.parent().comm("html/naturaljs/exap/exap0602.html")
@@ -101,7 +101,7 @@ N(".exap0601").cont({
                             .submit();
         });
         // 3-2 Delete
-        N("#btnDelete", cont.view).click(function(e) {
+        N("#btnDelete", cont.view).on("click", function(e) {
             e.preventDefault();
             N(window).alert({
                 msg : N.message.get(cont.messages, "EXAP0601-0003"),
@@ -120,7 +120,7 @@ N(".exap0601").cont({
                         N(window).alert({
                             msg : msg,
                             onOk : function() {
-                                N("#btnList", cont.view).click();
+                                N("#btnList", cont.view).trigger("click");
                             }
                         }).show();
                     });
@@ -128,7 +128,7 @@ N(".exap0601").cont({
             }).show();
         });
         // 3-3 Go to list page
-        N("#btnList", cont.view).click(function(e) {
+        N("#btnList", cont.view).on("click", function(e) {
             e.preventDefault();
             // Return list page with search condition data
             N(N.context.attr("architecture").page.context).comm("html/naturaljs/exap/exap0600.html")

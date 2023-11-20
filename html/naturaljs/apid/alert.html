@@ -176,7 +176,7 @@ function(msgContext, msgContents) {
             this.setEvent(view, this);
         },
         setEvent : function(view, cont) {
-            N("#btnShow", view).click(function(e) {
+            N("#btnShow", view).on("click", function(e) {
                 e.preventDefault();
 
                 var context = N("#context", view).val();

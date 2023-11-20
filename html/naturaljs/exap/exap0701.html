@@ -92,7 +92,7 @@ N(".exap0701").cont({
     setEvents : function(cont) {
         // 3. bind events
          // 3-1 Go to create page
-        N("#btnAdd", cont.view).click(function(e) {
+        N("#btnAdd", cont.view).on("click", function(e) {
             e.preventDefault();
 
             // FIXME remove this code.
@@ -106,7 +106,7 @@ N(".exap0701").cont({
                              .submit();
         });
          // 3-2 Go to edit page
-        N("#btnEdit", cont.view).click(function(e) {
+        N("#btnEdit", cont.view).on("click", function(e) {
             e.preventDefault();
 
             // Grid row select event
@@ -117,7 +117,7 @@ N(".exap0701").cont({
                                .submit();
         });
         // 3-3 Delete
-        N("#btnDelete", cont.view).click(function(e) {
+        N("#btnDelete", cont.view).on("click", function(e) {
             e.preventDefault();
             N(window).alert({
                 msg : N.message.get(cont.messages, "EXAP0701-0001"),
@@ -130,7 +130,7 @@ N(".exap0701").cont({
             }).show();
         });
         // 3-4 Close this popup
-        N("#btnClose", cont.view).click(function(e) {
+        N("#btnClose", cont.view).on("click", function(e) {
             e.preventDefault();
             cont.caller.close(); // cont.caller is popup instance that called this page
         });

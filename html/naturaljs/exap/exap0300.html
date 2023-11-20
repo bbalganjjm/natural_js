@@ -125,7 +125,7 @@ N(".exap0300").cont({
     setEvents : function(cont) {
         // 4. bind events
         // 4-1 Save data to server
-        N("#btnSave", cont.view).click(function(e) {
+        N("#btnSave", cont.view).on("click", function(e) {
             e.preventDefault();
             if(cont.form.validate()) {
                 N(window).alert({
@@ -149,7 +149,7 @@ N(".exap0300").cont({
             }
         });
         // 4-2 Reset to initialized data
-        N("#btnRevert", cont.view).click(function(e) {
+        N("#btnRevert", cont.view).on("click", function(e) {
             e.preventDefault();
             cont.form.revert();
         });

@@ -1761,6 +1761,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     width: 100%;
     height: 100%;
     cursor: wait;
+    transition: none;
 }
 
 .entire_load_screen_block__.hidden__ {

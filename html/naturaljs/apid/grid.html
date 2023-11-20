@@ -464,7 +464,7 @@
 
             // bind events
             var grid;
-            N("#btnInit", view).click(function(e) {
+            N("#btnInit", view).on("click", function(e) {
                 e.preventDefault();
                    var opts = {
                        context : view.find(N("#context", view).val()),
@@ -511,13 +511,13 @@
                 N("#btnInit", view).instance("button").disable();
             });
 
-            N("#height", view).change(function(e) {
+            N("#height", view).on("change", function(e) {
                 if($(this).val() > 0) {
                     N("#fixedcol", view).val("0");
                 }
             });
 
-            N("#fixedcol", view).change(function(e) {
+            N("#fixedcol", view).on("change", function(e) {
                 if($(this).val() > 0) {
                     N("#height", view).val("0");
                 }
@@ -532,7 +532,7 @@
                 gridEle.find("thead > tr > th").width(150);
             });
 
-            N("#btnAdd", view).click(function(e) {
+            N("#btnAdd", view).on("click", function(e) {
                 e.preventDefault();
                 var addRowIdx = N.string.trimToUndefined(N("#addRow", view).val());
                 if(addRowIdx !== undefined) {
@@ -551,7 +551,7 @@
                 });
             });
 
-            N("#btnBind", view).click(function(e) {
+            N("#btnBind", view).on("click", function(e) {
                 e.preventDefault();
                 N.comm("html/naturaljs/apid/data/grid.json").submit(function(data) {
                     if(N("#fixedcol", view).val() > 0) {
@@ -571,17 +571,17 @@
                 });
             });
 
-            N("#btnRevert", view).click(function(e) {
+            N("#btnRevert", view).on("click", function(e) {
                 e.preventDefault();
                    grid.revert(eval(N.string.trimToUndefined(N("#rvtRow", view).val())));
             });
 
-            N("#btnRemove", view).click(function(e) {
+            N("#btnRemove", view).on("click", function(e) {
                 e.preventDefault();
                 grid.remove(eval(N.string.trimToUndefined(N("#rmvRow", view).val())));
             });
 
-            N("#btnVal", view).click(function(e) {
+            N("#btnVal", view).on("click", function(e) {
                 e.preventDefault();
                 var row = N.string.trimToZero(N("#row", view).val());
                 var key = N.string.trimToNull(N("#key", view).val());
@@ -593,7 +593,7 @@
                 }
             });
 
-            N("#btnData", view).click(function(e) {
+            N("#btnData", view).on("click", function(e) {
                 e.preventDefault();
                 grid.context().parent().alert({
                     msg : '<pre class="pre">' + N.json.format(grid.data(N("select#data", view).val() === "false" ? false : N.string.trimToUndefined(N("select#data", view).val()))) + '</pre>',
@@ -602,7 +602,7 @@
                 }).show();
             });
 
-            N("#btnSelect", view).click(function(e) {
+            N("#btnSelect", view).on("click", function(e) {
                 e.preventDefault();
                 var value = N.string.trimToNull(N("#selectIndex", view).val());
                 if(value !== null) {
@@ -612,7 +612,7 @@
                 }
             })
 
-            N("#btnCheck", view).click(function(e) {
+            N("#btnCheck", view).on("click", function(e) {
                 e.preventDefault();
                 var value = N.string.trimToNull(N("#checkIndex", view).val());
                 if(value !== null) {
@@ -622,32 +622,32 @@
                 }
             })
 
-            N("#btnHide", view).click(function(e) {
+            N("#btnHide", view).on("click", function(e) {
                 e.preventDefault();
                 grid.hide(eval(N.string.trimToNull(N("#hideIndex", view).val())));
             })
 
-            N("#btnShow", view).click(function(e) {
+            N("#btnShow", view).on("click", function(e) {
                 e.preventDefault();
                 grid.show(eval(N.string.trimToNull(N("#showIndex", view).val())));
             })
 
-            N("#btnValidate", view).click(function(e) {
+            N("#btnValidate", view).on("click", function(e) {
                 e.preventDefault();
                 grid.context().parent().alert(String(grid.validate(N.string.trimToUndefined(N("#vldRow", view).val())))).show();
             });
 
-            N("#btnMove", view).click(function(e) {
+            N("#btnMove", view).on("click", function(e) {
                 e.preventDefault();
                 grid.move(eval(N.string.trimToUndefined(N("#moveFrom", view).val())), eval(N.string.trimToUndefined(N("#moveTo", view).val())));
             });
 
-            N("#btnCopy", view).click(function(e) {
+            N("#btnCopy", view).on("click", function(e) {
                 e.preventDefault();
                 grid.copy(eval(N.string.trimToUndefined(N("#copyFrom", view).val())), eval(N.string.trimToUndefined(N("#copyTo", view).val())));
             });
 
-            N("#btnReload", view).click(function(e) {
+            N("#btnReload", view).on("click", function(e) {
                 e.preventDefault();
                 N(view.parent()).comm(request.get("url")).submit();
             });

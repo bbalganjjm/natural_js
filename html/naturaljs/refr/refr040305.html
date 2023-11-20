@@ -16,13 +16,13 @@
             <td>
                 <p lang="ko_KR">날짜나 월(monthonly 옵션이 true로 설정되었을 경우)이 선택되었을 때 실행되는 이벤트 핸들러를 정의합니다.</p>
                 <p lang="en_US">Defines an event handler that is executed when a date or month(if the monthonly option is set to true) is selected.</p>
-                <pre lang="ko_KR"><code>$("selector").bind("onSelect", function(e, context, selDate, monthonly) {
+                <pre lang="ko_KR"><code>$("selector").on("onSelect", function(e, context, selDate, monthonly) {
     // e : 이벤트 객체
     // context : context 요소
     // selDate : 선택된 날짜의 Date 객체
     // monthonly : monthonly 옵션 값
 });</code></pre>
-                <pre lang="en_US"><code>$("context").bind("onSelect", function(e, context, selDate, monthonly) {
+                <pre lang="en_US"><code>$("context").on("onSelect", function(e, context, selDate, monthonly) {
     // e : Event object
     // context : context element
     // selDate : The Date object of the selected date
@@ -35,12 +35,12 @@
             <td>
                 <p lang="ko_KR">데이트피커가 표시되기 전에 실행되는 이벤트 핸들러를 정의합니다.</p>
                 <p lang="en_US">Define an event handler that is executed before the date picker is displayed.</p>
-                <pre lang="ko_KR"><code>$("context").bind("onBeforeShow", function(e, context, contents) {
+                <pre lang="ko_KR"><code>$("context").on("onBeforeShow", function(e, context, contents) {
     // e : 이벤트 객체
     // context : context 요소
     // contents : Datepicker 판넬 요소
 });</code></pre>
-                <pre lang="en_US"><code>$("context").bind("onBeforeShow", function(e, context, contents) {
+                <pre lang="en_US"><code>$("context").on("onBeforeShow", function(e, context, contents) {
     // e : Event object
     // context : context element
     // contents : Datepicker panel element
@@ -52,12 +52,12 @@
             <td>
                 <p lang="ko_KR">데이트피커가 표시된 후에 실행되는 이벤트 핸들러를 정의합니다.</p>
                 <p lang="en_US">Define an event handler that is executed after the date picker is displayed.</p>
-                <pre lang="ko_KR"><code>$("context").bind("onShow", function(e, context, contents) {
+                <pre lang="ko_KR"><code>$("context").on("onShow", function(e, context, contents) {
     // e : 이벤트 객체
     // context : context 요소
     // contents : Datepicker 판넬 요소
 });</code></pre>
-                <pre lang="en_US"><code>$("context").bind("onShow", function(e, context, contents) {
+                <pre lang="en_US"><code>$("context").on("onShow", function(e, context, contents) {
     // e : Event object
     // context : context element
     // contents : Datepicker panel element
@@ -69,12 +69,12 @@
             <td>
                 <p lang="ko_KR">데이트피커가 닫히기 전에 실행되는 이벤트 핸들러를 정의합니다.</p>
                 <p lang="en_US">Defines an event handler that is executed before the datepicker closes.</p>
-                <pre lang="ko_KR"><code>$("context").bind("onBeforeHide", function(e, context, contents) {
+                <pre lang="ko_KR"><code>$("context").on("onBeforeHide", function(e, context, contents) {
     // e : 이벤트 객체
     // context : context 요소
     // contents : Datepicker 판넬 요소
 });</code></pre>
-                <pre lang="en_US"><code>$("context").bind("onBeforeHide", function(e, context, contents) {
+                <pre lang="en_US"><code>$("context").on("onBeforeHide", function(e, context, contents) {
     // e : Event object
     // context : context element
     // contents : Datepicker panel element
@@ -86,11 +86,11 @@
             <td>
                 <p lang="ko_KR">데이트피커가 닫힌 후에(닫히는 효과가 끝난 후) 실행되는 이벤트 핸들러를 정의합니다.</p>
                 <p lang="en_US">Define an event handler that is executed after the datepicker is closed(after the closing effect is over).</p>
-                <pre lang="ko_KR"><code>$("context").bind("onHide", function(e, context) {
+                <pre lang="ko_KR"><code>$("context").on("onHide", function(e, context) {
     // e : 이벤트 객체
     // context : context 요소
 });</code></pre>
-                <pre lang="en_US"><code>$("context").bind("onHide", function(e, context) {
+                <pre lang="en_US"><code>$("context").on("onHide", function(e, context) {
     // e : Event object
     // context : context element
 });</code></pre>
@@ -101,13 +101,13 @@
             <td>
                 <p lang="ko_KR">연도가 변경되었을 때 실행되는 이벤트 핸들러를 정의합니다.</p>
                 <p lang="en_US">Defines an event handler that is executed when the year is changed.</p>
-                <pre lang="ko_KR"><code>$("context").bind("onHide", function(e, context, year, oe) {
+                <pre lang="ko_KR"><code>$("context").on("onHide", function(e, context, year, oe) {
     // e : 이벤트 객체
     // context : context 요소
     // year : 선택된 연도
     // oe : Original 이벤트 객체
 });</code></pre>
-                <pre lang="en_US"><code>$("context").bind("onHide", function(e, context, year, oe) {
+                <pre lang="en_US"><code>$("context").on("onHide", function(e, context, year, oe) {
     // e : Event object
     // context : context element
     // year : Selected year
@@ -120,14 +120,14 @@
             <td>
                 <p lang="ko_KR">월이 변경되었을 때 실행되는 이벤트 핸들러를 정의합니다.</p>
                 <p lang="en_US">Defines an event handler that is executed when the month is changed.</p>
-                <pre lang="ko_KR"><code>$("context").bind("onHide", function(e, month, year, oe) {
+                <pre lang="ko_KR"><code>$("context").on("onHide", function(e, month, year, oe) {
     // e : 이벤트 객체
     // context : context 요소
     // month : 선택된 월
     // year : 선택된 연도
     // oe : Original 이벤트 객체
 });</code></pre>
-                <pre lang="en_US"><code>$("context").bind("onHide", function(e, month, year, oe) {
+                <pre lang="en_US"><code>$("context").on("onHide", function(e, month, year, oe) {
     // e : Event object
     // context : context element
     // month : Selected month

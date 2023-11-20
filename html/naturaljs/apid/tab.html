@@ -154,7 +154,7 @@ He was ranked 5th in Rolling Stone's list of the "100 Greatest Guitarists of All
             this.setEvents(view, this);
         },
         setEvents : function(view, cont) {
-            N("#btnInitTab", view).click(function(e) {
+            N("#btnInitTab", view).on("click", function(e) {
                 e.preventDefault();
                 var opts = {
                     tabScroll : N("input#tabScroll", view).is(":checked"),
@@ -175,12 +175,12 @@ He was ranked 5th in Rolling Stone's list of the "100 Greatest Guitarists of All
                 N("#btnCont", view).instance("button").enable();
             });
 
-            N("#btnReload", view).click(function(e) {
+            N("#btnReload", view).on("click", function(e) {
                 e.preventDefault();
                 N(view.parent()).comm(cont.request.get("url")).submit();
             });
 
-            N("#btnOpen", view).click(function(e) {
+            N("#btnOpen", view).on("click", function(e) {
                 e.preventDefault();
                 var idx = N.string.trimToUndefined(N("input#idx", view).val());
                 var rslt = cont.tab.open(idx);
@@ -189,17 +189,17 @@ He was ranked 5th in Rolling Stone's list of the "100 Greatest Guitarists of All
                 }
             });
 
-            N("#btnDisable", view).click(function(e) {
+            N("#btnDisable", view).on("click", function(e) {
                 e.preventDefault();
                 cont.tab.disable(N("input#disable", view).val());
             });
 
-            N("#btnEnable", view).click(function(e) {
+            N("#btnEnable", view).on("click", function(e) {
                 e.preventDefault();
                 cont.tab.enable(N("input#enable", view).val());
             });
 
-            N("#btnCont", view).click(function(e) {
+            N("#btnCont", view).on("click", function(e) {
                 e.preventDefault();
                 N.log(cont.tab.cont(N.string.trimToUndefined(N("input#cont", view).val())));
             });

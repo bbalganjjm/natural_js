@@ -125,7 +125,7 @@
         "e.eyeColor.change" : {
         	target : "#search #eyeColor",
         	handler : function(e) {
-        	    cont["e.btnSearch.click"].click();
+        	    cont["e.btnSearch.click"].trigger("click");
             }
         },
         init : function(view, request) {

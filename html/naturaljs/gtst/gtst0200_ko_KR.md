@@ -15,7 +15,7 @@
 
 폴더 생성이 완료되었으면 [GitHub](https://github.com/bbalganjjm/natural_js)의 마스터 브랜치에서 다음 파일을 다운로드하여 해당 경로로 복사해 주세요.
 
- * js/natural_js/lib/jquery-1.12.4.min.js - GitHub의 master 브랜치에서 다운로드 한 압축 파일의 lib 폴더에 있음
+ * js/natural_js/lib/jquery-3.7.1.min.js - GitHub의 master 브랜치에서 다운로드 한 압축 파일의 lib 폴더에 있음
  * js/natural_js/css/natural.ui.css - GitHub의 master 브랜치에서 다운로드 한 압축 파일의 css 폴더에 있음
  * js/natural_js/natural.js.min.js - GitHub의 master 브랜치에서 다운로드 한 압축 파일의 dist 폴더에 있음
  * js/natural_js/natural.config.js - GitHub의 master 브랜치에서 다운로드 한 압축 파일의 dist 폴더에 있음
@@ -34,7 +34,7 @@
 <head>
 <meta content="text/html; charset=utf-8" />
 <title>Natural-JS</title>
-<script type="text/javascript" src="js/natural_js/lib/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="js/natural_js/lib/jquery-3.7.1.min.js"></script>
 <link rel="stylesheet" type="text/css" href="js/natural_js/css/natural.ui.css" />
 <script type="text/javascript" src="js/natural_js/natural.js.min.js" charset="utf-8"></script>
 <script type="text/javascript" src="js/natural_js/natural.config.js" charset="utf-8"></script>

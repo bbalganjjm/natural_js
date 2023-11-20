@@ -87,7 +87,7 @@
 &lt;script type="text/javascript"&gt;
     var list = N(data).list(".list").bind();
 
-    N(".btnAdd").click(function() {
+    N(".btnAdd").on("click", function() {
         list.<strong>add</strong>(); // list.data() ==> [{ "age": "", "email": "", "registered" : "" }]
     });
 &lt;/script&gt;</code></pre>
@@ -107,7 +107,7 @@
 &lt;script type="text/javascript"&gt;
     var list = N(data).list(".list").bind();
 
-    N(".btnSave").click(function() {
+    N(".btnSave").on("click", function() {
         <strong>N(window).alert</strong>({ // 1. confirm 메시지 표시.
             msg : "저장하시겠습니까?",
             <strong>confirm : true</strong>,
@@ -132,7 +132,7 @@
 &lt;script type="text/javascript"&gt;
     var list = N(data).list(".list").bind();
 
-    N(".btnSave").click(function() {
+    N(".btnSave").on("click", function() {
         <strong>N(window).alert</strong>({ // 1. Displays a confirm message.
             msg : "Would you like to save?",
             <strong>confirm : true</strong>,

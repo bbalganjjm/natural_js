@@ -142,7 +142,7 @@
             var pagination;
 
             // bind events
-            N("#btnInit", view).click(function(e) {
+            N("#btnInit", view).on("click", function(e) {
                 e.preventDefault();
                 N.comm("html/naturaljs/apid/data/grid.json").submit(function(data) {
                     var opts = {
@@ -163,13 +163,13 @@
                 N("#btnData", view).instance("button").enable();
             });
 
-            N("#btnBind", view).click(function(e) {
+            N("#btnBind", view).on("click", function(e) {
                 e.preventDefault();
 
                 pagination.bind();
             });
 
-            N("#btnData", view).click(function(e) {
+            N("#btnData", view).on("click", function(e) {
                 e.preventDefault();
                 N("div.result", view).alert({
                     msg : '<pre class="pre">' + N.json.format(pagination.data(eval(N("#data", view).val()))) + '</pre>',
@@ -178,7 +178,7 @@
                 }).show();
             });
 
-            N("#btnReload", view).click(function(e) {
+            N("#btnReload", view).on("click", function(e) {
                 e.preventDefault();
                 N(view.parent()).comm(request.get("url")).submit();
             });

@@ -107,14 +107,14 @@ N(".exap0702").cont({
     setEvents : function(cont) {
         // 4. bind events
         // 4-1 Confirm button
-        N("#btnConfirm", cont.view).click(function(e) {
+        N("#btnConfirm", cont.view).on("click", function(e) {
             e.preventDefault();
             if(cont.form.validate()) {
                 cont.caller.close()
             }
         });
         // 4-2 Cancel button - Revert data & close this popup
-        N("#btnCancel", cont.view).click(function(e) {
+        N("#btnCancel", cont.view).on("click", function(e) {
             e.preventDefault();
             if(cont.request.attr("mode") === "create") {
                 // remove created row

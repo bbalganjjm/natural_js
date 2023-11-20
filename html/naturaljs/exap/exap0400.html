@@ -131,7 +131,7 @@ N(".exap0400").cont({
     setEvents : function(cont) {
         // 4. bind events
         // 4-1 Save data to server
-        N("#btnSave", cont.view).click(function(e) {
+        N("#btnSave", cont.view).on("click", function(e) {
             e.preventDefault();
             if(cont.form.data(true)[0].rowStatus === undefined) {
                 N.notify.add(N.message.get(cont.messages, "EXAP0400-0004"));
@@ -160,7 +160,7 @@ N(".exap0400").cont({
         });
 
         // 4-2 Revert to initialized data
-        N("#btnRevert", cont.view).click(function(e) {
+        N("#btnRevert", cont.view).on("click", function(e) {
             e.preventDefault();
             cont.form.revert();
         });

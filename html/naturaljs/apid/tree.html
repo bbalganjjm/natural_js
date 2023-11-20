@@ -230,7 +230,7 @@
             var tree;
 
             // bind events
-            N("#btnInit", view).click(function(e) {
+            N("#btnInit", view).on("click", function(e) {
                 e.preventDefault();
 
                  // data
@@ -260,12 +260,12 @@
                 N("#btnData", view).instance("button").enable();
             });
 
-            N("#btnBind", view).click(function(e) {
+            N("#btnBind", view).on("click", function(e) {
                 e.preventDefault();
                 tree.bind();
             });
 
-            N("#btnSelect", view).click(function(e) {
+            N("#btnSelect", view).on("click", function(e) {
                 e.preventDefault();
                 if(N.string.trimToUndefined(N("#nodeVal", view).val())) {
                     tree.select(N.string.trimToUndefined(N("#nodeVal", view).val()));
@@ -274,17 +274,17 @@
                 }
             });
 
-            N("#btnOpenAll", view).click(function(e) {
+            N("#btnOpenAll", view).on("click", function(e) {
                 e.preventDefault();
                 tree.openAll();
             });
 
-            N("#btnCloseAll", view).click(function(e) {
+            N("#btnCloseAll", view).on("click", function(e) {
                 e.preventDefault();
                 tree.closeAll(N("#isFirstNodeOpen", view).is(":checked"));
             });
 
-            N("#btnData", view).click(function(e) {
+            N("#btnData", view).on("click", function(e) {
                 e.preventDefault();
                 N("div.result", view).alert({
                     msg : '<pre class="pre">' + N.json.format(tree.data(eval(N("#data", view).val()))) + '</pre>',
@@ -293,7 +293,7 @@
                 }).show();
             });
 
-            N("#btnReload", view).click(function(e) {
+            N("#btnReload", view).on("click", function(e) {
                 e.preventDefault();
                 N(view.parent()).comm(request.get("url")).submit();
             });

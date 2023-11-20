@@ -72,7 +72,7 @@
 &lt;script type="text/javascript"&gt;
     var form = N(data).form(".form").bind();
 
-    N(".btn-save").click(function() {
+    N(".btn-save").on("click", function() {
         <strong>N(window).alert</strong>({ // 1. 저장 확인 메시지 표시
             msg : "저장하시겠습니까?",
             <strong>confirm : true</strong>,
@@ -107,7 +107,7 @@
 &lt;script type="text/javascript"&gt;
     var form = N(data).form(".form").bind();
 
-    N(".btn-save").click(function() {
+    N(".btn-save").on("click", function() {
         <strong>N(window).alert</strong>({ // 1. displaying the save confirm message.
             msg : "Do you want to save it?",
             <strong>confirm : true</strong>,
@@ -135,7 +135,7 @@
     // add 메서드를 실행하면 id 속성을 갖고 있는 입력 요소들의 name 속성 값과 value 속성 값으로 data 객체를 생성합니다.
     var form = N(data).form(".form").<strong>add</strong>(); // { "name": "", "age": "" }
 
-    N(".btn-search").click(function() {
+    N(".btn-search").on("click", function() {
         if(<strong>form.validate()</strong>) { // 1. 검색 조건 블록에 입력된 데이터를 유효성을 검사합니다
             <strong>form.data(false)</strong>.comm("data.json").submit(); // 2. 폼의 데이터를 서버 파라미터로 전송합니다.
         }
@@ -155,7 +155,7 @@
     // When the add method is executed, a data object is created with the name and value attribute's value ​​of the input elements that have the id attribute.
     var form = N(data).form(".form").<strong>add</strong>(); // { "name": "", "age": "" }
 
-    N(".btn-search").click(function() {
+    N(".btn-search").on("click", function() {
         if(<strong>form.validate()</strong>) { // 1. Validate the data entered in the search condition block
             <strong>form.data(false)</strong>.comm("data.json").submit(); // 2. Sends the form data to server parameters
         }

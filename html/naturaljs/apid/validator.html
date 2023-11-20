@@ -89,7 +89,7 @@ N(".demo.validator").cont({
         this.setEvents(view);
     },
     setEvents : function(view) {
-        N("#btnValidateImperative", view).click(function(e) {
+        N("#btnValidateImperative", view).on("click", function(e) {
             e.preventDefault();
 
             var data = eval(N("code#data", view).text());
@@ -103,7 +103,7 @@ N(".demo.validator").cont({
             N("#result", view).text(N.json.format(pData));
         });
 
-        N("#btnValidateDeclarative", view).click(function(e) {
+        N("#btnValidateDeclarative", view).on("click", function(e) {
             e.preventDefault();
             N().validator(N("#inputBox", view)).validate();
         });

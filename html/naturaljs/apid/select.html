@@ -250,7 +250,7 @@
             this.setEvents(view, this);
         },
         setEvents : function(view, cont) {
-            N("#btnInit", view).click(function(e) {
+            N("#btnInit", view).on("click", function(e) {
                 e.preventDefault();
                 var data = eval(N("code#data", view).text())[0][N("select[id='data']:eq(0)", view).val()];
                 var opts = {
@@ -266,7 +266,7 @@
                    N("#btnData", view).instance("button").enable();
             });
 
-            N("select#context", view).change(function() {
+            N("select#context", view).on("change", function() {
                 N("#btnBind", view).instance("button").disable();
                    N("#btnData", view).instance("button").disable();
                    N("#btnVal", view).instance("button").disable();
@@ -275,7 +275,7 @@
                    N("#btnReset", view).instance("button").disable();
             });
 
-            N("#btnBind", view).click(function(e) {
+            N("#btnBind", view).on("click", function(e) {
                 e.preventDefault();
                 cont.select.bind();
 
@@ -285,7 +285,7 @@
                    N("#btnReset", view).instance("button").enable();
             });
 
-            N("#btnVal", view).click(function(e) {
+            N("#btnVal", view).on("click", function(e) {
                 e.preventDefault();
                 var value = N.string.trimToNull(N("input[id=val]:eq(1)", view).val());
                 if(value !== null) {
@@ -295,7 +295,7 @@
                 }
             });
 
-            N("#btnIndex", view).click(function(e) {
+            N("#btnIndex", view).on("click", function(e) {
                 e.preventDefault();
                 var value = N.string.trimToNull(N("input[id=index]", view).val());
                 if(value !== null) {
@@ -305,7 +305,7 @@
                 }
             });
 
-            N("#btnRemove", view).click(function(e) {
+            N("#btnRemove", view).on("click", function(e) {
                 e.preventDefault();
                 var value = N.string.trimToNull(N("input[id=remove]", view).val());
                 if(value !== null) {
@@ -313,7 +313,7 @@
                 }
             });
 
-            N("#btnData", view).click(function(e) {
+            N("#btnData", view).on("click", function(e) {
                 e.preventDefault();
                 N("div.result", view).alert({
                     msg : '<pre class="pre">' + N.json.format(cont.select.data(eval(N("select[id='data']:eq(1)", view).val()))) + '</pre>',
@@ -322,12 +322,12 @@
                 }).show();
             });
 
-            N("#btnReset", view).click(function(e) {
+            N("#btnReset", view).on("click", function(e) {
                 e.preventDefault();
                 cont.select.reset(N("#reset", view).is(":checked"));
             });
 
-            N("#btnReload", view).click(function(e) {
+            N("#btnReload", view).on("click", function(e) {
                 e.preventDefault();
                 N(view.parent()).comm(cont.request.get("url")).submit();
             });

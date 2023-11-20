@@ -10,7 +10,7 @@
 
 다운로드된 파일 들 중 Natural-JS를 구동하기 위한 필수 라이브러리 파일들은 다음과 같습니다.
 
-1.  **jquery-1.12.4.min.js** - Natural-JS는 jQuery를 기반으로 동작하므로 반드시 임포트 해야 합니다.
+1.  **jquery-3.7.1.min.js** - Natural-JS는 jQuery를 기반으로 동작하므로 반드시 임포트 해야 합니다.
 2.  **natural.ui.css** - Natural-UI 디자인과 관련된 스타일시트 파일입니다.
 3.  **natural.js.min.js** - Natural-JS의 전체 라이브러리 파일들이 합쳐진 Minified 파일입니다.
 4.  **natural.config.js** - Natural-JS의 환경설정 파일입니다.
@@ -18,7 +18,7 @@
 이제 최상위 HTML 파일을 만들고 위 파일들을 다음과 같은 순서로 페이지에 Import 해 줍니다.
 
 ```
-<script type="text/javascript" src="js/natural_js/lib/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="js/natural_js/lib/jquery-3.7.1.min.js"></script>
 <link rel="stylesheet" type="text/css" href="js/natural_js/css/natural.ui.css" />
 <script type="text/javascript" src="js/natural_js/natural.js.min.js" charset="utf-8"></script>
 <script type="text/javascript" src="js/natural_js/natural.config.js" charset="utf-8"></script>
@@ -216,7 +216,7 @@ Natural-ARCHITECTURE 기반의 모든 페이지나 페이지 블록 들은 반�
 <head>
 <meta content="text/html; charset=utf-8" />
 <title>Natural-JS</title>
-<script type="text/javascript" src="js/natural_js/lib/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="js/natural_js/lib/jquery-3.7.1.min.js"></script>
 <link rel="stylesheet" type="text/css" href="js/natural_js/css/natural.ui.css" />
 <script type="text/javascript" src="js/natural_js/natural.js.min.js"></script>
 <script type="text/javascript" src="js/natural_js/natural.config.js"></script>

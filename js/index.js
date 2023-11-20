@@ -47,15 +47,16 @@
         initBrowserHistorySystem : function() {
             var self = this;
             $(window).on("hashchange.index", function() {
+
                 var docId, docNm, url;
-                if (N.string.trim(location.hash).length === 0) {
+                if (N.string.trimToEmpty(location.hash).length === 0) {
                     docId = "home0100";
                     docNm = "Home";
 
                     url = "html/naturaljs/" + docId.substring(0, 4) + "/" + docId + ".html";
                 }
 
-                if ((docId === "home0100" || N.string.trim(location.hash).length > 67) && !N.string.endsWith(location.href, "#")) {
+                if ((docId === "home0100" || N.string.trimToEmpty(location.hash).length > 67) && !N.string.endsWith(location.href, "#")) {
                     var menuInfoStr = "";
                     var menuInfo = "";
                     try {

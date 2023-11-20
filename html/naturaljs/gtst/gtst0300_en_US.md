@@ -315,7 +315,7 @@ Event binding uses the functionality provided by jQuery.
 
 ```
 bindEvents : function() {
-    N("#btnSearch", cont.view).click(function(e) {
+    N("#btnSearch", cont.view).on("click", function(e) {
         e.preventDefault();
         if(cont.form.validate()) {
             N(cont.form.data(true)).comm({
@@ -344,7 +344,7 @@ and, at the end of the statement, the .button() method was executed to apply the
 ```
 bindEvents : function() {
     ...
-    N("#btnAdd", cont.view).click(function(e) {
+    N("#btnAdd", cont.view).on("click", function(e) {
         e.preventDefault();
         cont.grid.add();
     }).button();
@@ -358,7 +358,7 @@ If the add() method is called on an instance of the N.grid component, a row is a
 ```
 bindEvents : function() {
     ...
-    N("#btnDelete", cont.view).click(function(e) {
+    N("#btnDelete", cont.view).on("click", function(e) {
         e.preventDefault();
         var checkedIndexs = cont.grid.check();
         if(checkedIndexs.length > 0) {
@@ -382,7 +382,7 @@ When the cont.grid.check() method is called, the checkbox of the first column of
 ```
 bindEvents : function() {
     ...
-    N("#btnSave", cont.view).click(function(e) {
+    N("#btnSave", cont.view).on("click", function(e) {
         e.preventDefault();
 
         if(cont.grid.data("modified").length === 0) {
@@ -401,7 +401,7 @@ bindEvents : function() {
                         url : "data.json"
                     }).submit(function(data) {
                         N.notify.add("Save completed.");
-                        N("#btnSearch", cont.view).click();
+                        N("#btnSearch", cont.view).trigger("click");
                     });
                 }
             }).show();
