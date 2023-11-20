@@ -1,5 +1,5 @@
 /*!
- * Natural-TEMPLATE v0.2.11
+ * Natural-TEMPLATE v0.3.11
  *
  * Released under the LGPL v2.1 license
  * Date: 2019-02-28T18:00Z
@@ -7,12 +7,286 @@
  * Copyright 2023 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-TEMPLATE"] = "0.2.11";
+    N.version["Natural-TEMPLATE"] = "0.3.11";
 
     (function(N) {
 
         var TEMPLATE = N.template = {
+            design : {
+                material : function(callback) {
+                    // Polyfill
+                    if (!String.prototype.includes) {
+                        Object.defineProperty(String.prototype, "includes", {
+                            enumerable: false,
+                            writable: true,
+                            value: function(search, start) {
+                                'use strict';
+                                if (typeof start !== 'number') {
+                                    start = 0;
+                                }
+
+                                if (start + search.length > this.length) {
+                                    return false;
+                                } else {
+                                    return this.indexOf(search, start) !== -1;
+                                }
+                            }
+                        });
+                    }
+                    if (!Array.prototype.includes) {
+                        Object.defineProperty(Array.prototype, "includes", {
+                            enumerable: false,
+                            writable: true,
+                            value: function(searchElement /*, fromIndex*/ ) {
+                                'use strict';
+                                var O = Object(this);
+                                var len = parseInt(O.length) || 0;
+                                if (len === 0) {
+                                    return false;
+                                }
+                                var n = parseInt(arguments[1]) || 0;
+                                var k;
+                                if (n >= 0) {
+                                    k = n;
+                                } else {
+                                    k = len + n;
+                                    if (k < 0) {k = 0;}
+                                }
+                                var currentElement;
+                                while (k < len) {
+                                    currentElement = O[k];
+                                    if (searchElement === currentElement ||
+                                        (searchElement !== searchElement && currentElement !== currentElement)) { // NaN !== NaN
+                                            return true;
+                                        }
+                                        k++;
+                                }
+                                return false;
+                            }
+                        });
+                    }
+
+                    // Load libraries
+                    $.getScript("js/natural_js/lib/material/material-components-web.min.js").done(function(data, textStatus, jqxhr) {
+                        $("<link/>", {
+                            rel: "stylesheet",
+                            type: "text/css",
+                            href: "js/natural_js/css/natural.ui." + N.context.attr("template").design + ".css"
+                        }).appendTo("head");
+                        $("<link/>", {
+                            rel: "stylesheet",
+                            type: "text/css",
+                            href: "css/common." + N.context.attr("template").design + ".css"
+                        }).appendTo("head");
+                        // Load Material Design Libraries.
+                        $("<link/>", {
+                            rel: "stylesheet",
+                            type: "text/css",
+                            href: "js/natural_js/lib/material/icon" + (N.browser.is("ie") ? "_ie" : "") + ".css"
+                        }).appendTo("head");
+                        $("<link/>", {
+                            rel: "stylesheet",
+                            type: "text/css",
+                            href: "js/natural_js/lib/material/material-components-web.min.css"
+                        }).appendTo("head");
+
+                        // Disable mouse related events of N.button.
+                        if(N.context.attr("ui").button === undefined) {
+                            N.context.attr("ui").button = {};
+                        }
+                        N.context.attr("ui").button.customStyle = true;
+                        // Alert, Popup
+                        N.context.attr("ui").alert.onBeforeShow = N.context.attr("ui").popup.onBeforeShow = TEMPLATE.aop.design.material.onBeforeShow;
+                        // Grid
+                        N.context.attr("ui").grid.misc.fixedcolHeadMarginTop = N.browser.is("ie") || N.browser.is("firefox") ? -1 : 0;
+                        N.context.attr("ui").grid.misc.fixedcolHeadHeight = N.browser.is("ie") || N.browser.is("firefox") ? 2 : 1;
+                        N.context.attr("ui").grid.misc.fixedcolBodyMarginTop = N.browser.is("ie") ? 0 : N.browser.is("firefox") ? -1 : 0;
+                        callback();
+                    }).fail(function(data) {
+                        N.log(data);
+                        N.context.attr("template").design = undefined;
+                        callback();
+                    });
+                }
+            },
             aop : {
+                design : {
+                    /**
+                     * Material Design
+                     */
+                    material : {
+                        init : function(cont, isAfterCompInited) {
+                            if(isAfterCompInited) {
+                                this.button(cont);
+                                this.textfield(cont);
+                                this.select(cont);
+                            } else {
+                                this.iconButton(cont);
+                                this.list(cont);
+                            }
+                        },
+                        /**
+                         * Button style classes : mdc-button__ripple | mdc-button--outlined | mdc-button--raised
+                         */
+                        button : function(cont) {
+                            N('.mdc-button', cont.view).each(function(i, el) {
+                                el.className = N.string.trimToEmpty(el.className.replace(/btn_.*?__/g, ""));
+                                var icon = el.getAttribute('data-icon');
+                                var html = '<div class="mdc-button__ripple"></div>';
+                                if(icon) {
+                                    icon = '<span class="material-icons mdc-icon-button__icon">' + icon + '</span>';
+                                    if(N.string.trimToEmpty(el.innerText).length > 0) {
+                                        icon += "&nbsp;";
+                                    }
+                                    html += icon;
+                                }
+                                if(N.string.trimToEmpty(el.innerText).length > 0) {
+                                    html += ('<span class="mdc-button__label">' + el.innerText + '</span>');
+                                }
+
+                                el.innerHTML = html;
+                                mdc.ripple.MDCRipple.attachTo(el);
+                            });
+                        },
+                        /**
+                         * Button style classes : mdc-button__ripple | mdc-button--outlined | mdc-button--raised
+                         */
+                        iconButton : function(cont) {
+                            N('.mdc-icon-button', cont.view).each(function(i, el) {
+                                el.className = "material-icons mdc-ripple-upgraded--unbounded mdc-ripple-upgraded " + N.string.trimToEmpty(el.className.replace(/btn_.*?__/g, ""));
+                                const iconButtonRipple = mdc.ripple.MDCRipple.attachTo(el);
+                                iconButtonRipple.unbounded = true;
+                            });
+                        },
+                        onBeforeShow : function(msgContext, msgContents) {
+                            if(this.options.isInput) {
+                                return false;
+                            }
+                            if(this.options.title !== undefined) {
+                                msgContents.find(".msg_box__").css("padding-top", 0);
+                            }
+                            msgContents.find(".buttonBox__ .button__").each(function(i, el) {
+                                el.className = "mdc-button " + N.string.trimToEmpty(el.className.replace(/btn_.*?__/g, ""));
+                                var icon = el.getAttribute('data-icon');
+                                if(icon) {
+                                    icon = '<span class="material-icons mdc-icon-button__icon">' + icon + '</span>&nbsp;';
+                                } else {
+                                    icon = "";
+                                }
+                                el.innerHTML = '<div class="mdc-button__ripple"></div>' + icon + '<span class="mdc-button__label">' + el.innerText + '</span>';
+
+                                mdc.ripple.MDCRipple.attachTo(el);
+                            });
+                        },
+                        textfield : function(cont) { // textarea, input
+                            N('.mdc-text-field', cont.view).each(function(i, el) {
+                                el = $(el);
+                                var id = el.attr("id");
+                                var label = el.data("label");
+                                var uid = String(Math.random()).replace("0.", "");
+                                var isNoLabel = el.data("nolabel") ? el.data("nolabel") : false;
+
+                                var mdcTextField;
+                                if(el.is("textarea")) {
+                                    el.addClass("mdc-text-field__input").removeClass("mdc-text-field");
+                                    el.attr("aria-label", label);
+
+                                    if(el.data("type") === "outlined") { // filled | outlined
+                                        mdcTextField = el.wrap('<span class="mdc-text-field__resizer"></span>').parent();
+                                        mdcTextField = mdcTextField.wrap('<label class="mdc-text-field mdc-text-field--outlined mdc-text-field--textarea' + (isNoLabel ? ' mdc-text-field--no-label' : '') + '"></label>').parent();
+                                        mdcTextField.prepend('<span class="mdc-notched-outline">'
+                                            + '<span class="mdc-notched-outline__leading"></span>'
+                                            + '<span class="mdc-notched-outline__notch">'
+                                            + (!isNoLabel ? '<span class="mdc-floating-label" id="' + id + '-label-' + uid + '">' + label +'</span>' : '')
+                                            + '</span>'
+                                            + '<span class="mdc-notched-outline__trailing"></span>'
+                                        + '</span>');
+                                    } else {
+                                        mdcTextField = el.wrap('<span class="mdc-text-field__resizer"></span>').parent();
+                                        mdcTextField = mdcTextField.wrap('<label class="mdc-text-field mdc-text-field--filled mdc-text-field--textarea' + (isNoLabel ? ' mdc-text-field--no-label' : '') + '"></label>').parent();
+                                        mdcTextField.prepend('<span class="mdc-floating-label" id="' + id + '-label-' + uid + '">' + label +'</span>');
+                                        mdcTextField.prepend('<span class="mdc-text-field__ripple"></span>');
+                                        mdcTextField.append('<span class="mdc-line-ripple"></span>');
+                                    }
+                                } else {
+                                    el.css({
+                                        "padding": "0",
+                                        "border": "none"
+                                    });
+
+                                    el.addClass("mdc-text-field__input").removeClass("mdc-text-field");
+                                    el.attr("aria-labelledby", id + "-label-" + uid);
+
+                                    if(el.data("type") === "outlined") { // filled | outlined
+                                        mdcTextField = el.wrap('<label class="mdc-text-field mdc-text-field--outlined' + (isNoLabel ? ' mdc-text-field--no-label' : '') + '"></label>').parent();
+                                        mdcTextField.prepend('<span class="mdc-notched-outline">'
+                                            + '<span class="mdc-notched-outline__leading"></span>'
+                                            + '<span class="mdc-notched-outline__notch">'
+                                                + (!isNoLabel ? '<span class="mdc-floating-label" id="' + id + '-label-' + uid + '">' + label +'</span>' : '')
+                                            + '</span>'
+                                            + '<span class="mdc-notched-outline__trailing"></span>'
+                                        + '</span>');
+                                    } else {
+                                        mdcTextField = el.wrap('<label class="mdc-text-field mdc-text-field--filled' + (isNoLabel ? ' mdc-text-field--no-label' : '') + '"></label>').parent();
+                                        if(!isNoLabel) {
+                                            mdcTextField.prepend('<span class="mdc-floating-label" id="' + id + '-label-' + uid + '">' + label +'</span>');
+                                        }
+                                        mdcTextField.prepend('<span class="mdc-text-field__ripple"></span>');
+                                        mdcTextField.append('<span class="mdc-line-ripple"></span>');
+                                    }
+                                    var btnId = el.data("btnid");
+                                    var btnIdAttr = "";
+                                    if(btnId) {
+                                        btnIdAttr = ' id="' + btnId + '"';
+                                    }
+                                    if(el.data("trailingicon")) {
+                                        mdcTextField.addClass("mdc-text-field--with-trailing-icon");
+                                        el.after('<i' + btnIdAttr + ' class="material-icons mdc-text-field__icon mdc-text-field__icon--leading" tabindex="0" role="button">' + el.data("trailingicon") + '</i>');
+                                    } else if(el.data("format") && el.data("format")[0] && el.data("format")[0][0] === "date") {
+                                        mdcTextField.addClass("mdc-text-field--with-trailing-icon");
+                                        var btn = N('<i class="material-icons mdc-text-field__icon mdc-text-field__icon--leading" tabindex="0" role="button">date_range</i>');
+                                        btn.on("click.material.textfield.trailing.icon", function(e) {
+                                            e.preventDefault();
+                                            var dpInst = el.instance("datepicker");
+                                            el.trigger("focusin.datepicker");
+                                        });
+                                        el.after(btn);
+                                    }
+                                    if(el.data("leadingicon")) {
+                                        mdcTextField.addClass("mdc-text-field--with-leading-icon");
+                                        el.before('<i' + btnIdAttr + ' class="material-icons mdc-text-field__icon mdc-text-field__icon--trailing" tabindex="0" role="button">' + el.data("leadingicon") + '</i>');
+                                    }
+                                    if(btnId) {
+                                        cont["e." + btnId + ".click"] = N("#" + btnId, cont.view).on("click", cont["e." + btnId + ".click"]);
+                                    }
+                                }
+                                el.data("md_textfield_inst", mdc.textField.MDCTextField.attachTo(mdcTextField.get(0)));
+                            });
+                        },
+                        select : function(cont) {
+                            N('.mdc-njs-select', cont.view).each(function(i, el) {
+                                el = N(el);
+                                el.attr("required", true);
+                                var mdcNjsSelect = el.wrap('<div class="mdc-njs-select-wrap"></div>').parent();
+                                mdcNjsSelect.append('<span class="mdc-njs-select-highlight"></span>');
+                                mdcNjsSelect.append('<span class="mdc-njs-select-bar"></span>');
+                                mdcNjsSelect.append('<label class="mdc-njs-select-label">' + el.data("label") + '</label>');
+                            });
+                        },
+                        list : function(cont) {
+                            N('.mdc-list', cont.view).each(function(i, el) {
+                                el = N(el);
+                                if(el.is("ul")) {
+                                    var liEl = el.find("li").addClass("mdc-list-item");
+                                    liEl.prepend('<span class="mdc-list-item__ripple"></span>');
+                                    liEl.find("[id]").addClass("mdc-list-item__text");
+                                    // mdc.list.MDCList.attachTo(this);
+                                    // mdc.ripple.MDCRipple.attachTo(liEl.get(0)); // Clone된 요소는 ripple 적용 안됨.
+                                }
+                            });
+                        }
+                    }
+                },
                 codes : function(cont, joinPoint, opts) {
                     var options = {
                         codeUrl : null,
@@ -154,6 +428,10 @@
                     }
                 },
                 template : function(cont, joinPoint) {
+                    if(N.context.attr("template").design) {
+                        TEMPLATE.aop.design[N.context.attr("template").design].init(cont);
+                    }
+
                     var compActionDefer = [];
                     for(var prop in cont) {
                         if(N.type(prop) === "string" && N.string.startsWith(prop, "p.")) {
@@ -164,6 +442,10 @@
                         if(N.type(prop) === "string" && N.string.startsWith(prop, "e.")) {
                             TEMPLATE.aop.events(cont, prop);
                         }
+                    }
+
+                    if(N.context.attr("template").design) {
+                        TEMPLATE.aop.design[N.context.attr("template").design].init(cont, true);
                     }
 
                     if(compActionDefer.length > 0) {
@@ -230,6 +512,7 @@
 
                                 // search-box
                                 if(opts.usage === "search-box" || usageOptions["search-box"] !== undefined) {
+                                    opts.context.addClass("search_box__");
                                     if(opts.action === undefined || opts.action !== "add") {
                                         cont[comp].add();
                                     }
@@ -246,7 +529,7 @@
                                     opts.context.on("keyup." + cont.view.data("pageid"), ":input:not(" + targets.join(",") + ")", function(e) {
                                         var keyCode = e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode);
                                         if (keyCode == 13) { // enter key
-                                            cont.view.find(usageOptions["search-box"].defaultButton).trigger("click");
+                                            cont.view.find(usageOptions["search-box"].defaultButton).click();
                                         }
                                     });
 
@@ -296,55 +579,58 @@
                         }
 
                         var targetEle = N(idSelector + targetProp, cont.view);
-                        var listCompEle = targetEle.closest(".list__, .grid__");
 
-                        var compInst;
-                        if(listCompEle.length > 0 && targetEle.closest("header").length === 0) {
-                            if(listCompEle.hasClass("list__")) {
-                                compInst = listCompEle.instance("list");
-                            } else if(listCompEle.hasClass("grid__")) {
-                                compInst = listCompEle.instance("grid");
+                        if(targetEle.length > 0) {
+                            var listCompEle = targetEle.closest(".list__, .grid__");
+
+                            var compInst;
+                            if(listCompEle.length > 0 && targetEle.closest("header").length === 0) {
+                                if(listCompEle.hasClass("list__")) {
+                                    compInst = listCompEle.instance("list");
+                                } else if(listCompEle.hasClass("grid__")) {
+                                    compInst = listCompEle.instance("grid");
+                                }
+
+                                if(compInst) {
+                                    targetEle = compInst.tempRowEle.find(idSelector + targetProp);
+
+                                    // If the target element is a checkbox or radio, the element is imported by name selector.(#eleId -> [name='eleId']).
+                                    if(targetEle.is(":radio, :checkbox") && N("[name='" + targetProp + "']", compInst.tempRowEle).length > 1) {
+                                        targetEle = N("[name='" + targetProp + "']", compInst.tempRowEle);
+                                    }
+                                }
+                            } else {
+                                // If the target element is a checkbox or radio, the element is imported by name selector.(#eleId -> [name='eleId']).
+                                if(targetEle.is(":radio, :checkbox") && N("[name='" + targetProp + "']", cont.view).length > 1) {
+                                    targetEle = N("[name='" + targetProp + "']", cont.view);
+                                }
+                            }
+
+                            // If the target element is a button element(a, button, input[type=button]), the N.button component is automatically applied.
+                            if(targetEle.is("a, button, input[type=button]")) {
+                                targetEle.button();
+                            } else {
+                                if(eventName && eventName.indexOf("click") > -1) {
+                                    targetEle.css("cursor", "pointer");
+                                }
                             }
 
                             if(compInst) {
-                                targetEle = compInst.tempRowEle.find(idSelector + targetProp);
-
-                                // If the target element is a checkbox or radio, the element is imported by name selector.(#eleId -> [name='eleId']).
-                                if(targetEle.is(":radio, :checkbox") && N("[name='" + targetProp + "']", compInst.tempRowEle).length > 1) {
-                                    targetEle = N("[name='" + targetProp + "']", compInst.tempRowEle);
+                                var targetStr;
+                                if(targetEle.is(":radio") || (targetEle.is(":checkbox") && targetEle.length > 1)) {
+                                    targetStr = ">.form__ [name='" + targetProp + "']:radio, >.form__ [name='" + targetProp + "']:checkbox";
+                                } else {
+                                    targetStr = ">.form__ " + idSelector + targetProp;
                                 }
-                            }
-                        } else {
-                            // If the target element is a checkbox or radio, the element is imported by name selector.(#eleId -> [name='eleId']).
-                            if(targetEle.is(":radio, :checkbox") && N("[name='" + targetProp + "']", cont.view).length > 1) {
-                                targetEle = N("[name='" + targetProp + "']", cont.view);
-                            }
-                        }
 
-                        // If the target element is a button element(a, button, input[type=button]), the N.button component is automatically applied.
-                        if(targetEle.is("a, button, input[type=button]")) {
-                            targetEle.button();
-                        } else {
-                            if(eventName && eventName.indexOf("click") > -1) {
-                                targetEle.css("cursor", "pointer");
-                            }
-                        }
-
-                        if(compInst) {
-                            var targetStr;
-                            if(targetEle.is(":radio") || (targetEle.is(":checkbox") && targetEle.length > 1)) {
-                                targetStr = ">.form__ [name='" + targetProp + "']:radio, >.form__ [name='" + targetProp + "']:checkbox";
+                                cont[prop] = listCompEle.on(eventName + "." + cont.view.data("pageid"), targetStr, function() {
+                                    var args = Array.apply(null, arguments);
+                                    args.push(listCompEle.find(">.form__").index($(this).closest(".form__")));
+                                    handler.apply(this, args);
+                                });
                             } else {
-                                targetStr = ">.form__ " + idSelector + targetProp;
+                                cont[prop] = targetEle.on(eventName + "." + cont.view.data("pageid"), handler);
                             }
-
-                            cont[prop] = listCompEle.on(eventName + "." + cont.view.data("pageid"), targetStr, function() {
-                                var args = Array.apply(null, arguments);
-                                args.push(listCompEle.find(">.form__").index($(this).closest(".form__")));
-                                handler.apply(this, args);
-                            });
-                        } else {
-                            cont[prop] = targetEle.on(eventName + "." + cont.view.data("pageid"), handler);
                         }
                     } else {
                         throw N.error(N.message.get(N.context.attr("template").message, "MSG-0006", [ cont.view.data("pageid") + ":" + prop ]));
