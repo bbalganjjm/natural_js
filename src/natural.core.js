@@ -22,7 +22,9 @@
 
     // Use jQuery init
     N = function(selector, context) {
-        return new $.fn.init(selector, context);
+        var obj = new $.fn.init(selector, context);
+        obj.selector = selector;
+        return obj;
     };
 
     $.fn.extend($.extend(N.prototype, {
@@ -277,7 +279,7 @@
                     return $el.css(propertyName) ? [ $el.css(propertyName) ] : [];
                 }
         };
-        $.expr[":"].regexp = $.expr.createPseudo(function(meta){
+        $.expr.pseudos.regexp = $.expr.createPseudo(function(meta){
             if(!meta) return $.noop;
 
             var params = meta.match(paramMatch);
@@ -344,7 +346,10 @@
             /**
              * Check whether arg[0] is a numeric type
              */
-            isNumeric : $.isNumeric,
+            isNumeric : function(obj) {
+                return ( typeof obj === "number" || typeof obj === "string" ) &&
+                    !isNaN( obj - parseFloat( obj ) );
+            },
             /**
              * Check whether arg[0] is a plain object type
              */
@@ -367,13 +372,13 @@
             /**
              * Check whether arg[0] is a Array type
              */
-            isArray : $.isArray,
+            isArray : Array.isArray,
             /**
              * Checks whether an object of a type similar(array or jquery object etc.) to an array
              */
             isArraylike : function(obj) {
                 var length = obj.length, type = N.type(obj);
-                if (type === "function" || $.isWindow(obj)) {
+                if (type === "function" || (obj != null && obj === obj.window)){
                     return false;
                 }
                 if (obj.nodeType === 1 && length) {
@@ -423,27 +428,27 @@
                  * Minimum collection
                  */
                 minimum : function() {
-                    $(window).unbind("resize.datepicker");
-                    $(window).unbind("resize.alert");
-                    $(document).unbind("click.datepicker");
-                    $(document).unbind("keyup.alert");
-                    $(document).unbind("click.grid.dataFilter");
-                    $(document).unbind("click.grid.more touchstart.grid.more");
+                    $(window).off("resize.datepicker");
+                    $(window).off("resize.alert");
+                    $(document).off("click.datepicker");
+                    $(document).off("keyup.alert");
+                    $(document).off("click.grid.dataFilter");
+                    $(document).off("click.grid.more touchstart.grid.more");
                     return true;
                 },
                 /**
                  * Full collection
                  */
                 full : function() {
-                    $(window).unbind("resize.datepicker");
-                    $(window).unbind("resize.alert");
-                    $(document).unbind("dragstart.alert selectstart.alert mousemove.alert touchmove.alert mouseup.alert touchend.alert");
-                    $(document).unbind("click.datepicker");
-                    $(document).unbind("keyup.alert");
-                    $(document).unbind("dragstart.grid.vResize selectstart.grid.vResize mousemove.grid.vResize touchmove.grid.vResize mouseup.grid.vResize touchend.grid.vResize");
-                    $(document).unbind("dragstart.grid.resize selectstart.grid.resize mousemove.grid.resize touchmove.grid.resize mouseup.grid.resize touchend.grid.resize");
-                    $(document).unbind("click.grid.dataFilter");
-                    $(document).unbind("click.grid.more touchstart.grid.more");
+                    $(window).off("resize.datepicker");
+                    $(window).off("resize.alert");
+                    $(document).off("dragstart.alert selectstart.alert mousemove.alert touchmove.alert mouseup.alert touchend.alert");
+                    $(document).off("click.datepicker");
+                    $(document).off("keyup.alert");
+                    $(document).off("dragstart.grid.vResize selectstart.grid.vResize mousemove.grid.vResize touchmove.grid.vResize mouseup.grid.vResize touchend.grid.vResize");
+                    $(document).off("dragstart.grid.resize selectstart.grid.resize mousemove.grid.resize touchmove.grid.resize mouseup.grid.resize touchend.grid.resize");
+                    $(document).off("click.grid.dataFilter");
+                    $(document).off("click.grid.more touchstart.grid.more");
                     return true;
                 },
                 /**
@@ -499,9 +504,11 @@
                     }
                     return str;
                 },
-                trim : $.trim,
+                trim : function(str) {
+                    return str ? str.trim() : str;
+                },
                 isEmpty : function(str) {
-                    return $.trim(str).length === 0 ? true : false;
+                    return N.string.trimToEmpty(str).length === 0 ? true : false;
                 },
                 byteLength : function(str, charByteLength) {
                     if(charByteLength === undefined) {
@@ -512,21 +519,23 @@
                         return b;
                     })(str);
                 },
-                trimToEmpty : $.trim,
+                trimToEmpty : function(str) {
+                    return str ? String(str).trim() : "";
+                },
                 nullToEmpty : function(str) {
                     return str === null || str === undefined ? "" : str;
                 },
                 trimToNull : function(str) {
-                    return $.trim(str).length === 0 ? null : $.trim(str);
+                    return N.string.trimToEmpty(str).length === 0 ? null : str.trim();
                 },
                 trimToUndefined : function(str) {
-                    return $.trim(str).length === 0 ? undefined : $.trim(str);
+                    return N.string.trimToEmpty(str).length === 0 ? undefined : str.trim();
                 },
                 trimToZero : function(str) {
-                    return $.trim(str).length === 0 ? "0" : $.trim(str);
+                    return N.string.trimToEmpty(str).length === 0 ? "0" : str.trim();
                 },
                 trimToVal : function(str, val) {
-                    return $.trim(str).length === 0 ? val : $.trim(str);
+                    return N.string.trimToEmpty(str).length === 0 ? val : str.trim();
                 }
             },
             /**
@@ -1160,7 +1169,7 @@
                  * This method is locked window scroll when scrolling in the ele(arg1)
                  */
                 windowScrollLock : function(ele) {
-                    ele.bind('mousewheel.ui DOMMouseScroll.ui',function(e) {
+                    ele.on("mousewheel.ui DOMMouseScroll.ui",function(e) {
                         var delta = e.originalEvent.wheelDelta || -e.originalEvent.detail;
                         if (delta > 0 && $(this).scrollTop() <= 0) return false;
                         if (delta < 0 && $(this).scrollTop() >= this.scrollHeight - $(this).height()) return false;
@@ -1171,7 +1180,7 @@
                  * Detect the duration of animation or transition of css3
                  */
                 getMaxDuration : function(ele, css) {
-                    if(!ele.css(css)) {
+                    if(!ele.css(css) || ele.css(css).startsWith("0")) {
                         return 0;
                     }
                     return duration = Math.max.apply(undefined, $(ele.css(css).split(",")).map(function() {

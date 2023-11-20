@@ -246,7 +246,7 @@
                                     opts.context.on("keyup." + cont.view.data("pageid"), ":input:not(" + targets.join(",") + ")", function(e) {
                                         var keyCode = e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode);
                                         if (keyCode == 13) { // enter key
-                                            cont.view.find(usageOptions["search-box"].defaultButton).click();
+                                            cont.view.find(usageOptions["search-box"].defaultButton).trigger("click");
                                         }
                                     });
 

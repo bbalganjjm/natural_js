@@ -185,7 +185,7 @@
 
                     var checkAll = compNm === "grid" ? this.thead.find(opts.checkAll) : $(opts.checkAll);
                     var cellTag = compNm === "grid" ? "tbody > tr > td" : "li";
-                    checkAll.bind("click." + compNm + ".checkAll", function() {
+                    checkAll.on("click." + compNm + ".checkAll", function() {
                         if(!$(this).prop("checked")) {
                             contextEle.find(cellTag + " " + opts.checkAllTarget + ":checked").removeProp("checked");
                         } else {
@@ -270,7 +270,7 @@
 
                             if(isContinue !== false) {
                                 $(document).on("mousemove" + eventNameSpace + " touchmove" + eventNameSpace, function(e) {
-                                    $(document).bind("dragstart" + eventNameSpace + " selectstart" + eventNameSpace, function() {
+                                    $(document).on("dragstart" + eventNameSpace + " selectstart" + eventNameSpace, function() {
                                         return false;
                                     });
 
@@ -291,7 +291,7 @@
                                 });
 
                                 $(document).on("mouseup" + eventNameSpace + " touchend" + eventNameSpace, function(e) {
-                                    $(document).unbind("dragstart" + eventNameSpace + " selectstart" + eventNameSpace + " mousemove" + eventNameSpace + " touchmove" + eventNameSpace + " mouseup" + eventNameSpace + " touchend" + eventNameSpace);
+                                    $(document).off("dragstart" + eventNameSpace + " selectstart" + eventNameSpace + " mousemove" + eventNameSpace + " touchmove" + eventNameSpace + " mouseup" + eventNameSpace + " touchend" + eventNameSpace);
 
                                     if(endHandler !== undefined) {
                                         endHandler.call(this, e, selfEle)
@@ -363,7 +363,7 @@
                     var opts = this.options;
                     var self = this;
 
-                    contextWrapEle.scroll(function() {
+                    contextWrapEle.on("scroll", function() {
                         if(opts.scrollPaging.size > 0 && opts.isBinding === false) {
                             var thisWrap = $(this);
                             if (Math.ceil(thisWrap.scrollTop()) >= opts.context.height() - thisWrap.height()) {
@@ -625,7 +625,7 @@
 
                 // bind event to close(X) button
                 var self = this;
-                opts.msgContents.find(".msg_title_box__ .msg_title_close_btn__").bind("click.alert touchend.alert", function(e) {
+                opts.msgContents.find(".msg_title_box__ .msg_title_close_btn__").on("click.alert touchend.alert", function(e) {
                     e.preventDefault();
                     if (opts.onCancelG !== null) {
                         opts.onCancelG.call(self, opts.msgContext, opts.msgContents);
@@ -666,7 +666,7 @@
 
                 //set confirm button style and bind click event
                 opts.msgContents.find(".buttonBox__ .confirm__").button(opts.global.okBtnStyle);
-                opts.msgContents.find(".buttonBox__ .confirm__").bind("click.alert", function(e) {
+                opts.msgContents.find(".buttonBox__ .confirm__").on("click.alert", function(e) {
                     e.preventDefault();
                     if (opts.onOkG !== null) {
                         opts.onOkG.call(self, opts.msgContext, opts.msgContents);
@@ -685,7 +685,7 @@
                     opts.msgContext.remove();
                 } else {
                     if(opts.overlayClose) {
-                        opts.msgContext.bind("click.alert", function() {
+                        opts.msgContext.on("click.alert", function() {
                             if (opts.onCancelG !== null) {
                                 opts.onCancelG.call(self, opts.msgContext, opts.msgContents);
                             }
@@ -703,7 +703,7 @@
                 // set cancel button style and bind click event
                 if(opts.confirm) {
                     opts.msgContents.find(".buttonBox__ .cancel__").button(opts.global.cancelBtnStyle);
-                    opts.msgContents.find(".buttonBox__ .cancel__").bind("click.alert", function(e) {
+                    opts.msgContents.find(".buttonBox__ .cancel__").on("click.alert", function(e) {
                         e.preventDefault();
                         if (opts.onCancelG !== null) {
                             opts.onCancelG.call(self, opts.msgContext, opts.msgContents);
@@ -726,7 +726,7 @@
                     var startX;
                     var startY;
                     var defMargin;
-                    opts.msgContents.addClass("draggable__").find(".msg_title_box__").bind("mousedown.alert touchstart.alert", function(e) {
+                    opts.msgContents.addClass("draggable__").find(".msg_title_box__").on("mousedown.alert touchstart.alert", function(e) {
                         var dte;
                         if(e.originalEvent.touches) {
                             e.preventDefault();
@@ -743,12 +743,12 @@
                             startX = (dte !== undefined ? dte.pageX : e.pageX)- opts.msgContents.offset().left;
                             startY = (dte !== undefined ? dte.pageY : e.pageY) - opts.msgContents.offset().top;
 
-                            $(window.document).bind("dragstart.alert selectstart.alert", function(e) {
+                            $(window.document).on("dragstart.alert selectstart.alert", function(e) {
                                 return false;
                             });
 
                             moved = true;
-                            $(window.document).bind("mousemove.alert touchmove.alert", function(e) {
+                            $(window.document).on("mousemove.alert touchmove.alert", function(e) {
                                 var mte;
                                 if(e.originalEvent.touches) {
                                     e.stopPropagation();
@@ -768,7 +768,7 @@
                             });
 
                             var documentWidth = $(window.document).width();
-                            $(window.document).bind("mouseup.alert touchend.alert", function(e) {
+                            $(window.document).on("mouseup.alert touchend.alert", function(e) {
                                 pressed = false;
                                 if(opts.draggableOverflowCorrection) {
                                     var offset = {};
@@ -803,7 +803,7 @@
                                 }
 
                                 opts.msgContents.fadeTo(100, "1.0");
-                                $(window.document).unbind("dragstart.alert selectstart.alert mousemove.alert touchmove.alert mouseup.alert touchend.alert");
+                                $(window.document).off("dragstart.alert selectstart.alert mousemove.alert touchmove.alert mouseup.alert touchend.alert");
                             });
                         }
                     });
@@ -918,7 +918,7 @@
                     }
 
                     var self = this;
-                    opts.msgContext.find(".msg_close__").click(function(e) {
+                    opts.msgContext.find(".msg_close__").on("click", function(e) {
                         e.preventDefault();
                         self.remove();
                     });
@@ -974,7 +974,7 @@
                         opts.resizeHandler =  function() {
                             Alert.resetOffSetEle(opts);
                         };
-                        $(window).unbind("resize.alert", opts.resizeHandler).bind("resize.alert", opts.resizeHandler).trigger("resize.alert");
+                        $(window).off("resize.alert", opts.resizeHandler).on("resize.alert", opts.resizeHandler).trigger("resize.alert");
                     }
 
                     if(!opts.isWindow) {
@@ -1032,7 +1032,7 @@
                             }
                         }
                     };
-                    $(document).unbind("keyup.alert", opts.keyupHandler).bind("keyup.alert", opts.keyupHandler);
+                    $(document).off("keyup.alert", opts.keyupHandler).on("keyup.alert", opts.keyupHandler);
                 }
 
                 return this;
@@ -1084,9 +1084,9 @@
                     }).trigger("nothing");
                 }
 
-                $(window).unbind("resize.alert", opts.resizeHandler);
+                $(window).off("resize.alert", opts.resizeHandler);
                 if(opts.escClose) {
-                    $(document).unbind("keyup.alert", opts.keyupHandler);
+                    $(document).off("keyup.alert", opts.keyupHandler);
                 }
 
                 return this;
@@ -1143,9 +1143,9 @@
                     }).trigger("nothing");
                 }
 
-                $(window).unbind("resize.alert", opts.resizeHandler);
+                $(window).off("resize.alert", opts.resizeHandler);
                 if(opts.escClose) {
-                    $(document).unbind("keyup.alert", opts.keyupHandler);
+                    $(document).off("keyup.alert", opts.keyupHandler);
                 }
                 return this;
             }
@@ -1232,8 +1232,8 @@
                         }
                     }
 
-                    opts.context.unbind("mouseover.button mousedown.button mouseup.button mouseout.button");
-                    opts.context.bind("mouseover.button", function() {
+                    opts.context.off("mouseover.button mousedown.button mouseup.button mouseout.button");
+                    opts.context.on("mouseover.button", function() {
                         if (!opts.context.hasClass("btn_disabled__")) {
                             if(!opts.customStyle) {
                                 if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {
@@ -1246,7 +1246,7 @@
                             $(this).addClass("btn_mouseover__");
                         }
                     });
-                    opts.context.bind("mousedown.button", function() {
+                    opts.context.on("mousedown.button", function() {
                         if (!opts.context.hasClass("btn_disabled__")) {
                             if(!opts.customStyle) {
                                 if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {
@@ -1259,7 +1259,7 @@
                             $(this).addClass("btn_mousedown__");
                         }
                     });
-                    opts.context.bind("mouseup.button", function() {
+                    opts.context.on("mouseup.button", function() {
                         if (!opts.context.hasClass("btn_disabled__")) {
                             if(!opts.customStyle) {
                                 if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {
@@ -1272,7 +1272,7 @@
                             $(this).addClass("btn_mouseup__");
                         }
                     });
-                    opts.context.bind("mouseout.button", function() {
+                    opts.context.on("mouseout.button", function() {
                         if (!opts.context.hasClass("btn_disabled__")) {
                             if(!opts.customStyle) {
                                 if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {
@@ -1295,7 +1295,7 @@
             disable : function() {
                 var context = this.options.context;
                 if (context.is("a")) {
-                    context.unbind("click.button");
+                    context.off("click.button");
                     context.tpBind("click.button", N.event.disable);
                 } else {
                     context.prop("disabled", true);
@@ -1306,7 +1306,7 @@
             enable : function() {
                 var context = this.options.context;
                 if (context.is("a")) {
-                    context.unbind("click", N.event.disable);
+                    context.off("click", N.event.disable);
                 } else {
                     context.prop("disabled", false);
                 }
@@ -1448,13 +1448,13 @@
 
                 // bind focusin event
                 if(opts.focusin && !opts.context.prop("readonly") && !opts.context.prop("disabled")) {
-                    opts.context.unbind("focusin.datepicker").bind("focusin.datepicker", function() {
+                    opts.context.off("focusin.datepicker").on("focusin.datepicker", function() {
                         self.show();
                     });
                 }
 
                 // bind key events
-                opts.context.unbind("keydown.datepicker").bind("keydown.datepicker", function(e) {
+                opts.context.off("keydown.datepicker").on("keydown.datepicker", function(e) {
                     var keyCode = e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode);
                     if(!N.event.isNumberRelatedKeys(e) || opts.context.val().length > 8) {
                         e.preventDefault();
@@ -1463,7 +1463,7 @@
                         opts.context.get(0).blur();
                         self.hide();
                     }
-                }).unbind("keyup.datepicker").bind("keyup.datepicker", function(e, isPassCheckMinMaxDate) {
+                }).off("keyup.datepicker").on("keyup.datepicker", function(e, isPassCheckMinMaxDate) {
                     // Hangul does not apply e.preventDefault() of keydown event
                     e.target.value = e.target.value.replace(/[^0-9]/g, "");
 
@@ -1519,7 +1519,7 @@
                         e.preventDefault();
                         self.hide();
                     }
-                }).unbind("focusout.datepicker").bind("focusout.datepicker", function(e) {
+                }).off("focusout.datepicker").on("focusout.datepicker", function(e) {
                     // Hangul does not apply e.preventDefault() of keydown event
                     if(!opts.context.prop("readonly") && !opts.context.prop("disable")) {
                         e.target.value = e.target.value.replace(/[^0-9]/g, "");
@@ -1534,11 +1534,11 @@
                 opts.currYear = parseInt(d.formatDate("Y"));
                 var format = (!opts.monthonly ? N.context.attr("data").formatter.date.Ymd() : N.context.attr("data").formatter.date.Ym()).replace(/[^Y|^m|^d]/g, "");
 
-                opts.contents = $('<div class="datepicker_contents__"></div>').bind("click.datepicker", function(e) {
+                opts.contents = $('<div class="datepicker_contents__"></div>').on("click.datepicker", function(e) {
                     e.stopPropagation();
                 }).addClass("hidden__").addClass("years_panel_position_" + opts.yearsPanelPosition + "__")
                     .addClass("months_panel_position_" + opts.monthsPanelPosition + "__");
-                opts.context.unbind("click.datepicker").bind("click.datepicker", function(e) {
+                opts.context.off("click.datepicker").on("click.datepicker", function(e) {
                     e.stopPropagation();
                 });
 
@@ -1627,12 +1627,12 @@
                     });
 
                     var yearPaging = $('<div class="datepicker_year_paging__"><a href="#" class="datepicker_year_prev__" title="' + N.message.get(opts.message, "prev") + '"><span>&lt;</span></a><a href="#" class="datepicker_year_next__" title="' + N.message.get(opts.message, "next") + '"><span>&gt;</span></a></div>');
-                    yearPaging.find(".datepicker_year_prev__").bind("click.datepicker", function(e) {
+                    yearPaging.find(".datepicker_year_prev__").on("click.datepicker", function(e) {
                         e.preventDefault();
                         Datepicker.yearPaging(yearsPanel.find(".datepicker_year_item__"), opts.currYear, -5);
                         yearsPanel.find(".datepicker_year_selected__").trigger("click.datepicker", [true]);
                     });
-                    yearPaging.find(".datepicker_year_next__").bind("click.datepicker", function(e) {
+                    yearPaging.find(".datepicker_year_next__").on("click.datepicker", function(e) {
                         e.preventDefault();
                         Datepicker.yearPaging(yearsPanel.find(".datepicker_year_item__"), opts.currYear, 5);
                         yearsPanel.find(".datepicker_year_selected__").trigger("click.datepicker", [true]);
@@ -1640,7 +1640,7 @@
                     yearsPanel.append(yearPaging);
                 } else if(opts.yearsPanelPosition === "top") {
                     var prevYearBtn = $('<div class="datepicker_year_paging__"><a href="#" class="datepicker_year_prev__" title="' + N.message.get(opts.message, "prev") + '"><span>&lt;</span></a></div>').appendTo(yearsPanel)
-                        .find("> .datepicker_year_prev__").bind("click.datepicker", function(e, isPrevYearBtn) {
+                        .find("> .datepicker_year_prev__").on("click.datepicker", function(e, isPrevYearBtn) {
                             e.preventDefault();
                             var selectedYear = parseInt(yearItem.val());
                             if(selectedYear > opts.currYear - opts.minYear) {
@@ -1672,7 +1672,7 @@
                     for(var i=opts.currYear-opts.minYear;i<=opts.currYear+opts.maxYear;i++) {
                         yearItem.append('<option value="' + N.string.lpad(String(i), 4, "0") +'"' + (i === opts.currYear ? 'selected="selected"' : "") + '>' + N.string.lpad(String(i), 4, "0") +'</option>');
                     }
-                    yearItem.addClass("datepicker_year_item__ datepicker_year_selected__").bind("change.datepicker", function(e, isPrevNextYearBtn) {
+                    yearItem.addClass("datepicker_year_item__ datepicker_year_selected__").on("change.datepicker", function(e, isPrevNextYearBtn) {
                         var selYearStr = $(this).val();
 
                         // immediately applys the changed year to the context element
@@ -1722,7 +1722,7 @@
                     }).appendTo(yearsPanel);
 
                     var nextYearBtn = $('<div class="datepicker_year_paging__"><a href="#" class="datepicker_year_next__" title="' + N.message.get(opts.message, "next") + '"><span>&gt;</span></a></div>').appendTo(yearsPanel)
-                        .find("> .datepicker_year_next__").bind("click.datepicker", function(e, isNextYearBtn) {
+                        .find("> .datepicker_year_next__").on("click.datepicker", function(e, isNextYearBtn) {
                             e.preventDefault();
                             var selectedYear = parseInt(yearItem.val());
 
@@ -1762,7 +1762,7 @@
                     }
 
                     var prevMonthBtn = $('<div class="datepicker_month_paging__"><a href="#" class="datepicker_month_prev__" title="' + N.message.get(opts.message, "prev") + '"><span>&lt;</span></a></div>').appendTo(topMonthsPanel)
-                    .find("> .datepicker_month_prev__").bind("click.datepicker", function(e) {
+                    .find("> .datepicker_month_prev__").on("click.datepicker", function(e) {
                         e.preventDefault();
                         var prevMonth = String(parseInt(topMonthItem.val()) - 1);
                         if(prevMonth < 1) {
@@ -1773,7 +1773,7 @@
                                 if(yearsPanel.find(".datepicker_year_item__:contains('" + N.string.lpad(String(yearStr), 4, "0") + "')").length === 0) {
                                     Datepicker.yearPaging(yearsPanel.find(".datepicker_year_item__"), yearStr, -4, true);
                                 }
-                                yearsPanel.find(".datepicker_year_item__:contains('" + N.string.lpad(String(yearStr), 4, "0") + "')").click();
+                                yearsPanel.find(".datepicker_year_item__:contains('" + N.string.lpad(String(yearStr), 4, "0") + "')").trigger("click");
                             } else if(opts.yearsPanelPosition === "top") {
                                 yearPrevBtnEle.trigger("click.datepicker", [ true ]);
                             }
@@ -1784,12 +1784,12 @@
                         monthsPanel.find(".datepicker_month_item__:contains(" + prevMonth + "):eq(0)").trigger("click.datepicker");
                     });
 
-                    topMonthItem.addClass("datepicker_month_item__ datepicker_month_selected__").bind("change.datepicker", function() {
+                    topMonthItem.addClass("datepicker_month_item__ datepicker_month_selected__").on("change.datepicker", function() {
                         monthsPanel.find(".datepicker_month_item__:contains(" + $(this).val() + "):eq(0)").trigger("click.datepicker");
                     }).appendTo(topMonthsPanel);
 
                     var nextMonthBtn = $('<div class="datepicker_month_paging__"><a href="#" class="datepicker_month_next__" title="' + N.message.get(opts.message, "next") + '"><span>&gt;</span></a></div>').appendTo(topMonthsPanel)
-                    .find("> .datepicker_month_next__").bind("click.datepicker", function(e) {
+                    .find("> .datepicker_month_next__").on("click.datepicker", function(e) {
                         e.preventDefault();
                         var nextMonth = String(parseInt(topMonthItem.val()) + 1);
                         if(nextMonth > 12) {
@@ -1800,7 +1800,7 @@
                                 if(yearsPanel.find(".datepicker_year_item__:contains('" + N.string.lpad(String(yearStr), 4, "0") + "')").length === 0) {
                                     Datepicker.yearPaging(yearsPanel.find(".datepicker_year_item__"), yearStr, 0, true);
                                 }
-                                yearsPanel.find(".datepicker_year_item__:contains('" + N.string.lpad(String(yearStr), 4, "0") + "')").click();
+                                yearsPanel.find(".datepicker_year_item__:contains('" + N.string.lpad(String(yearStr), 4, "0") + "')").trigger("click");
                             } else if(opts.yearsPanelPosition === "top") {
                                 yearNextBtnEle.trigger("click.datepicker", [ true ]);
                             }
@@ -1818,7 +1818,7 @@
                     }
 
                     if(opts.scrollMonthChange) {
-                        opts.contents.bind("mousewheel DOMMouseScroll", function(e) {
+                        opts.contents.on("mousewheel DOMMouseScroll", function(e) {
                             e.preventDefault();
                             if(e.originalEvent.wheelDelta > 0) {
                                 nextMonthBtn.trigger("click.datepicker");
@@ -1831,12 +1831,12 @@
                     if(opts.touchMonthChange) {
                         var startX;
                         var lastX;
-                        opts.contents.bind("touchstart", function(e) {
+                        opts.contents.on("touchstart", function(e) {
                             startX = e.originalEvent.touches[0].pageX;
-                        }).bind("touchmove", function(e) {
+                        }).on("touchmove", function(e) {
                             e.preventDefault();
                             lastX = e.originalEvent.touches[0].pageX;
-                        }).bind("touchend", function(e) {
+                        }).on("touchend", function(e) {
                             var deltaX = startX - lastX;
                             if(Math.abs(deltaX) > 30) {
                                 if(deltaX < 0) {
@@ -2141,7 +2141,7 @@
                     if(opts.yearsPanelPosition === "left") {
                         yearsPanel.find(".datepicker_year_item__").removeClass("datepicker_year_selected__");
                         Datepicker.yearPaging(yearsPanel.find(".datepicker_year_item__"), dateStrArr[0], -2, true);
-                        yearsPanel.find(".datepicker_year_item__:contains('" + N.string.lpad(String(dateStrArr[0]), 4, "0") + "')").click();
+                        yearsPanel.find(".datepicker_year_item__:contains('" + N.string.lpad(String(dateStrArr[0]), 4, "0") + "')").trigger("click");
                     } else if(opts.yearsPanelPosition === "top") {
                         var yearItem = yearsPanel.find(".datepicker_year_item__");
                         if(yearItem.val() != N.string.lpad(String(dateStrArr[0]), 4, "0")) {
@@ -2232,7 +2232,7 @@
                     opts.context.trigger("onBeforeShow", [opts.context, opts.contents]);
 
                     // set datepicker position
-                    $(window).bind("resize.datepicker", function() {
+                    $(window).on("resize.datepicker", function() {
                         var leftOfs = opts.context.position().left;
                         var parentEle = opts.contents.closest(".form__");
                         var limitWidth;
@@ -2256,7 +2256,7 @@
                     opts.contents.show(0, function() {
                         $(this).removeClass("hidden__").addClass("visible__");
                         $(this).one(N.event.whichTransitionEvent(opts.contents), function(e){
-                            $(document).unbind("click.datepicker").bind("click.datepicker", function(e) {
+                            $(document).off("click.datepicker").on("click.datepicker", function(e) {
                                 opts.context.get(0).blur();
                                 self.hide();
                             });
@@ -2286,9 +2286,9 @@
                     }
                     opts.context.trigger("onBeforeHide", [opts.context, opts.contents, arguments.length > 0 ? arguments[0] : undefined]);
 
-                    $(window).unbind("resize.datepicker");
-                    $(document).unbind("click.datepicker");
-                    opts.context.unbind("blur.datepicker");
+                    $(window).off("resize.datepicker");
+                    $(document).off("click.datepicker");
+                    opts.context.off("blur.datepicker");
 
                     opts.contents.removeClass("visible__").addClass("hidden__");
 
@@ -2775,13 +2775,13 @@
                 });
 
                 var marginLeft;
-                opts.links.bind("mousedown.tab" + (N.browser.scrollbarWidth() > 0 ? "touchstart.tab" : ""), function(e) {
+                opts.links.on("mousedown.tab" + (N.browser.scrollbarWidth() > 0 ? "touchstart.tab" : ""), function(e) {
                     e.preventDefault();
 
                     marginLeft = parseInt(opts.context.find(">ul").css("margin-left"));
                 });
 
-                opts.links.bind("click.tab" + (N.browser.scrollbarWidth() > 0 ? "touchend.tab" : ""), function(e, onOpenData, isFirst) {
+                opts.links.on("click.tab" + (N.browser.scrollbarWidth() > 0 ? "touchend.tab" : ""), function(e, onOpenData, isFirst) {
                     e.preventDefault();
 
                     if(marginLeft !== undefined && Math.abs(parseInt(opts.context.find(">ul").css("margin-left")) - marginLeft) > 15 && isFirst !== true) {
@@ -2922,7 +2922,7 @@
                         "top" : 0
                     });
 
-                    prevBtnEle = scrollBtnEles.eq(0).addClass("tab_scroll_prev__").css("left", 0).bind("click" + eventNameSpace,  function(e) {
+                    prevBtnEle = scrollBtnEles.eq(0).addClass("tab_scroll_prev__").css("left", 0).on("click" + eventNameSpace,  function(e) {
                         e.preventDefault();
                         if(N.browser.scrollbarWidth() > 0) {
                             tabContainerEle.addClass("effect__");
@@ -2938,7 +2938,7 @@
                     });
                     prevBtnEleOuterWidth = prevBtnEle.outerWidth();
 
-                    nextBtnEle = scrollBtnEles.eq(1).addClass("tab_scroll_next__").css("right", 0).bind("click" + eventNameSpace,  function(e) {
+                    nextBtnEle = scrollBtnEles.eq(1).addClass("tab_scroll_next__").css("right", 0).on("click" + eventNameSpace,  function(e) {
                         e.preventDefault();
                         if(N.browser.scrollbarWidth() > 0) {
                             tabContainerEle.addClass("effect__");
@@ -2957,7 +2957,7 @@
                     lastDistance = prevBtnEleOuterWidth + liMarginRight;
                 }
 
-                N(window).bind("resize" + eventNameSpace, function() {
+                N(window).on("resize" + eventNameSpace, function() {
                     if(!tabContainerEle.is(":visible")) {
                         return false;
                     }
@@ -3193,9 +3193,9 @@
             disable : function(idx) {
                 if(idx !== undefined) {
                     $(this.options.links.get(idx))
-                        .unbind("click.tab.disable")
-                        .unbind("touchstart.tab.disable")
-                        .unbind("touchend.tab.disable")
+                        .off("click.tab.disable")
+                        .off("touchstart.tab.disable")
+                        .off("touchend.tab.disable")
                         .tpBind("click.tab.disable", N.event.disable)
                         .tpBind("touchstart.tab.disable", N.event.disable)
                         .tpBind("touchend.tab.disable", N.event.disable)
@@ -3206,9 +3206,9 @@
             enable : function(idx) {
                 if(idx !== undefined) {
                     $(this.options.links.get(idx))
-                        .unbind("click", N.event.disable)
-                        .unbind("touchstart", N.event.disable)
-                        .unbind("touchend", N.event.disable)
+                        .off("click", N.event.disable)
+                        .off("touchstart", N.event.disable)
+                        .off("touchend", N.event.disable)
                         .removeClass("tab_disabled__");
                 }
                 return this;
@@ -3919,7 +3919,7 @@
                             type = N.string.trimToEmpty(ele.attr("type")).toLowerCase();
                             if (UI.utils.isTextInput(tagName, type)) {
                                 // unbind events
-                                ele.unbind("focusout.form.validate focusout.form.dataSync keyup.form.dataSync focusin.form.unformat focusout.form.format format.formatter unformat.formatter");
+                                ele.off("focusout.form.validate focusout.form.dataSync keyup.form.dataSync focusin.form.unformat focusout.form.format format.formatter unformat.formatter");
                                 // remove validator's dregs for rebind
                                 ele.removeClass("validate_false__");
                                 if(ele.instance("alert") !== undefined) {
@@ -3930,7 +3930,7 @@
                                 ele.val(vals[key] != null ? String(vals[key]) : "");
                             } else if(tagName === "select") {
                                 // unbind events
-                                ele.unbind("change.form.dataSync");
+                                ele.off("change.form.dataSync");
                                 // remove validator's dregs for rebind
                                 ele.removeClass("validate_false__");
                                 if(ele.instance("alert") !== undefined) {
@@ -5544,7 +5544,7 @@
                     });
                 });
 
-                vResizable.bind("mousedown.grid.vResize touchstart.grid.vResize", function(e) {
+                vResizable.on("mousedown.grid.vResize touchstart.grid.vResize", function(e) {
                     if(e.originalEvent.touches) {
                         e.preventDefault();
                         e.stopPropagation();
@@ -5553,12 +5553,12 @@
                     if(e.originalEvent.touches || (e.which || e.button) === 1) {
 
 
-                        $(document).bind("dragstart.grid.vResize selectstart.grid.vResize", function() {
+                        $(document).on("dragstart.grid.vResize selectstart.grid.vResize", function() {
                             return false;
                         });
                         pressed = true;
 
-                        $(window.document).bind("mousemove.grid.vResize touchmove.grid.vResize", function(e) {
+                        $(window.document).on("mousemove.grid.vResize touchmove.grid.vResize", function(e) {
                             var mte;
                             if(e.originalEvent.touches) {
                                 e.stopPropagation();
@@ -5573,8 +5573,8 @@
                             }
                         });
 
-                        $(window.document).bind("mouseup.grid.vResize touchend.grid.vResize", function(e) {
-                            $(document).unbind("dragstart.grid.vResize selectstart.grid.vResize mousemove.grid.vResize touchmove.grid.vResize mouseup.grid.vResize touchend.grid.vResize");
+                        $(window.document).on("mouseup.grid.vResize touchend.grid.vResize", function(e) {
+                            $(document).off("dragstart.grid.vResize selectstart.grid.vResize mousemove.grid.vResize touchmove.grid.vResize mouseup.grid.vResize touchend.grid.vResize");
                             pressed = false;
                         });
                     }
@@ -5656,12 +5656,12 @@
                 var gridMoreColList;
 
                 // Hide and show panel's checkbox click event
-                panel.find(".grid_more_checkall_box__ :checkbox").bind("click.grid.more", function() {
+                panel.find(".grid_more_checkall_box__ :checkbox").on("click.grid.more", function() {
                     var thisEle = $(this);
                     if(thisEle.is(":checked")) {
-                        gridMoreColList.find("input[name='hideshow']:not(':checked')").click();
+                        gridMoreColList.find("input[name='hideshow']:not(':checked')").trigger("click");
                     } else {
-                        gridMoreColList.find("input[name='hideshow']:checked").click();
+                        gridMoreColList.find("input[name='hideshow']:checked").trigger("click");
                     }
                 });
                 panel.css("position", "absolute");
@@ -5678,7 +5678,7 @@
                 };
 
                 // Hide and show button event.
-                colShowHideBtn.bind("click.grid.more", function(e) {
+                colShowHideBtn.on("click.grid.more", function(e) {
                     e.preventDefault();
                     e.stopPropagation();
                     e.stopImmediatePropagation();
@@ -5712,15 +5712,15 @@
                         calibDialogItems(thisBtn, panel);
                     }
 
-                    $(document).unbind("click.grid.more");
-                    $(document).bind("click.grid.more", function(e) {
+                    $(document).off("click.grid.more");
+                    $(document).on("click.grid.more", function(e) {
                         if($(e.target).parents(".grid_more_panel__, .grid_col_show_hide_btn__").length === 0 && !$(e.target).hasClass("grid_col_show_hide_btn__")) {
                             panel.removeClass("visible__").addClass("hidden__");
                             panel.one(N.event.whichTransitionEvent(panel), function(){
                                 panel.hide();
 
                                 // The touchstart event is not removed when using the one method
-                                $(document).unbind("click.grid.more touchstart.grid.more");
+                                $(document).off("click.grid.more touchstart.grid.more");
                             }).trigger("nothing");
                         }
                     });
@@ -5772,7 +5772,7 @@
                     var form = opts.data.form(moreContents).unbind().bind(rowIdx);
 
                     var btnBox = $('<div class="btn_box__"></div>').appendTo(morePopupContects);
-                    var prevBtn = $('<a href="#" class="prev_btn__">' + N.message.get(opts.message, "prev") + '</a>').bind("click.grid.more", function(e) {
+                    var prevBtn = $('<a href="#" class="prev_btn__">' + N.message.get(opts.message, "prev") + '</a>').on("click.grid.more", function(e) {
                         e.preventDefault();
 
                         if(rowIdx > 0 && form.validate()) {
@@ -5782,7 +5782,7 @@
                         }
                     }).appendTo(btnBox);
                     var page = $('<span class="page__">' + String(rowIdx + 1) +'</span>').appendTo(btnBox);
-                    var nextBtn = $('<a href="#" class="next_btn__">' + N.message.get(opts.message, "next") + '</a>').bind("click.grid.more", function(e) {
+                    var nextBtn = $('<a href="#" class="next_btn__">' + N.message.get(opts.message, "next") + '</a>').on("click.grid.more", function(e) {
                         e.preventDefault();
 
                         if(rowIdx + 1 < form.data().length && form.validate()) {
@@ -5850,7 +5850,7 @@
                         context = opts.context;
                     }
 
-                    this.thead.bind("mouseover.grid.resize touchstart.grid.resize", function() {
+                    this.thead.on("mouseover.grid.resize touchstart.grid.resize", function() {
                         resizeBarHeight = (opts.height > 0 ? self.contextEle.closest(".grid_wrap__").height() - 3 : self.contextEle.height() + resizeBarCorrectionHeight) + 1 + opts.misc.resizeBarCorrectionHeight;
                         var lastResizeBar = theadCells.each(function() {
                             var cellEle = $(this);
@@ -5876,7 +5876,7 @@
                             "opacity": "0"
                         }).appendTo(cellEle);
 
-                        resizeBar.bind("mousedown.grid.resize touchstart.grid.resize", function(e) {
+                        resizeBar.on("mousedown.grid.resize touchstart.grid.resize", function(e) {
                             var dte;
                             if(e.originalEvent.touches) {
                                 dte = e.originalEvent.touches[0];
@@ -5931,7 +5931,7 @@
                                 defWidth = Math.floor(currCellEle.outerWidth()) + opts.misc.resizableCorrectionWidth;
                                 nextDefWidth = !isLast ? Math.floor(currNextCellEle.outerWidth()) + opts.misc.resizableCorrectionWidth : Math.floor(context.width());
 
-                                $(document).bind("dragstart.grid.resize selectstart.grid.resize", function() {
+                                $(document).on("dragstart.grid.resize selectstart.grid.resize", function() {
                                     return false;
                                 });
                                 isPressed = true;
@@ -5939,7 +5939,7 @@
                                 minPx = !isLast ? Math.floor(currNextCellEle.offset().left) : Math.floor(currCellEle.offset().left) + Math.floor(currCellEle.outerWidth());
                                 maxPx = minPx + (!isLast ? Math.floor(currNextCellEle.outerWidth()) : 7680);
                                 movedPx = defPx = Math.floor(currResizeBarEle.parent("th").offset().left);
-                                $(window.document).bind("mousemove.grid.resize touchmove.grid.resize", function(e) {
+                                $(window.document).on("mousemove.grid.resize touchmove.grid.resize", function(e) {
                                     var mte;
                                     if(e.originalEvent.touches) {
                                         e.stopPropagation();
@@ -5971,7 +5971,7 @@
                                 });
 
                                 var currResizeBar = $(this);
-                                $(window.document).bind("mouseup.grid.resize touchend.grid.resize", function(e) {
+                                $(window.document).on("mouseup.grid.resize touchend.grid.resize", function(e) {
                                     currResizeBar.animate({
                                         "height" : String(theadCells.filter(":eq(0)").outerHeight()) + "px"
                                     }, 200, function() {
@@ -5982,7 +5982,7 @@
                                         currResizeBar = undefined;
                                     });
 
-                                    $(document).unbind("dragstart.grid.resize selectstart.grid.resize mousemove.grid.resize touchmove.grid.resize mouseup.grid.resize touchend.grid.resize");
+                                    $(document).off("dragstart.grid.resize selectstart.grid.resize mousemove.grid.resize touchmove.grid.resize mouseup.grid.resize touchend.grid.resize");
                                     isPressed = false;
                                 });
                             }
@@ -6004,7 +6004,7 @@
                 var self = this;
                 theadCells.filter(function(i, cell) {
                     return $(cell).data("id") !== undefined;
-                }).bind("click.grid.sort", function(e) {
+                }).on("click.grid.sort", function(e) {
                     var currEle = $(this);
                     if(currEle.data("sortLock")) {
                         currEle.data("sortLock", false);
@@ -6051,7 +6051,7 @@
 
                 var btnEle = $('<a href="#" class="btn_data_filter__" title="' + N.message.get(opts.message, "dFilter") + '"><span>' + N.message.get(opts.message, "dFilter") + '</span><a>')
                     .addClass("btn_data_filter_full__")
-                    .bind("click.grid.dataFilter", function(e) {
+                    .on("click.grid.dataFilter", function(e) {
                         e.preventDefault();
                         e.stopPropagation();
 
@@ -6121,7 +6121,7 @@
                                     + '</div>')
                             .css("z-index", 1)
                             .hide()
-                            .appendTo(theadCell).bind("click.grid.dataFilter, mouseover.grid.dataFilter", function(e) {
+                            .appendTo(theadCell).on("click.grid.dataFilter, mouseover.grid.dataFilter", function(e) {
                                 e.stopPropagation();
                             });
 
@@ -6135,7 +6135,7 @@
                             searchBox = panel.find(".data_filter_search__");
 
                             // search btn event
-                            panel.find(".data_filter_search_btn__").bind("click.grid.dataFilter", function(e) {
+                            panel.find(".data_filter_search_btn__").on("click.grid.dataFilter", function(e) {
                                 e.preventDefault();
                                 var searchWord = panel.find(".data_filter_search_word__").val();
                                 if(N.string.trimToNull(searchWord) !== null) {
@@ -6150,15 +6150,15 @@
                                     filterListBox.find("li :checkbox").prop("checked", true).last().trigger("do.grid.dataFilter");
                                 }
                             });
-                            panel.find(".data_filter_search_word__").bind("keyup.grid.dataFilter", function(e) {
+                            panel.find(".data_filter_search_word__").on("keyup.grid.dataFilter", function(e) {
                                 var keyCode = (e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode));
                                 if (keyCode == 13) {
-                                    panel.find(".data_filter_search_btn__").click();
+                                    panel.find(".data_filter_search_btn__").trigger("click");
                                 }
                             });
 
                             // select all checkbox event
-                            panel.find(".data_filter_checkall_box__ :checkbox").bind("click.grid.dataFilter", function() {
+                            panel.find(".data_filter_checkall_box__ :checkbox").on("click.grid.dataFilter", function() {
                                 if($(this).is(":checked")) {
                                     var chkboxEle;
                                     panel.find(".data_filter_search_word__").val("");
@@ -6225,7 +6225,7 @@
                                 filterItemEle.find(".data_filter_checkbox__")
                                 .data("rowIdxs", filterKeys[k])
                                 .data("length", length)
-                                .bind("click.grid.dataFilter, do.grid.dataFilter", function() { // TODO Change "on" method
+                                .on("click.grid.dataFilter, do.grid.dataFilter", function() {
                                     // Update the count of rows for each filter item
                                     var thisEle = $(this);
                                     if(thisEle.is(":checked")) {
@@ -6307,8 +6307,8 @@
                             itemSeq++;
                         }
 
-                        $(document).unbind("click.grid.dataFilter");
-                        $(document).bind("click.grid.dataFilter", function(e) {
+                        $(document).off("click.grid.dataFilter");
+                        $(document).on("click.grid.dataFilter", function(e) {
                             if($(e.target).closest(".data_filter_panel__, .btn_data_filter__").length === 0
                                     && !$(e.target).hasClass("btn_data_filter__")
                                     && !$(e.target).hasClass("form__")) {
@@ -6319,7 +6319,7 @@
                                     panel.unbind(eventNm);
                                     panel.one(eventNm, function(e){
                                         $(this).hide();
-                                        $(document).unbind("click.grid.dataFilter");
+                                        $(document).off("click.grid.dataFilter");
                                     }).trigger("nothing");
                                 }
                             }
@@ -7248,8 +7248,8 @@
 
                 // first button event
                 if(linkEles.first !== undefined) {
-                    linkEles.first.unbind("click.pagination");
-                    linkEles.first.bind("click.pagination", function(e) {
+                    linkEles.first.off("click.pagination");
+                    linkEles.first.on("click.pagination", function(e) {
                         e.preventDefault();
                         if(1 !== opts.pageNo) {
                             opts.pageNo = 1;
@@ -7260,8 +7260,8 @@
                 }
 
                 // previous button event
-                linkEles.prev.unbind("click.pagination");
-                linkEles.prev.bind("click.pagination", function(e) {
+                linkEles.prev.off("click.pagination");
+                linkEles.prev.on("click.pagination", function(e) {
                     e.preventDefault();
                     if(opts.currPageNavInfo.currSelPageSet > 1 && opts.currPageNavInfo.startPage >= opts.currPageNavInfo.currSelPageSet) {
                         opts.pageNo = opts.currPageNavInfo.startPage - opts.countPerPageSet;
@@ -7297,8 +7297,8 @@
                 }).find("li a:eq(" + String(opts.pageNo - opts.currPageNavInfo.startPage) +  ")").trigger("click.pagination", [true]);
 
                 // next button event
-                linkEles.next.unbind("click.pagination");
-                linkEles.next.bind("click.pagination", function(e) {
+                linkEles.next.off("click.pagination");
+                linkEles.next.on("click.pagination", function(e) {
                     e.preventDefault();
                     if(opts.currPageNavInfo.pageSetCount > opts.currPageNavInfo.currSelPageSet) {
                         opts.pageNo = opts.currPageNavInfo.startPage + opts.countPerPageSet;
@@ -7309,8 +7309,8 @@
 
                 // last button event
                 if(linkEles.last !== undefined) {
-                    linkEles.last.unbind("click.pagination");
-                    linkEles.last.bind("click.pagination", function(e) {
+                    linkEles.last.off("click.pagination");
+                    linkEles.last.on("click.pagination", function(e) {
                         e.preventDefault();
                         if(opts.pageNo !== opts.currPageNavInfo.pageCount) {
                             opts.pageNo = opts.currPageNavInfo.pageCount;
@@ -7484,7 +7484,7 @@
                         rootNode.append('<li data-index="' + i + '" class="tree_' + rowData[opts.val] + '__ tree_level1_node__ tree_close__"><span class="tree_icon__"></span>' + (opts.checkbox ? '<span class="tree_check__"><input type="checkbox" /></span>' : '') + '<a class="tree_key__" href="#"><span>' + rowData[opts.key] + '</span></a><ul id="' + rowData[opts.val] + '" class="tree_level' + (opts.level !== null ? String(Number(rowData[opts.level]) + 1) : '') + '_folder__"></ul></li>');
                         isAleadyRoot = true;
                     } else {
-                        rootNode.find("#" + rowData[opts.parent]).append('<li data-index="' + i + '" class="tree_' + rowData[opts.val] + '__ tree_level' + N.string.trim(rowData[opts.level]) + '_node__ tree_close__"><span class="tree_icon__"></span>' + (opts.checkbox ? '<span class="tree_check__"><input type="checkbox" /></span>' : '') + '<a class="tree_key__" href="#"><span>' + rowData[opts.key] + '</span></a><ul id="' + rowData[opts.val] + '" class="tree_level' + (opts.level !== null ? String(Number(rowData[opts.level]) + 1) : '') + '_folder__"></ul></li>');
+                        rootNode.find("#" + rowData[opts.parent]).append('<li data-index="' + i + '" class="tree_' + rowData[opts.val] + '__ tree_level' + N.string.trimToEmpty(rowData[opts.level]) + '_node__ tree_close__"><span class="tree_icon__"></span>' + (opts.checkbox ? '<span class="tree_check__"><input type="checkbox" /></span>' : '') + '<a class="tree_key__" href="#"><span>' + rowData[opts.key] + '</span></a><ul id="' + rowData[opts.val] + '" class="tree_level' + (opts.level !== null ? String(Number(rowData[opts.level]) + 1) : '') + '_folder__"></ul></li>');
                     }
                 });
 

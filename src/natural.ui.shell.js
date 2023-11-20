@@ -107,7 +107,7 @@
                 msgEle[ opts.html ? "html" : "text" ](msg);
 
                 if(url !== undefined) {
-                    msgEle.bind("click.notify", function(e) {
+                    msgEle.on("click.notify", function(e) {
                         e.preventDefault();
                         if(N.type(url) === "function") {
                             url.call(this);
@@ -129,7 +129,7 @@
                 }).append(msgEle).appendTo(opts.context).show().addClass("visible__");
 
                 $('<a href="#" class="notify_msg_close__" title="' + N.message.get(opts.message, "close") + '"><span></span></a>')
-                .appendTo(msgBoxEle).bind("click.notify", function(e) {
+                .appendTo(msgBoxEle).on("click.notify", function(e) {
                     e.preventDefault();
                     self.remove(msgBoxEle);
                 });
@@ -295,10 +295,10 @@
                     } else {
                         var entireLoadScreenBlock = $('<div class="entire_load_screen_block__"></div>')
                         .css("z-index", String(maxZindex))
-                        .click(function(e) {
+                        .on("click", function(e) {
                             e.stopPropagation();
                         });
-                        entireLoadScreenBlock.appendTo("body").bind(N.event.whichTransitionEvent(entireLoadScreenBlock), function(e){
+                        entireLoadScreenBlock.appendTo("body").on(N.event.whichTransitionEvent(entireLoadScreenBlock), function(e){
                             $(this).hide().removeClass("hidden__");
                         }).trigger("nothing");
                     }
@@ -316,7 +316,7 @@
                         entireLoadIndicator.css("z-index", String(maxZindex)).removeClass("hidden__").show();
                         entireLoadIndicator.find("> .entire_load_indicator_bar__").css("left", "");
                     } else {
-                        var entireLoadIndicator = $('<div class="entire_load_indicator__"><div class="entire_load_indicator_bar__"></div></div>').click(function(e) {
+                        var entireLoadIndicator = $('<div class="entire_load_indicator__"><div class="entire_load_indicator_bar__"></div></div>').on("click", function(e) {
                             e.stopPropagation();
                         }).css("z-index", String(maxZindex));
                         opts.context.find(".docs_tab_context__").after(entireLoadIndicator);
@@ -345,7 +345,7 @@
                     entireLoadIndicator.find("> .entire_load_indicator_bar__").css("left", "0");
                 }
                 if(opts.entireLoadScreenBlock) {
-                    $(".entire_load_screen_block__").trigger("nothing");
+                    N(".entire_load_screen_block__").trigger("nothing");
                 }
                 
                 return this;
@@ -362,7 +362,7 @@
                     opts.context.find("> .entire_load_indicator__ > .entire_load_indicator_bar__").css("left", "");
                 }
                 if(opts.entireLoadScreenBlock) {
-                    $(".entire_load_screen_block__").trigger("nothing");
+                    N(".entire_load_screen_block__").trigger("nothing");
                 }
                 
                 return this;
@@ -402,7 +402,7 @@
                         "href" : "#",
                         "text" : N.message.get(opts.message, "closeAll"),
                         "title" : N.message.get(opts.message, "closeAllTitle")
-                    }).bind("click.docs", function(e) {
+                    }).on("click.docs", function(e) {
                         e.preventDefault();
                         if(opts.closeAllRedirectURL !== null) {
                             opts.msgContext.alert({
@@ -439,7 +439,7 @@
                         "href" : "#",
                         "text" : N.message.get(opts.message, "docList"),
                         "title" : N.message.get(opts.message, "docListTitle")
-                    }).bind("click.docs", function(e) {
+                    }).on("click.docs", function(e) {
                         e.preventDefault();
                         e.stopPropagation();
 
@@ -462,16 +462,16 @@
                             }, 0);
                         }
 
-                        $(document).bind("click.docs", function(e) {
-                            $(document).unbind("click.docs");
+                        $(document).on("click.docs", function(e) {
+                            $(document).off("click.docs");
                             docsTabList.removeClass("visible__").addClass("hidden__");
                             docsTabList.one(N.event.whichTransitionEvent(docsTabList), function(e){
                                 $(this).remove();
                             }).trigger("nothing");
                         });
 
-                        $(document).bind("touchstart.docs", function(e) {
-                            $(document).unbind("touchstart.docs");
+                        $(document).on("touchstart.docs", function(e) {
+                            $(document).off("touchstart.docs");
                             if($(e.target).closest(".docs_tab_list__").length === 0) {
                                 docsTabList.removeClass("visible__").addClass("hidden__");
                                 docsTabList.one(N.event.whichTransitionEvent(docsTabList), function(e){
@@ -494,7 +494,7 @@
                 
                 var lastDistance = 0;
 
-                $(window).bind("resize" + eventNameSpace, function() {
+                $(window).on("resize" + eventNameSpace, function() {
                     var ulWidth = 0;
                     tabContainerEle.find(">li").each(function() {
                         ulWidth += ($(this).outerWidth() + parseInt(N.string.trimToZero($(this).css("margin-left"))) + parseInt(N.string.trimToZero($(this).css("margin-right"))));
@@ -755,12 +755,12 @@
                 if(targetTabContents.hasClass("visible__")) {
                     targetTabContents.addClass("remove__");
                     targetTabContents.one(N.event.whichTransitionEvent(targetTabContents), function(e){
-                        $(this).find("*").unbind();
+                        $(this).find("*").off();
                         $(this).remove();
                         targetTabContents = undefined;
                     }).trigger("nothing");
                 } else {
-                    targetTabContents.find("*").unbind();
+                    targetTabContents.find("*").off();
                     targetTabContents.remove();
                     targetTabContents = undefined;
                 }
@@ -782,10 +782,10 @@
 
                 if(isActiveTargetTabEle) {
                     if(targetTabPrevEle.length > 0) {
-                        targetTabPrevEle.find(".docs_tab_active_btn__").click();
+                        targetTabPrevEle.find(".docs_tab_active_btn__").trigger("click");
                     } else {
                         if(targetTabNextEle.length > 0) {
-                            targetTabNextEle.find(".docs_tab_active_btn__").click();
+                            targetTabNextEle.find(".docs_tab_active_btn__").trigger("click");
                         }
                     }
                 } else {
@@ -810,7 +810,7 @@
                 var beforeTabContents = opts.context.find("> .docs_contents__." + docId + "__");
                 if(beforeTabContents.length > 0 && beforeTabContents.hasClass("remove__")) {
                     opts.context.find("> .docs_tab_context__ > .docs_tabs__ > .docs_tab__." + docId + "__").remove();
-                    beforeTabContents.find("*").unbind();
+                    beforeTabContents.find("*").off();
                     beforeTabContents.remove();
                     beforeTabContents = undefined;
                 }
@@ -858,7 +858,7 @@
                             .append($("<span></span>", {
                                 "text" : opts.docs[docId].docNm
                             }))
-                            .bind("click.docs", function(e) {
+                            .on("click.docs", function(e) {
                                 e.preventDefault();
                                 self.active(docId, $(this).closest(".docs_tab_list__").length > 0);
                             }).appendTo(tab);
@@ -870,7 +870,7 @@
                                 "title" : N.message.get(opts.message, "close")
                             })
                             .append("<span></span>")
-                            .bind("click.docs", function(e) {
+                            .on("click.docs", function(e) {
                                 e.preventDefault();
                                 if($(this).closest(".docs_tab_list__").length === 0) {
                                     e.stopPropagation();

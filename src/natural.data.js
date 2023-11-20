@@ -553,14 +553,14 @@
 
 				if(args[0] === "phone") {
 					var rtnStr;
-					str = N.string.trim(str);
+					str = N.string.trimToEmpty(str);
 					rtnStr = this.phonenum(str);
 					var frontNum = rtnStr.substring(0, rtnStr.indexOf("-")+1);
 					var rearNum = rtnStr.substring(rtnStr.lastIndexOf("-"), rtnStr.length);
 					var middleNum = rtnStr.replace(frontNum, "").replace(rearNum, "");
 					return frontNum + middleNum.replace(/\d/g, replaceStr) + rearNum;
 				} else if(args[0] === "email") {
-					str = N.string.trim(str);
+					str = N.string.trimToEmpty(str);
 					if(N.validator.email(str)) {
 						var rplcStr = "";
 						for(var i=0;i<3;i++) {
@@ -569,7 +569,7 @@
 						return str.replace(/@.*/, "").replace(/.{1,3}$/, rplcStr) + str.replace(/.*@/, "@");
 					}
 				} else if(args[0] === "address") {
-					str = N.string.trim(str);
+					str = N.string.trimToEmpty(str);
 					var firstCheckChars = "_경기_강원_충북_충남_전북_전남_경북_경남_제주_";
 					var secondCheckChars = "_도_시_군_구_";
 					var thirdCheckChars = "_읍_면_동_리_로_길_가_";
@@ -580,7 +580,7 @@
 					var firstChar;
 					var lastChar;
 					$(addrFrags).each(function() {
-						addrFrag = N.string.trim(this);
+						addrFrag = N.string.trimToEmpty(this);
 					    firstChar = addrFrag.substring(0, 1);
 						lastChar = addrFrag.substring(addrFrag.length - 1, addrFrag.length);
 					    if(firstCheckChars.indexOf("_" + addrFrag + "_") < 0 && secondCheckChars.indexOf("_" + lastChar + "_") < 0) {
@@ -599,9 +599,9 @@
 						}
 						maskedAddr += addrFrag + " ";
 					});
-					return N.string.trim(maskedAddr);
+					return N.string.trimToEmpty(maskedAddr);
 				} else if(args[0] === "name") {
-					str = N.string.trim(str);
+					str = N.string.trimToEmpty(str);
 
 					// if str is alphabet and number and dot(.)
 					if((new RegExp(/^[a-z-?\d\s\.]+$/i)).test(str)) {
@@ -623,7 +623,7 @@
 
 					return str.substring(0, frontIdx) + replaceStr + str.substring(frontIdx + 1, str.length);
 				} else if(args[0] === "rrn") {
-					str = N.string.trim(str);
+					str = N.string.trimToEmpty(str);
 					var rplcStr = "";
 					for(var i=0;i<7;i++) {
 						rplcStr += replaceStr;
@@ -704,8 +704,8 @@
 							if (ele.is("[type='text'], [type='tel'], textarea")) {
 								ele.val(tempValue);
 								if(opts.createEvent) {
-									ele.unbind("format.formatter unformat.formatter");
-									ele.bind("format.formatter", function() {
+									ele.off("format.formatter unformat.formatter");
+									ele.on("format.formatter", function() {
 										ele = opts.context.filter("#" + $(this).attr("id"));
 										if(ele.length === 0) {
 											ele = opts.context.find("#" + $(this).attr("id"));
@@ -718,7 +718,7 @@
 										}
 
 										$(this).val(fmdVals[row][$(this).attr("id")]);
-									}).bind("unformat.formatter", function() {
+									}).on("unformat.formatter", function() {
 										// TODO Temporary code, think more
 										if(opts.data.length === 1) {
 											row = 0;
@@ -766,8 +766,8 @@
 					if($(this).data("validate") !== undefined) {
 						if(opts.createEvent) {
 							var thisEle = $(this);
-							thisEle.unbind("validate.validator");
-							thisEle.bind("validate.validator", function() {
+							thisEle.off("validate.validator");
+							thisEle.on("validate.validator", function() {
 								N().validator(N(this)).validate();
 							});
 						}

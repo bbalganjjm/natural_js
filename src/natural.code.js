@@ -60,7 +60,7 @@
                             }
 
                             // selector excludes
-                            var selector = N.string.trim(match[1]).replace(/ /g, "");
+                            var selector = N.string.trimToEmpty(match[1]).replace(/ /g, "");
                             if((/^["']/g).test(selector)) {
                                 if(!isExclude) {
                                     if((/[\(\)]|,view|,cont\.view|",|',|^"<|^'<|>"$|>'$|html|body/g).test(selector)) {

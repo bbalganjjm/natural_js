@@ -511,7 +511,7 @@
                                 for (var x in contFrag) {
                                     if (!contFrag.hasOwnProperty(x)) continue;
 
-                                    if($.isFunction(contFrag[x])) {
+                                    if(typeof contFrag[x] === "function") {
                                         if (pointcut.fn(advisor.pointcut.param, contFrag, fnPath + x)) {
                                             var real = contFrag[x];
 
