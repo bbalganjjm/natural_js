@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.43.246
+ * Natural-UI v0.43.247
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2023 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-UI"] = "0.43.246";
+    N.version["Natural-UI"] = "0.43.247";
 
     $.fn.extend($.extend(N.prototype, {
         alert : function(msg, vars) {
@@ -2232,28 +2232,41 @@
                     opts.context.trigger("onBeforeShow", [opts.context, opts.contents]);
 
                     // set datepicker position
+                    var parentEle = opts.contents.closest(".form__");
+                    if(parentEle.length > 0) {
+                        this.parentElePosition = parentEle.css("position").replace("fixed", "");    
+                    }
+                    parentEle.css("position", "relative");
                     $(window).on("resize.datepicker", function() {
-                        var leftOfs = opts.context.position().left;
-                        var parentEle = opts.contents.closest(".form__");
+                        var td = opts.context.closest("td");
+                        var leftOfs;
+                        var parentPaddingLeft = parseInt(opts.context.parent().css("padding-left"));
+                        var parentPaddingRight = parseInt(opts.context.parent().css("padding-right"));
+                        if(td.length > 0) {
+                            td.css("display", "contents");
+                            leftOfs = opts.context.position().left + parentPaddingLeft;
+                            td.css("display", "");
+                        } else {
+                            leftOfs = opts.context.position().left;
+                        }
+
                         var limitWidth;
                         if(parentEle.length > 0 && parentEle.innerWidth() > opts.contents.outerWidth()) {
                             limitWidth = parentEle.position().left + parentEle.width();
                         } else {
                             limitWidth = (window.innerWidth ? window.innerWidth : $(window).width());
                         }
-                        if(leftOfs + opts.contents.width() > limitWidth) {
-                            opts.contents.css("left", "");
-                            opts.contents.css("right", (limitWidth - (leftOfs + opts.context.outerWidth())) + "px");
+                        if(opts.context.offset().left + opts.contents.width() > limitWidth) {
+                            opts.contents.css("left", (leftOfs + opts.context.outerWidth() - opts.contents.width() - (parentPaddingLeft + parentPaddingRight)) + "px");
                             opts.contents.removeClass("orgin_left__").addClass("orgin_right__");
                         } else {
-                            opts.contents.css("right", "");
                             opts.contents.css("left", leftOfs + "px");
                             opts.contents.removeClass("orgin_right__").addClass("orgin_left__");
                         }
                     }).trigger("resize.datepicker");
 
                     var self = this;
-                    opts.contents.show(0, function() {
+                    opts.contents.show(10, function() {
                         $(this).removeClass("hidden__").addClass("visible__");
                         $(this).one(N.event.whichTransitionEvent(opts.contents), function(e){
                             $(document).off("click.datepicker").on("click.datepicker", function(e) {
@@ -2294,6 +2307,9 @@
 
                     opts.contents.one(N.event.whichTransitionEvent(opts.contents), function(e){
                         $(this).remove();
+                        if(this.parentElePosition) {
+                            opts.contents.closest(".form__").css("position", this.parentElePosition);  
+                        }
                         if(opts.onHide !== null) {
                             opts.onHide.call(self, opts.context);
                         }
@@ -2520,7 +2536,7 @@
 
                     // set popup instance to popup's Controller
                     if(cont !== undefined) {
-                        // set caller attribute in Conteroller in tab content, that is Popup instance
+                        // set caller attribute in Controller in tab content, that is Popup instance
                         cont.caller = self;
 
                         // set opener to popup's Controller
@@ -2765,7 +2781,7 @@
                     if(this.preload) {
                         if(this.url !== undefined) {
                             Tab.loadContent.call(self, this.url, i, function(cont, selContentEle_) {
-                                // excute "onLoad" event
+                                // execute "onLoad" event
                                 if(opts.onLoad !== null) {
                                     opts.onLoad.call(self, i, opts.links.eq(i), selContentEle_, cont);
                                 }
@@ -2800,7 +2816,7 @@
                         selTabEle.addClass("tab_active__");
 
                         var onActiveProcFn__ = function() {
-                            // excute "onActive" event
+                            // execute "onActive" event
                             if(opts.onActive !== null) {
                                 if(opts.blockOnActiveWhenCreate === false || (opts.blockOnActiveWhenCreate === true && isFirst !== true)) {
                                     opts.onActive.call(self, selTabIdx, selTabEle, selContentEle, opts.links, opts.contents);
@@ -2809,7 +2825,7 @@
                         }
 
                         var onOpenProcFn__ = function() {
-                            // excute "onOpen"(declarative option) event
+                            // execute "onOpen"(declarative option) event
                             if(selDeclarativeOpts.onOpen !== undefined) {
                                 var cont = selContentEle.children(".view_context__:last").instance("cont");
                                 if(cont[selDeclarativeOpts.onOpen] !== undefined) {
@@ -2857,7 +2873,7 @@
                             Tab.loadContent.call(self, selDeclarativeOpts.url, selTabIdx, function(cont, selContentEle_) {
                                 selContentEle_.addClass("tab_content_active__");
 
-                                // excute "onLoad" event
+                                // execute "onLoad" event
                                 if(opts.onLoad !== null) {
                                     opts.onLoad.call(self, selTabIdx, selTabEle, selContentEle_, cont);
                                 }
@@ -3097,7 +3113,7 @@
 
                     // set tab instance to tab contents Controller
                     if(cont !== undefined) {
-                        // set caller attribute in conteroller in tab content that is Tab instance
+                        // set caller attribute in controller in tab content that is Tab instance
                         cont.caller = self;
 
                         // set opener to popup's Controller
@@ -3335,7 +3351,7 @@
                         var id = opts.context.attr("id")
                         var container = $('<form class="select_input_container__" style="display: inline;" />');
                         if (opts.direction === "h") {
-                            container.addClass("select_input_horizental__");
+                            container.addClass("select_input_horizontal__");
                         } else if (opts.direction === "v") {
                             container.addClass("select_input_vertical__");
                         }
@@ -4147,7 +4163,7 @@
                                 ele.removeData("alert__");
                             }
 
-                            // rebind for sync and validate, format, etc. realted events bind
+                            // rebind for sync and validate, format, etc. related events bind
                             if(ele.events("focusout", "dataSync.form") === undefined) {
                                 vals[key] = null;
                                 self.bind(undefined, undefined, key);
@@ -4186,7 +4202,7 @@
                                 ele.removeData("alert__");
                             }
 
-                            // rebind for data sync and validate, format, etc. realted events bind
+                            // rebind for data sync and validate, format, etc. related events bind
                             if(ele.events("change", "dataSync.form") === undefined) {
                                 vals[key] = null;
                                 self.bind(undefined, undefined, key);

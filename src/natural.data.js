@@ -1,5 +1,5 @@
 /*!
- * Natural-DATA v0.11.72
+ * Natural-DATA v0.11.73
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2023 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-		N.version["Natural-DATA"] = "0.11.72";
+		N.version["Natural-DATA"] = "0.11.73";
 
 	$.fn.extend($.extend(N.prototype, {
 		datafilter : function(callBack) {
@@ -365,16 +365,6 @@
 
 						var orgOnBeforeShow = opts.onBeforeShow;
 						opts.onBeforeShow = function(context, contents) {
-							if(contents.closest(".view_context__").length > 0
-									&& !(contents.closest(".view_context__").css("position") === "relative"
-										|| contents.closest(".view_context__").css("position") === "absolute"
-										|| contents.closest(".view_context__").css("position") === "sticky")) {
-								contents.closest(".view_context__").css("position", "relative");
-								contents.closest(".context_wrap__").css("position", "relative");
-								this.isApplyRelative = true;
-							} else {
-								this.isApplyRelative = false;
-							}
 							// for md format without Y format
 							context.trigger("unformat");
 
@@ -416,12 +406,6 @@
 
 						var orgOnHide = opts.onHide;
 						opts.onHide = function(context, contents) {
-							if(this.isApplyRelative === true) {
-								context.closest(".context_wrap__").css("position", "");
-								context.closest(".view_context__").css("position", "");
-								this.isApplyRelative = false;
-							}
-
 							if(orgOnHide !== null) {
 								return orgOnHide.apply(this, arguments);
 							}
