@@ -151,6 +151,9 @@
                             }
 
                             // color theme
+                            if(!APP.indx.colorPalette[window.localStorage.themeColor]) {
+                                window.localStorage.themeColor = "green"
+                            }
                             if(window.localStorage.themeColor !== "green") {
                                 $(APP.indx.colorPalette.green).each(function(i, color) {
                                     data = data.replace(new RegExp(color, "gi"), APP.indx.colorPalette[window.localStorage.themeColor][i]);
