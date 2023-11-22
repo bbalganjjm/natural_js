@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.43.247
+ * Natural-UI v0.44.247
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2023 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-UI"] = "0.43.247";
+    N.version["Natural-UI"] = "0.44.247";
 
     $.fn.extend($.extend(N.prototype, {
         alert : function(msg, vars) {
@@ -893,39 +893,45 @@
                 }
 
                 if (opts.msg.length > 0) {
-                    opts.msgContext = opts.context.next(".msg__");
+                    opts.msgContext = opts.context;
+                    // for Material Design
+                    if(opts.msgContext.data("md_textfield_inst")) {
+                        opts.msgContext = opts.msgContext.closest(".mdc-text-field");
+                    }
+
+                    opts.msgContents = opts.msgContext.next(".msg__");
                     var isBeforeShow = false;
-                    if (opts.msgContext.length === 0 || isRemoved) {
-                        var limitWidth = opts.context.offset().left + opts.context.outerWidth() + 150;
+                    if (opts.msgContents.length === 0 || isRemoved) {
+                        var limitWidth = opts.msgContext.offset().left + opts.msgContext.outerWidth() + 150;
 
                         if(limitWidth > (window.innerWidth ? window.innerWidth : $(window).width())) {
-                            opts.msgContext = opts.context.before('<span class="msg__ alert_before_show__" style="display: none;"><ul class="msg_line_box__"></ul></span>').prev(".msg__");
-                            opts.msgContext.removeClass("orgin_left__").addClass("orgin_right__");
+                            opts.msgContents = opts.msgContext.before('<span class="msg__ alert_before_show__" style="display: none;"><ul class="msg_line_box__"></ul></span>').prev(".msg__");
+                            opts.msgContents.removeClass("orgin_left__").addClass("orgin_right__");
                             isBeforeShow = true;
                         } else {
-                            opts.msgContext = opts.context.after('<span class="msg__ alert_after_show__" style="display: none;"><ul class="msg_line_box__"></ul></span>').next(".msg__");
-                            opts.msgContext.removeClass("orgin_right__").addClass("orgin_left__");
+                            opts.msgContents = opts.msgContext.after('<span class="msg__ alert_after_show__" style="display: none;"><ul class="msg_line_box__"></ul></span>').next(".msg__");
+                            opts.msgContents.removeClass("orgin_right__").addClass("orgin_left__");
                             isBeforeShow = false;
                         }
 
-                        // set style class to msgContext element
-                        opts.msgContext.addClass("alert__ alert_tooltip__ hidden__");
+                        // set style class to msgContents element
+                        opts.msgContents.addClass("alert__ alert_tooltip__ hidden__");
 
-                        opts.msgContext.append('<a href="#" class="msg_close__" title="' + N.message.get(opts.message, "close") + '"></a>');
+                        opts.msgContents.append('<a href="#" class="msg_close__" title="' + N.message.get(opts.message, "close") + '"></a>');
                     }
                     if(opts.alwaysOnTop) {
-                        opts.msgContext.css("z-index", N.element.maxZindex(opts.container.find(opts.alwaysOnTopCalcTarget)) + 1);
+                        opts.msgContents.css("z-index", N.element.maxZindex(opts.container.find(opts.alwaysOnTopCalcTarget)) + 1);
                     }
 
                     var self = this;
-                    opts.msgContext.find(".msg_close__").on("click", function(e) {
+                    opts.msgContents.find(".msg_close__").click(function(e) {
                         e.preventDefault();
                         self.remove();
                     });
 
-                    var ul_ = opts.msgContext.find(".msg_line_box__").empty();
+                    var ul_ = opts.msgContents.find(".msg_line_box__").empty();
                     if (N.isArray(opts.msg)) {
-                        opts.msgContext.find(".msg_line_box__").empty();
+                        opts.msgContents.find(".msg_line_box__").empty();
                         $(opts.msg).each(function(i, msg_) {
                             if (opts.vars !== undefined) {
                                 opts.msg[i] = N.message.replaceMsgVars(msg_, opts.vars);
@@ -939,7 +945,7 @@
                         ul_.append('<li>' + opts.msg + '</li>');
                     }
                     if(isBeforeShow) {
-                        opts.msgContext.css("margin-left", "-" + String(opts.msgContext.outerWidth()) + "px");
+                        opts.msgContents.css("margin-left", "-" + String(opts.msgContents.outerWidth()) + "px");
                     }
                 } else {
                     this.remove();
@@ -999,20 +1005,20 @@
                     }
                 } else {
                     if (!N.isEmptyObject(opts.msg)) {
-                        opts.context.parent().css({
+                        opts.msgContext.parent().css({
                             "white-space": "normal"
                         });
 
-                        opts.msgContext.show();
+                        opts.msgContents.show();
 
                         opts.iTime = setTimeout(function() {
-                            opts.context.parent().css({
+                            opts.msgContext.parent().css({
                                 "white-space": ""
                             });
                             self[opts.closeMode]();
                         }, opts.input.displayTimeout);
 
-                        opts.msgContext.removeClass("hidden__").addClass("visible__");
+                        opts.msgContents.removeClass("hidden__").addClass("visible__");
                     }
                 }
 
@@ -1071,7 +1077,7 @@
                     opts.msgContents.removeClass("visible__").addClass("hidden__");
                     opts.msgContents.one(N.event.whichTransitionEvent(opts.msgContents), function(e){
                         clearTimeout(opts.iTime);
-                        opts.msgContext.remove();
+                        opts.msgContents.remove();
 
                         // DEPRECATED
                         if (opts.onHideG !== null) {
@@ -1127,10 +1133,10 @@
                         }
                     }).trigger("nothing");
                 } else {
-                    opts.msgContext.removeClass("visible__").addClass("hidden__");
-                    opts.msgContext.one(N.event.whichTransitionEvent(opts.msgContext), function(e){
+                    opts.msgContents.removeClass("visible__").addClass("hidden__");
+                    opts.msgContents.one(N.event.whichTransitionEvent(opts.msgContents), function(e){
                         clearTimeout(opts.iTime);
-                        opts.msgContext.remove();
+                        opts.msgContents.remove();
 
                         // DEPRECATED
                         if (opts.onRemoveG !== null) {
@@ -2101,8 +2107,13 @@
                     });
                 }
 
+                var contextParentWrapEle = opts.context.closest("label,span");
                 // append datepicker panel after context
-                opts.context.after(opts.contents);
+                if(contextParentWrapEle.length > 0 && contextParentWrapEle.css("overflow").indexOf("hidden") > -1) {
+                    opts.contextWrapper = contextParentWrapEle.after(opts.contents);
+                } else {
+                    opts.context.after(opts.contents);
+                }
 
                 return opts.contents;
             },
@@ -2232,32 +2243,36 @@
                     opts.context.trigger("onBeforeShow", [opts.context, opts.contents]);
 
                     // set datepicker position
-                    var parentEle = opts.contents.closest(".form__");
-                    if(parentEle.length > 0) {
-                        this.parentElePosition = parentEle.css("position").replace("fixed", "");    
+                    var formEle = opts.contents.closest(".form__");
+                    if(formEle.length > 0 && formEle.css("position") !== "relative") {
+                        this.formElePosition = formEle.css("position").replace("fixed", "");
+                        formEle.css("position", "relative");
                     }
-                    parentEle.css("position", "relative");
+                    var baseEle = opts.contextWrapper ? opts.contextWrapper : opts.context;
                     $(window).on("resize.datepicker", function() {
-                        var td = opts.context.closest("td");
+                        var tdEle = baseEle.closest("td");
                         var leftOfs;
-                        var parentPaddingLeft = parseInt(opts.context.parent().css("padding-left"));
-                        var parentPaddingRight = parseInt(opts.context.parent().css("padding-right"));
-                        if(td.length > 0) {
-                            td.css("display", "contents");
-                            leftOfs = opts.context.position().left + parentPaddingLeft;
-                            td.css("display", "");
+                        var formPaddingLeft = parseInt(formEle.css("padding-left"));
+                        var formPaddingRight = 0;
+                        baseEle.parentsUntil(formEle.parent()).each(function(i, ele) {
+                            formPaddingRight += parseInt($(ele).css("padding-right"));
+                        });
+                        if(tdEle.length > 0) {
+                            tdEle.css("display", "contents");
+                            leftOfs = baseEle.position().left + formPaddingLeft;
+                            tdEle.css("display", "");
                         } else {
-                            leftOfs = opts.context.position().left;
+                            leftOfs = baseEle.position().left;
                         }
 
                         var limitWidth;
-                        if(parentEle.length > 0 && parentEle.innerWidth() > opts.contents.outerWidth()) {
-                            limitWidth = parentEle.position().left + parentEle.width();
+                        if(formEle.length > 0 && formEle.innerWidth() > opts.contents.outerWidth()) {
+                            limitWidth = formEle.position().left + formEle.width();
                         } else {
                             limitWidth = (window.innerWidth ? window.innerWidth : $(window).width());
                         }
-                        if(opts.context.offset().left + opts.contents.width() > limitWidth) {
-                            opts.contents.css("left", (leftOfs + opts.context.outerWidth() - opts.contents.width() - (parentPaddingLeft + parentPaddingRight)) + "px");
+                        if(baseEle.offset().left + opts.contents.width() > limitWidth) {
+                            opts.contents.css("left", (leftOfs + baseEle.outerWidth() - opts.contents.width() - (formPaddingLeft + formPaddingRight)) + "px");
                             opts.contents.removeClass("orgin_left__").addClass("orgin_right__");
                         } else {
                             opts.contents.css("left", leftOfs + "px");
@@ -2307,8 +2322,8 @@
 
                     opts.contents.one(N.event.whichTransitionEvent(opts.contents), function(e){
                         $(this).remove();
-                        if(this.parentElePosition) {
-                            opts.contents.closest(".form__").css("position", this.parentElePosition);  
+                        if(self.formElePosition) {
+                            opts.contents.closest(".form__").css("position", self.formElePosition);
                         }
                         if(opts.onHide !== null) {
                             opts.onHide.call(self, opts.context);
@@ -3407,10 +3422,14 @@
             val : function(val) {
                 var opts = this.options;
 
-                var rtnVal = $(opts.type === 3 || opts.type === 4
-                            ? this.options.context.closest(".select_input_container__").find(":input") : this.options.context).vals(val);
-                if(val === undefined) {
-                    return rtnVal;
+                if(!N.isEmptyObject(opts.data)) {
+                    var rtnVal = $(opts.type === 3 || opts.type === 4
+                        ? this.options.context.closest(".select_input_container__").find(":input") : this.options.context).vals(val);
+                    if(val === undefined) {
+                        return rtnVal;
+                    }
+                } else {
+                    N.warn("[N.select.prototype.val]There is no data bound to the N.select component.");
                 }
 
                 return this;
@@ -3776,6 +3795,10 @@
                             continue;
                         }
                         ele = idContext.filter("#" + key);
+                        // for Material Design
+                        if(ele.length > 0 && !N.string.isEmpty(vals[key]) && ele.data("md_textfield_inst")) {
+                            ele.data("md_textfield_inst").value = " ";
+                        }
 
                         if(opts.onBeforeBindValue !== null) {
                             var filteredVal = opts.onBeforeBindValue.call(self, ele, vals[key], "bind");
@@ -4106,7 +4129,7 @@
             },
             validate : function() {
                 var opts = this.options;
-                var eles = opts.context.find(":input:not(:radio, :checkbox), :radio.select_template__, :checkbox.select_template__");
+                var eles = opts.context.find(":input:not(:radio, :checkbox), :radio.select_template__, :checkbox.select_template__, .mdc-text-field"); // for Material Design
                 if(opts.validate) {
                     eles.not(".validate_false__").trigger("unformat.formatter");
                 } else {
@@ -4116,7 +4139,7 @@
                 eles.trigger("validate.validator");
                 eles.not(".validate_false__").trigger("format.formatter");
 
-                return eles.filter(".validate_false__").length > 0 ? false : true;
+                return eles.filter(".validate_false__").length <= 0;
             },
             val : function(key, val, notify) {
                 var opts = this.options;
@@ -4131,6 +4154,10 @@
                 var rdonyFg = false;
                 var dsabdFg = false;
                 var ele = opts.context.find("#" + key);
+                // for Material Design
+                if(ele.length > 0 && !N.string.isEmpty(vals[key]) && ele.data("md_textfield_inst")) {
+                    ele.data("md_textfield_inst").value = " ";
+                }
 
                 if(opts.onBeforeBindValue !== null) {
                     var filteredVal = opts.onBeforeBindValue.call(self, ele, vals[key], "val");

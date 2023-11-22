@@ -285,7 +285,7 @@
             var params = meta.match(paramMatch);
             if(!params) return $.noop;
 
-            var attrNames = params[1].trim().split(':'), attrName = attrNames[0].trim(), propertyName = attrNames.length == 2 ? attrNames[1].trim() : '';
+            var attrNames = params[1].trim().split(':'), attrName = attrNames[0].trim(), propertyName = attrNames.length === 2 ? attrNames[1].trim() : '';
             var regexp = new RegExp(params[2].trim());
             var getter = getterMap[attrName] || getterMap['default'];
 
@@ -508,14 +508,14 @@
                     return str ? str.trim() : str;
                 },
                 isEmpty : function(str) {
-                    return N.string.trimToEmpty(str).length === 0 ? true : false;
+                    return N.string.trimToEmpty(str).length === 0;
                 },
                 byteLength : function(str, charByteLength) {
                     if(charByteLength === undefined) {
                         charByteLength = N.context.attr("core").charByteLength !== undefined ? N.context.attr("core").charByteLength : 3;
                     }
                     return (function(s,b,i,c){
-                        for(b=i=0;c=s.charCodeAt(i++);b+=c>>11?charByteLength:c>>7?2:1){};
+                        for(b=i=0;c=s.charCodeAt(i++);b+=c>>11?charByteLength:c>>7?2:1){}
                         return b;
                     })(str);
                 },
@@ -546,10 +546,10 @@
                  * Calculate the difference between two dates
                  */
                 diff : function(refDateStr, targetDateStr) {
-                    if (N.type(refDateStr) == "string") {
+                    if (N.type(refDateStr) === "string") {
                         refDateStr = this.strToDate(refDateStr).obj;
                     }
-                    if (N.type(targetDateStr) == "string") {
+                    if (N.type(targetDateStr) === "string") {
                         targetDateStr = this.strToDate(targetDateStr).obj;
                     }
                     return Math.ceil((targetDateStr - refDateStr) / 1000 / 24 / 60 / 60);
@@ -933,19 +933,19 @@
                  */
                 "is" : function(name) {
                     if(!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0) {
-                        return name === "opera" ? true : false;
+                        return name === "opera";
                     } else if(typeof InstallTrigger !== 'undefined') {
-                        return name === "firefox" ? true : false;
+                        return name === "firefox";
                     } else if(name !== "ios" && navigator.userAgent.match(/^((?!chrome|android|crios|fxios).)*safari/i)) {
-                        return name === "safari" ? true : false;
+                        return name === "safari";
                     } else if(!!window.chrome && !(!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0)) {
-                        return name === "chrome" ? true : false;
+                        return name === "chrome";
                     } else if(N.browser.msieVersion() > 0) {
-                        return name === "ie" ? true : false;
+                        return name === "ie";
                     } else if(navigator.userAgent.match(/like Mac OS X/i)) {
-                        return name === "ios" ? true : false;
+                        return name === "ios";
                     } else if(navigator.userAgent.match(/android/i)) {
-                        return name === "android" ? true : false;
+                        return name === "android";
                     }
                     return false;
                 },
@@ -1183,7 +1183,7 @@
                     if(!ele.css(css) || ele.css(css).startsWith("0")) {
                         return 0;
                     }
-                    return duration = Math.max.apply(undefined, $(ele.css(css).split(",")).map(function() {
+                    return Math.max.apply(undefined, $(ele.css(css).split(",")).map(function() {
                         if(this.indexOf("ms") > -1) {
                             return parseInt(N.string.trimToZero(this));
                         } else {
@@ -1310,9 +1310,9 @@
                     beat -= 1000;
                 if (beat < 0)
                     beat += 1000;
-                if ((String(beat)).length == 1)
+                if ((String(beat)).length === 1)
                     beat = "00" + beat;
-                if ((String(beat)).length == 2)
+                if ((String(beat)).length === 2)
                     beat = "0" + beat;
                 return beat;
             },
@@ -1324,7 +1324,7 @@
             d : function() {
                 // Day of the month, 2 digits with leading zeros
                 var j = String(this.j());
-                return (j.length == 1 ? "0" + j : j);
+                return (j.length === 1 ? "0" + j : j);
             },
             D : function() {
                 // A textual representation of a day, three letters
@@ -1349,24 +1349,24 @@
             h : function() {
                 // 12-hour format of an hour with leading zeros
                 var g = String(this.g());
-                return (g.length == 1 ? "0" + g : g);
+                return (g.length === 1 ? "0" + g : g);
             },
             H : function() {
                 // 24-hour format of an hour with leading zeros
                 var G = String(this.G());
-                return (G.length == 1 ? "0" + G : G);
+                return (G.length === 1 ? "0" + G : G);
             },
             i : function() {
                 // Minutes with leading zeros
                 var min = String(date.getMinutes());
-                return (min.length == 1 ? "0" + min : min);
+                return (min.length === 1 ? "0" + min : min);
             },
             I : function() {
                 // Whether or not the date is in daylight saving time (DST)
                 // note that this has no bearing in actual DST mechanics,
                 // and is just a pure guess. buyer beware.
                 var noDST = new Date("January 1 " + this.Y() + " 00:00:00");
-                return (noDST.getTimezoneOffset() == date.getTimezoneOffset() ? 0 : 1);
+                return (noDST.getTimezoneOffset() === date.getTimezoneOffset() ? 0 : 1);
             },
             j : function() {
                 // Day of the month without leading zeros
@@ -1390,7 +1390,7 @@
             m : function() {
                 // Numeric representation of a month, with leading zeros
                 var n = String(this.n());
-                return (n.length == 1 ? "0" + n : n);
+                return (n.length === 1 ? "0" + n : n);
             },
             M : function() {
                 // A short textual representation of a month, three letters
@@ -1410,8 +1410,8 @@
                 var os = Math.abs(date.getTimezoneOffset());
                 var h = String(Math.floor(os / 60));
                 var m = String(os % 60);
-                if(h.length == 1) h = "0" + h;
-                if(m.length == 1) m = "0" + m;
+                if(h.length === 1) h = "0" + h;
+                if(m.length === 1) m = "0" + m;
                 return date.getTimezoneOffset() < 0 ? "+" + h + m : "-" + h + m;
             },
             P : function() {
@@ -1431,7 +1431,7 @@
             s : function() {
                 // Seconds, with leading zeros
                 var sec = String(date.getSeconds());
-                return (sec.length == 1 ? "0" + sec : sec);
+                return (sec.length === 1 ? "0" + sec : sec);
             },
             S : function() {
                 // English ordinal suffix for the day of the month, 2 characters
@@ -1457,7 +1457,7 @@
             t : function() {
                 // thanks to Matt Bannon for some much needed code-fixes here!
                 var daysinmonths = [ null, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
-                if (this.L() == 1 && this.n() == 2)
+                if (this.L() === 1 && this.n() === 2)
                     return 29; // ~leap day
                 return daysinmonths[this.n()];
             },
@@ -1513,7 +1513,7 @@
                 if (date.getFullYear) {
                     var newDate = new Date("January 1 2001 00:00:00 +0000");
                     x = newDate.getFullYear();
-                    if (x == 2001) {
+                    if (x === 2001) {
                         // i trust the method now
                         return date.getFullYear();
                     }
@@ -1544,7 +1544,7 @@
         var formatString = input.split("");
         var i = 0;
         while (i < formatString.length) {
-            if (formatString[i] == "%") {
+            if (formatString[i] === "%") {
                 // this is our way of allowing users to escape stuff
                 formatString.splice(i, 1);
             } else {
@@ -1598,7 +1598,7 @@
 
             // strip out invalid characters
             v = v.replace(new RegExp("[^" + rx["~"] + "]", "gi"), "");
-            if ((_d === true) && (v.length == this.strippedValue.length)) {
+            if ((_d === true) && (v.length === this.strippedValue.length)) {
                 v = v.substring(0, v.length - 1);
             }
             this.strippedValue = v;
@@ -1609,7 +1609,7 @@
                 // check to see if current character is a mask, escape commands are not a mask character
                 t = (r.indexOf(x) > -1);
                 // if the current character is an escape command, then grab the next character
-                if (x == "!") {
+                if (x === "!") {
                     x = m.charAt(i++);
                 }
                 // build a regex to test against
@@ -1631,7 +1631,7 @@
                 for (i = 0; i < a.length; i++) {
                     if (a[i].mask) {
                         while (v.length > 0 && !(new RegExp(rt[j])).test(v.charAt(j))) {
-                            v = (v.length == 1) ? "" : v.substring(1);
+                            v = (v.length === 1) ? "" : v.substring(1);
                         }
                         if (v.length > 0) {
                             nv += v.charAt(j);
@@ -1671,7 +1671,7 @@
                 return this.throwError(1, "An invalid numeric user format was specified for the \nNumeric user format constructor.", _v);
             }
 
-            if ((_d === true) && (v.length == this.strippedValue.length)) {
+            if ((_d === true) && (v.length === this.strippedValue.length)) {
                 v = v.substring(0, v.length - 1);
             }
 
@@ -1699,15 +1699,15 @@
             var vd = (v.indexOf(".") > -1) ? v.split(".")[1] : "";
             var _vd = vd;
 
-            var isNegative = (vn !== 0 && Math.abs(vn) * -1 == vn);
+            var isNegative = (vn !== 0 && Math.abs(vn) * -1 === vn);
 
             // check for masking operations
             var show = {
                 "$" : /^[\$]/.test(m),
                 "(" : (isNegative && (m.indexOf("(") > -1)),
-                "+" : ((m.indexOf("+") != -1) && !isNegative)
+                "+" : ((m.indexOf("+") !== -1) && !isNegative)
             };
-            show["-"] = (isNegative && (!show["("] || (m.indexOf("-") != -1)));
+            show["-"] = (isNegative && (!show["("] || (m.indexOf("-") !== -1)));
 
             // replace all non-place holders from the mask
             m = m.replace(/[^#0.,]*/gi, "");
@@ -1716,9 +1716,9 @@
             // get number of digits after decimal point in mask
             var dm = (m.indexOf(".") > -1) ? m.split(".")[1] : "";
             if (dm.length === 0) {
-                if (_p !== undefined && _p == "round") {
+                if (_p !== undefined && _p === "round") {
                     vi = String(Math.round(Number(vi)));
-                } else if (_p !== undefined && _p == "ceil") {
+                } else if (_p !== undefined && _p === "ceil") {
                     vi = String(Math.ceil(Number(vi)));
                 } else {
                     vi = String(Math.floor(Number(vi)));
@@ -1730,9 +1730,9 @@
                 var md = dm.lastIndexOf("0") + 1;
                 // if the number of decimal places is greater than the mask, then round off
                 if (vd.length > dm.length) {
-                    if (_p !== undefined && _p == "round") {
+                    if (_p !== undefined && _p === "round") {
                         vd = String(Math.round(Number(vd.substring(0, dm.length + 1)) / 10));
-                    } else if (_p !== undefined && _p == "ceil") {
+                    } else if (_p !== undefined && _p === "ceil") {
                         vd = String(Math.ceil(Number(vd.substring(0, dm.length + 1)) / 10));
                     } else {
                         vd = String(Math.floor(Number(vd.substring(0, dm.length + 1)) / 10));
