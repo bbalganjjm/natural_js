@@ -2245,34 +2245,35 @@
                     // set datepicker position
                     var formEle = opts.contents.closest(".form__");
                     if(formEle.length > 0 && formEle.css("position") !== "relative") {
-                        this.formElePosition = formEle.css("position").replace("fixed", "");
+                        this.formEleOrgPosition = formEle.css("position").replace("static", "");
                         formEle.css("position", "relative");
                     }
                     var baseEle = opts.contextWrapper ? opts.contextWrapper : opts.context;
                     $(window).on("resize.datepicker", function() {
-                        var tdEle = baseEle.closest("td");
-                        var leftOfs;
-                        var formPaddingLeft = parseInt(formEle.css("padding-left"));
+                        var formPaddingLeft = 0;
+                        baseEle.parentsUntil(formEle.parent()).each(function(i, ele) {
+                            formPaddingLeft += parseInt($(ele).css("padding-left")) + parseInt($(ele).css("margin-left"));
+                        });
                         var formPaddingRight = 0;
                         baseEle.parentsUntil(formEle.parent()).each(function(i, ele) {
-                            formPaddingRight += parseInt($(ele).css("padding-right"));
+                            formPaddingRight += parseInt($(ele).css("padding-right")) + parseInt($(ele).css("margin-right"));
                         });
+                        var leftOfs = baseEle.position().left;
+                        var tdEle = baseEle.closest("td");
                         if(tdEle.length > 0) {
                             tdEle.css("display", "contents");
                             leftOfs = baseEle.position().left + formPaddingLeft;
                             tdEle.css("display", "");
-                        } else {
-                            leftOfs = baseEle.position().left;
                         }
 
                         var limitWidth;
                         if(formEle.length > 0 && formEle.innerWidth() > opts.contents.outerWidth()) {
-                            limitWidth = formEle.position().left + formEle.width();
+                            limitWidth = formEle.offset().left + parseInt(formEle.css("padding-left")) + formEle.width();
                         } else {
                             limitWidth = (window.innerWidth ? window.innerWidth : $(window).width());
                         }
                         if(baseEle.offset().left + opts.contents.width() > limitWidth) {
-                            opts.contents.css("left", (leftOfs + baseEle.outerWidth() - opts.contents.width() - (formPaddingLeft + formPaddingRight)) + "px");
+                            opts.contents.css("left", (leftOfs + baseEle.outerWidth() - opts.contents.width()) + "px");
                             opts.contents.removeClass("orgin_left__").addClass("orgin_right__");
                         } else {
                             opts.contents.css("left", leftOfs + "px");
@@ -2321,10 +2322,10 @@
                     opts.contents.removeClass("visible__").addClass("hidden__");
 
                     opts.contents.one(N.event.whichTransitionEvent(opts.contents), function(e){
-                        $(this).remove();
-                        if(self.formElePosition) {
-                            opts.contents.closest(".form__").css("position", self.formElePosition);
+                        if(self.formEleOrgPosition !== undefined) {
+                            $(this).closest(".form__").css("position", self.formEleOrgPosition);
                         }
+                        $(this).remove();
                         if(opts.onHide !== null) {
                             opts.onHide.call(self, opts.context);
                         }
