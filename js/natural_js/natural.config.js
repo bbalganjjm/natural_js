@@ -767,7 +767,7 @@
                  *  - The top position of the fixed header cell(th) may not match when the fixedcol option is activated.
                  *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
                  */
-                "fixedcolHeadMarginTop" : N.browser.is("ie") || N.browser.is("firefox") ? 0 : 1,
+                "fixedcolHeadMarginTop" : 0,
                 /**
                  * Global misc.fixedcolHeadMarginLeft option
                  *  - The left position of the fixed header cell(th) may not match when the fixedcol option is activated.
@@ -785,7 +785,7 @@
                  *  - The top position of the fixed body cell(td) may not match when the fixedcol option is activated.
                  *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
                  */
-                "fixedcolBodyMarginTop" : N.browser.is("ie") ? -0.5 : N.browser.is("firefox") ? -1 : 0,
+                "fixedcolBodyMarginTop" : -1,
                 /**
                  * Global misc.fixedcolBodyMarginLeft option
                  *  - The left position of the fixed body cell(td) may not match when the fixedcol option is activated.
