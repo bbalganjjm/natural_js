@@ -847,7 +847,6 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     min-width: 60px;
     text-align: center;
     background-color: #81C784;
-    border-radius: 0 3px 0 0;
     line-height: 20px;
 }
 
@@ -889,6 +888,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     border: 1px solid #66BB6A;
     background-color: #C8E6C9;
     color : rgba(0, 0, 0, 0.87);
+    height: 24px;
 }
 
 .tab__>.tab_scroll_prev__ span {
@@ -1563,6 +1563,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 .docs__>.docs_tab_context__>.docs_tabs__>.docs_tab__ {
     display: inline-block;
+    height: 24px;
     margin-left: 1px;
     padding: 0;
     border-top: 1px solid #66BB6A;
