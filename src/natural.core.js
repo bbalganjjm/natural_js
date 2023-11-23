@@ -1,5 +1,5 @@
 /*!
- * Natural-CORE v0.19.30
+ * Natural-CORE v0.19.29
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -304,7 +304,7 @@
         // N local variables
         $.extend(N, {
             version : {
-                "Natural-CORE" : "0.19.30"
+                "Natural-CORE" : "0.19.29"
             },
             /**
              * Set and get locale value
@@ -960,14 +960,16 @@
                  * Get scrollbars width for connected browser
                  */
                 scrollbarWidth : function() {
-                    var div = $('<div style="width:50px;height:50px;overflow:hidden;position:absolute;top:-200px;left:-200px;">' +
-                        '<div style="height:100px;"></div>');
-                    $('body').append(div);
-                    var w1 = $("div", div).innerWidth();
-                    div.css('overflow-y', "scroll");
+                    var div = $('<div class="antiscroll-inner" style="width:50px;height:50px;overflow-y:scroll;' +
+                        'position:absolute;top:-200px;left:-200px;"><div style="height:100px;width:100%"/>' +
+                        '</div>');
+
+                    $("body").append(div);
+                    var w1 = $(div).innerWidth();
                     var w2 = $("div", div).innerWidth();
                     $(div).remove();
-                    return (w1 - w2);
+
+                    return w1 - w2;
                 }
             },
             /**
