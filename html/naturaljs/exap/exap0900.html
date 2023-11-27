@@ -288,7 +288,7 @@ N(".exap0900").cont({
              }).show();
         });
         // 3-9. effect
-        N(".form01, .form02, .form03", cont.view).mouseover(function() {
+        N(".form01, .form02, .form03", cont.view).on("mouseover", function() {
             var formEle;
             if(N(this).hasClass("form01")) {
                 formEle = N(".form01", cont.view);
@@ -305,7 +305,7 @@ N(".exap0900").cont({
             });
         });
         // 3-10. effect
-        N(".form01, .form02, .form03", cont.view).mouseout(function() {
+        N(".form01, .form02, .form03", cont.view).on("mouseout", function() {
             N(".form01, .form02, .form03", cont.view).css({
                 "box-shadow" : "",
                 "opacity" : "",

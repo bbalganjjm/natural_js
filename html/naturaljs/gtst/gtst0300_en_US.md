@@ -219,7 +219,7 @@ initComponents : function() {
 ...
 ```
 
-<p class="alert">All functions and methods of Natural-JS support method chaining that can execute commands one after another, such as N([]).select.bind().</a>
+<p class="alert">All functions and methods of Natural-JS support method chaining that can execute commands one after another, such as N([]).select.bind().</p>
 
 Data-related components such as N.select are separated from component initialization and data binding. ```var grid = N([object, object, ...]).grid()``` The "a" command returns the component instance, the bind() method on the component instance binds the data, and the add() method calls creates new row data.
 

@@ -81,7 +81,7 @@ input[type='radio'], input[type='checkbox'] {
 }
 
 .select_input_label__ input[type='radio'], .select_input_label__ input[type='checkbox'] {
-    margin: 0px 8px 0px 16px;
+    margin: 0 8px 0 16px;
 }
 
 .mdc-text-field input, .mdc-text-field textarea,

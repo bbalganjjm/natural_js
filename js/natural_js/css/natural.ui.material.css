@@ -1342,7 +1342,6 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     background-color: transparent !important;
     box-shadow: none !important;
     color: inherit;
-    border-radius: inherit;
     width: auto;
     padding: 0;
     float: none;

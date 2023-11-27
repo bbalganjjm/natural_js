@@ -171,41 +171,6 @@
                 </p>
             </td>
         </tr>
-        <tr>
-            <td>
-                <p class="depricated">effect</p>
-                <p>Deprecated</p>
-            </td>
-            <td class="depricated">boolean|json object</td>
-            <td class="depricated">false</td>
-            <td class="depricated"></td>
-            <td class="depricated">
-                <p>HTML 컨텐츠를 가져올 때 전환 효과를 보여줄지 여부를 설정합니다.</p>
-                <p>효과를 적용하지 않으려면 false를 입력하고 효과를 입력하려면 다음과 같이 입력합니다.</p>
-                <p>["이펙트", "시간(ms)", "이펙트가 끝날 때마다 실행될 콜백 함수"]</p>
-                <pre><code>["slideDown", 300, null]</code></pre>
-                <p>이펙트 종류 : show, hide, slideUp, slideDown, fadeIn, fadeOut</p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p class="depricated">async</p>
-                <p>Deprecated</p>
-            </td>
-            <td class="depricated">boolean</td>
-            <td class="depricated">true</td>
-            <td class="depricated" style="text-align: center;">X</td>
-            <td class="depricated">
-                <p>false로 설정하면 Ajax 요청을 동기 방식으로 처리합니다.</p>
-                <p lang="ko_KR" class="alert">async 옵션은 jQuery.ajax 함수의 옵션이 그대로 적용됩니다.
-                    <a class="link" target="blank_" href="http://api.jquery.com/jquery.ajax/">jQuery.ajax</a>
-                    매뉴얼의 settings 부분에서 async 속성을 참고하세요.
-                </p>
-                <p lang="en_US" class="alert">The async option remains the same as the jQuery.ajax function option.
-                    See the async property in the settings section of the <a class="link" target="blank_" href="http://api.jquery.com/jquery.ajax/">jQuery.ajax</a> manual.
-                </p>
-            </td>
-        </tr>
     </table>
     <p lang="ko_KR" class="alert">N.comm은 jQuery.ajax 모듈을 사용하여 Ajax 요청을 처리합니다. jQuery.ajax의 beforeSend, success, error, complete 옵션을 제외 한 옵션들은 N.comm에서도 그대로 적용됩니다.</p>
     <p lang="en_US" class="alert">N.comm uses the jQuery.ajax module to process Ajax requests. The options in jQuery.ajax also apply to N.comm except for beforeSend, success, error and complete options.</p>

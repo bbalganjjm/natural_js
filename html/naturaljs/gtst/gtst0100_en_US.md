@@ -92,7 +92,7 @@ You have finished configuring your execution environment. Now let's write some s
 
 Natural-JS has a simple source code composition rule to separate development areas and design areas within a source code of page block and to guarantee the scope between elements and scripts. It is not so difficult. You just need to separate the view area and the Controller area as shown below and arrange them in order.
 
-<p class="alert">For more information about View and Controller, please refer to the <a href="#cmVmcjAyMDElMjRDb250cm9sbGVyJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAyMDEuaHRtbA==">Controller</a> menu.</a>
+<p class="alert">For more information about View and Controller, please refer to the <a href="#cmVmcjAyMDElMjRDb250cm9sbGVyJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAyMDEuaHRtbA==">Controller</a> menu.</p>
 
 **block01.html**
 

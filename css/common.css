@@ -303,7 +303,7 @@ th, tfoot td {
     padding: 10px 10px 10px 30px;
     line-height: 200%;
     opacity: 0;
-    box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.2);
 
     transform: scaleY(0);
     transform-origin: top;
@@ -326,11 +326,10 @@ th, tfoot td {
 .alert:not(article) {
     margin: 5px;
     padding: 0.23em 0.5em 0.23em 1.8em;
-    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAkElEQVQoz5WQQQrCUAxE3/z/FXqDegnPUC8k9AIFV17LjZfpBVzUn7ipIDZiGxgCk2EyiQwubKgEDBv0Awb+zRp0Bl3Ae/nhdJr7LYq0rcJIUmtSG2njDe497n00koELdgCC5+xUFPnAhEGd4TXnvcH1g1ugJMjvfKr1DoxIh+Q+/jv+YXCemmbd50w6rtG9ANZ+P7VXtHZhAAAAAElFTkSuQmCC') no-repeat 6px 6px;
     font-size: 0.95em;
     line-height: 1.7;
     opacity: 0.8;
-    background-color: #E8F5E9;
+    background: #E8F5E9 url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAkElEQVQoz5WQQQrCUAxE3/z/FXqDegnPUC8k9AIFV17LjZfpBVzUn7ipIDZiGxgCk2EyiQwubKgEDBv0Awb+zRp0Bl3Ae/nhdJr7LYq0rcJIUmtSG2njDe497n00koELdgCC5+xUFPnAhEGd4TXnvcH1g1ugJMjvfKr1DoxIh+Q+/jv+YXCemmbd50w6rtG9ANZ+P7VXtHZhAAAAAElFTkSuQmCC') no-repeat 6px 6px;
     border: 1px solid #C8E6C9;
 }
 
@@ -462,12 +461,10 @@ article .btnBox {
 .apiDoc .apidemo .form .demo-desc {
     position: absolute;
     padding: 5px;
-    margin: 0;
-    margin-bottom: 15px;
+    margin: 0 0 15px;
     overflow: auto;
-    background-color: #fff;
     border: 1px solid #81C784;
-    box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.2);
     background-color: #E8F5E9EE;
     z-index: 1;
     opacity: 0;
@@ -475,7 +472,6 @@ article .btnBox {
     transform : scaleY(0);
     transform-origin: top;
     transition: transform 0.5s ease, opacity 0.5s ease;
-    overflow: auto;
     max-height: 300px;
 }
 
@@ -503,8 +499,7 @@ article .btnBox {
 .docs_contents__>.view_context__ .searchBox ul {
     list-style: none;
     margin: 0;
-    padding: 0;
-    padding-top: 5px;
+    padding: 5px 0 0;
 }
 
 .docs_contents__>.view_context__ .searchBox ul li {
@@ -560,7 +555,6 @@ article .btnBox {
 .docs_contents__ .view_context__ .click {
     margin-top: 30px;
     padding: 5px 40px 5px 15px;
-    background: url("../images/comm/icon/click.png") no-repeat 160px 6px;
     display: inline-block;
     height: 35px;
     font-weight: bold;
@@ -568,7 +562,7 @@ article .btnBox {
     border: 1px dotted #4CAF50;
     border-radius: 3px;
     box-shadow: 1px 1px 3px #BCFBBC;
-    background-color: #E8F5E9;
+    background: #E8F5E9 url("../images/comm/icon/click.png") no-repeat 160px 6px;
     cursor: pointer;
     font-size: 17px;
 }

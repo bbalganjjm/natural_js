@@ -219,7 +219,7 @@ initComponents : function() {
 ...
 ```
 
-<p class="alert">Natural-JS의 모든 함수 및 메서드 들은 N([]).select.bind()와 같이 명령을 연달아 실행할 수 있는 메서드체이닝을 지원합니다.</a>
+<p class="alert">Natural-JS의 모든 함수 및 메서드 들은 N([]).select.bind()와 같이 명령을 연달아 실행할 수 있는 메서드체이닝을 지원합니다.</p>
 
 N.select와 같은 데이터 관련 컴포넌트들은 컴포넌트 초기화와 데이터 바인딩이 분리되어 있습니다. ```var grid = N([object, object, ...]).grid()``` 명령을 실행하면 컴포넌트 인스턴스가 반환되고 컴포넌트 인스턴스에서 bind() 메서드를 실행하면 데이터가 바인딩되고 add() 메서드를 호출하면 새로운 행 데이터가 생성됩니다.
 
