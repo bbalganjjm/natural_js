@@ -457,7 +457,7 @@
                 ds : function() {
                     if($(N.context.attr("architecture").page.context).find(">#data_sync_temp__").length > 0) {
                         $(N.context.attr("architecture").page.context).find(">#data_sync_temp__").instance("ds").obserable
-                            = $.unique($(".grid__, .list__, .form__:not('.grid__>tbody, .list__>li'), .tree__", N.context.attr("architecture").page.context).instance());
+                            = $.uniqueSort($(".grid__, .list__, .form__:not('.grid__>tbody, .list__>li'), .tree__", N.context.attr("architecture").page.context).instance());
                     }
                 }
             },
@@ -503,12 +503,6 @@
                         str = str + padStr;
                     }
                     return str;
-                },
-                /**
-                 * @deprecated 2023.11.27
-                 */
-                trim : function(str) {
-                    return str ? String(str).trim() : "";
                 },
                 isEmpty : function(str) {
                     return N.string.trimToEmpty(str).length === 0;
@@ -1130,25 +1124,20 @@
 
                         // Allow: Ctrl + char for action save, print, copy,
                         // ...etc
-                        if ((e.ctrlKey && charsKeys.indexOf(key) != -1) ||
+                        if ((e.ctrlKey && charsKeys.indexOf(key) !== -1) ||
                             // Fix Issue: f1 : f12 Or Ctrl + f1 : f12, in
                             // Firefox browser
-                            (navigator.userAgent.indexOf("Firefox") != -1 && ((e.ctrlKey && e.keyCode && e.keyCode > 0 && key >= 112 && key <= 123) || (e.keyCode && e.keyCode > 0 && key && key >= 112 && key <= 123)))) {
+                            (navigator.userAgent.indexOf("Firefox") !== -1 && ((e.ctrlKey && e.keyCode && e.keyCode > 0 && key >= 112 && key <= 123) || (e.keyCode && e.keyCode > 0 && key && key >= 112 && key <= 123)))) {
                             return true
                         }
                             // Allow: Special Keys
-                        else if (specialKeys.indexOf(key) != -1) {
+                        else if (specialKeys.indexOf(key) !== -1) {
                             // Fix Issue: right arrow & Delete & ins in FireFox
-                            if (navigator.userAgent.indexOf("Firefox") != -1 && (key == 39 || key == 45 || key == 46)) {
-                                return e.keyCode != undefined && e.keyCode > 0;
+                            if (navigator.userAgent.indexOf("Firefox") !== -1 && (key == 39 || key == 45 || key == 46)) {
+                                return e.keyCode !== undefined && e.keyCode > 0;
                             }
                                 // DisAllow : "#" & "$" & "%"
-                            else if (e.shiftKey && (key == 35 || key == 36 || key == 37)) {
-                                return false;
-                            }
-                            else {
-                                return true;
-                            }
+                            else return !(e.shiftKey && (key == 35 || key == 36 || key == 37));
                         }
                         else {
                             return false;
@@ -1175,8 +1164,8 @@
                     ele.on("mousewheel.ui DOMMouseScroll.ui",function(e) {
                         var delta = e.originalEvent.wheelDelta || -e.originalEvent.detail;
                         if (delta > 0 && $(this).scrollTop() <= 0) return false;
-                        if (delta < 0 && $(this).scrollTop() >= this.scrollHeight - $(this).height()) return false;
-                        return true;
+                        return !(delta < 0 && $(this).scrollTop() >= this.scrollHeight - $(this).height());
+
                     });
                 },
                 /**
@@ -1282,7 +1271,7 @@
     // the current "this" date object's set time.
     //
     // supported switches are
-    // a, A, B, c, d, D, F, g, G, h, H, i, I (uppercase i), j, l (lowecase L),
+    // a, A, B, c, d, D, F, g, G, h, H, i, I (uppercase i), j, l (lowercase L),
     // L, m, M, n, N, O, P, r, s, S, t, U, w, W, y, Y, z, Z
     //
     // unsupported (as compared to date in PHP 5.1.3)
@@ -1712,7 +1701,7 @@
             };
             show["-"] = (isNegative && (!show["("] || (m.indexOf("-") !== -1)));
 
-            // replace all non-place holders from the mask
+            // replace all non-placeholders from the mask
             m = m.replace(/[^#0.,]*/gi, "");
 
             // make sure there are the correct number of decimal places
@@ -1765,9 +1754,9 @@
                 }
             }
 
-            // check to see if we need commas in the thousands place holder
+            // check to see if we need commas in the thousands placeholder
             if (/[#0]+,[#0]{3}/.test(m)) {
-                // add the commas as the place holder
+                // add the commas as the placeholder
                 var x = [], i = 0, n = Number(vi);
                 while (n > 999) {
                     x[i] = "00" + String(n % 1000);

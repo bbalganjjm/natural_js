@@ -11,7 +11,7 @@
 .alert__.block_overlay_msg__ {
     background: #fff;
     border: 1px solid #66BB6A;
-    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
 }
 
 .alert__.block_overlay_msg__ .msg_title_box__ {
@@ -101,7 +101,7 @@
     position: absolute;
     background-color: #2E7D32;
     padding: 5px;
-    box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.2);
     margin-right: 5px;
 }
 
@@ -161,7 +161,7 @@
 
 /* Popup */
 .popup__.block_overlay_msg__ {
-    box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.2);
 }
 
 .popup__.block_overlay_msg__ > .msg_title_box__ {
@@ -201,13 +201,12 @@
 /* Button */
 a.btn_common__, input[type='button'].btn_common__, button.btn_common__ {
     display: inline-block;
-    margin-bottom: 2px 0 2px 0 !important;
     overflow: visible;
     cursor: pointer;
     text-align: center;
     white-space: nowrap;
     vertical-align: middle;
-    margin: 0px;
+    margin: 0;
 }
 
 a.btn_disabled__, input.btn_disabled__, button.btn_disabled__ {
@@ -285,7 +284,7 @@ input[type='button'].btn_smaller__, button.btn_smaller__ {
 }
 
 a.btn_small__, input[type='button'].btn_small__, button.btn_small__ {
-    padding: 0px 8px 0px 8px;
+    padding: 0 8px 0 8px;
     font-size: 11px;
     height: 20px;
     line-height: 18px;
@@ -301,7 +300,7 @@ input[type='button'].btn_small__, button.btn_small__ {
 }
 
 a.btn_medium__, input[type='button'].btn_medium__, button.btn_medium__ {
-    padding: 0px 10px 0px 10px;
+    padding: 0 10px 0 10px;
     font-size: 12px;
     height: 26px;
     line-height: 24px;
@@ -316,7 +315,7 @@ input[type='button'].btn_medium__, button.btn_medium__ {
 }
 
 a.btn_large__, input[type='button'].btn_large__, button.btn_large__ {
-    padding: 0px 10px 0px 10px;
+    padding: 0 10px 0 10px;
     font-size: 14px;
     height: 33px;
     line-height: 30px;
@@ -333,7 +332,7 @@ input[type='button'].btn_large__, button.btn_large__ {
 }
 
 a.btn_big__, input[type='button'].btn_big__, button.btn_big__ {
-    padding: 0px 10px 0px 10px;
+    padding: 0 10px 0 10px;
     font-size: 16px;
     height: 46px;
     line-height: 43px;
@@ -530,7 +529,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     will-change: margin-right;
     transform: translateZ(0)\0; /* for ie 8+ */
 
-    margin-right: 0px;
+    margin-right: 0;
     transition: margin-right 0.3s ease;
 }
 
@@ -562,7 +561,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     max-width: 300px;
     position: absolute;
     background-color: #E8F5E9;
-    box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.2);
     padding: 4px;
     margin: 0;
     color : rgba(0, 0, 0, 0.87);
@@ -742,7 +741,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
     border: 1px solid #A5D6A7;
     background-color: #E8F5E9;
-    box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.2);
     padding: 5px;
     text-align: left;
     z-index: 1;
@@ -950,7 +949,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     transform: translateZ(0)\0; /* for ie 8+ */
 
     border: 1px solid #A5D6A7;
-    box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.2);
     background-color: #FFFFFF;
     font-size: 95%;
     z-index: 1;
@@ -1133,7 +1132,8 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     text-align: center;
 }
 
-.datepicker_contents__.years_panel_position_top__ .datepicker_years_panel__ {
+.datepicker_contents__.years_panel_position_top__ .datepicker_years_panel__,
+.datepicker_contents__.months_panel_position_top__ .datepicker_top_months_panel__{
     float: none;
     display: inline;
     background-color: inherit;
@@ -1141,7 +1141,8 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     width: auto;
 }
 
-.datepicker_contents__.years_panel_position_top__ .datepicker_year_item__ {
+.datepicker_contents__.years_panel_position_top__ .datepicker_year_item__,
+.datepicker_contents__.months_panel_position_top__ .datepicker_month_item__{
     border: none !important;
     cursor: pointer;
     line-height: inherit;
@@ -1149,7 +1150,6 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     background-color: transparent !important;
     box-shadow: none !important;
     color: inherit;
-    border-radius: inherit;
     width: auto;
     padding: 0;
     float: none;
@@ -1190,33 +1190,6 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     font-weight: bold;
 }
 
-.datepicker_contents__.months_panel_position_top__ .datepicker_top_months_panel__ {
-    float: none;
-    display: inline;
-    background-color: inherit;
-    border: none;
-    width: auto;
-}
-
-.datepicker_contents__.months_panel_position_top__ .datepicker_month_item__ {
-    border: none !important;
-    cursor: pointer;
-    line-height: inherit;
-    text-align: center;
-    background-color: transparent !important;
-    box-shadow: none !important;
-    color: inherit;
-    border-radius: inherit;
-    width: auto;
-    padding: 0;
-    float: none;
-
-    /* Remove the arrow in select box */
-    border-radius: 0;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-}
 /* Remove the arrow in select box(ie)*/
 .datepicker_contents__.months_panel_position_top__ .datepicker_month_item__::-ms-expand {
     display: none;
@@ -1485,7 +1458,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     line-height: 16px;
     text-align: left;
     word-break: break-all;
-    box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.2);
     transform: scale(0.7);
     opacity: 0;
     background-color: #2E7D32;
@@ -1678,7 +1651,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     border: 1px solid #A5D6A7;
     max-width: 300px;
     background-color: #E8F5E9;
-    box-shadow: -3px 3px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: -3px 3px 0 rgba(0, 0, 0, 0.2);
     padding: 2px 6px 2px 6px;
     margin: 2px 0 0 0;
     transform: scale(0.7);

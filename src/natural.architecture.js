@@ -56,7 +56,7 @@
                 if((jo = this(obj)) instanceof Error){
                     isFilterStopped = true;
                     return false;
-                };
+                }
                 if(jo !== undefined) {
                     obj = $(jo);
                 }
@@ -98,13 +98,13 @@
                 var spltSepa = N.context.attr("core").spltSepa;
 
                 // Indexing to execute filters with the order property defined first and filters with no order property defined
-                for ( var key in filters) {
+                for (var key in filters) {
                     if(filters[key].order !== undefined) {
                         orderedFilterKeys.push(filters[key].order + spltSepa + key);
                     }
                 }
                 orderedFilterKeys.sort();
-                for ( var key in filters) {
+                for (var key in filters) {
                     if(filters[key].order === undefined) {
                         orderedFilterKeys.push(key);
                     }
@@ -160,7 +160,7 @@
                     if(this(obj.request) instanceof Error){
                         isFilterStopped = true;
                         return false;
-                    };
+                    }
                 });
                 if(isFilterStopped) return;
 
@@ -216,11 +216,6 @@
                             if(!obj.is(N.context.attr("architecture").page.context)) {
                                 // Removes garbage instances from obserables of N.ds 
                                 N.gc.ds();                              
-                            }
-                            
-                            // @deprecated
-                            if (obj.request.options.effect) {
-                                obj.hide()[obj.request.options.effect[0]](obj.request.options.effect[1], obj.request.options.effect[2]);
                             }
                             
                             if(obj.request.options.replace){
@@ -312,7 +307,6 @@
                 crossDomain : false,
                 browserHistory : true, // TODO
                 append : false,
-                effect : false, // @deprecated
                 target : null
             };
 
@@ -388,7 +382,7 @@
              * remove request attribute
              */
             removeAttr : function(name) {
-                if(this.attrObj[name] != undefined) {
+                if(this.attrObj[name] !== undefined) {
                     delete this.attrObj[name];
                 }
                 return this;
@@ -554,7 +548,7 @@
                                                         try{
                                                             result = real.apply(contFrag, args);
                                                         } catch(e) {
-                                                            if (advisor.adviceType == "error") {
+                                                            if (advisor.adviceType === "error") {
                                                                 result = advisor.fn.call(advisor, contFrag, fnPath + x, args, e);
                                                             } else {
                                                                 throw e;

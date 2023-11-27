@@ -295,7 +295,7 @@
 
                                     if(endHandler !== undefined) {
                                         endHandler.call(this, e, selfEle)
-                                    };
+                                    }
 
                                     if(!e.originalEvent.touches) {
                                         e.preventDefault();
@@ -425,7 +425,7 @@
                         // The date type does not support formatting, so it does not support it.
                         // || type === "date" || type === "datetime-local" || type === "month" || type === "time" || type === "week"
                         || type === "range"
-                        || type === "url" ? true : false;
+                        || type === "url";
                 }
             }
         };
@@ -452,18 +452,13 @@
                 closeMode : "remove", // closeMode : hide - keep element, remove - remove element
                 modal : true,
                 onOk : null,
-                onOkG : null, // @deprecated
                 onCancel : null,
-                onCancelG : null, // @deprecated
                 onBeforeShow : null,
                 onShow : null,
-                onShowG : null, // @deprecated
                 onBeforeHide : null,
                 onHide : null,
-                onHideG : null, // @deprecated
                 onBeforeRemove : null,
                 onRemove : null,
-                onRemoveG : null, // @deprecated
                 overlayColor : null,
                 overlayClose : true,
                 escClose : true,
@@ -562,7 +557,7 @@
                 };
 
                 if(!opts.isWindow) {
-                    blockOverlayCss["border-radius"] = opts.context.css("border-radius") != "0px" ? opts.context.css("border-radius") : "0px";
+                    blockOverlayCss["border-radius"] = opts.context.css("border-radius") !== "0px" ? opts.context.css("border-radius") : "0px";
                 }
 
                 var maxZindex = 0;
@@ -627,9 +622,6 @@
                 var self = this;
                 opts.msgContents.find(".msg_title_box__ .msg_title_close_btn__").on("click.alert touchend.alert", function(e) {
                     e.preventDefault();
-                    if (opts.onCancelG !== null) {
-                        opts.onCancelG.call(self, opts.msgContext, opts.msgContents);
-                    }
                     if (opts.onCancel !== null) {
                         if(opts.onCancel.call(self, opts.msgContext, opts.msgContents) !== 0) {
                             self[opts.closeMode]();
@@ -668,9 +660,6 @@
                 opts.msgContents.find(".buttonBox__ .confirm__").button(opts.global.okBtnStyle);
                 opts.msgContents.find(".buttonBox__ .confirm__").on("click.alert", function(e) {
                     e.preventDefault();
-                    if (opts.onOkG !== null) {
-                        opts.onOkG.call(self, opts.msgContext, opts.msgContents);
-                    }
                     if (opts.onOk !== null) {
                         if(opts.onOk.call(self, opts.msgContext, opts.msgContents) !== 0) {
                             self[opts.closeMode]();
@@ -686,9 +675,6 @@
                 } else {
                     if(opts.overlayClose) {
                         opts.msgContext.on("click.alert", function() {
-                            if (opts.onCancelG !== null) {
-                                opts.onCancelG.call(self, opts.msgContext, opts.msgContents);
-                            }
                             if (opts.onCancel !== null) {
                                 if(opts.onCancel.call(self, opts.msgContext, opts.msgContents) !== 0) {
                                     self[opts.closeMode]();
@@ -705,9 +691,6 @@
                     opts.msgContents.find(".buttonBox__ .cancel__").button(opts.global.cancelBtnStyle);
                     opts.msgContents.find(".buttonBox__ .cancel__").on("click.alert", function(e) {
                         e.preventDefault();
-                        if (opts.onCancelG !== null) {
-                            opts.onCancelG.call(self, opts.msgContext, opts.msgContents);
-                        }
                         if (opts.onCancel !== null) {
                             if(opts.onCancel.call(self, opts.msgContext, opts.msgContents) !== 0) {
                                 self[opts.closeMode]();
@@ -998,11 +981,6 @@
                             opts.onShow.call(self, opts.msgContext, opts.msgContents);
                         }
                     }).trigger("nothing");
-
-                    // @deprecated
-                    if (opts.onShowG !== null) {
-                        opts.onShowG.call(self, opts.msgContext, opts.msgContents);
-                    }
                 } else {
                     if (!N.isEmptyObject(opts.msg)) {
                         opts.msgContext.parent().css({
@@ -1026,9 +1004,6 @@
                 if(opts.escClose) {
                     opts.keyupHandler = function(e) {
                         if ((e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode)) == 27) {
-                            if (opts.onCancelG !== null) {
-                                opts.onCancelG.call(self, opts.msgContext, opts.msgContents);
-                            }
                             if (opts.onCancel !== null) {
                                 if(opts.onCancel.call(self, opts.msgContext, opts.msgContents) !== 0) {
                                     self[opts.closeMode]();
@@ -1063,11 +1038,6 @@
                     opts.msgContents.one(N.event.whichTransitionEvent(opts.msgContents), function(e){
                         opts.msgContents.hide();
 
-                        // @deprecated
-                        if (opts.onHideG !== null) {
-                            opts.onHideG.call(this, opts.msgContext, opts.msgContents);
-                        }
-
                         if (opts.onHide !== null) {
                             opts.onHide.call(this, opts.msgContext, opts.msgContents);
                         }
@@ -1078,11 +1048,6 @@
                     opts.msgContents.one(N.event.whichTransitionEvent(opts.msgContents), function(e){
                         clearTimeout(opts.iTime);
                         opts.msgContents.remove();
-
-                        // @deprecated
-                        if (opts.onHideG !== null) {
-                            opts.onHideG.call(this, opts.msgContext, opts.msgContents);
-                        }
 
                         if (opts.onHide !== null) {
                             opts.onHide.call(this, opts.msgContext, opts.msgContents);
@@ -1123,11 +1088,6 @@
                             N.gc.ds();
                         }
 
-                        // @deprecated
-                        if (opts.onRemoveG !== null) {
-                            opts.onRemoveG.call(this, opts.msgContext, opts.msgContents);
-                        }
-
                         if (opts.onRemove !== null) {
                             opts.onRemove.call(this, opts.msgContext, opts.msgContents);
                         }
@@ -1137,11 +1097,6 @@
                     opts.msgContents.one(N.event.whichTransitionEvent(opts.msgContents), function(e){
                         clearTimeout(opts.iTime);
                         opts.msgContents.remove();
-
-                        // @deprecated
-                        if (opts.onRemoveG !== null) {
-                            opts.onRemoveG.call(this, opts.msgContext, opts.msgContents);
-                        }
 
                         if (opts.onRemove !== null) {
                             opts.onRemove.call(this, opts.msgContext, opts.msgContents);
@@ -2355,11 +2310,8 @@
                 "confirm" : true,
                 overlayClose : true,
                 escClose : true,
-                delayContInit : false, // @deprecated
                 onOk : null,
-                onOkG : null, // @deprecated
                 onCancel : null,
-                onCancelG : null, // @deprecated
                 onBeforeShow : null,
                 onShow : null,
                 onBeforeHide : null,
@@ -2367,10 +2319,8 @@
                 onBeforeRemove : null,
                 onRemove : null,
                 onOpen : null,
-                onOpenG : null, // @deprecated
                 onOpenData : null,
                 onClose : null,
-                onCloseG : null, // @deprecated
                 onCloseData : null,
                 onLoad : null,
                 preload : false,
@@ -2469,9 +2419,6 @@
                 opts.html = true;
                 opts.msg = opts.context;
 
-                // To prevent the onShowG event from running when popup.
-                opts.onShowG = null; // @deprecated
-
                 if(opts.title === null) {
                     opts.title = opts.context.attr("title");
                 }
@@ -2523,9 +2470,6 @@
                         };
                     }
 
-                    // To prevent the onShowG event from running when popup.
-                    opts.onShowG = null; // @deprecated
-
                     var opener;
                     if(opts.opener) {
                         opener = opts.opener;
@@ -2560,18 +2504,10 @@
                             cont.opener = opts.opener;
                         }
 
-                        // if delayContInit options is true, *ProcFn__ function is must set to Controller's attribute before the aop processing
-                        if(opts.delayContInit) { // @deprecated
-                            callback.call(self, cont, opts.context);
+                        // triggering "init" method
+                        N.cont.trInit.call(this, cont, this.request);
 
-                            // triggering "init" method
-                            N.cont.trInit.call(this, cont, this.request);
-                        } else {
-                            // triggering "init" method
-                            N.cont.trInit.call(this, cont, this.request);
-
-                            callback.call(self, cont, opts.context);
-                        }
+                        callback.call(self, cont, opts.context);
                     } else {
                         callback.call(self, cont, opts.context);
                     }
@@ -2592,13 +2528,6 @@
                 self.alert.show();
 
                 var onOpenProcFn__ = function() {
-
-                    // @deprecated
-                    // execute "onOpenG" event handler
-                    if(opts.onOpenG !== null) {
-                        opts.onOpenG.call(self);
-                    }
-
                     // execute "onOpen" event
                     if(opts.onOpen !== null) {
                         opts.onOpenData = onOpenData !== undefined ? onOpenData : null;
@@ -2610,11 +2539,7 @@
                     }
                 };
 
-                if(opts.delayContInit && cont !== undefined) {
-                    cont.onOpenProcFn__ = onOpenProcFn__; // @deprecated
-                } else {
-                    onOpenProcFn__();
-                }
+                onOpenProcFn__();
             }
         });
 
@@ -2658,11 +2583,6 @@
                     onCloseData = opts.onCloseData;
                 }
 
-                // execute the "onCloseG" event handler.
-                if(opts.onCloseG !== null) {
-                    opts.onCloseG.call(this);
-                }
-
                 // execute the "onClose" event handler.
                 if(opts.onClose !== null) {
                     opts.onClose.call(this, onCloseData);
@@ -2688,16 +2608,12 @@
                 context : obj.length > 0 ? obj : null,
                 links : obj.length > 0 ? obj.find(">ul>li") : null,
                 tabOpts : [], // tabOpts : [{ url: undefined, active: false, preload: false, onOpen: undefined, disable : false, stateless : false }]
-                delayContInit : false, // @deprecated
                 randomSel : false,
                 opener : null,
                 onActive : null,
-                onActiveG : null, // @deprecated
                 onLoad : null,
-                onLoadG : null, // @deprecated
                 blockOnActiveWhenCreate : false,
                 contents : obj.length > 0 ? obj.find(">div") : null,
-                effect : false, // @deprecated
                 tabScroll : false,
                 tabScrollCorrection : {
                     tabContainerWidthCorrectionPx : 0,
@@ -2894,13 +2810,8 @@
                                     opts.onLoad.call(self, selTabIdx, selTabEle, selContentEle_, cont);
                                 }
 
-                                if(opts.delayContInit) { // @deprecated
-                                    cont.onActiveProcFn__ = onActiveProcFn__;
-                                    cont.onOpenProcFn__ = onOpenProcFn__;
-                                } else {
-                                    onActiveProcFn__();
-                                    onOpenProcFn__();
-                                }
+                                onActiveProcFn__();
+                                onOpenProcFn__();
 
                                 selContentEle_.data("loaded", true);
                                 loadDefer.resolve();
@@ -2917,11 +2828,6 @@
 
                                 loadDefer.resolve();
                             }).removeClass("hidden__");
-                        }
-
-                        // @deprecated
-                        if (opts.effect) {
-                            selContentEle.children().hide()[opts.effect[0]](opts.effect[1], opts.effect[2]);
                         }
                     }
                 });
@@ -3122,7 +3028,7 @@
                     contentType : "text/html; charset=UTF-8",
                     dataType : "html",
                     type : "GET",
-                    urlSync : isFirst ? false : true,
+                    urlSync : !isFirst,
                     target : selContentEle
                 }).submit(function(page) {
                     var cont = selContentEle.html(page).children(".view_context__:last").instance("cont");
@@ -3137,19 +3043,10 @@
                             cont.opener = opts.opener;
                         }
 
-                        // if delayContInit options is true, *ProcFn__ function is must set to Controller's attribute before the aop processing
-                        if(opts.delayContInit) { // @deprecated
-                            callback.call(this, cont, selContentEle);
+                        // triggering "init" method
+                        N.cont.trInit.call(this, cont, this.request);
 
-                            // triggering "init" method
-                            N.cont.trInit.call(this, cont, this.request);
-                        } else {
-                            // triggering "init" method
-                            N.cont.trInit.call(this, cont, this.request);
-
-                            callback.call(this, cont, selContentEle);
-                        }
-
+                        callback.call(this, cont, selContentEle);
                     } else {
                         callback.call(this, cont, selContentEle);
                     }
@@ -3307,10 +3204,10 @@
         $.extend(Select, {
             wrapEle : function() {
                 var opts = this.options;
-                if (opts.context.is("select") && opts.context.attr("multiple") != "multiple") {
+                if (opts.context.is("select") && opts.context.attr("multiple") !== "multiple") {
                     this.options.context.find("option").addClass("select_default__");
                     opts.type = 1;
-                } else if (opts.context.is("select") && opts.context.attr("multiple") == "multiple") {
+                } else if (opts.context.is("select") && opts.context.attr("multiple") === "multiple") {
                     this.options.context.find("option").addClass("select_default__");
                     opts.type = 2;
                 } else if (opts.context.is("input:radio")) {
@@ -3440,7 +3337,7 @@
                 if(val !== undefined) {
                     var selectEles = opts.type === 1 || opts.type === 2 ? opts.context.find("option") : opts.context.closest(".select_input_container__").children("label");
 
-                    selOptEle = opts.type === 1 || opts.type === 2 ? selectEles.filter("[value='" + val + "']") : selectEles.find("input[value='" + val + "']").parent("label");
+                    var selOptEle = opts.type === 1 || opts.type === 2 ? selectEles.filter("[value='" + val + "']") : selectEles.find("input[value='" + val + "']").parent("label");
                     var idx = selOptEle.index();
                     var defSelCnt = selectEles.filter(".select_default__").length;
 
@@ -4110,8 +4007,6 @@
 
                 opts.state = "revert";
 
-                var orgRow = opts.row;
-                opts.row = orgRow;
                 for(var k in opts.data[opts.row]){
                     delete opts.data[opts.row][k];
                 }
@@ -4684,10 +4579,9 @@
                 var opts = this.options;
                 if(row === undefined) {
                     var rowEles = this.contextEle.find(">li");
-                    var rtnArr = rowEles.find(opts.checkAllTarget||opts.checkSingleTarget).filter(":checked").map(function() {
+                    return rowEles.find(opts.checkAllTarget || opts.checkSingleTarget).filter(":checked").map(function () {
                         return rowEles.index(N(this).closest("li.form__"));
                     }).get();
-                    return rtnArr;
                 } else {
                     if(N.type(row) !== "array") {
                         row = [row];
@@ -5087,7 +4981,6 @@
                 onSelect : null,
                 onBind : null,
                 misc : {
-                    withoutTbodyLength : 0, // garbage rows count in table -> @deprecated
                     resizableCorrectionWidth : 0,
                     resizableLastCellCorrectionWidth : 0,
                     resizeBarCorrectionLeft : 0,
@@ -5129,9 +5022,6 @@
             } else {
                 this.options.context = N(opts);
             }
-
-            // set garbage rows count in table
-            this.options.misc.withoutTbodyLength = this.options.context.children().length - this.options.context.children("tbody").length - this.options.context.children("tfoot").length;
 
             // If the value of the opts.scrollPaging.size value is greater than 0, the addTop option is unconditionally set to true.
             if(!this.options.addTop) {
@@ -5370,7 +5260,6 @@
                             })
                         }
                     }).parent().remove();
-                    this.options.misc.withoutTbodyLength -= 1;
                 }
             },
             fixColumn : function() {
@@ -5845,7 +5734,7 @@
                         onCancel : function() {
                             if(!form.validate()) {
                                 return 0;
-                            };
+                            }
                         }
                     }).open();
                 });
@@ -5881,7 +5770,7 @@
                         theadCells.css("padding-right", "0");
                     }
 
-                    if(opts.context.css("table-layout") != "fixed") {
+                    if(opts.context.css("table-layout") !== "fixed") {
                         opts.context.css("table-layout", "fixed");
                     }
 
@@ -5951,7 +5840,7 @@
                                         targetNextTfootCellEle = targetTfootCellEle.next();
                                     }
                                 }
-                                // Convert flexible cell width to absolute cell width when the clicked resizeBar is last last resizeBar
+                                // Convert flexible cell width to absolute cell width when the clicked resizeBar is last resizeBar
                                 if(isFirstTimeLastClick && isLast) {
                                     var thisWidth;
                                     theadCells.each(function(i) {
@@ -6552,10 +6441,9 @@
 
                 if(row === undefined) {
                     var rowEles = this.contextEle.find(">tbody.form__");
-                    var rtnArr = rowEles.filter(".grid_selected__").map(function() {
+                    return rowEles.filter(".grid_selected__").map(function () {
                         return rowEles.index(this);
                     }).get();
-                    return rtnArr;
                 } else {
                     if(N.type(row) !== "array") {
                         row = [row];
@@ -6590,10 +6478,9 @@
                 var opts = this.options;
                 if(row === undefined) {
                     var rowEles = this.contextEle.find(">tbody.form__");
-                    var rtnArr = rowEles.find(opts.checkAllTarget||opts.checkSingleTarget).filter(":checked").map(function() {
+                    return rowEles.find(opts.checkAllTarget || opts.checkSingleTarget).filter(":checked").map(function () {
                         return rowEles.index(N(this).closest("tbody.form__"));
                     }).get();
-                    return rtnArr;
                 } else {
                     if(N.type(row) !== "array") {
                         row = [row];
@@ -7179,7 +7066,7 @@
                 var pageCount = Math.ceil(opts.totalCount / opts.countPerPage);
                 var pageSetCount = Math.ceil(pageCount / opts.countPerPageSet);
                 var currSelPageSet = Math.ceil(opts.pageNo / opts.countPerPageSet);
-                if (currSelPageSet > pageSetCount) { currSelPageSet = pageSetCount; };
+                if (currSelPageSet > pageSetCount) { currSelPageSet = pageSetCount; }
 
                 var startPage = (currSelPageSet - 1) * opts.countPerPageSet + 1;
                 var endPage = startPage + opts.countPerPageSet - 1;
@@ -7368,7 +7255,7 @@
             },
             totalCount : function(totalCount) {
                 var opts = this.options;
-                if(totalCount != undefined) {
+                if(totalCount !== undefined) {
                     opts.totalCount = totalCount;
                     return this;
                 } else {
@@ -7377,7 +7264,7 @@
             },
             pageNo : function(pageNo) {
                 var opts = this.options;
-                if(pageNo != undefined) {
+                if(pageNo !== undefined) {
                     opts.pageNo = pageNo;
                     return this;
                 } else {

@@ -20,7 +20,7 @@
                     var report = []
 
                     if(!N.context.attr("code") || (N.context.attr("code") && !N.context.attr("code").inspection)) {
-                        throw N.error("Define Natiral-CODE options and message resources in N.context.attr(\"code\").inspection in the natural.config.js file.");
+                        throw N.error("Define Natural-CODE options and message resources in N.context.attr(\"code\").inspection in the natural.config.js file.");
                     }
 
                     if(rules) {

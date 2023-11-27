@@ -13,12 +13,6 @@
 		datafilter : function(callBack) {
 			return N.data.filter(this, callBack);
 		},
-		/**
-		 * @deprecated 2020.05.19.
-		 */
-		datarefine : function(listId) {
-			return N.data.refine(this, listId);
-		},
 		datasort : function(key, reverse) {
 			return N.data.sort(this, key, reverse);
 		},
@@ -33,30 +27,6 @@
 	(function(N) {
 
 		N.data = {
-            /**
-             * @deprecated 2020.05.19.
-             */
-			refine : function(obj, listId) {
-				if (N.isWrappedSet(obj)) {
-					if (obj.length == 1) {
-						if (N.isPlainObject(obj.get(0))) {
-							return N(this.refine(obj.get(0), listId));
-						} else {
-							return obj;
-						}
-					} else {
-						return N(this.refine(obj.toArray(), listId));
-					}
-				} else {
-					if (listId !== undefined) {
-						return obj[listId] || [];
-					} else {
-						for ( var key in obj) {
-							return N.isNumeric(key) ? obj : obj[key];
-						}
-					}
-				}
-			},
 			filter : function(arr, condition) {
 				if(N.type(condition) === "function") {
 					return N.isWrappedSet(arr) ? N($.grep(arr.toArray(), condition)) : $.grep(arr, condition);
@@ -223,7 +193,7 @@
 					return str;
 				}
 				str = str.replace(/[^0-9*]/g, "");
-				if (str.length == 13) {
+				if (str.length === 13) {
 					var strToPad = "*";
 					if (args !== undefined && args[1] !== undefined) {
 						strToPad = args[1];
@@ -262,13 +232,6 @@
 					str = str.substring(0, 10);
 				}
 				return str.substring(0, 3) + "-" + str.substring(3, 5) + "-" + str.substring(5, 10);
-			},
-			/**
-			 * @deprecated.
-			 * Use kbrn rule.
-			 */
-			"cno" : function(str, args) {
-				return this.kbrn(str);
 			},
 			/**
 			 * Korean corporation number
@@ -312,20 +275,13 @@
 				str = str.replace(/[^0-9*]/g, "");
 				return str.replace(/(^02.{0}|^01.{1}|[0-9*]{3})([0-9*]+)([0-9*]{4})/, "$1-$2-$3");
 			},
-			/**
-			 * @deprecated 2017.07.26
-			 * phonenum to phone
-			 */
-			"phonenum" : function(str, args) {
-				return this.phone(str, args);
-			},
 			"realnum" : function(str, args) {
 				try {
 					str = String(parseFloat(str));
 				} catch (e) {
 					return str;
 				}
-				return str == "NaN" ? str.replace("NaN", "") : str;
+				return str === "NaN" ? str.replace("NaN", "") : str;
 			},
 			"trimtoempty" : function(str, args) {
 				return N.string.trimToEmpty(str);
@@ -348,7 +304,7 @@
 				//use datepicker, monthpicker
 				if(N.datepicker !== undefined) {
 					if(args[1] !== undefined && (args[1] === "date" || args[1] === "month") && ele !== undefined && !ele.hasClass("datepicker__") && ele.is("input")) {
-						var isMonth = args[1] === "month" ? true : false;
+						var isMonth = args[1] === "month";
 						var dateVal;
 						var formInst;
 						var colId;
@@ -825,7 +781,7 @@
 			},
 			"rrn" : function(str, args) {
 				str = str.replace(/[^0-9*]/g, "");
-				if (N.string.trimToEmpty(str).length != 13) {
+				if (N.string.trimToEmpty(str).length !== 13) {
 					str = null;
 					return false;
 				}
@@ -851,23 +807,21 @@
 				checkdigit = 11 - checkdigit;
 				checkdigit = checkdigit % 10;
 
-				if (checkdigit != b7) {
+				if (checkdigit !== b7) {
 					return false;
 				}
 
 				return true;
 			},
 			/**
-			 * @deprecated 2017.07.26
-			 * Use rrn rule
-			 * TODO Later, "ssn" will be replaced by the US Social Security Number
+			 * US Social Security Number
 			 */
 			"ssn" : function(str, args) {
-				return this.rrn(str, args);
+				return new RegExp(/\d{3}-\d{2}-\d{4}/).test(str);
 			},
 			"frn" : function(str, args) {
 				str = str.replace(/[^0-9*]/g, "");
-				if (N.string.trimToEmpty(str).length != 13) {
+				if (N.string.trimToEmpty(str).length !== 13) {
 					str = null;
 					return false;
 				}
@@ -889,7 +843,7 @@
 			},
 			"frn_rrn" : function(str, args) {
 				str = str.replace(/[^0-9*]/g, "");
-				if (N.string.trimToEmpty(str).length != 13) {
+				if (N.string.trimToEmpty(str).length !== 13) {
 					str = null;
 					return false;
 				}
@@ -900,25 +854,11 @@
 				}
 			},
 			/**
-			 * @deprecated 2017.07.26
-			 * Use frn_rrn rule
-			 */
-			"frn_ssn" : function(str, args) {
-				return this.frn_rrn(str, args);
-			},
-			/**
-			 * @deprecated 2017.09.26
-			 * Use kbrn rule
-			 */
-			"cno" : function(str, args) {
-				return this.kbrn(str, args);
-			},
-			/**
 			 * Korean business registration number
 			 */
 			"kbrn" : function(str, args) {
 				var bizID = str.replace(/[^0-9*]/g, "");
-				var checkID = new Array(1, 3, 7, 1, 3, 7, 1, 3, 5, 1);
+				var checkID = [1, 3, 7, 1, 3, 7, 1, 3, 5, 1];
 				var i, chkSum = 0, c2, remander;
 				for (i = 0; i <= 7; i++) {
 					chkSum += checkID[i] * bizID.charAt(i);
@@ -930,24 +870,17 @@
 
 				remander = (10 - (chkSum % 10)) % 10;
 
-				if (Math.floor(bizID.charAt(9)) == remander) {
+				if (Math.floor(bizID.charAt(9)) === remander) {
 					return true;
 				}
 				return false;
-			},
-			/**
-			 * @deprecated 2017.09.26
-			 * Use kcn rule
-			 */
-			"cpno" : function(str, args) {
-				return this.kcn(str, args);
 			},
 			/**
 			 * Korean corporation number
 			 */
 			"kcn" : function(str, args) {
 				var numStr = str.replace(/[^0-9*]/g, "");
-				if (numStr.length != 13) {
+				if (numStr.length !== 13) {
 					return false;
 				}
 				var arr_regno = numStr.split("");
@@ -963,7 +896,7 @@
 
 				iCheck_digit = iCheck_digit % 10;
 
-				if (iCheck_digit != arr_regno[12]) {
+				if (iCheck_digit !== arr_regno[12]) {
 					return false;
 				}
 				return true;
@@ -971,7 +904,7 @@
 			"date" : function(str, args) {
 				// Check date format length
 				var isDateFormat = function(d) {
-					if (N.string.trimToEmpty(d).length == 8) {
+					if (N.string.trimToEmpty(d).length === 8) {
 						return true;
 					} else {
 						return false;
