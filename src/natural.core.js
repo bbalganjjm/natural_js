@@ -504,8 +504,11 @@
                     }
                     return str;
                 },
+                /**
+                 * Deprecated 2023.11.27
+                 */
                 trim : function(str) {
-                    return this.trimToEmpty;
+                    return str ? String(str).trim() : "";
                 },
                 isEmpty : function(str) {
                     return N.string.trimToEmpty(str).length === 0;
