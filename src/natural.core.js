@@ -523,16 +523,16 @@
                     return str === null || str === undefined ? "" : str;
                 },
                 trimToNull : function(str) {
-                    return N.string.trimToEmpty(str).length === 0 ? null : str.trim();
+                    return N.string.trimToEmpty(str).length === 0 ? null : N.string.trimToEmpty(str);
                 },
                 trimToUndefined : function(str) {
-                    return N.string.trimToEmpty(str).length === 0 ? undefined : str.trim();
+                    return N.string.trimToEmpty(str).length === 0 ? undefined : N.string.trimToEmpty(str);
                 },
                 trimToZero : function(str) {
-                    return N.string.trimToEmpty(str).length === 0 ? "0" : str.trim();
+                    return N.string.trimToEmpty(str).length === 0 ? "0" : N.string.trimToEmpty(str);
                 },
                 trimToVal : function(str, val) {
-                    return N.string.trimToEmpty(str).length === 0 ? val : str.trim();
+                    return N.string.trimToEmpty(str).length === 0 ? val : N.string.trimToEmpty(str);
                 }
             },
             /**
