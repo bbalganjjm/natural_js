@@ -194,13 +194,13 @@
                     decimal_ : "(유한)소수 {0}번째 자리까지 입력할 수 있습니다.", // TODO
                     phone : "전화번호 형식이 아닙니다.",
                     rrn : "주민등록번호 형식에 맞지 않습니다.",
-                    ssn : "주민등록번호 형식에 맞지 않습니다.", // Deprecated
+                    ssn : "주민등록번호 형식에 맞지 않습니다.", // @deprecated
                     frn : "외국인등록번호 형식에 맞지 않습니다.",
-                    frn_rrn : "주민번호나 외국인등록번호 형식에 맞지 않습니다.", // Deprecated
+                    frn_rrn : "주민번호나 외국인등록번호 형식에 맞지 않습니다.", // @deprecated
                     frn_ssn : "주민번호나 외국인등록번호 형식에 맞지 않습니다.",
-                    cno : "사업자등록번호 형식에 맞지 않습니다.", // Deprecated
+                    cno : "사업자등록번호 형식에 맞지 않습니다.", // @deprecated
                     kbrn : "사업자등록번호 형식에 맞지 않습니다.",
-                    cpno : "법인번호 형식에 맞지 않습니다.", // Deprecated
+                    cpno : "법인번호 형식에 맞지 않습니다.", // @deprecated
                     kcn : "법인번호 형식에 맞지 않습니다.",
                     date : "날짜 형식에 맞지 않습니다.",
                     time : "시간 형식에 맞지 않습니다.",
@@ -242,13 +242,13 @@
                     decimal_ : "Can enter up to {0} places of (finite)decimal.", // TODO
                     phone : "There is no format of phone number.",
                     rrn : "Don't fit the format of the resident registration number.",
-                    ssn : "Don't fit the format of the resident registration number.", // Deprecated.
+                    ssn : "Don't fit the format of the resident registration number.", // @deprecated.
                     frn : "Don't fit the format of foreign registration number.",
                     frn_rrn : "Don't fit the format of the resident registration number or foreign registration number.",
-                    frn_ssn : "Don't fit the format of the resident registration number or foreign registration number.", // Deprecated.
-                    cno : "Don't fit the format of registration of enterpreneur.", // Deprecated
+                    frn_ssn : "Don't fit the format of the resident registration number or foreign registration number.", // @deprecated.
+                    cno : "Don't fit the format of registration of enterpreneur.", // @deprecated
                     kbrn : "Don't fit the format of registration of enterpreneur.",
-                    cpno : "Don't fit the format of corporation number.", // Deprecated
+                    cpno : "Don't fit the format of corporation number.", // @deprecated
                     kcn : "Don't fit the format of corporation number.",
                     date : "Don't fit the format of date.",
                     time : "Don't fit the format of time.",

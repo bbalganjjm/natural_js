@@ -505,7 +505,7 @@
                     return str;
                 },
                 /**
-                 * Deprecated 2023.11.27
+                 * @deprecated 2023.11.27
                  */
                 trim : function(str) {
                     return str ? String(str).trim() : "";

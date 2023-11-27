@@ -452,18 +452,18 @@
                 closeMode : "remove", // closeMode : hide - keep element, remove - remove element
                 modal : true,
                 onOk : null,
-                onOkG : null, // DEPRECATED
+                onOkG : null, // @deprecated
                 onCancel : null,
-                onCancelG : null, // DEPRECATED
+                onCancelG : null, // @deprecated
                 onBeforeShow : null,
                 onShow : null,
-                onShowG : null, // DEPRECATED
+                onShowG : null, // @deprecated
                 onBeforeHide : null,
                 onHide : null,
-                onHideG : null, // DEPRECATED
+                onHideG : null, // @deprecated
                 onBeforeRemove : null,
                 onRemove : null,
-                onRemoveG : null, // DEPRECATED
+                onRemoveG : null, // @deprecated
                 overlayColor : null,
                 overlayClose : true,
                 escClose : true,
@@ -999,7 +999,7 @@
                         }
                     }).trigger("nothing");
 
-                    // DEPRECATED
+                    // @deprecated
                     if (opts.onShowG !== null) {
                         opts.onShowG.call(self, opts.msgContext, opts.msgContents);
                     }
@@ -1063,7 +1063,7 @@
                     opts.msgContents.one(N.event.whichTransitionEvent(opts.msgContents), function(e){
                         opts.msgContents.hide();
 
-                        // DEPRECATED
+                        // @deprecated
                         if (opts.onHideG !== null) {
                             opts.onHideG.call(this, opts.msgContext, opts.msgContents);
                         }
@@ -1079,7 +1079,7 @@
                         clearTimeout(opts.iTime);
                         opts.msgContents.remove();
 
-                        // DEPRECATED
+                        // @deprecated
                         if (opts.onHideG !== null) {
                             opts.onHideG.call(this, opts.msgContext, opts.msgContents);
                         }
@@ -1123,7 +1123,7 @@
                             N.gc.ds();
                         }
 
-                        // DEPRECATED
+                        // @deprecated
                         if (opts.onRemoveG !== null) {
                             opts.onRemoveG.call(this, opts.msgContext, opts.msgContents);
                         }
@@ -1138,7 +1138,7 @@
                         clearTimeout(opts.iTime);
                         opts.msgContents.remove();
 
-                        // DEPRECATED
+                        // @deprecated
                         if (opts.onRemoveG !== null) {
                             opts.onRemoveG.call(this, opts.msgContext, opts.msgContents);
                         }
@@ -2355,11 +2355,11 @@
                 "confirm" : true,
                 overlayClose : true,
                 escClose : true,
-                delayContInit : false, // WILL BE DEPRECATED
+                delayContInit : false, // @deprecated
                 onOk : null,
-                onOkG : null, // DEPRECATED
+                onOkG : null, // @deprecated
                 onCancel : null,
-                onCancelG : null, // DEPRECATED
+                onCancelG : null, // @deprecated
                 onBeforeShow : null,
                 onShow : null,
                 onBeforeHide : null,
@@ -2367,10 +2367,10 @@
                 onBeforeRemove : null,
                 onRemove : null,
                 onOpen : null,
-                onOpenG : null, // DEPRECATED
+                onOpenG : null, // @deprecated
                 onOpenData : null,
                 onClose : null,
-                onCloseG : null, // DEPRECATED
+                onCloseG : null, // @deprecated
                 onCloseData : null,
                 onLoad : null,
                 preload : false,
@@ -2470,7 +2470,7 @@
                 opts.msg = opts.context;
 
                 // To prevent the onShowG event from running when popup.
-                opts.onShowG = null; // DEPRECATED
+                opts.onShowG = null; // @deprecated
 
                 if(opts.title === null) {
                     opts.title = opts.context.attr("title");
@@ -2524,7 +2524,7 @@
                     }
 
                     // To prevent the onShowG event from running when popup.
-                    opts.onShowG = null; // DEPRECATED
+                    opts.onShowG = null; // @deprecated
 
                     var opener;
                     if(opts.opener) {
@@ -2561,7 +2561,7 @@
                         }
 
                         // if delayContInit options is true, *ProcFn__ function is must set to Controller's attribute before the aop processing
-                        if(opts.delayContInit) { // WILL BE DEPRECATED
+                        if(opts.delayContInit) { // @deprecated
                             callback.call(self, cont, opts.context);
 
                             // triggering "init" method
@@ -2593,7 +2593,7 @@
 
                 var onOpenProcFn__ = function() {
 
-                    // DEPRECATED
+                    // @deprecated
                     // execute "onOpenG" event handler
                     if(opts.onOpenG !== null) {
                         opts.onOpenG.call(self);
@@ -2611,7 +2611,7 @@
                 };
 
                 if(opts.delayContInit && cont !== undefined) {
-                    cont.onOpenProcFn__ = onOpenProcFn__; // WILL BE DEPRECATED
+                    cont.onOpenProcFn__ = onOpenProcFn__; // @deprecated
                 } else {
                     onOpenProcFn__();
                 }
@@ -2688,16 +2688,16 @@
                 context : obj.length > 0 ? obj : null,
                 links : obj.length > 0 ? obj.find(">ul>li") : null,
                 tabOpts : [], // tabOpts : [{ url: undefined, active: false, preload: false, onOpen: undefined, disable : false, stateless : false }]
-                delayContInit : false, // WILL BE DEPRECATED
+                delayContInit : false, // @deprecated
                 randomSel : false,
                 opener : null,
                 onActive : null,
-                onActiveG : null, // DEPRECATED
+                onActiveG : null, // @deprecated
                 onLoad : null,
-                onLoadG : null, // DEPRECATED
+                onLoadG : null, // @deprecated
                 blockOnActiveWhenCreate : false,
                 contents : obj.length > 0 ? obj.find(">div") : null,
-                effect : false, // DEPRECATED
+                effect : false, // @deprecated
                 tabScroll : false,
                 tabScrollCorrection : {
                     tabContainerWidthCorrectionPx : 0,
@@ -2894,7 +2894,7 @@
                                     opts.onLoad.call(self, selTabIdx, selTabEle, selContentEle_, cont);
                                 }
 
-                                if(opts.delayContInit) { // WILL BE DEPRECATED
+                                if(opts.delayContInit) { // @deprecated
                                     cont.onActiveProcFn__ = onActiveProcFn__;
                                     cont.onOpenProcFn__ = onOpenProcFn__;
                                 } else {
@@ -2919,7 +2919,7 @@
                             }).removeClass("hidden__");
                         }
 
-                        // DEPRECATED
+                        // @deprecated
                         if (opts.effect) {
                             selContentEle.children().hide()[opts.effect[0]](opts.effect[1], opts.effect[2]);
                         }
@@ -3138,7 +3138,7 @@
                         }
 
                         // if delayContInit options is true, *ProcFn__ function is must set to Controller's attribute before the aop processing
-                        if(opts.delayContInit) { // WILL BE DEPRECATED
+                        if(opts.delayContInit) { // @deprecated
                             callback.call(this, cont, selContentEle);
 
                             // triggering "init" method
@@ -5087,7 +5087,7 @@
                 onSelect : null,
                 onBind : null,
                 misc : {
-                    withoutTbodyLength : 0, // garbage rows count in table -> DEPRECATED.
+                    withoutTbodyLength : 0, // garbage rows count in table -> @deprecated
                     resizableCorrectionWidth : 0,
                     resizableLastCellCorrectionWidth : 0,
                     resizeBarCorrectionLeft : 0,

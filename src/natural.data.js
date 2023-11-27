@@ -264,7 +264,7 @@
 				return str.substring(0, 3) + "-" + str.substring(3, 5) + "-" + str.substring(5, 10);
 			},
 			/**
-			 * Deprecated.
+			 * @deprecated.
 			 * Use kbrn rule.
 			 */
 			"cno" : function(str, args) {
@@ -313,7 +313,7 @@
 				return str.replace(/(^02.{0}|^01.{1}|[0-9*]{3})([0-9*]+)([0-9*]{4})/, "$1-$2-$3");
 			},
 			/**
-			 * Deprecated 2017.07.26
+			 * @deprecated 2017.07.26
 			 * phonenum to phone
 			 */
 			"phonenum" : function(str, args) {
@@ -858,7 +858,7 @@
 				return true;
 			},
 			/**
-			 * Deprecated 2017.07.26
+			 * @deprecated 2017.07.26
 			 * Use rrn rule
 			 * TODO Later, "ssn" will be replaced by the US Social Security Number
 			 */
@@ -900,14 +900,14 @@
 				}
 			},
 			/**
-			 * Deprecated 2017.07.26
+			 * @deprecated 2017.07.26
 			 * Use frn_rrn rule
 			 */
 			"frn_ssn" : function(str, args) {
 				return this.frn_rrn(str, args);
 			},
 			/**
-			 * Deprecated 2017.09.26
+			 * @deprecated 2017.09.26
 			 * Use kbrn rule
 			 */
 			"cno" : function(str, args) {
@@ -936,7 +936,7 @@
 				return false;
 			},
 			/**
-			 * Deprecated 2017.09.26
+			 * @deprecated 2017.09.26
 			 * Use kcn rule
 			 */
 			"cpno" : function(str, args) {
