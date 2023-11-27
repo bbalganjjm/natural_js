@@ -1,5 +1,5 @@
 /*!
- * Natural-CORE v0.19.29
+ * Natural-CORE v0.19.30
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -304,7 +304,7 @@
         // N local variables
         $.extend(N, {
             version : {
-                "Natural-CORE" : "0.19.29"
+                "Natural-CORE" : "0.19.30"
             },
             /**
              * Set and get locale value
@@ -505,7 +505,7 @@
                     return str;
                 },
                 trim : function(str) {
-                    return str ? str.trim() : str;
+                    return this.trimToEmpty;
                 },
                 isEmpty : function(str) {
                     return N.string.trimToEmpty(str).length === 0;
