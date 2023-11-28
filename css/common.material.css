@@ -1,9 +1,8 @@
 /* common.css */
-
-@media screen and (max-width: 768px) {
-    body {
-        font-size: 14px;
-    }
+:root {
+    --mdc-typography-subtitle1-font-family: 'NanumSquare', '맑은 고딕', 'Malgun Gothic', 'Apple SD 산돌고딕 Neo', 'Apple SD Gothic Neo', 'Microsoft NeoGothic', sans-serif;
+    --mdc-typography-font-family: 'NanumSquare', '맑은 고딕', 'Malgun Gothic', 'Apple SD 산돌고딕 Neo', 'Apple SD Gothic Neo', 'Microsoft NeoGothic', sans-serif;
+    --mdc-typography-subtitle1-font-size: 0.875rem;
 }
 
 /* Layouts */
@@ -265,5 +264,5 @@ th, tfoot td {
 }
 
 .view_context__ .form__.search_box__ .criteria-panel ul li {
-    background-color: rgba(0, 0, 0, 0.04);
+    padding: 0;
 }

@@ -181,7 +181,7 @@
 
 /* Popup */
 .popup__.block_overlay_msg__ {
-    
+
 }
 
 .popup__.block_overlay_msg__ > .msg_title_box__ {
@@ -852,7 +852,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .grid_more_popup_contents__ > .grid_more_contents__ > table {
-	width: auto;
+    width: auto;
 }
 
 .grid_more_popup_contents__ > .grid_more_contents__ th {
@@ -909,7 +909,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     cursor: pointer;
     min-width: auto;
     text-align: center;
-    background-color: #f6f6f6;
+    background-color: rgba(0,0,0,.04);
 }
 
 .tab__>ul>li>a,
@@ -1257,7 +1257,8 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     width: auto;
 }
 
-.datepicker_contents__.years_panel_position_top__ .datepicker_year_item__ {
+.datepicker_contents__.years_panel_position_top__ .datepicker_year_item__,
+.datepicker_contents__.months_panel_position_top__ .datepicker_month_item__{
     border: none !important;
     cursor: pointer;
     line-height: inherit;
@@ -1335,23 +1336,6 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .datepicker_contents__.months_panel_position_top__ .datepicker_month_item__ {
-    border: none !important;
-    cursor: pointer;
-    line-height: inherit;
-    text-align: center;
-    background-color: transparent !important;
-    box-shadow: none !important;
-    color: inherit;
-    width: auto;
-    padding: 0;
-    float: none;
-    min-width: auto;
-
-    /* Remove the arrow in select box */
-    border-radius: 0;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
 }
 /* Remove the arrow in select box(ie)*/
 .datepicker_contents__.months_panel_position_top__ .datepicker_month_item__::-ms-expand {
@@ -1492,14 +1476,14 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 .tree__ li.tree_open__>.tree_icon__ {
     background:
-        url('../../natural_js/lib/material/icons/expand_more-24px.svg')
-        0 0 no-repeat;
+            url('../../natural_js/lib/material/icons/expand_more-24px.svg')
+            0 0 no-repeat;
 }
 
 .tree__ li.tree_close__>.tree_icon__ {
     background:
-        url('../../natural_js/lib/material/icons/chevron_right-24px.svg')
-        no-repeat;
+            url('../../natural_js/lib/material/icons/chevron_right-24px.svg')
+            no-repeat;
 }
 
 .tree__ li.tree_close__>ul {
@@ -1936,6 +1920,8 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     width: 100%;
     height: 100%;
     cursor: wait;
+    opacity: 0.05;
+    background-color: #000;
 }
 
 .entire_load_screen_block__.hidden__ {
@@ -1949,12 +1935,25 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     position: fixed;
     left: 0;
     top: 0;
-    height: 3px;
+    height: 7px;
     width: 100%;
     overflow: hidden;
     margin-top: 0;
-    background-color: #C8E6C9;
     opacity: 0.9;
+    background: repeating-linear-gradient(to right, orange 0%, skyblue 50%, orange 100%);
+    background-size: 200% auto;
+    animation: gradient 2s infinite;
+    animation-fill-mode: forwards;
+    animation-timing-function: linear;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
 }
 
 .docs__>.entire_load_indicator__>.entire_load_indicator_bar__ {
@@ -1963,14 +1962,14 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     content: "";
     left: -100%;
     width: 100%;
-    height: 3px;
-    background-color: #2E7D32;
-    opacity: 1;
+    height: 7px;
+    background-color: #333333;
+    opacity: 0.7;
 }
 
 .docs__>.entire_load_indicator__.hidden__ {
-    transform: translateY(-3px);
-    transition: transform 0.4s cubic-bezier(1, 0, 1, 1);
+    transform: translateY(-7px);
+    transition: transform 0.5s cubic-bezier(1, 0, 1, 1);
 }
 
 /* Webkit scrollbars */
@@ -2039,14 +2038,14 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     font-family: var(--mdc-typography-subtitle1-font-family, var(--mdc-typography-font-family, Roboto, sans-serif));
     color: rgba(0, 0, 0, 0.87);
     background-color: transparent;
-    padding: 21px 16px 6px 16px;
+    padding: 20px 16px 6px 16px;
     min-width: 166px;
     font-size: 16px;
     border-radius: var(--mdc-shape-small, 4px) var(--mdc-shape-small, 4px) 0 0;
     border: none;
     vertical-align: inherit;
     box-sizing: inherit;
-    height: 28px;
+    height: 29px;
     line-height: inherit;
     border-bottom: 1px solid rgba(0,0,0, 0.38);
 }
@@ -2087,10 +2086,10 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     position: absolute;
     pointer-events: none;
     left: 16px;
-    top: 50%;
+    top: 51%;
     transform: translateY(-50%);
     pointer-events: none;
-    height: 28px;
+    height: 30px;
     transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1), color 150ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 /* active state */
@@ -2144,14 +2143,4 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     font-size: 0.75rem;
     padding: 4px 16px;
     margin: 0;
-}
-
-@media screen and (min-width: 768px) {
-    .mdc-text-field--filled {
-        height : 48px !important;
-    }
-    
-    .mdc-njs-select-wrap .mdc-njs-select {
-        padding-top: 13px !important;
-    }
 }
