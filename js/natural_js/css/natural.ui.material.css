@@ -751,14 +751,15 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .grid_container__ {
     position: relative;
 }
-@media screen and (-webkit-min-device-pixel-ratio:0) { /* CSS hack only for MAC PC */
+@media screen and (-webkit-min-device-pixel-ratio:0) { /* CSS hack only for MAC */
     .grid_container__ {
-        display: inline-grid;
+        /* display: inline-grid; */
     }
 }
 
 .grid_container__ > .grid_wrap__ {
     /* -webkit-overflow-scrolling: touch; */
+    border-radius: 0;
 }
 
 /* Details popup */
