@@ -530,7 +530,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .tbody_wrap__>.grid__>tbody td.empty__ {
     border-top: none;
     text-align: center;
-    border-left: 1px solid rgba(0,0,0,.12);
+    border-left: 1px solid transparent;
 }
 
 .grid__ thead th, .grid__ tbody td {
@@ -982,10 +982,10 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .tab__>.tab_scroll_prev__, .tab__>.tab_scroll_next__ {
-    background-color: #f6f6f6;
+    background-color: #e9e9e9;
     line-height: 48px;
     height: 48px;
-    border: 1px solid rgba(0, 0, 0, 0.12);
+    border: 1px solid #dcdcdc;
     border-top: none;
     color: var(--mdc-theme-primary, #6200ee);
 }
