@@ -437,7 +437,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .list__ > .row_data_changed__ input,
 .list__ > .row_data_changed__ select,
 .list__ > .row_data_changed__ textarea {
-    color : rgba(0, 0, 0, 1);
+    color : rgba(0, 0, 0, 0.87);
 }
 
 .list__ > .row_data_changed__ {
@@ -488,7 +488,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .grid__ > .row_data_changed__ input,
 .grid__ > .row_data_changed__ select,
 .grid__ > .row_data_changed__ textarea {
-    color : rgba(0, 0, 0, 1);
+    color : rgba(0, 0, 0, 0.87);
 }
 
 .grid__ > .row_data_changed__>tr:first-child>td:first-child {
