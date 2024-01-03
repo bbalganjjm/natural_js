@@ -1,5 +1,5 @@
 /*!
- * Natural-CORE v0.19.30
+ * Natural-CORE v0.19.31
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -23,7 +23,9 @@
     // Use jQuery init
     N = function(selector, context) {
         var obj = new $.fn.init(selector, context);
-        obj.selector = selector;
+        if(N.type(selector) === "string") {
+            obj.selector = selector;
+        }
         return obj;
     };
 
@@ -304,7 +306,7 @@
         // N local variables
         $.extend(N, {
             version : {
-                "Natural-CORE" : "0.19.30"
+                "Natural-CORE" : "0.19.31"
             },
             /**
              * Set and get locale value
