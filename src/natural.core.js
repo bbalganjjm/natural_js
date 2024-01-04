@@ -370,11 +370,16 @@
              * Checks whether an object of a type similar(array or jquery object etc.) to an array
              */
             isArraylike : function(obj) {
+                var length = obj.length, type = N.type(obj);
                 if(!obj.length) {
                     return false;
                 }
-                var length = obj.length, type = N.type(obj);
-                if (type === "function" || (obj === obj.window)){
+                if (type === "function"
+                    || type === "string"
+                    || type === "number"
+                    || type === "date"
+                    || type === "boolean"
+                    || obj === obj.window){
                     return false;
                 }
                 if (obj.nodeType === 1 && length) {
@@ -406,6 +411,12 @@
                 }
                 if(this.isElement(el)) {
                     return el.tagName.toLowerCase() + (el.id ? '#' + el.id : "") + '.' + (Array.from(el.classList)).join('.');
+                } else if(N.type(el) === "array") {
+                    if(el.length > 0) {
+                        return String(el[0]) + " x " + el.length;
+                    } else {
+                        return "[]";
+                    }
                 } else {
                     return String(el);
                 }
