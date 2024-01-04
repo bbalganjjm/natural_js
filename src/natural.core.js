@@ -371,7 +371,7 @@
              */
             isArraylike : function(obj) {
                 var length = obj.length, type = N.type(obj);
-                if(!obj.length) {
+                if(!length) {
                     return false;
                 }
                 if (type === "function"
