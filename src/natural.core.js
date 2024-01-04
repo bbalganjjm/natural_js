@@ -1,5 +1,5 @@
 /*!
- * Natural-CORE v0.19.31
+ * Natural-CORE v0.20.32
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -13,19 +13,10 @@
 (function(window, $) {
     var N;
 
-    // array.indexOf polyfill
-    if (!Array.prototype.indexOf) {
-        Array.prototype.indexOf = function(val) {
-            return jQuery.inArray(val, this);
-        };
-    }
-
     // Use jQuery init
     N = function(selector, context) {
         var obj = new $.fn.init(selector, context);
-        if(N.type(selector) === "string") {
-            obj.selector = selector;
-        }
+        obj.selector = N.toSelector(selector);
         return obj;
     };
 
@@ -306,7 +297,7 @@
         // N local variables
         $.extend(N, {
             version : {
-                "Natural-CORE" : "0.19.31"
+                "Natural-CORE" : "0.20.32"
             },
             /**
              * Set and get locale value
@@ -379,8 +370,11 @@
              * Checks whether an object of a type similar(array or jquery object etc.) to an array
              */
             isArraylike : function(obj) {
+                if(!obj.length) {
+                    return false;
+                }
                 var length = obj.length, type = N.type(obj);
-                if (type === "function" || (obj != null && obj === obj.window)){
+                if (type === "function" || (obj === obj.window)){
                     return false;
                 }
                 if (obj.nodeType === 1 && length) {
@@ -401,7 +395,20 @@
                 if(this.isWrappedSet(obj)) {
                     obj = obj.get(0);
                 }
-                return obj !== undefined && obj.getElementsByTagName ? true : false;
+                return !!(obj && obj !== document && obj.getElementsByTagName);
+            },
+            toSelector : function (el) {
+                if (typeof el === "string") {
+                    return el;
+                }
+                if(this.isWrappedSet(el)) {
+                    el = el.get(0);
+                }
+                if(this.isElement(el)) {
+                    return el.tagName.toLowerCase() + (el.id ? '#' + el.id : "") + '.' + (Array.from(el.classList)).join('.');
+                } else {
+                    return String(el);
+                }
             },
             /**
              * Run asynchronous execution sequentially
