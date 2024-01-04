@@ -402,7 +402,7 @@
                 }
                 return !!(obj && obj !== document && obj.getElementsByTagName);
             },
-            toSelector : function (el) {
+            toSelector : function(el) {
                 if (typeof el === "string") {
                     return el;
                 }
@@ -410,12 +410,19 @@
                     el = el.get(0);
                 }
                 if(this.isElement(el)) {
-                    return el.tagName.toLowerCase() + (el.id ? '#' + el.id : "") + '.' + (Array.from(el.classList)).join('.');
+                    return el.tagName.toLowerCase() + (el.id ? "#" + el.id : "") + (el.classList && el.classList.length > 0 ? "." : "") + (Array.from(el.classList)).join(".");
                 } else if(N.type(el) === "array") {
                     if(el.length > 0) {
-                        return String(el[0]) + " x " + el.length;
+                        let obj = el[el.length - 1];
+                        let type = N.type(obj);
+                        if(type.startsWith("[")) {
+                            type = type.replace(/[\[\]]/g, "");
+                        } else if(N.type(obj) === "string") {
+                            type = '"' + type + '"';
+                        }
+                        return "...[" + type + "](" + el.length + ")";
                     } else {
-                        return "[]";
+                        return "...[](0)";
                     }
                 } else {
                     return String(el);
