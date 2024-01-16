@@ -1,5 +1,5 @@
 /*!
- * Natural-CORE v0.20.33
+ * Natural-CORE v0.20.34
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -297,7 +297,7 @@
         // N local variables
         $.extend(N, {
             version : {
-                "Natural-CORE" : "0.20.33"
+                "Natural-CORE" : "0.20.34"
             },
             /**
              * Set and get locale value
@@ -493,20 +493,20 @@
              */
             "string" : {
                 contains : function(context, str) {
-                    if (this.isEmpty(context) || this.isEmpty(str)) {
-                        return false;
+                    if (this.isEmpty(context)) {
+                        throw N.error("[N.string.contains]You must input arguments[0]");
                     }
-                    return context && (context.indexOf(str) != -1);
+                    return context.indexOf(str) > -1;
                 },
                 endsWith : function(context, str) {
-                    if (this.isEmpty(context) || this.isEmpty(str)) {
-                        return false;
+                    if (this.isEmpty(context)) {
+                        throw N.error("[N.string.endsWith]You must input arguments[0]");
                     }
                     return context.lastIndexOf(str) === context.length - str.length;
                 },
                 startsWith : function(context, str) {
                     if (this.isEmpty(context)) {
-                        return false;
+                        throw N.error("[N.string.startsWith]You must input arguments[0]");
                     }
                     return context.indexOf(str) === 0;
                 },
