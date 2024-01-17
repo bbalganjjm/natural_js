@@ -119,7 +119,7 @@
                             }
                         }
                     } else if(i === lastIdx + 1) {
-                        if(opts.onBind !== null && (!N.string.isEmpty(callType) && !N.string.endsWith(callType, ".update"))) {
+                        if(opts.onBind !== null && !N.string.endsWith(N.string.trimToEmpty(callType), ".update")) {
                             opts.onBind.call(self, opts.context, opts.data, i === opts.scrollPaging.size || opts.data.length <= opts.scrollPaging.size, i === opts.data.length);
                         }
                         opts.scrollPaging.limit = opts.scrollPaging.size === 0 ? opts.data.length : opts.scrollPaging.size;

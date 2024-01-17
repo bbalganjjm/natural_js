@@ -493,20 +493,20 @@
              */
             "string" : {
                 contains : function(context, str) {
-                    if (this.isEmpty(context)) {
-                        throw N.error("[N.string.contains]You must input arguments[0]");
+                    if (typeof context !== "string") {
+                        throw N.error("[N.string.contains]arguments[0] was not entered or is not of string type.");
                     }
                     return context.indexOf(str) > -1;
                 },
                 endsWith : function(context, str) {
-                    if (this.isEmpty(context)) {
-                        throw N.error("[N.string.endsWith]You must input arguments[0]");
+                    if (typeof context !== "string") {
+                        throw N.error("[N.string.endsWith]arguments[0] was not entered or is not of string type.");
                     }
                     return context.lastIndexOf(str) === context.length - str.length;
                 },
                 startsWith : function(context, str) {
-                    if (this.isEmpty(context)) {
-                        throw N.error("[N.string.startsWith]You must input arguments[0]");
+                    if (typeof context !== "string") {
+                        throw N.error("[N.string.startsWith]arguments[0] was not entered or is not of string type.");
                     }
                     return context.indexOf(str) === 0;
                 },
