@@ -370,10 +370,10 @@
              * Checks whether an object of a type similar(array or jquery object etc.) to an array
              */
             isArraylike : function(obj) {
-                var length = obj.length, type = N.type(obj);
-                if(!length) {
+                if(typeof obj === "undefined" || obj.length === undefined) {
                     return false;
                 }
+                var length = obj.length, type = N.type(obj);
                 if (type === "function"
                     || type === "string"
                     || type === "number"
@@ -391,7 +391,7 @@
              * Check whether arg[0] is a jQuery Object type
              */
             isWrappedSet : function(obj) {
-                return obj != null && this.isArraylike(obj) && obj.jquery !== undefined;
+                return obj != null && this.isArraylike(obj) && obj.selector !== undefined;
             },
             /**
              * Check whether arg[0] is an element type
