@@ -391,7 +391,7 @@
              * Check whether arg[0] is a jQuery Object type
              */
             isWrappedSet : function(obj) {
-                return obj != null && this.isArraylike(obj) && obj.selector !== undefined;
+                return !!(obj && this.isArraylike(obj) && obj.jquery);
             },
             /**
              * Check whether arg[0] is an element type
