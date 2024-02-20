@@ -15,10 +15,10 @@
 	"authors": [
 		"KIM HWANG MAN <bbalganjjm@gmail.com>"
 	],
-	"license": "LGPL-2.1",
+	"license": "LGPL v2.1",
 	"homepage": "http://bbalganjjm.github.io/natural_js",
 	"dependencies":{
-    	"jquery": "1.12.4"
+    	"jquery": "3.7.1"
     },
 	"ignore": [
 		"lib/",

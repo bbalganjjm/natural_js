@@ -35,14 +35,14 @@
   ],
   "//" : {
       "dependencies": {
-        "jquery": "1.12.4"
+        "jquery": "3.7.1"
       }
   },
   "author": {
     "name" : "KIM HWANG MAN",
     "email" : "bbalganjjm@gmail.com"
   },
-  "license": "LGPL-2.0-only",
+  "license": "LGPL v2.1",
   "bugs": {
     "url": "https://github.com/bbalganjjm/natural_js/issues",
     "email": "bbalganjjm@gmail.com"
