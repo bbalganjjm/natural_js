@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.44.248
+ * Natural-UI v0.44.249
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2023 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-UI"] = "0.44.248";
+    N.version["Natural-UI"] = "0.44.249";
 
     $.fn.extend($.extend(N.prototype, {
         alert : function(msg, vars) {
@@ -398,7 +398,7 @@
                  * Wraps component event options and global event options in N.config.
                  */
                 wrapHandler : function(opts, compNm, eventNm) {
-                    if(N.context.attr("ui")[compNm] && N.context.attr("ui")[compNm][eventNm] && opts[eventNm]) {
+                    if(N.context.attr("ui")[compNm] && N.context.attr("ui")[compNm][eventNm] && (opts && opts[eventNm])) {
                         var localEventHandler = opts[eventNm];
                         opts[eventNm] = function() {
                             if(eventNm === "onBeforeBindValue") {
