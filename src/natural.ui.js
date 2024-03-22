@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.44.249
+ * Natural-UI v0.46.249
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2023 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-UI"] = "0.44.249";
+    N.version["Natural-UI"] = "0.46.249";
 
     $.fn.extend($.extend(N.prototype, {
         alert : function(msg, vars) {
@@ -161,8 +161,8 @@
                                 isSelected = true;
                             }
 
-                            if(opts.onSelect !== null) {
-                                retFlag = opts.onSelect.call(self, opts.row, thisEle, opts.data, opts.beforeRow, e);
+                            if(opts.onBeforeSelect !== null) {
+                                retFlag = opts.onBeforeSelect.call(self, opts.row, thisEle, opts.data, opts.beforeRow, e);
                             }
 
                             if(retFlag === undefined || retFlag === true) {
@@ -175,6 +175,10 @@
                                 } else {
                                     thisEle.removeClass(compNm + "_selected__");
                                 }
+                            }
+
+                            if(opts.onSelect !== null) {
+                                opts.onSelect.call(self, opts.row, thisEle, opts.data, opts.beforeRow, e);
                             }
                         }
                     });
@@ -3386,6 +3390,7 @@
                 unbind : true,
                 tpBind : false,
                 onBeforeBindValue : null,
+                onBindValue : null,
                 onBeforeBind : null,
                 onBind : null,
                 InitialData : null // for unbind
@@ -3400,6 +3405,7 @@
             if (N.isPlainObject(opts)) {
                 // Wraps the global event options in N.config and event options for this component.
                 UI.utils.wrapHandler(opts, "form", "onBeforeBindValue");
+                UI.utils.wrapHandler(opts, "form", "onBindValue");
                 UI.utils.wrapHandler(opts, "form", "onBeforeBind");
                 UI.utils.wrapHandler(opts, "form", "onBind");
 
@@ -3828,6 +3834,14 @@
                                 }
                             }
                         }
+
+                        if(opts.onBindValue !== null) {
+                            var filteredVal = opts.onBindValue.call(self, ele, vals[key], "bind");
+                            if(filteredVal !== undefined) {
+                                vals[key] = filteredVal;
+                            }
+                        }
+
                     }
 
                     if(arguments.length < 3 && opts.onBind !== null && this.options.extObj === null) {
@@ -4251,6 +4265,13 @@
                     opts.context.addClass("row_data_changed__");
                 }
 
+                if(opts.onBindValue !== null) {
+                    var filteredVal = opts.onBindValue.call(self, ele, vals[key], "val");
+                    if(filteredVal !== undefined) {
+                        vals[key] = filteredVal;
+                    }
+                }
+
                 return this;
             },
             update : function(row, key) {
@@ -4317,6 +4338,7 @@
                 tpBind : false,
                 rowHandlerBeforeBind : null,
                 rowHandler : null,
+                onBeforeSelect : null,
                 onSelect : null,
                 onBind : null
             };
@@ -4329,6 +4351,7 @@
 
             if (N.isPlainObject(opts)) {
                 // Wraps the global event options in N.config and event options for this component.
+                UI.utils.wrapHandler(opts, "list", "onBeforeSelect");
                 UI.utils.wrapHandler(opts, "list", "onSelect");
                 UI.utils.wrapHandler(opts, "list", "onBind");
 
@@ -4978,6 +5001,7 @@
                 pastiable : false,
                 rowHandlerBeforeBind : null,
                 rowHandler : null,
+                onBeforeSelect : null,
                 onSelect : null,
                 onBind : null,
                 misc : {
@@ -5005,6 +5029,7 @@
 
             if (N.isPlainObject(opts)) {
                 // Wraps the global event options in N.config and event options for this component.
+                UI.utils.wrapHandler(opts, "grid", "onBeforeSelect");
                 UI.utils.wrapHandler(opts, "grid", "onSelect");
                 UI.utils.wrapHandler(opts, "grid", "onBind");
 
