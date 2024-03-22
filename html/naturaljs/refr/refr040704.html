@@ -189,13 +189,45 @@
             <td style="text-align: center;">X</td>
             <td>
                 <p lang="ko_KR">데이터 프로퍼티 값이 요소에 바인딩되기 전에 실행되는 이벤트 핸들러를 정의합니다.</p>
-                <p lang="en_US">Defines an event handler that is executed before the data property value is bound to the element.</p>
+                <p lang="en_US">Defines an event handler that executes before a data property value is bound to an element.</p>
                 <p lang="ko_KR" class="alert"><a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a>에 전역 옵션으로 설정할 경우 N.form을 사용하는 모든 컴포넌트(N.grid, N.list)들에서도 적용됩니다.
                     onBeforeBindValue 이벤트를 사용하면 N.form, N.grid, N.list로 바인딩되는 모든 값들과 요소들을 한 번에 핸들링할 수 있습니다.</p>
                 <p lang="en_US" class="alert">If you set it as a global option in <a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a>, all components using N.form(N.grid, N.list) also apply.
                     Using the onBeforeBindValue event, you can handle all column values ​​and elements bound to N.form, N.grid, and N.list at once.</p>
                 <p lang="ko_KR" class="alert">onBeforeBindValue 이벤트를 N.config에 전역 이벤트 옵션으로 설정하면 컴포넌트 초기화 시 정의 한 onBeforeBindValue 이벤트 핸들러의 결괏값이 전역 이벤트 핸들러의 val(arguments[1]) 인자로 지정됩니다.
                                 때문에 다른 이벤트들처럼 전역으로 설정한 이벤트 핸들러를 컴포넌트 이벤트에서 중단할 수 없습니다.</p>
+                <p lang="en_US" class="alert">If the onBeforeBindValue event is set as a global event option in N.config, the result value of the onBeforeBindValue event handler defined at component initialization is specified as the val (arguments [1]) parameter of the global event handler.
+                    Therefore, you cannot stop the globally set event handler from the component event like other events.</p>
+                <pre lang="ko_KR"><code>onBeforeBindValue : function(ele, val, action) {
+    // this : N.form 인스턴스
+    // ele : 바인딩될 요소
+    // val : 바인딩될 값
+    // action : N.form 인스턴스의 메서드 명 - "bind" | "val"
+    return val; // 반드시 처리된 값을 다시 리턴해야 합니다.
+}</code></pre>
+                <pre lang="en_US"><code>onBeforeBindValue : function(ele, val, action) {
+    // this : N.form instance
+    // ele : The element to be bound
+    // val : The value to be bound
+    // action : Method name of N.form instance - "bind" | "val"
+    return val; // The processed value must be returned again.
+}</code></pre>
+            </td>
+        </tr>
+        <tr>
+            <td>onBindValue</td>
+            <td>function</td>
+            <td>null</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p lang="ko_KR">데이터 프로퍼티 값이 요소에 바인딩된 후에 실행되는 이벤트 핸들러를 정의합니다.</p>
+                <p lang="en_US">Defines an event handler that executes after a data property value is bound to an element.</p>
+                <p lang="ko_KR" class="alert"><a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a>에 전역 옵션으로 설정할 경우 N.form을 사용하는 모든 컴포넌트(N.grid, N.list)들에서도 적용됩니다.
+                    onBeforeBindValue 이벤트를 사용하면 N.form, N.grid, N.list로 바인딩되는 모든 값들과 요소들을 한 번에 핸들링할 수 있습니다.</p>
+                <p lang="en_US" class="alert">If you set it as a global option in <a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a>, all components using N.form(N.grid, N.list) also apply.
+                    Using the onBeforeBindValue event, you can handle all column values ​​and elements bound to N.form, N.grid, and N.list at once.</p>
+                <p lang="ko_KR" class="alert">onBeforeBindValue 이벤트를 N.config에 전역 이벤트 옵션으로 설정하면 컴포넌트 초기화 시 정의 한 onBeforeBindValue 이벤트 핸들러의 결괏값이 전역 이벤트 핸들러의 val(arguments[1]) 인자로 지정됩니다.
+                    때문에 다른 이벤트들처럼 전역으로 설정한 이벤트 핸들러를 컴포넌트 이벤트에서 중단할 수 없습니다.</p>
                 <p lang="en_US" class="alert">If the onBeforeBindValue event is set as a global event option in N.config, the result value of the onBeforeBindValue event handler defined at component initialization is specified as the val (arguments [1]) parameter of the global event handler.
                     Therefore, you cannot stop the globally set event handler from the component event like other events.</p>
                 <pre lang="ko_KR"><code>onBeforeBindValue : function(ele, val, action) {
