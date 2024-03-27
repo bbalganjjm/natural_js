@@ -230,19 +230,17 @@
                     때문에 다른 이벤트들처럼 전역으로 설정한 이벤트 핸들러를 컴포넌트 이벤트에서 중단할 수 없습니다.</p>
                 <p lang="en_US" class="alert">If the onBeforeBindValue event is set as a global event option in N.config, the result value of the onBeforeBindValue event handler defined at component initialization is specified as the val (arguments [1]) parameter of the global event handler.
                     Therefore, you cannot stop the globally set event handler from the component event like other events.</p>
-                <pre lang="ko_KR"><code>onBeforeBindValue : function(ele, val, action) {
+                <pre lang="ko_KR"><code>onBindValue : function(ele, val, action) {
     // this : N.form 인스턴스
     // ele : 바인딩될 요소
     // val : 바인딩될 값
     // action : N.form 인스턴스의 메서드 명 - "bind" | "val"
-    return val; // 반드시 처리된 값을 다시 리턴해야 합니다.
 }</code></pre>
-                <pre lang="en_US"><code>onBeforeBindValue : function(ele, val, action) {
+                <pre lang="en_US"><code>onBindValue : function(ele, val, action) {
     // this : N.form instance
     // ele : The element to be bound
     // val : The value to be bound
     // action : Method name of N.form instance - "bind" | "val"
-    return val; // The processed value must be returned again.
 }</code></pre>
             </td>
         </tr>
