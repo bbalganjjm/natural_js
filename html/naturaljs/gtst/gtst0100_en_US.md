@@ -71,9 +71,9 @@ Natural-JS's component option's applied priority is as follows.
 
 1.  The specified option values when initializing the component
 2.  The specified options values in <a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a>
-3.  The default option values ​​of component
+3.  The default option values of component
 
-Option values ​​not specified in the <a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a> among the default option values ​​of the component class is if you do not specify any options at component initialization it works as the default option value of the component class. If you want to set the default option value of a component class that is not defined in the configuration file as the site global option value you can add it to the component part of the configuration file. For example, if you want to set the default height of all grid components body areas within the site to 300 pixels you can add the following to the N.context.attr ("ui").grid property
+Option values not specified in the <a href="#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s">Config(natural.config.js)</a> among the default option values of the component class is if you do not specify any options at component initialization it works as the default option value of the component class. If you want to set the default option value of a component class that is not defined in the configuration file as the site global option value you can add it to the component part of the configuration file. For example, if you want to set the default height of all grid components body areas within the site to 300 pixels you can add the following to the N.context.attr ("ui").grid property
 
 ```
 N.context.attr("ui", {

@@ -1,7 +1,7 @@
 Overview
 ===
 
-Controller(N.cont) is a class that implements Controller layer of ​​CVC Architecture Pattern.
+Controller(N.cont) is a class that implements Controller layer of CVC Architecture Pattern.
 
 ![](images/intr/pic4.png)
 <center>[ Natural-ARCHITECTURE ]</center>
@@ -9,7 +9,7 @@ Controller(N.cont) is a class that implements Controller layer of ​​CVC Arch
 N.cont executes the init function of the Controller object and returns a Controller object.
 <p class="alert">The Controller object is the object that controls the elements of the View and the data retrieved by Communicator.</p>
 
-N.cont should be declared just below the View area of ​​the page as follows:
+N.cont should be declared just below the View area of the page as follows:
 
 ```
 <article class="view">

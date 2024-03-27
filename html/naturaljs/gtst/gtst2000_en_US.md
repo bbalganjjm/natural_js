@@ -65,7 +65,7 @@ https://github.com/bbalganjjm/natural_js.git
 
 ![img-3][]
 
-2.4. This is the screen for entering the connection information of  Source Git Repository of Natural-JS. The values ​​will be automatically entered according to the URL you copied earlier. If not entered, Enter
+2.4. This is the screen for entering the connection information of  Source Git Repository of Natural-JS. The values will be automatically entered according to the URL you copied earlier. If not entered, Enter
 ```md
 https://github.com/bbalganjjm/natural_js.git
 ```

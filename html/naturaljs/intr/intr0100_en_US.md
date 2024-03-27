@@ -72,18 +72,18 @@ Natural Architecture Framework provides a clear separation of the areas of devel
 
 #### Controller
 
-[Controller(N.cont)](#cmVmcjAyMDElMjRDb250cm9sbGVyJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAyMDEuaHRtbA==) is a class that implements Controller layer of ​​CVC Architecture Pattern.
+[Controller(N.cont)](#cmVmcjAyMDElMjRDb250cm9sbGVyJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAyMDEuaHRtbA==) is a class that implements Controller layer of CVC Architecture Pattern.
  * Controller object is an object in which user-defined functions that control block pages are implemented.
    <p class="alert">N.cont executes the init function of the Controller object and returns a Controller object.</p>
  * Natural-ARCHITECTURE supports AOP (Aspect-Oriented Programming) for Controller objects.
 
 #### View
 
-There is no separate implementation of View, and the HTML element area of ​​the block page is defined as View.
+There is no separate implementation of View, and the HTML element area of the block page is defined as View.
 
 #### Communicator
 
-[Communicator(N.comm)](#cmVmcjAyMDMlMjRDb21tdW5pY2F0b3IkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDIwMy5odG1s) is a class that implements Communicator layer of ​​CVC Architecture Pattern.
+[Communicator(N.comm)](#cmVmcjAyMDMlMjRDb21tdW5pY2F0b3IkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDIwMy5odG1s) is a class that implements Communicator layer of CVC Architecture Pattern.
  * N.comm is a library that supports Ajax communication with the server, such as requesting content or data from the server, or passing parameters.
  * N.comm provides a [Communication Filter](#cmVmcjAyMDUlMjRDb21tdW5pY2F0aW9uJTIwRmlsdGVyJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAyMDUuaHRtbA==) feature that can execute common logic in every request and response or error generation phase that communicates with the server.
 

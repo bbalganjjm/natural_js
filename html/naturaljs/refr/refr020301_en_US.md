@@ -1,7 +1,7 @@
 Overview
 ===
 
-Communicator(N.comm) is a class that implements Communicator layer of ​​CVC Architecture Pattern.
+Communicator(N.comm) is a class that implements Communicator layer of CVC Architecture Pattern.
 
 ![](images/intr/pic4.png)
 <center>[ Natural-ARCHITECTURE ]</center>
