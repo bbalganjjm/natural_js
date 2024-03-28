@@ -132,7 +132,14 @@
             <td>
                 <p lang="ko_KR">페이지가 전환될 때 실행되는 이벤트 핸들러를 정의합니다.</p>
                 <p lang="en_US">Define an event handler that is excuted when the page is switched.</p>
-                <pre><code>onChange : function(pageNo, selEle, selData, currPageNavInfo) {
+                <pre lang="ko_KR"><code>onChange : function(pageNo, selEle, selData, currPageNavInfo) {
+    // this : N.pagination 인스턴스
+    // pageNo : 페이지 번호
+    // selEle : 선택된 페이지 이동 요소
+    // selData : 선택된 페이지의 데이터 목록
+    // currPageNavInfo : 이벤트가 발생했을 때의 페이지 정보
+}</code></pre>
+                <pre lang="en_US"><code>onChange : function(pageNo, selEle, selData, currPageNavInfo) {
     // this : N.pagination instance
     // pageNo : Page number
     // selEle : Selected page link element
