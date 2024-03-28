@@ -596,7 +596,7 @@
             <td>
                 <p lang="ko_KR">행이 선택 되기전에 실행되는 이벤트 핸들러를 정의합니다.</p>
                 <p lang="en_US">Defines an event handler that executes before a row is selected.</p>
-                <pre lang="ko_KR"><code>onSelect : function(rowIdx, rowEle, rowData, beforeRowIdx, e) {
+                <pre lang="ko_KR"><code>onBeforeSelect : function(rowIdx, rowEle, rowData, beforeRowIdx, e) {
     // this : N.grid 인스턴스
     // rowIdx : 선택된 행 index
     // rowEle : 선택된 행 요소(li)
@@ -604,7 +604,7 @@
     // beforeRowIdx : 바로 전에 선택된 행의 index
     // e : click 이벤트 객체
 }</code></pre>
-                <pre lang="en_US"><code>onSelect : function(rowIdx, rowEle, rowData, beforeRowIdx, e) {
+                <pre lang="en_US"><code>onBeforeSelect : function(rowIdx, rowEle, rowData, beforeRowIdx, e) {
     // this : N.grid instance
     // rowIdx : Selected row index
     // rowEle : Selected row element (li)
