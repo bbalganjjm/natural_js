@@ -145,10 +145,9 @@
                             if(location.hostname === "localhost" || location.hostname === "127.0.0.1") {
                                 // [ Natural-CODE ] Code inspection
                                 N.code.inspection.report.console(N.code.inspection.test(data), opts.url);
-
-                                // [ Natural-CODE ] For debugging controller object, sourceURL is automatically inserted for every HTML request.
-                                data = N.code.addSourceURL(data, opts.url);
                             }
+                            // [ Natural-CODE ] For debugging controller object, sourceURL is automatically inserted for every HTML request.
+                            data = N.code.addSourceURL(data, opts.url);
 
                             // color theme
                             if(!APP.indx.colorPalette[window.localStorage.themeColor]) {
