@@ -147,7 +147,7 @@
                                 N.code.inspection.report.console(N.code.inspection.test(data), opts.url);
                             }
                             // [ Natural-CODE ] For debugging controller object, sourceURL is automatically inserted for every HTML request.
-                            data = N.code.addSourceURL(data, opts.url);
+                            data = N.code.addSourceURL(data, opts.url).replace(".html", ".js");
 
                             // color theme
                             if(!APP.indx.colorPalette[window.localStorage.themeColor]) {
