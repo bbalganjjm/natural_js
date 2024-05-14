@@ -53,10 +53,13 @@
         init : function(view, request) {
             this.initDocs(this, view);
 
-            if(N.string.trimToEmpty(location.hash).length > 0 && N.string.trimToEmpty(location.hash).length <= 35) {
-                location.href = "./";
-            } else {
+            if(!N.string.isEmpty(location.hash)
+                && (N.string.endsWith(location.hash, ".html") || N.string.endsWith(location.hash, ".view"))) {
                 $(window).trigger("hashchange.index");
+            } else {
+                APP.indx.docs.add("home0100", "Home", {
+                    "url" : "html/naturaljs/home/home0100.html"
+                });
             }
         },
         initDocs : function(cont, view) {

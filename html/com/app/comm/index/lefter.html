@@ -341,10 +341,10 @@
                 var selfEle = N(this);
 
                 if(selfEle.parent().is(".leaf-node") && selfEle.is("[data-pageid]")) {
-                    location.hash = btoa(encodeURIComponent(selfEle.data("pageid") + "$" + selfEle.find("span").text()) + "$" + encodeURIComponent(selfEle.attr("href")));
+                    location.hash = selfEle.attr("href");
 
-                     if($(window).width() <= 1001) { // 768 + 250 - 17px(?)
-                        N(".lefter-toggle-button", view).trigger("click.lefter");
+                    if($(window).width() <= 1001) { // 768 + 256 - 17px(?)
+                        N(".lefter-toggle-button", ".page-wrap").trigger("click.lefter");
                     }
                 }
 

@@ -10,7 +10,6 @@
             } else {
                 this.loadHeader();
                 this.loadLefter();
-                this.loadBody();
                 this.loadFooter();
             }
             this.reloadCss();
@@ -36,7 +35,9 @@
             N("header").comm("html/com/app/comm/index/header.html").submit();
         },
         loadLefter : function() {
-            N(".main-nav").comm("html/com/app/comm/index/lefter.html").submit();
+            N(".main-nav").comm("html/com/app/comm/index/lefter.html").submit(function () {
+                APP.indx.loadBody();
+            });
         },
         loadBody : function() {
             N(".main-contents").comm("html/com/app/comm/index/contents.html").submit();
@@ -47,58 +48,19 @@
         initBrowserHistorySystem : function() {
             var self = this;
             $(window).on("hashchange.index", function() {
-
-                var docId, docNm, url;
-                if (N.string.trimToEmpty(location.hash).length === 0) {
-                    docId = "home0100";
-                    docNm = "Home";
-
-                    url = "html/naturaljs/" + docId.substring(0, 4) + "/" + docId + ".html";
-                }
-
-                if ((docId === "home0100" || N.string.trimToEmpty(location.hash).length > 67) && !N.string.endsWith(location.href, "#")) {
-                    var menuInfoStr = "";
-                    var menuInfo = "";
-                    try {
-                        menuInfoStr = location.hash.replace("#", "");
-                        menuInfo = decodeURIComponent(atob(menuInfoStr)).split("$");
-                    } catch(e) {
-                        N.warn(e);
-                    }
-
-                    if (menuInfo.length > 1) {
-                        if(!N.string.isEmpty(menuInfo[0])) {
-                            docId = menuInfo[0];
-                        }
-                        if(!N.string.isEmpty(menuInfo[1])) {
-                            docNm = menuInfo[1];
-                        }
-
-                        // FIXME 메뉴 DB 만들어 지고 페이지 불러오는 서비스 만들어지면 아래 url 수정해서 살리고 url = menuInfo[2];는 제거 바람.
-                        // url = "html/com/app/sample/" + docId + ".html";
-                        if(menuInfo[2]) {
-                            url = menuInfo[2];
-                        }
-                    }
-
-                    if(self.docs) {
+                if(self.docs) {
+                    if (!N.string.isEmpty(location.hash)
+                        && (N.string.endsWith(location.hash, ".html") || N.string.endsWith(location.hash, ".view"))) {
+                        var url = location.hash.replace("#", "");
+                        var selectedMenuEle = N(".index-lefter.view_context__ a[href='" + url + "']");
+                        var docId = selectedMenuEle.find("span:last").text();
                         if(self.docs.options.order[0] !== docId) {
-                            // N.docs MDI 탭 닫을 때 페이지에서 사용된 라이브러리 제거
-                            var onRemove;
-                            if(docId === "documents") {
-                                onRemove = function(docId) {
-                                    showdown = undefined;
-                                }
-                            }
-
-                            self.docs.add(docId, docNm, {
-                                "url" : url,
-                                "onRemove" : onRemove
+                            self.docs.add(selectedMenuEle.data("pageid"), docId, {
+                                "url" : url
                             });
                         }
                     }
                 }
-
             });
         },
         "colorPalette" : {
@@ -213,7 +175,6 @@
             });
         },
         mobileResponsiveView : function() {
-
             // API 문서 모바일 용 보기 처리 이벤트
             N(window).on("resize.mobile", function(e, view) {
 
