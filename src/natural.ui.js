@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.46.249
+ * Natural-UI v0.46.250
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2023 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-UI"] = "0.46.249";
+    N.version["Natural-UI"] = "0.46.250";
 
     $.fn.extend($.extend(N.prototype, {
         alert : function(msg, vars) {
@@ -2166,16 +2166,10 @@
             show : function() {
                 var opts = this.options;
 
-                if(N(".datepicker_contents__").length > 0) {
-                    N(".datepicker_contents__").each(function() {
-                        var thisEle = N(this);
-                        if(thisEle.prev(".datepicker__").length > 0) {
-                            thisEle.prev(".datepicker__").instance("datepicker").hide();
-                        }
-                    });
-                }
-
-                if(opts.context.next(".datepicker_contents__.visible").length === 0) {
+                var contextParentWrapEle = opts.context.closest("label,span");
+                if(opts.context.next(".datepicker_contents__.visible").length === 0
+                    && (contextParentWrapEle.css("overflow").indexOf("hidden") > -1
+                        && contextParentWrapEle.next(".datepicker_contents__").length === 0)) {
                     Datepicker.createContents.call(this);
 
                     // auto select datepicker items from before input value
