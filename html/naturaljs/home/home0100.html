@@ -2,64 +2,80 @@
 .home0100 .n-architecture > li:nth-child(1) {
     /* 99FF99 */
     background-size: auto 80%;
-    background: #C8E6C9 url("images/home/n_architecture_back1.png") no-repeat 50% 50%;
+    background: var(--md-sys-color-tertiary-container) url("images/home/n_architecture_back1.png") no-repeat 50% 50%;
 }
 
 .home0100 .n-architecture > li:nth-child(2) {
     /* 99FF99 */
     background-size: auto 80%;
-    background: #C8E6C9 url("images/home/n_architecture_back2.png") no-repeat 50% 50%;
+    background: var(--md-sys-color-tertiary-container) url("images/home/n_architecture_back2.png") no-repeat 50% 50%;
 }
 
 .home0100 .n-architecture > li:nth-child(3) {
     /* 99FF99 */
     background-size: auto 80%;
-    background: #C8E6C9 url("images/home/n_architecture_back3.png") no-repeat 50% 50%;
+    background: var(--md-sys-color-tertiary-container) url("images/home/n_architecture_back3.png") no-repeat 50% 50%;
 }
 
 .home0100 .n-architecture > li:nth-child(4) {
     background-size: auto 80%;
-    background: #C8E6C9 url("images/home/n_architecture_back4.png") no-repeat 50% 50%; /* 99FF99 */
+    background: var(--md-sys-color-tertiary-container) url("images/home/n_architecture_back4.png") no-repeat 50% 50%; /* 99FF99 */
 }
 
 .home0100 .n-data > li:nth-child(1) {
     background-size: auto 80%;
-    background: #C8E6C9 url("images/home/n_data_back1.png") no-repeat 50% 50%; /* 99FF99 */
+    background: var(--md-sys-color-tertiary-container) url("images/home/n_data_back1.png") no-repeat 50% 50%; /* 99FF99 */
 }
 
 .home0100 .n-data > li:nth-child(2) {
     background-size: auto 80%;
-    background: #C8E6C9 url("images/home/n_data_back2.png") no-repeat 50% 50%; /* 99FF99 */
+    background: var(--md-sys-color-tertiary-container) url("images/home/n_data_back2.png") no-repeat 50% 50%; /* 99FF99 */
 }
 
 .home0100 .n-data > li:nth-child(3) {
     background-size: auto 80%;
-    background: #C8E6C9 url("images/home/n_data_back3.png") no-repeat 50% 50%; /* 99FF99 */
+    background: var(--md-sys-color-tertiary-container) url("images/home/n_data_back3.png") no-repeat 50% 50%; /* 99FF99 */
 }
 
 .home0100 .n-ui > li:nth-child(1) {
     background-size: auto 80%;
-    background: #C8E6C9 url("images/home/n_ui_back1.png") no-repeat 50% 50%; /* 99FF99 */
+    background: var(--md-sys-color-tertiary-container) url("images/home/n_ui_back1.png") no-repeat 50% 50%; /* 99FF99 */
 }
 
 .home0100 .n-ui > li:nth-child(2) {
     background-size: auto 80%;
-    background: #C8E6C9 url("images/home/n_ui_back2.png") no-repeat 50% 50%; /* 99FF99 */
+    background: var(--md-sys-color-tertiary-container) url("images/home/n_ui_back2.png") no-repeat 50% 50%; /* 99FF99 */
 }
 
 .home0100 .n-ui > li:nth-child(3) {
     background-size: auto 80%;
-    background: #C8E6C9 url("images/home/n_ui_back3.png") no-repeat 50% 50%; /* 99FF99 */
+    background: var(--md-sys-color-tertiary-container) url("images/home/n_ui_back3.png") no-repeat 50% 50%; /* 99FF99 */
 }
 
 .home0100 .n-ui > li:nth-child(4) {
     background-size: auto 80%;
-    background: #C8E6C9 url("images/home/n_ui_back4.png") no-repeat 50% 50%; /* 99FF99 */
+    background: var(--md-sys-color-tertiary-container) url("images/home/n_ui_back4.png") no-repeat 50% 50%; /* 99FF99 */
 }
 
 .home0100 .n-ui > li:nth-child(5) {
     background-size: auto 80%;
-    background: #C8E6C9 url("images/home/n_ui_back5.png") no-repeat 50% 50%; /* 99FF99 */
+    background: var(--md-sys-color-tertiary-container) url("images/home/n_ui_back5.png") no-repeat 50% 50%; /* 99FF99 */
+}
+
+@media (prefers-color-scheme: dark) {
+    .home0100 .contents > ul > li {
+        position: relative;
+        isolation: isolate;
+    }
+
+    .home0100 .contents > ul > li::after {
+        content: '';
+        position: absolute;
+        background: var(--md-sys-color-surface);
+        z-index: -1;
+        inset: 0;
+        opacity: 0.90;
+    }
 }
 
 .home0100 .contents {
@@ -96,7 +112,7 @@
 .home0100 ul>li:hover,
 .home0100 ul>li.hover {
     transform: translateY(-10px);
-    box-shadow: 0 10px 10px #999;
+    box-shadow: 0 10px 10px var(--md-sys-color-shadow);
 }
 
 .home0100 ol>li {

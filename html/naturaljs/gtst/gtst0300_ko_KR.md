@@ -42,7 +42,7 @@ Grid로 생성/조회/수정/삭제를 처리하기 위해 조회 조건 영역�
     }
 
     .page6 .search-conditions {
-        border: 1px solid #000;
+        border: 1px solid var(--md-sys-color-outline);
         padding: 10px;
     }
     .page6 .search-conditions > label {
@@ -71,7 +71,7 @@ Grid로 생성/조회/수정/삭제를 처리하기 위해 조회 조건 영역�
     }
     .page6 table th,
     .page6 table td {
-        border: 1px solid #000;
+        border: 1px solid var(--md-sys-color-outline);
         box-sizing: border-box;
     }
 </style>

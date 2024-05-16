@@ -11,37 +11,37 @@
     background: url("images/header-back.png");
 }
 
+@media (prefers-color-scheme: dark) {
+    .index-header .header-back {
+        isolation: isolate;
+    }
+
+    .index-header .header-back::after {
+        content: '';
+        position: absolute;
+        background: var(--md-sys-color-surface);
+        z-index: -1;
+        inset: 0;
+        opacity: 1;
+    }
+}
+
 .index-header .i18n-select,
 .index-header .links {
     position: relative;
     display: inline-block;
     margin: 7px 10px 0 0;
-    color : #66BB6A;
     z-index: 1;
 }
 
 .index-header .i18n-select a {
-    color: #2E7D32;
-}
-
-.index-header .theme-color {
-    position: relative;
-    height: 25px;
-    line-height: 25px;
-    margin: 0 7px 0 0;
-    padding-bottom: 3px;
-    width: auto;
-    opacity: 0.8;
-    z-index: 1;
-    text-align: center;
-    text-align-last: center;
-    background-color: #e6e8e5;
+    color: var(--md-sys-color-surface-tint-color);
 }
 
 .index-header .github-link>span {
     background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABJklEQVQ4y42ToVLDQBCGv93kIhqmohLRZ+hEIRBI3oS+CVNdFZEHYCp4iCp0RUU0op6BmYQQBHuZIz0admZFdv//v93cfzAKESmAEqiB1rIGSuvFI0mSGVAB/URWhj0j7/9B9rkfi/iTX4A1cAA64NWys9raML1xhp298hYgy7LUOXfl1Z1zsyzLUvvceryIFGnf9w/BJF8ATdN8Am++2Lbt+xgD4Lm1V1TVaybCMH7iGrumHjhNkYM4GafVoDjP8zydYhpmHtaGFUTkbkrAML9WKIPCUVWXF/ZfAscAXw7XKCKPwDPwAexUdRUQV8DOeoOhQmtXQKeqt8ATP05b+KZzbkHE0sNogZUPInIvIjeRDS5aOfaY/hI4f0yjv1wAm0hrE3vO3ymJdIJgZzluAAAAAElFTkSuQmCC') no-repeat;
     padding-left: 19px;
-    color : #00838F;
+    color: var(--md-sys-color-surface-tint-color);
 }
 
 .index-header .github-link.boot {
@@ -63,7 +63,7 @@
 .index-header .community-link>span {
     background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAA6klEQVQ4y92QoU4DURREz2wqCRLVViBI0wRDKlHgSlF8AJZNMHxNVyAQ6Co24FCQkEpI2CBZBJ+A2TcYFjYksI+VXPUyk5l371F/On+0PaLDSCqSrmEA26Ne5E9vwDlwDyTAvu0dgNYCSUFit8zT21rrT+crQFwBcFWHB3vZGHts2KzNmIKnxs3XtteaZhJREBrv1e/mjxtIWkhcAg9fGqmkns2h7e22E+7KPD1tCmWenn1APIhhMBjOsgnw+nxx9AIwnGVbQBKCN1oZ2D6uqrAMwSefMIJvqiosba//BeKv8x8KJBVdw5KKd7wuWFdJSZGYAAAAAElFTkSuQmCC') no-repeat;
     padding-left: 19px;
-    color : #00838F;
+    color: var(--md-sys-color-surface-tint-color);
     margin-right: 10px;
 }
 </style>
@@ -81,8 +81,6 @@
         <a class="community-link" href="https://www.facebook.com/groups/1927201360891679" target="blank" title="Natural-JS Facebook Community"><span>Community</span></a>
         <a class="korean link" href="#" title="한국어로 변경">한국어</a> | <a class="english link" href="#" title="Change to english">English</a>
     </div>
-
-    <select class="theme-color" title="색상 테마 선택"></select>
 </article>
 
 <script type="text/javascript">
@@ -98,23 +96,6 @@
                 e.preventDefault();
                 window.sessionStorage.locale = "en_US";
                 window.location.reload();
-            });
-
-            // Color select
-            var colorSelect = N(".theme-color", view);
-            for(var k in APP.indx.colorPalette) {
-                var selected="";
-                if(k === window.localStorage.themeColor) {
-                    selected = 'selected="selected"';
-                } else {
-                    selected = "";
-                }
-                colorSelect.append('<option value="' + k + '" ' + selected + '>' + k + '</option>')
-            };
-
-            colorSelect.on("change", function() {
-                window.localStorage.themeColor = $(this).val();
-                location.reload();
             });
         }
     });

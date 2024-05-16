@@ -12,7 +12,7 @@
 
     <h4 lang="ko_KR" class="notIndex">1. 지정한 요소(.popupArea)로 팝업으로 생성하기.</h4>
     <h4 lang="en_US" class="notIndex">1. Creating the popup with specified element(.popupArea).</h4>
-    <pre><code>&lt;div title="Popup Example" class="popupArea" style="height: 200px;border: 3px dotted #4CAF50;"&gt;Popup Block...&lt;/div&gt;
+    <pre><code>&lt;div title="Popup Example" class="popupArea" style="height: 200px;border: 3px dotted var(--md-sys-color-outline);"&gt;Popup Block...&lt;/div&gt;
 
 &lt;script type="text/javascript"&gt;
        <strong>N(".popupArea")</strong>.popup().open();
@@ -54,7 +54,7 @@
     <p lang="en_US">5.1. Popup page(popup.html)</p>
     <pre lang="ko_KR"><code>&lt;!-- Style --&gt;
 &lt;style&gt;
-    .popup-0001 .result { width: 400px; height: 300px; border: 1px solid #4CAF50; }
+    .popup-0001 .result { width: 400px; height: 300px; border: 1px solid var(--md-sys-color-outline); }
 &lt;/style&gt;
 
 &lt;!-- View --&gt;
@@ -80,7 +80,7 @@ N(".popup-0001").cont({
 &lt;/script&gt;</code></pre>
     <pre lang="en_US"><code>&lt;!-- Style --&gt;
 &lt;style&gt;
-    .popup-0001 .result { width: 400px; height: 300px; border: 1px solid #4CAF50; }
+    .popup-0001 .result { width: 400px; height: 300px; border: 1px solid var(--md-sys-color-outline); }
 &lt;/style&gt;
 
 &lt;!-- View --&gt;
@@ -109,7 +109,7 @@ N(".popup-0001").cont({
     <p lang="en_US">5.2. Parent page(parent.html)</p>
     <pre lang="ko_KR"><code>&lt;!-- Style --&gt;
 &lt;style&gt;
-    .parent-0001 .result { width: 400px; height: 300px; border: 1px solid #4CAF50; }
+    .parent-0001 .result { width: 400px; height: 300px; border: 1px solid var(--md-sys-color-outline); }
 &lt;/style&gt;
 
 &lt;!-- View --&gt;
@@ -134,7 +134,7 @@ N(".parent-0001").cont({
 &lt;/script&gt;</code></pre>
     <pre lang="en_US"><code>&lt;!-- Style --&gt;
 &lt;style&gt;
-    .parent-0001 .result { width: 400px; height: 300px; border: 1px solid #4CAF50; }
+    .parent-0001 .result { width: 400px; height: 300px; border: 1px solid var(--md-sys-color-outline); }
 &lt;/style&gt;
 
 &lt;!-- View --&gt;

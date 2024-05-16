@@ -1,7 +1,7 @@
 <style>
     .exap0900 .formGroup {
         padding: 40px;
-        background-color: #E8F5E9;
+        background-color: var(--md-sys-color-primary-container);
     }
 
     .exap0900 .formGroup input[type='text'], .exap0900 .formGroup input[type='number'], .exap0900 .formGroup input[type='tel'] {
@@ -22,7 +22,7 @@
     .exap0900 .form03,
     .exap0900 .form03 th  {
         background-color: blue;
-        color: #fff;
+        color: var(--md-sys-color-surface);
         opacity : 0.8;
     }
 </style>
@@ -298,7 +298,7 @@ N(".exap0900").cont({
                 formEle = N(".form03", cont.view);
             }
             formEle.css({
-                "box-shadow" : "5px 5px 10px #7777777a",
+                "box-shadow" : "5px 5px 10px var(--md-sys-color-shadow)",
                 "opacity" : "1",
                 "transform" : "scale(1.1)",
                 "transition" : "transform 1s, box-shadow 1s, opacity 1s"
