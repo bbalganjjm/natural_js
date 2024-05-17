@@ -29,7 +29,7 @@ body {
 
 a {
     text-decoration: none;
-    color: #0366d6;
+    color: var(--md-sys-color-surface-tint-color);
 }
 .pagination__ a {
     color: var(--md-sys-color-on-surface);
@@ -70,8 +70,8 @@ select[multiple='multiple'] {
 }
 
 input[readonly], input[readonly]:hover, input[readonly]:focus {
-    color: var(--md-sys-color-on-secondary-container) !important;
-    background-color: var(--md-sys-color-secondary-container) !important;
+    color: var(--md-sys-color-on-surface) !important;
+    background-color: var(--md-sys-color-surface-container-low) !important;
 }
 
 input[disabled][type='text'],
@@ -89,8 +89,8 @@ input[disabled][type='number']:focus,
 input[disabled][type='tel']:focus,
 select[disabled]:focus,
 textarea[disabled]:focus {
-    background-color: var(--md-sys-color-primary-container);
-    color: rgba(0, 0, 0, 0.4) !important;
+    color: var(--md-sys-color-on-surface) !important;
+    background-color: var(--md-sys-color-surface-container-low);
 }
 
 input[type='radio'], input[type='checkbox'] {
@@ -135,7 +135,7 @@ th, tfoot td {
 
 .grid__ tr>th:first-child,
 .form__ tr>th:first-child {
-    border-left-color: var(--md-sys-color-outline-variant);
+    border-left: none;
 }
 
 .grid__ tr>td:first-child,
