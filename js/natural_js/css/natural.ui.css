@@ -457,7 +457,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .grid__.grid_hover__ > tbody:hover input,
 .grid__.grid_hover__ > tbody:hover select,
 .grid__.grid_hover__ > tbody:hover textarea    {
-    background-color: var(--md-sys-color-primary-container);
+    background-color: var(--md-sys-color-surface-container);
 }
 
 .grid__.grid_select__ > tbody {
@@ -468,7 +468,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .grid__.grid_select__ > .grid_selected__ input,
 .grid__.grid_select__ > .grid_selected__ select,
 .grid__.grid_select__ > .grid_selected__ textarea {
-    background-color: var(--md-sys-color-primary-container);
+    background-color: var(--md-sys-color-surface-container);
 }
 
 .grid__ td.empty__ {
@@ -488,7 +488,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .grid__>thead>tr>th .resize_bar__ {
-    background-color: var(--md-sys-color-secondary-container);
+    background-color: var(--md-sys-color-surface-container-highest);
     opacity: 0.6;
     cursor: e-resize;
     z-index: 1;
@@ -842,13 +842,13 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     cursor: pointer;
     min-width: 60px;
     text-align: center;
-    background-color: var(--md-sys-color-on-secondary);
+    background-color: var(--md-sys-color-surface-dim);
     line-height: 20px;
 }
 
 .tab__>ul>li>a,
 .tab__>.tab_native_scroll__>ul>li>a {
-    color: inherit;
+    color: var(--md-sys-color-on-surface-variant);
 }
 
 .tab__>ul>li.tab_active__,
@@ -859,7 +859,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 .tab__>ul>li.tab_active__>a,
 .tab__>.tab_native_scroll__>ul>li.tab_active__>a {
-    color: var(--md-sys-color-surface-tint-color);
+    color: var(--md-sys-color-on-surface);
 }
 
 .tab__>.tab_native_scroll__ {
@@ -879,7 +879,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 .tab__>.tab_scroll_prev__, .tab__>.tab_scroll_next__ {
     border: 1px solid var(--md-sys-color-outline-variant);
-    background-color: var(--md-sys-color-surface-container-lowest);
+    background-color: var(--md-sys-color-surface-dim);
     color : var(--md-sys-color-on-secondary-container);
     height: 24px;
 }
@@ -1432,6 +1432,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 .pagination__ .pagination_body__ li.pagination_page__.pagination_active__>a>span {
     font-weight: bold;
+    color: var(--md-sys-color-on-primary-fixed-variant);
 }
 
 .pagination__ .pagination_disable__ {
@@ -1455,7 +1456,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     box-shadow: 3px 3px 0 var(--md-sys-color-shadow);
     transform: scale(0.7);
     opacity: 0;
-    background-color: var(--md-sys-color-secondary-container);
+    background-color: var(--md-sys-color-error-container);
     margin-bottom: 5px;
     border-radius: 5px;
 }
@@ -1474,7 +1475,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 .notify__ .notify_msg__ a, .notify__ .notify_msg__ span {
     line-height: 120%;
-    color : var(--md-sys-color-on-secondary-container);
+    color : var(--md-sys-color-on-error-container);
     font-weight: normal;
     text-decoration: none;
     font-size: 95%;
@@ -1543,11 +1544,11 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .docs__>.docs_tab_context__>.docs_tabs__>.docs_tab__.inactive__ {
-    background-color: var(--md-sys-color-secondary-container);
+    background-color: var(--md-sys-color-surface-dim);
 }
 
 .docs__>.docs_tab_context__>.docs_tabs__>.docs_tab__.inactive__>.docs_tab_active_btn__>span {
-    color: var(--md-sys-color-on-secondary-container);
+    color: var(--md-sys-color-on-surface-variant);
 }
 
 .docs__>.docs_tab_context__>.docs_tabs__>.docs_tab__.active__ {
@@ -1557,7 +1558,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .docs__>.docs_tab_context__>.docs_tabs__>.docs_tab__.active__>.docs_tab_active_btn__>span {
-    color: var(--md-sys-color-surface-tint-color);
+    color: var(--md-sys-color-on-surface);
     text-shadow: none;
 }
 
@@ -1602,7 +1603,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     max-width: 27px;
     height: 24px;
     text-align: center;
-    background-color: var(--md-sys-color-secondary-container);
+    background-color: var(--md-sys-color-surface-dim);
     line-height: 10px;
 }
 
