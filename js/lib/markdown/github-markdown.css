@@ -74,7 +74,7 @@
 }
 
 .markdown-body .pl-sr .pl-cce {
-  font-weight: bold;
+  font-weight: 700;
   color: #22863a;
 }
 
@@ -85,7 +85,7 @@
 .markdown-body .pl-mh,
 .markdown-body .pl-mh .pl-en,
 .markdown-body .pl-ms {
-  font-weight: bold;
+  font-weight: 700;
   color: #005cc5;
 }
 
@@ -95,7 +95,7 @@
 }
 
 .markdown-body .pl-mb {
-  font-weight: bold;
+  font-weight: 700;
   color: #24292e;
 }
 
@@ -120,7 +120,7 @@
 }
 
 .markdown-body .pl-mdr {
-  font-weight: bold;
+  font-weight: 700;
   color: #6f42c1;
 }
 
@@ -158,7 +158,7 @@
 }
 
 .markdown-body strong {
-  font-weight: bolder;
+  font-weight: 700;
 }
 
 .markdown-body img {
@@ -212,7 +212,7 @@
 }
 
 .markdown-body strong {
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .markdown-body hr {
@@ -413,7 +413,7 @@
 .markdown-body h6 {
   margin-top: 24px;
   margin-bottom: 16px;
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.25;
 }
 
@@ -509,7 +509,7 @@
   margin-top: 16px;
   font-size: 1em;
   font-style: italic;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .markdown-body dl dd {
@@ -524,7 +524,7 @@
 }
 
 .markdown-body table th {
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .markdown-body table th,

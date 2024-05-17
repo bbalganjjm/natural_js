@@ -133,7 +133,7 @@
     color : var(--md-sys-color-surface-tint-color);
     margin-right: 5px;
     font-style: italic;
-    font-weight: normal;
+    font-weight: 400;
     white-space: nowrap;
 }
 
@@ -320,7 +320,7 @@ a.btn_large__, input[type='button'].btn_large__, button.btn_large__ {
     font-size: 14px;
     height: 33px;
     line-height: 30px;
-    font-weight: bold;
+    font-weight: 700;
 }
 
 a.btn_large__ {
@@ -337,7 +337,7 @@ a.btn_big__, input[type='button'].btn_big__, button.btn_big__ {
     font-size: 16px;
     height: 46px;
     line-height: 43px;
-    font-weight: bold;
+    font-weight: 700;
 }
 
 a.btn_big__ {
@@ -1097,7 +1097,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     line-height: 25px;
     text-align: center;
     color: var(--md-sys-color-surface-container-lowest);
-    font-weight: bold;
+    font-weight: 700;
 }
 
 .datepicker_contents__ .datepicker_year_selected__ {
@@ -1172,7 +1172,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     display: inline;
     cursor: pointer;
     line-height: 95%;
-    font-weight: bold;
+    font-weight: 700;
 }
 
 .datepicker_contents__.years_panel_position_top__ .datepicker_year_paging__ > a {
@@ -1183,7 +1183,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .datepicker_contents__.years_panel_position_top__ .datepicker_year_paging__ > a > span {
     padding: 0 10px;
     line-height: 16px;
-    font-weight: bold;
+    font-weight: 700;
 }
 
 /* Remove the arrow in select box(ie)*/
@@ -1201,7 +1201,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .datepicker_contents__.months_panel_position_top__ .datepicker_month_item__, .datepicker_contents__.months_panel_position_top__ .datepicker_month_paging__ {
     display: inline;
     cursor: pointer;
-    font-weight: bold;
+    font-weight: 700;
 }
 
 .datepicker_contents__.months_panel_position_top__ .datepicker_month_paging__ > a {
@@ -1212,7 +1212,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .datepicker_contents__.months_panel_position_top__ .datepicker_month_paging__ > a > span {
     padding: 0 10px;
     line-height: 95%;
-    font-weight: bold;
+    font-weight: 700;
 }
 
 .datepicker_contents__.years_panel_position_top__ > .datepicker_days_panel__,
@@ -1301,7 +1301,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .tree__>ul>li>a>span {
-    font-weight: bold;
+    font-weight: 700;
     color : var(--md-sys-color-on-surface);
 }
 
@@ -1357,11 +1357,11 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .tree__ li.tree_last_node__ a>span {
-    font-weight: normal;
+    font-weight: 400;
 }
 
 .tree__ li>.tree_key__.tree_active__>span {
-    font-weight: bold;
+    font-weight: 700;
     color : var(--md-sys-color-on-surface);
 }
 
@@ -1433,7 +1433,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .pagination__ .pagination_body__ li.pagination_page__.pagination_active__>a>span {
-    font-weight: bold;
+    font-weight: 700;
     color: var(--md-sys-color-on-primary-fixed-variant);
 }
 
@@ -1479,7 +1479,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .notify__ .notify_msg__ a, .notify__ .notify_msg__ span {
     line-height: 120%;
     color : var(--md-sys-color-on-surface);
-    font-weight: normal;
+    font-weight: 400;
     text-decoration: none;
     font-size: 95%;
 }

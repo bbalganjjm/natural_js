@@ -1,10 +1,5 @@
 @charset "utf-8";
 
-@font-face {
-    font-family: 'NanumSquare';
-    src: local(※), url(../images/font/nanumsquarer.woff) format('woff')
-}
-
 html {
     height: 100%;
     margin: 0;
@@ -404,11 +399,11 @@ article .btnBox {
 }
 
 .apiDoc .b {
-    font-weight: bold;
+    font-weight: 700;
 }
 
 .apiDoc .bi {
-    font-weight: bold;
+    font-weight: 700;
     font-style: italic;
 }
 
@@ -509,11 +504,11 @@ article .btnBox {
 
 .docs_contents__>.view_context__ .searchBox li>label {
     margin: 0 10px 0 10px;
-    font-weight: bold;
+    font-weight: 700;
 }
 
 .docs_contents__>.view_context__ .searchBox li>label label {
-    font-weight: normal;
+    font-weight: 400;
 }
 
 .docs_contents__>.view_context__ .searchBox input,
@@ -543,7 +538,7 @@ article .btnBox {
 .docs_contents__>.view_context__ h6 {
     margin-top: 24px;
     margin-bottom: 16px;
-    font-weight: 600;
+    font-weight: 700;
     line-height: 1.25;
 }
 
@@ -552,7 +547,7 @@ article .btnBox {
     padding: 5px 40px 5px 15px;
     display: inline-block;
     height: 35px;
-    font-weight: bold;
+    font-weight: 700;
     border: 1px dotted var(--md-sys-color-outline-variant);
     border-radius: 3px;
     box-shadow: 1px 1px 3px var(--md-sys-color-shadow);
@@ -705,7 +700,7 @@ pre.shell>code {
         padding: 0 10px;
         line-height: 3;
         color: var(--md-sys-color-surface-tint-color);
-        font-weight: 600;
+        font-weight: 700;
     }
 
     .apiDoc .api.form tr>td:last-child {
@@ -717,17 +712,17 @@ pre.shell>code {
     }
     #constructor .apiDoc .api.form td:nth-child(2):before {
         content: 'arguments';
-        font-weight: 600;
+        font-weight: 700;
         color: var(--md-sys-color-surface-tint-color);
     }
     #constructor .apiDoc .api.form td:nth-child(3):before {
         content: 'type : ';
-        font-weight: 600;
+        font-weight: 700;
         color: var(--md-sys-color-surface-tint-color);
     }
     #constructor .apiDoc .api.form td:nth-child(4):before {
         content: 'return : ';
-        font-weight: 600;
+        font-weight: 700;
         color: var(--md-sys-color-surface-tint-color);
     }
 
@@ -735,32 +730,32 @@ pre.shell>code {
     #pointcuts .apiDoc .api.form td:nth-child(2):before,
     #defaultoptions .apiDoc .api.form td:nth-child(2):before {
         content: 'type : ';
-        font-weight: 600;
+        font-weight: 700;
         color: var(--md-sys-color-surface-tint-color);
     }
     #advisors .apiDoc .api.form td:nth-child(3):before,
     #pointcuts .apiDoc .api.form td:nth-child(3):before,
     #defaultoptions .apiDoc .api.form td:nth-child(3):before {
         content: 'default : ';
-        font-weight: 600;
+        font-weight: 700;
         color: var(--md-sys-color-surface-tint-color);
     }
     #advisors .apiDoc .api.form td:nth-child(4):before,
     #pointcuts .apiDoc .api.form td:nth-child(4):before,
     #defaultoptions .apiDoc .api.form td:nth-child(4):before {
         content: 'required : ';
-        font-weight: 600;
+        font-weight: 700;
         color: var(--md-sys-color-surface-tint-color);
     }
 
     #declarativeoptions .apiDoc .api.form td:nth-child(2):before {
         content: 'type : ';
-        font-weight: 600;
+        font-weight: 700;
         color: var(--md-sys-color-surface-tint-color);
     }
     #declarativeoptions .apiDoc .api.form td:nth-child(3):before {
         content: 'default : ';
-        font-weight: 600;
+        font-weight: 700;
         color: var(--md-sys-color-surface-tint-color);
     }
 
@@ -795,7 +790,7 @@ pre.shell>code {
     #methods .apiDoc .api.form td:nth-child(2):before,
     #utilities .apiDoc .api.form td:nth-child(2):before {
         content: 'arguments';
-        font-weight: 600;
+        font-weight: 700;
         color: var(--md-sys-color-surface-tint-color);
     }
     #pluginExtention .apiDoc .api.form td:nth-child(3):before,
@@ -813,7 +808,7 @@ pre.shell>code {
     #methods .apiDoc .api.form td:nth-child(3):before,
     #utilities .apiDoc .api.form td:nth-child(3):before {
         content: 'type : ';
-        font-weight: 600;
+        font-weight: 700;
         color: var(--md-sys-color-surface-tint-color);
     }
     #pluginExtention .apiDoc .api.form td:nth-child(4):before,
@@ -831,7 +826,7 @@ pre.shell>code {
     #methods .apiDoc .api.form td:nth-child(4):before,
     #utilities .apiDoc .api.form td:nth-child(4):before {
         content: 'return : ';
-        font-weight: 600;
+        font-weight: 700;
         color: var(--md-sys-color-surface-tint-color);
     }
 
@@ -843,7 +838,7 @@ pre.shell>code {
     #conf_template .apiDoc .api.form td:nth-child(2):before,
     #conf_code .apiDoc .api.form td:nth-child(2):before {
         content: 'default : ';
-        font-weight: 600;
+        font-weight: 700;
         color: var(--md-sys-color-surface-tint-color);
     }
     #conf_core .apiDoc .api.form td:nth-child(3):before,
@@ -854,7 +849,7 @@ pre.shell>code {
     #conf_template .apiDoc .api.form td:nth-child(3):before,
     #conf_code .apiDoc .api.form td:nth-child(3):before {
         content: 'required : ';
-        font-weight: 600;
+        font-weight: 700;
         color: var(--md-sys-color-surface-tint-color);
     }
 
@@ -906,7 +901,7 @@ pre.shell>code {
     padding: 0 10px;
     line-height: 3;
     color: var(--md-sys-color-surface-tint-color);
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .apiDoc.api-view-list-type .api.form tr>td:last-child {
@@ -918,17 +913,17 @@ pre.shell>code {
 }
 #constructor .apiDoc.api-view-list-type .api.form td:nth-child(2):before {
     content: 'arguments';
-    font-weight: 600;
+    font-weight: 700;
     color: var(--md-sys-color-surface-tint-color);
 }
 #constructor .apiDoc.api-view-list-type .api.form td:nth-child(3):before {
     content: 'type : ';
-    font-weight: 600;
+    font-weight: 700;
     color: var(--md-sys-color-surface-tint-color);
 }
 #constructor .apiDoc.api-view-list-type .api.form td:nth-child(4):before {
     content: 'return : ';
-    font-weight: 600;
+    font-weight: 700;
     color: var(--md-sys-color-surface-tint-color);
 }
 
@@ -936,32 +931,32 @@ pre.shell>code {
 #pointcuts .apiDoc.api-view-list-type .api.form td:nth-child(2):before,
 #defaultoptions .apiDoc.api-view-list-type .api.form td:nth-child(2):before {
     content: 'type : ';
-    font-weight: 600;
+    font-weight: 700;
     color: var(--md-sys-color-surface-tint-color);
 }
 #advisors .apiDoc.api-view-list-type .api.form td:nth-child(3):before,
 #pointcuts .apiDoc.api-view-list-type .api.form td:nth-child(3):before,
 #defaultoptions .apiDoc.api-view-list-type .api.form td:nth-child(3):before {
     content: 'default : ';
-    font-weight: 600;
+    font-weight: 700;
     color: var(--md-sys-color-surface-tint-color);
 }
 #advisors .apiDoc.api-view-list-type .api.form td:nth-child(4):before,
 #pointcuts .apiDoc.api-view-list-type .api.form td:nth-child(4):before,
 #defaultoptions .apiDoc.api-view-list-type .api.form td:nth-child(4):before {
     content: 'required : ';
-    font-weight: 600;
+    font-weight: 700;
     color: var(--md-sys-color-surface-tint-color);
 }
 
 #declarativeoptions .apiDoc.api-view-list-type .api.form td:nth-child(2):before {
     content: 'type : ';
-    font-weight: 600;
+    font-weight: 700;
     color: var(--md-sys-color-surface-tint-color);
 }
 #declarativeoptions .apiDoc.api-view-list-type .api.form td:nth-child(3):before {
     content: 'default : ';
-    font-weight: 600;
+    font-weight: 700;
     color: var(--md-sys-color-surface-tint-color);
 }
 
@@ -996,7 +991,7 @@ pre.shell>code {
 #methods .apiDoc.api-view-list-type .api.form td:nth-child(2):before,
 #utilities .apiDoc.api-view-list-type .api.form td:nth-child(2):before {
     content: 'arguments';
-    font-weight: 600;
+    font-weight: 700;
     color: var(--md-sys-color-surface-tint-color);
 }
 #pluginExtention .apiDoc.api-view-list-type .api.form td:nth-child(3):before,
@@ -1014,7 +1009,7 @@ pre.shell>code {
 #methods .apiDoc.api-view-list-type .api.form td:nth-child(3):before,
 #utilities .apiDoc.api-view-list-type .api.form td:nth-child(3):before {
     content: 'type : ';
-    font-weight: 600;
+    font-weight: 700;
     color: var(--md-sys-color-surface-tint-color);
 }
 #pluginExtention .apiDoc.api-view-list-type .api.form td:nth-child(4):before,
@@ -1032,7 +1027,7 @@ pre.shell>code {
 #methods .apiDoc.api-view-list-type .api.form td:nth-child(4):before,
 #utilities .apiDoc.api-view-list-type .api.form td:nth-child(4):before {
     content: 'return : ';
-    font-weight: 600;
+    font-weight: 700;
     color: var(--md-sys-color-surface-tint-color);
 }
 
@@ -1044,7 +1039,7 @@ pre.shell>code {
 #conf_template .apiDoc.api-view-list-type .api.form td:nth-child(2):before,
 #conf_code .apiDoc.api-view-list-type .api.form td:nth-child(2):before {
     content: 'default : ';
-    font-weight: 600;
+    font-weight: 700;
     color: var(--md-sys-color-surface-tint-color);
 }
 #conf_core .apiDoc.api-view-list-type .api.form td:nth-child(3):before,
@@ -1055,7 +1050,7 @@ pre.shell>code {
 #conf_template .apiDoc.api-view-list-type .api.form td:nth-child(3):before,
 #conf_code .apiDoc.api-view-list-type .api.form td:nth-child(3):before {
     content: 'required : ';
-    font-weight: 600;
+    font-weight: 700;
     color: var(--md-sys-color-surface-tint-color);
 }
 
@@ -1068,7 +1063,7 @@ pre.shell>code {
 }
 
 .api-view-type-select span {
-    font-weight: normal;
+    font-weight: 400;
     font-size: 0.875rem;
     cursor: pointer;
 }
