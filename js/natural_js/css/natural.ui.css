@@ -879,7 +879,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 .tab__>.tab_scroll_prev__, .tab__>.tab_scroll_next__ {
     border: 1px solid var(--md-sys-color-outline-variant);
-    background-color: var(--md-sys-color-secondary-container);
+    background-color: var(--md-sys-color-surface-container-lowest);
     color : var(--md-sys-color-on-secondary-container);
     height: 24px;
 }
