@@ -1757,7 +1757,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     content: "";
     left: -100%;
     width: 100%;
-    height: 3px;
+    height: 4px;
     background-color: var(--md-sys-color-primary);
     opacity: 1;
 }
