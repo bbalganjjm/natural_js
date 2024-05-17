@@ -25,7 +25,7 @@
                 "margin": "0 0 35px 0",
                 "display": "block",
                 "font-size": "20px",
-                "border-bottom": "3px double var(--md-sys-color-outline)"
+                "border-bottom": "3px double var(--md-sys-color-outline-variant)"
             }).prependTo("body");
             N(".page-wrap").comm({
                 url : initPageId

@@ -10,7 +10,7 @@
 
 .alert__.block_overlay_msg__ {
     background: var(--md-sys-color-surface-container-lowest);
-    border: 1px solid var(--md-sys-color-outline);
+    border: 1px solid var(--md-sys-color-outline-variant);
     box-shadow: 4px 4px 0 var(--md-sys-color-shadow);
 }
 
@@ -229,37 +229,37 @@ a.btn_common__ img {
 a.btn_white__, input[type='button'].btn_white__, button.btn_white__ {
     color: #4f535c !important;
     background-color: var(--md-sys-color-surface-container-lowest);
-    border: 1px solid var(--md-sys-color-outline);
+    border: 1px solid var(--md-sys-color-outline-variant);
 }
 
 a.btn_gray__, input[type='button'].btn_gray__, button.btn_gray__ {
     color: var(--md-sys-color-surface-container-lowest) !important;
     background-color: #a2a2a2;
-    border: 1px solid var(--md-sys-color-outline);
+    border: 1px solid var(--md-sys-color-outline-variant);
 }
 
 a.btn_blue__, input[type='button'].btn_blue__, button.btn_blue__ {
     color: var(--md-sys-color-surface-container-lowest) !important;
     background-color: #6666ff;
-    border: 1px solid var(--md-sys-color-outline);
+    border: 1px solid var(--md-sys-color-outline-variant);
 }
 
 a.btn_skyblue__, input[type='button'].btn_skyblue__, button.btn_skyblue__ {
     color: var(--md-sys-color-surface-container-lowest) !important;
     background-color: #3cc3ff;
-    border: 1px solid var(--md-sys-color-outline);
+    border: 1px solid var(--md-sys-color-outline-variant);
 }
 
 a.btn_green__, input[type='button'].btn_green__, button.btn_green__ {
     color: var(--md-sys-color-surface-container-lowest) !important;
     background-color: #008800;
-    border: 1px solid var(--md-sys-color-outline);
+    border: 1px solid var(--md-sys-color-outline-variant);
 }
 
 a.btn_yellowgreen__, input[type='button'].btn_yellowgreen__, button.btn_yellowgreen__ {
     color: var(--md-sys-color-surface-container-lowest) !important;
     background-color: #9ACD32;
-    border: 1px solid var(--md-sys-color-outline);
+    border: 1px solid var(--md-sys-color-outline-variant);
 }
 
 a.btn_smaller__, input[type='button'].btn_smaller__, button.btn_smaller__ {
@@ -497,7 +497,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .v_resizable__ {
     height: 3px;
     margin-right: 18px;
-    border-bottom: 3px double var(--md-sys-color-outline);
+    border-bottom: 3px double var(--md-sys-color-outline-variant);
 }
 
 .grid_wrap__ {
@@ -555,7 +555,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     will-change: opacity, transform;
     transform: translateZ(0)\0; /* for ie 8+ */
 
-    border: 1px solid var(--md-sys-color-outline);
+    border: 1px solid var(--md-sys-color-outline-variant);
     max-width: 300px;
     position: absolute;
     background-color: var(--md-sys-color-primary-container);
@@ -598,7 +598,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     width: 100%;
     height: 28px;
     padding: 3px 3px;
-    border: 1px solid var(--md-sys-color-outline);
+    border: 1px solid var(--md-sys-color-outline-variant);
     font-size: 95%;
     line-height: 100%;
     box-sizing: border-box;
@@ -736,7 +736,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     will-change: opacity, transform;
     transform: translateZ(0)\0; /* for ie 8+ */
 
-    border: 1px solid var(--md-sys-color-outline);
+    border: 1px solid var(--md-sys-color-outline-variant);
     background-color: var(--md-sys-color-primary-container);
     box-shadow: 3px 3px 0 var(--md-sys-color-shadow);
     padding: 5px;
@@ -815,7 +815,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 .grid_more_popup_contents__ .btn_box__ > .prev_btn__,
 .grid_more_popup_contents__ .btn_box__ > .next_btn__ {
-    border: 1px solid var(--md-sys-color-outline);
+    border: 1px solid var(--md-sys-color-outline-variant);
     line-height: 18px;
     padding: 2px 5px 4px 5px;
 }
@@ -838,7 +838,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     float: left;
     margin-right: 1px;
     padding: 2px 4px;
-    border: 1px solid var(--md-sys-color-outline);
+    border: 1px solid var(--md-sys-color-outline-variant);
     cursor: pointer;
     min-width: 60px;
     text-align: center;
@@ -878,7 +878,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .tab__>.tab_scroll_prev__, .tab__>.tab_scroll_next__ {
-    border: 1px solid var(--md-sys-color-outline);
+    border: 1px solid var(--md-sys-color-outline-variant);
     background-color: var(--md-sys-color-secondary-container);
     color : var(--md-sys-color-on-secondary-container);
     height: 24px;
@@ -918,7 +918,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 .tab__>div {
     padding: 15px;
-    border: 1px solid var(--md-sys-color-outline);
+    border: 1px solid var(--md-sys-color-outline-variant);
 }
 
 .tab__>div > .view_context__ {
@@ -942,7 +942,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     will-change: opacity, transform;
     transform: translateZ(0)\0; /* for ie 8+ */
 
-    border: 1px solid var(--md-sys-color-outline);
+    border: 1px solid var(--md-sys-color-outline-variant);
     box-shadow: 3px 3px 0 var(--md-sys-color-shadow);
     background-color: var(--md-sys-color-surface-container-lowest);
     font-size: 95%;
@@ -1090,7 +1090,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .datepicker_contents__ .datepicker_year_title__,
 .datepicker_contents__ .datepicker_month_title__,
 .datepicker_contents__ .datepicker_day_title__ {
-    border: 1px solid var(--md-sys-color-outline);
+    border: 1px solid var(--md-sys-color-outline-variant);
     background-color: var(--md-sys-color-secondary-container);
     line-height: 25px;
     text-align: center;
@@ -1099,17 +1099,17 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .datepicker_contents__ .datepicker_year_selected__ {
-    border-color: var(--md-sys-color-outline);
+    border-color: var(--md-sys-color-outline-variant);
     border-radius: 45%;
 }
 
 .datepicker_contents__ .datepicker_month_selected__ {
-    border-color: var(--md-sys-color-outline);
+    border-color: var(--md-sys-color-outline-variant);
     border-radius: 50%;
 }
 
 .datepicker_contents__ .datepicker_day_selected__ {
-    border-color: var(--md-sys-color-outline);
+    border-color: var(--md-sys-color-outline-variant);
     border-radius: 50%;
 }
 
@@ -1284,7 +1284,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .tree__ ul>li {
-    border-left: 1px dotted var(--md-sys-color-outline);
+    border-left: 1px dotted var(--md-sys-color-outline-variant);
     margin-left: 5px;
     padding: 0 0 0 7px;
     line-height: 18px;
@@ -1497,7 +1497,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .docs__>.docs_tab_context__ {
     position: relative;
     height: 25px;
-    border-bottom: 1px solid var(--md-sys-color-outline);
+    border-bottom: 1px solid var(--md-sys-color-outline-variant);
     z-index: 1;
 }
 
@@ -1533,7 +1533,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     height: 24px;
     margin-left: 1px;
     padding: 0;
-    border: 1px solid var(--md-sys-color-outline);
+    border: 1px solid var(--md-sys-color-outline-variant);
     text-align: center;
 }
 
@@ -1596,7 +1596,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .docs__>.docs_tab_context__>ul.docs_tab_utils__>li {
     float: left;
     padding: 0;
-    border: 1px solid var(--md-sys-color-outline);
+    border: 1px solid var(--md-sys-color-outline-variant);
     border-bottom: none;
     min-width: 22px;
     max-width: 27px;
@@ -1638,7 +1638,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     text-indent: 0;
     top: 23px;
     right: 0;
-    border: 1px solid var(--md-sys-color-outline);
+    border: 1px solid var(--md-sys-color-outline-variant);
     max-width: 300px;
     background-color: var(--md-sys-color-primary-container);
     box-shadow: -3px 3px 0 var(--md-sys-color-shadow);
@@ -1664,7 +1664,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 .docs__>.docs_tab_context__>ul.docs_tab_utils__>.docs_tab_list_item__ .docs_tab_list__>.docs_tab__ {
     text-align: right;
-    border-bottom: 1px dotted var(--md-sys-color-outline);
+    border-bottom: 1px dotted var(--md-sys-color-outline-variant);
 }
 
 .docs__>.docs_tab_context__>ul.docs_tab_utils__>.docs_tab_list_item__ .docs_tab_list__>.docs_tab__:last-child {

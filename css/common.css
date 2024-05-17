@@ -52,7 +52,7 @@ input[type='text'], input[type='number'], input[type='tel'], input[type='passwor
     box-sizing: border-box;
     width: 100%;
     padding: 3px;
-    border: 1px solid var(--md-sys-color-outline);
+    border: 1px solid var(--md-sys-color-outline-variant);
     line-height: 16px;
 }
 
@@ -110,7 +110,7 @@ table {
 }
 
 th, td {
-    border: 1px solid var(--md-sys-color-outline);
+    border: 1px solid var(--md-sys-color-outline-variant);
     word-break: break-all;
     padding: 5px;
 }
@@ -135,7 +135,7 @@ th, tfoot td {
 
 .grid__ tr>th:first-child,
 .form__ tr>th:first-child {
-    border-left-color: var(--md-sys-color-outline);
+    border-left-color: var(--md-sys-color-outline-variant);
 }
 
 .grid__ tr>td:first-child,
@@ -165,11 +165,11 @@ th, tfoot td {
     border-left: none;
     border-right: none;
     line-height: 18px;
-    border-top: 1px solid var(--md-sys-color-outline);
+    border-top: 1px solid var(--md-sys-color-outline-variant);
 }
 
 .list__>li:last-child {
-    border-bottom: 1px solid var(--md-sys-color-outline);
+    border-bottom: 1px solid var(--md-sys-color-outline-variant);
 }
 
 .btn-box {
@@ -289,7 +289,7 @@ th, tfoot td {
 .view-intro .view-desc {
     position: absolute;
     background-color: var(--md-sys-color-primary-container);
-    border: 1px solid var(--md-sys-color-outline);
+    border: 1px solid var(--md-sys-color-outline-variant);
     margin: 0;
     padding: 10px 10px 10px 30px;
     line-height: 200%;
@@ -369,7 +369,7 @@ article .btnBox {
     height: 0.25rem;
     padding: 0;
     margin: 24px 0;
-    background-color: var(--md-sys-color-outline);
+    background-color: var(--md-sys-color-outline-variant);
     border: 0;
 }
 
@@ -393,7 +393,7 @@ article .btnBox {
 
 .apiDoc fieldset {
     display: inline-block;
-    border: 1px dotted var(--md-sys-color-outline);
+    border: 1px dotted var(--md-sys-color-outline-variant);
     border-radius: 5px;
     padding: 0 0 0 10px;
 }
@@ -425,7 +425,7 @@ article .btnBox {
 }
 
 .apiDoc .apidemo>article .result {
-    border: 1px solid var(--md-sys-color-outline);
+    border: 1px solid var(--md-sys-color-outline-variant);
     border-radius: 3px;
     padding: 10px;
     margin: 0 0 15px 0;
@@ -446,7 +446,7 @@ article .btnBox {
     padding: 5px;
     margin: 0 0 15px;
     overflow: auto;
-    border: 1px solid var(--md-sys-color-outline);
+    border: 1px solid var(--md-sys-color-outline-variant);
     box-shadow: 3px 3px 0 var(--md-sys-color-shadow);
     background-color: var(--md-sys-color-primary-container);
     z-index: 1;
@@ -491,7 +491,7 @@ article .btnBox {
 }
 
 .docs_contents__>.view_context__ .searchBox ul li.inputs {
-    border-bottom: 1px dotted var(--md-sys-color-outline);
+    border-bottom: 1px dotted var(--md-sys-color-outline-variant);
 }
 
 .docs_contents__>.view_context__ .searchBox ul li.buttons {
@@ -520,7 +520,7 @@ article .btnBox {
 .docs_contents__>.view_context__ .searchBox select,
 .docs_contents__>.view_context__ .searchBox textarea {
     margin-left: 15px;
-    border-color: var(--md-sys-color-outline);
+    border-color: var(--md-sys-color-outline-variant);
 }
 
 .docs_contents__>.view_context__ .searchBox input[type='text'],
@@ -553,7 +553,7 @@ article .btnBox {
     display: inline-block;
     height: 35px;
     font-weight: bold;
-    border: 1px dotted var(--md-sys-color-outline);
+    border: 1px dotted var(--md-sys-color-outline-variant);
     border-radius: 3px;
     box-shadow: 1px 1px 3px var(--md-sys-color-shadow);
     color : var(--md-sys-color-on-secondary-container);
@@ -594,13 +594,13 @@ article .btnBox {
 .docs_contents__>.view_context__ h1 {
     padding-bottom: 0.5rem;
     font-size: 1.3rem;
-    border-bottom: 1px solid var(--md-sys-color-outline);
+    border-bottom: 1px solid var(--md-sys-color-outline-variant);
 }
 
 .docs_contents__>.view_context__ h2 {
     padding-bottom: 0.4rem;
     font-size: 1.3rem;
-    border-bottom: 1px solid var(--md-sys-color-outline);
+    border-bottom: 1px solid var(--md-sys-color-outline-variant);
 }
 
 .docs_contents__>.view_context__ h3 {

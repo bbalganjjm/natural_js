@@ -221,7 +221,7 @@
   overflow: hidden;
   background: transparent;
   border: 0;
-  border-bottom: 1px solid var(--md-sys-color-outline);
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
 }
 
 .markdown-body hr::before {
@@ -371,7 +371,7 @@
   height: 0.25em;
   padding: 0;
   margin: 24px 0;
-  background-color: var(--md-sys-color-outline);
+  background-color: var(--md-sys-color-outline-variant);
   border: 0;
 }
 
@@ -380,7 +380,7 @@
   font-size: 0.95em;
   line-height: 170%;
   color: rgba(0, 0, 0, 0.7);
-  border-left: 0.25em solid var(--md-sys-color-outline);
+  border-left: 0.25em solid var(--md-sys-color-outline-variant);
 }
 
 .markdown-body blockquote>:first-child {
@@ -399,8 +399,8 @@
   color: #444d56;
   vertical-align: middle;
   background-color: #fafbfc;
-  border: solid 1px var(--md-sys-color-outline);
-  border-bottom-color: var(--md-sys-color-outline);
+  border: solid 1px var(--md-sys-color-outline-variant);
+  border-bottom-color: var(--md-sys-color-outline-variant);
   border-radius: 3px;
   box-shadow: inset 0 -1px 0 var(--md-sys-color-shadow);
 }
@@ -449,13 +449,13 @@
 .markdown-body h1 {
   padding-bottom: 0.3em;
   font-size: 1.5em;
-  border-bottom: 1px solid var(--md-sys-color-outline);
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
 }
 
 .markdown-body h2 {
   padding-bottom: 0.3em;
   font-size: 1.3em;
-  border-bottom: 1px solid var(--md-sys-color-outline);
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
 }
 
 .markdown-body h3 {
@@ -530,11 +530,11 @@
 .markdown-body table th,
 .markdown-body table td {
   padding: 6px 13px;
-  border: 1px solid var(--md-sys-color-outline);
+  border: 1px solid var(--md-sys-color-outline-variant);
 }
 
 .markdown-body table tr {
-  border-top: 1px solid var(--md-sys-color-outline);
+  border-top: 1px solid var(--md-sys-color-outline-variant);
 }
 
 .markdown-body table tr:nth-child(2n) {
@@ -611,7 +611,7 @@
 
 .markdown-body .full-commit .btn-outline:not(:disabled):hover {
   color: #005cc5;
-  border-color: var(--md-sys-color-outline);
+  border-color: var(--md-sys-color-outline-variant);
 }
 
 .markdown-body kbd {
@@ -622,8 +622,8 @@
   color: #444d56;
   vertical-align: middle;
   background-color: #fafbfc;
-  border: solid 1px var(--md-sys-color-outline);
-  border-bottom-color: var(--md-sys-color-outline);
+  border: solid 1px var(--md-sys-color-outline-variant);
+  border-bottom-color: var(--md-sys-color-outline-variant);
   border-radius: 3px;
   box-shadow: inset 0 -1px 0 var(--md-sys-color-shadow);
 }
@@ -631,7 +631,7 @@
 .markdown-body :checked+.radio-label {
   position: relative;
   z-index: 1;
-  border-color: var(--md-sys-color-outline);
+  border-color: var(--md-sys-color-outline-variant);
 }
 
 .markdown-body .task-list-item {
@@ -648,5 +648,5 @@
 }
 
 .markdown-body hr {
-  border-bottom-color: var(--md-sys-color-outline);
+  border-bottom-color: var(--md-sys-color-outline-variant);
 }

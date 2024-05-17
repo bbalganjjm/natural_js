@@ -55,7 +55,7 @@ body {
 #lefter {
     flex: 1;
     max-width: 200px;
-    border-right: 1px solid var(--md-sys-color-outline);
+    border-right: 1px solid var(--md-sys-color-outline-variant);
     height: 100%;
 }
 
