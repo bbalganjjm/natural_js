@@ -316,7 +316,7 @@ th, tfoot td {
 .alert:not(article) {
     margin: 5px;
     padding: 0.23rem 0.5rem 0.23rem 1.8rem;
-    background: var(--md-sys-color-secondary-container) url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAkElEQVQoz5WQQQrCUAxE3/z/FXqDegnPUC8k9AIFV17LjZfpBVzUn7ipIDZiGxgCk2EyiQwubKgEDBv0Awb+zRp0Bl3Ae/nhdJr7LYq0rcJIUmtSG2njDe497n00koELdgCC5+xUFPnAhEGd4TXnvcH1g1ugJMjvfKr1DoxIh+Q+/jv+YXCemmbd50w6rtG9ANZ+P7VXtHZhAAAAAElFTkSuQmCC') no-repeat 6px 6px;
+    background: var(--md-sys-color-tertiary-container) url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAkElEQVQoz5WQQQrCUAxE3/z/FXqDegnPUC8k9AIFV17LjZfpBVzUn7ipIDZiGxgCk2EyiQwubKgEDBv0Awb+zRp0Bl3Ae/nhdJr7LYq0rcJIUmtSG2njDe497n00koELdgCC5+xUFPnAhEGd4TXnvcH1g1ugJMjvfKr1DoxIh+Q+/jv+YXCemmbd50w6rtG9ANZ+P7VXtHZhAAAAAElFTkSuQmCC') no-repeat 6px 6px;
     border-radius: 3px;
 }
 
@@ -633,8 +633,8 @@ article .btnBox {
 pre.shell {
     padding: 16px;
     overflow: auto;
-    color: var(--md-sys-color-on-tertiary-container);
-    background-color: var(--md-sys-color-tertiary-container);
+    color: var(--md-sys-color-on-secondary-container);
+    background-color: var(--md-sys-color-secondary-container);
     border-radius: 3px;
     line-height: 1.65;
     word-wrap: normal;
@@ -690,9 +690,8 @@ pre.shell>code {
         width: 100%;
         border: none;
         margin: 0;
-        padding: 5px 17px;
+        padding: 5px 10px;
         box-sizing: border-box;
-        border-left: 0.25rem solid var(--md-sys-color-outline);
         text-shadow: none;
         color: var(--md-sys-color-on-surface);
         text-align: left !important;
@@ -700,15 +699,12 @@ pre.shell>code {
     }
 
     .apiDoc .api.form tr>td:first-child {
-        font-size: 1rem;
+        font-size: 1.1rem;
         border: none;
         padding: 0 10px;
-        line-height: 2.5;
-        background-color: var(--md-sys-color-secondary-container);
-        text-shadow: 0 1px 0 var(--md-sys-color-shadow);
-        font-weight: 400;
-        color: var(--md-sys-color-surface);
-        margin-bottom: 15px;
+        line-height: 3;
+        color: var(--md-sys-color-surface-tint-color);
+        font-weight: 600;
     }
 
     .apiDoc .api.form tr>td:last-child {
@@ -721,14 +717,17 @@ pre.shell>code {
     #constructor .apiDoc .api.form td:nth-child(2):before {
         content: 'arguments';
         font-weight: 600;
+        color: var(--md-sys-color-surface-tint-color);
     }
     #constructor .apiDoc .api.form td:nth-child(3):before {
         content: 'type : ';
         font-weight: 600;
+        color: var(--md-sys-color-surface-tint-color);
     }
     #constructor .apiDoc .api.form td:nth-child(4):before {
         content: 'return : ';
         font-weight: 600;
+        color: var(--md-sys-color-surface-tint-color);
     }
 
     #advisors .apiDoc .api.form td:nth-child(2):before,
@@ -736,27 +735,32 @@ pre.shell>code {
     #defaultoptions .apiDoc .api.form td:nth-child(2):before {
         content: 'type : ';
         font-weight: 600;
+        color: var(--md-sys-color-surface-tint-color);
     }
     #advisors .apiDoc .api.form td:nth-child(3):before,
     #pointcuts .apiDoc .api.form td:nth-child(3):before,
     #defaultoptions .apiDoc .api.form td:nth-child(3):before {
         content: 'default : ';
         font-weight: 600;
+        color: var(--md-sys-color-surface-tint-color);
     }
     #advisors .apiDoc .api.form td:nth-child(4):before,
     #pointcuts .apiDoc .api.form td:nth-child(4):before,
     #defaultoptions .apiDoc .api.form td:nth-child(4):before {
         content: 'required : ';
         font-weight: 600;
+        color: var(--md-sys-color-surface-tint-color);
     }
 
     #declarativeoptions .apiDoc .api.form td:nth-child(2):before {
         content: 'type : ';
         font-weight: 600;
+        color: var(--md-sys-color-surface-tint-color);
     }
     #declarativeoptions .apiDoc .api.form td:nth-child(3):before {
         content: 'default : ';
         font-weight: 600;
+        color: var(--md-sys-color-surface-tint-color);
     }
 
     #pluginExtention .apiDoc .api.form tr>td:first-child,
@@ -791,6 +795,7 @@ pre.shell>code {
     #utilities .apiDoc .api.form td:nth-child(2):before {
         content: 'arguments';
         font-weight: 600;
+        color: var(--md-sys-color-surface-tint-color);
     }
     #pluginExtention .apiDoc .api.form td:nth-child(3):before,
     #n .apiDoc .api.form td:nth-child(3):before,
@@ -808,6 +813,7 @@ pre.shell>code {
     #utilities .apiDoc .api.form td:nth-child(3):before {
         content: 'type : ';
         font-weight: 600;
+        color: var(--md-sys-color-surface-tint-color);
     }
     #pluginExtention .apiDoc .api.form td:nth-child(4):before,
     #n .apiDoc .api.form td:nth-child(4):before,
@@ -825,6 +831,7 @@ pre.shell>code {
     #utilities .apiDoc .api.form td:nth-child(4):before {
         content: 'return : ';
         font-weight: 600;
+        color: var(--md-sys-color-surface-tint-color);
     }
 
     #conf_core .apiDoc .api.form td:nth-child(2):before,
@@ -836,6 +843,7 @@ pre.shell>code {
     #conf_code .apiDoc .api.form td:nth-child(2):before {
         content: 'default : ';
         font-weight: 600;
+        color: var(--md-sys-color-surface-tint-color);
     }
     #conf_core .apiDoc .api.form td:nth-child(3):before,
     #conf_architecture .apiDoc .api.form td:nth-child(3):before,
@@ -846,6 +854,7 @@ pre.shell>code {
     #conf_code .apiDoc .api.form td:nth-child(3):before {
         content: 'required : ';
         font-weight: 600;
+        color: var(--md-sys-color-surface-tint-color);
     }
 
     .apiDoc .apidemo .form .demo-desc {
@@ -909,14 +918,17 @@ pre.shell>code {
 #constructor .apiDoc.api-view-list-type .api.form td:nth-child(2):before {
     content: 'arguments';
     font-weight: 600;
+    color: var(--md-sys-color-surface-tint-color);
 }
 #constructor .apiDoc.api-view-list-type .api.form td:nth-child(3):before {
     content: 'type : ';
     font-weight: 600;
+    color: var(--md-sys-color-surface-tint-color);
 }
 #constructor .apiDoc.api-view-list-type .api.form td:nth-child(4):before {
     content: 'return : ';
     font-weight: 600;
+    color: var(--md-sys-color-surface-tint-color);
 }
 
 #advisors .apiDoc.api-view-list-type .api.form td:nth-child(2):before,
@@ -924,27 +936,32 @@ pre.shell>code {
 #defaultoptions .apiDoc.api-view-list-type .api.form td:nth-child(2):before {
     content: 'type : ';
     font-weight: 600;
+    color: var(--md-sys-color-surface-tint-color);
 }
 #advisors .apiDoc.api-view-list-type .api.form td:nth-child(3):before,
 #pointcuts .apiDoc.api-view-list-type .api.form td:nth-child(3):before,
 #defaultoptions .apiDoc.api-view-list-type .api.form td:nth-child(3):before {
     content: 'default : ';
     font-weight: 600;
+    color: var(--md-sys-color-surface-tint-color);
 }
 #advisors .apiDoc.api-view-list-type .api.form td:nth-child(4):before,
 #pointcuts .apiDoc.api-view-list-type .api.form td:nth-child(4):before,
 #defaultoptions .apiDoc.api-view-list-type .api.form td:nth-child(4):before {
     content: 'required : ';
     font-weight: 600;
+    color: var(--md-sys-color-surface-tint-color);
 }
 
 #declarativeoptions .apiDoc.api-view-list-type .api.form td:nth-child(2):before {
     content: 'type : ';
     font-weight: 600;
+    color: var(--md-sys-color-surface-tint-color);
 }
 #declarativeoptions .apiDoc.api-view-list-type .api.form td:nth-child(3):before {
     content: 'default : ';
     font-weight: 600;
+    color: var(--md-sys-color-surface-tint-color);
 }
 
 #pluginExtention .apiDoc.api-view-list-type .api.form tr>td:first-child,
