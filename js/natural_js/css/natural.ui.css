@@ -226,7 +226,7 @@ a.btn_common__ img {
 }
 
 a.btn_white__, input[type='button'].btn_white__, button.btn_white__ {
-    color: #4f535c !important;
+    color: var(--md-sys-color-on-surface) !important;
     background-color: var(--md-sys-color-surface-container-lowest);
     border: 1px solid var(--md-sys-color-outline-variant);
 }
