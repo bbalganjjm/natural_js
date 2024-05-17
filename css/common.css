@@ -635,7 +635,7 @@ pre.shell {
     padding: 16px;
     overflow: auto;
     color: var(--md-sys-color-on-surface);
-    background-color: var(--md-sys-color-surface-container-high);
+    background-color: var(--md-sys-color-surface-container-low);
     border-radius: 3px;
     line-height: 1.65;
     word-wrap: normal;
