@@ -27,7 +27,7 @@ Contents
 <script type="text/javascript" src="js/natural_js/natural.template.min.js" charset="utf-8"></script>
 ```
 
-2. Add the following setting to [Config(natural.config.js)](#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s). For a description of properties, refer to the **N.context.attr("template")** tab in the [Config(natural.config.js)](#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s) menu.
+2. Add the following setting to [Config(natural.config.js)](#html/naturaljs/refr/refr0102.html). For a description of properties, refer to the **N.context.attr("template")** tab in the [Config(natural.config.js)](#html/naturaljs/refr/refr0102.html) menu.
 
 ```
 /**
@@ -144,7 +144,7 @@ Additional options for each component available only in Natural-TEMPLATE are as 
 
 ###1.1. N.select - Common code data binding
 
-**To use this function, the service URL that provides common code data and the common code classification code column name must be set in the N.context.attr("template").codes property of [Config(natural.config.js)](#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s).**
+**To use this function, the service URL that provides common code data and the common code classification code column name must be set in the N.context.attr("template").codes property of [Config(natural.config.js)](#html/naturaljs/refr/refr0102.html).**
 
 | Property | Option name | Type | Required | Property value | Description |
 | :--: | :--: | :--: | :--: | :--: | -- |
@@ -323,7 +323,7 @@ To set more detailed options, you can specify the "search-box" option as object 
 ```
 
 ##2. Starts with "c." - Communicator(N.comm) declaration
-All [Communicator(N.comm)](#cmVmcjAyMDMlMjRDb21tdW5pY2F0b3IkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDIwMy5odG1s) that communicate with the server can be defined as member variables of the Controller object. If you pre-declare Communicator, you can check the flow of data at a glance and apply AOP to the declared Communicators.
+All [Communicator(N.comm)](#html/naturaljs/refr/refr0203.html) that communicate with the server can be defined as member variables of the Controller object. If you pre-declare Communicator, you can check the flow of data at a glance and apply AOP to the declared Communicators.
 The initial property name of N.comm can be used in combination as follows.
 
 ```

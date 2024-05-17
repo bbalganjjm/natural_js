@@ -1,9 +1,9 @@
 웹 어플리케이션 기본 프레임 만들기
 ===
 
-메뉴를 좌측에 배치하고 우측에  MDI 형태로 페이지를 표시해 주는 <a href="#cmVmcjA1MDIlMjREb2N1bWVudHMkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDUwMi5odG1s">Documents</a>(N.docs) 컴포넌트를 사용하여 Single Page Web Application을 개발해 보겠습니다.
+메뉴를 좌측에 배치하고 우측에  MDI 형태로 페이지를 표시해 주는 <a href="#html/naturaljs/refr/refr0502.html">Documents</a>(N.docs) 컴포넌트를 사용하여 Single Page Web Application을 개발해 보겠습니다.
 
-<p class="alert">Documents(N.docs)에 대한 자세한 내용은 <a href="#cmVmcjA1MDIlMjREb2N1bWVudHMkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDUwMi5odG1s">Documents</a> 메뉴를 참고해 주세요.</p>
+<p class="alert">Documents(N.docs)에 대한 자세한 내용은 <a href="#html/naturaljs/refr/refr0502.html">Documents</a> 메뉴를 참고해 주세요.</p>
 
 먼저 개발 프로젝트를 구성하기 위해 다음 폴더들을 생성합니다.
 

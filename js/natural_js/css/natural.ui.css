@@ -1566,7 +1566,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .docs__>.docs_tab_context__>.docs_tabs__>.docs_tab__.stateless__>.docs_tab_active_btn__>span {
-    color: rgba(0, 0, 0, 0.40);
+    color: var(--md-sys-color-on-surface-variant);
 }
 
 .docs__>.docs_tab_context__>.docs_tabs__>.docs_tab__.remove__ {
@@ -1743,7 +1743,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     position: fixed;
     left: 0;
     top: 0;
-    height: 3px;
+    height: 4px;
     width: 100%;
     overflow: hidden;
     margin-top: 0;

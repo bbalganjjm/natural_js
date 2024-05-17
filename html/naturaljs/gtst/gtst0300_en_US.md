@@ -3,7 +3,7 @@ Retrieving / Modifying Data with Grid
 
 In order to process creation / retrieval / modification / deletion with Grid, we will develop a program consisting of the search condition area and the search result Grid.
 
-Code data will use [Select](#cmVmcjA0MDYlMjRTZWxlY3QkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDQwNi5odG1s)(N.select) component to bind data, [Form](#cmVmcjA0MDclMjRGb3JtJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjA0MDcuaHRtbA==)(N.form) component will create search condition area as form, and [Grid](#cmVmcjA0MDklMjRHcmlkJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjA0MDkuaHRtbA==)(N.grid) component will create a grid that can be input / viewed / modified / deleted. Buttons use the [Button](#cmVmcjA0MDIlMjRCdXR0b24kaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDQwMi5odG1s)(N.button) component.
+Code data will use [Select](#html/naturaljs/refr/refr0406.html)(N.select) component to bind data, [Form](#html/naturaljs/refr/refr0407.html)(N.form) component will create search condition area as form, and [Grid](#html/naturaljs/refr/refr0409.html)(N.grid) component will create a grid that can be input / viewed / modified / deleted. Buttons use the [Button](#html/naturaljs/refr/refr0402.html)(N.button) component.
 
 Let's practice by adding a menu to the basic frame created in [Create a web application base frame](#Z3RzdDAyMDAlMjRDcmVhdGUlMjBhJTIwd2ViJTIwYXBwbGljYXRpb24lMjBiYXNlJTIwZnJhbWUkaHRtbCUyRm5hdHVyYWxqcyUyRmd0c3QlMkZndHN0MDIwMC5odG1s).
 
@@ -336,7 +336,7 @@ The event handler of the Search button executes the following logic.
  1. Retrieve data from the server using the data of the search form(cont.form) as a parameter.
  2. Bind the retrieved data to the grid (cont.grid).
 
-The ```cont.form.validate()``` is a method that validates input data by checking the data-validate option(refer to the [Declarative Options] tab in the [Form](#cmVmcjA0MDclMjRGb3JtJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjA0MDcuaHRtbA==) document) declared in the tag of the input element of the search form at once. The validate () method returns true only after all validations are passed, so if you declare it as an "if" condition as in the code above, you can conveniently handle annoying works such as "check required input".
+The ```cont.form.validate()``` is a method that validates input data by checking the data-validate option(refer to the [Declarative Options] tab in the [Form](#html/naturaljs/refr/refr0407.html) document) declared in the tag of the input element of the search form at once. The validate () method returns true only after all validations are passed, so if you declare it as an "if" condition as in the code above, you can conveniently handle annoying works such as "check required input".
 and, at the end of the statement, the .button() method was executed to apply the Button(N.button) component to the event target element.
 
 #### [New] Button event

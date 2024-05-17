@@ -27,7 +27,7 @@ Natural-TEMPLATE 은 Natural-JS 기반 웹 어플리케이션 개발을 정형�
 <script type="text/javascript" src="js/natural_js/natural.template.min.js" charset="utf-8"></script>
 ```
 
-2. [Config(natural.config.js)](#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s)에 다음 설정을 추가합니다. 속성에 대한 설명은 [Config(natural.config.js)](#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s) 메뉴의 **N.context.attr("template")** 탭을 참고하세요.
+2. [Config(natural.config.js)](#html/naturaljs/refr/refr0102.html)에 다음 설정을 추가합니다. 속성에 대한 설명은 [Config(natural.config.js)](#html/naturaljs/refr/refr0102.html) 메뉴의 **N.context.attr("template")** 탭을 참고하세요.
 
 ```
 /**
@@ -144,7 +144,7 @@ Natural-TEMPLATE에서만 사용 가능한 컴포넌트 별 추가 옵션들은 
 
 ###1.1. N.select - 공통코드 데이터 바인딩
 
-**이 기능을 사용하려면 공통코드 데이터를 제공하는 서비스 URL과  공통코드 분류코드 컬럼명을 [Config(natural.config.js)](#cmVmcjAxMDIlMjRDb25maWckaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDEwMi5odG1s)의  N.context.attr("template").codes 속성에 설정해 주어야 합니다.**
+**이 기능을 사용하려면 공통코드 데이터를 제공하는 서비스 URL과  공통코드 분류코드 컬럼명을 [Config(natural.config.js)](#html/naturaljs/refr/refr0102.html)의  N.context.attr("template").codes 속성에 설정해 주어야 합니다.**
 
 | 속성 | 옵션명 | 타입 | 필수 여부 | 속성 값 | 설명 |
 | :--: | :--: | :--: | :--: | :--: | -- |
@@ -323,7 +323,7 @@ Natural-TEMPLATE에서만 사용 가능한 컴포넌트 별 추가 옵션들은 
 ```
 
 ##2. "c."으로 시작 - Communicator(N.comm) 선언
-서버와 통신하는 모든 [Communicator(N.comm)](#cmVmcjAyMDMlMjRDb21tdW5pY2F0b3IkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDIwMy5odG1s)를 Controller object의 멤버 변수로 정의할 수 있습니다. Communicator를 미리 선언해 놓으면 데이터의 흐름을 한눈에 확인할 수 있고 선언된 Communicator들에 AOP를 적용할 수 있습니다.
+서버와 통신하는 모든 [Communicator(N.comm)](#html/naturaljs/refr/refr0203.html)를 Controller object의 멤버 변수로 정의할 수 있습니다. Communicator를 미리 선언해 놓으면 데이터의 흐름을 한눈에 확인할 수 있고 선언된 Communicator들에 AOP를 적용할 수 있습니다.
 N.comm의 초기화 속성명은 다음과 같이 조합하여 사용할 수 있습니다.
 
 ```

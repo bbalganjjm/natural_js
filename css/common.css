@@ -193,7 +193,7 @@ th, tfoot td {
     transform-origin: left;
     transition: margin-left 0.5s ease, box-shadow 0.15s ease;
 
-    background-color: var(--md-sys-color-surface-variant);
+    background-color: var(--md-sys-color-surface-container);
     min-height: 100%;
 
     border-radius: 0 20px 20px 0;

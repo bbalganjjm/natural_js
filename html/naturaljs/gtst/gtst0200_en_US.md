@@ -1,9 +1,9 @@
 Create a web application base frame
 ===
 
-Let's develop a Single Page Web Application by using the <a href="#cmVmcjA1MDIlMjREb2N1bWVudHMkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDUwMi5odG1s">Documents</a>(N.docs) component that places the menu on the left and displays the page in MDI form on the right.
+Let's develop a Single Page Web Application by using the <a href="#html/naturaljs/refr/refr0502.html">Documents</a>(N.docs) component that places the menu on the left and displays the page in MDI form on the right.
 
-<p class="alert">For more information about Documents(N.docs), please refer to the <a href="#cmVmcjA1MDIlMjREb2N1bWVudHMkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDUwMi5odG1s">Documents</a> menu.</p>
+<p class="alert">For more information about Documents(N.docs), please refer to the <a href="#html/naturaljs/refr/refr0502.html">Documents</a> menu.</p>
 
 First, create the following folders to structure the development project.
 

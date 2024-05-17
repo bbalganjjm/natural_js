@@ -3,8 +3,8 @@ Grid로 데이터 조회/변경 하기
 
 Grid로 생성/조회/수정/삭제를 처리하기 위해 조회 조건 영역과 조회 결과 Grid로 이루어진 프로그램을 개발해 보겠습니다.
 
-코드 데이터들은 [Select](#cmVmcjA0MDYlMjRTZWxlY3QkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDQwNi5odG1s)(N.select) 컴포넌트를 사용하여 데이터를 바인딩하고 [Form](#cmVmcjA0MDclMjRGb3JtJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjA0MDcuaHRtbA==)(N.form) 컴포넌트로 조회 조건 영역을 폼으로 생성하고  [Grid](#cmVmcjA0MDklMjRHcmlkJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjA0MDkuaHRtbA==)(N.grid) 컴포넌트로 입력/조회/수정/삭제할 수 있는 그리드를 생성할 것입니다.
-버튼 들은 [Button](#cmVmcjA0MDIlMjRCdXR0b24kaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDQwMi5odG1s)(N.button) 컴포넌트를 사용합니다.
+코드 데이터들은 [Select](#html/naturaljs/refr/refr0406.html)(N.select) 컴포넌트를 사용하여 데이터를 바인딩하고 [Form](#html/naturaljs/refr/refr0407.html)(N.form) 컴포넌트로 조회 조건 영역을 폼으로 생성하고  [Grid](#html/naturaljs/refr/refr0409.html)(N.grid) 컴포넌트로 입력/조회/수정/삭제할 수 있는 그리드를 생성할 것입니다.
+버튼 들은 [Button](#html/naturaljs/refr/refr0402.html)(N.button) 컴포넌트를 사용합니다.
 
 [웹 어플리케이션 기본 프레임 만들기](#Z3RzdDAyMDAlMjQlRUMlOUIlQjklMjAlRUMlOTYlQjQlRUQlOTQlOEMlRUIlQTYlQUMlRUMlQkMlODAlRUMlOUQlQjQlRUMlODUlOTglMjAlRUElQjglQjAlRUIlQjMlQjglMjAlRUQlOTQlODQlRUIlQTAlODglRUMlOUUlODQlMjAlRUIlQTclOEMlRUIlOTMlQTQlRUElQjglQjAkaHRtbCUyRm5hdHVyYWxqcyUyRmd0c3QlMkZndHN0MDIwMC5odG1s)에서 생성한 기본 프레임에 메뉴를 추가하여 실습을 진행해 보겠습니다.
 
@@ -336,7 +336,7 @@ bindEvents : function() {
  1. 검색 폼(cont.form)의 데이터를 파라미터로 서버에서 데이터 조회
  2. 그리드(cont.grid)에 조회한 데이터를 바인딩
 
-```cont.form.validate()``` 메서드는 검색 폼의 입력 요소의 태그에 선언된 data-validate 옵션([Form](#cmVmcjA0MDclMjRGb3JtJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjA0MDcuaHRtbA==) 문서의 [선언형 옵션] 참고)을 한 번에 체크하여 입력 데이터에 대한 유효성 검증을 실행하는 메서드입니다. validate() 메서드는 유효성 검증을 모두 통과해야만 true를 반환하므로 위 코드와 같이 if 조건으로 선언해 놓으면 "필수 입력 체크" 등의 귀찮은 작업들을 편리하게 처리할 수 있습니다.
+```cont.form.validate()``` 메서드는 검색 폼의 입력 요소의 태그에 선언된 data-validate 옵션([Form](#html/naturaljs/refr/refr0407.html) 문서의 [선언형 옵션] 참고)을 한 번에 체크하여 입력 데이터에 대한 유효성 검증을 실행하는 메서드입니다. validate() 메서드는 유효성 검증을 모두 통과해야만 true를 반환하므로 위 코드와 같이 if 조건으로 선언해 놓으면 "필수 입력 체크" 등의 귀찮은 작업들을 편리하게 처리할 수 있습니다.
 그리고 구문의 끝 부분에 .button() 메서드를 실행해서 이벤트 타겟 요소에 Button(N.button) 컴포넌트를 적용했습니다.
 
 #### [New] 버튼 이벤트
