@@ -49,8 +49,7 @@
             var self = this;
             $(window).on("hashchange.index", function() {
                 if(self.docs) {
-                    if (!N.string.isEmpty(location.hash)
-                        && (N.string.endsWith(location.hash, ".html") || N.string.endsWith(location.hash, ".view"))) {
+                    if (!N.string.isEmpty(location.hash) && N.string.endsWith(location.hash, ".html")) {
                         var url = location.hash.replace("#", "");
                         var selectedMenuEle = N(".index-lefter.view_context__ a[href='" + url + "']");
                         var docId = selectedMenuEle.find("span:last").text();
