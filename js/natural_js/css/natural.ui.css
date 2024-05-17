@@ -1747,7 +1747,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     width: 100%;
     overflow: hidden;
     margin-top: 0;
-    background-color: var(--md-sys-color-surface-low);
+    background-color: var(--md-sys-color-primary-container);
     opacity: 0.9;
 }
 
@@ -1758,7 +1758,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     left: -100%;
     width: 100%;
     height: 3px;
-    background-color: var(--md-sys-color-surface-tint);
+    background-color: var(--md-sys-color-primary);
     opacity: 1;
 }
 
