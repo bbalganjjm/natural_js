@@ -22,6 +22,7 @@ body {
     height: 100%;
     margin: 0;
     color: var(--md-sys-color-on-surface);
+    background-color: var(--md-sys-color-surface-container-lowest);
     font-size: 0.875rem;
     line-height: 1.7;
 }
@@ -139,17 +140,17 @@ th, tfoot td {
 
 .grid__ tr>td:first-child,
 .form__ tr>td:first-child {
-    border-left-color: var(--md-sys-color-surface);
+    border-left: none;
 }
 
 .grid__ tr>th:last-child,
 .form__ tr>th:last-child {
-    border-right-color: var(--md-sys-color-outline);
+    border-right: none;
 }
 
 .grid__ tr>td:last-child,
 .form__ tr>td:last-child {
-    border-right-color: var(--md-sys-color-surface);
+    border-right: none;
 }
 
 .list__ {
@@ -197,7 +198,7 @@ th, tfoot td {
     transform-origin: left;
     transition: margin-left 0.5s ease;
 
-    background-color: var(--md-sys-color-secondary-container);
+    background-color: var(--md-sys-color-surface-container);
     min-height: 100%;
 
     z-index: 2;
@@ -428,7 +429,6 @@ article .btnBox {
     border-radius: 3px;
     padding: 10px;
     margin: 0 0 15px 0;
-    background-color: var(--md-sys-color-surface);
     text-align: left;
 }
 
@@ -1076,7 +1076,7 @@ pre.shell>code {
 textarea::-webkit-scrollbar,
 select::-webkit-scrollbar {
     width: 6px;
-    background-color: var(--md-sys-color-surface);
+    background-color: var(--md-sys-color-surface-container);
 }
 
 textarea:hover::-webkit-scrollbar-track,

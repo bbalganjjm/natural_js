@@ -68,7 +68,7 @@
 }
 .surface {
   color: var(--md-sys-color-on-surface);
-  background-color: var(--md-sys-color-surface);
+var(--md-sys-color-surface-container-lowest);
 }
 .surface-variant {
   color: var(--md-sys-color-on-surface-variant);

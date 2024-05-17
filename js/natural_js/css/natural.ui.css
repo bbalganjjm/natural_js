@@ -9,7 +9,7 @@
 }
 
 .alert__.block_overlay_msg__ {
-    background: var(--md-sys-color-surface);
+    background: var(--md-sys-color-surface-container-lowest);
     border: 1px solid var(--md-sys-color-outline);
     box-shadow: 4px 4px 0 var(--md-sys-color-shadow);
 }
@@ -185,7 +185,7 @@
 }
 
 .popup__.block_overlay_msg__ > .msg_box__ {
-    background-color: var(--md-sys-color-surface);
+    background-color: var(--md-sys-color-surface-container-lowest);
     padding: 0;
 }
 
@@ -228,36 +228,36 @@ a.btn_common__ img {
 
 a.btn_white__, input[type='button'].btn_white__, button.btn_white__ {
     color: #4f535c !important;
-    background-color: var(--md-sys-color-surface);
+    background-color: var(--md-sys-color-surface-container-lowest);
     border: 1px solid var(--md-sys-color-outline);
 }
 
 a.btn_gray__, input[type='button'].btn_gray__, button.btn_gray__ {
-    color: var(--md-sys-color-surface) !important;
+    color: var(--md-sys-color-surface-container-lowest) !important;
     background-color: #a2a2a2;
     border: 1px solid var(--md-sys-color-outline);
 }
 
 a.btn_blue__, input[type='button'].btn_blue__, button.btn_blue__ {
-    color: var(--md-sys-color-surface) !important;
+    color: var(--md-sys-color-surface-container-lowest) !important;
     background-color: #6666ff;
     border: 1px solid var(--md-sys-color-outline);
 }
 
 a.btn_skyblue__, input[type='button'].btn_skyblue__, button.btn_skyblue__ {
-    color: var(--md-sys-color-surface) !important;
+    color: var(--md-sys-color-surface-container-lowest) !important;
     background-color: #3cc3ff;
     border: 1px solid var(--md-sys-color-outline);
 }
 
 a.btn_green__, input[type='button'].btn_green__, button.btn_green__ {
-    color: var(--md-sys-color-surface) !important;
+    color: var(--md-sys-color-surface-container-lowest) !important;
     background-color: #008800;
     border: 1px solid var(--md-sys-color-outline);
 }
 
 a.btn_yellowgreen__, input[type='button'].btn_yellowgreen__, button.btn_yellowgreen__ {
-    color: var(--md-sys-color-surface) !important;
+    color: var(--md-sys-color-surface-container-lowest) !important;
     background-color: #9ACD32;
     border: 1px solid var(--md-sys-color-outline);
 }
@@ -435,7 +435,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 /* Grid */
 .grid__ > tbody {
-    background-color: var(--md-sys-color-surface);
+    background-color: var(--md-sys-color-surface-container-lowest);
 }
 
 .grid__ > .row_data_changed__,
@@ -853,8 +853,8 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 .tab__>ul>li.tab_active__,
 .tab__>.tab_native_scroll__>ul>li.tab_active__ {
-    background-color: var(--md-sys-color-surface);
-    border-bottom: 1px solid var(--md-sys-color-surface);
+    background-color: var(--md-sys-color-surface-container-lowest);
+    border-bottom: 1px solid var(--md-sys-color-surface-container-lowest);
 }
 
 .tab__>ul>li.tab_active__>a,
@@ -944,7 +944,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
     border: 1px solid var(--md-sys-color-outline);
     box-shadow: 3px 3px 0 var(--md-sys-color-shadow);
-    background-color: var(--md-sys-color-surface);
+    background-color: var(--md-sys-color-surface-container-lowest);
     font-size: 95%;
     z-index: 1;
     padding: 2px;
@@ -965,7 +965,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .datepicker_contents__.datepicker_monthonly__ > .datepicker_months_panel__ {
-    background-color: var(--md-sys-color-surface);
+    background-color: var(--md-sys-color-surface-container-lowest);
 }
 
 .datepicker_contents__ > .datepicker_days_panel__ {
@@ -1043,7 +1043,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     float: left;
     border: 1px solid transparent;
     cursor: pointer;
-    background-color: var(--md-sys-color-surface);
+    background-color: var(--md-sys-color-surface-container-lowest);
     line-height: 25px;
     width: 28px;
     text-align: center;
@@ -1081,7 +1081,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .datepicker_contents__ .datepicker_day_title__ {
-    background-color: var(--md-sys-color-surface);
+    background-color: var(--md-sys-color-surface-container-lowest);
     width: 28px;
     float: left;
     text-align: center;
@@ -1094,7 +1094,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     background-color: var(--md-sys-color-secondary-container);
     line-height: 25px;
     text-align: center;
-    color: var(--md-sys-color-surface);
+    color: var(--md-sys-color-surface-container-lowest);
     font-weight: bold;
 }
 
@@ -1351,7 +1351,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .tree__ li.tree_last_node__:last-child>.tree_icon__ {
-    background-color: var(--md-sys-color-surface);
+    background-color: var(--md-sys-color-surface-container-lowest);
 }
 
 .tree__ li.tree_last_node__ a>span {
@@ -1551,8 +1551,8 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .docs__>.docs_tab_context__>.docs_tabs__>.docs_tab__.active__ {
-    background-color: var(--md-sys-color-surface);
-    border-bottom: 1px solid var(--md-sys-color-surface);
+    background-color: var(--md-sys-color-surface-container-lowest);
+    border-bottom: 1px solid var(--md-sys-color-surface-container-lowest);
     transition: background-color 0.5s ease, border-bottom-color 0.3s ease;
 }
 
@@ -1609,7 +1609,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .docs__>.docs_tab_context__>ul.docs_tab_utils__>li>a {
     text-indent: -9999px;
     display: inline-block;
-    color: var(--md-sys-color-surface);
+    color: var(--md-sys-color-surface-container-lowest);
     font-size: 95%;
     margin-top: 6px;
 }
@@ -1700,7 +1700,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 }
 
 .docs__>.docs_contents__ {
-    background-color: var(--md-sys-color-surface);
+    background-color: var(--md-sys-color-surface-container-lowest);
 }
 
 .docs__>.docs_contents__.visible__ {
@@ -1770,7 +1770,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .grid_wrap__::-webkit-scrollbar {
     width: 6px;
     height: 8px;
-    background-color: var(--md-sys-color-surface);
+    background-color: var(--md-sys-color-surface-container-lowest);
 }
 
 .antiscroll-inner:hover::-webkit-scrollbar-track,
