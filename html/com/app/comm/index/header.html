@@ -3,29 +3,6 @@
     text-align: right;
 }
 
-.index-header .header-back {
-    position: absolute;
-    width: 100%;
-    height: 100px;
-    z-index: 0;
-    background: url("images/header-back.png");
-}
-
-@media (prefers-color-scheme: dark) {
-    .index-header .header-back {
-        isolation: isolate;
-    }
-
-    .index-header .header-back::after {
-        content: '';
-        position: absolute;
-        background: var(--md-sys-color-surface-container-lowest);
-        z-index: -1;
-        inset: 0;
-        opacity: 1;
-    }
-}
-
 .index-header .links {
     position: relative;
     display: inline-block;

@@ -191,12 +191,19 @@ th, tfoot td {
     width: 250px;
 
     transform-origin: left;
-    transition: margin-left 0.5s ease;
+    transition: margin-left 0.5s ease, box-shadow 0.15s ease;
 
-    background-color: var(--md-sys-color-surface-container);
+    background-color: var(--md-sys-color-surface-variant);
     min-height: 100%;
 
+    border-radius: 0 20px 20px 0;
+
     z-index: 2;
+}
+
+.main-nav:hover {
+    border-right: 1px solid var(--md-sys-color-outline-variant);
+    box-shadow: 1px 0 5px var(--md-sys-color-shadow);
 }
 
 .content-wrap {
@@ -217,7 +224,7 @@ th, tfoot td {
 }
 
 .page-header {
-    height: 75px;
+    height: 36px;
 }
 
 .main-contents {
