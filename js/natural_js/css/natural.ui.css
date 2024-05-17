@@ -1452,7 +1452,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     line-height: 16px;
     text-align: left;
     word-break: break-all;
-    box-shadow: 3px 3px 3px var(--md-sys-color-shadow);
+    box-shadow: 3px 3px 0 var(--md-sys-color-shadow);
     transform: scale(0.7);
     opacity: 0;
     background-color: var(--md-sys-color-surface-container-lowest);
