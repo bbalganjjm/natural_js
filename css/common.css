@@ -1081,10 +1081,10 @@ select::-webkit-scrollbar {
 
 textarea:hover::-webkit-scrollbar-track,
 select:hover::-webkit-scrollbar-track {
-    background-color: var(--md-sys-color-secondary-container);
+    background-color: var(--md-sys-color-surface-container-low);
 }
 
 textarea:hover::-webkit-scrollbar-thumb,
 select:hover::-webkit-scrollbar-thumb{
-    background-color: var(--md-sys-color-on-secondary-container);
+    background-color: var(--md-sys-color-surface-container-highest);
 }
