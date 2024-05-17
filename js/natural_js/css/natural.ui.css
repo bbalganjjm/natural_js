@@ -130,7 +130,7 @@
     line-height: 12px;
     padding: 1px 1px 1px 15px;
     background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAvElEQVQoz7WRLW5CYRREz/1CEASBQDcIgmUHiIqqLoDKOnaEqkJUVTQoREnYQlNR0RTfFbR5vHNrIOGvooJxk8zN3JmBSyP2idoBJsAQ+AIegE9gU0r55kh8pS7U66qqmmpfvVFX6vOJlTpTe2p3y1vqS2b+qLc7Xdm7aQPdiFirE+ApIkaZeQ+870SNI6O3zFxGxBTYZOYd0AEGwMdfLzXVR3Vc13VR59syTjKcCz1Tx/+qtZTyevFxD/ALNrGGAZ7BYBgAAAAASUVORK5CYII=') no-repeat 3px 2px;
-    color : var(--md-sys-color-surface-tint-color);
+    color : var(--md-sys-color-surface-tint);
     margin-right: 5px;
     font-style: italic;
     font-weight: 400;
@@ -1747,7 +1747,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     width: 100%;
     overflow: hidden;
     margin-top: 0;
-    background-color: var(--md-sys-color-tertiary);
+    background-color: var(--md-sys-color-surface-low);
     opacity: 0.9;
 }
 
@@ -1758,7 +1758,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     left: -100%;
     width: 100%;
     height: 3px;
-    background-color: var(--md-sys-color-tertiary);
+    background-color: var(--md-sys-color-surface-tint);
     opacity: 1;
 }
 

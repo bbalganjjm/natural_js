@@ -6,7 +6,7 @@
 .index-header .links {
     position: relative;
     display: inline-block;
-    margin: 7px 10px 0 0;
+    margin: 7px 10px 7px 0;
     z-index: 1;
 }
 
@@ -17,25 +17,24 @@
 .index-header .github-link>span {
     background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABJklEQVQ4y42ToVLDQBCGv93kIhqmohLRZ+hEIRBI3oS+CVNdFZEHYCp4iCp0RUU0op6BmYQQBHuZIz0admZFdv//v93cfzAKESmAEqiB1rIGSuvFI0mSGVAB/URWhj0j7/9B9rkfi/iTX4A1cAA64NWys9raML1xhp298hYgy7LUOXfl1Z1zsyzLUvvceryIFGnf9w/BJF8ATdN8Am++2Lbt+xgD4Lm1V1TVaybCMH7iGrumHjhNkYM4GafVoDjP8zydYhpmHtaGFUTkbkrAML9WKIPCUVWXF/ZfAscAXw7XKCKPwDPwAexUdRUQV8DOeoOhQmtXQKeqt8ATP05b+KZzbkHE0sNogZUPInIvIjeRDS5aOfaY/hI4f0yjv1wAm0hrE3vO3ymJdIJgZzluAAAAAElFTkSuQmCC') no-repeat;
     padding-left: 19px;
-    color: var(--md-sys-color-surface-tint-color);
+    color: var(--md-sys-color-on-surface);
 }
 
-.index-header .github-discussions:before {
-    content: ' / ';
+@media (prefers-color-scheme: dark) {
+    .index-header .github-link > span {
+        color: var(--md-sys-color-inverse-on-surface);
+        filter: invert(100%)
+    }
 }
 
-.index-header .github-discussions>span {
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    padding-left: 0;
-    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAB7klEQVQ4y5WTMWhTURSGv3PzamKipTiKg4ogRpGODrUkg+iigu5iXcQMMY9CISVBSpKW1iFtxUBBUCq4lEIRpw5WIqiDQhEE6SSSoUOn0Ni+NLnHoY9CHg+xP1w49z//Peeec+4VQtA3OR/rWHsZ1VMAiDQcY77vjWd3g1rp2ZRnB1U1D9wCYgHtLvBWRKa0kFvvCZCYqZmW5z0BCsA6sGBEPhw/GvslCM2dndNWNQU8BAaBciIanWiNZawD0PK8aSAn8DgejdZaYxlrge3K3ACALeQ2gI3ETO3FH8/LKFRbnncMGBUpV1OqrAmMaNF91XPpUvUjAEX3ak+ppep9hZcipI0qLlBPX0wuhjSoIlAJ8qnkhUWgrsqoAYaB5fd3rtugUFWbqtoM8mt3b1hgGRhygH5gK2ycCK5vfQrxbgH9BmgA5zg8zgO/DfAOGIlU5uL/e9LZ194DVowRmQZOdK0thWg/++sAR6aeOR1rF4ABI/JU/HEtATGK7s1/ZTbl2aRVfQ5cEbitRXfV8X2XgFVncj7e6XYfANeAb0BDwCqcAVJWdRj4KUJaC+4XAPGj/mD/CZ9l/w/Uffukn2AT+Cqw1OdEVtr5bPugH1b1EdABmsCEEXljC7nNsBIUaAc4x4i8jhiT3xvPbgNYDoe/u3qz9Ee1zj4AAAAASUVORK5CYII=') no-repeat 0 1px;;
-}
-
-.index-header .community-link>span {
+.index-header .community-link>span{
     background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAA6klEQVQ4y92QoU4DURREz2wqCRLVViBI0wRDKlHgSlF8AJZNMHxNVyAQ6Co24FCQkEpI2CBZBJ+A2TcYFjYksI+VXPUyk5l371F/On+0PaLDSCqSrmEA26Ne5E9vwDlwDyTAvu0dgNYCSUFit8zT21rrT+crQFwBcFWHB3vZGHts2KzNmIKnxs3XtteaZhJREBrv1e/mjxtIWkhcAg9fGqmkns2h7e22E+7KPD1tCmWenn1APIhhMBjOsgnw+nxx9AIwnGVbQBKCN1oZ2D6uqrAMwSefMIJvqiosba//BeKv8x8KJBVdw5KKd7wuWFdJSZGYAAAAAElFTkSuQmCC') no-repeat;
     padding-left: 19px;
-    color: var(--md-sys-color-surface-tint-color);
+    color: var(--md-sys-color-on-surface);
+}
+
+.index-header .link {
+    color: var(--md-sys-color-on-surface);
 }
 </style>
 
@@ -43,9 +42,7 @@
     <div class="header-back"></div>
     <div class="links">
         <a class="github-link" href="https://github.com/bbalganjjm/natural_js" target="blank" title="Natural-JS GitHub repository"><span>Natural-JS</span></a>
-        <a class="github-link github-discussions" href="https://github.com/bbalganjjm/natural_js/discussions" target="blank"><span lang="ko_KR" title="토론/질문/의견"></span><span lang="en_US" title="Discussions"></span></a>
         <a class="github-link boot margin-left-20" href="https://github.com/bbalganjjm/natural_js_boot" target="blank" title="Natural-JS Boot GitHub repository"><span>Natural-JS Boot</span></a>
-        <a class="github-link github-discussions" href="https://github.com/bbalganjjm/natural_js_boot/discussions" target="blank"><span lang="ko_KR" title="토론/질문/의견"></span><span lang="en_US" title="Discussions"></span></a>
         <a class="community-link margin-left-20" href="https://www.facebook.com/groups/1927201360891679" target="blank" title="Natural-JS Facebook Community"><span>Community</span></a>
         <a class="korean link margin-left-20" href="#" title="한국어로 변경"><span>한국어</span></a><a><span> | </span></a><a class="english link" href="#" title="Change to english"><span>English</span></a>
     </div>

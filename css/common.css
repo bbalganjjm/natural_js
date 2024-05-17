@@ -24,7 +24,7 @@ body {
 
 a {
     text-decoration: none;
-    color: var(--md-sys-color-surface-tint-color);
+    color: var(--md-sys-color-surface-tint);
 }
 .pagination__ a {
     color: var(--md-sys-color-on-surface);
@@ -223,13 +223,6 @@ th, tfoot td {
     transition: margin-left 0.5s ease;
 }
 
-.page-header {
-    height: 36px;
-}
-
-.main-contents {
-}
-
 .page-footer {
 }
 
@@ -359,7 +352,7 @@ article .btnBox {
 
 .apiDoc .depricated {
     text-decoration: line-through;
-    color: var(--md-sys-color-surface-tint-color);
+    color: var(--md-sys-color-surface-tint);
 }
 
 .apiDoc a>sup {
@@ -706,7 +699,7 @@ pre.shell>code {
         border: none;
         padding: 0 10px;
         line-height: 3;
-        color: var(--md-sys-color-surface-tint-color);
+        color: var(--md-sys-color-surface-tint);
         font-weight: 700;
     }
 
@@ -720,17 +713,17 @@ pre.shell>code {
     #constructor .apiDoc .api.form td:nth-child(2):before {
         content: 'arguments';
         font-weight: 700;
-        color: var(--md-sys-color-surface-tint-color);
+        color: var(--md-sys-color-surface-tint);
     }
     #constructor .apiDoc .api.form td:nth-child(3):before {
         content: 'type : ';
         font-weight: 700;
-        color: var(--md-sys-color-surface-tint-color);
+        color: var(--md-sys-color-surface-tint);
     }
     #constructor .apiDoc .api.form td:nth-child(4):before {
         content: 'return : ';
         font-weight: 700;
-        color: var(--md-sys-color-surface-tint-color);
+        color: var(--md-sys-color-surface-tint);
     }
 
     #advisors .apiDoc .api.form td:nth-child(2):before,
@@ -738,32 +731,32 @@ pre.shell>code {
     #defaultoptions .apiDoc .api.form td:nth-child(2):before {
         content: 'type : ';
         font-weight: 700;
-        color: var(--md-sys-color-surface-tint-color);
+        color: var(--md-sys-color-surface-tint);
     }
     #advisors .apiDoc .api.form td:nth-child(3):before,
     #pointcuts .apiDoc .api.form td:nth-child(3):before,
     #defaultoptions .apiDoc .api.form td:nth-child(3):before {
         content: 'default : ';
         font-weight: 700;
-        color: var(--md-sys-color-surface-tint-color);
+        color: var(--md-sys-color-surface-tint);
     }
     #advisors .apiDoc .api.form td:nth-child(4):before,
     #pointcuts .apiDoc .api.form td:nth-child(4):before,
     #defaultoptions .apiDoc .api.form td:nth-child(4):before {
         content: 'required : ';
         font-weight: 700;
-        color: var(--md-sys-color-surface-tint-color);
+        color: var(--md-sys-color-surface-tint);
     }
 
     #declarativeoptions .apiDoc .api.form td:nth-child(2):before {
         content: 'type : ';
         font-weight: 700;
-        color: var(--md-sys-color-surface-tint-color);
+        color: var(--md-sys-color-surface-tint);
     }
     #declarativeoptions .apiDoc .api.form td:nth-child(3):before {
         content: 'default : ';
         font-weight: 700;
-        color: var(--md-sys-color-surface-tint-color);
+        color: var(--md-sys-color-surface-tint);
     }
 
     #pluginExtention .apiDoc .api.form tr>td:first-child,
@@ -798,7 +791,7 @@ pre.shell>code {
     #utilities .apiDoc .api.form td:nth-child(2):before {
         content: 'arguments';
         font-weight: 700;
-        color: var(--md-sys-color-surface-tint-color);
+        color: var(--md-sys-color-surface-tint);
     }
     #pluginExtention .apiDoc .api.form td:nth-child(3):before,
     #n .apiDoc .api.form td:nth-child(3):before,
@@ -816,7 +809,7 @@ pre.shell>code {
     #utilities .apiDoc .api.form td:nth-child(3):before {
         content: 'type : ';
         font-weight: 700;
-        color: var(--md-sys-color-surface-tint-color);
+        color: var(--md-sys-color-surface-tint);
     }
     #pluginExtention .apiDoc .api.form td:nth-child(4):before,
     #n .apiDoc .api.form td:nth-child(4):before,
@@ -834,7 +827,7 @@ pre.shell>code {
     #utilities .apiDoc .api.form td:nth-child(4):before {
         content: 'return : ';
         font-weight: 700;
-        color: var(--md-sys-color-surface-tint-color);
+        color: var(--md-sys-color-surface-tint);
     }
 
     #conf_core .apiDoc .api.form td:nth-child(2):before,
@@ -846,7 +839,7 @@ pre.shell>code {
     #conf_code .apiDoc .api.form td:nth-child(2):before {
         content: 'default : ';
         font-weight: 700;
-        color: var(--md-sys-color-surface-tint-color);
+        color: var(--md-sys-color-surface-tint);
     }
     #conf_core .apiDoc .api.form td:nth-child(3):before,
     #conf_architecture .apiDoc .api.form td:nth-child(3):before,
@@ -857,7 +850,7 @@ pre.shell>code {
     #conf_code .apiDoc .api.form td:nth-child(3):before {
         content: 'required : ';
         font-weight: 700;
-        color: var(--md-sys-color-surface-tint-color);
+        color: var(--md-sys-color-surface-tint);
     }
 
     .apiDoc .apidemo .form .demo-desc {
@@ -907,7 +900,7 @@ pre.shell>code {
     border: none;
     padding: 0 10px;
     line-height: 3;
-    color: var(--md-sys-color-surface-tint-color);
+    color: var(--md-sys-color-surface-tint);
     font-weight: 700;
 }
 
@@ -921,17 +914,17 @@ pre.shell>code {
 #constructor .apiDoc.api-view-list-type .api.form td:nth-child(2):before {
     content: 'arguments';
     font-weight: 700;
-    color: var(--md-sys-color-surface-tint-color);
+    color: var(--md-sys-color-surface-tint);
 }
 #constructor .apiDoc.api-view-list-type .api.form td:nth-child(3):before {
     content: 'type : ';
     font-weight: 700;
-    color: var(--md-sys-color-surface-tint-color);
+    color: var(--md-sys-color-surface-tint);
 }
 #constructor .apiDoc.api-view-list-type .api.form td:nth-child(4):before {
     content: 'return : ';
     font-weight: 700;
-    color: var(--md-sys-color-surface-tint-color);
+    color: var(--md-sys-color-surface-tint);
 }
 
 #advisors .apiDoc.api-view-list-type .api.form td:nth-child(2):before,
@@ -939,32 +932,32 @@ pre.shell>code {
 #defaultoptions .apiDoc.api-view-list-type .api.form td:nth-child(2):before {
     content: 'type : ';
     font-weight: 700;
-    color: var(--md-sys-color-surface-tint-color);
+    color: var(--md-sys-color-surface-tint);
 }
 #advisors .apiDoc.api-view-list-type .api.form td:nth-child(3):before,
 #pointcuts .apiDoc.api-view-list-type .api.form td:nth-child(3):before,
 #defaultoptions .apiDoc.api-view-list-type .api.form td:nth-child(3):before {
     content: 'default : ';
     font-weight: 700;
-    color: var(--md-sys-color-surface-tint-color);
+    color: var(--md-sys-color-surface-tint);
 }
 #advisors .apiDoc.api-view-list-type .api.form td:nth-child(4):before,
 #pointcuts .apiDoc.api-view-list-type .api.form td:nth-child(4):before,
 #defaultoptions .apiDoc.api-view-list-type .api.form td:nth-child(4):before {
     content: 'required : ';
     font-weight: 700;
-    color: var(--md-sys-color-surface-tint-color);
+    color: var(--md-sys-color-surface-tint);
 }
 
 #declarativeoptions .apiDoc.api-view-list-type .api.form td:nth-child(2):before {
     content: 'type : ';
     font-weight: 700;
-    color: var(--md-sys-color-surface-tint-color);
+    color: var(--md-sys-color-surface-tint);
 }
 #declarativeoptions .apiDoc.api-view-list-type .api.form td:nth-child(3):before {
     content: 'default : ';
     font-weight: 700;
-    color: var(--md-sys-color-surface-tint-color);
+    color: var(--md-sys-color-surface-tint);
 }
 
 #pluginExtention .apiDoc.api-view-list-type .api.form tr>td:first-child,
@@ -999,7 +992,7 @@ pre.shell>code {
 #utilities .apiDoc.api-view-list-type .api.form td:nth-child(2):before {
     content: 'arguments';
     font-weight: 700;
-    color: var(--md-sys-color-surface-tint-color);
+    color: var(--md-sys-color-surface-tint);
 }
 #pluginExtention .apiDoc.api-view-list-type .api.form td:nth-child(3):before,
 #n .apiDoc.api-view-list-type .api.form td:nth-child(3):before,
@@ -1017,7 +1010,7 @@ pre.shell>code {
 #utilities .apiDoc.api-view-list-type .api.form td:nth-child(3):before {
     content: 'type : ';
     font-weight: 700;
-    color: var(--md-sys-color-surface-tint-color);
+    color: var(--md-sys-color-surface-tint);
 }
 #pluginExtention .apiDoc.api-view-list-type .api.form td:nth-child(4):before,
 #n .apiDoc.api-view-list-type .api.form td:nth-child(4):before,
@@ -1035,7 +1028,7 @@ pre.shell>code {
 #utilities .apiDoc.api-view-list-type .api.form td:nth-child(4):before {
     content: 'return : ';
     font-weight: 700;
-    color: var(--md-sys-color-surface-tint-color);
+    color: var(--md-sys-color-surface-tint);
 }
 
 #conf_core .apiDoc.api-view-list-type .api.form td:nth-child(2):before,
@@ -1047,7 +1040,7 @@ pre.shell>code {
 #conf_code .apiDoc.api-view-list-type .api.form td:nth-child(2):before {
     content: 'default : ';
     font-weight: 700;
-    color: var(--md-sys-color-surface-tint-color);
+    color: var(--md-sys-color-surface-tint);
 }
 #conf_core .apiDoc.api-view-list-type .api.form td:nth-child(3):before,
 #conf_architecture .apiDoc.api-view-list-type .api.form td:nth-child(3):before,
@@ -1058,7 +1051,7 @@ pre.shell>code {
 #conf_code .apiDoc.api-view-list-type .api.form td:nth-child(3):before {
     content: 'required : ';
     font-weight: 700;
-    color: var(--md-sys-color-surface-tint-color);
+    color: var(--md-sys-color-surface-tint);
 }
 
 .apiDoc.api-view-list-type .apidemo .form .demo-desc {

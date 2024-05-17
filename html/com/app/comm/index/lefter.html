@@ -40,6 +40,12 @@
     transition: transform 0.3s ease;
 }
 
+@media (prefers-color-scheme: dark) {
+    .index-lefter .logo .lefter-toggle-button>span {
+        filter: invert(100%);
+    }
+}
+
 .index-lefter .logo .lefter-toggle-button:hover>span {
     will-change: transform;
 }
@@ -116,7 +122,7 @@
 }
 
 .index-lefter .left-menu sup {
-    color: var(--md-sys-color-surface-tint-color);
+    color: var(--md-sys-color-surface-tint);
 }
 </style>
 
