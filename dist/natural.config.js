@@ -55,7 +55,7 @@
 		/**
 		 * Controller AOP related settings.
 		 *  - Refer to the
-		 *    https://bbalganjjm.github.io/natural_js/#cmVmcjAyMDIlMjRBT1AkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDIwMi5odG1s
+		 *    https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0202.html
 		 */
 		"cont" : {
 		},

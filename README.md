@@ -85,7 +85,7 @@ There is no separate implementation of View, and the HTML element area of the bl
 
 [Communicator(N.comm)](https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0203.html) is a class that implements Communicator layer of CVC Architecture Pattern.
 * N.comm is a library that supports Ajax communication with the server, such as requesting content or data from the server, or passing parameters.
-* N.comm provides a [Communication Filter](https://bbalganjjm.github.io/natural_js/#cmVmcjAyMDUlMjRDb21tdW5pY2F0aW9uJTIwRmlsdGVyJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAyMDUuaHRtbA==) feature that can execute common logic in every request and response or error generation phase that communicates with the server.
+* N.comm provides a [Communication Filter](https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0205.html) feature that can execute common logic in every request and response or error generation phase that communicates with the server.
 
 #### Context
 
