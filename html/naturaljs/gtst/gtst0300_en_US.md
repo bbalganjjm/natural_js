@@ -26,7 +26,6 @@ First, open the  **/html/index/lefter.html** file, add the li element to the end
 
 When the menu addition is complete, download the [data.json](html/naturaljs/gtst/data/data.json) file and save it in the context root of your project for the execute data searching and saving.
 <p class="alert">If the data.json file is not downloaded when you click the link, right-click on the data.json link, then click [Save Link As].</p>
-<p class="alert">This tutorial is an example running on the Web Server, and the inquiry parameter or saved / modified / deleted data is not saved. Please check only the parameters transmitted to the server in the network tab of the developer tool. For an example that works with a server(DBMS), please refer to the document <a href="#Z3RzdDIwMDAlMjRHZXR0aW5nJTIwU3RhcnRlZCUyMHdpdGglMjBTYW1wbGUlMjBwcm9qZWN0JGh0bWwlMkZuYXR1cmFsanMlMkZndHN0JTJGZ3RzdDIwMDAuaHRtbA==">Getting Started with Sample project</a>.</p>
 
 
 ##Coding the view area
@@ -330,7 +329,7 @@ bindEvents : function() {
 }
 ```
 
-<p class="alert">In the above code, among the options of N.comm, the "type" is an option that is arbitrarily defined because it cannot be requested through the POST method to the web server. If the server can handle POST requests, remove the type option because the default value of type is defined as "POST" in natural.config.js. For more information about the type option, refer to the [Default Options] tab in the <a href="#cmVmcjAyMDQlMjRDb21tdW5pY2F0b3IucmVxdWVzdCRodG1sJTJGbmF0dXJhbGpzJTJGcmVmciUyRnJlZnIwMjA0Lmh0bWw=">Communicator.request</a> document.</p>
+<p class="alert">In the above code, among the options of N.comm, the "type" is an option that is arbitrarily defined because it cannot be requested through the POST method to the web server. If the server can handle POST requests, remove the type option because the default value of type is defined as "POST" in natural.config.js. For more information about the type option, refer to the [Default Options] tab in the <a href="#html/naturaljs/refr/refr0204.html">Communicator.request</a> document.</p>
 
 The event handler of the Search button executes the following logic.
  1. Retrieve data from the server using the data of the search form(cont.form) as a parameter.
@@ -426,8 +425,8 @@ N(window).alert({
 ```
 
 4. Using N.comm send the changed data(```cont.grid.data("modified")```) of the grid to the server parameter.
-<p class="alert">In the above code, among the options of N.comm, the "type" is an option that is arbitrarily defined because it cannot be requested through the POST method to the web server. If the server can handle POST requests, remove the type option because the default value of type is defined as "POST" in natural.config.js. For more information about the type option, refer to the [Default Options] tab in the <a href="#cmVmcjAyMDQlMjRDb21tdW5pY2F0b3IucmVxdWVzdCRodG1sJTJGbmF0dXJhbGpzJTJGcmVmciUyRnJlZnIwMjA0Lmh0bWw=">Communicator.request</a> document.</p>
-<p class="alert">To send parameters of type array[object], not object, to server, you must enable dataIsArray option. For more information about the dataIsArray option, refer to the [Default Options] tab in the <a href="#cmVmcjAyMDQlMjRDb21tdW5pY2F0b3IucmVxdWVzdCRodG1sJTJGbmF0dXJhbGpzJTJGcmVmciUyRnJlZnIwMjA0Lmh0bWw=">Communicator.request</a> document.</p>
+<p class="alert">In the above code, among the options of N.comm, the "type" is an option that is arbitrarily defined because it cannot be requested through the POST method to the web server. If the server can handle POST requests, remove the type option because the default value of type is defined as "POST" in natural.config.js. For more information about the type option, refer to the [Default Options] tab in the <a href="#html/naturaljs/refr/refr0204.html">Communicator.request</a> document.</p>
+<p class="alert">To send parameters of type array[object], not object, to server, you must enable dataIsArray option. For more information about the dataIsArray option, refer to the [Default Options] tab in the <a href="#html/naturaljs/refr/refr0204.html">Communicator.request</a> document.</p>
 5. After saving, display the message using the N.notify component.
 <p class="alert"><strong>rowStatus</strong> property is created when the value of input element is changed or data is changed by cont.grid.val () method. The rowStatus value can be one of "insert", "update", or "delete". <strong>insert / update / delete on the server can be handled with the rowStatus value</strong> defined in each row data object.
 6. Click the Search button to retrieve the changed data again.
