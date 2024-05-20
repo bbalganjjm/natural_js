@@ -1,7 +1,7 @@
 개요
 ===
 
-<a href="#html/naturaljs/refr/refr0102.html">Config(natural.config.js)</a>는 Natural-JS의 운영 환경 설정, AOP 설정, Communication Filter 설정, UI 컴포넌트의 전역 옵션 값 등을 저장하는 공간입니다.
+Config(natural.config.js) 는 Natural-JS의 운영 환경 설정, AOP 설정, Communication Filter 설정, UI 컴포넌트의 전역 옵션 값 등을 저장하는 공간입니다.
 
 natural.config.js 파일에 정의되어 있으며 설정 값은 N.context에 각 패키지 별 속성 값으로 별도로 저장됩니다.
  * N.context.attr("core") : Natural-CORE 패키지 라이브러리들의 기본 설정 값.

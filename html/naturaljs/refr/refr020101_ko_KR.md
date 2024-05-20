@@ -1,7 +1,7 @@
 개요
 ===
 
-Controller(N.cont)는 CVC Architecture Pattern의 Controller 레이어를 구현한 클래스입니다.
+Controller(N.cont) 는 CVC Architecture Pattern의 Controller 레이어를 구현한 클래스입니다.
 
 ![](images/intr/pic4.png)
 <center>[ Natural-ARCHITECTURE ]</center>

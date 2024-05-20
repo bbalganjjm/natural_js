@@ -1,7 +1,7 @@
 Overview
 ===
 
-<a href="#html/naturaljs/refr/refr0102.html">Config(natural.config.js)</a> is a place to save Natural-JS operation environment setting, AOP setting, Communication Filter setting, UI global option value, etc.
+Config(natural.config.js) is a place to save Natural-JS operation environment setting, AOP setting, Communication Filter setting, UI global option value, etc.
 
 Defined in the natural.config.js file and the configuration values are stored separately in N.context as property values for each package.
  * N.context.attr("core") : Default values for the libraries in the Natural-CORE package.
