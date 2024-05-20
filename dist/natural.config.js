@@ -286,12 +286,12 @@
 			 */
 			"container" : ".docs__ > .docs_contents__.visible__",
 			"global" : {
-			    /**
-			     * N.alert's OK button style
-			     *  - It is specified as an option of the Button(N.button) component.
-			     */
+				/**
+				 * N.alert's OK button style
+				 *  - It is specified as an option of the Button(N.button) component.
+				 */
 				"okBtnStyle" : {
-					color : "yellowgreen",
+					color : "primary",
 					size : "medium"
 				},
 				/**
@@ -299,6 +299,7 @@
 				 *  - It is specified as an option of the Button(N.button) component.
 				 */
 				"cancelBtnStyle" : {
+					color : "primary_container",
 					size : "medium"
 				}
 			},

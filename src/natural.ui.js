@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.46.250
+ * Natural-UI v0.47.250
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2023 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-UI"] = "0.46.250";
+    N.version["Natural-UI"] = "0.47.250";
 
     $.fn.extend($.extend(N.prototype, {
         alert : function(msg, vars) {
@@ -1121,7 +1121,8 @@
             this.options = {
                 context : obj,
                 size : "medium", // size : smaller, small, medium, large, big
-                color : "white", // color : white, blue, skyblue, gray, green, yellowgreen
+                color : "primary_container", // color : primary, primary_container, secondary, secondary_container, tertiary, tertiary_container
+                fill : "filled", // type : filled, outlined
                 iconClass : null,
                 disable : false,
                 customStyle : false
@@ -1169,86 +1170,13 @@
                     opts.context.attr("onselectstart", "return false;");
                 }
                 if (opts.context.is("a") || opts.context.is("button") || opts.context.is("input[type='button']")) {
-                    opts.context.removeClass("btn_common__ btn_white__ btn_blue__ btn_skyblue__ btn_gray__ btn_smaller__ btn_small__ btn_medium__ btn_large__ btn_big__");
-                    opts.context.addClass("btn_common__ btn_" + opts.color + "__ btn_" + opts.size + "__");
-
-                    if(!opts.customStyle) {
-                        // for ie8
-                        if(N.browser.msieVersion() === 8 && opts.context.is("a")) {
-                            opts.context.css("line-height", "");
-                            if(opts.size === "smaller") {
-                                opts.context.css("line-height", "17px");
-                            } else if(opts.size === "small") {
-                                opts.context.css("line-height", "21px");
-                            } else if(opts.size === "medium") {
-                                opts.context.css("line-height", "26px");
-                            } else if(opts.size === "large") {
-                                opts.context.css("line-height", "34px");
-                            } else if(opts.size === "big") {
-                                opts.context.css("line-height", "48px");
-                            }
-                        }
-
-                        if(N.browser.msieVersion() === 9) {
-                            if(opts.context.is("a")) {
-                                opts.context.css("line-height", "");
-                            }
-                            opts.context.css("line-height", (parseInt(opts.context.css("line-height")) - 3) + "px");
-                        }
-                    }
-
-                    opts.context.off("mouseover.button mousedown.button mouseup.button mouseout.button");
-                    opts.context.on("mouseover.button", function() {
-                        if (!opts.context.hasClass("btn_disabled__")) {
-                            if(!opts.customStyle) {
-                                if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {
-                                    $(this).css("box-shadow", "rgba(0, 0, 0, 0.2) 1px 1px 1px inset");
-                                } else {
-                                    $(this).css("opacity", "0.9");
-                                }
-                            }
-                            $(this).removeClass("btn_mouseover__ btn_mousedown__ btn_mouseup__ btn_mouseout__");
-                            $(this).addClass("btn_mouseover__");
-                        }
-                    });
-                    opts.context.on("mousedown.button", function() {
-                        if (!opts.context.hasClass("btn_disabled__")) {
-                            if(!opts.customStyle) {
-                                if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {
-                                    $(this).css("box-shadow", "rgba(0, 0, 0, 0.2) 3px 3px 3px inset");
-                                } else {
-                                    $(this).css("opacity", "0.7");
-                                }
-                            }
-                            $(this).removeClass("btn_mouseover__ btn_mousedown__ btn_mouseup__ btn_mouseout__");
-                            $(this).addClass("btn_mousedown__");
-                        }
-                    });
-                    opts.context.on("mouseup.button", function() {
-                        if (!opts.context.hasClass("btn_disabled__")) {
-                            if(!opts.customStyle) {
-                                if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {
-                                    $(this).css("box-shadow", "none");
-                                } else {
-                                    $(this).css("opacity", "1");
-                                }
-                            }
-                            $(this).removeClass("btn_mouseover__ btn_mousedown__ btn_mouseup__ btn_mouseout__");
-                            $(this).addClass("btn_mouseup__");
-                        }
-                    });
-                    opts.context.on("mouseout.button", function() {
-                        if (!opts.context.hasClass("btn_disabled__")) {
-                            if(!opts.customStyle) {
-                                if(N.browser.msieVersion() === 0 || N.browser.msieVersion() > 8) {
-                                    $(this).css("box-shadow", "none");
-                                } else {
-                                    $(this).css("opacity", "1");
-                                }
-                            }
-                            $(this).removeClass("btn_mouseover__ btn_mousedown__ btn_mouseup__ btn_mouseout__");
-                        }
-                    });
+                    opts.context.removeClass("btn_common__ " +
+                        "btn_primary__ btn_primary_container__ " +
+                        "btn_secondary__ btn_secondary_container__ " +
+                        "btn_tertiary__ btn_tertiary_container__ " +
+                        "btn_filled__ btn_outlined__ " +
+                        "btn_smaller__ btn_small__ btn_medium__ btn_large__ btn_big__");
+                    opts.context.addClass("btn_common__ btn_" + opts.color + "__ btn_" + opts.size + "__ btn_" + opts.fill + "__");
                 }
             }
         });
