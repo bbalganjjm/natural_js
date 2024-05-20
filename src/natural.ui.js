@@ -911,7 +911,7 @@
                     }
 
                     var self = this;
-                    opts.msgContents.find(".msg_close__").click(function(e) {
+                    opts.msgContents.find(".msg_close__").on("click", function(e) {
                         e.preventDefault();
                         self.remove();
                     });
