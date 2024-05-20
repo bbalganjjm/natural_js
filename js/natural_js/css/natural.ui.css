@@ -1500,7 +1500,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 .docs__>.docs_tab_context__ {
     position: relative;
-    height: 25px;
+    height: 30.8px;
     border-bottom: 1px solid var(--md-sys-color-outline-variant);
     z-index: 1;
 }
@@ -1534,7 +1534,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 .docs__>.docs_tab_context__>.docs_tabs__>.docs_tab__ {
     display: inline-block;
-    height: 24px;
+    height: 30px;
     margin-left: 1px;
     padding: 0;
     border: 1px solid var(--md-sys-color-outline-variant);
@@ -1577,11 +1577,11 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .docs__>.docs_tab_context__>.docs_tabs__>.docs_tab__>.docs_tab_active_btn__ {
     color : var(--md-sys-color-on-surface);
     text-decoration: none;
-    padding: 0 12px 0 5px;
+    padding: 0 12px 0 10px;
 }
 
 .docs__>.docs_tab_context__>.docs_tabs__>.docs_tab__>.docs_tab_active_btn__>span {
-    line-height: 24px;
+    line-height: 30px;
 }
 
 .docs__>.docs_tab_context__>.docs_tabs__>.docs_tab__.active__>.docs_tab_active_btn__ {
@@ -1590,7 +1590,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 
 .docs__>.docs_tab_context__>.docs_tabs__>.docs_tab__>.docs_tab_close_btn__>span {
     position: absolute;
-    margin-top: 6px;
+    margin-top: 0;
     margin-left: -12px;
     height: 12px;
     width: 12px;
@@ -1604,7 +1604,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
     border-bottom: none;
     min-width: 22px;
     max-width: 27px;
-    height: 24px;
+    height: 30px;
     text-align: center;
     background-color: var(--md-sys-color-surface-dim);
     line-height: 10px;
