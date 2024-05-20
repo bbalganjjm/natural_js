@@ -1577,7 +1577,7 @@ a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__ {
 .docs__>.docs_tab_context__>.docs_tabs__>.docs_tab__>.docs_tab_active_btn__ {
     color : var(--md-sys-color-on-surface);
     text-decoration: none;
-    padding: 0 12px 0 10px;
+    padding: 0 15px;
 }
 
 .docs__>.docs_tab_context__>.docs_tabs__>.docs_tab__>.docs_tab_active_btn__>span {
