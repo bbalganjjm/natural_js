@@ -109,12 +109,12 @@ function(msgContext, msgContents) {
     <p lang="ko_KR" class="smallContTit">실행 : </p>
     <p lang="en_US" class="smallContTit">Run : </p>
     <div class="btnBox">
-        <a id="btnInitLocal" href="#" data-opts='{ "color": "green", "size": "large" }'>
+        <a id="btnInitLocal" href="#" data-opts='{ "color": "primary", "size": "large" }'>
             <span lang="ko_KR">팝업 생성</span>
             <span lang="en_US">Create popup</span>
         </a>
-        <a id="btnOpenLocal" href="#" data-opts='{ "color" : "gray", "size": "large", "disable": true }'>open</a>
-        <a id="btnReload" href="#" data-opts='{ "color": "white", "size": "large" }'>
+        <a id="btnOpenLocal" href="#" data-opts='{ "color": "primary", "size": "large", "disable": true }'>open</a>
+        <a id="btnReload" href="#" data-opts='{ "size": "large" }'>
             <span lang="ko_KR">DEMO 초기화</span>
             <span lang="en_US">Reset DEMO</span>
         </a>
@@ -122,7 +122,7 @@ function(msgContext, msgContents) {
 
     <p lang="ko_KR" class="smallContTit">대상 요소 : </p>
     <p lang="en_US" class="smallContTit">Target Element : </p>
-    <div style="background-color: var(--md-sys-color-primary-container); padding: 1px; text-align: center;">
+    <div style="background-color: var(--md-sys-color-surface-container-lowest); padding: 1px; text-align: center;">
         <table id="loginForm" style="width: 280px; margin: 15px; table-layout: fixed;">
             <colgroup>
                 <col style="width: 70px;">
@@ -132,10 +132,10 @@ function(msgContext, msgContents) {
             <tr>
                 <th><label for="userId">아이디</label></th>
                 <td><input id="userId" type="text" style="width: 95%;" maxlength="10"></td>
-                <td rowspan="2"><a id="btnLogin" data-opts='{ "color" : "gray", "size": "large"'>로그인</a></td>
+                <td rowspan="2"><a id="btnLogin" data-opts='{ "color": "primary", "size": "large"'>로그인</a></td>
             </tr>
             <tr>
-                <th><label for="password">패스워드</label></th>
+                <th><label for="userPw">패스워드</label></th>
                 <td><input id="userPw" type="password" style="width: 95%;" maxlength="16"></td>
             </tr>
         </table>
@@ -294,15 +294,15 @@ function(msgContext, msgContents) {
     <p lang="ko_KR" class="smallContTit">실행 : </p>
     <p lang="en_US" class="smallContTit">Run : </p>
     <div class="btnBox">
-        <a id="btnInitOther" href="#" data-opts='{ "color": "green", "size": "large" }'>
+        <a id="btnInitOther" href="#" data-opts='{ "color": "primary", "size": "large" }'>
             <span lang="ko_KR">팝업 생성</span>
             <span lang="en_US">Create popup</span>
         </a>
-        <a id="btnOpenOther" href="#" data-opts='{ "color" : "gray", "size": "large", "disable": true }'>
+        <a id="btnOpenOther" href="#" data-opts='{ "color": "primary", "size": "large", "disable": true }'>
             <span lang="ko_KR">열기</span>
             <span lang="en_US">open</span>
         </a>
-        <a id="btnReload" href="#" data-opts='{ "color": "white", "size": "large" }'>
+        <a id="btnReload" href="#" data-opts='{ "size": "large" }'>
             <span lang="ko_KR">DEMO 초기화</span>
             <span lang="en_US">Reset DEMO</span>
         </a>

@@ -283,7 +283,7 @@ th, tfoot td {
 
 .view-intro .view-desc {
     position: absolute;
-    background-color: var(--md-sys-color-primary-container);
+    background-color: var(--md-sys-color-surface-container-low);
     border: 1px solid var(--md-sys-color-outline-variant);
     margin: 0;
     padding: 10px 10px 10px 30px;
@@ -443,7 +443,7 @@ article .btnBox {
     overflow: auto;
     border: 1px solid var(--md-sys-color-outline-variant);
     box-shadow: 3px 3px 0 var(--md-sys-color-shadow);
-    background-color: var(--md-sys-color-primary-container);
+    background-color: var(--md-sys-color-surface-container-low);
     z-index: 1;
     opacity: 0;
     font-size: 0.813rem;

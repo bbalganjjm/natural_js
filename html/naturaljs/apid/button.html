@@ -19,17 +19,22 @@
             </select></td>
             <th><label for="color">color</label></th>
             <td><select id="color">
-                <option value="white">white</option>
-                <option value="blue">blue</option>
-                <option value="skyblue">skyblue</option>
-                <option value="gray">gray</option>
-                <option value="green">green</option>
-                <option value="yellowgreen">yellowgreen</option>
+                <option value="primary">primary</option>
+                <option value="primary_container">primary_container</option>
+                <option value="secondary">secondary</option>
+                <option value="secondary_container">secondary_container</option>
+                <option value="tertiary">tertiary</option>
+                <option value="tertiary_container">tertiary_container</option>
             </select></td>
         </tr>
         <tr>
+            <th><label for="fill">fill</label></th>
+            <td><select id="fill">
+                <option value="filled">filled</option>
+                <option value="outlined">outlined</option>
+            </select></td>
             <th><label for="disable">disable</label></th>
-            <td colspan="3">
+            <td>
                 <input id="disable" type="checkbox">
             </td>
         </tr>
@@ -38,13 +43,13 @@
     <p lang="ko_KR" class="smallContTit">실행 : </p>
     <p lang="en_US" class="smallContTit">Run : </p>
     <div class="btnBox">
-        <a id="btnMake" href="#" data-opts='{ "color": "green", "size": "large" }'>
+        <a id="btnMake" href="#" data-opts='{ "color": "primary", "size": "large" }'>
             <span lang="ko_KR">Button 생성</span>
             <span lang="en_US">Create Button</span>
         </a>
-        <a id="btnDisable" href="#" data-opts='{ "color" : "gray", "size": "large", "disable": true }'>disable</a>
-        <a id="btnEnable" href="#" data-opts='{ "color" : "gray", "size": "large", "disable": true }'>enable</a>
-        <a id="btnReload" href="#" data-opts='{ "color": "white", "size": "large" }'>
+        <a id="btnDisable" href="#" data-opts='{ "color": "primary", "size": "large", "disable": true }'>disable</a>
+        <a id="btnEnable" href="#" data-opts='{ "color": "primary", "size": "large", "disable": true }'>enable</a>
+        <a id="btnReload" href="#" data-opts='{ "size": "large" }'>
             <span lang="ko_KR">DEMO 초기화</span>
             <span lang="en_US">Reset DEMO</span>
         </a>
@@ -74,6 +79,7 @@
                 var opts = {
                       color : N("select#color", view).val(),
                       size : N("select#size", view).val(),
+                      fill : N("select#fill", view).val(),
                       disable : N("input#disable", view).is(":checked")
                 };
                 N("div.result", view).find("a, button, input[type='button']").button(opts);

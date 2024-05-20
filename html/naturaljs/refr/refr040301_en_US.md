@@ -8,4 +8,4 @@ Datepicker(N.datepicker) is a UI component that displays a calendar popup for se
 <a href="#html/naturaljs/refr/refr0409.html">Grid</a> menus and the
 ["date", 4|6|8|10|12|14, "month"|"date"] rule in the [Format rule list] tab of the <a href="#html/naturaljs/refr/refr0301.html">Formatter</a> menu.
 
-<p class="alert">For a description of the declarative options, see the <strong>Declarative Options</strong> section of the <a href="#cmVmcjAwMDElMjRBUEklMjBEb2N1bWVudGF0aW9uJTIwR3VpZGUkaHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDAwMS5odG1s">API Documentation Guide</a> menu.</p>
+<p class="alert">For a description of the declarative options, see the <strong>Declarative Options</strong> section of the <a href="#html/naturaljs/refr/refr0001.html">API Documentation Guide</a> menu.</p>

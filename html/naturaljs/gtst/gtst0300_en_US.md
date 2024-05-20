@@ -83,9 +83,9 @@ Create the **/html/contents/page6.html** file and write the code as follows.
     </div>
 
     <div class="buttons">
-        <a id="btnAdd" href="#" data-opts='{ "color": "green" }'>New</a>
-        <a id="btnDelete" href="#" data-opts='{ "color": "green" }'>Delete</a>
-        <a id="btnSave" href="#" data-opts='{ "color" : "gray" }'>Save</a>
+        <a id="btnAdd" href="#" data-opts='{ "color": "primary" }'>New</a>
+        <a id="btnDelete" href="#" data-opts='{ "color": "primary" }'>Delete</a>
+        <a id="btnSave" href="#" data-opts='{ "color": "primary" }'>Save</a>
         <a id="btnSearch" href="#">Search</a>
     </div>
 

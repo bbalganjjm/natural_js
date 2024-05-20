@@ -24,9 +24,9 @@
                 <p lang="ko_KR" class="alert">N.button은 한 번에 여러 요소를 선택해서 context로 지정할 수 있습니다.</p>
                 <p lang="en_US" class="alert">N.button can select multiple elements at once and set it as context.</p>
 
-                <pre><code>&lt;a class="button-context" data-opts='{ "color" : "white", "size" : "big" }'&gt;Button&lt;/a&gt;
-&lt;input class="button-context" type="button" value="Button" data-opts='{ "color" : "gray" }'&gt;
-&lt;button class="button-context" data-opts='{ "color" : "green", "size" : "large" }'&gt;Button&lt;/button&gt;</code></pre>
+                <pre><code>&lt;a class="button-context" data-opts='{ "size" : "big" }'&gt;Button&lt;/a&gt;
+&lt;input class="button-context" type="button" value="Button" data-opts='{ "color": "primary" }'&gt;
+&lt;button class="button-context" data-opts='{ "color": "primary", "size" : "large" }'&gt;Button&lt;/button&gt;</code></pre>
             </td>
         </tr>
         <tr>
@@ -44,20 +44,32 @@
         <tr>
             <td>color</td>
             <td>string</td>
-            <td>white</td>
+            <td>primary</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">버튼의 컬러를 설정합니다.</p>
+                <p lang="ko_KR">버튼의 색상을 설정합니다.</p>
                 <p lang="en_US">Set the color of the button.</p>
-                <p lang="ko_KR">컬러는 "white", "blue", "skyblue", "gray", "green", "yellowgreen" 중 하나를 지정할 수 있습니다.</p>
-                <p lang="en_US">The color can be one of "white", "blue", "skyblue", "gray", "green" and "yellowgreen".</p>
-                <p lang="ko_KR">natural.ui.css 파일에 다음과 같이 클래스 스타일을 추가하면 컬러를 간단하게 확장할 수 있습니다.</p>
-                <p lang="en_US">You can simply extend the color by adding a class style to the natural.ui.css file as follows</p>
+                <p lang="ko_KR">색상은 "primary", "primary_container", "secondary", "secondary_container", "tertiary", "tertiary_container" 중 하나를 지정할 수 있습니다.</p>
+                <p lang="en_US">The color can be one of "primary", "primary_container", "secondary", "secondary_container", "tertiary" and "tertiary_container".</p>
+                <p lang="ko_KR">버튼 색상의 Naming 과 기본값은 <a href="https://m3.material.io/styles/color/roles" target="_blank">Material Design 3 의 Color roles</a> 를 기반으로 합니다.</p>
+                <p lang="en_US">The naming and default value of the button color is based on the <a href="https://m3.material.io/styles/color/roles" target="_blank">Color token of Material Design 3</a>.</p>
+                <p lang="ko_KR">버튼의 스타일을 변경하려면 natural.ui.css 파일의 "btn_" 로 시작하는 클래스를 수정하면 됩니다.</p>
+                <p lang="en_US">To change the style of the button, simply edit the class starting with "btn_" in the natural.ui.css file.</p>
 <pre><code>a.btn_{color}__,input[type='button'].btn_{color}__,button.btn_{color}__ {
-    color: #000 !important;
-    background-color: #fff;
-    border: 1px solid #000;
+    color: var(--md-sys-color-on-tertiary);
+    background-color: var(--md-sys-color-tertiary);
+    border: 1px solid var(--md-sys-color-tertiary);
 }</code></pre>
+            </td>
+        </tr>
+        <tr>
+            <td>fill</td>
+            <td>string</td>
+            <td>filled</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p lang="ko_KR">버튼의 배경을 채울지 외곽선만 표시할지 설정 합니다.</p>
+                <p lang="en_US">Set whether to fill the background of the button or display only the outline.</p>
             </td>
         </tr>
         <tr>
