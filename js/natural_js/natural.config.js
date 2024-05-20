@@ -132,7 +132,14 @@
 
                         // Display page loading image.
                         if(request.options.dataType === "html" && request.options.target !== null && request.options.append === false) {
-                            request.options.target.html('<div style="text-align: center; vertical-align: middle;border: 0; border: none;width: 100%;height: 100%;"><img src="images/loading.gif" height="24"></div>');
+                            var html = '<div style="text-align: center; vertical-align: middle;border: 0; border: none;width: 100%;height: 100%;">';
+                            if(window.matchMedia && window.matchMedia("(prefers-color-scheme:dark)").matches) {
+                                html += '<img src="images/page-loading-dark.png">';
+                            } else {
+                                html += '<img src="images/page-loading-light.png">';
+                            }
+                            html += '</div>';
+                            request.options.target.html(html);
                         }
                     },
                     /**
