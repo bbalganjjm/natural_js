@@ -134,9 +134,9 @@
                         if(request.options.dataType === "html" && request.options.target !== null && request.options.append === false) {
                             var html = '<div style="text-align: center; vertical-align: middle;border: 0; border: none;width: 100%;height: 100%;">';
                             if(window.matchMedia && window.matchMedia("(prefers-color-scheme:dark)").matches) {
-                                html += '<img src="images/page-loading-dark.png">';
+                                html += '<img src="images/page-loading-dark.png" style="opacity: 0.5;">';
                             } else {
-                                html += '<img src="images/page-loading-light.png">';
+                                html += '<img src="images/page-loading-light.png" style="opacity: 0.5;">';
                             }
                             html += '</div>';
                             request.options.target.html(html);
