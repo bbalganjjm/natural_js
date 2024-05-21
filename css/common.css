@@ -128,23 +128,19 @@ th, tfoot td {
     font-weight: 400;
 }
 
-.grid__ tr>th:first-child,
-.form__ tr>th:first-child {
+.grid__ tr>th:first-child {
     border-left: none;
 }
 
-.grid__ tr>td:first-child,
-.form__ tr>td:first-child {
+.grid__ tr>td:first-child {
     border-left: none;
 }
 
-.grid__ tr>th:last-child,
-.form__ tr>th:last-child {
+.grid__ tr>th:last-child {
     border-right: none;
 }
 
-.grid__ tr>td:last-child,
-.form__ tr>td:last-child {
+.grid__ tr>td:last-child {
     border-right: none;
 }
 
