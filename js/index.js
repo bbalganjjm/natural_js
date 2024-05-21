@@ -8,8 +8,8 @@
             if(initPageId) {
                 this.loadPageForSEO(initPageId);
             } else {
-                this.loadHeader();
                 this.loadLefter();
+                this.loadHeader();
                 this.loadFooter();
             }
             this.reloadCss();

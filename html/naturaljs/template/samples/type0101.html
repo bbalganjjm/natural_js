@@ -112,14 +112,11 @@
         "c.getSampleList" : function() {
             return cont["p.form.search"].data(false).comm("sample/getSampleBigList.json");
         },
-        "e.btnSearch.click" : function(e) {
+        "e.btnSearch.click" : async function(e) {
             e.preventDefault();
 
             if (cont["p.form.search"].validate()) {
-                cont["c.getSampleList"]().submit(function(data) {
-                    // N.grid bind
-                    cont["p.grid.master"].bind(data);
-                });
+                cont["p.grid.master"].bind(await cont["c.getSampleList"]().fetch());
             }
         },
         "e.eyeColor.change" : {
