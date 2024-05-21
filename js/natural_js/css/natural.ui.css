@@ -14,11 +14,13 @@
     background: var(--md-sys-color-surface-container-lowest);
     border: 1px solid var(--md-sys-color-outline-variant);
     box-shadow: 4px 4px 0 var(--md-sys-color-shadow);
+    border-radius: 3px;
 }
 
 .alert__.block_overlay_msg__ .msg_title_box__ {
     background-color: var(--md-sys-color-primary);
     border-top: none;
+    border-radius: 3px 3px 0 0;
 }
 
 .alert__.block_overlay_msg__ .msg_title_box__ .msg_title__ {
@@ -807,6 +809,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
     margin-right: 1px;
     padding: 2px 4px;
     border: 1px solid var(--md-sys-color-outline-variant);
+    border-radius: 3px 3px 0 0;
     cursor: pointer;
     min-width: 60px;
     text-align: center;
@@ -887,6 +890,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 .tab__>div {
     padding: 15px;
     border: 1px solid var(--md-sys-color-outline-variant);
+    border-radius: 0 3px 3px 3px;
 }
 
 .tab__>div > .view_context__ {
@@ -913,10 +917,11 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
     border: 1px solid var(--md-sys-color-outline-variant);
     box-shadow: 3px 3px 0 var(--md-sys-color-shadow);
     background-color: var(--md-sys-color-surface-container-lowest);
-    font-size: 95%;
+    font-size: 90%;
     z-index: 1;
     padding: 2px;
     width: 314px;
+    border-radius: 3px;
 }
 
 .datepicker_contents__ > .datepicker_years_panel__ {
@@ -1058,12 +1063,11 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 .datepicker_contents__ .datepicker_year_title__,
 .datepicker_contents__ .datepicker_month_title__,
 .datepicker_contents__ .datepicker_day_title__ {
-    border: 1px solid var(--md-sys-color-outline-variant);
+    border: 1px solid var(--md-sys-color-secondary-container);
     background-color: var(--md-sys-color-secondary-container);
     line-height: 25px;
     text-align: center;
-    color: var(--md-sys-color-surface-container-lowest);
-    font-weight: 700;
+    color: var(--md-sys-color-on-secondary-container);
 }
 
 .datepicker_contents__ .datepicker_year_selected__ {
@@ -1427,7 +1431,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
     background-color: var(--md-sys-color-surface-container-lowest);
     border: 1px solid var(--md-sys-color-outline-variant);
     margin-bottom: 5px;
-    border-radius: 5px;
+    border-radius: 3px;
 }
 
 .notify__ .notify_msg__.visible__ {
@@ -1494,7 +1498,6 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 .docs__>.docs_tab_context__>ul.docs_tab_utils__ {
     position: absolute;
     right: 0;
-    background-color: var(--md-sys-color-secondary-container);
     padding: 0;
 }
 
@@ -1505,6 +1508,8 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
     padding: 0;
     border: 1px solid var(--md-sys-color-outline-variant);
     text-align: center;
+    background-color: var(--md-sys-color-secondary-container);
+    border-radius: 3px 3px 0 0;
 }
 
 .docs__>.docs_tab_context__>.docs_tabs__>.docs_tab__ {
@@ -1574,6 +1579,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
     text-align: center;
     background-color: var(--md-sys-color-surface-dim);
     line-height: 10px;
+    border-radius: 3px 3px 0 0;
 }
 
 .docs__>.docs_tab_context__>ul.docs_tab_utils__>li>a {
