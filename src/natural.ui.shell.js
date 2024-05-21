@@ -7,7 +7,7 @@
  * Copyright 2023 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-UI.Shell"] = "0.10.48";
+    N.version["Natural-UI.Shell"] = "0.10.49";
 
     $.fn.extend($.extend(N.prototype, {
         notify : function(opts) {
@@ -109,7 +109,7 @@
                 if(url !== undefined) {
                     msgEle.on("click.notify", function(e) {
                         e.preventDefault();
-                        if(N.type(url) === "function") {
+                        if(typeof url === "function") {
                             url.call(this);
                         } else {
                             if(N.string.startsWith(url, "#")) {
@@ -959,7 +959,7 @@
             "removeState" : function(docId, callback) { // type of docId argument is undefined or string or function
                 var opts = this.options;
 
-                if(N.type(docId) === "function") {
+                if(typeof docId === "function") {
                     callback = docId;
                     docId = undefined;
                 }

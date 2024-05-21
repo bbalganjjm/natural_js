@@ -564,7 +564,7 @@
                         var handler;
                         var eventName = props[2];
                         var idSelector = "";
-                        if(N.type(cont[prop]) === "function") {
+                        if(typeof cont[prop] === "function") {
                             targetProp = props[1];
                             handler = cont[prop];
                             idSelector = "#";

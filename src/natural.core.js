@@ -1,5 +1,5 @@
 /*!
- * Natural-CORE v0.20.35
+ * Natural-CORE v0.20.36
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -68,7 +68,7 @@
                     });
                 });
             } else if(arguments.length === 1) {
-                if(N.type(name) === "function") {
+                if(typeof name === "function") {
                     return this.each(function() {
                         return $.each($(this).data(), function(i, v) {
                             if(N.string.endsWith(i, "__")) {
@@ -87,7 +87,7 @@
                     return insts.length <= 1 ? insts[0] : insts;
                 }
             } else if(arguments.length === 2) {
-                if(N.type(instance) === "function") {
+                if(typeof instance === "function") {
                     return this.each(function() {
                         return $.each($(this).data(), function(i, v) {
                             if(name + "__" === i) {
@@ -297,7 +297,7 @@
         // N local variables
         $.extend(N, {
             version : {
-                "Natural-CORE" : "0.20.35"
+                "Natural-CORE" : "0.20.36"
             },
             /**
              * Set and get locale value
@@ -375,6 +375,7 @@
                 }
                 var length = obj.length, type = N.type(obj);
                 if (type === "function"
+                    || type === "asyncfunction"
                     || type === "string"
                     || type === "number"
                     || type === "date"

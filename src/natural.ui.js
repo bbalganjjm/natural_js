@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.47.250
+ * Natural-UI v0.47.251
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -639,8 +639,8 @@
                 opts.msgContents.find(".msg_box__")[ opts.html ? "html" : "text" ](opts.msg);
 
                 // set width
-                if(N.type(opts.width) === "function" || opts.width > 0) {
-                    if(N.type(opts.width) === "function") {
+                if(typeof opts.width === "function" || opts.width > 0) {
+                    if(typeof opts.width === "function") {
                         opts.msgContents.find(".msg_box__").width(opts.width.call(self, opts.msgContext, opts.msgContents));
                     } else {
                         opts.msgContents.find(".msg_box__").width(opts.width);
@@ -648,8 +648,8 @@
                 }
 
                 // set height
-                if(N.type(opts.height) === "function" || opts.height > 0) {
-                    if(N.type(opts.width) === "function") {
+                if(typeof opts.height === "function" || opts.height > 0) {
+                    if(typeof opts.width === "function") {
                         opts.msgContents.find(".msg_box__").height(opts.height.call(self, opts.msgContext, opts.msgContents)).css("overflow-y", "auto");
                     } else {
                         opts.msgContents.find(".msg_box__").height(opts.height).css("overflow-y", "auto");

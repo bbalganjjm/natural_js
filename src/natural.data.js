@@ -1,5 +1,5 @@
 /*!
- * Natural-DATA v0.11.73
+ * Natural-DATA v0.11.74
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -28,7 +28,7 @@
 
 		N.data = {
 			filter : function(arr, condition) {
-				if(N.type(condition) === "function") {
+				if(typeof condition === "function") {
 					return N.isWrappedSet(arr) ? N($.grep(arr.toArray(), condition)) : $.grep(arr, condition);
 				} else if(N.type(condition) === "string") {
 					condition = condition.replace(/ /g, "").replace(/\|\|/g, " || item.").replace(/\&\&/g, " || item.");
