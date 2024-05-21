@@ -97,13 +97,15 @@
                 <p lang="en_US">Defines an event handler that is fired before the button's options are applied.</p>
                 <p lang="ko_KR" class="alert">외부 버튼 라이브러리를 사용할때 버튼요소의 외부나 내부에 필요한 HTML 요소를 추가하거나 다른 용도로 HTML 요소의 편집이 필요할 때 활용 할 수 있습니다.</p>
                 <p lang="en_US" class="alert">When using an external button library, you can add necessary HTML elements to the outside or inside of a button element, or use it when you need to edit HTML elements for other purposes.</p>
-                <pre lang="ko_KR"><code>onBeforeCreate : function(context) {
+                <pre lang="ko_KR"><code>onBeforeCreate : function(context, opts) {
     // this : N.button 인스턴스
     // context : context 요소
+    // opts : 버튼을 생성할 때 지정된 옵션
 }</code></pre>
-                <pre lang="en_US"><code>onBeforeCreate : function(context) {
-    // this : N.button 인스턴스
-    // context : context 요소
+                <pre lang="en_US"><code>onBeforeCreate : function(context, opts) {
+    // this : N.button instance
+    // context : context element
+    // opts : options that specified when creating a button
 }</code></pre>
             </td>
         </tr>
