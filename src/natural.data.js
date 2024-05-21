@@ -7,7 +7,7 @@
  * Copyright 2023 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-		N.version["Natural-DATA"] = "0.11.73";
+		N.version["Natural-DATA"] = "0.11.74";
 
 	$.fn.extend($.extend(N.prototype, {
 		datafilter : function(callBack) {

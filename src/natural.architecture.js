@@ -7,7 +7,7 @@
  * Copyright 2023 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-ARCHITECTURE"] = "0.14.12";
+    N.version["Natural-ARCHITECTURE"] = "0.15.12";
 
     $.fn.extend($.extend(N.prototype, {
         ajax : function(opts) {
