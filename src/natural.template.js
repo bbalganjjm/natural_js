@@ -90,11 +90,6 @@
                             href: "js/natural_js/lib/material/material-components-web.min.css"
                         }).appendTo("head");
 
-                        // Disable mouse related events of N.button.
-                        if(N.context.attr("ui").button === undefined) {
-                            N.context.attr("ui").button = {};
-                        }
-                        N.context.attr("ui").button.customStyle = true;
                         // Alert, Popup
                         N.context.attr("ui").alert.onBeforeShow = N.context.attr("ui").popup.onBeforeShow = TEMPLATE.aop.design.material.onBeforeShow;
 
