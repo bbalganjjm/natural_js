@@ -7,7 +7,7 @@
  * Copyright 2023 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-UI"] = "0.47.250";
+    N.version["Natural-UI"] = "0.47.251";
 
     $.fn.extend($.extend(N.prototype, {
         alert : function(msg, vars) {
@@ -198,7 +198,7 @@
                     });
                     contextEle.on("click." + compNm + ".checkAllTarget", cellTag + " " + opts.checkAllTarget, function() {
                         if(contextEle.find(cellTag + " " + opts.checkAllTarget).length
-                                === contextEle.find(cellTag + " " + opts.checkAllTarget + ":checked").length) {
+                            === contextEle.find(cellTag + " " + opts.checkAllTarget + ":checked").length) {
                             checkAll.prop("checked", true);
                         } else {
                             checkAll.removeProp("checked");
@@ -577,7 +577,7 @@
 
                 // create message overlay
                 opts.msgContext = opts[opts.isWindow ? "container" : "context"][opts.isWindow ? "append" : "after"]($('<div class="block_overlay__" onselectstart="return false;"></div>')
-                        .css(blockOverlayCss))[opts.isWindow ? "find" : "siblings"](".block_overlay__:" + (opts.isWindow ? "last" : "first"));
+                    .css(blockOverlayCss))[opts.isWindow ? "find" : "siblings"](".block_overlay__:" + (opts.isWindow ? "last" : "first"));
 
                 // set style class name to msgContext element
                 opts.msgContext.addClass("alert_overlay__");
@@ -613,11 +613,11 @@
 
                 // create message box elements
                 opts.msgContents = opts.msgContext.after(
-                        $('<div class="block_overlay_msg__">' +
-                                titleBox +
-                                '<div class="msg_box__"></div>' +
-                                buttonBox +
-                                '</div>').css(blockOverlayMsgCss)).next(".block_overlay_msg__:last");
+                    $('<div class="block_overlay_msg__">' +
+                        titleBox +
+                        '<div class="msg_box__"></div>' +
+                        buttonBox +
+                        '</div>').css(blockOverlayMsgCss)).next(".block_overlay_msg__:last");
 
                 // set style class name to msgContents element
                 opts.msgContents.addClass("alert__ hidden__");
@@ -766,11 +766,11 @@
 
                                     if(msgContentsOffsetTop - windowScrollTop < 0) {
                                         offset.top = (opts.isWindow ? 0
-                                                : msgContentsOffsetTop + (windowScrollTop - msgContentsOffsetTop)) + opts.draggableOverflowCorrectionAddValues.top;
+                                            : msgContentsOffsetTop + (windowScrollTop - msgContentsOffsetTop)) + opts.draggableOverflowCorrectionAddValues.top;
                                         offset.top -= parseFloat(opts.msgContents.css("margin-top"));
                                     } else if(msgContentsOffsetTop + msgContentsOuterHeight > windowScrollTop + windowHeight) {
                                         offset.top = (opts.isWindow ? windowHeight - msgContentsOuterHeight
-                                                : windowScrollTop + windowHeight - msgContentsOuterHeight) + opts.draggableOverflowCorrectionAddValues.bottom;
+                                            : windowScrollTop + windowHeight - msgContentsOuterHeight) + opts.draggableOverflowCorrectionAddValues.bottom;
                                         offset.top -= parseFloat(opts.msgContents.css("margin-top"));
                                     }
                                     if(offset.top < 0) {
@@ -1120,12 +1120,12 @@
         var Button = N.button = function(obj, opts) {
             this.options = {
                 context : obj,
-                size : "medium", // size : smaller, small, medium, large, big
-                color : "primary_container", // color : primary, primary_container, secondary, secondary_container, tertiary, tertiary_container
-                fill : "filled", // type : filled, outlined
-                iconClass : null,
+                size : "none", // none, smaller, small, medium, large, big
+                color : "none", // none, primary, primary_container, secondary, secondary_container, tertiary, tertiary_container
+                type : "none", // none, filled, outlined, elevated
                 disable : false,
-                customStyle : false
+                onBeforeCreate : null,
+                onCreate : null
             };
 
             try {
@@ -1134,17 +1134,30 @@
                 throw N.error("N.button", e);
             }
             $.extend(this.options, N.element.toOpts(this.options.context));
+
             if(opts !== undefined) {
+                // Wraps the global event options in N.config and event options for this component.
+                UI.utils.wrapHandler(opts, "button", "onBeforeCreate");
+                UI.utils.wrapHandler(opts, "button", "onCreate");
+
                 $.extend(this.options, opts);
             }
 
             // set style class name to context element
             this.options.context.addClass("button__");
 
+            if (this.options.onBeforeCreate) {
+                this.options.onBeforeCreate.call(this, this.options.context, this.options);
+            }
+
             Button.wrapEle.call(this);
 
             // set this instance to context element
             this.options.context.instance("button", this);
+
+            if (this.options.onCreate) {
+                this.options.onCreate.call(this, this.options.context, this.options);
+            }
 
             return this;
         };
@@ -1156,10 +1169,6 @@
             wrapEle : function() {
                 var opts = this.options;
 
-                if(opts.iconClass !== null) {
-                    opts.context.prepend('<span class="' + opts.iconClass + '"></span>');
-                }
-
                 if(opts.disable) {
                     this.disable();
                 } else {
@@ -1170,13 +1179,25 @@
                     opts.context.attr("onselectstart", "return false;");
                 }
                 if (opts.context.is("a") || opts.context.is("button") || opts.context.is("input[type='button']")) {
-                    opts.context.removeClass("btn_common__ " +
+                    opts.context.removeClass("btn_common__ btn_smaller__ btn_small__ btn_medium__ btn_large__ btn_big__ " +
                         "btn_primary__ btn_primary_container__ " +
                         "btn_secondary__ btn_secondary_container__ " +
                         "btn_tertiary__ btn_tertiary_container__ " +
-                        "btn_filled__ btn_outlined__ " +
-                        "btn_smaller__ btn_small__ btn_medium__ btn_large__ btn_big__");
-                    opts.context.addClass("btn_common__ btn_" + opts.color + "__ btn_" + opts.size + "__ btn_" + opts.fill + "__");
+                        "btn_filled__ btn_outlined__ btn_elevated__");
+
+                    opts.context.addClass("btn_common__");
+
+                    if (opts.size !== "none") {
+                        opts.context.addClass("btn_" + opts.size + "__");
+                    }
+
+                    if (opts.color !== "none") {
+                        opts.context.addClass("btn_" + opts.color + "__ ");
+                    }
+
+                    if (opts.type !== "none") {
+                        opts.context.addClass("btn_" + opts.type + "__");
+                    }
                 }
             }
         });
@@ -1655,54 +1676,54 @@
                     }
 
                     var prevMonthBtn = $('<div class="datepicker_month_paging__"><a href="#" class="datepicker_month_prev__" title="' + N.message.get(opts.message, "prev") + '"><span>&lt;</span></a></div>').appendTo(topMonthsPanel)
-                    .find("> .datepicker_month_prev__").on("click.datepicker", function(e) {
-                        e.preventDefault();
-                        var prevMonth = String(parseInt(topMonthItem.val()) - 1);
-                        if(prevMonth < 1) {
-                            var yearPrevBtnEle = yearsPanel.find(".datepicker_year_prev__");
-                            if(opts.yearsPanelPosition === "left") {
-                                var yearStr = String(Number(yearsPanel.find(".datepicker_year_selected__").text()) - 1);
-                                yearsPanel.find(".datepicker_year_item__").removeClass("datepicker_year_selected__");
-                                if(yearsPanel.find(".datepicker_year_item__:contains('" + N.string.lpad(String(yearStr), 4, "0") + "')").length === 0) {
-                                    Datepicker.yearPaging(yearsPanel.find(".datepicker_year_item__"), yearStr, -4, true);
+                        .find("> .datepicker_month_prev__").on("click.datepicker", function(e) {
+                            e.preventDefault();
+                            var prevMonth = String(parseInt(topMonthItem.val()) - 1);
+                            if(prevMonth < 1) {
+                                var yearPrevBtnEle = yearsPanel.find(".datepicker_year_prev__");
+                                if(opts.yearsPanelPosition === "left") {
+                                    var yearStr = String(Number(yearsPanel.find(".datepicker_year_selected__").text()) - 1);
+                                    yearsPanel.find(".datepicker_year_item__").removeClass("datepicker_year_selected__");
+                                    if(yearsPanel.find(".datepicker_year_item__:contains('" + N.string.lpad(String(yearStr), 4, "0") + "')").length === 0) {
+                                        Datepicker.yearPaging(yearsPanel.find(".datepicker_year_item__"), yearStr, -4, true);
+                                    }
+                                    yearsPanel.find(".datepicker_year_item__:contains('" + N.string.lpad(String(yearStr), 4, "0") + "')").trigger("click");
+                                } else if(opts.yearsPanelPosition === "top") {
+                                    yearPrevBtnEle.trigger("click.datepicker", [ true ]);
                                 }
-                                yearsPanel.find(".datepicker_year_item__:contains('" + N.string.lpad(String(yearStr), 4, "0") + "')").trigger("click");
-                            } else if(opts.yearsPanelPosition === "top") {
-                                yearPrevBtnEle.trigger("click.datepicker", [ true ]);
-                            }
 
-                            prevMonth = 12;
-                        }
-                        topMonthItem.val(prevMonth);
-                        monthsPanel.find(".datepicker_month_item__:contains(" + prevMonth + "):eq(0)").trigger("click.datepicker");
-                    });
+                                prevMonth = 12;
+                            }
+                            topMonthItem.val(prevMonth);
+                            monthsPanel.find(".datepicker_month_item__:contains(" + prevMonth + "):eq(0)").trigger("click.datepicker");
+                        });
 
                     topMonthItem.addClass("datepicker_month_item__ datepicker_month_selected__").on("change.datepicker", function() {
                         monthsPanel.find(".datepicker_month_item__:contains(" + $(this).val() + "):eq(0)").trigger("click.datepicker");
                     }).appendTo(topMonthsPanel);
 
                     var nextMonthBtn = $('<div class="datepicker_month_paging__"><a href="#" class="datepicker_month_next__" title="' + N.message.get(opts.message, "next") + '"><span>&gt;</span></a></div>').appendTo(topMonthsPanel)
-                    .find("> .datepicker_month_next__").on("click.datepicker", function(e) {
-                        e.preventDefault();
-                        var nextMonth = String(parseInt(topMonthItem.val()) + 1);
-                        if(nextMonth > 12) {
-                            var yearNextBtnEle = yearsPanel.find(".datepicker_year_next__");
-                            if(opts.yearsPanelPosition === "left") {
-                                var yearStr = String(Number(yearsPanel.find(".datepicker_year_selected__").text()) + 1);
-                                yearsPanel.find(".datepicker_year_item__").removeClass("datepicker_year_selected__");
-                                if(yearsPanel.find(".datepicker_year_item__:contains('" + N.string.lpad(String(yearStr), 4, "0") + "')").length === 0) {
-                                    Datepicker.yearPaging(yearsPanel.find(".datepicker_year_item__"), yearStr, 0, true);
+                        .find("> .datepicker_month_next__").on("click.datepicker", function(e) {
+                            e.preventDefault();
+                            var nextMonth = String(parseInt(topMonthItem.val()) + 1);
+                            if(nextMonth > 12) {
+                                var yearNextBtnEle = yearsPanel.find(".datepicker_year_next__");
+                                if(opts.yearsPanelPosition === "left") {
+                                    var yearStr = String(Number(yearsPanel.find(".datepicker_year_selected__").text()) + 1);
+                                    yearsPanel.find(".datepicker_year_item__").removeClass("datepicker_year_selected__");
+                                    if(yearsPanel.find(".datepicker_year_item__:contains('" + N.string.lpad(String(yearStr), 4, "0") + "')").length === 0) {
+                                        Datepicker.yearPaging(yearsPanel.find(".datepicker_year_item__"), yearStr, 0, true);
+                                    }
+                                    yearsPanel.find(".datepicker_year_item__:contains('" + N.string.lpad(String(yearStr), 4, "0") + "')").trigger("click");
+                                } else if(opts.yearsPanelPosition === "top") {
+                                    yearNextBtnEle.trigger("click.datepicker", [ true ]);
                                 }
-                                yearsPanel.find(".datepicker_year_item__:contains('" + N.string.lpad(String(yearStr), 4, "0") + "')").trigger("click");
-                            } else if(opts.yearsPanelPosition === "top") {
-                                yearNextBtnEle.trigger("click.datepicker", [ true ]);
-                            }
 
-                            nextMonth = 1;
-                        }
-                        topMonthItem.val(nextMonth);
-                        monthsPanel.find(".datepicker_month_item__:contains(" + nextMonth + "):eq(0)").trigger("click.datepicker");
-                    });
+                                nextMonth = 1;
+                            }
+                            topMonthItem.val(nextMonth);
+                            monthsPanel.find(".datepicker_month_item__:contains(" + nextMonth + "):eq(0)").trigger("click.datepicker");
+                        });
 
                     if(opts.yearsPanelPosition === "left" && opts.monthsPanelPosition === "top") {
                         opts.contents.prepend(topMonthsPanel);
@@ -1890,8 +1911,8 @@
                             }
 
                             var date = N.string.lpad(String(dayItemT.data("year")), 4, "0") +
-                                    N.string.lpad(String(dayItemT.data("month")), 2, "0") +
-                                    N.string.lpad(String(dayItemT.data("day")), 2, "0");
+                                N.string.lpad(String(dayItemT.data("month")), 2, "0") +
+                                N.string.lpad(String(dayItemT.data("day")), 2, "0");
 
                             if(opts.minDate && Number(date) < Number(opts.minDate)) {
                                 dayItemT.addClass("datepicker_min_date__");
@@ -1964,8 +1985,8 @@
                         daysPanel.find(".datepicker_prev_day_item__.datepicker_day_selected__, .datepicker_day_item__.datepicker_day_selected__, .datepicker_next_day_item__.datepicker_day_selected__").removeClass("datepicker_day_selected__");
                         thisEle.addClass("datepicker_day_selected__");
                         var selDate = N.date.strToDate(N.string.lpad(String(thisEle.data("year")), 4, "0") +
-                                N.string.lpad(String(thisEle.data("month")), 2, "0") +
-                                N.string.lpad(String(thisEle.data("day")), 2, "0"), "Ymd");
+                            N.string.lpad(String(thisEle.data("month")), 2, "0") +
+                            N.string.lpad(String(thisEle.data("day")), 2, "0"), "Ymd");
 
                         opts.lastSelectedDay = thisEle.text();
 
@@ -2109,11 +2130,11 @@
                     }
 
                     Datepicker.selectItems(opts,
-                            dateStr,
-                            (!opts.monthonly ? N.context.attr("data").formatter.date.Ymd() : N.context.attr("data").formatter.date.Ym()).replace(/[^Y|^m|^d]/g, ""),
-                            opts.contents.find(".datepicker_years_panel__"),
-                            opts.contents.find(".datepicker_months_panel__"),
-                            opts.contents.find(".datepicker_days_panel__"));
+                        dateStr,
+                        (!opts.monthonly ? N.context.attr("data").formatter.date.Ymd() : N.context.attr("data").formatter.date.Ym()).replace(/[^Y|^m|^d]/g, ""),
+                        opts.contents.find(".datepicker_years_panel__"),
+                        opts.contents.find(".datepicker_months_panel__"),
+                        opts.contents.find(".datepicker_days_panel__"));
 
                     if(opts.onBeforeShow !== null) {
                         var result = opts.onBeforeShow.call(this, opts.context, opts.contents);
@@ -2795,7 +2816,7 @@
                             nextBtnEle.removeClass("disabled__");
                             prevBtnEle.addClass("disabled__");
                         } else {
-                        	tabNativeScroll.animate({
+                            tabNativeScroll.animate({
                                 scrollLeft: 0
                             }, 300, "swing");
                         }
@@ -2811,7 +2832,7 @@
                             prevBtnEle.removeClass("disabled__");
                             nextBtnEle.addClass("disabled__");
                         } else {
-                        	tabNativeScroll.animate({
+                            tabNativeScroll.animate({
                                 scrollLeft: tabContainerEle.outerWidth()
                             }, 300, "swing");
                         }
@@ -2845,13 +2866,13 @@
                             }
                         } else {
                             if(!tabContainerEle.parent().hasClass("tab_native_scroll__")) {
-                            	tabNativeScroll = tabContainerEle.wrap('<div class="tab_native_scroll__"></div>').parent();
-                            	if(prevBtnEleOuterWidth > 0) {
-                            		tabNativeScroll.css("margin-left", prevBtnEleOuterWidth + liMarginRight);
-                            	}
-                            	if(nextBtnEleOuterWidth > 0) {
-                            		tabNativeScroll.css("margin-right", nextBtnEleOuterWidth - liMarginRight);
-                            	}
+                                tabNativeScroll = tabContainerEle.wrap('<div class="tab_native_scroll__"></div>').parent();
+                                if(prevBtnEleOuterWidth > 0) {
+                                    tabNativeScroll.css("margin-left", prevBtnEleOuterWidth + liMarginRight);
+                                }
+                                if(nextBtnEleOuterWidth > 0) {
+                                    tabNativeScroll.css("margin-right", nextBtnEleOuterWidth - liMarginRight);
+                                }
                             }
                             if(scrollBtnEles.length > 1) {
                                 scrollBtnEles.show();
@@ -2914,16 +2935,16 @@
                         if(isMoved) {
                             if(lastDistance + (scrollBtnEles.length > 1 ? 0 : 30) >= 0 && lastDistance <= prevDefGap) {
                                 if(scrollBtnEles.length > 1) {
-                                	lastDistance = prevDefGap;
-                                	if(prevBtnEleOuterWidth > 0 && nextBtnEleOuterWidth > 0) {
-                                		lastDistance += liMarginRight;
+                                    lastDistance = prevDefGap;
+                                    if(prevBtnEleOuterWidth > 0 && nextBtnEleOuterWidth > 0) {
+                                        lastDistance += liMarginRight;
                                     }
                                     nextBtnEle.removeClass("disabled__");
                                     prevBtnEle.addClass("disabled__");
                                 } else {
                                     lastDistance = 0;
                                     if(prevBtnEleOuterWidth > 0 && nextBtnEleOuterWidth > 0) {
-                                		lastDistance += liMarginRight;
+                                        lastDistance += liMarginRight;
                                     }
                                 }
                                 tabContainerEle_.addClass("effect__").css("margin-left", lastDistance + "px");
@@ -3386,7 +3407,7 @@
                     }
                     return retData;
                 } else if(selFlag !== undefined && selFlag === false) {
-                        return opts.data;
+                    return opts.data;
                 } else {
                     return opts.data.get();
                 }
@@ -3491,7 +3512,7 @@
                  */
                 enterKey : function(ele, opts) {
                     if(N.isEmptyObject(ele.events("keyup", "dataSync.form"))) {
-                         ele[opts.tpBind ? "tpBind" : "on"]("keyup.form.dataSync", function(e) {
+                        ele[opts.tpBind ? "tpBind" : "on"]("keyup.form.dataSync", function(e) {
                             if ((e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode)) == 13) {
                                 e.preventDefault();
                                 $(this).trigger("focusout.form.validate");
@@ -4624,7 +4645,7 @@
                         //remove lis in list body area
                         opts.context.find(">li").remove();
                         opts.context.append('<li class="empty__">' +
-                                N.message.get(opts.message, "empty") + '</li>');
+                            N.message.get(opts.message, "empty") + '</li>');
 
                         if(opts.onBind !== null && callType !== "list.update") {
                             opts.onBind.call(this, opts.context, opts.data, true, true);
@@ -5528,9 +5549,9 @@
 
                 // Hide and show panel
                 var panel = $('<div class="grid_more_panel__ hidden__">'
-                        +   '<div class="grid_more_checkall_box__"><label><input type="checkbox">' + N.message.get(opts.message, "selectAll") + '<span class="grid_more_total_cnt__"></span></label></div>'
-                        +   '<ul class="grid_more_col_list__"></ul>'
-                        + '</div>');
+                    +   '<div class="grid_more_checkall_box__"><label><input type="checkbox">' + N.message.get(opts.message, "selectAll") + '<span class="grid_more_total_cnt__"></span></label></div>'
+                    +   '<ul class="grid_more_col_list__"></ul>'
+                    + '</div>');
                 colShowHideBtn.after(panel);
 
                 var gridMoreColList;
@@ -5692,187 +5713,187 @@
 //              var tableMap = this.tableMap;
 
 //              if(tableMap.colgroup.length > 0) {
-                    /*
-                    N.ui.draggable.events.call(docsTabs, ".docs.scroll", function(e, ele, x, y) { // start
+                /*
+                N.ui.draggable.events.call(docsTabs, ".docs.scroll", function(e, ele, x, y) { // start
 
-                    }, function(e, ele, x, y) { // move
-                        N.ui.draggable.moveX.call(ele, x);
-                    }, function(e, ele) { //end
+                }, function(e, ele, x, y) { // move
+                    N.ui.draggable.moveX.call(ele, x);
+                }, function(e, ele) { //end
 
-                    });
-                    */
+                });
+                */
 //              } else {
-                    var resizeBar, currResizeBar, resizeBarHeight, cellEle, currCellEle, currNextCellEle, targetCellEle, targetNextCellEle,
+                var resizeBar, currResizeBar, resizeBarHeight, cellEle, currCellEle, currNextCellEle, targetCellEle, targetNextCellEle,
                     targetTfootCellEle, targetNextTfootCellEle, currResizeBarEle,
                     defWidth, nextDefWidth, currWidth, nextCurrWidth, startOffsetX,
                     minPx, maxPx, defPx, movedPx;
 
-                    var opts = this.options;
-                    var theadCells = this.thead.find("> tr th:not(.grid_head_fixed__)");
-                    var isPressed = false;
-                    var scrollbarWidth = N.browser.scrollbarWidth();
+                var opts = this.options;
+                var theadCells = this.thead.find("> tr th:not(.grid_head_fixed__)");
+                var isPressed = false;
+                var scrollbarWidth = N.browser.scrollbarWidth();
 
-                    if(N.browser.is("safari")){
-                        theadCells.css("padding-left", "0");
-                        theadCells.css("padding-right", "0");
-                    }
+                if(N.browser.is("safari")){
+                    theadCells.css("padding-left", "0");
+                    theadCells.css("padding-right", "0");
+                }
 
-                    if(opts.context.css("table-layout") !== "fixed") {
-                        opts.context.css("table-layout", "fixed");
-                    }
+                if(opts.context.css("table-layout") !== "fixed") {
+                    opts.context.css("table-layout", "fixed");
+                }
 
-                    var resizeBarWidth = 5;
-                    var resizeBarCorrectionHeight = N.browser.is("ie") ? -2 : 0;
-                    var context;
-                    if (opts.height > 0) {
-                        context = opts.context.closest(".grid_wrap__");
-                    } else {
-                        context = opts.context;
-                    }
+                var resizeBarWidth = 5;
+                var resizeBarCorrectionHeight = N.browser.is("ie") ? -2 : 0;
+                var context;
+                if (opts.height > 0) {
+                    context = opts.context.closest(".grid_wrap__");
+                } else {
+                    context = opts.context;
+                }
 
-                    this.thead.on("mouseover.grid.resize touchstart.grid.resize", function() {
-                        resizeBarHeight = (opts.height > 0 ? self.contextEle.closest(".grid_wrap__").height() - 3 : self.contextEle.height() + resizeBarCorrectionHeight) + 1 + opts.misc.resizeBarCorrectionHeight;
-                        var lastResizeBar = theadCells.each(function() {
-                            var cellEle = $(this);
-                            cellEle.find("> .resize_bar__").css({
-                                "top" : cellEle.position().top + 1,
-                                "left" : (cellEle.position().left + cellEle.outerWidth() - resizeBarWidth / 2 + opts.misc.resizeBarCorrectionLeft) + "px"
-                            });
-                        }).last().find("> .resize_bar__");
-                        lastResizeBar.css({
-                            "left" : parseInt(lastResizeBar.css("left")) - (resizeBarWidth / 2)
-                        })
-                        lastResizeBar = undefined;
-                    });
-
-                    var isFirstTimeLastClick = true;
-                    theadCells.each(function() {
-                        cellEle = $(this);
-                        resizeBar = $('<div class="resize_bar__"></div>').css({
-                            "padding": "0px",
-                            "position": "absolute",
-                            "width": resizeBarWidth + "px",
-                            "height": String(cellEle.outerHeight()) + "px",
-                            "opacity": "0"
-                        }).appendTo(cellEle);
-
-                        resizeBar.on("mousedown.grid.resize touchstart.grid.resize", function(e) {
-                            var dte;
-                            if(e.originalEvent.touches) {
-                                dte = e.originalEvent.touches[0];
-                            }
-
-                            if(e.originalEvent.touches || (e.which || e.button) === 1) {
-                                $(this).css({
-                                    "opacity": ""
-                                }).animate({
-                                    "height" : resizeBarHeight + "px"
-                                }, 150);
-
-                                startOffsetX = dte !== undefined ? dte.pageX : e.pageX;
-                                currResizeBarEle = $(this);
-                                currCellEle = currResizeBarEle.parent("th");
-                                currNextCellEle = currCellEle.next();
-                                var isLast = false;
-                                if(currNextCellEle.length === 0) {
-                                    currNextCellEle = context;
-                                    isLast = true;
-                                }
-
-                                if(opts.height > 0) {
-                                    targetCellEle = opts.context.find("thead th:eq(" + theadCells.index(currCellEle) + ")");
-                                    targetNextCellEle = targetCellEle.next();
-                                    if(opts.height > 0 && opts.context.parent().parent(".grid_wrap__").find("tfoot").length > 0) {
-                                        targetTfootCellEle = opts.context.parent().parent(".grid_wrap__").find("tfoot > tr > td:eq(" + theadCells.index(currCellEle) + ")");
-                                        targetNextTfootCellEle = targetTfootCellEle.next();
-                                    }
-                                }
-                                // Convert flexible cell width to absolute cell width when the clicked resizeBar is last resizeBar
-                                if(isFirstTimeLastClick && isLast) {
-                                    var thisWidth;
-                                    theadCells.each(function(i) {
-                                        thisWidth = $(this).width();
-                                        $(this).width(thisWidth + (opts.height > 0 ? opts.misc.resizableLastCellCorrectionWidth : 0) + opts.misc.resizableCorrectionWidth).removeAttr("width");
-
-                                        if(targetCellEle !== undefined) {
-                                            opts.context.find("thead th:eq(" + theadCells.index(this) + ")").width(thisWidth + (opts.height > 0 ? opts.misc.resizableLastCellCorrectionWidth : 0) + opts.misc.resizableCorrectionWidth).removeAttr("width");
-                                        }
-                                        if(opts.height > 0 && targetTfootCellEle !== undefined) {
-                                            opts.context.parent().parent(".grid_wrap__").find("tfoot > tr > td:eq(" + theadCells.index(this) + ")").width(thisWidth + (opts.height > 0 ? opts.misc.resizableLastCellCorrectionWidth : 0) + opts.misc.resizableCorrectionWidth).removeAttr("width");
-                                        }
-                                    });
-                                    isFirstTimeLastClick = false;
-                                    thisWidth = undefined;
-                                }
-
-                                // to block sort event
-                                currCellEle.data("sortLock", true);
-
-                                defWidth = Math.floor(currCellEle.outerWidth()) + opts.misc.resizableCorrectionWidth;
-                                nextDefWidth = !isLast ? Math.floor(currNextCellEle.outerWidth()) + opts.misc.resizableCorrectionWidth : Math.floor(context.width());
-
-                                $(document).on("dragstart.grid.resize selectstart.grid.resize", function() {
-                                    return false;
-                                });
-                                isPressed = true;
-
-                                minPx = !isLast ? Math.floor(currNextCellEle.offset().left) : Math.floor(currCellEle.offset().left) + Math.floor(currCellEle.outerWidth());
-                                maxPx = minPx + (!isLast ? Math.floor(currNextCellEle.outerWidth()) : 7680);
-                                movedPx = defPx = Math.floor(currResizeBarEle.parent("th").offset().left);
-                                $(window.document).on("mousemove.grid.resize touchmove.grid.resize", function(e) {
-                                    var mte;
-                                    if(e.originalEvent.touches) {
-                                        e.stopPropagation();
-                                        mte = e.originalEvent.touches[0];
-                                    }
-                                    if(isPressed) {
-                                        var mPageX = mte !== undefined ? mte.pageX : e.pageX;
-                                        if(defPx < mPageX && maxPx > mPageX) {
-                                            movedPx = mPageX - startOffsetX;
-                                            currWidth = defWidth + movedPx;
-                                            nextCurrWidth = !isLast ? nextDefWidth - movedPx : nextDefWidth + movedPx;
-                                            if(currWidth > 0 && nextCurrWidth > 0) {
-                                                currCellEle.css("width", currWidth + "px");
-                                                currNextCellEle.css("width", nextCurrWidth + "px");
-                                                if(targetCellEle !== undefined) {
-                                                    targetCellEle.css("width", currWidth + "px");
-                                                    targetNextCellEle.css("width", nextCurrWidth + "px");
-                                                }
-                                                if(targetTfootCellEle !== undefined) {
-                                                    targetTfootCellEle.css("width", currWidth + "px");
-                                                    targetNextTfootCellEle.css("width", nextCurrWidth + "px");
-                                                }
-                                            }
-                                            currCellEle.find(".resize_bar__").offset({
-                                                "left" : minPx - resizeBarWidth/2 + movedPx + opts.misc.resizeBarCorrectionLeft
-                                            });
-                                        }
-                                    }
-                                });
-
-                                var currResizeBar = $(this);
-                                $(window.document).on("mouseup.grid.resize touchend.grid.resize", function(e) {
-                                    currResizeBar.animate({
-                                        "height" : String(theadCells.filter(":eq(0)").outerHeight()) + "px"
-                                    }, 200, function() {
-                                        $(this).css({
-                                            "opacity": "0"
-                                        });
-
-                                        currResizeBar = undefined;
-                                    });
-
-                                    $(document).off("dragstart.grid.resize selectstart.grid.resize mousemove.grid.resize touchmove.grid.resize mouseup.grid.resize touchend.grid.resize");
-                                    isPressed = false;
-                                });
-                            }
+                this.thead.on("mouseover.grid.resize touchstart.grid.resize", function() {
+                    resizeBarHeight = (opts.height > 0 ? self.contextEle.closest(".grid_wrap__").height() - 3 : self.contextEle.height() + resizeBarCorrectionHeight) + 1 + opts.misc.resizeBarCorrectionHeight;
+                    var lastResizeBar = theadCells.each(function() {
+                        var cellEle = $(this);
+                        cellEle.find("> .resize_bar__").css({
+                            "top" : cellEle.position().top + 1,
+                            "left" : (cellEle.position().left + cellEle.outerWidth() - resizeBarWidth / 2 + opts.misc.resizeBarCorrectionLeft) + "px"
                         });
-                    });
+                    }).last().find("> .resize_bar__");
+                    lastResizeBar.css({
+                        "left" : parseInt(lastResizeBar.css("left")) - (resizeBarWidth / 2)
+                    })
+                    lastResizeBar = undefined;
+                });
 
-                    resizeBar = currResizeBar = resizeBarHeight = cellEle = currCellEle = currNextCellEle = targetCellEle = targetNextCellEle =
+                var isFirstTimeLastClick = true;
+                theadCells.each(function() {
+                    cellEle = $(this);
+                    resizeBar = $('<div class="resize_bar__"></div>').css({
+                        "padding": "0px",
+                        "position": "absolute",
+                        "width": resizeBarWidth + "px",
+                        "height": String(cellEle.outerHeight()) + "px",
+                        "opacity": "0"
+                    }).appendTo(cellEle);
+
+                    resizeBar.on("mousedown.grid.resize touchstart.grid.resize", function(e) {
+                        var dte;
+                        if(e.originalEvent.touches) {
+                            dte = e.originalEvent.touches[0];
+                        }
+
+                        if(e.originalEvent.touches || (e.which || e.button) === 1) {
+                            $(this).css({
+                                "opacity": ""
+                            }).animate({
+                                "height" : resizeBarHeight + "px"
+                            }, 150);
+
+                            startOffsetX = dte !== undefined ? dte.pageX : e.pageX;
+                            currResizeBarEle = $(this);
+                            currCellEle = currResizeBarEle.parent("th");
+                            currNextCellEle = currCellEle.next();
+                            var isLast = false;
+                            if(currNextCellEle.length === 0) {
+                                currNextCellEle = context;
+                                isLast = true;
+                            }
+
+                            if(opts.height > 0) {
+                                targetCellEle = opts.context.find("thead th:eq(" + theadCells.index(currCellEle) + ")");
+                                targetNextCellEle = targetCellEle.next();
+                                if(opts.height > 0 && opts.context.parent().parent(".grid_wrap__").find("tfoot").length > 0) {
+                                    targetTfootCellEle = opts.context.parent().parent(".grid_wrap__").find("tfoot > tr > td:eq(" + theadCells.index(currCellEle) + ")");
+                                    targetNextTfootCellEle = targetTfootCellEle.next();
+                                }
+                            }
+                            // Convert flexible cell width to absolute cell width when the clicked resizeBar is last resizeBar
+                            if(isFirstTimeLastClick && isLast) {
+                                var thisWidth;
+                                theadCells.each(function(i) {
+                                    thisWidth = $(this).width();
+                                    $(this).width(thisWidth + (opts.height > 0 ? opts.misc.resizableLastCellCorrectionWidth : 0) + opts.misc.resizableCorrectionWidth).removeAttr("width");
+
+                                    if(targetCellEle !== undefined) {
+                                        opts.context.find("thead th:eq(" + theadCells.index(this) + ")").width(thisWidth + (opts.height > 0 ? opts.misc.resizableLastCellCorrectionWidth : 0) + opts.misc.resizableCorrectionWidth).removeAttr("width");
+                                    }
+                                    if(opts.height > 0 && targetTfootCellEle !== undefined) {
+                                        opts.context.parent().parent(".grid_wrap__").find("tfoot > tr > td:eq(" + theadCells.index(this) + ")").width(thisWidth + (opts.height > 0 ? opts.misc.resizableLastCellCorrectionWidth : 0) + opts.misc.resizableCorrectionWidth).removeAttr("width");
+                                    }
+                                });
+                                isFirstTimeLastClick = false;
+                                thisWidth = undefined;
+                            }
+
+                            // to block sort event
+                            currCellEle.data("sortLock", true);
+
+                            defWidth = Math.floor(currCellEle.outerWidth()) + opts.misc.resizableCorrectionWidth;
+                            nextDefWidth = !isLast ? Math.floor(currNextCellEle.outerWidth()) + opts.misc.resizableCorrectionWidth : Math.floor(context.width());
+
+                            $(document).on("dragstart.grid.resize selectstart.grid.resize", function() {
+                                return false;
+                            });
+                            isPressed = true;
+
+                            minPx = !isLast ? Math.floor(currNextCellEle.offset().left) : Math.floor(currCellEle.offset().left) + Math.floor(currCellEle.outerWidth());
+                            maxPx = minPx + (!isLast ? Math.floor(currNextCellEle.outerWidth()) : 7680);
+                            movedPx = defPx = Math.floor(currResizeBarEle.parent("th").offset().left);
+                            $(window.document).on("mousemove.grid.resize touchmove.grid.resize", function(e) {
+                                var mte;
+                                if(e.originalEvent.touches) {
+                                    e.stopPropagation();
+                                    mte = e.originalEvent.touches[0];
+                                }
+                                if(isPressed) {
+                                    var mPageX = mte !== undefined ? mte.pageX : e.pageX;
+                                    if(defPx < mPageX && maxPx > mPageX) {
+                                        movedPx = mPageX - startOffsetX;
+                                        currWidth = defWidth + movedPx;
+                                        nextCurrWidth = !isLast ? nextDefWidth - movedPx : nextDefWidth + movedPx;
+                                        if(currWidth > 0 && nextCurrWidth > 0) {
+                                            currCellEle.css("width", currWidth + "px");
+                                            currNextCellEle.css("width", nextCurrWidth + "px");
+                                            if(targetCellEle !== undefined) {
+                                                targetCellEle.css("width", currWidth + "px");
+                                                targetNextCellEle.css("width", nextCurrWidth + "px");
+                                            }
+                                            if(targetTfootCellEle !== undefined) {
+                                                targetTfootCellEle.css("width", currWidth + "px");
+                                                targetNextTfootCellEle.css("width", nextCurrWidth + "px");
+                                            }
+                                        }
+                                        currCellEle.find(".resize_bar__").offset({
+                                            "left" : minPx - resizeBarWidth/2 + movedPx + opts.misc.resizeBarCorrectionLeft
+                                        });
+                                    }
+                                }
+                            });
+
+                            var currResizeBar = $(this);
+                            $(window.document).on("mouseup.grid.resize touchend.grid.resize", function(e) {
+                                currResizeBar.animate({
+                                    "height" : String(theadCells.filter(":eq(0)").outerHeight()) + "px"
+                                }, 200, function() {
+                                    $(this).css({
+                                        "opacity": "0"
+                                    });
+
+                                    currResizeBar = undefined;
+                                });
+
+                                $(document).off("dragstart.grid.resize selectstart.grid.resize mousemove.grid.resize touchmove.grid.resize mouseup.grid.resize touchend.grid.resize");
+                                isPressed = false;
+                            });
+                        }
+                    });
+                });
+
+                resizeBar = currResizeBar = resizeBarHeight = cellEle = currCellEle = currNextCellEle = targetCellEle = targetNextCellEle =
                     targetTfootCellEle = targetNextTfootCellEle = currResizeBarEle =
-                    defWidth = nextDefWidth = currWidth = nextCurrWidth = startOffsetX =
-                    minPx = maxPx = defPx = movedPx = undefined;
+                        defWidth = nextDefWidth = currWidth = nextCurrWidth = startOffsetX =
+                            minPx = maxPx = defPx = movedPx = undefined;
 //              }
             },
             sort : function() {
@@ -5925,8 +5946,8 @@
 
                 var changeBtnIcon = function(th, kind) {
                     th.find(".btn_data_filter__")
-                    .removeClass("btn_data_filter_empty__ btn_data_filter_part__ btn_data_filter_full__")
-                    .addClass("btn_data_filter_" + kind + "__");
+                        .removeClass("btn_data_filter_empty__ btn_data_filter_part__ btn_data_filter_full__")
+                        .addClass("btn_data_filter_" + kind + "__");
                 };
 
                 var btnEle = $('<a href="#" class="btn_data_filter__" title="' + N.message.get(opts.message, "dFilter") + '"><span>' + N.message.get(opts.message, "dFilter") + '</span><a>')
@@ -5990,27 +6011,27 @@
                             }
 
                             panel = $('<div align="left" class="data_filter_panel__ hidden__">'
-                                    +   '<div class="data_filter_search__">'
-                                    +       '<input class="data_filter_search_word__" type="text">'
-                                    +       '<a class="data_filter_search_btn__" href="#" title="' + N.message.get(opts.message, "search") + '">'
-                                    +           '<span>' + N.message.get(opts.message, "search") + '</span>'
-                                    +       '</a>'
-                                    +   '</div>'
-                                    +   '<div class="data_filter_checkall_box__"><label><input type="checkbox" checked="checked"><span class="data_filter_select_all__">' + N.message.get(opts.message, "selectAll") + '</span><span class="data_filter_total_cnt__">(' + opts.data.length + ')</span></label></div>'
-                                    +   '<ul class="data_filter_list__"></ul>'
-                                    + '</div>')
-                            .css("z-index", 1)
-                            .hide()
-                            .appendTo(theadCell).on("click.grid.dataFilter, mouseover.grid.dataFilter", function(e) {
-                                e.stopPropagation();
-                            });
+                                +   '<div class="data_filter_search__">'
+                                +       '<input class="data_filter_search_word__" type="text">'
+                                +       '<a class="data_filter_search_btn__" href="#" title="' + N.message.get(opts.message, "search") + '">'
+                                +           '<span>' + N.message.get(opts.message, "search") + '</span>'
+                                +       '</a>'
+                                +   '</div>'
+                                +   '<div class="data_filter_checkall_box__"><label><input type="checkbox" checked="checked"><span class="data_filter_select_all__">' + N.message.get(opts.message, "selectAll") + '</span><span class="data_filter_total_cnt__">(' + opts.data.length + ')</span></label></div>'
+                                +   '<ul class="data_filter_list__"></ul>'
+                                + '</div>')
+                                .css("z-index", 1)
+                                .hide()
+                                .appendTo(theadCell).on("click.grid.dataFilter, mouseover.grid.dataFilter", function(e) {
+                                    e.stopPropagation();
+                                });
 
                             dataFilterProgress = $('<div class="data_filter_progress__"></div>')
-                            .css({
-                                "z-index" : 2,
-                                "opacity" : 0.3
-                            })
-                            .appendTo(panel);
+                                .css({
+                                    "z-index" : 2,
+                                    "opacity" : 0.3
+                                })
+                                .appendTo(panel);
 
                             searchBox = panel.find(".data_filter_search__");
 
@@ -6097,86 +6118,86 @@
                                 filterItemEle.find(".data_filter_cnt__").text("(" + String(length) + ")");
                             } else {
                                 filterItemEle = $('<li class="data_filter_item_' + String(itemSeq) + '__">'
-                                        + '<label><input type="checkbox" checked="checked" class="data_filter_checkbox__">'
-                                        + '<span class="data_filter_item_name__"></span><span class="data_filter_cnt__">(' + String(length) + ')</span></label></li>');
+                                    + '<label><input type="checkbox" checked="checked" class="data_filter_checkbox__">'
+                                    + '<span class="data_filter_item_name__"></span><span class="data_filter_cnt__">(' + String(length) + ')</span></label></li>');
 
                                 filterItemEle.find(".data_filter_item_name__").text(k.replace(id + "_", ""));
 
                                 filterItemEle.find(".data_filter_checkbox__")
-                                .data("rowIdxs", filterKeys[k])
-                                .data("length", length)
-                                .on("click.grid.dataFilter, do.grid.dataFilter", function() {
-                                    // Update the count of rows for each filter item
-                                    var thisEle = $(this);
-                                    if(thisEle.is(":checked")) {
-                                        thisEle.parent().children(".data_filter_cnt__").text("(" + String(thisEle.data("length")) + ")");
-                                    } else {
-                                        thisEle.parent().children(".data_filter_cnt__").text("(0)");
-                                    }
-
-                                    // dataFilterListUnCheckedEles is current thead's cell unchecked data filter list
-                                    var dataFilterListUnCheckedEles = theadCell.find(".data_filter_list__ li :checkbox:not(:checked)");
-                                    if(dataFilterListUnCheckedEles.length > 0) {
-                                        panel.find(".data_filter_checkall_box__ :checkbox").prop("checked", false);
-                                        if(theadCell.find(".data_filter_list__ li :checkbox:checked").length > 0) {
-                                            changeBtnIcon(theadCell, "part");
+                                    .data("rowIdxs", filterKeys[k])
+                                    .data("length", length)
+                                    .on("click.grid.dataFilter, do.grid.dataFilter", function() {
+                                        // Update the count of rows for each filter item
+                                        var thisEle = $(this);
+                                        if(thisEle.is(":checked")) {
+                                            thisEle.parent().children(".data_filter_cnt__").text("(" + String(thisEle.data("length")) + ")");
                                         } else {
-                                            changeBtnIcon(theadCell, "empty");
+                                            thisEle.parent().children(".data_filter_cnt__").text("(0)");
                                         }
-                                    } else {
-                                        panel.find(".data_filter_checkall_box__ :checkbox").prop("checked", true);
-                                        changeBtnIcon(theadCell, "full");
-                                    }
 
-                                    // dataFilterListUnCheckedEles is all thead's cells unchecked data filter list
-                                    dataFilterListUnCheckedEles = theadCells.find(".data_filter_list__ li :checkbox:not(:checked)");
+                                        // dataFilterListUnCheckedEles is current thead's cell unchecked data filter list
+                                        var dataFilterListUnCheckedEles = theadCell.find(".data_filter_list__ li :checkbox:not(:checked)");
+                                        if(dataFilterListUnCheckedEles.length > 0) {
+                                            panel.find(".data_filter_checkall_box__ :checkbox").prop("checked", false);
+                                            if(theadCell.find(".data_filter_list__ li :checkbox:checked").length > 0) {
+                                                changeBtnIcon(theadCell, "part");
+                                            } else {
+                                                changeBtnIcon(theadCell, "empty");
+                                            }
+                                        } else {
+                                            panel.find(".data_filter_checkall_box__ :checkbox").prop("checked", true);
+                                            changeBtnIcon(theadCell, "full");
+                                        }
 
-                                    var filterIdxs = [];
-                                    dataFilterListUnCheckedEles.each(function() {
-                                        $.each($(this).data("rowIdxs"), function(i, v) {
-                                            filterIdxs[v] = v;
+                                        // dataFilterListUnCheckedEles is all thead's cells unchecked data filter list
+                                        dataFilterListUnCheckedEles = theadCells.find(".data_filter_list__ li :checkbox:not(:checked)");
+
+                                        var filterIdxs = [];
+                                        dataFilterListUnCheckedEles.each(function() {
+                                            $.each($(this).data("rowIdxs"), function(i, v) {
+                                                filterIdxs[v] = v;
+                                            });
+                                        });
+
+                                        filterIdxs = $.grep(filterIdxs, function(n){ return n == 0 || n });
+
+                                        dataFilterProgress.show().fadeTo(50, 0.5, function() {
+                                            // init scrollPaging index
+                                            opts.scrollPaging.idx = 0;
+
+                                            if(filterIdxs.length > 0 && filterIdxs.length !== clonedData.length) {
+                                                var extrData = clonedData.slice(0);
+                                                var bfrFilterIdx = -1;
+                                                var addUnits = 0;
+                                                for(var i = 0; i < filterIdxs.length; i++){
+                                                    if(filterIdxs[i] - bfrFilterIdx === 1) {
+                                                        addUnits++;
+                                                    } else {
+                                                        extrData.splice((bfrFilterIdx - addUnits + 1) - (i - addUnits), addUnits);
+                                                        addUnits = 1;
+                                                    }
+                                                    bfrFilterIdx = filterIdxs[i];
+                                                }
+                                                extrData.splice((bfrFilterIdx - addUnits + 1) - (i - addUnits), addUnits);
+
+                                                self.bind(extrData, "grid.dataFilter");
+                                            } else {
+                                                if(filterIdxs.length > 0) {
+                                                    self.bind([], "grid.dataFilter");
+                                                } else {
+                                                    self.bind(clonedData, "grid.dataFilter");
+                                                }
+                                            }
+
+                                            // Update total count.
+                                            theadCell.find(".data_filter_total_cnt__").text("(" + String(opts.data.length) + ")");
+
+                                            // Prevent event propagation when browser is stoped.
+                                            setTimeout(function() {
+                                                dataFilterProgress.hide();
+                                            }, 0);
                                         });
                                     });
-
-                                    filterIdxs = $.grep(filterIdxs, function(n){ return n == 0 || n });
-
-                                    dataFilterProgress.show().fadeTo(50, 0.5, function() {
-                                        // init scrollPaging index
-                                        opts.scrollPaging.idx = 0;
-
-                                        if(filterIdxs.length > 0 && filterIdxs.length !== clonedData.length) {
-                                            var extrData = clonedData.slice(0);
-                                            var bfrFilterIdx = -1;
-                                            var addUnits = 0;
-                                            for(var i = 0; i < filterIdxs.length; i++){
-                                                if(filterIdxs[i] - bfrFilterIdx === 1) {
-                                                    addUnits++;
-                                                } else {
-                                                    extrData.splice((bfrFilterIdx - addUnits + 1) - (i - addUnits), addUnits);
-                                                    addUnits = 1;
-                                                }
-                                                bfrFilterIdx = filterIdxs[i];
-                                            }
-                                            extrData.splice((bfrFilterIdx - addUnits + 1) - (i - addUnits), addUnits);
-
-                                            self.bind(extrData, "grid.dataFilter");
-                                        } else {
-                                            if(filterIdxs.length > 0) {
-                                                self.bind([], "grid.dataFilter");
-                                            } else {
-                                                self.bind(clonedData, "grid.dataFilter");
-                                            }
-                                        }
-
-                                        // Update total count.
-                                        theadCell.find(".data_filter_total_cnt__").text("(" + String(opts.data.length) + ")");
-
-                                        // Prevent event propagation when browser is stoped.
-                                        setTimeout(function() {
-                                            dataFilterProgress.hide();
-                                        }, 0);
-                                    });
-                                });
 
                                 filterListBox.append(filterItemEle);
                             }
@@ -6190,8 +6211,8 @@
                         $(document).off("click.grid.dataFilter");
                         $(document).on("click.grid.dataFilter", function(e) {
                             if($(e.target).closest(".data_filter_panel__, .btn_data_filter__").length === 0
-                                    && !$(e.target).hasClass("btn_data_filter__")
-                                    && !$(e.target).hasClass("form__")) {
+                                && !$(e.target).hasClass("btn_data_filter__")
+                                && !$(e.target).hasClass("form__")) {
                                 var panel = thead.find(".data_filter_panel__.visible__");
                                 if(panel.length > 0) {
                                     panel.removeClass("visible__").addClass("hidden__");
@@ -6491,8 +6512,8 @@
 
                             if(callType !== "grid.dataFilter" && callType !== "grid.sort") {
                                 this.thead.find(".btn_data_filter__")
-                                .removeClass("btn_data_filter_empty__ btn_data_filter_part__ btn_data_filter_full__")
-                                .addClass("btn_data_filter_full__");
+                                    .removeClass("btn_data_filter_empty__ btn_data_filter_part__ btn_data_filter_full__")
+                                    .addClass("btn_data_filter_full__");
 
                                 if(opts.data.length > 0) {
                                     this.thead.find(".btn_data_filter__").removeClass("hidden__").addClass("visible__");
@@ -7419,17 +7440,17 @@
                             var closestLi = N(this).closest("li");
                             var checkedEle = N(this).closest("ul").find(".tree_last_node__ :checked");
                             opts.onCheck.call(self
-                                    , closestLi.data("index")
-                                    , closestLi
-                                    , opts.data[closestLi.data("index")]
-                            , checkedEle.map(function() {
-                                return N(this).closest("li").data("index");
-                            }).get()
-                            , checkedEle
-                            , checkedEle.map(function() {
-                                return opts.data[N(this).closest("li").data("index")];
-                            }).get()
-                            , checkFlag);
+                                , closestLi.data("index")
+                                , closestLi
+                                , opts.data[closestLi.data("index")]
+                                , checkedEle.map(function() {
+                                    return N(this).closest("li").data("index");
+                                }).get()
+                                , checkedEle
+                                , checkedEle.map(function() {
+                                    return opts.data[N(this).closest("li").data("index")];
+                                }).get()
+                                , checkFlag);
                         }
                     });
                 }
