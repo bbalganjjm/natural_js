@@ -11,15 +11,17 @@
         <tr>
             <th><label for="size">size</label></th>
             <td><select id="size">
+                <option value="none">none</option>
                 <option value="smaller">smaller</option>
                 <option value="small">small</option>
-                <option value="medium">medium</option>
+                <option value="medium" selected="selected">medium</option>
                 <option value="large">large</option>
                 <option value="big">big</option>
             </select></td>
             <th><label for="color">color</label></th>
             <td><select id="color">
-                <option value="primary">primary</option>
+                <option value="none">none</option>
+                <option value="primary" selected="selected">primary</option>
                 <option value="primary_container">primary_container</option>
                 <option value="secondary">secondary</option>
                 <option value="secondary_container">secondary_container</option>
@@ -28,14 +30,30 @@
             </select></td>
         </tr>
         <tr>
-            <th><label for="fill">fill</label></th>
-            <td><select id="fill">
-                <option value="filled">filled</option>
+            <th><label for="type">type</label></th>
+            <td><select id="type">
+                <option value="none">none</option>
+                <option value="filled" selected="selected">filled</option>
                 <option value="outlined">outlined</option>
+                <option value="elevated">elevated</option>
             </select></td>
             <th><label for="disable">disable</label></th>
             <td>
                 <input id="disable" type="checkbox">
+            </td>
+        </tr>
+        <tr>
+            <th><label for="onBeforeCreate">onBeforeCreate</label></th>
+            <td>
+                <textarea id="onBeforeCreate" style="height: 124px;;">function(context, opts) {
+    N.log(context, opts);
+}</textarea>
+            </td>
+            <th><label for="onCreate">onCreate</label></th>
+            <td>
+                <textarea id="onCreate" style="height: 124px;;">function(context, opts) {
+    N.log(context, opts);
+}</textarea>
             </td>
         </tr>
     </table>
@@ -43,12 +61,12 @@
     <p lang="ko_KR" class="smallContTit">실행 : </p>
     <p lang="en_US" class="smallContTit">Run : </p>
     <div class="btnBox">
-        <a id="btnMake" href="#" data-opts='{ "color": "primary", "size": "large" }'>
+        <a id="btnMake" href="#" data-opts='{ "size": "large" }'>
             <span lang="ko_KR">Button 생성</span>
             <span lang="en_US">Create Button</span>
         </a>
-        <a id="btnDisable" href="#" data-opts='{ "color": "primary", "size": "large", "disable": true }'>disable</a>
-        <a id="btnEnable" href="#" data-opts='{ "color": "primary", "size": "large", "disable": true }'>enable</a>
+        <a id="btnDisable" href="#" data-opts='{ "size": "large", "disable": true }'>disable</a>
+        <a id="btnEnable" href="#" data-opts='{ "size": "large", "disable": true }'>enable</a>
         <a id="btnReload" href="#" data-opts='{ "size": "large" }'>
             <span lang="ko_KR">DEMO 초기화</span>
             <span lang="en_US">Reset DEMO</span>
@@ -77,10 +95,14 @@
             N("#btnMake", view).on("click", function(e) {
                 e.preventDefault();
                 var opts = {
-                      color : N("select#color", view).val(),
-                      size : N("select#size", view).val(),
-                      fill : N("select#fill", view).val(),
-                      disable : N("input#disable", view).is(":checked")
+                    color : N("select#color", view).val(),
+                    size : N("select#size", view).val(),
+                    type : N("select#type", view).val(),
+                    disable : N("input#disable", view).is(":checked"),
+                    onBeforeCreate : N.string.trimToNull(N("#onBeforeCreate", view).val()) !== null ?
+                        eval("(" + N("#onBeforeCreate", view).val() + ")") : null,
+                    onCreate : N.string.trimToNull(N("#onCreate", view).val()) !== null ?
+                        eval("(" + N("#onCreate", view).val() + ")") : null
                 };
                 N("div.result", view).find("a, button, input[type='button']").button(opts);
 

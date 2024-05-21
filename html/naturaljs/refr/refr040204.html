@@ -32,25 +32,25 @@
         <tr>
             <td>size</td>
             <td>string</td>
-            <td>medium</td>
+            <td>none</td>
             <td style="text-align: center;">X</td>
             <td>
                 <p lang="ko_KR">버튼의 크기를 설정합니다.</p>
                 <p lang="en_US">Set the size of the button.</p>
-                <p lang="ko_KR">크기는 "smaller", "small", "medium", "large", "big" 중 하나를 지정할 수 있습니다.</p>
-                <p lang="en_US">The size can be one of "smaller", "small", "medium", "large" and "big".</p>
+                <p lang="ko_KR">크기는 "none", "smaller", "small", "medium", "large", "big" 중 하나를 지정할 수 있습니다.</p>
+                <p lang="en_US">The size can be one of "none", "smaller", "small", "medium", "large" and "big".</p>
             </td>
         </tr>
         <tr>
             <td>color</td>
             <td>string</td>
-            <td>primary</td>
+            <td>none</td>
             <td style="text-align: center;">X</td>
             <td>
                 <p lang="ko_KR">버튼의 색상을 설정합니다.</p>
                 <p lang="en_US">Set the color of the button.</p>
-                <p lang="ko_KR">색상은 "primary", "primary_container", "secondary", "secondary_container", "tertiary", "tertiary_container" 중 하나를 지정할 수 있습니다.</p>
-                <p lang="en_US">The color can be one of "primary", "primary_container", "secondary", "secondary_container", "tertiary" and "tertiary_container".</p>
+                <p lang="ko_KR">색상은 "none", "primary", "primary_container", "secondary", "secondary_container", "tertiary", "tertiary_container" 중 하나를 지정할 수 있습니다.</p>
+                <p lang="en_US">The color can be one of "none", "primary", "primary_container", "secondary", "secondary_container", "tertiary" and "tertiary_container".</p>
                 <p lang="ko_KR">버튼 색상의 Naming 과 기본값은 <a href="https://m3.material.io/styles/color/roles" target="_blank">Material Design 3 의 Color roles</a> 를 기반으로 합니다.</p>
                 <p lang="en_US">The naming and default value of the button color is based on the <a href="https://m3.material.io/styles/color/roles" target="_blank">Color token of Material Design 3</a>.</p>
                 <p lang="ko_KR">버튼의 스타일을 변경하려면 natural.ui.css 파일의 "btn_" 로 시작하는 클래스를 수정하면 됩니다.</p>
@@ -63,13 +63,17 @@
             </td>
         </tr>
         <tr>
-            <td>fill</td>
+            <td>type</td>
             <td>string</td>
-            <td>filled</td>
+            <td>none</td>
             <td style="text-align: center;">X</td>
             <td>
                 <p lang="ko_KR">버튼의 배경을 채울지 외곽선만 표시할지 설정 합니다.</p>
                 <p lang="en_US">Set whether to fill the background of the button or display only the outline.</p>
+                <p lang="ko_KR">타입은 "none", "filled", "outlined", "elevated" 중 하나를 지정할 수 있습니다.</p>
+                <p lang="en_US">The type can be one of  "none", "filled", "outlined" and "elevated".</p>
+                <p lang="ko_KR">"filled", "outlined" 의 색상은 color 옵션으로 정의한 색상으로 지정 됩니다. color 옵션이 "none" 이면 버튼의 배경이나 외곽선이 표시되지 않습니다.</p>
+                <p lang="en_US">The color of "filled" and "outlined" is specified by the color defined by the color option. If the color option is "none", the button's background or outline will not be displayed.</p>
             </td>
         </tr>
         <tr>
@@ -83,22 +87,48 @@
             </td>
         </tr>
         <tr>
-            <td>customStyle</td>
-            <td>boolean</td>
-            <td>false</td>
+        <tr>
+            <td>onBeforeCreate</td>
+            <td>function</td>
+            <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">true로 설정하면 사용자 정의 버튼 스타일을 적용할 수 있습니다.</p>
-                <p lang="en_US">If set to true, custom button styles can be applied.</p>
-                <p lang="ko_KR">true로 설정하면 버튼의 마우스 이벤트에 따라 natural.ui.css 파일의 다음과 같은 스타일 클래스가 적용됩니다.</p>
-                <p lang="en_US">When set to true, the following style classes in the natural.ui.css file are applied according to the mouse event of the button.</p>
-                <ul>
-                    <li>mouseover : a.btn_mouseover__, input[type='button'].btn_mouseover__, button.btn_mouseover__</li>
-                    <li>mousedown : a.btn_mousedown__, input[type='button'].btn_mousedown__, button.btn_mousedown__</li>
-                    <li>mouseup : a.btn_mouseup__, input[type='button'].btn_mouseup__, button.btn_mouseup__</li>
-                    <li>mouseout : a.btn_mouseout__, input[type='button'].btn_mouseout__, button.btn_mouseout__</li>
-                </ul>
+                <p lang="ko_KR">버튼의 옵션이 적용되기 전에 실행되는 이벤트핸들러를 정의 합니다.</p>
+                <p lang="en_US">Defines an event handler that is fired before the button's options are applied.</p>
+                <p lang="ko_KR" class="alert">외부 버튼 라이브러리를 사용할때 버튼요소의 외부나 내부에 필요한 HTML 요소를 추가하거나 다른 용도로 HTML 요소의 편집이 필요할 때 활용 할 수 있습니다.</p>
+                <p lang="en_US" class="alert">When using an external button library, you can add necessary HTML elements to the outside or inside of a button element, or use it when you need to edit HTML elements for other purposes.</p>
+                <pre lang="ko_KR"><code>onBeforeCreate : function(context) {
+    // this : N.button 인스턴스
+    // context : context 요소
+}</code></pre>
+                <pre lang="en_US"><code>onBeforeCreate : function(context) {
+    // this : N.button 인스턴스
+    // context : context 요소
+}</code></pre>
             </td>
+        </tr>
+        <tr>
+            <td>onCreate</td>
+            <td>function</td>
+            <td>null</td>
+            <td style="text-align: center;">X</td>
+            <td>
+                <p lang="ko_KR">버튼의 옵션이 적용된 후에 실행되는 이벤트핸들러를 정의 합니다.</p>
+                <p lang="en_US">Defines an event handler that is fired after the button's options are applied.</p>
+                <p lang="ko_KR" class="alert">외부 버튼 라이브러리를 사용할때 버튼요소에 효과 이벤트를 정의하거나 다른 용도로 버튼 처리가 필요할 때 활용 할 수 있습니다.</p>
+                <p lang="en_US" class="alert">When using an external button library, you can define effect events on button elements or use it when button handling is needed for other purposes.</p>
+                <pre lang="ko_KR"><code>onCreate : function(context, opts) {
+    // this : N.button 인스턴스
+    // context : context 요소
+    // opts : 버튼을 생성할 때 지정된 옵션
+}</code></pre>
+                <pre lang="en_US"><code>onCreate : function(context, opts) {
+    // this : N.button instance
+    // context : context element
+    // opts : options that specified when creating a button
+}</code></pre>
+            </td>
+        </tr>
         </tr>
     </table>
 </article>

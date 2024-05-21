@@ -223,72 +223,101 @@ a.btn_common__ {
     text-decoration: none;
 }
 
-a.btn_primary__, input[type='button'].btn_primary__, button.btn_primary__ {
-    color: var(--md-sys-color-on-primary);
-    background-color: var(--md-sys-color-primary);
-    border: 1px solid var(--md-sys-color-primary);
-}
-a.btn_primary_container__, input[type='button'].btn_primary_container__, button.btn_primary_container__ {
-    color: var(--md-sys-color-on-primary-container);
-    background-color: var(--md-sys-color-primary-container);
-    border: 1px solid var(--md-sys-color-primary-container);
-}
-a.btn_secondary__, input[type='button'].btn_secondary__, button.btn_secondary__ {
-    color: var(--md-sys-color-on-secondary);
-    background-color: var(--md-sys-color-secondary);
-    border: 1px solid var(--md-sys-color-secondary);
-}
-a.btn_secondary_container__, input[type='button'].btn_secondary_container__, button.btn_secondary_container__ {
-    color: var(--md-sys-color-on-secondary-container);
-    background-color: var(--md-sys-color-secondary-container);
-    border: 1px solid var(--md-sys-color-secondary-container);
-}
-a.btn_tertiary__, input[type='button'].btn_tertiary__, button.btn_tertiary__ {
-    color: var(--md-sys-color-on-tertiary);
-    background-color: var(--md-sys-color-tertiary);
-    border: 1px solid var(--md-sys-color-tertiary);
-}
-a.btn_tertiary_container__, input[type='button'].btn_tertiary_container__, button.btn_tertiary_container__ {
-    color: var(--md-sys-color-on-tertiary);
-    background-color: var(--md-sys-color-tertiary-container);
-    border: 1px solid var(--md-sys-color-tertiary-container);
-}
-
-a.btn_outlined__, input[type='button'].btn_outlined__, button.btn_outlined__ {
-    color: inherit;
-    background: none;
-}
-
 a.btn_smaller__, input[type='button'].btn_smaller__, button.btn_smaller__ {
     padding: 0 8px 0 8px;
     font-size: 11px;
     line-height: 14px;
 }
-
 a.btn_small__, input[type='button'].btn_small__, button.btn_small__ {
     padding: 0 8px 0 8px;
     font-size: 11px;
     line-height: 18px;
 }
-
 a.btn_medium__, input[type='button'].btn_medium__, button.btn_medium__ {
     padding: 0 10px 0 10px;
     font-size: 12px;
     line-height: 24px;
 }
-
 a.btn_large__, input[type='button'].btn_large__, button.btn_large__ {
     padding: 0 10px 0 10px;
     font-size: 14px;
     line-height: 30px;
     font-weight: 700;
 }
-
 a.btn_big__, input[type='button'].btn_big__, button.btn_big__ {
     padding: 0 10px 0 10px;
     font-size: 16px;
     line-height: 44px;
     font-weight: 700;
+}
+
+a.btn_primary__, input[type='button'].btn_primary__, button.btn_primary__ {
+    border: none;
+    color: var(--md-sys-color-on-primary);
+    background-color: var(--md-sys-color-primary);
+}
+a.btn_primary_container__, input[type='button'].btn_primary_container__, button.btn_primary_container__ {
+    border: none;
+    color: var(--md-sys-color-on-primary-container);
+    background-color: var(--md-sys-color-primary-container);
+}
+a.btn_secondary__, input[type='button'].btn_secondary__, button.btn_secondary__ {
+    border: none;
+    color: var(--md-sys-color-on-secondary);
+    background-color: var(--md-sys-color-secondary);
+}
+a.btn_secondary_container__, input[type='button'].btn_secondary_container__, button.btn_secondary_container__ {
+    border: none;
+    color: var(--md-sys-color-on-secondary-container);
+    background-color: var(--md-sys-color-secondary-container);
+}
+a.btn_tertiary__, input[type='button'].btn_tertiary__, button.btn_tertiary__ {
+    border: none;
+    color: var(--md-sys-color-on-tertiary);
+    background-color: var(--md-sys-color-tertiary);
+}
+a.btn_tertiary_container__, input[type='button'].btn_tertiary_container__, button.btn_tertiary_container__ {
+    border: none;
+    color: var(--md-sys-color-on-tertiary);
+    background-color: var(--md-sys-color-tertiary-container);
+}
+
+a.btn_primary__.btn_outlined__, input[type='button'].btn_primary__.btn_outlined__, button.btn_primary__.btn_outlined__ {
+    border: 1px solid var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-surface);
+    background: none;
+}
+a.btn_primary_container__.btn_outlined__, input[type='button'].btn_primary_container__.btn_outlined__, button.btn_primary_container__.btn_outlined__ {
+    border: 1px solid var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-on-primary-container);
+    background: none;
+}
+a.btn_secondary__.btn_outlined__, input[type='button'].btn_secondary__.btn_outlined__, button.btn_secondary__.btn_outlined__ {
+    border: 1px solid var(--md-sys-color-secondary);
+    color: var(--md-sys-color-on-surface);
+    background: none;
+}
+a.btn_secondary_container__.btn_outlined__, input[type='button'].btn_secondary_container__.btn_outlined__, button.btn_secondary_container__.btn_outlined__ {
+    border: 1px solid var(--md-sys-color-secondary-container);
+    color: var(--md-sys-color-on-surface);
+    background: none;
+}
+a.btn_tertiary__.btn_outlined__, input[type='button'].btn_tertiary__.btn_outlined__, button.btn_tertiary__.btn_outlined__ {
+    border: 1px solid var(--md-sys-color-tertiary);
+    color: var(--md-sys-color-on-surface);
+    background: none;
+}
+a.btn_tertiary_container__.btn_outlined__, input[type='button'].btn_tertiary_container__.btn_outlined__, button.btn_tertiary_container__.btn_outlined__ {
+    border: 1px solid var(--md-sys-color-tertiary-container);
+    color: var(--md-sys-color-on-surface);
+    background: none;
+}
+
+a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
+    border: none;
+    color: inherit;
+    background: none;
+    box-shadow: 1px 1px 3px var(--md-sys-color-shadow);
 }
 
 /* Select */
@@ -302,8 +331,8 @@ a.btn_big__, input[type='button'].btn_big__, button.btn_big__ {
 
 /* Form */
 .validate_false__ {
-    background-color: var(--md-sys-color-error-container) !important;
     color: --md-sys-color-on-error-container !important;
+    background-color: var(--md-sys-color-error-container) !important;
 }
 
 
