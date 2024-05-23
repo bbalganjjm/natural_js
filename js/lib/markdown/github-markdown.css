@@ -379,7 +379,7 @@
   padding: 0 0.7em;
   font-size: 0.95em;
   line-height: 170%;
-  color: rgba(0, 0, 0, 0.7);
+  color: var(--md-sys-color-surface-tint);
   border-left: 0.25em solid var(--md-sys-color-outline-variant);
 }
 
@@ -524,7 +524,7 @@
 }
 
 .markdown-body table th {
-  font-weight: 700;
+  font-weight: 400;
 }
 
 .markdown-body table th,
@@ -538,7 +538,7 @@
 }
 
 .markdown-body table tr:nth-child(2n) {
-  background-color: #f6f8fa;
+  background-color:  var(--md-sys-color-surface-container-low);
 }
 
 .markdown-body img {
@@ -560,7 +560,7 @@
   padding: 0.2em 0.4em;
   margin: 0;
   font-size: 85%;
-  background-color: rgba(27,31,35,0.05);
+  background-color: var(--md-sys-color-surface-container);
   border-radius: 3px;
 }
 

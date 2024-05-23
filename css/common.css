@@ -123,8 +123,7 @@ td.grid_body_fixed__ {
 }
 
 th, tfoot td {
-    background-color: var(--md-sys-color-surface-container);
-    color: var(--md-sys-color-on-primary-container);
+    background-color: var(--md-sys-color-surface-container-high);
     font-weight: 400;
 }
 
@@ -189,17 +188,17 @@ th, tfoot td {
     transform-origin: left;
     transition: margin-left 0.5s ease, box-shadow 0.15s ease;
 
-    background-color: var(--md-sys-color-surface-container);
+    background-color: var(--md-sys-color-surface-container-high);
     min-height: 100%;
 
-    border-radius: 0 20px 20px 0;
+    border-radius: 0 5px 5px 0;
 
     z-index: 2;
 }
 
 .main-nav:hover {
     border-right: 1px solid var(--md-sys-color-outline-variant);
-    box-shadow: 1px 0 5px var(--md-sys-color-shadow);
+    box-shadow: 1px 0 3px var(--md-sys-color-shadow);
 }
 
 .content-wrap {
