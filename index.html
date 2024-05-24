@@ -1,16 +1,5 @@
 <!DOCTYPE html>
 <html lang="ko">
-<body>
-<section class="page-wrap">
-    <nav class="main-nav"></nav>
-    <section class="content-wrap">
-        <header class="page-header"></header>
-        <div class="main-contents"></div>
-        <footer class="page-footer"></footer>
-    </section>
-</section>
-</body>
-
 <head>
     <title>Natural-JS : Javascript Front-End Architecture Framework</title>
     <meta charset="utf-8">
@@ -55,5 +44,31 @@
         });
     </script>
 
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <script type="importmap">
+        {
+          "imports": {
+            "@material/web/": "https://esm.run/@material/web/"
+          }
+        }
+    </script>
+    <script type="module">
+        import '@material/web/all.js';
+        import {styles as typescaleStyles} from '@material/web/typography/md-typescale-styles.js';
+
+        document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+    </script>
+
+    <script type="text/javascript" charset="utf-8" src="js/natural_js/natural.js.material.js"></script>
 </head>
+<body>
+<section class="page-wrap">
+    <nav class="main-nav"></nav>
+    <section class="content-wrap">
+        <header class="page-header"></header>
+        <div class="main-contents"></div>
+        <footer class="page-footer"></footer>
+    </section>
+</section>
+</body>
 </html>

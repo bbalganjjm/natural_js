@@ -428,8 +428,8 @@
                  *  - It is specified as an option of the Button(N.button) component.
                  */
                 "okBtnStyle" : {
-                    color : "primary",
-                    size : "medium"
+                    // color : "primary",
+                    // size : "medium"
                 },
                 /**
                  * N.alert's Cancel button style
@@ -497,8 +497,20 @@
         },
         "button" : {
             size: "medium",
-            color: "primary_container",
-            type: "filled"
+            // color: "primary_container",
+            // type: "filled",
+            onBeforeCreate: function (context, opts) {
+                context.css({
+                    "position": "relative",
+                    "margin": 0,
+                    "padding": 0,
+                    "height": 21
+                });
+                context.html('<md-ripple id="ripple"></md-ripple><button id="ripple-control">' + context.text() +'</button>');
+            },
+            onCreate: function (context, opts) {
+
+            }
         },
         "popup" : {
             /**
