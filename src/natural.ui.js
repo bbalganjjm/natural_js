@@ -1185,9 +1185,8 @@
                         "btn_tertiary__ btn_tertiary_container__ " +
                         "btn_filled__ btn_outlined__ btn_elevated__");
 
-                    opts.context.addClass("btn_common__");
-
                     if (opts.size !== "none") {
+                        opts.context.addClass("btn_common__");
                         opts.context.addClass("btn_" + opts.size + "__");
                     }
 
