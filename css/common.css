@@ -7,10 +7,10 @@ html {
 }
 
 :lang(ko) {
-    font-family: 'NanumSquare', '맑은 고딕', 'Malgun Gothic', 'Apple SD 산돌고딕 Neo', 'Apple SD Gothic Neo', 'Microsoft NeoGothic', sans-serif;
+    font-family: 'NanumSquare', Roboto, '맑은 고딕', 'Malgun Gothic', 'Apple SD 산돌고딕 Neo', 'Apple SD Gothic Neo', 'Microsoft NeoGothic', sans-serif;
 }
 :lang(en) {
-    font-family: 'NanumSquare', 'Segoe UI', 'Microsoft NeoGothic', sans-serif;
+    font-family: Roboto, 'NanumSquare', 'Segoe UI', 'Microsoft NeoGothic', sans-serif;
 }
 
 body {
@@ -20,6 +20,12 @@ body {
     background-color: var(--md-sys-color-surface-container-lowest);
     font-size: 0.875rem;
     line-height: 1.7;
+}
+
+a, input, select, textarea {
+    color: inherit;
+    font-size: inherit;
+    font-family: inherit;
 }
 
 a {
@@ -33,7 +39,7 @@ a {
 img {
     max-width: 100%;
     display: block;
-       margin: 0 auto;
+   margin: 0 auto;
 }
 
 html [lang] {

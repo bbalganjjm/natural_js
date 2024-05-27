@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
     <title>Natural-JS : Javascript Front-End Architecture Framework</title>
     <meta charset="utf-8">
@@ -31,35 +31,31 @@
     <!-- script type="text/javascript" charset="utf-8" src="js/lib/xlsx.full.min.js"></script -->
 
     <script type="text/javascript" charset="utf-8" src="js/index.js"></script>
-    <!-- script type="text/javascript" charset="utf-8" src="js/common.pub.js"></script -->
     <script type="text/javascript" charset="utf-8" src="js/common.js"></script>
+    <!-- script type="text/javascript" charset="utf-8" src="js/common.pub.js"></script -->
 
-    <!-- script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <script type="importmap">
+    {
+      "imports": {
+        "@material/web/": "https://esm.run/@material/web/"
+      }
+    }
+  </script>
+    <script type="module">
+        import '@material/web/all.js';
+        import {styles as typescaleStyles} from '@material/web/typography/md-typescale-styles.js';
+
+        document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+    </script>
 
     <script type="text/javascript">
-        //APP.indx.webFont();
-
         $(document).ready(function () {
             APP.indx.init();
         });
     </script>
 
-<!--    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">-->
-<!--    <script type="importmap">-->
-<!--        {-->
-<!--          "imports": {-->
-<!--            "@material/web/": "https://esm.run/@material/web/"-->
-<!--          }-->
-<!--        }-->
-<!--    </script>-->
-<!--    <script type="module">-->
-<!--        import '@material/web/all.js';-->
-<!--        import {styles as typescaleStyles} from '@material/web/typography/md-typescale-styles.js';-->
-
-<!--        document.adoptedStyleSheets.push(typescaleStyles.styleSheet);-->
-<!--    </script>-->
-
-<!--    <script type="text/javascript" charset="utf-8" src="js/natural_js/natural.js.material.js"></script>-->
 </head>
 <body>
 <section class="page-wrap">

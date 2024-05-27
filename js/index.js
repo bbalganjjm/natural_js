@@ -85,7 +85,7 @@
         },
         setLocale : function() {
             N.locale(window.sessionStorage.locale !== undefined ? window.sessionStorage.locale : IndexController.getLocale().toLowerCase().indexOf("ko") > -1 ? "ko_KR" : "en_US");
-            N("html").attr("lang", N.locale().substring(0, 2));
+            // N("html").attr("lang", N.locale().substring(0, 2)); // 이게 있으면 md-icon 그림이 안나옴.
         },
         getLocale : function() {
             if(navigator) {

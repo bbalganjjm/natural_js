@@ -36,9 +36,9 @@
     <div class="flex-horizental">
         <h3 style="max-width: 50px;">N.grid</h3>
         <div class="btn-box">
-            <a id="btnSearch" href="#" class="btn-search">
-                <span lang="ko_KR">조회</span>
-                <span lang="en_US">Search</span>
+            <a id="btnSearch" href="#" class="btn-search" data-opts='{ "size": "none", "color": "none" }'>
+                <md-filled-button lang="ko_KR">조회</md-filled-button>
+                <md-filled-button lang="en_US">Search</md-filled-button>
             </a>
         </div>
     </div>
@@ -62,8 +62,14 @@
     </table>
 
     <div class="btn-box" style="text-align: center;">
-        <a id="btnOk" href="#">확인</a>
-        <a id="btnCancel" href="#">취소</a>
+        <a id="btnOk" href="#" data-opts='{ "size": "none", "color": "none" }'>
+            <md-filled-button lang="ko_KR">확인</md-filled-button>
+            <md-filled-button lang="en_US">OK</md-filled-button>
+        </a>
+        <a id="btnCancel" href="#" data-opts='{ "size": "none", "color": "none" }'>
+            <md-outlined-button lang="ko_KR">취소</md-outlined-button>
+            <md-outlined-button lang="en_US">Cancel</md-outlined-button>
+        </a>
     </div>
 
 </article>

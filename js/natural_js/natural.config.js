@@ -422,23 +422,21 @@
              *  - If it is not SPA(Single Page Application), please set it to "body".
              */
             "container" : ".docs__ > .docs_contents__.visible__",
-            "global" : {
-                /**
-                 * N.alert's OK button style
-                 *  - It is specified as an option of the Button(N.button) component.
-                 */
-                "okBtnStyle" : {
-                    color : "primary",
-                    size : "medium"
-                },
-                /**
-                 * N.alert's Cancel button style
-                 *  - It is specified as an option of the Button(N.button) component.
-                 */
-                "cancelBtnStyle" : {
-                    color : "primary_container",
-                    size : "medium"
-                }
+            /**
+             * N.alert's OK button style
+             *  - It is specified as an option of the Button(N.button) component.
+             */
+            "okButtonOpts" : {
+                color : "primary",
+                size : "medium"
+            },
+            /**
+             * N.alert's Cancel button style
+             *  - It is specified as an option of the Button(N.button) component.
+             */
+            "cancelButtonOpts" : {
+                color : "primary_container",
+                size : "medium"
             },
             /**
              * Global draggableOverflowCorrectionAddValues option
@@ -498,19 +496,7 @@
         "button" : {
             size: "medium",
             color: "primary_container",
-            type: "filled",
-            // onBeforeCreate: function (context, opts) {
-            //     context.css({
-            //         "position": "relative",
-            //         "margin": 0,
-            //         "padding": 0,
-            //         "height": 21
-            //     });
-            //     context.html('<md-ripple id="ripple"></md-ripple><button id="ripple-control">' + context.text() +'</button>');
-            // },
-            // onCreate: function (context, opts) {
-            //
-            // }
+            type: "filled"
         },
         "popup" : {
             /**

@@ -44,19 +44,18 @@
             </tbody>
         </table>
     </div>
-
     <div class="flex-horizental">
         <div style="max-width: 33%;">
             <div class="flex-horizental">
                 <h3 style="max-width: 50px;">N.grid</h3>
                 <div class="btn-box">
-                    <a id="btnSearch" href="#" class="btn-search">
-		                <span lang="ko_KR">조회</span>
-		                <span lang="en_US">Search</span>
+                    <a id="btnSearch" href="#" class="btn-search" data-opts='{ "size": "none", "color": "none" }'>
+                        <md-filled-button lang="ko_KR">조회</md-filled-button>
+                        <md-filled-button lang="en_US">Search</md-filled-button>
 		            </a>
-                    <a id="btnSave" href="#">
-		                <span lang="ko_KR">저장</span>
-		                <span lang="en_US">Save</span>
+                    <a id="btnSave" href="#" data-opts='{ "size": "none", "color": "none" }'>
+                        <md-filled-tonal-button lang="ko_KR">저장</md-filled-tonal-button>
+                        <md-filled-tonal-button lang="en_US">Save</md-filled-tonal-button>
 		            </a>
                 </div>
             </div>
@@ -87,17 +86,17 @@
             <div class="flex-horizental">
                 <h3>N.form</h3>
                 <div class="btn-box">
-                    <a id="btnAdd" href="#">
-	                    <span lang="ko_KR">추가</span>
-	                    <span lang="en_US">Add</span>
+                    <a id="btnAdd" href="#" data-opts='{ "size": "none", "color": "none" }'>
+                        <md-outlined-button lang="ko_KR">추가</md-outlined-button>
+                        <md-outlined-button lang="en_US">Add</md-outlined-button>
 	                </a>
-                    <a id="btnDelete" href="#">
-	                    <span lang="ko_KR">삭제</span>
-	                    <span lang="en_US">Delete</span>
+                    <a id="btnDelete" href="#" data-opts='{ "size": "none", "color": "none" }'>
+                        <md-outlined-button lang="ko_KR">삭제</md-outlined-button>
+                        <md-outlined-button lang="en_US">Delete</md-outlined-button>
 	                </a>
-                    <a id="btnRevert" href="#">
-	                    <span lang="ko_KR">초기화</span>
-	                    <span lang="en_US">Reset</span>
+                    <a id="btnRevert" href="#" data-opts='{ "size": "none", "color": "none" }'>
+                        <md-outlined-button lang="ko_KR">초기화</md-outlined-button>
+                        <md-outlined-button lang="en_US">Reset</md-outlined-button>
 	                </a>
                 </div>
             </div>
@@ -119,11 +118,14 @@
                     </tr>
                     <tr>
                         <th>Department</th>
-                        <td><input id="deptNm" type="text" data-validate='[["required"]]' style="width: 50%;" readonly="readonly"> <a id="btnDept" href="#"
-                            data-opts='{ "size" : "small" }'>
-				                <span lang="ko_KR">조회</span>
-				                <span lang="en_US">Find</span>
-				            </a></td>
+                        <td>
+                            <input id="deptNm" type="text" data-validate='[["required"]]' style="width: 50%;" readonly="readonly">
+                            <a id="btnDept" href="#" data-opts='{ "size": "none", "color": "none" }'>
+                                <md-icon-button>
+                                    <md-icon>manage_search</md-icon>
+                                </md-icon-button>
+                            </a>
+                        </a></td>
                     </tr>
                     <tr>
                         <th>Email</th>

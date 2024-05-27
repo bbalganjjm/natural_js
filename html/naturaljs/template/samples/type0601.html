@@ -9,7 +9,7 @@
     padding-top: 22px;
 }
 </style>
-<article class="type0601 view-code">
+<article class="type0601 view-code" lang="ko_KR">
     <div class="view-intro">
         <h1 lang="ko_KR">트리+그리드(CRUD)</h1>
         <h1 lang="en_US">Tree + Grid(CRUD)</h1>
@@ -26,13 +26,11 @@
             <div class="flex-horizental">
                 <h3 style="max-width: 55px">N.tree</h3>
                 <div class="btn-box">
-                    <a id="btnOpen" href="#" data-opts='{ "size" : "small" }'>
-		                <span lang="ko_KR">모두펼침</span>
-		                <span lang="en_US">Expand all</span>
-		            </a>
-		            <a id="btnClose" href="#" data-opts='{ "size" : "small" }'>
-		                <span lang="ko_KR">모두줄임</span>
-		                <span lang="en_US">Collapse all</span>
+                    <a id="expandCollapse" href="#" data-opts='{ "size": "none", "color": "none" }'>
+                        <md-filled-icon-button toggle>
+                            <md-icon>expand_all</md-icon>
+                            <md-icon slot="selected">collapse_all</md-icon>
+                        </md-filled-icon-button>
 		            </a>
                 </div>
             </div>
@@ -43,17 +41,17 @@
             <div class="flex-horizental">
                 <h3>N.grid</h3>
                 <div class="btn-box">
-                    <a id="btnAdd" href="#">
-		                <span lang="ko_KR">추가</span>
-		                <span lang="en_US">Add</span>
+                    <a id="btnAdd" href="#" data-opts='{ "size": "none", "color": "none" }'>
+                        <md-outlined-button lang="ko_KR">추가</md-outlined-button>
+                        <md-outlined-button lang="en_US">Add</md-outlined-button>
 		            </a>
-                    <a id="btnDelete" href="#">
-		                <span lang="ko_KR">삭제</span>
-		                <span lang="en_US">Delete</span>
+                    <a id="btnDelete" href="#" data-opts='{ "size": "none", "color": "none" }'>
+                        <md-outlined-button lang="ko_KR">삭제</md-outlined-button>
+                        <md-outlined-button lang="en_US">Delete</md-outlined-button>
 		            </a>
-                    <a id="btnSave" href="#">
-		                <span lang="ko_KR">저장</span>
-		                <span lang="en_US">Save</span>
+                    <a id="btnSave" href="#" data-opts='{ "size": "none", "color": "none" }'>
+                        <md-filled-tonal-button lang="ko_KR">저장</md-filled-tonal-button>
+                        <md-filled-tonal-button lang="en_US">Save</md-filled-tonal-button>
 		            </a>
                 </div>
             </div>
@@ -152,13 +150,16 @@
                 url : "sample/saveSample.json"
             });
         },
-        "e.btnOpen.click" : function(e) {
+        "e.expandCollapse.click" : function(e) {
             e.preventDefault();
-            cont["p.tree.master"].openAll();
-        },
-        "e.btnClose.click" : function(e) {
-            e.preventDefault();
-            cont["p.tree.master"].closeAll(true);
+            if (N(this).data("status") === "expand") {
+                cont["p.tree.master"].closeAll(true);
+                N(this).data("status", "collapse");
+            } else {
+                cont["p.tree.master"].openAll();
+                N(this).data("status", "expand");
+            }
+
         },
         "e.btnSave.click" : function(e) {
             e.preventDefault();
