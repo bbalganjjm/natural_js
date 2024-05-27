@@ -27,7 +27,7 @@
             <tbody>
                 <tr>
                     <th>Name</th>
-                    <td><input id="name" type="text"></td>
+                    <td><md-outlined-text-field id="name" label="Name" type="text"></md-outlined-text-field></td>
                     <th>Age</th>
                     <td><select id="age">
                         <option lang="ko_KR" value="">선택</option>
@@ -114,7 +114,10 @@
                         <td rowspan="7" style="text-align: center; vertical-align: middle;"><img
                             src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D" height="110"></td>
                         <th>Name</th>
-                        <td><input id="name" type="text" data-validate='[["required"]]'></td>
+                        <td>
+                            <md-outlined-text-field id="name" label="Name" type="text" required></md-outlined-text-field>
+<!--                            <input id="name" type="text" data-validate='[["required"]]'>-->
+                        </td>
                     </tr>
                     <tr>
                         <th>Department</th>
