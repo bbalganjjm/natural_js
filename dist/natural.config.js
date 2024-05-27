@@ -285,23 +285,21 @@
 			 *  - If it is not SPA(Single Page Application), please set it to "body".
 			 */
 			"container" : ".docs__ > .docs_contents__.visible__",
-			"global" : {
-				/**
-				 * N.alert's OK button style
-				 *  - It is specified as an option of the Button(N.button) component.
-				 */
-				"okBtnStyle" : {
-					color : "primary",
-					size : "medium"
-				},
-				/**
-				 * N.alert's Cancel button style
-				 *  - It is specified as an option of the Button(N.button) component.
-				 */
-				"cancelBtnStyle" : {
-					color : "primary_container",
-					size : "medium"
-				}
+			/**
+			 * N.alert's OK button style
+			 *  - It is specified as an option of the Button(N.button) component.
+			 */
+			"okButtonOpts" : {
+				color : "primary",
+				size : "medium"
+			},
+			/**
+			 * N.alert's Cancel button style
+			 *  - It is specified as an option of the Button(N.button) component.
+			 */
+			"cancelButtonOpts" : {
+				color : "primary_container",
+				size : "medium"
 			},
 			"input" : {
 				/**

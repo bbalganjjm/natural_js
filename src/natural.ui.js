@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.47.252
+ * Natural-UI v0.47.254
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2023 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-UI"] = "0.47.252";
+    N.version["Natural-UI"] = "0.47.254";
 
     $.fn.extend($.extend(N.prototype, {
         alert : function(msg, vars) {
@@ -453,6 +453,8 @@
                 isWindow : obj === window || obj.get(0) === window || obj.is("body"),
                 title : obj === window || obj.get(0) === window || obj.get(0) === window.document || obj.is("body") ? undefined : obj.attr("title"),
                 button : true,
+                okButtonOpts : null,
+                cancelButtonOpts : null,
                 closeMode : "remove", // closeMode : hide - keep element, remove - remove element
                 modal : true,
                 onOk : null,
@@ -512,6 +514,8 @@
                 UI.utils.wrapHandler(msg, "alert", "onHide");
                 UI.utils.wrapHandler(msg, "alert", "onBeforeRemove");
                 UI.utils.wrapHandler(msg, "alert", "onRemove");
+                UI.utils.wrapHandler(msg, "alert", "okButtonOpts");
+                UI.utils.wrapHandler(msg, "alert", "cancelButtonOpts");
 
                 $.extend(true, this.options, msg);
                 if(N.isString(this.options.container)) {
@@ -661,7 +665,7 @@
                 }
 
                 //set confirm button style and bind click event
-                opts.msgContents.find(".buttonBox__ .confirm__").button(opts.global.okBtnStyle);
+                opts.msgContents.find(".buttonBox__ .confirm__").button(opts.okButtonOpts);
                 opts.msgContents.find(".buttonBox__ .confirm__").on("click.alert", function(e) {
                     e.preventDefault();
                     if (opts.onOk !== null) {
@@ -692,7 +696,7 @@
 
                 // set cancel button style and bind click event
                 if(opts.confirm) {
-                    opts.msgContents.find(".buttonBox__ .cancel__").button(opts.global.cancelBtnStyle);
+                    opts.msgContents.find(".buttonBox__ .cancel__").button(opts.cancelButtonOpts);
                     opts.msgContents.find(".buttonBox__ .cancel__").on("click.alert", function(e) {
                         e.preventDefault();
                         if (opts.onCancel !== null) {
