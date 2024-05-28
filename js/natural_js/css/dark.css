@@ -67,3 +67,12 @@
   color-scheme: dark;
   filter: invert(100%);
 }
+
+.alert_tooltip__.msg__ .msg_close__ {
+  color-scheme: dark;
+  filter: invert(100%);
+}
+
+.alert_tooltip__.msg__ ul.msg_line_box__ li {
+  background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAtklEQVQoz5WRPQrCQBCF3zeFtaT2ABaewtoieAux9hSpQw4hiGAZLCy8gZ3XsBCRHQuzsFkV4jTLPub9DE/6c+h9oJS0ljTqoIek2t33n0yogMbMioiZWQE0QJUvl0D9M8abVKZAmyonDhPg2Dm1KeHUvXMzG8c4ks7ALN2xTPQZQjiY2TSEsAU27n75lrGNyp3iFVhkx/ciLYcebZLk7jtJd6COTolyLekWu8iLW0paDSpu6LwAYRMyIJxQ4NcAAAAASUVORK5CYII=') no-repeat 3px 2px !important;
+}
