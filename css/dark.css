@@ -50,3 +50,20 @@
   --md-sys-color-surface-container-high: rgb(39 43 37);
   --md-sys-color-surface-container-highest: rgb(50 54 47);
 }
+
+.pagination__ .pagination_lefter__ li.pagination_first__ {
+  color-scheme: dark;
+  filter: invert(100%);
+}
+.pagination__ .pagination_lefter__ li.pagination_prev__ {
+  color-scheme: dark;
+  filter: invert(100%);
+}
+.pagination__ .pagination_righter__ li.pagination_next__ {
+  color-scheme: dark;
+  filter: invert(100%);
+}
+.pagination__ .pagination_righter__ li.pagination_last__ {
+  color-scheme: dark;
+  filter: invert(100%);
+}
