@@ -396,7 +396,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 .list__.list_select__ > .list_selected__ input,
 .list__.list_select__ > .list_selected__ select,
 .list__.list_select__ > .list_selected__ textarea {
-    background-color: var(--md-sys-color-primary-container);
+    background-color: var(--md-sys-color-surface-container-low);
 }
 
 .list__ li.empty__ {
