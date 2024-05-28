@@ -6,10 +6,10 @@ html {
     overflow-y: scroll;
 }
 
-:lang(ko) {
+:lang(ko_KR) {
     font-family: 'NanumSquare', '맑은 고딕', 'Malgun Gothic', 'Apple SD 산돌고딕 Neo', 'Apple SD Gothic Neo', 'Microsoft NeoGothic', sans-serif;
 }
-:lang(en) {
+:lang(en_US) {
     font-family: 'NanumSquare', 'Segoe UI', 'Microsoft NeoGothic', sans-serif;
 }
 
@@ -121,11 +121,6 @@ th, td {
 .grid__ th, .grid__ td {
     padding: 0px 5px;
     line-height: 28px;
-}
-
-th.grid_head_fixed__,
-td.grid_body_fixed__ {
-    padding: 6px 3px;
 }
 
 th, tfoot td {
