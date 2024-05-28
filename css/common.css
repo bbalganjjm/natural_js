@@ -6,18 +6,12 @@ html {
     overflow-y: scroll;
 }
 
-:lang(ko_KR) {
-    font-family: 'NanumSquare', '맑은 고딕', 'Malgun Gothic', 'Apple SD 산돌고딕 Neo', 'Apple SD Gothic Neo', 'Microsoft NeoGothic', sans-serif;
-}
-:lang(en_US) {
-    font-family: 'NanumSquare', 'Segoe UI', 'Microsoft NeoGothic', sans-serif;
-}
-
 body {
     height: 100%;
     margin: 0;
     color: var(--md-sys-color-on-surface);
     background-color: var(--md-sys-color-surface-container-lowest);
+    font-family: 'NanumSquare', '맑은 고딕', 'Malgun Gothic', 'Apple SD 산돌고딕 Neo', 'Apple SD Gothic Neo', 'Microsoft NeoGothic', sans-serif;
     font-size: 0.875rem;
     line-height: 1.7;
 }
