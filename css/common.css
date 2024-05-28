@@ -203,7 +203,6 @@ th, tfoot td {
 }
 
 .main-nav:hover {
-    border-right: 1px solid var(--md-sys-color-outline-variant);
     box-shadow: 1px 0 3px var(--md-sys-color-shadow);
 }
 
