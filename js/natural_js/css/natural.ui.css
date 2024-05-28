@@ -3,6 +3,15 @@
 @import url(light.css) screen and (prefers-color-scheme: light);
 @import url(dark.css) screen and (prefers-color-scheme: dark);
 
+.docs__,
+.docs__ *,
+.view_context__,
+.view_context__ * {
+    box-sizing: border-box;
+    min-width: 0;
+    min-height: 0
+}
+
 /* Alert */
 .alert_overlay__.block_overlay__ {
     background-color: var(--md-sys-color-surface-container-highest) !important;
@@ -852,7 +861,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
     border: 1px solid var(--md-sys-color-outline-variant);
     background-color: var(--md-sys-color-surface-dim);
     color : var(--md-sys-color-on-secondary-container);
-    height: 24px;
+    height: 26px;
 }
 
 .tab__>.tab_scroll_prev__ span {
@@ -1470,7 +1479,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 
 .docs__>.docs_tab_context__ {
     position: relative;
-    height: 30.8px;
+    height: 30px;
     border-bottom: 1px solid var(--md-sys-color-outline-variant);
     z-index: 1;
 }
