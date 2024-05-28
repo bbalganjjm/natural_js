@@ -114,10 +114,16 @@
             </tr>
             <tr>
                 <td><input id="about" type="text"></td>
-                <td colspan="2"><input id="deptNm" type="text" data-validate='[["required"]]' style="width: 75%;" readonly="readonly"> <a id="btnDept" href="#" data-opts='{ "size" : "small" }'>
-                    <span lang="ko_KR">조회</span>
-                    <span lang="en_US">Find</span>
-                </a></td>
+                <td colspan="2">
+                    <div style="display: flex;">
+                        <input id="deptNm" type="text" data-validate='[["required"]]' style="margin-right: 5px;" readonly="readonly">
+                        <a id="btnDept" href="#" data-opts='{ "size": "none", "color": "none" }' style="display: inline-block; height: 24px;">
+                            <md-icon-button>
+                                <md-icon>manage_search</md-icon>
+                            </md-icon-button>
+                        </a>
+                    </div>
+                </td>
                 <td colspan="2"><input id="greeting" type="text"></td>
             </tr>
         </tbody>

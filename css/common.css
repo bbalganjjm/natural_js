@@ -7,10 +7,10 @@ html {
 }
 
 :lang(ko) {
-    font-family: 'NanumSquare', Roboto, '맑은 고딕', 'Malgun Gothic', 'Apple SD 산돌고딕 Neo', 'Apple SD Gothic Neo', 'Microsoft NeoGothic', sans-serif;
+    font-family: 'NanumSquare', '맑은 고딕', 'Malgun Gothic', 'Apple SD 산돌고딕 Neo', 'Apple SD Gothic Neo', 'Microsoft NeoGothic', sans-serif;
 }
 :lang(en) {
-    font-family: Roboto, 'NanumSquare', 'Segoe UI', 'Microsoft NeoGothic', sans-serif;
+    font-family: 'NanumSquare', 'Segoe UI', 'Microsoft NeoGothic', sans-serif;
 }
 
 body {
@@ -26,6 +26,7 @@ a, input, select, textarea {
     color: inherit;
     font-size: inherit;
     font-family: inherit;
+    line-height: inherit;
 }
 
 a {
@@ -118,9 +119,8 @@ th, td {
 
 .form__ th, .form__ td,
 .grid__ th, .grid__ td {
-    padding: 2px 3px;
-    line-height: 16px;
-    height: 24px;
+    padding: 0px 5px;
+    line-height: 28px;
 }
 
 th.grid_head_fixed__,
@@ -157,10 +157,10 @@ th, tfoot td {
 
 .list__>li {
     margin: 0;
-    padding: 2px 3px;
+    padding: 0px 5px;
+    line-height: 28px;
     border-left: none;
     border-right: none;
-    line-height: 18px;
     border-top: 1px solid var(--md-sys-color-outline-variant);
 }
 
@@ -544,9 +544,8 @@ article .btnBox {
 
 .docs_contents__ .view_context__ .click {
     margin-top: 30px;
-    padding: 5px 40px 5px 15px;
+    padding: 10px 45px 6px 15px;
     display: inline-block;
-    height: 35px;
     font-weight: 700;
     border: 1px dotted var(--md-sys-color-outline-variant);
     border-radius: 3px;
@@ -1084,3 +1083,74 @@ textarea:hover::-webkit-scrollbar-thumb,
 select:hover::-webkit-scrollbar-thumb{
     background-color: var(--md-sys-color-surface-container-highest);
 }
+
+:root {
+    --md-outlined-button-container-height: 26px;
+    --md-outlined-button-label-text-size: 13px;
+    --md-outlined-button-label-text-line-height: 24px;
+    --md-outlined-button-leading-space: 1px;
+    --md-outlined-button-trailing-space: 1px;
+    --md-outlined-button-container-shape-start-start: 5px;
+    --md-outlined-button-container-shape-start-end: 5px;
+    --md-outlined-button-container-shape-end-end: 5px;
+    --md-outlined-button-container-shape-end-start: 5px;
+    --md-outlined-button-label-text-font: 'NanumSquare', '맑은 고딕', 'Malgun Gothic', 'Apple SD 산돌고딕 Neo', 'Apple SD Gothic Neo', 'Microsoft NeoGothic', sans-serif;
+    --md-outlined-button-label-text-weight: normal;
+
+    --md-filled-button-container-height: 26px;
+    --md-filled-button-label-text-size: 13px;
+    --md-filled-button-label-text-line-height: 24px;
+    --md-filled-button-leading-space: 1px;
+    --md-filled-button-trailing-space: 1px;
+    --md-filled-button-container-shape-start-start: 5px;
+    --md-filled-button-container-shape-start-end: 5px;
+    --md-filled-button-container-shape-end-end: 5px;
+    --md-filled-button-container-shape-end-start: 5px;
+    --md-filled-button-label-text-font: 'NanumSquare', '맑은 고딕', 'Malgun Gothic', 'Apple SD 산돌고딕 Neo', 'Apple SD Gothic Neo', 'Microsoft NeoGothic', sans-serif;
+    --md-filled-button-label-text-weight: normal;
+
+    --md-filled-tonal-button-container-height: 26px;
+    --md-filled-tonal-button-label-text-size: 13px;
+    --md-filled-tonal-button-label-text-line-height: 24px;
+    --md-filled-tonal-button-leading-space: 1px;
+    --md-filled-tonal-button-trailing-space: 1px;
+    --md-filled-tonal-button-container-shape-start-start: 5px;
+    --md-filled-tonal-button-container-shape-start-end: 5px;
+    --md-filled-tonal-button-container-shape-end-end: 5px;
+    --md-filled-tonal-button-container-shape-end-start: 5px;
+    --md-filled-tonal-button-label-text-font: 'NanumSquare', '맑은 고딕', 'Malgun Gothic', 'Apple SD 산돌고딕 Neo', 'Apple SD Gothic Neo', 'Microsoft NeoGothic', sans-serif;
+    --md-filled-tonal-button-label-text-weight: normal;
+
+    --md-text-button-container-height: 26px;
+    --md-text-button-label-text-size: 13px;
+    --md-text-button-label-text-line-height: 24px;
+    --md-text-button-leading-space: 1px;
+    --md-text-button-trailing-space: 1px;
+    --md-text-button-container-shape-start-start: 5px;
+    --md-text-button-container-shape-start-end: 5px;
+    --md-text-button-container-shape-end-end: 5px;
+    --md-text-button-container-shape-end-start: 5px;
+    --md-text-button-label-text-font: 'NanumSquare', '맑은 고딕', 'Malgun Gothic', 'Apple SD 산돌고딕 Neo', 'Apple SD Gothic Neo', 'Microsoft NeoGothic', sans-serif;
+    --md-text-button-label-text-weight: normal;
+
+    --md-elevated-button-container-height: 26px;
+    --md-elevated-button-label-text-size: 13px;
+    --md-elevated-button-label-text-line-height: 24px;
+    --md-elevated-button-leading-space: 1px;
+    --md-elevated-button-trailing-space: 1px;
+    --md-elevated-button-container-shape-start-start: 5px;
+    --md-elevated-button-container-shape-start-end: 5px;
+    --md-elevated-button-container-shape-end-end: 5px;
+    --md-elevated-button-container-shape-end-start: 5px;
+    --md-elevated-button-label-text-font: 'NanumSquare', '맑은 고딕', 'Malgun Gothic', 'Apple SD 산돌고딕 Neo', 'Apple SD Gothic Neo', 'Microsoft NeoGothic', sans-serif;
+    --md-elevated-button-label-text-weight: normal;
+
+    --md-icon-button-state-layer-height: 24px;
+    --md-icon-button-state-layer-width: 24px;
+    --md-icon-button-state-layer-shape: 3px;
+    --md-icon-button-container-width: 22px;
+    --md-icon-button-container-height: 22px;
+    --md-icon-button-icon-size: 22px;
+    --md-icon-button-container-shape: 0;
+}
+

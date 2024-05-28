@@ -125,10 +125,16 @@
                 </tr>
                 <tr>
                     <th>Department</th>
-                    <td><input id="deptNm" type="text" data-validate='[["required"]]' style="width: 50%;" readonly="readonly"> <a id="btnDept" href="#" data-opts='{ "size" : "small" }'>
-		                <span lang="ko_KR">조회</span>
-		                <span lang="en_US">Find</span>
-		            </a></td>
+                    <td>
+                        <div style="display: flex;">
+                            <input id="deptNm" type="text" data-validate='[["required"]]' style="margin-right: 5px;" readonly="readonly">
+                            <a id="btnDept" href="#" data-opts='{ "size": "none", "color": "none" }' style="display: inline-block; height: 24px;">
+                                <md-icon-button>
+                                    <md-icon>manage_search</md-icon>
+                                </md-icon-button>
+                            </a>
+                        </div>
+                    </td>
                 </tr>
                 <tr>
                     <th>Email</th>

@@ -27,7 +27,7 @@
             <tbody>
                 <tr>
                     <th>Name</th>
-                    <td><md-outlined-text-field id="name" label="Name" type="text"></md-outlined-text-field></td>
+                    <td><input id="name" type="text"></td>
                     <th>Age</th>
                     <td><select id="age">
                         <option lang="ko_KR" value="">선택</option>
@@ -114,21 +114,20 @@
                         <td rowspan="7" style="text-align: center; vertical-align: middle;"><img
                             src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D" height="110"></td>
                         <th>Name</th>
-                        <td>
-                            <md-outlined-text-field id="name" label="Name" type="text" required></md-outlined-text-field>
-<!--                            <input id="name" type="text" data-validate='[["required"]]'>-->
-                        </td>
+                        <td><input id="name" type="text" data-validate='[["required"]]'></td>
                     </tr>
                     <tr>
                         <th>Department</th>
                         <td>
-                            <input id="deptNm" type="text" data-validate='[["required"]]' style="width: 50%;" readonly="readonly">
-                            <a id="btnDept" href="#" data-opts='{ "size": "none", "color": "none" }'>
-                                <md-icon-button>
-                                    <md-icon>manage_search</md-icon>
-                                </md-icon-button>
-                            </a>
-                        </a></td>
+                            <div style="display: flex;">
+                                <input id="deptNm" type="text" data-validate='[["required"]]' style="margin-right: 5px;" readonly="readonly">
+                                <a id="btnDept" href="#" data-opts='{ "size": "none", "color": "none" }' style="display: inline-block; height: 24px;">
+                                    <md-icon-button>
+                                        <md-icon>manage_search</md-icon>
+                                    </md-icon-button>
+                                </a>
+                            </div>
+                        </td>
                     </tr>
                     <tr>
                         <th>Email</th>
@@ -219,7 +218,7 @@
             autoUnbind : true
         },
         "p.grid.master" : {
-            height : 442,
+            height : 433,
             select : true,
             selectScroll : false,
             onSelect : function(index, rowEle, data, beforeRow, e) {
