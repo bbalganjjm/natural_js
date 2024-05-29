@@ -10,8 +10,8 @@
         <span lang="en_US">Examples</span>
     </h1>
 
-    <h2 lang="ko_KR">⊙ 예제 데이터</h2>
-    <h2 lang="en_US">⊙Example data</h2>
+    <h3 lang="ko_KR">⊙ 예제 데이터</h3>
+    <h3 lang="en_US">⊙Example data</h3>
     <pre><code>
 var data = [{
         "key" : "blue",
@@ -38,8 +38,8 @@ N.context.attr("ui", {
 <p lang="ko_KR" class="alert">다음 예제들은 <a href="#html/naturaljs/refr/refr0102.html">Config(natural.config.js)</a>에 다음과 같이 설정되어 있다는 가정하에 구동되는 예제입니다. 그렇지 않다면 컴포넌트 초기화 시 key, val 옵션을 설정해야 합니다.</p>
 <p lang="en_US" class="alert">The following examples are based on the assumption that <a href="#html/naturaljs/refr/refr0102.html">Config(natural.config.js)</a> is configured as follows. Otherwise, you must set the key and val options when initializing the component.</p>
 
-<h2 lang="ko_KR" class="notIndex">1. select 요소에 데이터 바인딩하기.</h2>
-<h2 lang="en_US" class="notIndex">1. Binding data to the select element.</h2>
+<h3 lang="ko_KR" class="notIndex">1. select 요소에 데이터 바인딩하기.</h3>
+<h3 lang="en_US" class="notIndex">1. Binding data to the select element.</h3>
 <p lang="ko_KR" class="alert">1 ~ 4 예제는 context 요소는 다르지만 컴포넌트 초기화 방법은 동일합니다.</p>
 <p lang="en_US" class="alert">In the example 1-4, the context element is different, but the component initialization method is the same.</p>
     <pre><code>&lt;select class="eyeColor"&gt;
@@ -58,8 +58,8 @@ N.context.attr("ui", {
     N(data).select(".eyeColor").bind().<strong>val</strong>("brown");
 &lt;/script&gt;</code></pre>
 
-<h2 lang="ko_KR" class="notIndex">2. select[multiple=multiple] 요소에 데이터 바인딩하기.</h2>
-<h2 lang="en_US" class="notIndex">2. Binding data to the select[multiple=multiple] element.</h2>
+<h3 lang="ko_KR" class="notIndex">2. select[multiple=multiple] 요소에 데이터 바인딩하기.</h3>
+<h3 lang="en_US" class="notIndex">2. Binding data to the select[multiple=multiple] element.</h3>
     <pre><code>&lt;select class="eyeColor" multiple="multiple"&gt;&lt;/select&gt;
 &lt;script type="text/javascript"&gt;
     N(data).select(".eyeColor").bind();
@@ -72,8 +72,8 @@ N.context.attr("ui", {
     N(data).select(".eyeColor").bind().<strong>val</strong>(["brown", "green"]);
 &lt;/script&gt;</code></pre>
 
-<h2 lang="ko_KR" class="notIndex">3. input[type=radio] 요소에 데이터 바인딩하기.</h2>
-<h2 lang="en_US" class="notIndex">3. Bind data to the input[type=radio] element.</h2>
+<h3 lang="ko_KR" class="notIndex">3. input[type=radio] 요소에 데이터 바인딩하기.</h3>
+<h3 lang="en_US" class="notIndex">3. Bind data to the input[type=radio] element.</h3>
     <pre><code>&lt;input class="eyeColor" type="radio"&gt;
 &lt;script type="text/javascript"&gt;
     N(data).select(".eyeColor").bind();
@@ -86,8 +86,8 @@ N.context.attr("ui", {
     N(data).select(".eyeColor").bind().<strong>val</strong>("brown");
 &lt;/script&gt;</code></pre>
 
-<h2 lang="ko_KR" class="notIndex">4. input[type=checkbox] 요소에 데이터 바인딩하기.</h2>
-<h2 lang="en_US" class="notIndex">4. Bind data to the input[type=checkbox] element.</h2>
+<h3 lang="ko_KR" class="notIndex">4. input[type=checkbox] 요소에 데이터 바인딩하기.</h3>
+<h3 lang="en_US" class="notIndex">4. Bind data to the input[type=checkbox] element.</h3>
     <pre><code>&lt;input class="eyeColor" type="checkbox"&gt;
 &lt;script type="text/javascript"&gt;
     N(data).select(".eyeColor").bind();

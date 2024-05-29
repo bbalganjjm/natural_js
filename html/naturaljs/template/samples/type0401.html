@@ -11,7 +11,7 @@
         </ul>
     </div>
 
-    <h2>N.form</h2>
+    <h3>N.form</h3>
     <div id="search" class="form__">
         <table>
             <colgroup>
@@ -47,7 +47,7 @@
     <div class="flex-horizental">
         <div style="max-width: 33%;">
             <div class="flex-horizental">
-                <h2 style="max-width: 50px;">N.grid</h2>
+                <h3 style="max-width: 50px;">N.grid</h3>
                 <div class="btn-box">
                     <a id="btnSearch" href="#" class="btn-search" data-opts='{ "size": "none", "color": "none" }'>
                         <md-filled-button lang="ko_KR">조회</md-filled-button>
@@ -84,7 +84,7 @@
 
         <div>
             <div class="flex-horizental">
-                <h2>N.form</h2>
+                <h3>N.form</h3>
                 <div class="btn-box">
                     <a id="btnAdd" href="#" data-opts='{ "size": "none", "color": "none" }'>
                         <md-outlined-button lang="ko_KR">추가</md-outlined-button>
@@ -328,7 +328,7 @@
         init : function(view, request) {
 			// cont.opener는 탭이 포함된 부모페이지의 Controller object.
             if(cont.opener) {
-                cont["p.form.search"].context().hide().prev("h2").hide().prev(".view-intro").hide();
+                cont["p.form.search"].context().hide().prev("h3").hide().prev(".view-intro").hide();
                 view.find("#btnSearch").hide();
 				// 부모 페이지 컨트롤러의 검색 버튼 클릭
                 cont.opener["e.btnSearch.click"].trigger("click");

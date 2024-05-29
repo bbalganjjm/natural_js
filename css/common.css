@@ -10,11 +10,11 @@ body {
     height: 100%;
     margin: 0;
     background-color: var(--md-sys-color-surface-container-lowest);
-    font-family: var(--njs-font-family);
+    font-family: var(--njs-font-family-base);
     color: var(--md-sys-color-on-surface);
-    font-size: var(--njs-font-m-size);
-    font-weight: var(--njs-font-m-weight);
-    line-height: var(--njs-font-m-line-height);
+    font-size: var(--njs-font-size-m);
+    font-weight: var(--njs-font-weight-m);
+    line-height: var(--njs-line-height-m);
 }
 
 a, input, select, textarea {
@@ -187,7 +187,7 @@ th, tfoot td {
     background-color: var(--md-sys-color-surface-container-high);
     min-height: 100%;
 
-    border-radius: var(--njs-border-radius-none) var(--njs-border-radius-medium) var(--njs-border-radius-medium) var(--njs-border-radius-none);
+    border-radius: var(--njs-border-radius-none) var(--njs-border-radius-m) var(--njs-border-radius-m) var(--njs-border-radius-none);
 
     z-index: 2;
 }
@@ -302,7 +302,7 @@ th, tfoot td {
 .alert:not(article) {
     padding: 5px 5px 5px 30px;
     background: var(--md-sys-color-surface-container) url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAkElEQVQoz5WQQQrCUAxE3/z/FXqDegnPUC8k9AIFV17LjZfpBVzUn7ipIDZiGxgCk2EyiQwubKgEDBv0Awb+zRp0Bl3Ae/nhdJr7LYq0rcJIUmtSG2njDe497n00koELdgCC5+xUFPnAhEGd4TXnvcH1g1ugJMjvfKr1DoxIh+Q+/jv+YXCemmbd50w6rtG9ANZ+P7VXtHZhAAAAAElFTkSuQmCC') no-repeat 10px 10px;
-    border-radius: var(--njs-border-radius-medium);
+    border-radius: var(--njs-border-radius-m);
 }
 
 .alert:not(article):last-child {
@@ -313,12 +313,8 @@ th, tfoot td {
     margin: 0;
 }
 
-article ul.contents {
-    margin: 0 0 15px 0;
-}
-
 article p {
-    margin: 0 0 10px 0;
+    margin: 10px 0 0 0;
 }
 
 article p:last-child {
@@ -398,7 +394,7 @@ article .btnBox {
 
 .apiDoc .apidemo>article .result {
     border: 1px solid var(--md-sys-color-outline-variant);
-    border-radius: var(--njs-border-radius-medium);
+    border-radius: var(--njs-border-radius-m);
     padding: 10px;
     margin: 0 0 15px 0;
     text-align: left;
@@ -423,9 +419,9 @@ article .btnBox {
     background-color: var(--md-sys-color-surface-container-low);
     z-index: 1;
     opacity: 0;
-    font-size: var(--njs-font-s-plus-size);
-    font-weight: var(--njs-font-s-plus-weight);
-    line-height: var(--njs-font-s-plus-line-height);
+    font-size: var(--njs-font-size-s-plus);
+    font-weight: var(--njs-font-weight-s-plus);
+    line-height: var(--njs-line-height-s-plus);
     transform : scaleY(0);
     transform-origin: top;
     transition: transform 0.5s ease, opacity 0.5s ease;
@@ -449,7 +445,7 @@ article .btnBox {
 /* Examples */
 .docs_contents__>.view_context__ .searchBox {
     background-color: var(--md-sys-color-surface-container-low);
-    border-radius: var(--njs-border-radius-medium);
+    border-radius: var(--njs-border-radius-m);
     margin-bottom: 10px;
 }
 
@@ -523,14 +519,14 @@ article .btnBox {
     padding: 10px 45px 10px 10px;
     display: inline-block;
     border: 1px dotted var(--md-sys-color-outline-variant);
-    border-radius: var(--njs-border-radius-medium);
+    border-radius: var(--njs-border-radius-m);
     box-shadow: 1px 1px 3px var(--md-sys-color-shadow);
     color : var(--md-sys-color-on-secondary-container);
     background: var(--md-sys-color-secondary-container) url("../images/comm/icon/click.png") no-repeat 140px 4px;
     cursor: pointer;
-    font-size: var(--njs-font-m-plus-size);
-    font-weight: var(--njs-font-m-plus-weight);
-    line-height: var(--njs-font-m-plus-line-height);
+    font-size: var(--njs-font-size-m-plus);
+    font-weight: var(--njs-font-weight-m-plus);
+    line-height: var(--njs-line-height-m-plus);
 }
 
 .docs_contents__>.view_context__ h1 .octicon-link,
@@ -563,24 +559,24 @@ article .btnBox {
 }
 
 .docs_contents__>.view_context__ h1 {
-    font-size: var(--njs-font-xl-size);
-    font-weight: var(--njs-font-xl-weight);
-    line-height: var(--njs-font-xl-line-height);
+    font-size: var(--njs-font-size-xl);
+    font-weight: var(--njs-font-weight-xl);
+    line-height: var(--njs-line-height-xl);
     border-bottom: 1px solid var(--md-sys-color-outline-variant);
     margin: .67em 0;
     padding-bottom: .3em;
 }
 
 .docs_contents__>.view_context__ h2 {
-    font-size: var(--njs-font-l-size);
-    font-weight: var(--njs-font-l-weight);
-    line-height: var(--njs-font-l-line-height);
+    font-size: var(--njs-font-size-l);
+    font-weight: var(--njs-font-weight-l);
+    line-height: var(--njs-line-height-l);
 }
 
 .docs_contents__>.view_context__ h3 {
-    font-size: var(--njs-font-m-plus-size);
-    font-weight: var(--njs-font-m-plus-weight);
-    line-height: var(--njs-font-m-plus-line-height);
+    font-size: var(--njs-font-size-m-plus);
+    font-weight: var(--njs-font-weight-m-plus);
+    line-height: var(--njs-line-height-m-plus);
 }
 
 .docs_contents__ .view_context__>*:first-child,
@@ -594,25 +590,26 @@ article .btnBox {
 
 .docs_contents__ .view_context__ pre,
 pre.shell {
-    margin: 5px 0;
-    padding: 16px;
+    margin: 10px 0 0 0;
+    padding: 10px;
     overflow: auto;
-    color: var(--md-sys-color-on-surface);
     background-color: var(--md-sys-color-surface-container-low);
-    border-radius: var(--njs-border-radius-medium);
-    line-height: 1.65;
+    border-radius: var(--njs-border-radius-m);
     word-wrap: normal;
+    color: var(--md-sys-color-on-surface);
 }
 
 .docs_contents__ .view_context__ pre>code,
 pre.shell>code {
-    font-family: Consolas, "NanumSquare", monospace;
+    font-family: var(--njs-font-family-code);
     display: inline;
     word-break: normal;
     word-wrap: normal;
     white-space: pre;
     overflow: visible;
-    font-size: var(--njs-font-s-plus-size);
+    font-size: var(--njs-font-size-s);
+    font-weight: var(--njs-font-weight-s);
+    line-height: var(--njs-line-height-s);
 }
 
 /* Mobile */
@@ -659,16 +656,15 @@ pre.shell>code {
         text-shadow: none;
         color: var(--md-sys-color-on-surface);
         text-align: left !important;
-        font-size: 0.9rem;
     }
 
     .apiDoc .api.form tr>td:first-child {
-        font-size: 1.1rem;
         border: none;
-        padding: 0 10px;
-        line-height: 3;
+        padding: 10px;
         color: var(--md-sys-color-surface-tint);
-        font-weight: 700;
+        font-size: var(--njs-font-size-l);
+        font-weight: var(--njs-font-weight-l);
+        line-height: var(--njs-line-height-l);
     }
 
     .apiDoc .api.form tr>td:last-child {
@@ -680,51 +676,35 @@ pre.shell>code {
     }
     #constructor .apiDoc .api.form td:nth-child(2):before {
         content: 'arguments';
-        font-weight: 700;
-        color: var(--md-sys-color-surface-tint);
     }
     #constructor .apiDoc .api.form td:nth-child(3):before {
         content: 'type : ';
-        font-weight: 700;
-        color: var(--md-sys-color-surface-tint);
     }
     #constructor .apiDoc .api.form td:nth-child(4):before {
         content: 'return : ';
-        font-weight: 700;
-        color: var(--md-sys-color-surface-tint);
     }
 
     #advisors .apiDoc .api.form td:nth-child(2):before,
     #pointcuts .apiDoc .api.form td:nth-child(2):before,
     #defaultoptions .apiDoc .api.form td:nth-child(2):before {
         content: 'type : ';
-        font-weight: 700;
-        color: var(--md-sys-color-surface-tint);
     }
     #advisors .apiDoc .api.form td:nth-child(3):before,
     #pointcuts .apiDoc .api.form td:nth-child(3):before,
     #defaultoptions .apiDoc .api.form td:nth-child(3):before {
         content: 'default : ';
-        font-weight: 700;
-        color: var(--md-sys-color-surface-tint);
     }
     #advisors .apiDoc .api.form td:nth-child(4):before,
     #pointcuts .apiDoc .api.form td:nth-child(4):before,
     #defaultoptions .apiDoc .api.form td:nth-child(4):before {
         content: 'required : ';
-        font-weight: 700;
-        color: var(--md-sys-color-surface-tint);
     }
 
     #declarativeoptions .apiDoc .api.form td:nth-child(2):before {
         content: 'type : ';
-        font-weight: 700;
-        color: var(--md-sys-color-surface-tint);
     }
     #declarativeoptions .apiDoc .api.form td:nth-child(3):before {
         content: 'default : ';
-        font-weight: 700;
-        color: var(--md-sys-color-surface-tint);
     }
 
     #pluginExtention .apiDoc .api.form tr>td:first-child,
@@ -758,8 +738,6 @@ pre.shell>code {
     #methods .apiDoc .api.form td:nth-child(2):before,
     #utilities .apiDoc .api.form td:nth-child(2):before {
         content: 'arguments';
-        font-weight: 700;
-        color: var(--md-sys-color-surface-tint);
     }
     #pluginExtention .apiDoc .api.form td:nth-child(3):before,
     #n .apiDoc .api.form td:nth-child(3):before,
@@ -776,8 +754,6 @@ pre.shell>code {
     #methods .apiDoc .api.form td:nth-child(3):before,
     #utilities .apiDoc .api.form td:nth-child(3):before {
         content: 'type : ';
-        font-weight: 700;
-        color: var(--md-sys-color-surface-tint);
     }
     #pluginExtention .apiDoc .api.form td:nth-child(4):before,
     #n .apiDoc .api.form td:nth-child(4):before,
@@ -794,8 +770,6 @@ pre.shell>code {
     #methods .apiDoc .api.form td:nth-child(4):before,
     #utilities .apiDoc .api.form td:nth-child(4):before {
         content: 'return : ';
-        font-weight: 700;
-        color: var(--md-sys-color-surface-tint);
     }
 
     #conf_core .apiDoc .api.form td:nth-child(2):before,
@@ -806,8 +780,6 @@ pre.shell>code {
     #conf_template .apiDoc .api.form td:nth-child(2):before,
     #conf_code .apiDoc .api.form td:nth-child(2):before {
         content: 'default : ';
-        font-weight: 700;
-        color: var(--md-sys-color-surface-tint);
     }
     #conf_core .apiDoc .api.form td:nth-child(3):before,
     #conf_architecture .apiDoc .api.form td:nth-child(3):before,
@@ -817,8 +789,6 @@ pre.shell>code {
     #conf_template .apiDoc .api.form td:nth-child(3):before,
     #conf_code .apiDoc .api.form td:nth-child(3):before {
         content: 'required : ';
-        font-weight: 700;
-        color: var(--md-sys-color-surface-tint);
     }
 
     .apiDoc .apidemo .form .demo-desc {
@@ -851,9 +821,8 @@ pre.shell>code {
     padding: 5px 10px;
     box-sizing: border-box;
     text-shadow: none;
-    color: var(--md-sys-color-on-surface);
     text-align: left !important;
-    font-size: 0.9rem;
+    color: var(--md-sys-color-on-surface);
 }
 
 .apiDoc.api-view-list-type .api.form td p[lang] {
@@ -864,12 +833,12 @@ pre.shell>code {
 }
 
 .apiDoc.api-view-list-type .api.form tr>td:first-child {
-    font-size: 1.1rem;
     border: none;
-    padding: 0 10px;
-    line-height: 3;
+    padding: 10px;
     color: var(--md-sys-color-surface-tint);
-    font-weight: 700;
+    font-size: var(--njs-font-size-l);
+    font-weight: var(--njs-font-weight-l);
+    line-height: var(--njs-line-height-l);
 }
 
 .apiDoc.api-view-list-type .api.form tr>td:last-child {
@@ -881,17 +850,14 @@ pre.shell>code {
 }
 #constructor .apiDoc.api-view-list-type .api.form td:nth-child(2):before {
     content: 'arguments';
-    font-weight: 700;
     color: var(--md-sys-color-surface-tint);
 }
 #constructor .apiDoc.api-view-list-type .api.form td:nth-child(3):before {
     content: 'type : ';
-    font-weight: 700;
     color: var(--md-sys-color-surface-tint);
 }
 #constructor .apiDoc.api-view-list-type .api.form td:nth-child(4):before {
     content: 'return : ';
-    font-weight: 700;
     color: var(--md-sys-color-surface-tint);
 }
 
@@ -899,33 +865,23 @@ pre.shell>code {
 #pointcuts .apiDoc.api-view-list-type .api.form td:nth-child(2):before,
 #defaultoptions .apiDoc.api-view-list-type .api.form td:nth-child(2):before {
     content: 'type : ';
-    font-weight: 700;
-    color: var(--md-sys-color-surface-tint);
 }
 #advisors .apiDoc.api-view-list-type .api.form td:nth-child(3):before,
 #pointcuts .apiDoc.api-view-list-type .api.form td:nth-child(3):before,
 #defaultoptions .apiDoc.api-view-list-type .api.form td:nth-child(3):before {
     content: 'default : ';
-    font-weight: 700;
-    color: var(--md-sys-color-surface-tint);
 }
 #advisors .apiDoc.api-view-list-type .api.form td:nth-child(4):before,
 #pointcuts .apiDoc.api-view-list-type .api.form td:nth-child(4):before,
 #defaultoptions .apiDoc.api-view-list-type .api.form td:nth-child(4):before {
     content: 'required : ';
-    font-weight: 700;
-    color: var(--md-sys-color-surface-tint);
 }
 
 #declarativeoptions .apiDoc.api-view-list-type .api.form td:nth-child(2):before {
     content: 'type : ';
-    font-weight: 700;
-    color: var(--md-sys-color-surface-tint);
 }
 #declarativeoptions .apiDoc.api-view-list-type .api.form td:nth-child(3):before {
     content: 'default : ';
-    font-weight: 700;
-    color: var(--md-sys-color-surface-tint);
 }
 
 #pluginExtention .apiDoc.api-view-list-type .api.form tr>td:first-child,
@@ -959,8 +915,6 @@ pre.shell>code {
 #methods .apiDoc.api-view-list-type .api.form td:nth-child(2):before,
 #utilities .apiDoc.api-view-list-type .api.form td:nth-child(2):before {
     content: 'arguments';
-    font-weight: 700;
-    color: var(--md-sys-color-surface-tint);
 }
 #pluginExtention .apiDoc.api-view-list-type .api.form td:nth-child(3):before,
 #n .apiDoc.api-view-list-type .api.form td:nth-child(3):before,
@@ -977,8 +931,6 @@ pre.shell>code {
 #methods .apiDoc.api-view-list-type .api.form td:nth-child(3):before,
 #utilities .apiDoc.api-view-list-type .api.form td:nth-child(3):before {
     content: 'type : ';
-    font-weight: 700;
-    color: var(--md-sys-color-surface-tint);
 }
 #pluginExtention .apiDoc.api-view-list-type .api.form td:nth-child(4):before,
 #n .apiDoc.api-view-list-type .api.form td:nth-child(4):before,
@@ -995,8 +947,6 @@ pre.shell>code {
 #methods .apiDoc.api-view-list-type .api.form td:nth-child(4):before,
 #utilities .apiDoc.api-view-list-type .api.form td:nth-child(4):before {
     content: 'return : ';
-    font-weight: 700;
-    color: var(--md-sys-color-surface-tint);
 }
 
 #conf_core .apiDoc.api-view-list-type .api.form td:nth-child(2):before,
@@ -1007,8 +957,6 @@ pre.shell>code {
 #conf_template .apiDoc.api-view-list-type .api.form td:nth-child(2):before,
 #conf_code .apiDoc.api-view-list-type .api.form td:nth-child(2):before {
     content: 'default : ';
-    font-weight: 700;
-    color: var(--md-sys-color-surface-tint);
 }
 #conf_core .apiDoc.api-view-list-type .api.form td:nth-child(3):before,
 #conf_architecture .apiDoc.api-view-list-type .api.form td:nth-child(3):before,
@@ -1018,8 +966,6 @@ pre.shell>code {
 #conf_template .apiDoc.api-view-list-type .api.form td:nth-child(3):before,
 #conf_code .apiDoc.api-view-list-type .api.form td:nth-child(3):before {
     content: 'required : ';
-    font-weight: 700;
-    color: var(--md-sys-color-surface-tint);
 }
 
 .apiDoc.api-view-list-type .apidemo .form .demo-desc {
@@ -1031,9 +977,10 @@ pre.shell>code {
 }
 
 .api-view-type-select span {
-    font-weight: 400;
-    font-size: 0.875rem;
     cursor: pointer;
+    font-size: var(--njs-font-size-m-plus);
+    font-weight: var(--njs-font-weight-m-plus);
+    line-height: var(--njs-line-height-m-plus);
 }
 
 /* Webkit scrollbars */

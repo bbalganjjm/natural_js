@@ -172,7 +172,6 @@ The above files are pages composed of very simple contents consisting only of th
 ```
 <style type="text/css">
     .page1 .text {
-        font-size: 15em;
         text-align: center;
     }
 </style>
@@ -194,7 +193,6 @@ N(".page01").cont({
 ```
 <style type="text/css">
     .page2 .text {
-        font-size: 15em;
         text-align: center;
     }
 </style>
@@ -216,7 +214,6 @@ N(".page01").cont({
 ```
 <style type="text/css">
     .page3 .text {
-        font-size: 15em;
         text-align: center;
     }
 </style>
@@ -238,7 +235,6 @@ N(".page01").cont({
 ```
 <style type="text/css">
     .page4 .text {
-        font-size: 15em;
         text-align: center;
     }
 </style>
@@ -260,7 +256,6 @@ N(".page01").cont({
 ```
 <style type="text/css">
     .page5 .text {
-        font-size: 15em;
         text-align: center;
     }
 </style>

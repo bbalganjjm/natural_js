@@ -173,7 +173,6 @@ N.cont 오브젝트의 init 함수에는 메뉴 링크 요소를 클릭했을 �
 ```
 <style type="text/css">
     .page1 .text {
-        font-size: 15em;
         text-align: center;
     }
 </style>
@@ -195,7 +194,6 @@ N(".page01").cont({
 ```
 <style type="text/css">
     .page2 .text {
-        font-size: 15em;
         text-align: center;
     }
 </style>
@@ -217,7 +215,6 @@ N(".page01").cont({
 ```
 <style type="text/css">
     .page3 .text {
-        font-size: 15em;
         text-align: center;
     }
 </style>
@@ -239,7 +236,6 @@ N(".page01").cont({
 ```
 <style type="text/css">
     .page4 .text {
-        font-size: 15em;
         text-align: center;
     }
 </style>
@@ -261,7 +257,6 @@ N(".page01").cont({
 ```
 <style type="text/css">
     .page5 .text {
-        font-size: 15em;
         text-align: center;
     }
 </style>
