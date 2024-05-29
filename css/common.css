@@ -179,12 +179,12 @@ th, tfoot td {
 
 .main-nav {
     position: fixed;
-    width: 250px;
+    width: 270px;
 
     transform-origin: left;
     transition: margin-left 0.5s ease, box-shadow 0.15s ease;
 
-    background-color: var(--md-sys-color-surface-container-high);
+    background-color: var(--md-sys-color-tertiary-container);
     min-height: 100%;
 
     border-radius: var(--njs-border-radius-none) var(--njs-border-radius-m) var(--njs-border-radius-m) var(--njs-border-radius-none);
@@ -209,7 +209,7 @@ th, tfoot td {
 
     position: relative;
     min-height: 100%;
-    margin-left: 250px;
+    margin-left: 270px;
     transition: margin-left 0.5s ease;
 }
 
@@ -273,13 +273,15 @@ th, tfoot td {
 
 .view-intro .view-desc {
     position: absolute;
-    background-color: var(--md-sys-color-surface-container-low);
+    background-color: var(--md-sys-color-surface-container);
     border: 1px solid var(--md-sys-color-outline-variant);
-    margin: 0;
+    margin: -15px 0 0 0;
     padding: 10px 10px 10px 30px;
-    line-height: 200%;
     opacity: 0;
-    box-shadow: 3px 3px 0 var(--md-sys-color-shadow);
+    font-size: var(--njs-font-size-s-plus);
+    font-weight: var(--njs-font-weight-s-plus);
+    line-height: 200%;
+    box-shadow: var(--njs-elevation-s);
 
     transform: scaleY(0);
     transform-origin: top;
@@ -411,12 +413,12 @@ article .btnBox {
 
 .apiDoc .apidemo .form .demo-desc {
     position: absolute;
-    padding: 10px;
+    padding: 0 10px 10px 10px;
     margin: 0 0 15px;
     overflow: auto;
     border: 1px solid var(--md-sys-color-outline-variant);
-    box-shadow: 3px 3px 0 var(--md-sys-color-shadow);
-    background-color: var(--md-sys-color-surface-container-low);
+    box-shadow: var(--njs-elevation-m);
+    background-color: var(--md-sys-color-surface-container-lowest);
     z-index: 1;
     opacity: 0;
     font-size: var(--njs-font-size-s-plus);
@@ -520,7 +522,7 @@ article .btnBox {
     display: inline-block;
     border: 1px dotted var(--md-sys-color-outline-variant);
     border-radius: var(--njs-border-radius-m);
-    box-shadow: 1px 1px 3px var(--md-sys-color-shadow);
+    box-shadow: var(--njs-elevation-s);
     color : var(--md-sys-color-on-secondary-container);
     background: var(--md-sys-color-secondary-container) url("../images/comm/icon/click.png") no-repeat 140px 4px;
     cursor: pointer;
@@ -560,7 +562,7 @@ article .btnBox {
 
 .docs_contents__>.view_context__ h1 {
     font-size: var(--njs-font-size-xl);
-    font-weight: var(--njs-font-weight-xl);
+    font-weight: var(--njs-font-weight-semibold);
     line-height: var(--njs-line-height-xl);
     border-bottom: 1px solid var(--md-sys-color-outline-variant);
     margin: .67em 0;
@@ -569,7 +571,7 @@ article .btnBox {
 
 .docs_contents__>.view_context__ h2 {
     font-size: var(--njs-font-size-l);
-    font-weight: var(--njs-font-weight-l);
+    font-weight: var(--njs-font-weight-semibold);
     line-height: var(--njs-line-height-l);
 }
 
@@ -613,7 +615,7 @@ pre.shell>code {
 }
 
 /* Mobile */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 748px) {
     .main-nav {
         display : none;
     }

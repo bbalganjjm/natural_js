@@ -23,7 +23,7 @@
 .alert__.block_overlay_msg__ {
     background: var(--md-sys-color-surface-container-lowest);
     border: 1px solid var(--md-sys-color-outline-variant);
-    box-shadow: 4px 4px 0 var(--md-sys-color-shadow);
+    box-shadow: var(--njs-elevation-vl);
     border-radius: var(--njs-border-radius-m);
 }
 
@@ -114,7 +114,7 @@
     position: absolute;
     background-color: var(--md-sys-color-error);
     padding: 5px;
-    box-shadow: 3px 3px 0 var(--md-sys-color-shadow);
+    box-shadow: var(--njs-elevation-s);
     margin-right: 5px;
 }
 
@@ -174,7 +174,7 @@
 
 /* Popup */
 .popup__.block_overlay_msg__ {
-    box-shadow: 5px 5px 0 var(--md-sys-color-shadow);
+    box-shadow: var(--njs-elevation-vl);
 }
 
 .popup__.block_overlay_msg__ > .msg_title_box__ {
@@ -338,7 +338,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
     border: 1px solid transparent;
     color: var(--md-sys-color-on-surface);
     background: none;
-    box-shadow: 1px 1px 3px var(--md-sys-color-shadow);
+    box-shadow: var(--njs-elevation-s);;
 }
 
 /* Select */
@@ -539,7 +539,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
     max-width: 300px;
     position: absolute;
     background-color: var(--md-sys-color-surface-container-lowest);
-    box-shadow: 3px 3px 0 var(--md-sys-color-shadow);
+    box-shadow: var(--njs-elevation-m);
     padding: 4px;
     margin: 0;
     color : var(--md-sys-color-on-surface);
@@ -718,7 +718,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 
     border: 1px solid var(--md-sys-color-outline-variant);
     background-color: var(--md-sys-color-surface-container-lowest);
-    box-shadow: 3px 3px 0 var(--md-sys-color-shadow);
+    box-shadow: var(--njs-elevation-m);
     padding: 5px;
     text-align: left;
     z-index: 1;
@@ -925,13 +925,13 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
     transform: translateZ(0)\0; /* for ie 8+ */
 
     border: 1px solid var(--md-sys-color-outline-variant);
-    box-shadow: 3px 3px 0 var(--md-sys-color-shadow);
-    background-color: var(--md-sys-color-surface-container-lowest);
-    font-size: 90%;
+    box-shadow: var(--njs-elevation-m);
+    background-color: var(--md-sys-color-surface-container);
     z-index: 1;
-    padding: 2px;
-    width: 314px;
+    padding: 0;
+    width: 247px;
     border-radius: var(--njs-border-radius-m);
+    font-size: var(--njs-font-size-m);
 }
 
 .datepicker_contents__ > .datepicker_years_panel__ {
@@ -952,9 +952,10 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 }
 
 .datepicker_contents__ > .datepicker_days_panel__ {
-    width: 210px;
+    width: 245px;
     float: left;
     margin-left: 2px;
+    background-color: var(--md-sys-color-surface-container-lowest);
 }
 
 .datepicker_contents__.visible__ {
@@ -1003,8 +1004,8 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 }
 
 .datepicker_contents__ .datepicker_month_item__ {
-    line-height: 25px;
-    width: 28px;
+    line-height: 33px;
+    width: 35px;
     float: left;
     border: 1px solid transparent;
     cursor: pointer;
@@ -1027,10 +1028,12 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
     border: 1px solid transparent;
     cursor: pointer;
     background-color: var(--md-sys-color-surface-container-lowest);
-    line-height: 25px;
-    width: 28px;
+    font-size: var(--njs-font-size-m);
+    line-height: 33px;
+    width: 35px;
     text-align: center;
     transform: scaleX(0);
+    font-size: var(--njs-font-size-m);
 }
 
 .datepicker_contents__ .datepicker_day_item__.datepicker_holiday__,
@@ -1065,7 +1068,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 
 .datepicker_contents__ .datepicker_day_title__ {
     background-color: var(--md-sys-color-surface-container-lowest);
-    width: 28px;
+    width: 35px;
     float: left;
     text-align: center;
 }
@@ -1075,7 +1078,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 .datepicker_contents__ .datepicker_day_title__ {
     border: 1px solid var(--md-sys-color-secondary-container);
     background-color: var(--md-sys-color-secondary-container);
-    line-height: 25px;
+    line-height: 33px;
     text-align: center;
     color: var(--md-sys-color-on-secondary-container);
 }
@@ -1112,7 +1115,8 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 .datepicker_contents__.years_panel_position_top__ .datepicker_years_panel__,
 .datepicker_contents__.months_panel_position_top__ .datepicker_top_months_panel__{
     float: none;
-    display: inline;
+    display: inline-block;
+    padding: 5px;
     background-color: inherit;
     border: none;
     width: auto;
@@ -1125,7 +1129,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
     line-height: inherit;
     text-align: center;
     background-color: transparent !important;
-    box-shadow: none !important;
+    box-shadow: var(--njs-elevation-none) !important;
     color: inherit;
     width: auto;
     padding: 0;
@@ -1152,8 +1156,9 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 .datepicker_contents__.years_panel_position_top__ .datepicker_year_item__, .datepicker_contents__.years_panel_position_top__ .datepicker_year_paging__ {
     display: inline;
     cursor: pointer;
-    line-height: 95%;
-    font-weight: 700;
+    font-size: var(--njs-font-size-m);
+    font-weight: var(--njs-font-weight-m);
+    line-height: var(--njs-line-height-m);
 }
 
 .datepicker_contents__.years_panel_position_top__ .datepicker_year_paging__ > a {
@@ -1163,8 +1168,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 
 .datepicker_contents__.years_panel_position_top__ .datepicker_year_paging__ > a > span {
     padding: 0 10px;
-    line-height: 16px;
-    font-weight: 700;
+    font-weight: var(--njs-font-weight-bold);
 }
 
 /* Remove the arrow in select box(ie)*/
@@ -1182,7 +1186,9 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 .datepicker_contents__.months_panel_position_top__ .datepicker_month_item__, .datepicker_contents__.months_panel_position_top__ .datepicker_month_paging__ {
     display: inline;
     cursor: pointer;
-    font-weight: 700;
+    font-size: var(--njs-font-size-m);
+    font-weight: var(--njs-font-weight-m);
+    line-height: var(--njs-line-height-m);
 }
 
 .datepicker_contents__.months_panel_position_top__ .datepicker_month_paging__ > a {
@@ -1193,7 +1199,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 .datepicker_contents__.months_panel_position_top__ .datepicker_month_paging__ > a > span {
     padding: 0 10px;
     line-height: 95%;
-    font-weight: 700;
+    font-weight: var(--njs-font-weight-bold);
 }
 
 .datepicker_contents__.years_panel_position_top__ > .datepicker_days_panel__,
@@ -1438,10 +1444,10 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
     line-height: 16px;
     text-align: left;
     word-break: break-all;
-    box-shadow: 3px 3px 0 var(--md-sys-color-shadow);
+    box-shadow: var(--njs-elevation-l);
     transform: scale(0.7);
     opacity: 0;
-    background-color: var(--md-sys-color-surface-container-lowest);
+    background-color: var(--md-sys-color-surface-container);
     border: 1px solid var(--md-sys-color-outline-variant);
     margin-bottom: 5px;
     border-radius: var(--njs-border-radius-m);
@@ -1630,7 +1636,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
     border: 1px solid var(--md-sys-color-outline-variant);
     max-width: 300px;
     background-color: var(--md-sys-color-surface-container-lowest);
-    box-shadow: -3px 3px 0 var(--md-sys-color-shadow);
+    box-shadow: var(--njs-elevation-s);
     padding: 2px 6px 2px 6px;
     margin: 2px 0 0 0;
     transform: scale(0.7);

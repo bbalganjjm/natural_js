@@ -43,16 +43,16 @@
     --njs-line-height-mi: 14px;
 
     --njs-elevation-0: 0 0 0 0 transparent;
-    --njs-elevation-s: 0 1.6px 3.6px 0 rgba(0,0,0,.132),0 .3px .9px 0 rgba(0,0,0,.108);
-    --njs-elevation-m: 0 3.2px 7.2px 0 rgba(0,0,0,.132),0 .6px 1.8px 0 rgba(0,0,0,.108);
-    --njs-elevation-l: 0 6.4px 14.4px 0 rgba(0,0,0,.132),0 1.2px 3.6px 0 rgba(0,0,0,.108);
-    --njs-elevation-vl: 0 25.6px 57.6px 0 rgba(0,0,0,.22),0 4.8px 14.4px 0 rgba(0,0,0,.18);
+    --njs-elevation-4: 0 1.6px 3.6px 0 rgba(0,0,0,.132),0 .3px .9px 0 rgba(0,0,0,.108);
+    --njs-elevation-8: 0 3.2px 7.2px 0 rgba(0,0,0,.132),0 .6px 1.8px 0 rgba(0,0,0,.108);
+    --njs-elevation-16: 0 6.4px 14.4px 0 rgba(0,0,0,.132),0 1.2px 3.6px 0 rgba(0,0,0,.108);
+    --njs-elevation-64: 0 25.6px 57.6px 0 rgba(0,0,0,.22),0 4.8px 14.4px 0 rgba(0,0,0,.18);
 
     --njs-elevation-none: var(--njs-elevation-0);
-    --njs-elevation-m: var(--njs-elevation-4);
-    --njs-elevation-8: var(--njs-elevation-8);
-    --njs-elevation-16: var(--njs-elevation-16);
-    --njs-elevation-64 : var(--njs-elevation-64);
+    --njs-elevation-s: var(--njs-elevation-4);
+    --njs-elevation-m: var(--njs-elevation-8);
+    --njs-elevation-l: var(--njs-elevation-16);
+    --njs-elevation-vl : var(--njs-elevation-64);
 
     --njs-border-radius-none: 0;
     --njs-border-radius-s: 2px;

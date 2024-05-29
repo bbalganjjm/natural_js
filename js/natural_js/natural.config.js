@@ -527,7 +527,7 @@
                 tabContainerWidthReCalcDelayTime : 0
             },
             "onActive" : function(tabIdx, tabEle, contentEle, tabEles, contentEles) {
-                if($(window).width() > 751) { // 768 - 17px(?)
+                if($(window).width() > 731) { // 748 - 17px(?)
                     if(localStorage.getItem("isListTypeView") == "Y") {
                         contentEle.find(".api-view-type-select :checkbox").prop("checked", true).trigger("change.aop");
                     } else {
@@ -1073,7 +1073,7 @@
         "pointcut" : ".apiDoc:^init$",
         "adviceType" : "before",
         "fn" : function(cont, fnChain, args){
-            if($(window).width() > 751) { // 768 - 17px(?)
+            if($(window).width() > 731) { // 748 - 17px(?)
                 var view = args[0];
 
                 if(view.closest("#constructor, #advisors, #pointcuts, #defaultoptions, #declarativeoptions, #pluginExtention, " +
@@ -1105,7 +1105,7 @@
             }
 
             N(window).on("resize.aop", function() {
-                if($(window).width() > 751) { // 768 - 17px(?)
+                if($(window).width() > 731) { // 748 - 17px(?)
                     N(".view_context__ h1 .api-view-type-select").show();
                 } else {
                     N(".view_context__ h1 .api-view-type-select").hide();

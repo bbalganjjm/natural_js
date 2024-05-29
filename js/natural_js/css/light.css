@@ -50,3 +50,7 @@
   --md-sys-color-surface-container-high: rgb(230 233 224);
   --md-sys-color-surface-container-highest: rgb(225 228 218);
 }
+
+.notify__ .notify_msg__ .notify_msg_close__ span {
+  filter: invert(100%);
+}

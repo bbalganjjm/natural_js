@@ -5,10 +5,10 @@
 }
 
 .index-lefter .logo {
-    width: 250px;
+    width: 270px;
     text-align: center;
     border-radius: var(--njs-border-radius-none) var(--njs-border-radius-xl) var(--njs-border-radius-none) var(--njs-border-radius-none);
-    background-color: var(--md-sys-color-surface-container-high);
+    background-color: var(--md-sys-color-tertiary-container);
 }
 
 .index-lefter .logo .home>span {
@@ -54,11 +54,11 @@
 }
 
 .index-lefter .left-menu:hover::-webkit-scrollbar-track {
-    background: var(--md-sys-color-surface-container-low);
+    background: var(--md-sys-color-tertiary-container);
 }
 
 .index-lefter .left-menu:hover::-webkit-scrollbar-thumb {
-    background: var(--md-sys-color-surface-container-highest);
+    background: var(--md-sys-color-tertiary-fixed-dim);
     border-radius: var(--njs-border-radius-m);
 }
 
@@ -109,13 +109,13 @@
 }
 
 .index-lefter .left-menu ul > li > a > span {
-    color: var(--md-sys-color-on-surface-variant);
-    font-weight: 700;
+    color: var(--md-sys-color-on-surface);
+    font-weight: var(--njs-font-weight-bold);
 }
 
 .index-lefter .left-menu ul > li.leaf-node > a > span {
-    color: var(--md-sys-color-on-surface);
-    font-weight: 400;
+    color: var(--md-sys-color-on-surface-variant);
+    font-weight: var(--njs-font-weight-m);
 }
 
 .index-lefter .left-menu .folding {
@@ -347,7 +347,7 @@
                 if(selfEle.parent().is(".leaf-node") && selfEle.is("[data-pageid]")) {
                     location.hash = selfEle.attr("href");
 
-                    if($(window).width() <= 1001) { // 768 + 256 - 17px(?)
+                    if($(window).width() <= 1001) { // 748 + 256 - 17px(?)
                         N(".lefter-toggle-button", ".page-wrap").trigger("click.lefter");
                     }
                 }
@@ -373,20 +373,20 @@
                 var mainNav = view.closest(".main-nav");
 
                 if (selfEle.data("status") === "show") {
-                    if($(window).width() <= 1001) { // 768 + 250 - 17px(?)
+                    if($(window).width() <= 1001) { // 748 + 270 - 17px(?)
                         N(".content-wrap", "body").off("click.lefter");
                     }
 
                     N(".lefter-toggle-button>span", view).css("transform", "").off("mouseover.lefter").off("mouseout.lefter");
 
                     mainNav.css("margin-left", "-" + mainNav.width() + "px");
-                    if($(window).width() > 1001) { // 768 + 250 - 17px(?)
+                    if($(window).width() > 1001) { // 748 + 270 - 17px(?)
                         mainNav.siblings(".content-wrap").css("margin-left", "0");
                     }
                     selfEle.data("status", "hide").css("margin-right", "-42px");
 
                 } else {
-                    if($(window).width() > 1001) { // 768 + 250 - 17px(?)
+                    if($(window).width() > 1001) { // 748 + 270 - 17px(?)
                         mainNav.siblings(".content-wrap").css("margin-left", "");
                     }
                     mainNav.css("margin-left", "");
@@ -398,7 +398,7 @@
                         $(this).css("transform", "");
                     });
 
-                    if($(window).width() <= 1001) { // 768 + 250 - 17px(?)
+                    if($(window).width() <= 1001) { // 748 + 270 - 17px(?)
                         N(".content-wrap", "body").on("click.lefter", function(e) {
                             e.preventDefault();
                             N(".lefter-toggle-button", view).trigger("click.lefter");
@@ -413,7 +413,7 @@
             N(window).on("resize.left-menu", function() {
                 N(".left-menu", view).innerHeight(N(this).height() - N(".logo", view).height());
 
-                if($(window).width() <= 1001) { // 768 + 250 - 17px(?)
+                if($(window).width() <= 1001) { // 748 + 270 - 17px(?)
                     N(".lefter-toggle-button", view).data("status", "show");
                     N(".content-wrap", "body").css({
                         "transition": "none",
