@@ -1,0 +1,65 @@
+:root {
+    --njs-font-family: 'NanumSquare', '맑은 고딕', 'Malgun Gothic', 'Apple SD 산돌고딕 Neo', 'Apple SD Gothic Neo', 'Microsoft NeoGothic', sans-serif;
+
+    --njs-font-weight-light: 100;
+    --njs-font-weight-semilight: 300;
+    --njs-font-weight-regular : 400;
+    --njs-font-weight-semibold: 600;
+    --njs-font-weight-bold: 700;
+
+    --njs-font-su-size: 42px;
+    --njs-font-su-weight: var(--njs-font-weight-light, 100);
+    --njs-font-su-line-height: 54;
+    --njs-font-xxl-size: 28px;
+    --njs-font-xxl-weight: var(--njs-font-weight-light, 100);
+    --njs-font-xxl-line-height: 36px;
+    --njs-font-xl-plus-size: 24px;
+    --njs-font-xl-plus-weight: var(--njs-font-weight-light, 100);
+    --njs-font-xl-plus-line-height: 32px;
+    --njs-font-xl-size: 21px;
+    --njs-font-xl-weight: var(--njs-font-weight-light, 100);
+    --njs-font-xl-line-height: 29px;
+    --njs-font-l-size: 17px;
+    --njs-font-l-weight: var(--njs-font-weight-semilight, 300);
+    --njs-font-l-line-height: 23px;
+    --njs-font-m-plus-size: 15px;
+    --njs-font-m-plus-weight: var(--njs-font-weight-regular, 400);
+    --njs-font-m-plus-line-height: px;
+    --njs-font-m-size: 14px;
+    --njs-font-m-weight: var(--njs-font-weight-regular, 400);
+    --njs-font-m-line-height: 20px;
+    --njs-font-s-plus-size: 13px;
+    --njs-font-s-plus-weight: var(--njs-font-weight-regular, 400);
+    --njs-font-s-plus-line-height: 18px;
+    --njs-font-s-size: 12px;
+    --njs-font-s-weight: var(--njs-font-weight-regular, 400);
+    --njs-font-s-line-height: 16px;
+    --njs-font-xs-size: 11px;
+    --njs-font-xs-weight: var(--njs-font-weight-regular, 400);
+    --njs-font-xs-line-height: 15px;
+    --njs-font-mi-size: 10px;
+    --njs-font-mi-weight: var(--njs-font-weight-semibold, 600);
+    --njs-font-mi-line-height: 14px;
+
+    --njs-elevation-0: 0 0 0 0 transparent;
+    --njs-elevation-4: 0 1.6px 3.6px 0 rgba(0,0,0,.132),0 .3px .9px 0 rgba(0,0,0,.108);
+    --njs-elevation-8: 0 3.2px 7.2px 0 rgba(0,0,0,.132),0 .6px 1.8px 0 rgba(0,0,0,.108);
+    --njs-elevation-16: 0 6.4px 14.4px 0 rgba(0,0,0,.132),0 1.2px 3.6px 0 rgba(0,0,0,.108);
+    --njs-elevation-64: 0 25.6px 57.6px 0 rgba(0,0,0,.22),0 4.8px 14.4px 0 rgba(0,0,0,.18);
+
+    --njs-border-radius-none: 0;
+    --njs-border-radius-small: 2px;
+    --njs-border-radius-medium: 4px;
+    --njs-border-radius-large: 6px;
+    --njs-border-radius-xlarge: 8px;
+    --njs-border-radius-circular: 10000px;
+
+    --njs-motion-duration-ultraFast: 50ms;
+    --njs-motion-duration-faster: 100ms;
+    --njs-motion-duration-fast: 150ms;
+    --njs-motion-duration-normal: 200ms;
+    --njs-motion-duration-gentle: 250ms;
+    --njs-motion-duration-slow: 300ms;
+    --njs-motion-duration-slower: 400ms;
+    --njs-motion-duration-ultraSlow: 500ms;
+}

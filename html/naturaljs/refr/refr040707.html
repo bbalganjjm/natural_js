@@ -5,13 +5,13 @@
 </style>
 
 <article class="refr040707 apiDoc">
-    <h2>
+    <h1>
         <span lang="ko_KR">예제</span>
         <span lang="en_US">Examples</span>
-    </h2>
+    </h1>
 
-    <h4 lang="ko_KR">⊙ 예제 데이터</h4>
-    <h4 lang="en_US">⊙Example data</h4>
+    <h2 lang="ko_KR">⊙ 예제 데이터</h2>
+    <h2 lang="en_US">⊙Example data</h2>
     <pre><code>var data = [{
     "name": "Dean Stanley",
     "age": 26,
@@ -20,8 +20,8 @@
     "registered": "20140727",
 }]</code></pre>
 
-    <h4 lang="ko_KR" class="notIndex">1. 폼에 데이터 바인딩 하기.</h4>
-    <h4 lang="en_US" class="notIndex">1. Binds the data to the form.</h4>
+    <h2 lang="ko_KR" class="notIndex">1. 폼에 데이터 바인딩 하기.</h2>
+    <h2 lang="en_US" class="notIndex">1. Binds the data to the form.</h2>
     <p lang="ko_KR" class="alert">폼의 context 요소는 table 이든 div 든 상관없습니다. context 요소 안에 데이터 객체의 프로퍼티명과 같은 id 속성을 가진 요소가 있다면 해당 요소에 값을 바인딩합니다.</p>
     <p lang="en_US" class="alert">The form's context element doesn't matter whether it's a table or a div. If there is an element with an id attribute equal to the property name of the data object in the context element, the value is bound to the element.</p>
     <pre><code>&lt;table class="form"&gt;
@@ -47,8 +47,8 @@
     N(data).form(".form").bind(); // ==> N(data).form({ context: ".form", row: 0 }).bind();
 &lt;/script&gt;</code></pre>
 
-    <h4 lang="ko_KR" class="notIndex">2. 폼에 데이터 바인딩 및 데이터 포맷팅 -&gt; 저장 확인 메시지 표시(N.alert) 후 폼의 전체 데이터 유효성 검증(N.validator) -&gt; 폼 데이터를 서버에 전송(N.comm)</h4>
-    <h4 lang="en_US" class="notIndex">2. Binds data to the form and format the data -&gt; Validates(N.validator) entire data in the form after displaying(N.alert) the save confirm message  -&gt; Submits(N.comm) the form data to the server.</h4>
+    <h2 lang="ko_KR" class="notIndex">2. 폼에 데이터 바인딩 및 데이터 포맷팅 -&gt; 저장 확인 메시지 표시(N.alert) 후 폼의 전체 데이터 유효성 검증(N.validator) -&gt; 폼 데이터를 서버에 전송(N.comm)</h2>
+    <h2 lang="en_US" class="notIndex">2. Binds data to the form and format the data -&gt; Validates(N.validator) entire data in the form after displaying(N.alert) the save confirm message  -&gt; Submits(N.comm) the form data to the server.</h2>
     <pre lang="ko_KR"><code>&lt;table class="form"&gt;
     &lt;tr&gt;
         &lt;th&gt;&lt;label for="name"&gt;name&lt;/label&gt;&lt;/th&gt;
@@ -119,8 +119,8 @@
         }).show();
     });
 &lt;/script&gt;</code></pre>
-    <h4 lang="ko_KR" class="notIndex">3. 검색조건 블록에 N.form을 적용하여 조회 로직을 간단하게 만들기.</h4>
-    <h4 lang="en_US" class="notIndex">3. Making the search logic simply by applying N.form to search condition block.</h4>
+    <h2 lang="ko_KR" class="notIndex">3. 검색조건 블록에 N.form을 적용하여 조회 로직을 간단하게 만들기.</h2>
+    <h2 lang="en_US" class="notIndex">3. Making the search logic simply by applying N.form to search condition block.</h2>
     <pre lang="ko_KR"><code>&lt;table class="form"&gt;
     &lt;tr&gt;
         &lt;th&gt;&lt;label for="name"&gt;name&lt;/label&gt;&lt;/th&gt;
@@ -162,8 +162,8 @@
     });
 &lt;/script&gt;</code></pre>
 
-    <h4 lang="ko_KR" class="notIndex">4. N.select와 N.form 연동 하기.</h4>
-    <h4 lang="en_US" class="notIndex">4. Linking N.select and N.form.</h4>
+    <h2 lang="ko_KR" class="notIndex">4. N.select와 N.form 연동 하기.</h2>
+    <h2 lang="en_US" class="notIndex">4. Linking N.select and N.form.</h2>
     <p lang="ko_KR" class="alert">N.select와 N.form을 연동하여 사용할 때는 반드시 N.select를 먼저 초기화 한 다음 N.form을 초기화해야 합니다.</p>
     <p lang="en_US" class="alert">When using N.select in link with N.form, N.select must be initialized first and then N.form initialized.</p>
     <pre lang="ko_KR"><code>&lt;table class="form"&gt;
@@ -246,8 +246,8 @@
     // 2. Binds the form data
     N(data).<strong>form</strong>(".form").<strong>bind</strong>();
 &lt;/script&gt;</code></pre>
-    <h4 lang="ko_KR" class="notIndex">5. N.select를 사용하지 않고 radio, checkbox 입력 요소를 N.form과 연동 하기.</h4>
-    <h4 lang="en_US" class="notIndex">5. Linking radio and checkbox input elements with N.form without using N.select.</h4>
+    <h2 lang="ko_KR" class="notIndex">5. N.select를 사용하지 않고 radio, checkbox 입력 요소를 N.form과 연동 하기.</h2>
+    <h2 lang="en_US" class="notIndex">5. Linking radio and checkbox input elements with N.form without using N.select.</h2>
     <p lang="ko_KR" class="alert">radio와 checkbox 입력 요소의 첫 번째 요소에 name 속성 값과 같은 id 속성 값을 반드시 정의해야 합니다.</p>
     <p lang="en_US" class="alert">The id element value, such as the name attribute value, must be defined in the first element of the radio and checkbox input elements.</p>
     <pre><code>&lt;div class="form"&gt;

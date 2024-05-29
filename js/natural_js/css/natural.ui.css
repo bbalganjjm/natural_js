@@ -1,5 +1,6 @@
 @charset "utf-8";
 
+@import url(tokens.css);
 @import url(light.css) screen and (prefers-color-scheme: light);
 @import url(dark.css) screen and (prefers-color-scheme: dark);
 
@@ -23,13 +24,13 @@
     background: var(--md-sys-color-surface-container-lowest);
     border: 1px solid var(--md-sys-color-outline-variant);
     box-shadow: 4px 4px 0 var(--md-sys-color-shadow);
-    border-radius: 3px;
+    border-radius: var(--njs-border-radius-medium);
 }
 
 .alert__.block_overlay_msg__ .msg_title_box__ {
     background-color: var(--md-sys-color-primary);
     border-top: none;
-    border-radius: 3px 3px 0 0;
+    border-radius: var(--njs-border-radius-medium) var(--njs-border-radius-medium) var(--njs-border-radius-none) var(--njs-border-radius-none);
 }
 
 .alert__.block_overlay_msg__ .msg_title_box__ .msg_title__ {
@@ -218,7 +219,7 @@ a.btn_common__, input[type='button'].btn_common__, button.btn_common__ {
     text-align: center;
     white-space: nowrap;
     vertical-align: middle;
-    border-radius: 3px;
+    border-radius: var(--njs-border-radius-medium);
     margin: 0;
 }
 
@@ -818,7 +819,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
     margin-right: 1px;
     padding: 2px 4px;
     border: 1px solid var(--md-sys-color-outline-variant);
-    border-radius: 3px 3px 0 0;
+    border-radius: var(--njs-border-radius-medium) var(--njs-border-radius-medium) var(--njs-border-radius-none) var(--njs-border-radius-none);
     cursor: pointer;
     min-width: 60px;
     text-align: center;
@@ -899,7 +900,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 .tab__>div {
     padding: 15px;
     border: 1px solid var(--md-sys-color-outline-variant);
-    border-radius: 0 3px 3px 3px;
+    border-radius: 0 var(--njs-border-radius-medium) var(--njs-border-radius-medium) var(--njs-border-radius-medium);
 }
 
 .tab__>div > .view_context__ {
@@ -930,7 +931,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
     z-index: 1;
     padding: 2px;
     width: 314px;
-    border-radius: 3px;
+    border-radius: var(--njs-border-radius-medium);
 }
 
 .datepicker_contents__ > .datepicker_years_panel__ {
@@ -1081,24 +1082,25 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 
 .datepicker_contents__ .datepicker_year_selected__ {
     border-color: var(--md-sys-color-outline-variant);
-    border-radius: 45%;
+    border-radius: var(--njs-border-radius-circular);
 }
 
 .datepicker_contents__ .datepicker_month_selected__ {
     border-color: var(--md-sys-color-outline-variant);
-    border-radius: 50%;
+    border-radius: var(--njs-border-radius-circular);
 }
 
 .datepicker_contents__ .datepicker_day_selected__ {
     border-color: var(--md-sys-color-outline-variant);
-    border-radius: 50%;
+    border-radius: var(--njs-border-radius-circular);
 }
 
 .datepicker_contents__ .datepicker_year_item__:hover,
 .datepicker_contents__ .datepicker_month_item__:hover,
 .datepicker_contents__ .datepicker_day_item__:hover {
-    background-color: var(--md-sys-color-tertiary);
-    border-radius: 50%;
+    color: var(--md-sys-color-on-surface);
+    background-color: var(--md-sys-color-surface-container-highest);
+    border-radius: var(--njs-border-radius-circular);
 }
 
 .datepicker_contents__.years_panel_position_top__,
@@ -1130,7 +1132,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
     float: none;
 
     /* Remove the arrow in select box */
-    border-radius: 0;
+    border-radius: var(--njs-border-radius-none);
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -1442,7 +1444,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
     background-color: var(--md-sys-color-surface-container-lowest);
     border: 1px solid var(--md-sys-color-outline-variant);
     margin-bottom: 5px;
-    border-radius: 3px;
+    border-radius: var(--njs-border-radius-medium);
 }
 
 .notify__ .notify_msg__.visible__ {
@@ -1520,7 +1522,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
     border: 1px solid var(--md-sys-color-outline-variant);
     text-align: center;
     background-color: var(--md-sys-color-secondary-container);
-    border-radius: 3px 3px 0 0;
+    border-radius: var(--njs-border-radius-medium) var(--njs-border-radius-medium) 0 0;
 }
 
 .docs__>.docs_tab_context__>.docs_tabs__>.docs_tab__ {
@@ -1590,7 +1592,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
     text-align: center;
     background-color: var(--md-sys-color-surface-dim);
     line-height: 10px;
-    border-radius: 3px 3px 0 0;
+    border-radius: var(--njs-border-radius-medium) var(--njs-border-radius-medium) var(--njs-border-radius-none) var(--njs-border-radius-none);
 }
 
 .docs__>.docs_tab_context__>ul.docs_tab_utils__>li>a {

@@ -1097,7 +1097,7 @@
                         }
                         N(window).trigger("resize.mobile", [ view ]);
                     });
-                    view.find("h2:first").append(select);
+                    view.find("h1:first").append(select);
                     if(localStorage.getItem("isListTypeView") == "Y") {
                         select.find(":checkbox").prop("checked", true).trigger("change.aop");
                     }
@@ -1106,9 +1106,9 @@
 
             N(window).on("resize.aop", function() {
                 if($(window).width() > 751) { // 768 - 17px(?)
-                    N(".view_context__ h2 .api-view-type-select").show();
+                    N(".view_context__ h1 .api-view-type-select").show();
                 } else {
-                    N(".view_context__ h2 .api-view-type-select").hide();
+                    N(".view_context__ h1 .api-view-type-select").hide();
                 }
                 N(window).trigger("resize.mobile", [ view ]);
             });

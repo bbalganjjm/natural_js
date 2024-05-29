@@ -5,13 +5,13 @@
 </style>
 
 <article class="refr040807 apiDoc">
-    <h2>
+    <h1>
         <span lang="ko_KR">예제</span>
         <span lang="en_US">Examples</span>
-    </h2>
+    </h1>
 
-    <h4 lang="ko_KR">⊙ 예제 데이터</h4>
-    <h4 lang="en_US">⊙Example data</h4>
+    <h2 lang="ko_KR">⊙ 예제 데이터</h2>
+    <h2 lang="en_US">⊙Example data</h2>
     <pre><code>var data = [{
     "name": "Dean Stanley",
     "age": 26,
@@ -32,8 +32,8 @@
     "registered": "20120616",
 }]</code></pre>
 
-    <h4 lang="ko_KR" class="notIndex">1. 리스트에 데이터 바인딩 하기.</h4>
-    <h4 lang="en_US" class="notIndex">1. Binds the data to the list.</h4>
+    <h2 lang="ko_KR" class="notIndex">1. 리스트에 데이터 바인딩 하기.</h2>
+    <h2 lang="en_US" class="notIndex">1. Binds the data to the list.</h2>
     <pre><code>&lt;ul class="list"&gt;
     &lt;li&gt;
         &lt;input id="name" type="text"&gt;
@@ -47,8 +47,8 @@
     N(data).list(".list").bind();
 &lt;/script&gt;</code></pre>
 
-    <h4 lang="ko_KR" class="notIndex">1.1. rowHandler 적용 하기.</h4>
-    <h4 lang="en_US" class="notIndex">1.1. Applying rowHandler.</h4>
+    <h2 lang="ko_KR" class="notIndex">1.1. rowHandler 적용 하기.</h2>
+    <h2 lang="en_US" class="notIndex">1.1. Applying rowHandler.</h2>
     <p lang="ko_KR" class="alert">rowHandler 이벤트는 리스트 렌더링 시 행이 만들어질 때마다 실행되는 이벤트입니다.</p>
     <p lang="en_US" class="alert">The rowHandler event is an event that is executed whenever a row is created when the list is rendered.</p>
     <pre><code>&lt;ul class="list"&gt;
@@ -72,8 +72,8 @@
     }).bind();
 &lt;/script&gt;</code></pre>
 
-    <h4 lang="ko_KR" class="notIndex">2. 행 추가 하기.</h4>
-    <h4 lang="en_US" class="notIndex">2. Adding rows.</h4>
+    <h2 lang="ko_KR" class="notIndex">2. 행 추가 하기.</h2>
+    <h2 lang="en_US" class="notIndex">2. Adding rows.</h2>
     <pre><code>&lt;ul class="list"&gt;
     &lt;li&gt;
         &lt;input id="name" type="text"&gt;
@@ -92,8 +92,8 @@
     });
 &lt;/script&gt;</code></pre>
 
-    <h4 lang="ko_KR" class="notIndex">3. 리스트에 데이터 바인딩 및 데이터 포맷팅 -&gt; 저장 확인 메시지 표시(N.alert) 후 리스트의 전체 데이터 유효성 검증(N.validator) -&gt; 리스트 데이터를 서버에 전송(N.comm)</h4>
-    <h4 lang="en_US" class="notIndex">3. Binds data to the list and format the data -&gt; Validates(N.validator) entire data in the list after displaying(N.alert) the save confirm message  -&gt; Submits(N.comm) the list data to the server.</h4>
+    <h2 lang="ko_KR" class="notIndex">3. 리스트에 데이터 바인딩 및 데이터 포맷팅 -&gt; 저장 확인 메시지 표시(N.alert) 후 리스트의 전체 데이터 유효성 검증(N.validator) -&gt; 리스트 데이터를 서버에 전송(N.comm)</h2>
+    <h2 lang="en_US" class="notIndex">3. Binds data to the list and format the data -&gt; Validates(N.validator) entire data in the list after displaying(N.alert) the save confirm message  -&gt; Submits(N.comm) the list data to the server.</h2>
     <pre lang="ko_KR"><code>&lt;ul class="list"&gt;
     &lt;li&gt;
         &lt;input id="name" type="text"&gt;
@@ -145,8 +145,8 @@
     });
 &lt;/script&gt;</code></pre>
 
-    <h4 lang="ko_KR" class="notIndex">4. N.select와 N.list 연동하기.</h4>
-    <h4 lang="en_US" class="notIndex">4. Linking N.select and N.list.</h4>
+    <h2 lang="ko_KR" class="notIndex">4. N.select와 N.list 연동하기.</h2>
+    <h2 lang="en_US" class="notIndex">4. Linking N.select and N.list.</h2>
     <p lang="ko_KR" class="alert">N.select와 연동하려면 먼저 N.select를 초기화해야 합니다. 그런 다음 N.list를 초기화하고 데이터를 바인딩하십시오.</p>
     <p lang="en_US" class="alert">To link with N.select, you need to initialize Then initialize N.list and bind the data.</p>
     <pre lang="ko_KR"><code>&lt;ul class="list"&gt;
@@ -204,8 +204,8 @@
     N(data).<strong>list</strong>(".list").<strong>bind</strong>();
 &lt;/script&gt;</code></pre>
 
-    <h4 lang="ko_KR" class="notIndex">5. jQuery의 on 메서드를 사용하여 행 선택 이벤트를 바인딩 하기.</h4>
-    <h4 lang="en_US" class="notIndex">5. Binding a row selection event using jQuery's on method.</h4>
+    <h2 lang="ko_KR" class="notIndex">5. jQuery의 on 메서드를 사용하여 행 선택 이벤트를 바인딩 하기.</h2>
+    <h2 lang="en_US" class="notIndex">5. Binding a row selection event using jQuery's on method.</h2>
     <p lang="ko_KR" class="alert">onSelect 이벤트에서 행 요소에 이벤트를 바인딩하면 행 수만큼 이벤트 객체가 생성되어 속도가 느려질 수 있습니다.
         다음과 같이 이벤트 위임(Event Delegation, jQuery.on method)을 사용하면 성능 저하 없이 행 요소들에 이벤트를 바인딩할 수 있습니다.</p>
     <p lang="en_US" class="alert">If you bind an event to a row element in the onSelect event, it can slow it down because event object is created as much the number of rows.

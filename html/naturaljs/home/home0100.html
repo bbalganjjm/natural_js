@@ -102,7 +102,7 @@
     margin: 10px;
     padding: 15px;
     min-width: 220px;
-    border-radius: 3px;
+    border-radius: var(--njs-border-radius-medium);
     background-color: var(--md-sys-color-surface-container-low);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -133,15 +133,17 @@
 }
 
 .home0100 .notice {
-    font-size: 20px;
-    background-color: yellow;
+    font-size: var(--njs-font-m-plus-size);
+    font-weight: var(--njs-font-m-plus-weight);
+    line-height: var(--njs-font-m-plus-line-height);
+    color: var(--md-sys-color-on-primary-container);
+    background-color: var(--md-sys-color-primary-container);
     padding: 15px;
-    border-radius: 0 0 10px 10px;
+    border-radius: 0 0 var(--njs-border-radius-large) var(--njs-border-radius-large);
     text-align: center;
     word-break: keep-all;
     opacity: 0;
     transition: margin-top 0.5s ease, opacity 0.8s cubic-bezier(0.4, 0, 1, 1);
-    position: absolute;
     margin-bottom: 24px;
 }
 
@@ -173,8 +175,8 @@
     <h2 lang="en_US">Features of Natural-JS</h2>
 
     <div class="contents features">
-        <h4 lang="ko_KR">CVC 아키텍처패턴 기반의 Natural-ARCHITECTURE 프레임워크를 제공합니다.</h4>
-        <h4 lang="en_US">Provides an Natural-ARCHITECTURE framework based on the CVC architecture pattern.</h4>
+        <h3 lang="ko_KR">CVC 아키텍처패턴 기반의 Natural-ARCHITECTURE 프레임워크를 제공합니다.</h3>
+        <h3 lang="en_US">Provides an Natural-ARCHITECTURE framework based on the CVC architecture pattern.</h3>
         <ul class="n-architecture">
             <li lang="ko_KR">
                 <h2>AOP</h2>
@@ -210,8 +212,8 @@
             </li>
         </ul>
 
-        <h4 lang="ko_KR">데이터 표현과 컨트롤, Rich-UI 개발을 위한 다양한 UI 컴포넌트를 제공합니다.</h4>
-        <h4 lang="en_US">It provides various UI components for data presentation, control, and rich-UI development.</h4>
+        <h3 lang="ko_KR">데이터 표현과 컨트롤, Rich-UI 개발을 위한 다양한 UI 컴포넌트를 제공합니다.</h3>
+        <h3 lang="en_US">It provides various UI components for data presentation, control, and rich-UI development.</h3>
         <ul class="n-ui">
             <li lang="ko_KR">
                 <h2>데이터 처리 컴포넌트</h2>
@@ -247,8 +249,8 @@
             </li>
         </ul>
 
-        <h4 lang="ko_KR">데이터를 손쉽게 핸들링할 수 있는 라이브러리를 제공합니다.</h4>
-        <h4 lang="en_US">Provides a library for easy handling of data.</h4>
+        <h3 lang="ko_KR">데이터를 손쉽게 핸들링할 수 있는 라이브러리를 제공합니다.</h3>
+        <h3 lang="en_US">Provides a library for easy handling of data.</h3>
         <ul class="n-data">
             <li lang="ko_KR">
                 <h2>데이터 서식화</h2>
@@ -276,8 +278,8 @@
             </li>
         </ul>
 
-        <h4 lang="ko_KR">모바일 브라우저(iOS Safari, iOS UIWebView, Android Browser, Android Chrome, Android WebView)와 터치 디바이스를 지원하고 모바일 하이브리드 앱과의 연동을 지원합니다.</h4>
-        <h4 lang="en_US">Supports mobile browsers (iOS Safari, iOS UIWebView, Android Browser, Android Chrome, Android WebView) and touch devices and it supports interworking with mobile hybrid applications.</h4>
+        <h3 lang="ko_KR">모바일 브라우저(iOS Safari, iOS UIWebView, Android Browser, Android Chrome, Android WebView)와 터치 디바이스를 지원하고 모바일 하이브리드 앱과의 연동을 지원합니다.</h3>
+        <h3 lang="en_US">Supports mobile browsers (iOS Safari, iOS UIWebView, Android Browser, Android Chrome, Android WebView) and touch devices and it supports interworking with mobile hybrid applications.</h3>
 
     </div>
 
