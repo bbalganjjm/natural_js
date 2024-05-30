@@ -106,12 +106,12 @@
             }
             if(locale === "ko_KR") {
                 if (N("head .ko.hidden").length === 0) {
-                    $( "<style class='ko hidden'>[lang='ko_KR'] { display: revert !important; }</style>" ).appendTo( "head" )
+                    $( "<style class='ko hidden'>[lang='ko_KR'] { display: revert; display: revert-layer !important; }</style>" ).appendTo( "head" )
                 }
                 $("[lang='en_US']", view).remove();
             } else {
                 if (N("head .en.hidden").length === 0) {
-                    $( "<style class='en hidden'>[lang='en_US'] { display: revert !important; }</style>" ).appendTo( "head" )
+                    $( "<style class='en hidden'>[lang='en_US'] { display: revert; !important; }</style>" ).appendTo( "head" )
                 }
                 $("[lang='ko_KR']", view).remove();
             }

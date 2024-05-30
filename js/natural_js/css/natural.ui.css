@@ -88,13 +88,13 @@
 .alert__.visible__ {
     opacity: 1;
     transform: scale(1);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition: opacity var(--njs-motion-duration-slow) ease, transform var(--njs-motion-duration-slow) ease;
 }
 
 .alert__.hidden__ {
     opacity: 0;
     transform: scale(0.7);
-    transition: opacity 0.15s linear, transform 0.15s linear;
+    transition: opacity var(--njs-motion-duration-fast) linear, transform var(--njs-motion-duration-fast) linear;
 }
 
 .alert__.orgin_left__ {
@@ -235,7 +235,7 @@ a.btn_disabled__, input.btn_disabled__, button.btn_disabled__ {
     will-change: opacity;
 
     opacity: 0.6;
-    transition: opacity 0.3s ease;
+    transition: opacity var(--njs-motion-duration-slow) ease;
     cursor: default;
 }
 
@@ -490,7 +490,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
     height: 16px;
     width: 16px;
     margin-right: -16px;
-    transition: margin-right 0.3s ease;
+    transition: margin-right var(--njs-motion-duration-slow) ease;
 }
 
 .grid__>thead .btn_data_filter__ span {
@@ -500,7 +500,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
     height: 16px;
     width: 16px;
     opacity: 0.3;
-    transition: opacity 0.3s ease;
+    transition: opacity var(--njs-motion-duration-slow) ease;
 }
 
 .grid__>thead .btn_data_filter__:hover {
@@ -508,7 +508,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
     transform: translateZ(0)\0; /* for ie 8+ */
 
     margin-right: 0;
-    transition: margin-right 0.3s ease;
+    transition: margin-right var(--njs-motion-duration-slow) ease;
 }
 
 .grid__>thead .btn_data_filter__:hover span {
@@ -516,7 +516,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
     transform: translateZ(0)\0; /* for ie 8+ */
 
     opacity: 1;
-    transition: opacity 0.3s ease;
+    transition: opacity var(--njs-motion-duration-slow) ease;
 }
 
 .grid__>thead .btn_data_filter__.btn_data_filter_empty__ span {
@@ -551,7 +551,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
     transform-origin: top left;
     opacity: 1;
 
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition: opacity var(--njs-motion-duration-slow) ease, transform var(--njs-motion-duration-slow) ease;
 }
 
 .grid__>thead .data_filter_panel__.hidden__ {
@@ -559,7 +559,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
     transform-origin: top left;
     opacity: 0;
 
-    transition: opacity 0.15s linear, transform 0.15s linear;
+    transition: opacity var(--njs-motion-duration-fast) linear, transform var(--njs-motion-duration-fast) linear;
 }
 
 .grid__>thead .data_filter_panel__ .data_filter_search__ {
@@ -731,7 +731,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
     transform-origin: top right;
     opacity: 1;
 
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition: opacity var(--njs-motion-duration-slow) ease, transform var(--njs-motion-duration-slow) ease;
 }
 
 .grid__ .grid_more_thead_col__ .grid_more_panel__.hidden__ {
@@ -739,7 +739,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
     transform-origin: top right;
     opacity: 0;
 
-    transition: opacity 0.15s linear, transform 0.15s linear;
+    transition: opacity var(--njs-motion-duration-fast) linear, transform var(--njs-motion-duration-fast) linear;
 }
 
 .grid__ .grid_more_thead_col__ .grid_more_panel__ input[type=checkbox] {
@@ -816,15 +816,15 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 .tab__>ul>li,
 .tab__>.tab_native_scroll__>ul>li {
     float: left;
+    line-height: 32px;
     margin-right: 1px;
-    padding: 2px 4px;
+    padding: 0 10px;
     border: 1px solid var(--md-sys-color-outline-variant);
     border-radius: var(--njs-border-radius-m) var(--njs-border-radius-m) var(--njs-border-radius-none) var(--njs-border-radius-none);
     cursor: pointer;
     min-width: 60px;
     text-align: center;
     background-color: var(--md-sys-color-surface-dim);
-    line-height: 20px;
 }
 
 .tab__>ul>li>a,
@@ -862,7 +862,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
     border: 1px solid var(--md-sys-color-outline-variant);
     background-color: var(--md-sys-color-surface-dim);
     color : var(--md-sys-color-on-secondary-container);
-    height: 26px;
+    line-height: 32px;
 }
 
 .tab__>.tab_scroll_prev__ span {
@@ -882,7 +882,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
     transform: translateZ(0)\0; /* for ie 8+ */
 
     opacity : 0.4;
-    transition: opacity 0.3s ease;
+    transition: opacity var(--njs-motion-duration-slow) ease;
 }
 
 .tab__>ul {
@@ -894,7 +894,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
     transform: translateZ(0)\0; /* for ie 8+ */
 
     opacity: 0.6;
-    transition: opacity 0.3s ease;
+    transition: opacity var(--njs-motion-duration-slow) ease;
 }
 
 .tab__>div {
@@ -916,7 +916,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 
 .tab__>div.visible__ > .view_context__ {
     opacity: 1;
-    transition: opacity 0.5s ease;
+    transition: opacity var(--njs-motion-duration-ultraSlow) ease;
 }
 
 /* Datepicker */
@@ -961,13 +961,13 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 .datepicker_contents__.visible__ {
     transform: scale(1);
     opacity: 1;
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition: opacity var(--njs-motion-duration-slow) ease, transform var(--njs-motion-duration-slow) ease;
 }
 
 .datepicker_contents__.hidden__ {
     transform: scale(0.7);
     opacity: 0;
-    transition: opacity 0.3s linear, transform 0.15s linear;
+    transition: opacity var(--njs-motion-duration-slow) linear, transform var(--njs-motion-duration-fast) linear;
 }
 
 .datepicker_contents__.orgin_left__ {
@@ -1046,7 +1046,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 .datepicker_contents__ .datepicker_prev_day_item__.visible__,
 .datepicker_contents__ .datepicker_next_day_item__.visible__ {
     transform: scaleX(1);
-    transition: transform 0.3s ease;
+    transition: transform var(--njs-motion-duration-slow) ease;
 }
 
 .datepicker_contents__ .datepicker_prev_day_item__,
@@ -1456,13 +1456,13 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 .notify__ .notify_msg__.visible__ {
     transform: scale(1);
     opacity: 1;
-    transition: opacity 0.15s ease, transform 0.15s ease;
+    transition: opacity var(--njs-motion-duration-fast) ease, transform var(--njs-motion-duration-fast) ease;
 }
 
 .notify__ .notify_msg__.hidden__ {
     transform: scale(0.7);
     opacity: 0;
-    transition: opacity 0.3s linear, transform 0.3s linear;
+    transition: opacity var(--njs-motion-duration-slow) linear, transform var(--njs-motion-duration-slow) linear;
 }
 
 .notify__ .notify_msg__ a, .notify__ .notify_msg__ span {
@@ -1489,7 +1489,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 
 .docs__>.docs_tab_context__ {
     position: relative;
-    height: 30px;
+    height: 34px;
     border-bottom: 1px solid var(--md-sys-color-outline-variant);
     z-index: 1;
 }
@@ -1498,7 +1498,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
     will-change: margin-left;
     transform: translateZ(0)\0; /* for ie 8+ */
 
-    transition: margin-left 0.3s ease;
+    transition: margin-left var(--njs-motion-duration-slow) ease;
 }
 
 .docs__>.docs_tab_context__>.docs_tabs__, .docs__>.docs_tab_context__>ul.docs_tab_utils__, .docs__>.docs_tab_context__>ul.docs_tab_utils__ .docs_tab_list__ {
@@ -1516,13 +1516,12 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 
 .docs__>.docs_tab_context__>ul.docs_tab_utils__ {
     position: absolute;
-    right: 0;
+    right: 1px;
     padding: 0;
 }
 
 .docs__>.docs_tab_context__>.docs_tabs__>.docs_tab__ {
     display: inline-block;
-    height: 30px;
     margin-left: 1px;
     padding: 0;
     border: 1px solid var(--md-sys-color-outline-variant);
@@ -1547,7 +1546,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 .docs__>.docs_tab_context__>.docs_tabs__>.docs_tab__.active__ {
     background-color: var(--md-sys-color-surface-container-lowest);
     border-bottom: 1px solid var(--md-sys-color-surface-container-lowest);
-    transition: background-color 0.5s ease, border-bottom-color 0.3s ease;
+    transition: background-color var(--njs-motion-duration-ultraSlow) ease, border-bottom-color var(--njs-motion-duration-slow) ease;
 }
 
 .docs__>.docs_tab_context__>.docs_tabs__>.docs_tab__.active__>.docs_tab_active_btn__>span {
@@ -1561,7 +1560,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 
 .docs__>.docs_tab_context__>.docs_tabs__>.docs_tab__.remove__ {
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity var(--njs-motion-duration-slow) ease;
 }
 
 .docs__>.docs_tab_context__>.docs_tabs__>.docs_tab__>.docs_tab_active_btn__ {
@@ -1571,7 +1570,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 }
 
 .docs__>.docs_tab_context__>.docs_tabs__>.docs_tab__>.docs_tab_active_btn__>span {
-    line-height: 30px;
+    line-height: 32px;
 }
 
 .docs__>.docs_tab_context__>.docs_tabs__>.docs_tab__.active__>.docs_tab_active_btn__ {
@@ -1592,12 +1591,9 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
     padding: 0;
     border: 1px solid var(--md-sys-color-outline-variant);
     border-bottom: none;
-    min-width: 25px;
-    max-width: 30px;
-    height: 29px;
+    width: 34px;
     text-align: center;
     background-color: var(--md-sys-color-surface-dim);
-    line-height: 10px;
     border-radius: var(--njs-border-radius-m) var(--njs-border-radius-m) var(--njs-border-radius-none) var(--njs-border-radius-none);
 }
 
@@ -1606,7 +1602,8 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
     display: inline-block;
     color: var(--md-sys-color-surface-container-lowest);
     font-size: 95%;
-    margin-top: 9px;
+    line-height: 25px;
+    margin-top: 10px;
 }
 
 .docs__>.docs_tab_context__>ul.docs_tab_utils__>li.docs_tab_close_all_item__>a {
@@ -1647,14 +1644,14 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
     transform: scale(1);
     opacity: 1;
     transform-origin: top right;
-    transition: transform 0.3s ease, opacity 0.5s ease;
+    transition: transform var(--njs-motion-duration-slow) ease, opacity var(--njs-motion-duration-ultraSlow) ease;
 }
 
 .docs__>.docs_tab_context__>ul.docs_tab_utils__>.docs_tab_list_item__ .docs_tab_list__.hidden__ {
     transform: scale(0.7);
     opacity: 0;
     transform-origin: top right;
-    transition: transform 0.15s linear, opacity 0.15s linear;
+    transition: transform var(--njs-motion-duration-fast) linear, opacity var(--njs-motion-duration-fast) linear;
 }
 
 .docs__>.docs_tab_context__>ul.docs_tab_utils__>.docs_tab_list_item__ .docs_tab_list__>.docs_tab__ {
@@ -1700,7 +1697,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 
 .docs__>.docs_contents__.visible__ {
     opacity: 1;
-    transition: transform 0.5s ease, opacity 0.5s ease;
+    transition: transform var(--njs-motion-duration-ultraSlow) ease, opacity var(--njs-motion-duration-ultraSlow) ease;
 }
 
 .docs__>.docs_contents__.hidden__  {
@@ -1755,7 +1752,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 
 .docs__>.entire_load_indicator__.hidden__ {
     transform: translateY(-3px);
-    transition: transform 0.4s cubic-bezier(1, 0, 1, 1);
+    transition: transform var(--njs-motion-duration-slower) cubic-bezier(1, 0, 1, 1);
 }
 
 /* Webkit scrollbars */
