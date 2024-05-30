@@ -165,6 +165,7 @@ th, tfoot td {
 
 .pagination-box {
     padding: 10px 0;
+    line-height: 0;
     text-align: center;
 }
 
