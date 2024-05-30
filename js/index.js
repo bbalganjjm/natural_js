@@ -109,9 +109,9 @@
                     $( "<style class='ko hidden'>[lang='ko_KR'] { display: revert; display: revert-layer !important; }</style>" ).appendTo( "head" )
                 }
                 $("[lang='en_US']", view).remove();
-            } else {
+            } else if(locale === "en_US") {
                 if (N("head .en.hidden").length === 0) {
-                    $( "<style class='en hidden'>[lang='en_US'] { display: revert; !important; }</style>" ).appendTo( "head" )
+                    $( "<style class='en hidden'>[lang='en_US'] { display: revert; display: revert-layer !important; }</style>" ).appendTo( "head" )
                 }
                 $("[lang='ko_KR']", view).remove();
             }
