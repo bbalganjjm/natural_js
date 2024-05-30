@@ -17,7 +17,7 @@
             <td>false</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">true로 설정하면 로드 한 페이지를 덮어쓰지 않고 첨부합니다.</p>
+                <p lang="ko_KR">true 로 설정하면 로드 한 페이지를 덮어쓰지 않고 첨부합니다.</p>
                 <p lang="en_US">If set to true, the loaded page is appended without being overwritten.</p>
             </td>
         </tr>
@@ -27,9 +27,9 @@
             <td>true</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">false로 설정하면 서버로 요청할 때의 location.href와 서버에서 응답을 받았을 때의 location.href가 다르더라도 응답을 차단하지 않습니다.</p>
+                <p lang="ko_KR">false 로 설정하면 서버로 요청할 때의 location.href 와 서버에서 응답을 받았을 때의 location.href 가 다르더라도 응답을 차단하지 않습니다.</p>
                 <p lang="en_US">If set to false, the response will not be blocked even if location.href when requesting to the server and location.href when receiving a response from the server are different.</p>
-                <p lang="ko_KR" class="alert">알 수 없는 이유로 서버 응답이 차단되었을 경우 이 옵션을 false로 설정해서 테스트해 보세요.</p>
+                <p lang="ko_KR" class="alert">알 수 없는 이유로 서버 응답이 차단되었을 경우 이 옵션을 false 로 설정해서 테스트해 보세요.</p>
                 <p lang="en_US" class="alert">If the server response is blocked for unknown reasons, set this option to false to test.</p>
             </td>
         </tr>
@@ -39,19 +39,19 @@
             <td>false</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">true로 설정하면 N().comm에서 N 함수의 인자로 지정한 파라미터 객체를  array 타입으로 지정할 수 있습니다.</p>
+                <p lang="ko_KR">true 로 설정하면 N().comm 에서 N 함수의 인자로 지정한 파라미터 객체를  array 타입으로 지정할 수 있습니다.</p>
                 <p lang="en_US">If set to true, the parameter object specified as an argument of N function in N().comm can be specified as an array type.</p>
                 <p lang="ko_KR" class="alert">
-                    Communicator를 N(params).comm(url).submit();와 같이 사용할 때 params의 객체 타입이 array 일 때 dataIsArray 옵션이 false로 지정되어 있다면 array의 첫 번째 오브젝트만 전송됩니다.
+                    Communicator 를 N(params).comm(url).submit();와 같이 사용할 때 params 의 객체 타입이 array 일 때 dataIsArray 옵션이 false 로 지정되어 있다면 array 의 첫 번째 오브젝트만 전송됩니다.
                     이 문제의 원인은 jQuery 함수의 인자를 array(jQuery([{}])) 또는 object($({}))로 설정한 후에 get 함수를 호출하면 둘 다 array([{}])를 반환하기 때문입니다.
-                    불편하더라도 array를 서버에 전송할 때는 dataIsArray를 true로 설정하거나 object에 array를 담아서 사용 바랍니다.
+                    불편하더라도 array 를 서버에 전송할 때는 dataIsArray 를 true 로 설정하거나 object 에 array 를 담아서 사용 바랍니다.
                 </p>
                 <p lang="en_US" class="alert">
                     If Communicator is used as N(params).comm(url).submit();, only the first object in the array is sent when the object type of params is array and the dataIsArray option is set to false.
                     The cause of this problem is that if you call get function after setting the argument of jQuery function to array(jQuery([{}])) or object($({})), both return array ([{}]).
                     Even if inconvenient, when sending an array to the server, set dataIsArray to true or use an object in an array.
                 </p>
-                <p lang="ko_KR" class="alert">Communicator를 N.comm(params, url).submit();와 같이 사용하면 dataIsArray 옵션을 true로 지정하지 않아도 params를 jQuery object로 만들지 않기 때문에 array 타입으로 전송됩니다.</p>
+                <p lang="ko_KR" class="alert">Communicator 를 N.comm(params, url).submit();와 같이 사용하면 dataIsArray 옵션을 true 로 지정하지 않아도 params 를 jQuery object 로 만들지 않기 때문에 array 타입으로 전송됩니다.</p>
                 <p lang="en_US" class="alert">When Communicator is used as N.comm(params, url).submit();, params are not created as jQuery objects even if the dataIsArray option is not set to true, so they are sent as an array type.</p>
                 <p lang="ko_KR" class="alert">Natural-ARCHITECTURE v0.8.1.4 버전 이후에 적용되었습니다.</p>
                 <p lang="en_US" class="alert">Natural-ARCHITECTURE v0.8.1.4 or later.</p>
@@ -65,7 +65,7 @@
             <td>
                 <p lang="ko_KR">HTML 컨텐츠를 삽입할 요소를 지정합니다.</p>
                 <p lang="en_US">Specifies the element to insert HTML content.</p>
-                <p lang="ko_KR" class="alert">Communicator를 N(".block").comm("page.html").submit();와 같이 사용할 경우 N("#block") 요소 오브젝트가 target 속성 값으로 지정됩니다.</p>
+                <p lang="ko_KR" class="alert">Communicator 를 N(".block").comm("page.html").submit();와 같이 사용할 경우 N("#block") 요소 오브젝트가 target 속성 값으로 지정됩니다.</p>
                 <p lang="en_US" class="alert">If Communicator is used as N(".block").comm("page.html").submit();, the N(".block") element object is assigned as the target attribute value.</p>
             </td>
         </tr>
@@ -75,7 +75,7 @@
             <td>application/json; charset=utf-8</td>
             <td style="text-align: center;">O</td>
             <td>
-                <p lang="ko_KR">서버 요청에 대한 contentType을 지정합니다.</p>
+                <p lang="ko_KR">서버 요청에 대한 contentType 을 지정합니다.</p>
                 <p lang="en_US">Specifies the contentType for server requests.</p>
                 <p lang="ko_KR" class="alert">contentType 옵션은 jQuery.ajax 함수의 옵션이 그대로 적용됩니다.
                     <a class="link" target="blank_" href="http://api.jquery.com/jquery.ajax/">jQuery.ajax</a>
@@ -92,7 +92,7 @@
             <td>false</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">true로 설정하면 요청된 페이지가 브라우저에 의해 캐싱됩니다.</p>
+                <p lang="ko_KR">true 로 설정하면 요청된 페이지가 브라우저에 의해 캐싱됩니다.</p>
                 <p lang="en_US">If set to true, it will force requested pages to be cached by the browser.</p>
                 <p lang="ko_KR" class="alert">cache 옵션은 jQuery.ajax 함수의 옵션이 그대로 적용됩니다.
                     <a class="link" target="blank_" href="http://api.jquery.com/jquery.ajax/">jQuery.ajax</a>
@@ -126,11 +126,11 @@
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">서버로 전송될 데이터. string이 아닌 경우 string으로 변환됩니다.</p>
+                <p lang="ko_KR">서버로 전송될 데이터. string 이 아닌 경우 string 으로 변환됩니다.</p>
                 <p lang="en_US">Data to be sent to the server. It is converted to a string, if not already a string.</p>
                 <p lang="ko_KR" class="alert">data 옵션은 jQuery.ajax 함수의 옵션이 그대로 적용됩니다.
                     <a class="link" target="blank_" href="http://api.jquery.com/jquery.ajax/">jQuery.ajax</a>
-                    매뉴얼의 settings 부분에서 data속성을 참고하세요.
+                    매뉴얼의 settings 부분에서 data 속성을 참고하세요.
                 </p>
                 <p lang="en_US" class="alert">The data option remains the same as the jQuery.ajax function option.
                     See the data property in the settings section of the <a class="link" target="blank_" href="http://api.jquery.com/jquery.ajax/">jQuery.ajax</a> manual.
@@ -160,7 +160,7 @@
             <td>false</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">동일한 도메인에서 crossDomain 요청 (예 : JSONP)을 강제로 수행하려면 crossDomain 값을 true로 설정하세요. 이를 통해서 다른 도메인으로 서버 사이드 리다이렉션 하는 것 등이 가능해집니다.</p>
+                <p lang="ko_KR">동일한 도메인에서 crossDomain 요청 (예 : JSONP)을 강제로 수행하려면 crossDomain 값을 true 로 설정하세요. 이를 통해서 다른 도메인으로 서버 사이드 리다이렉션 하는 것 등이 가능해집니다.</p>
                 <p lang="en_US">If you wish to force a crossDomain request(such as JSONP) on the same domain, set the value of crossDomain to true. This allows, for example, server-side redirection to another domain.</p>
                 <p lang="ko_KR" class="alert">crossDomain 옵션은 jQuery.ajax 함수의 옵션이 그대로 적용됩니다.
                     <a class="link" target="blank_" href="http://api.jquery.com/jquery.ajax/">jQuery.ajax</a>
@@ -172,14 +172,14 @@
             </td>
         </tr>
     </table>
-    <p lang="ko_KR" class="alert">N.comm은 jQuery.ajax 모듈을 사용하여 Ajax 요청을 처리합니다. jQuery.ajax의 beforeSend, success, error, complete 옵션을 제외 한 옵션들은 N.comm에서도 그대로 적용됩니다.</p>
+    <p lang="ko_KR" class="alert">N.comm 은 jQuery.ajax 모듈을 사용하여 Ajax 요청을 처리합니다. jQuery.ajax 의 beforeSend, success, error, complete 옵션을 제외 한 옵션들은 N.comm 에서도 그대로 적용됩니다.</p>
     <p lang="en_US" class="alert">N.comm uses the jQuery.ajax module to process Ajax requests. The options in jQuery.ajax also apply to N.comm except for beforeSend, success, error and complete options.</p>
 
     <hr>
     <p><strong>주석</strong></p>
     <ol>
         <li>
-            <span lang="ko_KR" id="jsonarray">JSON 포맷의 object들이 담겨있는 array 객체.</span>
+            <span lang="ko_KR" id="jsonarray">JSON 포멧의 객체가 담겨있는 array 객체.</span>
             <span lang="en_US" id="jsonarray">An array object containing JSON format objects.</span>
         </li>
     </ol>
