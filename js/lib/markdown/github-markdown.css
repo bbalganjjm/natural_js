@@ -119,8 +119,8 @@
   color: inherit;
   background-color: inherit;
   font-family: inherit;
-  font-size: inherit;
-  line-height: 1.5;
+  font-size: var(--njs-font-size-m);
+  line-height: var(--njs-line-height-m);
   word-wrap: break-word;
 }
 

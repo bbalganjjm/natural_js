@@ -46,7 +46,7 @@
                     이 문제의 원인은 jQuery 함수의 인자를 array(jQuery([{}])) 또는 object($({}))로 설정한 후에 get 함수를 호출하면 둘 다 array([{}])를 반환하기 때문입니다.
                     불편하더라도 array를 서버에 전송할 때는 dataIsArray를 true로 설정하거나 object에 array를 담아서 사용 바랍니다.
                 </p>
-                <p lang="ko_KR" class="alert">
+                <p lang="en_US" class="alert">
                     If Communicator is used as N(params).comm(url).submit();, only the first object in the array is sent when the object type of params is array and the dataIsArray option is set to false.
                     The cause of this problem is that if you call get function after setting the argument of jQuery function to array(jQuery([{}])) or object($({})), both return array ([{}]).
                     Even if inconvenient, when sending an array to the server, set dataIsArray to true or use an object in an array.

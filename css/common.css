@@ -828,7 +828,7 @@ pre.shell>code {
 }
 
 .apiDoc.api-view-list-type .api.form td p[lang] {
-    display: inline;
+    display: block;
 }
 .apiDoc.api-view-list-type .api.form td p[lang].alert {
     display: block;
