@@ -499,6 +499,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
     height: 16px;
     width: 16px;
     opacity: 0.3;
+    margin-left: -6px; /* padding-left negative of th - 1px */
     transition: opacity var(--njs-motion-duration-slow) ease;
 }
 
@@ -517,15 +518,18 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 }
 
 .grid__>thead .btn_data_filter__.btn_data_filter_empty__ span {
-    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABOklEQVQ4y2N89e2rhMfWVTe//P7Nx0AC4GFl/bTDO0ydSYyL+0WujnE9KZoZGBgYcnWM68W4uF8wMTAwMMSoaU9R5Re8QqxmVX7BKzFq2lMYGBgYmBgYGBhYmZn/1Bpb5RJrQK2xVS4rM/MfuAEMDAwMFhLSB7zllFcQ0uwtp7zCQkL6AIzPhCxZbmhezMXC8gWXZi4Wli/lhubFyGIoBkhw8zzL1jFqxGVAto5RowQ3zzOcBjAwMDDEq+tMUuITuIEursQncCNeXWcSujiGAWzMLL9qjC0xArTG2DKXjZnlF0EDGBgYGGwkZfe4yyqugfHdZRXX2EjK7sGmFqsBDAwMDJ5ySquxsYk2gIGB4R8ONtEGEAVoZ4C9lOy2AEXVRYQMYMElwc3K9o2BgSF+7d0b+zmZWb7hUgcAXz9B79ssNEEAAAAASUVORK5CYII=') 0 0 no-repeat;
+    background: var(--njs-icon-filter-empty) 0 0 no-repeat;
+    background-size: 10px;
 }
 
 .grid__>thead .btn_data_filter__.btn_data_filter_part__ span {
-    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABZUlEQVQ4y2N89e2rhMfWVTe//P7Nx0AC4GFl/bTDO0ydRYyL+8X865fq28+f6C/UM6mW5+W/hU/jw88f1fovnWnN1TGuF+PifsHAwMDA8PvvXxbvrasvp+zfvpWQzSn7t2/13rr68u+/f1lQJE68eOqgtmzW/z2P7/vh0rzn8X0/tWWz/p948dQBJsaIrKDwyN7lF9++sigxMCvFZkDPhVPd+sJiJ/ptnCOxGvDi6xcpj62rbn7784cHmwFcLCxfdniHqUtw8zyDiTEhK5Dg5nmWrWPUiMsL2TpGjciaMQxgYGBgiFfXmaTEJ3ADXVyJT+BGvLrOJHRxDAPYmFl+1Rhb5qKL1xhb5rIxs/wiaAADAwODjaTsHndZxTUwvrus4hobSdk92NRiNYCBgYHBU05pNTY20QYwMDD8w8Em2gCiAO0MsJeS3RagqLqIkAEsuCS4Wdm+MTAwxK+9e2M/JzPLN1zqAP7xc07MhO4lAAAAAElFTkSuQmCC') 0 0 no-repeat;
+    background: var(--njs-icon-filter-half) 0 0 no-repeat;
+    background-size: 10px;
 }
 
 .grid__>thead .btn_data_filter__.btn_data_filter_full__ span {
-    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABeElEQVQ4y2NMO7B984Fnj30YSAQ8rKyfdniHqbNUG1kVHnuxxsVaQnqPv6LqQkIaH37+qNZ/6Uxrro5xvRgX9wsGBgYGhgkXTzcbrpr/8eW3r1KEDEjZv32r99bVl3///csCF/z2+zeXw4Zl94uP7luMT/Oex/f91JbN+n/ixVMHDMmdj+4FqS2b9f/Uy2d22DR///2bw2nj8ruFR/Yux2lD0r5tO323rbmI4jwomHTpTKPBqnmfX3z9gtub9z6+V9NeMefnwhuX85DFH33+qKS7cu732dculBCMnu7zJ9uNVy94//r7NzGYWMbBnRs9tqy6/uvvHzaCBnz99YvHbv3Sx+XHD8xnYGBgOPD0oZfasln/jzx/7EJQMwxsfXAnTH3ZrL9X3r42ctm04nbu4d2rcallwiboraCy6j8DA9OjL5+UHn35pOIpp0SaAVjAP0oNYCDLgA33byWSbcB0OzffOx8/aFDkvO+/f3NMunSmce+TBzizOwC2vq2OXKHQ7wAAAABJRU5ErkJggg==') 0 0 no-repeat;
+    background: var(--njs-icon-filter-full) 0 0 no-repeat;
+    background-size: 10px;
 }
 
 .grid__>thead .data_filter_panel__ {
@@ -713,13 +717,15 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
     display: inline-block;
     height: 16px;
     width: 16px;
-    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABVUlEQVQ4y2NkIAA+//rJd/j5Ezdc8iyEDOBlY/809fJZjYmXzzZjk2fc9vBuCD4DvOSV1zAwMDBMv3Kuqv/SmVYMA9SWzfqPz4BbUWmMDAwMDF9//+Lx3bb24pOvn5UwvDDB2jkUZhM28O33L660gzs3o2tmYGBgYCIUBt9+/+bKOLRr86lXzx0YGBgYZHl476Vo6nURFYjf//zmyDy0a+OJl8+cGBgYGGS4eR8scvJxlObhfTT18tnPEy+fbcZpwI8/vzmyDu3eeOzFUxcGBgYGKS6eB4ucvB2leXgfMTAwMGTrGrdMvnSGCacXfv/7x/bl9y8+BgYGBkku7keLnL2dZXj5Hjz7+lkGFnO5eiZNDGrLZv3HFZWffv3kyzm8e+3DTx/hgbft4d0Q5JjDGwZ8bOyfGBgYgqfgUUMwFgiBgTeAYFLGBWBJnGWCtXMoOQZ4QWkAIHuD/uzmSGwAAAAASUVORK5CYII=') 0 0 no-repeat;
+    background: var(--njs-icon-open) 50% 50% no-repeat;
+    background-size: 16px;
 }
 
 .grid__ .grid_more_thead_col__ .grid_more_panel__ {
     will-change: opacity, transform;
 
     border: 1px solid var(--md-sys-color-outline-variant);
+    border-radius: var(--njs-border-radius-m);
     background-color: var(--md-sys-color-surface-container-lowest);
     box-shadow: var(--njs-elevation-m);
     padding: 5px;
@@ -864,7 +870,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
     border: 1px solid var(--md-sys-color-outline-variant);
     background-color: var(--md-sys-color-surface-dim);
     color : var(--md-sys-color-on-secondary-container);
-    line-height: 32px;
+    line-height: 30px;
 }
 
 .tab__>.tab_scroll_prev__ span {

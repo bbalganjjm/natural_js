@@ -1,3 +1,11 @@
+<style>
+    .refr010102 ul > li {
+        margin-bottom: 5px;
+    }
+    .refr010102 td > ul > li {
+        margin-bottom: 20px;
+    }
+</style>
 <article class="refr010102 apiDoc">
     <h1>
         <span lang="ko_KR">jQuery selector 확장</span>
@@ -10,86 +18,78 @@
     <table>
         <thead>
             <tr>
-            <th style="padding-left:1rem;font-weight: 400;text-align:left;">
-                <strong>[selector]</strong>:regexp( <strong>attributeName[:propertyName]</strong>, <strong>expr</strong> )
-                <span style="float:right;font-weight: 700;">Return: jQuery Object</span>
-            </th>
+                <th style="padding-left:1rem;font-weight: 400;text-align:left;">
+                    <strong>[selector]</strong>:regexp( <strong>attributeName[:propertyName]</strong>, <strong>expr</strong> )
+                    <span style="float:right;font-weight: 700;">Return: jQuery Object</span>
+                </th>
             </tr>
         </thead>
         <tr>
             <td>
-            <ul>
-                <li>
-                    <div><strong>selector</strong></div>
-                    <div>Type : string</div>
-                    <div>
-                       <p lang="ko_KR">기본 selector 문자열입니다.</p>
-                       <p lang="en_US">Default selector string.</p>
-                       <p lang="ko_KR">생략할 경우 모든 요소에 대해 평가가 이뤄지기 때문에 가능하면 기본 selector를 지정하는 것이 좋습니다.</p>
-                       <p lang="en_US">If omitted, it is recommended to specify the default selector if possible, because all elements are evaluated.</p>
-                    </div>
-                </li>
-                <li>
-                    <div><strong>attributeName</strong></div>
-                    <div>Type : string</div>
-                    <div>
-                       <p lang="ko_KR">평가하려는 값을 갖고 있는 HTML DOM 요소의 속성 명입니다.</p>
-                       <p lang="en_US">The attribute name of the HTML DOM element whose value you want to evaluate.</p>
-                       <p lang="ko_KR">아래에 나열된 속성을 제외한 모든 속성 값은 <a href="//api.jquery.com/attr/#attr1"><strong>.attr(attributeName)</strong></a> 함수의 반환 값으로 평가됩니다.</p>
-                       <p lang="en_US">All property values except those listed below are evaluated as the return value of the <a href="//api.jquery.com/attr/#attr1"><strong>.attr(attributeName)</strong></a> function.</p>
-                    <ul>
-                        <li>
-                            <strong>data</strong> :
-                            <span lang="ko_KR">요소의 data속성을 추출합니다.</span>
-                            <span lang="en_US">Extract the element's data attribute.</span>
-                            <strong lang="ko_KR">반드시 propertyName으로 하위 속성을 지정해야 합니다.</strong>
-                            <strong lang="en_US">You must specify a child property with propertyName.</strong>
-                            <span lang="ko_KR"><a href="//api.jquery.com/data/#data2"><strong>.data(properyName)</strong></a> 함수의 반환 값과 같습니다.</span>
-                            <span lang="en_US">Equivalent to the return value of the <a href="//api.jquery.com/data/#data2"><strong>.data(properyName)</strong></a> function.</span>
-                        </li>
-                        <li>
-                            <strong>css</strong> :
-                            <span lang="ko_KR">요소의 css 속성을 추출합니다.</span>
-                            <span lang="en_US">Extract the element's css attribute.</span>
-                            <strong lang="ko_KR">반드시 propertyName으로 하위 속성을 지정해야 합니다.</strong>
-                            <strong lang="en_US">You must specify a child property with propertyName.</strong>
-                            <span lang="ko_KR"><a href="//api.jquery.com/css/#css1"><strong>.css(propertyName)</strong></a> 함수의 반환 값과 같습니다.</span>
-                            <span lang="en_US">Equivalent to the return value of the <a href="//api.jquery.com/css/#css1"><strong>.css(propertyName)</strong></a> function.</span>
-                        </li>
-                        <li>
-                            <strong>class</strong> :
-                            <span lang="ko_KR">요소의 class 속성을 추출합니다.</span>
-                            <span lang="en_US">Extract the element's class attribute.</span>
-                           <span lang="ko_KR">class 속성 값이 둘 이상인 요소의 경우 각 클래스에 대해 평가가 수행됩니다.</span>
-                           <span lang="en_US">For elements with more than one class attribute value, evaluation is performed for each class.</span>
-                        </li>
-                    </ul>
-                    </div>
-                </li>
-                <li>
-                    <div><strong>propertyName</strong></div>
-                    <div>Type : string</div>
-                    <div>
-                       <span lang="ko_KR">attributeName이 data 혹은 css인 경우 하위 속성을 의미합니다.</span>
-                       <span lang="en_US">If attributeName is data or css, it means sub-attribute.</span>
-                       <span lang="ko_KR">이외의 경우 값을 지정해도 무시됩니다.</span>
-                       <span lang="en_US">In other cases, specifying a value is ignored.</span>
-                    </div>
-                </li>
-                <li>
-                    <div><strong>expr</strong></div>
-                    <div>Type : string</div>
-                    <div>
-                       <p lang="ko_KR">정규 표현식 문자열입니다. 큰따옴표나 작은따옴표로 감싸지 않아야 합니다.</p>
-                       <p lang="en_US">Regular expression string. It should not be enclosed in double or single quotation marks.</p>
+                <ul>
+                    <li>
+                        <p><strong>selector</strong></p>
+                        <p>Type : string</p>
+                        <p lang="ko_KR">기본 selector 문자열입니다.</p>
+                        <p lang="en_US">Default selector string.</p>
+                        <p lang="ko_KR">생략할 경우 모든 요소에 대해 평가가 이뤄지기 때문에 가능하면 기본 selector를 지정하는 것이 좋습니다.</p>
+                        <p lang="en_US">If omitted, it is recommended to specify the default selector if possible, because all elements are evaluated.</p>
+                    </li>
+                    <li>
+                        <p><strong>attributeName</strong></p>
+                        <p>Type : string</p>
+                        <p lang="ko_KR">평가하려는 값을 갖고 있는 HTML DOM 요소의 속성 명입니다.</p>
+                        <p lang="en_US">The attribute name of the HTML DOM element whose value you want to evaluate.</p>
+                        <p lang="ko_KR">아래에 나열된 속성을 제외한 모든 속성 값은 <a href="//api.jquery.com/attr/#attr1"><strong>.attr(attributeName)</strong></a> 함수의 반환 값으로 평가됩니다.</p>
+                        <p lang="en_US">All property values except those listed below are evaluated as the return value of the <a href="//api.jquery.com/attr/#attr1"><strong>.attr(attributeName)</strong></a> function.</p>
+                        <ul>
+                            <li>
+                                <strong>data</strong> :
+                                <span lang="ko_KR">요소의 data속성을 추출합니다.</span>
+                                <span lang="en_US">Extract the element's data attribute.</span>
+                                <strong lang="ko_KR">반드시 propertyName으로 하위 속성을 지정해야 합니다.</strong>
+                                <strong lang="en_US">You must specify a child property with propertyName.</strong>
+                                <span lang="ko_KR"><a href="//api.jquery.com/data/#data2"><strong>.data(properyName)</strong></a> 함수의 반환 값과 같습니다.</span>
+                                <span lang="en_US">Equivalent to the return value of the <a href="//api.jquery.com/data/#data2"><strong>.data(properyName)</strong></a> function.</span>
+                            </li>
+                            <li>
+                                <strong>css</strong> :
+                                <span lang="ko_KR">요소의 css 속성을 추출합니다.</span>
+                                <span lang="en_US">Extract the element's css attribute.</span>
+                                <strong lang="ko_KR">반드시 propertyName으로 하위 속성을 지정해야 합니다.</strong>
+                                <strong lang="en_US">You must specify a child property with propertyName.</strong>
+                                <span lang="ko_KR"><a href="//api.jquery.com/css/#css1"><strong>.css(propertyName)</strong></a> 함수의 반환 값과 같습니다.</span>
+                                <span lang="en_US">Equivalent to the return value of the <a href="//api.jquery.com/css/#css1"><strong>.css(propertyName)</strong></a> function.</span>
+                            </li>
+                            <li>
+                                <strong>class</strong> :
+                                <span lang="ko_KR">요소의 class 속성을 추출합니다.</span>
+                                <span lang="en_US">Extract the element's class attribute.</span>
+                               <span lang="ko_KR">class 속성 값이 둘 이상인 요소의 경우 각 클래스에 대해 평가가 수행됩니다.</span>
+                               <span lang="en_US">For elements with more than one class attribute value, evaluation is performed for each class.</span>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <p><strong>propertyName</strong></p>
+                        <p>Type : string</p>
+                        <p lang="ko_KR">attributeName이 data 혹은 css인 경우 하위 속성을 의미합니다.</p>
+                        <p lang="en_US">If attributeName is data or css, it means sub-attribute.</p>
+                        <p lang="ko_KR">이외의 경우 값을 지정해도 무시됩니다.</p>
+                        <p lang="en_US">In other cases, specifying a value is ignored.</p>
+                    </li>
+                    <li>
+                        <p><strong>expr</strong></p>
+                        <p>Type : string</p>
+                        <p lang="ko_KR">정규 표현식 문자열입니다. 큰따옴표나 작은따옴표로 감싸지 않아야 합니다.</p>
+                        <p lang="en_US">Regular expression string. It should not be enclosed in double or single quotation marks.</p>
 <pre><code><span lang="ko_KR">/* href 속성에 "Mr.Lee" 혹은 "Mr.Kim"을 포함하는 모든 a 태그 추출 */</span><span lang="en_US">/* Extract all a tags that contain "Mr.Lee" or "Mr.Kim" in the href attribute. */</span>
 N("a:regexp(href, 'Mr\\.(Lee|Kim)')"); // (X)
 N('a:regexp(href, "Mr\\.(Lee|Kim)")'); // (X)
 N("a:regexp(href, Mr\\.(Lee|Kim))"); // (O)
 </code></pre>
-                    </div>
-                </li>
-            </ul>
+                    </li>
+                </ul>
             </td>
         </tr>
     </table>
