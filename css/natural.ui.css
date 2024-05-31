@@ -894,7 +894,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
     display: inline-block;
     height: 30px;
     width: 18px;
-    background: var(--njs-icon-arrow-right-double) 50% 50% no-repeat;
+    background: var(--njs-icon-arrow-right-last) 50% 50% no-repeat;
     background-size: 12px;
     transform: rotate(180deg);
 }
@@ -903,7 +903,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
     display: inline-block;
     height: 30px;
     width: 18px;
-    background: var(--njs-icon-arrow-right-double) 50% 50% no-repeat;
+    background: var(--njs-icon-arrow-right-last) 50% 50% no-repeat;
     background-size: 12px;
 }
 
@@ -1403,7 +1403,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 }
 
 .pagination__ .pagination_lefter__ li.pagination_first__ a {
-    background: var(--njs-icon-double-arrow-right) 2px 2px no-repeat;
+    background: var(--njs-icon-arrow-right-last) 2px 2px no-repeat;
     background-size: 13px;
     transform: rotate(180deg);
 }
@@ -1430,7 +1430,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 }
 
 .pagination__ .pagination_righter__ li.pagination_last__ a {
-    background: var(--njs-icon-double-arrow-right) 1px 1px no-repeat;
+    background: var(--njs-icon-arrow-right-last) 1px 1px no-repeat;
     background-size: 13px;
 }
 
