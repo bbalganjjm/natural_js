@@ -108,18 +108,19 @@ table {
 
 th, td {
     border: 1px solid var(--md-sys-color-outline-variant);
+    border-left: none;
+    border-right: none;
     word-break: break-all;
     padding: 5px;
 }
 
 .form__ th, .form__ td,
 .grid__ th, .grid__ td {
-    padding: 0px 5px;
-    line-height: 28px;
+    padding: 5px;
 }
 
 th, tfoot td {
-    background-color: var(--md-sys-color-surface-container-high);
+    background-color: var(--md-sys-color-surface-container);
     font-weight: 400;
 }
 
@@ -185,7 +186,7 @@ th, tfoot td {
     transform-origin: left;
     transition: margin-left var(--njs-motion-duration-ultra-slow) ease, box-shadow var(--njs-motion-duration-fast) ease;
 
-    background-color: var(--md-sys-color-tertiary-container);
+    background-color: var(--md-sys-color-secondary-container);
     min-height: 100%;
 
     border-radius: var(--njs-border-radius-none) var(--njs-border-radius-m) var(--njs-border-radius-m) var(--njs-border-radius-none);
@@ -307,6 +308,10 @@ th, tfoot td {
     margin-bottom: 16px;
     background: var(--md-sys-color-surface-container) url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAkElEQVQoz5WQQQrCUAxE3/z/FXqDegnPUC8k9AIFV17LjZfpBVzUn7ipIDZiGxgCk2EyiQwubKgEDBv0Awb+zRp0Bl3Ae/nhdJr7LYq0rcJIUmtSG2njDe497n00koELdgCC5+xUFPnAhEGd4TXnvcH1g1ugJMjvfKr1DoxIh+Q+/jv+YXCemmbd50w6rtG9ANZ+P7VXtHZhAAAAAElFTkSuQmCC') no-repeat 10px 14px;
     border-radius: var(--njs-border-radius-m);
+}
+
+.markdown-body .alert:not(article) {
+    margin: 16px 0;
 }
 
 article p {
@@ -441,6 +446,7 @@ article .btnBox {
 /* Examples */
 .docs_contents__>.view_context__ .searchBox {
     background-color: var(--md-sys-color-surface-container-low);
+    border: 1px solid var(--md-sys-color-outline-variant);
     border-radius: var(--njs-border-radius-m);
     margin-bottom: 16px;
 }
@@ -457,7 +463,7 @@ article .btnBox {
 }
 
 .docs_contents__>.view_context__ .searchBox ul li.inputs {
-    border-bottom: 1px dotted var(--md-sys-color-outline-variant);
+
 }
 
 .docs_contents__>.view_context__ .searchBox ul li.buttons {

@@ -524,7 +524,7 @@
         "tab" : {
             "tabScrollCorrection" : {
                 tabContainerWidthCorrectionPx : 1,
-                tabContainerWidthReCalcDelayTime : 100
+                tabContainerWidthReCalcDelayTime : 200
             },
             "onActive" : function(tabIdx, tabEle, contentEle, tabEles, contentEles) {
                 if($(window).width() > 731) { // 748 - 17px(?)
