@@ -49,8 +49,13 @@ input[type='text'], input[type='number'], input[type='tel'], input[type='passwor
     box-sizing: border-box;
     width: 100%;
     padding: 3px;
-    border: 1px solid var(--md-sys-color-outline-variant);
+    border: 1px solid transparent;
     line-height: 16px;
+}
+
+input[type='text']:hover, input[type='number']:hover, input[type='tel']:hover, input[type='password']:hover, select:hover, textarea:hover,
+input[type='text']:focus, input[type='number']:focus, input[type='tel']:focus, input[type='password']:focus, select:focus, textarea:focus {
+    border: 1px solid var(--md-sys-color-outline-variant);
 }
 
 select {
@@ -195,7 +200,7 @@ th, tfoot td {
 }
 
 .main-nav:hover {
-    box-shadow: 1px 0 3px var(--md-sys-color-shadow);
+    box-shadow: var(--njs-elevation-s);
 }
 
 .content-wrap {
