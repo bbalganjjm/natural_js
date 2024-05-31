@@ -551,7 +551,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
     border-radius: var(--njs-border-radius-m);
     box-shadow: var(--njs-elevation-m);
     padding: 4px;
-    margin: -5px 0 0 5px;
+    margin: 0 0 0 -10px;
     color : var(--md-sys-color-on-surface);
     text-shadow: none;
 }
@@ -561,7 +561,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
     transform-origin: top left;
     opacity: 1;
 
-    transition: opacity var(--njs-motion-duration-slow) ease, transform var(--njs-motion-duration-slow) ease;
+    transition: opacity var(--njs-motion-duration-normal) ease, transform var(--njs-motion-duration-normal) ease;
 }
 
 .grid__>thead .data_filter_panel__.hidden__ {
@@ -842,7 +842,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
     cursor: pointer;
     min-width: 60px;
     text-align: center;
-    background-color: var(--md-sys-color-surface-dim);
+    background-color: var(--md-sys-color-surface-container-low);
 }
 
 .tab__>ul>li>a,
@@ -877,7 +877,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 
 .tab__>.tab_scroll_prev__, .tab__>.tab_scroll_next__ {
     border: 1px solid var(--md-sys-color-outline-variant);
-    background-color: var(--md-sys-color-surface-dim);
+    background-color: var(--md-sys-color-surface-container-low);
 
     line-height: 0;
 }
@@ -1563,7 +1563,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 }
 
 .docs__>.docs_tab_context__>.docs_tabs__>.docs_tab__.inactive__ {
-    background-color: var(--md-sys-color-surface-dim);
+    background-color: var(--md-sys-color-surface-container);
 }
 
 .docs__>.docs_tab_context__>.docs_tabs__>.docs_tab__.inactive__>.docs_tab_active_btn__>span {
@@ -1621,7 +1621,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
     border-bottom: none;
     width: 34px;
     text-align: center;
-    background-color: var(--md-sys-color-surface-dim);
+    background-color: var(--md-sys-color-surface-container);
     border-radius: var(--njs-border-radius-m) var(--njs-border-radius-m) var(--njs-border-radius-none) var(--njs-border-radius-none);
 }
 
