@@ -1069,7 +1069,7 @@
                 });
             });
         }
-    }, { // Automatically include API View Type.
+    }, { // Insert API View Type.
         "pointcut" : ".apiDoc:^init$",
         "adviceType" : "before",
         "fn" : function(cont, fnChain, args){
@@ -1091,9 +1091,11 @@
                         if(N(this).is(":checked")) {
                             localStorage.setItem("isListTypeView", "Y");
                             view.addClass("api-view-list-type");
+                            view.find("td:empty").hide();
                         } else {
                             localStorage.setItem("isListTypeView", "N");
                             view.removeClass("api-view-list-type");
+                            view.find("td:empty").show();
                         }
                         N(window).trigger("resize.mobile", [ view ]);
                     });

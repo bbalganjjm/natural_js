@@ -143,18 +143,6 @@
                 })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
             }
         },
-        webFont : function(locale) {
-            // 웹 폰트
-            var fontFamily = "Lato:300,400,600";
-            if(locale == "en") {
-                fontFamily = "Lato:400,600";
-            }
-            WebFont.load({
-                google: {
-                   families: [fontFamily]
-                }
-            });
-        },
         mobileResponsiveView : function() {
             // API 문서 모바일 용 보기 처리 이벤트
             N(window).on("resize.mobile", function(e, view) {

@@ -256,7 +256,7 @@ th, tfoot td {
     -webkit-flex: 1;
     -ms-flex: 1;
     flex: 1;
-    margin-bottom: 10px;
+    margin-bottom: 16px;
 }
 
 .flex-vertical>*:last-child {
@@ -304,6 +304,7 @@ th, tfoot td {
 
 .alert:not(article) {
     padding: 10px 10px 10px 30px;
+    margin-bottom: 16px;
     background: var(--md-sys-color-surface-container) url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAkElEQVQoz5WQQQrCUAxE3/z/FXqDegnPUC8k9AIFV17LjZfpBVzUn7ipIDZiGxgCk2EyiQwubKgEDBv0Awb+zRp0Bl3Ae/nhdJr7LYq0rcJIUmtSG2njDe497n00koELdgCC5+xUFPnAhEGd4TXnvcH1g1ugJMjvfKr1DoxIh+Q+/jv+YXCemmbd50w6rtG9ANZ+P7VXtHZhAAAAAElFTkSuQmCC') no-repeat 10px 14px;
     border-radius: var(--njs-border-radius-m);
 }
@@ -317,11 +318,11 @@ article p:last-child {
 }
 
 article div.grid_wrap__ {
-    margin-bottom: 15px;
+    margin-bottom: 16px;
 }
 
 article .btnBox {
-    margin-bottom: 15px;
+    margin-bottom: 16px;
     line-height: 40px;
 }
 
@@ -401,7 +402,7 @@ article .btnBox {
 }
 
 .apiDoc .apidemo>article .dataBox {
-    margin-bottom: 15px;
+    margin-bottom: 16px;
 }
 
 .apiDoc .apidemo .form .demo-desc {
@@ -427,7 +428,7 @@ article .btnBox {
 .apiDoc .apidemo .form input:focus+.demo-desc,
 .apiDoc .apidemo .form textarea:focus+.demo-desc {
     will-change: transform, opacity;
-    margin-bottom: 15px;
+    margin-bottom: 16px;
     opacity: 1;
     transform : scaleY(1);
 
@@ -441,7 +442,7 @@ article .btnBox {
 .docs_contents__>.view_context__ .searchBox {
     background-color: var(--md-sys-color-surface-container-low);
     border-radius: var(--njs-border-radius-m);
-    margin-bottom: 10px;
+    margin-bottom: 16px;
 }
 
 .docs_contents__>.view_context__ .searchBox ul {
@@ -469,7 +470,7 @@ article .btnBox {
 }
 
 .docs_contents__>.view_context__ .formGroup {
-    margin-bottom: 10px;
+    margin-bottom: 16px;
 }
 
 .docs_contents__>.view_context__ .searchBox li>label {
@@ -506,7 +507,7 @@ article .btnBox {
 .docs_contents__>.view_context__ h4,
 .docs_contents__>.view_context__ h5,
 .docs_contents__>.view_context__ h6 {
-    margin-bottom: 10px;
+    margin-bottom: 16px;
 }
 
 .docs_contents__ .view_context__ .click {
@@ -658,7 +659,7 @@ pre.shell>code {
         padding: 10px;
         color: var(--md-sys-color-surface-tint);
         font-size: var(--njs-font-size-l);
-        font-weight: var(--njs-font-weight-l);
+        font-weight: var(--njs-font-weight-bold);
         line-height: var(--njs-line-height-l);
     }
 
@@ -832,7 +833,7 @@ pre.shell>code {
     padding: 10px;
     color: var(--md-sys-color-surface-tint);
     font-size: var(--njs-font-size-l);
-    font-weight: var(--njs-font-weight-l);
+    font-weight: var(--njs-font-weight-bold);
     line-height: var(--njs-line-height-l);
 }
 
