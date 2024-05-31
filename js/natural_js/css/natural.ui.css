@@ -878,8 +878,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 .tab__>.tab_scroll_prev__, .tab__>.tab_scroll_next__ {
     border: 1px solid var(--md-sys-color-outline-variant);
     background-color: var(--md-sys-color-surface-dim);
-    color : var(--md-sys-color-on-secondary-container);
-    border-radius: var(--njs-border-radius-m) var(--njs-border-radius-m) 0 0;
+
     line-height: 0;
 }
 
@@ -929,7 +928,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 .tab__>div {
     padding: 15px;
     border: 1px solid var(--md-sys-color-outline-variant);
-    border-radius: 0 var(--njs-border-radius-m) var(--njs-border-radius-m) var(--njs-border-radius-m);
+    border-radius: 0 0 var(--njs-border-radius-m) var(--njs-border-radius-m);
 }
 
 .tab__>div > .view_context__ {
