@@ -61,12 +61,12 @@
     --njs-border-radius-xl: 8px;
     --njs-border-radius-cir: 10000px;
 
-    --njs-motion-duration-ultraFast: 50ms;
+    --njs-motion-duration-ultra-fast: 50ms;
     --njs-motion-duration-faster: 100ms;
     --njs-motion-duration-fast: 150ms;
     --njs-motion-duration-normal: 200ms;
     --njs-motion-duration-gentle: 250ms;
     --njs-motion-duration-slow: 300ms;
     --njs-motion-duration-slower: 400ms;
-    --njs-motion-duration-ultraSlow: 500ms;
+    --njs-motion-duration-ultra-slow: 500ms;
 }

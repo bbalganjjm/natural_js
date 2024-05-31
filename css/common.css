@@ -183,7 +183,7 @@ th, tfoot td {
     width: 270px;
 
     transform-origin: left;
-    transition: margin-left var(--njs-motion-duration-ultraSlow) ease, box-shadow var(--njs-motion-duration-fast) ease;
+    transition: margin-left var(--njs-motion-duration-ultra-slow) ease, box-shadow var(--njs-motion-duration-fast) ease;
 
     background-color: var(--md-sys-color-tertiary-container);
     min-height: 100%;
@@ -211,7 +211,7 @@ th, tfoot td {
     position: relative;
     min-height: 100%;
     margin-left: 270px;
-    transition: margin-left var(--njs-motion-duration-ultraSlow) ease;
+    transition: margin-left var(--njs-motion-duration-ultra-slow) ease;
 }
 
 .page-footer {
@@ -420,7 +420,7 @@ article .btnBox {
     line-height: var(--njs-line-height-s-plus);
     transform : scaleY(0);
     transform-origin: top;
-    transition: transform var(--njs-motion-duration-ultraSlow) ease, opacity var(--njs-motion-duration-ultraSlow) ease;
+    transition: transform var(--njs-motion-duration-ultra-slow) ease, opacity var(--njs-motion-duration-ultra-slow) ease;
     max-height: 300px;
 }
 

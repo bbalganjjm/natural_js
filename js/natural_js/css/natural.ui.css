@@ -944,7 +944,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 
 .tab__>div.visible__ > .view_context__ {
     opacity: 1;
-    transition: opacity var(--njs-motion-duration-ultraSlow) ease;
+    transition: opacity var(--njs-motion-duration-ultra-slow) ease;
 }
 
 /* Datepicker */
@@ -1574,7 +1574,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 .docs__>.docs_tab_context__>.docs_tabs__>.docs_tab__.active__ {
     background-color: var(--md-sys-color-surface-container-lowest);
     border-bottom: 1px solid var(--md-sys-color-surface-container-lowest);
-    transition: background-color var(--njs-motion-duration-ultraSlow) ease, border-bottom-color var(--njs-motion-duration-slow) ease;
+    transition: background-color var(--njs-motion-duration-ultra-slow) ease, border-bottom-color var(--njs-motion-duration-slow) ease;
 }
 
 .docs__>.docs_tab_context__>.docs_tabs__>.docs_tab__.active__>.docs_tab_active_btn__>span {
@@ -1675,7 +1675,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
     transform: scale(1);
     opacity: 1;
     transform-origin: top right;
-    transition: transform var(--njs-motion-duration-slow) ease, opacity var(--njs-motion-duration-ultraSlow) ease;
+    transition: transform var(--njs-motion-duration-slow) ease, opacity var(--njs-motion-duration-ultra-slow) ease;
 }
 
 .docs__>.docs_tab_context__>ul.docs_tab_utils__>.docs_tab_list_item__ .docs_tab_list__.hidden__ {
@@ -1732,7 +1732,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 
 .docs__>.docs_contents__.visible__ {
     opacity: 1;
-    transition: transform var(--njs-motion-duration-ultraSlow) ease, opacity var(--njs-motion-duration-ultraSlow) ease;
+    transition: transform var(--njs-motion-duration-ultra-slow) ease, opacity var(--njs-motion-duration-ultra-slow) ease;
 }
 
 .docs__>.docs_contents__.hidden__  {
