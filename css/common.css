@@ -127,6 +127,10 @@ th, td {
     height: 32px;
 }
 
+.grid_body_fixed__, .grid_head_fixed__ {
+    padding: 6px 5px !important;
+}
+
 th, tfoot td {
     background-color: var(--md-sys-color-surface-container);
     font-weight: 400;
