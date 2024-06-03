@@ -117,7 +117,8 @@ th, td {
     border-left: none;
     border-right: none;
     word-break: break-all;
-    padding: 5px;
+    padding: 0 5px;
+    height: 32px;
 }
 
 .form__ th, .form__ td,
