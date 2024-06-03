@@ -186,7 +186,7 @@
             </td>
         </tr>
         <tr>
-            <th>closeAll</th>
+            <th>collapse</th>
             <th><label for="isFirstNodeOpen">arguments[0]</label></th>
             <td>
                 <input id="isFirstNodeOpen" type="checkbox">
@@ -206,8 +206,8 @@
         <a id="btnBind" href="#" data-opts='{ "size": "large", "disable": true }'>bind</a>
         <a id="btnSelect" href="#" data-opts='{ "size": "large", "disable": true }'>select</a>
         <a id="btnData" href="#" data-opts='{ "size": "large", "disable": true }'>data</a>
-        <a id="btnOpenAll" href="#" data-opts='{ "size": "large", "disable": true }'>openAll</a>
-        <a id="btnCloseAll" href="#" data-opts='{ "size": "large", "disable": true }'>closeAll</a>
+        <a id="btnExpand" href="#" data-opts='{ "size": "large", "disable": true }'>expand</a>
+        <a id="btnCollapse" href="#" data-opts='{ "size": "large", "disable": true }'>collapse</a>
         <a id="btnReload" href="#" data-opts='{ "size": "large" }'>
             <span lang="ko_KR">DEMO 초기화</span>
             <span lang="en_US">Reset DEMO</span>
@@ -255,8 +255,8 @@
                 N("#btnInit", view).instance("button").disable();
                 N("#btnBind", view).instance("button").enable();
                 N("#btnSelect", view).instance("button").enable();
-                N("#btnOpenAll", view).instance("button").enable();
-                N("#btnCloseAll", view).instance("button").enable();
+                N("#btnExpand", view).instance("button").enable();
+                N("#btnCollapse", view).instance("button").enable();
                 N("#btnData", view).instance("button").enable();
             });
 
@@ -274,14 +274,14 @@
                 }
             });
 
-            N("#btnOpenAll", view).on("click", function(e) {
+            N("#btnExpand", view).on("click", function(e) {
                 e.preventDefault();
-                tree.openAll();
+                tree.expand();
             });
 
-            N("#btnCloseAll", view).on("click", function(e) {
+            N("#btnCollapse", view).on("click", function(e) {
                 e.preventDefault();
-                tree.closeAll(N("#isFirstNodeOpen", view).is(":checked"));
+                tree.collapse(N("#isFirstNodeOpen", view).is(":checked"));
             });
 
             N("#btnData", view).on("click", function(e) {

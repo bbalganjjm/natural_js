@@ -1344,7 +1344,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 
 .tree__ li>.tree_check__ {
     display: inline-block;
-    margin: 0;
+    margin: 0 5px 0 0;
     height: 16px;
     width: 16px;
 }

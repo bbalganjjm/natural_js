@@ -153,10 +153,10 @@
         "e.expandCollapse.click" : function(e) {
             e.preventDefault();
             if (N(this).data("status") === "expand") {
-                cont["p.tree.master"].closeAll(true);
+                cont["p.tree.master"].collapse(true);
                 N(this).data("status", "collapse");
             } else {
-                cont["p.tree.master"].openAll();
+                cont["p.tree.master"].expand();
                 N(this).data("status", "expand");
             }
 
