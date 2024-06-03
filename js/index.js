@@ -106,12 +106,12 @@
             }
             if(locale === "ko_KR") {
                 if (N("head .ko.hidden").length === 0) {
-                    $( "<style class='ko hidden'>[lang='ko_KR'] { display: revert; display: revert-layer !important; }</style>" ).appendTo( "head" )
+                    $( "<style class='ko hidden'>[lang='ko_KR'] { display: revert-layer !important; }</style>" ).appendTo( "head" )
                 }
                 $("[lang='en_US']", view).remove();
             } else if(locale === "en_US") {
                 if (N("head .en.hidden").length === 0) {
-                    $( "<style class='en hidden'>[lang='en_US'] { display: revert; display: revert-layer !important; }</style>" ).appendTo( "head" )
+                    $( "<style class='en hidden'>[lang='en_US'] { display: revert-layer !important; }</style>" ).appendTo( "head" )
                 }
                 $("[lang='ko_KR']", view).remove();
             }
@@ -165,7 +165,7 @@
 
                     if(N(window).width() <= 751 || view.hasClass("api-view-list-type")) { // 768 - 17px(?)
                         N("td:contains('N/A')", view).css({
-                            "visibility": "hidden",
+                            "display": "none",
                             "padding" : 0,
                             "margin" : 0,
                             "height" : 0,
@@ -187,7 +187,7 @@
                         N("tr .agrsIndex", view).remove();
 
                         N("td:contains('N/A')", view).css({
-                            "visibility": "",
+                            "display": "",
                             "padding" : "",
                             "margin" : "",
                             "height" : "",
