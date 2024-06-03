@@ -115,7 +115,7 @@ table {
 th, td {
     border: 1px solid var(--md-sys-color-outline-variant);
     word-break: break-all;
-    padding: 0 5px;
+    padding: 5px 5px;
     height: 32px;
 }
 

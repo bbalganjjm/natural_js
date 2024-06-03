@@ -47,6 +47,20 @@ N(".targetElement").comm("page.html").submit(function(cont) {
             </td>
         </tr>
         <tr>
+            <td>fetch</td>
+            <td style="text-align: center;">N/A</td>
+            <td style="text-align: center;">N/A</td>
+            <td>Promise&lt;object&gt;</td>
+            <td>
+                <span lang="ko_KR">서버에 요청을 보내고 결과를 Promise 로 반환합니다</span>
+                <span lang="en_US">Sends a request to the server and returns the result as a Promise</span>
+                <span lang="ko_KR">(변경될 수 있음).</span>
+                <span lang="en_US">(Subject to change).</span>
+                <pre><code>const data = await N.comm("data.json").fetch();
+</code></pre>
+            </td>
+        </tr>
+        <tr>
             <td>error</td>
             <td style="text-align: center;">N/A</td>
             <td style="text-align: center;">N/A</td>
