@@ -114,8 +114,6 @@ table {
 
 th, td {
     border: 1px solid var(--md-sys-color-outline-variant);
-    border-left: none;
-    border-right: none;
     word-break: break-all;
     padding: 0 5px;
     height: 32px;
@@ -123,6 +121,8 @@ th, td {
 
 .form__ th, .form__ td,
 .grid__ th, .grid__ td {
+    border-left: none;
+    border-right: none;
     padding: 0 5px;
     height: 32px;
 }
@@ -675,13 +675,10 @@ pre.shell>code {
     line-height: var(--njs-line-height-l);
 }
 
-.apiDoc.api-view-list-type .api.form tr>td:last-child {
-    /*margin-bottom: 20px;*/
+.apiDoc.api-view-list-type .api.form tr:nth-child(2)>td:first-child {
+    margin-top: 0;
 }
 
-#constructor .apiDoc.api-view-list-type .api.form tr>td:first-child {
-    margin: 30px 0 10px 0;
-}
 #constructor .apiDoc.api-view-list-type .api.form td:nth-child(2):before {
     content: 'arguments';
     color: var(--md-sys-color-surface-tint);
@@ -699,41 +696,30 @@ pre.shell>code {
 #pointcuts .apiDoc.api-view-list-type .api.form td:nth-child(2):before,
 #defaultoptions .apiDoc.api-view-list-type .api.form td:nth-child(2):before {
     content: 'type : ';
+    color: var(--md-sys-color-surface-tint);
 }
 #advisors .apiDoc.api-view-list-type .api.form td:nth-child(3):before,
 #pointcuts .apiDoc.api-view-list-type .api.form td:nth-child(3):before,
 #defaultoptions .apiDoc.api-view-list-type .api.form td:nth-child(3):before {
     content: 'default : ';
+    color: var(--md-sys-color-surface-tint);
 }
 #advisors .apiDoc.api-view-list-type .api.form td:nth-child(4):before,
 #pointcuts .apiDoc.api-view-list-type .api.form td:nth-child(4):before,
 #defaultoptions .apiDoc.api-view-list-type .api.form td:nth-child(4):before {
     content: 'required : ';
+    color: var(--md-sys-color-surface-tint);
 }
 
 #declarativeoptions .apiDoc.api-view-list-type .api.form td:nth-child(2):before {
     content: 'type : ';
+    color: var(--md-sys-color-surface-tint);
 }
 #declarativeoptions .apiDoc.api-view-list-type .api.form td:nth-child(3):before {
     content: 'default : ';
+    color: var(--md-sys-color-surface-tint);
 }
 
-#pluginExtention .apiDoc.api-view-list-type .api.form tr>td:first-child,
-#n .apiDoc.api-view-list-type .api.form tr>td:first-child,
-#gc .apiDoc.api-view-list-type .api.form tr>td:first-child,
-#string .apiDoc.api-view-list-type .api.form tr>td:first-child,
-#element .apiDoc.api-view-list-type .api.form tr>td:first-child,
-#date .apiDoc.api-view-list-type .api.form tr>td:first-child,
-#browser .apiDoc.api-view-list-type .api.form tr>td:first-child,
-#message .apiDoc.api-view-list-type .api.form tr>td:first-child,
-#array .apiDoc.api-view-list-type .api.form tr>td:first-child,
-#json .apiDoc.api-view-list-type .api.form tr>td:first-child,
-#event .apiDoc.api-view-list-type .api.form tr>td:first-child,
-#functions .apiDoc.api-view-list-type .api.form tr>td:first-child,
-#methods .apiDoc.api-view-list-type .api.form tr>td:first-child,
-#utilities .apiDoc.api-view-list-type .api.form tr>td:first-child {
-    margin: 30px 0 10px 0;
-}
 #pluginExtention .apiDoc.api-view-list-type .api.form td:nth-child(2):before,
 #n .apiDoc.api-view-list-type .api.form td:nth-child(2):before,
 #gc .apiDoc.api-view-list-type .api.form td:nth-child(2):before,
@@ -749,6 +735,7 @@ pre.shell>code {
 #methods .apiDoc.api-view-list-type .api.form td:nth-child(2):before,
 #utilities .apiDoc.api-view-list-type .api.form td:nth-child(2):before {
     content: 'arguments';
+    color: var(--md-sys-color-surface-tint);
 }
 #pluginExtention .apiDoc.api-view-list-type .api.form td:nth-child(3):before,
 #n .apiDoc.api-view-list-type .api.form td:nth-child(3):before,
@@ -765,6 +752,7 @@ pre.shell>code {
 #methods .apiDoc.api-view-list-type .api.form td:nth-child(3):before,
 #utilities .apiDoc.api-view-list-type .api.form td:nth-child(3):before {
     content: 'type : ';
+    color: var(--md-sys-color-surface-tint);
 }
 #pluginExtention .apiDoc.api-view-list-type .api.form td:nth-child(4):before,
 #n .apiDoc.api-view-list-type .api.form td:nth-child(4):before,
@@ -781,6 +769,7 @@ pre.shell>code {
 #methods .apiDoc.api-view-list-type .api.form td:nth-child(4):before,
 #utilities .apiDoc.api-view-list-type .api.form td:nth-child(4):before {
     content: 'return : ';
+    color: var(--md-sys-color-surface-tint);
 }
 
 #conf_core .apiDoc.api-view-list-type .api.form td:nth-child(2):before,
@@ -791,6 +780,7 @@ pre.shell>code {
 #conf_template .apiDoc.api-view-list-type .api.form td:nth-child(2):before,
 #conf_code .apiDoc.api-view-list-type .api.form td:nth-child(2):before {
     content: 'default : ';
+    color: var(--md-sys-color-surface-tint);
 }
 #conf_core .apiDoc.api-view-list-type .api.form td:nth-child(3):before,
 #conf_architecture .apiDoc.api-view-list-type .api.form td:nth-child(3):before,
@@ -800,6 +790,7 @@ pre.shell>code {
 #conf_template .apiDoc.api-view-list-type .api.form td:nth-child(3):before,
 #conf_code .apiDoc.api-view-list-type .api.form td:nth-child(3):before {
     content: 'required : ';
+    color: var(--md-sys-color-surface-tint);
 }
 
 .apiDoc.api-view-list-type .apidemo .form .demo-desc {

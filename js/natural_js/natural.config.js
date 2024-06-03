@@ -1091,11 +1091,9 @@
                         if(N(this).is(":checked")) {
                             localStorage.setItem("isListTypeView", "Y");
                             view.addClass("api-view-list-type");
-                            view.find("td:empty").hide();
                         } else {
                             localStorage.setItem("isListTypeView", "N");
                             view.removeClass("api-view-list-type");
-                            view.find("td:empty").show();
                         }
                         N(window).trigger("resize.mobile", [ view ]);
                     });
@@ -1113,13 +1111,7 @@
                     N(".view_context__ h1 .api-view-type-select").hide();
                 }
                 N(window).trigger("resize.mobile", [ view ]);
-            });
-        }
-    }, { // Processing the API document view on mobile
-        "pointcut" : ".view-mobile-layout:^init$",
-        "adviceType" : "before",
-        "fn" : function(cont, fnChain, args){
-            N(window).trigger("resize.mobile", [ args[0] ]);
+            }).trigger("resize.aop");
         }
     }, { // Source view button handling
         "pointcut" : ".view-code:^init$",

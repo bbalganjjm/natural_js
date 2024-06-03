@@ -148,23 +148,20 @@
             N(window).on("resize.mobile", function(e, view) {
 
                 if (e.target == window || view) { // 모바일에서 scroll 시 resize 이벤트가 실행되서(ios, android 동일).
-
                     if(view === undefined) {
-                        view = N(".view-mobile-layout").filter(":visible");
+                        view = N(".apiDoc").filter(":visible");
                     }
-
                     if(!view) {
-                        return false;
-                    }
-                    if(!view.hasClass("view-mobile-layout")) {
                         return false;
                     }
 
                     N(".agrsIndex", view).remove();
                     N(".function-desc", view).removeClass("function-desc");
 
-                    if(N(window).width() <= 731) { // 748 - 17px(?)
-                        view.addClass("api-view-list-type");
+                    if(N(window).width() <= 731 || view.hasClass("api-view-list-type")) { // 748 - 17px(?)
+                        if (!view.hasClass("api-view-list-type")) {
+                            view.addClass("api-view-list-type");
+                        }
 
                         N("td:contains('N/A'), td:empty", view).css({
                             "display": "none",
@@ -181,7 +178,9 @@
                                 idx = -1;
                                 N(this).find(">td:eq(0)").siblings("td").addClass("function-desc");
                             }
-                            N(this).find(">td:eq(1)").prepend('<strong class="agrsIndex">[' + idx + '] : </strong>');
+                            if (idx > -1) {
+                                N(this).find(">td:eq(1)").prepend('<strong class="agrsIndex">[' + idx + '] : </strong>');
+                            }
                             idx++;
                         });
                     } else {
