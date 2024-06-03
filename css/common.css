@@ -643,6 +643,7 @@ pre.shell>code {
 .apiDoc.api-view-list-type .api.form tbody,
 .apiDoc.api-view-list-type .api.form tr {
     display: block;
+    overflow-x: auto;
 }
 
 .apiDoc.api-view-list-type .api.form th {
@@ -654,10 +655,13 @@ pre.shell>code {
     list-style: none;
     width: 100%;
     border: none;
-    margin: 0;
-    padding: 5px 10px;
+    height: unset;
+    margin: 0 0 10px 0;
+    padding: 0 10px;
+    font-size: var(--njs-font-size-m);
+    font-weight: var(--njs-font-weight-m);
+    line-height: var(--njs-line-height-m);
     box-sizing: border-box;
-    text-shadow: none;
     text-align: left !important;
     color: var(--md-sys-color-on-surface);
 }
@@ -672,11 +676,12 @@ pre.shell>code {
 .apiDoc.api-view-list-type .api.form tr>td:first-child {
     border: none;
     padding: 10px;
-    margin: 30px 0 10px 0;
-    color: var(--md-sys-color-surface-tint);
+    margin: 35px 0 15px 0;
+    border-bottom: 1px solid var(--md-sys-color-outline-variant);
+    color: var(--md-sys-color-primary);
     font-size: var(--njs-font-size-l);
     font-weight: var(--njs-font-weight-bold);
-    line-height: var(--njs-line-height-l);
+    line-height: var(--njs-line-height-xl);
 }
 
 .apiDoc.api-view-list-type .api.form tr:nth-child(2)>td:first-child {

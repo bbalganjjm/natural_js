@@ -146,6 +146,7 @@
         mobileResponsiveView : function() {
             // API 문서 모바일 용 보기 처리 이벤트
             N(window).on("resize.mobile", function(e, view) {
+                var windowWith = N(window).width();
 
                 if (e.target == window || view) { // 모바일에서 scroll 시 resize 이벤트가 실행되서(ios, android 동일).
                     if(view === undefined) {
@@ -158,7 +159,7 @@
                     N(".agrsIndex", view).remove();
                     N(".function-desc", view).removeClass("function-desc");
 
-                    if(N(window).width() <= 731 || view.hasClass("api-view-list-type")) { // 748 - 17px(?)
+                    if(windowWith <= 731 || view.hasClass("api-view-list-type")) { // 748 - 17px(?)
                         view.addClass("api-view-list-type");
 
                         N("td:contains('N/A'), td:empty", view).css({
@@ -181,6 +182,8 @@
                             }
                             idx++;
                         });
+
+                        N(".api-view-list-type p, .api-view-list-type pre").css("max-width", windowWith - 72);
                     } else {
                         N("tr .function-desc", view).removeClass("function-desc");
                         N("tr .agrsIndex", view).remove();
