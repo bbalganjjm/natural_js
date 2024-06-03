@@ -1078,7 +1078,7 @@
 
                 if(view.closest("#constructor, #advisors, #pointcuts, #defaultoptions, #declarativeoptions, #pluginExtention, " +
                         "#n, #gc, #string, #element, #date, #browser, #message, #array, #json, #event, #functions, #methods, #utilities, " +
-                        "#conf_core, #conf_architecture, #conf_data, #conf_ui, #conf_ui_shell, #conf_template, #conf_code").length > 0) {
+                        "#conf_core, #conf_architecture, #conf_data, #conf_ui, #conf_ui_shell, #conf_template, #conf_code, #constant").length > 0) {
                     var select = N('<label class="api-view-type-select"><input type="checkbox"><span>' + N.message.get({
                         "ko_KR" : {
                             "AOP-0001" : "리스트로 보기"
