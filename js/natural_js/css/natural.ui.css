@@ -225,6 +225,10 @@ a.btn_common__, input[type='button'].btn_common__, button.btn_common__ {
     vertical-align: middle;
     border-radius: var(--njs-border-radius-m);
     margin: 0;
+    font-family: inherit;
+    color: inherit;
+    font-size: inherit;
+    line-height: inherit;
 }
 
 a.btn_common__:hover, input[type='button'].btn_common__:hover, button.btn_common__:hover {

@@ -17,7 +17,7 @@ body {
     line-height: var(--njs-line-height-m);
 }
 
-a, input, select, textarea {
+a, input, select, textarea, button {
     font-family: inherit;
     color: inherit;
     font-size: inherit;
