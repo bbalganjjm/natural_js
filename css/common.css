@@ -313,21 +313,21 @@ th, tfoot td {
 
 .alert:not(article) {
     padding: 10px 10px 10px 30px;
-    margin-bottom: 16px;
+    /*margin-bottom: 16px;*/
     background: var(--md-sys-color-surface-container) url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAkElEQVQoz5WQQQrCUAxE3/z/FXqDegnPUC8k9AIFV17LjZfpBVzUn7ipIDZiGxgCk2EyiQwubKgEDBv0Awb+zRp0Bl3Ae/nhdJr7LYq0rcJIUmtSG2njDe497n00koELdgCC5+xUFPnAhEGd4TXnvcH1g1ugJMjvfKr1DoxIh+Q+/jv+YXCemmbd50w6rtG9ANZ+P7VXtHZhAAAAAElFTkSuQmCC') no-repeat 10px 14px;
     border-radius: var(--njs-border-radius-m);
 }
 
 .markdown-body .alert:not(article) {
-    margin: 16px 0;
+    /*margin: 10px 0;*/
 }
 
 article p {
     margin: 0 0 10px 0;
 }
 
-article p:last-child {
-    margin: 0;
+article *:last-child {
+    /*margin: 0;*/
 }
 
 article div.grid_wrap__ {
@@ -627,184 +627,6 @@ pre.shell>code {
     .main-nav {
         display : none;
     }
-
-    .demo .form.options colgroup col:nth-child(2n-1) {
-        width: 22% !important;
-    }
-    .demo .form.options colgroup col:nth-child(2n) {
-        width: auto !important;
-    }
-
-    .demo .form.methods colgroup col:nth-child(1) {
-        width: 20% !important;
-    }
-    .demo .form.methods colgroup col:nth-child(2) {
-        width: 32% !important;
-    }
-    .demo .form.methods colgroup col:nth-child(3) {
-        width: auto !important;
-    }
-
-    .apiDoc .api.form,
-    .apiDoc .api.form tbody,
-    .apiDoc .api.form tr {
-        display: block;
-    }
-
-    .apiDoc .api.form th {
-        display: none;
-    }
-
-    .apiDoc .api.form td {
-        display: list-item;
-        list-style: none;
-        width: 100%;
-        border: none;
-        margin: 0;
-        padding: 5px 10px;
-        box-sizing: border-box;
-        text-shadow: none;
-        color: var(--md-sys-color-on-surface);
-        text-align: left !important;
-    }
-
-    .apiDoc .api.form tr>td:first-child {
-        border: none;
-        padding: 10px;
-        margin: 10px 0;
-        color: var(--md-sys-color-surface-tint);
-        font-size: var(--njs-font-size-l);
-        font-weight: var(--njs-font-weight-bold);
-        line-height: var(--njs-line-height-l);
-    }
-
-    .apiDoc .api.form tr>td:last-child {
-        margin-bottom: 20px;
-    }
-
-    #constructor .apiDoc .api.form tr>td:first-child {
-        margin: 10px 0;
-    }
-    #constructor .apiDoc .api.form td:nth-child(2):before {
-        content: 'arguments';
-    }
-    #constructor .apiDoc .api.form td:nth-child(3):before {
-        content: 'type : ';
-    }
-    #constructor .apiDoc .api.form td:nth-child(4):before {
-        content: 'return : ';
-    }
-
-    #advisors .apiDoc .api.form td:nth-child(2):before,
-    #pointcuts .apiDoc .api.form td:nth-child(2):before,
-    #defaultoptions .apiDoc .api.form td:nth-child(2):before {
-        content: 'type : ';
-    }
-    #advisors .apiDoc .api.form td:nth-child(3):before,
-    #pointcuts .apiDoc .api.form td:nth-child(3):before,
-    #defaultoptions .apiDoc .api.form td:nth-child(3):before {
-        content: 'default : ';
-    }
-    #advisors .apiDoc .api.form td:nth-child(4):before,
-    #pointcuts .apiDoc .api.form td:nth-child(4):before,
-    #defaultoptions .apiDoc .api.form td:nth-child(4):before {
-        content: 'required : ';
-    }
-
-    #declarativeoptions .apiDoc .api.form td:nth-child(2):before {
-        content: 'type : ';
-    }
-    #declarativeoptions .apiDoc .api.form td:nth-child(3):before {
-        content: 'default : ';
-    }
-
-    #pluginExtention .apiDoc .api.form tr>td:first-child,
-    #n .apiDoc .api.form tr>td:first-child,
-    #gc .apiDoc .api.form tr>td:first-child,
-    #string .apiDoc .api.form tr>td:first-child,
-    #element .apiDoc .api.form tr>td:first-child,
-    #date .apiDoc .api.form tr>td:first-child,
-    #browser .apiDoc .api.form tr>td:first-child,
-    #message .apiDoc .api.form tr>td:first-child,
-    #array .apiDoc .api.form tr>td:first-child,
-    #json .apiDoc .api.form tr>td:first-child,
-    #event .apiDoc .api.form tr>td:first-child,
-    #functions .apiDoc .api.form tr>td:first-child,
-    #methods .apiDoc .api.form tr>td:first-child,
-    #utilities .apiDoc .api.form tr>td:first-child {
-        margin: 10px 0;
-    }
-    #pluginExtention .apiDoc .api.form td:nth-child(2):before,
-    #n .apiDoc .api.form td:nth-child(2):before,
-    #gc .apiDoc .api.form td:nth-child(2):before,
-    #string .apiDoc .api.form td:nth-child(2):before,
-    #element .apiDoc .api.form td:nth-child(2):before,
-    #date .apiDoc .api.form td:nth-child(2):before,
-    #browser .apiDoc .api.form td:nth-child(2):before,
-    #message .apiDoc .api.form td:nth-child(2):before,
-    #array .apiDoc .api.form td:nth-child(2):before,
-    #json .apiDoc .api.form td:nth-child(2):before,
-    #event .apiDoc .api.form td:nth-child(2):before,
-    #functions .apiDoc .api.form td:nth-child(2):before,
-    #methods .apiDoc .api.form td:nth-child(2):before,
-    #utilities .apiDoc .api.form td:nth-child(2):before {
-        content: 'arguments';
-    }
-    #pluginExtention .apiDoc .api.form td:nth-child(3):before,
-    #n .apiDoc .api.form td:nth-child(3):before,
-    #gc .apiDoc .api.form td:nth-child(3):before,
-    #string .apiDoc .api.form td:nth-child(3):before,
-    #element .apiDoc .api.form td:nth-child(3):before,
-    #date .apiDoc .api.form td:nth-child(3):before,
-    #browser .apiDoc .api.form td:nth-child(3):before,
-    #message .apiDoc .api.form td:nth-child(3):before,
-    #array .apiDoc .api.form td:nth-child(3):before,
-    #json .apiDoc .api.form td:nth-child(3):before,
-    #event .apiDoc .api.form td:nth-child(3):before,
-    #functions .apiDoc .api.form td:nth-child(3):before,
-    #methods .apiDoc .api.form td:nth-child(3):before,
-    #utilities .apiDoc .api.form td:nth-child(3):before {
-        content: 'type : ';
-    }
-    #pluginExtention .apiDoc .api.form td:nth-child(4):before,
-    #n .apiDoc .api.form td:nth-child(4):before,
-    #gc .apiDoc .api.form td:nth-child(4):before,
-    #string .apiDoc .api.form td:nth-child(4):before,
-    #element .apiDoc .api.form td:nth-child(4):before,
-    #date .apiDoc .api.form td:nth-child(4):before,
-    #browser .apiDoc .api.form td:nth-child(4):before,
-    #message .apiDoc .api.form td:nth-child(4):before,
-    #array .apiDoc .api.form td:nth-child(4):before,
-    #json .apiDoc .api.form td:nth-child(4):before,
-    #event .apiDoc .api.form td:nth-child(4):before,
-    #functions .apiDoc .api.form td:nth-child(4):before,
-    #methods .apiDoc .api.form td:nth-child(4):before,
-    #utilities .apiDoc .api.form td:nth-child(4):before {
-        content: 'return : ';
-    }
-
-    #conf_core .apiDoc .api.form td:nth-child(2):before,
-    #conf_architecture .apiDoc .api.form td:nth-child(2):before,
-    #conf_data .apiDoc .api.form td:nth-child(2):before,
-    #conf_ui .apiDoc .api.form td:nth-child(2):before,
-    #conf_ui_shell .apiDoc .api.form td:nth-child(2):before,
-    #conf_template .apiDoc .api.form td:nth-child(2):before,
-    #conf_code .apiDoc .api.form td:nth-child(2):before {
-        content: 'default : ';
-    }
-    #conf_core .apiDoc .api.form td:nth-child(3):before,
-    #conf_architecture .apiDoc .api.form td:nth-child(3):before,
-    #conf_data .apiDoc .api.form td:nth-child(3):before,
-    #conf_ui .apiDoc .api.form td:nth-child(3):before,
-    #conf_ui_shell .apiDoc .api.form td:nth-child(3):before,
-    #conf_template .apiDoc .api.form td:nth-child(3):before,
-    #conf_code .apiDoc .api.form td:nth-child(3):before {
-        content: 'required : ';
-    }
-
-    .apiDoc .apidemo .form .demo-desc {
-        left : 0;
-    }
 }
 
 .apiDoc .function-desc {
@@ -846,7 +668,7 @@ pre.shell>code {
 .apiDoc.api-view-list-type .api.form tr>td:first-child {
     border: none;
     padding: 10px;
-    margin: 10px 0;
+    margin: 30px 0 10px 0;
     color: var(--md-sys-color-surface-tint);
     font-size: var(--njs-font-size-l);
     font-weight: var(--njs-font-weight-bold);
@@ -854,11 +676,11 @@ pre.shell>code {
 }
 
 .apiDoc.api-view-list-type .api.form tr>td:last-child {
-    margin-bottom: 20px;
+    /*margin-bottom: 20px;*/
 }
 
 #constructor .apiDoc.api-view-list-type .api.form tr>td:first-child {
-    margin: 10px 0;
+    margin: 30px 0 10px 0;
 }
 #constructor .apiDoc.api-view-list-type .api.form td:nth-child(2):before {
     content: 'arguments';
@@ -910,7 +732,7 @@ pre.shell>code {
 #functions .apiDoc.api-view-list-type .api.form tr>td:first-child,
 #methods .apiDoc.api-view-list-type .api.form tr>td:first-child,
 #utilities .apiDoc.api-view-list-type .api.form tr>td:first-child {
-    margin: 10px 0;
+    margin: 30px 0 10px 0;
 }
 #pluginExtention .apiDoc.api-view-list-type .api.form td:nth-child(2):before,
 #n .apiDoc.api-view-list-type .api.form td:nth-child(2):before,

@@ -163,8 +163,10 @@
                     N(".agrsIndex", view).remove();
                     N(".function-desc", view).removeClass("function-desc");
 
-                    if(N(window).width() <= 751 || view.hasClass("api-view-list-type")) { // 768 - 17px(?)
-                        N("td:contains('N/A')", view).css({
+                    if(N(window).width() <= 731) { // 748 - 17px(?)
+                        view.addClass("api-view-list-type");
+
+                        N("td:contains('N/A'), td:empty", view).css({
                             "display": "none",
                             "padding" : 0,
                             "margin" : 0,
@@ -186,7 +188,7 @@
                         N("tr .function-desc", view).removeClass("function-desc");
                         N("tr .agrsIndex", view).remove();
 
-                        N("td:contains('N/A')", view).css({
+                        N("td:contains('N/A'), td:empty", view).css({
                             "display": "",
                             "padding" : "",
                             "margin" : "",

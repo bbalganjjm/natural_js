@@ -1106,7 +1106,7 @@
                 }
             }
 
-            N(window).on("resize.aop", function() {
+            N(window).off("resize.aop").on("resize.aop", function() {
                 if($(window).width() > 731) { // 748 - 17px(?)
                     N(".view_context__ h1 .api-view-type-select").show();
                 } else {
