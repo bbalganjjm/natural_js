@@ -49,8 +49,9 @@ input[type='text'], input[type='number'], input[type='tel'], input[type='passwor
     box-sizing: border-box;
     width: 100%;
     padding: 3px;
-    border: 1px solid transparent;
-    line-height: 16px;
+    border: 1px solid var(--md-sys-color-outline-variant);
+    line-height: 18px;
+    margin: 2px 0;
 }
 
 input[type='text']:hover, input[type='number']:hover, input[type='tel']:hover, input[type='password']:hover, select:hover, textarea:hover,
@@ -121,7 +122,8 @@ th, td {
 
 .form__ th, .form__ td,
 .grid__ th, .grid__ td {
-    padding: 5px;
+    padding: 0 5px;
+    height: 32px;
 }
 
 th, tfoot td {
@@ -154,7 +156,7 @@ th, tfoot td {
 .list__>li {
     margin: 0;
     padding: 0px 5px;
-    line-height: 28px;
+    line-height: 31px;
     border-left: none;
     border-right: none;
     border-top: 1px solid var(--md-sys-color-outline-variant);

@@ -5,7 +5,7 @@ In order to process creation / retrieval / modification / deletion with Grid, we
 
 Code data will use [Select](#html/naturaljs/refr/refr0406.html)(N.select) component to bind data, [Form](#html/naturaljs/refr/refr0407.html)(N.form) component will create search condition area as form, and [Grid](#html/naturaljs/refr/refr0409.html)(N.grid) component will create a grid that can be input / viewed / modified / deleted. Buttons use the [Button](#html/naturaljs/refr/refr0402.html)(N.button) component.
 
-Let's practice by adding a menu to the basic frame created in [Create a web application base frame](#Z3RzdDAyMDAlMjRDcmVhdGUlMjBhJTIwd2ViJTIwYXBwbGljYXRpb24lMjBiYXNlJTIwZnJhbWUkaHRtbCUyRm5hdHVyYWxqcyUyRmd0c3QlMkZndHN0MDIwMC5odG1s).
+Let's practice by adding a menu to the basic frame created in [Create a web application base frame](#html/naturaljs/gtst/gtst0200.html).
 
 First, open the  **/html/index/lefter.html** file, add the li element to the end of the ul tag as follows, and add a menu link(page6.html) to work from now on.
 

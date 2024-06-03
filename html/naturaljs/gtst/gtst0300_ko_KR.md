@@ -6,7 +6,7 @@ Grid로 생성/조회/수정/삭제를 처리하기 위해 조회 조건 영역�
 코드 데이터들은 [Select](#html/naturaljs/refr/refr0406.html)(N.select) 컴포넌트를 사용하여 데이터를 바인딩하고 [Form](#html/naturaljs/refr/refr0407.html)(N.form) 컴포넌트로 조회 조건 영역을 폼으로 생성하고  [Grid](#html/naturaljs/refr/refr0409.html)(N.grid) 컴포넌트로 입력/조회/수정/삭제할 수 있는 그리드를 생성할 것입니다.
 버튼 들은 [Button](#html/naturaljs/refr/refr0402.html)(N.button) 컴포넌트를 사용합니다.
 
-[웹 어플리케이션 기본 프레임 만들기](#Z3RzdDAyMDAlMjQlRUMlOUIlQjklMjAlRUMlOTYlQjQlRUQlOTQlOEMlRUIlQTYlQUMlRUMlQkMlODAlRUMlOUQlQjQlRUMlODUlOTglMjAlRUElQjglQjAlRUIlQjMlQjglMjAlRUQlOTQlODQlRUIlQTAlODglRUMlOUUlODQlMjAlRUIlQTclOEMlRUIlOTMlQTQlRUElQjglQjAkaHRtbCUyRm5hdHVyYWxqcyUyRmd0c3QlMkZndHN0MDIwMC5odG1s)에서 생성한 기본 프레임에 메뉴를 추가하여 실습을 진행해 보겠습니다.
+[웹 어플리케이션 기본 프레임 만들기](#html/naturaljs/gtst/gtst0200.html)에서 생성한 기본 프레임에 메뉴를 추가하여 실습을 진행해 보겠습니다.
 
 먼저 **/html/index/lefter.html** 파일을 열어 다음과 같이 ul 태그의 마지막에 li 요소를 추가하고 지금부터 작업할 메뉴 링크(page6.html)를 추가해 줍니다.
 
