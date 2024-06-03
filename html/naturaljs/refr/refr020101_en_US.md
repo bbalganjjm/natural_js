@@ -26,7 +26,7 @@ N.cont should be declared just below the View area of the page as follows:
 
 If you load a page with the above structure into an N.popup, N.tab component or N.comm library, the init function of the Controller object is called when the page has finished loading.
 <p class="alert">Pages based on Natural-ARCHITECTURE must be loaded into N.comm, N.popup or N.tab to work properly.</p>
-<p class="alert">When selecting an element of the page, you must find in view or specify view as the context argument(second argument) of the jQuery function. Otherwise, unintentional elements of other block pages may be selected, resulting in unpredictable errors. Please refer to the <a href="#cmVmcjA2MDElMjRSZXN0cmljdGlvbnMlMjBhbmQlMjBUaXBzJGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjA2MDEuaHRtbA==">Restrictions and Tips</a> menu for details.</p>
+<p class="alert">When selecting an element of the page, you must find in view or specify view as the context argument(second argument) of the jQuery function. Otherwise, unintentional elements of other block pages may be selected, resulting in unpredictable errors. Please refer to the <a href="#html/naturaljs/refr/refr0601.html">Restrictions and Tips</a> menu for details.</p>
 
 To control a specific page in the block page or tab content, you can get a Controller object as follows:
 

@@ -85,7 +85,7 @@
             /**
              * Communication Filter related settings.
              *  - Refer to the
-             *    https://bbalganjjm.github.io/natural_js/#cmVmcjAyMDUlMjRDb21tdW5pY2F0aW9uJTIwRmlsdGVyJTI0aHRtbCUyRm5hdHVyYWxqcyUyRnJlZnIlMkZyZWZyMDIwNS5odG1s
+             *    https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0205.html
              */
             "filters" : {
                 "basicFilter" : {
@@ -208,7 +208,7 @@
                 /**
                  * Global options of Communicator.request.
                  *  - Refer to the
-                 *    https://bbalganjjm.github.io/natural_js/#cmVmcjAyMDQlMjRDb21tdW5pY2F0b3IucmVxdWVzdCUyNGh0bWwlMkZuYXR1cmFsanMlMkZyZWZyJTJGcmVmcjAyMDQuaHRtbA==
+                 *    https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0204.html
                  */
                 "options" : {
                     "type" : "GET",
