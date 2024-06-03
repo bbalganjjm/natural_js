@@ -159,9 +159,7 @@
                     N(".function-desc", view).removeClass("function-desc");
 
                     if(N(window).width() <= 731 || view.hasClass("api-view-list-type")) { // 748 - 17px(?)
-                        if (!view.hasClass("api-view-list-type")) {
-                            view.addClass("api-view-list-type");
-                        }
+                        view.addClass("api-view-list-type");
 
                         N("td:contains('N/A'), td:empty", view).css({
                             "display": "none",

@@ -50,7 +50,7 @@ input[type='text'], input[type='number'], input[type='tel'], input[type='passwor
     width: 100%;
     padding: 3px;
     border: 1px solid var(--md-sys-color-outline-variant);
-    line-height: 18px;
+    line-height: 19px;
     margin: 2px 0;
 }
 
