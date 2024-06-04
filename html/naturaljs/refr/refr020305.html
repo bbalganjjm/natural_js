@@ -17,8 +17,19 @@
             <td style="text-align: center;">N/A</td>
             <td>N.comm</td>
             <td>
-                <span lang="ko_KR">서버에 요청을 보내고 성공한 서버 응답이 수신될 때 실행될 콜백 함수를 등록합니다.</span>
-                <span lang="en_US">Send a request to the server and register a callback function to be executed when a successful server response is received.</span>
+                <p lang="ko_KR">서버에 요청을 보내고 성공한 서버 응답이 수신될 때 실행될 콜백 함수를 등록합니다.</p>
+                <p lang="en_US">Send a request to the server and register a callback function to be executed when a successful server response is received.</p>
+                <p lang="ko_KR">submit 함수에 callback 인수를 입력하지 않으면 Promise 와 호환되는 xhr 객체가 반환되어 async / await 문법을 사용할 수 있습니다.</p>
+                <p lang="en_US">If you do not provide a callback argument to the submit function, a Promise compatible xhr object will be returned, allowing you to use async / await syntax.</p>
+                <pre><code>const fn1 = async () => {
+    const data = await N.comm({url}).submit();
+};
+
+const fn2 = () => await N.comm({url}).submit().then((data) => {
+    console.log(data);
+}).catch((e) => {
+    console.error(e);
+});</code></pre>
             </td>
         </tr>
         <tr>
@@ -32,7 +43,7 @@
             <td>
                 <p lang="ko_KR">요청이 성공했을 때 서버의 응답을 처리하는 콜백 함수를 정의합니다.</p>
                 <p lang="en_US">Define a callback function that handles the server's response when the request is successful.</p>
-                <p lang="ko_KR">HTML 페이지를 요청하면 콜백 함수의 인자로 로드 한 페이지의 Contoller object가 반환되고 이 외의 요청은 data 객체와 Communicator.request 객체가 반환됩니다.</p>
+                <p lang="ko_KR">HTML 페이지를 요청하면 콜백 함수의 인수로 로드 한 페이지의 Contoller object가 반환되고 이 외의 요청은 data 객체와 Communicator.request 객체가 반환됩니다.</p>
                 <p lang="en_US">If an HTML page is requested, the Controller object of the page loaded as the argument of the callback function is returned. For other requests, the data object and the Communicator.request object are returned.</p>
                 <pre><code>// Data
 N.comm("data.json").submit(function(data, request) {
@@ -43,20 +54,6 @@ N.comm("data.json").submit(function(data, request) {
 N(".targetElement").comm("page.html").submit(function(cont) {
     N.log(cont);
 });
-</code></pre>
-            </td>
-        </tr>
-        <tr>
-            <td>fetch</td>
-            <td style="text-align: center;">N/A</td>
-            <td style="text-align: center;">N/A</td>
-            <td>Promise&lt;object&gt;</td>
-            <td>
-                <span lang="ko_KR">서버에 요청을 보내고 결과를 Promise 로 반환합니다</span>
-                <span lang="en_US">Sends a request to the server and returns the result as a Promise</span>
-                <span lang="ko_KR">(변경될 수 있음).</span>
-                <span lang="en_US">(Subject to change).</span>
-                <pre><code>const data = await N.comm("data.json").fetch();
 </code></pre>
             </td>
         </tr>
@@ -83,21 +80,21 @@ N(".targetElement").comm("page.html").submit(function(cont) {
             <td>
                 <p lang="ko_KR">에러가 발생했을 때 에러를 처리하는 콜백 함수를 정의합니다.</p>
                 <p lang="en_US">Defines a callback function that handles errors when an error occurs.</p>
-                <p lang="ko_KR">콜백 함수의 this는 생성된 N.comm 인스턴스이고 다음과 같은 인자를 반환합니다.</p>
+                <p lang="ko_KR">콜백 함수의 this는 생성된 N.comm 인스턴스이고 다음과 같은 인수를 반환합니다.</p>
                 <p lang="en_US">this of the callback function is the created N.comm instance and returns the following arguments.</p>
                 <ul>
-                    <li>e(arguments[0]) : ErrorThrown</li>
-                    <li>request(arguments[1]) : Communicator.request</li>
-                    <li>xhr(arguments[2]) : jQuery XMLHTTORequest</li>
+                    <li>xhr(arguments[2]) : jQuery XMLHTTPRequest</li>
                     <li lang="ko_KR">textStatus(arguments[3]) : "success"(submit 콜백에서 에러 발생 시) 또는 "error"(서버에서 오류 발생 시)</li>
                     <li lang="en_US">textStatus(arguments[3]) : "success"(When an error occurs in submit callback) or "error"(When an error occurs on the server)</li>
-                    <li lang="ko_KR">callback(arguments[4]) : textStatus 값이 "success" 일 때 submit 메서드의 인자로 지정한 콜백 함수.</li>
+                    <li>e(arguments[0]) : ErrorThrown</li>
+                    <li>request(arguments[1]) : Communicator.request</li>
+                    <li lang="ko_KR">callback(arguments[4]) : textStatus 값이 "success" 일 때 submit 메서드의 인수로 지정한 콜백 함수.</li>
                     <li lang="en_US">callback(arguments[4]) : Callback function specified as argument of submit method when textStatus value is "success".</li>
                 </ul>
                 <pre lang="ko_KR"><code>
-N.comm("data.json").error(function(e, request, xhr, textStatus, callback) {
+N.comm("data.json").error(function(xhr, textStatus, e, request, callback) {
     // 2. col01.length 오류에 대한 첫 번째 오류 처리
-}).error(function(e, request, xhr, textStatus, callback) {
+}).error(function(xhr, textStatus, e, request, callback) {
     // 3. col01.length 오류에 대한 두 번째 오류 처리
 }).submit(function(data, request) {
     var col01;

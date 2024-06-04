@@ -95,7 +95,7 @@ init : function() {
 },
 ...
 ```
-data 메서드의 첫 번째 인자를 false로 설정해서 반환된 데이터를 다른 컴포넌트에 바인딩해도 문제가 해결됩니다.
+data 메서드의 첫 번째 인수를 false로 설정해서 반환된 데이터를 다른 컴포넌트에 바인딩해도 문제가 해결됩니다.
 
 ```
 ...
@@ -105,7 +105,7 @@ init : function() {
 
     N.comm("data url").submit(function(data) {
         form.bind(0, data);
-        // 원래 유형의 데이터 객체가 반환되도록 data 메소드의 첫 번째 인자를 false로 설정해야 합니다.
+        // 원래 유형의 데이터 객체가 반환되도록 data 메소드의 첫 번째 인수를 false로 설정해야 합니다.
         grid.bind(form.data(false));
     });
 

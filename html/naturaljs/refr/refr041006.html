@@ -302,7 +302,7 @@
         blockOnChangeWhenBind : true, // bind 함수를 호출할 때 onChange 이벤트를 차단하기 위한 옵션(false로 설정하면 무한루프에 빠짐)
         <strong>onChange: function(pageNo, selEle, selData, currPageNavInfo)</strong> {
             <strong>N(currPageNavInfo)</strong>.comm("data.json").submit(function(data){ // 7. totalCount 값이 포함된 데이터 조회.
-                <strong>pagination.bind(data[0] &amp;&amp; data[0].totalCount ? data[0].totalCount : 0)</strong>; // 8. N.pagination의 bind 메서드의 인자에 totalCount를 입력하여 페이징 인덱스 재 생성.
+                <strong>pagination.bind(data[0] &amp;&amp; data[0].totalCount ? data[0].totalCount : 0)</strong>; // 8. N.pagination의 bind 메서드의 인수에 totalCount를 입력하여 페이징 인덱스 재 생성.
                 <strong>grid.bind(data)</strong>; // 9. 페이징 된 데이터를 N.grid에 바인딩.
             });
         }
@@ -311,7 +311,7 @@
     N(".btn-search").on("click", function() { // 데이터 조회 버튼 이벤트
         <strong>pagination.pageNo(1).bind()</strong>; // 3. 첫 번째 페이지로 이동하여 currPageNavInfo 정보 초기화.
         <strong>N(pagination.currPageNavInfo())</strong>.comm("data.json").submit(function(data){ // 4. totalCount 값이 포함된 데이터 조회.
-            <strong>pagination.bind(data[0] &amp;&amp; data[0].totalCount ? data[0].totalCount : 0 )</strong>; // 5. N.pagination의 bind 메서드의 인자에 totalCount를 입력하여 페이징 인덱스 재 생성.
+            <strong>pagination.bind(data[0] &amp;&amp; data[0].totalCount ? data[0].totalCount : 0 )</strong>; // 5. N.pagination의 bind 메서드의 인수에 totalCount를 입력하여 페이징 인덱스 재 생성.
             <strong>grid.bind(data)</strong>; // 6. 페이징 된 데이터를 N.grid에 바인딩.
         });
     });

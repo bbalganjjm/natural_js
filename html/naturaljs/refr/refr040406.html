@@ -69,7 +69,7 @@ N(".popup-0001").cont({
     init : function(view, request) {
         var caller = this.caller; // caller는 이 팝업 페이지를 열어준 N.popup 인스턴스
         N(".btn-ok", view).on("click", function(onCloseData) { // Ok 버튼에 이벤트 바인딩
-            <strong>caller.close</strong>("Hello onClose."); // close 함수의 첫 번째 인자로 onCloseData 데이터 전달
+            <strong>caller.close</strong>("Hello onClose."); // close 함수의 첫 번째 인수로 onCloseData 데이터 전달
         });
     },
     // 팝업이 열릴 때마다 실행될 함수
@@ -128,7 +128,7 @@ N(".parent-0001").cont({
                 N(".result", view).text(onCloseData);
             }
         });
-        popup.open("Hello onOpen."); // open 함수의 첫 번째 인자로 onOpenData 데이터 전달
+        popup.open("Hello onOpen."); // open 함수의 첫 번째 인수로 onOpenData 데이터 전달
     }
 });
 &lt;/script&gt;</code></pre>

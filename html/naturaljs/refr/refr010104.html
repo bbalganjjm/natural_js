@@ -21,7 +21,7 @@
             <td>
                 <p lang="ko_KR">Natural-JS의 플러그인 타입으로 제공되는 라이브러리들과 N 객체의 멤버 변수나 함수가 정의되어있는 core 객체입니다.</p>
                 <p lang="en_US">It is a core object that defines the library and N object member variables and functions provided as plug-in types of Natural-JS.</p>
-                <p lang="ko_KR">N(selector)를 실행하면 jQuery의 init 메서드의 인자로 selector가 입력되어 Naturl-JS와 jQuery가 동시에 초기화됩니다.</p>
+                <p lang="ko_KR">N(selector)를 실행하면 jQuery의 init 메서드의 인수로 selector가 입력되어 Naturl-JS와 jQuery가 동시에 초기화됩니다.</p>
                 <p lang="en_US">When N(selector) is executed, a selector is input as an argument of jQuery's init method, and Naturl-JS and jQuery are initialized at the same time.</p>
                 <pre><code>var divs = N("div");</code></pre>
             </td>
@@ -32,7 +32,7 @@
             <td>selector string|function|element|array[element]|jQuery object|object</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p lang="ko_KR">jQuery selector와 같습니다. 자세한 내용은 <a href="https://api.jquery.com/jQuery/" target="_blank">jQuery()</a> 함수의 selector 인자의 설명을 참고 바랍니다.</p>
+                <p lang="ko_KR">jQuery selector와 같습니다. 자세한 내용은 <a href="https://api.jquery.com/jQuery/" target="_blank">jQuery()</a> 함수의 selector 인수의 설명을 참고 바랍니다.</p>
                 <p lang="en_US">Same as a jQuery selector. For details, see the description of the selector argument of the <a href="https://api.jquery.com/jQuery/" target="_blank">jQuery()</a> function.</p>
             </td>
         </tr>
@@ -42,7 +42,7 @@
             <td>selector string|jQuery object[element]</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p lang="ko_KR">selector 인자에 selector 문자열을 입력했을 때 context 인자로 지정된 요소 안에 있는 요소만 선택합니다.</p>
+                <p lang="ko_KR">selector 인수에 selector 문자열을 입력했을 때 context 인수로 지정된 요소 안에 있는 요소만 선택합니다.</p>
                 <p lang="en_US">If a selector string is input in the selector argument, only the elements within the element specified as the context argument are selected.</p>
             </td>
         </tr>
@@ -398,7 +398,7 @@
             <td style="text-align: center;">N/A</td>
             <td>boolean</td>
             <td>
-                <p lang="ko_KR">N()이나 $(), jQuery()의 인자로 지정된 객체가 HTML 요소인지 검사합니다.</p>
+                <p lang="ko_KR">N()이나 $(), jQuery()의 인수로 지정된 객체가 HTML 요소인지 검사합니다.</p>
                 <p lang="en_US">Checks whether the object specified by N(), $(), or jQuery() is an HTML element.</p>
             </td>
         </tr>
@@ -418,7 +418,7 @@
             <td style="text-align: center;">N/A</td>
             <td>boolean</td>
             <td>
-                <p lang="ko_KR">N() 함수의 인자로 입력 된 객체의 selector 를 추출 합니다.</p>
+                <p lang="ko_KR">N() 함수의 인수로 입력 된 객체의 selector 를 추출 합니다.</p>
                 <p lang="en_US">Extracts the selector of the object entered as an argument to the N() function.</p>
             </td>
         </tr>
@@ -441,10 +441,10 @@
                 <p lang="ko_KR">비동기 실행 로직의 계층적 콜백들을 jQuery.Deferred를 사용하여 직렬로 표기할 수 있게 해 주는 함수입니다.</p>
                 <p lang="en_US">This is a function that posibles hierarchical callbacks of asynchronous execution logics to be serialized using jQuery.Deferred.</p>
                 <ul lang="ko_KR">
-                    <li>비동기로 작동하는 로직과 그 로직의 전처리, 후처리 로직을 하나의 함수 블록으로 만들어서 N.serialExecute 함수의 인자로 입력하면 됩니다.</li>
-                    <li>입력된 인자의 순서대로 함수들이 실행됩니다. 다음 인자로 정의한 함수 블록을 실행하기 위해서는 비동기 로직이 끝나는 시점 또는 다음 함수가 실행되어야 하는 시점에 defer(Deferred) 인자의 resolve 메서드를 실행해야 합니다.</li>
-                    <li>defer.resolve 메서드의 인자들은 그다음 실행될 함수 블록의 두 번째 인자부터 순서대로 지정됩니다.</li>
-                    <li>각 함수 블록의 this와 return 객체는 인자로 입력된 함수 블록들의 Deferred 객체들이 담겨 있는 array 객체입니다.</li>
+                    <li>비동기로 작동하는 로직과 그 로직의 전처리, 후처리 로직을 하나의 함수 블록으로 만들어서 N.serialExecute 함수의 인수로 입력하면 됩니다.</li>
+                    <li>입력된 인수의 순서대로 함수들이 실행됩니다. 다음 인수로 정의한 함수 블록을 실행하기 위해서는 비동기 로직이 끝나는 시점 또는 다음 함수가 실행되어야 하는 시점에 defer(Deferred) 인수의 resolve 메서드를 실행해야 합니다.</li>
+                    <li>defer.resolve 메서드의 인수들은 그다음 실행될 함수 블록의 두 번째 인수부터 순서대로 지정됩니다.</li>
+                    <li>각 함수 블록의 this와 return 객체는 인수로 입력된 함수 블록들의 Deferred 객체들이 담겨 있는 array 객체입니다.</li>
                     <li>
                         <p>이 this를 이용해서 첫 번째 함수 블록의 비동기 로직의 완료 시점에 this[3].resolve()와 같이 실행하면 두 번째, 세 번째 함수 블록을 건너뛰고 네 번째 함수 블록을 실행시킬 수 있습니다.</p>
                         <p class="alert">비동기 로직의 시작 시점에는 아직 다음 함수 블록의 Deferred 객체가 생성되지 않았기 때문에 해당 함수 블록 앞에 정의된 함수 블록들은 참조 가능하나 이후에 정의된 함수 블록은 참조가 불가능합니다.</p>
@@ -546,13 +546,13 @@
                 <p lang="en_US">Using jQuery $.when, you can group the function blocks with the defers variable object returned from the above source code, and also execute the logic after all the function blocks of the corresponding group are completed.</p>
                 <pre lang="ko_KR"><code>// 두 번째, 세 번째 함수 블록이 모두 완료되면 로직을 실행
 $.when(defers[1], defers[2]).done(function(arguments[0], arguments[1]) {
-    // arguments[0], arguments[1] 은 각 함수 블록에서 defer.resolve 함수를 실행할 때 인자로 지정한 오브젝트들입니다.
+    // arguments[0], arguments[1] 은 각 함수 블록에서 defer.resolve 함수를 실행할 때 인수로 지정한 오브젝트들입니다.
     N.log("2번, 3번 로직 모두 완료.");
 });
 
 // 전체 함수 블록들이 모두 완료되면 로직을 실행
 $.when.apply($, defers).done(function(arguments[0], arguments[1], arguments[2], arguments[3]) {
-    // arguments[0], arguments[1], arguments[2], arguments[3] 은 각 함수 블록에서 defer.resolve 함수를 호출할 때 인자로 지정한 오브젝트들입니다.
+    // arguments[0], arguments[1], arguments[2], arguments[3] 은 각 함수 블록에서 defer.resolve 함수를 호출할 때 인수로 지정한 오브젝트들입니다.
     N.log("1번, 2번, 3번, 4번 전체 로직 완료.");
 });</code></pre>
                 <pre lang="en_US"><code>// Executes logic when the second and third function blocks are completed

@@ -35,7 +35,7 @@
          * @this : 호출한 함수 인스턴스
          * @opts.cont : N.cont object
          * @opts.inst : 행을 삭제할 N.grid 인스턴스 명,
-         * @opts.before : 선택한 행을 삭제하기 전 실행할 함수. 핸들러 함수의 인자로 체크한 행의 index 들을 반환합니다.
+         * @opts.before : 선택한 행을 삭제하기 전 실행할 함수. 핸들러 함수의 인수로 체크한 행의 index 들을 반환합니다.
          * @opts.after : 선택한 행을 삭제 한 후 실행할 함수.
         */
         del : function(opts) {
@@ -333,7 +333,7 @@
      *  - mode : 데이터 바인딩 모드 - insert 면 무조건 INSERT, update 면 pk로 지정한 행 데이터가 있으면 UPDATE, 없으면 INSERT
      *  - pk : mode 옵션이 update 일 때 INSERT, UPDATE를 판단할 기준 키 컬럼 명
      *  - server : JSON 데이터를 추출하기 위해 Excel 파일을 Server에 업로드하여 처리할 것인지 브라우저에서 javascript로 처리할 것인지 여부(boolean)
-     *  - after : 엑셀 데이터 추출 완료 후 실행할 콜백 함수(함수의 첫 번째 인자로 추출된 JSON 타입의 엑셀 데이터가 반환 됨)
+     *  - after : 엑셀 데이터 추출 완료 후 실행할 콜백 함수(함수의 첫 번째 인수로 추출된 JSON 타입의 엑셀 데이터가 반환 됨)
      */
     N.grid.prototype.bindExcel = function(header, opts) {
         var self = this;

@@ -71,7 +71,7 @@
         "cont" : {
             /**
              * advisor에서 참조할 pointcut을 정의합니다.
-             * pointcut 은 반드시 fn 속성에 param, cont, fnChain 인자를 가진 함수로 정의해야 합니다.
+             * pointcut 은 반드시 fn 속성에 param, cont, fnChain 인수를 가진 함수로 정의해야 합니다.
              * 함수 수행 결과(boolean)는 advice의 적용 여부를 판단하는 데 사용됩니다.
              */
             "pointcuts" : {
@@ -111,20 +111,20 @@
                  * 각 adviecType의 사용방법은 아래의 예제들을 참고 바랍니다.
                  */
                 "adviceType" : "before",
-                "fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 함수체인, args 인자 */
+                "fn" : function(cont, fnChain, args){ /* cont 컨트롤러, fnChain 함수체인, args 인수 */
                     console.log("call me before %s", fnChain);
                 }
             }, {
                 "pointcut" : "^after.*",
                 "adviceType" : "after",
-                "fn" : function(cont, fnChain, args, result){ /* cont 컨트롤러, fnChain 함수체인, args 인자, result 반환값 */
+                "fn" : function(cont, fnChain, args, result){ /* cont 컨트롤러, fnChain 함수체인, args 인수, result 반환값 */
                     console.log("call me after %s", fnChain);
                     console.log("reuslt", result);
                 }
             }, {
                 "pointcut" : "^around.*",
                 "adviceType" : "around",
-                "fn" : function(cont, fnChain, args, joinPoint){ /* cont 컨트롤러, fnChain 함수체인, args 인자, joinPoint 원본 함수 실행 객체 */
+                "fn" : function(cont, fnChain, args, joinPoint){ /* cont 컨트롤러, fnChain 함수체인, args 인수, joinPoint 원본 함수 실행 객체 */
                     console.log("call me around %s", fnChain);
                     var result = joinPoint.proceed();
                     console.log("result ", result);
@@ -136,7 +136,7 @@
             /**
              * Communication Filter
              *  - N.comm으로 호출되는 모든요청이 아래에서 정의한 필터를 통과하게 되므로 서버 요청 시 공통적으로 적용해야 할 부분을 정의하면 됨.
-             *  - 필터 인자 중 request 인자에 요청에 대한 유용한 정보가 담겨 있음.
+             *  - 필터 인수 중 request 인수에 요청에 대한 유용한 정보가 담겨 있음.
              *  - request 객체에서 제공해 주는 정보는 http://bbalganjjm.github.io/natural_js/에서 Communicator.request 메뉴를 참고 바람.
              *  - 필터를 여러 개 걸수 있으며 단위 필터명은 아무거나 지정하면 됨.
              *  - 수행 순서는 order 속성(숫자가 적을 수록 먼저 실행 됨)이 정의된 필터가 실행된 다음 order 속성이 정의되지 않은 필터들이 실행 됨.
@@ -167,7 +167,7 @@
                      * 서버에 요청이 성공했을 경우 실행됨.
                      */
                     success : function(request, data, textStatus, xhr) {
-                        // return data를하면 N.comm.submit의 콜백의 인자로 넘어오는 data가 리턴한 데이터로 치환 됨.
+                        // return data를하면 N.comm.submit의 콜백의 인수로 넘어오는 data가 리턴한 데이터로 치환 됨.
                     },
                     /**
                      * 서버에 요청 후 서버에러가 발생했을 경우 실행됨.
@@ -709,7 +709,7 @@
              */
             "message" : {
                 "ko_KR" : {
-                    "NoContextSpecifiedInSelector" : 'Controller object의 함수 안에서 요소를 선택할 때는 반드시 $() 나 N() 함수의 두 번째 인자(context)에 view 요소를 입력하거나 view 요소에서 find해야 합니다. '
+                    "NoContextSpecifiedInSelector" : 'Controller object의 함수 안에서 요소를 선택할 때는 반드시 $() 나 N() 함수의 두 번째 인수(context)에 view 요소를 입력하거나 view 요소에서 find해야 합니다. '
                         + 'view(context) 요소를 입력하지 않으면 다른 View의 요소까지 선택되어 의도하지 않은 오류가 발생할 수 있습니다. '
                         + '\nex) N("selector", cont.view).hide();'
                         + '\n    cont.view.find("selector").hide();',

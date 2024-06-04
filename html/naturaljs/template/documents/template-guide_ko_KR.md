@@ -131,7 +131,7 @@ var cont = N(".page-id").cont({
 ...
 ```
 
-위와같이 context 옵션의 셀렉터에 context를 지정하지 않아도 페이지의 view 요소를 셀렉터의 context인자로 자동으로 지정해 줍니다.
+위와같이 context 옵션의 셀렉터에 context를 지정하지 않아도 페이지의 view 요소를 셀렉터의 context인수로 자동으로 지정해 줍니다.
 
 `context : ".detail"` => `context : N(".detail", cont.view)`
 
@@ -382,7 +382,7 @@ N.comm의 선언은 오브젝트나 값을 직접 대입하는 것이 아닌 함
     }
 }
 ```
-id 이외의 속성을 가진 요소를 선택할 때는 target 속성에 jQuery selector 문자열을 지정하면 됩니다. 이때 셀렉터의 context를 view 요소로 지정하지 않아도 view 요소가 context 인자로 자동으로 지정됩니다.
+id 이외의 속성을 가진 요소를 선택할 때는 target 속성에 jQuery selector 문자열을 지정하면 됩니다. 이때 셀렉터의 context를 view 요소로 지정하지 않아도 view 요소가 context 인수로 자동으로 지정됩니다.
 
 이벤트 바인딩이 완료되면 `e.{요소id}.{이벤트명}` 속성 값으로 정의한 이벤트 핸들러 함수는 대상 요소(jQuery object)로 대체됩니다.
 
@@ -423,7 +423,7 @@ var cont = N(".page-id").cont({
 ...
 ```
 
-N.grid 나 N.list 컴포넌트 안의 요소를 지정하면 이벤트 핸들러 함수의 마지막 인자에 `해당 요소가 포함된 행의 인덱스를 반환`해 줍니다.
+N.grid 나 N.list 컴포넌트 안의 요소를 지정하면 이벤트 핸들러 함수의 마지막 인수에 `해당 요소가 포함된 행의 인덱스를 반환`해 줍니다.
 
 >rowHandler나 rowHandlerBeforeBind에서 행마다 이벤트를 바인딩하면 브라우저 Heap 메모리 사용량이 이벤트 수 X 행 수만큼 늘어나 웹 어플리케이션 성능이 저하됩니다. 아래 방법(이벤트 위임 적용)을 사용하면 이벤트에 의한 메모리 사용량을 크게 줄일 수 있습니다.
 

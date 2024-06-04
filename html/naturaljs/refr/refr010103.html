@@ -25,7 +25,7 @@
                 <p lang="en_US">Returns the instance of the component object or the Controller object from the context element or View element of the UI component, or saves the object instance to the element.</p>
                 <p lang="ko_KR" class="alert">Natural-JS는 탭이나 팝업 등의 블록 컨텐츠를 쉽게 제어하기 위해서 컴포넌트나 라이브러리 초기화 시 지정한 템플릿(context 나 view) 요소에 생성된 객체 인스턴스를 저장합니다.</p>
                 <p lang="en_US" class="alert">Natural-JS stores the created object instance in the template (context or view) element specified when initializing the component or library to easily control block contents such as tabs or pop-ups.</p>
-                <p lang="ko_KR">다음과 같이 인자의 개수와 타입에 따라서 다르게 작동됩니다.</p>
+                <p lang="ko_KR">다음과 같이 인수의 개수와 타입에 따라서 다르게 작동됩니다.</p>
                 <p lang="en_US">It works differently depending on the number and type of parameters as follows.</p>
                 <ol>
                     <li>
@@ -36,7 +36,7 @@
                         <pre><code>var all = N(".grid01", ".grid02").instance();</code></pre>
                     </li>
                     <li>
-                        <p lang="ko_KR">선택한 요소에 저장되어 있는 모든 인스턴스를 콜백의 함수의 인자로 지정.</p>
+                        <p lang="ko_KR">선택한 요소에 저장되어 있는 모든 인스턴스를 콜백의 함수의 인수로 지정.</p>
                         <p lang="en_US">Specifies all instances stored in the selected element as arguments of the callback function.</p>
                         <p lang="ko_KR" class="alert">인스턴스의 개수만큼 콜백 함수가 실행됩니다.</p>
                         <p lang="en_US" class="alert">Callback function is executed as many as the number of instances.</p>
@@ -54,7 +54,7 @@
                         <pre><code>var all = N(".grid01", ".grid02").instance("name");</code></pre>
                     </li>
                     <li>
-                        <p lang="ko_KR">선택한 요소에 instanceId가 "name"으로 저장되어 있는 모든 인스턴스를 콜백 함수의 인자로 반환.</p>
+                        <p lang="ko_KR">선택한 요소에 instanceId가 "name"으로 저장되어 있는 모든 인스턴스를 콜백 함수의 인수로 반환.</p>
                         <p lang="en_US">Return all instances where instanceId is stored as "name" in the selected element as argument of callback function.</p>
                         <p lang="ko_KR" class="alert">인스턴스의 개수만큼 콜백 함수가 실행됩니다.</p>
                         <p lang="en_US" class="alert">Callback function is executed as many as the number of instances.</p>
@@ -68,7 +68,7 @@
                         <p lang="ko_KR">선택한 요소에  instance를 "name"으로 저장.</p>
                         <p lang="en_US">Store instance as "name" in the selected element.</p>
                         <pre><code>N(".grid01").instance("name", instance);</code></pre>
-                        <p lang="ko_KR" class="alert">인스턴스 저장 시 instance 인자가 function 타입이면 정상작동하지 않을 수 있습니다. function 타입을 제외한 object 나 string과 같은 타입을 instance 인자로 지정해야 합니다.</p>
+                        <p lang="ko_KR" class="alert">인스턴스 저장 시 instance 인수가 function 타입이면 정상작동하지 않을 수 있습니다. function 타입을 제외한 object 나 string과 같은 타입을 instance 인수로 지정해야 합니다.</p>
                         <p lang="en_US" class="alert">When saving an instance, if the instance argument is a function type, it may not work properly. Types such as object or string, except the function type, should be specified as instance arguments.</p>
                     </li>
                 </ol>
@@ -140,7 +140,7 @@
             <td>
                 <p lang="ko_KR">선택한 요소에 저장할 인스턴스나 인스턴스를 가져올 callback function.</p>
                 <p lang="en_US">Callback function to get the instance or instance to be saved in the selected element.</p>
-                <p lang="ko_KR" class="alert">callback의 인자로 index(arguments[0])와 각각의 instance(arguments[1])가 반환됩니다. 이 callback function의 "this"는 각각의 instance를 가리킵니다.</p>
+                <p lang="ko_KR" class="alert">callback의 인수로 index(arguments[0])와 각각의 instance(arguments[1])가 반환됩니다. 이 callback function의 "this"는 각각의 instance를 가리킵니다.</p>
                 <p lang="en_US" class="alert">As the argument of callback, index(arguments[0]) and each instance(arguments[1]) are returned. This callback function's "this" points to each instance.</p>
             </td>
         </tr>
@@ -185,7 +185,7 @@
                 <p lang="ko_KR">select, select[multiple=multiple], input[type=radio], input[type=checkbox]와 같은 선택 요소의 선택된 값을 가져오거나 선택합니다.</p>
                 <p lang="en_US">Gets or selects the selected value of a selection element such as select, select[multiple=multiple], input[type=radio], input[type=checkbox].</p>
                 <ul>
-                    <li lang="ko_KR">vals 인자를 입력하지 않으면 선택한 값이 반환됩니다. vals 인자가 지정되면 입력 한 값과 일치하는 선택 요소가 선택됩니다.</li>
+                    <li lang="ko_KR">vals 인수를 입력하지 않으면 선택한 값이 반환됩니다. vals 인수가 지정되면 입력 한 값과 일치하는 선택 요소가 선택됩니다.</li>
                     <li lang="en_US">If the vals argument is not entered, the selected values are returned. If the vals argument is specified, option elements that match the entered values are selected.</li>
                     <li lang="ko_KR">하나만 선택하면 string 유형의 값이 하나만 반환되고 둘 이상인 경우 값이 배열로 반환됩니다.</li>
                     <li lang="en_US">If only one is selected, only one value of type string is returned, and if it is more than two, values are returned in an array.</li>
@@ -206,7 +206,7 @@
             <td>
                 <p lang="ko_KR">단일 값을 지정할 때는 문자열로 값을 지정하고 둘 이상의 선택지를 선택할 때는 배열에 문자열을 담아 값을 지정합니다.</p>
                 <p lang="en_US">When specifying a single value, specify the value as a string and when selecting two or more options, specify the value by storing the string in an array.</p>
-                <p lang="ko_KR">function 지정하면 선택된 선택지 요소 개수만큼 지정한 콜백 함수를 실행해 줍니다. 콜백 함수의 인자는 다음과 같습니다.</p>
+                <p lang="ko_KR">function 지정하면 선택된 선택지 요소 개수만큼 지정한 콜백 함수를 실행해 줍니다. 콜백 함수의 인수는 다음과 같습니다.</p>
                 <p lang="en_US">If function is specified, the specified callback function is executed as many as the number of selected option elements. The arguments of the callback function are as follows.</p>
                 <ul>
                     <li lang="ko_KR">this : 선택된 선택지 요소</li>
@@ -224,7 +224,7 @@
             <td style="text-align: center;">N/A</td>
             <td>jQuery object</td>
             <td>
-                <p lang="ko_KR">인자로 지정한 array의 요소를 제거합니다.</p>
+                <p lang="ko_KR">인수로 지정한 array의 요소를 제거합니다.</p>
                 <p lang="en_US">Removes the elements of the array specified as arguments.</p>
             </td>
         </tr>
@@ -256,9 +256,9 @@
             <td>
                 <p lang="ko_KR">선택한 요소에 바인딩되어 있는 이벤트들을 반환합니다.</p>
                 <p lang="en_US">Returns the events bound to the selected element.</p>
-                <p lang="ko_KR" class="alert">eventName 인자와 namespace 인자를 둘 다 입력하지 않으면 모든 이벤트들을 반환하고 namespace를 입력하지 않으면 지정한 eventName에 해당하는 이벤트들만 반환합니다.</p>
+                <p lang="ko_KR" class="alert">eventName 인수와 namespace 인수를 둘 다 입력하지 않으면 모든 이벤트들을 반환하고 namespace를 입력하지 않으면 지정한 eventName에 해당하는 이벤트들만 반환합니다.</p>
                 <p lang="en_US" class="alert">If both the eventName and namespace arguments are not entered, all events are returned. If no namespace is entered, only the events corresponding to the specified eventName are returned.</p>
-                <p lang="ko_KR" class="alert">namespace 인자가 입력되면 배열 객체 타입으로 이벤트를 반환하고 그렇지 않은 경우에는 jQuery object 타입으로 이벤트들을 반환합니다. 바인딩되어 있는 이벤트가 없으면 undefined를 반환합니다.</p>
+                <p lang="ko_KR" class="alert">namespace 인수가 입력되면 배열 객체 타입으로 이벤트를 반환하고 그렇지 않은 경우에는 jQuery object 타입으로 이벤트들을 반환합니다. 바인딩되어 있는 이벤트가 없으면 undefined를 반환합니다.</p>
                 <p lang="en_US" class="alert">If the namespace argument is entered, the event is returned as an array object type. Otherwise, the event is returned as a jQuery object type. If there are no bound events, undefined is returned.</p>
             </td>
         </tr>

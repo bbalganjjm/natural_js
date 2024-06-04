@@ -109,7 +109,7 @@ $(document).ready 함수의 콜백 함수의 내용을 봐주세요.
 ```
 
 **/index.html**의 DOM이 모두 로딩된 다음 N.comm으로 #lefter 요소에 좌측 블록 페이지를 불러와 넣어주는 구문입니다. **/html/index/lefter.html** 파일은 좌측 메뉴의 링크 요소와 이를 활성화해 주는 Controller(N.cont) Object가 들어 있습니다.
-N("#lefter").comm("html/index/lefter.html").submit 함수의 인자는 **/html/index/lefter.html** 파일 로딩이 완료된 후 실행되는 콜백 함수입니다. 여기에서 N.docs 컴포넌트로 #docs 요소 안에 MDI 페이지 컨테이너를 생성해 주고 있습니다. N.docs 컴포넌트의 인스턴스는 어플리케이션당 1개만 생성되므로 window 객체에 담아 전역으로 사용할 것입니다.
+N("#lefter").comm("html/index/lefter.html").submit 함수의 인수는 **/html/index/lefter.html** 파일 로딩이 완료된 후 실행되는 콜백 함수입니다. 여기에서 N.docs 컴포넌트로 #docs 요소 안에 MDI 페이지 컨테이너를 생성해 주고 있습니다. N.docs 컴포넌트의 인스턴스는 어플리케이션당 1개만 생성되므로 window 객체에 담아 전역으로 사용할 것입니다.
 <p class="alert">N.docs 인스턴스는 반드시 window 객체가 아니더라도 어플리케이션에서 정의한 전역으로 접근할 수 있는 아무 객체에 담아도 됩니다.</p>
 
 이제 이 N.docs 인스턴스에서 제공하는 기능으로 메뉴 컨텐츠를 불러오는 좌측 메뉴 블록 페이지(/html/index/lefter.html)를 생성해 보겠습니다.

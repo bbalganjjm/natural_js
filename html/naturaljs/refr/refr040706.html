@@ -30,7 +30,7 @@
                 <p lang="ko_KR">반환되는 데이터의 타입을 결정하는 구분 값입니다.</p>
                 <p lang="en_US">This is a division value that determines the type of data returned.</p>
 
-                <p lang="ko_KR">selFlag 인자 값에 따라 다음과 같은 데이터를 반환합니다.</p>
+                <p lang="ko_KR">selFlag 인수 값에 따라 다음과 같은 데이터를 반환합니다.</p>
                 <p lang="en_US">The following data is returned according to the value of the selFlag argument.</p>
                 <ul>
                     <li lang="ko_KR">undefined(selFlag 옵션이 설정되지 않은 경우) : array[json object] 타입의 데이터를 반환합니다.</li>
@@ -57,13 +57,13 @@
             <td>string</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p lang="ko_KR">data 메서드의 두 번째 인자부터 n 번째 인자까지 데이터의 프로퍼티명을 인자로 지정하면 지정한 프로퍼티 값만 추출한 객체를 반환합니다.</p>
+                <p lang="ko_KR">data 메서드의 두 번째 인수부터 n 번째 인수까지 데이터의 프로퍼티명을 인수로 지정하면 지정한 프로퍼티 값만 추출한 객체를 반환합니다.</p>
                 <p lang="en_US">If you specify the property name of the data from the second argument to the nth argument of the data method as an argument, the object that extracts only the specified property value is returned.</p>
                 <pre><code>var formInst = N([]).form(".context")
     .bind(0, [{ col01 : "", col02 : "", col03 : "", col04 : "", col05 : "", col06 : "" }]);
 formInst.data(true, "col01", "col02", "col03");
     // [{ col01 : "", col02 : "", col03 : "" }]</code></pre>
-                <p lang="ko_KR" class="alert">첫 번째 인자를 true로 설정했을 때만 작동됩니다.</p>
+                <p lang="ko_KR" class="alert">첫 번째 인수를 true로 설정했을 때만 작동됩니다.</p>
                 <p lang="en_US" class="alert">It works only when the first argument is set to true.</p>
             </td>
         </tr>
@@ -143,7 +143,7 @@ formInst.data(true, "col01", "col02", "col03");
             <td>string</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p lang="ko_KR">bind 메서드의 세 번째 인자부터 n 번째 인자까지 데이터의 프로퍼티명을 지정하면 프로퍼티명과 id 속성 값이 일치하는 요소만 데이터가 바인딩됩니다.</p>
+                <p lang="ko_KR">bind 메서드의 세 번째 인수부터 n 번째 인수까지 데이터의 프로퍼티명을 지정하면 프로퍼티명과 id 속성 값이 일치하는 요소만 데이터가 바인딩됩니다.</p>
                 <p lang="en_US">If you specify the property name of the data from the third argument to the nth argument of the bind method, only the element whose property name matches the value of the id attribute is bound data.</p>
                 <pre lang="ko_KR"><code>// 바인딩할 데이터
 var data = [{ col01 : "", col02 : "", col03 : "", col04 : "", col05 : "", col06 : "" }]
@@ -201,7 +201,7 @@ formInstance.bind(0, data, "col01", "col02", "col03");</code></pre>
             <td>
                 <p lang="ko_KR">data 객체를 지정하면 생성된 데이터와 지정 한 data가 병합되어 바인딩됩니다.</p>
                 <p lang="en_US">When a data object is specified, the added data and the specified data are merged and then bound.</p>
-                <p lang="ko_KR" class="alert">data 인자가 number 타입이면 row(arguments[1]) 인자로 지정됩니다.</p>
+                <p lang="ko_KR" class="alert">data 인수가 number 타입이면 row(arguments[1]) 인수로 지정됩니다.</p>
                 <p lang="en_US" class="alert">If the data argument is of type number, it is specified as a row (arguments [1]) argument.</p>
             </td>
         </tr>
@@ -211,7 +211,7 @@ formInstance.bind(0, data, "col01", "col02", "col03");</code></pre>
             <td>number</td>
             <td style="text-align: center;">N/A</td>
             <td>
-                <p lang="ko_KR">새로운 데이터가 추가될 행 인덱스를 row 인자로 지정하면 지정한 행 인덱스 바로 앞에 행 데이터가 추가됩니다.</p>
+                <p lang="ko_KR">새로운 데이터가 추가될 행 인덱스를 row 인수로 지정하면 지정한 행 인덱스 바로 앞에 행 데이터가 추가됩니다.</p>
                 <p lang="en_US">If the row index to which new data is to be added is specified as the row argument, the row data is added right in front of the specified row index.</p>
             </td>
         </tr>
@@ -243,7 +243,7 @@ formInstance.bind(0, data, "col01", "col02", "col03");</code></pre>
             <td>
                 <p lang="ko_KR">컴포넌트에 바인딩되어 있는 데이터의 프로퍼티 값을 얻어오거나 설정합니다.</p>
                 <p lang="en_US">Gets or sets the property value of data bound to the component.</p>
-                <p lang="ko_KR" class="alert">val 인자가 설정되면 지정된 값을 바인딩된 데이터에 세팅하거나 추가하고 val 인자가 설정되지 않으면 지정된 값을 얻어옵니다.</p>
+                <p lang="ko_KR" class="alert">val 인수가 설정되면 지정된 값을 바인딩된 데이터에 세팅하거나 추가하고 val 인수가 설정되지 않으면 지정된 값을 얻어옵니다.</p>
                 <p lang="en_US" class="alert">If the val argument is set, the specified value is set or added to the bound data. If the val argument is not set, the specified value is get.</p>
             </td>
         </tr>
