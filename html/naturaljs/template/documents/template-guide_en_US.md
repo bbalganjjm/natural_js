@@ -21,7 +21,7 @@ Contents
         * [3. Starts with "e."(Event binding)](#3startswitheeventbinding)
 
 #Install
-1. Download the natural.template.min.js file from [Github](https://github.com/bbalganjjm/natural_js/tree/master/dist) and load the library as follows.
+1. Download the natural.template.min.js file from [Github](https://github.com/bbalganjjm/natural_js/tree/master/dist) and import the library as follows.
 
 ```
 <script type="text/javascript" src="js/natural_js/natural.template.min.js" charset="utf-8"></script>

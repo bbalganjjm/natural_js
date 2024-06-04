@@ -21,7 +21,7 @@ Natural-TEMPLATE 은 Natural-JS 기반 웹 어플리케이션 개발을 정형�
         * [3. "e."으로 시작(이벤트 바인딩)](#3e)
 
 #설치
-1. [Github](https://github.com/bbalganjjm/natural_js/tree/master/dist)에서 natural.template.min.js 파일을 다운로드해서 다음과 같이 라이브러리를 로딩합니다.
+1. [Github](https://github.com/bbalganjjm/natural_js/tree/master/dist) 에서 natural.template.min.js 파일을 다운로드해서 다음과 같이 라이브러리를 import 합니다.
 
 ```
 <script type="text/javascript" src="js/natural_js/natural.template.min.js" charset="utf-8"></script>
