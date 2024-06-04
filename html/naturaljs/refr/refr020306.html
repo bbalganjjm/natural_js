@@ -7,9 +7,17 @@
     <h3 lang="ko_KR" class="notIndex">1. 서버에서 데이터 조회</h3>
     <h3 lang="en_US" class="notIndex">1. Query data from server</h3>
     <pre><code>&lt;script type="text/javascript"&gt;
+    // callback
     N.comm("data.json").submit(function(data) {
         N.log(data);
     });
+
+    // async / await
+    const fn = async () => {
+        const data = await N.comm("data.json").submit();
+        console.log(data);
+    };
+    fn();
 &lt;/script&gt;</code></pre>
 
     <h3 lang="ko_KR" class="notIndex">2. 서버에 파라미터 전송 및 결과 데이터 조회</h3>
@@ -29,23 +37,39 @@
 
     <h3 lang="ko_KR" class="notIndex">3. 지정한 요소에 HTML 페이지 삽입하기</h3>
     <h3 lang="en_US" class="notIndex">3. Insert HTML page into specified element</h3>
-    <pre lang="ko_KR"><code>&lt;article class="view-0001"&gt;&lt;/article&gt;
+    <pre lang="ko_KR"><code>&lt;article id="view-0001"&gt;&lt;/article&gt;
 
 &lt;script type="text/javascript"&gt;
-    // ".view-0001" 요소에 "page.html" 페이지를 로드하고 "page.html" 페이지의 Controller object의 init 메서드를 실행해 줍니다.
-    N(".view-0001").comm("page.html").submit(function() {
+    // "#view-0001" 요소에 "page.html" 페이지를 로드하고 "page.html" 페이지의 Controller object의 init 메서드를 실행해 줍니다.
+    N("#view-0001").comm("page.html").submit(function(cont) {
+        // cont : 불러온 페이지의 Controller object
         // 페이지 삽입이 완료된 후 실행됩니다.
-        // 필요 없으면 콜백 함수를 정의하지 않아도 됩니다.
     });
+
+    const fn = async () => {
+        const data = await N("#view-0001").comm("page.html").submit();
+        console.log(data); // HTML Text
+        const cont = N("#view-0001 .view_context__").instance("cont");
+        console.log(cont); // 불러온 페이지의 Controller object
+    };
+    fn();
 &lt;/script&gt;</code></pre>
-    <pre lang="en_US"><code>&lt;article class="view-0001"&gt;&lt;/article&gt;
+    <pre lang="en_US"><code>&lt;article id="view-0001"&gt;&lt;/article&gt;
 
 &lt;script type="text/javascript"&gt;
-    // Load "page.html" page in ".view-0001" element and execute init method of Controller object on "page.html" page.
-    N(".view-0001").comm("page.html").submit(function() {
+    // Load "page.html" page in "#view-0001" element and execute init method of Controller object on "page.html" page.
+    N("#view-0001").comm("page.html").submit(function(cont) {
+        // cont: Controller object of the loaded page
         // It executes after the page is inserted.
-        // You don't need to define a callback function if you don't need it.
     });
+
+    const fn = async () => {
+        const data = await N("#view-0001").comm("page.html").submit();
+        console.log(data); // HTML Text
+        const cont = N("#view-0001 .view_context__").instance("cont");
+        console.log(cont); // Controller object of the loaded page
+    };
+    fn();
 &lt;/script&gt;</code></pre>
 </article>
 

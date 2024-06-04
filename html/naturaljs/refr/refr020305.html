@@ -21,15 +21,23 @@
                 <p lang="en_US">Send a request to the server and register a callback function to be executed when a successful server response is received.</p>
                 <p lang="ko_KR">submit 함수에 callback 인수를 입력하지 않으면 Promise 와 호환되는 xhr 객체가 반환되어 async / await 문법을 사용할 수 있습니다.</p>
                 <p lang="en_US">If you do not provide a callback argument to the submit function, a Promise compatible xhr object will be returned, allowing you to use async / await syntax.</p>
-                <pre><code>const fn1 = async () => {
-    const data = await N.comm({url}).submit();
+                <pre><code>// JSON Data
+const fn1 = async () => {
+    const data = await N.comm("data.json").submit();
 };
 
-const fn2 = () => await N.comm({url}).submit().then((data) => {
+// Catch exception
+const fn2 = () => await N.comm("data.json").submit().then((data) => {
     console.log(data);
 }).catch((e) => {
     console.error(e);
-});</code></pre>
+});
+
+// HTML page
+const fn3 = async () => {
+    const data = await N("#page-container").comm("page.html").submit();
+    console.log(data); // HTML Text
+};</code></pre>
             </td>
         </tr>
         <tr>
@@ -45,16 +53,15 @@ const fn2 = () => await N.comm({url}).submit().then((data) => {
                 <p lang="en_US">Define a callback function that handles the server's response when the request is successful.</p>
                 <p lang="ko_KR">HTML 페이지를 요청하면 콜백 함수의 인수로 로드 한 페이지의 Contoller object가 반환되고 이 외의 요청은 data 객체와 Communicator.request 객체가 반환됩니다.</p>
                 <p lang="en_US">If an HTML page is requested, the Controller object of the page loaded as the argument of the callback function is returned. For other requests, the data object and the Communicator.request object are returned.</p>
-                <pre><code>// Data
+                <pre><code>// JSON Data
 N.comm("data.json").submit(function(data, request) {
     N.log(data, request);
 });
 
 // HTML page
-N(".targetElement").comm("page.html").submit(function(cont) {
-    N.log(cont);
-});
-</code></pre>
+N("#page-container").comm("page.html").submit(function(cont) {
+    N.log(cont); // cont : Controller object
+});</code></pre>
             </td>
         </tr>
         <tr>
@@ -91,8 +98,7 @@ N(".targetElement").comm("page.html").submit(function(cont) {
                     <li lang="ko_KR">callback(arguments[4]) : textStatus 값이 "success" 일 때 submit 메서드의 인수로 지정한 콜백 함수.</li>
                     <li lang="en_US">callback(arguments[4]) : Callback function specified as argument of submit method when textStatus value is "success".</li>
                 </ul>
-                <pre lang="ko_KR"><code>
-N.comm("data.json").error(function(xhr, textStatus, e, request, callback) {
+                <pre lang="ko_KR"><code>N.comm("data.json").error(function(xhr, textStatus, e, request, callback) {
     // 2. col01.length 오류에 대한 첫 번째 오류 처리
 }).error(function(xhr, textStatus, e, request, callback) {
     // 3. col01.length 오류에 대한 두 번째 오류 처리
