@@ -1,5 +1,5 @@
 /*!
- * Natural-ARCHITECTURE v0.15.12
+ * Natural-ARCHITECTURE v0.16.12
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2023 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-ARCHITECTURE"] = "0.15.12";
+    N.version["Natural-ARCHITECTURE"] = "0.16.12";
 
     $.fn.extend($.extend(N.prototype, {
         ajax : function(opts) {
@@ -163,6 +163,7 @@
                     }
                 });
                 if(isFilterStopped) return;
+                var currReject;
 
                 $.extend(obj.request.options, {
                     beforeSend : function(xhr, settings) {
@@ -247,7 +248,7 @@
                             } catch (e) {
                                 if(obj.errorHandlers.length > 0) {
                                     $(obj.errorHandlers).each(function(i, errorHandler) {
-                                        errorHandler.call(obj, e, obj.request, xhr, textStatus, callback);
+                                        errorHandler.call(obj, xhr, textStatus, e, obj.request, callback);
                                     });
                                 }
                                 throw N.error("N.comm.submit.success.callback(url:" + obj.request.options.url + ")", e);
@@ -269,8 +270,9 @@
                                 $(obj.errorHandlers).each(function(i, errorHandler) {
                                     errorHandler.call(obj, e, obj.request, xhr, textStatus);
                                 });
+                            } else {
+                                throw N.error("N.comm.submit.error(url:" + obj.request.options.url + ")", e);
                             }
-                            throw N.error("N.comm.submit.error(url:" + obj.request.options.url + ")", e);
                         }
                     },
                     complete : function(xhr, textStatus) {
@@ -284,152 +286,13 @@
                         });
                     }
                 });
+
                 this.xhr = N.ajax(obj.request.options);
-                return obj;
-            },
-            fetch : function() { // TODO Change $.ajax to fetch function
-                var obj = this;
-                return new Promise((resolve, reject) => {
-                    if (N.isElement(obj)) {
-                        $.extend(this.request.options, {
-                            contentType : "text/html; charset=UTF-8",
-                            dataType : "html",
-                            type : "GET"
-                        });
-                        this.request.options.target = obj;
-                    }
-
-                    var isFilterStopped = false;
-                    // request filter
-                    $(filterConfig.afterInitFilters).each(function(i) {
-                        if(this(obj.request) instanceof Error){
-                            isFilterStopped = true;
-                            return false;
-                        }
-                    });
-                    if(isFilterStopped) return;
-
-                    $.extend(obj.request.options, {
-                        beforeSend : function(xhr, settings) {
-                            var isFilterStopped = false;
-                            // request filter
-                            $(filterConfig.beforeSendFilters).each(function(i, filter) {
-                                if(filter.call(obj, obj.request, xhr, settings) instanceof Error){
-                                    isFilterStopped = true;
-                                    return false;
-                                }
-                            });
-                            if(isFilterStopped) return false;
-                        },
-                        success : function(data, textStatus, xhr) {
-                            var isFilterStopped = false;
-                            // request filter
-                            $(filterConfig.successFilters).each(function(i, filter) {
-                                var fData = filter.call(obj, obj.request, data, textStatus, xhr);
-                                if(fData instanceof Error){
-                                    isFilterStopped = true;
-                                    return false;
-                                }
-                                if(fData !== undefined) {
-                                    data = fData;
-                                }
-                                fData = undefined;
-                            });
-                            if(isFilterStopped) return false;
-
-                            var cont;
-                            if (!N.isElement(obj)) {
-                                if (obj.request.options.urlSync && obj.request.options.referrer.replace(/!/g, "") != window.location.href.replace(/!/g, "")) {
-                                    xhr.abort();
-                                    N.warn("[Communicator.submit.success(urlSync option)]The response was stopped because it was different from the URL at the time of the request and the URL at the time of the response.");
-                                    return false;
-                                }
-                            } else {
-                                if(obj.is(N.context.attr("architecture").page.context)) {
-                                    N.gc[N.context.attr("core").gcMode]();
-                                }
-                                if (obj.request.options.append) {
-                                    obj.append(data);
-                                } else if(obj.request.options.replace){
-                                    obj.attr("id", obj.attr("id") + "_pending_to_remove");
-                                    obj.css("display", "none");
-                                    obj.after(data);
-                                } else {
-                                    obj.html(data);
-                                }
-
-                                if(!obj.is(N.context.attr("architecture").page.context)) {
-                                    // Removes garbage instances from obserables of N.ds
-                                    N.gc.ds();
-                                }
-
-                                if(obj.request.options.replace){
-                                    if(obj.nextAll(".view_context__:first").length > 0){
-                                        cont = obj.nextAll(".view_context__:first").instance("cont");
-                                        if(cont !== undefined){
-                                            // triggering "init" method
-                                            Controller.trInit.call(this, cont, obj.request);
-                                        }
-                                    }
-                                    obj.remove();
-                                } else if(obj.children(".view_context__:last").length > 0) {
-                                    cont = obj.children(".view_context__:last").instance("cont");
-                                    if(cont !== undefined) {
-                                        // triggering "init" method
-                                        Controller.trInit.call(this, cont, obj.request);
-                                    }
-                                }
-                            }
-
-                            try {
-                                if (!N.isElement(obj)) {
-                                    resolve.call(obj, data, obj.request);
-                                } else {
-                                    resolve.call(obj, cont);
-                                }
-                                cont = undefined;
-                            } catch (e) {
-                                if(obj.errorHandlers.length > 0) {
-                                    $(obj.errorHandlers).each(function(i, errorHandler) {
-                                        errorHandler.call(obj, e, obj.request, xhr, textStatus, callback);
-                                    });
-                                }
-                                reject(e);
-                            }
-                        },
-                        error : function(xhr, textStatus, e) {
-                            var isFilterStopped = false;
-                            // request filter
-                            $(filterConfig.errorFilters).each(function(i, filter) {
-                                if(filter.call(obj, obj.request, xhr, textStatus, e) instanceof Error){
-                                    isFilterStopped = true;
-                                    return false;
-                                }
-                            });
-
-                            if(!isFilterStopped){
-                                if(obj.errorHandlers.length > 0) {
-                                    $(obj.errorHandlers).each(function(i, errorHandler) {
-                                        errorHandler.call(obj, e, obj.request, xhr, textStatus);
-                                    });
-                                }
-                                throw N.error("N.comm.submit.error(url:" + obj.request.options.url + ")", e);
-                            }
-                        },
-                        complete : function(xhr, textStatus) {
-                            var isFilterStopped = false;
-                            // request filter
-                            $(filterConfig.completeFilters).each(function(i, filter) {
-                                if(filter.call(obj, obj.request, xhr, textStatus) instanceof Error){
-                                    isFilterStopped = true;
-                                    return false;
-                                }
-                            });
-                        }
-                    });
-                    this.xhr = N.ajax(obj.request.options);
+                if (!callback) {
+                    return this.xhr;
+                } else {
                     return obj;
-                });
+                }
             },
             error : function(callback) {
                 this.errorHandlers.push(callback);
