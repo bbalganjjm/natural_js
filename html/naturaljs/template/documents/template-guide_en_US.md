@@ -325,7 +325,9 @@ All [Communicator(N.comm)](#html/naturaljs/refr/refr0203.html) that communicate 
 The initial property name of N.comm can be used in combination as follows.
 
 ```
-"c.{service name}" : function() { return N.comm; }
+"c.{serviceName}" : function() { 
+    return N(params).comm({url}); 
+}
 ```
 
 >If possible, define the service name as the same as the service name in the last path of the calling URL. If there is a duplicate service name, define it by combining the extension, such as getSampleList*Json*.

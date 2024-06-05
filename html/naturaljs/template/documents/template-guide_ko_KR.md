@@ -325,7 +325,9 @@ Natural-TEMPLATE에서만 사용 가능한 컴포넌트 별 추가 옵션들은 
 N.comm의 초기화 속성명은 다음과 같이 조합하여 사용할 수 있습니다.
 
 ```
-"c.{서비스명}" : function() { return N.comm; }
+"c.{서비스명}" : function() { 
+    return N(params).comm({url}); 
+}
 ```
 
 >가능 하다면 서비스명은 호출하는 URL 의 마지막 경로의 서비스명과 동일하게 정의하고 중복되는 서비스명이 있다면 getSampleList*Json* 과 같이 확장자까지 조합하여 정의 합니다. 
