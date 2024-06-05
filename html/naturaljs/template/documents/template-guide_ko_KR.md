@@ -5,8 +5,9 @@ Natural-TEMPLATE 은 Natural-JS 기반 웹 어플리케이션 개발을 정형�
 목차
 ===
 * [**설치**](#-1)
-* [**API 매뉴얼**](#api)
-	* [Controller object의 속성명 작성 규칙](#ncontcontrollerobject)
+* [**개발 가이드**](#-2)
+    * [페이지 소스코드 작성 규칙](#-3)
+	* [Controller object(N.cont) 의 속성명 작성 규칙](#controllerobjectncont)
 
         * [1. "p."으로 시작(UI 컴포넌트 초기화)](#1pui)
             * [1.1. N.select - 공통코드 데이터 바인딩](#11nselect)
@@ -83,10 +84,42 @@ N.context.attr("template", {
 ```
 
 
-#API 매뉴얼
+#개발 가이드
 
-##Controller object의 속성명 작성 규칙
-Natural-TEMPLATE의 기능은 Controller object 프로퍼티명의 명명규칙으로 실행할 수 있습니다. 컴포넌트를 초기화하거나 이벤트를 바인딩하는 등의 반복적인 작업들을 자동화해 줍니다.
+##페이지 소스코드 작성 규칙
+
+기본적으로 Natural-JS 의 블록 페이지들의 소스코드는 다음과 같이 구성해야 됩니다.
+
+```javascript
+&lt;style&gt;
+    .page-id {
+        /* View(CSS) - 퍼블리셔가 작성, 생략 가능하고 이 파일의 View 에만 스타일을 적용하고 싶을 때만 추가. */
+        /* CSS 셀렉터를 선언할 때는 반드시 .page-id #target { } 처럼 .page-id를 맨 앞에 적어 주세요. 안그러면 다른 페이지에도 영향을 미칩니다. */
+    }
+&lt;/style&gt;
+
+&lt;article class="page-id"&gt;
+    &lt;!-- View - 퍼블리셔가 작성 --&gt;
+    &lt;!-- article 태그에 class 속성으로 page-id를 지정합니다. --&gt;
+&lt;/article&gt;
+
+&lt;script type="text/javascript"&gt;
+(function() {
+
+    // Controller - 업무 개발자가 작성
+    // N.cont 함수를 실행 시킬 때 N의 인자로 View의 class 속성으로 정의 한 "page-id" 값을 넣어 줍니다.
+    var cont = N(".page-id").cont({
+        init : function(view, request) {
+            // 페이지 로딩 후 init 함수가 자동으로 실행됩니다.
+        }
+    });
+
+})();
+&lt;/script&gt;
+```
+
+##Controller object(N.cont) 의 속성명 작성 규칙
+Natural-TEMPLATE 의 기능은 Controller object 프로퍼티명의 명명규칙으로 실행할 수 있습니다. 컴포넌트를 초기화하거나 이벤트를 바인딩하는 등의 반복적인 작업들을 자동화해 줍니다.
 
 ###1. "p."으로 시작 - UI 컴포넌트 초기화
 Natural-UI의 컴포넌트들을 자동으로 초기 화해 줍니다.

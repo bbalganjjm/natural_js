@@ -194,6 +194,7 @@ th, tfoot td {
 .main-nav {
     position: fixed;
     width: 270px;
+    padding-bottom: 50px;
 
     transform-origin: left;
     transition: margin-left var(--njs-motion-duration-ultra-slow) ease, box-shadow var(--njs-motion-duration-fast) ease;
