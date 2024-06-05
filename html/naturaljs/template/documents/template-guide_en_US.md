@@ -7,7 +7,7 @@ Contents
 * [**Install**](#install)
 * [**Development guide**](#developmentguide)
     * [Page source code writing rules](#pagesourcecodewritingrules)
-    * [Rules for creating property names for Controller object(N.cont)](#rulesforcreatingpropertynamesforcontrollerobject)
+    * [Rules for creating property names for Controller object(N.cont)](#rulesforcreatingpropertynamesforcontrollerobjectncont)
 
         * [1. Starts with "p."(UI component initialization)](#1startswithpuicomponentinitialization)
             * [1.1. N.select - Common code data binding](#11nselectcommoncodedatabinding)
@@ -88,33 +88,31 @@ N.context.attr("template", {
 
 ##Page source code writing rules
 
-기본적으로 Natural-JS 의 블록 페이지들의 소스코드는 다음과 같이 구성해야 됩니다.
+Basically, the source code of Natural-JS block pages should be structured as follows.
 
 ```javascript
 &lt;style&gt;
-    .page-id {
-        /* View(CSS) - 퍼블리셔가 작성, 생략 가능하고 이 파일의 View 에만 스타일을 적용하고 싶을 때만 추가. */
-        /* CSS 셀렉터를 선언할 때는 반드시 .page-id #target { } 처럼 .page-id를 맨 앞에 적어 주세요. 안그러면 다른 페이지에도 영향을 미칩니다. */
-    }
+.page-id {
+    /* View(CSS) - It can be omitted and is added only when you want to apply the style only to the View in this file. */
+    /* When declaring a CSS selector, be sure to write .page-id at the beginning, such as .page-id #target { }. Otherwise, it will affect other pages as well. */
+}
 &lt;/style&gt;
 
 &lt;article class="page-id"&gt;
-    &lt;!-- View - 퍼블리셔가 작성 --&gt;
-    &lt;!-- article 태그에 class 속성으로 page-id를 지정합니다. --&gt;
+    &lt;!-- Specify page-id as a class attribute in the article tag. --&gt;
 &lt;/article&gt;
 
 &lt;script type="text/javascript"&gt;
-(function() {
+    (function() {
 
-    // Controller - 업무 개발자가 작성
-    // N.cont 함수를 실행 시킬 때 N의 인자로 View의 class 속성으로 정의 한 "page-id" 값을 넣어 줍니다.
-    var cont = N(".page-id").cont({
-        init : function(view, request) {
-            // 페이지 로딩 후 init 함수가 자동으로 실행됩니다.
-        }
-    });
+        //  When executing the N.cont function, enter the "page-id" value defined as the class property of View as the argument of N.
+        var cont = N(".page-id").cont({
+            init : function(view, request) {
+                // This "init" function runs automatically once the page has finished loading.
+            }
+        });
 
-})();
+    })();
 &lt;/script&gt;
 ```
 

@@ -93,24 +93,22 @@ N.context.attr("template", {
 ```javascript
 &lt;style&gt;
     .page-id {
-        /* View(CSS) - 퍼블리셔가 작성, 생략 가능하고 이 파일의 View 에만 스타일을 적용하고 싶을 때만 추가. */
+        /* View(CSS) - 생략 가능하고 이 파일의 View 에만 스타일을 적용하고 싶을 때만 추가 합니다. */
         /* CSS 셀렉터를 선언할 때는 반드시 .page-id #target { } 처럼 .page-id를 맨 앞에 적어 주세요. 안그러면 다른 페이지에도 영향을 미칩니다. */
     }
 &lt;/style&gt;
 
 &lt;article class="page-id"&gt;
-    &lt;!-- View - 퍼블리셔가 작성 --&gt;
     &lt;!-- article 태그에 class 속성으로 page-id를 지정합니다. --&gt;
 &lt;/article&gt;
 
 &lt;script type="text/javascript"&gt;
 (function() {
 
-    // Controller - 업무 개발자가 작성
-    // N.cont 함수를 실행 시킬 때 N의 인자로 View의 class 속성으로 정의 한 "page-id" 값을 넣어 줍니다.
+    // N.cont 함수 실행시 View 의 class 속성으로 정의 된 "page-id" 값을 N 의 인수로 넣어 줍니다.
     var cont = N(".page-id").cont({
         init : function(view, request) {
-            // 페이지 로딩 후 init 함수가 자동으로 실행됩니다.
+            // "init" 함수는 페이지 로드가 완료되면 자동으로 실행됩니다.
         }
     });
 
