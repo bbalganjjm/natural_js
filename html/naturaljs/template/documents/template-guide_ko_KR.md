@@ -4,10 +4,8 @@ Natural-TEMPLATE 은 Natural-JS 기반 웹 어플리케이션 개발을 정형�
 
 목차
 ===
-* [**설치**](#-2)
+* [**설치**](#-1)
 * [**API 매뉴얼**](#api)
-	* [파일 별 기본 코드 작성 규칙](#ui)
-
 	* [Controller object의 속성명 작성 규칙](#ncontcontrollerobject)
 
         * [1. "p."으로 시작(UI 컴포넌트 초기화)](#1pui)
@@ -16,7 +14,7 @@ Natural-TEMPLATE 은 Natural-JS 기반 웹 어플리케이션 개발을 정형�
             * [1.3. N.form](#13nform)
             * [1.4. 다른 모든 컴포넌트](#14)
 
-        * [2. "c."으로 시작(Communicator(N.comm) 선언)](#2cncomm)
+        * [2. "c."으로 시작(Communicator(N.comm) 선언)](#2ccommunicatorncomm)
 
         * [3. "e."으로 시작(이벤트 바인딩)](#3e)
 
@@ -184,7 +182,7 @@ Natural-TEMPLATE에서만 사용 가능한 컴포넌트 별 추가 옵션들은 
 | 속성 | 옵션명 | 타입 | 필수 여부 | 속성 값 | 설명 |
 | :--: | :--: | :--: | :--: | :--: | -- |
 | p.select.{id} | - | - | - | - | N.select 컴포넌트를 초기화합니다. |
-| - | comm | string | | 목록을 조회할 Communicator(N.comm) | Controller object에 선언한 "c.{actionName}"을 지정합니다. |
+| - | comm | string | | 목록을 조회할 Communicator(N.comm) | Controller object에 선언한 "c.{serviceName}"을 지정합니다. |
 | - | data | array[object] | | 바인딩할 데이터 | comm 옵션을 지정하지 않고 data 옵션으로 [{}, {}]와 같은 데이터를 직접 생성하여 바인딩할 수 있습니다. |
 | - | key | string | O | 선택 요소의 명칭에 바인딩될 데이터 속성 명 | 조회한 데이터 객체에서 바인딩할 프로퍼티명을 설정합니다. |
 | - | val | string | O | 선택 요소의 값에 바인딩될 데이터 속성 명 | 조회한 데이터 객체에서 바인딩할 프로퍼티명을 설정합니다. |
@@ -327,10 +325,11 @@ Natural-TEMPLATE에서만 사용 가능한 컴포넌트 별 추가 옵션들은 
 N.comm의 초기화 속성명은 다음과 같이 조합하여 사용할 수 있습니다.
 
 ```
-"c.{액션명}" : function() { return N.comm; }
+"c.{서비스명}" : function() { return N.comm; }
 ```
 
->가능 하다면 액션명은 호출하는 URL의 서비스명과 맞춰 주고 불가능하면 반드시 목록 조회는 get + {ActionName} + List, 한건 조회는 get + {ActionName}, 입력은 insert + {ActionName}, 수정은 update + {ActionName}, 삭제는 delete + {ActionName}, 입력/수정/삭제를 한 번에 처리하는 Communicator는 save + {ActionName}로 정의 바랍니다.
+>가능 하다면 서비스명은 호출하는 URL 의 마지막 경로의 서비스명과 동일하게 정의하고 중복되는 서비스명이 있다면 getSampleList*Json* 과 같이 확장자까지 조합하여 정의 합니다. 
+>그래도 중복되는 서비스명이 있다면 목록 조회는 `get + {serviceName} + List`, 한건 조회는 `get + {serviceName}`, 다건(CUD) 저장은 `save + {serviceName} + List`, 입력은 `insert + {serviceName}`, 수정은 `update + {serviceName}`, 삭제는 `delete + {serviceName}` 으로 정의 바랍니다.
 
 ```
 ...
@@ -355,7 +354,7 @@ var cont = N(".page-id").cont({
 });
 ```
 
-N.comm의 선언은 오브젝트나 값을 직접 대입하는 것이 아닌 함수를 선언하는 방식입니다. `cont["c.{액션명}"]().submit`와 같이 선언된 함수를 실행해야 N.comm 인스턴스가 반환됩니다.
+N.comm의 선언은 오브젝트나 값을 직접 대입하는 것이 아닌 함수를 선언하는 방식입니다. `cont["c.{서비스명}"]().submit`와 같이 선언된 함수를 실행해야 N.comm 인스턴스가 반환됩니다.
 
 위 예제와 같이 N.comm의 파라미터를 데이터 관련 컴포넌트(Grid, List, Form 등)의 data() 메서드와 연결해 놓으면 N.comm의 submit 메서드가 호출되는 시점의 컴포넌트 데이터가 요청 파라미터로 서버에 전송됩니다.
 

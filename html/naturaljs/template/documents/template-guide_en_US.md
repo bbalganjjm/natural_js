@@ -6,9 +6,7 @@ Contents
 ===
 * [**Install**](#install)
 * [**API Menual**](#apimenual)
-    * [Basic code writing rules for each file](#basiccodewritingrulesforeachfile)
-
-    * [Rules for creating property names for Controller objects](#rulesforcreatingpropertynamesforcontrollerobjects)
+    * [Rules for creating property names for Controller objects](#rulesforcreatingpropertynamesforcontrollerobject)
 
         * [1. Starts with "p."(UI component initialization)](#1startswithpuicomponentinitialization)
             * [1.1. N.select - Common code data binding](#11nselectcommoncodedatabinding)
@@ -184,7 +182,7 @@ Additional options for each component available only in Natural-TEMPLATE are as 
 | Property | Option name | Type | Required | Property value | Description |
 | :--: | :--: | :--: | :--: | :--: | -- |
 | p.select.{id} | - | - | - | - | Initialize the N.select component. |
-| - | comm | string | | Communicator(N.comm) for get the list | Specify "c.{actionName}" declared in the Controller object. |
+| - | comm | string | | Communicator(N.comm) for get the list | Specify "c.{serviceName}" declared in the Controller object. |
 | - | data | array[object] | | Data to bind | You can directly create and bind data such as [{}, {}] with the data option without specifying the comm option. |
 | - | key | string | O | Data property name to be bound to the name of the option element | Set the property name to be bound in the retrieved data object. |
 | - | val | string | O | Data property name to be bound to the value of the option element | Set the property name to be bound in the retrieved data object. |
@@ -327,10 +325,11 @@ All [Communicator(N.comm)](#html/naturaljs/refr/refr0203.html) that communicate 
 The initial property name of N.comm can be used in combination as follows.
 
 ```
-"c.{action name}" : function() { return N.comm; }
+"c.{service name}" : function() { return N.comm; }
 ```
 
->If possible, match the action name with the service name of the calling URL, and if not possible, define the property name to get + {ActionName} + List for list search, get + {ActionName} for single item search, insert + {ActionName} for input, update + {ActionName} for modification, delete + {ActionName} for deletion, and save + {ActionName} for handles input/modification/deletion at once with Communicator.
+>If possible, define the service name as the same as the service name in the last path of the calling URL. If there is a duplicate service name, define it by combining the extension, such as getSampleList*Json*.
+>Still, if there are duplicate service names, list search is `get + {serviceName} + List`, single search is `get + {serviceName}`, multiple service names are saved(CUD) is `save + {serviceName} + List`, input is `insert. + {serviceName}`, edit is defined as `update + {serviceName}`, and deletion is defined as `delete + {serviceName}`.
 
 ```
 ...
@@ -355,7 +354,7 @@ var cont = N(".page-id").cont({
 });
 ```
 
-The declaration of N.comm is not a direct assignment of an object or value, but a way of function declaration. A function declared like `cont["c.{action name}"]().submit` must be executed to return an N.comm instance.
+The declaration of N.comm is not a direct assignment of an object or value, but a way of function declaration. A function declared like `cont["c.{serviceName}"]().submit` must be executed to return an N.comm instance.
 
 As in the example above, if N.comm's parameters are connected to the data() method of data-related components(Grid, List, Form, etc.), component data at the time the submit method of N.comm is called is sent to the server as a request parameter.
 
