@@ -286,7 +286,7 @@ To set more detailed options, you can specify the "search-box" option as object 
         "search-box" : {
             "defaultButton" : ".btn-search", // A selector string that selects the button element to be clicked when the enter key is pressed.
             "events" : [{ // Add when you want to block the Enter key event and assign the event directly to the input element.
-                "event" : "focusin", // Event name
+                "event" : "focusin", // Event type
                 "target" : "#name", // Selector string to select the target element in the search box
                 "handler" : function(e) { // Event handler
                     N.log(e);
@@ -401,7 +401,7 @@ You can declare event binding to elements in the view and define event handlers.
 >When an event is declared on a, button, input[type=button] element, the N.button component is automatically applied, and the event handler defined by the Controller object property value is replaced with an instance of N.button.
 
 ```
-"e.{elementId}.{eventName}" : function(e, [idx]) {
+"e.{elementId}.{eventType}" : function(e, [idx]) {
     // Event handler
 }
 ```
@@ -409,7 +409,7 @@ You can declare event binding to elements in the view and define event handlers.
 or
 
 ```
-"e.{eventId}.{eventName}" : {
+"e.{eventId}.{eventType}" : {
     target : "{element selector}",
     handler : function(e, [idx]) {
         // Event handler

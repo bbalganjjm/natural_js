@@ -287,7 +287,7 @@ Natural-TEMPLATE 에서만 사용 가능한 컴포넌트 별 추가 옵션은 �
         "search-box" : {
             "defaultButton" : ".btn-search", // 엔터키를 눌렀을 때 클릭될 버튼 요소를 선택하는 selector 문자열
             "events" : [{ // 엔터키 이벤트를 차단하고 입력 요소에 이벤트를 직접 지정하고 싶을 때 추가합니다.
-                "event" : "focusin", // 이벤트 명
+                "event" : "focusin", // 이벤트 유형
                 "target" : "#name", // 검색 박스 안의 대상 요소를 선택하는 selector 문자열
                 "handler" : function(e) { // 이벤트 핸들러
                     N.log(e);
@@ -402,7 +402,7 @@ view 안에 있는 요소들에 이벤트 바인딩을 Controller object 에 선
 >a, button, input[type=button] 요소에 이벤트를 선언하면 N.button 컴포넌트가 자동으로 적용되고 Controller object 속성 값으로 정의한 이벤트 핸들러가 N.button 의 인스턴스로 대체 됩니다.
 
 ```
-"e.{요소id}.{이벤트명}" : function(e, [idx]) {
+"e.{요소id}.{이벤트유형}" : function(e, [idx]) {
     // 이벤트 핸들러
 }
 ```
@@ -410,7 +410,7 @@ view 안에 있는 요소들에 이벤트 바인딩을 Controller object 에 선
 또는
 
 ```
-"e.{이벤트구분자}.{이벤트명}" : {
+"e.{이벤트구분자}.{이벤트유형}" : {
     target : "{요소 selector}",
     handler : function(e, [idx]) {
         // Event handler
@@ -420,7 +420,7 @@ view 안에 있는 요소들에 이벤트 바인딩을 Controller object 에 선
 
 id 이외의 속성을 가진 요소를 선택할 때는 target 속성에 jQuery selector 문자열을 지정하면 됩니다. 이때 셀렉터의 context 를 view 요소로 지정하지 않아도 view 요소가 context 인수로 자동으로 지정됩니다.
 
-이벤트 바인딩이 완료되면 `e.{요소id}.{이벤트명}` 속성 값으로 정의한 이벤트 핸들러 함수는 대상요소(jQuery object)로 대체됩니다.
+이벤트 바인딩이 완료되면 `e.{요소id}.{이벤트유형}` 속성 값으로 정의한 이벤트 핸들러 함수는 대상요소(jQuery object)로 대체됩니다.
 
 ```
 ...
@@ -489,7 +489,7 @@ var cont = N(".page-id").cont({
 ```
 
 >Natural-JS는 내부 데이터와 입력된 데이터를 동기화하기 위해서 select 요소는 change 이벤트를, radio, checkbox 요소는 click 이벤트를, 그 외 text 입력 요소(text, textarea, number 등)는 focusout 이벤트를 사용합니다. 
->컴포넌트의 내부 데이터를 가져올 때는 반드시 위와 같은 이벤트명으로 바인딩해 줘야 합니다. 
+>컴포넌트의 내부 데이터를 가져올 때는 반드시 위와 같은 이벤트유형으로 바인딩해 줘야 합니다. 
 >그렇지 않으면 변경되기 이전의 데이터가 반환됩니다.
 
 ```
