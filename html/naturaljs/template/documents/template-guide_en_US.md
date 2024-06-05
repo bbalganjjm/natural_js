@@ -62,7 +62,8 @@ N.context.attr("template", {
 });
 ```
 
-3. Finally, add AOP pointcut as follows to complete installation.
+3. Finally, add AOP Advice to the N.context.attr("architecture").cont property of [Config(natural.config.js)](#html/naturaljs/refr/refr0102.html) as follows to complete the installation.
+   For an explanation of Natural-JS's AOP, please refer to the [AOP](#html/naturaljs/refr/refr0202.html) page.
 
 ```
 ...

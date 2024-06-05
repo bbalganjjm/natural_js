@@ -27,7 +27,7 @@ Natural-TEMPLATE 은 Natural-JS 기반 웹 어플리케이션 개발을 정형�
 <script type="text/javascript" src="js/natural_js/natural.template.min.js" charset="utf-8"></script>
 ```
 
-2. [Config(natural.config.js)](#html/naturaljs/refr/refr0102.html)에 다음 설정을 추가합니다. 속성에 대한 설명은 [Config(natural.config.js)](#html/naturaljs/refr/refr0102.html) 메뉴의 **N.context.attr("template")** 탭을 참고하세요.
+2. [Config(natural.config.js)](#html/naturaljs/refr/refr0102.html) 에 다음 설정을 추가합니다. 속성에 대한 설명은 [Config(natural.config.js)](#html/naturaljs/refr/refr0102.html) 메뉴의 **N.context.attr("template")** 탭을 참고하세요.
 
 ```
 /**
@@ -62,7 +62,8 @@ N.context.attr("template", {
 });
 ```
 
-3. 마지막으로 다음과 같이 AOP 포인트컷을 추가하면 설치가 완료됩니다.
+3. 마지막으로 [Config(natural.config.js)](#html/naturaljs/refr/refr0102.html) 의 N.context.attr("architecture").cont 속성에 다음과 같이 AOP Advice 를 추가하여 설치를 완료합니다.
+   Natural-JS 의 AOP 에 대한 설명은 [AOP](#html/naturaljs/refr/refr0202.html) 페이지를 참고 바랍니다.
 
 ```
 ...
