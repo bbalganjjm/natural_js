@@ -58,7 +58,7 @@ You will see the syntax of above look like JSON format. you might known what is 
 
 [http://www.json.org](http://www.json.org)
 
-JSON is very important on Natrual-JS. The data type that send and receive to server is a string of JSON type, and the data bound to the UI components is also an array object composed of JSON objects.
+JSON is very important on Natural-JS. The data type that send and receive to server is a string of JSON type, and the data bound to the UI components is also an array object composed of JSON objects.
 
 Back to the point... Natural-JS environment settings are stored in the Context(N.context) object. N.context.attr("architecture").page.context value in the above syntaxes is a very important value among the environment settings. This value is specify for jQuery-selector string of the container element that contained Natural-JS's component elements. In other words, specify the dynamically unchanging element box that contained page content. In addition, Specify the container element selector that stores the N.alert HTML element in N.context.attr("ui").alert.context value. You specify the same element usually as the N.context.attr("architecture").page.context value. Resources of components supported by Natural-UI such as Tab (N.tab), Popup (N.popup), and Datepicker (N.datepicker) are created in the area specified here(N.context.attr...context) and when the page is changed, it will return the browser's resources by overwriting it again. When developing a Single Page Web Application that does not redirect pages, you don't have to manage browser resources separately. For other environment setting values, refer to [Config Example] in [API/DEMO] > [Natural-CORE] > [[Config](#html/naturaljs/refr/refr0102.html)] menu.
 

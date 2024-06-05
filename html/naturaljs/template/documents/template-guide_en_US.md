@@ -1,6 +1,7 @@
 Natural-TEMPLATE
 ===
-Natural-TEMPLATE is a package that formalizes the development of Natural-JS-based web applications. Natural-TEMPLATE significantly improves code readability and development productivity.
+
+Natural-TEMPLATE formalizes Natural-JS-based web application development, greatly improving code readability and development productivity.
 
 Contents
 ===
@@ -9,15 +10,15 @@ Contents
     * [Page source code writing rules](#pagesourcecodewritingrules)
     * [Rules for creating property names for Controller object(N.cont)](#rulesforcreatingpropertynamesforcontrollerobjectncont)
 
-        * [1. Starts with "p."(UI component initialization)](#1startswithpuicomponentinitialization)
+        * [1. Starts with "p." - Create UI components](#1startswithpcreateuicomponents)
             * [1.1. N.select - Common code data binding](#11nselectcommoncodedatabinding)
             * [1.2. N.select - Binding general list data to select elements(select, radio, checkbox)](#12nselectbindinggenerallistdatatoselectelementsselectradiocheckbox)
             * [1.3. N.form](#13nform)
             * [1.4. All other components](#14allothercomponents)
 
-        * [2. Starts with "c."(Communicator(N.comm) declaration)](#2startswithccommunicatorncommdeclaration)
+        * [2. Starts with "c." - Communicator(N.comm) declaration](#2startswithccommunicatorncommdeclaration)
 
-        * [3. Starts with "e."(Event binding)](#3startswitheeventbinding)
+        * [3. Starts with "e." - Event binding](#3startswitheeventbinding)
 
 #Install
 1. Download the natural.template.min.js file from [Github](https://github.com/bbalganjjm/natural_js/tree/master/dist) and import the library as follows.
@@ -84,44 +85,45 @@ N.context.attr("template", {
 ```
 
 
-#Development guide
+# Development guide
 
-##Page source code writing rules
+## Page source code writing rules
 
 Basically, the source code of Natural-JS block pages should be structured as follows.
 
 ```javascript
-&lt;style&gt;
-.page-id {
+<style>
     /* View(CSS) - It can be omitted and is added only when you want to apply the style only to the View in this file. */
-    /* When declaring a CSS selector, be sure to write .page-id at the beginning, such as .page-id #target { }. Otherwise, it will affect other pages as well. */
-}
-&lt;/style&gt;
+    .page-id {
+        /* When declaring a CSS selector, you must add .page-id first, like .page-id #target { }. Otherwise, it will affect other pages as well. */
+    }
+</style>
 
-&lt;article class="page-id"&gt;
-    &lt;!-- Specify page-id as a class attribute in the article tag. --&gt;
-&lt;/article&gt;
+<article class="page-id">
+    <!-- Specify page-id as a class attribute in the article tag. -->
+</article>
 
-&lt;script type="text/javascript"&gt;
-    (function() {
+<script type="text/javascript">
+(function() {
 
-        //  When executing the N.cont function, enter the "page-id" value defined as the class property of View as the argument of N.
-        var cont = N(".page-id").cont({
-            init : function(view, request) {
-                // This "init" function runs automatically once the page has finished loading.
-            }
-        });
+    //  When executing the N.cont function, enter the "page-id" value defined as the class property of View as the argument of N.
+    var cont = N(".page-id").cont({
+        init : function(view, request) {
+            // This "init" function runs automatically once the page has finished loading.
+        }
+    });
 
-    })();
-&lt;/script&gt;
+})();
+</script>
 ```
 
-##Rules for creating property names for Controller object(N.cont)
+## Rules for creating property names for Controller object(N.cont)
 Natural-TEMPLATE functions can be executed using the naming convention for Controller object property names. Automate repetitive tasks such as initializing components and binding events.
 
-###1. Starts with "p." - UI component initialization
-Automatically initialize the components of Natural-UI.
-Component initialization property names can be used in combination as follows.
+### 1. Starts with "p." - Create UI components
+
+If you declare as follows, Natural-UI component is created in the specified element and the created component instance is returned.
+The property names of the Controller object that declares the component can be used in combination as follows.
 
 ```
 "p.{Component name}.{Element id}" : {
@@ -160,9 +162,7 @@ In the context option of the component, the element specified by {id} is automat
 ...
 ```
 
-As above, even if no context is specified in the selector of the context option, the view element of the page is automatically specified as the context argument of the selector .
-
-`context : ".detail"` => `context : N(".detail", cont.view)`
+If you declare the context option as above, a syntax that is found within the view, such as `N(".detail", view)`, is automatically generated.
 
 >**The function name string of the `onOpen option of N.tab and N.popup components must start with onOpen (“onOpen”, “onOpenABC”, etc.). Otherwise, the onOpen function is executed before the init function of the Controller object, so you may not be able to reference component instances.**
 
@@ -171,7 +171,7 @@ As above, even if no context is specified in the selector of the context option,
 As for component options, in addition to the default options for each component of Natural-UI, the option to specify the usage of the component or to execute the function immediately after initialization is added.
 Additional options for each component available only in Natural-TEMPLATE are as follows.
 
-###1.1. N.select - Common code data binding
+### 1.1. N.select - Common code data binding
 
 **To use this function, the service URL that provides common code data and the common code classification code column name must be set in the N.context.attr("template").codes property of [Config(natural.config.js)](#html/naturaljs/refr/refr0102.html).**
 
@@ -209,7 +209,8 @@ Additional options for each component available only in Natural-TEMPLATE are as 
 ...
 ```
 
-###1.2. N.select - Binding general list data to select elements(select, radio, checkbox)
+### 1.2. N.select - Binding general list data to select elements(select, radio, checkbox)
+
 | Property | Option name | Type | Required | Property value | Description |
 | :--: | :--: | :--: | :--: | :--: | -- |
 | p.select.{id} | - | - | - | - | Initialize the N.select component. |
@@ -244,7 +245,8 @@ Additional options for each component available only in Natural-TEMPLATE are as 
 ...
 ```
 
-###1.3. N.form
+### 1.3. N.form
+
 | Property | Option name | Type | Required | Property value | Description |
 | :--: | :--: | :--: | :--: | :--: | -- |
 | p.form.{id} | - | - | - | - | Initialize the N.form component. |
@@ -302,7 +304,8 @@ To set more detailed options, you can specify the "search-box" option as object 
 ...
 ```
 
-###1.4. All other components
+### 1.4. All other components
+
 | Property | Option name | Type | Required | Property value | Description |
 | :--: | :--: | :--: | :--: | :--: | -- |
 | p.{component}.{id} | - | - | - | - | Initialize the N.{component}. All components except N.alert can be initialized in this way. |
@@ -351,9 +354,10 @@ To set more detailed options, you can specify the "search-box" option as object 
 ...
 ```
 
-##2. Starts with "c." - Communicator(N.comm) declaration
-All [Communicator(N.comm)](#html/naturaljs/refr/refr0203.html) that communicate with the server can be defined as member variables of the Controller object. If you pre-declare Communicator, you can check the flow of data at a glance and apply AOP to the declared Communicators.
-The initial property name of N.comm can be used in combination as follows.
+## 2. Starts with "c." - Communicator(N.comm) declaration
+
+Any [Communicator(N.comm)](#html/naturaljs/refr/refr0203.html) that communicates with the server can be declared as a member variable of the Controller object. If you pre-declare Communicator, If you declare a Communicator in advance, you can check the data flow at a glance and apply AOP to the declared Communicator.
+The property names of the Controller object declared as Communicator can be used in combination as follows.
 
 ```
 "c.{serviceName}" : function() { 
@@ -387,19 +391,17 @@ var cont = N(".page-id").cont({
 });
 ```
 
-The declaration of N.comm is not a direct assignment of an object or value, but a way of function declaration. A function declared like `cont["c.{serviceName}"]().submit` must be executed to return an N.comm instance.
+Communicator declaration is a method of specifying an execution function rather than directly assigning an object or value. When used, the function execution syntax `()` is added, such as `cont["c.{service name}"]().submit`. Please be careful what you do.
+If you connect the N.comm parameter to the data() method of a data-related component such as N.form, N.grid, or N.list as shown in the example above, the latest data of the component is automatically specified as a request parameter.
 
-As in the example above, if N.comm's parameters are connected to the data() method of data-related components(Grid, List, Form, etc.), component data at the time the submit method of N.comm is called is sent to the server as a request parameter.
+## 3. Starts with "e." - Event binding
 
-##3. Starts with "e." - Event binding
-Event bindings can be declared for elements within the view element of the page.
+You can declare event binding to elements in the view and define event handlers.
 
->When an event is defined in a, button, and input[type=button] elements, the N.button component is automatically initialized and created as a button.
-
-The event initialization property name can be used in combination as follows.
+>When an event is declared on a, button, input[type=button] element, the N.button component is automatically applied, and the event handler defined by the Controller object property value is replaced with an instance of N.button.
 
 ```
-"e.{element id}.{event name}" : function(e, [idx]) {
+"e.{elementId}.{eventName}" : function(e, [idx]) {
     // Event handler
 }
 ```
@@ -407,7 +409,7 @@ The event initialization property name can be used in combination as follows.
 or
 
 ```
-"e.{Event id}.{event name}" : {
+"e.{eventId}.{eventName}" : {
     target : "{element selector}",
     handler : function(e, [idx]) {
         // Event handler
@@ -415,7 +417,7 @@ or
 }
 ```
 
-When selecting an element with an attribute other than id, you can specify the jQuery selector string in the target property. At this time, even if the selector's context is not specified as the view element, the view element is automatically specified as the context argument.
+When selecting an element with an attribute other than id, you can specify a jQuery selector string in the target attribute. At this time, even if you do not specify the selector's context as a view element, the view element is automatically specified as the context argument.
 
 When event binding is completed, the event handler function defined by the property value of `e.{elementid}.{eventname}` is replaced with the target element(jQuery object).
 
@@ -485,7 +487,9 @@ var cont = N(".page-id").cont({
 ...
 ```
 
->Natural-JS uses change event for select element, click event for radio, checkbox element, and focusout event for other text input elements (text, textarea, number, etc.) to synchronize internal data and input data. When getting the internal data of a component, it must be bound with the event name as above. Otherwise, data before the change is returned.
+>Natural-JS uses change event for select element, click event for radio, checkbox element, and focusout event for other text input elements (text, textarea, number, etc.) to synchronize internal data and input data. 
+>When getting the internal data of a component, it must be bound with the event name as above. 
+>Otherwise, data before the change is returned.
 
 ```
 ...

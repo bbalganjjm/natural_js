@@ -185,13 +185,13 @@ Supports
 
 ### Development language
 
-* Javascript(ECMAScript 3 or later) / jQuery 3.7.1
+* Javascript(ECMA Script 3+) / jQuery 3.7.1
 * HTML / DHTML / HTML5
 * CSS2 / CSS3
 
 ### Support browsers
 
-* PC : Internet Explorer 9+, Chrome, Firefox, Safari, Opera latest version
+* PC : Internet Explorer 9+, Chrome, Firefox, Safari, Opera, Edge
 * Mobile : iOS Safari, iOS UIWebView, Android Browser, Android Chrome, Android WebView
 
 ### Training and support
