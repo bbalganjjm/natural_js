@@ -1,6 +1,4 @@
-<h1 style="padding-left: 24px;
-    background: url(https://bbalganjjm.github.io/natural_js/images/natural-js.svg) no-repeat 0 calc(50% - 4px);
-    background-size: 18px;">Natural-JS</h1>
+<h1 style="padding-left: 24px;background: url(https://bbalganjjm.github.io/natural_js/images/natural-js.svg) no-repeat 0 calc(50% - 4px);background-size: 18px;">Natural-JS</h1>
 Natural-JS is an open source Javascript framework library that can be easily and quickly development the enterprise web application UI such as ERP, CRM, etc.
 
 Structure
