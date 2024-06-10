@@ -310,6 +310,7 @@ To set more detailed options, you can specify the "search-box" option as object 
 | Property | Option name | Type | Required | Property value | Description |
 | :--: | :--: | :--: | :--: | :--: | -- |
 | p.{component}.{id} | - | - | - | - | Initialize the N.{component}. All components except N.alert can be initialized in this way. |
+| - | action | string | - | Component function name | After the component is initialized, the specified function is immediately executed. |
 
  * Tab(N.tab) example
 
