@@ -80,7 +80,7 @@ init : function() {
 data : [{ col01 : 1, col01 : 2 }, { col01 : 3, col01 : 4 }],
 init : function() {
     // Converts to jQuery object.
-    <strong>this.data = N(this.data);</strong>
+    this.data = N(this.data);
 
     var grid = N([]).grid();
     grid.bind(this.data);
