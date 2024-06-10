@@ -906,3 +906,8 @@ select:hover::-webkit-scrollbar-thumb{
     --md-icon-button-container-shape: 0;
 }
 
+.logo.title {
+    padding-left: 24px;
+    background: url(../images/natural-js.svg) no-repeat 0 calc(50% - 4px);
+    background-size: 18px;
+}

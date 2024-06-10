@@ -1,5 +1,4 @@
-Natural-JS
-===
+<h1 class="logo title">Natural-JS</h1>
 Natural-JS는 ERP, CRM 등의 기업용 웹 어플리케이션 UI를 쉽고 빠르게 구현할 수 있는 오픈소스 Javascript 프레임워크 라이브러리입니다.
 
 구성
