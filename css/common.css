@@ -909,5 +909,5 @@ select:hover::-webkit-scrollbar-thumb{
 .logo.title {
     padding-left: 24px;
     background: url(../images/natural-js.svg) no-repeat 0 calc(50% - 4px);
-    background-size: 18px;
+    background-size: 20px;
 }
