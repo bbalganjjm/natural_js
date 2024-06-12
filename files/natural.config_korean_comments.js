@@ -555,7 +555,7 @@
                 /**
                  * 헤더고정형 중 마지막 컬럼 리사이즈 시 다른컬럼이 밀릴때 아래 수치 조절(기본값 : 0)
                  */
-                "resizableLastCellCorrectionWidth" : N.browser.is("ie") || N.browser.is("firefox") ? 10.8 : 12,
+                "resizableLastCellCorrectionWidth" : N.browser.is("firefox") ? 10.8 : 12,
                 /**
                  * 리사이즈바의 left 포지션이 컬럼 보더를 기준으로 가운데에 위치하지 않을 때 아래 수치 조절(기본값 : 0)
                  */
@@ -567,11 +567,11 @@
                 /**
                  * 컬럼 고정 시 고정된 헤더 셀(TH)의 상단 위치가 맞지 않을 때 아래 수치 조절(기본값 : 0)
                  */
-                "fixedcolHeadMarginTop" : N.browser.is("ie") || N.browser.is("firefox") ? -1 : 0,
+                "fixedcolHeadMarginTop" : N.browser.is("firefox") ? -1 : 0,
                 /**
                  * 컬럼 고정 시 고정된 헤더 셀(TH)의 좌측 위치가 맞지 않을 때 아래 수치 조절(기본값 : 0)
                  */
-                "fixedcolHeadMarginLeft" : N.browser.is("ie") || N.browser.is("firefox") ? -1 : 0,
+                "fixedcolHeadMarginLeft" : N.browser.is("firefox") ? -1 : 0,
                 /**
                  * 컬럼 고정 시 고정된 헤더 셀(TH)의 높이가 맞지 않을 때 아래 수치 조절(기본값 : 0)
                  */
@@ -579,15 +579,15 @@
                 /**
                  * 컬럼 고정 시 고정된 바디 셀(TD)의 상단 위치가 맞지 않을 때 아래 수치 조절(기본값 : 0)
                  */
-                "fixedcolBodyMarginTop" : N.browser.is("ie") || N.browser.is("firefox") ? -1 : 0,
+                "fixedcolBodyMarginTop" : N.browser.is("firefox") ? -1 : 0,
                 /**
                  * 컬럼 고정 시 고정된 바디 셀(TD)의 좌측 위치가 맞지 않을 때 아래 수치 조절(기본값 : 0)
                  */
-                "fixedcolBodyMarginLeft" : N.browser.is("ie") || N.browser.is("firefox") ? -1 : 0,
+                "fixedcolBodyMarginLeft" : N.browser.is("firefox") ? -1 : 0,
                 /**
                  * 컬럼 고정 시 데이터를 바인딩할 때 고정된 바디 셀(TD)의 높이가 맞지 않을 때 아래 수치 조절(기본값 : 0)
                  */
-                "fixedcolBodyBindHeight" : N.browser.is("ie") || N.browser.is("firefox") ? 1 : 1,
+                "fixedcolBodyBindHeight" : N.browser.is("firefox") ? 1 : 1,
                 /**
                  * 컬럼 고정 시 데이터를 Add할 때 고정된 바디 셀(TD)의 높이가 맞지 않을 때 아래 수치 조절(기본값 : 1)
                  */
