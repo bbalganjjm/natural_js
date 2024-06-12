@@ -477,81 +477,81 @@
 			/**
              * Miscellaneous settings
              */
-            "misc" : {
-                /**
-                 * Global misc.resizableCorrectionWidth option
-                 *  - The grid body column width and grid header column width may not match when the resizable option is activated.
-                 *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
-                 */
-                "resizableCorrectionWidth" : N.browser.is("safari") ? -6 : -7,
-                /**
-                 * Global misc.resizableLastCellCorrectionWidth option
-                 *  - Clicking on the last column may cause other columns to be pushed when the resizable option is enabled in the header fixed grid.
-                 *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
-                 */
-                "resizableLastCellCorrectionWidth" : 8,
-                /**
-                 * Global misc.resizeBarCorrectionLeft option
-                 *  - The left position of the resize bar may not be centered relative to the column border when the resizable option is activated. At this time,
-                 *    it is an option to correct by increasing or decreasing the value by 0.1.
-                 */
-                "resizeBarCorrectionLeft" : N.browser.is("firefox") ? -1 : N.browser.is("safari") ? 1 : 0,
-                /**
-                 * Global misc.resizeBarCorrectionHeight option
-                 *  - The height of the resizing bar may not be full when the resizable option is activated.
-                 *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
-                 */
-                "resizeBarCorrectionHeight" : 0,
-                /**
-                 * Global misc.fixedcolHeadMarginTop option
-                 *  - The top position of the fixed header cell(th) may not match when the fixedcol option is activated.
-                 *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
-                 */
-                "fixedcolHeadMarginTop" : 0,
-                /**
-                 * Global misc.fixedcolHeadMarginLeft option
-                 *  - The left position of the fixed header cell(th) may not match when the fixedcol option is activated.
-                 *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
-                 */
-                "fixedcolHeadMarginLeft" : N.browser.is("ie") || N.browser.is("firefox") ? -1 : 0,
-                /**
-                 * Global misc.fixedcolHeadHeight option
-                 *  - The height of the fixed header cell(th) may not match when the fixedcol option is activated.
-                 *    At this time, it is an option to correct by increasing or decreasing the value by 0.1..
-                 */
-                "fixedcolHeadHeight" : N.browser.is("ie") || N.browser.is("firefox") ? 1 : 0,
-                /**
-                 * Global misc.fixedcolBodyMarginTop option
-                 *  - The top position of the fixed body cell(td) may not match when the fixedcol option is activated.
-                 *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
-                 */
-                "fixedcolBodyMarginTop" : -1,
-                /**
-                 * Global misc.fixedcolBodyMarginLeft option
-                 *  - The left position of the fixed body cell(td) may not match when the fixedcol option is activated.
-                 *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
-                 */
-                "fixedcolBodyMarginLeft" : N.browser.is("ie") || N.browser.is("firefox") ? -1 : 0,
-                /**
-                 * Global misc.fixedcolBodyBindHeight option
-                 *  - The height of the fixed body cell(td) may not match when the fixedcol option is activated.
-                 *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
-                 */
-                "fixedcolBodyBindHeight" : N.browser.is("ie") ? 1.3 : 1,
-                /**
-                 * Global misc.fixedcolBodyAddHeight option
-                 *  - The height of the cell(td) of the added row may not match when the fixedcol option is activated.
-                 *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
-                 */
-                "fixedcolBodyAddHeight" : 1,
-                /**
-                 * Global misc.fixedcolRootContainer option
-                 *  - After creating a grid instance by applying the fixed col option, the grid shape may break when the height of the element wrapping the grid is dynamically changed.
-                 *    At this time, if you specify the element whose height is changed in this option, the grid shape will not be broken.
-                 *  - Specify an element with the jQuery selector string.
-                 */
-                "fixedcolRootContainer" : ".view_context__"
-            }
+			"misc" : {
+				/**
+				 * Global misc.resizableCorrectionWidth option
+				 *  - The grid body column width and grid header column width may not match when the resizable option is activated.
+				 *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
+				 */
+				"resizableCorrectionWidth" : N.browser.is("safari") ? 1 : 0,
+				/**
+				 * Global misc.resizableLastCellCorrectionWidth option
+				 *  - Clicking on the last column may cause other columns to be pushed when the resizable option is enabled in the header fixed grid.
+				 *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
+				 */
+				"resizableLastCellCorrectionWidth" : 8,
+				/**
+				 * Global misc.resizeBarCorrectionLeft option
+				 *  - The left position of the resize bar may not be centered relative to the column border when the resizable option is activated. At this time,
+				 *    it is an option to correct by increasing or decreasing the value by 0.1.
+				 */
+				"resizeBarCorrectionLeft" : N.browser.is("firefox") ? -1 : N.browser.is("safari") ? 1 : 0,
+				/**
+				 * Global misc.resizeBarCorrectionHeight option
+				 *  - The height of the resizing bar may not be full when the resizable option is activated.
+				 *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
+				 */
+				"resizeBarCorrectionHeight" : 0,
+				/**
+				 * Global misc.fixedcolHeadMarginTop option
+				 *  - The top position of the fixed header cell(th) may not match when the fixedcol option is activated.
+				 *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
+				 */
+				"fixedcolHeadMarginTop" : 0,
+				/**
+				 * Global misc.fixedcolHeadMarginLeft option
+				 *  - The left position of the fixed header cell(th) may not match when the fixedcol option is activated.
+				 *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
+				 */
+				"fixedcolHeadMarginLeft" : N.browser.is("firefox") ? -1 : 0,
+				/**
+				 * Global misc.fixedcolHeadHeight option
+				 *  - The height of the fixed header cell(th) may not match when the fixedcol option is activated.
+				 *    At this time, it is an option to correct by increasing or decreasing the value by 0.1..
+				 */
+				"fixedcolHeadHeight" : N.browser.is("firefox") ? 1 : 0,
+				/**
+				 * Global misc.fixedcolBodyMarginTop option
+				 *  - The top position of the fixed body cell(td) may not match when the fixedcol option is activated.
+				 *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
+				 */
+				"fixedcolBodyMarginTop" : -1,
+				/**
+				 * Global misc.fixedcolBodyMarginLeft option
+				 *  - The left position of the fixed body cell(td) may not match when the fixedcol option is activated.
+				 *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
+				 */
+				"fixedcolBodyMarginLeft" : N.browser.is("firefox") ? -1 : 0,
+				/**
+				 * Global misc.fixedcolBodyBindHeight option
+				 *  - The height of the fixed body cell(td) may not match when the fixedcol option is activated.
+				 *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
+				 */
+				"fixedcolBodyBindHeight" : 1,
+				/**
+				 * Global misc.fixedcolBodyAddHeight option
+				 *  - The height of the cell(td) of the added row may not match when the fixedcol option is activated.
+				 *    At this time, it is an option to correct by increasing or decreasing the value by 0.1.
+				 */
+				"fixedcolBodyAddHeight" : 1,
+				/**
+				 * Global misc.fixedcolRootContainer option
+				 *  - After creating a grid instance by applying the fixed col option, the grid shape may break when the height of the element wrapping the grid is dynamically changed.
+				 *    At this time, if you specify the element whose height is changed in this option, the grid shape will not be broken.
+				 *  - Specify an element with the jQuery selector string.
+				 */
+				"fixedcolRootContainer" : ".view_context__"
+			}
 		}
 	});
 
