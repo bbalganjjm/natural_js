@@ -116,7 +116,7 @@
             e.preventDefault();
 
             if (cont["p.form.search"].validate()) {
-                cont["p.grid.master"].bind(await cont["c.getSampleList"]().fetch());
+                cont["p.grid.master"].bind(await cont["c.getSampleList"]().submit());
             }
         },
         "e.eyeColor.change" : {
