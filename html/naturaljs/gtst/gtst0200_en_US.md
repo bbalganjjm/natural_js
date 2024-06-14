@@ -279,4 +279,4 @@ After deploying the source files created so far to the web server and accessing 
 
 Full source code can be downloaded from [here](html/naturaljs/gtst/codes/natural_js_gtst0200.zip).
 
-In the next step([Retrieving / Modifying Data with Grid](#Z3RzdDAzMDAlMjRSZXRyaWV2aW5nJTJGTW9kaWZ5aW5nJTIwRGF0YSUyMHdpdGglMjBHcmlkJGh0bWwlMkZuYXR1cmFsanMlMkZndHN0JTJGZ3RzdDAzMDAuaHRtbA==)), we will fill this content area with the components provided by the Natural-UI package.
+In the next step([Retrieving / Modifying Data with Grid](#html/naturaljs/gtst/gtst0300.html)), we will fill this content area with the components provided by the Natural-UI package.

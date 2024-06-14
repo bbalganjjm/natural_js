@@ -251,6 +251,6 @@ The **block01.html** file is loaded by the index.html page, and the init functio
 
 Now that we know how to configure and run the default environment for Natural-JS, let's create a site environment where the block page will run?
 
-Click the [Create a web application base frame](#Z3RzdDAyMDAlMjRDcmVhdGUlMjBhJTIwd2ViJTIwYXBwbGljYXRpb24lMjBiYXNlJTIwZnJhbWUkaHRtbCUyRm5hdHVyYWxqcyUyRmd0c3QlMkZndHN0MDIwMC5odG1s) menu.
+Click the [Create a web application base frame](#html/naturaljs/gtst/gtst0200.html) menu.
 
 <p class="alert">This site was developed with Natural-JS. Please refer to the source code of this site as it is published in <a href="https://github.com/bbalganjjm/natural_js/tree/gh-pages">gh-pages branch of github</a>.

@@ -280,4 +280,4 @@ N(".page01").cont({
 
 전체 소스코드는 [여기](html/naturaljs/gtst/codes/natural_js_gtst0200.zip)에서 다운로드할 수 있습니다.
 
-다음 단계([Grid로 데이터 조회/변경 하기](#Z3RzdDAzMDAlMjRHcmlkJTIwJUVCJUExJTlDJTIwJUVCJThEJUIwJUVDJTlEJUI0JUVEJTg0JUIwJTIwJUVDJUExJUIwJUVEJTlBJThDJTJGJUVCJUIzJTgwJUVBJUIyJUJEJTIwJUVEJTk1JTk4JUVBJUI4JUIwJGh0bWwlMkZuYXR1cmFsanMlMkZndHN0JTJGZ3RzdDAzMDAuaHRtbA==))에서는 Natural-UI 패키지에서 제공하는 컴포넌트들로 이 컨텐츠 영역을 채워 보겠습니다.
+다음 단계([Grid로 데이터 조회/변경 하기](#html/naturaljs/gtst/gtst0300.html))에서는 Natural-UI 패키지에서 제공하는 컴포넌트들로 이 컨텐츠 영역을 채워 보겠습니다.
