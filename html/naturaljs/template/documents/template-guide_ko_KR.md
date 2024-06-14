@@ -3,6 +3,8 @@ Natural-TEMPLATE
 
 Natural-TEMPLATE 은 Natural-JS 기반 웹 애플리케이션 개발을 정형화하여 코드 가독성과 개발 생산성을 크게 향상시켜 줍니다.
 
+> 이 가이드를 참고하기 전에 [Natural-JS 시작하기](#html/naturaljs/gtst/gtst0200.html) 를 먼저 학습하기 바랍니다.
+
 목차
 ===
 * [**설치**](#-1)
