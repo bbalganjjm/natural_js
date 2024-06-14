@@ -1798,7 +1798,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 .context_wrap__::-webkit-scrollbar,
 .grid_wrap__::-webkit-scrollbar {
     width: 6px;
-    height: 8px;
+    height: 6px;
     background-color: var(--md-sys-color-surface-container-lowest);
 }
 
