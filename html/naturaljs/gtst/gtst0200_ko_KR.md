@@ -1,4 +1,4 @@
-웹 어플리케이션 기본 프레임 만들기
+웹 애플리케이션 기본 프레임 만들기
 ===
 
 메뉴를 좌측에 배치하고 우측에  MDI 형태로 페이지를 표시해 주는 <a href="#html/naturaljs/refr/refr0502.html">Documents</a>(N.docs) 컴포넌트를 사용하여 Single Page Web Application을 개발해 보겠습니다.
@@ -88,9 +88,9 @@ body {
 </html>
 ```
 
-**/index.html**는 이 어플리케이션으로 접속하는 메인 인덱스 페이지입니다. SPA(Single Page Application) 이기 때문에 브라우저 URL 은 웹 어플리케이션을 사용하는 동안 변동되지 않을 것입니다.
+**/index.html**는 이 애플리케이션으로 접속하는 메인 인덱스 페이지입니다. SPA(Single Page Application) 이기 때문에 브라우저 URL 은 웹 애플리케이션을 사용하는 동안 변동되지 않을 것입니다.
 
-**/index.html** 상단에 head 태그 영역에는 Javascript와 CSS 파일들을 로딩하는 구문들이 배치됩니다. 이 파일들은 어플리케이션을 사용하는 동안 한 번만 로딩되어 이후 불러오는 페이지들과 기능을 공유하게 될 것입니다.
+**/index.html** 상단에 head 태그 영역에는 Javascript와 CSS 파일들을 로딩하는 구문들이 배치됩니다. 이 파일들은 애플리케이션을 사용하는 동안 한 번만 로딩되어 이후 불러오는 페이지들과 기능을 공유하게 될 것입니다.
 
 $(document).ready 함수의 콜백 함수의 내용을 봐주세요.
 
@@ -109,8 +109,8 @@ $(document).ready 함수의 콜백 함수의 내용을 봐주세요.
 ```
 
 **/index.html**의 DOM이 모두 로딩된 다음 N.comm으로 #lefter 요소에 좌측 블록 페이지를 불러와 넣어주는 구문입니다. **/html/index/lefter.html** 파일은 좌측 메뉴의 링크 요소와 이를 활성화해 주는 Controller(N.cont) Object가 들어 있습니다.
-N("#lefter").comm("html/index/lefter.html").submit 함수의 인수는 **/html/index/lefter.html** 파일 로딩이 완료된 후 실행되는 콜백 함수입니다. 여기에서 N.docs 컴포넌트로 #docs 요소 안에 MDI 페이지 컨테이너를 생성해 주고 있습니다. N.docs 컴포넌트의 인스턴스는 어플리케이션당 1개만 생성되므로 window 객체에 담아 전역으로 사용할 것입니다.
-<p class="alert">N.docs 인스턴스는 반드시 window 객체가 아니더라도 어플리케이션에서 정의한 전역으로 접근할 수 있는 아무 객체에 담아도 됩니다.</p>
+N("#lefter").comm("html/index/lefter.html").submit 함수의 인수는 **/html/index/lefter.html** 파일 로딩이 완료된 후 실행되는 콜백 함수입니다. 여기에서 N.docs 컴포넌트로 #docs 요소 안에 MDI 페이지 컨테이너를 생성해 주고 있습니다. N.docs 컴포넌트의 인스턴스는 애플리케이션당 1개만 생성되므로 window 객체에 담아 전역으로 사용할 것입니다.
+<p class="alert">N.docs 인스턴스는 반드시 window 객체가 아니더라도 애플리케이션에서 정의한 전역으로 접근할 수 있는 아무 객체에 담아도 됩니다.</p>
 
 이제 이 N.docs 인스턴스에서 제공하는 기능으로 메뉴 컨텐츠를 불러오는 좌측 메뉴 블록 페이지(/html/index/lefter.html)를 생성해 보겠습니다.
 
