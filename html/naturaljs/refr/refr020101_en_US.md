@@ -30,7 +30,7 @@ If you load a page with the above structure into an N.popup, N.tab component or 
 > When selecting an element of the page, you must find in view or specify view as the context argument(second argument) of the jQuery function. Otherwise, unintentional elements of other block pages may be selected, resulting in unpredictable errors. Please refer to the <a href="#html/naturaljs/refr/refr0601.html">Restrictions and Tips</a> menu for details.
 
 > When N(".view").cont() is executed, the pageid data attribute value, such as data-pageid="view", is created in the `.view` element specified by the selector.
-This pageid is ". (dot), # (sharp), [ (left bracket), ] (right bracket), ' (single quote), : (colon), ( (left bracket), ) (right bracket), > (Greater sign), space (space), - (hyphen)" characters are removed, so please note that pageid is created.
+This pageid is ". (dot), # (sharp), [ (left square bracket), ] (right square bracket), ' (single quote), : (colon), ( (left parenthesis), ) (right parenthesis), > (Greater symbol), space (space), - (hyphen)" characters are removed to create pageid, so it is recommended to define the page identification value so that it does not include the preceding characters.
 For example, N("page.view-01").cont() creates a pageid of "pageview01" with the dot and hyphen removed.
 
 To control a specific page in the block page or tab content, you can get a Controller object as follows:
