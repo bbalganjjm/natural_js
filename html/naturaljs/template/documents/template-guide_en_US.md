@@ -277,11 +277,11 @@ Additional options for each component available only in Natural-TEMPLATE are as 
 ...
 ```
 
->In order to automatically handle the Enter key event in the search form, you must add a button element(a element) with a class attribute value of "btn-search"(search button) into the view element.
+> In order to automatically process the enter key event in the search form, you must add the class attribute value "btn-search" to the main search button.
 
 To set more detailed options, you can specify the "search-box" option as object as in the following example.
 
->Form with the "usage" option set to "search-box" is automatically bound to the event handler that is searched with the Enter key on the input element. To block the execution of this Enter key event handler and bind another event handler, define as many event handlers as necessary in the "events" property of the "search-box" option object.
+> Form with the "usage" option set to "search-box" is automatically bound to the event handler that is searched with the Enter key on the input element. To block the execution of this Enter key event handler and bind another event handler, define as many event handlers as necessary in the "events" property of the "search-box" option object.
 
 ```
 ...
