@@ -1,5 +1,5 @@
 /*!
- * Natural-DATA v0.11.74
+ * Natural-DATA v0.11.75
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2023 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-		N.version["Natural-DATA"] = "0.11.74";
+		N.version["Natural-DATA"] = "0.11.75";
 
 	$.fn.extend($.extend(N.prototype, {
 		datafilter : function(callBack) {
@@ -494,7 +494,7 @@
 				if(args[0] === "phone") {
 					var rtnStr;
 					str = N.string.trimToEmpty(str);
-					rtnStr = this.phonenum(str);
+					rtnStr = this.phone(str);
 					var frontNum = rtnStr.substring(0, rtnStr.indexOf("-")+1);
 					var rearNum = rtnStr.substring(rtnStr.lastIndexOf("-"), rtnStr.length);
 					var middleNum = rtnStr.replace(frontNum, "").replace(rearNum, "");
