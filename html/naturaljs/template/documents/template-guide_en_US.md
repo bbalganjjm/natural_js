@@ -93,7 +93,7 @@ N.context.attr("template", {
 ## Page source code writing rules
 
 Basically, the source code of Natural-JS block pages should be structured as follows.
-Please refer to the usage and precautions of N.cont in the [Controller](#html/naturaljs/refr/refr0201.html) menu.
+First, Please refer to the usage and precautions of N.cont in the [Controller](#html/naturaljs/refr/refr0201.html) menu.
 
 ```javascript
 <style>
