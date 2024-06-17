@@ -92,7 +92,8 @@ N.context.attr("template", {
 
 ## 페이지 소스코드 작성 규칙
 
-기본적으로 Natural-JS 의 블록 페이지들의 소스코드는 다음과 같이 구성해야 됩니다.
+기본적으로 Natural-JS 의 블록 페이지들의 소스코드는 다음과 같이 구성해야 됩니다. 
+[Controller](#html/naturaljs/refr/refr0201.html) 메뉴에서 N.cont 의 사용법과 유의사항을 참고 하세요.
 
 ```javascript
 <style>
