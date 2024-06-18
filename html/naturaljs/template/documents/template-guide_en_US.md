@@ -1,6 +1,8 @@
 Natural-TEMPLATE Development Guide
 ===
 
+This guide explains the code writing rules for Natural-TEMPLATE.
+
 ## Introduction
 
 Natural-TEMPLATE formalizes Natural-JS-based web application development, greatly improving code readability and development productivity.
