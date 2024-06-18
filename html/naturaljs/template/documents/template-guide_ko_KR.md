@@ -1,4 +1,4 @@
-Natural-TEMPLATE
+Natural-TEMPLATE 개발 가이드
 ===
 
 ## 소개

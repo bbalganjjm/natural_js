@@ -1,4 +1,4 @@
-Natural-TEMPLATE
+Natural-TEMPLATE Development Guide
 ===
 
 ## Introduction
