@@ -1,12 +1,14 @@
 Natural-TEMPLATE
 ===
 
+## 소개
+
 Natural-TEMPLATE 은 Natural-JS 기반 웹 애플리케이션 개발을 정형화하여 코드 가독성과 개발 생산성을 크게 향상시켜 줍니다.
 
-> 이 가이드를 참고하기 전에 [Natural-JS 시작하기](#html/naturaljs/gtst/gtst0100.html) 를 먼저 학습하기 바랍니다.
+> Natural-JS 의 기본적인 사용법을 학습하려면 [Natural-JS 시작하기](#html/naturaljs/gtst/gtst0100.html) 문서를 참고하세요.
 
-목차
-===
+## 목차
+
 * [**설치**](#-1)
 * [**개발 가이드**](#-2)
     * [페이지 소스코드 작성 규칙](#-3)
@@ -22,8 +24,9 @@ Natural-TEMPLATE 은 Natural-JS 기반 웹 애플리케이션 개발을 정형�
 
         * [3. "e." 으로 시작 - 이벤트 바인딩](#3e)
 
-# 설치
-1. [Github](https://github.com/bbalganjjm/natural_js/tree/master/dist) 에서 natural.template.min.js 파일을 다운로드해서 다음과 같이 라이브러리를 import 합니다.
+## 설치
+
+1.[Github](https://github.com/bbalganjjm/natural_js/tree/master/dist) 에서 natural.template.min.js 파일을 다운로드해서 다음과 같이 라이브러리를 import 합니다.
 
 ```
 <script type="text/javascript" src="js/natural_js/natural.template.min.js" charset="utf-8"></script>

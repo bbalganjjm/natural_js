@@ -669,7 +669,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 }
 
 .thead_wrap__ thead th .asc__ {
-    color: blue;
+    color: var(--md-sys-color-on-primary-container);
 }
 
 .thead_wrap__ thead th .desc__ {

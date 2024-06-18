@@ -1,12 +1,14 @@
 Natural-TEMPLATE
 ===
 
+## Introduction
+
 Natural-TEMPLATE formalizes Natural-JS-based web application development, greatly improving code readability and development productivity.
 
-> Before referring to this guide, please first study [Getting Started with Natural-JS](#html/naturaljs/gtst/gtst0100.html).
+> To learn the basic usage of Natural-JS, refer to the [Getting Started with Natural-JS](#html/naturaljs/gtst/gtst0100.html) document.
 
-Contents
-===
+## Contents
+
 * [**Install**](#install)
 * [**Development guide**](#developmentguide)
     * [Page source code writing rules](#pagesourcecodewritingrules)
@@ -22,7 +24,8 @@ Contents
 
         * [3. Starts with "e." - Event binding](#3startswitheeventbinding)
 
-#Install
+## Install
+
 1. Download the natural.template.min.js file from [Github](https://github.com/bbalganjjm/natural_js/tree/master/dist) and import the library as follows.
 
 ```
