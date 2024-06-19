@@ -148,12 +148,12 @@ Create the **/html/contents/page6.html** file and write the code as follows.
 </script>
 ```
 
-The code is long? It becomes simple by separating Style, View area and Controller area. Let's focus on just 30 seconds. Isn't the code at a glance like Matrix Neo? -.-;
+The HTML and CSS code is long and may seem complicated, but it becomes simpler if you distinguish between the Style and View areas and the Controller area.
 
 If the above style area is integrated into a common css file, the style area is unnecessary. However, to make it simple to see that the style of the context element defined in the Natural-JS component is applied as it is, the Style is defined on the page.
 <p class="alert">If you collaborating with web publishers when working on a project with Natural-JS can simultaneously improve UI quality and development productivity. Web publishers do not need to learn Natural-JS, they just publish according to web standards.</p>
 
-The part to focus on in the code above is the view area. Controller deliberately made a frame and left it empty. I'm going to fill in one by one.
+The part to focus on in the code above is the view area. In order to proceed by filling in each item one by one, the Controller intentionally created only a frame and left it empty.
 
 The **.search-conditions** element at the first of the sub-elements on View is a search form where you can enter search conditions. Below, buttons are placed in the **.buttons** element, and in the **.result** element, a table, the context element of N.grid, is created to express the searched result data in a grid. To apply N.grid component, **table** tag to be created as grid must be written, and **thead** (grid header) and **tbody** tag must be written in table tag. The rows of N.grid represent the **tbody** element by duplicating as much as the length of the list data.
 For more information about each component, please refer to the related document.
@@ -172,7 +172,7 @@ Looking at the Controller area, unlike the previous examples, the code that cont
 })();
 ```
 
-The reason is to access the Contoller(N.cont) Object regardless of the function scope.
+The reason is to access the Controller(N.cont) Object regardless of the function scope.
 Define Controller as above, declare cont variable and execute N().cont() function, you can access Controller object with cont variable at any position of function.
 <p class="alert">When working on a project with Natural-JS, there are many times when you need to access the Controller object to refer to the constant objects contained in the Controller object such as view, request, and caller, or to save or reference the page global variables.</p>
 <p class="alert">When developing page contents with SPA, think that the Controller object is the top-level object of the page and define global variables for each page. If you don't do so, declaring a global variable in the window object can cause data is twisted or a large increase in memory usage. Natural-JS manages the resource for the Controller object, but does not participate in global variables bound to the window object.</p>
