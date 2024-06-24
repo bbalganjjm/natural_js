@@ -11,38 +11,22 @@
 
     <h3>N.form</h3>
     <div id="search" class="form__">
-        <table>
-            <colgroup>
-                <col style="width: 10%;">
-                <col style="width: 23%;">
-                <col style="width: 10%;">
-                <col style="width: 23%;">
-                <col style="width: 10%;">
-                <col style="width: 23%;">
-            </colgroup>
-            <tbody>
-                <tr>
-                    <th>Name</th>
-                    <td><input id="name" type="text"></td>
-                    <th>Gender</th>
-                    <td><input id="gender" type="radio"></td>
-                    <th>Eye Color</th>
-                    <td><select id="eyeColor">
-                        <option lang="ko_KR" value="">선택</option>
-                        <option lang="en_US" value="">Select</option>
-                    </select></td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="search-panel">
+            <ul>
+                <li><label><span>Name</span><input id="name" type="text"></label></li>
+                <li><label><span>Gender</span><select id="gender"><option value="">선택</option></select></label></li>
+                <li><label><span>Eye Color</span><select id="eyeColor">
+                    <option lang="ko_KR" value="">선택</option>
+                    <option lang="en_US" value="">Select</option>
+                </select></label></li>
+            </ul>
+        </div>
     </div>
 
     <div class="flex-horizental">
         <h3>N.grid</h3>
-        <div class="btn-box" data-opts='{ "size": "none", "color": "none" }'>
-            <a id="btnSearch" href="#" class="btn-search" data-opts='{ "size": "none", "color": "none" }'>
-                <md-filled-button lang="ko_KR">조회</md-filled-button>
-                <md-filled-button lang="en_US">Search</md-filled-button>
-            </a>
+        <div class="button-panel">
+            <button id="btnSearch" data-opts='{ "color": "primary" }'>조회</button>
         </div>
     </div>
     <table id="master" class="grid__">

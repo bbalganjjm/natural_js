@@ -13,35 +13,27 @@
 
     <h3>N.form</h3>
     <div id="search" class="form__">
-        <table>
-            <colgroup>
-                <col style="width: 10%;">
-                <col style="width: 23%;">
-                <col style="width: 10%;">
-                <col style="width: 23%;">
-                <col style="width: 10%;">
-                <col style="width: 23%;">
-            </colgroup>
-            <tbody>
-                <tr>
-                    <th>Name</th>
-                    <td><input id="name" type="text"></td>
-                    <th>Gender</th>
-                    <td><input id="gender" type="radio"></td>
-                    <th>Eye Color</th>
-                    <td><select id="eyeColor">
+        <div id="search" class="form__">
+            <div class="search-panel">
+                <ul>
+                    <li><label><span>Name</span><input id="name" type="text"></label></li>
+                    <li><label><span>Gender</span><select id="gender">
                         <option lang="ko_KR" value="">선택</option>
                         <option lang="en_US" value="">Select</option>
-                    </select></td>
-                </tr>
-            </tbody>
-        </table>
+                    </select></label></li>
+                    <li><label><span>Eye Color</span><select id="eyeColor">
+                        <option lang="ko_KR" value="">선택</option>
+                        <option lang="en_US" value="">Select</option>
+                    </select></label></li>
+                </ul>
+            </div>
+        </div>
 
-        <div class="btn-box">
-            <a id="btnSearch" href="#" class="btn-search" data-opts='{ "size": "none", "color": "none" }'>
-                <md-filled-button lang="ko_KR">조회</md-filled-button>
-                <md-filled-button lang="en_US">Search</md-filled-button>
-            </a>
+        <div class="button-panel">
+            <button id="btnSearch" href="#" data-opts='{ "color": "primary" }'>
+                <span lang="ko_KR">조회</span>
+                <span lang="en_US">Search</span>
+            </button>
         </div>
     </div>
 
@@ -98,10 +90,16 @@
             cCont["p.form.search"].bind(0, cont["p.form.search"].data());
             cCont["e.btnSearch.click"].trigger("click");
         },
+        "e.gender.change" : {
+            target : "#search #gender",
+            handler : function(e) {
+                cont["e.btnSearch.click"].trigger("click");
+            }
+        },
         "e.eyeColor.change" : {
-        	target : "#search #eyeColor",
-        	handler : function(e) {
-        	    cont["e.btnSearch.click"].trigger("click");
+            target : "#search #eyeColor",
+            handler : function(e) {
+                cont["e.btnSearch.click"].trigger("click");
             }
         },
         init : function(view, request) {

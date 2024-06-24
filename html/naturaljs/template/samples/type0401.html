@@ -13,52 +13,37 @@
 
     <h3>N.form</h3>
     <div id="search" class="form__">
-        <table>
-            <colgroup>
-                <col style="width: 10%;">
-                <col style="width: 15%;">
-                <col style="width: 10%;">
-                <col style="width: 15%;">
-                <col style="width: 10%;">
-                <col style="width: 15%;">
-                <col style="width: 10%;">
-                <col style="width: 15%;">
-            </colgroup>
-            <tbody>
-                <tr>
-                    <th>Name</th>
-                    <td><input id="name" type="text"></td>
-                    <th>Age</th>
-                    <td><select id="age">
-                        <option lang="ko_KR" value="">선택</option>
-                        <option lang="en_US" value="">Select</option>
-                    </select></td>
-                    <th>Gender</th>
-                    <td><input id="gender" type="radio"></td>
-                    <th>Eye Color</th>
-                    <td><select id="eyeColor">
-                        <option lang="ko_KR" value="">선택</option>
-                        <option lang="en_US" value="">Select</option>
-                    </select></td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="search-panel">
+            <ul>
+                <li><label><span>Name</span><input id="name" type="text"></label></li>
+                <li><label><span>Gender</span><select id="gender">
+                    <option lang="ko_KR" value="">선택</option>
+                    <option lang="en_US" value="">Select</option>
+                </select></label></li>
+                <li><label><span>Eye Color</span><select id="eyeColor">
+                    <option lang="ko_KR" value="">선택</option>
+                    <option lang="en_US" value="">Select</option>
+                </select></label></li>
+            </ul>
+        </div>
     </div>
+
     <div class="flex-horizental">
         <div style="max-width: 33%;">
             <div class="flex-horizental">
-                <h3 style="max-width: 50px;">N.grid</h3>
-                <div class="btn-box">
-                    <a id="btnSearch" href="#" class="btn-search" data-opts='{ "size": "none", "color": "none" }'>
-                        <md-filled-button lang="ko_KR">조회</md-filled-button>
-                        <md-filled-button lang="en_US">Search</md-filled-button>
-		            </a>
-                    <a id="btnSave" href="#" data-opts='{ "size": "none", "color": "none" }'>
-                        <md-filled-tonal-button lang="ko_KR">저장</md-filled-tonal-button>
-                        <md-filled-tonal-button lang="en_US">Save</md-filled-tonal-button>
-		            </a>
+                <h3>N.grid</h3>
+                <div class="button-panel">
+                    <button id="btnSearch" data-opts='{ "color": "primary" }'>
+                        <span lang="ko_KR">조회</span>
+                        <span lang="en_US">Search</span>
+                    </button>
+                    <button id="btnSave">
+                        <span lang="ko_KR">저장</span>
+                        <span lang="en_US">Save</span>
+                    </button>
                 </div>
             </div>
+
             <table id="master" class="grid__">
                 <colgroup>
                     <col style="width: 20%;">
@@ -85,105 +70,115 @@
         <div>
             <div class="flex-horizental">
                 <h3>N.form</h3>
-                <div class="btn-box">
-                    <a id="btnAdd" href="#" data-opts='{ "size": "none", "color": "none" }'>
-                        <md-outlined-button lang="ko_KR">추가</md-outlined-button>
-                        <md-outlined-button lang="en_US">Add</md-outlined-button>
-	                </a>
-                    <a id="btnDelete" href="#" data-opts='{ "size": "none", "color": "none" }'>
-                        <md-outlined-button lang="ko_KR">삭제</md-outlined-button>
-                        <md-outlined-button lang="en_US">Delete</md-outlined-button>
-	                </a>
-                    <a id="btnRevert" href="#" data-opts='{ "size": "none", "color": "none" }'>
-                        <md-outlined-button lang="ko_KR">초기화</md-outlined-button>
-                        <md-outlined-button lang="en_US">Reset</md-outlined-button>
-	                </a>
+                <div class="button-panel">
+                    <button id="btnAdd">
+                        <span lang="ko_KR">추가</span>
+                        <span lang="en_US">Add</span>
+                    </button>
+                    <button id="btnDelete">
+                        <span lang="ko_KR">삭제</span>
+                        <span lang="en_US">Delete</span>
+                    </button>
+                    <button id="btnRevert">
+                        <span lang="ko_KR">초기화</span>
+                        <span lang="en_US">Reset</span>
+                    </button>
                 </div>
             </div>
 
-            <table id="detail" class="form__">
-                <colgroup>
-                    <col style="width: 15%;">
-                    <col style="width: 35%;">
-                    <col style="width: 15%;">
-                    <col style="width: 35%;">
-                </colgroup>
-                <tbody>
-                    <tr>
-                        <th rowspan="7">Picture</th>
-                        <td rowspan="7" style="text-align: center; vertical-align: middle;"><img
-                            src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D" height="110"></td>
-                        <th>Name</th>
-                        <td><input id="name" type="text" data-validate='[["required"]]'></td>
-                    </tr>
-                    <tr>
-                        <th>Department</th>
-                        <td>
-                            <div style="display: flex;">
-                                <input id="deptNm" type="text" data-validate='[["required"]]' style="margin-right: 5px;" readonly="readonly">
-                                <a id="btnDept" href="#" data-opts='{ "size": "none", "color": "none" }' style="display: inline-block; height: 24px;">
-                                    <md-icon-button>
-                                        <md-icon>manage_search</md-icon>
-                                    </md-icon-button>
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Email</th>
-                        <td><input id="email" type="text" data-validate='[["required"], ["email"]]'></td>
-                    </tr>
-                    <tr>
-                        <th>Password</th>
-                        <td><input id="key" type="text" data-format='[["generic", "@@＊＊＊＊＊＊"]]' data-validate='[["required"]]'></td>
-                    </tr>
-                    <tr>
-                        <th>Balance</th>
-                        <td><input id="balance" type="text" data-format='[["numeric", "$#,###.##0"]]' data-validate='[["required"], ["number"]]'></td>
-                    </tr>
-                    <tr>
-                        <th>Phone</th>
-                        <td><input id="phone" type="text" data-validate='[["required"]]'></td>
-                    </tr>
-                    <tr>
-                        <th>Eye color</th>
-                        <td><select id="eyeColor" data-validate='[["required"]]'>
-                            <option lang="ko_KR" value="">선택</option>
-                            <option lang="en_US" value="">Select</option>
-                        </select></td>
-                    </tr>
-                    <tr>
-                        <th rowspan="4">Company</th>
-                        <td rowspan="4"><select id="company" multiple="multiple" data-validate='[["required"]]' style="height: 96%;"></select></td>
-                        <th>Gender</th>
-                        <td><input id="gender" type="radio"></td>
-                    </tr>
-                    <tr>
-                        <th>Age</th>
-                        <td><input id="age" type="text" data-validate='[["required"], ["integer"]]'></td>
-                    </tr>
-                    <tr>
-                        <th>Favorite fruit</th>
-                        <td><input id="favoriteFruit" type="checkbox" data-validate='[["required"]]'></td>
-                    </tr>
-                    <tr>
-                        <th>Registered</th>
-                        <td><input id="registered" type="text" data-format='[["date", 8, "date"]]' data-validate='[["required"]]'></td>
-                    </tr>
-                    <tr>
-                        <th>About</th>
-                        <td colspan="3"><textarea id="about" style="width: 100%;" rows="3" data-validate='[["required"]]'></textarea></td>
-                    </tr>
-                    <tr>
-                        <th>Greeting</th>
-                        <td colspan="3"><textarea id="greeting" style="width: 100%;" rows="3" data-validate='[["required"]]'></textarea></td>
-                    </tr>
-                    <tr>
-                        <th>Active</th>
-                        <td colspan="3"><input id="isActive" type="checkbox"></td>
-                    </tr>
-                </tbody>
-            </table>
+            <ul id="detail" class="form__">
+                <li>
+                    <label>
+                        <span>Default Picture</span>
+                        <img id="picture" style="height: 56px;">
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <span>Name</span>
+                        <input id="name" type="text" data-validate='[["required"]]'>
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <span>Department</span>
+                        <input id="deptNm" type="text" data-validate='[["required"]]' readonly="readonly" style="width: 70%;">
+                    </label>
+                    <button id="btnDeptCd" data-opts='{ "size": "middle" }'>Q</button>
+                </li>
+                <li>
+                    <label>
+                        <span>Email</span>
+                        <input id="email" type="text" data-validate='[["required"], ["email"]]'>
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <span>Balance</span>
+                        <input id="balance" type="text" data-format='[["numeric", "$#,###.##0"]]' data-validate='[["required"], ["number"]]'>
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <span>Phone</span>
+                        <input id="phone" type="text" data-validate='[["required"]]'>
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <span>Eye Color</span>
+                        <select id="eyeColor" data-validate='[["required"]]'><option>선택</option></select>
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <span>Age</span>
+                        <input id="age" type="text" data-validate='[["required"], ["integer"]]'>
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <span>Gender</span>
+                    </label>
+                    <input id="gender" type="radio">
+                </li>
+                <li>
+                    <label>
+                        <span>Favorite Fruit</span>
+                    </label>
+                    <input id="favoriteFruit" type="checkbox" data-validate='[["required"]]'>
+                </li>
+                <li>
+                    <label>
+                        <span>Registered</span>
+                        <input id="registered" type="text" data-format='[["date", 8, "date"]]' data-validate='[["required"]]'>
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <span>Company</span>
+                        <select id="company" multiple="multiple" data-validate='[["required"]]' style="height: 100px;"></select>
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <span>About</span>
+                        <textarea id="about" rows="4" cols="34" data-validate='[["required"]]'></textarea>
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <span>Greeting</span>
+                        <textarea id="greeting" rows="4" cols="34" data-validate='[["required"]]'></textarea>
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <span>Active</span>
+                        <input id="isActive" type="checkbox">
+                    </label>
+                </li>
+            </ul>
         </div>
     </div>
 </article>
@@ -283,7 +278,7 @@
         	    cont["e.btnSearch.click"].trigger("click");
             }
         },
-        "e.btnDept.click" : function(e) {
+        "e.btnDeptCd.click" : function(e) {
             e.preventDefault();
             cont["p.popup.dept"].open(cont["p.form.detail"].data(true)[0]);
         },

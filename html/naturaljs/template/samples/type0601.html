@@ -1,13 +1,14 @@
 <style>
-.type0601 #master {
-    border: 1px solid var(--md-sys-color-outline-variant);
-    padding: 5px 10px;
-    min-height: 609px;
-}
+    .type0601 #master {
+        border: 1px solid var(--md-sys-color-outline-variant);
+        min-height: 484px;
+        border-radius: var(--njs-border-radius-l);
+    }
 
-.type0601 .btn-box:not(.icon) {
-    padding-top: 24px;
-}
+    .type0601 .icon {
+        padding: 0;
+        margin: 0;
+    }
 </style>
 <article class="type0601 view-code">
     <div class="view-intro">
@@ -24,8 +25,8 @@
     <div class="flex-horizental">
         <div style="max-width: 218px;">
             <div class="flex-horizental">
-                <h3 style="max-width: 65px">N.tree</h3>
-                <div class="btn-box icon">
+                <h3>N.tree</h3>
+                <div class="button-panel icon">
                     <a id="expandCollapse" href="#" data-opts='{ "size": "none", "color": "none" }'>
                         <md-filled-icon-button toggle>
                             <md-icon>expand_all</md-icon>
@@ -40,18 +41,18 @@
         <div>
             <div class="flex-horizental">
                 <h3>N.grid</h3>
-                <div class="btn-box">
-                    <a id="btnAdd" href="#" data-opts='{ "size": "none", "color": "none" }'>
-                        <md-outlined-button lang="ko_KR">추가</md-outlined-button>
-                        <md-outlined-button lang="en_US">Add</md-outlined-button>
+                <div class="button-panel">
+                    <a id="btnAdd">
+                        <span lang="ko_KR">추가</span>
+                        <span lang="en_US">Add</span>
 		            </a>
-                    <a id="btnDelete" href="#" data-opts='{ "size": "none", "color": "none" }'>
-                        <md-outlined-button lang="ko_KR">삭제</md-outlined-button>
-                        <md-outlined-button lang="en_US">Delete</md-outlined-button>
+                    <a id="btnDelete">
+                        <span lang="ko_KR">삭제</span>
+                        <span lang="en_US">Delete</span>
 		            </a>
-                    <a id="btnSave" href="#" data-opts='{ "size": "none", "color": "none" }'>
-                        <md-filled-tonal-button lang="ko_KR">저장</md-filled-tonal-button>
-                        <md-filled-tonal-button lang="en_US">Save</md-filled-tonal-button>
+                    <a id="btnSave">
+                        <span lang="ko_KR">저장</span>
+                        <span lang="en_US">Save</span>
 		            </a>
                 </div>
             </div>
@@ -133,7 +134,7 @@
         },
         "p.grid.detail" : {
             "action" : [ "hide", [ 9, 10 ] ],
-            height : 590,
+            height : 450,
             filter : false,
             checkAll : "#checkAll",
             checkAllTarget : ".checkAllTarget"

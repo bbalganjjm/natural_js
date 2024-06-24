@@ -13,51 +13,40 @@
 
     <h3>N.form</h3>
     <div id="search" class="form__">
-        <table>
-            <colgroup>
-                <col style="width: 10%;">
-                <col style="width: 23%;">
-                <col style="width: 10%;">
-                <col style="width: 23%;">
-                <col style="width: 10%;">
-                <col style="width: 23%;">
-            </colgroup>
-            <tbody>
-                <tr>
-                    <th>Name</th>
-                    <td><input id="name" type="text"></td>
-                    <th>Gender</th>
-                    <td><input id="gender" type="radio"></td>
-                    <th>Eye Color</th>
-                    <td><select id="eyeColor">
-                        <option lang="ko_KR" value="">선택</option>
-                        <option lang="en_US" value="">Select</option>
-                    </select></td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="search-panel">
+            <ul>
+                <li><label><span>Name</span><input id="name" type="text"></label></li>
+                <li><label><span>Gender</span><select id="gender">
+                    <option lang="ko_KR" value="">선택</option>
+                    <option lang="en_US" value="">Select</option>
+                </select></label></li>
+                <li><label><span>Eye Color</span><select id="eyeColor">
+                    <option lang="ko_KR" value="">선택</option>
+                    <option lang="en_US" value="">Select</option>
+                </select></label></li>
+            </ul>
+        </div>
     </div>
-
 
     <div class="flex-horizental">
         <h3 style="max-width: 100px;">N.grid</h3>
-        <div class="btn-box">
-            <a id="btnSearch" href="#" class="btn-search" data-opts='{ "size": "none", "color": "none" }'>
-                <md-filled-button lang="ko_KR">조회</md-filled-button>
-                <md-filled-button lang="en_US">Search</md-filled-button>
-            </a>
-            <a id="btnAdd" href="#" data-opts='{ "size": "none", "color": "none" }'>
-                <md-outlined-button lang="ko_KR">추가</md-outlined-button>
-                <md-outlined-button lang="en_US">Add</md-outlined-button>
-            </a>
-            <a id="btnDelete" href="#" data-opts='{ "size": "none", "color": "none" }'>
-                <md-outlined-button lang="ko_KR">삭제</md-outlined-button>
-                <md-outlined-button lang="en_US">Delete</md-outlined-button>
-            </a>
-            <a id="btnSave" href="#" data-opts='{ "size": "none", "color": "none" }'>
-                <md-filled-tonal-button lang="ko_KR">저장</md-filled-tonal-button>
-                <md-filled-tonal-button lang="en_US">Save</md-filled-tonal-button>
-            </a>
+        <div class="button-panel">
+            <button id="btnSearch" data-opts='{ "color": "primary" }'>
+                <span lang="ko_KR">조회</span>
+                <span lang="en_US">Search</span>
+            </button>
+            <button id="btnAdd">
+                <span lang="ko_KR">추가</span>
+                <span lang="en_US">Add</span>
+            </button>
+            <button id="btnDelete">
+                <span lang="ko_KR">삭제</span>
+                <span lang="en_US">Delete</span>
+            </button>
+            <button id="btnSave">
+                <span lang="ko_KR">저장</span>
+                <span lang="en_US">Save</span>
+            </button>
         </div>
     </div>
 
@@ -115,14 +104,8 @@
             <tr>
                 <td><input id="about" type="text"></td>
                 <td colspan="2">
-                    <div style="display: flex;">
-                        <input id="deptNm" type="text" data-validate='[["required"]]' style="margin-right: 5px;" readonly="readonly">
-                        <a id="btnDept" href="#" data-opts='{ "size": "none", "color": "none" }' style="display: inline-block; height: 24px;">
-                            <md-icon-button>
-                                <md-icon>manage_search</md-icon>
-                            </md-icon-button>
-                        </a>
-                    </div>
+                    <input id="deptNm" type="text" data-validate='[["required"]]' style="width: 75%;" readonly="readonly">
+                    <button id="btnDept" data-opts='{ "size": "middle" }'>Q</button>
                 </td>
                 <td colspan="2"><input id="greeting" type="text"></td>
             </tr>
