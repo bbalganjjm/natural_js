@@ -232,11 +232,11 @@ a.btn_common__, input[type='button'].btn_common__, button.btn_common__ {
 }
 
 a.btn_common__:hover, input[type='button'].btn_common__:hover, button.btn_common__:hover {
-    /*opacity: 0.9;*/
+    opacity: 0.9;
 }
 
 a.btn_common__:active, input[type='button'].btn_common__:active, button.btn_common__:active {
-    /*opacity: 0.8;*/
+    opacity: 0.8;
 }
 
 a.btn_disabled__, input.btn_disabled__, button.btn_disabled__ {
@@ -467,6 +467,10 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
     text-align: center;
 }
 
+.tbody_wrap__ > .grid__ {
+    border-bottom: 1px solid var(--md-sys-color-outline-variant);
+}
+
 .tbody_wrap__>.grid__>tbody td.empty__ {
     border-top: none;
     text-align: center;
@@ -678,6 +682,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 
 .tbody_wrap__ {
     position: relative;
+    background-color: var(--md-sys-color-surface);
     -webkit-overflow-scrolling: touch;
 }
 

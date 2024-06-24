@@ -43,19 +43,20 @@ html [lang] {
 }
 
 /* input element styles */
-input[type='text'], input[type='number'], input[type='tel'], input[type='password'], select, textarea {
+input:not([type='radio'], [type='checkbox']), select, textarea {
     color: var(--md-sys-color-on-surface);
     vertical-align: middle;
     box-sizing: border-box;
     width: 100%;
     padding: 3px;
     border: 1px solid var(--md-sys-color-outline-variant);
+    border-radius: var(--njs-border-radius-m);
     line-height: 19px;
     margin: 2px 0;
 }
 
-input[type='text']:hover, input[type='number']:hover, input[type='tel']:hover, input[type='password']:hover, select:hover, textarea:hover,
-input[type='text']:focus, input[type='number']:focus, input[type='tel']:focus, input[type='password']:focus, select:focus, textarea:focus {
+input:not([type='radio'], [type='checkbox']):hover, select:hover, textarea:hover,
+input:not([type='radio'], [type='checkbox']):focus, select:focus, textarea:focus {
     border: 1px solid var(--md-sys-color-outline-variant);
 }
 
@@ -98,7 +99,6 @@ textarea[disabled]:focus {
 
 input[type='radio'], input[type='checkbox'] {
     vertical-align: middle;
-    border: none;
 }
 
 .select_input_label__ input[type='radio'], .select_input_label__ input[type='checkbox'] {
@@ -340,10 +340,6 @@ th, tfoot td {
 
 .view_context__ p {
     margin: 0 0 10px 0;
-}
-
-.view_context__ *:last-child {
-    /*margin: 0;*/
 }
 
 .view_context__ .pagination-box {
