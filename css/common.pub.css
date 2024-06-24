@@ -104,3 +104,11 @@ thead:first-child  tr:first-child th:first-child {
 thead:first-child  tr:first-child th:last-child {
     border-top-right-radius: var(--njs-border-radius-l);
 }
+
+/* N.list */
+.list__>li:first-child {
+    border-radius: var(--njs-border-radius-l) var(--njs-border-radius-l) 0 0;
+}
+.list__>li:last-child {
+    border-radius: 0 0 var(--njs-border-radius-l) var(--njs-border-radius-l);
+}
