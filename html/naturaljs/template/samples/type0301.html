@@ -143,10 +143,16 @@
                 });
             }
         },
+        "e.gender.change" : {
+            target : "#search #gender",
+            handler : function(e) {
+                cont["e.btnSearch.click"].trigger("click");
+            }
+        },
         "e.eyeColor.change" : {
-        	target : "#search #eyeColor",
-        	handler : function(e) {
-        	    cont["e.btnSearch.click"].trigger("click");
+            target : "#search #eyeColor",
+            handler : function(e) {
+                cont["e.btnSearch.click"].trigger("click");
             }
         },
         init : function(view, request) {
