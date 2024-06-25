@@ -108,7 +108,7 @@
                 <td><input id="about" type="text"></td>
                 <td colspan="2">
                     <input id="deptNm" type="text" data-validate='[["required"]]' style="width: 75%;" readonly="readonly">
-                    <button id="btnDept" data-opts='{ "size": "middle" }'>Q</button>
+                    <button id="btnDeptCd" data-opts='{ "type": "outlined" }' class="icon-search"></button>
                 </td>
                 <td colspan="2"><input id="greeting" type="text"></td>
             </tr>
@@ -209,7 +209,7 @@
                 inst : "p.grid.master"
             });
         },
-        "e.btnDept.click" : function(e, idx) {
+        "e.btnDeptCd.click" : function(e, idx) {
             e.preventDefault();
 
             cont.selIdx = idx;
