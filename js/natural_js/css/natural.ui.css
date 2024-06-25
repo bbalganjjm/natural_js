@@ -795,7 +795,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 }
 
 .grid_more_popup_contents__ > .grid_more_contents__ > table {
-	width: auto;
+    width: auto;
 }
 
 .grid_more_popup_contents__ > .grid_more_contents__ th {
@@ -1822,65 +1822,76 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 }
 
 /* Checkbox toggle switch */
-/* HTML Template
-<label class="toggle-switch">
+/**
+HTML Template & variables
+<label class="toggle-switch" style="
+    --njs-toggle-switch-height: ${height};
+    --njs-toggle-switch-width: ${width};
+    --njs-toggle-switch-padding: ${padding};
+    --njs-toggle-switch-height: ${height};
+    --njs-toggle-switch-on-content: ${on-content};
+    --njs-toggle-switch-off-content: ${off-content};
+    --njs-toggle-switch-font-size: ${font-size};
+    ">
     <input id="${id}" type="checkbox">
     <span class="slider"></span>
 </label>
  */
 .toggle-switch {
-    --njs-toggle-switch-height: 26px;
-    position: relative;
+    --njs-toggle-switch-height: 27px;
+    --njs-toggle-switch-width: calc(var(--njs-toggle-switch-height) * 2);
+    --njs-toggle-switch-padding: calc(var(--njs-toggle-switch-height) / 7);
+    --njs-toggle-switch-on-content: "ON";
+    --njs-toggle-switch-off-content: "OFF";
     display: inline-block;
-    width: calc(var(--njs-toggle-switch-height) * 2);
+    position: relative;
     height: var(--njs-toggle-switch-height);
+    width: var(--njs-toggle-switch-width);
 }
 .toggle-switch input {
     display: none;
 }
 .toggle-switch .slider {
-    position: absolute;
+    display: flex;
+    height: var(--njs-toggle-switch-height);
+    padding: var(--njs-toggle-switch-padding);
     cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
     background-color: var(--md-sys-color-primary-container);
-    transition: var(--njs-motion-duration-fast);
+    transition: left var(--njs-motion-duration-fast) ease, background-color var(--njs-motion-duration-fast) ease;
     border-radius: 999999px;
 }
 .toggle-switch .slider:before {
-    position: absolute;
     content: "";
-    height: calc(var(--njs-toggle-switch-height) - (var(--njs-toggle-switch-height) / 4));
-    width: calc(var(--njs-toggle-switch-height) - (var(--njs-toggle-switch-height) / 4));
-    left: calc(((var(--njs-toggle-switch-height) / 4) / 2) + 1px);
-    bottom: calc(((var(--njs-toggle-switch-height) / 4) / 2) + 0.5px);
+    position: absolute;
+    display: inline-block;
+    height: calc(var(--njs-toggle-switch-height) - (var(--njs-toggle-switch-padding) * 2));
+    width: calc(var(--njs-toggle-switch-height) - (var(--njs-toggle-switch-padding) * 2));
     background-color: var(--md-sys-color-inverse-on-surface);
     transition: var(--njs-motion-duration-normal);
+    left: var(--njs-toggle-switch-padding);
     border-radius: 999999px;
 }
 .toggle-switch input:checked+.slider {
     background-color: var(--md-sys-color-primary);
 }
-.toggle-switch input:focus+.slider {
-    box-shadow: 0 0 1px var(--md-sys-color-shadow);
-}
 .toggle-switch input:checked+.slider:before {
-    transform: translateX(calc(var(--njs-toggle-switch-height) - 1px));
+    left: calc(var(--njs-toggle-switch-width) - (var(--njs-toggle-switch-height) - var(--njs-toggle-switch-padding)));
 }
 .toggle-switch .slider::after {
-    content: "OFF";
+    content: var(--njs-toggle-switch-off-content);
     display: inline-block;
     position: absolute;
-    top: 50%;
-    left: calc(100% - var(--njs-toggle-switch-height));
-    transform: translateY(-50%);
-    font-size: 75%;
+    text-align: center;
+    line-height: calc(var(--njs-toggle-switch-height) - (var(--njs-toggle-switch-padding) * 2));
+    height: calc(var(--njs-toggle-switch-height) - (var(--njs-toggle-switch-padding) * 2));
+    width: calc(var(--njs-toggle-switch-width) - (var(--njs-toggle-switch-height) + (var(--njs-toggle-switch-padding) * 2)));
+    right: calc(var(--njs-toggle-switch-padding) * 2);
     color: var(--md-sys-color-on-primary-container);
+    white-space: nowrap;
+    font-size: var(--njs-toggle-switch-font-size, calc((var(--njs-toggle-switch-height) / 2) - (var(--njs-toggle-switch-padding) / 1.3)));
 }
 .toggle-switch input:checked+.slider::after {
-    content: "ON";
-    left: calc((var(--njs-toggle-switch-height) / 4) + ((var(--njs-toggle-switch-height) / 4) / 2));
+    content: var(--njs-toggle-switch-on-content);
+    left: calc(var(--njs-toggle-switch-padding) * 2);
     color: var(--md-sys-color-on-primary);
 }

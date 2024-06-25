@@ -113,7 +113,10 @@
                         </select></td>
                         <td style="text-align: center;"><input id="age" type="text" data-validate='[["required"], ["integer"]]'></td>
                         <td><input id="registered" type="text" data-format='[["date", 8, "date"]]' data-validate='[["required"]]'></td>
-                        <td style="text-align: center;"><input id="isActive" type="checkbox"></td>
+                        <td style="text-align: center; line-height: 0;"><label class="toggle-switch">
+                            <input id="isActive" type="checkbox">
+                            <span class="slider"></span>
+                        </label></td>
                         <td><textarea id="about" style="min-width: 500px; min-height: 100px;"></textarea></td>
                         <td><textarea id="greeting"></textarea></td>
                     </tr>

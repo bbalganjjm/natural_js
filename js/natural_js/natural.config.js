@@ -1071,6 +1071,16 @@
     }, { // Insert API View Type.
         "pointcut" : ".apiDoc:^init$",
         "adviceType" : "before",
+        "message" : {
+            "ko_KR" : {
+                "AOP-0001" : "목록으로 보기",
+                "AOP-0002" : "표로 보기"
+            },
+            "en_US" : {
+                "AOP-0001" : "LIST VIEW",
+                "AOP-0002" : "TABLE VIEW"
+            }
+        },
         "fn" : function(cont, fnChain, args){
             if($(window).width() > 731) { // 748 - 17px(?)
                 var view = args[0];
@@ -1078,14 +1088,15 @@
                 if(view.closest("#constructor, #advisors, #pointcuts, #defaultoptions, #declarativeoptions, #pluginExtention, " +
                         "#n, #gc, #string, #element, #date, #browser, #message, #array, #json, #event, #functions, #methods, #utilities, " +
                         "#conf_core, #conf_architecture, #conf_data, #conf_ui, #conf_ui_shell, #conf_template, #conf_code, #constant, #formatrules, #validationrules").length > 0) {
-                    var select = N('<label class="api-view-type-select"><input type="checkbox"><span>' + N.message.get({
-                        "ko_KR" : {
-                            "AOP-0001" : "리스트로 보기"
-                        },
-                        "en_US" : {
-                            "AOP-0001" : "List view"
-                        }
-                    }, "AOP-0001") +'</span></label>');
+                    var select = N('<label class="api-view-type-select toggle-switch" ' +
+                        'style="--njs-toggle-switch-height: 28px;' +
+                        '--njs-toggle-switch-on-content: \'' + N.message.get(this.message, "AOP-0001") + '\';' +
+                        '--njs-toggle-switch-off-content: \'' + N.message.get(this.message, "AOP-0002") + '\';' +
+                        '--njs-toggle-switch-width: 100px;' +
+                        '">' +
+                        '<input type="checkbox">' +
+                        '<span class="slider"></span>' +
+                        '</label>');
                     select.find(":checkbox").on("change.aop", function() {
                         if(N(this).is(":checked")) {
                             localStorage.setItem("isListTypeView", "Y");

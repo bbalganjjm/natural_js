@@ -99,7 +99,10 @@
                 </select></td>
                 <td rowspan="2" style="text-align: center;"><input id="age" type="text" data-validate='[["required"], ["integer"]]'></td>
                 <td><input id="registered" type="text" data-format='[["date", 8, "date"]]' data-validate='[["required"]]'></td>
-                <td style="text-align: center;"><input id="isActive" type="checkbox"></td>
+                <td style="text-align: center; line-height: 0;"><label class="toggle-switch">
+                    <input id="isActive" type="checkbox">
+                    <span class="slider"></span>
+                </label></td>로
             </tr>
             <tr>
                 <td><input id="about" type="text"></td>
@@ -135,17 +138,6 @@
             checkAllTarget : ".checkAllTarget",
             scrollPaging : {
                 size : 15
-            },
-            rowHandlerBeforeBind : function(rowIdx, rowEle, rowData) {
-             	// 선택한 날짜가 오늘 날짜보다 크면 #isActive 요소 체크, 아니면 체크 해제.
-             	// rowHandlerBeforeBind는 행에 데이터가 바인딩되기 전에 실행되는 핸들러 함수 이므로 바인딩될 데이터의 값을 바꾸어 주면 바뀐 데이터로 바인딩딩됨.
-                if(!N.string.isEmpty(rowData.registered)) {
-                    if(N.date.diff((new Date()).formatDate("Ymd"), rowData.registered) > 0) {
-                        rowData.isActive = "Y";
-                    } else {
-                        rowData.isActive = "N";
-                    }
-                }
             }
         },
         "p.popup.dept" : {
@@ -226,7 +218,7 @@
         "e.registered.onSelect" : function(e, inputEle, selDate, isMonthonly, idx) {
             e.preventDefault();
             // 선택한 날짜가 오늘 날짜보다 크면 #isActive 요소 체크, 아니면 체크 해제.
-            //  - 입력 요소를 jQuery val 메서드로 직접 다루지 말고 반드시 바인딩되어 있는 컴포넌트의 val 메서드로 값을 세팅해 주세요.
+            //  - 입력 요소를 jQuery val 메서드로 직접 다루지 말고 반드시 컴포넌트 인스턴스의 val 메서드로 값을 입력해주세요.
             //  - 입력 요소를 jQuery val 메서드로 직접 다루면 컴포넌트 내부 데이터셋과 동기화되지 않습니다.
             if(N.date.diff((new Date()).formatDate("Ymd"), selDate.obj.formatDate(selDate.format)) > 0) {
                 cont["p.grid.master"].val(idx, "isActive", "Y");
