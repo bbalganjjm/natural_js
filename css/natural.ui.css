@@ -1838,7 +1838,7 @@ HTML Template & variables
 </label>
  */
 .toggle-switch {
-    --njs-toggle-switch-height: 24px;
+    --njs-toggle-switch-height: 27px;
     --njs-toggle-switch-width: calc(var(--njs-toggle-switch-height) * 2);
     --njs-toggle-switch-padding: calc(var(--njs-toggle-switch-height) / 7);
     --njs-toggle-switch-on-content: "ON";
