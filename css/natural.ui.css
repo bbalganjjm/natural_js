@@ -314,38 +314,38 @@ a.btn_tertiary_container__, input[type='button'].btn_tertiary_container__, butto
 a.btn_primary__.btn_outlined__, input[type='button'].btn_primary__.btn_outlined__, button.btn_primary__.btn_outlined__ {
     border: 1px solid var(--md-sys-color-primary);
     color: var(--md-sys-color-on-surface);
-    background: none;
+    background-color: transparent;
 }
 a.btn_primary_container__.btn_outlined__, input[type='button'].btn_primary_container__.btn_outlined__, button.btn_primary_container__.btn_outlined__ {
     border: 1px solid var(--md-sys-color-primary-container);
     color: var(--md-sys-color-on-surface);
-    background: none;
+    background-color: transparent;
 }
 a.btn_secondary__.btn_outlined__, input[type='button'].btn_secondary__.btn_outlined__, button.btn_secondary__.btn_outlined__ {
     border: 1px solid var(--md-sys-color-secondary);
     color: var(--md-sys-color-on-surface);
-    background: none;
+    background-color: transparent;
 }
 a.btn_secondary_container__.btn_outlined__, input[type='button'].btn_secondary_container__.btn_outlined__, button.btn_secondary_container__.btn_outlined__ {
     border: 1px solid var(--md-sys-color-secondary-container);
     color: var(--md-sys-color-on-surface);
-    background: none;
+    background-color: transparent;
 }
 a.btn_tertiary__.btn_outlined__, input[type='button'].btn_tertiary__.btn_outlined__, button.btn_tertiary__.btn_outlined__ {
     border: 1px solid var(--md-sys-color-tertiary);
     color: var(--md-sys-color-on-surface);
-    background: none;
+    background-color: transparent;
 }
 a.btn_tertiary_container__.btn_outlined__, input[type='button'].btn_tertiary_container__.btn_outlined__, button.btn_tertiary_container__.btn_outlined__ {
     border: 1px solid var(--md-sys-color-tertiary-container);
     color: var(--md-sys-color-on-surface);
-    background: none;
+    background-color: transparent;
 }
 
 a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
     border: 1px solid transparent;
     color: var(--md-sys-color-on-surface);
-    background: none;
+    background-color: transparent;
     box-shadow: var(--njs-elevation-s);;
 }
 
