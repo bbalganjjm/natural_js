@@ -1,13 +1,3 @@
-<style>
-    .type04P0 #master tbody {
-        -ms-user-select: none;
-        -moz-user-select: -moz-none;
-        -khtml-user-select: none;
-        -webkit-user-select: none;
-        user-select: none;
-    }
-</style>
-
 <article class="type04P0 view-code" title="부서조회" style="width: 400px;">
     <div class="view-intro">
         <span lang="ko_KR">부서 검색 팝업</span>
@@ -19,29 +9,17 @@
     </div>
 
     <div id="search" class="form__">
-        <table>
-            <colgroup>
-                <col style="width: 50%;">
-                <col style="width: auto;">
-            </colgroup>
-            <tbody>
-                <tr>
-                    <th>Department Name</th>
-                    <td><input id="deptNm" type="text"></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div class="flex-horizental">
-        <h3 style="max-width: 50px;">N.grid</h3>
-        <div class="btn-box">
-            <a id="btnSearch" href="#" class="btn-search" data-opts='{ "size": "none", "color": "none" }'>
-                <md-filled-button lang="ko_KR">조회</md-filled-button>
-                <md-filled-button lang="en_US">Search</md-filled-button>
-            </a>
+        <div class="search-panel">
+            <ul>
+                <li><label><span>Department Name</span><input id="deptNm" type="text"></label></li>
+            </ul>
         </div>
     </div>
+
+    <div class="button-panel">
+        <button id="btnSearch" data-opts='{ "color": "primary" }'>조회</button>
+    </div>
+
     <table id="master" class="grid__">
         <colgroup>
             <col style="width: 30%;">
@@ -61,15 +39,9 @@
         </tbody>
     </table>
 
-    <div class="btn-box" style="text-align: center;">
-        <a id="btnOk" href="#" data-opts='{ "size": "none", "color": "none" }'>
-            <md-filled-button lang="ko_KR">확인</md-filled-button>
-            <md-filled-button lang="en_US">OK</md-filled-button>
-        </a>
-        <a id="btnCancel" href="#" data-opts='{ "size": "none", "color": "none" }'>
-            <md-outlined-button lang="ko_KR">취소</md-outlined-button>
-            <md-outlined-button lang="en_US">Cancel</md-outlined-button>
-        </a>
+    <div class="button-panel">
+        <button id="btnOk" data-opts='{ "color": "primary" }'>확인</button>
+        <button id="btnCancel">취소</button>
     </div>
 
 </article>

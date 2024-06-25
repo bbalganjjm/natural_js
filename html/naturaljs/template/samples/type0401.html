@@ -59,9 +59,9 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td id="index" style="text-align: center;"></td>
-                        <td id="name"></td>
-                        <td id="isActive" style="text-align: center;"></td>
+                        <td style="text-align: center;"><span id="index"></span></td>
+                        <td><span id="name"></span></td>
+                        <td style="text-align: center;"><span id="isActive"></span></td>
                     </tr>
                 </tbody>
             </table>
@@ -173,9 +173,10 @@
                     </label>
                 </li>
                 <li>
-                    <label>
-                        <span>Active</span>
+                    <label for="isActive"><span>Active</span></label>
+                    <label class="toggle-switch">
                         <input id="isActive" type="checkbox">
+                        <span class="slider"></span>
                     </label>
                 </li>
             </ul>

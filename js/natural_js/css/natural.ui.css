@@ -1820,3 +1820,67 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 .grid_wrap__::-webkit-scrollbar-thumb {
     background-color: var(--md-sys-color-surface-container-highest);
 }
+
+/* Checkbox toggle switch */
+/* HTML Template
+<label class="toggle-switch">
+    <input id="${id}" type="checkbox">
+    <span class="slider"></span>
+</label>
+ */
+.toggle-switch {
+    --njs-toggle-switch-height: 26px;
+    position: relative;
+    display: inline-block;
+    width: calc(var(--njs-toggle-switch-height) * 2);
+    height: var(--njs-toggle-switch-height);
+}
+.toggle-switch input {
+    display: none;
+}
+.toggle-switch .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--md-sys-color-primary-container);
+    transition: var(--njs-motion-duration-fast);
+    border-radius: 999999px;
+}
+.toggle-switch .slider:before {
+    position: absolute;
+    content: "";
+    height: calc(var(--njs-toggle-switch-height) - (var(--njs-toggle-switch-height) / 4));
+    width: calc(var(--njs-toggle-switch-height) - (var(--njs-toggle-switch-height) / 4));
+    left: calc(((var(--njs-toggle-switch-height) / 4) / 2) + 1px);
+    bottom: calc(((var(--njs-toggle-switch-height) / 4) / 2) + 0.5px);
+    background-color: var(--md-sys-color-inverse-on-surface);
+    transition: var(--njs-motion-duration-normal);
+    border-radius: 999999px;
+}
+.toggle-switch input:checked+.slider {
+    background-color: var(--md-sys-color-primary);
+}
+.toggle-switch input:focus+.slider {
+    box-shadow: 0 0 1px var(--md-sys-color-shadow);
+}
+.toggle-switch input:checked+.slider:before {
+    transform: translateX(calc(var(--njs-toggle-switch-height) - 1px));
+}
+.toggle-switch .slider::after {
+    content: "OFF";
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    left: calc(100% - var(--njs-toggle-switch-height));
+    transform: translateY(-50%);
+    font-size: 75%;
+    color: var(--md-sys-color-on-primary-container);
+}
+.toggle-switch input:checked+.slider::after {
+    content: "ON";
+    left: calc((var(--njs-toggle-switch-height) / 4) + ((var(--njs-toggle-switch-height) / 4) / 2));
+    color: var(--md-sys-color-on-primary);
+}

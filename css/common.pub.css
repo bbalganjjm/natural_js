@@ -19,7 +19,7 @@
     border-radius: var(--njs-border-radius-m);
     background-color: var(--md-sys-color-surface-container-low);
 }
-.view_context__ .search-panel>ul>li>label>span {
+.view_context__ .search-panel>ul>li>label>span:first-child {
     display: block;
     color: var(--md-sys-color-on-surface-variant);
     border-bottom: 1px solid var(--md-sys-color-outline-variant);
@@ -55,7 +55,7 @@
     border-radius: var(--njs-border-radius-m);
     background-color: var(--md-sys-color-surface-container-low);
 }
-.view_context__ ul.form__>li>label>span {
+.view_context__ ul.form__>li>label>span:first-child {
     display: block;
     color: var(--md-sys-color-on-surface-variant);
     border-bottom: 1px solid var(--md-sys-color-outline-variant);
