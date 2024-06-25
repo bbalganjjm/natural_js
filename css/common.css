@@ -43,7 +43,7 @@ html [lang] {
 }
 
 /* input element styles */
-input:not([type='radio'], [type='checkbox']), select, textarea {
+input:not([type='radio'], [type='checkbox'], [type='button']), select, textarea {
     color: var(--md-sys-color-on-surface);
     vertical-align: middle;
     box-sizing: border-box;
@@ -55,8 +55,8 @@ input:not([type='radio'], [type='checkbox']), select, textarea {
     margin: 2px 0;
 }
 
-input:not([type='radio'], [type='checkbox']):hover, select:hover, textarea:hover,
-input:not([type='radio'], [type='checkbox']):focus, select:focus, textarea:focus {
+input:not([type='radio'], [type='checkbox'], [type='button']):hover, select:hover, textarea:hover,
+input:not([type='radio'], [type='checkbox'], [type='button']):focus, select:focus, textarea:focus {
     border: 1px solid var(--md-sys-color-outline-variant);
 }
 
