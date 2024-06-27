@@ -431,7 +431,7 @@ th, tfoot td {
 
 .apiDoc .apidemo .form .demo-desc {
     position: absolute;
-    padding: 0 10px 10px 10px;
+    padding: 10px;
     margin: 0 0 15px;
     overflow: auto;
     border: 1px solid var(--md-sys-color-outline-variant);
@@ -444,8 +444,12 @@ th, tfoot td {
     line-height: var(--njs-line-height-s-plus);
     transform : scaleY(0);
     transform-origin: top;
-    transition: transform var(--njs-motion-duration-ultra-slow) ease, opacity var(--njs-motion-duration-ultra-slow) ease;
+    transition: transform var(--njs-motion-duration-slow) ease, opacity var(--njs-motion-duration-slow) ease;
     max-height: 300px;
+}
+
+.apiDoc .apidemo .form .demo-desc p:last-child {
+    margin-bottom: 0;
 }
 
 .apiDoc .apidemo .form select:focus+.demo-desc,
