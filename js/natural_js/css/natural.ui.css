@@ -1815,7 +1815,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
     background-color: var(--md-sys-color-surface-container-highest);
 }
 
-/* Checkbox toggle switch */
+/* Switch */
 .switch__ {
     --njs-switch-height: 27px;
     --njs-switch-width: calc(var(--njs-switch-height) * 2);
