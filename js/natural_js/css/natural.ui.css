@@ -742,6 +742,8 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 .grid__ .grid_more_thead_col__ .grid_more_panel__ {
     will-change: opacity, transform;
 
+    position: absolute;
+    right: 0;
     border: 1px solid var(--md-sys-color-outline-variant);
     border-radius: var(--njs-border-radius-m);
     background-color: var(--md-sys-color-surface-container-lowest);
@@ -818,13 +820,6 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 .grid_more_popup_contents__ .btn_box__ {
     text-align: center;
     margin-bottom: 10px;
-}
-
-.grid_more_popup_contents__ .btn_box__ > .prev_btn__,
-.grid_more_popup_contents__ .btn_box__ > .next_btn__ {
-    border: 1px solid var(--md-sys-color-outline-variant);
-    line-height: 18px;
-    padding: 2px 5px 4px 5px;
 }
 
 .grid_more_popup_contents__ .btn_box__ .page__ {
@@ -961,35 +956,33 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 
     border: 1px solid var(--md-sys-color-outline-variant);
     box-shadow: var(--njs-elevation-m);
-    background-color: var(--md-sys-color-surface-container);
+    background-color: var(--md-sys-color-surface-container-lowest);
     z-index: 1;
     padding: 0;
-    width: 247px;
     border-radius: var(--njs-border-radius-m);
     font-size: var(--njs-font-size-m);
+    text-align: center;
 }
 
 .datepicker_contents__ > .datepicker_years_panel__ {
-    width: 40px;
+    width: 55px;
     float: left;
-    background-color: var(--md-sys-color-primary-container);
+    border-right: 1px solid var(--md-sys-color-outline-variant);
 }
 
 .datepicker_contents__ > .datepicker_months_panel__ {
-    width: 60px;
+    width: 71px;
     float: left;
-    margin-left: 2px;
-    background-color: var(--md-sys-color-primary-container);
+    border-right: 1px solid var(--md-sys-color-outline-variant);
 }
 
 .datepicker_contents__.datepicker_monthonly__ > .datepicker_months_panel__ {
-    background-color: var(--md-sys-color-surface-container-lowest);
+    border-right: none;
 }
 
 .datepicker_contents__ > .datepicker_days_panel__ {
     width: 245px;
     float: left;
-    margin-left: 2px;
     background-color: var(--md-sys-color-surface-container-lowest);
 }
 
@@ -1014,14 +1007,13 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 }
 
 .datepicker_monthonly__ {
-    width: 102px;
 }
 
 .datepicker_contents__ .datepicker_year_item__,
 .datepicker_contents__ .datepicker_year_paging__ {
     border: 1px solid transparent;
     cursor: pointer;
-    line-height: 25px;
+    line-height: 33px;
     text-align: center;
 }
 
@@ -1048,8 +1040,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 }
 
 .datepicker_contents__ .datepicker_month_title__ {
-    line-height: 25px;
-    width: 58px;
+    width: 70px;
     float: left;
 }
 
@@ -1110,8 +1101,8 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 .datepicker_contents__ .datepicker_year_title__,
 .datepicker_contents__ .datepicker_month_title__,
 .datepicker_contents__ .datepicker_day_title__ {
-    border: 1px solid var(--md-sys-color-secondary-container);
-    background-color: var(--md-sys-color-secondary-container);
+    border: 1px solid var(--md-sys-color-surface-container-low);
+    background-color: var(--md-sys-color-surface-container-low);
     line-height: 33px;
     text-align: center;
     color: var(--md-sys-color-on-secondary-container);
@@ -1142,8 +1133,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 
 .datepicker_contents__.years_panel_position_top__,
 .datepicker_contents__.months_panel_position_top__ {
-    width: auto;
-    text-align: center;
+
 }
 
 .datepicker_contents__.years_panel_position_top__ .datepicker_years_panel__,
@@ -1239,6 +1229,10 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 .datepicker_contents__.years_panel_position_top__ > .datepicker_days_panel__,
 .datepicker_contents__.months_panel_position_top__ > .datepicker_days_panel__ {
     float: none;
+}
+
+.datepicker_contents__.years_panel_position_left__,
+.datepicker_contents__.years_panel_position_left__ {
 }
 
 .datepicker_contents__.years_panel_position_left__.months_panel_position_top__ > .datepicker_days_panel__ {

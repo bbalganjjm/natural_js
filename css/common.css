@@ -61,8 +61,7 @@ input:not([type='radio'], [type='checkbox'], [type='button']):focus, select:focu
 }
 
 select {
-    padding: 0;
-    height: 24px;
+    padding: 4px 3px;
 }
 
 select[multiple='multiple'] {
