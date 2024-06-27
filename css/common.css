@@ -340,6 +340,9 @@ th, tfoot td {
 .view_context__ p {
     margin: 0 0 10px 0;
 }
+.view_context__ p:last-child {
+    margin: 0;
+}
 
 .view_context__ .pagination-box {
     margin-top: 16px;
