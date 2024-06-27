@@ -7,17 +7,17 @@
     <h3 lang="ko_KR" class="notIndex">1. 기본 토글 스위치 생성.</h3>
     <h3 lang="en_US" class="notIndex">1. Create a basic toggle switch.</h3>
 
-    <p lang="ko_KR">'input[type=checkbox]' 요소를 'label' 태그로 감싸고 class 속성값에 'switch__' 를 입력합니다. 그 다음 'input[type=checkbox]' 요소 다음에 'span' 태그를 추가하고 class 속성값에 'slider__' 를 입력 합니다.</p>
-    <p lang="en_US">Wrap the 'input[type=checkbox]' element with the 'label' tag and enter 'switch__' in the class attribute value. Then, add the 'span' tag after the 'input[type=checkbox]' element and enter 'slider__' in the class attribute value.</p>
+    <p lang="ko_KR">'input[type=checkbox]' 요소를 'label' 태그로 감싸고 class 속성값에 'switch__' 를 입력합니다. 그 다음 'input[type=checkbox]' 요소 다음에 'span' 태그를 추가하고 class 속성값에 'switch_slider__' 를 입력 합니다.</p>
+    <p lang="en_US">Wrap the 'input[type=checkbox]' element with the 'label' tag and enter 'switch__' in the class attribute value. Then, add the 'span' tag after the 'input[type=checkbox]' element and enter 'switch_slider__' in the class attribute value.</p>
 
     <pre><code>&lt;label class="switch__">
     &lt;input id="${id}" type="checkbox">
-    &lt;span class="slider__"></span>
+    &lt;span class="switch_slider__"></span>
 &lt;/label></code></pre>
 
     <label class="switch__">
         <input id="${id}" type="checkbox">
-        <span class="slider__"></span>
+        <span class="switch_slider__"></span>
     </label>
 
     <h3 lang="ko_KR" class="notIndex">2. 스위치 옵션 지정.</h3>
@@ -28,12 +28,12 @@
 
     <pre><code>&lt;label class="switch__" style="--njs-switch-width: 80px;">
     &lt;input id="${id}" type="checkbox">
-    &lt;span class="slider__"></span>
+    &lt;span class="switch_slider__"></span>
 &lt;/label></code></pre>
 
     <label class="switch__" style="--njs-switch-width: 80px;">
         <input id="${id}" type="checkbox">
-        <span class="slider__"></span>
+        <span class="switch_slider__"></span>
     </label>
 
     <p lang="ko_KR">'--njs-switch-height' 옵션을 '70px' 로 지정하여 크기가 큰 토글 스위치를 만드고 안에 텍스트를 'Y/N' 으로 표시하는 예제 입니다.</p>
@@ -41,12 +41,12 @@
 
     <pre><code>&lt;label class="switch__" style="--njs-switch-height: 40px; --njs-switch-on-content: 'Y'; --njs-switch-off-content: 'N';">
     &lt;input id="${id}" type="checkbox">
-    &lt;span class="slider__"></span>
+    &lt;span class="switch_slider__"></span>
 &lt;/label></code></pre>
 
     <label class="switch__" style="--njs-switch-height: 70px; --njs-switch-on-content: 'Y'; --njs-switch-off-content: 'N';">
         <input id="${id}" type="checkbox">
-        <span class="slider__"></span>
+        <span class="switch_slider__"></span>
     </label>
 
     <p lang="ko_KR" class="alert">Switch 의 크기 관련 옵션은 특별히 지정하지 않는 한 `--njs-switch-height` 옵션 값을 기준으로 자동으로 계산됩니다.</p>

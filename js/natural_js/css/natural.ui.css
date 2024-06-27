@@ -1830,7 +1830,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 .switch__ input {
     display: none;
 }
-.switch__ .slider__ {
+.switch__ .switch_slider__ {
     display: flex;
     height: var(--njs-switch-height);
     padding: var(--njs-switch-padding);
@@ -1839,7 +1839,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
     transition: left var(--njs-motion-duration-fast) ease, background-color var(--njs-motion-duration-fast) ease;
     border-radius: 999999px;
 }
-.switch__ .slider__:before {
+.switch__ .switch_slider__:before {
     content: "";
     position: absolute;
     display: inline-block;
@@ -1850,13 +1850,13 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
     left: var(--njs-switch-padding);
     border-radius: 999999px;
 }
-.switch__ input:checked+.slider__ {
+.switch__ input:checked+.switch_slider__ {
     background-color: var(--md-sys-color-primary);
 }
-.switch__ input:checked+.slider__:before {
+.switch__ input:checked+.switch_slider__:before {
     left: calc(var(--njs-switch-width) - (var(--njs-switch-height) - var(--njs-switch-padding)));
 }
-.switch__ .slider__::after {
+.switch__ .switch_slider__::after {
     content: var(--njs-switch-off-content);
     display: inline-block;
     position: absolute;
@@ -1869,7 +1869,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
     white-space: nowrap;
     font-size: var(--njs-switch-font-size, calc((var(--njs-switch-height) / 2) - (var(--njs-switch-padding) / 1.3)));
 }
-.switch__ input:checked+.slider__::after {
+.switch__ input:checked+.switch_slider__::after {
     content: var(--njs-switch-on-content);
     left: calc(var(--njs-switch-padding) * 2);
     color: var(--md-sys-color-on-primary);

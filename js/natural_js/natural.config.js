@@ -1095,7 +1095,7 @@
                         '--njs-switch-width: 100px;' +
                         '">' +
                         '<input type="checkbox">' +
-                        '<span class="slider__"></span>' +
+                        '<span class="switch_slider__"></span>' +
                         '</label>');
                     select.find(":checkbox").on("change.aop", function() {
                         if(N(this).is(":checked")) {
