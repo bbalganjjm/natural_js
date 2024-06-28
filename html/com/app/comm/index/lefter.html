@@ -65,7 +65,7 @@
 }
 
 .index-lefter .left-menu {
-    padding: 0.7em 0 5.7em 0.5em;
+    padding: 10px;
     overflow: auto;
     -webkit-overflow-scrolling: touch;
     font-size: var(--njs-font-size-m);
@@ -74,40 +74,36 @@
 }
 
 .index-lefter .left-menu ul {
-    margin: 0;
-    padding: 0.4em 0 0.4em 0.2em;
+    margin: 0 0 0 15px;
+    padding: 0;
     list-style: none;
 }
 
 .index-lefter .left-menu > ul {
-    padding-left: 0;
+    margin-left: 0;
 }
 
 .index-lefter .left-menu ul li {
     margin: 0;
-    padding: 0.25em 0;
+    padding: 5px 0;
+    line-height: 16px;
 }
 
-.index-lefter .left-menu ul > li {
-    padding-left: 1.1em;
-    background: url("images/comm/icon/right.png") no-repeat 0 8px;
+.index-lefter .left-menu li:before {
+    content: "";
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    background: url("images/comm/icon/right.png") no-repeat 100% 50%;
+    transition: transform var(--njs-motion-duration-normal) ease;
 }
 
-.index-lefter .left-menu .expand {
-    background: url("images/comm/icon/down.png") no-repeat 0 8px;
+.index-lefter .left-menu li.expand:before {
+    transform: rotate(90deg);
 }
 
-.index-lefter .left-menu ul > li.leaf-node {
+.index-lefter .left-menu li.leaf-node:before {
     background: none;
-}
-
-.index-lefter .left-menu > ul > li > a > span {
-}
-
-.index-lefter .left-menu > ul > li > ul > li > a {
-}
-
-.index-lefter .left-menu > ul > li > ul > li > ul > li > a {
 }
 
 .index-lefter .left-menu ul > li > a > span {
