@@ -1,5 +1,5 @@
 /*!
- * Natural-CORE v0.20.36
+ * Natural-CORE v1.0.0
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -297,7 +297,7 @@
         // N local variables
         $.extend(N, {
             version : {
-                "Natural-CORE" : "0.20.36"
+                "Natural-CORE" : "1.0.0"
             },
             /**
              * Set and get locale value

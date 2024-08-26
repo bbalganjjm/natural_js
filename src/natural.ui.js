@@ -1,5 +1,5 @@
 /*!
- * Natural-UI v0.48.257
+ * Natural-UI v1.0.0
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -7,7 +7,7 @@
  * Copyright 2023 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-UI"] = "0.48.257";
+    N.version["Natural-UI"] = "1.0.0";
 
     $.fn.extend($.extend(N.prototype, {
         alert : function(msg, vars) {
