@@ -4,7 +4,7 @@
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
  *  
- * Copyright 2023 KIM HWANG MAN(bbalganjjm@gmail.com)
+ * Copyright 2024 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
     N.version["Natural-UI.Shell"] = "1.0.0";

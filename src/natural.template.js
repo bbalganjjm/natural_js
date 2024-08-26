@@ -4,7 +4,7 @@
  * Released under the LGPL v2.1 license
  * Date: 2019-02-28T18:00Z
  *
- * Copyright 2023 KIM HWANG MAN(bbalganjjm@gmail.com)
+ * Copyright 2024 KIM HWANG MAN(bbalganjjm@gmail.com)
  */
 (function(window, $) {
     N.version["Natural-TEMPLATE"] = "0.4.11";
