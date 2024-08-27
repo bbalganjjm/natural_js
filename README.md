@@ -185,7 +185,7 @@ Supports
 
 ### Support browsers
 
-* PC : Chrome, Edge, Firefox, Safari, Opera latest version, Internet Explorer 9+(limited support)
+* PC : Chrome, Edge, Firefox, Safari, Opera, Internet Explorer 11(limited support)
 * Mobile : iOS Safari, iOS UIWebView, Android Browser, Android Chrome, Android WebView
 
 ### Training and support
