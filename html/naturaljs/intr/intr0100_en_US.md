@@ -1,5 +1,5 @@
 <h1 class="logo title">Natural-JS</h1>
-Natural-JS is an open source Javascript framework library that can be easily and quickly development the enterprise web application UI such as ERP, CRM, etc.
+Natural-JS is an open source Javascript framework that can be easily and quickly development the enterprise web application UI.
 
 Structure
 ===
