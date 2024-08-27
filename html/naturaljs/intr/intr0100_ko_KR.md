@@ -181,7 +181,7 @@ Natural-UI가 컨텐츠 영역의 UI 개발을 지원한다면 Natural-UI.Shell 
 
 ### 지원 브라우저
 
-* PC : Chrome, Edge, Firefox, Safari, Opera latest version, Internet Explorer 11(limited support)
+* PC : Chrome, Edge, Firefox, Safari, Opera, Internet Explorer 11(limited support)
 * 모바일 : iOS Safari, iOS UIWebView, Android Browser, Android Chrome, Android WebView
 
 ### 교육 및 지원
