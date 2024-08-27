@@ -1,6 +1,8 @@
 Natural-JS
 ===
-Natural-JS is an open source Javascript framework library that can be easily and quickly development the enterprise web application UI such as ERP, CRM, etc.
+Natural-JS is an open source Javascript framework that can be easily and quickly development the enterprise web application UI.
+
+Natural-JS is intuitive and really easy.
 
 Structure
 ===
