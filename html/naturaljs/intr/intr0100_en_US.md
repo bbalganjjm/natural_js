@@ -182,15 +182,9 @@ While Natural-UI supports UI development in the content area, Natural-UI.Shell i
 Supports
 ===
 
-### Development language
-
-* Javascript(ECMA Script 3+) / jQuery 3.7.1
-* HTML / DHTML / HTML5
-* CSS2 / CSS3
-
 ### Support browsers
 
-* PC : Internet Explorer 9+, Chrome, Firefox, Safari, Opera, Edge
+* PC : Chrome, Edge, Firefox, Safari, Opera latest version, Internet Explorer 11(limited support)
 * Mobile : iOS Safari, iOS UIWebView, Android Browser, Android Chrome, Android WebView
 
 ### Training and support
