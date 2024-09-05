@@ -189,4 +189,4 @@ Natural-UI가 컨텐츠 영역의 UI 개발을 지원한다면 Natural-UI.Shell 
 * <bbalganjjm@gmail.com>으로 문의 바랍니다.
 
 ### 라이센스
-This software is licensed under the [LGPL v2.1](https://github.com/bbalganjjm/natural_js/blob/master/LICENSE) &copy; KIM HWANG MAN&lt;<bbalganjjm@gmail.com>&gt;
+This software is licensed under the [LGPL v2.1](https://github.com/bbalganjjm/natural_js/blob/master/LICENSE) &copy; Goldman Kim&lt;<bbalganjjm@gmail.com>&gt;
