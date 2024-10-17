@@ -34,19 +34,25 @@
     "natural-js",
     "naturaljs"
   ],
-  "//" : {
-      "dependencies": {
-        "jquery": "3.7.1"
-      }
+  "//": {
+    "dependencies": {
+      "jquery": "3.7.1"
+    }
   },
   "author": {
-    "name" : "Goldman Kim",
-    "email" : "bbalganjjm@gmail.com"
+    "name": "Goldman Kim",
+    "email": "bbalganjjm@gmail.com"
   },
   "license": "LGPL v2.1",
   "bugs": {
     "url": "https://github.com/bbalganjjm/natural_js/issues",
     "email": "bbalganjjm@gmail.com"
   },
-  "homepage": "http://bbalganjjm.github.io/natural_js"
+  "homepage": "http://bbalganjjm.github.io/natural_js",
+  "dependencies": {
+    "jquery": "^3.7.1"
+  },
+  "devDependencies": {
+    "@types/jquery": "^3.5.31"
+  }
 }

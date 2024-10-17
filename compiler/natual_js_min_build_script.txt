@@ -7,7 +7,7 @@
 	minify_core
 #Arguments
 	-jar ${build_project}/compiler/closure-compiler-v20231112.jar
-	--js ${build_project}/src/natural.core.js
+	--js ${build_project}/src/natural.core.ts
 	--js_output_file ${build_project}/dist/natural.core.min.js
 
 #Name : 
@@ -42,7 +42,7 @@
 	minify_all
 #Arguments
 	-jar ${build_project}/compiler/closure-compiler-v20231112.jar
-	--js ${build_project}/src/natural.core.js ${build_project}/src/natural.architecture.js ${build_project}/src/natural.data.js ${build_project}/src/natural.ui.js ${build_project}/src/natural.ui.shell.js 
+	--js ${build_project}/src/natural.core.ts ${build_project}/src/natural.architecture.js ${build_project}/src/natural.data.js ${build_project}/src/natural.ui.js ${build_project}/src/natural.ui.shell.js
 	--js_output_file ${build_project}/dist/natural.js.min.js --create_source_map ${build_project}/dist/natural.js.min.map
 	
 	
