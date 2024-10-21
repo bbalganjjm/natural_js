@@ -8,3 +8,4 @@ Thumbs.db
 .history
 .idea
 *.iml
+node_modules/
