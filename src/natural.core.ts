@@ -14,7 +14,7 @@
 import $ from 'jquery';
 
 // Use jQuery init
-const N = function(selector: string, context: any) {
+const N = function(selector: JQuery.Selector, context: Element) {
     const obj = new $.fn.init(selector, context);
     obj.selector = N.toSelector(selector);
     return obj;
@@ -293,8 +293,12 @@ $.fn.extend($.extend(N.prototype, {
 })();
 
 
-(function(N) {
-    // N local constiables
+(/**
+ * Extends the provided object with various utility functions and properties.
+ *
+ * @param {Object} N - The main object to extend.
+ */
+function(N) {
     $.extend(N, {
         version : {
             "Natural-CORE" : "1.0.0"
@@ -302,17 +306,17 @@ $.fn.extend($.extend(N.prototype, {
         /**
          * Set and get locale value
          */
-        locale : function(str) {
-            if(str === undefined) {
+        locale : function(locale: string): string | undefined {
+            if(locale === undefined) {
                 return N.context.attr("core").locale;
             } else {
-                N.context.attr("core").locale = str;
+                N.context.attr("core").locale = locale;
             }
         },
         /**
          * Display the error log to console
          */
-        error : function(msg, e) {
+        error : function(msg: string, e: Error | string): Error | string {
             if(N.type(e) !== "error") {
                 e = new Error(msg);
 
@@ -327,21 +331,24 @@ $.fn.extend($.extend(N.prototype, {
         /**
          * Check object type
          */
-        type : function(obj) {
-            return ({}).toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase();
+        type : function(obj: any): string {
+            const match = ({}).toString.call(obj).match(/\s([a-zA-Z]+)/);
+            if (match && match[1]) {
+                return match[1].toLowerCase();
+            }
+            return "unknown";
         },
         /**
          * Check whether arg[0] is a String type
          */
-        isString : function(obj) {
+        isString : function(obj: any): boolean {
             return N.type(obj) === "string";
         },
         /**
          * Check whether arg[0] is a numeric type
          */
-        isNumeric : function(obj) {
-            return ( typeof obj === "number" || typeof obj === "string" ) &&
-                !isNaN( obj - parseFloat( obj ) );
+        isNumeric : function(obj: any): boolean {
+            return  !isNaN(parseFloat(String(obj))) && isFinite(Number(obj));
         },
         /**
          * Check whether arg[0] is a plain object type
@@ -350,18 +357,7 @@ $.fn.extend($.extend(N.prototype, {
         /**
          * Check whether object is empty
          */
-        isEmptyObject : function(obj) {
-            if(obj !== undefined && this.isString(obj)) {
-                if(obj.length > 0) {
-                    return false;
-                }
-            } else {
-                for (const name in obj) {
-                    return false;
-                }
-            }
-            return true;
-        },
+        isEmptyObject : $.isEmptyObject,
         /**
          * Check whether arg[0] is a Array type
          */
@@ -369,7 +365,7 @@ $.fn.extend($.extend(N.prototype, {
         /**
          * Checks whether an object of a type similar(array or jquery object etc.) to an array
          */
-        isArraylike : function(obj) {
+        isArraylike : function(obj: any) {
             if(typeof obj === "undefined" || obj.length === undefined) {
                 return false;
             }
@@ -391,42 +387,42 @@ $.fn.extend($.extend(N.prototype, {
         /**
          * Check whether arg[0] is a jQuery Object type
          */
-        isWrappedSet : function(obj) {
+        isWrappedSet : function(obj: any) {
             return !!(obj && this.isArraylike(obj) && obj.jquery);
         },
         /**
          * Check whether arg[0] is an element type
          */
-        isElement : function(obj) {
+        isElement : function(obj: any) {
             if(this.isWrappedSet(obj)) {
                 obj = obj.get(0);
             }
             return !!(obj && obj !== document && obj.getElementsByTagName);
         },
-        toSelector : function(el) {
-            if (typeof el === "string") {
-                return el;
+        toSelector : function(selector: Array<JQuery.Selector> | JQuery.Selector) {
+            if (typeof selector === "string") {
+                return selector;
             }
-            if(this.isWrappedSet(el)) {
-                el = el.get(0);
+            if(this.isWrappedSet(selector)) {
+                selector = selector.get(0);
             }
-            if(this.isElement(el)) {
-                return el.tagName.toLowerCase() + (el.id ? "#" + el.id : "") + (el.classList && el.classList.length > 0 ? "." : "") + (Array.from(el.classList)).join(".");
-            } else if(N.type(el) === "array") {
-                if(el.length > 0) {
-                    let obj = el[el.length - 1];
+            if(this.isElement(selector)) {
+                return selector.tagName.toLowerCase() + (selector.id ? "#" + selector.id : "") + (selector.classList && selector.classList.length > 0 ? "." : "") + (Array.from(selector.classList)).join(".");
+            } else if(N.type(selector) === "array") {
+                if(selector.length > 0) {
+                    let obj = selector[selector.length - 1];
                     let type = N.type(obj);
                     if(type.startsWith("[")) {
                         type = type.replace(/[\[\]]/g, "");
                     } else if(N.type(obj) === "string") {
                         type = '"' + type + '"';
                     }
-                    return "...[" + type + "](" + el.length + ")";
+                    return "...[" + type + "](" + selector.length + ")";
                 } else {
                     return "...[](0)";
                 }
             } else {
-                return String(el);
+                return String(selector);
             }
         },
         /**
@@ -493,74 +489,62 @@ $.fn.extend($.extend(N.prototype, {
          * N.string package
          */
         "string" : {
-            contains : function(context, str) {
-                if (typeof context !== "string") {
-                    throw N.error("[N.string.contains]arguments[0] was not entered or is not of string type.");
-                }
+            contains(context: string, str: string): boolean {
                 return context.indexOf(str) > -1;
             },
-            endsWith : function(context, str) {
-                if (typeof context !== "string") {
-                    throw N.error("[N.string.endsWith]arguments[0] was not entered or is not of string type.");
-                }
-                return context.indexOf(str, this.length - str.length) !== -1;
+            endsWith(context: string, str: string): boolean {
+                return context.indexOf(str, context.length - str.length) !== -1;
             },
-            startsWith : function(context, str) {
-                if (typeof context !== "string") {
-                    throw N.error("[N.string.startsWith]arguments[0] was not entered or is not of string type.");
-                }
+            startsWith(context: string, str: string): boolean {
                 return context.indexOf(str) === 0;
             },
-            insertAt : function(context, idx, str) {
+            insertAt(context: string, idx: number, str: string): string {
                 return context.substring(0, idx) + str + context.substring(idx);
             },
-            removeWhitespace : function(str) {
-                if (this.isEmpty(str)) {
-                    return str;
+            removeWhitespace(str: string): string {
+                return this.isEmpty(str) ? str : str.replace(/\s/g, "");
+            },
+            lpad : function(context: string, length: number, str: string): string {
+                while (context.length < length) {
+                    context = str + context;
                 }
-                return str.replace(/\s/g, "");
+                return context;
             },
-            lpad : function(str, length, padStr) {
-                while (str.length < length) {
-                    str = padStr + str;
+            rpad : function(context: string, length: number, str: string): string {
+                while (context.length < length) {
+                    context = context + str;
                 }
-                return str;
+                return context;
             },
-            rpad : function(str, length, padStr) {
-                while (str.length < length) {
-                    str = str + padStr;
-                }
-                return str;
+            isEmpty(str: string): boolean {
+                return this.trimToEmpty(str).length === 0;
             },
-            isEmpty : function(str) {
-                return N.string.trimToEmpty(str).length === 0;
-            },
-            byteLength : function(str, charByteLength) {
-                if(charByteLength === undefined) {
+            byteLength : function(str: string, charByteLength?: number): number {
+                if (charByteLength === undefined) {
                     charByteLength = N.context.attr("core").charByteLength !== undefined ? N.context.attr("core").charByteLength : 3;
                 }
-                return (function(s,b,i,c){
-                    for(b=i=0;c=s.charCodeAt(i++);b+=c>>11?charByteLength:c>>7?2:1){}
+                return (function(s: string, b: number, i: number, c: number): number {
+                    for (b = i = 0; c = s.charCodeAt(i++); b += c >> 11 ? charByteLength : c >> 7 ? 2 : 1) {}
                     return b;
-                })(str);
+                })(str, 0, 0, 0);
             },
-            trimToEmpty : function(str) {
-                return str !== undefined && str !== null ? String(str).trim() : "";
+            trimToEmpty(str: string | null | undefined): string {
+                return str?.trim() || "";
             },
-            nullToEmpty : function(str) {
-                return str === null || str === undefined ? "" : str;
+            nullToEmpty(str: string | null | undefined): string {
+                return str ?? "";
             },
-            trimToNull : function(str) {
-                return N.string.trimToEmpty(str).length === 0 ? null : N.string.trimToEmpty(str);
+            trimToNull(str: string): string | null {
+                return this.isEmpty(str) ? null : this.trimToEmpty(str);
             },
-            trimToUndefined : function(str) {
-                return N.string.trimToEmpty(str).length === 0 ? undefined : N.string.trimToEmpty(str);
+            trimToUndefined(str: string): string | undefined {
+                return this.isEmpty(str) ? undefined : this.trimToEmpty(str);
             },
-            trimToZero : function(str) {
-                return N.string.trimToEmpty(str).length === 0 ? "0" : N.string.trimToEmpty(str);
+            trimToZero(str: string): string | number {
+                return this.isEmpty(str) ? "0" : this.trimToEmpty(str);
             },
-            trimToVal : function(str, val) {
-                return N.string.trimToEmpty(str).length === 0 ? val : N.string.trimToEmpty(str);
+            trimToVal(str: string, val: string): string {
+                return this.isEmpty(str) ? val : this.trimToEmpty(str);
             }
         },
         /**
@@ -568,53 +552,53 @@ $.fn.extend($.extend(N.prototype, {
          */
         "date" : {
             /**
-             * Calculate the difference between two dates
-             */
-            diff : function(refDateStr, targetDateStr) {
-                if (N.type(refDateStr) === "string") {
-                    refDateStr = this.strToDate(refDateStr).obj;
-                }
-                if (N.type(targetDateStr) === "string") {
-                    targetDateStr = this.strToDate(targetDateStr).obj;
-                }
-                return Math.ceil((targetDateStr - refDateStr) / 1000 / 24 / 60 / 60);
-            },
-            /**
              * Return to re-place the date string for a given format.
              */
-            strToDateStrArr : function(str, format, isString) {
-                const dateStrArr = [];
-                const fixNum = 0;
-                if(format.length === 3 && str.length === 7 || format.length === 2 && str.length === 5) {
-                    fixNum = -1;
+            strToDateStrArr : function (input: string, format: string, returnAsString: boolean = false): string[] {
+                const dateSegments: string[] = [];
+                const FORMAT_CORRECTION_OFFSET = -1;
+
+                const isShortDate = (formatLength: number, inputLength: number): boolean =>
+                    (formatLength === 3 && inputLength === 7) || (formatLength === 2 && inputLength === 5);
+
+                const adjust = isShortDate(format.length, input.length) ? FORMAT_CORRECTION_OFFSET : 0;
+
+                const addSegment = (start: number, end: number) =>
+                    dateSegments.push(input.substring(start, end + adjust));
+
+                const segmentPositions: { [key: string]: number[][] } = {
+                    "Ymd": [[0, 4], [4, 6], [6, 8]],
+                    "mdY": [[4, 8], [0, 2], [2, 4]],
+                    "dmY": [[4, 8], [2, 4], [0, 2]],
+                    "Ym": [[0, 4], [4, 6]],
+                    "mY": [[2, 6], [0, 2]]
+                };
+
+                if (!segmentPositions[format]) {
+                    throw new Error(`[N.date.strToDateStrArr] "${format}" date format is not supported. Please update the return value of N.context.attr("data").formatter.date's functions`);
                 }
-                if(N.string.startsWith(format, "Ymd")) {
-                    dateStrArr.push(str.substring(0, 4 + fixNum)); //year
-                    dateStrArr.push(str.substring(4 + fixNum, 6 + fixNum)); //month
-                    dateStrArr.push(str.substring(6 + fixNum, 8 + fixNum)); //day
-                } else if(N.string.startsWith(format, "mdY")) {
-                    dateStrArr.push(str.substring(4, 8 + fixNum)); //year
-                    dateStrArr.push(str.substring(0, 2)); //month
-                    dateStrArr.push(str.substring(2, 4)); //day
-                } else if(N.string.startsWith(format, "dmY")) {
-                    dateStrArr.push(str.substring(4, 8 + fixNum)); //year
-                    dateStrArr.push(str.substring(2, 4)); //month
-                    dateStrArr.push(str.substring(0, 2)); //day
-                } else if(N.string.startsWith(format, "Ym")) {
-                    dateStrArr.push(str.substring(0, 4 + fixNum)); //year
-                    dateStrArr.push(str.substring(4 + fixNum, 6 + fixNum)); //month
-                } else if(N.string.startsWith(format, "mY")) {
-                    dateStrArr.push(str.substring(2, 6 + fixNum)); //year
-                    dateStrArr.push(str.substring(0, 2)); //month
-                } else {
-                    throw N.error("[N.date.strToDateStrArr]\"" + format + "\" date format is not support. please change return value of N.context.attr(\"data\").formatter.date's functions");
+
+                segmentPositions[format].forEach(([start, end]) => addSegment(start, end));
+
+                if (!returnAsString) {
+                    return dateSegments.map(segment => parseInt(segment).toString());
                 }
-                if(isString === undefined || isString === false) {
-                    $(dateStrArr).each(function(i) {
-                        dateStrArr[i] = parseInt(this);
-                    });
-                }
-                return dateStrArr;
+
+                return dateSegments;
+            },
+            /**
+             * Calculate the difference between two dates
+             */
+            diff : function(referenceDate: Date | string, targetDate: Date | string): number {
+                const parseDate = (date: Date | string): Date => {
+                    return typeof date === 'string' ? N.date.strToDate(date).obj : date;
+                };
+
+                const refDate = parseDate(referenceDate);
+                const tgtDate = parseDate(targetDate);
+                const millisecondsPerDay = 1000 * 24 * 60 * 60;
+
+                return Math.ceil((tgtDate.getTime() - refDate.getTime()) / millisecondsPerDay);
             },
             /**
              * Convert a date string to a date object
@@ -622,7 +606,7 @@ $.fn.extend($.extend(N.prototype, {
             strToDate : function(str, format) {
                 str = N.string.trimToEmpty(str).replace(/[^0-9]/g, "");
                 const dateInfo = null;
-                const dateStrArr;
+                let dateStrArr;
                 if (str.length > 2 && str.length <= 4) {
                     dateInfo = {
                         obj : new Date(str, 1, 1, 0, 0, 0),

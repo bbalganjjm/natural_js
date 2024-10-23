@@ -7,12 +7,14 @@
  * Copyright 2019 Goldman Kim(bbalganjjm@gmail.com)
  */
 
-type CodeInspectionResult = {
-    level: string;
-    message: string;
-    line: number;
-    code: string;
-};
+declare namespace Code {
+    type CodeInspectionResult = {
+        level: string;
+        message: string;
+        line: number;
+        code: string;
+    };
+}
 
 class CodeUtils {
     static isExclude(excludes: string[], match: RegExpExecArray | null): boolean {
@@ -28,7 +30,7 @@ class Inspection {
         if (orgCode.indexOf("<script") < 0) {
             return false;
         }
-        const reports: CodeInspectionResult[] = [];
+        const reports: Code.CodeInspectionResult[] = [];
 
         if (!N.context.attr("code") || (N.context.attr("code") && !N.context.attr("code").inspection)) {
             throw N.error("Define Natural-CODE options and message resources in N.context.attr(\"code\").inspection in the natural.config.js file.");
@@ -51,7 +53,7 @@ class Inspection {
         /**
          * Detect code that does not specify view in the context of jQuery Selector.
          */
-        "NoContextSpecifiedInSelector": function (orgCode: string, excludes: string[], reports: CodeInspectionResult[]): void {
+        "NoContextSpecifiedInSelector": function (orgCode: string, excludes: string[], reports: Code.CodeInspectionResult[]): void {
             const regex = /\/{2}.*|[N$]\((.*?)\)(.*)/gm;
             let match: RegExpExecArray | null;
             while (match = regex.exec(orgCode)) {
@@ -109,7 +111,7 @@ class Inspection {
         /**
          * Detects code using jQuery's val method instead of the val method of the Natural-UI component.
          */
-        "UseTheComponentsValMethod": function (orgCode: string, excludes: string[], reports: CodeInspectionResult[]) {
+        "UseTheComponentsValMethod": function (orgCode: string, excludes: string[], reports: Code.CodeInspectionResult[]) {
             const regex = /\/{2}.*|[N$]\((.*?)\)\.val\((.*?)\)(.*)/gm;
             let match: RegExpExecArray | null;
             while (match = regex.exec(orgCode)) {
