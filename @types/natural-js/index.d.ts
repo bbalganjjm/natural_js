@@ -4,7 +4,7 @@ type InstanceFunction = {
 type ValsFunction = {
     (this: N, index: number, selEle: N): void;
 }
-interface N extends JQuery {
+declare interface N extends JQuery {
     remove_(idx: number | string, length: number): this;
     tpBind(): this;
     instance(name: string | function, instance?: InstanceFunction): this | undefined;

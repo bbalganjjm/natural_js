@@ -174,7 +174,8 @@ export class Code {
         if (orgCode.indexOf("<script") < 0) {
             return orgCode;
         }
-
+const mask = new N.Mask();
+        mask.setGeneric()
         let cutIndex = orgCode.lastIndexOf("\n</script>");
         if (cutIndex < 0) {
             cutIndex = orgCode.lastIndexOf("\t</script>");

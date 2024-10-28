@@ -93,3 +93,37 @@ declare namespace N.browser {
     function contextPath (): string;
     function scrollbarWidth (): number;
 }
+
+declare namespace N.message {
+    function replaceMsgVars (msg: string, vars?: string[]): string;
+    function get (resource: object, msg: string, vars?: string[]): void;
+}
+
+declare namespace N.array {
+    function deduplicate (arr: [], key?: string): [];
+}
+
+declare namespace N.json {
+    function mapFromKeys (obj: object | object[]): object | object[];
+    function mergeJsonArray (arr1: object[], arr2: object[], key: string): object[];
+    function format (oData: object | object[] | string, sIndent: number): string | null;
+}
+
+declare namespace N.event {
+    function isNumberRelatedKeys (e: Event): boolean;
+    function disable (e: Event): false;
+    function windowScrollLock (ele: N<HTMLElement>): void;
+    function getMaxDuration (ele: N<HTMLElement>, css: string): number;
+    function whichAnimationEvent (ele: N<HTMLElement>): string | "nothing";
+    function whichTransitionEvent (ele: N<HTMLElement>): string | "nothing";
+}
+
+declare interface Date {
+    formatDate(input: string, time?: number): string;
+}
+
+declare interface Mask {
+    setGeneric(_v: string, _d: boolean): string;
+    setNumeric(_v: string, _p: string, _d: boolean): string;
+}
+N.mask = Mask;
