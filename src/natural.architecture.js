@@ -581,9 +581,14 @@
         });
 
         // Context Object
-        N.context = {
+        var Context = N.context = {
             attrObj : {},
             attr : Communicator.request.prototype.attr
+        };
+
+        // Config
+        var Config = N.config = function() {
+            //TODO
         };
 
     })(N);

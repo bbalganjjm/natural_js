@@ -1269,11 +1269,6 @@
             }
         });
 
-        // Config
-        var Config = N.config = function() {
-            //TODO
-        };
-
     })(N);
 
     // formatDate :
