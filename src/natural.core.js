@@ -1193,7 +1193,6 @@
                         var delta = e.originalEvent.wheelDelta || -e.originalEvent.detail;
                         if (delta > 0 && $(this).scrollTop() <= 0) return false;
                         return !(delta < 0 && $(this).scrollTop() >= this.scrollHeight - $(this).height());
-
                     });
                 },
                 /**
