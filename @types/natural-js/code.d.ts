@@ -1,4 +1,6 @@
-N.code = Code;
+declare namespace N {
+    const code = Code;
+}
 
 type CodeInspectionResult = {
     level: string;

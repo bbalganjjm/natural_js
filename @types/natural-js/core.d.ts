@@ -122,8 +122,10 @@ declare interface Date {
     formatDate(input: string, time?: number): string;
 }
 
-declare interface Mask {
+declare namespace N {
+    const mask = Mask;
+}
+declare class Mask {
     setGeneric(_v: string, _d: boolean): string;
     setNumeric(_v: string, _p: string, _d: boolean): string;
 }
-N.mask = Mask;
