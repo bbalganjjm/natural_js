@@ -577,14 +577,14 @@
 				if (args === undefined || args[0] === undefined) {
 					throw N.error("[N.formatter.generic]You must input args[0](user format rule)");
 				}
-				var mask = new N.Mask(args[0]);
+				var mask = new N.mask(args[0]);
 				return mask.setGeneric(String(str));
 			},
 			"numeric" : function(str, args) {
 				if (args === undefined || args[0] === undefined) {
 					throw N.error("[N.formatter.numeric]You must input args[0](user format rule)");
 				}
-				var mask = new N.Mask(args[0]);
+				var mask = new N.mask(args[0]);
 				return mask.setNumeric(String(str), args[1]);
 			}
 		});

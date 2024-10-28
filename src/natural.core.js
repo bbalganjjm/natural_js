@@ -1189,7 +1189,7 @@
                  * This method is locked window scroll when scrolling in the ele(arg1)
                  */
                 windowScrollLock : function(ele) {
-                    ele.on("mousewheel.ui DOMMouseScroll.ui",function(e) {
+                    ele.on("mousewheel.ui DOMMouseScroll.ui", function(e) {
                         var delta = e.originalEvent.wheelDelta || -e.originalEvent.detail;
                         if (delta > 0 && $(this).scrollTop() <= 0) return false;
                         return !(delta < 0 && $(this).scrollTop() >= this.scrollHeight - $(this).height());
@@ -1586,7 +1586,7 @@
      * @reference Mask JavaScript API(http://www.pengoworks.com/workshop/js/mask/,
      *            dswitzer@pengoworks.com)
      */
-    N.Mask = function(m) {
+    N.mask = function(m) {
         this.format = m;
         this.error = [];
         this.errorCodes = [];
