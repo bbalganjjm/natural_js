@@ -7,14 +7,8 @@
  * Copyright 2019 Goldman Kim(bbalganjjm@gmail.com)
  */
 
-declare namespace Code {
-    type CodeInspectionResult = {
-        level: string;
-        message: string;
-        line: number;
-        code: string;
-    };
-}
+
+N.version["Natural-CODE"] = "0.3.8";
 
 class CodeUtils {
     static isExclude(excludes: string[], match: RegExpExecArray | null): boolean {
@@ -194,7 +188,4 @@ export class Code {
 
     static inspection = Inspection;  // Assign the Inspection class directly
 }
-
-declare const N: any;
 N.code = Code;
-N.version["Natural-CODE"] = "0.3.8";
