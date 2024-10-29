@@ -7,7 +7,7 @@
  * Copyright 2014 Goldman Kim(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-CODE"] = "0.3.8";
+    N.version["Natural-CODE"] = "0.4.8";
 
     (function(N) {
 
