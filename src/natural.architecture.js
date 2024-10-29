@@ -302,6 +302,7 @@
 
         Communicator.request = function(obj, opts) {
             this.options = {
+                url: null,
                 referrer : window.location.href,
                 contentType : "application/json; charset=utf-8",
                 cache : false,
