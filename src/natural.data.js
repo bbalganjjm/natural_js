@@ -10,8 +10,8 @@
 		N.version["Natural-DATA"] = "1.0.0";
 
 	$.fn.extend($.extend(N.prototype, {
-		datafilter : function(callBack) {
-			return N.data.filter(this, callBack);
+		datafilter : function(condition) {
+			return N.data.filter(this, condition);
 		},
 		datasort : function(key, reverse) {
 			return N.data.sort(this, key, reverse);
