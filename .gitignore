@@ -9,4 +9,3 @@ Thumbs.db
 .idea
 *.iml
 node_modules/
-cypress/
