@@ -1,4 +1,3 @@
-"use strict";
 /*!
  * Natural-CODE v0.3.8
  *
@@ -7,82 +6,95 @@
  *
  * Copyright 2019 Goldman Kim(bbalganjjm@gmail.com)
  */
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Code = void 0;
-var CodeUtils = /** @class */ (function () {
-    function CodeUtils() {
-    }
-    CodeUtils.isExclude = function (excludes, match) {
-        return excludes.some(function (exclude) {
+
+N.version["Natural-CODE"] = "0.3.8";
+
+class CodeUtils {
+    static isExclude(excludes: string[], match: RegExpExecArray | null): boolean {
+        return excludes.some((exclude: string) => {
             return match !== null && match[0].indexOf(exclude) > -1;
         });
-    };
-    return CodeUtils;
-}());
-var Inspection = /** @class */ (function () {
-    function Inspection() {
     }
-    Inspection.test = function (orgCode, rules) {
+}
+
+type CodeInspectionResult = {
+    level: "ERROR" | "DEBUG" | "LOG" | "INFO" | "WARN";
+    message: string;
+    line: number;
+    code: string;
+};
+
+class Inspection {
+
+    static test(orgCode: string, rules: string[]): boolean {
         if (orgCode.indexOf("<script") < 0) {
             return false;
         }
-        var reports = [];
+        const reports: CodeInspectionResult[] = [];
+
         if (!N.context.attr("code") || (N.context.attr("code") && !N.context.attr("code").inspection)) {
             throw N.error("Define Natural-CODE options and message resources in N.context.attr(\"code\").inspection in the natural.config.js file.");
         }
+
         if (rules) {
-            rules.forEach(function (rule) {
-                N.code.inspection.rules[rule](orgCode, N.context.attr("code").inspection.excludes, reports);
+            rules.forEach((rule: string) => {
+                Code.inspection.rules[rule](orgCode, N.context.attr("code").inspection.excludes, reports);
             });
-        }
-        else {
-            for (var k in Code.inspection.rules) {
-                N.code.inspection.rules[k](orgCode, N.context.attr("code").inspection.excludes, reports);
+        } else {
+            for (const k in Code.inspection.rules) {
+                Code.inspection.rules[k](orgCode, N.context.attr("code").inspection.excludes, reports);
             }
         }
+
         return true;
-    };
-    Inspection.rules = {
+    }
+
+    static rules = {
         /**
          * Detect code that does not specify view in the context of jQuery Selector.
          */
-        "NoContextSpecifiedInSelector": function (orgCode, excludes, reports) {
-            var regex = /\/{2}.*|[N$]\((.*?)\)(.*)/gm;
-            var match;
+        "NoContextSpecifiedInSelector": function (orgCode: string, excludes: string[], reports: CodeInspectionResult[]): void {
+            const regex = /\/{2}.*|[N$]\((.*?)\)(.*)/gm;
+            let match: RegExpExecArray | null;
             while (match = regex.exec(orgCode)) {
-                var isExclude = CodeUtils.isExclude(excludes, match);
+                let isExclude: boolean = CodeUtils.isExclude(excludes, match);
+
                 if (match.length > 2 && match[2] && match[2].replace(/ /g, "").indexOf("view)") > -1) {
                     isExclude = true;
                 }
+
                 if (N.string.startsWith(match[0], "//")) {
                     isExclude = true;
                 }
+
                 // selector excludes
-                var selector = N.string.trimToEmpty(match[1]).replace(/ /g, "");
+                const selector = N.string.trimToEmpty(match[1]).replace(/ /g, "");
                 if ((/^["']/g).test(selector)) {
                     if (!isExclude) {
                         if ((/[()]|,view|,cont\.view|",|',|^"<|^'<|>"$|>'$|html|body/g).test(selector)) {
                             isExclude = true;
                         }
+
                         if (!(/,view|,cont.view/g).test(selector)
                             && (/"\+|'\+|\+"|\+'/g).test(selector)) {
                             isExclude = false;
                         }
                     }
+
                     // method excludes
                     if (!isExclude) {
-                        var method = match[2];
+                        const method: string = match[2];
                         if ((/^\.cont\(|^\.comm\(|^\.select\(|^\.form\(|^\.list\(|^\.grid\(|^\.pagination\(|^\.tree\(|^\.instance\(/g).test(method)) {
                             isExclude = true;
                         }
                     }
+
                     if (!isExclude) {
-                        var script = "";
+                        let script: string = "";
                         try {
                             script = orgCode.substring(orgCode.indexOf("<script"), orgCode.indexOf("</script>"));
-                        }
-                        catch (e) {
-                            N.warn(e);
+                        } catch (e) {
+                            N.warn(e)
                         }
                         if (script.indexOf(match[0]) > -1) {
                             reports.push({
@@ -99,27 +111,29 @@ var Inspection = /** @class */ (function () {
         /**
          * Detects code using jQuery's val method instead of the val method of the Natural-UI component.
          */
-        "UseTheComponentsValMethod": function (orgCode, excludes, reports) {
-            var regex = /\/{2}.*|[N$]\((.*?)\)\.val\((.*?)\)(.*)/gm;
-            var match;
+        "UseTheComponentsValMethod": function (orgCode: string, excludes: string[], reports: CodeInspectionResult[]) {
+            const regex = /\/{2}.*|[N$]\((.*?)\)\.val\((.*?)\)(.*)/gm;
+            let match: RegExpExecArray | null;
             while (match = regex.exec(orgCode)) {
-                var isExclude = CodeUtils.isExclude(excludes, match);
+                let isExclude: boolean = CodeUtils.isExclude(excludes, match);
+
                 if (!isExclude) {
-                    var args = match[2];
+                    const args: string = match[2];
                     if (N.string.isEmpty(args)) {
                         isExclude = true;
                     }
                 }
+
                 if (N.string.startsWith(match[0], "//")) {
                     isExclude = true;
                 }
+
                 if (!isExclude) {
-                    var script = "";
+                    let script: string = "";
                     try {
                         script = orgCode.substring(orgCode.indexOf("<script"), orgCode.indexOf("</script>"));
-                    }
-                    catch (e) {
-                        N.warn(e);
+                    } catch (e) {
+                        N.warn(e)
                     }
                     if (script.indexOf(match[0]) > -1) {
                         reports.push({
@@ -133,51 +147,63 @@ var Inspection = /** @class */ (function () {
             }
         }
     };
-    Inspection.report = {
-        console: function (reports, url) {
-            var color = "black";
-            reports.forEach(function (report) {
+
+    static report = {
+        console: (reports: [], url: string) => {
+
+            reports.forEach((report: CodeInspectionResult) => {
                 if (N.context.attr("code").inspection.abortOnError && report.level === "ERROR") {
                     throw N.error("[" + report.level + "] " + url + " - " + report.line + " : " + report.code + "\n" + report.message + "\n\n");
-                }
-                else {
+                } else {
                     if (N.browser.is("ie")) {
-                        N[report.level.toLowerCase()]("[" + report.level + "] " + url + " - " + report.line + " : " + report.code, "\n" + report.message);
-                    }
-                    else {
+                        const level: string | "warn" = report.level;
+                        if (level in N && typeof N[level] === "function") {
+                            N[level]("[" + report.level + "] " + url + " - " + report.line + " : " + report.code, "\n" + report.message);
+                        } else {
+                            console.error(`N.${level} function does not exist in N object.`);
+                        }
+                    } else {
+                        let color: string;
                         if (report.level === "ERROR") {
                             color = "red";
-                        }
-                        else if (report.level === "WARN") {
+                        } else if (report.level === "WARN") {
                             color = "blue";
+                        } else {
+                            color = "black";
                         }
-                        N[report.level.replace("ERROR", "WARN").toLowerCase()]("%c[" + report.level + "] " + url + " - " + report.line + " : " + report.code, "color: " + color + "; font-weight: bold; line-height: 200%;", "\n" + report.message);
+
+                        const level: string = report.level.replace("ERROR", "WARN").toLowerCase();
+                        if (level in N && typeof N[level] === "function") {
+                            N[level]("%c[" + report.level + "] " + url + " - " + report.line + " : " + report.code, "color: " + color + "; font-weight: bold; line-height: 200%;",
+                                "\n" + report.message);
+                        } else {
+                            console.error(`N.${level} function does not exist in N object.`);
+                        }
                     }
                 }
             });
+
         }
     };
-    return Inspection;
-}());
-var Code = /** @class */ (function () {
-    function Code() {
-    }
-    Code.addSourceURL = function (orgCode, sourceURL) {
+}
+
+class Code {
+    static addSourceURL(orgCode: string, sourceURL: string): string {
         if (orgCode.indexOf("<script") < 0) {
             return orgCode;
         }
-        var cutIndex = orgCode.lastIndexOf("\n</script>");
+
+        let cutIndex = orgCode.lastIndexOf("\n</script>");
         if (cutIndex < 0) {
             cutIndex = orgCode.lastIndexOf("\t</script>");
         }
         if (cutIndex < 0) {
             cutIndex = orgCode.lastIndexOf(" </script>");
         }
+
         return [orgCode.slice(0, cutIndex), '\n//# sourceURL=' + sourceURL + "\n", orgCode.slice(cutIndex)].join("");
-    };
-    Code.inspection = Inspection; // Assign the Inspection class directly
-    return Code;
-}());
-exports.Code = Code;
+    }
+
+    static inspection = Inspection;  // Assign the Inspection class directly
+}
 N.code = Code;
-N.version["Natural-CODE"] = "0.3.8";
