@@ -1,7 +1,7 @@
-type InstanceFunction = {
+declare type InstanceFunction = {
     (this: object, name: string, instance: object): void;
 }
-type ValsFunction = {
+declare type ValsFunction = {
     (this: N, index: number, selEle: N): void;
 }
 declare interface N extends JQuery {
@@ -11,4 +11,4 @@ declare interface N extends JQuery {
     vals(vals?: ValsFunction): string | string[] | this;
     events(eventName?: string, namespace: string): undefined | object | JQuery.EventHandler
 }
-declare function N(selector: JQuery.Selector, context?: Element): N;
+declare function N(selector: any, context?: any): N;

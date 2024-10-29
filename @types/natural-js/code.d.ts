@@ -2,8 +2,15 @@ declare namespace N {
     const code = Code;
 }
 
+declare enum SeverityLevels {
+    BLOCKER = ["Blocker", "darkred", N.error],
+    CRITICAL = ["Critical", "red", N.error],
+    MAJOR = ["Major", "orange", N.warn],
+    MINOR = ["Minor", "black", N.log]
+}
+
 type CodeInspectionResult = {
-    level: string;
+    level: SeverityLevels;
     message: string;
     line: number;
     code: string;
