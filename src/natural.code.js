@@ -14,7 +14,7 @@
         var SeverityLevels = {
             BLOCKER: ["Blocker", "darkred", N.error],
             CRITICAL: ["Critical", "red", N.error],
-            MAJOR: ["Major", "lightblue", N.warn],
+            MAJOR: ["Major", "orange", N.warn],
             MINOR: ["Minor", "black", N.log]
         }
 
