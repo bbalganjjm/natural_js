@@ -12,3 +12,18 @@ declare interface N extends JQuery {
     events(eventName?: string, namespace: string): undefined | object | JQuery.EventHandler
 }
 declare function N(selector: any, context?: any): N;
+
+declare namespace N {
+    const version: Version;
+
+    type Version = {
+        "Natural-CORE": string,
+        "Natural-ARCHITECTURE": string,
+        "Natural-DATA": string,
+        "Natural-UI": string,
+        "Natural-UI.Shell": string,
+        "Natural-TEMPLATE": string,
+        "Natural-CODE": string
+    };
+}
+

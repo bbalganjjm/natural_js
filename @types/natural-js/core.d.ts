@@ -12,16 +12,6 @@ declare namespace N {
     type DataObj = {
         id: string
     }
-    type Version = {
-        "Natural-CORE": string,
-        "Natural-ARCHITECTURE": string,
-        "Natural-DATA": string,
-        "Natural-UI": string,
-        "Natural-UI.Shell": string,
-        "Natural-TEMPLATE": string,
-        "Natural-CODE": string
-    };
-    const version: N.Version;
 
     function locale(str: string): string | undefined;
     function error(msg?: string, e?: Error): Error;

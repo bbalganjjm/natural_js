@@ -4,7 +4,6 @@ declare namespace N {
 }
 
 declare interface N {
-    constructor(selector: JQuery.Selector, context?: Element): N;
     comm (url: RequestOptions | string): Communicator;
     cont (callback: object): N;
 }
