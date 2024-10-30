@@ -4,42 +4,46 @@
         <span lang="en_US">Examples</span>
     </h1>
 
-    <h3 lang="ko_KR" class="notIndex">1. N.form이나 N.grid로 데이터를 바인딩하기 전에 컬럼 값이 바이딩 될 요소의 data-format 속성에 포맷 룰을 선언 하기.</h3>
-    <h3 lang="en_US" class="notIndex">1. Let's declare a format rule in the data-format attribute of the element to which the column value will be bound before binding data with N.form or N.grid.</h3>
+    <h3 lang="ko_KR" class="notIndex">1. N.form이나 N.grid로 데이터를 바인딩하기 전에, 컬럼 값이 바인딩될 요소의 data-format 속성에 포맷 규칙을 선언하기.</h3>
+    <h3 lang="en_US" class="notIndex">1. Before binding data with N.form or N.grid, declare format rules in the data-format attribute of the element where the column value will be bound.</h3>
     <pre><code>&lt;input id="startDate" type="text" data-format='[["date", 8]]'&gt;</code></pre>
-    <p lang="ko_KR">위와 같이 입력 요소에 포맷 룰을 선언하면 입력 요소에 focus-in 되면 포맷이 해제되고 focus-out 되면 다시 포맷팅 됩니다.</p>
-    <p lang="en_US">When the format rule is declared on the input element as above, unformatted when focus-in to the input element and reformatted when focus-out from  the input element.</p>
+    <p lang="ko_KR">위와 같이 HTML 요소에 선언하면, 포커스가 해당 요소에서 벗어날 때 포맷팅이 적용되고, 다시 요소에 포커스되면 포맷팅이 해제됩니다.</p>
+    <p lang="en_US">When declared on an HTML element as described above, formatting is applied when the focus leaves the element and is removed when the element is focused again.</p>
     <pre><code>&lt;span id="startDate" data-format='[["date", 8]]'&gt;&lt;/span&gt;</code></pre>
-    <p lang="ko_KR">위와 같이 입력 요소가 아닌 요소에 포맷 룰을 선언하면 포맷된 값이 요소의 text로 입력됩니다.</p>
-    <p lang="en_US">If a format rule is declared on an element that is not an input element as above, the formatted value is put as the text of the element.</p>
-    <p lang="ko_KR" class="alert">N.grid 나 N.form의 data 메서드를 호출하여 컴포넌트의 데이터를 가져와 보면 포맷팅 되지 않은 값으로 세팅되어 있을 것입니다. 요소에 보이는 값들만 포맷팅 하기 때문에 서버에 데이터를 전송할 때 unforamt하지 않아도 됩니다.</p>
-    <p lang="en_US" class="alert">If you call the data method of N.grid or N.form to get the component data, it will be set to the unformatted value. It only formats the values shown in the element, so there is no need to unformat when sending data to the server.</p>
+    <p lang="ko_KR">위와 같이 입력 요소가 아닌 요소에 포맷 규칙을 선언하면, 포맷된 값이 요소의 텍스트로 입력됩니다.</p>
+    <p lang="en_US">When format rules are declared on a non-input element as described above, the formatted value is set as the element's text.</p>
+    <p lang="ko_KR" class="alert">Formatter는 N.grid나 N.form등의 UI 컴포넌트에 입력된 원 데이터를 포맷팅하여 요소에 바인딩하지 않습니다. 원 데이터는 그대로 유지한 채 화면에 보이는 값들만 포맷팅하기 때문에 서버에 데이터를 전송할 때 다시 unformat하지 않아도 됩니다.</p>
+    <p lang="en_US" class="alert">The Formatter does not bind formatted values to elements in UI components like N.grid or N.form; it only formats the displayed values while keeping the original input data unchanged. Therefore, there is no need to unformat the data when sending it to the server.</p>
 
-    <h3 lang="ko_KR" class="notIndex">2. N.formatter 라이브러리로 포맷팅 하기.</h3>
-    <h3 lang="en_US" class="notIndex">2. Let's format it with the N.formatter library.</h3>
-    <p lang="ko_KR">요소에 포맷 룰을 선언할 때 data-format='[["date", 8]]' 속성 값에서 "date"가 포맷 룰이고 8 이후부터는 포맷 파라미터이고  포맷팅 할 문자열은 입력 요소의 value 값이나 그 외 요소의 text입니다.</p>
-    <p lang="en_US">When declaring a format rule on an element, in data-format='[["date", 8]]' attribute value, "date" is the formatting rule, and after 8 is the format parameters, and the string to be formatted is the value of the input element or the text of other element.</p>
-    <p lang="ko_KR">이 선언을 명령으로 처리할 때는 다음과 같이 사용할 수 있습니다.</p>
-    <p lang="en_US">When processing this declaration as a imperative, you can use it as follows:</p>
-    <pre><code>// N.formatter.rule("string to format", [arg[0], arg[1], arg[n]]);
-N.formatter.date("20201011", [8]); // 2020-10-11
-</code></pre>
+    <h3 lang="ko_KR" class="notIndex">2. N.formatter 라이브러리를 사용하여 포맷팅하기.</h3>
+    <h3 lang="en_US" class="notIndex">2. Formatting using the N.formatter library.</h3>
+    <p lang="ko_KR">입력 요소에 data-format='[["limit", 12, "..."]]' 와 같이 포멧 규칙을 선언하면 프레임워크 내부에서는 "limit" 다음의 12 와 "..." 을 [12, "..."]와 같이 Array 형태로 변환하여 N.formatter.limit 함수의 인수로 실행합니다.</p>
+    <p lang="en_US">When declaring a format rule on an element, in data-format='[["limit", 12, "..."]]' attribute value, "date" is the formatting rule, and after 8 is the format parameters, and the string to be formatted is the value of the input element or the text of other element.</p>
+    <p lang="ko_KR">포맷 규칙 함수를 명령으로 처리하는 방법은 다음과 같습니다.</p>
+    <p lang="en_US">The method for handling format rule functions as commands is as follows.</p>
+
+    <pre><code>// N.formatter.{rule}("String to format", ...arguments);
+
+N.formatter.limit("abcdefghijklmn", [12, "..."]); // 'abcdefghijkl...'</code></pre>
 
     <h3 lang="ko_KR" class="notIndex">3. 요소에 바인딩된 Formatter 관련 이벤트를 직접 실행하기.</h3>
-    <h3 lang="en_US" class="notIndex">3. Let's excute Formatter related events directly bound to elements.</h3>
-    <p lang="ko_KR">Formatter는 룰 대신 입력 요소를 지정하면 입력 요소에 "format" 이벤트와 "unformat" 이벤트를 생성합니다. 이 이벤트들은 jQuery trigger 메서드로 직접 실행할 수 있습니다.</p>
-    <p lang="en_US">Formatter creates "format" and "unformat" events to input elements when an input element is specified instead of a rule. These events can be executed directly with the jQuery trigger method.</p>
-    <pre><code>N("input[name='formatEl']").trigger("unformat");
-N("input[name='formatEl']").trigger("format");</code></pre>
+    <h3 lang="en_US" class="notIndex">3. Directly triggering formatter-related events bound to an element.</h3>
+    <p lang="ko_KR">Formatter는 룰 대신 입력 요소를 지정하면, 입력 요소에 "format" 이벤트와 "unformat" 이벤트를 생성합니다. 이 이벤트들은 jQuery의 trigger 메서드를 통해 직접 실행할 수 있습니다.</p>
+    <p lang="en_US">When you specify an input element instead of a rule for the Formatter, it generates "format" and "unformat" events on the input element. These events can be directly triggered using jQuery's trigger method.</p>
+    <pre><code>N("input[name='targetEle']").trigger("unformat");
 
-    <h3 lang="ko_KR" class="notIndex">4. 동적으로 포맷 룰을 변경하고 바로 반영 하기</h3>
-    <h3 lang="en_US" class="notIndex">4. Let's change the formatting rules dynamically and apply them immediately.</h3>
-    <p lang="ko_KR" class="alert">아래 코드가 작동하려면 컴포넌트로 데이터를 바인딩하기 전에 대상 요소에 data-format 속성으로 포맷 룰이 1개 이상 선언되어 있어야 합니다.</p>
-    <p lang="en_US" class="alert">For the code below to work, at least one format rule must be declared as a data-format attribute in the target element before binding data to the component.</p>
+N("input[name='targetEle']").trigger("format");</code></pre>
+
+    <h3 lang="ko_KR" class="notIndex">4. 동적으로 포맷 규칙을 변경하고 즉시 반영하기.</h3>
+    <h3 lang="en_US" class="notIndex">4. Dynamically change and immediately apply format rules.</h3>
+
     <pre><code>N("selector").data("format", [[&quot;trimtoempty&quot;]]).trigger("format");</code></pre>
 
-    <p lang="ko_KR" class="alert">전체 포맷 룰에 대한 설명은 [포맷 룰 목록] 탭을 참고하세요.</p>
-    <p lang="en_US" class="alert">For a description of the entire formatting rule, see the [Format rule list] tab.</p>
+    <p lang="ko_KR" class="alert">위 코드가 작동하기 위해서는 컴포넌트로 데이터를 바인딩하기 전에 대상 요소에 data-format 속성으로 포멧 규칙이 1개 이상 선언되어 있어야 합니다.</p>
+    <p lang="en_US" class="alert">For the code to function properly, at least one format rule must be declared in the data-format attribute of the target element before binding data to the component.</p>
+
+    <p lang="ko_KR" class="alert">전체 포맷 규칙에 대한 설명은 [포맷 룰 목록] 탭을 참고하세요.</p>
+    <p lang="en_US" class="alert">Refer to the [Format rule list] tab for a full description of the format rules.</p>
 </article>
 
 <script type="text/javascript">
