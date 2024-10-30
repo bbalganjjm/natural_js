@@ -1,5 +1,5 @@
 /*!
- * Natural-TEMPLATE v0.4.11
+ * Natural-TEMPLATE v0.4.12
  *
  * Released under the LGPL v2.1 license
  * Date: 2019-02-28T18:00Z
@@ -7,11 +7,11 @@
  * Copyright 2014 Goldman Kim(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-TEMPLATE"] = "0.4.11";
+    N.version["Natural-TEMPLATE"] = "0.4.12";
 
     (function(N) {
 
-        var TEMPLATE = N.template = {
+        var Template = N.template = {
             aop : {
                 codes : function(cont, joinPoint) {
                     var options = {
@@ -144,10 +144,10 @@
                         });
 
                         $.when.apply($, xhrs).done(function() {
-                            TEMPLATE.aop.template(cont, joinPoint);
+                            Template.aop.template(cont, joinPoint);
                         });
                     } else {
-                        TEMPLATE.aop.template(cont, joinPoint);
+                        Template.aop.template(cont, joinPoint);
                     }
                 },
                 template : function(cont, joinPoint) {
@@ -170,7 +170,7 @@
                     var compActionDefer = [];
                     for(var prop in cont) {
                         if(N.type(prop) === "string" && N.string.startsWith(prop, "p.")) {
-                            TEMPLATE.aop.components(cont, prop, compActionDefer);
+                            Template.aop.components(cont, prop, compActionDefer);
                         }
                     }
 
@@ -180,7 +180,7 @@
 
                     for(var prop in cont) {
                         if(N.type(prop) === "string" && N.string.startsWith(prop, "e.")) {
-                            TEMPLATE.aop.events(cont, prop);
+                            Template.aop.events(cont, prop);
                         }
                     }
 
