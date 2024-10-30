@@ -4,6 +4,7 @@ declare type InstanceFunction = {
 declare type ValsFunction = {
     (this: N, index: number, selEle: N): void;
 }
+declare type NHTMLElement = N<HTMLElement[]>
 declare interface N extends JQuery {
     remove_(idx: number | string, length: number): this;
     tpBind(): this;

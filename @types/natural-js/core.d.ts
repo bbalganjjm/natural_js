@@ -1,3 +1,21 @@
+declare type InstanceCallbackFunction = {
+    (this: T, instanceName: string, instance: T): void;
+}
+declare type ValsCallbackFunction = {
+    (this: NHTMLElement, index: number, selEle: NHTMLElement): void;
+}
+declare type EventObject = object[]
+declare type EventsObject = {
+    [Key: string]: EventObject;
+}
+declare interface N {
+    remove_ (idx: string | number | T, length: number): this;
+    tpBind (): this;
+    instance (name: string | InstanceCallbackFunction, instance?: T): undefined | T[] | T | this;
+    vals (vals?: string | string[] | ValsCallbackFunction): string | string[] | NHTMLElement | this;
+    events (eventName: string, namespace?: string): EventsObject | EventObject;
+}
+
 declare namespace N {
     type NDate = {
         obj: Date,
@@ -102,10 +120,10 @@ declare namespace N.json {
 declare namespace N.event {
     function isNumberRelatedKeys (e: Event): boolean;
     function disable (e: Event): false;
-    function windowScrollLock (ele: N<HTMLElement>): void;
-    function getMaxDuration (ele: N<HTMLElement>, css: string): number;
-    function whichAnimationEvent (ele: N<HTMLElement>): string | "nothing";
-    function whichTransitionEvent (ele: N<HTMLElement>): string | "nothing";
+    function windowScrollLock (ele: NHTMLElement): void;
+    function getMaxDuration (ele: NHTMLElement, css: string): number;
+    function whichAnimationEvent (ele: NHTMLElement): string | "nothing";
+    function whichTransitionEvent (ele: NHTMLElement): string | "nothing";
 }
 
 declare interface Date {

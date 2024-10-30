@@ -26,7 +26,7 @@ declare type RequestOptions = {
     crossDomain? : boolean,
     // browserHistory : true, // TODO
     append? : boolean,
-    target? : N<HTMLElement>
+    target? : NHTMLElement
 }
 
 declare interface Communicator {
@@ -38,7 +38,7 @@ declare interface request {
     attr (name: string, obj_?: any): Communicator;
     removeAttr (name: string): Communicator;
     param (name?: string): object | string;
-    get (key?: string): RequestOptions | string | boolean | object | object[] | N<object> | N<HTMLElement>;
+    get (key?: string): RequestOptions | string | boolean | object | object[] | N<object> | NHTMLElement;
     reload (callback?: SubmitCallbackFunction): Communicator;
 }
 
