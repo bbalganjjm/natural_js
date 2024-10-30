@@ -100,7 +100,7 @@
             </td>
         </tr>
         <tr>
-            <td>["decimal(length)"]</td>
+            <td>["decimal", length]</td>
             <td>
                 <p lang="ko_KR">(유한)소수 점 length 번째 자리까지 입력 가능</p>
                 <p lang="en_US">You can enter up to the "length" digit of the decimal(Limited) point</p>
@@ -191,24 +191,17 @@
             </td>
         </tr>
         <tr>
-            <td>["match", "word"]</td>
-            <td>
-                <p lang="ko_KR">"word" 값이 포함된 값만 입력 가능</p>
-                <p lang="en_US">Only values that contain the "word" value</p>
-            </td>
-        </tr>
-        <tr>
-            <td>["acceptFileExt", "ext"]</td>
-            <td>
-                <p lang="ko_KR">"ext" 값이 포함된 확장자만 입력 가능</p>
-                <p lang="en_US">Only extensions with "ext" value</p>
-            </td>
-        </tr>
-        <tr>
             <td>["notAccept", "word""]</td>
             <td>
                 <p lang="ko_KR">"word" 값만 입력 불가능</p>
                 <p lang="en_US">Only not "word" value</p>
+            </td>
+        </tr>
+        <tr>
+            <td>["match", "word"]</td>
+            <td>
+                <p lang="ko_KR">"word" 값이 포함된 값만 입력 가능</p>
+                <p lang="en_US">Only values that contain the "word" value</p>
             </td>
         </tr>
         <tr>
@@ -219,10 +212,17 @@
             </td>
         </tr>
         <tr>
-            <td>["notAcceptFileExt", "ext"]</td>
+            <td>["acceptFileExt", "fileExtention"]</td>
             <td>
-                <p lang="ko_KR">"ext"가 포함된 확장자는 입력 불가능</p>
-                <p lang="en_US">Only extensions without "ext" value</p>
+                <p lang="ko_KR">"fileExtention" 값이 포함된 확장자만 입력 가능</p>
+                <p lang="en_US">Only extensions with "fileExtention" value</p>
+            </td>
+        </tr>
+        <tr>
+            <td>["notAcceptFileExt", "fileExtention"]</td>
+            <td>
+                <p lang="ko_KR">"fileExtention"가 포함된 확장자는 입력 불가능</p>
+                <p lang="en_US">Only extensions without "fileExtention" value</p>
             </td>
         </tr>
         <tr>
@@ -233,72 +233,72 @@
             </td>
         </tr>
         <tr>
-            <td>["maxlength", "length"]</td>
+            <td>["maxlength", length]</td>
             <td>
-                <p lang="ko_KR">"length" 이하의 글자 수만 입력 가능</p>
+                <p lang="ko_KR">length 이하의 글자 수만 입력 가능</p>
                 <p lang="en_US">Only the number of characters less than "length"</p>
             </td>
         </tr>
         <tr>
-            <td>["minlength", "length"]</td>
+            <td>["minlength", length]</td>
             <td>
-                <p lang="ko_KR">"length" 이상의 글자 수만 입력 가능</p>
+                <p lang="ko_KR">length 이상의 글자 수만 입력 가능</p>
                 <p lang="en_US">Only the number of characters longer than “length”</p>
             </td>
         </tr>
         <tr>
-            <td>["rangelength", "startLength", "endLength"]</td>
+            <td>["rangelength", startLength, endLength]</td>
             <td>
-                <p lang="ko_KR">"stratLength" 글자 수에서 "endLength" 글자 수까지만 입력 가능</p>
-                <p lang="en_US">Only between the number of characters from "stratLength" and the number of "endLength" characters</p>
+                <p lang="ko_KR">startLength 글자 수에서 endLength 글자 수까지만 입력 가능</p>
+                <p lang="en_US">Only between the number of characters from startLength and the number of endLength characters</p>
             </td>
         </tr>
         <tr>
-            <td>["maxbyte", "byteLength", charByteLength]</td>
+            <td>["maxbyte", byteLength, defaultCharByteLength]</td>
             <td>
-                <p lang="ko_KR">"byteLength" 바이트 이하만 입력 가능</p>
-                <p lang="en_US">Only "byteLength" bytes or less</p>
-                <p lang="ko_KR">charByteLength는 영문, 숫자, 기본 특수문자 등을 제외한 한글, 한글 특수 문자 등의 기본 바이트 길이입니다. 입력하지 않으면 <a href="#html/naturaljs/refr/refr0102.html">Config(natural.config.js)</a>의 N.context.attr("core").charByteLength 값이 적용됩니다.</p>
-                <p lang="en_US">charByteLength is the default byte length for Hangul, Hangul special characters, etc., excluding English, numbers, and basic special characters. If not entered, the value of N.context.attr("core").charByteLength of <a href="#html/naturaljs/refr/refr0102.html">Config(natural.config.js)</a> is applied.</p>
+                <p lang="ko_KR">byteLength 바이트 이하만 입력 가능</p>
+                <p lang="en_US">Only byteLength bytes or less</p>
+                <p lang="ko_KR">defaultCharByteLength는 영문, 숫자, 기본 특수문자 등을 제외한 한글, 한글 특수 문자 등의 기본 바이트 길이입니다. 입력하지 않으면 <a href="#html/naturaljs/refr/refr0102.html">Config(natural.config.js)</a>의 N.context.attr("core").charByteLength 값이 적용됩니다.</p>
+                <p lang="en_US">defaultCharByteLength is the default byte length for Hangul, Hangul special characters, etc., excluding English, numbers, and basic special characters. If not entered, the value of N.context.attr("core").charByteLength of <a href="#html/naturaljs/refr/refr0102.html">Config(natural.config.js)</a> is applied.</p>
             </td>
         </tr>
         <tr>
-            <td>["minbyte", "byteLength", charByteLength]</td>
+            <td>["minbyte", byteLength, defaultCharByteLength]</td>
             <td>
-                <p lang="ko_KR">"byteLength" 바이트 이상만 입력 가능</p>
-                <p lang="en_US">Only "byteLength" bytes or more</p>
-                <p lang="ko_KR">charByteLength는 영문, 숫자, 기본 특수문자 등을 제외한 한글, 한글 특수 문자 등의 기본 바이트 길이입니다. 입력하지 않으면 <a href="#html/naturaljs/refr/refr0102.html">Config(natural.config.js)</a>의 N.context.attr("core").charByteLength 값이 적용됩니다.</p>
-                <p lang="en_US">charByteLength is the default byte length for Hangul, Hangul special characters, etc., excluding English, numbers, and basic special characters. If not entered, the value of N.context.attr("core").charByteLength of <a href="#html/naturaljs/refr/refr0102.html">Config(natural.config.js)</a> is applied.</p>
+                <p lang="ko_KR">byteLength 바이트 이상만 입력 가능</p>
+                <p lang="en_US">Only byteLength bytes or more</p>
+                <p lang="ko_KR">defaultCharByteLength는 영문, 숫자, 기본 특수문자 등을 제외한 한글, 한글 특수 문자 등의 기본 바이트 길이입니다. 입력하지 않으면 <a href="#html/naturaljs/refr/refr0102.html">Config(natural.config.js)</a>의 N.context.attr("core").charByteLength 값이 적용됩니다.</p>
+                <p lang="en_US">defaultCharByteLength is the default byte length for Hangul, Hangul special characters, etc., excluding English, numbers, and basic special characters. If not entered, the value of N.context.attr("core").charByteLength of <a href="#html/naturaljs/refr/refr0102.html">Config(natural.config.js)</a> is applied.</p>
             </td>
         </tr>
         <tr>
-            <td>["rangebyte", "startByteLength", "endByteLength", charByteLength]</td>
+            <td>["rangebyte", startByteLength, endByteLength, defaultCharByteLength]</td>
             <td>
-                <p lang="ko_KR">"startByteLength" 바이트에서 "endByteLength" 바이트 까지만 입력 가능</p>
-                <p lang="en_US">Only between startByteLength "stratValue" and "endByteLength" bytes</p>
-                <p lang="ko_KR">charByteLength는 영문, 숫자, 기본 특수문자 등을 제외한 한글, 한글 특수 문자 등의 기본 바이트 길이입니다. 입력하지 않으면 <a href="#html/naturaljs/refr/refr0102.html">Config(natural.config.js)</a>의 N.context.attr("core").charByteLength 값이 적용됩니다.</p>
-                <p lang="en_US">charByteLength is the default byte length for Hangul, Hangul special characters, etc., excluding English, numbers, and basic special characters. If not entered, the value of N.context.attr("core").charByteLength of <a href="#html/naturaljs/refr/refr0102.html">Config(natural.config.js)</a> is applied.</p>
+                <p lang="ko_KR">startByteLength 바이트에서 endByteLength 바이트 까지만 입력 가능</p>
+                <p lang="en_US">Only between startByteLength "stratValue" and endByteLength bytes</p>
+                <p lang="ko_KR">defaultCharByteLength는 영문, 숫자, 기본 특수문자 등을 제외한 한글, 한글 특수 문자 등의 기본 바이트 길이입니다. 입력하지 않으면 <a href="#html/naturaljs/refr/refr0102.html">Config(natural.config.js)</a>의 N.context.attr("core").charByteLength 값이 적용됩니다.</p>
+                <p lang="en_US">defaultCharByteLength is the default byte length for Hangul, Hangul special characters, etc., excluding English, numbers, and basic special characters. If not entered, the value of N.context.attr("core").charByteLength of <a href="#html/naturaljs/refr/refr0102.html">Config(natural.config.js)</a> is applied.</p>
             </td>
         </tr>
         <tr>
-            <td>["maxvalue", "value"]</td>
+            <td>["maxvalue", number]</td>
             <td>
                 <p lang="ko_KR">"value" 이하의 값만 입력 가능</p>
                 <p lang="en_US">Only "value" values or less</p>
             </td>
         </tr>
         <tr>
-            <td>["minvalue", "value"]</td>
+            <td>["minvalue", number]</td>
             <td>
                 <p lang="ko_KR">"value" 이상의 값만 입력 가능</p>
                 <p lang="en_US">Only "value" values or more</p>
             </td>
         </tr>
         <tr>
-            <td>["rangevalue", "stratValue,endValue"]</td>
+            <td>["rangevalue", startNumber, endNumber]</td>
             <td>
-                <p lang="ko_KR">"stratValue" 값에서 "endValue" 값 까지만 입력 가능</p>
-                <p lang="en_US">Only between "stratValue" and "endValue" values</p>
+                <p lang="ko_KR">"startValue" 값에서 "endValue" 값 까지만 입력 가능</p>
+                <p lang="en_US">Only between "startValue" and "endValue" values</p>
             </td>
         </tr>
         <tr>
