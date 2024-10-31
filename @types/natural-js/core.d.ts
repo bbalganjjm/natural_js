@@ -49,6 +49,8 @@ declare namespace N {
     function log(obj?: any): Console;
     function info(obj?: any): Console;
     function warn(obj?: any): Console;
+
+    function mask(m: string): Mask;
 }
 
 declare namespace N.gc {
@@ -128,10 +130,6 @@ declare namespace N.event {
 
 declare interface Date {
     formatDate(input: string, time?: number): string;
-}
-
-declare namespace N {
-    function mask(m: string): Mask;
 }
 
 declare interface Mask {
