@@ -203,12 +203,22 @@
     // this : N.datepicker 인스턴스
     // context : context 요소
     // selDate : 선택된 날짜의 Date 객체
+    //      selDate = {
+    //          obj: Date 객체,
+    //          format: Date 포멧(Formatter > 포맷 룰 목록 탭 > "date" 룰의 "string 타입으로 데이트 포맷 룰을 지정" 참고
+    //      }
+    //      selDate.obj.formatDate("Y-m-d") => "2024-09-26";
     // monthonly : monthonly 옵션 값
 }</code></pre>
                 <pre lang="en_US"><code>onSelect : function(context, selDate, monthonly) {
     // this : N.datepicker instance
     // context : context element
     // selDate : The Date object of the selected date
+    //      selDate = {
+    //          obj: Date Object,
+    //          format: Date Format(Formatter > Format rule list tab > Refer to “Specify date format rule as string type” in the “date” rule.
+    //      }
+    //      selDate.obj.formatDate("d/m/Y") => "26/09/2024";
     // monthonly : monthonly option value
 }</code></pre>
             </td>
