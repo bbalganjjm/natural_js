@@ -9,12 +9,12 @@ declare type NJSONObject = N<JSONObject[]> | JSONObject
 declare type NJSONObjectArray = N<JSONObject[]> | JSONObject[]
 declare type NAny = T | NOrHTMLElement | JSONValue | JSONObject;
 declare type NDate = {
-    obj: Date,
-    format: string
+    obj: Date;
+    format: string;
 }
 declare type RuleObj = {
     id: {
-        ruleName: [[string, ...[]]]
+        ruleName: [[string, ...[]]];
     }
 }
 
@@ -22,12 +22,12 @@ declare namespace N {
     const version: Version;
 
     type Version = {
-        "Natural-CORE": string,
-        "Natural-ARCHITECTURE": string,
-        "Natural-DATA": string,
-        "Natural-UI": string,
-        "Natural-UI.Shell": string,
-        "Natural-TEMPLATE": string,
-        "Natural-CODE": string
+        "Natural-CORE": string;
+        "Natural-ARCHITECTURE": string;
+        "Natural-DATA": string;
+        "Natural-UI": string;
+        "Natural-UI.Shell": string;
+        "Natural-TEMPLATE": string;
+        "Natural-CODE": string;
     };
 }

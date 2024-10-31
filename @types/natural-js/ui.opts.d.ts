@@ -93,8 +93,40 @@ declare type ButtonOnCreate = {
 }
 
 declare type DatepickerOpts = {
-
+    context?: NHTMLElement | JQuery.Selector | null;
+    monthonly?: boolean;
+    focusin?: boolean;
+    yearsPanelPosition?: "left" | "top";
+    monthsPanelPosition?: "left" | "top";
+    minYear?: number;
+    maxYear?: number;
+    yearChangeInput?: boolean;
+    monthChangeInput?: boolean;
+    touchMonthChange?: boolean;
+    scrollMonthChange?: boolean;
+    minDate?: string;
+    maxDate?: string;
+    holiday?: {
+        "repeat"?: {
+            [key: string]: string | string[]
+        } | null;
+        "once"?: {
+            [key: string]: string | string[]
+        } | null;
+    };
+    onChangeYear?: DatepickerOnSelect | null;
+    onChangeMonth?: null;
+    onSelect?: null;
+    onBeforeShow?: null;
+    onShow?: null;
+    onBeforeHide?: null;
+    onHide?: null;
 }
+
+declare type DatepickerOnSelect = {
+    (this: Datepicker, context: NHTMLElement, selDate: NDate, monthonly: boolean): void;
+}
+
 
 declare type PopupOpts = {
 
