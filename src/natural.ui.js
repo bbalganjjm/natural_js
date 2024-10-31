@@ -20,6 +20,15 @@
                 });
             }
         },
+        datepicker : function(opts) {
+            return new N.datepicker(this, opts);
+        },
+        popup : function(opts) {
+            return new N.popup(this, opts);
+        },
+        tab : function(opts) {
+            return new N.tab(this, opts);
+        },
         select : function(opts) {
             return new N.select(this, opts);
         },
@@ -32,20 +41,11 @@
         grid : function(opts) {
             return new N.grid(this, opts);
         },
-        popup : function(opts) {
-            return new N.popup(this, opts);
-        },
-        tab : function(opts) {
-            return new N.tab(this, opts);
-        },
-        datepicker : function(opts) {
-            return new N.datepicker(this, opts);
+        pagination : function(opts) {
+            return new N.pagination(this, opts);
         },
         tree : function(opts) {
             return new N.tree(this, opts);
-        },
-        pagination : function(opts) {
-            return new N.pagination(this, opts);
         }
     }));
 
@@ -2544,6 +2544,8 @@
             changeEvent : function(name, callback) {
                 this.options[name] = callback;
                 this.alert.options[name] = this.options[name];
+
+                return this;
             },
             remove : function() {
                 this.alert.remove();
@@ -3427,9 +3429,9 @@
                 /**
                  * validate
                  */
-                validate : function(ele, opts, type, isTextInput) {
+                validate : function(ele, opts, eleType, isTextInput) {
                     if(ele.data("validate") !== undefined) {
-                        if (type !== "hidden") {
+                        if (eleType !== "hidden") {
                             N().validator(opts.vRules !== null ? opts.vRules : ele);
 
                             if(isTextInput && N.isEmptyObject(ele.events("focusout", "form.validate"))) {
@@ -3527,9 +3529,9 @@
                 /**
                  * format
                  */
-                format : function(ele, opts, type, vals, key) {
+                format : function(ele, opts, eleType, vals, key) {
                     if(ele.data("format") !== undefined) {
-                        if (type !== "password" && type !== "hidden" && type !== "file") {
+                        if (eleType !== "password" && eleType !== "hidden" && eleType !== "file") {
                             N(opts.data).formatter(opts.fRules !== null ? opts.fRules : ele).format(opts.row);
 
                             var eventNames = ["focusin", "focusout"];
