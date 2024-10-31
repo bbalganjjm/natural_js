@@ -19,8 +19,8 @@
         request : function() {
             return this.get(0).request;
         },
-        cont : function(callback) {
-            return new N.cont(this, callback);
+        cont : function(contObj) {
+            return new N.cont(this, contObj);
         }
     }));
 
@@ -435,7 +435,7 @@
             }
         });
 
-        var Controller = N.cont = function(obj, callback) {
+        var Controller = N.cont = function(obj, contObj) {
             if(obj.attr("id") !== undefined && N("[id='" + obj.attr("id") + "']").length > 1) {
                 obj = N("#" + obj.attr("id") + ":not([data-pageid])");
             } else {
@@ -448,10 +448,10 @@
             obj.attr("data-pageid", obj.attr("id") ? obj.attr("id") : obj.selector.replace(/\.|\#|\[|\]|\'|\:|\(|\)|\>| |\-/gi, ""));
             obj.addClass("view_context__");
 
-            obj.instance("cont", callback);
+            obj.instance("cont", contObj);
 
-            callback.view = obj;
-            return callback;
+            contObj.view = obj;
+            return contObj;
         };
 
         $.extend(Controller, {

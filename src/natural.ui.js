@@ -4576,7 +4576,7 @@
             },
             /**
              * callType arguments is call type about scrollPaging(internal) or data filter(internal) or data append(external)
-             * callType : "append", "list.bind"
+             * callType : "append" | "list.bind" | "list.update"
              */
             bind : function(data, callType) {
                 var opts = this.options;
@@ -6479,7 +6479,7 @@
             },
             /**
              * callType arguments is call type about scrollPaging(internal), data filter(internal), data append(external), DataSync's update.
-             * callType : "append", "grid.bind", "grid.dataFilter", "grid.sort", "grid.update"
+             * callType : "append" | "grid.bind" | "grid.dataFilter" | "grid.sort" | "grid.update"
              */
             bind : function(data, callType) {
                 var opts = this.options;
@@ -7487,11 +7487,11 @@
 
                 return this;
             },
-            val : function(row, key, val) {
-                // TODO
-                // notify
-                return this;
-            },
+            // val : function(row, key, val) {
+            //     // TODO
+            //     // notify
+            //     return this;
+            // },
             select : function(val) {
                 var opts = this.options;
                 if(val !== undefined) {
@@ -7504,10 +7504,10 @@
                     }
                 }
             },
-            check : function(vals) {
-                // TODO
-                return this;
-            },
+            // check : function(vals) {
+            //     // TODO
+            //     return this;
+            // },
             expand : function() {
                 this.options.context.find("li.tree_close__:not(.tree_last_node__)").removeClass("tree_close__").addClass("tree_open__");
                 return this;
@@ -7519,10 +7519,10 @@
                 }
                 return this;
             },
-            update : function(row, key) {
-                // TODO
-                return this;
-            }
+            // update : function(row, key) {
+            //     // TODO
+            //     return this;
+            // }
         });
 
     })(N);
