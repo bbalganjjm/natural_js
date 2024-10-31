@@ -1,47 +1,34 @@
 declare namespace N {
-    function comm(url: RequestOptions | string): Communicator;
-
+    function comm(url: RequestOpts | string): Communicator;
     function cont(callback: object): N;
 }
 
 declare interface N {
-    comm(url: RequestOptions | string): Communicator;
-
-    cont(callback: object): N;
+    comm(url: RequestOpts | string): Communicator;
+    cont(callback: object): ControllerObject;
+}
+declare type ControllerObject = {
+    [key: string]: NAny
 }
 
 declare type SubmitCallbackFunction = {
     (this: Communicator | NOrHTMLElement, data: object | object[] | Controller, request?: Communicator.request): void;
 }
-
-declare type RequestOptions = {
-    url: string,
-    referrer?: string,
-    contentType?: string,
-    cache?: boolean,
-    async?: boolean,
-    type?: "POST" | "GET" | "PUT" | "DELETE" | "HEAD" | "OPTIONS" | "TRACE" | "CONNECT" | "PATCH",
-    data?: object | object[] | N<object>,
-    dataIsArray?: boolean,
-    dataType?: "json" | "xml" | "script" | "html",
-    urlSync?: boolean,
-    crossDomain?: boolean,
-    // browserHistory : true, // TODO
-    append?: boolean,
-    target?: NHTMLElement
+declare type ErrorCallbackFunction = {
+    (this: Communicator, xhr: JQueryXHR, textStatus: "success" | "error", e: Error, request?: Communicator.request, submitCallback: SubmitCallbackFunction): void;
 }
 
 declare interface Communicator {
-    submit(callback?: SubmitCallbackFunction): this | JQuery.jqXHR
-
     request: request;
+    submit(callback?: SubmitCallbackFunction): this | JQuery.jqXHR
+    error(callback?: ErrorCallbackFunction): this
 }
 
 declare interface request {
-    attr(name: string, obj_?: any): Communicator;
+    attr(name: string, obj_?: NAny): Communicator;
     removeAttr(name: string): Communicator;
     param(name?: string): object | string;
-    get(key?: string): RequestOptions | string | boolean | object | object[] | N<object> | NHTMLElement;
+    get(key?: string): RequestOpts | string | boolean | object | object[] | N<object> | NHTMLElement;
     reload(callback?: SubmitCallbackFunction): Communicator;
 }
 
@@ -52,5 +39,5 @@ declare interface request {
 declare namespace N.context {
     type attrObj = {};
 
-    function attr(name: string, obj_?: any): any;
+    function attr(name: string, obj_?: NAny): NAny;
 }

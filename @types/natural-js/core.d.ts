@@ -1,3 +1,5 @@
+declare function N(selector: NAny, context?: JQuery.Selector | N.NOrHTMLElement): N;
+
 declare type InstanceCallbackFunction = {
     (this: T, instanceName: string, instance: T): void;
 }
@@ -6,10 +8,9 @@ declare type ValsCallbackFunction = {
 }
 declare type EventObject = object[]
 declare type EventsObject = {
-    [Key: string]: EventObject;
+    [key: string]: EventObject;
 }
-
-declare interface N {
+declare interface N extends JQuery {
     remove_(idx: string | number | T, length: number): this;
     tpBind(): this;
     instance(name: string | InstanceCallbackFunction, instance?: T): undefined | T[] | T | this;
@@ -18,20 +19,6 @@ declare interface N {
 }
 
 declare namespace N {
-    type NDate = {
-        obj: Date,
-        format: string
-    }
-    type NOrHTMLElement = N | HTMLElement;
-    type RuleObj = {
-        id: {
-            ruleName: [[string, ...[]]]
-        }
-    }
-    type DataObj = {
-        id: string
-    }
-
     function locale(str: string): string | undefined;
     function error(msg?: string, e?: Error): Error;
     function type(obj?: any): string;
@@ -80,17 +67,17 @@ declare namespace N.string {
 declare namespace N.date {
     function diff(refDateStr: string, targetDateStr: string): number;
     function strToDateStrArr(str: string, format: string, isString?: boolean): string[] | number[];
-    function strToDate(str: string, format: string): N.NDate | null;
+    function strToDate(str: string, format: string): NDate | null;
     function format(str: string, format?: string): string;
     function dateToTs(dateObj?: Date): number;
     function tsToDate(tsNum?: number): Date;
-    function dateList(year: number, month: number): [Data[]];
+    function dateList(year: number, month: number): [JSONObject[]];
 }
 
 declare namespace N.element {
     function toOpts(ele: N.NOrHTMLElement): string;
-    function toRules(ele: N, ruleset: string): N.RuleObj;
-    function toData(eles: N): N.DataObj;
+    function toRules(ele: N, ruleset: string): RuleObj;
+    function toData(eles: N): JSONObject;
     function dataChanged(eles: N): void;
     function maxZindex(ele: N): number;
 }

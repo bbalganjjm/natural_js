@@ -1,17 +1,13 @@
-declare type Data = {
-    [Key: string]: Primitive;
-}[];
-
 declare type Rules = {
-    [Key: string]: [string, ...Primitive][];
+    [key: string]: [string, ...Primitive][];
 }[];
 
 declare type FormatObject = {
-    [Key: string]: string;
+    [key: string]: string;
 }[];
 
 declare type ValidateObject = {
-    [Key: string]: [{
+    [key: string]: [{
         rule: string,
         result: boolean;
         msg: string | null;
@@ -23,8 +19,8 @@ declare type ConditionCallbackFunction = {
 }
 
 declare namespace N {
-    function formatter(data: N<Data> | Data, rules?: NHTMLElement | HTMLElement | string | Rules): this;
-    function validator(data: N<Data> | Data, rules?: NHTMLElement | HTMLElement | string | Rules): this;
+    function formatter(data: NJSONObject, rules?: NHTMLElement | HTMLElement | string | Rules): this;
+    function validator(data: NJSONObject, rules?: NHTMLElement | HTMLElement | string | Rules): this;
     function ds(inst: T, isReg?: boolean): T;
 }
 declare namespace N.formatter {
@@ -35,8 +31,8 @@ declare namespace N.validator {
     function validate(row?: number): ValidateObject;
 }
 declare namespace N.data {
-    function filter(data: N<Data> | Data, condition: ConditionCallbackFunction | string): object[];
-    function sort(data: N<Data> | Data, key: string, reverse?: boolean): object[];
+    function filter(data: NJSONObject, condition: ConditionCallbackFunction | string): object[];
+    function sort(data: NJSONObject, key: string, reverse?: boolean): object[];
 }
 declare namespace N.ds {
     function instance(inst: T, isReg?: boolean): DataSync;
