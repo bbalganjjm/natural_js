@@ -1,11 +1,13 @@
 declare namespace N {
-    function comm (url: RequestOptions | string): Communicator;
-    function cont (callback: object): N;
+    function comm(url: RequestOptions | string): Communicator;
+
+    function cont(callback: object): N;
 }
 
 declare interface N {
-    comm (url: RequestOptions | string): Communicator;
-    cont (callback: object): N;
+    comm(url: RequestOptions | string): Communicator;
+
+    cont(callback: object): N;
 }
 
 declare type SubmitCallbackFunction = {
@@ -14,32 +16,33 @@ declare type SubmitCallbackFunction = {
 
 declare type RequestOptions = {
     url: string,
-    referrer? : string,
-    contentType? : string,
-    cache? : boolean,
-    async? : boolean,
-    type? : "POST" | "GET" | "PUT" | "DELETE" | "HEAD" | "OPTIONS" | "TRACE" | "CONNECT" | "PATCH",
-    data? : object | object[] | N<object>,
-    dataIsArray? : boolean,
-    dataType? : "json" | "xml" | "script" | "html",
-    urlSync? : boolean,
-    crossDomain? : boolean,
+    referrer?: string,
+    contentType?: string,
+    cache?: boolean,
+    async?: boolean,
+    type?: "POST" | "GET" | "PUT" | "DELETE" | "HEAD" | "OPTIONS" | "TRACE" | "CONNECT" | "PATCH",
+    data?: object | object[] | N<object>,
+    dataIsArray?: boolean,
+    dataType?: "json" | "xml" | "script" | "html",
+    urlSync?: boolean,
+    crossDomain?: boolean,
     // browserHistory : true, // TODO
-    append? : boolean,
-    target? : NHTMLElement
+    append?: boolean,
+    target?: NHTMLElement
 }
 
 declare interface Communicator {
     submit(callback?: SubmitCallbackFunction): this | JQuery.jqXHR
+
     request: request;
 }
 
 declare interface request {
-    attr (name: string, obj_?: any): Communicator;
-    removeAttr (name: string): Communicator;
-    param (name?: string): object | string;
-    get (key?: string): RequestOptions | string | boolean | object | object[] | N<object> | NHTMLElement;
-    reload (callback?: SubmitCallbackFunction): Communicator;
+    attr(name: string, obj_?: any): Communicator;
+    removeAttr(name: string): Communicator;
+    param(name?: string): object | string;
+    get(key?: string): RequestOptions | string | boolean | object | object[] | N<object> | NHTMLElement;
+    reload(callback?: SubmitCallbackFunction): Communicator;
 }
 
 // declare namespace N.config {
@@ -48,5 +51,6 @@ declare interface request {
 
 declare namespace N.context {
     type attrObj = {};
-    function attr (name: string, obj_?: any): any;
+
+    function attr(name: string, obj_?: any): any;
 }

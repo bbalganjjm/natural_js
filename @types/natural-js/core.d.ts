@@ -8,12 +8,13 @@ declare type EventObject = object[]
 declare type EventsObject = {
     [Key: string]: EventObject;
 }
+
 declare interface N {
-    remove_ (idx: string | number | T, length: number): this;
-    tpBind (): this;
-    instance (name: string | InstanceCallbackFunction, instance?: T): undefined | T[] | T | this;
-    vals (vals?: string | string[] | ValsCallbackFunction): string | string[] | NHTMLElement | this;
-    events (eventName: string, namespace?: string): EventsObject | EventObject;
+    remove_(idx: string | number | T, length: number): this;
+    tpBind(): this;
+    instance(name: string | InstanceCallbackFunction, instance?: T): undefined | T[] | T | this;
+    vals(vals?: string | string[] | ValsCallbackFunction): string | string[] | NHTMLElement | this;
+    events(eventName: string, namespace?: string): EventsObject | EventObject;
 }
 
 declare namespace N {
@@ -44,7 +45,6 @@ declare namespace N {
     function isElement(obj?: any): boolean;
     function toSelector(el?: N.NOrHTMLElement): string;
     function serialExecute(): JQuery.Deferred[];
-
     function debug(obj?: any): Console;
     function log(obj?: any): Console;
     function info(obj?: any): Console;
@@ -52,9 +52,9 @@ declare namespace N {
 }
 
 declare namespace N.gc {
-    function minimum (): true;
-    function full (): true;
-    function ds (): void;
+    function minimum(): true;
+    function full(): true;
+    function ds(): void;
 }
 
 declare namespace N.string {
@@ -66,7 +66,7 @@ declare namespace N.string {
     function lpad(str: string, length: number, padStr: string): string;
     function rpad(str: string, length: number, padStr: string): string;
     function isEmpty(str: string): boolean;
-    function byteLength(str: string,  charByteLength: number): boolean;
+    function byteLength(str: string, charByteLength: number): boolean;
     function trimToEmpty(str: string): string;
     function nullToEmpty(str: string | null | undefined): string;
     function trimToNull(str: string): string | null;
@@ -86,44 +86,44 @@ declare namespace N.date {
 }
 
 declare namespace N.element {
-    function toOpts (ele: N.NOrHTMLElement): string;
-    function toRules (ele: N, ruleset: string): N.RuleObj;
-    function toData (eles: N): N.DataObj;
-    function dataChanged (eles: N): void;
-    function maxZindex (ele: N): number;
+    function toOpts(ele: N.NOrHTMLElement): string;
+    function toRules(ele: N, ruleset: string): N.RuleObj;
+    function toData(eles: N): N.DataObj;
+    function dataChanged(eles: N): void;
+    function maxZindex(ele: N): number;
 }
 
 declare namespace N.browser {
-    function cookie (name: string, value?: string, expiredays?: number, domain?: string): string | undefined;
-    function removeCookie (name: string, domain?: string): void;
-    function msieVersion (): number;
-    function is (name: string): boolean;
-    function contextPath (): string;
-    function scrollbarWidth (): number;
+    function cookie(name: string, value?: string, expiredays?: number, domain?: string): string | undefined;
+    function removeCookie(name: string, domain?: string): void;
+    function msieVersion(): number;
+    function is(name: string): boolean;
+    function contextPath(): string;
+    function scrollbarWidth(): number;
 }
 
 declare namespace N.message {
-    function replaceMsgVars (msg: string, vars?: string[]): string;
-    function get (resource: object, msg: string, vars?: string[]): void;
+    function replaceMsgVars(msg: string, vars?: string[]): string;
+    function get(resource: object, msg: string, vars?: string[]): void;
 }
 
 declare namespace N.array {
-    function deduplicate (arr: [], key?: string): [];
+    function deduplicate(arr: [], key?: string): [];
 }
 
 declare namespace N.json {
-    function mapFromKeys (obj: object | object[]): object | object[];
-    function mergeJsonArray (arr1: object[], arr2: object[], key: string): object[];
-    function format (oData: object | object[] | string, sIndent: number): string | null;
+    function mapFromKeys(obj: object | object[]): object | object[];
+    function mergeJsonArray(arr1: object[], arr2: object[], key: string): object[];
+    function format(oData: object | object[] | string, sIndent: number): string | null;
 }
 
 declare namespace N.event {
-    function isNumberRelatedKeys (e: Event): boolean;
-    function disable (e: Event): false;
-    function windowScrollLock (ele: NHTMLElement): void;
-    function getMaxDuration (ele: NHTMLElement, css: string): number;
-    function whichAnimationEvent (ele: NHTMLElement): string | "nothing";
-    function whichTransitionEvent (ele: NHTMLElement): string | "nothing";
+    function isNumberRelatedKeys(e: Event): boolean;
+    function disable(e: Event): false;
+    function windowScrollLock(ele: NHTMLElement): void;
+    function getMaxDuration(ele: NHTMLElement, css: string): number;
+    function whichAnimationEvent(ele: NHTMLElement): string | "nothing";
+    function whichTransitionEvent(ele: NHTMLElement): string | "nothing";
 }
 
 declare interface Date {
@@ -131,9 +131,10 @@ declare interface Date {
 }
 
 declare namespace N {
-    const mask = Mask;
+    function mask(m: string): Mask;
 }
-declare class Mask {
+
+declare interface Mask {
     setGeneric(_v: string, _d: boolean): string;
     setNumeric(_v: string, _p: string, _d: boolean): string;
 }
