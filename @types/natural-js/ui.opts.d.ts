@@ -75,7 +75,21 @@ declare type AlertOnRemove = {
 }
 
 declare type ButtonOpts = {
+    context?: NHTMLElement | JQuery.Selector | null;
+    size?: "none" | "smaller" | "small" | "medium" | "large" | "big";
+    color?: "none" | "primary" | "primary_container" | "secondary" | "secondary_container" | "tertiary" | "tertiary_container";
+    type?: "none" | "filled" | "outlined" | "elevated";
+    disable?: boolean;
+    onBeforeCreate?: ButtonOnBeforeCreate | null;
+    onCreate?: ButtonOnCreate | null;
+}
 
+declare type ButtonOnBeforeCreate = {
+    (this: Button, context: NHTMLElement, opts: ButtonOpts): void;
+}
+
+declare type ButtonOnCreate = {
+    (this: Button, context: NHTMLElement, opts: ButtonOpts): void;
 }
 
 declare type DatepickerOpts = {
