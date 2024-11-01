@@ -7181,7 +7181,7 @@
                             }
                         }
                         if(opts.blockOnChangeWhenBind === false || (opts.blockOnChangeWhenBind === true && isFirst !== true)) {
-                            opts.onChange.call(self, opts.pageNo, this, selData, opts.currPageNavInfo);
+                            opts.onChange.call(self, opts.pageNo, $(this), selData, opts.currPageNavInfo);
                         }
                     }
 
