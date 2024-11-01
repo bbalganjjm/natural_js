@@ -4252,7 +4252,6 @@
                 vResizable : false,
                 windowScrollLock : true,
                 select : false,
-                selectWithCheck : false,
                 unselect : true,
                 multiselect : false,
                 checkAll : null, // selector
@@ -4913,7 +4912,6 @@
                 sortable : false,
                 windowScrollLock : true,
                 select : false,
-                selectWithCheck : false,
                 unselect : true,
                 multiselect : false,
                 checkAll : null, // selector
