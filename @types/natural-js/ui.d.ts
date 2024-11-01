@@ -66,7 +66,7 @@ declare interface Select {
     context(sel?: NHTMLElement | JQuery.Selector): NHTMLElement;
     bind(data?: NJSONObjectArray): this;
     index(idx?: number): number | this;
-    val(val?: Primitive): Primitive | this;
+    val(val?: Primitive | Primitive[]): Primitive | Primitive[] | this;
     remove(val?: Primitive): this;
     reset(selFlag?: boolean): this;
 }
@@ -86,7 +86,7 @@ declare interface Form {
     remove(): this;
     revert(): this;
     validate(): boolean;
-    val(key: string, val?: Primitive, notify: boolean): Primitive | this;
+    val(key: string, val?: Primitive | Primitive[], notify: boolean): Primitive | Primitive[] | this;
     update(row: number, key?: string): this;
 }
 
@@ -101,7 +101,7 @@ declare interface List {
     remove(row?: number): this;
     revert(row?: number): this;
     validate(row?: number): boolean;
-    val(row: number, key: string, val?: Primitive): Primitive | this;
+    val(row: number, key: string, val?: Primitive | Primitive[]): Primitive | Primitive[] | this;
     move(fromRow: number, toRow: number): this;
     copy(fromRow: number, toRow: number): this;
     update(row: number, key?: string): this;
@@ -119,7 +119,7 @@ declare interface Grid {
     remove(row?: number): this;
     revert(row?: number): this;
     validate(row?: number): boolean;
-    val(row: number, key: string, val?: Primitive): Primitive | this;
+    val(row: number, key: string, val?: Primitive | Primitive[]): Primitive | Primitive[] | this;
     move(fromRow: number, toRow: number): this;
     copy(fromRow: number, toRow: number): this;
     show(colIdxs: number): this;
@@ -127,21 +127,6 @@ declare interface Grid {
     update(row: number, key?: string): this;
 }
 
-declare type CurrPageNavInfo = {
-    pageNo: number;
-    countPerPage: number;
-    countPerPageSet: number;
-    totalCount: number;
-    pageCount: number;
-    pageSetCount: number;
-    currSelPageSet: number;
-    startPage: number;
-    endPage: number;
-    startRowIndex: number;
-    startRowNum: number;
-    endRowIndex: number;
-    endRowNum: number;
-};
 declare interface Pagination {
     data(selFlag?: false): NJSONObject | JSONObject;
     context(sel?: NHTMLElement | JQuery.Selector): NHTMLElement;
@@ -157,9 +142,9 @@ declare interface Tree {
     data(selFlag?: false | "selected" | "checked" | "checkedInLastNode"): NJSONObject | JSONObject;
     context(sel?: NHTMLElement | JQuery.Selector): NHTMLElement;
     bind(data: NJSONObjectArray): this;
-    // TODO val(row: number, key: string, val?: Primitive): Primitive | this;
+    // TODO val(row: number, key: string, val?: Primitive | Primitive[]): Primitive | Primitive[] | this;
     select(val?: Primitive): Primitive | this;
-    // TODO check(vals?: Primitive[]): Primitive[] | this;
+    // TODO check(vals?: Primitive | Primitive[]): Primitive | Primitive[] | this;
     expand(): this;
     collapse(): this;
     // TODO update(row: number, key?: string): this;

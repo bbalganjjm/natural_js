@@ -8,7 +8,11 @@ declare interface N {
     cont(callback: object): ControllerObject;
 }
 declare type ControllerObject = {
-    [key: string]: NAny
+    [key: string]: NAny;
+    view: NHTMLElement;
+    request: request;
+    caller?: ControllerObject;
+    opener?: ControllerObject;
 }
 
 declare type SubmitCallbackFunction = {
