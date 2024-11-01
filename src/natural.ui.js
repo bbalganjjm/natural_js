@@ -3330,8 +3330,8 @@
                 addTop : true,
                 fRules : null,
                 vRules : null,
-                extObj : null, // extObj : for N.grid
-                extRow : -1, // extRow : for N.grid
+                extObj : null, // extObj : for N.list or N.grid
+                extRow : -1, // extRow : for N.list or N.grid
                 revert : false,
                 cache : true,
                 unbind : true,
@@ -4258,7 +4258,6 @@
                 checkAll : null, // selector
                 checkAllTarget : null, // selector
                 checkSingleTarget : null,
-                checkWidthSelect : false,
                 hover : false,
                 revert : false,
                 createRowDelay : 1,
@@ -4920,7 +4919,6 @@
                 checkAll : null, // selector
                 checkAllTarget : null, // selector
                 checkSingleTarget : null, // selector
-                checkWidthSelect : false,
                 hover : false,
                 revert : false,
                 createRowDelay : 1,
