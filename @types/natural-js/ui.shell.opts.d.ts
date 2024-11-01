@@ -16,8 +16,8 @@ declare type DocsObject = {
     [key: string]: DocOpts;
 }
 declare type DocOpts = {
-    docId?: docId;
-    docNm?: docNm;
+    docId?: string;
+    docNm?: string;
     url?: string;
     urlSync?: boolean;
     onBeforeLoad?: DocumentsOnBeforeLoad | null;
@@ -39,7 +39,7 @@ declare type DocsOpts = {
     maxTabs?: number;
     addLast?: boolean;
     tabScroll?: boolean;
-    closeAllRedirectURL?: null;
+    closeAllRedirectURL?: string | null;
     tabScrollCorrection?: {
         rightCorrectionPx?: number;
     };
@@ -59,7 +59,7 @@ declare type DocsOpts = {
     onBeforeInactive?: DocumentsOnBeforeInactive | null;
     onInactive?: DocumentsOnInactive | null;
     onBeforeRemoveState?: DocumentsOnBeforeRemoveState | null;
-    onRemoveState?: DocumentsORemoveState | null;
+    onRemoveState?: DocumentsOnRemoveState | null;
     onBeforeRemove?: DocumentsOnBeforeRemove | null;
     onRemove?: DocumentsOnRemove | null;
     saveHistory?: boolean;
@@ -67,5 +67,5 @@ declare type DocsOpts = {
     alwaysOnTop?: boolean;
     alwaysOnTopCalcTarget?: string;
     order?: string[];
-    loadedDocId?: null;
+    loadedDocId?: string | null;
 }
