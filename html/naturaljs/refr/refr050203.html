@@ -283,16 +283,20 @@
             <td>
                 <p lang="ko_KR">페이지가 로딩될 때 실행되는 Ajax 요청들이 모두 완료된 후에 실행되는 이벤트 핸들러를 정의합니다.</p>
                 <p lang="en_US">Define an event handler that is executed after all Ajax requests complete when the page loads.</p>
-                <pre lang="ko_KR"><code>onEntireLoad : function(docId) {
+                <pre lang="ko_KR"><code>onEntireLoad : function(docId, entireLoadRequestCnt, entireLoadRequestMaxCnt) {
     // docId : document id
+    // entireLoadRequestCnt: 완료된 요청 수
+    // entireLoadRequestMaxCnt: 완료할 수 있는 최대 요청 수
 
     var doc = this.doc(docId); // document 정보 가져오기
     var cont = this.cont(docId); // document의 Controller object 가져오기
     var view = cont.view;
     var request = cont.request;
 }</code></pre>
-                <pre lang="en_US"><code>onEntireLoad : function(docId) {
+                <pre lang="en_US"><code>onEntireLoad : function(docId, entireLoadRequestCnt, entireLoadRequestMaxCnt) {
     // docId : document id
+    // entireLoadRequestCnt: number of requests that have been completed
+    // entireLoadRequestMaxCnt: maximum number of requests that can be completed
 
     var doc = this.doc(docId); // get document info
     var cont = this.cont(docId); // get document's Controller object
