@@ -1,13 +1,13 @@
 N("#asd").alert({
     msg: "asd",
-    onOk: function (msgContext?: NHTMLElement, msgContents?: NHTMLElement): void {
+    onOk: function (msgContext?: NHTMLElement, msgContents?: NHTMLElement): undefined {
         console.log(1);
     }
 }).show();
 
 N.alert(N("#asd"), {
     msg: "asd",
-    onOk: function (msgContext?: NHTMLElement, msgContents?: NHTMLElement): void {
+    onOk: function (msgContext?: NHTMLElement, msgContents?: NHTMLElement): undefined {
         console.log(1);
     }
 }).show();
@@ -22,3 +22,17 @@ N("#button").button({
 
     }
 });
+
+N({
+
+}).notify({
+    displayTime: 1
+}).add("asd");
+
+N.notify({
+    position: {
+        top: 12,
+        right: 12
+    },
+    displayTime: 2
+}).add("asd");

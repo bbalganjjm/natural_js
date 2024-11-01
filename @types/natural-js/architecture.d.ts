@@ -15,25 +15,25 @@ declare type ControllerObject = {
     opener?: ControllerObject;
 }
 
-declare type SubmitCallbackFunction = {
+declare type SubmitCallback = {
     (this: Communicator | NOrHTMLElement, data: object | object[] | Controller, request?: Communicator.request): void;
 }
-declare type ErrorCallbackFunction = {
-    (this: Communicator, xhr: JQueryXHR, textStatus: "success" | "error", e: Error, request?: Communicator.request, submitCallback: SubmitCallbackFunction): void;
+declare type ErrorCallback = {
+    (this: Communicator, xhr: JQueryXHR, textStatus: "success" | "error", e: Error, request?: Communicator.request, submitCallback: SubmitCallback): void;
 }
 
 declare interface Communicator {
     request: request;
-    submit(callback?: SubmitCallbackFunction): this | JQuery.jqXHR
-    error(callback?: ErrorCallbackFunction): this
+    submit(callback?: SubmitCallback): this | JQuery.jqXHR
+    error(callback?: ErrorCallback): this
 }
 
 declare interface request {
     attr(name: string, obj_?: NAny): Communicator;
     removeAttr(name: string): Communicator;
     param(name?: string): object | string;
-    get(key?: string): RequestOpts | string | boolean | object | object[] | N<object> | NHTMLElement;
-    reload(callback?: SubmitCallbackFunction): Communicator;
+    get(key?: string): RequestOpts | string | boolean | object | object[] | N<JQuery.TypeOrArray<object>> | NHTMLElement;
+    reload(callback?: SubmitCallback): Communicator;
 }
 
 // declare namespace N.config {

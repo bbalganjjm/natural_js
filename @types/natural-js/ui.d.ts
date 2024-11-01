@@ -94,8 +94,8 @@ declare interface List {
     data(selFlag?: false | "modified" | "selected" | "checked" | "insert" | "update" | "delete"): NJSONObject | JSONObject;
     context(sel?: NHTMLElement | JQuery.Selector): NHTMLElement;
     contextBodyTemplate(sel?: NHTMLElement | JQuery.Selector): NHTMLElement;
-    select(row?: number | number[], isAppend?: boolean): N<number[]> | this;
-    check(row?: number | number[], isAppend?: boolean): N<number[]> | this;
+    select(row?: number | number[], isAppend?: boolean): N<JQuery.TypeOrArray<number>> | this;
+    check(row?: number | number[], isAppend?: boolean): N<JQuery.TypeOrArray<number>> | this;
     bind(data: NJSONObjectArray, callType?: "append" | "list.bind" | "list.update"): this;
     add(data?: number | JSONObject, row?: number): this;
     remove(row?: number): this;
@@ -112,8 +112,8 @@ declare interface Grid {
     context(sel?: NHTMLElement | JQuery.Selector): NHTMLElement;
     contextHead(sel?: NHTMLElement | JQuery.Selector): NHTMLElement;
     contextBodyTemplate(sel?: NHTMLElement | JQuery.Selector): NHTMLElement;
-    select(row?: number | number[], isAppend?: boolean): N<number[]> | this;
-    check(row?: number | number[], isAppend?: boolean): N<number[]> | this;
+    select(row?: number | number[], isAppend?: boolean): N<JQuery.TypeOrArray<number>> | this;
+    check(row?: number | number[], isAppend?: boolean): N<JQuery.TypeOrArray<number>> | this;
     bind(data: NJSONObjectArray, callType?: "append" | "grid.bind" | "grid.dataFilter" | "grid.sort" | "grid.update"): this;
     add(data?: number | JSONObject, row?: number): this;
     remove(row?: number): this;

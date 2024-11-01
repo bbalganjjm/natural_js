@@ -5,7 +5,7 @@ declare type RequestOpts = {
     cache?: boolean,
     async?: boolean,
     type?: "POST" | "GET" | "PUT" | "DELETE" | "HEAD" | "OPTIONS" | "TRACE" | "CONNECT" | "PATCH",
-    data?: object | object[] | N<object>,
+    data?: object | object[] | N<JQuery.TypeOrArray<object>>,
     dataIsArray?: boolean,
     dataType?: "json" | "xml" | "script" | "html",
     urlSync?: boolean,

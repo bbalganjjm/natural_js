@@ -1,5 +1,3 @@
-import Event = JQuery.Event;
-
 declare type AlertWidth = {
     (this: Alert, msgContext?: NHTMLElement, msgContents?: NHTMLElement): number;
 }
@@ -38,10 +36,10 @@ declare type ButtonOnCreate = {
     (this: Button, context: NHTMLElement, opts: ButtonOpts): void;
 }
 declare type DatepickerOnChangeYear = {
-    (this: Datepicker, context: NHTMLElement, selYearStr: string, e: Event): void;
+    (this: Datepicker, context: NHTMLElement, selYearStr: string, e: JQuery.Event): void;
 }
 declare type DatepickerOnChangeMonth = {
-    (this: Datepicker, context: NHTMLElement, selMonthStr: string, selYearStr: string, e: Event): void;
+    (this: Datepicker, context: NHTMLElement, selMonthStr: string, selYearStr: string, e: JQuery.Event): void;
 }
 declare type DatepickerOnSelect = {
     (this: Datepicker, context: NHTMLElement, selDate: NDate, monthonly: boolean): void;

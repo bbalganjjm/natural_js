@@ -14,7 +14,7 @@ declare type ValidateObject = {
     }];
 }[]
 
-declare type ConditionCallbackFunction = {
+declare type ConditionCallback = {
     (item: object): boolean;
 }
 
@@ -31,7 +31,7 @@ declare namespace N.validator {
     function validate(row?: number): ValidateObject;
 }
 declare namespace N.data {
-    function filter(data: NJSONObject, condition: ConditionCallbackFunction | string): object[];
+    function filter(data: NJSONObject, condition: ConditionCallback | string): object[];
     function sort(data: NJSONObject, key: string, reverse?: boolean): object[];
 }
 declare namespace N.ds {
@@ -39,7 +39,7 @@ declare namespace N.ds {
 }
 
 declare interface N {
-    datafilter(condition: ConditionCallbackFunction | string): object[];
+    datafilter(condition: ConditionCallback | string): object[];
     datasort(key: string, reverse?: boolean): object[];
     formatter(rules: NHTMLElement | HTMLElement | string | Rules): this;
     validator(rules: NHTMLElement | HTMLElement | string | Rules): this;

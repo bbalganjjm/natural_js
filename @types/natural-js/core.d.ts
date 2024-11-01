@@ -1,20 +1,21 @@
-declare function N(selector: NAny, context?: JQuery.Selector | N.NOrHTMLElement): N;
-
-declare type InstanceCallbackFunction = {
+declare type InstanceCallback = {
     (this: T, instanceName: string, instance: T): void;
 }
-declare type ValsCallbackFunction = {
+declare type ValsCallback = {
     (this: NHTMLElement, index: number, selEle: NHTMLElement): void;
 }
 declare type EventObject = object[]
 declare type EventsObject = {
     [key: string]: EventObject;
 }
+
+declare function N(selector: NAny, context?: JQuery.Selector | N.NOrHTMLElement): N;
+
 declare interface N extends JQuery {
     remove_(idx: string | number | T, length: number): this;
     tpBind(): this;
-    instance(name: string | InstanceCallbackFunction, instance?: T): undefined | T[] | T | this;
-    vals(vals?: string | string[] | ValsCallbackFunction): string | string[] | NHTMLElement | this;
+    instance(name: string | InstanceCallback, instance?: T): undefined | T[] | T | this;
+    vals(vals?: string | string[] | ValsCallback): string | string[] | NHTMLElement | this;
     events(eventName: string, namespace?: string): EventsObject | EventObject;
 }
 

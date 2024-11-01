@@ -1,12 +1,12 @@
 declare type Primitive = string | number | boolean | null;
-declare type NHTMLElement = N<HTMLElement[]>
+declare type NHTMLElement = N<JQuery.TypeOrArray<HTMLElement>>
 declare type NOrHTMLElement = NHTMLElement | HTMLElement;
 declare type JSONValue = Primitive | JSONObject | JSONValue[];
 declare type JSONObject = {
     [key: string]: JSONValue;
 }
-declare type NJSONObject = N<JSONObject[]> | JSONObject
-declare type NJSONObjectArray = N<JSONObject[]> | JSONObject[]
+declare type NJSONObject = N<JQuery.TypeOrArray<JSONObject>> | JSONObject
+declare type NJSONObjectArray = N<JQuery.TypeOrArray<JSONObject>> | JSONObject[]
 declare type NAny = T | NOrHTMLElement | JSONValue | JSONObject;
 declare type NDate = {
     obj: Date;
