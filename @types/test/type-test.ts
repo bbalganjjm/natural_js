@@ -36,3 +36,11 @@ N.notify({
     },
     displayTime: 2
 }).add("asd");
+
+const docs = N("#asds").docs({
+    onBeforeLoad: function (docContext: NHTMLElement, docOpts: DocOpts): void {
+        console.log(1);
+    }
+});
+docs.active("asd");;
+docs.removeState("asd", function () {});
