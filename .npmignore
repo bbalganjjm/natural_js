@@ -5,3 +5,10 @@ Icon?
 Thumbs.db
 .settings/
 .externalToolBuilders/
+.history
+.idea
+*.iml
+
+# node
+node_modules/
+package-lock.json

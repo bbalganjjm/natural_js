@@ -10,17 +10,17 @@
 		N.version["Natural-DATA"] = "1.0.0";
 
 	$.fn.extend($.extend(N.prototype, {
-		datafilter : function(callBack) {
-			return N.data.filter(this, callBack);
+		datafilter : function(condition) {
+			return N.data.filter(this, condition);
 		},
 		datasort : function(key, reverse) {
 			return N.data.sort(this, key, reverse);
 		},
-		formatter : function(row) {
-			return new N.formatter(this, row);
+		formatter : function(rules) {
+			return new N.formatter(this, rules);
 		},
-		validator : function(row) {
-			return new N.validator(this, row);
+		validator : function(rules) {
+			return new N.validator(this, rules);
 		}
 	}));
 
@@ -173,7 +173,7 @@
 		};
 
 		$.extend(Formatter, {
-			"commas" : function(str, args) {
+			"commas" : function(str) {
 				if (N.isEmptyObject(str)) {
 					return str;
 				}
@@ -223,7 +223,7 @@
 			/**
 			 * Korean business registration number
 			 */
-			"kbrn" : function(str, args) {
+			"kbrn" : function(str) {
 				if (N.string.trimToEmpty(str).length < 5) {
 					return str;
 				}
@@ -236,22 +236,22 @@
 			/**
 			 * Korean corporation number
 			 */
-			"kcn" : function(str, args) {
+			"kcn" : function(str) {
 				return this.rrn(str);
 			},
-			"upper" : function(str, args) {
+			"upper" : function(str) {
 				if (N.isEmptyObject(str)) {
 					return str;
 				}
 				return str.toUpperCase();
 			},
-			"lower" : function(str, args) {
+			"lower" : function(str) {
 				if (N.isEmptyObject(str)) {
 					return str;
 				}
 				return str.toLowerCase();
 			},
-			"capitalize" : function(str, args) {
+			"capitalize" : function(str) {
 				if (N.isEmptyObject(str)) {
 					return str;
 				}
@@ -261,21 +261,21 @@
 				}
 				return result;
 			},
-			"zipcode" : function(str, args) {
+			"zipcode" : function(str) {
 				if (N.isEmptyObject(str)) {
 					return str;
 				}
 				str = str.replace(/[^0-9*]/g, "");
 				return str.substring(0, 3) + "-" + str.substring(3, 6);
 			},
-			"phone" : function(str, args) {
+			"phone" : function(str) {
 				if (N.isEmptyObject(str)) {
 					return str;
 				}
 				str = str.replace(/[^0-9*]/g, "");
 				return str.replace(/(^02.{0}|^01.{1}|[0-9*]{3})([0-9*]+)([0-9*]{4})/, "$1-$2-$3");
 			},
-			"realnum" : function(str, args) {
+			"realnum" : function(str) {
 				try {
 					str = String(parseFloat(str));
 				} catch (e) {
@@ -283,10 +283,10 @@
 				}
 				return str === "NaN" ? str.replace("NaN", "") : str;
 			},
-			"trimtoempty" : function(str, args) {
+			"trimtoempty" : function(str) {
 				return N.string.trimToEmpty(str);
 			},
-			"trimtozero" : function(str, args) {
+			"trimtozero" : function(str) {
 				return N.string.trimToZero(str);
 			},
 			"trimtoval" : function(str, args) {
@@ -779,7 +779,7 @@
 				}
 				return new RegExp(/^\d{2,3}-\d{3,4}-\d{4}$/).test(str);
 			},
-			"rrn" : function(str, args) {
+			"rrn" : function(str) {
 				str = str.replace(/[^0-9*]/g, "");
 				if (N.string.trimToEmpty(str).length !== 13) {
 					str = null;
@@ -816,10 +816,10 @@
 			/**
 			 * US Social Security Number
 			 */
-			"ssn" : function(str, args) {
+			"ssn" : function(str) {
 				return new RegExp(/\d{3}-\d{2}-\d{4}/).test(str);
 			},
-			"frn" : function(str, args) {
+			"frn" : function(str) {
 				str = str.replace(/[^0-9*]/g, "");
 				if (N.string.trimToEmpty(str).length !== 13) {
 					str = null;
@@ -841,7 +841,7 @@
 				}
 				return false;
 			},
-			"frn_rrn" : function(str, args) {
+			"frn_rrn" : function(str) {
 				str = str.replace(/[^0-9*]/g, "");
 				if (N.string.trimToEmpty(str).length !== 13) {
 					str = null;
@@ -856,7 +856,7 @@
 			/**
 			 * Korean business registration number
 			 */
-			"kbrn" : function(str, args) {
+			"kbrn" : function(str) {
 				var bizID = str.replace(/[^0-9*]/g, "");
 				var checkID = [1, 3, 7, 1, 3, 7, 1, 3, 5, 1];
 				var i, chkSum = 0, c2, remander;
@@ -878,7 +878,7 @@
 			/**
 			 * Korean corporation number
 			 */
-			"kcn" : function(str, args) {
+			"kcn" : function(str) {
 				var numStr = str.replace(/[^0-9*]/g, "");
 				if (numStr.length !== 13) {
 					return false;
@@ -901,7 +901,7 @@
 				}
 				return true;
 			},
-			"date" : function(str, args) {
+			"date" : function(str) {
 				// Check date format length
 				var isDateFormat = function(d) {
 					if (N.string.trimToEmpty(d).length === 8) {
@@ -962,7 +962,7 @@
 
 				return isValid;
 			},
-			"time" : function(str, args) {
+			"time" : function(str) {
 				return new RegExp(/^([01]\d|2[0-3])([0-5]\d){0,2}$/).test(str.replace(/[^0-9]/g, ""));
 			},
 			"accept" : function(str, args) {

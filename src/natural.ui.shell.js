@@ -188,7 +188,6 @@
                 alwaysOnTop : false,
                 alwaysOnTopCalcTarget : "div, span, ul, p, nav, article, section, header, footer, aside",
                 order : [],
-                docsFilterDefers : [],
                 loadedDocId : null
             };
 

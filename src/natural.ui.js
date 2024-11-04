@@ -20,6 +20,15 @@
                 });
             }
         },
+        datepicker : function(opts) {
+            return new N.datepicker(this, opts);
+        },
+        popup : function(opts) {
+            return new N.popup(this, opts);
+        },
+        tab : function(opts) {
+            return new N.tab(this, opts);
+        },
         select : function(opts) {
             return new N.select(this, opts);
         },
@@ -32,20 +41,11 @@
         grid : function(opts) {
             return new N.grid(this, opts);
         },
-        popup : function(opts) {
-            return new N.popup(this, opts);
-        },
-        tab : function(opts) {
-            return new N.tab(this, opts);
-        },
-        datepicker : function(opts) {
-            return new N.datepicker(this, opts);
+        pagination : function(opts) {
+            return new N.pagination(this, opts);
         },
         tree : function(opts) {
             return new N.tree(this, opts);
-        },
-        pagination : function(opts) {
-            return new N.pagination(this, opts);
         }
     }));
 
@@ -2544,6 +2544,8 @@
             changeEvent : function(name, callback) {
                 this.options[name] = callback;
                 this.alert.options[name] = this.options[name];
+
+                return this;
             },
             remove : function() {
                 this.alert.remove();
@@ -3328,8 +3330,8 @@
                 addTop : true,
                 fRules : null,
                 vRules : null,
-                extObj : null, // extObj : for N.grid
-                extRow : -1, // extRow : for N.grid
+                extObj : null, // extObj : for N.list or N.grid
+                extRow : -1, // extRow : for N.list or N.grid
                 revert : false,
                 cache : true,
                 unbind : true,
@@ -3427,9 +3429,9 @@
                 /**
                  * validate
                  */
-                validate : function(ele, opts, type, isTextInput) {
+                validate : function(ele, opts, eleType, isTextInput) {
                     if(ele.data("validate") !== undefined) {
-                        if (type !== "hidden") {
+                        if (eleType !== "hidden") {
                             N().validator(opts.vRules !== null ? opts.vRules : ele);
 
                             if(isTextInput && N.isEmptyObject(ele.events("focusout", "form.validate"))) {
@@ -3527,9 +3529,9 @@
                 /**
                  * format
                  */
-                format : function(ele, opts, type, vals, key) {
+                format : function(ele, opts, eleType, vals, key) {
                     if(ele.data("format") !== undefined) {
-                        if (type !== "password" && type !== "hidden" && type !== "file") {
+                        if (eleType !== "password" && eleType !== "hidden" && eleType !== "file") {
                             N(opts.data).formatter(opts.fRules !== null ? opts.fRules : ele).format(opts.row);
 
                             var eventNames = ["focusin", "focusout"];
@@ -4250,13 +4252,11 @@
                 vResizable : false,
                 windowScrollLock : true,
                 select : false,
-                selectWithCheck : false,
                 unselect : true,
                 multiselect : false,
                 checkAll : null, // selector
                 checkAllTarget : null, // selector
                 checkSingleTarget : null,
-                checkWidthSelect : false,
                 hover : false,
                 revert : false,
                 createRowDelay : 1,
@@ -4574,7 +4574,7 @@
             },
             /**
              * callType arguments is call type about scrollPaging(internal) or data filter(internal) or data append(external)
-             * callType : "append", "list.bind"
+             * callType : "append" | "list.bind" | "list.update"
              */
             bind : function(data, callType) {
                 var opts = this.options;
@@ -4912,13 +4912,11 @@
                 sortable : false,
                 windowScrollLock : true,
                 select : false,
-                selectWithCheck : false,
                 unselect : true,
                 multiselect : false,
                 checkAll : null, // selector
                 checkAllTarget : null, // selector
                 checkSingleTarget : null, // selector
-                checkWidthSelect : false,
                 hover : false,
                 revert : false,
                 createRowDelay : 1,
@@ -6477,7 +6475,7 @@
             },
             /**
              * callType arguments is call type about scrollPaging(internal), data filter(internal), data append(external), DataSync's update.
-             * callType : "append", "grid.bind", "grid.dataFilter", "grid.sort", "grid.update"
+             * callType : "append" | "grid.bind" | "grid.dataFilter" | "grid.sort" | "grid.update"
              */
             bind : function(data, callType) {
                 var opts = this.options;
@@ -7183,7 +7181,7 @@
                             }
                         }
                         if(opts.blockOnChangeWhenBind === false || (opts.blockOnChangeWhenBind === true && isFirst !== true)) {
-                            opts.onChange.call(self, opts.pageNo, this, selData, opts.currPageNavInfo);
+                            opts.onChange.call(self, opts.pageNo, $(this), selData, opts.currPageNavInfo);
                         }
                     }
 
@@ -7485,11 +7483,11 @@
 
                 return this;
             },
-            val : function(row, key, val) {
-                // TODO
-                // notify
-                return this;
-            },
+            // val : function(row, key, val) {
+            //     // TODO
+            //     // notify
+            //     return this;
+            // },
             select : function(val) {
                 var opts = this.options;
                 if(val !== undefined) {
@@ -7502,10 +7500,10 @@
                     }
                 }
             },
-            check : function(vals) {
-                // TODO
-                return this;
-            },
+            // check : function(vals) {
+            //     // TODO
+            //     return this;
+            // },
             expand : function() {
                 this.options.context.find("li.tree_close__:not(.tree_last_node__)").removeClass("tree_close__").addClass("tree_open__");
                 return this;
@@ -7517,10 +7515,10 @@
                 }
                 return this;
             },
-            update : function(row, key) {
-                // TODO
-                return this;
-            }
+            // update : function(row, key) {
+            //     // TODO
+            //     return this;
+            // }
         });
 
     })(N);

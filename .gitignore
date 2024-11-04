@@ -8,4 +8,7 @@ Thumbs.db
 .history
 .idea
 *.iml
+
+# node
 node_modules/
+package-lock.json

@@ -1,5 +1,5 @@
 /*!
- * Natural-CODE v0.3.8
+ * Natural-CODE v0.4.8
  *
  * Released under the LGPL v2.1 license
  * Date: 2019-02-28T18:00Z
@@ -7,9 +7,16 @@
  * Copyright 2014 Goldman Kim(bbalganjjm@gmail.com)
  */
 (function(window, $) {
-    N.version["Natural-CODE"] = "0.3.8";
+    N.version["Natural-CODE"] = "0.4.8";
 
     (function(N) {
+
+        var SeverityLevels = {
+            BLOCKER: ["Blocker", "darkred", N.error],
+            CRITICAL: ["Critical", "red", N.error],
+            MAJOR: ["Major", "orange", N.warn],
+            MINOR: ["Minor", "black", N.log]
+        }
 
         var Code = N.code = {
             inspection : {
@@ -88,7 +95,7 @@
                                     } catch(e) { N.warn(e) };
                                     if(script.indexOf(match[0]) > -1) {
                                         report.push({
-                                            "level" : "ERROR",
+                                            "level" : SeverityLevels.CRITICAL[0],
                                             "message" : N.message.get(N.context.attr("code").inspection.message, "NoContextSpecifiedInSelector"),
                                             "line" : codes.substring(0, regex.lastIndex).split("\n").length,
                                             "code" : match[0],
@@ -131,7 +138,7 @@
                                 } catch(e) { N.warn(e) };
                                 if(script.indexOf(match[0]) > -1) {
                                     report.push({
-                                        "level" : "WARN",
+                                        "level" : SeverityLevels.MAJOR[0],
                                         "message" : N.message.get(N.context.attr("code").inspection.message, "UseTheComponentsValMethod"),
                                         "line" : codes.substring(0, regex.lastIndex).split("\n").length,
                                         "code" : match[0],
@@ -146,21 +153,15 @@
                         if(!data) {
                             return false;
                         }
-                        var color = "black";
                         N(data).each(function() {
-                            if(N.context.attr("code").inspection.abortOnError && this.level === "ERROR") {
-                                throw N.error("[" + this.level + "] " + url + " - " + this.line + " : " + this.code + "\n" + this.message + "\n\n");
+                            var consoleLogger = SeverityLevels[this.level.toUpperCase()][2];
+                            if(N.context.attr("code").inspection.abortOnError && (this.level === SeverityLevels.BLOCKER[0] || this.level === SeverityLevels.CRITICAL[0])) {
+                                throw consoleLogger("[" + this.level + "] " + url + " - " + this.line + " : " + this.code + "\n" + this.message + "\n\n");
                             } else {
                                 if(N.browser.is("ie")) {
-                                    N[this.level.toLowerCase()]("[" + this.level + "] " + url + " - " + this.line + " : " + this.code, "\n" + this.message);
+                                    consoleLogger("[" + this.level + "] " + url + " - " + this.line + " : " + this.code, "\n" + this.message);
                                 } else {
-                                    if(this.level === "ERROR") {
-                                        color = "red";
-                                    } else if(this.level === "WARN") {
-                                        color = "blue";
-                                    }
-
-                                    N[this.level.replace("ERROR", "WARN").toLowerCase()]("%c[" + this.level + "] " + url + " - " + this.line + " : " + this.code, "color: " + color + "; font-weight: bold; line-height: 200%;",
+                                    consoleLogger("%c[" + this.level + "] " + url + " - " + this.line + " : " + this.code, "color: " + SeverityLevels[this.level.toUpperCase()][1] + "; font-weight: bold; line-height: 200%;",
                                             "\n" + this.message);
                                 }
                             }
