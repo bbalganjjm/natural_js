@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "lib": [ "dom", "es2015" ],
+    "allowJs": true,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "outDir": "convert/@types",
+    "target": "ES5"
+  },
+  "include": ["convert/*.js"]
+}
