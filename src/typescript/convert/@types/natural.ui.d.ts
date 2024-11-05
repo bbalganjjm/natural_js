@@ -13,7 +13,7 @@ declare class N {
     tree(opts: any): any;
 }
 declare namespace N {
-    namespace ui {
+    export namespace ui {
         namespace iteration {
             function render(i: any, limit: any, delay: any, lastIdx: any, callType: any): void;
             function select(compNm: any): void;
@@ -49,35 +49,17 @@ declare namespace N {
             function isTextInput(tagName: any, type: any): boolean;
         }
     }
-    namespace alert {
-        function constructor(obj: any, msg: any, vars: any): this;
-        function wrapEle(): void;
-        function resetOffSetEle(opts: any): void;
-        function wrapInputEle(): void;
-    }
-    function button(obj: any, opts: any): this;
-    function datepicker(obj: any, opts: any): this;
-    function popup(obj: any, opts: any, ...args: any[]): this;
-    function tab(obj: any, opts: any): void;
-    function select(data: any, opts: any): this;
-    function form(data: any, opts: any): this;
-    function list(data: any, opts: any): this;
-    function grid(data: any, opts: any): this;
-    function pagination(data: any, opts: any): this;
-    function tree(data: any, opts: any): this;
-}
-declare function Button(obj: any, opts: any): this;
-declare class Button {
-    constructor(obj: any, opts: any);
-    options: {
-        context: any;
-        size: string;
-        color: string;
-        type: string;
-        disable: boolean;
-        onBeforeCreate: any;
-        onCreate: any;
-    };
+    export { alert };
+    export { button };
+    export function datepicker(obj: any, opts: any): this;
+    export function popup(obj: any, opts: any, ...args: any[]): this;
+    export function tab(obj: any, opts: any): void;
+    export function select(data: any, opts: any): this;
+    export function form(data: any, opts: any): this;
+    export function list(data: any, opts: any): this;
+    export function grid(data: any, opts: any): this;
+    export function pagination(data: any, opts: any): this;
+    export function tree(data: any, opts: any): this;
 }
 declare function Datepicker(obj: any, opts: any): this;
 declare class Datepicker {
@@ -364,4 +346,77 @@ declare class Tree {
         onSelect: any;
         onCheck: any;
     };
+}
+declare class alert {
+    static wrapEle(): void;
+    static resetOffSetEle(opts: any): void;
+    static wrapInputEle(): void;
+    constructor(obj: any, msg: any, vars: any);
+    options: {
+        obj: any;
+        context: any;
+        container: any;
+        msgContext: any;
+        msgContents: any;
+        msg: any;
+        vars: any;
+        html: boolean;
+        top: any;
+        left: any;
+        width: number;
+        height: number;
+        isInput: boolean;
+        isWindow: any;
+        title: any;
+        button: boolean;
+        okButtonOpts: any;
+        cancelButtonOpts: any;
+        closeMode: string;
+        modal: boolean;
+        onOk: any;
+        onCancel: any;
+        onBeforeShow: any;
+        onShow: any;
+        onBeforeHide: any;
+        onHide: any;
+        onBeforeRemove: any;
+        onRemove: any;
+        overlayColor: any;
+        overlayClose: boolean;
+        escClose: boolean;
+        confirm: boolean;
+        alwaysOnTop: boolean;
+        alwaysOnTopCalcTarget: string;
+        dynPos: boolean;
+        windowScrollLock: boolean;
+        draggable: boolean;
+        draggableOverflowCorrection: boolean;
+        draggableOverflowCorrectionAddValues: {
+            top: number;
+            bottom: number;
+            left: number;
+            right: number;
+        };
+        saveMemory: boolean;
+    };
+    context(sel: any): any;
+    show(): this;
+    hide(): this;
+    remove(): this;
+}
+declare class button {
+    static wrapEle(): void;
+    constructor(obj: any, opts: any);
+    options: {
+        context: any;
+        size: string;
+        color: string;
+        type: string;
+        disable: boolean;
+        onBeforeCreate: any;
+        onCreate: any;
+    };
+    context(sel: any): any;
+    disable(): this;
+    enable(): this;
 }

@@ -35,7 +35,6 @@
     "naturaljs"
   ],
   "dependencies": {
-    "@types/jquery": "^3.5.32",
     "jquery": "^3.7.1",
     "typescript": "^5.6.3"
   },
@@ -47,5 +46,8 @@
   "bugs": {
     "url": "https://github.com/bbalganjjm/natural_js/issues",
     "email": "bbalganjjm@gmail.com"
+  },
+  "devDependencies": {
+    "@types/jquery": "^3.5.32"
   }
 }
