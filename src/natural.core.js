@@ -503,7 +503,7 @@
                     if (typeof context !== "string") {
                         throw N.error("[N.string.endsWith]arguments[0] was not entered or is not of string type.");
                     }
-                    return context.indexOf(str, this.length - str.length) !== -1;
+                    return context.indexOf(str, context.length - str.length) !== -1;
                 },
                 startsWith : function(context, str) {
                     if (typeof context !== "string") {
