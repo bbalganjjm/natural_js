@@ -208,13 +208,10 @@
 				return str;
 			},
 			/**
-			 * Resident registration number or US Social Security Number
-			 * TODO Later, "rrn"(Resident registration number) check logic will be removed
+			 * US Social Security Number
 			 */
 			"ssn" : function(str, args) {
-				if (str.length === 13) {
-					return this.rrn(str, args);
-				} else if (str.length === 9) {
+				if (str.length === 9) {
 					str = str.replace(/[^0-9*]/g, "");
 					return str.substr(0, 3) + "-" + str.substr(3, 2) + "-" + str.substr(5, 4);
 				}
