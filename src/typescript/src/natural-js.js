@@ -13,7 +13,7 @@ class NaturalJS extends jQuery {
      * Initializes and returns a new N object based on jQuery objects with the provided selector and context argument values.
      */
     constructor(selector, context) {
-        super();
+        super(selector, context);
         this.selector = NC.toSelector(selector);
     };
 
@@ -35,6 +35,7 @@ class NaturalJS extends jQuery {
 function N(selector, context) {
     return new NaturalJS(selector, context);
 }
+
 Object.assign(N, NC, NA, ND, NU, NUS);
 Object.assign(N.prototype, NC.prototype, NA.prototype, ND.prototype, NU.prototype, NUS.prototype);
 
