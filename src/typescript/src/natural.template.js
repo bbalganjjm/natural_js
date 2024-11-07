@@ -391,3 +391,5 @@ export class NT {
     }
 
 }
+
+N.template = NT;

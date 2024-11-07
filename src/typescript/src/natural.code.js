@@ -194,3 +194,5 @@ export class NCD {
     };
 
 }
+
+N.code = NCD;
