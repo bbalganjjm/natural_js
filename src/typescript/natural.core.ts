@@ -10,52 +10,66 @@
  * formatdate.js : http://www.svendtofte.com/javascript/javascript-date-string-formatting/
  * Mask JavaScript API : http://www.pengoworks.com/workshop/js/mask/, dswitzer@pengoworks.com
  */
+class N {
 
-import { jQuery } from "../lib/jquery-3.7.1.min";
-import { NA } from "./natural.architecture";
+    /**
+     * Initializes and returns a new N object based on jQuery objects with the provided selector and context argument values.
+     */
+    constructor(selector: JQuery, context: JQuery.Selector) {
+        const obj = new $.fn.init(selector, context);
+        obj.selector = N.toSelector(selector);
 
-export class NC {
+        return obj;
+    };
+
+    static VERSION = {
+        "Natural-CORE" : "1.0.0"
+    };
+
+    static get version() {
+        return this.VERSION;
+    };
 
     /**
      * Set and get locale value
      */
-    static locale(str) {
+    static locale(str?: string): string | void {
         if(str === undefined) {
-            return NA.context.attr("core").locale;
+            return N.context.attr("core").locale;
         } else {
-            NA.context.attr("core").locale = str;
+            N.context.attr("core").locale = str;
         }
     };
 
     /**
      * Displays debug logs on the console.
      */
-    static debug = console && console.debug ? console.debug.bind(window.console) : function() {};
+    static debug: void = console && console.debug ? console.debug.bind(window.console) : function() {};
 
     /**
      * Displays general logs on the console.
      */
-    static log = console && console.log ? console.log.bind(window.console) : function() {};
+    static log: void = console && console.log ? console.log.bind(window.console) : function() {};
 
     /**
      * Displays info logs on the console.
      */
-    static info = console && console.info ? console.info.bind(window.console) : function() {};
+    static info: void = console && console.info ? console.info.bind(window.console) : function() {};
 
     /**
      * Displays warning logs on the console.
      */
-    static warn = console && console.warn ? console.warn.bind(window.console) : function() {};
+    static warn: void = console && console.warn ? console.warn.bind(window.console) : function() {};
 
     /**
      * Displays error logs on the console.
      */
-    static error(msg, e) {
-        if(NC.type(e) !== "error") {
+    static error(msg: string, e: Error): Error {
+        if(N.type(e) !== "error") {
             e = new Error(msg);
 
-            if("captureStackTrace" in Error) {
-                Error.captureStackTrace(e, NC.error);
+            if(Error.captureStackTrace !== undefined) {
+                Error.captureStackTrace(e, N.error);
             }
         } else {
             e.message = (msg != null ? "[" + msg + "]" : "") + e.message;
@@ -66,21 +80,21 @@ export class NC {
     /**
      * Check object type
      */
-    static type(obj) {
+    static type(obj: any): string {
         return ({}).toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase();
     };
 
     /**
      * Check whether arg[0] is a String type
      */
-    static isString(obj) {
-        return NC.type(obj) === "string";
+    static isString(obj: any): boolean {
+        return N.type(obj) === "string";
     };
 
     /**
      * Check whether arg[0] is a numeric type
      */
-    static isNumeric(obj) {
+    static isNumeric(obj: any): boolean {
         return ( typeof obj === "number" || typeof obj === "string" ) &&
             !isNaN( obj - parseFloat( obj ) );
     };
@@ -88,12 +102,12 @@ export class NC {
     /**
      * Check whether arg[0] is a plain object type
      */
-    static isPlainObject = jQuery.isPlainObject;
+    static isPlainObject = $.isPlainObject;
 
     /**
      * Check whether object is empty
      */
-    static isEmptyObject = jQuery.isEmptyObject;
+    static isEmptyObject = $.isEmptyObject;
 
     /**
      * Check whether arg[0] is a Array type
@@ -103,11 +117,11 @@ export class NC {
     /**
      * Checks whether an object of a type similar(array or jquery object etc.) to an array
      */
-    static isArraylike(obj) {
+    static isArraylike(obj: any): boolean {
         if(typeof obj === "undefined" || obj.length === undefined) {
             return false;
         }
-        const length = obj.length, type = NC.type(obj);
+        const length = obj.length, type = N.type(obj);
         if (type === "function"
             || type === "asyncfunction"
             || type === "string"
@@ -126,21 +140,21 @@ export class NC {
     /**
      * Check whether arg[0] is a jQuery Object type
      */
-    static isWrappedSet(obj) {
+    static isWrappedSet(obj: any): boolean {
         return !!(obj && this.isArraylike(obj) && obj.jquery);
     };
 
     /**
      * Check whether arg[0] is an element type
      */
-    static isElement(obj) {
+    static isElement(obj: any): boolean {
         if(this.isWrappedSet(obj)) {
             obj = obj.get(0);
         }
         return !!(obj && obj !== document && obj.getElementsByTagName);
     };
 
-    static toSelector(el) {
+    static toSelector(el: any): string {
         if (typeof el === "string") {
             return el;
         }
@@ -149,13 +163,13 @@ export class NC {
         }
         if(this.isElement(el)) {
             return el.tagName.toLowerCase() + (el.id ? "#" + el.id : "") + (el.classList && el.classList.length > 0 ? "." : "") + (Array.from(el.classList)).join(".");
-        } else if(NC.type(el) === "array") {
+        } else if(N.type(el) === "array") {
             if(el.length > 0) {
                 let obj = el[el.length - 1];
-                let type = NC.type(obj);
+                let type = N.type(obj);
                 if(type.startsWith("[")) {
                     type = type.replace(/[\[\]]/g, "");
-                } else if(NC.type(obj) === "string") {
+                } else if(N.type(obj) === "string") {
                     type = '"' + type + '"';
                 }
                 return "...[" + type + "](" + el.length + ")";
@@ -169,16 +183,18 @@ export class NC {
 
     /**
      * Run asynchronous execution sequentially
+     *
+     * TODO Remove any
      */
-    static serialExecute() {
+    static serialExecute(...args: any[]): JQuery.Deferred<any, any, any>[] {
         const self = this;
         self.defers = [];
-        jQuery(arguments).each(function(i, fn){
-            const defer = jQuery.Deferred();
+        $(args).each(function(i: number, fn: any){
+            const defer = $.Deferred();
             self.defers.push(defer);
             if(self.defers.length > 1) {
                 self.defers[i-1].done(function() {
-                    fn.apply(self.defers, jQuery.merge([defer], arguments));
+                    fn.apply(self.defers, $.merge([defer], arguments));
                 });
             } else {
                 fn.apply(self.defers, [defer]);
@@ -196,12 +212,12 @@ export class NC {
          * Minimum collection
          */
         static minimum() {
-            jQuery(window).off("resize.datepicker");
-            jQuery(window).off("resize.alert");
-            jQuery(document).off("click.datepicker");
-            jQuery(document).off("keyup.alert");
-            jQuery(document).off("click.grid.dataFilter");
-            jQuery(document).off("click.grid.more touchstart.grid.more");
+            $(window).off("resize.datepicker");
+            $(window).off("resize.alert");
+            $(document).off("click.datepicker");
+            $(document).off("keyup.alert");
+            $(document).off("click.grid.dataFilter");
+            $(document).off("click.grid.more touchstart.grid.more");
             return true;
         };
 
@@ -209,52 +225,52 @@ export class NC {
          * Full collection
          */
         static full() {
-            jQuery(window).off("resize.datepicker");
-            jQuery(window).off("resize.alert");
-            jQuery(document).off("dragstart.alert selectstart.alert mousemove.alert touchmove.alert mouseup.alert touchend.alert");
-            jQuery(document).off("click.datepicker");
-            jQuery(document).off("keyup.alert");
-            jQuery(document).off("dragstart.grid.vResize selectstart.grid.vResize mousemove.grid.vResize touchmove.grid.vResize mouseup.grid.vResize touchend.grid.vResize");
-            jQuery(document).off("dragstart.grid.resize selectstart.grid.resize mousemove.grid.resize touchmove.grid.resize mouseup.grid.resize touchend.grid.resize");
-            jQuery(document).off("click.grid.dataFilter");
-            jQuery(document).off("click.grid.more touchstart.grid.more");
+            $(window).off("resize.datepicker");
+            $(window).off("resize.alert");
+            $(document).off("dragstart.alert selectstart.alert mousemove.alert touchmove.alert mouseup.alert touchend.alert");
+            $(document).off("click.datepicker");
+            $(document).off("keyup.alert");
+            $(document).off("dragstart.grid.vResize selectstart.grid.vResize mousemove.grid.vResize touchmove.grid.vResize mouseup.grid.vResize touchend.grid.vResize");
+            $(document).off("dragstart.grid.resize selectstart.grid.resize mousemove.grid.resize touchmove.grid.resize mouseup.grid.resize touchend.grid.resize");
+            $(document).off("click.grid.dataFilter");
+            $(document).off("click.grid.more touchstart.grid.more");
             return true;
         };
 
         /**
-         * Removes garbage instances from observables of ND.ds
+         * Removes garbage instances from observables of N.ds
          */
         static ds() {
-            if(jQuery(NA.context.attr("architecture").page.context).find(">#data_sync_temp__").length > 0) {
-                jQuery(NA.context.attr("architecture").page.context).find(">#data_sync_temp__").instance("ds").obserable
-                    = jQuery.uniqueSort(jQuery(".grid__, .list__, .form__:not('.grid__>tbody, .list__>li'), .tree__", NA.context.attr("architecture").page.context).instance());
+            if($(N.context.attr("architecture").page.context).find(">#data_sync_temp__").length > 0) {
+                $(N.context.attr("architecture").page.context).find(">#data_sync_temp__").instance("ds").obserable
+                    = $.uniqueSort($(".grid__, .list__, .form__:not('.grid__>tbody, .list__>li'), .tree__", N.context.attr("architecture").page.context).instance());
             }
         }
 
     };
 
     /**
-     * NC.string package
+     * N.string package
      */
     static string = class {
 
         static contains(context, str) {
             if (typeof context !== "string") {
-                throw NC.error("[NC.string.contains]arguments[0] was not entered or is not of string type.");
+                throw N.error("[N.string.contains]arguments[0] was not entered or is not of string type.");
             }
             return context.indexOf(str) > -1;
         };
 
         static endsWith(context, str) {
             if (typeof context !== "string") {
-                throw NC.error("[NC.string.endsWith]arguments[0] was not entered or is not of string type.");
+                throw N.error("[N.string.endsWith]arguments[0] was not entered or is not of string type.");
             }
             return context.indexOf(str, context.length - str.length) !== -1;
         };
 
         static startsWith(context, str) {
             if (typeof context !== "string") {
-                throw NC.error("[NC.string.startsWith]arguments[0] was not entered or is not of string type.");
+                throw N.error("[N.string.startsWith]arguments[0] was not entered or is not of string type.");
             }
             return context.indexOf(str) === 0;
         };
@@ -285,12 +301,12 @@ export class NC {
         };
 
         static isEmpty(str) {
-            return NC.string.trimToEmpty(str).length === 0;
+            return N.string.trimToEmpty(str).length === 0;
         };
 
         static byteLength(str, charByteLength) {
             if(charByteLength === undefined) {
-                charByteLength = NA.context.attr("core").charByteLength !== undefined ? NA.context.attr("core").charByteLength : 3;
+                charByteLength = N.context.attr("core").charByteLength !== undefined ? N.context.attr("core").charByteLength : 3;
             }
             return (function(s,b,i,c){
                 for(b=i=0;c=s.charCodeAt(i++);b+=c>>11?charByteLength:c>>7?2:1){}
@@ -307,24 +323,24 @@ export class NC {
         };
 
         static trimToNull(str) {
-            return NC.string.trimToEmpty(str).length === 0 ? null : NC.string.trimToEmpty(str);
+            return N.string.trimToEmpty(str).length === 0 ? null : N.string.trimToEmpty(str);
         };
 
         static trimToUndefined(str) {
-            return NC.string.trimToEmpty(str).length === 0 ? undefined : NC.string.trimToEmpty(str);
+            return N.string.trimToEmpty(str).length === 0 ? undefined : N.string.trimToEmpty(str);
         };
 
         static trimToZero(str) {
-            return NC.string.trimToEmpty(str).length === 0 ? "0" : NC.string.trimToEmpty(str);
+            return N.string.trimToEmpty(str).length === 0 ? "0" : N.string.trimToEmpty(str);
         };
 
         static trimToVal(str, val) {
-            return NC.string.trimToEmpty(str).length === 0 ? val : NC.string.trimToEmpty(str);
+            return N.string.trimToEmpty(str).length === 0 ? val : N.string.trimToEmpty(str);
         }
     };
 
     /**
-     * NC.date package
+     * N.date package
      */
     static date = class {
 
@@ -332,10 +348,10 @@ export class NC {
          * Calculate the difference between two dates
          */
         static diff(refDateStr, targetDateStr) {
-            if (NC.type(refDateStr) === "string") {
+            if (N.type(refDateStr) === "string") {
                 refDateStr = this.strToDate(refDateStr).obj;
             }
-            if (NC.type(targetDateStr) === "string") {
+            if (N.type(targetDateStr) === "string") {
                 targetDateStr = this.strToDate(targetDateStr).obj;
             }
             return Math.ceil((targetDateStr - refDateStr) / 1000 / 24 / 60 / 60);
@@ -350,29 +366,29 @@ export class NC {
             if(format.length === 3 && str.length === 7 || format.length === 2 && str.length === 5) {
                 fixNum = -1;
             }
-            if(NC.string.startsWith(format, "Ymd")) {
+            if(N.string.startsWith(format, "Ymd")) {
                 dateStrArr.push(str.substring(0, 4 + fixNum)); //year
                 dateStrArr.push(str.substring(4 + fixNum, 6 + fixNum)); //month
                 dateStrArr.push(str.substring(6 + fixNum, 8 + fixNum)); //day
-            } else if(NC.string.startsWith(format, "mdY")) {
+            } else if(N.string.startsWith(format, "mdY")) {
                 dateStrArr.push(str.substring(4, 8 + fixNum)); //year
                 dateStrArr.push(str.substring(0, 2)); //month
                 dateStrArr.push(str.substring(2, 4)); //day
-            } else if(NC.string.startsWith(format, "dmY")) {
+            } else if(N.string.startsWith(format, "dmY")) {
                 dateStrArr.push(str.substring(4, 8 + fixNum)); //year
                 dateStrArr.push(str.substring(2, 4)); //month
                 dateStrArr.push(str.substring(0, 2)); //day
-            } else if(NC.string.startsWith(format, "Ym")) {
+            } else if(N.string.startsWith(format, "Ym")) {
                 dateStrArr.push(str.substring(0, 4 + fixNum)); //year
                 dateStrArr.push(str.substring(4 + fixNum, 6 + fixNum)); //month
-            } else if(NC.string.startsWith(format, "mY")) {
+            } else if(N.string.startsWith(format, "mY")) {
                 dateStrArr.push(str.substring(2, 6 + fixNum)); //year
                 dateStrArr.push(str.substring(0, 2)); //month
             } else {
-                throw NC.error("[NC.date.strToDateStrArr]\"" + format + "\" date format is not support. please change return value of NA.context.attr(\"data\").formatter.date's functions");
+                throw N.error("[N.date.strToDateStrArr]\"" + format + "\" date format is not support. please change return value of N.context.attr(\"data\").formatter.date's functions");
             }
             if(isString === undefined || isString === false) {
-                jQuery(dateStrArr).each(function(i) {
+                $(dateStrArr).each(function(i) {
                     dateStrArr[i] = parseInt(this);
                 });
             }
@@ -383,7 +399,7 @@ export class NC {
          * Convert a date string to a date object
          */
         static strToDate(str, format) {
-            str = NC.string.trimToEmpty(str).replace(/[^0-9]/g, "");
+            str = N.string.trimToEmpty(str).replace(/[^0-9]/g, "");
             let dateInfo = null;
             let dateStrArr;
             if (str.length > 2 && str.length <= 4) {
@@ -393,49 +409,49 @@ export class NC {
                 };
             } else if (str.length === 6) {
                 if(format === undefined) {
-                    format = NA.context.attr("data").formatter.date.Ym();
+                    format = N.context.attr("data").formatter.date.Ym();
                 }
-                dateStrArr = NC.date.strToDateStrArr(str, format.replace(/[^Y|^m|^d]/g, ""));
+                dateStrArr = N.date.strToDateStrArr(str, format.replace(/[^Y|^m|^d]/g, ""));
                 dateInfo = {
                     obj : new Date(dateStrArr[0], dateStrArr[1]-1, 1, 0, 0, 0),
                     format : format
                 };
             } else if (str.length === 8) {
                 if(format === undefined) {
-                    format = NA.context.attr("data").formatter.date.Ymd();
+                    format = N.context.attr("data").formatter.date.Ymd();
                 }
-                dateStrArr = NC.date.strToDateStrArr(str, format.replace(/[^Y|^m|^d]/g, ""));
+                dateStrArr = N.date.strToDateStrArr(str, format.replace(/[^Y|^m|^d]/g, ""));
                 dateInfo = {
                     obj : new Date(dateStrArr[0], dateStrArr[1]-1, dateStrArr[2], 0, 0, 0),
                     format : format
                 };
             } else if (str.length === 10) {
                 if(format === undefined) {
-                    format = NA.context.attr("data").formatter.date.YmdH();
+                    format = N.context.attr("data").formatter.date.YmdH();
                 }
-                dateStrArr = NC.date.strToDateStrArr(str, format.replace(/[^Y|^m|^d]/g, ""));
+                dateStrArr = N.date.strToDateStrArr(str, format.replace(/[^Y|^m|^d]/g, ""));
                 dateInfo = {
-                    obj : new Date(dateStrArr[0], dateStrArr[1]-1, dateStrArr[2], Number(str.substring(8, 10)), 0, 0),
+                    obj : new Date(dateStrArr[0], dateStrArr[1]-1, dateStrArr[2], str.substring(8, 10), 0, 0),
                     format : format
                 };
             } else if (str.length === 12) {
                 if(format === undefined) {
-                    format = NA.context.attr("data").formatter.date.YmdHi();
+                    format = N.context.attr("data").formatter.date.YmdHi();
                 }
-                dateStrArr = NC.date.strToDateStrArr(str, format.replace(/[^Y|^m|^d]/g, ""));
+                dateStrArr = N.date.strToDateStrArr(str, format.replace(/[^Y|^m|^d]/g, ""));
                 dateInfo = {
-                    obj : new Date(dateStrArr[0], dateStrArr[1]-1, dateStrArr[2], Number(str.substring(8, 10)), Number(str.substring(10, 12)),
+                    obj : new Date(dateStrArr[0], dateStrArr[1]-1, dateStrArr[2], str.substring(8, 10), str.substring(10, 12),
                         0),
                     format : format
                 };
             } else if (str.length >= 14) {
                 if(format === undefined) {
-                    format = NA.context.attr("data").formatter.date.YmdHis();
+                    format = N.context.attr("data").formatter.date.YmdHis();
                 }
-                dateStrArr = NC.date.strToDateStrArr(str, format.replace(/[^Y|^m|^d]/g, ""));
+                dateStrArr = N.date.strToDateStrArr(str, format.replace(/[^Y|^m|^d]/g, ""));
                 dateInfo = {
-                    obj : new Date(dateStrArr[0], dateStrArr[1]-1, dateStrArr[2], Number(str.substring(8, 10)), Number(str.substring(10, 12)),
-                        Number(str.substring(12, 14))),
+                    obj : new Date(dateStrArr[0], dateStrArr[1]-1, dateStrArr[2], str.substring(8, 10), str.substring(10, 12),
+                        str.substring(12, 14)),
                     format : format
                 };
             }
@@ -529,7 +545,7 @@ export class NC {
     };
 
     /**
-     * NC.element package
+     * N.element package
      */
     static element = class {
 
@@ -548,7 +564,7 @@ export class NC {
             let thisEle;
             let id;
             ele.each(function() {
-                thisEle = jQuery(this);
+                thisEle = $(this);
                 if(thisEle.is("input:radio, input:checkbox")) {
                     id = thisEle.attr("name");
                 } else {
@@ -565,10 +581,10 @@ export class NC {
         static toData(eles) {
             const retData = {};
             let key, ele;
-            let beforeCheckboxNRadios = jQuery();
+            let beforeCheckboxNRadios = $();
             eles.each(function() {
-                key = jQuery(this).attr("id");
-                ele = jQuery(this);
+                key = $(this).attr("id");
+                ele = $(this);
                 if(ele.is("input:radio") || ele.is("input:checkbox")) {
                     if(beforeCheckboxNRadios.filter(ele).length === 0) {
                         if(ele.closest(".select_input_container__").length > 0) {
@@ -619,7 +635,7 @@ export class NC {
         };
 
         /**
-         * Data change effect for ND.ds
+         * Data change effect for N.ds
          */
         static dataChanged(ele) {
             ele.addClass("data_changed__");
@@ -631,13 +647,13 @@ export class NC {
          */
         static maxZindex(ele) {
             if (ele === undefined) {
-                ele = jQuery("div, span, ul, p, nav, article, section");
+                ele = $("div, span, ul, p, nav, article, section");
             }
-            return Math.max.apply(null, jQuery.map(ele, function(e) {
-                const zIndex = parseInt(jQuery(e).css("z-index"));
+            return Math.max.apply(null, $.map(ele, function(e, n) {
+                const zIndex = parseInt($(e).css("z-index"));
                 if (zIndex >= 2147483647) {
-                    jQuery(e).css("z-index", String(2147483647 - 999));
-                    jQuery(e).attr("fixed", "[Natural-JS]limited_z-index_value(-999)");
+                    $(e).css("z-index", String(2147483647 - 999));
+                    $(e).attr("fixed", "[Natural-JS]limited_z-index_value(-999)");
                 }
                 return zIndex || 0;
             }));
@@ -646,7 +662,7 @@ export class NC {
     };
 
     /**
-     * NC.browser package
+     * N.browser package
      */
     static browser = class {
         /**
@@ -660,7 +676,7 @@ export class NC {
                     if (endstr === -1) {
                         endstr = document.cookie.length;
                     }
-                    return decodeURIComponent(document.cookie.substring(offset, endstr));
+                    return unescape(document.cookie.substring(offset, endstr));
                 };
 
                 const arg = name + "=";
@@ -692,7 +708,7 @@ export class NC {
                 } else {
                     domain_ = "";
                 }
-                document.cookie = name + "=" + decodeURIComponent(value) + "; path=/" + expires + domain_;
+                document.cookie = name + "=" + escape(value) + "; path=/" + expires + domain_;
             }
         };
 
@@ -734,15 +750,15 @@ export class NC {
          * Check the connected browser
          */
         static is(name) {
-            if("opera" in window || navigator.userAgent.indexOf(' OPR/') >= 0) {
+            if(!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0) {
                 return name === "opera";
-            } else if("InstallTrigger" in window) {
+            } else if(typeof InstallTrigger !== 'undefined') {
                 return name === "firefox";
             } else if(name !== "ios" && navigator.userAgent.match(/^((?!chrome|android|crios|fxios).)*safari/i)) {
                 return name === "safari";
-            } else if("chrome" in window && !("opera" in window || navigator.userAgent.indexOf(' OPR/') >= 0)) {
+            } else if(!!window.chrome && !(!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0)) {
                 return name === "chrome";
-            } else if(NC.browser.msieVersion() > 0) {
+            } else if(N.browser.msieVersion() > 0) {
                 return name === "ie";
             } else if(navigator.userAgent.match(/like Mac OS X/i)) {
                 return name === "ios";
@@ -764,26 +780,26 @@ export class NC {
          * Get scrollbars width for connected browser
          */
         static scrollbarWidth() {
-            const div = jQuery('<div class="antiscroll-inner" style="width:50px;height:50px;overflow-y:scroll;' +
+            const div = $('<div class="antiscroll-inner" style="width:50px;height:50px;overflow-y:scroll;' +
                 'position:absolute;top:-200px;left:-200px;"><div style="height:100px;width:100%"/>' +
                 '</div>');
 
-            jQuery("body").append(div);
-            const w1 = jQuery(div).innerWidth();
-            const w2 = jQuery("div", div).innerWidth();
-            jQuery(div).remove();
+            $("body").append(div);
+            const w1 = $(div).innerWidth();
+            const w2 = $("div", div).innerWidth();
+            $(div).remove();
 
             return w1 - w2;
         };
 
     };
     /**
-     * NC.message package
+     * N.message package
      */
     static message = class {
 
         /**
-         * Replace message variables for NC.message.get
+         * Replace message variables for N.message.get
          */
         static replaceMsgVars(msg, vars) {
             if (vars !== undefined) {
@@ -798,14 +814,14 @@ export class NC {
          * Get message from message resource
          */
         static get(resource, key, vars) {
-            const msg = resource[NC.locale()][key];
-            return msg !== undefined ? NC.message.replaceMsgVars(msg, vars) : key;
+            const msg = resource[N.locale()][key];
+            return msg !== undefined ? N.message.replaceMsgVars(msg, vars) : key;
         };
 
     };
 
     /**
-     * NC.array package
+     * N.array package
      */
     static array = class {
 
@@ -814,15 +830,15 @@ export class NC {
          */
         static deduplicate(arr, key) {
             const rtnArr = [];
-            jQuery(arr).each(function(i, obj) {
-                if(NC.type(obj) === "object" && key !== undefined) {
-                    if(jQuery.inArray(obj[key], jQuery(rtnArr).map(function() {
+            $(arr).each(function(i, obj) {
+                if(N.type(obj) === "object" && key !== undefined) {
+                    if($.inArray(obj[key], $(rtnArr).map(function() {
                         return this[key];
                     }).get()) < 0) {
                         rtnArr.push(obj);
                     }
                 } else {
-                    if(jQuery.inArray(obj, rtnArr) < 0) {
+                    if($.inArray(obj, rtnArr) < 0) {
                         rtnArr.push(obj);
                     }
                 }
@@ -833,21 +849,21 @@ export class NC {
     };
 
     /**
-     * NC.json package
+     * N.json package
      */
     static json = class {
 
         static mapFromKeys(obj) {
             if(arguments.length > 1) {
                 let args = Array.prototype.slice.call(arguments, 0);
-                if(NA.context.attr("core").excludeMapFromKeys !== undefined) {
-                    args = args.concat(NA.context.attr("core").excludeMapFromKeys);
+                if(N.context.attr("core").excludeMapFromKeys !== undefined) {
+                    args = args.concat(N.context.attr("core").excludeMapFromKeys);
                 }
-                if(NC.type(obj) === "array") {
+                if(N.type(obj) === "array") {
                     if(obj.length === 0) {
                         return obj;
                     }
-                    return jQuery(obj).map(function() {
+                    return $(obj).map(function() {
                         const retObj = {};
                         for(let i=1,length=args.length;i<length;i++) {
                             if(args[i] !== undefined && this[args[i]] !== undefined) {
@@ -874,10 +890,10 @@ export class NC {
          * Merge JSON Array by key
          */
         static mergeJsonArray(arr1, arr2, key) {
-            const keySet = jQuery(arr1).map(function() {
+            const keySet = $(arr1).map(function() {
                 return this[key];
             }).get().join(",");
-            jQuery(arr2).each(function() {
+            $(arr2).each(function() {
                 if(keySet.indexOf(this[key]) < 0) {
                     arr1.push(this);
                 }
@@ -889,8 +905,8 @@ export class NC {
          * Return formated JSON String
          */
         static format(oData, sIndent) {
-            if (!NC.isEmptyObject(oData)) {
-                if (NC.isString(oData)) {
+            if (!N.isEmptyObject(oData)) {
+                if (N.isString(oData)) {
                     oData = JSON.parse(oData);
                 }
                 if(sIndent === undefined) {
@@ -954,11 +970,11 @@ export class NC {
                 // Allow: Special Keys
                 else if (specialKeys.indexOf(key) !== -1) {
                     // Fix Issue: right arrow & Delete & ins in FireFox
-                    if (navigator.userAgent.indexOf("Firefox") !== -1 && (key === 39 || key === 45 || key === 46)) {
+                    if (navigator.userAgent.indexOf("Firefox") !== -1 && (key == 39 || key == 45 || key == 46)) {
                         return e.keyCode !== undefined && e.keyCode > 0;
                     }
                     // DisAllow : "#" & "$" & "%"
-                    else return !(e.shiftKey && (key === 35 || key === 36 || key === 37));
+                    else return !(e.shiftKey && (key == 35 || key == 36 || key == 37));
                 }
                 else {
                     return false;
@@ -986,8 +1002,8 @@ export class NC {
         static windowScrollLock(ele) {
             ele.on("mousewheel.ui DOMMouseScroll.ui", function(e) {
                 const delta = e.originalEvent.wheelDelta || -e.originalEvent.detail;
-                if (delta > 0 && jQuery(this).scrollTop() <= 0) return false;
-                return !(delta < 0 && jQuery(this).scrollTop() >= this.scrollHeight - jQuery(this).height());
+                if (delta > 0 && $(this).scrollTop() <= 0) return false;
+                return !(delta < 0 && $(this).scrollTop() >= this.scrollHeight - $(this).height());
             });
         };
 
@@ -998,11 +1014,11 @@ export class NC {
             if(!ele.css(css) || ele.css(css).startsWith("0")) {
                 return 0;
             }
-            return Math.max.apply(undefined, jQuery(ele.css(css).split(",")).map(function() {
+            return Math.max.apply(undefined, $(ele.css(css).split(",")).map(function() {
                 if(this.indexOf("ms") > -1) {
-                    return parseInt(NC.string.trimToZero(this));
+                    return parseInt(N.string.trimToZero(this));
                 } else {
-                    return parseFloat(NC.string.trimToZero(this)) * 1000;
+                    return parseFloat(N.string.trimToZero(this)) * 1000;
                 }
             }).get());
         };
@@ -1071,7 +1087,7 @@ export class NC {
      */
     remove_(idx, length) {
         if (idx !== undefined) {
-            if (!NC.isNumeric(idx)) {
+            if (!N.isNumeric(idx)) {
                 idx = this.toArray().indexOf(idx);
             }
             if (length === undefined) {
@@ -1089,10 +1105,10 @@ export class NC {
         const args = arguments;
         const self = this;
         return this.each(function() {
-            if(jQuery._data(this, "events") !== undefined) {
+            if($._data(this, "events") !== undefined) {
                 self.on.apply(self, args);
-                jQuery(this).each(function() {
-                    const handlers = jQuery._data(this, "events")[args[0].split(".")[0]];
+                $(this).each(function() {
+                    const handlers = $._data(this, "events")[args[0].split(".")[0]];
                     const handler = handlers.pop();
                     handlers.splice(0, 0, handler);
                 });
@@ -1108,8 +1124,8 @@ export class NC {
     instance(name, instance) {
         if(arguments.length === 0) {
             return this.map(function() {
-                return jQuery.map(jQuery(this).data(), function(v, i) {
-                    if(NC.string.endsWith(i, "__")) {
+                return $.map($(this).data(), function(v, i) {
+                    if(N.string.endsWith(i, "__")) {
                         return v;
                     }
                 });
@@ -1117,15 +1133,15 @@ export class NC {
         } else if(arguments.length === 1) {
             if(typeof name === "function") {
                 return this.each(function() {
-                    return jQuery.each(jQuery(this).data(), function(i, v) {
-                        if(NC.string.endsWith(i, "__")) {
+                    return $.each($(this).data(), function(i, v) {
+                        if(N.string.endsWith(i, "__")) {
                             name.call(v, i.replace("__", ""), v);
                         }
                     });
                 });
             } else {
                 const insts = this.map(function() {
-                    return jQuery.map(jQuery(this).data(), function(v, i) {
+                    return $.map($(this).data(), function(v, i) {
                         if(i === name + "__") {
                             return v;
                         }
@@ -1136,7 +1152,7 @@ export class NC {
         } else if(arguments.length === 2) {
             if(typeof instance === "function") {
                 return this.each(function() {
-                    return jQuery.each(jQuery(this).data(), function(i, v) {
+                    return $.each($(this).data(), function(i, v) {
                         if(name + "__" === i) {
                             instance.call(v, i.replace("__", ""), v);
                         }
@@ -1156,12 +1172,12 @@ export class NC {
      */
     vals(vals) {
         const tagName = this.get(0).tagName.toLowerCase();
-        const type = NC.string.trimToEmpty(this.attr("type")).toLowerCase();
+        const type = N.string.trimToEmpty(this.attr("type")).toLowerCase();
         let selEle;
         let ele;
-        if(vals !== undefined && NC.type(vals) !== "function") {
+        if(vals !== undefined && N.type(vals) !== "function") {
             if (tagName === "select") {
-                if(NC.string.trimToNull(vals) === null && !this.is("select[multiple='multiple']")) {
+                if(N.string.trimToNull(vals) === null && !this.is("select[multiple='multiple']")) {
                     if(this.length > 0) {
                         this.get(0).selectedIndex = 0;
                     }
@@ -1169,7 +1185,7 @@ export class NC {
                     this.val(vals);
                 }
             } else if (type === "checkbox") {
-                if(NC.type(vals) === "string") {
+                if(N.type(vals) === "string") {
                     vals = [ vals ];
                 }
                 if(this.length > 1) {
@@ -1179,12 +1195,12 @@ export class NC {
                         self.filter("[value='" + String(this) + "']").prop("checked", true);
                     });
                 } else if(this.length === 1) {
-                    if(vals[0] !== NA.context.attr("core").sgChkdVal && vals[0] !== NA.context.attr("core").sgUnChkdVal) {
-                        vals[0] = NA.context.attr("core").sgUnChkdVal;
+                    if(vals[0] !== N.context.attr("core").sgChkdVal && vals[0] !== N.context.attr("core").sgUnChkdVal) {
+                        vals[0] = N.context.attr("core").sgUnChkdVal;
                     }
-                    if(NA.context.attr("core").sgChkdVal === vals[0]) {
+                    if(N.context.attr("core").sgChkdVal === vals[0]) {
                         this.prop("checked", true);
-                    } else if (NA.context.attr("core").sgUnChkdVal === vals[0]) {
+                    } else if (N.context.attr("core").sgUnChkdVal === vals[0]) {
                         this.prop("checked", false);
                     } else {
                         this.filter("[value='" + String(vals[0]) + "']").prop("checked", true);
@@ -1206,9 +1222,9 @@ export class NC {
             if (tagName === "select") {
                 selEle = this.find("> option:selected");
                 if(selEle.length > 1) {
-                    if(NC.type(vals) !== "function") {
+                    if(N.type(vals) !== "function") {
                         return selEle.map(function() {
-                            return NC.string.trimToEmpty(jQuery(this).val());
+                            return N.string.trimToEmpty($(this).val());
                         }).toArray();
                     } else {
                         ele = this.find("> option");
@@ -1217,9 +1233,9 @@ export class NC {
                         });
                     }
                 } else if(selEle.length === 1) {
-                    if(NC.type(vals) !== "function") {
+                    if(N.type(vals) !== "function") {
                         if(selEle.attr("value") !== undefined) {
-                            return NC.string.trimToEmpty(selEle.val());
+                            return N.string.trimToEmpty(selEle.val());
                         } else {
                             return "";
                         }
@@ -1232,8 +1248,8 @@ export class NC {
                 }
             } else if (type === "radio") {
                 selEle = this.filter("[name='" + this.attr("name") + "']:checked");
-                if(NC.type(vals) !== "function") {
-                    return NC.string.trimToEmpty(selEle.val());
+                if(N.type(vals) !== "function") {
+                    return N.string.trimToEmpty(selEle.val());
                 } else {
                     vals.call(selEle, this.filter("[name='" + this.attr("name") + "']").index(selEle), selEle);
                     return selEle;
@@ -1241,11 +1257,11 @@ export class NC {
             } else if (type === "checkbox") {
                 selEle = this.filter("[name='" + this.attr("name") + "']:checked");
                 if(this.length > 1) {
-                    if(NC.type(vals) !== "function") {
+                    if(N.type(vals) !== "function") {
                         const chkedVals = selEle.map(function() {
-                            return NC.string.trimToEmpty(jQuery(this).val());
+                            return N.string.trimToEmpty($(this).val());
                         }).toArray();
-                        return selEle.length === 1 ? NC.string.trimToEmpty(jQuery(selEle).val()) : chkedVals.length === 0 ? [] : chkedVals;
+                        return selEle.length === 1 ? N.string.trimToEmpty($(selEle).val()) : chkedVals.length === 0 ? [] : chkedVals;
                     } else {
                         ele = this.filter("[name='" + this.attr("name") + "']");
                         return selEle.each(function() {
@@ -1256,18 +1272,18 @@ export class NC {
                     if(selEle.length === 0) {
                         selEle = this.filter("[id='" + this.attr("id") + "']");
                     }
-                    if(NC.type(vals) !== "function") {
-                        let val = NC.string.trimToEmpty(selEle.val());
-                        if(val !== NA.context.attr("core").sgChkdVal && val !== NA.context.attr("core").sgUnChkdVal) {
-                            val = NA.context.attr("core").sgUnChkdVal;
+                    if(N.type(vals) !== "function") {
+                        let val = N.string.trimToEmpty(selEle.val());
+                        if(val !== N.context.attr("core").sgChkdVal && val !== N.context.attr("core").sgUnChkdVal) {
+                            val = N.context.attr("core").sgUnChkdVal;
                         }
-                        if(NA.context.attr("core").sgChkdVal === val || NA.context.attr("core").sgUnChkdVal === val || selEle.attr("value") === undefined) {
+                        if(N.context.attr("core").sgChkdVal === val || N.context.attr("core").sgUnChkdVal === val || selEle.attr("value") === undefined) {
                             if(selEle.prop("checked")) {
-                                val = NA.context.attr("core").sgChkdVal;
+                                val = N.context.attr("core").sgChkdVal;
                                 selEle.val(val);
                                 return val;
                             } else if (!selEle.prop("checked")) {
-                                val = NA.context.attr("core").sgUnChkdVal;
+                                val = N.context.attr("core").sgUnChkdVal;
                                 selEle.val(val);
                                 return val;
                             }
@@ -1288,17 +1304,17 @@ export class NC {
      * Returns the event bound to the element.
      */
     events(eventName, namespace) {
-        const ele = jQuery(this);
-        if(ele.length > 0 && jQuery._data(ele.get(0), "events") !== undefined) {
+        const ele = $(this);
+        if(ele.length > 0 && $._data(ele.get(0), "events") !== undefined) {
             if(eventName !== undefined && namespace !== undefined) {
-                const e_ = jQuery(jQuery._data(ele.get(0), "events")[eventName]).filter(function() {
+                const e_ = $($._data(ele.get(0), "events")[eventName]).filter(function() {
                     return namespace === this.namespace;
                 }).get();
-                return NC.isEmptyObject(e_) ? undefined : e_;
+                return N.isEmptyObject(e_) ? undefined : e_;
             } else if(eventName !== undefined && namespace === undefined) {
-                return jQuery._data(ele.get(0), "events")[eventName];
+                return $._data(ele.get(0), "events")[eventName];
             } else {
-                return jQuery._data(ele.get(0), "events");
+                return $._data(ele.get(0), "events");
             }
         }
     };
@@ -1322,255 +1338,255 @@ export class NC {
                 }
                 return true;
             };
-
-            this.setGeneric = function(_v, _d) {
-                let v = _v, m = this.format;
-                let r = "@#~", rt = [], nv = "", t, x, a = [], j = 0, rx = {
-                    "@" : "a-zA-Z가-힣ㄱ-ㅎㅏ-ㅣ\x20\s",
-                    "#" : "0-9\s",
-                    "~" : "0-9a-zA-Z가-힣ㄱ-ㅎㅏ-ㅣ\x20\s"
-                };
-
-                // strip out invalid characters
-                v = v.replace(new RegExp("[^" + rx["~"] + "]", "gi"), "");
-                if ((_d === true) && (v.length === this.strippedValue.length)) {
-                    v = v.substring(0, v.length - 1);
-                }
-                this.strippedValue = v;
-                const b = [];
-                for (let i = 0; i < m.length; i++) {
-                    // grab the current character
-                    x = m.charAt(i);
-                    // check to see if current character is a mask, escape commands are not a mask character
-                    t = (r.indexOf(x) > -1);
-                    // if the current character is an escape command, then grab the next character
-                    if (x === "!") {
-                        x = m.charAt(i++);
-                    }
-                    // build a regex to test against
-                    if ((t && !this.allowPartial) || (t && this.allowPartial && (rt.length < v.length))) {
-                        rt[rt.length] = "[" + rx[x] + "]";
-                    }
-                    // build mask definition table
-                    a[a.length] = {
-                        "chr" : x,
-                        "mask" : t
-                    };
-                }
-
-                let hasOneValidChar = false;
-                // if the regex fails, return an error
-                if (!this.allowPartial && !(new RegExp(rt.join(""))).test(v)) {
-                    return this.throwError(1, "The value \"" + _v + "\" must be in the format " + this.format + ".", _v);
-                } else if ((this.allowPartial && (v.length > 0)) || !this.allowPartial) {
-                    for (let i = 0; i < a.length; i++) {
-                        if (a[i].mask) {
-                            while (v.length > 0 && !(new RegExp(rt[j])).test(v.charAt(j))) {
-                                v = (v.length === 1) ? "" : v.substring(1);
-                            }
-                            if (v.length > 0) {
-                                nv += v.charAt(j);
-                                hasOneValidChar = true;
-                            }
-                            j++;
-                        } else {
-                            nv += a[i].chr;
-                        }
-                        if (this.allowPartial && (j > v.length)) {
-                            break;
-                        }
-                    }
-                }
-
-                if (this.allowPartial && !hasOneValidChar) {
-                    nv = "";
-                }
-                if (this.allowPartial) {
-                    if (nv.length < a.length) {
-                        this.nextValidChar = rx[a[nv.length].chr];
-                    } else {
-                        this.nextValidChar = null;
-                    }
-                }
-
-                return nv;
-            };
-
-            this.setNumeric = function(_v, _p, _d) {
-                let v = String(_v).replace(/[^\d.-]*/gi, ""), m = this.format;
-                // make sure there's only one decimal point
-                v = v.replace(/\./, "d").replace(/\./g, "").replace(/d/, ".");
-
-                // check to see if an invalid mask operation has been entered
-                if (!/^[\$]?((\$?[\+-]?([0#]{1,3},)?[0#]*(\.[0#]*)?)|([\+-]?\([\+-]?([0#]{1,3},)?[0#]*(\.[0#]*)?\)))$/.test(m)) {
-                    return this.throwError(1, "An invalid numeric user format was specified for the \nNumeric user format constructor.", _v);
-                }
-
-                if ((_d === true) && (v.length === this.strippedValue.length)) {
-                    v = v.substring(0, v.length - 1);
-                }
-
-                if (this.allowPartial && (v.replace(/[^0-9]/, "").length === 0)) {
-                    return v;
-                }
-                this.strippedValue = v;
-
-                if (v.length === 0) {
-                    v = NaN;
-                }
-                const vn = Number(v);
-                if (isNaN(vn)) {
-                    return this.throwError(2, "The value entered was not a number.", _v);
-                }
-
-                // if no mask, stop processing
-                if (m.length === 0) {
-                    return v;
-                }
-
-                // get the value before the decimal point
-                let vi = String(Math.abs(Number((v.indexOf(".") > -1) ? v.split(".")[0] : v)));
-                // get the value after the decimal point
-                let vd = (v.indexOf(".") > -1) ? v.split(".")[1] : "";
-                const _vd = vd;
-
-                const isNegative = (vn !== 0 && Math.abs(vn) * -1 === vn);
-
-                // check for masking operations
-                const show = {
-                    "$" : /^[\$]/.test(m),
-                    "(" : (isNegative && (m.indexOf("(") > -1)),
-                    "+" : ((m.indexOf("+") !== -1) && !isNegative)
-                };
-                show["-"] = (isNegative && (!show["("] || (m.indexOf("-") !== -1)));
-
-                // replace all non-placeholders from the mask
-                m = m.replace(/[^#0.,]*/gi, "");
-
-                // make sure there are the correct number of decimal places
-                // get number of digits after decimal point in mask
-                const dm = (m.indexOf(".") > -1) ? m.split(".")[1] : "";
-                if (dm.length === 0) {
-                    if (_p !== undefined && _p === "round") {
-                        vi = String(Math.round(Number(vi)));
-                    } else if (_p !== undefined && _p === "ceil") {
-                        vi = String(Math.ceil(Number(vi)));
-                    } else {
-                        vi = String(Math.floor(Number(vi)));
-                    }
-                    vd = "";
-                } else {
-                    // find the last zero, which indicates the minimum number
-                    // of decimal places to show
-                    const md = dm.lastIndexOf("0") + 1;
-                    // if the number of decimal places is greater than the mask, then round off
-                    if (vd.length > dm.length) {
-                        if (_p !== undefined && _p === "round") {
-                            vd = String(Math.round(Number(vd.substring(0, dm.length + 1)) / 10));
-                        } else if (_p !== undefined && _p === "ceil") {
-                            vd = String(Math.ceil(Number(vd.substring(0, dm.length + 1)) / 10));
-                        } else {
-                            vd = String(Math.floor(Number(vd.substring(0, dm.length + 1)) / 10));
-                        }
-                    } else {
-                        // otherwise, pad the string w/the required zeros
-                        while (vd.length < md) {
-                            vd += "0";
-                        }
-                    }
-                }
-
-                /*
-                 * pad the int with any necessary zeros
-                 */
-                // get number of digits before decimal point in mask
-                let im = (m.indexOf(".") > -1) ? m.split(".")[0] : m;
-                im = im.replace(/[^0#]+/gi, "");
-                // find the first zero, which indicates the minimum length
-                // that the value must be padded w/zeros
-                let mv = im.indexOf("0") + 1;
-                // if there is a zero found, make sure it's padded
-                if (mv > 0) {
-                    mv = im.length - mv + 1;
-                    while (vi.length < mv) {
-                        vi = "0" + vi;
-                    }
-                }
-
-                // check to see if we need commas in the thousands placeholder
-                if (/[#0]+,[#0]{3}/.test(m)) {
-                    // add the commas as the placeholder
-                    let x = [], i = 0, n = Number(vi);
-                    while (n > 999) {
-                        x[i] = "00" + String(n % 1000);
-                        x[i] = x[i].substring(x[i].length - 3);
-                        n = Math.floor(n / 1000);
-                        i++;
-                    }
-                    x[i] = String(n % 1000);
-                    vi = x.reverse().join(",");
-                }
-
-                // combine the new value together
-                if ((vd.length > 0 && !this.allowPartial) || ((dm.length > 0) && this.allowPartial && (v.indexOf(".") > -1) && (_vd.length >= vd.length))) {
-                    v = vi + "." + vd;
-                } else if ((dm.length > 0) && this.allowPartial && (v.indexOf(".") > -1) && (_vd.length < vd.length)) {
-                    v = vi + "." + _vd;
-                } else {
-                    v = vi;
-                }
-
-                if (show.$) {
-                    v = this.format.replace(/(^[\$])(.+)/gi, "$") + v;
-                }
-                if (show["+"]) {
-                    v = "+" + v;
-                }
-                if (show["-"]) {
-                    v = "-" + v;
-                }
-                if (show["("]) {
-                    v = "(" + v + ")";
-                }
-                return v;
-            };
-
         };
+
+        static setGeneric(_v, _d) {
+            let v = _v, m = this.format;
+            let r = "@#~", rt = [], nv = "", t, x, a = [], j = 0, rx = {
+                "@" : "a-zA-Z가-힣ㄱ-ㅎㅏ-ㅣ\x20\s",
+                "#" : "0-9\s",
+                "~" : "0-9a-zA-Z가-힣ㄱ-ㅎㅏ-ㅣ\x20\s"
+            };
+
+            // strip out invalid characters
+            v = v.replace(new RegExp("[^" + rx["~"] + "]", "gi"), "");
+            if ((_d === true) && (v.length === this.strippedValue.length)) {
+                v = v.substring(0, v.length - 1);
+            }
+            this.strippedValue = v;
+            const b = [];
+            for (let i = 0; i < m.length; i++) {
+                // grab the current character
+                x = m.charAt(i);
+                // check to see if current character is a mask, escape commands are not a mask character
+                t = (r.indexOf(x) > -1);
+                // if the current character is an escape command, then grab the next character
+                if (x === "!") {
+                    x = m.charAt(i++);
+                }
+                // build a regex to test against
+                if ((t && !this.allowPartial) || (t && this.allowPartial && (rt.length < v.length))) {
+                    rt[rt.length] = "[" + rx[x] + "]";
+                }
+                // build mask definition table
+                a[a.length] = {
+                    "chr" : x,
+                    "mask" : t
+                };
+            }
+
+            let hasOneValidChar = false;
+            // if the regex fails, return an error
+            if (!this.allowPartial && !(new RegExp(rt.join(""))).test(v)) {
+                return this.throwError(1, "The value \"" + _v + "\" must be in the format " + this.format + ".", _v);
+            } else if ((this.allowPartial && (v.length > 0)) || !this.allowPartial) {
+                for (let i = 0; i < a.length; i++) {
+                    if (a[i].mask) {
+                        while (v.length > 0 && !(new RegExp(rt[j])).test(v.charAt(j))) {
+                            v = (v.length === 1) ? "" : v.substring(1);
+                        }
+                        if (v.length > 0) {
+                            nv += v.charAt(j);
+                            hasOneValidChar = true;
+                        }
+                        j++;
+                    } else {
+                        nv += a[i].chr;
+                    }
+                    if (this.allowPartial && (j > v.length)) {
+                        break;
+                    }
+                }
+            }
+
+            if (this.allowPartial && !hasOneValidChar) {
+                nv = "";
+            }
+            if (this.allowPartial) {
+                if (nv.length < a.length) {
+                    this.nextValidChar = rx[a[nv.length].chr];
+                } else {
+                    this.nextValidChar = null;
+                }
+            }
+
+            return nv;
+        };
+
+        static setNumeric(_v, _p, _d) {
+            let v = String(_v).replace(/[^\d.-]*/gi, ""), m = this.format;
+            // make sure there's only one decimal point
+            v = v.replace(/\./, "d").replace(/\./g, "").replace(/d/, ".");
+
+            // check to see if an invalid mask operation has been entered
+            if (!/^[\$]?((\$?[\+-]?([0#]{1,3},)?[0#]*(\.[0#]*)?)|([\+-]?\([\+-]?([0#]{1,3},)?[0#]*(\.[0#]*)?\)))$/.test(m)) {
+                return this.throwError(1, "An invalid numeric user format was specified for the \nNumeric user format constructor.", _v);
+            }
+
+            if ((_d === true) && (v.length === this.strippedValue.length)) {
+                v = v.substring(0, v.length - 1);
+            }
+
+            if (this.allowPartial && (v.replace(/[^0-9]/, "").length === 0)) {
+                return v;
+            }
+            this.strippedValue = v;
+
+            if (v.length === 0) {
+                v = NaN;
+            }
+            const vn = Number(v);
+            if (isNaN(vn)) {
+                return this.throwError(2, "The value entered was not a number.", _v);
+            }
+
+            // if no mask, stop processing
+            if (m.length === 0) {
+                return v;
+            }
+
+            // get the value before the decimal point
+            let vi = String(Math.abs((v.indexOf(".") > -1) ? v.split(".")[0] : v));
+            // get the value after the decimal point
+            let vd = (v.indexOf(".") > -1) ? v.split(".")[1] : "";
+            const _vd = vd;
+
+            const isNegative = (vn !== 0 && Math.abs(vn) * -1 === vn);
+
+            // check for masking operations
+            const show = {
+                "$" : /^[\$]/.test(m),
+                "(" : (isNegative && (m.indexOf("(") > -1)),
+                "+" : ((m.indexOf("+") !== -1) && !isNegative)
+            };
+            show["-"] = (isNegative && (!show["("] || (m.indexOf("-") !== -1)));
+
+            // replace all non-placeholders from the mask
+            m = m.replace(/[^#0.,]*/gi, "");
+
+            // make sure there are the correct number of decimal places
+            // get number of digits after decimal point in mask
+            const dm = (m.indexOf(".") > -1) ? m.split(".")[1] : "";
+            if (dm.length === 0) {
+                if (_p !== undefined && _p === "round") {
+                    vi = String(Math.round(Number(vi)));
+                } else if (_p !== undefined && _p === "ceil") {
+                    vi = String(Math.ceil(Number(vi)));
+                } else {
+                    vi = String(Math.floor(Number(vi)));
+                }
+                vd = "";
+            } else {
+                // find the last zero, which indicates the minimum number
+                // of decimal places to show
+                const md = dm.lastIndexOf("0") + 1;
+                // if the number of decimal places is greater than the mask, then round off
+                if (vd.length > dm.length) {
+                    if (_p !== undefined && _p === "round") {
+                        vd = String(Math.round(Number(vd.substring(0, dm.length + 1)) / 10));
+                    } else if (_p !== undefined && _p === "ceil") {
+                        vd = String(Math.ceil(Number(vd.substring(0, dm.length + 1)) / 10));
+                    } else {
+                        vd = String(Math.floor(Number(vd.substring(0, dm.length + 1)) / 10));
+                    }
+                } else {
+                    // otherwise, pad the string w/the required zeros
+                    while (vd.length < md) {
+                        vd += "0";
+                    }
+                }
+            }
+
+            /*
+             * pad the int with any necessary zeros
+             */
+            // get number of digits before decimal point in mask
+            let im = (m.indexOf(".") > -1) ? m.split(".")[0] : m;
+            im = im.replace(/[^0#]+/gi, "");
+            // find the first zero, which indicates the minimum length
+            // that the value must be padded w/zeros
+            let mv = im.indexOf("0") + 1;
+            // if there is a zero found, make sure it's padded
+            if (mv > 0) {
+                mv = im.length - mv + 1;
+                while (vi.length < mv) {
+                    vi = "0" + vi;
+                }
+            }
+
+            // check to see if we need commas in the thousands placeholder
+            if (/[#0]+,[#0]{3}/.test(m)) {
+                // add the commas as the placeholder
+                let x = [], i = 0, n = Number(vi);
+                while (n > 999) {
+                    x[i] = "00" + String(n % 1000);
+                    x[i] = x[i].substring(x[i].length - 3);
+                    n = Math.floor(n / 1000);
+                    i++;
+                }
+                x[i] = String(n % 1000);
+                vi = x.reverse().join(",");
+            }
+
+            // combine the new value together
+            if ((vd.length > 0 && !this.allowPartial) || ((dm.length > 0) && this.allowPartial && (v.indexOf(".") > -1) && (_vd.length >= vd.length))) {
+                v = vi + "." + vd;
+            } else if ((dm.length > 0) && this.allowPartial && (v.indexOf(".") > -1) && (_vd.length < vd.length)) {
+                v = vi + "." + _vd;
+            } else {
+                v = vi;
+            }
+
+            if (show.$) {
+                v = this.format.replace(/(^[\$])(.+)/gi, "$") + v;
+            }
+            if (show["+"]) {
+                v = "+" + v;
+            }
+            if (show["-"]) {
+                v = "-" + v;
+            }
+            if (show["("]) {
+                v = "(" + v + ")";
+            }
+            return v;
+        };
+
     };
 
 }
 
 // Extend regexp filter selector to jQuery filter selector
-(function(){
+(function($: JQueryStatic){
 
     const paramMatch = /^([^,]+),(.+)/;
     const getterMap = {
-        "default": function($el, attrName, propertyName){
+        "default": function($el: JQuery, attrName, propertyName){
             return $el.attr(attrName) ? [ $el.attr(attrName) ] : [];
         },
-        "data": function($el, attrName, propertyName){
+        "data": function($el: JQuery, attrName: string, propertyName: string): any[]{
             return $el.data(propertyName) ? [ $el.data(propertyName) ] : [];
         },
-        "class": function($el, attrName, propertyName){
+        "class": function($el: JQuery, attrName: string, propertyName: string): string[]{
             return $el.attr('class') ? $el.attr('class').split(' ') : [];
         },
-        "css": function($el, attrName, propertyName){
+        "css": function($el: JQuery, attrName: string, propertyName: string): string[]{
             return $el.css(propertyName) ? [ $el.css(propertyName) ] : [];
         }
     };
 
-    jQuery.expr.pseudos.regexp = jQuery.expr.createPseudo(function(meta){
-        if(!meta) return jQuery.noop;
+    $.expr.pseudos.regexp = $.expr.createPseudo(function(meta):(el: Element)=>boolean {
+        if(!meta) return $.noop;
 
         const params = meta.match(paramMatch);
-        if(!params) return jQuery.noop;
+        if(!params) return $.noop;
 
         const attrNames = params[1].trim().split(':'), attrName = attrNames[0].trim(), propertyName = attrNames.length === 2 ? attrNames[1].trim() : '';
         const regexp = new RegExp(params[2].trim());
         const getter = getterMap[attrName] || getterMap['default'];
 
-        return function(el){
-            const $el = jQuery(el);
+        return function(el: Element){
+            const $el = $(el);
             const values = getter($el, attrName, propertyName);
             for(let i = 0, len = values.length; i < len; i++)
                 if(regexp.test(values[i])) return true;
@@ -1578,7 +1594,7 @@ export class NC {
         };
     });
 
-})();
+})(jQuery);
 
 (function(){
 
@@ -1611,16 +1627,8 @@ export class NC {
      *
      * unsupported (as compared to date in PHP 5.1.3)
      * T, e, o
-     *
-     * @param {string} input
-     * @param {number} time
-     * @returns {string}
-     *
-     * declare interface Date {
-     *     formatDate(input: string, time: boolean): string;
-     * }
      */
-    Date.prototype.formatDate = function(input, time) {
+    Date.prototype.formatDate = function(input: string, time: number): string {
         const daysLong = [ "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ];
         const daysShort = [ "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" ];
         const monthsShort = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
@@ -1752,12 +1760,12 @@ export class NC {
             },
             P : function() {
                 // Difference to GMT, with colon between hours and minutes
-                const O = this.O();
-                return (O.substring(0, 3) + ":" + O.substring(3, 5));
+                const O: string = this.O();
+                return O.substring(0, 3) + ":" + O.substring(3, 5);
             },
             r : function() {
                 // RFC 822 formatted date
-                let r; // result
+                let r: string; // result
                 // Thu , 21 Dec 2000
                 r = this.D() + ", " + this.d() + " " + this.M() + " " + this.Y() +
                     // 16 : 01 : 07 0200
@@ -1845,7 +1853,7 @@ export class NC {
                 // we first check, if getFullYear is supported. if it
                 // is, we just use that. ppks code is nice, but wont
                 // work with dates outside 1900-2038, or something like that
-                let x;
+                let x: number;
                 if (date.getFullYear) {
                     const newDate = new Date("January 1 2001 00:00:00 +0000");
                     x = newDate.getFullYear();
@@ -1905,3 +1913,7 @@ export class NC {
     Date.DATE_W3C = "Y-m-d%TH:i:sP";
 
 })();
+
+window.$.N = window.N = N;
+
+export {N};

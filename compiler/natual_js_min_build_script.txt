@@ -14,21 +14,21 @@
 	minify_architecture
 #Arguments
 	-jar ${build_project}/compiler/closure-compiler-v20231112.jar
-	--js ${build_project}/src/natural.architecture.js
+	--js ${build_project}/src/natural.architecture.js_org
 	--js_output_file ${build_project}/dist/natural.architecture.min.js
 
 #Name : 
 	minify_data
 #Arguments
 	-jar ${build_project}/compiler/closure-compiler-v20231112.jar
-	--js ${build_project}/src/natural.data.js
+	--js ${build_project}/src/natural.data.js_org
 	--js_output_file ${build_project}/dist/natural.data.min.js
 
 #Name : 
 	minify_ui
 #Arguments
 	-jar ${build_project}/compiler/closure-compiler-v20231112.jar
-	--js ${build_project}/src/natural.ui.js
+	--js ${build_project}/src/natural.ui.js_org
 	--js_output_file ${build_project}/dist/natural.ui.min.js
 
 #Name : 
@@ -42,7 +42,7 @@
 	minify_all
 #Arguments
 	-jar ${build_project}/compiler/closure-compiler-v20231112.jar
-	--js ${build_project}/src/natural.core.ts ${build_project}/src/natural.architecture.js ${build_project}/src/natural.data.js ${build_project}/src/natural.ui.js ${build_project}/src/natural.ui.shell.js
+	--js ${build_project}/src/natural.core.ts ${build_project}/src/natural.architecture.js_org ${build_project}/src/natural.data.js_org ${build_project}/src/natural.ui.js_org ${build_project}/src/natural.ui.shell.js
 	--js_output_file ${build_project}/dist/natural.js.min.js --create_source_map ${build_project}/dist/natural.js.min.map
 	
 	
