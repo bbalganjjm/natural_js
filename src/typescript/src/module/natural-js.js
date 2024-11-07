@@ -46,6 +46,4 @@ function N(selector, context) {
 Object.assign(N, NC, NA, ND, NU, NUS);
 Object.assign(N.prototype, NC.prototype, NA.prototype, ND.prototype, NU.prototype, NUS.prototype);
 
-window.N = N;
-
 export { N }
