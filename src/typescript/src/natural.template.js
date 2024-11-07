@@ -8,11 +8,11 @@
  */
 
 import { jQuery } from "../lib/jquery-3.7.1.min";
-import { N } from "./natural-js";
+import { N, NaturalJS } from "./natural-js";
 import { NC } from "./natural.core";
 import { NA } from "./natural.architecture";
 
-N.version["Natural-TEMPLATE"] = "0.4.12";
+NaturalJS.VERSION["Natural-TEMPLATE"] = "0.4.12";
 
 // Template
 export class NT {

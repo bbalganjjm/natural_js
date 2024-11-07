@@ -14,7 +14,7 @@ import { ND } from "./natural.data";
 import { NU } from "./natural.ui";
 import { NUS } from "./natural.ui.shell";
 
-class NaturalJS extends jQuery {
+export class NaturalJS extends jQuery {
 
     /**
      * Initializes and returns a new N object based on jQuery objects with the provided selector and context argument values.
@@ -24,14 +24,14 @@ class NaturalJS extends jQuery {
         this.selector = NC.toSelector(selector);
     };
 
-    static VERSION = Object.freeze({
+    static VERSION = {
         "Natural-JS" : "1.0.0",
         "Natural-CORE" : "1.0.0",
         "Natural-ARCHITECTURE" : "1.0.0",
         "Natural-DATA" : "1.0.0",
         "Natural-UI" : "1.0.0",
         "Natural-UI.Shell" : "1.0.0"
-    });
+    };
 
     static get version() {
         return this.VERSION;
