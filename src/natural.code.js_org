@@ -26,17 +26,17 @@
                     }
                     var report = []
 
-                    if(!N.context.attr("code") || (N.context.attr("code") && !N.context.attr("code").inspection)) {
-                        throw N.error("Define Natural-CODE options and message resources in N.context.attr(\"code\").inspection in the natural.config.js file.");
+                    if(!NA.context.attr("code") || (NA.context.attr("code") && !NA.context.attr("code").inspection)) {
+                        throw N.error("Define Natural-CODE options and message resources in NA.context.attr(\"code\").inspection in the natural.config.js file.");
                     }
 
                     if(rules) {
                         N(rules).each(function() {
-                            Code.inspection.rules[this](codes, N.context.attr("code").inspection.excludes, report);
+                            Code.inspection.rules[this](codes, NA.context.attr("code").inspection.excludes, report);
                         });
                     } else {
                         for(var k in Code.inspection.rules) {
-                            Code.inspection.rules[k](codes, N.context.attr("code").inspection.excludes, report);
+                            Code.inspection.rules[k](codes, NA.context.attr("code").inspection.excludes, report);
                         }
                     }
 
@@ -96,7 +96,7 @@
                                     if(script.indexOf(match[0]) > -1) {
                                         report.push({
                                             "level" : SeverityLevels.CRITICAL[0],
-                                            "message" : N.message.get(N.context.attr("code").inspection.message, "NoContextSpecifiedInSelector"),
+                                            "message" : N.message.get(NA.context.attr("code").inspection.message, "NoContextSpecifiedInSelector"),
                                             "line" : codes.substring(0, regex.lastIndex).split("\n").length,
                                             "code" : match[0],
                                         });
@@ -139,7 +139,7 @@
                                 if(script.indexOf(match[0]) > -1) {
                                     report.push({
                                         "level" : SeverityLevels.MAJOR[0],
-                                        "message" : N.message.get(N.context.attr("code").inspection.message, "UseTheComponentsValMethod"),
+                                        "message" : N.message.get(NA.context.attr("code").inspection.message, "UseTheComponentsValMethod"),
                                         "line" : codes.substring(0, regex.lastIndex).split("\n").length,
                                         "code" : match[0],
                                     });
@@ -155,7 +155,7 @@
                         }
                         N(data).each(function() {
                             var consoleLogger = SeverityLevels[this.level.toUpperCase()][2];
-                            if(N.context.attr("code").inspection.abortOnError && (this.level === SeverityLevels.BLOCKER[0] || this.level === SeverityLevels.CRITICAL[0])) {
+                            if(NA.context.attr("code").inspection.abortOnError && (this.level === SeverityLevels.BLOCKER[0] || this.level === SeverityLevels.CRITICAL[0])) {
                                 throw consoleLogger("[" + this.level + "] " + url + " - " + this.line + " : " + this.code + "\n" + this.message + "\n\n");
                             } else {
                                 if(N.browser.is("ie")) {

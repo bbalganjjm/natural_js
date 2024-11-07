@@ -8,14 +8,37 @@
  */
 
 import { jQuery } from "../lib/jquery-3.7.1.min";
+import { N } from "./natural-js";
 import { NC } from "./natural.core";
 
 export class NA {
 
+    comm(url) {
+        return new NA.comm(this, url);
+    };
+
+    request() {
+        return this.get(0).request;
+    };
+
+    cont(contObj) {
+        return new NA.cont(this, contObj);
+    };
+
     // Ajax TODO This will be replaced by fetch.
     // static ajax = jQuery.ajax;
 
-    // Communicator
+    /**
+     * Communicator
+     *
+     * Communicator class for handling AJAX requests with filtering mechanisms.
+     * The class provides a structured way of initializing and making requests,
+     * including the application of various filters at different stages of the request lifecycle.
+     *
+     * @class
+     * @param {Object|String} obj - The options object or URL.
+     * @param {String} [url] - The request URL, if `obj` is not a string.
+     */
     static comm = class {
 
         constructor(obj, url) {
@@ -591,17 +614,5 @@ export class NA {
     // ajax(opts) {
     //     return NC.ajax(opts);
     // };
-
-    comm(url) {
-        return new NA.comm(this, url);
-    };
-
-    request() {
-        return this.get(0).request;
-    };
-
-    cont(contObj) {
-        return new NA.cont(this, contObj);
-    };
 
 }

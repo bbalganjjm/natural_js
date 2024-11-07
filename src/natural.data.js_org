@@ -75,9 +75,9 @@
 				throw new Error("[N.datasync]There is no public constructor for N.ds, use instance method");
 			}
 
-			var pageContext = $(N.context.attr("architecture").page.context);
+			var pageContext = $(NA.context.attr("architecture").page.context);
 			if(pageContext.length === 0) {
-				N.warn("[N.ds]Context element is missing. Please specify the correct Natural-JS's main context element selector to \"N.context.attr(\"architecture\").page.context\" property in \"natural.config.js\" file");
+				N.warn("[N.ds]Context element is missing. Please specify the correct Natural-JS's main context element selector to \"NA.context.attr(\"architecture\").page.context\" property in \"natural.config.js\" file");
 			}
 			var dataSyncTemp = pageContext.find("var#data_sync_temp__");
 			if(dataSyncTemp.length === 0) {
@@ -389,7 +389,7 @@
 				}
 
 				if (args[0] !== undefined) {
-					var formats = N.context.attr("data").formatter.date;
+					var formats = NA.context.attr("data").formatter.date;
 					var val;
 
 					if(N.type(args[0]) === "number") {
@@ -425,12 +425,12 @@
 				if (args !== undefined && args[0] !== undefined && args[0] == '2') {
 					str = str.substring(0, 2);
 				} else if (args !== undefined && args[0] !== undefined && args[0] == '4') {
-					str = str.substring(0, 2) + N.context.attr("data").formatter.date.timeSepa + str.substring(2, 4);
+					str = str.substring(0, 2) + NA.context.attr("data").formatter.date.timeSepa + str.substring(2, 4);
 				} else if (args !== undefined && args[0] !== undefined && args[0] == '6') {
-					str = str.substring(0, 2) + N.context.attr("data").formatter.date.timeSepa + str.substring(2, 4) +
-							N.context.attr("data").formatter.date.timeSepa + str.substring(4, 6);
+					str = str.substring(0, 2) + NA.context.attr("data").formatter.date.timeSepa + str.substring(2, 4) +
+							NA.context.attr("data").formatter.date.timeSepa + str.substring(4, 6);
 				} else {
-					str = str.substring(0, 2) + N.context.attr("data").formatter.date.timeSepa + str.substring(2, 4);
+					str = str.substring(0, 2) + NA.context.attr("data").formatter.date.timeSepa + str.substring(2, 4);
 				}
 
 				return str;
@@ -924,7 +924,7 @@
 					return leaf;
 				};
 
-				var d = str.replace(new RegExp("\\" + N.context.attr("data").formatter.date.dateSepa, "gi"), '');
+				var d = str.replace(new RegExp("\\" + NA.context.attr("data").formatter.date.dateSepa, "gi"), '');
 				if (!isDateFormat(d)) {
 					return false;
 				}
@@ -1031,7 +1031,7 @@
 					throw new Error("[Validator.maxbyte]You must input args[0](maximum byte)");
 				}
 				if(args[1] === undefined) {
-					args[1] = N.context.attr("core").charByteLength;
+					args[1] = NA.context.attr("core").charByteLength;
 				}
 				return N.string.byteLength(N.string.trimToEmpty(str), args[1]) <= Number(N.string.trimToZero(args[0]));
 			},
@@ -1040,7 +1040,7 @@
 					throw new Error("[Validator.minbyte]You must input args[0](minimum byte)");
 				}
 				if(args[1] === undefined) {
-					args[1] = N.context.attr("core").charByteLength;
+					args[1] = NA.context.attr("core").charByteLength;
 				}
 				return Number(N.string.trimToZero(args[0])) <= N.string.byteLength(N.string.trimToEmpty(str), args[1]);
 			},
@@ -1049,7 +1049,7 @@
 					throw new Error("[Validator.rangebyte]You must input args[0](minimum byte) and args[1](maximum byte)");
 				}
 				if(args[2] === undefined) {
-					args[2] = N.context.attr("core").charByteLength;
+					args[2] = NA.context.attr("core").charByteLength;
 				}
 				return Number(N.string.trimToZero(args[0])) <= N.string.byteLength(N.string.trimToEmpty(str), args[2]) &&
 						N.string.byteLength(N.string.trimToEmpty(str), args[2]) <= Number(N.string.trimToZero(args[1]));
@@ -1135,8 +1135,8 @@
 							retTempObj.msg = null;
 							if (!retTempObj.result) {
 								var valiMsg;
-								if (!(valiMsg = N.context.attr("data").validator.message[N.locale()][rule])) {
-									valiMsg = N.context.attr("data").validator.message[N.locale()].global;
+								if (!(valiMsg = NA.context.attr("data").validator.message[N.locale()][rule])) {
+									valiMsg = NA.context.attr("data").validator.message[N.locale()].global;
 								}
 								retTempObj.msg = N.message.replaceMsgVars(valiMsg, args);
 

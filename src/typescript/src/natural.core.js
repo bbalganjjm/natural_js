@@ -12,6 +12,7 @@
  */
 
 import { jQuery } from "../lib/jquery-3.7.1.min";
+import { N } from "./natural-js";
 import { NA } from "./natural.architecture";
 
 export class NC {

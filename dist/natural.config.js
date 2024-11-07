@@ -9,7 +9,7 @@
 	/**
 	 * Natural-CORE Config
 	 */
-	N.context.attr("core", {
+	NA.context.attr("core", {
 		/**
 		 * Default locale
 		 */
@@ -43,7 +43,7 @@
 	/**
 	 * Natural-ARCHITECTURE Config
 	 */
-	N.context.attr("architecture", {
+	NA.context.attr("architecture", {
         /**
          * Specify the element to insert the main content in jQuery Selector syntax.
          *  - If you use the Documents(N.docs) component, you don't have to specify it, but otherwise you must.
@@ -88,7 +88,7 @@
 	/**
 	 * Natural-DATA Config
 	 */
-	N.context.attr("data", {
+	NA.context.attr("data", {
 		"formatter" : {
 			/**
 			 * Custom format rules
@@ -158,7 +158,7 @@
 		    "userRules" : {
 		        /*
 		         * Function name becomes rule name.
-		         * The validation failure message is defined in the following N.context.attr("data").validator.message object with a property name same a function name for each language.
+		         * The validation failure message is defined in the following NA.context.attr("data").validator.message object with a property name same a function name for each language.
 		         *
 		         * str : Target string of validation
 		         * args : validation options
@@ -269,18 +269,18 @@
 	});
 
 	// The extend statement below should never be deleted if you have defined a custom format rule.
-	$.extend(N.formatter, N.context.attr("data").formatter.userRules);
+	$.extend(N.formatter, NA.context.attr("data").formatter.userRules);
 	// The extend statement below should never be deleted if you have defined a custom validation rule.
-	$.extend(N.validator, N.context.attr("data").validator.userRules);
+	$.extend(N.validator, NA.context.attr("data").validator.userRules);
 
 	/**
 	 * Natural-UI Config
 	 */
-	N.context.attr("ui", {
+	NA.context.attr("ui", {
 		"alert" : {
 			/**
 			 * Set the element to save the elements of N.alert and N.popup components using jQuery Selector syntax.
-			 * Define the same value as the value of N.context.attr("architecture").page.context unless it is a special case.
+			 * Define the same value as the value of NA.context.attr("architecture").page.context unless it is a special case.
 			 *  - If you use the Documents(N.docs) component, you don't have to specify it, but otherwise you must.
 			 *  - If it is not SPA(Single Page Application), please set it to "body".
 			 */
@@ -558,7 +558,7 @@
 	/**
 	 * Natural-UI.Shell Config
 	 */
-	N.context.attr("ui.shell", {
+	NA.context.attr("ui.shell", {
 		"notify" : {
 		    /**
              * Global alwaysOnTop option
@@ -620,7 +620,7 @@
 	/**
      * Natural-TEMPLATE Config
      */
-    N.context.attr("template", {
+    NA.context.attr("template", {
         aop : {
             /**
              * Common code request information
@@ -659,7 +659,7 @@
     /**
      * Natural-CODE Config
      */
-    N.context.attr("code", {
+    NA.context.attr("code", {
         inspection : {
             /**
              * Specifies whether to stop the logic by throwing an ERROR when a code of ERROR type is detected.

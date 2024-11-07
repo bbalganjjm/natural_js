@@ -12,6 +12,7 @@ import { NC } from "./natural.core";
 import { NA } from "./natural.architecture";
 import { ND } from "./natural.data";
 import { NU } from "./natural.ui";
+import { NUS } from "./natural.ui.shell";
 
 class NaturalJS extends jQuery {
 
@@ -28,7 +29,8 @@ class NaturalJS extends jQuery {
         "Natural-CORE" : "1.0.0",
         "Natural-ARCHITECTURE" : "1.0.0",
         "Natural-DATA" : "1.0.0",
-        "Natural-UI" : "1.0.0"
+        "Natural-UI" : "1.0.0",
+        "Natural-UI.Shell" : "1.0.0"
     });
 
     static get version() {
@@ -40,8 +42,8 @@ class NaturalJS extends jQuery {
 function N(selector, context) {
     return new NaturalJS(selector, context);
 }
-Object.assign(N, NC, NA, ND, NU);
-Object.assign(N.prototype, NC.prototype, NA.prototype, ND.prototype, NU.prototype);
+Object.assign(N, NC, NA, ND, NU, NUS);
+Object.assign(N.prototype, NC.prototype, NA.prototype, ND.prototype, NU.prototype, NUS.prototype);
 
 window.N = N;
 

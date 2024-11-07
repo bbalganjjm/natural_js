@@ -93,9 +93,9 @@
                 var successFilters = [];
                 var errorFilters = [];
                 var completeFilters = [];
-                var filters = N.context.attr("architecture").comm.filters;
+                var filters = NA.context.attr("architecture").comm.filters;
                 var orderedFilterKeys = [];
-                var spltSepa = N.context.attr("core").spltSepa;
+                var spltSepa = NA.context.attr("core").spltSepa;
 
                 // Indexing to execute filters with the order property defined first and filters with no order property defined
                 for (var key in filters) {
@@ -201,8 +201,8 @@
                                 return false;
                             }
                         } else {
-                            if(obj.is(N.context.attr("architecture").page.context)) {
-                                N.gc[N.context.attr("core").gcMode]();
+                            if(obj.is(NA.context.attr("architecture").page.context)) {
+                                N.gc[NA.context.attr("core").gcMode]();
                             }
                             if (obj.request.options.append) {
                                 obj.append(data);
@@ -214,7 +214,7 @@
                                 obj.html(data);
                             }
 
-                            if(!obj.is(N.context.attr("architecture").page.context)) {
+                            if(!obj.is(NA.context.attr("architecture").page.context)) {
                                 // Removes garbage instances from obserables of N.ds
                                 N.gc.ds();
                             }
@@ -320,7 +320,7 @@
 
             // global config
             try {
-                $.extend(this.options, N.context.attr("architecture").comm.request.options);
+                $.extend(this.options, NA.context.attr("architecture").comm.request.options);
             } catch (e) {
             }
             $.extend(this.options, opts);
@@ -483,10 +483,10 @@
                     }
                 },
                 wrap : function(cont) {
-                    if (N.context.attr("architecture").cont &&
-                        N.context.attr("architecture").cont.advisors &&
-                        N.context.attr("architecture").cont.advisors.length > 0) {
-                        var o = N.context.attr("architecture").cont;
+                    if (NA.context.attr("architecture").cont &&
+                        NA.context.attr("architecture").cont.advisors &&
+                        NA.context.attr("architecture").cont.advisors.length > 0) {
+                        var o = NA.context.attr("architecture").cont;
 
                         $(o.advisors).each(function (idx, advisor) {
                             var pointcut;
@@ -582,7 +582,7 @@
         });
 
         // Context Object
-        var Context = N.context = {
+        var Context = NA.context = {
             attrObj : {},
             attr : Communicator.request.prototype.attr
         };

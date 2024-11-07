@@ -402,18 +402,18 @@
                  * Wraps component event options and global event options in N.config.
                  */
                 wrapHandler : function(opts, compNm, eventNm) {
-                    if(N.context.attr("ui")[compNm] && N.context.attr("ui")[compNm][eventNm] && (opts && opts[eventNm])) {
+                    if(NA.context.attr("ui")[compNm] && NA.context.attr("ui")[compNm][eventNm] && (opts && opts[eventNm])) {
                         var localEventHandler = opts[eventNm];
                         opts[eventNm] = function() {
                             if(eventNm === "onBeforeBindValue") {
                                 var rVal = localEventHandler.apply(this, arguments);
-                                return N.context.attr("ui")[compNm][eventNm].call(this, arguments[0], rVal);
+                                return NA.context.attr("ui")[compNm][eventNm].call(this, arguments[0], rVal);
                             } else {
                                 var rVal = localEventHandler.apply(this, arguments);
                                 if(rVal === false) {
                                     return rVal;
                                 } else {
-                                    return N.context.attr("ui")[compNm][eventNm].apply(this, arguments);
+                                    return NA.context.attr("ui")[compNm][eventNm].apply(this, arguments);
                                 }
                             }
                         }
@@ -485,10 +485,10 @@
             };
 
             try {
-                // 1. When N.context.attr("ui").alert.container value is undefined
-                this.options.container = N.context.attr("architecture").page.context;
-                // 2. If defined the N.context.attr("ui").alert.container value to N.config this.options.container value is defined from N.config's value
-                $.extend(true, this.options, N.context.attr("ui").alert);
+                // 1. When NA.context.attr("ui").alert.container value is undefined
+                this.options.container = NA.context.attr("architecture").page.context;
+                // 2. If defined the NA.context.attr("ui").alert.container value to N.config this.options.container value is defined from N.config's value
+                $.extend(true, this.options, NA.context.attr("ui").alert);
 
                 if(N.isString(this.options.container)) {
                     this.options.container = N(this.options.container);
@@ -498,7 +498,7 @@
             }
 
             if(N(this.options.container).length === 0) {
-                throw N.error("[N.alert]Container element is missing. please specify the correct element selector that will contain the message dialog's element. it can be defined in the \"N.context.attr(\"ui\").alert.container\" property of \"natural.config.js\" file.");
+                throw N.error("[N.alert]Container element is missing. please specify the correct element selector that will contain the message dialog's element. it can be defined in the \"NA.context.attr(\"ui\").alert.container\" property of \"natural.config.js\" file.");
             }
 
             if (N(obj).is(":input")) {
@@ -1129,7 +1129,7 @@
             };
 
             try {
-                $.extend(this.options, N.context.attr("ui").button);
+                $.extend(this.options, NA.context.attr("ui").button);
             } catch (e) {
                 throw N.error("N.button", e);
             }
@@ -1259,9 +1259,9 @@
             };
 
             try {
-                $.extend(this.options, N.context.attr("ui").datepicker);
-                if(opts && opts.monthonly === true && N.context.attr("ui").datepicker.monthonlyOpts) {
-                    $.extend(this.options, N.context.attr("ui").datepicker.monthonlyOpts);
+                $.extend(this.options, NA.context.attr("ui").datepicker);
+                if(opts && opts.monthonly === true && NA.context.attr("ui").datepicker.monthonlyOpts) {
+                    $.extend(this.options, NA.context.attr("ui").datepicker.monthonlyOpts);
                 }
             } catch (e) {
                 throw N.error("N.datepicker", e);
@@ -1382,7 +1382,7 @@
 
                     var value = opts.context.val();
                     var keyCode = e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode);
-                    var format = (!opts.monthonly ? N.context.attr("data").formatter.date.Ymd() : N.context.attr("data").formatter.date.Ym()).replace(/[^Y|^m|^d]/g, "");
+                    var format = (!opts.monthonly ? NA.context.attr("data").formatter.date.Ymd() : NA.context.attr("data").formatter.date.Ym()).replace(/[^Y|^m|^d]/g, "");
 
                     // when press the number keys
                     if ((value.length > 2 && value.length%2 === 0) && keyCode != 35 && keyCode != 36 && keyCode != 37 && keyCode != 39 && keyCode != 9 && keyCode != 27) {
@@ -1445,7 +1445,7 @@
 
                 var d = new Date();
                 opts.currYear = parseInt(d.formatDate("Y"));
-                var format = (!opts.monthonly ? N.context.attr("data").formatter.date.Ymd() : N.context.attr("data").formatter.date.Ym()).replace(/[^Y|^m|^d]/g, "");
+                var format = (!opts.monthonly ? NA.context.attr("data").formatter.date.Ymd() : NA.context.attr("data").formatter.date.Ym()).replace(/[^Y|^m|^d]/g, "");
 
                 opts.contents = $('<div class="datepicker_contents__"></div>').on("click.datepicker", function(e) {
                     e.stopPropagation();
@@ -1505,9 +1505,9 @@
                                     var selDate;
                                     var dateFormat;
                                     if(dateVal.length === 6) {
-                                        dateFormat = N.context.attr("data").formatter.date.Ym().replace(/[^Y|^m|^d]/g, "");
+                                        dateFormat = NA.context.attr("data").formatter.date.Ym().replace(/[^Y|^m|^d]/g, "");
                                     } else if(dateVal.length === 8) {
-                                        dateFormat = N.context.attr("data").formatter.date.Ymd().replace(/[^Y|^m|^d]/g, "");
+                                        dateFormat = NA.context.attr("data").formatter.date.Ymd().replace(/[^Y|^m|^d]/g, "");
                                     }
 
                                     if(dateFormat !== undefined) {
@@ -1598,9 +1598,9 @@
                                 var selDate;
                                 var dateFormat;
                                 if(dateVal.length === 6) {
-                                    dateFormat = N.context.attr("data").formatter.date.Ym().replace(/[^Y|^m|^d]/g, "");
+                                    dateFormat = NA.context.attr("data").formatter.date.Ym().replace(/[^Y|^m|^d]/g, "");
                                 } else if(dateVal.length === 8) {
-                                    dateFormat = N.context.attr("data").formatter.date.Ymd().replace(/[^Y|^m|^d]/g, "");
+                                    dateFormat = NA.context.attr("data").formatter.date.Ymd().replace(/[^Y|^m|^d]/g, "");
                                 }
 
                                 if(dateFormat !== undefined) {
@@ -1797,9 +1797,9 @@
                                     dateFormat = "Ym";
                                     dateVal = dateVal + N.string.lpad(selMonthStr, 2, "0");
                                 } else if(dateVal.length === 6) {
-                                    dateFormat = N.context.attr("data").formatter.date.Ym().replace(/[^Y|^m|^d]/g, "");
+                                    dateFormat = NA.context.attr("data").formatter.date.Ym().replace(/[^Y|^m|^d]/g, "");
                                 } else if(dateVal.length === 8) {
-                                    dateFormat = N.context.attr("data").formatter.date.Ymd().replace(/[^Y|^m|^d]/g, "");
+                                    dateFormat = NA.context.attr("data").formatter.date.Ymd().replace(/[^Y|^m|^d]/g, "");
                                 }
 
                                 if(dateFormat !== undefined) {
@@ -1843,7 +1843,7 @@
                     if(opts.monthonly) {
                         var selDate = N.date.strToDate(N.string.lpad(selYearStr, 4, "0") + N.string.lpad($(this).text(), 2, "0"), "Ym");
                         // sets the date format by the global config.
-                        selDate.format = N.context.attr("data").formatter.date.Ym().replace(/[^Y|^m|^d]/g, "");
+                        selDate.format = NA.context.attr("data").formatter.date.Ym().replace(/[^Y|^m|^d]/g, "");
 
                         var onSelectContinue;
                         if(opts.onSelect !== null) {
@@ -1956,7 +1956,7 @@
                         // automatic day selection
                         var dateVal = opts.context.val().replace(/[^\d]/g,"");
                         if(!N.string.isEmpty(dateVal) && dateVal.length === 8) {
-                            var selDate = N.date.strToDate(dateVal, dateFormat = N.context.attr("data").formatter.date.Ymd().replace(/[^Y|^m|^d]/g, ""));
+                            var selDate = N.date.strToDate(dateVal, dateFormat = NA.context.attr("data").formatter.date.Ymd().replace(/[^Y|^m|^d]/g, ""));
                             daysPanel.find(".datepicker_day_item__:contains(" + String(Number(selDate.obj.formatDate("d"))) + "):eq(0)").addClass("datepicker_day_selected__");
                             if(!opts.monthChangeInput && Number(opts.lastSelectedDay) > endDate) {
                                 daysPanel.find(".datepicker_day_item__:contains(" + String(endDate) + "):eq(0)").addClass("datepicker_day_selected__");
@@ -1990,7 +1990,7 @@
                         opts.lastSelectedDay = thisEle.text();
 
                         // sets the date format by the global config
-                        selDate.format = N.context.attr("data").formatter.date.Ymd().replace(/[^Y|^m|^d]/g, "");
+                        selDate.format = NA.context.attr("data").formatter.date.Ymd().replace(/[^Y|^m|^d]/g, "");
 
                         var onSelectContinue;
                         if(opts.onSelect !== null) {
@@ -2135,7 +2135,7 @@
 
                 Datepicker.selectItems(opts,
                     dateStr,
-                    (!opts.monthonly ? N.context.attr("data").formatter.date.Ymd() : N.context.attr("data").formatter.date.Ym()).replace(/[^Y|^m|^d]/g, ""),
+                    (!opts.monthonly ? NA.context.attr("data").formatter.date.Ymd() : NA.context.attr("data").formatter.date.Ym()).replace(/[^Y|^m|^d]/g, ""),
                     opts.contents.find(".datepicker_years_panel__"),
                     opts.contents.find(".datepicker_months_panel__"),
                     opts.contents.find(".datepicker_days_panel__"));
@@ -2295,7 +2295,7 @@
             }
 
             try {
-                $.extend(true, this.options, N.context.attr("ui").popup);
+                $.extend(true, this.options, NA.context.attr("ui").popup);
             } catch (e) {
                 throw N.error("N.popup", e);
             }
@@ -2581,7 +2581,7 @@
             }
 
             try {
-                $.extend(true, this.options, N.context.attr("ui").tab);
+                $.extend(true, this.options, NA.context.attr("ui").tab);
             } catch (e) {
                 throw N.error("N.tab", e);
             }
@@ -3124,7 +3124,7 @@
             };
 
             try {
-                $.extend(this.options, N.context.attr("ui").select);
+                $.extend(this.options, NA.context.attr("ui").select);
             } catch (e) {
                 throw N.error("N.select", e);
             }
@@ -3249,7 +3249,7 @@
                 var selectEles = opts.type === 1 || opts.type === 2 ? opts.context : selectSiblingEles.find(":radio, :checkbox");
                 if(idx === undefined) {
                     var rslt = selectEles.vals();
-                    var spltSepa = N.context.attr("core").spltSepa;
+                    var spltSepa = NA.context.attr("core").spltSepa;
                     var rsltStr = spltSepa + (N.type(rslt) === "array" ? rslt.join(spltSepa) : String(rslt)) + spltSepa;
                     var rsltArr = [];
                     (opts.type === 1 || opts.type === 2 ? selectSiblingEles : selectEles).each(function(i) {
@@ -3344,7 +3344,7 @@
             };
 
             try {
-                $.extend(this.options, N.context.attr("ui").form);
+                $.extend(this.options, NA.context.attr("ui").form);
             } catch (e) {
                 throw N.error("N.form", e);
             }
@@ -3615,7 +3615,7 @@
                     }
                     var idContext, rcContext, eles, ele, val, tagName, type;
 
-                    var spltSepa = N.context.attr("core").spltSepa;
+                    var spltSepa = NA.context.attr("core").spltSepa;
                     var cols;
                     if(arguments.length > 2) {
                         cols = spltSepa + Array.prototype.slice.call(arguments, 2).join(spltSepa) + spltSepa;
@@ -4281,7 +4281,7 @@
             };
 
             try {
-                $.extend(true, this.options, N.context.attr("ui").list);
+                $.extend(true, this.options, NA.context.attr("ui").list);
             } catch (e) {
                 throw N.error("N.list", e);
             }
@@ -4957,7 +4957,7 @@
             };
 
             try {
-                $.extend(true, this.options, N.context.attr("ui").grid);
+                $.extend(true, this.options, NA.context.attr("ui").grid);
             } catch (e) {
                 throw N.error("N.grid", e);
             }
@@ -6956,7 +6956,7 @@
             };
 
             try {
-                $.extend(this.options, N.context.attr("ui").pagination);
+                $.extend(this.options, NA.context.attr("ui").pagination);
             } catch (e) {
                 throw N.error("N.pagination", e);
             }
@@ -7274,7 +7274,7 @@
             };
 
             try {
-                $.extend(this.options, N.context.attr("ui").tree);
+                $.extend(this.options, NA.context.attr("ui").tree);
             } catch (e) {
                 throw N.error("N.tree", e);
             }

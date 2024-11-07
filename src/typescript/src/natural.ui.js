@@ -7,11 +7,11 @@
  * Copyright 2014 Goldman Kim(bbalganjjm@gmail.com)
  */
 
-import {jQuery} from "../lib/jquery-3.7.1.min";
-import {N} from "./natural-js";
-import {NC} from "./natural.core";
-import {NA} from "./natural.architecture";
-import {ND} from "./natural.data";
+import { jQuery } from "../lib/jquery-3.7.1.min";
+import { N } from "./natural-js";
+import { NC } from "./natural.core";
+import { NA } from "./natural.architecture";
+import { ND } from "./natural.data";
 
 export class NU {
 

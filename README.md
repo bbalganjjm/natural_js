@@ -89,8 +89,8 @@ There is no separate implementation of View, and the HTML element area of the bl
 
 #### Context
 
-Context(N.context) is a space that ensures data persistence within the Life-Cycle(Until the page is loaded and redirected to another URL) of a Natural-JS-based application.
-* Natural-JS configuration values​([Config(natural.config.js)](https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0102.html)), global configuration values, common messages of framework, etc. are stored in N.context objects.
+Context(NA.context) is a space that ensures data persistence within the Life-Cycle(Until the page is loaded and redirected to another URL) of a Natural-JS-based application.
+* Natural-JS configuration values​([Config(natural.config.js)](https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0102.html)), global configuration values, common messages of framework, etc. are stored in NA.context objects.
 
 
 ## Natural-DATA

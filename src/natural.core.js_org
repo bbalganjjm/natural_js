@@ -131,12 +131,12 @@
                             self.filter("[value='" + String(this) + "']").prop("checked", true);
                         });
                     } else if(this.length === 1) {
-                        if(vals[0] !== N.context.attr("core").sgChkdVal && vals[0] !== N.context.attr("core").sgUnChkdVal) {
-                            vals[0] = N.context.attr("core").sgUnChkdVal;
+                        if(vals[0] !== NA.context.attr("core").sgChkdVal && vals[0] !== NA.context.attr("core").sgUnChkdVal) {
+                            vals[0] = NA.context.attr("core").sgUnChkdVal;
                         }
-                        if(N.context.attr("core").sgChkdVal === vals[0]) {
+                        if(NA.context.attr("core").sgChkdVal === vals[0]) {
                             this.prop("checked", true);
-                        } else if (N.context.attr("core").sgUnChkdVal === vals[0]) {
+                        } else if (NA.context.attr("core").sgUnChkdVal === vals[0]) {
                             this.prop("checked", false);
                         } else {
                             this.filter("[value='" + String(vals[0]) + "']").prop("checked", true);
@@ -210,16 +210,16 @@
                         }
                         if(N.type(vals) !== "function") {
                             var val = N.string.trimToEmpty(selEle.val());
-                            if(val !== N.context.attr("core").sgChkdVal && val !== N.context.attr("core").sgUnChkdVal) {
-                                val = N.context.attr("core").sgUnChkdVal;
+                            if(val !== NA.context.attr("core").sgChkdVal && val !== NA.context.attr("core").sgUnChkdVal) {
+                                val = NA.context.attr("core").sgUnChkdVal;
                             }
-                            if(N.context.attr("core").sgChkdVal === val || N.context.attr("core").sgUnChkdVal === val || selEle.attr("value") === undefined) {
+                            if(NA.context.attr("core").sgChkdVal === val || NA.context.attr("core").sgUnChkdVal === val || selEle.attr("value") === undefined) {
                                 if(selEle.prop("checked")) {
-                                    val = N.context.attr("core").sgChkdVal;
+                                    val = NA.context.attr("core").sgChkdVal;
                                     selEle.val(val);
                                     return val;
                                 } else if (!selEle.prop("checked")) {
-                                    val = N.context.attr("core").sgUnChkdVal;
+                                    val = NA.context.attr("core").sgUnChkdVal;
                                     selEle.val(val);
                                     return val;
                                 }
@@ -304,9 +304,9 @@
              */
             locale : function(str) {
                 if(str === undefined) {
-                    return N.context.attr("core").locale;
+                    return NA.context.attr("core").locale;
                 } else {
-                    N.context.attr("core").locale = str;
+                    NA.context.attr("core").locale = str;
                 }
             },
             /**
@@ -483,9 +483,9 @@
                  * Removes garbage instances from observables of N.ds
                  */
                 ds : function() {
-                    if($(N.context.attr("architecture").page.context).find(">#data_sync_temp__").length > 0) {
-                        $(N.context.attr("architecture").page.context).find(">#data_sync_temp__").instance("ds").obserable
-                            = $.uniqueSort($(".grid__, .list__, .form__:not('.grid__>tbody, .list__>li'), .tree__", N.context.attr("architecture").page.context).instance());
+                    if($(NA.context.attr("architecture").page.context).find(">#data_sync_temp__").length > 0) {
+                        $(NA.context.attr("architecture").page.context).find(">#data_sync_temp__").instance("ds").obserable
+                            = $.uniqueSort($(".grid__, .list__, .form__:not('.grid__>tbody, .list__>li'), .tree__", NA.context.attr("architecture").page.context).instance());
                     }
                 }
             },
@@ -537,7 +537,7 @@
                 },
                 byteLength : function(str, charByteLength) {
                     if(charByteLength === undefined) {
-                        charByteLength = N.context.attr("core").charByteLength !== undefined ? N.context.attr("core").charByteLength : 3;
+                        charByteLength = NA.context.attr("core").charByteLength !== undefined ? NA.context.attr("core").charByteLength : 3;
                     }
                     return (function(s,b,i,c){
                         for(b=i=0;c=s.charCodeAt(i++);b+=c>>11?charByteLength:c>>7?2:1){}
@@ -607,7 +607,7 @@
                         dateStrArr.push(str.substring(2, 6 + fixNum)); //year
                         dateStrArr.push(str.substring(0, 2)); //month
                     } else {
-                        throw N.error("[N.date.strToDateStrArr]\"" + format + "\" date format is not support. please change return value of N.context.attr(\"data\").formatter.date's functions");
+                        throw N.error("[N.date.strToDateStrArr]\"" + format + "\" date format is not support. please change return value of NA.context.attr(\"data\").formatter.date's functions");
                     }
                     if(isString === undefined || isString === false) {
                         $(dateStrArr).each(function(i) {
@@ -630,7 +630,7 @@
                         };
                     } else if (str.length === 6) {
                         if(format === undefined) {
-                            format = N.context.attr("data").formatter.date.Ym();
+                            format = NA.context.attr("data").formatter.date.Ym();
                         }
                         dateStrArr = N.date.strToDateStrArr(str, format.replace(/[^Y|^m|^d]/g, ""));
                         dateInfo = {
@@ -639,7 +639,7 @@
                         };
                     } else if (str.length === 8) {
                         if(format === undefined) {
-                            format = N.context.attr("data").formatter.date.Ymd();
+                            format = NA.context.attr("data").formatter.date.Ymd();
                         }
                         dateStrArr = N.date.strToDateStrArr(str, format.replace(/[^Y|^m|^d]/g, ""));
                         dateInfo = {
@@ -648,7 +648,7 @@
                         };
                     } else if (str.length === 10) {
                         if(format === undefined) {
-                            format = N.context.attr("data").formatter.date.YmdH();
+                            format = NA.context.attr("data").formatter.date.YmdH();
                         }
                         dateStrArr = N.date.strToDateStrArr(str, format.replace(/[^Y|^m|^d]/g, ""));
                         dateInfo = {
@@ -657,7 +657,7 @@
                         };
                     } else if (str.length === 12) {
                         if(format === undefined) {
-                            format = N.context.attr("data").formatter.date.YmdHi();
+                            format = NA.context.attr("data").formatter.date.YmdHi();
                         }
                         dateStrArr = N.date.strToDateStrArr(str, format.replace(/[^Y|^m|^d]/g, ""));
                         dateInfo = {
@@ -667,7 +667,7 @@
                         };
                     } else if (str.length >= 14) {
                         if(format === undefined) {
-                            format = N.context.attr("data").formatter.date.YmdHis();
+                            format = NA.context.attr("data").formatter.date.YmdHis();
                         }
                         dateStrArr = N.date.strToDateStrArr(str, format.replace(/[^Y|^m|^d]/g, ""));
                         dateInfo = {
@@ -1052,8 +1052,8 @@
                 "mapFromKeys" : function(obj) {
                     if(arguments.length > 1) {
                         var args = Array.prototype.slice.call(arguments, 0);
-                        if(N.context.attr("core").excludeMapFromKeys !== undefined) {
-                            args = args.concat(N.context.attr("core").excludeMapFromKeys);
+                        if(NA.context.attr("core").excludeMapFromKeys !== undefined) {
+                            args = args.concat(NA.context.attr("core").excludeMapFromKeys);
                         }
                         if(N.type(obj) === "array") {
                             if(obj.length === 0) {
