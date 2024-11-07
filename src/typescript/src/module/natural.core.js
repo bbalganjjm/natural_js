@@ -11,7 +11,11 @@
  * Mask JavaScript API : http://www.pengoworks.com/workshop/js/mask/, dswitzer@pengoworks.com
  */
 
-class NC {
+// import { jQuery } from "../lib/jquery-3.7.1.min";
+import { N } from "./natural-js";
+import { NA } from "./natural.architecture";
+
+export class NC {
 
     /**
      * Set and get locale value

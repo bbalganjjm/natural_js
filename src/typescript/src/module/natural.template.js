@@ -7,10 +7,15 @@
  * Copyright 2014 Goldman Kim(bbalganjjm@gmail.com)
  */
 
+// import { jQuery } from "../lib/jquery-3.7.1.min";
+import { N, NaturalJS } from "./natural-js";
+import { NC } from "./natural.core";
+import { NA } from "./natural.architecture";
+
 NaturalJS.VERSION["Natural-TEMPLATE"] = "0.4.12";
 
 // Template
-class NT {
+export class NT {
 
     static aop = class {
 

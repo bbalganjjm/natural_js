@@ -7,7 +7,11 @@
  * Copyright 2014 Goldman Kim(bbalganjjm@gmail.com)
  */
 
-class NA {
+// import { jQuery } from "../lib/jquery-3.7.1.min";
+import { N } from "./natural-js";
+import { NC } from "./natural.core";
+
+export class NA {
 
     comm(url) {
         return new NA.comm(this, url);

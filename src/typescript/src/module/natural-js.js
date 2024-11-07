@@ -7,7 +7,14 @@
  * Copyright 2014 Goldman Kim(bbalganjjm@gmail.com)
  */
 
-class NaturalJS extends jQuery {
+// import { jQuery } from "../lib/jquery-3.7.1.min";
+import { NC } from "./natural.core";
+import { NA } from "./natural.architecture";
+import { ND } from "./natural.data";
+import { NU } from "./natural.ui";
+import { NUS } from "./natural.ui.shell";
+
+export class NaturalJS extends jQuery {
 
     /**
      * Initializes and returns a new N object based on jQuery objects with the provided selector and context argument values.
@@ -39,3 +46,5 @@ Object.assign(N, NC, NA, ND, NU, NUS);
 Object.assign(N.prototype, NC.prototype, NA.prototype, ND.prototype, NU.prototype, NUS.prototype);
 
 window.N = N;
+
+export { N }
