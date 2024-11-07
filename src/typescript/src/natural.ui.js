@@ -944,7 +944,7 @@ export class NU {
                     });
                 } else {
                     if (opts.vars !== undefined) {
-                        opts.msg = NC.message.replaceMsgVars(msg, opts.vars);
+                        opts.msg = NC.message.replaceMsgVars(opts.msg, opts.vars);
                     }
                     ul_.append('<li>' + opts.msg + '</li>');
                 }
@@ -1918,8 +1918,8 @@ export class NU {
                         } else if(j > endDate) {
                             dayItemT.addClass("datepicker_next_day_item__");
                             day = String(j-endDate);
-                            dayItemT.data("year", endDateCls.obj.getMonth() + 1 == 12 ?  endDateCls.obj.getFullYear() + 1 : endDateCls.obj.getFullYear())
-                                .data("month", endDateCls.obj.getMonth() + 2 == 13 ? 1 : endDateCls.obj.getMonth() + 2)
+                            dayItemT.data("year", endDateCls.obj.getMonth() + 1 === 12 ?  endDateCls.obj.getFullYear() + 1 : endDateCls.obj.getFullYear())
+                                .data("month", endDateCls.obj.getMonth() + 2 === 13 ? 1 : endDateCls.obj.getMonth() + 2)
                                 .data("day", day);
                         } else {
                             dayItemT.addClass("datepicker_day_item__");
@@ -2490,6 +2490,7 @@ export class NU {
                     opts.onLoad.call(this, cont);
                 }
             });
+
         };
 
         static popOpen(onOpenData, cont) {
@@ -6100,7 +6101,7 @@ export class NU {
                                 const retChkbxs = filterListBox.find("li:contains('" + searchWord + "')").show().find(":checkbox").prop("checked", true);
                                 filterListBox.find("li:not(:contains('" + searchWord + "'))").hide().find(":checkbox").prop("checked", false).last().trigger("do.grid.dataFilter");
                                 retChkbxs.each(function() {
-                                    chkboxEle = N(this);
+                                    const chkboxEle = N(this);
                                     chkboxEle.parent().children(".data_filter_cnt__").text('(' + String(chkboxEle.data("length")) + ')')
                                 });
                             } else {
@@ -6337,7 +6338,7 @@ export class NU {
                 e.preventDefault();
 
                 let content;
-                if (window.clipboardData) {
+                if ("clipboardData" in window) {
                     content = window.clipboardData.getData('Text');
                     if (window.getSelection) {
                         const selObj = window.getSelection();
