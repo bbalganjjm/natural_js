@@ -1,22 +1,4 @@
-/*!
- * Natural-CORE v1.0.0
- *
- * Released under the LGPL v2.1 license
- * Date: 2014-09-26T11:11Z
- *
- * Copyright 2014 Goldman Kim(bbalganjjm@gmail.com)
- *
- * Includes formatdate.js & Mask JavaScript API
- * formatdate.js : http://www.svendtofte.com/javascript/javascript-date-string-formatting/
- * Mask JavaScript API : http://www.pengoworks.com/workshop/js/mask/, dswitzer@pengoworks.com
- */
-export class N {
-    static _version: Readonly<{
-        "Natural-CORE": "1.0.0";
-    }>;
-    static get version(): Readonly<{
-        "Natural-CORE": "1.0.0";
-    }>;
+export class NC {
     /**
      * Set and get locale value
      */
@@ -60,7 +42,7 @@ export class N {
     /**
      * Check whether object is empty
      */
-    static isEmptyObject(obj: any): boolean;
+    static isEmptyObject: (obj: any) => boolean;
     /**
      * Check whether arg[0] is a Array type
      */
@@ -68,7 +50,7 @@ export class N {
     /**
      * Checks whether an object of a type similar(array or jquery object etc.) to an array
      */
-    static sArraylike(obj: any): boolean;
+    static isArraylike(obj: any): boolean;
     /**
      * Check whether arg[0] is a jQuery Object type
      */
@@ -96,12 +78,12 @@ export class N {
          */
         full(): boolean;
         /**
-         * Removes garbage instances from observables of N.ds
+         * Removes garbage instances from observables of ND.ds
          */
         ds(): void;
     };
     /**
-     * N.string package
+     * NC.string package
      */
     static string: {
         new (): {};
@@ -122,7 +104,7 @@ export class N {
         trimToVal(str: any, val: any): any;
     };
     /**
-     * N.date package
+     * NC.date package
      */
     static date: {
         new (): {};
@@ -163,7 +145,7 @@ export class N {
         dateList(year: any, month: any): Date[][];
     };
     /**
-     * N.element package
+     * NC.element package
      */
     static element: {
         new (): {};
@@ -180,7 +162,7 @@ export class N {
          */
         toData(eles: any): {};
         /**
-         * Data change effect for N.ds
+         * Data change effect for ND.ds
          */
         dataChanged(ele: any): void;
         /**
@@ -189,7 +171,7 @@ export class N {
         maxZindex(ele: any): any;
     };
     /**
-     * N.browser package
+     * NC.browser package
      */
     static browser: {
         new (): {};
@@ -221,12 +203,12 @@ export class N {
         scrollbarWidth(): number;
     };
     /**
-     * N.message package
+     * NC.message package
      */
     static message: {
         new (): {};
         /**
-         * Replace message variables for N.message.get
+         * Replace message variables for NC.message.get
          */
         replaceMsgVars(msg: any, vars: any): any;
         /**
@@ -235,7 +217,7 @@ export class N {
         get(resource: any, key: any, vars: any): any;
     };
     /**
-     * N.array package
+     * NC.array package
      */
     static array: {
         new (): {};
@@ -245,7 +227,7 @@ export class N {
         deduplicate(arr: any, key: any): any[];
     };
     /**
-     * N.json package
+     * NC.json package
      */
     static json: {
         new (): {};
@@ -299,16 +281,11 @@ export class N {
             strippedValue: string;
             allowPartial: boolean;
             throwError: (c: any, e: any, v: any) => string | true;
+            setGeneric(_v: any, _d: any): string | true;
+            nextValidChar: any;
+            setNumeric(_v: any, _p: any, _d: any): string | true;
         };
-        setGeneric(_v: any, _d: any): any;
-        strippedValue: any;
-        nextValidChar: any;
-        setNumeric(_v: any, _p: any, _d: any): any;
     };
-    /**
-     * Initializes and returns a new N object based on jQuery objects with the provided selector and context argument values.
-     */
-    constructor(selector: any, context: any);
     /**
      * Remove element in array
      */

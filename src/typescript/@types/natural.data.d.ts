@@ -1,120 +1,157 @@
-declare class N {
-    private constructor();
-    datafilter(condition: any): any;
-    datasort(key: any, reverse: any): any;
-    formatter(rules: any): any;
-    validator(rules: any): any;
-}
-declare namespace N {
-    namespace data {
-        function filter(arr: any, condition: any): any;
-        function sortBy(key: any, reverse: any): (a: any, b: any) => number;
-        function sort(arr: any, key: any, reverse: any): any;
-    }
-    class ds {
-        remove(): any;
-        notify(row: any, key: any): any;
-    }
-    namespace ds {
-        function constructor(inst: any, isReg: any): any;
-        function instance(inst: any, isReg: any): any;
-    }
-    class formatter {
-        format(row: any): any[];
-        unformat(row: any, key: any): any;
-    }
-    namespace formatter {
-        function constructor(obj: any, rules: any): void;
-        function commas(str: any): any;
+export class ND {
+    static ds: {
+        new (inst: any, isReg: any): {
+            viewContext: JQuery<HTMLElement>;
+            remove(): any;
+            notify(row: any, key: any): any;
+        };
+        instance(inst: any, isReg: any): {
+            viewContext: JQuery<HTMLElement>;
+            remove(): any;
+            notify(row: any, key: any): any;
+        };
+    };
+    static formatter: {
+        new (obj: any, rules: any): {
+            options: {
+                data: any;
+                rules: any;
+                isElement: boolean;
+                createEvent: boolean;
+                context: any;
+                targetEle: import("./natural-js").NaturalJS;
+            };
+            format(row: any): any[];
+            unformat(row: any, key: any): any;
+        };
+        commas(str: any): any;
         /**
          * Resident registration number
          */
-        function rrn(str: any, args: any): any;
+        rrn(str: any, args: any): any;
         /**
          * US Social Security Number
          */
-        function ssn(str: any): any;
+        ssn(str: any): any;
         /**
          * Korean business registration number
          */
-        function kbrn(str: any): any;
+        kbrn(str: any): any;
         /**
          * Korean corporation number
          */
-        function kcn(str: any): any;
-        function upper(str: any): any;
-        function lower(str: any): any;
-        function capitalize(str: any): any;
-        function zipcode(str: any): any;
-        function phone(str: any): any;
-        function realnum(str: any): any;
-        function trimtoempty(str: any): any;
-        function trimtozero(str: any): any;
-        function trimtoval(str: any, args: any): any;
-        function date(str: any, args: any, ele: any): any;
-        function time(str: any, args: any): any;
-        function limit(str: any, args: any, ele: any): any;
-        function replace(str: any, args: any, ele: any): any;
-        function lpad(str: any, args: any): any;
-        function rpad(str: any, args: any): any;
-        function mask(str: any, args: any): any;
-        function generic(str: any, args: any): any;
-        function numeric(str: any, args: any): any;
-    }
-    class validator {
-        validate(row: any): any[];
-    }
-    namespace validator {
-        function constructor(obj: any, rules: any): void;
-        function required(str: any): boolean;
-        function alphabet(str: any): boolean;
-        function integer(str: any): boolean;
-        function korean(str: any): boolean;
-        function alphabet_integer(str: any): boolean;
-        function integer_korean(str: any): boolean;
-        function alphabet_korean(str: any): boolean;
-        function alphabet_integer_korean(str: any): boolean;
-        function dash_integer(str: any): boolean;
-        function commas_integer(str: any): boolean;
-        function number(str: any): boolean;
-        function email(str: any): boolean;
-        function url(str: any): boolean;
-        function zipcode(str: any): boolean;
-        function decimal(str: any, args: any): boolean;
-        function phone(str: any, args: any): boolean;
-        function rrn(str: any): boolean;
+        kcn(str: any): any;
+        upper(str: any): any;
+        lower(str: any): any;
+        capitalize(str: any): any;
+        zipcode(str: any): any;
+        phone(str: any): any;
+        realnum(str: any): any;
+        trimtoempty(str: any): string;
+        trimtozero(str: any): string;
+        trimtoval(str: any, args: any): any;
+        date(str: any, args: any, ele: any): any;
+        time(str: any, args: any): any;
+        limit(str: any, args: any, ele: any): any;
+        replace(str: any, args: any, ele: any): any;
+        lpad(str: any, args: any): any;
+        rpad(str: any, args: any): any;
+        mask(str: any, args: any): any;
+        generic(str: any, args: any): string | true;
+        numeric(str: any, args: any): string | true;
+    };
+    static validator: {
+        new (obj: any, rules: any): {
+            options: {
+                data: any;
+                rules: any;
+                isElement: boolean;
+                createEvent: boolean;
+                context: any;
+                targetEle: any;
+            };
+            validate: (row: any) => any[];
+        };
+        required(str: any): boolean;
+        alphabet(str: any): boolean;
+        integer(str: any): boolean;
+        korean(str: any): boolean;
+        alphabet_integer(str: any): boolean;
+        integer_korean(str: any): boolean;
+        alphabet_korean(str: any): boolean;
+        alphabet_integer_korean(str: any): boolean;
+        dash_integer(str: any): boolean;
+        commas_integer(str: any): boolean;
+        number(str: any): boolean;
+        email(str: any): boolean;
+        url(str: any): boolean;
+        zipcode(str: any): boolean;
+        decimal(str: any, args: any): boolean;
+        phone(str: any, args: any): boolean;
+        rrn(str: any): boolean;
         /**
          * US Social Security Number
          */
-        function ssn(str: any): boolean;
-        function frn(str: any): boolean;
-        function frn_rrn(str: any): any;
+        ssn(str: any): boolean;
+        frn(str: any): boolean;
+        frn_rrn(str: any): boolean;
         /**
          * Korean business registration number
          */
-        function kbrn(str: any): boolean;
+        kbrn(str: any): boolean;
         /**
          * Korean corporation number
          */
-        function kcn(str: any): boolean;
-        function date(str: any): boolean;
-        function time(str: any): boolean;
-        function accept(str: any, args: any): boolean;
-        function match(str: any, args: any): boolean;
-        function acceptfileext(str: any, args: any): boolean;
-        function notaccept(str: any, args: any): boolean;
-        function notmatch(str: any, args: any): boolean;
-        function notacceptfileext(str: any, args: any): boolean;
-        function equalTo(str: any, args: any): boolean;
-        function maxlength(str: any, args: any): boolean;
-        function minlength(str: any, args: any): boolean;
-        function rangelength(str: any, args: any): boolean;
-        function maxbyte(str: any, args: any): boolean;
-        function minbyte(str: any, args: any): boolean;
-        function rangebyte(str: any, args: any): boolean;
-        function maxvalue(str: any, args: any): boolean;
-        function minvalue(str: any, args: any): boolean;
-        function rangevalue(str: any, args: any): boolean;
-        function regexp(str: any, args: any): boolean;
-    }
+        kcn(str: any): boolean;
+        date(str: any): boolean;
+        time(str: any): boolean;
+        accept(str: any, args: any): boolean;
+        match(str: any, args: any): boolean;
+        acceptfileext(str: any, args: any): boolean;
+        notaccept(str: any, args: any): boolean;
+        notmatch(str: any, args: any): boolean;
+        notacceptfileext(str: any, args: any): boolean;
+        equalTo(str: any, args: any): boolean;
+        maxlength(str: any, args: any): boolean;
+        minlength(str: any, args: any): boolean;
+        rangelength(str: any, args: any): boolean;
+        maxbyte(str: any, args: any): boolean;
+        minbyte(str: any, args: any): boolean;
+        rangebyte(str: any, args: any): boolean;
+        maxvalue(str: any, args: any): boolean;
+        minvalue(str: any, args: any): boolean;
+        rangevalue(str: any, args: any): boolean;
+        regexp(str: any, args: any): boolean;
+    };
+    static data: {
+        new (): {};
+        filter(arr: any, condition: any): any;
+        sortBy(key: any, reverse: any): (a: any, b: any) => number;
+        sort(arr: any, key: any, reverse: any): any;
+    };
+    datafilter(condition: any): any;
+    datasort(key: any, reverse: any): any;
+    formatter(rules: any): {
+        options: {
+            data: any;
+            rules: any;
+            isElement: boolean;
+            createEvent: boolean;
+            context: any;
+            targetEle: import("./natural-js").NaturalJS;
+        };
+        format(row: any): any[];
+        unformat(row: any, key: any): any;
+    };
+    validator(rules: any): {
+        options: {
+            data: any;
+            rules: any;
+            isElement: boolean;
+            createEvent: boolean;
+            context: any;
+            targetEle: any;
+        };
+        validate: (row: any) => any[];
+    };
 }
