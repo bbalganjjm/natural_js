@@ -13,13 +13,13 @@ import { NA } from "./natural.architecture";
 import { ND } from "./natural.data";
 import { NU } from "./natural.ui";
 
-class NaturalJS extends jQuery { // NC, NA, ND, NU
+class NaturalJS extends jQuery {
 
     /**
      * Initializes and returns a new N object based on jQuery objects with the provided selector and context argument values.
      */
     constructor(selector, context) {
-        super(selector, context);
+        super();
         this.selector = NC.toSelector(selector);
     };
 
@@ -37,11 +37,12 @@ class NaturalJS extends jQuery { // NC, NA, ND, NU
 
 }
 
-// TODO N. 확장
-
-export function N(selector, context) {
+function N(selector, context) {
     return new NaturalJS(selector, context);
 }
-// Object.assign(N, NC, NA, ND, NU);
+Object.assign(N, NC, NA, ND, NU);
+Object.assign(N.prototype, NC.prototype, NA.prototype, ND.prototype, NU.prototype);
 
-window.jQuery.N = window.N = N;
+window.N = N;
+
+export { N }

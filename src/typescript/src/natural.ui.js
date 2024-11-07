@@ -1486,9 +1486,8 @@ export class NU {
             });
 
             const yearsPanel = N('<div class="datepicker_years_panel__"></div>');
-            let topMonthsPanel;
-            let topMonthItem;
-            let monthsPanel;
+            let topMonthsPanel, topMonthItem, monthsPanel;
+            let days, daysPanel, dayItem;
 
             if(opts.yearsPanelPosition === "left") {
                 const yearItem = N('<div></div>');
@@ -1859,6 +1858,7 @@ export class NU {
                     opts.context.trigger("onChangeMonth", [opts.context, selMonthStr, selYearStr, e]);
                 }
 
+                let dateFormat;
                 if(opts.monthonly) {
                     const selDate = NC.date.strToDate(NC.string.lpad(selYearStr, 4, "0") + NC.string.lpad(N(this).text(), 2, "0"), "Ym");
                     // sets the date format by the global config.
@@ -1869,7 +1869,7 @@ export class NU {
                         onSelectContinue = opts.onSelect.call(self, opts.context, selDate, opts.monthonly);
                     }
                     if(onSelectContinue === undefined || onSelectContinue === true) {
-                        const dateFormat = selDate.format.replace(/[^Y|^m|^d]/g, "");
+                        dateFormat = selDate.format.replace(/[^Y|^m|^d]/g, "");
                         const yearVal = selDate.obj.formatDate("Y");
                         let dateVal = selDate.obj.formatDate(dateFormat);
                         if(yearVal.length === 3) {
@@ -1885,6 +1885,11 @@ export class NU {
 
                     self.hide(ke);
                 } else {
+                    // creates the day items
+                    days = NC.message.get(opts.message, "days").split(",");
+                    daysPanel = N('<div class="datepicker_days_panel__"></div>');
+                    dayItem = N('<div></div>');
+
                     const selectedDay = daysPanel.find(".datepicker_day_selected__").text();
                     daysPanel.empty();
                     const endDateCls = NC.date.strToDate(NC.string.lpad(selYearStr, 4, "0") +  NC.string.lpad(String(parseInt(N(this).text())+1), 2, "0") + "00", "Ymd");
@@ -1988,11 +1993,6 @@ export class NU {
             });
 
             if(!opts.monthonly) {
-                // creates the day items
-                const days = NC.message.get(opts.message, "days").split(",");
-                const daysPanel = N('<div class="datepicker_days_panel__"></div>');
-                const dayItem = N('<div></div>');
-
                 opts.contents.append(daysPanel);
 
                 // Binds click event to day items
@@ -3072,7 +3072,7 @@ export class NU {
                             nextBtnEle.removeClass("disabled__");
                             prevBtnEle.addClass("disabled__");
                         } else if(opts.context.innerWidth() > tabContainerEle.outerWidth() + marginLeft) {
-                            marginLeft = -(tabContainerEle.outerWidth() - opts.context.innerWidth() + (nextBtnEle.length > 0 ? nextBtnEleOuterWidth : 0) - 1);
+                            marginLeft = -(tabContainerEle.outerWidth() - opts.context.innerWidth() + (nextBtnEle.length > 0 ? nextBtnEle.outerWidth() : 0) - 1);
                             prevBtnEle.removeClass("disabled__");
                             nextBtnEle.addClass("disabled__");
                         } else {
@@ -4568,7 +4568,7 @@ export class NU {
                 });
 
                 if(opts.selectScroll) {
-                    scrollTop = (row[row.length - 1] * selRowEle.outerHeight()) - (opts.height / 2) + (selRowEle.outerHeight() / 2);
+                    let scrollTop = (row[row.length - 1] * selRowEle.outerHeight()) - (opts.height / 2) + (selRowEle.outerHeight() / 2);
                     if(scrollTop < 0) {
                         scrollTop = 0;
                     }
@@ -4606,7 +4606,7 @@ export class NU {
 
                 if(opts.checkScroll) {
                     const selRowEle = checkboxEle.closest("li.form__");
-                    scrollTop = (row[row.length - 1] * selRowEle.outerHeight()) - (opts.height / 2) + (selRowEle.outerHeight() / 2);
+                    let scrollTop = (row[row.length - 1] * selRowEle.outerHeight()) - (opts.height / 2) + (selRowEle.outerHeight() / 2);
                     if(scrollTop < 0) {
                         scrollTop = 0;
                     }
@@ -5155,7 +5155,8 @@ export class NU {
             const rows = tbl.find(">tr");
             opt_cellValueGetter = opt_cellValueGetter || function(td) { return td.textContent || td.innerText; };
             const twoD = [];
-            for (let rowCount = rows.length, rowIndex = 0; rowIndex < rowCount; rowIndex++) {
+            let rowCount = rows.length;
+            for (let rowIndex = 0; rowIndex < rowCount; rowIndex++) {
                 twoD.push([]);
             }
             for (let rowIndex = 0, tr; rowIndex < rowCount; rowIndex++) {
@@ -6226,7 +6227,8 @@ export class NU {
                                             const extrData = clonedData.slice(0);
                                             let bfrFilterIdx = -1;
                                             let addUnits = 0;
-                                            for(let i = 0; i < filterIdxs.length; i++){
+                                            let i;
+                                            for(i = 0; i < filterIdxs.length; i++){
                                                 if(filterIdxs[i] - bfrFilterIdx === 1) {
                                                     addUnits++;
                                                 } else {
@@ -6582,8 +6584,6 @@ export class NU {
                         }
                     }
                 }
-
-                let tempRowEleClone;
 
                 if(opts.checkAll !== null) {
                     this.thead.find(opts.checkAll).prop("checked", false);
