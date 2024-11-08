@@ -12,46 +12,25 @@ function N(selector, context) {
 }
 
 Object.assign(N, NC, NA, ND, NU, NUS);
-// Object.assign(jQuery.fn, NC.prototype, NA.prototype, ND.prototype, NU.prototype, NUS.prototype);
 
-jQuery.fn.remove_ = NC.prototype.remove_;
-jQuery.fn.tpBind = NC.prototype.tpBind;
-jQuery.fn.instance = NC.prototype.instance;
-jQuery.fn.vals = NC.prototype.vals;
-jQuery.fn.events = NC.prototype.events;
-
-jQuery.fn.comm = NA.prototype.comm;
-N.comm = function(obj, url) {
-    return new NA.comm(obj, url);
-}
-jQuery.fn.cont = NA.prototype.cont;
-
-jQuery.fn.datafilter = ND.prototype.datafilter;
-jQuery.fn.datasort = ND.prototype.datasort;
-jQuery.fn.formatter = ND.prototype.formatter;
-jQuery.fn.validator = ND.prototype.validator;
-
-jQuery.fn.alert = NU.prototype.alert;
-jQuery.fn.button = NU.prototype.button;
-jQuery.fn.datepicker = NU.prototype.datepicker;
-jQuery.fn.popup = NU.prototype.popup;
-jQuery.fn.tab = NU.prototype.tab;
-jQuery.fn.select = NU.prototype.select;
-jQuery.fn.form = NU.prototype.form;
-jQuery.fn.list = NU.prototype.list;
-jQuery.fn.grid = NU.prototype.grid;
-jQuery.fn.pagination = NU.prototype.pagination;
-jQuery.fn.tree = NU.prototype.tree;
-
-jQuery.fn.notify = NUS.prototype.notify;
-N.notify = function(position, opts) {
-    return new NUS.notify(position, opts);
-}
-N.notify.add = NUS.notify.add;
-jQuery.fn.docs = NUS.prototype.docs;
-
-// jQuery.fn.extend(NC.prototype);
-// jQuery.fn.extend(NA.prototype);
+[NC.prototype, NA.prototype, ND.prototype, NU.prototype, NUS.prototype].forEach(function(prototype) {
+    Object.getOwnPropertyNames(prototype)
+        .forEach(function(key) {
+            if (key !== "constructor" && key !== "request") {
+                jQuery.fn[key] = prototype[key];
+            }
+            if (key === "comm") {
+                N[key] = function(obj, url) {
+                    return new NA[key](obj, url);
+                }
+            } else if (key === "notify") {
+                N[key] = function(position, opts) {
+                    return new NUS[key](position, opts);
+                }
+                N[key].add = NUS[key].add;
+            }
+        });
+});
 
 class NJS extends jQuery {
 
