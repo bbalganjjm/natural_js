@@ -29,10 +29,6 @@ class ND {
 	static ds = class {
 		
 		constructor(inst, isReg) {
-			if (ND.ds.caller !== ND.ds.instance) {
-				throw new Error("[ND.datasync]There is no public constructor for ND.ds, use instance method");
-			}
-
 			const pageContext = jQuery(NA.context.attr("architecture").page.context);
 			if(pageContext.length === 0) {
 				NC.warn("[ND.ds]Context element is missing. Please specify the correct Natural-JS's main context element selector to \"NA.context.attr(\"architecture\").page.context\" property in \"natural.config.js\" file");
@@ -60,7 +56,7 @@ class ND {
 			return siglInst;
 		};
 
-		static instance(inst, isReg) {
+		static instance = function(inst, isReg) {
 			return new ND.ds(inst, isReg);
 		};
 
@@ -225,8 +221,8 @@ class ND {
 			return this.options.data[row][key];
 		};
 
-		static commas(str) {
-			if (NC.isEmpty(str)) {
+		static commas = function(str) {
+			if (NC.string.isEmpty(str)) {
 				return str;
 			}
 			str = str.replace(/,/g, "");
@@ -240,8 +236,8 @@ class ND {
 		/**
 		 * Resident registration number
 		 */
-		static rrn(str, args) {
-			if (NC.isEmpty(str)) {
+		static rrn = function(str, args) {
+			if (NC.string.isEmpty(str)) {
 				return str;
 			}
 			str = str.replace(/[^0-9*]/g, "");
@@ -262,7 +258,7 @@ class ND {
 		/**
 		 * US Social Security Number
 		 */
-		static ssn(str) {
+		static ssn = function(str) {
 			if (str.length === 9) {
 				str = str.replace(/[^0-9*]/g, "");
 				return str.substring(0, 3) + "-" + str.substring(3, 5) + "-" + str.substring(5, 9);
@@ -272,7 +268,7 @@ class ND {
 		/**
 		 * Korean business registration number
 		 */
-		static kbrn(str) {
+		static kbrn = function(str) {
 			if (NC.string.trimToEmpty(str).length < 5) {
 				return str;
 			}
@@ -285,23 +281,23 @@ class ND {
 		/**
 		 * Korean corporation number
 		 */
-		static kcn(str) {
+		static kcn = function(str) {
 			return this.rrn(str);
 		};
-		static upper(str) {
-			if (NC.isEmpty(str)) {
+		static upper = function(str) {
+			if (NC.string.isEmpty(str)) {
 				return str;
 			}
 			return str.toUpperCase();
 		};
-		static lower(str) {
-			if (NC.isEmpty(str)) {
+		static lower = function(str) {
+			if (NC.string.isEmpty(str)) {
 				return str;
 			}
 			return str.toLowerCase();
 		};
-		static capitalize(str) {
-			if (NC.isEmpty(str)) {
+		static capitalize = function(str) {
+			if (NC.string.isEmpty(str)) {
 				return str;
 			}
 			let result = str.substring(0, 1).toUpperCase();
@@ -310,21 +306,21 @@ class ND {
 			}
 			return result;
 		};
-		static zipcode(str) {
-			if (NC.isEmpty(str)) {
+		static zipcode = function(str) {
+			if (NC.string.isEmpty(str)) {
 				return str;
 			}
 			str = str.replace(/[^0-9*]/g, "");
 			return str.substring(0, 3) + "-" + str.substring(3, 6);
 		};
-		static phone(str) {
-			if (NC.isEmpty(str)) {
+		static phone = function(str) {
+			if (NC.string.isEmpty(str)) {
 				return str;
 			}
 			str = str.replace(/[^0-9*]/g, "");
 			return str.replace(/(^02.{0}|^01.{1}|[0-9*]{3})([0-9*]+)([0-9*]{4})/, "$1-$2-$3");
 		};
-		static realnum(str) {
+		static realnum = function(str) {
 			try {
 				str = String(parseFloat(str));
 			} catch (e) {
@@ -332,19 +328,19 @@ class ND {
 			}
 			return str === "NaN" ? str.replace("NaN", "") : str;
 		};
-		static trimtoempty(str) {
+		static trimtoempty = function(str) {
 			return NC.string.trimToEmpty(str);
 		};
-		static trimtozero(str) {
+		static trimtozero = function(str) {
 			return NC.string.trimToZero(str);
 		};
-		static trimtoval(str, args) {
+		static trimtoval = function(str, args) {
 			if (args === undefined || args[0] === undefined) {
 				throw NC.error("[ND.formatter.trimtoval]You must input args[0](default value)");
 			}
 			return NC.string.trimToVal(str, args[0]);
 		};
-		static date(str, args, ele) {
+		static date = function(str, args, ele) {
 			if(args === undefined) {
 				return str;
 			}
@@ -467,7 +463,7 @@ class ND {
 				return Number(str) > 0 ? val : "";
 			}
 		};
-		static time(str, args) {
+		static time = function(str, args) {
 			str = str.replace(/[^0-9]/g, "");
 			if (NC.string.trimToEmpty(str) > 6) {
 				str = NC.string.rpad(str, 6, "0");
@@ -487,7 +483,7 @@ class ND {
 
 			return str;
 		};
-		static limit(str, args, ele) {
+		static limit = function(str, args, ele) {
 			if (args === undefined || args[0] === undefined) {
 				throw NC.error("[ND.formatter.limit]You must input args[0](cut length)");
 			}
@@ -509,7 +505,7 @@ class ND {
 			}
 			return str;
 		};
-		static replace(str, args, ele) {
+		static replace = function(str, args, ele) {
 			if (args === undefined || args.length < 2) {
 				throw NC.error("[ND.formatter.replace]You must input args[0](target string) and args[1](replace string)");
 			}
@@ -519,19 +515,19 @@ class ND {
 			}
 			return replaceStr;
 		};
-		static lpad(str, args) {
+		static lpad = function(str, args) {
 			if (args === undefined || args.length < 2) {
 				throw NC.error("[ND.formatter.lpad]You must input args[0](fill length) and args[1](replace string)");
 			}
 			return NC.string.lpad(str, Number(args[0]), args[1]);
 		};
-		static rpad(str, args) {
+		static rpad = function(str, args) {
 			if (args === undefined || args.length < 2) {
 				throw NC.error("[ND.formatter.rpad]You must input args[0](fill length) and  args[1](replace string)");
 			}
 			return NC.string.rpad(str, Number(args[0]), args[1]);
 		};
-		static mask(str, args) {
+		static mask = function(str, args) {
 			if (args === undefined || args.length < 1) {
 				throw NC.error("[ND.formatter.rpad]You must input args[0](masking rule)");
 			}
@@ -622,14 +618,14 @@ class ND {
 
 			return str;
 		};
-		static generic(str, args) {
+		static generic = function(str, args) {
 			if (args === undefined || args[0] === undefined) {
 				throw NC.error("[ND.formatter.generic]You must input args[0](user format rule)");
 			}
 			const mask = new NC.mask(args[0]);
 			return mask.setGeneric(String(str));
 		};
-		static numeric(str, args) {
+		static numeric = function(str, args) {
 			if (args === undefined || args[0] === undefined) {
 				throw NC.error("[ND.formatter.numeric]You must input args[0](user format rule)");
 			}
@@ -774,57 +770,57 @@ class ND {
 			return retArr;
 		};
 
-		static required(str) {
+		static required = function(str) {
 			return !NC.string.isEmpty(str);
 		};
-		static alphabet(str) {
+		static alphabet = function(str) {
 			return new RegExp(/^[a-z\s]+$/i).test(str);
 		};
-		static integer(str) {
+		static integer = function(str) {
 			return new RegExp(/^[+-]?\d+$/).test(str);
 		};
-		static korean(str) {
+		static korean = function(str) {
 			return new RegExp(/^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣\s]+$/).test(str);
 		};
-		static alphabet_integer(str) {
+		static alphabet_integer = function(str) {
 			return new RegExp(/^[a-z-?\d\s]+$/i).test(str);
 		};
-		static integer_korean(str) {
+		static integer_korean = function(str) {
 			return new RegExp(/^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣-?\d\s]+$/).test(str);
 		};
-		static alphabet_korean(str) {
+		static alphabet_korean = function(str) {
 			return new RegExp(/^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣a-z\s]+$/i).test(str);
 		};
-		static alphabet_integer_korean(str) {
+		static alphabet_integer_korean = function(str) {
 			return new RegExp(/^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣a-z-?\d\s]+$/i).test(str);
 		};
-		static dash_integer(str) {
+		static dash_integer = function(str) {
 			return new RegExp(/^(\d|-)+$/).test(str);
 		};
-		static commas_integer(str) {
+		static commas_integer = function(str) {
 			return new RegExp(/^(\d|,)+$/).test(str);
 		};
-		static number(str) {
+		static number = function(str) {
 			return new RegExp(/^[+-]?(\d|,|\.)+$/).test(str);
 		};
-		static email(str) {
+		static email = function(str) {
 			return new RegExp(
 				/^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)*(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i)
 				.test(str);
 		};
-		static url(str) {
+		static url = function(str) {
 			return new RegExp(
 				/^(https?|ftp):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)*(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(\#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i)
 				.test(str);
 		};
-		static zipcode(str) {
+		static zipcode = function(str) {
 			return new RegExp(/^\d{3}-\d{3}$/).test(str);
 		};
-		static decimal(str, args) {
+		static decimal = function(str, args) {
 			const length = (args !== undefined && args[0] !== undefined) ? args[0] : 10;
 			return new RegExp(/^-?\d+$/).test(str) || new RegExp("^-?\\d*\\.\\d{0," + String(length) + "}$").test(str);
 		};
-		static phone(str, args) {
+		static phone = function(str, args) {
 			if (args !== undefined && args[0] !== undefined) {
 				if (args[0] === "true") {
 					return new RegExp(/^\d{2,3}-\d{3,4}-\w+|"("")"$/).test(str);
@@ -832,7 +828,7 @@ class ND {
 			}
 			return new RegExp(/^\d{2,3}-\d{3,4}-\d{4}$/).test(str);
 		};
-		static rrn(str) {
+		static rrn = function(str) {
 			str = str.replace(/[^0-9*]/g, "");
 			if (NC.string.trimToEmpty(str).length !== 13) {
 				str = null;
@@ -865,10 +861,10 @@ class ND {
 		/**
 		 * US Social Security Number
 		 */
-		static ssn(str) {
+		static ssn = function(str) {
 			return new RegExp(/\d{3}-\d{2}-\d{4}/).test(str);
 		};
-		static frn(str) {
+		static frn = function(str) {
 			str = str.replace(/[^0-9*]/g, "");
 			if (NC.string.trimToEmpty(str).length !== 13) {
 				str = null;
@@ -889,7 +885,7 @@ class ND {
 			return (((11 - (sum % 11)) % 10 + 2) % 10) === Number(str.substring(12, 13));
 
 		};
-		static frn_rrn(str) {
+		static frn_rrn = function(str) {
 			str = str.replace(/[^0-9*]/g, "");
 			if (NC.string.trimToEmpty(str).length !== 13) {
 				str = null;
@@ -904,7 +900,7 @@ class ND {
 		/**
 		 * Korean business registration number
 		 */
-		static kbrn(str) {
+		static kbrn = function(str) {
 			const bizID = str.replace(/[^0-9*]/g, "");
 			const checkID = [1, 3, 7, 1, 3, 7, 1, 3, 5, 1];
 			let i, chkSum = 0, c2, remander;
@@ -923,7 +919,7 @@ class ND {
 		/**
 		 * Korean corporation number
 		 */
-		static kcn(str) {
+		static kcn = function(str) {
 			const numStr = str.replace(/[^0-9*]/g, "");
 			if (numStr.length !== 13) {
 				return false;
@@ -943,7 +939,7 @@ class ND {
 			return iCheck_digit === arr_regno[12];
 
 		};
-		static date(str) {
+		static date = function(str) {
 			// Check date format length
 			const isDateFormat = function(d) {
 				return NC.string.trimToEmpty(d).length === 8;
@@ -996,46 +992,46 @@ class ND {
 
 			return isValid;
 		};
-		static time(str) {
+		static time = function(str) {
 			return new RegExp(/^([01]\d|2[0-3])([0-5]\d){0,2}$/).test(str.replace(/[^0-9]/g, ""));
 		};
-		static accept(str, args) {
+		static accept = function(str, args) {
 			if (args === undefined || args[0] === undefined) {
 				throw new Error("[ND.validator.accept]You must input args[0](accept string)");
 			}
 			return (new RegExp("^(" + args[0] + ")$")).test(str);
 		};
-		static match(str, args) {
+		static match = function(str, args) {
 			if (args === undefined || args[0] === undefined) {
 				throw new Error("[ND.validator.match]You must input args[0](match string)");
 			}
 			return (new RegExp(args[0])).test(str);
 		};
-		static acceptfileext(str, args) {
+		static acceptfileext = function(str, args) {
 			if (args === undefined || args[0] === undefined) {
 				throw new Error("[ND.validator.acceptFileExt]You must input args[0](file extention)");
 			}
 			return (new RegExp(".(" + args[0] + ")$", "i")).test(str);
 		};
-		static notaccept(str, args) {
+		static notaccept = function(str, args) {
 			if (args === undefined || args[0] === undefined) {
 				throw new Error("[ND.validator.notAccept]You must input args[0](refused string)");
 			}
 			return !(new RegExp("^(" + args[0] + ")$")).test(str);
 		};
-		static notmatch(str, args) {
+		static notmatch = function(str, args) {
 			if (args === undefined || args[0] === undefined) {
 				throw new Error("[ND.validator.notMatch]You must input args[0](unmatch String)");
 			}
 			return !(new RegExp(args[0])).test(str);
 		};
-		static notacceptfileext(str, args) {
+		static notacceptfileext = function(str, args) {
 			if (args === undefined || args[0] === undefined) {
 				throw new Error("[ND.validator.notAcceptFileExt]You must input args[0](file extention)");
 			}
 			return !(new RegExp(".(" + args[0] + ")$", "i")).test(str);
 		};
-		static equalTo(str, args) {
+		static equalTo = function(str, args) {
 			if (args === undefined || args[0] === undefined) {
 				throw new Error("[ND.validator.equalTo]You must input args[0](selector string(:input))");
 			}
@@ -1044,26 +1040,26 @@ class ND {
 			}
 			return str === jQuery(args[0]).val();
 		};
-		static maxlength(str, args) {
+		static maxlength = function(str, args) {
 			if (args === undefined || args[0] === undefined) {
 				throw new Error("[ND.validator.maxlength]You must input args[0](length)");
 			}
 			return NC.string.trimToEmpty(str).length <= Number(NC.string.trimToZero(args[0]));
 		};
-		static minlength(str, args) {
+		static minlength = function(str, args) {
 			if (args === undefined || args[0] === undefined) {
 				throw new Error("[ND.validator.minlength]You must input args[0](length)");
 			}
 			return Number(NC.string.trimToZero(args[0])) <= NC.string.trimToEmpty(str).length;
 		};
-		static rangelength(str, args) {
+		static rangelength = function(str, args) {
 			if (args === undefined || args.length < 2) {
 				throw new Error("[ND.validator.rangelength]You must input args[0](minimum length) and args[1](maximum length");
 			}
 			return Number(NC.string.trimToZero(args[0])) <= NC.string.trimToEmpty(str).length &&
 				NC.string.trimToZero(str).length <= Number(NC.string.trimToEmpty(args[1]));
 		};
-		static maxbyte(str, args) {
+		static maxbyte = function(str, args) {
 			if (args === undefined || args[0] === undefined) {
 				throw new Error("[ND.validator.maxbyte]You must input args[0](maximum byte)");
 			}
@@ -1072,7 +1068,7 @@ class ND {
 			}
 			return NC.string.byteLength(NC.string.trimToEmpty(str), args[1]) <= Number(NC.string.trimToZero(args[0]));
 		};
-		static minbyte(str, args) {
+		static minbyte = function(str, args) {
 			if (args === undefined || args[0] === undefined) {
 				throw new Error("[ND.validator.minbyte]You must input args[0](minimum byte)");
 			}
@@ -1081,7 +1077,7 @@ class ND {
 			}
 			return Number(NC.string.trimToZero(args[0])) <= NC.string.byteLength(NC.string.trimToEmpty(str), args[1]);
 		};
-		static rangebyte(str, args) {
+		static rangebyte = function(str, args) {
 			if (args === undefined || args.length < 2) {
 				throw new Error("[ND.validator.rangebyte]You must input args[0](minimum byte) and args[1](maximum byte)");
 			}
@@ -1091,26 +1087,26 @@ class ND {
 			return Number(NC.string.trimToZero(args[0])) <= NC.string.byteLength(NC.string.trimToEmpty(str), args[2]) &&
 				NC.string.byteLength(NC.string.trimToEmpty(str), args[2]) <= Number(NC.string.trimToZero(args[1]));
 		};
-		static maxvalue(str, args) {
+		static maxvalue = function(str, args) {
 			if (args === undefined || args[0] === undefined) {
 				throw new Error("[ND.validator.maxvalue]You must input args[0](maximum value)");
 			}
 			return Number(NC.string.trimToZero(str)) <= Number(NC.string.trimToZero(args[0]));
 		};
-		static minvalue(str, args) {
+		static minvalue = function(str, args) {
 			if (args === undefined || args[0] === undefined) {
 				throw new Error("[ND.validator.minvalue]You must input args[0](minimum value)");
 			}
 			return Number(NC.string.trimToZero(args[0])) <= Number(NC.string.trimToZero(str));
 		};
-		static rangevalue(str, args) {
+		static rangevalue = function(str, args) {
 			if (args === undefined || args.length < 2) {
 				throw new Error("[ND.validator.rangevalue]You must input args[0](minimum value) and args[1](maximum value)");
 			}
 			return Number(NC.string.trimToZero(args[0])) <= Number(NC.string.trimToZero(str)) &&
 				Number(NC.string.trimToZero(str)) <= Number(NC.string.trimToZero(args[1]));
 		};
-		static regexp(str, args) {
+		static regexp = function(str, args) {
 			if (args === undefined || args.length < 2) {
 				throw new Error("[ND.validator.regexp]You must input args[0](regular expression string) and args[1](flag)");
 			}
@@ -1122,7 +1118,7 @@ class ND {
 
 	static data = class {
 
-		static filter(arr, condition) {
+		static filter = function(arr, condition) {
 			if(typeof condition === "function") {
 				return NC.isWrappedSet(arr) ? N(jQuery.grep(arr.toArray(), condition)) : jQuery.grep(arr, condition);
 			} else if(NC.type(condition) === "string") {
@@ -1138,7 +1134,7 @@ class ND {
 			}
 		};
 
-		static sortBy(key, reverse) {
+		static sortBy = function(key, reverse) {
 			return function(a, b) {
 				a = a[key];
 				b = b[key];
@@ -1156,7 +1152,7 @@ class ND {
 			};
 		};
 
-		static sort(arr, key, reverse) {
+		static sort = function(arr, key, reverse) {
 			if(reverse) {
 				reverse = -1;
 			} else {

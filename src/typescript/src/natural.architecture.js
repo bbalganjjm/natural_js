@@ -21,8 +21,8 @@ class NA {
         return new NA.cont(this, contObj);
     };
 
-    // Ajax TODO This will be replaced by fetch.
-    // static ajax = jQuery.ajax;
+    // Ajax
+    static ajax = jQuery.ajax;
 
     /**
      * Communicator
@@ -92,7 +92,7 @@ class NA {
 
         static xhr = null;
 
-        static initFilterConfig() {
+        static initFilterConfig = function() {
             const beforeInitFilters = [];
             const afterInitFilters = [];
             const beforeSendFilters = [];
@@ -146,12 +146,12 @@ class NA {
             }
         };
 
-        static resetFilterConfig() {
+        static resetFilterConfig = function() {
             NA.config.filterConfig = NA.comm.initFilterConfig();
             return this;
         };
 
-        static submit(callback) {
+        static submit = function(callback) {
             const obj = this;
             if (NC.isElement(obj)) {
                 jQuery.extend(this.request.options, {
@@ -292,7 +292,7 @@ class NA {
                 }
             });
 
-            this.xhr = NC.ajax(obj.request.options);
+            this.xhr = NA.ajax(obj.request.options);
             if (!callback) {
                 return this.xhr;
             } else {
@@ -300,7 +300,7 @@ class NA {
             }
         };
 
-        static error(callback) {
+        static error = function(callback) {
             this.errorHandlers.push(callback);
             return this;
         };
@@ -376,7 +376,7 @@ class NA {
             /**
              * get / set request attribute
              */
-            static attr(name, obj_) {
+            attr(name, obj_) {
                 if (name === undefined) {
                     return this.attrObj;
                 }
@@ -395,7 +395,7 @@ class NA {
             /**
              * remove request attribute
              */
-            static removeAttr(name) {
+            removeAttr(name) {
                 if(this.attrObj[name] !== undefined) {
                     delete this.attrObj[name];
                 }
@@ -405,8 +405,8 @@ class NA {
             /**
              * get query parmas from request url
              */
-            static param(name) {
-                if (NC.isEmpty(name)) {
+            param(name) {
+                if (NC.string.isEmpty(name)) {
                     if (this.options.url.indexOf("?") < 0) {
                         return {};
                     } else {
@@ -425,7 +425,7 @@ class NA {
                 }
             };
 
-            static get(key) {
+            get(key) {
                 if(key !== undefined) {
                     return this.options[key];
                 } else {
@@ -436,7 +436,7 @@ class NA {
             /**
              * Reload block page
              */
-            static reload(callback) {
+            reload(callback) {
                 const comm = this.options.target.comm(this.options.url);
                 comm.request = this;
                 comm.submit(callback);
@@ -471,7 +471,7 @@ class NA {
         /**
          * "init" method trigger
          */
-        static trInit(cont, request) {
+        static trInit = function(cont, request) {
             // set request attribute
             cont.request = request;
 
@@ -598,7 +598,7 @@ class NA {
     // Context
     static context = class {
         static attrObj = {};
-        static attr = NA.comm.request.attr
+        static attr = NA.comm.request.prototype.attr
     };
 
     // Config
@@ -608,7 +608,7 @@ class NA {
 
     // TODO This will be replaced by fetch.
     // ajax(opts) {
-    //     return NC.ajax(opts);
+    //     return NA.ajax(opts);
     // };
 
 }

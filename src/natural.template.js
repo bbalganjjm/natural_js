@@ -7,19 +7,14 @@
  * Copyright 2014 Goldman Kim(bbalganjjm@gmail.com)
  */
 
-// import { jQuery } from "../lib/jquery-3.7.1.min";
-import { N, NaturalJS } from "./natural-js";
-import { NC } from "./natural.core";
-import { NA } from "./natural.architecture";
-
-NaturalJS.VERSION["Natural-TEMPLATE"] = "0.4.12";
+NJS.version["Natural-TEMPLATE"] = "0.4.12";
 
 // Template
-export class NT {
+class NT {
 
     static aop = class {
 
-        static codes(cont, joinPoint) {
+        static codes = function(cont, joinPoint) {
             const options = {
                 codeUrl : null,
                 codeKey : null
@@ -157,7 +152,7 @@ export class NT {
             }
         };
 
-        static template(cont, joinPoint) {
+        static template = function(cont, joinPoint) {
             const options = {
                 onBeforeInitComponents : null,
                 onInitComponents : null,
@@ -214,7 +209,7 @@ export class NT {
             }, 0);
         };
 
-        static components(cont, prop, compActionDefer) {
+        static components = function(cont, prop, compActionDefer) {
             const props = prop.split("."); // props[1] : Component name, props[2] : Component id
             if(props.length > 2) {
                 const comp = "p." + props[1] + "." + props[2];
@@ -311,7 +306,7 @@ export class NT {
             }
         };
 
-        static events(cont, prop) {
+        static events = function(cont, prop) {
             const props = prop.split(".");
             if(props.length > 2) {
                 let targetProp;

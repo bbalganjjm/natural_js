@@ -20,7 +20,7 @@ class NUS {
     // Notify
     static notify = class {
         constructor(position, opts) {
-            if(arguments.length === 1 && !NC.isEmptyObject(position)) {
+            if(!NC.isEmptyObject(position) && opts === undefined) {
                 return new NUS.notify(null, position);
             }
 
@@ -66,11 +66,11 @@ class NUS {
             return this;
         };
 
-        static add(msg, url) {
+        static add = function(msg, url) {
             (new NUS.notify()).add(msg, url);
         };
 
-        static wrapEle() {
+        static wrapEle = function() {
             const opts = this.options;
             if(opts.container.find(".notify__").length > 0) {
                 opts.context = opts.container.find(".notify__");
@@ -283,7 +283,7 @@ class NUS {
             return this;
         };
 
-        static createLoadIndicator() {
+        static createLoadIndicator = function() {
             const opts = this.options;
 
             let maxZindex;
@@ -327,7 +327,7 @@ class NUS {
             return this;
         };
         
-        static updateLoadIndicator(entireLoadRequestCnt, entireLoadRequestMaxCnt) {
+        static updateLoadIndicator = function(entireLoadRequestCnt, entireLoadRequestMaxCnt) {
             const opts = this.options;
 
             opts.context.find("> .entire_load_indicator__ > .entire_load_indicator_bar__")
@@ -336,7 +336,7 @@ class NUS {
             return this;
         };
         
-        static removeLoadIndicator() {
+        static removeLoadIndicator = function() {
             const opts = this.options;
 
             if(opts.entireLoadIndicator) {
@@ -353,7 +353,7 @@ class NUS {
             return this;
         };
         
-        static errorLoadIndicator() {
+        static errorLoadIndicator = function() {
             const opts = this.options;
 
             if(opts.entireLoadIndicator) {
@@ -371,7 +371,7 @@ class NUS {
             return this;
         };
         
-        static wrapEle() {
+        static wrapEle = function() {
             const opts = this.options;
 
             opts.context.addClass("docs__");
@@ -490,7 +490,7 @@ class NUS {
             }
         };
         
-        static wrapScroll() {
+        static wrapScroll = function() {
             const opts = this.options;
             const eventNameSpace = ".docs.scroll";
             const tabContext = opts.context.find(">nav");
@@ -546,7 +546,7 @@ class NUS {
             });
         };
         
-        static clearScrollPosition(tabEle, isActive) {
+        static clearScrollPosition = function(tabEle, isActive) {
             const opts = this.options;
 
             const tabContext = opts.context.find(">nav");
@@ -577,7 +577,7 @@ class NUS {
             }
         };
         
-        static loadContent(docOpts, callback) {
+        static loadContent = function(docOpts, callback) {
             const opts = this.options;
             opts.loadedDocId = docOpts.docId;
 
@@ -601,7 +601,7 @@ class NUS {
                 docOpts.onBeforeLoad.call(this, docOpts.docId, target);
             }
 
-            const comm = NA.comm({
+            const comm = new NA.comm({
                 url : docOpts.url,
                 urlSync : docOpts.urlSync,
                 contentType : "text/html; charset=UTF-8",
@@ -643,7 +643,7 @@ class NUS {
             });
         };
         
-        static closeBtnControl() {
+        static closeBtnControl = function() {
             const opts = this.options;
             const tabs = opts.context.find("> .docs_tab_context__ > .docs_tabs__ > .docs_tab__:not('.remove__')");
             if(tabs.length === 1) {
@@ -653,7 +653,7 @@ class NUS {
             }
         };
         
-        static inactivateTab() {
+        static inactivateTab = function() {
             const opts = this.options;
 
             const currActiveTab = opts.context.find(".docs_tab_context__ > .docs_tabs__ > .docs_tab__.active__");
@@ -676,7 +676,7 @@ class NUS {
             }
         };
         
-        static activateTab(docId_, isFromDocsTabList_, isNotLoaded_) {
+        static activateTab = function(docId_, isFromDocsTabList_, isNotLoaded_) {
             const opts = this.options;
 
             const tabToActivate = opts.context.find("> .docs_tab_context__ > .docs_tabs__ > .docs_tab__." + docId_ + "__");
@@ -700,7 +700,7 @@ class NUS {
             }, 0);
         };
         
-        static showTabContents(docId_) {
+        static showTabContents = function(docId_) {
             const opts = this.options;
 
             const tabContents_ = opts.context.find("> .docs_contents__." + docId_ + "__");
@@ -719,7 +719,7 @@ class NUS {
             });
         };
         
-        static hideTabContents(docId_) {
+        static hideTabContents = function(docId_) {
             const opts = this.options;
 
             const tabContents_ = opts.context.find("> .docs_contents__." + docId_ + "__");
@@ -735,7 +735,7 @@ class NUS {
             }
         };
         
-        static remove(targetTabEle) {
+        static remove = function(targetTabEle) {
             const opts = this.options;
             const targetTabDocOpts = targetTabEle.data("docOpts");
             const targetTabPrevEle = targetTabEle.prev();

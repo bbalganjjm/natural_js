@@ -14,1056 +14,6 @@
 class NC {
 
     /**
-     * Set and get locale value
-     */
-    static locale(str) {
-        if(str === undefined) {
-            return NA.context.attr("core").locale;
-        } else {
-            NA.context.attr("core").locale = str;
-        }
-    };
-
-    /**
-     * Displays debug logs on the console.
-     */
-    static debug = console && console.debug ? console.debug.bind(window.console) : function() {};
-
-    /**
-     * Displays general logs on the console.
-     */
-    static log = console && console.log ? console.log.bind(window.console) : function() {};
-
-    /**
-     * Displays info logs on the console.
-     */
-    static info = console && console.info ? console.info.bind(window.console) : function() {};
-
-    /**
-     * Displays warning logs on the console.
-     */
-    static warn = console && console.warn ? console.warn.bind(window.console) : function() {};
-
-    /**
-     * Displays error logs on the console.
-     */
-    static error(msg, e) {
-        if(NC.type(e) !== "error") {
-            e = new Error(msg);
-
-            if("captureStackTrace" in Error) {
-                Error.captureStackTrace(e, NC.error);
-            }
-        } else {
-            e.message = (msg != null ? "[" + msg + "]" : "") + e.message;
-        }
-        return e;
-    };
-
-    /**
-     * Check object type
-     */
-    static type(obj) {
-        return ({}).toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase();
-    };
-
-    /**
-     * Check whether arg[0] is a String type
-     */
-    static isString(obj) {
-        return NC.type(obj) === "string";
-    };
-
-    /**
-     * Check whether arg[0] is a numeric type
-     */
-    static isNumeric(obj) {
-        return ( typeof obj === "number" || typeof obj === "string" ) &&
-            !isNaN( obj - parseFloat( obj ) );
-    };
-
-    /**
-     * Check whether arg[0] is a plain object type
-     */
-    static isPlainObject = jQuery.isPlainObject;
-
-    /**
-     * Check whether object is empty
-     */
-    static isEmptyObject = jQuery.isEmptyObject;
-
-    /**
-     * Check whether arg[0] is a Array type
-     */
-    static isArray = Array.isArray;
-
-    /**
-     * Checks whether an object of a type similar(array or jquery object etc.) to an array
-     */
-    static isArraylike(obj) {
-        if(typeof obj === "undefined" || obj.length === undefined) {
-            return false;
-        }
-        const length = obj.length, type = NC.type(obj);
-        if (type === "function"
-            || type === "asyncfunction"
-            || type === "string"
-            || type === "number"
-            || type === "date"
-            || type === "boolean"
-            || obj === obj.window){
-            return false;
-        }
-        if (obj.nodeType === 1 && length) {
-            return true;
-        }
-        return type === "array" || length === 0 || typeof length === "number" && length > 0 && (length - 1) in obj;
-    };
-
-    /**
-     * Check whether arg[0] is a jQuery Object type
-     */
-    static isWrappedSet(obj) {
-        return !!(obj && this.isArraylike(obj) && obj.jquery);
-    };
-
-    /**
-     * Check whether arg[0] is an element type
-     */
-    static isElement(obj) {
-        if(this.isWrappedSet(obj)) {
-            obj = obj.get(0);
-        }
-        return !!(obj && obj !== document && obj.getElementsByTagName);
-    };
-
-    static toSelector(el) {
-        if (typeof el === "string") {
-            return el;
-        }
-        if(this.isWrappedSet(el)) {
-            el = el.get(0);
-        }
-        if(this.isElement(el)) {
-            return el.tagName.toLowerCase() + (el.id ? "#" + el.id : "") + (el.classList && el.classList.length > 0 ? "." : "") + (Array.from(el.classList)).join(".");
-        } else if(NC.type(el) === "array") {
-            if(el.length > 0) {
-                let obj = el[el.length - 1];
-                let type = NC.type(obj);
-                if(type.startsWith("[")) {
-                    type = type.replace(/[\[\]]/g, "");
-                } else if(NC.type(obj) === "string") {
-                    type = '"' + type + '"';
-                }
-                return "...[" + type + "](" + el.length + ")";
-            } else {
-                return "...[](0)";
-            }
-        } else {
-            return String(el);
-        }
-    };
-
-    /**
-     * Run asynchronous execution sequentially
-     */
-    static serialExecute() {
-        const self = this;
-        self.defers = [];
-        jQuery(arguments).each(function(i, fn){
-            const defer = jQuery.Deferred();
-            self.defers.push(defer);
-            if(self.defers.length > 1) {
-                self.defers[i-1].done(function() {
-                    fn.apply(self.defers, jQuery.merge([defer], arguments));
-                });
-            } else {
-                fn.apply(self.defers, [defer]);
-            }
-        });
-        return self.defers;
-    };
-
-    /**
-     * Natural-JS resource garbage collector
-     */
-    static gc = class {
-
-        /**
-         * Minimum collection
-         */
-        static minimum() {
-            jQuery(window).off("resize.datepicker");
-            jQuery(window).off("resize.alert");
-            jQuery(document).off("click.datepicker");
-            jQuery(document).off("keyup.alert");
-            jQuery(document).off("click.grid.dataFilter");
-            jQuery(document).off("click.grid.more touchstart.grid.more");
-            return true;
-        };
-
-        /**
-         * Full collection
-         */
-        static full() {
-            jQuery(window).off("resize.datepicker");
-            jQuery(window).off("resize.alert");
-            jQuery(document).off("dragstart.alert selectstart.alert mousemove.alert touchmove.alert mouseup.alert touchend.alert");
-            jQuery(document).off("click.datepicker");
-            jQuery(document).off("keyup.alert");
-            jQuery(document).off("dragstart.grid.vResize selectstart.grid.vResize mousemove.grid.vResize touchmove.grid.vResize mouseup.grid.vResize touchend.grid.vResize");
-            jQuery(document).off("dragstart.grid.resize selectstart.grid.resize mousemove.grid.resize touchmove.grid.resize mouseup.grid.resize touchend.grid.resize");
-            jQuery(document).off("click.grid.dataFilter");
-            jQuery(document).off("click.grid.more touchstart.grid.more");
-            return true;
-        };
-
-        /**
-         * Removes garbage instances from observables of ND.ds
-         */
-        static ds() {
-            if(jQuery(NA.context.attr("architecture").page.context).find(">#data_sync_temp__").length > 0) {
-                jQuery(NA.context.attr("architecture").page.context).find(">#data_sync_temp__").instance("ds").obserable
-                    = jQuery.uniqueSort(jQuery(".grid__, .list__, .form__:not('.grid__>tbody, .list__>li'), .tree__", NA.context.attr("architecture").page.context).instance());
-            }
-        }
-
-    };
-
-    /**
-     * NC.string package
-     */
-    static string = class {
-
-        static contains(context, str) {
-            if (typeof context !== "string") {
-                throw NC.error("[NC.string.contains]arguments[0] was not entered or is not of string type.");
-            }
-            return context.indexOf(str) > -1;
-        };
-
-        static endsWith(context, str) {
-            if (typeof context !== "string") {
-                throw NC.error("[NC.string.endsWith]arguments[0] was not entered or is not of string type.");
-            }
-            return context.indexOf(str, context.length - str.length) !== -1;
-        };
-
-        static startsWith(context, str) {
-            if (typeof context !== "string") {
-                throw NC.error("[NC.string.startsWith]arguments[0] was not entered or is not of string type.");
-            }
-            return context.indexOf(str) === 0;
-        };
-
-        static insertAt(context, idx, str) {
-            return context.substring(0, idx) + str + context.substring(idx);
-        };
-
-        static removeWhitespace(str) {
-            if (this.isEmpty(str)) {
-                return str;
-            }
-            return str.replace(/\s/g, "");
-        };
-
-        static lpad(str, length, padStr) {
-            while (str.length < length) {
-                str = padStr + str;
-            }
-            return str;
-        };
-
-        static rpad(str, length, padStr) {
-            while (str.length < length) {
-                str = str + padStr;
-            }
-            return str;
-        };
-
-        static isEmpty(str) {
-            return NC.string.trimToEmpty(str).length === 0;
-        };
-
-        static byteLength(str, charByteLength) {
-            if(charByteLength === undefined) {
-                charByteLength = NA.context.attr("core").charByteLength !== undefined ? NA.context.attr("core").charByteLength : 3;
-            }
-            return (function(s,b,i,c){
-                for(b=i=0;c=s.charCodeAt(i++);b+=c>>11?charByteLength:c>>7?2:1){}
-                return b;
-            })(str);
-        };
-
-        static trimToEmpty(str) {
-            return str !== undefined && str !== null ? String(str).trim() : "";
-        };
-
-        static nullToEmpty(str) {
-            return str === null || str === undefined ? "" : str;
-        };
-
-        static trimToNull(str) {
-            return NC.string.trimToEmpty(str).length === 0 ? null : NC.string.trimToEmpty(str);
-        };
-
-        static trimToUndefined(str) {
-            return NC.string.trimToEmpty(str).length === 0 ? undefined : NC.string.trimToEmpty(str);
-        };
-
-        static trimToZero(str) {
-            return NC.string.trimToEmpty(str).length === 0 ? "0" : NC.string.trimToEmpty(str);
-        };
-
-        static trimToVal(str, val) {
-            return NC.string.trimToEmpty(str).length === 0 ? val : NC.string.trimToEmpty(str);
-        }
-    };
-
-    /**
-     * NC.date package
-     */
-    static date = class {
-
-        /**
-         * Calculate the difference between two dates
-         */
-        static diff(refDateStr, targetDateStr) {
-            if (NC.type(refDateStr) === "string") {
-                refDateStr = this.strToDate(refDateStr).obj;
-            }
-            if (NC.type(targetDateStr) === "string") {
-                targetDateStr = this.strToDate(targetDateStr).obj;
-            }
-            return Math.ceil((targetDateStr - refDateStr) / 1000 / 24 / 60 / 60);
-        };
-
-        /**
-         * Return to re-place the date string for a given format.
-         */
-        static strToDateStrArr(str, format, isString) {
-            const dateStrArr = [];
-            let fixNum = 0;
-            if(format.length === 3 && str.length === 7 || format.length === 2 && str.length === 5) {
-                fixNum = -1;
-            }
-            if(NC.string.startsWith(format, "Ymd")) {
-                dateStrArr.push(str.substring(0, 4 + fixNum)); //year
-                dateStrArr.push(str.substring(4 + fixNum, 6 + fixNum)); //month
-                dateStrArr.push(str.substring(6 + fixNum, 8 + fixNum)); //day
-            } else if(NC.string.startsWith(format, "mdY")) {
-                dateStrArr.push(str.substring(4, 8 + fixNum)); //year
-                dateStrArr.push(str.substring(0, 2)); //month
-                dateStrArr.push(str.substring(2, 4)); //day
-            } else if(NC.string.startsWith(format, "dmY")) {
-                dateStrArr.push(str.substring(4, 8 + fixNum)); //year
-                dateStrArr.push(str.substring(2, 4)); //month
-                dateStrArr.push(str.substring(0, 2)); //day
-            } else if(NC.string.startsWith(format, "Ym")) {
-                dateStrArr.push(str.substring(0, 4 + fixNum)); //year
-                dateStrArr.push(str.substring(4 + fixNum, 6 + fixNum)); //month
-            } else if(NC.string.startsWith(format, "mY")) {
-                dateStrArr.push(str.substring(2, 6 + fixNum)); //year
-                dateStrArr.push(str.substring(0, 2)); //month
-            } else {
-                throw NC.error("[NC.date.strToDateStrArr]\"" + format + "\" date format is not support. please change return value of NA.context.attr(\"data\").formatter.date's functions");
-            }
-            if(isString === undefined || isString === false) {
-                jQuery(dateStrArr).each(function(i) {
-                    dateStrArr[i] = parseInt(this);
-                });
-            }
-            return dateStrArr;
-        };
-
-        /**
-         * Convert a date string to a date object
-         */
-        static strToDate(str, format) {
-            str = NC.string.trimToEmpty(str).replace(/[^0-9]/g, "");
-            let dateInfo = null;
-            let dateStrArr;
-            if (str.length > 2 && str.length <= 4) {
-                dateInfo = {
-                    obj : new Date(str, 1, 1, 0, 0, 0),
-                    format : "Y"
-                };
-            } else if (str.length === 6) {
-                if(format === undefined) {
-                    format = NA.context.attr("data").formatter.date.Ym();
-                }
-                dateStrArr = NC.date.strToDateStrArr(str, format.replace(/[^Y|^m|^d]/g, ""));
-                dateInfo = {
-                    obj : new Date(dateStrArr[0], dateStrArr[1]-1, 1, 0, 0, 0),
-                    format : format
-                };
-            } else if (str.length === 8) {
-                if(format === undefined) {
-                    format = NA.context.attr("data").formatter.date.Ymd();
-                }
-                dateStrArr = NC.date.strToDateStrArr(str, format.replace(/[^Y|^m|^d]/g, ""));
-                dateInfo = {
-                    obj : new Date(dateStrArr[0], dateStrArr[1]-1, dateStrArr[2], 0, 0, 0),
-                    format : format
-                };
-            } else if (str.length === 10) {
-                if(format === undefined) {
-                    format = NA.context.attr("data").formatter.date.YmdH();
-                }
-                dateStrArr = NC.date.strToDateStrArr(str, format.replace(/[^Y|^m|^d]/g, ""));
-                dateInfo = {
-                    obj : new Date(dateStrArr[0], dateStrArr[1]-1, dateStrArr[2], Number(str.substring(8, 10)), 0, 0),
-                    format : format
-                };
-            } else if (str.length === 12) {
-                if(format === undefined) {
-                    format = NA.context.attr("data").formatter.date.YmdHi();
-                }
-                dateStrArr = NC.date.strToDateStrArr(str, format.replace(/[^Y|^m|^d]/g, ""));
-                dateInfo = {
-                    obj : new Date(dateStrArr[0], dateStrArr[1]-1, dateStrArr[2], Number(str.substring(8, 10)), Number(str.substring(10, 12)),
-                        0),
-                    format : format
-                };
-            } else if (str.length >= 14) {
-                if(format === undefined) {
-                    format = NA.context.attr("data").formatter.date.YmdHis();
-                }
-                dateStrArr = NC.date.strToDateStrArr(str, format.replace(/[^Y|^m|^d]/g, ""));
-                dateInfo = {
-                    obj : new Date(dateStrArr[0], dateStrArr[1]-1, dateStrArr[2], Number(str.substring(8, 10)), Number(str.substring(10, 12)),
-                        Number(str.substring(12, 14))),
-                    format : format
-                };
-            }
-            return dateInfo;
-        };
-
-        /**
-         * Format the date string
-         */
-        static format(str, format) {
-            const dateInfo = this.strToDate(str);
-            return dateInfo !== null ? dateInfo.obj.formatDate(format !== undefined ? format : dateInfo.format) : str;
-        };
-
-        /**
-         * Convert date object to timestamp number
-         */
-        static dateToTs(dateObj) {
-            let d = dateObj;
-            if (d === undefined) {
-                d = new Date();
-            }
-            return Math.round(d.getTime() / 1000);
-        };
-
-        /**
-         * Convert timestamp number to date object
-         */
-        static tsToDate(tsNum) {
-            if (tsNum === undefined) {
-                return new Date();
-            } else {
-                return new Date(tsNum);
-            }
-        };
-
-        /**
-         * Get a list of monthly date objects
-         *
-         * @param year
-         * @param month
-         * @return array[array[date]]
-         */
-        static dateList(year, month) {
-            const weekArr = [];
-            const prevDate = new Date(year, month-1, 0);
-            const currDate = new Date(year, month, 0);
-            const nextDate = new Date(year, month+1, 0);
-
-            const lastDate = currDate.getDate();
-            const prevLastDate = prevDate.getDate();
-            const prevLastDay = prevDate.getDay();
-            let daysOfWeek = [];
-
-            if(prevLastDay !== 6) {
-                for(let i=prevLastDate-prevLastDay;i<=prevLastDate;i++) {
-                    prevDate.setDate(i);
-                    daysOfWeek.push(new Date(prevDate.getFullYear(), prevDate.getMonth(), prevDate.getDate(), 0));
-                }
-            }
-
-            for(let i=1;i<=lastDate;i++) {
-                currDate.setDate(i);
-                daysOfWeek.push(new Date(currDate.getFullYear(), currDate.getMonth(), currDate.getDate(), 0));
-                if(i > 0 && daysOfWeek.length === 7) {
-                    weekArr.push(daysOfWeek);
-                    daysOfWeek = [];
-                }
-            }
-
-            weekArr.push(daysOfWeek);
-
-            let daysOfLastWeek = weekArr[weekArr.length-1];
-            let lastDayOfCalendar;
-            for(let i=1, length=daysOfLastWeek.length;i<=7-length;i++) {
-                nextDate.setDate(i);
-                daysOfLastWeek.push(new Date(nextDate.getFullYear(), nextDate.getMonth(), nextDate.getDate(), 0));
-                lastDayOfCalendar = i;
-            }
-            if(weekArr.length === 5) {
-                daysOfLastWeek = [];
-                for(let i=lastDayOfCalendar+1;i<=lastDayOfCalendar+7;i++) {
-                    nextDate.setDate(i);
-                    daysOfLastWeek.push(new Date(nextDate.getFullYear(), nextDate.getMonth(), nextDate.getDate(), 0));
-                }
-                weekArr.push(daysOfLastWeek);
-            }
-
-            return weekArr;
-        };
-    };
-
-    /**
-     * NC.element package
-     */
-    static element = class {
-
-        /**
-         * make options object from class attribute
-         */
-        static toOpts(ele) {
-            return N(ele).data("opts");
-        };
-
-        /**
-         * make rules object from input element
-         */
-        static toRules(ele, ruleset) {
-            const retRules = {};
-            let thisEle;
-            let id;
-            ele.each(function() {
-                thisEle = jQuery(this);
-                if(thisEle.is("input:radio, input:checkbox")) {
-                    id = thisEle.attr("name");
-                } else {
-                    id = thisEle.attr("id");
-                }
-                retRules[id] = thisEle.data(ruleset);
-            });
-            return retRules;
-        };
-
-        /**
-         * make data object from input element
-         */
-        static toData(eles) {
-            const retData = {};
-            let key, ele;
-            let beforeCheckboxNRadios = jQuery();
-            eles.each(function() {
-                key = jQuery(this).attr("id");
-                ele = jQuery(this);
-                if(ele.is("input:radio") || ele.is("input:checkbox")) {
-                    if(beforeCheckboxNRadios.filter(ele).length === 0) {
-                        if(ele.closest(".select_input_container__").length > 0) {
-                            ele = ele.closest(".select_input_container__").find("input:" + ele.attr("type") + "[name='" + ele.attr("name") + "']");
-                            beforeCheckboxNRadios = ele;
-                        } else if(ele.parent("label").length > 0) {
-                            ele = ele.parent().siblings("label").find("input:" + ele.attr("type") + "[name='" + ele.attr("name") + "']");
-                            ele.push(this);
-                            beforeCheckboxNRadios = ele;
-                        } else {
-                            ele = ele.siblings("input:" + ele.attr("type") + "[name='" + ele.attr("name") + "']");
-                            ele.push(this);
-                            beforeCheckboxNRadios = ele;
-                        }
-
-                        if(ele.length > 1) {
-                            key = ele.attr("name");
-                        } else if (ele.length === 1) {
-                            key = ele.attr("id");
-                            if(key === undefined) {
-                                key = ele.attr("name");
-                            }
-                        }
-
-                        if(key !== undefined) {
-                            retData[key] = ele.vals();
-                        }
-                    }
-                } else {
-                    if(key !== undefined) {
-                        if(!ele.is("select")) {
-                            if(ele.is("img")) {
-                                retData[key] = ele.attr("src");
-                            } else {
-                                if(!ele.is(":input")) {
-                                    retData[key] = ele.text();
-                                } else {
-                                    retData[key] = ele.val();
-                                }
-                            }
-                        } else {
-                            retData[key] = ele.vals();
-                        }
-                    }
-                }
-            });
-            return retData;
-        };
-
-        /**
-         * Data change effect for ND.ds
-         */
-        static dataChanged(ele) {
-            ele.addClass("data_changed__");
-            ele.fadeOut(150).fadeIn(300);
-        };
-
-        /**
-         * Get the maximum z-index of all elements
-         */
-        static maxZindex(ele) {
-            if (ele === undefined) {
-                ele = jQuery("div, span, ul, p, nav, article, section");
-            }
-            return Math.max.apply(null, jQuery.map(ele, function(e) {
-                const zIndex = parseInt(jQuery(e).css("z-index"));
-                if (zIndex >= 2147483647) {
-                    jQuery(e).css("z-index", String(2147483647 - 999));
-                    jQuery(e).attr("fixed", "[Natural-JS]limited_z-index_value(-999)");
-                }
-                return zIndex || 0;
-            }));
-        };
-
-    };
-
-    /**
-     * NC.browser package
-     */
-    static browser = class {
-        /**
-         * Set and get cookie
-         *  - get : when value is undefined
-         */
-        static cookie(name, value, expiredays, domain) {
-            if (value === undefined) {
-                const getCookieVar = function(offset) {
-                    let endstr = document.cookie.indexOf(";", offset);
-                    if (endstr === -1) {
-                        endstr = document.cookie.length;
-                    }
-                    return decodeURIComponent(document.cookie.substring(offset, endstr));
-                };
-
-                const arg = name + "=";
-                const alen = arg.length;
-                const clen = document.cookie.length;
-                let i = 0;
-                while (i < clen) {
-                    const j = i + alen;
-                    if (document.cookie.substring(i, j) === arg) {
-                        return getCookieVar(j);
-                    }
-                    i = document.cookie.indexOf(" ", i) + 1;
-                    if (i === 0) {
-                        break;
-                    }
-                }
-            } else {
-                let expires;
-                if (expiredays !== undefined) {
-                    const today = new Date();
-                    today.setDate(today.getDate() + expiredays);
-                    expires = "; expires=" + today.toGMTString();
-                } else {
-                    expires = "";
-                }
-                let domain_;
-                if (domain !== undefined) {
-                    domain_ = "; domain=" + domain;
-                } else {
-                    domain_ = "";
-                }
-                document.cookie = name + "=" + decodeURIComponent(value) + "; path=/" + expires + domain_;
-            }
-        };
-
-        /**
-         * Remove cookie
-         */
-        static removeCookie(name, domain) {
-            if (domain !== undefined) {
-                document.cookie = name + "=; path=/; expires=" + (new Date(1)) + "; domain=" + domain;
-            } else {
-                document.cookie = name + "=; path=/; expires=" + (new Date(1)) + ";";
-            }
-        };
-
-        /**
-         * Get Microsoft Internet Explorer version
-         *  - MSIE trident version has been applied
-         */
-        static msieVersion() {
-            const ua = window.navigator.userAgent;
-            let msie = ua.indexOf("MSIE ");
-            // for IE11
-            if(msie < 0) {
-                msie = ua.indexOf(".NET");
-            }
-            const trident = ua.match(/Trident\/(\d.\d)/i);
-            if (msie < 0) {
-                return 0;
-            } else {
-                if (trident === undefined) {
-                    return parseInt(ua.substring(msie + 5, ua.indexOf(".", msie)));
-                } else {
-                    return parseInt(trident[1]) + 4.0;
-                }
-            }
-        };
-
-        /**
-         * Check the connected browser
-         */
-        static is(name) {
-            if("opera" in window || navigator.userAgent.indexOf(' OPR/') >= 0) {
-                return name === "opera";
-            } else if("InstallTrigger" in window) {
-                return name === "firefox";
-            } else if(name !== "ios" && navigator.userAgent.match(/^((?!chrome|android|crios|fxios).)*safari/i)) {
-                return name === "safari";
-            } else if("chrome" in window && !("opera" in window || navigator.userAgent.indexOf(' OPR/') >= 0)) {
-                return name === "chrome";
-            } else if(NC.browser.msieVersion() > 0) {
-                return name === "ie";
-            } else if(navigator.userAgent.match(/like Mac OS X/i)) {
-                return name === "ios";
-            } else if(navigator.userAgent.match(/android/i)) {
-                return name === "android";
-            }
-            return false;
-        };
-
-        /**
-         * Get context path from current window url
-         */
-        static contextPath(){
-            const offset = location.href.indexOf(location.host) + location.host.length;
-            return location.href.substring(offset, location.href.indexOf('/', offset + 1));
-        };
-
-        /**
-         * Get scrollbars width for connected browser
-         */
-        static scrollbarWidth() {
-            const div = jQuery('<div class="antiscroll-inner" style="width:50px;height:50px;overflow-y:scroll;' +
-                'position:absolute;top:-200px;left:-200px;"><div style="height:100px;width:100%"/>' +
-                '</div>');
-
-            jQuery("body").append(div);
-            const w1 = jQuery(div).innerWidth();
-            const w2 = jQuery("div", div).innerWidth();
-            jQuery(div).remove();
-
-            return w1 - w2;
-        };
-
-    };
-    /**
-     * NC.message package
-     */
-    static message = class {
-
-        /**
-         * Replace message variables for NC.message.get
-         */
-        static replaceMsgVars(msg, vars) {
-            if (vars !== undefined) {
-                for (let i = 0; i < vars.length; i++) {
-                    msg = msg.split("{" + String(i) + "}").join(vars[i]);
-                }
-            }
-            return msg;
-        };
-
-        /**
-         * Get message from message resource
-         */
-        static get(resource, key, vars) {
-            const msg = resource[NC.locale()][key];
-            return msg !== undefined ? NC.message.replaceMsgVars(msg, vars) : key;
-        };
-
-    };
-
-    /**
-     * NC.array package
-     */
-    static array = class {
-
-        /**
-         * Remove duplicated value(object | etc.)
-         */
-        static deduplicate(arr, key) {
-            const rtnArr = [];
-            jQuery(arr).each(function(i, obj) {
-                if(NC.type(obj) === "object" && key !== undefined) {
-                    if(jQuery.inArray(obj[key], jQuery(rtnArr).map(function() {
-                        return this[key];
-                    }).get()) < 0) {
-                        rtnArr.push(obj);
-                    }
-                } else {
-                    if(jQuery.inArray(obj, rtnArr) < 0) {
-                        rtnArr.push(obj);
-                    }
-                }
-            });
-            return rtnArr;
-        };
-
-    };
-
-    /**
-     * NC.json package
-     */
-    static json = class {
-
-        static mapFromKeys(obj) {
-            if(arguments.length > 1) {
-                let args = Array.prototype.slice.call(arguments, 0);
-                if(NA.context.attr("core").excludeMapFromKeys !== undefined) {
-                    args = args.concat(NA.context.attr("core").excludeMapFromKeys);
-                }
-                if(NC.type(obj) === "array") {
-                    if(obj.length === 0) {
-                        return obj;
-                    }
-                    return jQuery(obj).map(function() {
-                        const retObj = {};
-                        for(let i=1,length=args.length;i<length;i++) {
-                            if(args[i] !== undefined && this[args[i]] !== undefined) {
-                                retObj[args[i]] = this[args[i]];
-                            }
-                        }
-                        return retObj;
-                    }).get();
-                } else {
-                    const retObj = {};
-                    for(let i=1,length=args.length;i<length;i++) {
-                        if(args[i] !== undefined && obj[args[i]] !== undefined) {
-                            retObj[args[i]] = obj[args[i]];
-                        }
-                    }
-                    return retObj;
-                }
-            } else {
-                return obj;
-            }
-        };
-
-        /**
-         * Merge JSON Array by key
-         */
-        static mergeJsonArray(arr1, arr2, key) {
-            const keySet = jQuery(arr1).map(function() {
-                return this[key];
-            }).get().join(",");
-            jQuery(arr2).each(function() {
-                if(keySet.indexOf(this[key]) < 0) {
-                    arr1.push(this);
-                }
-            });
-            return arr1;
-        };
-
-        /**
-         * Return formated JSON String
-         */
-        static format(oData, sIndent) {
-            if (!NC.isEmptyObject(oData)) {
-                if (NC.isString(oData)) {
-                    oData = JSON.parse(oData);
-                }
-                if(sIndent === undefined) {
-                    sIndent = 4;
-                }
-                return JSON.stringify(oData, undefined, sIndent);
-            } else {
-                return null;
-            }
-        };
-
-    };
-
-    static event = class {
-
-        /**
-         * This function was taken from "https://stackoverflow.com/a/13952775" and modified.
-         */
-        static isNumberRelatedKeys(e) {
-            e = (e) ? e : window.event;
-            let key;
-            const charsKeys = [
-                97, // a Ctrl + a Select All
-                65, // A Ctrl + A Select All
-                99, // c Ctrl + c Copy
-                67, // C Ctrl + C Copy
-                118, // v Ctrl + v paste
-                86, // V Ctrl + V paste
-                115, // s Ctrl + s save
-                83, // S Ctrl + S save
-                112, // p Ctrl + p print
-                80 // P Ctrl + P print
-            ];
-
-            const specialKeys = [
-                8, // backspace
-                9, // tab
-                27, // escape
-                13, // enter
-                35, // Home & shiftKey + #
-                36, // End & shiftKey + $
-                37, // left arrow & shiftKey + %
-                39, // right arrow & '
-                46, // delete & .
-                45 // Ins & -
-            ];
-
-            key = e.keyCode ? e.keyCode : e.which ? e.which : e.charCode;
-
-            // check if pressed key is not number
-            if (key && !((key >= 48 && key <= 57) || (key >= 96 && key <= 105))) {
-
-                // Allow: Ctrl + char for action save, print, copy,
-                // ...etc
-                if ((e.ctrlKey && charsKeys.indexOf(key) !== -1) ||
-                    // Fix Issue: f1 : f12 Or Ctrl + f1 : f12, in
-                    // Firefox browser
-                    (navigator.userAgent.indexOf("Firefox") !== -1 && ((e.ctrlKey && e.keyCode && e.keyCode > 0 && key >= 112 && key <= 123) || (e.keyCode && e.keyCode > 0 && key && key >= 112 && key <= 123)))) {
-                    return true
-                }
-                // Allow: Special Keys
-                else if (specialKeys.indexOf(key) !== -1) {
-                    // Fix Issue: right arrow & Delete & ins in FireFox
-                    if (navigator.userAgent.indexOf("Firefox") !== -1 && (key === 39 || key === 45 || key === 46)) {
-                        return e.keyCode !== undefined && e.keyCode > 0;
-                    }
-                    // DisAllow : "#" & "$" & "%"
-                    else return !(e.shiftKey && (key === 35 || key === 36 || key === 37));
-                }
-                else {
-                    return false;
-                }
-            } else {
-                return true;
-            }
-        };
-
-        /**
-         * Prevent all events
-         */
-        static disable(e) {
-            try {
-                e.preventDefault();
-                e.stopImmediatePropagation();
-                e.stopPropagation();
-            } catch(e) {}
-            return false;
-        };
-
-        /**
-         * This method is locked window scroll when scrolling in the ele(arg1)
-         */
-        static windowScrollLock(ele) {
-            ele.on("mousewheel.ui DOMMouseScroll.ui", function(e) {
-                const delta = e.originalEvent.wheelDelta || -e.originalEvent.detail;
-                if (delta > 0 && jQuery(this).scrollTop() <= 0) return false;
-                return !(delta < 0 && jQuery(this).scrollTop() >= this.scrollHeight - jQuery(this).height());
-            });
-        };
-
-        /**
-         * Detect the duration of animation or transition of css3
-         */
-        static getMaxDuration(ele, css) {
-            if(!ele.css(css) || ele.css(css).startsWith("0")) {
-                return 0;
-            }
-            return Math.max.apply(undefined, jQuery(ele.css(css).split(",")).map(function() {
-                if(this.indexOf("ms") > -1) {
-                    return parseInt(NC.string.trimToZero(this));
-                } else {
-                    return parseFloat(NC.string.trimToZero(this)) * 1000;
-                }
-            }).get());
-        };
-
-        /**
-         * Detect the end event name of CSS animations
-         * Reference from David Walsh: http://davidwalsh.name/css-animation-callback
-         */
-        static whichAnimationEvent(ele){
-            let el;
-            if(ele !== undefined && ele.length > 0) {
-                if(this.getMaxDuration(ele, "animation-duration") === 0) {
-                    return "nothing";
-                }
-                el = ele.get(0);
-            } else {
-                el = document.createElement("fakeelement");
-            }
-
-            const animations = {
-                "animation" : "animationend",
-                "OAnimation" : "oAnimationEnd",
-                "MSAnimation" : "MSAnimationEnd",
-                "WebkitAnimation" : "webkitAnimationEnd"
-            };
-            for(const t in animations){
-                if( animations.hasOwnProperty(t) && el.style[t] !== undefined ){
-                    return animations[t];
-                }
-            }
-
-            return "nothing";
-        };
-
-        /**
-         * Detect the end event name of CSS transitions
-         * Reference from David Walsh: http://davidwalsh.name/css-animation-callback
-         */
-        static whichTransitionEvent(ele){
-            if(ele !== undefined) {
-                if(this.getMaxDuration(ele, "transition-duration") === 0) {
-                    return "nothing";
-                }
-            }
-
-            const el = document.createElement("fakeelement");
-            const transitions = {
-                "transition" : "transitionend",
-                "OTransition" : "oTransitionEnd",
-                "MozTransition" : "transitionend",
-                "WebkitTransition" : "webkitTransitionEnd"
-            };
-            for(const t in transitions){
-                if( transitions.hasOwnProperty(t) && el.style[t] !== undefined ){
-                    return transitions[t];
-                }
-            }
-
-            return "nothing";
-        }
-
-    };
-
-    /**
      * Remove element in array
      */
     remove_(idx, length) {
@@ -1298,6 +248,1056 @@ class NC {
                 return jQuery._data(ele.get(0), "events");
             }
         }
+    };
+
+    /**
+     * Set and get locale value
+     */
+    static locale = function(str) {
+        if(str === undefined) {
+            return NA.context.attr("core").locale;
+        } else {
+            NA.context.attr("core").locale = str;
+        }
+    };
+
+    /**
+     * Displays debug logs on the console.
+     */
+    static debug = console && console.debug ? console.debug.bind(window.console) : function() {};
+
+    /**
+     * Displays general logs on the console.
+     */
+    static log = console && console.log ? console.log.bind(window.console) : function() {};
+
+    /**
+     * Displays info logs on the console.
+     */
+    static info = console && console.info ? console.info.bind(window.console) : function() {};
+
+    /**
+     * Displays warning logs on the console.
+     */
+    static warn = console && console.warn ? console.warn.bind(window.console) : function() {};
+
+    /**
+     * Displays error logs on the console.
+     */
+    static error = function(msg, e) {
+        if(NC.type(e) !== "error") {
+            e = new Error(msg);
+
+            if("captureStackTrace" in Error) {
+                Error.captureStackTrace(e, NC.error);
+            }
+        } else {
+            e.message = (msg != null ? "[" + msg + "]" : "") + e.message;
+        }
+        return e;
+    };
+
+    /**
+     * Check object type
+     */
+    static type = function(obj) {
+        return ({}).toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase();
+    };
+
+    /**
+     * Check whether arg[0] is a String type
+     */
+    static isString = function(obj) {
+        return NC.type(obj) === "string";
+    };
+
+    /**
+     * Check whether arg[0] is a numeric type
+     */
+    static isNumeric = function(obj) {
+        return ( typeof obj === "number" || typeof obj === "string" ) &&
+            !isNaN( obj - parseFloat( obj ) );
+    };
+
+    /**
+     * Check whether arg[0] is a plain object type
+     */
+    static isPlainObject = jQuery.isPlainObject;
+
+    /**
+     * Check whether object is empty
+     */
+    static isEmptyObject = jQuery.isEmptyObject;
+
+    /**
+     * Check whether arg[0] is a Array type
+     */
+    static isArray = Array.isArray;
+
+    /**
+     * Checks whether an object of a type similar(array or jquery object etc.) to an array
+     */
+    static isArraylike = function(obj) {
+        if(typeof obj === "undefined" || obj.length === undefined) {
+            return false;
+        }
+        const length = obj.length, type = NC.type(obj);
+        if (type === "function"
+            || type === "asyncfunction"
+            || type === "string"
+            || type === "number"
+            || type === "date"
+            || type === "boolean"
+            || obj === obj.window){
+            return false;
+        }
+        if (obj.nodeType === 1 && length) {
+            return true;
+        }
+        return type === "array" || length === 0 || typeof length === "number" && length > 0 && (length - 1) in obj;
+    };
+
+    /**
+     * Check whether arg[0] is a jQuery Object type
+     */
+    static isWrappedSet = function(obj) {
+        return !!(obj && this.isArraylike(obj) && obj.jquery);
+    };
+
+    /**
+     * Check whether arg[0] is an element type
+     */
+    static isElement = function(obj) {
+        if(this.isWrappedSet(obj)) {
+            obj = obj.get(0);
+        }
+        return !!(obj && obj !== document && obj.getElementsByTagName);
+    };
+
+    static toSelector = function(el) {
+        if (typeof el === "string") {
+            return el;
+        }
+        if(this.isWrappedSet(el)) {
+            el = el.get(0);
+        }
+        if(this.isElement(el)) {
+            return el.tagName.toLowerCase() + (el.id ? "#" + el.id : "") + (el.classList && el.classList.length > 0 ? "." : "") + (Array.from(el.classList)).join(".");
+        } else if(NC.type(el) === "array") {
+            if(el.length > 0) {
+                let obj = el[el.length - 1];
+                let type = NC.type(obj);
+                if(type.startsWith("[")) {
+                    type = type.replace(/[\[\]]/g, "");
+                } else if(NC.type(obj) === "string") {
+                    type = '"' + type + '"';
+                }
+                return "...[" + type + "](" + el.length + ")";
+            } else {
+                return "...[](0)";
+            }
+        } else {
+            return String(el);
+        }
+    };
+
+    /**
+     * Run asynchronous execution sequentially
+     */
+    static serialExecute = function() {
+        const self = this;
+        self.defers = [];
+        jQuery(arguments).each(function(i, fn){
+            const defer = jQuery.Deferred();
+            self.defers.push(defer);
+            if(self.defers.length > 1) {
+                self.defers[i-1].done(function() {
+                    fn.apply(self.defers, jQuery.merge([defer], arguments));
+                });
+            } else {
+                fn.apply(self.defers, [defer]);
+            }
+        });
+        return self.defers;
+    };
+
+    /**
+     * Natural-JS resource garbage collector
+     */
+    static gc = class {
+
+        /**
+         * Minimum collection
+         */
+        static minimum = function() {
+            jQuery(window).off("resize.datepicker");
+            jQuery(window).off("resize.alert");
+            jQuery(document).off("click.datepicker");
+            jQuery(document).off("keyup.alert");
+            jQuery(document).off("click.grid.dataFilter");
+            jQuery(document).off("click.grid.more touchstart.grid.more");
+            return true;
+        };
+
+        /**
+         * Full collection
+         */
+        static full = function() {
+            jQuery(window).off("resize.datepicker");
+            jQuery(window).off("resize.alert");
+            jQuery(document).off("dragstart.alert selectstart.alert mousemove.alert touchmove.alert mouseup.alert touchend.alert");
+            jQuery(document).off("click.datepicker");
+            jQuery(document).off("keyup.alert");
+            jQuery(document).off("dragstart.grid.vResize selectstart.grid.vResize mousemove.grid.vResize touchmove.grid.vResize mouseup.grid.vResize touchend.grid.vResize");
+            jQuery(document).off("dragstart.grid.resize selectstart.grid.resize mousemove.grid.resize touchmove.grid.resize mouseup.grid.resize touchend.grid.resize");
+            jQuery(document).off("click.grid.dataFilter");
+            jQuery(document).off("click.grid.more touchstart.grid.more");
+            return true;
+        };
+
+        /**
+         * Removes garbage instances from observables of ND.ds
+         */
+        static ds = function() {
+            if(jQuery(NA.context.attr("architecture").page.context).find(">#data_sync_temp__").length > 0) {
+                jQuery(NA.context.attr("architecture").page.context).find(">#data_sync_temp__").instance("ds").obserable
+                    = jQuery.uniqueSort(jQuery(".grid__, .list__, .form__:not('.grid__>tbody, .list__>li'), .tree__", NA.context.attr("architecture").page.context).instance());
+            }
+        }
+
+    };
+
+    /**
+     * NC.string package
+     */
+    static string = class {
+
+        static contains = function(context, str) {
+            if (typeof context !== "string") {
+                throw NC.error("[NC.string.contains]arguments[0] was not entered or is not of string type.");
+            }
+            return context.indexOf(str) > -1;
+        };
+
+        static endsWith = function(context, str) {
+            if (typeof context !== "string") {
+                throw NC.error("[NC.string.endsWith]arguments[0] was not entered or is not of string type.");
+            }
+            return context.indexOf(str, context.length - str.length) !== -1;
+        };
+
+        static startsWith = function(context, str) {
+            if (typeof context !== "string") {
+                throw NC.error("[NC.string.startsWith]arguments[0] was not entered or is not of string type.");
+            }
+            return context.indexOf(str) === 0;
+        };
+
+        static insertAt = function(context, idx, str) {
+            return context.substring(0, idx) + str + context.substring(idx);
+        };
+
+        static removeWhitespace = function(str) {
+            if (this.isEmpty(str)) {
+                return str;
+            }
+            return str.replace(/\s/g, "");
+        };
+
+        static lpad = function(str, length, padStr) {
+            while (str.length < length) {
+                str = padStr + str;
+            }
+            return str;
+        };
+
+        static rpad = function(str, length, padStr) {
+            while (str.length < length) {
+                str = str + padStr;
+            }
+            return str;
+        };
+
+        static isEmpty = function(str) {
+            return NC.string.trimToEmpty(str).length === 0;
+        };
+
+        static byteLength = function(str, charByteLength) {
+            if(charByteLength === undefined) {
+                charByteLength = NA.context.attr("core").charByteLength !== undefined ? NA.context.attr("core").charByteLength : 3;
+            }
+            return (function(s,b,i,c){
+                for(b=i=0;c=s.charCodeAt(i++);b+=c>>11?charByteLength:c>>7?2:1){}
+                return b;
+            })(str);
+        };
+
+        static trimToEmpty = function(str) {
+            return str !== undefined && str !== null ? String(str).trim() : "";
+        };
+
+        static nullToEmpty = function(str) {
+            return str === null || str === undefined ? "" : str;
+        };
+
+        static trimToNull = function(str) {
+            return NC.string.trimToEmpty(str).length === 0 ? null : NC.string.trimToEmpty(str);
+        };
+
+        static trimToUndefined = function(str) {
+            return NC.string.trimToEmpty(str).length === 0 ? undefined : NC.string.trimToEmpty(str);
+        };
+
+        static trimToZero = function(str) {
+            return NC.string.trimToEmpty(str).length === 0 ? "0" : NC.string.trimToEmpty(str);
+        };
+
+        static trimToVal = function(str, val) {
+            return NC.string.trimToEmpty(str).length === 0 ? val : NC.string.trimToEmpty(str);
+        }
+    };
+
+    /**
+     * NC.date package
+     */
+    static date = class {
+
+        /**
+         * Calculate the difference between two dates
+         */
+        static diff = function(refDateStr, targetDateStr) {
+            if (NC.type(refDateStr) === "string") {
+                refDateStr = this.strToDate(refDateStr).obj;
+            }
+            if (NC.type(targetDateStr) === "string") {
+                targetDateStr = this.strToDate(targetDateStr).obj;
+            }
+            return Math.ceil((targetDateStr - refDateStr) / 1000 / 24 / 60 / 60);
+        };
+
+        /**
+         * Return to re-place the date string for a given format.
+         */
+        static strToDateStrArr = function(str, format, isString) {
+            const dateStrArr = [];
+            let fixNum = 0;
+            if(format.length === 3 && str.length === 7 || format.length === 2 && str.length === 5) {
+                fixNum = -1;
+            }
+            if(NC.string.startsWith(format, "Ymd")) {
+                dateStrArr.push(str.substring(0, 4 + fixNum)); //year
+                dateStrArr.push(str.substring(4 + fixNum, 6 + fixNum)); //month
+                dateStrArr.push(str.substring(6 + fixNum, 8 + fixNum)); //day
+            } else if(NC.string.startsWith(format, "mdY")) {
+                dateStrArr.push(str.substring(4, 8 + fixNum)); //year
+                dateStrArr.push(str.substring(0, 2)); //month
+                dateStrArr.push(str.substring(2, 4)); //day
+            } else if(NC.string.startsWith(format, "dmY")) {
+                dateStrArr.push(str.substring(4, 8 + fixNum)); //year
+                dateStrArr.push(str.substring(2, 4)); //month
+                dateStrArr.push(str.substring(0, 2)); //day
+            } else if(NC.string.startsWith(format, "Ym")) {
+                dateStrArr.push(str.substring(0, 4 + fixNum)); //year
+                dateStrArr.push(str.substring(4 + fixNum, 6 + fixNum)); //month
+            } else if(NC.string.startsWith(format, "mY")) {
+                dateStrArr.push(str.substring(2, 6 + fixNum)); //year
+                dateStrArr.push(str.substring(0, 2)); //month
+            } else {
+                throw NC.error("[NC.date.strToDateStrArr]\"" + format + "\" date format is not support. please change return value of NA.context.attr(\"data\").formatter.date's functions");
+            }
+            if(isString === undefined || isString === false) {
+                jQuery(dateStrArr).each(function(i) {
+                    dateStrArr[i] = parseInt(this);
+                });
+            }
+            return dateStrArr;
+        };
+
+        /**
+         * Convert a date string to a date object
+         */
+        static strToDate = function(str, format) {
+            str = NC.string.trimToEmpty(str).replace(/[^0-9]/g, "");
+            let dateInfo = null;
+            let dateStrArr;
+            if (str.length > 2 && str.length <= 4) {
+                dateInfo = {
+                    obj : new Date(str, 1, 1, 0, 0, 0),
+                    format : "Y"
+                };
+            } else if (str.length === 6) {
+                if(format === undefined) {
+                    format = NA.context.attr("data").formatter.date.Ym();
+                }
+                dateStrArr = NC.date.strToDateStrArr(str, format.replace(/[^Y|^m|^d]/g, ""));
+                dateInfo = {
+                    obj : new Date(dateStrArr[0], dateStrArr[1]-1, 1, 0, 0, 0),
+                    format : format
+                };
+            } else if (str.length === 8) {
+                if(format === undefined) {
+                    format = NA.context.attr("data").formatter.date.Ymd();
+                }
+                dateStrArr = NC.date.strToDateStrArr(str, format.replace(/[^Y|^m|^d]/g, ""));
+                dateInfo = {
+                    obj : new Date(dateStrArr[0], dateStrArr[1]-1, dateStrArr[2], 0, 0, 0),
+                    format : format
+                };
+            } else if (str.length === 10) {
+                if(format === undefined) {
+                    format = NA.context.attr("data").formatter.date.YmdH();
+                }
+                dateStrArr = NC.date.strToDateStrArr(str, format.replace(/[^Y|^m|^d]/g, ""));
+                dateInfo = {
+                    obj : new Date(dateStrArr[0], dateStrArr[1]-1, dateStrArr[2], Number(str.substring(8, 10)), 0, 0),
+                    format : format
+                };
+            } else if (str.length === 12) {
+                if(format === undefined) {
+                    format = NA.context.attr("data").formatter.date.YmdHi();
+                }
+                dateStrArr = NC.date.strToDateStrArr(str, format.replace(/[^Y|^m|^d]/g, ""));
+                dateInfo = {
+                    obj : new Date(dateStrArr[0], dateStrArr[1]-1, dateStrArr[2], Number(str.substring(8, 10)), Number(str.substring(10, 12)),
+                        0),
+                    format : format
+                };
+            } else if (str.length >= 14) {
+                if(format === undefined) {
+                    format = NA.context.attr("data").formatter.date.YmdHis();
+                }
+                dateStrArr = NC.date.strToDateStrArr(str, format.replace(/[^Y|^m|^d]/g, ""));
+                dateInfo = {
+                    obj : new Date(dateStrArr[0], dateStrArr[1]-1, dateStrArr[2], Number(str.substring(8, 10)), Number(str.substring(10, 12)),
+                        Number(str.substring(12, 14))),
+                    format : format
+                };
+            }
+            return dateInfo;
+        };
+
+        /**
+         * Format the date string
+         */
+        static format = function(str, format) {
+            const dateInfo = this.strToDate(str);
+            return dateInfo !== null ? dateInfo.obj.formatDate(format !== undefined ? format : dateInfo.format) : str;
+        };
+
+        /**
+         * Convert date object to timestamp number
+         */
+        static dateToTs = function(dateObj) {
+            let d = dateObj;
+            if (d === undefined) {
+                d = new Date();
+            }
+            return Math.round(d.getTime() / 1000);
+        };
+
+        /**
+         * Convert timestamp number to date object
+         */
+        static tsToDate = function(tsNum) {
+            if (tsNum === undefined) {
+                return new Date();
+            } else {
+                return new Date(tsNum);
+            }
+        };
+
+        /**
+         * Get a list of monthly date objects
+         *
+         * @param year
+         * @param month
+         * @return array[array[date]]
+         */
+        static dateList = function(year, month) {
+            const weekArr = [];
+            const prevDate = new Date(year, month-1, 0);
+            const currDate = new Date(year, month, 0);
+            const nextDate = new Date(year, month+1, 0);
+
+            const lastDate = currDate.getDate();
+            const prevLastDate = prevDate.getDate();
+            const prevLastDay = prevDate.getDay();
+            let daysOfWeek = [];
+
+            if(prevLastDay !== 6) {
+                for(let i=prevLastDate-prevLastDay;i<=prevLastDate;i++) {
+                    prevDate.setDate(i);
+                    daysOfWeek.push(new Date(prevDate.getFullYear(), prevDate.getMonth(), prevDate.getDate(), 0));
+                }
+            }
+
+            for(let i=1;i<=lastDate;i++) {
+                currDate.setDate(i);
+                daysOfWeek.push(new Date(currDate.getFullYear(), currDate.getMonth(), currDate.getDate(), 0));
+                if(i > 0 && daysOfWeek.length === 7) {
+                    weekArr.push(daysOfWeek);
+                    daysOfWeek = [];
+                }
+            }
+
+            weekArr.push(daysOfWeek);
+
+            let daysOfLastWeek = weekArr[weekArr.length-1];
+            let lastDayOfCalendar;
+            for(let i=1, length=daysOfLastWeek.length;i<=7-length;i++) {
+                nextDate.setDate(i);
+                daysOfLastWeek.push(new Date(nextDate.getFullYear(), nextDate.getMonth(), nextDate.getDate(), 0));
+                lastDayOfCalendar = i;
+            }
+            if(weekArr.length === 5) {
+                daysOfLastWeek = [];
+                for(let i=lastDayOfCalendar+1;i<=lastDayOfCalendar+7;i++) {
+                    nextDate.setDate(i);
+                    daysOfLastWeek.push(new Date(nextDate.getFullYear(), nextDate.getMonth(), nextDate.getDate(), 0));
+                }
+                weekArr.push(daysOfLastWeek);
+            }
+
+            return weekArr;
+        };
+    };
+
+    /**
+     * NC.element package
+     */
+    static element = class {
+
+        /**
+         * make options object from class attribute
+         */
+        static toOpts = function(ele) {
+            return N(ele).data("opts");
+        };
+
+        /**
+         * make rules object from input element
+         */
+        static toRules = function(ele, ruleset) {
+            const retRules = {};
+            let thisEle;
+            let id;
+            ele.each(function() {
+                thisEle = jQuery(this);
+                if(thisEle.is("input:radio, input:checkbox")) {
+                    id = thisEle.attr("name");
+                } else {
+                    id = thisEle.attr("id");
+                }
+                retRules[id] = thisEle.data(ruleset);
+            });
+            return retRules;
+        };
+
+        /**
+         * make data object from input element
+         */
+        static toData = function(eles) {
+            const retData = {};
+            let key, ele;
+            let beforeCheckboxNRadios = jQuery();
+            eles.each(function() {
+                key = jQuery(this).attr("id");
+                ele = jQuery(this);
+                if(ele.is("input:radio") || ele.is("input:checkbox")) {
+                    if(beforeCheckboxNRadios.filter(ele).length === 0) {
+                        if(ele.closest(".select_input_container__").length > 0) {
+                            ele = ele.closest(".select_input_container__").find("input:" + ele.attr("type") + "[name='" + ele.attr("name") + "']");
+                            beforeCheckboxNRadios = ele;
+                        } else if(ele.parent("label").length > 0) {
+                            ele = ele.parent().siblings("label").find("input:" + ele.attr("type") + "[name='" + ele.attr("name") + "']");
+                            ele.push(this);
+                            beforeCheckboxNRadios = ele;
+                        } else {
+                            ele = ele.siblings("input:" + ele.attr("type") + "[name='" + ele.attr("name") + "']");
+                            ele.push(this);
+                            beforeCheckboxNRadios = ele;
+                        }
+
+                        if(ele.length > 1) {
+                            key = ele.attr("name");
+                        } else if (ele.length === 1) {
+                            key = ele.attr("id");
+                            if(key === undefined) {
+                                key = ele.attr("name");
+                            }
+                        }
+
+                        if(key !== undefined) {
+                            retData[key] = ele.vals();
+                        }
+                    }
+                } else {
+                    if(key !== undefined) {
+                        if(!ele.is("select")) {
+                            if(ele.is("img")) {
+                                retData[key] = ele.attr("src");
+                            } else {
+                                if(!ele.is(":input")) {
+                                    retData[key] = ele.text();
+                                } else {
+                                    retData[key] = ele.val();
+                                }
+                            }
+                        } else {
+                            retData[key] = ele.vals();
+                        }
+                    }
+                }
+            });
+            return retData;
+        };
+
+        /**
+         * Data change effect for ND.ds
+         */
+        static dataChanged = function(ele) {
+            ele.addClass("data_changed__");
+            ele.fadeOut(150).fadeIn(300);
+        };
+
+        /**
+         * Get the maximum z-index of all elements
+         */
+        static maxZindex = function(ele) {
+            if (ele === undefined) {
+                ele = jQuery("div, span, ul, p, nav, article, section");
+            }
+            return Math.max.apply(null, jQuery.map(ele, function(e) {
+                const zIndex = parseInt(jQuery(e).css("z-index"));
+                if (zIndex >= 2147483647) {
+                    jQuery(e).css("z-index", String(2147483647 - 999));
+                    jQuery(e).attr("fixed", "[Natural-JS]limited_z-index_value(-999)");
+                }
+                return zIndex || 0;
+            }));
+        };
+
+    };
+
+    /**
+     * NC.browser package
+     */
+    static browser = class {
+        /**
+         * Set and get cookie
+         *  - get : when value is undefined
+         */
+        static cookie = function(name, value, expiredays, domain) {
+            if (value === undefined) {
+                const getCookieVar = function(offset) {
+                    let endstr = document.cookie.indexOf(";", offset);
+                    if (endstr === -1) {
+                        endstr = document.cookie.length;
+                    }
+                    return decodeURIComponent(document.cookie.substring(offset, endstr));
+                };
+
+                const arg = name + "=";
+                const alen = arg.length;
+                const clen = document.cookie.length;
+                let i = 0;
+                while (i < clen) {
+                    const j = i + alen;
+                    if (document.cookie.substring(i, j) === arg) {
+                        return getCookieVar(j);
+                    }
+                    i = document.cookie.indexOf(" ", i) + 1;
+                    if (i === 0) {
+                        break;
+                    }
+                }
+            } else {
+                let expires;
+                if (expiredays !== undefined) {
+                    const today = new Date();
+                    today.setDate(today.getDate() + expiredays);
+                    expires = "; expires=" + today.toGMTString();
+                } else {
+                    expires = "";
+                }
+                let domain_;
+                if (domain !== undefined) {
+                    domain_ = "; domain=" + domain;
+                } else {
+                    domain_ = "";
+                }
+                document.cookie = name + "=" + decodeURIComponent(value) + "; path=/" + expires + domain_;
+            }
+        };
+
+        /**
+         * Remove cookie
+         */
+        static removeCookie = function(name, domain) {
+            if (domain !== undefined) {
+                document.cookie = name + "=; path=/; expires=" + (new Date(1)) + "; domain=" + domain;
+            } else {
+                document.cookie = name + "=; path=/; expires=" + (new Date(1)) + ";";
+            }
+        };
+
+        /**
+         * Get Microsoft Internet Explorer version
+         *  - MSIE trident version has been applied
+         */
+        static msieVersion = function() {
+            const ua = window.navigator.userAgent;
+            let msie = ua.indexOf("MSIE ");
+            // for IE11
+            if(msie < 0) {
+                msie = ua.indexOf(".NET");
+            }
+            const trident = ua.match(/Trident\/(\d.\d)/i);
+            if (msie < 0) {
+                return 0;
+            } else {
+                if (trident === undefined) {
+                    return parseInt(ua.substring(msie + 5, ua.indexOf(".", msie)));
+                } else {
+                    return parseInt(trident[1]) + 4.0;
+                }
+            }
+        };
+
+        /**
+         * Check the connected browser
+         */
+        static is = function(name) {
+            if("opera" in window || navigator.userAgent.indexOf(' OPR/') >= 0) {
+                return name === "opera";
+            } else if("InstallTrigger" in window) {
+                return name === "firefox";
+            } else if(name !== "ios" && navigator.userAgent.match(/^((?!chrome|android|crios|fxios).)*safari/i)) {
+                return name === "safari";
+            } else if("chrome" in window && !("opera" in window || navigator.userAgent.indexOf(' OPR/') >= 0)) {
+                return name === "chrome";
+            } else if(NC.browser.msieVersion() > 0) {
+                return name === "ie";
+            } else if(navigator.userAgent.match(/like Mac OS X/i)) {
+                return name === "ios";
+            } else if(navigator.userAgent.match(/android/i)) {
+                return name === "android";
+            }
+            return false;
+        };
+
+        /**
+         * Get context path from current window url
+         */
+        static contextPath = function(){
+            const offset = location.href.indexOf(location.host) + location.host.length;
+            return location.href.substring(offset, location.href.indexOf('/', offset + 1));
+        };
+
+        /**
+         * Get scrollbars width for connected browser
+         */
+        static scrollbarWidth = function() {
+            const div = jQuery('<div class="antiscroll-inner" style="width:50px;height:50px;overflow-y:scroll;' +
+                'position:absolute;top:-200px;left:-200px;"><div style="height:100px;width:100%"/>' +
+                '</div>');
+
+            jQuery("body").append(div);
+            const w1 = jQuery(div).innerWidth();
+            const w2 = jQuery("div", div).innerWidth();
+            jQuery(div).remove();
+
+            return w1 - w2;
+        };
+
+    };
+    /**
+     * NC.message package
+     */
+    static message = class {
+
+        /**
+         * Replace message variables for NC.message.get
+         */
+        static replaceMsgVars = function(msg, vars) {
+            if (vars !== undefined) {
+                for (let i = 0; i < vars.length; i++) {
+                    msg = msg.split("{" + String(i) + "}").join(vars[i]);
+                }
+            }
+            return msg;
+        };
+
+        /**
+         * Get message from message resource
+         */
+        static get = function(resource, key, vars) {
+            const msg = resource[NC.locale()][key];
+            return msg !== undefined ? NC.message.replaceMsgVars(msg, vars) : key;
+        };
+
+    };
+
+    /**
+     * NC.array package
+     */
+    static array = class {
+
+        /**
+         * Remove duplicated value(object | etc.)
+         */
+        static deduplicate = function(arr, key) {
+            const rtnArr = [];
+            jQuery(arr).each(function(i, obj) {
+                if(NC.type(obj) === "object" && key !== undefined) {
+                    if(jQuery.inArray(obj[key], jQuery(rtnArr).map(function() {
+                        return this[key];
+                    }).get()) < 0) {
+                        rtnArr.push(obj);
+                    }
+                } else {
+                    if(jQuery.inArray(obj, rtnArr) < 0) {
+                        rtnArr.push(obj);
+                    }
+                }
+            });
+            return rtnArr;
+        };
+
+    };
+
+    /**
+     * NC.json package
+     */
+    static json = class {
+
+        static mapFromKeys = function(obj) {
+            if(arguments.length > 1) {
+                let args = Array.prototype.slice.call(arguments, 0);
+                if(NA.context.attr("core").excludeMapFromKeys !== undefined) {
+                    args = args.concat(NA.context.attr("core").excludeMapFromKeys);
+                }
+                if(NC.type(obj) === "array") {
+                    if(obj.length === 0) {
+                        return obj;
+                    }
+                    return jQuery(obj).map(function() {
+                        const retObj = {};
+                        for(let i=1,length=args.length;i<length;i++) {
+                            if(args[i] !== undefined && this[args[i]] !== undefined) {
+                                retObj[args[i]] = this[args[i]];
+                            }
+                        }
+                        return retObj;
+                    }).get();
+                } else {
+                    const retObj = {};
+                    for(let i=1,length=args.length;i<length;i++) {
+                        if(args[i] !== undefined && obj[args[i]] !== undefined) {
+                            retObj[args[i]] = obj[args[i]];
+                        }
+                    }
+                    return retObj;
+                }
+            } else {
+                return obj;
+            }
+        };
+
+        /**
+         * Merge JSON Array by key
+         */
+        static mergeJsonArray = function(arr1, arr2, key) {
+            const keySet = jQuery(arr1).map(function() {
+                return this[key];
+            }).get().join(",");
+            jQuery(arr2).each(function() {
+                if(keySet.indexOf(this[key]) < 0) {
+                    arr1.push(this);
+                }
+            });
+            return arr1;
+        };
+
+        /**
+         * Return formated JSON String
+         */
+        static format = function(oData, sIndent) {
+            if (!NC.isEmptyObject(oData)) {
+                if (NC.isString(oData)) {
+                    oData = JSON.parse(oData);
+                }
+                if(sIndent === undefined) {
+                    sIndent = 4;
+                }
+                return JSON.stringify(oData, undefined, sIndent);
+            } else {
+                return null;
+            }
+        };
+
+    };
+
+    static event = class {
+
+        /**
+         * This function was taken from "https://stackoverflow.com/a/13952775" and modified.
+         */
+        static isNumberRelatedKeys = function(e) {
+            e = (e) ? e : window.event;
+            let key;
+            const charsKeys = [
+                97, // a Ctrl + a Select All
+                65, // A Ctrl + A Select All
+                99, // c Ctrl + c Copy
+                67, // C Ctrl + C Copy
+                118, // v Ctrl + v paste
+                86, // V Ctrl + V paste
+                115, // s Ctrl + s save
+                83, // S Ctrl + S save
+                112, // p Ctrl + p print
+                80 // P Ctrl + P print
+            ];
+
+            const specialKeys = [
+                8, // backspace
+                9, // tab
+                27, // escape
+                13, // enter
+                35, // Home & shiftKey + #
+                36, // End & shiftKey + $
+                37, // left arrow & shiftKey + %
+                39, // right arrow & '
+                46, // delete & .
+                45 // Ins & -
+            ];
+
+            key = e.keyCode ? e.keyCode : e.which ? e.which : e.charCode;
+
+            // check if pressed key is not number
+            if (key && !((key >= 48 && key <= 57) || (key >= 96 && key <= 105))) {
+
+                // Allow: Ctrl + char for action save, print, copy,
+                // ...etc
+                if ((e.ctrlKey && charsKeys.indexOf(key) !== -1) ||
+                    // Fix Issue: f1 : f12 Or Ctrl + f1 : f12, in
+                    // Firefox browser
+                    (navigator.userAgent.indexOf("Firefox") !== -1 && ((e.ctrlKey && e.keyCode && e.keyCode > 0 && key >= 112 && key <= 123) || (e.keyCode && e.keyCode > 0 && key && key >= 112 && key <= 123)))) {
+                    return true
+                }
+                // Allow: Special Keys
+                else if (specialKeys.indexOf(key) !== -1) {
+                    // Fix Issue: right arrow & Delete & ins in FireFox
+                    if (navigator.userAgent.indexOf("Firefox") !== -1 && (key === 39 || key === 45 || key === 46)) {
+                        return e.keyCode !== undefined && e.keyCode > 0;
+                    }
+                    // DisAllow : "#" & "$" & "%"
+                    else return !(e.shiftKey && (key === 35 || key === 36 || key === 37));
+                }
+                else {
+                    return false;
+                }
+            } else {
+                return true;
+            }
+        };
+
+        /**
+         * Prevent all events
+         */
+        static disable = function(e) {
+            try {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                e.stopPropagation();
+            } catch(e) {}
+            return false;
+        };
+
+        /**
+         * This method is locked window scroll when scrolling in the ele(arg1)
+         */
+        static windowScrollLock = function(ele) {
+            ele.on("mousewheel.ui DOMMouseScroll.ui", function(e) {
+                const delta = e.originalEvent.wheelDelta || -e.originalEvent.detail;
+                if (delta > 0 && jQuery(this).scrollTop() <= 0) return false;
+                return !(delta < 0 && jQuery(this).scrollTop() >= this.scrollHeight - jQuery(this).height());
+            });
+        };
+
+        /**
+         * Detect the duration of animation or transition of css3
+         */
+        static getMaxDuration = function(ele, css) {
+            if(!ele.css(css) || ele.css(css).startsWith("0")) {
+                return 0;
+            }
+            return Math.max.apply(undefined, jQuery(ele.css(css).split(",")).map(function() {
+                if(this.indexOf("ms") > -1) {
+                    return parseInt(NC.string.trimToZero(this));
+                } else {
+                    return parseFloat(NC.string.trimToZero(this)) * 1000;
+                }
+            }).get());
+        };
+
+        /**
+         * Detect the end event name of CSS animations
+         * Reference from David Walsh: http://davidwalsh.name/css-animation-callback
+         */
+        static whichAnimationEvent = function(ele){
+            let el;
+            if(ele !== undefined && ele.length > 0) {
+                if(this.getMaxDuration(ele, "animation-duration") === 0) {
+                    return "nothing";
+                }
+                el = ele.get(0);
+            } else {
+                el = document.createElement("fakeelement");
+            }
+
+            const animations = {
+                "animation" : "animationend",
+                "OAnimation" : "oAnimationEnd",
+                "MSAnimation" : "MSAnimationEnd",
+                "WebkitAnimation" : "webkitAnimationEnd"
+            };
+            for(const t in animations){
+                if( animations.hasOwnProperty(t) && el.style[t] !== undefined ){
+                    return animations[t];
+                }
+            }
+
+            return "nothing";
+        };
+
+        /**
+         * Detect the end event name of CSS transitions
+         * Reference from David Walsh: http://davidwalsh.name/css-animation-callback
+         */
+        static whichTransitionEvent = function(ele){
+            if(ele !== undefined) {
+                if(this.getMaxDuration(ele, "transition-duration") === 0) {
+                    return "nothing";
+                }
+            }
+
+            const el = document.createElement("fakeelement");
+            const transitions = {
+                "transition" : "transitionend",
+                "OTransition" : "oTransitionEnd",
+                "MozTransition" : "transitionend",
+                "WebkitTransition" : "webkitTransitionEnd"
+            };
+            for(const t in transitions){
+                if( transitions.hasOwnProperty(t) && el.style[t] !== undefined ){
+                    return transitions[t];
+                }
+            }
+
+            return "nothing";
+        }
+
     };
 
     /**

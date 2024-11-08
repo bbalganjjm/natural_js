@@ -562,7 +562,7 @@ class NU {
             return this;
         };
 
-        static wrapEle() {
+        static wrapEle = function() {
             const opts = this.options;
 
             // set message overlay's default style
@@ -810,7 +810,7 @@ class NU {
             }
         };
 
-        static resetOffSetEle(opts) {
+        static resetOffSetEle = function(opts) {
             const position = opts.context.position();
             if(opts.context.is(":visible")) {
                 const windowHeight = N(window).height();
@@ -885,7 +885,7 @@ class NU {
             }
         };
 
-        static wrapInputEle() {
+        static wrapInputEle = function() {
             const opts = this.options;
 
             let isRemoved = false;
@@ -1175,7 +1175,7 @@ class NU {
             return this;
         };
 
-        static wrapEle() {
+        static wrapEle = function() {
             const opts = this.options;
 
             if(opts.disable) {
@@ -1309,11 +1309,11 @@ class NU {
             return this;
         };
 
-        static context() {
+        static context = function() {
             return this.options.context;
         };
 
-        static checkMinMaxDate() {
+        static checkMinMaxDate = function() {
             const opts = this.options;
             const value = opts.context.val();
 
@@ -1367,7 +1367,7 @@ class NU {
             return true;
         };
 
-        static wrapEle() {
+        static wrapEle = function() {
             const opts = this.options;
             const self = this;
 
@@ -1452,7 +1452,7 @@ class NU {
             });
         };
 
-        static createContents() {
+        static createContents = function() {
             const opts = this.options;
             const self = this;
 
@@ -1677,6 +1677,13 @@ class NU {
             // create month items
             monthsPanel = N('<div class="datepicker_months_panel__"></div>');
 
+            if(!opts.monthonly) {
+                // creates the day items
+                days = NC.message.get(opts.message, "days").split(",");
+                daysPanel = N('<div class="datepicker_days_panel__"></div>');
+                dayItem = N('<div></div>');
+            }
+
             if(opts.monthsPanelPosition === "top") {
                 monthsPanel.hide();
 
@@ -1879,11 +1886,6 @@ class NU {
 
                     self.hide(ke);
                 } else {
-                    // creates the day items
-                    days = NC.message.get(opts.message, "days").split(",");
-                    daysPanel = N('<div class="datepicker_days_panel__"></div>');
-                    dayItem = N('<div></div>');
-
                     const selectedDay = daysPanel.find(".datepicker_day_selected__").text();
                     daysPanel.empty();
                     const endDateCls = NC.date.strToDate(NC.string.lpad(selYearStr, 4, "0") +  NC.string.lpad(String(parseInt(N(this).text())+1), 2, "0") + "00", "Ymd");
@@ -2038,7 +2040,7 @@ class NU {
             return opts.contents;
         };
 
-        static yearPaging(yearItems, currYear, addCnt, absolute) {
+        static yearPaging = function(yearItems, currYear, addCnt, absolute) {
             // Date Object's year value must be greater 2 digits
             yearItems.removeClass("datepicker_curr_year__");
             let thisEle;
@@ -2061,7 +2063,7 @@ class NU {
             });
         };
 
-        static selectItems(opts, value, format, yearsPanel, monthsPanel, daysPanel) {
+        static selectItems = function(opts, value, format, yearsPanel, monthsPanel, daysPanel) {
             if(value.length > 2 && value.length%2 !== 0) {
                 value = (new Date()).formatDate(format);
             }
@@ -2376,7 +2378,7 @@ class NU {
             return this;
         };
 
-        static wrapEle() {
+        static wrapEle = function() {
             const opts = this.options;
             opts.context.hide();
 
@@ -2401,11 +2403,11 @@ class NU {
             }
         };
 
-        static loadContent(callback) {
+        static loadContent = function(callback) {
             const opts = this.options;
             const self = this;
 
-            NA.comm({
+            new NA.comm({
                 url : opts.url,
                 contentType : "text/html; charset=UTF-8",
                 dataType : "html",
@@ -2487,7 +2489,7 @@ class NU {
 
         };
 
-        static popOpen(onOpenData, cont) {
+        static popOpen = function(onOpenData, cont) {
             const opts = this.options;
             const self = this;
 
@@ -2654,7 +2656,7 @@ class NU {
             this.options.context.instance("tab", this);
         };
 
-        static wrapEle() {
+        static wrapEle = function() {
             const opts = this.options;
             // hide div contents
             opts.contents.hide();
@@ -2815,7 +2817,7 @@ class NU {
             this.open(defSelIdx, undefined, true);
         };
 
-        static wrapScroll() {
+        static wrapScroll = function() {
             const opts = this.options;
             const eventNameSpace = ".tab.scroll";
             const tabContainerEle = opts.context.find(">ul").addClass("effect__");
@@ -2995,12 +2997,12 @@ class NU {
             }
         };
 
-        static loadContent(url, targetIdx, callback, isFirst) {
+        static loadContent = function(url, targetIdx, callback, isFirst) {
             const opts = this.options;
             const self = this;
             const selContentEle = opts.contents.eq(targetIdx);
 
-            NA.comm({
+            new NA.comm({
                 url : url,
                 contentType : "text/html; charset=UTF-8",
                 dataType : "html",
@@ -3183,7 +3185,7 @@ class NU {
             return this;
         };
 
-        static wrapEle() {
+        static wrapEle = function() {
             const opts = this.options;
             if (opts.context.is("select") && opts.context.attr("multiple") !== "multiple") {
                 this.options.context.find("option").addClass("select_default__");
@@ -4399,7 +4401,7 @@ class NU {
             return this;
         };
 
-        static createScroll() {
+        static createScroll = function() {
             const opts = this.options;
 
             opts.context.css({
@@ -4434,7 +4436,7 @@ class NU {
             }
         };
 
-        static vResize(contextWrapEle) {
+        static vResize = function(contextWrapEle) {
             const pressed = false;
             const vResizable = N('<div class="v_resizable__"></div>').css({
                 "text-align": "center",
@@ -5145,7 +5147,7 @@ class NU {
          * Convert HTML Table To 2D Array
          * Reference from CHRIS WEST'S BLOG : http://cwestblog.com/2016/08/21/javascript-snippet-convert-html-table-to-2d-array/
          */
-        static tableCells(tbl, opt_cellValueGetter) {
+        static tableCells = function(tbl, opt_cellValueGetter) {
             const rows = tbl.find(">tr");
             opt_cellValueGetter = opt_cellValueGetter || function(td) { return td.textContent || td.innerText; };
             const twoD = [];
@@ -5175,7 +5177,7 @@ class NU {
             return twoD;
         };
 
-        static tableMap() {
+        static tableMap = function() {
             const opts = this.options;
 
             const colgroup = [];
@@ -5213,7 +5215,7 @@ class NU {
             };
         };
 
-        static setTheadCellInfo() {
+        static setTheadCellInfo = function() {
             const opts = this.options;
             const tableMap = this.tableMap;
             if(tableMap.thead.length === 0) {
@@ -5248,7 +5250,7 @@ class NU {
             });
         };
 
-        static removeColgroup() {
+        static removeColgroup = function() {
             const opts = this.options;
             if(opts.context.find("colgroup").length > 0) {
                 const theadMap = NU.grid.tableCells(opts.context.find("> thead"));
@@ -5275,7 +5277,7 @@ class NU {
             }
         };
 
-        static fixColumn() {
+        static fixColumn = function() {
             const opts = this.options;
             const self = this;
 
@@ -5364,7 +5366,7 @@ class NU {
             }
         };
 
-        static fixHeader() {
+        static fixHeader = function() {
             const opts = this.options;
 
             opts.context.css({
@@ -5468,7 +5470,7 @@ class NU {
             }
         };
 
-        static vResize(gridWrap, contextWrapEle, tfootWrap) {
+        static vResize = function(gridWrap, contextWrapEle, tfootWrap) {
             let pressed = false;
             const vResizable = N('<div class="v_resizable__"></div>').css({
                 "text-align": "center",
@@ -5530,7 +5532,7 @@ class NU {
             gridWrap.after(vResizable);
         };
 
-        static more() {
+        static more = function() {
             const opts = this.options;
             const self = this;
 
@@ -5759,7 +5761,7 @@ class NU {
             });
         };
 
-        static resize() {
+        static resize = function() {
             const self = this;
             // TODO colgroup
             // const tableMap = this.tableMap;
@@ -5949,7 +5951,7 @@ class NU {
             // }
         };
 
-        static sort() {
+        static sort = function() {
             const opts = this.options;
             const thead = this.thead;
 
@@ -5984,7 +5986,7 @@ class NU {
             });
         };
 
-        static dataFilter() {
+        static dataFilter = function() {
             const opts = this.options;
             const thead = this.thead;
             const theadCells = thead.find("> tr th").filter(function(i, cell) {
@@ -6282,7 +6284,7 @@ class NU {
                 }).prependTo(theadCells.filter("[data-filter='true']:not(.grid_more_thead_col__)"));
         };
 
-        static rowSpan(i, rowEle, bfRowEle, rowData, bfRowData, colId) {
+        static rowSpan = function(i, rowEle, bfRowEle, rowData, bfRowData, colId) {
             if(bfRowData !== undefined && rowData[colId] === bfRowData[colId]) {
                 const bfRowCell = bfRowEle.find("#" + colId).closest("td");
                 let prevColId;
@@ -6321,7 +6323,7 @@ class NU {
             }
         };
 
-        static paste() {
+        static paste = function() {
             const self = this;
             self.tempRowEle.find("[id]").not(":input").attr("contenteditable", "true").on("keydown.grid.paste", function(e) {
                 if(!e.ctrlKey) {
@@ -7062,7 +7064,7 @@ class NU {
             return this;
         };
 
-        static wrapEle() {
+        static wrapEle = function() {
             const opts = this.options;
 
             // pagination link element set
@@ -7093,7 +7095,7 @@ class NU {
             return linkEles;
         };
 
-        static changePageSet(linkEles, opts, isRemake) {
+        static changePageSet = function(linkEles, opts, isRemake) {
             const pageCount = Math.ceil(opts.totalCount / opts.countPerPage);
             const pageSetCount = Math.ceil(pageCount / opts.countPerPageSet);
             let currSelPageSet = Math.ceil(opts.pageNo / opts.countPerPageSet);
