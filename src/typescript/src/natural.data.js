@@ -7,7 +7,10 @@
  * Copyright 2014 Goldman Kim(bbalganjjm@gmail.com)
  */
 
-class ND {
+import { N } from "./natural.js";
+import { NC } from "./natural.core";
+
+export class ND {
 
 	datafilter(condition) {
 		return ND.data.filter(this, condition);

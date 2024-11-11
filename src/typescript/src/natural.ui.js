@@ -7,7 +7,12 @@
  * Copyright 2014 Goldman Kim(bbalganjjm@gmail.com)
  */
 
-class NU {
+import { N } from "./natural.js";
+import { NC } from "./natural.core";
+import { NA } from "./natural.architecture";
+import { ND } from "./natural.data";
+
+export class NU {
 
     alert(msg, vars) {
         return new NU.alert(this, msg, vars);
@@ -2394,12 +2399,12 @@ class NU {
                 opts.context.removeAttr("title");
             }
 
-            this.alert = N(window).alert(opts);
-            this.alert.options.msgContext.addClass("popup_overlay__");
-            this.alert.options.msgContents.addClass("popup__");
+            NU.popup.alert = N(window).alert(opts);
+            NU.popup.alert.options.msgContext.addClass("popup_overlay__");
+            NU.popup.alert.options.msgContents.addClass("popup__");
 
             if(opts.saveMemory) {
-                this.alert.options.msg = null;
+                NU.popup.alert.options.msg = null;
             }
         };
 

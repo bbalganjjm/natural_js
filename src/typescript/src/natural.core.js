@@ -11,7 +11,10 @@
  * Mask JavaScript API : http://www.pengoworks.com/workshop/js/mask/, dswitzer@pengoworks.com
  */
 
-class NC {
+import { N } from "./natural.js";
+import { NA } from "./natural.architecture.js";
+
+export class NC {
 
     /**
      * Remove element in array
@@ -405,20 +408,19 @@ class NC {
      * Run asynchronous execution sequentially
      */
     static serialExecute = function() {
-        const self = this;
-        self.defers = [];
+        const defers = [];
         jQuery(arguments).each(function(i, fn){
             const defer = jQuery.Deferred();
-            self.defers.push(defer);
-            if(self.defers.length > 1) {
-                self.defers[i-1].done(function() {
-                    fn.apply(self.defers, jQuery.merge([defer], arguments));
+            defers.push(defer);
+            if(defers.length > 1) {
+                defers[i-1].done(function() {
+                    fn.apply(defers, jQuery.merge([defer], arguments));
                 });
             } else {
-                fn.apply(self.defers, [defer]);
+                fn.apply(defers, [defer]);
             }
         });
-        return self.defers;
+        return defers;
     };
 
     /**

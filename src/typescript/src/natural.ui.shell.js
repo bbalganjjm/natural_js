@@ -7,7 +7,12 @@
  * Copyright 2014 Goldman Kim(bbalganjjm@gmail.com)
  */
 
-class NUS {
+import { N } from "./natural.js";
+import { NC } from "./natural.core";
+import { NA } from "./natural.architecture";
+import { NU } from "./natural.ui";
+
+export class NUS {
 
     notify(opts) {
         return new NUS.notify(this, opts);

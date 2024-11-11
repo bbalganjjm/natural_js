@@ -7,9 +7,11 @@
  * Copyright 2014 Goldman Kim(bbalganjjm@gmail.com)
  */
 
-function N(selector, context) {
-    return new NJS(selector, context);
-}
+import { NC } from "./natural.core";
+import { NA } from "./natural.architecture";
+import { ND } from "./natural.data";
+import { NU } from "./natural.ui";
+import { NUS } from "./natural.ui.shell";
 
 Object.assign(N, NC, NA, ND, NU, NUS);
 
@@ -32,7 +34,7 @@ Object.assign(N, NC, NA, ND, NU, NUS);
         });
 });
 
-class NJS extends jQuery {
+export class NJS extends jQuery {
 
     /**
      * Initializes and returns a new N object based on jQuery objects with the provided selector and context argument values.
@@ -53,8 +55,6 @@ class NJS extends jQuery {
 
 }
 
-
-
-
-
-
+export function N(selector, context) {
+    return new NJS(selector, context);
+}

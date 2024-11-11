@@ -7,7 +7,10 @@
  * Copyright 2014 Goldman Kim(bbalganjjm@gmail.com)
  */
 
-class NA {
+import { N } from "./natural.js";
+import { NC } from "./natural.core";
+
+export class NA {
 
     comm(url) {
         return new NA.comm(this, url);
@@ -154,12 +157,12 @@ class NA {
         static submit = function(callback) {
             const obj = this;
             if (NC.isElement(obj)) {
-                jQuery.extend(this.request.options, {
+                jQuery.extend(obj.request.options, {
                     contentType : "text/html; charset=UTF-8",
                     dataType : "html",
                     type : "GET"
                 });
-                this.request.options.target = obj;
+                obj.request.options.target = obj;
             }
 
             let isFilterStopped = false;
@@ -292,9 +295,9 @@ class NA {
                 }
             });
 
-            this.xhr = NA.ajax(obj.request.options);
+            NA.comm.xhr = NA.ajax(obj.request.options);
             if (!callback) {
-                return this.xhr;
+                return NA.comm.xhr;
             } else {
                 return obj;
             }
@@ -605,10 +608,5 @@ class NA {
     static config = class {
         static filterConfig;
     };
-
-    // TODO This will be replaced by fetch.
-    // ajax(opts) {
-    //     return NA.ajax(opts);
-    // };
 
 }

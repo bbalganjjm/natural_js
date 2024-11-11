@@ -7,6 +7,9 @@
  * Copyright 2014 Goldman Kim(bbalganjjm@gmail.com)
  */
 
+import { N, NJS } from "./natural.js";
+import { NC } from "./natural.core";
+
 NJS.version["Natural-TEMPLATE"] = "0.4.12";
 
 // Template
