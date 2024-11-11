@@ -143,7 +143,7 @@
         * @this : 호출한 함수 인스턴스 - onSelect 함수의 this 이므로 N.grid나 N.list 인스턴스
         * @opts.cont : N.cont object
         * @opts.form : 데이터를 연동할 N.form 인스턴스 명.
-        * @opts.args : selectNBind 호출한 함수의 arguments
+        * @opts.args : selectNBind 호출한 함수의 arguments.
         */
         selectNBind : function(opts) {
             if((opts.args[2][opts.args[0]] !== undefined && opts.args[2][opts.args[0]].rowStatus !== "insert") && opts.cont[opts.form] > -1  && !opts.cont[opts.form].validate()) {
