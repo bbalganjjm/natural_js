@@ -7,8 +7,9 @@
  * Copyright 2014 Goldman Kim(bbalganjjm@gmail.com)
  */
 
-import { N, NJS } from "./natural.js";
-import { NC } from "./natural.core";
+import { N, NJS } from "./natural.js.js";
+import { NC } from "./natural.core.js";
+import { NA } from "./natural.architecture.js";
 
 NJS.version["Natural-CODE"] = "0.4.8";
 

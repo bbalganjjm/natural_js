@@ -7,10 +7,10 @@
  * Copyright 2014 Goldman Kim(bbalganjjm@gmail.com)
  */
 
-import { N } from "./natural.js";
-import { NC } from "./natural.core";
-import { NA } from "./natural.architecture";
-import { ND } from "./natural.data";
+import { N } from "./natural.js.js";
+import { NC } from "./natural.core.js";
+import { NA } from "./natural.architecture.js";
+import { ND } from "./natural.data.js";
 
 export class NU {
 

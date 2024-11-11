@@ -11,7 +11,7 @@
  * Mask JavaScript API : http://www.pengoworks.com/workshop/js/mask/, dswitzer@pengoworks.com
  */
 
-import { N } from "./natural.js";
+import { N } from "./natural.js.js";
 import { NA } from "./natural.architecture.js";
 
 export class NC {

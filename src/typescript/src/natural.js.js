@@ -7,11 +7,11 @@
  * Copyright 2014 Goldman Kim(bbalganjjm@gmail.com)
  */
 
-import { NC } from "./natural.core";
-import { NA } from "./natural.architecture";
-import { ND } from "./natural.data";
-import { NU } from "./natural.ui";
-import { NUS } from "./natural.ui.shell";
+import { NC } from "./natural.core.js";
+import { NA } from "./natural.architecture.js";
+import { ND } from "./natural.data.js";
+import { NU } from "./natural.ui.js";
+import { NUS } from "./natural.ui.shell.js";
 
 Object.assign(N, NC, NA, ND, NU, NUS);
 
@@ -58,3 +58,5 @@ export class NJS extends jQuery {
 export function N(selector, context) {
     return new NJS(selector, context);
 }
+
+window.N = N;
