@@ -40,7 +40,7 @@ export class NU {
                 obj: any;
                 context: any;
                 container: any;
-                msgContext: import("./natural.js").NJS;
+                msgContext: import("./natural.js.js").NJS;
                 msgContents: any;
                 msg: any;
                 vars: any;
@@ -113,7 +113,7 @@ export class NU {
         new (obj: any, opts: any): {
             options: {
                 context: any;
-                contents: import("./natural.js").NJS;
+                contents: import("./natural.js.js").NJS;
                 monthonly: boolean;
                 focusin: boolean;
                 yearsPanelPosition: string;
@@ -571,7 +571,7 @@ export class NU {
             obj: any;
             context: any;
             container: any;
-            msgContext: import("./natural.js").NJS;
+            msgContext: import("./natural.js.js").NJS;
             msgContents: any;
             msg: any;
             vars: any;
@@ -623,7 +623,7 @@ export class NU {
     datepicker(opts: any): {
         options: {
             context: any;
-            contents: import("./natural.js").NJS;
+            contents: import("./natural.js.js").NJS;
             monthonly: boolean;
             focusin: boolean;
             yearsPanelPosition: string;

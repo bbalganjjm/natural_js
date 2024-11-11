@@ -6,7 +6,7 @@ export class NUS {
                     top: number;
                     right: number;
                 };
-                container: import("./natural.js").NJS;
+                container: import("./natural.js.js").NJS;
                 context: any;
                 displayTime: number;
                 alwaysOnTop: boolean;
@@ -33,7 +33,7 @@ export class NUS {
                 tabScrollCorrection: {
                     rightCorrectionPx: number;
                 };
-                msgContext: import("./natural.js").NJS;
+                msgContext: import("./natural.js.js").NJS;
                 entireLoadIndicator: boolean;
                 entireLoadScreenBlock: boolean;
                 entireLoadExcludeURLs: any[];
@@ -114,7 +114,7 @@ export class NUS {
                 top: number;
                 right: number;
             };
-            container: import("./natural.js").NJS;
+            container: import("./natural.js.js").NJS;
             context: any;
             displayTime: number;
             alwaysOnTop: boolean;
@@ -137,7 +137,7 @@ export class NUS {
             tabScrollCorrection: {
                 rightCorrectionPx: number;
             };
-            msgContext: import("./natural.js").NJS;
+            msgContext: import("./natural.js.js").NJS;
             entireLoadIndicator: boolean;
             entireLoadScreenBlock: boolean;
             entireLoadExcludeURLs: any[];

@@ -19,7 +19,7 @@ export class ND {
                 isElement: boolean;
                 createEvent: boolean;
                 context: any;
-                targetEle: import("./natural.js").NJS;
+                targetEle: import("./natural.js.js").NJS;
             };
             format(row: any): any[];
             unformat(row: any, key: any): any;
@@ -138,7 +138,7 @@ export class ND {
             isElement: boolean;
             createEvent: boolean;
             context: any;
-            targetEle: import("./natural.js").NJS;
+            targetEle: import("./natural.js.js").NJS;
         };
         format(row: any): any[];
         unformat(row: any, key: any): any;
