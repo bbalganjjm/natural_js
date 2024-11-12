@@ -139,7 +139,6 @@
 }
 
 .alert_tooltip__.msg__ ul.msg_line_box__ li {
-    line-height: 16px;
     padding: 1px 7px 1px 22px;
     background: var(--njs-icon-error) no-repeat 7px 50%;
     background-size: 14px;
@@ -1062,7 +1061,6 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
     width: 35px;
     text-align: center;
     transform: scaleX(0);
-    font-size: var(--njs-font-size-m);
 }
 
 .datepicker_contents__ .datepicker_day_item__.datepicker_holiday__,
