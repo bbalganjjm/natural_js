@@ -16,13 +16,8 @@ import { NA } from "./natural.architecture.js";
 
 export class NC {
 
-
     /**
-     * Removes one or more elements from an array, starting at the specified index.
-     *
-     * @param {number|string} idx - The index at which to start removing elements, or the value of the element to find and remove.
-     * @param {number} [length] - The number of elements to remove. Defaults to 1.
-     * @return {jQuery} The jQuery object for chaining.
+     * Remove element in array
      */
     remove_(idx, length) {
         if (idx !== undefined) {
@@ -37,13 +32,8 @@ export class NC {
         return this;
     };
 
-
     /**
-     * Binds an event handler to each element in the set of matched elements.
-     * If the event already has handlers, the new handler is added to the beginning of the handler's list.
-     *
-     * @this {NJS}
-     * @return {NJS} The jQuery object for chaining.
+     * Bind an event to top priority
      */
     tpBind() {
         const args = arguments;
@@ -62,18 +52,8 @@ export class NC {
         });
     };
 
-
     /**
-     * Retrieves or manipulates instances of Natural-JS components associated with the selected elements.
-     *
-     * If no arguments are provided, returns all instances.
-     * If one argument is provided and it is a function, executes the function for each instance.
-     * If one argument is provided and it is a string, returns the instance with the specified name.
-     * If two arguments are provided, sets the instance with the specified name.
-     *
-     * @param {string|function} [name] - The name of the instance to retrieve or set, or a function to execute for each instance.
-     * @param {*} [instance] - The instance to set, if setting an instance.
-     * @return {*} Returns the instance(s) associated with the selected elements, or the jQuery object if setting an instance.
+     * Get instance from context element of component or library
      */
     instance(name, instance) {
         if(arguments.length === 0) {
@@ -120,12 +100,9 @@ export class NC {
         }
     };
 
-
     /**
-     * Sets or gets the value(s) for form elements such as select, checkbox, and radio.
-     *
-     * @param {any} vals - The value(s) to set or a callback function to execute.
-     * @return {any} - The current value(s) of the form element(s) if no parameter is provided, or the jQuery object for chaining if values are set.
+     * Get or set the value to (multiple)select input elements
+     * if vals(arg[0]) argument is undefined, it works in get mode
      */
     vals(vals) {
         const tagName = this.get(0).tagName.toLowerCase();

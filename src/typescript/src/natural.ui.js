@@ -2399,12 +2399,12 @@ export class NU {
                 opts.context.removeAttr("title");
             }
 
-            NU.popup.alert = N(window).alert(opts);
-            NU.popup.alert.options.msgContext.addClass("popup_overlay__");
-            NU.popup.alert.options.msgContents.addClass("popup__");
+            this.alert = N(window).alert(opts);
+            this.alert.options.msgContext.addClass("popup_overlay__");
+            this.alert.options.msgContents.addClass("popup__");
 
             if(opts.saveMemory) {
-                NU.popup.alert.options.msg = null;
+                this.alert.options.msg = null;
             }
         };
 
