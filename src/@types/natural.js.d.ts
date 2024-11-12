@@ -45,11 +45,15 @@ declare namespace N {
     const mask = NC.mask;
 
     // Natural-ARCHITECTURE
-    const ajax = ND.ajax;
-    const comm = ND.comm;
-    const cont = ND.cont;
-    const context = ND.context;
-    const config = ND.config;
+    const ajax = NA.ajax;
+    function comm(obj: any, url: any) {
+        return new NA.comm(obj, url);
+    }
+    function cont(obj: any, url: any) {
+        return new NA.cont(obj, url);
+    }
+    const context = NA.context;
+    const config = NA.config;
 
     // Natural-DATA
     const ds = ND.ds;
@@ -58,20 +62,26 @@ declare namespace N {
     const data = ND.data;
 
     // Natural-UI
-    const ui = ND.ui;
-    const alert = ND.alert;
-    const button = ND.button;
-    const datepicker = ND.datepicker;
-    const popup = ND.popup;
-    const tab = ND.tab;
-    const select = ND.select;
-    const form = ND.form;
-    const list = ND.list;
-    const grid = ND.grid;
-    const pagination = ND.pagination;
-    const tree = ND.tree;
+    const ui = NU.ui;
+    const alert = NU.alert;
+    const button = NU.button;
+    const datepicker = NU.datepicker;
+    const popup = NU.popup;
+    const tab = NU.tab;
+    const select = NU.select;
+    const form = NU.form;
+    const list = NU.list;
+    const grid = NU.grid;
+    const pagination = NU.pagination;
+    const tree = NU.tree;
 
     // Natural-UI.Shell
-    const notify = ND.notify;
-    const docs = ND.docs;
+    const notify = function(position, opts) {
+        return new NUS.notify(position, opts);
+    }
+    // FIXME
+    namespace notify {
+        const add = NUS.notify.add;
+    }
+    const docs = NUS.docs;
 }
