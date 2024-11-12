@@ -1238,11 +1238,11 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 }
 
 .datepicker_contents__.years_panel_position_left__.months_panel_position_top__ > .datepicker_days_panel__ {
-    margin-left: 42px;
+    margin-left: 55px;
 }
 
 .datepicker_contents__.years_panel_position_top__.months_panel_position_left__ > .datepicker_days_panel__ {
-    margin-left: 62px;
+    margin-left: 71px;
 }
 
 /* Datepicker panels position correction */
