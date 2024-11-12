@@ -1,4 +1,4 @@
-export class ND {
+declare class ND {
     static ds: {
         new (inst: any, isReg: any): {
             viewContext: JQuery<HTMLElement>;
@@ -19,7 +19,7 @@ export class ND {
                 isElement: boolean;
                 createEvent: boolean;
                 context: any;
-                targetEle: import("./natural.js.js").NJS;
+                targetEle: NJS;
             };
             format(row: any): any[];
             unformat(row: any, key: any): any;
@@ -124,7 +124,6 @@ export class ND {
         regexp: (str: any, args: any) => boolean;
     };
     static data: {
-        new (): {};
         filter: (arr: any, condition: any) => any;
         sortBy: (key: any, reverse: any) => (a: any, b: any) => number;
         sort: (arr: any, key: any, reverse: any) => any;
@@ -138,7 +137,7 @@ export class ND {
             isElement: boolean;
             createEvent: boolean;
             context: any;
-            targetEle: import("./natural.js.js").NJS;
+            targetEle: NJS;
         };
         format(row: any): any[];
         unformat(row: any, key: any): any;

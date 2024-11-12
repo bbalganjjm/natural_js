@@ -1,6 +1,5 @@
-export class NU {
+declare class NU {
     static ui: {
-        new (): {};
         iteration: {
             render: (i: any, limit: any, delay: any, lastIdx: any, callType: any) => void;
             select: (compNm: any) => void;
@@ -40,7 +39,7 @@ export class NU {
                 obj: any;
                 context: any;
                 container: any;
-                msgContext: import("./natural.js.js").NJS;
+                msgContext: NJS;
                 msgContents: any;
                 msg: any;
                 vars: any;
@@ -113,7 +112,7 @@ export class NU {
         new (obj: any, opts: any): {
             options: {
                 context: any;
-                contents: import("./natural.js.js").NJS;
+                contents: NJS;
                 monthonly: boolean;
                 focusin: boolean;
                 yearsPanelPosition: string;
@@ -571,7 +570,7 @@ export class NU {
             obj: any;
             context: any;
             container: any;
-            msgContext: import("./natural.js.js").NJS;
+            msgContext: NJS;
             msgContents: any;
             msg: any;
             vars: any;
@@ -623,7 +622,7 @@ export class NU {
     datepicker(opts: any): {
         options: {
             context: any;
-            contents: import("./natural.js.js").NJS;
+            contents: NJS;
             monthonly: boolean;
             focusin: boolean;
             yearsPanelPosition: string;

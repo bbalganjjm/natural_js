@@ -1,4 +1,4 @@
-export class NC {
+declare class NC {
     /**
      * Set and get locale value
      */
@@ -68,7 +68,6 @@ export class NC {
      * Natural-JS resource garbage collector
      */
     static gc: {
-        new (): {};
         /**
          * Minimum collection
          */
@@ -86,7 +85,6 @@ export class NC {
      * NC.string package
      */
     static string: {
-        new (): {};
         contains: (context: any, str: any) => boolean;
         endsWith: (context: any, str: any) => boolean;
         startsWith: (context: any, str: any) => boolean;
@@ -107,7 +105,6 @@ export class NC {
      * NC.date package
      */
     static date: {
-        new (): {};
         /**
          * Calculate the difference between two dates
          */
@@ -148,7 +145,6 @@ export class NC {
      * NC.element package
      */
     static element: {
-        new (): {};
         /**
          * make options object from class attribute
          */
@@ -174,7 +170,6 @@ export class NC {
      * NC.browser package
      */
     static browser: {
-        new (): {};
         /**
          * Set and get cookie
          *  - get : when value is undefined
@@ -206,7 +201,6 @@ export class NC {
      * NC.message package
      */
     static message: {
-        new (): {};
         /**
          * Replace message variables for NC.message.get
          */
@@ -220,7 +214,6 @@ export class NC {
      * NC.array package
      */
     static array: {
-        new (): {};
         /**
          * Remove duplicated value(object | etc.)
          */
@@ -230,7 +223,6 @@ export class NC {
      * NC.json package
      */
     static json: {
-        new (): {};
         mapFromKeys: (obj: any, ...args: any[]) => any;
         /**
          * Merge JSON Array by key
@@ -242,7 +234,6 @@ export class NC {
         format: (oData: any, sIndent: any) => string;
     };
     static event: {
-        new (): {};
         /**
          * This function was taken from "https://stackoverflow.com/a/13952775" and modified.
          */

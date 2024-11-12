@@ -1,4 +1,4 @@
-export class NUS {
+declare class NUS {
     static notify: {
         new (position: any, opts: any): {
             options: {
@@ -6,7 +6,7 @@ export class NUS {
                     top: number;
                     right: number;
                 };
-                container: import("./natural.js.js").NJS;
+                container: NJS;
                 context: any;
                 displayTime: number;
                 alwaysOnTop: boolean;
@@ -33,7 +33,7 @@ export class NUS {
                 tabScrollCorrection: {
                     rightCorrectionPx: number;
                 };
-                msgContext: import("./natural.js.js").NJS;
+                msgContext: NJS;
                 entireLoadIndicator: boolean;
                 entireLoadScreenBlock: boolean;
                 entireLoadExcludeURLs: any[];
@@ -114,7 +114,7 @@ export class NUS {
                 top: number;
                 right: number;
             };
-            container: import("./natural.js.js").NJS;
+            container: NJS;
             context: any;
             displayTime: number;
             alwaysOnTop: boolean;
@@ -137,7 +137,7 @@ export class NUS {
             tabScrollCorrection: {
                 rightCorrectionPx: number;
             };
-            msgContext: import("./natural.js.js").NJS;
+            msgContext: NJS;
             entireLoadIndicator: boolean;
             entireLoadScreenBlock: boolean;
             entireLoadExcludeURLs: any[];

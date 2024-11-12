@@ -1,4 +1,4 @@
-export class NA {
+declare class NA {
     static ajax: {
         (url: string, settings?: JQuery.AjaxSettings): JQuery.jqXHR;
         (settings?: JQuery.AjaxSettings): JQuery.jqXHR;
@@ -87,12 +87,10 @@ export class NA {
         };
     };
     static context: {
-        new (): {};
         attrObj: {};
         attr: (name: any, obj_: any) => any;
     };
     static config: {
-        new (): {};
         filterConfig: any;
     };
     comm(url: any): {};
