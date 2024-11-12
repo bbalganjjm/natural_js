@@ -295,9 +295,9 @@ export class NA {
                 }
             });
 
-            NA.comm.xhr = NA.ajax(obj.request.options);
+            this.xhr = NA.ajax(obj.request.options);
             if (!callback) {
-                return NA.comm.xhr;
+                return this.xhr;
             } else {
                 return obj;
             }
