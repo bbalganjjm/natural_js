@@ -1,10 +1,10 @@
 <h1 class="logo title">Natural-JS</h1>
-Natural-JS is a JavaScript architectural framework designed for enterprise web applications, allowing intuitive, easy, and fast implementation of user interfaces.
+Natural-JS is a JavaScript architectural framework designed to enable intuitive, easy, and fast implementation of user interfaces for enterprise web applications.
 
 Structure
 ===
 
-Natural-JS consists of the Natural-CORE, Natural-ARCHITECTURE, Natural-DATA, and Natural-UI library packages. Natural-CORE is a common library package used globally by Natural-JS and Natural-ARCHITECTURE is a library package that makes up the architecture of Natural-JS. Natural-DATA is a library package that supports data synchronization, formatting, validation, and processing and Natural-UI is a library package that supports HTML-based UI components.
+Natural-JS consists of the following library packages: Natural-CORE, Natural-ARCHITECTURE, Natural-DATA, and Natural-UI. Natural-CORE is a common library package used globally within Natural-JS, while Natural-ARCHITECTURE is the library package that structures the architecture of Natural-JS. Natural-DATA is a library package that supports data synchronization, formatting, validation, and processing, and Natural-UI is a library package that provides HTML-based UI components.
 
 ![Structure of Natural-JS](images/intr/pic3.png)
 

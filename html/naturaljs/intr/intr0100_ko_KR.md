@@ -1,10 +1,10 @@
 <h1 class="logo title">Natural-JS</h1>
-Natural-JS는 기업용 웹 애플리케이션 UI 를 직관적으로 쉽고 빠르게 구현할 수 있는 Javascript 아키텍처 프레임워크입니다.
+Natural-JS는 기업용 웹 애플리케이션의 사용자 인터페이스를 직관적이고 쉽고 빠르게 구현할 수 있도록 설계된 JavaScript 아키텍처 프레임워크입니다.
 
 구성
 ===
 
-Natural-JS는 Natural-CORE, Natural-ARCHITECTURE, Natural-DATA, Natural-UI 라이브러리 패키지로 구성됩니다. Natural-CORE는 Natural-JS에서 전역으로 사용하는 공통 라이브러리 패키지이고 Natural-ARCHITECTURE는 Natural-JS의 아키텍처를 구성하는 라이브러리 패키지입니다. Natural-DATA는 데이터의 동기화, Formatting, Validation, 가공을 지원하는 라이브러리 패키지이고 Natural-UI는 HTML 기반의 UI 컴포넌트를 지원하는 라이브러리 패키지입니다.
+Natural-JS는 Natural-CORE, Natural-ARCHITECTURE, Natural-DATA, Natural-UI 라이브러리 패키지로 구성됩니다. Natural-CORE는 Natural-JS 내에서 전역적으로 사용되는 공통 라이브러리 패키지이며, Natural-ARCHITECTURE는 Natural-JS의 아키텍처를 구성하는 라이브러리 패키지입니다. Natural-DATA는 데이터 동기화, 포맷팅, 검증 및 가공을 지원하는 라이브러리 패키지이고 Natural-UI는 HTML 기반의 UI 컴포넌트를 제공하는 라이브러리 패키지입니다.
 
 ![Natural-JS 의 구조](images/intr/pic3.png)
 
