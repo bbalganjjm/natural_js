@@ -20,7 +20,7 @@ declare class NA {
         filterConfig: any;
     };
 
-    comm(url: any): Communicator;
+    comm(url: string | NA.Request.Options): Communicator;
 
     request(): Request;
 
@@ -28,7 +28,7 @@ declare class NA {
 }
 
 declare class Communicator {
-    constructor(obj: any, url: string);
+    constructor(obj: NJS, url: string | NA.Request.Options);
 
     xhr: JQuery.jqXHR;
     initFilterConfig: () => {
@@ -46,23 +46,8 @@ declare class Communicator {
 }
 
 declare interface Request {
-    new(obj: any, opts: any): {
-        options: {
-            url: any;
-            referrer: string;
-            contentType: string;
-            cache: boolean;
-            async: boolean;
-            type: string;
-            data: any;
-            dataIsArray: boolean;
-            dataType: string;
-            urlSync: boolean;
-            crossDomain: boolean;
-            browserHistory: boolean;
-            append: boolean;
-            target: any;
-        };
+    new(obj: NJS, opts: NA.Request.Options): {
+        options: NA.Request.Options;
         attrObj: {};
         obj: any;
     };

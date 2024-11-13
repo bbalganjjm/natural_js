@@ -34,14 +34,14 @@ declare class NU {
         };
     };
     static alert: {
-        new(obj: any, msg: any, vars?: any): {
+        new(obj: NJS, msg: NU.alert.prototype.options, vars?: any): {
             options: {
                 obj: any;
                 context: any;
                 container: any;
                 msgContext: NJS;
                 msgContents: any;
-                msg: any;
+                msg: string;
                 vars: any;
                 html: boolean;
                 top: any;

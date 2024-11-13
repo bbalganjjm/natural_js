@@ -1,3 +1,4 @@
+/// <reference types="jquery" />
 /// <reference path="natural.core.d.ts" />
 /// <reference path="natural.architecture.d.ts" />
 /// <reference path="natural.data.d.ts" />

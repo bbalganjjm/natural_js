@@ -50,7 +50,7 @@ declare namespace N {
     // Natural-ARCHITECTURE
     const ajax = NA.ajax;
 
-    function comm(obj: any, url: any): NA.comm {
+    function comm(obj: NJS, url: string | NA.Request.Options): NA.comm {
         return new NA.comm(obj, url);
     }
 
