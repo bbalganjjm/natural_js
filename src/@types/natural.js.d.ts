@@ -1,4 +1,5 @@
 declare function N(selector: any, context?: any): NJS;
+
 declare interface NJS extends JQuery, NC, NA, ND, NU, NUS {
     /**
      * Initializes and returns a new N object based on jQuery objects with the provided selector and context argument values.
@@ -48,12 +49,15 @@ declare namespace N {
 
     // Natural-ARCHITECTURE
     const ajax = NA.ajax;
-    function comm(obj: any, url: any): N.comm {
-        return new N.comm(obj, url);
+
+    function comm(obj: any, url: any): NA.comm {
+        return new NA.comm(obj, url);
     }
-    function cont(obj: any, url: any): N.cont {
-        return new N.cont(obj, url);
+
+    function cont(obj: any, url: any): NA.cont {
+        return new NA.cont(obj, url);
     }
+
     const context = NA.context;
     const config = NA.config;
 
@@ -65,9 +69,7 @@ declare namespace N {
 
     // Natural-UI
     const ui = NU.ui;
-    function alert(obj: any, url: any): NU.alert {
-        return new NU.alert(obj, url);
-    }
+    const alert = NU.alert;
     const button = NU.button;
     const datepicker = NU.datepicker;
     const popup = NU.popup;
@@ -80,12 +82,9 @@ declare namespace N {
     const tree = NU.tree;
 
     // Natural-UI.Shell
-    const notify = function(position, opts) {
+    const notify = function (position: any, opts?: any) {
         return new NUS.notify(position, opts);
     }
-    // FIXME
-    namespace notify {
-        const add = NUS.notify.add;
-    }
+    notify.add = NUS.notify.add;
     const docs = NUS.docs;
 }

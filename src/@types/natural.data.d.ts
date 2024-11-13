@@ -1,6 +1,6 @@
 declare class ND {
     static ds: {
-        new (inst: any, isReg: any): {
+        new(inst: any, isReg: any): {
             viewContext: JQuery<HTMLElement>;
             remove(): any;
             notify(row: any, key: any): any;
@@ -12,7 +12,7 @@ declare class ND {
         };
     };
     static formatter: {
-        new (obj: any, rules: any): {
+        new(obj: any, rules: any): {
             options: {
                 data: any;
                 rules: any;
@@ -61,7 +61,7 @@ declare class ND {
         numeric: (str: any, args: any) => string | true;
     };
     static validator: {
-        new (obj: any, rules: any): {
+        new(obj: any, rules: any): {
             options: {
                 data: any;
                 rules: any;
@@ -128,8 +128,11 @@ declare class ND {
         sortBy: (key: any, reverse: any) => (a: any, b: any) => number;
         sort: (arr: any, key: any, reverse: any) => any;
     };
+
     datafilter(condition: any): any;
+
     datasort(key: any, reverse: any): any;
+
     formatter(rules: any): {
         options: {
             data: any;
@@ -142,6 +145,7 @@ declare class ND {
         format(row: any): any[];
         unformat(row: any, key: any): any;
     };
+
     validator(rules: any): {
         options: {
             data: any;

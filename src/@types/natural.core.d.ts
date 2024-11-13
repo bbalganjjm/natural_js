@@ -265,7 +265,7 @@ declare class NC {
      * @reference Mask JavaScript API(http://www.pengoworks.com/workshop/js/mask/, dswitzer@pengoworks.com)
      */
     static mask: {
-        new (m: any): {
+        new(m: any): {
             format: any;
             error: any[];
             errorCodes: any[];
@@ -277,23 +277,28 @@ declare class NC {
             setNumeric(_v: any, _p: any, _d: any): string | true;
         };
     };
+
     /**
      * Remove element in array
      */
     remove_(idx: any, length: any): this;
+
     /**
      * Bind an event to top priority
      */
     tpBind(...args: any[]): any;
+
     /**
      * Get instance from context element of component or library
      */
     instance(name: any, instance: any, ...args: any[]): any;
+
     /**
      * Get or set the value to (multiple)select input elements
      * if vals(arg[0]) argument is undefined, it works in get mode
      */
     vals(vals: any): any;
+
     /**
      * Returns the event bound to the element.
      */

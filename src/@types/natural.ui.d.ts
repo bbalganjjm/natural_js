@@ -34,7 +34,7 @@ declare class NU {
         };
     };
     static alert: {
-        new (obj: any, msg: any, vars?: any): {
+        new(obj: any, msg: any, vars?: any): {
             options: {
                 obj: any;
                 context: any;
@@ -92,7 +92,7 @@ declare class NU {
         wrapInputEle: () => void;
     };
     static button: {
-        new (obj: any, opts: any): {
+        new(obj: any, opts: any): {
             options: {
                 context: any;
                 size: string;
@@ -109,7 +109,7 @@ declare class NU {
         wrapEle: () => void;
     };
     static datepicker: {
-        new (obj: any, opts: any): {
+        new(obj: any, opts: any): {
             options: {
                 context: any;
                 contents: NJS;
@@ -150,7 +150,7 @@ declare class NU {
         selectItems: (opts: any, value: any, format: any, yearsPanel: any, monthsPanel: any, daysPanel: any) => void;
     };
     static popup: {
-        new (obj: any, opts: any, ...args: any[]): {
+        new(obj: any, opts: any, ...args: any[]): {
             options: {
                 context: any;
                 url: any;
@@ -204,7 +204,7 @@ declare class NU {
         popOpen: (onOpenData: any, cont: any) => void;
     };
     static tab: {
-        new (obj: any, opts: any): {
+        new(obj: any, opts: any): {
             options: {
                 context: any;
                 links: any;
@@ -237,7 +237,7 @@ declare class NU {
         loadContent: (url: any, targetIdx: any, callback: any, isFirst: any) => void;
     };
     static select: {
-        new (data: any, opts: any): {
+        new(data: any, opts: any): {
             options: {
                 data: any;
                 context: any;
@@ -259,7 +259,7 @@ declare class NU {
         wrapEle: () => void;
     };
     static form: {
-        new (data: any, opts: any): {
+        new(data: any, opts: any): {
             options: {
                 data: any;
                 row: number;
@@ -318,7 +318,7 @@ declare class NU {
         };
     };
     static list: {
-        new (data: any, opts: any): {
+        new(data: any, opts: any): {
             options: {
                 data: any;
                 row: number;
@@ -384,7 +384,7 @@ declare class NU {
         vResize: (contextWrapEle: any) => void;
     };
     static grid: {
-        new (data: any, opts: any): {
+        new(data: any, opts: any): {
             options: {
                 data: any;
                 row: number;
@@ -497,7 +497,7 @@ declare class NU {
         paste: () => void;
     };
     static pagination: {
-        new (data: any, opts: any): {
+        new(data: any, opts: any): {
             options: {
                 data: any;
                 context: any;
@@ -544,7 +544,7 @@ declare class NU {
         };
     };
     static tree: {
-        new (data: any, opts: any): {
+        new(data: any, opts: any): {
             options: {
                 data: any;
                 context: any;
@@ -565,6 +565,7 @@ declare class NU {
             collapse(isFirstNodeOpen: any): any;
         };
     };
+
     alert(msg: any, vars?: any): {
         options: {
             obj: any;
@@ -618,7 +619,9 @@ declare class NU {
         hide(): any;
         remove(): any;
     };
+
     button(opts: any): any;
+
     datepicker(opts: any): {
         options: {
             context: any;
@@ -652,6 +655,7 @@ declare class NU {
         formEleOrgPosition: any;
         hide(...args: any[]): any;
     };
+
     popup(opts: any): {
         options: {
             context: any;
@@ -701,6 +705,7 @@ declare class NU {
         changeEvent(name: any, callback: any): any;
         remove(): any;
     };
+
     tab(opts: any): {
         options: {
             context: any;
@@ -729,6 +734,7 @@ declare class NU {
         enable(idx: any): any;
         cont(idx: any): any;
     };
+
     select(opts: any): {
         options: {
             data: any;
@@ -748,6 +754,7 @@ declare class NU {
         remove(val: any): any;
         reset(selFlag: any): any;
     };
+
     form(opts: any): {
         options: {
             data: any;
@@ -805,6 +812,7 @@ declare class NU {
         val(key: any, val: any, notify: any): any;
         update(row: any, key: any): any;
     };
+
     list(opts: any): {
         options: {
             data: any;
@@ -867,6 +875,7 @@ declare class NU {
         copy(fromRow: any, toRow: any): any;
         update(row: any, key: any): any;
     };
+
     grid(opts: any): {
         options: {
             data: any;
@@ -956,6 +965,7 @@ declare class NU {
         hide(colIdxs: any): any;
         update(row: any, key: any): any;
     };
+
     pagination(opts: any): {
         options: {
             data: any;
@@ -971,13 +981,14 @@ declare class NU {
         linkEles: any;
         data(selFlag: any): any;
         context(sel: any): any;
-        bind(data: any, totalCount: any, ...args: any[]): any;
+        bind(data?: any, totalCount?: any, ...args?: any[]): any;
         totalCount(totalCount: any): number | any;
         pageNo(pageNo: any): number | any;
         countPerPage(countPerPage: any): number | any;
         countPerPageSet(countPerPageSet: any): number | any;
         currPageNavInfo(): any;
     };
+
     tree(opts: any): {
         options: {
             data: any;

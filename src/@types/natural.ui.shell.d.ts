@@ -1,6 +1,6 @@
 declare class NUS {
     static notify: {
-        new (position: any, opts: any): {
+        new(position: any, opts?: any): {
             options: {
                 position: {
                     top: number;
@@ -14,14 +14,14 @@ declare class NUS {
                 alwaysOnTopCalcTarget: string;
             };
             context(sel: any): any;
-            add(msg: any, url: any): any;
+            add(msg: any, url?: any): any;
             remove(msgBoxEle: any): any;
         };
         add: (msg: any, url: any) => void;
         wrapEle: () => void;
     };
     static docs: {
-        new (obj: any, opts: any): {
+        new(obj: any, opts: any): {
             options: {
                 context: any;
                 multi: boolean;
@@ -108,6 +108,7 @@ declare class NUS {
         hideTabContents: (docId_: any) => void;
         remove: (targetTabEle: any) => void;
     };
+
     notify(opts: any): {
         options: {
             position: {
@@ -122,9 +123,10 @@ declare class NUS {
             alwaysOnTopCalcTarget: string;
         };
         context(sel: any): any;
-        add(msg: any, url: any): any;
+        add(msg: any, url?: any): any;
         remove(msgBoxEle: any): any;
     };
+
     docs(opts: any): {
         options: {
             context: any;
