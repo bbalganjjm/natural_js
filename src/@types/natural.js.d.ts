@@ -1,6 +1,11 @@
-declare function N(selector: any, context?: any): NJS.prototype;
-declare class NJS extends JQuery, NC, NA, ND, NU, NUS {
-    static version: {
+declare function N(selector: any, context?: any): NJS;
+declare interface NJS extends JQuery, NC, NA, ND, NU, NUS {
+    /**
+     * Initializes and returns a new N object based on jQuery objects with the provided selector and context argument values.
+     */
+    new(selector: any, context?: any);
+
+    version: {
         "Natural-JS": string;
         "Natural-CORE": string;
         "Natural-ARCHITECTURE": string;
@@ -8,10 +13,7 @@ declare class NJS extends JQuery, NC, NA, ND, NU, NUS {
         "Natural-UI": string;
         "Natural-UI.Shell": string;
     };
-    /**
-     * Initializes and returns a new N object based on jQuery objects with the provided selector and context argument values.
-     */
-    constructor(selector: any, context?: any);
+
     selector: string;
 }
 
@@ -46,11 +48,11 @@ declare namespace N {
 
     // Natural-ARCHITECTURE
     const ajax = NA.ajax;
-    function comm(obj: any, url: any) {
-        return new NA.comm(obj, url);
+    function comm(obj: any, url: any): N.comm {
+        return new N.comm(obj, url);
     }
-    function cont(obj: any, url: any) {
-        return new NA.cont(obj, url);
+    function cont(obj: any, url: any): N.cont {
+        return new N.cont(obj, url);
     }
     const context = NA.context;
     const config = NA.config;
@@ -63,7 +65,9 @@ declare namespace N {
 
     // Natural-UI
     const ui = NU.ui;
-    const alert = NU.alert;
+    function alert(obj: any, url: any): NU.alert {
+        return new NU.alert(obj, url);
+    }
     const button = NU.button;
     const datepicker = NU.datepicker;
     const popup = NU.popup;

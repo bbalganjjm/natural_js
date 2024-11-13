@@ -34,7 +34,7 @@ declare class NU {
         };
     };
     static alert: {
-        new (obj: any, msg: any, vars: any): {
+        new (obj: any, msg: any, vars?: any): {
             options: {
                 obj: any;
                 context: any;
@@ -565,7 +565,7 @@ declare class NU {
             collapse(isFirstNodeOpen: any): any;
         };
     };
-    alert(msg: any, vars: any): {
+    alert(msg: any, vars?: any): {
         options: {
             obj: any;
             context: any;

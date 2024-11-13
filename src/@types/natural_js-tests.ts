@@ -13,6 +13,13 @@ N([]).comm("http://localhost:8080").request.attr("asd", "").submit(function () {
 
 N.context.attr("asdf");
 N.cont(N(".context"), {});
-N(".context").cont({}); // TODO Type 검사 제대로 안돼는것 같음.
+N(".context").cont({});
+
+N.formatter.rpad("asf", []);
+N.validator.rrn("asf");
+N([]).datasort([], false);
+
+N(window).alert({}).show();
+N.alert(window, {}).show();
 
 // TODO N.notify.add

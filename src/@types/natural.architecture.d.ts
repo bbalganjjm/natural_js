@@ -10,8 +10,40 @@ declare class NA {
      * The class provides a structured way of initializing and making requests,
      * including the application of various filters at different stages of the request lifecycle.
      */
-    static comm = Communicator;
-    static cont: Controller;
+    static comm = class {
+        constructor (obj: any, url: string);
+        xhr: JQuery.jqXHR;
+        initFilterConfig: () => {
+            beforeInitFilters: any[];
+            afterInitFilters: any[];
+            beforeSendFilters: any[];
+            successFilters: any[];
+            errorFilters: any[];
+            completeFilters: any[];
+        };
+        resetFilterConfig: () => any;
+        submit: (callback: any) => any;
+        error: (callback: any) => any;
+        request: Request;
+    };
+    static cont = class {
+        constructor (obj: any, contObj: any);
+        /**
+         * "init" method trigger
+         */
+        trInit: (cont: any, request: any) => void;
+        /**
+         * AOP processing module
+         */
+        aop: {
+            pointcuts: {
+                regexp: {
+                    fn: (param: any, contFrag: any, fnChain: any) => boolean;
+                };
+            };
+            wrap: (cont: any) => void;
+        };
+    };
     static context: {
         attrObj: {};
         attr: (name: any, obj_?: any) => any;
@@ -19,26 +51,9 @@ declare class NA {
     static config: {
         filterConfig: any;
     };
-    comm(url: any): Communicator;
+    comm(url: any): N.comm;
     request(): Request;
-    cont(contObj: any): Controller;
-}
-
-declare class Communicator {
-    constructor (obj: any, url: string);
-    xhr: JQuery.jqXHR;
-    initFilterConfig: () => {
-        beforeInitFilters: any[];
-        afterInitFilters: any[];
-        beforeSendFilters: any[];
-        successFilters: any[];
-        errorFilters: any[];
-        completeFilters: any[];
-    };
-    resetFilterConfig: () => any;
-    submit: (callback: any) => any;
-    error: (callback: any) => any;
-    request: Request;
+    cont(contObj: any): N.cont;
 }
 
 declare interface Request {
@@ -60,22 +75,3 @@ declare interface Request {
      */
     reload(callback: any): Communicator;
 }
-
-declare class Controller {
-    constructor (obj: any, contObj: any);
-    /**
-     * "init" method trigger
-     */
-    trInit: (cont: any, request: any) => void;
-    /**
-     * AOP processing module
-     */
-    aop: {
-        pointcuts: {
-            regexp: {
-                fn: (param: any, contFrag: any, fnChain: any) => boolean;
-            };
-        };
-        wrap: (cont: any) => void;
-    };
-};
