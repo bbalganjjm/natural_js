@@ -9,6 +9,12 @@ const selector = N("asdf").selector;
 N("").datasort("asd", false);
 N.validator.frn_rrn("");
 
+N.ajax({
+    url: "http://localhost:8080",
+    type: NA.Request.HttpMethod.POST,
+    dataType: NA.Request.DataType.JSON,
+    enctype: NA.Request.Enctype.URLENCODED
+});
 N.comm(N([]), {
     url: "https://localhost:8080"
 }).submit(function () {});
@@ -22,8 +28,16 @@ N.comm(N([]), "https://localhost:8080").request.attr("asd", "").submit(function 
 N([]).comm("http://localhost:8080").request.attr("asd", "").request.attr("asd", "asd").submit(function () {});
 
 N.context.attr("asdf");
-N.cont(N(".context"), {});
-N(".context").cont({});
+N.cont(N(".context"), {
+    init: function (view, request) {
+
+    }
+});
+N(".context").cont({
+    init: function (view, request) {
+        
+    }
+});
 
 N.formatter.rpad("asf", []);
 N.validator.rrn("asf");

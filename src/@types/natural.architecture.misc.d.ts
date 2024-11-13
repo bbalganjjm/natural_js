@@ -134,19 +134,19 @@ declare namespace NA.Request {
         /**
          * If set to `true`, the parameter object specified as an argument of the N function in `N().comm` can be specified as an array type.
          *
-         * When using Communicator with `N(params).comm(url).submit()`, if the object type of params is array and the dataIsArray option is set to false, only the first object of array is transmitted.
-         * The cause of this problem is that if you call the get function after setting the argument of the jQuery function to `array(jQuery([{}]))` or `object($({}))`, both return `array([{}])`.
-         * Even if it is inconvenient, when transmitting an array to the server, set dataIsArray to true or use an array in an object.
+         * > When using Communicator with `N(params).comm(url).submit()`, if the object type of params is array and the dataIsArray option is set to false, only the first object of array is transmitted.
+         * > The cause of this problem is that if you call the get function after setting the argument of the jQuery function to `array(jQuery([{}]))` or `object($({}))`, both return `array([{}])`.
+         * > Even if it is inconvenient, when transmitting an array to the server, set dataIsArray to true or use an array in an object.
          *
-         * When `Communicator` is used with `N.comm(params, url).submit()`, even if the dataIsArray option is not set to true, params is not created as a jQuery object, so it is sent as an array type.
+         * > When `Communicator` is used with `N.comm(params, url).submit()`, even if the dataIsArray option is not set to true, params is not created as a jQuery object, so it is sent as an array type.
          *
-         * Applied after `Natural-ARCHITECTURE v0.8.1.4` version.
+         * > Applied after `Natural-ARCHITECTURE v0.8.1.4` version.
          */
         dataIsArray?: boolean,
         /**
          * If set to `false`, the response will not be blocked even if the location.href when making a request to the server and the location.href when receiving a response from the server are different.
          *
-         * If the server response is blocked for unknown reasons, test this option by setting it to false.
+         * > If the server response is blocked for unknown reasons, test this option by setting it to false.
          */
         urlSync?: boolean,
         // TODO browserHistory : true,
@@ -157,8 +157,27 @@ declare namespace NA.Request {
         /**
          * Specifies the element into which to insert HTML content.
          *
-         * When Communicator is used with `N(".block").comm("page.html").submit()`, the `N("#block")` element object is specified as the target property value.
+         * > When Communicator is used with `N(".block").comm("page.html").submit()`, the `N("#block")` element object is specified as the target property value.
          */
         target?: N
+    }
+}
+
+declare namespace NA.Controller {
+    type InitFunction = {
+        (this: Object, view: N<NHTMLElement>, request: Request): void
+    }
+
+    type Object = {
+        [key: string]: any;
+        /**
+         * The initializer function that is called to set up the initial state or configuration.
+         * This function is optional, and if provided, it should follow the signature defined by `InitFunction`.
+         */
+        init?: InitFunction;
+        view?: N<NHTMLElement>;
+        request?: Request;
+        caller?: Object;
+        opener?: Object;
     }
 }

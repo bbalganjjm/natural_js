@@ -3,13 +3,6 @@ declare class NA {
         (url: string, settings?: JQuery.AjaxSettings): JQuery.jqXHR;
         (settings?: JQuery.AjaxSettings): JQuery.jqXHR;
     };
-    /**
-     * Communicator
-     *
-     * Communicator class for handling AJAX requests with filtering mechanisms.
-     * The class provides a structured way of initializing and making requests,
-     * including the application of various filters at different stages of the request lifecycle.
-     */
     static comm: Communicator;
     static cont: Controller;
     static context: {
@@ -24,11 +17,11 @@ declare class NA {
 
     request(): Request;
 
-    cont(contObj: any): Controller;
+    cont(ontObj: NA.Controller.Object): Controller;
 }
 
 declare class Communicator {
-    constructor(obj: NJS, url: string | NA.Request.Options);
+    constructor(obj: N<object[]>, url: string | NA.Request.Options);
 
     xhr: JQuery.jqXHR;
     initFilterConfig: () => {
@@ -52,39 +45,21 @@ declare interface Request {
         obj: any;
     };
 
-    /**
-     * get / set request attribute
-     */
     attr(name: any, obj_: any): Communicator;
 
-    /**
-     * remove request attribute
-     */
     removeAttr(name: any): Communicator;
 
-    /**
-     * get query parmas from request url
-     */
     param(name: any): any;
 
     get(key: any): any;
 
-    /**
-     * Reload block page
-     */
     reload(callback: any): Communicator;
 }
 
 declare class Controller {
-    constructor(obj: any, contObj: any);
+    constructor(obj: N<HTMLElement>, contObj: NA.Controller.Object): NA.Controller.Object;
 
-    /**
-     * "init" method trigger
-     */
     trInit: (cont: any, request: any) => void;
-    /**
-     * AOP processing module
-     */
     aop: {
         pointcuts: {
             regexp: {
