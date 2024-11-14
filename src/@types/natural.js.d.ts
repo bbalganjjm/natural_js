@@ -1,3 +1,8 @@
+/**
+ * N() is a core method of Natural-JS. It returns a collection of matched elements found in the DOM based on the provided arguments or creates elements matching the given HTML string.
+ *
+ * N() extends the jQuery() function, thus it can be replaced with $() or jQuery(). However, local functions of the N object cannot be used within jQuery or $ objects.
+ */
 declare function N(selector: any, context?: any): NJS;
 
 declare interface NJS extends JQuery, NC, NA, ND, NU, NUS {
@@ -18,6 +23,9 @@ declare interface NJS extends JQuery, NC, NA, ND, NU, NUS {
     selector: string;
 }
 
+/**
+ * N is a collection class that defines common functions for Natural-JS.
+ */
 declare namespace N {
     // === Natural-CORE
 
@@ -120,31 +128,33 @@ declare namespace N {
     const context = NA.context;
 
     /**
-     * Config(natural.config.js) 는 Natural-JS의 운영 환경 설정, AOP 설정, Communication Filter 설정, UI 컴포넌트의 전역 옵션 값 등을 저장하는 공간입니다.
+     * Config(natural.config.js) stores the operational environment settings, AOP settings, Communication Filter settings,
+     * and global option values for UI components of Natural-JS.
      *
-     * natural.config.js 파일에 정의되어 있으며 설정 값은 N.context에 각 패키지 별 속성 값으로 별도로 저장됩니다.
-     *  - N.context.attr("core") : Natural-CORE 패키지 라이브러리들의 기본 설정 값.
-     *  - N.context.attr("architecture") : Natural-ARCHITECTURE 패키지 라이브러리들의 기본 설정 값.
-     *  - N.context.attr("data") : Natural-DATA 패키지 라이브러리들의 기본 설정 값.
-     *  - N.context.attr("ui") : Natural-UI 패키지 라이브러리들의 기본 설정 값.
-     *  - N.context.attr("ui.shell") : Natural-UI.Shell 패키지 라이브러리들의 기본 설정 값.
-     *  - Natural-JS 적용 시 설정해야 할 필수 속성 값은 다음 두 가지입니다.
+     * The settings are defined in the natural.config.js file and are saved as separate attribute values for each package in N.context.
+     *  - N.context.attr("core"): Basic settings for the Natural-CORE package libraries.
+     *  - N.context.attr("architecture"): Basic settings for the Natural-ARCHITECTURE package libraries.
+     *  - N.context.attr("data"): Basic settings for the Natural-DATA package libraries.
+     *  - N.context.attr("ui"): Basic settings for the Natural-UI package libraries.
+     *  - N.context.attr("ui.shell"): Basic settings for the Natural-UI.Shell package libraries.
      *
-     * Natural-JS 적용 시 설정해야 할 필수 속성 값은 다음 두 가지입니다.
-     *  1. N.context.attr("architecture").page.context : 웹 애플리케이션의 컨텐츠가 표시되는 컨테이너 영역(요소)을 jQuery selector 문자열로 지정합니다.
-     *     > Documents(N.docs) 컴포넌트를 사용하면 자동으로 입력됩니다.
+     * The following two attributes are essential when applying Natural-JS:
      *
-     *     > SPA(Single Page Application) 구조로 제작되는 웹 애플리케이션이라면 메뉴 페이지를 적제하는 요소를 지정하고 아니라면 "body" 나 전체 컨텐츠를 감싸고 있는 요소를 입력해 주세요.
-     *  2. N.context.attr("ui").alert.container : N.alert, N.popup 컴포넌트의 요소들이 저장될 영역(요소)을 jQuery selector 문자열로 지정합니다.
-     *     > Documents(N.docs) 컴포넌트를 사용하면 자동으로 입력됩니다.
+     * The following two attributes are essential when applying Natural-JS:
+     *  1. N.context.attr("architecture").page.context: Specifies the container area (element) where the web application's content will be displayed as a jQuery selector string.
+     *     > It is automatically entered when using the Documents(N.docs) component.
      *
-     *     > SPA(Single Page Application) 구조로 제작되는 웹 애플리케이션이라면 메뉴 페이지를 적제하는 요소를 지정하고 아니라면 "body" 나 전체 컨텐츠를 감싸고 있는 요소를 입력해 주세요.
+     *     > If the web application is built as a SPA (Single Page Application), specify the element that loads the menu page. Otherwise, enter "body" or the element wrapping the entire content.
+     *  2. N.context.attr("ui").alert.container: Specifies the area (element) where elements of the N.alert and N.popup components will be stored as a jQuery selector string.
+     *     > It is automatically entered when using the Documents(N.docs) component.
      *
-     * 컴포넌트 옵션이 적용되는 순서는 다음과 같습니다.
-     *  1. 컴포넌트를 초기화할 때 지정한 옵션 값.
-     *  2. Config(natural.config.js)에서 지정한 옵션 값.
-     *  3. 컴포넌트의 기본 옵션 값.
-     *     > 전역 이벤트 옵션을 설정하면 전역 이벤트가 먼저 실행된 다음 컴포넌트 초기화 시 지정한 이벤트가 실행됩니다.
+     *     > If the web application is built as a SPA (Single Page Application), specify the element that loads the menu page. Otherwise, enter "body" or the element wrapping the entire content.
+     *
+     * The order in which component options are applied is as follows:
+     *  1. Option values specified when initializing the component.
+     *  2. Option values specified in Config(natural.config.js).
+     *  3. The component’s default option values.
+     *     > If you set a global event option, the global event is executed first, followed by the event specified when initializing the component.
      *
      * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0102.html }
      */
@@ -152,31 +162,116 @@ declare namespace N {
 
     // === Natural-DATA
 
+    /**
+     * DataSync(N.ds) is a module in Natural-JS that handles two-way data binding.
+     */
     const ds = ND.ds;
+    /**
+     * Formatter(N.formatter) is a library that formats an input data set (array of JSON objects) and returns the formatted data set.
+     *  - Instead of using a ruleset, you can pass as an argument an element that wraps elements with formatting rules declared in the data-format attribute. This will display the formatted string in those elements. If the element is a text input element, it will display the original string of the data when the cursor focuses in (focusin event), and display the formatted string when the cursor focuses out (focusout event).
+     *  - You can also format on a per-string basis, rather than using a dataset.
+     *
+     * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0301.html }
+     */
     const formatter = ND.formatter;
+    /**
+     * Validator (N.validator) is a library that validates an input data set (array of JSON objects) and returns the result data set.
+     *  - Instead of a ruleset, if you pass an element that wraps input elements with validation rules declared in the data-validate attribute, it will validate the value entered in the element when the cursor focusout occurs on the input element. If validation fails, an error message is displayed in the form of a tooltip near the input element.
+     *  - Validation can also be performed on strings, not just datasets.
+     *
+     * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0302.html }
+     */
     const validator = ND.validator;
+    /**
+     * The Natural-DATA library provides methods and functions for sorting, filtering, and refining data of type array[json object].
+     *
+     * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0303.html }
+     */
     const data = ND.data;
 
     // === Natural-UI
 
+    /**
+     * This class defines common functions that support the development of Natural-UI components.
+     */
     const ui = NU.ui;
+    /**
+     * Alert(N.alert)은 window.alert이나 window.confirm 같은 메시지 대화 상자를 레이어 팝업 형태로 표현해 주는 UI 컴포넌트입니다.
+     *
+     * > Alert 대화 상자가 표시되지 않고 오류가 발생하면 Config(natural.config.js)의 N.context.attr("ui").alert.container 속성에 jQuery selector 문자열로 N.alert 관련 요소들이 저장될 요소를 지정해야 합니다.
+     *
+     * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0401.html }
+     */
     const alert = NU.alert;
+    /**
+     * Button(N.button)은 context 옵션으로 지정된 "a, input[type=button], button" 요소를 사용하여 버튼을 만드는 UI 컴포넌트입니다.
+     *
+     * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0402.html }
+     */
     const button = NU.button;
+    /**
+     *
+     * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0403.html }
+     */
     const datepicker = NU.datepicker;
+    /**
+     *
+     * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0404.html }
+     */
     const popup = NU.popup;
+    /**
+     *
+     * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0405.html }
+     */
     const tab = NU.tab;
+    /**
+     *
+     * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0406.html }
+     */
     const select = NU.select;
+    /**
+     *
+     * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0407.html }
+     */
     const form = NU.form;
+    /**
+     *
+     * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0408.html }
+     */
     const list = NU.list;
+    /**
+     *
+     * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0409.html }
+     */
     const grid = NU.grid;
+    /**
+     *
+     * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0410.html }
+     */
     const pagination = NU.pagination;
+    /**
+     *
+     * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0411.html }
+     */
     const tree = NU.tree;
 
     // === Natural-UI.Shell
 
+    /**
+     *
+     * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0501.html }
+     */
     const notify = function (position: any, opts?: any) {
         return new NUS.notify(position, opts);
     }
+    /**
+     *
+     * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0502.html }
+     */
     notify.add = NUS.notify.add;
+    /**
+     *
+     * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0401.html }
+     */
     const docs = NUS.docs;
 }
