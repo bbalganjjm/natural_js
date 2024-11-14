@@ -107,7 +107,7 @@
                 <p lang="en_US">Specifies the height of the grid body.</p>
                 <p lang="ko_KR">설정한 값이 0보다 크면 헤더가 고정되고 그리드 바디에 스크롤바가 생기면서 설정한 높이로 고정됩니다. 0으로 설정하면 헤더를 고정하지 않고 모든 데이터를 그리드 바디에 보여 줍니다.</p>
                 <p lang="en_US">If the set value is greater than 0, the header is fixed and a scroll bar is created on the grid body, and it is fixed at the set height. If set to 0, all data is shown in the grid body without fixing the header.</p>
-                <p lang="ko_KR" class="alert">Pagination(N.pagination) 컴포넌트와 결합하여 페이징 된 데이터를 N.list에 바인딩할 때는 0으로 설정하여 모든 데이터를 한 번에 표시하는 것을 권장합니다.</p>
+                <p lang="ko_KR" class="alert">Pagination(N.pagination) 컴포넌트와 결합하여 페이징 된 데이터를 N.list에 바인딩할 때는 0으로 설정하여 모든 데이터를 한번에 표시하는 것을 권장합니다.</p>
                 <p lang="en_US" class="alert">When binding paged data to the N.grid in combination with the Pagination(N.pagination) component, it is recommended to display all data at once by setting it to 0.</p>
             </td>
         </tr>
@@ -399,7 +399,7 @@
             <td>
                 <p lang="ko_KR">1 이상으로 설정하면 바인딩할 때 그리드의 각 행이 별도로 생성됩니다. 이때 다음 행이 생성되기까지의 시간 간격을 설정합니다.</p>
                 <p lang="en_US">If set to 1 or higher, each row of the grid is created separately when binding. At this time, set the time interval until the next row is created.</p>
-                <p lang="ko_KR" class="alert">0으로 설정하면 모든 행을 한 번에 생성하여 데이터를 바인딩하는 동안 브라우저가 멈출 수도 있습니다.</p>
+                <p lang="ko_KR" class="alert">0으로 설정하면 모든 행을 한번에 생성하여 데이터를 바인딩하는 동안 브라우저가 멈출 수도 있습니다.</p>
                 <p lang="en_US" class="alert">If set to 0, the browser may hang while binding data by creating all rows at once.</p>
             </td>
         </tr>
@@ -409,7 +409,7 @@
             <td>100</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">스크롤 페이징 할 때 한 번에 바인딩할 행 수를 지정합니다.</p>
+                <p lang="ko_KR">스크롤 페이징 할 때 한번에 바인딩할 행 수를 지정합니다.</p>
                 <p lang="en_US">Specifies the number of rows to bind at a time when scroll paging.</p>
                 <p lang="ko_KR">헤더 고정형 N.list는 스크롤 페이징 기능이 기본적으로 활성화되며 0을 지정하면 스크롤 페이징 기능이 비활성화됩니다.</p>
                 <p lang="en_US">In Header fixed type N.grid, the scroll paging feature is enabled by default, if 0 is specified, the scroll paging feature is disabled.</p>
@@ -613,7 +613,7 @@
     // e : click event object
 }</code></pre>
                 <p lang="ko_KR" class="alert">onBeforeSelect 이벤트 핸들러에서 false 를 반환하면 행이 선택되지 않습니다. 이때 onSelect 이벤트는 onBeforeSelect 이벤트와 같은 조건으로 실행 됩니다.</p>
-                <p lang="ko_KR" class="alert">If the onBeforeSelect event handler returns false , the row will not be selected. At this time, the onSelect event is executed under the same conditions as the onBeforeSelect event.</p>
+                <p lang="en_US" class="alert">If the onBeforeSelect event handler returns false , the row will not be selected. At this time, the onSelect event is executed under the same conditions as the onBeforeSelect event.</p>
                 <p lang="ko_KR" class="alert">select 나 multiselect 옵션이 true로 설정되었을 경우에만 실행됩니다.</p>
                 <p lang="en_US" class="alert">It is executed only when the select or multiselect option is set to true.</p>
                 <p lang="ko_KR" class="alert">unselect 옵션이 false로 설정되었을 경우 선택이 해제되면 rowIdx 인수 값에 -1을 반환하고 선택되면 선택된 행의 인덱스를 반환합니다.</p>
