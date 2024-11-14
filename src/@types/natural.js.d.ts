@@ -196,30 +196,41 @@ declare namespace N {
      */
     const ui = NU.ui;
     /**
-     * Alert(N.alert)은 window.alert이나 window.confirm 같은 메시지 대화 상자를 레이어 팝업 형태로 표현해 주는 UI 컴포넌트입니다.
+     * Alert (N.alert) is a UI component that displays message dialog boxes such as window.alert or window.confirm in a layer popup form.
      *
-     * > Alert 대화 상자가 표시되지 않고 오류가 발생하면 Config(natural.config.js)의 N.context.attr("ui").alert.container 속성에 jQuery selector 문자열로 N.alert 관련 요소들이 저장될 요소를 지정해야 합니다.
+     * > If the Alert dialog box is not displayed, and an error occurs, you need to specify the element where N.alert related elements will be stored with a jQuery selector string in the N.context.attr("ui").alert.container property of the Config (natural.config.js).
      *
      * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0401.html }
      */
     const alert = NU.alert;
     /**
-     * Button(N.button)은 context 옵션으로 지정된 "a, input[type=button], button" 요소를 사용하여 버튼을 만드는 UI 컴포넌트입니다.
+     * Button (N.button) is a UI component that creates buttons using the "a, input[type=button], button" elements specified by the context option.
      *
      * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0402.html }
      */
     const button = NU.button;
     /**
+     * Datepicker (N.datepicker) is a UI component that displays a calendar popup on the text input element specified by the context option, allowing you to select and input dates or months.
+     *
+     *  - You can easily use the Datepicker by declaring the "date" rule in the data-format attribute of the text input element and linking it with data-related components. Refer to the ["date", 4|6|8|10|12|14, "month"|"date"] rules in the [Declarative Options] tab of the Form, List, Grid menu, and the [Format Rule List] tab of the Formatter menu.
+     *
+     * > For descriptions of declarative options, refer to the declarative options section of the [API Documentation Guide](https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0001.html) menu.
      *
      * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0403.html }
      */
     const datepicker = NU.datepicker;
     /**
+     * Popup (N.popup) is a UI component that creates a layer popup using the internal element specified by the context option or the page specified by the url option.
+     *
+     *  - When a popup is created with the page specified by the url option, the generated popup's Controller object will have caller (the N.popup instance that called it) and opener (the parent page's Controller object that called it, passed as an option during popup creation) properties. You can use the opener to control the parent page or use the caller to close itself or send data to the parent Controller.
+     *
+     * > If the Popup dialog box is not displayed, and an error occurs, you need to specify the top-level HTML element where N.alert related HTML elements will be stored using a jQuery selector string in the N.context.attr("ui").alert.container property of the [Config(natural.config.js)](https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0102.html).
      *
      * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0404.html }
      */
     const popup = NU.popup;
     /**
+     *
      *
      * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0405.html }
      */
