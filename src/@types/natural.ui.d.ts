@@ -34,12 +34,12 @@ declare class NU {
         };
     };
     static alert: {
-        new(obj: NJS, msg: NU.alert.prototype.options, vars?: any): {
+        new(obj: N, msg: NU.alert.prototype.options, vars?: any): {
             options: {
                 obj: any;
                 context: any;
                 container: any;
-                msgContext: NJS;
+                msgContext: N;
                 msgContents: any;
                 msg: string;
                 vars: any;
@@ -112,7 +112,7 @@ declare class NU {
         new(obj: any, opts: any): {
             options: {
                 context: any;
-                contents: NJS;
+                contents: N;
                 monthonly: boolean;
                 focusin: boolean;
                 yearsPanelPosition: string;
@@ -571,7 +571,7 @@ declare class NU {
             obj: any;
             context: any;
             container: any;
-            msgContext: NJS;
+            msgContext: N;
             msgContents: any;
             msg: any;
             vars: any;
@@ -625,7 +625,7 @@ declare class NU {
     datepicker(opts: any): {
         options: {
             context: any;
-            contents: NJS;
+            contents: N;
             monthonly: boolean;
             focusin: boolean;
             yearsPanelPosition: string;

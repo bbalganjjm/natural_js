@@ -230,59 +230,95 @@ declare namespace N {
      */
     const popup = NU.popup;
     /**
+     * Tab(N.tab) is a UI component that creates a tab page view using a context option specified element composed of div>ul>li tags.
      *
+     * If a page specified with the url option is created as a popup, the Controller object of the created popup will have properties caller (the N.popup instance that called it) and opener (the parent page Controller object that called it, which must be passed as an option when creating the popup). You can use opener to control the parent page or use caller to close itself and send data to the parent Controller.
+     * By calling the cont method on an instance of N.tab, you can get the Controller objects of each tab page. For more details on the cont method, please refer to the [Function] tab.
      *
      * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0405.html }
      */
     const tab = NU.tab;
     /**
+     * Select(N.select) is a UI component that binds data to select, input[type=checkbox], input[type=radio] elements to create selection elements and extend the functionality of those controls.
      *
      * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0406.html }
      */
     const select = NU.select;
     /**
+     * Form(N.form) is a UI component that binds or creates single row data on an element (block elements like div, table) specified with the context option.
+     *  - N.form integrates with components of the Natural-DATA package to simplify the data formatting and input data validation processes. For more details, please refer to the [Declarative Option] tab.
+     *  - Data is bound when the property name (column name) of the bound data object matches the id attribute value of the element. Data formatting and validation are activated when data is bound to an element.
+     *  - If elements within the context elements of N.form are specified again as context for N.form or other data-related components (e.g., N.grid, N.list), errors may occur or data synchronization issues may arise. Ensure that context elements for N.form are specified without duplication or that column data is split to avoid data redundancy. For how to separate context elements or data, please refer to the example > Multi Form Binding menu source code.
+     *    > After adding to a form element created with add() and then calling bind(), or calling bind() after add() or bind() after bind(), the data synchronization logic for the form's input elements may have issues. In this case, be sure to execute the unbind method in between.
+     *    > ```
+     *    > var formInst = N([]).form().add();
+     *    > formInst.unbind().bind(0, [{ "col01" : "abcd" }])
+     *    > ```
+     *  - When the value of an input element is changed or the val method is used to change data, the rowStatus property is created, with "insert" for input, "update" for modification, and "delete" for deletion.
      *
      * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0407.html }
      */
     const form = NU.form;
     /**
+     * List(N.list) is a UI component that creates a data list in a single column format using ul>li elements specified with the context option.
+     *
+     *  - N.list integrates with components of the Natural-DATA package to simplify the data formatting and input data validation processes. For more details, please refer to the [Declarative Option] tab.
+     *  - Data is bound when the property name (column name) of the bound data object matches the id attribute value of the element. Data formatting and validation are activated when data is bound to an element.
+     *  - When changing the value of an input element or the val method is used to change data, the rowStatus property is created, with "insert" for input, "update" for modification, and "delete" for deletion.
      *
      * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0408.html }
      */
     const list = NU.list;
     /**
+     * Grid(N.grid) is a UI component that creates a data list in a multi-column format using table elements specified with the context option.
+     *  - N.grid integrates with components of the Natural-DATA package to simplify the data formatting and input data validation processes. For more details, please refer to the [Declarative Option] tab.
+     *  - Data is bound when the property name (column name) of the bound data object matches the id attribute value of the element. Data formatting and validation are activated when data is bound to an element.
+     *  - Provides two types of grids: fixed header and list type.
+     *  - When changing the value of an input element or the val method is used to change data, the rowStatus property is created. The rowStatus value is "insert" for input, "update" for modification, and "delete" for deletion.
+     *  - Provides many functions for handling list data, such as pasting Excel data, data filtering/sorting, etc. For more details on the provided functions, please refer to the option tab and function tab.
+     * > The width of the table element to be made into a grid must be specified, whether it is a fixed length (px) or a variable length (%).
      *
      * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0409.html }
      */
     const grid = NU.grid;
     /**
+     * Pagination(N.pagination) is a UI component that creates paging indexes for list data or overall row counts.
+     *  - The structure of the N.pagination context element consists of a div>ul>li>a hierarchy.
+     *  - The N.pagination component can generate parameters for SQL paging or paginate full list data of type array[json object].
      *
      * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0410.html }
      */
     const pagination = NU.pagination;
+
     /**
+     * Tree(N.tree) is a UI component that creates tree elements from hierarchical data.
+     *  - A checkbox can be added to the nodes for group selection.
      *
      * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0411.html }
      */
     const tree = NU.tree;
 
-    // === Natural-UI.Shell
-
+// === Natural-UI.Shell
     /**
+     * Notify(N.notify) is a UI component that displays global notifications at a specified position without requiring user confirmation.
+     * > The Alert(N.alert) is used for handling messages within the content area, while N.notify handles messages site-wide. Thus, N.alert component elements are created within each View element, and N.notify is created in the document.body element.
      *
      * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0501.html }
      */
     const notify = function (position: any, opts?: any) {
         return new NUS.notify(position, opts);
     }
+
     /**
-     *
-     * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0502.html }
+     * Creates a message notification.
      */
     notify.add = NUS.notify.add;
+
     /**
+     * Documents(N.docs) is a page container that displays menu pages based on Natural-JS in either MDI (Multi Document Interface) or SDI (Single Document Interface) structures.
+     *  - Options such as the maximum number of pages and the maximum number of state-maintained pages can be specified. It can also display a loading indicator for the requests and responses of N.comm.
      *
-     * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0401.html }
+     * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0502.html }
      */
     const docs = NUS.docs;
 }
