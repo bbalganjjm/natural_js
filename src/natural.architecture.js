@@ -27,17 +27,6 @@ export class NA {
     // Ajax
     static ajax = jQuery.ajax;
 
-    /**
-     * Communicator
-     *
-     * Communicator class for handling AJAX requests with filtering mechanisms.
-     * The class provides a structured way of initializing and making requests,
-     * including the application of various filters at different stages of the request lifecycle.
-     *
-     * @class
-     * @param {Object|String} obj - The options object or URL.
-     * @param {String} [url] - The request URL, if `obj` is not a string.
-     */
     static comm = class {
 
         constructor(obj, url) {

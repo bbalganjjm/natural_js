@@ -30,7 +30,7 @@ N([]).comm("http://localhost:8080").request.attr("asd", "").request.attr("asd", 
 N.context.attr("asdf");
 N.cont(N(".context"), {
     init: function (view, request) {
-
+        this.view = view;
     }
 });
 N(".context").cont({
