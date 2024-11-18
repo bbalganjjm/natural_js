@@ -368,17 +368,17 @@ export class NA {
             /**
              * get / set request attribute
              */
-            attr(name, obj_) {
+            attr(name, obj) {
                 if (name === undefined) {
                     return this.attrObj;
                 }
-                if (obj_ === undefined) {
+                if (obj === undefined) {
                     return this.attrObj !== undefined && this.attrObj[name] !== undefined ? this.attrObj[name] : undefined;
                 } else {
                     if (this.attrObj === undefined) {
                         this.attrObj = {};
                     }
-                    this.attrObj[name] = obj_;
+                    this.attrObj[name] = obj;
                     // this.obj is defined at NA.comm.request constructor;
                     return this.obj;
                 }
@@ -590,7 +590,18 @@ export class NA {
     // Context
     static context = class {
         static attrObj = {};
-        static attr = NA.comm.request.prototype.attr
+
+        static attr = function (name, obj) {
+            if (name !== undefined) {
+                if (obj !== undefined) {
+                    NA.context.attrObj[name] = obj;
+                } else {
+                    return NA.context.attrObj[name];
+                }
+            }
+
+            return this;
+        };
     };
 
     // Config
