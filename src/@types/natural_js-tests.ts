@@ -24,8 +24,14 @@ N([]).comm({
     dataType: NA.Request.DataType.JSON,
     enctype: NA.Request.Enctype.URLENCODED
 }).submit(function () {});
-N.comm(N([]), "https://localhost:8080").request.attr("asd", "").submit(function () {});
-N([]).comm("http://localhost:8080").request.attr("asd", "").request.attr("asd", "asd").submit(function () {});
+N.comm(N([]), "https://localhost:8080").request.attr("asd", "").error(function(xhr, textStatus, e, request, submitCallback) {
+
+}).submit(function () {
+
+});
+N([]).comm("http://localhost:8080").request.attr("asd", "").request.attr("asd", "asd").submit(function () {
+
+});
 
 N.context.attr("asdf");
 N.cont(N(".context"), {
