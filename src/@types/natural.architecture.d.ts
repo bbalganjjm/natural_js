@@ -11,8 +11,8 @@ declare class NA {
     static comm: Communicator;
     static cont: Controller;
     static context: {
-        attrObj: {};
-        attr: (name: any, obj_?: any) => any;
+        attrObj: object;
+        attr: (name: string, obj?: any) => any | this;
     };
     static config: {
         filterConfig: any;
@@ -74,16 +74,16 @@ declare class Communicator {
 
     xhr: JQuery.jqXHR;
     initFilterConfig: () => {
-        beforeInitFilters: any[];
-        afterInitFilters: any[];
-        beforeSendFilters: any[];
-        successFilters: any[];
-        errorFilters: any[];
-        completeFilters: any[];
+        beforeInitFilters: object[];
+        afterInitFilters: object[];
+        beforeSendFilters: object[];
+        successFilters: object[];
+        errorFilters: object[];
+        completeFilters: object[];
     };
-    resetFilterConfig: () => any;
-    submit: (callback: any) => any;
-    error: (callback: any) => any;
+    resetFilterConfig: () => Communicator;
+    submit: (callback: NA.Request.SubmitCallback) => JQuery.jqXHR | Communicator;
+    error: (callback: NA.Request.ErrorCallback) => Communicator;
 
     /**
      * The `Communicator.request` object is a request information object created each time `N.comm` is executed.
@@ -100,8 +100,8 @@ declare class Communicator {
 declare interface Request {
     new(obj: NJS, opts: NA.Request.Options): {
         options: NA.Request.Options;
-        attrObj: {};
-        obj: any;
+        attrObj: object;
+        obj: Communicator;
     };
 
     /**
@@ -132,17 +132,17 @@ declare interface Request {
      * ```
      *
      * @param {String} name - Parameter name
-     * @param {any} obj_ - Parameter data
+     * @param {any} obj - Parameter data
      *
-     * @return {Communicator} Returns the Communicator if both `name` and `obj_` are specified, and returns the passed parameter value if only `name` is specified.
+     * @return {Communicator} Returns the Communicator if both `name` and `obj` are specified, and returns the passed parameter value if only `name` is specified.
      */
-    attr(name: string, obj_: any): Communicator;
+    attr(name: string, obj: any): Communicator;
 
-    removeAttr(name: any): Communicator;
+    removeAttr(name: string): Communicator;
 
-    param(name: any): any;
+    param(name: string): object | string;
 
-    get(key: any): any;
+    get(key: string): any | NA.Request.Options;
 
     reload(callback: any): Communicator;
 }
@@ -150,13 +150,14 @@ declare interface Request {
 declare class Controller {
     constructor(obj: N<HTMLElement>, contObj: NA.Controller.Object): NA.Controller.Object;
 
-    trInit: (cont: any, request: any) => void;
+    trInit: (cont: NA.Controller.Object, request: Request) => void;
+
     aop: {
         pointcuts: {
             regexp: {
-                fn: (param: any, contFrag: any, fnChain: any) => boolean;
+                fn: (param: RegExp | string, contFrag: NA.Controller.Object, fnChain: string) => boolean;
             };
         };
-        wrap: (cont: any) => void;
+        wrap: (cont: NA.Controller.Object) => void;
     };
-};
+}

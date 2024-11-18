@@ -64,7 +64,6 @@ declare namespace NA.Request {
         PATCH = "PATCH"
     }
 
-
     /**
      * Options interface extending the JQuery.Ajax.AjaxSettingsBase interface for making `N.comm.request` with additional settings.
      */
@@ -161,6 +160,15 @@ declare namespace NA.Request {
          */
         target?: N
     }
+
+    type SubmitCallback = {
+        (this: Communicator, data?: object | object[] | Controller, request?: Request): void;
+    }
+
+    type ErrorCallback = {
+        (this: Communicator, xhr: JQuery.jqXHR, textStatus: Ajax.TextStatus, e: Error, request?: Request, submitCallback: SubmitCallback): void;
+    }
+
 }
 
 declare namespace NA.Controller {
