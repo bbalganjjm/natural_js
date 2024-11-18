@@ -78,7 +78,7 @@ declare class NUS {
                 };
                 attrObj: {};
                 obj: any;
-                attr(name: any, obj_: any): any;
+                attr(name: any, obj: any): any;
                 removeAttr(name: any): any;
                 param(name: any): any;
                 get(key: any): any;
@@ -184,7 +184,7 @@ declare class NUS {
             };
             attrObj: {};
             obj: any;
-            attr(name: any, obj_: any): any;
+            attr(name: any, obj: any): any;
             removeAttr(name: any): any;
             param(name: any): any;
             get(key: any): any;
