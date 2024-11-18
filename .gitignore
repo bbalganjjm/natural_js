@@ -5,3 +5,7 @@ Icon?
 Thumbs.db
 .settings/
 .idea/
+
+# node
+node_modules/
+package-lock.json
