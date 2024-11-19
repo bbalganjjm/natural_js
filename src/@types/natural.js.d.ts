@@ -71,7 +71,7 @@ declare namespace N {
      *
      * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0203.html }
      */
-    function comm(obj: N<object[]>, url: string | NA.Request.Options): Communicator {
+    function comm(obj: N<NC.JSONObject[]>, url: string | NA.Request.Options): Communicator {
         return new NA.comm(obj, url);
     }
 

@@ -12,10 +12,10 @@ declare class NA {
     static cont: Controller;
     static context: {
         attrObj: object;
-        attr: (name: string, obj?: any) => any | this;
+        attr(name: string, obj?: any): any | this;
     };
     static config: {
-        filterConfig: any;
+        filterConfig: NA.Config.FilterConfig;
     };
 
     /**
@@ -70,20 +70,13 @@ declare class NA {
 }
 
 declare class Communicator {
-    constructor(obj: N<object[]>, url: string | NA.Request.Options);
+    constructor(obj: N<NC.JSONObject[]>, url: string | NA.Request.Options);
 
     xhr: JQuery.jqXHR;
-    initFilterConfig: () => {
-        beforeInitFilters: object[];
-        afterInitFilters: object[];
-        beforeSendFilters: object[];
-        successFilters: object[];
-        errorFilters: object[];
-        completeFilters: object[];
-    };
-    resetFilterConfig: () => Communicator;
-    submit: (callback: NA.Request.SubmitCallback) => JQuery.jqXHR | Communicator;
-    error: (callback: NA.Request.ErrorCallback) => Communicator;
+    initFilterConfig(): NA.Config.FilterConfig;
+    resetFilterConfig(): Communicator;
+    submit(callback: NA.Request.SubmitCallback): JQuery.jqXHR | Communicator;
+    error(callback: NA.Request.ErrorCallback): Communicator;
 
     /**
      * The `Communicator.request` object is a request information object created each time `N.comm` is executed.
@@ -150,14 +143,14 @@ declare interface Request {
 declare class Controller {
     constructor(obj: N<HTMLElement>, contObj: NA.Controller.Object): NA.Controller.Object;
 
-    trInit: (cont: NA.Controller.Object, request: Request) => void;
+    trInit(cont: NA.Controller.Object, request: Request): void;
 
     aop: {
         pointcuts: {
             regexp: {
-                fn: (param: RegExp | string, contFrag: NA.Controller.Object, fnChain: string) => boolean;
+                fn(param: RegExp | string, contFrag: NA.Controller.Object, fnChain: string): boolean;
             };
         };
-        wrap: (cont: NA.Controller.Object) => void;
+        wrap(cont: NA.Controller.Object): void;
     };
 }

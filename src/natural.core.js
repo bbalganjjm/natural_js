@@ -1588,8 +1588,7 @@ export class NC {
      * authored by Svend Tofte <www.svendtofte.com>
      * the code is in the public domain
      *
-     * see http://www.svendtofte.com/javascript/javascript-date-string-formatting/
-     * and http://www.php.net/date
+     * @see http://www.svendtofte.com/javascript/javascript-date-string-formatting/ and http://www.php.net/date
      *
      * thanks to
      * - Daniel Berlin <mail@daniel-berlin.de>,
@@ -1611,10 +1610,6 @@ export class NC {
      *
      * unsupported (as compared to date in PHP 5.1.3)
      * T, e, o
-     *
-     * declare interface Date {
-     *     formatDate(input: string, time: boolean): string;
-     * }
      */
     Date.prototype.formatDate = function(input, time) {
         const daysLong = [ "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ];

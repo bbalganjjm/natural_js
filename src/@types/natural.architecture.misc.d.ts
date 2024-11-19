@@ -222,3 +222,14 @@ declare namespace NA.Controller {
         opener?: Object;
     }
 }
+
+declare namespace NA.Config {
+    type FilterConfig = {
+        beforeInitFilters: object[];
+        afterInitFilters: object[];
+        beforeSendFilters: object[];
+        successFilters: object[];
+        errorFilters: object[];
+        completeFilters: object[];
+    };
+}

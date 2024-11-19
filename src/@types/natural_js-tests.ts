@@ -1,8 +1,24 @@
+N(".button").remove_(1, 2);
+N(".button").tpBind("click", function (e: Event) {});
+N(".button").events("click", "grid");
 N.locale("en-US");
+N(".button").on("click", function (e) {
+    N.event.disable(e);
+    N.event.isNumberRelatedKeys(e);
+});
+NC.serialExecute(function (a: any) {
+
+}, function (b: any, c: any) {
+
+});
+N.gc.full();
+N.gc.ds();
+N.gc.minimum();
 N.string.trimToZero("");
 N.string.rpad("Hello", 10, "World");
-N.gc.ds();
-N.event.disable(Event);
+N.element.toOpts(N("div"));
+N.browser.scrollbarWidth();
+N.browser.cookie("test", "test cookie value", 1, "localhost");
 
 const selector = N("asdf").selector;
 
