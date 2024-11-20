@@ -1,9 +1,5 @@
 declare class NA {
-    /**
-     * Performs asynchronous HTTP (Ajax) requests in `N.comm`.
-     *
-     * @see {@link https://api.jquery.com/jquery.ajax/#jQuery-ajax-settings }
-     */
+
     static ajax: {
         (url: string, settings?: JQuery.AjaxSettings): JQuery.jqXHR;
         (settings?: JQuery.AjaxSettings): JQuery.jqXHR;
@@ -145,6 +141,9 @@ declare class Controller {
 
     trInit(cont: NA.Controller.Object, request: Request): void;
 
+    /**
+     * Aspect-oriented programming(AOP) processing class.
+     */
     aop: {
         pointcuts: {
             regexp: {

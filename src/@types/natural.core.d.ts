@@ -1,5 +1,6 @@
-import EventObject = NC.EventObject;
-
+/**
+ * The NC class is a CORE package of Natural-JS that provides various utilities and methods for collection manipulation, event binding, instance handling, value management, event retrieval, locale setting, etc.
+ */
 declare class NC {
 
     /**
@@ -169,7 +170,10 @@ declare class NC {
      */
     static error(msg: string, e?: Error): Error;
     /**
-     * Check object type
+     * Identifies the type of an object.
+     *
+     * @param {any} obj - The object to identify the type of.
+     * @return {NC.ObjectType | string} The identified type of the object, either as an NC.ObjectType or a string.
      */
     static type(obj: any): NC.ObjectType | string;
     /**
@@ -249,7 +253,7 @@ declare class NC {
     static serialExecute: (...args: T) => JQuery.Deferred[];
 
     /**
-     * Natural-JS resource garbage collector
+     * Provides methods to perform different levels of garbage collection.
      */
     static gc: {
         /**
@@ -272,7 +276,7 @@ declare class NC {
         ds(): void;
     };
     /**
-     * NC.string package
+     * Provides utility functions for processing and manipulating strings.
      */
     static string: {
         /**
@@ -397,7 +401,7 @@ declare class NC {
         trimToVal(str: string, val: string): string;
     };
     /**
-     * NC.date package
+     * Provides various utilities for handling and manipulating dates.
      */
     static date: {
         /**
@@ -488,7 +492,7 @@ declare class NC {
         dateList(year: number, month: number): [NC.JSONObject[]];
     };
     /**
-     * NC.element package
+     * Provides utility methods for working with HTML elements, including converting data attributes to options objects, creating JSON data objects, defining data change effects, and calculating maximum z-index.
      */
     static element: {
         /**
@@ -537,7 +541,7 @@ declare class NC {
         maxZindex(ele: N<HTMLElement[]>): number;
     };
     /**
-     * NC.browser package
+     * Provides various utility functions and properties related to browser operation.
      */
     static browser: {
         /**
@@ -597,7 +601,7 @@ declare class NC {
         scrollbarWidth: () => number;
     };
     /**
-     * NC.message package
+     * Provides various utilities for handling messages.
      */
     static message: {
         /**
@@ -637,7 +641,7 @@ declare class NC {
         get(resource: NC.MessageResourceObj, key: string, vars?: string[]): void;
     };
     /**
-     * NC.array package
+     * Array utilities for various array operations.
      */
     static array: {
         /**
@@ -651,7 +655,7 @@ declare class NC {
         deduplicate(arr: [], key?: string): [];
     };
     /**
-     * NC.json package
+     * Provides utilities for processing JSON data.
      */
     static json: {
         mapFromKeys(obj: object | object[]): object | object[];
@@ -677,6 +681,9 @@ declare class NC {
          */
         format(oData: object | object[] | string, sIndent: number): string | null; // Formats the json object beautifully.
     };
+    /**
+     * Provides utilities for processing event.
+     */
     static event: {
         /**
          * Checks if the provided keyboard event is related to number input keys.
@@ -726,6 +733,8 @@ declare class NC {
         whichTransitionEvent(ele: N<HTMLElement[]>): string | "nothing";
     };
     /**
+     * Used in N.formatter to process user formats.
+     *
      * @reference Mask JavaScript API(http://www.pengoworks.com/workshop/js/mask/, dswitzer@pengoworks.com)
      */
     static mask: {
@@ -743,6 +752,9 @@ declare class NC {
 
 }
 
+/**
+ * Extends the JavaScript Date object to provide additional utility functions for date manipulation and formatting.
+ */
 declare interface Date {
     /**
      * Returns a string created with the date of the Date object in the specified format.
