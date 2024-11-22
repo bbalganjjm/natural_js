@@ -72,7 +72,7 @@ declare namespace N {
      *
      * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0203.html }
      */
-    function comm(obj: NJS, url: string | NA.Request.Options): Communicator {
+    function comm(obj: NJS, url: string | NA.Request.Options): NA.Communicator {
         return new NA.comm(obj, url);
     }
 
@@ -167,21 +167,7 @@ declare namespace N {
      * DataSync(N.ds) is a module in Natural-JS that handles two-way data binding.
      */
     const ds = ND.ds;
-    /**
-     * Formatter(N.formatter) is a library that formats an input data set (array of JSON objects) and returns the formatted data set.
-     *  - Instead of using a ruleset, you can pass as an argument an element that wraps elements with formatting rules declared in the data-format attribute. This will display the formatted string in those elements. If the element is a text input element, it will display the original string of the data when the cursor focuses in (focusin event), and display the formatted string when the cursor focuses out (focusout event).
-     *  - You can also format on a per-string basis, rather than using a dataset.
-     *
-     * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0301.html }
-     */
     const formatter = ND.formatter;
-    /**
-     * Validator (N.validator) is a library that validates an input data set (array of JSON objects) and returns the result data set.
-     *  - Instead of a ruleset, if you pass an element that wraps input elements with validation rules declared in the data-validate attribute, it will validate the value entered in the element when the cursor focusout occurs on the input element. If validation fails, an error message is displayed in the form of a tooltip near the input element.
-     *  - Validation can also be performed on strings, not just datasets.
-     *
-     * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0302.html }
-     */
     const validator = ND.validator;
     /**
      * The Natural-DATA library provides methods and functions for sorting, filtering, and refining data of type array[json object].

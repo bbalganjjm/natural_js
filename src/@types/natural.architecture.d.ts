@@ -4,8 +4,8 @@ declare class NA {
         (url: string, settings?: JQuery.AjaxSettings): JQuery.jqXHR;
         (settings?: JQuery.AjaxSettings): JQuery.jqXHR;
     };
-    static comm: Communicator;
-    static cont: Controller;
+    static comm: NA.Communicator;
+    static cont: NA.Controller;
     static context: {
         attrObj: object;
         attr(name: string, obj?: any): any | this;
@@ -19,9 +19,9 @@ declare class NA {
      *
      * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0203.html }
      */
-    comm(url: string | NA.Request.Options): Communicator;
+    comm(url: string | NA.Request.Options): NA.Communicator;
 
-    request(): Request;
+    request(): NA.Request;
 
     /**
      * N.cont executes the init function of the Controller object and returns the Controller object.
@@ -62,94 +62,98 @@ declare class NA {
      * ```
      * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0201.html }
      */
-    cont(ontObj: NA.Controller.Object): Controller;
+    cont(ontObj: NA.Controller.Object): NA.Controller;
 }
 
-declare class Communicator {
-    constructor(obj: NJS, url: string | NA.Request.Options);
+declare namespace NA {
 
-    xhr: JQuery.jqXHR;
-    initFilterConfig(): NA.Config.FilterConfig;
-    resetFilterConfig(): Communicator;
-    submit(callback: NA.Request.SubmitCallback): JQuery.jqXHR | Communicator;
-    error(callback: NA.Request.ErrorCallback): Communicator;
+    class Communicator {
+        new(obj: NJS, url: string | NA.Request.Options);
 
-    /**
-     * The `Communicator.request` object is a request information object created each time `N.comm` is executed.
-     *
-     * The options of the `N.comm()` function are stored in the `Communicator.request.options` object and are delivered as headers or parameters of the server request.
-     *
-     * When requesting an HTML page, the request object is passed as the second argument of the `init` function of the Controller object or as a member variable (`this.request`) of the Controller object. You can check the request information or retrieve the request parameter object using the provided request object.
-     *
-     * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0204.html }
-     */
-    request = new Request;
-}
+        xhr: JQuery.jqXHR;
+        initFilterConfig(): NA.Config.FilterConfig;
+        resetFilterConfig(): NA.Communicator;
+        submit(callback: NA.Request.SubmitCallback): JQuery.jqXHR | NA.Communicator;
+        error(callback: NA.Request.ErrorCallback): NA.Communicator;
 
-declare interface Request {
-    new(obj: NJS, opts: NA.Request.Options): {
-        options: NA.Request.Options;
-        attrObj: object;
-        obj: Communicator;
-    };
+        /**
+         * The `Communicator.request` object is a request information object created each time `N.comm` is executed.
+         *
+         * The options of the `N.comm()` function are stored in the `Communicator.request.options` object and are delivered as headers or parameters of the server request.
+         *
+         * When requesting an HTML page, the request object is passed as the second argument of the `init` function of the Controller object or as a member variable (`this.request`) of the Controller object. You can check the request information or retrieve the request parameter object using the provided request object.
+         *
+         * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0204.html }
+         */
+        request = new NA.Request;
+    }
 
-    /**
-     * Specifies parameters to pass to the page to be loaded or retrieves the passed data.
-     *
-     * If the `attr` method has two arguments, it works as a setter, and if it has one argument, it works as a getter.
-     *
-     * Sending data:
-     * ```
-     * N(".view").cont({
-     *     init: function(view, request) {
-     *         N("#section").comm("page.html")
-     *             .request.attr("data1", { data: ["1", "2"] })
-     *             .request.attr("data2", ["3", "4"])
-     *                 .submit();
-     *     }
-     * });
-     * ```
-     *
-     * Retrieving data from the loaded page:
-     * ```
-     * N(".view").cont({
-     *     init: function(view, request) {
-     *         var data1 = request.attr("data1"); // { data: ["1", "2"] }
-     *         var data2 = request.attr("data2"); // ["3", "4"]
-     *     }
-     * });
-     * ```
-     *
-     * @param {String} name - Parameter name
-     * @param {any} obj - Parameter data
-     *
-     * @return {Communicator} Returns the Communicator if both `name` and `obj` are specified, and returns the passed parameter value if only `name` is specified.
-     */
-    attr(name: string, obj: any): Communicator;
-
-    removeAttr(name: string): Communicator;
-
-    param(name: string): object | string;
-
-    get(key: string): any | NA.Request.Options;
-
-    reload(callback: any): Communicator;
-}
-
-declare class Controller {
-    constructor(obj: N<HTMLElement>, contObj: NA.Controller.Object): NA.Controller.Object;
-
-    trInit(cont: NA.Controller.Object, request: Request): void;
-
-    /**
-     * Aspect-oriented programming(AOP) processing class.
-     */
-    aop: {
-        pointcuts: {
-            regexp: {
-                fn(param: RegExp | string, contFrag: NA.Controller.Object, fnChain: string): boolean;
-            };
+    interface Request {
+        new(obj: NJS, opts: NA.Request.Options): {
+            options: NA.Request.Options;
+            attrObj: object;
+            obj: NA.Communicator;
         };
-        wrap(cont: NA.Controller.Object): void;
-    };
+
+        /**
+         * Specifies parameters to pass to the page to be loaded or retrieves the passed data.
+         *
+         * If the `attr` method has two arguments, it works as a setter, and if it has one argument, it works as a getter.
+         *
+         * Sending data:
+         * ```
+         * N(".view").cont({
+         *     init: function(view, request) {
+         *         N("#section").comm("page.html")
+         *             .request.attr("data1", { data: ["1", "2"] })
+         *             .request.attr("data2", ["3", "4"])
+         *                 .submit();
+         *     }
+         * });
+         * ```
+         *
+         * Retrieving data from the loaded page:
+         * ```
+         * N(".view").cont({
+         *     init: function(view, request) {
+         *         var data1 = request.attr("data1"); // { data: ["1", "2"] }
+         *         var data2 = request.attr("data2"); // ["3", "4"]
+         *     }
+         * });
+         * ```
+         *
+         * @param {String} name - Parameter name
+         * @param {any} obj - Parameter data
+         *
+         * @return {NA.Communicator} Returns the Communicator if both `name` and `obj` are specified, and returns the passed parameter value if only `name` is specified.
+         */
+        attr(name: string, obj: any): NA.Communicator;
+
+        removeAttr(name: string): NA.Communicator;
+
+        param(name: string): object | string;
+
+        get(key: string): any | NA.Request.Options;
+
+        reload(callback: any): NA.Communicator;
+    }
+
+    class Controller {
+        new(obj: N<HTMLElement>, contObj: NA.Controller.Object): NA.Controller.Object;
+
+        trInit(cont: NA.Controller.Object, request: NA.Request): void;
+
+        /**
+         * Aspect-oriented programming(AOP) processing class.
+         */
+        aop: {
+            pointcuts: {
+                regexp: {
+                    fn(param: RegExp | string, contFrag: NA.Controller.Object, fnChain: string): boolean;
+                };
+            };
+            wrap(cont: NA.Controller.Object): void;
+        };
+    }
+
 }

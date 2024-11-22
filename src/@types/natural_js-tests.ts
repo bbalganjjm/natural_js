@@ -1,3 +1,5 @@
+import SubmitCallback = NA.Request.SubmitCallback;
+
 N(".button").remove_(1, 2);
 N(".button").tpBind("click", function (e: Event) {});
 N(".button").events("click", "grid");
@@ -19,6 +21,7 @@ N.string.rpad("Hello", 10, "World");
 N.element.toOpts(N("div"));
 N.browser.scrollbarWidth();
 N.browser.cookie("test", "test cookie value", 1, "localhost");
+new Date().formatDate("Y-m-d");
 
 const selector = N("asdf").selector;
 
@@ -40,7 +43,8 @@ N([]).comm({
     dataType: NA.Request.DataType.JSON,
     enctype: NA.Request.Enctype.URLENCODED
 }).submit(function () {});
-N.comm(N([]), "https://localhost:8080").request.attr("asd", "").error(function(xhr, textStatus, e, request, submitCallback) {
+// FIXME
+N.comm(N([]), "https://localhost:8080").request.attr("asd", "").error(function(xhr: JQuery.jqXHR, textStatus: JQuery.Ajax.TextStatus, e: Error, request?: NA.Request, submitCallback: NA.Request.SubmitCallback) {
 
 }).submit(function () {
 
@@ -91,12 +95,20 @@ N([{}]).validator({
 N.validator.rrn("asf");
 N([]).datasort("key", false);
 
-N(window).alert({}).show();
+N(window).alert("Hello").show();
 new N.alert(N(window), {
     msg: "Hello"
 }).show();
+
+N(".button").button({
+    color: "primary_container"
+}).disable();
+new N.button(N(".button"), {
+    color: "primary_container"
+}).disable();
+
 N([]).pagination({}).bind();
-new N.pagination([], {});
+new N.pagination([], {}).bind();
 
 N({}).notify({}).add("asd");
 N.notify({}, {}).add("asd");

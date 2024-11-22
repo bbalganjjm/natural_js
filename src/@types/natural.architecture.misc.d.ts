@@ -162,11 +162,11 @@ declare namespace NA.Request {
     }
 
     type SubmitCallback = {
-        (this: Communicator, data?: object | object[] | Controller, request?: Request): void;
+        (this: NA.Communicator, data?: object | object[] | NA.Controller, request?: NA.Request): void;
     }
 
     type ErrorCallback = {
-        (this: Communicator, xhr: JQuery.jqXHR, textStatus: Ajax.TextStatus, e: Error, request?: Request, submitCallback: SubmitCallback): void;
+        (this: NA.Communicator, xhr: JQuery.jqXHR, textStatus: Ajax.TextStatus, e: Error, request?: NA.Request, submitCallback: SubmitCallback): void;
     }
 
 }
@@ -182,10 +182,10 @@ declare namespace NA.Controller {
      * ```
      *
      * @param {N<HTMLElement>} view - View element.
-     * @param {Request} request - Instance of the Communicator.request
+     * @param {NA.Request} request - Instance of the Communicator.request
      */
     type InitFunction = {
-        (this: Object, view: N<HTMLElement>, request: Request): void
+        (this: Object, view: N<HTMLElement>, request: NA.Request): void
     }
 
     type Object = {
@@ -206,7 +206,7 @@ declare namespace NA.Controller {
          *
          * > Same as the second argument of the init function.
          */
-        request?: Request;
+        request?: NA.Request;
         /**
          * If the popup page is called by N.popup or N.tab components, this is the instance of the calling component.
          * With this instance, you can control the parent page.

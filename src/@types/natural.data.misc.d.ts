@@ -78,11 +78,11 @@ declare namespace ND {
         [key: string]: [ValidationRules, ...NC.Primitive][];
     };
 
-    type FormatObject = {
+    type FormatResultObject = {
         [key: string]: string;
     };
 
-    type ValidateObject = {
+    type ValidateResultObject = {
         [key: string]: [{
             rule: string,
             result: boolean;
