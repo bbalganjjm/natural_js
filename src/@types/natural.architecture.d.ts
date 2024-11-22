@@ -66,7 +66,7 @@ declare class NA {
 }
 
 declare class Communicator {
-    constructor(obj: N<NC.JSONObject[]>, url: string | NA.Request.Options);
+    constructor(obj: NJS, url: string | NA.Request.Options);
 
     xhr: JQuery.jqXHR;
     initFilterConfig(): NA.Config.FilterConfig;

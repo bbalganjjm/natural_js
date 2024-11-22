@@ -29,6 +29,7 @@ declare interface NJS extends JQuery, NC, NA, ND, NU, NUS {
 declare namespace N {
     // === Natural-CORE
 
+    import JSONObject = NC.JSONObject;
     const locale = NC.locale;
     const debug = NC.debug;
     const log = NC.log;
@@ -71,7 +72,7 @@ declare namespace N {
      *
      * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0203.html }
      */
-    function comm(obj: N<NC.JSONObject[]>, url: string | NA.Request.Options): Communicator {
+    function comm(obj: NJS, url: string | NA.Request.Options): Communicator {
         return new NA.comm(obj, url);
     }
 
@@ -114,7 +115,7 @@ declare namespace N {
      * ```
      * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0201.html }
      */
-    function cont(obj: N<HTMLElement>, contObj: NA.Controller.Object): NA.Controller.Object {
+    function cont(obj: NJS, contObj: NA.Controller.Object): NA.Controller.Object {
         return new NA.cont(obj, contObj);
     }
 

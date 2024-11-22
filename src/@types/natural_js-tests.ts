@@ -61,9 +61,35 @@ N(".context").cont({
     }
 });
 
+N.ds.instance(class {}, true)
+    .remove()
+    .notify(1, "");
+
+new N.formatter(N([{}]), {
+    "numeric" : [[ND.FormatRules.TRIMTOEMPTY], [ND.FormatRules.NUMERIC, "#,###.##0000"]],
+    "generic" : [[ND.FormatRules.TRIMTOEMPTY], [ND.FormatRules.GENERIC, "@@ABCD"]],
+    "limit" : [[ND.FormatRules.TRIMTOEMPTY], [ND.FormatRules.LIMIT, "13", "..."]],
+    "etc" : [[ND.FormatRules.DATE, 12]]
+}).format(1);
+N([{}]).formatter({
+    "numeric" : [[ND.FormatRules.TRIMTOEMPTY], [ND.FormatRules.NUMERIC, "#,###.##0000"]],
+    "generic" : [[ND.FormatRules.TRIMTOEMPTY], [ND.FormatRules.GENERIC, "@@ABCD"]],
+    "limit" : [[ND.FormatRules.TRIMTOEMPTY], [ND.FormatRules.LIMIT, "13", "..."]],
+    "etc" : [[ND.FormatRules.DATE, 12]]
+}).format(1);
 N.formatter.rpad("asf", []);
+new N.validator(N([{}]), {
+    "numeric" : [[ND.ValidationRules.REQUIRED], [ND.ValidationRules.COMMAS_INTEGER]],
+    "generic" : [[ND.ValidationRules.REQUIRED], [ND.ValidationRules.KOREAN]],
+    "limit" : [[ND.ValidationRules.REQUIRED], [ND.ValidationRules.ALPHABET]]
+}).validate(1);
+N([{}]).validator({
+    "numeric" : [[ND.ValidationRules.REQUIRED], [ND.ValidationRules.COMMAS_INTEGER]],
+    "generic" : [[ND.ValidationRules.REQUIRED], [ND.ValidationRules.KOREAN]],
+    "limit" : [[ND.ValidationRules.REQUIRED], [ND.ValidationRules.ALPHABET]]
+}).validate(1);
 N.validator.rrn("asf");
-N([]).datasort([], false);
+N([]).datasort("key", false);
 
 N(window).alert({}).show();
 new N.alert(N(window), {

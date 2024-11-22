@@ -1,14 +1,9 @@
 declare namespace NC {
 
-    type InstanceCallback = {
-        (this: T, instanceName: string, instance: T): void;
-    }
-    type ValsCallback = {
-        (this: NHTMLElement, index: number, selEle: NHTMLElement): void;
-    }
-    type EventObject = object[]
-    type EventsObject = {
-        [key: string]: EventObject;
+    type Primitive = string | number | boolean | null;
+    type JSONValue = Primitive | JSONObject | JSONValue[];
+    type JSONObject = {
+        [key: string]: JSONValue;
     }
 
     type Date = {
@@ -16,16 +11,23 @@ declare namespace NC {
         format: string;
     }
 
-    type Primitive = string | number | boolean | null;
-    type JSONValue = Primitive | JSONObject | JSONValue[];
-    type JSONObject = {
-        [key: string]: JSONValue;
+    type EventObject = object[]
+    type EventsObject = {
+        [key: string]: EventObject;
     }
 
     type RuleObj = {
         id: {
             ruleName: [[string, ...[]]];
         }
+    }
+
+
+    type InstanceCallback = {
+        (this: T, instanceName: string, instance: T): void;
+    }
+    type ValsCallback = {
+        (this: NJS, index: number, selEle: NJS): void;
     }
 
     /**

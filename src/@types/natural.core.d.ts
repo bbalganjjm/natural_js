@@ -102,10 +102,10 @@ declare class NC {
      *  - this : The selected option element
      *  - arguments[0] : The index of the selected option element
      *  - arguments[1] : The selected option element
-     * @return {string|string[]|N<HTMLElement[]>|this} If the vals argument is not provided, the selected value is returned. If the vals argument is specified, the elements that match the specified value are selected.
+     * @return {string|string[]|NJS|this} If the vals argument is not provided, the selected value is returned. If the vals argument is specified, the elements that match the specified value are selected.
      * If only one is selected, a value of type string is returned, and if two or more are selected, the values are returned in an array.
      */
-    vals(vals?: string | string[] | NC.ValsCallback): string | string[] | N<HTMLElement[]> | this;
+    vals(vals?: string | string[] | NC.ValsCallback): string | string[] | NJS | this;
     /**
      * Returns the events bound to the selected element.
      *
@@ -498,18 +498,18 @@ declare class NC {
         /**
          * Converts an object string defined by the `data-opts` attribute value of an HTML element to an options object.
          *
-         * @param {N<HTMLElement[]>} ele - HTML elements to be converted.
+         * @param {NJS} ele - HTML elements to be converted.
          * @return {string} Options object.
          */
-        toOpts(ele: N<HTMLElement[]>): string;
+        toOpts(ele: NJS): string;
         /**
          * Converts an array object string defined by the `data-format` or `data-validate` attribute value of an HTML element to an rule array object.
          *
-         * @param {N<HTMLElement[]>} ele - HTML elements to be converted.
+         * @param {NJS} ele - HTML elements to be converted.
          * @param {"format" | "validate"} ruleset - The type of rules to be applied, either formatting or validation.
          * @return {NC.RuleObj} - The resulting rule object containing the applied rules.
          */
-        toRules(ele: N<HTMLElement[]>, ruleset: "format" | "validate"): NC.RuleObj;
+        toRules(ele: NJS, ruleset: "format" | "validate"): NC.RuleObj;
         /**
          * Creates a JSON Data object with the id and value attributes of the specified input elements.
          *
@@ -520,25 +520,25 @@ declare class NC {
          * var data = N.element.toData($("#box").find(":input"));
          * ```
          *
-         * @param {N<HTMLElement[]>} eles - N object containing only input select elements.
+         * @param {NJS} eles - N object containing only input select elements.
          * @return {JSONObject} JSON data object with id and value pairs of the input elements.
          */
-        toData(eles: N<HTMLElement[]>): JSONObject;
+        toData(eles: NJS): JSONObject;
 
         /**
          * The effect of changes displayed on elements when data is synchronized by ND.ds is defined.
          *
-         * @param {N<HTMLElement[]>} eles - HTML elements on which the change effect will be displayed.
+         * @param {NJS} eles - HTML elements on which the change effect will be displayed.
          * @return {void} This method does not return a value.
          */
-        dataChanged(eles: N<HTMLElement[]>): void;
+        dataChanged(eles: NJS): void;
         /**
          * Calculates the maximum z-index value among a collection of HTML elements.
          *
-         * @param {N<HTMLElement[]>} ele - A collection of HTML elements to evaluate.
+         * @param {NJS} ele - A collection of HTML elements to evaluate.
          * @return {number} The highest z-index value found within the collection of elements.
          */
-        maxZindex(ele: N<HTMLElement[]>): number;
+        maxZindex(ele: NJS): number;
     };
     /**
      * Provides various utility functions and properties related to browser operation.
@@ -703,34 +703,34 @@ declare class NC {
         /**
          * Locks the window scrolling functionality to specific elements.
          *
-         * @param {N<HTMLElement[]>} ele - HTML element that should lock window scrolling.
+         * @param {NJS} ele - HTML element that should lock window scrolling.
          * @return {void} This method does not return a value.
          */
-        windowScrollLock(ele: N<HTMLElement[]>): void;
+        windowScrollLock(ele: NJS): void;
         /**
          * Retrieves the maximum duration of CSS animations or transitions applied to any of the given HTMLElements.
          *
-         * @param {N<HTMLElement[]>} ele - A wrapped or unwrapped array of HTMLElements to analyze for CSS durations.
+         * @param {NJS} ele - A wrapped or unwrapped array of HTMLElements to analyze for CSS durations.
          * @param {string} css - The CSS property name (e.g., 'animation', 'transition') to inspect for durations.
          * @return {number} The maximum duration in milliseconds among all specified CSS properties on the provided elements.
          */
-        getMaxDuration(ele: N<HTMLElement[]>, css: string): number;
+        getMaxDuration(ele: NJS, css: string): number;
         /**
          * Detects the end event name of a CSS animation.
          * > Referenced the code from [David Walsh](http://davidwalsh.name/css-animation-callback).
          *
-         * @param {N<HTMLElement[]>} ele - The HTML elements to check for animation events.
+         * @param {NJS} ele - The HTML elements to check for animation events.
          * @return {string | "nothing"} The name of the animation event, or "nothing" if no event is found.
          */
-        whichAnimationEvent(ele: N<HTMLElement[]>): string | "nothing"; // Detect the end event name of CSS animations,
+        whichAnimationEvent(ele: NJS): string | "nothing"; // Detect the end event name of CSS animations,
         /**
          * Detects the end event name of a CSS transition.
          * > Referenced the code from [David Walsh](http://davidwalsh.name/css-animation-callback).
          *
-         * @param {N<HTMLElement[]>} ele - The HTML elements to check for transition events.
+         * @param {NJS} ele - The HTML elements to check for transition events.
          * @return {string | "nothing"} The name of the animation event, or "nothing" if no event is found.
          */
-        whichTransitionEvent(ele: N<HTMLElement[]>): string | "nothing";
+        whichTransitionEvent(ele: NJS): string | "nothing";
     };
     /**
      * Used in N.formatter to process user formats.

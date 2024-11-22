@@ -200,7 +200,7 @@ declare namespace NA.Controller {
          *
          * > Same as the first argument of the init function.
          */
-        view?: N<NHTMLElement>;
+        view?: NJS;
         /**
          * Instance of the Communicator.request object.
          *
