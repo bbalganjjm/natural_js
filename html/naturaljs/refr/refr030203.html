@@ -19,7 +19,7 @@
             <td>
                 <p lang="ko_KR">N.validator 인스턴스를 생성합니다.</p>
                 <p lang="en_US">Create an N.validator instance.</p>
-                <pre><code>var validator = N.validator(data, rules|context);</code></pre>
+                <pre><code>var validator = new N.validator(data, rules|context);</code></pre>
             </td>
         </tr>
         <tr>
@@ -45,17 +45,17 @@
 		                <p lang="ko_KR">룰들을 객체 옵션으로 지정할 경우 : </p>
                         <p lang="en_US">If specifying rules as object options : </p>
 		                <pre lang="ko_KR"><code>// { "컬럼속성명" : [["룰명", arguments[0], arguments[1]... ] }
-N.validator(data, {
+new N.validator(data, {
     &quot;numeric&quot; : [[&quot;required&quot;], [&quot;integer+commas&quot;]],
     &quot;generic&quot; : [[&quot;required&quot;], [&quot;korean&quot;]],
     &quot;limit&quot; : [[&quot;required&quot;], [&quot;alphabet&quot;]]
-}.validate();</code></pre>
+}).validate();</code></pre>
                         <pre lang="en_US"><code>// { "Column property name" : [["Rule name", arguments[0], arguments[1]... ] }
-N.validator(data, {
+new N.validator(data, {
     &quot;numeric&quot; : [[&quot;required&quot;], [&quot;integer+commas&quot;]],
     &quot;generic&quot; : [[&quot;required&quot;], [&quot;korean&quot;]],
     &quot;limit&quot; : [[&quot;required&quot;], [&quot;alphabet&quot;]]
-}.validate();</code></pre>
+}).validate();</code></pre>
                     </li>
                     <li>
 		                <p lang="ko_KR">data-validate 속성이 정의된 요소가 포함된 context 요소를 jQuery object로 지정할 경우 : </p>

@@ -99,15 +99,15 @@ DataSync는 컴포넌트나 라이브러리에 의해 변경된 데이터를 실
 
 ### Formatter
 
-[Formatter(N.formatter)](#html/naturaljs/refr/refr0301.html)는 입력 한 데이터 셋(array[json object]을 포맷팅 하고 포맷팅 된 데이터 셋을 반환해 주는 라이브러리입니다.
+[Formatter(N.formatter)](#html/naturaljs/refr/refr0301.html)는 입력 한 데이터 셋(json object array)을 포맷팅 하고 포맷팅 된 데이터 셋을 반환해 주는 라이브러리입니다.
 
 ### Validator
 
-[Validator(N.validator)](#html/naturaljs/refr/refr0302.html)는 입력 한 데이터 셋(array[json object]에 대한 유효성을 검사하고 검사 결과 데이터 셋을 반환해 주는 라이브러리입니다.
+[Validator(N.validator)](#html/naturaljs/refr/refr0302.html)는 입력 한 데이터 셋(json object array)에 대한 유효성을 검사하고 검사 결과 데이터 셋을 반환해 주는 라이브러리입니다.
 
 ### Natural-DATA Library
 
-[Natural-DATA Library](#html/naturaljs/refr/refr0303.html)는 array[json object] 유형의 데이터를 정렬, 필터링 및 정제하기 위한 메서드 및 함수를 제공합니다.
+[Natural-DATA Library](#html/naturaljs/refr/refr0303.html)는 json object array 유형의 데이터를 정렬, 필터링 및 정제하기 위한 메서드 및 함수를 제공합니다.
 
 
 ## Natural-UI

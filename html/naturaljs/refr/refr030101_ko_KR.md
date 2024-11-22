@@ -1,7 +1,7 @@
 개요
 ===
 
-Formatter(N.formatter)는 입력 한 데이터 셋(array[json object]을 포맷팅 하고 포맷팅 된 데이터 셋을 반환해 주는 라이브러리입니다.
+Formatter(N.formatter)는 입력 한 데이터 셋(json object array)을 포맷팅 하고 포맷팅 된 데이터 셋을 반환해 주는 라이브러리입니다.
 
  * 룰셋 대신 data-format 속성으로 포맷 룰들이 선언된 요소들을 감싸고 있는 요소를 인수로 입력하면 해당 요소에 포맷팅 된 문자열을 표시해 줍니다.
 이때 요소가 텍스트를 입력하는 요소라면 커서가 focusin 될 때 원래 데이터의 문자열을 표시해주고 focusout 되면 포맷팅 된 문자열을 표시해 줍니다.

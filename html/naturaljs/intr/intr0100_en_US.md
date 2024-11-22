@@ -103,15 +103,15 @@ DataSync is a library that synchronizes data changed by components or libraries 
 
 ### Formatter
 
-[Formatter(N.formatter)](#html/naturaljs/refr/refr0301.html) is a library that formats the input data set(array [json object]) and returns the formatted data set.
+[Formatter(N.formatter)](#html/naturaljs/refr/refr0301.html) is a library that formats the input data set(json object array) and returns the formatted data set.
 
 ### Validator
 
-[Validator(N.validator)](#html/naturaljs/refr/refr0302.html) is a library that validates the input data set(array [json object]) and returns a validation result data set.
+[Validator(N.validator)](#html/naturaljs/refr/refr0302.html) is a library that validates the input data set(json object array) and returns a validation result data set.
 
 ### Natural-DATA Library
 
-[Natural-DATA Library](#html/naturaljs/refr/refr0303.html) provides methods and functions for sorting, filtering, and refining data of type array[json object].
+[Natural-DATA Library](#html/naturaljs/refr/refr0303.html) provides methods and functions for sorting, filtering, and refining data of type json object array.
 
 
 ## Natural-UI
