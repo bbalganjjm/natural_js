@@ -238,10 +238,10 @@ declare class NC {
     /**
      * Converts a given element, array of elements, or any input to a CSS selector string.
      *
-     * @param {N<HTMLElement> | HTMLElement | HTMLElement[] | any} el - The input element(s) or any value to convert.
+     * @param {NJS | HTMLElement | HTMLElement[] | any} el - The input element(s) or any value to convert.
      * @returns {string} The CSS selector string derived from the input.
      */
-    static toSelector: (el: N<HTMLElement> | HTMLElement | HTMLElement[] | any) => string;
+    static toSelector: (el: NJS | HTMLElement | HTMLElement[] | any) => string;
     /**
      * A function that takes a variable number of arguments and returns an array of
      * JQuery.Deferred objects, ensuring that the deferred tasks are executed in serial order.
