@@ -139,7 +139,7 @@ declare namespace NA {
     }
 
     class Controller {
-        new(obj: N<HTMLElement>, contObj: NA.Controller.Object): NA.Controller.Object;
+        new(obj: NJS, contObj: NA.Controller.Object): NA.Controller.Object;
 
         trInit(cont: NA.Controller.Object, request: NA.Request): void;
 
