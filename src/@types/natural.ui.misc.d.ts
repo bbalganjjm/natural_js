@@ -335,178 +335,178 @@ declare namespace NU {
 
     namespace EventHandlers {
         namespace Alert {
-            declare type Width = {
+            type Width = {
                 (this: NU.Alert, msgContext?: NJS, msgContents?: NJS): number;
             }
-            declare type Height = {
+            type Height = {
                 (this: NU.Alert, msgContext?: NJS, msgContents?: NJS): number;
             }
-            declare type OnOk = {
+            type OnOk = {
                 (this: NU.Alert, msgContext?: NJS, msgContents?: NJS): undefined | 0;
             }
-            declare type OnCancel = {
+            type OnCancel = {
                 (this: NU.Alert, msgContext?: NJS, msgContents?: NJS): undefined | 0;
             }
-            declare type OnBeforeShow = {
+            type OnBeforeShow = {
                 (this: NU.Alert, msgContext?: NJS, msgContents?: NJS): void;
             }
-            declare type OnShow = {
+            type OnShow = {
                 (this: NU.Alert, msgContext?: NJS, msgContents?: NJS): void;
             }
-            declare type OnBeforeHide = {
+            type OnBeforeHide = {
                 (this: NU.Alert, msgContext?: NJS, msgContents?: NJS): void;
             }
-            declare type OnHide = {
+            type OnHide = {
                 (this: NU.Alert, msgContext?: NJS, msgContents?: NJS): void;
             }
-            declare type OnBeforeRemove = {
+            type OnBeforeRemove = {
                 (this: NU.Alert, msgContext?: NJS, msgContents?: NJS): void;
             }
-            declare type OnRemove = {
+            type OnRemove = {
                 (this: NU.Alert, msgContext?: NJS, msgContents?: NJS): void;
             }
         }
         namespace Button {
-            declare type OnBeforeCreate = {
+            type OnBeforeCreate = {
                 (this: NU.Button, context: NJS, opts: NU.Options.Button): void;
             }
-            declare type OnCreate = {
+            type OnCreate = {
                 (this: NU.Button, context: NJS, opts: NU.Options.Button): void;
             }
         }
         namespace Datepicker {
-            declare type OnChangeYear = {
+            type OnChangeYear = {
                 (this: NU.Datepicker, context: NJS, selYearStr: string, e: JQuery.Event): void;
             }
-            declare type OnChangeMonth = {
+            type OnChangeMonth = {
                 (this: NU.Datepicker, context: NJS, selMonthStr: string, selYearStr: string, e: JQuery.Event): void;
             }
-            declare type OnSelect = {
+            type OnSelect = {
                 (this: NU.Datepicker, context: NJS, selDate: NDate, monthonly: boolean): void;
             }
-            declare type OnBeforeShow = {
+            type OnBeforeShow = {
                 (this: NU.Datepicker, context: NJS, contents: NJS): undefined | false;
             }
-            declare type OnShow = {
+            type OnShow = {
                 (this: NU.Datepicker, context: NJS, contents: NJS): void;
             }
-            declare type OnBeforeHide = {
+            type OnBeforeHide = {
                 (this: NU.Datepicker, context: NJS, contents: NJS): void;
             }
-            declare type OnHide = {
+            type OnHide = {
                 (this: NU.Datepicker, context: NJS): void;
             }
         }
         namespace Popup {
-            declare type Width = {
+            type Width = {
                 (this: NU.Popup, msgContext?: NJS, msgContents?: NJS): number;
             }
-            declare type Height = {
+            type Height = {
                 (this: NU.Popup, msgContext?: NJS, msgContents?: NJS): number;
             }
-            declare type OnOk = {
+            type OnOk = {
                 (this: NU.Popup, msgContext?: NJS, msgContents?: NJS): undefined | 0;
             }
-            declare type OnCancel = {
+            type OnCancel = {
                 (this: NU.Popup, msgContext?: NJS, msgContents?: NJS): undefined | 0;
             }
-            declare type OnBeforeShow = {
+            type OnBeforeShow = {
                 (this: NU.Popup, msgContext?: NJS, msgContents?: NJS): void;
             }
-            declare type OnShow = {
+            type OnShow = {
                 (this: NU.Popup, msgContext?: NJS, msgContents?: NJS): void;
             }
-            declare type OnBeforeHide = {
+            type OnBeforeHide = {
                 (this: NU.Popup, msgContext?: NJS, msgContents?: NJS): void;
             }
-            declare type OnHide = {
+            type OnHide = {
                 (this: NU.Popup, msgContext?: NJS, msgContents?: NJS): void;
             }
-            declare type OnBeforeRemove = {
+            type OnBeforeRemove = {
                 (this: NU.Popup, msgContext?: NJS, msgContents?: NJS): void;
             }
-            declare type OnRemove = {
+            type OnRemove = {
                 (this: NU.Popup, msgContext?: NJS, msgContents?: NJS): void;
             }
-            declare type OnOpen = {
+            type OnOpen = {
                 (this: NA.Controller.Object, onOpenData?: any): void;
             }
-            declare type OnClose = {
+            type OnClose = {
                 (this: NU.Popup, onCloseData?: any): void;
             }
-            declare type OnLoad = {
+            type OnLoad = {
                 (this: NU.Popup, cont: NA.Controller.Object): void;
             }
         }
         namespace Tab {
-            declare type OnOpen = {
+            type OnOpen = {
                 (this: NA.Controller.Object, onOpenData?: any): void;
             }
-            declare type OnActive = {
+            type OnActive = {
                 (this: NU.Tab, selTabIdx: number, selTabEle: NJS, selContentEle: NJS, links: NJS, contents: NJS): void;
             }
-            declare type OnLoad = {
+            type OnLoad = {
                 (this: NU.Tab, selTabIdx: number, selTabEle: NJS, selContentEle: NJS, cont: NA.Controller.Object): void;
             }
         }
         namespace Form {
-            declare type OnBeforeBindValue = {
+            type OnBeforeBindValue = {
                 (this: NU.Form, ele: NJS, val: NC.Primitive | NC.Primitive[], action: "bind" | "val"): NC.Primitive | NC.Primitive[];
             }
-            declare type OnBindValue = {
+            type OnBindValue = {
                 (this: NU.Form, ele: NJS, val: NC.Primitive | NC.Primitive[], action: "bind" | "val"): void;
             }
-            declare type OnBeforeBind = {
+            type OnBeforeBind = {
                 (this: NU.Form, context: NJS, vals: NC.JSONObject): void;
             }
-            declare type OnBind = {
+            type OnBind = {
                 (this: NU.Form, context: NJS, vals: NC.JSONObject): void;
             }
         }
         namespace List {
-            declare type RowHandlerBeforeBind = {
+            type RowHandlerBeforeBind = {
                 (this: NU.List, rowIdx: number, rowEle: NJS, rowData: NC.JSONObject): void;
             }
-            declare type RowHandler = {
+            type RowHandler = {
                 (this: NU.List, rowIdx: number, rowEle: NJS, rowData: NC.JSONObject): void;
             }
-            declare type OnBeforeSelect = {
+            type OnBeforeSelect = {
                 (this: NU.List, rowIdx: number, rowEle: NJS, rowData: NJS, beforeRowIdx: number, e: JQuery.Event): undefined | false;
             }
-            declare type OnSelect = {
+            type OnSelect = {
                 (this: NU.List, rowIdx: number, rowEle: NJS, rowData: NJS, beforeRowIdx: number, e: JQuery.Event): void;
             }
-            declare type OnBind = {
+            type OnBind = {
                 (this: NU.List, context: NJS, data: NJS, isFirstPage: boolean, isLastPage: boolean): void;
             }
         }
         namespace Grid {
-            declare type RowHandlerBeforeBind = {
+            type RowHandlerBeforeBind = {
                 (this: NU.Grid, rowIdx: number, rowEle: NJS, rowData: NC.JSONObject): void;
             }
-            declare type RowHandler = {
+            type RowHandler = {
                 (this: NU.Grid, rowIdx: number, rowEle: NJS, rowData: NC.JSONObject): void;
             }
-            declare type OnBeforeSelect = {
+            type OnBeforeSelect = {
                 (this: NU.Grid, rowIdx: number, rowEle: NJS, rowData: NJS, beforeRowIdx: number, e: JQuery.Event): undefined | false;
             }
-            declare type OnSelect = {
+            type OnSelect = {
                 (this: NU.Grid, rowIdx: number, rowEle: NJS, rowData: NJS, beforeRowIdx: number, e: JQuery.Event): void;
             }
-            declare type OnBind = {
+            type OnBind = {
                 (this: NU.Grid, context: NJS, data: NJS, isFirstPage: boolean, isLastPage: boolean): void;
             }
         }
         namespace Pagination {
-            declare type OnChange = {
+            type OnChange = {
                 (this: NU.Pagination, pageNo: number, selEle: NJS, selData: NC.JSONObject[], currPageNavInfo: NU.Options.CurrPageNavInfo): void;
             }
         }
         namespace Tree {
-            declare type OnSelect = {
+            type OnSelect = {
                 (this: NU.Tree, selNodeIndex: number, selNodeEle: NJS, selNodeData: NC.JSONObject): void;
             }
-            declare type OnCheck = {
+            type OnCheck = {
                 (this: NU.Tree, selNodeIndex: number, selNodeEle: NJS, selNodeData: NC.JSONObject
                     , checkedElesIndexes: number[], checkedEles: NJS, checkedElesData: NC.JSONObject[]
                     , checkFlag: boolean): void;
