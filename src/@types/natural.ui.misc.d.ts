@@ -347,88 +347,88 @@ declare namespace NU {
                 (this: NU.Alert, msgContext?: NJS<HTMLElement>, msgContents?: NJS<HTMLElement>): undefined | 0;
             }
             type OnCancel = {
-                (this: NU.Alert, msgContext?: NJS, msgContents?: NJS): undefined | 0;
+                (this: NU.Alert, msgContext?: NJS<HTMLElement>, msgContents?: NJS<HTMLElement>): undefined | 0;
             }
             type OnBeforeShow = {
-                (this: NU.Alert, msgContext?: NJS, msgContents?: NJS): void;
+                (this: NU.Alert, msgContext?: NJS<HTMLElement>, msgContents?: NJS<HTMLElement>): void;
             }
             type OnShow = {
-                (this: NU.Alert, msgContext?: NJS, msgContents?: NJS): void;
+                (this: NU.Alert, msgContext?: NJS<HTMLElement>, msgContents?: NJS<HTMLElement>): void;
             }
             type OnBeforeHide = {
-                (this: NU.Alert, msgContext?: NJS, msgContents?: NJS): void;
+                (this: NU.Alert, msgContext?: NJS<HTMLElement>, msgContents?: NJS<HTMLElement>): void;
             }
             type OnHide = {
-                (this: NU.Alert, msgContext?: NJS, msgContents?: NJS): void;
+                (this: NU.Alert, msgContext?: NJS<HTMLElement>, msgContents?: NJS<HTMLElement>): void;
             }
             type OnBeforeRemove = {
-                (this: NU.Alert, msgContext?: NJS, msgContents?: NJS): void;
+                (this: NU.Alert, msgContext?: NJS<HTMLElement>, msgContents?: NJS<HTMLElement>): void;
             }
             type OnRemove = {
-                (this: NU.Alert, msgContext?: NJS, msgContents?: NJS): void;
+                (this: NU.Alert, msgContext?: NJS<HTMLElement>, msgContents?: NJS<HTMLElement>): void;
             }
         }
         namespace Button {
             type OnBeforeCreate = {
-                (this: NU.Button, context: NJS, opts: NU.Options.Button): void;
+                (this: NU.Button, context: NJS<HTMLElement>, opts: NU.Options.Button): void;
             }
             type OnCreate = {
-                (this: NU.Button, context: NJS, opts: NU.Options.Button): void;
+                (this: NU.Button, context: NJS<HTMLElement>, opts: NU.Options.Button): void;
             }
         }
         namespace Datepicker {
             type OnChangeYear = {
-                (this: NU.Datepicker, context: NJS, selYearStr: string, e: JQuery.Event): void;
+                (this: NU.Datepicker, context: NJS<HTMLElement>, selYearStr: string, e: JQuery.Event): void;
             }
             type OnChangeMonth = {
-                (this: NU.Datepicker, context: NJS, selMonthStr: string, selYearStr: string, e: JQuery.Event): void;
+                (this: NU.Datepicker, context: NJS<HTMLElement>, selMonthStr: string, selYearStr: string, e: JQuery.Event): void;
             }
             type OnSelect = {
-                (this: NU.Datepicker, context: NJS, selDate: NDate, monthonly: boolean): void;
+                (this: NU.Datepicker, context: NJS<HTMLElement>, selDate: NDate, monthonly: boolean): void;
             }
             type OnBeforeShow = {
-                (this: NU.Datepicker, context: NJS, contents: NJS): undefined | false;
+                (this: NU.Datepicker, context: NJS<HTMLElement>, contents: NJS<HTMLElement>): undefined | false;
             }
             type OnShow = {
-                (this: NU.Datepicker, context: NJS, contents: NJS): void;
+                (this: NU.Datepicker, context: NJS<HTMLElement>, contents: NJS<HTMLElement>): void;
             }
             type OnBeforeHide = {
-                (this: NU.Datepicker, context: NJS, contents: NJS): void;
+                (this: NU.Datepicker, context: NJS<HTMLElement>, contents: NJS<HTMLElement>): void;
             }
             type OnHide = {
-                (this: NU.Datepicker, context: NJS): void;
+                (this: NU.Datepicker, context: NJS<HTMLElement>): void;
             }
         }
         namespace Popup {
             type Width = {
-                (this: NU.Popup, msgContext?: NJS, msgContents?: NJS): number;
+                (this: NU.Popup, msgContext?: NJS<HTMLElement>, msgContents?: NJS<HTMLElement>): number;
             }
             type Height = {
-                (this: NU.Popup, msgContext?: NJS, msgContents?: NJS): number;
+                (this: NU.Popup, msgContext?: NJS<HTMLElement>, msgContents?: NJS<HTMLElement>): number;
             }
             type OnOk = {
-                (this: NU.Popup, msgContext?: NJS, msgContents?: NJS): undefined | 0;
+                (this: NU.Popup, msgContext?: NJS<HTMLElement>, msgContents?: NJS<HTMLElement>): undefined | 0;
             }
             type OnCancel = {
-                (this: NU.Popup, msgContext?: NJS, msgContents?: NJS): undefined | 0;
+                (this: NU.Popup, msgContext?: NJS<HTMLElement>, msgContents?: NJS<HTMLElement>): undefined | 0;
             }
             type OnBeforeShow = {
-                (this: NU.Popup, msgContext?: NJS, msgContents?: NJS): void;
+                (this: NU.Popup, msgContext?: NJS<HTMLElement>, msgContents?: NJS<HTMLElement>): void;
             }
             type OnShow = {
-                (this: NU.Popup, msgContext?: NJS, msgContents?: NJS): void;
+                (this: NU.Popup, msgContext?: NJS<HTMLElement>, msgContents?: NJS<HTMLElement>): void;
             }
             type OnBeforeHide = {
-                (this: NU.Popup, msgContext?: NJS, msgContents?: NJS): void;
+                (this: NU.Popup, msgContext?: NJS<HTMLElement>, msgContents?: NJS<HTMLElement>): void;
             }
             type OnHide = {
-                (this: NU.Popup, msgContext?: NJS, msgContents?: NJS): void;
+                (this: NU.Popup, msgContext?: NJS<HTMLElement>, msgContents?: NJS<HTMLElement>): void;
             }
             type OnBeforeRemove = {
-                (this: NU.Popup, msgContext?: NJS, msgContents?: NJS): void;
+                (this: NU.Popup, msgContext?: NJS<HTMLElement>, msgContents?: NJS<HTMLElement>): void;
             }
             type OnRemove = {
-                (this: NU.Popup, msgContext?: NJS, msgContents?: NJS): void;
+                (this: NU.Popup, msgContext?: NJS<HTMLElement>, msgContents?: NJS<HTMLElement>): void;
             }
             type OnOpen = {
                 (this: NA.Controller.Object, onOpenData?: any): void;
@@ -445,7 +445,7 @@ declare namespace NU {
                 (this: NA.Controller.Object, onOpenData?: any): void;
             }
             type OnActive = {
-                (this: NU.Tab, selTabIdx: number, selTabEle: NJS<HTMLElement>, selContentEle: NJS<HTMLElement>, links: NJS, contents: NJS): void;
+                (this: NU.Tab, selTabIdx: number, selTabEle: NJS<HTMLElement>, selContentEle: NJS<HTMLElement>, links: NJS<HTMLElement>, contents: NJS<HTMLElement>): void;
             }
             type OnLoad = {
                 (this: NU.Tab, selTabIdx: number, selTabEle: NJS<HTMLElement>, selContentEle: NJS<HTMLElement>, cont: NA.Controller.Object): void;
@@ -459,10 +459,10 @@ declare namespace NU {
                 (this: NU.Form, ele: NJS<HTMLElement>, val: NC.Primitive | NC.Primitive[], action: "bind" | "val"): void;
             }
             type OnBeforeBind = {
-                (this: NU.Form, context: NJS, vals: NC.JSONObject): void;
+                (this: NU.Form, context: NJS<HTMLElement>, vals: NC.JSONObject): void;
             }
             type OnBind = {
-                (this: NU.Form, context: NJS, vals: NC.JSONObject): void;
+                (this: NU.Form, context: NJS<HTMLElement>, vals: NC.JSONObject): void;
             }
         }
         namespace List {
@@ -479,7 +479,7 @@ declare namespace NU {
                 (this: NU.List, rowIdx: number, rowEle: NJS<HTMLElement>, rowData: NJS<NC.JSONObject>, beforeRowIdx: number, e: JQuery.Event): void;
             }
             type OnBind = {
-                (this: NU.List, context: NJS, data: NJS<NC.JSONObject>, isFirstPage: boolean, isLastPage: boolean): void;
+                (this: NU.List, context: NJS<HTMLElement>, data: NJS<NC.JSONObject>, isFirstPage: boolean, isLastPage: boolean): void;
             }
         }
         namespace Grid {
@@ -496,7 +496,7 @@ declare namespace NU {
                 (this: NU.Grid, rowIdx: number, rowEle: NJS<HTMLElement>, rowData: NJS<NC.JSONObject>, beforeRowIdx: number, e: JQuery.Event): void;
             }
             type OnBind = {
-                (this: NU.Grid, context: NJS, data: NJS<NC.JSONObject>, isFirstPage: boolean, isLastPage: boolean): void;
+                (this: NU.Grid, context: NJS<HTMLElement>, data: NJS<NC.JSONObject>, isFirstPage: boolean, isLastPage: boolean): void;
             }
         }
         namespace Pagination {
@@ -510,7 +510,7 @@ declare namespace NU {
             }
             type OnCheck = {
                 (this: NU.Tree, selNodeIndex: number, selNodeEle: NJS<HTMLElement>, selNodeData: NC.JSONObject
-                    , checkedElesIndexes: number[], checkedEles: NJS, checkedElesData: NC.JSONObject[]
+                    , checkedElesIndexes: number[], checkedEles: NJS<HTMLElement>, checkedElesData: NC.JSONObject[]
                     , checkFlag: boolean): void;
             }
         }

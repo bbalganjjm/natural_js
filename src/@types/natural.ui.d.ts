@@ -235,7 +235,9 @@ declare namespace NU {
         data(): JSONObject[];
         row(before?: "before"): number;
         context(sel?: JQuery.Selector): NJS<HTMLElement>;
+
         // === 여기부터
+
         bindEvents: {
             validate: (ele: any, opts: any, eleType: any, isTextInput: any) => void;
             dataSync: (ele: any, opts: any, vals: any, eleType: any) => void;

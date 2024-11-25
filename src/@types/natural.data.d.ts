@@ -177,7 +177,7 @@ declare class ND {
          * - Validation can also be performed on strings, not just datasets.
          *
          * @param {NJS<NC.JSONObject[]>} data - The data to be validated.
-         * @param {NJS|HTMLElement|ND.ValidationRuleObject|string} [rules] - Specifies the validation rules.
+         * @param {NJS<HTMLElement>|HTMLElement|ND.ValidationRuleObject|string} [rules] - Specifies the validation rules.
          * You can specify the validation rules in two ways as follows:
          * - Specifying rules as object options:
          *    ```
@@ -272,7 +272,7 @@ declare class ND {
     static data: {
         filter(arr: NJS<NC.JSONObject[]> | NC.JSONObject[], condition: ConditionCallback | string): NJS<NC.JSONObject[]> | NC.JSONObject[];
         sortBy(key: string, reverse: 1 | -1): (a: number, b: number) => 1 | -1 | 0;
-        sort(arr: NJS | NC.JSONObject[], key: string, reverse?: boolean): NJS | NC.JSONObject[];
+        sort(arr: NJS<NC.JSONObject[]> | NC.JSONObject[], key: string, reverse?: boolean): NJS<NC.JSONObject[]> | NC.JSONObject[];
     };
 
 }
@@ -289,7 +289,7 @@ declare namespace ND {
     }
 
     interface DataSync {
-        viewContext: NJS;
+        viewContext: NJS<HTMLElement>;
         remove(): DataSync;
         notify(row: number, key: string): DataSync;
     }
