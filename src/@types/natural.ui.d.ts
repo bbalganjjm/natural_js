@@ -1,3 +1,5 @@
+import JSONObject = NC.JSONObject;
+
 declare class NU {
 
     alert(msg: NU.Options.Alert | string, vars?: string[]): NU.Alert;
@@ -5,12 +7,18 @@ declare class NU {
     datepicker(opts?: NU.Options.Datepicker): NU.Datepicker;
     popup(opts?: NU.Options.Popup): NU.Popup;
     tab(opts?: NU.Options.Tab): NU.Tab;
-    select(opts?: NU.Options.Select): NU.Select;
-    form(opts?: NU.Options.Form): NU.Form;
-    list(opts?: NU.Options.List): NU.List;
-    grid(opts?: NU.Options.Grid): NU.Grid;
-    pagination(opts: NU.Options.Pagination): NU.Pagination;
-    tree(opts: NU.Options.Tree): NU.Tree;
+    // In the code proposal, the properties of NJS are also displayed, so the properties of NJS are excluded.
+    select<T extends NU.Options.Select | NJS<HTMLElement>>(opts?: T): NU.Select;
+    // In the code proposal, the properties of NJS are also displayed, so the properties of NJS are excluded.
+    form<T extends NU.Options.Form | NJS<HTMLElement>>(opts?: T): NU.Form;
+    // In the code proposal, the properties of NJS are also displayed, so the properties of NJS are excluded.
+    list<T extends NU.Options.List | NJS<HTMLElement>>(opts?: T): NU.List;
+    // In the code proposal, the properties of NJS are also displayed, so the properties of NJS are excluded.
+    grid<T extends NU.Options.Grid | NJS<HTMLElement>>(opts?: T): NU.Grid;
+    // In the code proposal, the properties of NJS are also displayed, so the properties of NJS are excluded.
+    pagination<T extends NU.Options.Pagination | NJS<HTMLElement>>(opts: T): NU.Pagination;
+    // In the code proposal, the properties of NJS are also displayed, so the properties of NJS are excluded.
+    tree<T extends NU.Options.Tree | NJS<HTMLElement>>(opts: T): NU.Tree;
 
     static ui: {
         iteration: {
@@ -48,19 +56,19 @@ declare class NU {
     };
 
     static alert: {
-        new(obj: N, msg: NU.Options.Alert | string, vars?: string[]): NU.Alert;
+        new(obj: NJS<HTMLElement>, msg: NU.Options.Alert | string, vars?: string[]): NU.Alert;
         wrapEle: () => void;
         resetOffSetEle: (opts: any) => void;
         wrapInputEle: () => void;
     };
 
     static button: {
-        new(obj: any, opts?: any): NU.Button;
+        new(obj: NJS<HTMLElement>, opts?: NU.Options.Button): NU.Button;
         wrapEle: () => void;
     };
 
     static datepicker: {
-        new(obj: any, opts: any): NU.Datepicker;
+        new(obj: NJS<HTMLElement>, opts?: NU.Options.Datepicker): NU.Datepicker;
         context: () => any;
         checkMinMaxDate: () => boolean;
         wrapEle: () => void;
@@ -70,36 +78,36 @@ declare class NU {
     };
 
     static popup: {
-        new(obj: any, opts): NU.Popup;
+        new(obj: NJS<HTMLElement>, opts?: NU.Options.Popup): NU.Popup;
         wrapEle: () => void;
         loadContent: (callback: any) => void;
         popOpen: (onOpenData: any, cont: any) => void;
     };
 
     static tab: {
-        new(obj: any, opts: any): NU.Tab;
+        new(obj: NJS<HTMLElement>, opts?: NU.Options.Tab): NU.Tab;
         wrapEle: () => void;
         wrapScroll: () => void;
         loadContent: (url: any, targetIdx: any, callback: any, isFirst: any) => void;
     };
 
     static select: {
-        new(data: any, opts?: any): NU.Select;
+        new(data: NJS<JSONObject[]>, opts?: NU.Options.Select | NJS<HTMLElement>): NU.Select;
         wrapEle: () => void;
     };
 
     static form: {
-        new(data: any, opts: any): NU.Form;
+        new(data: NJS<JSONObject[]>, opts?: NU.Options.Form | NJS<HTMLElement>): NU.Form;
     };
 
     static list: {
-        new(data: any, opts: any): NU.List;
+        new(data: NJS<JSONObject[]>, opts?: NU.Options.List | NJS<HTMLElement>): NU.List;
         createScroll: () => void;
         vResize: (contextWrapEle: any) => void;
     };
 
     static grid: {
-        new(data: any, opts: any): NU.Grid;
+        new(data: NJS<JSONObject[]>, opts?: NU.Options.Grid | NJS<HTMLElement>): NU.Grid;
         /**
          * Convert HTML Table To 2D Array
          * Reference from CHRIS WEST'S BLOG : http://cwestblog.com/2016/08/21/javascript-snippet-convert-html-table-to-2d-array/
@@ -125,7 +133,7 @@ declare class NU {
     };
 
     static pagination: {
-        new(data: any, opts: any): NU.Pagination;
+        new(data: NJS<JSONObject[]>, opts?: NU.Options.Pagination | NJS<HTMLElement>): NU.Pagination;
         wrapEle: () => {
             body: any;
             page: any;
@@ -152,7 +160,7 @@ declare class NU {
     };
 
     static tree: {
-        new(data: any, opts: any): NU.Tree;
+        new(data: NJS<JSONObject[]>, opts?: NU.Options.Tree | NJS<HTMLElement>): NU.Tree;
     };
 
 }
@@ -209,10 +217,10 @@ declare namespace NU {
     interface Select {
         options: NU.Options.Select;
         data(selFlag: true): JSONObject[];
-        data(selFlag: false): NJS<JSONObject[]>;
+        data(selFlag: false): NJS<NC.JSONObject[]>;
         data(): JSONObject[];
         context(sel?: JQuery.Selector): NJS<HTMLElement>;
-        bind(data?: NJS): any;
+        bind(data?: NJS<NC.JSONObject[]>): any;
         index(idx: any): any;
         val(val: any): any;
         remove(val: any): any;
@@ -222,9 +230,9 @@ declare namespace NU {
     interface Form {
         options: NU.Options.Form;
         data(selFlag: true, ...args?: string[]): JSONObject[];
-        data(selFlag: false): NJS<JSONObject[]>;
+        data(selFlag: false): NJS<NC.JSONObject[]>;
         data(): JSONObject[];
-        row(before: any): any;
+        row(before?: "before"): number;
         context(sel?: JQuery.Selector): NJS<HTMLElement>;
         /**
          * arguments[2]... arguments[n] are the columns to be bound.

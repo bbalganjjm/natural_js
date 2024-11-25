@@ -90,9 +90,9 @@ declare class ND {
      */
     validator(rules?: NJS<HTMLElement> | HTMLElement | ND.ValidationRuleObject | string): ND.Validator;
 
-    datafilter(condition: ND.ConditionCallback | string): NJS;
+    datafilter(condition: ND.ConditionCallback | string): NJS<NC.JSONObject[]>;
 
-    datasort(key: string, reverse?: boolean): NJS;
+    datasort(key: string, reverse?: boolean): NJS<NC.JSONObject[]>;
 
     static ds: {
         instance(inst: T, isReg?: boolean): ND.DataSync;
@@ -104,8 +104,8 @@ declare class ND {
          * - Instead of using a ruleset, you can pass an element as an argument, where the element wraps elements with formatting rules declared in the data-format attribute. This will display the formatted string in those elements. If the element is a text input element, it will display the original string of the data when the cursor focuses in (focusin event), and display the formatted string when the cursor focuses out (focusout event).
          * - You can also format on a per-string basis rather than using a dataset.
          *
-         * @param {NJS<JSONObject>} data - The data to be formatted.
-         * @param {NJS | HTMLElement | ND.FormatRuleObject | string} [rules] - Specifies formatting rules.
+         * @param {NJS<NC.JSONObject[]>} data - The data to be formatted.
+         * @param {NJS<HTMLElement> | HTMLElement | ND.FormatRuleObject | string} [rules] - Specifies formatting rules.
          * The formatting rule can be specified in two types as follows:
          * - If you specify the rules as an object option:
          *   ```
@@ -143,7 +143,7 @@ declare class ND {
          *
          * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0301.html }
          */
-        new(data: NJS<JSONObject>, rules?: NJS<HTMLElement> | HTMLElement | ND.FormatRuleObject | string): ND.Formatter;
+        new(data: NJS<NC.JSONObject[]>, rules?: NJS<HTMLElement> | HTMLElement | ND.FormatRuleObject | string): ND.Formatter;
 
         commas(str: string): string;
         rrn(str: string, args: NC.Primitive[]): string;
@@ -176,7 +176,7 @@ declare class ND {
          * - Instead of a ruleset, if you pass an element that wraps input elements with validation rules declared in the data-validate attribute, it will validate the value entered in the element when the cursor focusout occurs on the input element. If validation fails, an error message is displayed in the form of a tooltip near the input element.
          * - Validation can also be performed on strings, not just datasets.
          *
-         * @param {NJS} data - The data to be validated.
+         * @param {NJS<NC.JSONObject[]>} data - The data to be validated.
          * @param {NJS|HTMLElement|ND.ValidationRuleObject|string} [rules] - Specifies the validation rules.
          * You can specify the validation rules in two ways as follows:
          * - Specifying rules as object options:
@@ -217,7 +217,7 @@ declare class ND {
          *
          * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0302.html }
          */
-        new(data: NJS<JSONObject>, rules?: NJS<HTMLElement> | HTMLElement | ND.ValidationRuleObject | string): ND.Validator;
+        new(data: NJS<NC.JSONObject[]>, rules?: NJS<HTMLElement> | HTMLElement | ND.ValidationRuleObject | string): ND.Validator;
         required(str: string): boolean;
         alphabet(str: string): boolean;
         integer(str: string): boolean;
@@ -270,7 +270,7 @@ declare class ND {
         regexp(str: string, args: NC.Primitive[]): boolean;
     };
     static data: {
-        filter(arr: NJS | NC.JSONObject[], condition: ConditionCallback | string): NJS | NC.JSONObject[];
+        filter(arr: NJS<NC.JSONObject[]> | NC.JSONObject[], condition: ConditionCallback | string): NJS<NC.JSONObject[]> | NC.JSONObject[];
         sortBy(key: string, reverse: 1 | -1): (a: number, b: number) => 1 | -1 | 0;
         sort(arr: NJS | NC.JSONObject[], key: string, reverse?: boolean): NJS | NC.JSONObject[];
     };

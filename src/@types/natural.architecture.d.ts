@@ -69,7 +69,7 @@ declare class NA {
 declare namespace NA {
 
     class Communicator {
-        new(obj: NJS, url: string | NA.Request.Options);
+        new(obj: NJS<NC.JSONObject[]>, url: string | NA.Request.Options);
 
         xhr: JQuery.jqXHR;
         initFilterConfig(): NA.Config.FilterConfig;
@@ -90,7 +90,7 @@ declare namespace NA {
     }
 
     interface Request {
-        new(obj: NJS, opts: NA.Request.Options): {
+        new(obj: NJS<NC.JSONObject[]>, opts: NA.Request.Options): {
             options: NA.Request.Options;
             attrObj: object;
             obj: NA.Communicator;

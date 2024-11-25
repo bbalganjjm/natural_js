@@ -54,6 +54,7 @@ N([]).comm("http://localhost:8080").request.attr("asd", "").request.attr("asd", 
 
 N.context.attr("asdf");
 
+// FIXME fn01 안보임.
 const cont = new N.cont(N(".context"), {
     init: function (view, request) {
         view.each(function () {});
@@ -64,6 +65,7 @@ const cont = new N.cont(N(".context"), {
     }
 });
 
+// FIXME fn01 안보임.
 N(".context").cont({
     init: function (view, request) {
         view.each(function () {});
@@ -138,18 +140,28 @@ N(".tab").tab({
 
 N([{}, {}]).each((index, element) => {});
 
-new N.select(".select").data(false).each((index, element) => {});
-new N.select(N(".select")).data().forEach(function (item: JSONObject) {});
-new N.select(".select").data(true).forEach(function (item: JSONObject) {});
-new N.select(N(".select")).context("option").get().forEach(function (item: HTMLElement) {});
 
-N().form(".form").data(false).each((index, element) => {});
-new N.select(N(".select")).data().forEach(function (item: JSONObject) {});
-new N.select(N(".select")).data(true).forEach(function (item: JSONObject) {});
-new N.select(N(".select")).context("option").get().forEach(function (item: HTMLElement) {});
+new N.select(N([{a:1}]), N(".select", cont.view)).data(false).each((index, element) => {});
+new N.select(N([{a:1}]), N(".select", cont.view)).data().forEach(function (item) {});
+new N.select(N([{a:1}]), N(".select", cont.view)).data(true).forEach(function (item) {});
+new N.select(N([{a:1}]), N(".select", cont.view)).context("option").get().forEach(function (item) {});
+N([{a:1}]).select(N(".select", cont.view)).data(false).each((index, element) => {});
+N([{a:1}]).select(N(".select", cont.view)).data().forEach(function (item) {});
+N([{a:1}]).select(N(".select", cont.view)).data(true).forEach(function (item) {});
+N([{a:1}]).select(N(".select", cont.view)).context("option").get().forEach(function (item) {});
+
+
+N([{a:1}]).form({
+    context: N(".form", cont.view)
+}).data(false).each((index, element) => {});
+N([{a:1}]).form(N(".form", cont.view)).data().forEach(function (item) {});
+N([{a:1}]).form(N(".form", cont.view)).data(true).forEach(function (item) {});
+N([{a:1}]).form(N(".form", cont.view)).context("option").get().forEach(function (item) {});
 
 N([]).pagination({}).bind();
-new N.pagination([], {}).bind();
+new N.pagination(N([]), {
+
+}).bind();
 
 N({}).notify({}).add("asd");
 N.notify({}, {}).add("asd");

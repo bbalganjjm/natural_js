@@ -10,9 +10,10 @@ declare function N(selector?: JQuery.Selector
     | JQuery.htmlString
     | JQuery
     | JQuery.Node
-    | JQuery.PlainObject, context?: Element | Document | JQuery | JQuery.Selector): NJS<E>;
+    | JQuery.PlainObject, context?: Element | Document | JQuery | JQuery.Selector): NJS<T>;
 
-declare interface NJS<T> extends JQuery, NC, NA, ND, NU, NUS {
+type OmitJQuery = Omit<JQuery, "select">;
+declare interface NJS<T> extends OmitJQuery, NC, NA, ND, NU, NUS {
     /**
      * Initializes and returns a new N object based on jQuery objects with the provided selector and context argument values.
      */
@@ -79,7 +80,7 @@ declare namespace N {
      *
      * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0203.html }
      */
-    function comm(obj: NJS, url: string | NA.Request.Options): NA.Communicator {
+    function comm(obj: NJS<NC.JSONObject[]>, url: string | NA.Request.Options): NA.Communicator {
         return new NA.comm(obj, url);
     }
 
