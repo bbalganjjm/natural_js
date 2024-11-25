@@ -92,22 +92,22 @@ declare class NU {
     };
 
     static select: {
-        new(data: NJS<JSONObject[]>, opts?: NU.Options.Select | NJS<HTMLElement>): NU.Select;
+        new(data: NJS<NC.JSONObject[]>, opts?: NU.Options.Select | NJS<HTMLElement>): NU.Select;
         wrapEle: () => void;
     };
 
     static form: {
-        new(data: NJS<JSONObject[]>, opts?: NU.Options.Form | NJS<HTMLElement>): NU.Form;
+        new(data: NJS<NC.JSONObject[]>, opts?: NU.Options.Form | NJS<HTMLElement>): NU.Form;
     };
 
     static list: {
-        new(data: NJS<JSONObject[]>, opts?: NU.Options.List | NJS<HTMLElement>): NU.List;
+        new(data: NJS<NC.JSONObject[]>, opts?: NU.Options.List | NJS<HTMLElement>): NU.List;
         createScroll: () => void;
         vResize: (contextWrapEle: any) => void;
     };
 
     static grid: {
-        new(data: NJS<JSONObject[]>, opts?: NU.Options.Grid | NJS<HTMLElement>): NU.Grid;
+        new(data: NJS<NC.JSONObject[]>, opts?: NU.Options.Grid | NJS<HTMLElement>): NU.Grid;
         /**
          * Convert HTML Table To 2D Array
          * Reference from CHRIS WEST'S BLOG : http://cwestblog.com/2016/08/21/javascript-snippet-convert-html-table-to-2d-array/
@@ -133,7 +133,7 @@ declare class NU {
     };
 
     static pagination: {
-        new(data: NJS<JSONObject[]>, opts?: NU.Options.Pagination | NJS<HTMLElement>): NU.Pagination;
+        new(data: NJS<NC.JSONObject[]>, opts?: NU.Options.Pagination | NJS<HTMLElement>): NU.Pagination;
         wrapEle: () => {
             body: any;
             page: any;
@@ -160,7 +160,7 @@ declare class NU {
     };
 
     static tree: {
-        new(data: NJS<JSONObject[]>, opts?: NU.Options.Tree | NJS<HTMLElement>): NU.Tree;
+        new(data: NJS<NC.JSONObject[]>, opts?: NU.Options.Tree | NJS<HTMLElement>): NU.Tree;
     };
 
 }
