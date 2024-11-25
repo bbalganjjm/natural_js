@@ -194,8 +194,8 @@ declare namespace NU {
     interface Popup {
         options: NU.Options.Popup;
         context(sel?: JQuery.Selector): NJS<HTMLElement>;
-        open(onOpenData: any): this;
-        close(onCloseData: any): this;
+        open(onOpenData?: any): this;
+        close(onCloseData?: any): this;
         remove(): this;
     }
 
@@ -220,11 +220,12 @@ declare namespace NU {
         data(selFlag: false): NJS<NC.JSONObject[]>;
         data(): JSONObject[];
         context(sel?: JQuery.Selector): NJS<HTMLElement>;
-        bind(data?: NJS<NC.JSONObject[]>): any;
-        index(idx: any): any;
-        val(val: any): any;
-        remove(val: any): any;
-        reset(selFlag: any): any;
+        bind(data?: NJS<NC.JSONObject[]>): this;
+        index(): number;
+        index(idx: number): this;
+        val(val: any): this;
+        remove(val: any): this;
+        reset(selFlag: any): this;
     }
 
     interface Form {
@@ -234,25 +235,11 @@ declare namespace NU {
         data(): JSONObject[];
         row(before?: "before"): number;
         context(sel?: JQuery.Selector): NJS<HTMLElement>;
-        /**
-         * arguments[2]... arguments[n] are the columns to be bound.
-         */
+        // === 여기부터
         bindEvents: {
-            /**
-             * validate
-             */
             validate: (ele: any, opts: any, eleType: any, isTextInput: any) => void;
-            /**
-             * dataSync
-             */
             dataSync: (ele: any, opts: any, vals: any, eleType: any) => void;
-            /**
-             * Enter key event
-             */
             enterKey: (ele: any, opts: any) => void;
-            /**
-             * format
-             */
             format: (ele: any, opts: any, eleType: any, vals: any, key: any) => void;
         };
         bind(row: any, data: any, ...args: any[]): any;

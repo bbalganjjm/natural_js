@@ -141,22 +141,27 @@ N(".tab").tab({
 N([{}, {}]).each((index, element) => {});
 
 
-new N.select(N([{a:1}]), N(".select", cont.view)).data(false).each((index, element) => {});
-new N.select(N([{a:1}]), N(".select", cont.view)).data().forEach(function (item) {});
-new N.select(N([{a:1}]), N(".select", cont.view)).data(true).forEach(function (item) {});
-new N.select(N([{a:1}]), N(".select", cont.view)).context("option").get().forEach(function (item) {});
-N([{a:1}]).select(N(".select", cont.view)).data(false).each((index, element) => {});
-N([{a:1}]).select(N(".select", cont.view)).data().forEach(function (item) {});
-N([{a:1}]).select(N(".select", cont.view)).data(true).forEach(function (item) {});
-N([{a:1}]).select(N(".select", cont.view)).context("option").get().forEach(function (item) {});
+let select = new N.select(N([{a:1}]), N(".select", cont.view));
+select.data(false).each((index, element) => {});
+select.data(true).forEach(function (item) {});
+select.context("option").get().forEach(function (item) {});
 
+select = N([{a:1}]).select(N(".select", cont.view));
+select.data(false).each((index, element) => {});
+select.data().forEach(function (item) {});
+select.data(true).forEach(function (item) {});
+select.context("option").get().forEach(function (item) {});
+const idx = select.index();
+const sltInst = select.index(1);
 
-N([{a:1}]).form({
+let form = N([{a:1}]).form({
     context: N(".form", cont.view)
-}).data(false).each((index, element) => {});
-N([{a:1}]).form(N(".form", cont.view)).data().forEach(function (item) {});
-N([{a:1}]).form(N(".form", cont.view)).data(true).forEach(function (item) {});
-N([{a:1}]).form(N(".form", cont.view)).context("option").get().forEach(function (item) {});
+});
+form.data(false).each((index, element) => {});
+form = N([{a:1}]).form(N(".form", cont.view));
+form.data().forEach(function (item) {});
+form.data(true).forEach(function (item) {});
+form.context("option").get().forEach(function (item) {});
 
 N([]).pagination({}).bind();
 new N.pagination(N([]), {
