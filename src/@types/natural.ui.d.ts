@@ -84,7 +84,7 @@ declare class NU {
     };
 
     static select: {
-        new(data: any, opts: any): NU.Select;
+        new(data: any, opts?: any): NU.Select;
         wrapEle: () => void;
     };
 
@@ -159,55 +159,60 @@ declare class NU {
 
 declare namespace NU {
 
+    import JSONObject = NC.JSONObject;
+
     interface Alert {
         options: NU.Options.Alert;
-        context(sel?: JQuery.Selector): NJS;
-        show(): Alert;
-        hide(): Alert;
-        remove(): Alert;
+        context(sel?: JQuery.Selector): NJS<HTMLElement>;
+        show(): this;
+        hide(): this;
+        remove(): this;
     }
 
     interface Button {
         options: NU.Options.Button;
-        context(sel?: JQuery.Selector): NJS;
-        disable(): Button;
-        enable(): Button;
+        context(sel?: JQuery.Selector): NJS<HTMLElement>;
+        disable(): this;
+        enable(): this;
     }
 
     interface Datepicker {
         options: NU.Options.Datepicker;
-        context(sel?: JQuery.Selector): NJS;
-        show(): Datepicker;
-        hide(...args: any[]): Datepicker;
+        context(sel?: JQuery.Selector): NJS<HTMLElement>;
+        show(): this;
+        hide(): this;
     }
 
     interface Popup {
         options: NU.Options.Popup;
-        context(sel?: JQuery.Selector): NJS;
-        open(onOpenData: any): Popup;
-        close(onCloseData: any): Popup;
-        remove(): Popup;
+        context(sel?: JQuery.Selector): NJS<HTMLElement>;
+        open(onOpenData: any): this;
+        close(onCloseData: any): this;
+        remove(): this;
     }
 
     interface Tab {
         options: NU.Options.Tab;
-        context(sel?: JQuery.Selector): NJS;
-        open(idx: any, onOpenData: any, isFirst: any): any | {
-            index: any;
-            tab: any;
-            content: any;
-            cont: any;
+        context(sel?: JQuery.Selector): NJS<HTMLElement>;
+        open(idx: number, onOpenData?: any, isFirst?: boolean): this;
+        open(idx?: number, onOpenData?: any, isFirst?: boolean): {
+            index: number;
+            tab: NJS<HTMLElement>;
+            content: NJS<HTMLElement>;
+            cont: NA.Controller.Object;
         };
-        disable(idx: any): any;
-        enable(idx: any): any;
-        cont(idx: any): any;
+        disable(idx: number): this;
+        enable(idx: number): this;
+        cont(idx?: number): NA.Controller.Object;
     };
 
     interface Select {
         options: NU.Options.Select;
-        data(selFlag: any): any;
-        context(sel?: JQuery.Selector): NJS;
-        bind(data: any): any;
+        data(selFlag: true): JSONObject[];
+        data(selFlag: false): NJS<JSONObject[]>;
+        data(selFlag?: boolean): JSONObject[];
+        context(sel?: JQuery.Selector): NJS<HTMLElement>;
+        bind(data?: NJS): any;
         index(idx: any): any;
         val(val: any): any;
         remove(val: any): any;
@@ -218,7 +223,7 @@ declare namespace NU {
         options: NU.Options.Form;
         data(selFlag: any, ...args: any[]): any;
         row(before: any): any;
-        context(sel?: JQuery.Selector): NJS;
+        context(sel?: JQuery.Selector): NJS<HTMLElement>;
         /**
          * arguments[2]... arguments[n] are the columns to be bound.
          */
@@ -255,7 +260,7 @@ declare namespace NU {
         tempRowEle: any;
         contextEle: any;
         data(rowStatus: any, ...args: any[]): any;
-        context(sel?: JQuery.Selector): NJS;
+        context(sel?: JQuery.Selector): NJS<HTMLElement>;
         contextBodyTemplate(sel: any): any;
         select(row: any, isAppend: any): any;
         check(row: any, isAppend: any): any;
@@ -282,7 +287,7 @@ declare namespace NU {
         contextEle: any;
         rowSpanIds: any;
         data(rowStatus: any, ...args: any[]): any;
-        context(sel?: JQuery.Selector): NJS;
+        context(sel?: JQuery.Selector): NJS<HTMLElement>;
         contextHead(sel: any): any;
         contextBodyTemplate(sel: any): any;
         select(row: any, isAppend: any): any;
@@ -308,7 +313,7 @@ declare namespace NU {
         options: NU.Options.Pagination;
         linkEles: any;
         data(selFlag: any): any;
-        context(sel?: JQuery.Selector): NJS;
+        context(sel?: JQuery.Selector): NJS<HTMLElement>;
         bind(data?: any, totalCount?: any, ...args?: any[]): any;
         totalCount(totalCount: any): number | any;
         pageNo(pageNo: any): number | any;
@@ -320,7 +325,7 @@ declare namespace NU {
     interface Tree {
         options: NU.Options.Tree;
         data(selFlag: any, ...args: any[]): any;
-        context(sel?: JQuery.Selector): NJS;
+        context(sel?: JQuery.Selector): NJS<HTMLElement>;
         bind(data: any): any;
         select(val: any): any;
         expand(): any;

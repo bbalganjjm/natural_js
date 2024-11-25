@@ -8,7 +8,8 @@ declare class NA {
     static cont: NA.Controller;
     static context: {
         attrObj: object;
-        attr(name: string, obj?: any): any | this;
+        attr(name: string, obj?: any): obj[name];
+        attr(name: string, obj: any): this;
     };
     static config: {
         filterConfig: NA.Config.FilterConfig;
@@ -62,7 +63,7 @@ declare class NA {
      * ```
      * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0201.html }
      */
-    cont(ontObj: NA.Controller.Object): NA.Controller;
+    cont(ontObj: NA.Controller.Object): ontObj;
 }
 
 declare namespace NA {
@@ -85,7 +86,7 @@ declare namespace NA {
          *
          * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0204.html }
          */
-        request = new NA.Request;
+        request = new Request(obj, url);
     }
 
     interface Request {
@@ -127,6 +128,7 @@ declare namespace NA {
          *
          * @return {NA.Communicator} Returns the Communicator if both `name` and `obj` are specified, and returns the passed parameter value if only `name` is specified.
          */
+        attr(name: string, obj?: any): obj[name];
         attr(name: string, obj: any): NA.Communicator;
 
         removeAttr(name: string): NA.Communicator;
@@ -138,8 +140,8 @@ declare namespace NA {
         reload(callback: any): NA.Communicator;
     }
 
-    class Controller {
-        new(obj: NJS, contObj: NA.Controller.Object): NA.Controller.Object;
+    interface Controller {
+        new(obj: NJS<HTMLElement>, contObj: NA.Controller.Object): contObj;
 
         trInit(cont: NA.Controller.Object, request: NA.Request): void;
 

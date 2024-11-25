@@ -1,11 +1,18 @@
+import JSONObject = NC.JSONObject;
+
 /**
  * N() is a core method of Natural-JS. It returns a collection of matched elements found in the DOM based on the provided arguments or creates elements matching the given HTML string.
  *
  * N() extends the jQuery() function, thus it can be replaced with $() or jQuery(). However, local functions of the N object cannot be used within jQuery or $ objects.
  */
-declare function N(selector: any, context?: any): NJS;
+declare function N(selector?: JQuery.Selector
+    | JQuery.TypeOrArray<Element>
+    | JQuery.htmlString
+    | JQuery
+    | JQuery.Node
+    | JQuery.PlainObject, context?: Element | Document | JQuery | JQuery.Selector): NJS<E>;
 
-declare interface NJS extends JQuery, NC, NA, ND, NU, NUS {
+declare interface NJS<T> extends JQuery, NC, NA, ND, NU, NUS {
     /**
      * Initializes and returns a new N object based on jQuery objects with the provided selector and context argument values.
      */
@@ -115,9 +122,7 @@ declare namespace N {
      * ```
      * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0201.html }
      */
-    function cont(obj: NJS, contObj: NA.Controller.Object): NA.Controller.Object {
-        return new NA.cont(obj, contObj);
-    }
+    const cont = NA.cont;
 
     /**
      * Context (N.context) is a space that guarantees data persistence within the life-cycle (until the page is loaded and redirected to another URL) of a Natural-JS-based application.

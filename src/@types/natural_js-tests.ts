@@ -1,5 +1,4 @@
 import SubmitCallback = NA.Request.SubmitCallback;
-
 N(".button").remove_(1, 2);
 N(".button").tpBind("click", function (e: Event) {});
 N(".button").events("click", "grid");
@@ -54,16 +53,28 @@ N([]).comm("http://localhost:8080").request.attr("asd", "").request.attr("asd", 
 });
 
 N.context.attr("asdf");
-N.cont(N(".context"), {
+
+const cont = new N.cont(N(".context"), {
     init: function (view, request) {
-        this.view = view;
+        view.each(function () {});
+    },
+    fn01: function () {
+        this.view!.each(function () {});
+        console.log(this.request!.attr("param"));
     }
 });
+
 N(".context").cont({
     init: function (view, request) {
-        
+        view.each(function () {});
+    },
+    fn01: function () {
+        this.view!.each(function () {});
+        this.request!.attr("param", {a:1});
     }
 });
+
+cont.fn01();
 
 N.ds.instance(class {}, true)
     .remove()
@@ -96,9 +107,10 @@ N.validator.rrn("asf");
 N([]).datasort("key", false);
 
 N(window).alert("Hello").show();
-new N.alert(N(window), {
+const alertInst = new N.alert(N(window), {
     msg: "Hello"
 }).show();
+alertInst.context("span").each(function (index, element) {});
 
 N(".button").button({
     color: "primary_container"
@@ -106,6 +118,31 @@ N(".button").button({
 new N.button(N(".button"), {
     color: "primary_container"
 }).disable();
+
+N(".tab").tab({
+    tabOpts: [{
+        url: "http://localhost:8080",
+    }]
+}).cont().view!.find(".tab-pane").remove();
+new N.tab(N(".tab"), {
+    tabOpts: [{
+        url: "http://localhost:8080",
+    }]
+}).cont(0).view!.find(".tab-pane").remove();
+N(".tab").tab({
+    tabOpts: [{
+        url: "http://localhost:8080",
+    }]
+}).open().cont.view!.find(".tab-pane").remove();
+
+
+N([{}, {}]).each((index, element) => {});
+
+new N.select(N(".select")).data(false).each((index, element) => {});
+new N.select(N(".select")).data().forEach(function (item: JSONObject) {});
+new N.select(N(".select")).data(true).forEach(function (item: JSONObject) {});
+new N.select(N(".select")).context("option").get().forEach(function (item: HTMLElement) {});
+
 
 N([]).pagination({}).bind();
 new N.pagination([], {}).bind();

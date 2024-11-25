@@ -1,11 +1,16 @@
 declare class NUS {
+
+    notify(opts?: NU.Options.Button): Notify;
+    docs(opts?: NU.Options.Button): Documents;
+
     static notify: {
-        new(position: any, opts?: any): NUS.Notify;
+        new(position: any, opts?: any): Notify;
         add: (msg: any, url: any) => void;
         wrapEle: () => void;
     };
+
     static docs: {
-        new(obj: any, opts: any): NUS.Documents;
+        new(obj: any, opts: any): Documents;
         createLoadIndicator: () => any;
         updateLoadIndicator: (entireLoadRequestCnt: any, entireLoadRequestMaxCnt: any) => any;
         removeLoadIndicator: () => any;

@@ -185,11 +185,11 @@ declare namespace NA.Controller {
      * @param {NA.Request} request - Instance of the Communicator.request
      */
     type InitFunction = {
-        (this: Object, view: NJS, request: NA.Request): void
+        (this: Object, view: NJS<HTMLElement>, request: NA.Request): void
     }
 
-    type Object = {
-        [key: string]: any;
+    type Object<T = any> = {
+        [key: string]: T;
         /**
          * The initializer function that is called to set up the initial state or configuration.
          * This function is optional, and if provided, it should follow the signature defined by `InitFunction`.
@@ -200,7 +200,7 @@ declare namespace NA.Controller {
          *
          * > Same as the first argument of the init function.
          */
-        view?: NJS;
+        view?: NJS<HTMLElement>;
         /**
          * Instance of the Communicator.request object.
          *

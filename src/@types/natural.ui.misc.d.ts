@@ -139,7 +139,7 @@ declare namespace NU {
         type Tab = {
             context?: NJS | null;
             links?: NJS | null;
-            tabOpts?: NU.Options.EachTab;
+            tabOpts?: NU.Options.EachTab[];
             randomSel?: boolean;
             opener?: NA.Controller.Object | null;
             onActive?: NU.EventHandlers.Tab.OnActive | null;
