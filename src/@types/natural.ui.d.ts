@@ -1,6 +1,6 @@
 declare class NU {
 
-    alert(msg: NU.Options.Alert | string, vars?: any): NU.Alert;
+    alert(msg: NU.Options.Alert | string, vars?: string[]): NU.Alert;
     button(opts?: NU.Options.Button): NU.Button;
     datepicker(opts?: NU.Options.Datepicker): NU.Datepicker;
     popup(opts?: NU.Options.Popup): NU.Popup;
@@ -48,7 +48,7 @@ declare class NU {
     };
 
     static alert: {
-        new(obj: N, msg: NU.Options.Alert | string, vars?: any): NU.Alert;
+        new(obj: N, msg: NU.Options.Alert | string, vars?: string[]): NU.Alert;
         wrapEle: () => void;
         resetOffSetEle: (opts: any) => void;
         wrapInputEle: () => void;
@@ -161,39 +161,37 @@ declare namespace NU {
 
     interface Alert {
         options: NU.Options.Alert;
-        context(sel: any): any;
-        show(): any;
-        hide(): any;
-        remove(): any;
+        context(sel?: JQuery.Selector): NJS;
+        show(): Alert;
+        hide(): Alert;
+        remove(): Alert;
     }
 
     interface Button {
         options: NU.Options.Button;
-        context(sel: any): any;
-        disable(): any;
-        enable(): any;
+        context(sel?: JQuery.Selector): NJS;
+        disable(): Button;
+        enable(): Button;
     }
 
     interface Datepicker {
         options: NU.Options.Datepicker;
-        context(sel: any): any;
-        show(): any;
-        formEleOrgPosition: any;
-        hide(...args: any[]): any;
+        context(sel?: JQuery.Selector): NJS;
+        show(): Datepicker;
+        hide(...args: any[]): Datepicker;
     }
 
     interface Popup {
         options: NU.Options.Popup;
-        context(sel: any): any;
-        open(onOpenData: any): any;
-        close(onCloseData: any): any;
-        changeEvent(name: any, callback: any): any;
-        remove(): any;
+        context(sel?: JQuery.Selector): NJS;
+        open(onOpenData: any): Popup;
+        close(onCloseData: any): Popup;
+        remove(): Popup;
     }
 
     interface Tab {
         options: NU.Options.Tab;
-        context(sel: any): any;
+        context(sel?: JQuery.Selector): NJS;
         open(idx: any, onOpenData: any, isFirst: any): any | {
             index: any;
             tab: any;
@@ -208,7 +206,7 @@ declare namespace NU {
     interface Select {
         options: NU.Options.Select;
         data(selFlag: any): any;
-        context(sel: any): any;
+        context(sel?: JQuery.Selector): NJS;
         bind(data: any): any;
         index(idx: any): any;
         val(val: any): any;
@@ -220,7 +218,7 @@ declare namespace NU {
         options: NU.Options.Form;
         data(selFlag: any, ...args: any[]): any;
         row(before: any): any;
-        context(sel: any): any;
+        context(sel?: JQuery.Selector): NJS;
         /**
          * arguments[2]... arguments[n] are the columns to be bound.
          */
@@ -257,7 +255,7 @@ declare namespace NU {
         tempRowEle: any;
         contextEle: any;
         data(rowStatus: any, ...args: any[]): any;
-        context(sel: any): any;
+        context(sel?: JQuery.Selector): NJS;
         contextBodyTemplate(sel: any): any;
         select(row: any, isAppend: any): any;
         check(row: any, isAppend: any): any;
@@ -284,7 +282,7 @@ declare namespace NU {
         contextEle: any;
         rowSpanIds: any;
         data(rowStatus: any, ...args: any[]): any;
-        context(sel: any): any;
+        context(sel?: JQuery.Selector): NJS;
         contextHead(sel: any): any;
         contextBodyTemplate(sel: any): any;
         select(row: any, isAppend: any): any;
@@ -310,7 +308,7 @@ declare namespace NU {
         options: NU.Options.Pagination;
         linkEles: any;
         data(selFlag: any): any;
-        context(sel: any): any;
+        context(sel?: JQuery.Selector): NJS;
         bind(data?: any, totalCount?: any, ...args?: any[]): any;
         totalCount(totalCount: any): number | any;
         pageNo(pageNo: any): number | any;
@@ -322,7 +320,7 @@ declare namespace NU {
     interface Tree {
         options: NU.Options.Tree;
         data(selFlag: any, ...args: any[]): any;
-        context(sel: any): any;
+        context(sel?: JQuery.Selector): NJS;
         bind(data: any): any;
         select(val: any): any;
         expand(): any;

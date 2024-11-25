@@ -2569,13 +2569,6 @@ export class NU {
             return this;
         };
 
-        changeEvent(name, callback) {
-            this.options[name] = callback;
-            this.alert.options[name] = this.options[name];
-
-            return this;
-        };
-
         remove() {
             this.alert.remove();
             return this;
