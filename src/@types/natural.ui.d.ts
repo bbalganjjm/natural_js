@@ -210,7 +210,7 @@ declare namespace NU {
         options: NU.Options.Select;
         data(selFlag: true): JSONObject[];
         data(selFlag: false): NJS<JSONObject[]>;
-        data(selFlag?: boolean): JSONObject[];
+        data(): JSONObject[];
         context(sel?: JQuery.Selector): NJS<HTMLElement>;
         bind(data?: NJS): any;
         index(idx: any): any;
@@ -221,7 +221,9 @@ declare namespace NU {
 
     interface Form {
         options: NU.Options.Form;
-        data(selFlag: any, ...args: any[]): any;
+        data(selFlag: true, ...args?: string[]): JSONObject[];
+        data(selFlag: false): NJS<JSONObject[]>;
+        data(): JSONObject[];
         row(before: any): any;
         context(sel?: JQuery.Selector): NJS<HTMLElement>;
         /**

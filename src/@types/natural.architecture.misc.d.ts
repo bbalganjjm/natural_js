@@ -181,7 +181,7 @@ declare namespace NA.Controller {
      * });
      * ```
      *
-     * @param {NJS} view - View element.
+     * @param {NJS<HTMLElement>} view - View element.
      * @param {NA.Request} request - Instance of the Communicator.request
      */
     type InitFunction = {

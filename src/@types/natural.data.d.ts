@@ -4,7 +4,7 @@ declare class ND {
      * - Instead of using a ruleset, you can pass an element as an argument, where the element wraps elements with formatting rules declared in the data-format attribute. This will display the formatted string in those elements. If the element is a text input element, it will display the original string of the data when the cursor focuses in (focusin event), and display the formatted string when the cursor focuses out (focusout event).
      * - You can also format on a per-string basis rather than using a dataset.
      *
-     * @param {NJS | HTMLElement | ND.FormatRuleObject | string} [rules] - Specifies formatting rules.
+     * @param {NJS<HTMLElement> | HTMLElement | ND.FormatRuleObject | string} [rules] - Specifies formatting rules.
      * The formatting rule can be specified in two types as follows:
      * - If you specify the rules as an object option:
      *   ```
@@ -42,13 +42,13 @@ declare class ND {
      *
      * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0301.html }
      */
-    formatter(rules?: NJS | HTMLElement | ND.FormatRuleObject | string): ND.Formatter;
+    formatter(rules?: NJS<HTMLElement> | HTMLElement | ND.FormatRuleObject | string): ND.Formatter;
     /**
      * Validator (N.validator) is a library that validates an input data set (array of JSON objects) and returns the result data set.
      * - Instead of a ruleset, if you pass an element that wraps input elements with validation rules declared in the data-validate attribute, it will validate the value entered in the element when the cursor focusout occurs on the input element. If validation fails, an error message is displayed in the form of a tooltip near the input element.
      * - Validation can also be performed on strings, not just datasets.
      *
-     * @param {NJS|HTMLElement|ND.ValidationRuleObject|string} [rules] - Specifies the validation rules.
+     * @param {NJS<HTMLElement>|HTMLElement|ND.ValidationRuleObject|string} [rules] - Specifies the validation rules.
      * You can specify the validation rules in two ways as follows:
      * - Specifying rules as object options:
      *    ```
@@ -88,7 +88,7 @@ declare class ND {
      *
      * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0302.html }
      */
-    validator(rules?: NJS | HTMLElement | ND.ValidationRuleObject | string): ND.Validator;
+    validator(rules?: NJS<HTMLElement> | HTMLElement | ND.ValidationRuleObject | string): ND.Validator;
 
     datafilter(condition: ND.ConditionCallback | string): NJS;
 
@@ -104,7 +104,7 @@ declare class ND {
          * - Instead of using a ruleset, you can pass an element as an argument, where the element wraps elements with formatting rules declared in the data-format attribute. This will display the formatted string in those elements. If the element is a text input element, it will display the original string of the data when the cursor focuses in (focusin event), and display the formatted string when the cursor focuses out (focusout event).
          * - You can also format on a per-string basis rather than using a dataset.
          *
-         * @param {NJS} data - The data to be formatted.
+         * @param {NJS<JSONObject>} data - The data to be formatted.
          * @param {NJS | HTMLElement | ND.FormatRuleObject | string} [rules] - Specifies formatting rules.
          * The formatting rule can be specified in two types as follows:
          * - If you specify the rules as an object option:
@@ -143,7 +143,7 @@ declare class ND {
          *
          * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0301.html }
          */
-        new(data: NJS, rules?: NJS | HTMLElement | ND.FormatRuleObject | string): ND.Formatter;
+        new(data: NJS<JSONObject>, rules?: NJS<HTMLElement> | HTMLElement | ND.FormatRuleObject | string): ND.Formatter;
 
         commas(str: string): string;
         rrn(str: string, args: NC.Primitive[]): string;
@@ -159,10 +159,10 @@ declare class ND {
         trimtoempty(str: string): string;
         trimtozero(str: string): string;
         trimtoval(str: string, args: NC.Primitive[]): string;
-        date(str: string, args: NC.Primitive[], ele: NJS): string;
+        date(str: string, args: NC.Primitive[], ele: NJS<HTMLElement>): string;
         time(str: string, args: NC.Primitive[]): string;
-        limit(str: string, args: NC.Primitive[], ele: NJS): string;
-        replace(str: string, args: NC.Primitive[], ele: NJS): string;
+        limit(str: string, args: NC.Primitive[], ele: NJS<HTMLElement>): string;
+        replace(str: string, args: NC.Primitive[], ele: NJS<HTMLElement>): string;
         lpad(str: string, args: NC.Primitive[]): string;
         rpad(str: string, args: NC.Primitive[]): string;
         mask(str: string, args: NC.Primitive[]): string;
@@ -217,7 +217,7 @@ declare class ND {
          *
          * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0302.html }
          */
-        new(data: NJS, rules?: NJS | HTMLElement | ND.ValidationRuleObject | string): ND.Validator;
+        new(data: NJS<JSONObject>, rules?: NJS<HTMLElement> | HTMLElement | ND.ValidationRuleObject | string): ND.Validator;
         required(str: string): boolean;
         alphabet(str: string): boolean;
         integer(str: string): boolean;

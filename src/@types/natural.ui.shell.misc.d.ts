@@ -7,7 +7,7 @@ declare namespace NUS {
                 top: number;
                 right: number;
             };
-            container: NJS;
+            container: NJS<HTMLElement>;
             context: any;
             displayTime: number;
             alwaysOnTop: boolean;
@@ -26,7 +26,7 @@ declare namespace NUS {
             tabScrollCorrection: {
                 rightCorrectionPx: number;
             };
-            msgContext: NJS;
+            msgContext: NJS<HTMLElement>;
             entireLoadIndicator: boolean;
             entireLoadScreenBlock: boolean;
             entireLoadExcludeURLs: any[];
@@ -59,7 +59,7 @@ declare namespace NUS {
 
         namespace Documents {
             type OnBeforeCreate = {
-                (this: NU.Button, context: NJS, opts: NU.Options.Button): void;
+                (this: NU.Button, context: NJS<HTMLElement>, opts: NU.Options.Button): void;
             }
         }
 

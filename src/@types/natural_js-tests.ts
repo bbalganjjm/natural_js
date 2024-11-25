@@ -138,11 +138,15 @@ N(".tab").tab({
 
 N([{}, {}]).each((index, element) => {});
 
-new N.select(N(".select")).data(false).each((index, element) => {});
+new N.select(".select").data(false).each((index, element) => {});
+new N.select(N(".select")).data().forEach(function (item: JSONObject) {});
+new N.select(".select").data(true).forEach(function (item: JSONObject) {});
+new N.select(N(".select")).context("option").get().forEach(function (item: HTMLElement) {});
+
+N().form(".form").data(false).each((index, element) => {});
 new N.select(N(".select")).data().forEach(function (item: JSONObject) {});
 new N.select(N(".select")).data(true).forEach(function (item: JSONObject) {});
 new N.select(N(".select")).context("option").get().forEach(function (item: HTMLElement) {});
-
 
 N([]).pagination({}).bind();
 new N.pagination([], {}).bind();

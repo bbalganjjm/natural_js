@@ -1,7 +1,7 @@
 declare namespace NU {
     namespace Options {
         type Alert = {
-            context?: window | NJS | null;
+            context?: window | NJS<HTMLElement> | null;
             msg: string;
             vars?: string[] | undefined;
             html?: boolean;
@@ -45,17 +45,17 @@ declare namespace NU {
         };
 
         type Button = {
-            context?: NJS | null;
+            context?: NJS<HTMLElement> | null;
             size?: "none" | "smaller" | "small" | "medium" | "large" | "big";
             color?: "none" | "primary" | "primary_container" | "secondary" | "secondary_container" | "tertiary" | "tertiary_container";
             type?: "none" | "filled" | "outlined" | "elevated";
             disable?: boolean;
             onBeforeCreate?: NU.EventHandlers.Button.OnBeforeCreate | null;
             onCreate?: NU.EventHandlers.Button.OnCreate | null;
-        }
+        };
 
         type Datepicker = {
-            context?: NJS | null;
+            context?: NJS<HTMLElement> | null;
             monthonly?: boolean;
             focusin?: boolean;
             yearsPanelPosition?: "left" | "top";
@@ -83,10 +83,10 @@ declare namespace NU {
             onShow?: NU.EventHandlers.Datepicker.OnShow | null;
             onBeforeHide?: NU.EventHandlers.Datepicker.OnBeforeHide | null;
             onHide?: NU.EventHandlers.Datepicker.OnHide | null;
-        }
+        };
 
         type Popup = {
-            context?: NJS | null;
+            context?: NJS<HTMLElement> | null;
             url? : string,
             title?: string;
             button?: boolean;
@@ -126,7 +126,7 @@ declare namespace NU {
                 right?: number
             };
             saveMemory?: boolean;
-        }
+        };
 
         type EachTab = {
             url?: string;
@@ -135,39 +135,39 @@ declare namespace NU {
             onOpen?: string | NU.EventHandlers.Tab.OnOpen;
             disable?: boolean;
             stateless?: boolean
-        }
+        };
         type Tab = {
-            context?: NJS | null;
-            links?: NJS | null;
+            context?: NJS<HTMLElement> | null;
+            links?: NJS<HTMLElement> | null;
             tabOpts?: NU.Options.EachTab[];
             randomSel?: boolean;
             opener?: NA.Controller.Object | null;
             onActive?: NU.EventHandlers.Tab.OnActive | null;
             onLoad?: NU.EventHandlers.Tab.OnLoad | null;
             blockOnActiveWhenCreate?: boolean;
-            contents?: NJS | null;
+            contents?: NJS<HTMLElement> | null;
             tabScroll?: boolean;
             tabScrollCorrection?: {
                 tabContainerWidthCorrectionPx?: number;
                 tabContainerWidthReCalcDelayTime?: number;
             }
-        }
+        };
 
         type Select = {
-            data?: NJS;
-            context?: NJS | null;
+            data?: NJS<JSONObject>;
+            context?: NJS<HTMLElement> | null;
             key?: string;
             val?: string;
             append?: boolean;
             direction?: "h" | "v";
             type?: 0 | 1 | 2 | 3 | 4;
-            template?: NJS | null;
-        }
+            template?: NJS<HTMLElement> | null;
+        } | string
 
         type Form = {
-            data?: NJS;
+            data?: NJS<JSONObject>;
             row?: number;
-            context?: NJS | null;
+            context?: NJS<HTMLElement> | null;
             validate?: boolean;
             autoUnbind?: boolean;
             state?: "add" | "bind" | "revert" | "update" | null;
@@ -185,14 +185,14 @@ declare namespace NU {
             onBindValue?: NU.EventHandlers.Form.OnBindValue | null;
             onBeforeBind?: NU.EventHandlers.Form.OnBeforeBind | null;
             onBind?: NU.EventHandlers.Form.OnBind | null;
-            InitialData?: NJS;
-        }
+            InitialData?: NJS<JSONObject>;
+        } | string;
 
         type List = {
-            data?: NJS;
+            data?: NJS<JSONObject>;
             row?: number;
             beforeRow?: number;
-            context?: NJS | null;
+            context?: NJS<HTMLElement> | null;
             height?: number;
             validate?: boolean;
             html?: boolean;
@@ -227,7 +227,7 @@ declare namespace NU {
             onBeforeSelect?: NU.EventHandlers.List.OnBeforeSelect | null;
             onSelect?: NU.EventHandlers.List.OnSelect | null;
             onBind?: NU.EventHandlers.List.OnBind | null;
-        }
+        } | string;
 
         type GridMisc = {
             resizableCorrectionWidth?: number;
@@ -242,12 +242,13 @@ declare namespace NU {
             fixedcolBodyBindHeight?: number;
             fixedcolBodyAddHeight?: number;
             fixedcolRootContainer?: JQuery.Selector | null;
-        }
+        } | string;
+
         type Grid = {
-            data?: NJS;
+            data?: NJS<JSONObject>;
             row?: number;
             beforeRow?: number;
-            context?: NJS | null;
+            context?: NJS<HTMLElement> | null;
             height?: number;
             fixedcol?: number;
             more?: boolean | string[];
@@ -290,7 +291,7 @@ declare namespace NU {
             onBind?: NU.EventHandlers.Grid.OnBind | null;
             misc?: NU.Options.GridMisc;
             currMoveToRow?: number;
-        }
+        } | string
 
         type CurrPageNavInfo = {
             pageNo: number;
@@ -306,10 +307,11 @@ declare namespace NU {
             startRowNum: number;
             endRowIndex: number;
             endRowNum: number;
-        };
+        } | string;
+
         type Pagination = {
-            data?: NJS;
-            context?: NJS | null;
+            data?: NJS<JSONObject>;
+            context?: NJS<HTMLElement> | null;
             totalCount?: number;
             countPerPage?: number;
             countPerPageSet?: number;
@@ -317,11 +319,11 @@ declare namespace NU {
             onChange?: NU.EventHandlers.Pagination.OnChange | null;
             blockOnChangeWhenBind?: boolean;
             currPageNavInfo?: NU.Options.CurrPageNavInfo | null;
-        }
+        } | string;
 
         type Tree = {
-            data?: NJS;
-            context?: NJS | null;
+            data?: NJS<JSONObject>;
+            context?: NJS<HTMLElement> | null;
             key?: string;
             val?: string;
             level?: string;
@@ -330,19 +332,20 @@ declare namespace NU {
             checkbox?: boolean;
             onSelect?: NU.EventHandlers.Tree.OnSelect | null;
             onCheck?: NU.EventHandlers.Tree.OnCheck | null;
-        }
+        } | string;
+
     }
 
     namespace EventHandlers {
         namespace Alert {
             type Width = {
-                (this: NU.Alert, msgContext?: NJS, msgContents?: NJS): number;
+                (this: NU.Alert, msgContext?: NJS<HTMLElement>, msgContents?: NJS<HTMLElement>): number;
             }
             type Height = {
-                (this: NU.Alert, msgContext?: NJS, msgContents?: NJS): number;
+                (this: NU.Alert, msgContext?: NJS<HTMLElement>, msgContents?: NJS<HTMLElement>): number;
             }
             type OnOk = {
-                (this: NU.Alert, msgContext?: NJS, msgContents?: NJS): undefined | 0;
+                (this: NU.Alert, msgContext?: NJS<HTMLElement>, msgContents?: NJS<HTMLElement>): undefined | 0;
             }
             type OnCancel = {
                 (this: NU.Alert, msgContext?: NJS, msgContents?: NJS): undefined | 0;
@@ -443,18 +446,18 @@ declare namespace NU {
                 (this: NA.Controller.Object, onOpenData?: any): void;
             }
             type OnActive = {
-                (this: NU.Tab, selTabIdx: number, selTabEle: NJS, selContentEle: NJS, links: NJS, contents: NJS): void;
+                (this: NU.Tab, selTabIdx: number, selTabEle: NJS<HTMLElement>, selContentEle: NJS<HTMLElement>, links: NJS, contents: NJS): void;
             }
             type OnLoad = {
-                (this: NU.Tab, selTabIdx: number, selTabEle: NJS, selContentEle: NJS, cont: NA.Controller.Object): void;
+                (this: NU.Tab, selTabIdx: number, selTabEle: NJS<HTMLElement>, selContentEle: NJS<HTMLElement>, cont: NA.Controller.Object): void;
             }
         }
         namespace Form {
             type OnBeforeBindValue = {
-                (this: NU.Form, ele: NJS, val: NC.Primitive | NC.Primitive[], action: "bind" | "val"): NC.Primitive | NC.Primitive[];
+                (this: NU.Form, ele: NJS<HTMLElement>, val: NC.Primitive | NC.Primitive[], action: "bind" | "val"): NC.Primitive | NC.Primitive[];
             }
             type OnBindValue = {
-                (this: NU.Form, ele: NJS, val: NC.Primitive | NC.Primitive[], action: "bind" | "val"): void;
+                (this: NU.Form, ele: NJS<HTMLElement>, val: NC.Primitive | NC.Primitive[], action: "bind" | "val"): void;
             }
             type OnBeforeBind = {
                 (this: NU.Form, context: NJS, vals: NC.JSONObject): void;
@@ -465,49 +468,49 @@ declare namespace NU {
         }
         namespace List {
             type RowHandlerBeforeBind = {
-                (this: NU.List, rowIdx: number, rowEle: NJS, rowData: NC.JSONObject): void;
+                (this: NU.List, rowIdx: number, rowEle: NJS<HTMLElement>, rowData: NC.JSONObject): void;
             }
             type RowHandler = {
-                (this: NU.List, rowIdx: number, rowEle: NJS, rowData: NC.JSONObject): void;
+                (this: NU.List, rowIdx: number, rowEle: NJS<HTMLElement>, rowData: NC.JSONObject): void;
             }
             type OnBeforeSelect = {
-                (this: NU.List, rowIdx: number, rowEle: NJS, rowData: NJS, beforeRowIdx: number, e: JQuery.Event): undefined | false;
+                (this: NU.List, rowIdx: number, rowEle: NJS<HTMLElement>, rowData: NJS<JSONObject>, beforeRowIdx: number, e: JQuery.Event): undefined | false;
             }
             type OnSelect = {
-                (this: NU.List, rowIdx: number, rowEle: NJS, rowData: NJS, beforeRowIdx: number, e: JQuery.Event): void;
+                (this: NU.List, rowIdx: number, rowEle: NJS<HTMLElement>, rowData: NJS<JSONObject>, beforeRowIdx: number, e: JQuery.Event): void;
             }
             type OnBind = {
-                (this: NU.List, context: NJS, data: NJS, isFirstPage: boolean, isLastPage: boolean): void;
+                (this: NU.List, context: NJS, data: NJS<JSONObject>, isFirstPage: boolean, isLastPage: boolean): void;
             }
         }
         namespace Grid {
             type RowHandlerBeforeBind = {
-                (this: NU.Grid, rowIdx: number, rowEle: NJS, rowData: NC.JSONObject): void;
+                (this: NU.Grid, rowIdx: number, rowEle: NJS<HTMLElement>, rowData: NC.JSONObject): void;
             }
             type RowHandler = {
-                (this: NU.Grid, rowIdx: number, rowEle: NJS, rowData: NC.JSONObject): void;
+                (this: NU.Grid, rowIdx: number, rowEle: NJS<HTMLElement>, rowData: NC.JSONObject): void;
             }
             type OnBeforeSelect = {
-                (this: NU.Grid, rowIdx: number, rowEle: NJS, rowData: NJS, beforeRowIdx: number, e: JQuery.Event): undefined | false;
+                (this: NU.Grid, rowIdx: number, rowEle: NJS<HTMLElement>, rowData: NJS<JSONObject>, beforeRowIdx: number, e: JQuery.Event): undefined | false;
             }
             type OnSelect = {
-                (this: NU.Grid, rowIdx: number, rowEle: NJS, rowData: NJS, beforeRowIdx: number, e: JQuery.Event): void;
+                (this: NU.Grid, rowIdx: number, rowEle: NJS<HTMLElement>, rowData: NJS<JSONObject>, beforeRowIdx: number, e: JQuery.Event): void;
             }
             type OnBind = {
-                (this: NU.Grid, context: NJS, data: NJS, isFirstPage: boolean, isLastPage: boolean): void;
+                (this: NU.Grid, context: NJS, data: NJS<JSONObject>, isFirstPage: boolean, isLastPage: boolean): void;
             }
         }
         namespace Pagination {
             type OnChange = {
-                (this: NU.Pagination, pageNo: number, selEle: NJS, selData: NC.JSONObject[], currPageNavInfo: NU.Options.CurrPageNavInfo): void;
+                (this: NU.Pagination, pageNo: number, selEle: NJS<HTMLElement>, selData: NC.JSONObject[], currPageNavInfo: NU.Options.CurrPageNavInfo): void;
             }
         }
         namespace Tree {
             type OnSelect = {
-                (this: NU.Tree, selNodeIndex: number, selNodeEle: NJS, selNodeData: NC.JSONObject): void;
+                (this: NU.Tree, selNodeIndex: number, selNodeEle: NJS<HTMLElement>, selNodeData: NC.JSONObject): void;
             }
             type OnCheck = {
-                (this: NU.Tree, selNodeIndex: number, selNodeEle: NJS, selNodeData: NC.JSONObject
+                (this: NU.Tree, selNodeIndex: number, selNodeEle: NJS<HTMLElement>, selNodeData: NC.JSONObject
                     , checkedElesIndexes: number[], checkedEles: NJS, checkedElesData: NC.JSONObject[]
                     , checkFlag: boolean): void;
             }
