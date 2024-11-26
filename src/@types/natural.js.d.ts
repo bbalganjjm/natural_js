@@ -14,10 +14,6 @@ declare function N(selector?: JQuery.Selector
 
 type OmitJQuery = Omit<JQuery, "select">;
 declare interface NJS<T> extends OmitJQuery, NC, NA, ND, NU, NUS {
-    /**
-     * Initializes and returns a new N object based on jQuery objects with the provided selector and context argument values.
-     */
-    new(selector: any, context?: any);
 
     version: {
         "Natural-JS": string;
@@ -298,7 +294,7 @@ declare namespace N {
      *
      * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0501.html }
      */
-    const notify = function (position: any, opts?: any) {
+    const notify = function (position: NUS.Options.NotifyPosition, opts?: NUS.Options.Notify) {
         return new NUS.notify(position, opts);
     }
 

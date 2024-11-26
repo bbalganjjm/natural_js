@@ -141,7 +141,7 @@ declare namespace NA {
     }
 
     interface Controller {
-        new(obj: NJS<HTMLElement>, contObj: NA.Controller.Object): contObj;
+        new(obj: NJS<HTMLElement[]>, contObj: NA.Controller.Object): contObj;
 
         trInit(cont: NA.Controller.Object, request: NA.Request): void;
 

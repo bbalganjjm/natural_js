@@ -181,11 +181,11 @@ declare namespace NA.Controller {
      * });
      * ```
      *
-     * @param {NJS<HTMLElement>} view - View element.
+     * @param {NJS<HTMLElement[]>} view - View element.
      * @param {NA.Request} request - Instance of the Communicator.request
      */
     type InitFunction = {
-        (this: Object, view: NJS<HTMLElement>, request: NA.Request): void
+        (this: Object, view: NJS<HTMLElement[]>, request: NA.Request): void
     }
 
     type Object<T = any> = {
@@ -200,7 +200,7 @@ declare namespace NA.Controller {
          *
          * > Same as the first argument of the init function.
          */
-        view?: NJS<HTMLElement>;
+        view?: NJS<HTMLElement[]>;
         /**
          * Instance of the Communicator.request object.
          *

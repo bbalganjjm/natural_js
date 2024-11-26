@@ -112,6 +112,7 @@ N(window).alert("Hello").show();
 const alertInst = new N.alert(N(window), {
     msg: "Hello"
 }).show();
+alertInst.options.msg = "Hello";
 alertInst.context("span").each(function (index, element) {});
 
 N(".button").button({
@@ -146,7 +147,9 @@ select.data(false).each((index, element) => {});
 select.data(true).forEach(function (item) {});
 select.context("option").get().forEach(function (item) {});
 
-select = N([{a:1}]).select(N(".select", cont.view));
+select = N([{a:1}]).select({
+    context: N(".select", cont.view)
+});
 select.data(false).each((index, element) => {});
 select.data().forEach(function (item) {});
 select.data(true).forEach(function (item) {});
@@ -163,15 +166,31 @@ form.data().forEach(function (item) {});
 form.data(true).forEach(function (item) {});
 form.context("option").get().forEach(function (item) {});
 
-N([]).pagination({}).bind();
+N([]).pagination({
+
+}).bind();
 new N.pagination(N([]), {
 
 }).bind();
 
-N({}).notify({}).add("asd");
-N.notify({}, {}).add("asd");
-N.notify({}).add("asd");
+N({
+    // TODO
+}).notify({
+
+}).add("asd");
+N.notify({
+
+}, {
+
+}).add("asd");
+N.notify({
+
+}).add("asd");
 N.notify.add("asd", "");
 
-const docs1 = N(".context").docs({});
-const docs2 = new N.docs(N(".context"), {});
+const docs1 = N(".context").docs({
+
+});
+const docs2 = new N.docs(N(".context"), {
+
+});

@@ -27,7 +27,7 @@ declare namespace NC {
         (this: T, instanceName: string, instance: T): void;
     }
     type ValsCallback = {
-        (this: NJS<HTMLElement>, index: number, selEle: NJS<HTMLElement>): void;
+        (this: NJS<HTMLElement[]>, index: number, selEle: NJS<HTMLElement[]>): void;
     }
 
     /**

@@ -1,16 +1,16 @@
 declare class NUS {
 
-    notify(opts?: NU.Options.Button): Notify;
-    docs(opts?: NU.Options.Button): Documents;
+    notify(opts?: NUS.Options.Notify): NUS.Notify;
+    docs(opts?: NUS.Options.Documents): NUS.Documents;
 
     static notify: {
-        new(position: any, opts?: any): Notify;
+        new(position: NUS.Options.NotifyPosition, opts?: NUS.Options.Notify): NUS.Notify;
         add: (msg: any, url: any) => void;
         wrapEle: () => void;
     };
 
     static docs: {
-        new(obj: any, opts: any): Documents;
+        new(obj: NJS<HTMLElement[]>, opts: NUS.Options.Documents): NUS.Documents;
         createLoadIndicator: () => any;
         updateLoadIndicator: (entireLoadRequestCnt: any, entireLoadRequestMaxCnt: any) => any;
         removeLoadIndicator: () => any;
@@ -33,22 +33,22 @@ declare namespace NUS {
 
     interface Notify {
         options: NUS.Options.Notify;
-        context(sel: any): any;
-        add(msg: any, url?: any): any;
-        remove(msgBoxEle: any): any;
+        context(sel?: JQuery.Selector): NJS<HTMLElement[]>;
+        add(msg: string, url?: string): this;
+        remove(msgBoxEle: NJS<HTMLElement[]>): this;
     }
 
     interface Documents {
         options: NUS.Options.Documents;
         request: NA.Request;
-        context(sel: any): any;
-        add(docId: any, docNm: any, docOpts: any): any;
-        active(docId: any, isFromDocsTabList: any, isNotLoaded: any): any;
-        removeState(docId: any, callback: any): any;
-        remove(docId: any, unconditional: any): any;
-        doc(docId: any): any;
-        cont(docId: any): any;
-        reload(docId: any, callback: any): any;
+        context(sel?: JQuery.Selector): NJS<HTMLElement[]>;
+        add(docId: string, docNm: string, docOpts: DocOpts): this;
+        active(docId: string, isFromDocsTabList?: boolean, isNotLoaded?: boolean): this;
+        removeState(docId: string, callback: NUS.Callbacks.Documents.RemoveState): this;
+        remove(docId: string, unconditional?: boolean): this;
+        doc(docId: string): NUS.Options.DocsObject | NUS.Options.DocOpts;
+        cont(docId: string): NA.Controller.Object;
+        reload(docId: string, callback: NA.Request.SubmitCallback): this;
     }
 
 }
