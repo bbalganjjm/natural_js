@@ -241,7 +241,7 @@ declare class NC {
      * @param {NJS<HTMLElement[]> | HTMLElement | HTMLElement[] | any} el - The input element(s) or any value to convert.
      * @returns {string} The CSS selector string derived from the input.
      */
-    static toSelector: (el: NJS<HTMLElement[]> | HTMLElement | HTMLElement[] | any) => string;
+    static toSelector(el: NJS<HTMLElement[]> | HTMLElement | HTMLElement[] | any): string;
     /**
      * A function that takes a variable number of arguments and returns an array of
      * JQuery.Deferred objects, ensuring that the deferred tasks are executed in serial order.
@@ -250,7 +250,7 @@ declare class NC {
      * @returns {JQuery.Deferred[]} An array of JQuery.Deferred objects representing
      *                              the serialized execution of tasks.
      */
-    static serialExecute: (...args: T) => JQuery.Deferred[];
+    static serialExecute(...args: T): JQuery.Deferred[];
 
     /**
      * Provides methods to perform different levels of garbage collection.
@@ -571,7 +571,7 @@ declare class NC {
          *
          * @return {number} The version of Internet Explorer as a number, or 0 if the browser is not IE.
          */
-        msieVersion: () => number;
+        msieVersion(): number;
         /**
          * Checks if the given browser name matches the current browser type.
          *
@@ -589,7 +589,7 @@ declare class NC {
          *
          * @returns {string} The application context path.
          */
-        contextPath: () => string;
+        contextPath(): string;
         /**
          * Calculates and returns the width of the browser's scrollbar.
          *
@@ -598,7 +598,7 @@ declare class NC {
          *
          * @returns {number} The width of the scrollbar in pixels.
          */
-        scrollbarWidth: () => number;
+        scrollbarWidth(): number;
     };
     /**
      * Provides various utilities for handling messages.

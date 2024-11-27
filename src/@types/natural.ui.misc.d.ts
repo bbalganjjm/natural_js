@@ -87,15 +87,15 @@ declare namespace NU {
 
         type Popup = {
             context?: NJS<HTMLElement[]> | null;
-            url? : string,
+            url?: string,
             title?: string;
             button?: boolean;
-            modal? : boolean,
+            modal?: boolean,
             top?: number | undefined;
             left?: number | undefined;
             width?: NU.EventHandlers.Popup.Width | number;
             height?: NU.EventHandlers.Popup.Height | number;
-            opener? : NA.Controller.Object | null,
+            opener?: NA.Controller.Object | null,
             closeMode?: "hide" | "remove";
             alwaysOnTop?: boolean;
             confirm?: boolean;
@@ -109,12 +109,12 @@ declare namespace NU {
             onHide?: NU.EventHandlers.Popup.OnHide | null;
             onBeforeRemove?: NU.EventHandlers.Popup.OnBeforeRemove | null;
             onRemove?: NU.EventHandlers.Popup.OnRemove | null;
-            onOpen : string | NU.EventHandlers.Popup.OnOpen | null,
-            onOpenData : any | null,
-            onClose : NU.EventHandlers.Popup.OnClose | null,
-            onCloseData : any | null,
-            onLoad : NU.EventHandlers.Popup.OnLoad | null,
-            preload : boolean,
+            onOpen: string | NU.EventHandlers.Popup.OnOpen | null,
+            onOpenData: any | null,
+            onClose: NU.EventHandlers.Popup.OnClose | null,
+            onCloseData: any | null,
+            onLoad: NU.EventHandlers.Popup.OnLoad | null,
+            preload: boolean,
             dynPos?: boolean;
             windowScrollLock?: boolean;
             draggable?: boolean;
@@ -514,7 +514,6 @@ declare namespace NU {
                     , checkFlag: boolean): void;
             }
         }
-
     }
 
     namespace Grid {
@@ -525,7 +524,6 @@ declare namespace NU {
             tfoot: HTMLTableCellElement[][];
         };
     }
-
     namespace Pagination {
         type LinkEles = {
             body: HTMLElement[][];
@@ -535,6 +533,19 @@ declare namespace NU {
             next: HTMLElement[][];
             last: HTMLElement[][];
         };
+    }
+
+    namespace Callbacks {
+        namespace Popup {
+            type loadContent = {
+                (this: NU.Popup, cont?: NA.Controller.Object, context?: NJS<HTMLElement[]>): void;
+            }
+        }
+        namespace Tab {
+            type loadContent = {
+                (this: NU.Tab, cont?: NA.Controller.Object, context?: NJS<HTMLElement[]>): void;
+            }
+        }
     }
 
 }

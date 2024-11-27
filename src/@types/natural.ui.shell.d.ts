@@ -5,26 +5,26 @@ declare class NUS {
 
     static notify: {
         new(position: NUS.Options.NotifyPosition, opts?: NUS.Options.Notify): NUS.Notify;
-        add: (msg: any, url: any) => void;
-        wrapEle: () => void;
+        add(msg: any, url: any): void;
+        wrapEle(): void;
     };
 
     static docs: {
         new(obj: NJS<HTMLElement[]>, opts: NUS.Options.Documents): NUS.Documents;
-        createLoadIndicator: () => any;
-        updateLoadIndicator: (entireLoadRequestCnt: any, entireLoadRequestMaxCnt: any) => any;
-        removeLoadIndicator: () => any;
-        errorLoadIndicator: () => any;
-        wrapEle: () => void;
-        wrapScroll: () => void;
-        clearScrollPosition: (tabEle: any, isActive: any) => void;
-        loadContent: (docOpts: any, callback: any) => void;
-        closeBtnControl: () => void;
-        inactivateTab: () => void;
-        activateTab: (docId_: any, isFromDocsTabList_: any, isNotLoaded_: any) => void;
-        showTabContents: (docId_: any) => boolean;
-        hideTabContents: (docId_: any) => void;
-        remove: (targetTabEle: any) => void;
+        createLoadIndicator(): any;
+        updateLoadIndicator(entireLoadRequestCnt: any, entireLoadRequestMaxCnt: any): any;
+        removeLoadIndicator(): any;
+        errorLoadIndicator(): any;
+        wrapEle(): void;
+        wrapScroll(): void;
+        clearScrollPosition(tabEle: any, isActive: any): void;
+        loadContent(docOpts: any, callback: any): void;
+        closeBtnControl(): void;
+        inactivateTab(): void;
+        activateTab(docId_: any, isFromDocsTabList_: any, isNotLoaded_: any): void;
+        showTabContents(docId_: any): boolean;
+        hideTabContents(docId_: any): void;
+        remove(targetTabEle: any): void;
     };
 
 }

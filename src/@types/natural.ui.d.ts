@@ -39,43 +39,42 @@ declare class NU {
 
     static alert: {
         new(obj: NJS<HTMLElement[]>, msg: NU.Options.Alert | string, vars?: string[]): NU.Alert;
-        wrapEle: () => void;
-        resetOffSetEle: (opts: any) => void;
-        wrapInputEle: () => void;
+        wrapEle(): void;
+        resetOffSetEle(opts: NU.Options.Alert): void;
+        wrapInputEle(): void;
     };
 
     static button: {
         new(obj: NJS<HTMLElement[]>, opts?: NU.Options.Button): NU.Button;
-        wrapEle: () => void;
+        wrapEle(): void;
     };
 
     static datepicker: {
         new(obj: NJS<HTMLElement[]>, opts?: NU.Options.Datepicker): NU.Datepicker;
-        context: () => any;
-        checkMinMaxDate: () => boolean;
-        wrapEle: () => void;
-        createContents: () => any;
-        yearPaging: (yearItems: any, currYear: any, addCnt: any, absolute: any) => void;
-        selectItems: (opts: any, value: any, format: any, yearsPanel: any, monthsPanel: any, daysPanel: any) => void;
+        checkMinMaxDate(): boolean;
+        wrapEle(): void;
+        createContents(): any;
+        yearPaging(yearItems: NJS<HTMLElement[]>, currYear: number | string, addCnt: number, absolute?: boolean): void;
+        selectItems(opts: NU.Options.Datepicker, value: string, format: string, yearsPanel: NJS<HTMLElement[]>, monthsPanel: NJS<HTMLElement[]>, daysPanel: NJS<HTMLElement[]>): void;
     };
 
     static popup: {
         new(obj: NJS<HTMLElement[]>, opts?: NU.Options.Popup): NU.Popup;
-        wrapEle: () => void;
-        loadContent: (callback: any) => void;
-        popOpen: (onOpenData: any, cont: any) => void;
+        wrapEle(): void;
+        loadContent(callback: NU.Callbacks.Popup.loadContent): void;
+        popOpen(onOpenData: any, cont: NA.Controller.Object): void;
     };
 
     static tab: {
         new(obj: NJS<HTMLElement[]>, opts?: NU.Options.Tab): NU.Tab;
-        wrapEle: () => void;
-        wrapScroll: () => void;
-        loadContent: (url: any, targetIdx: any, callback: any, isFirst: any) => void;
+        wrapEle(): void;
+        wrapScroll(): void;
+        loadContent(url: string, targetIdx: number, callback: NU.Callbacks.Tab.loadContent, isFirst: boolean): void;
     };
 
     static select: {
         new(data: NJS<NC.JSONObject[]>, opts?: NU.Options.Select | Omit<NJS<HTMLElement[]>, keyof NJS<HTMLElement[]>>): NU.Select;
-        wrapEle: () => void;
+        wrapEle(): void;
     };
 
     static form: {
@@ -84,52 +83,31 @@ declare class NU {
 
     static list: {
         new(data: NJS<NC.JSONObject[]>, opts?: NU.Options.List | Omit<NJS<HTMLElement[]>, keyof NJS<HTMLElement[]>>): NU.List;
-        createScroll: () => void;
-        vResize: (contextWrapEle: any) => void;
+        createScroll(): void;
+        vResize(contextWrapEle: NJS<NC.JSONObject[]>): void;
     };
 
     static grid: {
         new(data: NJS<NC.JSONObject[]>, opts?: NU.Options.Grid | Omit<NJS<HTMLElement[]>, keyof NJS<HTMLElement[]>>): NU.Grid;
-        tableCells: (tbl: any, opt_cellValueGetter: any) => any[][];
+        tableCells(tbl: any, opt_cellValueGetter: any): any[][];
         tableMap(): NU.Grid.TableMap;
-        setTheadCellInfo: () => void;
-        removeColgroup: () => void;
-        fixColumn: () => void;
-        fixHeader: () => void;
-        vResize: (gridWrap: any, contextWrapEle: any, tfootWrap: any) => void;
-        more: () => void;
-        resize: () => void;
-        sort: () => void;
-        dataFilter: () => void;
-        rowSpan: (i: any, rowEle: any, bfRowEle: any, rowData: any, bfRowData: any, colId: any) => void;
-        paste: () => void;
+        setTheadCellInfo(): void;
+        removeColgroup(): void;
+        fixColumn(): void;
+        fixHeader(): void;
+        vResize(gridWrap: NJS<HTMLElement[]>, contextWrapEle: NJS<HTMLElement[]>, tfootWrap: NJS<HTMLElement[]>): void;
+        more(): void;
+        resize(): void;
+        sort(): void;
+        dataFilter(): void;
+        rowSpan(i: number, rowEle: NJS<HTMLElement[]>, bfRowEle: NJS<HTMLElement[]>, rowData: NC.JSONObject, bfRowData: NC.JSONObject, colId: string): void;
+        paste(): void;
     };
 
     static pagination: {
         new(data: NJS<NC.JSONObject[]>, opts?: NU.Options.Pagination | Omit<NJS<HTMLElement[]>, keyof NJS<HTMLElement[]>>): NU.Pagination;
-        wrapEle: () => {
-            body: any;
-            page: any;
-            first: any;
-            prev: any;
-            next: any;
-            last: any;
-        };
-        changePageSet: (linkEles: any, opts: any, isRemake: any) => {
-            pageNo: any;
-            countPerPage: any;
-            countPerPageSet: any;
-            totalCount: any;
-            pageCount: number;
-            pageSetCount: number;
-            currSelPageSet: number;
-            startPage: number;
-            endPage: number;
-            startRowIndex: number;
-            startRowNum: number;
-            endRowIndex: number;
-            endRowNum: number;
-        };
+        wrapEle: NU.Pagination.LinkEles
+        changePageSet(linkEles: U.Pagination.LinkEles, opts: NU.Options.Pagination, isRemake: boolean): NU.Options.CurrPageNavInfo;
     };
 
     static tree: {
@@ -194,9 +172,9 @@ declare namespace NU {
         bind(data?: NJS<NC.JSONObject[]>): this;
         index(): number;
         index(idx: number): this;
-        val(val: any): this;
-        remove(val: any): this;
-        reset(selFlag: any): this;
+        val(val?: NC.Primitive | NC.Primitive[]): PNC.rimitive | NC.Primitive[] | this;
+        remove(val?: NC.Primitive): this;
+        reset(selFlag?: boolean): this;
     }
 
     interface Form {

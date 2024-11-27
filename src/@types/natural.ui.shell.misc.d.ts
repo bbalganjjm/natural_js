@@ -1,7 +1,6 @@
 declare namespace NUS {
 
     namespace Options {
-
         type NotifyPosition = {
             top?: number;
             right?: number;
@@ -73,25 +72,10 @@ declare namespace NUS {
             order?: string[];
             loadedDocId?: string | null;
         }
-
-    }
-
-    namespace Callbacks {
-
-        namespace Documents {
-
-            type RemoveState = {
-                (this: NUS.Documents, docId?: string): void;
-            }
-
-        }
-
     }
 
     namespace EventHandlers {
-
         namespace Documents {
-
             type OnBeforeEntireLoad = {
                 (this: NUS.Documents, docId?: string): void;
             }
@@ -132,9 +116,15 @@ declare namespace NUS {
             type OnRemove = {
                 (this: NUS.Documents, docId?: string): void;
             }
-
         }
+    }
 
+    namespace Callbacks {
+        namespace Documents {
+            type RemoveState = {
+                (this: NUS.Documents, docId?: string): void;
+            }
+        }
     }
 
 }
