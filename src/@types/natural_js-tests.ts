@@ -1,4 +1,3 @@
-import SubmitCallback = NA.Request.SubmitCallback;
 N(".button").remove_(1, 2);
 N(".button").tpBind("click", function (e: Event) {});
 N(".button").events("click", "grid");
@@ -174,23 +173,38 @@ new N.pagination(N([]), {
 }).bind();
 
 N({
-    // TODO
+    top: 50,
+    right: 50
 }).notify({
-
+    alwaysOnTop: true
 }).add("asd");
 N.notify({
-
+    top: 50,
+    right: 50
 }, {
-
+    alwaysOnTop: true
 }).add("asd");
 N.notify({
-
+    top: 50,
+    right: 50
 }).add("asd");
 N.notify.add("asd", "");
 
 const docs1 = N(".context").docs({
+    onEntireLoad: function(docId, entireLoadRequestCnt, entireLoadRequestMaxCnt) {
 
+    }
 });
 const docs2 = new N.docs(N(".context"), {
+    onEntireLoad: function(docId, entireLoadRequestCnt, entireLoadRequestMaxCnt) {
 
+    }
 });
+
+const inspectionResult = N.code.inspection.test("code");
+if(Array.isArray(inspectionResult)) {
+    N.code.inspection.report.console(inspectionResult, "/test.js");
+}
+N.code.addSourceURL("code", "/test.js");
+
+N.template.aop.codes({} as NA.Controller.Object, function () {});

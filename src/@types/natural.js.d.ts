@@ -310,4 +310,14 @@ declare namespace N {
      * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0502.html }
      */
     const docs = NUS.docs;
+
+    /**
+     * Natural-CODE
+     */
+    const code = NCD;
+
+    /**
+     * Natural-TEMPLATE
+     */
+    const template = NT;
 }
