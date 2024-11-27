@@ -61,7 +61,7 @@ declare class NU {
     static popup: {
         new(obj: NJS<HTMLElement[]>, opts?: NU.Options.Popup): NU.Popup;
         wrapEle(): void;
-        loadContent(callback: NU.Callbacks.Popup.loadContent): void;
+        loadContent(callback: NU.Callbacks.Popup.LoadContent): void;
         popOpen(onOpenData: any, cont: NA.Controller.Object): void;
     };
 
@@ -69,7 +69,7 @@ declare class NU {
         new(obj: NJS<HTMLElement[]>, opts?: NU.Options.Tab): NU.Tab;
         wrapEle(): void;
         wrapScroll(): void;
-        loadContent(url: string, targetIdx: number, callback: NU.Callbacks.Tab.loadContent, isFirst: boolean): void;
+        loadContent(url: string, targetIdx: number, callback: NU.Callbacks.Tab.LoadContent, isFirst: boolean): void;
     };
 
     static select: {

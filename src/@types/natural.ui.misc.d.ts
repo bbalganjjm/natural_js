@@ -537,12 +537,12 @@ declare namespace NU {
 
     namespace Callbacks {
         namespace Popup {
-            type loadContent = {
+            type LoadContent = {
                 (this: NU.Popup, cont?: NA.Controller.Object, context?: NJS<HTMLElement[]>): void;
             }
         }
         namespace Tab {
-            type loadContent = {
+            type LoadContent = {
                 (this: NU.Tab, cont?: NA.Controller.Object, context?: NJS<HTMLElement[]>): void;
             }
         }

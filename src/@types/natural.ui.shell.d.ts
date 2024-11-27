@@ -5,26 +5,26 @@ declare class NUS {
 
     static notify: {
         new(position: NUS.Options.NotifyPosition, opts?: NUS.Options.Notify): NUS.Notify;
-        add(msg: any, url: any): void;
+        add(msg: string, url: string): void;
         wrapEle(): void;
     };
 
     static docs: {
         new(obj: NJS<HTMLElement[]>, opts: NUS.Options.Documents): NUS.Documents;
-        createLoadIndicator(): any;
-        updateLoadIndicator(entireLoadRequestCnt: any, entireLoadRequestMaxCnt: any): any;
-        removeLoadIndicator(): any;
-        errorLoadIndicator(): any;
+        createLoadIndicator();
+        updateLoadIndicator(entireLoadRequestCnt: number, entireLoadRequestMaxCnt: number);
+        removeLoadIndicator();
+        errorLoadIndicator();
         wrapEle(): void;
         wrapScroll(): void;
-        clearScrollPosition(tabEle: any, isActive: any): void;
-        loadContent(docOpts: any, callback: any): void;
+        clearScrollPosition(tabEle: number | NJS<HTMLElement[]>, isActive?: boolean): void;
+        loadContent(docOpts: NUS.Options.DocOpts, callback: NUS.Callbacks.Documents.LoadContent): void;
         closeBtnControl(): void;
         inactivateTab(): void;
-        activateTab(docId_: any, isFromDocsTabList_: any, isNotLoaded_: any): void;
-        showTabContents(docId_: any): boolean;
-        hideTabContents(docId_: any): void;
-        remove(targetTabEle: any): void;
+        activateTab(docId_: string, isFromDocsTabList_?: boolean, isNotLoaded_?: boolean): void;
+        showTabContents(docId_: string): boolean | void;
+        hideTabContents(docId_: string): void;
+        remove(targetTabEle: NJS<HTMLElement[]>): void;
     };
 
 }

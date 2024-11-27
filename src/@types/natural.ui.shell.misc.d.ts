@@ -124,6 +124,9 @@ declare namespace NUS {
             type RemoveState = {
                 (this: NUS.Documents, docId?: string): void;
             }
+            type LoadContent = {
+                (this: NUS.Documents): void;
+            }
         }
     }
 
