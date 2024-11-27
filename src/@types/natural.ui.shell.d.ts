@@ -48,7 +48,7 @@ declare namespace NUS {
         remove(docId: string, unconditional?: boolean): this;
         doc(docId: string): NUS.Options.DocsObject | NUS.Options.DocOpts;
         cont(docId: string): NA.Controller.Object;
-        reload(docId: string, callback: NA.Request.SubmitCallback): this;
+        reload(docId: string, callback: NA.Callbacks.Communicator.Submit): this;
     }
 
 }

@@ -80,7 +80,7 @@ declare namespace NUS {
                 (this: NUS.Documents, docId?: string): void;
             }
             type OnErrorEntireLoad = {
-                (this: NUS.Documents, e: Error, request: NA.Request, xhr: JQueryXHR, textStatus: "success" | "error", submitCallback: SubmitCallback): void;
+                (this: NUS.Documents, e: Error, request: NA.Request, xhr: JQueryXHR, textStatus: "success" | "error", submitCallback: NA.Callbacks.Communicator.Submit): void;
             }
             type OnEntireLoad = {
                 (this: NUS.Documents, docId?: string, entireLoadRequestCnt: number, entireLoadRequestMaxCnt: number): void;

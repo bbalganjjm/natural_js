@@ -42,7 +42,7 @@ N([]).comm({
     enctype: NA.Request.Enctype.URLENCODED
 }).submit(function () {});
 // FIXME
-N.comm(N([]), "https://localhost:8080").request.attr("asd", "").error(function(xhr: JQuery.jqXHR, textStatus: JQuery.Ajax.TextStatus, e: Error, request: NA.Request, submitCallback: NA.Request.SubmitCallback) {
+N.comm(N([]), "https://localhost:8080").request.attr("asd", "").error(function(xhr: JQuery.jqXHR, textStatus: JQuery.Ajax.TextStatus, e: Error, request: NA.Request, submitCallback: NA.Callbacks.Communicator.Submit) {
 
 }).submit(function () {
 
