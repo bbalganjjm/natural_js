@@ -1314,10 +1314,6 @@ export class NU {
             return this;
         };
 
-        static context = function() {
-            return this.options.context;
-        };
-
         static checkMinMaxDate = function() {
             const opts = this.options;
             const value = opts.context.val();
