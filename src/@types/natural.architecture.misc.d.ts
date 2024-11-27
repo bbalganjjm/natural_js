@@ -183,6 +183,12 @@ declare namespace NA {
         }
     }
 
+    namespace Objects {
+        namespace Controller {
+
+        }
+    }
+
     // TODO 클래스명일랑 겹침. 딴걸로 정의바람.
     namespace Controller {
         /**

@@ -90,7 +90,7 @@ declare class NU {
     static grid: {
         new(data: NJS<NC.JSONObject[]>, opts?: NU.Options.Grid | Omit<NJS<HTMLElement[]>, keyof NJS<HTMLElement[]>>): NU.Grid;
         tableCells(tbl: any, opt_cellValueGetter: any): any[][];
-        tableMap(): NU.Grid.TableMap;
+        tableMap(): NU.Objects.Grid.TableMap;
         setTheadCellInfo(): void;
         removeColgroup(): void;
         fixColumn(): void;
@@ -106,7 +106,7 @@ declare class NU {
 
     static pagination: {
         new(data: NJS<NC.JSONObject[]>, opts?: NU.Options.Pagination | Omit<NJS<HTMLElement[]>, keyof NJS<HTMLElement[]>>): NU.Pagination;
-        wrapEle: NU.Pagination.LinkEles
+        wrapEle: NU.Objects.Pagination.LinkEles
         changePageSet(linkEles: U.Pagination.LinkEles, opts: NU.Options.Pagination, isRemake: boolean): NU.Options.CurrPageNavInfo;
     };
 
@@ -224,7 +224,7 @@ declare namespace NU {
     interface Grid {
         options: NU.Options.Grid;
         tempRowEle: NJS<HTMLElement[]>;
-        tableMap: NU.Grid.TableMap;
+        tableMap: NU.Objects.Grid.TableMap;
         thead: NJS<HTMLElement[]>;
         contextEle: NJS<HTMLElement[]>;
         rowSpanIds: NJS<string[]>;
@@ -249,7 +249,7 @@ declare namespace NU {
 
     interface Pagination {
         options: NU.Options.Pagination;
-        linkEles: NU.Pagination.LinkEles;
+        linkEles: NU.Objects.Pagination.LinkEles;
         data(selFlag?: false): NJS<NC.JSONObject[]> | NC.JSONObject;
         context(sel?: JQuery.Selector): NJS<HTMLElement[]>;
         bind(data?: NJS<NC.JSONObject[]>, totalCount?: number): this;
