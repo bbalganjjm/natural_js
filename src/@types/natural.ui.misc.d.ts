@@ -516,25 +516,6 @@ declare namespace NU {
         }
     }
 
-    namespace Grid {
-        type TableMap = {
-            colgroup: HTMLElement[][];
-            thead: HTMLTableCellElement[][];
-            tbody: HTMLTableCellElement[][];
-            tfoot: HTMLTableCellElement[][];
-        };
-    }
-    namespace Pagination {
-        type LinkEles = {
-            body: HTMLElement[][];
-            page: HTMLElement[][];
-            first: HTMLElement[][];
-            prev: HTMLElement[][];
-            next: HTMLElement[][];
-            last: HTMLElement[][];
-        };
-    }
-
     namespace Callbacks {
         namespace Popup {
             type LoadContent = {
@@ -546,6 +527,27 @@ declare namespace NU {
                 (this: NU.Tab, cont?: NA.Controller.Object, context?: NJS<HTMLElement[]>): void;
             }
         }
+    }
+
+    // TODO 클래스명일랑 겹침. 딴걸로 정의바람. namespace 하나 더 파야됨.
+    namespace Grid {
+        type TableMap = {
+            colgroup: HTMLElement[][];
+            thead: HTMLTableCellElement[][];
+            tbody: HTMLTableCellElement[][];
+            tfoot: HTMLTableCellElement[][];
+        };
+    }
+    // TODO 클래스명일랑 겹침. 딴걸로 정의바람. namespace 하나 더 파야됨.
+    namespace Pagination {
+        type LinkEles = {
+            body: HTMLElement[][];
+            page: HTMLElement[][];
+            first: HTMLElement[][];
+            prev: HTMLElement[][];
+            next: HTMLElement[][];
+            last: HTMLElement[][];
+        };
     }
 
 }
