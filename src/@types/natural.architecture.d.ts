@@ -5,14 +5,28 @@ declare class NA {
         (settings?: JQuery.AjaxSettings): JQuery.jqXHR;
     };
     static comm: NA.Communicator;
-    static cont: NA.Controller;
+    static cont: {
+        new(obj: NJS<HTMLElement[]>, contObj: NA.Objects.Controller.Object): NA.Objects.Controller.Object;
+        trInit(cont: NA.Objects.Controller.Object, request: NA.Request): void;
+        /**
+         * Aspect-oriented programming(AOP) processing class.
+         */
+        aop: {
+            pointcuts: {
+                regexp: {
+                    fn(param: RegExp | string, contFrag: NA.Objects.Controller.Object, fnChain: string): boolean;
+                };
+            };
+            wrap(cont: NA.Objects.Controller.Object): void;
+        };
+    };
     static context: {
         attrObj: object;
         attr(name: string, obj?: any): obj[name];
         attr(name: string, obj: any): this;
     };
     static config: {
-        filterConfig: NA.Config.FilterConfig;
+        filterConfig: NA.Objects.Config.FilterConfig;
     };
 
     /**
@@ -20,7 +34,7 @@ declare class NA {
      *
      * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0203.html }
      */
-    comm(url: string | NA.Request.Options): NA.Communicator;
+    comm(url: string | NA.Options.Request): NA.Communicator;
 
     request(): NA.Request;
 
@@ -63,15 +77,15 @@ declare class NA {
      * ```
      * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0201.html }
      */
-    cont(ontObj: NA.Controller.Object): ontObj;
+    cont(contObj: NA.Objects.Controller.Object): NA.Objects.Controller.Object;
 }
 
 declare namespace NA {
 
     class Communicator {
-        new(obj: NJS<NC.JSONObject[]>, url: string | NA.Request.Options);
+        new(obj: NJS<NC.JSONObject[]>, url: string | NA.Options.Request);
         xhr: JQuery.jqXHR;
-        initFilterConfig(): NA.Config.FilterConfig;
+        initFilterConfig(): NA.Objects.Config.FilterConfig;
         resetFilterConfig(): NA.Communicator;
         /**
          * Registers a callback function to be executed when a successful response is received from the server.
@@ -153,12 +167,12 @@ declare namespace NA {
          *
          * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0204.html }
          */
-        request = new Request(obj, url);
+        request = new NA.Request(obj, url);
     }
 
-    interface Request {
-        new(obj: NJS<NC.JSONObject[]>, opts: NA.Request.Options): {
-            options: NA.Request.Options;
+    class Request {
+        new(obj: NJS<NC.JSONObject[]>, opts: NA.Options.Request): {
+            options: NA.Options.Request;
             attrObj: object;
             obj: NA.Communicator;
         };
@@ -194,40 +208,7 @@ declare namespace NA {
          *
          * @return {NA.Communicator} Returns the Communicator if both `name` and `obj` are specified, and returns the passed parameter value if only `name` is specified.
          */
-        attr(name: string): obj[name];
-        /**
-         * Specifies parameters to pass to the page to be loaded or retrieves the passed data.
-         *
-         * If the `attr` method has two arguments, it works as a setter, and if it has one argument, it works as a getter.
-         *
-         * Sending data:
-         * ```
-         * N(".view").cont({
-         *     init: function(view, request) {
-         *         N("#section").comm("page.html")
-         *             .request.attr("data1", { data: ["1", "2"] })
-         *             .request.attr("data2", ["3", "4"])
-         *                 .submit();
-         *     }
-         * });
-         * ```
-         *
-         * Retrieving data from the loaded page:
-         * ```
-         * N(".view").cont({
-         *     init: function(view, request) {
-         *         var data1 = request.attr("data1"); // { data: ["1", "2"] }
-         *         var data2 = request.attr("data2"); // ["3", "4"]
-         *     }
-         * });
-         * ```
-         *
-         * @param {String} name - Parameter name
-         * @param {any} obj - Parameter data
-         *
-         * @return {NA.Communicator} Returns the Communicator if both `name` and `obj` are specified, and returns the passed parameter value if only `name` is specified.
-         */
-        attr(name: string, obj: any): NA.Communicator;
+        attr(name: string, obj?: any): NA.Communicator;
         removeAttr(name: string): NA.Communicator;
         /**
          * Extracts the GET parameter values from the browser's URL.
@@ -245,9 +226,9 @@ declare namespace NA {
         /**
          * Retrieves the current request options.
          *
-         * @return {NA.Request.Options} The options used for the request.
+         * @return {NA.Options.Request} The options used for the request.
          */
-        get(): NA.Request.Options;
+        get(): NA.Options.Request;
         /**
          * Retrieves for the value specified as a key in request options.
          *
@@ -257,22 +238,6 @@ declare namespace NA {
         get(key: string): any;
 
         reload(callback?: NA.Callbacks.Request.Reload): NA.Communicator;
-    }
-
-    interface Controller {
-        new(obj: NJS<HTMLElement[]>, contObj: NA.Controller.Object): contObj;
-        trInit(cont: NA.Controller.Object, request: NA.Request): void;
-        /**
-         * Aspect-oriented programming(AOP) processing class.
-         */
-        aop: {
-            pointcuts: {
-                regexp: {
-                    fn(param: RegExp | string, contFrag: NA.Controller.Object, fnChain: string): boolean;
-                };
-            };
-            wrap(cont: NA.Controller.Object): void;
-        };
     }
 
 }

@@ -62,7 +62,7 @@ declare class NU {
         new(obj: NJS<HTMLElement[]>, opts?: NU.Options.Popup): NU.Popup;
         wrapEle(): void;
         loadContent(callback: NU.Callbacks.Popup.LoadContent): void;
-        popOpen(onOpenData: any, cont: NA.Controller.Object): void;
+        popOpen(onOpenData: any, cont: NA.Objects.Controller.Object): void;
     };
 
     static tab: {
@@ -156,11 +156,11 @@ declare namespace NU {
             index: number;
             tab: NJS<HTMLElement[]>;
             content: NJS<HTMLElement[]>;
-            cont: NA.Controller.Object;
+            cont: NA.Objects.Controller.Object;
         };
         disable(idx: number): this;
         enable(idx: number): this;
-        cont(idx?: number): NA.Controller.Object;
+        cont(idx?: number): NA.Objects.Controller.Object;
     };
 
     interface Select {

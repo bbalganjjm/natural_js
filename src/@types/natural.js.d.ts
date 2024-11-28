@@ -5,12 +5,9 @@ import JSONObject = NC.JSONObject;
  *
  * N() extends the jQuery() function, thus it can be replaced with $() or jQuery(). However, local functions of the N object cannot be used within jQuery or $ objects.
  */
-declare function N(selector?: JQuery.Selector
-    | JQuery.TypeOrArray<Element>
-    | JQuery.htmlString
-    | JQuery
-    | JQuery.Node
-    | JQuery.PlainObject, context?: Element | Document | JQuery | JQuery.Selector): NJS<T>;
+declare function N(
+    selector?: string | Element | Array<Element> | JQuery<Element> | JQuery.Node | JQuery.PlainObject | ((this: Document, readyCallback: (this: Document) => void) => void) | NJS | undefined,
+    context?: Element | Document | JQuery<Element> | string | NJS | undefined): NJS<E>;
 
 type OmitJQuery = Omit<JQuery, "select">;
 declare interface NJS<T> extends OmitJQuery, NC, NA, ND, NU, NUS {
@@ -76,7 +73,7 @@ declare namespace N {
      *
      * @see {@link https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0203.html }
      */
-    function comm(obj: NJS<NC.JSONObject[]>, url: string | NA.Request.Options): NA.Communicator {
+    function comm(obj: NJS<NC.JSONObject[]>, url: string | NA.Options.Request): NA.Communicator {
         return new NA.comm(obj, url);
     }
 

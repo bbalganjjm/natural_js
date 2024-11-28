@@ -95,7 +95,7 @@ declare namespace NU {
             left?: number | undefined;
             width?: NU.EventHandlers.Popup.Width | number;
             height?: NU.EventHandlers.Popup.Height | number;
-            opener?: NA.Controller.Object | null,
+            opener?: NA.Objects.Controller.Object | null,
             closeMode?: "hide" | "remove";
             alwaysOnTop?: boolean;
             confirm?: boolean;
@@ -141,7 +141,7 @@ declare namespace NU {
             links?: NJS<HTMLElement[]> | null;
             tabOpts?: NU.Options.EachTab[];
             randomSel?: boolean;
-            opener?: NA.Controller.Object | null;
+            opener?: NA.Objects.Controller.Object | null;
             onActive?: NU.EventHandlers.Tab.OnActive | null;
             onLoad?: NU.EventHandlers.Tab.OnLoad | null;
             blockOnActiveWhenCreate?: boolean;
@@ -431,24 +431,24 @@ declare namespace NU {
                 (this: NU.Popup, msgContext?: NJS<HTMLElement[]>, msgContents?: NJS<HTMLElement[]>): void;
             }
             type OnOpen = {
-                (this: NA.Controller.Object, onOpenData?: any): void;
+                (this: NA.Objects.Controller.Object, onOpenData?: any): void;
             }
             type OnClose = {
                 (this: NU.Popup, onCloseData?: any): void;
             }
             type OnLoad = {
-                (this: NU.Popup, cont: NA.Controller.Object): void;
+                (this: NU.Popup, cont: NA.Objects.Controller.Object): void;
             }
         }
         namespace Tab {
             type OnOpen = {
-                (this: NA.Controller.Object, onOpenData?: any): void;
+                (this: NA.Objects.Controller.Object, onOpenData?: any): void;
             }
             type OnActive = {
                 (this: NU.Tab, selTabIdx: number, selTabEle: NJS<HTMLElement[]>, selContentEle: NJS<HTMLElement[]>, links: NJS<HTMLElement[]>, contents: NJS<HTMLElement[]>): void;
             }
             type OnLoad = {
-                (this: NU.Tab, selTabIdx: number, selTabEle: NJS<HTMLElement[]>, selContentEle: NJS<HTMLElement[]>, cont: NA.Controller.Object): void;
+                (this: NU.Tab, selTabIdx: number, selTabEle: NJS<HTMLElement[]>, selContentEle: NJS<HTMLElement[]>, cont: NA.Objects.Controller.Object): void;
             }
         }
         namespace Form {
@@ -519,12 +519,12 @@ declare namespace NU {
     namespace Callbacks {
         namespace Popup {
             type LoadContent = {
-                (this: NU.Popup, cont?: NA.Controller.Object, context?: NJS<HTMLElement[]>): void;
+                (this: NU.Popup, cont?: NA.Objects.Controller.Object, context?: NJS<HTMLElement[]>): void;
             }
         }
         namespace Tab {
             type LoadContent = {
-                (this: NU.Tab, cont?: NA.Controller.Object, context?: NJS<HTMLElement[]>): void;
+                (this: NU.Tab, cont?: NA.Objects.Controller.Object, context?: NJS<HTMLElement[]>): void;
             }
         }
     }

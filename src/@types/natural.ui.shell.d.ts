@@ -10,7 +10,7 @@ declare class NUS {
     };
 
     static docs: {
-        new(obj: NJS<HTMLElement[]>, opts: NUS.Options.Documents): NUS.Documents;
+        new(obj: NJS<HTMLElement[]>, opts?: NUS.Options.Documents): NUS.Documents;
         createLoadIndicator();
         updateLoadIndicator(entireLoadRequestCnt: number, entireLoadRequestMaxCnt: number);
         removeLoadIndicator();
@@ -47,7 +47,7 @@ declare namespace NUS {
         removeState(docId: string, callback: NUS.Callbacks.Documents.RemoveState): this;
         remove(docId: string, unconditional?: boolean): this;
         doc(docId: string): NUS.Options.DocsObject | NUS.Options.DocOpts;
-        cont(docId: string): NA.Controller.Object;
+        cont(docId: string): NA.Objects.Controller.Object;
         reload(docId: string, callback: NA.Callbacks.Communicator.Submit): this;
     }
 

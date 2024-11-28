@@ -28,21 +28,21 @@ N.validator.frn_rrn("");
 
 N.ajax({
     url: "http://localhost:8080",
-    type: NA.Request.HttpMethod.POST,
-    dataType: NA.Request.DataType.JSON,
-    enctype: NA.Request.Enctype.URLENCODED
+    type: NA.Objects.Request.HttpMethod.POST,
+    dataType: NA.Objects.Request.DataType.JSON,
+    enctype: NA.Objects.Request.Enctype.URLENCODED
 });
 N.comm(N([]), {
     url: "https://localhost:8080"
 }).submit(function () {});
 N([]).comm({
     url: "http://localhost:8080",
-    type: NA.Request.HttpMethod.POST,
-    dataType: NA.Request.DataType.JSON,
-    enctype: NA.Request.Enctype.URLENCODED
+    type: NA.Objects.Request.HttpMethod.POST,
+    dataType: NA.Objects.Request.DataType.JSON,
+    enctype: NA.Objects.Request.Enctype.URLENCODED
 }).submit(function () {});
 // FIXME
-N.comm(N([]), "https://localhost:8080").request.attr("asd", "").error(function(xhr: JQuery.jqXHR, textStatus: JQuery.Ajax.TextStatus, e: Error, request: NA.Request, submitCallback: NA.Callbacks.Communicator.Submit) {
+N.comm(N([]), "https://localhost:8080").request.attr("asd", "").error(function(xhr, textStatus, e, request, submitCallback) {
 
 }).submit(function () {
 
@@ -57,12 +57,14 @@ N.context.attr("asdf");
 const cont = new N.cont(N(".context"), {
     init: function (view, request) {
         view.each(function () {});
+        request.attr("param");
     },
     fn01: function () {
         this.view!.each(function () {});
         console.log(this.request!.attr("param"));
     }
 });
+cont.fn01();
 
 // FIXME fn01 안보임.
 N(".context").cont({
@@ -71,11 +73,11 @@ N(".context").cont({
     },
     fn01: function () {
         this.view!.each(function () {});
-        this.request!.attr("param", {a:1});
+        this.request!.attr("param");
     }
 });
 
-cont.fn01();
+
 
 N.ds.instance(class {}, true)
     .remove()
@@ -83,13 +85,13 @@ N.ds.instance(class {}, true)
 
 new N.formatter(N([{}]), {
     "numeric" : [[ND.FormatRules.TRIMTOEMPTY], [ND.FormatRules.NUMERIC, "#,###.##0000"]],
-    "generic" : [[ND.FormatRules.TRIMTOEMPTY], [ND.FormatRules.GENERIC, "@@ABCD"]],
+    "generic" : [[ND.FormatRules.TRIMTOEMPTY], [ND.FormatRules.GENERIC, "@@ABS"]],
     "limit" : [[ND.FormatRules.TRIMTOEMPTY], [ND.FormatRules.LIMIT, "13", "..."]],
     "etc" : [[ND.FormatRules.DATE, 12]]
 }).format(1);
 N([{}]).formatter({
     "numeric" : [[ND.FormatRules.TRIMTOEMPTY], [ND.FormatRules.NUMERIC, "#,###.##0000"]],
-    "generic" : [[ND.FormatRules.TRIMTOEMPTY], [ND.FormatRules.GENERIC, "@@ABCD"]],
+    "generic" : [[ND.FormatRules.TRIMTOEMPTY], [ND.FormatRules.GENERIC, "@@ABS"]],
     "limit" : [[ND.FormatRules.TRIMTOEMPTY], [ND.FormatRules.LIMIT, "13", "..."]],
     "etc" : [[ND.FormatRules.DATE, 12]]
 }).format(1);
@@ -157,7 +159,10 @@ const idx = select.index();
 const sltInst = select.index(1);
 
 let form = N([{a:1}]).form({
-    context: N(".form", cont.view)
+    context: N(".form", cont.view),
+    onBindValue: (ele, val, action) => {
+
+    }
 });
 form.data(false).each((index, element) => {});
 form = N([{a:1}]).form(N(".form", cont.view));
@@ -166,10 +171,14 @@ form.data(true).forEach(function (item) {});
 form.context("option").get().forEach(function (item) {});
 
 N([]).pagination({
+    onChange: function (page) {
 
+    }
 }).bind();
 new N.pagination(N([]), {
+    onChange: function (page) {
 
+    }
 }).bind();
 
 N({
@@ -207,4 +216,4 @@ if(Array.isArray(inspectionResult)) {
 }
 N.code.addSourceURL("code", "/test.js");
 
-N.template.aop.codes({} as NA.Controller.Object, function () {});
+N.template.aop.codes({} as NA.Objects.Controller.Object, function () {});

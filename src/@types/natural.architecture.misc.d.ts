@@ -1,76 +1,10 @@
 declare namespace NA {
 
-    // TODO 클래스명일랑 겹침. 딴걸로 정의바람.
-    namespace Request {
-        /**
-         * Enum representing different encoding types for form submissions.
-         *
-         * The `Enctype` enum provides a set of constants that define the encoding type
-         * used when submitting form data. This is used in the `enctype` attribute of HTML forms.
-         *
-         * Enctype.URLENCODED - Represents the MIME type `application/x-www-form-urlencoded`.
-         * This is the default encoding type that is used by forms.
-         *
-         * Enctype.MULTIPART - Represents the MIME type `multipart/form-data`.
-         * This encoding type is used when the form includes file uploads.
-         *
-         * Enctype.PLAIN - Represents the MIME type `text/plain`.
-         * This encoding type sends data without any encoding for the key-value pairs.
-         */
-        enum Enctype {
-            URLENCODED = "application/x-www-form-urlencoded",
-            MULTIPART = "multipart/form-data",
-            PLAIN = "text/plain",
-        }
-
-        /**
-         * An enumeration for different types of data formats that can be used.
-         *
-         * @enum {string}
-         */
-        enum DataType {
-            JSON = "json",
-            XML = "xml",
-            SCRIPT = "script",
-            HTML = "html",
-            TEXT = "text",
-            JSONP = "jsonp"
-        }
-
-        /**
-         * Enum for HTTP methods.
-         *
-         * This enum provides a collection of standard HTTP methods used in network communication.
-         * Each key in the enum represents a type of request that can be made to a web server.
-         *
-         * - POST: Used to submit data to be processed to a specified resource.
-         * - GET: Requests a representation of the specified resource.
-         * - PUT: Replaces all current representations of the target resource with the request payload.
-         * - DELETE: Deletes the specified resource.
-         * - HEAD: Asks for a response identical to a GET request, but without the response body.
-         * - OPTIONS: Used to describe the communication options for the target resource.
-         * - TRACE: Performs a message loop-back test along the path to the target resource.
-         * - CONNECT: Establishes a tunnel to the server identified by the target resource.
-         * - PATCH: Used to apply partial modifications to a resource.
-         *
-         * @enum {string}
-         */
-        enum HttpMethod {
-            POST = "POST",
-            GET = "GET",
-            PUT = "PUT",
-            DELETE = "DELETE",
-            HEAD = "HEAD",
-            OPTIONS = "OPTIONS",
-            TRACE = "TRACE",
-            CONNECT = "CONNECT",
-            PATCH = "PATCH"
-        }
-
+    namespace Options {
         /**
          * Options interface extending the JQuery.Ajax.AjaxSettingsBase interface for making `N.comm.request` with additional settings.
          */
-        interface Options extends JQuery.Ajax.AjaxSettingsBase {
+        interface Request extends JQuery.Ajax.AjaxSettingsBase {
             /**
              * A string containing the URL to which the request is sent.
              */
@@ -88,7 +22,7 @@ declare namespace NA {
              *
              * "text/plain": A type introduced in HTML5.
              */
-            enctype?: Enctype
+            enctype?: Objects.Request.Enctype
             /**
              * If set to false, it will force requested pages not to be cached by the browser. Note: Setting cache to false will only work correctly with HEAD and GET requests. It works by appending "_={timestamp}" to the GET parameters. The parameter is not needed for other types of requests, except in IE8 when a POST is made to a URL that has already been requested by a GET.
              */
@@ -102,7 +36,7 @@ declare namespace NA {
             /**
              * An alias for method. You should use type if you're using versions of jQuery prior to 1.9.0.
              */
-            type?: HttpMethod,
+            type?: Objects.Request.HttpMethod,
             /**
              * Data to be sent to the server. It is converted to a query string, if not already a string. It's appended to the url for GET-requests. See processData option to prevent this automatic processing. Object must be Key/Value pairs. If value is an Array, jQuery serializes multiple values with same key based on the value of the traditional setting (described below).
              */
@@ -110,7 +44,7 @@ declare namespace NA {
             /**
              * The type of data that you're expecting back from the server. If none is specified, jQuery will try to infer it based on the MIME type of the response (an XML MIME type will yield XML, in 1.4 JSON will yield a JavaScript object, in 1.4 script will execute the script, and anything else will be returned as a string). The available types (and the result passed as the first argument to your success callback) are:
              *
-             * "xml": Returns a XML document that can be processed via jQuery.
+             * "xml": Returns an XML document that can be processed via jQuery.
              *
              * "html": Returns HTML as plain text; included script tags are evaluated when inserted in the DOM.
              *
@@ -124,7 +58,7 @@ declare namespace NA {
              *
              * multiple, space-separated values: As of jQuery 1.5, jQuery can convert a dataType from what it received in the Content-Type header to what you require. For example, if you want a text response to be treated as XML, use "text xml" for the dataType. You can also make a JSONP request, have it received as text, and interpreted by jQuery as XML: "jsonp text xml". Similarly, a shorthand string such as "jsonp xml" will first attempt to convert from jsonp to xml, and, failing that, convert from jsonp to text, and then from text to xml.
              */
-            dataType?: DataType,
+            dataType?: Objects.Request.DataType,
             /**
              * If you wish to force a crossDomain request (such as JSONP) on the same domain, set the value of crossDomain to true. This allows, for example, server-side redirection to another domain.
              */
@@ -163,7 +97,6 @@ declare namespace NA {
              */
             target?: N
         }
-
     }
 
     namespace Callbacks {
@@ -184,74 +117,135 @@ declare namespace NA {
     }
 
     namespace Objects {
+        namespace Request {
+            /**
+             * Enum representing different encoding types for form submissions.
+             *
+             * The `Enctype` enum provides a set of constants that define the encoding type
+             * used when submitting form data. This is used in the `enctype` attribute of HTML forms.
+             *
+             * Enctype.URLENCODED - Represents the MIME type `application/x-www-form-urlencoded`.
+             * This is the default encoding type that is used by forms.
+             *
+             * Enctype.MULTIPART - Represents the MIME type `multipart/form-data`.
+             * This encoding type is used when the form includes file uploads.
+             *
+             * Enctype.PLAIN - Represents the MIME type `text/plain`.
+             * This encoding type sends data without any encoding for the key-value pairs.
+             */
+            enum Enctype {
+                URLENCODED = "application/x-www-form-urlencoded",
+                MULTIPART = "multipart/form-data",
+                PLAIN = "text/plain",
+            }
+
+            /**
+             * An enumeration for different types of data formats that can be used.
+             *
+             * @enum {string}
+             */
+            enum DataType {
+                JSON = "json",
+                XML = "xml",
+                SCRIPT = "script",
+                HTML = "html",
+                TEXT = "text",
+                JSONP = "jsonp"
+            }
+
+            /**
+             * Enum for HTTP methods.
+             *
+             * This enum provides a collection of standard HTTP methods used in network communication.
+             * Each key in the enum represents a type of request that can be made to a web server.
+             *
+             * - POST: Used to submit data to be processed to a specified resource.
+             * - GET: Requests a representation of the specified resource.
+             * - PUT: Replaces all current representations of the target resource with the request payload.
+             * - DELETE: Deletes the specified resource.
+             * - HEAD: Asks for a response identical to a GET request, but without the response body.
+             * - OPTIONS: Used to describe the communication options for the target resource.
+             * - TRACE: Performs a message loop-back test along the path to the target resource.
+             * - CONNECT: Establishes a tunnel to the server identified by the target resource.
+             * - PATCH: Used to apply partial modifications to a resource.
+             *
+             * @enum {string}
+             */
+            enum HttpMethod {
+                POST = "POST",
+                GET = "GET",
+                PUT = "PUT",
+                DELETE = "DELETE",
+                HEAD = "HEAD",
+                OPTIONS = "OPTIONS",
+                TRACE = "TRACE",
+                CONNECT = "CONNECT",
+                PATCH = "PATCH"
+            }
+        }
+
         namespace Controller {
+            /**
+             * InitFunction is a user-defined function that is called after the view has finished loading and the Controller object has been initialized.
+             * ```
+             * N(".view").cont({
+             *     init : function(view, request) {
+             *     }
+             * });
+             * ```
+             *
+             * @param {NJS<HTMLElement[]>} view - View element.
+             * @param {NA.Request} request - Instance of the Communicator.request
+             */
+            type InitFunction = {
+                (this: Object, view: NJS<HTMLElement[]>, request: NA.Request): void
+            }
 
+            interface Object {
+                [key: string]: any;
+                /**
+                 * The initializer function that is called to set up the initial state or configuration.
+                 * This function is optional, and if provided, it should follow the signature defined by `InitFunction`.
+                 */
+                init?: InitFunction;
+                /**
+                 * View element.
+                 *
+                 * > Same as the first argument of the init function.
+                 */
+                view?: NJS<HTMLElement[]>;
+                /**
+                 * Instance of the Communicator.request object.
+                 *
+                 * > Same as the second argument of the init function.
+                 */
+                request?: NA.Request;
+                /**
+                 * If the popup page is called by N.popup or N.tab components, this is the instance of the calling component.
+                 * With this instance, you can control the parent page.
+                 */
+                caller?: Object;
+                /**
+                 * If the popup page is called by N.popup or N.tab components, this is the controller object instance of the parent page.
+                 *
+                 * With this instance, you can control the parent page.
+                 *
+                 * > The opener attribute should be specified with the Controller object of the parent page when creating an instance of N.popup or N.tab components.
+                 */
+                opener?: Object;
+            }
         }
-    }
 
-    // TODO 클래스명일랑 겹침. 딴걸로 정의바람.
-    namespace Controller {
-        /**
-         * InitFunction is a user-defined function that is called after the view has finished loading and the Controller object has been initialized.
-         * ```
-         * N(".view").cont({
-         *     init : function(view, request) {
-         *     }
-         * });
-         * ```
-         *
-         * @param {NJS<HTMLElement[]>} view - View element.
-         * @param {NA.Request} request - Instance of the Communicator.request
-         */
-        type InitFunction = {
-            (this: Object, view: NJS<HTMLElement[]>, request: NA.Request): void
+        namespace Config {
+            type FilterConfig = {
+                beforeInitFilters: object[];
+                afterInitFilters: object[];
+                beforeSendFilters: object[];
+                successFilters: object[];
+                errorFilters: object[];
+                completeFilters: object[];
+            };
         }
-
-        type Object<T = any> = {
-            [key: string]: T;
-            /**
-             * The initializer function that is called to set up the initial state or configuration.
-             * This function is optional, and if provided, it should follow the signature defined by `InitFunction`.
-             */
-            init?: InitFunction;
-            /**
-             * View element.
-             *
-             * > Same as the first argument of the init function.
-             */
-            view?: NJS<HTMLElement[]>;
-            /**
-             * Instance of the Communicator.request object.
-             *
-             * > Same as the second argument of the init function.
-             */
-            request?: NA.Request;
-            /**
-             * If the popup page is called by N.popup or N.tab components, this is the instance of the calling component.
-             * With this instance, you can control the parent page.
-             */
-            caller?: Object;
-            /**
-             * If the popup page is called by N.popup or N.tab components, this is the controller object instance of the parent page.
-             *
-             * With this instance, you can control the parent page.
-             *
-             * > The opener attribute should be specified with the Controller object of the parent page when creating an instance of N.popup or N.tab components.
-             */
-            opener?: Object;
-        }
-    }
-
-    // TODO 클래스명일랑 겹침. 딴걸로 정의바람.
-    namespace Config {
-        type FilterConfig = {
-            beforeInitFilters: object[];
-            afterInitFilters: object[];
-            beforeSendFilters: object[];
-            successFilters: object[];
-            errorFilters: object[];
-            completeFilters: object[];
-        };
     }
 
 }
