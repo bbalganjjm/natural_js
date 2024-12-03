@@ -52,15 +52,21 @@
     N(".index-contents").cont({
         init : function(view, request) {
             this.initDocs(this, view);
-
-            if(!N.string.isEmpty(location.hash)
-                && (N.string.endsWith(location.hash, ".html") || N.string.endsWith(location.hash, ".view"))) {
-                $(window).trigger("hashchange.index");
+            var state;
+            if(location.search.indexOf("page=") > -1) {
+                var params = N.comm("index.html" + location.search).request.param();
+                var selectedMenuEle = N(".index-lefter.view_context__ a[href='" + params["page"] + "']");
+                state = {
+                    "page": params["page"],
+                    "pageId": selectedMenuEle.data("pageid"),
+                    "pageNm": selectedMenuEle.find("span:last").text(),
+                    "tab": null
+                };
+                history.pushState(state, state.pageNm, "?page=" + state.page);
             } else {
-                APP.indx.docs.add("home0100", "Home", {
-                    "url" : "html/naturaljs/home/home0100.html"
-                });
+                state = {};
             }
+            $(window).trigger("popstate.index", state);
         },
         initDocs : function(cont, view) {
             APP.indx.docs = N(".docs-contents", view).docs();

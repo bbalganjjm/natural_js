@@ -888,6 +888,18 @@
                         });
                     } catch (e) { console.warn(e) }
                 }
+
+                if(!this.isPopstate && !isNotLoaded) {
+                    var docOpts = this.doc(docId);
+                    var state = {
+                        "page": docOpts.url,
+                        "pageId": docId,
+                        "pageNm": docOpts.docNm,
+                        "tab": null
+                    };
+                    history.pushState(state, state.pageNm, "?page=" + state.page);
+                }
+                this.isPopstate = false;
             },
             /**
              * Multilingual messages

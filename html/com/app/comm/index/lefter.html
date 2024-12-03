@@ -348,7 +348,17 @@
                 var selfEle = N(this);
 
                 if(selfEle.parent().is(".leaf-node") && selfEle.is("[data-pageid]")) {
-                    location.hash = selfEle.attr("href");
+                    var state = {
+                        "page": selfEle.attr("href"),
+                        "pageId": selfEle.data("pageid"),
+                        "pageNm": selfEle.find("span").text(),
+                        "tab": null
+                    };
+                    if(APP.indx.docs.beforeDocId !== state.pageId) {
+                        history.pushState(state, state.pageNm, "?page=" + state.page);
+                        $(window).trigger("popstate.index", state);
+                        APP.indx.docs.beforeDocId = state.pageId;
+                    }
 
                     if($(window).width() <= 1001) { // 748 + 256 - 17px(?)
                         N(".lefter-toggle-button", ".page-wrap").trigger("click.lefter");
@@ -359,8 +369,6 @@
                     selfEle.parent("li").toggleClass("expand");
                     selfEle.siblings("ul:last").toggleClass("folding");
                 }
-
-                selfEle = undefined;
             });
 
             N(".lefter-toggle-button>span", view).on("mouseover.lefter", function() {
@@ -408,9 +416,6 @@
                         });
                     }
                 }
-
-                mainNav = undefined;
-                selfEle = undefined;
             });
 
             N(window).on("resize.left-menu", function() {

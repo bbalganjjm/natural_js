@@ -13,7 +13,7 @@
                 this.loadFooter();
             }
             this.reloadCss();
-            this.initBrowserHistorySystem();
+            this.initRouter();
             if(location.hostname === "bbalganjjm.github.io") {
                 this.googleAnalytics();
             }
@@ -45,20 +45,44 @@
         loadFooter : function() {
             N("footer").comm("html/com/app/comm/index/footer.html").submit();
         },
-        initBrowserHistorySystem : function() {
+        initRouter : function() {
             var self = this;
-            $(window).on("hashchange.index", function() {
-                if(self.docs) {
-                    if (!N.string.isEmpty(location.hash) && N.string.endsWith(location.hash, ".html")) {
-                        var url = location.hash.replace("#", "");
-                        var selectedMenuEle = N(".index-lefter.view_context__ a[href='" + url + "']");
-                        var docId = selectedMenuEle.find("span:last").text();
-                        if(self.docs.options.order[0] !== docId) {
-                            self.docs.add(selectedMenuEle.data("pageid"), docId, {
-                                "url" : url
-                            });
+
+            var tabSelector = function(params) {
+                var tabInst = APP.indx.docs.context(".docs_contents__.visible__ .tab__:eq(0)").instance("tab");
+                if(tabInst) {
+                    if(!N.string.isEmpty(params["tab"]) && N.string.endsWith(params["tab"], ".html")) {
+                        var openedTabEle = tabInst.options.links.filter(":regexp(data-opts, " + params["tab"] + ")");
+                        if(openedTabEle.length > 0 && !openedTabEle.is(".tab_active__")) {
+                            if(tabInst.beforeUrl !== params["tab"]) {
+                                tabInst.open(tabInst.options.links.index(openedTabEle));
+                                tabInst.beforeUrl = params["tab"];
+                            }
                         }
+                    } else {
+                        tabInst.open(0);
+                        tabInst.beforeUrl = params["tab"];
                     }
+                }
+            };
+
+            $(window).on("popstate.index", function(e, state) {
+                if(!N.isEmptyObject(e.originalEvent)) {
+                    state = e.originalEvent.state;
+                }
+                if(!N.isEmptyObject(state) && !N.string.isEmpty(state.page)) {
+                    var url = state.page;
+                    if(self.docs.options.order[0] !== state.pageId) {
+                        self.docs.isPopstate = true;
+                        self.docs.add(state.pageId, state.pageNm, {
+                            "url" : url
+                        });
+                    }
+                } else {
+                    self.docs.isPopstate = true;
+                    self.docs.add("home0100", "Home", {
+                        "url" : "html/naturaljs/home/home0100.html"
+                    });
                 }
             });
         },
