@@ -28,7 +28,7 @@ N.popup, N.tab 컴포넌트나 N.comm 라이브러리로 위와 같은 구조의
 
 > Natural-ARCHITECTURE 기반 페이지가 제대로 작동하려면 반드시 N.comm 라이브러리나 N.popup, N.tab 컴포넌트로 로딩되어야 합니다.
 
-> 페이지의 요소를 선택할 때는 반드시 view 에서 find 하거나 view 를 jQuery 함수의 context 인수(두 번째 인수)로 지정해야 합니다. 그렇지 않으면 다른 블록 페이지의 의도하지 않은 요소까지 선택되어 예측이 어려운 오류가 발생할 수 있습니다. 자세한 내용은 <a href="#html/naturaljs/refr/refr0601.html">제한 및 팁</a> 메뉴를 참고 바랍니다.
+> 페이지의 요소를 선택할 때는 반드시 view 에서 find 하거나 view 를 jQuery 함수의 context 인수(두 번째 인수)로 지정해야 합니다. 그렇지 않으면 다른 블록 페이지의 의도하지 않은 요소까지 선택되어 예측이 어려운 오류가 발생할 수 있습니다. 자세한 내용은 <a href="?page=html/naturaljs/refr/refr0601.html">제한 및 팁</a> 메뉴를 참고 바랍니다.
 
 > N(".view").cont() 를 실행하면 selector 로 지정한 `.view` 요소에 data-pageid="view" 와 같이 pageid data 속성값이 생성 됩니다.
 이 pageid 는 ". (점), # (샵), [ (왼쪽 대괄호), ] (오른쪽 대괄호), ' (작은따옴표), : (콜론), ( (왼쪽 괄호), ) (오른쪽 괄호), > (오른쪽 화살괄호), 공백 (스페이스), - (하이픈)" 문자들은 제거 되어 pageid 가 생성되니 페이지 식별값은 앞의 문자들이 포함되지 않도록 정의 하는것이 좋습니다.

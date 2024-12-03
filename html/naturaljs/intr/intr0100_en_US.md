@@ -107,11 +107,11 @@ DataSync is a library that synchronizes data changed by components or libraries 
 
 ### Validator
 
-[Validator(N.validator)](#html/naturaljs/refr/refr0302.html) is a library that validates the input data set(json object array) and returns a validation result data set.
+[Validator(N.validator)](?page=html/naturaljs/refr/refr0302.html) is a library that validates the input data set(json object array) and returns a validation result data set.
 
 ### Natural-DATA Library
 
-[Natural-DATA Library](#html/naturaljs/refr/refr0303.html) provides methods and functions for sorting, filtering, and refining data of type json object array.
+[Natural-DATA Library](?page=html/naturaljs/refr/refr0303.html) provides methods and functions for sorting, filtering, and refining data of type json object array.
 
 
 ## Natural-UI
@@ -126,46 +126,46 @@ Natural-UI is a library package that supports HTML-based UI components.
 
 ### Alert
 
-[Alert(N.alert)](#html/naturaljs/refr/refr0401.html) is a UI component that displays message dialogs such as window.alert or window.confirm in the form of layer popups.
+[Alert(N.alert)](?page=html/naturaljs/refr/refr0401.html) is a UI component that displays message dialogs such as window.alert or window.confirm in the form of layer popups.
 
 ### Button
 
-[Button(N.button)](#html/naturaljs/refr/refr0402.html) is a UI component that creates a button with a "a, input[type=button], button" element specified as a context option.
+[Button(N.button)](?page=html/naturaljs/refr/refr0402.html) is a UI component that creates a button with a "a, input[type=button], button" element specified as a context option.
 
 ### Datepicker
 
-[Datepicker(N.datepicker)](#html/naturaljs/refr/refr0403.html) a UI component that displays a calendar popup for selecting a date or month in the text input element specified by the context option.
+[Datepicker(N.datepicker)](?page=html/naturaljs/refr/refr0403.html) a UI component that displays a calendar popup for selecting a date or month in the text input element specified by the context option.
 
 ### Popup
 
-[Popup(N.popup)](#html/naturaljs/refr/refr0404.html) is a UI component that makes a layer popup form the internal element specified by the context option or the page specified by the url option.
+[Popup(N.popup)](?page=html/naturaljs/refr/refr0404.html) is a UI component that makes a layer popup form the internal element specified by the context option or the page specified by the url option.
 
 ### Tab
 
-[Tab(N.tab)](#html/naturaljs/refr/refr0405.html) is a UI component that creates a tab page view by specifying an element consisting of div>ul>li tags as the context option.
+[Tab(N.tab)](?page=html/naturaljs/refr/refr0405.html) is a UI component that creates a tab page view by specifying an element consisting of div>ul>li tags as the context option.
 
 ### Select
 
-[Select(N.select)](#html/naturaljs/refr/refr0406.html) is a UI component that binds data to select, input[type=checkbox], and input[type=radio] elements to create a selection and extend the functionality of that control.
+[Select(N.select)](?page=html/naturaljs/refr/refr0406.html) is a UI component that binds data to select, input[type=checkbox], and input[type=radio] elements to create a selection and extend the functionality of that control.
 
 ### Form
 
-[Form(N.form)](#html/naturaljs/refr/refr0407.html) is a UI component that binds or creates single row data to an element(block elements such as div and table) specified by the context option.
+[Form(N.form)](?page=html/naturaljs/refr/refr0407.html) is a UI component that binds or creates single row data to an element(block elements such as div and table) specified by the context option.
 ### List
 
-[List(N.list)](#html/naturaljs/refr/refr0408.html) is a UI component that creates a list of data in the form of a single column by specifying the ul>li element as the context option.
+[List(N.list)](?page=html/naturaljs/refr/refr0408.html) is a UI component that creates a list of data in the form of a single column by specifying the ul>li element as the context option.
 
 ### Grid
 
-[Grid(N.grid)](#html/naturaljs/refr/refr0409.html) is a UI component that creates a list of data in a multi-column form by specifying a table element as a context option.
+[Grid(N.grid)](?page=html/naturaljs/refr/refr0409.html) is a UI component that creates a list of data in a multi-column form by specifying a table element as a context option.
 
 ### Pagination
 
-[Pagination(N.pagination)](#html/naturaljs/refr/refr0410.html) is a UI component that creates paging indexes from list data or the total count of rows.
+[Pagination(N.pagination)](?page=html/naturaljs/refr/refr0410.html) is a UI component that creates paging indexes from list data or the total count of rows.
 
 ### Tree
 
-[Tree(N.tree)](#html/naturaljs/refr/refr0411.html) is a UI component that makes hierarchical data into tree elements.
+[Tree(N.tree)](?page=html/naturaljs/refr/refr0411.html) is a UI component that makes hierarchical data into tree elements.
 
 ## Natural-UI.Shell
 
@@ -173,11 +173,11 @@ While Natural-UI supports UI development in the content area, Natural-UI.Shell i
 
 ### Notify(N.notify)
 
-[Notify(N.notify)](#html/naturaljs/refr/refr0501.html) is a UI component that displays a global notification message in a specified location that does not require user confirmation.
+[Notify(N.notify)](?page=html/naturaljs/refr/refr0501.html) is a UI component that displays a global notification message in a specified location that does not require user confirmation.
 
 ### Documents(N.docs)
 
-[Documents(N.docs)](#html/naturaljs/refr/refr0502.html) is a page container that displays Natural-JS based menu pages in MDI(Multi Document Interface) or SDI(Single Document Interface) structure.
+[Documents(N.docs)](?page=html/naturaljs/refr/refr0502.html) is a page container that displays Natural-JS based menu pages in MDI(Multi Document Interface) or SDI(Single Document Interface) structure.
 
 Supports
 ===

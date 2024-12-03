@@ -7,7 +7,7 @@ Natural-TEMPLATE 개발 가이드
 
 Natural-TEMPLATE 은 Natural-JS 기반 웹 애플리케이션 개발을 정형화하여 코드 가독성과 개발 생산성을 크게 향상시켜 줍니다.
 
-> Natural-JS 의 기본적인 사용법을 학습하려면 [Natural-JS 시작하기](#html/naturaljs/gtst/gtst0100.html) 문서를 참고하세요.
+> Natural-JS 의 기본적인 사용법을 학습하려면 [Natural-JS 시작하기](?page=html/naturaljs/gtst/gtst0100.html) 문서를 참고하세요.
 
 ## 목차
 
@@ -34,7 +34,7 @@ Natural-TEMPLATE 은 Natural-JS 기반 웹 애플리케이션 개발을 정형�
 <script type="text/javascript" src="js/natural_js/natural.template.min.js" charset="utf-8"></script>
 ```
 
-2. [Config(natural.config.js)](#html/naturaljs/refr/refr0102.html) 에 다음 설정을 추가합니다. 속성에 대한 설명은 [Config(natural.config.js)](#html/naturaljs/refr/refr0102.html) 메뉴의 **N.context.attr("template")** 탭을 참고하세요.
+2. [Config(natural.config.js)](?page=html/naturaljs/refr/refr0102.html) 에 다음 설정을 추가합니다. 속성에 대한 설명은 [Config(natural.config.js)](?page=html/naturaljs/refr/refr0102.html) 메뉴의 **N.context.attr("template")** 탭을 참고하세요.
 
 ```
 /**
@@ -69,8 +69,8 @@ N.context.attr("template", {
 });
 ```
 
-3. 마지막으로 [Config(natural.config.js)](#html/naturaljs/refr/refr0102.html) 의 N.context.attr("architecture").cont 속성에 다음과 같이 AOP Advice 를 추가하여 설치를 완료합니다.
-   Natural-JS 의 AOP 에 대한 설명은 [AOP](#html/naturaljs/refr/refr0202.html) 페이지를 참고 바랍니다.
+3. 마지막으로 [Config(natural.config.js)](?page=html/naturaljs/refr/refr0102.html) 의 N.context.attr("architecture").cont 속성에 다음과 같이 AOP Advice 를 추가하여 설치를 완료합니다.
+   Natural-JS 의 AOP 에 대한 설명은 [AOP](?page=html/naturaljs/refr/refr0202.html) 페이지를 참고 바랍니다.
 
 ```
 ...
@@ -98,7 +98,7 @@ N.context.attr("template", {
 ## 페이지 소스코드 작성 규칙
 
 기본적으로 Natural-JS 의 블록 페이지들의 소스코드는 다음과 같이 구성해야 됩니다. 
-먼저 [Controller](#html/naturaljs/refr/refr0201.html) 메뉴에서 N.cont 의 사용법과 유의사항을 참고 하세요.
+먼저 [Controller](?page=html/naturaljs/refr/refr0201.html) 메뉴에서 N.cont 의 사용법과 유의사항을 참고 하세요.
 
 ```javascript
 <style>
@@ -183,7 +183,7 @@ Natural-TEMPLATE 에서만 사용 가능한 컴포넌트 별 추가 옵션은 �
 
 ### 1.1. N.select - 공통코드 데이터 바인딩
 
-**이 기능을 사용하려면 공통코드 데이터를 제공하는 서비스 URL 과 공통코드 분류코드 컬럼명을 [Config(natural.config.js)](#html/naturaljs/refr/refr0102.html) 의  N.context.attr("template").codes 속성에 설정해 주어야 합니다.**
+**이 기능을 사용하려면 공통코드 데이터를 제공하는 서비스 URL 과 공통코드 분류코드 컬럼명을 [Config(natural.config.js)](?page=html/naturaljs/refr/refr0102.html) 의  N.context.attr("template").codes 속성에 설정해 주어야 합니다.**
 
 | 속성 | 옵션명 | 타입 | 필수 여부 | 속성 값 | 설명 |
 | :--: | :--: | :--: | :--: | :--: | -- |
@@ -367,7 +367,7 @@ Natural-TEMPLATE 에서만 사용 가능한 컴포넌트 별 추가 옵션은 �
 
 ## 2. "c." 으로 시작 - Communicator(N.comm) 선언
 
-서버와 통신하는 모든 [Communicator(N.comm)](#html/naturaljs/refr/refr0203.html) 를 Controller object 의 멤버 변수로 선언할 수 있습니다. Communicator 를 미리 선언해 놓으면 데이터의 흐름을 한눈에 확인할 수 있고 선언된 Communicator 에 AOP 를 적용할 수 있습니다.
+서버와 통신하는 모든 [Communicator(N.comm)](?page=html/naturaljs/refr/refr0203.html) 를 Controller object 의 멤버 변수로 선언할 수 있습니다. Communicator 를 미리 선언해 놓으면 데이터의 흐름을 한눈에 확인할 수 있고 선언된 Communicator 에 AOP 를 적용할 수 있습니다.
 Communicator 선언하는 Controller object 의 속성명은 다음과 같이 조합하여 사용할 수 있습니다.
 
 ```

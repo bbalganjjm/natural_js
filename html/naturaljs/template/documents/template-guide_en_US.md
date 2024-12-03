@@ -7,7 +7,7 @@ This guide explains the code writing rules for Natural-TEMPLATE.
 
 Natural-TEMPLATE formalizes Natural-JS-based web application development, greatly improving code readability and development productivity.
 
-> To learn the basic usage of Natural-JS, refer to the [Getting Started with Natural-JS](#html/naturaljs/gtst/gtst0100.html) document.
+> To learn the basic usage of Natural-JS, refer to the [Getting Started with Natural-JS](?page=html/naturaljs/gtst/gtst0100.html) document.
 
 ## Contents
 
@@ -34,7 +34,7 @@ Natural-TEMPLATE formalizes Natural-JS-based web application development, greatl
 <script type="text/javascript" src="js/natural_js/natural.template.min.js" charset="utf-8"></script>
 ```
 
-2. Add the following setting to [Config(natural.config.js)](#html/naturaljs/refr/refr0102.html). For a description of properties, refer to the **N.context.attr("template")** tab in the [Config(natural.config.js)](#html/naturaljs/refr/refr0102.html) menu.
+2. Add the following setting to [Config(natural.config.js)](?page=html/naturaljs/refr/refr0102.html). For a description of properties, refer to the **N.context.attr("template")** tab in the [Config(natural.config.js)](?page=html/naturaljs/refr/refr0102.html) menu.
 
 ```
 /**
@@ -69,8 +69,8 @@ N.context.attr("template", {
 });
 ```
 
-3. Finally, add AOP Advice to the N.context.attr("architecture").cont property of [Config(natural.config.js)](#html/naturaljs/refr/refr0102.html) as follows to complete the installation.
-   For an explanation of Natural-JS's AOP, please refer to the [AOP](#html/naturaljs/refr/refr0202.html) page.
+3. Finally, add AOP Advice to the N.context.attr("architecture").cont property of [Config(natural.config.js)](?page=html/naturaljs/refr/refr0102.html) as follows to complete the installation.
+   For an explanation of Natural-JS's AOP, please refer to the [AOP](?page=html/naturaljs/refr/refr0202.html) page.
 
 ```
 ...
@@ -98,7 +98,7 @@ N.context.attr("template", {
 ## Page source code writing rules
 
 Basically, the source code of Natural-JS block pages should be structured as follows.
-First, Please refer to the usage and precautions of N.cont in the [Controller](#html/naturaljs/refr/refr0201.html) menu.
+First, Please refer to the usage and precautions of N.cont in the [Controller](?page=html/naturaljs/refr/refr0201.html) menu.
 
 ```javascript
 <style>
@@ -182,7 +182,7 @@ Additional options for each component available only in Natural-TEMPLATE are as 
 
 ### 1.1. N.select - Common code data binding
 
-**To use this function, the service URL that provides common code data and the common code classification code column name must be set in the N.context.attr("template").codes property of [Config(natural.config.js)](#html/naturaljs/refr/refr0102.html).**
+**To use this function, the service URL that provides common code data and the common code classification code column name must be set in the N.context.attr("template").codes property of [Config(natural.config.js)](?page=html/naturaljs/refr/refr0102.html).**
 
 | Property | Option name | Type | Required | Property value | Description |
 | :--: | :--: | :--: | :--: | :--: | -- |
@@ -366,7 +366,7 @@ To set more detailed options, you can specify the "search-box" option as object 
 
 ## 2. Starts with "c." - Communicator(N.comm) declaration
 
-Any [Communicator(N.comm)](#html/naturaljs/refr/refr0203.html) that communicates with the server can be declared as a member variable of the Controller object. If you pre-declare Communicator, If you declare a Communicator in advance, you can check the data flow at a glance and apply AOP to the declared Communicator.
+Any [Communicator(N.comm)](?page=html/naturaljs/refr/refr0203.html) that communicates with the server can be declared as a member variable of the Controller object. If you pre-declare Communicator, If you declare a Communicator in advance, you can check the data flow at a glance and apply AOP to the declared Communicator.
 The property names of the Controller object declared as Communicator can be used in combination as follows.
 
 ```

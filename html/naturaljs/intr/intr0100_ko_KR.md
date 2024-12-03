@@ -146,23 +146,23 @@ Natural-UI는 HTML 기반의 UI 컴포넌트를 지원하는 라이브러리 패
 
 ### Form
 
-[Form(N.form)](#html/naturaljs/refr/refr0407.html)은 context 옵션으로 지정한 요소(div, table 등의 block 요소)에 단건 로우 데이터를 바인딩하거나 생성하는  UI 컴포넌트입니다.
+[Form(N.form)](?page=html/naturaljs/refr/refr0407.html)은 context 옵션으로 지정한 요소(div, table 등의 block 요소)에 단건 로우 데이터를 바인딩하거나 생성하는  UI 컴포넌트입니다.
 
 ### List
 
-[List(N.list)](#html/naturaljs/refr/refr0408.html)는 ul>li 요소를 context 옵션으로 지정하여 단일 컬럼 형태로 데이터 목록을 생성해 주는 UI 컴포넌트입니다.
+[List(N.list)](?page=html/naturaljs/refr/refr0408.html)는 ul>li 요소를 context 옵션으로 지정하여 단일 컬럼 형태로 데이터 목록을 생성해 주는 UI 컴포넌트입니다.
 
 ### Grid
 
-[Grid(N.grid)](#html/naturaljs/refr/refr0409.html)는 table 요소를 context 옵션으로 지정하여 멀티 컬럼 형태로 데이터 목록을 생성해 주는 UI 컴포넌트입니다.
+[Grid(N.grid)](?page=html/naturaljs/refr/refr0409.html)는 table 요소를 context 옵션으로 지정하여 멀티 컬럼 형태로 데이터 목록을 생성해 주는 UI 컴포넌트입니다.
 
 ### Pagination
 
-[Pagination(N.pagination)](#html/naturaljs/refr/refr0410.html)은 목록 데이터나 전체 행 수로 페이징 인덱스를 생성해 주는 UI 컴포넌트입니다.
+[Pagination(N.pagination)](?page=html/naturaljs/refr/refr0410.html)은 목록 데이터나 전체 행 수로 페이징 인덱스를 생성해 주는 UI 컴포넌트입니다.
 
 ### Tree
 
-[Tree(N.tree)](#html/naturaljs/refr/refr0411.html)는 계층적 데이터를 트리 요소로 만들어 주는 UI 컴포넌트입니다.
+[Tree(N.tree)](?page=html/naturaljs/refr/refr0411.html)는 계층적 데이터를 트리 요소로 만들어 주는 UI 컴포넌트입니다.
 
 ## Natural-UI.Shell
 
@@ -170,11 +170,11 @@ Natural-UI가 컨텐츠 영역의 UI 개발을 지원한다면 Natural-UI.Shell 
 
 ### Notify(N.notify)
 
-[Notify(N.notify)](#html/naturaljs/refr/refr0501.html)는 사용자의 확인 과정이 필요 없는 전역 알림 메시지를 지정한 위치에 표시해주는 UI 컴포넌트입니다.
+[Notify(N.notify)](?page=html/naturaljs/refr/refr0501.html)는 사용자의 확인 과정이 필요 없는 전역 알림 메시지를 지정한 위치에 표시해주는 UI 컴포넌트입니다.
 
 ### Documents(N.docs)
 
-[Documents(N.docs)](#html/naturaljs/refr/refr0502.html)는 Natural-JS 기반의 메뉴 페이지를 MDI (Multi Document Interface) 또는 SDI (Single Document Interface) 구조로 표시하는 페이지 컨테이너입니다.
+[Documents(N.docs)](?page=html/naturaljs/refr/refr0502.html)는 Natural-JS 기반의 메뉴 페이지를 MDI (Multi Document Interface) 또는 SDI (Single Document Interface) 구조로 표시하는 페이지 컨테이너입니다.
 
 지원
 ===
