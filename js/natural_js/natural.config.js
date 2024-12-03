@@ -2,7 +2,7 @@
  * Config(natural.config.js) is a place to save Natural-JS operation environment setting, AOP setting, Communication Filter setting, UI global option value, etc.
  *
  * For more information on settings, please refer to the
- * Natural-CORE > Config( https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0102.html )
+ * Natural-CORE > Config( https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0102.html )
  * menu on the Natural-JS site.
  */
 (function(N) {
@@ -55,7 +55,7 @@
         /**
          * Controller AOP related settings.
          *  - Refer to the
-         *    https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0202.html
+         *    https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0202.html
          */
         "cont" : {
             "advisors" : [{
@@ -85,7 +85,7 @@
             /**
              * Communication Filter related settings.
              *  - Refer to the
-             *    https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0205.html
+             *    https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0205.html
              */
             "filters" : {
                 "basicFilter" : {
@@ -208,7 +208,7 @@
                 /**
                  * Global options of Communicator.request.
                  *  - Refer to the
-                 *    https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0204.html
+                 *    https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0204.html
                  */
                 "options" : {
                     "type" : "GET",

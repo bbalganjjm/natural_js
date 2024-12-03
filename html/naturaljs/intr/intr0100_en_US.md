@@ -23,7 +23,7 @@ N() is a Natural-JS core method. Return a collection of matched elements either 
 
 N is an object class that defines the core functions of Natural-JS.
 
-[N() and N](#html/naturaljs/refr/refr0101.html) provide the following jQuery extensions and utility classes:
+[N() and N](?page=html/naturaljs/refr/refr0101.html) provide the following jQuery extensions and utility classes:
 
 * jQuery selector extensions : JQuery selector extension for defining selectors with attributes such as style or data
 * jQuery plugin extension methods : Natural-JS utility method created with jQuery Plugin
@@ -40,7 +40,7 @@ N is an object class that defines the core functions of Natural-JS.
 
 ### Natural Config - Config(natural.config.js)
 
-[Config(natural.config.js)](#html/naturaljs/refr/refr0102.html) is a place to save Natural-JS operation environment setting, AOP setting, Communication Filter setting, UI option value, etc.
+[Config(natural.config.js)](?page=html/naturaljs/refr/refr0102.html) is a place to save Natural-JS operation environment setting, AOP setting, Communication Filter setting, UI option value, etc.
 
 ## Natural-ARCHITECTURE
 
@@ -71,7 +71,7 @@ Natural Architecture Framework provides a clear separation of the areas of devel
 
 #### Controller
 
-[Controller(N.cont)](#html/naturaljs/refr/refr0201.html) is a class that implements Controller layer of CVC Architecture Pattern.
+[Controller(N.cont)](?page=html/naturaljs/refr/refr0201.html) is a class that implements Controller layer of CVC Architecture Pattern.
  * Controller object is an object in which user-defined functions that control block pages are implemented.
    <p class="alert">N.cont executes the init function of the Controller object and returns a Controller object.</p>
  * Natural-ARCHITECTURE supports AOP (Aspect-Oriented Programming) for Controller objects.
@@ -82,14 +82,14 @@ There is no separate implementation of View, and the HTML element area of the bl
 
 #### Communicator
 
-[Communicator(N.comm)](#html/naturaljs/refr/refr0203.html) is a class that implements Communicator layer of CVC Architecture Pattern.
+[Communicator(N.comm)](?page=html/naturaljs/refr/refr0203.html) is a class that implements Communicator layer of CVC Architecture Pattern.
  * N.comm is a library that supports Ajax communication with the server, such as requesting content or data from the server, or passing parameters.
- * N.comm provides a [Communication Filter](#html/naturaljs/refr/refr0205.html) feature that can execute common logic in every request and response or error generation phase that communicates with the server.
+ * N.comm provides a [Communication Filter](?page=html/naturaljs/refr/refr0205.html) feature that can execute common logic in every request and response or error generation phase that communicates with the server.
 
 #### Context
 
 Context(N.context) is a space that ensures data persistence within the Life-Cycle(Until the page is loaded and redirected to another URL) of a Natural-JS-based application.
- * Natural-JS configuration values​([Config(natural.config.js)](#html/naturaljs/refr/refr0102.html)), global configuration values, common messages of framework, etc. are stored in N.context objects.
+ * Natural-JS configuration values​([Config(natural.config.js)](?page=html/naturaljs/refr/refr0102.html)), global configuration values, common messages of framework, etc. are stored in N.context objects.
 
 
 ## Natural-DATA
@@ -103,7 +103,7 @@ DataSync is a library that synchronizes data changed by components or libraries 
 
 ### Formatter
 
-[Formatter(N.formatter)](#html/naturaljs/refr/refr0301.html) is a library that formats the input data set(json object array) and returns the formatted data set.
+[Formatter(N.formatter)](?page=html/naturaljs/refr/refr0301.html) is a library that formats the input data set(json object array) and returns the formatted data set.
 
 ### Validator
 

@@ -1,9 +1,9 @@
 Create a web application base frame
 ===
 
-Let's develop a Single Page Web Application by using the <a href="#html/naturaljs/refr/refr0502.html">Documents</a>(N.docs) component that places the menu on the left and displays the page in MDI form on the right.
+Let's develop a Single Page Web Application by using the <a href="?page=html/naturaljs/refr/refr0502.html">Documents</a>(N.docs) component that places the menu on the left and displays the page in MDI form on the right.
 
-<p class="alert">For more information about Documents(N.docs), please refer to the <a href="#html/naturaljs/refr/refr0502.html">Documents</a> menu.</p>
+<p class="alert">For more information about Documents(N.docs), please refer to the <a href="?page=html/naturaljs/refr/refr0502.html">Documents</a> menu.</p>
 
 First, create the following folders to structure the development project.
 
@@ -279,4 +279,4 @@ After deploying the source files created so far to the web server and accessing 
 
 Full source code can be downloaded from [here](html/naturaljs/gtst/codes/natural_js_gtst0200.zip).
 
-In the next step([Retrieving / Modifying Data with Grid](#html/naturaljs/gtst/gtst0300.html)), we will fill this content area with the components provided by the Natural-UI package.
+In the next step([Retrieving / Modifying Data with Grid](?page=html/naturaljs/gtst/gtst0300.html)), we will fill this content area with the components provided by the Natural-UI package.

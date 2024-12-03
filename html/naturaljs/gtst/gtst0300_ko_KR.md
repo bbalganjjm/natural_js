@@ -3,10 +3,10 @@ Grid 로 데이터 조회/변경 하기
 
 Grid 로 생성/조회/수정/삭제를 처리하기 위해 조회 조건 영역과 조회 결과 Grid 로 이루어진 프로그램을 개발해 보겠습니다.
 
-코드 데이터들은 [Select](#html/naturaljs/refr/refr0406.html)(N.select) 컴포넌트를 사용하여 데이터를 바인딩하고 [Form](#html/naturaljs/refr/refr0407.html)(N.form) 컴포넌트로 조회 조건 영역을 폼으로 생성하고  [Grid](#html/naturaljs/refr/refr0409.html)(N.grid) 컴포넌트로 입력/조회/수정/삭제할 수 있는 그리드를 생성할 것입니다.
-버튼 들은 [Button](#html/naturaljs/refr/refr0402.html)(N.button) 컴포넌트를 사용합니다.
+코드 데이터들은 [Select](?page=html/naturaljs/refr/refr0406.html)(N.select) 컴포넌트를 사용하여 데이터를 바인딩하고 [Form](?page=html/naturaljs/refr/refr0407.html)(N.form) 컴포넌트로 조회 조건 영역을 폼으로 생성하고  [Grid](?page=html/naturaljs/refr/refr0409.html)(N.grid) 컴포넌트로 입력/조회/수정/삭제할 수 있는 그리드를 생성할 것입니다.
+버튼 들은 [Button](?page=html/naturaljs/refr/refr0402.html)(N.button) 컴포넌트를 사용합니다.
 
-[웹 애플리케이션 기본 프레임 만들기](#html/naturaljs/gtst/gtst0200.html)에서 생성한 기본 프레임에 메뉴를 추가하여 실습을 진행해 보겠습니다.
+[웹 애플리케이션 기본 프레임 만들기](?page=html/naturaljs/gtst/gtst0200.html)에서 생성한 기본 프레임에 메뉴를 추가하여 실습을 진행해 보겠습니다.
 
 먼저 **/html/index/lefter.html** 파일을 열어 다음과 같이 ul 태그의 마지막에 li 요소를 추가하고 지금부터 작업할 메뉴 링크(page6.html)를 추가해 줍니다.
 
@@ -329,13 +329,13 @@ bindEvents : function() {
 }
 ```
 
-<p class="alert">위 코드에서 N.comm 의 옵션들 중 type 프로퍼티는 웹 서버에 POST 방식으로 요청할 수 없어서 임의로 정의 한 옵션입니다. 서버가 POST 요청을 처리할 수 있는 환경이라면 natural.config.js 에 type 의 기본값이 "POST"로 정의되어 있으니 type 옵션을 제거 바랍니다. type 옵션에 대한 자세한 내용은 <a href="#html/naturaljs/refr/refr0204.html">Communicator.request</a> 문서의 [기본 옵션] 탭을 참고해 주세요.</p>
+<p class="alert">위 코드에서 N.comm 의 옵션들 중 type 프로퍼티는 웹 서버에 POST 방식으로 요청할 수 없어서 임의로 정의 한 옵션입니다. 서버가 POST 요청을 처리할 수 있는 환경이라면 natural.config.js 에 type 의 기본값이 "POST"로 정의되어 있으니 type 옵션을 제거 바랍니다. type 옵션에 대한 자세한 내용은 <a href="?page=html/naturaljs/refr/refr0204.html">Communicator.request</a> 문서의 [기본 옵션] 탭을 참고해 주세요.</p>
 
 조회 버튼의 이벤트 핸들러는 다음과 같은 로직을 실행합니다.
  1. 검색 폼(cont.form)의 데이터를 파라미터로 서버에서 데이터 조회
  2. 그리드(cont.grid)에 조회한 데이터를 바인딩
 
-```cont.form.validate()``` 메서드는 검색 폼의 입력 요소의 태그에 선언된 data-validate 옵션([Form](#html/naturaljs/refr/refr0407.html) 문서의 [선언형 옵션] 참고)을 한번에 체크하여 입력 데이터에 대한 유효성 검증을 실행하는 메서드입니다. validate() 메서드는 유효성 검증을 모두 통과해야만 true 를 반환하므로 위 코드와 같이 if 조건으로 선언해 놓으면 "필수 입력 체크" 등의 귀찮은 작업들을 편리하게 처리할 수 있습니다.
+```cont.form.validate()``` 메서드는 검색 폼의 입력 요소의 태그에 선언된 data-validate 옵션([Form](?page=html/naturaljs/refr/refr0407.html) 문서의 [선언형 옵션] 참고)을 한번에 체크하여 입력 데이터에 대한 유효성 검증을 실행하는 메서드입니다. validate() 메서드는 유효성 검증을 모두 통과해야만 true 를 반환하므로 위 코드와 같이 if 조건으로 선언해 놓으면 "필수 입력 체크" 등의 귀찮은 작업들을 편리하게 처리할 수 있습니다.
 그리고 구문의 끝 부분에 .button() 메서드를 실행해서 이벤트 타겟 요소에 Button(N.button) 컴포넌트를 적용했습니다.
 
 #### [New] 버튼 이벤트
@@ -426,8 +426,8 @@ N(window).alert({
 ```
 
 4. N.comm 을 이용하여 그리드의 변경된 데이터(```cont.grid.data("modified")```)를 서버 파라미터로 전송.
-<p class="alert">위 코드에서 N.comm 의 옵션들 중 "type" 은 웹 서버에 POST 방식으로 요청할 수 없어서 임의로 정의 한 옵션입니다. 서버가 POST 요청을 처리할 수 있는 환경이라면 natural.config.js에 type 의 기본값이 "POST"로 정의되어 있으니 type 옵션을 제거 바랍니다. type 옵션에 대한 자세한 내용은 <a href="#html/naturaljs/refr/refr0204.html">Communicator.request</a> 문서의 [기본 옵션] 탭을 참고해 주세요.</p>
-<p class="alert">서버로 object 가 아닌 array[object] 형태의 파라미터를 전달하려면 dataIsArray 옵션을 활성화해 주어야 합니다. dataIsArray 옵션에 대한 자세한 내용은 <a href="#html/naturaljs/refr/refr0204.html">Communicator.request</a> 문서의 [기본 옵션] 탭을 참고해 주세요.</p>
+<p class="alert">위 코드에서 N.comm 의 옵션들 중 "type" 은 웹 서버에 POST 방식으로 요청할 수 없어서 임의로 정의 한 옵션입니다. 서버가 POST 요청을 처리할 수 있는 환경이라면 natural.config.js에 type 의 기본값이 "POST"로 정의되어 있으니 type 옵션을 제거 바랍니다. type 옵션에 대한 자세한 내용은 <a href="?page=html/naturaljs/refr/refr0204.html">Communicator.request</a> 문서의 [기본 옵션] 탭을 참고해 주세요.</p>
+<p class="alert">서버로 object 가 아닌 array[object] 형태의 파라미터를 전달하려면 dataIsArray 옵션을 활성화해 주어야 합니다. dataIsArray 옵션에 대한 자세한 내용은 <a href="?page=html/naturaljs/refr/refr0204.html">Communicator.request</a> 문서의 [기본 옵션] 탭을 참고해 주세요.</p>
 5. 저장 완료 후 N.notify 컴포넌트를 사용하여 메시지 표시
 <p class="alert">입력 요소의 값을 변경하거나 cont.grid.val() 메서드로 데이터를 변경하면 <strong>rowStatus</strong> 프로퍼티가 생성됩니다. rowStatus 값은 "insert", "update", "delete" 중 하나가 됩니다. <strong>서버에서는</strong> 행 데이터 객체마다 정의되어 있는 <strong>rowStatus 값으로 입력/수정/삭제를 구분해서 처리</strong>하면 됩니다.</p>
 6. Search 버튼을 클릭하여 변경된 데이터 재 조회

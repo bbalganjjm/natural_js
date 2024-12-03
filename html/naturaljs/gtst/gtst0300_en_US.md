@@ -3,9 +3,9 @@ Retrieving / Modifying Data with Grid
 
 In order to process creation / retrieval / modification / deletion with Grid, we will develop a program consisting of the search condition area and the search result Grid.
 
-Code data will use [Select](#html/naturaljs/refr/refr0406.html)(N.select) component to bind data, [Form](#html/naturaljs/refr/refr0407.html)(N.form) component will create search condition area as form, and [Grid](#html/naturaljs/refr/refr0409.html)(N.grid) component will create a grid that can be input / viewed / modified / deleted. Buttons use the [Button](#html/naturaljs/refr/refr0402.html)(N.button) component.
+Code data will use [Select](?page=html/naturaljs/refr/refr0406.html)(N.select) component to bind data, [Form](?page=html/naturaljs/refr/refr0407.html)(N.form) component will create search condition area as form, and [Grid](?page=html/naturaljs/refr/refr0409.html)(N.grid) component will create a grid that can be input / viewed / modified / deleted. Buttons use the [Button](?page=html/naturaljs/refr/refr0402.html)(N.button) component.
 
-Let's practice by adding a menu to the basic frame created in [Create a web application base frame](#html/naturaljs/gtst/gtst0200.html).
+Let's practice by adding a menu to the basic frame created in [Create a web application base frame](?page=html/naturaljs/gtst/gtst0200.html).
 
 First, open the  **/html/index/lefter.html** file, add the li element to the end of the ul tag as follows, and add a menu link(page6.html) to work from now on.
 
@@ -329,13 +329,13 @@ bindEvents : function() {
 }
 ```
 
-<p class="alert">In the above code, among the options of N.comm, the "type" is an option that is arbitrarily defined because it cannot be requested through the POST method to the web server. If the server can handle POST requests, remove the type option because the default value of type is defined as "POST" in natural.config.js. For more information about the type option, refer to the [Default Options] tab in the <a href="#html/naturaljs/refr/refr0204.html">Communicator.request</a> document.</p>
+<p class="alert">In the above code, among the options of N.comm, the "type" is an option that is arbitrarily defined because it cannot be requested through the POST method to the web server. If the server can handle POST requests, remove the type option because the default value of type is defined as "POST" in natural.config.js. For more information about the type option, refer to the [Default Options] tab in the <a href="?page=html/naturaljs/refr/refr0204.html">Communicator.request</a> document.</p>
 
 The event handler of the Search button executes the following logic.
  1. Retrieve data from the server using the data of the search form(cont.form) as a parameter.
  2. Bind the retrieved data to the grid (cont.grid).
 
-The ```cont.form.validate()``` is a method that validates input data by checking the data-validate option(refer to the [Declarative Options] tab in the [Form](#html/naturaljs/refr/refr0407.html) document) declared in the tag of the input element of the search form at once. The validate () method returns true only after all validations are passed, so if you declare it as an "if" condition as in the code above, you can conveniently handle annoying works such as "check required input".
+The ```cont.form.validate()``` is a method that validates input data by checking the data-validate option(refer to the [Declarative Options] tab in the [Form](?page=html/naturaljs/refr/refr0407.html) document) declared in the tag of the input element of the search form at once. The validate () method returns true only after all validations are passed, so if you declare it as an "if" condition as in the code above, you can conveniently handle annoying works such as "check required input".
 and, at the end of the statement, the .button() method was executed to apply the Button(N.button) component to the event target element.
 
 #### [New] Button event
@@ -425,8 +425,8 @@ N(window).alert({
 ```
 
 4. Using N.comm send the changed data(```cont.grid.data("modified")```) of the grid to the server parameter.
-<p class="alert">In the above code, among the options of N.comm, the "type" is an option that is arbitrarily defined because it cannot be requested through the POST method to the web server. If the server can handle POST requests, remove the type option because the default value of type is defined as "POST" in natural.config.js. For more information about the type option, refer to the [Default Options] tab in the <a href="#html/naturaljs/refr/refr0204.html">Communicator.request</a> document.</p>
-<p class="alert">To send parameters of type array[object], not object, to server, you must enable dataIsArray option. For more information about the dataIsArray option, refer to the [Default Options] tab in the <a href="#html/naturaljs/refr/refr0204.html">Communicator.request</a> document.</p>
+<p class="alert">In the above code, among the options of N.comm, the "type" is an option that is arbitrarily defined because it cannot be requested through the POST method to the web server. If the server can handle POST requests, remove the type option because the default value of type is defined as "POST" in natural.config.js. For more information about the type option, refer to the [Default Options] tab in the <a href="?page=html/naturaljs/refr/refr0204.html">Communicator.request</a> document.</p>
+<p class="alert">To send parameters of type array[object], not object, to server, you must enable dataIsArray option. For more information about the dataIsArray option, refer to the [Default Options] tab in the <a href="?page=html/naturaljs/refr/refr0204.html">Communicator.request</a> document.</p>
 5. After saving, display the message using the N.notify component.
 <p class="alert"><strong>rowStatus</strong> property is created when the value of input element is changed or data is changed by cont.grid.val () method. The rowStatus value can be one of "insert", "update", or "delete". <strong>insert / update / delete on the server can be handled with the rowStatus value</strong> defined in each row data object.
 6. Click the Search button to retrieve the changed data again.

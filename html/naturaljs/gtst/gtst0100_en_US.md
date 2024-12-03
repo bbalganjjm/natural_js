@@ -54,20 +54,20 @@ N.context.attr("ui", {
     ...
 ```
 
-Natural-JS environment settings are stored in the Context(N.context) object. N.context.attr("architecture").page.context value in the above syntaxes is a very important value among the environment settings. This value is specify for jQuery-selector string of the container element that contained Natural-JS's component elements. In other words, specify the dynamically unchanging element box that contained page content. In addition, Specify the container element selector that stores the N.alert HTML element in N.context.attr("ui").alert.context value. You specify the same element usually as the N.context.attr("architecture").page.context value. Resources of components supported by Natural-UI such as Tab (N.tab), Popup (N.popup), and Datepicker (N.datepicker) are created in the area specified here(N.context.attr...context) and when the page is changed, it will return the browser's resources by overwriting it again. When developing a Single Page Web Application that does not redirect pages, you don't have to manage browser resources separately. For other environment setting values, refer to [Config Example] in [API/DEMO] > [Natural-CORE] > [[Config](#html/naturaljs/refr/refr0102.html)] menu.
+Natural-JS environment settings are stored in the Context(N.context) object. N.context.attr("architecture").page.context value in the above syntaxes is a very important value among the environment settings. This value is specify for jQuery-selector string of the container element that contained Natural-JS's component elements. In other words, specify the dynamically unchanging element box that contained page content. In addition, Specify the container element selector that stores the N.alert HTML element in N.context.attr("ui").alert.context value. You specify the same element usually as the N.context.attr("architecture").page.context value. Resources of components supported by Natural-UI such as Tab (N.tab), Popup (N.popup), and Datepicker (N.datepicker) are created in the area specified here(N.context.attr...context) and when the page is changed, it will return the browser's resources by overwriting it again. When developing a Single Page Web Application that does not redirect pages, you don't have to manage browser resources separately. For other environment setting values, refer to [Config Example] in [API/DEMO] > [Natural-CORE] > [[Config](?page=html/naturaljs/refr/refr0102.html)] menu.
 
-<p class="alert">If you are using the <a href="#html/naturaljs/refr/refr0502.html">Documents</a>(N.docs) component, you do not need to specify it.</p>
+<p class="alert">If you are using the <a href="?page=html/naturaljs/refr/refr0502.html">Documents</a>(N.docs) component, you do not need to specify it.</p>
 <p class="alert">If it is not a SPA(Single Page Application), set it to "body".</p>
 
-In <a href="#html/naturaljs/refr/refr0102.html">Config(natural.config.js)</a>, the global settings for most UI components are specified, and all components are based on the options set here.
+In <a href="?page=html/naturaljs/refr/refr0102.html">Config(natural.config.js)</a>, the global settings for most UI components are specified, and all components are based on the options set here.
 
 Natural-JS's component option's applied priority is as follows.
 
 1.  The specified option values when initializing the component
-2.  The specified options values in <a href="#html/naturaljs/refr/refr0102.html">Config(natural.config.js)</a>
+2.  The specified options values in <a href="?page=html/naturaljs/refr/refr0102.html">Config(natural.config.js)</a>
 3.  The default option values of component
 
-Option values not specified in the <a href="#html/naturaljs/refr/refr0102.html">Config(natural.config.js)</a> among the default option values of the component class is if you do not specify any options at component initialization it works as the default option value of the component class. If you want to set the default option value of a component class that is not defined in the configuration file as the site global option value you can add it to the component part of the configuration file. For example, if you want to set the default height of all grid components body areas within the site to 300 pixels you can add the following to the N.context.attr ("ui").grid property
+Option values not specified in the <a href="?page=html/naturaljs/refr/refr0102.html">Config(natural.config.js)</a> among the default option values of the component class is if you do not specify any options at component initialization it works as the default option value of the component class. If you want to set the default option value of a component class that is not defined in the configuration file as the site global option value you can add it to the component part of the configuration file. For example, if you want to set the default height of all grid components body areas within the site to 300 pixels you can add the following to the N.context.attr ("ui").grid property
 
 ```
 N.context.attr("ui", {
@@ -86,7 +86,7 @@ You have finished configuring your execution environment. Now let's write some s
 
 Natural-JS has a simple source code composition rule to separate development areas and design areas within a source code of page block and to guarantee the scope between elements and scripts. It is not so difficult. You just need to separate the view area and the Controller area as shown below and arrange them in order.
 
-<p class="alert">For more information about View and Controller, please refer to the <a href="#html/naturaljs/refr/refr0201.html">Controller</a> menu.</p>
+<p class="alert">For more information about View and Controller, please refer to the <a href="?page=html/naturaljs/refr/refr0201.html">Controller</a> menu.</p>
 
 **block01.html**
 
@@ -115,7 +115,7 @@ Please save the above code as **block01.html** file.
 
 The N.comm function in the init function of the ".block01" Controller object is a statement that retrieves data from the server.
 
-<p class="alert">Natural-JS uses the Communicator(N.comm) module to send and receive data and files with the server. For more information about N.comm, please refer to the <a href="#html/naturaljs/refr/refr0203.html">Communicator</a> menu.</p>
+<p class="alert">Natural-JS uses the Communicator(N.comm) module to send and receive data and files with the server. For more information about N.comm, please refer to the <a href="?page=html/naturaljs/refr/refr0203.html">Communicator</a> menu.</p>
 
 I mentioned earlier that the data type for sending and receiving component data and data of Natural-JS is JSON.
 
@@ -196,7 +196,7 @@ To receive data temporarily, create and save a data file (data.json) composed of
 ]
 ```
 
-Now one block page is complete. This page can be imported as a Tab(N.tab), Popup(N.popup), or <a href="#html/naturaljs/refr/refr0502.html">Documents</a>(N.docs) component, and Communicator(N.comm) can be used to add elements of this page to the desired location.
+Now one block page is complete. This page can be imported as a Tab(N.tab), Popup(N.popup), or <a href="?page=html/naturaljs/refr/refr0502.html">Documents</a>(N.docs) component, and Communicator(N.comm) can be used to add elements of this page to the desired location.
 
 Let's create a simple index page and add the ** block 01.html ** page to the desired position using N.comm.
 
@@ -245,6 +245,6 @@ The **block01.html** file is loaded by the index.html page, and the init functio
 
 Now that we know how to configure and run the default environment for Natural-JS, let's create a site environment where the block page will run?
 
-Click the [Create a web application base frame](#html/naturaljs/gtst/gtst0200.html) menu.
+Click the [Create a web application base frame](?page=html/naturaljs/gtst/gtst0200.html) menu.
 
 <p class="alert">This site was developed with Natural-JS. Please refer to the source code of this site as it is published in <a href="https://github.com/bbalganjjm/natural_js/tree/gh-pages">gh-pages branch of github</a>.
