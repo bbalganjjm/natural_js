@@ -85,7 +85,6 @@ declare namespace NUS {
             type OnEntireLoad = {
                 (this: NUS.Documents, docId: string, entireLoadRequestCnt: number, entireLoadRequestMaxCnt: number): void;
             }
-
             type OnBeforeLoad = {
                 (this: NUS.Documents, docId: string, target: NJS<HTMLElement[]>): void;
             }

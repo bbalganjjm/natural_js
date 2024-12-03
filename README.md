@@ -24,7 +24,7 @@ N() is a Natural-JS core method. Return a collection of matched elements either 
 
 N is an object class that defines the core functions of Natural-JS.
 
-[N() and N](https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0101.html) provide the following jQuery extensions and utility classes:
+[N() and N](https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0101.html) provide the following jQuery extensions and utility classes:
 
 * jQuery selector extensions : JQuery selector extension for defining selectors with attributes such as style or data
 * jQuery plugin extension methods : Natural-JS utility method created with jQuery Plugin
@@ -41,7 +41,7 @@ N is an object class that defines the core functions of Natural-JS.
 
 ### Natural Config - Config(natural.config.js)
 
-[Config(natural.config.js)](https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0102.html) is a place to save Natural-JS operation environment setting, AOP setting, Communication Filter setting, UI option value, etc.
+[Config(natural.config.js)](https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0102.html) is a place to save Natural-JS operation environment setting, AOP setting, Communication Filter setting, UI option value, etc.
 
 ## Natural-ARCHITECTURE
 
@@ -72,7 +72,7 @@ Natural Architecture Framework provides a clear separation of the areas of devel
 
 #### Controller
 
-[Controller(N.cont)](https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0201.html) is a class that implements Controller layer of CVC Architecture Pattern.
+[Controller(N.cont)](https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0201.html) is a class that implements Controller layer of CVC Architecture Pattern.
 * Controller object is an object in which user-defined functions that control block pages are implemented.
   <p class="alert">N.cont executes the init function of the Controller object and returns a Controller object.</p>
 * Natural-ARCHITECTURE supports AOP (Aspect-Oriented Programming) for Controller objects.
@@ -83,14 +83,14 @@ There is no separate implementation of View, and the HTML element area of the bl
 
 #### Communicator
 
-[Communicator(N.comm)](https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0203.html) is a class that implements Communicator layer of CVC Architecture Pattern.
+[Communicator(N.comm)](https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0203.html) is a class that implements Communicator layer of CVC Architecture Pattern.
 * N.comm is a library that supports Ajax communication with the server, such as requesting content or data from the server, or passing parameters.
-* N.comm provides a [Communication Filter](https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0205.html) feature that can execute common logic in every request and response or error generation phase that communicates with the server.
+* N.comm provides a [Communication Filter](https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0205.html) feature that can execute common logic in every request and response or error generation phase that communicates with the server.
 
 #### Context
 
 Context(NA.context) is a space that ensures data persistence within the Life-Cycle(Until the page is loaded and redirected to another URL) of a Natural-JS-based application.
-* Natural-JS configuration values​([Config(natural.config.js)](https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0102.html)), global configuration values, common messages of framework, etc. are stored in NA.context objects.
+* Natural-JS configuration values​([Config(natural.config.js)](https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0102.html)), global configuration values, common messages of framework, etc. are stored in NA.context objects.
 
 
 ## Natural-DATA
@@ -104,15 +104,15 @@ DataSync is a library that synchronizes data changed by components or libraries 
 
 ### Formatter
 
-[Formatter(N.formatter)](https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0301.html) is a library that formats the input data set(array [json object]) and returns the formatted data set.
+[Formatter(N.formatter)](https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0301.html) is a library that formats the input data set(array [json object]) and returns the formatted data set.
 
 ### Validator
 
-[Validator(N.validator)](https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0302.html) is a library that validates the input data set(array [json object]) and returns a validation result data set.
+[Validator(N.validator)](https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0302.html) is a library that validates the input data set(array [json object]) and returns a validation result data set.
 
 ### Natural-DATA Library
 
-[Natural-DATA Library](https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0303.html) provides methods and functions for sorting, filtering, and refining data of type array[json object].
+[Natural-DATA Library](https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0303.html) provides methods and functions for sorting, filtering, and refining data of type array[json object].
 
 
 ## Natural-UI
@@ -127,46 +127,46 @@ Natural-UI is a library package that supports HTML-based UI components.
 
 ### Alert
 
-[Alert(N.alert)](https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0401.html) is a UI component that displays message dialogs such as window.alert or window.confirm in the form of layer popups.
+[Alert(N.alert)](https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0401.html) is a UI component that displays message dialogs such as window.alert or window.confirm in the form of layer popups.
 
 ### Button
 
-[Button(N.button)](https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0402.html) is a UI component that creates a button with a "a, input[type=button], button" element specified as a context option.
+[Button(N.button)](https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0402.html) is a UI component that creates a button with a "a, input[type=button], button" element specified as a context option.
 
 ### Datepicker
 
-[Datepicker(N.datepicker)](https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0403.html) a UI component that displays a calendar popup for selecting a date or month in the text input element specified by the context option.
+[Datepicker(N.datepicker)](https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0403.html) a UI component that displays a calendar popup for selecting a date or month in the text input element specified by the context option.
 
 ### Popup
 
-[Popup(N.popup)](https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0404.html) is a UI component that makes a layer popup form the internal element specified by the context option or the page specified by the url option.
+[Popup(N.popup)](https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0404.html) is a UI component that makes a layer popup form the internal element specified by the context option or the page specified by the url option.
 
 ### Tab
 
-[Tab(N.tab)](https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0405.html) is a UI component that creates a tab page view by specifying an element consisting of div>ul>li tags as the context option.
+[Tab(N.tab)](https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0405.html) is a UI component that creates a tab page view by specifying an element consisting of div>ul>li tags as the context option.
 
 ### Select
 
-[Select(N.select)](https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0406.html) is a UI component that binds data to select, input[type=checkbox], and input[type=radio] elements to create a selection and extend the functionality of that control.
+[Select(N.select)](https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0406.html) is a UI component that binds data to select, input[type=checkbox], and input[type=radio] elements to create a selection and extend the functionality of that control.
 
 ### Form
 
-[Form(N.form)](https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0407.html) is a UI component that binds or creates single row data to an element(block elements such as div and table) specified by the context option.
+[Form(N.form)](https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0407.html) is a UI component that binds or creates single row data to an element(block elements such as div and table) specified by the context option.
 ### List
 
-[List(N.list)](https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0408.html) is a UI component that creates a list of data in the form of a single column by specifying the ul>li element as the context option.
+[List(N.list)](https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0408.html) is a UI component that creates a list of data in the form of a single column by specifying the ul>li element as the context option.
 
 ### Grid
 
-[Grid(N.grid)](https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0409.html) is a UI component that creates a list of data in a multi-column form by specifying a table element as a context option.
+[Grid(N.grid)](https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0409.html) is a UI component that creates a list of data in a multi-column form by specifying a table element as a context option.
 
 ### Pagination
 
-[Pagination(N.pagination)](https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0410.html) is a UI component that creates paging indexes from list data or the total count of rows.
+[Pagination(N.pagination)](https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0410.html) is a UI component that creates paging indexes from list data or the total count of rows.
 
 ### Tree
 
-[Tree(N.tree)](https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0411.html) is a UI component that makes hierarchical data into tree elements.
+[Tree(N.tree)](https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0411.html) is a UI component that makes hierarchical data into tree elements.
 
 ## Natural-UI.Shell
 
@@ -174,11 +174,11 @@ While Natural-UI supports UI development in the content area, Natural-UI.Shell i
 
 ### Notify(N.notify)
 
-[Notify(N.notify)](https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0501.html) is a UI component that displays a global notification message in a specified location that does not require user confirmation.
+[Notify(N.notify)](https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0501.html) is a UI component that displays a global notification message in a specified location that does not require user confirmation.
 
 ### Documents(N.docs)
 
-[Documents(N.docs)](https://bbalganjjm.github.io/natural_js/#html/naturaljs/refr/refr0502.html) is a page container that displays Natural-JS based menu pages in MDI(Multi Document Interface) or SDI(Single Document Interface) structure.
+[Documents(N.docs)](https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0502.html) is a page container that displays Natural-JS based menu pages in MDI(Multi Document Interface) or SDI(Single Document Interface) structure.
 
 Supports
 ===
