@@ -60,9 +60,9 @@
                     "page": params["page"],
                     "pageId": selectedMenuEle.data("pageid"),
                     "pageNm": selectedMenuEle.find("span:last").text(),
-                    "tab": null
+                    "tab": params["tab"] ? params["tab"] : null
                 };
-                history.pushState(state, state.pageNm, "?page=" + state.page);
+                history.pushState(state, state.pageNm, "?page=" + state.page + (params["tab"] ? "&tab=" + params["tab"] : ""));
             } else {
                 state = {};
             }

@@ -48,20 +48,23 @@
         initRouter : function() {
             var self = this;
 
-            var tabSelector = function(params) {
-                var tabInst = APP.indx.docs.context(".docs_contents__.visible__ .tab__:eq(0)").instance("tab");
+            var tabSelector = function(state) {
+                var tabInst = APP.indx.docs.context(".docs_contents__." + state.pageId + "__ .tab__:eq(0)").instance("tab");
                 if(tabInst) {
-                    if(!N.string.isEmpty(params["tab"]) && N.string.endsWith(params["tab"], ".html")) {
-                        var openedTabEle = tabInst.options.links.filter(":regexp(data-opts, " + params["tab"] + ")");
+                    if(!N.string.isEmpty(state["tab"])) {
+                        var openedTabEle = tabInst.options.links.filter(":regexp(data-opts, " + state["tab"] + ")");
                         if(openedTabEle.length > 0 && !openedTabEle.is(".tab_active__")) {
-                            if(tabInst.beforeUrl !== params["tab"]) {
-                                tabInst.open(tabInst.options.links.index(openedTabEle));
-                                tabInst.beforeUrl = params["tab"];
-                            }
+                            tabInst.isPopstate = true;
+                            tabInst.open(tabInst.options.links.index(openedTabEle));
                         }
                     } else {
+                        if(!tabInst.isFirstOpened) {
+                            tabInst.isPopstate = false;
+                        } else {
+                            tabInst.isPopstate = true;
+                        }
                         tabInst.open(0);
-                        tabInst.beforeUrl = params["tab"];
+                        tabInst.isFirstOpened = true;
                     }
                 }
             };
@@ -75,8 +78,13 @@
                     if(self.docs.options.order[0] !== state.pageId) {
                         self.docs.isPopstate = true;
                         self.docs.add(state.pageId, state.pageNm, {
-                            "url" : url
+                            "url": url,
+                            "onLoad": function () {
+                                tabSelector(state);
+                            }
                         });
+                    } else {
+                        tabSelector(state);
                     }
                 } else {
                     self.docs.isPopstate = true;

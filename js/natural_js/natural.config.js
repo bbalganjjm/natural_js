@@ -521,10 +521,12 @@
             "saveMemory" : true
         },
         "tab" : {
+            "blockOnActiveWhenCreate": true,
             "tabScrollCorrection" : {
                 tabContainerWidthCorrectionPx : 1,
                 tabContainerWidthReCalcDelayTime : 200
             },
+            isPopstate : false,
             "onActive" : function(tabIdx, tabEle, contentEle, tabEles, contentEles) {
                 if($(window).width() > 731) { // 748 - 17px(?)
                     if(localStorage.getItem("isListTypeView") == "Y") {
@@ -532,6 +534,18 @@
                     } else {
                         contentEle.find(".api-view-type-select :checkbox").prop("checked", false).trigger("change.aop");
                     }
+                    if(!this.isPopstate) {
+                        var docId = tabEle.closest(".view_context__").data("pageid");
+                        var docOpts = APP.indx.docs.doc(docId);
+                        var state = {
+                            "page": docOpts.url,
+                            "pageId": docId,
+                            "pageNm": docOpts.docNm,
+                            "tab": this.options.tabOpts[tabIdx].url
+                        };
+                        history.pushState(state, state.pageNm, "?page=" + state.page + "&tab=" + state.tab);
+                    }
+                    this.isPopstate = false;
                 }
             }
         },
