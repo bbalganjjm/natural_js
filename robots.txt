@@ -1,6 +1,9 @@
 User-agent: *
-Disallow: /etc/
+Disallow: /css/
 Disallow: /files/
+Disallow: /html/
+Disallow: /js/
+Disallow: /sample/
 Disallow: /README.md
 Disallow: /google6060ee7ae15e1f61.html
 
