@@ -26,14 +26,14 @@
             <td>["commas"]</td>
             <td>
                 <p lang="ko_KR">천 단위로 콤마(,)를 추가해 줍니다. 소수점이 있어도 소수점 앞부분만 처리합니다.</p>
-                <p lang="en_US">Adds comma(,) by thousand. Even if there is a decimal point, only the part before the decimal point is processed.</p>
+                <p lang="en_US">Adds commas(,) at thousand separators. It processes only the part before the decimal point, if present.</p>
             </td>
         </tr>
         <tr>
             <td>["rrn"]</td>
             <td>
                 <p lang="ko_KR">주민등록번호 형식으로 변환합니다.</p>
-                <p lang="en_US">Converts to South Korea's Resident registration number format.</p>
+                <p lang="en_US">Convert to South Korean resident registration number format.</p>
             </td>
         </tr>
         <tr>
@@ -47,28 +47,28 @@
             <td>["kbrn"]</td>
             <td>
                 <p lang="ko_KR">사업자등록번호 형식으로 변환합니다.</p>
-                <p lang="en_US">Converts to Korea's business registration number format.</p>
+                <p lang="en_US">Convert to South Korean business registration number format.</p>
             </td>
         </tr>
         <tr>
             <td>["kcn"]</td>
             <td>
                 <p lang="ko_KR">법인번호 형식으로 변환합니다.</p>
-                <p lang="en_US">Converts to the Korean corporation number format.</p>
+                <p lang="en_US">Convert to South Korean corporate number format.</p>
             </td>
         </tr>
         <tr>
             <td>["upper"]</td>
             <td>
                 <p lang="ko_KR">대문자로 변환합니다.</p>
-                <p lang="en_US">Converts to uppercase.</p>
+                <p lang="en_US">Convert to uppercase.</p>
             </td>
         </tr>
         <tr>
             <td>["lower"]</td>
             <td>
                 <p lang="ko_KR">소문자로 변환합니다.</p>
-                <p lang="en_US">Converts to lowercase.</p>
+                <p lang="en_US">Convert to lowercase.</p>
             </td>
         </tr>
         <tr>
@@ -82,21 +82,21 @@
             <td>["zipcode"]</td>
             <td>
                 <p lang="ko_KR">우편번호 형식으로 변환합니다.</p>
-                <p lang="en_US">Converts to the postal code format of Korea.</p>
+                <p lang="en_US">Convert to South Korean zip code format.</p>
             </td>
         </tr>
         <tr>
             <td>["phone"]</td>
             <td>
                 <p lang="ko_KR">전화번호 형식으로 변환합니다.</p>
-                <p lang="en_US">Converts to the Korean phone number format.</p>
+                <p lang="en_US">Convert to South Korean phone number format.</p>
             </td>
         </tr>
         <tr>
             <td>["realnum"]</td>
             <td>
                 <p lang="ko_KR">의미 없는 0을 제거합니다.</p>
-                <p lang="en_US">Removes meaningless zeros.</p>
+                <p lang="en_US">Remove meaningless zeros.</p>
                 <pre><code>0100.0 -&gt; 100
 0100.10 -&gt; 100.1</code></pre>
             </td>
@@ -104,22 +104,22 @@
         <tr>
             <td>["trimToEmpty"]</td>
             <td>
-                <p lang="ko_KR">문자열의 처음과 마지막 공백을 제거하고 값이 null 이거나 없으면 비어있는 문자열로 변환합니다.</p>
-                <p lang="en_US">Removes the first and last spaces from the string and converts it to an empty space if the value is null or empty</p>
+                <p lang="ko_KR">문자열의 처음과 마지막 공백을 제거합니다. 입력된 문자열이 null 이거나 undefined 이면 비어있는 문자열로 변환합니다.</p>
+                <p lang="en_US">Removes the first and last whitespace from a string. If the input string is null or undefined, it is converted to an empty string.</p>
             </td>
         </tr>
         <tr>
             <td>["trimToZero"]</td>
             <td>
-                <p lang="ko_KR">문자열의 처음과 마지막 공백을 제거하고 값이 null 이거나 없으면 0으로 변환합니다.</p>
-                <p lang="en_US">Removes the first and last spaces from the string and convert it to 0 if the value is null or empty.</p>
+                <p lang="ko_KR">문자열의 처음과 마지막 공백을 제거합니다. 입력된 문자열이 비어있거나 null, undefined 이면 0을 변환합니다.</p>
+                <p lang="en_US">Removes the first and last whitespace from a string. If the input string is empty, null, or undefined, it is converted to 0.</p>
             </td>
         </tr>
         <tr>
             <td>["trimToVal", "valStr"]</td>
             <td>
-                <p lang="ko_KR">문자열의 처음과 마지막 공백을 제거하고 값이 null 이거나 없으면 "valStr"으로 변환합니다.</p>
-                <p lang="en_US">Removes the first and last spaces from the string and convert it to "valStr" if the value is null or empty.</p>
+                <p lang="ko_KR">문자열의 처음과 마지막 공백을 제거합니다. 입력된 문자열이 비어있거나 null, undefined 이면 valStr 으로 변환합니다.</p>
+                <p lang="en_US">Removes the first and last whitespace from a string. If the input string is empty, null, or undefined, it is converted to valStr.</p>
             </td>
         </tr>
         <tr>
@@ -127,8 +127,8 @@
             <td>
                 <p lang="ko_KR">날짜 형식으로 변환합니다.</p>
                 <p lang="en_US">Converts to date format.</p>
-                <p lang="ko_KR">기본 날짜 형식은 <a href="?page=html/naturaljs/refr/refr0102.html">Config(natural.config.js)</a>의 N.context.attr("data").formatter.date 속성에서 설정 가능합니다.</p>
-                <p lang="en_US">The default date format can be set in N.context.attr("data").formatter.date property of <a href="?page=html/naturaljs/refr/refr0102.html">Config(natural.config.js)</a>.</p>
+                <p lang="ko_KR">전역 날짜 형식은 <a href="?page=html/naturaljs/refr/refr0102.html&tab=html/naturaljs/refr/refr010204.html">Config(natural.config.js)</a>의 N.context.attr("data").formatter.date 속성에서 설정할 수 있습니다.</p>
+                <p lang="en_US">The global date format can be set in the N.context.attr("data").formatter.date property of <a href="?page=html/naturaljs/refr/refr0102.html&tab=html/naturaljs/refr/refr010204.html">Config(natural.config.js)</a>.</p>
                 <p lang="ko_KR">1. 다음은 두 번째 인수 값에 대한 설명입니다.</p>
                 <p lang="en_US">1. The following is the description of the second argument value.</p>
                 <p lang="ko_KR">number 타입으로 길이를 지정하면 다음과 같이 변환됩니다.</p>
@@ -187,10 +187,24 @@
             </td>
         </tr>
         <tr>
-            <td>["time"]</td>
+            <td>["time", 2|4|6]</td>
             <td>
                 <p lang="ko_KR">시간 형식으로 변환합니다.</p>
                 <p lang="en_US">Converts to time format.</p>
+                <p lang="ko_KR">시간을 구분하는 문자 형식은 <a href="?page=html/naturaljs/refr/refr0102.html&tab=html/naturaljs/refr/refr010204.html">Config(natural.config.js)</a>의 N.context.attr("data").formatter.date 속성에서 설정할 수 있습니다.</p>
+                <p lang="en_US">The global character format to separate time can be set in the N.context.attr("data").formatter.timeSepa property of <a href="?page=html/naturaljs/refr/refr0102.html&tab=html/naturaljs/refr/refr010204.html">Config(natural.config.js)</a>.</p>
+                <p lang="ko_KR">두번째 인수에 number 타입으로 길이를 지정하면 다음과 같이 변환됩니다.</p>
+                <p lang="en_US">If you specify the length as number type in the second argument, it is converted as follows.</p>
+                <ul lang="ko_KR">
+                    <li>2 : 시</li>
+                    <li>4 : 시:분</li>
+                    <li>6 : 시:분:초</li>
+                </ul>
+                <ul lang="en_US">
+                    <li>2: Hour</li>
+                    <li>4: Hour:Minute</li>
+                    <li>6: Hour:Minute:Second</li>
+                </ul>
             </td>
         </tr>
         <tr>
