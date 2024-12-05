@@ -310,56 +310,38 @@
                 <pre><code>mask: ~~~~'~-~~~
 string: namesdan
 result: name's-dan
-expected: name's-dan
-error: n/a
 
 mask: (###) ###-####
 string: 614-777-6094
 result: (614) 777-6094
-expected: (614) 777-6094
-error: n/a
 
 mask: (###) ###-####
 string: 6147776094
 result: (614) 777-6094
-expected: (614) 777-6094
-error: n/a
 
 mask: (###) ###-####
 string: 614.777.6094
 result: (614) 777-6094
-expected: (614) 777-6094
-error: n/a
 
 mask: (###) ###-####
 string: 6147a76094
 result: 6147a76094
-expected: 6147a76094
-error: The value "6147a76094" must be in the format (###) ###-####.
 
 mask: (###) #x*-####
 string: 6147a76094
 result: (614) 7a7-6094
-expected: (614) 7a7-6094
-error: n/a
 
 mask: ###.###.####
 string: 614-777-6094
 result: 614.777.6094
-expected: 614.777.6094
-error: n/a
 
 mask: ###/###.####
 string: 614-777-6094
 result: 614/777.6094
-expected: 614/777.6094
-error: n/a
 
 mask: phone !#: ###/###.####
 string: 614-777-6094
-result: phone !: 614/777.6094
-expected: phone !: 614/777.6094
-error: n/a</code></pre>
+result: phone !: 614/777.6094</code></pre>
             </td>
         </tr>
         <tr>
@@ -394,170 +376,114 @@ error: n/a</code></pre>
                 <pre><code>mask: 0#####.##
 string: 534
 result: 000534
-expected: 000534
-error: n/a
 
 mask: 0#####.00
 string: 534
 result: 000534.00
-expected: 000534.00
-error: n/a
 
 mask: 0#####.##
 string: 534.23
 result: 000534.23
-expected: 000534.23
-error: n/a
 
 mask: 000000.##
 string: 534.23
 result: 000534.23
-expected: 000534.23
-error: n/a
 
 mask: +##,###.##
 string: 534.23
 result: +534.23
-expected: +534.23
-error: n/a
 
 mask: #,###.##
 string: 999,034,256.5252
 result: 999,034,256.53
-expected: 999,034,256.53
-error: n/a
 
 mask: #,###.##
 string: 1,999,034,256.5252
 result: 1,999,034,256.53
-expected: 1,999,034,256.53
-error: n/a
 
 mask: #,###.##
 string: 1,034,256.5252
 result: 1,034,256.53
-expected: 1,034,256.53
-error: n/a
 
 mask: #,###
 string: 1,034,256.5242
 result: 1,034,256
-expected: 1,034,256
-error: n/a
 
 mask: -(#,###.##)
 string: -534.23
 result: (-534.23)
-expected: (-534.23)
-error: n/a
 
 mask: (-#,###.##)
 string: -534.23
 result: (-534.23)
-expected: (-534.23)
-error: n/a
 
 mask: (#,###.##)
 string: -534.23
 result: (534.23)
-expected: (534.23)
-error: n/a
 
 mask: (#,###.##)
 string: 534.23
 result: 534.23
-expected: 534.23
-error: n/a
 
 mask: +#,###.##
 string: 534.23
 result: +534.23
-expected: +534.23
-error: n/a
 
 mask: +#,###.##
 string: -534.23
 result: -534.23
-expected: -534.23
-error: n/a
 
 mask: $#,###.##
 string: -534.23
 result: -$534.23
-expected: -$534.23
-error: n/a
 
 mask: $#,###.##
 string: 53-4.23
 result: 53-4.23
-expected: 53-4.23
-error: The value entered was not a number.
 
 mask: $#,###.##
 string: --534.23
 result: --534.23
-expected: --534.23
-error: The value entered was not a number.
 
 mask:
 string: dan
 result: dan
-expected: dan
-error: The value entered was not a number.
 
 mask:
 string: 6147776094
 result: 6147776094
-expected: 6147776094
-error: n/a
 
 mask: #,###.#0
 string: 1,034,256.5242
 result: 1,034,256.52
-expected: 1,034,256.52
-error: n/a
 
 mask: #,###.##
 string: 4,256.529
 result: 4,256.53
-expected: 4,256.53
-error: n/a
 
 mask: #,###.000000
 string: 4,256.529
 result: 4,256.529000
-expected: 4,256.529000
-error: n/a
 
 mask: #,###.0
 string: 4,256.589
 result: 4,256.6
-expected: 4,256.6
-error: n/a
 
 mask: #,###.00
 string: 4,256.5
 result: 4,256.50
-expected: 4,256.50
-error: n/a
 
 mask: #,###.#0
 string: 4,256.5
 result: 4,256.50
-expected: 4,256.50
-error: n/a
 
 mask: $#,###.##
 string: 4,256.5
 result: $4,256.5
-expected: $4,256.5
-error: n/a
 
 mask: #,###.##
 string: 4,256.5
-result: 4,256.5
-expected: 4,256.5
-error: n/a</code></pre>
+result: 4,256.5</code></pre>
             </td>
         </tr>
     </table>
