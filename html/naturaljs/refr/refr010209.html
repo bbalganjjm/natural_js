@@ -4,8 +4,8 @@
         <span lang="en_US">Config Example</span>
     </h1>
 
-    <p lang="ko_KR" class="alert">현재 보고 있는 사이트의 natural.config.js 파일 설정입니다.</p>
-    <p lang="en_US" class="alert">This is the natural.config.js file setting for the site you are currently viewing.</p>
+    <p lang="ko_KR" class="alert">현재 보고 있는 사이트의 natural.config.js 설정입니다.</p>
+    <p lang="en_US" class="alert">This is the natural.config.js setting for the site you are currently viewing.</p>
 
     <pre><code class="naturalConfigJs"></code></pre>
 
@@ -18,7 +18,8 @@ N(".refr010209").cont({
 
         N.comm({
             url: "js/natural_js/natural.config.js",
-            dataType: "text"
+            dataType: "text",
+            urlSync: false
         }).submit(function(naturalConfigJs) {
             N(".naturalConfigJs", view).text(naturalConfigJs);
         });
