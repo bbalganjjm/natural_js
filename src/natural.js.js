@@ -58,5 +58,6 @@ export class NJS extends jQuery {
 export function N(selector, context) {
     return new NJS(selector, context);
 }
+N.version = NJS.version;
 
 window.N = N;
