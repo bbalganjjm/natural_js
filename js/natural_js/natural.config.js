@@ -543,7 +543,9 @@
                             "pageNm": docOpts.docNm,
                             "tab": this.options.tabOpts[tabIdx].url
                         };
-                        history.pushState(state, state.pageNm, "?page=" + state.page + "&tab=" + state.tab);
+                        setTimeout(function() {
+                            history.pushState(state, state.pageNm, "?page=" + state.page + "&tab=" + state.tab);
+                        }, 50);
                     }
                     this.isPopstate = false;
                 }
