@@ -911,9 +911,16 @@
                         "pageNm": docOpts.docNm,
                         "tab": null
                     };
-                    history.pushState(state, state.pageNm, "?page=" + state.page);
+                    history.pushState(state, state.pageNm,
+                        docOpts["locationSearch"]
+                            && N.string.startsWith(docOpts["locationSearch"], "?page=" + state.page)
+                                ? docOpts["locationSearch"] : "?page=" + state.page);
+                    this.beforeDocId = docId;
                 }
                 this.isPopstate = false;
+            },
+            "onInactive" : function(docId) {
+                this.doc(docId)["locationSearch"] = location.search;
             },
             /**
              * Multilingual messages
