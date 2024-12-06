@@ -175,7 +175,7 @@ Controller 영역을 보면 이전 예제들과 다르게 cont 변수에 Control
 이유는 Function Scope 에 상관없이 Controller(N.cont) Object 에 접근하기 위해서입니다.
 위와 같이 Controller 를 정의하고 cont 변수를 선언하고 N().cont() 함수를 실행하면 함수의 어떤 위치에서나 cont 변수로 Controller object 에 접근할 수 있습니다.
 <p class="alert">Natural-JS로 프로젝트를 진행하다 보면 view 나 request, caller 등의 Controller 오브젝트에 담겨있는 고유 객체들을 참고하거나 페이지 전역 변수를 담기 위해 Controller object 에 접근해야 할 때가 많이 있습니다.</p>
-<p class="alert">SPA 로 메뉴 컨텐츠 들을 개발할 때는 Controller object 가 해당 페이지의 최상위 객체라 생각하고 페이지 별 전역 변수를 정의해야 합니다. 그렇게 하지 않고 window 객체에 전역 변수를 선언하면 데이터가 꼬이거나 메모리 사용량이 크게 증가하는 문제가 발생할 수 있습니다. Natural-JS는 Controller object 에 대해서 리소스 관리를 해 주지만 window 객체에 바인딩되어 있는 전역 변수들에 대해서는 관여하지 않습니다.</p>
+<p class="alert">SPA 로 메뉴 콘텐츠 들을 개발할 때는 Controller object 가 해당 페이지의 최상위 객체라 생각하고 페이지 별 전역 변수를 정의해야 합니다. 그렇게 하지 않고 window 객체에 전역 변수를 선언하면 데이터가 꼬이거나 메모리 사용량이 크게 증가하는 문제가 발생할 수 있습니다. Natural-JS는 Controller object 에 대해서 리소스 관리를 해 주지만 window 객체에 바인딩되어 있는 전역 변수들에 대해서는 관여하지 않습니다.</p>
 
 ###컴포넌트 초기화
 이제 View 에서 선언 한 각 요소들에 다음과 같은 컴포넌트를 적용하여 생명을 불어넣어 보겠습니다.
@@ -222,7 +222,7 @@ initComponents : function() {
 
 N.select 와 같은 데이터 관련 컴포넌트들은 컴포넌트 초기화와 데이터 바인딩이 분리되어 있습니다. ```var grid = N([object, object, ...]).grid()``` 명령을 실행하면 컴포넌트 인스턴스가 반환되고 컴포넌트 인스턴스에서 bind() 메서드를 실행하면 데이터가 바인딩되고 add() 메서드를 호출하면 새로운 행 데이터가 생성됩니다.
 
-N() 함수의 첫 번째 인수에 JSON Array 타입의 데이터를 입력 한 다음 bind() 메서드를 호출하면 인스턴스 생성 시 입력된 데이터가 바인딩됩니다. 데이터를 동적으로 바인딩해야 한다면 N() 함수에 ```var grid = N([]).grid()``` 처럼 비어있는 array 를 입력하여 컴포넌트를 초기화하고 bind() 메서드의 첫 번째 인수에 json array 타입의 데이터를 입력하여 호출하면 됩니다.
+N() 함수의 첫 번째 인수에 JSON Array 타입의 데이터를 입력한 다음 bind() 메서드를 호출하면 인스턴스 생성 시 입력된 데이터가 바인딩됩니다. 데이터를 동적으로 바인딩해야 한다면 N() 함수에 ```var grid = N([]).grid()``` 처럼 비어있는 array 를 입력하여 컴포넌트를 초기화하고 bind() 메서드의 첫 번째 인수에 json array 타입의 데이터를 입력하여 호출하면 됩니다.
 
 N.select 에 바인딩할 데이터를 서버에서 조회해 온다면 다음 코드와 비슷하게 변경하면 됩니다.
 

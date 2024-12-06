@@ -37,7 +37,7 @@
             <td style="text-align: center;">N/A</td>
             <td>N.docs</td>
             <td>
-                <p lang="ko_KR">새로운 탭 컨텐츠를 추가합니다.</p>
+                <p lang="ko_KR">새로운 탭 콘텐츠를 추가합니다.</p>
                 <p lang="en_US">Adds new tab content.</p>
             </td>
         </tr>
@@ -49,7 +49,7 @@
             <td>
                 <p lang="ko_KR">document 아이디를 입력합니다.</p>
                 <p lang="en_US">Inputs the document id.</p>
-                <p lang="ko_KR" class="alert">동일한 아이디를 가진 탭 컨텐츠가 이미 있으면 컨텐츠가 활성화됩니다.</p>
+                <p lang="ko_KR" class="alert">동일한 아이디를 가진 탭 콘텐츠가 이미 있으면 콘텐츠가 활성화됩니다.</p>
                 <p lang="en_US" class="alert">If there is already tab content with the same id, the content is activated.</p>
             </td>
         </tr>
@@ -80,7 +80,7 @@
         // 추가되는 document 에만 적용되는 onBeforeLoad 이벤트.
 
         // docId : document id
-        // target : 로드된 컨텐츠를 넣어 줄 요소
+        // target : 로드된 콘텐츠를 넣어 줄 요소
 
         var doc = this.doc(docId); // document 정보 가져오기
 	    var cont = this.cont(docId); // document의 Controller object 가져오기
@@ -114,7 +114,7 @@
     onRemove : function(docId) {
         // 추가되는 document 에만 적용되는 onRemove 이벤트.
     },
-    stateless : false // 탭 컨텐츠의 상태 유지 여부
+    stateless : false // 탭 콘텐츠의 상태 유지 여부
 }
 </code></pre>
                 <pre lang=en_US><code>var docOpts = {
@@ -173,7 +173,7 @@
             <td style="text-align: center;">N/A</td>
             <td>N.docs</td>
             <td>
-                <p lang="ko_KR">지정한 탭 컨텐츠를 활성화합니다.</p>
+                <p lang="ko_KR">지정한 탭 콘텐츠를 활성화합니다.</p>
                 <p lang="en_US">Activates the specified tab content.</p>
             </td>
         </tr>
@@ -193,7 +193,7 @@
             <td style="text-align: center;">N/A</td>
             <td>N.docs</td>
             <td>
-                <p lang="ko_KR">지정한 탭 컨텐츠의 상태를 제거합니다.</p>
+                <p lang="ko_KR">지정한 탭 콘텐츠의 상태를 제거합니다.</p>
                 <p lang="en_US">Removes the state of the specified tab content.</p>
             </td>
         </tr>
@@ -213,7 +213,7 @@
             <td style="text-align: center;">N/A</td>
             <td>N.docs</td>
             <td>
-                <p lang="ko_KR">지정한 탭 컨텐츠를 제거합니다.</p>
+                <p lang="ko_KR">지정한 탭 콘텐츠를 제거합니다.</p>
                 <p lang="en_US">Removes the specified tab content.</p>
             </td>
         </tr>
@@ -243,7 +243,7 @@
             <td style="text-align: center;">N/A</td>
             <td>object|array</td>
             <td>
-                <p lang="ko_KR">지정한 탭 컨텐츠의 정보(docOpts)를 가져옵니다.</p>
+                <p lang="ko_KR">지정한 탭 콘텐츠의 정보(docOpts)를 가져옵니다.</p>
                 <p lang="en_US">Get information(docOpts) of the specified tab content.</p>
             </td>
         </tr>
@@ -255,7 +255,7 @@
             <td>
                 <p lang="ko_KR">document 아이디를 입력합니다.</p>
                 <p lang="en_US">Inputs the document id.</p>
-                <p lang="ko_KR">입력하지 않으면 모든 탭 컨텐츠의 정보를 배열로 반환합니다.</p>
+                <p lang="ko_KR">입력하지 않으면 모든 탭 콘텐츠의 정보를 배열로 반환합니다.</p>
                 <p lang="en_US">If not input, information of all tab contents is returned as an array.</p>
             </td>
         </tr>
@@ -265,7 +265,7 @@
             <td style="text-align: center;">N/A</td>
             <td>object</td>
             <td>
-                <p lang="ko_KR">지정한 탭 컨텐츠의 Controller object를 가져옵니다.</p>
+                <p lang="ko_KR">지정한 탭 콘텐츠의 Controller object를 가져옵니다.</p>
                 <p lang="en_US">Gets the Controller object of the specified tab content.</p>
             </td>
         </tr>
@@ -285,7 +285,7 @@
             <td style="text-align: center;">N/A</td>
             <td>N.docs</td>
             <td>
-                <p lang="ko_KR">지정한 탭 컨텐츠를 다시 불러옵니다.</p>
+                <p lang="ko_KR">지정한 탭 콘텐츠를 다시 불러옵니다.</p>
                 <p lang="en_US">Reloads the specified tab content.</p>
                 <p lang="ko_KR" class="alert">reload 함수를 실행하기 전에 request.attr 함수로 값을 지정하지 않았다면 리로드 전의 request 객체의 값은 리로드 해도 계속 유지됩니다.</p>
                 <p lang="en_US" class="alert">If the value is not specified by request.attr before executing the reload function, the value of the request object before the reload is retained even after reloading.</p>

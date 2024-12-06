@@ -105,7 +105,7 @@
             <td>true</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">true로 설정하면 전체 화면을 가리는 overlay 요소를 생성하여 팝업의 컨텐츠를 제외하고 모든 이벤트를 차단합니다.</p>
+                <p lang="ko_KR">true로 설정하면 전체 화면을 가리는 overlay 요소를 생성하여 팝업의 콘텐츠를 제외하고 모든 이벤트를 차단합니다.</p>
                 <p lang="en_US">If set to true, creates an overlay element that covers the entire screen to block all events except the content of the popup.</p>
             </td>
         </tr>
@@ -141,7 +141,7 @@
                     <li lang="ko_KR">number 타입으로 설정할 경우 입력한 수치(px)가 요소의 넓이로 설정됩니다.</li>
                     <li lang="en_US">When set to number type, the entered value(px) is set as the element width.</li>
                     <li>
-                        <p lang="ko_KR">function 타입으로 설정할 경우 msgContext(modal 옵션이 true 일 때 화면에 덮는 요소), msgContents(메시지 컨텐츠 요소)가 인수로 전달되고 return 된 값으로 요소의 넓이가 설정됩니다.</p>
+                        <p lang="ko_KR">function 타입으로 설정할 경우 msgContext(modal 옵션이 true 일 때 화면에 덮는 요소), msgContents(메시지 콘텐츠 요소)가 인수로 전달되고 return 된 값으로 요소의 넓이가 설정됩니다.</p>
                         <p lang="en_US">If set to function type, msgContext (the element that covers the screen when the modal option is true) and msgContents (the message content element) are passed as arguments, and the width of the element is set as the returned value.</p>
                         <pre><code>...<span lang="ko_KR">// 팝업의 넓이를 화면에 꽉 채우기</span>
 <span lang="en_US">// Fully fill the width of the popup on the screen.</span>
@@ -159,13 +159,13 @@ width : function(msgContext, msgContents) {
             <td>0</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">팝업에서 타이틀 영역을 제외한 컨텐츠의 높이.</p>
+                <p lang="ko_KR">팝업에서 타이틀 영역을 제외한 콘텐츠의 높이.</p>
                 <p lang="en_US">The height of the content in the pop-up, excluding the title area.</p>
                 <ul>
                     <li lang="ko_KR">number 타입으로 설정할 경우 입력한 수치(px)가 요소의 높이로 설정됩니다.</li>
                     <li lang="en_US">If set to number type, the entered value(px) is set as the element height.</li>
                     <li>
-                        <p lang="ko_KR">function 타입으로 설정할 경우 msgContext(modal 옵션이 true 일 때 화면에 덮는 요소), msgContents(메시지 컨텐츠 요소)가 인수로 전달되고 return 된 값으로 요소의 높이가 설정됩니다.</p>
+                        <p lang="ko_KR">function 타입으로 설정할 경우 msgContext(modal 옵션이 true 일 때 화면에 덮는 요소), msgContents(메시지 콘텐츠 요소)가 인수로 전달되고 return 된 값으로 요소의 높이가 설정됩니다.</p>
                         <p lang="en_US">If set to function type, msgContext(the element that covers the screen when the modal option is true) and msgContents(the message content element) are passed as arguments, and the height of the element is set as the returned value.</p>
                         <pre><code>...<span lang="ko_KR">// 팝업의 높이를 화면에 꽉 채우기.</span>
 <span lang="en_US">// Fully fill the height of the popup on the screen.</span>
@@ -194,7 +194,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 팝업이 �
             <td>true</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">false로 설정하면 브라우저의 크기를 조절하거나 부모 컨텐츠의 높이가 동적으로 변경되었을 때 블록 오버레이의 크기와 팝업의 위치를 자동으로 조정하지 않습니다.</p>
+                <p lang="ko_KR">false로 설정하면 브라우저의 크기를 조절하거나 부모 콘텐츠의 높이가 동적으로 변경되었을 때 블록 오버레이의 크기와 팝업의 위치를 자동으로 조정하지 않습니다.</p>
                 <p lang="en_US">If set to false, It does not automatically adjust the size of the block overlay and the position of the popup when the browser is resized or the height of the parent content is dynamically changed.</p>
             </td>
         </tr>
@@ -261,11 +261,11 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 팝업이 �
             <td>false</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">true로 설정하면 팝업의 컨텐츠를 팝업이 초기화될 때 미리 로딩합니다.</p>
+                <p lang="ko_KR">true로 설정하면 팝업의 콘텐츠를 팝업이 초기화될 때 미리 로딩합니다.</p>
                 <p lang="en_US">If set to true, the content of the popup is preloaded when the popup is initialized.</p>
-                <p lang="ko_KR">false로 설정하면 팝업을 처음 열 때 팝업의 컨텐츠를 로딩합니다.</p>
+                <p lang="ko_KR">false로 설정하면 팝업을 처음 열 때 팝업의 콘텐츠를 로딩합니다.</p>
                 <p lang="en_US">If set to false, the content of the popup is loaded when the popup is first opened.</p>
-                <p lang="ko_KR" class="alert">url 옵션을 설정하여 다른 페이지를 팝업 컨텐츠로 생성했을 때만 작동합니다.</p>
+                <p lang="ko_KR" class="alert">url 옵션을 설정하여 다른 페이지를 팝업 콘텐츠로 생성했을 때만 작동합니다.</p>
                 <p lang="en_US" class="alert">It works only when other pages are created as pop-up content by setting the url option.</p>
             </td>
         </tr>
@@ -293,7 +293,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 팝업이 �
                 <p lang="en_US">Option to refer to the Controller object of the parent page in the Controller object of the popup.</p>
                 <p lang="ko_KR">팝업 인스턴스를 생성하는 페이지의 Controller object를 opener 옵션으로 설정하면 팝업의 Controller object의 opener 속성으로 전달됩니다.</p>
                 <p lang="en_US">If the Controller object of the page creating the popup instance is set as the opener option, it is passed as the opener property of the Controller object of the popup.</p>
-                <p lang="ko_KR" class="alert">url 옵션을 설정하여 다른 페이지를 팝업 컨텐츠로 생성했을 때만 작동합니다.</p>
+                <p lang="ko_KR" class="alert">url 옵션을 설정하여 다른 페이지를 팝업 콘텐츠로 생성했을 때만 작동합니다.</p>
                 <p lang="en_US" class="alert">It works only when other pages are created as pop-up content by setting the url option.</p>
             </td>
         </tr>
@@ -318,7 +318,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 팝업이 �
                 <pre lang="ko_KR"><code>onOk : function(msgContext, msgContents) {
     // this : N.alert 인스턴스
     // msgContext : 팝업 오버레이 요소
-    // msgContents : 팝업 컨텐츠 요소
+    // msgContents : 팝업 콘텐츠 요소
 }</code></pre>
                 <pre lang="en_US"><code>onOk : function(msgContext, msgContents) {
     // this : N.alert instance
@@ -342,7 +342,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 팝업이 �
                 <pre lang="ko_KR"><code>onCancel : function(msgContext, msgContents) {
     // this : N.alert 인스턴스
     // msgContext : 팝업 오버레이 요소
-    // msgContents : 팝업 컨텐츠 요소
+    // msgContents : 팝업 콘텐츠 요소
 }</code></pre>
                 <pre lang="en_US"><code>onCancel : function(msgContext, msgContents) {
     // this : N.alert instance
@@ -491,13 +491,13 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 팝업이 �
             <td>
                 <p lang="ko_KR">팝업이 열릴 때마다 실행되는 이벤트 핸들러를 정의합니다.</p>
                 <p lang="en_US">Define an event handler that is executed whenever a popup is opened.</p>
-                <p lang="ko_KR" class="alert">문자열로 함수명만 정의하고 실제 이벤트 핸들러 메서드는 불러오는 팝업 컨텐츠의 Controller object에 정의 한 함수명으로 구현되어 있어야 합니다.</p>
+                <p lang="ko_KR" class="alert">문자열로 함수명만 정의하고 실제 이벤트 핸들러 메서드는 불러오는 팝업 콘텐츠의 Controller object에 정의 한 함수명으로 구현되어 있어야 합니다.</p>
                 <p lang="en_US" class="alert">Define only the function name as a string, and the actual event handler method must be implemented as the function name defined in the Controller object of the pop-up content to be loaded.</p>
                 <p lang="ko_KR" class="alert">open 메서드의 첫 번째 인수가 onOpen 이벤트 핸들러 함수의 첫 번째 인수(onOpenData)로 전달됩니다.</p>
                 <p lang="en_US" class="alert">The first argument of the open method is passed as the first argument(onOpenData) of the onOpen event handler function.</p>
-                <p lang="ko_KR" class="alert">팝업 컨텐츠가 처음 로딩될 경우 Controller object의 init 함수가 실행된 다음 onOpen 함수가 실행됩니다.</p>
+                <p lang="ko_KR" class="alert">팝업 콘텐츠가 처음 로딩될 경우 Controller object의 init 함수가 실행된 다음 onOpen 함수가 실행됩니다.</p>
                 <p lang="en_US" class="alert">If the popup content is loaded for the first time, the init function of the Controller object is executed, and then the onOpen function is executed.</p>
-                <p lang="ko_KR" class="alert">url 옵션을 설정하여 다른 페이지를 팝업 컨텐츠로 생성했을 때만 작동합니다.</p>
+                <p lang="ko_KR" class="alert">url 옵션을 설정하여 다른 페이지를 팝업 콘텐츠로 생성했을 때만 작동합니다.</p>
                 <p lang="en_US" class="alert">It works only when other pages are created as pop-up content by setting the url option.</p>
                 <ul>
                     <li>
@@ -542,7 +542,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 팝업이 �
                 <p lang="en_US">Sets the data of the parent page to be passed as the first argument of the onOpen event handler function.</p>
                 <p lang="ko_KR">open 메서드의 첫 번째 인수 값이 이 값으로 설정됩니다.</p>
                 <p lang="en_US">The value of the first argument of the open method is set to this value.</p>
-                <p lang="ko_KR" class="alert">url 옵션을 설정하여 다른 페이지를 팝업 컨텐츠로 생성했을 때만 작동합니다.</p>
+                <p lang="ko_KR" class="alert">url 옵션을 설정하여 다른 페이지를 팝업 콘텐츠로 생성했을 때만 작동합니다.</p>
                 <p lang="en_US" class="alert">It works only when other pages are created as pop-up content by setting the url option.</p>
             </td>
         </tr>
@@ -563,12 +563,12 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 팝업이 �
     // onCloseData : The first argument value of the (Controller object).caller.close function called from the popup is passed.
 }</code></pre>
                 <p lang="ko_KR" class="alert">
-                                팝업 컨텐츠 로딩이 완료되면 팝업의 Controller object에 caller라는 속성이 생성됩니다. 이 caller는 이 팝업을 생성한 부모페이지의 N.popup instance입니다.<br>
+                                팝업 콘텐츠 로딩이 완료되면 팝업의 Controller object에 caller라는 속성이 생성됩니다. 이 caller는 이 팝업을 생성한 부모페이지의 N.popup instance입니다.<br>
                                 팝업에서 자체 팝업을 닫을 때는 팝업의 Controller object에서 "this.caller.close(onCloseData);" 명령을 실행하면 됩니다. 이 명령을 실행하면 팝업이 닫히면서 onClose 이벤트 핸들러 함수의 첫 번째 인수로 onCloseData가 전달됩니다.</p>
                 <p lang="en_US" class="alert">
                     When loading popup content is completed, a caller property is created in the Controller object of the popup. This caller is the N.popup instance of the parent page that created this popup.<br>
                     When closing a self-popup in a popup, in the Controller object of the popup, "this.caller.close(onCloseData);" just run the command. When this command is executed, the popup is closed and onCloseData is passed as the first argument of the onClose event handler function.</p>
-                <p lang="ko_KR" class="alert">url 옵션을 설정하여 다른 페이지를 팝업 컨텐츠로 생성했을 때만 작동합니다.</p>
+                <p lang="ko_KR" class="alert">url 옵션을 설정하여 다른 페이지를 팝업 콘텐츠로 생성했을 때만 작동합니다.</p>
                 <p lang="en_US" class="alert">It works only when other pages are created as pop-up content by setting the url option.</p>
                 <ul>
                     <li>
@@ -618,7 +618,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 팝업이 �
                 <p lang="en_US">Sets the data of the popup page to be passed as the first argument of the onClose event handler function.</p>
                 <p lang="ko_KR">팝업의 Controller object의 this.caller.close 메서드의 첫 번째 인수 값이 이 값으로 설정됩니다.</p>
                 <p lang="en_US">The value of the first argument of the this.caller.close method of the popup Controller object is set to this value.</p>
-                <p lang="ko_KR" class="alert">url 옵션을 설정하여 다른 페이지를 팝업 컨텐츠로 생성했을 때만 작동합니다.</p>
+                <p lang="ko_KR" class="alert">url 옵션을 설정하여 다른 페이지를 팝업 콘텐츠로 생성했을 때만 작동합니다.</p>
                 <p lang="en_US" class="alert">It works only when other pages are created as pop-up content by setting the url option.</p>
             </td>
         </tr>
@@ -628,7 +628,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 팝업이 �
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">팝업 컨텐츠 로딩이 완료되었을 때 실행되는 이벤트 핸들러를 정의합니다.</p>
+                <p lang="ko_KR">팝업 콘텐츠 로딩이 완료되었을 때 실행되는 이벤트 핸들러를 정의합니다.</p>
                 <p lang="en_US">Defines an event handler that is executed when popup content loading is completed.</p>
                 <pre lang="ko_KR"><code>onLoad : function(cont) {
     // this : N.popup 인스턴스
@@ -638,7 +638,7 @@ height: function(msgContext, msgContents) {<span lang="ko_KR">    // 팝업이 �
     // this : N.popup instance
     // cont : Controller object in popup
 }</code></pre>
-                <p lang="ko_KR" class="alert">url 옵션을 설정하여 다른 페이지를 팝업 컨텐츠로 생성했을 때만 작동합니다.</p>
+                <p lang="ko_KR" class="alert">url 옵션을 설정하여 다른 페이지를 팝업 콘텐츠로 생성했을 때만 작동합니다.</p>
                 <p lang="en_US" class="alert">It works only when other pages are created as pop-up content by setting the url option.</p>
             </td>
         </tr>

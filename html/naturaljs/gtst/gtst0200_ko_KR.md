@@ -10,7 +10,7 @@
  * /js/natural_js - Natural-JS Javascript 라이브러리 파일 폴더
  * /js/natural_js/lib - jQuery 라이브러리 파일 폴더
  * /js/natural_js/css - Natural-JS UI 컴포넌트들의 기본 CSS 파일 폴더
- * /html/contents - 메뉴 컨텐츠 파일 폴더
+ * /html/contents - 메뉴 콘텐츠 파일 폴더
  * /html/index - 메인 인덱스와 관련된 파일 폴더
 
 폴더 생성이 완료되었으면 [GitHub](https://github.com/bbalganjjm/natural_js)의 마스터 브랜치에서 다음 파일을 다운로드하여 해당 경로로 복사해 주세요.
@@ -112,7 +112,7 @@ $(document).ready 함수의 콜백 함수의 내용을 봐주세요.
 N("#lefter").comm("html/index/lefter.html").submit 함수의 인수는 **/html/index/lefter.html** 파일 로딩이 완료된 후 실행되는 콜백 함수입니다. 여기에서 N.docs 컴포넌트로 #docs 요소 안에 MDI 페이지 컨테이너를 생성해 주고 있습니다. N.docs 컴포넌트의 인스턴스는 애플리케이션당 1개만 생성되므로 window 객체에 담아 전역으로 사용할 것입니다.
 <p class="alert">N.docs 인스턴스는 반드시 window 객체가 아니더라도 애플리케이션에서 정의한 전역으로 접근할 수 있는 아무 객체에 담아도 됩니다.</p>
 
-이제 이 N.docs 인스턴스에서 제공하는 기능으로 메뉴 컨텐츠를 불러오는 좌측 메뉴 블록 페이지(/html/index/lefter.html)를 생성해 보겠습니다.
+이제 이 N.docs 인스턴스에서 제공하는 기능으로 메뉴 콘텐츠를 불러오는 좌측 메뉴 블록 페이지(/html/index/lefter.html)를 생성해 보겠습니다.
 
 다음 코드를 **/html/index/lefter.html** 파일로 저장해 주세요.
 
@@ -154,12 +154,12 @@ N(".index-lefter").cont({
 <p class="alert">이 페이지에서만 스타일이 적용되게 하려면 <code>.index-lefter .menu a { ... }</code>의 **.index-lefter** 처럼  CSS 셀렉터를 정의할 때 반드시 view 요소 셀렉터부터 시작해야 합니다.</p>
 <p class="alert">페이지가 닫히면 스타일도 같이 제거됩니다.</p>
 
-N.cont 오브젝트의 init 함수에는 메뉴 링크 요소를 클릭했을 때  **/index.html**에서 window 객체에 담아둔 N.docs 인스턴스의 add 메서드로 메뉴 컨텐츠를 불러오는 코드가 작성되어 있습니다. N.docs 인스턴스로 ```add("페이지ID", "페이지명", { url : "페이지URL" }``` 함수를 실행하면 우측 MDI 영역에 페이지가 추가됩니다.
+N.cont 오브젝트의 init 함수에는 메뉴 링크 요소를 클릭했을 때  **/index.html**에서 window 객체에 담아둔 N.docs 인스턴스의 add 메서드로 메뉴 콘텐츠를 불러오는 코드가 작성되어 있습니다. N.docs 인스턴스로 ```add("페이지ID", "페이지명", { url : "페이지URL" }``` 함수를 실행하면 우측 MDI 영역에 페이지가 추가됩니다.
 ```N(".menu", view).on("click", "a", function(e) { ... }, N(this).data("docid"), N(this).text(), N(this).attr("href")```는 모두 jQuery 에서 제공하는 기능이니 [jQuery API 매뉴얼](https://api.jquery.com)을 참고 바랍니다.
 
 위 파일들은 View 와 Controller 구조로만 이루어진 아주 간단한 내용으로 구성된 페이지입니다.
 
-아래 메뉴 컨텐츠 파일들을 생성해 주세요.
+아래 메뉴 콘텐츠 파일들을 생성해 주세요.
 
  * **/html/contents/page1.html**
  * **/html/contents/page2.html**
@@ -280,4 +280,4 @@ N(".page01").cont({
 
 전체 소스코드는 [여기](html/naturaljs/gtst/codes/natural_js_gtst0200.zip)에서 다운로드할 수 있습니다.
 
-다음 단계([Grid 로 데이터 조회/변경 하기](?page=html/naturaljs/gtst/gtst0300.html))에서는 Natural-UI 패키지에서 제공하는 컴포넌트들로 이 컨텐츠 영역을 채워 보겠습니다.
+다음 단계([Grid 로 데이터 조회/변경 하기](?page=html/naturaljs/gtst/gtst0300.html))에서는 Natural-UI 패키지에서 제공하는 컴포넌트들로 이 콘텐츠 영역을 채워 보겠습니다.

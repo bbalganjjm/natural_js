@@ -54,7 +54,7 @@ N.context.attr("ui", {
     ...
 ```
 
-Natural-JS의 환경설정값은 Context(N.context) 객체에 저장됩니다. 환경설정값 중 위 구문에 해당하는 N.context.attr("architecture").page.context 값은 아주 중요한 값입니다. 이 값은 Natural-JS의 컴포넌트 요소들이 적재될 컨테이너 요소를 jQuery Selector 문자열로 지정하면 됩니다. 쉽게 말해 페이지 컨텐츠들을 표시할 동적으로 변하지 않는 박스 요소를 지정하면 됩니다. 더불어, N.context.attr("ui").alert.context 값에 N.alert HTML 요소를 저장하는 컨테이너 요소의 selector 를 지정해 주세요. 보통 N.context.attr("architecture").page.context 값과 같은 요소를 지정하면 됩니다. Tab(N.tab)이나 Popup(N.popup), Datepicker(N.datepicker)등 Natural-UI 에서 지원하는 컴포넌트들의 자원이 여기(N.context.attr...context)에서 지정한 영역에 생성되고 페이지가 전환될 때 이 영역에 다시 덮어 씌움으로써 브라우저의 자원을 반환하게 됩니다. 페이지 Redirect 를 하지 않는 Single Page Web Application 을 개발할 때 브라우저 리소스를 따로 관리하지 않아도 되어서 편리하겠죠? 그 외 환경설정 값들은 [Config](?page=html/naturaljs/refr/refr0102.html) 메뉴의 내용을 참고해 주세요.
+Natural-JS의 환경설정값은 Context(N.context) 객체에 저장됩니다. 환경설정값 중 위 구문에 해당하는 N.context.attr("architecture").page.context 값은 아주 중요한 값입니다. 이 값은 Natural-JS의 컴포넌트 요소들이 적재될 컨테이너 요소를 jQuery Selector 문자열로 지정하면 됩니다. 쉽게 말해 페이지 콘텐츠들을 표시할 동적으로 변하지 않는 박스 요소를 지정하면 됩니다. 더불어, N.context.attr("ui").alert.context 값에 N.alert HTML 요소를 저장하는 컨테이너 요소의 selector 를 지정해 주세요. 보통 N.context.attr("architecture").page.context 값과 같은 요소를 지정하면 됩니다. Tab(N.tab)이나 Popup(N.popup), Datepicker(N.datepicker)등 Natural-UI 에서 지원하는 컴포넌트들의 자원이 여기(N.context.attr...context)에서 지정한 영역에 생성되고 페이지가 전환될 때 이 영역에 다시 덮어 씌움으로써 브라우저의 자원을 반환하게 됩니다. 페이지 Redirect 를 하지 않는 Single Page Web Application 을 개발할 때 브라우저 리소스를 따로 관리하지 않아도 되어서 편리하겠죠? 그 외 환경설정 값들은 [Config](?page=html/naturaljs/refr/refr0102.html) 메뉴의 내용을 참고해 주세요.
 
 <p class="alert"><a href="?page=html/naturaljs/refr/refr0502.html">Documents</a>(N.docs) 컴포넌트를 사용하는 경우에는 지정할 필요가 없습니다.</p>
 <p class="alert">SPA(Single Page Application)가 아니면 "body"로 설정해 주세요.</p>

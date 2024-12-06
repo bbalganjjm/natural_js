@@ -30,9 +30,9 @@
                 <p lang="ko_KR">true로 설정하면 탭 기반 Multiple-Document Interface(MDI) 형태로 N.docs가 생성되고 false로 설정하면 일반적인 Single-Document Interface(SDI) 형태로 N.docs가 생성됩니다.</p>
                 <p lang="en_US">If set to true, N.docs are generated as a tab-based Multiple Document Interface(MDI) type, and when set to false, N.docs are generated as a generic Single Document Interface(SDI) type.</p>
                 <ul>
-                    <li lang="ko_KR">true : 탭과 페이지 컨텐츠들을 표시합니다.</li>
+                    <li lang="ko_KR">true : 탭과 페이지 콘텐츠들을 표시합니다.</li>
                     <li lang="en_US">true : Displays tabs and page contents.</li>
-                    <li lang="ko_KR">false : 탭은 표시하지 않고 단 한 개의 페이지 컨텐츠만 표시합니다.</li>
+                    <li lang="ko_KR">false : 탭은 표시하지 않고 단 한 개의 페이지 콘텐츠만 표시합니다.</li>
                     <li lang="en_US">false : The tab is not displayed, and only one page content is displayed.</li>
                 </ul>
             </td>
@@ -43,11 +43,11 @@
             <td>0</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">multi 옵션이 true 인 경우 추가 탭 컨텐츠를 열 때마다 웹 브라우저가 느려지지 않도록 최대 상태 유지 탭 컨텐츠 수를 설정할 수 있습니다.</p>
+                <p lang="ko_KR">multi 옵션이 true 인 경우 추가 탭 콘텐츠를 열 때마다 웹 브라우저가 느려지지 않도록 최대 상태 유지 탭 콘텐츠 수를 설정할 수 있습니다.</p>
                 <p lang="en_US">If the multi option is true, the maximum number of stateful tab contents can be set to prevent the web browser from slowing down whenever additional tab contents are opened.</p>
-                <p lang="ko_KR" class="alert">새로운 컨텐츠를 열때 열려있는 탭 컨텐츠의 개수가 최대 상태 유지 개수를 초과하면 제일 먼저 열린 탭 컨텐츠의 상태가 제거되고 상태 유지가 제거된 탭을 클릭하면 해당 컨텐츠가 다시 로딩됩니다.</p>
+                <p lang="ko_KR" class="alert">새로운 콘텐츠를 열때 열려있는 탭 콘텐츠의 개수가 최대 상태 유지 개수를 초과하면 제일 먼저 열린 탭 콘텐츠의 상태가 제거되고 상태 유지가 제거된 탭을 클릭하면 해당 콘텐츠가 다시 로딩됩니다.</p>
                 <p lang="en_US" class="alert">When opening the new content, if the number of open tab contents exceeds the maximum stateful count, the state of the first opened tab content is removed, and  clicking on the tab with the removed state, it will reload the content.</p>
-                <p lang="ko_KR" class="alert">값이 0 이면 최대 상태 유지 컨텐츠 수를 제한하지 않습니다.</p>
+                <p lang="ko_KR" class="alert">값이 0 이면 최대 상태 유지 콘텐츠 수를 제한하지 않습니다.</p>
                 <p lang="en_US" class="alert">A value of 0 does not limit the maximum number of stateful content.</p>
             </td>
         </tr>
@@ -57,11 +57,11 @@
             <td>0</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">multi 옵션이 true 인 경우 추가 탭 컨텐츠를 열 때마다 웹 브라우저가 느려지지 않도록 최대 탭 컨텐츠 수를 설정할 수 있습니다.</p>
+                <p lang="ko_KR">multi 옵션이 true 인 경우 추가 탭 콘텐츠를 열 때마다 웹 브라우저가 느려지지 않도록 최대 탭 콘텐츠 수를 설정할 수 있습니다.</p>
                 <p lang="en_US">If the multi option is true, the maximum number of tab contents can be set to prevent the web browser from slowing down whenever additional tab contents are opened.</p>
-                <p lang="ko_KR" class="alert">새로운 컨텐츠를 열때 열려있는 탭 컨텐츠의 개수가 최대 탭 개수를 초과하면 더이상 탭 컨텐츠를 열 수 없습니다. 새로운 컨텐츠를 열려면 기존 탭 중에 하나를 닫아야 합니다.</p>
+                <p lang="ko_KR" class="alert">새로운 콘텐츠를 열때 열려있는 탭 콘텐츠의 개수가 최대 탭 개수를 초과하면 더이상 탭 콘텐츠를 열 수 없습니다. 새로운 콘텐츠를 열려면 기존 탭 중에 하나를 닫아야 합니다.</p>
                 <p lang="en_US" class="alert">When opening new content, if the number of open tab contents exceeds the maximum tabs count, the tab contents can no longer be opened. To open new content, you must close one of the existing tabs.</p>
-                <p lang="ko_KR" class="alert">값이 0 이면 최대 컨텐츠 수를 제한하지 않습니다.</p>
+                <p lang="ko_KR" class="alert">값이 0 이면 최대 콘텐츠 수를 제한하지 않습니다.</p>
                 <p lang="en_US" class="alert">If the value is 0, the maximum number of contents is not limited.</p>
             </td>
         </tr>
@@ -180,11 +180,11 @@
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">컨텐츠가 로딩되기 전 실행되는 이벤트입니다.</p>
+                <p lang="ko_KR">콘텐츠가 로딩되기 전 실행되는 이벤트입니다.</p>
                 <p lang="en_US">Define an event handler that is executed before the content is loaded.</p>
                 <pre lang="ko_KR"><code>onBeforeLoad : function(docId, target) {
     // docId : document id
-    // target : 로드된 컨텐츠를 넣어 줄 요소
+    // target : 로드된 콘텐츠를 넣어 줄 요소
 
     var doc = this.doc(docId); // document 정보 가져오기
 }</code></pre>
@@ -245,7 +245,7 @@
 
     var doc = this.doc(docId); // get document info
 }</code></pre>
-                <p lang="ko_KR" class="alert">컨텐츠 로딩 전 최초 한 번은 컨텐츠가 로딩되기 전에 이벤트가 실행되므로 cont 메서드로 불러온 페이지의 Controller object를 가져올 수 없습니다.</p>
+                <p lang="ko_KR" class="alert">콘텐츠 로딩 전 최초 한 번은 콘텐츠가 로딩되기 전에 이벤트가 실행되므로 cont 메서드로 불러온 페이지의 Controller object를 가져올 수 없습니다.</p>
                 <p lang="en_US" class="alert">The first time before loading the content, the event is fired before the content is loaded, so you cannot get the Controller object of the page called by the cont method.</p>
             </td>
         </tr>

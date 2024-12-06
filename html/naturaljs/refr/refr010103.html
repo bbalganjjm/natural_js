@@ -23,7 +23,7 @@
             <td>
                 <p lang="ko_KR">UI 컴포넌트의 context 요소나 View 요소에서 컴포넌트 객체의 인스턴스 또는 Controller object를 반환하거나 객체 인스턴스를 요소에 저장합니다.</p>
                 <p lang="en_US">Returns the instance of the component object or the Controller object from the context element or View element of the UI component, or saves the object instance to the element.</p>
-                <p lang="ko_KR" class="alert">Natural-JS는 탭이나 팝업 등의 블록 컨텐츠를 쉽게 제어하기 위해서 컴포넌트나 라이브러리 초기화 시 지정한 템플릿(context 나 view) 요소에 생성된 객체 인스턴스를 저장합니다.</p>
+                <p lang="ko_KR" class="alert">Natural-JS는 탭이나 팝업 등의 블록 콘텐츠를 쉽게 제어하기 위해서 컴포넌트나 라이브러리 초기화 시 지정한 템플릿(context 나 view) 요소에 생성된 객체 인스턴스를 저장합니다.</p>
                 <p lang="en_US" class="alert">Natural-JS stores the created object instance in the template (context or view) element specified when initializing the component or library to easily control block contents such as tabs or pop-ups.</p>
                 <p lang="ko_KR">다음과 같이 인수의 개수와 타입에 따라서 다르게 작동됩니다.</p>
                 <p lang="en_US">It works differently depending on the number and type of parameters as follows.</p>
@@ -101,14 +101,14 @@
                         <li>
                             <p lang="ko_KR">N.popup의 instance : popup</p>
                             <p lang="en_US">Instance of N.popup : popup</p>
-                            <p lang="ko_KR" class="alert">로드된 팝업 컨텐츠의 Controller object는 .block_overlay_msg__ &gt; .msg_box__ &gt; .view_context__ 요소에 저장되어 있음.</p>
+                            <p lang="ko_KR" class="alert">로드된 팝업 콘텐츠의 Controller object는 .block_overlay_msg__ &gt; .msg_box__ &gt; .view_context__ 요소에 저장되어 있음.</p>
                             <p lang="en_US" class="alert">The Controller object of the loaded pop-up content is stored in the .block_overlay_msg__ &gt; .msg_box__ &gt; .view_context__ element.</p>
                         </li>
                         <li>
                             <p lang="ko_KR">N.tab의 instance : tab</p>
                             <p lang="en_US">Instance of N.tab : tab</p>
-                            <p lang="ko_KR" class="alert">로드된 탭 컨텐츠의 Controller object는 .tab__ &gt; .{tab 컨텐츠 요소 id} &gt; .view_context__ 요소에 저장되어 있음.</p>
-                            <p lang="en_US" class="alert">The Controller object of the loaded tab content is stored in the .tab__ &gt; .{tab 컨텐츠 요소 id} &gt; .view_context__ element.</p>
+                            <p lang="ko_KR" class="alert">로드된 탭 콘텐츠의 Controller object는 .tab__ &gt; .{tab 콘텐츠 요소 id} &gt; .view_context__ 요소에 저장되어 있음.</p>
+                            <p lang="en_US" class="alert">The Controller object of the loaded tab content is stored in the .tab__ &gt; .{tab 콘텐츠 요소 id} &gt; .view_context__ element.</p>
                         </li>
                         <li lang="ko_KR">N.select의 instance : select</li>
                         <li lang="en_US">Instance of N.select : select</li>
@@ -185,7 +185,7 @@
                 <p lang="ko_KR">select, select[multiple=multiple], input[type=radio], input[type=checkbox]와 같은 선택 요소의 선택된 값을 가져오거나 선택합니다.</p>
                 <p lang="en_US">Gets or selects the selected value of a selection element such as select, select[multiple=multiple], input[type=radio], input[type=checkbox].</p>
                 <ul>
-                    <li lang="ko_KR">vals 인수를 입력하지 않으면 선택한 값이 반환됩니다. vals 인수가 지정되면 입력 한 값과 일치하는 선택 요소가 선택됩니다.</li>
+                    <li lang="ko_KR">vals 인수를 입력하지 않으면 선택한 값이 반환됩니다. vals 인수가 지정되면 입력한 값과 일치하는 선택 요소가 선택됩니다.</li>
                     <li lang="en_US">If the vals argument is not entered, the selected values are returned. If the vals argument is specified, option elements that match the entered values are selected.</li>
                     <li lang="ko_KR">하나만 선택하면 string 유형의 값이 하나만 반환되고 둘 이상인 경우 값이 배열로 반환됩니다.</li>
                     <li lang="en_US">If only one is selected, only one value of type string is returned, and if it is more than two, values are returned in an array.</li>
