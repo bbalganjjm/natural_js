@@ -17,8 +17,8 @@
             <td style="text-align: center;">N/A</td>
             <td>json object array|jQuery object[json object array]</td>
             <td>
-                <p lang="ko_KR">컴포넌트에 바인딩되어 있는 가장 최근 상태의 데이터를 반환합니다.</p>
-                <p lang="en_US">Returns the data of the most recent state bound to the component.</p>
+                <p lang="ko_KR">컴포넌트에 바인딩된 최신 데이터를 반환합니다.</p>
+                <p lang="en_US">Returns the latest data bound to the component.</p>
             </td>
         </tr>
         <tr>
@@ -33,8 +33,8 @@
                 <p lang="ko_KR">selFlag 인수 값에 따라 다음과 같은 데이터를 반환합니다.</p>
                 <p lang="en_US">The following data is returned according to the value of the selFlag argument.</p>
                 <ul>
-                    <li lang="ko_KR">undefined(selFlag 옵션이 설정되지 않은 경우) : json object array 타입의 데이터를 반환합니다.</li>
-                    <li lang="en_US">undefined(When the selFlag option is not set) : Returns data of type json object array.</li>
+                    <li lang="ko_KR">undefined(selFlag 옵션이 지정되지 않은 경우) : json object array 타입의 데이터를 반환합니다.</li>
+                    <li lang="en_US">undefined(If the selFlag option is not specified) : Returns data of type json object array.</li>
                     <li>
                         <p lang="ko_KR">false : 컴포넌트에 바인딩되어 있는 jQuery object[json object array] 타입의 원래 유형의 데이터를 반환합니다.</p>
                         <p lang="en_US">false : Returns the data of the original type of the jQuery object[json object array] type bound to the component.</p>
@@ -73,8 +73,8 @@
     .bind([{ col01 : "", col02 : "", col03 : "", col04 : "", col05 : "", col06 : "" }]);
 gridInst.data("modified", "col01", "col02", "col03");
     // [{ col01 : "", col02 : "", col03 : "" }]</code></pre>
-                <p lang="ko_KR" class="alert">첫 번째 인수를 "modified", "selected", "checked", "insert", "update", "delete"로 설정했을 때만 작동됩니다.</p>
-                <p lang="en_US" class="alert">It works only when the first argument is set to "modified", "selected", "checked", "insert", "update" or "delete".</p>
+                <p lang="ko_KR" class="alert">첫 번째 인수를 "modified", "selected", "checked", "insert", "update", "delete"로 지정했을 때만 작동됩니다.</p>
+                <p lang="en_US" class="alert">This only works when the first argument is specified as "modified", "selected", "checked", "insert", "update", or "delete".</p>
             </td>
         </tr>
         <tr>
