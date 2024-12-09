@@ -63,12 +63,12 @@
             <td>
                 <p lang="ko_KR">data 메서드의 두 번째 인수부터 n 번째 인수까지 데이터의 프로퍼티명을 인수로 지정하면 지정한 프로퍼티 값만 추출한 객체를 반환합니다.</p>
                 <p lang="en_US">If you specify the property name of the data from the second argument to the nth argument of the data method as an argument, the object that extracts only the specified property value is returned.</p>
-                <pre><code>var listInst = N([]).tree(".context")
+                <pre><code>var treeInst = N([]).tree(".context")
     .bind([{ col01 : "", col02 : "", col03 : "", col04 : "", col05 : "", col06 : "" }]);
 treeInst.data("checked", "col01", "col02", "col03");
     // [{ col01 : "", col02 : "", col03 : "" }]</code></pre>
-                <p lang="ko_KR" class="alert">첫 번째 인수를 "checked" 나 "checkedInLastNode"로 지정했을 때만 작동됩니다.</p>
-                <p lang="en_US" class="alert">This only works if you specify "checked" or "checkedInLastNode" as the first argument.</p>
+                <p lang="ko_KR" class="alert">첫 번째 인수를 "selected" 나 "checked", "checkedInLastNode"로 지정했을 때만 작동됩니다.</p>
+                <p lang="en_US" class="alert">This only works if you specify "selected", "checked" or "checkedInLastNode" as the first argument.</p>
             </td>
         </tr>
         <tr>
