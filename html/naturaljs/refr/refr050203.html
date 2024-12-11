@@ -22,6 +22,16 @@
             </td>
         </tr>
         <tr>
+            <td></td>
+            <td>selector</td>
+            <td>string</td>
+            <td style="text-align: center;">N/A</td>
+            <td>
+                <p lang="ko_KR">jQuery selector 구문을 입력하면 context 요소에서 지정한 요소를 찾아서 반환합니다.</p>
+                <p lang="en_US">If you input jQuery selector syntax, the element specified in the context element is found and returned.</p>
+            </td>
+        </tr>
+        <tr>
             <td>multi</td>
             <td>boolean</td>
             <td>true</td>
@@ -112,7 +122,7 @@
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">"전체 닫기" 버튼을 클릭했을 경우 closeAllRedirectURL 옵션 값이 null 이면 활성화된 탭을 제외한 나머지 탭들을 닫아도 url 문자열을 입력하면 해당 url로 리다이렉트 됩니다.</p>
+                <p lang="ko_KR">"모두 닫기" 버튼 클릭 시 closeAllRedirectURL 옵션 값이 null인 경우 활성 탭을 제외한 모든 탭이 닫히고, url 문자열을 입력하면 해당 url로 리디렉션됩니다.</p>
                 <p lang="en_US">When the "Close All" button is clicked, if the value of the closeAllRedirectURL option is null, all other tabs except the active tab are closed and if you input the url string, it  will be redirect to the url.</p>
                 <p lang="ko_KR" class="alert">SPA(Single Page Application)로  개발할 때  홈(메인 인덱스)으로 이동하는 url을 입력하여 탭 전체가 닫힐 때만이라도 페이지 리다이렉션이 일어나서 브라우저의 가비지 리소스들이 정리되게 하는 것을 권장합니다.</p>
                 <p lang="en_US" class="alert">When developing with SPA(Single Page Application), it is recommended to enter the url to go to the home(Main index page) so that even when the entire tab is closed, page redirection occurs, so that the garbage resources of the browser are cleaned.</p>
@@ -255,8 +265,8 @@
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">페이지가 로딩될 때 실행되는 Ajax 요청들이 모두 완료되기 전에 에러가 발생되었을 때 실행되는 이벤트 핸들러를 정의합니다.</p>
-                <p lang="en_US">Define an event handler that is executed when an error occurs before all Ajax requests complete when the page loads.</p>
+                <p lang="ko_KR">페이지 로딩이 완료되고 Ajax 요청들이 모두 완료되기 전에 에러가 발생되었을 때 실행되는 이벤트 핸들러를 정의합니다.</p>
+                <p lang="en_US">Defines an event handler that is executed when an error occurs before page loading is complete and all Ajax requests are completed.</p>
                 <pre lang="ko_KR"><code>onErrorEntireLoad : function(e, request, xhr, textStatus, callback) {
     // e(arguments[0]) : ErrorThrown
     // request(arguments[1]) : Communicator.request
@@ -281,8 +291,8 @@
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">페이지가 로딩될 때 실행되는 Ajax 요청들이 모두 완료된 후에 실행되는 이벤트 핸들러를 정의합니다.</p>
-                <p lang="en_US">Define an event handler that is executed after all Ajax requests complete when the page loads.</p>
+                <p lang="ko_KR">페이지 로딩이 완료되고 Ajax 요청들이 모두 완료된 후에 실행되는 이벤트 핸들러를 정의합니다.</p>
+                <p lang="en_US">Defines an event handler that is executed after page loading is complete and all Ajax requests are completed.</p>
                 <pre lang="ko_KR"><code>onEntireLoad : function(docId, entireLoadRequestCnt, entireLoadRequestMaxCnt) {
     // docId : document id
     // entireLoadRequestCnt: 완료된 요청 수
@@ -467,8 +477,8 @@
             <td>null</td>
             <td style="text-align: center;">X</td>
             <td>
-                <p lang="ko_KR">선택한 탭의 상태가 제거된 전에 실행되는 이벤트 핸들러를 정의합니다.</p>
-                <p lang="en_US">Define an event handler that is executed before the selected tab is removed.</p>
+                <p lang="ko_KR">선택한 탭이 제거되기 전에 실행되는 이벤트 핸들러를 정의합니다.</p>
+                <p lang="en_US">Defines an event handler that runs before the selected tab is removed.</p>
                 <pre lang="ko_KR"><code>onBeforeRemove : function(docId) {
     // docId : document id
 
