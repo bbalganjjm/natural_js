@@ -6,5 +6,6 @@ Disallow: /js/
 Disallow: /sample/
 Disallow: /README.md
 Disallow: /google6060ee7ae15e1f61.html
+Allow: /
 
-Sitemap: https://bbalganjjm.github.io/natural_js/catalog/sitemap.xml
+Sitemap: https://bbalganjjm.github.io/natural_js/sitemap.xml
