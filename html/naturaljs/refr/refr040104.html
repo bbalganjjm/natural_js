@@ -136,7 +136,7 @@ width : function(msgContext, msgContents) {
                         <pre><code>...
 <span lang="ko_KR">// 대화상자의 높이를 화면에 꽉 채우기</span><span lang="en_US">// Fully fill the height of the dialog on the screen.</span>
 height: function(msgContext, msgContents) {
-    <span lang="ko_KR">    // 메시지 대화상자가 열릴 때 msgContents는 숨겨져 있기 때문에 show() 함수를 호출 한 다음 타이틀 영역의 높이를 가져와야 합니다.</span><span lang="en_US">    // You need to call the show () function and then get the height of the title area because the message Content is hidden when the message dialog opens.</span>
+    <span lang="ko_KR">// 메시지 대화상자가 열릴 때 msgContents는 숨겨져 있기 때문에 show() 함수를 호출 한 다음 타이틀 영역의 높이를 가져와야 합니다.</span><span lang="en_US">// You need to call the show () function and then get the height of the title area because the message Content is hidden when the message dialog opens.</span>
     return $(window).height() - msgContents.show().find(".msg_title_box__").height();
 },
 ...</code></pre>
