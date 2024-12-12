@@ -109,8 +109,8 @@
                     <li>
                         <p lang="ko_KR">function 타입으로 설정할 경우 msgContext(modal 옵션이 true 일 때 화면에 덮는 요소), msgContents(메시지 콘텐츠 요소)가 인수로 전달되고 return 된 값으로 요소의 넓이가 설정됩니다.</p>
                         <p lang="en_US">If set to function type, msgContext (the element that covers the screen when the modal option is true) and msgContents (the message content element) are passed as arguments, and the width of the element is set as the returned value.</p>
-                        <pre><code>...<span lang="ko_KR">// 대화상자의 넓이를 화면에 꽉 채우기</span>
-<span lang="en_US">// Fully fill the width of the dialog on the screen.</span>
+                        <pre><code>...
+<span lang="ko_KR">// 대화상자의 넓이를 화면에 꽉 채우기</span><span lang="en_US">// Fully fill the width of the dialog on the screen.</span>
 width : function(msgContext, msgContents) {
     return $(window).width();
 },
@@ -133,10 +133,10 @@ width : function(msgContext, msgContents) {
                     <li>
                         <p lang="ko_KR">function 타입으로 설정할 경우 msgContext(modal 옵션이 true 일 때 화면에 덮는 요소), msgContents(메시지 콘텐츠 요소)가 인수로 전달되고 return 된 값으로 요소의 높이가 설정됩니다.</p>
                         <p lang="en_US">If set to function type, msgContext(the element that covers the screen when the modal option is true) and msgContents(the message content element) are passed as arguments, and the height of the element is set as the returned value.</p>
-                        <pre><code>...<span lang="ko_KR">// 대화상자의 높이를 화면에 꽉 채우기</span>
-<span lang="en_US">// Fully fill the height of the dialog on the screen.</span>
-height: function(msgContext, msgContents) {<span lang="ko_KR">    // 메시지 대화상자가 열릴 때 msgContents는 숨겨져 있기 때문에 show() 함수를 호출 한 다음 타이틀 영역의 높이를 가져와야 합니다.</span>
-    <span lang="en_US">// You need to call the show () function and then get the height of the title area because the message Content is hidden when the message dialog opens.</span>
+                        <pre><code>...
+<span lang="ko_KR">// 대화상자의 높이를 화면에 꽉 채우기</span><span lang="en_US">// Fully fill the height of the dialog on the screen.</span>
+height: function(msgContext, msgContents) {
+    <span lang="ko_KR">    // 메시지 대화상자가 열릴 때 msgContents는 숨겨져 있기 때문에 show() 함수를 호출 한 다음 타이틀 영역의 높이를 가져와야 합니다.</span><span lang="en_US">    // You need to call the show () function and then get the height of the title area because the message Content is hidden when the message dialog opens.</span>
     return $(window).height() - msgContents.show().find(".msg_title_box__").height();
 },
 ...</code></pre>
