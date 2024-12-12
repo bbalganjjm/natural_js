@@ -532,8 +532,8 @@
             <td>
                 <p lang="ko_KR">true로 설정하면 엑셀에서 복사한 셀 데이터를 그리드에 붙여넣기(Ctrl + V)할 수 있습니다.</p>
                 <p lang="en_US">If set to true, you can paste(Ctrl + V) the cell data copied from Excel into the grid.</p>
-                <p lang="ko_KR" class="alert">Excel에서 복사 한 데이터 외에도 행을 엔터키(\n)로 구분하고 열을 탭키(\t)로 구분하여 텍스트를 붙여 넣을 수 있습니다</p>
-                <p lang="en_US" class="alert">In addition to the data copied from Excel, you can paste text with rows separated by enter key(\n) and columns separated by tab key(\t).</p>
+                <p lang="ko_KR" class="alert">Excel에서 복사한 데이터 외에도 행을 엔터키(\n)로 구분하고 열을 탭키(\t)로 구분하는 텍스트도 붙여 넣을 수 있습니다.</p>
+                <p lang="en_US" class="alert">In addition to data copied from Excel, you can also paste text that separates rows with the Enter key (\n) and columns with the Tab key (\t).</p>
                 <p lang="ko_KR" class="alert">텍스트 입력 커서가 표시되는 셀을 기준으로 id 속성을 갖고 있는 요소들에 순서대로 붙여 넣기 합니다. 입력 요소가 아닌 경우에도 id 속성이 있으면 셀 값이 업데이트됩니다.</p>
                 <p lang="en_US" class="alert">Based on the cell where the text input cursor is displayed, values are pasted in order to the elements that have the id attribute. Even if it is not an input element, the cell value is updated if the id attribute is present.</p>
                 <p lang="ko_KR" class="alert">readonly 또는 disabled 속성을 갖고 있는 요소는 값을 입력하지 않습니다.</p>
@@ -560,8 +560,8 @@
     // rowEle : Created row element(li)
     // rowData : Data of the row to be created
 }</code></pre>
-                <p lang="ko_KR" class="alert">rowHandler 이벤트 핸들러는 행 요소가 생성될 때마다 실행됩니다.</p>
-                <p lang="en_US" class="alert">The rowHandler event handler is executed whenever a row element is created.</p>
+                <p lang="ko_KR" class="alert">rowHandlerBeforeBind 이벤트 핸들러는 행 요소가 생성될 때마다 실행됩니다.</p>
+                <p lang="en_US" class="alert">The rowHandlerBeforeBind event handler is executed whenever a row element is created.</p>
             </td>
         </tr>
         <tr>
