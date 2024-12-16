@@ -899,7 +899,7 @@
                         gtag('event', 'page_view', {
                             'page_title' : this.doc(docId).docNm,
                             'page_location' : location.href,
-                            'page_path': location.hash,
+                            'page_path': location.search,
                             'send_to' : 'G-GL64Q27TWZ'
                         });
                     } catch (e) { console.warn(e) }

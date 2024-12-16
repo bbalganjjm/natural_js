@@ -159,7 +159,7 @@
                 gtag('config', 'G-GL64Q27TWZ', {
                     'page_title' : 'Home',
                     'page_location' : location.href,
-                    'page_path': location.hash,
+                    'page_path': location.search,
                     'send_page_view': true
                 });
             }
