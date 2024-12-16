@@ -25,7 +25,6 @@ new Date().formatDate("Y-m-d");
 
 const selector = N("asdf").selector;
 
-N("").datasort("asd", false);
 N.validator.frn_rrn("");
 
 N.ajax({
@@ -87,50 +86,60 @@ N.ds.instance(class {}, true)
     .notify(1, "");
 
 new N.formatter(N([{}]), {
-    "numeric" : [[ND.FormatRules.TRIMTOEMPTY], [ND.FormatRules.NUMERIC, "#,###.##0000"]],
-    "generic" : [[ND.FormatRules.TRIMTOEMPTY], [ND.FormatRules.GENERIC, "@@ABS"]],
-    "limit" : [[ND.FormatRules.TRIMTOEMPTY], [ND.FormatRules.LIMIT, "13", "..."]],
-    "etc" : [[ND.FormatRules.DATE, 12]]
+    "numeric": [[ND.FormatRules.TRIMTOEMPTY], [ND.FormatRules.NUMERIC, "#,###.##0000"]],
+    "generic": [[ND.FormatRules.TRIMTOEMPTY], [ND.FormatRules.GENERIC, "@@ABS"]],
+    "limit": [[ND.FormatRules.TRIMTOEMPTY], [ND.FormatRules.LIMIT, "13", "..."]],
+    "etc": [[ND.FormatRules.DATE, 12]]
 }).format(1);
 N([{}]).formatter({
-    "numeric" : [[ND.FormatRules.TRIMTOEMPTY], [ND.FormatRules.NUMERIC, "#,###.##0000"]],
-    "generic" : [[ND.FormatRules.TRIMTOEMPTY], [ND.FormatRules.GENERIC, "@@ABS"]],
-    "limit" : [[ND.FormatRules.TRIMTOEMPTY], [ND.FormatRules.LIMIT, "13", "..."]],
-    "etc" : [[ND.FormatRules.DATE, 12]]
+    "numeric": [[ND.FormatRules.TRIMTOEMPTY], [ND.FormatRules.NUMERIC, "#,###.##0000"]],
+    "generic": [[ND.FormatRules.TRIMTOEMPTY], [ND.FormatRules.GENERIC, "@@ABS"]],
+    "limit": [[ND.FormatRules.TRIMTOEMPTY], [ND.FormatRules.LIMIT, "13", "..."]],
+    "etc": [[ND.FormatRules.DATE, 12]]
 }).format(1);
-N.formatter.rpad("asf", []);
+N.formatter[ND.FormatRules.RRN]("1234567890123", [7, "*"]);
+N.formatter[ND.FormatRules.TRIMTOVAL]("", ["1"]);
 new N.validator(N([{}]), {
-    "numeric" : [[ND.ValidationRules.REQUIRED], [ND.ValidationRules.COMMAS_INTEGER]],
-    "generic" : [[ND.ValidationRules.REQUIRED], [ND.ValidationRules.KOREAN]],
-    "limit" : [[ND.ValidationRules.REQUIRED], [ND.ValidationRules.ALPHABET]]
+    "numeric": [[ND.ValidationRules.REQUIRED], [ND.ValidationRules.COMMAS_INTEGER]],
+    "generic": [[ND.ValidationRules.REQUIRED], [ND.ValidationRules.KOREAN]],
+    "limit": [[ND.ValidationRules.REQUIRED], [ND.ValidationRules.ALPHABET]]
 }).validate(1);
 N([{}]).validator({
-    "numeric" : [[ND.ValidationRules.REQUIRED], [ND.ValidationRules.COMMAS_INTEGER]],
-    "generic" : [[ND.ValidationRules.REQUIRED], [ND.ValidationRules.KOREAN]],
-    "limit" : [[ND.ValidationRules.REQUIRED], [ND.ValidationRules.ALPHABET]]
+    "numeric": [[ND.ValidationRules.REQUIRED], [ND.ValidationRules.COMMAS_INTEGER]],
+    "generic": [[ND.ValidationRules.REQUIRED], [ND.ValidationRules.KOREAN]],
+    "limit": [[ND.ValidationRules.REQUIRED], [ND.ValidationRules.ALPHABET]]
 }).validate(1);
-N.validator.rrn("asf");
+N.validator[ND.ValidationRules.RRN]("123456-7890123");
+N.validator[ND.ValidationRules.MINLENGTH]("123456-7890123", [6]);
 N([]).datasort("key", false);
+N.data.sort([{}], "key", true);
 
 N(".area").alert("Hello").show();
 const alertInst = new N.alert(N(".area"), {
-    msg: "Hello"
+    msg: "Hello",
+    onHide: function (msgContext, msgContents) {
+        console.log(msgContext, msgContents);
+    }
 }).show();
 alertInst.options.msg = "Hello";
 alertInst.context("span").each(function (index, element) {});
 
 N(".button").button({
-    color: "primary_container"
+    color: NU.ButtonColor.PRIMARY_CONTAINER,
+    size: NU.ButtonSize.BIG,
+    type: NU.ButtonType.ELEVATED
 }).disable();
 new N.button(N(".button"), {
-    color: "primary_container"
+    color: NU.ButtonColor.PRIMARY_CONTAINER,
+    size: NU.ButtonSize.BIG,
+    type: NU.ButtonType.ELEVATED
 }).disable();
 
 N(".input").datepicker({
-    maxYear: 2050
+    maxYear: 300
 }).show();
 new N.datepicker(N(".input"), {
-    minDate: "20190101",
+    minDate: "20190101"
 }).show();
 
 let popup = new N.popup(N(".popup"), {
@@ -177,6 +186,8 @@ select.data(true).forEach(function (item) {});
 select.context("option").get().forEach(function (item) {});
 const idx = select.index();
 const sltInst = select.index(1);
+const val = select.val();
+const sltInst02 = select.val("val");
 
 let form = N([{a:1}]).form({
     context: N(".form", cont.view),
@@ -189,12 +200,14 @@ form = N([{a:1}]).form(N(".form", cont.view));
 form.data().forEach(function (item) {});
 form.data(true).forEach(function (item) {});
 form.context("option").get().forEach(function (item) {});
+form.val("col01");
+form.val("col01", "value");
 
 new N.list([{age: 18}, {age: 22}], N(".list", cont.view)).bind();
 N([{age: 18}, {age: 22}]).list({
-    context : N(".list", cont.view),
-    height : 200,
-    rowHandler : function(index, row, data) {
+    context: N(".list", cont.view),
+    height: 200,
+    rowHandler: function(index, row, data) {
         if(data.age as number >= 28) {
             row.find("#age").css("background-color", "red");
         }
@@ -203,9 +216,9 @@ N([{age: 18}, {age: 22}]).list({
 
 new N.grid([{age: 18}, {age: 22}], N(".grid", cont.view)).bind();
 N([{age: 18}, {age: 22}]).grid({
-    context : N(".grid", cont.view),
-    height : 200,
-    rowHandler : function(index, row, data) {
+    context: N(".grid", cont.view),
+    height: 200,
+    rowHandler: function(index, row, data) {
         if(data.age as number >= 28) {
             row.find("#age").css("background-color", "red");
         }
@@ -236,8 +249,8 @@ N([{age: 18}, {age: 22}]).tree({
 }).bind();
 
 N({
-    top: 50,
-    right: 50
+    bottom: 50,
+    left: 50
 }).notify({
     alwaysOnTop: true
 }).add("asd");
@@ -253,19 +266,19 @@ N.notify({
 }).add("asd");
 N.notify.add("asd", "");
 
-const docs1 = new N.docs(N(".context"), {
+const docs1 = N(".context").docs({
     onEntireLoad: function(docId, entireLoadRequestCnt, entireLoadRequestMaxCnt) {
 
     }
 });
-docs1.add("ex-0001", "Example page", { url : "ex.html" });
+docs1.add("ex-0001", "Example page", { url: "ex.html" });
 
 const docs2 = new N.docs(N(".context"), {
     onEntireLoad: function(docId, entireLoadRequestCnt, entireLoadRequestMaxCnt) {
 
     }
 });
-docs2.request.attr("a", 1).request.attr("b", 2).add("page", "Example page", { url : "page.html" });
+docs2.request.attr("a", 1).request.attr("b", 2).add("page", "Example page", { url: "page.html" });
 
 const inspectionResult = N.code.inspection.test("code");
 if(Array.isArray(inspectionResult)) {
