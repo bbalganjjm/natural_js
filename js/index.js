@@ -87,10 +87,12 @@
                         tabSelector(state);
                     }
                 } else {
-                    self.docs.isPopstate = true;
-                    self.docs.add("home0100", "Home", {
-                        "url" : "html/naturaljs/home/home0100.html"
-                    });
+                    if(N.string.isEmpty(location.hash)) {
+                        self.docs.isPopstate = true;
+                        self.docs.add("home0100", "Home", {
+                            "url" : "html/naturaljs/home/home0100.html"
+                        });
+                    }
                 }
             });
         },
