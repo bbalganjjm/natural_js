@@ -1,0 +1,21 @@
+{
+  "name": "natural_js_pages",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc -w",
+    "dev": "NODE_ENV=dev nodemon --watch src/ --delay 500ms --exec ts-node src/start.ts",
+    "start:dev": "NODE_ENV=dev ts-node-dev --respawn --transpile-only src/start.ts",
+    "start": "NODE_ENV=production node build/start.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bbalganjjm/natural_js.git"
+  },
+  "private": true,
+  "dependencies": {
+    "@types/jquery": "^3.5.32"
+  }
+}

@@ -101,7 +101,7 @@ declare namespace NA {
     namespace Callbacks {
         namespace Communicator {
             type Submit = {
-                (this: NA.Communicator, data?: object | object[] | NA.Controller, request?: NA.Request): void;
+                (this: NA.Communicator, data?: NC.JSONObject | NC.JSONObject[] | string | object | object[] | NA.Controller, request?: NA.Request): void;
             }
             type Error = {
                 (this: NA.Communicator, xhr: JQuery.jqXHR, textStatus: JQuery.Ajax.TextStatus, e: Error, request: NA.Request, submitCallback: Submit): void;
@@ -184,6 +184,7 @@ declare namespace NA {
         }
 
         namespace Controller {
+            import JSONObject = NC.JSONObject;
             /**
              * InitFunction is a user-defined function that is called after the view has finished loading and the Controller object has been initialized.
              * ```
@@ -200,7 +201,7 @@ declare namespace NA {
                 (this: Object, view: NJS<HTMLElement[]>, request: NA.Request): void
             }
 
-            interface Object {
+            interface BaseObject {
                 [key: string]: any;
                 /**
                  * The initializer function that is called to set up the initial state or configuration.
@@ -233,6 +234,9 @@ declare namespace NA {
                  */
                 opener?: Object;
             }
+
+            type Object = BaseObject & NT.Objects.Controller.InitialObject;
+
         }
 
         namespace Config {
