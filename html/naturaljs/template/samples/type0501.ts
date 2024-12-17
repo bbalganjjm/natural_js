@@ -43,7 +43,7 @@
             select : true,
             selectScroll : false,
             onSelect : function(index, rowEle, data, beforeRow, e) {
-                // TODO 전처리
+                // 전처리
 
                 (window as any).APP.comm.utils.selectNBind.call(this, {
                     args: arguments,
@@ -51,7 +51,7 @@
                     form : "p.form.detail"
                 });
 
-                // TODO 후처리
+                // 후처리
             },
             onBind : function(context, data, isFirstPage, isLastPage) {
                 if(isFirstPage) {

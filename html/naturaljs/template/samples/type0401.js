@@ -31,13 +31,13 @@
             select: true,
             selectScroll: false,
             onSelect: function (index, rowEle, data, beforeRow, e) {
-                // TODO 전처리
+                // 전처리
                 window.APP.comm.utils.selectNBind.call(this, {
                     args: arguments,
                     cont: cont,
                     form: "p.form.detail"
                 });
-                // TODO 후처리
+                // 후처리
             },
             onBind: function (context, data, isFirstPage, isLastPage) {
                 if (isFirstPage) {
@@ -128,7 +128,7 @@
             cont["p.form.detail"].revert();
         },
         init: function (view, request) {
-            // cont.opener는 탭이 포함된 부모페이지의 Controller object.
+            // cont.opener 는 탭이 포함된 부모페이지의 Controller object.
             if (cont.opener) {
                 cont["p.form.search"].context().hide().prev("h3").hide().prev(".view-intro").hide();
                 view.find("#btnSearch").hide();
