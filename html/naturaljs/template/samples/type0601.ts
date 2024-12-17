@@ -29,7 +29,7 @@
         "c.getSampleDeptList": (): NA.Communicator => N.comm("sample/getSampleDeptList.json"),
         "c.getSampleList": (params: object): NA.Communicator => N(params).comm("sample/getSampleList.json"),
         "c.saveSample": (): NA.Communicator => N(cont["p.grid.detail"].data("modified")).comm({
-            dataIsArray: true, // Array 타입의 여러 행데이터가 1 개 일 때는 자동으로 Object로 변환됩니다. 자동으로 변환되지 않게 하려면 dataIsArray 옵션을 true로 지정해 주세요.
+            dataIsArray: true, // Array 타입의 여러 행데이터가 1 개 일 때는 자동으로 Object 로 변환됩니다. 자동으로 변환되지 않게 하려면 dataIsArray 옵션을 true 로 지정해 주세요.
             url: "sample/saveSample.json"
         }),
         "e.expandCollapse.click": function(e) {
@@ -49,7 +49,7 @@
         "e.btnSave.click": function(e) {
             e.preventDefault();
 
-            return APP.comm.utils.save.call(this, {
+            return (window as any).APP.comm.utils.save.call(this, {
                 cont: cont,
                 comm: "c.saveSample",
                 changed: "p.grid.detail",
@@ -66,7 +66,7 @@
         "e.btnDelete.click": function(e) {
             e.preventDefault();
 
-            return APP.comm.utils.del.call(this, {
+            return (window as any).APP.comm.utils.del.call(this, {
                 cont: cont,
                 inst: "p.grid.detail"
             });
