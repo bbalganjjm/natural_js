@@ -50,12 +50,12 @@ declare class NA {
      * > For Natural-ARCHITECTURE-based pages to function properly, they must be loaded with the N.comm library, N.popup, or N.tab components.
      *
      * > When selecting an element on a page, you must `find` on a view or specify view as the `context` argument (second argument) to a jQuery function.
-     * > Otherwise, unintended elements from other block pages may be selected, resulting in unpredictable errors.
-     * > For more information, please refer to the [Restrictions and Tips](https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0601.html) menu.
+     * Otherwise, unintended elements from other block pages may be selected, resulting in unpredictable errors.
+     * For more information, please refer to the [Restrictions and Tips](https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0601.html) menu.
      *
      * > When `N(".view").cont()` is executed, a `pageid data attribute value` such as `data-pageid="view"` is created in the `.view` element specified by the selector.
-     * > The `pageid` is `.(dot), #(sharp), [(left bracket), ](right bracket), '(single quote), :(colon), ((left bracket), ), )(right bracket), >(right arrow bracket), " "(space), -(hyphen)` characters are removed to create pageid, so the page identification value is defined not to include the special characters.
-     * > For example, `N("page.view-01").cont()` creates a pageid of `pageview01` with the dot and hyphen removed.
+     * The `pageid` is `.(dot), #(sharp), [(left bracket), ](right bracket), '(single quote), :(colon), ((left bracket), ), )(right bracket), >(right arrow bracket), " "(space), -(hyphen)` characters are removed to create pageid, so the page identification value is defined not to include the special characters.
+     * For example, `N("page.view-01").cont()` creates a pageid of `pageview01` with the dot and hyphen removed.
      *
      * To control a specific page, such as a block page or tab content, you can get a Controller object as follows.
      * ```
@@ -115,9 +115,43 @@ declare namespace NA {
          *     N.log(cont); // cont: Controller object
          * });
          * ```
-         * @return {JQuery.jqXHR | NA.Communicator} The jqXHR object or the communicator instance depending on the submission context.
+         * @return {NA.Communicator} The jqXHR object or the Communicator instance depending on the submission context.
+         *
+         * @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0203.html&tab=html/naturaljs/refr/refr020305.html }
          */
-        submit(callback: NA.Callbacks.Communicator.Submit): JQuery.jqXHR | NA.Communicator;
+        submit(callback: NA.Callbacks.Communicator.Submit): NA.Communicator;
+        /**
+         * Registers a callback function to be executed when a successful response is received from the server.
+         *
+         * If the `callback` argument is not provided to the `submit` function, a Promise-compatible `xhr` object is returned, allowing the use of async/await syntax.
+         *
+         * ```
+         * // JSON Data
+         * const fn1 = async () => {
+         *     const data = await N.comm("data.json").submit();
+         * };
+         *
+         * // Catch exception
+         * const fn2 = async () => {
+         *     const data = await N.comm("data.json").submit().then((data) => {
+         *         console.log(data);
+         *     }).catch((e) => {
+         *         console.error(e);
+         *     });
+         * };
+         *
+         * // HTML page
+         * const fn3 = async () => {
+         *     const data = await N("#page-container").comm("page.html").submit();
+         *     console.log(data); // HTML Text
+         * };
+         * ```
+         *
+         * @return {JQuery.jqXHR} The jqXHR object or the Communicator instance depending on the submission context.
+         *
+         * @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0203.html&tab=html/naturaljs/refr/refr020305.html }
+         */
+        submit(): JQuery.jqXHR;
         /**
          * Registers a callback function that will be executed when an error response is received from the server after calling the submit function or when an error occurs in the callback function of the submit method.
          * > You can call the error method multiple times to register multiple callback functions.
@@ -142,7 +176,9 @@ declare namespace NA {
          * });
          * ```
          *
-         * @return {NA.Communicator} Returns the communicator instance for chaining.
+         * @return {NA.Communicator} Returns the `Communicator` instance for chaining.
+         *
+         * @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0203.html&tab=html/naturaljs/refr/refr020305.html }
          */
         error(callback: NA.Callbacks.Communicator.Error): NA.Communicator;
         /**
@@ -178,6 +214,8 @@ declare namespace NA {
          * @param {String} name - Parameter name
          *
          * @return {NA.Communicator} Returns the passed parameter value.
+         *
+         * @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0204.html&tab=html/naturaljs/refr/refr020403.html }
          */
         attr(name: string): any;
         /**
@@ -199,6 +237,8 @@ declare namespace NA {
          * @param {any} obj - Parameter data
          *
          * @return {NA.Communicator} Returns the Communicator object.
+         *
+         * @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0204.html&tab=html/naturaljs/refr/refr020403.html }
          */
         attr(name: string, obj: any): NA.Communicator;
         removeAttr(name: string): NA.Communicator;
@@ -206,6 +246,8 @@ declare namespace NA {
          * Extracts the GET parameter values from the browser's URL.
          *
          * @return {object} Returns all GET parameters as an object.
+         *
+         * @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0204.html&tab=html/naturaljs/refr/refr020403.html }
          */
         param(): object;
         /**
@@ -219,6 +261,8 @@ declare namespace NA {
          * Retrieves the current request options.
          *
          * @return {NA.Options.Request} The options used for the request.
+         *
+         * @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0204.html&tab=html/naturaljs/refr/refr020403.html }
          */
         get(): NA.Options.Request;
         /**
@@ -226,9 +270,36 @@ declare namespace NA {
          *
          * @param {string} key - Property name of request options
          * @return {any} Value corresponding to the key value specified in request options
+         *
+         * @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0204.html&tab=html/naturaljs/refr/refr020403.html }
          */
         get(key: string): any;
-
+        /**
+         * Reloads the block page loaded by the Communicator.
+         * > If the attr method has not been called to set values before calling reload, the values in the request object before the reload are maintained even after reloading.
+         *
+         * > You can specify the Communicator.request data for the page being reloaded using the attr method.
+         *
+         * ```
+         * request.attr("param", { param: 1 });
+         * request.reload();
+         * ```
+         *
+         * > The reload function does not support method chaining.
+         *   ```
+         *   request.attr("param", { param: 1 }).reload(); // This usage is invalid.
+         *   ```
+         *
+         * @param {NA.Callbacks.Request.Reload} [callback] - An optional callback function that will be called upon the completion of the reload process.
+         * ```
+         * request.reload(function(html, request) {
+         *     N.log(html, request);
+         * });
+         * ```
+         * @return {NA.Communicator} Returns the Communicator instance to allow for method chaining.
+         *
+         * @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0204.html&tab=html/naturaljs/refr/refr020403.html }
+         */
         reload(callback?: NA.Callbacks.Request.Reload): NA.Communicator;
     }
 
@@ -237,6 +308,8 @@ declare namespace NA {
         trInit(cont: NA.Objects.Controller.Object, request: NA.Request): void;
         /**
          * Aspect-oriented programming(AOP) processing class.
+         *
+         * @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0202.html }
          */
         aop: {
             pointcuts: {
@@ -255,6 +328,8 @@ declare namespace NA {
          *
          * @param {string} name - data name.
          * @return {any} Stored data.
+         *
+         * @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0206.html&tab=html/naturaljs/refr/refr020602.html }
          */
         attr(name: string): any;
         /**
@@ -263,6 +338,8 @@ declare namespace NA {
          * @param {string} name - data name.
          * @param {any} obj - Data to store.
          * @return {this} The current object, for chainability.
+         *
+         * @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0206.html&tab=html/naturaljs/refr/refr020602.html }
          */
         attr(name: string, obj: any): NA.Context;
     }
