@@ -5,6 +5,7 @@
     "strict": true,
     "types": ["js/natural_js/@types"]
   },
+  "exclude": ["js/natural_js/@types"],
   "watchOptions": {
     "watchFile": "useFsEvents",
     "watchDirectory": "useFsEvents",
