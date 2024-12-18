@@ -25,18 +25,18 @@ const selector = N("asdf").selector;
 N.validator.frn_rrn("");
 N.ajax({
     url: "http://localhost:8080",
-    type: NA.Objects.Request.HttpMethod.POST,
-    dataType: NA.Objects.Request.DataType.JSON,
-    enctype: NA.Objects.Request.Enctype.URLENCODED
+    type: "POST" /* NA.Objects.Request.HttpMethod.POST */,
+    dataType: "json" /* NA.Objects.Request.DataType.JSON */,
+    enctype: "application/x-www-form-urlencoded" /* NA.Objects.Request.Enctype.URLENCODED */
 });
 N.comm(N([]), {
     url: "https://localhost:8080"
 }).submit(function () { });
 N([]).comm({
     url: "http://localhost:8080",
-    type: NA.Objects.Request.HttpMethod.POST,
-    dataType: NA.Objects.Request.DataType.JSON,
-    enctype: NA.Objects.Request.Enctype.URLENCODED
+    type: "POST" /* NA.Objects.Request.HttpMethod.POST */,
+    dataType: "json" /* NA.Objects.Request.DataType.JSON */,
+    enctype: "application/x-www-form-urlencoded" /* NA.Objects.Request.Enctype.URLENCODED */
 }).submit(function (data, request) { });
 N.comm(N([]), "https://localhost:8080").request.attr("asd", "").error(function (xhr, textStatus, e, request, submitCallback) {
 }).submit(function (data, request) {
@@ -74,31 +74,31 @@ N.ds.instance(class {
     .remove()
     .notify(1, "");
 new N.formatter(N([{}]), {
-    "numeric": [[ND.FormatRules.TRIMTOEMPTY], [ND.FormatRules.NUMERIC, "#,###.##0000"]],
-    "generic": [[ND.FormatRules.TRIMTOEMPTY], [ND.FormatRules.GENERIC, "@@ABS"]],
-    "limit": [[ND.FormatRules.TRIMTOEMPTY], [ND.FormatRules.LIMIT, "13", "..."]],
-    "etc": [[ND.FormatRules.DATE, 12]]
+    "numeric": [["trimtoempty" /* ND.FormatRules.TRIMTOEMPTY */], ["numeric" /* ND.FormatRules.NUMERIC */, "#,###.##0000"]],
+    "generic": [["trimtoempty" /* ND.FormatRules.TRIMTOEMPTY */], ["generic" /* ND.FormatRules.GENERIC */, "@@ABS"]],
+    "limit": [["trimtoempty" /* ND.FormatRules.TRIMTOEMPTY */], ["limit" /* ND.FormatRules.LIMIT */, "13", "..."]],
+    "etc": [["date" /* ND.FormatRules.DATE */, 12]]
 }).format(1);
 N([{}]).formatter({
-    "numeric": [[ND.FormatRules.TRIMTOEMPTY], [ND.FormatRules.NUMERIC, "#,###.##0000"]],
-    "generic": [[ND.FormatRules.TRIMTOEMPTY], [ND.FormatRules.GENERIC, "@@ABS"]],
-    "limit": [[ND.FormatRules.TRIMTOEMPTY], [ND.FormatRules.LIMIT, "13", "..."]],
-    "etc": [[ND.FormatRules.DATE, 12]]
+    "numeric": [["trimtoempty" /* ND.FormatRules.TRIMTOEMPTY */], ["numeric" /* ND.FormatRules.NUMERIC */, "#,###.##0000"]],
+    "generic": [["trimtoempty" /* ND.FormatRules.TRIMTOEMPTY */], ["generic" /* ND.FormatRules.GENERIC */, "@@ABS"]],
+    "limit": [["trimtoempty" /* ND.FormatRules.TRIMTOEMPTY */], ["limit" /* ND.FormatRules.LIMIT */, "13", "..."]],
+    "etc": [["date" /* ND.FormatRules.DATE */, 12]]
 }).format(1);
-N.formatter[ND.FormatRules.RRN]("1234567890123", [7, "*"]);
-N.formatter[ND.FormatRules.TRIMTOVAL]("", ["1"]);
+N.formatter["rrn" /* ND.FormatRules.RRN */]("1234567890123", [7, "*"]);
+N.formatter["trimtoval" /* ND.FormatRules.TRIMTOVAL */]("", ["1"]);
 new N.validator(N([{}]), {
-    "numeric": [[ND.ValidationRules.REQUIRED], [ND.ValidationRules.COMMAS_INTEGER]],
-    "generic": [[ND.ValidationRules.REQUIRED], [ND.ValidationRules.KOREAN]],
-    "limit": [[ND.ValidationRules.REQUIRED], [ND.ValidationRules.ALPHABET]]
+    "numeric": [["required" /* ND.ValidationRules.REQUIRED */], ["commas_integer" /* ND.ValidationRules.COMMAS_INTEGER */]],
+    "generic": [["required" /* ND.ValidationRules.REQUIRED */], ["korean" /* ND.ValidationRules.KOREAN */]],
+    "limit": [["required" /* ND.ValidationRules.REQUIRED */], ["alphabet" /* ND.ValidationRules.ALPHABET */]]
 }).validate(1);
 N([{}]).validator({
-    "numeric": [[ND.ValidationRules.REQUIRED], [ND.ValidationRules.COMMAS_INTEGER]],
-    "generic": [[ND.ValidationRules.REQUIRED], [ND.ValidationRules.KOREAN]],
-    "limit": [[ND.ValidationRules.REQUIRED], [ND.ValidationRules.ALPHABET]]
+    "numeric": [["required" /* ND.ValidationRules.REQUIRED */], ["commas_integer" /* ND.ValidationRules.COMMAS_INTEGER */]],
+    "generic": [["required" /* ND.ValidationRules.REQUIRED */], ["korean" /* ND.ValidationRules.KOREAN */]],
+    "limit": [["required" /* ND.ValidationRules.REQUIRED */], ["alphabet" /* ND.ValidationRules.ALPHABET */]]
 }).validate(1);
-N.validator[ND.ValidationRules.RRN]("123456-7890123");
-N.validator[ND.ValidationRules.MINLENGTH]("123456-7890123", [6]);
+N.validator["rrn" /* ND.ValidationRules.RRN */]("123456-7890123");
+N.validator["minlength" /* ND.ValidationRules.MINLENGTH */]("123456-7890123", [6]);
 N([]).datasort("key", false);
 N.data.sort([{}], "key", true);
 N(".area").alert("Hello").show();
@@ -111,13 +111,13 @@ const alertInst = new N.alert(N(".area"), {
 alertInst.options.msg = "Hello";
 alertInst.context("span").each(function (index, element) { });
 N(".button").button({
-    color: NU.ButtonColor.PRIMARY_CONTAINER,
-    size: NU.ButtonSize.BIG,
+    color: "primary_container" /* NU.ButtonColor.PRIMARY_CONTAINER */,
+    size: "big" /* NU.ButtonSize.BIG */,
     type: NU.ButtonType.ELEVATED
 }).disable();
 new N.button(N(".button"), {
-    color: NU.ButtonColor.PRIMARY_CONTAINER,
-    size: NU.ButtonSize.BIG,
+    color: "primary_container" /* NU.ButtonColor.PRIMARY_CONTAINER */,
+    size: "big" /* NU.ButtonSize.BIG */,
     type: NU.ButtonType.ELEVATED
 }).disable();
 N(".input").datepicker({

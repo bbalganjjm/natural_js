@@ -23,7 +23,7 @@
             if (cont["p.form.search"].validate()) {
                 cont["c.getSampleDeptList"]().submit(function(data) {
                     // N.grid bind
-                    cont["p.grid.master"].bind(data as JSONObject[]);
+                    cont["p.grid.master"].bind(data as NC.JSONObject[]);
                 });
             }
         },

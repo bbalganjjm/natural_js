@@ -25,7 +25,7 @@
                 // onSelect 함수는 .data("selected") 함수 전에 실행되므로 부자연 스럽지만 setTimeout(0)을 넣어줌.
                 setTimeout(function() {
                     cont["c.getSampleList"]().submit(function(data) {
-                        cont["p.grid.master"].bind(data as JSONObject[]);
+                        cont["p.grid.master"].bind(data as NC.JSONObject[]);
                     });
                 }, 0);
             },
@@ -97,7 +97,7 @@
 
             if (cont["p.form.search"].validate()) {
                 cont["c.getSampleCodeCompanyList"]().submit(function(data) {
-                    cont["p.list.codeMaster"].bind(data as JSONObject[]);
+                    cont["p.list.codeMaster"].bind(data as NC.JSONObject[]);
                 });
             }
         },
@@ -115,7 +115,7 @@
                 before : function() {
                     // TODO
                 },
-                after : function(data: JSONObject[]) {
+                after : function(data: NC.JSONObject[]) {
                     cont["p.list.codeMaster"].select(cont["p.list.codeMaster"].select());
                 }
             });

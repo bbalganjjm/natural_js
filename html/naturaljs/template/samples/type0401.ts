@@ -77,7 +77,7 @@
             if (cont["p.form.search"].validate()) {
                 cont["c.getSampleList"]().submit(function(data) {
                     // N.grid bind
-                    cont["p.grid.master"].bind(data as JSONObject[]);
+                    cont["p.grid.master"].bind(data as NC.JSONObject[]);
                 });
             }
         },
@@ -108,7 +108,7 @@
                 before : function() {
                     // TODO
                 },
-                after : function(data: JSONObject[]) {
+                after : function(data: NC.JSONObject[]) {
                     cont["e.btnSearch.click"].trigger("click");
                 }
             });

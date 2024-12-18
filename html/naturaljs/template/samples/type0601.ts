@@ -15,7 +15,7 @@
                 cont["c.getSampleList"]({
                     deptCd: selNodeData.deptCd
                 }).submit(function(data) {
-                    cont["p.grid.detail"].bind(data as JSONObject[]);
+                    cont["p.grid.detail"].bind(data as NC.JSONObject[]);
                 });
             }
         },
@@ -54,7 +54,7 @@
                 comm: "c.saveSample",
                 changed: "p.grid.detail",
                 validate: "p.grid.detail",
-                after: function(data: JSONObject[]) {
+                after: function(data: NC.JSONObject[]) {
                     cont["p.tree.master"].context(".tree_active__").trigger("click");
                 }
             });
@@ -74,7 +74,7 @@
         init: function(view, request) {
             cont["p.grid.detail"].bind();
             cont["c.getSampleDeptList"]().submit(function(data) {
-                cont["p.tree.master"].bind(data as JSONObject[]);
+                cont["p.tree.master"].bind(data as NC.JSONObject[]);
             });
         }
     });

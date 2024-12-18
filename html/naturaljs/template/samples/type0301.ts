@@ -24,7 +24,7 @@
                         totalCount = data[0].totalCount;
                     }
                     cont["p.pagination.masterPagination"].bind(totalCount);
-                    cont["p.grid.master"].bind(data as JSONObject[]);
+                    cont["p.grid.master"].bind(data as NC.JSONObject[]);
                 });
             }
         },
@@ -43,7 +43,7 @@
                         totalCount = data[0].totalCount;
                     }
                     cont["p.pagination.masterPagination"].bind(totalCount);
-                    cont["p.grid.master"].bind(data as JSONObject[]);
+                    cont["p.grid.master"].bind(data as NC.JSONObject[]);
                 });
             }
         },
