@@ -84,13 +84,13 @@ declare class NC {
      *  - Instance of N.notify: notify
      *  - Instance of N.docs: docs
      *    > Components whose instance storage locations are not specifically mentioned are stored in the context elements specified by the context option.
-     * @param {any} [instance] - The instance to store in the selected elements or a callback function to retrieve instances.
+     * @param {NC.Instance} [instance] - The instance to store in the selected elements or a callback function to retrieve instances.
      * > The callback function returns the index (arguments[0]) and each instance (arguments[1]). The `this` context of the callback function refers to each instance.
      * @return {void | NJS<NC.Instance[]> | NC.Instance[] | NC.Instance | NC} Returns undefined, an array of instances, a single instance, or the context itself.
      *
      * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0101.html&tab=html/naturaljs/refr/refr010103.html
      */
-    instance(name: string | NC.InstanceCallback, instance?: any): void | NJS<NC.Instance[]> | NC.Instance[] | NC.Instance | NC;
+    instance(name: string | NC.InstanceCallback, instance?: NC.Instance): void | NJS<NC.Instance[]> | NC.Instance[] | NC.Instance | NC;
     /**
      * Gets or selects the selected values of elements such as select, select[multiple=multiple], input[type=radio], and input[type=checkbox].
      *
