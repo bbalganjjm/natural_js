@@ -64,7 +64,7 @@
                             return N(window).width() as number;
                         };
                         popupOpts.height = function(msgContext, msgContents) {
-                            return N(window).height() as number - msgContents?.show().find(".msg_title_box__").height();
+                            return N(window).height() as number - (msgContents?.show().find(".msg_title_box__").height() as number || 0);
                         };
                     }
 

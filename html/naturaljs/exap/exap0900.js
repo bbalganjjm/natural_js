@@ -77,35 +77,39 @@
             });
             // 3-5. save the form01's data
             N("#btnSaveData01", cont.view).on("click", function (e) {
+                var _a;
                 e.preventDefault();
                 N(window).alert({
                     title: N.message.get(cont.messages, "EXAP0900-0001"),
-                    msg: "<pre style='width: 450px; overflow: auto;'>" + N.json.format(cont.form01.data(true, "picture", "name", "email", "password", "balance", "phone", "company", "active")).replace(/\\/g, "") + "</pre>"
+                    msg: "<pre style='width: 450px; overflow: auto;'>" + ((_a = N.json.format(cont.form01.data(true, "picture", "name", "email", "password", "balance", "phone", "company", "active"))) === null || _a === void 0 ? void 0 : _a.replace(/\\/g, "")) + "</pre>"
                 }).show();
             });
             // 3-6. save the form02's data
             N("#btnSaveData02", cont.view).on("click", function (e) {
+                var _a;
                 e.preventDefault();
                 N(window).alert({
                     title: N.message.get(cont.messages, "EXAP0900-0001"),
-                    msg: "<pre style='width: 450px; overflow: auto;'>" + N.json.format(cont.form02.data(true, "age", "eyeColor")).replace(/\\/g, "") + "</pre>"
+                    msg: "<pre style='width: 450px; overflow: auto;'>" + ((_a = N.json.format(cont.form02.data(true, "age", "eyeColor"))) === null || _a === void 0 ? void 0 : _a.replace(/\\/g, "")) + "</pre>"
                 }).show();
             });
             // 3-7. save the form03's data
             N("#btnSaveData03", cont.view).on("click", function (e) {
+                var _a;
                 e.preventDefault();
                 N(window).alert({
                     title: N.message.get(cont.messages, "EXAP0900-0001"),
-                    msg: "<pre style='width: 450px; overflow: auto;'>" + N.json.format(cont.form03.data(true, "gender", "favoriteFruit", "registered", "about", "greeting")).replace(/\\/g, "") + "</pre>"
+                    msg: "<pre style='width: 450px; overflow: auto;'>" + ((_a = N.json.format(cont.form03.data(true, "gender", "favoriteFruit", "registered", "about", "greeting"))) === null || _a === void 0 ? void 0 : _a.replace(/\\/g, "")) + "</pre>"
                 }).show();
             });
             // 3-8. save the all forms data
             N("#btnSaveAll", cont.view).on("click", function (e) {
+                var _a;
                 e.preventDefault();
                 // cont.data and cont.form01.data(), cont.form02.data(), cont.form03.data() are the same because they are reference to the same memory address.
                 N(window).alert({
                     title: N.message.get(cont.messages, "EXAP0900-0001"),
-                    msg: "<pre style='width: 450px; overflow: auto;'>" + N.json.format(cont.data).replace(/\\/g, "") + "</pre>"
+                    msg: "<pre style='width: 450px; overflow: auto;'>" + ((_a = N.json.format(cont.data)) === null || _a === void 0 ? void 0 : _a.replace(/\\/g, "")) + "</pre>"
                 }).show();
             });
             // 3-9. effect

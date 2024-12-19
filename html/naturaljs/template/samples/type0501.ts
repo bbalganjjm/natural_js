@@ -77,7 +77,7 @@
             return cont["p.form.search"].data(false).comm("sample/code/getSampleCodeCompanyList.json");
         },
         "c.getSampleList" : function() {
-            const params: JSONObject = {};
+            const params: NC.JSONObject = {};
             if(cont["p.list.codeMaster"].data("selected").length > 0) {
                 params.company = cont["p.list.codeMaster"].data("selected")[0].val;
             }

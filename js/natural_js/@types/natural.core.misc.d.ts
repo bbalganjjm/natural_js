@@ -22,10 +22,10 @@ declare namespace NC {
         }
     }
 
-    type InstanceCallback = {
+    interface InstanceCallback {
         (this: Function, instanceName: string, instance: Function): void;
     }
-    type ValsCallback = {
+    interface ValsCallback {
         (this: NJS<HTMLElement[]>, index: number, selEle: NJS<HTMLElement[]>): void;
     }
 
@@ -76,4 +76,6 @@ declare namespace NC {
         FUNCTION = "function",
         DATE = "date"
     }
+
+    type Instance = NA.Controller | NU.Alert | NU.Button | NU.Datepicker | NU.Popup | NU.Tab | NU.Select | NU.Form | NU.List | NU.Grid | NU.Pagination | NU.Tree | NUS.Notify | NUS.Documents;
 }

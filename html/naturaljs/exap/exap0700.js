@@ -59,7 +59,7 @@
                             return N(window).width();
                         };
                         popupOpts.height = function (msgContext, msgContents) {
-                            return N(window).height() - (msgContents === null || msgContents === void 0 ? void 0 : msgContents.show().find(".msg_title_box__").height());
+                            return N(window).height() - ((msgContents === null || msgContents === void 0 ? void 0 : msgContents.show().find(".msg_title_box__").height()) || 0);
                         };
                     }
                     N().popup(popupOpts).open({
