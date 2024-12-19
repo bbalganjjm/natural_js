@@ -5,31 +5,14 @@
         init : function(initPageId) {
             this.mobileResponsiveView();
             this.setLocale();
-            if(initPageId) {
-                this.loadPageForSEO(initPageId);
-            } else {
-                this.loadLefter();
-                this.loadHeader();
-                this.loadFooter();
-            }
+            this.loadLefter();
+            this.loadHeader();
+            this.loadFooter();
             this.reloadCss();
             this.initRouter();
             if(location.hostname === "bbalganjjm.github.io") {
                 this.googleAnalytics();
             }
-        },
-        loadPageForSEO : function(initPageId) {
-            N("body").css("padding", "30px");
-            N('<a href="./"><span>Go Home(https://bbalganjjm.github.io/natural_js/)</span></a>').css({
-                "padding": "0 0 7px 0",
-                "margin": "0 0 35px 0",
-                "display": "block",
-                "font-size": "var(--njs-font-size-xl)",
-                "border-bottom": "3px double var(--md-sys-color-outline-variant)"
-            }).prependTo("body");
-            N(".page-wrap").comm({
-                url : initPageId
-            }).submit();
         },
         loadHeader : function() {
             N("header").comm("html/com/app/comm/index/header.html").submit();

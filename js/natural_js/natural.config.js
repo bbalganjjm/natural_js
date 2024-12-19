@@ -1186,6 +1186,16 @@
                     var tempView = $("<div>" + html + "</div>");
                     APP.indx.i18n(undefined, tempView);
                     N("#sourceCode", view).text(tempView.html().replace(/&quot;/g, '"'));
+
+                    url = url.replace(/\.html/, ".ts");
+                    N.comm({
+                        url : url,
+                        contentType : "text/plain; charset=UTF-8",
+                        dataType : "text",
+                        type : "GET"
+                    }).submit(function(js) {
+                        N("#sourceCode", view).append("\n\n===\n" + url + "\n\n" + js);
+                    });
                 });
             }
         }
