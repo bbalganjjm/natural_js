@@ -139,7 +139,6 @@
 }
 
 .alert_tooltip__.msg__ ul.msg_line_box__ li {
-    line-height: 16px;
     padding: 1px 7px 1px 22px;
     background: var(--njs-icon-error) no-repeat 7px 50%;
     background-size: 14px;
@@ -231,18 +230,18 @@ a.btn_common__, input[type='button'].btn_common__, button.btn_common__ {
     line-height: inherit;
 }
 
-a.btn_common__:hover, input[type='button'].btn_common__:hover, button.btn_common__:hover {
+a.btn_common__:not(.btn_disabled__):hover, input[type='button'].btn_common__:not(.btn_disabled__):hover, button.btn_common__:not(.btn_disabled__):hover {
     opacity: 0.9;
 }
 
-a.btn_common__:active, input[type='button'].btn_common__:active, button.btn_common__:active {
+a.btn_common__:not(.btn_disabled__):active, input[type='button'].btn_common__:not(.btn_disabled__):active, button.btn_common__:not(.btn_disabled__):active {
     opacity: 0.8;
 }
 
 a.btn_disabled__, input.btn_disabled__, button.btn_disabled__ {
     will-change: opacity;
 
-    opacity: 0.6;
+    opacity: 0.6 !important;
     transition: opacity var(--njs-motion-duration-slow) ease;
     cursor: default;
 }
@@ -1062,7 +1061,6 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
     width: 35px;
     text-align: center;
     transform: scaleX(0);
-    font-size: var(--njs-font-size-m);
 }
 
 .datepicker_contents__ .datepicker_day_item__.datepicker_holiday__,
@@ -1240,11 +1238,11 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 }
 
 .datepicker_contents__.years_panel_position_left__.months_panel_position_top__ > .datepicker_days_panel__ {
-    margin-left: 42px;
+    margin-left: 55px;
 }
 
 .datepicker_contents__.years_panel_position_top__.months_panel_position_left__ > .datepicker_days_panel__ {
-    margin-left: 62px;
+    margin-left: 71px;
 }
 
 /* Datepicker panels position correction */
