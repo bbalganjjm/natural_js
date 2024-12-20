@@ -66,7 +66,7 @@
                     N(window).alert({
                         msg : N.message.get(cont.messages, "EXAP0500-0001"),
                         confirm : true,
-                        onOk : function() {
+                        onOk : function(): undefined {
                             cont.grid.remove(checkedIndexs);
                         }
                     }).show();
@@ -87,7 +87,7 @@
                     N(window).alert({
                         msg : N.message.get(cont.messages, "EXAP0500-0005"),
                         confirm : true,
-                        onOk : function() {
+                        onOk : function(): undefined {
                             N(cont.grid.data("modified")).comm({
                                 type : NA.Objects.Request.HttpMethod.PUT,
                                 dataIsArray : true, // When sending multiple rows of data(array<json object>).
@@ -100,7 +100,7 @@
                                 msg += N.message.get(cont.messages, "EXAP0500-0008", [cnt]);
                                 N(window).alert({
                                     msg : msg,
-                                    onOk : function() {
+                                    onOk : function(): undefined {
                                         N("#btnSearch", cont.view).trigger("click");
                                     }
                                 }).show();

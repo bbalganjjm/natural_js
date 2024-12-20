@@ -34,7 +34,7 @@
                 N(window).alert({
                     msg : N.message.get(cont.messages, "EXAP0601-0003"),
                     confirm : true,
-                    onOk : function() {
+                    onOk : function(): undefined {
                         N(cont.form.data(true)).comm({
                             type : NA.Objects.Request.HttpMethod.DELETE,
                             url : "rest/sample/" + cont.form.val("key")
@@ -47,7 +47,7 @@
                             }
                             N(window).alert({
                                 msg : msg,
-                                onOk : function() {
+                                onOk : function(): undefined {
                                     N("#btnList", cont.view).trigger("click");
                                 }
                             }).show();

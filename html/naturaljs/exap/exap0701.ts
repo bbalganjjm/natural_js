@@ -45,7 +45,7 @@
                 N(window).alert({
                     msg : N.message.get(cont.messages, "EXAP0701-0001"),
                     confirm : true,
-                    onOk : function() {
+                    onOk : function(): undefined {
                         // remove row
                         cont.selData.grid.remove(cont.selData.row);
                         cont.caller?.close()

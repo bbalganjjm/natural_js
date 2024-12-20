@@ -48,7 +48,7 @@
                     N(window).alert({
                         msg : N.message.get(cont.messages, "EXAP0602-0003"),
                         confirm : true,
-                        onOk : function() {
+                        onOk : function(): undefined {
                             N(cont.form.data(true)).comm({
                                 type : cont.request?.attr("selData") !== undefined ? NA.Objects.Request.HttpMethod.PATCH : NA.Objects.Request.HttpMethod.POST,
                                 url : "html/naturaljs/exap/data/sample.json" + (cont.request?.attr("selData") !== undefined ? "/" + cont.form.val("key") : "")
@@ -61,7 +61,7 @@
                                 }
                                 N(window).alert({
                                     msg : msg,
-                                    onOk : function() {
+                                    onOk : function(): undefined {
                                         N(cont.view?.parent("#subContext")).comm("html/naturaljs/exap/exap0601.html")
                                             .request.attr("selData", cont.form.data(true))
                                             .request.attr("scData", cont.request?.attr("scData"))

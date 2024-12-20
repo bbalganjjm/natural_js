@@ -37,7 +37,7 @@
                     N(window).alert({
                         msg : N.message.get(cont.messages, "EXAP0300-0003"),
                         confirm : true,
-                        onOk : function() {
+                        onOk : function(): undefined {
                             N(cont.form.data(true)).comm({
                                 type : NA.Objects.Request.HttpMethod.POST,
                                 url : "html/naturaljs/exap/data/sample.json"
