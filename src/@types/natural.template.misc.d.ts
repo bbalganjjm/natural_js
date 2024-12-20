@@ -1,6 +1,6 @@
 declare namespace NT {
     namespace Options {
-        type Extra = {
+        interface Extra {
             /**
              * After the component is initialized, the specified function is immediately executed.
              *  - string: Function name
@@ -28,18 +28,17 @@ declare namespace NT {
                     }[]
                 }
             }
-        };
+        }
         /**
          * Represents a function type for filtering an array of JSON objects.
          *
-         * @callback SelectFilter
          * @param {NJS<JSONObject[]>} data - Data to process.
          * @returns {NJS<JSONObject[]>} - Processed data.
          */
-        type SelectFilter = {
-            (data: NJS<JSONObject[]>): NJS<JSONObject[]>;
+        interface SelectFilter {
+            (data: NJS<NC.JSONObject[]>): NJS<NC.JSONObject[]>;
         }
-        type Select = {
+        interface Select {
             /**
              * Common code classification code - Set the classification code value of the code list to bind.
              *
@@ -63,7 +62,7 @@ declare namespace NT {
              *
              * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/template/documents/template-guide.html
              */
-            data?: JSONObject[];
+            data?: NC.JSONObject[];
             /**
              * Property name of the data bound to the label of the selection element - Set the property name to bind from the retrieved data object.
              *
@@ -113,7 +112,7 @@ declare namespace NT {
              *
              * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/template/documents/template-guide.html
              */
-            type EventHandler = {
+            interface EventHandler {
                 (this: HTMLElement, e: JQuery.Event, ...args: any[]): void;
             }
 

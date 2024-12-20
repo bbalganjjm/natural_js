@@ -1,5 +1,6 @@
 declare namespace NU {
 
+    /* eslint-disable-next-line @definitelytyped/no-const-enum */
     const enum ButtonSize {
         NONE = "none",
         SMALLER = "smaller",
@@ -8,6 +9,8 @@ declare namespace NU {
         LARGE = "large",
         BIG = "big"
     }
+
+    /* eslint-disable-next-line @definitelytyped/no-const-enum */
     const enum ButtonColor {
         NONE = "none",
         PRIMARY = "primary",
@@ -17,7 +20,9 @@ declare namespace NU {
         TERTIARY = "tertiary",
         TERTIARY_CONTAINER = "tertiary_container"
     }
-    enum ButtonType {
+
+    /* eslint-disable-next-line @definitelytyped/no-const-enum */
+    const enum ButtonType {
         NONE = "none",
         FILLED = "filled",
         OUTLINED = "outlined",
@@ -25,7 +30,7 @@ declare namespace NU {
     }
 
     namespace Options {
-        type Alert = {
+        interface Alert {
             /**
              * Specifies the area where the message dialog for Alert will be displayed.
              *
@@ -419,9 +424,9 @@ declare namespace NU {
             onRemove?: NU.EventHandlers.Alert.OnRemove | null;
             isInput?: boolean;
             isWindow?: boolean;
-        };
+        }
 
-        type Button = {
+        interface Button {
             /**
              * Specifies the context element to which the Button will be applied.
              *
@@ -524,9 +529,9 @@ declare namespace NU {
              * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0402.html&tab=html/naturaljs/refr/refr040204.html
              */
             onCreate?: NU.EventHandlers.Button.OnCreate | null;
-        };
+        }
 
-        type Datepicker = {
+        interface Datepicker {
             /**
              * Specifies the input element to which the Datepicker will be applied.
              * ```
@@ -807,9 +812,9 @@ declare namespace NU {
              * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0403.html&tab=html/naturaljs/refr/refr040304.html
              */
             onHide?: NU.EventHandlers.Datepicker.OnHide | null;
-        };
+        }
 
-        type Popup = {
+        interface Popup {
             /**
              * Specifies the Block element inside the page to create as a popup.
              *
@@ -1152,7 +1157,7 @@ declare namespace NU {
              *
              * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0404.html&tab=html/naturaljs/refr/refr040404.html
              */
-            onOpenData?: any | null,
+            onOpenData?: any,
             /**
              * Defines an event handler that is executed whenever the popup is closed.
              * ```
@@ -1215,7 +1220,7 @@ declare namespace NU {
              *
              * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0404.html&tab=html/naturaljs/refr/refr040404.html
              */
-            onCloseData?: any | null,
+            onCloseData?: any,
             /**
              * Defines the event handler that runs when the popup content has finished loading.
              *
@@ -1301,9 +1306,9 @@ declare namespace NU {
              * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0404.html&tab=html/naturaljs/refr/refr040404.html
              */
             saveMemory?: boolean;
-        };
+        }
 
-        type EachTab = {
+        interface EachTab {
             /**
              * Specifies the URL of the page to be created as tab content.
              *
@@ -1360,8 +1365,8 @@ declare namespace NU {
              * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0405.html&tab=html/naturaljs/refr/refr040504.html
              */
             stateless?: boolean;
-        };
-        type Tab = {
+        }
+        interface Tab {
             /**
              * Specifies the context element where the Tab will be applied.
              *
@@ -1550,9 +1555,9 @@ declare namespace NU {
                 tabContainerWidthCorrectionPx?: number;
                 tabContainerWidthReCalcDelayTime?: number;
             }
-        };
+        }
 
-        type Select = {
+        interface Select {
             /**
              * Specifies the data to bind to the Select element.
              *
@@ -1633,9 +1638,9 @@ declare namespace NU {
              * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0406.html&tab=html/naturaljs/refr/refr040604.html
              */
             template?: NJS<HTMLElement[]> | null;
-        };
+        }
 
-        type Form = {
+        interface Form {
             /**
              * Specifies the data to bind to the Form.
              *
@@ -1885,9 +1890,9 @@ declare namespace NU {
              * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0407.html&tab=html/naturaljs/refr/refr040704.html
              */
             InitialData?: NJS<NC.JSONObject>;
-        };
+        }
 
-        type List = {
+        interface List {
             /**
              * Specifies the data to be bound to the List.
              *
@@ -2307,9 +2312,9 @@ declare namespace NU {
              * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0408.html&tab=html/naturaljs/refr/refr040804.html
              */
             onBind?: NU.EventHandlers.List.OnBind | null;
-        };
+        }
 
-        type GridMisc = {
+        interface GridMisc {
             resizableCorrectionWidth?: number;
             resizableLastCellCorrectionWidth?: number;
             resizeBarCorrectionLeft?: number;
@@ -2322,9 +2327,9 @@ declare namespace NU {
             fixedcolBodyBindHeight?: number;
             fixedcolBodyAddHeight?: number;
             fixedcolRootContainer?: JQuery.Selector | null;
-        };
+        }
 
-        type Grid = {
+        interface Grid {
             /**
              * Specifies the data to be bound to the Grid.
              *
@@ -2889,9 +2894,9 @@ declare namespace NU {
              * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0409.html&tab=html/naturaljs/refr/refr040904.html
              */
             currMoveToRow?: number;
-        };
+        }
 
-        type CurrPageNavInfo = {
+        interface CurrPageNavInfo {
             /**
              * Current page number.
              *
@@ -2996,8 +3001,8 @@ declare namespace NU {
              * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0410.html&tab=html/naturaljs/refr/refr041004.html
              */
             endRowNum: number;
-        };
-        type Pagination = {
+        }
+        interface Pagination {
             /**
              * Specifies the data to be bound to the Pagination.
              *
@@ -3143,9 +3148,9 @@ declare namespace NU {
              * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0410.html&tab=html/naturaljs/refr/refr041004.html
              */
             currPageNavInfo?: NU.Options.CurrPageNavInfo | null;
-        };
+        }
 
-        type Tree = {
+        interface Tree {
             /**
              * Specifies the data to bind to the Tree.
              *
@@ -3256,184 +3261,184 @@ declare namespace NU {
              * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0411.html&tab=html/naturaljs/refr/refr041104.html
              */
             onCheck?: NU.EventHandlers.Tree.OnCheck | null;
-        };
+        }
 
     }
 
     namespace EventHandlers {
         namespace Alert {
-            type Width = {
+            interface Width {
                 (this: NU.Alert, msgContext?: NJS<HTMLElement[]>, msgContents?: NJS<HTMLElement[]>): number;
             }
-            type Height = {
+            interface Height {
                 (this: NU.Alert, msgContext?: NJS<HTMLElement[]>, msgContents?: NJS<HTMLElement[]>): number;
             }
-            type OnOk = {
-                (this: NU.Alert, msgContext?: NJS<HTMLElement[]>, msgContents?: NJS<HTMLElement[]>): void | 0;
+            interface OnOk {
+                (this: NU.Alert, msgContext?: NJS<HTMLElement[]>, msgContents?: NJS<HTMLElement[]>): undefined | 0;
             }
-            type OnCancel = {
-                (this: NU.Alert, msgContext?: NJS<HTMLElement[]>, msgContents?: NJS<HTMLElement[]>): void | 0;
+            interface OnCancel {
+                (this: NU.Alert, msgContext?: NJS<HTMLElement[]>, msgContents?: NJS<HTMLElement[]>): undefined | 0;
             }
-            type OnBeforeShow = {
+            interface OnBeforeShow {
                 (this: NU.Alert, msgContext?: NJS<HTMLElement[]>, msgContents?: NJS<HTMLElement[]>): void;
             }
-            type OnShow = {
+            interface OnShow {
                 (this: NU.Alert, msgContext?: NJS<HTMLElement[]>, msgContents?: NJS<HTMLElement[]>): void;
             }
-            type OnBeforeHide = {
+            interface OnBeforeHide {
                 (this: NU.Alert, msgContext?: NJS<HTMLElement[]>, msgContents?: NJS<HTMLElement[]>): void;
             }
-            type OnHide = {
+            interface OnHide {
                 (this: NU.Alert, msgContext?: NJS<HTMLElement[]>, msgContents?: NJS<HTMLElement[]>): void;
             }
-            type OnBeforeRemove = {
+            interface OnBeforeRemove {
                 (this: NU.Alert, msgContext?: NJS<HTMLElement[]>, msgContents?: NJS<HTMLElement[]>): void;
             }
-            type OnRemove = {
+            interface OnRemove {
                 (this: NU.Alert, msgContext?: NJS<HTMLElement[]>, msgContents?: NJS<HTMLElement[]>): void;
             }
         }
         namespace Button {
-            type OnBeforeCreate = {
+            interface OnBeforeCreate {
                 (this: NU.Button, context: NJS<HTMLElement[]>, opts: NU.Options.Button): void;
             }
-            type OnCreate = {
+            interface OnCreate {
                 (this: NU.Button, context: NJS<HTMLElement[]>, opts: NU.Options.Button): void;
             }
         }
         namespace Datepicker {
-            type OnChangeYear = {
+            interface OnChangeYear {
                 (this: NU.Datepicker, context: NJS<HTMLElement[]>, selYearStr: string, e: JQuery.Event): void;
             }
-            type OnChangeMonth = {
+            interface OnChangeMonth {
                 (this: NU.Datepicker, context: NJS<HTMLElement[]>, selMonthStr: string, selYearStr: string, e: JQuery.Event): void;
             }
-            type OnSelect = {
+            interface OnSelect {
                 (this: NU.Datepicker, context: NJS<HTMLElement[]>, selDate: NC.Date, monthonly: boolean): void;
             }
-            type OnBeforeShow = {
-                (this: NU.Datepicker, context: NJS<HTMLElement[]>, contents: NJS<HTMLElement[]>): void | false;
+            interface OnBeforeShow {
+                (this: NU.Datepicker, context: NJS<HTMLElement[]>, contents: NJS<HTMLElement[]>): undefined | false;
             }
-            type OnShow = {
+            interface OnShow {
                 (this: NU.Datepicker, context: NJS<HTMLElement[]>, contents: NJS<HTMLElement[]>): void;
             }
-            type OnBeforeHide = {
+            interface OnBeforeHide {
                 (this: NU.Datepicker, context: NJS<HTMLElement[]>, contents: NJS<HTMLElement[]>): void;
             }
-            type OnHide = {
+            interface OnHide {
                 (this: NU.Datepicker, context: NJS<HTMLElement[]>): void;
             }
         }
         namespace Popup {
-            type Width = {
+            interface Width {
                 (this: NU.Popup, msgContext?: NJS<HTMLElement[]>, msgContents?: NJS<HTMLElement[]>): number;
             }
-            type Height = {
+            interface Height {
                 (this: NU.Popup, msgContext?: NJS<HTMLElement[]>, msgContents?: NJS<HTMLElement[]>): number;
             }
-            type OnOk = {
-                (this: NU.Popup, msgContext?: NJS<HTMLElement[]>, msgContents?: NJS<HTMLElement[]>): void | 0;
+            interface OnOk {
+                (this: NU.Popup, msgContext?: NJS<HTMLElement[]>, msgContents?: NJS<HTMLElement[]>): undefined | 0;
             }
-            type OnCancel = {
-                (this: NU.Popup, msgContext?: NJS<HTMLElement[]>, msgContents?: NJS<HTMLElement[]>): void | 0;
+            interface OnCancel {
+                (this: NU.Popup, msgContext?: NJS<HTMLElement[]>, msgContents?: NJS<HTMLElement[]>): undefined | 0;
             }
-            type OnBeforeShow = {
+            interface OnBeforeShow {
                 (this: NU.Popup, msgContext?: NJS<HTMLElement[]>, msgContents?: NJS<HTMLElement[]>): void;
             }
-            type OnShow = {
+            interface OnShow {
                 (this: NU.Popup, msgContext?: NJS<HTMLElement[]>, msgContents?: NJS<HTMLElement[]>): void;
             }
-            type OnBeforeHide = {
+            interface OnBeforeHide {
                 (this: NU.Popup, msgContext?: NJS<HTMLElement[]>, msgContents?: NJS<HTMLElement[]>): void;
             }
-            type OnHide = {
+            interface OnHide {
                 (this: NU.Popup, msgContext?: NJS<HTMLElement[]>, msgContents?: NJS<HTMLElement[]>): void;
             }
-            type OnBeforeRemove = {
+            interface OnBeforeRemove {
                 (this: NU.Popup, msgContext?: NJS<HTMLElement[]>, msgContents?: NJS<HTMLElement[]>): void;
             }
-            type OnRemove = {
+            interface OnRemove {
                 (this: NU.Popup, msgContext?: NJS<HTMLElement[]>, msgContents?: NJS<HTMLElement[]>): void;
             }
-            type OnOpen = {
+            interface OnOpen {
                 (this: NA.Objects.Controller.Object, onOpenData?: any): void;
             }
-            type OnClose = {
+            interface OnClose {
                 (this: NU.Popup, onCloseData?: any): void;
             }
-            type OnLoad = {
+            interface OnLoad {
                 (this: NU.Popup, cont: NA.Objects.Controller.Object): void;
             }
         }
         namespace Tab {
-            type OnOpen = {
+            interface OnOpen {
                 (this: NA.Objects.Controller.Object, onOpenData?: any): void;
             }
-            type OnActive = {
+            interface OnActive {
                 (this: NU.Tab, selTabIdx: number, selTabEle: NJS<HTMLElement[]>, selContentEle: NJS<HTMLElement[]>, links: NJS<HTMLElement[]>, contents: NJS<HTMLElement[]>): void;
             }
-            type OnLoad = {
+            interface OnLoad {
                 (this: NU.Tab, selTabIdx: number, selTabEle: NJS<HTMLElement[]>, selContentEle: NJS<HTMLElement[]>, cont: NA.Objects.Controller.Object): void;
             }
         }
         namespace Form {
-            type OnBeforeBindValue = {
+            interface OnBeforeBindValue {
                 (this: NU.Form, ele: NJS<HTMLElement[]>, val: NC.Primitive | NC.Primitive[], action: "bind" | "val"): NC.Primitive | NC.Primitive[];
             }
-            type OnBindValue = {
+            interface OnBindValue {
                 (this: NU.Form, ele: NJS<HTMLElement[]>, val: NC.Primitive | NC.Primitive[], action: "bind" | "val"): void;
             }
-            type OnBeforeBind = {
+            interface OnBeforeBind {
                 (this: NU.Form, context: NJS<HTMLElement[]>, vals: NC.JSONObject): void;
             }
-            type OnBind = {
+            interface OnBind {
                 (this: NU.Form, context: NJS<HTMLElement[]>, vals: NC.JSONObject): void;
             }
         }
         namespace List {
-            type RowHandlerBeforeBind = {
+            interface RowHandlerBeforeBind {
                 (this: NU.List, rowIdx: number, rowEle: NJS<HTMLElement[]>, rowData: NC.JSONObject): void;
             }
-            type RowHandler = {
+            interface RowHandler {
                 (this: NU.List, rowIdx: number, rowEle: NJS<HTMLElement[]>, rowData: NC.JSONObject): void;
             }
-            type OnBeforeSelect = {
-                (this: NU.List, rowIdx: number, rowEle: NJS<HTMLElement[]>, rowData: NJS<NC.JSONObject>, beforeRowIdx: number, e: JQuery.Event): void | false;
+            interface OnBeforeSelect {
+                (this: NU.List, rowIdx: number, rowEle: NJS<HTMLElement[]>, rowData: NJS<NC.JSONObject>, beforeRowIdx: number, e: JQuery.Event): undefined | false;
             }
-            type OnSelect = {
+            interface OnSelect {
                 (this: NU.List, rowIdx: number, rowEle: NJS<HTMLElement[]>, rowData: NJS<NC.JSONObject[]>, beforeRowIdx: number, e: JQuery.Event): void;
             }
-            type OnBind = {
+            interface OnBind {
                 (this: NU.List, context: NJS<HTMLElement[]>, data: NJS<NC.JSONObject>, isFirstPage: boolean, isLastPage: boolean): void;
             }
         }
         namespace Grid {
-            type RowHandlerBeforeBind = {
+            interface RowHandlerBeforeBind {
                 (this: NU.Grid, rowIdx: number, rowEle: NJS<HTMLElement[]>, rowData: NC.JSONObject): void;
             }
-            type RowHandler = {
+            interface RowHandler {
                 (this: NU.Grid, rowIdx: number, rowEle: NJS<HTMLElement[]>, rowData: NC.JSONObject): void;
             }
-            type OnBeforeSelect = {
-                (this: NU.Grid, rowIdx: number, rowEle: NJS<HTMLElement[]>, rowData: NJS<NC.JSONObject>, beforeRowIdx: number, e: JQuery.Event): void | false;
+            interface OnBeforeSelect {
+                (this: NU.Grid, rowIdx: number, rowEle: NJS<HTMLElement[]>, rowData: NJS<NC.JSONObject>, beforeRowIdx: number, e: JQuery.Event): undefined | false;
             }
-            type OnSelect = {
+            interface OnSelect {
                 (this: NU.Grid, rowIdx: number, rowEle: NJS<HTMLElement[]>, rowData: NJS<NC.JSONObject[]>, beforeRowIdx: number, e: JQuery.Event): void;
             }
-            type OnBind = {
+            interface OnBind {
                 (this: NU.Grid, context: NJS<HTMLElement[]>, data: NJS<NC.JSONObject>, isFirstPage: boolean, isLastPage: boolean): void;
             }
         }
         namespace Pagination {
-            type OnChange = {
+            interface OnChange {
                 (this: NU.Pagination, pageNo: number, selEle: NJS<HTMLElement[]>, selData: NC.JSONObject[], currPageNavInfo: NU.Options.CurrPageNavInfo): void;
             }
         }
         namespace Tree {
-            type OnSelect = {
+            interface OnSelect {
                 (this: NU.Tree, selNodeIndex: number, selNodeEle: NJS<HTMLElement[]>, selNodeData: NC.JSONObject): void;
             }
-            type OnCheck = {
+            interface OnCheck {
                 (this: NU.Tree, selNodeIndex: number, selNodeEle: NJS<HTMLElement[]>, selNodeData: NC.JSONObject
                     , checkedElesIndexes: number[], checkedEles: NJS<HTMLElement[]>, checkedElesData: NC.JSONObject[]
                     , checkFlag: boolean): void;
@@ -3443,12 +3448,12 @@ declare namespace NU {
 
     namespace Callbacks {
         namespace Popup {
-            type LoadContent = {
+            interface LoadContent {
                 (this: NU.Popup, cont?: NA.Objects.Controller.Object, context?: NJS<HTMLElement[]>): void;
             }
         }
         namespace Tab {
-            type LoadContent = {
+            interface LoadContent {
                 (this: NU.Tab, cont?: NA.Objects.Controller.Object, context?: NJS<HTMLElement[]>): void;
             }
         }
@@ -3456,23 +3461,23 @@ declare namespace NU {
 
     namespace Objects {
         namespace Grid {
-            type TableMap = {
+            interface TableMap {
                 colgroup: HTMLElement[][];
                 thead: HTMLTableCellElement[][];
                 tbody: HTMLTableCellElement[][];
                 tfoot: HTMLTableCellElement[][];
-            };
+            }
         }
 
         namespace Pagination {
-            type LinkEles = {
+            interface LinkEles {
                 body: HTMLElement[][];
                 page: HTMLElement[][];
                 first: HTMLElement[][];
                 prev: HTMLElement[][];
                 next: HTMLElement[][];
                 last: HTMLElement[][];
-            };
+            }
         }
     }
 

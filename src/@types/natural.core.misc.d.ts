@@ -2,36 +2,39 @@ declare namespace NC {
 
     type Primitive = string | number | boolean | null;
     type JSONValue = Primitive | JSONObject | JSONValue[];
-    type JSONObject = {
+    interface JSONObject {
         [key: string]: JSONValue;
     }
 
-    type Date = {
+    interface Date {
         obj: Date;
         format: string;
     }
 
     type EventObject = object[]
-    type EventsObject = {
+    interface EventsObject {
         [key: string]: EventObject;
     }
 
-    type RuleObj = {
+    interface RuleObj {
         id: {
-            ruleName: [[string, ...[]]];
+            [key: string]: [string, ...NC.Primitive[]][];
         }
     }
 
-    type InstanceCallback = {
-        (this: Function, instanceName: string, instance: Function): void;
+    type Instance = NA.Controller | NU.Alert | NU.Button | NU.Datepicker | NU.Popup | NU.Tab | NU.Select | NU.Form | NU.List | NU.Grid | NU.Pagination | NU.Tree | NUS.Notify | NUS.Documents;
+    interface InstanceCallback {
+        (this: NC.Instance, instanceName: string, instance: NC.Instance): void;
     }
-    type ValsCallback = {
+
+    interface ValsCallback {
         (this: NJS<HTMLElement[]>, index: number, selEle: NJS<HTMLElement[]>): void;
     }
 
     /**
      * Enumeration representing types of web browsers.
      */
+    /* eslint-disable-next-line @definitelytyped/no-const-enum */
     const enum BrowserType {
         OPERA = "opera",
         FIREFOX = "firefox",
@@ -62,12 +65,13 @@ declare namespace NC {
      * }
      * ```
      */
-    type MessageResourceObj = {
+    interface MessageResourceObj {
         [key: string]: {
             [key: string]: string;
         }
     }
 
+    /* eslint-disable-next-line @definitelytyped/no-const-enum */
     const enum ObjectType {
         NUMBER = "number",
         STRING = "string",
@@ -76,4 +80,6 @@ declare namespace NC {
         FUNCTION = "function",
         DATE = "date"
     }
+
+    type Selector = string | Element | Array<Element> | JQuery<Element> | JQuery.Node | JQuery.PlainObject | ((this: Document, readyCallback: (this: Document) => void) => void) | NJS<Element> | JQuery
 }

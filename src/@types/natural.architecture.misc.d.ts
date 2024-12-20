@@ -100,22 +100,22 @@ declare namespace NA {
 
     namespace Callbacks {
         namespace Communicator {
-            type Submit = {
+            interface Submit {
                 (this: NA.Communicator, data?: NC.JSONObject | NC.JSONObject[] | NC.Primitive | object | object[] | NA.Controller, request?: NA.Request): void;
             }
-            type Error = {
+            interface Error {
                 (this: NA.Communicator, xhr: JQuery.jqXHR, textStatus: JQuery.Ajax.TextStatus, e: Error, request: NA.Request, submitCallback: Submit): void;
             }
         }
 
         namespace Controller {
-            type OnOpen = {
+            interface OnOpen {
                 (this: NA.Objects.Controller.Object, onOpenData?: any): void;
             }
         }
 
         namespace Request {
-            type Reload = {
+            interface Reload {
                 (this: NA.Communicator, html?: string | NA.Controller, request?: NA.Request): void;
             }
         }
@@ -138,6 +138,7 @@ declare namespace NA {
              * Enctype.PLAIN - Represents the MIME type `text/plain`.
              * This encoding type sends data without any encoding for the key-value pairs.
              */
+            /* eslint-disable-next-line @definitelytyped/no-const-enum */
             const enum Enctype {
                 URLENCODED = "application/x-www-form-urlencoded",
                 MULTIPART = "multipart/form-data",
@@ -146,9 +147,8 @@ declare namespace NA {
 
             /**
              * An enumeration for different types of data formats that can be used.
-             *
-             * @enum {string}
              */
+            /* eslint-disable-next-line @definitelytyped/no-const-enum */
             const enum DataType {
                 JSON = "json",
                 XML = "xml",
@@ -173,9 +173,8 @@ declare namespace NA {
              * - TRACE: Performs a message loop-back test along the path to the target resource.
              * - CONNECT: Establishes a tunnel to the server identified by the target resource.
              * - PATCH: Used to apply partial modifications to a resource.
-             *
-             * @enum {string}
              */
+            /* eslint-disable-next-line @definitelytyped/no-const-enum */
             const enum HttpMethod {
                 POST = "POST",
                 GET = "GET",
@@ -190,7 +189,7 @@ declare namespace NA {
         }
 
         namespace Controller {
-            type InitFunction = {
+            interface InitFunction {
                 (this: Object, view: NJS<HTMLElement[]>, request: NA.Request): void
             }
 
@@ -237,14 +236,14 @@ declare namespace NA {
         }
 
         namespace Config {
-            type FilterConfig = {
+            interface FilterConfig {
                 beforeInitFilters: object[];
                 afterInitFilters: object[];
                 beforeSendFilters: object[];
                 successFilters: object[];
                 errorFilters: object[];
                 completeFilters: object[];
-            };
+            }
         }
     }
 
