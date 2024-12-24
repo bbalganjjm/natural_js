@@ -40,10 +40,13 @@
   "devDependencies": {
     "@types/jquery": "^3.5.32"
   },
-  "author": {
-    "name": "Goldman Kim",
-    "email": "bbalganjjm@gmail.com"
-  },
+  "owners": [
+    {
+      "name": "Goldman Kim",
+      "githubUsername": "bbalganjjm",
+      "email": "bbalganjjm@gmail.com"
+    }
+  ],
   "license": "LGPL v2.1",
   "bugs": {
     "url": "https://github.com/bbalganjjm/natural_js/issues",
