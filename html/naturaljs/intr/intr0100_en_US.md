@@ -188,8 +188,7 @@ Supports
 
 ### Support browsers
 
-* PC: Chrome, Edge, Firefox, Safari, Opera, Internet Explorer 11(limited support)
-* Mobile: iOS Safari, iOS UIWebView, Android Browser, Android Chrome, Android WebView
+* Any PC/mobile web browser that supports ECMAScript5(ES5) or higher.
 
 ### Training and support
 

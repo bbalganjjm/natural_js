@@ -183,8 +183,7 @@ Natural-UI가 콘텐츠 영역의 UI 개발을 지원한다면 Natural-UI.Shell�
 
 ### 지원 브라우저
 
-* PC: Chrome, Edge, Firefox, Safari, Opera, Internet Explorer 11(제한된 지원)
-* 모바일: iOS Safari, iOS UIWebView, Android Browser, Android Chrome, Android WebView
+* ECMAScript5(ES5) 이상을 지원하는 모든 PC/모바일 웹 브라우저.
 
 ### 교육 및 지원
 
