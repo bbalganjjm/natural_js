@@ -14,7 +14,7 @@
         "forceConsistentCasingInFileNames": true
     },
     "files": [
-        "index.d.ts",
+      "index.d.ts",
         "natural_js-tests.ts"
     ]
 }
