@@ -7,21 +7,45 @@
 
 1.  [GitHub](https://github.com/bbalganjjm/natural_js)에서 직접 다운로드
 2.  Bower : bower install natural_js
+3.  npm : npm install @bbalganjjm@natural_js
 
 다운로드된 파일 들 중 Natural-JS를 구동하기 위한 필수 라이브러리 파일들은 다음과 같습니다.
 
-1.  **jquery-3.7.1.min.js** - Natural-JS는 jQuery 를 기반으로 동작하므로 반드시 임포트 해야 합니다.
-2.  **natural.ui.css** - Natural-UI 디자인과 관련된 스타일시트 파일입니다.
-3.  **natural.js.min.js** - Natural-JS의 전체 라이브러리 파일들이 합쳐진 Minified 파일입니다.
-4.  **natural.config.js** - Natural-JS의 환경설정 파일입니다.
+1.  **lib/jquery-3.7.1.min.js** - Natural-JS는 jQuery에 의존성이 있으므로 반드시 임포트해야 합니다.
+2.  **css/natural.ui.css** - Natural-UI 디자인과 관련된 스타일시트 파일입니다.
+    > css 폴더에 있는 `dark.css`, `light.css`, `css/tokens.css` 파일이 모두 포함되어야 합니다.
+3.  **dist/natural.js{+code}{+template}.{es5|es6}.min.js** - Natural-JS의 전체 라이브러리 파일이 합쳐진 Minified 파일입니다.
+    > 지원되는 ECMAScript 버전 및 패키지에 따라 아래 파일 중 하나를 선택해서 사용할 수 있습니다:
+    > - dist/natural.js+code+template.es5.min.js: ES5 기반의 Natural-CODE 와 Natural-TEMPLATE 패키지가 포함된 Natural-JS 파일
+    > - dist/natural.js+code+template.es6.min.js: ES6 기반의 Natural-CODE 와 Natural-TEMPLATE 패키지가 포함된 Natural-JS 파일
+    > - dist/natural.js+code.es5.min.js: ES5 기반의 Natural-CODE 패키지가 포함된 Natural-JS 파일
+    > - dist/natural.js+code.es6.min.js: ES6 기반의 Natural-CODE 패키지가 포함된 Natural-JS 파일
+    > - dist/natural.js+template.es5.min.js: ES5 기반의 Natural-TEMPLATE 패키지가 포함된 Natural-JS 파일
+    > - dist/natural.js+template.es6.min.js: ES6 기반의 Natural-TEMPLATE 패키지가 포함된 Natural-JS 파일
+    > - dist/natural.js.es5.min.js: ES5 기반의 Natural-JS 파일
+    > - dist/natural.js.es6.min.js: ES6 기반의 Natural-JS 파일
+    > > natural_js 소스코드에 포함된 `compiler/closure-compiler.jar`를 사용하여 ES3 이상의 원하는 패키지를 포함하여 직접 생성할 수도 있습니다.
+4.  **dist/natural.config.js** - Natural-JS의 환경설정 파일입니다.
 
-이제 최상위 HTML 파일을 만들고 위 파일들을 다음과 같은 순서로 페이지에 Import 해 줍니다.
+Natural-JS 는 TypeScript 를 지원하기위해 타입 선언 파일을 제공합니다.
+
+아래와 같이 `tsconfig.json` 파일에 Natural-JS 의 타입 선언파일이 있는 경로를 추가하면 Typescript 로 개발이 가능합니다.
+```
+{
+  "compilerOptions": {
+    ...
+    "types": ["js/natural_js/@types"]
+  }
+}
+```
+
+이제 최상위 HTML 파일을 생성하고 위 파일들을 아래 순서대로 페이지에 가져오기(import) 해줍니다.
 
 ```
 <script type="text/javascript" src="js/natural_js/lib/jquery-3.7.1.min.js"></script>
 <link rel="stylesheet" type="text/css" href="js/natural_js/css/natural.ui.css" />
-<script type="text/javascript" src="js/natural_js/natural.js.min.js" charset="utf-8"></script>
-<script type="text/javascript" src="js/natural_js/natural.config.js" charset="utf-8"></script>
+<script type="module" charset="utf-8" src="js/natural_js/dist/natural.js+code+template.es6.min.js"></script>
+<script type="module" charset="utf-8" src="js/natural_js/dist/natural.config.js"></script>
 ```
 
 CORE, ARCHITECTURE, DATA, UI, UI.Shell 전체를 사용하기 원한다면 natural.js.min.js를 임포트(Import)하고 각 패키지 별로 따로 사용하기 원한다면 따로 임포트하면 됩니다.

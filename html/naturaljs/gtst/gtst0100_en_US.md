@@ -7,21 +7,45 @@ First, download the Natural-JS library files in one of the following ways.
 
 1.  Directly download from [GitHub](https://github.com/bbalganjjm/natural_js)
 2.  Bower : bower install natural_js
+3.  npm : npm install @bbalganjjm@natural_js
 
 Among the downloaded files, the necessary library files for running Natural-JS are as follows.
 
-1.  **jquery-3.7.1.min.js** - You must import the jQuery library. because Natural-JS operates based on jQuery.
-2.  **natural.ui.css** - This is style sheet file related with the Natural-UI design.
-3.  **natural.js.min.js** - This is a minified file that combines the entire library files of Natural-JS.
-4.  **natural.config.js** - This is Natural-JS's configuration file.
+1.  **lib/jquery-3.7.1.min.js** - Since Natural-JS depends on jQuery, it must be imported.
+2.  **css/natural.ui.css** - This is the stylesheet file related to the Natural-UI design.
+    > The files `dark.css`, `light.css`, and `css/tokens.css` located in the css folder must all be included.
+3.  **dist/natural.js{+code}{+template}.{es5|es6}.min.js** - A minified file that combines the complete library files of Natural-JS.
+    > Depending on the supported ECMAScript version and package, you can select one of the following files:
+    > - dist/natural.js+code+template.es5.min.js: An ES5-based Natural-CODE and Natural-TEMPLATE package included Natural-JS file
+    > - dist/natural.js+code+template.es6.min.js: An ES6-based Natural-CODE and Natural-TEMPLATE package included Natural-JS file
+    > - dist/natural.js+code.es5.min.js: An ES5-based Natural-CODE package included Natural-JS file
+    > - dist/natural.js+code.es6.min.js: An ES6-based Natural-CODE package included Natural-JS file
+    > - dist/natural.js+template.es5.min.js: An ES5-based Natural-TEMPLATE package included Natural-JS file
+    > - dist/natural.js+template.es6.min.js: An ES6-based Natural-TEMPLATE package included Natural-JS file
+    > - dist/natural.js.es5.min.js: An ES5-based Natural-JS file
+    > - dist/natural.js.es6.min.js: An ES6-based Natural-JS file
+    > > You can also generate a desired package containing ES3 or higher using the `compiler/closure-compiler.jar` included in the natural_js source code.
+4.  **dist/natural.config.js** - The configuration file for Natural-JS.
 
-Now you can create a top-level HTML file and import the above files into the page in the following order.
+Natural-JS provides type declaration files to support TypeScript.
+
+You can develop with Typescript by adding the path to the Natural-JS type declaration file in the `tsconfig.json` file as shown below.
+```
+{
+  "compilerOptions": {
+    ...
+    "types": ["js/natural_js/@types"]
+  }
+}
+```
+
+Now, create the top-level HTML file and import the above files into the page in the following order.
 
 ```
 <script type="text/javascript" src="js/natural_js/lib/jquery-3.7.1.min.js"></script>
 <link rel="stylesheet" type="text/css" href="js/natural_js/css/natural.ui.css" />
-<script type="text/javascript" src="js/natural_js/natural.js.min.js" charset="utf-8"></script>
-<script type="text/javascript" src="js/natural_js/natural.config.js" charset="utf-8"></script>
+<script type="module" charset="utf-8" src="js/natural_js/dist/natural.js+code+template.es6.min.js"></script>
+<script type="module" charset="utf-8" src="js/natural_js/dist/natural.config.js"></script>
 ```
 
 If you want to use the entire CORE, ARCHITECTURE, DATA, UI, UI.Shell, import natural.js.min.js and if you want to use it separately for each package, you can import it separately.
