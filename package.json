@@ -1,6 +1,6 @@
 {
   "name": "@bbalganjjm/natural_js",
-  "version": "1.0.0-PRE.SNAPSHOT",
+  "version": "1.0.0",
   "description": "Natural-JS is a JavaScript architectural framework designed for enterprise web applications, allowing intuitive, easy, and fast implementation of user interfaces.",
   "projects": [
     "https://github.com/bbalganjjm/natural_js"
