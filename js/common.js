@@ -65,7 +65,7 @@
                     N(window).alert({
                         msg : N.message.get(APP.comm.messages, "COMM-0009"),
                         confirm : true,
-                        onOk : function(): undefined {
+                        onOk : function() {
                             opts.cont[opts.inst].remove(checkedIndexs);
 
                             if(opts.after) {
@@ -119,7 +119,7 @@
             N(window).alert({
                 msg : opts.msg ? opts.msg : N.message.get(APP.comm.messages, "COMM-0005"),
                 confirm : true,
-                onOk : function(): undefined {
+                onOk : function() {
                     opts.cont[opts.comm]().submit(function(data) {
                         var msg = N.message.get(APP.comm.messages, "COMM-0002");
                         if(data.insert !== undefined && data.update !== undefined && data.delete !== undefined) {
@@ -156,7 +156,7 @@
                     N(window).alert({
                         msg : N.message.get(APP.comm.messages, "COMM-0003"),
                         confirm : true,
-                        onOk : function(): undefined {
+                        onOk : function() {
                         // bind data to detail form;
                         if(opts.dataSync === false) {
                             opts.cont[opts.form].bind(0, [opts.args[2][opts.args[0]]]);
