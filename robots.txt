@@ -8,4 +8,4 @@ Disallow: /README.md
 Disallow: /google6060ee7ae15e1f61.html
 Allow: /
 
-Sitemap: https://bbalganjjm.github.io/natural_js/sitemap.xml
+Sitemap: https://bbalganjjm.github.io/natural_js/etc/sitemap.xml
