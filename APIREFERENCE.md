@@ -1,4 +1,4 @@
-# Natural-JS API 레퍼런스 가이드북
+# Natural-JS API 레퍼런스
 
 ## 목차
 - Natural-CORE
