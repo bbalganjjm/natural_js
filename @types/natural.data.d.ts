@@ -1114,18 +1114,28 @@ declare class ND {
 declare namespace ND {
     interface Formatter {
         /**
-         * TODO Please add a comment.
+         * Formats the data at the specified row according to the formatting rules.
+         * 
+         * @param {number} row - The row index to format.
+         * @return {ND.FormatResultObject} An object containing the formatted values.
          */
         format(row: number): ND.FormatResultObject;
         /**
-         * TODO Please add a comment.
+         * Reverts a formatted value back to its original form.
+         * 
+         * @param {number} row - The row index containing the value to unformat.
+         * @param {string} key - The property name of the value to unformat.
+         * @return {NC.Primitive} The unformatted value.
          */
         unformat(row: number, key: string): NC.Primitive;
     }
 
     interface Validator {
         /**
-         * TODO Please add a comment.
+         * Validates the data at the specified row according to the validation rules.
+         * 
+         * @param {number} row - The row index to validate.
+         * @return {ND.ValidateResultObject} An object containing the validation results.
          */
         validate(row: number): ND.ValidateResultObject;
     }
@@ -1133,11 +1143,17 @@ declare namespace ND {
     interface DataSync {
         viewContext: NJS<HTMLElement[]>;
         /**
-         * TODO Please add a comment.
+         * Removes this DataSync instance from the data synchronization system.
+         * 
+         * @return {DataSync} The current DataSync instance for chaining.
          */
         remove(): DataSync;
         /**
-         * TODO Please add a comment.
+         * Notifies all observers about a data change at the specified row and key.
+         * 
+         * @param {number} row - The row index where the data changed.
+         * @param {string} key - The property name of the changed data.
+         * @return {DataSync} The current DataSync instance for chaining.
          */
         notify(row: number, key: string): DataSync;
     }

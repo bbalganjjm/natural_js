@@ -5,6 +5,30 @@ declare namespace NC {
         [key: string]: JSONValue;
     }
 
+    /**
+     * Represents an instance of the mask utility used for formatting values.
+     */
+    interface MaskInstance {
+        /**
+         * Sets a generic value for masking operations.
+         * 
+         * @param {string} _v - The value to be masked.
+         * @param {boolean} _d - A flag indicating whether to delete the last character.
+         * @return {string} The masked value.
+         */
+        setGeneric(_v: string, _d: boolean): string;
+
+        /**
+         * Sets a numeric value for masking based on the provided parameters.
+         * 
+         * @param {string} _v - The value to be masked.
+         * @param {"round" | "ceil" | "floor"} _p - The processing mode.
+         * @param {boolean} _d - A flag indicating whether to delete the last character.
+         * @return {string} The masked value.
+         */
+        setNumeric(_v: string, _p: "round" | "ceil" | "floor", _d: boolean): string;
+    }
+
     interface Date {
         obj: Date;
         format: string;

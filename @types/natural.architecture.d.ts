@@ -302,8 +302,24 @@ declare namespace NA {
     }
 
     interface Controller {
+        /**
+         * Creates a new Controller instance.
+         * 
+         * @param {NJS<HTMLElement[]>} obj - The context element to which the Controller will be applied.
+         * @param {NA.Objects.Controller.Object} contObj - The Controller object containing initialization and event handling logic.
+         * @return {NA.Objects.Controller.Object} The initialized Controller object.
+         */
         new(obj: NJS<HTMLElement[]>, contObj: NA.Objects.Controller.Object): NA.Objects.Controller.Object;
+
+        /**
+         * Initializes the Controller with transaction-related setup.
+         * 
+         * @param {NA.Objects.Controller.Object} cont - The Controller object to initialize.
+         * @param {NA.Request} request - The Request object associated with the Controller.
+         * @return {void} This method does not return a value.
+         */
         trInit(cont: NA.Objects.Controller.Object, request: NA.Request): void;
+
         /**
          * Aspect-oriented programming(AOP) processing class.
          *
@@ -312,9 +328,24 @@ declare namespace NA {
         aop: {
             pointcuts: {
                 regexp: {
+                    /**
+                     * Evaluates whether a function should be intercepted based on a regular expression pattern.
+                     * 
+                     * @param {RegExp | string} param - The pattern to match against function names.
+                     * @param {NA.Objects.Controller.Object} contFrag - The Controller object fragment.
+                     * @param {string} fnChain - The function chain to evaluate.
+                     * @return {boolean} True if the function should be intercepted, false otherwise.
+                     */
                     fn(param: RegExp | string, contFrag: NA.Objects.Controller.Object, fnChain: string): boolean;
                 };
             };
+
+            /**
+             * Wraps the Controller object with AOP functionality.
+             * 
+             * @param {NA.Objects.Controller.Object} cont - The Controller object to wrap.
+             * @return {void} This method does not return a value.
+             */
             wrap(cont: NA.Objects.Controller.Object): void;
         };
     }

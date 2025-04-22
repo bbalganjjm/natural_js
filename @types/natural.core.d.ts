@@ -793,7 +793,27 @@ declare class NC {
      * Provides utilities for processing JSON data.
      */
     static json: {
-        mapFromKeys(obj: NC.JSONObject | NC.JSONObject[]): NC.JSONObject | NC.JSONObject[];
+        /**
+         * Creates a new object or array of objects containing only the specified keys from the input object(s).
+         * 
+         * @param {NC.JSONObject | NC.JSONObject[]} obj - The object or array of objects to extract keys from.
+         * @param {...string} keys - The keys to include in the resulting object(s).
+         * @return {NC.JSONObject | NC.JSONObject[]} A new object or array of objects containing only the specified keys.
+         * 
+         * @example
+         * // Extract only the 'id' and 'name' properties from an object
+         * const result = N.json.mapFromKeys({ id: 1, name: 'John', age: 30 }, 'id', 'name');
+         * // result: { id: 1, name: 'John' }
+         * 
+         * @example
+         * // Extract only the 'id' and 'name' properties from an array of objects
+         * const result = N.json.mapFromKeys([
+         *   { id: 1, name: 'John', age: 30 },
+         *   { id: 2, name: 'Jane', age: 25 }
+         * ], 'id', 'name');
+         * // result: [{ id: 1, name: 'John' }, { id: 2, name: 'Jane' }]
+         */
+        mapFromKeys(obj: NC.JSONObject | NC.JSONObject[], ...keys: string[]): NC.JSONObject | NC.JSONObject[];
         /**
          * Merges two JSON arrays based on a specified key.
          *
@@ -881,20 +901,18 @@ declare class NC {
     };
     /**
      * Used in N.formatter to process user formats.
-     *
+     * 
+     * @class
      * @see http://www.pengoworks.com/workshop/js/mask/ Mask JavaScript API(dswitzer@pengoworks.com)
      */
     static mask: {
-        new(m: any): {
-            /**
-             * Sets a generic value for masking operations.
-             */
-            setGeneric(_v: string, _d: boolean): string;
-            /**
-             * Sets a numeric value for masking based on the provided parameters.
-             */
-            setNumeric(_v: string, _p: string, _d: boolean): string;
-        };
+        /**
+         * Creates a new mask instance with the specified format.
+         * 
+         * @param {string} m - The mask format to apply.
+         * @return {NC.MaskInstance} A new mask instance.
+         */
+        new(m: string): NC.MaskInstance;
     };
 }
 
