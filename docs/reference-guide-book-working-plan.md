@@ -12,16 +12,16 @@ Natural-JS의 모든 기능과 컴포넌트에 대한 상세한 가이드북을 
 ## 체크리스트
 
 ### 메인 페이지(docs/REFGUIDE.md)
-- [ ] https://bbalganjjm.github.io/natural_js/ 데이터 수집
+- [x] https://bbalganjjm.github.io/natural_js/ 데이터 수집
 
 ### 소개 페이지(docs/REFGUIDE.md)
-- [ ] https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/intr/intr0100.html 데이터 수집
+- [x] https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/intr/intr0100.html 데이터 수집
 
 ### API 문서 안내(docs/REFGUIDE.md)
-- [ ] refr0001 페이지 데이터 수집 (API 문서 안내)
+- [x] refr0001 페이지 데이터 수집 (API 문서 안내)
 
 ### 제한 및 팁(docs/REFGUIDE.md)
-- [ ] refr0601 페이지 데이터 수집 (제한 및 팁)
+- [x] refr0601 페이지 데이터 수집 (제한 및 팁)
 
 ### 레퍼런스 - Core API(docs/REFGUIDE-CORE.md)
 - [ ] refr0101 및 탭 페이지들 데이터 수집 (N() & N)
@@ -57,24 +57,25 @@ Natural-JS의 모든 기능과 컴포넌트에 대한 상세한 가이드북을 
 - [ ] refr0501 및 탭 페이지들 데이터 수집 (Notify)
 - [ ] refr0502 및 탭 페이지들 데이터 수집 (Documents)
 
-### 가이드 및 튜토리얼
+### 가이드 및 튜토리얼(docs/REFGUIDE-GETTINGSTARTED.md)
 - [ ] gtst로 시작하는 html 페이지들 데이터 수집
 
-### 예제
+### 예제(docs/REFGUIDE-EXAMPLES.md)
 - [ ] exap로 시작하는 html 페이지들 데이터 수집
 
-### 템플릿 가이드 및 샘플
+### 템플릿 가이드 및 샘플(docs/REFGUIDE-TEMPLATE.md)
 - [ ] template-guide 데이터 수집(빠짐없이 꼼꼼하게)
 - [ ] type으로 시작하는 html 페이지들 데이터 수집
 
 ### 문서 작성
-- [ ] docs/REFGUIDE.md 작성
+- [x] docs/REFGUIDE.md 작성
 - [ ] docs/REFGUIDE-CORE.md 작성
 - [ ] docs/REFGUIDE-ARCHITECTURE.md 작성
 - [ ] docs/REFGUIDE-DATA.md 작성
 - [ ] docs/REFGUIDE-UI.md 작성
 - [ ] docs/REFGUIDE-UI-{COMPONENT}.md 작성
 - [ ] docs/REFGUIDE-UI.Shell-{COMPONENT}.md 작성
+- [ ] docs/REFGUIDE-GETTINGSTARTED.md 작성
 - [ ] docs/REFGUIDE-EXAMPLES.md 작성
 - [ ] docs/REFGUIDE-TEMPLATE.md 작성
 - [ ] 모든 문서 상세 내용 추가 완료
