@@ -74,13 +74,13 @@
     //     "g-search-mcp"
     //   ]
     // },
-  //  "filesystem": {
-  //    "command": "npx",
-  //    "args": [
-  //      "-y",
-  //      "@modelcontextprotocol/server-filesystem",
-  //      "/Users/a11331/IdeaProjects/skcc-aikms-data/.vscode"
-  //    ]
-  //  }
+   "filesystem": {
+     "command": "npx",
+     "args": [
+       "-y",
+       "@modelcontextprotocol/server-filesystem",
+       "/Users/a11331/IdeaProjects/natural_js_pages"
+     ]
+   }
   }
 }
