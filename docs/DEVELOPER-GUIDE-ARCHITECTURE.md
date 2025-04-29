@@ -28,8 +28,17 @@ Natural-JS는 CVC(Controller-View-Communicator) 아키텍처 패턴을 기반으
 5. [Communication Filter](#communication-filter)
    - [개요](#communication-filter-개요)
    - [필터 객체의 기본 옵션 및 함수](#필터-객체의-기본-옵션-및-함수)
+     - [beforeInit](#필터-객체의-기본-옵션-및-함수)
+     - [afterInit](#필터-객체의-기본-옵션-및-함수)
+     - [beforeSend](#필터-객체의-기본-옵션-및-함수)
+     - [success](#필터-객체의-기본-옵션-및-함수)
+     - [error](#필터-객체의-기본-옵션-및-함수)
+     - [complete](#필터-객체의-기본-옵션-및-함수)
    - [예제](#communication-filter-예제)
 6. [Context](#context)
+   - [개요](#context-개요)
+   - [함수](#context-함수)
+   - [예제](#context-예제)
 
 ## Controller
 

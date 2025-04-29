@@ -1,5 +1,21 @@
 # Natural-JS Core 레퍼런스 가이드
 
+## 목차
+- [N() & N](#n--n)
+  - [개요](#개요)
+  - [jQuery selector 확장](#jquery-selector-확장)
+  - [jQuery plugin 확장 메서드](#jquery-plugin-확장-메서드)
+- [N 객체의 함수](#n-객체의-함수)
+- [N.gc 객체의 함수](#ngc-객체의-함수)
+- [N.string 객체의 함수](#nstring-객체의-함수)
+- [N.element 객체의 함수](#nelement-객체의-함수)
+- [N.date 객체의 함수](#ndate-객체의-함수)
+- [N.browser 객체의 함수](#nbrowser-객체의-함수)
+- [N.message 객체의 함수](#nmessage-객체의-함수)
+- [N.array 객체의 함수](#narray-객체의-함수)
+- [N.json 객체의 함수](#njson-객체의-함수)
+- [N.event 객체의 함수](#nevent-객체의-함수)
+
 ## N() & N
 
 ### 개요
@@ -167,60 +183,7 @@ Natural-JS는 탭이나 팝업 등의 블록 콘텐츠를 쉽게 제어하기 �
 
 인스턴스의 저장 위치가 별도로 명시되어 있지 않은 컴포넌트는 context 옵션으로 지정한 요소에 저장됩니다.
 
-#### N("selector").tpBind(event, handler)
-
-**Return**: jQuery object
-
-선택한 요소에 같은 이름의 이벤트 정의되어 있더라도 tpBind로 정의한 이벤트가 제일 먼저 실행되게 해 줍니다.
-기본적인 사용법은 jQuery().bind 메서드와 같습니다.
-
-- **event**: string - 이벤트 유형
-- **handler**: function - 이벤트 핸들러
-
-#### N("selector").vals([vals])
-
-**Return**: string|array|jQuery object
-
-select, select[multiple=multiple], input[type=radio], input[type=checkbox]와 같은 선택 요소의 선택된 값을 가져오거나 선택합니다.
-
-- vals 인수를 입력하지 않으면 선택한 값이 반환됩니다. 
-- vals 인수가 지정되면 입력한 값과 일치하는 선택 요소가 선택됩니다.
-- 하나만 선택하면 string 유형의 값이 하나만 반환되고 둘 이상인 경우 값이 배열로 반환됩니다.
-- checkbox의 경우 선택지가 1개만 있다면 Y/N 또는 1/0과 같이 여부를 결정하는 모드로 작동하게 됩니다.
-
-단일 선택의 표준 값이 Y/N 인지 1/0 인지 on/off 인지 설정은 natural.config.js의 `N.context.attr("core").sgChkdVal("체크 값")` 변수와 `N.context.attr("core").sgUnChkdVal("언체크 값")` 변수 값으로 설정할 수 있습니다.
-
-**vals**: array|string|function
-- 단일 값을 지정할 때는 문자열로 값을 지정하고 둘 이상의 선택지를 선택할 때는 배열에 문자열을 담아 값을 지정합니다.
-- function을 지정하면 선택된 선택지 요소 개수만큼 지정한 콜백 함수를 실행해 줍니다. 콜백 함수의 인수는 다음과 같습니다:
-  - this: 선택된 선택지 요소
-  - arguments[0]: 선택된 선택지 요소의 index
-  - arguments[1]: 선택된 선택지 요소
-
-#### N(array).remove_(idx, length)
-
-**Return**: jQuery object
-
-인수로 지정한 array의 요소를 제거합니다.
-
-- **idx**: number - 배열에서 제거할 요소의 Index
-- **length**: number - 제거할 배열 요소들의 개수
-
-#### N(selector).events([eventType[, namespace]])
-
-**Return**: object similar to array|array|undefined
-
-선택한 요소에 바인딩되어 있는 이벤트들을 반환합니다.
-
-- eventType 인수와 namespace 인수를 둘 다 입력하지 않으면 모든 이벤트들을 반환합니다.
-- namespace를 입력하지 않으면 지정한 eventType에 해당하는 이벤트들만 반환됩니다.
-- namespace 인수가 입력되면 배열 객체 타입으로 이벤트를 반환하고 그렇지 않은 경우에는 jQuery object 타입으로 이벤트들을 반환합니다. 
-- 바인딩되어 있는 이벤트가 없으면 undefined를 반환합니다.
-
-- **eventType**: string - 이벤트 유형
-- **namespace**: string - 이벤트 네임스페이스
-
-### N 객체의 함수
+## N 객체의 함수
 
 N 객체의 코어 및 유틸리티 함수입니다.
 
@@ -479,7 +442,7 @@ $.when.apply($, defers).done(function(arguments[0], arguments[1], arguments[2], 
 });
 ```
 
-### N.gc 객체의 함수
+## N.gc 객체의 함수
 
 N.gc는 Natural-JS의 가비지 컬렉션 관련 유틸리티 함수들을 모아놓은 객체입니다.
 
@@ -501,15 +464,7 @@ Natural-JS의 컴포넌트와 라이브러리에서 사용되는 요소와 이�
 
 SPA(Single Page Application)로 사이트를 제작할 때 브라우저의 메모리가 페이지를 열 때마다 증가한다면 어딘가에서 메모리 누수가 발생하는 것입니다. N.comm에서 자동으로 포착할 수 없는 부분을 파악하여 N.gc.full()을 실행해 주면 해당 현상이 개선될 수 있습니다.
 
-#### N.gc.ds()
-
-**Return**: undefined
-
-N.ds의 observable 들에서 가비지 인스턴스를 제거합니다.
-
-N.comm으로 Config(natural.config.js)의 N.context.attr("architecture").page.context 영역이 아닌 곳에 페이지를 불러올 경우 N.gc.ds()가 자동으로 실행됩니다.
-
-### N.string 객체의 함수
+## N.string 객체의 함수
 
 N.string은 문자열 관련 유틸리티 함수들을 모아놓은 객체입니다.
 
@@ -653,7 +608,7 @@ N.string.trim은 String.prototype.trim 메서드를 그대로 사용합니다.
 - **str**: string|null|undefined - 공백을 제거할 대상 문자열을 입력합니다.
 - **val**: string - 반환될 문자열을 입력합니다.
 
-### N.element 객체의 함수
+## N.element 객체의 함수
 
 N.element는 HTML 요소 관련 유틸리티 함수들을 모아놓은 객체입니다.
 
@@ -686,7 +641,7 @@ var maxZindex = N.element.maxZindex($("div"));
 
 - **ele**: jQuery object - 대상 요소들을 jQuery object를 입력합니다. 입력하지 않으면 $("div, span, ul, p, nav, article, section")가 기본 값으로 지정됩니다.
 
-### N.date 객체의 함수
+## N.date 객체의 함수
 
 N.date은 날짜 제어 관련 유틸리티 함수들을 모아놓은 객체입니다.
 
@@ -799,7 +754,7 @@ tsNum 인수를 입력하지 않으면 현재 날짜와 시간으로 변환합�
 
 - **tsNum**: number - date 객체로 변환할 Timestamp를 입력합니다.
 
-### N.browser 객체의 함수
+## N.browser 객체의 함수
 
 N.browser는 browser 관련 유틸리티 함수들을 모아놓은 객체입니다.
 
@@ -858,7 +813,7 @@ N.browser는 browser 관련 유틸리티 함수들을 모아놓은 객체입니�
 
 브라우저 스크롤바의 넓이를 반환합니다.
 
-### N.message 객체의 함수
+## N.message 객체의 함수
 
 N.message는 다국어 메시지 처리 관련 유틸리티 함수들을 모아놓은 객체입니다.
 
@@ -893,7 +848,7 @@ N.message는 다국어 메시지 처리 관련 유틸리티 함수들을 모아�
 - **key**: string - 메시지 프로퍼티명.
 - **vars**: array - 메시지의 변수를 입력한 값으로 치환해 줍니다. 메시지에 선언된 {index}와 같은 변수가 vars 옵션으로 설정 한 array의 index에 해당하는 값으로 치환됩니다.
 
-### N.array 객체의 함수
+## N.array 객체의 함수
 
 N.array는 배열 관련 유틸리티 함수들을 모아놓은 객체입니다.
 
@@ -910,7 +865,7 @@ array에 object가 담겨 있을 경우 두 번째 인수로 오브젝트의 프
 - **arr**: array - 중복을 제거할 array를 입력합니다.
 - **key**: string - array에 object가 저장되어 있을 경우 중복된 요소를 제거할 기준 프로퍼티명을 입력합니다.
 
-### N.json 객체의 함수
+## N.json 객체의 함수
 
 N.json은 json object 관련 유틸리티 함수들을 모아놓은 객체입니다.
 
@@ -939,7 +894,7 @@ json object를 보기 좋게 formatting 해 줍니다.
 - **obj**: json object array|json object - json object 나 json object가 저장되어 있는 array를 입력합니다.
 - **indent**: number - 들여 쓰기 될 공백 수를 입력합니다.
 
-### N.event 객체의 함수
+## N.event 객체의 함수
 
 N.event는 event 관련 유틸리티 함수들을 모아놓은 객체입니다.
 
