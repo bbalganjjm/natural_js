@@ -11,72 +11,72 @@ Natural-JS의 모든 기능과 컴포넌트에 대한 상세한 가이드북을 
 
 ## 체크리스트
 
-### 메인 페이지
+### 메인 페이지(docs/REFGUIDE.md)
 - [ ] https://bbalganjjm.github.io/natural_js/ 데이터 수집
 
-### 소개 페이지
+### 소개 페이지(docs/REFGUIDE.md)
 - [ ] https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/intr/intr0100.html 데이터 수집
 
-### 레퍼런스 - Core API
+### API 문서 안내(docs/REFGUIDE.md)
+- [ ] refr0001 페이지 데이터 수집 (API 문서 안내)
+
+### 제한 및 팁(docs/REFGUIDE.md)
 - [ ] refr0601 페이지 데이터 수집 (제한 및 팁)
+
+### 레퍼런스 - Core API(docs/REFGUIDE-CORE.md)
 - [ ] refr0101 및 탭 페이지들 데이터 수집 (N() & N)
 - [ ] refr0102 및 탭 페이지들 데이터 수집 (Config)
 
-### 레퍼런스 - 데이터 모듈
-- [ ] refr0201 및 탭 페이지들 데이터 수집 (Formatter)
-- [ ] refr0202 및 탭 페이지들 데이터 수집 (Validator)
-- [ ] refr0203 및 탭 페이지들 데이터 수집 (Natural-DATA Library)
-- [ ] refr0204 및 탭 페이지들 데이터 수집
-- [ ] refr0205 및 탭 페이지들 데이터 수집
-- [ ] refr0206 및 탭 페이지들 데이터 수집
+### 레퍼런스 - 아키텍처(docs/REFGUIDE-ARCHITECTURE.md)
+- [ ] refr0201 및 탭 페이지들 데이터 수집 (Controller)
+- [ ] refr0202 및 탭 페이지들 데이터 수집 (AOP)
+- [ ] refr0203 및 탭 페이지들 데이터 수집 (Communicator)
+- [ ] refr0204 및 탭 페이지들 데이터 수집 (Communicator.request)
+- [ ] refr0205 및 탭 페이지들 데이터 수집 (Communication Filter)
+- [ ] refr0206 및 탭 페이지들 데이터 수집 (Context)
 
-### 레퍼런스 - 아키텍처
-- [ ] refr0701 및 탭 페이지들 데이터 수집 (Controller)
-- [ ] refr0702 및 탭 페이지들 데이터 수집 (AOP)
-- [ ] refr0703 및 탭 페이지들 데이터 수집 (Communicator)
-- [ ] refr0704 및 탭 페이지들 데이터 수집 (Communication Filter)
-- [ ] refr0705 및 탭 페이지들 데이터 수집 (Context)
+### 레퍼런스 - 데이터 모듈(docs/REFGUIDE-DATA.md)
+- [ ] refr0301 및 탭 페이지들 데이터 수집 (Formatter)
+- [ ] refr0302 및 탭 페이지들 데이터 수집 (Validator)
+- [ ] refr0303 및 탭 페이지들 데이터 수집 (Natural-DATA Library)
 
-### 레퍼런스 - UI 컴포넌트
-- [ ] refr0301 및 탭 페이지들 데이터 수집 (Alert)
-- [ ] refr0302 및 탭 페이지들 데이터 수집 (Button)
-- [ ] refr0303 및 탭 페이지들 데이터 수집 (Datepicker)
-- [ ] refr0304 및 탭 페이지들 데이터 수집 (Popup)
-- [ ] refr0305 및 탭 페이지들 데이터 수집 (Tab)
-- [ ] refr0306 및 탭 페이지들 데이터 수집 (Select)
+### 레퍼런스 - UI 컴포넌트(docs/REFGUIDE-UI-{COMPONENT}.md)
+- [ ] refr0401 및 탭 페이지들 데이터 수집 (Alert)
+- [ ] refr0402 및 탭 페이지들 데이터 수집 (Button)
+- [ ] refr0403 및 탭 페이지들 데이터 수집 (Datepicker)
+- [ ] refr0404 및 탭 페이지들 데이터 수집 (Popup)
+- [ ] refr0405 및 탭 페이지들 데이터 수집 (Tab)
+- [ ] refr0406, refr0701 및 탭 페이지들 데이터 수집 (Select)
+- [ ] refr0407 및 탭 페이지들 데이터 수집 (Form)
+- [ ] refr0408 및 탭 페이지들 데이터 수집 (List)
+- [ ] refr0409 및 탭 페이지들 데이터 수집 (Grid)
+- [ ] refr0410 및 탭 페이지들 데이터 수집 (Pagination)
+- [ ] refr0411 및 탭 페이지들 데이터 수집 (Tree)
 
-### 레퍼런스 - 데이터 표현 컴포넌트
-- [ ] refr0401 및 탭 페이지들 데이터 수집 (Form)
-- [ ] refr0402 및 탭 페이지들 데이터 수집 (List)
-- [ ] refr0403 및 탭 페이지들 데이터 수집 (Grid)
-- [ ] refr0404 및 탭 페이지들 데이터 수집 (Pagination)
-- [ ] refr0405 및 탭 페이지들 데이터 수집 (Tree)
-
-### 레퍼런스 - Shell 컴포넌트
+### 레퍼런스 - UI Shell 컴포넌트(docs/REFGUIDE-UI.Shell-{COMPONENT}.md)
 - [ ] refr0501 및 탭 페이지들 데이터 수집 (Notify)
 - [ ] refr0502 및 탭 페이지들 데이터 수집 (Documents)
 
-### 레퍼런스 - 추가 컴포넌트
-- [ ] refr0407-refr0411 및 해당 탭 페이지들 데이터 수집
-
 ### 가이드 및 튜토리얼
-- [ ] gtst0100-gtst0300 페이지들 데이터 수집
+- [ ] gtst로 시작하는 html 페이지들 데이터 수집
 
 ### 예제
-
-- [ ] exap0100-exap0900 페이지들 데이터 수집
+- [ ] exap로 시작하는 html 페이지들 데이터 수집
 
 ### 템플릿 가이드 및 샘플
-- [ ] template-guide 데이터 수집
-- [ ] type0101-type0701 템플릿 샘플 데이터 수집
+- [ ] template-guide 데이터 수집(빠짐없이 꼼꼼하게)
+- [ ] type으로 시작하는 html 페이지들 데이터 수집
 
 ### 문서 작성
-- [ ] docs/COOKBOOK-Core.md 작성
-- [ ] docs/COOKBOOK-Data.md 작성
-- [ ] docs/COOKBOOK-UI-Components.md 작성
-- [ ] docs/COOKBOOK-Architecture.md 작성
-- [ ] docs/COOKBOOK-Templates.md 작성
-- [ ] docs/COOKBOOK-Examples.md 작성
+- [ ] docs/REFGUIDE.md 작성
+- [ ] docs/REFGUIDE-CORE.md 작성
+- [ ] docs/REFGUIDE-ARCHITECTURE.md 작성
+- [ ] docs/REFGUIDE-DATA.md 작성
+- [ ] docs/REFGUIDE-UI.md 작성
+- [ ] docs/REFGUIDE-UI-{COMPONENT}.md 작성
+- [ ] docs/REFGUIDE-UI.Shell-{COMPONENT}.md 작성
+- [ ] docs/REFGUIDE-EXAMPLES.md 작성
+- [ ] docs/REFGUIDE-TEMPLATE.md 작성
 - [ ] 모든 문서 상세 내용 추가 완료
 
 ## 작업 완료 확인
