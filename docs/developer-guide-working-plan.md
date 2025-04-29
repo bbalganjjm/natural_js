@@ -28,12 +28,12 @@ Natural-JS의 모든 기능과 컴포넌트에 대한 상세한 가이드북을 
 - [x] refr0102 및 탭 페이지들 데이터 수집 (Config)
 
 ### 레퍼런스 - 아키텍처(docs/DEVELOPER-GUIDE-ARCHITECTURE.md)
-- [ ] refr0201 및 탭 페이지들 데이터 수집 (Controller)
-- [ ] refr0202 및 탭 페이지들 데이터 수집 (AOP)
-- [ ] refr0203 및 탭 페이지들 데이터 수집 (Communicator)
-- [ ] refr0204 및 탭 페이지들 데이터 수집 (Communicator.request)
-- [ ] refr0205 및 탭 페이지들 데이터 수집 (Communication Filter)
-- [ ] refr0206 및 탭 페이지들 데이터 수집 (Context)
+- [x] refr0201 및 탭 페이지들 데이터 수집 (Controller)
+- [x] refr0202 및 탭 페이지들 데이터 수집 (AOP)
+- [x] refr0203 및 탭 페이지들 데이터 수집 (Communicator)
+- [x] refr0204 및 탭 페이지들 데이터 수집 (Communicator.request)
+- [x] refr0205 및 탭 페이지들 데이터 수집 (Communication Filter)
+- [x] refr0206 및 탭 페이지들 데이터 수집 (Context)
 
 ### 레퍼런스 - 데이터 모듈(docs/DEVELOPER-GUIDE-DATA.md)
 - [ ] refr0301 및 탭 페이지들 데이터 수집 (Formatter)
@@ -69,8 +69,8 @@ Natural-JS의 모든 기능과 컴포넌트에 대한 상세한 가이드북을 
 
 ### 문서 작성
 - [x] docs/DEVELOPER-GUIDE.md 작성
-- [ ] docs/DEVELOPER-GUIDE-CORE.md 작성
-- [ ] docs/DEVELOPER-GUIDE-ARCHITECTURE.md 작성
+- [x] docs/DEVELOPER-GUIDE-CORE.md 작성
+- [x] docs/DEVELOPER-GUIDE-ARCHITECTURE.md 작성
 - [ ] docs/DEVELOPER-GUIDE-DATA.md 작성
 - [ ] docs/DEVELOPER-GUIDE-UI.md 작성
 - [ ] docs/DEVELOPER-GUIDE-UI-{COMPONENT}.md 작성
