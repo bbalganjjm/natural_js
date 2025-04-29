@@ -11,17 +11,14 @@ Natural-JS의 모든 기능과 컴포넌트에 대한 상세한 가이드북을 
 
 ## 체크리스트
 
-### 기본 설정
-- [x] Playwright MCP 서버 설정
-
 ### 메인 페이지
-- [x] https://bbalganjjm.github.io/natural_js/ 데이터 수집
+- [ ] https://bbalganjjm.github.io/natural_js/ 데이터 수집
 
 ### 소개 페이지
-- [x] https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/intr/intr0100.html 데이터 수집
+- [ ] https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/intr/intr0100.html 데이터 수집
 
 ### 레퍼런스 - Core API
-- [x] refr0601 페이지 데이터 수집 (제한 및 팁)
+- [ ] refr0601 페이지 데이터 수집 (제한 및 팁)
 - [ ] refr0101 및 탭 페이지들 데이터 수집 (N() & N)
 - [ ] refr0102 및 탭 페이지들 데이터 수집 (Config)
 
@@ -74,12 +71,12 @@ Natural-JS의 모든 기능과 컴포넌트에 대한 상세한 가이드북을 
 - [ ] type0101-type0701 템플릿 샘플 데이터 수집
 
 ### 문서 작성
-- [x] COOKBOOK-Core.md 작성 (기본 구조)
-- [x] COOKBOOK-Data.md 작성 (기본 구조)
-- [x] COOKBOOK-UI-Components.md 작성 (기본 구조)
-- [x] COOKBOOK-Architecture.md 작성 (기본 구조)
-- [x] COOKBOOK-Templates.md 작성 (기본 구조)
-- [x] COOKBOOK-Examples.md 작성 (기본 구조)
+- [ ] docs/COOKBOOK-Core.md 작성
+- [ ] docs/COOKBOOK-Data.md 작성
+- [ ] docs/COOKBOOK-UI-Components.md 작성
+- [ ] docs/COOKBOOK-Architecture.md 작성
+- [ ] docs/COOKBOOK-Templates.md 작성
+- [ ] docs/COOKBOOK-Examples.md 작성
 - [ ] 모든 문서 상세 내용 추가 완료
 
 ## 작업 완료 확인
