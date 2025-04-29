@@ -268,7 +268,7 @@ Natural-JS 의 사이트 맵 URL 다음과 같아.
 
 ===
 
-Natural-JS 가이드북을 작성한다.
+Natural-JS 개발자 가이드북을 작성한다.
 1. 이 작업의 계획은 docs/developer-guide-working-plan.md 로 실행계획과 체크리스트를 생성하고 이미 생성되어 있다면 하나하나 체크하면서 작업을 누락없이 일관성있게 수행한다.
 2. 작업이 끝날때마다 docs/developer-guide-working-plan.md 파일에 끝낸 작업에 대해서 체크한다.
 1. playwright mcp server 를 사용해서 하나도 빠짐없이 세트별로(===로 구분) 모든 URL을 방문해서 자료를 수집해서 docs/DEVELOPER-GUIDE-{클래스나 컴포넌트, 오브젝트 명}.md 파일에 기록한다.
