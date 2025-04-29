@@ -5,6 +5,7 @@ Icon?
 Thumbs.db
 .settings/
 .idea/
+.vscode/
 
 # node
 node_modules/
