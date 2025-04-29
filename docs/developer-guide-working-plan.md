@@ -11,23 +11,23 @@ Natural-JS의 모든 기능과 컴포넌트에 대한 상세한 가이드북을 
 
 ## 체크리스트
 
-### 메인 페이지(docs/REFGUIDE.md)
+### 메인 페이지(docs/DEVELOPER-GUIDE.md)
 - [x] https://bbalganjjm.github.io/natural_js/ 데이터 수집
 
-### 소개 페이지(docs/REFGUIDE.md)
+### 소개 페이지(docs/DEVELOPER-GUIDE.md)
 - [x] https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/intr/intr0100.html 데이터 수집
 
-### API 문서 안내(docs/REFGUIDE.md)
+### API 문서 안내(docs/DEVELOPER-GUIDE.md)
 - [x] refr0001 페이지 데이터 수집 (API 문서 안내)
 
-### 제한 및 팁(docs/REFGUIDE.md)
+### 제한 및 팁(docs/DEVELOPER-GUIDE.md)
 - [x] refr0601 페이지 데이터 수집 (제한 및 팁)
 
-### 레퍼런스 - Core API(docs/REFGUIDE-CORE.md)
-- [ ] refr0101 및 탭 페이지들 데이터 수집 (N() & N)
-- [ ] refr0102 및 탭 페이지들 데이터 수집 (Config)
+### 레퍼런스 - Core API(docs/DEVELOPER-GUIDE-CORE.md)
+- [x] refr0101 및 탭 페이지들 데이터 수집 (N() & N)
+- [x] refr0102 및 탭 페이지들 데이터 수집 (Config)
 
-### 레퍼런스 - 아키텍처(docs/REFGUIDE-ARCHITECTURE.md)
+### 레퍼런스 - 아키텍처(docs/DEVELOPER-GUIDE-ARCHITECTURE.md)
 - [ ] refr0201 및 탭 페이지들 데이터 수집 (Controller)
 - [ ] refr0202 및 탭 페이지들 데이터 수집 (AOP)
 - [ ] refr0203 및 탭 페이지들 데이터 수집 (Communicator)
@@ -35,12 +35,12 @@ Natural-JS의 모든 기능과 컴포넌트에 대한 상세한 가이드북을 
 - [ ] refr0205 및 탭 페이지들 데이터 수집 (Communication Filter)
 - [ ] refr0206 및 탭 페이지들 데이터 수집 (Context)
 
-### 레퍼런스 - 데이터 모듈(docs/REFGUIDE-DATA.md)
+### 레퍼런스 - 데이터 모듈(docs/DEVELOPER-GUIDE-DATA.md)
 - [ ] refr0301 및 탭 페이지들 데이터 수집 (Formatter)
 - [ ] refr0302 및 탭 페이지들 데이터 수집 (Validator)
 - [ ] refr0303 및 탭 페이지들 데이터 수집 (Natural-DATA Library)
 
-### 레퍼런스 - UI 컴포넌트(docs/REFGUIDE-UI-{COMPONENT}.md)
+### 레퍼런스 - UI 컴포넌트(docs/DEVELOPER-GUIDE-UI-{COMPONENT}.md)
 - [ ] refr0401 및 탭 페이지들 데이터 수집 (Alert)
 - [ ] refr0402 및 탭 페이지들 데이터 수집 (Button)
 - [ ] refr0403 및 탭 페이지들 데이터 수집 (Datepicker)
@@ -53,31 +53,31 @@ Natural-JS의 모든 기능과 컴포넌트에 대한 상세한 가이드북을 
 - [ ] refr0410 및 탭 페이지들 데이터 수집 (Pagination)
 - [ ] refr0411 및 탭 페이지들 데이터 수집 (Tree)
 
-### 레퍼런스 - UI Shell 컴포넌트(docs/REFGUIDE-UI.Shell-{COMPONENT}.md)
+### 레퍼런스 - UI Shell 컴포넌트(docs/DEVELOPER-GUIDE-UI.Shell-{COMPONENT}.md)
 - [ ] refr0501 및 탭 페이지들 데이터 수집 (Notify)
 - [ ] refr0502 및 탭 페이지들 데이터 수집 (Documents)
 
-### 가이드 및 튜토리얼(docs/REFGUIDE-GETTINGSTARTED.md)
+### 가이드 및 튜토리얼(docs/DEVELOPER-GUIDE-GETTINGSTARTED.md)
 - [ ] gtst로 시작하는 html 페이지들 데이터 수집
 
-### 예제(docs/REFGUIDE-EXAMPLES.md)
+### 예제(docs/DEVELOPER-GUIDE-EXAMPLES.md)
 - [ ] exap로 시작하는 html 페이지들 데이터 수집
 
-### 템플릿 가이드 및 샘플(docs/REFGUIDE-TEMPLATE.md)
+### 템플릿 가이드 및 샘플(docs/DEVELOPER-GUIDE-TEMPLATE.md)
 - [ ] template-guide 데이터 수집(빠짐없이 꼼꼼하게)
 - [ ] type으로 시작하는 html 페이지들 데이터 수집
 
 ### 문서 작성
-- [x] docs/REFGUIDE.md 작성
-- [ ] docs/REFGUIDE-CORE.md 작성
-- [ ] docs/REFGUIDE-ARCHITECTURE.md 작성
-- [ ] docs/REFGUIDE-DATA.md 작성
-- [ ] docs/REFGUIDE-UI.md 작성
-- [ ] docs/REFGUIDE-UI-{COMPONENT}.md 작성
-- [ ] docs/REFGUIDE-UI.Shell-{COMPONENT}.md 작성
-- [ ] docs/REFGUIDE-GETTINGSTARTED.md 작성
-- [ ] docs/REFGUIDE-EXAMPLES.md 작성
-- [ ] docs/REFGUIDE-TEMPLATE.md 작성
+- [x] docs/DEVELOPER-GUIDE.md 작성
+- [ ] docs/DEVELOPER-GUIDE-CORE.md 작성
+- [ ] docs/DEVELOPER-GUIDE-ARCHITECTURE.md 작성
+- [ ] docs/DEVELOPER-GUIDE-DATA.md 작성
+- [ ] docs/DEVELOPER-GUIDE-UI.md 작성
+- [ ] docs/DEVELOPER-GUIDE-UI-{COMPONENT}.md 작성
+- [ ] docs/DEVELOPER-GUIDE-UI.Shell-{COMPONENT}.md 작성
+- [ ] docs/DEVELOPER-GUIDE-GETTINGSTARTED.md 작성
+- [ ] docs/DEVELOPER-GUIDE-EXAMPLES.md 작성
+- [ ] docs/DEVELOPER-GUIDE-TEMPLATE.md 작성
 - [ ] 모든 문서 상세 내용 추가 완료
 
 ## 작업 완료 확인
