@@ -1,0 +1,86 @@
+{
+  "servers": {
+    // "time": {
+    //   "command": "uvx",
+    //   "args": [
+    //     "mcp-server-time",
+    //     "--local-timezone",
+    //     "Asia/Seoul"
+    //   ]
+    // },
+    // "github": {
+    //   "command": "npx",
+    //   "args": [
+    //     "-y",
+    //     "@modelcontextprotocol/server-github"
+    //   ],
+    //   "env": {
+    //     "GITHUB_PERSONAL_ACCESS_TOKEN": ""
+    //   }
+    // },
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@executeautomation/playwright-mcp-server"
+      ]
+    },
+    // "terminal": {
+    //   "command": "npx",
+    //   "args": [
+    //     "-y",
+    //     "@dillip285/mcp-terminal"
+    //   ],
+    //   "config": {
+    //     "allowedCommands": [
+    //       "npm",
+    //       "npx",
+    //       "node",
+    //       "git",
+    //       "python",
+    //       "pip",
+    //       "pipx",
+    //       "pipenv",
+    //       "poetry",
+    //       "pytest",
+    //       "tox",
+    //       "flake8",
+    //       "pylint",
+    //       "black",
+    //       "isort",
+    //       "mypy",
+    //       "coverage",
+    //       "cProfile",
+    //       "pyinstrument",
+    //       "ab",
+    //       "wrk",
+    //       "siege",
+    //       "locust",
+    //       "k6",
+    //       "hey",
+    //       "pytest-benchmark",
+    //       "curl",
+    //       "http",
+    //       "ls",
+    //       "dir"
+    //     ],
+    //     "defaultTimeout": 30000
+    //   }
+    // },
+    // "googleSearch": {
+    //   "command": "npx",
+    //   "args": [
+    //     "-y",
+    //     "g-search-mcp"
+    //   ]
+    // },
+  //  "filesystem": {
+  //    "command": "npx",
+  //    "args": [
+  //      "-y",
+  //      "@modelcontextprotocol/server-filesystem",
+  //      "/Users/a11331/IdeaProjects/skcc-aikms-data/.vscode"
+  //    ]
+  //  }
+  }
+}
