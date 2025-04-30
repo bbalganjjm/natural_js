@@ -40,7 +40,7 @@ Natural-JS의 모든 기능과 컴포넌트에 대한 상세한 가이드북을 
 - [x] refr0302 및 탭 페이지들 데이터 수집 (Validator)
 - [x] refr0303 및 탭 페이지들 데이터 수집 (Natural-DATA Library)
 
-### 레퍼런스 - UI 컴포넌트(docs/DEVELOPER-GUIDE-UI-{COMPONENT}.md)
+### 레퍼런스 - UI 컴포넌트(docs/DEVELOPER-GUIDE-UI-{COMPONENT}.md)({COMPONENT}은 컴포넌트 이름으로 대체됨)
 - [ ] refr0401 및 탭 페이지들 데이터 수집 (Alert)
 - [ ] refr0402 및 탭 페이지들 데이터 수집 (Button)
 - [ ] refr0403 및 탭 페이지들 데이터 수집 (Datepicker)
@@ -53,7 +53,7 @@ Natural-JS의 모든 기능과 컴포넌트에 대한 상세한 가이드북을 
 - [ ] refr0410 및 탭 페이지들 데이터 수집 (Pagination)
 - [ ] refr0411 및 탭 페이지들 데이터 수집 (Tree)
 
-### 레퍼런스 - UI Shell 컴포넌트(docs/DEVELOPER-GUIDE-UI.Shell-{COMPONENT}.md)
+### 레퍼런스 - UI Shell 컴포넌트(docs/DEVELOPER-GUIDE-UI.Shell-{COMPONENT}.md)({COMPONENT}은 컴포넌트 이름으로 대체됨)
 - [ ] refr0501 및 탭 페이지들 데이터 수집 (Notify)
 - [ ] refr0502 및 탭 페이지들 데이터 수집 (Documents)
 
@@ -72,7 +72,6 @@ Natural-JS의 모든 기능과 컴포넌트에 대한 상세한 가이드북을 
 - [x] docs/DEVELOPER-GUIDE-CORE.md 작성
 - [x] docs/DEVELOPER-GUIDE-ARCHITECTURE.md 작성
 - [x] docs/DEVELOPER-GUIDE-DATA.md 작성
-- [ ] docs/DEVELOPER-GUIDE-UI.md 작성
 - [ ] docs/DEVELOPER-GUIDE-UI-{COMPONENT}.md 작성
 - [ ] docs/DEVELOPER-GUIDE-UI.Shell-{COMPONENT}.md 작성
 - [ ] docs/DEVELOPER-GUIDE-GETTINGSTARTED.md 작성
