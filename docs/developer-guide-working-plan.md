@@ -38,7 +38,7 @@ Natural-JS의 모든 기능과 컴포넌트에 대한 상세한 가이드북을 
 ### 레퍼런스 - 데이터 모듈(docs/DEVELOPER-GUIDE-DATA.md)
 - [x] refr0301 및 탭 페이지들 데이터 수집 (Formatter)
 - [x] refr0302 및 탭 페이지들 데이터 수집 (Validator)
-- [ ] refr0303 및 탭 페이지들 데이터 수집 (Natural-DATA Library)
+- [x] refr0303 및 탭 페이지들 데이터 수집 (Natural-DATA Library)
 
 ### 레퍼런스 - UI 컴포넌트(docs/DEVELOPER-GUIDE-UI-{COMPONENT}.md)({COMPONENT}은 컴포넌트 이름으로 대체됨)
 - [ ] refr0401 및 탭 페이지들 데이터 수집 (Alert)
@@ -71,7 +71,7 @@ Natural-JS의 모든 기능과 컴포넌트에 대한 상세한 가이드북을 
 - [x] docs/DEVELOPER-GUIDE.md 작성
 - [x] docs/DEVELOPER-GUIDE-CORE.md 작성
 - [x] docs/DEVELOPER-GUIDE-ARCHITECTURE.md 작성
-- [ ] docs/DEVELOPER-GUIDE-DATA.md 작성
+- [x] docs/DEVELOPER-GUIDE-DATA.md 작성
 - [ ] docs/DEVELOPER-GUIDE-UI-{COMPONENT}.md 작성
 - [ ] docs/DEVELOPER-GUIDE-UI.Shell-{COMPONENT}.md 작성
 - [ ] docs/DEVELOPER-GUIDE-GETTINGSTARTED.md 작성

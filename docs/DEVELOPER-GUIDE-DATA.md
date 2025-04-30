@@ -340,4 +340,217 @@ var validator = N(data).validator(rules|context);
 
 ## Natural-DATA 라이브러리
 
-(Natural-DATA Library 정보가 수집되면 추가될 예정입니다.)
+<a name="natural-data-라이브러리-개요"></a>
+### 개요
+
+Natural-DATA 라이브러리는 JSON 객체 배열 형태의 데이터를 정렬, 필터링, 가공하는 메소드와 기능을 제공합니다. 이 라이브러리를 통해 클라이언트 사이드에서 데이터를 효율적으로 조작할 수 있습니다.
+
+<a name="natural-data-라이브러리-메소드"></a>
+### 메소드
+
+#### N.data.filter
+
+지정된 조건에 일치하는 데이터를 추출합니다.
+
+```javascript
+var filteredData = N.data.filter(data, condition);
+```
+
+| 인자 | 타입 | 반환값 | 설명 |
+|------|------|--------|------|
+| data | json object array | N/A | 필터링할 데이터 |
+| condition | function\|string | N/A | 필터링 조건을 지정합니다. |
+
+조건을 지정하는 방법은 두 가지가 있습니다:
+
+1. **함수를 인자로 지정하는 경우**:
+   함수에서 true를 반환하는 행만 필터링됩니다.
+
+   ```javascript
+   var fData = N.data.filter([
+       { name : "John", age : 18 },
+       { name : "Mike", age : 16 },
+       { name : "Mike", age : 14 }
+   ], function(item) {
+       return item.name === "Mike" && item.age === 16;
+   });
+
+   console.log(fData); // [{ name : "Mike", age : 16 }]
+   ```
+
+2. **문자열 조건을 인자로 지정하는 경우**:
+   조건 문자열과 일치하는 행만 필터링됩니다.
+
+   ```javascript
+   var fData = N.data.filter([
+       { name : "John", age : 18 },
+       { name : "Mike", age : 16 },
+       { name : "Mike", age : 14 }
+   ], 'name === "Mike"');
+
+   console.log(fData); // [{ name : "Mike", age : 16 }, { name : "Mike", age : 14 }]
+   ```
+
+**참고:**
+- 함수로 조건을 처리하는 것이 문자열로 조건을 지정하는 것보다 빠릅니다.
+- 문자열로 조건을 지정하는 방식은 AND(&&)와 OR(||) 표현식을 지원하지 않으며, 단일 조건식만 사용할 수 있습니다.
+
+#### N.data.sort
+
+지정된 "key" 인자 값을 기준으로 데이터를 정렬합니다.
+
+```javascript
+var sortedData = N.data.sort(data, key, reverse);
+```
+
+| 인자 | 타입 | 반환값 | 설명 |
+|------|------|--------|------|
+| data | json object array | json object array | 정렬할 데이터 |
+| key | string | N/A | 정렬 기준이 될 객체의 속성명 |
+| reverse | boolean | N/A | true로 설정하면 내림차순으로 정렬됩니다. |
+
+#### N(data).datafilter
+
+jQuery 플러그인 메소드로 N.data.filter 함수를 실행합니다.
+
+```javascript
+var filteredData = N(data).datafilter(condition);
+```
+
+N() 함수의 첫 번째 인자는 새로운 N.data.filter 생성자의 첫 번째 인자로 설정됩니다.
+
+| 인자 | 타입 | 반환값 | 설명 |
+|------|------|--------|------|
+| condition | function\|string | jQuery object[json object] | N.data.filter의 condition 인자와 동일합니다. |
+
+#### N(data).datasort
+
+jQuery 플러그인 메소드로 N.data.sort 함수를 실행합니다.
+
+```javascript
+var sortedData = N(data).datasort(condition);
+```
+
+N() 함수의 첫 번째 인자는 새로운 N.data.sort 생성자의 첫 번째 인자로 설정됩니다.
+
+| 인자 | 타입 | 반환값 | 설명 |
+|------|------|--------|------|
+| key | string | jQuery object[json object] | N.data.sort의 key 인자와 동일합니다. |
+| reverse | boolean | N/A | N.data.sort의 reverse 인자와 동일합니다. |
+
+<a name="natural-data-라이브러리-사용-예제"></a>
+### 사용 예제
+
+#### 1. 데이터 필터링 예제
+
+```javascript
+// 샘플 데이터
+var users = [
+    { id: 1, name: "John", age: 28, active: true },
+    { id: 2, name: "Mike", age: 32, active: false },
+    { id: 3, name: "Sarah", age: 25, active: true },
+    { id: 4, name: "David", age: 35, active: true }
+];
+
+// 함수를 사용한 필터링
+var activeUsers = N.data.filter(users, function(user) {
+    return user.active === true && user.age < 30;
+});
+console.log(activeUsers); // [{ id: 1, name: "John", age: 28, active: true }, { id: 3, name: "Sarah", age: 25, active: true }]
+
+// 문자열을 사용한 필터링
+var userNamedMike = N.data.filter(users, 'name === "Mike"');
+console.log(userNamedMike); // [{ id: 2, name: "Mike", age: 32, active: false }]
+
+// jQuery 플러그인 메소드 사용
+var activeUsersJQuery = N(users).datafilter(function(user) {
+    return user.active === true;
+});
+console.log(activeUsersJQuery); // jQuery 객체 내에 [{ id: 1, name: "John", age: 28, active: true }, { id: 3, name: "Sarah", age: 25, active: true }, { id: 4, name: "David", age: 35, active: true }]
+```
+
+#### 2. 데이터 정렬 예제
+
+```javascript
+// 샘플 데이터
+var products = [
+    { id: 1, name: "Laptop", price: 1200 },
+    { id: 2, name: "Phone", price: 800 },
+    { id: 3, name: "Tablet", price: 500 },
+    { id: 4, name: "Desktop", price: 1500 }
+];
+
+// 가격 오름차순 정렬
+var sortedByPrice = N.data.sort(products, "price", false);
+console.log(sortedByPrice); 
+// [{ id: 3, name: "Tablet", price: 500 }, { id: 2, name: "Phone", price: 800 }, { id: 1, name: "Laptop", price: 1200 }, { id: 4, name: "Desktop", price: 1500 }]
+
+// 이름 내림차순 정렬
+var sortedByName = N.data.sort(products, "name", true);
+console.log(sortedByName);
+// [{ id: 3, name: "Tablet", price: 500 }, { id: 2, name: "Phone", price: 800 }, { id: 1, name: "Laptop", price: 1200 }, { id: 4, name: "Desktop", price: 1500 }]
+
+// jQuery 플러그인 메소드 사용
+var sortedByPriceJQuery = N(products).datasort("price", true); // 가격 내림차순
+console.log(sortedByPriceJQuery); // jQuery 객체 내에 정렬된 제품 목록
+```
+
+<a name="natural-data-라이브러리-고급-활용"></a>
+### 고급 활용
+
+#### 필터링과 정렬 조합하기
+
+데이터를 먼저 필터링한 후 정렬하여 원하는 데이터 세트를 얻을 수 있습니다.
+
+```javascript
+// 샘플 데이터
+var items = [
+    { category: "A", value: 10, available: true },
+    { category: "B", value: 5, available: false },
+    { category: "A", value: 8, available: true },
+    { category: "C", value: 12, available: true },
+    { category: "B", value: 15, available: true }
+];
+
+// 가용한 항목만 필터링한 후 value 기준으로 정렬
+var filteredAndSorted = N.data.sort(
+    N.data.filter(items, function(item) {
+        return item.available === true;
+    }),
+    "value",
+    true // 내림차순
+);
+
+console.log(filteredAndSorted);
+// [
+//   { category: "C", value: 12, available: true },
+//   { category: "A", value: 10, available: true },
+//   { category: "A", value: 8, available: true },
+//   { category: "B", value: 15, available: true }
+// ]
+```
+
+#### 복잡한 필터링 조건 적용하기
+
+필터링 함수를 사용하여 복잡한 조건을 적용할 수 있습니다.
+
+```javascript
+// 샘플 데이터
+var transactions = [
+    { date: "2023-01-15", amount: 120, type: "income" },
+    { date: "2023-01-20", amount: 80, type: "expense" },
+    { date: "2023-02-05", amount: 200, type: "income" },
+    { date: "2023-02-10", amount: 50, type: "expense" },
+    { date: "2023-03-01", amount: 300, type: "income" }
+];
+
+// 2023년 2월의 수입 거래만 필터링
+var februaryIncome = N.data.filter(transactions, function(transaction) {
+    return transaction.date.startsWith("2023-02") && transaction.type === "income";
+});
+
+console.log(februaryIncome);
+// [{ date: "2023-02-05", amount: 200, type: "income" }]
+```
+
+Natural-DATA 라이브러리는 클라이언트 측에서 JSON 데이터를 효율적으로 처리하기 위한 간단하면서도 강력한 도구를 제공합니다. 필터링과 정렬 기능을 통해 서버에서 전송된 데이터를 추가적인 서버 요청 없이 클라이언트 측에서 가공하고 표시할 수 있습니다.
