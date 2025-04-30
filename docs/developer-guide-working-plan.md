@@ -45,7 +45,7 @@ Natural-JS의 모든 기능과 컴포넌트에 대한 상세한 가이드북을 
 - [x] refr0402 및 탭 페이지들 데이터 수집 (Button)
 - [x] refr0403 및 탭 페이지들 데이터 수집 (Datepicker)
 - [x] refr0404 및 탭 페이지들 데이터 수집 (Popup)
-- [ ] refr0405 및 탭 페이지들 데이터 수집 (Tab)
+- [x] refr0405 및 탭 페이지들 데이터 수집 (Tab)
 - [ ] refr0406, refr0701 및 탭 페이지들 데이터 수집 (Select)
 - [ ] refr0407 및 탭 페이지들 데이터 수집 (Form)
 - [ ] refr0408 및 탭 페이지들 데이터 수집 (List)
@@ -76,7 +76,7 @@ Natural-JS의 모든 기능과 컴포넌트에 대한 상세한 가이드북을 
 - [x] docs/DEVELOPER-GUIDE-UI-Button.md 작성
 - [x] docs/DEVELOPER-GUIDE-UI-Datepicker.md 작성
 - [x] docs/DEVELOPER-GUIDE-UI-Popup.md 작성
-- [ ] docs/DEVELOPER-GUIDE-UI-Tab.md 작성
+- [x] docs/DEVELOPER-GUIDE-UI-Tab.md 작성
 - [ ] docs/DEVELOPER-GUIDE-UI-Select.md 작성
 - [ ] docs/DEVELOPER-GUIDE-UI-Form.md 작성
 - [ ] docs/DEVELOPER-GUIDE-UI-List.md 작성
