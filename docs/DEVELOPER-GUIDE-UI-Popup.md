@@ -11,31 +11,12 @@ url 옵션으로 지정한 페이지로 팝업을 만들 때, 생성된 팝업�
 만약 Popup 대화상자가 표시되지 않고 오류가 발생한다면, [Config(natural.config.js)](https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0102.html)의 N.context.attr("ui").alert.container 속성에 N.alert 관련 요소가 저장될 요소를 jQuery 셀렉터 문자열로 지정해야 합니다.
 
 ## 목차
-
-- [Natural-JS Popup 컴포넌트 개발자 가이드](#natural-js-popup-컴포넌트-개발자-가이드)
-  - [개요](#개요)
-  - [목차](#목차)
-  - [생성자(Constructor)](#생성자constructor)
-    - [N.popup](#npopup)
-    - [N(obj).popup](#nobjpopup)
-  - [기본 옵션(Default Options)](#기본-옵션default-options)
-    - [이벤트 핸들러 함수 매개변수](#이벤트-핸들러-함수-매개변수)
-      - [onOk, onCancel, onBeforeShow, onShow, onBeforeHide, onHide, onBeforeRemove, onRemove](#onok-oncancel-onbeforeshow-onshow-onbeforehide-onhide-onbeforeremove-onremove)
-      - [onClose](#onclose)
-      - [onLoad](#onload)
-  - [메서드(Methods)](#메서드methods)
-    - [context](#context)
-    - [open](#open)
-    - [close](#close)
-    - [remove](#remove)
-  - [예제(Examples)](#예제examples)
-    - [1. 지정한 요소(.popupArea)로 팝업 생성하기](#1-지정한-요소popuparea로-팝업-생성하기)
-    - [2. 페이지를 로드하여 팝업으로 생성하기](#2-페이지를-로드하여-팝업으로-생성하기)
-    - [3. 페이지를 로드하여 드래그 가능한 팝업으로 생성하기](#3-페이지를-로드하여-드래그-가능한-팝업으로-생성하기)
-    - [4. 팝업이 열릴 때마다 페이지를 다시 로드하는 팝업 생성하기](#4-팝업이-열릴-때마다-페이지를-다시-로드하는-팝업-생성하기)
-    - [5. 팝업에서 데이터 전달 및 수신하기](#5-팝업에서-데이터-전달-및-수신하기)
-      - [5.1. 팝업 페이지(popup.html)](#51-팝업-페이지popuphtml)
-      - [5.2. 부모 페이지(parent.html)](#52-부모-페이지parenthtml)
+- [개요](#개요)
+- [목차](#목차)
+- [생성자(Constructor)](#생성자constructor)
+- [기본 옵션(Default Options)](#기본-옵션default-options)
+- [메서드(Methods)](#메서드methods)
+- [예제(Examples)](#예제examples)
 
 ## 생성자(Constructor)
 

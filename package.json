@@ -16,6 +16,7 @@
   },
   "private": true,
   "dependencies": {
-    "@types/jquery": "^3.5.32"
+    "@types/jquery": "^3.5.32",
+    "natural_js_pages": "file:"
   }
 }

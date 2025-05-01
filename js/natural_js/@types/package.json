@@ -11,7 +11,7 @@
         "@types/jquery": "*"
     },
     "devDependencies": {
-        "@types/natural_js": "workspace:."
+        "@types/natural_js": "file:"
     },
     "owners": [
         {
