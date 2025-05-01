@@ -9,8 +9,6 @@ Datepicker는 사용자가 텍스트 입력 필드에서 날짜를 쉽게 선택
 ## 목차
 
 - [생성자](#생성자constructor)
-  - [N.datepicker](#ndatepicker)
-  - [N(obj).datepicker](#nobjdatepicker)
 - [기본 옵션](#기본-옵션default-options)
 - [메서드](#메서드methods)
 - [이벤트](#이벤트events)
