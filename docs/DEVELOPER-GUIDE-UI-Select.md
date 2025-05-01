@@ -228,3 +228,74 @@ N.context.attr("ui", {
     N(data).select(".eyeColor").bind().val(["brown", "green"]);
 </script>
 ```
+
+## Switch 컴포넌트
+
+Switch는 Select 컴포넌트를 단일 체크박스에 적용하여 true/false, Y/N 등의 데이터를 처리할 때 체크박스 요소를 토글 스위치로 만들어 주는 CSS입니다.
+
+### 개요
+
+Switch는 `input[type=checkbox]` 요소에 CSS만 사용하여 적용할 수 있으며, Select 컴포넌트와 함께 사용할 수 있습니다. 체크박스를 현대적인 토글 스위치 형태로 표시하여 사용자 경험을 향상시킵니다.
+
+### 기본 옵션(CSS 변수)
+
+| 옵션명 | 타입 | 기본값 | 필수 여부 | 설명 |
+|--------|------|--------|-----------|------|
+| --njs-switch-height | string | 27px | | 토글 스위치의 높이를 지정합니다. |
+| --njs-switch-width | string | | | 토글 스위치의 넓이를 지정합니다. |
+| --njs-switch-padding | string | | | 토글 스위치의 안쪽 여백을 지정합니다. |
+| --njs-switch-on-content | string | | | 토글 스위치가 활성화되었을 때의 텍스트를 지정합니다. |
+| --njs-switch-off-content | string | | | 토글 스위치가 비활성화되었을 때의 텍스트를 지정합니다. |
+| --njs-switch-font-size | string | | | 토글 스위치의 텍스트 크기를 지정합니다. |
+
+Switch의 크기 관련 옵션은 특별히 지정하지 않는 한 `--njs-switch-height` 옵션 값을 기준으로 자동으로 계산됩니다.
+
+### 예제(Examples)
+
+#### 1. 기본 토글 스위치 생성
+
+`input[type=checkbox]` 요소를 `label` 태그로 감싸고 class 속성값에 'switch__'를 입력합니다. 그 다음 `input[type=checkbox]` 요소 다음에 `span` 태그를 추가하고 class 속성값에 'switch_slider__'를 입력합니다.
+
+```html
+<label class="switch__">
+    <input id="${id}" type="checkbox">
+    <span class="switch_slider__">
+</label>
+```
+
+#### 2. 사용자 정의 스위치 옵션 지정
+
+넓은 토글 스위치를 만드는 예제:
+
+```html
+<label class="switch__" style="--njs-switch-width: 80px;">
+    <input id="${id}" type="checkbox">
+    <span class="switch_slider__">
+</label>
+```
+
+큰 토글 스위치를 만들고 상태 텍스트를 'Y/N'으로 표시하는 예제:
+
+```html
+<label class="switch__" style="--njs-switch-height: 40px; --njs-switch-on-content: 'Y'; --njs-switch-off-content: 'N';">
+    <input id="${id}" type="checkbox">
+    <span class="switch_slider__">
+</label>
+```
+
+#### 3. Switch와 Select 컴포넌트 함께 사용하기
+
+```html
+<label class="switch__">
+    <input id="useSwitch" name="useSwitch" type="checkbox">
+    <span class="switch_slider__">
+</label>
+<script type="text/javascript">
+    // Select 컴포넌트로 데이터 바인딩
+    var switchData = [{
+        "key" : "useSwitch",
+        "val" : true
+    }];
+    N(switchData).select("#useSwitch").bind();
+</script>
+```
