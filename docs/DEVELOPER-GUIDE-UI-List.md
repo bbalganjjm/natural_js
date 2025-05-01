@@ -11,6 +11,39 @@ List(N.list)는 ul>li 요소를 context 옵션으로 지정하여 단일 컬럼 
 - 입력 요소의 값을 변경하거나 val 메서드로 데이터가 변경되면 rowStatus 프로퍼티가 생성되고 입력은 "insert", 수정은 "update", 삭제는 "delete" 값이 입력됩니다.
 - 행 선택(단일 또는 다중), 체크박스 통합, 스크롤 페이징 등의 기능을 제공합니다.
 
+## 목차
+
+- [Natural-JS List 컴포넌트](#natural-js-list-컴포넌트)
+  - [개요](#개요)
+  - [목차](#목차)
+  - [생성자](#생성자)
+    - [N.list](#nlist)
+    - [N(obj).list](#nobjlist)
+  - [기본 옵션](#기본-옵션)
+  - [선언형 옵션](#선언형-옵션)
+    - [data-format](#data-format)
+    - [data-validate](#data-validate)
+  - [함수](#함수)
+    - [data](#data)
+    - [context](#context)
+    - [contextBodyTemplate](#contextbodytemplate)
+    - [bind](#bind)
+    - [add](#add)
+    - [remove](#remove)
+    - [revert](#revert)
+    - [validate](#validate)
+    - [val](#val)
+    - [select](#select)
+    - [check](#check)
+    - [move](#move)
+    - [copy](#copy)
+  - [예제](#예제)
+    - [기본 List 생성 및 데이터 바인딩](#기본-list-생성-및-데이터-바인딩)
+    - [행 선택 기능 추가](#행-선택-기능-추가)
+    - [체크박스 통합 기능](#체크박스-통합-기능)
+    - [스크롤 페이징](#스크롤-페이징)
+    - [데이터 편집 및 유효성 검증](#데이터-편집-및-유효성-검증)
+
 ## 생성자
 
 ### N.list

@@ -104,10 +104,10 @@ Natural-JS의 모든 기능과 컴포넌트에 대한 상세한 가이드북을 
 - [x] docs/DEVELOPER-GUIDE-EXAMPLES.md 작성
 - [x] docs/DEVELOPER-GUIDE-TEMPLATE.md 작성
 - [x] docs/DEVELOPER-GUIDE-TEMPLATE-EXAMPLES.md 작성
-- [ ] 모든 문서 상세 내용 추가 완료
+- [x] 모든 문서 상세 내용 추가 완료
 
 ## 작업 완료 확인
 
-- [ ] 모든 URL 방문 및 데이터 수집 완료 확인
-- [ ] 모든 문서 작성 완료 확인
-- [ ] 최종 검토 및 편집(docs/*.md 파일과 각 패키지별 문서의 템플릿 및 구조의 일관성 위주로 검사하고 수정한다.)
+- [x] 모든 URL 방문 및 데이터 수집 완료 확인
+- [x] 모든 문서 작성 완료 확인
+- [x] 최종 검토 및 편집(./docs 폴더의 모든 md 파일과 각 패키지별 문서의 템플릿 및 구조의 일관성을 검사하고 수정한다.)
