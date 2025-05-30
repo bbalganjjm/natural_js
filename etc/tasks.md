@@ -2,25 +2,25 @@
 
 ## 기본 문서
 
-- [ ] Natural-JS: html/naturaljs/home/home0100.html
-- [ ] Natural-JS 소개: html/naturaljs/intr/intr0100_ko_KR.md
+- [x] Natural-JS: html/naturaljs/home/home0100.html
+- [x] Natural-JS 소개: html/naturaljs/intr/intr0100_ko_KR.md
 
 ## 레퍼런스 문서
 
 ### Core
 
-- [ ] API 문서 안내: html/naturaljs/refr/refr0001_ko_KR.md
-- [ ] 제한 및 팁 - [제한]: html/naturaljs/refr/refr060101_ko_KR.md
-- [ ] 제한 및 팁 - [팁]: html/naturaljs/refr/refr060102_ko_KR.md
-- [ ] N() & N - [개요]: html/naturaljs/refr/refr010101_ko_KR.md
-- [ ] N() & N - [jQuery selector 확장]: html/naturaljs/refr/refr010102.html
-- [ ] N() & N - [jQuery plugin 확장 메서드]: html/naturaljs/refr/refr010103.html
-- [ ] N() & N - [N 객체의 함수]: html/naturaljs/refr/refr010104.html
-- [ ] N() & N - [N.gc 객체의 함수]: html/naturaljs/refr/refr010105.html
-- [ ] N() & N - [N.string 객체의 함수]: html/naturaljs/refr/refr010106.html
-- [ ] N() & N - [N.element 객체의 함수]: html/naturaljs/refr/refr010107.html
-- [ ] N() & N - [N.date 객체의 함수]: html/naturaljs/refr/refr010108.html
-- [ ] N() & N - [N.browser 객체의 함수]: html/naturaljs/refr/refr010109.html
+- [x] API 문서 안내: html/naturaljs/refr/refr0001_ko_KR.md
+- [x] 제한 및 팁 - [제한]: html/naturaljs/refr/refr060101_ko_KR.md
+- [x] 제한 및 팁 - [팁]: html/naturaljs/refr/refr060102_ko_KR.md
+- [x] N() & N - [개요]: html/naturaljs/refr/refr010101_ko_KR.md
+- [x] N() & N - [jQuery selector 확장]: html/naturaljs/refr/refr010102.html
+- [x] N() & N - [jQuery plugin 확장 메서드]: html/naturaljs/refr/refr010103.html
+- [x] N() & N - [N 객체의 함수]: html/naturaljs/refr/refr010104.html
+- [x] N() & N - [N.gc 객체의 함수]: html/naturaljs/refr/refr010105.html
+- [x] N() & N - [N.string 객체의 함수]: html/naturaljs/refr/refr010106.html
+- [x] N() & N - [N.element 객체의 함수]: html/naturaljs/refr/refr010107.html
+- [x] N() & N - [N.date 객체의 함수]: html/naturaljs/refr/refr010108.html
+- [x] N() & N - [N.browser 객체의 함수]: html/naturaljs/refr/refr010109.html
 - [ ] N() & N - [N.form 객체의 함수]: html/naturaljs/refr/refr010110.html
 - [ ] N() & N - [N.comm 객체의 함수]: html/naturaljs/refr/refr010111.html
 - [ ] N() & N - [N.json 객체의 함수]: html/naturaljs/refr/refr010112.html
@@ -159,7 +159,7 @@
 - [ ] Tree - [Tree object의 함수]: html/naturaljs/refr/refr041105.html
 - [ ] Tree - [유틸리티 함수]: html/naturaljs/refr/refr041106.html
 
-### 기타
+### UI.Shell
 
 - [ ] Notify - [개요]: html/naturaljs/refr/refr050101_ko_KR.md
 - [ ] Notify - [API DEMO]: html/naturaljs/refr/refr050102.html
