@@ -204,24 +204,24 @@
 ## 가이드/예제/템플릿
 
 - [ ] 시작하기: html/naturaljs/gtst/gtst0100_ko_KR.md
-- [ ] 웹 애플리케이션 기본 프레임 만들기: html/naturaljs/gtst/gtst0200_ko_KR.md
-- [ ] Grid로 데이터 조회/변경 하기: html/naturaljs/gtst/gtst0300_ko_KR.md
-- [ ] 데이터 목록 조회: html/naturaljs/exap/exap0100.html
-- [ ] 폼 데이터 조회: html/naturaljs/exap/exap0200.html
-- [ ] 폼 데이터 입력: html/naturaljs/exap/exap0300.html
-- [ ] 폼 데이터 수정: html/naturaljs/exap/exap0400.html
-- [ ] 데이터 그리드 CRUD(헤더고정형): html/naturaljs/exap/exap0500.html
-- [ ] 데이터 그리드 CRUD(리스트형): html/naturaljs/exap/exap0510.html
-- [ ] 화면전환 CRUD(페이징): html/naturaljs/exap/exap0600.html
-- [ ] 팝업 CRUD: html/naturaljs/exap/exap0700.html
-- [ ] 마스터 그리드 & 디테일 폼: html/naturaljs/exap/exap0800.html
-- [ ] 멀티 폼 바인딩: html/naturaljs/exap/exap0900.html
-- [ ] 개발 가이드: html/naturaljs/template/documents/template-guide_ko_KR.md
-- [ ] 조회폼+그리드: html/naturaljs/template/samples/type0101.html
-- [ ] 조회폼+그리드(CRUD): html/naturaljs/template/samples/type0201.html
-- [ ] 조회폼+그리드+페이징: html/naturaljs/template/samples/type0301.html
-- [ ] 조회폼+그리드+상세폼(수평배치): html/naturaljs/template/samples/type0401.html
-- [ ] 조회폼+그리드+상세폼(수직배치): html/naturaljs/template/samples/type0402.html
-- [ ] 조회폼+리스트+그리드+상세폼: html/naturaljs/template/samples/type0501.html
-- [ ] 트리+그리드(CRUD): html/naturaljs/template/samples/type0601.html
-- [ ] 조회폼+탭: html/naturaljs/template/samples/type0701.html
+- [ ] 자습서 - 웹 애플리케이션 기본 프레임 만들기: html/naturaljs/gtst/gtst0200_ko_KR.md
+- [ ] 자습서 - Grid로 데이터 조회/변경 하기: html/naturaljs/gtst/gtst0300_ko_KR.md
+- [ ] Natural-JS 예제 - 데이터 목록 조회: html/naturaljs/exap/exap0100.html
+- [ ] Natural-JS 예제 - 폼 데이터 조회: html/naturaljs/exap/exap0200.html
+- [ ] Natural-JS 예제 - 폼 데이터 입력: html/naturaljs/exap/exap0300.html
+- [ ] Natural-JS 예제 - 폼 데이터 수정: html/naturaljs/exap/exap0400.html
+- [ ] Natural-JS 예제 - 데이터 그리드 CRUD(헤더고정형): html/naturaljs/exap/exap0500.html
+- [ ] Natural-JS 예제 - 데이터 그리드 CRUD(리스트형): html/naturaljs/exap/exap0510.html
+- [ ] Natural-JS 예제 - 화면전환 CRUD(페이징): html/naturaljs/exap/exap0600.html
+- [ ] Natural-JS 예제 - 팝업 CRUD: html/naturaljs/exap/exap0700.html
+- [ ] Natural-JS 예제 - 마스터 그리드 & 디테일 폼: html/naturaljs/exap/exap0800.html
+- [ ] Natural-JS 예제 - 멀티 폼 바인딩: html/naturaljs/exap/exap0900.html
+- [ ] Natural-TEMPLATE - 개발 가이드: html/naturaljs/template/documents/template-guide_ko_KR.md
+- [ ] Natural-TEMPLATE 예제 - 조회폼+그리드: html/naturaljs/template/samples/type0101.html
+- [ ] Natural-TEMPLATE 예제 - 조회폼+그리드(CRUD): html/naturaljs/template/samples/type0201.html
+- [ ] Natural-TEMPLATE 예제 - 조회폼+그리드+페이징: html/naturaljs/template/samples/type0301.html
+- [ ] Natural-TEMPLATE 예제 - 조회폼+그리드+상세폼(수평배치): html/naturaljs/template/samples/type0401.html
+- [ ] Natural-TEMPLATE 예제 - 조회폼+그리드+상세폼(수직배치): html/naturaljs/template/samples/type0402.html
+- [ ] Natural-TEMPLATE 예제 - 조회폼+리스트+그리드+상세폼: html/naturaljs/template/samples/type0501.html
+- [ ] Natural-TEMPLATE 예제 - 트리+그리드(CRUD): html/naturaljs/template/samples/type0601.html
+- [ ] Natural-TEMPLATE 예제 - 조회폼+탭: html/naturaljs/template/samples/type0701.html
