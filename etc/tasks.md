@@ -19,8 +19,8 @@
 - [x] N() & N - [N 객체의 함수]: html/naturaljs/refr/refr010104.html
 - [x] N() & N - [N.gc 객체의 함수]: html/naturaljs/refr/refr010105.html
 - [x] N() & N - [N.string 객체의 함수]: html/naturaljs/refr/refr010106.html
-- [ ] N() & N - [N.element 객체의 함수]: html/naturaljs/refr/refr010107.html
-- [ ] N() & N - [N.date 객체의 함수]: html/naturaljs/refr/refr010108.html
+- [x] N() & N - [N.element 객체의 함수]: html/naturaljs/refr/refr010107.html
+- [x] N() & N - [N.date 객체의 함수]: html/naturaljs/refr/refr010108.html
 - [ ] N() & N - [N.browser 객체의 함수]: html/naturaljs/refr/refr010109.html
 - [ ] N() & N - [N.message 객체의 함수]: html/naturaljs/refr/refr010110.html
 - [ ] N() & N - [N.array 객체의 함수]: html/naturaljs/refr/refr010111.html
