@@ -49,8 +49,8 @@ Natural-CORE extends the selector to support regexp filters for evaluating attri
 
 **Correct Usage Example**:
 ```javascript
-/* Extract all <a> tags whose href attribute contains "Mr.Lee" or "Mr.Kim" */
-N("a:regexp(href, Mr\.(Lee|Kim))"); // (O)
+// Extract all <a> tags whose href attribute contains "Mr.Lee" or "Mr.Kim"
+const anchors = N("a:regexp(href, Mr\.(Lee|Kim))");
 ```
 
 #### :regexp Filter Attributes and Examples
@@ -74,7 +74,7 @@ N("a:regexp(href, Mr\.(Lee|Kim))"); // (O)
     - `N("div:regexp(css:width, ^128px)")`
 - Filtering by id attribute:
   - Example:
-    - `<div id="page-1"><div id="page-2"><div id="page-3">`
+    - `<div id="page-1"></div><div id="page-2"></div><div id="page-3"></div>`
     - `N("div:regexp(id, page-[0-9])")`
 
 ### jQuery Plugin Extension Methods
@@ -298,10 +298,11 @@ Earlier function blocks can reference Deferred objects of later blocks, but not 
 
 Typical asynchronous logic:
 ```javascript
-setTimeout(function() {
-    setTimeout(function() {
-        setTimeout(function() {
-            setTimeout(function() {
+// ES6+ Example: Typical asynchronous logic
+setTimeout(() => {
+    setTimeout(() => {
+        setTimeout(() => {
+            setTimeout(() => {
                 N.log("Step 4 complete");
             }, 500);
             N.log("Step 3 complete");
@@ -310,48 +311,41 @@ setTimeout(function() {
     }, 500);
     N.log("Step 1 complete");
 }, 500);
-```
 
-With N.serialExecute:
-```javascript
-var defers = N.serialExecute(
-    function(defer){
-        setTimeout(function() {
+// With N.serialExecute (ES6+)
+const defers = N.serialExecute(
+    defer => {
+        setTimeout(() => {
             defer.resolve("0", "1");
             N.log("Step 1 complete");
         }, 500);
     },
-    function(defer, arg0, arg1){
-        setTimeout(function() {
+    (defer, arg0, arg1) => {
+        setTimeout(() => {
             defer.resolve(arg0, arg1);
             N.log("Step 2 complete", arg0, arg1);
         }, 500);
     },
-    function(defer, arg0, arg1){
-        setTimeout(function() {
+    (defer, arg0, arg1) => {
+        setTimeout(() => {
             defer.resolve(arg0, arg1);
             N.log("Step 3 complete", arg0, arg1);
         }, 500);
     },
-    function(defer, arg0){
-        setTimeout(function() {
+    (defer, arg0) => {
+        setTimeout(() => {
             defer.resolve();
             N.log("Step 4 complete", arg0);
         }, 500);
     }
 );
-```
 
-You can also use jQuery $.when to group function blocks and execute logic after all blocks in the group are complete.
-
-```javascript
-// Execute logic after both the second and third function blocks are complete
-$.when(defers[1], defers[2]).done(function(arguments[0], arguments[1]) {
+// ES6+ Example: $.when usage
+$.when(defers[1], defers[2]).done((arg0, arg1) => {
     N.log("Step 2 and 3 both complete.");
 });
 
-// Execute logic after all function blocks are complete
-$.when.apply($, defers).done(function(arguments[0], arguments[1], arguments[2], arguments[3]) {
+$.when(...defers).done((...args) => {
     N.log("All steps complete.");
 });
 ```
@@ -527,8 +521,8 @@ Use as "N.element.{functionName}(arg[0...N])".
 Creates a JSON object from the id and value attributes of the specified input elements. Used to generate initial data in the add method of N.form.
 
 ```javascript
-// Convert input values in #box to JSON data
-var data = N.element.toData($("#box").find(":input"));
+// ES6+ Example: Convert input values in #box to JSON data
+const data = N.element.toData($("#box").find(":input"));
 ```
 
 - **eles**: jQuery object - jQuery object with input elements selected.
@@ -540,7 +534,8 @@ var data = N.element.toData($("#box").find(":input"));
 Returns the highest z-index value among the specified elements.
 
 ```javascript
-var maxZindex = N.element.maxZindex($("div"));
+// ES6+ Example: Get max z-index among divs
+const maxZindex = N.element.maxZindex($("div"));
 ```
 
 - **ele**: jQuery object - Target elements as a jQuery object. If omitted, defaults to $("div, span, ul, p, nav, article, section").

@@ -86,35 +86,35 @@ An example combining a search box (N.form) and a data grid (N.grid) to retrieve 
 
 ### JavaScript Implementation
 
-```typescript
-const cont = N(".exap0100").cont({
-    init: function (view, request) {
-        cont.setCodes(["gender", "eyeColor"], function () {
+```js
+const cont = N('.exap0100').cont({
+    init: (view, request) => {
+        cont.setCodes(['gender', 'eyeColor'], () => {
             // N.select must be initialized before data components like N.grid or N.form
             cont.setComponents();
             cont.setEvents();
         });
     },
-    setCodes: function (codeParams: string[], afterCodeInitFn: Function) {
+    setCodes: (codeParams, afterCodeInitFn) => {
         // 1. Initialize N.select and bind code data
-        N({codes: codeParams}).comm("html/naturaljs/exap/data/code.json").submit(function (data, request) {
-            N(codeParams).each(function (i, code) {
-                N(data as NC.JSONObject[]).datafilter("code === '" + code + "'").select(N(".searchBox #" + code, cont.view)).bind();
+        N({ codes: codeParams }).comm('html/naturaljs/exap/data/code.json').submit((data, request) => {
+            N(codeParams).each((i, code) => {
+                N(data).datafilter(`code === '${code}'`).select(N(`.searchBox #${code}`, cont.view)).bind();
             });
             afterCodeInitFn.call(cont);
         });
     },
-    setComponents: function () {
+    setComponents: () => {
         // 2. Initialize N.button
-        N(".buttons a", cont.view).button();
+        N('.buttons a', cont.view).button();
         // 3. Initialize N.form and add new row data
         cont.form = N([]).form({
-            context: N("div.searchBox li.inputs", cont.view),
+            context: N('div.searchBox li.inputs', cont.view),
             revert: true
         }).add();
         // 4. Initialize N.grid and bind empty data
         cont.grid = N([]).grid({
-            context: N("#grid", cont.view),
+            context: N('#grid', cont.view),
             data: [],
             height: 350,
             resizable: true,
@@ -122,20 +122,20 @@ const cont = N(".exap0100").cont({
             filter: true
         }).bind();
     },
-    setEvents: function () {
+    setEvents: () => {
         // 5. Bind events
-        N("#btnSearch", cont.view).on("click", function (e) {
+        N('#btnSearch', cont.view).on('click', e => {
             e.preventDefault();
             if (cont.form.validate()) {
-                N(cont.form.data(true)).comm("html/naturaljs/exap/data/sample.json").submit(function (data, request) {
+                N(cont.form.data(true)).comm('html/naturaljs/exap/data/sample.json').submit((data, request) => {
                     cont.grid.bind(data);
                 });
             }
         });
     },
     messages: {
-        "ko_KR": {},
-        "en_US": {}
+        ko_KR: {},
+        en_US: {}
     }
 });
 ```
@@ -181,26 +181,26 @@ An example of retrieving form data using N.form.
 
 ### JavaScript Implementation
 
-```typescript
-const cont = N(".exap0200").cont({
-    init : function(view, request) {
-        cont._key = "101";
+```js
+const cont = N('.exap0200').cont({
+    init: (view, request) => {
+        cont._key = '101';
         cont.setComponents();
     },
-    setComponents : function() {
+    setComponents: () => {
         // 1. Initialize button
-        N(".buttons a", cont.view).button();
+        N('.buttons a', cont.view).button();
         // 2. Initialize N.form
-        cont.form = N([]).form(N("#detail", cont.view));
+        cont.form = N([]).form(N('#detail', cont.view));
         // 2-1. Bind form data
-        N.comm("html/naturaljs/exap/data/" + cont._key + ".json").submit(function(data) {
+        N.comm(`html/naturaljs/exap/data/${cont._key}.json`).submit(data => {
             // Bind data with N.form
             cont.form.bind(0, data);
         });
     },
-    messages : {
-        "ko_KR" : {},
-        "en_US" : {}
+    messages: {
+        ko_KR: {},
+        en_US: {}
     }
 });
 ```
@@ -251,52 +251,52 @@ An example of creating new data using N.form.
 
 ### JavaScript Implementation
 
-```typescript
-const cont = N(".exap0300").cont({
-    init : function(view, request) {
-        cont.setCodes([ "gender", "eyeColor", "company", "favoriteFruit" ], function() {
+```js
+const cont = N('.exap0300').cont({
+    init: (view, request) => {
+        cont.setCodes(['gender', 'eyeColor', 'company', 'favoriteFruit'], () => {
             // N.select must be initialized before data components like N.grid or N.form
             cont.setComponents();
             cont.setEvents();
         });
     },
-    setCodes : function(codeParams: string[], afterCodeInitFn: Function) {
+    setCodes: (codeParams, afterCodeInitFn) => {
         // 1. Initialize N.select and bind code data
-        N({ codes : codeParams }).comm("html/naturaljs/exap/data/code.json").submit(function(data, request) {
-            N(codeParams).each(function(i, code) {
-                N(data as NC.JSONObject[]).datafilter("code === '" + code + "'").select(N("#detail #" + code, cont.view)).bind();
+        N({ codes: codeParams }).comm('html/naturaljs/exap/data/code.json').submit((data, request) => {
+            N(codeParams).each((i, code) => {
+                N(data).datafilter(`code === '${code}'`).select(N(`#detail #${code}`, cont.view)).bind();
             });
             afterCodeInitFn.call(cont);
         });
     },
-    setComponents : function() {
+    setComponents: () => {
         // 2. Initialize N.button
-        N(".buttons a", cont.view).button();
+        N('.buttons a', cont.view).button();
         // 3. Initialize N.form and create new data
         cont.form = N([]).form({
-            context : N("#detail", cont.view),
-            revert : true
+            context: N('#detail', cont.view),
+            revert: true
         }).add();
     },
-    setEvents : function() {
+    setEvents: () => {
         // 4. Bind events
         // 4-1 Save data to server
-        N("#btnSave", cont.view).on("click", function(e) {
+        N('#btnSave', cont.view).on('click', e => {
             e.preventDefault();
-            if(cont.form.validate()) {
+            if (cont.form.validate()) {
                 N(window).alert({
-                    msg : N.message.get(cont.messages, "EXAP0300-0003"),
-                    confirm : true,
-                    onOk : function(): undefined {
+                    msg: N.message.get(cont.messages, 'EXAP0300-0003'),
+                    confirm: true,
+                    onOk: () => {
                         N(cont.form.data(true)).comm({
-                            type : NA.Objects.Request.HttpMethod.POST,
-                            url : "html/naturaljs/exap/data/sample.json"
-                        }).submit(function(data) {
+                            type: NA.Objects.Request.HttpMethod.POST,
+                            url: 'html/naturaljs/exap/data/sample.json'
+                        }).submit(data => {
                             let msg;
-                            if(data as number > 0) {
-                                msg = N.message.get(cont.messages, "EXAP0300-0001");
+                            if (data > 0) {
+                                msg = N.message.get(cont.messages, 'EXAP0300-0001');
                             } else {
-                                msg = N.message.get(cont.messages, "EXAP0300-0002");
+                                msg = N.message.get(cont.messages, 'EXAP0300-0002');
                             }
                             N(window).alert(msg).show();
                         });
@@ -305,21 +305,21 @@ const cont = N(".exap0300").cont({
             }
         });
         // 4-2 Reset to initial data
-        N("#btnRevert", cont.view).on("click", function(e) {
+        N('#btnRevert', cont.view).on('click', e => {
             e.preventDefault();
             cont.form.revert();
         });
     },
-    messages : {
-        "ko_KR" : {
-            "EXAP0300-0001" : "Saving is complete.",
-            "EXAP0300-0002" : "Saving is not complete. Please contact the administrator.",
-            "EXAP0300-0003" : "Do you want to save it?"
+    messages: {
+        ko_KR: {
+            'EXAP0300-0001': 'Saving is complete.',
+            'EXAP0300-0002': 'Saving is not complete. Please contact the administrator.',
+            'EXAP0300-0003': 'Do you want to save it?'
         },
-        "en_US" : {
-            "EXAP0300-0001" : "Saving is complete.",
-            "EXAP0300-0002" : "Saving is not complete. Please contact the administrator.",
-            "EXAP0300-0003" : "Do you want to save it?"
+        en_US: {
+            'EXAP0300-0001': 'Saving is complete.',
+            'EXAP0300-0002': 'Saving is not complete. Please contact the administrator.',
+            'EXAP0300-0003': 'Do you want to save it?'
         }
     }
 });
@@ -366,62 +366,62 @@ An example of editing retrieved data using N.form.
 
 ### JavaScript Implementation
 
-```typescript
-const cont = N(".exap0400").cont({
-    init : function(view, request) {
-        cont._key = "101";
-        cont.setCodes([ "gender", "eyeColor", "company", "favoriteFruit" ], function() {
+```js
+const cont = N('.exap0400').cont({
+    init: (view, request) => {
+        cont._key = '101';
+        cont.setCodes(['gender', 'eyeColor', 'company', 'favoriteFruit'], () => {
             // N.select must be initialized before data components like N.grid or N.form
             cont.setComponents();
             cont.setEvents();
         });
     },
-    setCodes : function(codeParams: string[], afterCodeInitFn: Function) {
+    setCodes: (codeParams, afterCodeInitFn) => {
         // 1. Initialize N.select and bind code data
-        N({ codes : codeParams }).comm("html/naturaljs/exap/data/code.json").submit(function(data, request) {
-            N(codeParams).each(function(i, code) {
-                N(data as NC.JSONObject[]).datafilter("code === '" + code + "'").select(N("#detail #" + code as string, cont.view)).bind();
+        N({ codes: codeParams }).comm('html/naturaljs/exap/data/code.json').submit((data, request) => {
+            N(codeParams).each((i, code) => {
+                N(data).datafilter(`code === '${code}'`).select(N(`#detail #${code}`, cont.view)).bind();
             });
             afterCodeInitFn.call(cont);
         });
     },
-    setComponents : function() {
+    setComponents: () => {
         // 2. Initialize button
-        N(".buttons a", cont.view).button();
+        N('.buttons a', cont.view).button();
         // 3. Initialize N.form
         cont.form = N([]).form({
-            context : N("#detail", cont.view),
-            revert : true
+            context: N('#detail', cont.view),
+            revert: true
         });
         // 3-1. Bind N.form data
-        N.comm("html/naturaljs/exap/data/" + cont._key + ".json").submit(function(data) {
+        N.comm(`html/naturaljs/exap/data/${cont._key}.json`).submit(data => {
             // Bind data with N.form
             cont.form.bind(0, data);
         });
     },
-    setEvents : function() {
+    setEvents: () => {
         // 4. Bind events
         // 4-1 Save data to server
-        N("#btnSave", cont.view).on("click", function(e) {
+        N('#btnSave', cont.view).on('click', e => {
             e.preventDefault();
-            if(cont.form.data(true)[0].rowStatus === undefined) {
-                N.notify.add(N.message.get(cont.messages, "EXAP0400-0004"));
+            if (cont.form.data(true)[0].rowStatus === undefined) {
+                N.notify.add(N.message.get(cont.messages, 'EXAP0400-0004'));
                 return false;
             }
-            if(cont.form.validate()) {
+            if (cont.form.validate()) {
                 N(window).alert({
-                    msg : N.message.get(cont.messages, "EXAP0400-0003"),
-                    confirm : true,
-                    onOk : function(): undefined {
+                    msg: N.message.get(cont.messages, 'EXAP0400-0003'),
+                    confirm: true,
+                    onOk: () => {
                         N(cont.form.data(true)).comm({
-                            type : NA.Objects.Request.HttpMethod.PATCH,
-                            url : "html/naturaljs/exap/data/" + cont._key + ".json"
-                        }).submit(function(data) {
+                            type: NA.Objects.Request.HttpMethod.PATCH,
+                            url: `html/naturaljs/exap/data/${cont._key}.json`
+                        }).submit(data => {
                             let msg;
-                            if(data as number > 0) {
-                                msg = N.message.get(cont.messages, "EXAP0400-0001");
+                            if (data > 0) {
+                                msg = N.message.get(cont.messages, 'EXAP0400-0001');
                             } else {
-                                msg = N.message.get(cont.messages, "EXAP0400-0002");
+                                msg = N.message.get(cont.messages, 'EXAP0400-0002');
                             }
                             N(window).alert(msg).show();
                         });
@@ -430,23 +430,23 @@ const cont = N(".exap0400").cont({
             }
         });
         // 4-2 Reset to initial data
-        N("#btnRevert", cont.view).on("click", function(e) {
+        N('#btnRevert', cont.view).on('click', e => {
             e.preventDefault();
             cont.form.revert();
         });
     },
-    messages : {
-        "ko_KR" : {
-            "EXAP0400-0001" : "Editing is complete.",
-            "EXAP0400-0002" : "Editing is not complete. Please contact the administrator.",
-            "EXAP0400-0003" : "Do you want to save it?",
-            "EXAP0400-0004" : "No changed data."
+    messages: {
+        ko_KR: {
+            'EXAP0400-0001': 'Editing is complete.',
+            'EXAP0400-0002': 'Editing is not complete. Please contact the administrator.',
+            'EXAP0400-0003': 'Do you want to save it?',
+            'EXAP0400-0004': 'No changed data.'
         },
-        "en_US" : {
-            "EXAP0400-0001" : "Editing is complete.",
-            "EXAP0400-0002" : "Editing is not complete. Please contact the administrator.",
-            "EXAP0400-0003" : "Do you want to save it?",
-            "EXAP0400-0004" : "No changed data."
+        en_US: {
+            'EXAP0400-0001': 'Editing is complete.',
+            'EXAP0400-0002': 'Editing is not complete. Please contact the administrator.',
+            'EXAP0400-0003': 'Do you want to save it?',
+            'EXAP0400-0004': 'No changed data.'
         }
     }
 });
@@ -530,95 +530,95 @@ An example of handling create, read, update, and delete operations directly in a
 
 ### JavaScript Implementation
 
-```typescript
-const cont = N(".exap0500").cont({
-    init : function(view, request) {
-        cont.setCodes([ "gender", "eyeColor" ], function() {
+```js
+const cont = N('.exap0500').cont({
+    init: (view, request) => {
+        cont.setCodes(['gender', 'eyeColor'], () => {
             // N.select must be initialized before data components like N.grid or N.form
             cont.setComponents();
             cont.setEvents();
         });
     },
-    setCodes : function(codeParams: string[], afterCodeInitFn: Function) {
+    setCodes: (codeParams, afterCodeInitFn) => {
         // 1. Initialize N.select and bind code data
-        N({ codes : codeParams }).comm("html/naturaljs/exap/data/code.json").submit(function(data, request) {
-            N(codeParams).each(function(i, code) {
-                const filteredData = N(data as NC.JSONObject[]).datafilter("code === '" + code + "'");
-                filteredData.select(N(".searchBox #" + code, cont.view)).bind();
-                filteredData.select(N(".grid__ #" + code, cont.view)).bind();
+        N({ codes: codeParams }).comm('html/naturaljs/exap/data/code.json').submit((data, request) => {
+            N(codeParams).each((i, code) => {
+                const filteredData = N(data).datafilter(`code === '${code}'`);
+                filteredData.select(N(`.searchBox #${code}`, cont.view)).bind();
+                filteredData.select(N(`.grid__ #${code}`, cont.view)).bind();
             });
             afterCodeInitFn.call(cont);
         });
     },
-    setComponents : function() {
+    setComponents: () => {
         // 2. Initialize button
-        N(".buttons a", cont.view).button();
+        N('.buttons a', cont.view).button();
         // 3. Initialize N.form and add new row for search box
         cont.form = N([]).form({
-            context : N(".searchBox", cont.view),
-            revert : true
+            context: N('.searchBox', cont.view),
+            revert: true
         }).add();
         // 4. Initialize N.grid and bind empty data for data list
         cont.grid = N([]).grid({
-            context : N("#grid", cont.view),
-            height : 350,
-            resizable : false,
-            sortable : true,
-            more : true,
-            checkAll : "#checkAll",
-            checkAllTarget : ".checkAllTarget"
+            context: N('#grid', cont.view),
+            height: 350,
+            resizable: false,
+            sortable: true,
+            more: true,
+            checkAll: '#checkAll',
+            checkAllTarget: '.checkAllTarget'
         }).bind();
     },
-    setEvents : function() {
+    setEvents: () => {
         // 5. Bind events
         // 5-1. Search button
-        N("#btnSearch", cont.view).on("click", function(e) {
+        N('#btnSearch', cont.view).on('click', e => {
             e.preventDefault();
-            if(cont.form.validate()) {
-                N(cont.form.data(true)).comm("html/naturaljs/exap/data/sample.json").submit(function(data, request) {
+            if (cont.form.validate()) {
+                N(cont.form.data(true)).comm('html/naturaljs/exap/data/sample.json').submit((data, request) => {
                     // Bind data with N.grid
                     cont.grid.bind(data);
                 });
             }
         });
         // 5-2. Add button
-        N("#btnAdd", cont.view).on("click", function(e) {
+        N('#btnAdd', cont.view).on('click', e => {
             e.preventDefault();
             cont.grid.add();
         });
         // 5-3. Delete button
-        N("#btnDelete", cont.view).on("click", function(e) {
+        N('#btnDelete', cont.view).on('click', e => {
             e.preventDefault();
             const checkedIndexs = cont.grid.check();
-            if(checkedIndexs.length > 0) {
+            if (checkedIndexs.length > 0) {
                 N(window).alert({
-                    msg : N.message.get(cont.messages, "EXAP0500-0001"),
-                    confirm : true,
-                    onOk : function(): undefined {
+                    msg: N.message.get(cont.messages, 'EXAP0500-0001'),
+                    confirm: true,
+                    onOk: () => {
                         cont.grid.remove(checkedIndexs);
                     }
                 }).show();
             } else {
-                N(window).alert(N.message.get(cont.messages, "EXAP0500-0004")).show();
+                N(window).alert(N.message.get(cont.messages, 'EXAP0500-0004')).show();
             }
         });
         // 5-4. Save button
-        N("#btnSave", cont.view).on("click", function(e) {
+        N('#btnSave', cont.view).on('click', e => {
             e.preventDefault();
-            if(cont.grid.data("modified").length === 0) {
-                N.notify.add(N.message.get(cont.messages, "EXAP0500-0003"));
+            if (cont.grid.data('modified').length === 0) {
+                N.notify.add(N.message.get(cont.messages, 'EXAP0500-0003'));
                 return false;
             }
-            if(cont.grid.validate()) {
+            if (cont.grid.validate()) {
                 N(window).alert({
-                    msg : N.message.get(cont.messages, "EXAP0500-0005"),
-                    confirm : true,
-                    onOk : function(): undefined {
-                        N(cont.grid.data("modified")).comm({
-                            type : NA.Objects.Request.HttpMethod.PUT,
-                            dataIsArray : true, // Send as array for multiple rows
-                            url : "html/naturaljs/exap/data/sample.json"
-                        }).submit(function(data) {
+                    msg: N.message.get(cont.messages, 'EXAP0500-0005'),
+                    confirm: true,
+                    onOk: () => {
+                        N(cont.grid.data('modified')).comm({
+                            type: NA.Objects.Request.HttpMethod.PUT,
+                            dataIsArray: true, // Send as array for multiple rows
+                            url: 'html/naturaljs/exap/data/sample.json'
+                        }).submit(data => {
                             // Show success message and re-fetch data
                         });
                     }
@@ -626,18 +626,18 @@ const cont = N(".exap0500").cont({
             }
         });
     },
-    messages : {
-        "ko_KR" : {
-            "EXAP0500-0001" : "Do you want to delete?\nIt will not be reflected in the DB until you press the save button.",
-            "EXAP0500-0002" : "Saving is complete.",
-            "EXAP0500-0003" : "No changed data.",
-            "EXAP0500-0004" : "No selected row.",
-            "EXAP0500-0005" : "Do you want to save?",
-            "EXAP0500-0006" : " - Inserted: {0} rows",
-            "EXAP0500-0007" : " - Updated: {0} rows",
-            "EXAP0500-0008" : " - Deleted: {0} rows"
+    messages: {
+        ko_KR: {
+            'EXAP0500-0001': 'Do you want to delete?\nIt will not be reflected in the DB until you press the save button.',
+            'EXAP0500-0002': 'Saving is complete.',
+            'EXAP0500-0003': 'No changed data.',
+            'EXAP0500-0004': 'No selected row.',
+            'EXAP0500-0005': 'Do you want to save?',
+            'EXAP0500-0006': ' - Inserted: {0} rows',
+            'EXAP0500-0007': ' - Updated: {0} rows',
+            'EXAP0500-0008': ' - Deleted: {0} rows'
         },
-        "en_US" : {
+        en_US: {
             // English messages...
         }
     }
@@ -734,14 +734,14 @@ An example of handling create, read, update, and delete operations directly in a
 
 The implementation is similar to the fixed header grid, but with the following differences in grid initialization options:
 
-```typescript
+```js
 // N.grid initialization (list type)
 cont.grid = N([]).grid({
-    context : N("table#grid", cont.view),
-    resizable : true, // resizable is true for list type grid
-    sortable : true,
-    checkAll : "#checkAll",
-    checkAllTarget : ".checkAllTarget"
+    context: N('table#grid', cont.view),
+    resizable: true, // resizable is true for list type grid
+    sortable: true,
+    checkAll: '#checkAll',
+    checkAllTarget: '.checkAllTarget'
 }).bind();
 ```
 

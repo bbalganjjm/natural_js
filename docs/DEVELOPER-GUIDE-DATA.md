@@ -127,12 +127,12 @@ formatter.unformat(row, key);
 - Declare format rules in the data-format attribute of the element before binding data with N.form or N.grid:
   - Example:
     ```html
-    <input id="startDate" type="text" data-format='[["date", 8]]'>
+    <input id="startDate" type="text" data-format='[["date",8]]' />
     ```
     - The format is applied when the element loses focus, and removed when it gains focus again.
     - For non-input elements:
       ```html
-      <span id="startDate" data-format='[["date", 8]]'></span>
+      <span id="startDate" data-format='[["date",8]]'></span>
       ```
       - The formatted value is set as the element's text.
 - Formatter only formats the displayed value in UI components like N.grid or N.form, without changing the original input data. There is no need to unformat data before sending it to the server.
@@ -141,7 +141,7 @@ formatter.unformat(row, key);
   - Example:
     ```javascript
     // N.formatter.{rule}("string to format", ...args);
-    N.formatter.limit("abcdefghijklmn", [12, "..."]); // 'abcdefghijkl...'
+    const result = N.formatter.limit("abcdefghijklmn", [12, "..."]); // 'abcdefghijkl...'
     ```
 
 - Triggering formatter-related events directly:
@@ -308,7 +308,7 @@ validator.validate([row]);
   - Example:
     ```javascript
     // N.validator.{rule}("String to validate", ...arguments);
-    N.validator.rangevalue("Validation string", [1, 9]); // false
+    const isValid = N.validator.rangevalue("Validation string", [1, 9]); // false
     ```
 
 - Triggering validator-related events directly:
@@ -454,38 +454,36 @@ var sortedData = N(data).datasort(condition);
 - Filtering data:
   - Example:
     ```javascript
-    var users = [
+    // Filtering data:
+    const users = [
         { id: 1, name: "John", age: 28, active: true },
         { id: 2, name: "Mike", age: 32, active: false },
         { id: 3, name: "Sarah", age: 25, active: true },
         { id: 4, name: "David", age: 35, active: true }
     ];
-    var activeUsers = N.data.filter(users, function(user) {
-        return user.active === true && user.age < 30;
-    });
+    const activeUsers = N.data.filter(users, user => user.active === true && user.age < 30);
     // Result: [{ id: 1, name: "John", age: 28, active: true }, { id: 3, name: "Sarah", age: 25, active: true }]
-    var userNamedMike = N.data.filter(users, 'name === "Mike"');
+    const userNamedMike = N.data.filter(users, 'name === "Mike"');
     // Result: [{ id: 2, name: "Mike", age: 32, active: false }]
-    var activeUsersJQuery = N(users).datafilter(function(user) {
-        return user.active === true;
-    });
+    const activeUsersJQuery = N(users).datafilter(user => user.active === true);
     // Result: jQuery object containing [{ id: 1, name: "John", age: 28, active: true }, { id: 3, name: "Sarah", age: 25, active: true }, { id: 4, name: "David", age: 35, active: true }]
     ```
 
 - Sorting data:
   - Example:
     ```javascript
-    var products = [
+    // Sorting data:
+    const products = [
         { id: 1, name: "Laptop", price: 1200 },
         { id: 2, name: "Phone", price: 800 },
         { id: 3, name: "Tablet", price: 500 },
         { id: 4, name: "Desktop", price: 1500 }
     ];
-    var sortedByPrice = N.data.sort(products, "price", false);
+    const sortedByPrice = N.data.sort(products, "price", false);
     // Result: [{ id: 3, name: "Tablet", price: 500 }, { id: 2, name: "Phone", price: 800 }, { id: 1, name: "Laptop", price: 1200 }, { id: 4, name: "Desktop", price: 1500 }]
-    var sortedByName = N.data.sort(products, "name", true);
+    const sortedByName = N.data.sort(products, "name", true);
     // Result: [{ id: 3, name: "Tablet", price: 500 }, { id: 2, name: "Phone", price: 800 }, { id: 1, name: "Laptop", price: 1200 }, { id: 4, name: "Desktop", price: 1500 }]
-    var sortedByPriceJQuery = N(products).datasort("price", true);
+    const sortedByPriceJQuery = N(products).datasort("price", true);
     // Result: jQuery object containing sorted product list
     ```
 
@@ -495,17 +493,16 @@ var sortedData = N(data).datasort(condition);
 - Combining filtering and sorting:
   - Example:
     ```javascript
-    var items = [
+    // Combining filtering and sorting:
+    const items = [
         { category: "A", value: 10, available: true },
         { category: "B", value: 5, available: false },
         { category: "A", value: 8, available: true },
         { category: "C", value: 12, available: true },
         { category: "B", value: 15, available: true }
     ];
-    var filteredAndSorted = N.data.sort(
-        N.data.filter(items, function(item) {
-            return item.available === true;
-        }),
+    const filteredAndSorted = N.data.sort(
+        N.data.filter(items, item => item.available === true),
         "value",
         true // descending
     );
@@ -521,16 +518,15 @@ var sortedData = N(data).datasort(condition);
 - Applying complex filtering conditions:
   - Example:
     ```javascript
-    var transactions = [
+    // Applying complex filtering conditions:
+    const transactions = [
         { date: "2023-01-15", amount: 120, type: "income" },
         { date: "2023-01-20", amount: 80, type: "expense" },
         { date: "2023-02-05", amount: 200, type: "income" },
         { date: "2023-02-10", amount: 50, type: "expense" },
         { date: "2023-03-01", amount: 300, type: "income" }
     ];
-    var februaryIncome = N.data.filter(transactions, function(transaction) {
-        return transaction.date.startsWith("2023-02") && transaction.type === "income";
-    });
+    const februaryIncome = N.data.filter(transactions, transaction => transaction.date.startsWith("2023-02") && transaction.type === "income");
     // Result: [{ date: "2023-02-05", amount: 200, type: "income" }]
     ```
 
