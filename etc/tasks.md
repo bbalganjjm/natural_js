@@ -46,9 +46,9 @@
 - [x] Controller - [예제]: html/naturaljs/refr/refr020106.html
 - [x] AOP - [개요]: html/naturaljs/refr/refr020201_ko_KR.md
 - [x] AOP - [pointcuts 객체]: html/naturaljs/refr/refr020202.html
-- [ ] AOP - [advisors 객체]: html/naturaljs/refr/refr020203.html
-- [ ] AOP - [예제]: html/naturaljs/refr/refr020204.html
-- [ ] Communicator - [개요]: html/naturaljs/refr/refr020301_ko_KR.md
+- [x] AOP - [advisors 객체]: html/naturaljs/refr/refr020203.html
+- [x] AOP - [예제]: html/naturaljs/refr/refr020204.html
+- [x] Communicator - [개요]: html/naturaljs/refr/refr020301_ko_KR.md
 - [ ] Communicator - [API DEMO]: html/naturaljs/refr/refr020302.html
 - [ ] Communicator - [생성자]: html/naturaljs/refr/refr020303.html
 - [ ] Communicator - [기본 옵션]: html/naturaljs/refr/refr020304.html
