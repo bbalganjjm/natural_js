@@ -1,0 +1,53 @@
+{
+    "servers": {
+        "sequential-thinking": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@modelcontextprotocol/server-sequential-thinking"
+            ]
+        },
+        "shrimp-task-manager": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "mcp-shrimp-task-manager"
+            ],
+            "env": {
+                "DATA_DIR": "C:\\Users\\bbalg\\.shrimp\\data",
+                "TEMPLATES_USE": "ko",
+                "ENABLE_GUI": "false"
+            }
+        },
+        "time-mcp": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "time-mcp"
+            ]
+        },
+        "g-search": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "g-search-mcp"
+            ]
+        },
+        "playwright": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@executeautomation/playwright-mcp-server"
+            ]
+        },
+        "postgres": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@modelcontextprotocol/server-postgres",
+                "postgresql://goldmandata:rlaghkdaks1!@postgresql.goldmandata.kr:30000/goldmandata"
+            ],
+        },
+
+    }
+}
