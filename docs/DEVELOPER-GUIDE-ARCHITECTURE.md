@@ -158,42 +158,42 @@ The Controller object defines the following constants:
 
 1. Defining View and Controller:
 
-    ```html
-    <!-- View -->
-    <article class="view">
-        <p>View</p>
-    </article>
+   ```html
+   <!-- View -->
+   <article class="view">
+       <p>View</p>
+   </article>
 
-    <!-- Controller -->
-    <script type="module">
-        N('.view').cont({
-            init(view, request) {
-                N('p', view).css('padding', '10px');
-            }
-        });
-    </script>
-    ```
+   <!-- Controller -->
+   <script type="text/javascript">
+       N(".view").cont({
+           init(view, request) {
+               N("p", view).css("padding", "10px");
+           }
+       });
+   </script>
+   ```
 
 2. Referencing the Controller object in the scope of all functions implemented in the Controller object:
 
-    ```html
-    <article class="view">
-        <p>View</p>
-    </article>
+   ```html
+   <article class="view">
+       <p>View</p>
+   </article>
 
-    <script type="module">
-    (() => {
-        const cont = N('.view').cont({
-            init(view, request) {
-                this.fn();
-            },
-            fn() {
-                N('p', cont.view).css('padding', '10px');
-            }
-        });
-    })();
-    </script>
-    ```
+   <script type="text/javascript">
+   (() => {
+       const cont = N(".view").cont({
+           init(view, request) {
+               this.fn();
+           },
+           fn() {
+              N("p", cont.view).css("padding", "10px");
+           }
+       });
+   })();
+   </script>
+   ```
 
 ## AOP
 

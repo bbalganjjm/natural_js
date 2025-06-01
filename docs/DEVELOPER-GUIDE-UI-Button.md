@@ -22,7 +22,7 @@ The Button (N.button) component allows you to easily create and manage consisten
 Creates an instance of N.button.
 
 ```javascript
-var button = new N.button(context, opts);
+const button = new N.button(context, opts);
 ```
 
 - context: jQuery object | jQuery selector string
@@ -35,7 +35,7 @@ var button = new N.button(context, opts);
 Creates an instance of the N.button object as a jQuery plugin method.
 
 ```javascript
-var button = N(context).button(opts);
+const button = N(context).button(opts);
 ```
 
 Although the instantiation method is different, instances created with "new N.button()" and "N().button" are the same. The first argument of the N() function is set as the first argument of the new N.button constructor.
@@ -80,14 +80,14 @@ N("a.button, button.button, input.button").button();
 - disable: Sets the button to a disabled state.
   - Usage:
     ```javascript
-    N("button").instance("button", function() {
+    N("button").instance("button", () => {
         this.disable();
     });
     ```
 - enable: Sets the button to an enabled state.
   - Usage:
     ```javascript
-    N("button").instance("button", function() {
+    N("button").instance("button", () => {
         this.enable();
     });
     ```
@@ -123,12 +123,12 @@ N("a.button, button.button, input.button").button();
 - Changing button state:
   ```javascript
   // Disable a button
-  N("button#myButton").instance("button", function() {
+  N("button#myButton").instance("button", () => {
       this.disable();
   });
 
   // Enable a button
-  N("button#myButton").instance("button", function() {
+  N("button#myButton").instance("button", () => {
       this.enable();
   });
   ```
@@ -139,12 +139,12 @@ N("a.button, button.button, input.button").button();
   N("button#myButton").button({
       size: "large",
       color: "primary",
-      onBeforeCreate: function(context, opts) {
+      onBeforeCreate: (context, opts) => {
           N(context).data("customData", "someValue");
           console.log("Before button creation:", context, opts);
       },
-      onCreate: function(context, opts) {
-          N(context).on("click", function() {
+      onCreate: (context, opts) => {
+          N(context).on("click", () => {
               console.log("Button clicked!");
           });
           console.log("After button creation:", context, opts);

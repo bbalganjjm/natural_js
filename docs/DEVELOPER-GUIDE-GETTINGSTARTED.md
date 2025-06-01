@@ -213,8 +213,8 @@ Now, let's create a simple index page and use N.comm to add the `block01.html` p
 <script type="text/javascript" src="js/natural_js/natural.config.js"></script>
 
 <script type="text/javascript">
-    $(document).ready(function() {
-        N(N.context.attr("architecture").page.context).comm("block01.html").submit()
+    $(document).ready(() => {
+        N(N.context.attr("architecture").page.context).comm("block01.html").submit();
     });
 </script>
 

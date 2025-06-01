@@ -5,14 +5,20 @@ Natural-TEMPLATE is a library that standardizes web application development base
 
 ## Table of Contents
 
-- [Introduction](#introduction)
-- [Installation](#installation)
-- [Development Guide](#development-guide)
-  - [Page Source Code Conventions](#page-source-code-conventions)
-  - [Controller object (N.cont) Property Naming Rules](#controller-object-ncont-property-naming-rules)
-    - [Starts with "p." - UI Component Creation](#starts-with-p---ui-component-creation)
-    - [Starts with "c." - Communicator (N.comm) Declaration](#starts-with-c---communicator-ncomm-declaration)
-    - [Starts with "e." - Event Binding](#starts-with-e---event-binding)
+- [Natural-TEMPLATE Developer Guide](#natural-template-developer-guide)
+  - [Table of Contents](#table-of-contents)
+  - [Introduction](#introduction)
+  - [Installation](#installation)
+  - [Development Guide](#development-guide)
+    - [Page Source Code Conventions](#page-source-code-conventions)
+    - [Controller object (N.cont) Property Naming Rules](#controller-object-ncont-property-naming-rules)
+      - [Starts with "p." - UI Component Creation](#starts-with-p---ui-component-creation)
+        - [N.select - Common Code Data Binding](#nselect---common-code-data-binding)
+        - [N.select - Bind General List Data to Select, Radio, Checkbox](#nselect---bind-general-list-data-to-select-radio-checkbox)
+        - [N.form](#nform)
+        - [All Other Components](#all-other-components)
+      - [Starts with "c." - Communicator (N.comm) Declaration](#starts-with-c---communicator-ncomm-declaration)
+      - [Starts with "e." - Event Binding](#starts-with-e---event-binding)
 
 ## Introduction
 
@@ -100,10 +106,10 @@ By default, the source code for block pages in Natural-JS should be structured a
 </article>
 
 <script type="text/javascript">
-(function() {
+(() => {
     // When running N.cont, pass the value of the View's class attribute ("page-id") as an argument to N.
-    var cont = N(".page-id").cont({
-        init : function(view, request) {
+    const cont = N(".page-id").cont({
+        init: (view, request) => {
             // The "init" function is automatically executed when the page load is complete.
         }
     });
@@ -132,11 +138,11 @@ Declaring `p.select.{id}` initializes the Select (N.select) component for all se
 Component initialization options can be accessed via `cont["p.{component}.{elementId}"].options`, but direct use is not recommended.
 
 ```javascript
-var cont = N(".page-id").cont({
-    "p.select.id" : {
+const cont = N(".page-id").cont({
+    "p.select.id": {
         // Component options
     },
-    init : function(view, request) {
+    init: (view, request) => {
         N.log(cont["p.select.id"].val()); // Use the component instance.
     }
 });
@@ -318,20 +324,20 @@ Declare all [Communicator (N.comm)](DEVELOPER-GUIDE-ARCHITECTURE.md) objects as 
 Example:
 
 ```javascript
-var cont = N(".page-id").cont({
-    "c.PAGEID" : function() {
+const cont = N(".page-id").cont({
+    "c.PAGEID": () => {
         // Define a Communicator to load "sample/PAGEID.html" into the .box element
         return N(".box").comm("sample/PAGEID.html");
     },
-    "c.getSampleList" : function() {
+    "c.getSampleList": () => {
         // Call "sample/getSampleList.json" using data from cont["p.form.search"]
         return cont["p.form.search"].data(false).comm("sample/getSampleList.json");
     },
-    init : function(view, request) {
+    init: (view, request) => {
         // Insert another page using the Communicator
         cont["c.PAGEID"]().submit();
         // Load data using the Communicator
-        cont["c.getSampleList"]().submit(function(data) {
+        cont["c.getSampleList"]().submit((data) => {
            cont["p.grid.master"].bind(data);
         });
     }
@@ -370,19 +376,19 @@ If you want to select elements by attributes other than id, specify the selector
 After binding, the event handler function is replaced with the target element (jQuery object).
 
 ```javascript
-var cont = N(".page-id").cont({
-    "e.id.click" : function(e) {
+const cont = N(".page-id").cont({
+    "e.id.click": (e) => {
         e.preventDefault();
         cont["p.popup.dept"].open();
     },
-    "e.id.click" : {
-        target : ".div #id",
-        handler : function(e) {
+    "e.id.click": {
+        target: ".div #id",
+        handler: (e) => {
             e.preventDefault();
             cont["p.popup.company"].open();
         }
     },
-    init : function(view, request) {
+    init: (view, request) => {
         cont["e.id.click"].trigger("click");
     }
 });
@@ -391,8 +397,8 @@ var cont = N(".page-id").cont({
 You can also apply component-provided events:
 
 ```javascript
-var cont = N(".page-id").cont({
-    "e.dateInput.onSelect" : function(e, inputEle, selDate, isMonthonly, idx) {
+const cont = N(".page-id").cont({
+    "e.dateInput.onSelect": (e, inputEle, selDate, isMonthonly, idx) => {
         e.preventDefault();
         N.log(selDate.obj.formatDate(selDate.format));
     }
@@ -404,8 +410,8 @@ If you specify an element inside N.grid or N.list, the last argument of the even
 To reduce memory usage, use event delegation instead of binding events for each row in rowHandler or rowHandlerBeforeBind.
 
 ```javascript
-var cont = N(".page-id").cont({
-    "e.id.click" : function(e, idx) {
+const cont = N(".page-id").cont({
+    "e.id.click": (e, idx) => {
         e.preventDefault();
         N.log(cont["p.grid.id"].data()[idx]);
     }
@@ -426,8 +432,8 @@ If you specify the target property as below, the context is set to the row eleme
 Natural-JS uses the change event for select elements, the click event for radio and checkbox elements, and the focusout event for other text input elements to synchronize internal and input data. Always bind events using these types to ensure you get the latest data.
 
 ```javascript
-var cont = N(".page-id").cont({
-    "e.textInput.focusout" : function(e, idx) {
+const cont = N(".page-id").cont({
+    "e.textInput.focusout": (e, idx) => {
         e.preventDefault();
         N.log(cont["p.grid.id"].val(idx, "textInput"));
     }

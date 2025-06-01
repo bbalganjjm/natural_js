@@ -4,17 +4,20 @@ Natural-TEMPLATE is a library that standardizes web application development base
 
 ## Table of Contents
 
-- [Introduction](#introduction)
-- [List of Examples](#list-of-examples)
-- [Template Examples](#template-examples)
-  - [Search Form + Grid](#search-form--grid)
-  - [Search Form + Grid (CRUD)](#search-form--grid-crud)
-  - [Search Form + Grid + Paging](#search-form--grid--paging)
-  - [Search Form + Grid + Detail Form (Horizontal Layout)](#search-form--grid--detail-form-horizontal-layout)
-  - [Search Form + Grid + Detail Form (Vertical Layout)](#search-form--grid--detail-form-vertical-layout)
-  - [Search Form + List + Grid + Detail Form](#search-form--list--grid--detail-form)
-  - [Tree + Grid (CRUD)](#tree--grid-crud)
-  - [Search Form + Tab](#search-form--tab)
+- [Natural-TEMPLATE Example Guide](#natural-template-example-guide)
+  - [Table of Contents](#table-of-contents)
+  - [Introduction](#introduction)
+  - [List of Examples](#list-of-examples)
+  - [Template Examples](#template-examples)
+    - [Search Form + Grid](#search-form--grid)
+    - [Search Form + Grid (CRUD)](#search-form--grid-crud)
+    - [Search Form + Grid + Paging](#search-form--grid--paging)
+    - [Search Form + Grid + Detail Form (Horizontal Layout)](#search-form--grid--detail-form-horizontal-layout)
+    - [Search Form + Grid + Detail Form (Vertical Layout)](#search-form--grid--detail-form-vertical-layout)
+    - [Search Form + List + Grid + Detail Form](#search-form--list--grid--detail-form)
+    - [Tree + Grid (CRUD)](#tree--grid-crud)
+    - [Search Form + Tab](#search-form--tab)
+  - [How to Use](#how-to-use)
 
 ## Introduction
 
@@ -65,7 +68,7 @@ Natural-TEMPLATE provides template examples for various patterns as follows:
     <div id="search" class="form__">
         <div class="search-panel">
             <ul>
-                <li><label><span>Name</span><input id="name" type="text"></label></li>
+                <li><label><span>Name</span><input id="name" type="text" /></label></li>
                 <li><label><span>Gender</span><select id="gender"><option value="">Select</option></select></label></li>
                 <li><label><span>Eye Color</span><select id="eyeColor"><option value="">Select</option></select></label></li>
             </ul>
@@ -75,59 +78,57 @@ Natural-TEMPLATE provides template examples for various patterns as follows:
     <div class="flex-horizental">
         <h3>N.grid</h3>
         <div class="button-panel">
-            <button id="btnSearch" data-opts="{ \"color\": \"primary\" }">Search</button>
+            <button id="btnSearch" data-opts='{ "color": "primary" }'>Search</button>
         </div>
     </div>
     <table id="master" class="grid__">
         <!-- Grid columns -->
-        <colgroup>...</colgroup>
-        <thead>...</thead>
-        <tbody>...</tbody>
-        <tfoot>...</tfoot>
+        <colgroup><!-- ... --></colgroup>
+        <thead><!-- ... --></thead>
+        <tbody><!-- ... --></tbody>
+        <tfoot><!-- ... --></tfoot>
     </table>
 </article>
 ```
 
 **Controller Implementation**
 ```javascript
-const cont = N(".type0101").cont({
+const cont = N('.type0101').cont({
     // Component initialization and options
-    "p.select.gender" : [ "gender" ],
-    "p.select.eyeColor" : [ "eyeColor" ],
-    "p.select.favoriteFruit" : [ "favoriteFruit" ],
-    "p.form.search" : {
-        "usage" : "search-box"
+    'p.select.gender': [ 'gender' ],
+    'p.select.eyeColor': [ 'eyeColor' ],
+    'p.select.favoriteFruit': [ 'favoriteFruit' ],
+    'p.form.search': {
+        usage: 'search-box'
     },
-    "p.grid.master" : {
-        "action" : "bind",
-        filter : false,
-        height : 350,
-        onBind : function(context, data) {
-            N("#totalCnt", cont.view).text(N.formatter.commas(String(data.length)));
+    'p.grid.master': {
+        action: 'bind',
+        filter: false,
+        height: 350,
+        onBind: (context, data) => {
+            N('#totalCnt', cont.view).text(N.formatter.commas(String(data.length)));
         }
     },
     // Data communication
-    "c.getSampleList" : function() {
-        return cont["p.form.search"].data(false).comm("sample/getSampleBigList.json");
-    },
+    'c.getSampleList': () => cont['p.form.search'].data(false).comm('sample/getSampleBigList.json'),
     // Event handler
-    "e.btnSearch.click" : async function(e) {
+    'e.btnSearch.click': async (e) => {
         e.preventDefault();
-        if (cont["p.form.search"].validate()) {
-            cont["p.grid.master"].bind(await cont["c.getSampleList"]().submit());
+        if (cont['p.form.search'].validate()) {
+            cont['p.grid.master'].bind(await cont['c.getSampleList']().submit());
         }
     },
-    "e.eyeColor.change" : {
-        target : "#search #eyeColor",
-        handler : function(e) {
-            cont["e.btnSearch.click"].trigger("click");
+    'e.eyeColor.change': {
+        target: '#search #eyeColor',
+        handler: (e) => {
+            cont['e.btnSearch.click'].trigger('click');
         }
     },
     // Initialization
-    init : function(view, request) {
-        if(cont.opener) {
-            cont["p.form.search"].context().hide().prev("h3").hide().prev(".view-intro").hide();
-            view.find("#btnSearch").hide();
+    init: (view, request) => {
+        if (cont.opener) {
+            cont['p.form.search'].context().hide().prev('h3').hide().prev('.view-intro').hide();
+            view.find('#btnSearch').hide();
         }
     }
 });
@@ -155,10 +156,10 @@ const cont = N(".type0101").cont({
 ```html
 <article class="type0201 view-code">
     <!-- Page introduction -->
-    <div class="view-intro">...</div>
+    <div class="view-intro"><!-- ... --></div>
     <!-- Search form -->
     <h3>N.form</h3>
-    <div id="search" class="form__">...</div>
+    <div id="search" class="form__"><!-- ... --></div>
     <!-- Grid -->
     <div class="flex-horizental">
         <h3 style="max-width: 100px;">N.grid</h3>
@@ -171,108 +172,104 @@ const cont = N(".type0101").cont({
     </div>
     <table id="master" class="grid__">
         <!-- Grid columns -->
-        <colgroup>...</colgroup>
-        <thead>...</thead>
+        <colgroup><!-- ... --></colgroup>
+        <thead><!-- ... --></thead>
         <tbody>
             <!-- Editable grid rows -->
             <tr>
                 <td rowspan="2" style="text-align: center;"><input class="checkAllTarget" type="checkbox"></td>
                 <td id="index" style="text-align: center;" rowspan="2"></td>
-                <td rowspan="2"><input id="name" type="text" data-validate="[[\"required\"]]"></td>
+                <td rowspan="2"><input id="name" type="text" data-validate='[["required"]]'></td>
                 <!-- Other input fields -->
             </tr>
             <tr>
                 <!-- Second row input fields -->
             </tr>
         </tbody>
-        <tfoot>...</tfoot>
+        <tfoot><!-- ... --></tfoot>
     </table>
 </article>
 ```
 
 **Controller Implementation**
 ```javascript
-const cont = N(".type0201").cont({
+const cont = N('.type0201').cont({
     // Component initialization and options
-    "p.select.gender" : [ "gender" ],
-    "p.select.eyeColor" : [ "eyeColor" ],
-    "p.form.search" : {
-        "usage" : "search-box"
+    'p.select.gender': [ 'gender' ],
+    'p.select.eyeColor': [ 'eyeColor' ],
+    'p.form.search': {
+        usage: 'search-box'
     },
-    "p.grid.master" : {
-        height : 350,
-        resizable : false,
-        checkAll : "#checkAll",
-        checkAllTarget : ".checkAllTarget",
-        scrollPaging : {
-            size : 15
+    'p.grid.master': {
+        height: 350,
+        resizable: false,
+        checkAll: '#checkAll',
+        checkAllTarget: '.checkAllTarget',
+        scrollPaging: {
+            size: 15
         }
     },
-    "p.popup.dept" : {
-        url : "html/naturaljs/template/samples/type04P0.html",
-        onOpen : "onOpen",
+    'p.popup.dept': {
+        url: 'html/naturaljs/template/samples/type04P0.html',
+        onOpen: 'onOpen',
         height: 621,
-        onClose : function(onCloseData) {
+        onClose: (onCloseData) => {
             if (onCloseData) {
-                cont["p.grid.master"]
-                    .val(cont.selIdx, "deptNm", onCloseData.deptNm)
-                    .val(cont.selIdx, "deptCd", onCloseData.deptCd);
+                cont['p.grid.master']
+                    .val(cont.selIdx, 'deptNm', onCloseData.deptNm)
+                    .val(cont.selIdx, 'deptCd', onCloseData.deptCd);
             }
         }
     },
     // Data communication
-    "c.getSampleList" : function() {
-        return cont["p.form.search"].data(false).comm("sample/getSampleList.json");
-    },
-    "c.saveSample" : function() {
-        return N(cont["p.grid.master"].data("modified")).comm({
-            dataIsArray : true,
-            url : "sample/saveSample.json"
-        });
-    },
+    'c.getSampleList': () => cont['p.form.search'].data(false).comm('sample/getSampleList.json'),
+    'c.saveSample': () => N(cont['p.grid.master'].data('modified')).comm({
+        dataIsArray: true,
+        url: 'sample/saveSample.json'
+    }),
     // Event handlers
-    "e.btnSearch.click" : function(e) {
+    'e.btnSearch.click': (e) => {
         e.preventDefault();
-        if (cont["p.form.search"].validate()) {
-            cont["c.getSampleList"]().submit(function(data) {
-                cont["p.grid.master"].bind(data);
+        if (cont['p.form.search'].validate()) {
+            cont['c.getSampleList']().submit((data) => {
+                cont['p.grid.master'].bind(data);
             });
         }
     },
-    "e.btnSave.click" : function(e) {
+    'e.btnSave.click': (e) => {
         e.preventDefault();
         return APP.comm.utils.save.call(this, {
-            cont : cont,
-            comm : "c.saveSample",
-            changed : "p.grid.master",
-            validate : "p.grid.master",
-            after : function(data) {
-                cont["e.btnSearch.click"].trigger("click");
+            cont,
+            comm: 'c.saveSample',
+            changed: 'p.grid.master',
+            validate: 'p.grid.master',
+            after: (data) => {
+                cont['e.btnSearch.click'].trigger('click');
             }
         });
     },
-    "e.btnAdd.click" : function(e) {
+    'e.btnAdd.click': (e) => {
         e.preventDefault();
-        cont["p.grid.master"].add();
+        cont['p.grid.master'].add();
     },
-    "e.btnDelete.click" : function(e) {
+    'e.btnDelete.click': (e) => {
         e.preventDefault();
         return APP.comm.utils.del.call(this, {
-            cont : cont,
-            inst : "p.grid.master"
+            cont,
+            inst: 'p.grid.master'
         });
     },
-    "e.btnDeptCd.click" : function(e, idx) {
+    'e.btnDeptCd.click': (e, idx) => {
         e.preventDefault();
         cont.selIdx = idx;
-        cont["p.popup.dept"].open(cont["p.grid.master"].data()[idx]);
+        cont['p.popup.dept'].open(cont['p.grid.master'].data()[idx]);
     },
     // Initialization
-    init : function(view, request) {
-        if(cont.opener) {
+    init: (view, request) => {
+        if (cont.opener) {
             // Logic for parent page
         } else {
-            cont["e.btnSearch.click"].trigger("click");
+            cont['e.btnSearch.click'].trigger('click');
         }
     }
 });
@@ -299,10 +296,10 @@ const cont = N(".type0201").cont({
 ```html
 <article class="type0301 view-code">
     <!-- Page introduction -->
-    <div class="view-intro">...</div>
+    <div class="view-intro"><!-- ... --></div>
     <!-- Search form -->
     <h3>N.form</h3>
-    <div id="search" class="form__">...</div>
+    <div id="search" class="form__"><!-- ... --></div>
     <!-- Grid -->
     <div class="flex-horizental">
         <h3>N.grid + N.pagination(DB)</h3>
@@ -311,7 +308,7 @@ const cont = N(".type0201").cont({
         </div>
     </div>
     <div style="position: relative; min-height: 483px;">
-        <table id="master" class="grid__">...</table>
+        <table id="master" class="grid__"><!-- ... --></table>
     </div>
     <!-- Pagination -->
     <div class="pagination-box">
@@ -334,74 +331,71 @@ const cont = N(".type0201").cont({
 
 **Controller Implementation**
 ```javascript
-const cont = N(".type0301").cont({
+const cont = N('.type0301').cont({
     // Component initialization and options
-    "p.select.gender" : [ "gender" ],
-    "p.select.eyeColor" : [ "eyeColor" ],
-    "p.form.search" : {
-        "usage" : "search-box"
+    'p.select.gender': [ 'gender' ],
+    'p.select.eyeColor': [ 'eyeColor' ],
+    'p.form.search': {
+        usage: 'search-box'
     },
-    "p.grid.master" : {
-        resizable : true,
-        filter : false,
-        fixedcol : 3,
-        checkAll : "#checkAll",
-        checkAllTarget : ".checkAllTarget",
-        createRowDelay : 0
+    'p.grid.master': {
+        resizable: true,
+        filter: false,
+        fixedcol: 3,
+        checkAll: '#checkAll',
+        checkAllTarget: '.checkAllTarget',
+        createRowDelay: 0
     },
-    "p.pagination.masterPagination" : {
-        blockOnChangeWhenBind : true,
-        countPerPage : 15,
-        onChange : function(pageNo, selEle, selData, currPageNavInfo) {
-            cont["c.getSampleList"]().submit(function(data) {
+    'p.pagination.masterPagination': {
+        blockOnChangeWhenBind: true,
+        countPerPage: 15,
+        onChange: (pageNo, selEle, selData, currPageNavInfo) => {
+            cont['c.getSampleList']().submit((data) => {
                 let totalCount = 0;
-                if(Array.isArray(data) && data[0] && data[0].totalCount) {
+                if (Array.isArray(data) && data[0] && data[0].totalCount) {
                     totalCount = data[0].totalCount;
                 }
-                cont["p.pagination.masterPagination"].bind(totalCount);
-                cont["p.grid.master"].bind(data);
+                cont['p.pagination.masterPagination'].bind(totalCount);
+                cont['p.grid.master'].bind(data);
             });
         }
     },
     // Data communication
-    "c.getSampleList" : function() {
-        return N($.extend(cont["p.form.search"].data()[0], cont["p.pagination.masterPagination"].currPageNavInfo())).comm(
-            "sample/getSamplePaginationList.json");
-    },
+    'c.getSampleList': () => N(Object.assign(cont['p.form.search'].data()[0], cont['p.pagination.masterPagination'].currPageNavInfo())).comm('sample/getSamplePaginationList.json'),
     // Event handler
-    "e.btnSearch.click" : function(e) {
+    'e.btnSearch.click': (e) => {
         e.preventDefault();
-        if (cont["p.form.search"].validate()) {
-            cont["p.pagination.masterPagination"].pageNo(1).bind();
-            cont["c.getSampleList"]().submit(function(data) {
+        if (cont['p.form.search'].validate()) {
+            cont['p.pagination.masterPagination'].pageNo(1).bind();
+            cont['c.getSampleList']().submit((data) => {
                 let totalCount = 0;
-                if(Array.isArray(data) && data[0] && data[0].totalCount) {
+                if (Array.isArray(data) && data[0] && data[0].totalCount) {
                     totalCount = data[0].totalCount;
                 }
-                cont["p.pagination.masterPagination"].bind(totalCount);
-                cont["p.grid.master"].bind(data);
+                cont['p.pagination.masterPagination'].bind(totalCount);
+                cont['p.grid.master'].bind(data);
             });
         }
     },
     // Other event handlers
-    "e.gender.change" : {
-        target : "#search #gender",
-        handler : function(e) {
-            cont["e.btnSearch.click"].trigger("click");
+    'e.gender.change': {
+        target: '#search #gender',
+        handler: (e) => {
+            cont['e.btnSearch.click'].trigger('click');
         }
     },
-    "e.eyeColor.change" : {
-        target : "#search #eyeColor",
-        handler : function(e) {
-            cont["e.btnSearch.click"].trigger("click");
+    'e.eyeColor.change': {
+        target: '#search #eyeColor',
+        handler: (e) => {
+            cont['e.btnSearch.click'].trigger('click');
         }
     },
     // Initialization
-    init : function(view, request) {
-        if(cont.opener) {
+    init: (view, request) => {
+        if (cont.opener) {
             // Logic for parent page
         } else {
-            cont["e.btnSearch.click"].trigger("click");
+            cont['e.btnSearch.click'].trigger('click');
         }
     }
 });
@@ -429,10 +423,10 @@ const cont = N(".type0301").cont({
 ```html
 <article class="type0401 view-code">
     <!-- Page introduction -->
-    <div class="view-intro">...</div>
+    <div class="view-intro"><!-- ... --></div>
     <!-- Search form -->
     <h3>N.form</h3>
-    <div id="search" class="form__">...</div>
+    <div id="search" class="form__"><!-- ... --></div>
     <div class="flex-horizental">
         <!-- Grid area -->
         <div style="max-width: 33%;">
@@ -443,7 +437,7 @@ const cont = N(".type0301").cont({
                     <button id="btnSave">Save</button>
                 </div>
             </div>
-            <table id="master" class="grid__">...</table>
+            <table id="master" class="grid__"><!-- ... --></table>
         </div>
         <!-- Detail form area (horizontal layout) -->
         <div>
@@ -466,7 +460,7 @@ const cont = N(".type0301").cont({
                 <li>
                     <label>
                         <span>Name</span>
-                        <input id="name" type="text" data-validate="[[\"required\"]]">
+                        <input id="name" type="text" data-validate='[["required"]]'>
                     </label>
                 </li>
                 <!-- Other form elements -->
@@ -478,115 +472,109 @@ const cont = N(".type0301").cont({
 
 **Controller Implementation**
 ```javascript
-const cont = N(".type0401").cont({
+const cont = N('.type0401').cont({
     // Component initialization and options
-    "p.select.gender" : [ "gender" ],
-    "p.select.eyeColor" : [ "eyeColor" ],
-    "p.select.company" : [ "company" ],
-    "p.select.favoriteFruit" : [ "favoriteFruit" ],
-    "p.select.age" : [ "c.getSampleCodeList", "age", "age", function(data) {
-        return N(N.array.deduplicate(data, "age")).datasort("age");
+    'p.select.gender': [ 'gender' ],
+    'p.select.eyeColor': [ 'eyeColor' ],
+    'p.select.company': [ 'company' ],
+    'p.select.favoriteFruit': [ 'favoriteFruit' ],
+    'p.select.age': [ 'c.getSampleCodeList', 'age', 'age', (data) => {
+        return N(N.array.deduplicate(data, 'age')).datasort('age');
     }],
-    "p.form.search" : {
-        "usage" : "search-box"
+    'p.form.search': {
+        usage: 'search-box'
     },
-    "p.form.detail" : {
-        revert : true,
-        autoUnbind : true
+    'p.form.detail': {
+        revert: true,
+        autoUnbind: true
     },
-    "p.grid.master" : {
-        height : 486,
-        select : true,
-        selectScroll : false,
-        onSelect : function(index, rowEle, data, beforeRow, e) {
+    'p.grid.master': {
+        height: 486,
+        select: true,
+        selectScroll: false,
+        onSelect: (index, rowEle, data, beforeRow, e) => {
             // Pre-processing
             APP.comm.utils.selectNBind.call(this, {
                 args: arguments,
-                cont : cont,
-                form : "p.form.detail"
+                cont: cont,
+                form: 'p.form.detail'
             });
             // Post-processing
         },
-        onBind : function(context, data, isFirstPage, isLastPage) {
-            if(isFirstPage) {
+        onBind: (context, data, isFirstPage, isLastPage) => {
+            if (isFirstPage) {
                 this.select(0);
             }
         }
     },
-    "p.popup.dept" : {
-        url : "html/naturaljs/template/samples/type04P0.html",
-        onOpen : "onOpen",
+    'p.popup.dept': {
+        url: 'html/naturaljs/template/samples/type04P0.html',
+        onOpen: 'onOpen',
         height: 621,
-        onClose : function(onCloseData) {
+        onClose: (onCloseData) => {
             if (onCloseData) {
-                cont["p.form.detail"]
-                    .val("deptNm", onCloseData.deptNm)
-                    .val("deptCd", onCloseData.deptCd);
+                cont['p.form.detail']
+                    .val('deptNm', onCloseData.deptNm)
+                    .val('deptCd', onCloseData.deptCd);
             }
         }
     },
     // Data communication
-    "c.getSampleCodeList" : function() {
-        return N.comm("sample/getSampleList.json");
-    },
-    "c.getSampleList" : function() {
-        return cont["p.form.search"].data(false).comm("sample/getSampleList.json");
-    },
-    "c.saveSample" : function() {
-        return N(cont["p.grid.master"].data("modified")).comm({
-            dataIsArray : true,
-            url : "sample/saveSample.json"
-        });
-    },
+    'c.getSampleCodeList': () => N.comm('sample/getSampleList.json'),
+    'c.getSampleList': () => cont['p.form.search'].data(false).comm('sample/getSampleList.json'),
+    'c.saveSample': () => N(cont['p.grid.master'].data('modified')).comm({
+        dataIsArray: true,
+        url: 'sample/saveSample.json'
+    }),
     // Event handlers
-    "e.btnSearch.click" : function(e) {
+    'e.btnSearch.click': (e) => {
         e.preventDefault();
-        if (cont["p.form.search"].validate()) {
-            cont["c.getSampleList"]().submit(function(data) {
-                cont["p.grid.master"].bind(data);
+        if (cont['p.form.search'].validate()) {
+            cont['c.getSampleList']().submit((data) => {
+                cont['p.grid.master'].bind(data);
             });
         }
     },
-    "e.btnDeptCd.click" : function(e) {
+    'e.btnDeptCd.click': (e) => {
         e.preventDefault();
-        cont["p.popup.dept"].open(cont["p.form.detail"].data(true)[0]);
+        cont['p.popup.dept'].open(cont['p.form.detail'].data(true)[0]);
     },
-    "e.btnSave.click" : function(e) {
+    'e.btnSave.click': (e) => {
         e.preventDefault();
         return APP.comm.utils.save.call(this, {
-            cont : cont,
-            comm : "c.saveSample",
-            changed : "p.grid.master",
-            validate : "p.form.detail",
-            after : function(data) {
-                cont["e.btnSearch.click"].trigger("click");
+            cont: cont,
+            comm: 'c.saveSample',
+            changed: 'p.grid.master',
+            validate: 'p.form.detail',
+            after: (data) => {
+                cont['e.btnSearch.click'].trigger('click');
             }
         });
     },
-    "e.btnAdd.click" : function(e) {
+    'e.btnAdd.click': (e) => {
         e.preventDefault();
-        if (cont["p.form.detail"].validate()) {
-            cont["p.form.detail"].add();
+        if (cont['p.form.detail'].validate()) {
+            cont['p.form.detail'].add();
         }
     },
-    "e.btnDelete.click" : function(e) {
+    'e.btnDelete.click': (e) => {
         e.preventDefault();
-        cont["p.form.detail"].remove();
+        cont['p.form.detail'].remove();
     },
-    "e.btnRevert.click" : function(e) {
+    'e.btnRevert.click': (e) => {
         e.preventDefault();
-        if (cont["p.grid.master"].data("modified").length === 0) {
-            N(window).alert(N.message.get(APP.comm.messages, "COMM-0001")).show();
+        if (cont['p.grid.master'].data('modified').length === 0) {
+            N(window).alert(N.message.get(APP.comm.messages, 'COMM-0001')).show();
             return false;
         }
-        cont["p.form.detail"].revert();
+        cont['p.form.detail'].revert();
     },
     // Initialization
-    init : function(view, request) {
-        if(cont.opener) {
+    init: (view, request) => {
+        if (cont.opener) {
             // Logic for parent page
         } else {
-            cont["e.btnSearch.click"].trigger("click");
+            cont['e.btnSearch.click'].trigger('click');
         }
     }
 });
@@ -614,10 +602,10 @@ const cont = N(".type0401").cont({
 ```html
 <article class="type0402 view-code">
     <!-- Page introduction -->
-    <div class="view-intro">...</div>
+    <div class="view-intro"><!-- ... --></div>
     <!-- Search form -->
     <h3>N.form</h3>
-    <div id="search" class="form__">...</div>
+    <div id="search" class="form__"><!-- ... --></div>
     <!-- Grid -->
     <div class="flex-horizental">
         <h3>N.grid</h3>
@@ -626,7 +614,7 @@ const cont = N(".type0401").cont({
             <button id="btnSave">Save</button>
         </div>
     </div>
-    <table id="master" class="grid__">...</table>
+    <table id="master" class="grid__"><!-- ... --></table>
     <!-- Detail form area (vertical layout) -->
     <div>
         <div class="flex-horizental">
@@ -646,52 +634,52 @@ const cont = N(".type0401").cont({
 
 **Controller Implementation**
 ```javascript
-const cont = N(".type0402").cont({
+const cont = N('.type0402').cont({
     // Component initialization and options
-    "p.select.gender" : {
-        "code" : "gender",
-        "selected" : "male"
+    'p.select.gender': {
+        code: 'gender',
+        selected: 'male'
     },
-    "p.select.eyeColor" : {
-        "code" : "eyeColor"
+    'p.select.eyeColor': {
+        code: 'eyeColor'
     },
-    "p.select.company" : {
-        "code" : "company"
+    'p.select.company': {
+        code: 'company'
     },
-    "p.select.favoriteFruit" : {
-        "code" : "favoriteFruit"
+    'p.select.favoriteFruit': {
+        code: 'favoriteFruit'
     },
-    "p.select.age" : {
-        "comm" : "c.getSampleCodeList",
-        key : "age",
-        val : "age",
-        "filter" : function(data) {
-            return N(N.array.deduplicate(data, "age")).datasort("age");
+    'p.select.age': {
+        comm: 'c.getSampleCodeList',
+        key: 'age',
+        val: 'age',
+        filter: (data) => {
+            return N(N.array.deduplicate(data, 'age')).datasort('age');
         },
-        "selected" : "22"
+        selected: '22'
     },
-    "p.form.search" : {
-        "usage" : "search-box"
+    'p.form.search': {
+        usage: 'search-box'
     },
-    "p.form.detail" : {
-        revert : true,
-        autoUnbind : true
+    'p.form.detail': {
+        revert: true,
+        autoUnbind: true
     },
-    "p.grid.master" : {
-        height : 200,
-        select : true,
-        selectScroll : false,
-        onSelect : function(index, rowEle, data, beforeRow, e) {
+    'p.grid.master': {
+        height: 200,
+        select: true,
+        selectScroll: false,
+        onSelect: (index, rowEle, data, beforeRow, e) => {
             // Pre-processing
             APP.comm.utils.selectNBind.call(this, {
                 args: arguments,
-                cont : cont,
-                form : "p.form.detail"
+                cont: cont,
+                form: 'p.form.detail'
             });
             // Post-processing
         },
-        onBind : function(context, data, isFirstPage, isLastPage) {
-            if(isFirstPage) {
+        onBind: (context, data, isFirstPage, isLastPage) => {
+            if (isFirstPage) {
                 this.select(0);
             }
         }

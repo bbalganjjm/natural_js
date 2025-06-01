@@ -145,8 +145,8 @@ The Natural-JS API documentation provides usage and descriptions for the feature
   Example:
 
   ```javascript
-  N.grid(argument[0])
-  N().grid(argument[0])
+  N.grid(argument[0]);
+  N().grid(argument[0]);
   ```
 
 - **Default Options**: Describes the default options for the component or library.
@@ -154,7 +154,7 @@ The Natural-JS API documentation provides usage and descriptions for the feature
   Example:
 
   ```javascript
-  N([]).grid({ resizeable: true })
+  N([]).grid({ resizeable: true });
   ```
 
 - **Declarative Options**: Describes options defined in JSON format in the data-* attributes of template HTML elements used by the component or library.
@@ -183,7 +183,7 @@ The Natural-JS API documentation provides usage and descriptions for the feature
   Example:
 
   ```javascript
-  N([]).grid({ resizeable: true }).revert(3)
+  N([]).grid({ resizeable: true }).revert(3);
   ```
 
 - **Examples**: Provides usage examples for the component or library.

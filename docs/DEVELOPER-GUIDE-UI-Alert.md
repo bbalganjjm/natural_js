@@ -22,9 +22,9 @@ Alert (N.alert) is a UI component that displays message dialogs, such as window.
 Creates an instance of N.alert.
 
 ```javascript
-var alert = new N.alert(context, opts|msg);
+const alert = new N.alert(context, opts|msg);
 // or
-var alert = new N.alert(context, opts|msg, vars);
+const alert = new N.alert(context, opts|msg, vars);
 ```
 
 - context: window | jQuery object | jQuery selector string
@@ -39,9 +39,9 @@ var alert = new N.alert(context, opts|msg, vars);
 Creates an instance of the N.alert object as a jQuery plugin method.
 
 ```javascript
-var alert = N(context).alert(opts|msg);
+const alert = N(context).alert(opts|msg);
 // or
-var alert = N(context).alert(opts|msg, vars);
+const alert = N(context).alert(opts|msg, vars);
 ```
 
 Although the instantiation method is different, instances created with "new N.alert()" and "N().alert" are the same. The first argument of the N() function is set as the first argument of the new N.alert constructor.
@@ -143,10 +143,10 @@ Although the instantiation method is different, instances created with "new N.al
   N(window).alert({
       msg: "Do you want to continue?",
       confirm: true,
-      onOk: function() {
+      onOk: () => {
           console.log("User clicked OK.");
       },
-      onCancel: function() {
+      onCancel: () => {
           console.log("User clicked Cancel.");
       }
   }).show();
