@@ -13,10 +13,14 @@ Natural-DATA 모듈은 데이터 조작, 검증, 형식화 및 관련 작업을 
 2. [Validator](#validator)
    - [개요](#validator-개요)
    - [생성자](#validator-생성자)
-   - [메소드](#validator-메소드)
-   - [사용 예제](#validator-사용-예제)
-   - [검증 규칙 목록](#validator-검증-규칙-목록)
+   - [함수](#함수)
+   - [유효성 검증 룰 목록](#유효성-검증-룰-목록)
+   - [예제](#예제)
 3. [Natural-DATA 라이브러리](#natural-data-라이브러리)
+   - [개요](#natural-data-라이브러리-개요)
+   - [메소드](#natural-data-라이브러리-메소드)
+   - [사용 예제](#natural-data-라이브러리-사용-예제)
+   - [고급 활용](#natural-data-라이브러리-고급-활용)
 
 ## Formatter
 
@@ -336,7 +340,108 @@ var validator = N(data).validator(rules|context);
 
 객체 인스턴스를 생성하는 방법은 다르지만, "new N.validator()"로 생성된 인스턴스와 "N().validator"로 생성된 인스턴스는 동일합니다. N() 함수의 첫 번째 인자는 새 N.validator 생성자의 첫 번째 인자로 설정됩니다.
 
-(추가 내용은 Validator의 Methods, Examples, Validation rule list 정보가 수집되면 보완될 예정입니다.)
+### 함수
+
+#### validate
+
+지정된 데이터의 유효성을 검증합니다.
+
+```javascript
+validator.validate([row]);
+```
+
+| 인자 | 타입 | 필수 | 설명 |
+|------|------|------|------|
+| row | number | X | 유효성 검증할 데이터 목록의 행 index. 입력하지 않으면 전체 행 데이터가 검증됩니다. |
+
+#### 반환값
+
+* **Object**: 유효성 검증 결과 데이터. 검증에 실패한 요소는 포커스가 주어지고 툴팁 형태로 오류 메시지가 표시됩니다.
+
+> 검증 메시지는 Config(natural.config.js)의 N.context.attr("data").validator.message 속성에서 설정할 수 있습니다.
+
+### 유효성 검증 룰 목록
+
+검증 룰 이름은 대소문자를 구분하지 않습니다.
+
+| 룰명 | 설명 |
+|------|------|
+| ["required"] | 필수입력 |
+| ["alphabet"] | 영문자만 입력 가능 |
+| ["integer"] | 숫자(정수)만 입력 가능 |
+| ["korean"] | 한글만 입력 가능 |
+| ["alphabet+integer"] | 영문자와 숫자(정수)만 입력 가능(+로 구분하고 순서는 관계없음) |
+| ["integer+korean"] | 숫자(정수)와 한글만 입력 가능(+로 구분하고 순서는 관계없음) |
+| ["alphabet+korean"] | 영문자와 한글만 입력 가능(+로 구분하고 순서는 관계없음) |
+| ["alphabet+integer+korean"] | 영문자, 숫자(정수), 한글만 입력 가능(+로 구분하고 순서는 관계없음) |
+| ["integer+dash"] | 숫자(정수), 대시(-)만 입력 가능(+로 구분하고 순서는 관계없음) |
+| ["integer+commas"] | 숫자(정수), 콤마(,)만 입력 가능(+로 구분하고 순서는 관계없음) |
+| ["number"] | 숫자(정수), 콤마(,), 점(.)만 입력 가능 |
+| ["decimal", length] | (유한)소수 점 length 번째 자리까지 입력 가능 |
+| ["phone", isPartialDigits] | 전화번호 형식에 맞는지 검사. isPartialDigits 이 true 이면 전화번호 마지막 4자리중 1자리만 입력되어도 통과 됩니다. |
+| ["email"] | e-mail 형식에 맞는지 검사 |
+| ["url"] | URL 형식에 맞는지 검사 |
+| ["zipcode"] | 우편번호 형식에 맞는지 검사 |
+| ["rrn"] | 주민등록번호 형식과 일치하는지 검사 |
+| ["ssn"] | 미국 사회보장번호 형식에 맞는지 검사 |
+| ["frn"] | 외국인등록번호 형식과 일치하는지 검사 |
+| ["frn_rrn"] | 외국인등록번호 또는 주민등록번호 형식과 일치하는지 검사 |
+| ["kbrn"] | 사업자등록번호 형식과 일치하는지 검사 |
+| ["kcn"] | 법인번호 형식과 일치하는지 검사 |
+| ["date"] | 날짜 형식과 일치하는지 검사 |
+| ["time"] | 시간 형식과 일치하는지 검사 |
+| ["accept", "word"] | "word" 값만 입력 가능 |
+| ["notAccept", "word"] | "word" 값만 입력 불가능 |
+| ["match", "word"] | "word" 값이 포함된 값만 입력 가능 |
+| ["notMatch", "word"] | "word"가 포함된 값은 입력 불가능 |
+| ["acceptFileExt", "fileExtention"] | "fileExtention" 값이 포함된 확장자만 입력 가능 |
+| ["notAcceptFileExt", "fileExtention"] | "fileExtention"가 포함된 확장자는 입력 불가능 |
+| ["equalTo", "input"] | "input"의 값과 같아야 입력 가능 |
+| ["maxlength", length] | length 이하의 글자 수만 입력 가능 |
+| ["minlength", length] | length 이상의 글자 수만 입력 가능 |
+| ["rangelength", startLength, endLength] | startLength 글자 수에서 endLength 글자 수까지만 입력 가능 |
+| ["maxbyte", byteLength, defaultCharByteLength] | byteLength 바이트 이하만 입력 가능. defaultCharByteLength는 영문, 숫자, 기본 특수문자 등을 제외한 한글, 한글 특수 문자 등의 기본 바이트 길이입니다. 입력하지 않으면 Config(natural.config.js)의 N.context.attr("core").charByteLength 값이 적용됩니다. |
+| ["minbyte", byteLength, defaultCharByteLength] | byteLength 바이트 이상만 입력 가능. defaultCharByteLength는 영문, 숫자, 기본 특수문자 등을 제외한 한글, 한글 특수 문자 등의 기본 바이트 길이입니다. 입력하지 않으면 Config(natural.config.js)의 N.context.attr("core").charByteLength 값이 적용됩니다. |
+| ["rangebyte", startByteLength, endByteLength, defaultCharByteLength] | startByteLength 바이트에서 endByteLength 바이트 까지만 입력 가능. defaultCharByteLength는 영문, 숫자, 기본 특수문자 등을 제외한 한글, 한글 특수 문자 등의 기본 바이트 길이입니다. 입력하지 않으면 Config(natural.config.js)의 N.context.attr("core").charByteLength 값이 적용됩니다. |
+| ["maxvalue", number] | "value" 이하의 값만 입력 가능 |
+| ["minvalue", number] | "value" 이상의 값만 입력 가능 |
+| ["rangevalue", startNumber, endNumber] | "startValue" 값에서 "endValue" 값 까지만 입력 가능 |
+| ["regexp", "regexp string", "flag", "message"] | 입력한 "regexp string"의 조건으로 유효성 검증 후 검증에 실패하면 "message" 값을 툴팁으로 표시합니다. 정규식 평가는 \{regexp string}\{flag} 형태로 실행됩니다. "flag"가 없으면 빈 값으로 넣어주세요. "message"를 입력하지 않으면 기본 메시지("필드 검증에 통과하지 못했습니다.")가 표시됩니다. |
+
+### 예제
+
+#### 1. 입력 요소에 유효성 검증 규칙 선언하기
+
+```html
+<input id="col01" type="text" data-validate='[["required"]]'>
+```
+
+위와 같이 입력 요소에 선언하면, 포커스가 해당 요소에서 벗어날 때 유효성 검증이 실행되며, 유효성 검증에 실패할 경우 실패 원인을 입력 요소 옆에 툴팁으로 보여 줍니다.
+
+#### 2. N.validator 라이브러리를 사용하여 유효성 검증하기
+
+입력 요소에 data-validate='[["rangevalue", 1, 9]]' 와 같이 검증 규칙을 선언하면 프레임워크 내부에서는 "rangevalue" 다음의 1과 9를 [1, 9]와 같이 Array 형태로 변환하여 N.validator.rangevalue 함수의 인수로 실행합니다.
+
+유효성 검증 규칙 함수를 명령으로 처리하는 방법은 다음과 같습니다.
+
+```javascript
+// N.validator.{rule}("String to validate", ...arguments);
+N.validator.rangevalue("Validation string", [1, 9]); // false
+```
+
+#### 3. 요소에 바인딩된 Validator 관련 이벤트를 직접 실행하기
+
+Validator는 룰 대신 입력 요소를 지정하면, 해당 입력 요소에 "validate" 이벤트를 생성합니다. 이 이벤트는 jQuery의 trigger 메서드를 통해 직접 실행할 수 있습니다.
+
+```javascript
+N("input[name='targetEle']").trigger("validate");
+```
+
+#### 4. 동적으로 유효성 검증 규칙을 변경하고 즉시 반영하기
+
+```javascript
+N("selector").data("validate", [["required"]]).trigger("validate");
+```
 
 ## Natural-DATA 라이브러리
 
