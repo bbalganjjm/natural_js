@@ -19,6 +19,13 @@
                 "ENABLE_GUI": "false"
             }
         },
+        "context7": {
+            "command": "npx",
+            "args": ["-y", "@upstash/context7-mcp"],
+            "env": {
+                "DEFAULT_MINIMUM_TOKENS": "6000"
+            }
+        },
         "time-mcp": {
             "command": "npx",
             "args": [
