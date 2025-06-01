@@ -40,6 +40,8 @@ Natural-JS는 다음과 같은 주요 패키지로 구성되어 있습니다:
 - **N()**: Natural-JS 코어 메서드로, 전달된 인수를 기반으로 DOM에서 요소를 찾거나 HTML 문자열을 전달하여 생성된 일치하는 요소의 컬렉션을 반환합니다.
 - **N**: Natural-JS의 코어 함수들이 정의되어 있는 객체 클래스입니다.
 
+자세한 내용은 [Natural-CORE 가이드](DEVELOPER-GUIDE-CORE.md)를 참조하세요.
+
 N()과 N은 다음과 같은 jQuery 확장 기능과 유틸리티 클래스를 제공합니다:
 
 - **jQuery 셀렉터 확장**: HTML의 style이나 data- 속성으로도 셀렉터를 정의할 수 있는 jQuery 셀렉터 확장 기능
@@ -53,10 +55,14 @@ N()과 N은 다음과 같은 jQuery 확장 기능과 유틸리티 클래스를 �
 - **N.array**: 배열 데이터 조작을 위한 함수 집합 클래스
 - **N.json**: JSON 데이터 조작을 위한 함수 집합 클래스
 - **N.event**: 이벤트 제어를 위한 함수 집합 클래스
+- **N.message**: 메시지(다국어) 처리를 위한 함수 집합 클래스
+- **N.array**: 배열 데이터 조작을 위한 함수 집합 클래스
+- **N.json**: JSON 데이터 조작을 위한 함수 집합 클래스
+- **N.event**: 이벤트 제어를 위한 함수 집합 클래스
 
 ### Config(natural.config.js)
 
-Config(natural.config.js)는 Natural-JS의 운영 환경 설정, AOP 설정, Communication Filter 설정, UI 컴포넌트의 기본 옵션 값 등을 저장하는 공간입니다.
+Config(natural.config.js)는 Natural-JS의 운영 환경 설정, AOP 설정, Communication Filter 설정, UI 컴포넌트의 기본 옵션 값 등을 저장하는 공간입니다. 자세한 내용은 [Config 레퍼런스](DEVELOPER-GUIDE-CONFIG.md)를 참조하세요.
 
 ## Natural-ARCHITECTURE
 
@@ -87,18 +93,18 @@ View는 별도의 구현체가 없으며, 블록 페이지의 HTML 요소 영역
 
 #### Communicator
 
-Communicator(N.comm)는 CVC 아키텍처 패턴의 커뮤니케이터 레이어를 구현한 클래스입니다.
+Communicator(N.comm)는 CVC 아키텍처 패턴의 커뮤니케이터 레이어를 구현한 클래스입니다. 자세한 내용은 [Communicator 가이드](DEVELOPER-GUIDE-COMMUNICATOR.md)를 참조하세요.
 - N.comm은 서버에 콘텐츠나 데이터를 요청하거나 매개변수를 전달하는 등, 서버와의 Ajax 통신을 지원하는 라이브러리입니다.
 - N.comm은 서버와 통신하는 모든 요청 및 응답 또는 오류 발생 단계에서 공통 로직을 실행할 수 있는 Communication Filter 기능을 제공합니다.
 
 #### Context
 
-Context(N.context)는 Natural-JS 기반 애플리케이션의 Life-Cycle(페이지가 적재되고 다른 URL로 redirect되기 전까지) 안에서 데이터의 영속성을 보장하는 공간입니다.
+Context(N.context)는 Natural-JS 기반 애플리케이션의 Life-Cycle(페이지가 적재되고 다른 URL로 redirect되기 전까지) 안에서 데이터의 영속성을 보장하는 공간입니다. 자세한 내용은 [Context 가이드](DEVELOPER-GUIDE-CONTEXT.md)를 참조하세요.
 - Natural-JS의 환경 설정 값(Config(natural.config.js)), 프레임워크 공통 메시지 등이 N.context 객체에 저장됩니다.
 
 ## Natural-DATA
 
-Natural-DATA는 데이터의 동기화, 포맷팅, 유효성 검사, 가공을 지원하는 라이브러리 패키지입니다.
+Natural-DATA는 데이터의 동기화, 포맷팅, 유효성 검사, 가공을 지원하는 라이브러리 패키지입니다. 자세한 내용은 [Natural-DATA 가이드](DEVELOPER-GUIDE-DATA.md)를 참조하세요.
 
 ### DataSync
 
@@ -119,51 +125,51 @@ Natural-DATA Library는 json object array 유형의 데이터를 정렬, 필터�
 
 ## Natural-UI
 
-Natural-UI는 HTML 기반의 UI 컴포넌트를 지원하는 라이브러리 패키지입니다. Grid, List, Form 등의 컴포넌트는 자체 스타일이 없습니다. 컴포넌트를 초기화하기 전에 컴포넌트의 컨텍스트 요소(table, ul/li 등)에 스타일을 정의해 놓으면 정의된 스타일대로 컴포넌트가 생성됩니다.
+Natural-UI는 HTML 기반의 UI 컴포넌트를 지원하는 라이브러리 패키지입니다. Grid, List, Form 등의 컴포넌트는 자체 스타일이 없습니다. 컴포넌트를 초기화하기 전에 컴포넌트의 컨텍스트 요소(table, ul/li 등)에 스타일을 정의해 놓으면 정의된 스타일대로 컴포넌트가 생성됩니다. 자세한 내용은 [Natural-UI 가이드](DEVELOPER-GUIDE-UI.md)를 참조하세요.
 
 ### Alert
 
-Alert(N.alert)은 window.alert이나 window.confirm 같은 메시지 대화상자를 레이어 팝업 형태로 표현해주는 UI 컴포넌트입니다.
+Alert(N.alert)은 window.alert이나 window.confirm 같은 메시지 대화상자를 레이어 팝업 형태로 표현해주는 UI 컴포넌트입니다. 자세한 내용은 [Alert 가이드](DEVELOPER-GUIDE-UI-Alert.md)를 참조하세요.
 
 ### Button
 
-Button(N.button)은 context 옵션으로 지정된 "a, input[type=button], button" 요소를 사용하여 버튼을 만드는 UI 컴포넌트입니다.
+Button(N.button)은 context 옵션으로 지정된 "a, input[type=button], button" 요소를 사용하여 버튼을 만드는 UI 컴포넌트입니다. 자세한 내용은 [Button 가이드](DEVELOPER-GUIDE-UI-Button.md)를 참조하세요.
 
 ### Datepicker
 
-Datepicker(N.datepicker)는 context 옵션으로 지정한 텍스트 입력 요소에 날짜나 월을 선택하여 입력할 수 있는 달력 팝업을 표시해 주는 UI 컴포넌트입니다.
+Datepicker(N.datepicker)는 context 옵션으로 지정한 텍스트 입력 요소에 날짜나 월을 선택하여 입력할 수 있는 달력 팝업을 표시해 주는 UI 컴포넌트입니다. 자세한 내용은 [Datepicker 가이드](DEVELOPER-GUIDE-UI-Datepicker.md)를 참조하세요.
 
 ### Popup
 
-Popup(N.popup)은 context 옵션으로 지정한 내부 요소나 url 옵션으로 지정한 페이지를 레이어 팝업 형태로 만들어 주는 UI 컴포넌트입니다.
+Popup(N.popup)은 context 옵션으로 지정한 내부 요소나 url 옵션으로 지정한 페이지를 레이어 팝업 형태로 만들어 주는 UI 컴포넌트입니다. 자세한 내용은 [Popup 가이드](DEVELOPER-GUIDE-UI-Popup.md)를 참조하세요.
 
 ### Tab
 
-Tab(N.tab)은 div>ul>li 태그로 구성된 요소를 context 옵션으로 지정하여 탭 페이지 뷰를 만들어 주는 UI 컴포넌트입니다.
+Tab(N.tab)은 div>ul>li 태그로 구성된 요소를 context 옵션으로 지정하여 탭 페이지 뷰를 만들어 주는 UI 컴포넌트입니다. 자세한 내용은 [Tab 가이드](DEVELOPER-GUIDE-UI-Tab.md)를 참조하세요.
 
 ### Select
 
-Select(N.select)는 select, input[type=checkbox], input[type=radio] 요소에 데이터를 바인딩하여 선택 요소를 만들어 주고 해당 컨트롤의 기능을 확장해 주는 UI 컴포넌트입니다.
+Select(N.select)는 select, input[type=checkbox], input[type=radio] 요소에 데이터를 바인딩하여 선택 요소를 만들어 주고 해당 컨트롤의 기능을 확장해 주는 UI 컴포넌트입니다. 자세한 내용은 [Select 가이드](DEVELOPER-GUIDE-UI-Select.md)를 참조하세요.
 
 ### Form
 
-Form(N.form)은 context 옵션으로 지정한 요소(div, table 등의 block 요소)에 단건 로우 데이터를 바인딩하거나 생성하는 UI 컴포넌트입니다.
+Form(N.form)은 context 옵션으로 지정한 요소(div, table 등의 block 요소)에 단건 로우 데이터를 바인딩하거나 생성하는 UI 컴포넌트입니다. 자세한 내용은 [Form 가이드](DEVELOPER-GUIDE-UI-Form.md)를 참조하세요.
 
 ### List
 
-List(N.list)는 ul>li 요소를 context 옵션으로 지정하여 단일 컬럼 형태로 데이터 목록을 생성해 주는 UI 컴포넌트입니다.
+List(N.list)는 ul>li 요소를 context 옵션으로 지정하여 단일 컬럼 형태로 데이터 목록을 생성해 주는 UI 컴포넌트입니다. 자세한 내용은 [List 가이드](DEVELOPER-GUIDE-UI-List.md)를 참조하세요.
 
 ### Grid
 
-Grid(N.grid)는 table 요소를 context 옵션으로 지정하여 멀티 컬럼 형태로 데이터 목록을 생성해 주는 UI 컴포넌트입니다.
+Grid(N.grid)는 table 요소를 context 옵션으로 지정하여 멀티 컬럼 형태로 데이터 목록을 생성해 주는 UI 컴포넌트입니다. 자세한 내용은 [Grid 가이드](DEVELOPER-GUIDE-UI-Grid.md)를 참조하세요.
 
 ### Pagination
 
-Pagination(N.pagination)은 목록 데이터나 전체 행 수로 페이징 인덱스를 생성해 주는 UI 컴포넌트입니다.
+Pagination(N.pagination)은 목록 데이터나 전체 행 수로 페이징 인덱스를 생성해 주는 UI 컴포넌트입니다. 자세한 내용은 [Pagination 가이드](DEVELOPER-GUIDE-UI-Pagination.md)를 참조하세요.
 
 ### Tree
 
-Tree(N.tree)는 계층적 데이터를 트리 요소로 만들어 주는 UI 컴포넌트입니다.
+Tree(N.tree)는 계층적 데이터를 트리 요소로 만들어 주는 UI 컴포넌트입니다. 자세한 내용은 [Tree 가이드](DEVELOPER-GUIDE-UI-Tree.md)를 참조하세요.
 
 ## Natural-UI.Shell
 
@@ -171,11 +177,15 @@ Natural-UI가 콘텐츠 영역의 UI 개발을 지원한다면 Natural-UI.Shell�
 
 ### Notify
 
-Notify(N.notify)는 사용자의 확인 과정이 필요 없는 전역 알림 메시지를 지정된 위치에 표시해 주는 UI 컴포넌트입니다.
+Notify(N.notify)는 사용자의 확인 과정이 필요 없는 전역 알림 메시지를 지정된 위치에 표시해 주는 UI 컴포넌트입니다. 자세한 내용은 [Notify 가이드](DEVELOPER-GUIDE-UI.Shell-Notify.md)를 참조하세요.
 
 ### Documents
 
-Documents(N.docs)는 Natural-JS 기반의 메뉴 페이지를 MDI(Multi Document Interface) 또는 SDI(Single Document Interface) 구조로 표시하는 페이지 컨테이너입니다.
+Documents(N.docs)는 Natural-JS 기반의 메뉴 페이지를 MDI(Multi Document Interface) 또는 SDI(Single Document Interface) 구조로 표시하는 페이지 컨테이너입니다. 자세한 내용은 [Documents 가이드](DEVELOPER-GUIDE-UI.Shell-Documents.md)를 참조하세요.
+
+## Natural-TEMPLATE
+
+Natural-TEMPLATE은 Natural-JS 기반 웹 애플리케이션 개발을 정형화하여 코드 가독성과 개발 생산성을 크게 향상시켜 주는 라이브러리입니다. 자세한 내용은 [Natural-TEMPLATE 가이드](DEVELOPER-GUIDE-TEMPLATE.md)와 [예제](DEVELOPER-GUIDE-TEMPLATE-EXAMPLES.md)를 참조하세요.
 
 ## API 문서 안내
 
