@@ -84,10 +84,10 @@
 
 ### Natural-UI
 
-- [ ] Alert - [개요]: html/naturaljs/refr/refr040101_ko_KR.md
-- [ ] Alert - [API DEMO]: html/naturaljs/refr/refr040102.html
-- [ ] Alert - [생성자]: html/naturaljs/refr/refr040103.html
-- [ ] Alert - [기본 옵션]: html/naturaljs/refr/refr040104.html
+- [x] Alert - [개요]: html/naturaljs/refr/refr040101_ko_KR.md
+- [x] Alert - [API DEMO]: html/naturaljs/refr/refr040102.html
+- [x] Alert - [생성자]: html/naturaljs/refr/refr040103.html
+- [x] Alert - [기본 옵션]: html/naturaljs/refr/refr040104.html
 - [ ] Alert - [함수]: html/naturaljs/refr/refr040105.html
 - [ ] Alert - [예제]: html/naturaljs/refr/refr040106.html
 - [ ] Button - [개요]: html/naturaljs/refr/refr040201_ko_KR.md
@@ -204,4 +204,4 @@
 
 ## 내용 검토
 
-- [ ] 위 전체 작성리스트를 다시 반복 하면서 내용이 누락되거나 잘못 작성된 내용을 보완하거나 제거, 수정 합니다. 검토가 완료된 작업은 [x]를 [o] 로 변경합니다.
+- [ ] 위 전체 작성리스트를 다시 반복 하면서 내용이 문서를 보완하고 잘못 작성된 내용을 수정 합니다. 검토가 완료된 작업은 [x]를 [o] 로 변경합니다.
