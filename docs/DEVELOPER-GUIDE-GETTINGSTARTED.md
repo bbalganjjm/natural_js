@@ -59,9 +59,9 @@ Natural-JS는 TypeScript를 지원하기 위해 타입 선언 파일을 제공�
 }
 ```
 
-### 파일 임포트
+### HTML 페이지에 라이브러리 임포트
 
-최상위 HTML 파일을 생성하고 위 파일들을 아래 순서대로 페이지에 가져오기(import) 해줍니다.
+이제 최상위 HTML 파일을 생성하고 위 파일들을 아래 순서대로 페이지에 가져오기(import) 해줍니다.
 
 ```html
 <script type="text/javascript" src="js/natural_js/lib/jquery-3.7.1.min.js"></script>
@@ -70,9 +70,7 @@ Natural-JS는 TypeScript를 지원하기 위해 타입 선언 파일을 제공�
 <script type="module" charset="utf-8" src="js/natural_js/dist/natural.config.js"></script>
 ```
 
-### 패키지별 사용
-
-CORE, ARCHITECTURE, DATA, UI, UI.Shell 전체를 사용하기 원한다면 natural.js.min.js를 임포트하고 각 패키지별로 따로 사용하기 원한다면 각각 임포트하면 됩니다.
+CORE, ARCHITECTURE, DATA, UI, UI.Shell 전체를 사용하기 원한다면 natural.js.min.js를 임포트(Import)하고 각 패키지 별로 따로 사용하기 원한다면 따로 임포트하면 됩니다.
 
 각 패키지별 의존 관계는 다음과 같습니다:
 

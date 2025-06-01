@@ -60,7 +60,7 @@ Config(natural.config.js)는 Natural-JS의 운영 환경 설정, AOP 설정, Com
 
 ## Natural-ARCHITECTURE
 
-Natural-ARCHITECTURE는 Natural-JS의 아키텍처를 구성하는 라이브러리 패키지입니다. 
+Natural-ARCHITECTURE는 Natural-JS의 아키텍처를 구성하는 라이브러리 패키지입니다. 자세한 내용은 [Natural-ARCHITECTURE 가이드](DEVELOPER-GUIDE-ARCHITECTURE.md)를 참조하세요.
 
 ### Communicator-View-Controller(CVC) 아키텍처 패턴
 
@@ -76,10 +76,10 @@ Natural Architecture Framework는 CVC Architecture Pattern을 구현한 아키�
 
 #### Controller
 
-Controller(N.cont)는 CVC Architecture Pattern의 Controller 레이어를 구현한 클래스입니다.
+Controller(N.cont)는 CVC Architecture Pattern의 Controller 레이어를 구현한 클래스입니다. 자세한 내용은 [Controller 가이드](DEVELOPER-GUIDE-CONTROLLER.md)를 참조하세요.
 - Controller object는 블록 페이지를 제어하는 사용자 정의 함수들이 구현되는 객체입니다.
 - N.cont는 Controller object의 init 함수를 실행해주고 Controller object를 반환합니다.
-- Natural-ARCHITECTURE는 Controller object를 대상으로 AOP(Aspect-Oriented Programming)를 지원합니다.
+- Natural-ARCHITECTURE는 Controller object를 대상으로 AOP(Aspect-Oriented Programming)를 지원합니다. 자세한 내용은 [AOP 가이드](DEVELOPER-GUIDE-AOP.md)를 참조하세요.
 
 #### View
 
