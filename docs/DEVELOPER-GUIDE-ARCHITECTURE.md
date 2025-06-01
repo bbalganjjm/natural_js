@@ -4,47 +4,52 @@ Natural-JS는 CVC(Controller-View-Communicator) 아키텍처 패턴을 기반으
 
 ## 목차
 
-1. [Controller](#controller)
-   - [개요](#개요)
-   - [생성자](#생성자)
-   - [Controller 객체의 상수](#controller-객체의-상수)
-   - [Controller 객체의 함수](#controller-객체의-함수)
-   - [예제](#예제)
-2. [AOP](#aop)
-   - [개요](#aop-개요)
-   - [pointcuts 객체](#pointcuts-객체)
-   - [advisors 객체](#advisors-객체)
-   - [예제](#aop-예제)
-3. [Communicator](#communicator)
-   - [개요](#communicator-개요)
-   - [생성자](#communicator-생성자)
-   - [함수](#communicator-함수)
-   - [예제](#communicator-예제)
-4. [Communicator.request](#communicator-request)
-   - [개요](#communicator-request-개요)
-   - [기본 옵션](#communicator-request-기본-옵션)
-   - [함수](#communicator-request-함수)
-   - [예제](#communicator-request-예제)
-5. [Communication Filter](#communication-filter)
-   - [개요](#communication-filter-개요)
-   - [필터 객체의 기본 옵션 및 함수](#필터-객체의-기본-옵션-및-함수)
-     - [beforeInit](#필터-객체의-기본-옵션-및-함수)
-     - [afterInit](#필터-객체의-기본-옵션-및-함수)
-     - [beforeSend](#필터-객체의-기본-옵션-및-함수)
-     - [success](#필터-객체의-기본-옵션-및-함수)
-     - [error](#필터-객체의-기본-옵션-및-함수)
-     - [complete](#필터-객체의-기본-옵션-및-함수)
-   - [예제](#communication-filter-예제)
-6. [Context](#context)
-   - [개요](#context-개요)
-   - [함수](#context-함수)
-   - [예제](#context-예제)
+- [Natural-JS 아키텍처 가이드](#natural-js-아키텍처-가이드)
+  - [목차](#목차)
+  - [Controller](#controller)
+    - [개요](#개요)
+    - [페이지 ID (pageid) 관리](#페이지-id-pageid-관리)
+    - [Controller 인스턴스 획득](#controller-인스턴스-획득)
+    - [생성자](#생성자)
+    - [Controller 객체의 상수](#controller-객체의-상수)
+    - [Controller 객체의 함수](#controller-객체의-함수)
+    - [예제](#예제)
+  - [AOP](#aop)
+    - [개요 {#aop-개요}](#개요-aop-개요)
+    - [pointcuts 객체 {#pointcuts-객체}](#pointcuts-객체-pointcuts-객체)
+    - [advisors 객체 {#advisors-객체}](#advisors-객체-advisors-객체)
+    - [예제 {#aop-예제}](#예제-aop-예제)
+      - [1. AOP 선언](#1-aop-선언)
+      - [2. 모든 페이지에 공통코드를 불러와 N.select 컴포넌트로 요소들에 바인딩한 후 Controller object의 init을 지연 실행하기](#2-모든-페이지에-공통코드를-불러와-nselect-컴포넌트로-요소들에-바인딩한-후-controller-object의-init을-지연-실행하기)
+      - [3. 로드된 페이지의 버튼, 폼, 그리드, 리스트 컴포넌트들을 자동으로 초기화해 준 후에 init 함수 실행하기](#3-로드된-페이지의-버튼-폼-그리드-리스트-컴포넌트들을-자동으로-초기화해-준-후에-init-함수-실행하기)
+  - [Communicator](#communicator)
+    - [개요 {#communicator-개요}](#개요-communicator-개요)
+    - [생성자 {#communicator-생성자}](#생성자-communicator-생성자)
+    - [함수 {#communicator-함수}](#함수-communicator-함수)
+    - [예제 {#communicator-예제}](#예제-communicator-예제)
+  - [Communicator.request](#communicatorrequest)
+    - [개요 {#communicator-request-개요}](#개요-communicator-request-개요)
+    - [기본 옵션 {#communicator-request-기본-옵션}](#기본-옵션-communicator-request-기본-옵션)
+    - [함수 {#communicator-request-함수}](#함수-communicator-request-함수)
+      - [매개변수](#매개변수)
+    - [예제 {#communicator-request-예제}](#예제-communicator-request-예제)
+  - [Communication Filter](#communication-filter)
+    - [개요 {#communication-filter-개요}](#개요-communication-filter-개요)
+    - [필터 객체의 기본 옵션 및 함수 {#필터-객체의-기본-옵션-및-함수}](#필터-객체의-기본-옵션-및-함수-필터-객체의-기본-옵션-및-함수)
+    - [예제 {#communication-filter-예제}](#예제-communication-filter-예제)
+  - [Context](#context)
+    - [개요 {#context-개요}](#개요-context-개요)
+    - [함수 {#context-함수}](#함수-context-함수)
+      - [매개변수](#매개변수-1)
+    - [예제 {#context-예제}](#예제-context-예제)
 
 ## Controller
 
 ### 개요
 
 Controller(N.cont)는 CVC Architecture Pattern의 Controller 레이어를 구현한 클래스입니다. N.cont는 Controller 객체의 init 함수를 실행해 주고 Controller 객체를 반환합니다. Controller 객체는 View의 요소들과 Communicator에서 검색한 데이터를 제어하는 역할을 합니다.
+
+![Natural-ARCHITECTURE](../images/intr/pic4.png)
 
 N.cont는 다음과 같이 페이지의 View 영역 바로 아래 선언되어야 합니다:
 
@@ -56,6 +61,7 @@ N.cont는 다음과 같이 페이지의 View 영역 바로 아래 선언되어�
 <script type="text/javascript">
     N(".view").cont({ //  Controller object
         init : function(view, request) {
+            // 초기화 코드
         }
     });
 </script>
@@ -63,15 +69,32 @@ N.cont는 다음과 같이 페이지의 View 영역 바로 아래 선언되어�
 
 N.popup, N.tab 컴포넌트나 N.comm 라이브러리로 위와 같은 구조의 페이지를 불러오면 페이지 로딩이 완료되었을 때 Controller 객체의 init 함수가 호출됩니다.
 
-Natural-ARCHITECTURE 기반 페이지가 제대로 작동하려면 반드시 N.comm 라이브러리나 N.popup, N.tab 컴포넌트로 로딩되어야 합니다.
+> **참고**: Natural-ARCHITECTURE 기반 페이지가 제대로 작동하려면 반드시 N.comm 라이브러리나 N.popup, N.tab 컴포넌트로 로딩되어야 합니다.
 
-페이지의 요소를 선택할 때는 반드시 view에서 find하거나 view를 jQuery 함수의 context 인수(두 번째 인수)로 지정해야 합니다. 그렇지 않으면 다른 블록 페이지의 의도하지 않은 요소까지 선택되어 예측이 어려운 오류가 발생할 수 있습니다.
+> **중요**: 페이지의 요소를 선택할 때는 반드시 view에서 find 하거나 view를 jQuery 함수의 context 인수(두 번째 인수)로 지정해야 합니다. 그렇지 않으면 다른 블록 페이지의 의도하지 않은 요소까지 선택되어 예측이 어려운 오류가 발생할 수 있습니다.
 
-N(".view").cont()를 실행하면 selector로 지정한 `.view` 요소에 data-pageid="view"와 같이 pageid data 속성값이 생성됩니다. 이 pageid는 ".(점), #(샵), [(왼쪽 대괄호), ](오른쪽 대괄호), '(작은따옴표), :(콜론), ((왼쪽 괄호), )(오른쪽 괄호), >(오른쪽 화살괄호), 공백(스페이스), -(하이픈)" 문자들이 제거되어 pageid가 생성되니 페이지 식별값은 앞의 문자들이 포함되지 않도록 정의하는 것이 좋습니다.
+### 페이지 ID (pageid) 관리
 
-예를 들면 N("page.view-01").cont()은 점과 하이픈이 제거되어 "pageview01"으로 pageid가 생성됩니다.
+N.cont를 실행하면 selector로 지정한 요소에 `data-pageid` 속성이 자동으로 생성됩니다. 예를 들어 `N(".view").cont()`를 실행하면 `.view` 요소에 `data-pageid="view"`와 같이 pageid 데이터 속성값이 생성됩니다.
 
-블록 페이지나 탭 콘텐츠 등에서 특정 페이지를 제어하기 위해 다음과 같이 Controller 오브젝트를 얻을 수 있습니다:
+pageid 생성 시 다음 문자들은 제거됩니다:
+- `.` (점)
+- `#` (샵)
+- `[` (왼쪽 대괄호)
+- `]` (오른쪽 대괄호)
+- `'` (작은따옴표)
+- `:` (콜론)
+- `(` (왼쪽 괄호)
+- `)` (오른쪽 괄호)
+- `>` (오른쪽 화살괄호)
+- 공백 (스페이스)
+- `-` (하이픈)
+
+예를 들어, `N("page.view-01").cont()`는 점과 하이픈이 제거되어 "pageview01"로 pageid가 생성됩니다. 따라서 페이지 식별값은 위 문자들이 포함되지 않도록 정의하는 것이 좋습니다.
+
+### Controller 인스턴스 획득
+
+블록 페이지나 탭 콘텐츠 등에서 특정 페이지를 제어하기 위해 다음과 같이 Controller 객체를 얻을 수 있습니다:
 
 ```javascript
 var page01Cont = N("#page01").instance("cont");
