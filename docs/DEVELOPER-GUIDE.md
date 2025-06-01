@@ -21,8 +21,8 @@ Natural-JS는 기업용 웹 애플리케이션의 사용자 인터페이스를 �
    - **데이터 서식화**: Formatter 라이브러리
    - **데이터 유효성 검증**: Validator 라이브러리
    - **데이터 유틸리티**: filter, sort 등의 라이브러리
-10. **모바일 지원** - 모바일 브라우저(ES5이상)와 터치 디바이스 지원, 모바일 하이브리드 앱과의 연동 지원
-11. **TypeScript 지원** - 타입 선언 파일 제공
+10. **모바일 지원** - 모바일 브라우저(ES5이상)와 터치 디바이스 지원, 모바일 하이브리드 앱과의 연동 지원. 자세한 내용은 [모바일 가이드](DEVELOPER-GUIDE-MOBILE.md)를 참조하세요.
+11. **TypeScript 지원** - 타입 선언 파일 제공. 자세한 내용은 [TypeScript 가이드](DEVELOPER-GUIDE-TYPESCRIPT.md)를 참조하세요.
 
 ### Natural-JS의 구성
 
