@@ -1,5 +1,16 @@
 # Natural-JS List Component Developer Guide
 
+List (N.list) is a UI component that generates single-column data lists using ul>li elements as the context option. It provides various features for displaying and managing list-type data.
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Constructor](#constructor)
+- [Default Options](#default-options)
+- [Declarative Options](#declarative-options)
+- [Methods](#methods)
+- [Examples](#examples)
+
 ## Overview
 
 List (N.list) is a UI component that generates single-column data lists using ul>li elements as the context option. It provides various features for displaying and managing list-type data.
@@ -10,15 +21,6 @@ Main features:
 - Data formatting and validation are enabled only when data is bound to the element.
 - When an input value changes or data is changed via the val method, a rowStatus property is created: "insert" for new, "update" for modified, and "delete" for deleted.
 - Provides features such as row selection (single or multiple), checkbox integration, and scroll paging.
-
-## Table of Contents
-
-- [Overview](#overview)
-- [Constructor](#constructor)
-- [Default Options](#default-options)
-- [Declarative Options](#declarative-options)
-- [Methods](#methods)
-- [Examples](#examples)
 
 ## Constructor
 

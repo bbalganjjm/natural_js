@@ -4,12 +4,19 @@ The Grid (N.grid) component is a UI component that generates multi-column data l
 
 ## Table of Contents
 
-- [Constructor](#constructor)
-- [Default Options](#default-options)
-- [Declarative Options](#declarative-options)
-- [Methods](#methods)
-- [Events](#events)
-- [Examples](#examples)
+- [Natural-JS Grid Component Developer Guide](#natural-js-grid-component-developer-guide)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+  - [Constructor](#constructor)
+  - [Default Options](#default-options)
+  - [Declarative Options](#declarative-options)
+  - [Methods](#methods)
+  - [Events](#events)
+  - [Examples](#examples)
+    - [1. Basic Grid Creation](#1-basic-grid-creation)
+    - [2. Fixed Header Grid (height option)](#2-fixed-header-grid-height-option)
+    - [3. Sorting and Filtering](#3-sorting-and-filtering)
+    - [4. Row Selection Event](#4-row-selection-event)
 
 ## Overview
 

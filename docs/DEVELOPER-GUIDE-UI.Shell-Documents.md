@@ -2,17 +2,24 @@
 
 The Documents (N.docs) component of Natural-JS is a page container that displays menu pages based on Natural-JS in either MDI (Multiple Document Interface) or SDI (Single Document Interface) structure. This document provides a detailed explanation of the features, options, and usage of the Documents component.
 
-## Contents
+## Table of Contents
 
-1. Overview
-2. Constructor
-3. Default Options
-4. Document.request
-5. Main Methods
-6. Utility Methods
-7. Usage Examples
-8. Notes and Recommendations
-9. Related Components
+- [Natural-UI.Shell Documents Component Developer Guide](#natural-uishell-documents-component-developer-guide)
+  - [Table of Contents](#table-of-contents)
+  - [1. Overview](#1-overview)
+  - [2. Constructor](#2-constructor)
+    - [2.1 N.docs Constructor](#21-ndocs-constructor)
+    - [2.2 jQuery Plugin Method](#22-jquery-plugin-method)
+  - [3. Default Options](#3-default-options)
+    - [3.1 Event-Related Options](#31-event-related-options)
+  - [4. Document.request](#4-documentrequest)
+  - [5. Main Methods](#5-main-methods)
+  - [6. Utility Methods](#6-utility-methods)
+  - [7. Usage Examples](#7-usage-examples)
+    - [Open a new document (tab)](#open-a-new-document-tab)
+    - [Pass parameters between documents](#pass-parameters-between-documents)
+  - [8. Notes and Recommendations](#8-notes-and-recommendations)
+  - [9. Related Components](#9-related-components)
 
 ## 1. Overview
 

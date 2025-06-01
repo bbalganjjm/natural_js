@@ -2,14 +2,14 @@
 
 The Notify (N.notify) component of Natural-UI.Shell is a UI component that displays global notification messages at a specified position, without requiring user confirmation.
 
-## Contents
+## Table of Contents
 
-1. Overview
-2. Constructor
-3. Default Options
-4. Methods
-5. Usage Examples
-6. Notes
+1. [Overview](#overview)
+2. [Constructor](#constructor)
+3. [Default Options](#default-options)
+4. [Methods](#methods)
+5. [Usage Examples](#usage-examples)
+6. [Notes](#notes)
 
 ## Overview
 

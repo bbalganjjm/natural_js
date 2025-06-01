@@ -1,40 +1,52 @@
+# Natural-ARCHITECTURE Guide
+
+A concise guide to the core architecture and patterns of Natural-JS.
+
+## Table of Contents
+
+- [Natural-ARCHITECTURE Guide](#natural-architecture-guide)
+  - [Table of Contents](#table-of-contents)
+- [Natural-JS Architecture Guide](#natural-js-architecture-guide)
+  - [Controller](#controller)
+    - [Overview](#overview)
+    - [Page ID (pageid) Management](#page-id-pageid-management)
+    - [Obtaining Controller Instance](#obtaining-controller-instance)
+    - [Constructor](#constructor)
+    - [Controller Object Constants](#controller-object-constants)
+    - [Controller Object Methods](#controller-object-methods)
+    - [Examples](#examples)
+  - [AOP](#aop)
+    - [Overview](#overview-1)
+    - [pointcuts Object](#pointcuts-object)
+    - [advisors Object](#advisors-object)
+    - [Examples](#examples-1)
+      - [1. Declaring AOP](#1-declaring-aop)
+      - [2. Load common code for all pages, bind to elements with N.select, then delay Controller object's init execution](#2-load-common-code-for-all-pages-bind-to-elements-with-nselect-then-delay-controller-objects-init-execution)
+      - [3. After automatically initializing button, form, grid, and list components on the loaded page, execute the init function](#3-after-automatically-initializing-button-form-grid-and-list-components-on-the-loaded-page-execute-the-init-function)
+  - [Communicator](#communicator)
+    - [Overview](#overview-2)
+    - [Constructor](#constructor-1)
+    - [Methods](#methods)
+    - [Examples](#examples-2)
+  - [Communicator.request](#communicatorrequest)
+    - [Overview (Communicator.request)](#overview-communicatorrequest)
+    - [Default Options](#default-options)
+    - [Methods (Communicator.request)](#methods-communicatorrequest)
+    - [Examples (Communicator.request)](#examples-communicatorrequest)
+  - [Communication Filter](#communication-filter)
+    - [Overview](#overview-3)
+    - [Filter Object Default Options and Methods](#filter-object-default-options-and-methods)
+    - [Examples](#examples-3)
+  - [Context](#context)
+    - [Overview (Context)](#overview-context)
+    - [Methods (Context)](#methods-context)
+    - [Examples (Context)](#examples-context)
+
 # Natural-JS Architecture Guide
 
 Natural-JS is designed based on the CVC (Controller-View-Communicator) architecture pattern. This document explains the core elements of the Natural-JS architecture.
 
-## Table of Contents
 
-- [Controller](#controller)
-  - Overview
-  - Page ID (pageid) Management
-  - Obtaining Controller Instance
-  - Constructor
-  - Controller Object Constants
-  - Controller Object Methods
-  - Examples
-- [AOP](#aop)
-  - Overview
-  - pointcuts Object
-  - advisors Object
-  - Examples
-- [Communicator](#communicator)
-  - Overview
-  - Constructor
-  - Methods
-  - Examples
-- [Communicator.request](#communicatorrequest)
-  - Overview
-  - Default Options
-  - Methods
-  - Examples
-- [Communication Filter](#communication-filter)
-  - Overview
-  - Filter Object Default Options and Methods
-  - Examples
-- [Context](#context)
-  - Overview
-  - Methods
-  - Examples
 
 ## Controller
 

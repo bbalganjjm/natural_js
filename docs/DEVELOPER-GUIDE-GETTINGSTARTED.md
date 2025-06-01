@@ -4,9 +4,35 @@ This document provides a getting started guide and basic tutorial for the Natura
 
 ## Table of Contents
 
-1. [Setting Up the Natural-JS Runtime Environment](#setting-up-the-natural-js-runtime-environment)
-2. [Creating a Basic Web Application Frame](#creating-a-basic-web-application-frame)
-3. [Viewing and Modifying Data with Grid](#viewing-and-modifying-data-with-grid)
+- [Natural-JS Getting Started Guide](#natural-js-getting-started-guide)
+  - [Table of Contents](#table-of-contents)
+  - [Setting Up the Natural-JS Runtime Environment](#setting-up-the-natural-js-runtime-environment)
+    - [Downloading the Library](#downloading-the-library)
+    - [Required Library Files](#required-library-files)
+    - [TypeScript Support](#typescript-support)
+    - [Importing Libraries in HTML](#importing-libraries-in-html)
+    - [Configuration](#configuration)
+    - [Component Option Precedence](#component-option-precedence)
+    - [Writing Sample Code](#writing-sample-code)
+    - [Handling JSON Data](#handling-json-data)
+    - [Creating the Index Page](#creating-the-index-page)
+  - [Creating a Basic Web Application Frame](#creating-a-basic-web-application-frame)
+    - [Project Structure](#project-structure)
+    - [Creating the Index Page (Web App Frame)](#creating-the-index-page-web-app-frame)
+    - [Creating the Left Menu](#creating-the-left-menu)
+    - [Creating Content Pages](#creating-content-pages)
+  - [Viewing and Modifying Data with Grid](#viewing-and-modifying-data-with-grid)
+    - [Adding a Menu](#adding-a-menu)
+    - [Writing the CRUD Page View](#writing-the-crud-page-view)
+    - [Implementing the CRUD Page Controller](#implementing-the-crud-page-controller)
+      - [Initializing N.select](#initializing-nselect)
+      - [Initializing N.form](#initializing-nform)
+      - [Initializing N.grid](#initializing-ngrid)
+    - [Event Binding](#event-binding)
+      - [Search Button Event](#search-button-event)
+      - [New Button Event](#new-button-event)
+      - [Delete Button Event](#delete-button-event)
+      - [Save Button Event](#save-button-event)
 
 ## Setting Up the Natural-JS Runtime Environment
 
@@ -251,7 +277,7 @@ After creating the folders, download the following files from the master branch 
 - js/natural_js/natural.js.min.js
 - js/natural_js/natural.config.js
 
-### Creating the Index Page
+### Creating the Index Page (Web App Frame)
 
 Once the project environment is set up, save the following code as `/index.html`:
 

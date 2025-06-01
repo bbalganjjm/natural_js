@@ -2,14 +2,18 @@
 
 The Natural-UI Alert (N.alert) component is a UI component that displays message dialogs, such as window.alert or window.confirm, as layer popups.
 
-## Contents
+## Table of Contents
 
-- Overview
-- Constructor
-- Default Options
-- Methods
-- Usage Examples
-- Notes
+- [Natural-UI Alert Component Developer Guide](#natural-ui-alert-component-developer-guide)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+  - [Constructor](#constructor)
+    - [N.alert](#nalert)
+    - [N(obj).alert](#nobjalert)
+  - [Default Options](#default-options)
+  - [Methods](#methods)
+  - [Usage Examples](#usage-examples)
+  - [Notes](#notes)
 
 ## Overview
 

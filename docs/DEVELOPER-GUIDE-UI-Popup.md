@@ -2,6 +2,15 @@
 
 The Natural-JS Popup (N.popup) is a UI component that creates a layer popup from an element on the current page specified by the context option, or from a page specified by the url option.
 
+## Table of Contents
+
+- [Overview](#overview)
+- [Table of Contents](#table-of-contents)
+- [Constructor](#constructor)
+- [Default Options](#default-options)
+- [Methods](#methods)
+- [Examples](#examples)
+
 ## Overview
 
 The Popup component can display an existing element as a popup or load a new page as a popup.
@@ -9,14 +18,6 @@ The Popup component can display an existing element as a popup or load a new pag
 When creating a popup with the url option, the generated popup's Controller object will have two additional properties: caller (the N.popup instance that opened the popup) and opener (the parent page's Controller object, passed as an option). You can use opener to control the parent page, or caller to close the popup or send data to the parent Controller.
 
 If the popup dialog does not appear and an error occurs, make sure to set the N.context.attr("ui").alert.container property in [Config(natural.config.js)](https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0102.html) to a jQuery selector string for the element where N.alert-related elements will be stored.
-
-## Table of Contents
-- Overview
-- Table of Contents
-- Constructor
-- Default Options
-- Methods
-- Examples
 
 ## Constructor
 

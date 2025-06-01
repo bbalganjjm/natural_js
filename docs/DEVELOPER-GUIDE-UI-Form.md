@@ -2,6 +2,15 @@
 
 The Form (N.form) component is a UI component that binds or creates single row data to a specified context element (such as div, table, or other block elements) using the context option.
 
+## Table of Contents
+
+- [Constructor](#constructor)
+- [Default Options](#default-options)
+- [Declarative Options](#declarative-options)
+- [Methods](#methods)
+- [Events](#events)
+- [Examples](#examples)
+
 ## Overview
 
 Form (N.form) binds or creates single row data to a specified context element (div, table, etc.) using the context option. It helps map form elements to data, bind data, and perform validation easily.
@@ -13,15 +22,6 @@ Form (N.form) binds or creates single row data to a specified context element (d
 
 > **Note:** Avoid overlapping context elements or duplicating column data between N.form and other data components (N.grid, N.list, etc.).
 > **Note:** When calling add() or bind() repeatedly, always call unbind() in between to prevent data sync issues.
-
-## Table of Contents
-
-- Constructor
-- Default Options
-- Declarative Options
-- Methods
-- Events
-- Examples
 
 ## Constructor
 

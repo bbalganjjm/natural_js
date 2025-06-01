@@ -2,14 +2,18 @@
 
 The Natural-UI Button (N.button) component is a UI component that creates buttons with consistent styles and features by specifying "a", "input[type=button]", or "button" elements as the context option.
 
-## Contents
+## Table of Contents
 
-- Overview
-- Constructor
-- Default Options
-- Declarative Options
-- Methods
-- Usage Examples
+- [Natural-UI Button Component Developer Guide](#natural-ui-button-component-developer-guide)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+  - [Constructor](#constructor)
+    - [N.button](#nbutton)
+    - [N(obj).button](#nobjbutton)
+  - [Default Options](#default-options)
+  - [Declarative Options](#declarative-options)
+  - [Methods](#methods)
+  - [Usage Examples](#usage-examples)
 
 ## Overview
 

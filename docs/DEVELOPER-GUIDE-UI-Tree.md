@@ -2,15 +2,23 @@
 
 The Tree (N.tree) component of Natural-UI is a UI component that creates tree elements from hierarchical data.
 
-## Contents
+## Table of Contents
 
-1. Overview
-2. Constructor
-3. Default Options
-4. Methods
-5. Usage Examples
-6. Notes
-7. Related Components
+- [Natural-UI Tree Component Developer Guide](#natural-ui-tree-component-developer-guide)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+  - [Constructor](#constructor)
+    - [N.tree](#ntree)
+    - [N(obj).tree](#nobjtree)
+  - [Default Options](#default-options)
+  - [Methods](#methods)
+  - [Usage Examples](#usage-examples)
+    - [Basic usage](#basic-usage)
+    - [Select a node by value](#select-a-node-by-value)
+    - [Expand and collapse all nodes](#expand-and-collapse-all-nodes)
+    - [Get selected and checked nodes](#get-selected-and-checked-nodes)
+  - [Notes](#notes)
+  - [Related Components](#related-components)
 
 ## Overview
 

@@ -2,6 +2,14 @@
 
 The Natural-JS Datepicker (N.datepicker) is a UI component that displays a calendar popup for selecting a date or month in a text input element specified by the context option.
 
+## Table of Contents
+
+- [Constructor](#constructor)
+- [Default Options](#default-options)
+- [Methods](#methods)
+- [Events](#events)
+- [Examples](#examples)
+
 ## Overview
 
 Datepicker (N.datepicker) displays a calendar popup for selecting a date or month in a text input element specified by the context option.
@@ -9,14 +17,6 @@ Datepicker (N.datepicker) displays a calendar popup for selecting a date or mont
 - You can easily use Datepicker by declaring the "date" rule in the data-format attribute of a text input element and linking it with data-related components.
 - See the [Form], [List], and [Grid] menus' [Declarative Options] tab and the [Formatter] menu's [Format Rule List] tab for rules like ["date", 4|6|8|10|12|14, "month"|"date"].
 - For an explanation of declarative options, see the **Declarative Options** section in the [API Documentation Guide].
-
-## Table of Contents
-
-- Constructor
-- Default Options
-- Methods
-- Events
-- Examples
 
 ## Constructor
 

@@ -2,6 +2,15 @@
 
 The Tab (N.tab) component of Natural-JS creates a tabbed page view by specifying an element structured as div > ul > li as the context option.
 
+## Table of Contents
+
+- [Overview](#overview)
+- [Constructor](#constructor)
+- [Default Options](#default-options)
+- [Declarative Options](#declarative-options)
+- [Methods](#methods)
+- [Examples](#examples)
+
 ## Overview
 
 The Tab component provides an interface that allows users to easily switch between multiple content areas. Each tab is displayed as a text link, and clicking it shows the corresponding content. You can also set the url option to load other pages as tab content.
@@ -9,15 +18,6 @@ The Tab component provides an interface that allows users to easily switch betwe
 When a page is created as tab content using the url option, the Controller object for the tab includes caller (the N.popup instance that opened the tab) and opener (the parent page's Controller object, passed as an option). This allows you to control the parent page using opener, or close the tab or send data to the parent Controller using caller.
 
 You can use the cont method of the N.tab instance to get the Controller object for each tab page. See the Methods section for details on the cont method.
-
-## Contents
-
-- Overview
-- Constructor
-- Default Options
-- Declarative Options
-- Methods
-- Examples
 
 ## Constructor
 

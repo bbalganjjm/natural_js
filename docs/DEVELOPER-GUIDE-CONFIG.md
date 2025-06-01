@@ -1,6 +1,23 @@
 <!-- filepath: d:\workspace\natural_js\docs\DEVELOPER-GUIDE-CONFIG.md -->
 # Natural-JS Config Reference Guide
 
+This document provides an overview and reference for configuring Natural-JS.
+
+## Table of Contents
+
+- [Natural-JS Config Reference Guide](#natural-js-config-reference-guide)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+    - [Required Attributes for Natural-JS](#required-attributes-for-natural-js)
+    - [Component Option Precedence](#component-option-precedence)
+  - [N.context.attr("core") - Natural-CORE Settings](#ncontextattrcore---natural-core-settings)
+  - [N.context.attr("architecture") - Natural-ARCHITECTURE Settings](#ncontextattrarchitecture---natural-architecture-settings)
+  - [N.context.attr("data") - Natural-DATA Settings](#ncontextattrdata---natural-data-settings)
+  - [N.context.attr("ui") - Natural-UI Settings](#ncontextattrui---natural-ui-settings)
+  - [N.context.attr("ui.shell") - Natural-UI.Shell Settings](#ncontextattruishell---natural-uishell-settings)
+  - [N.context.attr("template") - Natural-TEMPLATE Settings](#ncontextattrtemplate---natural-template-settings)
+  - [N.context.attr("code") - Natural-CODE Settings](#ncontextattrcode---natural-code-settings)
+
 ## Overview
 
 Config (`natural.config.js`) is the configuration file for Natural-JS, storing environment settings, AOP settings, Communication Filter settings, and global options for UI components.
