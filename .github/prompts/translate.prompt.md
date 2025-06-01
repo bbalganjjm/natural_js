@@ -11,6 +11,7 @@
   - 변환도중 markdown 문법이 깨지거나, 잘못된 부분이 있다면 수정합니다.
 - **예제의 Javascript 는 ES6 문법으로 변환하고 html과 css 예제도 이에 맞게 변환 합니다.**
   - Javascript 는 문법 변경 외의 코드는 그대로 둡니다.
+  - 반드시 var 를 let 또는 const 로 변경해야 하고 Arrow Function 문법으로 변환이 가능하다면 변환해야 합니다.
   - ES6 변환관련 주석을 추가하지 않습니다.
   - script 태그는 그대로 유지합니다.
   - N 은 jQuery 의 $ 함수와 기능이 동일하므로, jQuery 를 사용하지 않고 N 을 사용합니다.
