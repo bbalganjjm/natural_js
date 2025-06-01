@@ -21,24 +21,24 @@
 - [x] N() & N - [N.string 객체의 함수]: html/naturaljs/refr/refr010106.html
 - [x] N() & N - [N.element 객체의 함수]: html/naturaljs/refr/refr010107.html
 - [x] N() & N - [N.date 객체의 함수]: html/naturaljs/refr/refr010108.html
-- [ ] N() & N - [N.browser 객체의 함수]: html/naturaljs/refr/refr010109.html
-- [ ] N() & N - [N.message 객체의 함수]: html/naturaljs/refr/refr010110.html
-- [ ] N() & N - [N.array 객체의 함수]: html/naturaljs/refr/refr010111.html
-- [ ] N() & N - [N.json 객체의 함수]: html/naturaljs/refr/refr010112.html
-- [ ] N() & N - [N.event 객체의 함수]: html/naturaljs/refr/refr010113.html
-- [ ] Config(natural.config.js) - [개요]: html/naturaljs/refr/refr010201_ko_KR.md
-- [ ] Config(natural.config.js) - [N.context.attr("core")]: html/naturaljs/refr/refr010202.html
-- [ ] Config(natural.config.js) - [N.context.attr("architecture")]: html/naturaljs/refr/refr010203.html
-- [ ] Config(natural.config.js) - [N.context.attr("data")]: html/naturaljs/refr/refr010204.html
-- [ ] Config(natural.config.js) - [N.context.attr("ui")]: html/naturaljs/refr/refr010205.html
-- [ ] Config(natural.config.js) - [N.context.attr("ui.shell")]: html/naturaljs/refr/refr010206.html
-- [ ] Config(natural.config.js) - [N.context.attr("template")]: html/naturaljs/refr/refr010207.html
-- [ ] Config(natural.config.js) - [N.context.attr("code")]: html/naturaljs/refr/refr010208.html
-- [ ] Config(natural.config.js) - [예제]: html/naturaljs/refr/refr010209.html
+- [x] N() & N - [N.browser 객체의 함수]: html/naturaljs/refr/refr010109.html
+- [x] N() & N - [N.message 객체의 함수]: html/naturaljs/refr/refr010110.html
+- [x] N() & N - [N.array 객체의 함수]: html/naturaljs/refr/refr010111.html
+- [x] N() & N - [N.json 객체의 함수]: html/naturaljs/refr/refr010112.html
+- [x] N() & N - [N.event 객체의 함수]: html/naturaljs/refr/refr010113.html
+- [x] Config(natural.config.js) - [개요]: html/naturaljs/refr/refr010201_ko_KR.md
+- [x] Config(natural.config.js) - [N.context.attr("core")]: html/naturaljs/refr/refr010202.html
+- [x] Config(natural.config.js) - [N.context.attr("architecture")]: html/naturaljs/refr/refr010203.html
+- [x] Config(natural.config.js) - [N.context.attr("data")]: html/naturaljs/refr/refr010204.html
+- [x] Config(natural.config.js) - [N.context.attr("ui")]: html/naturaljs/refr/refr010205.html
+- [x] Config(natural.config.js) - [N.context.attr("ui.shell")]: html/naturaljs/refr/refr010206.html
+- [x] Config(natural.config.js) - [N.context.attr("template")]: html/naturaljs/refr/refr010207.html
+- [x] Config(natural.config.js) - [N.context.attr("code")]: html/naturaljs/refr/refr010208.html
+- [x] Config(natural.config.js) - [예제]: html/naturaljs/refr/refr010209.html
 
 ### Natural-ARCHITECTURE
 
-- [ ] Controller - [개요]: html/naturaljs/refr/refr020101_ko_KR.md
+- [x] Controller - [개요]: html/naturaljs/refr/refr020101_ko_KR.md
 - [ ] Controller - [API DEMO]: html/naturaljs/refr/refr020102.html
 - [ ] Controller - [생성자]: html/naturaljs/refr/refr020103.html
 - [ ] Controller - [Controller object의 상수]: html/naturaljs/refr/refr020104.html
