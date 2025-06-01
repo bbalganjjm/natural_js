@@ -72,13 +72,13 @@
 - [x] Formatter - [생성자]: html/naturaljs/refr/refr030103.html
 - [x] Formatter - [함수]: html/naturaljs/refr/refr030104.html
 - [x] Formatter - [예제]: html/naturaljs/refr/refr030105.html
-- [ ] Formatter - [포맷 룰 목록]: html/naturaljs/refr/refr030106.html
+- [x] Formatter - [포맷 룰 목록]: html/naturaljs/refr/refr030106.html
 - [x] Validator - [개요]: html/naturaljs/refr/refr030201_ko_KR.md
 - [x] Validator - [API DEMO]: html/naturaljs/refr/refr030202.html
 - [x] Validator - [생성자]: html/naturaljs/refr/refr030203.html
 - [x] Validator - [함수]: html/naturaljs/refr/refr030204.html
 - [x] Validator - [예제]: html/naturaljs/refr/refr030205.html
-- [ ] Validator - [유효성 검증 룰 목록]: html/naturaljs/refr/refr030206.html
+- [x] Validator - [유효성 검증 룰 목록]: html/naturaljs/refr/refr030206.html
 - [x] Natural-DATA Library - [개요]: html/naturaljs/refr/refr030301_ko_KR.md
 - [x] Natural-DATA Library - [함수]: html/naturaljs/refr/refr030302.html
 
@@ -201,3 +201,7 @@
 - [ ] Natural-TEMPLATE 예제 - 조회폼+리스트+그리드+상세폼: html/naturaljs/template/samples/type0501.html
 - [ ] Natural-TEMPLATE 예제 - 트리+그리드(CRUD): html/naturaljs/template/samples/type0601.html
 - [ ] Natural-TEMPLATE 예제 - 조회폼+탭: html/naturaljs/template/samples/type0701.html
+
+## 내용 검토
+
+- [ ] 위 전체 작성리스트를 다시 반복 하면서 내용이 누락되거나 잘못 작성된 내용을 보완하거나 제거, 수정 합니다. 검토가 완료된 작업은 [x]를 [o] 로 변경합니다.
