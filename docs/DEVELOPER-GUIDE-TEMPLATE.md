@@ -1,4 +1,3 @@
-<!-- filepath: d:\workspace\natural_js\docs\DEVELOPER-GUIDE-TEMPLATE.md -->
 # Natural-TEMPLATE Developer Guide
 
 Natural-TEMPLATE is a library that standardizes web application development based on Natural-JS, greatly improving code readability and development productivity. This guide explains the coding conventions for Natural-TEMPLATE.

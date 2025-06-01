@@ -1,6 +1,6 @@
-# Natural-JS Tab Component Developer Guide
+# Natural-UI Tab Component Developer Guide
 
-The Tab (N.tab) component of Natural-JS creates a tabbed page view by specifying an element structured as div > ul > li as the context option.
+The Tab (N.tab) component of Natural-UI creates a tabbed page view by specifying an element structured as div > ul > li as the context option.
 
 ## Table of Contents
 

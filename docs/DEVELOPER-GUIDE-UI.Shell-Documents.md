@@ -1,6 +1,6 @@
 # Natural-UI.Shell Documents Component Developer Guide
 
-The Documents (N.docs) component of Natural-JS is a page container that displays menu pages based on Natural-JS in either MDI (Multiple Document Interface) or SDI (Single Document Interface) structure. This document provides a detailed explanation of the features, options, and usage of the Documents component.
+The Documents (N.docs) component of Natural-UI.Shell is a page container that displays menu pages based on Natural-JS in either MDI (Multiple Document Interface) or SDI (Single Document Interface) structure. This document provides a detailed explanation of the features, options, and usage of the Documents component.
 
 ## Table of Contents
 

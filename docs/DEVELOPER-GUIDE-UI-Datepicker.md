@@ -1,6 +1,6 @@
-# Natural-JS Datepicker Component Developer Guide
+# Natural-UI Datepicker Component Developer Guide
 
-The Natural-JS Datepicker (N.datepicker) is a UI component that displays a calendar popup for selecting a date or month in a text input element specified by the context option.
+The Natural-UI Datepicker (N.datepicker) is a UI component that displays a calendar popup for selecting a date or month in a text input element specified by the context option.
 
 ## Table of Contents
 

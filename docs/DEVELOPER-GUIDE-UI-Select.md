@@ -1,4 +1,4 @@
-# Natural-JS Select Component Developer Guide
+# Natural-UI Select Component Developer Guide
 
 The Select (N.select) component of Natural-JS is a UI component that binds data to select, input[type=checkbox], and input[type=radio] elements, providing selection functionality and extending the features of these controls.
 

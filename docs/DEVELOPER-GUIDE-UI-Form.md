@@ -1,4 +1,4 @@
-# Natural-JS Form Component Developer Guide
+# Natural-UI Form Component Developer Guide
 
 The Form (N.form) component is a UI component that binds or creates single row data to a specified context element (such as div, table, or other block elements) using the context option.
 

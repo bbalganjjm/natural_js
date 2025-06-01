@@ -1,6 +1,6 @@
-# Natural-JS Popup Component Developer Guide
+# Natural-UI Popup Component Developer Guide
 
-The Natural-JS Popup (N.popup) is a UI component that creates a layer popup from an element on the current page specified by the context option, or from a page specified by the url option.
+The Natural-UI Popup (N.popup) is a UI component that creates a layer popup from an element on the current page specified by the context option, or from a page specified by the url option.
 
 ## Table of Contents
 

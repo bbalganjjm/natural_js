@@ -1,4 +1,3 @@
-<!-- filepath: d:\workspace\natural_js\docs\DEVELOPER-GUIDE-TYPESCRIPT.md -->
 # Natural-JS TypeScript Developer Guide
 
 Natural-JS provides type declaration files (.d.ts) to support TypeScript development. This guide explains in detail how to use Natural-JS in a TypeScript environment.

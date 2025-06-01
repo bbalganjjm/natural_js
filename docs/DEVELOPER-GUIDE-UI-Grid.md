@@ -1,10 +1,10 @@
-# Natural-JS Grid Component Developer Guide
+# Natural-UI Grid Component Developer Guide
 
 The Grid (N.grid) component is a UI component that generates multi-column data lists using a table element as its context.
 
 ## Table of Contents
 
-- [Natural-JS Grid Component Developer Guide](#natural-js-grid-component-developer-guide)
+- [Natural-UI Grid Component Developer Guide](#natural-ui-grid-component-developer-guide)
   - [Table of Contents](#table-of-contents)
   - [Overview](#overview)
   - [Constructor](#constructor)

@@ -1,4 +1,4 @@
-# Natural-JS List Component Developer Guide
+# Natural-UI List Component Developer Guide
 
 List (N.list) is a UI component that generates single-column data lists using ul>li elements as the context option. It provides various features for displaying and managing list-type data.
 
