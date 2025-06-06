@@ -35,6 +35,7 @@
     "naturaljs"
   ],
   "dependencies": {
+    "@bbalganjjm/natural_js": "file:",
     "jquery": "3.7.1"
   },
   "devDependencies": {

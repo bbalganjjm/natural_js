@@ -7,6 +7,8 @@ Thumbs.db
 .externalToolBuilders/
 .history
 .idea
+.vscode
+.continue
 *.iml
 
 # node
