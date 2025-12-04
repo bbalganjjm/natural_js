@@ -46,7 +46,7 @@ export class NJS extends jQuery {
 
     static version = {
         "Natural-JS" : "1.0.0",
-        "Natural-CORE" : "1.0.0",
+        "Natural-CORE" : "1.0.1",
         "Natural-ARCHITECTURE" : "1.0.0",
         "Natural-DATA" : "1.0.0",
         "Natural-UI" : "1.0.0",

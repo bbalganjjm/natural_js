@@ -1,5 +1,5 @@
 /*!
- * Natural-CORE v1.0.0
+ * Natural-CORE v1.0.1
  *
  * Released under the LGPL v2.1 license
  * Date: 2014-09-26T11:11Z
@@ -1466,12 +1466,34 @@ export class NC {
                 const md = dm.lastIndexOf("0") + 1;
                 // if the number of decimal places is greater than the mask, then round off
                 if (vd.length > dm.length) {
-                    if (_p !== undefined && _p === "round") {
-                        vd = String(Math.round(Number(vd.substring(0, dm.length + 1)) / 10));
-                    } else if (_p !== undefined && _p === "ceil") {
-                        vd = String(Math.ceil(Number(vd.substring(0, dm.length + 1)) / 10));
-                    } else {
-                        vd = String(Math.floor(Number(vd.substring(0, dm.length + 1)) / 10));
+                    // get the base part (dm.length digits) and the next digit for rounding
+                    const basePart = vd.substring(0, dm.length);
+                    const nextDigit = parseInt(vd.charAt(dm.length)) || 0;
+                    // default behavior is round, unless _p is explicitly set to "ceil" or "floor"
+                    const shouldRound = (_p === undefined || _p === "round");
+                    const shouldCeil = (_p === "ceil");
+                    const shouldFloor = (_p === "floor");
+                    
+                    if (shouldRound) {
+                        // round based on next digit
+                        if (nextDigit >= 5) {
+                            // need to round up: add 1 to the last digit of basePart
+                            let num = Number("0." + basePart) + Math.pow(10, -dm.length);
+                            vd = num.toFixed(dm.length).split(".")[1];
+                        } else {
+                            vd = basePart;
+                        }
+                    } else if (shouldCeil) {
+                        // always round up if there's any remainder
+                        if (nextDigit > 0 || basePart !== "0".repeat(dm.length)) {
+                            let num = Number("0." + basePart) + Math.pow(10, -dm.length);
+                            vd = num.toFixed(dm.length).split(".")[1];
+                        } else {
+                            vd = basePart;
+                        }
+                    } else if (shouldFloor) {
+                        // floor - just take the base part
+                        vd = basePart;
                     }
                 } else {
                     // otherwise, pad the string w/the required zeros
