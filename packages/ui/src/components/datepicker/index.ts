@@ -195,6 +195,7 @@ export class Datepicker {
 
     // Show panel
     opts.panel?.show();
+    opts.panel?.removeClass('hidden__').addClass('visible__');
     opts.isOpen = true;
 
     // Call onShow
@@ -620,6 +621,7 @@ export class Datepicker {
       if (result === false) return this;
     }
 
+    opts.panel?.removeClass('visible__').addClass('hidden__');
     opts.panel?.hide();
     opts.isOpen = false;
 

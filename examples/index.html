@@ -474,6 +474,10 @@
       setStatus('success', '✅ 모듈 로드 완료! 테스트 버튼을 클릭하세요.');
       console.log('🎉 모든 모듈 로드 완료!');
 
+      // Datepicker 자동 초기화 (포커스 시 캘린더 표시)
+      window.testDatepicker = new Datepicker(new NaturalElement('#demo-datepicker'));
+      console.log('✅ Datepicker 초기화 완료');
+
     } catch (error) {
       console.error('❌ 모듈 로드 실패:', error);
       setStatus('error', '❌ 모듈 로드 실패: ' + error.message);

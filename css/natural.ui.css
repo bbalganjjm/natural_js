@@ -1050,8 +1050,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 .datepicker_contents__ .datepicker_day_item__,
 .datepicker_contents__ .datepicker_prev_day_item__,
 .datepicker_contents__ .datepicker_next_day_item__ {
-    will-change: transform;
-
+    display: inline-block;
     float: left;
     border: 1px solid transparent;
     cursor: pointer;
@@ -1060,7 +1059,6 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
     line-height: 33px;
     width: 35px;
     text-align: center;
-    transform: scaleX(0);
 }
 
 .datepicker_contents__ .datepicker_day_item__.datepicker_holiday__,
@@ -1072,8 +1070,7 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 .datepicker_contents__ .datepicker_day_item__.visible__,
 .datepicker_contents__ .datepicker_prev_day_item__.visible__,
 .datepicker_contents__ .datepicker_next_day_item__.visible__ {
-    transform: scaleX(1);
-    transition: transform var(--njs-motion-duration-slow) ease;
+    opacity: 1;
 }
 
 .datepicker_contents__ .datepicker_prev_day_item__,
@@ -1936,7 +1933,14 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
 .datepicker_contents__ .datepicker_day_item__,
 .datepicker_contents__ .datepicker_prev_day_item__,
 .datepicker_contents__ .datepicker_next_day_item__ {
-    transform: scaleX(1);
+    transform: none !important;
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid transparent;
 }
 
 .datepicker_contents__ .datepicker_months_panel__ {
