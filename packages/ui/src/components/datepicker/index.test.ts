@@ -89,7 +89,7 @@ describe('Datepicker', () => {
       const dp = new Datepicker('#test-date');
       dp.show();
       
-      const panels = document.querySelectorAll('.datepicker__');
+      const panels = document.querySelectorAll('.datepicker_contents__');
       expect(panels.length).toBeGreaterThan(0);
       dp.destroy();
     });
@@ -404,7 +404,7 @@ describe('Datepicker', () => {
       const dp = new Datepicker('#test-date', { monthOnly: true });
       dp.show();
       
-      const months = dp.options.panel?.find('.datepicker_months__');
+      const months = dp.options.panel?.find('.datepicker_months_panel__');
       expect(months?.length).toBeGreaterThan(0);
       dp.destroy();
     });

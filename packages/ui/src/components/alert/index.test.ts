@@ -4,12 +4,14 @@
 
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { NaturalElement } from '@natural-js/shared';
+import { resetConfig } from '@natural-js/core';
 import { Alert, createAlert } from './index';
 
 describe('Alert', () => {
   let container: HTMLDivElement;
 
   beforeEach(() => {
+    resetConfig(); // Reset config to avoid saveMemory affecting tests
     container = document.createElement('div');
     container.id = 'test-container';
     document.body.appendChild(container);

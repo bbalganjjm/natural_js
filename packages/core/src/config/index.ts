@@ -190,7 +190,7 @@ export const DEFAULT_UI_CONFIG: UIConfig = {
     input: { displayTimeout: 7000, closeBtn: '×' },
     alwaysOnTop: true,
     draggable: true,
-    saveMemory: true,
+    saveMemory: false,
     message: {
       ko_KR: { confirm: '확인', cancel: '취소' },
       en_US: { confirm: 'OK', cancel: 'Cancel' },
@@ -221,7 +221,7 @@ export const DEFAULT_UI_CONFIG: UIConfig = {
   popup: {
     alwaysOnTop: true,
     draggable: true,
-    saveMemory: true,
+    saveMemory: false,
     button: false,
   },
   list: {
