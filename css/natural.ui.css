@@ -1876,3 +1876,316 @@ a.btn_elevated__, input[type='button'].btn_elevated__, button.btn_elevated__ {
     left: calc(var(--njs-switch-padding) * 2);
     color: var(--md-sys-color-on-primary);
 }
+/* Natural-JS 2.0 Component Styles */
+
+/* Datepicker 2.0 */
+.datepicker_contents__ .datepicker_header__ {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: var(--md-sys-color-surface-container-low);
+    border-bottom: 1px solid var(--md-sys-color-outline-variant);
+}
+
+.datepicker_contents__ .datepicker_header__ button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    font-size: var(--njs-font-size-l);
+    color: var(--md-sys-color-on-surface);
+    border-radius: var(--njs-border-radius-s);
+}
+
+.datepicker_contents__ .datepicker_header__ button:hover {
+    background-color: var(--md-sys-color-surface-container-highest);
+}
+
+.datepicker_contents__ .datepicker_title__ {
+    font-weight: var(--njs-font-weight-medium);
+    color: var(--md-sys-color-on-surface);
+}
+
+.datepicker_contents__ .datepicker_body__ {
+    padding: 5px;
+}
+
+.datepicker_contents__ .datepicker_day_titles__ {
+    display: flex;
+    margin-bottom: 5px;
+}
+
+.datepicker_contents__ .datepicker_day_titles__ .datepicker_day_title__ {
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    font-size: var(--njs-font-size-s);
+    color: var(--md-sys-color-on-surface-variant);
+    border: none;
+    background: none;
+}
+
+.datepicker_contents__ .datepicker_days_panel__ {
+    display: flex;
+    flex-wrap: wrap;
+    width: 245px;
+}
+
+.datepicker_contents__ .datepicker_day_item__,
+.datepicker_contents__ .datepicker_prev_day_item__,
+.datepicker_contents__ .datepicker_next_day_item__ {
+    transform: scaleX(1);
+}
+
+.datepicker_contents__ .datepicker_months_panel__ {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+}
+
+.datepicker_contents__ .datepicker_footer__ {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    padding: 10px;
+    border-top: 1px solid var(--md-sys-color-outline-variant);
+}
+
+.datepicker_contents__ .datepicker_footer__ button {
+    padding: 5px 15px;
+    border: 1px solid var(--md-sys-color-outline);
+    background-color: var(--md-sys-color-surface);
+    color: var(--md-sys-color-on-surface);
+    border-radius: var(--njs-border-radius-s);
+    cursor: pointer;
+    font-size: var(--njs-font-size-s);
+}
+
+.datepicker_contents__ .datepicker_footer__ button:hover {
+    background-color: var(--md-sys-color-surface-container-high);
+}
+
+.datepicker_contents__ .datepicker_selected__ {
+    border-color: var(--md-sys-color-primary) !important;
+    background-color: var(--md-sys-color-primary-container);
+    border-radius: var(--njs-border-radius-cir);
+}
+
+.datepicker_contents__ .datepicker_today__ {
+    font-weight: var(--njs-font-weight-bold);
+    color: var(--md-sys-color-primary);
+}
+
+.datepicker_contents__ .datepicker_disabled__ {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+/* Tab 2.0 Additional */
+.tab__ {
+    width: 100%;
+}
+
+.tab__ > ul > li.tab_active__ {
+    background-color: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+}
+
+.tab__ > ul > li.tab_active__ > a {
+    color: var(--md-sys-color-on-primary);
+}
+
+.tab__ > .tab_content__ {
+    padding: 15px;
+    border: 1px solid var(--md-sys-color-outline-variant);
+    border-top: none;
+    background-color: var(--md-sys-color-surface);
+}
+
+/* Grid 2.0 Additional */
+.grid__ {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.grid__ th,
+.grid__ td {
+    padding: 10px;
+    border: 1px solid var(--md-sys-color-outline-variant);
+}
+
+.grid__ th {
+    background-color: var(--md-sys-color-surface-container-low);
+    font-weight: var(--njs-font-weight-medium);
+}
+
+.grid__ tbody tr:hover {
+    background-color: var(--md-sys-color-surface-container-highest);
+}
+
+/* Alert 2.0 Additional */
+.alert__.block_overlay_msg__ {
+    min-width: 280px;
+    max-width: 450px;
+}
+
+.alert__.block_overlay_msg__ .buttonBox__ button {
+    min-width: 80px;
+}
+
+/* Notify 2.0 */
+.notify_container__ {
+    position: fixed;
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+    pointer-events: none;
+}
+
+.notify_container__.top-left__ { top: 0; left: 0; align-items: flex-start; }
+.notify_container__.top-center__ { top: 0; left: 50%; transform: translateX(-50%); align-items: center; }
+.notify_container__.top-right__ { top: 0; right: 0; align-items: flex-end; }
+.notify_container__.bottom-left__ { bottom: 0; left: 0; align-items: flex-start; }
+.notify_container__.bottom-center__ { bottom: 0; left: 50%; transform: translateX(-50%); align-items: center; }
+.notify_container__.bottom-right__ { bottom: 0; right: 0; align-items: flex-end; }
+
+.notify_item__ {
+    pointer-events: auto;
+    padding: 15px 20px;
+    background-color: var(--md-sys-color-inverse-surface);
+    color: var(--md-sys-color-inverse-on-surface);
+    border-radius: var(--njs-border-radius-m);
+    box-shadow: var(--njs-elevation-m);
+    animation: notify-slide-in 0.3s ease;
+}
+
+.notify_item__.notify_info__ { border-left: 4px solid var(--md-sys-color-primary); }
+.notify_item__.notify_success__ { border-left: 4px solid var(--md-sys-color-tertiary); }
+.notify_item__.notify_warning__ { border-left: 4px solid var(--md-sys-color-error); }
+.notify_item__.notify_error__ { border-left: 4px solid var(--md-sys-color-error); background-color: var(--md-sys-color-error-container); color: var(--md-sys-color-on-error-container); }
+
+@keyframes notify-slide-in {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Docs (Documents) 2.0 */
+.docs__ .docs_tab_list__ {
+    display: flex;
+    overflow-x: auto;
+    background-color: var(--md-sys-color-surface-container-low);
+    border-bottom: 1px solid var(--md-sys-color-outline-variant);
+}
+
+.docs__ .docs_tab__ {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-right: 1px solid var(--md-sys-color-outline-variant);
+    white-space: nowrap;
+}
+
+.docs__ .docs_tab__.docs_tab_active__ {
+    background-color: var(--md-sys-color-surface);
+    border-bottom: 2px solid var(--md-sys-color-primary);
+}
+
+.docs__ .docs_tab__ .docs_tab_close__ {
+    margin-left: 10px;
+    cursor: pointer;
+    opacity: 0.5;
+}
+
+.docs__ .docs_tab__ .docs_tab_close__:hover {
+    opacity: 1;
+}
+
+.docs__ .docs_content__ {
+    display: none;
+}
+
+.docs__ .docs_content__.docs_content_active__ {
+    display: block;
+}
+
+/* Pagination 2.0 */
+.pagination__ {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    padding: 10px;
+}
+
+.pagination__ .page_btn__ {
+    min-width: 35px;
+    height: 35px;
+    padding: 5px 10px;
+    border: 1px solid var(--md-sys-color-outline-variant);
+    background-color: var(--md-sys-color-surface);
+    color: var(--md-sys-color-on-surface);
+    border-radius: var(--njs-border-radius-s);
+    cursor: pointer;
+}
+
+.pagination__ .page_btn__:hover:not(.page_btn_disabled__) {
+    background-color: var(--md-sys-color-surface-container-high);
+}
+
+.pagination__ .page_btn__.page_btn_active__ {
+    background-color: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+    border-color: var(--md-sys-color-primary);
+}
+
+.pagination__ .page_btn__.page_btn_disabled__ {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Tree 2.0 */
+.tree__ {
+    list-style: none;
+    padding-left: 0;
+}
+
+.tree__ .tree_node__ {
+    padding: 5px 0;
+}
+
+.tree__ .tree_toggle__ {
+    cursor: pointer;
+    margin-right: 5px;
+    width: 20px;
+    display: inline-block;
+    text-align: center;
+}
+
+.tree__ .tree_label__ {
+    cursor: pointer;
+    padding: 3px 8px;
+    border-radius: var(--njs-border-radius-s);
+}
+
+.tree__ .tree_label__:hover {
+    background-color: var(--md-sys-color-surface-container-high);
+}
+
+.tree__ .tree_node__.tree_selected__ > .tree_label__ {
+    background-color: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-on-primary-container);
+}
+
+.tree__ .tree_children__ {
+    list-style: none;
+    padding-left: 20px;
+}
+
+.tree__ .tree_children__.tree_collapsed__ {
+    display: none;
+}
