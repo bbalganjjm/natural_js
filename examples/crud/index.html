@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Natural-JS 2.0 CRUD Example</title>
+  
+  <!-- Natural-JS CSS -->
+  <link rel="stylesheet" href="../../css/tokens.css">
+  <link rel="stylesheet" href="../../css/light.css">
+  <link rel="stylesheet" href="../../css/natural.ui.css">
+  
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: var(--njs-color-bg);
+      color: var(--njs-color-text);
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    h1 {
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+    
+    .search-area {
+      background: var(--njs-color-surface);
+      border: 1px solid var(--njs-color-border);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+    
+    .search-area label {
+      margin-right: 24px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .search-area input,
+    .search-area select {
+      padding: 8px 12px;
+      border: 1px solid var(--njs-color-border);
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    
+    .button-area {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    
+    .btn {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    
+    .btn-primary {
+      background: var(--njs-color-primary);
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background: var(--njs-color-primary-hover);
+    }
+    
+    .btn-secondary {
+      background: var(--njs-color-secondary);
+      color: white;
+    }
+    
+    .btn-danger {
+      background: var(--njs-color-error);
+      color: white;
+    }
+    
+    .grid-area {
+      background: var(--njs-color-surface);
+      border: 1px solid var(--njs-color-border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    
+    .grid {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    .grid th,
+    .grid td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid var(--njs-color-border);
+    }
+    
+    .grid th {
+      background: var(--njs-color-surface-variant);
+      font-weight: 600;
+    }
+    
+    .grid tbody tr:hover {
+      background: var(--njs-color-surface-variant);
+    }
+    
+    .grid input[type="text"],
+    .grid select {
+      width: 100%;
+      padding: 6px 8px;
+      border: 1px solid var(--njs-color-border);
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    
+    .grid input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+    }
+    
+    .pagination-area {
+      display: flex;
+      justify-content: center;
+      margin-top: 16px;
+    }
+    
+    .loading {
+      text-align: center;
+      padding: 40px;
+      color: var(--njs-color-text-secondary);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>📊 Natural-JS 2.0 CRUD Example</h1>
+    
+    <!-- Search Area -->
+    <div class="search-area" id="searchForm">
+      <label>
+        이름
+        <input type="text" id="searchName" placeholder="이름 검색">
+      </label>
+      <label>
+        상태
+        <select id="searchStatus">
+          <option value="">전체</option>
+        </select>
+      </label>
+      <label>
+        부서
+        <select id="searchDept">
+          <option value="">전체</option>
+        </select>
+      </label>
+    </div>
+    
+    <!-- Button Area -->
+    <div class="button-area">
+      <button type="button" id="btnAdd" class="btn btn-secondary">➕ 추가</button>
+      <button type="button" id="btnDelete" class="btn btn-danger">🗑️ 삭제</button>
+      <button type="button" id="btnSave" class="btn btn-primary">💾 저장</button>
+      <button type="button" id="btnSearch" class="btn btn-primary">🔍 조회</button>
+    </div>
+    
+    <!-- Grid Area -->
+    <div class="grid-area">
+      <table class="grid" id="userGrid">
+        <colgroup>
+          <col style="width: 50px;">
+          <col style="width: 120px;">
+          <col style="width: auto;">
+          <col style="width: 100px;">
+          <col style="width: 120px;">
+          <col style="width: 80px;">
+          <col style="width: 140px;">
+        </colgroup>
+        <thead>
+          <tr>
+            <th><input type="checkbox" id="checkAll" title="전체 선택"></th>
+            <th data-sort="name">이름</th>
+            <th data-sort="email">이메일</th>
+            <th data-sort="dept">부서</th>
+            <th data-sort="status">상태</th>
+            <th data-sort="age">나이</th>
+            <th data-sort="registered">등록일</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="text-align: center;"><input type="checkbox" class="check"></td>
+            <td><input type="text" id="name" data-validate='[["required"]]'></td>
+            <td><input type="text" id="email" data-validate='[["required"], ["email"]]'></td>
+            <td>
+              <select id="dept" data-validate='[["required"]]'>
+                <option value="">선택</option>
+              </select>
+            </td>
+            <td>
+              <select id="status" data-validate='[["required"]]'>
+                <option value="">선택</option>
+              </select>
+            </td>
+            <td><input type="text" id="age" data-validate='[["integer"]]' data-format='[["commas"]]'></td>
+            <td><input type="text" id="registered" data-format='[["date", 8]]' data-validate='[["date"]]'></td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <div class="loading" id="loading" style="display: none;">
+        데이터를 불러오는 중...
+      </div>
+    </div>
+    
+    <!-- Pagination -->
+    <div class="pagination-area" id="pagination">
+    </div>
+  </div>
+  
+  <!-- Sample Data (실제로는 서버에서 가져옴) -->
+  <script>
+    window.SAMPLE_DATA = {
+      codes: {
+        status: [
+          { code: 'active', name: '활성' },
+          { code: 'inactive', name: '비활성' },
+          { code: 'pending', name: '대기' }
+        ],
+        dept: [
+          { code: 'sales', name: '영업부' },
+          { code: 'dev', name: '개발부' },
+          { code: 'hr', name: '인사부' },
+          { code: 'finance', name: '재무부' }
+        ]
+      },
+      users: [
+        { id: 1, name: '홍길동', email: 'hong@example.com', dept: 'sales', status: 'active', age: 30, registered: '20240101' },
+        { id: 2, name: '김영희', email: 'kim@example.com', dept: 'dev', status: 'active', age: 28, registered: '20240115' },
+        { id: 3, name: '이철수', email: 'lee@example.com', dept: 'hr', status: 'inactive', age: 35, registered: '20240201' },
+        { id: 4, name: '박지민', email: 'park@example.com', dept: 'finance', status: 'pending', age: 25, registered: '20240301' },
+        { id: 5, name: '최수진', email: 'choi@example.com', dept: 'dev', status: 'active', age: 32, registered: '20240315' },
+        { id: 6, name: '정민호', email: 'jung@example.com', dept: 'sales', status: 'active', age: 29, registered: '20240401' },
+        { id: 7, name: '강예진', email: 'kang@example.com', dept: 'hr', status: 'active', age: 27, registered: '20240415' },
+        { id: 8, name: '윤서연', email: 'yoon@example.com', dept: 'dev', status: 'pending', age: 31, registered: '20240501' }
+      ]
+    };
+  </script>
+  
+  <!-- Natural-JS 2.0 -->
+  <script type="module">
+    // Import from built packages
+    import { N, NaturalElement } from '../../packages/natural/dist/index.js';
+    
+    // Make N globally available
+    window.N = N;
+    
+    // Initialize the page
+    N('#userGrid').cont({
+      // Component references
+      grid: null,
+      statusSelect: null,
+      deptSelect: null,
+      searchStatusSelect: null,
+      searchDeptSelect: null,
+      
+      init(view, request) {
+        const self = this;
+        this.initSelects();
+        this.initGrid();
+        this.bindEvents();
+        
+        // Initial load
+        setTimeout(() => {
+          N('#btnSearch').trigger('click');
+        }, 100);
+      },
+      
+      initSelects() {
+        const codes = window.SAMPLE_DATA.codes;
+        
+        // Status selects
+        this.statusSelect = N(codes.status).select({
+          context: N('#status', this.view),
+          key: 'name',
+          val: 'code'
+        }).bind();
+        
+        this.searchStatusSelect = N(codes.status).select({
+          context: N('#searchStatus', this.view),
+          key: 'name',
+          val: 'code'
+        }).bind();
+        
+        // Dept selects
+        this.deptSelect = N(codes.dept).select({
+          context: N('#dept', this.view),
+          key: 'name',
+          val: 'code'
+        }).bind();
+        
+        this.searchDeptSelect = N(codes.dept).select({
+          context: N('#searchDept', this.view),
+          key: 'name',
+          val: 'code'
+        }).bind();
+      },
+      
+      initGrid() {
+        this.grid = N([]).grid({
+          context: N('.grid', this.view),
+          height: 400,
+          resizable: true,
+          sortable: true,
+          checkAll: '#checkAll',
+          checkAllTarget: '.check',
+          onSelect: (index, data, e) => {
+            console.log('Selected row:', index, data);
+          }
+        });
+      },
+      
+      bindEvents() {
+        const self = this;
+        
+        // Search button
+        N('#btnSearch', this.view).on('click', function(e) {
+          e.preventDefault();
+          self.search();
+        });
+        
+        // Add button
+        N('#btnAdd', this.view).on('click', function(e) {
+          e.preventDefault();
+          self.grid.add();
+        });
+        
+        // Delete button
+        N('#btnDelete', this.view).on('click', function(e) {
+          e.preventDefault();
+          const checkedIndexes = self.grid.check();
+          
+          if (checkedIndexes.length === 0) {
+            N(window).alert({
+              msg: '삭제할 행을 선택해주세요.'
+            }).show();
+            return;
+          }
+          
+          N(window).alert({
+            msg: `선택한 ${checkedIndexes.length}개의 행을 삭제하시겠습니까?`,
+            confirm: true,
+            onOk: () => {
+              self.grid.remove(checkedIndexes);
+              N.notify?.success?.(`${checkedIndexes.length}개의 행이 삭제 대기 상태입니다.`) ||
+                console.log(`${checkedIndexes.length}개의 행이 삭제 대기 상태입니다.`);
+            }
+          }).show();
+        });
+        
+        // Save button
+        N('#btnSave', this.view).on('click', function(e) {
+          e.preventDefault();
+          const modified = self.grid.data('modified');
+          
+          if (modified.length === 0) {
+            N(window).alert({
+              msg: '변경된 데이터가 없습니다.'
+            }).show();
+            return;
+          }
+          
+          // Validate
+          if (!self.grid.validate()) {
+            return;
+          }
+          
+          N(window).alert({
+            msg: `${modified.length}개의 데이터를 저장하시겠습니까?`,
+            confirm: true,
+            onOk: () => {
+              // Simulate save
+              console.log('Saving data:', modified);
+              N.notify?.success?.('저장되었습니다.') ||
+                console.log('저장되었습니다.');
+              
+              // Reload
+              self.search();
+            }
+          }).show();
+        });
+      },
+      
+      search() {
+        const self = this;
+        const searchName = N('#searchName', this.view).val()?.toLowerCase() || '';
+        const searchStatus = N('#searchStatus', this.view).val() || '';
+        const searchDept = N('#searchDept', this.view).val() || '';
+        
+        // Filter sample data
+        let filteredData = window.SAMPLE_DATA.users.filter(user => {
+          let match = true;
+          if (searchName && !user.name.toLowerCase().includes(searchName)) {
+            match = false;
+          }
+          if (searchStatus && user.status !== searchStatus) {
+            match = false;
+          }
+          if (searchDept && user.dept !== searchDept) {
+            match = false;
+          }
+          return match;
+        });
+        
+        // Deep clone to avoid modifying original
+        filteredData = JSON.parse(JSON.stringify(filteredData));
+        
+        // Show loading
+        N('#loading', this.view).show();
+        
+        // Simulate network delay
+        setTimeout(() => {
+          self.grid.bind(filteredData);
+          N('#loading', self.view).hide();
+          console.log('Loaded', filteredData.length, 'records');
+        }, 300);
+      }
+    });
+  </script>
+</body>
+</html>
+

@@ -500,45 +500,28 @@
 
 /* Days Panel */
 .datepicker_days_panel__ {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 2px;
-  padding: 8px;
+  display: grid !important;
+  grid-template-columns: repeat(7, 1fr) !important;
+  gap: 4px !important;
+  padding: 8px 12px !important;
+  background-color: var(--md-sys-color-surface, #FDFCFF);
 }
 
-.datepicker_days_panel__ > span {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: var(--njs-border-radius-cir);
-  background-color: transparent;
-  color: #1A1C1E;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 150ms ease;
-}
-
-.datepicker_days_panel__ > span:hover {
-  background-color: #E2E4E8;
-}
-
+.datepicker_days_panel__ > span,
 .datepicker_day_item__,
 .datepicker_prev_day_item__,
 .datepicker_next_day_item__ {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border: 1px solid transparent;
-  border-radius: var(--njs-border-radius-cir);
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 50% !important;
   background-color: transparent;
   color: var(--md-sys-color-on-surface, #1A1C1E);
-  font-size: var(--njs-font-size-m, 14px);
+  font-size: 14px;
   cursor: pointer;
-  transition: all var(--njs-motion-duration-fast, 150ms) ease;
+  transition: background-color 150ms ease;
 }
 
 .datepicker_day_item__:not(:empty):hover,
@@ -557,6 +540,7 @@
 /* Empty day cells */
 .datepicker_day_item__:empty {
   cursor: default;
+  pointer-events: none;
 }
 
 /* Today */

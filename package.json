@@ -24,7 +24,9 @@
     "lint:fix": "eslint packages --ext .ts --fix",
     "format": "prettier --write \"packages/**/*.ts\"",
     "format:check": "prettier --check \"packages/**/*.ts\"",
-    "clean": "pnpm -r exec rm -rf dist && rm -rf coverage"
+    "clean": "pnpm -r exec rm -rf dist && rm -rf coverage",
+    "docs": "typedoc",
+    "docs:watch": "typedoc --watch"
   },
   "repository": {
     "type": "git",

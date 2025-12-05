@@ -1,0 +1,60 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": [
+    "packages/shared/src/index.ts",
+    "packages/core/src/index.ts",
+    "packages/architecture/src/index.ts",
+    "packages/data/src/index.ts",
+    "packages/ui/src/index.ts",
+    "packages/ui-shell/src/index.ts",
+    "packages/template/src/index.ts",
+    "packages/code/src/index.ts",
+    "packages/natural/src/index.ts"
+  ],
+  "entryPointStrategy": "expand",
+  "out": "docs/api",
+  "name": "Natural-JS 2.0 API Documentation",
+  "readme": "README.md",
+  "includeVersion": true,
+  "excludePrivate": true,
+  "excludeProtected": false,
+  "excludeInternal": true,
+  "excludeExternals": true,
+  "theme": "default",
+  "categorizeByGroup": true,
+  "defaultCategory": "Other",
+  "categoryOrder": [
+    "Core",
+    "Architecture",
+    "Data",
+    "UI",
+    "UI.Shell",
+    "Template",
+    "Code",
+    "*"
+  ],
+  "navigation": {
+    "includeCategories": true,
+    "includeGroups": true
+  },
+  "sort": [
+    "source-order",
+    "alphabetical"
+  ],
+  "visibilityFilters": {
+    "protected": true,
+    "@internal": false
+  },
+  "searchInComments": true,
+  "cleanOutputDir": true,
+  "skipErrorChecking": false,
+  "validation": {
+    "notExported": true,
+    "invalidLink": true,
+    "notDocumented": false
+  },
+  "plugin": [],
+  "logLevel": "Info",
+  "tsconfig": "tsconfig.json"
+}
+

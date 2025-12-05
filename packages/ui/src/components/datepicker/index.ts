@@ -431,12 +431,12 @@ export class Datepicker {
       self.nextMonth();
     });
 
-    // Day selection
-    opts.panel.find('.datepicker_day__:not(.datepicker_empty__):not(.datepicker_adjacent__)').on('click', function (this: Element, e: Event) {
+    // Day selection - click on day items
+    opts.panel.find('.datepicker_day_item__, .datepicker_prev_day_item__, .datepicker_next_day_item__').on('click', function (this: Element, e: Event) {
       e.preventDefault();
       e.stopPropagation();
       const el = this as HTMLElement;
-      if (el.dataset.disabled === 'true') return;
+      if (el.dataset.disabled === 'true' || !el.textContent?.trim()) return;
       
       const dateStr = el.dataset.date;
       if (dateStr) {
@@ -449,7 +449,7 @@ export class Datepicker {
     });
 
     // Month selection (monthOnly mode)
-    opts.panel.find('.datepicker_month__').on('click', function (this: Element, e: Event) {
+    opts.panel.find('.datepicker_month_item__').on('click', function (this: Element, e: Event) {
       e.preventDefault();
       e.stopPropagation();
       const el = this as HTMLElement;
