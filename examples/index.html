@@ -4,100 +4,87 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Natural-JS 2.0 테스트 페이지</title>
-  <!-- Natural-JS CSS -->
+  <!-- Natural-JS CSS (Design System) -->
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/light.css">
+  <link rel="stylesheet" href="../css/dark.css">
   <link rel="stylesheet" href="../css/natural.ui.css">
   <style>
+    /* Test Page Specific Styles */
     :root {
-      --primary: #3b82f6;
-      --success: #22c55e;
-      --error: #ef4444;
-      --warning: #f59e0b;
-      --bg: #0f172a;
-      --card-bg: #1e293b;
-      --text: #e2e8f0;
-      --border: #334155;
+      --test-success: #22c55e;
+      --test-error: #ef4444;
+      --test-warning: #f59e0b;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
+      font-family: var(--njs-font-family);
+      background: var(--md-sys-color-background);
+      color: var(--md-sys-color-on-background);
+      line-height: var(--njs-line-height-normal);
       padding: 2rem;
     }
     h1 {
       text-align: center;
       margin-bottom: 2rem;
-      font-size: 2rem;
-      background: linear-gradient(135deg, var(--primary), #8b5cf6);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      font-size: var(--njs-font-size-xxxl);
+      color: var(--md-sys-color-primary);
     }
     .test-section {
-      background: var(--card-bg);
-      border-radius: 12px;
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-      border: 1px solid var(--border);
+      background: var(--md-sys-color-surface-container-low);
+      border-radius: var(--njs-border-radius-m);
+      padding: var(--njs-spacing-xl);
+      margin-bottom: var(--njs-spacing-xl);
+      border: 1px solid var(--md-sys-color-outline-variant);
     }
     .test-section h2 {
-      font-size: 1.25rem;
-      margin-bottom: 1rem;
-      color: var(--primary);
+      font-size: var(--njs-font-size-l);
+      margin-bottom: var(--njs-spacing-m);
+      color: var(--md-sys-color-primary);
     }
     .test-group {
-      margin-bottom: 1rem;
-      padding: 1rem;
-      background: rgba(0,0,0,0.2);
-      border-radius: 8px;
+      margin-bottom: var(--njs-spacing-m);
+      padding: var(--njs-spacing-m);
+      background: var(--md-sys-color-surface-container);
+      border-radius: var(--njs-border-radius-s);
     }
     .test-result {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      padding: 0.5rem 0;
-      border-bottom: 1px solid var(--border);
+      gap: var(--njs-spacing-s);
+      padding: var(--njs-spacing-s) 0;
+      border-bottom: 1px solid var(--md-sys-color-outline-variant);
     }
     .test-result:last-child { border-bottom: none; }
-    .test-result.pass::before { content: '✓'; color: var(--success); font-weight: bold; }
-    .test-result.fail::before { content: '✗'; color: var(--error); font-weight: bold; }
-    .test-result.pending::before { content: '…'; color: var(--warning); }
+    .test-result.pass::before { content: '✓'; color: var(--test-success); font-weight: bold; }
+    .test-result.fail::before { content: '✗'; color: var(--test-error); font-weight: bold; }
+    .test-result.pending::before { content: '…'; color: var(--test-warning); }
     .test-name { flex: 1; }
-    .test-message { font-size: 0.875rem; color: #64748b; margin-left: 0.5rem; }
-    .btn {
-      background: var(--primary);
-      color: white;
-      border: none;
-      padding: 0.75rem 1.5rem;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 1rem;
-    }
-    .btn:hover { filter: brightness(1.1); }
+    .test-message { font-size: var(--njs-font-size-s); color: var(--md-sys-color-on-surface-variant); margin-left: var(--njs-spacing-s); }
     .summary {
       display: flex;
       justify-content: center;
       gap: 2rem;
       margin-bottom: 2rem;
-      padding: 1.5rem;
-      background: var(--card-bg);
-      border-radius: 12px;
+      padding: var(--njs-spacing-xl);
+      background: var(--md-sys-color-surface-container-low);
+      border-radius: var(--njs-border-radius-m);
     }
     .summary-item { text-align: center; }
     .summary-item .count { font-size: 2rem; font-weight: bold; }
-    .summary-item .label { font-size: 0.875rem; color: #64748b; }
-    .summary-item.passed .count { color: var(--success); }
-    .summary-item.failed .count { color: var(--error); }
+    .summary-item .label { font-size: var(--njs-font-size-s); color: var(--md-sys-color-on-surface-variant); }
+    .summary-item.passed .count { color: var(--test-success); }
+    .summary-item.failed .count { color: var(--test-error); }
     #controls { text-align: center; margin-bottom: 2rem; }
     .demo-area {
-      background: rgba(0,0,0,0.3);
-      border-radius: 8px;
-      padding: 1rem;
-      margin-top: 1rem;
+      background: var(--md-sys-color-surface-container);
+      border-radius: var(--njs-border-radius-s);
+      padding: var(--njs-spacing-m);
+      margin-top: var(--njs-spacing-m);
     }
     .demo-area input, .demo-area select {
-      padding: 0.5rem;
-      border-radius: 4px;
+      padding: var(--njs-spacing-s);
+      border-radius: var(--njs-border-radius-s);
       border: 1px solid var(--border);
       background: var(--bg);
       color: var(--text);
