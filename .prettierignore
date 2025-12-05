@@ -1,0 +1,10 @@
+node_modules
+dist
+coverage
+*.min.js
+*.min.css
+pnpm-lock.yaml
+src/**/*.js
+lib/**/*
+compiler/**/*
+

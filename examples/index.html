@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Natural-JS 2.0 테스트 페이지</title>
+  <!-- Natural-JS CSS -->
+  <link rel="stylesheet" href="../css/natural.ui.css">
+  <style>
+    :root {
+      --primary: #3b82f6;
+      --success: #22c55e;
+      --error: #ef4444;
+      --warning: #f59e0b;
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #e2e8f0;
+      --border: #334155;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 2rem;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+      background: linear-gradient(135deg, var(--primary), #8b5cf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .test-section {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid var(--border);
+    }
+    .test-section h2 {
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+    .test-group {
+      margin-bottom: 1rem;
+      padding: 1rem;
+      background: rgba(0,0,0,0.2);
+      border-radius: 8px;
+    }
+    .test-result {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .test-result:last-child { border-bottom: none; }
+    .test-result.pass::before { content: '✓'; color: var(--success); font-weight: bold; }
+    .test-result.fail::before { content: '✗'; color: var(--error); font-weight: bold; }
+    .test-result.pending::before { content: '…'; color: var(--warning); }
+    .test-name { flex: 1; }
+    .test-message { font-size: 0.875rem; color: #64748b; margin-left: 0.5rem; }
+    .btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    .btn:hover { filter: brightness(1.1); }
+    .summary {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      background: var(--card-bg);
+      border-radius: 12px;
+    }
+    .summary-item { text-align: center; }
+    .summary-item .count { font-size: 2rem; font-weight: bold; }
+    .summary-item .label { font-size: 0.875rem; color: #64748b; }
+    .summary-item.passed .count { color: var(--success); }
+    .summary-item.failed .count { color: var(--error); }
+    #controls { text-align: center; margin-bottom: 2rem; }
+    .demo-area {
+      background: rgba(0,0,0,0.3);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-top: 1rem;
+    }
+    .demo-area input, .demo-area select {
+      padding: 0.5rem;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      margin-right: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .demo-area button:not(.btn_common__) {
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      border: none;
+      background: var(--primary);
+      color: white;
+      cursor: pointer;
+      margin-right: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+    th, td { border: 1px solid var(--border); padding: 0.5rem; text-align: left; }
+    th { background: rgba(0,0,0,0.3); }
+    .console-output {
+      background: #000;
+      color: #0f0;
+      padding: 1rem;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 0.875rem;
+      max-height: 200px;
+      overflow-y: auto;
+      margin-top: 1rem;
+    }
+    .tab-links { display: flex; list-style: none; gap: 0.5rem; margin-bottom: 1rem; }
+    .tab-links li { padding: 0.5rem 1rem; background: var(--border); border-radius: 4px; cursor: pointer; }
+    .tab-links li.active { background: var(--primary); }
+    .tab-content { display: none; padding: 1rem; background: rgba(0,0,0,0.2); border-radius: 4px; }
+    .tab-content.active { display: block; }
+    .status-box {
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    .status-box.loading { background: #1e40af; }
+    .status-box.success { background: #166534; }
+    .status-box.error { background: #991b1b; }
+  </style>
+</head>
+<body>
+  <h1>🚀 Natural-JS 2.0 테스트</h1>
+
+  <div id="status-box" class="status-box loading">모듈 로드 대기 중...</div>
+
+  <div id="controls">
+    <button class="btn" id="runAllTests">전체 테스트 실행</button>
+  </div>
+
+  <div class="summary">
+    <div class="summary-item">
+      <div class="count" id="totalCount">0</div>
+      <div class="label">전체</div>
+    </div>
+    <div class="summary-item passed">
+      <div class="count" id="passedCount">0</div>
+      <div class="label">통과</div>
+    </div>
+    <div class="summary-item failed">
+      <div class="count" id="failedCount">0</div>
+      <div class="label">실패</div>
+    </div>
+  </div>
+
+  <!-- Formatter 테스트 -->
+  <div class="test-section">
+    <h2>Formatter 테스트</h2>
+    <div class="test-group">
+      <div class="test-result pending" data-test="formatter-commas">
+        <span class="test-name">숫자에 콤마 추가 (1234567 → 1,234,567)</span>
+      </div>
+      <div class="test-result pending" data-test="formatter-phone">
+        <span class="test-name">전화번호 포맷 (01012345678 → 010-1234-5678)</span>
+      </div>
+      <div class="test-result pending" data-test="formatter-date">
+        <span class="test-name">날짜 포맷 (20231225 → 2023-12-25)</span>
+      </div>
+      <div class="test-result pending" data-test="formatter-rrn">
+        <span class="test-name">주민번호 포맷 (마스킹 포함)</span>
+      </div>
+    </div>
+    <div class="demo-area">
+      <input type="text" id="demo-format-input" placeholder="값 입력">
+      <select id="demo-format-type">
+        <option value="commas">콤마 (숫자)</option>
+        <option value="phone">전화번호</option>
+        <option value="date">날짜 (8자리)</option>
+      </select>
+      <button id="demo-format-btn">포맷 적용</button>
+      <div id="demo-format-result" class="console-output">결과가 여기 표시됩니다</div>
+    </div>
+  </div>
+
+  <!-- Validator 테스트 -->
+  <div class="test-section">
+    <h2>Validator 테스트</h2>
+    <div class="test-group">
+      <div class="test-result pending" data-test="validator-required">
+        <span class="test-name">필수값 검사</span>
+      </div>
+      <div class="test-result pending" data-test="validator-email">
+        <span class="test-name">이메일 형식 검사</span>
+      </div>
+      <div class="test-result pending" data-test="validator-integer">
+        <span class="test-name">정수 검사</span>
+      </div>
+      <div class="test-result pending" data-test="validator-multiple">
+        <span class="test-name">복합 규칙 검사</span>
+      </div>
+    </div>
+    <div class="demo-area">
+      <input type="text" id="demo-validate-input" placeholder="값 입력">
+      <select id="demo-validate-type">
+        <option value="required">필수값</option>
+        <option value="email">이메일</option>
+        <option value="integer">정수</option>
+      </select>
+      <button id="demo-validate-btn">검사</button>
+      <div id="demo-validate-result" class="console-output">결과가 여기 표시됩니다</div>
+    </div>
+  </div>
+
+  <!-- Grid 테스트 -->
+  <div class="test-section">
+    <h2>Grid 컴포넌트 테스트</h2>
+    <div class="test-group">
+      <div class="test-result pending" data-test="grid-bind">
+        <span class="test-name">데이터 바인딩</span>
+      </div>
+      <div class="test-result pending" data-test="grid-add">
+        <span class="test-name">행 추가</span>
+      </div>
+      <div class="test-result pending" data-test="grid-val">
+        <span class="test-name">값 조회/수정</span>
+      </div>
+      <div class="test-result pending" data-test="grid-remove">
+        <span class="test-name">행 삭제</span>
+      </div>
+    </div>
+    <div class="demo-area">
+      <div id="demo-grid-container">
+        <table>
+          <thead><tr><th>ID</th><th>이름</th><th>가격</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Alert 테스트 -->
+  <div class="test-section">
+    <h2>Alert 컴포넌트 테스트</h2>
+    <div class="test-group">
+      <div class="test-result pending" data-test="alert-basic">
+        <span class="test-name">기본 알림</span>
+      </div>
+      <div class="test-result pending" data-test="alert-confirm">
+        <span class="test-name">확인 다이얼로그</span>
+      </div>
+    </div>
+    <div class="demo-area">
+      <input type="text" id="demo-alert-msg" placeholder="알림 메시지" value="테스트 메시지입니다.">
+      <button id="demo-alert-btn">알림 표시</button>
+      <button id="demo-confirm-btn">확인창 표시</button>
+    </div>
+  </div>
+
+  <!-- Tab 테스트 -->
+  <div class="test-section">
+    <h2>Tab 컴포넌트 테스트</h2>
+    <div class="test-group">
+      <div class="test-result pending" data-test="tab-count">
+        <span class="test-name">탭 개수 확인</span>
+      </div>
+      <div class="test-result pending" data-test="tab-open">
+        <span class="test-name">탭 전환</span>
+      </div>
+    </div>
+    <div class="demo-area">
+      <div id="demo-tab-container">
+        <ul class="tab-links">
+          <li class="active">탭 1</li>
+          <li>탭 2</li>
+          <li>탭 3</li>
+        </ul>
+        <div class="tab-content active">첫 번째 탭 내용입니다.</div>
+        <div class="tab-content">두 번째 탭 내용입니다.</div>
+        <div class="tab-content">세 번째 탭 내용입니다.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Select 테스트 -->
+  <div class="test-section">
+    <h2>Select 컴포넌트 테스트</h2>
+    <div class="test-group">
+      <div class="test-result pending" data-test="select-bind">
+        <span class="test-name">옵션 바인딩</span>
+      </div>
+      <div class="test-result pending" data-test="select-val">
+        <span class="test-name">값 설정/조회</span>
+      </div>
+    </div>
+    <div class="demo-area">
+      <select id="demo-select-container"></select>
+    </div>
+  </div>
+
+  <!-- Datepicker 테스트 -->
+  <div class="test-section">
+    <h2>Datepicker 컴포넌트 테스트</h2>
+    <div class="test-group">
+      <div class="test-result pending" data-test="datepicker-create">
+        <span class="test-name">Datepicker 생성</span>
+      </div>
+      <div class="test-result pending" data-test="datepicker-setget">
+        <span class="test-name">날짜 설정/조회</span>
+      </div>
+    </div>
+    <div class="demo-area">
+      <input type="text" id="demo-datepicker" placeholder="날짜 선택">
+    </div>
+  </div>
+
+  <!-- HTTP Client 테스트 -->
+  <div class="test-section">
+    <h2>HTTP Client 테스트</h2>
+    <div class="test-group">
+      <div class="test-result pending" data-test="http-get">
+        <span class="test-name">GET 요청</span>
+      </div>
+      <div class="test-result pending" data-test="http-post">
+        <span class="test-name">POST 요청</span>
+      </div>
+    </div>
+    <div class="demo-area">
+      <button id="demo-http-get">GET /posts/1</button>
+      <button id="demo-http-post">POST /posts</button>
+      <div id="demo-http-log" class="console-output">응답 결과</div>
+    </div>
+  </div>
+
+  <!-- Communicator 테스트 -->
+  <div class="test-section">
+    <h2>Communicator 테스트</h2>
+    <div class="test-group">
+      <div class="test-result pending" data-test="comm-submit">
+        <span class="test-name">submit() 호출</span>
+      </div>
+    </div>
+    <div class="demo-area">
+      <input type="text" id="demo-comm-url" placeholder="URL" value="https://jsonplaceholder.typicode.com/posts/1" style="width: 400px;">
+      <button id="demo-comm-submit">Submit</button>
+      <div id="demo-comm-log" class="console-output">응답 결과</div>
+    </div>
+  </div>
+
+  <script type="importmap">
+    {
+      "imports": {
+        "@natural-js/shared": "../packages/shared/dist/index.js",
+        "@natural-js/core": "../packages/core/dist/index.js",
+        "@natural-js/data": "../packages/data/dist/index.js",
+        "@natural-js/ui": "../packages/ui/dist/index.js",
+        "@natural-js/architecture": "../packages/architecture/dist/index.js"
+      }
+    }
+  </script>
+
+  <script type="module">
+    console.log('📌 스크립트 시작');
+
+    // 상태 박스 업데이트
+    function setStatus(type, message) {
+      const box = document.getElementById('status-box');
+      box.className = 'status-box ' + type;
+      box.textContent = message;
+    }
+
+    // 테스트 결과
+    let testResults = { total: 0, passed: 0, failed: 0 };
+
+    function updateSummary() {
+      document.getElementById('totalCount').textContent = testResults.total;
+      document.getElementById('passedCount').textContent = testResults.passed;
+      document.getElementById('failedCount').textContent = testResults.failed;
+    }
+
+    function markTest(testId, passed, message) {
+      const el = document.querySelector('[data-test="' + testId + '"]');
+      if (el) {
+        el.classList.remove('pending', 'pass', 'fail');
+        el.classList.add(passed ? 'pass' : 'fail');
+        if (message) {
+          let msgEl = el.querySelector('.test-message');
+          if (!msgEl) {
+            msgEl = document.createElement('span');
+            msgEl.className = 'test-message';
+            el.appendChild(msgEl);
+          }
+          msgEl.textContent = message;
+        }
+        testResults.total++;
+        if (passed) testResults.passed++;
+        else testResults.failed++;
+        updateSummary();
+      }
+    }
+
+    function log(elementId, message) {
+      const el = document.getElementById(elementId);
+      if (el) {
+        el.textContent = typeof message === 'object' ? JSON.stringify(message, null, 2) : message;
+      }
+    }
+
+    // 모듈 로드
+    let NaturalElement, Formatter, Validator, Grid, Alert, Tab, Select, Datepicker;
+    let createHttpClient, Communicator;
+    let defineConfig, getConfig;
+
+    try {
+      console.log('🚀 모듈 로드 시작...');
+      setStatus('loading', '모듈 로드 중...');
+
+      // 먼저 core 모듈을 로드하고 config 초기화
+      const core = await import('@natural-js/core');
+      defineConfig = core.defineConfig;
+      getConfig = core.getConfig;
+      console.log('✅ core 로드');
+
+      // natural.config 초기화
+      defineConfig({
+        core: { locale: 'ko_KR' },
+        ui: {
+          alert: {
+            alwaysOnTop: true,
+            draggable: true,
+            okButtonOpts: { color: 'primary', size: 'medium' },
+            cancelButtonOpts: { color: 'secondary', size: 'medium' },
+          },
+        },
+      });
+      console.log('✅ config 초기화 완료');
+
+      const shared = await import('@natural-js/shared');
+      NaturalElement = shared.NaturalElement;
+      console.log('✅ shared 로드');
+
+      const data = await import('@natural-js/data');
+      Formatter = data.Formatter;
+      Validator = data.Validator;
+      console.log('✅ data 로드');
+
+      const ui = await import('@natural-js/ui');
+      Grid = ui.Grid;
+      Alert = ui.Alert;
+      Tab = ui.Tab;
+      Select = ui.Select;
+      Datepicker = ui.Datepicker;
+      console.log('✅ ui 로드');
+
+      const arch = await import('@natural-js/architecture');
+      createHttpClient = arch.createHttpClient;
+      Communicator = arch.Communicator;
+      console.log('✅ architecture 로드');
+
+      setStatus('success', '✅ 모듈 로드 완료! 테스트 버튼을 클릭하세요.');
+      console.log('🎉 모든 모듈 로드 완료!');
+
+    } catch (error) {
+      console.error('❌ 모듈 로드 실패:', error);
+      setStatus('error', '❌ 모듈 로드 실패: ' + error.message);
+      throw error;
+    }
+
+    // 테스트 함수들
+    function runFormatterTests() {
+      console.log('🧪 Formatter 테스트');
+      try {
+        const f1 = new Formatter([{ amount: '1234567' }], { amount: [['commas']] });
+        const r1 = f1.format();
+        markTest('formatter-commas', r1[0]?.amount === '1,234,567', r1[0]?.amount);
+      } catch (e) { markTest('formatter-commas', false, e.message); }
+
+      try {
+        const f2 = new Formatter([{ phone: '01012345678' }], { phone: [['phone']] });
+        const r2 = f2.format();
+        markTest('formatter-phone', r2[0]?.phone === '010-1234-5678', r2[0]?.phone);
+      } catch (e) { markTest('formatter-phone', false, e.message); }
+
+      try {
+        const f3 = new Formatter([{ date: '20231225' }], { date: [['date', 8]] });
+        const r3 = f3.format();
+        markTest('formatter-date', r3[0]?.date === '2023-12-25', r3[0]?.date);
+      } catch (e) { markTest('formatter-date', false, e.message); }
+
+      try {
+        const f4 = new Formatter([{ rrn: '1234561234567' }], { rrn: [['rrn', 6]] });
+        const r4 = f4.format();
+        markTest('formatter-rrn', r4[0]?.rrn === '123456-1******', r4[0]?.rrn);
+      } catch (e) { markTest('formatter-rrn', false, e.message); }
+    }
+
+    function runValidatorTests() {
+      console.log('🧪 Validator 테스트');
+      try {
+        const v1 = new Validator([{ name: '' }], { name: [['required']] });
+        const r1 = v1.validate();
+        markTest('validator-required', !Validator.isValid(r1));
+      } catch (e) { markTest('validator-required', false, e.message); }
+
+      try {
+        const v2 = new Validator([{ email: 'invalid' }], { email: [['email']] });
+        const r2 = v2.validate();
+        markTest('validator-email', !Validator.isValid(r2));
+      } catch (e) { markTest('validator-email', false, e.message); }
+
+      try {
+        const v3 = new Validator([{ age: '25' }], { age: [['integer']] });
+        const r3 = v3.validate();
+        markTest('validator-integer', Validator.isValid(r3));
+      } catch (e) { markTest('validator-integer', false, e.message); }
+
+      try {
+        const v4 = new Validator([{ email: 'test@test.com', age: '30' }], {
+          email: [['required'], ['email']],
+          age: [['integer']]
+        });
+        const r4 = v4.validate();
+        markTest('validator-multiple', Validator.isValid(r4));
+      } catch (e) { markTest('validator-multiple', false, e.message); }
+    }
+
+    function runGridTests() {
+      console.log('🧪 Grid 테스트');
+      const container = new NaturalElement('#demo-grid-container');
+      const gridData = [
+        { id: 1, name: '상품A', price: 10000 },
+        { id: 2, name: '상품B', price: 20000 },
+      ];
+
+      try {
+        window.testGrid = new Grid(container, { data: gridData });
+        window.testGrid.bind(gridData);
+        markTest('grid-bind', window.testGrid.count() === 2, 'count: ' + window.testGrid.count());
+      } catch (e) { markTest('grid-bind', false, e.message); }
+
+      try {
+        window.testGrid.add({ id: 3, name: '상품C', price: 30000 });
+        markTest('grid-add', window.testGrid.count() === 3, 'count: ' + window.testGrid.count());
+      } catch (e) { markTest('grid-add', false, e.message); }
+
+      try {
+        const val = window.testGrid.val(0, 'name');
+        markTest('grid-val', val === '상품A', 'val: ' + val);
+      } catch (e) { markTest('grid-val', false, e.message); }
+
+      try {
+        window.testGrid.remove(2);
+        markTest('grid-remove', window.testGrid.count() === 2, 'count: ' + window.testGrid.count());
+      } catch (e) { markTest('grid-remove', false, e.message); }
+    }
+
+    function runAlertTests() {
+      console.log('🧪 Alert 테스트');
+      try {
+        const alertInst = new Alert(new NaturalElement(document.body), { msg: '테스트 알림' });
+        const exists = document.querySelector('.alert__') !== null;
+        markTest('alert-basic', exists);
+        setTimeout(() => alertInst.remove(), 1000);
+      } catch (e) { markTest('alert-basic', false, e.message); }
+
+      setTimeout(() => {
+        try {
+          const confirmInst = new Alert(new NaturalElement(document.body), { msg: '확인?', isConfirm: true });
+          const hasBtn = document.querySelector('.btn_ok__') !== null || document.querySelector('.alert__') !== null;
+          markTest('alert-confirm', hasBtn);
+          setTimeout(() => confirmInst.remove(), 1000);
+        } catch (e) { markTest('alert-confirm', false, e.message); }
+      }, 1100);
+    }
+
+    function runTabTests() {
+      console.log('🧪 Tab 테스트');
+      try {
+        window.testTab = new Tab(new NaturalElement('#demo-tab-container'));
+        markTest('tab-count', window.testTab.count() === 3, 'count: ' + window.testTab.count());
+      } catch (e) { markTest('tab-count', false, e.message); }
+
+      try {
+        window.testTab.open(1);
+        markTest('tab-open', true);
+      } catch (e) { markTest('tab-open', false, e.message); }
+    }
+
+    function runSelectTests() {
+      console.log('🧪 Select 테스트');
+      // Select의 기본 key는 'code', val은 'name'
+      const options = [
+        { code: '1', name: '옵션1' },
+        { code: '2', name: '옵션2' },
+        { code: '3', name: '옵션3' },
+      ];
+
+      try {
+        window.testSelect = new Select(new NaturalElement('#demo-select-container'), { 
+          data: options,
+          addEmpty: false // 빈 옵션 추가 안함
+        });
+        window.testSelect.bind(options);
+        markTest('select-bind', true);
+      } catch (e) { markTest('select-bind', false, e.message); }
+
+      try {
+        window.testSelect.val('2');
+        const val = window.testSelect.val();
+        markTest('select-val', val === '2', 'val: ' + val);
+      } catch (e) { markTest('select-val', false, e.message); }
+    }
+
+    function runDatepickerTests() {
+      console.log('🧪 Datepicker 테스트');
+      try {
+        window.testDatepicker = new Datepicker(new NaturalElement('#demo-datepicker'));
+        markTest('datepicker-create', window.testDatepicker !== null);
+      } catch (e) { markTest('datepicker-create', false, e.message); }
+
+      try {
+        window.testDatepicker.setDate('2023-12-25');
+        const val = window.testDatepicker.getDate();
+        markTest('datepicker-setget', val !== null && val !== undefined, 'val: ' + val);
+      } catch (e) { markTest('datepicker-setget', false, e.message); }
+    }
+
+    async function runHttpTests() {
+      console.log('🧪 HTTP 테스트');
+      try {
+        const client = createHttpClient({ baseURL: 'https://jsonplaceholder.typicode.com' });
+        const response = await client.get('/posts/1');
+        markTest('http-get', response.data?.id === 1, 'id: ' + response.data?.id);
+      } catch (e) { markTest('http-get', false, e.message); }
+
+      try {
+        const client = createHttpClient({ baseURL: 'https://jsonplaceholder.typicode.com' });
+        const response = await client.post('/posts', { title: 'Test', body: 'Content', userId: 1 });
+        markTest('http-post', response.data?.id !== undefined, 'id: ' + response.data?.id);
+      } catch (e) { markTest('http-post', false, e.message); }
+    }
+
+    async function runCommTests() {
+      console.log('🧪 Communicator 테스트');
+      try {
+        const comm = new Communicator({ url: 'https://jsonplaceholder.typicode.com/posts/1', method: 'GET' });
+        let success = false;
+        await comm.submit((data) => { success = data?.id === 1; });
+        markTest('comm-submit', success);
+      } catch (e) { markTest('comm-submit', false, e.message); }
+    }
+
+    // 전체 테스트 실행
+    async function runAllTests() {
+      console.log('🔘 전체 테스트 실행');
+      testResults = { total: 0, passed: 0, failed: 0 };
+      document.querySelectorAll('.test-result').forEach(el => {
+        el.classList.remove('pass', 'fail');
+        el.classList.add('pending');
+        const msg = el.querySelector('.test-message');
+        if (msg) msg.remove();
+      });
+
+      runFormatterTests();
+      runValidatorTests();
+      runGridTests();
+      runAlertTests();
+      runTabTests();
+      runSelectTests();
+      runDatepickerTests();
+      await runHttpTests();
+      await runCommTests();
+    }
+
+    // 이벤트 바인딩
+    document.getElementById('runAllTests').addEventListener('click', runAllTests);
+    console.log('✅ 이벤트 바인딩 완료');
+
+    // 데모 버튼들
+    document.getElementById('demo-format-btn').addEventListener('click', () => {
+      const input = document.getElementById('demo-format-input').value;
+      const type = document.getElementById('demo-format-type').value;
+      try {
+        const rules = { value: type === 'date' ? [['date', 8]] : [[type]] };
+        const formatter = new Formatter([{ value: input }], rules);
+        const result = formatter.format();
+        log('demo-format-result', '입력: ' + input + '\n출력: ' + result[0]?.value);
+      } catch (e) { log('demo-format-result', '오류: ' + e.message); }
+    });
+
+    document.getElementById('demo-validate-btn').addEventListener('click', () => {
+      const input = document.getElementById('demo-validate-input').value;
+      const type = document.getElementById('demo-validate-type').value;
+      try {
+        const validator = new Validator([{ value: input }], { value: [[type]] });
+        const results = validator.validate();
+        const isValid = Validator.isValid(results);
+        log('demo-validate-result', '입력: ' + input + '\n규칙: ' + type + '\n결과: ' + (isValid ? '✓ 유효' : '✗ 유효하지 않음'));
+      } catch (e) { log('demo-validate-result', '오류: ' + e.message); }
+    });
+
+    document.getElementById('demo-http-get').addEventListener('click', async () => {
+      try {
+        const client = createHttpClient({ baseURL: 'https://jsonplaceholder.typicode.com' });
+        const response = await client.get('/posts/1');
+        log('demo-http-log', response.data);
+      } catch (e) { log('demo-http-log', '오류: ' + e.message); }
+    });
+
+    document.getElementById('demo-http-post').addEventListener('click', async () => {
+      try {
+        const client = createHttpClient({ baseURL: 'https://jsonplaceholder.typicode.com' });
+        const response = await client.post('/posts', { title: 'Test Post', body: 'Test body', userId: 1 });
+        log('demo-http-log', response.data);
+      } catch (e) { log('demo-http-log', '오류: ' + e.message); }
+    });
+
+    document.getElementById('demo-comm-submit').addEventListener('click', async () => {
+      const url = document.getElementById('demo-comm-url').value;
+      try {
+        const comm = new Communicator({ url: url, method: 'GET' });
+        await comm.submit(
+          (data) => log('demo-comm-log', data),
+          (error) => log('demo-comm-log', '오류: ' + error.message)
+        );
+      } catch (e) { log('demo-comm-log', '오류: ' + e.message); }
+    });
+
+    document.getElementById('demo-alert-btn').addEventListener('click', () => {
+      const msg = document.getElementById('demo-alert-msg').value;
+      const alertInstance = new Alert(new NaturalElement(document.body), { msg: msg });
+      alertInstance.show();
+    });
+
+    document.getElementById('demo-confirm-btn').addEventListener('click', () => {
+      const msg = document.getElementById('demo-alert-msg').value;
+      const alertInstance = new Alert(new NaturalElement(document.body), {
+        msg: msg,
+        isConfirm: true,
+        onOk: () => alert('확인 클릭!'),
+        onCancel: () => alert('취소 클릭!')
+      });
+      alertInstance.show();
+    });
+  </script>
+</body>
+</html>

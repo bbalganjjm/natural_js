@@ -1,0 +1,22 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "composite": true,
+    "declaration": true,
+    "declarationMap": true
+  },
+  "references": [
+    { "path": "../shared" },
+    { "path": "../core" },
+    { "path": "../architecture" },
+    { "path": "../data" },
+    { "path": "../ui" },
+    { "path": "../ui-shell" },
+    { "path": "../template" },
+    { "path": "../code" }
+  ],
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "dist", "src/**/*.test.ts", "src/**/*.spec.ts"]
+}

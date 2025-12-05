@@ -1,0 +1,40 @@
+{
+  "name": "@natural-js/ui-shell",
+  "version": "2.0.0-alpha.0",
+  "description": "Natural-JS UI Shell Components - Notify, Docs",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "natural-js",
+    "ui-shell",
+    "notify",
+    "docs"
+  ],
+  "author": "Goldman Kim <bbalganjjm@gmail.com>",
+  "license": "LGPL-2.1",
+  "dependencies": {
+    "@natural-js/shared": "workspace:*",
+    "@natural-js/core": "workspace:*",
+    "@natural-js/ui": "workspace:*"
+  },
+  "devDependencies": {}
+}
+

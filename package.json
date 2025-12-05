@@ -1,56 +1,62 @@
 {
-  "name": "@bbalganjjm/natural_js",
-  "version": "1.0.0",
-  "description": "Natural-JS is a JavaScript architectural framework designed for enterprise web applications, allowing intuitive, easy, and fast implementation of user interfaces.",
-  "projects": [
-    "https://github.com/bbalganjjm/natural_js"
-  ],
-  "homepage": "https://bbalganjjm.github.io/natural_js",
-  "main": "natural.js.min.js",
-  "types": "node_modules/@types/natural_js/index.d.ts",
+  "name": "@natural-js/monorepo",
+  "version": "2.0.0-alpha.0",
+  "private": true,
+  "description": "Natural-JS - TypeScript UI framework for enterprise web applications with SSR support",
+  "type": "module",
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "packageManager": "pnpm@9.15.0",
+  "scripts": {
+    "build": "pnpm -r build",
+    "build:watch": "pnpm -r --parallel dev",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:integration": "vitest run __tests__/integration",
+    "test:e2e": "RUN_E2E=true npx playwright test -c __tests__/e2e/playwright.config.ts",
+    "test:e2e:ui": "RUN_E2E=true npx playwright test -c __tests__/e2e/playwright.config.ts --ui",
+    "test:all": "pnpm test && pnpm test:e2e",
+    "typecheck": "tsc -b",
+    "lint": "eslint packages --ext .ts",
+    "lint:fix": "eslint packages --ext .ts --fix",
+    "format": "prettier --write \"packages/**/*.ts\"",
+    "format:check": "prettier --check \"packages/**/*.ts\"",
+    "clean": "pnpm -r exec rm -rf dist && rm -rf coverage"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bbalganjjm/natural_js.git"
   },
   "keywords": [
-    "UI Components",
-    "Javascript UI",
-    "Front-end",
-    "Front-end Architecture",
-    "Front-end framework",
-    "jQuery Plugin",
-    "jQuery Library",
-    "Javascript Input Validation",
-    "javascript AOP",
-    "Single Page Applications",
-    "SPA",
-    "Javascript Front",
-    "Data Grid",
-    "Data Table",
-    "table",
-    "grid",
-    "tree",
-    "tabs",
     "natural-js",
-    "naturaljs"
+    "ui-framework",
+    "typescript",
+    "ssr",
+    "isomorphic",
+    "enterprise",
+    "data-grid",
+    "form",
+    "components"
   ],
-  "dependencies": {
-    "@bbalganjjm/natural_js": "file:",
-    "jquery": "3.7.1"
-  },
-  "devDependencies": {
-    "@types/jquery": "^3.5.32"
-  },
-  "owners": [
-    {
-      "name": "Goldman Kim",
-      "githubUsername": "bbalganjjm",
-      "email": "bbalganjjm@gmail.com"
-    }
-  ],
-  "license": "LGPL v2.1",
+  "author": "Goldman Kim <bbalganjjm@gmail.com>",
+  "license": "LGPL-2.1",
   "bugs": {
-    "url": "https://github.com/bbalganjjm/natural_js/issues",
-    "email": "bbalganjjm@gmail.com"
+    "url": "https://github.com/bbalganjjm/natural_js/issues"
+  },
+  "homepage": "https://bbalganjjm.github.io/natural_js",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^8.17.0",
+    "@typescript-eslint/parser": "^8.17.0",
+    "@vitest/coverage-v8": "^2.1.8",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "jsdom": "^25.0.1",
+    "prettier": "^3.4.2",
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
   }
 }

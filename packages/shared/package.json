@@ -1,0 +1,35 @@
+{
+  "name": "@natural-js/shared",
+  "version": "2.0.0-alpha.0",
+  "description": "Shared utilities for Natural-JS framework",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "natural-js",
+    "utilities",
+    "dom"
+  ],
+  "author": "Goldman Kim <bbalganjjm@gmail.com>",
+  "license": "LGPL-2.1",
+  "peerDependencies": {},
+  "devDependencies": {}
+}
+

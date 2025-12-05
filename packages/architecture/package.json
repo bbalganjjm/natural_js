@@ -1,0 +1,38 @@
+{
+  "name": "@natural-js/architecture",
+  "version": "2.0.0-alpha.0",
+  "description": "Natural-JS Architecture - HTTP client, Communication Filter, Controller, Context",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "natural-js",
+    "architecture",
+    "http",
+    "controller"
+  ],
+  "author": "Goldman Kim <bbalganjjm@gmail.com>",
+  "license": "LGPL-2.1",
+  "dependencies": {
+    "@natural-js/core": "workspace:*"
+  },
+  "devDependencies": {}
+}
+

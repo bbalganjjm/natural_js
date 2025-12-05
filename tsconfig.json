@@ -1,20 +1,31 @@
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "module": "commonjs",
-    "lib": [
-      "es6",
-      "dom"
-    ],
-    "noImplicitAny": true,
-    "noImplicitThis": true,
-    "strictNullChecks": true,
-    "strictFunctionTypes": true,
-    "types": [],
-    "noEmit": true,
-    "forceConsistentCasingInFileNames": true
+    "baseUrl": ".",
+    "paths": {
+      "@natural-js/shared": ["./packages/shared/src"],
+      "@natural-js/core": ["./packages/core/src"],
+      "@natural-js/architecture": ["./packages/architecture/src"],
+      "@natural-js/data": ["./packages/data/src"],
+      "@natural-js/ui": ["./packages/ui/src"],
+      "@natural-js/ui-shell": ["./packages/ui-shell/src"],
+      "@natural-js/template": ["./packages/template/src"],
+      "@natural-js/code": ["./packages/code/src"],
+      "@natural-js/natural": ["./packages/natural/src"]
+    }
   },
-  "files": [
-    "./@types/index.d.ts",
-    "./@types/natural_js-tests.ts"
-  ]
+  "references": [
+    { "path": "./packages/shared" },
+    { "path": "./packages/core" },
+    { "path": "./packages/architecture" },
+    { "path": "./packages/data" },
+    { "path": "./packages/ui" },
+    { "path": "./packages/ui-shell" },
+    { "path": "./packages/template" },
+    { "path": "./packages/code" },
+    { "path": "./packages/natural" }
+  ],
+  "include": [],
+  "exclude": ["node_modules", "dist", "coverage"]
 }

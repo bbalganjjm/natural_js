@@ -1,0 +1,46 @@
+{
+  "name": "@natural-js/natural",
+  "version": "2.0.0-alpha.0",
+  "description": "Natural-JS - Full-featured UI framework for enterprise web applications (TypeScript, SSR-ready)",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "natural-js",
+    "ui-framework",
+    "typescript",
+    "ssr",
+    "isomorphic"
+  ],
+  "author": "Goldman Kim <bbalganjjm@gmail.com>",
+  "license": "LGPL-2.1",
+  "dependencies": {
+    "@natural-js/shared": "workspace:*",
+    "@natural-js/core": "workspace:*",
+    "@natural-js/architecture": "workspace:*",
+    "@natural-js/data": "workspace:*",
+    "@natural-js/ui": "workspace:*",
+    "@natural-js/ui-shell": "workspace:*",
+    "@natural-js/template": "workspace:*",
+    "@natural-js/code": "workspace:*"
+  },
+  "devDependencies": {}
+}
+

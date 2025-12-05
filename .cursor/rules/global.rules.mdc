@@ -1,0 +1,80 @@
+---
+alwaysApply: true
+---
+
+# Natural-JS TypeScript Migration & SSR Transformation Project Rules
+
+## 기본 규칙
+
+### 언어 규칙
+- **모든 인터렉션의 결과는 반드시 한국어로 표시해야 합니다.**
+- 코드 주석은 영어로 작성하되, 사용자와의 대화는 한국어로 진행합니다.
+- 에러 메시지와 로그는 다국어 지원을 위해 메시지 리소스를 활용합니다.
+
+### 코딩 컨벤션
+
+#### TypeScript 스타일
+- 엄격한 타입 체크 사용 (`strict: true`)
+- `any` 타입 사용 금지 - 적절한 타입 또는 `unknown` 사용
+- 인터페이스와 타입 정의는 별도 파일로 분리
+- 클래스보다 함수형 프로그래밍 선호 (순수 함수, 불변성)
+- ESM(ES Modules) 사용 - CommonJS 금지
+
+#### 네이밍 규칙
+- 파일명: kebab-case (예: `data-formatter.ts`)
+- 클래스명: PascalCase (예: `DataFormatter`)
+- 함수/변수명: camelCase (예: `formatDate`)
+- 상수: SCREAMING_SNAKE_CASE (예: `DEFAULT_LOCALE`)
+- 타입/인터페이스: PascalCase + 접미사 (예: `FormatterOptions`, `ValidatorResult`)
+
+### SOLID 원칙 준수
+1. **Single Responsibility**: 각 모듈/클래스는 하나의 책임만 가짐
+2. **Open/Closed**: 확장에는 열려있고 수정에는 닫혀있는 구조
+3. **Liskov Substitution**: 하위 타입은 상위 타입을 대체할 수 있어야 함
+4. **Interface Segregation**: 클라이언트별 특화된 인터페이스 분리
+5. **Dependency Inversion**: 구체적인 구현이 아닌 추상화에 의존
+
+### 프로젝트 구조
+```
+natural-js/
+├── packages/
+│   ├── core/           # Natural-CORE
+│   ├── architecture/   # Natural-ARCHITECTURE  
+│   ├── data/           # Natural-DATA
+│   ├── ui/             # Natural-UI
+│   ├── ui-shell/       # Natural-UI.Shell
+│   ├── template/       # Natural-TEMPLATE
+│   └── code/           # Natural-CODE
+├── __tests__/          # 통합 테스트
+├── examples/           # 예제 코드
+└── docs/               # 문서
+```
+
+### jQuery 대체 규칙
+- `$.ajax()` → `fetch()` API 사용
+- `$(selector)` → `document.querySelector/querySelectorAll` 또는 자체 DOM 유틸리티
+- `$.extend()` → `Object.assign()` 또는 스프레드 연산자
+- `$.each()` → `Array.prototype.forEach/map/filter`
+- `$.proxy()` → Arrow 함수 또는 `Function.prototype.bind`
+- `$.Deferred()` → `Promise`
+
+### SSR(Server-Side Rendering) 지원
+- `window`, `document` 등 브라우저 전용 API는 조건부 접근
+- 환경 감지 유틸리티 함수 제공 (`isServer()`, `isBrowser()`)
+- 하이드레이션 지원 구조 설계
+
+### 테스트 규칙
+- 모든 기능에 대해 단위 테스트 필수
+- 테스트 프레임워크: Vitest
+- 테스트 커버리지 최소 80% 유지
+- 테스트 파일명: `*.test.ts` 또는 `*.spec.ts`
+
+### 버전 관리
+- 시맨틱 버저닝(Semantic Versioning) 준수
+- 모든 변경사항은 CHANGELOG.md에 기록
+- 주요 변경사항은 별도 마이그레이션 가이드 작성
+
+### 의존성 관리
+- jQuery 의존성 완전 제거
+- 외부 의존성 최소화
+- 필수 의존성만 사용 (빌드 도구, 테스트 도구 등)

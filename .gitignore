@@ -1,8 +1,11 @@
+# OS generated files
 .project
 .DS_Store*
 ehthumbs.db
 Icon?
 Thumbs.db
+
+# IDE/Editor
 .settings/
 .externalToolBuilders/
 .history
@@ -11,6 +14,24 @@ Thumbs.db
 .continue
 *.iml
 
-# node
+# Node.js
 node_modules/
 package-lock.json
+pnpm-lock.yaml
+
+# Build outputs
+packages/*/dist/
+coverage/
+*.tsbuildinfo
+
+# Shrimp task manager
+.shrimp/
+
+# Test outputs
+*.log
+.vitest-results/
+
+# Environment
+.env
+.env.local
+.env.*.local
