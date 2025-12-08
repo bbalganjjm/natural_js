@@ -637,6 +637,35 @@
   width: 100%;
 }
 
+.tab_link__ {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  color: var(--md-sys-color-on-surface-variant);
+  font-size: var(--njs-font-size-m);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all var(--njs-motion-duration-fast) ease;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.tab_link__:hover {
+  background-color: var(--md-sys-color-surface-container-highest);
+  color: var(--md-sys-color-on-surface);
+}
+
+.tab_link__.tab_active__ {
+  color: var(--md-sys-color-primary);
+  border-bottom-color: var(--md-sys-color-primary);
+  background-color: var(--md-sys-color-surface);
+}
+
+.tab_link__.tab_disabled__ {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .tab__ > ul,
 .tab__ > nav {
   display: flex;
@@ -685,6 +714,21 @@
   color: inherit;
 }
 
+.slide_in__ {
+  animation: tab-slide-in var(--njs-motion-duration-normal) ease;
+}
+
+@keyframes tab-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* Tab Content */
 .tab__ > div,
 .tab__ > .tab_content__ {
@@ -714,6 +758,26 @@
 /* ========================================
    7. FORM COMPONENT
    ======================================== */
+.form__ {
+  display: block;
+  width: 100%;
+}
+
+.form__ .form_group__ {
+  margin-bottom: var(--njs-spacing-m);
+}
+
+.form_invalid__,
+.form__ .form_invalid__ {
+  border-color: var(--md-sys-color-error) !important;
+  background-color: var(--md-sys-color-error-container) !important;
+  color: var(--md-sys-color-on-error-container);
+}
+
+.form_invalid__::placeholder {
+  color: var(--md-sys-color-on-error-container);
+}
+
 .validate_false__ {
   border-color: var(--md-sys-color-error) !important;
   background-color: var(--md-sys-color-error-container) !important;
@@ -817,6 +881,15 @@
   border-collapse: collapse;
 }
 
+.grid__ .grid_row__ {
+  transition: background-color var(--njs-motion-duration-fast) ease;
+}
+
+.grid__ > tbody > .grid_checked__ {
+  background-color: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+}
+
 .grid__ th,
 .grid__ td {
   padding: 12px 16px;
@@ -854,6 +927,36 @@
 .grid__ > tbody > .row_data_deleted__ {
     opacity: 0.5;
   text-decoration: line-through;
+}
+
+.grid_fixed_header__ {
+  position: relative;
+}
+
+.grid_fixed_header__ thead {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background-color: var(--md-sys-color-surface-container-low);
+}
+
+.grid_fixed_header__ tbody {
+  display: block;
+}
+
+.grid_fixed_header__ tbody > tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.grid_fixed_column__ th,
+.grid_fixed_column__ td {
+  background-color: var(--md-sys-color-surface);
+}
+
+.grid_resizable__ th {
+  position: relative;
 }
 
 .grid__ .empty__ {

@@ -5,6 +5,12 @@ All notable changes to Natural-JS will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Fixed
+- Natural-UI CSS 클래스 누락 보완 (grid 고정 헤더/컬럼, tab link, form invalid, checked row 등)으로 신규 TypeScript 컴포넌트와 스타일 일치
+- 스타일 로딩 순서 안내 추가 (`tokens.css` → `light.css`/`dark.css` → `natural.ui.css`)로 테마 변수 초기화 문제 예방
+
 ## [2.0.0-alpha.0] - 2024-12-05
 
 ### 🚀 Major Changes

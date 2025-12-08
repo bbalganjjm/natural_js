@@ -39,6 +39,12 @@ pnpm add @natural-js/ui           # UI components
 pnpm add @natural-js/ui-shell     # Shell components
 ```
 
+## 🎨 Styles
+
+- Natural-UI 스타일을 적용하려면 CSS를 **tokens → theme → component** 순서로 로드합니다.
+- 권장 순서: `tokens.css` → `light.css` 또는 `dark.css` → `natural.ui.css`
+- SSR/테마 전환 시 `data-theme="light"`/`"dark"` 속성을 루트 요소에 지정해 컬러 토큰을 전환하세요.
+
 ## 🚀 Quick Start
 
 ```typescript

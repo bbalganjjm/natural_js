@@ -117,6 +117,14 @@ pnpm add @natural-js/core @natural-js/architecture @natural-js/data @natural-js/
 
 `vite.config.ts` 또는 `webpack.config.js`에서 Natural-JS 패키지를 외부 의존성으로 설정하거나 번들에 포함시킵니다.
 
+### 4. 스타일 시트 로딩
+
+1. 디자인 토큰: `css/tokens.css`
+2. 테마: `css/light.css` 또는 `css/dark.css` (SSR/다크모드 전환 시 `data-theme` 속성 사용)
+3. 컴포넌트 스타일: `css/natural.ui.css`
+
+위 순서를 지키지 않으면 색상 변수가 초기화되지 않아 신규 UI 컴포넌트 스타일이 깨질 수 있습니다.
+
 ## jQuery 제거에 따른 코드 변경
 
 ### DOM 선택자

@@ -77,6 +77,8 @@ pnpm add @natural-js/core @natural-js/ui
 | `@natural-js/code` | 코드 검사 도구 |
 | `@natural-js/natural` | 통합 패키지 |
 
+> UI 스타일을 사용할 때는 `tokens.css` → `light.css`/`dark.css` → `natural.ui.css` 순으로 로드하세요. 순서가 바뀌면 색상 변수가 초기화되지 않아 컴포넌트 스타일이 깨질 수 있습니다.
+
 ---
 
 ## @natural-js/shared
