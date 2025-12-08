@@ -874,7 +874,7 @@ export class Grid {
       
       // Create resize handle
       const handle = doc.createElement('div');
-      handle.className = 'grid_resize_handle__';
+      handle.className = 'resize_bar__';
       handle.style.cssText = `
         position: absolute;
         right: 0;
@@ -973,8 +973,8 @@ export class Grid {
 
     // Update header sort indicator
     if (opts.thead) {
-      opts.thead.find('.grid_sort__').removeClass('grid_sort_asc__ grid_sort_desc__');
-      opts.thead.find(`[data-sort="${key}"]`).addClass(`grid_sort__ grid_sort_${direction}__`);
+      opts.thead.find('.sortable__').removeClass('asc__ desc__');
+      opts.thead.find(`[data-sort="${key}"]`).addClass(`sortable__ ${direction}__`);
     }
 
     if (options?.onSort) {

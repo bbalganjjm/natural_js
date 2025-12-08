@@ -177,7 +177,7 @@ export class Alert {
     let maxZIndex = opts.alwaysOnTop ? getMaxZIndex(opts.alwaysOnTopCalcTarget) : 0;
 
     const overlay = doc.createElement('div');
-    overlay.className = 'block_overlay__ alert_overlay__';
+    overlay.className = 'alert_overlay__';
     overlay.style.display = 'none';
     overlay.style.position = opts.isWindow ? 'fixed' : 'absolute';
     overlay.style.cursor = 'not-allowed';
@@ -204,7 +204,7 @@ export class Alert {
     }
 
     const msgContent = doc.createElement('div');
-    msgContent.className = 'block_overlay_msg__ alert__ hidden__';
+    msgContent.className = 'alert__ hidden__';
     msgContent.style.display = 'none';
     msgContent.style.position = opts.isWindow ? 'fixed' : 'absolute';
     if (opts.alwaysOnTop) msgContent.style.zIndex = String(maxZIndex + 2);

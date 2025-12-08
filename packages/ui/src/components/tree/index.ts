@@ -178,7 +178,7 @@ export class Tree {
 
     // Node content
     const content = doc.createElement('div');
-    content.className = 'tree_node_content__';
+    content.className = 'tree_item__';
     content.style.paddingLeft = `${level * 20}px`;
 
     // Toggle icon (for folders)

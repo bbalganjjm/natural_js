@@ -190,7 +190,7 @@ export class Select {
     // Clear existing if not append mode
     if (!opts.append) {
       // Remove only generated elements
-      opts.context.find('.select_item__').remove();
+      opts.context.find('.select_input_label__').remove();
     }
 
     // Add checkbox/radio from data
@@ -199,7 +199,7 @@ export class Select {
       if (!item) continue;
 
       const wrapper = doc.createElement('label');
-      wrapper.className = 'select_item__';
+      wrapper.className = 'select_input_label__';
 
       const input = doc.createElement('input');
       input.type = opts.type || 'checkbox';
@@ -377,7 +377,7 @@ export class Select {
         // Remove checkbox/radio wrapper
         opts.context.find('input').each((_, el) => {
           if ((el as HTMLInputElement).value === String(value)) {
-            new NaturalElement(el).closest('.select_item__').remove();
+            new NaturalElement(el).closest('.select_input_label__').remove();
           }
         });
       }

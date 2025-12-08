@@ -22,8 +22,8 @@ const DEFAULT_OPTIONS: Partial<PaginationOptions> = {
   nextText: '›',
   prevSetText: '...',
   nextSetText: '...',
-  activeClass: 'pagination_active__',
-  disabledClass: 'pagination_disabled__',
+  activeClass: 'page_btn_active__',
+  disabledClass: 'page_btn_disabled__',
 };
 
 /**
@@ -131,7 +131,7 @@ export class Pagination {
     for (let i = info.firstPage; i <= info.lastPage; i++) {
       const btn = this.createButton(String(i), i, false, 'page');
       if (i === info.pageNo) {
-        btn.classList.add(opts.activeClass || 'pagination_active__');
+        btn.classList.add(opts.activeClass || 'page_btn_active__');
       }
       nav.appendChild(btn);
     }
@@ -162,12 +162,12 @@ export class Pagination {
     
     btn.type = 'button';
     btn.textContent = text;
-    btn.className = `pagination_btn__ pagination_${type}__`;
+    btn.className = `page_btn__ pagination_${type}__`;
     btn.dataset['page'] = String(pageNo);
 
     if (disabled) {
       btn.disabled = true;
-      btn.classList.add(opts.disabledClass || 'pagination_disabled__');
+      btn.classList.add(opts.disabledClass || 'page_btn_disabled__');
     } else {
       btn.addEventListener('click', () => {
         this.pageNo(pageNo);

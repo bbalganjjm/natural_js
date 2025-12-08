@@ -70,7 +70,7 @@ export class Notify {
 
     // Add classes
     contextEl.addClass('notify__');
-    contextEl.addClass(`notify_${this.options.position.replace('-', '_')}__`);
+    contextEl.addClass(`notify_${this.options.position}__`);
 
     // Store reference
     contextEl.data('notify', this);
@@ -84,11 +84,11 @@ export class Notify {
     if (!doc) return new NaturalElement(doc!.createElement('div'));
 
     // Check for existing container
-    let container = doc.querySelector(`.notify_container_${position.replace('-', '_')}__`) as HTMLElement | null;
+    let container = doc.querySelector(`.notify_container_${position}__`) as HTMLElement | null;
     
     if (!container) {
       container = doc.createElement('div');
-      container.className = `notify_container__ notify_container_${position.replace('-', '_')}__`;
+      container.className = `notify_container__ notify_container_${position}__ ${position}__`;
       
       // Position styles
       const styles: Partial<CSSStyleDeclaration> = {

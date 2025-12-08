@@ -65,7 +65,7 @@ export class Button {
     const self = this;
 
     // Add button class
-    this.buttons.addClass('button__');
+    this.buttons.addClass('btn_common__');
 
     // Add color class if specified
     if (opts.color) {
@@ -82,7 +82,7 @@ export class Button {
       const button = new NaturalElement(this);
 
       // Check if disabled
-      if (button.hasClass('disabled__') || button.attr('disabled') === 'disabled') {
+      if (button.hasClass('btn_disabled__') || button.attr('disabled') === 'disabled') {
         e.preventDefault();
         e.stopPropagation();
         return;
@@ -96,12 +96,6 @@ export class Button {
           return;
         }
       }
-
-      // Add click animation effect
-      button.addClass('button_active__');
-      setTimeout(() => {
-        button.removeClass('button_active__');
-      }, opts.animationDuration ?? 200);
 
       // Call onClick
       if (opts.onClick) {
@@ -131,7 +125,7 @@ export class Button {
    * Disable the button(s).
    */
   disable(): this {
-    this.buttons.addClass('disabled__');
+    this.buttons.addClass('btn_disabled__');
     this.buttons.attr('disabled', 'disabled');
     this.buttons.each((_, el) => {
       if (el instanceof HTMLButtonElement || el instanceof HTMLInputElement) {
@@ -145,7 +139,7 @@ export class Button {
    * Enable the button(s).
    */
   enable(): this {
-    this.buttons.removeClass('disabled__');
+    this.buttons.removeClass('btn_disabled__');
     this.buttons.removeAttr('disabled');
     this.buttons.each((_, el) => {
       if (el instanceof HTMLButtonElement || el instanceof HTMLInputElement) {
@@ -159,7 +153,7 @@ export class Button {
    * Check if the button(s) are disabled.
    */
   isDisabled(): boolean {
-    return this.buttons.hasClass('disabled__') || this.buttons.attr('disabled') === 'disabled';
+    return this.buttons.hasClass('btn_disabled__') || this.buttons.attr('disabled') === 'disabled';
   }
 
   /**
@@ -195,7 +189,7 @@ export class Button {
    */
   destroy(): void {
     this.buttons.off('click.button');
-    this.buttons.removeClass('button__ button_active__ disabled__');
+    this.buttons.removeClass('btn_common__ btn_disabled__');
     if (this.options.color) {
       this.buttons.removeClass(this.options.color);
     }

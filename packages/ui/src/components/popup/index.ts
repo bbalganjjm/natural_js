@@ -100,7 +100,7 @@ export class Popup {
 
     // Create overlay
     const overlay = doc.createElement('div');
-    overlay.className = 'block_overlay__ popup_overlay__';
+    overlay.className = 'popup_overlay__';
     overlay.style.display = 'none';
     overlay.style.position = opts.isWindow ? 'fixed' : 'absolute';
     overlay.style.top = '0';
@@ -120,7 +120,7 @@ export class Popup {
 
     // Create popup content wrapper
     const popupContent = doc.createElement('div');
-    popupContent.className = 'block_overlay_msg__ popup__ hidden__';
+    popupContent.className = 'popup__ hidden__';
     popupContent.style.display = 'none';
     popupContent.style.position = opts.isWindow ? 'fixed' : 'absolute';
     if (opts.alwaysOnTop) popupContent.style.zIndex = String(maxZIndex + 2);

@@ -39,21 +39,21 @@ export class Docs {
     }
 
     // Find or create tab and content containers
-    let tabContext = contextEl.find('.docs_tabs__');
-    let contentContext = contextEl.find('.docs_content__');
+    let tabContext = contextEl.find('.docs_tab_list__');
+    let contentContext = contextEl.find('.docs_content_area__');
 
     const doc = getDocument();
     if (doc) {
       if (tabContext.length === 0) {
         const tabDiv = doc.createElement('div');
-        tabDiv.className = 'docs_tabs__';
+        tabDiv.className = 'docs_tab_list__';
         contextEl.prepend(tabDiv);
         tabContext = new NaturalElement(tabDiv);
       }
 
       if (contentContext.length === 0) {
         const contentDiv = doc.createElement('div');
-        contentDiv.className = 'docs_content__';
+        contentDiv.className = 'docs_content_area__';
         contextEl.append(contentDiv);
         contentContext = new NaturalElement(contentDiv);
       }
@@ -156,7 +156,7 @@ export class Docs {
     tabEl.dataset['id'] = docId;
 
     const tabLabel = doc.createElement('span');
-    tabLabel.className = 'docs_tab_label__';
+    tabLabel.className = 'docs_tab_title__';
     tabLabel.textContent = docName;
     tabEl.appendChild(tabLabel);
 
@@ -181,7 +181,7 @@ export class Docs {
 
     // Create content element
     const contentEl = doc.createElement('div');
-    contentEl.className = 'docs_panel__';
+    contentEl.className = 'docs_content__';
     contentEl.dataset['id'] = docId;
     contentEl.style.display = 'none';
 
@@ -253,6 +253,7 @@ export class Docs {
       if (current) {
         current.active = false;
         current.tabElement?.removeClass('docs_tab_active__');
+        current.contentElement?.removeClass('docs_content_active__');
         current.contentElement?.css('display', 'none');
       }
     }
@@ -261,6 +262,7 @@ export class Docs {
     docState.active = true;
     opts.activeId = docId;
     docState.tabElement?.addClass('docs_tab_active__');
+    docState.contentElement?.addClass('docs_content_active__');
     docState.contentElement?.css('display', '');
 
     // Scroll tab into view
