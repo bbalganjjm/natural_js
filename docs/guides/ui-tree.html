@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UI Tree Demo</title>
+    <link rel="stylesheet" href="../../css/natural.ui.css" />
+    <link rel="stylesheet" href="./common.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "@natural-js/shared": "../../packages/shared/dist/index.js",
+          "@natural-js/core": "../../packages/core/dist/index.js",
+          "@natural-js/architecture": "../../packages/architecture/dist/index.js",
+          "@natural-js/data": "../../packages/data/dist/index.js",
+          "@natural-js/ui": "../../packages/ui/dist/index.js",
+          "@natural-js/ui-shell": "../../packages/ui-shell/dist/index.js",
+          "@natural-js/template": "../../packages/template/dist/index.js",
+          "@natural-js/code": "../../packages/code/dist/index.js"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="page">
+      <nav>
+        <h1>UI Tree</h1>
+        <ul><li><a href="./index.html">← 돌아가기</a></li></ul>
+      </nav>
+      <main>
+        <div class="banner">
+          <p class="tag">idKey · parentKey · labelKey · onSelect</p>
+          <p>정적 데이터로 Tree를 구성하고 선택 이벤트를 확인합니다.</p>
+        </div>
+
+        <div class="grid">
+          <div class="card">
+            <h2>Tree 데이터 바인딩</h2>
+            <ul id="tree-demo" class="tree__"></ul>
+            <div class="toolbar">
+              <button class="btn" id="btn-tree-bind">bind()</button>
+              <button class="btn" id="btn-tree-expand">전체 펼치기</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="console" id="console"></div>
+      </main>
+    </div>
+
+    <script type="module">
+      import * as N from '../../packages/natural/dist/index.js';
+      import { log, mockData } from './common.js';
+
+      const tree = new N.Tree('#tree-demo', {
+        data: mockData.tree,
+        idKey: 'id',
+        parentKey: 'parent',
+        labelKey: 'label',
+        onSelect: (node) => log('select', node?.id),
+      });
+
+      document.getElementById('btn-tree-bind').addEventListener('click', () => {
+        tree.bind();
+        log('tree bind');
+      });
+
+      document.getElementById('btn-tree-expand').addEventListener('click', () => {
+        tree.expandAll();
+        log('tree expandAll');
+      });
+
+      // 초기 바인딩
+      tree.bind();
+    </script>
+  </body>
+  </html>
+

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UI Shell Notify Demo</title>
+    <link rel="stylesheet" href="../../css/natural.ui.css" />
+    <link rel="stylesheet" href="./common.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "@natural-js/shared": "../../packages/shared/dist/index.js",
+          "@natural-js/core": "../../packages/core/dist/index.js",
+          "@natural-js/architecture": "../../packages/architecture/dist/index.js",
+          "@natural-js/data": "../../packages/data/dist/index.js",
+          "@natural-js/ui": "../../packages/ui/dist/index.js",
+          "@natural-js/ui-shell": "../../packages/ui-shell/dist/index.js",
+          "@natural-js/template": "../../packages/template/dist/index.js",
+          "@natural-js/code": "../../packages/code/dist/index.js"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="page">
+      <nav>
+        <h1>UI Shell Notify</h1>
+        <ul><li><a href="./index.html">← 돌아가기</a></li></ul>
+      </nav>
+      <main>
+        <div class="banner">
+          <p class="tag">type · ttl · close</p>
+          <p>info/success/warn/error 타입과 TTL/close 동작을 확인합니다.</p>
+        </div>
+
+        <div class="grid">
+          <div class="card">
+            <h2>Notify</h2>
+            <div class="toolbar">
+              <button class="btn" data-type="info">info</button>
+              <button class="btn" data-type="success">success</button>
+              <button class="btn" data-type="warn">warn</button>
+              <button class="btn" data-type="error">error</button>
+            </div>
+            <div class="toolbar">
+              <button class="btn" id="btn-notify-ttl">TTL=2s</button>
+              <button class="btn" id="btn-notify-close">closeAll()</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="console" id="console"></div>
+      </main>
+    </div>
+
+    <script type="module">
+      import * as N from '../../packages/natural/dist/index.js';
+      import { log } from './common.js';
+
+      const notify = new N.Notify();
+
+      document.querySelectorAll('[data-type]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const type = btn.getAttribute('data-type');
+          notify.add(`알림: ${type}`, { type });
+          log('notify add', type);
+        });
+      });
+
+      document.getElementById('btn-notify-ttl').addEventListener('click', () => {
+        notify.add('TTL 2초', { type: 'info', ttl: 2000 });
+        log('notify ttl 2s');
+      });
+
+      document.getElementById('btn-notify-close').addEventListener('click', () => {
+        notify.closeAll();
+        log('notify closeAll');
+      });
+    </script>
+  </body>
+  </html>
+

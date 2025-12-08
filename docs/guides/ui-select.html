@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UI Select Demo</title>
+    <link rel="stylesheet" href="../../css/natural.ui.css" />
+    <link rel="stylesheet" href="./common.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "@natural-js/shared": "../../packages/shared/dist/index.js",
+          "@natural-js/core": "../../packages/core/dist/index.js",
+          "@natural-js/architecture": "../../packages/architecture/dist/index.js",
+          "@natural-js/data": "../../packages/data/dist/index.js",
+          "@natural-js/ui": "../../packages/ui/dist/index.js",
+          "@natural-js/ui-shell": "../../packages/ui-shell/dist/index.js",
+          "@natural-js/template": "../../packages/template/dist/index.js",
+          "@natural-js/code": "../../packages/code/dist/index.js"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="page">
+      <nav>
+        <h1>UI Select</h1>
+        <ul><li><a href="./index.html">← 돌아가기</a></li></ul>
+      </nav>
+      <main>
+        <div class="banner">
+          <p class="tag">select · checkbox · radio · addEmpty · append</p>
+          <p>key/val 매핑, 빈 옵션, append 동작을 확인합니다.</p>
+        </div>
+
+        <div class="grid">
+          <div class="card">
+            <h2>Select</h2>
+            <label>색상
+              <select id="sel-basic"></select>
+            </label>
+            <div class="toolbar">
+              <button class="btn" id="btn-sel-bind">bind()</button>
+              <button class="btn" id="btn-sel-append">append=true bind()</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>Checkbox / Radio</h2>
+            <div class="toolbar">
+              <div id="sel-check" style="display:flex; gap:8px;"></div>
+              <div id="sel-radio" style="display:flex; gap:8px;"></div>
+            </div>
+            <div class="toolbar">
+              <button class="btn" id="btn-sel-check-bind">checkbox bind</button>
+              <button class="btn" id="btn-sel-radio-bind">radio bind</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="console" id="console"></div>
+      </main>
+    </div>
+
+    <script type="module">
+      import * as N from '../../packages/natural/dist/index.js';
+      import { log } from './common.js';
+
+      const data = [
+        { code: 'blue', name: 'Blue' },
+        { code: 'green', name: 'Green' },
+        { code: 'brown', name: 'Brown' },
+      ];
+
+      const sel = new N.Select('#sel-basic', {
+        data,
+        key: 'name',
+        val: 'code',
+        addEmpty: true,
+        emptyText: '선택하세요',
+      });
+
+      const selCheck = new N.Select('#sel-check', {
+        data,
+        key: 'name',
+        val: 'code',
+        type: 'checkbox',
+      });
+
+      const selRadio = new N.Select('#sel-radio', {
+        data,
+        key: 'name',
+        val: 'code',
+        type: 'radio',
+        name: 'color-radio',
+      });
+
+      document.getElementById('btn-sel-bind').addEventListener('click', () => {
+        sel.options.append = false;
+        sel.bind();
+        log('select bind (append=false)');
+      });
+
+      document.getElementById('btn-sel-append').addEventListener('click', () => {
+        sel.options.append = true;
+        sel.bind();
+        log('select bind (append=true)');
+      });
+
+      document.getElementById('btn-sel-check-bind').addEventListener('click', () => {
+        selCheck.bind();
+        log('checkbox bind');
+      });
+
+      document.getElementById('btn-sel-radio-bind').addEventListener('click', () => {
+        selRadio.bind();
+        log('radio bind');
+      });
+    </script>
+  </body>
+  </html>
+

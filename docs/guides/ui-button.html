@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UI Button Demo</title>
+    <link rel="stylesheet" href="../../css/natural.ui.css" />
+    <link rel="stylesheet" href="./common.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "@natural-js/shared": "../../packages/shared/dist/index.js",
+          "@natural-js/core": "../../packages/core/dist/index.js",
+          "@natural-js/architecture": "../../packages/architecture/dist/index.js",
+          "@natural-js/data": "../../packages/data/dist/index.js",
+          "@natural-js/ui": "../../packages/ui/dist/index.js",
+          "@natural-js/ui-shell": "../../packages/ui-shell/dist/index.js",
+          "@natural-js/template": "../../packages/template/dist/index.js",
+          "@natural-js/code": "../../packages/code/dist/index.js"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="page">
+      <nav>
+        <h1>UI Button</h1>
+        <ul><li><a href="./index.html">← 돌아가기</a></li></ul>
+      </nav>
+      <main>
+        <div class="banner">
+          <p class="tag">data-opts · size · color · type · disable</p>
+          <p>Button 컴포넌트의 모든 주요 옵션을 테스트합니다.</p>
+        </div>
+
+        <div class="grid">
+          <div class="card">
+            <h2>data-opts 선언형</h2>
+            <div class="toolbar">
+              <a class="btn button-demo" data-opts='{"size":"small","color":"primary","type":"filled"}'>Primary Filled</a>
+              <a class="btn button-demo" data-opts='{"size":"medium","color":"secondary","type":"outlined"}'>Secondary Outlined</a>
+              <a class="btn button-demo" data-opts='{"size":"large","color":"tertiary","type":"elevated","disable":true}'>Disabled</a>
+            </div>
+            <div class="toolbar">
+              <button class="btn" id="btn-enable">enable()</button>
+              <button class="btn" id="btn-disable">disable()</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>onBeforeCreate / onCreate</h2>
+            <p>이벤트 훅을 사용해 커스텀 로직을 주입합니다.</p>
+            <a class="btn" id="btn-hook">Hook Button</a>
+          </div>
+        </div>
+
+        <div class="console" id="console"></div>
+      </main>
+    </div>
+
+    <script type="module">
+      import * as N from '../../packages/natural/dist/index.js';
+      import { log } from './common.js';
+
+      const btns = new N.Button('.button-demo');
+
+      document.getElementById('btn-enable').addEventListener('click', () => {
+        btns.enable();
+        log('enable() 호출');
+      });
+      document.getElementById('btn-disable').addEventListener('click', () => {
+        btns.disable();
+        log('disable() 호출');
+      });
+
+      new N.Button('#btn-hook', {
+        size: 'medium',
+        color: 'primary',
+        type: 'filled',
+        onBeforeCreate: () => log('onBeforeCreate 호출'),
+        onCreate: () => log('onCreate 호출'),
+      });
+    </script>
+  </body>
+  </html>
+

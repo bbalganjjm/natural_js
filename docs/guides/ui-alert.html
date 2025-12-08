@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UI Alert Demo</title>
+    <link rel="stylesheet" href="../../css/natural.ui.css" />
+    <link rel="stylesheet" href="./common.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "@natural-js/shared": "../../packages/shared/dist/index.js",
+          "@natural-js/core": "../../packages/core/dist/index.js",
+          "@natural-js/architecture": "../../packages/architecture/dist/index.js",
+          "@natural-js/data": "../../packages/data/dist/index.js",
+          "@natural-js/ui": "../../packages/ui/dist/index.js",
+          "@natural-js/ui-shell": "../../packages/ui-shell/dist/index.js",
+          "@natural-js/template": "../../packages/template/dist/index.js",
+          "@natural-js/code": "../../packages/code/dist/index.js"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="page">
+      <nav>
+        <h1>UI Alert</h1>
+        <ul><li><a href="./index.html">← 돌아가기</a></li></ul>
+      </nav>
+      <main>
+        <div class="banner">
+          <p class="tag">msg · confirm · overlayClose · escClose · draggable</p>
+          <p>N.alert 주요 옵션을 조합하여 테스트합니다.</p>
+        </div>
+
+        <div class="grid">
+          <div class="card">
+            <h2>기본 / Confirm</h2>
+            <div class="toolbar">
+              <button class="btn" id="btn-alert-basic">기본 Alert</button>
+              <button class="btn" id="btn-alert-confirm">Confirm Alert</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>옵션 조합</h2>
+            <div class="toolbar">
+              <button class="btn" id="btn-alert-draggable">Draggable + alwaysOnTop</button>
+              <button class="btn" id="btn-alert-overlay-lock">overlayClose=false</button>
+              <button class="btn" id="btn-alert-esc-off">escClose=false</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="console" id="console"></div>
+      </main>
+    </div>
+
+    <script type="module">
+      import * as N from '../../packages/natural/dist/index.js';
+      import { log } from './common.js';
+
+      document.getElementById('btn-alert-basic').addEventListener('click', () => {
+        const a = new N.Alert(window, { msg: '기본 메시지' });
+        a.onShow = () => log('alert show');
+        a.show();
+      });
+
+      document.getElementById('btn-alert-confirm').addEventListener('click', () => {
+        const a = new N.Alert(window, {
+          msg: '계속할까요?',
+          confirm: true,
+          onOk: () => log('confirm OK'),
+          onCancel: () => log('confirm Cancel'),
+        });
+        a.show();
+      });
+
+      document.getElementById('btn-alert-draggable').addEventListener('click', () => {
+        new N.Alert(window, {
+          msg: 'Draggable + alwaysOnTop',
+          draggable: true,
+          alwaysOnTop: true,
+        }).show();
+      });
+
+      document.getElementById('btn-alert-overlay-lock').addEventListener('click', () => {
+        new N.Alert(window, {
+          msg: 'Overlay click does not close',
+          overlayClose: false,
+        }).show();
+      });
+
+      document.getElementById('btn-alert-esc-off').addEventListener('click', () => {
+        new N.Alert(window, {
+          msg: 'ESC로 닫히지 않습니다',
+          escClose: false,
+        }).show();
+      });
+    </script>
+  </body>
+  </html>
+

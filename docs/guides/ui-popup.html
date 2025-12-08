@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UI Popup Demo</title>
+    <link rel="stylesheet" href="../../css/natural.ui.css" />
+    <link rel="stylesheet" href="./common.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "@natural-js/shared": "../../packages/shared/dist/index.js",
+          "@natural-js/core": "../../packages/core/dist/index.js",
+          "@natural-js/architecture": "../../packages/architecture/dist/index.js",
+          "@natural-js/data": "../../packages/data/dist/index.js",
+          "@natural-js/ui": "../../packages/ui/dist/index.js",
+          "@natural-js/ui-shell": "../../packages/ui-shell/dist/index.js",
+          "@natural-js/template": "../../packages/template/dist/index.js",
+          "@natural-js/code": "../../packages/code/dist/index.js"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="page">
+      <nav>
+        <h1>UI Popup</h1>
+        <ul><li><a href="./index.html">← 돌아가기</a></li></ul>
+      </nav>
+      <main>
+        <div class="banner">
+          <p class="tag">modal · draggable · closeMode · onOpen/onClose</p>
+          <p>컨텍스트 팝업과 URL 팝업(샘플 컨텍스트) 동작을 확인합니다.</p>
+        </div>
+
+        <div class="grid">
+          <div class="card">
+            <h2>컨텍스트 팝업</h2>
+            <div class="toolbar">
+              <button class="btn" id="btn-popup-open">open()</button>
+              <button class="btn" id="btn-popup-close">close()</button>
+            </div>
+            <div id="popup-target" style="display:none;">
+              <p>컨텍스트 팝업 내용</p>
+              <button class="btn btn-close-inside">닫기</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>옵션 테스트</h2>
+            <div class="toolbar">
+              <button class="btn" id="btn-popup-draggable">draggable + alwaysOnTop</button>
+              <button class="btn" id="btn-popup-hide">closeMode='hide'</button>
+              <button class="btn" id="btn-popup-esc-off">escClose=false</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="console" id="console"></div>
+      </main>
+    </div>
+
+    <script type="module">
+      import * as N from '../../packages/natural/dist/index.js';
+      import { log } from './common.js';
+
+      const popup = new N.Popup('#popup-target', {
+        title: 'Popup',
+        modal: true,
+        onOpen: () => log('popup onOpen'),
+        onClose: () => log('popup onClose'),
+      });
+
+      document.getElementById('btn-popup-open').addEventListener('click', () => {
+        popup.open();
+      });
+      document.getElementById('btn-popup-close').addEventListener('click', () => {
+        popup.close();
+      });
+      document.querySelector('.btn-close-inside').addEventListener('click', () => popup.close());
+
+      document.getElementById('btn-popup-draggable').addEventListener('click', () => {
+        new N.Popup('#popup-target', { draggable: true, alwaysOnTop: true, title: 'Draggable' }).open();
+      });
+      document.getElementById('btn-popup-hide').addEventListener('click', () => {
+        new N.Popup('#popup-target', { closeMode: 'hide', title: 'Hide mode' }).open();
+      });
+      document.getElementById('btn-popup-esc-off').addEventListener('click', () => {
+        new N.Popup('#popup-target', { escClose: false, title: 'ESC off' }).open();
+      });
+    </script>
+  </body>
+  </html>
+

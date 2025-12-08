@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UI Datepicker Demo</title>
+    <link rel="stylesheet" href="../../css/natural.ui.css" />
+    <link rel="stylesheet" href="./common.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "@natural-js/shared": "../../packages/shared/dist/index.js",
+          "@natural-js/core": "../../packages/core/dist/index.js",
+          "@natural-js/architecture": "../../packages/architecture/dist/index.js",
+          "@natural-js/data": "../../packages/data/dist/index.js",
+          "@natural-js/ui": "../../packages/ui/dist/index.js",
+          "@natural-js/ui-shell": "../../packages/ui-shell/dist/index.js",
+          "@natural-js/template": "../../packages/template/dist/index.js",
+          "@natural-js/code": "../../packages/code/dist/index.js"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="page">
+      <nav>
+        <h1>Datepicker</h1>
+        <ul><li><a href="./index.html">← 돌아가기</a></li></ul>
+      </nav>
+      <main>
+        <div class="banner">
+          <p class="tag">monthonly · minDate/maxDate · events</p>
+          <p>data-format 연동과 옵션별 동작을 확인합니다.</p>
+        </div>
+
+        <div class="grid">
+          <div class="card">
+            <h2>기본 Datepicker</h2>
+            <label>날짜 <input id="dp-basic" type="text" data-format='[["date",8,"date"]]' value="20240201" /></label>
+            <div class="toolbar">
+              <button class="btn" id="btn-show-basic">show()</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>Monthpicker + 제한</h2>
+            <label>월 선택 <input id="dp-month" type="text" /></label>
+            <p>minDate=20240101, maxDate=20241231</p>
+            <div class="toolbar">
+              <button class="btn" id="btn-show-month">show()</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="console" id="console"></div>
+      </main>
+    </div>
+
+    <script type="module">
+      import * as N from '../../packages/natural/dist/index.js';
+      import { log } from './common.js';
+
+      const dpBasic = new N.Datepicker('#dp-basic', {
+        onSelect: (_ctx, selDate) => log('onSelect', selDate?.format),
+        onBeforeShow: () => log('onBeforeShow'),
+        onShow: () => log('onShow'),
+      });
+
+      const dpMonth = new N.Datepicker('#dp-month', {
+        monthonly: true,
+        minDate: '20240101',
+        maxDate: '20241231',
+        onSelect: (_ctx, selDate) => log('month select', selDate?.format),
+      });
+
+      document.getElementById('btn-show-basic').addEventListener('click', () => {
+        dpBasic.show();
+      });
+      document.getElementById('btn-show-month').addEventListener('click', () => {
+        dpMonth.show();
+      });
+    </script>
+  </body>
+  </html>
+

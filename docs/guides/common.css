@@ -1,7 +1,13 @@
 /* Common layout for Natural-JS 2.0 guide demos */
 :root {
   color-scheme: light;
-  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-family: "Inter", "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --bg: radial-gradient(circle at 20% 20%, #e0f2fe, #f4f5fb 40%), radial-gradient(circle at 80% 0%, #f1e5ff, #f7f7fb 35%);
+  --card-bg: rgba(255, 255, 255, 0.85);
+  --card-border: rgba(226, 232, 240, 0.9);
+  --text-main: #0f172a;
+  --text-muted: #475569;
+  --accent: #2563eb;
 }
 
 *,
@@ -12,9 +18,9 @@
 
 body {
   margin: 0;
-  background: #f6f7fb;
-  color: #1d1d1f;
-  line-height: 1.4;
+  background: var(--bg);
+  color: var(--text-main);
+  line-height: 1.5;
 }
 
 .page {
@@ -24,10 +30,11 @@ body {
 }
 
 nav {
-  background: #0f172a;
+  background: linear-gradient(180deg, #0f172a, #111827);
   color: #e2e8f0;
   padding: 20px 16px;
   border-right: 1px solid #1f2937;
+  box-shadow: 4px 0 18px rgba(0, 0, 0, 0.12);
 }
 
 nav h1 {
@@ -50,6 +57,7 @@ nav a {
   display: block;
   border-radius: 8px;
   transition: background 0.2s ease, color 0.2s ease;
+  font-weight: 600;
 }
 
 nav a:hover,
@@ -59,30 +67,30 @@ nav a:focus-visible {
 }
 
 main {
-  padding: 20px 28px 32px;
+  padding: 24px 32px 40px;
 }
 
 .banner {
-  background: #fff;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  padding: 16px;
-  margin-bottom: 16px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.12), rgba(236, 72, 153, 0.12)), var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+  padding: 18px;
+  margin-bottom: 20px;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
 }
 
 .grid {
   display: grid;
   gap: 16px;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
 }
 
 .card {
-  background: #fff;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  padding: 14px 16px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+  padding: 16px 18px;
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
 }
 
 .card h2 {
@@ -92,7 +100,7 @@ main {
 
 .card p {
   margin: 0 0 12px;
-  color: #4b5563;
+  color: var(--text-muted);
   font-size: 14px;
 }
 
@@ -102,9 +110,9 @@ main {
   gap: 6px;
   padding: 8px 10px;
   border-radius: 8px;
-  border: 1px solid #d1d5db;
-  background: #f8fafc;
-  color: #111827;
+  border: 1px solid rgba(37, 99, 235, 0.25);
+  background: rgba(37, 99, 235, 0.08);
+  color: #0f172a;
   text-decoration: none;
   font-weight: 600;
   cursor: pointer;
@@ -113,19 +121,19 @@ main {
 
 .btn:hover,
 .btn:focus-visible {
-  background: #e5e7eb;
-  border-color: #9ca3af;
+  background: rgba(37, 99, 235, 0.16);
+  border-color: #2563eb;
 }
 
 .console {
   margin-top: 16px;
-  border: 1px solid #e5e7eb;
-  border-radius: 10px;
+  border: 1px solid #0f172a;
+  border-radius: 12px;
   background: #0b1220;
   color: #e2e8f0;
   padding: 12px;
-  min-height: 140px;
-  max-height: 220px;
+  min-height: 160px;
+  max-height: 240px;
   overflow: auto;
   font-family: "SFMono-Regular", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   font-size: 13px;
@@ -147,10 +155,10 @@ main {
 .tag {
   display: inline-block;
   padding: 4px 8px;
-  background: #eef2ff;
-  color: #3730a3;
+  background: rgba(37, 99, 235, 0.12);
+  color: #1d4ed8;
   border-radius: 6px;
   font-size: 12px;
-  border: 1px solid #c7d2fe;
+  border: 1px solid rgba(37, 99, 235, 0.3);
 }
 
