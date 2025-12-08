@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Architecture · Config · Core Demo</title>
+    <link rel="stylesheet" href="../../css/natural.ui.css" />
+    <link rel="stylesheet" href="./common.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "@natural-js/shared": "../../packages/shared/dist/index.js",
+          "@natural-js/core": "../../packages/core/dist/index.js",
+          "@natural-js/architecture": "../../packages/architecture/dist/index.js",
+          "@natural-js/data": "../../packages/data/dist/index.js",
+          "@natural-js/ui": "../../packages/ui/dist/index.js",
+          "@natural-js/ui-shell": "../../packages/ui-shell/dist/index.js",
+          "@natural-js/template": "../../packages/template/dist/index.js",
+          "@natural-js/code": "../../packages/code/dist/index.js"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="page">
+      <nav>
+        <h1>Architecture/Core</h1>
+        <ul>
+          <li><a href="./index.html">← 돌아가기</a></li>
+        </ul>
+      </nav>
+      <main>
+        <div class="banner">
+          <p class="tag">AOP · Context · Comm Filter</p>
+          <p>Architecture/Config/Core 주요 옵션과 유틸을 테스트합니다.</p>
+        </div>
+
+        <div class="grid">
+          <div class="card">
+            <h2>Context & AOP 등록</h2>
+            <div class="toolbar">
+              <button class="btn" id="btn-setup">컨텍스트/어드바이저 설정</button>
+              <button class="btn" id="btn-clear-aop">AOP 초기화</button>
+            </div>
+            <p>init/sayHello 메서드에 before/around/after/error 어드바이스를 적용.</p>
+          </div>
+
+          <div class="card">
+            <h2>Controller 실행</h2>
+            <div class="toolbar">
+              <button class="btn" id="btn-init-cont">컨트롤러 init 실행</button>
+              <button class="btn" id="btn-call-hello">sayHello 호출</button>
+            </div>
+            <p class="tag" id="pageid-tag">pageid: (미설정)</p>
+            <article id="arch-view" class="view__">
+              <p>컨트롤러 뷰 영역</p>
+            </article>
+          </div>
+
+          <div class="card">
+            <h2>Comm 필터 & 요청</h2>
+            <div class="toolbar">
+              <button class="btn" id="btn-run-comm">data: JSON 요청</button>
+            </div>
+            <p>initFilterConfig로 등록한 beforeInit/beforeSend/success/complete 필터 로그를 확인하세요.</p>
+          </div>
+
+          <div class="card">
+            <h2>Core 유틸</h2>
+            <div class="toolbar">
+              <button class="btn" id="btn-core-utils">기본 유틸 실행</button>
+            </div>
+            <p>N.string/N.date/N.element 헬퍼 사용 예.</p>
+          </div>
+        </div>
+
+        <div class="console" id="console" aria-label="console output"></div>
+      </main>
+    </div>
+
+    <script type="module">
+      import * as N from '../../packages/natural/dist/index.js';
+      import { log, clearLog } from './common.js';
+
+      const { cont, triggerInit, registerAdvisor, clearAdvisors, getContext, initFilterConfig, Communicator, string, date, element } = N;
+      let controllerInstance = null;
+
+      function setupContext() {
+        const archConfig = {
+          cont: {
+            advisors: [
+              {
+                pointcut: '^init$',
+                adviceType: 'before',
+                fn: (c, fnPath) => log('AOP before', fnPath),
+              },
+              {
+                pointcut: '^init$',
+                adviceType: 'after',
+                fn: (c, fnPath) => log('AOP after', fnPath),
+              },
+              {
+                pointcut: '^sayHello$',
+                adviceType: 'around',
+                fn: (_c, fnPath, _args, joinPoint) => {
+                  log('AOP around - before', fnPath);
+                  const res = joinPoint.proceed();
+                  log('AOP around - after', fnPath);
+                  return res;
+                },
+              },
+              {
+                pointcut: '^throwError$',
+                adviceType: 'error',
+                fn: (_c, fnPath, _args, e) => log('AOP error', fnPath, e?.message ?? ''),
+              },
+            ],
+          },
+          comm: {
+            filters: {
+              logger: {
+                order: 1,
+                beforeInit: ({ request }) => log('filter beforeInit url=', request?.url ?? ''),
+                beforeSend: ({ request }) => log('filter beforeSend url=', request.url ?? ''),
+                success: ({ response }) => log('filter success data=', JSON.stringify(response?.data)),
+                complete: ({ status, statusText }) => log('filter complete status=', status ?? '', statusText ?? ''),
+              },
+            },
+          },
+        };
+        getContext().attr('architecture', archConfig);
+        initFilterConfig(archConfig.comm.filters);
+        log('context.architecture 등록 완료');
+      }
+
+      function initController() {
+        if (!controllerInstance) {
+          controllerInstance = cont('#arch-view', {
+            init(view) {
+              log('controller.init 호출', view?.get?.(0)?.getAttribute('data-pageid'));
+              const tag = document.getElementById('pageid-tag');
+              if (tag && view?.getPageId) {
+                tag.textContent = `pageid: ${view.getPageId()}`;
+              }
+            },
+            sayHello() {
+              log('controller.sayHello 실행');
+              return 'hello';
+            },
+            throwError() {
+              throw new Error('boom');
+            },
+          });
+        }
+        triggerInit(controllerInstance);
+      }
+
+      function callHello() {
+        if (!controllerInstance) {
+          log('컨트롤러가 아직 생성되지 않았습니다.');
+          return;
+        }
+        controllerInstance.sayHello();
+        try {
+          controllerInstance.throwError();
+        } catch (e) {
+          log('throwError catch', e.message);
+        }
+      }
+
+      async function runComm() {
+        const dataUrl = 'data:application/json,%7B%22message%22%3A%22ok%22%7D';
+        const comm = new Communicator({ q: 1 }, dataUrl);
+        const res = await comm.submit();
+        log('comm response', JSON.stringify(res));
+      }
+
+      function runCoreUtils() {
+        log('string.trimToEmpty', string.trimToEmpty('  hi  '));
+        log('string.isNumeric', string.isNumeric('123'));
+        log('date.format', date.format('20240102', 'Y-m-d'));
+        const maxZ = element.maxZindex(document.querySelectorAll('div'));
+        log('element.maxZindex', maxZ);
+      }
+
+      document.getElementById('btn-setup').addEventListener('click', () => {
+        clearLog();
+        setupContext();
+      });
+      document.getElementById('btn-clear-aop').addEventListener('click', () => {
+        clearAdvisors();
+        log('AOP 어드바이저 초기화');
+      });
+      document.getElementById('btn-init-cont').addEventListener('click', () => {
+        initController();
+      });
+      document.getElementById('btn-call-hello').addEventListener('click', () => {
+        callHello();
+      });
+      document.getElementById('btn-run-comm').addEventListener('click', () => {
+        runComm().catch((e) => log('comm error', e.message));
+      });
+      document.getElementById('btn-core-utils').addEventListener('click', runCoreUtils);
+    </script>
+  </body>
+  </html>
+

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UI Controls · Notify · Tree Demo</title>
+    <link rel="stylesheet" href="../../css/natural.ui.css" />
+    <link rel="stylesheet" href="./common.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "@natural-js/shared": "../../packages/shared/dist/index.js",
+          "@natural-js/core": "../../packages/core/dist/index.js",
+          "@natural-js/architecture": "../../packages/architecture/dist/index.js",
+          "@natural-js/data": "../../packages/data/dist/index.js",
+          "@natural-js/ui": "../../packages/ui/dist/index.js",
+          "@natural-js/ui-shell": "../../packages/ui-shell/dist/index.js",
+          "@natural-js/template": "../../packages/template/dist/index.js",
+          "@natural-js/code": "../../packages/code/dist/index.js"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="page">
+      <nav>
+        <h1>UI Controls</h1>
+        <ul>
+          <li><a href="./index.html">← 돌아가기</a></li>
+        </ul>
+      </nav>
+      <main>
+        <div class="banner">
+          <p class="tag">Button · Tab · Select · Datepicker · Alert · Popup · Notify · Tree</p>
+          <p>data-opts와 선언형 옵션을 포함해 주요 인터랙션을 확인하세요.</p>
+        </div>
+
+        <div class="grid">
+          <div class="card">
+            <h2>Buttons (data-opts)</h2>
+            <div class="toolbar">
+              <a class="btn button-demo" data-opts='{"size":"small","color":"primary","type":"filled"}'>Primary</a>
+              <a class="btn button-demo" data-opts='{"size":"medium","color":"secondary","type":"outlined"}'>Secondary</a>
+              <a class="btn button-demo" data-opts='{"size":"large","color":"tertiary","type":"elevated","disable":true}'>Disabled</a>
+            </div>
+            <div class="toolbar">
+              <button class="btn" id="btn-enable">enable()</button>
+              <button class="btn" id="btn-disable">disable()</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>Tab (data-opts)</h2>
+            <div id="tab-demo" class="tab__">
+              <ul>
+                <li>Home</li>
+                <li data-opts='{"active":true}'>About</li>
+                <li data-opts='{"disable":true}'>Disabled</li>
+              </ul>
+              <div>
+                <section>Home 내용</section>
+                <section>About 내용</section>
+                <section>Disabled 내용</section>
+              </div>
+            </div>
+            <div class="toolbar">
+              <button class="btn" id="btn-tab-active">2번 탭 활성화</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>Select & Datepicker</h2>
+            <div class="stack">
+              <label>색상
+                <select id="select-demo"></select>
+              </label>
+              <label>날짜
+                <input id="date-demo" type="text" data-format='[["date",8,"date"]]' />
+              </label>
+            </div>
+            <div class="toolbar">
+              <button class="btn" id="btn-select-bind">Select bind</button>
+              <button class="btn" id="btn-datepicker">Datepicker open</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>Alert & Popup</h2>
+            <div class="toolbar">
+              <button class="btn" id="btn-alert">Alert confirm</button>
+              <button class="btn" id="btn-popup">Popup open</button>
+            </div>
+            <div id="popup-content" style="display:none;">
+              <p>Popup 내용입니다.</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>Notify & Tree</h2>
+            <div class="toolbar">
+              <button class="btn" id="btn-notify">Notify 메시지</button>
+            </div>
+            <ul id="tree-demo" class="tree__"></ul>
+          </div>
+        </div>
+
+        <div class="console" id="console" aria-label="console output"></div>
+      </main>
+    </div>
+
+    <script type="module">
+      import * as N from '../../packages/natural/dist/index.js';
+      import { log, mockData } from './common.js';
+
+      const buttonInst = new N.Button('.button-demo');
+      const tabInst = new N.Tab('#tab-demo');
+      const selectInst = new N.Select('#select-demo', {
+        data: [
+          { code: 'blue', name: 'Blue' },
+          { code: 'green', name: 'Green' },
+          { code: 'brown', name: 'Brown' },
+        ],
+        key: 'name',
+        val: 'code',
+      });
+      const datepicker = new N.Datepicker('#date-demo', { monthonly: false });
+      const alertInst = new N.Alert(window, { confirm: true, msg: '정말 실행할까요?' });
+      const popupInst = new N.Popup('#popup-content', { title: 'Demo Popup', modal: true, closeMode: 'hide' });
+      const notifyInst = new N.Notify();
+      const treeInst = new N.Tree('#tree-demo', {
+        data: mockData.tree,
+        idKey: 'id',
+        parentKey: 'parent',
+        labelKey: 'label',
+        onSelect: (node) => log('tree select', node?.id, node?.label),
+      });
+
+      document.getElementById('btn-enable').addEventListener('click', () => {
+        buttonInst.enable();
+        log('buttons enabled');
+      });
+      document.getElementById('btn-disable').addEventListener('click', () => {
+        buttonInst.disable();
+        log('buttons disabled');
+      });
+
+      document.getElementById('btn-tab-active').addEventListener('click', () => {
+        tabInst.active(1);
+        log('tab active index 1');
+      });
+
+      document.getElementById('btn-select-bind').addEventListener('click', () => {
+        selectInst.bind();
+        log('select bind');
+      });
+
+      document.getElementById('btn-datepicker').addEventListener('click', () => {
+        datepicker.show();
+        log('datepicker show');
+      });
+
+      document.getElementById('btn-alert').addEventListener('click', () => {
+        alertInst.show();
+        alertInst.onOk = () => log('alert OK');
+        alertInst.onCancel = () => log('alert Cancel');
+      });
+
+      document.getElementById('btn-popup').addEventListener('click', () => {
+        popupInst.onClose = () => log('popup closed');
+        popupInst.open();
+      });
+
+      document.getElementById('btn-notify').addEventListener('click', () => {
+        notifyInst.add('안내 메시지', { type: 'info' });
+        log('notify added');
+      });
+
+      // 초기 렌더
+      selectInst.bind();
+      treeInst.bind();
+    </script>
+  </body>
+  </html>
+

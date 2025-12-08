@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Template · TS · UI Shell Demo</title>
+    <link rel="stylesheet" href="../../css/natural.ui.css" />
+    <link rel="stylesheet" href="./common.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "@natural-js/shared": "../../packages/shared/dist/index.js",
+          "@natural-js/core": "../../packages/core/dist/index.js",
+          "@natural-js/architecture": "../../packages/architecture/dist/index.js",
+          "@natural-js/data": "../../packages/data/dist/index.js",
+          "@natural-js/ui": "../../packages/ui/dist/index.js",
+          "@natural-js/ui-shell": "../../packages/ui-shell/dist/index.js",
+          "@natural-js/template": "../../packages/template/dist/index.js",
+          "@natural-js/code": "../../packages/code/dist/index.js"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="page">
+      <nav>
+        <h1>Template · TS · UI Shell</h1>
+        <ul>
+          <li><a href="./index.html">← 돌아가기</a></li>
+        </ul>
+      </nav>
+      <main>
+        <div class="banner">
+          <p class="tag">p./c./e. 선언형 · JSdoc 타입 안내 · Notify</p>
+          <p>Template AOP를 통해 p./c./e. 패턴을 자동 초기화하고, TS 타입 경로/JSdoc 예시를 제공합니다.</p>
+        </div>
+
+        <div class="grid">
+          <div class="card">
+            <h2>Template p./c./e. 데모</h2>
+            <div class="toolbar">
+              <button class="btn" id="btn-template-init">템플릿 init</button>
+              <button class="btn" id="btn-template-save">저장 시나리오</button>
+            </div>
+            <article class="tpl-view">
+              <h3>폼/그리드</h3>
+              <select id="tpl-select"></select>
+              <table id="tpl-form" class="form__" style="width:100%; border-spacing:6px;">
+                <tr>
+                  <th>이름</th>
+                  <td><input id="name" type="text" data-validate='[["required"]]' /></td>
+                </tr>
+                <tr>
+                  <th>이메일</th>
+                  <td><input id="email" type="text" data-validate='[["required"],["email"]]' /></td>
+                </tr>
+              </table>
+
+              <table id="tpl-grid" class="grid__" style="width:100%;">
+                <thead>
+                  <tr>
+                    <th data-sort="name">이름</th>
+                    <th data-sort="email">이메일</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td id="name"></td>
+                    <td id="email"></td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div class="toolbar">
+                <button class="btn btn-search">검색</button>
+                <button class="btn" id="btn-add-row">행 추가</button>
+              </div>
+            </article>
+          </div>
+
+          <div class="card">
+            <h2>JSdoc 타입 안내</h2>
+            <p>TypeScript를 사용하지 않는 페이지에서도 jsdoc으로 타입 힌트를 제공합니다.</p>
+            <pre class="console" style="background:#f3f4f6;color:#111827;min-height:120px;">
+/** @typedef {{ id:string, name:string, email:string }} User */
+
+/**
+ * @param {User} user
+ * @returns {string}
+ */
+function formatUser(user) {
+  return `${user.name} <${user.email}>`;
+}
+            </pre>
+            <p>TS를 사용할 경우 <code>tsconfig.json</code>에 <code>\"types\": [\"js/natural_js/@types\"]</code>를 추가하세요.</p>
+          </div>
+
+          <div class="card">
+            <h2>UI Shell Notify</h2>
+            <div class="toolbar">
+              <button class="btn" id="btn-shell-notify">Notify</button>
+            </div>
+            <p>UI Shell 메시지를 표시합니다.</p>
+          </div>
+        </div>
+
+        <div class="console" id="console" aria-label="console output"></div>
+      </main>
+    </div>
+
+    <script type="module">
+      import * as N from '../../packages/natural/dist/index.js';
+      import { log, mockData } from './common.js';
+
+      const { cont, triggerInit, TemplateAop, Notify } = N;
+      const tpl = cont('.tpl-view', {
+        'p.select.colors': {
+          context: '#tpl-select',
+          data: [
+            { code: 'blue', name: 'Blue' },
+            { code: 'green', name: 'Green' },
+          ],
+          key: 'name',
+          val: 'code',
+        },
+        'p.form.detail': {
+          context: '#tpl-form',
+          revert: true,
+        },
+        'p.grid.master': {
+          context: '#tpl-grid',
+          data: mockData.people.slice(0, 2),
+          sortable: true,
+          filter: false,
+        },
+        'e.btn-search.click': {
+          target: '.btn-search',
+          handler: (e) => {
+            e.preventDefault();
+            log('템플릿 검색 클릭');
+          },
+        },
+        init(view) {
+          log('Template init 실행', view.length);
+        },
+        save() {
+          log('save 호출', JSON.stringify(this['p.form.detail'].data(true)));
+        },
+      });
+
+      function runTemplateInit() {
+        const joinPoint = {
+          proceed: () => tpl.init?.(tpl.view),
+        };
+        TemplateAop.template(tpl, joinPoint);
+        log('processTemplate 완료');
+      }
+
+      document.getElementById('btn-template-init').addEventListener('click', () => {
+        runTemplateInit();
+      });
+      document.getElementById('btn-template-save').addEventListener('click', () => {
+        tpl.save();
+      });
+      document.getElementById('btn-add-row').addEventListener('click', () => {
+        tpl['p.grid.master'].add();
+        log('grid add via template');
+      });
+
+      const notifier = new Notify();
+      document.getElementById('btn-shell-notify').addEventListener('click', () => {
+        notifier.add('UI Shell Notify 메시지', { type: 'info' });
+        log('notify 표시');
+      });
+    </script>
+  </body>
+  </html>
+

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Data Module Demo</title>
+    <link rel="stylesheet" href="../../css/natural.ui.css" />
+    <link rel="stylesheet" href="./common.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "@natural-js/shared": "../../packages/shared/dist/index.js",
+          "@natural-js/core": "../../packages/core/dist/index.js",
+          "@natural-js/architecture": "../../packages/architecture/dist/index.js",
+          "@natural-js/data": "../../packages/data/dist/index.js",
+          "@natural-js/ui": "../../packages/ui/dist/index.js",
+          "@natural-js/ui-shell": "../../packages/ui-shell/dist/index.js",
+          "@natural-js/template": "../../packages/template/dist/index.js",
+          "@natural-js/code": "../../packages/code/dist/index.js"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="page">
+      <nav>
+        <h1>Data</h1>
+        <ul>
+          <li><a href="./index.html">← 돌아가기</a></li>
+        </ul>
+      </nav>
+      <main>
+        <div class="banner">
+          <p class="tag">Formatter · Validator · data.filter/sort</p>
+          <p>data-format/data-validate 선언형과 객체 rules를 모두 검증합니다.</p>
+        </div>
+
+        <div class="grid">
+          <div class="card">
+            <h2>선언형 data-format / data-validate</h2>
+            <div class="stack" id="format-context">
+              <label>금액 <input id="balance" type="text" value="1234567.8" data-format='[["commas"]]' /></label>
+              <label>날짜 <input id="registered" type="text" value="20240102" data-format='[["date",8,"date"]]' /></label>
+              <label>이메일 <input id="email" type="text" value="USER@EXAMPLE.COM" data-validate='[["required"],["email"]]' data-format='[["lower"]]' /></label>
+            </div>
+            <div class="toolbar">
+              <button class="btn" id="btn-format">format()</button>
+              <button class="btn" id="btn-unformat">unformat()</button>
+              <button class="btn" id="btn-validate">validate()</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>rules 객체 기반 Formatter/Validator</h2>
+            <div class="toolbar">
+              <button class="btn" id="btn-rules-format">rules format()</button>
+              <button class="btn" id="btn-rules-validate">rules validate()</button>
+            </div>
+            <p>rules 객체로 balance/email을 처리.</p>
+          </div>
+
+          <div class="card">
+            <h2>data.filter / data.sort</h2>
+            <div class="toolbar">
+              <button class="btn" id="btn-filter">eyeColor=blue 필터</button>
+              <button class="btn" id="btn-sort">age 오름차순 정렬</button>
+            </div>
+            <p>mockData.people에 대해 필터/정렬 결과를 확인합니다.</p>
+          </div>
+        </div>
+
+        <div class="console" id="console" aria-label="console output"></div>
+      </main>
+    </div>
+
+    <script type="module">
+      import * as N from '../../packages/natural/dist/index.js';
+      import { log, clearLog, mockData, rules } from './common.js';
+
+      const { Formatter, Validator, data } = N;
+      const ctxEl = document.getElementById('format-context');
+
+      function formatDeclarative() {
+        const fmt = new Formatter([], ctxEl);
+        fmt.format();
+        log('Declarative format 적용 완료');
+      }
+
+      function unformatDeclarative() {
+        const fmt = new Formatter([], ctxEl);
+        fmt.unformat();
+        log('Declarative unformat 완료');
+      }
+
+      function validateDeclarative() {
+        const v = new Validator([], ctxEl);
+        const result = v.validate();
+        log('Declarative validate 결과', JSON.stringify(result));
+      }
+
+      function rulesFormat() {
+        const fmt = new Formatter([{ balance: '123456.7', email: 'A@B.com' }], rules.formatter);
+        const result = fmt.format();
+        log('Rules format 결과', JSON.stringify(result));
+      }
+
+      function rulesValidate() {
+        const v = new Validator([{ balance: '100', email: 'bad' }], rules.validator);
+        const res = v.validate();
+        log('Rules validate 결과', JSON.stringify(res));
+      }
+
+      function runFilter() {
+        const filtered = data.filter(mockData.people, (item) => item.eyeColor === 'blue');
+        log('data.filter 결과', JSON.stringify(filtered));
+      }
+
+      function runSort() {
+        const sorted = data.sort(mockData.people, 'age', false);
+        log('data.sort 결과', JSON.stringify(sorted.map((p) => `${p.name}:${p.age}`)));
+      }
+
+      document.getElementById('btn-format').addEventListener('click', formatDeclarative);
+      document.getElementById('btn-unformat').addEventListener('click', unformatDeclarative);
+      document.getElementById('btn-validate').addEventListener('click', validateDeclarative);
+      document.getElementById('btn-rules-format').addEventListener('click', rulesFormat);
+      document.getElementById('btn-rules-validate').addEventListener('click', rulesValidate);
+      document.getElementById('btn-filter').addEventListener('click', runFilter);
+      document.getElementById('btn-sort').addEventListener('click', runSort);
+    </script>
+  </body>
+  </html>
+

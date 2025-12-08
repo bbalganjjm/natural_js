@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Natural-JS 2.0 Guide Demos</title>
+    <link rel="stylesheet" href="../../css/natural.ui.css" />
+    <link rel="stylesheet" href="./common.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "@natural-js/shared": "../../packages/shared/dist/index.js",
+          "@natural-js/core": "../../packages/core/dist/index.js",
+          "@natural-js/architecture": "../../packages/architecture/dist/index.js",
+          "@natural-js/data": "../../packages/data/dist/index.js",
+          "@natural-js/ui": "../../packages/ui/dist/index.js",
+          "@natural-js/ui-shell": "../../packages/ui-shell/dist/index.js",
+          "@natural-js/template": "../../packages/template/dist/index.js",
+          "@natural-js/code": "../../packages/code/dist/index.js"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="page">
+      <nav>
+        <h1>Natural-JS 2.0</h1>
+        <ul>
+          <li><a href="./architecture-core.html">Architecture · Config · Core</a></li>
+          <li><a href="./data.html">Data (Formatter/Validator)</a></li>
+          <li><a href="./ui-form-list-grid.html">UI Form/List/Grid/Pagination</a></li>
+          <li><a href="./ui-controls.html">UI Controls · Notify · Tree</a></li>
+          <li><a href="./template-ts-shell.html">Template · TS · UI Shell</a></li>
+          <li><a href="./README.md">실행/테스트 안내</a></li>
+        </ul>
+      </nav>
+      <main>
+        <div class="banner">
+          <p class="tag">정적 데모</p>
+          <p>각 메뉴는 Natural-JS 2.0 가이드에 맞춰 선언형 data-* 옵션과 API를 테스트할 수 있는 독립 HTML 페이지입니다.</p>
+          <p>로컬 정적 서버(예: <code>pnpm dlx serve docs/guides</code>)로 실행 후 좌측 링크를 통해 접근하세요.</p>
+        </div>
+        <div class="grid">
+          <div class="card">
+            <h2>Architecture/Core</h2>
+            <p>Controller, AOP, Context, Comm 필터, CORE 유틸.</p>
+            <a class="btn" href="./architecture-core.html">열기</a>
+          </div>
+          <div class="card">
+            <h2>Data</h2>
+            <p>Formatter/Validator rules, data.filter/sort, data-format/data-validate.</p>
+            <a class="btn" href="./data.html">열기</a>
+          </div>
+          <div class="card">
+            <h2>UI 데이터 컴포넌트</h2>
+            <p>Form/List/Grid/Pagination, data-sort/filter/rowspan.</p>
+            <a class="btn" href="./ui-form-list-grid.html">열기</a>
+          </div>
+          <div class="card">
+            <h2>UI 컨트롤</h2>
+            <p>Button/Tab/Select/Datepicker/Alert/Popup/Notify/Tree.</p>
+            <a class="btn" href="./ui-controls.html">열기</a>
+          </div>
+          <div class="card">
+            <h2>Template · TS · UI Shell</h2>
+            <p>p./c./e. 선언형, jsdoc 타입 안내, Docs/Notify.</p>
+            <a class="btn" href="./template-ts-shell.html">열기</a>
+          </div>
+        </div>
+        <div class="console" id="console" aria-label="console output"></div>
+      </main>
+    </div>
+
+    <script type="module">
+      import * as N from '../../packages/natural/dist/index.js';
+      import { log } from './common.js';
+
+      window.N = N;
+      log('Natural-JS version', JSON.stringify(N.version || {}, null, 2));
+    </script>
+  </body>
+  </html>
+

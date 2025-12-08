@@ -1,0 +1,156 @@
+/* Common layout for Natural-JS 2.0 guide demos */
+:root {
+  color-scheme: light;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #f6f7fb;
+  color: #1d1d1f;
+  line-height: 1.4;
+}
+
+.page {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  min-height: 100vh;
+}
+
+nav {
+  background: #0f172a;
+  color: #e2e8f0;
+  padding: 20px 16px;
+  border-right: 1px solid #1f2937;
+}
+
+nav h1 {
+  font-size: 18px;
+  margin: 0 0 12px;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 8px;
+}
+
+nav a {
+  color: #cbd5e1;
+  text-decoration: none;
+  padding: 8px 10px;
+  display: block;
+  border-radius: 8px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+nav a:hover,
+nav a:focus-visible {
+  background: #1f2937;
+  color: #fff;
+}
+
+main {
+  padding: 20px 28px 32px;
+}
+
+.banner {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 14px 16px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.card h2 {
+  margin: 0 0 8px;
+  font-size: 16px;
+}
+
+.card p {
+  margin: 0 0 12px;
+  color: #4b5563;
+  font-size: 14px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  background: #f8fafc;
+  color: #111827;
+  text-decoration: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.btn:hover,
+.btn:focus-visible {
+  background: #e5e7eb;
+  border-color: #9ca3af;
+}
+
+.console {
+  margin-top: 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: #0b1220;
+  color: #e2e8f0;
+  padding: 12px;
+  min-height: 140px;
+  max-height: 220px;
+  overflow: auto;
+  font-family: "SFMono-Regular", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 13px;
+}
+
+.toolbar {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.stack {
+  display: grid;
+  gap: 12px;
+}
+
+.tag {
+  display: inline-block;
+  padding: 4px 8px;
+  background: #eef2ff;
+  color: #3730a3;
+  border-radius: 6px;
+  font-size: 12px;
+  border: 1px solid #c7d2fe;
+}
+

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UI Form · List · Grid · Pagination Demo</title>
+    <link rel="stylesheet" href="../../css/natural.ui.css" />
+    <link rel="stylesheet" href="./common.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "@natural-js/shared": "../../packages/shared/dist/index.js",
+          "@natural-js/core": "../../packages/core/dist/index.js",
+          "@natural-js/architecture": "../../packages/architecture/dist/index.js",
+          "@natural-js/data": "../../packages/data/dist/index.js",
+          "@natural-js/ui": "../../packages/ui/dist/index.js",
+          "@natural-js/ui-shell": "../../packages/ui-shell/dist/index.js",
+          "@natural-js/template": "../../packages/template/dist/index.js",
+          "@natural-js/code": "../../packages/code/dist/index.js"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="page">
+      <nav>
+        <h1>UI 데이터 컴포넌트</h1>
+        <ul>
+          <li><a href="./index.html">← 돌아가기</a></li>
+        </ul>
+      </nav>
+      <main>
+        <div class="banner">
+          <p class="tag">Form · List · Grid · Pagination</p>
+          <p>data-format/data-validate 및 data-sort/filter/rowspan을 포함한 주요 옵션을 시연합니다.</p>
+        </div>
+
+        <div class="grid">
+          <div class="card">
+            <h2>Form</h2>
+            <table id="form-demo" class="form__" style="width:100%; border-spacing:8px;">
+              <tr>
+                <th><label for="f-name">이름</label></th>
+                <td><input id="name" type="text" data-validate='[["required"]]' data-format='[["capitalize"]]' value="alice" /></td>
+              </tr>
+              <tr>
+                <th><label for="f-email">이메일</label></th>
+                <td><input id="email" type="text" data-validate='[["required"],["email"]]' value="alice@example.com" /></td>
+              </tr>
+              <tr>
+                <th><label for="f-registered">가입일</label></th>
+                <td><input id="registered" type="text" data-format='[["date",8,"date"]]' value="20240102" /></td>
+              </tr>
+            </table>
+            <div class="toolbar">
+              <button class="btn" id="btn-form-bind">bind</button>
+              <button class="btn" id="btn-form-validate">validate</button>
+              <button class="btn" id="btn-form-revert">revert</button>
+              <button class="btn" id="btn-form-data">data()</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>List</h2>
+            <div class="toolbar">
+              <label><input type="checkbox" id="list-check-all" /> 전체선택</label>
+              <button class="btn" id="btn-list-bind">bind</button>
+              <button class="btn" id="btn-list-select">select(1)</button>
+              <button class="btn" id="btn-list-data">data(\"selected\")</button>
+            </div>
+            <ul id="list-demo" class="list__" style="padding-left:0;">
+              <li>
+                <input class="row-check" type="checkbox" />
+                <span id="name"></span> /
+                <span id="age"></span> /
+                <span id="email"></span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h2>Grid</h2>
+            <table id="grid-demo" class="grid__" style="width:100%;">
+              <thead>
+                <tr>
+                  <th data-sort="name">이름</th>
+                  <th data-sort="email" data-filter="true">이메일</th>
+                  <th data-sort="eyeColor" data-filter="true">눈색</th>
+                  <th data-sort="age">나이</th>
+                  <th data-rowspan="true">Active</th>
+                  <th data-sort="registered">가입일</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td id="name" data-format='[["capitalize"]]'></td>
+                  <td id="email" data-validate='[["required"],["email"]]'></td>
+                  <td id="eyeColor"></td>
+                  <td id="age" data-validate='[["integer"]]'></td>
+                  <td id="isActive"></td>
+                  <td id="registered" data-format='[["date",8,"date"]]'></td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="toolbar">
+              <button class="btn" id="btn-grid-bind">bind</button>
+              <button class="btn" id="btn-grid-add">add()</button>
+              <button class="btn" id="btn-grid-validate">validate()</button>
+              <button class="btn" id="btn-grid-data">data(\"modified\")</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>Pagination</h2>
+            <div id="pager" class="pagination__"></div>
+            <p>클릭 시 grid 데이터가 페이지 단위로 교체됩니다.</p>
+          </div>
+        </div>
+
+        <div class="console" id="console" aria-label="console output"></div>
+      </main>
+    </div>
+
+    <script type="module">
+      import * as N from '../../packages/natural/dist/index.js';
+      import { log, clearLog, mockData } from './common.js';
+
+      const form = new N.Form(mockData.people.slice(0, 1), { context: '#form-demo', revert: true });
+      const list = new N.List('#list-demo', {
+        data: mockData.people,
+        select: true,
+        multiselect: true,
+        checkAll: '#list-check-all',
+        checkAllTarget: '.row-check',
+      });
+      const grid = new N.Grid('#grid-demo', {
+        data: mockData.people,
+        sortable: true,
+        filter: true,
+        resizable: true,
+        validate: true,
+      });
+      const pagination = new N.Pagination('#pager', {
+        totalCount: mockData.people.length,
+        countPerPage: 2,
+        onChange: (pageNo, info) => {
+          const start = (pageNo - 1) * info.countPerPage;
+          const pageData = mockData.people.slice(start, start + info.countPerPage);
+          grid.bind(pageData);
+          log('pagination change', pageNo);
+        },
+      });
+
+      document.getElementById('btn-form-bind').addEventListener('click', () => {
+        form.bind();
+        log('form bind');
+      });
+      document.getElementById('btn-form-validate').addEventListener('click', () => {
+        const res = form.validate();
+        log('form validate', JSON.stringify(res));
+      });
+      document.getElementById('btn-form-revert').addEventListener('click', () => {
+        form.revert();
+        log('form revert');
+      });
+      document.getElementById('btn-form-data').addEventListener('click', () => {
+        log('form data', JSON.stringify(form.data(true)));
+      });
+
+      document.getElementById('btn-list-bind').addEventListener('click', () => {
+        list.bind();
+        log('list bind');
+      });
+      document.getElementById('btn-list-select').addEventListener('click', () => {
+        list.select(1);
+        log('list select row 1');
+      });
+      document.getElementById('btn-list-data').addEventListener('click', () => {
+        log('list selected', JSON.stringify(list.data('selected')));
+      });
+
+      document.getElementById('btn-grid-bind').addEventListener('click', () => {
+        grid.bind(mockData.people);
+        log('grid bind');
+      });
+      document.getElementById('btn-grid-add').addEventListener('click', () => {
+        grid.add();
+        log('grid add empty row');
+      });
+      document.getElementById('btn-grid-validate').addEventListener('click', () => {
+        const res = grid.validate();
+        log('grid validate', JSON.stringify(res));
+      });
+      document.getElementById('btn-grid-data').addEventListener('click', () => {
+        log('grid modified', JSON.stringify(grid.data('modified')));
+      });
+
+      // 초기 바인딩
+      list.bind();
+      grid.bind(mockData.people);
+      form.bind();
+    </script>
+  </body>
+  </html>
+
