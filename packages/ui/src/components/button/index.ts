@@ -71,7 +71,7 @@ export class Button {
       const dataOpts = element.toOpts(el) as Partial<ButtonOptions> | undefined;
       const opts = { ...baseOpts, ...dataOpts };
 
-      // Add button class
+    // Add button class
       btn.addClass('btn_common__ button__');
 
       // Size classes
@@ -96,10 +96,10 @@ export class Button {
       }
 
       // Color class if specified
-      if (opts.color) {
+    if (opts.color) {
         btn.addClass(`btn_${opts.color}__`);
         btn.addClass(opts.color);
-      }
+    }
 
       const disabledFlag =
         opts.disabled === true ||
@@ -107,39 +107,39 @@ export class Button {
         opts.disabled === 'true' ||
         opts.disable === 'true';
 
-      // Apply initial disabled state
+    // Apply initial disabled state
       if (disabledFlag) {
         btn.addClass('btn_disabled__ disabled__');
         btn.attr('disabled', 'disabled');
         if (el instanceof HTMLButtonElement || el instanceof HTMLInputElement) {
           el.disabled = true;
         }
+    }
+
+    // Bind click event
+      btn.off('click.button').on('click.button', (e: Event) => {
+      // Check if disabled
+        if (btn.hasClass('btn_disabled__') || btn.attr('disabled') === 'disabled') {
+        e.preventDefault();
+        e.stopPropagation();
+        return;
       }
 
-      // Bind click event
-      btn.off('click.button').on('click.button', (e: Event) => {
-        // Check if disabled
-        if (btn.hasClass('btn_disabled__') || btn.attr('disabled') === 'disabled') {
+      if (opts.onBeforeClick) {
+          const result = opts.onBeforeClick(e, btn);
+        if (result === false) {
           e.preventDefault();
-          e.stopPropagation();
           return;
         }
-
-        if (opts.onBeforeClick) {
-          const result = opts.onBeforeClick(e, btn);
-          if (result === false) {
-            e.preventDefault();
-            return;
-          }
-        }
+      }
 
         // active class for click feedback
         btn.addClass('button_active__');
         setTimeout(() => btn.removeClass('button_active__'), opts.animationDuration ?? 200);
 
-        if (opts.onClick) {
+      if (opts.onClick) {
           opts.onClick(e, btn);
-        }
+      }
       });
     });
 

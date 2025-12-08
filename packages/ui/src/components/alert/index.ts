@@ -180,24 +180,24 @@ export class Alert {
     if (opts.modal !== false) {
       overlay = doc.createElement('div');
       overlay.className = 'alert_overlay__ block_overlay__';
-      overlay.style.display = 'none';
-      overlay.style.position = opts.isWindow ? 'fixed' : 'absolute';
-      overlay.style.cursor = 'not-allowed';
-      overlay.style.padding = '0';
-      if (!opts.isWindow) overlay.style.borderRadius = opts.context.css('border-radius') || '0px';
-      if (opts.alwaysOnTop) overlay.style.zIndex = String(maxZIndex + 1);
-      if (opts.overlayColor) overlay.style.backgroundColor = opts.overlayColor;
+    overlay.style.display = 'none';
+    overlay.style.position = opts.isWindow ? 'fixed' : 'absolute';
+    overlay.style.cursor = 'not-allowed';
+    overlay.style.padding = '0';
+    if (!opts.isWindow) overlay.style.borderRadius = opts.context.css('border-radius') || '0px';
+    if (opts.alwaysOnTop) overlay.style.zIndex = String(maxZIndex + 1);
+    if (opts.overlayColor) overlay.style.backgroundColor = opts.overlayColor;
 
-      const containerEl = opts.isWindow ? opts.container : opts.context;
-      if (containerEl) {
-        if (opts.isWindow) {
-          containerEl.append(overlay);
-        } else {
-          const contextEl = opts.context.get(0);
-          contextEl?.parentNode?.insertBefore(overlay, contextEl.nextSibling);
-        }
+    const containerEl = opts.isWindow ? opts.container : opts.context;
+    if (containerEl) {
+      if (opts.isWindow) {
+        containerEl.append(overlay);
+      } else {
+        const contextEl = opts.context.get(0);
+        contextEl?.parentNode?.insertBefore(overlay, contextEl.nextSibling);
       }
-      opts.msgContext = new NaturalElement(overlay);
+    }
+    opts.msgContext = new NaturalElement(overlay);
     } else {
       opts.msgContext = new NaturalElement([]);
     }

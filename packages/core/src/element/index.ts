@@ -136,7 +136,7 @@ export function toRules(
             rules[id] = ruleData;
           }
         } else {
-          rules[id] = ruleData;
+        rules[id] = ruleData;
         }
       }
     }
