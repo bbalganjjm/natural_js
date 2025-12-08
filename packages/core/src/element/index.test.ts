@@ -77,6 +77,18 @@ describe('Element Utilities', () => {
       const div = document.createElement('div');
       expect(toOpts(div)).toBeUndefined();
     });
+
+    it('should parse JSON from data-opts attribute', () => {
+      const div = document.createElement('div');
+      div.dataset.opts = '{"foo":"bar","num":1}';
+      expect(toOpts(div)).toEqual({ foo: 'bar', num: 1 });
+    });
+
+    it('should ignore invalid JSON in data-opts', () => {
+      const div = document.createElement('div');
+      div.dataset.opts = '{invalid json';
+      expect(toOpts(div)).toBeUndefined();
+    });
   });
 
   describe('toRules', () => {

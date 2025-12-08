@@ -192,6 +192,17 @@ describe('Form', () => {
       expect(nameInput.value).toBe('John');
       expect(emailInput.value).toBe(''); // Should not be bound
     });
+
+    it('should apply declarative data-format rules', () => {
+      const data = [{ name: 'john doe' }];
+      const input = document.getElementById('name') as HTMLInputElement;
+      input.setAttribute('data-format', '[["upper"]]');
+
+      const form = new Form(data, '#test-form');
+      form.bind(0);
+
+      expect(input.value).toBe('JOHN DOE');
+    });
   });
 
   describe('two-way binding', () => {
@@ -440,6 +451,18 @@ describe('Form', () => {
       input.dispatchEvent(new Event('change'));
 
       expect(onChange).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('validate()', () => {
+    it('should validate using declarative data-validate rules', () => {
+      const nameInput = document.getElementById('name') as HTMLInputElement;
+      nameInput.setAttribute('data-validate', '[["required"]]');
+      const data = [{ name: '' }];
+      const form = new Form(data, '#test-form');
+      form.bind(0);
+
+      expect(form.validate()).toBe(false);
     });
   });
 });

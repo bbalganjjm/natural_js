@@ -176,27 +176,31 @@ export class Alert {
 
     let maxZIndex = opts.alwaysOnTop ? getMaxZIndex(opts.alwaysOnTopCalcTarget) : 0;
 
-    const overlay = doc.createElement('div');
-    overlay.className = 'alert_overlay__';
-    overlay.style.display = 'none';
-    overlay.style.position = opts.isWindow ? 'fixed' : 'absolute';
-    overlay.style.cursor = 'not-allowed';
-    overlay.style.padding = '0';
-    if (!opts.isWindow) overlay.style.borderRadius = opts.context.css('border-radius') || '0px';
-    if (opts.alwaysOnTop) overlay.style.zIndex = String(maxZIndex + 1);
-    if (opts.overlayColor) overlay.style.backgroundColor = opts.overlayColor;
+    let overlay: HTMLDivElement | null = null;
+    if (opts.modal !== false) {
+      overlay = doc.createElement('div');
+      overlay.className = 'alert_overlay__ block_overlay__';
+      overlay.style.display = 'none';
+      overlay.style.position = opts.isWindow ? 'fixed' : 'absolute';
+      overlay.style.cursor = 'not-allowed';
+      overlay.style.padding = '0';
+      if (!opts.isWindow) overlay.style.borderRadius = opts.context.css('border-radius') || '0px';
+      if (opts.alwaysOnTop) overlay.style.zIndex = String(maxZIndex + 1);
+      if (opts.overlayColor) overlay.style.backgroundColor = opts.overlayColor;
 
-    const containerEl = opts.isWindow ? opts.container : opts.context;
-    if (containerEl) {
-      if (opts.isWindow) {
-        containerEl.append(overlay);
-      } else {
-        const contextEl = opts.context.get(0);
-        contextEl?.parentNode?.insertBefore(overlay, contextEl.nextSibling);
+      const containerEl = opts.isWindow ? opts.container : opts.context;
+      if (containerEl) {
+        if (opts.isWindow) {
+          containerEl.append(overlay);
+        } else {
+          const contextEl = opts.context.get(0);
+          contextEl?.parentNode?.insertBefore(overlay, contextEl.nextSibling);
+        }
       }
+      opts.msgContext = new NaturalElement(overlay);
+    } else {
+      opts.msgContext = new NaturalElement([]);
     }
-
-    opts.msgContext = new NaturalElement(overlay);
 
     let msgText = opts.msg;
     if (opts.vars && isString(msgText)) {
@@ -204,7 +208,7 @@ export class Alert {
     }
 
     const msgContent = doc.createElement('div');
-    msgContent.className = 'alert__ hidden__';
+    msgContent.className = 'alert__ block_overlay_msg__ hidden__';
     msgContent.style.display = 'none';
     msgContent.style.position = opts.isWindow ? 'fixed' : 'absolute';
     if (opts.alwaysOnTop) msgContent.style.zIndex = String(maxZIndex + 2);
@@ -226,7 +230,12 @@ export class Alert {
     }
 
     msgContent.innerHTML = `${titleHtml}<div class="msg_box__"></div>${buttonHtml}`;
-    overlay.parentNode?.insertBefore(msgContent, overlay.nextSibling);
+    if (overlay && overlay.parentNode) {
+      overlay.parentNode.insertBefore(msgContent, overlay.nextSibling);
+    } else {
+      const containerEl = opts.isWindow ? opts.container : opts.context;
+      containerEl?.append(msgContent);
+    }
     opts.msgContents = new NaturalElement(msgContent);
 
     const msgBox = opts.msgContents.find('.msg_box__');

@@ -61,6 +61,20 @@ describe('Tab', () => {
       const tab = new Tab('#tabs', { active: 1 });
       expect(tab.getIndex()).toBe(1);
     });
+
+    it('should read data-opts for active/disable/preload', () => {
+      const ul = container.querySelector('ul')!;
+      ul.innerHTML = `
+        <li data-opts='{"preload": true}'>Tab 1</li>
+        <li data-opts='{"active": true}'>Tab 2</li>
+        <li data-opts='{"disable": true}'>Tab 3</li>
+      `;
+      const tabComp = new Tab('#tabs', { active: -1, preload: false });
+      expect(tabComp.getIndex()).toBe(1);
+      expect(tabComp.options.preload).toBe(true);
+      expect(tabComp.options.tabLinks.eq(2).hasClass('tab_disabled__')).toBe(true);
+    });
+
   });
 
   describe('open()', () => {

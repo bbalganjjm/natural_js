@@ -74,7 +74,21 @@ export function removeData(element: Element, key?: string): void {
  * ```
  */
 export function toOpts(element: Element): Record<string, unknown> | undefined {
-  return getData(element, 'opts') as Record<string, unknown> | undefined;
+  const stored = getData(element, 'opts') as Record<string, unknown> | undefined;
+  if (stored !== undefined) {
+    return stored;
+  }
+
+  const datasetValue = (element as HTMLElement).dataset?.opts;
+  if (!datasetValue) return undefined;
+
+  try {
+    // Expect strict JSON in data-opts (consistent with docs)
+    return JSON.parse(datasetValue) as Record<string, unknown>;
+  } catch (_e) {
+    // Fallback to undefined on parse error to avoid runtime breakage
+    return undefined;
+  }
 }
 
 /**
@@ -115,7 +129,15 @@ export function toRules(
     if (id) {
       const ruleData = getData(element, ruleset) ?? element.dataset[ruleset];
       if (ruleData) {
-        rules[id] = ruleData;
+        if (typeof ruleData === 'string') {
+          try {
+            rules[id] = JSON.parse(ruleData);
+          } catch (_e) {
+            rules[id] = ruleData;
+          }
+        } else {
+          rules[id] = ruleData;
+        }
       }
     }
   }

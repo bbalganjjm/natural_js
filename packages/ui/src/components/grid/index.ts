@@ -4,7 +4,8 @@
  */
 
 import { NaturalElement, isBrowser, getDocument } from '@natural-js/shared';
-import { isString, isArray } from '@natural-js/core';
+import { isString, isArray, element } from '@natural-js/core';
+import { Formatter, Validator, type FormatRules, type ValidationRules } from '@natural-js/data';
 import { 
   GridOptions, 
   GridUserOptions, 
@@ -31,6 +32,8 @@ const DEFAULT_OPTIONS: Partial<GridOptions> = {
   multiselect: false,
   html: false,
   validate: true,
+  fRules: null,
+  vRules: null,
   revert: true,
   dataSync: true,
   selectedClass: 'grid_selected__',
@@ -47,6 +50,9 @@ const DEFAULT_OPTIONS: Partial<GridOptions> = {
  */
 export class Grid {
   public options: GridOptions;
+  private columnKeys: string[] = [];
+  private filterKeys: string[] = [];
+  private rowspanKeys: string[] = [];
 
   constructor(context: NaturalElement | Element | string, opts?: GridUserOptions) {
     if (!isBrowser()) {
@@ -87,6 +93,54 @@ export class Grid {
     // Clear template rows from tbody
     tbody.find('tr').remove();
 
+    // Extract declarative format/validate rules from row template inputs
+    const bodyInputs = contextEl.find('tbody input, tbody select, tbody textarea');
+    const declarativeFRules = element.toRules(
+      bodyInputs.get(),
+      'format'
+    ) as unknown as FormatRules | undefined;
+    const declarativeVRules = element.toRules(
+      bodyInputs.get(),
+      'validate'
+    ) as unknown as ValidationRules | undefined;
+
+    const mergedFRules: FormatRules | null =
+      (opts?.fRules as FormatRules | undefined) ||
+      (declarativeFRules && Object.keys(declarativeFRules).length > 0 ? declarativeFRules : null);
+    const mergedVRules: ValidationRules | null =
+      (opts?.vRules as ValidationRules | undefined) ||
+      (declarativeVRules && Object.keys(declarativeVRules).length > 0 ? declarativeVRules : null);
+
+    if (mergedVRules) {
+      for (const key in mergedVRules) {
+        const rules = mergedVRules[key];
+        if (!rules) continue;
+        let el = contextEl.find(`tbody [id="${key}"]`);
+        if (el.length === 0) {
+          el = contextEl.find(`tbody [name="${key}"]`);
+        }
+        if (el.length === 0) {
+          el = contextEl.find(`tbody [data-bind="${key}"]`);
+        }
+        if (el.length > 0 && el.get(0)) {
+          const target = el.get(0) as HTMLElement;
+          if (!target.dataset.validate) {
+            target.dataset.validate = JSON.stringify(rules);
+          }
+        }
+      }
+    }
+
+    // Build column key order from row template
+    if (rowTemplate) {
+      rowTemplate.find('[data-bind]').each((_, el) => {
+        const key = el.getAttribute('data-bind');
+        if (key) {
+          this.columnKeys.push(key);
+        }
+      });
+    }
+
     this.options = {
       ...DEFAULT_OPTIONS,
       ...opts,
@@ -99,10 +153,49 @@ export class Grid {
       beforeRow: -1,
       rowElements: [],
       isBinding: false,
+      fRules: mergedFRules,
+      vRules: mergedVRules,
     } as GridOptions;
 
     // Add grid class
     contextEl.addClass('grid__');
+
+    // Bind declarative sort/filter/rowspan headers
+    if (this.options.thead) {
+      this.options.thead.find('th').each((idx, el) => {
+        const th = new NaturalElement(el);
+        const keyFromSort = (el as HTMLElement).dataset.sort;
+        const colKey = keyFromSort || this.columnKeys[idx];
+
+        // sort
+        if (keyFromSort) {
+          th.addClass('sortable__');
+          th.off('click.grid.sort').on('click.grid.sort', (e: Event) => {
+            e.preventDefault();
+            this.sort(keyFromSort);
+          });
+        }
+
+        // filter
+        const filterAttr = (el as HTMLElement).dataset.filter;
+        if (filterAttr !== undefined && filterAttr !== 'false') {
+          const key = colKey;
+          if (key) {
+            this.filterKeys.push(key);
+            this.setupFilter(th, key);
+          }
+        }
+
+        // rowspan
+        const rowspanAttr = (el as HTMLElement).dataset.rowspan;
+        if (rowspanAttr !== undefined && rowspanAttr !== 'false') {
+          const key = colKey;
+          if (key) {
+            this.rowspanKeys.push(key);
+          }
+        }
+      });
+    }
 
     // Set height if specified (scrollable body)
     if (opts?.height) {
@@ -201,6 +294,9 @@ export class Grid {
       callback();
     }
 
+    // Apply rowspan if configured
+    this.applyRowspanForKeys();
+
     return this;
   }
 
@@ -254,7 +350,8 @@ export class Grid {
       if (key.startsWith('__') || key === 'rowStatus') continue;
 
       const value = rowData[key];
-      const valueStr = value === null || value === undefined ? '' : String(value);
+      const formattedValue = this.applyFormat(key, value);
+      const valueStr = formattedValue === null || formattedValue === undefined ? '' : String(formattedValue);
 
       // Find element by id, name, or data-bind
       let el = rowElement.find(`#${key}`);
@@ -874,7 +971,7 @@ export class Grid {
       
       // Create resize handle
       const handle = doc.createElement('div');
-      handle.className = 'resize_bar__';
+      handle.className = 'resize_bar__ grid_resize_handle__';
       handle.style.cssText = `
         position: absolute;
         right: 0;
@@ -1155,6 +1252,41 @@ export class Grid {
   }
 
   /**
+   * Setup filter input for a header cell.
+   */
+  private setupFilter(th: NaturalElement, key: string): void {
+    const existingInput = th.find('input, select').first();
+    let inputEl: NaturalElement;
+
+    if (existingInput.length > 0) {
+      inputEl = existingInput;
+    } else {
+      const doc = getDocument();
+      if (!doc) return;
+      const input = doc.createElement('input');
+      input.type = 'text';
+      input.className = 'grid_filter__';
+      th.append(input);
+      inputEl = new NaturalElement(input);
+    }
+
+    inputEl.off('input.grid.filter change.grid.filter').on('input.grid.filter change.grid.filter', () => {
+      const value = (inputEl.get(0) as HTMLInputElement | HTMLSelectElement | undefined)?.value ?? '';
+      this.dataFilter(key, value);
+    });
+  }
+
+  /**
+   * Apply rowspan for configured keys.
+   */
+  private applyRowspanForKeys(): void {
+    if (this.rowspanKeys.length === 0) return;
+    for (const key of this.rowspanKeys) {
+      this.rowSpan(key);
+    }
+  }
+
+  /**
    * Update column visibility (internal).
    */
   private updateColumnVisibility(): void {
@@ -1173,6 +1305,58 @@ export class Grid {
         (td as HTMLElement).style.display = this.hiddenColumns.includes(idx) ? 'none' : '';
       });
     });
+  }
+
+  /**
+   * Validate grid rows using configured rules or required attributes.
+   */
+  validate(row?: number): boolean {
+    const opts = this.options;
+    const hasRules = opts.vRules && Object.keys(opts.vRules).length > 0;
+
+    if (hasRules) {
+      const validator = new Validator(opts.data, opts.vRules as ValidationRules);
+      const results = validator.validate(row);
+      return Validator.isValid(results);
+    }
+
+    // Fallback required check on rendered rows
+    const rowsToCheck =
+      row === undefined || row === null ? opts.rowElements ?? [] : [opts.rowElements?.[row]].filter(Boolean);
+    let isValid = true;
+
+    rowsToCheck.forEach((rowEl) => {
+      rowEl?.find('[required]').each((_, el) => {
+        const input = el as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
+        const key = input.id || input.name;
+        const rowIndex = rowEl.data('index') as number | undefined;
+        const dataRow = rowIndex !== undefined ? opts.data[rowIndex] : undefined;
+        const value = dataRow ? dataRow[key] : undefined;
+        if (value === undefined || value === null || value === '') {
+          isValid = false;
+          new NaturalElement(input).addClass('grid_invalid__');
+        } else {
+          new NaturalElement(input).removeClass('grid_invalid__');
+        }
+      });
+    });
+
+    return isValid;
+  }
+
+  /**
+   * Apply formatting rules to a value if present.
+   */
+  private applyFormat(key: string, value: unknown): unknown {
+    const rules = this.options.fRules?.[key];
+    if (!rules) return value;
+    try {
+      const formatter = new Formatter([{ [key]: value }], { [key]: rules } as FormatRules);
+      const formatted = formatter.format(0);
+      return formatted[0]?.[key];
+    } catch (_e) {
+      return value;
+    }
   }
 
   /**

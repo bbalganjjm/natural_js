@@ -39,8 +39,8 @@ describe('Grid', () => {
     // Clean up any grid instances
     const grids = document.querySelectorAll('.grid__');
     grids.forEach((el) => {
-      const gridData = new NaturalElement(el).data('grid');
-      if (gridData && typeof gridData.destroy === 'function') {
+      const gridData = new NaturalElement(el).data('grid') as { destroy?: () => void } | undefined;
+      if (gridData?.destroy) {
         gridData.destroy();
       }
     });
@@ -585,11 +585,88 @@ describe('Grid Advanced Features', () => {
     document.body.appendChild(container);
   });
 
+  describe('Declarative options (sort/filter/rowspan)', () => {
+    it('should sort when clicking data-sort header', () => {
+      const grid = new Grid('#advanced-grid', { data: createAdvancedData() });
+      const firstTh = grid.contextHead()?.find('th').first();
+      firstTh?.trigger('click');
+      expect(grid.getSortState()).toEqual({ key: 'name', direction: 'asc' });
+      grid.destroy();
+    });
+
+    it('should create filter input for data-filter and filter rows', () => {
+      const table = document.createElement('table');
+      table.id = 'filter-grid';
+      table.innerHTML = `
+        <thead>
+          <tr>
+            <th data-filter="true" data-sort="city">City</th>
+            <th data-filter="true" data-sort="age">Age</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-bind="city"></td>
+            <td data-bind="age"></td>
+          </tr>
+        </tbody>
+      `;
+      document.body.appendChild(table);
+
+      const grid = new Grid('#filter-grid', { data: createAdvancedData() });
+      const filterInput = grid.contextHead()?.find('.grid_filter__').first();
+      expect(filterInput?.length).toBeGreaterThan(0);
+
+      filterInput?.val('Seoul');
+      filterInput?.trigger('input');
+
+      expect(grid.count()).toBe(2);
+      grid.destroy();
+      document.body.removeChild(table);
+    });
+
+    it('should apply rowspan when data-rowspan is set', () => {
+      const table = document.createElement('table');
+      table.id = 'rowspan-grid';
+      table.innerHTML = `
+        <thead>
+          <tr>
+            <th data-rowspan="true">City</th>
+            <th>Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-bind="city"></td>
+            <td data-bind="name"></td>
+          </tr>
+        </tbody>
+      `;
+      document.body.appendChild(table);
+
+      const data = [
+        { city: 'Seoul', name: 'Alice' },
+        { city: 'Seoul', name: 'Bob' },
+        { city: 'Tokyo', name: 'Charlie' },
+      ];
+
+      const grid = new Grid('#rowspan-grid', { data });
+      const firstCell = grid.context().find('.grid_row__').first().find('[data-bind="city"]').get(0) as HTMLTableCellElement;
+      expect(firstCell?.rowSpan).toBeGreaterThan(1);
+
+      const hiddenCells = grid.context().find('.grid_row__').eq(1).find('[data-bind="city"]');
+      expect((hiddenCells.get(0) as HTMLElement).style.display).toBe('none');
+
+      grid.destroy();
+      document.body.removeChild(table);
+    });
+  });
+
   afterEach(() => {
     const grids = document.querySelectorAll('.grid__');
     grids.forEach((el) => {
-      const gridData = new NaturalElement(el).data('grid');
-      if (gridData && typeof gridData.destroy === 'function') {
+      const gridData = new NaturalElement(el).data('grid') as { destroy?: () => void } | undefined;
+      if (gridData?.destroy) {
         gridData.destroy();
       }
     });

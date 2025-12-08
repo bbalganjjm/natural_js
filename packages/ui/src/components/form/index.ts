@@ -4,7 +4,8 @@
  */
 
 import { NaturalElement, isBrowser, getDocument } from '@natural-js/shared';
-import { isString, isArray, isFunction, isPlainObject } from '@natural-js/core';
+import { isString, isArray, isFunction, isPlainObject, element } from '@natural-js/core';
+import { Formatter, Validator, type FormatRules, type ValidationRules } from '@natural-js/data';
 import { FormOptions, FormUserOptions, FormDataRow, RowStatus } from './types';
 
 export * from './types';
@@ -15,6 +16,8 @@ const DEFAULT_OPTIONS: Partial<FormOptions> = {
   beforeRow: -1,
   html: false,
   validate: true,
+  fRules: null,
+  vRules: null,
   revert: true,
   unbind: false,
   cache: true,
@@ -72,6 +75,46 @@ export class Form {
 
     const userOpts = isPlainObject(optsOrContext) ? (optsOrContext as FormUserOptions) : {};
 
+    // Extract declarative format/validate rules from data-* attributes
+    const inputElements = contextEl.find('input, select, textarea');
+    const declarativeFRules = element.toRules(
+      inputElements.get(),
+      'format'
+    ) as unknown as FormatRules | undefined;
+    const declarativeVRules = element.toRules(
+      inputElements.get(),
+      'validate'
+    ) as unknown as ValidationRules | undefined;
+
+    const mergedFRules: FormatRules | null =
+      (userOpts.fRules as FormatRules | undefined) ||
+      (declarativeFRules && Object.keys(declarativeFRules).length > 0 ? declarativeFRules : null);
+
+    const mergedVRules: ValidationRules | null =
+      (userOpts.vRules as ValidationRules | undefined) ||
+      (declarativeVRules && Object.keys(declarativeVRules).length > 0 ? declarativeVRules : null);
+
+    // Apply vRules to dataset when provided to keep Validator element flow working
+    if (mergedVRules) {
+      for (const key in mergedVRules) {
+        const rules = mergedVRules[key];
+        if (!rules) continue;
+        let el = contextEl.find(`#${key}`);
+        if (el.length === 0) {
+          el = contextEl.find(`[name="${key}"]`);
+        }
+        if (el.length === 0) {
+          el = contextEl.find(`[data-bind="${key}"]`);
+        }
+        if (el.length > 0 && el.get(0)) {
+          const target = el.get(0) as HTMLElement;
+          if (!target.dataset.validate) {
+            target.dataset.validate = JSON.stringify(rules);
+          }
+        }
+      }
+    }
+
     this.options = {
       ...DEFAULT_OPTIONS,
       ...userOpts,
@@ -80,6 +123,8 @@ export class Form {
       row: -1,
       beforeRow: -1,
       elementCache: new Map(),
+      fRules: mergedFRules,
+      vRules: mergedVRules,
     } as FormOptions;
 
     // Add form class
@@ -230,7 +275,8 @@ export class Form {
     if (!firstEl) return;
 
     const tagName = firstEl.tagName.toLowerCase();
-    const valueStr = value === null || value === undefined ? '' : String(value);
+    const formattedValue = this.applyFormat(key, value);
+    const valueStr = formattedValue === null || formattedValue === undefined ? '' : String(formattedValue);
 
     if (tagName === 'input') {
       const inputEl = firstEl as HTMLInputElement;
@@ -451,24 +497,28 @@ export class Form {
    * Validate all form fields.
    */
   validate(): boolean {
-    // Basic validation - check required fields
     const opts = this.options;
     const rowData = opts.data[opts.row];
-    
     if (!rowData) return true;
 
+    // If declarative/option rules exist, use Validator
+    if (opts.vRules && Object.keys(opts.vRules).length > 0) {
+      const validator = new Validator(opts.data, opts.vRules);
+      const results = validator.validate(opts.row);
+      return Validator.isValid(results);
+    }
+
+    // Fallback: required attribute check
     let isValid = true;
-
     opts.context.find('[required]').each((_, el) => {
-      const element = el as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
-      const key = element.id || element.name;
+      const elementNode = el as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
+      const key = elementNode.id || elementNode.name;
       const value = rowData[key];
-
       if (value === undefined || value === null || value === '') {
         isValid = false;
-        new NaturalElement(element).addClass('form_invalid__');
+        new NaturalElement(elementNode).addClass('form_invalid__');
       } else {
-        new NaturalElement(element).removeClass('form_invalid__');
+        new NaturalElement(elementNode).removeClass('form_invalid__');
       }
     });
 
@@ -514,6 +564,22 @@ export class Form {
     }
 
     return this;
+  }
+
+  /**
+   * Apply formatting rules to a single value if configured.
+   */
+  private applyFormat(key: string, value: unknown): unknown {
+    const rules = this.options.fRules?.[key];
+    if (!rules) return value;
+
+    try {
+      const formatter = new Formatter([{ [key]: value }], { [key]: rules } as FormatRules);
+      const formatted = formatter.format(0);
+      return formatted[0]?.[key];
+    } catch (_e) {
+      return value;
+    }
   }
 
   /**

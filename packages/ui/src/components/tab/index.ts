@@ -3,7 +3,7 @@
  */
 
 import { NaturalElement, isBrowser, getDocument } from '@natural-js/shared';
-import { isString, isFunction, isArray } from '@natural-js/core';
+import { isString, isFunction, isArray, element } from '@natural-js/core';
 import { TabOptions, TabUserOptions, TabStatusInfo } from './types';
 
 export * from './types';
@@ -64,6 +64,28 @@ export class Tab {
     // Find tab links and contents
     opts.tabLinks = opts.context.find(opts.tabLinkSelector!);
     opts.tabContents = opts.context.find(opts.tabContentSelector!);
+
+    // Declarative options from data-opts on tab links
+    const urlArr: string[] = [];
+    opts.tabLinks.each((index, el) => {
+      const dataOpts = element.toOpts(el) as Partial<TabOptions> | undefined;
+      if (!dataOpts) return;
+      if (dataOpts.url) {
+        urlArr[index] = Array.isArray(dataOpts.url) ? String(dataOpts.url[index] ?? dataOpts.url[0]) : String(dataOpts.url);
+      }
+      if (dataOpts.active) {
+        opts.active = index;
+      }
+      if ((dataOpts as { disable?: boolean }).disable) {
+        new NaturalElement(el).addClass(opts.disabledClass!);
+      }
+      if (dataOpts.preload === true && opts.preload === false) {
+        opts.preload = true;
+      }
+    });
+    if (urlArr.length > 0) {
+      opts.url = urlArr;
+    }
 
     // Add base classes
     opts.context.addClass('tab__');

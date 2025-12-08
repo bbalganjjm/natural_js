@@ -4,7 +4,8 @@
  */
 
 import { NaturalElement, isBrowser, getDocument } from '@natural-js/shared';
-import { isString, isArray, isFunction, isPlainObject, isNumeric } from '@natural-js/core';
+import { isString, isArray, isFunction, isPlainObject, isNumeric, element } from '@natural-js/core';
+import { Formatter, Validator, type FormatRules, type ValidationRules } from '@natural-js/data';
 import { ListOptions, ListUserOptions, ListDataRow, RowStatus } from './types';
 
 export * from './types';
@@ -17,6 +18,8 @@ const DEFAULT_OPTIONS: Partial<ListOptions> = {
   multiselect: false,
   html: false,
   validate: true,
+  fRules: null,
+  vRules: null,
   revert: true,
   dataSync: true,
   selectedClass: 'list_selected__',
@@ -58,6 +61,44 @@ export class List {
       template.remove();
     }
 
+    // Extract declarative format/validate rules from data-* attributes
+    const bodyInputs = contextEl.find('input, select, textarea');
+    const declarativeFRules = element.toRules(
+      bodyInputs.get(),
+      'format'
+    ) as unknown as FormatRules | undefined;
+    const declarativeVRules = element.toRules(
+      bodyInputs.get(),
+      'validate'
+    ) as unknown as ValidationRules | undefined;
+
+    const mergedFRules: FormatRules | null =
+      (opts?.fRules as FormatRules | undefined) ||
+      (declarativeFRules && Object.keys(declarativeFRules).length > 0 ? declarativeFRules : null);
+    const mergedVRules: ValidationRules | null =
+      (opts?.vRules as ValidationRules | undefined) ||
+      (declarativeVRules && Object.keys(declarativeVRules).length > 0 ? declarativeVRules : null);
+
+    if (mergedVRules) {
+      for (const key in mergedVRules) {
+        const rules = mergedVRules[key];
+        if (!rules) continue;
+        let el = contextEl.find(`#${key}`);
+        if (el.length === 0) {
+          el = contextEl.find(`[name="${key}"]`);
+        }
+        if (el.length === 0) {
+          el = contextEl.find(`[data-bind="${key}"]`);
+        }
+        if (el.length > 0 && el.get(0)) {
+          const target = el.get(0) as HTMLElement;
+          if (!target.dataset.validate) {
+            target.dataset.validate = JSON.stringify(rules);
+          }
+        }
+      }
+    }
+
     this.options = {
       ...DEFAULT_OPTIONS,
       ...opts,
@@ -67,6 +108,8 @@ export class List {
       beforeRow: -1,
       rowElements: [],
       isBinding: false,
+      fRules: mergedFRules,
+      vRules: mergedVRules,
     } as ListOptions;
 
     // Add list class
@@ -197,7 +240,8 @@ export class List {
       if (key.startsWith('__') || key === 'rowStatus') continue;
 
       const value = rowData[key];
-      const valueStr = value === null || value === undefined ? '' : String(value);
+      const formattedValue = this.applyFormat(key, value);
+      const valueStr = formattedValue === null || formattedValue === undefined ? '' : String(formattedValue);
 
       // Find element by id, name, or data-bind
       let el = rowElement.find(`#${key}`);
@@ -237,6 +281,56 @@ export class List {
           el.text(valueStr);
         }
       }
+    }
+  }
+
+  /**
+   * Validate list rows using configured rules or required attributes.
+   */
+  validate(row?: number): boolean {
+    const opts = this.options;
+    const hasRules = opts.vRules && Object.keys(opts.vRules).length > 0;
+
+    if (hasRules) {
+      const validator = new Validator(opts.data, opts.vRules as ValidationRules);
+      const results = validator.validate(row);
+      return Validator.isValid(results);
+    }
+
+    // Fallback: required attribute check on current rows
+    const rowsToCheck = row === undefined ? opts.rowElements ?? [] : [opts.rowElements?.[row]].filter(Boolean);
+    let isValid = true;
+    rowsToCheck.forEach((rowEl) => {
+      rowEl?.find('[required]').each((_, el) => {
+        const input = el as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
+        const key = input.id || input.name;
+        const rowIndex = rowEl.data('index') as number | undefined;
+        const dataRow = rowIndex !== undefined ? opts.data[rowIndex] : undefined;
+        const value = dataRow ? dataRow[key] : undefined;
+        if (value === undefined || value === null || value === '') {
+          isValid = false;
+          new NaturalElement(input).addClass('list_invalid__');
+        } else {
+          new NaturalElement(input).removeClass('list_invalid__');
+        }
+      });
+    });
+
+    return isValid;
+  }
+
+  /**
+   * Apply formatting rules to a value if present.
+   */
+  private applyFormat(key: string, value: unknown): unknown {
+    const rules = this.options.fRules?.[key];
+    if (!rules) return value;
+    try {
+      const formatter = new Formatter([{ [key]: value }], { [key]: rules } as FormatRules);
+      const formatted = formatter.format(0);
+      return formatted[0]?.[key];
+    } catch (_e) {
+      return value;
     }
   }
 

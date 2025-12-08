@@ -3,12 +3,14 @@
  */
 
 import { NaturalElement, isBrowser } from '@natural-js/shared';
-import { isString, isFunction } from '@natural-js/core';
+import { isString, isFunction, element } from '@natural-js/core';
 import { ButtonOptions, ButtonUserOptions } from './types';
 
 export * from './types';
 
 const DEFAULT_OPTIONS: Partial<ButtonOptions> = {
+  size: 'none',
+  type: 'none',
   color: '',
   disabled: false,
   selector: 'button, input[type="button"], input[type="submit"], a.button',
@@ -61,46 +63,84 @@ export class Button {
    * Initialize button functionality.
    */
   private init(): void {
-    const opts = this.options;
-    const self = this;
+    const baseOpts = this.options;
 
-    // Add button class
-    this.buttons.addClass('btn_common__');
+    // Initialize each button individually to honor data-opts
+    this.buttons.each((_, el) => {
+      const btn = new NaturalElement(el);
+      const dataOpts = element.toOpts(el) as Partial<ButtonOptions> | undefined;
+      const opts = { ...baseOpts, ...dataOpts };
 
-    // Add color class if specified
-    if (opts.color) {
-      this.buttons.addClass(opts.color);
-    }
+      // Add button class
+      btn.addClass('btn_common__ button__');
 
-    // Apply initial disabled state
-    if (opts.disabled) {
-      this.disable();
-    }
-
-    // Bind click event
-    this.buttons.on('click.button', function (this: Element, e: Event) {
-      const button = new NaturalElement(this);
-
-      // Check if disabled
-      if (button.hasClass('btn_disabled__') || button.attr('disabled') === 'disabled') {
-        e.preventDefault();
-        e.stopPropagation();
-        return;
+      // Size classes
+      const sizeClass: Record<string, string> = {
+        none: '',
+        smaller: 'btn_smaller__',
+        small: 'btn_small__',
+        medium: 'btn_medium__',
+        large: 'btn_large__',
+        big: 'btn_big__',
+      };
+      const sizeKey = opts.size as keyof typeof sizeClass | undefined;
+      if (sizeKey && sizeClass[sizeKey]) {
+        btn.addClass(sizeClass[sizeKey]);
       }
 
-      // Call onBeforeClick
-      if (opts.onBeforeClick) {
-        const result = opts.onBeforeClick(e, button);
-        if (result === false) {
-          e.preventDefault();
-          return;
+      // Type classes
+      if (opts.type === 'outlined') {
+        btn.addClass('btn_outlined__');
+      } else if (opts.type === 'elevated') {
+        btn.addClass('btn_elevated__');
+      }
+
+      // Color class if specified
+      if (opts.color) {
+        btn.addClass(`btn_${opts.color}__`);
+        btn.addClass(opts.color);
+      }
+
+      const disabledFlag =
+        opts.disabled === true ||
+        opts.disable === true ||
+        opts.disabled === 'true' ||
+        opts.disable === 'true';
+
+      // Apply initial disabled state
+      if (disabledFlag) {
+        btn.addClass('btn_disabled__ disabled__');
+        btn.attr('disabled', 'disabled');
+        if (el instanceof HTMLButtonElement || el instanceof HTMLInputElement) {
+          el.disabled = true;
         }
       }
 
-      // Call onClick
-      if (opts.onClick) {
-        opts.onClick(e, button);
-      }
+      // Bind click event
+      btn.off('click.button').on('click.button', (e: Event) => {
+        // Check if disabled
+        if (btn.hasClass('btn_disabled__') || btn.attr('disabled') === 'disabled') {
+          e.preventDefault();
+          e.stopPropagation();
+          return;
+        }
+
+        if (opts.onBeforeClick) {
+          const result = opts.onBeforeClick(e, btn);
+          if (result === false) {
+            e.preventDefault();
+            return;
+          }
+        }
+
+        // active class for click feedback
+        btn.addClass('button_active__');
+        setTimeout(() => btn.removeClass('button_active__'), opts.animationDuration ?? 200);
+
+        if (opts.onClick) {
+          opts.onClick(e, btn);
+        }
+      });
     });
 
     // Store reference
@@ -125,7 +165,7 @@ export class Button {
    * Disable the button(s).
    */
   disable(): this {
-    this.buttons.addClass('btn_disabled__');
+    this.buttons.addClass('btn_disabled__ disabled__');
     this.buttons.attr('disabled', 'disabled');
     this.buttons.each((_, el) => {
       if (el instanceof HTMLButtonElement || el instanceof HTMLInputElement) {
@@ -139,7 +179,7 @@ export class Button {
    * Enable the button(s).
    */
   enable(): this {
-    this.buttons.removeClass('btn_disabled__');
+    this.buttons.removeClass('btn_disabled__ disabled__');
     this.buttons.removeAttr('disabled');
     this.buttons.each((_, el) => {
       if (el instanceof HTMLButtonElement || el instanceof HTMLInputElement) {
@@ -153,7 +193,14 @@ export class Button {
    * Check if the button(s) are disabled.
    */
   isDisabled(): boolean {
-    return this.buttons.hasClass('btn_disabled__') || this.buttons.attr('disabled') === 'disabled';
+    const elements = this.buttons.get();
+    for (const el of elements) {
+      const htmlEl = el as HTMLButtonElement | HTMLInputElement | undefined;
+      if (htmlEl && (htmlEl.disabled || htmlEl.hasAttribute('disabled'))) {
+        return true;
+      }
+    }
+    return this.buttons.hasClass('btn_disabled__') || this.buttons.hasClass('disabled__');
   }
 
   /**
@@ -189,9 +236,13 @@ export class Button {
    */
   destroy(): void {
     this.buttons.off('click.button');
-    this.buttons.removeClass('btn_common__ btn_disabled__');
+    this.buttons.removeClass(
+      'btn_common__ button__ btn_disabled__ disabled__ btn_outlined__ btn_elevated__ btn_smaller__ btn_small__ btn_medium__ btn_large__ btn_big__ button_active__'
+    );
+    this.buttons.removeAttr('disabled');
     if (this.options.color) {
       this.buttons.removeClass(this.options.color);
+      this.buttons.removeClass(`btn_${this.options.color}__`);
     }
     this.buttons.removeData('button');
   }

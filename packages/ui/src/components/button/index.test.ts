@@ -63,6 +63,19 @@ describe('Button', () => {
       const btn = new Button('#btn1', { disabled: true });
       expect(btn.isDisabled()).toBe(true);
     });
+
+    it('should parse data-opts for size/type/color/disable', () => {
+      const btnEl = document.getElementById('btn2') as HTMLElement;
+      btnEl.setAttribute('data-opts', '{"size":"large","type":"outlined","color":"primary","disable":true}');
+
+      const btn = new Button('#btn2');
+      const el = btn.getButtons();
+
+      expect(el.hasClass('btn_large__')).toBe(true);
+      expect(el.hasClass('btn_outlined__')).toBe(true);
+      expect(el.hasClass('btn_primary__')).toBe(true);
+      expect(btn.isDisabled()).toBe(true);
+    });
   });
 
   describe('disable()', () => {

@@ -39,23 +39,27 @@ export class Docs {
     }
 
     // Find or create tab and content containers
-    let tabContext = contextEl.find('.docs_tab_list__');
-    let contentContext = contextEl.find('.docs_content_area__');
+    let tabContext = contextEl.find('.docs_tab_list__, .docs_tabs__');
+    let contentContext = contextEl.find('.docs_content_area__, .docs_content__');
 
     const doc = getDocument();
     if (doc) {
       if (tabContext.length === 0) {
         const tabDiv = doc.createElement('div');
-        tabDiv.className = 'docs_tab_list__';
+        tabDiv.className = 'docs_tab_list__ docs_tabs__';
         contextEl.prepend(tabDiv);
         tabContext = new NaturalElement(tabDiv);
+      } else {
+        tabContext.addClass('docs_tabs__');
       }
 
       if (contentContext.length === 0) {
         const contentDiv = doc.createElement('div');
-        contentDiv.className = 'docs_content_area__';
+        contentDiv.className = 'docs_content_area__ docs_content__';
         contextEl.append(contentDiv);
         contentContext = new NaturalElement(contentDiv);
+      } else {
+        contentContext.addClass('docs_content__');
       }
     }
 
@@ -181,7 +185,7 @@ export class Docs {
 
     // Create content element
     const contentEl = doc.createElement('div');
-    contentEl.className = 'docs_content__';
+    contentEl.className = 'docs_content__ docs_panel__';
     contentEl.dataset['id'] = docId;
     contentEl.style.display = 'none';
 

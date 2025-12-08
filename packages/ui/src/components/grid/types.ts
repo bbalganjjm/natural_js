@@ -3,6 +3,7 @@
  */
 
 import { NaturalElement, RowStatus } from '@natural-js/shared';
+import { type FormatRules, type ValidationRules } from '@natural-js/data';
 
 // Re-export for convenience
 export type { RowStatus };
@@ -55,6 +56,10 @@ export interface GridOptions {
   html?: boolean;
   /** Whether to validate on blur */
   validate?: boolean;
+  /** Formatting rules (data-format fallback) */
+  fRules?: FormatRules | null;
+  /** Validation rules (data-validate fallback) */
+  vRules?: ValidationRules | null;
   /** Whether to enable revert functionality */
   revert?: boolean;
   /** Whether to enable DataSync */

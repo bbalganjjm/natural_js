@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Natural-UI CSS 클래스 누락 보완 (grid 고정 헤더/컬럼, tab link, form invalid, checked row 등)으로 신규 TypeScript 컴포넌트와 스타일 일치
 - 스타일 로딩 순서 안내 추가 (`tokens.css` → `light.css`/`dark.css` → `natural.ui.css`)로 테마 변수 초기화 문제 예방
+- data-* 선언형 옵션(data-format, data-validate, data-opts, data-sort/filter/rowspan) 파싱·동작을 TS 리라이트 컴포넌트에 이관
 
 ## [2.0.0-alpha.0] - 2024-12-05
 
