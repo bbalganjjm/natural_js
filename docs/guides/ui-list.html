@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UI List Demo</title>
+    <link rel="stylesheet" href="../../css/natural.ui.css" />
+    <link rel="stylesheet" href="./common.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "@natural-js/shared": "../../packages/shared/dist/index.js",
+          "@natural-js/core": "../../packages/core/dist/index.js",
+          "@natural-js/architecture": "../../packages/architecture/dist/index.js",
+          "@natural-js/data": "../../packages/data/dist/index.js",
+          "@natural-js/ui": "../../packages/ui/dist/index.js",
+          "@natural-js/ui-shell": "../../packages/ui-shell/dist/index.js",
+          "@natural-js/template": "../../packages/template/dist/index.js",
+          "@natural-js/code": "../../packages/code/dist/index.js"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="page">
+      <nav>
+        <h1>UI List</h1>
+        <ul><li><a href="./index.html">← 돌아가기</a></li></ul>
+      </nav>
+      <main>
+        <div class="banner">
+          <p class="tag">select · multiselect · checkAll · scrollPaging</p>
+          <p>단일/다중 선택, 체크박스, 스크롤 페이징을 확인합니다.</p>
+        </div>
+
+        <div class="grid">
+          <div class="card">
+            <h2>기본 List</h2>
+            <div class="toolbar">
+              <label><input type="checkbox" id="list-check-all" /> 전체선택</label>
+              <button class="btn" id="btn-list-bind">bind()</button>
+              <button class="btn" id="btn-list-select">select(1)</button>
+              <button class="btn" id="btn-list-data">data(\"selected\")</button>
+            </div>
+            <ul id="list-demo" class="list__" style="padding-left:0;">
+              <li>
+                <input class="row-check" type="checkbox" />
+                <span id="name"></span> /
+                <span id="age"></span> /
+                <span id="email"></span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h2>Scroll Paging</h2>
+            <ul id="list-scroll" class="list__" style="padding-left:0; max-height:180px; overflow:auto;">
+              <li>
+                <span id="name"></span>
+              </li>
+            </ul>
+            <div class="toolbar">
+              <button class="btn" id="btn-list-scroll-bind">scroll bind</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="console" id="console"></div>
+      </main>
+    </div>
+
+    <script type="module">
+      import * as N from '../../packages/natural/dist/index.js';
+      import { log, mockData } from './common.js';
+
+      const list = new N.List('#list-demo', {
+        data: mockData.people,
+        select: true,
+        multiselect: true,
+        checkAll: '#list-check-all',
+        checkAllTarget: '.row-check',
+      });
+
+      const many = Array.from({ length: 50 }).map((_, idx) => ({
+        name: `User${idx}`,
+      }));
+      const listScroll = new N.List('#list-scroll', {
+        data: many,
+        scrollPaging: { size: 10 },
+      });
+
+      document.getElementById('btn-list-bind').addEventListener('click', () => {
+        list.bind();
+        log('list bind');
+      });
+      document.getElementById('btn-list-select').addEventListener('click', () => {
+        list.select(1);
+        log('list select 1');
+      });
+      document.getElementById('btn-list-data').addEventListener('click', () => {
+        log('selected', JSON.stringify(list.data('selected')));
+      });
+      document.getElementById('btn-list-scroll-bind').addEventListener('click', () => {
+        listScroll.bind();
+        log('scroll bind');
+      });
+
+      list.bind();
+      listScroll.bind();
+    </script>
+  </body>
+  </html>
+

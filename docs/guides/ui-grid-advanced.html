@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UI Grid Advanced Demo</title>
+    <link rel="stylesheet" href="../../css/natural.ui.css" />
+    <link rel="stylesheet" href="./common.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "@natural-js/shared": "../../packages/shared/dist/index.js",
+          "@natural-js/core": "../../packages/core/dist/index.js",
+          "@natural-js/architecture": "../../packages/architecture/dist/index.js",
+          "@natural-js/data": "../../packages/data/dist/index.js",
+          "@natural-js/ui": "../../packages/ui/dist/index.js",
+          "@natural-js/ui-shell": "../../packages/ui-shell/dist/index.js",
+          "@natural-js/template": "../../packages/template/dist/index.js",
+          "@natural-js/code": "../../packages/code/dist/index.js"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="page">
+      <nav>
+        <h1>UI Grid (Advanced)</h1>
+        <ul><li><a href="./index.html">← 돌아가기</a></li></ul>
+      </nav>
+      <main>
+        <div class="banner">
+          <p class="tag">sortable · filter · rowspan · resizable · data-format/validate</p>
+          <p>고급 옵션과 data-* 선언형을 모두 시연합니다.</p>
+        </div>
+
+        <div class="card">
+          <h2>Grid</h2>
+          <table id="grid-adv" class="grid__" style="width:100%;">
+            <thead>
+              <tr>
+                <th data-sort="name">이름</th>
+                <th data-sort="email" data-filter="true">이메일</th>
+                <th data-sort="eyeColor" data-filter="true">눈색</th>
+                <th data-sort="age">나이</th>
+                <th data-rowspan="true">Active</th>
+                <th data-sort="registered">가입일</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td id="name" data-format='[["capitalize"]]'></td>
+                <td id="email" data-validate='[["required"],["email"]]'></td>
+                <td id="eyeColor"></td>
+                <td id="age" data-validate='[["integer"]]'></td>
+                <td id="isActive"></td>
+                <td id="registered" data-format='[["date",8,"date"]]'></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="toolbar">
+            <button class="btn" id="btn-adv-bind">bind()</button>
+            <button class="btn" id="btn-adv-add">add()</button>
+            <button class="btn" id="btn-adv-validate">validate()</button>
+            <button class="btn" id="btn-adv-data">data(\"modified\")</button>
+          </div>
+        </div>
+
+        <div class="console" id="console"></div>
+      </main>
+    </div>
+
+    <script type="module">
+      import * as N from '../../packages/natural/dist/index.js';
+      import { log, mockData } from './common.js';
+
+      const grid = new N.Grid('#grid-adv', {
+        data: mockData.people,
+        sortable: true,
+        filter: true,
+        resizable: true,
+        validate: true,
+        vResizable: true,
+      });
+
+      document.getElementById('btn-adv-bind').addEventListener('click', () => {
+        grid.bind(mockData.people);
+        log('grid bind');
+      });
+      document.getElementById('btn-adv-add').addEventListener('click', () => {
+        grid.add();
+        log('grid add');
+      });
+      document.getElementById('btn-adv-validate').addEventListener('click', () => {
+        const res = grid.validate();
+        log('grid validate', JSON.stringify(res));
+      });
+      document.getElementById('btn-adv-data').addEventListener('click', () => {
+        log('grid modified', JSON.stringify(grid.data('modified')));
+      });
+
+      grid.bind(mockData.people);
+    </script>
+  </body>
+  </html>
+

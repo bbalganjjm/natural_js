@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UI Pagination Demo</title>
+    <link rel="stylesheet" href="../../css/natural.ui.css" />
+    <link rel="stylesheet" href="./common.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "@natural-js/shared": "../../packages/shared/dist/index.js",
+          "@natural-js/core": "../../packages/core/dist/index.js",
+          "@natural-js/architecture": "../../packages/architecture/dist/index.js",
+          "@natural-js/data": "../../packages/data/dist/index.js",
+          "@natural-js/ui": "../../packages/ui/dist/index.js",
+          "@natural-js/ui-shell": "../../packages/ui-shell/dist/index.js",
+          "@natural-js/template": "../../packages/template/dist/index.js",
+          "@natural-js/code": "../../packages/code/dist/index.js"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="page">
+      <nav>
+        <h1>UI Pagination</h1>
+        <ul><li><a href="./index.html">← 돌아가기</a></li></ul>
+      </nav>
+      <main>
+        <div class="banner">
+          <p class="tag">pageNo · totalCount · countPerPage · onChange</p>
+          <p>페이지 변경 시 mock 데이터를 잘라서 표시합니다.</p>
+        </div>
+
+        <div class="grid">
+          <div class="card">
+            <h2>Pagination</h2>
+            <div id="pager" class="pagination__"></div>
+            <div class="toolbar">
+              <button class="btn" id="btn-page-1">pageNo(1)</button>
+              <button class="btn" id="btn-page-3">pageNo(3)</button>
+              <button class="btn" id="btn-count-5">countPerPage=5</button>
+            </div>
+            <ul id="page-data" style="padding-left:16px;"></ul>
+          </div>
+        </div>
+
+        <div class="console" id="console"></div>
+      </main>
+    </div>
+
+    <script type="module">
+      import * as N from '../../packages/natural/dist/index.js';
+      import { log, mockData, renderList } from './common.js';
+
+      const pager = new N.Pagination('#pager', {
+        totalCount: mockData.people.length,
+        countPerPage: 3,
+        onChange: (pageNo, info) => render(pageNo, info.countPerPage),
+      });
+
+      function render(pageNo, countPerPage) {
+        const start = (pageNo - 1) * countPerPage;
+        const data = mockData.people.slice(start, start + countPerPage);
+        renderList(document.getElementById('page-data'), data, (u) => `${u.name} (${u.email})`);
+        log('render page', pageNo, 'countPerPage', countPerPage);
+      }
+
+      document.getElementById('btn-page-1').addEventListener('click', () => pager.pageNo(1));
+      document.getElementById('btn-page-3').addEventListener('click', () => pager.pageNo(3));
+      document.getElementById('btn-count-5').addEventListener('click', () => {
+        pager.countPerPage(5).bind();
+        render(1, 5);
+      });
+
+      // 초기 렌더
+      render(1, pager.options.countPerPage);
+    </script>
+  </body>
+  </html>
+

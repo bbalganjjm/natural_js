@@ -13,8 +13,10 @@
 - `index.html`: 네비게이션 및 버전 확인
 - `architecture-core.html`: Context 설정, AOP(advisors), Comm 필터, Core 유틸
 - `data.html`: Formatter/Validator, data-format/data-validate 선언형, data.filter/sort
-- `ui-form-list-grid.html`: Form/List/Grid/Pagination, data-sort/filter/rowspan, data-format/validate
-- `ui-controls.html`: Button/Tab/Select/Datepicker/Alert/Popup/Notify/Tree, data-opts
+- UI 컴포넌트 단일 페이지들:
+  - `ui-form.html`, `ui-list.html`, `ui-grid-advanced.html`, `ui-pagination.html`
+  - `ui-button.html`, `ui-alert.html`, `ui-popup.html`, `ui-select.html`, `ui-datepicker.html`, `ui-tab.html`, `ui-tree.html`, `ui-notify.html`
+- `ui-controls.html`: 혼합 컨트롤 샘플(간략 모음)
 - `template-ts-shell.html`: Template p./c./e. 자동 초기화 데모, jsdoc 타입 안내, UI Shell Notify
 
 ## 테스트 체크리스트

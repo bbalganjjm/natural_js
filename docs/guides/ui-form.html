@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UI Form Demo</title>
+    <link rel="stylesheet" href="../../css/natural.ui.css" />
+    <link rel="stylesheet" href="./common.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "@natural-js/shared": "../../packages/shared/dist/index.js",
+          "@natural-js/core": "../../packages/core/dist/index.js",
+          "@natural-js/architecture": "../../packages/architecture/dist/index.js",
+          "@natural-js/data": "../../packages/data/dist/index.js",
+          "@natural-js/ui": "../../packages/ui/dist/index.js",
+          "@natural-js/ui-shell": "../../packages/ui-shell/dist/index.js",
+          "@natural-js/template": "../../packages/template/dist/index.js",
+          "@natural-js/code": "../../packages/code/dist/index.js"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="page">
+      <nav>
+        <h1>UI Form</h1>
+        <ul><li><a href="./index.html">← 돌아가기</a></li></ul>
+      </nav>
+      <main>
+        <div class="banner">
+          <p class="tag">bind · add · revert · data-format/data-validate</p>
+          <p>Form 주요 옵션과 선언형 포맷/검증을 확인합니다.</p>
+        </div>
+
+        <div class="card">
+          <h2>Form</h2>
+          <table id="form-demo" class="form__" style="width:100%; border-spacing:8px;">
+            <tr>
+              <th><label for="name">이름</label></th>
+              <td><input id="name" type="text" data-validate='[["required"]]' data-format='[["capitalize"]]' value="alice" /></td>
+            </tr>
+            <tr>
+              <th><label for="email">이메일</label></th>
+              <td><input id="email" type="text" data-validate='[["required"],["email"]]' value="alice@example.com" /></td>
+            </tr>
+            <tr>
+              <th><label for="registered">가입일</label></th>
+              <td><input id="registered" type="text" data-format='[["date",8,"date"]]' value="20240102" /></td>
+            </tr>
+          </table>
+          <div class="toolbar">
+            <button class="btn" id="btn-form-bind">bind</button>
+            <button class="btn" id="btn-form-add">add()</button>
+            <button class="btn" id="btn-form-validate">validate</button>
+            <button class="btn" id="btn-form-revert">revert</button>
+            <button class="btn" id="btn-form-data">data()</button>
+          </div>
+        </div>
+
+        <div class="console" id="console"></div>
+      </main>
+    </div>
+
+    <script type="module">
+      import * as N from '../../packages/natural/dist/index.js';
+      import { log, mockData } from './common.js';
+
+      const form = new N.Form(mockData.people.slice(0, 1), { context: '#form-demo', revert: true });
+
+      document.getElementById('btn-form-bind').addEventListener('click', () => {
+        form.bind();
+        log('form bind');
+      });
+      document.getElementById('btn-form-add').addEventListener('click', () => {
+        form.add();
+        log('form add');
+      });
+      document.getElementById('btn-form-validate').addEventListener('click', () => {
+        const res = form.validate();
+        log('form validate', JSON.stringify(res));
+      });
+      document.getElementById('btn-form-revert').addEventListener('click', () => {
+        form.revert();
+        log('form revert');
+      });
+      document.getElementById('btn-form-data').addEventListener('click', () => {
+        log('form data', JSON.stringify(form.data(true)));
+      });
+
+      form.bind();
+    </script>
+  </body>
+  </html>
+
