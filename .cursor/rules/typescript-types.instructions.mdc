@@ -1,0 +1,16 @@
+---
+alwaysApply: true
+---
+# TypeScript Type Definition Instructions (Natural-JS)
+
+## 엔트리/구조
+- 단일 엔트리: `@types/index.d.ts`가 모든 `*.d.ts`를 `/// <reference path=...>`로 연결한다.
+- 수정은 **해당 모듈의 d.ts**에서 하고, 필요 시 `index.d.ts` 참조 체인을 갱신한다.
+
+## 검증(타입 기반)
+- 타입 변경 시 `@types/natural_js-tests.ts`에 **최소 사용 예**를 추가/수정해 컴파일로 검증한다.
+- 이 레포의 `tsconfig.json`은 `noEmit`이므로 “컴파일 통과”가 곧 타입 검증이다.
+
+## 원칙
+- 공개 API 변경/추가 시 타입과 실제 구현(`src/`)이 불일치하지 않게 동기화한다.
+- `any` 확산을 피하고, 기존 선언 스타일(네임스페이스/타입 별칭/오버로드)을 유지한다.

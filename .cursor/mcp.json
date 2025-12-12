@@ -1,0 +1,33 @@
+{
+    "mcpServers": {
+        "memory": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@modelcontextprotocol/server-memory"
+            ],
+            "env": {
+                "MEMORY_FILE_PATH": "/Users/a11331/IdeaProjects/natural_js/.memory/memory.json"
+            }
+        },
+        "shrimp-task-manager": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "mcp-shrimp-task-manager"
+            ],
+            "env": {
+                "DATA_DIR": "/Users/a11331/IdeaProjects/natural_js/.shrimp",
+                "TEMPLATES_USE": "en",
+                "ENABLE_GUI": "true"
+            }
+        },
+        "context7": {
+            "command": "npx",
+            "args": ["-y", "@upstash/context7-mcp"],
+            "env": {
+                "DEFAULT_MINIMUM_TOKENS": "6000"
+            }
+        }
+    }
+}

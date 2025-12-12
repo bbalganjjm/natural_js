@@ -1,0 +1,21 @@
+---
+alwaysApply: true
+---
+# Code Change & Debugging Instructions (Natural-JS)
+
+## Spec‑TDD(최소 절차)
+1) **Spec**: 목표/비목표/제약(ES5+, 의존성, 하위호환)을 5줄 이내로 고정
+2) **Test(또는 재현)**: 실패를 재현 가능한 형태로 만든다(우선순위: `@types/natural_js-tests.ts` → 최소 재현 스니펫)
+3) **Code**: `src/`에서 최소 수정(기존 패턴/포맷 유지)
+4) **Refactor**: 공개 API/호환성 유지, 중복 제거
+5) **Build 확인**: 필요 시 `compiler/*.sh`로 `dist/` 갱신
+
+## 디버깅 관례
+- **View 컨텍스트**: 컨트롤러 내부에서 DOM 선택은 `view` 컨텍스트를 우선 사용(다른 블록 페이지 오염 방지).
+- **인스턴스 접근**: 컴포넌트 인스턴스는 `.instance("<name>")`로 얻고, key는 `<name>__` 관례를 유지.
+- **이벤트 네임스페이스**: 기존 네임스페이스를 유지하고(예: `.form.dataSync`) 무분별한 전역 바인딩을 피한다.
+
+## 완료 조건(체크)
+- 타입 검증이 통과한다(`tsconfig.json` 기준).
+- 필요 시 번들 빌드가 생성되고(`dist/`), 수동 편집이 없었다.
+- 변경이 공개 API에 영향이면 `@types/`와 `docs/`가 함께 갱신됐다.

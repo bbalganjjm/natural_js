@@ -1,0 +1,21 @@
+---
+alwaysApply: true
+---
+# Project Structure Instructions (Natural-JS)
+
+## 수정 위치
+- **코드**: `src/`
+- **타입**: `@types/`
+- **가이드/레퍼런스**: `docs/`
+- **스타일**: `css/`
+- **외부 라이브러리**: `lib/`
+
+## 산출물(수정 금지)
+- `dist/`의 `*.min.js`, `*.map`은 **빌드 산출물**(수동 편집 금지).
+
+## 빌드
+- 레포 루트에서 `compiler/*.sh` 실행 → `dist/` 갱신.
+
+## 패키지 구조(개념)
+- CORE/ARCHITECTURE/DATA/UI/UI.Shell(+ TEMPLATE/CODE)
+- 진입점: `src/natural.js.js`가 `NC/NA/ND/NU/NUS`를 합치고 `N()`/`N`으로 노출.

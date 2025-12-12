@@ -1,0 +1,23 @@
+---
+alwaysApply: true
+---
+# Naming Instructions (Natural-JS)
+
+## 공개 엔트리/약어
+- **글로벌**: `N()` 함수 + `N` 네임스페이스(`window.N`).
+- **패키지 클래스**: `NC`(CORE), `NA`(ARCHITECTURE), `ND`(DATA), `NU`(UI), `NUS`(UI.Shell).
+
+## 코드 네이밍
+- **내부/헬퍼**: `_` 접미는 내부 유틸/헬퍼에 사용(예: `remove_`).
+- **인스턴스 키**: 컴포넌트/라이브러리 인스턴스는 `name + "__"` 형태로 `data()`에 저장/조회.
+
+## 컨트롤러 오브젝트 키
+- **프로퍼티(프리픽스)**: `p.<type>.<id>` (예: `p.grid.userList`, `p.form.userDetail`, `p.select.country`)
+- **커뮤니케이션(프리픽스)**: `c.<name>` (예: `c.getUserList`)
+
+## CSS/DOM 클래스 네이밍
+- `__` 접미 클래스(예: `grid__`, `list__`, `visible__`, `hidden__`)는 스타일/상태 표기로 사용되므로 관례를 유지한다.
+
+## pageid 주의
+- `N(".view").cont()` 실행 시 `data-pageid`가 생성된다.
+- `.` `#` `[` `]` `'` `"` `:` `(` `)` `>` 공백 `-` 문자는 pageid 생성 과정에서 제거되므로, **page 식별자 설계 시 피한다**.
