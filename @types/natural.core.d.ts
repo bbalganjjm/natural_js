@@ -155,39 +155,39 @@ declare class NC {
     /**
      * Logs the `debug` level messages to the console.
      *
-     * @param {...any} obj - The items to log to the console. They can be of any type and multiple arguments can be passed.
+     * @param {...unknown[]} obj - The items to log to the console. They can be of any type and multiple arguments can be passed.
      * @return {Console} Displays the contents of the provided item in the browser console.
      *
      * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0101.html&tab=html/naturaljs/refr/refr010103.html
      */
-    static debug(...obj: any): Console;
+    static debug(...obj: unknown[]): Console;
     /**
      * Logs the messages to the console.
      *
-     * @param {...any} obj - The items to log to the console. They can be of any type and multiple arguments can be passed.
+     * @param {...unknown[]} obj - The items to log to the console. They can be of any type and multiple arguments can be passed.
      * @return {Console} Displays the contents of the provided item in the browser console.
      *
      * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0101.html&tab=html/naturaljs/refr/refr010104.html
      */
-    static log(...obj: any): Console;
+    static log(...obj: unknown[]): Console;
     /**
      * Logs the `info` level messages to the console.
      *
-     * @param {...any} obj - The items to log to the console. They can be of any type and multiple arguments can be passed.
+     * @param {...unknown[]} obj - The items to log to the console. They can be of any type and multiple arguments can be passed.
      * @return {Console} Displays the contents of the provided item in the browser console.
      *
      * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0101.html&tab=html/naturaljs/refr/refr010104.html
      */
-    static info(...obj: any): Console;
+    static info(...obj: unknown[]): Console;
     /**
      * Logs the `warning` level messages to the console.
      *
-     * @param {...any} obj - The items to log to the console. They can be of any type and multiple arguments can be passed.
+     * @param {...unknown[]} obj - The items to log to the console. They can be of any type and multiple arguments can be passed.
      * @return {Console} Displays the contents of the provided item in the browser console.
      *
      * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0101.html&tab=html/naturaljs/refr/refr010104.html
      */
-    static warn(...obj: any): Console;
+    static warn(...obj: unknown[]): Console;
     /**
      * Throws an error and logs the error message to the browser console.
      *
@@ -206,86 +206,86 @@ declare class NC {
     /**
      * Identifies the type of an object.
      *
-     * @param {any} obj - The object to identify the type of.
+     * @param {unknown} obj - The object to identify the type of.
      * @return {NC.ObjectType | string} The identified type of the object, either as an NC.ObjectType or a string.
      *
      * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0101.html&tab=html/naturaljs/refr/refr010104.html
      */
-    static type(obj: any): NC.ObjectType | string;
+    static type(obj: unknown): NC.ObjectType | string;
     /**
      * Determines if the provided object is a string.
      *
-     * @param {any} obj - The object to check.
+     * @param {unknown} obj - The object to check.
      * @return {boolean} true if the value is a string; otherwise, false.
      *
      * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0101.html&tab=html/naturaljs/refr/refr010104.html
      */
-    static isString(obj: any): boolean;
+    static isString(obj: unknown): boolean;
     /**
      * Determines if the provided object is a numeric.
      *
-     * @param {any} obj - The object to check.
+     * @param {unknown} obj - The object to check.
      * @return {boolean} true if the value is a numeric; otherwise, false.
      *
      * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0101.html&tab=html/naturaljs/refr/refr010104.html
      */
-    static isNumeric(obj: any): boolean;
+    static isNumeric(obj: unknown): boolean;
     /**
      * Determines if a given object is a plain object.
      * A plain object is one that is created by the Object constructor or one with a prototype of null.
      *
-     * @param {any} obj - The object to test.
+     * @param {unknown} obj - The object to test.
      * @return {boolean} true if the object is a plain object, false otherwise.
      *
      * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0101.html&tab=html/naturaljs/refr/refr010104.html
      */
-    static isPlainObject(obj: any): boolean;
+    static isPlainObject(obj: unknown): boolean;
     /**
      * Checks if the given object is empty (i.e., has no own enumerable properties).
      *
-     * @param {object} obj - The object to check for emptiness.
+     * @param {unknown} obj - The object to check for emptiness.
      * @return {boolean} Returns true if the object is empty, false otherwise.
      *
      * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0101.html&tab=html/naturaljs/refr/refr010104.html
      */
-    static isEmptyObject(obj: any): boolean;
+    static isEmptyObject(obj: unknown): boolean;
     /**
      * Determines if the given object is an array.
      *
-     * @param {any} obj - The object to be checked.
+     * @param {unknown} obj - The object to be checked.
      * @return {boolean} true if the object is an array, otherwise false.
      *
      * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0101.html&tab=html/naturaljs/refr/refr010104.html
      */
-    static isArray(obj: any): boolean;
+    static isArray(obj: unknown): boolean;
     /**
      * Checks if the given object is array-like.
      * An object is considered array-like if it is not a function and has a `length` property that is a number.
      *
-     * @param {any} obj - The object to check.
+     * @param {unknown} obj - The object to check.
      * @return {boolean} - Returns `true` if the object is array-like, otherwise returns `false`.
      *
      * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0101.html&tab=html/naturaljs/refr/refr010104.html
      */
-    static isArraylike(obj: any): boolean;
+    static isArraylike(obj: unknown): boolean;
     /**
      * Checks if the given object is of type jQuery object.
      *
-     * @param {any} obj - The object to check.
+     * @param {unknown} obj - The object to check.
      * @return {boolean} true if the object is a jQuery object, otherwise false.
      *
      * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0101.html&tab=html/naturaljs/refr/refr010104.html
      */
-    static isWrappedSet(obj: any): boolean;
+    static isWrappedSet(obj: unknown): boolean;
     /**
      * Determines if the provided object is a DOM element.
      *
-     * @param {any} obj - The object to check.
+     * @param {unknown} obj - The object to check.
      * @return {boolean} true if the object is a DOM element, otherwise false.
      *
      * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0101.html&tab=html/naturaljs/refr/refr010104.html
      */
-    static isElement(obj: any): boolean;
+    static isElement(obj: unknown): boolean;
     /**
      * Converts a given element, array of elements, or any input to a CSS selector string.
      *
@@ -598,16 +598,31 @@ declare class NC {
      */
     static element: {
         /**
-         * Converts an object string defined by the `data-opts` attribute value of an HTML element to an options object.
+         * Converts the value stored in the `opts` data key of an HTML element to an options-like value.
+         *
+         * > Implementation: `return N(ele).data("opts");`
+         *
+         * Since jQuery's `.data()` returns `any`, this method returns `unknown` for type safety.
+         * Use type guards or type assertions when using the returned value.
          *
          * @param {NJS<HTMLElement[]>} ele - HTML elements to be converted.
-         * @return {string} Options object.
+         * @return {unknown} Options-like value stored in `data("opts")`. Use type guards to narrow the type.
+         *
+         * @example
+         * ```typescript
+         * const opts = N.element.toOpts(N("#myElement"));
+         * if (typeof opts === 'object' && opts !== null) {
+         *     // Type-safe usage with type guard
+         *     const typedOpts = opts as { width?: number };
+         *     console.log(typedOpts.width);
+         * }
+         * ```
          *
          * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0101.html&tab=html/naturaljs/refr/refr010107.html
          */
-        toOpts(ele: NJS<HTMLElement[]>): string;
+        toOpts(ele: NJS<HTMLElement[]>): unknown;
         /**
-         * Converts an array object string defined by the `data-format` or `data-validate` attribute value of an HTML element to an rule array object.
+         * Converts an array-like rule definition string from the `data-format` or `data-validate` attribute into a rule array object.
          *
          * @param {NJS<HTMLElement[]>} ele - HTML elements to be converted.
          * @param {"format" | "validate"} ruleset - The type of rules to be applied, either formatting or validation.
@@ -617,11 +632,11 @@ declare class NC {
          */
         toRules(ele: NJS<HTMLElement[]>, ruleset: "format" | "validate"): NC.RuleObj;
         /**
-         * Creates a JSON Data object with the id and value attributes of the specified input elements.
+         * Creates a JSON data object using the id/value attributes of the specified input elements.
          *
          * > Used in the N.form's add method to create initial data.
          *
-         * e.g. Convert the values of the input elements inside the #box element to JSON data.
+         * e.g. Convert the values of input elements inside the #box element to JSON data.
          * ```
          * var data = N.element.toData($("#box").find(":input"));
          * ```
@@ -634,7 +649,7 @@ declare class NC {
         toData(eles: NJS<HTMLElement[]>): NC.JSONObject;
 
         /**
-         * The effect of changes displayed on elements when data is synchronized by ND.ds is defined.
+         * Defines the visual effect applied to elements when data is synchronized by ND.ds.
          *
          * @param {NJS<HTMLElement[]>} eles - HTML elements on which the change effect will be displayed.
          * @return {void} This method does not return a value.
@@ -674,13 +689,13 @@ declare class NC {
          *
          * @param {string} name - The name of the cookie to remove.
          * @param {string} [domain] - The domain from which the cookie is to be removed. If omitted, the current domain is assumed.
-         * @return {void} This method does not return anything.
+         * @return {void} This method does not return a value.
          *
          * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0101.html&tab=html/naturaljs/refr/refr010109.html
          */
         removeCookie(name: string, domain?: string): void;
         /**
-         * Function to retrieve the version of Microsoft Internet Explorer (IE).
+         * Retrieves the version of Microsoft Internet Explorer (IE).
          *
          * This function detects the version of IE being used by the client and returns
          * it as a number. If the browser is not Internet Explorer, it returns 0.

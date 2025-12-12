@@ -204,7 +204,6 @@ declare namespace NA {
             }
 
             interface BaseObject {
-                [key: string]: any;
                 /**
                  * The initializer function that is called to set up the initial state or configuration.
                  * This function is optional, and if provided, it should follow the signature defined by `InitFunction`.
@@ -223,10 +222,10 @@ declare namespace NA {
                  */
                 request?: NA.Request;
                 /**
-                 * If the popup page is called by N.popup or N.tab components, this is the instance of the calling component.
+                 * If the page is called by N.popup / N.tab / N.docs components, this is the instance of the calling component.
                  * With this instance, you can control the parent page.
                  */
-                caller?: NU.Popup & NU.Tab; // FIXME
+                caller?: NU.Popup | NU.Tab | NUS.Documents;
                 /**
                  * If the popup page is called by N.popup or N.tab components, this is the controller object instance of the parent page.
                  *
@@ -239,6 +238,11 @@ declare namespace NA {
                  * This is a function implementation of the onOpen option specified as a string in pop-ups and tabs.
                  */
                 onOpen?: Callbacks.Controller.OnOpen;
+                /**
+                 * Index signature to allow custom properties on the controller object.
+                 * Use `unknown` for type safety - requires type guards or assertions when accessing custom properties.
+                 */
+                [key: string]: unknown;
             }
 
             type Object = BaseObject & (NT.Objects.Controller.InitialObject | {});

@@ -115,7 +115,7 @@ declare namespace NU {
             /**
              * Height of the content of the message dialog excluding the title area.
              *  - number: When set to the number type, the entered number (px) is set as the height of the element.
-             *  - NU.EventHandlers.Alert.Height: function 타입으로 설정할 경우 msgContext(modal 옵션이 true 일 때 화면에 덮는 요소), msgContents(메시지 콘텐츠 요소)가 인수로 전달되고 return 된 값으로 요소의 높이가 설정됩니다.
+             *  - NU.EventHandlers.Alert.Height: When set to a function, msgContext (the overlay element when modal is true) and msgContents (the message content element) are passed as arguments, and the element height is set to the returned value.
              *    ```
              *    ...
              *    // fill the height of the dialog to fill the screen
@@ -907,7 +907,7 @@ declare namespace NU {
             /**
              * Height of the content of the popup excluding the title area.
              *  - number: When set to the number type, the entered number (px) is set as the height of the element.
-             *  - NU.EventHandlers.Popup.Height: function 타입으로 설정할 경우 msgContext(modal 옵션이 true 일 때 화면에 덮는 요소), msgContents(메시지 콘텐츠 요소)가 인수로 전달되고 return 된 값으로 요소의 높이가 설정됩니다.
+             *  - NU.EventHandlers.Popup.Height: When set to a function, msgContext (the overlay element when modal is true) and msgContents (the message content element) are passed as arguments, and the element height is set to the returned value.
              *    ```
              *    ...
              *    // fill the height of the popup to fill the screen

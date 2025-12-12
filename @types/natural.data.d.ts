@@ -200,7 +200,7 @@ declare class ND {
          */
         commas(str: string): string;
         /**
-         * Convert to South Korea's resident registration number format.
+         * Converts to the South Korean resident registration number format.
          *
          * @param {string} str - The string to be formatted.
          * @param {[number, string]} args - Replaces the entered string with the specified character.
@@ -212,7 +212,7 @@ declare class ND {
          */
         rrn(str: string, args: [number, string]): string;
         /**
-         * Convert to US Social Security number format.
+         * Converts to the US Social Security number format.
          *
          * @param {string} str - The string to be formatted.
          * @return {string} The formatted string.
@@ -221,7 +221,7 @@ declare class ND {
          */
         ssn(str: string): string;
         /**
-         * Convert to South Korea's business registration number format.
+         * Converts to the South Korean business registration number format.
          *
          * @param {string} str - The string to be formatted.
          * @return {string} The formatted string.
@@ -230,7 +230,7 @@ declare class ND {
          */
         kbrn(str: string): string;
         /**
-         * Convert to South Korea's corporate number format.
+         * Converts to the South Korean corporate number format.
          *
          * @param {string} str - The string to be formatted.
          * @return {string} The formatted string.
@@ -239,7 +239,7 @@ declare class ND {
          */
         kcn(str: string): string;
         /**
-         * Convert to uppercase.
+         * Converts to uppercase.
          *
          * @param {string} str - The string to be formatted.
          * @return {string} The formatted string.
@@ -248,7 +248,7 @@ declare class ND {
          */
         upper(str: string): string;
         /**
-         * Convert to lowercase.
+         * Converts to lowercase.
          *
          * @param {string} str - The string to be formatted.
          * @return {string} The formatted string.
@@ -266,7 +266,7 @@ declare class ND {
          */
         capitalize(str: string): string;
         /**
-         * Convert to South Korea's zip code format.
+         * Converts to the South Korean zip code format.
          *
          * @param {string} str - The string to be formatted.
          * @return {string} The formatted string.
@@ -275,7 +275,7 @@ declare class ND {
          */
         zipcode(str: string): string;
         /**
-         * Convert to South Korea's phone number format.
+         * Converts to the South Korean phone number format.
          *
          * @param {string} str - The string to be formatted.
          * @return {string} The formatted string.
@@ -284,7 +284,7 @@ declare class ND {
          */
         phone(str: string): string;
         /**
-         * Remove meaningless zeros.
+         * Removes unnecessary zeros.
          *  - 0100.0 -> 100
          *  - 0100.10 -> 100.1
          *
@@ -367,7 +367,7 @@ declare class ND {
             ele?: NJS<HTMLElement[]>,
         ): string;
         /**
-         * Convert to time format.
+         * Converts to a time format.
          *
          * @param {string} str - The string to be formatted.
          * @param {[number]} [args] - Specifies the time format.

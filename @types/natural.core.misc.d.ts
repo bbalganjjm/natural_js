@@ -6,6 +6,38 @@ declare namespace NC {
     }
 
     /**
+     * Generic callback function that accepts unknown arguments and returns unknown value.
+     * Use this for callbacks where the signature is not strictly defined.
+     */
+    type AnyCallback = (...args: unknown[]) => unknown;
+
+    /**
+     * Callback function that accepts unknown arguments and returns void.
+     * Use this for event handlers and side-effect callbacks.
+     */
+    type VoidCallback = (...args: unknown[]) => void;
+
+    /**
+     * Represents element-like values that can be used as element references.
+     * Includes NJS collections, native HTMLElement, and arrays of HTMLElement.
+     */
+    type ElementLike = NJS<HTMLElement[]> | HTMLElement | HTMLElement[];
+
+    /**
+     * Represents values that can be used as element selectors.
+     * Includes CSS selector strings and element-like values.
+     */
+    type ElementSelector = string | ElementLike;
+
+    /**
+     * Generic type for component options that allows partial properties with additional unknown properties.
+     * Use this as a base for component option interfaces to allow extensibility.
+     * 
+     * @template T - The base option interface type
+     */
+    type ComponentOptions<T> = Partial<T> & { [key: string]: unknown };
+
+    /**
      * Represents an instance of the mask utility used for formatting values.
      */
     interface MaskInstance {

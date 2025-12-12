@@ -31,7 +31,7 @@ declare class NUS {
          * var notify = new N.notify(position, opts);
          * ```
          *
-         * @param {NUS.Options.NotifyPosition} position - Set where the message will appear.
+     * @param {NUS.Options.NotifyPosition} position - Specifies where the message will appear.
          * > It can be specified with the left / right / top / bottom properties of the options object.
          * @param {NUS.Options.Notify} [opts] - Specifies the initialization option object for the component.
          * @returns {NUS.Notify} An instance of a Notify object, configured according to the provided options.
@@ -81,7 +81,7 @@ declare namespace NUS {
          * Returns the message container element.
          *
          * @param {JQuery.Selector} [sel] - An optional jQuery selector to refine the context.
-         * @return {NJS<HTMLElement[]>} The context element or the element selected in the context is returned.
+         * @return {NJS<HTMLElement[]>} Returns the context element, or the element matched within the context.
          *
          * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0501.html&tab=html/naturaljs/refr/refr050105.html
          */
@@ -114,17 +114,17 @@ declare namespace NUS {
          * Returns the context element.
          *
          * @param {JQuery.Selector} [sel] - An optional jQuery selector to refine the context.
-         * @return {NJS<HTMLElement[]>} The context element or the element selected in the context is returned.
+         * @return {NJS<HTMLElement[]>} Returns the context element, or the element matched within the context.
          *
          * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0502.html&tab=html/naturaljs/refr/refr050205.html
          */
         context(sel?: JQuery.Selector): NJS<HTMLElement[]>;
         /**
-         * Add new Documents tab content.
+         * Adds a new Documents tab content.
          *
          * @param {string} docId - The unique identifier for the document page to be added.
          * @param {string} docNm - The name of the document page to be added.
-         * @param {NUS.Options.DocOpts} docOpts - Enter options that apply only to the page being added.
+         * @param {NUS.Options.DocOpts} docOpts - Options that apply only to the page being added.
          * ```
          * var docOpts = {
          *     url: "url", // document URL

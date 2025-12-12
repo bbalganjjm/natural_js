@@ -16,8 +16,8 @@ interface NJS<T> extends Omit<JQuery, "select">, NC, NA, ND, NU, NUS {
         "Natural-DATA": string;
         "Natural-UI": string;
         "Natural-UI.Shell": string;
-        "Natural-CODE": string;
-        "Natural-TEMPLATE": string;
+        "Natural-CODE"?: string;
+        "Natural-TEMPLATE"?: string;
     };
 
     selector: string;
@@ -29,6 +29,13 @@ interface NJS<T> extends Omit<JQuery, "select">, NC, NA, ND, NU, NUS {
  * N is a collection class that defines common functions for Natural-JS.
  */
 declare namespace N {
+    /**
+     * Version map of Natural-JS modules.
+     *
+     * - "Natural-CODE" and "Natural-TEMPLATE" are added at runtime only when those modules are loaded.
+     */
+    const version: NJS<any>["version"];
+
     // === Natural-CORE
     const locale: typeof NC.locale;
     const debug: typeof NC.debug;

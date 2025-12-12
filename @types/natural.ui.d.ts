@@ -64,93 +64,81 @@ declare class NU {
     /**
      * Creates a new Select instance.
      * ```
-     * var select = N(data).select(opts|context);
+     * var select = N(data).select(opts);
+     * var select = N(data).select(context);
      * ```
      *
-     * @param {NU.Options.Select | NJS<HTMLElement[]} [opts] - Specifies the component's initialization options object or context element.
-     * @returns {NU.Select} An instance of a Select object, configured according to the provided parameters.
+     * @param {NU.Options.Select | NJS<HTMLElement[]>} [opts] - Component options or context element.
+     * @returns {NU.Select} An instance of a Select object.
      *
      * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0406.html&tab=html/naturaljs/refr/refr040603.html
      */
-    select(
-        this: NJS<NC.JSONObject[]> | NC.JSONObject[],
-        opts?: NU.Options.Select | Omit<NJS<HTMLElement[]>, keyof NJS<HTMLElement[]>>,
-    ): NU.Select;
+    select(this: NJS<NC.JSONObject[]> | NC.JSONObject[], opts?: NU.Options.Select | NJS<HTMLElement[]>): NU.Select;
     /**
      * Creates a new Form instance.
      * ```
-     * var form = N(data).form(opts|context);
+     * var form = N(data).form(opts);
+     * var form = N(data).form(context);
      * ```
      *
-     * @param {NU.Options.Form | NJS<HTMLElement[]} [opts] - Specifies the component's initialization options object or context element.
-     * @returns {NU.Form} An instance of a Form object, configured according to the provided parameters.
+     * @param {NU.Options.Form | NJS<HTMLElement[]>} [opts] - Component options or context element.
+     * @returns {NU.Form} An instance of a Form object.
      *
      * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0407.html&tab=html/naturaljs/refr/refr040703.html
      */
-    form(
-        this: NJS<NC.JSONObject[]> | NC.JSONObject[],
-        opts?: NU.Options.Form | Omit<NJS<HTMLElement[]>, keyof NJS<HTMLElement[]>>,
-    ): NU.Form;
+    form(this: NJS<NC.JSONObject[]> | NC.JSONObject[], opts?: NU.Options.Form | NJS<HTMLElement[]>): NU.Form;
     /**
      * Creates a new List instance.
      * ```
-     * var list = N(data).list(opts|context);
+     * var list = N(data).list(opts);
+     * var list = N(data).list(context);
      * ```
      *
-     * @param {NU.Options.List | NJS<HTMLElement[]} [opts] - Specifies the component's initialization options object or context element.
-     * @returns {NU.List} An instance of a List object, configured according to the provided parameters.
+     * @param {NU.Options.List | NJS<HTMLElement[]>} [opts] - Component options or context element.
+     * @returns {NU.List} An instance of a List object.
      *
      * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0408.html&tab=html/naturaljs/refr/refr040803.html
      */
-    list(
-        this: NJS<NC.JSONObject[]> | NC.JSONObject[],
-        opts?: NU.Options.List | Omit<NJS<HTMLElement[]>, keyof NJS<HTMLElement[]>>,
-    ): NU.List;
+    list(this: NJS<NC.JSONObject[]> | NC.JSONObject[], opts?: NU.Options.List | NJS<HTMLElement[]>): NU.List;
     /**
      * Creates a new Grid instance.
      * ```
-     * var grid = N(data).grid(opts|context);
+     * var grid = N(data).grid(opts);
+     * var grid = N(data).grid(context);
      * ```
      *
-     * @param {NU.Options.Grid | NJS<HTMLElement[]} [opts] - Specifies the component's initialization options object or context element.
-     * @returns {NU.Grid} An instance of a Grid object, configured according to the provided parameters.
+     * @param {NU.Options.Grid | NJS<HTMLElement[]>} [opts] - Component options or context element.
+     * @returns {NU.Grid} An instance of a Grid object.
      *
      * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0409.html&tab=html/naturaljs/refr/refr040903.html
      */
-    grid(
-        this: NJS<NC.JSONObject[]> | NC.JSONObject[],
-        opts?: NU.Options.Grid | Omit<NJS<HTMLElement[]>, keyof NJS<HTMLElement[]>>,
-    ): NU.Grid;
+    grid(this: NJS<NC.JSONObject[]> | NC.JSONObject[], opts?: NU.Options.Grid | NJS<HTMLElement[]>): NU.Grid;
     /**
      * Creates a new Pagination instance.
      * ```
-     * var pagination = N(data).pagination(opts|context);
+     * var pagination = N(data).pagination(opts);
+     * var pagination = N(data).pagination(context);
      * ```
      *
-     * @param {NU.Options.Pagination | NJS<HTMLElement[]} [opts] - Specifies the component's initialization options object or context element.
-     * @returns {NU.Pagination} An instance of a Pagination object, configured according to the provided parameters.
+     * @param {NU.Options.Pagination | NJS<HTMLElement[]>} opts - Component options or context element.
+     * @returns {NU.Pagination} An instance of a Pagination object.
      *
      * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0410.html&tab=html/naturaljs/refr/refr041003.html
      */
-    pagination(
-        this: NJS<NC.JSONObject[]> | NC.JSONObject[],
-        opts: NU.Options.Pagination | Omit<NJS<HTMLElement[]>, keyof NJS<HTMLElement[]>>,
-    ): NU.Pagination;
+    pagination(this: NJS<NC.JSONObject[]> | NC.JSONObject[], opts: NU.Options.Pagination | NJS<HTMLElement[]>): NU.Pagination;
     /**
      * Creates a new Tree instance.
      * ```
-     * var tree = N(data).tree(opts|context);
+     * var tree = N(data).tree(opts);
+     * var tree = N(data).tree(context);
      * ```
      *
-     * @param {NU.Options.Tree | NJS<HTMLElement[]} [opts] - Specifies the component's initialization options object or context element.
-     * @returns {NU.Tree} An instance of a Tree object, configured according to the provided parameters.
+     * @param {NU.Options.Tree | NJS<HTMLElement[]>} opts - Component options or context element.
+     * @returns {NU.Tree} An instance of a Tree object.
      *
      * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0411.html&tab=html/naturaljs/refr/refr041103.html
      */
-    tree(
-        this: NJS<NC.JSONObject[]> | NC.JSONObject[],
-        opts: NU.Options.Tree | Omit<NJS<HTMLElement[]>, keyof NJS<HTMLElement[]>>,
-    ): NU.Tree;
+    tree(this: NJS<NC.JSONObject[]> | NC.JSONObject[], opts: NU.Options.Tree | NJS<HTMLElement[]>): NU.Tree;
 
     static ui: {
         iteration: {
@@ -294,7 +282,7 @@ declare class NU {
          */
         new(
             data: NJS<NC.JSONObject[]> | NC.JSONObject[],
-            opts?: NU.Options.Select | Omit<NJS<HTMLElement[]>, keyof NJS<HTMLElement[]>>,
+            opts?: NU.Options.Select | NJS<HTMLElement[]>,
         ): NU.Select;
         wrapEle(): void;
     };
@@ -314,7 +302,7 @@ declare class NU {
          */
         new(
             data: NJS<NC.JSONObject[]> | NC.JSONObject[],
-            opts?: NU.Options.Form | Omit<NJS<HTMLElement[]>, keyof NJS<HTMLElement[]>>,
+            opts?: NU.Options.Form | NJS<HTMLElement[]>,
         ): NU.Form;
     };
 
@@ -333,7 +321,7 @@ declare class NU {
          */
         new(
             data: NJS<NC.JSONObject[]> | NC.JSONObject[],
-            opts?: NU.Options.List | Omit<NJS<HTMLElement[]>, keyof NJS<HTMLElement[]>>,
+            opts?: NU.Options.List | NJS<HTMLElement[]>,
         ): NU.List;
         createScroll(): void;
         vResize(contextWrapEle: NJS<NC.JSONObject[]>): void;
@@ -354,7 +342,7 @@ declare class NU {
          */
         new(
             data: NJS<NC.JSONObject[]> | NC.JSONObject[],
-            opts?: NU.Options.Grid | Omit<NJS<HTMLElement[]>, keyof NJS<HTMLElement[]>>,
+            opts?: NU.Options.Grid | NJS<HTMLElement[]>,
         ): NU.Grid;
         tableCells(tbl: any, opt_cellValueGetter: any): any[][];
         tableMap(): NU.Objects.Grid.TableMap;
@@ -393,7 +381,7 @@ declare class NU {
          */
         new(
             data: NJS<NC.JSONObject[]> | NC.JSONObject[],
-            opts?: NU.Options.Pagination | Omit<NJS<HTMLElement[]>, keyof NJS<HTMLElement[]>>,
+            opts?: NU.Options.Pagination | NJS<HTMLElement[]>,
         ): NU.Pagination;
         wrapEle: NU.Objects.Pagination.LinkEles;
         changePageSet(
@@ -418,7 +406,7 @@ declare class NU {
          */
         new(
             data: NJS<NC.JSONObject[]> | NC.JSONObject[],
-            opts?: NU.Options.Tree | Omit<NJS<HTMLElement[]>, keyof NJS<HTMLElement[]>>,
+            opts?: NU.Options.Tree | NJS<HTMLElement[]>,
         ): NU.Tree;
     };
 }
@@ -430,7 +418,7 @@ declare namespace NU {
          * Returns the context element.
          *
          * @param {JQuery.Selector} [sel] - An optional jQuery selector to refine the context.
-         * @return {NJS<HTMLElement[]>} The context element or the element selected in the context is returned.
+         * @return {NJS<HTMLElement[]>} Returns the context element, or the element matched within the context.
          *
          * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0401.html&tab=html/naturaljs/refr/refr040105.html
          */
@@ -467,7 +455,7 @@ declare namespace NU {
          * Returns the context element.
          *
          * @param {JQuery.Selector} [sel] - An optional jQuery selector to refine the context.
-         * @return {NJS<HTMLElement[]>} The context element or the element selected in the context is returned.
+         * @return {NJS<HTMLElement[]>} Returns the context element, or the element matched within the context.
          *
          * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0402.html&tab=html/naturaljs/refr/refr040206.html
          */
@@ -496,7 +484,7 @@ declare namespace NU {
          * Returns the context element.
          *
          * @param {JQuery.Selector} [sel] - An optional jQuery selector to refine the context.
-         * @return {NJS<HTMLElement[]>} The context element or the element selected in the context is returned.
+         * @return {NJS<HTMLElement[]>} Returns the context element, or the element matched within the context.
          *
          * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0403.html&tab=html/naturaljs/refr/refr040306.html
          */
@@ -525,7 +513,7 @@ declare namespace NU {
          * Returns the context element.
          *
          * @param {JQuery.Selector} [sel] - An optional jQuery selector to refine the context.
-         * @return {NJS<HTMLElement[]>} The context element or the element selected in the context is returned.
+         * @return {NJS<HTMLElement[]>} Returns the context element, or the element matched within the context.
          *
          * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0404.html&tab=html/naturaljs/refr/refr040405.html
          */
@@ -533,23 +521,23 @@ declare namespace NU {
         /**
          * Opens the Popup.
          *
-         * @param {any} [onOpenData] - Optional data to be processed or used when the popup is opened.
+         * @param {unknown} [onOpenData] - Optional data to be processed or used when the popup is opened.
          * > Pass onOpenData as the first argument to the onOpen function specified by the onOpen event option.
          * @return {NU.Popup} Returns the `Popup` instance for chaining.
          *
          * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0404.html&tab=html/naturaljs/refr/refr040405.html
          */
-        open(onOpenData?: any): NU.Popup;
+        open(onOpenData?: unknown): NU.Popup;
         /**
          * Close the Popup.
          *
-         * @param {any} [onCloseData] - Optional data to be processed or used when the popup is closed.
+         * @param {unknown} [onCloseData] - Optional data to be processed or used when the popup is closed.
          * > Pass onCloseData as the first argument to the onClose function specified by the onClose event option.
          * @return {NU.Popup} Returns the `Popup` instance for chaining.
          *
          * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0404.html&tab=html/naturaljs/refr/refr040405.html
          */
-        close(onCloseData?: any): NU.Popup;
+        close(onCloseData?: unknown): NU.Popup;
         /**
          * Removes all elements related to Popup.
          *
@@ -566,7 +554,7 @@ declare namespace NU {
          * Returns the context element.
          *
          * @param {JQuery.Selector} [sel] - An optional jQuery selector to refine the context.
-         * @return {NJS<HTMLElement[]>} The context element or the element selected in the context is returned.
+         * @return {NJS<HTMLElement[]>} Returns the context element, or the element matched within the context.
          *
          * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0405.html&tab=html/naturaljs/refr/refr040506.html
          */
@@ -575,19 +563,19 @@ declare namespace NU {
          * Opens the specified tab.
          *
          * @param {number} idx - The index of the tab to open.
-         * @param {any} [onOpenData] - Optional data to be processed or used when the tab is opened.
+         * @param {unknown} [onOpenData] - Optional data to be processed or used when the tab is opened.
          * > Pass onOpenData as the first argument to the onOpen function specified by the onOpen event option.
          * @param {boolean} [isFirst] - This is an option used inside a component that is set to true when a tab is instantiated and the default active tab is automatically selected.
          * @return {NU.Tab} - Returns the `Tab` instance for chaining.
          *
          * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0405.html&tab=html/naturaljs/refr/refr040506.html
          */
-        open(idx: number, onOpenData?: any, isFirst?: boolean): NU.Tab;
+        open(idx: number, onOpenData?: unknown, isFirst?: boolean): NU.Tab;
         /**
          * Opens the specified tab.
          *
          * @param {number} [idx] - The index of the tab to open. If no arguments are specified, a status information object is returned.
-         * @param {any} [onOpenData] - Optional data to be processed or used when the tab is opened.
+         * @param {unknown} [onOpenData] - Optional data to be processed or used when the tab is opened.
          * > Pass onOpenData as the first argument to the onOpen function specified by the onOpen event option.
          * @param {boolean} [isFirst] - This is an option used inside a component that is set to true when a tab is instantiated and the default active tab is automatically selected.
          * @return {Object} If all arguments are not entered, the following tab status information is returned in object type.
@@ -598,7 +586,7 @@ declare namespace NU {
          *
          * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0405.html&tab=html/naturaljs/refr/refr040506.html
          */
-        open(idx?: number, onOpenData?: any, isFirst?: boolean): {
+        open(idx?: number, onOpenData?: unknown, isFirst?: boolean): {
             index: number;
             tab: NJS<HTMLElement[]>;
             content: NJS<HTMLElement[]>;
@@ -626,8 +614,8 @@ declare namespace NU {
          * Returns the Controller object of the tab content.
          * > If the tab content is created internally or the preload option is false, undefined is returned because there is no Controller object.
          *
-         * @param {number} [idx] - Enter the tab index where the controller object you want to look up is located. If no index is provided, the method returns the controller object that is active.
-         * @return {NA.Objects.Controller.Object} The controller object corresponding to the specified index.
+         * @param {number} [idx] - Specifies the tab index whose Controller object you want to retrieve. If omitted, the active Controller object is returned.
+         * @return {NA.Objects.Controller.Object} The Controller object for the specified index.
          *
          * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0405.html&tab=html/naturaljs/refr/refr040506.html
          */
@@ -673,7 +661,7 @@ declare namespace NU {
          * Returns the context element.
          *
          * @param {JQuery.Selector} [sel] - An optional jQuery selector to refine the context.
-         * @return {NJS<HTMLElement[]>} The context element or the element selected in the context is returned.
+         * @return {NJS<HTMLElement[]>} Returns the context element, or the element matched within the context.
          *
          * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0406.html&tab=html/naturaljs/refr/refr040605.html
          */
@@ -799,7 +787,7 @@ declare namespace NU {
          * Returns the context element.
          *
          * @param {JQuery.Selector} [sel] - An optional jQuery selector to refine the context.
-         * @return {NJS<HTMLElement[]>} The context element or the element selected in the context is returned.
+         * @return {NJS<HTMLElement[]>} Returns the context element, or the element matched within the context.
          *
          * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0407.html&tab=html/naturaljs/refr/refr040706.html
          */
@@ -971,7 +959,7 @@ declare namespace NU {
          * Returns the context element.
          *
          * @param {JQuery.Selector} [sel] - An optional jQuery selector to refine the context.
-         * @return {NJS<HTMLElement[]>} The context element or the element selected in the context is returned.
+         * @return {NJS<HTMLElement[]>} Returns the context element, or the element matched within the context.
          *
          * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0408.html&tab=html/naturaljs/refr/refr040806.html
          */
@@ -1220,7 +1208,7 @@ declare namespace NU {
          * Returns the context element.
          *
          * @param {JQuery.Selector} [sel] - An optional jQuery selector to refine the context.
-         * @return {NJS<HTMLElement[]>} The context element or the element selected in the context is returned.
+         * @return {NJS<HTMLElement[]>} Returns the context element, or the element matched within the context.
          *
          * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0409.html&tab=html/naturaljs/refr/refr040906.html
          */
@@ -1447,7 +1435,7 @@ declare namespace NU {
          * Returns the context element.
          *
          * @param {JQuery.Selector} [sel] - An optional jQuery selector to refine the context.
-         * @return {NJS<HTMLElement[]>} The context element or the element selected in the context is returned.
+         * @return {NJS<HTMLElement[]>} Returns the context element, or the element matched within the context.
          *
          * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0410.html&tab=html/naturaljs/refr/refr041005.html
          */
@@ -1455,16 +1443,16 @@ declare namespace NU {
         /**
          * Creates a Pagination element by binding data to the element specified with the context option.
          *
-         * @param {NJS<NC.JSONObject[]> | number} [data] - Specify data to bind or set totalCount.
+         * @param {NJS<NC.JSONObject[]> | number} [data] - Data to bind, or a number to set totalCount.
          * If the argument type is number, it is set to totalCount, and if the argument type is array type, it is set to data.
-         * @param {number} [totalCount] - Enter the total number of rows of data for pagination.
+         * @param {number} [totalCount] - Specifies the total number of rows for pagination.
          * @return {NU.Pagination} Returns the `Pagination` instance for chaining.
          *
          * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0410.html&tab=html/naturaljs/refr/refr041005.html
          */
         bind(data?: NJS<NC.JSONObject[]> | NC.JSONObject[] | number, totalCount?: number): NU.Pagination;
         /**
-         * Gets the Total count value.
+         * Returns the total count.
          *
          * @return {number} Total count of data to be displayed by pagination.
          *
@@ -1615,7 +1603,7 @@ declare namespace NU {
          * Returns the context element.
          *
          * @param {JQuery.Selector} [sel] - An optional jQuery selector to refine the context.
-         * @return {NJS<HTMLElement[]>} The context element or the element selected in the context is returned.
+         * @return {NJS<HTMLElement[]>} Returns the context element, or the element matched within the context.
          *
          * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0411.html&tab=html/naturaljs/refr/refr041105.html
          */

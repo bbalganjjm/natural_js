@@ -21,7 +21,17 @@ N.date.dateList(2024, 12).forEach(function(date) {
         date.formatDate("Y-m-d");
     });
 });
+
+// Test NC.element.toOpts - returns unknown, requires type guard or assertion
+const optsUnknown: unknown = N.element.toOpts(N("div"));
+if (typeof optsUnknown === 'object' && optsUnknown !== null) {
+    // Type guard usage example
+    const typedOpts = optsUnknown as { width?: number; height?: number };
+    console.log(typedOpts.width);
+}
+// Legacy test - still works without using return value
 N.element.toOpts(N("div"));
+
 N.browser.scrollbarWidth();
 N.browser.cookie("test", "test cookie value", 1, "localhost");
 
@@ -69,7 +79,8 @@ const cont = new N.cont(N(".context"), {
         this.view!.each(function() {});
     },
 });
-cont.fn01();
+// Type assertion needed for custom methods after unknown index signature change
+(cont.fn01 as () => void)();
 
 N(".context").cont({
     init: function(view, request) {
@@ -238,12 +249,12 @@ N([{ age: 18 }, { age: 22 }]).pagination({
 }).pageNo(3).bind();
 
 new N.tree([{ age: 18 }, { age: 22 }], {
-    context: ".treeBlock",
+    context: N(".treeBlock"),
     checkbox: true,
 }).bind();
 
 N([{ age: 18 }, { age: 22 }]).tree({
-    context: ".treeBlock",
+    context: N(".treeBlock"),
     checkbox: true,
 }).bind();
 
@@ -284,3 +295,106 @@ if (Array.isArray(inspectionResult)) {
 N.code.addSourceURL("code", "/test.js");
 
 N.template.aop.codes({} as NA.Objects.Controller.Object, function() {});
+
+// Version map: CODE/TEMPLATE keys are optional unless those modules are loaded.
+const coreVer = N.version["Natural-CORE"];
+coreVer.charAt(0);
+const codeVer = N.version["Natural-CODE"];
+if (codeVer) {
+    codeVer.charAt(0);
+}
+
+// Test NA.Objects.Controller.BaseObject - index signature with unknown
+const controller: NA.Objects.Controller.BaseObject = {
+    init: function(view, request) {
+        // Custom properties are allowed with unknown type
+        const customData: unknown = this.myCustomProperty;
+        if (typeof customData === 'string') {
+            console.log(customData.toUpperCase());
+        }
+    },
+    // Custom property - typed as unknown due to index signature
+    myCustomProperty: "custom value",
+    anotherProp: { foo: "bar", baz: 123 }
+};
+
+// Test any → unknown changes
+// Type check functions now accept unknown
+const unknownValue: unknown = "test";
+N.type(unknownValue);
+N.isString(unknownValue);
+N.isNumeric(unknownValue);
+N.isPlainObject(unknownValue);
+N.isEmptyObject(unknownValue);
+N.isArray(unknownValue);
+N.isArraylike(unknownValue);
+N.isWrappedSet(unknownValue);
+N.isElement(unknownValue);
+
+// Logging functions accept unknown[]
+N.debug("debug", unknownValue, { foo: "bar" });
+N.log("log", unknownValue);
+N.info("info", unknownValue);
+N.warn("warn", unknownValue);
+
+// Communicator attr/get returns unknown
+const comm = N.comm("url");
+const attrValue: unknown = comm.request.attr("key");
+const getValue: unknown = comm.request.get("key");
+comm.request.attr("key", unknownValue);
+
+// Context attr returns unknown
+const contextValue: unknown = N.context.attr("key");
+N.context.attr("key", unknownValue);
+
+// Popup open/close with unknown data
+const popupTest = N(".test").popup();
+popupTest.open(unknownValue);
+popupTest.close(unknownValue);
+
+// Tab open with unknown data
+const tabTest = N(".test").tab();
+tabTest.open(0, unknownValue);
+
+// Test data component unified signature - both opts and context
+const testData = [{ id: 1, name: "test" }];
+
+// Select: with options
+const select1 = N(testData).select({ context: N(".select") });
+// Select: with context directly
+const select2 = N(testData).select(N(".select"));
+
+// Form: with options
+const form1 = N(testData).form({ context: N(".form") });
+// Form: with context directly
+const form2 = N(testData).form(N(".form"));
+
+// List: with options
+const list1 = N(testData).list({ context: N(".list") });
+// List: with context directly
+const list2 = N(testData).list(N(".list"));
+
+// Grid: with options
+const grid1 = N(testData).grid({ context: N(".grid") });
+// Grid: with context directly
+const grid2 = N(testData).grid(N(".grid"));
+
+// Pagination: with options
+const pagination1 = N(testData).pagination({ context: N(".pagination") });
+// Pagination: with context directly
+const pagination2 = N(testData).pagination(N(".pagination"));
+
+// Tree: with options
+const tree1 = N(testData).tree({ context: N(".tree") });
+// Tree: with context directly
+const tree2 = N(testData).tree(N(".tree"));
+
+// Test Grid/List bind with data
+grid1.bind(testData);
+grid2.bind(testData);
+list1.bind(testData);
+list2.bind(testData);
+
+// Test multiple arguments in logging functions
+N.log("Multiple", "arguments", 123, { key: "value" }, [1, 2, 3], true, null, undefined);
+N.debug("Debug with", "various", "types");

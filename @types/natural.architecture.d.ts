@@ -157,7 +157,7 @@ declare namespace NA {
          * @param {NA.Callbacks.Communicator.Error} callback - Defines the callback function that handles errors when they occur.
          *
          * The `this` context of the callback function is the instance of the created N.comm, and it receives the following arguments:
-         *  - xhr(arguments[2]): jQuery XMLHTTPRequest
+         *  - xhr(arguments[2]): jQuery XMLHttpRequest
          *  - textStatus(arguments[3]): "success" (when an error occurs in the submit callback) or "error" (when an error occurs from the server)
          *  - e(arguments[0]): ErrorThrown
          *  - request(arguments[1]): Communicator.request
@@ -211,11 +211,11 @@ declare namespace NA {
          *
          * @param {String} name - Parameter name
          *
-         * @return {NA.Communicator} Returns the passed parameter value.
+         * @return {unknown} Returns the passed parameter value.
          *
          * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0204.html&tab=html/naturaljs/refr/refr020403.html
          */
-        attr(name: string): any;
+        attr(name: string): unknown;
         /**
          * Set the parameters to be passed to the page to be loaded.
          *
@@ -232,13 +232,13 @@ declare namespace NA {
          * ```
          *
          * @param {String} name - Parameter name
-         * @param {any} obj - Parameter data
+         * @param {unknown} obj - Parameter data
          *
          * @return {NA.Communicator} Returns the Communicator object.
          *
          * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0204.html&tab=html/naturaljs/refr/refr020403.html
          */
-        attr(name: string, obj: any): NA.Communicator;
+        attr(name: string, obj: unknown): NA.Communicator;
         removeAttr(name: string): NA.Communicator;
         /**
          * Extracts the GET parameter values from the browser's URL.
@@ -356,21 +356,21 @@ declare namespace NA {
          * Get data stored in N.context.
          *
          * @param {string} name - data name.
-         * @return {any} Stored data.
+         * @return {unknown} Stored data.
          *
          * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0206.html&tab=html/naturaljs/refr/refr020602.html
          */
-        attr(name: string): any;
+        attr(name: string): unknown;
         /**
          * Set the data to be stored in N.context.
          *
          * @param {string} name - data name.
-         * @param {any} obj - Data to store.
+         * @param {unknown} obj - Data to store.
          * @return {this} The current object, for chainability.
          *
          * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0206.html&tab=html/naturaljs/refr/refr020602.html
          */
-        attr(name: string, obj: any): NA.Context;
+        attr(name: string, obj: unknown): NA.Context;
     }
 
     interface Config {

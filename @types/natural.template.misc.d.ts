@@ -12,7 +12,7 @@ declare namespace NT {
              */
             action?: string | [string, ...any[]];
             /**
-             * Purpose of Form - When you enter the string "search-box", the specified area is created as a search box Form. You can specify more detailed options with the object type.
+             * Form usage. If set to the string "search-box", the target area is rendered as a search box Form. For more detailed options, use an object.
              *
              * @default undefined
              *

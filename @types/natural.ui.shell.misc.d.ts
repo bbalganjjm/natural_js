@@ -8,7 +8,7 @@ declare namespace NUS {
         }
         interface Notify {
             /**
-             * Set where the message will appear.
+             * Specifies where the message will appear.
              *
              * It can be specified with the left / right / top / bottom properties of the options object.
              *
@@ -32,7 +32,7 @@ declare namespace NUS {
              */
             context?: NJS<HTMLElement[]>;
             /**
-             * Set the time in seconds for the message to be displayed.
+             * Sets how long (in seconds) the message will be displayed.
              *
              * @default 7
              *
@@ -48,7 +48,7 @@ declare namespace NUS {
              */
             alwaysOnTop?: boolean;
             /**
-             * If set to true, the HTML Code of the message will be applied.
+             * If set to true, HTML in the message will be rendered.
              *
              * @default false
              *
@@ -60,7 +60,7 @@ declare namespace NUS {
              *
              * > Specified with jQuery selector syntax.
              *
-             * > When N.notify related elements are obscured by other elements, please add a selector for the element that is being obscured.
+             * > If N.notify-related elements are obscured by other elements, add a selector for the obscuring element.
              *
              * @default "div, span, ul, p, nav, article, section, header, footer, aside"
              *
@@ -73,21 +73,21 @@ declare namespace NUS {
             [key: string]: DocOpts;
         }
         /**
-         * This is an option that can be set whenever tab content is added to the Documents component.
+         * Options that can be set whenever tab content is added to the Documents component.
          *
-         * @see @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0502.html&tab=html/naturaljs/refr/refr050205.html
+         * @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0502.html&tab=html/naturaljs/refr/refr050205.html}
          */
         interface DocOpts {
             /**
-             * Document id
+             * Document ID.
              */
             docId?: string;
             /**
-             * Document name
+             * Document name.
              */
             docNm?: string;
             /**
-             * Document url
+             * Document URL.
              */
             url: string;
             /**
@@ -169,7 +169,7 @@ declare namespace NUS {
              *
              * @default undefined
              *
-             * @see @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0502.html&tab=html/naturaljs/refr/refr050203.html
+             * @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0502.html&tab=html/naturaljs/refr/refr050203.html}
              */
             context?: NJS<HTMLElement[]>;
             /**
@@ -179,7 +179,7 @@ declare namespace NUS {
              *
              * @default true
              *
-             * @see @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0502.html&tab=html/naturaljs/refr/refr050203.html
+             * @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0502.html&tab=html/naturaljs/refr/refr050203.html}
              */
             multi?: boolean;
             /**
@@ -190,7 +190,7 @@ declare namespace NUS {
              *
              * @default 0
              *
-             * @see @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0502.html&tab=html/naturaljs/refr/refr050203.html
+             * @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0502.html&tab=html/naturaljs/refr/refr050203.html}
              */
             maxStateful?: number;
             /**
@@ -202,7 +202,7 @@ declare namespace NUS {
              *
              * @default 0
              *
-             * @see @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0502.html&tab=html/naturaljs/refr/refr050203.html
+             * @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0502.html&tab=html/naturaljs/refr/refr050203.html}
              */
             maxTabs?: number;
             /**
@@ -210,7 +210,7 @@ declare namespace NUS {
              *
              * @default false
              *
-             * @see @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0502.html&tab=html/naturaljs/refr/refr050203.html
+             * @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0502.html&tab=html/naturaljs/refr/refr050203.html}
              */
             addLast?: boolean;
             /**
@@ -218,7 +218,7 @@ declare namespace NUS {
              *
              * @default false
              *
-             * @see @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0502.html&tab=html/naturaljs/refr/refr050203.html
+             * @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0502.html&tab=html/naturaljs/refr/refr050203.html}
              */
             tabScroll?: boolean;
             /**
@@ -236,7 +236,7 @@ declare namespace NUS {
              *
              * @default { rightCorrectionPx: 0 }
              *
-             * @see @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0502.html&tab=html/naturaljs/refr/refr050203.html
+             * @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0502.html&tab=html/naturaljs/refr/refr050203.html}
              */
             tabScrollCorrection?: {
                 rightCorrectionPx?: number;
@@ -244,11 +244,11 @@ declare namespace NUS {
             /**
              * When you click the "Close All" button, if the closeAllRedirectURL option value is null, all tabs except the active tab will be closed, and if you enter a url string, you will be redirected to that url.
              *
-             * When developing as a SPA(Single Page Application), it is recommended to enter the URL to go to the 'home' page so that the browser's garbage resources can be cleaned up.
+             * When developing an SPA (Single Page Application), it is recommended to specify the URL of the "home" page so the browser can clean up unused resources.
              *
              * @default null
              *
-             * @see @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0502.html&tab=html/naturaljs/refr/refr050203.html
+             * @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0502.html&tab=html/naturaljs/refr/refr050203.html}
              */
             closeAllRedirectURL?: string | null;
             msgContext?: NJS<Window[]>;
@@ -257,15 +257,15 @@ declare namespace NUS {
              *
              * @default false
              *
-             * @see @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0502.html&tab=html/naturaljs/refr/refr050203.html
+             * @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0502.html&tab=html/naturaljs/refr/refr050203.html}
              */
             entireLoadIndicator?: boolean;
             /**
-             * If set to true, Double Submit will be prevented by blocking the screen until all Ajax requests executed when the page is loaded are completed.
+             * If set to true, prevents double submissions by blocking the screen until all Ajax requests triggered during page load have completed.
              *
              * @default false
              *
-             * @see @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0502.html&tab=html/naturaljs/refr/refr050203.html
+             * @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0502.html&tab=html/naturaljs/refr/refr050203.html}
              */
             entireLoadScreenBlock?: boolean;
             /**
@@ -274,7 +274,7 @@ declare namespace NUS {
              *
              * @default []
              *
-             * @see @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0502.html&tab=html/naturaljs/refr/refr050203.html
+             * @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0502.html&tab=html/naturaljs/refr/refr050203.html}
              */
             entireLoadExcludeURLs?: string[];
             entireLoadRequestCnt?: number;
@@ -286,7 +286,7 @@ declare namespace NUS {
              *     // docId: document id
              *     // target: Element to place loaded content
              *
-             *     var doc = this.doc(docId); // document 정보 가져오기
+             *     var doc = this.doc(docId); // Get document information
              * }
              * ```
              * > It will not be called again until the open page is closed.
@@ -295,7 +295,7 @@ declare namespace NUS {
              *
              * @default null
              *
-             * @see @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0502.html&tab=html/naturaljs/refr/refr050203.html
+             * @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0502.html&tab=html/naturaljs/refr/refr050203.html}
              */
             onBeforeLoad?: EventHandlers.Documents.OnBeforeLoad | null;
             /**
@@ -314,7 +314,7 @@ declare namespace NUS {
              *
              * @default null
              *
-             * @see @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0502.html&tab=html/naturaljs/refr/refr050203.html
+             * @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0502.html&tab=html/naturaljs/refr/refr050203.html}
              */
             onLoad?: EventHandlers.Documents.OnLoad | null;
             /**
@@ -339,7 +339,7 @@ declare namespace NUS {
              * onErrorEntireLoad: function(e, request, xhr, textStatus, callback) {
              *     // e(arguments[0]): ErrorThrown
              *     // request(arguments[1]): Communicator.request
-             *     // xhr(arguments[2]): jQuery XMLHTTORequest
+             *     // xhr(arguments[2]): jQuery XMLHttpRequest
              *     // textStatus(arguments[3]): "success" (if the request succeeds) or "error" (if an error occurs in the submit callback during the request (on the server-side))
              *     // callback(arguments[4]): If the textStatus value is "success," this is the callback function specified as an argument for the submit method.
              * }
@@ -368,7 +368,7 @@ declare namespace NUS {
              *
              * @default null
              *
-             * @see @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0502.html&tab=html/naturaljs/refr/refr050203.html
+             * @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0502.html&tab=html/naturaljs/refr/refr050203.html}
              */
             onEntireLoad?: EventHandlers.Documents.OnEntireLoad | null;
             /**
@@ -386,7 +386,7 @@ declare namespace NUS {
              *
              * @default null
              *
-             * @see @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0502.html&tab=html/naturaljs/refr/refr050203.html
+             * @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0502.html&tab=html/naturaljs/refr/refr050203.html}
              */
             onBeforeActive?: EventHandlers.Documents.OnBeforeActive | null;
             /**
@@ -404,7 +404,7 @@ declare namespace NUS {
              *
              * @default null
              *
-             * @see @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0502.html&tab=html/naturaljs/refr/refr050203.html
+             * @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0502.html&tab=html/naturaljs/refr/refr050203.html}
              */
             onActive?: EventHandlers.Documents.OnActive | null;
             /**
@@ -422,7 +422,7 @@ declare namespace NUS {
              *
              * @default null
              *
-             * @see @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0502.html&tab=html/naturaljs/refr/refr050203.html
+             * @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0502.html&tab=html/naturaljs/refr/refr050203.html}
              */
             onBeforeInactive?: EventHandlers.Documents.OnBeforeInactive | null;
             /**
@@ -440,7 +440,7 @@ declare namespace NUS {
              *
              * @default null
              *
-             * @see @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0502.html&tab=html/naturaljs/refr/refr050203.html
+             * @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0502.html&tab=html/naturaljs/refr/refr050203.html}
              */
             onInactive?: EventHandlers.Documents.OnInactive | null;
             /**
@@ -458,7 +458,7 @@ declare namespace NUS {
              *
              * @default null
              *
-             * @see @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0502.html&tab=html/naturaljs/refr/refr050203.html
+             * @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0502.html&tab=html/naturaljs/refr/refr050203.html}
              */
             onBeforeRemoveState?: EventHandlers.Documents.OnBeforeRemoveState | null;
             /**
@@ -474,7 +474,7 @@ declare namespace NUS {
              * }
              * ```
              *
-             * @see @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0502.html&tab=html/naturaljs/refr/refr050203.html
+             * @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0502.html&tab=html/naturaljs/refr/refr050203.html}
              */
             onRemoveState?: EventHandlers.Documents.OnRemoveState | null;
             /**
@@ -492,7 +492,7 @@ declare namespace NUS {
              *
              * @default null
              *
-             * @see @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0502.html&tab=html/naturaljs/refr/refr050203.html
+             * @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0502.html&tab=html/naturaljs/refr/refr050203.html}
              */
             onBeforeRemove?: EventHandlers.Documents.OnBeforeRemove | null;
             /**
@@ -510,7 +510,7 @@ declare namespace NUS {
              *
              * @default null
              *
-             * @see @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0502.html&tab=html/naturaljs/refr/refr050203.html
+             * @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0502.html&tab=html/naturaljs/refr/refr050203.html}
              */
             onRemove?: EventHandlers.Documents.OnRemove | null;
             docs?: DocsObject;
@@ -519,18 +519,18 @@ declare namespace NUS {
              *
              * @default false
              *
-             * @see @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0502.html&tab=html/naturaljs/refr/refr050203.html
+             * @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0502.html&tab=html/naturaljs/refr/refr050203.html}
              */
             alwaysOnTop?: boolean;
             /**
              * When applying the `alwaysOnTop` option, specify target elements for calculating the top z-index.
              * > Specified with jQuery selector syntax.
              *
-             * > When N.docs-related elements are obscured by other elements, please add an obscured element selector.
+             * > If N.docs-related elements are obscured by other elements, add a selector for the obscuring element.
              *
              * @default "div, span, ul, p, nav, article, section, header, footer, aside"
              *
-             * @see @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0502.html&tab=html/naturaljs/refr/refr050203.html
+             * @see {@link https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0502.html&tab=html/naturaljs/refr/refr050203.html}
              */
             alwaysOnTopCalcTarget?: string;
             order?: string[];
