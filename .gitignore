@@ -14,3 +14,7 @@ Thumbs.db
 # node
 node_modules/
 package-lock.json
+
+# mcp
+.shrimp/
+.memory/
