@@ -39,11 +39,23 @@ const selector = N("asdf").selector;
 
 N.validator.frn_rrn("");
 
-N.ajax({
+N.fetch({
     url: "http://localhost:8080",
     type: NA.Objects.Request.HttpMethod.POST,
     dataType: NA.Objects.Request.DataType.JSON,
     enctype: NA.Objects.Request.Enctype.URLENCODED,
+});
+
+// Test with custom fetchOptions
+N.fetch({
+    url: "http://localhost:8080/api/data",
+    type: NA.Objects.Request.HttpMethod.POST,
+    dataType: NA.Objects.Request.DataType.JSON,
+    fetchOptions: {
+        credentials: "include",
+        redirect: "follow",
+        mode: "cors"
+    }
 });
 N.comm(N([]), {
     url: "https://localhost:8080",

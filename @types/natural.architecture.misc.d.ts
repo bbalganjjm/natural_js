@@ -1,6 +1,31 @@
 declare namespace NA {
     namespace Options {
         /**
+         * Options interface for NA.fetch with support for custom fetch options.
+         * Extends Request interface and allows additional fetch-specific options.
+         */
+        interface Fetch extends Request {
+            /**
+             * Additional fetch API options that will be merged with converted jQuery.ajax options.
+             * Allows fine-grained control over fetch behavior.
+             * 
+             * @example
+             * ```
+             * NA.fetch({
+             *     url: "/api/data",
+             *     type: "POST",
+             *     fetchOptions: {
+             *         credentials: "include",
+             *         redirect: "follow",
+             *         mode: "cors"
+             *     }
+             * });
+             * ```
+             */
+            fetchOptions?: RequestInit;
+        }
+
+        /**
          * Options interface extending the JQuery.Ajax.AjaxSettingsBase interface for making `N.comm.request` with additional settings.
          */
         interface Request extends Omit<JQuery.Ajax.AjaxSettingsBase<any>, "success" | "error" | "complete"> {

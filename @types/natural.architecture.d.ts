@@ -1,7 +1,6 @@
 declare class NA {
-    static ajax: {
-        (url: string, settings?: JQuery.AjaxSettings): JQuery.jqXHR;
-        (settings?: JQuery.AjaxSettings): JQuery.jqXHR;
+    static fetch: {
+        (options: NA.Options.Fetch): NA.XhrCompat;
     };
     static comm: NA.Communicator;
     static cont: NA.Controller;
@@ -69,7 +68,7 @@ declare class NA {
 declare namespace NA {
     class Communicator {
         constructor(obj: NJS<NC.JSONObject[]> | string, url?: string | NA.Options.Request);
-        xhr: JQuery.jqXHR;
+        xhr: NA.XhrCompat;
         initFilterConfig(): NA.Objects.Config.FilterConfig;
         resetFilterConfig(): NA.Communicator;
         /**
@@ -145,11 +144,11 @@ declare namespace NA {
          * };
          * ```
          *
-         * @return {JQuery.jqXHR} The jqXHR object or the Communicator instance depending on the submission context.
+         * @return {NA.XhrCompat} The xhr-compatible object or the Communicator instance depending on the submission context.
          *
          * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0203.html&tab=html/naturaljs/refr/refr020305.html
          */
-        submit(): JQuery.jqXHR;
+        submit(): NA.XhrCompat;
         /**
          * Registers a callback function that will be executed when an error response is received from the server after calling the submit function or when an error occurs in the callback function of the submit method.
          * > You can call the error method multiple times to register multiple callback functions.
@@ -375,5 +374,27 @@ declare namespace NA {
 
     interface Config {
         filterConfig: NA.Objects.Config.FilterConfig;
+    }
+
+    /**
+     * xhr-compatible object returned by NA.fetch
+     * Extends Promise and provides jQuery.Deferred methods and xhr methods
+     */
+    interface XhrCompat extends Promise<any> {
+        readyState: number;
+        status: number;
+        statusText: string;
+        responseText: string;
+        responseJSON: any;
+        
+        // xhr methods
+        abort(): NA.XhrCompat;
+        getResponseHeader(name: string): string | null;
+        getAllResponseHeaders(): string;
+        
+        // jQuery.Deferred methods
+        done(callback: (data: any) => void): NA.XhrCompat;
+        fail(callback: (error: any) => void): NA.XhrCompat;
+        always(callback: () => void): NA.XhrCompat;
     }
 }

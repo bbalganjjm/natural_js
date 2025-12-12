@@ -67,11 +67,13 @@ declare namespace N {
 
     // === Natural-ARCHITECTURE
     /**
-     * Performs asynchronous HTTP (Ajax) requests in `N.comm`.
+     * Performs asynchronous HTTP requests using fetch API with jQuery.ajax-compatible options.
+     * 
+     * Supports both jQuery.ajax options and additional fetch-specific options via `fetchOptions` property.
      *
-     * @see https://api.jquery.com/jquery.ajax/#jQuery-ajax-settings
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
      */
-    const ajax: typeof NA.ajax;
+    const fetch: typeof NA.fetch;
     /**
      * N.comm is a library that supports Ajax communication with the server, such as requesting content or data from the server or passing parameters.
      *

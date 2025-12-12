@@ -628,8 +628,17 @@ When requesting a page file, the request object is passed as the second argument
 - **data** (json object array or json object, default: null): Data to be sent to the server. If not a string, it is converted to a string. Same as the jQuery.ajax option.
 - **dataType** (string, default: "json"): Type of server response data (xml, json, script, or html). Same as the jQuery.ajax option.
 - **crossDomain** (boolean, default: false): Set to true to force crossDomain requests (e.g., JSONP) on the same domain. Same as the jQuery.ajax option.
+- **fetchOptions** (RequestInit, default: undefined): Additional native fetch API options that will be merged with converted jQuery.ajax options. This allows fine-grained control over fetch behavior.
+  - `credentials`: "omit" | "same-origin" | "include" - Controls cookie and authentication header handling
+  - `redirect`: "follow" | "error" | "manual" - How to handle redirects
+  - `mode`: "cors" | "no-cors" | "same-origin" - CORS mode
+  - `cache`: "default" | "no-store" | "reload" | "no-cache" | "force-cache" - Cache control
+  - `integrity`: string - Subresource integrity value
+  - `keepalive`: boolean - Keep request alive beyond page lifetime
+  - `referrer`: string - Referrer URL
+  - `referrerPolicy`: string - Referrer policy
 
-> N.comm uses the jQuery.ajax module to handle Ajax requests. All options except beforeSend, success, error, and complete are applied as in jQuery.ajax.
+> N.comm uses the native fetch API to handle HTTP requests. All options except beforeSend, success, error, and complete are applied similar to jQuery.ajax for backward compatibility. The fetchOptions property allows direct access to native fetch API features.
 
 ### Methods (Communicator.request)
 
@@ -659,6 +668,45 @@ When requesting a page file, the request object is passed as the second argument
            var data1 = request.attr("data1"); // { data : ["1", "2"] }
            var data2 = request.attr("data2"); // ["3", "4"]
        }
+   });
+   ```
+
+2. Using fetchOptions for advanced fetch API features:
+
+   ```javascript
+   // 2.1. Include credentials (cookies) with cross-origin requests
+   N.comm({ username: "user", password: "pass" }, {
+       url: "/api/login",
+       type: "POST",
+       fetchOptions: {
+           credentials: "include"
+       }
+   }).submit(function(data) {
+       console.log("Login successful:", data);
+   });
+
+   // 2.2. Control redirect behavior
+   N.comm({
+       url: "/api/redirect-endpoint",
+       type: "GET",
+       fetchOptions: {
+           redirect: "manual"  // Don't follow redirects automatically
+       }
+   }).submit();
+
+   // 2.3. Using multiple fetch options
+   N.comm({
+       url: "/api/secure-data",
+       type: "POST",
+       dataType: "json",
+       fetchOptions: {
+           credentials: "include",
+           mode: "cors",
+           cache: "no-cache",
+           keepalive: true
+       }
+   }).submit(function(data) {
+       console.log("Data:", data);
    });
    ```
 
