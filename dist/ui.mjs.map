@@ -1,0 +1,1 @@
+{"version":3,"sources":["../src/ui/index.js"],"names":[],"mappings":";;;AACA,IAAO,aAAQ","file":"ui.mjs","sourcesContent":["// Temporary ui entry point\nexport default {};\n"]}

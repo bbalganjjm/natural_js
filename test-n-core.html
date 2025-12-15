@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Natural-JS Core Test</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="dist/natural.min.js"></script>
+</head>
+<body>
+    <h1>Natural-JS Core Test</h1>
+    <div id="results"></div>
+    
+    <script>
+        const results = [];
+        
+        function test(name, fn) {
+            try {
+                const result = fn();
+                results.push(`✅ ${name}: ${result}`);
+            } catch (e) {
+                results.push(`❌ ${name}: ${e.message}`);
+            }
+        }
+        
+        // Test N exists
+        test('N exists', () => typeof N);
+        test('N.version', () => N.version);
+        
+        // Test String utils
+        test('N.string.trimToEmpty', () => N.string.trimToEmpty('  test  '));
+        test('N.string.contains', () => N.string.contains('hello', 'll'));
+        
+        // Test Type checking
+        test('N.type("test")', () => N.type('test'));
+        test('N.isString("test")', () => N.isString('test'));
+        test('N.isNumeric(123)', () => N.isNumeric(123));
+        
+        // Test Date utils
+        test('N.date.dateToTs', () => typeof N.date.dateToTs(new Date()));
+        
+        // Test Logger
+        test('N.log exists', () => typeof N.log);
+        test('N.error exists', () => typeof N.error);
+        
+        // Test GC
+        test('N.gc exists', () => typeof N.gc);
+        test('N.gc.minimum exists', () => typeof N.gc.minimum);
+        
+        // Test jQuery extensions
+        test('jQuery.fn.remove_ exists', () => typeof jQuery.fn.remove_);
+        test('jQuery.fn.tpBind exists', () => typeof jQuery.fn.tpBind);
+        test('jQuery.fn.instance exists', () => typeof jQuery.fn.instance);
+        test('jQuery.fn.vals exists', () => typeof jQuery.fn.vals);
+        
+        // Test Date.prototype.formatDate
+        test('Date.prototype.formatDate exists', () => typeof Date.prototype.formatDate);
+        test('Date format test', () => new Date('2025-12-12').formatDate('Y-m-d'));
+        
+        // Display results
+        document.getElementById('results').innerHTML = '<pre>' + results.join('\n') + '</pre>';
+        
+        console.log('=== Natural-JS Core Test ===');
+        console.log(results.join('\n'));
+    </script>
+</body>
+</html>

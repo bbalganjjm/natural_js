@@ -1,200 +1,224 @@
-Natural-JS
-===
-Natural-JS is a JavaScript architectural framework designed to enable intuitive, easy, and fast implementation of user interfaces for enterprise web applications.
-
-Structure
-===
-
-Natural-JS consists of the Natural-CORE, Natural-ARCHITECTURE, Natural-DATA, and Natural-UI library packages.
-Natural-CORE is a common library package used globally within Natural-JS, and Natural-ARCHITECTURE is a library package that constitutes the architecture of Natural-JS.
-Natural-DATA is a library package that supports data synchronization, formatting, verification, and processing, and Natural-UI is a library package that provides HTML-based UI components.
-
-![Structure of Natural-JS](https://bbalganjjm.github.io/natural_js/images/intr/pic3.png)
-
-<center>[ Structure of Natural-JS ]</center>
-
-![Natural-JS Architecture Framework](https://bbalganjjm.github.io/natural_js/images/intr/pic0.png)
-
-<center>[ Natural-JS Architecture Framework ]</center>
-
-## Natural-CORE
-
-Natural-CORE is a common library package used globally by Natural-JS.
-
-### CORE Utitlities - N() & N
-N() is a Natural-JS core method. 
-It returns a collection of matched elements either found in the DOM based on the passed argument(s) or created by passing an HTML string.
-
-N is an object class that defines the core functions of Natural-JS.
-
-[N() and N](https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0101.html) provide the following jQuery extensions and utility classes:
-
-* jQuery selector extensions: jQuery selector extension for defining selectors with attributes such as style or data
-* jQuery plugin extension methods: Natural-JS utility method created with jQuery Plugin
-* N: Object class that defines the core functions of Natural-JS
-* N.gc: Function set class for Natural-JS internal garbage collection
-* N.string: Function set class for string control
-* N.element: Function set class for controlling HTML elements
-* N.date: Function set class for date control
-* N.browser: Web browser information-related function set class
-* N.message: Function set class for handling messages(multilingual)
-* N.array: Function set class for manipulating array data
-* N.json: Function set class for manipulating JSON data
-* N.event: Function set class for event control
-
-### Natural Config - Config(natural.config.js)
-
-[Config(natural.config.js)](https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0102.html) is a place to save the Natural-JS operation environment settings, AOP settings, Communication Filter settings, UI option values, etc.
-
-## Natural-ARCHITECTURE
-
-Natural-ARCHITECTURE is a library package that constitutes the architecture of Natural-JS.
-
-![Natural-ARCHITECTURE](https://bbalganjjm.github.io/natural_js/images/intr/pic4.png)
-
-<center>[ Natural-ARCHITECTURE ]</center>
-
-### Communicator-View-Controller(CVC) Architecture Pattern
-
-The CVC pattern is an architectural pattern based on the Model-View-Controller(MVC) pattern.
-As shown in the figure below, it is a client-centric architectural pattern that configures the client's browser area as the Communicator-View-Controller architecture and defines the server as the model area.
-Applying the CVC pattern allows client browser implementation technologies to deviate from server technology and server architecture dependencies, and the complexity of development can be reduced by completely separating the design and development areas.
-
-![CVC Architecture Pattern](https://bbalganjjm.github.io/natural_js/images/intr/pic5.png)
-
-<center>[ Communicator-View-Controller(CVC) Architecture Pattern ]</center>
-
-### Natural Architecture Framework
-
-Natural Architecture Framework is an architectural framework that implements the CVC Architecture Pattern.
-
-![Natural Architecture Framework](https://bbalganjjm.github.io/natural_js/images/intr/pic6.png)
-
-<center>[ Natural Architecture Framework ]</center>
-
-Natural Architecture Framework provides a clear separation of the areas of development, offering a foundation for division of work among professionals in each area.
-
-#### Controller
-
-[Controller(N.cont)](https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0201.html) is a class that implements the Controller layer of the CVC Architecture Pattern.
-* The Controller object is an object in which user-defined functions that control block pages are implemented.
-<p class="alert">N.cont executes the init function of the Controller object and returns a Controller object.</p>
- * Natural-ARCHITECTURE supports AOP(Aspect-Oriented Programming) for Controller objects.
-
-#### View
-
-There is no separate implementation of the View, and the HTML element area of the block page is defined as the View.
-
-#### Communicator
-
-[Communicator(N.comm)](https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0203.html) is a class that implements the Communicator layer of CVC Architecture Pattern.
-* N.comm is a library that supports Ajax communication with the server, such as requesting content or data from the server or passing parameters.
-* N.comm provides a [Communication Filter](https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0205.html) feature that can execute common logic in every request and response or error generation phase when communicates with the server.
-
-#### Context
-
-Context(N.context) is a space that ensures data persistence within the life-cycle (until the page is loaded and redirected to another URL) of a Natural-JS-based application.
-Natural-JS configuration values ([Config(natural.config.js)](https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0102.html)), global configuration values, common messages of the framework, etc., are stored in N.context objects.
-
-
-## Natural-DATA
-
-Natural-DATA is a library package that supports data synchronization, formatting, validation, and processing.
-
-### DataSync
-
-DataSync is a library that synchronizes data changed by components or libraries in real-time.
-<p class="alert">DataSync supports two-way data binding between components.</p>
-
-### Formatter
-
-[Formatter(N.formatter)](https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0301.html) is a library that formats the input dataset(JSON object array) and returns the formatted dataset.
-
-### Validator
-
-[Validator(N.validator)](https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0302.html) is a library that validates the input dataset(JSON object array) and returns a validation result dataset.
-
-### Natural-DATA Library
-
-[Natural-DATA Library](https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0303.html) provides methods and functions for sorting, filtering, and refining data of the JSON object array type.
-
-
-## Natural-UI
-
-Natural-UI is a library package that supports HTML-based UI components.
-
-<p class="alert">Components such as Grid, List, and Form do not have their own style. If the style is defined in the context element(table, ul/li, etc.) of the component before initializing the component, the component is created according to the defined style.</p>
-
-![Natural-UI](https://bbalganjjm.github.io/natural_js/images/intr/pic7.png)
-
-<center>[ Natural-UI ]</center>
-
-### Alert
-
-[Alert(N.alert)](https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0401.html) is a UI component that displays message dialogs like window.alert or window.confirm in the form of layer popups.
-
-### Button
-
-[Button(N.button)](https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0402.html) is a UI component that creates a button with "a, input[type=button], button" element specified as a context option.
-
-### Datepicker
-
-[Datepicker(N.datepicker)](https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0403.html) is a UI component that displays a calendar popup for selecting a date or month in the text input element specified by the context option.
-
-### Popup
-
-[Popup(N.popup)](https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0404.html) is a UI component that creates a layer popup from the internal element specified by the context option or the page specified by the URL option.
-
-### Tab
-
-[Tab(N.tab)](https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0405.html) is a UI component that creates a tab page view by specifying an element consisting of div>ul>li tags as the context option.
-
-### Select
-
-[Select(N.select)](https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0406.html) is a UI component that binds data to select, input[type=checkbox], and input[type=radio] elements to create selections and extends the functionality of those controls.
-
-### Form
-
-[Form(N.form)](https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0407.html) is a UI component that binds or creates single-row data to an element(block elements such as div and table) specified by the context option.
-
-### List
-
-[List(N.list)](https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0408.html) is a UI component that creates a list of data in the form of a single column by specifying the `ul>li` element as the context option.
-
-### Grid
-
-[Grid(N.grid)](https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0409.html) is a UI component that creates a list of data in a multi-column form by specifying a table element as a context option.
-
-### Pagination
-
-[Pagination(N.pagination)](https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0410.html) is a UI component that creates paging indexes from list data or the total count of rows.
-
-### Tree
-
-[Tree(N.tree)](https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0411.html) is a UI component that transforms hierarchical data into tree elements.
-
-## Natural-UI.Shell
-
-While Natural-UI supports UI development in the content area, Natural-UI.Shell is a component package that supports the development of shell areas outside the content area.
-
-### Notify(N.notify)
-
-[Notify(N.notify)](https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0501.html) is a UI component that displays a global notification message in a specified location that does not require user confirmation.
-
-### Documents(N.docs)
-
-[Documents(N.docs)](https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0502.html) is a page container that displays Natural-JS based menu pages in MDI(Multi Document Interface) or SDI(Single Document Interface) structure.
-
-Supports
-===
-
-### Support browsers
-
-* Any PC/mobile browser that supports ECMAScript5(ES5) or higher.
-
-### Training and support
-
-* Please contact us at <bbalganjjm@gmail.com>.
-
-### License
-This software is licensed under the [LGPL v2.1](https://github.com/bbalganjjm/natural_js/blob/master/LICENSE) &copy; Goldman Kim&lt;<bbalganjjm@gmail.com>&gt;
+# Natural-JS
+
+[![NPM Version](https://img.shields.io/npm/v/@bbalganjjm/natural_js.svg)](https://www.npmjs.com/package/@bbalganjjm/natural_js)
+[![License](https://img.shields.io/badge/license-LGPL%20v2.1-blue.svg)](https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html)
+
+Natural-JS는 jQuery 기반의 강력하고 유연한 JavaScript UI/Architecture 프레임워크입니다.
+
+## ✨ v2.0 주요 변경사항
+
+- 🎯 **네임스페이스 통합**: NC/NA/ND/NU/NUS → `N` 단일 네임스페이스
+- ⚡ **빌드 시스템 현대화**: Shell 스크립트 → tsup (30배 빠름)
+- 📦 **모듈 구조 개선**: 8개 파일 → 50개 모듈
+- 🔄 **자동 마이그레이션**: `npm run migrate`
+- ✅ **100% 기능 유지**: 모든 컴포넌트 및 API
+
+## 설치
+
+```bash
+npm install @bbalganjjm/natural_js jquery
+```
+
+## 빠른 시작
+
+### Browser (CDN)
+
+```html
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="dist/natural.min.js"></script>
+
+<script>
+// Core utilities
+const trimmed = N.string.trimToEmpty('  test  ');
+console.log(N.type([])); // "array"
+
+// UI Components
+N("#myForm").form({ data: [{ name: "John", age: 25 }] });
+N("#myGrid").grid({ 
+    data: [...],
+    height: 300,
+    sortable: true
+});
+
+// Communication
+N.comm({ url: "/api/data" }).submit(function(data) {
+    console.log("Data received:", data);
+});
+</script>
+```
+
+### Node.js (CommonJS)
+
+```javascript
+const N = require('@bbalganjjm/natural_js');
+
+// Core utilities  
+N.string.trimToEmpty('  test  ');
+N.date.format(new Date(), 'yyyy-MM-dd');
+
+// Data processing
+N.formatter(rules).format(data);
+N.validator(rules).validate(data);
+```
+
+### ES Modules
+
+```javascript
+import N from '@bbalganjjm/natural_js';
+
+// Same as above
+N.string.trimToEmpty('  test  ');
+```
+
+## 주요 기능
+
+### Core Utilities
+- **N.string**: 문자열 처리 (trimToEmpty, contains, etc.)
+- **N.date**: 날짜 처리 (format, strToDate, etc.)
+- **N.type**: 타입 체크 (type, isString, isArray, etc.)
+- **N.element**: DOM 요소 처리
+- **N.browser**: 브라우저 정보
+- **N.array**: 배열 처리
+- **N.json**: JSON 처리
+- **N.event**: 이벤트 처리
+
+### Architecture
+- **N.comm**: Ajax 통신 (Communication Filter 지원)
+- **N.fetch**: Fetch API wrapper
+- **N.cont**: Controller (CVC 패턴)
+- **N.context**: 애플리케이션 Context
+
+### Data
+- **N.ds**: DataSync (양방향 데이터 바인딩)
+- **N.formatter**: 데이터 포맷팅
+- **N.validator**: 데이터 유효성 검사
+- **N.data**: 데이터 필터링/정렬
+
+### UI Components
+- **N.form**: 폼 데이터 바인딩
+- **N.grid**: 그리드 (테이블, 고정컬럼, 정렬, 필터링)
+- **N.list**: 리스트 (단일 컬럼)
+- **N.select**: 셀렉트 박스
+- **N.pagination**: 페이지네이션
+- **N.tree**: 트리 (계층형 데이터)
+- **N.alert**: 알림 대화상자
+- **N.button**: 버튼 스타일링
+- **N.popup**: 팝업
+- **N.tab**: 탭
+- **N.datepicker**: 날짜 선택기
+
+### UI Shell
+- **N.notify**: 전역 알림
+- **N.docs**: MDI/SDI 문서 컨테이너
+
+## 사용 예시
+
+### Form 컴포넌트
+```javascript
+const data = [{ name: "John", age: 25, email: "john@example.com" }];
+
+N(data).form({
+    context: N("#myForm"),
+    validate: true,
+    onBind: function(context, data, row) {
+        console.log("Form bound:", data);
+    }
+}).bind();
+```
+
+### Grid 컴포넌트
+```javascript
+N(data).grid({
+    context: N("#myGrid"),
+    height: 300,
+    fixedcol: 2,
+    sortable: true,
+    multiselect: true,
+    onSelect: function(row, rowEle, rowData) {
+        console.log("Selected row:", row, rowData);
+    }
+}).bind();
+```
+
+### Communication
+```javascript
+N.comm({ 
+    url: "/api/users",
+    type: "GET",
+    dataType: "json"
+}).submit(function(data) {
+    N("#userGrid").grid({ data: data }).bind();
+});
+```
+
+### Data Formatting & Validation
+```javascript
+// Formatting
+const formatted = N.formatter.trimToEmpty("  test  "); // "test"
+N(data).formatter({
+    name: ["upper"],
+    age: ["trimToZero"]
+}).format();
+
+// Validation
+const result = N.validator.required("value"); // true/false
+N(data).validator({
+    name: [["required"], ["minlength", 2]],
+    email: [["required"], ["email"]]
+}).validate();
+```
+
+## 빌드
+
+```bash
+# Development (watch mode)
+npm run dev
+
+# Production build
+npm run build
+
+# ES5 build (IE11)
+npm run build:es5
+
+# Clean
+npm run clean
+```
+
+## 마이그레이션 (v1.x → v2.0)
+
+자동 마이그레이션 도구 사용:
+
+```bash
+npm run migrate -- --backup
+```
+
+자세한 내용은 [MIGRATION.md](docs/MIGRATION.md)를 참고하세요.
+
+## 문서
+
+- [마이그레이션 가이드](docs/MIGRATION.md)
+- [변경 로그](CHANGELOG.md)
+- [API 문서](https://bbalganjjm.github.io/natural_js)
+
+## 브라우저 지원
+
+- Chrome (최신)
+- Firefox (최신)
+- Safari (최신)
+- Edge (최신)
+- IE11 (ES5 빌드)
+
+## 라이선스
+
+LGPL v2.1
+
+## 작성자
+
+Goldman Kim (bbalganjjm@gmail.com)
+
+## 기여
+
+Issues와 Pull Requests는 언제나 환영합니다!
+
+- GitHub: https://github.com/bbalganjjm/natural_js
+- Issues: https://github.com/bbalganjjm/natural_js/issues
