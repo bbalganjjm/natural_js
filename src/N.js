@@ -55,14 +55,6 @@ import { List } from './ui/components/list/list.js';
 import { Grid } from './ui/components/grid/grid.js';
 import { Tree } from './ui/components/tree/tree.js';
 
-// UI-Shell
-import { Notify } from './ui-shell/notify/notify.js';
-import { Docs } from './ui-shell/docs/docs.js';
-
-// Code, Template
-import { Code } from './code/inspection.js';
-import { Template } from './template/aop.js';
-
 // Apply global extensions
 applyJQueryExtensions();
 initDateFormatter();
@@ -232,14 +224,6 @@ export class NJS {
     static grid = Grid;
     static pagination = Pagination;
     static tree = Tree;
-    
-    // Static Properties - UI-Shell
-    static notify = Notify;
-    static docs = Docs;
-    
-    // Static Properties - Code, Template
-    static code = Code;
-    static template = Template;
 }
 
 // Set prototype chain: NJS -> jQuery.fn
