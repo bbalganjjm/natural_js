@@ -1,1 +1,1 @@
-{"version":3,"sources":["../src/ui/index.js"],"names":[],"mappings":";;;;;AACA,IAAO,aAAQ","file":"ui.js","sourcesContent":["// Temporary ui entry point\nexport default {};\n"]}
+{"version":3,"sources":["../src/ui/index.js"],"names":["ui_default"],"mappings":";AACA,IAAOA,EAAQ","file":"ui.js","sourcesContent":["// Temporary ui entry point\nexport default {};\n"]}

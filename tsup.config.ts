@@ -25,8 +25,8 @@ export default defineConfig({
   // Source maps
   sourcemap: true,
   
-  // Minification
-  minify: process.env.NODE_ENV === 'production',
+  // Minification (always minify IIFE format which outputs .min.js)
+  minify: true,
   
   // Target
   target: 'es2015', // ES6
