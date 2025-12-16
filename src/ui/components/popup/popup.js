@@ -4,21 +4,15 @@
  */
 
 import { error as createError, warn } from '../../../core/helpers/logger.js';
-import { type as getType, isPlainObject, isString, isElement, isArray } from '../../../core/helpers/type-checker.js';
-import { StringUtils } from '../../../core/utils/string.js';
 import { ElementUtils } from '../../../core/utils/element.js';
-import { DateUtils } from '../../../core/utils/date.js';
-import { BrowserUtils } from '../../../core/utils/browser.js';
 import { EventUtils } from '../../../core/utils/event.js';
 import { Context } from '../../../architecture/context/context.js';
-import { DataSync } from '../../../data/sync/data-sync.js';
-import { Formatter } from '../../../data/formatter/formatter.js';
-import { Validator } from '../../../data/validator/validator.js';
-import { Iteration } from '../../shared/iteration.js';
+import { Communicator } from '../../../architecture/communication/communicator.js';
+import { Controller } from '../../../architecture/controller/controller.js';
 import { UIUtils } from '../../shared/utils.js';
-import { Scroll } from '../../shared/scroll.js';
-import { Draggable } from '../../shared/draggable.js';
-import { GC } from '../../../core/gc/garbage-collector.js';
+
+// Import N at runtime to avoid circular dependency
+const N = () => window.N;
 
 export class Popup {
 
@@ -87,11 +81,11 @@ export class Popup {
             } else {
                 if(arguments.length === 1 && isPlainObject(obj)) {
                     opts = obj;
-                    obj = jQuery(window);
+                    obj = N()(window);
                 }
             }
 
-            // Wraps the global event options in NA.config and event options for this component.
+            // Wraps the global event options in Context and event options for this component.
             UIUtils.wrapHandler(opts, "popup", "onOk");
             UIUtils.wrapHandler(opts, "popup", "onCancel");
             UIUtils.wrapHandler(opts, "popup", "onBeforeShow");
@@ -154,7 +148,7 @@ export class Popup {
                 opts.context.removeAttr("title");
             }
 
-            this.alert = jQuery(window).alert(opts);
+            this.alert = N()(window).alert(opts);
             this.alert.options.msgContext.addClass("popup_overlay__");
             this.alert.options.msgContents.addClass("popup__");
 
@@ -167,14 +161,14 @@ export class Popup {
             const opts = this.options;
             const self = this;
 
-            new NA.comm({
+            new Communicator({
                 url : opts.url,
                 contentType : "text/html; charset=UTF-8",
                 dataType : "html",
                 type : "GET"
             }).submit(function(page) {
                 // set loaded page instance to options.context
-                opts.context = jQuery(page);
+                opts.context = N()(page);
 
                 // set title
                 if(opts.title === null) {
@@ -205,7 +199,7 @@ export class Popup {
                     opts.opener = undefined;
                 }
 
-                self.alert = jQuery(window).alert(opts);
+                self.alert = N()(window).alert(opts);
 
                 if(opener) {
                     opts.opener = opener;
@@ -234,7 +228,7 @@ export class Popup {
                     }
 
                     // triggering "init" method
-                    NA.cont.trInit.call(this, cont, this.request);
+                    Controller.trInit.call(this, cont, this.request);
 
                     callback.call(self, cont, opts.context);
                 } else {
@@ -265,7 +259,7 @@ export class Popup {
                     if(opts.context.filter(".view_context__:last").instance("cont")[opts.onOpen] !== undefined) {
                         opts.context.filter(".view_context__:last").instance("cont")[opts.onOpen](onOpenData);
                     } else {
-                        warn("[Popup.popOpen]The onOpen event handler(" + opts.onOpen + ") is not defined on the Controller(NA.cont) of the Popup.");
+                        warn("[Popup.popOpen]The onOpen event handler(" + opts.onOpen + ") is not defined on the Controller of the Popup.");
                     }
                 }
             };

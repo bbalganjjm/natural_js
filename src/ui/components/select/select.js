@@ -4,27 +4,18 @@
  */
 
 import { error as createError, warn } from '../../../core/helpers/logger.js';
-import { type as getType, isPlainObject, isString, isElement, isArray } from '../../../core/helpers/type-checker.js';
-import { StringUtils } from '../../../core/utils/string.js';
+import { type as getType, isPlainObject, isEmptyObject } from '../../../core/helpers/type-checker.js';
 import { ElementUtils } from '../../../core/utils/element.js';
-import { DateUtils } from '../../../core/utils/date.js';
-import { BrowserUtils } from '../../../core/utils/browser.js';
-import { EventUtils } from '../../../core/utils/event.js';
 import { Context } from '../../../architecture/context/context.js';
-import { DataSync } from '../../../data/sync/data-sync.js';
-import { Formatter } from '../../../data/formatter/formatter.js';
-import { Validator } from '../../../data/validator/validator.js';
-import { Iteration } from '../../shared/iteration.js';
-import { UIUtils } from '../../shared/utils.js';
-import { Scroll } from '../../shared/scroll.js';
-import { Draggable } from '../../shared/draggable.js';
-import { GC } from '../../../core/gc/garbage-collector.js';
+
+// Import N at runtime to avoid circular dependency
+const N = () => window.N;
 
 export class Select {
 
         constructor(data, opts) {
             this.options = {
-                data : getType(data) === "array" ? jQuery(data) : data,
+                data : getType(data) === "array" ? N()(data) : data,
                 context : null,
                 key : null,
                 val : null,
@@ -42,13 +33,13 @@ export class Select {
             jQuery.extend(this.options, ElementUtils.toOpts(this.options.context));
 
             if (isPlainObject(opts)) {
-                jQuery.extend(this.options, opts);
+                jQuery.extend(true, this.options, opts);
                 if(getType(this.options.data) === "array") {
-                    this.options.data = jQuery(opts.data);
+                    this.options.data = N()(opts.data);
                 }
-                this.options.context = jQuery(opts.context);
+                this.options.context = N()(opts.context);
             } else {
-                this.options.context = jQuery(opts);
+                this.options.context = N()(opts);
             }
             this.options.template = this.options.context;
 
@@ -87,7 +78,7 @@ export class Select {
                 if(getType(idxs) !== "array") {
                     idxs = [idxs];
                 }
-                return jQuery(idxs).map(function() {
+                return N()(idxs).map(function() {
                     if(this - defSelCnt > -1) {
                         return opts.data.get(this - defSelCnt);
                     }
@@ -108,7 +99,7 @@ export class Select {
 
             //to rebind new data
             if(data != null) {
-                opts.data = getType(data) === "array" ? jQuery(data) : data;
+                opts.data = getType(data) === "array" ? N()(data) : data;
             }
 
             if(opts.type === 1 || opts.type === 2) {
@@ -123,7 +114,7 @@ export class Select {
             } else if(opts.type === 3 || opts.type === 4) {
                 if(opts.context.filter(".select_template__").length === 0) {
                     const id = opts.context.attr("id")
-                    let container = jQuery('<form class="select_input_container__" style="display: inline;" />');
+                    let container = N()('<form class="select_input_container__" style="display: inline;" />');
                     if (opts.direction === "h") {
                         container.addClass("select_input_horizontal__");
                     } else if (opts.direction === "v") {
@@ -132,8 +123,8 @@ export class Select {
                     let labelEle;
                     let labelTextEle
                     opts.data.each(function(i, rowData) {
-                        labelEle = jQuery('<label class="select_input_label__ ' + id + "_" + String(i) + '__"></label>');
-                        labelTextEle = jQuery('<span>' + rowData[opts.key] + '</span>');
+                        labelEle = N()('<label class="select_input_label__ ' + id + "_" + String(i) + '__"></label>');
+                        labelTextEle = N()('<span>' + rowData[opts.key] + '</span>');
                         if(i === 0) {
                             opts.template.attr("name", id).attr("value", rowData[opts.val]).addClass("select_input__ select_template__")
                                 .wrap(labelEle)
@@ -172,7 +163,7 @@ export class Select {
             }
 
             const vals = [];
-            jQuery(getType(idx) === "number" ? [idx] : idx).each(function() {
+            N()(getType(idx) === "number" ? [idx] : idx).each(function() {
                 vals.push((opts.type === 1 || opts.type === 2 ? selectSiblingEles : selectEles).get(this).value);
             });
             selectEles.vals(vals);
@@ -183,8 +174,8 @@ export class Select {
         val(val) {
             const opts = this.options;
 
-            if(!NC.isEmptyObject(opts.data)) {
-                const rtnVal = jQuery(opts.type === 3 || opts.type === 4
+            if(!isEmptyObject(opts.data)) {
+                const rtnVal = N()(opts.type === 3 || opts.type === 4
                     ? this.options.context.closest(".select_input_container__").find(":input") : this.options.context).vals(val);
                 if(val === undefined) {
                     return rtnVal;

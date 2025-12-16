@@ -1,7 +1,10 @@
 /**
  * Natural-JS UI Scroll
- * Simplified version - full implementation in original natural.ui.js lines 377-411
+ * Full implementation from natural.ui.js lines 377-411
  */
+
+// Import N at runtime to avoid circular dependency
+const N = () => window.N;
 
 export class Scroll {
     static paging(contextWrapEle, defSPSize, rowEleLength, rowTagName, bindOpt) {
@@ -10,10 +13,12 @@ export class Scroll {
 
         contextWrapEle.on("scroll", function() {
             if(opts.scrollPaging.size > 0 && opts.isBinding === false) {
-                const thisWrap = jQuery(this);
+                const thisWrap = N()(this);
                 if (Math.ceil(thisWrap.scrollTop()) >= opts.context.height() - thisWrap.height()) {
                     rowEleLength = opts.context.find(rowTagName).length;
-                    
+                    if(opts.currMoveToRow > -1 && rowEleLength < opts.currMoveToRow) {
+                        defSPSize -= 1;
+                    }
                     if (rowEleLength >= opts.scrollPaging.idx + defSPSize) {
                         if (rowEleLength > 0 && rowEleLength <= opts.data.length) {
                             opts.scrollPaging.idx += defSPSize;

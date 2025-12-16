@@ -1,7 +1,10 @@
 /**
  * Natural-JS UI Draggable
- * Simplified version - full implementation in original natural.ui.js lines 274-375
+ * Full implementation from natural.ui.js lines 274-375
  */
+
+// Import N at runtime to avoid circular dependency
+const N = () => window.N;
 
 export class Draggable {
     static events(eventNameSpace, startHandler, moveHandler, endHandler) {
@@ -16,8 +19,8 @@ export class Draggable {
                 }
 
                 if(isContinue !== false) {
-                    jQuery(document).on("mousemove" + eventNameSpace + " touchmove" + eventNameSpace, function(e) {
-                        jQuery(document).on("dragstart" + eventNameSpace + " selectstart" + eventNameSpace, function() {
+                    N()(document).on("mousemove" + eventNameSpace + " touchmove" + eventNameSpace, function(e) {
+                        N()(document).on("dragstart" + eventNameSpace + " selectstart" + eventNameSpace, function() {
                             return false;
                         });
 
@@ -30,10 +33,15 @@ export class Draggable {
                         if(!e.originalEvent.touches) {
                             e.preventDefault();
                         }
+                        e.stopImmediatePropagation();
+                        e.stopPropagation();
+                        if(!e.originalEvent.touches) {
+                            return false;
+                        }
                     });
 
-                    jQuery(document).on("mouseup" + eventNameSpace + " touchend" + eventNameSpace, function(e) {
-                        jQuery(document).off("dragstart" + eventNameSpace + " selectstart" + eventNameSpace + " mousemove" + eventNameSpace + " touchmove" + eventNameSpace + " mouseup" + eventNameSpace + " touchend" + eventNameSpace);
+                    N()(document).on("mouseup" + eventNameSpace + " touchend" + eventNameSpace, function(e) {
+                        N()(document).off("dragstart" + eventNameSpace + " selectstart" + eventNameSpace + " mousemove" + eventNameSpace + " touchmove" + eventNameSpace + " mouseup" + eventNameSpace + " touchend" + eventNameSpace);
 
                         if(endHandler !== undefined) {
                             endHandler.call(this, e, selfEle)
@@ -42,6 +50,11 @@ export class Draggable {
                         if(!e.originalEvent.touches) {
                             e.preventDefault();
                         }
+                        e.stopImmediatePropagation();
+                        e.stopPropagation();
+                        if(!e.originalEvent.touches) {
+                            return false;
+                        }
                     });
                 }
             }
@@ -49,9 +62,17 @@ export class Draggable {
             if(!e.originalEvent.touches) {
                 e.preventDefault();
             }
+            e.stopImmediatePropagation();
+            e.stopPropagation();
+            if(!e.originalEvent.touches) {
+                return false;
+            }
         });
     }
 
+    /**
+     * This function is not working in less than IE 9
+     */
     static moveX(x, min, max) {
         const ele = this;
         if(min !== undefined && x < min) {
@@ -64,11 +85,14 @@ export class Draggable {
         }
 
         const propNm = ["-webkit-transform", "-ms-transform", "transform"];
-        jQuery(propNm).each(function() {
+        N()(propNm).each(function() {
             ele.css(this, "translateX(" + x + "px)");
         });
     }
 
+    /**
+     * This function is not working in less than IE 9
+     */
     static moveY(y, min, max) {
         const ele = this;
         if(min !== undefined && y < min) {
@@ -81,7 +105,7 @@ export class Draggable {
         }
 
         const propNm = ["-webkit-transform", "-ms-transform", "transform"];
-        jQuery(propNm).each(function() {
+        N()(propNm).each(function() {
             ele.css(this, "translateY(" + y + "px)");
         });
     }

@@ -24,7 +24,7 @@ export class Grid {
 
         constructor(data, opts) {
             this.options = {
-                data : getType(data) === "array" ? jQuery(data) : data,
+                data : getType(data) === "array" ? N()(data) : data,
                 row : -1, // selected row index
                 beforeRow : -1, // before selected row index
                 context : null,
@@ -92,13 +92,13 @@ export class Grid {
             }
 
             if (isPlainObject(opts)) {
-                // Wraps the global event options in NA.config and event options for this component.
+                // Wraps the global event options in N().config and event options for this component.
                 UIUtils.wrapHandler(opts, "grid", "onBeforeSelect");
                 UIUtils.wrapHandler(opts, "grid", "onSelect");
                 UIUtils.wrapHandler(opts, "grid", "onBind");
 
                 //convert data to wrapped set
-                opts.data = getType(opts.data) === "array" ? jQuery(opts.data) : opts.data;
+                opts.data = getType(opts.data) === "array" ? N()(opts.data) : opts.data;
 
                 jQuery.extend(true, this.options, opts);
 
@@ -106,10 +106,10 @@ export class Grid {
                 this.options.scrollPaging.limit = this.options.scrollPaging.size;
 
                 if(getType(this.options.context) === "string") {
-                    this.options.context = jQuery(this.options.context);
+                    this.options.context = N()(this.options.context);
                 }
             } else {
-                this.options.context = jQuery(opts);
+                this.options.context = N()(opts);
             }
 
             // If the value of the opts.scrollPaging.size value is greater than 0, the addTop option is unconditionally set to true.
@@ -178,7 +178,7 @@ export class Grid {
 
             // set rowspan column info
             this.rowSpanIds = this.thead.find("th:regexp(data:rowspan,true)").map(function() {
-                return jQuery(this).data("id");
+                return N()(this).data("id");
             });
 
             // set function for check all checkbox in list
@@ -243,7 +243,7 @@ export class Grid {
                     }
                     for (let i = 0, colSpan = parseInt(td.colSpan, 10) || 1; i < colSpan; i++) {
                         for (let j = 0, rowSpan = parseInt(td.rowSpan, 10) || 1; j < rowSpan; j++) {
-                            jQuery(td).addClass("col_" + (colIndex + offset + i) + "__");
+                            N()(td).addClass("col_" + (colIndex + offset + i) + "__");
                             if(twoD[rowIndex + j] !== undefined) {
                                 twoD[rowIndex + j][colIndex + offset + i] = td;
                             } else {
@@ -265,17 +265,17 @@ export class Grid {
 
             if(opts.context.find("> colgroup").length > 0) {
                 colgroup.push(opts.context.find("> colgroup > col").each(function(i) {
-                    jQuery(this).addClass("col_" + String(i) + "__");
+                    N()(this).addClass("col_" + String(i) + "__");
                 }).get());
             }
 
             if(opts.height > 0) {
                 if(opts.context.find("> colgroup").length > 0) {
                     colgroup.unshift(opts.context.closest(".grid_wrap__").find(">.thead_wrap__>table>colgroup>col").each(function(i) {
-                        jQuery(this).addClass("col_" + String(i) + "__");
+                        N()(this).addClass("col_" + String(i) + "__");
                     }).get());
                     colgroup.push(opts.context.closest(".grid_wrap__").find(">.tfoot_wrap__>table>colgroup>col").each(function(i) {
-                        jQuery(this).addClass("col_" + String(i) + "__");
+                        N()(this).addClass("col_" + String(i) + "__");
                     }).get());
                 }
                 thead = Grid.tableCells(opts.context.closest(".grid_wrap__").find(">.thead_wrap__>table>thead"));
@@ -301,16 +301,16 @@ export class Grid {
                 return;
             }
             let nextCnt = 0;
-            jQuery(tableMap.tbody).each(function(i, cells) {
-                jQuery(cells).each(function(j, cell) {
+            N()(tableMap.tbody).each(function(i, cells) {
+                N()(cells).each(function(j, cell) {
                     if(tableMap.thead[i+nextCnt] === undefined || tableMap.thead[i+nextCnt][j] === undefined) {
                         return false;
                     }
-                    let theadCell = jQuery(tableMap.thead[i+nextCnt][j]);
-                    const tbodyCell = jQuery(cell);
+                    let theadCell = N()(tableMap.thead[i+nextCnt][j]);
+                    const tbodyCell = N()(cell);
 
                     if(nextCnt === 0 && tbodyCell.attr("colspan") !== theadCell.attr("colspan")) {
-                        theadCell = jQuery(tableMap.thead[i+1][j]);
+                        theadCell = N()(tableMap.thead[i+1][j]);
                     }
 
                     if(tbodyCell.attr("colspan") === theadCell.attr("colspan")) {
@@ -339,16 +339,16 @@ export class Grid {
                 }
 
                 opts.context.find("colgroup>col").each(function(i, colEle) {
-                    jQuery(theadMap).each(function(j, rowEles) {
-                        if(jQuery(rowEles[i]).attr("colspan") === undefined) {
-                            jQuery(rowEles[i]).css("width", colEle.style.width).removeAttr("scope");
+                    N()(theadMap).each(function(j, rowEles) {
+                        if(N()(rowEles[i]).attr("colspan") === undefined) {
+                            N()(rowEles[i]).css("width", colEle.style.width).removeAttr("scope");
                         }
                     })
 
                     if(opts.height > 0) {
-                        jQuery(tfootMap).each(function(j, rowEles) {
-                            if(jQuery(rowEles[i]).attr("colspan") === undefined) {
-                                jQuery(rowEles[i]).css("width", colEle.style.width).removeAttr("scope");
+                        N()(tfootMap).each(function(j, rowEles) {
+                            if(N()(rowEles[i]).attr("colspan") === undefined) {
+                                N()(rowEles[i]).css("width", colEle.style.width).removeAttr("scope");
                             }
                         })
                     }
@@ -368,12 +368,12 @@ export class Grid {
                     }, 0)
                 });
 
-                const gridWrap = opts.context.wrap(jQuery("<div/>", {
+                const gridWrap = opts.context.wrap(N()("<div/>", {
                     "css" : { "overflow-x" : (BrowserUtils.is("ios") ? "scroll" : "auto") },
                     "class" : "grid_wrap__"
                 })).parent("div");
 
-                const gridContainer = gridWrap.wrap(jQuery("<div/>", {
+                const gridContainer = gridWrap.wrap(N()("<div/>", {
                     "class" : "grid_container__"
                 })).parent("div");
 
@@ -392,10 +392,10 @@ export class Grid {
                     let targetTheadCellEle;
                     let targetTbodyCellEle;
 
-                    targetTheadCellEle = jQuery(self.tableMap.thead).map(function() {
+                    targetTheadCellEle = N()(self.tableMap.thead).map(function() {
                         return this[i];
                     }).addClass("grid_head_fixed__");
-                    targetTbodyCellEle = jQuery(self.tableMap.tbody).map(function() {
+                    targetTbodyCellEle = N()(self.tableMap.tbody).map(function() {
                         return this[i];
                     }).addClass("grid_body_fixed__");
 
@@ -431,11 +431,11 @@ export class Grid {
 
                     // remove colgroup's first col elements width
                     if(self.tableMap.colgroup.length > 0) {
-                        jQuery(self.tableMap.colgroup).each(function() {
+                        N()(self.tableMap.colgroup).each(function() {
                             if(i === 0) {
-                                jQuery(this[i]).width(0);
+                                N()(this[i]).width(0);
                             } else {
-                                jQuery(this[i]).hide();
+                                N()(this[i]).hide();
                             }
                         });
                     }
@@ -551,7 +551,7 @@ export class Grid {
 
         static vResize = function(gridWrap, contextWrapEle, tfootWrap) {
             let pressed = false;
-            const vResizable = jQuery('<div class="v_resizable__"></div>').css({
+            const vResizable = N()('<div class="v_resizable__"></div>').css({
                 "text-align": "center",
                 "cursor": "n-resize",
                 "margin-bottom": gridWrap.css("margin-bottom")
@@ -581,12 +581,12 @@ export class Grid {
 
                 if(e.originalEvent.touches || (e.which || e.button) === 1) {
 
-                    jQuery(document).on("dragstart.grid.vResize selectstart.grid.vResize", function() {
+                    N()(document).on("dragstart.grid.vResize selectstart.grid.vResize", function() {
                         return false;
                     });
                     pressed = true;
 
-                    jQuery(window.document).on("mousemove.grid.vResize touchmove.grid.vResize", function(e) {
+                    N()(window.document).on("mousemove.grid.vResize touchmove.grid.vResize", function(e) {
                         let mte;
                         if(e.originalEvent.touches) {
                             e.stopPropagation();
@@ -601,8 +601,8 @@ export class Grid {
                         }
                     });
 
-                    jQuery(window.document).on("mouseup.grid.vResize touchend.grid.vResize", function(e) {
-                        jQuery(document).off("dragstart.grid.vResize selectstart.grid.vResize mousemove.grid.vResize touchmove.grid.vResize mouseup.grid.vResize touchend.grid.vResize");
+                    N()(window.document).on("mouseup.grid.vResize touchend.grid.vResize", function(e) {
+                        N()(document).off("dragstart.grid.vResize selectstart.grid.vResize mousemove.grid.vResize touchmove.grid.vResize mouseup.grid.vResize touchend.grid.vResize");
                         pressed = false;
                     });
                 }
@@ -617,7 +617,7 @@ export class Grid {
 
             if(opts.more === true) {
                 opts.more = self.tempRowEle.find("[id]").map(function() {
-                    return jQuery(this).attr("id");
+                    return N()(this).attr("id");
                 }).get();
             }
 
@@ -631,13 +631,13 @@ export class Grid {
             let theadCol;
             const theadRowCnt = Grid.tableCells(opts.context.find(">thead")).length;
             if(theadRowCnt > 0) {
-                theadCol = jQuery('<th></th>').addClass("grid_more_thead_col__");
+                theadCol = N()('<th></th>').addClass("grid_more_thead_col__");
                 if(theadRowCnt > 1) {
                     theadCol.attr("rowspan", String(theadRowCnt));
                 }
             }
             // Hide and show button.
-            const colShowHideBtn = jQuery('<a href="#" title="' + NC.message.get(opts.message, "showHide") + '"><span></span></a>').addClass("grid_col_show_hide_btn__").appendTo(theadCol);
+            const colShowHideBtn = N()('<a href="#" title="' + N().message.get(opts.message, "showHide") + '"><span></span></a>').addClass("grid_col_show_hide_btn__").appendTo(theadCol);
             // Append column to tr in thead
             if(theadCol !== undefined) {
                 opts.context.find(">thead > tr:first").append(theadCol);
@@ -647,13 +647,13 @@ export class Grid {
             let tbodyCol;
             const tbodyRowCnt = Grid.tableCells(this.tempRowEle).length;
             if(tbodyRowCnt > 0) {
-                tbodyCol = jQuery('<td></td>').addClass("grid_more_tbody_col__");
+                tbodyCol = N()('<td></td>').addClass("grid_more_tbody_col__");
                 if(tbodyRowCnt > 1) {
                     tbodyCol.attr("rowspan", String(tbodyRowCnt));
                 }
             }
             // Detail popup button.
-            const moreBtn = jQuery('<a href="#" title="' + NC.message.get(opts.message, "more") + '"><span></span></a>').addClass("grid_more_btn__").appendTo(tbodyCol);
+            const moreBtn = N()('<a href="#" title="' + N().message.get(opts.message, "more") + '"><span></span></a>').addClass("grid_more_btn__").appendTo(tbodyCol);
             // Append column to tr in tbody
             if(tbodyCol !== undefined) {
                 self.tempRowEle.find("> tr:first").append(tbodyCol);
@@ -663,7 +663,7 @@ export class Grid {
             let tfootCol;
             const tfootRowCnt = Grid.tableCells(opts.context.find(">tfoot")).length;
             if(tfootRowCnt > 0) {
-                tfootCol = jQuery('<td></td>').addClass("grid_more_tfoot_col__")
+                tfootCol = N()('<td></td>').addClass("grid_more_tfoot_col__")
                 if(tfootRowCnt > 1) {
                     tfootCol.attr("rowspan", String(tfootRowCnt));
                 }
@@ -676,8 +676,8 @@ export class Grid {
             const excludeThClasses = ".btn_data_filter_full__, .data_filter_panel__, .btn_data_filter__, .resize_bar__, .sortable__";
 
             // Hide and show panel
-            const panel = jQuery('<div class="grid_more_panel__ hidden__">'
-                +   '<div class="grid_more_checkall_box__"><label><input type="checkbox">' + NC.message.get(opts.message, "selectAll") + '<span class="grid_more_total_cnt__"></span></label></div>'
+            const panel = N()('<div class="grid_more_panel__ hidden__">'
+                +   '<div class="grid_more_checkall_box__"><label><input type="checkbox">' + N().message.get(opts.message, "selectAll") + '<span class="grid_more_total_cnt__"></span></label></div>'
                 +   '<ul class="grid_more_col_list__"></ul>'
                 + '</div>');
             colShowHideBtn.after(panel);
@@ -686,7 +686,7 @@ export class Grid {
 
             // Hide and show panel's checkbox click event
             panel.find(".grid_more_checkall_box__ :checkbox").on("click.grid.more", function() {
-                const thisEle = jQuery(this);
+                const thisEle = N()(this);
                 if(thisEle.is(":checked")) {
                     gridMoreColList.find("input[name='hideshow']:not(':checked')").trigger("click");
                 } else {
@@ -708,13 +708,13 @@ export class Grid {
                 e.stopPropagation();
                 e.stopImmediatePropagation();
 
-                const thisBtn = jQuery(this);
+                const thisBtn = N()(this);
                 const panel = thisBtn.next(".grid_more_panel__ ");
 
                 if(self.tableMap.thead.length > 0 && gridMoreColList === undefined) {
                     gridMoreColList = panel.find(".grid_more_col_list__");
                     gridMoreColList.on("click.grid.more", "input[name='hideshow']", function() {
-                        const thisEle = jQuery(this);
+                        const thisEle = N()(this);
                         if(!thisEle.is(":checked")) {
                             self.hide(parseInt(thisEle.val()));
                         } else {
@@ -723,13 +723,13 @@ export class Grid {
                         calibDialogItems(panel);
                     });
 
-                    jQuery(self.tableMap.thead[0]).each(function(i) {
-                        const thisEleClone = jQuery(this).clone();
+                    N()(self.tableMap.thead[0]).each(function(i) {
+                        const thisEleClone = N()(this).clone();
                         if(!thisEleClone.hasClass("grid_more_thead_col__")) {
                             thisEleClone.find(excludeThClasses).remove();
-                            const cols = jQuery('<li class="grid_more_cols__" title="' + String(i+1) + '">'
+                            const cols = N()('<li class="grid_more_cols__" title="' + String(i+1) + '">'
                                 + '<label><input name="hideshow" type="checkbox" checked="checked" value="' + String(i) + '">'
-                                + String(i+1) + " " + NC.message.get(opts.message, "column") + '</label></li>')
+                                + String(i+1) + " " + N().message.get(opts.message, "column") + '</label></li>')
                                 .appendTo(gridMoreColList);
                         }
                     });
@@ -737,21 +737,21 @@ export class Grid {
                     calibDialogItems(panel);
                 }
 
-                jQuery(document).off("click.grid.more");
-                jQuery(document).on("click.grid.more", function(e) {
-                    if(jQuery(e.target).parents(".grid_more_panel__, .grid_col_show_hide_btn__").length === 0 && !jQuery(e.target).hasClass("grid_col_show_hide_btn__")) {
+                N()(document).off("click.grid.more");
+                N()(document).on("click.grid.more", function(e) {
+                    if(N()(e.target).parents(".grid_more_panel__, .grid_col_show_hide_btn__").length === 0 && !jQuery(e.target).hasClass("grid_col_show_hide_btn__")) {
                         panel.removeClass("visible__").addClass("hidden__");
                         panel.one(EventUtils.whichTransitionEvent(panel), function(){
                             panel.hide();
 
                             // The touchstart event is not removed when using the one method
-                            jQuery(document).off("click.grid.more touchstart.grid.more");
+                            N()(document).off("click.grid.more touchstart.grid.more");
                         }).trigger("nothing");
                     }
                 });
 
                 panel.show(0, function() {
-                    jQuery(this).removeClass("hidden__").addClass("visible__");
+                    N()(this).removeClass("hidden__").addClass("visible__");
                 });
             });
 
@@ -761,21 +761,21 @@ export class Grid {
                 e.stopPropagation();
                 e.stopImmediatePropagation();
 
-                let rowIdx = opts.context.find(">tbody").index(jQuery(this).closest("tbody.form__"));
+                let rowIdx = opts.context.find(">tbody").index(N()(this).closest("tbody.form__"));
 
-                const morePopupContects = jQuery("<div></div>").addClass("grid_more_popup_contents__");
-                const moreContents = jQuery("<div></div>").addClass("grid_more_contents__").appendTo(morePopupContects).css({
+                const morePopupContects = N()("<div></div>").addClass("grid_more_popup_contents__");
+                const moreContents = N()("<div></div>").addClass("grid_more_contents__").appendTo(morePopupContects).css({
                     "overflow-y" : "auto",
-                    "max-height" : (jQuery(window).height() - 200) + "px"
+                    "max-height" : (N()(window).height() - 200) + "px"
                 });
-                const table = jQuery("<table></table>").appendTo(moreContents);
-                const tbody = jQuery("<tbody></tbody>").appendTo(table);
-                jQuery(opts.more).each(function() {
-                    const tr = jQuery("<tr></tr>").appendTo(tbody);
+                const table = N()("<table></table>").appendTo(moreContents);
+                const tbody = N()("<tbody></tbody>").appendTo(table);
+                N()(opts.more).each(function() {
+                    const tr = N()("<tr></tr>").appendTo(tbody);
                     const filteredThClone = self.thead.find(">tr > th:regexp(data:id, " + this + ")").clone();
                     filteredThClone.find(excludeThClasses).remove();
                     filteredThClone.removeAttr("rowspan").removeAttr("colspan");
-                    const th = jQuery("<th></th>", {
+                    const th = N()("<th></th>", {
                         text : filteredThClone.text()
                     }).appendTo(tr);
 
@@ -796,8 +796,8 @@ export class Grid {
 
                 const form = opts.data.form(moreContents).unbind().bind(rowIdx);
 
-                const btnBox = jQuery('<div class="btn_box__"></div>').appendTo(morePopupContects);
-                const prevBtn = jQuery('<a href="#" class="prev_btn__">' + NC.message.get(opts.message, "prev") + '</a>').on("click.grid.more", function(e) {
+                const btnBox = N()('<div class="btn_box__"></div>').appendTo(morePopupContects);
+                const prevBtn = N()('<a href="#" class="prev_btn__">' + N().message.get(opts.message, "prev") + '</a>').on("click.grid.more", function(e) {
                     e.preventDefault();
 
                     if(rowIdx > 0 && form.validate()) {
@@ -810,8 +810,8 @@ export class Grid {
                     type: "outlined",
                     size: "medium"
                 });
-                const page = jQuery('<span class="page__">' + String(rowIdx + 1) +'</span>').appendTo(btnBox);
-                const nextBtn = jQuery('<a href="#" class="next_btn__">' + NC.message.get(opts.message, "next") + '</a>').on("click.grid.more", function(e) {
+                const page = N()('<span class="page__">' + String(rowIdx + 1) +'</span>').appendTo(btnBox);
+                const nextBtn = N()('<a href="#" class="next_btn__">' + N().message.get(opts.message, "next") + '</a>').on("click.grid.more", function(e) {
                     e.preventDefault();
 
                     if(rowIdx + 1 < form.data().length && form.validate()) {
@@ -826,7 +826,7 @@ export class Grid {
                 });
 
                 morePopupContects.popup({
-                    title : NC.message.get(opts.message, "more"),
+                    title : N().message.get(opts.message, "more"),
                     closeMode : "remove",
                     button : false,
                     draggable : true,
@@ -887,7 +887,7 @@ export class Grid {
             this.thead.on("mouseover.grid.resize touchstart.grid.resize", function() {
                 resizeBarHeight = (opts.height > 0 ? self.contextEle.closest(".grid_wrap__").height() - 3 : self.contextEle.height() + resizeBarCorrectionHeight) + 1 + opts.misc.resizeBarCorrectionHeight;
                 let lastResizeBar = theadCells.each(function() {
-                    const cellEle = jQuery(this);
+                    const cellEle = N()(this);
                     cellEle.find("> .resize_bar__").css({
                         "top" : cellEle.position().top + 1,
                         "left" : (cellEle.position().left + cellEle.outerWidth() - resizeBarWidth / 2 + opts.misc.resizeBarCorrectionLeft) + "px"
@@ -901,8 +901,8 @@ export class Grid {
 
             let isFirstTimeLastClick = true;
             theadCells.each(function() {
-                cellEle = jQuery(this);
-                resizeBar = jQuery('<div class="resize_bar__"></div>').css({
+                cellEle = N()(this);
+                resizeBar = N()('<div class="resize_bar__"></div>').css({
                     "padding": "0px",
                     "position": "absolute",
                     "width": resizeBarWidth + "px",
@@ -917,14 +917,14 @@ export class Grid {
                     }
 
                     if(e.originalEvent.touches || (e.which || e.button) === 1) {
-                        jQuery(this).css({
+                        N()(this).css({
                             "opacity": ""
                         }).animate({
                             "height" : resizeBarHeight + "px"
                         }, 150);
 
                         startOffsetX = dte !== undefined ? dte.pageX : e.pageX;
-                        currResizeBarEle = jQuery(this);
+                        currResizeBarEle = N()(this);
                         currCellEle = currResizeBarEle.parent("th");
                         currNextCellEle = currCellEle.next();
                         let isLast = false;
@@ -945,8 +945,8 @@ export class Grid {
                         if(isFirstTimeLastClick && isLast) {
                             let thisWidth;
                             theadCells.each(function(i) {
-                                thisWidth = jQuery(this).width();
-                                jQuery(this).width(thisWidth + (opts.height > 0 ? opts.misc.resizableLastCellCorrectionWidth : 0) + opts.misc.resizableCorrectionWidth).removeAttr("width");
+                                thisWidth = N()(this).width();
+                                N()(this).width(thisWidth + (opts.height > 0 ? opts.misc.resizableLastCellCorrectionWidth : 0) + opts.misc.resizableCorrectionWidth).removeAttr("width");
 
                                 if(targetCellEle !== undefined) {
                                     opts.context.find("thead th:eq(" + theadCells.index(this) + ")").width(thisWidth + (opts.height > 0 ? opts.misc.resizableLastCellCorrectionWidth : 0) + opts.misc.resizableCorrectionWidth).removeAttr("width");
@@ -965,7 +965,7 @@ export class Grid {
                         defWidth = Math.floor(currCellEle.outerWidth()) + opts.misc.resizableCorrectionWidth;
                         nextDefWidth = !isLast ? Math.floor(currNextCellEle.outerWidth()) + opts.misc.resizableCorrectionWidth : Math.floor(context.width());
 
-                        jQuery(document).on("dragstart.grid.resize selectstart.grid.resize", function() {
+                        N()(document).on("dragstart.grid.resize selectstart.grid.resize", function() {
                             return false;
                         });
                         isPressed = true;
@@ -973,7 +973,7 @@ export class Grid {
                         minPx = !isLast ? Math.floor(currNextCellEle.offset().left) : Math.floor(currCellEle.offset().left) + Math.floor(currCellEle.outerWidth());
                         maxPx = minPx + (!isLast ? Math.floor(currNextCellEle.outerWidth()) : 7680);
                         movedPx = defPx = Math.floor(currResizeBarEle.parent("th").offset().left);
-                        jQuery(window.document).on("mousemove.grid.resize touchmove.grid.resize", function(e) {
+                        N()(window.document).on("mousemove.grid.resize touchmove.grid.resize", function(e) {
                             let mte;
                             if(e.originalEvent.touches) {
                                 e.stopPropagation();
@@ -1004,19 +1004,19 @@ export class Grid {
                             }
                         });
 
-                        let currResizeBar = jQuery(this);
-                        jQuery(window.document).on("mouseup.grid.resize touchend.grid.resize", function(e) {
+                        let currResizeBar = N()(this);
+                        N()(window.document).on("mouseup.grid.resize touchend.grid.resize", function(e) {
                             currResizeBar.animate({
                                 "height" : String(theadCells.filter(":eq(0)").outerHeight()) + "px"
                             }, 200, function() {
-                                jQuery(this).css({
+                                N()(this).css({
                                     "opacity": "0"
                                 });
 
                                 currResizeBar = undefined;
                             });
 
-                            jQuery(document).off("dragstart.grid.resize selectstart.grid.resize mousemove.grid.resize touchmove.grid.resize mouseup.grid.resize touchend.grid.resize");
+                            N()(document).off("dragstart.grid.resize selectstart.grid.resize mousemove.grid.resize touchmove.grid.resize mouseup.grid.resize touchend.grid.resize");
                             isPressed = false;
                         });
                     }
@@ -1038,25 +1038,25 @@ export class Grid {
             theadCells.css("cursor", "pointer");
             const self = this;
             theadCells.filter(function(i, cell) {
-                return jQuery(cell).data("id") !== undefined;
+                return N()(cell).data("id") !== undefined;
             }).on("click.grid.sort", function(e) {
-                const currEle = jQuery(this);
+                const currEle = N()(this);
                 if(currEle.data("sortLock")) {
                     currEle.data("sortLock", false);
                     return false;
                 }
                 if (opts.data.length > 0) {
-                    if(StringUtils.trimToNull(jQuery(this).text()) !== null && jQuery(this).find(opts.checkAll).length === 0) {
+                    if(StringUtils.trimToNull(N()(this).text()) !== null && jQuery(this).find(opts.checkAll).length === 0) {
                         let isAsc = false;
                         if (currEle.find(".sortable__").hasClass("asc__")) {
                             isAsc = true;
                         }
                         if (isAsc) {
-                            self.bind(jQuery(opts.data).datasort(jQuery(this).data("id"), true), "grid.sort");
+                            self.bind(N()(opts.data).datasort(jQuery(this).data("id"), true), "grid.sort");
                             theadCells.find(".sortable__").remove();
                             currEle.append('<span class="sortable__ desc__">' + opts.sortableItem.asc + '</span>');
                         } else {
-                            self.bind(jQuery(opts.data).datasort(jQuery(this).data("id")), "grid.sort");
+                            self.bind(N()(opts.data).datasort(jQuery(this).data("id")), "grid.sort");
                             theadCells.find(".sortable__").remove();
                             currEle.append('<span class="sortable__ asc__">' + opts.sortableItem.desc + '</span>');
                         }
@@ -1069,7 +1069,7 @@ export class Grid {
             const opts = this.options;
             const thead = this.thead;
             const theadCells = thead.find("> tr th").filter(function(i, cell) {
-                return jQuery(cell).data("id") !== undefined;
+                return N()(cell).data("id") !== undefined;
             });
             const self = this;
 
@@ -1085,25 +1085,25 @@ export class Grid {
                     .addClass("btn_data_filter_" + kind + "__");
             };
 
-            const btnEle = jQuery('<a href="#" class="btn_data_filter__" title="' + NC.message.get(opts.message, "dFilter") + '"><span>' + NC.message.get(opts.message, "dFilter") + '</span><a>')
+            const btnEle = N()('<a href="#" class="btn_data_filter__" title="' + N().message.get(opts.message, "dFilter") + '"><span>' + N().message.get(opts.message, "dFilter") + '</span><a>')
                 .addClass("btn_data_filter_full__")
                 .on("click.grid.dataFilter", function(e) {
                     e.preventDefault();
                     e.stopPropagation();
 
-                    const thisEle = jQuery(this);
+                    const thisEle = N()(this);
                     const visiblePanel = thead.find(".data_filter_panel__.visible__");
                     if(visiblePanel.length > 0) {
                         visiblePanel.removeClass("visible__").addClass("hidden__");
                         const eventNm = EventUtils.whichTransitionEvent(visiblePanel);
                         visiblePanel.off(eventNm).one(eventNm, function(e){
                             if(!thisEle.hasClass("btn_data_filter__")) {
-                                jQuery(this).hide();
+                                N()(this).hide();
                             }
                         }).trigger("nothing");
                     }
 
-                    const theadCell = jQuery(this).closest("th");
+                    const theadCell = N()(this).closest("th");
 
                     let panel;
                     let searchBox;
@@ -1144,14 +1144,14 @@ export class Grid {
                             clonedData = opts.data.get().slice(0);
                         }
 
-                        panel = jQuery('<div style="text-align: left;" class="data_filter_panel__ hidden__">'
+                        panel = N()('<div style="text-align: left;" class="data_filter_panel__ hidden__">'
                             +   '<div class="data_filter_search__">'
                             +       '<input class="data_filter_search_word__" type="text">'
-                            +       '<a class="data_filter_search_btn__" href="#" title="' + NC.message.get(opts.message, "search") + '">'
-                            +           '<span>' + NC.message.get(opts.message, "search") + '</span>'
+                            +       '<a class="data_filter_search_btn__" href="#" title="' + N().message.get(opts.message, "search") + '">'
+                            +           '<span>' + N().message.get(opts.message, "search") + '</span>'
                             +       '</a>'
                             +   '</div>'
-                            +   '<div class="data_filter_checkall_box__"><label><input type="checkbox" checked="checked"><span class="data_filter_select_all__">' + NC.message.get(opts.message, "selectAll") + '</span><span class="data_filter_total_cnt__">(' + opts.data.length + ')</span></label></div>'
+                            +   '<div class="data_filter_checkall_box__"><label><input type="checkbox" checked="checked"><span class="data_filter_select_all__">' + N().message.get(opts.message, "selectAll") + '</span><span class="data_filter_total_cnt__">(' + opts.data.length + ')</span></label></div>'
                             +   '<ul class="data_filter_list__"></ul>'
                             + '</div>')
                             .css("z-index", 1)
@@ -1160,7 +1160,7 @@ export class Grid {
                                 e.stopPropagation();
                             });
 
-                        dataFilterProgress = jQuery('<div class="data_filter_progress__"></div>')
+                        dataFilterProgress = N()('<div class="data_filter_progress__"></div>')
                             .css({
                                 "z-index" : 2,
                                 "opacity" : 0.3
@@ -1177,7 +1177,7 @@ export class Grid {
                                 const retChkbxs = filterListBox.find("li:contains('" + searchWord + "')").show().find(":checkbox").prop("checked", true);
                                 filterListBox.find("li:not(:contains('" + searchWord + "'))").hide().find(":checkbox").prop("checked", false).last().trigger("do.grid.dataFilter");
                                 retChkbxs.each(function() {
-                                    const chkboxEle = jQuery(this);
+                                    const chkboxEle = N()(this);
                                     chkboxEle.parent().children(".data_filter_cnt__").text('(' + String(chkboxEle.data("length")) + ')')
                                 });
                             } else {
@@ -1193,12 +1193,12 @@ export class Grid {
 
                         // select all checkbox event
                         panel.find(".data_filter_checkall_box__ :checkbox").on("click.grid.dataFilter", function() {
-                            if(jQuery(this).is(":checked")) {
+                            if(N()(this).is(":checked")) {
                                 let chkboxEle;
                                 panel.find(".data_filter_search_word__").val("");
                                 filterListBox.find("li").show();
                                 filterListBox.find("li :checkbox").prop("checked", true).each(function() {
-                                    chkboxEle = jQuery(this);
+                                    chkboxEle = N()(this);
                                     chkboxEle.parent().children(".data_filter_cnt__").text('(' + String(chkboxEle.data("length")) + ')')
                                 }).last().trigger("do.grid.dataFilter");
                             } else {
@@ -1222,7 +1222,7 @@ export class Grid {
                         });
 
                         // Index filter keys from filtered data
-                        if(!NC.isEmptyObject(filteredKeys) && clonedData.length !== opts.data.length) {
+                        if(!N().isEmptyObject(filteredKeys) && clonedData.length !== opts.data.length) {
                             filteredKeys = {};
                             jQuery.each(opts.data, function(i, v) {
                                 if(filteredKeys[id + "_" + v[id]] === undefined) {
@@ -1237,7 +1237,7 @@ export class Grid {
                     }
 
                     panel.show(0, function() {
-                        jQuery(this).removeClass("hidden__").addClass("visible__");
+                        N()(this).removeClass("hidden__").addClass("visible__");
                     });
 
                     let itemSeq = 0;
@@ -1250,7 +1250,7 @@ export class Grid {
                             filterItemEle = prevFilterItemEle;
                             filterItemEle.find(".data_filter_cnt__").text("(" + String(length) + ")");
                         } else {
-                            filterItemEle = jQuery('<li class="data_filter_item_' + String(itemSeq) + '__">'
+                            filterItemEle = N()('<li class="data_filter_item_' + String(itemSeq) + '__">'
                                 + '<label><input type="checkbox" checked="checked" class="data_filter_checkbox__">'
                                 + '<span class="data_filter_item_name__"></span><span class="data_filter_cnt__">(' + String(length) + ')</span></label></li>');
 
@@ -1261,7 +1261,7 @@ export class Grid {
                                 .data("length", length)
                                 .on("click.grid.dataFilter, do.grid.dataFilter", function() {
                                     // Update the count of rows for each filter item
-                                    const thisEle = jQuery(this);
+                                    const thisEle = N()(this);
                                     if(thisEle.is(":checked")) {
                                         thisEle.parent().children(".data_filter_cnt__").text("(" + String(thisEle.data("length")) + ")");
                                     } else {
@@ -1287,7 +1287,7 @@ export class Grid {
 
                                     let filterIdxs = [];
                                     dataFilterListUnCheckedEles.each(function() {
-                                        jQuery.each(jQuery(this).data("rowIdxs"), function(i, v) {
+                                        jQuery.each(N()(this).data("rowIdxs"), function(i, v) {
                                             filterIdxs[v] = v;
                                         });
                                     });
@@ -1342,18 +1342,18 @@ export class Grid {
                         itemSeq++;
                     }
 
-                    jQuery(document).off("click.grid.dataFilter");
-                    jQuery(document).on("click.grid.dataFilter", function(e) {
-                        if(jQuery(e.target).closest(".data_filter_panel__, .btn_data_filter__").length === 0
-                            && !jQuery(e.target).hasClass("btn_data_filter__")
-                            && !jQuery(e.target).hasClass("form__")) {
+                    N()(document).off("click.grid.dataFilter");
+                    N()(document).on("click.grid.dataFilter", function(e) {
+                        if(N()(e.target).closest(".data_filter_panel__, .btn_data_filter__").length === 0
+                            && !N()(e.target).hasClass("btn_data_filter__")
+                            && !N()(e.target).hasClass("form__")) {
                             const panel = thead.find(".data_filter_panel__.visible__");
                             if(panel.length > 0) {
                                 panel.removeClass("visible__").addClass("hidden__");
                                 const eventNm = EventUtils.whichTransitionEvent(panel);
                                 panel.off(eventNm).one(eventNm, function(e){
-                                    jQuery(this).hide();
-                                    jQuery(document).off("click.grid.dataFilter");
+                                    N()(this).hide();
+                                    N()(document).off("click.grid.dataFilter");
                                 }).trigger("nothing");
                             }
                         }
@@ -1431,7 +1431,7 @@ export class Grid {
                     return false;
                 }
 
-                const thisEle = jQuery(this);
+                const thisEle = N()(this);
                 const currRowIndex = self.context(".form__").index(thisEle.closest(".form__"));
                 const currCellIndex = self.context(".form__:eq(" + currRowIndex + ") [id]").index(thisEle);
 
@@ -1439,10 +1439,10 @@ export class Grid {
                     return p1.replace(/""/g, '"').replace(/\r\n|\n\r|\n|\r/g, ' ');
                 }).split(/\r\n|\n\r|\n|\r/g);
                 const columns = self.tempRowEle.find("[id]").map(function() {
-                    return jQuery(this).attr("id");
+                    return N()(this).attr("id");
                 });
                 for (let i = 0; i < rows.length; i++) {
-                    if(NC.isEmptyObject(rows[i])) continue;
+                    if(N().isEmptyObject(rows[i])) continue;
 
                     const data = rows[i].split('\t');
                     const rowEle = self.context(".form__:eq(" + String(currRowIndex + i) + ")");
@@ -1480,7 +1480,7 @@ export class Grid {
                     rowEles.filter(".grid_selected__").each(function() {
                         if(arguments.length > 1) {
                             args[0] = opts.data[rowEles.index(this)];
-                            retData.push(NC.json.mapFromKeys.apply(NC.json, args));
+                            retData.push(N().json.mapFromKeys.apply(N().json, args));
                         } else {
                             retData.push(opts.data[rowEles.index(this)]);
                         }
@@ -1495,10 +1495,10 @@ export class Grid {
 
                 const rowEles = this.contextEle.find(">tbody.form__");
                 rowEles.find(opts.checkAllTarget||opts.checkSingleTarget).filter(":checked").each(function() {
-                    const thisEle = jQuery(this);
+                    const thisEle = N()(this);
                     if(arguments.length > 1) {
                         args[0] = opts.data[rowEles.index(thisEle.closest("tbody.form__"))];
-                        retData.push(NC.json.mapFromKeys.apply(NC.json, args));
+                        retData.push(N().json.mapFromKeys.apply(N().json, args));
                     } else {
                         retData.push(opts.data[rowEles.index(thisEle.closest("tbody.form__"))]);
                     }
@@ -1512,7 +1512,7 @@ export class Grid {
                         return data.rowStatus === rowStatus;
                     }).map(function() {
                         args[0] = this;
-                        return NC.json.mapFromKeys.apply(NC.json, args);
+                        return N().json.mapFromKeys.apply(N().json, args);
                     }).get();
                 } else {
                     return opts.data.datafilter(function(data) {
@@ -1557,7 +1557,7 @@ export class Grid {
                 if(!isAppend) {
                     self.contextEle.find(">tbody.grid_selected__").removeClass("grid_selected__");
                 }
-                jQuery(row).each(function() {
+                N()(row).each(function() {
                     selRowEle = self.contextEle.find(">tbody" + (self.options.data.length > 0 ? ".form__" : "") +":eq(" + String(this) + ")");
                     if(selRowEle.hasClass("grid_selected__")) {
                         selRowEle.removeClass("grid_selected__");
@@ -1582,7 +1582,7 @@ export class Grid {
             if(row === undefined) {
                 const rowEles = this.contextEle.find(">tbody.form__");
                 return rowEles.find(opts.checkAllTarget || opts.checkSingleTarget).filter(":checked").map(function () {
-                    return rowEles.index(jQuery(this).closest("tbody.form__"));
+                    return rowEles.index(N()(this).closest("tbody.form__"));
                 }).get();
             } else {
                 if(getType(row) !== "array") {
@@ -1594,7 +1594,7 @@ export class Grid {
                 if(!isAppend) {
                     self.contextEle.find(">tbody").find((opts.checkAllTarget||opts.checkSingleTarget) + ":checked").prop("checked", false);
                 }
-                jQuery(row).each(function() {
+                N()(row).each(function() {
                     checkboxEle = self.contextEle.find(">tbody").find(opts.checkAllTarget||opts.checkSingleTarget).eq(this);
                     if(checkboxEle.is(":checked")) {
                         checkboxEle.prop("checked", false);
@@ -1635,7 +1635,7 @@ export class Grid {
                     opts.scrollPaging.size = opts.scrollPaging.defSize;
                     // rebind new data
                     if(data != null) {
-                        opts.data = getType(data) === "array" ? jQuery(data) : data;
+                        opts.data = getType(data) === "array" ? N()(data) : data;
                     }
                 }
 
@@ -1707,18 +1707,18 @@ export class Grid {
 
                     let colspan = 0;
                     if(this.tableMap.colgroup[0] !== undefined && this.tableMap.colgroup[0].length > 0) {
-                        colspan = jQuery(this.tableMap.colgroup[0]).not(":regexp(css:display, none), [hidden]").length;
+                        colspan = N()(this.tableMap.colgroup[0]).not(":regexp(css:display, none), [hidden]").length;
                     } else {
-                        jQuery(this.tableMap.tbody).each(function(i, eles) {
-                            const currLen = jQuery(eles).not(":regexp(css:display, none), [hidden]").length;
+                        N()(this.tableMap.tbody).each(function(i, eles) {
+                            const currLen = N()(eles).not(":regexp(css:display, none), [hidden]").length;
                             if(colspan < currLen) {
                                 colspan = currLen;
                             }
                         });
                     }
 
-                    const emptyEle = jQuery('<tbody><tr><td class="empty__" ' + (colspan > 0 ? 'colspan=' + String(colspan) : '') + '>'
-                        + NC.message.get(opts.message, "empty") + '</td></tr></tbody>');
+                    const emptyEle = N()('<tbody><tr><td class="empty__" ' + (colspan > 0 ? 'colspan=' + String(colspan) : '') + '>'
+                        + N().message.get(opts.message, "empty") + '</td></tr></tbody>');
 
                     opts.context.append(emptyEle);
 
@@ -1760,7 +1760,7 @@ export class Grid {
             }
             const tempRowEleClone = this.tempRowEle.clone(true, true);
 
-            if(NC.isNumeric(data)) {
+            if(N().isNumeric(data)) {
                 row = data;
                 data = undefined;
             }
@@ -1794,7 +1794,7 @@ export class Grid {
                     }
                     opts.context.parent(".tbody_wrap__").stop().animate({ "scrollTop" : scrollTop }, 300, 'swing', function() {
                         if(opts.addSelect) {
-                            jQuery(this).find(">table>tbody:eq(" + row + ")").trigger("click.grid");
+                            N()(this).find(">table>tbody:eq(" + row + ")").trigger("click.grid");
                         }
                     });
                 } else {
@@ -1837,7 +1837,7 @@ export class Grid {
                     "scrollTop" : (opts.addTop ? 0 : opts.context.parent(".tbody_wrap__").prop("scrollHeight"))
                 }, 300, 'swing', function() {
                     if(opts.addSelect) {
-                        jQuery(this).find("> table > tbody:" + (opts.addTop ? "first" : "last")).trigger("click.grid");
+                        N()(this).find("> table > tbody:" + (opts.addTop ? "first" : "last")).trigger("click.grid");
                     }
                 });
             }
@@ -1851,7 +1851,7 @@ export class Grid {
                 if(getType(row) !== "array") {
                     row = [row];
                 }
-                jQuery(row.sort().reverse()).each(function(i, row) {
+                N()(row.sort().reverse()).each(function(i, row) {
                     if (opts.data[this] === undefined) {
                         throw createError("[Grid.prototype.remove]Row index is out of range");
                     }
@@ -1889,7 +1889,7 @@ export class Grid {
                 if(getType(row) !== "array") {
                     row = [row];
                 }
-                jQuery(row).each(function() {
+                N()(row).each(function() {
                     const i = this;
                     const context = opts.context.find(">tbody:eq(" + String(this) + ")");
                     const form = context.instance("form");
@@ -1991,11 +1991,11 @@ export class Grid {
                 }
             }
 
-            jQuery(colIdxs).each(function(i, v) {
+            N()(colIdxs).each(function(i, v) {
                 let context = opts.height > 0 ? opts.context.parent(".tbody_wrap__").parent(".grid_wrap__") : opts.context;
                 context = context.add(self.tempRowEle);
                 context.find(".col_" + v + "__").each(function(i, ele) {
-                    const colEle = jQuery(ele);
+                    const colEle = N()(ele);
                     const colSpanCnt = parseInt(colEle.attr("colspan"));
                     const orgColspan = colEle.data("colspan");
                     if(colSpanCnt < orgColspan) {
@@ -2008,10 +2008,10 @@ export class Grid {
             const emptyEle = opts.context.find(">tbody>tr>.empty__");
             if(emptyEle.length > 0) {
                 if(this.tableMap.colgroup[0] !== undefined && this.tableMap.colgroup[0].length > 0) {
-                    emptyEle.attr("colspan", String(jQuery(this.tableMap.colgroup[0]).not(":regexp(css:display, none)").length));
+                    emptyEle.attr("colspan", String(N()(this.tableMap.colgroup[0]).not(":regexp(css:display, none)").length));
                 } else {
-                    jQuery(this.tableMap.tbody).each(function(i, eles) {
-                        const currLen = String(jQuery(eles).not(":regexp(css:display, none)").length);
+                    N()(this.tableMap.tbody).each(function(i, eles) {
+                        const currLen = String(N()(eles).not(":regexp(css:display, none)").length);
                         if(StringUtils.trimToZero(emptyEle.attr("colspan")) < currLen) {
                             emptyEle.attr("colspan", currLen);
                         }
@@ -2031,11 +2031,11 @@ export class Grid {
                 }
             }
 
-            jQuery(colIdxs).each(function() {
+            N()(colIdxs).each(function() {
                 let context = opts.height > 0 ? opts.context.parent(".tbody_wrap__").parent(".grid_wrap__") : opts.context;
                 context = context.add(self.tempRowEle);
                 context.find(".col_" + this + "__").each(function() {
-                    const colEle = jQuery(this);
+                    const colEle = N()(this);
                     const colSpanCnt = parseInt(colEle.attr("colspan"));
                     if(colSpanCnt > 0) {
                         if(colEle.data("colspan") === undefined) {
@@ -2054,10 +2054,10 @@ export class Grid {
             const emptyEle = opts.context.find(">tbody>tr>.empty__");
             if(emptyEle.length > 0) {
                 if(this.tableMap.colgroup[0] !== undefined && this.tableMap.colgroup[0].length > 0) {
-                    emptyEle.attr("colspan", String(jQuery(this.tableMap.colgroup[0]).not(":regexp(css:display, none)").length));
+                    emptyEle.attr("colspan", String(N()(this.tableMap.colgroup[0]).not(":regexp(css:display, none)").length));
                 } else {
-                    jQuery(this.tableMap.tbody).each(function(i, eles) {
-                        const currLen = String(jQuery(eles).not(":regexp(css:display, none)").length);
+                    N()(this.tableMap.tbody).each(function(i, eles) {
+                        const currLen = String(N()(eles).not(":regexp(css:display, none)").length);
                         if(StringUtils.trimToZero(emptyEle.attr("colspan")) < currLen) {
                             emptyEle.attr("colspan", currLen);
                         }

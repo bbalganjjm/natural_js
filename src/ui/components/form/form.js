@@ -3,28 +3,24 @@
  * Full version from original natural.ui.js lines 3352-4844
  */
 
-import { error as createError, warn } from '../../../core/helpers/logger.js';
-import { type as getType, isPlainObject, isString, isElement, isArray } from '../../../core/helpers/type-checker.js';
-import { StringUtils } from '../../../core/utils/string.js';
-import { ElementUtils } from '../../../core/utils/element.js';
-import { DateUtils } from '../../../core/utils/date.js';
-import { BrowserUtils } from '../../../core/utils/browser.js';
-import { EventUtils } from '../../../core/utils/event.js';
+import { error as createError } from '../../../core/helpers/logger.js';
+import { type as getType, isEmptyObject, isNumeric } from '../../../core/helpers/type-checker.js';
 import { Context } from '../../../architecture/context/context.js';
 import { DataSync } from '../../../data/sync/data-sync.js';
 import { Formatter } from '../../../data/formatter/formatter.js';
 import { Validator } from '../../../data/validator/validator.js';
-import { Iteration } from '../../shared/iteration.js';
+import { JSONUtils } from '../../../core/utils/json.js';
 import { UIUtils } from '../../shared/utils.js';
-import { Scroll } from '../../shared/scroll.js';
-import { Draggable } from '../../shared/draggable.js';
 import { GC } from '../../../core/gc/garbage-collector.js';
+
+// Import N at runtime to avoid circular dependency
+const N = () => window.N;
 
 export class Form {
 
         constructor(data, opts) {
             this.options = {
-                data : getType(data) === "array" ? jQuery(data) : data,
+                data : getType(data) === "array" ? N()(data) : data,
                 row : -1,
                 context : null,
                 validate : true,
@@ -54,25 +50,25 @@ export class Form {
             }
 
             if (isPlainObject(opts)) {
-                // Wraps the global event options in NA.config and event options for this component.
+                // Wraps the global event options in Context and event options for this component.
                 UIUtils.wrapHandler(opts, "form", "onBeforeBindValue");
                 UIUtils.wrapHandler(opts, "form", "onBindValue");
                 UIUtils.wrapHandler(opts, "form", "onBeforeBind");
                 UIUtils.wrapHandler(opts, "form", "onBind");
 
                 //convert data to wrapped set
-                opts.data = getType(opts.data) === "array" ? jQuery(opts.data) : opts.data;
+                opts.data = getType(opts.data) === "array" ? N()(opts.data) : opts.data;
 
                 jQuery.extend(this.options, opts);
                 if(getType(this.options.context) === "string") {
-                    this.options.context = jQuery(this.options.context);
+                    this.options.context = N()(this.options.context);
                 }
                 if(opts.row === undefined) {
                     this.options.row = 0;
                 }
             } else {
                 this.options.row = 0;
-                this.options.context = jQuery(opts);
+                this.options.context = N()(opts);
             }
 
             // for unbind
@@ -108,7 +104,7 @@ export class Form {
                 const args = Array.prototype.slice.call(arguments, 0);
                 if(arguments.length > 1) {
                     args[0] = opts.data[opts.row];
-                    retData.push(NC.json.mapFromKeys.apply(NC.json, args));
+                    retData.push(JSONUtils.mapFromKeys.apply(JSONUtils, args));
                 } else {
                     retData.push(opts.data[opts.row]);
                 }
@@ -138,11 +134,11 @@ export class Form {
             validate : function(ele, opts, eleType, isTextInput) {
                 if(ele.data("validate") !== undefined) {
                     if (eleType !== "hidden") {
-                        jQuery().validator(opts.vRules !== null ? opts.vRules : ele);
+                        N()().validator(opts.vRules !== null ? opts.vRules : ele);
 
-                        if(isTextInput && NC.isEmptyObject(ele.events("focusout", "form.validate"))) {
+                        if(isTextInput && isEmptyObject(ele.events("focusout", "form.validate"))) {
                             ele[opts.tpBind ? "tpBind" : "on"]("focusout.form.validate", function() {
-                                const currEle = jQuery(this);
+                                const currEle = N()(this);
                                 if (!currEle.prop("disabled") && !currEle.prop("readonly") && opts.validate) {
                                     currEle.trigger("validate.validator");
                                 }
@@ -162,9 +158,9 @@ export class Form {
                     eventName = "change";
                 }
 
-                if(NC.isEmptyObject(ele.events(eventName, "dataSync.form"))) {
+                if(isEmptyObject(ele.events(eventName, "dataSync.form"))) {
                     ele[opts.tpBind ? "tpBind" : "on"](eventName + ".form.dataSync", function(e) {
-                        const currEle = jQuery(this);
+                        const currEle = N()(this);
                         const currVal = currEle.val();
 
                         // for val method
@@ -215,13 +211,13 @@ export class Form {
              * Enter key event
              */
             enterKey : function(ele, opts) {
-                if(NC.isEmptyObject(ele.events("keyup", "dataSync.form"))) {
+                if(isEmptyObject(ele.events("keyup", "dataSync.form"))) {
                     ele[opts.tpBind ? "tpBind" : "on"]("keyup.form.dataSync", function(e) {
                         if ((e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode)) === 13) {
                             e.preventDefault();
-                            jQuery(this).trigger("focusout.form.validate");
+                            N()(this).trigger("focusout.form.validate");
                             // notify data changed
-                            jQuery(this).trigger("focusout.form.dataSync");
+                            N()(this).trigger("focusout.form.dataSync");
                         }
                     });
                 }
@@ -232,7 +228,7 @@ export class Form {
             format : function(ele, opts, eleType, vals, key) {
                 if(ele.data("format") !== undefined) {
                     if (eleType !== "password" && eleType !== "hidden" && eleType !== "file") {
-                        jQuery(opts.data).formatter(opts.fRules !== null ? opts.fRules : ele).format(opts.row);
+                        N()(opts.data).formatter(opts.fRules !== null ? opts.fRules : ele).format(opts.row);
 
                         const eventNames = ["focusin", "focusout"];
                         const formats = ["unformat", "format"];
@@ -244,18 +240,18 @@ export class Form {
                             bindMethod = "tpBind";
                         }
 
-                        if(NC.isEmptyObject(ele.events(eventNames[0], "form." + formats[0]))) {
+                        if(isEmptyObject(ele.events(eventNames[0], "form." + formats[0]))) {
                             ele[bindMethod](eventNames[0] + ".form." + formats[0], function() {
-                                const currEle = jQuery(this);
+                                const currEle = N()(this);
                                 if (!currEle.prop("disabled") && !currEle.prop("readonly") && (!opts.validate || (opts.validate && !currEle.hasClass("validate_false__")))) {
                                     currEle.trigger(formats[0] + ".formatter");
                                 }
                             });
                         }
 
-                        if(NC.isEmptyObject(ele.events(eventNames[1], "form." + formats[1]))) {
+                        if(isEmptyObject(ele.events(eventNames[1], "form." + formats[1]))) {
                             ele[bindMethod](eventNames[1] + ".form." + formats[1], function() {
-                                const currEle = jQuery(this);
+                                const currEle = N()(this);
                                 if (!currEle.prop("disabled") && !currEle.prop("readonly") && (!opts.validate || (opts.validate && !currEle.hasClass("validate_false__")))) {
                                     currEle.trigger(formats[1] + ".formatter");
                                 }
@@ -287,7 +283,7 @@ export class Form {
                 opts.row = row;
             }
             if(data != null) {
-                opts.data = getType(data) === "array" ? jQuery(data) : data;
+                opts.data = getType(data) === "array" ? N()(data) : data;
                 if(opts.revert) {
                     opts.revertData = jQuery.extend({}, data[row]);
                 }
@@ -295,7 +291,7 @@ export class Form {
 
             const self = this;
             let vals;
-            if (!NC.isEmptyObject(opts.data) && !NC.isEmptyObject(vals = opts.data[opts.row])) {
+            if (!isEmptyObject(opts.data) && !isEmptyObject(vals = opts.data[opts.row])) {
                 if(arguments.length < 3 && opts.onBeforeBind !== null && this.options.extObj === null) {
                     opts.onBeforeBind.call(self, opts.context, vals);
                 }
@@ -392,7 +388,7 @@ export class Form {
                             ele.attr("src", vals[key] != null ? String(vals[key]) : "");
                         } else {
                             if(ele.data("format") !== undefined) {
-                                jQuery(opts.data).formatter(opts.fRules !== null ? opts.fRules : ele).format(opts.row);
+                                N()(opts.data).formatter(opts.fRules !== null ? opts.fRules : ele).format(opts.row);
                             } else {
                                 val = vals[key] != null ? String(vals[key]) : "";
                                 // put value
@@ -420,17 +416,17 @@ export class Form {
                                 }
 
                                 if (opts.validate) {
-                                    jQuery().validator(opts.vRules !== null ? opts.vRules : eles.filter(".select_template__"));
+                                    N()().validator(opts.vRules !== null ? opts.vRules : eles.filter(".select_template__"));
                                 }
                             }
 
                             //dataSync
                             eles.off("click.form.dataSync select.form.dataSync");
                             eles.on("click.form.dataSync select.form.dataSync", function(e) {
-                                const currEle = jQuery(this);
+                                const currEle = N()(this);
                                 let currEles = opts.context.find("[name='" + currEle.attr("name") + "']");
                                 if(currEles.length === 0) {
-                                    currEles = jQuery(this);
+                                    currEles = N()(this);
                                 }
                                 let currKey = currEle.attr("name");
                                 if(currKey === undefined) {
@@ -582,7 +578,7 @@ export class Form {
 
             const extractedData = ElementUtils.toData(opts.context.find(":input:not(:button)"));
             if(data != null) {
-                if(NC.isNumeric(data)) {
+                if(isNumeric(data)) {
                     row = data;
                     data = undefined;
                 } else {
@@ -612,7 +608,7 @@ export class Form {
 
             // row index of Grid's form is 0;
             if(opts.extObj !== null) {
-                opts.data = jQuery(opts.data[opts.row]);
+                opts.data = N()(opts.data[opts.row]);
                 opts.row = 0;
 
                 // for scroll paging
@@ -829,7 +825,7 @@ export class Form {
 
                         // put value
                         if(ele.data("format") !== undefined) {
-                            jQuery(opts.data).formatter(opts.fRules !== null ? opts.fRules : ele).format(opts.row);
+                            N()(opts.data).formatter(opts.fRules !== null ? opts.fRules : ele).format(opts.row);
                         } else {
                             if(!opts.html) {
                                 ele.text(val === null ? "" : val);
@@ -866,8 +862,8 @@ export class Form {
                         }).removeData("alert__");
 
                         // rebind for data sync and validate, format, etc. realted events bind
-                        if(jQuery(eles.get(0)).events("select", "dataSync.form") === undefined) {
-                            vals[jQuery(eles.get(0)).attr("id")] = null;
+                        if(N()(eles.get(0)).events("select", "dataSync.form") === undefined) {
+                            vals[N()(eles.get(0)).attr("id")] = null;
                             self.bind(undefined, undefined, key);
                         }
 
@@ -876,10 +872,10 @@ export class Form {
 
                         if(notify !== false) {
                             // dataSync & add data changed flag
-                            jQuery(eles.get(0)).trigger("select.form.dataSync");
+                            N()(eles.get(0)).trigger("select.form.dataSync");
                         } else {
                             // add data changed flag
-                            jQuery(eles.get(0)).addClass("data_changed__");
+                            N()(eles.get(0)).addClass("data_changed__");
                         }
                     }
                 }

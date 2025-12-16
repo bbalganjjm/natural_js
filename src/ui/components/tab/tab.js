@@ -4,21 +4,16 @@
  */
 
 import { error as createError, warn } from '../../../core/helpers/logger.js';
-import { type as getType, isPlainObject, isString, isElement, isArray } from '../../../core/helpers/type-checker.js';
-import { StringUtils } from '../../../core/utils/string.js';
 import { ElementUtils } from '../../../core/utils/element.js';
-import { DateUtils } from '../../../core/utils/date.js';
-import { BrowserUtils } from '../../../core/utils/browser.js';
 import { EventUtils } from '../../../core/utils/event.js';
 import { Context } from '../../../architecture/context/context.js';
-import { DataSync } from '../../../data/sync/data-sync.js';
-import { Formatter } from '../../../data/formatter/formatter.js';
-import { Validator } from '../../../data/validator/validator.js';
-import { Iteration } from '../../shared/iteration.js';
+import { Communicator } from '../../../architecture/communication/communicator.js';
+import { Controller } from '../../../architecture/controller/controller.js';
 import { UIUtils } from '../../shared/utils.js';
-import { Scroll } from '../../shared/scroll.js';
 import { Draggable } from '../../shared/draggable.js';
-import { GC } from '../../../core/gc/garbage-collector.js';
+
+// Import N at runtime to avoid circular dependency
+const N = () => window.N;
 
 export class Tab {
 
@@ -55,12 +50,12 @@ export class Tab {
             }
 
             if (isPlainObject(obj)) {
-                // Wraps the global event options in NA.config and event options for this component.
+                // Wraps the global event options in Context and event options for this component.
                 UIUtils.wrapHandler(opts, "tab", "onActive");
                 UIUtils.wrapHandler(opts, "tab", "onLoad");
 
                 jQuery.extend(true, this.options, obj);
-                this.options.context = jQuery(obj.context);
+                this.options.context = N()(obj.context);
             }
             this.options.links = this.options.context.find(">ul>li");
             this.options.contents = this.options.context.find(">div");
@@ -69,7 +64,7 @@ export class Tab {
             let opt;
             if(this.options.tabOpts.length === 0) {
                 this.options.links.each(function(i) {
-                    const thisEle = jQuery(this);
+                    const thisEle = N()(this);
                     opt = ElementUtils.toOpts(thisEle);
                     if(opt === undefined) {
                         opt = {};
@@ -105,7 +100,7 @@ export class Tab {
             const self = this;
 
             let defSelIdx;
-            jQuery(opts.tabOpts).each(function(i) {
+            N()(opts.tabOpts).each(function(i) {
                 if(this.disable) {
                     self.disable(i);
                 } else {
@@ -156,8 +151,8 @@ export class Tab {
                 }
                 marginLeft = undefined;
 
-                if(!jQuery(this).hasClass("tab_active__")) {
-                    const selTabEle = jQuery(this);
+                if(!N()(this).hasClass("tab_active__")) {
+                    const selTabEle = N()(this);
                     const selTabIdx = opts.beforeOpenIdx = opts.links.index(this);
                     const selDeclarativeOpts = opts.tabOpts[selTabIdx];
                     const selContentEle = opts.contents.eq(selTabIdx);
@@ -182,7 +177,7 @@ export class Tab {
                                 //thisDeclarativeOpts.onOpen
                                 cont[selDeclarativeOpts.onOpen](onOpenData);
                             } else {
-                                warn("[Tab.wrapEle]The onOpen event handler(" + selDeclarativeOpts.onOpen + ") is not defined on the Controller(NA.cont) of the tab(Tab)'s contents.");
+                                warn("[Tab.wrapEle]The onOpen event handler(" + selDeclarativeOpts.onOpen + ") is not defined on the Controller of the tab(Tab)'s contents.");
                             }
                         }
                     }
@@ -203,7 +198,7 @@ export class Tab {
                             isRelative = true;
                         }
                         beforeActivatedContent.removeClass("tab_content_active__ visible__").one(EventUtils.whichTransitionEvent(beforeActivatedContent), function(e){
-                            jQuery(this).hide();
+                            N()(this).hide();
                             if(isRelative) {
                                 opts.context.css("position", "");
                             }
@@ -314,14 +309,14 @@ export class Tab {
                 lastDistance = prevBtnEleOuterWidth + liMarginRight;
             }
 
-            jQuery(window).on("resize" + eventNameSpace, function() {
+            N()(window).on("resize" + eventNameSpace, function() {
                 if(!tabContainerEle.is(":visible")) {
                     return false;
                 }
 
                 let ulWidth = 0;
                 opts.links.each(function() {
-                    ulWidth += (jQuery(this).outerWidth() + parseInt(StringUtils.trimToZero(jQuery(this).css("margin-left"))) + parseInt(StringUtils.trimToZero(jQuery(this).css("margin-right"))));
+                    ulWidth += (N()(this).outerWidth() + parseInt(StringUtils.trimToZero(N()(this).css("margin-left"))) + parseInt(StringUtils.trimToZero(N()(this).css("margin-right"))));
                 });
                 ulWidth += opts.tabScrollCorrection.tabContainerWidthCorrectionPx;
 
@@ -374,7 +369,7 @@ export class Tab {
 
             if(opts.tabScrollCorrection.tabContainerWidthReCalcDelayTime > 0) {
                 setTimeout(function() {
-                    jQuery(window).trigger("resize" + eventNameSpace);
+                    N()(window).trigger("resize" + eventNameSpace);
                 }, opts.tabScrollCorrection.tabContainerWidthReCalcDelayTime);
             }
 
@@ -443,7 +438,7 @@ export class Tab {
             const self = this;
             const selContentEle = opts.contents.eq(targetIdx);
 
-            new NA.comm({
+            new Communicator({
                 url : url,
                 contentType : "text/html; charset=UTF-8",
                 dataType : "html",
@@ -464,7 +459,7 @@ export class Tab {
                     }
 
                     // triggering "init" method
-                    NA.cont.trInit.call(this, cont, this.request);
+                    Controller.trInit.call(this, cont, this.request);
 
                     callback.call(this, cont, selContentEle);
                 } else {
@@ -485,9 +480,9 @@ export class Tab {
                 if(opts.beforeOpenIdx !== idx) {
                     opts.context.queue("open", function() {
                         if(onOpenData !== undefined) {
-                            jQuery(opts.links.get(idx)).trigger("click.tab", [onOpenData, isFirst]);
+                            N()(opts.links.get(idx)).trigger("click.tab", [onOpenData, isFirst]);
                         } else {
-                            jQuery(opts.links.get(idx)).trigger("click.tab", [undefined, isFirst]);
+                            N()(opts.links.get(idx)).trigger("click.tab", [undefined, isFirst]);
                         }
                     });
                     clearTimeout(opts.openTime);
@@ -500,7 +495,7 @@ export class Tab {
                 if(opts.tabScroll) {
                     const tabContainerEle = opts.context.find(">ul");
                     if(tabContainerEle.outerWidth() > opts.context.innerWidth()) {
-                        let marginLeft = parseInt(tabContainerEle.css("margin-left")) - jQuery(opts.links.get(idx)).position().left + (opts.context.innerWidth() / 2 - jQuery(opts.links.get(idx)).outerWidth() / 2);
+                        let marginLeft = parseInt(tabContainerEle.css("margin-left")) - N()(opts.links.get(idx)).position().left + (opts.context.innerWidth() / 2 - N()(opts.links.get(idx)).outerWidth() / 2);
                         const prevBtnEle = opts.context.find(">.tab_scroll_prev__");
                         const nextBtnEle = opts.context.find(">.tab_scroll_next__");
 
@@ -541,7 +536,7 @@ export class Tab {
 
         disable(idx) {
             if(idx !== undefined) {
-                jQuery(this.options.links.get(idx))
+                N()(this.options.links.get(idx))
                     .off("click.tab.disable")
                     .off("touchstart.tab.disable")
                     .off("touchend.tab.disable")
@@ -555,7 +550,7 @@ export class Tab {
 
         enable(idx) {
             if(idx !== undefined) {
-                jQuery(this.options.links.get(idx))
+                N()(this.options.links.get(idx))
                     .off("click", EventUtils.disable)
                     .off("touchstart", EventUtils.disable)
                     .off("touchend", EventUtils.disable)
@@ -574,7 +569,7 @@ export class Tab {
             }
 
             if(cont === undefined) {
-                warn("Tab content has not been loaded yet or Controller(NA.cont) object is missing.");
+                warn("Tab content has not been loaded yet or Controller object is missing.");
             }
 
             return cont;

@@ -3,28 +3,19 @@
  * Full version from original natural.ui.js lines 7008-7332
  */
 
-import { error as createError, warn } from '../../../core/helpers/logger.js';
-import { type as getType, isPlainObject, isString, isElement, isArray } from '../../../core/helpers/type-checker.js';
-import { StringUtils } from '../../../core/utils/string.js';
-import { ElementUtils } from '../../../core/utils/element.js';
-import { DateUtils } from '../../../core/utils/date.js';
-import { BrowserUtils } from '../../../core/utils/browser.js';
-import { EventUtils } from '../../../core/utils/event.js';
+import { error as createError } from '../../../core/helpers/logger.js';
+import { type as getType, isPlainObject } from '../../../core/helpers/type-checker.js';
 import { Context } from '../../../architecture/context/context.js';
-import { DataSync } from '../../../data/sync/data-sync.js';
-import { Formatter } from '../../../data/formatter/formatter.js';
-import { Validator } from '../../../data/validator/validator.js';
-import { Iteration } from '../../shared/iteration.js';
 import { UIUtils } from '../../shared/utils.js';
-import { Scroll } from '../../shared/scroll.js';
-import { Draggable } from '../../shared/draggable.js';
-import { GC } from '../../../core/gc/garbage-collector.js';
+
+// Import N at runtime to avoid circular dependency
+const N = () => window.N;
 
 export class Pagination {
 
         constructor(data, opts) {
             this.options = {
-                data : getType(data) === "array" ? jQuery(data) : data,
+                data : getType(data) === "array" ? N()(data) : data,
                 context : null,
                 totalCount : 0,
                 countPerPage : 10,
@@ -50,15 +41,15 @@ export class Pagination {
                 UIUtils.wrapHandler(opts, "pagination", "onChange");
 
                 //convert data to wrapped set
-                opts.data = getType(opts.data) === "array" ? jQuery(opts.data) : opts.data;
+                opts.data = getType(opts.data) === "array" ? N()(opts.data) : opts.data;
 
-                jQuery.extend(this.options, opts);
+                jQuery.extend(true, this.options, opts);
 
                 if(getType(this.options.context) === "string") {
-                    this.options.context = jQuery(this.options.context);
+                    this.options.context = N()(this.options.context);
                 }
             } else {
-                this.options.context = jQuery(opts);
+                this.options.context = N()(opts);
             }
 
             // Initialize paging panel
@@ -135,28 +126,28 @@ export class Pagination {
             }
 
             if(currSelPageSet > 0 && currSelPageSet > 1 && startPage >= currSelPageSet) {
-                jQuery(linkEles.prev).removeClass("pagination_disable__");
+                N()(linkEles.prev).removeClass("pagination_disable__");
             } else {
-                jQuery(linkEles.prev).addClass("pagination_disable__");
+                N()(linkEles.prev).addClass("pagination_disable__");
             }
             if(linkEles.first !== undefined) {
                 if(1 !== opts.pageNo) {
-                    jQuery(linkEles.first).removeClass("pagination_disable__");
+                    N()(linkEles.first).removeClass("pagination_disable__");
                 } else {
-                    jQuery(linkEles.first).addClass("pagination_disable__");
+                    N()(linkEles.first).addClass("pagination_disable__");
                 }
             }
 
             if(pageSetCount > currSelPageSet) {
-                jQuery(linkEles.next).removeClass("pagination_disable__");
+                N()(linkEles.next).removeClass("pagination_disable__");
             } else {
-                jQuery(linkEles.next).addClass("pagination_disable__");
+                N()(linkEles.next).addClass("pagination_disable__");
             }
             if(linkEles.last !== undefined) {
                 if(pageCount > 0 && opts.pageNo !== pageCount) {
-                    jQuery(linkEles.last).removeClass("pagination_disable__");
+                    N()(linkEles.last).removeClass("pagination_disable__");
                 } else {
-                    jQuery(linkEles.last).addClass("pagination_disable__");
+                    N()(linkEles.last).addClass("pagination_disable__");
                 }
             }
 
@@ -204,7 +195,7 @@ export class Pagination {
                 opts.totalCount = arguments[0];
             } else if(arguments.length > 0 && getType(arguments[0]) === "array") {
                 // to rebind new data
-                opts.data = getType(data) === "array" ? jQuery(data) : data;
+                opts.data = getType(data) === "array" ? N()(data) : data;
 
                 // reset totalCount
                 if(totalCount !== undefined) {
@@ -248,7 +239,7 @@ export class Pagination {
             linkEles.body.on("click.pagination", "li > a", function(e, isFirst) {
                 e.preventDefault();
 
-                opts.pageNo = Number(jQuery(this).parent().data("pageno"));
+                opts.pageNo = Number(N()(this).parent().data("pageno"));
                 opts.currPageNavInfo = Pagination.changePageSet(linkEles, opts, true);
 
                 if(opts.onChange !== null) {
@@ -261,12 +252,12 @@ export class Pagination {
                         }
                     }
                     if(opts.blockOnChangeWhenBind === false || (opts.blockOnChangeWhenBind === true && isFirst !== true)) {
-                        opts.onChange.call(self, opts.pageNo, jQuery(this), selData, opts.currPageNavInfo);
+                        opts.onChange.call(self, opts.pageNo, N()(this), selData, opts.currPageNavInfo);
                     }
                 }
 
                 linkEles.body.find("li.pagination_active__").removeClass("pagination_active__");
-                jQuery(this).parent().addClass("pagination_active__");
+                N()(this).parent().addClass("pagination_active__");
             }).find("li a:eq(" + String(opts.pageNo - opts.currPageNavInfo.startPage) +  ")").trigger("click.pagination", [true]);
 
             // next button event

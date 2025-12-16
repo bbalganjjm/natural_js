@@ -3,22 +3,18 @@
  * Full version from original natural.ui.js lines 452-1136
  */
 
-import { error as createError, warn } from '../../../core/helpers/logger.js';
-import { type as getType, isPlainObject, isString, isElement, isArray } from '../../../core/helpers/type-checker.js';
-import { StringUtils } from '../../../core/utils/string.js';
+import { error as createError } from '../../../core/helpers/logger.js';
+import { isEmptyObject } from '../../../core/helpers/type-checker.js';
 import { ElementUtils } from '../../../core/utils/element.js';
-import { DateUtils } from '../../../core/utils/date.js';
 import { BrowserUtils } from '../../../core/utils/browser.js';
 import { EventUtils } from '../../../core/utils/event.js';
+import { MessageUtils } from '../../../core/utils/message.js';
 import { Context } from '../../../architecture/context/context.js';
-import { DataSync } from '../../../data/sync/data-sync.js';
-import { Formatter } from '../../../data/formatter/formatter.js';
-import { Validator } from '../../../data/validator/validator.js';
-import { Iteration } from '../../shared/iteration.js';
 import { UIUtils } from '../../shared/utils.js';
-import { Scroll } from '../../shared/scroll.js';
 import { Draggable } from '../../shared/draggable.js';
-import { GC } from '../../../core/gc/garbage-collector.js';
+
+// Import N at runtime to avoid circular dependency
+const N = () => window.N;
 
 export class Alert {
         constructor(obj, msg, vars) {
@@ -26,7 +22,7 @@ export class Alert {
                 obj : obj,
                 context : obj,
                 container : null,
-                msgContext : jQuery(),
+                msgContext : N()(),
                 msgContents : null,
                 msg : msg,
                 vars : vars,
@@ -73,25 +69,25 @@ export class Alert {
             try {
                 // 1. When Context.attr("ui").alert.container value is undefined
                 this.options.container = Context.attr("architecture").page.context;
-                // 2. If defined the Context.attr("ui").alert.container value to NA.config this.options.container value is defined from NA.config's value
+                // 2. If defined the Context.attr("ui").alert.container value this.options.container value is defined from Context's value
                 jQuery.extend(true, this.options, Context.attr("ui").alert);
 
                 if(isString(this.options.container)) {
-                    this.options.container = jQuery(this.options.container);
+                    this.options.container = N()(this.options.container);
                 }
             } catch (e) {
                 throw createError("Alert", e);
             }
 
-            if(jQuery(this.options.container).length === 0) {
+            if(N()(this.options.container).length === 0) {
                 throw createError("[Alert]Container element is missing. please specify the correct element selector that will contain the message dialog's element. it can be defined in the \"Context.attr(\"ui\").alert.container\" property of \"natural.config.js\" file.");
             }
 
-            if (jQuery(obj).is(":input")) {
+            if (N()(obj).is(":input")) {
                 this.options.isInput = true;
             }
             if(msg !== undefined && isPlainObject(msg)) {
-                // Wraps the global event options in NA.config and event options for this component.
+                // Wraps the global event options in Context and event options for this component.
                 UIUtils.wrapHandler(msg, "alert", "onOk");
                 UIUtils.wrapHandler(msg, "alert", "onCancel");
                 UIUtils.wrapHandler(msg, "alert", "onBeforeShow");
@@ -105,7 +101,7 @@ export class Alert {
 
                 jQuery.extend(true, this.options, msg);
                 if(isString(this.options.container)) {
-                    this.options.container = jQuery(this.options.container);
+                    this.options.container = N()(this.options.container);
                 }
                 // when the title option value is undefined
                 // jQuery.extend method does not extend undefined value
@@ -115,7 +111,7 @@ export class Alert {
             }
 
             if(this.options.isWindow) {
-                this.options.context = jQuery("body");
+                this.options.context = N()("body");
             }
 
             if (!this.options.isInput) {
@@ -156,7 +152,7 @@ export class Alert {
             let maxZindex = 0;
             if(opts.alwaysOnTop) {
                 // get maximum "z-index" value
-                maxZindex = ElementUtils.maxZindex(jQuery(opts.alwaysOnTopCalcTarget));
+                maxZindex = ElementUtils.maxZindex(N()(opts.alwaysOnTopCalcTarget));
                 blockOverlayCss["z-index"] = String(maxZindex + 1);
             }
 
@@ -165,7 +161,7 @@ export class Alert {
             }
 
             // create message overlay
-            opts.msgContext = opts[opts.isWindow ? "container" : "context"][opts.isWindow ? "append" : "after"](jQuery('<div class="block_overlay__" onselectstart="return false;"></div>')
+            opts.msgContext = opts[opts.isWindow ? "container" : "context"][opts.isWindow ? "append" : "after"](N()('<div class="block_overlay__" onselectstart="return false;"></div>')
                 .css(blockOverlayCss))[opts.isWindow ? "find" : "siblings"](".block_overlay__:" + (opts.isWindow ? "last" : "first"));
 
             // set style class name to msgContext element
@@ -188,21 +184,21 @@ export class Alert {
             // create title bar element
             let titleBox = '';
             if(opts.title !== undefined) {
-                titleBox = '<div class="msg_title_box__"><span class="msg_title__">' + opts.title + '</span><a href="#" class="msg_title_close_btn__"><span class="msg_title_close__" title="' + NC.message.get(opts.message, "close") + '"></span></a></div>';
+                titleBox = '<div class="msg_title_box__"><span class="msg_title__">' + opts.title + '</span><a href="#" class="msg_title_close_btn__"><span class="msg_title_close__" title="' + MessageUtils.get(opts.message, "close") + '"></span></a></div>';
             }
 
             // create button box elements
             let buttonBox = '';
             if(opts.button) {
                 buttonBox = '<div class="buttonBox__">' +
-                    '<button class="confirm__">' + NC.message.get(opts.message, "confirm") + '</button>' +
-                    '<button class="cancel__">' + NC.message.get(opts.message, "cancel") + '</button>' +
+                    '<button class="confirm__">' + MessageUtils.get(opts.message, "confirm") + '</button>' +
+                    '<button class="cancel__">' + MessageUtils.get(opts.message, "cancel") + '</button>' +
                     '</div>';
             }
 
             // create message box elements
             opts.msgContents = opts.msgContext.after(
-                jQuery('<div class="block_overlay_msg__">' +
+                N()('<div class="block_overlay_msg__">' +
                     titleBox +
                     '<div class="msg_box__"></div>' +
                     buttonBox +
@@ -312,19 +308,19 @@ export class Alert {
 
                     defMargin = opts.msgContents.css("margin");
 
-                    if(!jQuery(dte !== undefined ? dte.target : e.target).is(".msg_title_close__") && (e.originalEvent.touches || (e.which || e.button) === 1)) {
+                    if(!N()(dte !== undefined ? dte.target : e.target).is(".msg_title_close__") && (e.originalEvent.touches || (e.which || e.button) === 1)) {
                         pressed = true;
                         opts.msgContents.data("isMoved", true);
 
                         startX = (dte !== undefined ? dte.pageX : e.pageX)- opts.msgContents.offset().left;
                         startY = (dte !== undefined ? dte.pageY : e.pageY) - opts.msgContents.offset().top;
 
-                        jQuery(window.document).on("dragstart.alert selectstart.alert", function() {
+                        N()(window.document).on("dragstart.alert selectstart.alert", function() {
                             return false;
                         });
 
                         moved = true;
-                        jQuery(window.document).on("mousemove.alert touchmove.alert", function() {
+                        N()(window.document).on("mousemove.alert touchmove.alert", function() {
                             let mte;
                             if(e.originalEvent.touches) {
                                 e.stopPropagation();
@@ -343,13 +339,13 @@ export class Alert {
                             }
                         });
 
-                        const documentWidth = jQuery(window.document).width();
-                        jQuery(window.document).on("mouseup.alert touchend.alert", function() {
+                        const documentWidth = N()(window.document).width();
+                        N()(window.document).on("mouseup.alert touchend.alert", function() {
                             pressed = false;
                             if(opts.draggableOverflowCorrection) {
                                 const offset = {};
-                                const windowHeight = window.innerHeight ? window.innerHeight : jQuery(window).height();
-                                const windowScrollTop = jQuery(window).scrollTop();
+                                const windowHeight = window.innerHeight ? window.innerHeight : N()(window).height();
+                                const windowScrollTop = N()(window).scrollTop();
                                 const msgContentsOffsetTop = opts.msgContents.offset().top;
                                 const msgContentsOuterHeight = opts.msgContents.outerHeight();
 
@@ -373,13 +369,13 @@ export class Alert {
                                 } else if(opts.msgContents.offset().left + opts.msgContents.outerWidth() > documentWidth) {
                                     offset.left = documentWidth - opts.msgContents.outerWidth() + opts.draggableOverflowCorrectionAddValues.right;
                                 }
-                                if(!NC.isEmptyObject(offset)) {
+                                if(!isEmptyObject(offset)) {
                                     opts.msgContents.animate(offset, 200);
                                 }
                             }
 
                             opts.msgContents.fadeTo(100, "1.0");
-                            jQuery(window.document).off("dragstart.alert selectstart.alert mousemove.alert touchmove.alert mouseup.alert touchend.alert");
+                            N()(window.document).off("dragstart.alert selectstart.alert mousemove.alert touchmove.alert mouseup.alert touchend.alert");
                         });
                     }
                 });
@@ -389,8 +385,8 @@ export class Alert {
         static resetOffSetEle = function(opts) {
             const position = opts.context.position();
             if(opts.context.is(":visible")) {
-                const windowHeight = jQuery(window).height();
-                const windowWidth = jQuery(window).width();
+                const windowHeight = N()(window).height();
+                const windowWidth = N()(window).width();
                 const msgContentsHeight = opts.msgContents.height();
                 const msgContentsWidth = opts.msgContents.width();
 
@@ -438,7 +434,7 @@ export class Alert {
                     }
 
                     if(msgContentsHeight > windowHeight) {
-                        msgContentsCss["margin-top"] = String(jQuery(window).scrollTop()) + "px";
+                        msgContentsCss["margin-top"] = String(N()(window).scrollTop()) + "px";
                         msgContentsCss.position = "absolute";
                     }
                     if(msgContentsWidth > windowWidth) {
@@ -478,7 +474,7 @@ export class Alert {
                 if (opts.msgContents.length === 0 || isRemoved) {
                     const limitWidth = opts.msgContext.offset().left + opts.msgContext.outerWidth() + 150;
 
-                    if(limitWidth > (window.innerWidth ? window.innerWidth : jQuery(window).width())) {
+                    if(limitWidth > (window.innerWidth ? window.innerWidth : N()(window).width())) {
                         opts.msgContents = opts.msgContext.before('<span class="msg__ alert_before_show__" style="display: none;"><ul class="msg_line_box__"></ul></span>').prev(".msg__");
                         opts.msgContents.removeClass("orgin_left__").addClass("orgin_right__");
                         isBeforeShow = true;
@@ -491,7 +487,7 @@ export class Alert {
                     // set style class to msgContents element
                     opts.msgContents.addClass("alert__ alert_tooltip__ hidden__");
 
-                    opts.msgContents.append('<a href="#" class="msg_close__" title="' + NC.message.get(opts.message, "close") + '"></a>');
+                    opts.msgContents.append('<a href="#" class="msg_close__" title="' + MessageUtils.get(opts.message, "close") + '"></a>');
                 }
                 if(opts.alwaysOnTop) {
                     opts.msgContents.css("z-index", ElementUtils.maxZindex(opts.container.find(opts.alwaysOnTopCalcTarget)) + 1);
@@ -506,7 +502,7 @@ export class Alert {
                 const ul_ = opts.msgContents.find(".msg_line_box__").empty();
                 if (isArray(opts.msg)) {
                     opts.msgContents.find(".msg_line_box__").empty();
-                    jQuery(opts.msg).each(function(i, msg_) {
+                    N()(opts.msg).each(function(i, msg_) {
                         if (opts.vars !== undefined) {
                             opts.msg[i] = NC.message.replaceMsgVars(msg_, opts.vars);
                         }
@@ -539,7 +535,7 @@ export class Alert {
             }
 
             // for NUS.docs transition effect
-            jQuery(".docs__>.docs_tab_context__").css("z-index", "0");
+            N()(".docs__>.docs_tab_context__").css("z-index", "0");
 
             if (!opts.isInput) {
                 if(opts.dynPos && !opts.isWindow) {
@@ -553,7 +549,7 @@ export class Alert {
                     opts.resizeHandler =  function() {
                         Alert.resetOffSetEle(opts);
                     };
-                    jQuery(window).off("resize.alert", opts.resizeHandler).on("resize.alert", opts.resizeHandler).trigger("resize.alert");
+                    N()(window).off("resize.alert", opts.resizeHandler).on("resize.alert", opts.resizeHandler).trigger("resize.alert");
                 }
 
                 if(!opts.isWindow) {
@@ -603,7 +599,7 @@ export class Alert {
                         }
                     }
                 };
-                jQuery(document).off("keyup.alert", opts.keyupHandler).on("keyup.alert", opts.keyupHandler);
+                N()(document).off("keyup.alert", opts.keyupHandler).on("keyup.alert", opts.keyupHandler);
             }
 
             return this;
@@ -617,7 +613,7 @@ export class Alert {
             }
 
             // for NUS.docs transition effect
-            jQuery(".docs__>.docs_tab_context__").css("z-index", "");
+            N()(".docs__>.docs_tab_context__").css("z-index", "");
 
             if (!opts.isInput) {
                 if(!opts.isWindow) {
@@ -646,9 +642,9 @@ export class Alert {
                 }).trigger("nothing");
             }
 
-            jQuery(window).off("resize.alert", opts.resizeHandler);
+            N()(window).off("resize.alert", opts.resizeHandler);
             if(opts.escClose) {
-                jQuery(document).off("keyup.alert", opts.keyupHandler);
+                N()(document).off("keyup.alert", opts.keyupHandler);
             }
 
             return this;
@@ -662,7 +658,7 @@ export class Alert {
             }
 
             // for NUS.docs transition effect
-            jQuery(".docs__>.docs_tab_context__").css("z-index", "");
+            N()(".docs__>.docs_tab_context__").css("z-index", "");
 
             if (!opts.isInput) {
                 clearInterval(opts.time);
@@ -696,9 +692,9 @@ export class Alert {
                 }).trigger("nothing");
             }
 
-            jQuery(window).off("resize.alert", opts.resizeHandler);
+            N()(window).off("resize.alert", opts.resizeHandler);
             if(opts.escClose) {
-                jQuery(document).off("keyup.alert", opts.keyupHandler);
+                N()(document).off("keyup.alert", opts.keyupHandler);
             }
             return this;
         };

@@ -25,7 +25,7 @@ export class Datepicker {
         constructor(obj, opts) {
             this.options = {
                 context : obj,
-                contents : jQuery('<div class="datepicker__"></div>'),
+                contents : N()('<div class="datepicker__"></div>'),
                 monthonly : false,
                 focusin : true,
                 yearsPanelPosition : "left",
@@ -61,7 +61,7 @@ export class Datepicker {
             }
 
             if(opts !== undefined) {
-                // Wraps the global event options in NA.config and event options for this component.
+                // Wraps the global event options in N().config and event options for this component.
                 UIUtils.wrapHandler(opts, "datepicker", "onChangeYear");
                 UIUtils.wrapHandler(opts, "datepicker", "onChangeMonth");
                 UIUtils.wrapHandler(opts, "datepicker", "onSelect");
@@ -99,14 +99,14 @@ export class Datepicker {
                 if(opts.minDate != null && opts.minDate.length >= 4) {
                     if(Number(value) < Number(opts.minDate.substring(0, 4))) {
                         opts.context.val(opts.minDate.substring(0, 4)).trigger("keyup.datepicker", [true]);
-                        opts.context.alert(NC.message.get(opts.message, "minDate", [ opts.minDate ])).show();
+                        opts.context.alert(N().message.get(opts.message, "minDate", [ opts.minDate ])).show();
                         return false;
                     }
                 }
                 if(opts.maxDate != null && opts.maxDate.length >= 4) {
                     if(Number(value) > Number(opts.maxDate.substring(0, 4))) {
                         opts.context.val(opts.maxDate.substring(0, 4)).trigger("keyup.datepicker", [true]);
-                        opts.context.alert(NC.message.get(opts.message, "maxDate", [ opts.maxDate ])).show();
+                        opts.context.alert(N().message.get(opts.message, "maxDate", [ opts.maxDate ])).show();
                         return false;
                     }
                 }
@@ -114,14 +114,14 @@ export class Datepicker {
                 if(opts.minDate != null && opts.minDate.length >= 6) {
                     if(Number(value) < Number(opts.minDate.substring(0, 6))) {
                         opts.context.val(opts.minDate.substring(0, 6)).trigger("keyup.datepicker", [true]);
-                        opts.context.alert(NC.message.get(opts.message, "minDate", [ opts.minDate ])).show();
+                        opts.context.alert(N().message.get(opts.message, "minDate", [ opts.minDate ])).show();
                         return false;
                     }
                 }
                 if(opts.maxDate != null && opts.maxDate.length >= 6) {
                     if(Number(value) > Number(opts.maxDate.substring(0, 6))) {
                         opts.context.val(opts.maxDate.substring(0, 6)).trigger("keyup.datepicker", [true]);
-                        opts.context.alert(NC.message.get(opts.message, "maxDate", [ opts.maxDate ])).show();
+                        opts.context.alert(N().message.get(opts.message, "maxDate", [ opts.maxDate ])).show();
                         return false;
                     }
                 }
@@ -129,14 +129,14 @@ export class Datepicker {
                 if(opts.minDate != null && opts.minDate.length === 8) {
                     if(Number(value) < Number(opts.minDate)) {
                         opts.context.val(opts.minDate).trigger("keyup.datepicker", [true]);
-                        opts.context.alert(NC.message.get(opts.message, "minDate", [ opts.minDate ])).show();
+                        opts.context.alert(N().message.get(opts.message, "minDate", [ opts.minDate ])).show();
                         return false;
                     }
                 }
                 if(opts.maxDate != null && opts.maxDate.length === 8) {
                     if(Number(value) > Number(opts.maxDate)) {
                         opts.context.val(opts.maxDate).trigger("keyup.datepicker", [true]);
-                        opts.context.alert(NC.message.get(opts.message, "maxDate", [ opts.maxDate ])).show();
+                        opts.context.alert(N().message.get(opts.message, "maxDate", [ opts.maxDate ])).show();
                         return false;
                     }
                 }
@@ -181,15 +181,15 @@ export class Datepicker {
 
                     // validate input value
                     if(dateStrStrArr[0].length === 4 && dateStrArr[0] < 100) {
-                        opts.context.alert(NC.message.get(opts.message, "yearNaN")).show();
+                        opts.context.alert(N().message.get(opts.message, "yearNaN")).show();
                         opts.context.val(value.replace(dateStrStrArr[0], ""));
                         return false;
                     } else if(dateStrStrArr[1].length === 2 && (dateStrArr[1] < 1 || dateStrArr[1] > 12)) {
-                        opts.context.alert(NC.message.get(opts.message, "monthNaN")).show();
+                        opts.context.alert(N().message.get(opts.message, "monthNaN")).show();
                         opts.context.val(value.replace(dateStrStrArr[1], ""));
                         return false;
                     } else if(!opts.monthonly && dateStrStrArr[2].length === 2 && (dateStrArr[2] < 1 || dateStrArr[2] > parseInt(opts.gEndDate))) {
-                        opts.context.alert(NC.message.get(opts.message, "dayNaN", [String(parseInt(opts.gEndDate))])).show();
+                        opts.context.alert(N().message.get(opts.message, "dayNaN", [String(parseInt(opts.gEndDate))])).show();
                         opts.context.val(value.replace(dateStrStrArr[2], ""));
                         return false;
                     }
@@ -238,7 +238,7 @@ export class Datepicker {
             opts.currYear = parseInt(d.formatDate("Y"));
             const format = (!opts.monthonly ? Context.attr("data").formatter.date.Ymd() : Context.attr("data").formatter.date.Ym()).replace(/[^Y|^m|^d]/g, "");
 
-            opts.contents = jQuery('<div class="datepicker_contents__"></div>').on("click.datepicker", function(e) {
+            opts.contents = N()('<div class="datepicker_contents__"></div>').on("click.datepicker", function(e) {
                 e.stopPropagation();
             }).addClass("hidden__").addClass("years_panel_position_" + opts.yearsPanelPosition + "__")
                 .addClass("months_panel_position_" + opts.monthsPanelPosition + "__");
@@ -257,15 +257,15 @@ export class Datepicker {
                 position: "absolute"
             });
 
-            const yearsPanel = jQuery('<div class="datepicker_years_panel__"></div>');
+            const yearsPanel = N()('<div class="datepicker_years_panel__"></div>');
             let topMonthsPanel, topMonthItem, monthsPanel;
             let days, daysPanel, dayItem;
 
             if(opts.yearsPanelPosition === "left") {
-                const yearItem = jQuery('<div></div>');
+                const yearItem = N()('<div></div>');
                 // create year items
                 let yearItemClone;
-                yearsPanel.append(yearItem.clone(true).addClass("datepicker_year_title__").text(NC.message.get(opts.message, "year")));
+                yearsPanel.append(yearItem.clone(true).addClass("datepicker_year_title__").text(N().message.get(opts.message, "year")));
                 // render year items
                 let i;
                 for(i=opts.currYear-2;i<=opts.currYear+2;i++) {
@@ -281,9 +281,9 @@ export class Datepicker {
                 yearsPanel.on("click.datepicker", ".datepicker_year_item__", function(e, isForceUpdate) {
                     e.preventDefault();
                     const selectedYearItemEle = yearsPanel.find(".datepicker_year_item__.datepicker_year_selected__").removeClass("datepicker_year_selected__");
-                    jQuery(this).addClass("datepicker_year_selected__");
+                    N()(this).addClass("datepicker_year_selected__");
 
-                    const selYearStr = jQuery(this).text();
+                    const selYearStr = N()(this).text();
                     if(selYearStr !== selectedYearItemEle.text() || isForceUpdate) {
                         // immediately applys the changed year to the context element
                         if(opts.yearChangeInput) {
@@ -304,7 +304,7 @@ export class Datepicker {
                                     selDate = DateUtils.strToDate(dateVal, dateFormat);
 
                                     let tempFormat = "";
-                                    jQuery(dateFormat.split("")).each(function(i, formatChar) {
+                                    N()(dateFormat.split("")).each(function(i, formatChar) {
                                         tempFormat += formatChar + "-";
                                     });
                                     dateVal = selDate.obj.formatDate(tempFormat).replace(selDate.obj.formatDate("Y"), selYearStr).replace(/-/g, "");
@@ -329,7 +329,7 @@ export class Datepicker {
                     }
                 });
 
-                const yearPaging = jQuery('<div class="datepicker_year_paging__"><a href="#" class="datepicker_year_prev__" title="' + NC.message.get(opts.message, "prev") + '"><span>&lt;</span></a><a href="#" class="datepicker_year_next__" title="' + NC.message.get(opts.message, "next") + '"><span>&gt;</span></a></div>');
+                const yearPaging = N()('<div class="datepicker_year_paging__"><a href="#" class="datepicker_year_prev__" title="' + N().message.get(opts.message, "prev") + '"><span>&lt;</span></a><a href="#" class="datepicker_year_next__" title="' + N().message.get(opts.message, "next") + '"><span>&gt;</span></a></div>');
                 yearPaging.find(".datepicker_year_prev__").on("click.datepicker", function(e) {
                     e.preventDefault();
                     Datepicker.yearPaging(yearsPanel.find(".datepicker_year_item__"), opts.currYear, -5);
@@ -342,7 +342,7 @@ export class Datepicker {
                 });
                 yearsPanel.append(yearPaging);
             } else if(opts.yearsPanelPosition === "top") {
-                const prevYearBtn = jQuery('<div class="datepicker_year_paging__"><a href="#" class="datepicker_year_prev__" title="' + NC.message.get(opts.message, "prev") + '"><span>&lt;</span></a></div>').appendTo(yearsPanel)
+                const prevYearBtn = N()('<div class="datepicker_year_paging__"><a href="#" class="datepicker_year_prev__" title="' + N().message.get(opts.message, "prev") + '"><span>&lt;</span></a></div>').appendTo(yearsPanel)
                     .find("> .datepicker_year_prev__").on("click.datepicker", function(e, isPrevYearBtn) {
                         e.preventDefault();
                         let selectedYear = parseInt(yearItem.val());
@@ -370,13 +370,13 @@ export class Datepicker {
                         }
                     });
 
-                const yearItem = jQuery('<select class="datepicker_year_item__"><select>')
+                const yearItem = N()('<select class="datepicker_year_item__"><select>')
                 let yearStr;
                 for(let i=opts.currYear-opts.minYear;i<=opts.currYear+opts.maxYear;i++) {
                     yearItem.append('<option value="' + StringUtils.lpad(String(i), 4, "0") +'"' + (i === opts.currYear ? 'selected="selected"' : "") + '>' + StringUtils.lpad(String(i), 4, "0") +'</option>');
                 }
                 yearItem.addClass("datepicker_year_item__ datepicker_year_selected__").on("change.datepicker", function(e, isPrevNextYearBtn) {
-                    const selYearStr = jQuery(this).val();
+                    const selYearStr = N()(this).val();
 
                     // immediately applys the changed year to the context element
                     if(opts.yearChangeInput) {
@@ -397,7 +397,7 @@ export class Datepicker {
                                 selDate = DateUtils.strToDate(dateVal, dateFormat);
 
                                 let tempFormat = "";
-                                jQuery(dateFormat.split("")).each(function(i, formatChar) {
+                                N()(dateFormat.split("")).each(function(i, formatChar) {
                                     tempFormat += formatChar + "-";
                                 });
                                 dateVal = selDate.obj.formatDate(tempFormat).replace(selDate.obj.formatDate("Y"), selYearStr).replace(/-/g, "");
@@ -424,7 +424,7 @@ export class Datepicker {
 
                 }).appendTo(yearsPanel);
 
-                const nextYearBtn = jQuery('<div class="datepicker_year_paging__"><a href="#" class="datepicker_year_next__" title="' + NC.message.get(opts.message, "next") + '"><span>&gt;</span></a></div>').appendTo(yearsPanel)
+                const nextYearBtn = N()('<div class="datepicker_year_paging__"><a href="#" class="datepicker_year_next__" title="' + N().message.get(opts.message, "next") + '"><span>&gt;</span></a></div>').appendTo(yearsPanel)
                     .find("> .datepicker_year_next__").on("click.datepicker", function(e, isNextYearBtn) {
                         e.preventDefault();
                         let selectedYear = parseInt(yearItem.val());
@@ -453,25 +453,25 @@ export class Datepicker {
             opts.contents.append(yearsPanel);
 
             // create month items
-            monthsPanel = jQuery('<div class="datepicker_months_panel__"></div>');
+            monthsPanel = N()('<div class="datepicker_months_panel__"></div>');
 
             if(!opts.monthonly) {
                 // creates the day items
-                days = NC.message.get(opts.message, "days").split(",");
-                daysPanel = jQuery('<div class="datepicker_days_panel__"></div>');
-                dayItem = jQuery('<div></div>');
+                days = N().message.get(opts.message, "days").split(",");
+                daysPanel = N()('<div class="datepicker_days_panel__"></div>');
+                dayItem = N()('<div></div>');
             }
 
             if(opts.monthsPanelPosition === "top") {
                 monthsPanel.hide();
 
-                topMonthsPanel = jQuery('<div class="datepicker_top_months_panel__"></div>');
-                topMonthItem = jQuery('<select><select>')
+                topMonthsPanel = N()('<div class="datepicker_top_months_panel__"></div>');
+                topMonthItem = N()('<select><select>')
                 for(let i=1;i<=12;i++) {
                     topMonthItem.append('<option value="' + String(i) +'"' + (i === parseInt(d.formatDate("m")) ? 'selected="selected"' : "") + '>' + StringUtils.lpad(String(i), 2, "0") +'</option>');
                 }
 
-                const prevMonthBtn = jQuery('<div class="datepicker_month_paging__"><a href="#" class="datepicker_month_prev__" title="' + NC.message.get(opts.message, "prev") + '"><span>&lt;</span></a></div>').appendTo(topMonthsPanel)
+                const prevMonthBtn = N()('<div class="datepicker_month_paging__"><a href="#" class="datepicker_month_prev__" title="' + N().message.get(opts.message, "prev") + '"><span>&lt;</span></a></div>').appendTo(topMonthsPanel)
                     .find("> .datepicker_month_prev__").on("click.datepicker", function(e) {
                         e.preventDefault();
                         let prevMonth = String(parseInt(topMonthItem.val()) - 1);
@@ -495,10 +495,10 @@ export class Datepicker {
                     });
 
                 topMonthItem.addClass("datepicker_month_item__ datepicker_month_selected__").on("change.datepicker", function() {
-                    monthsPanel.find(".datepicker_month_item__:contains(" + jQuery(this).val() + "):eq(0)").trigger("click.datepicker");
+                    monthsPanel.find(".datepicker_month_item__:contains(" + N()(this).val() + "):eq(0)").trigger("click.datepicker");
                 }).appendTo(topMonthsPanel);
 
-                const nextMonthBtn = jQuery('<div class="datepicker_month_paging__"><a href="#" class="datepicker_month_next__" title="' + NC.message.get(opts.message, "next") + '"><span>&gt;</span></a></div>').appendTo(topMonthsPanel)
+                const nextMonthBtn = N()('<div class="datepicker_month_paging__"><a href="#" class="datepicker_month_next__" title="' + N().message.get(opts.message, "next") + '"><span>&gt;</span></a></div>').appendTo(topMonthsPanel)
                     .find("> .datepicker_month_next__").on("click.datepicker", function(e) {
                         e.preventDefault();
                         let nextMonth = String(parseInt(topMonthItem.val()) + 1);
@@ -562,8 +562,8 @@ export class Datepicker {
                 }
             }
 
-            const monthItem = jQuery('<div></div>');
-            monthsPanel.append(monthItem.clone().addClass("datepicker_month_title__").text(NC.message.get(opts.message, "month")));
+            const monthItem = N()('<div></div>');
+            monthsPanel.append(monthItem.clone().addClass("datepicker_month_title__").text(N().message.get(opts.message, "month")));
             // rendering the month items
             for(let i=1;i<=12;i++) {
                 monthsPanel.append(monthItem.clone(true).addClass("datepicker_month_item__").text(String(i)));
@@ -578,10 +578,10 @@ export class Datepicker {
                 e.preventDefault();
 
                 const selectedMonthItemEle = monthsPanel.find(".datepicker_month_item__.datepicker_month_selected__").removeClass("datepicker_month_selected__");
-                jQuery(this).addClass("datepicker_month_selected__");
+                N()(this).addClass("datepicker_month_selected__");
 
                 const selYearStr = yearsPanel.find(".datepicker_year_selected__")[opts.yearsPanelPosition === "left" ? "text" : "val"]();
-                const selMonthStr = jQuery(this).text();
+                const selMonthStr = N()(this).text();
                 if(selMonthStr !== selectedMonthItemEle.text()) {
                     // immediately applys the changed month to the context element
                     if(opts.monthChangeInput) {
@@ -603,7 +603,7 @@ export class Datepicker {
                                 selDate = DateUtils.strToDate(dateVal, dateFormat);
 
                                 let tempFormat = "";
-                                jQuery(dateFormat.split("")).each(function(i, formatChar) {
+                                N()(dateFormat.split("")).each(function(i, formatChar) {
                                     tempFormat += formatChar + "-";
                                 });
 
@@ -639,7 +639,7 @@ export class Datepicker {
 
                 let dateFormat;
                 if(opts.monthonly) {
-                    const selDate = DateUtils.strToDate(StringUtils.lpad(selYearStr, 4, "0") + StringUtils.lpad(jQuery(this).text(), 2, "0"), "Ym");
+                    const selDate = DateUtils.strToDate(StringUtils.lpad(selYearStr, 4, "0") + StringUtils.lpad(N()(this).text(), 2, "0"), "Ym");
                     // sets the date format by the global config.
                     selDate.format = Context.attr("data").formatter.date.Ym().replace(/[^Y|^m|^d]/g, "");
 
@@ -653,7 +653,7 @@ export class Datepicker {
                         let dateVal = selDate.obj.formatDate(dateFormat);
                         if(yearVal.length === 3) {
                             let tempFormat = "";
-                            jQuery(dateFormat.split("")).each(function(i, formatChar) {
+                            N()(dateFormat.split("")).each(function(i, formatChar) {
                                 tempFormat += formatChar + "-";
                             });
                             dateVal = selDate.obj.formatDate(tempFormat).replace(yearVal, "0" + yearVal).replace(/-/g, "");
@@ -666,7 +666,7 @@ export class Datepicker {
                 } else {
                     const selectedDay = daysPanel.find(".datepicker_day_selected__").text();
                     daysPanel.empty();
-                    const endDateCls = DateUtils.strToDate(StringUtils.lpad(selYearStr, 4, "0") +  StringUtils.lpad(String(parseInt(jQuery(this).text())+1), 2, "0") + "00", "Ymd");
+                    const endDateCls = DateUtils.strToDate(StringUtils.lpad(selYearStr, 4, "0") +  StringUtils.lpad(String(parseInt(N()(this).text())+1), 2, "0") + "00", "Ymd");
                     const endDate = endDateCls.obj.getDate();
                     opts.gEndDate = endDate;
                     if(format !== "Ymd") {
@@ -680,7 +680,7 @@ export class Datepicker {
                         daysPanel.append(dayItem.clone().addClass("datepicker_day_title__").text(days[j]));
                     }
 
-                    const prevEndDateCls = DateUtils.strToDate(StringUtils.lpad(selYearStr, 4, "0") +  StringUtils.lpad(jQuery(this).text(), 2, "0") + "00", "Ymd");
+                    const prevEndDateCls = DateUtils.strToDate(StringUtils.lpad(selYearStr, 4, "0") +  StringUtils.lpad(N()(this).text(), 2, "0") + "00", "Ymd");
                     const prevEndDate = prevEndDateCls.obj.getDate();
                     let day;
                     let dayItemT;
@@ -738,7 +738,7 @@ export class Datepicker {
                                 holidayValues.push(onceValue);
                             }
                         }
-                        if(!NC.isEmptyObject(holidayValues)) {
+                        if(!N().isEmptyObject(holidayValues)) {
                             dayItemT.addClass("datepicker_holiday__").attr("title", holidayValues.join(", "));
                         }
 
@@ -747,7 +747,7 @@ export class Datepicker {
 
                     daysPanel.find(".datepicker_prev_day_item__, .datepicker_day_item__, .datepicker_next_day_item__").each(function(i, ele) {
                         setTimeout(function() {
-                            jQuery(ele).addClass("visible__");
+                            N()(ele).addClass("visible__");
                         }, i*10);
                     });
 
@@ -772,7 +772,7 @@ export class Datepicker {
                 // Binds click event to day items
                 daysPanel.on("click.datepicker", ".datepicker_day_item__, .datepicker_prev_day_item__, .datepicker_next_day_item__", function(e, ke) {
                     e.preventDefault();
-                    const thisEle = jQuery(this);
+                    const thisEle = N()(this);
 
                     daysPanel.find(".datepicker_prev_day_item__.datepicker_day_selected__, .datepicker_day_item__.datepicker_day_selected__, .datepicker_next_day_item__.datepicker_day_selected__").removeClass("datepicker_day_selected__");
                     thisEle.addClass("datepicker_day_selected__");
@@ -795,7 +795,7 @@ export class Datepicker {
                         let dateVal = selDate.obj.formatDate(dateFormat);
                         if(yearVal.length === 3) {
                             let tempFormat = "";
-                            jQuery(dateFormat.split("")).each(function(i, formatChar) {
+                            N()(dateFormat.split("")).each(function(i, formatChar) {
                                 tempFormat += formatChar + "-";
                             });
                             dateVal = selDate.obj.formatDate(tempFormat).replace(yearVal, "0" + yearVal).replace(/-/g, "");
@@ -824,7 +824,7 @@ export class Datepicker {
             let thisEle;
             let yearNum;
             yearItems.each(function(i) {
-                thisEle = jQuery(this);
+                thisEle = N()(this);
                 if(absolute !== undefined && absolute === true) {
                     yearNum = parseInt(currYear) + i;
                 } else {
@@ -911,7 +911,7 @@ export class Datepicker {
             const contextParentWrapEle = opts.context.closest("label,span");
             if((contextParentWrapEle.length === 0 && opts.context.next(".datepicker_contents__").length === 0)
                 || (contextParentWrapEle.length > 0 && contextParentWrapEle.next(".datepicker_contents__").length === 0)) {
-                jQuery(jQuery(".datepicker__").instance("datepicker")).each(function () {
+                N()(jQuery(".datepicker__").instance("datepicker")).each(function () {
                     if (this.options.contents.hasClass("visible__")) {
                         this.hide();
                     }
@@ -949,14 +949,14 @@ export class Datepicker {
                 formEle.css("position", "relative");
             }
             const baseEle = opts.contextWrapper ? opts.contextWrapper : opts.context;
-            jQuery(window).on("resize.datepicker", function() {
+            N()(window).on("resize.datepicker", function() {
                 let formPaddingLeft = 0;
                 baseEle.parentsUntil(formEle.parent()).each(function(i, ele) {
-                    formPaddingLeft += parseInt(jQuery(ele).css("padding-left")) + parseInt(jQuery(ele).css("margin-left"));
+                    formPaddingLeft += parseInt(N()(ele).css("padding-left")) + parseInt(jQuery(ele).css("margin-left"));
                 });
                 let formPaddingRight = 0;
                 baseEle.parentsUntil(formEle.parent()).each(function(i, ele) {
-                    formPaddingRight += parseInt(jQuery(ele).css("padding-right")) + parseInt(jQuery(ele).css("margin-right"));
+                    formPaddingRight += parseInt(N()(ele).css("padding-right")) + parseInt(jQuery(ele).css("margin-right"));
                 });
                 let leftOfs = baseEle.position().left;
                 const tdEle = baseEle.closest("td");
@@ -970,7 +970,7 @@ export class Datepicker {
                 if(formEle.length > 0 && formEle.innerWidth() > opts.contents.outerWidth()) {
                     limitWidth = formEle.offset().left + parseInt(formEle.css("padding-left")) + formEle.width();
                 } else {
-                    limitWidth = (window.innerWidth ? window.innerWidth : jQuery(window).width());
+                    limitWidth = (window.innerWidth ? window.innerWidth : N()(window).width());
                 }
                 if(baseEle.offset().left + opts.contents.width() > limitWidth) {
                     opts.contents.css("left", (leftOfs + baseEle.outerWidth() - opts.contents.width()) + "px");
@@ -983,9 +983,9 @@ export class Datepicker {
 
             const self = this;
             opts.contents.show(10, function() {
-                jQuery(this).removeClass("hidden__").addClass("visible__");
-                jQuery(this).one(EventUtils.whichTransitionEvent(opts.contents), function(e){
-                    jQuery(document).off("click.datepicker").on("click.datepicker", function(e) {
+                N()(this).removeClass("hidden__").addClass("visible__");
+                N()(this).one(EventUtils.whichTransitionEvent(opts.contents), function(e){
+                    N()(document).off("click.datepicker").on("click.datepicker", function(e) {
                         opts.context.get(0).blur();
                         self.hide();
                     });
@@ -1014,17 +1014,17 @@ export class Datepicker {
                 }
                 opts.context.trigger("onBeforeHide", [opts.context, opts.contents, arguments.length > 0 ? arguments[0] : undefined]);
 
-                jQuery(window).off("resize.datepicker");
-                jQuery(document).off("click.datepicker");
+                N()(window).off("resize.datepicker");
+                N()(document).off("click.datepicker");
                 opts.context.off("blur.datepicker");
 
                 opts.contents.removeClass("visible__").addClass("hidden__");
 
                 opts.contents.one(EventUtils.whichTransitionEvent(opts.contents), function(e){
                     if(self.formEleOrgPosition !== undefined) {
-                        jQuery(this).closest(".form__").css("position", self.formEleOrgPosition);
+                        N()(this).closest(".form__").css("position", self.formEleOrgPosition);
                     }
-                    jQuery(this).remove();
+                    N()(this).remove();
                     if(opts.onHide !== null) {
                         opts.onHide.call(self, opts.context);
                     }

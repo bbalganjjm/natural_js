@@ -3,28 +3,27 @@
  * Full version from original natural.ui.js lines 4276-4937
  */
 
-import { error as createError, warn } from '../../../core/helpers/logger.js';
-import { type as getType, isPlainObject, isString, isElement, isArray } from '../../../core/helpers/type-checker.js';
-import { StringUtils } from '../../../core/utils/string.js';
-import { ElementUtils } from '../../../core/utils/element.js';
-import { DateUtils } from '../../../core/utils/date.js';
-import { BrowserUtils } from '../../../core/utils/browser.js';
-import { EventUtils } from '../../../core/utils/event.js';
+import { error as createError } from '../../../core/helpers/logger.js';
+import { type as getType, isNumeric } from '../../../core/helpers/type-checker.js';
 import { Context } from '../../../architecture/context/context.js';
 import { DataSync } from '../../../data/sync/data-sync.js';
 import { Formatter } from '../../../data/formatter/formatter.js';
 import { Validator } from '../../../data/validator/validator.js';
+import { JSONUtils } from '../../../core/utils/json.js';
+import { MessageUtils } from '../../../core/utils/message.js';
 import { Iteration } from '../../shared/iteration.js';
 import { UIUtils } from '../../shared/utils.js';
 import { Scroll } from '../../shared/scroll.js';
-import { Draggable } from '../../shared/draggable.js';
 import { GC } from '../../../core/gc/garbage-collector.js';
+
+// Import N at runtime to avoid circular dependency
+const N = () => window.N;
 
 export class List {
 
         constructor(data, opts) {
             this.options = {
-                data : getType(data) === "array" ? jQuery(data) : data,
+                data : getType(data) === "array" ? N()(data) : data,
                 row : -1, // selected row index
                 beforeRow : -1, // before selected row index
                 context : null,
@@ -71,13 +70,13 @@ export class List {
             }
 
             if (isPlainObject(opts)) {
-                // Wraps the global event options in NA.config and event options for this component.
+                // Wraps the global event options in Context and event options for this component.
                 UIUtils.wrapHandler(opts, "list", "onBeforeSelect");
                 UIUtils.wrapHandler(opts, "list", "onSelect");
                 UIUtils.wrapHandler(opts, "list", "onBind");
 
                 //convert data to wrapped set
-                opts.data = getType(opts.data) === "array" ? jQuery(opts.data) : opts.data;
+                opts.data = getType(opts.data) === "array" ? N()(opts.data) : opts.data;
 
                 jQuery.extend(true, this.options, opts);
 
@@ -85,10 +84,10 @@ export class List {
                 this.options.scrollPaging.limit = this.options.scrollPaging.size;
 
                 if(getType(this.options.context) === "string") {
-                    this.options.context = jQuery(this.options.context);
+                    this.options.context = N()(this.options.context);
                 }
             } else {
-                this.options.context = jQuery(opts);
+                this.options.context = N()(opts);
             }
 
             // If the addTop option is set to false, the setting values ​​of scrollPaging.size and createRowDelay options are forced to 0.
@@ -179,7 +178,7 @@ export class List {
 
         static vResize = function(contextWrapEle) {
             const pressed = false;
-            const vResizable = jQuery('<div class="v_resizable__"></div>').css({
+            const vResizable = N()('<div class="v_resizable__"></div>').css({
                 "text-align": "center",
                 "cursor": "n-resize",
                 "margin-bottom": contextWrapEle.css("margin-bottom")
@@ -221,10 +220,10 @@ export class List {
 
                     const rowEles = this.contextEle.find(">li.form__");
                     rowEles.filter(".list_selected__").each(function() {
-                        const thisEle = jQuery(this);
+                        const thisEle = N()(this);
                         if(arguments.length > 1) {
                             args[0] = opts.data[rowEles.index(this)];
-                            retData.push(NC.json.mapFromKeys.apply(NC.json, args));
+                            retData.push(JSONUtils.mapFromKeys.apply(JSONUtils, args));
                         } else {
                             retData.push(opts.data[rowEles.index(this)]);
                         }
@@ -239,10 +238,10 @@ export class List {
 
                 const rowEles = this.contextEle.find(">li.form__");
                 rowEles.find(opts.checkAllTarget||opts.checkSingleTarget).filter(":checked").each(function() {
-                    const thisEle = jQuery(this);
+                    const thisEle = N()(this);
                     if(arguments.length > 1) {
                         args[0] = opts.data[rowEles.index(thisEle.closest("li.form__"))];
-                        retData.push(NC.json.mapFromKeys.apply(NC.json, args));
+                        retData.push(JSONUtils.mapFromKeys.apply(JSONUtils, args));
                     } else {
                         retData.push(opts.data[rowEles.index(thisEle.closest("li.form__"))]);
                     }
@@ -256,7 +255,7 @@ export class List {
                         return data.rowStatus === rowStatus;
                     }).map(function() {
                         args[0] = this;
-                        return NC.json.mapFromKeys.apply(NC.json, args);
+                        return JSONUtils.mapFromKeys.apply(JSONUtils, args);
                     }).get();
                 } else {
                     return opts.data.datafilter(function(data) {
@@ -296,7 +295,7 @@ export class List {
                 if(!isAppend) {
                     self.contextEle.find(">li.list_selected__").removeClass("list_selected__");
                 }
-                jQuery(row).each(function() {
+                N()(row).each(function() {
                     selRowEle = self.contextEle.find(">li" + (self.options.data.length > 0 ? ".form__" : "") +":eq(" + String(this) + ")");
                     if(selRowEle.hasClass("list_selected__")) {
                         selRowEle.removeClass("list_selected__");
@@ -321,7 +320,7 @@ export class List {
             if(row === undefined) {
                 const rowEles = this.contextEle.find(">li");
                 return rowEles.find(opts.checkAllTarget || opts.checkSingleTarget).filter(":checked").map(function () {
-                    return rowEles.index(jQuery(this).closest("li.form__"));
+                    return rowEles.index(N()(this).closest("li.form__"));
                 }).get();
             } else {
                 if(getType(row) !== "array") {
@@ -333,7 +332,7 @@ export class List {
                 if(!isAppend) {
                     self.contextEle.find(">li").find((opts.checkAllTarget||opts.checkSingleTarget) + ":checked").prop("checked", false);
                 }
-                jQuery(row).each(function() {
+                N()(row).each(function() {
                     checkboxEle = self.contextEle.find(">li").find(opts.checkAllTarget||opts.checkSingleTarget).eq(this);
                     if(checkboxEle.is(":checked")) {
                         checkboxEle.prop("checked", false);
@@ -371,12 +370,12 @@ export class List {
                     opts.scrollPaging.size = opts.scrollPaging.defSize;
                     // rebind new data
                     if(data) {
-                        opts.data = getType(data) === "array" ? jQuery(data) : data;
+                        opts.data = getType(data) === "array" ? N()(data) : data;
                     }
                 }
 
                 if(opts.checkAll !== null) {
-                    jQuery(opts.checkAll).prop("checked", false);
+                    N()(opts.checkAll).prop("checked", false);
                 }
                 if (opts.data.length > 0 || (callType === "append" && data && data.length > 0)) {
                     //clear li visual effect
@@ -421,7 +420,7 @@ export class List {
                     //remove lis in list body area
                     opts.context.find(">li").remove();
                     opts.context.append('<li class="empty__">' +
-                        NC.message.get(opts.message, "empty") + '</li>');
+                        MessageUtils.get(opts.message, "empty") + '</li>');
 
                     if(opts.onBind !== null && callType !== "list.update") {
                         opts.onBind.call(this, opts.context, opts.data, true, true);
@@ -444,7 +443,7 @@ export class List {
             }
             const tempRowEleClone = this.tempRowEle.clone(true, true);
 
-            if(NC.isNumeric(data)) {
+            if(isNumeric(data)) {
                 row = data;
                 data = undefined;
             }
@@ -478,7 +477,7 @@ export class List {
                     }
                     opts.context.parent(".context_wrap__").stop().animate({ "scrollTop" : scrollTop }, 300, 'swing', function() {
                         if(opts.addSelect) {
-                            jQuery(this).find(">ul>li:eq(" + row + ")").trigger("click.list");
+                            N()(this).find(">ul>li:eq(" + row + ")").trigger("click.list");
                         }
                     });
                 } else {
@@ -517,7 +516,7 @@ export class List {
                     "scrollTop" : (opts.addTop ? 0 : opts.context.parent(".context_wrap__").prop("scrollHeight"))
                 }, 300, 'swing', function() {
                     if(opts.addSelect) {
-                        jQuery(this).find("> ul > li:" + (opts.addTop ? "first" : "last")).trigger("click.list");
+                        N()(this).find("> ul > li:" + (opts.addTop ? "first" : "last")).trigger("click.list");
                     }
                 });
             }
@@ -531,7 +530,7 @@ export class List {
                 if(getType(row) !== "array") {
                     row = [row];
                 }
-                jQuery(row.sort().reverse()).each(function(i, row) {
+                N()(row.sort().reverse()).each(function(i, row) {
                     if (opts.data[this] === undefined) {
                         throw createError("[List.prototype.remove]Row index is out of range");
                     }
@@ -568,7 +567,7 @@ export class List {
                 if(getType(row) !== "array") {
                     row = [row];
                 }
-                jQuery(row).each(function() {
+                N()(row).each(function() {
                     const i = this;
                     const context = opts.context.find(">li:eq(" + String(this) + ")");
                     const form = context.instance("form");

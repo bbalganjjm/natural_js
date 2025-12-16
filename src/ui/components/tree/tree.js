@@ -3,21 +3,20 @@
  * Full version from original natural.ui.js lines 7333-7603
  */
 
-import { error as createError, warn } from '../../../core/helpers/logger.js';
-import { type as getType, isPlainObject, isString } from '../../../core/helpers/type-checker.js';
-import { StringUtils } from '../../../core/utils/string.js';
-import { ElementUtils } from '../../../core/utils/element.js';
+import { error as createError } from '../../../core/helpers/logger.js';
+import { type as getType, isPlainObject } from '../../../core/helpers/type-checker.js';
 import { Context } from '../../../architecture/context/context.js';
-import { DataSync } from '../../../data/sync/data-sync.js';
-import { Formatter } from '../../../data/formatter/formatter.js';
-import { Iteration } from '../../shared/iteration.js';
+import { JSONUtils } from '../../../core/utils/json.js';
 import { UIUtils } from '../../shared/utils.js';
+
+// Import N at runtime to avoid circular dependency
+const N = () => window.N;
 
 export class Tree {
 
         constructor(data, opts) {
             this.options = {
-                data : getType(data) === "array" ? jQuery(data) : data,
+                data : getType(data) === "array" ? N()(data) : data,
                 context : null,
                 key : null,
                 val : null,
@@ -36,20 +35,20 @@ export class Tree {
             }
 
             if (isPlainObject(opts)) {
-                // Wraps the global event options in NA.config and event options for this component.
+                // Wraps the global event options in Context and event options for this component.
                 UIUtils.wrapHandler(opts, "tree", "onSelect");
                 UIUtils.wrapHandler(opts, "tree", "onCheck");
 
                 //convert data to wrapped set
-                opts.data = getType(opts.data) === "array" ? jQuery(opts.data) : opts.data;
+                opts.data = getType(opts.data) === "array" ? N()(opts.data) : opts.data;
 
-                jQuery.extend(this.options, opts);
+                jQuery.extend(true, this.options, opts);
 
                 if(getType(this.options.context) === "string") {
-                    this.options.context = jQuery(this.options.context);
+                    this.options.context = N()(this.options.context);
                 }
             } else {
-                this.options.context = jQuery(opts);
+                this.options.context = N()(opts);
             }
 
             // set style class name to context element
@@ -75,12 +74,12 @@ export class Tree {
                     // clone arguments
                     const args = Array.prototype.slice.call(arguments, 0);
                     return this.options.context.find(".tree_active__").map(function() {
-                        args[0] = data[jQuery(this).closest("li").data("index")];
-                        return NC.json.mapFromKeys.apply(NC.json, args);
+                        args[0] = data[N()(this).closest("li").data("index")];
+                        return JSONUtils.mapFromKeys.apply(JSONUtils, args);
                     }).get();
                 } else {
                     return this.options.context.find(".tree_active__").map(function() {
-                        return data[jQuery(this).closest("li").data("index")];
+                        return data[N()(this).closest("li").data("index")];
                     }).get();
                 }
             } else if(selFlag === "checked") {
@@ -89,12 +88,12 @@ export class Tree {
                     // clone arguments
                     const args = Array.prototype.slice.call(arguments, 0);
                     return this.options.context.find(":checked").map(function() {
-                        args[0] = data[jQuery(this).closest("li").data("index")];
-                        return NC.json.mapFromKeys.apply(NC.json, args);
+                        args[0] = data[N()(this).closest("li").data("index")];
+                        return JSONUtils.mapFromKeys.apply(JSONUtils, args);
                     }).get();
                 } else {
                     return this.options.context.find(":checked").map(function() {
-                        return data[jQuery(this).closest("li").data("index")];
+                        return data[N()(this).closest("li").data("index")];
                     }).get();
                 }
             } else if(selFlag === "checkedInLastNode") {
@@ -103,12 +102,12 @@ export class Tree {
                 if(arguments.length > 1) {
                     const args = Array.prototype.slice.call(arguments, 0);
                     return this.options.context.find(".tree_last_node__ :checked").map(function() {
-                        args[0] = data[jQuery(this).closest("li").data("index")];
-                        return NC.json.mapFromKeys.apply(NC.json, args);
+                        args[0] = data[N()(this).closest("li").data("index")];
+                        return JSONUtils.mapFromKeys.apply(JSONUtils, args);
                     }).get();
                 } else {
                     return this.options.context.find(".tree_last_node__ :checked").map(function() {
-                        return data[jQuery(this).closest("li").data("index")];
+                        return data[N()(this).closest("li").data("index")];
                     }).get();
                 }
             }
@@ -124,12 +123,12 @@ export class Tree {
 
             //to rebind new data
             if(data != null) {
-                opts.data = getType(data) === "array" ? jQuery(data) : data;
+                opts.data = getType(data) === "array" ? N()(data) : data;
             }
 
-            const rootNode = jQuery('<ul class="tree_level1_folder__"></ul>').appendTo(opts.context.empty());
+            const rootNode = N()('<ul class="tree_level1_folder__"></ul>').appendTo(opts.context.empty());
             let isAleadyRoot = false;
-            jQuery(opts.data).each(function(i, rowData) {
+            N()(opts.data).each(function(i, rowData) {
                 if(rowData[opts.level] === 1 || !isAleadyRoot) {
                     rootNode.append('<li data-index="' + i + '" class="tree_' + rowData[opts.val] + '__ tree_level1_node__ tree_close__"><span class="tree_icon__"></span>' + (opts.checkbox ? '<span class="tree_check__"><input type="checkbox" /></span>' : '') + '<a class="tree_key__" href="#"><span>' + rowData[opts.key] + '</span></a><ul id="' + rowData[opts.val] + '" class="tree_level' + (opts.level !== null ? String(Number(rowData[opts.level]) + 1) : '') + '_folder__"></ul></li>');
                     isAleadyRoot = true;
@@ -147,15 +146,15 @@ export class Tree {
             if(opts.checkbox) {
                 rootNode.on("click.tree", ".tree_check__ > :checkbox", function(e) {
                     let checkFlag;
-                    const siblingNodesEle = jQuery(this).closest("li").parent().children("li");
-                    const parentNodesEle = jQuery(this).parents("li");
-                    const parentNodeEle = jQuery(this).closest("ul").parent();
-                    jQuery(this).removeClass("tree_auto_parents_select__");
-                    if(jQuery(this).is(":checked")) {
-                        jQuery(this).parent().siblings("ul").find(":not(:checked)").prop("checked", true);
+                    const siblingNodesEle = N()(this).closest("li").parent().children("li");
+                    const parentNodesEle = N()(this).parents("li");
+                    const parentNodeEle = N()(this).closest("ul").parent();
+                    N()(this).removeClass("tree_auto_parents_select__");
+                    if(N()(this).is(":checked")) {
+                        N()(this).parent().siblings("ul").find(":not(:checked)").prop("checked", true);
                         checkFlag = true;
                     } else {
-                        jQuery(this).parent().siblings("ul").find(":checked").prop("checked", false);
+                        N()(this).parent().siblings("ul").find(":checked").prop("checked", false);
                         checkFlag = false;
                     }
 
@@ -188,18 +187,18 @@ export class Tree {
                     // run onCheck event callback
                     // FIXME "e.clientX > 0 && e.clientY > 0" is temporary code
                     if(opts.onCheck !== null && e.clientX > 0 && e.clientY > 0) {
-                        const closestLi = jQuery(this).closest("li");
-                        const checkedEle = jQuery(this).closest("ul").find(".tree_last_node__ :checked");
+                        const closestLi = N()(this).closest("li");
+                        const checkedEle = N()(this).closest("ul").find(".tree_last_node__ :checked");
                         opts.onCheck.call(self
                             , closestLi.data("index")
                             , closestLi
                             , opts.data[closestLi.data("index")]
                             , checkedEle.map(function() {
-                                return jQuery(this).closest("li").data("index");
+                                return N()(this).closest("li").data("index");
                             }).get()
                             , checkedEle
                             , checkedEle.map(function() {
-                                return opts.data[jQuery(this).closest("li").data("index")];
+                                return opts.data[N()(this).closest("li").data("index")];
                             }).get()
                             , checkFlag);
                     }
@@ -209,18 +208,18 @@ export class Tree {
             // node name click event bind
             rootNode.on("click.tree", "li" + (!opts.folderSelectable ? ".tree_last_node__" : "") + " .tree_key__", function(e) {
                 e.preventDefault();
-                const parentLi = jQuery(this).parent("li");
+                const parentLi = N()(this).parent("li");
                 if(opts.onSelect !== null) {
                     opts.onSelect.call(self, parentLi.data("index"), parentLi, opts.data[parentLi.data("index")]);
                 }
                 rootNode.find("li > a.tree_key__.tree_active__").removeClass("tree_active__");
-                jQuery(this).addClass("tree_active__");
+                N()(this).addClass("tree_active__");
             });
 
             // icon click event bind
             rootNode.on("click.tree", ".tree_icon__" + (!opts.folderSelectable ? ", li:not('.tree_last_node__') .tree_key__" : ""), function(e) {
                 e.preventDefault();
-                const parentLi = jQuery(this).parent("li");
+                const parentLi = N()(this).parent("li");
                 if(parentLi.find("> ul > li").length > 0) {
                     if(parentLi.hasClass("tree_open__")) {
                         parentLi.removeClass("tree_open__").addClass("tree_close__");

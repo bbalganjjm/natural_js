@@ -3,22 +3,11 @@
  * Full version from original natural.ui.js lines 1137-1245
  */
 
-import { error as createError, warn } from '../../../core/helpers/logger.js';
-import { type as getType, isPlainObject, isString, isElement, isArray } from '../../../core/helpers/type-checker.js';
-import { StringUtils } from '../../../core/utils/string.js';
+import { error as createError } from '../../../core/helpers/logger.js';
 import { ElementUtils } from '../../../core/utils/element.js';
-import { DateUtils } from '../../../core/utils/date.js';
-import { BrowserUtils } from '../../../core/utils/browser.js';
 import { EventUtils } from '../../../core/utils/event.js';
 import { Context } from '../../../architecture/context/context.js';
-import { DataSync } from '../../../data/sync/data-sync.js';
-import { Formatter } from '../../../data/formatter/formatter.js';
-import { Validator } from '../../../data/validator/validator.js';
-import { Iteration } from '../../shared/iteration.js';
 import { UIUtils } from '../../shared/utils.js';
-import { Scroll } from '../../shared/scroll.js';
-import { Draggable } from '../../shared/draggable.js';
-import { GC } from '../../../core/gc/garbage-collector.js';
 
 export class Button {
         constructor(obj, opts) {
@@ -33,18 +22,18 @@ export class Button {
             };
 
             try {
-                jQuery.extend(this.options, Context.attr("ui").button);
+                jQuery.extend(true, this.options, Context.attr("ui").button);
             } catch (e) {
                 throw createError("Button", e);
             }
-            jQuery.extend(this.options, ElementUtils.toOpts(this.options.context));
+            jQuery.extend(true, this.options, ElementUtils.toOpts(this.options.context));
 
             if(opts !== undefined) {
                 // Wraps the global event options in NA.config and event options for this component.
                 UIUtils.wrapHandler(opts, "button", "onBeforeCreate");
                 UIUtils.wrapHandler(opts, "button", "onCreate");
 
-                jQuery.extend(this.options, opts);
+                jQuery.extend(true, this.options, opts);
             }
 
             // set style class name to context element
