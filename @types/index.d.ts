@@ -133,6 +133,21 @@ declare class NC {
      */
     events(eventName: string, namespace?: string): N.EventsObject | N.EventObject;
     /**
+     * N.comm is a library that supports Ajax communication with the server.
+     * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0203.html
+     */
+    comm(url: string | N.Options.Request): N.Communicator;
+    /**
+     * Returns the Communicator.request object.
+     * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0204.html
+     */
+    request(): N.Request;
+    /**
+     * N.cont executes the init function of the Controller object.
+     * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0201.html
+     */
+    cont(contObj: N.Objects.Controller.Object): N.Objects.Controller.Object;
+    /**
      * Gets the default locale value configured in the framework.
      * > The default messages of the framework will be processed in multiple languages according to the configured locale value.
      *
@@ -341,6 +356,41 @@ declare class NC {
          */
         ds(): void;
     };
+    /**
+     * Fetch API wrapper that provides XHR-compatible interface
+     * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0203.html
+     */
+    static fetch: {
+        (options: N.Options.Fetch): N.XhrCompat;
+    };
+    /**
+     * Communicator constructor function
+     * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0203.html
+     */
+    static comm: {
+        (obj: N<N.JSONObject[]> | string, url?: string | N.Options.Request): N.Communicator;
+    };
+    /**
+     * Controller constructor function
+     * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0201.html
+     */
+    static cont: {
+        (obj: N<HTMLElement[]>, contObj: N.Objects.Controller.Object): N.Objects.Controller.Object;
+    };
+    /**
+     * Request class
+     * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0204.html
+     */
+    static request: typeof N.Request;
+    /**
+     * Context class for storing application-wide attributes
+     * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0202.html
+     */
+    static context: typeof N.Context;
+    /**
+     * Config class for storing configuration
+     */
+    static config: typeof N.Config;
     /**
      * Provides utility functions for processing and manipulating strings.
      */
@@ -1482,8 +1532,8 @@ declare namespace N {
         };
     }
 
-    interface Context {
-        attrObj: object;
+    class Context {
+        static attrObj: object;
         /**
          * Get data stored in N.context.
          *
@@ -1492,7 +1542,7 @@ declare namespace N {
          *
          * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0206.html&tab=html/naturaljs/refr/refr020602.html
          */
-        attr(name: string): unknown;
+        static attr(name: string): unknown;
         /**
          * Set the data to be stored in N.context.
          *
@@ -1502,11 +1552,11 @@ declare namespace N {
          *
          * @see https://bbalganjjm.github.io/natural_js/?page=html/naturaljs/refr/refr0206.html&tab=html/naturaljs/refr/refr020602.html
          */
-        attr(name: string, obj: unknown): N.Context;
+        static attr(name: string, obj: unknown): typeof N.Context;
     }
 
-    interface Config {
-        filterConfig: N.Objects.Config.FilterConfig;
+    class Config {
+        static filterConfig: N.Objects.Config.FilterConfig;
     }
 
     /**

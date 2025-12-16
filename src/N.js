@@ -29,8 +29,10 @@ import { initDateFormatter } from './core/utils/date.js';
 // Architecture
 import { Fetch, fetch as fetchAPI } from './architecture/communication/fetch.js';
 import { Communicator } from './architecture/communication/communicator.js';
+import { Request } from './architecture/communication/request.js';
 import { Controller } from './architecture/controller/controller.js';
 import { Context } from './architecture/context/context.js';
+import { Config } from './architecture/config/config.js';
 
 // Data
 import { DataSync } from './data/sync/data-sync.js';
@@ -205,7 +207,9 @@ export class NJS {
     static fetch = Fetch.fetch.bind(Fetch);
     static comm = (obj, url) => new Communicator(obj, url);
     static cont = (obj, contObj) => new Controller(obj, contObj);
+    static request = Request;
     static context = Context;
+    static config = Config;
     
     // Static Properties - Data
     static ds = DataSync;
