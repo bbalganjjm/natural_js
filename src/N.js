@@ -7,6 +7,7 @@
 import * as TypeChecker from './core/helpers/type-checker.js';
 import * as Logger from './core/helpers/logger.js';
 import * as SerialExecute from './core/helpers/serial-execute.js';
+import { locale, setContext as setLocaleContext } from './core/helpers/locale.js';
 
 // Core Utils
 import * as StringUtils from './core/utils/string.js';
@@ -21,6 +22,7 @@ import { Mask } from './core/utils/mask.js';
 
 // Core Extensions & GC
 import { applyJQueryExtensions } from './core/extensions/jquery-extensions.js';
+import { initRegexpFilter } from './core/extensions/jquery-regexp-filter.js';
 import { GC } from './core/gc/garbage-collector.js';
 import { initDateFormatter } from './core/utils/date.js';
 
@@ -57,7 +59,11 @@ import { Tree } from './ui/components/tree/tree.js';
 
 // Apply global extensions
 applyJQueryExtensions();
+initRegexpFilter();
 initDateFormatter();
+
+// Inject Context to locale helper
+setLocaleContext(Context);
 
 /**
  * NJS Class - extends jQuery
@@ -191,6 +197,9 @@ export class NJS {
     
     // Static Properties - Serial Execute
     static serialExecute = SerialExecute.serialExecute;
+    
+    // Static Properties - Locale
+    static locale = locale;
     
     // Static Properties - Architecture
     static fetch = Fetch.fetch.bind(Fetch);
