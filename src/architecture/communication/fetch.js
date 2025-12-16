@@ -160,7 +160,7 @@ export class Fetch {
      * @private
      */
     static _executeFetch(url, fetchOptions, options) {
-        return fetch(url, fetchOptions)
+        return globalThis.fetch(url, fetchOptions)
             .then(function(response) {
                 // 1. HTTP error check
                 if (!response.ok) {

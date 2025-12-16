@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>N.comm Debug Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .log { background: #f5f5f5; padding: 10px; margin: 10px 0; border-left: 3px solid #333; }
+        .error { border-left-color: red; color: red; }
+        .success { border-left-color: green; color: green; }
+    </style>
+</head>
+<body>
+    <h1>N.comm 디버그 테스트</h1>
+    <div id="log"></div>
+    
+    <script src="lib/jquery-3.7.1.min.js"></script>
+    <script src="dist/natural.min.js"></script>
+    <script>
+        const logDiv = document.getElementById('log');
+        
+        function log(message, type = 'log') {
+            const div = document.createElement('div');
+            div.className = 'log ' + type;
+            div.textContent = new Date().toISOString() + ' - ' + message;
+            logDiv.appendChild(div);
+            console.log(message);
+        }
+        
+        log('=== N.comm 디버그 시작 ===');
+        
+        // 1. N.comm 존재 확인
+        log('1. typeof N.comm: ' + typeof N.comm);
+        
+        // 2. comm 인스턴스 생성 확인
+        try {
+            const comm = N.comm("http://127.0.0.1:3000/index.html");
+            log('2. comm 인스턴스 생성 성공');
+            log('   - typeof comm: ' + typeof comm);
+            log('   - comm.jquery: ' + comm.jquery);
+            log('   - typeof comm.submit: ' + typeof comm.submit);
+            log('   - comm.request 존재: ' + (comm.request ? 'yes' : 'no'));
+            if (comm.request) {
+                log('   - comm.request.options.url: ' + comm.request.options.url);
+                log('   - comm.request.options.type: ' + comm.request.options.type);
+                log('   - comm.request.options.dataType: ' + comm.request.options.dataType);
+            }
+            
+            // 3. submit 호출 확인
+            log('3. submit() 호출 시작...');
+            const result = comm.submit(function(data) {
+                log('✓ SUCCESS 콜백 실행됨!', 'success');
+                log('   - 응답 데이터 타입: ' + typeof data);
+                log('   - 응답 데이터: ' + JSON.stringify(data).substring(0, 100));
+            });
+            
+            log('   - submit() 반환값 타입: ' + typeof result);
+            log('   - result.xhr 존재: ' + (result && result.xhr ? 'yes' : 'no'));
+            
+            // 4. Error 핸들러 추가
+            if (result && typeof result.error === 'function') {
+                result.error(function(e, request, xhr, textStatus) {
+                    log('✗ ERROR 콜백 실행됨!', 'error');
+                    log('   - 에러: ' + (e ? e.message || e.toString() : 'unknown'));
+                    log('   - textStatus: ' + textStatus);
+                });
+            }
+            
+        } catch (e) {
+            log('✗ 에러 발생: ' + e.message, 'error');
+            log('   스택: ' + e.stack, 'error');
+        }
+        
+        // 5. 네트워크 요청 확인
+        setTimeout(function() {
+            log('=== 2초 후 상태 확인 ===');
+            log('브라우저 개발자도구 > Network 탭을 확인하세요');
+        }, 2000);
+    </script>
+</body>
+</html>
+

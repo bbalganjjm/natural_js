@@ -47,21 +47,20 @@ export class Communicator {
         });
         if(isFilterStopped) return obj;
 
+        // Initialize request and errorHandlers after filters
         obj.request = new Request(obj, isString(url) ? { "url" : url } : url);
         obj.errorHandlers = [];
 
-        // Copy comm methods to obj
-        jQuery(jQuery.map(Communicator, function(v, i){
-            if(typeof Communicator[i] === "function") {
-                if(i !== "request") {
-                    return i;
-                }
-            }
-        })).each(function(i, v) {
-            obj[v] = function(arg0) {
-                return Communicator[v].call(obj, arg0);
-            };
-        });
+        // Copy comm methods to obj (must be done after filters)
+        // Use IIFE to capture obj in closure
+        (function(capturedObj) {
+            const commMethods = ['submit', 'error'];
+            jQuery(commMethods).each(function(i, methodName) {
+                capturedObj[methodName] = function(arg0) {
+                    return Communicator[methodName].call(capturedObj, arg0);
+                };
+            });
+        })(obj);
 
         return obj;
     }
@@ -135,6 +134,11 @@ export class Communicator {
 
     static submit(callback) {
         const obj = this;
+        
+        if (!obj.request) {
+            throw createError("[N.comm.submit] Request object is missing");
+        }
+
         if (isElement(obj)) {
             jQuery.extend(obj.request.options, {
                 contentType : "text/html; charset=UTF-8",

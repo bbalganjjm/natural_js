@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>N.comm Detailed Debug</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .log { background: #f5f5f5; padding: 10px; margin: 10px 0; border-left: 3px solid #333; font-size: 12px; }
+        .error { border-left-color: red; color: red; }
+        .success { border-left-color: green; color: green; }
+        .warning { border-left-color: orange; color: orange; }
+    </style>
+</head>
+<body>
+    <h1>N.comm 상세 디버깅</h1>
+    <div id="log"></div>
+    
+    <script src="lib/jquery-3.7.1.min.js"></script>
+    <script src="dist/natural.min.js"></script>
+    <script>
+        const logDiv = document.getElementById('log');
+        
+        function log(message, type = 'log') {
+            const div = document.createElement('div');
+            div.className = 'log ' + type;
+            div.textContent = new Date().toISOString() + ' - ' + message;
+            logDiv.appendChild(div);
+            console.log(message);
+        }
+        
+        log('=== N.comm 상세 디버깅 시작 ===');
+        
+        // 1. Context 확인
+        log('1. N.context 확인');
+        log('   - typeof N.context: ' + typeof N.context);
+        log('   - typeof N.context.attr: ' + (N.context ? typeof N.context.attr : 'N/A'));
+        
+        // 2. Architecture config 확인
+        try {
+            const archConfig = N.context.attr("architecture");
+            log('   - architecture config 존재: ' + (archConfig ? 'yes' : 'no'));
+            if (archConfig && archConfig.comm) {
+                log('   - comm config 존재: yes');
+                log('   - comm.filters: ' + (archConfig.comm.filters ? JSON.stringify(Object.keys(archConfig.comm.filters)) : 'no filters'));
+            }
+        } catch (e) {
+            log('   - architecture config 없음 (정상)', 'warning');
+        }
+        
+        // 3. 간단한 테스트 URL로 요청
+        log('');
+        log('2. 테스트 요청 시작 (JSONPlaceholder API)');
+        
+        try {
+            const comm = N.comm("https://jsonplaceholder.typicode.com/posts/1");
+            
+            log('   - comm 생성 완료');
+            log('   - request.options.url: ' + comm.request.options.url);
+            log('   - request.options.type: ' + comm.request.options.type);
+            log('   - request.options.contentType: ' + comm.request.options.contentType);
+            
+            // Error handler 먼저 등록
+            comm.error(function(e, request, xhr, textStatus) {
+                log('✗ ERROR 핸들러 실행됨!', 'error');
+                log('   - Error: ' + (e ? (e.message || e.toString()) : 'unknown'), 'error');
+                log('   - textStatus: ' + textStatus, 'error');
+                log('   - xhr.status: ' + (xhr ? xhr.status : 'N/A'), 'error');
+                log('   - xhr.statusText: ' + (xhr ? xhr.statusText : 'N/A'), 'error');
+            });
+            
+            // Submit with callback
+            log('   - submit() 호출 중...');
+            const result = comm.submit(function(data) {
+                log('✓ SUCCESS 콜백 실행됨!', 'success');
+                log('   - 응답 데이터 타입: ' + typeof data, 'success');
+                log('   - 응답 데이터: ' + JSON.stringify(data).substring(0, 200), 'success');
+            });
+            
+            log('   - submit() 반환 완료');
+            log('   - result === comm: ' + (result === comm));
+            
+            // XHR 상태 확인
+            if (comm.xhr) {
+                log('   - comm.xhr 존재: yes');
+                log('   - xhr.readyState: ' + comm.xhr.readyState);
+                log('   - xhr.status: ' + comm.xhr.status);
+            } else {
+                log('   - comm.xhr 존재: no', 'warning');
+            }
+            
+        } catch (e) {
+            log('✗ 예외 발생: ' + e.message, 'error');
+            log('   - Stack: ' + e.stack, 'error');
+        }
+        
+        // 4. 네트워크 확인 안내
+        setTimeout(function() {
+            log('');
+            log('=== 3초 후 ===');
+            log('브라우저 개발자도구 > Network 탭을 확인하세요');
+            log('요청이 보이지 않는다면 submit() 내부에서 차단된 것입니다');
+        }, 3000);
+        
+        // 5. Fetch API 직접 테스트
+        setTimeout(function() {
+            log('');
+            log('3. Fetch API 직접 테스트 (비교용)');
+            fetch("https://jsonplaceholder.typicode.com/posts/1")
+                .then(response => response.json())
+                .then(data => {
+                    log('✓ 네이티브 fetch 성공!', 'success');
+                    log('   - 데이터: ' + JSON.stringify(data).substring(0, 100), 'success');
+                })
+                .catch(error => {
+                    log('✗ 네이티브 fetch 실패: ' + error.message, 'error');
+                });
+        }, 1000);
+    </script>
+</body>
+</html>
+

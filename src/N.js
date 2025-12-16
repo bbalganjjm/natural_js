@@ -277,9 +277,9 @@ export function N(selector, context) {
 }
 
 // Copy static properties from NJS to N function
-Object.keys(NJS).forEach(key => {
+Object.getOwnPropertyNames(NJS).forEach(key => {
     if (key !== 'prototype' && key !== 'length' && key !== 'name') {
-        N[key] = NJS[key];
+        Object.defineProperty(N, key, Object.getOwnPropertyDescriptor(NJS, key));
     }
 });
 
