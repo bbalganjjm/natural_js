@@ -31,6 +31,7 @@ import { Fetch, fetch as fetchAPI } from './architecture/communication/fetch.js'
 import { Communicator } from './architecture/communication/communicator.js';
 import { Request } from './architecture/communication/request.js';
 import { Controller } from './architecture/controller/controller.js';
+import { TemplateAOP } from './architecture/controller/template-aop.js';
 import { Context } from './architecture/context/context.js';
 import { Config } from './architecture/config/config.js';
 
@@ -39,6 +40,13 @@ import { DataSync } from './data/sync/data-sync.js';
 import { Formatter } from './data/formatter/formatter.js';
 import { Validator } from './data/validator/validator.js';
 import { DataFilter } from './data/filters/data-filter.js';
+
+// Code
+import { Code } from './code/inspection.js';
+
+// UI Shell
+import { Notify } from './ui-shell/notify/notify.js';
+import { Docs } from './ui-shell/docs/docs.js';
 
 // UI Shared
 import { Iteration } from './ui/shared/iteration.js';
@@ -117,6 +125,15 @@ export class NJS {
     // UI Component Prototype Methods
     alert(msg, vars) {
         return new Alert(this, msg, vars);
+    }
+    
+    // Prototype Methods - UI Shell
+    notify(opts) {
+        return new Notify(this, opts);
+    }
+    
+    docs(opts) {
+        return new Docs(this, opts);
     }
     
     button(opts) {
@@ -217,8 +234,18 @@ export class NJS {
     static validator = Validator;
     static data = DataFilter;
     
+    // Static Properties - Code
+    static code = Code;
+    
+    // Static Properties - Template
+    static template = TemplateAOP;
+    
     // Static Properties - UI Shared
     static ui = class {
+        static shell = class {
+            static Notify = Notify;
+            static Docs = Docs;
+        };
         static iteration = Iteration;
         static draggable = Draggable;
         static utils = UIUtils;

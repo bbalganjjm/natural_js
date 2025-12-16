@@ -1,35 +1,55 @@
 /**
  * Natural-JS Data Filter
- * Simplified version - full implementation in original natural.data.js lines 1124-1169
+ * Full implementation from natural.data.js lines 1124-1169
  */
 
+import { isWrappedSet, type } from '../../core/helpers/type-checker.js';
+
+// Import N at runtime to avoid circular dependency
+const N = () => window.N;
+
 export class DataFilter {
-    static filter(data, condition) {
-        if (!condition) return data;
-        
-        return jQuery(data).filter(function() {
-            for (const key in condition) {
-                if (this[key] !== condition[key]) {
-                    return false;
-                }
-            }
-            return true;
-        }).toArray();
+    static filter(arr, condition) {
+        if(typeof condition === "function") {
+            return isWrappedSet(arr) ? N()(jQuery.grep(arr.toArray(), condition)) : jQuery.grep(arr, condition);
+        } else if(type(condition) === "string") {
+            condition = condition.replace(/ /g, "").replace(/\|\|/g, " || item.").replace(/\&\&/g, " && item.");
+            const testFn = new Function("item", "return item." + condition);
+            return isWrappedSet(arr) ? N()(jQuery.grep(arr.toArray(), function(item) {
+                return testFn(item);
+            })) : jQuery.grep(arr, function(item) {
+                return testFn(item);
+            });
+        } else {
+            return arr;
+        }
     }
 
-    static sort(data, key, reverse) {
-        const sorted = jQuery.extend(true, [], data);
-        
-        sorted.sort(function(a, b) {
-            const aVal = a[key];
-            const bVal = b[key];
-            
-            if (aVal < bVal) return reverse ? 1 : -1;
-            if (aVal > bVal) return reverse ? -1 : 1;
+    static sortBy(key, reverse) {
+        return function(a, b) {
+            a = a[key];
+            b = b[key];
+            if (Number(a) && Number(b)) {
+                a = Number(a);
+                b = Number(b);
+            }
+            if (a < b) {
+                return reverse * -1;
+            }
+            if (a > b) {
+                return reverse * 1;
+            }
             return 0;
-        });
-        
-        return sorted;
+        };
+    }
+
+    static sort(arr, key, reverse) {
+        if(reverse) {
+            reverse = -1;
+        } else {
+            reverse = 1;
+        }
+        return arr.sort(DataFilter.sortBy(key, reverse));
     }
 }
 

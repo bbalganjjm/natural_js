@@ -1,21 +1,27 @@
 /**
- * Natural-JS Code
- * Full version from natural.code.js lines 25-178
+ * Natural-JS Code Inspection
+ * Full implementation from natural.code.js lines 16-196
  */
 
 import { error as createError, warn, log } from '../core/helpers/logger.js';
-import { type as getType, isPlainObject, isString, isEmptyObject } from '../core/helpers/type-checker.js';
-import { StringUtils } from '../core/utils/string.js';
-import { ElementUtils } from '../core/utils/element.js';
-import { BrowserUtils } from '../core/utils/browser.js';
+import { isEmpty, startsWith, trimToEmpty } from '../core/utils/string.js';
+import { is as isBrowser } from '../core/utils/browser.js';
+import { get as getMessage } from '../core/utils/message.js';
 import { Context } from '../architecture/context/context.js';
-import { Controller } from '../architecture/controller/controller.js';
-import { Communicator } from '../architecture/communication/communicator.js';
-import { Formatter } from '../data/formatter/formatter.js';
+
+// Import N at runtime to avoid circular dependency
+const N = () => window.N;
 
 export class Code {
+    static severityLevels = Object.freeze({
+        BLOCKER: ["Blocker", "darkred", createError],
+        CRITICAL: ["Critical", "red", createError],
+        MAJOR: ["Major", "orange", warn],
+        MINOR: ["Minor", "black", log]
+    });
 
-        static test = function(codes, rules) {
+    static inspection = class {
+        static test(codes, rules) {
             if(codes.indexOf("<script") < 0) {
                 return false;
             }
@@ -26,17 +32,17 @@ export class Code {
             }
 
             if(rules) {
-                jQuery(rules).each(function() {
-                    Code.rules[this](codes, Context.attr("code").inspection.excludes, report);
+                N()(rules).each(function() {
+                    Code.inspection.rules[this](codes, Context.attr("code").inspection.excludes, report);
                 });
             } else {
-                for(const k in Code.rules) {
-                    Code.rules[k](codes, Context.attr("code").inspection.excludes, report);
+                for(const k in Code.inspection.rules) {
+                    Code.inspection.rules[k](codes, Context.attr("code").inspection.excludes, report);
                 }
             }
 
             return report;
-        };
+        }
 
         static rules = {
             /**
@@ -47,7 +53,7 @@ export class Code {
                 let match;
                 while (match=regex.exec(codes)) {
                     let isExclude = false;
-                    jQuery(excludes).each(function(i, str) {
+                    N()(excludes).each(function(i, str) {
                         if(match[0].indexOf(str) > -1) {
                             isExclude = true;
                             return false;
@@ -58,12 +64,12 @@ export class Code {
                         isExclude = true;
                     }
 
-                    if(StringUtils.startsWith(match[0], "//")) {
+                    if(startsWith(match[0], "//")) {
                         isExclude = true;
                     }
 
                     // selector excludes
-                    const selector = StringUtils.trimToEmpty(match[1]).replace(/ /g, "");
+                    const selector = trimToEmpty(match[1]).replace(/ /g, "");
                     if((/^["']/g).test(selector)) {
                         if(!isExclude) {
                             if((/[\(\)]|,view|,cont\.view|",|',|^"<|^'<|>"$|>'$|html|body/g).test(selector)) {
@@ -91,8 +97,8 @@ export class Code {
                             } catch(e) { warn(e) }
                             if(script.indexOf(match[0]) > -1) {
                                 report.push({
-                                    "level" : NCD.severityLevels.CRITICAL[0],
-                                    "message" : NC.message.get(Context.attr("code").inspection.message, "NoContextSpecifiedInSelector"),
+                                    "level" : Code.severityLevels.CRITICAL[0],
+                                    "message" : getMessage(Context.attr("code").inspection.message, "NoContextSpecifiedInSelector"),
                                     "line" : codes.substring(0, regex.lastIndex).split("\n").length,
                                     "code" : match[0],
                                 });
@@ -109,7 +115,7 @@ export class Code {
                 let match;
                 while (match=regex.exec(codes)) {
                     let isExclude = false;
-                    jQuery(excludes).each(function(i, str) {
+                    N()(excludes).each(function(i, str) {
                         if(match[0].indexOf(str) > -1) {
                             isExclude = true;
                             return false;
@@ -118,12 +124,12 @@ export class Code {
 
                     if(!isExclude) {
                         const args = match[2];
-                        if(StringUtils.isEmpty(args)) {
+                        if(isEmpty(args)) {
                             isExclude = true;
                         }
                     }
 
-                    if(StringUtils.startsWith(match[0], "//")) {
+                    if(startsWith(match[0], "//")) {
                         isExclude = true;
                     }
 
@@ -134,8 +140,8 @@ export class Code {
                         } catch(e) { warn(e) }
                         if(script.indexOf(match[0]) > -1) {
                             report.push({
-                                "level" : NCD.severityLevels.MAJOR[0],
-                                "message" : NC.message.get(Context.attr("code").inspection.message, "UseTheComponentsValMethod"),
+                                "level" : Code.severityLevels.MAJOR[0],
+                                "message" : getMessage(Context.attr("code").inspection.message, "UseTheComponentsValMethod"),
                                 "line" : codes.substring(0, regex.lastIndex).split("\n").length,
                                 "code" : match[0],
                             });
@@ -150,24 +156,39 @@ export class Code {
                 if(!data) {
                     return false;
                 }
-                jQuery(data).each(function() {
-                    const consoleLogger = NCD.severityLevels[this.level.toUpperCase()][2];
-                    if(Context.attr("code").inspection.abortOnError && (this.level === NCD.severityLevels.BLOCKER[0] || this.level === NCD.severityLevels.CRITICAL[0])) {
+                N()(data).each(function() {
+                    const consoleLogger = Code.severityLevels[this.level.toUpperCase()][2];
+                    if(Context.attr("code").inspection.abortOnError && (this.level === Code.severityLevels.BLOCKER[0] || this.level === Code.severityLevels.CRITICAL[0])) {
                         throw consoleLogger("[" + this.level + "] " + url + " - " + this.line + " : " + this.code + "\n" + this.message + "\n\n");
                     } else {
-                        if(BrowserUtils.is("ie")) {
+                        if(isBrowser("ie")) {
                             consoleLogger("[" + this.level + "] " + url + " - " + this.line + " : " + this.code, "\n" + this.message);
                         } else {
-                            consoleLogger("%c[" + this.level + "] " + url + " - " + this.line + " : " + this.code, "color: " + NCD.severityLevels[this.level.toUpperCase()][1] + "; font-weight: bold; line-height: 200%;",
+                            consoleLogger("%c[" + this.level + "] " + url + " - " + this.line + " : " + this.code, "color: " + Code.severityLevels[this.level.toUpperCase()][1] + "; font-weight: bold; line-height: 200%;",
                                 "\n" + this.message);
                         }
                     }
                 });
             }
         };
-
     }
 
+    static addSourceURL(codes, sourceURL) {
+        if(codes.indexOf("<script") < 0) {
+            return codes;
+        }
 
-export const inspection = (...args) => new Code(...args);
+        let cutIndex = codes.lastIndexOf("\n</script>");
+        if(cutIndex < 0) {
+            cutIndex = codes.lastIndexOf("\t</script>");
+        }
+        if(cutIndex < 0) {
+            cutIndex = codes.lastIndexOf(" </script>");
+        }
+
+        return [codes.slice(0, cutIndex), '\n//# sourceURL=' + sourceURL + "\n", codes.slice(cutIndex)].join("");
+    }
+}
+
+export const inspection = Code.inspection;
 export default Code;

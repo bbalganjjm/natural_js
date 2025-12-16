@@ -59,7 +59,15 @@ export class DataSync {
         if (inst && observable) {
             for (let i = 0; i < observable.length; i++) {
                 if (inst !== observable[i] && inst.options.data === observable[i].options.data) {
-                    observable[i].update(row, key);
+                    // Check if observable is a Form instance and handle accordingly
+                    const Form = window.N?.form;
+                    if(Form && observable[i] instanceof Form) {
+                        if(row === observable[i].row()) {
+                            observable[i].update(row, key);
+                        }
+                    } else {
+                        observable[i].update(row, key);
+                    }
                 }
             }
         }
