@@ -8,7 +8,7 @@ sources:
     resource: ../governance/okf-conventions.md
     title: OKF conventions for the Natural-JS bundle
     git_blob: 17cfe650daacff3935aa93a383868574afe95628
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T10:15:58Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T10:18:21Z }
 ---
 
 The Natural-JS 2.0 migration follows [the master roadmap](roadmap.md). Read this checkpoint before resuming a milestone. The immutable 1.x baseline is commit `b96e47a0d7e020d1878f7cecdf1b1a9f462d99a6`; its source, LGPL license, and usage docs are also archived under `v1/`.
@@ -20,7 +20,7 @@ Deliver a TypeScript-source, jQuery-free, ESM Natural-JS 2.0 at the repository r
 # Checkpoint
 
 - M0-M3 are complete. M3 and the root 2.0 layout were fast-forward pushed to `origin/2.0.0-alpha.0` at commit `94c73a9f`; `master` remains untouched. The 2.0 package uses Apache-2.0, while preserved `v1/` files retain their LGPL license and notices.
-- The user approved [M4](m4-plan.md). Its two-layout employee screen, Form/Grid pilots, nested row-local Select binding, browser regressions, benchmark, and independent-agent change task are implemented. M4 build, browser, package, and documentation gates passed; its detailed evidence is in the M4 plan.
+- The user approved [M4](m4-plan.md). Its two-layout employee screen, Form/Grid pilots, nested row-local Select binding, browser regressions, benchmark, and independent-agent change task are implemented. M4 build, browser, package, and documentation gates passed; commit `b9a1c902` was fast-forward pushed to `origin/2.0.0-alpha.0`. Its detailed evidence is in the M4 plan.
 - [M5](m5-plan.md) is a draft for separate review and approval. It will complete retained Form formatter/validator rules, row-keyed drafts, and full data contracts; none of that broader work is authorized by M4 approval.
 
 # Steps
@@ -35,11 +35,11 @@ Deliver a TypeScript-source, jQuery-free, ESM Natural-JS 2.0 at the repository r
 - [x] Review and approve [the M4 detailed plan](m4-plan.md) before implementing the representative UI screen.
 - [x] Implement the M4 representative screen in two authored layouts, nested Select binding, ID-clean keyboard access, and a fixed-fixture benchmark.
 - [x] Record the independent-agent feature task, M4 pilot boundaries, and the detailed M5 review plan.
-- [x] Close changed/full OKF checks and source stamps; prepare the M4 commit for `2.0.0-alpha.0`.
+- [x] Close changed/full OKF checks and source stamps; commit and fast-forward push M4 to `2.0.0-alpha.0`.
 
 # Next action
 
-Publish the completed M4 result to `origin/2.0.0-alpha.0`, then review [the M5 plan](m5-plan.md) with the user before starting M5 implementation. The Firefox host limitation stays open.
+Review [the M5 plan](m5-plan.md) with the user. Start M5 implementation only after separate approval; the Firefox host limitation stays open.
 
 # Decisions
 
@@ -61,7 +61,7 @@ Publish the completed M4 result to `origin/2.0.0-alpha.0`, then review [the M5 p
 | 2026-09-24 | M4 code and browsers | Build, typecheck, and explicit example TypeScript check passed; Vitest 29/29, fresh-tarball JS/TS consumers, and Chromium/WebKit browser 64/64 passed, including M4 screen 36/36. Six draft concepts received independent source review; one Form validation wording correction was applied. |
 | 2026-09-24 | M4 benchmark | Five measured Chromium runs after two warm-ups on the same i7-9700F host: at 1,000 rows/10 fields, 2.0 flat initial/rebind medians were 11.9/13.8 ms versus 1.x flat 122.8/111.0 ms; 2.0 nested automatic was 40.4/44.2 ms. Duplicate IDs were 0 in 2.0 and 9,990 in 1.x. See [raw data](evidence/m4-binding-chromium.json) and comparison caveats in [M4](m4-plan.md). |
 | 2026-09-24 | M4 package audit | `npm pack --dry-run` lists 48 files (46,017 bytes), with no `v1/`, jQuery, docs, examples, or convenience utility bundle. |
-| 2026-09-24 | M4 documentation | Changed and full OKF checks passed: 21 concepts, 5 reserved files, 0 errors, 0 warnings. Seven M4-related 2.0 concepts received independent source review. |
+| 2026-09-24 | M4 documentation | Changed and full OKF checks passed: 21 concepts, 5 reserved files, 0 errors, 0 warnings. Seven M4-related 2.0 concepts received independent source review. Commit `b9a1c902` was fast-forward pushed to `origin/2.0.0-alpha.0`. |
 | 2026-09-24 | Independent agent | A fresh docs-first agent added `profile.department` to both layouts and the data/save path with zero code retries; its first Chromium run passed. It read 15 unique files (53,364 bytes) and changed 7 files (12 added/5 replaced lines) in about 4m05s. Actual token use was unavailable. |
 
 # Open questions

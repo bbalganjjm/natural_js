@@ -12,7 +12,7 @@ sources:
   - id: roadmap
     resource: roadmap.md
     title: Milestone order and M4 exit gate
-    git_blob: fa95aa880ebf9279b5126a3380c616a0037fc77d
+    git_blob: ffc4012eaa96024bc6e23ce9bc06357b49089e10
   - id: page
     resource: ../../src/page/index.ts
     title: M3 page lifecycle implementation
@@ -25,7 +25,7 @@ sources:
     resource: ../../src/comm/index.ts
     title: M3 request implementation
     git_blob: f3650ddbfeb5d87c3e58dc84904df9704e994368
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T10:16:03Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T10:18:26Z }
 ---
 
 M4 tests the 2.0 structure through one complete application path before expanding the UI catalog. The user approved M4 on 2026-09-24. This record keeps its scope, implementation decisions, and measured evidence together.
@@ -109,6 +109,7 @@ Review the completed M4 result and [the M5 detailed plan](m5-plan.md) with the u
 | 2026-09-24 | Benchmark | Raw five-run Chromium measurements are in [m4-binding-chromium.json](evidence/m4-binding-chromium.json); 2 warm-up runs, 100/1,000 rows, 10 fields, same Windows i7-9700F and Headless Chromium 153. |
 | 2026-09-24 | Independent agent task | A fresh agent added optional `profile.department` to both views and the shared data/server/test path. First Chromium run passed, with zero code-change retries: 7 files, 12 added and 5 replaced lines. It read 15 unique files (53,364 bytes; 57,186 bytes including rereads) in about 4 minutes 5 seconds of recorded work. Two TypeScript command adjustments were needed; actual token use was unavailable. These bytes measure read context, not tokens. |
 | 2026-09-24 | Final checks | Build, typecheck, M4 example TypeScript check, Vitest 29/29, fresh-tarball JS/TS consumers, and the complete M2-M4 Chromium/WebKit browser suite 64/64 passed (M4 screen: 36/36). Changed/full OKF checks passed with 0 errors and 0 warnings. The 48-file, 46,017-byte tarball excludes 1.x and jQuery. A Firefox smoke still failed before page load with `browserType.launch: spawn UNKNOWN` on this Windows host. |
+| 2026-09-24 | GitHub push | M4 implementation commit `b9a1c902` was fast-forward pushed to `origin/2.0.0-alpha.0`; `master` and `v1/` were not changed. |
 
 The 1,000-row median times below are milliseconds from that recorded run. The flat 1.x comparison uses its preserved jQuery and Grid bundle with `onBind` completion, and excludes filter/dispose/nested Select because the contracts differ.
 
