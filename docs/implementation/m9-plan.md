@@ -29,7 +29,7 @@ sources:
   - id: wcag
     resource: https://www.w3.org/TR/WCAG22/
     title: W3C Web Content Accessibility Guidelines 2.2
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T19:39:45Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T20:41:30Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T19:03:21Z }
 ---
@@ -80,7 +80,8 @@ Proceed with the approved M9 implementation, beginning with the M8 recheck, publ
 | Date | Check | Result |
 |---|---|---|
 | 2026-09-25 | M9 approval and M8 recheck | An independent M8 recheck matched the pushed `e9db5d81` commit, three agent-task raw logs, 75/75 tests per Playwright engine, and a clean full OKF check. The user approved M9, removal of only the unused public `Rule` alias, and reported no Mac/Safari device. The rule runtime remains. |
-| 2026-09-25 | M9 implementation gate | Build, typecheck, and Vitest 81/81 passed after public `Rule` removal. Popup Tab-boundary focus was fixed without a new public API. Isolated full suites passed 103/103 each in Chromium, Firefox, and WebKit. M4/M7 authored layouts passed automated axe A/AA checks for tested states. Reference-host 1,000-row flat Grid initial/rebind medians were 11.9/16.0 ms and nested-auto 37.3/44.4 ms; List initial was 11.5 ms, with duplicate IDs 0. Raw [Grid](evidence/m9-binding-chromium.json) and [List](evidence/m9-list-chromium.json) evidence is retained. Real Safari and manual screen-reader checks remain open. |
+| 2026-09-25 | M9 implementation gate | Build, typecheck, and Vitest 81/81 passed after public `Rule` removal. Popup Tab-boundary focus was fixed without a new public API. Isolated full suites passed 103/103 each in Chromium, Firefox, and WebKit. M4/M7 authored layouts passed automated axe A/AA checks for tested states. Reference-host 1,000-row flat Grid initial/rebind medians were 11.9/16.0 ms and nested-auto 37.3/44.4 ms; List initial was 11.5 ms, with duplicate IDs 0. These preliminary medians were superseded; the linked raw [Grid](evidence/m9-binding-chromium.json) and [List](evidence/m9-list-chromium.json) records now contain the corrected beta run below. Real Safari and manual screen-reader checks remain open. |
+| 2026-09-25 | Corrected beta package gate | Clean source `a45fbd6` produced SHA-gated `2.0.0-beta.0` tarball `ca87cf82f6fe457823500e1933ec52de0a35d8f6a529be50cb37ed6fdea126b8`. JS/TS installed consumers, five Windows browser consumers, and 103/103 full source tests per Playwright engine passed. Updated 1,000-row flat Grid initial/rebind medians were 12.5/15.8 ms, nested-auto 38.0/46.9 ms, and List initial 11.4 ms. Three-engine M4 side/stack 320px text-spacing and M7 side-layout Popup focus regressions passed. The [M9 beta report](m9-beta-report.md) separates exact-tarball evidence from source checks and open Safari/manual-accessibility gates. |
 
 # Open questions
 

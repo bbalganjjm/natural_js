@@ -8,7 +8,7 @@ sources:
   - id: plan
     resource: m9-plan.md
     title: Approved M9 release gates
-    git_blob: 4dda21f26b3296cf86422c18506a5bffcf514b91
+    git_blob: 5a56a183c2dda77efabb1bcbf25349383301268b
   - id: package
     resource: ../../package.json
     title: Beta package metadata and scripts
@@ -33,14 +33,18 @@ sources:
     resource: ../../src/ui/popup.ts
     title: Native Popup focus boundary
     git_blob: 49ec03d610615aff95952804541c94892799535f
+  - id: zoom
+    resource: evidence/m9-zoom-chromium.json
+    title: Raw narrow-viewport and text-spacing geometry measurements
+    git_blob: 545eef7a9e18bc149ea56294f12be0d909096232
   - id: grid-benchmark
     resource: evidence/m9-binding-chromium.json
     title: Raw M9 Grid binding measurements
-    git_blob: 6b3ab2b0aeced8ca3bd47ba19dffbecd6e47b8b2
+    git_blob: ebfa20fcf965c7a4b89361892d6d4c2d35c645bb
   - id: list-benchmark
     resource: evidence/m9-list-chromium.json
     title: Raw M9 List/page measurements
-    git_blob: 0c7a6f96ac11d60d91e38d9341f1810575201b64
+    git_blob: 2277bcb71c290f639516d21b64f4562cc858ad38
   - id: agent-meter
     resource: evidence/m9-agent-meter-task3.jsonl
     title: Raw M9 Task 3 first-pass read-cost events
@@ -48,32 +52,32 @@ sources:
   - id: wcag
     resource: https://www.w3.org/TR/WCAG22/
     title: Web Content Accessibility Guidelines 2.2
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T20:24:21Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T20:41:30Z }
 ---
 
-The clean source commit `c79b9eae87d089d36813f2a4e9c6ed5981891bb8` produced an unpublished `2.0.0-beta.0` tarball. This artifact is superseded by a later M9 Popup focus and authored-layout accessibility fix; it must not be released. The evidence below describes the prior candidate until the corrected source is committed, repacked, and retested. This report separates checks that installed that exact tarball from source-checkout tests and records the remaining release gates. It does not claim registry publication, real Safari coverage, or complete WCAG 2.2 AA conformance.[^plan][^package]
+The clean source commit `a45fbd669e42e70e4e03624de8286b6440012d53` produced the unpublished `2.0.0-beta.0` tarball measured here. The earlier `c79b9eae` artifact was replaced after Popup focus and authored-layout reflow fixes. This report separates checks that installed the exact current tarball from source-checkout tests and records the remaining release gates. It does not claim registry publication, real Safari coverage, or complete WCAG 2.2 AA conformance.[^plan][^package]
 
 # Artifact and scope
 
 | Item | Result |
 |---|---|
 | Package | `@bbalganjjm/natural_js@2.0.0-beta.0`; five public entries: `.`, `./page`, `./data`, `./ui`, `./comm`; 11 runtime values and 34 public types. The unused `Rule` type is gone; all Form-reachable formatter and validator behavior remains.[^package] |
-| Tarball | `bbalganjjm-natural_js-2.0.0-beta.0.tgz`; SHA-256 `8695a3ba04950f0caa278b38b6acc0d8aafca1717c36a7091cb0849fd2bcfc7e`; 98 files, 137,358 compressed bytes, 659,694 unpacked bytes. Local test copy: `node_modules/.cache/m9-release/bbalganjjm-natural_js-2.0.0-beta.0.tgz`. |
+| Tarball | `bbalganjjm-natural_js-2.0.0-beta.0.tgz`; SHA-256 `ca87cf82f6fe457823500e1933ec52de0a35d8f6a529be50cb37ed6fdea126b8`; 98 files, 137,591 compressed bytes, 660,638 unpacked bytes. Local test copy: `node_modules/.cache/m9-release-a45/bbalganjjm-natural_js-2.0.0-beta.0.tgz`. |
 | Contents | Root `LICENSE`, `README.md`, `package.json`, 76 `build/` files, and 19 `src/` TypeScript files. All 38 source maps resolve. No runtime dependencies, jQuery, 1.x code, general-purpose utility bundle, `v1/`, user `js/`, examples, tests, or docs are packed. |
 | License | Root 2.0 package and all 19 packed TS source files identify Apache-2.0; preserved `v1/` and its LGPL-2.1 notices were not changed or packed. |
 | Registry | Read-only npm lookup still returns `1.0.0-latest` as `latest`; `npm whoami` reports `ENEEDAUTH` on this host. No npm version, tag, or Git release tag was published. |
 
-The JavaScript ESM and strict TypeScript consumers install this tarball by path and reject a wrong SHA before installation. The JavaScript fixture checks public import availability, FrameworkError, Rows changes, communication request/response, and a private UI deep import failing with `ERR_PACKAGE_PATH_NOT_EXPORTED`. The TypeScript fixture typechecks CVC and UI usage against the installed declarations; it does not execute DOM code. A separate Vite browser consumer installed from the same tarball runs two independent CVC pages with Form/Grid, nested row-local Select choices, unique ARIA IDs, editing, disposal, and reopening. List, Pagination, Popup, and Tabs are checked by installed imports/types here and by the source-checkout browser suite for behavior. The default consumer script remains available for working-tree development.[^consumers][^browser]
+A second `npm pack` from the report-bearing branch tip reproduced the same SHA after only excluded docs/evidence files changed. The JavaScript ESM and strict TypeScript consumers install this tarball by path and reject a wrong SHA before installation. The JavaScript fixture checks public import availability, FrameworkError, Rows changes, communication request/response, and a private UI deep import failing with `ERR_PACKAGE_PATH_NOT_EXPORTED`. The TypeScript fixture typechecks CVC and UI usage against the installed declarations; it does not execute DOM code. A separate Vite browser consumer installed from the same tarball runs two independent CVC pages with Form/Grid, nested row-local Select choices, unique ARIA IDs, editing, disposal, and reopening. List, Pagination, Popup, and Tabs are checked by installed imports/types here and by the source-checkout browser suite for behavior. The default consumer script remains available for working-tree development.[^consumers][^browser]
 
 # Verification
 
 | Gate | Result |
 |---|---|
-| Clean source | `npm ci`, ESM build, strict typecheck, and Vitest 81/81 passed with Node.js 24.18.0 and npm 11.16.0 on Windows. No lower Node/tooling version is claimed yet. |
+| Clean source | Lockfile-based `npm ci` ran before the final Popup/CSS patch; the lockfile did not change. On the final source, ESM build, strict typecheck, and Vitest 81/81 passed with Node.js 24.18.0 and npm 11.16.0 on Windows. No lower Node/tooling version is claimed yet. |
 | Complete browser suite | Isolated Playwright runs passed 103/103 in each of Chromium, Firefox, and WebKit (309/309 total). The suite includes CVC lifecycle/data and M4/M7 authored-layout/UI regression coverage. |
 | Packed browser consumer | The SHA-gated tarball passed in Playwright Chromium 153.0.8010.12, Firefox 155.0, WebKit 26.6, installed Chrome 153.0.8010.53, and installed Edge 153.0.4234.48, all on Windows. These vendor runs do not substitute for real Safari on macOS or iOS. |
-| Popup keyboard fix | A real Tab/Shift+Tab test found focus could leave the last/first control of a native modal Popup in Chromium and WebKit. Scoped boundary handling now wraps focus and is removed with the Popup. The focused regression passed in Chromium, Firefox, and WebKit.[^popup] |
-| Documentation | The changed and full OKF checks each reported 36 concepts and zero errors. Six M9 `verified-stale` trust-field warnings remain recorded in the active plan after automatic approval review rejected a verification-stamp refresh. This is a trust-state warning, not an unexamined API export or source drift. |
+| Popup keyboard and visibility | Native modal Tab/Shift+Tab boundaries wrap focus within the Popup. Opening and wrapping also keep the focused control visible in a 320 CSS-pixel viewport with enlarged text spacing. The focused regressions passed in Chromium, Firefox, and WebKit; scoped listeners are removed on disposal.[^popup][^a11y] |
+| Documentation | The changed and full OKF checks each reported 36 concepts and zero errors. Nine `verified-stale` trust-field warnings remain recorded in the active plan after automatic approval review rejected a verification-stamp refresh. This is a trust-state warning, not an unexamined API export or source drift. |
 
 The full suites were run separately because two simultaneous Playwright Vite servers using port 4173 can interfere with one another. Firefox initially failed to start from the host browser cache (`spawn UNKNOWN`); installing its Playwright binary under `node_modules/.cache/playwright-m6` allowed the final isolated 103/103 run and exact-tarball smoke to pass. No source change was made for that host-cache issue.
 
@@ -81,17 +85,17 @@ Raw source-suite logs are [Chromium](evidence/m9-browser-chromium.log), [Firefox
 
 # Reproduce the artifact checks
 
-Run the package, installed-consumer, and browser commands from the clean `c79b9eae` package-source commit on the documented Windows/Node host. Run documentation checks from the later commit containing this report; `c79b9eae` predates its 36th concept. Keep Playwright runs sequential; the full suite and the isolated agent fixture both use port 4173. The five packed-browser choices use one identical tarball and SHA.[^consumers][^browser]
+Run the package, installed-consumer, and browser commands from the clean `a45fbd6` package-source commit on the documented Windows/Node host. Run documentation checks from the later commit containing this report; the package-source commit predates the final M9 evidence update. Keep Playwright runs sequential; the full suite and the isolated agent fixture both use port 4173. The five packed-browser choices use one identical tarball and SHA.[^consumers][^browser]
 
 ```powershell
 npm ci
 npm run build
 npm run typecheck
 npm test
-New-Item -ItemType Directory -Force node_modules/.cache/m9-release | Out-Null
-npm pack --pack-destination node_modules/.cache/m9-release
-$tarball = 'node_modules/.cache/m9-release/bbalganjjm-natural_js-2.0.0-beta.0.tgz'
-$sha256 = '8695a3ba04950f0caa278b38b6acc0d8aafca1717c36a7091cb0849fd2bcfc7e'
+New-Item -ItemType Directory -Force node_modules/.cache/m9-release-a45 | Out-Null
+npm pack --pack-destination node_modules/.cache/m9-release-a45
+$tarball = 'node_modules/.cache/m9-release-a45/bbalganjjm-natural_js-2.0.0-beta.0.tgz'
+$sha256 = 'ca87cf82f6fe457823500e1933ec52de0a35d8f6a529be50cb37ed6fdea126b8'
 Get-FileHash -Path $tarball -Algorithm SHA256
 npm run test:consumers -- --tarball $tarball --sha256 $sha256
 foreach ($browser in 'chromium', 'firefox', 'webkit', 'chrome', 'edge') {
@@ -125,22 +129,22 @@ The tested M4 and M7 side/stack application states have zero axe violations tagg
 |---|---|---|
 | Semantics, names, errors, status (1.3.1, 3.3.1-3.3.3, 4.1.2-4.1.3) | axe A/AA and browser assertions on generated/live M4/M7 states; authored fields and labels appear in those fixtures. | Manual screen-reader announcements and all application-authored content. |
 | Keyboard and focus (2.1.1-2.1.2, 2.4.3, 2.4.7) | Real browser keyboard tests for Popup and Tabs; focus entry, wrap, Escape, and return in the tested flows. | Screen-reader/keyboard review of complete user journeys and focus visibility under every app CSS/theme. |
-| Text contrast and reflow (1.4.3, 1.4.10-1.4.12, 2.4.11, 2.5.8) | The axe `color-contrast` rule checks text contrast under 1.4.3 in tested states; M4 has a keyboard flow at 320 CSS pixels. | Non-text contrast under 1.4.11, 200%/400% zoom, text spacing, table reflow, obscured focus, target size, and manual visual review remain unverified. |
+| Text contrast and reflow (1.4.3, 1.4.10-1.4.12, 2.4.11, 2.5.8) | The axe `color-contrast` rule checks text contrast in tested states. M4 side/stack layouts and the M7 side-layout Popup were exercised at 320 CSS pixels with W3C text-spacing overrides in Chromium, Firefox, and WebKit. Document width remained 320px; wide data tables scrolled inside their list panel. Popup focus stayed visible after opening and Tab wrapping. | Non-text contrast under 1.4.11, actual 200%/400% browser zoom, target-size exceptions, all app CSS/themes, screen readers, and manual visual review remain unverified. |
 
-The framework owns generated IDs, ARIA relationships, state and focus handling. An application owns its authored labels, layout, and colors; each complete application page needs its own audit. This report therefore does not mark WCAG 2.2 AA as fully verified.[^wcag]
+The exploratory Chromium geometry record is [archived](evidence/m9-zoom-chromium.json); the three-engine regression results are in the browser-suite logs above. The framework owns generated IDs, ARIA relationships, state and focus handling. An application owns its authored labels, layout, and colors; each complete application page needs its own audit. This report therefore does not mark WCAG 2.2 AA as fully verified.[^wcag]
 
 # Binding cost
 
-The checked-in 100/1,000-row fixtures used headless Chromium 153 on the reference i7-9700F Windows host, two warm-up runs and five samples. At 1,000 rows, flat Grid initial/rebind/edit/sort/filter medians were 11.9/16.0/0.8/2.5/1.9 ms against 30/35/5/10/8 ms budgets. Nested automatic Grid initial/rebind/edit/sort/filter medians were 37.3/44.4/1.4/8.9/5.4 ms; initial/rebind/sort/filter are below their 90/100/25/18 ms budgets. The 1,000-row List initial/page-start/next/back medians were 11.5/0.9/0.2/0.1 ms, with zero duplicate IDs. These are fixture and host measurements, not universal speed guarantees or evidence of large-list virtualization.[^grid-benchmark][^list-benchmark]
+The checked-in 100/1,000-row fixtures used headless Chromium 153 on the reference i7-9700F Windows host, two warm-up runs and five samples. At 1,000 rows, flat Grid initial/rebind/edit/sort/filter medians were 12.5/15.8/0.8/2.5/2.2 ms against 30/35/5/10/8 ms budgets. Nested automatic Grid initial/rebind/edit/sort/filter medians were 38.0/46.9/1.4/8.4/5.8 ms; initial/rebind/sort/filter are below their 90/100/25/18 ms budgets. The 1,000-row List initial/page-start/next/back medians were 11.4/0.9/0.2/0.2 ms, with zero duplicate IDs. These are fixture and host measurements, not universal speed guarantees or evidence of large-list virtualization.[^grid-benchmark][^list-benchmark]
 
 # AI task replay
 
-The fixed M8 Task 3 delayed CVC close/reopen seed was overlaid onto the clean `c79b9eae` candidate in an ignored isolated checkout. The baseline archive SHA-256 was `0eb1d4aaf5e28f3adc7fb819c4776f22c4050baa203df0741855152f0c59e6e7` and the unchanged overlay SHA-256 was `c1c035df3cf1e2aa320c8365e56a1d87e5f351ac48e2b88aa2376ad19fbfb38d`. A fresh agent used the same metered read/search/review method and left fixed tests and framework source untouched.[^plan][^agent-meter]
+The fixed M8 Task 3 delayed CVC close/reopen seed was overlaid onto the earlier clean `c79b9eae` candidate in an ignored isolated checkout. This AI replay predates the Popup/accessibility patch, which did not change the CVC contract it exercised. The baseline archive SHA-256 was `0eb1d4aaf5e28f3adc7fb819c4776f22c4050baa203df0741855152f0c59e6e7` and the unchanged overlay SHA-256 was `c1c035df3cf1e2aa320c8365e56a1d87e5f351ac48e2b88aa2376ad19fbfb38d`. A fresh agent used the same metered read/search/review method and left fixed tests and framework source untouched.[^plan][^agent-meter]
 
 | Measure | M9 replay |
 |---|---|
 | First complete acceptance | Build, typecheck, direct strict example TypeScript check, Chromium browser 2/2, and changed OKF check all passed. |
-| Code retries | 0. A later documentation link fixed one new orphan warning; final changed/full OKF checks had zero errors and six M9 `verified-stale` warnings. |
+| Code retries | 0. A later documentation link fixed one new orphan warning; the isolated replay checkout then had zero OKF errors and six M9 `verified-stale` warnings. |
 | Read context before first pass | 19 successful metered operations, 17 normalized content paths, 85,572 UTF-8 output bytes. A 10,083-byte diff review after the pass is excluded. |
 | Changed scope | Six isolated-checkout files, +76/−8 lines; the example controller, its OKF concept/index/log, and a Related link. |
 | Elapsed | 2026-09-24 19:51:43–19:58:36 UTC (6m53s). Actual agent token telemetry was unavailable. |
@@ -149,9 +153,9 @@ The full-file `docs/log.md` read exceeded the meter's 24 KiB output cap and was 
 
 # Open release gates
 
-- The `c79b9eae` tarball is superseded after a Popup source change; a clean corrected-source tarball and all artifact-dependent checks are pending.
+- The `a45fbd6` beta tarball passed exact-artifact checks but remains unpublished.
 - A real Safari run is unavailable because there is no Mac/iOS test device; Playwright WebKit is labeled separately. Decide the Safari support statement or obtain external Safari evidence before claiming that vendor browser.
-- Complete WCAG 2.2 AA evaluation needs manual screen-reader, zoom, text-spacing, target-size, focus-obscuring, and full-page authored-CSS review. The automated axe pass alone cannot close it.[^wcag]
+- Complete WCAG 2.2 AA evaluation still needs manual screen-reader, actual zoom, target-size, and full-page authored-CSS review. The automated axe pass and tested 320px text-spacing states alone cannot close it.[^wcag]
 - Registry credentials are absent on this host. Publication and immutable version/tag actions also require the exact-artifact review specified by the approved M9 plan.[^plan]
 - A stable `2.0.0` manifest would change the packed bytes; this beta hash cannot serve as stable-artifact evidence. Repack and rerun artifact-dependent gates after any version or code change.[^plan]
 

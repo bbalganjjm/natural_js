@@ -2,19 +2,19 @@
 > @bbalganjjm/natural_js@2.0.0-beta.0 test:browser
 > playwright test -c tests/playwright.config.ts --project=webkit --reporter=dot
 
-[WebServer] (node:14244) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (node:18328) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
 [WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
 
 Running 103 tests using 4 workers
-(node:14596) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(node:5836) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
 (Use `node --trace-warnings ...` to show where the warning was created)
-(node:18356) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(node:16344) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
 (Use `node --trace-warnings ...` to show where the warning was created)
-(node:19256) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(node:15524) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
 (Use `node --trace-warnings ...` to show where the warning was created)
-(node:17872) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(node:10396) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
 (Use `node --trace-warnings ...` to show where the warning was created)
-[WebServer] 오전 5:02:18 [vite] (client) [Unhandled error] Error: subscriber failed
+[WebServer] 오전 5:31:08 [vite] (client) [Unhandled error] Error: subscriber failed
 [WebServer]  > notify ../../src/data/index.ts:139:21
 [WebServer]     137 |        if (disposed) break;
 [WebServer]     138 |        if (!listeners.has(listener)) continue;
@@ -26,7 +26,7 @@ Running 103 tests using 4 workers
 [WebServer]  > reconcile ../../src/ui/form.ts:404:20
 [WebServer]  > onInput ../../src/ui/form.ts:444:16
 [WebServer]
-[WebServer] 오전 5:02:18 [vite] (client) [Unhandled error] FrameworkError: Rows require acyclic JSON-compatible values.
+[WebServer] 오전 5:31:08 [vite] (client) [Unhandled error] FrameworkError: Rows require acyclic JSON-compatible values.
 [WebServer]  > rowError ../../src/data/index.ts:54:28
 [WebServer]     52 |
 [WebServer]     53 |  function rowError(api: string, code: string, message: string, detail?: Record<string, unknown>): FrameworkError {
@@ -41,4 +41,4 @@ Running 103 tests using 4 workers
 [WebServer]
 ················································································
 ·······················
-  103 passed (27.1s)
+  103 passed (24.5s)

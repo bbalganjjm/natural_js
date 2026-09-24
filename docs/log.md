@@ -1,5 +1,7 @@
 ## 2026-09-25
 
+* **Verification** Repacked the corrected M9 beta from clean `a45fbd6` and checked SHA-256 `ca87cf82f6fe457823500e1933ec52de0a35d8f6a529be50cb37ed6fdea126b8`. Exact installed JS/TS consumers and Chromium, Firefox, WebKit, Chrome, and Edge consumers passed. Full source suites passed 103/103 per Playwright engine; refreshed 1,000-row Grid/List budgets and three-engine M4 side/stack 320px text-spacing plus M7 side-layout Popup focus checks passed. Real Safari, manual accessibility, npm publication, and trust-field refresh remain open; the [beta report](implementation/m9-beta-report.md) has the evidence and limits.
+
 * **Correction** Narrow-viewport/text-spacing checks exposed document overflow in M4 authored layouts and an initially obscured M7 Popup focus. M4 CSS now keeps the wide table inside its list panel and wraps narrow controls; M7 authored CSS constrains dialog height and wraps Tabs, while Popup scrolls current focus into view and allows Tab-wrap scrolling. The prior `c79b9eae` beta tarball is superseded pending a clean rebuild and artifact recheck.
 
 * **Verification** M9 archived Chromium, Firefox, and WebKit full-suite logs (103/103 each) and SHA-gated JS/TS plus five-browser installed-artifact logs. The fresh delayed CVC task replay passed its first full acceptance with no code retry, 17 metered paths, 85,572 UTF-8 output bytes, and 6m53s elapsed; raw events are indexed in the beta report.
