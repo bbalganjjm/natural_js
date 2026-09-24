@@ -79,20 +79,25 @@ for (const layout of ["side", "stack"] as const) {
     await filter.fill("");
     await expect(screen.locator("tbody tr").filter({ hasText: "Ada Edited" })).toHaveCount(1);
   });
-  test(layout + " protects an invalid detail draft while selecting another row", async ({ page }) => {
+  test(layout + " keeps invalid drafts by row while navigating and adding", async ({ page }) => {
     await page.goto("/m4/" + layout + ".html");
     const screen = page.locator('[data-page="employees"]');
-    await screen.locator("tbody tr").filter({ hasText: "Ada" }).locator("[data-select-row]").click();
     const email = screen.locator('[data-role="detail"] [data-field="email"]');
-    await email.fill("not-an-email");
+    await screen.locator("tbody tr").filter({ hasText: "Ada" }).locator("[data-select-row]").click();
+    await email.fill("ada-invalid");
     await screen.locator("tbody tr").filter({ hasText: "Grace" }).locator("[data-select-row]").click();
-    await expect(screen.locator('[data-role="selected"]')).toHaveText("Selected: Ada");
-    await expect(email).toHaveValue("not-an-email");
+    await expect(screen.locator('[data-role="selected"]')).toHaveText("Selected: Grace");
+    await email.fill("grace-invalid");
+    await screen.locator("tbody tr").filter({ hasText: "Ada" }).locator("[data-select-row]").click();
+    await expect(email).toHaveValue("ada-invalid");
     await expect(email).toHaveAttribute("aria-invalid", "true");
-    await expect(screen.locator('[data-role="error"]')).toContainText("Fix the current input");
     await screen.locator('[data-action="add"]').click();
-    await expect(screen.locator("tbody tr")).toHaveCount(3);
-    await expect(email).toHaveValue("not-an-email");
+    await expect(screen.locator("tbody tr")).toHaveCount(4);
+    await screen.locator("tbody tr").filter({ hasText: "Ada" }).locator("[data-select-row]").click();
+    await expect(email).toHaveValue("ada-invalid");
+    await screen.locator('[data-action="save"]').click();
+    await expect(screen.locator('[data-role="error"]')).not.toBeEmpty();
+    await expect(email).toHaveValue("ada-invalid");
   });
 
   test(layout + " restores focus to a hidden row with an unavailable choice", async ({ page }) => {
@@ -233,4 +238,45 @@ test("closing during a delayed search does not update a removed page", async ({ 
   await expect(screen).toHaveCount(0);
   await page.waitForTimeout(700);
   expect(errors).toEqual([]);
+});
+test("server HTML runs the same employee controller in two ID-clean pages", async ({ page }) => {
+  const fragmentResponse = page.waitForResponse(response =>
+    response.url().endsWith("/m4/side-fragment.html"));
+  await page.goto("/m4/side.html?view=server");
+  const fragment = await fragmentResponse;
+  expect(fragment.ok()).toBe(true);
+  expect(await fragment.text()).toContain('data-page="employees"');
+
+  const screens = page.locator('[data-page="employees"]');
+  await expect(screens).toHaveCount(1);
+  await expect(screens.first().locator("tbody tr")).toHaveCount(3);
+  await page.locator('[data-action="open"]').click();
+  await expect(screens).toHaveCount(2);
+  await expect(screens.nth(1).locator("tbody tr")).toHaveCount(3);
+  const duplicateIds = await page.locator("[id]").evaluateAll(elements => {
+    const ids = elements.map(element => element.id);
+    return ids.filter((id, index) => ids.indexOf(id) !== index);
+  });
+  expect(duplicateIds).toEqual([]);
+
+  const first = screens.first();
+  const ada = first.locator("tbody tr").filter({ hasText: "Ada" });
+  const choice = ada.locator("select");
+  await expect(choice.locator("option")).toHaveCount(2);
+  await choice.selectOption({ index: 0 });
+  await choice.selectOption({ index: 1 });
+  await ada.locator("[data-select-row]").click();
+  await expect(first.locator('[data-role="selected"]')).toHaveText("Selected: Ada");
+  const salary = first.locator('[data-role="detail"] [data-field="salary"]');
+  await salary.focus();
+  await salary.fill("125000");
+  const saveRequest = page.waitForRequest(request => request.url().includes("/api/employees/save"));
+  await first.locator('[data-action="save"]').click();
+  const payload = (await saveRequest).postDataJSON();
+  expect(payload).toEqual([{
+    status: "update",
+    value: expect.objectContaining({ id: "E-101", salary: 125000, chosen: 22 })
+  }]);
+  await expect(first.locator('[data-role="status"]')).toHaveText("Saved");
+  await expect(screens.nth(1).locator("tbody tr")).toHaveCount(3);
 });

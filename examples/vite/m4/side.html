@@ -63,9 +63,9 @@
             <form data-role="detail" novalidate>
               <label>Name <input data-field="name" required></label>
               <small data-error-for="name"></small>
-              <label>Email <input data-field="email" type="email" required data-validate='[["companyEmail"]]'></label>
+              <label>Email <input data-field="email" type="email" required data-validate='[["email"],["companyEmail"]]'></label>
               <small data-error-for="email"></small>
-              <label>Salary <input data-field="salary" inputmode="decimal" required data-format='[["group"]]' data-validate='[["nonnegative"]]'></label>
+              <label>Salary <input data-field="salary" inputmode="decimal" required data-format='[["commas"]]' data-validate='[["integer"],["minvalue",0]]'></label>
               <small data-error-for="salary"></small>
               <label>Team <input data-field="profile.team" required></label>
               <small data-error-for="profile.team"></small>

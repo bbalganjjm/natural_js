@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
 import type { RowId, Snapshot } from "../data/index.js";
-import type { PageHandle } from "../page/index.js";
 
 export type Rule = readonly [name: string, ...args: unknown[]];
 
@@ -59,11 +58,6 @@ export interface GridHandle<T extends object> {
   setFilter(predicate: ((row: Snapshot<T>) => boolean) | null): void;
   validate(id?: RowId): ValidationResult;
   dispose(): void;
-}
-
-export interface PopupHandle<Output> extends PageHandle<Output> {
-  readonly result: Promise<Output | undefined>;
-  close(): Promise<void>;
 }
 
 export { bindForm } from "./form.js";

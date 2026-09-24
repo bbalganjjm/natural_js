@@ -8,11 +8,11 @@ sources:
   - id: contract
     resource: m1-contract.md
     title: Approved M1 public contract and representative screen
-    git_blob: f08f99ca449b6c53f81beb42f6d4d55d3d68e72f
+    git_blob: 9ef6cc85ee2e44c083184978017d08303e38a51d
   - id: roadmap
     resource: roadmap.md
     title: Milestone order and M4 exit gate
-    git_blob: ffc4012eaa96024bc6e23ce9bc06357b49089e10
+    git_blob: d881808046dba7ee9195224708b351a7cc2e6a85
   - id: page
     resource: ../../src/page/index.ts
     title: M3 page lifecycle implementation
@@ -20,12 +20,12 @@ sources:
   - id: rows
     resource: ../../src/data/index.ts
     title: M3 shared row store
-    git_blob: 85c9f0c7140580e7217dadb91476d824025b3a07
+    git_blob: 10c07414eacccc414b81afc8be5661dd21afe3c6
   - id: comm
     resource: ../../src/comm/index.ts
     title: M3 request implementation
     git_blob: f3650ddbfeb5d87c3e58dc84904df9704e994368
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T10:18:26Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T11:01:16Z }
 ---
 
 M4 tests the 2.0 structure through one complete application path before expanding the UI catalog. The user approved M4 on 2026-09-24. This record keeps its scope, implementation decisions, and measured evidence together.

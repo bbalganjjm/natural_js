@@ -11,8 +11,8 @@ sources:
     git_blob: 148dfc8e866559ae2859b5130afabafdaa1c0af3
   - id: ui
     resource: ../../src/ui/index.ts
-    title: M4 UI runtime exports
-    git_blob: f4004388ef1cb23c8e1e5fec340886f9c0416ef5
+    title: UI runtime exports
+    git_blob: 024d2a174b00a1ac80f626942dcb07fa1142bf20
   - id: compiler
     resource: ../../tsconfig.json
     title: 2.0 TypeScript build settings
@@ -21,12 +21,10 @@ sources:
     resource: ../../LICENSE
     title: Apache License 2.0 text for the new package
     git_blob: d645695673349e3947e8e5ae42332d0ac3164cd7
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T10:12:21Z }
-verified:
-  - { by: codex/gpt-6-sol-independent, at: 2026-09-24T10:12:53Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T11:01:01Z }
 ---
 
-Build the root package to inspect real 2.0 exports. The M4 alpha includes the CVC page runner, row store, communicator, shared error, and pilot Form/Grid binding. The full built-in rule catalog and remaining UI components are later milestones.
+Build the root package to inspect real 2.0 exports. The current alpha includes the CVC page runner, row store, communicator, shared error, Form/Grid binding, and retained UI-owned formatter/validator rules. Other UI components are later milestones.
 
 # Goal
 
@@ -67,4 +65,4 @@ Read the implemented [page](page.md), [data](data.md), and [communication](comm.
 [^compiler]: 2.0 TypeScript build settings
 [^license]: Apache License 2.0 text for the new package
 
-[^ui]: M4 UI runtime exports
+[^ui]: UI runtime exports

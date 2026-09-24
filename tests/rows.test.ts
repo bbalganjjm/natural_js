@@ -1,5 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 import { createRows } from "../src/data/index.js";
+import type { RowsEvent } from "../src/data/index.js";
 
 describe("createRows", () => {
   it("keeps row identity stable and exposes detached, immutable nested snapshots", () => {
@@ -84,5 +85,59 @@ describe("createRows", () => {
     rows.subscribe(later);
     rows.set(id, "value", 2);
     expect(later).not.toHaveBeenCalled();
+  });
+  it("reports operation IDs and clean revert without invalidating snapshots", () => {
+    const rows = createRows([{ value: 1 }]);
+    const id = rows.entries()[0].id;
+    const entries = rows.entries();
+    const changes = rows.changes();
+    const events: RowsEvent[] = [];
+    rows.subscribe(event => events.push(event));
+
+    rows.revert(id);
+    rows.revert();
+    expect(rows.entries()).toBe(entries);
+    expect(rows.changes()).toBe(changes);
+
+    rows.set(id, "value", 2);
+    rows.set(id, "value", 2);
+    const added = rows.add({ value: 3 });
+    rows.remove(added);
+    rows.remove(id);
+    rows.remove(id);
+    rows.revert(id);
+    rows.set(id, "value", 4);
+    rows.revert();
+    rows.replace([{ value: 5 }]);
+
+    expect(events).toEqual([
+      { type: "revert", id, changed: false },
+      { type: "revert", changed: false },
+      { type: "set", id, changed: true },
+      { type: "add", id: added, changed: true },
+      { type: "remove", id: added, changed: true },
+      { type: "remove", id, changed: true },
+      { type: "revert", id, changed: true },
+      { type: "set", id, changed: true },
+      { type: "revert", changed: true },
+      { type: "replace", changed: true }
+    ]);
+    expect(events.every(Object.isFrozen)).toBe(true);
+    rows.dispose();
+  });
+
+  it("delivers to remaining subscribers before propagating the first error", () => {
+    const rows = createRows([{ value: 1 }]);
+    const id = rows.entries()[0].id;
+    const first = new Error("first subscriber failed");
+    const later = vi.fn();
+    rows.subscribe(() => { throw first; });
+    rows.subscribe(() => { throw new Error("second subscriber failed"); });
+    rows.subscribe(later);
+
+    expect(() => rows.set(id, "value", 2)).toThrow(first);
+    expect(later).toHaveBeenCalledExactlyOnceWith({ type: "set", id, changed: true });
+    expect(rows.get(id)?.value.value).toBe(2);
+    rows.dispose();
   });
 });

@@ -1,26 +1,26 @@
 ---
 type: Plan
 title: Natural-JS 2.0 M5 data and rule plan
-description: Review plan for retained Form rules, row-keyed drafts, nested binding, and shared validation contracts.
+description: Approved M5 implementation plan and verification for retained Form rules, row-keyed drafts, nested binding, and shared validation.
 tags: [meta, plan, migration, form, validation]
 status: draft
 sources:
   - id: contract
     resource: m1-contract.md
     title: Approved M1 rule and binding contract
-    git_blob: f08f99ca449b6c53f81beb42f6d4d55d3d68e72f
+    git_blob: 9ef6cc85ee2e44c083184978017d08303e38a51d
   - id: m4
     resource: m4-plan.md
     title: M4 pilot and exit evidence
-    git_blob: 014324e32a0b05fb6d09b2850c2134e8918a769f
+    git_blob: 32e787e7cfcf9c5d4aced515732d08fd3b4e89fd
   - id: form
     resource: ../../src/ui/form.ts
     title: Current Form pilot
-    git_blob: 6a240838751510926bb37363b48145d4358fdb41
+    git_blob: 9d086ea8c09e30a688e25d474483a91b199d3308
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current Grid pilot
-    git_blob: 387645f6294f0dc01a077a5c695163c388b32784
+    git_blob: cc5de08d7431e0e9d201b164f80caa6545718167
   - id: legacy-data
     resource: ../../v1/src/natural.data.js
     title: Preserved 1.x formatter and validator implementation
@@ -29,10 +29,10 @@ sources:
     resource: ../../v1/src/natural.ui.js
     title: Preserved 1.x Form, List, and Grid rule integration
     git_blob: 50229404558dabe92cdea2d02cd1c45a2481cf49
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T10:12:21Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T11:26:06Z }
 ---
 
-M5 completes the data, binding, and rule contract behind the M4 authored-HTML screen. This is a proposal for separate review; drafting it does not authorize M5 implementation.
+M5 completes the data, binding, and rule contract behind the M4 authored-HTML screen. The user approved M5 implementation on 2026-09-24 and requested an independent M4 recheck before changing the runtime.
 
 # Goal
 
@@ -40,19 +40,19 @@ Retain the 1.x formatter and validator behavior that Form, List, and Grid can re
 
 # Checkpoint
 
-- M4 supplies working `bindForm` and `bindGrid` pilots, one private safe field-path helper, a two-layout screen, and nested row-local Select options. The pilots use application-supplied Form rules; Grid rejects `rules` explicitly and checks only Select availability.
-- M4 Form currently retains an invalid draft only for the bound row. Its example blocks navigation away from invalid input to avoid silent loss. M5 replaces that example guard with a framework-level row-keyed draft contract.
+- At the M4 exit, the repository supplied working `bindForm` and `bindGrid` pilots, one private safe field-path helper, a two-layout screen, and nested row-local Select options. The pilots use application-supplied Form rules; Grid rejects `rules` explicitly and checks only Select availability.
+- At the M4 exit, Form retained an invalid draft only for the bound row. Its example blocks navigation away from invalid input to avoid silent loss. M5 replaces that example guard with a framework-level row-keyed draft contract.
 - M4 benchmark evidence and its same-host M6 regression budgets are recorded in [the M4 plan](m4-plan.md). The 1.x source under `v1/` stays unchanged and excluded from the 2.0 package.
-- The [M1 contract](m1-contract.md) fixes the retained rule names and public `RuleSet`, `ParseInput`, `ValidationIssue`, `FormHandle`, and `GridHandle` shapes.
+- The [M1 contract](m1-contract.md) fixes the retained rule names and public `RuleSet`, `ParseInput`, `ValidationIssue`, `FormHandle`, and `GridHandle` shapes. The 1.x runtime and declarations also reach each combined validator through its underscore name as well as the `+` spelling; both spellings remain in scope.
 
 # Steps
 
 | Step | Work | Evidence |
 |---|---|---|
 | 1. Rule inventory | Trace every 1.x Form/List/Grid declarative rule name and its transitive mask/date/byte-count work. Separate intended behavior from known 1.x bugs and confirm the complete retained catalog in M1. | Code-backed table: name, arguments, output/issue, transitive operation, source, and 2.0 owner. No Form-reachable rule is dropped because static calls are absent. |
-| 2. Private rule runner | Refine the M4 Form JSON parser into one UI-owned parser/dispatcher for case-insensitive and combined names, application overrides, messages, and short errors. Put a helper beside the rule that needs it; share only semantics both Form and Grid actually use. | Form and Grid invoke the same runner. No public generic formatter/validator utility or mutable global registry appears in the tarball. |
+| 2. Private rule runner | Refine the M4 Form JSON parser into one UI-owned parser/dispatcher for case-insensitive and combined names, application overrides, messages, and short errors. Put a helper beside the rule that needs it; share only semantics both Form and Grid actually use. | Form and Grid invoke the same runner; both `+` and underscore combined names resolve. No public generic formatter/validator utility or mutable global registry appears in the tarball. |
 | 3. Raw/display/parse | Complete the M4 raw/display/parse pilot across retained rules: keep stored JSON raw; apply `data-format` to display only; focus restores raw input; parse a candidate before validation and write. A parse/rule failure leaves a visible draft and never corrupts `Rows`. | Number, date, mask, string, and user-rule examples show raw payloads independent of display text. |
-| 4. Row-keyed drafts | Store invalid input by `RowId` and field path, not by current DOM control. Switching, sorting, or filtering retains drafts; `validate(id)` reports issues for an unrendered row without rebinding. `replace`, revert, delete, and dispose release the right drafts. | Two edited rows keep independent drafts; hidden invalid rows block save and can be revealed/focused without changing another draft. |
+| 4. Row-keyed drafts | Add minimal typed Rows mutation events so a clean-row `revert(id)` can discard its draft without a public Form reset method. Store invalid input by `RowId` and field path, not by current DOM control. Switching, sorting, or filtering retains drafts; `validate(id)` reports issues for an unrendered row without rebinding. `replace`, revert, delete, and dispose release the right drafts. | Two edited rows keep independent drafts; hidden invalid rows block save and can be revealed/focused without changing another draft. Existing no-argument subscribers still work, and all live subscribers receive a mutation even if one callback throws. |
 | 5. Nested data | Reuse safe parsed object paths and top-level `Rows.set` replacement. Preserve row-local Select raw scalar mapping, unavailable-option issues, and atomic nested-array replacement/revert; avoid arbitrary array-index paths. | Exact `a: [{ aa: 11, bb: 22 }, {}]` fixture, nested Form fields, same-value type distinction, sort/filter identity, and dual-page ID cleanliness pass. |
 | 6. Rule catalog | Rewrite retained 1.x formatter, validator, and combined validator names in small cohorts with argument checks. Correct documented 1.x defects such as `equalTo` lookup while recording behavioral changes in the migration guide. Keep only mask/date/byte operations those rules require. | Each retained name has representative valid, invalid, malformed-argument, and user-override checks where risk warrants them; no 1.x implementation is copied unchanged. |
 | 7. Integration and docs | Enable Grid `rules` after it actually runs, align Form/Grid results and ARIA error output, and update the M4 screen to use the finished contract. Update JS/TS installed consumers, OKF concepts/index/log/fingerprints, and the active checkpoint in the same work. | Build, typecheck, focused tests, installed consumers, Chromium/WebKit browser flows, changed/full OKF checks, and a package-surface audit pass. Record Firefox host limitations rather than claiming a pass. |
@@ -60,7 +60,7 @@ Retain the 1.x formatter and validator behavior that Form, List, and Grid can re
 
 # Next action
 
-Review the M4 result and this detailed M5 scope with the user. Start M5 only after explicit separate approval; if M4 structure, nested automatic binding, or accessibility needs correction, resolve that before rule-catalog expansion.
+Run the independent docs-first feature task against the finished M5 screen, close the source/document checks, and fast-forward push M5 to the approved branch. Keep the rule catalog and drafts inside UI; [M6](m6-plan.md) remains a review draft requiring separate approval.
 
 # Decisions
 
@@ -68,7 +68,7 @@ Review the M4 result and this detailed M5 scope with the user. Start M5 only aft
 - Keep `data-format` display-only and `data-validate` candidate-oriented; domain rules remain application functions in `RuleSet`.
 - Keep the path helper private inside UI. Do not export a path, mask, format, date, or validation utility package.
 - Prefer one direct runner and ordinary objects over a registration engine, deep type gymnastics, and repeated assertions. Parse descriptors once per authored template, update only affected controls, and preserve native HTML semantics.
-- Treat M4's invalid-row navigation guard and `GRID_RULES` error as pilot boundaries to remove only when the full M5 behavior and tests are present.
+- Treat M4's invalid-row navigation guard and `GRID_RULES` error as pilot boundaries to remove only when the full M5 behavior and tests are present. Do not pre-export types for M7 containers while completing the M5 public surface.
 - Keep 1.x LGPL files unchanged under `v1/`; newly written 2.0 files use Apache-2.0. Do not switch Git `master` or publish to npm as part of M5.
 
 # Verification log
@@ -76,9 +76,11 @@ Review the M4 result and this detailed M5 scope with the user. Start M5 only aft
 | Date | Check | Result |
 |---|---|---|
 | 2026-09-24 | Planning | Drafted from the approved M1 contract, M4 pilot behavior, and preserved 1.x rule implementation; no M5 code was written. |
+| 2026-09-24 | Same-host M5 benchmark | Five measured Chromium runs after two warm-ups on the same i7-9700F/Chromium 153 fixture: 1,000-row flat initial/rebind 12.9/14.8 ms (M4 11.9/13.8), nested automatic 37.6/44.8 ms (M4 40.4/44.2). Flat edit/sort/filter 0.7/2.9/1.9 ms and nested 1.6/9.6/6.3 ms all meet the recorded M6 budgets. See [raw data](evidence/m5-binding-chromium.json); instantaneous heap readings remain diagnostic. |
+| 2026-09-24 | Final implementation checks | Build, typecheck, Vitest 79/79, Chromium/WebKit browser 102/102, direct example TypeScript check, and installed JS/TS consumers passed. The final tarball has 63 files/86,228 bytes and excludes 1.x, jQuery, docs, examples, and convenience utility bundles. |
+| 2026-09-24 | Approval and M4 recheck | The user approved M5 and requested a prior-milestone recheck. The unchanged M4 baseline passed build, typecheck, Vitest 29/29, Chromium/WebKit employee-screen 36/36, and full OKF 0 errors/0 warnings. Read-only audits found a fetched-HTML integration test gap and an unused future PopupHandle type; neither changes the approved M5 capability. |
 
 # Open questions
 
-- Confirm the exact 1.x argument edge cases and message-language fallback from source before writing individual rule cohorts.
-- Decide whether any built-in rule's old behavior was an intentional public contract or a defect requiring an explicit migration note.
-- Set final M5 performance acceptance against the measured M4 baseline after the same-browser rerun; browser heap readings are diagnostic only without controlled collection.
+- Independent source review found and prompted fixes for Form stale errors and visible/hidden length consistency, Grid cross-field Select drafts, checkbox state, unsupported input controls, and stale errors. The final code/browser gate passed; the docs-first agent task and OKF close remain before the M5 push.
+- The same-host M5 rerun stayed within every M6 reference budget; repeat the fixed fixture after major M6 Grid changes. Browser heap readings remain diagnostic without controlled collection.

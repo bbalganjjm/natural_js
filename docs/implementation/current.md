@@ -8,7 +8,7 @@ sources:
     resource: ../governance/okf-conventions.md
     title: OKF conventions for the Natural-JS bundle
     git_blob: 17cfe650daacff3935aa93a383868574afe95628
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T10:18:21Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T11:25:58Z }
 ---
 
 The Natural-JS 2.0 migration follows [the master roadmap](roadmap.md). Read this checkpoint before resuming a milestone. The immutable 1.x baseline is commit `b96e47a0d7e020d1878f7cecdf1b1a9f462d99a6`; its source, LGPL license, and usage docs are also archived under `v1/`.
@@ -21,7 +21,7 @@ Deliver a TypeScript-source, jQuery-free, ESM Natural-JS 2.0 at the repository r
 
 - M0-M3 are complete. M3 and the root 2.0 layout were fast-forward pushed to `origin/2.0.0-alpha.0` at commit `94c73a9f`; `master` remains untouched. The 2.0 package uses Apache-2.0, while preserved `v1/` files retain their LGPL license and notices.
 - The user approved [M4](m4-plan.md). Its two-layout employee screen, Form/Grid pilots, nested row-local Select binding, browser regressions, benchmark, and independent-agent change task are implemented. M4 build, browser, package, and documentation gates passed; commit `b9a1c902` was fast-forward pushed to `origin/2.0.0-alpha.0`. Its detailed evidence is in the M4 plan.
-- [M5](m5-plan.md) is a draft for separate review and approval. It will complete retained Form formatter/validator rules, row-keyed drafts, and full data contracts; none of that broader work is authorized by M4 approval.
+- The user approved [M5](m5-plan.md). The independent M4 audit, fetched-HTML integration fix, retained rules, row-keyed drafts, and full Form/Grid/data contracts are implemented. Build, unit/browser, installed-consumer, package, and final same-host performance checks passed; the docs-first agent task and final documentation/push gate remain.
 
 # Steps
 
@@ -36,10 +36,13 @@ Deliver a TypeScript-source, jQuery-free, ESM Natural-JS 2.0 at the repository r
 - [x] Implement the M4 representative screen in two authored layouts, nested Select binding, ID-clean keyboard access, and a fixed-fixture benchmark.
 - [x] Record the independent-agent feature task, M4 pilot boundaries, and the detailed M5 review plan.
 - [x] Close changed/full OKF checks and source stamps; commit and fast-forward push M4 to `2.0.0-alpha.0`.
+- [x] Receive M5 approval and independently recheck the unchanged M4 baseline.
+- [x] Close the fetched-HTML M4 integration gap with the same controller and HTML in both mount modes.
+- [ ] Implement M5 retained rules, row-keyed drafts, shared validation, docs, and verification.
 
 # Next action
 
-Review [the M5 plan](m5-plan.md) with the user. Start M5 implementation only after separate approval; the Firefox host limitation stays open.
+Run the M5 docs-first agent task against the fixed screen, then close source/document stamps and push the approved M5 result. Review the separate [M6 plan](m6-plan.md) with the user before implementing it. Keep the Firefox host limitation open.
 
 # Decisions
 
@@ -60,8 +63,11 @@ Review [the M5 plan](m5-plan.md) with the user. Start M5 implementation only aft
 | 2026-09-24 | M3 docs and push | Changed and full OKF checks: 17 concepts, 5 reserved files, 0 errors, 0 warnings. The 33-file tarball excludes `v1/` and jQuery. Commit `94c73a9f` fast-forward pushed to `origin/2.0.0-alpha.0`. |
 | 2026-09-24 | M4 code and browsers | Build, typecheck, and explicit example TypeScript check passed; Vitest 29/29, fresh-tarball JS/TS consumers, and Chromium/WebKit browser 64/64 passed, including M4 screen 36/36. Six draft concepts received independent source review; one Form validation wording correction was applied. |
 | 2026-09-24 | M4 benchmark | Five measured Chromium runs after two warm-ups on the same i7-9700F host: at 1,000 rows/10 fields, 2.0 flat initial/rebind medians were 11.9/13.8 ms versus 1.x flat 122.8/111.0 ms; 2.0 nested automatic was 40.4/44.2 ms. Duplicate IDs were 0 in 2.0 and 9,990 in 1.x. See [raw data](evidence/m4-binding-chromium.json) and comparison caveats in [M4](m4-plan.md). |
+| 2026-09-24 | Independent M4 recheck | The unchanged M4 baseline passed build, typecheck, Vitest 29/29, screen Chromium/WebKit 36/36, and full OKF 0/0. A fetched-server-HTML route now runs the same controller and authored view through `mountPage(URL)`; the M4 screen passed Chromium/WebKit 38/38. The premature future `PopupHandle` type was identified for removal during M5. |
 | 2026-09-24 | M4 package audit | `npm pack --dry-run` lists 48 files (46,017 bytes), with no `v1/`, jQuery, docs, examples, or convenience utility bundle. |
 | 2026-09-24 | M4 documentation | Changed and full OKF checks passed: 21 concepts, 5 reserved files, 0 errors, 0 warnings. Seven M4-related 2.0 concepts received independent source review. Commit `b9a1c902` was fast-forward pushed to `origin/2.0.0-alpha.0`. |
+| 2026-09-24 | M5 final code | Build, typecheck, Vitest 79/79, Chromium/WebKit browser 102/102, direct example TypeScript check, and installed JS/TS consumers passed. The browser suite includes the fetched-HTML path, two simultaneous ID-clean pages, hidden drafts, native constraints, and unsupported-control errors. |
+| 2026-09-24 | M5 final benchmark and package | Five Chromium runs after two warm-ups on the same 1,000-row/10-field host: flat initial/rebind 12.9/14.8 ms and nested automatic 37.6/44.8 ms; all M6 reference budgets passed. Raw report: [M5 binding](evidence/m5-binding-chromium.json). The 63-file, 86,228-byte tarball excludes `v1/`, jQuery, docs, examples, and convenience utility bundles. |
 | 2026-09-24 | Independent agent | A fresh docs-first agent added `profile.department` to both layouts and the data/save path with zero code retries; its first Chromium run passed. It read 15 unique files (53,364 bytes) and changed 7 files (12 added/5 replaced lines) in about 4m05s. Actual token use was unavailable. |
 
 # Open questions

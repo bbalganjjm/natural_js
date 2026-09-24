@@ -1,16 +1,23 @@
 // SPDX-License-Identifier: Apache-2.0
-import type { RowId, RowSnapshot, Rows, Snapshot } from "../data/index.js";
+import type { RowId, RowSnapshot, Rows, RowsEvent, Snapshot } from "../data/index.js";
 import { FrameworkError } from "../internal/framework-error.js";
 import { parsePath, readPath, writePath } from "./field-path.js";
-import type { GridHandle, RuleSet, ValidationIssue, ValidationResult } from "./index.js";
+import { createRuleRunner } from "./rules.js";
+import type { RuleCall } from "./rules.js";
+import type { FormatRule, GridHandle, RuleContext, RuleSet, ValidateRule, ValidationIssue, ValidationResult } from "./index.js";
 
 interface TextField {
   index: number;
+  name: string;
   path: readonly string[];
+  format: readonly RuleCall<FormatRule>[];
+  validate: readonly RuleCall<ValidateRule>[];
 }
 
 interface SelectField {
   index: number;
+  name?: string;
+  validate: readonly RuleCall<ValidateRule>[];
   field?: readonly string[];
   options?: readonly string[];
   label?: readonly string[];
@@ -21,6 +28,7 @@ interface SelectField {
 interface BoundText {
   descriptor: TextField;
   element: HTMLElement;
+  invalid: string | null;
   previous?: unknown;
   bound: boolean;
 }
@@ -28,6 +36,7 @@ interface BoundText {
 interface BoundSelect {
   descriptor: SelectField;
   element: HTMLSelectElement;
+  invalid: string | null;
   authoredNodes: Node[];
   authoredOptions: HTMLOptionElement[];
   rawByOption: Map<HTMLOptionElement, unknown>;
@@ -39,11 +48,21 @@ interface BoundSelect {
 
 interface RenderedRow<T> {
   element: HTMLTableRowElement;
+  errors: Map<string, HTMLElement>;
+  hasIssues: boolean;
   snapshot?: RowSnapshot<T>;
   texts: BoundText[];
   selects: BoundSelect[];
   buttons: HTMLButtonElement[];
 }
+
+interface SelectDraft {
+  value: unknown;
+  baseline: unknown;
+  path: readonly string[];
+}
+
+let nextErrorId = 0;
 
 function gridError(code: string, message: string, detail?: Record<string, unknown>): FrameworkError {
   return new FrameworkError({ api: "bindGrid", code, message, detail });
@@ -75,6 +94,10 @@ function optionValues(value: unknown, descriptor: SelectField, rowId: RowId): re
 }
 
 function display(element: HTMLElement, value: unknown): void {
+  if (element instanceof HTMLInputElement && element.type === "checkbox") {
+    element.checked = value === true;
+    return;
+  }
   const text = value == null ? "" : String(value);
   if (element instanceof HTMLInputElement || element instanceof HTMLTextAreaElement) element.value = text;
   else element.textContent = text;
@@ -85,9 +108,6 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
   rules?: RuleSet;
   onSelect?: (selection: { id: RowId | null; row: RowSnapshot<T> | null; event: Event | null }) => void;
 }): GridHandle<T> {
-  if (options?.rules !== undefined) {
-    throw gridError("GRID_RULES", "Grid rules are scheduled for M5 and are not available in this pilot.");
-  }
   if (!root || root.tagName !== "TABLE") {
     throw gridError("GRID_ROOT", "The Grid root must be a table element.");
   }
@@ -101,11 +121,19 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     throw gridError("DUPLICATE_ID", "A repeated row template cannot contain a fixed DOM id.", { id: fixedId.id });
   }
 
+  const runner = createRuleRunner("bindGrid", options.rules);
   const textFields: TextField[] = [];
   const selectFields: SelectField[] = [];
+  const errorFields = new Map<string, number>();
   const buttonIndexes: number[] = [];
   const authored = [template, ...template.querySelectorAll<HTMLElement>("*")];
   for (const [index, element] of authored.entries()) {
+    const errorFor = element.getAttribute("data-error-for");
+    if (errorFor !== null) {
+      parsePath(errorFor);
+      if (errorFields.has(errorFor)) throw gridError("GRID_ERROR_REGION", "A row field has two error regions.", { field: errorFor });
+      errorFields.set(errorFor, index);
+    }
     if (element.hasAttribute("data-select-row")) {
       if (element.tagName !== "BUTTON") {
         throw gridError("GRID_SELECT", "A row selection control must be a button.");
@@ -121,8 +149,13 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       if (optionsName !== null && (labelName === null || valueName === null)) {
         throw gridError("GRID_OPTIONS", "A row-local Select needs data-option-label and data-option-value.");
       }
+      if (select.hasAttribute("data-format")) {
+        throw gridError("GRID_FORMAT", "A Select cannot display a formatted scalar; format its option labels instead.", { field: fieldName ?? "" });
+      }
       selectFields.push({
         index,
+        name: fieldName ?? undefined,
+        validate: fieldName === null ? [] : runner.validators(select, fieldName),
         field: fieldName === null ? undefined : parsePath(fieldName),
         options: optionsName === null ? undefined : parsePath(optionsName),
         label: labelName === null ? undefined : parsePath(labelName),
@@ -130,13 +163,36 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
         authored: [...select.options].map(option => option.value === "" ? null : option.value)
       });
     } else if (fieldName !== null) {
-      textFields.push({ index, path: parsePath(fieldName) });
+      if (element instanceof HTMLInputElement) {
+        const type = element.getAttribute("type")?.toLowerCase() ?? element.type;
+        if (type === "file") {
+          throw gridError("GRID_FILE_ROWS", "File inputs cannot bind to JSON Rows.", { field: fieldName });
+        }
+        if (type === "radio") {
+          throw gridError("GRID_CONTROL", "Radio groups need a selected-value binding; Grid does not bind them yet.", { field: fieldName });
+        }
+        if (element.hasAttribute("data-format") &&
+            !["text", "search", "tel", "url", "email", "password"].includes(type)) {
+          throw gridError("GRID_FORMAT", "Only text-like inputs can display formatted text.", { field: fieldName });
+        }
+      }
+      textFields.push({ index, name: fieldName, path: parsePath(fieldName),
+        format: runner.formats(element, fieldName), validate: runner.validators(element, fieldName) });
     }
   }
 
+  const knownFields = new Set([...textFields.map(field => field.name),
+    ...selectFields.map(field => field.name).filter((name): name is string => name !== undefined)]);
+  for (const field of errorFields.keys()) {
+    if (!knownFields.has(field)) {
+      throw gridError("GRID_ERROR_REGION", "An error region needs a matching data-field.", { field });
+    }
+  }
   const anchor = root.ownerDocument.createComment("grid rows");
   template.replaceWith(anchor);
   const records = new Map<RowId, RenderedRow<T>>();
+  const drafts = new Map<RowId, Map<string, SelectDraft>>();
+  let reconciling = false;
   const rowIds = new WeakMap<HTMLTableRowElement, RowId>();
   const selects = new WeakMap<HTMLSelectElement, { id: RowId; binding: BoundSelect }>();
   let selected: RowId | null = null;
@@ -156,6 +212,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     const texts = textFields.map(descriptor => ({
       descriptor,
       element: nodes[descriptor.index],
+      invalid: nodes[descriptor.index].getAttribute("aria-invalid"),
       bound: false
     }));
     const rowSelects = selectFields.map(descriptor => {
@@ -163,6 +220,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       const binding: BoundSelect = {
         descriptor,
         element,
+        invalid: element.getAttribute("aria-invalid"),
         authoredNodes: [...element.childNodes],
         authoredOptions: [...element.options],
         rawByOption: new Map(),
@@ -173,9 +231,28 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       return binding;
     });
     const buttons = buttonIndexes.map(index => nodes[index] as HTMLButtonElement);
+    const errors = new Map([...errorFields].map(([field, index]) =>
+      [field, nodes[index]] as const));
+    for (const [field, region] of errors) {
+      let candidate: string;
+      do { candidate = `natural-grid-error-${++nextErrorId}`; }
+      while (root.ownerDocument.getElementById(candidate));
+      region.id = candidate;
+      if (!region.hasAttribute("aria-live")) region.setAttribute("aria-live", "polite");
+      region.textContent = "";
+      const controls = [
+        ...texts.filter(binding => binding.descriptor.name === field).map(binding => binding.element),
+        ...rowSelects.filter(binding => binding.descriptor.name === field).map(binding => binding.element)
+      ];
+      for (const control of controls) {
+        const ids = new Set((control.getAttribute("aria-describedby") ?? "").split(/\s+/).filter(Boolean));
+        ids.add(candidate);
+        control.setAttribute("aria-describedby", [...ids].join(" "));
+      }
+    }
     for (const button of buttons) button.setAttribute("aria-pressed", String(selected === id));
     rowIds.set(element, id);
-    return { element, texts, selects: rowSelects, buttons };
+    return { element, errors, hasIssues: false, texts, selects: rowSelects, buttons };
   }
 
   function renderSelect(binding: BoundSelect, value: Snapshot<T>, id: RowId): void {
@@ -201,7 +278,8 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       binding.selectedBound = false;
     }
     if (descriptor.field) {
-      const current = readPath(value, descriptor.field);
+      const draft = descriptor.name ? drafts.get(id)?.get(descriptor.name) : undefined;
+      const current = draft ? draft.value : readPath(value, descriptor.field);
       if (!binding.selectedBound || !Object.is(binding.previous, current)) {
         element.selectedIndex = [...element.options].findIndex(option =>
           Object.is(binding.rawByOption.get(option), current));
@@ -216,7 +294,16 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     for (const binding of record.texts) {
       const value = readPath(snapshot.value, binding.descriptor.path);
       if (!binding.bound || !Object.is(binding.previous, value)) {
-        display(binding.element, value);
+        const field = binding.descriptor;
+        if (field.format.length) {
+          const context: RuleContext = {
+            field: field.name, values: snapshot.value as Snapshot<Record<string, unknown>>,
+            rowId: snapshot.id, element: binding.element
+          };
+          display(binding.element, runner.format(field.format, value, context));
+        } else {
+          display(binding.element, value);
+        }
         binding.previous = value;
         binding.bound = true;
       }
@@ -225,6 +312,194 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     record.snapshot = snapshot;
   }
 
+  function candidateValues(row: RowSnapshot<T>): Readonly<Record<string, unknown>> {
+    let values = row.value as Readonly<Record<string, unknown>>;
+    for (const draft of drafts.get(row.id)?.values() ?? []) {
+      values = writePath(values, draft.path, draft.value);
+    }
+    return values;
+  }
+
+  function ruleContext(
+    row: RowSnapshot<T>, field: string, values: Readonly<Record<string, unknown>>,
+    element?: HTMLElement
+  ): RuleContext {
+    return {
+      field, values: values as Snapshot<Record<string, unknown>>, rowId: row.id,
+      ...(element?.isConnected ? { element } : {})
+    };
+  }
+
+  function validateRow(row: RowSnapshot<T>): ValidationIssue[] {
+    const record = records.get(row.id);
+    const values = candidateValues(row);
+    const issues: ValidationIssue[] = [];
+    for (const [index, descriptor] of textFields.entries()) {
+      const bound = record?.texts[index];
+      const element = bound?.element.isConnected ? bound.element : undefined;
+      const value = readPath(values, descriptor.path);
+      const context = ruleContext(row, descriptor.name, values, element);
+      const source = (bound?.element ?? authored[descriptor.index]).cloneNode(true);
+      if (source instanceof HTMLInputElement || source instanceof HTMLTextAreaElement) {
+        display(source, value);
+        const textLength = source instanceof HTMLTextAreaElement ||
+          ["text", "search", "tel", "url", "email", "password"].includes(source.type);
+        const tooShort = textLength && source.minLength >= 0 &&
+          source.value.length > 0 && source.value.length < source.minLength;
+        const tooLong = textLength && source.maxLength >= 0 &&
+          source.value.length > source.maxLength;
+        if (!source.validity.valid || tooShort || tooLong) {
+          const message = tooShort ? `Use at least ${source.minLength} characters.` :
+            tooLong ? `Use at most ${source.maxLength} characters.` :
+              source.validationMessage || "Invalid input.";
+          issues.push({
+            rowId: row.id, field: descriptor.name, rule: "html",
+            message, ...(element ? { element } : {})
+          });
+        }
+      }
+      issues.push(...runner.validate(descriptor.validate, value, context));
+    }
+    for (const [index, descriptor] of selectFields.entries()) {
+      if (!descriptor.field || !descriptor.name) continue;
+      const bound = record?.selects[index];
+      const element = bound?.element.isConnected ? bound.element : undefined;
+      const value = readPath(values, descriptor.field);
+      const available = [...descriptor.authored, ...optionValues(values, descriptor, row.id).map(item => item.raw)];
+      if (!available.some(option => Object.is(option, value))) {
+        issues.push({
+          rowId: row.id, field: descriptor.name, rule: "select-option",
+          message: "Choose an available option.", ...(element ? { element } : {})
+        });
+      }
+      if ((authored[descriptor.index] as HTMLSelectElement).required && (value === null || value === "" || value === undefined)) {
+        issues.push({
+          rowId: row.id, field: descriptor.name, rule: "html",
+          message: "Choose an option.", ...(element ? { element } : {})
+        });
+      }
+      issues.push(...runner.validate(descriptor.validate, value,
+        ruleContext(row, descriptor.name, values, element)));
+    }
+    if (record) {
+      const byField = new Map<string, ValidationIssue[]>();
+      for (const issue of issues) {
+        const group = byField.get(issue.field) ?? [];
+        group.push(issue);
+        byField.set(issue.field, group);
+      }
+      for (const bound of record.texts) {
+        const invalid = byField.has(bound.descriptor.name);
+        if (invalid) bound.element.setAttribute("aria-invalid", "true");
+        else if (bound.invalid === null) bound.element.removeAttribute("aria-invalid");
+        else bound.element.setAttribute("aria-invalid", bound.invalid);
+      }
+      for (const bound of record.selects) {
+        if (!bound.descriptor.name) continue;
+        const invalid = byField.has(bound.descriptor.name);
+        if (invalid) bound.element.setAttribute("aria-invalid", "true");
+        else if (bound.invalid === null) bound.element.removeAttribute("aria-invalid");
+        else bound.element.setAttribute("aria-invalid", bound.invalid);
+      }
+      for (const [field, region] of record.errors) {
+        region.textContent = (byField.get(field) ?? []).map(issue => issue.message).join(" ");
+      }
+      record.hasIssues = issues.length > 0;
+    }
+    return issues;
+  }
+
+  function clearIssues(record: RenderedRow<T>): void {
+    if (!record.hasIssues) return;
+    record.hasIssues = false;
+    for (const bound of [...record.texts, ...record.selects]) {
+      if (bound.invalid === null) bound.element.removeAttribute("aria-invalid");
+      else bound.element.setAttribute("aria-invalid", bound.invalid);
+    }
+    for (const region of record.errors.values()) region.textContent = "";
+  }
+
+  function reconcile(id: RowId): ValidationIssue[] {
+    const row = options.rows.get(id);
+    if (!row || row.status === "delete") {
+      throw gridError("GRID_ROW", "The row ID is not available in this Grid.", { id });
+    }
+    const pending = drafts.get(id);
+    if (!pending?.size || reconciling) return validateRow(row);
+
+    const issues = validateRow(row);
+    const failed = new Set(issues.map(issue => issue.field));
+    const ready = [...pending.keys()].filter(field => !failed.has(field));
+    if (!ready.length) return issues;
+
+    reconciling = true;
+    try {
+      for (const field of ready) {
+        const draft = pending.get(field);
+        if (!draft) continue;
+        const current = options.rows.get(id);
+        if (!current || current.status === "delete") {
+          throw gridError("GRID_ROW", "The row ID is not available in this Grid.", { id });
+        }
+        const next = writePath(current.value as Readonly<Record<string, unknown>>, draft.path, draft.value);
+        const key = draft.path[0] as keyof T;
+        try {
+          options.rows.set(id, key, next[draft.path[0]] as T[keyof T]);
+          pending.delete(field);
+        } catch (cause) {
+          try {
+            const stored = options.rows.get(id);
+            if (stored && Object.is(readPath(stored.value, draft.path), draft.value)) {
+              pending.delete(field);
+            }
+          } catch { /* Keep the original Rows.set error. */ }
+          throw cause;
+        }
+      }
+    } finally {
+      reconciling = false;
+      if (!pending.size) drafts.delete(id);
+    }
+    const updated = options.rows.get(id);
+    if (!updated || updated.status === "delete") {
+      throw gridError("GRID_ROW", "The row ID is not available in this Grid.", { id });
+    }
+    return validateRow(updated);
+  }
+
+  function onRows(event: RowsEvent): void {
+    if (event.type === "replace" || (event.type === "revert" && event.id === undefined)) {
+      drafts.clear();
+      for (const record of records.values()) {
+        record.snapshot = undefined;
+        clearIssues(record);
+      }
+    } else if (event.type === "remove" || event.type === "revert") {
+      if (event.id !== undefined) {
+        drafts.delete(event.id);
+        const record = records.get(event.id);
+        if (record) {
+          record.snapshot = undefined;
+          clearIssues(record);
+        }
+      }
+    } else if (event.type === "set") {
+      const pending = drafts.get(event.id);
+      const row = pending ? options.rows.get(event.id) : undefined;
+      if (pending && row && !reconciling) {
+        for (const [field, draft] of pending) {
+          if (!Object.is(readPath(row.value, draft.path), draft.baseline)) pending.delete(field);
+        }
+        if (!pending.size) drafts.delete(event.id);
+      }
+      const record = records.get(event.id);
+      if (record) {
+        if (pending) record.snapshot = undefined;
+        if (!reconciling) clearIssues(record);
+      }
+    }
+    render();
+  }
   function updateSelection(id: RowId | null, event: Event | null): void {
     if (id === selected) return;
     const prior = selected;
@@ -301,23 +576,25 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     const target = event.target;
     if (!(target instanceof HTMLSelectElement)) return;
     const entry = selects.get(target);
-    if (!entry?.binding.descriptor.field) return;
+    const path = entry?.binding.descriptor.field;
+    const field = entry?.binding.descriptor.name;
+    if (!entry || !path || !field) return;
     const option = target.selectedOptions[0];
-    if (!option || !entry.binding.rawByOption.has(option)) return;
+    if (!option) return;
     const row = options.rows.get(entry.id);
     if (!row || row.status === "delete") return;
-    const path = entry.binding.descriptor.field;
-    const next = writePath(row.value as Readonly<Record<string, unknown>>, path,
-      entry.binding.rawByOption.get(option));
-    const key = path[0] as keyof T;
-    options.rows.set(entry.id, key, next[path[0]] as T[keyof T]);
+    const value = entry.binding.rawByOption.has(option) ? entry.binding.rawByOption.get(option) : option.value;
+    const pending = drafts.get(entry.id) ?? new Map<string, SelectDraft>();
+    pending.set(field, { value, baseline: readPath(row.value, path), path });
+    drafts.set(entry.id, pending);
+    reconcile(entry.id);
   }
 
   root.addEventListener("click", onClick);
   root.addEventListener("change", onChange);
   let unsubscribe = () => {};
   try {
-    unsubscribe = options.rows.subscribe(render);
+    unsubscribe = options.rows.subscribe(onRows);
     render();
   } catch (cause) {
     unsubscribe();
@@ -357,24 +634,8 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       if (id !== undefined && (!target || target.status === "delete")) {
         throw gridError("GRID_ROW", "The row ID is not available in this Grid.", { id });
       }
-      const rows = target ? [target] : options.rows.entries();
-      const issues: ValidationIssue[] = [];
-      for (const row of rows) {
-        for (const descriptor of selectFields) {
-          if (!descriptor.field) continue;
-          const current = readPath(row.value, descriptor.field);
-          const available = [...descriptor.authored, ...optionValues(row.value, descriptor, row.id).map(item => item.raw)];
-          if (available.some(value => Object.is(value, current))) continue;
-          const binding = records.get(row.id)?.selects.find(select => select.descriptor === descriptor);
-          issues.push({
-            rowId: row.id,
-            field: descriptor.field.join("."),
-            rule: "select-option",
-            message: "Choose an available option.",
-            element: binding?.element.isConnected ? binding.element : undefined
-          });
-        }
-      }
+      const ids = target ? [target.id] : options.rows.entries().map(row => row.id);
+      const issues = ids.flatMap(rowId => reconcile(rowId));
       return { valid: issues.length === 0, issues };
     },
     dispose() {
@@ -385,6 +646,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       root.removeEventListener("change", onChange);
       for (const record of records.values()) record.element.remove();
       records.clear();
+      drafts.clear();
       visibleIds = [];
       anchor.replaceWith(template);
     }

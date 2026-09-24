@@ -7,7 +7,7 @@ sources:
   - id: contract
     resource: m1-contract.md
     title: Approved M1 public contract
-    git_blob: f08f99ca449b6c53f81beb42f6d4d55d3d68e72f
+    git_blob: 9ef6cc85ee2e44c083184978017d08303e38a51d
   - id: package
     resource: ../../package.json
     title: Isolated 2.0 package
@@ -19,12 +19,12 @@ sources:
   - id: data
     resource: ../../src/data/index.ts
     title: Data type contract
-    git_blob: 85c9f0c7140580e7217dadb91476d824025b3a07
+    git_blob: 10c07414eacccc414b81afc8be5661dd21afe3c6
   - id: comm
     resource: ../../src/comm/index.ts
     title: Communication type contract
     git_blob: f3650ddbfeb5d87c3e58dc84904df9704e994368
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T09:14:10Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T11:01:11Z }
 ---
 
 M3 turns the approved page, communication, and minimum row contracts into working runtime exports. It uses the M2 package without importing or relabeling 1.x code.

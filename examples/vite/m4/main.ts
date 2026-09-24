@@ -7,6 +7,7 @@ const hosts = document.querySelector<HTMLElement>("[data-hosts]");
 const template = document.querySelector<HTMLTemplateElement>("template[data-screen]");
 const openButton = document.querySelector<HTMLButtonElement>('[data-action="open"]');
 if (!hosts || !template || !openButton) throw new Error("The example shell is incomplete.");
+const serverView = new URL(location.href).searchParams.get("view") === "server";
 
 function open(): void {
   const host = document.createElement("div");
@@ -14,7 +15,9 @@ function open(): void {
   hosts!.append(host);
   let page: PageHandle | undefined;
   page = mountPage(host, {
-    view: () => template!.content.firstElementChild!.cloneNode(true) as HTMLElement,
+    view: serverView
+      ? new URL("/m4/side-fragment.html", document.baseURI)
+      : () => template!.content.firstElementChild!.cloneNode(true) as HTMLElement,
     controller: createEmployees
   }, {
     close() {

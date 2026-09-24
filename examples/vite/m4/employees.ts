@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 import { createCommunicator } from "@bbalganjjm/natural_js/comm";
 import { createRows } from "@bbalganjjm/natural_js/data";
-import type { Snapshot } from "@bbalganjjm/natural_js/data";
 import type { PageContext } from "@bbalganjjm/natural_js/page";
 import { bindForm, bindGrid } from "@bbalganjjm/natural_js/ui";
 import type { RuleSet, ValidationIssue } from "@bbalganjjm/natural_js/ui";
@@ -22,24 +21,9 @@ function find<ElementType extends Element>(root: ParentNode, selector: string): 
   return element;
 }
 
-function companyEmail(value: string): boolean {
-  return value.endsWith("@example.com");
-}
-
-function businessIssue(employee: Snapshot<Employee>): string | null {
-  if (!employee.name.trim()) return "Enter a name.";
-  if (!companyEmail(employee.email)) return "Use a company email.";
-  if (employee.salary < 0) return "Salary cannot be negative.";
-  return null;
-}
-
 const rules: RuleSet = {
-  format: {
-    group: value => Number(value).toLocaleString("en-US")
-  },
   validate: {
-    companyEmail: value => companyEmail(value) || "Use a company email.",
-    nonnegative: value => Number(value) >= 0 || "Salary cannot be negative."
+    companyEmail: value => value.endsWith("@example.com") || "Use a company email."
   }
 };
 
@@ -73,21 +57,9 @@ export function createEmployees({ root, signal, own, input }: PageContext<{ clos
     }
   });
   own(() => detail.dispose());
-  let activeDetailId: number | null = null;
   const grid = bindGrid(table, {
     rows,
     onSelect({ id, row }) {
-      if (id === activeDetailId) return;
-      if (activeDetailId !== null && rows.get(activeDetailId)?.status !== "delete") {
-        const current = detail.validate();
-        if (!current.valid) {
-          error.textContent = "Fix the current input before selecting another row.";
-          grid.select(activeDetailId);
-          current.issues[0].element?.focus();
-          return;
-        }
-      }
-      activeDetailId = id;
       detail.bind(id);
       selected.textContent = row ? "Selected: " + row.value.name : "No employee selected";
     }
@@ -181,12 +153,6 @@ export function createEmployees({ root, signal, own, input }: PageContext<{ clos
       if (!validation.valid) return reportIssue(validation.issues[0]);
       const choice = grid.validate(change.id);
       if (!choice.valid) return reportIssue(choice.issues[0]);
-      const message = businessIssue(change.value);
-      if (message) {
-        grid.select(change.id);
-        error.textContent = message;
-        return;
-      }
     }
 
     saving = true;
@@ -235,8 +201,6 @@ export function createEmployees({ root, signal, own, input }: PageContext<{ clos
     sortHeader.setAttribute("aria-sort", sortDirection === 1 ? "ascending" : "descending");
   }, { signal });
   find<HTMLButtonElement>(root, '[data-action="add"]').addEventListener("click", () => {
-    const current = detail.validate();
-    if (!current.valid) return reportIssue(current.issues[0]);
     const id = rows.add({
       id: "NEW-" + nextNew++, name: "", email: "", salary: 0,
       profile: { team: "", department: "" }, a: [], chosen: null

@@ -1,29 +1,31 @@
 ---
 type: UI Component
 title: bindGrid
-description: Bind a native authored table to Rows with row-local Select options and store-local selection.
+description: Bind an authored native table to Rows with M5 display rules, validation, row-local Select drafts, and accessible errors.
 tags: [ui, grid, binding, accessibility]
 status: draft
 symbols: [bindGrid]
 sources:
   - id: entry
     resource: ../../src/ui/index.ts
-    title: Public UI entry
-    git_blob: f4004388ef1cb23c8e1e5fec340886f9c0416ef5
+    title: Public UI entry and Grid handle types
+    git_blob: 024d2a174b00a1ac80f626942dcb07fa1142bf20
   - id: grid
     resource: ../../src/ui/grid.ts
-    title: M4 Grid implementation
-    git_blob: 387645f6294f0dc01a077a5c695163c388b32784
+    title: Grid binding and validation runtime
+    git_blob: cc5de08d7431e0e9d201b164f80caa6545718167
+  - id: rules
+    resource: ../../src/ui/rules.ts
+    title: Shared Form/Grid rule runner
+    git_blob: 967142342d060056cd3f124db29f6893a2875d48
   - id: path
     resource: ../../src/ui/field-path.ts
-    title: Safe field path implementation
+    title: Safe nested field paths
     git_blob: dfac85c3d4cc2c0a61cb2e4ee210b01583ecc5b2
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T10:12:21Z }
-verified:
-  - { by: codex/gpt-6-sol-independent, at: 2026-09-24T10:12:53Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T11:20:59Z }
 ---
 
-`bindGrid` attaches the M4 Grid pilot to an existing native table and a caller-owned `Rows` store. It clones the author's repeat row, binds fields within each clone, and keeps selection tied to `RowId` rather than DOM IDs or display position.[^grid]
+`bindGrid` adds behavior to a native table and a caller-owned `Rows` store. It clones one authored row template, keeps selection and invalid Select drafts under store-local `RowId` values, and never uses DOM IDs as row or field keys.[^grid]
 
 # Quick start
 
@@ -31,12 +33,16 @@ verified:
 <table>
   <thead><tr><th scope="col">Employee</th><th scope="col">Choice</th></tr></thead>
   <tbody><tr data-row-template>
-    <th scope="row"><button type="button" data-select-row><span data-field="name"></span></button></th>
+    <th scope="row">
+      <button type="button" data-select-row>Open <span data-field="name" data-format='[["upper"]]'></span></button>
+      <output data-error-for="name"></output>
+    </th>
     <td><label>Choice
-      <select data-field="chosen" data-options="a" data-option-label="aa" data-option-value="bb">
+      <select data-field="chosen" data-options="a" data-option-label="aa"
+        data-option-value="bb" data-validate='[["required"]]' required>
         <option value="">Choose</option>
       </select>
-    </label></td>
+    </label><output data-error-for="chosen"></output></td>
   </tr></tbody>
 </table>
 ```
@@ -48,111 +54,81 @@ import { bindGrid } from "@bbalganjjm/natural_js/ui";
 const rows = createRows([{ name: "Ada", a: [{ aa: 11, bb: 22 }], chosen: 22 }]);
 const table = document.querySelector("table")!;
 const grid = bindGrid(table, { rows, onSelect: ({ id }) => console.log(id) });
-// The page that owns these handles eventually calls grid.dispose() and rows.dispose().
+if (grid.validate().valid) console.log(rows.changes());
+// The owning page eventually calls grid.dispose() and rows.dispose().
 ```
 
 # Constructor
 
-## `bindGrid(root, options)`
+`bindGrid<T extends object>(root: HTMLTableElement, options: { rows: Rows<T>; rules?: RuleSet; onSelect?: (selection: { id: RowId | null; row: RowSnapshot<T> | null; event: Event | null }) => void }): GridHandle<T>` requires a `<table>` with exactly one `<tbody><tr data-row-template>` across all bodies. The template and its descendants must not have fixed DOM IDs. The runtime temporarily replaces that row with a comment anchor, reuses cloned row elements across sorting/filtering, and restores the original template on disposal. It leaves other authored table rows in place.[^grid]
 
-```ts
-function bindGrid<T extends object>(root: HTMLTableElement, options: {
-  rows: Rows<T>;
-  rules?: RuleSet;
-  onSelect?: (selection: {
-    id: RowId | null;
-    row: RowSnapshot<T> | null;
-    event: Event | null;
-  }) => void;
-}): GridHandle<T>;
-```
-
-The root must be a `<table>` with exactly one `<tbody><tr data-row-template>` row across its bodies. `bindGrid` removes that template while mounted, clones it for visible rows, and restores it on disposal. Other authored table rows remain in place. The `Rows` store belongs to the caller.[^grid]
-
-# Options
-
-| Option | Type | Default | Behavior |
-|---|---|---|---|
-| `rows` | `Rows<T>` | — | Source of immutable row snapshots, identity, changes, and subscriptions. |
-| `onSelect` | `(selection) => void` | — | Receives the selected store ID, current row snapshot, and originating click event; programmatic changes use `event: null`. |
-| `rules` | `RuleSet` | — | Reserved by the M1 type contract; passing a value throws `GRID_RULES` in M4. Grid rule execution belongs to M5. |
+| Option | Behavior |
+|---|---|
+| `rows` | Required caller-owned store of immutable snapshots and row identities. |
+| `rules` | Optional component-local formatter/validator overrides, messages, and locale. The shared rule runner also resolves retained built-in names. |
+| `onSelect` | Called when the selected ID changes; programmatic changes pass `event: null`. |
 
 # Declarative options
 
-| Marker | Element | Meaning |
+| Marker | Element | Behavior |
 |---|---|---|
-| `data-row-template` | One `<tr>` inside a `<tbody>` | Repeated row; no element inside it, including the row, may have a fixed `id`. |
-| `data-field="path"` | Row descendant | Reads a top-level or dot-separated object path. Text-like elements receive `textContent`; input and textarea elements receive `value`. Missing or null values display as empty text. |
-| `data-select-row` | `<button type="button">` in a row | Selects that row; the button gets `aria-pressed="true"` only while selected. |
-| `data-options="path"` | `<select>` | Row-relative option-array path, separate from the selected `data-field`. Missing or null arrays produce no generated options. |
-| `data-option-label="path"` | Select with `data-options` | Path within each option object for visible text. |
-| `data-option-value="path"` | Select with `data-options` | Path within each option object for its raw scalar value. |
+| `data-row-template` | One tbody row | Defines the repeated authored structure. |
+| `data-field="path"` | Row descendant | Reads a top-level or dot-separated object path. Text cells use `textContent`; inputs/textareas use `value`. |
+| `data-format='[["name", ...args]]'` | Non-Select field | Applies built-in or supplied rules to display text only. Stored row data stays raw. |
+| `data-validate='[["name", ...args]]'` | Field or Select | Validates raw values with built-in or supplied rules. Rules are parsed once from the template. |
+| `data-error-for="path"` | Row descendant | Displays field issues as text and receives a generated unique ID for `aria-describedby`. |
+| `data-select-row` | Button | Selects the row and reflects state through `aria-pressed`. |
+| `data-options="path"` | Select | Finds the row-local array of option objects, separate from the selected `data-field`. |
+| `data-option-label="path"`, `data-option-value="path"` | Select with `data-options` | Read each option's label and raw scalar value. |
 
-Paths are parsed once from the template. Each path uses safe dot-separated object keys; array indices, expressions, and prototype keys are rejected with `FIELD_PATH`. A nested Select change copies the affected object path and replaces its top-level `Rows` field instead of mutating a snapshot.[^path][^grid]
+Field and option paths reject array indices, expressions, prototype keys, and empty segments. The Grid compiles field descriptors once, caches clone element references, and updates only fields whose raw values change. A nested Select edit copies the affected object path and calls `Rows.set` for its top-level field.[^grid][^path]
 
 # Methods
 
-## `select(id)`
+## `select(id)` and `selected()`
 
-Selects a visible or filtered-out existing row by store-local `RowId`, or clears selection with `null`. An unavailable or deleted ID throws `GRID_ROW`. It updates rendered selection buttons and calls `onSelect` only when the selected ID changes.[^grid]
+`select(id)` selects an existing, nondeleted row (visible or filtered out), or clears selection with `null`. An unavailable ID raises `GRID_ROW`. `selected()` returns the current store-local ID or `null`. Sorting and filtering do not change it; deleting a selected row clears it.[^grid]
 
-## `selected()`
+## `setSort(compare)` and `setFilter(predicate)`
 
-Returns the selected `RowId` or `null`. Filtering and sorting do not replace it; deleting the selected row or replacing the store clears it and calls `onSelect` with `event: null`.[^grid]
-
-## `setSort(compare)`
-
-Accepts `(a: Snapshot<T>, b: Snapshot<T>) => number` or `null`. It reorders rendered rows only; store order, row IDs, edits, and selection stay with their snapshots.[^grid]
-
-## `setFilter(predicate)`
-
-Accepts `(row: Snapshot<T>) => boolean` or `null`. It changes which rows are rendered, without deleting filtered-out rows or clearing a filtered-out selection.[^grid]
+`compare(a, b)` receives immutable row values; a predicate receives one immutable row value. Pass `null` to clear either operation. These functions change only rendered order or visibility, preserving row IDs, selection, and invalid Select drafts. Business comparisons and filter conditions remain application functions.[^grid]
 
 ## `validate(id?)`
 
-Returns `{ valid, issues }` for one existing nondeleted row or all nondeleted rows, including rows hidden by filtering. A missing or deleted explicit ID throws `GRID_ROW`. In M4 it checks only Select values against authored and row-local options. A value with no matching option produces a `ValidationIssue` with `rule: "select-option"`; the issue has an `element` only when that Select is connected to the document.[^grid]
+Returns `{ valid, issues }` for an explicit nondeleted ID or all nondeleted rows, including filtered-out rows. It checks text field HTML constraints (including programmatically bound text length limits) and validators, Select availability, Select `required`, and Select validators. A missing or deleted explicit ID raises `GRID_ROW`. An issue has `rowId`, `field`, `rule`, and `message`; `element` exists only for a connected row control. Validation evaluates all Select drafts for one row against the same candidate values, even while the row is filtered out. A draft that passes is committed to `Rows`; a failed draft stays outside the store. Call `validate()` before saving to reconcile drafts after external row changes.[^grid][^rules]
 
 ## `dispose()`
 
-Unsubscribes from `Rows`, removes table listeners and cloned rows, and restores the authored template. Calling it again is safe. It does not dispose the caller-owned row store; other handle methods then throw `GRID_DISPOSED`.[^grid]
-
-# Events
-
-| Event | Handler | `this` | Behavior |
-|---|---|---|---|
-| Row selection | `onSelect({ id, row, event })` | The passed options object | A row button click supplies the native event; `select(id)` and automatic clearing supply `null`. Do not use `this` as component state. |
+Removes delegated listeners and cloned rows, unsubscribes from `Rows`, clears drafts, and restores the untouched row template. It does not dispose the caller-owned store. Repeated disposal is safe; other methods then raise `GRID_DISPOSED`.[^grid]
 
 # Behavior
 
-The component reads one descriptor set from the authored template, caches each clone's element references, and listens for clicks and Select changes on the table. Store notifications update changed visible row snapshots; unchanged fields and option arrays keep their existing DOM controls. Reordering reuses row elements and restores focus to a moved control when its row remains visible. The table keeps native table semantics; `bindGrid` does not assign `role="grid"`.[^grid]
+Text formatting is one-way: rules transform displayed text while the row snapshot and save payload retain the raw value. Validation invokes the shared UI rule runner on raw values. A Select option's DOM `value` is a string, but its row-local mapping preserves a raw string, finite number, boolean, or `null`. Authored empty options map to `null`; nonempty authored options remain strings. A missing selected raw value shows no selected option and yields `select-option`.[^grid][^rules]
 
-A generated option keeps a row-local association with its raw `string`, finite `number`, `boolean`, or `null` value. Its DOM `value` is a string, but changing the Select writes the associated raw value to `Rows`. Missing label/value paths, null or empty labels, and non-scalar values are skipped. Duplicate raw values select the first match. An authored option with `value=""` maps to raw `null`; other authored option values remain strings. If the selected raw value is unavailable, the Select shows no selected option (`selectedIndex === -1`) while the row value stays unchanged, and `validate()` reports `select-option`.[^grid]
+When a user changes a Select, the Grid checks all fields against the row value plus every Select draft for that row. A choice that fails stays visible as a draft under that row ID and field path, while `Rows` remains unchanged. A later choice can make two cross-field drafts valid and commit both. Changing another row field does not clear the draft. Programmatic `Rows` updates refresh the display and clear stale error text without invoking user validators; call `validate()` before saving. A replacement of that selected field, `replace`, `remove`, `revert`, or `dispose` clears the affected drafts. Filtering and sorting keep them. `validate(id)` checks drafts even without a rendered row.[^grid]
 
-| Error code | When |
+Each cloned `data-error-for` region receives a document-unique ID and `aria-live="polite"` if not authored. The matching field control includes that ID in `aria-describedby`; failed validation sets `aria-invalid="true"` and writes issue text. A pass restores the control's authored `aria-invalid` state. The table retains native semantics and does not acquire `role="grid"`. Authors still provide labels and table headings.[^grid]
+
+# Errors and pitfalls
+
+| Code | Cause |
 |---|---|
-| `GRID_RULES` | `rules` was supplied before M5 rule execution exists. |
-| `GRID_ROOT` | Root is not a table. |
-| `GRID_TEMPLATE` | The table has zero or multiple repeat rows. |
-| `DUPLICATE_ID` | The repeat row or one of its descendants has a fixed `id`. |
-| `GRID_SELECT` | `data-select-row` is not on a button. |
-| `GRID_OPTIONS` | A row-local Select lacks label/value markers, or its non-null option source is not an array. |
-| `GRID_ROW` | `select(id)` or `validate(id)` receives a missing or deleted row ID. |
-| `GRID_DISPOSED` | A method other than `dispose()` is used after disposal. |
-| `FIELD_PATH` | A binding path is empty or unsafe, or a nested write encounters a non-object parent. |
+| `GRID_ROOT`, `GRID_TEMPLATE` | Wrong table root or missing/duplicate row template. |
+| `DUPLICATE_ID` | A fixed ID appears inside the repeated template. |
+| `GRID_SELECT`, `GRID_OPTIONS`, `GRID_FORMAT` | Invalid selection control, option markers/source, or a formatter on a Select or non-text input. |
+| `GRID_ERROR_REGION` | Repeated or unmatched `data-error-for` path in the template. |
+| `GRID_FILE_ROWS` | A bound file input cannot be stored in JSON `Rows`. |
+| `GRID_CONTROL` | A bound radio input has no selected-value binding in M5. |
+| `GRID_ROW`, `GRID_DISPOSED` | Missing/deleted row or use after disposal. |
+| `RULE_DECLARATION`, `RULE_UNKNOWN`, `RULE_ARGUMENT`, `RULE_FAILED` | Invalid, unavailable, malformed, or failed rule. |
+| `FIELD_PATH` | Unsafe path or nested write through a non-object. |
 
-Errors use `FrameworkError` with the failing API; path failures originate in the private field-path module.[^grid][^path]
-
-# Pitfalls
-
-- `RowId` is neither an array index nor a DOM `id`. The selected row may be filtered out and still returned by `selected()`.[^grid]
-- `data-options` provides option data; `data-field` provides the selected scalar. Giving the array path as `data-field` does not bind the selected value.[^grid]
-- This M4 pilot does not run formatter/validator rules, edit text inputs, supply sorting/filtering controls, or implement the full M6 Grid. Passing `rules` fails explicitly. Use application validation for other pilot fields; M5 adds the shared Form/Grid rule runner.[^grid]
-- A fixed `id` inside a repeated row cannot be made unique by selecting within the table. Use wrapping labels or other ID-free authored markup. Page-level ID collisions are checked by the CVC page runner.[^grid]
+`RowId` is neither a DOM ID nor a display index. The M5 Grid validates text fields and displays a bound checkbox from a raw boolean, but does not write input or checkbox edits. Authors should mark display-only checkboxes `disabled` until M6 adds editing. A bound file input or radio input is rejected before cloning; upload handling and radio groups stay outside the M5 Grid. `data-format` is accepted only on text-like inputs, textareas, and text elements, so it cannot silently change a number, date, checkbox, or hidden control. Full Grid text editing and authored controls belong to M6. An error region and a field must use the same exact path. A Select's `data-options` names its option array; `data-field` names its selected scalar.[^grid]
 
 # Related
 
-[Rows](data.md) owns row identity and changes. [UI types](ui.md) defines `GridHandle`, `RuleSet`, and validation results. [The M1 contract](../implementation/m1-contract.md) specifies the first-release direction; [the M4 plan](../implementation/m4-plan.md) marks this implementation as a prototype.
+[Rows](data.md) owns identity and changes. [UI contracts](ui.md) defines `RuleSet`, handles, and results. [Form](form.md) shares the private rule runner. [The M5 plan](../implementation/m5-plan.md) records this milestone's migration scope.
 
-[^entry]: Public UI entry
-[^grid]: M4 Grid implementation
-[^path]: Safe field path implementation
+[^grid]: Grid binding and validation runtime
+[^rules]: Shared Form/Grid rule runner
+[^path]: Safe nested field paths

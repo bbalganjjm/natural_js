@@ -23,10 +23,10 @@ sources:
   - id: apg-grid
     resource: https://www.w3.org/WAI/ARIA/apg/patterns/grid/
     title: WAI-ARIA grid interaction pattern
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T10:12:21Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T11:25:58Z }
 ---
 
-This is the user-approved 2.0 design contract. M2-M4 implement its package, CVC, communication, data, and pilot Form/Grid pieces; the later UI contracts remain planned. It keeps the CVC roles and Form-used rule behavior while giving each mounted HTML root its own controller and resource lifetime.
+This is the user-approved 2.0 design contract. M2-M5 implement its package, CVC, communication, data, Form/Grid rule, and row-draft pieces; the later UI contracts remain planned. It keeps the CVC roles and Form-used rule behavior while giving each mounted HTML root its own controller and resource lifetime.
 
 # Goal
 
@@ -42,17 +42,17 @@ Make a search, list, detail, save, and popup flow readable in ordinary TypeScrip
 
 ## Package and public surface
 
-The 2.0 package lives at the repository root and keeps the name `@bbalganjjm/natural_js`; the 1.x source, package, license, and usage docs are preserved under `v1/`. Explicit ESM exports cover `./page`, `./data`, `./ui`, and `./comm`; the package root re-exports only public symbols. Internal modules never import the package root. M2 shipped `FrameworkError`; M3 shipped the page, data, and communication runtimes; M4 shipped pilot Form/Grid bindings.
+The 2.0 package lives at the repository root and keeps the name `@bbalganjjm/natural_js`; the 1.x source, package, license, and usage docs are preserved under `v1/`. Explicit ESM exports cover `./page`, `./data`, `./ui`, and `./comm`; the package root re-exports only public symbols. Internal modules never import the package root. M2 shipped `FrameworkError`; M3 shipped the page, data, and communication runtimes; M4 shipped pilot Form/Grid bindings, and M5 completes their shared rule and draft contracts.
 
 | Entry | Public symbols fixed by M1 | Required framework behavior |
 |---|---|---|
 | `.` | `FrameworkError` | Shared error shape, implemented below the role modules |
 | `./page` | `mountPage`, `PageContext`, `PageController`, `PageHandle`, `PageDefinition` | One CVC runtime, independent instances, lifecycle and cleanup |
-| `./data` | `createRows`, `Rows`, `RowId`, `RowSnapshot`, `RowChange` | Shared rows, stable identity, changes, subscriptions |
+| `./data` | `createRows`, `Rows`, `RowId`, `RowSnapshot`, `RowChange`, `RowsEvent` | Shared rows, stable identity, changes, subscriptions |
 | `./ui` | `bindForm`, `bindGrid`, `openPopup`; `FormHandle`, `GridHandle`, `PopupHandle`, `Rule`, `RuleSet`, `ValidationResult` | Behavior on authored HTML, built-in rules, common handle/disposal convention |
 | `./comm` | `createCommunicator`, `Communicator` | JSON requests, cancellation, common request/response hooks |
 
-`bindForm` and `bindGrid` are needed for M4; `openPopup` names the M7 result flow. M6/M7 decide the remaining component names and options only when their implementation need is established. All component handles own a root and expose `dispose()`. No formatter/validator utility package is created: Form, List, and Grid share a rule engine within `./ui`. Internal role modules import one private error implementation, never the root entry.
+`bindForm` and `bindGrid` are needed for M4; `openPopup` names the M7 result flow. M6/M7 decide the remaining component names and options only when their implementation need is established. The M7 names in this design table are planned contracts, not current package exports; [the UI concept](../v2/ui.md) lists the implemented surface. All component handles own a root and expose `dispose()`. No formatter/validator utility package is created: Form, List, and Grid share a rule engine within `./ui`. Internal role modules import one private error implementation, never the root entry.
 
 ## First page on existing HTML, in JavaScript
 
@@ -177,6 +177,10 @@ interface RowChange<T> {
   readonly status: "insert" | "update" | "delete";
   readonly value: Snapshot<T>; // Original value for delete; current value otherwise.
 }
+type RowsEvent =
+  | { readonly type: "replace"; readonly changed: true }
+  | { readonly type: "add" | "set" | "remove"; readonly id: RowId; readonly changed: true }
+  | { readonly type: "revert"; readonly id?: RowId; readonly changed: boolean };
 interface Rows<T extends object> {
   replace(values: readonly T[]): void;
   entries(): readonly RowSnapshot<T>[]; // Excludes deleted rows.
@@ -186,13 +190,15 @@ interface Rows<T extends object> {
   remove(id: RowId): void;
   revert(id?: RowId): void;
   changes(): readonly RowChange<T>[];
-  subscribe(listener: () => void): () => void;
+  subscribe(listener: (event: RowsEvent) => void): () => void;
   dispose(): void;
 }
 declare function createRows<T extends object>(initial?: readonly T[]): Rows<T>;
 ```
 
 `createRows(initial?)` owns JSON-compatible row objects, including nested objects and arrays. It detaches input values and exposes deeply read-only, runtime-immutable `Snapshot<T>` values; reads reuse snapshots rather than cloning the whole data set. All writes go through its methods. `set(id, field, value)` replaces one top-level field, including an entire nested array; Form may update a nested object path by replacing only that row's affected path. Functions, DOM nodes, cyclic structures, and in-place mutation of snapshots are outside this data contract. An update returns to `clean` when every field equals its original JSON value: primitives use value equality and changed nested objects/arrays use structural equality within that field, never a whole-data-set scan. Removing a new row drops it; removing an existing row retains a reversible delete. `replace` discards previous changes and issues new row IDs. `changes` carries internal IDs for UI validation; application code omits them from transport payloads. The store does not inject status or ID into business objects.
+
+`RowsEvent` reports the mutation type, affected row ID when present, and whether stored data changed. A clean-row `revert(id)` still notifies with `changed: false` so a component can clear its invalid draft. Existing no-argument subscriber callbacks remain assignable to the event listener type.
 
 `data-field` is the binding key and is independent of DOM `id`. It accepts a top-level property or a dot-separated object path such as `profile.name`; numeric array indexes and expression syntax are excluded. Paths are parsed once per template, never evaluated as JavaScript, and unsafe prototype keys are rejected. To edit `profile.name`, Form copies the affected `profile` object path and calls `rows.set(id, "profile", nextProfile)`; the public typed setter remains top-level. Text uses `textContent` by default; HTML insertion requires an explicit opt-in at the owning component. Form and repeated rows read the author's markup and classes, cloning only repeat templates. Missing fields clear their previous display. A Grid's sort/filter changes display order only: selected `RowId`, edits, and change status remain attached to the same row. A filtered-out selected row remains selected and bound in detail; delete or `replace` clears the selection. Store subscriptions and components are disposed by their owner.
 
@@ -261,7 +267,7 @@ declare function bindForm<T extends object = Record<string, unknown>>(
 ): FormHandle<T>;
 ```
 
-HTML retains the 1.x JSON list syntax and built-in rule names: `data-format='[["commas"]]'` and `data-validate='[["required"],["email"]]'`. `bindForm(root, { rows?, rules?, parse? })` returns a handle with `bind(id | null)`, `read()`, `validate(id?)`, and `dispose()`. `read()` returns a detached record of only bound fields in nested JSON shape; it is not a full `T` row snapshot. Without `rows` it owns local values for a search form. With `rows`, a bound field writes through `Rows.set` only after input parsing (if configured) and validation succeed. Focus restores the stored raw value; this is not an inverse formatter operation. An input draft is parsed if a field parser exists, then validators inspect that raw candidate, never formatted display text. A failed parse or rule leaves the unformatted draft visible and creates an issue. Only a valid candidate enters `Rows.set`; blur then reapplies one-way display formatting. `validate(id)` uses retained raw draft input when present and stored raw data otherwise, including for an unrendered row. `parse` is an optional field-name map of `ParseInput` functions, used only when an application needs input conversion. A failed edit stays in a row-keyed draft and does not corrupt the row. `bind(id)` preserves the previous row's draft and restores a target row's draft on return; `replace`, `revert`, and disposal discard affected drafts. For a local Form without `rows`, `validate()` checks its current inputs. For a row-bound Form, `validate()` checks every retained invalid draft and the currently bound row, or returns valid if neither exists. `validate(id)` checks that row's draft if present, otherwise its stored raw data, even when filtered out; it does not rebind or change another draft. Every issue from `validate(id)` carries that non-null row ID. HTML Constraint Validation API results and custom/built-in rule results appear in one `ValidationResult`. The component exposes field errors in the authored HTML and keeps their text/ARIA association; M5 fixes exact event timing and markup choices.
+HTML retains the 1.x JSON list syntax and built-in rule names: `data-format='[["commas"]]'` and `data-validate='[["required"],["email"]]'`. `bindForm(root, { rows?, rules?, parse? })` returns a handle with `bind(id | null)`, `read()`, `validate(id?)`, and `dispose()`. `read()` returns a detached record of only bound fields in nested JSON shape; it is not a full `T` row snapshot. Without `rows` it owns local values for a search form. With `rows`, a bound field writes through `Rows.set` only after input parsing (if configured) and validation succeed. Focus restores the stored raw value; this is not an inverse formatter operation. An input draft is parsed if a field parser exists, then validators inspect that raw candidate, never formatted display text. A failed parse or rule leaves the unformatted draft visible and creates an issue. Only a valid candidate enters `Rows.set`; blur then reapplies one-way display formatting. `validate(id)` uses retained raw draft input when present and stored raw data otherwise, including for an unrendered row. `parse` is an optional field-name map of `ParseInput` functions, used only when an application needs input conversion. A failed edit stays in a row-keyed draft and does not corrupt the row. `bind(id)` preserves the previous row's draft and restores a target row's draft on return; `replace`, `revert`, and disposal discard affected drafts. For a local Form without `rows`, `validate()` checks its current inputs. For a row-bound Form, `validate()` checks every retained invalid draft and the currently bound row, or returns valid if neither exists. `validate(id)` checks that row's draft if present, otherwise its stored raw data, even when filtered out; it does not rebind or change another draft. Every issue from `validate(id)` carries that non-null row ID. An explicit Form `validate(id?)` rechecks retained drafts and commits candidates that have become valid; its result reports any remaining draft or stored-value issues. Rows mutation notifications clear stale visible issues but do not call application validators. HTML Constraint Validation API results and custom/built-in rule results appear in one `ValidationResult`. The component exposes field errors in the authored HTML and keeps their text/ARIA association; M5 defines the event timing and error markup.
 
 The existing built-in formatter and validator catalogs, dynamic rule dispatch, rule messages, and transitive mask/date/byte-count operations are in scope. No built-in rule may be removed merely because a static search finds no call. The 1.x names below are retained as M1's catalog boundary; M5 tests arguments and corrected behavior rather than copying documented bugs. The `date` formatter remains in M5, while its optional custom calendar attachment waits for M11.
 
@@ -271,9 +277,9 @@ The existing built-in formatter and validator catalogs, dynamic rule dispatch, r
 | Validator | `required`, `alphabet`, `integer`, `korean`, `number`, `decimal`, `phone`, `email`, `url`, `zipcode`, `rrn`, `ssn`, `frn`, `frn_rrn`, `kbrn`, `kcn`, `date`, `time`, `accept`, `notAccept`, `match`, `notMatch`, `acceptFileExt`, `notAcceptFileExt`, `equalTo`, `maxlength`, `minlength`, `rangelength`, `maxbyte`, `minbyte`, `rangebyte`, `maxvalue`, `minvalue`, `rangevalue`, `regexp` |
 | Combined validator names | `alphabet+integer`, `integer+korean`, `alphabet+korean`, `alphabet+integer+korean`, `integer+dash`, `integer+commas` |
 
-Name lookup stays case-insensitive, including combined-name normalization. The 1.x camel-case `equalTo` lookup bug is corrected rather than treated as a reason to remove that rule. In 2.0 its argument is a `data-field` path resolved within the same Form or row, not a document-wide CSS selector; the migration guide records this argument change. See [formatter](../../v1/docs/data/formatter.md) and [validator](../../v1/docs/data/validator.md) for 1.x arguments and known bugs. `RuleSet` adds user rules and message overrides per component or shared page object without a mutable global registry. Its `locale` selects the built-in message language; M5 specifies exact fallback and available locales. A user rule with a built-in name intentionally overrides that rule for that component. Unknown names or malformed arguments raise a `FrameworkError` naming the field and rule. Business-specific new rules live in the application.
+Name lookup stays case-insensitive, including combined-name normalization. Each combined validator accepts both the listed `+` spelling and its 1.x underscore spelling, such as `integer+dash` and `integer_dash`. The 1.x camel-case `equalTo` lookup bug is corrected rather than treated as a reason to remove that rule. In 2.0 its argument is a `data-field` path resolved within the same Form or row, not a document-wide CSS selector; the migration guide records this argument change. See [formatter](../../v1/docs/data/formatter.md) and [validator](../../v1/docs/data/validator.md) for 1.x arguments and known bugs. `RuleSet` adds user rules and message overrides per component or shared page object without a mutable global registry. Its `locale` selects the built-in message language; M5 specifies exact fallback and available locales. A user rule with a built-in name intentionally overrides that rule for that component. Unknown names or malformed arguments raise a `FrameworkError` naming the field and rule. Business-specific new rules live in the application.
 
-`bindGrid(root, { rows, rules?, onSelect? })` and the later List component use the same field/rule runner as Form. Grid selection carries a `RowSnapshot<T>` and the originating event (or `null` for programmatic changes), never an array index. `grid.validate()` checks all retained invalid drafts, including filtered-out rows; `grid.validate(id)` checks that row's draft or stored fields and child Selects even when filtered out. Comparators and predicates are application functions, not a public data-utility catalog.
+`bindGrid(root, { rows, rules?, onSelect? })` and the later List component use the same field/rule runner as Form. Grid selection carries a `RowSnapshot<T>` and the originating event (or `null` for programmatic changes), never an array index. `grid.validate()` checks all retained invalid drafts, including filtered-out rows; `grid.validate(id)` checks that row's draft or stored fields and child Selects even when filtered out. An explicit Grid `validate(id?)` likewise commits retained Select drafts that became valid after another change, then reports remaining issues. Comparators and predicates are application functions, not a public data-utility catalog.
 
 ```ts
 interface GridHandle<T extends object> {
@@ -418,7 +424,7 @@ export function createEmployees({ root, signal, own }: PageContext<{ department:
 }
 ```
 
-Each new search aborts the previous one without failing page initialization; page disposal still propagates `AbortError` and prevents a late request from touching disposed rows or DOM. Save checks retained drafts in both the detail Form and Grid, then every changed row, including a nested Select even when filtered out. The sample uses an application rule alongside built-in `required`, `email`, `integer`, and `commas`. The request transmits raw values and omits internal `RowId`. M4 adds keyboard and failure fixtures; M5 completes rule behavior; M6 completes the full Grid contract.
+Each new search aborts the previous one without failing page initialization; page disposal still propagates `AbortError` and prevents a late request from touching disposed rows or DOM. Save checks retained drafts in both the detail Form and Grid, then every changed row, including a nested Select even when filtered out. The sample uses an application rule alongside built-in `required`, `email`, `integer`, and `commas`. The request transmits raw values and omits internal `RowId`. M4 adds keyboard and failure fixtures; M5 completed rule behavior; M6 completes the full Grid contract.
 
 ## Request and 1.x server conversion
 
@@ -498,7 +504,7 @@ Inside the picker controller, `context.output(employee)` resolves the popup resu
 
 # Next action
 
-The user approved this M1 contract and [the M2 tooling plan](m2-plan.md). M2 built the package foundation, M3 implemented the page, row, and communication functions, and M4 added pilot Form/Grid bindings. Update this contract if a core invariant changes. Later milestone plans may refine component options but must revise this contract before changing its public invariants.
+The user approved this M1 contract and [the M2 tooling plan](m2-plan.md). M2 built the package foundation, M3 implemented the page, row, and communication functions, and M4 added pilot Form/Grid bindings and M5 completed rule and row-draft behavior. Update this contract if a core invariant changes. Later milestone plans may refine component options but must revise this contract before changing its public invariants.
 
 # Decisions
 
@@ -525,7 +531,8 @@ No legacy function is removed in M1. M2-M9 removal audits must prove a candidate
 |---|---|---|
 | 2026-09-24 | Independent read-only source audits | CVC, Form rule dispatch, List/Grid Form use, and M0 classification conflict were inspected by separate agents. |
 | 2026-09-24 | Contract review | At M1 approval, no CVC, data, communication, or UI runtime had been implemented. |
-| 2026-09-24 | M4 status | M2-M3 shipped the package and core roles; M4 shipped the Form/Grid pilots, automatic nested row options, ID-clean dual-page checks, and fixed-fixture benchmarks. Later rule and container contracts remain draft. |
+| 2026-09-24 | M4 status | M2-M3 shipped the package and core roles; M4 shipped the Form/Grid pilots, automatic nested row options, ID-clean dual-page checks, and fixed-fixture benchmarks. |
+| 2026-09-24 | M5 status | The retained Form rule catalog, shared private Form/Grid runner, row-keyed drafts, and Rows mutation events are under verification. Popup remains a future M7 design, not a current public type. |
 
 # Open questions
 

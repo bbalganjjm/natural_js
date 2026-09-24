@@ -21,6 +21,11 @@ export interface RowChange<T> {
   readonly value: Snapshot<T>;
 }
 
+export type RowsEvent =
+  | { readonly type: "replace"; readonly changed: true }
+  | { readonly type: "add" | "set" | "remove"; readonly id: RowId; readonly changed: true }
+  | { readonly type: "revert"; readonly id?: RowId; readonly changed: boolean };
+
 export interface Rows<T extends object> {
   replace(values: readonly T[]): void;
   entries(): readonly RowSnapshot<T>[];
@@ -30,7 +35,7 @@ export interface Rows<T extends object> {
   remove(id: RowId): void;
   revert(id?: RowId): void;
   changes(): readonly RowChange<T>[];
-  subscribe(listener: () => void): () => void;
+  subscribe(listener: (event: RowsEvent) => void): () => void;
   dispose(): void;
 }
 
@@ -110,7 +115,7 @@ export function createRows<T extends object>(initial: readonly T[] = []): Rows<T
   let entryCache: readonly RowSnapshot<T>[] | undefined;
   let changeCache: readonly RowChange<T>[] | undefined;
   const rows = new Map<RowId, StoredRow<T>>();
-  const listeners = new Set<() => void>();
+  const listeners = new Set<(event: RowsEvent) => void>();
 
   function active(api: string): void {
     if (disposed) throw rowError(api, "ROWS_DISPOSED", "This row store has been disposed.");
@@ -120,13 +125,26 @@ export function createRows<T extends object>(initial: readonly T[] = []): Rows<T
     return Object.freeze({ id, value: value as Snapshot<T>, status });
   }
 
-  function changed(): void {
-    entryCache = undefined;
-    changeCache = undefined;
+  function notify(event: RowsEvent): void {
+    if (event.changed) {
+      entryCache = undefined;
+      changeCache = undefined;
+    }
+    Object.freeze(event);
+    let failed = false;
+    let firstError: unknown;
     for (const listener of [...listeners]) {
       if (disposed) break;
-      if (listeners.has(listener)) listener();
+      if (!listeners.has(listener)) continue;
+      try { listener(event); }
+      catch (cause) {
+        if (!failed) {
+          failed = true;
+          firstError = cause;
+        }
+      }
     }
+    if (failed) throw firstError;
   }
 
   function requireRow(id: RowId, api: string): StoredRow<T> {
@@ -159,7 +177,7 @@ export function createRows<T extends object>(initial: readonly T[] = []): Rows<T
       rows.clear();
       for (const [key, row] of nextRows) rows.set(key, row);
       nextId = id;
-      changed();
+      notify({ type: "replace", changed: true });
     },
     entries() {
       active("Rows.entries");
@@ -177,7 +195,7 @@ export function createRows<T extends object>(initial: readonly T[] = []): Rows<T
       const current = cloneRow(value, "Rows.add");
       const row = makeRow(nextId++, current, true);
       rows.set(row.id, row);
-      changed();
+      notify({ type: "add", id: row.id, changed: true });
       return row.id;
     },
     set(id, field, value) {
@@ -198,7 +216,7 @@ export function createRows<T extends object>(initial: readonly T[] = []): Rows<T
         row.status = row.dirty.size ? "update" : "clean";
       }
       row.view = view(row.id, row.current, row.status);
-      changed();
+      notify({ type: "set", id, changed: true });
     },
     remove(id) {
       active("Rows.remove");
@@ -211,7 +229,7 @@ export function createRows<T extends object>(initial: readonly T[] = []): Rows<T
         row.status = "delete";
         row.view = view(row.id, row.current, row.status);
       }
-      changed();
+      notify({ type: "remove", id, changed: true });
     },
     revert(id) {
       active("Rows.revert");
@@ -228,7 +246,9 @@ export function createRows<T extends object>(initial: readonly T[] = []): Rows<T
           row.view = view(row.id, row.current, row.status);
         }
       }
-      if (modified) changed();
+      notify(id === undefined
+        ? { type: "revert", changed: modified }
+        : { type: "revert", id, changed: modified });
     },
     changes() {
       active("Rows.changes");
