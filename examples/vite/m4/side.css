@@ -4,7 +4,7 @@ body { margin: 0; }
 button, input, select { font: inherit; }
 button { cursor: pointer; }
 button:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid #2563eb; outline-offset: 2px; }
-.site-header { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.5rem; background: #15243b; color: white; }
+.site-header { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; padding: 1rem 1.5rem; background: #15243b; color: white; }
 .site-header h1 { margin: 0 auto 0 0; font-size: 1.2rem; }
 .site-header a { color: white; }
 [data-hosts] { display: grid; gap: 1rem; padding: 1rem; }
@@ -13,10 +13,11 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 3px s
 .page-header { justify-content: space-between; }
 .page-header h2 { margin: 0; }
 .search-bar { margin: 1rem 0; }
-.search-bar label { display: inline-flex; align-items: center; gap: .4rem; }
+.search-bar label { display: inline-flex; flex-wrap: wrap; align-items: center; gap: .4rem; }
 .search-bar input { max-width: 13rem; }
 .workspace { display: grid; grid-template-columns: minmax(26rem, 2fr) minmax(16rem, 1fr); gap: 1rem; }
 .list-panel, .detail-panel { min-width: 0; padding: 1rem; border: 1px solid #d9e2ee; border-radius: .4rem; }
+.list-panel { overflow-x: auto; }
 .actions { margin-bottom: .8rem; }
 table { width: 100%; border-collapse: collapse; }
 caption { text-align: left; font-weight: 700; padding-bottom: .5rem; }

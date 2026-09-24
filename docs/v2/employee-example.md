@@ -28,11 +28,11 @@ sources:
   - id: side-css
     resource: ../../examples/vite/m4/side.css
     title: Side-by-side authored styling
-    git_blob: d90c06cebc55155cbcd732e293799634b6f618de
+    git_blob: 1e5f5e13116244190b3908b51b62e09ab079e5bd
   - id: stack-css
     resource: ../../examples/vite/m4/stack.css
     title: Stacked authored styling
-    git_blob: fb2e884da8167bd0c41206b5d6b26e8f5e145cf9
+    git_blob: e8b54da3d698fe8db9e42110440e84c89c42d13a
   - id: fixture
     resource: ../../examples/vite/m4/employees.json
     title: Fixed employee rows
@@ -53,7 +53,7 @@ sources:
     resource: ../../tests/browser/m6-screen.spec.ts
     title: List and paging browser regression
     git_blob: 9610ad289f93b7636a27f9c893a2640717caca9a
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T18:36:01Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T20:24:21Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T18:39:10Z }
 ---
@@ -81,7 +81,7 @@ The native action buttons and their event handlers belong to the page controller
 
 # View
 
-The side view places Grid/List beside the detail Form; the stacked view places the Form above them and uses different CSS. Both keep the same `data-role` and `data-action` application selectors. The framework uses `data-field`, `data-row-template`, and `data-options`; no repeated row or page button template has a fixed DOM `id`.[^side][^stack][^side-css][^stack-css]
+The side view places Grid/List beside the detail Form; the stacked view places the Form above them and uses different CSS. At narrow widths, both keep the document within the viewport, wrap search controls under expanded text spacing, and scroll the wide native table inside its list panel. Both keep the same `data-role` and `data-action` application selectors. The framework uses `data-field`, `data-row-template`, and `data-options`; no repeated row or page button template has a fixed DOM `id`.[^side][^stack][^side-css][^stack-css]
 
 ```html
 <label>Rows per page <select data-role="page-size"><option value="">Choose a size</option></select></label>

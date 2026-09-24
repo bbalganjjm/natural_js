@@ -1,6 +1,11 @@
 import { expect, test } from "@playwright/test";
-import type { Page } from "@playwright/test";
+import type { Locator, Page } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
+
+const textSpacing = `
+  * { line-height: 1.5 !important; letter-spacing: .12em !important; word-spacing: .16em !important; }
+  p { margin-bottom: 2em !important; }
+`;
 
 async function idReferences(page: Page) {
   return page.evaluate(() => {
@@ -47,8 +52,23 @@ async function wcagViolations(page: Page) {
   }));
 }
 
+async function focusedVisible(dialog: Locator): Promise<boolean> {
+  return dialog.evaluate(element => {
+    const focused = element.ownerDocument.activeElement;
+    if (!(focused instanceof HTMLElement) || !element.contains(focused)) return false;
+    const control = focused.getBoundingClientRect();
+    const bounds = element.getBoundingClientRect();
+    return control.top >= Math.max(0, bounds.top) &&
+      control.bottom <= Math.min(window.innerHeight, bounds.bottom);
+  });
+}
+
 test("native Popup keeps keyboard focus inside and Escape restores the opener", async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 256 });
   await page.goto("/m7/side.html");
+  await page.addStyleTag({ content: textSpacing });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth))
+    .toBeLessThanOrEqual(320);
   const screen = page.locator('[data-screen="1"]');
   const opener = screen.locator("[data-open-picker]");
   const dialog = screen.locator("[data-picker-dialog]");
@@ -57,15 +77,18 @@ test("native Popup keeps keyboard focus inside and Escape restores the opener", 
   await page.keyboard.press("Enter");
   await expect(dialog).toBeVisible();
   expect(await dialog.evaluate(element => element.contains(document.activeElement))).toBe(true);
+  await expect.poll(() => focusedVisible(dialog)).toBe(true);
 
   const cancel = dialog.getByRole("button", { name: "Cancel" });
   const first = dialog.getByRole("button", { name: "Choose Ada" });
   await cancel.focus();
   await page.keyboard.press("Tab");
   await expect(first).toBeFocused();
+  expect(await focusedVisible(dialog)).toBe(true);
   await first.focus();
   await page.keyboard.press("Shift+Tab");
   await expect(cancel).toBeFocused();
+  expect(await focusedVisible(dialog)).toBe(true);
 
   await page.keyboard.press("Escape");
   await expect(dialog).not.toBeVisible();
@@ -177,8 +200,11 @@ for (const layout of ["side", "stack"] as const) {
   test(`${layout} data UI remains keyboard-operable at 320px`, async ({ page }) => {
     await page.setViewportSize({ width: 320, height: 700 });
     await page.goto(`/m4/${layout}.html`);
+    await page.addStyleTag({ content: textSpacing });
     const screen = page.locator('[data-page="employees"]');
     await expect(screen.locator("tbody tr")).toHaveCount(3);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth))
+      .toBeLessThanOrEqual(320);
 
     const search = screen.locator('[data-role="search"] [data-field="query"]');
     const submit = screen.locator('[data-role="search"] button[type="submit"]');

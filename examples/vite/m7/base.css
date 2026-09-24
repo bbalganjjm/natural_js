@@ -38,7 +38,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid #185cb2; outline-offs
   border-radius: 0.5rem;
 }
 
-[role="tablist"] { display: flex; gap: 0.25rem; border-bottom: 1px solid #aebbc6; }
+[role="tablist"] { display: flex; flex-wrap: wrap; gap: 0.25rem; border-bottom: 1px solid #aebbc6; }
 [role="tab"] { border: 1px solid #aebbc6; border-radius: 0.4rem 0.4rem 0 0; padding: 0.45rem 0.8rem; background: #edf2f6; }
 [role="tab"][aria-selected="true"] { background: white; border-bottom-color: white; font-weight: 700; }
 [role="tabpanel"] { padding: 0.8rem 0; min-height: 6rem; }
@@ -51,6 +51,9 @@ output { display: inline-block; min-height: 1.4em; }
 .event-log ul { margin-bottom: 0; }
 
 dialog {
+  box-sizing: border-box;
+  max-height: calc(100dvh - 2rem);
+  overflow-y: auto;
   border: 1px solid #74889b;
   border-radius: 0.6rem;
   padding: 1.25rem;

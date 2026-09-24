@@ -17,11 +17,15 @@ sources:
     resource: ../../examples/vite/m7/stack.html
     title: Authored stacked layout
     git_blob: 587c20e109977fc12a091d84248f8d80f3526daf
+  - id: base-css
+    resource: ../../examples/vite/m7/base.css
+    title: Authored dialog and tab layout at narrow viewports
+    git_blob: 87005c54e21b878e55ab49abe5a247e1b3c1fa4e
   - id: browser
     resource: ../../tests/browser/m7-screen.spec.ts
     title: Cross-container and MDI browser checks
     git_blob: 67c6bdd310b8083059548eccbfec369678dd5167
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T18:36:01Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T20:24:21Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T18:39:10Z }
 ---
@@ -44,7 +48,7 @@ Open `/m7/side.html` or `/m7/stack.html` under `npm run example`. Open another w
 
 # View
 
-`examples/vite/m7/side.html` places main content before Tabs; `stack.html` reverses the order. Each authored screen has a main host, three keyed Tab buttons and panels, an alert region, a connected native dialog with a direct `[data-page-host]`, and a picker view template. The Preview panel keeps an empty `[data-preview-host]` for its page and a separate authored `[data-preview-output]` for results. The CSS files define two different layouts; the framework creates no layout or theme. All data markers can repeat when another workspace is cloned because they are scoped to its root. Tabs generates document-unique IDs only for ARIA references.[^side][^stack][^controller]
+`examples/vite/m7/side.html` places main content before Tabs; `stack.html` reverses the order. Each authored screen has a main host, three keyed Tab buttons and panels, an alert region, a connected native dialog with a direct `[data-page-host]`, and a picker view template. The Preview panel keeps an empty `[data-preview-host]` for its page and a separate authored `[data-preview-output]` for results. The CSS files define two different layouts; the framework creates no layout or theme. All data markers can repeat when another workspace is cloned because they are scoped to its root. Tabs generates document-unique IDs only for ARIA references. Shared authored CSS lets Tabs wrap and constrains tall dialogs to an internally scrollable viewport area; the framework supplies focus behavior, not the layout.[^side][^stack][^base-css][^controller]
 
 # Controller
 
@@ -69,4 +73,5 @@ The example's `find` helper is local application code, not a Natural-JS selector
 [^controller]: Shared page definition and container ownership
 [^side]: Authored side-by-side layout
 [^stack]: Authored stacked layout
+[^base-css]: Authored dialog and tab layout at narrow viewports
 [^browser]: Cross-container and MDI browser checks

@@ -40,7 +40,7 @@ sources:
   - id: popup
     resource: ../../src/ui/popup.ts
     title: Authored dialog and CVC Popup lifetime
-    git_blob: 33fa1227a630e0f9dad828ea003c5eb2692bf6d5
+    git_blob: 49ec03d610615aff95952804541c94892799535f
   - id: tabs
     resource: ../../src/ui/tabs.ts
     title: Authored Tabs and CVC page lifetime
@@ -85,7 +85,7 @@ sources:
     resource: ../../src/internal/framework-error.ts
     title: Shared framework error
     git_blob: 6930da1fbcfd71733a45dab22a51aec784cafe7f
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T15:56:13Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T20:25:04Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T15:58:02Z }
 ---
@@ -109,7 +109,7 @@ Keep one definition of each framework behavior without collecting unrelated help
 
 # Lifecycle
 
-Build `src/` once with `tsc` to `build/`. The package export map resolves public paths to generated JavaScript and declarations. Consumers cannot use an internal package subpath through `exports`. The preserved `v1/` code is outside this build and tarball. Form, Grid, and List bind within authored roots, subscribe to a caller-owned row store when supplied, and release their own listeners and subscriptions on disposal. Standalone Select and Pagination bind native controls, own no row store, and restore authored markup on disposal. Popup and Tabs own private `PageHandle` instances from the same `mountPage` runtime; Popup owns one opening, while Tabs retain successfully visited pages until final disposal and evict failed or canceled pages.[^package][^form][^grid][^list][^select][^pagination][^popup][^tabs]
+Build `src/` once with `tsc` to `build/`. The package export map resolves public paths to generated JavaScript and declarations. Consumers cannot use an internal package subpath through `exports`. The preserved `v1/` code is outside this build and tarball. Form, Grid, and List bind within authored roots, subscribe to a caller-owned row store when supplied, and release their own listeners and subscriptions on disposal. Standalone Select and Pagination bind native controls, own no row store, and restore authored markup on disposal. Popup and Tabs own private `PageHandle` instances from the same `mountPage` runtime; Popup owns one opening, keeps modal focus visible within authored scrollable CSS, and restores the opener, while Tabs retain successfully visited pages until final disposal and evict failed or canceled pages.[^package][^form][^grid][^list][^select][^pagination][^popup][^tabs]
 
 # Rules
 

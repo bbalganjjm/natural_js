@@ -7,12 +7,12 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 3px s
 .site-header { display: flex; align-items: center; flex-wrap: wrap; gap: 1rem; padding: .9rem 2rem; background: #21483f; color: #fff; }
 .site-header h1 { margin: 0 auto 0 0; font-size: 1.35rem; }
 .site-header a { color: #fff; }
-[data-hosts] { display: grid; gap: 1.2rem; max-width: 78rem; margin: auto; padding: 1.2rem; }
+[data-hosts] { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.2rem; max-width: 78rem; margin: auto; padding: 1.2rem; }
 .employee-page { display: grid; gap: 1.1rem; padding: 1.5rem; background: #fffdf8; border: 2px solid #cebba0; }
 .page-header, .search-bar, .actions { display: flex; align-items: center; flex-wrap: wrap; gap: .8rem; }
 .page-header { justify-content: space-between; border-bottom: 1px solid #cebba0; padding-bottom: .7rem; }
 .page-header h2, .detail-panel h3 { margin: 0; }
-.search-bar label { display: inline-flex; gap: .5rem; align-items: center; }
+.search-bar label { display: inline-flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
 .detail-panel { padding: 1rem; background: #f5efe2; }
 .detail-panel .fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .6rem 1rem; margin: .8rem 0; }
 .detail-panel label { display: grid; gap: .2rem; }

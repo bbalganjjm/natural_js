@@ -1,0 +1,44 @@
+
+> @bbalganjjm/natural_js@2.0.0-beta.0 test:browser
+> playwright test -c tests/playwright.config.ts --project=webkit --reporter=dot
+
+[WebServer] (node:14244) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 103 tests using 4 workers
+(node:14596) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:18356) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:19256) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:17872) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 오전 5:02:18 [vite] (client) [Unhandled error] Error: subscriber failed
+[WebServer]  > notify ../../src/data/index.ts:139:21
+[WebServer]     137 |        if (disposed) break;
+[WebServer]     138 |        if (!listeners.has(listener)) continue;
+[WebServer]     139 |        try { listener(event); }
+[WebServer]         |                       ^
+[WebServer]     140 |        catch (cause) {
+[WebServer]     141 |          if (!failed) {
+[WebServer]  > set ../../src/data/index.ts:219:13
+[WebServer]  > reconcile ../../src/ui/form.ts:404:20
+[WebServer]  > onInput ../../src/ui/form.ts:444:16
+[WebServer]
+[WebServer] 오전 5:02:18 [vite] (client) [Unhandled error] FrameworkError: Rows require acyclic JSON-compatible values.
+[WebServer]  > rowError ../../src/data/index.ts:54:28
+[WebServer]     52 |
+[WebServer]     53 |  function rowError(api: string, code: string, message: string, detail?: Record<string, unknown>): FrameworkError {
+[WebServer]     54 |    return new FrameworkError({ api, code, message, detail });
+[WebServer]        |                              ^
+[WebServer]     55 |  }
+[WebServer]     56 |
+[WebServer]  > cloneFrozen ../../src/data/index.ts:66:19
+[WebServer]  > set ../../src/data/index.ts:210:31
+[WebServer]  > reconcile ../../src/ui/form.ts:404:20
+[WebServer]  > onInput ../../src/ui/form.ts:444:16
+[WebServer]
+················································································
+·······················
+  103 passed (27.1s)

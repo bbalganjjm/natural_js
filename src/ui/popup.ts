@@ -54,10 +54,17 @@ export function openPopup<Input = unknown, Output = unknown>(
   const openerDialog = opener?.closest("dialog[open]");
   const nextFocus = opener?.nextElementSibling;
   const previousFocus = opener?.previousElementSibling;
+  function keepFocusVisible(): void {
+    const focused = dialog.ownerDocument.activeElement;
+    if (focused instanceof HTMLElement && dialog.contains(focused)) {
+      focused.scrollIntoView({ block: "nearest", inline: "nearest" });
+    }
+  }
   active.add(dialog);
   try {
     dialog.showModal();
     if (!dialog.open) throw popupError("POPUP_OPEN", "Dialog opening was prevented");
+    keepFocusVisible();
   } catch (cause) {
     active.delete(dialog);
     if (cause instanceof FrameworkError) throw cause;
@@ -174,13 +181,13 @@ export function openPopup<Input = unknown, Output = unknown>(
     const last = tabbables.at(-1);
     if (!first || !last) {
       event.preventDefault();
-      dialog.focus({ preventScroll: true });
+      dialog.focus();
       return;
     }
     const focused = dialog.ownerDocument.activeElement;
     if (event.shiftKey ? focused === first : focused === last) {
       event.preventDefault();
-      (event.shiftKey ? last : first).focus({ preventScroll: true });
+      (event.shiftKey ? last : first).focus();
     }
   }
 
@@ -235,7 +242,9 @@ export function openPopup<Input = unknown, Output = unknown>(
     dialog.close();
   });
   if (end) startCleanup();
-  void ready.catch(cause => {
+  void ready.then(() => {
+    if (dialog.open && attached() && !end) keepFocusVisible();
+  }, cause => {
     if (end) return;
     reserve({ kind: "error", cause });
     if (dialog.open) dialog.close();

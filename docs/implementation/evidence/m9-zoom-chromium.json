@@ -1,0 +1,1220 @@
+{
+  "browser": "153.0.8010.12",
+  "platform": "win32",
+  "results": [
+    {
+      "name": "m4-side-640",
+      "viewport": {
+        "width": 640,
+        "height": 512,
+        "scrollWidth": 640,
+        "clientWidth": 640
+      },
+      "parts": [
+        {
+          "selector": "body",
+          "x": 0,
+          "right": 640,
+          "width": 640,
+          "clientWidth": 640,
+          "scrollWidth": 640
+        },
+        {
+          "selector": "[data-hosts]",
+          "x": 0,
+          "right": 640,
+          "width": 640,
+          "clientWidth": 640,
+          "scrollWidth": 640
+        },
+        {
+          "selector": ".employee-page",
+          "x": 16,
+          "right": 624,
+          "width": 608,
+          "clientWidth": 606,
+          "scrollWidth": 606
+        },
+        {
+          "selector": ".workspace",
+          "x": 33,
+          "right": 607,
+          "width": 574,
+          "clientWidth": 574,
+          "scrollWidth": 574
+        },
+        {
+          "selector": ".list-panel",
+          "x": 33,
+          "right": 607,
+          "width": 574,
+          "clientWidth": 572,
+          "scrollWidth": 572
+        },
+        {
+          "selector": "table",
+          "x": 50,
+          "right": 590,
+          "width": 540,
+          "clientWidth": 540,
+          "scrollWidth": 540
+        }
+      ],
+      "small": [
+        {
+          "tag": "a",
+          "text": "Stacked layout",
+          "width": 106,
+          "height": 23,
+          "html": "<a href=\"/m4/stack.html\">Stacked layout</a>"
+        }
+      ]
+    },
+    {
+      "name": "m4-side-320",
+      "viewport": {
+        "width": 320,
+        "height": 256,
+        "scrollWidth": 320,
+        "clientWidth": 320
+      },
+      "parts": [
+        {
+          "selector": "body",
+          "x": 0,
+          "right": 320,
+          "width": 320,
+          "clientWidth": 320,
+          "scrollWidth": 320
+        },
+        {
+          "selector": "[data-hosts]",
+          "x": 0,
+          "right": 320,
+          "width": 320,
+          "clientWidth": 320,
+          "scrollWidth": 320
+        },
+        {
+          "selector": ".employee-page",
+          "x": 16,
+          "right": 304,
+          "width": 288,
+          "clientWidth": 286,
+          "scrollWidth": 286
+        },
+        {
+          "selector": ".workspace",
+          "x": 33,
+          "right": 287,
+          "width": 254,
+          "clientWidth": 254,
+          "scrollWidth": 254
+        },
+        {
+          "selector": ".list-panel",
+          "x": 33,
+          "right": 287,
+          "width": 254,
+          "clientWidth": 252,
+          "scrollWidth": 436
+        },
+        {
+          "selector": "table",
+          "x": 50,
+          "right": 454,
+          "width": 404,
+          "clientWidth": 404,
+          "scrollWidth": 404
+        }
+      ],
+      "small": [
+        {
+          "tag": "a",
+          "text": "Stacked layout",
+          "width": 106,
+          "height": 23,
+          "html": "<a href=\"/m4/stack.html\">Stacked layout</a>"
+        }
+      ]
+    },
+    {
+      "name": "m4-side-320-focus",
+      "selector": "<button type=\"button\" data-action=\"save\">Save changes</button>",
+      "box": {
+        "x": 50,
+        "y": 139,
+        "width": 114,
+        "height": 29
+      },
+      "viewport": {
+        "width": 320,
+        "height": 256
+      },
+      "outlineStyle": "solid",
+      "outlineWidth": "3px",
+      "obscuredCorners": [
+        false,
+        false
+      ]
+    },
+    {
+      "name": "m4-side-320-spacing",
+      "viewport": {
+        "width": 320,
+        "height": 256,
+        "scrollWidth": 320,
+        "clientWidth": 320
+      },
+      "parts": [
+        {
+          "selector": "body",
+          "x": 0,
+          "right": 320,
+          "width": 320,
+          "clientWidth": 320,
+          "scrollWidth": 320
+        },
+        {
+          "selector": "[data-hosts]",
+          "x": 0,
+          "right": 320,
+          "width": 320,
+          "clientWidth": 320,
+          "scrollWidth": 320
+        },
+        {
+          "selector": ".employee-page",
+          "x": 16,
+          "right": 304,
+          "width": 288,
+          "clientWidth": 286,
+          "scrollWidth": 286
+        },
+        {
+          "selector": ".workspace",
+          "x": 33,
+          "right": 287,
+          "width": 254,
+          "clientWidth": 254,
+          "scrollWidth": 254
+        },
+        {
+          "selector": ".list-panel",
+          "x": 33,
+          "right": 287,
+          "width": 254,
+          "clientWidth": 252,
+          "scrollWidth": 502
+        },
+        {
+          "selector": "table",
+          "x": 50,
+          "right": 520,
+          "width": 470,
+          "clientWidth": 470,
+          "scrollWidth": 470
+        }
+      ],
+      "small": []
+    },
+    {
+      "name": "m4-stack-640",
+      "viewport": {
+        "width": 640,
+        "height": 512,
+        "scrollWidth": 640,
+        "clientWidth": 640
+      },
+      "parts": [
+        {
+          "selector": "body",
+          "x": 0,
+          "right": 640,
+          "width": 640,
+          "clientWidth": 640,
+          "scrollWidth": 640
+        },
+        {
+          "selector": "[data-hosts]",
+          "x": 0,
+          "right": 640,
+          "width": 640,
+          "clientWidth": 640,
+          "scrollWidth": 640
+        },
+        {
+          "selector": ".employee-page",
+          "x": 19,
+          "right": 621,
+          "width": 602,
+          "clientWidth": 598,
+          "scrollWidth": 598
+        },
+        {
+          "selector": ".list-panel",
+          "x": 45,
+          "right": 595,
+          "width": 550,
+          "clientWidth": 550,
+          "scrollWidth": 550
+        },
+        {
+          "selector": "table",
+          "x": 45,
+          "right": 595,
+          "width": 550,
+          "clientWidth": 550,
+          "scrollWidth": 550
+        }
+      ],
+      "small": [
+        {
+          "tag": "select",
+          "text": "Choose a size25",
+          "width": 116,
+          "height": 23,
+          "html": "<select data-role=\"page-size\"><option value=\"\">Choose a size</option><option value=\"2\">2</option><option value=\"5\">5</option></select>"
+        },
+        {
+          "tag": "select",
+          "text": "Choose\n                  11",
+          "width": 74,
+          "height": 23,
+          "html": "<select data-field=\"chosen\" data-options=\"a\" data-option-label=\"aa\" data-option-value=\"bb\">\n                    <option value=\"\">Choose</option>\n               "
+        },
+        {
+          "tag": "select",
+          "text": "Choose\n                  3355",
+          "width": 74,
+          "height": 23,
+          "html": "<select data-field=\"chosen\" data-options=\"a\" data-option-label=\"aa\" data-option-value=\"bb\">\n                    <option value=\"\">Choose</option>\n               "
+        },
+        {
+          "tag": "select",
+          "text": "Choose",
+          "width": 74,
+          "height": 23,
+          "html": "<select data-field=\"chosen\" data-options=\"a\" data-option-label=\"aa\" data-option-value=\"bb\">\n                    <option value=\"\">Choose</option>\n               "
+        },
+        {
+          "tag": "select",
+          "text": "Choose11",
+          "width": 74,
+          "height": 23,
+          "html": "<select data-field=\"chosen\" data-options=\"a\" data-option-label=\"aa\" data-option-value=\"bb\" disabled=\"\"><option value=\"\">Choose</option><option value=\"22\">11</op"
+        },
+        {
+          "tag": "select",
+          "text": "Choose3355",
+          "width": 74,
+          "height": 23,
+          "html": "<select data-field=\"chosen\" data-options=\"a\" data-option-label=\"aa\" data-option-value=\"bb\" disabled=\"\"><option value=\"\">Choose</option><option value=\"44\">33</op"
+        },
+        {
+          "tag": "select",
+          "text": "Choose",
+          "width": 74,
+          "height": 23,
+          "html": "<select data-field=\"chosen\" data-options=\"a\" data-option-label=\"aa\" data-option-value=\"bb\" disabled=\"\"><option value=\"\">Choose</option></select>"
+        }
+      ]
+    },
+    {
+      "name": "m4-stack-320",
+      "viewport": {
+        "width": 320,
+        "height": 256,
+        "scrollWidth": 320,
+        "clientWidth": 320
+      },
+      "parts": [
+        {
+          "selector": "body",
+          "x": 0,
+          "right": 320,
+          "width": 320,
+          "clientWidth": 320,
+          "scrollWidth": 320
+        },
+        {
+          "selector": "[data-hosts]",
+          "x": 0,
+          "right": 320,
+          "width": 320,
+          "clientWidth": 320,
+          "scrollWidth": 320
+        },
+        {
+          "selector": ".employee-page",
+          "x": 19,
+          "right": 301,
+          "width": 282,
+          "clientWidth": 278,
+          "scrollWidth": 278
+        },
+        {
+          "selector": ".list-panel",
+          "x": 45,
+          "right": 284,
+          "width": 239,
+          "clientWidth": 239,
+          "scrollWidth": 443
+        },
+        {
+          "selector": "table",
+          "x": 45,
+          "right": 488,
+          "width": 443,
+          "clientWidth": 443,
+          "scrollWidth": 443
+        }
+      ],
+      "small": [
+        {
+          "tag": "select",
+          "text": "Choose a size25",
+          "width": 116,
+          "height": 23,
+          "html": "<select data-role=\"page-size\"><option value=\"\">Choose a size</option><option value=\"2\">2</option><option value=\"5\">5</option></select>"
+        },
+        {
+          "tag": "select",
+          "text": "Choose\n                  11",
+          "width": 74,
+          "height": 23,
+          "html": "<select data-field=\"chosen\" data-options=\"a\" data-option-label=\"aa\" data-option-value=\"bb\">\n                    <option value=\"\">Choose</option>\n               "
+        },
+        {
+          "tag": "select",
+          "text": "Choose\n                  3355",
+          "width": 74,
+          "height": 23,
+          "html": "<select data-field=\"chosen\" data-options=\"a\" data-option-label=\"aa\" data-option-value=\"bb\">\n                    <option value=\"\">Choose</option>\n               "
+        },
+        {
+          "tag": "select",
+          "text": "Choose",
+          "width": 74,
+          "height": 23,
+          "html": "<select data-field=\"chosen\" data-options=\"a\" data-option-label=\"aa\" data-option-value=\"bb\">\n                    <option value=\"\">Choose</option>\n               "
+        },
+        {
+          "tag": "select",
+          "text": "Choose11",
+          "width": 74,
+          "height": 23,
+          "html": "<select data-field=\"chosen\" data-options=\"a\" data-option-label=\"aa\" data-option-value=\"bb\" disabled=\"\"><option value=\"\">Choose</option><option value=\"22\">11</op"
+        },
+        {
+          "tag": "select",
+          "text": "Choose3355",
+          "width": 74,
+          "height": 23,
+          "html": "<select data-field=\"chosen\" data-options=\"a\" data-option-label=\"aa\" data-option-value=\"bb\" disabled=\"\"><option value=\"\">Choose</option><option value=\"44\">33</op"
+        },
+        {
+          "tag": "select",
+          "text": "Choose",
+          "width": 74,
+          "height": 23,
+          "html": "<select data-field=\"chosen\" data-options=\"a\" data-option-label=\"aa\" data-option-value=\"bb\" disabled=\"\"><option value=\"\">Choose</option></select>"
+        }
+      ]
+    },
+    {
+      "name": "m4-stack-320-focus",
+      "selector": "<button type=\"button\" data-action=\"save\">Save changes</button>",
+      "box": {
+        "x": 61,
+        "y": 111,
+        "width": 113,
+        "height": 35
+      },
+      "viewport": {
+        "width": 320,
+        "height": 256
+      },
+      "outlineStyle": "solid",
+      "outlineWidth": "3px",
+      "obscuredCorners": [
+        false,
+        false
+      ]
+    },
+    {
+      "name": "m4-stack-320-spacing",
+      "viewport": {
+        "width": 320,
+        "height": 256,
+        "scrollWidth": 320,
+        "clientWidth": 320
+      },
+      "parts": [
+        {
+          "selector": "body",
+          "x": 0,
+          "right": 320,
+          "width": 320,
+          "clientWidth": 320,
+          "scrollWidth": 320
+        },
+        {
+          "selector": "[data-hosts]",
+          "x": 0,
+          "right": 320,
+          "width": 320,
+          "clientWidth": 320,
+          "scrollWidth": 320
+        },
+        {
+          "selector": ".employee-page",
+          "x": 19,
+          "right": 301,
+          "width": 282,
+          "clientWidth": 278,
+          "scrollWidth": 278
+        },
+        {
+          "selector": ".list-panel",
+          "x": 45,
+          "right": 296,
+          "width": 250,
+          "clientWidth": 250,
+          "scrollWidth": 510
+        },
+        {
+          "selector": "table",
+          "x": 45,
+          "right": 555,
+          "width": 510,
+          "clientWidth": 510,
+          "scrollWidth": 510
+        }
+      ],
+      "small": [
+        {
+          "tag": "select",
+          "text": "Choose a size25",
+          "width": 146,
+          "height": 23,
+          "html": "<select data-role=\"page-size\"><option value=\"\">Choose a size</option><option value=\"2\">2</option><option value=\"5\">5</option></select>"
+        },
+        {
+          "tag": "select",
+          "text": "Choose\n                  11",
+          "width": 86,
+          "height": 23,
+          "html": "<select data-field=\"chosen\" data-options=\"a\" data-option-label=\"aa\" data-option-value=\"bb\">\n                    <option value=\"\">Choose</option>\n               "
+        },
+        {
+          "tag": "select",
+          "text": "Choose\n                  3355",
+          "width": 86,
+          "height": 23,
+          "html": "<select data-field=\"chosen\" data-options=\"a\" data-option-label=\"aa\" data-option-value=\"bb\">\n                    <option value=\"\">Choose</option>\n               "
+        },
+        {
+          "tag": "select",
+          "text": "Choose",
+          "width": 86,
+          "height": 23,
+          "html": "<select data-field=\"chosen\" data-options=\"a\" data-option-label=\"aa\" data-option-value=\"bb\">\n                    <option value=\"\">Choose</option>\n               "
+        },
+        {
+          "tag": "select",
+          "text": "Choose11",
+          "width": 86,
+          "height": 23,
+          "html": "<select data-field=\"chosen\" data-options=\"a\" data-option-label=\"aa\" data-option-value=\"bb\" disabled=\"\"><option value=\"\">Choose</option><option value=\"22\">11</op"
+        },
+        {
+          "tag": "select",
+          "text": "Choose3355",
+          "width": 86,
+          "height": 23,
+          "html": "<select data-field=\"chosen\" data-options=\"a\" data-option-label=\"aa\" data-option-value=\"bb\" disabled=\"\"><option value=\"\">Choose</option><option value=\"44\">33</op"
+        },
+        {
+          "tag": "select",
+          "text": "Choose",
+          "width": 86,
+          "height": 23,
+          "html": "<select data-field=\"chosen\" data-options=\"a\" data-option-label=\"aa\" data-option-value=\"bb\" disabled=\"\"><option value=\"\">Choose</option></select>"
+        }
+      ]
+    },
+    {
+      "name": "m7-side-640",
+      "viewport": {
+        "width": 640,
+        "height": 512,
+        "scrollWidth": 640,
+        "clientWidth": 640
+      },
+      "parts": [
+        {
+          "selector": "body",
+          "x": 0,
+          "right": 640,
+          "width": 640,
+          "clientWidth": 640,
+          "scrollWidth": 640
+        },
+        {
+          "selector": "[data-screens]",
+          "x": 24,
+          "right": 616,
+          "width": 592,
+          "clientWidth": 592,
+          "scrollWidth": 592
+        },
+        {
+          "selector": ".workspace-screen",
+          "x": 24,
+          "right": 616,
+          "width": 592,
+          "clientWidth": 590,
+          "scrollWidth": 590
+        },
+        {
+          "selector": ".screen-columns",
+          "x": 41,
+          "right": 599,
+          "width": 558,
+          "clientWidth": 558,
+          "scrollWidth": 558
+        },
+        {
+          "selector": ".main-panel",
+          "x": 41,
+          "right": 599,
+          "width": 558,
+          "clientWidth": 556,
+          "scrollWidth": 556
+        },
+        {
+          "selector": ".tabs-panel",
+          "x": 41,
+          "right": 599,
+          "width": 558,
+          "clientWidth": 556,
+          "scrollWidth": 556
+        },
+        {
+          "selector": "[role=\"tablist\"]",
+          "x": 58,
+          "right": 582,
+          "width": 524,
+          "clientWidth": 524,
+          "scrollWidth": 524
+        }
+      ],
+      "small": [
+        {
+          "tag": "a",
+          "text": "Stacked layout",
+          "width": 106,
+          "height": 21,
+          "html": "<a href=\"/m7/stack.html\">Stacked layout</a>"
+        }
+      ]
+    },
+    {
+      "name": "m7-side-320",
+      "viewport": {
+        "width": 320,
+        "height": 256,
+        "scrollWidth": 320,
+        "clientWidth": 320
+      },
+      "parts": [
+        {
+          "selector": "body",
+          "x": 0,
+          "right": 320,
+          "width": 320,
+          "clientWidth": 320,
+          "scrollWidth": 320
+        },
+        {
+          "selector": "[data-screens]",
+          "x": 24,
+          "right": 296,
+          "width": 272,
+          "clientWidth": 272,
+          "scrollWidth": 272
+        },
+        {
+          "selector": ".workspace-screen",
+          "x": 24,
+          "right": 296,
+          "width": 272,
+          "clientWidth": 270,
+          "scrollWidth": 270
+        },
+        {
+          "selector": ".screen-columns",
+          "x": 41,
+          "right": 279,
+          "width": 238,
+          "clientWidth": 238,
+          "scrollWidth": 238
+        },
+        {
+          "selector": ".main-panel",
+          "x": 41,
+          "right": 279,
+          "width": 238,
+          "clientWidth": 236,
+          "scrollWidth": 236
+        },
+        {
+          "selector": ".tabs-panel",
+          "x": 41,
+          "right": 279,
+          "width": 238,
+          "clientWidth": 236,
+          "scrollWidth": 236
+        },
+        {
+          "selector": "[role=\"tablist\"]",
+          "x": 58,
+          "right": 262,
+          "width": 204,
+          "clientWidth": 204,
+          "scrollWidth": 204
+        }
+      ],
+      "small": [
+        {
+          "tag": "a",
+          "text": "Stacked layout",
+          "width": 106,
+          "height": 21,
+          "html": "<a href=\"/m7/stack.html\">Stacked layout</a>"
+        }
+      ]
+    },
+    {
+      "name": "m7-side-320-focus",
+      "selector": "<button type=\"button\" data-open-picker=\"\">Open picker</button>",
+      "box": {
+        "x": 41,
+        "y": 114,
+        "width": 105,
+        "height": 27
+      },
+      "viewport": {
+        "width": 320,
+        "height": 256
+      },
+      "outlineStyle": "solid",
+      "outlineWidth": "3px",
+      "obscuredCorners": [
+        false,
+        false
+      ]
+    },
+    {
+      "name": "m7-side-320-spacing",
+      "viewport": {
+        "width": 320,
+        "height": 256,
+        "scrollWidth": 320,
+        "clientWidth": 320
+      },
+      "parts": [
+        {
+          "selector": "body",
+          "x": 0,
+          "right": 320,
+          "width": 320,
+          "clientWidth": 320,
+          "scrollWidth": 320
+        },
+        {
+          "selector": "[data-screens]",
+          "x": 24,
+          "right": 296,
+          "width": 272,
+          "clientWidth": 272,
+          "scrollWidth": 272
+        },
+        {
+          "selector": ".workspace-screen",
+          "x": 24,
+          "right": 296,
+          "width": 272,
+          "clientWidth": 270,
+          "scrollWidth": 270
+        },
+        {
+          "selector": ".screen-columns",
+          "x": 41,
+          "right": 279,
+          "width": 238,
+          "clientWidth": 238,
+          "scrollWidth": 238
+        },
+        {
+          "selector": ".main-panel",
+          "x": 41,
+          "right": 279,
+          "width": 238,
+          "clientWidth": 236,
+          "scrollWidth": 236
+        },
+        {
+          "selector": ".tabs-panel",
+          "x": 41,
+          "right": 279,
+          "width": 238,
+          "clientWidth": 236,
+          "scrollWidth": 236
+        },
+        {
+          "selector": "[role=\"tablist\"]",
+          "x": 58,
+          "right": 262,
+          "width": 204,
+          "clientWidth": 204,
+          "scrollWidth": 204
+        }
+      ],
+      "small": []
+    },
+    {
+      "name": "m7-side-320-popup-spacing",
+      "viewport": {
+        "width": 320,
+        "height": 256,
+        "scrollWidth": 320,
+        "clientWidth": 320
+      },
+      "parts": [
+        {
+          "selector": "body",
+          "x": 0,
+          "right": 320,
+          "width": 320,
+          "clientWidth": 320,
+          "scrollWidth": 320
+        },
+        {
+          "selector": "[data-screens]",
+          "x": 24,
+          "right": 296,
+          "width": 272,
+          "clientWidth": 272,
+          "scrollWidth": 272
+        },
+        {
+          "selector": ".workspace-screen",
+          "x": 24,
+          "right": 296,
+          "width": 272,
+          "clientWidth": 270,
+          "scrollWidth": 270
+        },
+        {
+          "selector": ".screen-columns",
+          "x": 41,
+          "right": 279,
+          "width": 238,
+          "clientWidth": 238,
+          "scrollWidth": 238
+        },
+        {
+          "selector": ".main-panel",
+          "x": 41,
+          "right": 279,
+          "width": 238,
+          "clientWidth": 236,
+          "scrollWidth": 236
+        },
+        {
+          "selector": ".tabs-panel",
+          "x": 41,
+          "right": 279,
+          "width": 238,
+          "clientWidth": 236,
+          "scrollWidth": 236
+        },
+        {
+          "selector": "[role=\"tablist\"]",
+          "x": 58,
+          "right": 262,
+          "width": 204,
+          "clientWidth": 204,
+          "scrollWidth": 204
+        },
+        {
+          "selector": "dialog[open]",
+          "x": 16,
+          "right": 304,
+          "width": 288,
+          "clientWidth": 286,
+          "scrollWidth": 286
+        }
+      ],
+      "small": []
+    },
+    {
+      "name": "m7-side-320-popup-focus",
+      "selector": "<button type=\"button\" data-person=\"Ada\">Choose Ada</button>",
+      "box": {
+        "x": 37,
+        "y": 137,
+        "width": 126,
+        "height": 30
+      },
+      "viewport": {
+        "width": 320,
+        "height": 256
+      },
+      "outlineStyle": "solid",
+      "outlineWidth": "3px",
+      "obscuredCorners": [
+        false,
+        false
+      ]
+    },
+    {
+      "name": "m7-stack-640",
+      "viewport": {
+        "width": 640,
+        "height": 512,
+        "scrollWidth": 640,
+        "clientWidth": 640
+      },
+      "parts": [
+        {
+          "selector": "body",
+          "x": 0,
+          "right": 640,
+          "width": 640,
+          "clientWidth": 640,
+          "scrollWidth": 640
+        },
+        {
+          "selector": "[data-screens]",
+          "x": 24,
+          "right": 616,
+          "width": 592,
+          "clientWidth": 592,
+          "scrollWidth": 592
+        },
+        {
+          "selector": ".workspace-screen",
+          "x": 24,
+          "right": 616,
+          "width": 592,
+          "clientWidth": 590,
+          "scrollWidth": 590
+        },
+        {
+          "selector": ".screen-columns",
+          "x": 41,
+          "right": 599,
+          "width": 558,
+          "clientWidth": 558,
+          "scrollWidth": 558
+        },
+        {
+          "selector": ".main-panel",
+          "x": 60,
+          "right": 599,
+          "width": 539,
+          "clientWidth": 537,
+          "scrollWidth": 537
+        },
+        {
+          "selector": ".tabs-panel",
+          "x": 41,
+          "right": 599,
+          "width": 558,
+          "clientWidth": 556,
+          "scrollWidth": 556
+        },
+        {
+          "selector": "[role=\"tablist\"]",
+          "x": 58,
+          "right": 582,
+          "width": 524,
+          "clientWidth": 524,
+          "scrollWidth": 524
+        }
+      ],
+      "small": [
+        {
+          "tag": "a",
+          "text": "Side-by-side layout",
+          "width": 141,
+          "height": 21,
+          "html": "<a href=\"/m7/side.html\">Side-by-side layout</a>"
+        }
+      ]
+    },
+    {
+      "name": "m7-stack-320",
+      "viewport": {
+        "width": 320,
+        "height": 256,
+        "scrollWidth": 320,
+        "clientWidth": 320
+      },
+      "parts": [
+        {
+          "selector": "body",
+          "x": 0,
+          "right": 320,
+          "width": 320,
+          "clientWidth": 320,
+          "scrollWidth": 320
+        },
+        {
+          "selector": "[data-screens]",
+          "x": 24,
+          "right": 296,
+          "width": 272,
+          "clientWidth": 272,
+          "scrollWidth": 272
+        },
+        {
+          "selector": ".workspace-screen",
+          "x": 24,
+          "right": 296,
+          "width": 272,
+          "clientWidth": 270,
+          "scrollWidth": 270
+        },
+        {
+          "selector": ".screen-columns",
+          "x": 41,
+          "right": 279,
+          "width": 238,
+          "clientWidth": 238,
+          "scrollWidth": 238
+        },
+        {
+          "selector": ".main-panel",
+          "x": 51,
+          "right": 279,
+          "width": 228,
+          "clientWidth": 226,
+          "scrollWidth": 226
+        },
+        {
+          "selector": ".tabs-panel",
+          "x": 41,
+          "right": 279,
+          "width": 238,
+          "clientWidth": 236,
+          "scrollWidth": 236
+        },
+        {
+          "selector": "[role=\"tablist\"]",
+          "x": 58,
+          "right": 262,
+          "width": 204,
+          "clientWidth": 204,
+          "scrollWidth": 204
+        }
+      ],
+      "small": [
+        {
+          "tag": "a",
+          "text": "Side-by-side layout",
+          "width": 141,
+          "height": 21,
+          "html": "<a href=\"/m7/side.html\">Side-by-side layout</a>"
+        }
+      ]
+    },
+    {
+      "name": "m7-stack-320-focus",
+      "selector": "<button type=\"button\" data-open-picker=\"\">Open picker</button>",
+      "box": {
+        "x": 41,
+        "y": 114,
+        "width": 105,
+        "height": 27
+      },
+      "viewport": {
+        "width": 320,
+        "height": 256
+      },
+      "outlineStyle": "solid",
+      "outlineWidth": "3px",
+      "obscuredCorners": [
+        false,
+        false
+      ]
+    },
+    {
+      "name": "m7-stack-320-spacing",
+      "viewport": {
+        "width": 320,
+        "height": 256,
+        "scrollWidth": 320,
+        "clientWidth": 320
+      },
+      "parts": [
+        {
+          "selector": "body",
+          "x": 0,
+          "right": 320,
+          "width": 320,
+          "clientWidth": 320,
+          "scrollWidth": 320
+        },
+        {
+          "selector": "[data-screens]",
+          "x": 24,
+          "right": 296,
+          "width": 272,
+          "clientWidth": 272,
+          "scrollWidth": 272
+        },
+        {
+          "selector": ".workspace-screen",
+          "x": 24,
+          "right": 296,
+          "width": 272,
+          "clientWidth": 270,
+          "scrollWidth": 270
+        },
+        {
+          "selector": ".screen-columns",
+          "x": 41,
+          "right": 279,
+          "width": 238,
+          "clientWidth": 238,
+          "scrollWidth": 238
+        },
+        {
+          "selector": ".main-panel",
+          "x": 51,
+          "right": 279,
+          "width": 228,
+          "clientWidth": 226,
+          "scrollWidth": 226
+        },
+        {
+          "selector": ".tabs-panel",
+          "x": 41,
+          "right": 279,
+          "width": 238,
+          "clientWidth": 236,
+          "scrollWidth": 236
+        },
+        {
+          "selector": "[role=\"tablist\"]",
+          "x": 58,
+          "right": 262,
+          "width": 204,
+          "clientWidth": 204,
+          "scrollWidth": 204
+        }
+      ],
+      "small": []
+    },
+    {
+      "name": "m7-stack-320-popup-spacing",
+      "viewport": {
+        "width": 320,
+        "height": 256,
+        "scrollWidth": 320,
+        "clientWidth": 320
+      },
+      "parts": [
+        {
+          "selector": "body",
+          "x": 0,
+          "right": 320,
+          "width": 320,
+          "clientWidth": 320,
+          "scrollWidth": 320
+        },
+        {
+          "selector": "[data-screens]",
+          "x": 24,
+          "right": 296,
+          "width": 272,
+          "clientWidth": 272,
+          "scrollWidth": 272
+        },
+        {
+          "selector": ".workspace-screen",
+          "x": 24,
+          "right": 296,
+          "width": 272,
+          "clientWidth": 270,
+          "scrollWidth": 270
+        },
+        {
+          "selector": ".screen-columns",
+          "x": 41,
+          "right": 279,
+          "width": 238,
+          "clientWidth": 238,
+          "scrollWidth": 238
+        },
+        {
+          "selector": ".main-panel",
+          "x": 51,
+          "right": 279,
+          "width": 228,
+          "clientWidth": 226,
+          "scrollWidth": 226
+        },
+        {
+          "selector": ".tabs-panel",
+          "x": 41,
+          "right": 279,
+          "width": 238,
+          "clientWidth": 236,
+          "scrollWidth": 236
+        },
+        {
+          "selector": "[role=\"tablist\"]",
+          "x": 58,
+          "right": 262,
+          "width": 204,
+          "clientWidth": 204,
+          "scrollWidth": 204
+        },
+        {
+          "selector": "dialog[open]",
+          "x": 16,
+          "right": 304,
+          "width": 288,
+          "clientWidth": 286,
+          "scrollWidth": 286
+        }
+      ],
+      "small": []
+    },
+    {
+      "name": "m7-stack-320-popup-focus",
+      "selector": "<button type=\"button\" data-person=\"Ada\">Choose Ada</button>",
+      "box": {
+        "x": 37,
+        "y": 137,
+        "width": 126,
+        "height": 30
+      },
+      "viewport": {
+        "width": 320,
+        "height": 256
+      },
+      "outlineStyle": "solid",
+      "outlineWidth": "3px",
+      "obscuredCorners": [
+        false,
+        false
+      ]
+    }
+  ]
+}

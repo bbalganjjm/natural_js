@@ -1,0 +1,51 @@
+
+> @bbalganjjm/natural_js@2.0.0-beta.0 test:browser
+> playwright test -c tests/playwright.config.ts --project=firefox --reporter=dot
+
+[WebServer] (node:17644) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 103 tests using 4 workers
+(node:5668) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1736) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:13432) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:19380) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 오전 5:01:38 [vite] (client) [Unhandled error] Error: subscriber failed
+[WebServer]  > notify ../../src/data/index.ts:139:21
+[WebServer]     137 |        if (disposed) break;
+[WebServer]     138 |        if (!listeners.has(listener)) continue;
+[WebServer]     139 |        try { listener(event); }
+[WebServer]         |                       ^
+[WebServer]     140 |        catch (cause) {
+[WebServer]     141 |          if (!failed) {
+[WebServer]  > set ../../src/data/index.ts:219:13
+[WebServer]  > reconcile ../../src/ui/form.ts:404:16
+[WebServer]  > onInput ../../src/ui/form.ts:444:16
+[WebServer]  > async*evaluate ../../debugger eval code:313:16
+[WebServer]  > ../../debugger eval code:1:44
+[WebServer]  > ../../debugger eval code:1:62
+[WebServer]
+[WebServer] 오전 5:01:38 [vite] (client) [Unhandled error] FrameworkError: Rows require acyclic JSON-compatible values.
+[WebServer]  > FrameworkError ../../src/internal/framework-error.ts:20:4
+[WebServer]     18 |        throw new TypeError("FrameworkError requires code, api, and message");
+[WebServer]     19 |      }
+[WebServer]     20 |      super(message, { cause });
+[WebServer]        |      ^
+[WebServer]     21 |      this.name = "FrameworkError";
+[WebServer]     22 |      this.code = code;
+[WebServer]  > rowError ../../src/data/index.ts:54:9
+[WebServer]  > cloneFrozen ../../src/data/index.ts:66:10
+[WebServer]  > set ../../src/data/index.ts:210:31
+[WebServer]  > reconcile ../../src/ui/form.ts:404:16
+[WebServer]  > onInput ../../src/ui/form.ts:444:16
+[WebServer]  > async*evaluate ../../debugger eval code:313:16
+[WebServer]  > ../../debugger eval code:1:44
+[WebServer]  > ../../debugger eval code:1:62
+[WebServer]
+················································································
+·······················
+  103 passed (33.4s)

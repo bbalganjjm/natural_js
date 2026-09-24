@@ -1,5 +1,11 @@
 ## 2026-09-25
 
+* **Correction** Narrow-viewport/text-spacing checks exposed document overflow in M4 authored layouts and an initially obscured M7 Popup focus. M4 CSS now keeps the wide table inside its list panel and wraps narrow controls; M7 authored CSS constrains dialog height and wraps Tabs, while Popup scrolls current focus into view and allows Tab-wrap scrolling. The prior `c79b9eae` beta tarball is superseded pending a clean rebuild and artifact recheck.
+
+* **Verification** M9 archived Chromium, Firefox, and WebKit full-suite logs (103/103 each) and SHA-gated JS/TS plus five-browser installed-artifact logs. The fresh delayed CVC task replay passed its first full acceptance with no code retry, 17 metered paths, 85,572 UTF-8 output bytes, and 6m53s elapsed; raw events are indexed in the beta report.
+
+* **Creation** The M9 unpublished beta artifact report records the clean source commit and tarball SHA-256, five installed-browser results, 309/309 isolated suite results, package/license inventory, performance fixtures, accessibility limits, and open release gates. The fresh metered agent task replay passed its first acceptance.
+
 * **Verification** M9 isolated full Playwright suites passed 103/103 each in Chromium, Firefox, and WebKit, including axe-tagged checks on authored M4/M7 layouts and keyboard/focus cases. Reference-host Grid/List binding budgets passed with zero duplicate IDs; raw JSON is indexed in M9 evidence. Changed OKF has zero errors and six trust-stamp warnings pending accepted verification.
 * **Correction** A real-keyboard test found that Chromium and WebKit could move Tab focus from the last native Popup control to the document body. The Popup binder now wraps Tab and Shift+Tab at dialog boundaries and removes its listener on cleanup; three-engine focused regressions pass.
 * **Update** An exact-tarball browser consumer now installs the checked SHA into a temporary Vite app and exercises independent CVC pages, nested Grid choices, Form edits, unique error IDs, and cleanup in Chromium, Firefox, WebKit, Chrome, or Edge.
