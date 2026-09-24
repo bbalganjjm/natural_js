@@ -3,8 +3,10 @@ import type { RowId, RowSnapshot, Rows, RowsEvent, Snapshot } from "../data/inde
 import { FrameworkError } from "../internal/framework-error.js";
 import { parsePath, readPath, writePath } from "./field-path.js";
 import { createRuleRunner } from "./rules.js";
+import { rowOptions } from "./row-options.js";
+import { claimSelect } from "./select-owner.js";
 import type { RuleCall } from "./rules.js";
-import type { FormatRule, GridHandle, RuleContext, RuleSet, ValidateRule, ValidationIssue, ValidationResult } from "./index.js";
+import type { FormatRule, GridHandle, PageRequest, PageState, ParseInput, RuleContext, RuleSet, SortIndicator, ValidateRule, ValidationIssue, ValidationResult } from "./index.js";
 
 interface TextField {
   index: number;
@@ -12,6 +14,8 @@ interface TextField {
   path: readonly string[];
   format: readonly RuleCall<FormatRule>[];
   validate: readonly RuleCall<ValidateRule>[];
+  editable: boolean;
+  checkbox: boolean;
 }
 
 interface SelectField {
@@ -44,6 +48,7 @@ interface BoundSelect {
   optionsBound: boolean;
   previous?: unknown;
   selectedBound: boolean;
+  release: () => void;
 }
 
 interface RenderedRow<T> {
@@ -56,41 +61,30 @@ interface RenderedRow<T> {
   buttons: HTMLButtonElement[];
 }
 
-interface SelectDraft {
-  value: unknown;
+interface FieldDraft {
+  entered: unknown;
   baseline: unknown;
   path: readonly string[];
 }
 
+interface Candidates {
+  values: Readonly<Record<string, unknown>>;
+  parsed: Map<string, unknown>;
+  parseErrors: Map<string, string>;
+}
+
 let nextErrorId = 0;
+const boundRoots = new WeakSet<HTMLTableElement>();
 
 function gridError(code: string, message: string, detail?: Record<string, unknown>): FrameworkError {
   return new FrameworkError({ api: "bindGrid", code, message, detail });
 }
 
-function scalar(value: unknown): value is string | number | boolean | null {
-  return value === null || typeof value === "string" || typeof value === "boolean" ||
-    (typeof value === "number" && Number.isFinite(value));
-}
-
-function optionValues(value: unknown, descriptor: SelectField, rowId: RowId): readonly { label: string; raw: string | number | boolean | null }[] {
+function optionValues(value: unknown, descriptor: SelectField, rowId: RowId) {
   if (!descriptor.options) return [];
-  const source = readPath(value, descriptor.options);
-  if (source == null) return [];
-  if (!Array.isArray(source)) {
-    throw gridError("GRID_OPTIONS", "A row-local Select needs an array of options.", {
-      rowId,
-      field: descriptor.options.join(".")
-    });
-  }
-  const result: { label: string; raw: string | number | boolean | null }[] = [];
-  for (const item of source) {
-    const label = readPath(item, descriptor.label!);
-    const raw = readPath(item, descriptor.value!);
-    if (!scalar(label) || label === null || label === "" || !scalar(raw)) continue;
-    result.push({ label: String(label), raw });
-  }
-  return result;
+  return rowOptions(value, descriptor.options, descriptor.label!, descriptor.value!, field => {
+    throw gridError("GRID_OPTIONS", "A row-local Select needs an array of options.", { rowId, field });
+  });
 }
 
 function display(element: HTMLElement, value: unknown): void {
@@ -106,11 +100,13 @@ function display(element: HTMLElement, value: unknown): void {
 export function bindGrid<T extends object>(root: HTMLTableElement, options: {
   rows: Rows<T>;
   rules?: RuleSet;
+  parse?: Record<string, ParseInput>;
   onSelect?: (selection: { id: RowId | null; row: RowSnapshot<T> | null; event: Event | null }) => void;
 }): GridHandle<T> {
   if (!root || root.tagName !== "TABLE") {
     throw gridError("GRID_ROOT", "The Grid root must be a table element.");
   }
+  if (boundRoots.has(root)) throw gridError("GRID_IN_USE", "This table is already bound as a Grid.");
   const templates = [...root.tBodies].flatMap(body => [...body.rows].filter(row => row.hasAttribute("data-row-template")));
   if (templates.length !== 1) {
     throw gridError("GRID_TEMPLATE", "The Grid needs one tbody row marked data-row-template.");
@@ -138,12 +134,18 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       if (element.tagName !== "BUTTON") {
         throw gridError("GRID_SELECT", "A row selection control must be a button.");
       }
+      if ((element as HTMLButtonElement).type !== "button") {
+        throw gridError("GRID_SELECT", "A row selection button needs type=button to avoid form submission.");
+      }
       buttonIndexes.push(index);
     }
     const fieldName = element.getAttribute("data-field");
     const optionsName = element.getAttribute("data-options");
     if (element.tagName === "SELECT" && (fieldName !== null || optionsName !== null)) {
       const select = element as HTMLSelectElement;
+      if (select.multiple) {
+        throw gridError("GRID_CONTROL", "Use Form for a multiple Select; Grid binds one selected value per row.", { field: fieldName ?? "" });
+      }
       const labelName = select.getAttribute("data-option-label");
       const valueName = select.getAttribute("data-option-value");
       if (optionsName !== null && (labelName === null || valueName === null)) {
@@ -175,29 +177,59 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
             !["text", "search", "tel", "url", "email", "password"].includes(type)) {
           throw gridError("GRID_FORMAT", "Only text-like inputs can display formatted text.", { field: fieldName });
         }
+        if (!["text", "search", "tel", "url", "email", "password", "checkbox", "number"].includes(type)) {
+          throw gridError("GRID_CONTROL", "Grid edits text, checkbox, and parsed number inputs; use Form for other controls.", { field: fieldName });
+        }
+        if (type === "number" && typeof options.parse?.[fieldName] !== "function") {
+          throw gridError("GRID_PARSE_FIELD", "A number input needs a parser to preserve its raw value type.", { field: fieldName });
+        }
       }
       textFields.push({ index, name: fieldName, path: parsePath(fieldName),
-        format: runner.formats(element, fieldName), validate: runner.validators(element, fieldName) });
+        format: runner.formats(element, fieldName), validate: runner.validators(element, fieldName),
+        editable: element instanceof HTMLTextAreaElement ||
+          element instanceof HTMLInputElement && !["hidden", "button", "submit", "reset", "image"].includes(element.type),
+        checkbox: element instanceof HTMLInputElement && element.type === "checkbox" });
     }
   }
 
   const knownFields = new Set([...textFields.map(field => field.name),
     ...selectFields.map(field => field.name).filter((name): name is string => name !== undefined)]);
+  for (const [field, parser] of Object.entries(options.parse ?? {})) {
+    const editable = textFields.filter(descriptor => descriptor.name === field && descriptor.editable);
+    if (editable.length !== 1 || editable[0].checkbox || typeof parser !== "function") {
+      throw gridError("GRID_PARSE_FIELD", "A Grid parser needs one editable non-checkbox input.", { field });
+    }
+  }
   for (const field of errorFields.keys()) {
     if (!knownFields.has(field)) {
       throw gridError("GRID_ERROR_REGION", "An error region needs a matching data-field.", { field });
     }
   }
+  let rootFocusTabIndex = false;
+  const templateReleases: (() => void)[] = [];
+  try {
+    for (const field of selectFields) {
+      templateReleases.push(claimSelect(authored[field.index] as HTMLSelectElement, "bindGrid"));
+    }
+  } catch (cause) {
+    for (const release of templateReleases) release();
+    throw cause;
+  }
   const anchor = root.ownerDocument.createComment("grid rows");
   template.replaceWith(anchor);
   const records = new Map<RowId, RenderedRow<T>>();
-  const drafts = new Map<RowId, Map<string, SelectDraft>>();
+  const drafts = new Map<RowId, Map<string, FieldDraft>>();
   let reconciling = false;
   const rowIds = new WeakMap<HTMLTableRowElement, RowId>();
   const selects = new WeakMap<HTMLSelectElement, { id: RowId; binding: BoundSelect }>();
+  const edits = new WeakMap<HTMLElement, { id: RowId; binding: BoundText }>();
   let selected: RowId | null = null;
   let sort: ((a: Snapshot<T>, b: Snapshot<T>) => number) | null = null;
   let filter: ((row: Snapshot<T>) => boolean) | null = null;
+  let pageRequest: PageRequest | null = null;
+  let pageState: PageState | null = null;
+  let sortIndicator: SortIndicator | null = null;
+  const headerOriginals = new Map<HTMLTableCellElement, string | null>();
   let visibleIds: RowId[] = [];
   let disposed = false;
 
@@ -215,6 +247,9 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       invalid: nodes[descriptor.index].getAttribute("aria-invalid"),
       bound: false
     }));
+    for (const binding of texts) {
+      if (binding.descriptor.editable) edits.set(binding.element, { id, binding });
+    }
     const rowSelects = selectFields.map(descriptor => {
       const element = nodes[descriptor.index] as HTMLSelectElement;
       const binding: BoundSelect = {
@@ -225,7 +260,8 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
         authoredOptions: [...element.options],
         rawByOption: new Map(),
         optionsBound: false,
-        selectedBound: false
+        selectedBound: false,
+        release: claimSelect(element, "bindGrid")
       };
       selects.set(element, { id, binding });
       return binding;
@@ -279,7 +315,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     }
     if (descriptor.field) {
       const draft = descriptor.name ? drafts.get(id)?.get(descriptor.name) : undefined;
-      const current = draft ? draft.value : readPath(value, descriptor.field);
+      const current = draft ? draft.entered : readPath(value, descriptor.field);
       if (!binding.selectedBound || !Object.is(binding.previous, current)) {
         element.selectedIndex = [...element.options].findIndex(option =>
           Object.is(binding.rawByOption.get(option), current));
@@ -292,10 +328,11 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
   function renderRecord(record: RenderedRow<T>, snapshot: RowSnapshot<T>): void {
     if (record.snapshot === snapshot) return;
     for (const binding of record.texts) {
-      const value = readPath(snapshot.value, binding.descriptor.path);
+      const draft = drafts.get(snapshot.id)?.get(binding.descriptor.name);
+      const value = draft ? draft.entered : readPath(snapshot.value, binding.descriptor.path);
       if (!binding.bound || !Object.is(binding.previous, value)) {
         const field = binding.descriptor;
-        if (field.format.length) {
+        if (field.format.length && !draft) {
           const context: RuleContext = {
             field: field.name, values: snapshot.value as Snapshot<Record<string, unknown>>,
             rowId: snapshot.id, element: binding.element
@@ -312,12 +349,33 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     record.snapshot = snapshot;
   }
 
-  function candidateValues(row: RowSnapshot<T>): Readonly<Record<string, unknown>> {
+  function candidateValues(row: RowSnapshot<T>): Candidates {
     let values = row.value as Readonly<Record<string, unknown>>;
-    for (const draft of drafts.get(row.id)?.values() ?? []) {
-      values = writePath(values, draft.path, draft.value);
+    const pending = drafts.get(row.id);
+    for (const draft of pending?.values() ?? []) values = writePath(values, draft.path, draft.entered);
+    const enteredValues = values;
+    const parsed = new Map<string, unknown>();
+    const parseErrors = new Map<string, string>();
+    for (const [field, draft] of pending ?? []) {
+      let value = draft.entered;
+      const parser = options.parse?.[field];
+      if (parser) {
+        const element = records.get(row.id)?.texts.find(binding => binding.descriptor.name === field)?.element;
+        try {
+          value = parser(String(draft.entered ?? ""), ruleContext(row, field, enteredValues, element));
+        } catch (cause) {
+          parseErrors.set(field, cause instanceof Error && cause.message ? cause.message : "Input could not be parsed.");
+        }
+        if (value === undefined && !parseErrors.has(field)) {
+          parseErrors.set(field, "Input could not be parsed.");
+        }
+      }
+      if (!parseErrors.has(field)) {
+        parsed.set(field, value);
+        values = writePath(values, draft.path, value);
+      }
     }
-    return values;
+    return { values, parsed, parseErrors };
   }
 
   function ruleContext(
@@ -330,18 +388,24 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     };
   }
 
-  function validateRow(row: RowSnapshot<T>): ValidationIssue[] {
+  function validateRow(row: RowSnapshot<T>, candidate = candidateValues(row)): ValidationIssue[] {
     const record = records.get(row.id);
-    const values = candidateValues(row);
+    const { values, parseErrors } = candidate;
     const issues: ValidationIssue[] = [];
     for (const [index, descriptor] of textFields.entries()) {
       const bound = record?.texts[index];
       const element = bound?.element.isConnected ? bound.element : undefined;
       const value = readPath(values, descriptor.path);
+      const parseError = parseErrors.get(descriptor.name);
+      if (parseError) {
+        issues.push({ rowId: row.id, field: descriptor.name, rule: "parse",
+          message: parseError, ...(element ? { element } : {}) });
+        continue;
+      }
       const context = ruleContext(row, descriptor.name, values, element);
       const source = (bound?.element ?? authored[descriptor.index]).cloneNode(true);
       if (source instanceof HTMLInputElement || source instanceof HTMLTextAreaElement) {
-        display(source, value);
+        display(source, drafts.get(row.id)?.get(descriptor.name)?.entered ?? value);
         const textLength = source instanceof HTMLTextAreaElement ||
           ["text", "search", "tel", "url", "email", "password"].includes(source.type);
         const tooShort = textLength && source.minLength >= 0 &&
@@ -409,6 +473,12 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     return issues;
   }
 
+  function resetRecord(record: RenderedRow<T>): void {
+    record.snapshot = undefined;
+    for (const binding of record.texts) binding.bound = false;
+    for (const binding of record.selects) binding.selectedBound = false;
+  }
+
   function clearIssues(record: RenderedRow<T>): void {
     if (!record.hasIssues) return;
     record.hasIssues = false;
@@ -427,7 +497,8 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     const pending = drafts.get(id);
     if (!pending?.size || reconciling) return validateRow(row);
 
-    const issues = validateRow(row);
+    const candidate = candidateValues(row);
+    const issues = validateRow(row, candidate);
     const failed = new Set(issues.map(issue => issue.field));
     const ready = [...pending.keys()].filter(field => !failed.has(field));
     if (!ready.length) return issues;
@@ -441,7 +512,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
         if (!current || current.status === "delete") {
           throw gridError("GRID_ROW", "The row ID is not available in this Grid.", { id });
         }
-        const next = writePath(current.value as Readonly<Record<string, unknown>>, draft.path, draft.value);
+        const next = writePath(current.value as Readonly<Record<string, unknown>>, draft.path, candidate.parsed.get(field));
         const key = draft.path[0] as keyof T;
         try {
           options.rows.set(id, key, next[draft.path[0]] as T[keyof T]);
@@ -449,7 +520,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
         } catch (cause) {
           try {
             const stored = options.rows.get(id);
-            if (stored && Object.is(readPath(stored.value, draft.path), draft.value)) {
+            if (stored && Object.is(readPath(stored.value, draft.path), candidate.parsed.get(field))) {
               pending.delete(field);
             }
           } catch { /* Keep the original Rows.set error. */ }
@@ -460,6 +531,9 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       reconciling = false;
       if (!pending.size) drafts.delete(id);
     }
+    const record = records.get(id);
+    if (record) resetRecord(record);
+    render();
     const updated = options.rows.get(id);
     if (!updated || updated.status === "delete") {
       throw gridError("GRID_ROW", "The row ID is not available in this Grid.", { id });
@@ -471,7 +545,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     if (event.type === "replace" || (event.type === "revert" && event.id === undefined)) {
       drafts.clear();
       for (const record of records.values()) {
-        record.snapshot = undefined;
+        resetRecord(record);
         clearIssues(record);
       }
     } else if (event.type === "remove" || event.type === "revert") {
@@ -479,7 +553,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
         drafts.delete(event.id);
         const record = records.get(event.id);
         if (record) {
-          record.snapshot = undefined;
+          resetRecord(record);
           clearIssues(record);
         }
       }
@@ -494,7 +568,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       }
       const record = records.get(event.id);
       if (record) {
-        if (pending) record.snapshot = undefined;
+        if (pending) resetRecord(record);
         if (!reconciling) clearIssues(record);
       }
     }
@@ -515,18 +589,27 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
 
   function render(): void {
     if (disposed) return;
+    const focused = root.ownerDocument.activeElement;
+    const focusedRow = focused instanceof Element ? focused.closest("tr") : null;
+    const focusedId = focusedRow && rowIds.get(focusedRow);
     const entries = options.rows.entries();
     const live = new Set(entries.map(row => row.id));
     for (const [id, record] of records) {
       if (!live.has(id)) {
         record.element.remove();
+        for (const select of record.selects) select.release();
         records.delete(id);
       }
     }
     if (selected !== null && !live.has(selected)) updateSelection(null, null);
     if (disposed) return;
-    const displayed = filter ? entries.filter(row => filter!(row.value)) : [...entries];
-    if (sort) displayed.sort((left, right) => sort!(left.value, right.value));
+    const filtered = filter ? entries.filter(row => filter!(row.value)) : [...entries];
+    if (sort) filtered.sort((left, right) => sort!(left.value, right.value));
+    const pages = pageRequest ? Math.ceil(filtered.length / pageRequest.size) : 0;
+    const page = pageRequest ? Math.min(pageRequest.page, Math.max(1, pages)) : 0;
+    if (pageRequest && page !== pageRequest.page) pageRequest = { page, size: pageRequest.size };
+    pageState = pageRequest ? Object.freeze({ page, size: pageRequest.size, total: filtered.length, pages }) : null;
+    const displayed = pageRequest ? filtered.slice((page - 1) * pageRequest.size, page * pageRequest.size) : filtered;
     const nextIds = displayed.map(row => row.id);
     for (const snapshot of displayed) {
       let record = records.get(snapshot.id);
@@ -538,11 +621,10 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     }
     if (nextIds.length !== visibleIds.length || nextIds.some((id, index) => id !== visibleIds[index])) {
       const nextSet = new Set(nextIds);
-      const focused = root.ownerDocument.activeElement;
-      const focusedRow = focused instanceof Element ? focused.closest("tr") : null;
-      const focusedId = focusedRow && rowIds.get(focusedRow);
       const restoreFocus = focused instanceof HTMLElement && focusedId !== undefined &&
         focusedId !== null && nextSet.has(focusedId);
+      const moveFocus = focused instanceof HTMLElement && focusedId !== undefined &&
+        focusedId !== null && !nextSet.has(focusedId);
       const selection = restoreFocus &&
         (focused instanceof HTMLInputElement || focused instanceof HTMLTextAreaElement) &&
         focused.selectionStart !== null && focused.selectionEnd !== null
@@ -558,6 +640,15 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
         if (selection && (focused instanceof HTMLInputElement || focused instanceof HTMLTextAreaElement)) {
           focused.setSelectionRange(...selection);
         }
+      } else if (moveFocus) {
+        const next = root.querySelector<HTMLElement>(
+          'tbody button[data-select-row]:not(:disabled), tbody input:not(:disabled), tbody textarea:not(:disabled), tbody select:not(:disabled)'
+        ) ?? root.querySelector<HTMLElement>('thead button:not(:disabled)') ?? root;
+        if (next === root && !root.hasAttribute("tabindex")) {
+          root.tabIndex = -1;
+          rootFocusTabIndex = true;
+        }
+        next.focus({ preventScroll: true });
       }
       visibleIds = nextIds;
     }
@@ -572,35 +663,65 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     if (id !== undefined) updateSelection(id, event);
   }
 
+  function draft(id: RowId, field: string, path: readonly string[], entered: unknown, commit: boolean): void {
+    const row = options.rows.get(id);
+    if (!row || row.status === "delete") return;
+    const pending = drafts.get(id) ?? new Map<string, FieldDraft>();
+    const baseline = pending.get(field)?.baseline ?? readPath(row.value, path);
+    pending.set(field, { entered, baseline, path });
+    drafts.set(id, pending);
+    if (commit) reconcile(id);
+    else validateRow(row);
+  }
+
+  function onInput(event: Event): void {
+    const target = event.target;
+    if (!(target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement) ||
+        target instanceof HTMLInputElement && target.type === "checkbox") return;
+    const entry = edits.get(target);
+    if (!entry) return;
+    draft(entry.id, entry.binding.descriptor.name, entry.binding.descriptor.path, target.value, false);
+  }
+
   function onChange(event: Event): void {
     const target = event.target;
-    if (!(target instanceof HTMLSelectElement)) return;
-    const entry = selects.get(target);
-    const path = entry?.binding.descriptor.field;
-    const field = entry?.binding.descriptor.name;
-    if (!entry || !path || !field) return;
-    const option = target.selectedOptions[0];
-    if (!option) return;
-    const row = options.rows.get(entry.id);
-    if (!row || row.status === "delete") return;
-    const value = entry.binding.rawByOption.has(option) ? entry.binding.rawByOption.get(option) : option.value;
-    const pending = drafts.get(entry.id) ?? new Map<string, SelectDraft>();
-    pending.set(field, { value, baseline: readPath(row.value, path), path });
-    drafts.set(entry.id, pending);
-    reconcile(entry.id);
+    if (target instanceof HTMLSelectElement) {
+      const entry = selects.get(target);
+      const path = entry?.binding.descriptor.field;
+      const field = entry?.binding.descriptor.name;
+      if (!entry || !path || !field) return;
+      const option = target.selectedOptions[0];
+      if (!option) return;
+      const value = entry.binding.rawByOption.has(option) ? entry.binding.rawByOption.get(option) : option.value;
+      draft(entry.id, field, path, value, true);
+      return;
+    }
+    if (!(target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement)) return;
+    const entry = edits.get(target);
+    if (!entry) return;
+    const entered = target instanceof HTMLInputElement && target.type === "checkbox"
+      ? target.checked : target.value;
+    draft(entry.id, entry.binding.descriptor.name, entry.binding.descriptor.path, entered, true);
   }
 
   root.addEventListener("click", onClick);
+  root.addEventListener("input", onInput);
   root.addEventListener("change", onChange);
   let unsubscribe = () => {};
   try {
     unsubscribe = options.rows.subscribe(onRows);
     render();
+    boundRoots.add(root);
   } catch (cause) {
     unsubscribe();
     root.removeEventListener("click", onClick);
+    root.removeEventListener("input", onInput);
     root.removeEventListener("change", onChange);
-    for (const record of records.values()) record.element.remove();
+    for (const record of records.values()) {
+      record.element.remove();
+      for (const select of record.selects) select.release();
+    }
+    for (const release of templateReleases) release();
     anchor.replaceWith(template);
     throw cause;
   }
@@ -618,15 +739,47 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       active();
       return selected;
     },
-    setSort(compare) {
+    setSort(compare, indicator) {
       active();
+      if (compare !== null && typeof compare !== "function") {
+        throw gridError("GRID_SORT", "A sort comparator must be a function or null.");
+      }
+      if (indicator && (compare === null || !(indicator.column instanceof HTMLTableCellElement) ||
+          indicator.column.tagName !== "TH" || !root.tHead?.contains(indicator.column) ||
+          !["ascending", "descending"].includes(indicator.direction))) {
+        throw gridError("GRID_SORT", "A sort indicator needs a table header and ascending or descending direction.");
+      }
+      if (sortIndicator) {
+        const previous = headerOriginals.get(sortIndicator.column) ?? null;
+        if (previous === null) sortIndicator.column.removeAttribute("aria-sort");
+        else sortIndicator.column.setAttribute("aria-sort", previous);
+      }
       sort = compare;
+      sortIndicator = indicator ?? null;
+      if (sortIndicator) {
+        const column = sortIndicator.column;
+        if (!headerOriginals.has(column)) headerOriginals.set(column, column.getAttribute("aria-sort"));
+        column.setAttribute("aria-sort", sortIndicator.direction);
+      }
       render();
     },
     setFilter(predicate) {
       active();
       filter = predicate;
       render();
+    },
+    setPage(request) {
+      active();
+      if (request && (!Number.isSafeInteger(request.page) || request.page < 1 ||
+          !Number.isSafeInteger(request.size) || request.size < 1)) {
+        throw gridError("GRID_PAGE", "Page and size must be positive integers.");
+      }
+      pageRequest = request ? { page: request.page, size: request.size } : null;
+      render();
+    },
+    page() {
+      active();
+      return pageState;
     },
     validate(id): ValidationResult {
       active();
@@ -643,11 +796,23 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       disposed = true;
       unsubscribe();
       root.removeEventListener("click", onClick);
+      root.removeEventListener("input", onInput);
       root.removeEventListener("change", onChange);
-      for (const record of records.values()) record.element.remove();
+      for (const record of records.values()) {
+        record.element.remove();
+        for (const select of record.selects) select.release();
+      }
+      for (const release of templateReleases) release();
       records.clear();
       drafts.clear();
       visibleIds = [];
+      for (const [column, original] of headerOriginals) {
+        if (original === null) column.removeAttribute("aria-sort");
+        else column.setAttribute("aria-sort", original);
+      }
+      headerOriginals.clear();
+      if (rootFocusTabIndex && root.getAttribute("tabindex") === "-1") root.removeAttribute("tabindex");
+      boundRoots.delete(root);
       anchor.replaceWith(template);
     }
   };

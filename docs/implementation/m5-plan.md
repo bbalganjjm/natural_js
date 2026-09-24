@@ -12,15 +12,15 @@ sources:
   - id: m4
     resource: m4-plan.md
     title: M4 pilot and exit evidence
-    git_blob: 06102729b33f24851ed9c743d26b1c50639b4103
+    git_blob: c5f7a8617a7622faaf3ddc7deaa9428ab810a216
   - id: form
     resource: ../../src/ui/form.ts
     title: Current Form pilot
-    git_blob: 9d086ea8c09e30a688e25d474483a91b199d3308
+    git_blob: e603f619679c24be778b04f45ea3c467b50bf2c2
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current Grid pilot
-    git_blob: cc5de08d7431e0e9d201b164f80caa6545718167
+    git_blob: dedeca30ef8f10a78172748d8cb9911a68b7da03
   - id: legacy-data
     resource: ../../v1/src/natural.data.js
     title: Preserved 1.x formatter and validator implementation
@@ -29,7 +29,7 @@ sources:
     resource: ../../v1/src/natural.ui.js
     title: Preserved 1.x Form, List, and Grid rule integration
     git_blob: 50229404558dabe92cdea2d02cd1c45a2481cf49
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T11:51:28Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T13:52:47Z }
 ---
 
 M5 completes the data, binding, and rule contract behind the M4 authored-HTML screen. The user approved M5 implementation on 2026-09-24 and requested an independent M4 recheck before changing the runtime.
@@ -60,7 +60,7 @@ Retain the 1.x formatter and validator behavior that Form, List, and Grid can re
 
 # Next action
 
-M5's approved scope and verification are complete. Review [the M6 plan](m6-plan.md) and its representative HTML/TypeScript contract with the user before implementing M6. Keep the retained rule catalog and drafts inside UI.
+M5's approved scope and verification are complete. The user subsequently approved [M6](m6-plan.md), which extended these Form/Grid components while keeping the retained rule catalog and drafts inside UI.
 
 # Decisions
 
@@ -86,4 +86,4 @@ M5's approved scope and verification are complete. Review [the M6 plan](m6-plan.
 
 - Independent source review prompted fixes for Form stale errors and visible/hidden length consistency, Grid cross-field Select drafts, checkbox state, unsupported input controls, and stale errors; the final code/browser gate passed.
 - The same-host M5 rerun stayed within every M6 reference budget; repeat the fixed fixture after major M6 Grid changes. Browser heap readings remain diagnostic without controlled collection.
-- Firefox Playwright fails before page load on this Windows host (`browserType.launch: spawn UNKNOWN`); a working host must run that gate before Firefox support is claimed.
+- At the M5 gate, the older Firefox Playwright cache failed before page load (`browserType.launch: spawn UNKNOWN`). A fresh Playwright Firefox build later passed the full M6 browser suite on this host; see [M6](m6-plan.md).

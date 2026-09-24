@@ -44,6 +44,42 @@ export interface ValidationResult {
   issues: readonly ValidationIssue[];
 }
 
+export interface PageRequest {
+  readonly page: number;
+  readonly size: number;
+}
+
+export interface PageInput extends PageRequest {
+  readonly total: number;
+}
+
+export interface PageState extends PageInput {
+  readonly pages: number;
+}
+
+export type SelectValue = string | number | boolean | null;
+
+export interface SelectChoice<V extends SelectValue> {
+  readonly label: string;
+  readonly value: V;
+  readonly disabled?: boolean;
+}
+
+export type SelectSelection<V extends SelectValue> = V | string | null;
+
+export interface SelectHandle<V extends SelectValue> {
+  setChoices(choices: readonly SelectChoice<V>[]): void;
+  setValue(value: SelectSelection<V> | readonly SelectSelection<V>[]): void;
+  value(): SelectSelection<V> | readonly SelectSelection<V>[];
+  dispose(): void;
+}
+
+export interface PaginationHandle {
+  set(state: PageInput): void;
+  state(): PageState;
+  dispose(): void;
+}
+
 export interface FormHandle<T extends object> {
   bind(id: RowId | null): void;
   read(): Record<string, unknown>;
@@ -51,14 +87,36 @@ export interface FormHandle<T extends object> {
   dispose(): void;
 }
 
-export interface GridHandle<T extends object> {
+export interface SortIndicator {
+  readonly column: HTMLTableCellElement;
+  readonly direction: "ascending" | "descending";
+}
+
+export interface ListHandle<T extends object> {
   select(id: RowId | null): void;
   selected(): RowId | null;
   setSort(compare: ((a: Snapshot<T>, b: Snapshot<T>) => number) | null): void;
   setFilter(predicate: ((row: Snapshot<T>) => boolean) | null): void;
+  setPage(request: PageRequest | null): void;
+  page(): PageState | null;
+  validate(id?: RowId): ValidationResult;
+  dispose(): void;
+}
+
+export interface GridHandle<T extends object> {
+  select(id: RowId | null): void;
+  selected(): RowId | null;
+  setSort(compare: ((a: Snapshot<T>, b: Snapshot<T>) => number) | null,
+    indicator?: SortIndicator): void;
+  setFilter(predicate: ((row: Snapshot<T>) => boolean) | null): void;
+  setPage(request: PageRequest | null): void;
+  page(): PageState | null;
   validate(id?: RowId): ValidationResult;
   dispose(): void;
 }
 
 export { bindForm } from "./form.js";
 export { bindGrid } from "./grid.js";
+export { bindList } from "./list.js";
+export { bindSelect } from "./select.js";
+export { bindPagination } from "./pagination.js";

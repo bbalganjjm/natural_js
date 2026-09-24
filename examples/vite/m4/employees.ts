@@ -2,8 +2,8 @@
 import { createCommunicator } from "@bbalganjjm/natural_js/comm";
 import { createRows } from "@bbalganjjm/natural_js/data";
 import type { PageContext } from "@bbalganjjm/natural_js/page";
-import { bindForm, bindGrid } from "@bbalganjjm/natural_js/ui";
-import type { RuleSet, ValidationIssue } from "@bbalganjjm/natural_js/ui";
+import { bindForm, bindGrid, bindList, bindPagination, bindSelect } from "@bbalganjjm/natural_js/ui";
+import type { ListHandle, PageRequest, RuleSet, ValidationIssue } from "@bbalganjjm/natural_js/ui";
 
 type Employee = {
   id: string;
@@ -37,6 +37,9 @@ export function createEmployees({ root, signal, own, input }: PageContext<{ clos
   const searchRoot = find<HTMLFormElement>(root, '[data-role="search"]');
   const detailRoot = find<HTMLFormElement>(root, '[data-role="detail"]');
   const table = find<HTMLTableElement>(root, '[data-role="grid"]');
+  const listRoot = find<HTMLUListElement>(root, '[data-role="list"]');
+  const pagerRoot = find<HTMLElement>(root, '[data-role="pager"]');
+  const pageSizeRoot = find<HTMLSelectElement>(root, '[data-role="page-size"]');
   const filterInput = find<HTMLInputElement>(root, '[data-role="filter"]');
   const status = find<HTMLOutputElement>(root, '[data-role="status"]');
   const error = find<HTMLOutputElement>(root, '[data-role="error"]');
@@ -57,16 +60,62 @@ export function createEmployees({ root, signal, own, input }: PageContext<{ clos
     }
   });
   own(() => detail.dispose());
+  let list: ListHandle<Employee>;
   const grid = bindGrid(table, {
     rows,
     onSelect({ id, row }) {
+      list?.select(id);
       detail.bind(id);
       selected.textContent = row ? "Selected: " + row.value.name : "No employee selected";
     }
   });
   own(() => grid.dispose());
+  list = bindList(listRoot, {
+    rows,
+    onSelect({ id }) { grid.select(id); }
+  });
+  own(() => list.dispose());
 
-  const lockTargets = [searchRoot, detailRoot, table, filterInput,
+  let pageRequest: PageRequest = { page: 1, size: 5 };
+  const pageSize = bindSelect(pageSizeRoot, {
+    choices: [{ label: "2", value: 2 }, { label: "5", value: 5 }],
+    value: 5,
+    onChange(value) {
+      if (typeof value === "number") applyPage({ page: 1, size: value });
+    }
+  });
+  own(() => pageSize.dispose());
+  const pagination = bindPagination(pagerRoot, {
+    state: { page: 1, size: 5, total: 0 },
+    onPage(request) { applyPage(request); }
+  });
+  own(() => pagination.dispose());
+
+  function applyPage(request: PageRequest): void {
+    grid.setPage(request);
+    list.setPage(request);
+    const state = grid.page()!;
+    pageRequest = { page: state.page, size: state.size };
+    pagination.set(state);
+  }
+
+  function showRow(id: number): void {
+    filterInput.value = "";
+    grid.setFilter(null);
+    list.setFilter(null);
+    const ordered = [...rows.entries()];
+    if (sortDirection) ordered.sort((a, b) =>
+      sortDirection * a.value.name.localeCompare(b.value.name));
+    const index = ordered.findIndex(row => row.id === id);
+    if (index >= 0) applyPage({ page: Math.floor(index / pageRequest.size) + 1, size: pageRequest.size });
+    grid.select(id);
+  }
+
+  const unsubscribePage = rows.subscribe(() => applyPage(pageRequest));
+  own(unsubscribePage);
+  applyPage(pageRequest);
+
+  const lockTargets = [searchRoot, detailRoot, table, listRoot, pagerRoot, pageSizeRoot, filterInput,
     ...root.querySelectorAll<HTMLElement>('[data-action="add"], [data-action="delete"], [data-action="revert"], [data-action="save"]')];
   const initialInert = lockTargets.map(element => element.inert);
   let focusBeforeLock: HTMLElement | null = null;
@@ -108,6 +157,7 @@ export function createEmployees({ root, signal, own, input }: PageContext<{ clos
         signal: AbortSignal.any([signal, current.signal])
       });
       if (signal.aborted || current.signal.aborted) return false;
+      pageRequest = { page: 1, size: pageRequest.size };
       rows.replace(values);
       grid.select(null);
       detail.bind(null);
@@ -124,9 +174,7 @@ export function createEmployees({ root, signal, own, input }: PageContext<{ clos
   function reportIssue(issue: ValidationIssue): void {
     let target = issue.element;
     if (issue.rowId !== null) {
-      filterInput.value = "";
-      grid.setFilter(null);
-      grid.select(issue.rowId);
+      showRow(issue.rowId);
       const updated = issue.rule === "select-option"
         ? grid.validate(issue.rowId).issues
         : detail.validate(issue.rowId).issues;
@@ -194,20 +242,23 @@ export function createEmployees({ root, signal, own, input }: PageContext<{ clos
   filterInput.addEventListener("input", () => {
     const query = filterInput.value.trim().toLowerCase();
     grid.setFilter(query ? row => row.name.toLowerCase().includes(query) : null);
+    list.setFilter(query ? row => row.name.toLowerCase().includes(query) : null);
+    applyPage({ page: 1, size: pageRequest.size });
   }, { signal });
   find<HTMLButtonElement>(root, '[data-action="sort-name"]').addEventListener("click", () => {
     sortDirection = sortDirection === 1 ? -1 : 1;
-    grid.setSort((left, right) => sortDirection * left.name.localeCompare(right.name));
-    sortHeader.setAttribute("aria-sort", sortDirection === 1 ? "ascending" : "descending");
+    const compare = (left: { readonly name: string }, right: { readonly name: string }) =>
+      sortDirection * left.name.localeCompare(right.name);
+    grid.setSort(compare, { column: sortHeader, direction: sortDirection === 1 ? "ascending" : "descending" });
+    list.setSort(compare);
+    applyPage({ page: 1, size: pageRequest.size });
   }, { signal });
   find<HTMLButtonElement>(root, '[data-action="add"]').addEventListener("click", () => {
     const id = rows.add({
       id: "NEW-" + nextNew++, name: "", email: "", salary: 0,
       profile: { team: "", department: "" }, a: [], chosen: null
     });
-    filterInput.value = "";
-    grid.setFilter(null);
-    grid.select(id);
+    showRow(id);
     find<HTMLInputElement>(detailRoot, '[data-field="name"]').focus();
     status.textContent = "New employee";
   }, { signal });

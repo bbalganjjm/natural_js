@@ -8,5 +8,5 @@
 * [Natural-JS 2.0 M3 runtime plan](m3-plan.md) - Proposed CVC lifecycle, communication, and minimum shared-row implementation with cancellation and cleanup gates.
 * [Natural-JS 2.0 M4 vertical-screen plan](m4-plan.md) - Approved plan and measured result for the first authored-HTML search, Grid, detail, and save screen.
 * [Natural-JS 2.0 M5 data and rule plan](m5-plan.md) - Approved M5 implementation plan and verification for retained Form rules, row-keyed drafts, nested binding, and shared validation. (draft)
-* [Natural-JS 2.0 M6 data UI review plan](m6-plan.md) - Review draft for completing Button, Select, pagination, Form, List, and basic Grid on authored HTML. (draft)
+* [Natural-JS 2.0 M6 data UI plan](m6-plan.md) - Approved M6 contract and implementation evidence for Button, Select, pagination, Form, List, and basic Grid on authored HTML. (draft)
 * [Natural-JS 2.0 master roadmap](roadmap.md) - Milestone order, scope boundary, and completion gates for the TypeScript-first Natural-JS 2.0 migration.

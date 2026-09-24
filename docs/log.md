@@ -1,5 +1,15 @@
 ## 2026-09-24
 
+* **Update** M6 shipped native Button behavior, standalone Select, controlled Pagination, read-only List, Form groups, and editable/paged Grid on authored HTML. The two employee layouts share one CVC controller and Rows store across all components; M6 usage, API, and example concepts now match source.
+* **Update** The employee-screen concept now traces the same CVC and Rows through Form, Grid, List, Select, and Pagination in both authored layouts and fetched HTML, including hidden-error page restoration.
+* **Correction** Independent review fixed raw number writes, unsupported Grid multiple Selects, List multiple-value validation, parser input-order dependence, mutable page state, implicit row-button submission, inaccessible sort state, and page-change focus. The framework keeps retained Form rules without a convenience utility package.
+* **Verification** M6 build/typecheck, Vitest 81/81, installed JS/TS consumers, Chromium/WebKit 144/144, and fresh-cache Firefox 72/72 passed. Same-host 1,000-row Grid/List medians remained within the M6 budgets with zero duplicate IDs; the 88-file dry-run tarball excludes 1.x and jQuery. See [M6 plan](implementation/m6-plan.md) and raw benchmark records.
+
+* **Creation** Added M6 draft concepts for List, standalone Select, and Pagination, with authored markup, nested row-local options, local page state, ownership, accessibility, and disposal contracts.
+* **Update** The UI, Form, Grid, package, architecture, and indexes now describe the implemented M6 binding contracts: Form choice groups, Grid cell editing and paging, read-only List, and native buttons. Retained UI formatter and validator rules remain available.
+
+* **Update** The user approved M6 data UI work after M5 was pushed at `25eafb15` and installed Firefox. The active plan now tracks M6 usage-contract and browser preflight work; the prior Firefox failure is not treated as a current result.
+
 * **Correction** The M5 docs-first field task passed on its first Chromium run but read more context than M4. Added a short source and test map to the employee example so a small data-field change does not require opening mounting, CSS, governance history, or unrelated test sections.
 * **Verification** A second isolated agent used that map for the same optional nested field task. Both M5 runs passed Chromium 19/19 at first execution, changed nine files, and required no code retry. Unique files opened fell from 23 to 17; the guided run fully read ten files/41,590 bytes, whereas the first fully read 23/117,294 bytes. The guided run's partial queries produced about 36,751 bytes on a replay, for roughly 77-78 KB of content output before diff review. The runs used different measurement methods, so precise total context and token savings remain unproven. M5 is closed with changed/full OKF errors and warnings at zero; the M6 plan remains a review draft.
 * **Correction** An independent M4 recheck added a fetched-server-HTML route for the same authored employee view and controller, with a simultaneous-page and duplicate-ID regression. The unused future PopupHandle type was removed from the M5 public UI entry.

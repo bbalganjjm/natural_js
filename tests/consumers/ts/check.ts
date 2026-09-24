@@ -5,8 +5,8 @@ import { createRows } from "@bbalganjjm/natural_js/data";
 import type { Rows } from "@bbalganjjm/natural_js/data";
 import { createCommunicator } from "@bbalganjjm/natural_js/comm";
 import type { Communicator } from "@bbalganjjm/natural_js/comm";
-import { bindForm, bindGrid } from "@bbalganjjm/natural_js/ui";
-import type { FormHandle } from "@bbalganjjm/natural_js/ui";
+import { bindForm, bindGrid, bindList, bindSelect, bindPagination } from "@bbalganjjm/natural_js/ui";
+import type { FormHandle, PageRequest, PageState, SelectChoice } from "@bbalganjjm/natural_js/ui";
 
 interface Employee {
   name: string;
@@ -66,4 +66,20 @@ export function connectEditor(root: HTMLFormElement, table: HTMLTableElement, ro
   const form = bindForm(root, { rows });
   const grid = bindGrid(table, { rows, onSelect: ({ id }) => form.bind(id) });
   return { form, grid };
+}
+
+export function connectDataUI(listRoot: HTMLUListElement, sizeRoot: HTMLSelectElement,
+  pageRoot: HTMLElement, rows: Rows<Employee>) {
+  const list = bindList(listRoot, { rows });
+  const choices: SelectChoice<number>[] = [{ label: "Five", value: 5 }];
+  const size = bindSelect(sizeRoot, { choices, value: 5 });
+  const pagination = bindPagination(pageRoot, {
+    state: { page: 1, size: 5, total: rows.entries().length },
+    onPage(request: PageRequest) {
+      list.setPage(request);
+      const state: PageState = list.page()!;
+      pagination.set(state);
+    }
+  });
+  return { list, size, pagination };
 }

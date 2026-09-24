@@ -16,15 +16,35 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI contracts and component exports
-    git_blob: 024d2a174b00a1ac80f626942dcb07fa1142bf20
+    git_blob: 6a2ee60393df8898e518a884fc1b8f3c6d6b9cf5
   - id: form
     resource: ../../src/ui/form.ts
     title: Form binding
-    git_blob: 9d086ea8c09e30a688e25d474483a91b199d3308
+    git_blob: e603f619679c24be778b04f45ea3c467b50bf2c2
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid binding
-    git_blob: cc5de08d7431e0e9d201b164f80caa6545718167
+    git_blob: dedeca30ef8f10a78172748d8cb9911a68b7da03
+  - id: list
+    resource: ../../src/ui/list.ts
+    title: List binding
+    git_blob: 8d3ef3e1ff3e7b7fb7faed27fc592846dd5fe090
+  - id: select
+    resource: ../../src/ui/select.ts
+    title: Standalone Select binding
+    git_blob: 4160eb77722751aad730fb997a4f0b07a967bd1e
+  - id: pagination
+    resource: ../../src/ui/pagination.ts
+    title: Pagination binding
+    git_blob: 0239548e7638456548beb441b55956381272d454
+  - id: row-options
+    resource: ../../src/ui/row-options.ts
+    title: Private row-local choice extraction
+    git_blob: 72facd6bc5b30845938731897f1f5aadd257a7fa
+  - id: select-owner
+    resource: ../../src/ui/select-owner.ts
+    title: Private Select ownership
+    git_blob: 6902e2789df6e44123b2ea599e4d05fa1c098fa4
   - id: path
     resource: ../../src/ui/field-path.ts
     title: Private UI field path semantics
@@ -57,7 +77,7 @@ sources:
     resource: ../../src/internal/framework-error.ts
     title: Shared framework error
     git_blob: 6930da1fbcfd71733a45dab22a51aec784cafe7f
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T11:25:58Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T13:47:21Z }
 ---
 
 The root 2.0 package uses one directory per public role and a narrow private internal area. An agent can start at the package export map, then read one entry and its direct dependencies.
@@ -68,34 +88,34 @@ Keep one definition of each framework behavior without collecting unrelated help
 
 # Participants
 
-| Path | Responsibility through M5 |
+| Path | Responsibility through M6 |
 |---|---|
 | `src/index.ts` | Root public entry; currently re-exports the real `FrameworkError`. |
 | `src/page/` | `mountPage`, CVC lifecycle, authored HTML roots, and per-instance cancellation. |
 | `src/data/` | `createRows`, immutable nested JSON snapshots, row identity, and change tracking. |
-| `src/ui/` | `bindForm`, `bindGrid`, their types, one private field-path helper, and one private rule runner with UI-owned built-in formatters and validators. |
+| `src/ui/` | `bindForm`, `bindGrid`, `bindList`, `bindSelect`, `bindPagination`, their types, and UI-owned field-path, rule, row-option, and Select-ownership helpers. |
 | `src/comm/` | `createCommunicator`, Request/Response hooks, JSON decoding, and cancellation. |
 | `src/internal/` | Private cross-role implementation; currently the common error class only. |
 
 # Lifecycle
 
-Build `src/` once with `tsc` to `build/`. The package export map resolves public paths to generated JavaScript and declarations. Consumers cannot use an internal package subpath through `exports`. The preserved `v1/` code is outside this build and tarball. Form and Grid bind within an authored root, subscribe to the same row store when supplied, and release their own listeners and subscriptions on disposal.[^package][^form][^grid]
+Build `src/` once with `tsc` to `build/`. The package export map resolves public paths to generated JavaScript and declarations. Consumers cannot use an internal package subpath through `exports`. The preserved `v1/` code is outside this build and tarball. Form, Grid, and List bind within authored roots, subscribe to a caller-owned row store when supplied, and release their own listeners and subscriptions on disposal. Standalone Select and Pagination bind native controls, own no row store, and restore authored markup on disposal.[^package][^form][^grid][^list][^select][^pagination]
 
 # Rules
 
 - Import downward and directly: UI may depend on data and page types; data and communication do not import UI. Runtime modules may use private internal code. No internal module imports the package root or another role's public package specifier.
 - Start a helper inside its owning feature. Move it to `internal/` only after at least two roles need the same semantics, lifetime, error behavior, and tests. Small operations with different meaning stay local.
-- Form and Grid use one UI-owned declaration parser and dispatcher. Built-in formatter and validator implementations remain private and close to those components; List may reuse them in M6. Do not turn them into a generic formatting or validation utility package.
+- Form, Grid, and List use one UI-owned declaration parser and dispatcher. Built-in formatter and validator implementations remain private. Grid and List share only the stable row-local option operation; Form, Grid, and List share Select ownership with standalone Select. Do not turn them into a generic formatting or validation utility package.
 - Keep DOM references and row identity local to their mounted root and row store. Standard browser operations remain direct calls; no selector, event, date, or collection wrapper is added for convenience.
 - A shared error code has one implementation. `FrameworkError` is the first cross-role contract, implemented privately and re-exported only at the root.[^root][^error]
 
 # Pitfalls
 
-A repeated snippet is not automatically a shared abstraction; first check whether it has identical inputs, outputs, cancellation, and ownership. A private helper must not become public merely because applications might find it useful. The private `field-path.ts` exists because Form and Grid need the same safe object-path parsing and copy-on-write behavior; it is not a package export. The rule runner exists because Form and Grid need the same declarative lookup, overrides, messages, and errors; individual rule operations remain beside their catalog.
+A repeated snippet is not automatically a shared abstraction; first check whether it has identical inputs, outputs, cancellation, and ownership. A private helper must not become public merely because applications might find it useful. The private `field-path.ts` exists because Form, Grid, and List need the same safe object-path reading; Form and Grid also need copy-on-write. It is not a package export. The rule runner exists because Form, Grid, and List need the same declarative lookup, overrides, messages, and errors; individual rule operations remain beside their catalog. The row-option and Select-ownership helpers each have two or more concrete UI callers.[^row-options][^select-owner]
 
 # Related
 
-[The M1 contract](../implementation/m1-contract.md) gives behavioral invariants. [Package](package.md) lists what is actually installable. [The employee example](employee-example.md) exercises both components across two authored layouts. [The roadmap](../implementation/roadmap.md) sets later implementation gates.
+[The M1 contract](../implementation/m1-contract.md) gives behavioral invariants. [Package](package.md) lists what is actually installable. [The employee example](employee-example.md) exercises Form and Grid across two authored layouts. [The roadmap](../implementation/roadmap.md) sets later implementation gates.
 
 [^package]: Public package boundaries
 [^root]: Root entry
@@ -103,3 +123,8 @@ A repeated snippet is not automatically a shared abstraction; first check whethe
 
 [^form]: Form binding
 [^grid]: Grid binding
+[^list]: List binding
+[^select]: Standalone Select binding
+[^pagination]: Pagination binding
+[^row-options]: Private row-local choice extraction
+[^select-owner]: Private Select ownership

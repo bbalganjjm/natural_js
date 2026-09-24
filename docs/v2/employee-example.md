@@ -1,34 +1,38 @@
 ---
 type: Example
-title: M4 employee screen in two authored layouts
-description: One controller runs search, Grid, detail Form, and save across side-by-side and stacked HTML views.
+title: Employee screen in two authored layouts
+description: One CVC controller shares Rows across Form, Grid, List, Select, and Pagination in two authored layouts and fetched HTML.
 tags: [example, cvc, form, grid, accessibility]
 status: draft
 sources:
   - id: controller
     resource: ../../examples/vite/m4/employees.ts
     title: Shared employee controller
-    git_blob: 88938bff9250438de302bf379194ef975b629c4f
+    git_blob: c15ab21168b93cb5675d2ddbf1c3fa18bfef557c
   - id: runner
     resource: ../../examples/vite/m4/main.ts
     title: Page mounting in the example
     git_blob: caab5b56e337b106a0be53ac5ac8ecbc3ba7368b
+  - id: vite
+    resource: ../../examples/vite/vite.config.ts
+    title: Development-only HTML fragment route
+    git_blob: ac3667b45edf705a64863173ca3554c04c18416d
   - id: side
     resource: ../../examples/vite/m4/side.html
     title: Side-by-side authored view
-    git_blob: 94a4664f96065be8cfc2cc02271bd62ac4881875
+    git_blob: 701b6b74a863ed41bb92f80b423b1a7a94be6cd2
   - id: stack
     resource: ../../examples/vite/m4/stack.html
     title: Stacked authored view
-    git_blob: 1676fd589b4782d88e12c1063d60b26aed204036
+    git_blob: c07d7af888c3c4e715a915b6011e1ec96a942129
   - id: side-css
     resource: ../../examples/vite/m4/side.css
     title: Side-by-side authored styling
-    git_blob: 1c69ee3e5ee71208142c12598e5d78c33533f85e
+    git_blob: d90c06cebc55155cbcd732e293799634b6f618de
   - id: stack-css
     resource: ../../examples/vite/m4/stack.css
     title: Stacked authored styling
-    git_blob: ad6e5b425634f9a32baa31c7e3688134a04330d1
+    git_blob: fb2e884da8167bd0c41206b5d6b26e8f5e145cf9
   - id: fixture
     resource: ../../examples/vite/m4/employees.json
     title: Fixed employee rows
@@ -41,90 +45,101 @@ sources:
     resource: ../../examples/vite/m4/mock-server.ts
     title: Development-only mock API
     git_blob: 71c10c7b63b9291fa1bbcbb64d7515e7887acfc8
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T11:39:18Z }
+  - id: m4-test
+    resource: ../../tests/browser/m4-screen.spec.ts
+    title: Original screen and server-HTML browser regression
+    git_blob: 9d54a32d5bdca27a913c6d925549e8d23c840031
+  - id: m6-test
+    resource: ../../tests/browser/m6-screen.spec.ts
+    title: List and paging browser regression
+    git_blob: 9610ad289f93b7636a27f9c893a2640717caca9a
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T13:53:36Z }
 ---
 
-Run `npm run build` and `npm run example`, then open `/m4/side.html` or `/m4/stack.html`. Both views use the same controller and fixture; their DOM placement and CSS differ. `/m4/side.html?view=server` fetches the same authored HTML through the page runtime instead of cloning its local template.[^side][^stack][^controller]
-
-# Small field change map
-
-For an optional nested employee field, start with the two HTML detail inputs, the Employee shapes and new-row default in employees.ts and mock-server.ts, the matching employee fixture and expected-save JSON, and the first search/edit/save case in [the browser spec](../../tests/browser/m4-screen.spec.ts). Form follows the data-field path automatically; a new field needs no Form/Grid runtime edit or controller event handler.[^controller][^side][^stack][^fixture][^expected][^server]
-
-Use a targeted search for the nearby field name in those files and read only the relevant test section. main.ts, the CSS files, and vite.config.ts concern page mounting or styling and need no review for a data-only field. For the documentation change, update this concept and prepend a dated bullet to the top of docs/log.md; its older history is not needed. Stamp this concept and run the changed documentation check.[^runner]
+Run `npm run build` and `npm run example`, then open `/m4/side.html` or `/m4/stack.html`. The paths retain their M4 name, but the same screen now exercises the M6 data UI. `/m4/side.html?view=server` loads its authored side view through `mountPage(URL)`.[^runner][^vite][^controller]
 
 # Scenario
 
-Search employees, select a row, edit its details, and save changed rows. The page also demonstrates local sorting/filtering, add/delete/revert, row-local nested Select options, a second live page instance, and removal during a delayed request.[^controller][^fixture]
+Search employees, select a row in either a native table or compact list, edit its detail Form, and save raw changes. The screen also demonstrates nested row-local choices, client sorting/filtering/paging, add/delete/revert, independent page instances, and request cancellation.[^controller][^m4-test][^m6-test]
 
 # Components used
 
-| Component | Example responsibility |
+| Component | Responsibility in this screen |
 |---|---|
-| `mountPage` | Creates each screen from the authored template and owns controller cleanup. |
-| `createCommunicator` | Sends explicit JSON requests with page/search cancellation. |
-| `createRows` | Shares immutable employee rows with Form and Grid and extracts changed records. |
-| `bindForm` | Reads search input and connects detail inputs, custom rules, and errors. |
-| `bindGrid` | Clones one authored row, keeps `RowId` selection, and connects row-local options. |
+| `mountPage` | Creates an independent controller for each authored screen and owns cleanup. |
+| `createCommunicator` | Sends JSON search/save requests with cancellation. |
+| `createRows` | Holds the shared employee records and extracts changed rows. |
+| `bindForm` | Reads search input and edits the selected employee with rules and row-keyed drafts. |
+| `bindGrid` | Clones the authored table row, edits the row-local Select, selects rows, and displays sort/page state. |
+| `bindList` | Clones the authored `<li>` as a read-only compact view of the same rows. |
+| `bindSelect` | Supplies numeric page sizes to the standalone authored Select. |
+| `bindPagination` | Connects authored page buttons to the Grid/List page request. |
+
+The native action buttons and their event handlers belong to the page controller; there is no Button binder or theme.[^controller][^side][^stack]
 
 # View
 
-The views deliberately place the detail Form on different sides of the table in the DOM. Both use the same `data-role` and `data-action` markers for application lookup. Framework field binding uses `data-field` and the Grid row template and Select markers; none of the repeated markup has a fixed DOM `id`.[^side][^stack]
+The side view places Grid/List beside the detail Form; the stacked view places the Form above them and uses different CSS. Both keep the same `data-role` and `data-action` application selectors. The framework uses `data-field`, `data-row-template`, and `data-options`; no repeated row or page button template has a fixed DOM `id`.[^side][^stack][^side-css][^stack-css]
 
 ```html
-<tr data-row-template>
-  <th scope="row"><button type="button" data-select-row>Open <span data-field="id"></span>: <span data-field="name"></span></button></th>
-  <td data-field="email"></td>
-  <td data-field="profile.team"></td>
-  <td><label>Choice
-    <select data-field="chosen" data-options="a" data-option-label="aa" data-option-value="bb">
-      <option value="">Choose</option>
-    </select>
-  </label></td>
-</tr>
+<label>Rows per page <select data-role="page-size"><option value="">Choose a size</option></select></label>
+<nav data-role="pager" aria-label="Employee pages">
+  <button type="button" data-page-prev>Previous</button>
+  <button type="button" data-page-template><span data-page-number></span></button>
+  <button type="button" data-page-next>Next</button>
+  <output data-page-status></output>
+</nav>
+<ul data-role="list">
+  <li data-row-template>
+    <button type="button" data-select-row><span data-field="name"></span></button>
+    <span data-field="profile.team"></span>
+    <label>Choice <select data-field="chosen" data-options="a"
+      data-option-label="aa" data-option-value="bb"><option value="">Choose</option></select></label>
+  </li>
+  <li data-empty hidden>No visible employees</li>
+</ul>
 ```
 
-The detail Form also binds the optional `profile.department` path in both views. The local filter sits outside the search form so Enter cannot silently submit a new search and discard an edit. The two stylesheets belong to the authored views; the framework supplies no visual theme. The table keeps native semantics, a sortable header announces `aria-sort`, and Form errors use authored `data-error-for` regions.[^side-css][^stack-css][^side]
+The table has native headers, including a name header with `aria-sort`; its repeated row contains a selection button and an editable Select with the same nested `a` options. The compact List Select is disabled because List is a read-only view. Native labels, `aria-pressed` row selection, `aria-current="page"` page state, `aria-live` status, and authored `data-error-for` regions retain browser semantics. Two live pages have no duplicate DOM IDs.[^side][^stack][^controller][^m6-test]
 
 # Controller
 
-`createEmployees` receives one `PageContext` per screen. It registers each store and binding with `own`, so page disposal releases them in reverse order. The controller supplies the business-specific `companyEmail` validator and salary parser as application code. Built-in `email`, `integer`, `minvalue`, and `commas` rules come from the private M5 UI catalog.[^controller]
+`createEmployees` receives one `PageContext` per screen and registers every handle, subscription, and store with `own`. The controller owns the business-specific `companyEmail` validator, salary parser, name comparator/filter, API endpoints, and save conversion. UI rules `email`, `integer`, `minvalue`, and `commas` remain framework-reachable through Form.[^controller]
 
-```ts
-const rows = createRows<Employee>();
-const detail = bindForm(detailRoot, { rows, rules, parse: { salary: parseSalary } });
-const grid = bindGrid(table, { rows, onSelect: ({ id }) => detail.bind(id) });
-```
+Grid and List use one `Rows<Employee>` instance. A List selection calls `grid.select(id)`; Grid's selection callback selects the same ID in List, binds the detail Form, and updates the live selected-name output. The standalone Select offers typed sizes 2 and 5. Page requests go through the controller, which sets Grid and List to the same slice, reads Grid's normalized state, and calls `pagination.set(state)`. Filtering and sorting apply to both views before page slicing. The application resets to page 1 on a new search, filter, or sort; `Rows` subscriptions recalculate totals after edits.[^controller]
 
-The excerpt shows the relationship; see the source for the exact application parser and cleanup registration. A local filter and name comparator are passed directly to Grid rather than exposed as framework data utilities.[^controller]
+For an invalid changed row that is hidden by a filter or page, save validation clears the filter, computes that row's page under the current name sort, selects it, then focuses the current validation element. The browser regression specifically covers an invalid row-local Grid choice on an off-page row. Editing controls become inert during save while Close stays available; settled saves restore focus when the prior target still exists.[^controller][^m4-test][^m6-test]
 
 # Server contract
 
-The development-only Vite mock responds to `POST /api/employees/search?session=...` with JSON rows and to `POST /api/employees/save?session=...` with 204. Search body is `{ "query": string }`. Save body is an array of `{ status, value }` records from `Rows.changes()`, omitting the internal `RowId`. Sessions isolate two live screens and independent browser tests.[^server][^controller]
+The Vite-only mock responds to `POST /api/employees/search?session=...` with employee JSON and to `POST /api/employees/save?session=...` with 204. Search body is `{ "query": string }`; save body is `Rows.changes()` mapped to `{ status, value }`, without the internal `RowId`. Each controller uses its own session. The mock's `empty`, `error`, and `slow` search terms exercise zero rows, HTTP 503, and late responses.[^server][^controller]
 
-The fixed fixture contains `a: [{ aa: 11, bb: 22 }, {}]`; the incomplete option is skipped and selecting the first option retains numeric `22`. `expected-save.json` shows the raw payload after changing Ada's salary to `125000` and `profile.department` to `Infrastructure`.[^fixture][^expected] Search terms `empty`, `error`, and `slow` exercise empty, HTTP 503, and delayed responses in this mock.[^server]
+The fixture includes `a: [{ aa: 11, bb: 22 }, {}]`: the incomplete option is skipped, and the first generated option retains raw number `22`. `expected-save.json` shows a salary change to `125000` and nested department change to `Infrastructure` as raw JSON.[^fixture][^expected][^m4-test]
 
 # How it works
 
-1. `main.ts` clones the requested authored template into a new page host; each Open click creates another independent CVC instance.[^runner]
-2. The controller loads rows through `createCommunicator`, then `rows.replace` updates Grid and clears the previous detail selection.[^controller]
-3. Form writes valid detail edits through `Rows.set`. Grid writes the selected raw option value, while a local sort/filter only changes display order.[^controller]
-4. Save checks the current Form and every changed row, including rows hidden by the local filter. It sends only business values and status; a successful response reloads the mock server state. If that follow-up read fails after the save was accepted, the example marks the local rows clean and reports the refresh failure separately, preventing a duplicate insert on the next save.[^controller]
-5. While a save is pending, the example makes editing controls inert but leaves Close available; it restores focus when the save settles. Invalid detail input stays with its `RowId` while the user selects or adds another row; save finds drafts across rows. New searches abort older searches, and closing a page aborts requests and disposes listeners, bindings, and the store.[^controller][^runner]
+1. `main.ts` clones the requested HTML template into each page host. With `?view=server`, the Vite middleware extracts the current side-view template and supplies it as an HTML fragment to the same page runtime and controller.[^runner][^vite]
+2. Search aborts its preceding request; `rows.replace` updates both views and resets the detail selection. Closing a screen aborts outstanding work and disposes its bindings, listeners, and store.[^controller][^m4-test]
+3. Table and list selection use store-local `RowId`, not a DOM `id` or display index. Form edits and the Grid choice write to `Rows`, so both visible views update. Page navigation only changes the rendered slice, not the stored rows or change status.[^controller][^m6-test]
+4. Save validates the detail Form and Grid, including changed rows outside the visible slice. A successful save reloads server state; if only that refresh fails, the example marks local rows clean so an inserted row is not sent again. A failed save retains the edits and reports the response error.[^controller][^m4-test]
 
 # Variations
 
-Use `/m4/side.html` to inspect a table beside the detail Form, `/m4/stack.html` to inspect detail above the table, or `/m4/side.html?view=server` to exercise fetched server HTML. The controller and fixture are unchanged. Open another screen to check simultaneous instances and document-unique generated error IDs.[^side][^stack][^runner]
+Open `/m4/side.html` and `/m4/stack.html` to compare independent authored layout and CSS. Use `/m4/side.html?view=server` for fetched HTML, or Open another screen to inspect simultaneous state and unique IDs. The M6 browser spec checks both layouts for keyboard page/row activation, synchronized List/Grid slices, typed page size, empty state, and independent two-screen paging.[^runner][^m6-test]
+
+For an optional nested employee field, edit the two detail HTML inputs, the Employee shapes and new-row default in `employees.ts` and `mock-server.ts`, the fixture and expected-save JSON, and the matching browser case. Form follows `data-field` paths automatically; a data-only field needs no runtime or controller event-handler change. Start with those files rather than reading `main.ts` and CSS.[^controller][^side][^stack][^fixture][^expected][^server]
 
 # Pitfalls
 
-This screen started as the M4 vertical pilot and now exercises the M5 Form/Grid rule boundary. Do not copy the demo's `data-role` or `data-action` markers as framework API; they are application selectors. The mock API is part of the example server, not a production transport; it applies a whole save batch atomically. M6 completes standalone UI components.[^controller][^server]
+`data-role` and `data-action` are application selectors, not framework markers. The Vite mock and HTML-fragment middleware are development examples, not transport or rendering services supplied by the package. The pagination here is client-side over the filtered rows; it does not fetch a server page. List displays disabled row-local Selects, so edits belong in Form or Grid. The native name header is the only sortable column in this example.[^controller][^server][^vite][^side]
 
 # Related
 
-[Form](form.md), [Grid](grid.md), and [UI contracts](ui.md) document the implemented boundary. [The M4 plan](../implementation/m4-plan.md) records the original screen gate; [the M5 plan](../implementation/m5-plan.md) records rule and draft verification.
+[Form](form.md) handles detail drafts and rules; [Grid](grid.md) and [List](list.md) share the rows. [Select](select.md) explains typed standalone choices, [Pagination](pagination.md) explains controlled page state, and [UI contracts](ui.md) lists public types. [The M4 plan](../implementation/m4-plan.md) records the original screen gate; [the M6 plan](../implementation/m6-plan.md) records the data UI gate.
 
 [^controller]: Shared employee controller
 [^runner]: Page mounting in the example
+[^vite]: Development-only HTML fragment route
 [^side]: Side-by-side authored view
 [^stack]: Stacked authored view
 [^side-css]: Side-by-side authored styling
@@ -132,3 +147,5 @@ This screen started as the M4 vertical pilot and now exercises the M5 Form/Grid 
 [^fixture]: Fixed employee rows
 [^expected]: Expected raw save payload
 [^server]: Development-only mock API
+[^m4-test]: Original screen and server-HTML browser regression
+[^m6-test]: List and paging browser regression

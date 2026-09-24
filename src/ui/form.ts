@@ -4,6 +4,7 @@ import type { RowId, Rows } from "../data/index.js";
 import { parsePath, readPath, writePath } from "./field-path.js";
 import { createRuleRunner } from "./rules.js";
 import type { RuleCall } from "./rules.js";
+import { claimSelect } from "./select-owner.js";
 import type {
   FormHandle, FormatRule, ParseInput, RuleContext, RuleSet,
   ValidateRule, ValidationIssue, ValidationResult
@@ -13,13 +14,14 @@ type Control = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
 
 interface Field {
   element: HTMLElement;
+  elements: HTMLElement[];
+  kind: "single" | "radio" | "checkbox" | "multiple";
   name: string;
   path: readonly string[];
   format: readonly RuleCall<FormatRule>[];
   validate: readonly RuleCall<ValidateRule>[];
   error?: HTMLElement;
-  describedBy: string | null;
-  invalid: string | null;
+  originals: { element: HTMLElement; describedBy: string | null; invalid: string | null }[];
 }
 
 interface Candidate {
@@ -61,13 +63,49 @@ function inputValue(element: HTMLElement): unknown {
   return element.value;
 }
 
+function fieldValue(field: Field): unknown {
+  if (field.kind === "radio") {
+    const selected = field.elements.find(element => (element as HTMLInputElement).checked);
+    return selected ? (selected as HTMLInputElement).value : null;
+  }
+  if (field.kind === "checkbox" && field.elements.length > 1) {
+    return field.elements.filter(element => (element as HTMLInputElement).checked)
+      .map(element => (element as HTMLInputElement).value);
+  }
+  if (field.kind === "multiple") {
+    return [...(field.element as HTMLSelectElement).selectedOptions].map(option => option.value);
+  }
+  return inputValue(field.element);
+}
+
 function display(element: HTMLElement, value: unknown): void {
   if (!control(element)) {
     element.textContent = value == null ? "" : String(value);
   } else if (element.localName === "input" && (element as HTMLInputElement).type === "checkbox") {
     (element as HTMLInputElement).checked = value === true;
+  } else if (element.localName === "select" && (element as HTMLSelectElement).multiple) {
+    const selected = new Set(Array.isArray(value) ? value.map(String) : []);
+    for (const option of (element as HTMLSelectElement).options) option.selected = selected.has(option.value);
   } else {
     element.value = value == null ? "" : String(value);
+  }
+}
+
+function displayField(field: Field, value: unknown): void {
+  if (field.kind === "radio") {
+    const selected = value == null ? null : String(value);
+    for (const element of field.elements) {
+      const input = element as HTMLInputElement;
+      input.checked = selected !== null && input.value === selected;
+    }
+  } else if (field.kind === "checkbox" && field.elements.length > 1) {
+    const selected = new Set(Array.isArray(value) ? value.map(String) : []);
+    for (const element of field.elements) {
+      const input = element as HTMLInputElement;
+      input.checked = selected.has(input.value);
+    }
+  } else {
+    display(field.element, value);
   }
 }
 
@@ -105,27 +143,85 @@ export function bindForm<T extends object = Record<string, unknown>>(
 
   const elements = [root, ...root.querySelectorAll<HTMLElement>("[data-field]")]
     .filter(element => element.hasAttribute("data-field"));
-  const fields: Field[] = elements.map(element => {
+  const fields: Field[] = [];
+  const byName = new Map<string, Field>();
+  for (const element of elements) {
     const name = element.getAttribute("data-field")!;
     const input = element.localName === "input" ? element as HTMLInputElement : null;
+    const kind = input?.type === "radio" ? "radio" :
+      input?.type === "checkbox" ? "checkbox" :
+        element.localName === "select" && (element as HTMLSelectElement).multiple ? "multiple" : "single";
     if (input?.type === "file") {
       if (rows) throw formError("FORM_FILE_ROWS", "File inputs require a local Form; Rows store JSON values.", { field: name });
       if (input.multiple) throw formError("FORM_FILE_MULTIPLE", "Validate multiple files in application code.", { field: name });
     }
-    const format = runner.formats(element, name);
-    if (format.length && !formatCapable(element)) {
-      throw formError("FORM_FORMAT_CONTROL", "Formatting requires a text field.", { field: name });
+    if (kind === "radio" && (!input?.form || !input.name ||
+        input.form !== root && !root.contains(input.form))) {
+      throw formError("FORM_RADIO_OWNER", "Radio fields need a name and a form owner inside this Form root.", { field: name });
     }
-    return {
-      element, name, path: parsePath(name),
-      format,
-      validate: runner.validators(element, name),
-      error: errorRegions.get(name),
-      describedBy: element.getAttribute("aria-describedby"),
-      invalid: element.getAttribute("aria-invalid")
+    const existing = byName.get(name);
+    if (existing) {
+      if ((kind !== "radio" && kind !== "checkbox") || existing.kind !== kind) {
+        throw formError("FORM_FIELD_REPEAT", "Only radio or checkbox controls may repeat a field.", { field: name });
+      }
+      if (kind === "radio") {
+        const first = existing.element as HTMLInputElement;
+        if (first.form !== input!.form || first.name !== input!.name) {
+          throw formError("FORM_RADIO_OWNER", "One radio field must share a form owner and name.", { field: name });
+        }
+      }
+      if (existing.elements.some(member => (member as HTMLInputElement).value === input!.value)) {
+        throw formError("FORM_GROUP_VALUE", "Group choices need distinct values.", { field: name });
+      }
+      existing.elements.push(element);
+      existing.originals.push({
+        element, describedBy: element.getAttribute("aria-describedby"),
+        invalid: element.getAttribute("aria-invalid")
+      });
+      continue;
+    }
+    const field: Field = {
+      element, elements: [element], kind, name, path: parsePath(name),
+      format: [], validate: [], error: errorRegions.get(name),
+      originals: [{
+        element, describedBy: element.getAttribute("aria-describedby"),
+        invalid: element.getAttribute("aria-invalid")
+      }]
     };
-  });
-  const byElement = new Map(fields.map(field => [field.element, field]));
+    fields.push(field);
+    byName.set(name, field);
+  }
+  for (const field of fields) {
+    for (const attribute of ["data-format", "data-validate"] as const) {
+      const declarations = field.elements.map(element => element.getAttribute(attribute))
+        .filter((value): value is string => value !== null);
+      if (new Set(declarations).size > 1) {
+        throw formError("FORM_GROUP_RULES", "One field group needs one rule declaration.", { field: field.name });
+      }
+    }
+    const formatElement = field.elements.find(element => element.hasAttribute("data-format")) ?? field.element;
+    const validateElement = field.elements.find(element => element.hasAttribute("data-validate")) ?? field.element;
+    field.format = runner.formats(formatElement, field.name);
+    field.validate = runner.validators(validateElement, field.name);
+    if (field.format.length && !formatCapable(field.element)) {
+      throw formError("FORM_FORMAT_CONTROL", "Formatting requires a text field.", { field: field.name });
+    }
+    if (parse?.[field.name] && (field.kind === "checkbox" || field.kind === "multiple")) {
+      throw formError("FORM_PARSE_CONTROL", "A string parser cannot convert boolean or array controls.", { field: field.name });
+    }
+  }
+  const byElement = new Map(fields.flatMap(field => field.elements.map(element => [element, field] as const)));
+  const releaseSelects: (() => void)[] = [];
+  try {
+    for (const field of fields) {
+      if (field.element instanceof HTMLSelectElement) {
+        releaseSelects.push(claimSelect(field.element, "bindForm"));
+      }
+    }
+  } catch (cause) {
+    for (const release of releaseSelects) release();
+    throw cause;
+  }
   for (const field of fields) {
     const region = field.error;
     if (!region) continue;
@@ -136,9 +232,11 @@ export function bindForm<T extends object = Record<string, unknown>>(
       if (!region.hasAttribute("aria-live")) region.setAttribute("aria-live", "polite");
     }
     const id = errorId(region);
-    const tokens = new Set((field.describedBy ?? "").split(/\s+/).filter(Boolean));
-    tokens.add(id);
-    field.element.setAttribute("aria-describedby", [...tokens].join(" "));
+    for (const original of field.originals) {
+      const tokens = new Set((original.describedBy ?? "").split(/\s+/).filter(Boolean));
+      tokens.add(id);
+      original.element.setAttribute("aria-describedby", [...tokens].join(" "));
+    }
   }
 
   let boundId: RowId | null = null;
@@ -162,7 +260,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
 
   function localValues(): Record<string, unknown> {
     let values: Record<string, unknown> = {};
-    for (const field of fields) values = writePath(values, field.path, inputValue(field.element));
+    for (const field of fields) values = writePath(values, field.path, fieldValue(field));
     return values;
   }
 
@@ -184,6 +282,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
     entered: ReadonlyMap<Field, unknown>): { values: Record<string, unknown>; parsed: Map<Field, Candidate> } {
     let values = source;
     for (const [field, value] of entered) values = writePath(values, field.path, value);
+    const enteredValues = values;
     const parsed = new Map<Field, Candidate>();
     for (const [field, input] of entered) {
       let value = input;
@@ -191,7 +290,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
       let parseFailed = false;
       const parser = parse?.[field.name];
       if (parser) {
-        try { value = parser(String(input ?? ""), context(field, id, values)); }
+        try { value = parser(String(input ?? ""), context(field, id, enteredValues)); }
         catch (cause) {
           parseFailed = true;
           parseError = cause instanceof Error && cause.message
@@ -212,7 +311,15 @@ export function bindForm<T extends object = Record<string, unknown>>(
     values: Record<string, unknown>): readonly ValidationIssue[] {
     if (candidate.parseFailed) return [issue(field, id, "parse", candidate.parseError ?? "Input could not be parsed.")];
     const found: ValidationIssue[] = [];
-    if (control(field.element)) {
+    if (field.kind === "radio" || field.kind === "checkbox" && field.elements.length > 1) {
+      const required = field.elements.some(element => (element as HTMLInputElement).required);
+      const entered = candidate.entered === undefined ? candidate.value : candidate.entered;
+      const selected = field.kind === "radio" ?
+        entered != null && field.elements.some(element => (element as HTMLInputElement).value === String(entered)) :
+        Array.isArray(entered) && field.elements.some(element =>
+          entered.some(value => String(value) === (element as HTMLInputElement).value));
+      if (required && !selected) found.push(issue(field, id, "html", "Select an option."));
+    } else if (control(field.element)) {
       const visible = id === null || id === boundId;
       const probe = visible ? field.element : field.element.cloneNode(true) as Control;
       const entered = candidate.entered ?? candidate.value;
@@ -249,9 +356,11 @@ export function bindForm<T extends object = Record<string, unknown>>(
     const messages = new Map<HTMLElement, string[]>();
     for (const field of fields) {
       const fieldIssues = issues.get(field) ?? [];
-      if (fieldIssues.length) field.element.setAttribute("aria-invalid", "true");
-      else if (field.invalid === null) field.element.removeAttribute("aria-invalid");
-      else field.element.setAttribute("aria-invalid", field.invalid);
+      for (const original of field.originals) {
+        if (fieldIssues.length) original.element.setAttribute("aria-invalid", "true");
+        else if (original.invalid === null) original.element.removeAttribute("aria-invalid");
+        else original.element.setAttribute("aria-invalid", original.invalid);
+      }
       if (field.error && fieldIssues.length) {
         const list = messages.get(field.error) ?? [];
         list.push(...fieldIssues.map(item => item.message));
@@ -265,14 +374,14 @@ export function bindForm<T extends object = Record<string, unknown>>(
     const source = boundId === null ? null : rowValue(boundId);
     const currentDrafts = boundId === null ? undefined : drafts.get(boundId);
     for (const field of fields) {
-      const focused = field.element === root.ownerDocument.activeElement;
-      if (skipFocused && focused) continue;
+      const focused = field.elements.includes(root.ownerDocument.activeElement as HTMLElement);
+      if (skipFocused && focused && field.kind === "single" && formatCapable(field.element)) continue;
       if (currentDrafts?.has(field)) {
-        display(field.element, currentDrafts.get(field));
+        displayField(field, currentDrafts.get(field));
         continue;
       }
-      const raw = source ? readPath(source, field.path) : "";
-      display(field.element, source && !focused && field.format.length
+      const raw = source ? readPath(source, field.path) : field.kind === "radio" ? null : "";
+      displayField(field, source && !focused && field.format.length
         ? runner.format(field.format, raw, context(field, boundId, source)) : raw);
     }
   }
@@ -330,12 +439,12 @@ export function bindForm<T extends object = Record<string, unknown>>(
     if (rows) {
       if (boundId === null) return;
       const currentDrafts = drafts.get(boundId) ?? new Map<Field, unknown>();
-      currentDrafts.set(field, inputValue(field.element));
+      currentDrafts.set(field, fieldValue(field));
       drafts.set(boundId, currentDrafts);
       reconcile(boundId);
       return;
     }
-    const entered = new Map(fields.map(item => [item, inputValue(item.element)] as const));
+    const entered = new Map(fields.map(item => [item, fieldValue(item)] as const));
     const checked = evaluate(null, localValues(), entered);
     for (const item of fields) {
       if (item === field || issues.has(item)) issues.set(item, checked.byField.get(item) ?? []);
@@ -353,7 +462,8 @@ export function bindForm<T extends object = Record<string, unknown>>(
     const field = byElement.get(event.target);
     const pointed = field !== undefined && pointerField === field;
     pointerField = undefined;
-    if (!field || !control(field.element) || !rows || boundId === null || drafts.get(boundId)?.has(field)) return;
+    if (!field || !field.format.length || !control(field.element) ||
+        !rows || boundId === null || drafts.get(boundId)?.has(field)) return;
     const element = field.element;
     const before = element.value;
     const raw = readPath(rowValue(boundId), field.path);
@@ -375,11 +485,11 @@ export function bindForm<T extends object = Record<string, unknown>>(
   function onFocusOut(event: FocusEvent): void {
     if (disposed || !event.target || !(event.target instanceof HTMLElement)) return;
     const field = byElement.get(event.target);
-    if (!field || !control(field.element) || !rows || boundId === null || drafts.get(boundId)?.has(field)) return;
+    if (!field || !field.format.length || !control(field.element) ||
+        !rows || boundId === null || drafts.get(boundId)?.has(field)) return;
     const source = rowValue(boundId);
     const raw = readPath(source, field.path);
-    display(field.element, !field.format.length
-      ? raw : runner.format(field.format, raw, context(field, boundId, source)));
+    display(field.element, runner.format(field.format, raw, context(field, boundId, source)));
   }
 
   root.addEventListener("input", onInput);
@@ -444,7 +554,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
     validate(id) {
       active();
       if (!rows) {
-        const entered = new Map(fields.map(field => [field, inputValue(field.element)] as const));
+        const entered = new Map(fields.map(field => [field, fieldValue(field)] as const));
         const checked = evaluate(null, localValues(), entered);
         const found = [...checked.byField.values()].flat();
         for (const field of fields) issues.set(field, checked.byField.get(field) ?? []);
@@ -471,6 +581,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
       disposed = true;
       boundRoots.delete(root);
       unsubscribe?.();
+      for (const release of releaseSelects) release();
       root.removeEventListener("input", onInput);
       root.removeEventListener("change", onInput);
       root.removeEventListener("pointerdown", onPointerDown);
@@ -479,10 +590,12 @@ export function bindForm<T extends object = Record<string, unknown>>(
       root.removeEventListener("focusin", onFocusIn);
       root.removeEventListener("focusout", onFocusOut);
       for (const field of fields) {
-        if (field.describedBy === null) field.element.removeAttribute("aria-describedby");
-        else field.element.setAttribute("aria-describedby", field.describedBy);
-        if (field.invalid === null) field.element.removeAttribute("aria-invalid");
-        else field.element.setAttribute("aria-invalid", field.invalid);
+        for (const original of field.originals) {
+          if (original.describedBy === null) original.element.removeAttribute("aria-describedby");
+          else original.element.setAttribute("aria-describedby", original.describedBy);
+          if (original.invalid === null) original.element.removeAttribute("aria-invalid");
+          else original.element.setAttribute("aria-invalid", original.invalid);
+        }
       }
       for (const [region, original] of regionState) {
         if (original.id === null) region.removeAttribute("id");

@@ -12,7 +12,7 @@ sources:
   - id: roadmap
     resource: roadmap.md
     title: Milestone order and M4 exit gate
-    git_blob: 497bbe095b7df442cb224502f854f89ad25a2dbc
+    git_blob: bbc0367777f7e513bbd4c67eed84154d7d3f91a2
   - id: page
     resource: ../../src/page/index.ts
     title: M3 page lifecycle implementation

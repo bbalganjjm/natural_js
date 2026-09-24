@@ -46,6 +46,15 @@
             <button type="button" data-action="delete">Delete selected</button>
             <button type="button" data-action="revert">Revert changes</button>
           </div>
+          <div class="view-tools">
+            <label>Rows per page <select data-role="page-size"><option value="">Choose a size</option></select></label>
+            <nav data-role="pager" aria-label="Employee pages">
+              <button type="button" data-page-prev>Previous</button>
+              <button type="button" data-page-template><span data-page-number></span></button>
+              <button type="button" data-page-next>Next</button>
+              <output data-page-status></output>
+            </nav>
+          </div>
           <table data-role="grid">
             <caption>Employees</caption>
             <thead>
@@ -69,6 +78,18 @@
               </tr>
             </tbody>
           </table>
+          <section class="compact-panel" aria-label="Employee compact list">
+            <h3>Compact list</h3>
+            <ul data-role="list">
+              <li data-row-template>
+                <button type="button" data-select-row><span data-field="name"></span></button>
+                <span data-field="profile.team"></span>
+                <label>Choice <select data-field="chosen" data-options="a"
+                  data-option-label="aa" data-option-value="bb"><option value="">Choose</option></select></label>
+              </li>
+              <li data-empty hidden>No visible employees</li>
+            </ul>
+          </section>
         </section>
         <footer class="page-footer">
           <output data-role="status" aria-live="polite"></output>

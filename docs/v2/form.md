@@ -1,7 +1,7 @@
 ---
 type: UI Component
 title: bindForm
-description: Bind authored Form fields to Rows with row-keyed drafts, retained rules, and accessible errors.
+description: Bind authored Form fields and groups to Rows with row-keyed drafts, retained rules, and accessible errors.
 tags: [ui, form, binding, accessibility]
 status: draft
 symbols: [bindForm]
@@ -9,11 +9,11 @@ sources:
   - id: entry
     resource: ../../src/ui/index.ts
     title: Public UI entry and Form types
-    git_blob: 024d2a174b00a1ac80f626942dcb07fa1142bf20
+    git_blob: 6a2ee60393df8898e518a884fc1b8f3c6d6b9cf5
   - id: form
     resource: ../../src/ui/form.ts
     title: Form binding runtime
-    git_blob: 9d086ea8c09e30a688e25d474483a91b199d3308
+    git_blob: e603f619679c24be778b04f45ea3c467b50bf2c2
   - id: path
     resource: ../../src/ui/field-path.ts
     title: Shared safe object field paths
@@ -34,10 +34,10 @@ sources:
     resource: ../../v1/src/natural.data.js
     title: Preserved 1.x formatter and validator behavior
     git_blob: fe1db485648b4837702cf1c321934b6a78c1344b
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T11:18:17Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T13:49:27Z }
 ---
 
-`bindForm` connects marked fields in authored HTML to local input or a caller-owned `Rows` store. It keeps business JSON separate from display text, retains invalid drafts by row, and uses native controls and authored error regions.[^form]
+`bindForm` connects marked fields in authored HTML to local input or a caller-owned `Rows` store. It keeps business JSON separate from display text, retains invalid drafts by row, and uses native controls, grouped choices, and authored error regions.[^form]
 
 # Quick start
 
@@ -81,7 +81,22 @@ Rule names are case-insensitive. Combined validators accept the retained `+` and
 
 A path is parsed once. It rejects prototype keys, numeric array indexes, and expressions; a nested write copies that object path and replaces its top-level `Rows` field. Array values can still be stored or replaced as whole fields.[^path][^form]
 
-A nonempty `data-format` list on a Select or non-text input (including checkbox, file, and number) raises `FORM_FORMAT_CONTROL` at binding; changing those controls to display strings would corrupt their value semantics. A file input may bind only to a local Form (`FORM_FILE_ROWS` for Rows); `multiple` file selection is outside this field contract (`FORM_FILE_MULTIPLE`).[^form]
+A nonempty `data-format` list on a Select or non-text input (including radio, checkbox, file, and number) raises `FORM_FORMAT_CONTROL` at binding; changing those controls to display strings would corrupt their value semantics. A file input may bind only to a local Form (`FORM_FILE_ROWS` for Rows); `multiple` file selection is outside this field contract (`FORM_FILE_MULTIPLE`).[^form]
+
+Repeated `data-field` paths are allowed only for radio or checkbox controls. A radio group needs the same native `name` and form owner inside the binding root; its raw value is the checked option string or `null`. One checkbox has a boolean raw value; two or more checkboxes with one `data-field` produce a string array. A native `<select multiple>` produces a string array. Group choices must have distinct values, and all declarations of the same rule attribute in one group must match. The same authored `data-error-for` region describes every group member. Invalid combinations raise `FORM_FIELD_REPEAT`, `FORM_RADIO_OWNER`, `FORM_GROUP_VALUE`, or `FORM_GROUP_RULES`.[^form]
+
+```html
+<form data-role="preferences">
+  <label><input type="radio" name="level" value="basic" data-field="level" required>Basic</label>
+  <label><input type="radio" name="level" value="advanced" data-field="level">Advanced</label>
+  <output data-error-for="level"></output>
+  <label><input type="checkbox" value="mail" data-field="channels">Mail</label>
+  <label><input type="checkbox" value="sms" data-field="channels">SMS</label>
+  <label>Tags <select multiple data-field="tags"><option value="a">A</option></select></label>
+</form>
+```
+
+A parser may convert a scalar radio or single Select string. It cannot attach to a boolean checkbox or array-valued checkbox group or multiple Select (`FORM_PARSE_CONTROL`). These authored Selects are owned by Form until disposal, so a second `bindSelect` on the same element raises `SELECT_OWNED`.[^form]
 
 # Methods
 
@@ -96,13 +111,13 @@ A nonempty `data-format` list on a Select or non-text input (including checkbox,
 
 # Input and accessibility
 
-Input parses the entered string when a parser exists, then checks the parsed candidate with the HTML Constraint Validation API and declared rules. Candidates from all drafts of one row are combined before cross-field checks such as `equalTo`. Valid candidates enter `Rows`; an invalid or unparseable input remains visible as a row-keyed draft and cannot change its stored raw field. An edit through the same Form rechecks drafts immediately, so an `equalTo` draft can enter `Rows` after its peer changes. After an external `Rows.set`, call `validate()` before saving to recheck and commit any newly valid draft.[^form]
+For a scalar field with a parser, Form parses the entered string, then checks the raw candidate against native constraints and declared rules. Grouped radio and checkbox fields use their shared selected-value and `required` check. Candidates from all drafts of one row are combined before cross-field checks such as `equalTo`. Valid candidates enter `Rows`; an invalid or unparseable input remains visible as a row-keyed draft and cannot change its stored raw field. An edit through the same Form rechecks drafts immediately, so an `equalTo` draft can enter `Rows` after its peer changes. After an external `Rows.set`, call `validate()` before saving to recheck and commit any newly valid draft.[^form]
 
-Visible and local fields use the actual control validity, including user-entered `minlength` and `maxlength`. Hidden row drafts use their entered text in a detached control, including equivalent text-length checks before application parsing, without rebinding or changing the visible Form. Untouched stored values have the same native text-length result whether visible or hidden. Built-in `required` fails for an unchecked checkbox; a caller-supplied `required` rule still controls its own result. A local file field validates and reads the first selected filename, while application code takes the `File` or `FormData` for upload.[^form][^rules]
+Visible and local non-group controls use their actual validity, including user-entered `minlength` and `maxlength`. Hidden row drafts of those controls use a detached control and equivalent text-length checks without rebinding or changing the visible Form. Untouched stored text values have the same native text-length result whether visible or hidden. Native `required` on a radio or repeated checkbox field requires at least one matching choice; its shared error marks every group member. Built-in `required` fails for an unchecked single checkbox; a caller-supplied `required` rule still controls its own result. A local file field validates and reads the first selected filename, while application code takes the `File` or `FormData` for upload.[^form][^rules]
 
 Formatting changes only the displayed text. Focus restores the stored raw value, and blur formats again when no invalid draft remains. When keyboard or programmatic focus starts at the beginning of a formatted control, Form selects its raw text for replacement; pointer focus keeps the clicked caret. Formatter fallback rules can display text for a stored `null` without changing that raw value. Call `validate()` before saving and use `Rows.changes()` for the raw save payload.[^form][^formats]
 
-A matched error region keeps its authored `id` or receives a document-unique one and `aria-live="polite"`; the field gets that ID in `aria-describedby`. Failed validation sets `aria-invalid="true"` and writes text to the region. Disposal restores the prior attributes/text. Use an authored wrapping `<label>` or another valid HTML label association.[^form]
+A matched error region keeps its authored `id` or receives a document-unique one and `aria-live="polite"`; every control in a field group gets that ID in `aria-describedby`. Failed validation sets `aria-invalid="true"` and writes text to the region. Disposal restores the prior attributes/text. Use an authored wrapping `<label>` or another valid HTML label association.[^form]
 
 # 1.x migration notes
 
@@ -125,7 +140,7 @@ These are the changes needed when moving a Form declaration. The full applicatio
 
 # Related
 
-[Rows](data.md) owns row identity and events. [UI contracts](ui.md) defines `RuleSet`, `FormHandle`, and validation results. [The M1 contract](../implementation/m1-contract.md) records the first-release rule boundary.
+[Rows](data.md) owns row identity and events. [Select](select.md) describes standalone typed choices; Form owns marked Select fields. [UI contracts](ui.md) defines `RuleSet`, `FormHandle`, and validation results. [The M1 contract](../implementation/m1-contract.md) records the first-release rule boundary.
 
 [^entry]: Public UI entry and Form types
 [^form]: Form binding runtime
