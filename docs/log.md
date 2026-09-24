@@ -1,5 +1,6 @@
 ## 2026-09-24
 
+* **Verification** M3 commit `94c73a9f` was fast-forward pushed to GitHub branch `2.0.0-alpha.0`; M4 remains a draft requiring separate approval.
 * **Update** Promoted the Apache-2.0 2.0 package from `v2/` to the repository root on branch `2.0.0-alpha.0`; preserved all 142 checked 1.x tracked source/document files under `v1/` with their LGPL license and notices. Root docs and the OKF checker now target 2.0.
 * **Creation** Added the M3 `mountPage`, `createCommunicator`, and `createRows` runtimes, focused unit/browser tests, and installed JS/TS consumer checks. UI remains type-only for M4.
 * **Update** `docs/v2/`, `implementation/current.md`, `implementation/m3-plan.md`, and the repository workflow to describe shipped M3 behavior, abort/cleanup boundaries, root package exports, and 1.x archive links.

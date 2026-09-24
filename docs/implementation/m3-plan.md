@@ -24,7 +24,7 @@ sources:
     resource: ../../src/comm/index.ts
     title: Communication type contract
     git_blob: f3650ddbfeb5d87c3e58dc84904df9704e994368
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T09:03:22Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T09:14:10Z }
 ---
 
 M3 turns the approved page, communication, and minimum row contracts into working runtime exports. It uses the M2 package without importing or relabeling 1.x code.
@@ -70,6 +70,7 @@ M3 runtime and its tests are complete. Review the [M4 plan](m4-plan.md) and rece
 | 2026-09-24 | Approval | The user approved M3 implementation, root 2.0 promotion, `v1/` preservation, and the `2.0.0-alpha.0` GitHub branch. |
 | 2026-09-24 | Runtime | Build, typecheck, Vitest 20/20, installed JS/TS consumers, and Chromium/WebKit browser 16/16 passed. URL/factory/borrowed roots, pending init cancellation, two independent pages, reload, and duplicate-ID rejection were exercised. |
 | 2026-09-24 | Package | The 2.0 tarball lists 33 files and excludes `v1/`, jQuery, old bundles, and old utility libraries. |
+| 2026-09-24 | Documentation and push | Changed and full OKF checks passed with 0 errors and warnings; commit `94c73a9f` was fast-forward pushed to `origin/2.0.0-alpha.0`. |
 
 # Open questions
 

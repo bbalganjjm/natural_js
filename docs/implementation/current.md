@@ -8,7 +8,7 @@ sources:
     resource: ../governance/okf-conventions.md
     title: OKF conventions for the Natural-JS bundle
     git_blob: 17cfe650daacff3935aa93a383868574afe95628
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T09:03:30Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T09:14:06Z }
 ---
 
 The Natural-JS 2.0 migration follows [the master roadmap](roadmap.md). Read this checkpoint before resuming a milestone. The immutable 1.x baseline is commit `b96e47a0d7e020d1878f7cecdf1b1a9f462d99a6`; its source, LGPL license, and usage docs are also archived under `v1/`.
@@ -20,7 +20,7 @@ Deliver a TypeScript-source, jQuery-free, ESM Natural-JS 2.0 at the repository r
 # Checkpoint
 
 - M0-M2 are complete. M2 was first built under `v2/` and verified before the user approved moving it to the repository root.
-- The user approved M3 and requested the exact GitHub branch `2.0.0-alpha.0`. The local branch has been created; the root move and M3 implementation are being checked before a fast-forward push. Do not switch `master` or create its archive branch yet.
+- The user approved M3 and requested the exact GitHub branch `2.0.0-alpha.0`. The verified root 2.0 tree and M3 runtime were fast-forward pushed to `origin/2.0.0-alpha.0` at commit `94c73a9f`. Do not switch `master` or create its archive branch yet.
 - The 2.0 root package and new source use Apache-2.0. The 1.x files under `v1/` keep their prior license and notices.
 - M3 page, communication, and row runtime code is implemented. The `./ui` entry remains type-only until M4. M5 retains and rewrites the Form-used formatter/validator behavior.
 
@@ -32,12 +32,12 @@ Deliver a TypeScript-source, jQuery-free, ESM Natural-JS 2.0 at the repository r
 - [x] Receive approval for the M3 runtime and root 2.0 / `v1/` layout.
 - [x] Move 2.0 source/package to the root and archive 1.x source/docs under `v1/` without changing their license.
 - [x] Implement `mountPage`, `createCommunicator`, and `createRows` with focused tests and installed consumers.
-- [ ] Complete M3 concept updates, source fingerprints, changed/full OKF checks, package audit, and GitHub fast-forward push.
+- [x] Complete M3 concept updates, source fingerprints, changed/full OKF checks, package audit, and GitHub fast-forward push.
 - [ ] Review and approve [the M4 detailed plan](m4-plan.md) before implementing the representative UI screen.
 
 # Next action
 
-Finish the M3 documentation and package checks, commit and push the verified root tree to `origin/2.0.0-alpha.0`, then present M3 results and the M4 plan for review. Do not implement M4 before approval.
+Review [the M4 detailed plan](m4-plan.md) and approve its scope before implementing the representative UI screen. M3 is complete; do not implement M4 before approval.
 
 # Decisions
 
@@ -54,6 +54,7 @@ Finish the M3 documentation and package checks, commit and push the verified roo
 | 2026-09-24 | M2 baseline | Build, typecheck, Vitest 2/2, installed JS/TS consumers, Chromium/WebKit smoke, and changed/full OKF checks passed. |
 | 2026-09-24 | M3 code | Build and typecheck passed; Vitest 20/20, Chromium/WebKit 16/16, and fresh-tarball JS/TS consumers passed. |
 | 2026-09-24 | Checker | Node regression test passed after switching public-source discovery to the 2.0 root. |
+| 2026-09-24 | M3 docs and push | Changed and full OKF checks: 17 concepts, 5 reserved files, 0 errors, 0 warnings. The 33-file tarball excludes `v1/` and jQuery. Commit `94c73a9f` fast-forward pushed to `origin/2.0.0-alpha.0`. |
 
 # Open questions
 

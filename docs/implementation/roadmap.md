@@ -7,7 +7,7 @@ sources:
   - id: baseline
     resource: https://github.com/bbalganjjm/natural_js/blob/b96e47a0d7e020d1878f7cecdf1b1a9f462d99a6/package.json
     title: Immutable Natural-JS 1.x package baseline
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T08:54:36Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T09:14:02Z }
 ---
 
 This roadmap governs the Natural-JS 2.0 migration. Use [the active checkpoint](current.md) for status and a milestone-specific plan before implementing that milestone. The 1.x source and documentation remain available under `v1/` and at commit b96e47a0d7e020d1878f7cecdf1b1a9f462d99a6.
@@ -18,7 +18,7 @@ Ship a TypeScript-source, ESM, jQuery-free UI framework that keeps CVC and attac
 
 # Checkpoint
 
-- M0-M2 are complete; M3 runtime is approved and in progress on branch `2.0.0-alpha.0`. See [current.md](current.md).
+- M0-M3 are complete on branch `2.0.0-alpha.0`; M4 awaits review and approval. See [current.md](current.md).
 - The initial 2.0 release includes form, list, basic grid, select, pagination, button, dialog, popup, and tab.
 - Advanced grid, tree, custom date picker, notification, and document tabs follow in 2.x.
 
@@ -44,7 +44,7 @@ Each milestone starts with a detailed plan, user review, and approval of its sco
 
 # Next action
 
-Complete [the M3 runtime plan](m3-plan.md), then review [the M4 vertical-screen plan](m4-plan.md) before implementing M4.
+Review [the M4 vertical-screen plan](m4-plan.md) and approve its scope before implementing M4.
 
 # Decisions
 

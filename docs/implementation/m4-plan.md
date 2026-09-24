@@ -12,7 +12,7 @@ sources:
   - id: roadmap
     resource: roadmap.md
     title: Milestone order and M4 exit gate
-    git_blob: 9a2ae5fa12f8a0309ca41b6565556fa05f826c54
+    git_blob: 7979cb0cea284c36e166199401c00b2ac806e26f
   - id: page
     resource: ../../src/page/index.ts
     title: M3 page lifecycle implementation
@@ -25,7 +25,7 @@ sources:
     resource: ../../src/comm/index.ts
     title: M3 request implementation
     git_blob: f3650ddbfeb5d87c3e58dc84904df9704e994368
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T09:03:26Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T09:14:15Z }
 ---
 
 M4 tests the 2.0 structure through one complete application path before expanding the UI catalog. This is a plan for user review. M4 implementation does not start until its scope is approved.
@@ -86,7 +86,7 @@ M4 is complete only when the two authored views run the same controller, the ver
 
 # Next action
 
-Wait for M3 to close and for the user to review and approve this M4 plan. No M4 runtime or UI implementation is authorized by drafting this document.
+M3 is complete. Wait for the user to review and approve this M4 plan. No M4 runtime or UI implementation is authorized by drafting this document.
 
 # Decisions
 
