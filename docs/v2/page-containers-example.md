@@ -8,7 +8,7 @@ sources:
   - id: controller
     resource: ../../examples/vite/m7/main.ts
     title: Shared page definition and container ownership
-    git_blob: 25d07df69cbf0c79d0e92bfdef6227ae6f905313
+    git_blob: 96e37e19f8596b57caffe0845a121b2c626db875
   - id: side
     resource: ../../examples/vite/m7/side.html
     title: Authored side-by-side layout
@@ -20,10 +20,10 @@ sources:
   - id: browser
     resource: ../../tests/browser/m7-screen.spec.ts
     title: Cross-container and MDI browser checks
-    git_blob: 214393e45d84cb88a781304cfa6e26cdc826ea42
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T15:43:32Z }
+    git_blob: 67c6bdd310b8083059548eccbfec369678dd5167
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T18:36:01Z }
 verified:
-  - { by: codex/gpt-6-sol, at: 2026-09-24T15:58:02Z }
+  - { by: codex/gpt-6-sol, at: 2026-09-24T18:39:10Z }
 ---
 
 The M7 Vite example mounts one picker `PageDefinition` independently in main content, a native dialog Popup, and the People and Preview Tab panels. A caller-owned `Rows` store shares the selected person across two authored MDI layouts without repeated DOM IDs.[^controller][^side][^stack]
@@ -48,7 +48,7 @@ Open `/m7/side.html` or `/m7/stack.html` under `npm run example`. Open another w
 
 # Controller
 
-`examples/vite/m7/main.ts` defines the picker once. Its view factory clones the authored picker template into a fresh root. The application creates one `Rows<{ selected: string }>` store and passes it to every mount. The controller uses the CVC signal for event listeners, subscribes to shared selection updates with `own` for cleanup, and emits a picked person through `output`. Main, People Tab, and Preview Tab each mount that definition with independent inputs and subscribe to output; Popup receives the same definition and awaits its result. The Help Tab borrows its prewritten inline root. A choice returned by the Popup opened from Preview also updates Preview's authored output. Each workspace owns its main page, Tabs handle, Popup opening, and event controller, and releases them before removing its root.[^controller]
+`examples/vite/m7/main.ts` defines the picker once. Its view factory clones the authored picker template into a fresh root. The application creates one `Rows<{ selected: string }>` store and passes it to every mount. The controller uses the CVC signal for event listeners, subscribes to shared selection updates with `own` for cleanup, and emits a picked person through `output`. Main, People Tab, and Preview Tab each mount that definition with independent inputs and subscribe to output; Popup receives the same definition and awaits its result. The Help Tab borrows its prewritten inline root. A choice returned by the Popup opened from Preview also updates Preview's authored output. Each workspace owns its main page, Tabs handle, Popup opening, and event controller, and releases them before removing its root. Explicit removal returns focus to the external Add screen button; expected `AbortError` from canceled main or Tab readiness is not reported as an application failure.[^controller][^browser]
 
 # How it works
 

@@ -12,15 +12,15 @@ sources:
   - id: roadmap
     resource: roadmap.md
     title: Milestone and first-release scope
-    git_blob: bb294e3a572c9778fb77679bbe9ce294c68d2841
+    git_blob: f5c11372df84b5cbddf729ec5d599825d59e3d99
   - id: m4
     resource: m4-plan.md
     title: Two-layout screen and fixed performance baseline
-    git_blob: 9fce2e40492f908d81bc6db9929739c5eff32cc3
+    git_blob: 665a141f5139857b7c21cbc1da1fd853ddd00061
   - id: m5
     resource: m5-plan.md
     title: Retained rules, row drafts, and data boundary
-    git_blob: 2a9d8bb6c7f3f94c06adae284fa7a2c7d85fb601
+    git_blob: b9304164612ffbf84b4f2e94012757d00a6d2c8a
   - id: ui
     resource: ../../src/ui/index.ts
     title: Current public UI types and exports

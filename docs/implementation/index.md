@@ -10,5 +10,9 @@
 * [Natural-JS 2.0 M5 data and rule plan](m5-plan.md) - Approved M5 implementation plan and verification for retained Form rules, row-keyed drafts, nested binding, and shared validation. (draft)
 * [Natural-JS 2.0 M6 data UI plan](m6-plan.md) - Approved M6 contract and implementation evidence for Button, Select, pagination, Form, List, and basic Grid on authored HTML. (draft)
 * [Natural-JS 2.0 M7 page UI plan](m7-plan.md) - Approved native Dialog, Popup, and Tab implementation with three-browser and agent-task evidence. (draft)
-* [Natural-JS 2.0 M8 agent and migration QA plan](m8-plan.md) - Proposed agent evaluation, 1.x migration, API pruning, and beta-candidate evidence after M7. (draft)
+* [Natural-JS 2.0 M8 agent and migration QA plan](m8-plan.md) - Approved agent evaluation, 1.x migration, API pruning, and beta-candidate evidence after M7. (draft)
+* [Natural-JS 2.0 M8 public API and Form rule audit](m8-api-audit.md) - Complete public export inventory, retained rule reachability, and review boundary for M8 pruning. (draft)
+* [Natural-JS 2.0 M8 fixed agent evaluation](m8-eval.md) - Pinned task seeds, acceptance checks, and consistent agent read-cost accounting for M8. (draft)
+* [Natural-JS 2.0 M8 unpublished beta candidate](m8-beta-report.md) - M8 migration, agent tasks, browser, package, performance, and documentation gates before the M9 release plan. (draft)
+* [Natural-JS 2.0 M9 release plan](m9-plan.md) - Proposed beta, release-candidate, and 2.0.0 gates for installed consumers, browsers, accessibility, performance, package scope, and publication. (draft)
 * [Natural-JS 2.0 master roadmap](roadmap.md) - Milestone order, scope boundary, and completion gates for the TypeScript-first Natural-JS 2.0 migration.

@@ -12,11 +12,11 @@ sources:
   - id: roadmap
     resource: roadmap.md
     title: First-release and M7 boundary
-    git_blob: bb294e3a572c9778fb77679bbe9ce294c68d2841
+    git_blob: f5c11372df84b5cbddf729ec5d599825d59e3d99
   - id: m6
     resource: m6-plan.md
     title: Approved M6 data UI and verification
-    git_blob: e9541ee00039742219ba33bdebc086a862fa4ab7
+    git_blob: 62f5b81adf5f1c4e4c59ba3db4daba3221fb74e2
   - id: page
     resource: ../../src/page/index.ts
     title: One CVC runtime and lifecycle

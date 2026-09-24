@@ -156,13 +156,32 @@ for (const layout of ["side", "stack"] as const) {
       return ids.filter((id, index) => ids.indexOf(id) !== index);
     });
     expect(duplicateIds).toEqual([]);
-    await first.locator("[data-remove-screen]").click();
+    await first.locator("[data-remove-screen]").focus();
+    await page.keyboard.press("Enter");
     await expect(first).toHaveCount(0);
+    const addScreen = page.locator("[data-add-screen]");
+    await expect(addScreen).toBeFocused();
+    await page.keyboard.press("Enter");
+    await expect(page.locator('[data-screen="3"]')).toHaveCount(1);
     await second.locator("[data-open-picker]").click();
     await second.locator('[data-picker-dialog] [data-person="Ada"]').click();
     await expect(second.locator("[data-popup-output]")).toHaveText("Popup chose Ada");
   });
 }
+
+test("immediate workspace removal treats page readiness cancellation as normal", async ({ page }) => {
+  const errors: Error[] = [];
+  page.on("pageerror", error => errors.push(error));
+  await page.goto("/m7/side.html");
+  await page.evaluate(() => {
+    document.querySelector<HTMLButtonElement>("[data-add-screen]")!.click();
+    document.querySelector<HTMLButtonElement>('[data-screen="2"] [data-remove-screen]')!.click();
+  });
+  await expect(page.locator('[data-screen="2"]')).toHaveCount(0);
+  await expect(page.locator("[data-history] > li")).toHaveText(["Screen 2: removed"]);
+  await expect(page.locator("[data-add-screen]")).toBeFocused();
+  expect(errors).toEqual([]);
+});
 
 test("slow Popup close and parent removal settle once and release the page", async ({ page }) => {
   const errors: Error[] = [];

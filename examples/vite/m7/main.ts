@@ -27,6 +27,7 @@ function find<ElementType extends Element>(root: ParentNode, selector: string): 
 }
 
 const hosts = find<HTMLElement>(document, "[data-screens]");
+const addScreenButton = find<HTMLButtonElement>(document, "[data-add-screen]");
 const screenTemplate = find<HTMLTemplateElement>(document, "template[data-screen-view]");
 const pickerTemplate = find<HTMLTemplateElement>(document, "template[data-picker-view]");
 const sharedRows = createRows([{ selected: "None" }]);
@@ -102,7 +103,10 @@ function openScreen(): void {
     ...sharedInput, screen: screenNumber, place: "main"
   });
   main.onOutput(choice => { mainOutput.textContent = `Main chose ${choice.person}`; });
-  void main.ready.catch(cause => record(`Screen ${screenNumber}: main ${errorName(cause)}`));
+  void main.ready.catch(cause => {
+    if (cause instanceof Error && cause.name === "AbortError") return;
+    record(`Screen ${screenNumber}: main ${errorName(cause)}`);
+  });
 
   async function openPicker(slow: boolean, onChoice?: (choice: PickerChoice) => void): Promise<void> {
     if (popup) return;
@@ -162,7 +166,10 @@ function openScreen(): void {
       }
     }
   });
-  void tabs.ready.catch(cause => record(`Screen ${screenNumber}: tabs ${errorName(cause)}`));
+  void tabs.ready.catch(cause => {
+    if (cause instanceof Error && cause.name === "AbortError") return;
+    record(`Screen ${screenNumber}: tabs ${errorName(cause)}`);
+  });
 
   find<HTMLButtonElement>(screen, "[data-open-picker]").addEventListener("click", event => {
     (event.currentTarget as HTMLButtonElement).focus({ preventScroll: true });
@@ -191,9 +198,10 @@ function openScreen(): void {
     }
     await Promise.allSettled([tabs.dispose(), main.dispose()]);
     screen.remove();
+    addScreenButton.focus({ preventScroll: true });
     record(`Screen ${screenNumber}: removed`);
   }
 }
 
-find<HTMLButtonElement>(document, "[data-add-screen]").addEventListener("click", openScreen);
+addScreenButton.addEventListener("click", openScreen);
 openScreen();

@@ -1,14 +1,14 @@
 ---
 type: Plan
 title: Natural-JS 2.0 M8 agent and migration QA plan
-description: Proposed agent evaluation, 1.x migration, API pruning, and beta-candidate evidence after M7.
+description: Approved agent evaluation, 1.x migration, API pruning, and beta-candidate evidence after M7.
 tags: [meta, plan, migration, ai]
 status: draft
 sources:
   - id: roadmap
     resource: roadmap.md
     title: First-release milestones and M8 boundary
-    git_blob: bb294e3a572c9778fb77679bbe9ce294c68d2841
+    git_blob: f5c11372df84b5cbddf729ec5d599825d59e3d99
   - id: baseline
     resource: m0-baseline.md
     title: Fixed representative screen and three agent tasks
@@ -20,15 +20,15 @@ sources:
   - id: m7
     resource: m7-plan.md
     title: M7 page-container result and fixed Preview task
-    git_blob: a8b9248498b7e96464f02e281984675d715d4149
+    git_blob: 492f57c7d29bd9133d4e818c1115b86c8c906e89
   - id: workflow
     resource: ../governance/repository-workflow.md
     title: Same-task OKF source and verification rules
     git_blob: a8d61fb373b6ade2fc623216378de623324609c8
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T15:49:51Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T18:59:01Z }
 ---
 
-M8 is a proposed plan, not an authorization to change the public contract or publish a package. It turns the implemented M0-M7 framework into a short, executable migration guide and a measured agent workflow before the M9 release gate.[^roadmap][^baseline][^m7]
+M8 was approved by the user on 2026-09-25. This approval does not authorize a public contract deletion or package publication. It turns the implemented M0-M7 framework into a short, executable migration guide and a measured agent workflow before the M9 release gate.[^roadmap][^baseline][^m7]
 
 # Goal
 
@@ -38,7 +38,7 @@ Let a coding agent locate the relevant contract, add or repair a screen correctl
 
 - M0 froze three representative tasks: add an authored-HTML search/list/detail page, add an email field with built-in and custom validation plus changed-row save, and fix a delayed-request close/reopen race. Their acceptance behavior remains fixed.[^baseline]
 - M7 supplied one CVC page runtime for main content, Popup, and Tabs, with two authored MDI layouts and a first docs-only Preview task. That task passed its first code run without a retry; its read-byte method differs from earlier tasks, so it is evidence of usability, not a cross-version savings percentage.[^m7]
-- M8 has not been approved. The root 2.0 package remains private, while preserved LGPL-2.1 1.x source and documentation stay under `v1/`.[^roadmap]
+- M8 is complete against post-M7 commit `f659f1d8c86ad39925eda44b55d569b175e96e57`; [the candidate report](m8-beta-report.md) holds its measured gates and limits. The root 2.0 package remains private, while preserved LGPL-2.1 1.x source and documentation stay under `v1/`.[^roadmap]
 
 # Steps
 
@@ -54,7 +54,7 @@ Let a coding agent locate the relevant contract, add or repair a screen correctl
 
 # Next action
 
-Review and approve this M8 scope and its frozen-task protocol separately. Only then implement the migration guide, agent comparisons, documented pruning, and beta-candidate checks. A proposed public API change returns for user review before implementation.
+Review [the M8 candidate report](m8-beta-report.md), [fixed evaluation results](m8-eval.md), and [proposed M9 plan](m9-plan.md). Keep the unused public `Rule` type until a separate contract decision; M9 implementation and package publication remain outside this M8 approval.
 
 # Decisions
 
@@ -67,11 +67,16 @@ Review and approve this M8 scope and its frozen-task protocol separately. Only t
 
 | Date | Check | Result |
 |---|---|---|
-| 2026-09-25 | Planning input | Derived this proposal from the M0 fixed tasks, M1 retained-rule contract, M7 container result, roadmap, and repository workflow. No M8 implementation or release action has started. |
+| 2026-09-25 | Planning input | Derived this plan from the M0 fixed tasks, M1 retained-rule contract, M7 container result, roadmap, and repository workflow. |
+| 2026-09-25 | User approval | User approved M8 after the M7 GitHub push. Evaluation, migration, reachability, and beta-candidate checks may proceed; public API deletion and publication remain separate decisions. |
+| 2026-09-25 | Migration and API | Indexed 1.x-to-2.0 migration, audited five public entries, 11 runtime values, 35 types, and all declaratively reachable Form rules. The only public removal candidate, `Rule`, remains unchanged. See [audit](m8-api-audit.md) and [guide](../v2/migration.md). |
+| 2026-09-25 | Fixed agent tasks | Three fresh 2.0 tasks passed frozen Chromium acceptance (2/2 each) with zero post-implementation code retries. First-pass content output was 154,895/163,253/109,304 UTF-8 bytes across 27/24/14 unique files. Task 2/3 elapsed 7m18s/5m39s; Task 1 and actual token counts are unavailable. Raw meter logs and cutoffs are tracked; no 1.x or M8-doc-effect savings claim is made. See [evaluation](m8-eval.md). |
+| 2026-09-25 | Browser, package, binding | Focused CVC/UI checks passed 75/75 each in Chromium, Firefox, and WebKit, plus Task 1 supplemental simultaneous-ID QA 2/2. Build, strict types, Vitest 81/81, packed JS/TS consumers, and 1,000-row reference Grid/List budgets passed. The 98-file tarball excludes legacy and evaluation files. See [candidate report](m8-beta-report.md). |
+| 2026-09-25 | Documentation | Changed/full OKF checks passed with 35 concepts, 5 reserved files, zero errors and warnings after source review and fingerprinting. The M9 release plan is a draft for separate approval. |
 
 # Open questions
 
-- A 1.x versus 2.0 agent comparison needs equivalent task acceptance and the same measurement script, but the API-specific prompts cannot be byte-identical. Record those differences before drawing a comparative conclusion.
+- A 1.x versus 2.0 agent comparison needs equivalent task acceptance and the same measurement script. The M8 fresh tasks used frozen post-M7 documentation, so they establish 2.0 feasibility but not the effect of M8's new navigation/migration docs or numerical token savings.
 - The user must review any proposed removal or changed meaning of a public 2.0 API. Treat such a finding as a decision point, not an automatic M8 cleanup.
 - Actual token telemetry may remain unavailable; report the measured read context and its counting method without estimating tokens.
 

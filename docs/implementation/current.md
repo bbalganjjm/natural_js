@@ -8,7 +8,7 @@ sources:
     resource: ../governance/okf-conventions.md
     title: OKF conventions for the Natural-JS bundle
     git_blob: 17cfe650daacff3935aa93a383868574afe95628
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T15:18:47Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T18:59:20Z }
 ---
 
 Read [the roadmap](roadmap.md) for the full sequence and each completed milestone's plan for its history. The fixed 1.x baseline is commit `b96e47a0d7e020d1878f7cecdf1b1a9f462d99a6`; its LGPL source and docs remain under `v1/`.
@@ -21,11 +21,12 @@ Deliver an Apache-2.0, TypeScript-source, ESM Natural-JS 2.0 at the root. Preser
 
 - M0-M5 are complete; their decisions, checks, and source evidence live in [M0](m0-baseline.md), [M1](m1-contract.md), [M2](m2-plan.md), [M3](m3-plan.md), [M4](m4-plan.md), and [M5](m5-plan.md). The branch is `2.0.0-alpha.0`; `master` and preserved `v1/` remain unchanged.
 - [M6 data UI](m6-plan.md) is complete. Commit `53790b44` implements native Button behavior, Form groups, List, standalone Select, Pagination, and editable/paged Grid in two authored CVC layouts. Three-browser, package, benchmark, source-doc, and two isolated agent-task gates passed; [M6](m6-plan.md) holds the detailed evidence.
-- [M7 page UI](m7-plan.md) is complete. Native Dialog, Popup, and lazy Tabs use the same CVC runner across two authored MDI layouts; the user-approved M1 Popup amendment is reflected in the source and docs. The branch awaits review of the [proposed M8 plan](m8-plan.md).
+- [M7 page UI](m7-plan.md) is complete. Native Dialog, Popup, and lazy Tabs use the same CVC runner across two authored MDI layouts; the user-approved M1 Popup amendment is reflected in the source and docs.
+- [M8 agent and migration QA](m8-plan.md) is complete. The [unpublished candidate report](m8-beta-report.md) records migration, three fixed agent tasks, package/consumer checks, browser regression, binding performance, and limits. [M9 release](m9-plan.md) is a proposed plan awaiting separate review.
 
 # Next action
 
-Review [the proposed M8 plan](m8-plan.md) and its fixed three-task protocol. M8 implementation and any public API pruning wait for separate user approval.
+Review the [proposed M9 plan](m9-plan.md) and the unused public `Rule` type decision. No beta/RC/stable npm publication, Git tag, or master-branch transition has been performed.
 
 # Decisions
 
@@ -45,10 +46,13 @@ Review [the proposed M8 plan](m8-plan.md) and its fixed three-task protocol. M8 
 | 2026-09-25 | M7 runtime and browser | Popup/Tabs and the two-layout CVC screen passed 20 focused cases in each of Chromium, WebKit, and fresh-cache Firefox (60/60). This includes 20 consecutive Popup openings, native close/cancel, nested focus recovery, async Tabs races, two simultaneous MDI workspaces, shared Rows, and duplicate-ID checks. |
 | 2026-09-25 | M7 package and agent task | Build, strict typecheck, Vitest 81/81, installed JS/TS consumers, and a 98-file, 136,368-byte package audit passed. The docs-first Preview task passed first-run Chromium 5/5 and changed OKF check with no code retries: 22 unique read files, about 106,209 UTF-8 read/review bytes, 7 changed files (+87/-24 lines), and 12m03s. Actual token usage was unavailable; see [M7 evidence](m7-plan.md). |
 | 2026-09-25 | M7 docs | Six M7 2.0 concepts were independently compared with source and verified. Changed and full OKF checks passed: 30 concepts, 5 reserved files, zero errors and warnings. |
+| 2026-09-25 | M8 authorization | User approved the M8 plan after the M7 commit `f659f1d8` was pushed to `2.0.0-alpha.0`. The fixed agent-task baseline is that commit. |
+| 2026-09-25 | M8 agent and docs | Three fresh tasks passed frozen Chromium acceptance 2/2 each without code retries. First-pass read-cost output was 154,895/163,253/109,304 UTF-8 bytes across 27/24/14 files; raw logs and cutoffs are tracked. Task 1 precise time and actual token counts were unavailable. Migration and API/rule audit were independently reviewed; changed/full OKF checks passed with 35 concepts, zero errors/warnings. See [evaluation](m8-eval.md) and [candidate](m8-beta-report.md). |
+| 2026-09-25 | M8 browser, package, binding | CVC/UI focused tests passed 75/75 each in Chromium, Firefox, and WebKit; Task 1 live two-screen duplicate-ID QA passed 2/2. Build, strict types, Vitest 81/81, installed JS/TS tarball consumers, and 1,000-row reference Grid/List budgets passed. The root package remains private and unpublished. |
 
 # Open questions
 
 - M6 agent correctness held, but read output increased and methods differ from the M5 replay. The [employee task map](../v2/employee-example.md) now points at narrow regression starts; M8 must use one measurement method for the three fixed tasks before claiming token savings.
-- List creates all row records on first bind; its 1,000-row fixture meets the current budget, but a focused M10 review may be needed for larger data sets. Chromium heap samples lack controlled collection.
+- List creates all row records on first bind; its 1,000-row fixture meets the current budget, but larger workloads may need M10 review. Chromium heap samples lack controlled collection. The unused public `Rule` type remains until a specific contract decision.
 - The system-installed Firefox does not expose the Playwright protocol. The fresh Playwright Firefox build passed M7; reproduce with `PLAYWRIGHT_BROWSERS_PATH=node_modules/.cache/playwright-m6` for Firefox only. Chromium/WebKit use the default cache.
-- M8 must use the same read-byte counting method and the M0 fixed tasks before claiming any 1.x-to-2.0 time or token improvement. M7's Preview result is one successful usability sample, not a comparable savings percentage.
+- M8 used one read-byte method for three 2.0 tasks, but there is no equivalent 1.x fixture or actual token telemetry. The seeds predate M8 documentation improvements; no numerical token/time-saving claim is supported.

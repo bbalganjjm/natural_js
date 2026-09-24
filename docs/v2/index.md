@@ -6,6 +6,7 @@
 * [Natural-JS 2.0 rows](data.md) - Immutable JSON row snapshots with store-local identity, change tracking, and subscriptions. (draft)
 * [CVC pages in main content, Popup, and Tabs](page-containers-example.md) - One picker PageDefinition shares Rows across main content, Popup, and People and Preview Tabs in two authored MDI layouts. (draft)
 * [Employee screen in two authored layouts](employee-example.md) - One CVC controller shares Rows across Form, Grid, and List, coordinating Select and Pagination in two authored layouts and fetched HTML. (draft)
+* [Migrating a 1.x screen to Natural-JS 2.0](migration.md) - Move a 1.x search/list/detail screen, changed-row save, and Popup or Tab page to scoped ESM APIs. (draft)
 * [bindForm](form.md) - Bind authored Form fields and groups to Rows with row-keyed drafts, retained rules, and accessible errors. (draft)
 * [FrameworkError](framework-error.md) - Shared 2.0 error with a stable code, API name, message, cause, and optional detail. (draft)
 * [bindGrid](grid.md) - Bind an authored native table to Rows with cell editing, nested choices, local paging, and accessible validation. (draft)

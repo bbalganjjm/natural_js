@@ -1,0 +1,62 @@
+{
+  "protocol": "m8-fixed-agent-tasks-v1",
+  "baseline_commit": "f659f1d8c86ad39925eda44b55d569b175e96e57",
+  "baseline_tar_sha256": "4F0AF4527034494F737D1563E24CD891B30A5C2DB40EBF28A2A537F50DF66191",
+  "seed_tar_sha256": {
+    "task1": "8AE5F81F2F58EFF35B9788C3A61B42E8C8B6176B46781F13A00CCCA63BC4052E",
+    "task2": "BA39CC15DD2EAA6294D19A25537C987C113DF3B5F0AC222A7E15DC233A484990",
+    "task3": "C1C035DF3CF1E2AA320C8365E56A1D87E5F351AC48E2B88AA2376AD19FBFB38D"
+  },
+  "task_logs": {
+    "task1": {
+      "log": "m8-agent-meter-task1.jsonl",
+      "log_sha256": "21990CA9BDFB06AE46932AA613D8780BFF109C263E74AD2FF822036B8BCDFCF9",
+      "records": 19,
+      "first_pass_records": 18,
+      "first_pass_at_utc": null,
+      "elapsed_seconds": null,
+      "first_pass_content_bytes": 154895,
+      "first_pass_unique_content_files": 27,
+      "first_pass_filename_bytes": 9179,
+      "excluded_later_records": 1
+    },
+    "task2": {
+      "log": "m8-agent-meter-task2.jsonl",
+      "log_sha256": "DD93797B9007BBF77D5113F80BE0502AFD3887212CE8051F8F466E0E9DA8F551",
+      "records": 28,
+      "first_pass_records": 27,
+      "first_pass_at_utc": "2026-09-24T18:31:31Z",
+      "elapsed_seconds": 438,
+      "first_pass_content_bytes": 163253,
+      "first_pass_unique_content_files": 24,
+      "first_pass_filename_bytes": 32,
+      "excluded_later_records": 1
+    },
+    "task3": {
+      "log": "m8-agent-meter-task3.jsonl",
+      "log_sha256": "DF9B010566000FC67D2AC973CEC0DBA994EEC06CA70B78A1F2ADEDE08366E381",
+      "records": 16,
+      "first_pass_records": 13,
+      "first_pass_at_utc": "2026-09-24T18:49:47Z",
+      "elapsed_seconds": 339,
+      "first_pass_content_bytes": 109304,
+      "first_pass_unique_content_files": 14,
+      "first_pass_filename_bytes": 0,
+      "excluded_later_records": 3
+    },
+    "task3-excluded": {
+      "log": "m8-agent-meter-task3-excluded.jsonl",
+      "log_sha256": "0D009308C39DF3E4685019889B7DBC684EC38E93F6F1694B0C5345E1DD68B8B6",
+      "records": 20,
+      "first_pass_records": null,
+      "first_pass_at_utc": null,
+      "elapsed_seconds": 329,
+      "first_pass_content_bytes": null,
+      "first_pass_unique_content_files": null,
+      "first_pass_filename_bytes": null,
+      "excluded_later_records": 20,
+      "reason": "Outer tool responses were truncated in the first functional run; its meter total is a lower bound and not comparable."
+    }
+  },
+  "recompute": "For each task, take the first_pass_records JSONL rows. Sum bytes where kind is not files; count distinct files values in those rows; separately sum bytes where kind is files. Later rows are excluded from first-pass cost."
+}

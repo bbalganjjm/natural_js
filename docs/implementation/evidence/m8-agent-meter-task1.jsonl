@@ -1,0 +1,19 @@
+{"at":"2026-09-24T18:12:24.319Z","kind":"read","args":["docs/index.md","docs/governance/repository-workflow.md","docs/implementation/current.md"],"bytes":16308,"files":["docs/index.md","docs/governance/repository-workflow.md","docs/implementation/current.md"],"status":0}
+{"at":"2026-09-24T18:12:32.072Z","kind":"files","args":["docs/v2","examples/vite/m8-task1","tests/browser","*brief*"],"bytes":1043,"files":[],"status":2}
+{"at":"2026-09-24T18:12:56.896Z","kind":"read","args":["docs/v2/select.md","docs/v2/data.md","docs/v2/page.md"],"bytes":14756,"files":["docs/v2/select.md","docs/v2/data.md","docs/v2/page.md"],"status":0}
+{"at":"2026-09-24T18:12:56.912Z","kind":"read","args":["docs/v2/form.md","docs/v2/list.md"],"bytes":21375,"files":["docs/v2/form.md","docs/v2/list.md"],"status":0}
+{"at":"2026-09-24T18:12:56.992Z","kind":"read","args":["docs/v2/index.md","docs/v2/employee-example.md"],"bytes":14154,"files":["docs/v2/index.md","docs/v2/employee-example.md"],"status":0}
+{"at":"2026-09-24T18:13:05.820Z","kind":"files","args":["."],"bytes":8136,"files":[],"status":0}
+{"at":"2026-09-24T18:13:15.956Z","kind":"read","args":["examples/vite/m8-task1/side.html","examples/vite/m8-task1/stack.html","examples/vite/m8-task1/employees.json"],"bytes":3806,"files":["examples/vite/m8-task1/side.html","examples/vite/m8-task1/stack.html","examples/vite/m8-task1/employees.json"],"status":0}
+{"at":"2026-09-24T18:13:18.934Z","kind":"read","args":["tests/browser/m8-task1.spec.mjs","tests/playwright.eval.config.mjs"],"bytes":3494,"files":["tests/browser/m8-task1.spec.mjs","tests/playwright.eval.config.mjs"],"status":0}
+{"at":"2026-09-24T18:13:21.739Z","kind":"read","args":["examples/vite/vite.config.ts","examples/vite/main.ts","src/page/index.ts"],"bytes":14882,"files":["examples/vite/vite.config.ts","examples/vite/main.ts","src/page/index.ts"],"status":0}
+{"at":"2026-09-24T18:13:24.593Z","kind":"read","args":["src/ui/index.ts","src/data/index.ts"],"bytes":13293,"files":["src/ui/index.ts","src/data/index.ts"],"status":0}
+{"at":"2026-09-24T18:13:42.339Z","kind":"search","args":["export function bindList|export function bindForm|onSelect|form.addEventListener|submit","src/ui/list.ts","src/ui/form.ts","examples/vite/m4/employees.ts"],"bytes":669,"files":["examples/vite/m4/employees.ts","src/ui/list.ts","src/ui/form.ts"],"status":0}
+{"at":"2026-09-24T18:13:50.286Z","kind":"read-lines","args":["src/ui/list.ts","78","100"],"bytes":5243,"files":["src/ui/list.ts"],"status":0}
+{"at":"2026-09-24T18:13:53.060Z","kind":"read-lines","args":["src/ui/form.ts","120","150"],"bytes":6880,"files":["src/ui/form.ts"],"status":0}
+{"at":"2026-09-24T18:13:55.809Z","kind":"read-lines","args":["examples/vite/m4/employees.ts","45","90"],"bytes":3300,"files":["examples/vite/m4/employees.ts"],"status":0}
+{"at":"2026-09-24T18:13:58.569Z","kind":"read-lines","args":["examples/vite/m4/employees.ts","232","250"],"bytes":2269,"files":["examples/vite/m4/employees.ts"],"status":0}
+{"at":"2026-09-24T18:14:37.917Z","kind":"read","args":["docs/governance/okf-conventions.md"],"bytes":13844,"files":["docs/governance/okf-conventions.md"],"status":0}
+{"at":"2026-09-24T18:14:40.722Z","kind":"read-lines","args":["docs/log.md","1","45"],"bytes":9700,"files":["docs/log.md"],"status":0}
+{"at":"2026-09-24T18:14:43.374Z","kind":"read","args":["docs/implementation/index.md","docs/implementation/m8-plan.md"],"bytes":10922,"files":["docs/implementation/index.md","docs/implementation/m8-plan.md"],"status":0}
+{"at":"2026-09-24T18:19:47.333Z","kind":"review","args":["examples/vite/m8-task1/main.ts","docs/v2/employee-directory-example.md","docs/v2/employee-example.md","docs/v2/index.md","docs/log.md"],"bytes":11571,"files":["docs/log.md","docs/v2/employee-directory-example.md","docs/v2/employee-example.md","docs/v2/index.md","examples/vite/m8-task1/main.ts"],"status":0}

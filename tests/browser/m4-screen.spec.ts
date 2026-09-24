@@ -61,9 +61,13 @@ for (const layout of ["side", "stack"] as const) {
         .filter(id => id && !document.getElementById(id))
     );
     expect(brokenReferences).toEqual([]);
-    await screens.nth(0).locator('[data-action="close"]').click();
+    await screens.nth(0).locator('[data-action="close"]').focus();
+    await page.keyboard.press("Enter");
     await expect(screens).toHaveCount(1);
-    await expect(screens.first().locator("tbody tr")).toHaveCount(3);
+    await expect(page.locator('[data-action="open"]')).toBeFocused();
+    await page.keyboard.press("Enter");
+    await expect(screens).toHaveCount(2);
+    await expect(screens.last().locator("tbody tr")).toHaveCount(3);
   });
 
   test(layout + " keeps unsaved edits when Enter is pressed in the local filter", async ({ page }) => {

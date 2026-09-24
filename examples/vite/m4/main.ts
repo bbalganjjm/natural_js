@@ -21,7 +21,10 @@ function open(): void {
     controller: createEmployees
   }, {
     close() {
-      void page?.dispose().finally(() => host.remove());
+      void page?.dispose().finally(() => {
+        host.remove();
+        openButton!.focus({ preventScroll: true });
+      });
     }
   });
   void page.ready.catch(cause => {

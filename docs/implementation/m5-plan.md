@@ -12,7 +12,7 @@ sources:
   - id: m4
     resource: m4-plan.md
     title: M4 pilot and exit evidence
-    git_blob: 9fce2e40492f908d81bc6db9929739c5eff32cc3
+    git_blob: 665a141f5139857b7c21cbc1da1fd853ddd00061
   - id: form
     resource: ../../src/ui/form.ts
     title: Current Form pilot
