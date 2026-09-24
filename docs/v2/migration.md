@@ -24,7 +24,7 @@ sources:
   - id: package
     resource: ../../package.json
     title: Implemented 2.0 ESM package entries
-    git_blob: 148dfc8e866559ae2859b5130afabafdaa1c0af3
+    git_blob: 393602a69677d5fdaf7968fd49b19efd1b7d5cae
   - id: page
     resource: ../../src/page/index.ts
     title: Page definition, scoped root, output, and lifecycle
@@ -40,7 +40,7 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI bindings and rule types
-    git_blob: fb7b7ba6e42f7c8fc818ca514bdaf55647e1cf80
+    git_blob: e1c3c3d309fb5b5724965ce348396046b1c77db7
   - id: form
     resource: ../../src/ui/form.ts
     title: Form fields, drafts, and validation
@@ -105,7 +105,7 @@ sources:
     resource: ../../tests/rules.test.ts
     title: Declarative dispatch and combined-name checks
     git_blob: 70f1881b500b99c138c04c834258ed57eb6021be
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T18:36:01Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T19:32:25Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T18:39:10Z }
 ---
@@ -135,7 +135,7 @@ npm run build
 npm run example
 ```
 
-Open `/m4/side.html` and `/m4/stack.html` for search/list/detail; open `/m7/side.html` and `/m7/stack.html` for main content, Popup, and Tabs. Vite transpiles these TypeScript examples to browser JavaScript. `npm run test:consumers` separately packs the library, executes a JavaScript consumer, and typechecks a TypeScript consumer; it checks installed entry points, not the complete screen flow.[^employee][^containers][^package]
+Open `/m4/side.html` and `/m4/stack.html` for search/list/detail; open `/m7/side.html` and `/m7/stack.html` for main content, Popup, and Tabs. Vite transpiles these TypeScript examples to browser JavaScript. `npm run test:consumers` packs the library and checks separate installed JavaScript and TypeScript consumers. For a browser-served installed CVC/Form/Grid flow, use the fixed-tarball `test:packed-browser` command in [the package guide](package.md).[^employee][^containers][^package]
 
 # Steps
 
@@ -265,7 +265,7 @@ npm run test:consumers
 npx playwright test -c tests/playwright.config.ts tests/browser/m4-screen.spec.ts tests/browser/m7-screen.spec.ts
 ```
 
-In M4, a valid save sends only the changed raw rows matching `examples/vite/m4/expected-save.json`; invalid visible or hidden drafts send no save request, and closing during delayed work leaves no late update. In M7, Popup result/cleanup and keyed Tabs work in two authored layouts with two live workspaces. The browser checks exercise executable TypeScript screens; `test:consumers` checks packed JavaScript runtime imports and TypeScript declarations but does not execute those screens as installed applications.[^employee-test][^containers-test]
+In M4, a valid save sends only the changed raw rows matching `examples/vite/m4/expected-save.json`; invalid visible or hidden drafts send no save request, and closing during delayed work leaves no late update. In M7, Popup result/cleanup and keyed Tabs work in two authored layouts with two live workspaces. The regular browser checks exercise executable workspace TypeScript screens; `test:consumers` checks packed JavaScript and TypeScript imports, while `test:packed-browser` exercises a separate installed CVC/Form/Grid browser screen from an exact tarball.[^employee-test][^containers-test]
 
 # Pitfalls
 

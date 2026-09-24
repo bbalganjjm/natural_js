@@ -9,9 +9,8 @@ sources:
     title: Approved M1 public contract
     git_blob: 5cb7c544900bbd86867971e87003518858e498e1
   - id: package
-    resource: ../../package.json
+    resource: https://github.com/bbalganjjm/natural_js/blob/e9db5d81496b5674b67e6d267c184cb63aa987c0/package.json
     title: Isolated 2.0 package
-    git_blob: 148dfc8e866559ae2859b5130afabafdaa1c0af3
   - id: page
     resource: ../../src/page/index.ts
     title: Page type contract

@@ -10,13 +10,11 @@ sources:
     title: Fixed representative screen and agent tasks
     git_blob: 18172dc51ce39e36e35911d9e432ff75c904bb68
   - id: m8
-    resource: m8-plan.md
+    resource: https://github.com/bbalganjjm/natural_js/blob/e9db5d81496b5674b67e6d267c184cb63aa987c0/docs/implementation/m8-plan.md
     title: Approved M8 agent evaluation gate
-    git_blob: a184d6e243dde94460fadf28d3bb116b24d27a2a
   - id: m7
-    resource: m7-plan.md
+    resource: https://github.com/bbalganjjm/natural_js/blob/e9db5d81496b5674b67e6d267c184cb63aa987c0/docs/implementation/m7-plan.md
     title: Earlier agent sample and source map
-    git_blob: 492f57c7d29bd9133d4e818c1115b86c8c906e89
   - id: fixture-readme
     resource: ../../tests/evaluation/m8/README.md
     title: Pinned reconstruction procedure and archive hashes

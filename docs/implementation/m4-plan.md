@@ -10,9 +10,8 @@ sources:
     title: Approved M1 public contract and representative screen
     git_blob: 5cb7c544900bbd86867971e87003518858e498e1
   - id: roadmap
-    resource: roadmap.md
+    resource: https://github.com/bbalganjjm/natural_js/blob/e9db5d81496b5674b67e6d267c184cb63aa987c0/docs/implementation/roadmap.md
     title: Milestone order and M4 exit gate
-    git_blob: f5c11372df84b5cbddf729ec5d599825d59e3d99
   - id: page
     resource: ../../src/page/index.ts
     title: M3 page lifecycle implementation

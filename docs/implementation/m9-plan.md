@@ -1,30 +1,27 @@
 ---
 type: Plan
 title: Natural-JS 2.0 M9 release plan
-description: Proposed beta, release-candidate, and 2.0.0 gates for installed consumers, browsers, accessibility, performance, package scope, and publication.
+description: Approved beta, release-candidate, and 2.0.0 gates for installed consumers, browsers, accessibility, performance, package scope, and publication.
 tags: [meta, plan, release]
 status: draft
 sources:
   - id: roadmap
     resource: roadmap.md
     title: First-release scope and M9 gate
-    git_blob: f5c11372df84b5cbddf729ec5d599825d59e3d99
+    git_blob: 716441c68a8971d34503b538ec67f4a7795e90fe
   - id: m8
-    resource: m8-beta-report.md
+    resource: https://github.com/bbalganjjm/natural_js/blob/e9db5d81496b5674b67e6d267c184cb63aa987c0/docs/implementation/m8-beta-report.md
     title: Unpublished M8 beta-candidate evidence and limits
-    git_blob: 17d87bbfd76079a4294322de226714d8aa435ab6
   - id: audit
-    resource: m8-api-audit.md
+    resource: https://github.com/bbalganjjm/natural_js/blob/e9db5d81496b5674b67e6d267c184cb63aa987c0/docs/implementation/m8-api-audit.md
     title: Public surface and retained Form rule reachability
-    git_blob: 03cb45641230fed47062931e3108bfe6f1530859
   - id: package
     resource: ../../package.json
-    title: Current private ESM package, exports, and scripts
-    git_blob: 148dfc8e866559ae2859b5130afabafdaa1c0af3
+    title: Current ESM beta package, exports, and scripts
+    git_blob: 393602a69677d5fdaf7968fd49b19efd1b7d5cae
   - id: performance
-    resource: m4-plan.md
+    resource: https://github.com/bbalganjjm/natural_js/blob/e9db5d81496b5674b67e6d267c184cb63aa987c0/docs/implementation/m4-plan.md
     title: Fixed binding fixture and M6 performance budgets
-    git_blob: 665a141f5139857b7c21cbc1da1fd853ddd00061
   - id: workflow
     resource: ../governance/repository-workflow.md
     title: Source, documentation, and verification workflow
@@ -32,13 +29,12 @@ sources:
   - id: wcag
     resource: https://www.w3.org/TR/WCAG22/
     title: W3C Web Content Accessibility Guidelines 2.2
-    git_blob: a8d61fb373b6ade2fc623216378de623324609c8
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T19:02:29Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T19:39:45Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T19:03:21Z }
 ---
 
-M9 is a proposal for release work after [the unpublished M8 candidate](m8-beta-report.md). It does not authorize a package publication, Git tag, public API deletion, or branch replacement. Review this scope and any unresolved contract choice before implementing M9.[^roadmap][^m8]
+M9 implementation is approved after [the unpublished M8 candidate](m8-beta-report.md). The user authorized deletion of the unused public `Rule` type while retaining Form formatter and validator behavior. No package publication, Git tag, or branch replacement has yet been approved against an exact release artifact.[^roadmap][^m8]
 
 # Goal
 
@@ -47,9 +43,9 @@ Release Natural-JS 2.0.0 from a small Apache-2.0 ESM package whose installed Jav
 # Checkpoint
 
 - M8 provides an unpublished candidate on `2.0.0-alpha.0`, a migration route, a public API/rule audit, fixed agent tasks, package checks, three Playwright-engine checks, and 1,000-row binding measurements. [Its report](m8-beta-report.md) records the completed M8 evaluation and OKF gates, with explicit limits.[^m8]
-- The current root manifest is `private: true` at `2.0.0-alpha.0` and exposes five entry paths: `.`, `./page`, `./data`, `./ui`, and `./comm`. No npm beta, release candidate, or stable version has been published by M8.[^package][^m8]
-- The public `Rule` tuple type is the sole M8 pruning candidate. It has no known 2.0 caller, but deleting an exported type can break external TypeScript imports. Keep it in the candidate until the user reviews that specific contract decision; do not conflate the type with Form's reachable formatter/validator engine.[^audit]
-- Playwright Chromium, Firefox, and WebKit passed M8 focused coverage. Real installed Chrome, Edge, and Safari remain a release-specific check; a Playwright engine result is not evidence that a vendor browser was run. Large List virtualization and actual agent token telemetry remain outside the first-release claim.[^m8]
+- M8 ended with a private `2.0.0-alpha.0` manifest. M9 now has an unpublished, publishable `2.0.0-beta.0` source candidate with the same five entry paths: `.`, `./page`, `./data`, `./ui`, and `./comm`. No npm beta, release candidate, or stable version has been published.[^package][^m8]
+- The user approved removal of the unused public `Rule` tuple type. The runtime Form formatter and validator catalog remains unchanged. M8 counted 35 public types; the M9 source has 34.[^audit]
+- Playwright Chromium, Firefox, and WebKit passed M8 focused coverage. Real Chrome and Edge are installed locally. The user has no Mac device, so real Safari cannot be tested on this host; WebKit evidence must remain labeled separately. Large List virtualization and actual agent token telemetry remain outside the first-release claim.[^m8]
 
 # Steps
 
@@ -67,14 +63,14 @@ Release Natural-JS 2.0.0 from a small Apache-2.0 ESM package whose installed Jav
 
 # Next action
 
-Present [M8's final report](m8-beta-report.md), this M9 plan, and the `Rule` type decision to the user; M9 implementation starts only after that scope review. Before any registry publication or tag, return the exact candidate SHA, tarball, package contents, release notes, completed gates, and remaining limitations for a final explicit publication decision. If real Safari cannot be tested on an available host, record the unsupported evidence and seek a support-scope or schedule decision rather than declaring the gate passed.
+Proceed with the approved M9 implementation, beginning with the M8 recheck, public `Rule` type deletion, fixed-tarball consumer tests, and accessibility gates. Before any registry publication or tag, return the exact candidate SHA, tarball, package contents, release notes, completed gates, and remaining limitations for a final explicit publication decision. If real Safari cannot be tested on an available host, record the unsupported evidence and seek a support-scope or schedule decision rather than declaring the gate passed.
 
 # Decisions
 
 - Release correctness precedes optimization claims. A passing fixture proves that fixture and browser/host combination; agent read bytes are not tokens and incomparable 1.x/2.0 task runs do not prove savings.[^m8][^performance]
 - Keep native, accessible authored HTML and CSS authoritative. `data-field` and store-local row identity bind values; document-unique IDs are used only where real HTML label or ARIA associations require them.[^roadmap]
 - The framework owns CVC lifetime, data sharing, UI binding, and Form rule dispatch. Applications own business rules, API payload conversion, layout, and visual contrast of authored CSS. A release defect in the framework's generated or changed accessibility state is still a blocker.[^roadmap][^audit]
-- Do not remove public `Rule` or any other exported contract through a release cleanup without its own reviewed decision. Do not remove a formatter, validator, or transitive helper while declarative Form/List/Grid can reach it. Avoid adding a compatibility utility package.[^audit]
+- Do not remove any other exported contract through release cleanup without its own reviewed decision. Do not remove a formatter, validator, or transitive helper while declarative Form/List/Grid can reach it. Avoid adding a compatibility utility package.[^audit]
 - Version, publishable manifest, registry publication, and Git tag are separate state changes. The candidate must have its final manifest before packing and consumer checks; an approved implementation plan alone does not authorize publishing. Stage every beta, RC, and stable artifact for review before its registry write. Keep `master`, archived 1.x history, and `v1/` unchanged unless the user later approves a branch migration.[^m8]
 - Release rollback means stop before the next stage, return to the last known-good commit and tag, and issue a new semver version for a fix. A published npm version cannot be overwritten; if a bad version escapes, correct its dist-tag or deprecate it with explicit approval, then publish a replacement. Preserve the failed artifact, command output, and cause for diagnosis.
 - Change code, tests, English OKF concepts, folder indexes, bundle log, fingerprints, migration docs, and release notes together. Mark `verified` only after independent comparison with source and artifact. Keep the active checkpoint short enough to resume release work quickly.[^workflow]
@@ -83,20 +79,20 @@ Present [M8's final report](m8-beta-report.md), this M9 plan, and the `Rule` typ
 
 | Date | Check | Result |
 |---|---|---|
-| 2026-09-25 | Planning input | Drafted M9 gates from the roadmap, completed M8 candidate report, public API/Form audit, package manifest, fixed M4/M6 performance budgets, and repository workflow. No M9 implementation, version change, registry publication, tag, or branch migration was performed. |
+| 2026-09-25 | M9 approval and M8 recheck | An independent M8 recheck matched the pushed `e9db5d81` commit, three agent-task raw logs, 75/75 tests per Playwright engine, and a clean full OKF check. The user approved M9, removal of only the unused public `Rule` alias, and reported no Mac/Safari device. The rule runtime remains. |
+| 2026-09-25 | M9 implementation gate | Build, typecheck, and Vitest 81/81 passed after public `Rule` removal. Popup Tab-boundary focus was fixed without a new public API. Isolated full suites passed 103/103 each in Chromium, Firefox, and WebKit. M4/M7 authored layouts passed automated axe A/AA checks for tested states. Reference-host 1,000-row flat Grid initial/rebind medians were 11.9/16.0 ms and nested-auto 37.3/44.4 ms; List initial was 11.5 ms, with duplicate IDs 0. Raw [Grid](evidence/m9-binding-chromium.json) and [List](evidence/m9-list-chromium.json) evidence is retained. Real Safari and manual screen-reader checks remain open. |
 
 # Open questions
 
-- Will the user keep or remove the unused public `Rule` type before the release API freeze? Either choice needs an explicit contract decision and synchronized types/docs/consumer checks; Form's runtime rule catalog is unaffected.
-- Which real Safari host is available for the planned support claim? A Playwright WebKit pass alone cannot close that gate. Record the exact real Chrome/Edge/Safari versions and supported OS range before a release candidate.
-- What minimum Node.js version should the published package promise? The current build guide names Node.js 24.18 or a version accepted by pinned development tools; validate a consumer support range separately from the build-tool requirement.
+- Real Safari remains untested on the available Windows host. Its support claim needs an explicit release-scope decision or an external Safari result before final publication.
+- What minimum Node.js version should the published package promise? The build guide names tested Node.js 24.18; the browser package does not set a Node engine promise. Validate any wider development-tool range before documenting it.
 - Is npm publication under `@bbalganjjm/natural_js` available with the intended registry access and account permissions? Verify read-only before preparing publication; the final publish command waits for explicit approval.
 - Do the currently passing 1,000-row List numbers represent the expected first-release workload? Larger lists and virtualization remain M10 follow-up unless a real release blocker appears.
 
 [^roadmap]: First-release scope and M9 gate
 [^m8]: Unpublished M8 beta-candidate evidence and limits
 [^audit]: Public surface and retained Form rule reachability
-[^package]: Current private ESM package, exports, and scripts
+[^package]: ESM package, exports, and scripts
 [^performance]: Fixed binding fixture and M6 performance budgets
 [^workflow]: Source, documentation, and verification workflow
 [^wcag]: W3C Web Content Accessibility Guidelines 2.2

@@ -1,7 +1,6 @@
 {
   "name": "@bbalganjjm/natural_js",
-  "version": "2.0.0-alpha.0",
-  "private": true,
+  "version": "2.0.0-beta.0",
   "description": "CVC UI framework that attaches behavior to authored HTML.",
   "type": "module",
   "license": "Apache-2.0",
@@ -48,12 +47,21 @@
     "example": "vite --config examples/vite/vite.config.ts",
     "test:consumers": "node tools/check-consumers.mjs",
     "docs:check": "node tools/knowledge-docs/knowledge-docs.mjs check",
-    "docs:stamp": "node tools/knowledge-docs/knowledge-docs.mjs stamp"
+    "docs:stamp": "node tools/knowledge-docs/knowledge-docs.mjs stamp",
+    "test:packed-browser": "node tools/check-packed-browser.mjs"
   },
   "devDependencies": {
+    "@axe-core/playwright": "4.13.0",
     "@playwright/test": "1.63.0",
     "typescript": "7.0.2",
     "vite": "8.3.0",
     "vitest": "5.0.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "homepage": "https://github.com/bbalganjjm/natural_js#readme",
+  "bugs": {
+    "url": "https://github.com/bbalganjjm/natural_js/issues"
   }
 }

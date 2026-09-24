@@ -4,13 +4,13 @@ title: Natural-JS 2.0 UI contracts
 description: Shared rule, validation, selection, and page types for the implemented HTML-bound UI.
 tags: [ui, typescript, binding]
 status: draft
-symbols: [Rule, RuleContext, FormatRule, ValidateRule, ParseInput, RuleSet, ValidationIssue, ValidationResult, PageRequest, PageInput, PageState, SelectValue, SelectChoice, SelectSelection, SelectHandle, PaginationHandle, FormHandle, SortIndicator, ListHandle, GridHandle]
+symbols: [RuleContext, FormatRule, ValidateRule, ParseInput, RuleSet, ValidationIssue, ValidationResult, PageRequest, PageInput, PageState, SelectValue, SelectChoice, SelectSelection, SelectHandle, PaginationHandle, FormHandle, SortIndicator, ListHandle, GridHandle]
 sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI types and runtime exports
-    git_blob: fb7b7ba6e42f7c8fc818ca514bdaf55647e1cf80
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T15:32:04Z }
+    git_blob: e1c3c3d309fb5b5724965ce348396046b1c77db7
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T19:32:25Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T15:58:02Z }
 ---
@@ -21,7 +21,6 @@ The `./ui` entry exports the HTML-bound Form, Grid, List, Select, Pagination, Po
 
 | Symbol | Signature | Returns |
 |---|---|---|
-| `Rule` | Name with positional arguments | Declarative rule tuple |
 | `RuleContext` | Field, values snapshot, row identity, optional field element | Rule context |
 | `FormatRule` | Value, arguments, context | Display string |
 | `ValidateRule` | Value, arguments, context | Boolean or message |
@@ -48,7 +47,7 @@ A `PageRequest` does not carry `total`; read `list.page()` or `grid.page()` afte
 
 Use an authored native `<button type="button">` and a page/controller event handler for ordinary actions. M6 has no `bindButton` export or framework button theme.
 
-A parser sees one snapshot of all currently entered, still unparsed drafts in `RuleContext.values`; parser order does not change that snapshot. Validator `RuleContext.values` holds the combined typed candidate, but each `ValidateRule` receives its field value as a string. Formatters see stored row values. A rule's `element` may still be detached when the component initializes; use `element.isConnected` if connection matters. Form, Grid, and List resolve JSON `data-format` and `data-validate` names through one private UI rule runner. A per-component `RuleSet` may override a retained built-in name. Unknown names and invalid built-in arguments fail at binding. Formatters and validators used by the UI remain; they are not a public utility package.[^ui]
+A parser sees one snapshot of all currently entered, still unparsed drafts in `RuleContext.values`; parser order does not change that snapshot. Validator `RuleContext.values` holds the combined typed candidate, but each `ValidateRule` receives its field value as a string. Formatters see stored row values. A rule's `element` may still be detached when the component initializes; use `element.isConnected` if connection matters. Form, Grid, and List resolve JSON `data-format` and `data-validate` tuples through one private UI rule runner; the tuple shape is not a separate public type. A per-component `RuleSet` may override a retained built-in name. Unknown names and invalid built-in arguments fail at binding. Formatters and validators used by the UI remain; they are not a public utility package.[^ui]
 
 # Related
 

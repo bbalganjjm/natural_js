@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 import type { RowId, Snapshot } from "../data/index.js";
 
-export type Rule = readonly [name: string, ...args: unknown[]];
-
 export interface RuleContext {
   readonly field: string;
   readonly values: Snapshot<Record<string, unknown>>;

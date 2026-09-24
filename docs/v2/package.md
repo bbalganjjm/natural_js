@@ -1,18 +1,18 @@
 ---
 type: Guide
 title: Natural-JS 2.0 package
-description: Build and inspect the root Apache-2.0 ESM package and its currently implemented exports.
+description: Build and verify the unpublished Apache-2.0 ESM beta candidate and its five entry points.
 tags: [setup, package, typescript]
 status: draft
 sources:
   - id: package
     resource: ../../package.json
     title: 2.0 package and public exports
-    git_blob: 148dfc8e866559ae2859b5130afabafdaa1c0af3
+    git_blob: 393602a69677d5fdaf7968fd49b19efd1b7d5cae
   - id: ui
     resource: ../../src/ui/index.ts
     title: UI runtime exports
-    git_blob: fb7b7ba6e42f7c8fc818ca514bdaf55647e1cf80
+    git_blob: e1c3c3d309fb5b5724965ce348396046b1c77db7
   - id: compiler
     resource: ../../tsconfig.json
     title: 2.0 TypeScript build settings
@@ -21,12 +21,12 @@ sources:
     resource: ../../LICENSE
     title: Apache License 2.0 text for the new package
     git_blob: d645695673349e3947e8e5ae42332d0ac3164cd7
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T15:32:04Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T19:32:25Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T15:58:02Z }
 ---
 
-Build the root package to inspect real 2.0 exports. The current alpha includes the CVC page runner, row store, communicator, shared error, Form, Grid, List, Select, Pagination, Popup, and Tabs, plus retained UI-owned formatter/validator rules. A plain Dialog uses native HTML methods; it has no framework binder.
+Build the root package to inspect real 2.0 exports. The unpublished `2.0.0-beta.0` candidate includes the CVC page runner, row store, communicator, shared error, Form, Grid, List, Select, Pagination, Popup, and Tabs, plus retained UI-owned formatter/validator rules. A plain Dialog uses native HTML methods; it has no framework binder.
 
 # Goal
 
@@ -34,7 +34,7 @@ Produce ESM JavaScript and generated declarations from one strict TypeScript sou
 
 # Prerequisites
 
-Use Node.js 24.18 or another version accepted by the pinned development tools. Run commands from the repository root. The preserved LGPL-2.1 1.x source, package, and documentation live under `v1/`.
+The release checks use Node.js 24.18; other development-tool versions have not yet been verified. Run commands from the repository root. The preserved LGPL-2.1 1.x source, package, and documentation live under `v1/`.
 
 # Steps
 
@@ -51,11 +51,11 @@ npm pack --dry-run --json
 
 # Verify
 
-`npm run test:consumers` packs the package into an isolated temporary directory, installs that tarball in separate JS and strict TS fixtures, and checks both imports. The pack list must contain no 1.x bundle, jQuery, hand-maintained 1.x declarations, or general utility library. For browser import smoke, install Playwright binaries with `npx playwright install chromium firefox webkit` and run `npm run test:browser`. `npm run example` serves the authored-HTML Vite fixture.
+`npm run test:consumers` builds and packs into an isolated temporary directory, then installs that tarball in separate JS and strict TS fixtures. For a frozen release artifact, run `npm run test:consumers -- --tarball <path.tgz> --sha256 <64-hex>`; this verifies the checksum before installing the exact same tarball in both fixtures and skips rebuilding. Run `npm run test:packed-browser -- --tarball <path.tgz> --sha256 <64-hex> --browser chromium` for a browser-served CVC/Form/Grid consumer installed from that artifact. The browser option also accepts `firefox`, `webkit`, `chrome`, or `edge` when available locally. The pack list must contain no 1.x bundle, jQuery, hand-maintained 1.x declarations, or general utility library. For browser import smoke, install Playwright binaries with `npx playwright install chromium firefox webkit` and run `npm run test:browser`. `npm run example` serves the authored-HTML Vite fixture.
 
 # Pitfalls
 
-Use `import type` for UI type names; `./ui` now also has the runtime Form, Grid, List, Select, Pagination, Popup, and Tabs functions. The package is marked private during the alpha foundation to prevent accidental registry publication; local `npm pack` and installed-consumer checks still work. Use the root scripts for 2.0 checks; the 1.x package under `v1/` is reference material.
+Use `import type` for UI type names; `./ui` now also has the runtime Form, Grid, List, Select, Pagination, Popup, and Tabs functions. The beta candidate is publishable in its manifest, but has not been published. The existing npm `latest` tag still resolves to 1.x. Review the exact tarball and checksum before any `npm publish --tag beta` command. Use the root scripts for 2.0 checks; the 1.x package under `v1/` is reference material.
 
 The root 2.0 source and packed output use Apache-2.0.[^license] The 1.x license, source headers, package metadata, and third-party files stay under `v1/` and are excluded from the 2.0 tarball.
 

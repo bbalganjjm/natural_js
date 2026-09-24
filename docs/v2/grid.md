@@ -9,7 +9,7 @@ sources:
   - id: entry
     resource: ../../src/ui/index.ts
     title: Public UI entry and Grid handle types
-    git_blob: fb7b7ba6e42f7c8fc818ca514bdaf55647e1cf80
+    git_blob: e1c3c3d309fb5b5724965ce348396046b1c77db7
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid binding and validation runtime

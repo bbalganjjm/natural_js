@@ -6,25 +6,20 @@ tags: [meta, report, migration, ai]
 status: draft
 sources:
   - id: plan
-    resource: m8-plan.md
+    resource: https://github.com/bbalganjjm/natural_js/blob/e9db5d81496b5674b67e6d267c184cb63aa987c0/docs/implementation/m8-plan.md
     title: Approved M8 scope and completion gate
-    git_blob: a184d6e243dde94460fadf28d3bb116b24d27a2a
   - id: evaluation
-    resource: m8-eval.md
+    resource: https://github.com/bbalganjjm/natural_js/blob/e9db5d81496b5674b67e6d267c184cb63aa987c0/docs/implementation/m8-eval.md
     title: Fixed agent tasks and measured outcomes
-    git_blob: 4dc6c3fad8dfe5dddc49118652510cf4ec63f8e2
   - id: audit
-    resource: m8-api-audit.md
+    resource: https://github.com/bbalganjjm/natural_js/blob/e9db5d81496b5674b67e6d267c184cb63aa987c0/docs/implementation/m8-api-audit.md
     title: Public surface and retained Form reachability
-    git_blob: 03cb45641230fed47062931e3108bfe6f1530859
   - id: migration
-    resource: ../v2/migration.md
+    resource: https://github.com/bbalganjjm/natural_js/blob/e9db5d81496b5674b67e6d267c184cb63aa987c0/docs/v2/migration.md
     title: Executable 2.0 migration route
-    git_blob: 3fb5b68b6663eba06b7fa2dd7a8a41573993e31f
   - id: package
-    resource: ../../package.json
+    resource: https://github.com/bbalganjjm/natural_js/blob/e9db5d81496b5674b67e6d267c184cb63aa987c0/package.json
     title: Private ESM package and export map
-    git_blob: 148dfc8e866559ae2859b5130afabafdaa1c0af3
   - id: grid-benchmark
     resource: evidence/m8-binding-chromium.json
     title: Raw M8 Grid binding measurements

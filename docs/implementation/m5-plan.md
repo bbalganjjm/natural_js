@@ -10,9 +10,8 @@ sources:
     title: Approved M1 rule and binding contract
     git_blob: 5cb7c544900bbd86867971e87003518858e498e1
   - id: m4
-    resource: m4-plan.md
+    resource: https://github.com/bbalganjjm/natural_js/blob/e9db5d81496b5674b67e6d267c184cb63aa987c0/docs/implementation/m4-plan.md
     title: M4 pilot and exit evidence
-    git_blob: 665a141f5139857b7c21cbc1da1fd853ddd00061
   - id: form
     resource: ../../src/ui/form.ts
     title: Current Form pilot

@@ -7,7 +7,7 @@ sources:
   - id: baseline
     resource: https://github.com/bbalganjjm/natural_js/blob/b96e47a0d7e020d1878f7cecdf1b1a9f462d99a6/package.json
     title: Immutable Natural-JS 1.x package baseline
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T18:58:42Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T19:32:25Z }
 ---
 
 This roadmap governs the Natural-JS 2.0 migration. Use [the active checkpoint](current.md) for status and a milestone-specific plan before implementing that milestone. The 1.x source and documentation remain available under `v1/` and at commit b96e47a0d7e020d1878f7cecdf1b1a9f462d99a6.
@@ -18,7 +18,7 @@ Ship a TypeScript-source, ESM, jQuery-free UI framework that keeps CVC and attac
 
 # Checkpoint
 
-- M0-M8 are complete on branch `2.0.0-alpha.0`. Button stays native HTML; Form, Grid, List, Select, and Pagination run in the two-layout CVC data screen. Native Dialog, Popup, and Tabs run on the common CVC page runtime in two authored MDI layouts. M6 and M7 evidence is in their [data UI](m6-plan.md) and [page UI](m7-plan.md) plans; [M8](m8-beta-report.md) holds the unpublished beta-candidate, migration, agent-task, and three-browser evidence. [M9 release work](m9-plan.md) is proposed for separate user review.
+- M0-M8 are complete on branch `2.0.0-alpha.0`. Button stays native HTML; Form, Grid, List, Select, and Pagination run in the two-layout CVC data screen. Native Dialog, Popup, and Tabs run on the common CVC page runtime in two authored MDI layouts. M6 and M7 evidence is in their [data UI](m6-plan.md) and [page UI](m7-plan.md) plans; [M8](m8-beta-report.md) holds the unpublished beta-candidate, migration, agent-task, and three-browser evidence. [M9 release work](m9-plan.md) is approved and in progress.
 - The initial 2.0 release includes form, list, basic grid, select, pagination, button, dialog, popup, and tab.
 - Advanced grid, tree, custom date picker, notification, and document tabs follow in 2.x.
 
@@ -44,7 +44,7 @@ Each milestone starts with a detailed plan, user review, and approval of its sco
 
 # Next action
 
-Review [the proposed M9 release plan](m9-plan.md) and the public `Rule` type decision. M9 implementation and publication wait for the user's approval of the next milestone and its exact release artifacts.
+Complete the approved [M9 release plan](m9-plan.md), then review exact release artifacts before any npm publication or Git tag. The user approved removing only the unused public `Rule` alias; retained Form rules are unchanged.
 
 # Decisions
 
@@ -65,4 +65,4 @@ Review [the proposed M9 release plan](m9-plan.md) and the public `Rule` type dec
 
 # Open questions
 
-- M6 met the [reference-host binding budgets](m4-plan.md); List's first bind still builds all row records, so larger data sets need a later memory review. A fresh Playwright Firefox build passed the M6 browser suite on this host. M8 must compare agent context cost with consistent counting methods.
+- M6 met the [reference-host binding budgets](m4-plan.md); List's first bind still builds all row records, so larger data sets need a later memory review. A fresh Playwright Firefox build passed the M6 browser suite on this host. M8 compared its three 2.0 tasks with one byte-count method; actual token use and an equivalent 1.x baseline remain unavailable.

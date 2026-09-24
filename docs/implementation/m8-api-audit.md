@@ -6,61 +6,47 @@ tags: [meta, audit, migration]
 status: draft
 sources:
   - id: package
-    resource: ../../package.json
+    resource: https://github.com/bbalganjjm/natural_js/blob/f659f1d8c86ad39925eda44b55d569b175e96e57/package.json
     title: Public package entry map
-    git_blob: 148dfc8e866559ae2859b5130afabafdaa1c0af3
   - id: root
-    resource: ../../src/index.ts
+    resource: https://github.com/bbalganjjm/natural_js/blob/f659f1d8c86ad39925eda44b55d569b175e96e57/src/index.ts
     title: Root public export
-    git_blob: d99a783055cf6bea9b6e15ca591c370ff514cec9
   - id: page
-    resource: ../../src/page/index.ts
+    resource: https://github.com/bbalganjjm/natural_js/blob/f659f1d8c86ad39925eda44b55d569b175e96e57/src/page/index.ts
     title: Page public exports and runtime
-    git_blob: f753a91b97c8137bcb4cdc5a476f13a4cf098588
   - id: data
-    resource: ../../src/data/index.ts
+    resource: https://github.com/bbalganjjm/natural_js/blob/f659f1d8c86ad39925eda44b55d569b175e96e57/src/data/index.ts
     title: Data public exports and runtime
-    git_blob: 10c07414eacccc414b81afc8be5661dd21afe3c6
   - id: ui
-    resource: ../../src/ui/index.ts
+    resource: https://github.com/bbalganjjm/natural_js/blob/f659f1d8c86ad39925eda44b55d569b175e96e57/src/ui/index.ts
     title: UI public exports and types
-    git_blob: fb7b7ba6e42f7c8fc818ca514bdaf55647e1cf80
   - id: comm
-    resource: ../../src/comm/index.ts
+    resource: https://github.com/bbalganjjm/natural_js/blob/f659f1d8c86ad39925eda44b55d569b175e96e57/src/comm/index.ts
     title: Communication public exports and runtime
-    git_blob: f3650ddbfeb5d87c3e58dc84904df9704e994368
   - id: form
-    resource: ../../src/ui/form.ts
+    resource: https://github.com/bbalganjjm/natural_js/blob/f659f1d8c86ad39925eda44b55d569b175e96e57/src/ui/form.ts
     title: Form rule use
-    git_blob: e603f619679c24be778b04f45ea3c467b50bf2c2
   - id: grid
-    resource: ../../src/ui/grid.ts
+    resource: https://github.com/bbalganjjm/natural_js/blob/f659f1d8c86ad39925eda44b55d569b175e96e57/src/ui/grid.ts
     title: Grid rule use
-    git_blob: dedeca30ef8f10a78172748d8cb9911a68b7da03
   - id: list
-    resource: ../../src/ui/list.ts
+    resource: https://github.com/bbalganjjm/natural_js/blob/f659f1d8c86ad39925eda44b55d569b175e96e57/src/ui/list.ts
     title: List rule use
-    git_blob: 8d3ef3e1ff3e7b7fb7faed27fc592846dd5fe090
   - id: rules
-    resource: ../../src/ui/rules.ts
+    resource: https://github.com/bbalganjjm/natural_js/blob/f659f1d8c86ad39925eda44b55d569b175e96e57/src/ui/rules.ts
     title: Declarative rule compilation and dispatch
-    git_blob: 967142342d060056cd3f124db29f6893a2875d48
   - id: formats
-    resource: ../../src/ui/format-rules.ts
+    resource: https://github.com/bbalganjjm/natural_js/blob/f659f1d8c86ad39925eda44b55d569b175e96e57/src/ui/format-rules.ts
     title: Retained format catalog and internal helpers
-    git_blob: a3ec42f7837c785a5f3fa3688283c13117b528a1
   - id: validators
-    resource: ../../src/ui/validate-rules.ts
+    resource: https://github.com/bbalganjjm/natural_js/blob/f659f1d8c86ad39925eda44b55d569b175e96e57/src/ui/validate-rules.ts
     title: Retained validator catalog and internal helpers
-    git_blob: 4f1439b6e09b066bea1afd26d16b34471d9f4d18
   - id: popup
-    resource: ../../src/ui/popup.ts
+    resource: https://github.com/bbalganjjm/natural_js/blob/f659f1d8c86ad39925eda44b55d569b175e96e57/src/ui/popup.ts
     title: Popup page ownership and result handle
-    git_blob: ac1f9cf3fba4445084943cc877674ffb4ffc0eef
   - id: tabs
-    resource: ../../src/ui/tabs.ts
+    resource: https://github.com/bbalganjjm/natural_js/blob/f659f1d8c86ad39925eda44b55d569b175e96e57/src/ui/tabs.ts
     title: Tabs page ownership and handle
-    git_blob: 4bbd8b9a3b0280ed1ab2c59683bcc5597d7d6920
   - id: legacy-data
     resource: ../../v1/src/natural.data.js
     title: Preserved 1.x dynamic rule use
@@ -69,12 +55,12 @@ sources:
     resource: ../../v1/src/natural.core.js
     title: Preserved 1.x utility implementations
     git_blob: d6b29764f7cd8d776f63de84b6c5d38be87f1c76
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T17:56:35Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T19:37:44Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T18:03:18Z }
 ---
 
-This read-only audit covers the five `package.json` entry paths at post-M7 commit `f659f1d8`. Keep every framework-reachable Form rule; treat a public deletion or semantic change as a separate user decision.[^package][^rules]
+This read-only M8 snapshot covers the five `package.json` entry paths at post-M7 commit `f659f1d8`. The M9-approved deletion of the unused public `Rule` alias changes the later export count to 34 types without changing retained Form rule behavior. Keep every framework-reachable Form rule; treat a public deletion or semantic change as a separate user decision.[^package][^rules]
 
 # Public inventory
 
@@ -86,7 +72,7 @@ The source entries and generated `build/**/index.{js,d.ts}` expose 11 runtime va
 | `./page` | `mountPage` | `PageContext`, `PageController`, `PageDefinition`, `PageHandle` | One CVC lifecycle for main, Popup, and Tabs; M4/M7 controllers call `mountPage`. | Keep all. |
 | `./data` | `createRows` | `RowId`, `Snapshot`, `RowStatus`, `RowSnapshot`, `RowChange`, `RowsEvent`, `Rows` | Shared row identity, immutable values, subscriptions, and changed-row saves; M4/M7 controllers call `createRows`. | Keep all. |
 | `./comm` | `createCommunicator` | `RequestOptions`, `Communicator` | Explicit requests, response decoding, and cancellation; M4 controller calls `createCommunicator`. | Keep all. |
-| `./ui` | `bindForm`, `bindGrid`, `bindList`, `bindSelect`, `bindPagination`, `openPopup`, `bindTabs` | `Rule`, `RuleContext`, `FormatRule`, `ValidateRule`, `ParseInput`, `RuleSet`, `ValidationIssue`, `ValidationResult`, `PageRequest`, `PageInput`, `PageState`, `SelectValue`, `SelectChoice`, `SelectSelection`, `SelectHandle`, `PaginationHandle`, `FormHandle`, `SortIndicator`, `ListHandle`, `GridHandle`, `PopupHandle`, `TabHandle` | M4 screen calls the five data-UI binders; M7 screen calls Popup/Tabs. Types describe callbacks, choices, paging, and handles. | Keep seven values and 21 types; review `Rule` separately. |
+| `./ui` | `bindForm`, `bindGrid`, `bindList`, `bindSelect`, `bindPagination`, `openPopup`, `bindTabs` | `Rule`, `RuleContext`, `FormatRule`, `ValidateRule`, `ParseInput`, `RuleSet`, `ValidationIssue`, `ValidationResult`, `PageRequest`, `PageInput`, `PageState`, `SelectValue`, `SelectChoice`, `SelectSelection`, `SelectHandle`, `PaginationHandle`, `FormHandle`, `SortIndicator`, `ListHandle`, `GridHandle`, `PopupHandle`, `TabHandle` | M4 screen calls the five data-UI binders; M7 screen calls Popup/Tabs. Types describe callbacks, choices, paging, and handles. | Keep seven values and 21 types besides `Rule`; review `Rule` separately. |
 
 `openPopup` and `bindTabs` own pages created through the same page runtime; neither duplicates CVC loading. No runtime export or private split has a supported removal case from this audit.[^popup][^tabs][^page]
 

@@ -8,7 +8,7 @@ sources:
   - id: package
     resource: ../../package.json
     title: Public package boundaries
-    git_blob: 148dfc8e866559ae2859b5130afabafdaa1c0af3
+    git_blob: 393602a69677d5fdaf7968fd49b19efd1b7d5cae
   - id: root
     resource: ../../src/index.ts
     title: Root entry
@@ -16,7 +16,7 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI contracts and component exports
-    git_blob: fb7b7ba6e42f7c8fc818ca514bdaf55647e1cf80
+    git_blob: e1c3c3d309fb5b5724965ce348396046b1c77db7
   - id: form
     resource: ../../src/ui/form.ts
     title: Form binding
@@ -40,7 +40,7 @@ sources:
   - id: popup
     resource: ../../src/ui/popup.ts
     title: Authored dialog and CVC Popup lifetime
-    git_blob: ac1f9cf3fba4445084943cc877674ffb4ffc0eef
+    git_blob: 33fa1227a630e0f9dad828ea003c5eb2692bf6d5
   - id: tabs
     resource: ../../src/ui/tabs.ts
     title: Authored Tabs and CVC page lifetime

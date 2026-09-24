@@ -10,13 +10,11 @@ sources:
     title: Approved CVC and Popup result design
     git_blob: 5cb7c544900bbd86867971e87003518858e498e1
   - id: roadmap
-    resource: roadmap.md
+    resource: https://github.com/bbalganjjm/natural_js/blob/e9db5d81496b5674b67e6d267c184cb63aa987c0/docs/implementation/roadmap.md
     title: First-release and M7 boundary
-    git_blob: f5c11372df84b5cbddf729ec5d599825d59e3d99
   - id: m6
-    resource: m6-plan.md
+    resource: https://github.com/bbalganjjm/natural_js/blob/e9db5d81496b5674b67e6d267c184cb63aa987c0/docs/implementation/m6-plan.md
     title: Approved M6 data UI and verification
-    git_blob: 62f5b81adf5f1c4e4c59ba3db4daba3221fb74e2
   - id: page
     resource: ../../src/page/index.ts
     title: One CVC runtime and lifecycle

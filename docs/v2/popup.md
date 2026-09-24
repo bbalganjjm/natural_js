@@ -9,16 +9,16 @@ sources:
   - id: entry
     resource: ../../src/ui/index.ts
     title: Public Popup exports
-    git_blob: fb7b7ba6e42f7c8fc818ca514bdaf55647e1cf80
+    git_blob: e1c3c3d309fb5b5724965ce348396046b1c77db7
   - id: popup
     resource: ../../src/ui/popup.ts
     title: Popup lifecycle and result
-    git_blob: ac1f9cf3fba4445084943cc877674ffb4ffc0eef
+    git_blob: 33fa1227a630e0f9dad828ea003c5eb2692bf6d5
   - id: page
     resource: ../../src/page/index.ts
     title: Shared CVC page runtime
     git_blob: f753a91b97c8137bcb4cdc5a476f13a4cf098588
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T15:56:13Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T19:32:25Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T15:58:02Z }
 ---
@@ -91,7 +91,7 @@ The first output or ordinary close reserves the result. A later `dispose()` cann
 
 # Behavior
 
-The wrapper restores focus to the opener when it remains connected and lets the browser provide modal focus and keyboard containment. An owning CVC page should register `context.own(() => popup.dispose())`. Detaching the dialog or its page host aborts an opening with no earlier reserved output or ordinary close; a reserved result survives detachment unless cleanup fails. The wrapper observes only while that opening lives. No visual overlay or global popup service is generated.[^popup]
+The wrapper restores focus to the opener when it remains connected. The native dialog provides modal behavior; the wrapper keeps Tab and Shift+Tab inside the dialog at focus boundaries. An owning CVC page should register `context.own(() => popup.dispose())`. Detaching the dialog or its page host aborts an opening with no earlier reserved output or ordinary close; a reserved result survives detachment unless cleanup fails. The wrapper observes only while that opening lives. No visual overlay or global popup service is generated.[^popup]
 
 A plain authored `<dialog>` that does not host a CVC page uses native `showModal()` and `close()` directly; there is no separate Dialog binder.[^popup]
 

@@ -107,6 +107,7 @@ export function openPopup<Input = unknown, Output = unknown>(
     if (fallbackTimer) clearTimeout(fallbackTimer);
     dialog.removeEventListener("beforetoggle", onBeforeToggle);
     dialog.removeEventListener("close", onClose);
+    dialog.removeEventListener("keydown", onKeydown);
     observer.disconnect();
     active.delete(dialog);
     restoreFocus();
@@ -161,6 +162,28 @@ export function openPopup<Input = unknown, Output = unknown>(
     settle();
   }
 
+  function onKeydown(event: KeyboardEvent): void {
+    if (event.key !== "Tab" || !dialog.open ||
+        !(event.target instanceof Element) || event.target.closest("dialog[open]") !== dialog) return;
+    const tabbables = [...dialog.querySelectorAll<HTMLElement>(
+      "a[href], area[href], button, input, select, textarea, summary, iframe, [tabindex], [contenteditable]"
+    )].filter(element => element.tabIndex >= 0 && !element.matches(":disabled") &&
+      !element.closest("[hidden], [inert]") && element.getClientRects().length > 0 &&
+      getComputedStyle(element).visibility === "visible");
+    const first = tabbables[0];
+    const last = tabbables.at(-1);
+    if (!first || !last) {
+      event.preventDefault();
+      dialog.focus({ preventScroll: true });
+      return;
+    }
+    const focused = dialog.ownerDocument.activeElement;
+    if (event.shiftKey ? focused === first : focused === last) {
+      event.preventDefault();
+      (event.shiftKey ? last : first).focus({ preventScroll: true });
+    }
+  }
+
   const observer = new MutationObserver(() => {
     if (!attached()) {
       if (!end) reserve({ kind: "abort" });
@@ -176,6 +199,7 @@ export function openPopup<Input = unknown, Output = unknown>(
   });
   dialog.addEventListener("beforetoggle", onBeforeToggle);
   dialog.addEventListener("close", onClose);
+  dialog.addEventListener("keydown", onKeydown);
   observer.observe(dialog.ownerDocument.documentElement, {
     attributes: true, attributeFilter: ["open"], childList: true, subtree: true
   });
@@ -185,6 +209,7 @@ export function openPopup<Input = unknown, Output = unknown>(
   } catch (cause) {
     dialog.removeEventListener("beforetoggle", onBeforeToggle);
     dialog.removeEventListener("close", onClose);
+    dialog.removeEventListener("keydown", onKeydown);
     observer.disconnect();
     if (fallbackTimer) clearTimeout(fallbackTimer);
     active.delete(dialog);

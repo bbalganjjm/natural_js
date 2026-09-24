@@ -50,3 +50,7 @@ try {
 } finally {
   globalThis.fetch = originalFetch;
 }
+
+await assert.rejects(import("@bbalganjjm/natural_js/ui/form"), {
+  code: "ERR_PACKAGE_PATH_NOT_EXPORTED"
+});

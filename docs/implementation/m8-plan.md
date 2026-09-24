@@ -6,9 +6,8 @@ tags: [meta, plan, migration, ai]
 status: draft
 sources:
   - id: roadmap
-    resource: roadmap.md
+    resource: https://github.com/bbalganjjm/natural_js/blob/e9db5d81496b5674b67e6d267c184cb63aa987c0/docs/implementation/roadmap.md
     title: First-release milestones and M8 boundary
-    git_blob: f5c11372df84b5cbddf729ec5d599825d59e3d99
   - id: baseline
     resource: m0-baseline.md
     title: Fixed representative screen and three agent tasks
@@ -18,9 +17,8 @@ sources:
     title: Approved CVC and retained Form rule contracts
     git_blob: 5cb7c544900bbd86867971e87003518858e498e1
   - id: m7
-    resource: m7-plan.md
+    resource: https://github.com/bbalganjjm/natural_js/blob/e9db5d81496b5674b67e6d267c184cb63aa987c0/docs/implementation/m7-plan.md
     title: M7 page-container result and fixed Preview task
-    git_blob: 492f57c7d29bd9133d4e818c1115b86c8c906e89
   - id: workflow
     resource: ../governance/repository-workflow.md
     title: Same-task OKF source and verification rules

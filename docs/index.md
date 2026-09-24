@@ -4,7 +4,7 @@ okf_version: "0.2"
 
 # Start here
 
-* [Natural-JS 2.0 package](v2/package.md) - Build and inspect the root Apache-2.0 ESM package and its currently implemented exports. (draft)
+* [Natural-JS 2.0 package](v2/package.md) - Build and verify the unpublished Apache-2.0 ESM beta candidate and its five entry points. (draft)
 * [Natural-JS 2.0 module boundaries](v2/architecture.md) - Small role modules, one-way imports, and evidence-based sharing keep 2.0 easy to navigate. (draft)
 * [Employee screen in two authored layouts](v2/employee-example.md) - One CVC controller shares Rows across Form, Grid, and List, coordinating Select and Pagination in two authored layouts and fetched HTML. (draft)
 * [CVC pages in main content, Popup, and Tabs](v2/page-containers-example.md) - One picker PageDefinition shares Rows across main content, Popup, and People and Preview Tabs in two authored MDI layouts. (draft)

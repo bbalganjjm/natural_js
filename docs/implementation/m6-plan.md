@@ -10,21 +10,17 @@ sources:
     title: Approved 2.0 public and binding contract
     git_blob: 5cb7c544900bbd86867971e87003518858e498e1
   - id: roadmap
-    resource: roadmap.md
+    resource: https://github.com/bbalganjjm/natural_js/blob/e9db5d81496b5674b67e6d267c184cb63aa987c0/docs/implementation/roadmap.md
     title: Milestone and first-release scope
-    git_blob: f5c11372df84b5cbddf729ec5d599825d59e3d99
   - id: m4
-    resource: m4-plan.md
+    resource: https://github.com/bbalganjjm/natural_js/blob/e9db5d81496b5674b67e6d267c184cb63aa987c0/docs/implementation/m4-plan.md
     title: Two-layout screen and fixed performance baseline
-    git_blob: 665a141f5139857b7c21cbc1da1fd853ddd00061
   - id: m5
-    resource: m5-plan.md
+    resource: https://github.com/bbalganjjm/natural_js/blob/e9db5d81496b5674b67e6d267c184cb63aa987c0/docs/implementation/m5-plan.md
     title: Retained rules, row drafts, and data boundary
-    git_blob: b9304164612ffbf84b4f2e94012757d00a6d2c8a
   - id: ui
-    resource: ../../src/ui/index.ts
+    resource: https://github.com/bbalganjjm/natural_js/blob/e9db5d81496b5674b67e6d267c184cb63aa987c0/src/ui/index.ts
     title: Current public UI types and exports
-    git_blob: fb7b7ba6e42f7c8fc818ca514bdaf55647e1cf80
   - id: form
     resource: ../../src/ui/form.ts
     title: Current Form behavior
