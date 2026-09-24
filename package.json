@@ -8,6 +8,10 @@
   "homepage": "https://bbalganjjm.github.io/natural_js",
   "main": "natural.js.min.js",
   "types": "node_modules/@types/natural_js/index.d.ts",
+  "scripts": {
+    "docs:check": "node tools/knowledge-docs/knowledge-docs.mjs check",
+    "docs:stamp": "node tools/knowledge-docs/knowledge-docs.mjs stamp"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bbalganjjm/natural_js.git"

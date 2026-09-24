@@ -9,7 +9,11 @@ Thumbs.db
 .idea
 .vscode
 .continue
+.codex/
+.mcp.json
 *.iml
+AGENTS.md
+CLAUDE.md
 
 # node
 node_modules/
