@@ -1,0 +1,6 @@
+build/
+node_modules/
+playwright-report/
+test-results/
+.vite/
+!package-lock.json

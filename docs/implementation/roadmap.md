@@ -7,7 +7,7 @@ sources:
   - id: baseline
     resource: https://github.com/bbalganjjm/natural_js/blob/b96e47a0d7e020d1878f7cecdf1b1a9f462d99a6/package.json
     title: Immutable Natural-JS 1.x package baseline
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T07:26:34Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T08:19:59Z }
 ---
 
 This roadmap governs the Natural-JS 2.0 migration. Use [the active checkpoint](current.md) for status and a milestone-specific plan before implementing that milestone. The 1.x source and documentation remain available at commit b96e47a0d7e020d1878f7cecdf1b1a9f462d99a6.
@@ -18,7 +18,7 @@ Ship a TypeScript-source, ESM, jQuery-free UI framework that keeps CVC and attac
 
 # Checkpoint
 
-- M0 is complete; M1 contract review is the current gate. See [current.md](current.md).
+- M0 and M1 are complete; M2 package foundation is implemented and its results await review. See [current.md](current.md).
 - The initial 2.0 release includes form, list, basic grid, select, pagination, button, dialog, popup, and tab.
 - Advanced grid, tree, custom date picker, notification, and document tabs follow in 2.x.
 
@@ -44,16 +44,17 @@ Each milestone starts with a detailed plan, user review, and approval of its sco
 
 # Next action
 
-Review [the M1 public contract](m1-contract.md) and [the M2 tooling plan](m2-plan.md); begin M2 only after its scope is approved.
+Review [the M2 tooling results](m2-plan.md) and [the M3 runtime plan](m3-plan.md) before implementing M3.
 
 # Decisions
 
 - Retain code used by framework behavior, including Form rules reached indirectly through HTML declarations, configuration, and List/Grid row forms. Remove a legacy utility only after checking direct and indirect framework reachability.
-- Keep framework-specific helpers private and near their owning feature. Do not move convenience libraries into a legacy or add-on package.
+- Keep framework-specific helpers private and near their owning feature. Share a private module only when two or more framework roles need the same stable behavior; make import direction explicit and do not move convenience libraries into a legacy or add-on package.
 - Keep the formatter and validator engines, built-in rule names, declarative Form integration, messages, and the internal mask/date operations their rules require. Applications own new business-specific rules and transformations; typed rule options connect them to the same engine.
 - Use browser and JavaScript standards for replaceable helpers while preserving framework-visible behavior. Rewrite retained behavior with optimized, readable code rather than copying old implementations. Avoid wrapper APIs with no framework responsibility.
 - Keep authored HTML and CSS authoritative. Use data markers instead of DOM IDs for binding; prevent duplicate IDs in repeated rows and simultaneous views. Generate only repeated or necessary supporting elements; optional templates and themes must not force a design.
 - Use direct functions, plain objects, consistent options and results, and close placement of relevant code and types. Compile template bindings once, update affected fields, and measure speed on fixed nested-data fixtures. Measure agent correctness first, then context read, changes, elapsed time, and available token usage.
+- New 2.0 source and package files in `v2/` use Apache-2.0. Leave the 1.x source, package metadata, bundles, headers, and root LGPL license untouched.
 - New API names and signatures are decided in M1. Record each change in English OKF concepts, folder indexes, and the bundle log; pass the changed docs check with zero errors.
 
 # Verification log
@@ -64,4 +65,4 @@ Review [the M1 public contract](m1-contract.md) and [the M2 tooling plan](m2-pla
 
 # Open questions
 
-- M1 proposes exact public symbols and HTML binding attributes in [the draft contract](m1-contract.md); user review remains the gate.
+- M4 must measure nested Select binding and may stage the explicit per-row fallback if the automatic path misses correctness or performance gates.

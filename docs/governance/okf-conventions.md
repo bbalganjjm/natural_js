@@ -13,8 +13,8 @@ sources:
   - id: checker
     resource: ../../tools/knowledge-docs/knowledge-docs.mjs
     title: knowledge-docs checker and stamper
-    git_blob: 35ca43e9625fb9809c42e7246ecfd43be1a45a98
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T05:37:38Z }
+    git_blob: 8c868f2ca6877b6c19329cde9bc9b9225712a3d2
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T08:10:00Z }
 ---
 
 `docs/` is an OKF v0.2 knowledge bundle[^okf-spec] maintained as an LLM wiki[^llm-wiki]. The primary reader is an AI coding agent writing Natural-JS code, so every rule below favors fast, unambiguous lookup over prose. The maintenance workflow (when to update what) lives in [Repository workflow](repository-workflow.md); this page defines the format.
@@ -91,9 +91,9 @@ verified:
 - `resource` is REQUIRED in every entry. Code sources use a path relative to the concept file (`../../src/natural.ui.js`); external material uses an absolute URL.
 - Local sources carry fingerprints written by `stamp`, never by hand:
   - `git_blob`: SHA-1 of `"blob <n>\0"` + file content with CRLF normalized to LF. It equals `git hash-object <file>`, works before commit, and is identical on every OS.
-  - `symbol` + `symbol_sha1`: narrows drift detection to one code unit. `symbol` is a dotted path resolved inside the file: `NU.grid`, `NA.comm.request`, `NC.string`, `NU.prototype.button` (the jQuery plugin wrapper), `NU.grid.prototype.add` (an instance method). `symbol_sha1` is the first 12 hex chars of the SHA-1 of that slice. When `symbol` is set, drift is decided by `symbol_sha1` only.
+  - `symbol` + `symbol_sha1`: narrows drift detection to one code unit. In 1.x JavaScript, `symbol` is a dotted class/member path such as `NU.grid` or `NU.grid.prototype.add`. In 2.0 TypeScript, it names a top-level exported declaration or explicit named re-export such as `FrameworkError` or `PageContext`. `symbol_sha1` is the first 12 hex chars of the SHA-1 of that slice. When `symbol` is set, drift is decided by `symbol_sha1` only.
 - Prefer a `symbol` over a whole file for anything inside a large file such as `src/natural.ui.js`; otherwise every edit to that file flags every page.
-- `@types/*.d.ts` is fingerprinted only by [setup/typescript](../setup/typescript.md) and `dist/natural.config.js` only by [setup/configuration](../setup/configuration.md). Other pages link to those two pages and name types and config keys by symbol.
+- 1.x `@types/*.d.ts` is fingerprinted only by [setup/typescript](../setup/typescript.md) and `dist/natural.config.js` only by [setup/configuration](../setup/configuration.md). The 2.0 concepts cite `v2/src/**/*.ts`, never generated `v2/build/**/*.d.ts`; the checker compares emitted declaration names to TS entry names when build output exists.
 - Pages migrated from the legacy guides keep one `legacy` source pointing at the removed file at commit `8877a4a49c2363a3358cb266bd798cb698283412`. It has no fingerprint.
 - Per-claim attribution uses footnotes keyed by `sources[].id` (`...defaults to true.[^ui]`). Put footnotes on corrected claims, defaults and Known issues; in tables, cite once per section, not per cell.
 
@@ -180,10 +180,10 @@ Exit codes: `0` no errors, `1` errors, `2` usage or internal error.
 
 | Level | Rules |
 |---|---|
-| error | `frontmatter-missing`, `frontmatter-parse`, `type-missing`, `timestamp`, `status`, `generated`, `verified`, `source-resource`, `source-id-dup`, `source-missing`, `symbol-unresolved`, `link-broken`, `link-case`, `footnote-unknown`, `index-frontmatter`, `okf-version`, `log-format` |
+| error | `frontmatter-missing`, `frontmatter-parse`, `type-missing`, `timestamp`, `status`, `generated`, `verified`, `source-resource`, `source-id-dup`, `source-missing`, `symbol-unresolved`, `link-broken`, `link-case`, `footnote-unknown`, `index-frontmatter`, `okf-version`, `log-format`, `entry-source-missing`, `export-star`, `export-default`, `declaration-export`, `runtime-export`, `declaration-mismatch` |
 | warn | `drift`, `unstamped` (both errors under `--changed` for changed files), `index-missing`, `index-gap`, `index-desc`, `index-entry-format`, `title-missing`, `description-missing`, `actor`, `verified-stale`, `log-gap`, `log-entry-format`, `orphan`, `uncovered-symbol` |
 
-`uncovered-symbol` lists every `static X = class` member of a top-level class in `src/*.js` that no concept names in `symbols` or `sources[].symbol`, which is how a new public API is noticed.
+`uncovered-symbol` lists every 1.x `static X = class` member in `src/*.js` and every named TypeScript export from the 2.0 entry files selected by `v2/package.json` that no concept names in `symbols` or `sources[].symbol`. A changed 2.0 entry raises this to an error. The checker requires explicit named exports in those entry files, so `export *` and default exports are errors. TypeScript symbol slicing covers top-level exported declarations and explicit named re-exports; for other internal syntax, cite the whole source file. `docs:check` does not require a prior build, but compares names in generated `.d.ts` files when they are present.
 
 # Reference concept
 

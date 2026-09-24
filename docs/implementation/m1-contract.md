@@ -23,10 +23,10 @@ sources:
   - id: apg-grid
     resource: https://www.w3.org/WAI/ARIA/apg/patterns/grid/
     title: WAI-ARIA grid interaction pattern
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T07:41:51Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T08:19:59Z }
 ---
 
-This is the proposed 2.0 contract for user review, not an implemented API. It keeps the CVC roles and Form-used rule behavior while giving each mounted HTML root its own controller and resource lifetime.
+This is the user-approved 2.0 design contract, not yet an implemented API. It keeps the CVC roles and Form-used rule behavior while giving each mounted HTML root its own controller and resource lifetime.
 
 # Goal
 
@@ -42,7 +42,7 @@ Make a search, list, detail, save, and popup flow readable in ordinary TypeScrip
 
 ## Package and public surface
 
-The package name remains `@bbalganjjm/natural_js`. M2 defines explicit ESM exports for `./page`, `./data`, `./ui`, and `./comm`; the root entry may re-export these public symbols only. Internal modules never import the root entry.
+The independent 2.0 package lives under `v2/` and keeps the name `@bbalganjjm/natural_js`; the repository-root 1.x package and license stay unchanged. M2 defines explicit ESM exports for `./page`, `./data`, `./ui`, and `./comm`; the root entry may re-export these public symbols only. Internal modules never import the root entry. At M2 only `FrameworkError` is a runtime export; the role entries export types until their behavior is implemented.
 
 | Entry | Public symbols fixed by M1 | Required framework behavior |
 |---|---|---|
@@ -498,7 +498,7 @@ Inside the picker controller, `context.output(employee)` resolves the popup resu
 
 # Next action
 
-Review this M1 contract and [the M2 tooling plan](m2-plan.md). If accepted, mark M1 complete and start M2 only after its scope is approved. Later milestone plans may refine component options but must revise this contract before changing its public invariants.
+The user approved this M1 contract and [the M2 tooling plan](m2-plan.md). M2 builds the isolated package foundation; later milestones implement the proposed runtime functions and update this contract if a core invariant changes. Later milestone plans may refine component options but must revise this contract before changing its public invariants.
 
 # Decisions
 
@@ -524,11 +524,11 @@ No legacy function is removed in M1. M2-M9 removal audits must prove a candidate
 | Date | Check | Result |
 |---|---|---|
 | 2026-09-24 | Independent read-only source audits | CVC, Form rule dispatch, List/Grid Form use, and M0 classification conflict were inspected by separate agents. |
-| 2026-09-24 | Contract review | Pending user review; no 2.0 runtime has been implemented. |
+| 2026-09-24 | Contract review | User approved M1 and M2 work; no CVC, data, communication, or UI runtime has been implemented. |
 
 # Open questions
 
-- M1 proposes to freeze the formatter/validator names listed above, including combined validator names. M5 audits each rule's arguments and corrected behavior against 1.x; none is removed by assumption.
+- M1 retains the formatter/validator names listed above, including combined validator names. M5 audits each rule's arguments and corrected behavior against 1.x; none is removed by assumption.
 - M4 benchmarks nested Select binding, duplicate-ID prevention, a possible legacy ID-scoping transform, and accessible native-table interaction.
 - If automatic nested binding misses its correctness or performance gate, the user may select explicit per-row Select binding for 2.0 and move automatic binding to a later 2.x milestone.
 - Date formatting remains in M5 while its optional custom calendar attachment waits until M11.

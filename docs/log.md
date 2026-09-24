@@ -1,5 +1,13 @@
 ## 2026-09-24
 
+* **Creation** `v2/`: added an isolated Apache-2.0 TypeScript package with explicit ESM/declaration exports, source maps, a tracked lockfile, and no 1.x or jQuery files in its tarball.
+* **Creation** `docs/v2/`: documented the implemented error, type-only role entries, installable package, and private-module boundaries without describing unimplemented runtime as shipped.
+* **Creation** `implementation/m3-plan.md`: scoped the next CVC, communication, and row-store runtime milestone for review.
+* **Update** `implementation/m1-contract.md`, `implementation/m2-plan.md`, `implementation/roadmap.md`, and `implementation/current.md`: recorded M1/M2 approval, 2.0-only Apache licensing, actual M2 checks, Firefox host limitation, and the evidence rule for shared modules.
+* **Verification** M2 package: `npm ci`, build, typecheck, Vitest, separate installed JS/TS consumers, documentation checker regression test, and Chromium/WebKit smoke passed; Firefox could not launch because of this Windows host's SideBySide `mozglue` failure.
+* **Verification** M2 OKF: changed and full checks passed with 78 concepts, 17 reserved files, 0 errors, and 0 warnings; an independent agent verified the package and FrameworkError concepts against source and tarball.
+
+* **Update** governance/okf-conventions.md and governance/repository-workflow.md: added the 2.0 TypeScript source, package entry, emitted declaration, and public-symbol documentation checks; tools/knowledge-docs now checks explicit v2 exports and TS symbol fingerprints with a focused regression test.
 * **Correction** implementation/roadmap.md and implementation/m0-baseline.md: retained Form-used formatter/validator engines, declarative built-in rules, and transitive helpers after the user's scope correction; only framework-unreachable utilities qualify for removal.
 * **Update** implementation/m1-plan.md and implementation/current.md: recorded M1 approval, the corrected retention boundary, and the M1 review gate.
 * **Creation** Added implementation/m1-contract.md with concrete HTML/JS/TS usage, public signatures, CVC lifetime, shared rows, Form rule behavior, and request/container examples.

@@ -4,11 +4,13 @@ okf_version: "0.2"
 
 # Start here
 
+* [Natural-JS 2.0 package](v2/package.md) - Build and inspect the isolated Apache-2.0 ESM package and its currently implemented exports. (draft)
 * [Natural-JS](overview/natural-js.md) - jQuery-based JavaScript architecture framework for enterprise web UIs, exposing CVC architecture, UI components and data libraries on the global N.
 * [Your first page](getting-started/first-page.md) - Tutorial that writes a block page (View plus N.cont controller), fetches JSON with N.comm and loads the page from an index page.
 
 # Topics
 
+* [Natural-JS 2.0](v2/index.md) - Implemented package, type-only contracts, and module boundaries.
 * [Overview](overview/index.md) - Framework map and API conventions.
 * [Setup](setup/index.md) - Installation, configuration, TypeScript and build outputs.
 * [Getting started](getting-started/index.md) - Tutorials for building a first page and application frame.

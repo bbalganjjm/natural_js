@@ -21,8 +21,8 @@ const STATUSES = new Set(["draft", "stable", "deprecated"]);
 const TIMESTAMP = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2}(\.\d+)?)?(Z|[+-]\d{2}:\d{2})$/;
 const ACTOR = /^([A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+|human:[^\s]+|process:[^\s]+)$/;
 const URL_SCHEME = /^[a-z][a-z0-9+.-]*:/i;
-// Raw layer: public classes are discovered here for the uncovered-symbol rule.
-const SYMBOL_SOURCES = ["src"];
+// 1.x nested classes are still checked beside explicit 2.0 TypeScript entry exports.
+const LEGACY_SYMBOL_SOURCES = ["src"];
 
 class UsageError extends Error {}
 
@@ -197,6 +197,13 @@ function parseFrontmatter(lines) {
  * segment switches to an instance method (NU.prototype.button, NU.grid.prototype.add).
  */
 function symbolSlice(abs, symbol) {
+    if (abs.endsWith(".ts")) {
+        const entry = typescriptExports(abs).find((item) => item.symbol === symbol);
+        if (!entry) return null;
+        const lines = readText(abs).split(/\r?\n/);
+        const slice = lines.slice(entry.start, entry.end + 1).map((line) => line.replace(/\s+$/, "")).join("\n");
+        return crypto.createHash("sha1").update(slice).digest("hex").slice(0, 12);
+    }
     const lines = readText(abs).split(/\r?\n/);
     const segs = symbol.split(".");
     const top = new RegExp(`^(\\s*)(export\\s+)?class\\s+${segs[0]}\\b`);
@@ -237,10 +244,53 @@ function blockEnd(lines, start) {
     return lines.length - 1;
 }
 
-function publicSymbols() {
+/*
+ * M2 entry files deliberately use explicit named exports. This small reader handles exported
+ * declarations and named export lists; it does not try to parse arbitrary TypeScript syntax.
+ * Source-of-truth fingerprints stay on TS, while emitted declarations are checked when built.
+ */
+function typescriptSourceLines(abs) {
+    return readText(abs).replace(/\/\*[\s\S]*?\*\//g, (comment) => comment.replace(/[^\r\n]/g, " ")).split(/\r?\n/);
+}
+
+function typescriptExports(abs) {
+    const lines = typescriptSourceLines(abs);
     const out = [];
-    for (const dir of SYMBOL_SOURCES) {
+    for (let i = 0; i < lines.length; i++) {
+        const line = lines[i];
+        const decl = /^\s*export\s+(?:(?:declare|default|abstract|async)\s+)*(?:class|function|interface|type|enum|const|let|var)\s+([A-Za-z_$][\w$]*)\b/.exec(line);
+        if (decl) {
+            let end = lines.length - 1;
+            for (let j = i + 1; j < lines.length; j++) {
+                if (/^(?:export|import|declare|class|function|interface|type|enum|const|let|var)\b/.test(lines[j])) {
+                    end = j - 1;
+                    break;
+                }
+            }
+            out.push({ symbol: decl[1], line: i + 1, start: i, end });
+            continue;
+        }
+        if (!/^\s*export\s+(?:type\s+)?\{/.test(line)) continue;
+        let end = i;
+        while (end < lines.length && !lines[end].includes("}")) end++;
+        if (end === lines.length) continue;
+        const clause = /\{([^}]*)\}/.exec(lines.slice(i, end + 1).join(" "));
+        if (clause) {
+            for (const part of clause[1].split(",")) {
+                const name = /^(?:type\s+)?([A-Za-z_$][\w$]*)(?:\s+as\s+([A-Za-z_$][\w$]*))?$/.exec(part.trim());
+                if (name) out.push({ symbol: name[2] || name[1], line: i + 1, start: i, end });
+            }
+        }
+        i = end;
+    }
+    return out;
+}
+
+function publicSymbols() {
+    const symbols = [], issues = [];
+    for (const dir of LEGACY_SYMBOL_SOURCES) {
         const absDir = path.join(REPO, dir);
+        if (!fs.existsSync(absDir)) continue;
         for (const f of fs.readdirSync(absDir).filter((n) => n.endsWith(".js")).sort()) {
             const abs = path.join(absDir, f);
             const lines = readText(abs).split(/\r?\n/);
@@ -253,11 +303,57 @@ function publicSymbols() {
                 const m = /^(\s+)static\s+(\w+)\s*=\s*class\b/.exec(lines[i]);
                 if (!m) continue;
                 if (childIndent === null) childIndent = m[1];
-                if (m[1] === childIndent) out.push({ symbol: `${cls}.${m[2]}`, file: abs, line: i + 1 });
+                if (m[1] === childIndent) symbols.push({ symbol: cls + "." + m[2], file: abs, line: i + 1 });
             }
         }
     }
-    return out;
+
+    const packageFile = path.join(REPO, "v2", "package.json");
+    if (!fs.existsSync(packageFile)) return { symbols, issues };
+    const pkg = JSON.parse(readText(packageFile));
+    for (const [entry, conditions] of Object.entries(pkg.exports || {})) {
+        if (entry !== "." && !/^\.\/[A-Za-z][\w-]*$/.test(entry)) continue;
+        const part = entry === "." ? "" : entry.slice(2);
+        const source = path.join(REPO, "v2", "src", part, "index.ts");
+        if (!fs.existsSync(source)) {
+            issues.push({ file: packageFile, line: 1, rule: "entry-source-missing", msg: entry + " has no TypeScript entry " + rel(source) });
+            continue;
+        }
+        const exports = typescriptExports(source);
+        for (const item of exports) symbols.push({ symbol: item.symbol, file: source, line: item.line, entry });
+        const sourceLines = typescriptSourceLines(source);
+        sourceLines.forEach((line, i) => {
+            if (/^\s*export\s+default\b/.test(line)) {
+                issues.push({ file: source, line: i + 1, rule: "export-default", msg: "use named public exports in " + rel(source) });
+            }
+            if (/^\s*export\s+(?:type\s+)?\*/.test(line)) {
+                issues.push({ file: source, line: i + 1, rule: "export-star", msg: "list public exports explicitly in " + rel(source) });
+            }
+        });
+        if (!conditions || typeof conditions !== "object" || typeof conditions.types !== "string" || !/\.d\.ts$/.test(conditions.types)) {
+            issues.push({ file: packageFile, line: 1, rule: "declaration-export", msg: entry + " needs an explicit .d.ts types condition" });
+            continue;
+        }
+        const runtime = conditions.import || conditions.default;
+        if (typeof runtime !== "string" || !/\.js$/.test(runtime)) {
+            issues.push({ file: packageFile, line: 1, rule: "runtime-export", msg: entry + " needs an explicit .js import/default condition" });
+        }
+        const declaration = path.resolve(path.dirname(packageFile), conditions.types);
+        if (!fs.existsSync(declaration)) continue; // A clean checkout need not build before docs:check.
+        const emitted = new Set(typescriptExports(declaration).map((item) => item.symbol));
+        const authored = new Set(exports.map((item) => item.symbol));
+        for (const name of authored) {
+            if (!emitted.has(name)) {
+                issues.push({ file: declaration, line: 1, rule: "declaration-mismatch", msg: entry + " declaration omits " + name });
+            }
+        }
+        for (const name of emitted) {
+            if (!authored.has(name)) {
+                issues.push({ file: declaration, line: 1, rule: "declaration-mismatch", msg: entry + " declaration has stale export " + name });
+            }
+        }
+    }
+    return { symbols, issues };
 }
 
 // ---------------------------------------------------------------- bundle model
@@ -561,10 +657,15 @@ function check(args) {
     }
 
     // New public API without a concept.
-    for (const s of publicSymbols()) {
+    const publicApi = publicSymbols();
+    for (const issue of publicApi.issues) {
+        findings.push({ level: "error", file: rel(issue.file), abs: issue.file, line: issue.line, rule: issue.rule, msg: issue.msg });
+    }
+    for (const s of publicApi.symbols) {
         const usage = s.symbol.replace(/^N[A-Z]*\./, "N.");
         if (!covered.has(s.symbol) && !covered.has(usage)) {
-            findings.push({ level: "warn", file: rel(s.file), line: s.line, rule: "uncovered-symbol", msg: `${s.symbol} is not referenced by any concept (sources[].symbol or symbols)` });
+            const level = s.entry && changedMode && changed.has(s.file) ? "error" : "warn";
+            findings.push({ level, file: rel(s.file), abs: s.file, line: s.line, rule: "uncovered-symbol", msg: s.symbol + " is not referenced by any concept (sources[].symbol or symbols)" });
         }
     }
 
