@@ -1,5 +1,7 @@
 ## 2026-09-25
 
+* **Creation** The draft M10 plan audits deferred 1.x Grid intent against the current authored-table/Rows contract, sets a reference-screen decision gate, and stages optional sticky/grouped headings, rendering lifetime, bulk edit, column state, and agent/package checks. No advanced Grid API or runtime is implemented yet.
+
 * **Update** The user excluded Safari from the initial 2.0 browser support scope and deferred npm publication and release tags until remaining functionality is complete, personally tested, and explicitly requested. The beta tarball remains unpublished; the package guide, M9 plan/report, and active checkpoint distinguish Playwright WebKit from real Safari and retain manual-accessibility limits.
 
 * **Verification** Repacked the corrected M9 beta from clean `a45fbd6` and checked SHA-256 `ca87cf82f6fe457823500e1933ec52de0a35d8f6a529be50cb37ed6fdea126b8`. Exact installed JS/TS consumers and Chromium, Firefox, WebKit, Chrome, and Edge consumers passed. Full source suites passed 103/103 per Playwright engine; refreshed 1,000-row Grid/List budgets and three-engine M4 side/stack 320px text-spacing plus M7 side-layout Popup focus checks passed. Real Safari, manual accessibility, npm publication, and trust-field refresh remain open; the [beta report](implementation/m9-beta-report.md) has the evidence and limits.

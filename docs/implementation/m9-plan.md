@@ -8,7 +8,7 @@ sources:
   - id: roadmap
     resource: roadmap.md
     title: First-release scope and M9 gate
-    git_blob: 716441c68a8971d34503b538ec67f4a7795e90fe
+    git_blob: 2bf6a8dd16deff7de9a5f075cc1e16c85c5a3c4c
   - id: m8
     resource: https://github.com/bbalganjjm/natural_js/blob/e9db5d81496b5674b67e6d267c184cb63aa987c0/docs/implementation/m8-beta-report.md
     title: Unpublished M8 beta-candidate evidence and limits
@@ -29,7 +29,7 @@ sources:
   - id: wcag
     resource: https://www.w3.org/TR/WCAG22/
     title: W3C Web Content Accessibility Guidelines 2.2
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T21:37:53Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T21:44:43Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T19:03:21Z }
 ---

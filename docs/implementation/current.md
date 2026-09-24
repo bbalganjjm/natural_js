@@ -8,7 +8,7 @@ sources:
     resource: ../governance/okf-conventions.md
     title: OKF conventions for the Natural-JS bundle
     git_blob: 17cfe650daacff3935aa93a383868574afe95628
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T21:37:53Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T21:44:43Z }
 ---
 
 Use [the roadmap](roadmap.md) for milestone order. The fixed 1.x baseline is `b96e47a0d7e020d1878f7cecdf1b1a9f462d99a6`; its LGPL source and docs remain unchanged under `v1/`.
@@ -21,11 +21,12 @@ Release a small Apache-2.0, TypeScript-source ESM framework that keeps CVC and a
 
 - M0-M8 are complete on `2.0.0-alpha.0`. Their design and verification history is in the [milestone index](index.md), [M6](m6-plan.md), [M7](m7-plan.md), and the [M8 report](m8-beta-report.md). M8 was independently rechecked against pushed commit `e9db5d81496b5674b67e6d267c184cb63aa987c0`, raw agent logs, and a clean full OKF check.
 - [M9](m9-plan.md) is approved and in progress. The working manifest is an unpublished `2.0.0-beta.0` candidate. The user approved removing only the unused public `Rule` type; Form formatter/validator runtime stays. Clean source commit `a45fbd669e42e70e4e03624de8286b6440012d53` produced the current [M9 beta artifact](m9-beta-report.md), SHA-256 `ca87cf82f6fe457823500e1933ec52de0a35d8f6a529be50cb37ed6fdea126b8`. Installed JS/TS and five-browser checks passed on that tarball after the Popup focus and authored-layout fix. A fixed docs-first CVC task passed its first complete acceptance with zero code retries on the earlier M9 source; its metered result is in the report.
+- The [M10 advanced Grid draft](m10-plan.md) separates authored table/CSS behavior from optional runtime operations. Its reference screen, selected capabilities, and public HTML/TS example need milestone review before M10 code changes. M11-M12 remain separate later stages.
 - `master` and `v1/` are unchanged. The user's untracked `js/` directory is outside this work. The user excluded Safari from initial 2.0 support and deferred npm publication and release tags until remaining functionality is complete and personally tested. No npm publication or Git release tag has occurred.
 
 # Next action
 
-Continue the remaining implementation through milestone-specific plans, then let the user test it before any publication request. Keep the exact beta artifact as unpublished evidence. Clarify whether `remaining functionality` includes M10-M12, and record manual accessibility, Node/tooling, and trust-field limits without claiming they passed. Do not publish to npm or create a release tag until the user requests it again.
+Review the [M10 draft](m10-plan.md) and clarify whether `remaining functionality` includes M10-M12. Then freeze an advanced reference screen and selected Grid capabilities before M10 implementation. Keep the exact M9 beta artifact as unpublished evidence; record manual accessibility, Node/tooling, and trust-field limits without claiming they passed. Do not publish to npm or create a release tag until the user requests it again.
 
 # Decisions
 

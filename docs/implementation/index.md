@@ -16,4 +16,5 @@
 * [Natural-JS 2.0 M8 unpublished beta candidate](m8-beta-report.md) - M8 migration, agent tasks, browser, package, performance, and documentation gates before the M9 release plan. (draft)
 * [Natural-JS 2.0 M9 release plan](m9-plan.md) - Approved beta, release-candidate, and 2.0.0 gates for installed consumers, browsers, accessibility, performance, package scope, and publication. (draft)
 * [Natural-JS 2.0 M9 unpublished beta artifact](m9-beta-report.md) - Exact beta tarball, installed-consumer, browser, accessibility, performance, package, and agent checks before release-candidate review. (draft)
+* [Natural-JS 2.x M10 advanced Grid plan](m10-plan.md) - Draft scope and gates for advanced behavior on authored native tables without expanding Grid into a general utility library. (draft)
 * [Natural-JS 2.0 master roadmap](roadmap.md) - Milestone order, scope boundary, and completion gates for the TypeScript-first Natural-JS 2.0 migration.

@@ -7,7 +7,7 @@ sources:
   - id: baseline
     resource: https://github.com/bbalganjjm/natural_js/blob/b96e47a0d7e020d1878f7cecdf1b1a9f462d99a6/package.json
     title: Immutable Natural-JS 1.x package baseline
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T19:32:25Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T21:44:43Z }
 ---
 
 This roadmap governs the Natural-JS 2.0 migration. Use [the active checkpoint](current.md) for status and a milestone-specific plan before implementing that milestone. The 1.x source and documentation remain available under `v1/` and at commit b96e47a0d7e020d1878f7cecdf1b1a9f462d99a6.
@@ -44,7 +44,7 @@ Each milestone starts with a detailed plan, user review, and approval of its sco
 
 # Next action
 
-Complete the approved [M9 release plan](m9-plan.md), then review exact release artifacts before any npm publication or Git tag. The user approved removing only the unused public `Rule` alias; retained Form rules are unchanged.
+The M9 beta artifact is verified but unpublished. The user excluded Safari from the initial 2.0 support scope and deferred registry publication and release tags until remaining functionality is complete, personally tested, and publication is requested again. Review the [M10 draft](m10-plan.md) and clarify whether the requested remaining functionality includes M10-M12 before implementing them. The user approved removing only the unused public `Rule` alias; retained Form rules are unchanged.
 
 # Decisions
 

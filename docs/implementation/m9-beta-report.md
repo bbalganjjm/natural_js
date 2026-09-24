@@ -8,7 +8,7 @@ sources:
   - id: plan
     resource: m9-plan.md
     title: Approved M9 release gates
-    git_blob: f77e624506ddee5d044d692fe5415b10c2c838aa
+    git_blob: 5d5295574ca4049a54c1f69bf055a920cd6ec475
   - id: package
     resource: ../../package.json
     title: Beta package metadata and scripts
@@ -52,7 +52,7 @@ sources:
   - id: wcag
     resource: https://www.w3.org/TR/WCAG22/
     title: Web Content Accessibility Guidelines 2.2
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T21:37:53Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T21:44:43Z }
 ---
 
 The clean source commit `a45fbd669e42e70e4e03624de8286b6440012d53` produced the unpublished `2.0.0-beta.0` tarball measured here. The earlier `c79b9eae` artifact was replaced after Popup focus and authored-layout reflow fixes. This report separates checks that installed the exact current tarball from source-checkout tests and records the remaining release gates. It does not claim registry publication, real Safari coverage, or complete WCAG 2.2 AA conformance.[^plan][^package]
