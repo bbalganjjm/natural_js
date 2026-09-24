@@ -41,10 +41,16 @@ sources:
     resource: ../../examples/vite/m4/mock-server.ts
     title: Development-only mock API
     git_blob: 71c10c7b63b9291fa1bbcbb64d7515e7887acfc8
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T11:01:06Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T11:39:18Z }
 ---
 
 Run `npm run build` and `npm run example`, then open `/m4/side.html` or `/m4/stack.html`. Both views use the same controller and fixture; their DOM placement and CSS differ. `/m4/side.html?view=server` fetches the same authored HTML through the page runtime instead of cloning its local template.[^side][^stack][^controller]
+
+# Small field change map
+
+For an optional nested employee field, start with the two HTML detail inputs, the Employee shapes and new-row default in employees.ts and mock-server.ts, the matching employee fixture and expected-save JSON, and the first search/edit/save case in [the browser spec](../../tests/browser/m4-screen.spec.ts). Form follows the data-field path automatically; a new field needs no Form/Grid runtime edit or controller event handler.[^controller][^side][^stack][^fixture][^expected][^server]
+
+Use a targeted search for the nearby field name in those files and read only the relevant test section. main.ts, the CSS files, and vite.config.ts concern page mounting or styling and need no review for a data-only field. For the documentation change, update this concept and prepend a dated bullet to the top of docs/log.md; its older history is not needed. Stamp this concept and run the changed documentation check.[^runner]
 
 # Scenario
 

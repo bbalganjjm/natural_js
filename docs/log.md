@@ -1,5 +1,6 @@
 ## 2026-09-24
 
+* **Correction** The M5 docs-first field task passed on its first Chromium run but read more context than M4. Added a short source and test map to the employee example so a small data-field change does not require opening mounting, CSS, governance history, or unrelated test sections.
 * **Correction** An independent M4 recheck added a fetched-server-HTML route for the same authored employee view and controller, with a simultaneous-page and duplicate-ID regression. The unused future PopupHandle type was removed from the M5 public UI entry.
 * **Creation** M5 rewrote the Form-reachable formatter and validator catalog inside private UI modules and gave Form and Grid one rule dispatcher. Built-in declarations, case-insensitive aliases, per-component overrides, and localized messages remain available without a public utility package.
 * **Update** Rows now reports typed mutation events, including a clean revert, so Form and Grid can release row-keyed drafts. Form and Grid share raw/display/parse semantics, validate hidden rows, and use authored error regions with document-unique IDs.
