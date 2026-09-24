@@ -1,6 +1,7 @@
 ## 2026-09-25
 
 * **Creation** M10's inferred 40-row advanced Grid reference screen now runs as two authored MDI layouts with native grouped headings, sticky header/first column, nested row-local choices, and the existing CVC/Grid API. Chromium, Firefox, and WebKit focused tests pass 4/4 each, using the repository-local Playwright browser cache for Firefox after the default cache failed to launch.
+* **Update** A read-only M10.2 audit identified offscreen Grid clone retention, DOM-owned validation error state, and initial full-render peak cost. The M10 plan records a narrow internal release proposal and provisional 5,000-row workload without changing runtime or public API.
 * **Correction** Independent source/package checks tightened the M8 API call-site wording, M7 shared Rows and Tabs example scope, Popup focus exception, UI parser-failure candidate wording, and M9 next-action/List scope. Nine previously stale concepts were re-audited; two Grid concepts were also independently checked. All 11 now have refreshed `verified` fields and the changed/full OKF checks have no warnings.
 
 * **Creation** The draft M10 plan audits deferred 1.x Grid intent against the current authored-table/Rows contract, sets a reference-screen decision gate, and stages optional sticky/grouped headings, rendering lifetime, bulk edit, column state, and agent/package checks. No advanced Grid API or runtime is implemented yet.

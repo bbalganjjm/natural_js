@@ -8,7 +8,7 @@ sources:
     resource: ../governance/okf-conventions.md
     title: OKF conventions for the Natural-JS bundle
     git_blob: 17cfe650daacff3935aa93a383868574afe95628
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T22:14:51Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T22:22:33Z }
 ---
 
 Use [the roadmap](roadmap.md) for milestone order. The fixed 1.x baseline is `b96e47a0d7e020d1878f7cecdf1b1a9f462d99a6`; its LGPL source and docs remain unchanged under `v1/`.
@@ -26,7 +26,7 @@ Release a small Apache-2.0, TypeScript-source ESM framework that keeps CVC and a
 
 # Next action
 
-Review the concrete [M10 reference screen](../v2/advanced-grid-example.md) and its three-engine M10.1 evidence. Measure Grid record lifetime and choose a larger workload before any M10.2 runtime change. Keep the exact M9 beta artifact as unpublished evidence; record manual accessibility, Node/tooling, and trust-field limits without claiming they passed. Do not publish to npm or create a release tag until the user requests it again.
+Review the concrete [M10 reference screen](../v2/advanced-grid-example.md) and its three-engine M10.1 evidence. A read-only M10.2 audit identified offscreen clone retention and DOM-owned validation errors; review the provisional 5,000-row workload and clone-lifetime contract before any runtime change. Keep the exact M9 beta artifact as unpublished evidence; record manual accessibility, Node/tooling, and trust-field limits without claiming they passed. Do not publish to npm or create a release tag until the user requests it again.
 
 # Decisions
 

@@ -29,7 +29,7 @@ sources:
     resource: evidence/m9-binding-chromium.json
     title: Fixed 1,000-row Grid baseline
     git_blob: ebfa20fcf965c7a4b89361892d6d4c2d35c645bb
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T22:17:03Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T22:22:33Z }
 ---
 
 M10 is a later 2.x milestone, outside the first `2.0.0` feature set. This draft defines decision and implementation gates. The first grouped/sticky authored-table slice is implemented without a new Grid API; later runtime capabilities remain unselected. The user has deferred npm publication until remaining work is complete and personally tested. Safari is outside the initial 2.0 browser support scope.[^roadmap]
@@ -61,6 +61,10 @@ The first implementation slice is authored fixed/grouped headers in two visually
 The inferred M10.0 reference is now [a 40-row employee assignment screen](../v2/advanced-grid-example.md), since no production advanced screen was supplied. It has five columns, two native column groups, a row-local nested Shift Select, keyboard-activated name sorting and row selection, a two-axis scroll region, and two independent MDI mounts. Side-by-side and stacked authored layouts reuse one CVC controller. The first selected capability is grouped and fixed headings/first column through HTML/CSS only. Column resize/reorder/hide, bulk paste, multi-selection, and virtualization remain unselected; no new Grid or Rows API is authorized by this fixture. M10.2 may study rendering lifetime on a separately declared larger workload without changing the basic contract.
 
 The browser acceptance for this slice checks native table semantics, no copied header or duplicate IDs, nested choices, keyboard sort/selection, two-screen isolation, sticky geometry, 320 CSS-pixel reflow with enlarged text spacing, and axe-tagged A/AA results. Chromium, Firefox, and WebKit passed four focused cases each. On this Windows host Firefox required the repository-local Playwright browser cache; the default cache failed at process launch (`spawn UNKNOWN`) even with one worker. Automated checks do not establish manual screen-reader conformance.
+
+A read-only M10.2 audit found that `bindGrid` initially renders every row, then retains each visited row's cloned DOM and Select even when paging or filtering removes it from view. Offscreen `drafts` and `selected` already live by `RowId`, but visible validation errors currently live on the retained record. A narrow internal change can release offscreen records only after DOM order and focus settle, while storing error text without element references for later restoration. This changes the current documented clone-reuse behavior for rows that leave and return, so the Grid concept and focused tests must change with it. External `Rows.set` must still clear stale errors without invoking user validators. Initial full-render peak cost remains until a separately approved initial-page contract exists.
+
+Provisional M10.2 workload: 5,000 rows, 10 fields, local pages of 50, and a 100-page traversal. Record the same-host baseline first, then set a page-navigation budget before implementation; compare retained records and forced-GC heap against a Rows-only baseline rather than treating one instantaneous heap reading as proof. Keep the existing 100/1,000-row budgets. This workload and the clone-lifetime contract await reference-screen review before runtime edits.
 
 # Contract gates
 
