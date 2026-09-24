@@ -1,3 +1,6 @@
 # Concepts
 
-* [No active plan](current.md) - Completed OKF migration record for Natural-JS; no implementation work is currently scheduled.
+* [Natural-JS 2.0 active plan](current.md) - Checkpoint, next action, and verification record for the milestone-gated Natural-JS 2.0 migration.
+* [Natural-JS 2.0 M0 baseline](m0-baseline.md) - Code-backed 1.x design intent, minimum 2.0 migration inventory, and representative evaluation screen.
+* [Natural-JS 2.0 M1 contract plan](m1-plan.md) - Detailed review plan for the public usage examples and minimum architecture contracts required before implementation.
+* [Natural-JS 2.0 master roadmap](roadmap.md) - Milestone order, scope boundary, and completion gates for the TypeScript-first Natural-JS 2.0 migration.

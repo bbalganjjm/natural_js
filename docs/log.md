@@ -1,5 +1,12 @@
 ## 2026-09-24
 
+* **Correction** implementation/m0-baseline.md: corrected the 1.x View lookup scope, jQuery plugin installation exceptions, and grid-only sorting/filtering boundary after independent source review.
+* **Update** implementation/m1-plan.md: included JavaScript consumer examples in the M1 exit package.
+* **Creation** Added implementation/roadmap.md for the approved Natural-JS 2.0 milestone sequence and minimal migration policy.
+* **Creation** Added implementation/m0-baseline.md with code-backed design intent, strict inclusion inventory, representative screen, and agent evaluation tasks.
+* **Creation** Added implementation/m1-plan.md with the detailed scope and review gate for the 2.0 public contract.
+* **Update** implementation/current.md now tracks the active 2.0 checkpoint; implementation/index.md and docs/index.md link the new records.
+
 * **Creation** Added 62 Natural-JS concepts across overview, setup, getting started, core, architecture, data, UI, UI shell, template, code, and examples. The five code-only areas (`core/mask.md`, `data/datasync.md`, `ui/theming.md`, `setup/build-and-dist.md`, and `code/inspection.md`) are drafts.
 * **Creation** Added 15 bundle and folder `index.md` files for concept lookup.
 * **Creation** Added `tools/knowledge-docs/knowledge-docs.mjs` for OKF checks, source drift detection, and source stamping.
