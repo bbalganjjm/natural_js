@@ -19,7 +19,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current Grid pilot
-    git_blob: dedeca30ef8f10a78172748d8cb9911a68b7da03
+    git_blob: 5599945bf62763fd645074c3475c8eef1a16a371
   - id: legacy-data
     resource: ../../v1/src/natural.data.js
     title: Preserved 1.x formatter and validator implementation

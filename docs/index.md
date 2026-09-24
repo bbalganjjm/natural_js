@@ -4,6 +4,7 @@ okf_version: "0.2"
 
 # Start here
 
+* [Interactive Grid contract demo](v2/grid-demo.md) - Exercise every implemented Grid option, method, and declarative marker on one authored native table while inspecting raw Rows state. (draft)
 * [Authored advanced Grid in two layouts](v2/advanced-grid-example.md) - Grouped native table headings and sticky rows and columns in two authored MDI layouts with no new Grid API. (draft)
 * [Natural-JS 2.0 package](v2/package.md) - Build and verify the unpublished Apache-2.0 ESM beta candidate and its five entry points. (draft)
 * [Natural-JS 2.0 module boundaries](v2/architecture.md) - Small role modules, one-way imports, and evidence-based sharing keep 2.0 easy to navigate. (draft)

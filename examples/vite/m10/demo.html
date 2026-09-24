@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Natural-JS Grid demo</title>
+  <link rel="stylesheet" href="./demo.css">
+  <script type="module" src="./demo.ts"></script>
+</head>
+<body>
+  <main class="demo">
+    <header>
+      <p class="eyebrow">Natural-JS 2.x</p>
+      <h1>Grid contract demo</h1>
+      <p>Try every implemented Grid option and method against one authored table. Select a row before using row actions. The state below shows raw data, not formatted display text.</p>
+    </header>
+
+    <div class="workspace">
+      <section class="controls" aria-label="Grid controls">
+        <fieldset>
+          <legend>View</legend>
+          <label>Sort
+            <select data-sort data-needs-grid>
+              <option value="none">Store order</option>
+              <option value="name-asc">Name A–Z</option>
+              <option value="name-desc">Name Z–A</option>
+              <option value="salary-desc">Salary high to low</option>
+            </select>
+          </label>
+          <label>Team filter
+            <select data-filter data-needs-grid>
+              <option value="">All teams</option>
+              <option value="Platform">Platform</option>
+              <option value="Support">Support</option>
+            </select>
+          </label>
+          <label>Page size
+            <select data-size data-needs-grid>
+              <option value="">All rows</option>
+              <option value="2">2 rows</option>
+              <option value="3">3 rows</option>
+            </select>
+          </label>
+          <div class="button-row">
+            <button type="button" data-action="previous" data-needs-grid>Previous</button>
+            <button type="button" data-action="next" data-needs-grid>Next</button>
+          </div>
+          <output data-page-state aria-live="polite">All rows</output>
+        </fieldset>
+
+        <fieldset>
+          <legend>Selection and validation</legend>
+          <div class="button-row">
+            <button type="button" data-action="select-first" data-needs-grid>Select first store row</button>
+            <button type="button" data-action="clear-selection" data-needs-grid>Clear selection</button>
+            <button type="button" data-action="validate-selected" data-needs-grid>Validate selected</button>
+            <button type="button" data-action="validate-all" data-needs-grid>Validate all</button>
+          </div>
+          <p>Type in the table to see HTML and application validation. Invalid drafts stay outside Rows.</p>
+        </fieldset>
+
+        <fieldset>
+          <legend>Rows store</legend>
+          <div class="button-row">
+            <button type="button" data-action="add" data-needs-grid>Add row</button>
+            <button type="button" data-action="remove" data-needs-grid>Remove selected</button>
+            <button type="button" data-action="revert-selected" data-needs-grid>Revert selected</button>
+            <button type="button" data-action="revert-all">Revert all</button>
+            <button type="button" data-action="replace">Replace all rows</button>
+          </div>
+          <label>Programmatic salary
+            <input type="number" min="0" step="1" value="250" data-new-salary data-needs-grid>
+          </label>
+          <div class="button-row">
+            <button type="button" data-action="set-salary" data-needs-grid>Rows.set salary</button>
+            <button type="button" data-action="missing-choice" data-needs-grid>Set unavailable shift</button>
+            <button type="button" data-action="clear-choice" data-needs-grid>Clear required shift</button>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Binding lifetime</legend>
+          <label>Built-in rule locale
+            <select data-locale>
+              <option value="en-US">English</option>
+              <option value="ko-KR">한국어</option>
+            </select>
+          </label>
+          <p>Changing locale rebinds the Grid and clears selection and uncommitted edits.</p>
+          <div class="button-row">
+            <button type="button" data-action="dispose" data-needs-grid>Dispose Grid</button>
+            <button type="button" data-action="rebind" disabled>Bind Grid again</button>
+          </div>
+          <p>The caller-owned Rows store remains alive while the Grid is unbound.</p>
+        </fieldset>
+      </section>
+
+      <section class="results" aria-label="Grid and observed state">
+        <div class="table-heading">
+          <h2>Employee assignments</h2>
+          <output data-selection aria-live="polite">No row selected</output>
+        </div>
+        <div class="grid-scroll" role="region" aria-label="Scrollable employee assignments" tabindex="0">
+          <table data-grid>
+            <caption>Employee assignments with nested shift choices</caption>
+            <colgroup span="1"></colgroup><colgroup span="2"></colgroup>
+            <colgroup span="4"></colgroup><colgroup span="1"></colgroup>
+            <thead>
+              <tr>
+                <th scope="col" rowspan="2" aria-sort="none">Employee</th>
+                <th scope="colgroup" colspan="2">Contact</th>
+                <th scope="colgroup" colspan="4">Assignment</th>
+                <th scope="col" rowspan="2" aria-sort="none">Salary</th>
+              </tr>
+              <tr>
+                <th scope="col">Email</th><th scope="col">Phone</th>
+                <th scope="col">Team</th><th scope="col">Shift</th><th scope="col">Active</th><th scope="col">Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr data-row-template>
+                <th scope="row"><button type="button" data-select-row><span data-field="name" data-format='[["displayName"]]'></span></button></th>
+                <td><label>Email <input type="email" data-field="email" required></label><output data-error-for="email"></output></td>
+                <td data-field="phone"></td>
+                <td><label>Team <input type="text" data-field="profile.team" data-validate='[["required"]]' required></label><output data-error-for="profile.team"></output></td>
+                <td><label>Shift <select data-field="assignment.chosen" data-options="assignment.shifts"
+                  data-option-label="meta.label" data-option-value="code" required><option value="">Choose</option></select></label>
+                  <output data-error-for="assignment.chosen"></output></td>
+                <td><label><input type="checkbox" data-field="active"> Active</label></td>
+                <td><label>Notes <textarea data-field="notes" rows="2"></textarea></label></td>
+                <td><label>Salary <input type="number" min="0" step="1" data-field="salary" data-validate='[["payAtLeast",100]]' required></label>
+                  <output data-error-for="salary"></output></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="status"><output data-status role="status">Grid is bound.</output></p>
+
+        <div class="observations">
+          <section><h3>Selected RowId and raw snapshot</h3><pre data-snapshot tabindex="0">Select a row.</pre></section>
+          <section><h3>Rows.changes()</h3><pre data-changes tabindex="0">[]</pre></section>
+          <section><h3>Validation issues</h3><pre data-issues tabindex="0">Not run yet.</pre></section>
+          <section><h3>Callbacks</h3><p>onSelect: <output data-callback>Not fired yet.</output></p>
+            <p>Rows.subscribe: <output data-event>Not fired yet.</output></p></section>
+        </div>
+      </section>
+    </div>
+
+    <section class="future" aria-label="Later Grid candidates">
+      <h2>Later candidates</h2>
+      <p>Column resize, reorder, hide/show, bulk paste, multi-selection, and virtualization are not implemented Grid options here. They need separate M10 contracts.</p>
+    </section>
+  </main>
+</body>
+</html>

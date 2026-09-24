@@ -13,7 +13,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid binding and validation runtime
-    git_blob: dedeca30ef8f10a78172748d8cb9911a68b7da03
+    git_blob: 5599945bf62763fd645074c3475c8eef1a16a371
   - id: rules
     resource: ../../src/ui/rules.ts
     title: Shared Form/Grid rule runner
@@ -30,9 +30,9 @@ sources:
     resource: ../../src/ui/select-owner.ts
     title: Shared Select ownership
     git_blob: 6902e2789df6e44123b2ea599e4d05fa1c098fa4
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T22:11:10Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T23:38:53Z }
 verified:
-  - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
+  - { by: codex/gpt-6-sol, at: 2026-09-24T23:38:54Z }
 ---
 
 `bindGrid` adds behavior to a native table and a caller-owned `Rows` store. It clones one authored row template, keeps selection and invalid cell drafts under store-local `RowId` values, and never uses DOM IDs as row or field keys.[^grid]
@@ -75,7 +75,7 @@ if (grid.validate().valid) console.log(rows.changes());
 
 # Constructor
 
-`bindGrid<T extends object>(root: HTMLTableElement, options: { rows: Rows<T>; rules?: RuleSet; parse?: Record<string, ParseInput>; onSelect?: (selection: { id: RowId | null; row: RowSnapshot<T> | null; event: Event | null }) => void }): GridHandle<T>` requires a `<table>` with exactly one `<tbody><tr data-row-template>` across all bodies. The template and its descendants must not have fixed DOM IDs. The runtime temporarily replaces that row with a comment anchor, reuses cloned row elements across sorting/filtering, and restores the original template on disposal. It leaves other authored table rows in place. A second live binding of the table raises `GRID_IN_USE`.[^grid]
+`bindGrid<T extends object>(root: HTMLTableElement, options: { rows: Rows<T>; rules?: RuleSet; parse?: Record<string, ParseInput>; onSelect?: (selection: { id: RowId | null; row: RowSnapshot<T> | null; event: Event | null }) => void }): GridHandle<T>` requires a `<table>` with exactly one `<tbody><tr data-row-template>` across all bodies. The template and its descendants must not have fixed DOM IDs. The runtime temporarily replaces that row with a comment anchor, reuses clones for rows that remain visible, releases offscreen row elements and Select ownership after each view change, and recreates them when those rows return. It restores the original template on disposal. It leaves other authored table rows in place. A second live binding of the table raises `GRID_IN_USE`.[^grid]
 
 | Option | Behavior |
 |---|---|
@@ -97,7 +97,7 @@ if (grid.validate().valid) console.log(rows.changes());
 | `data-options="path"` | Select | Finds the row-local array of option objects, separate from the selected `data-field`. |
 | `data-option-label="path"`, `data-option-value="path"` | Select with `data-options` | Read each option's label and raw scalar value. |
 
-Field and option paths reject array indices, expressions, prototype keys, and empty segments. The Grid compiles field descriptors once, caches clone element references, and updates only fields whose raw values change. A nested field edit copies the affected object path and calls `Rows.set` for its top-level field.[^grid][^path]
+Field and option paths reject array indices, expressions, prototype keys, and empty segments. The Grid compiles field descriptors once, keeps element references only for currently displayed clones, and updates their fields when raw values change. A nested field edit copies the affected object path and calls `Rows.set` for its top-level field.[^grid][^path]
 
 # Methods
 
@@ -119,13 +119,13 @@ Returns `{ valid, issues }` for an explicit nondeleted ID or all nondeleted rows
 
 ## `dispose()`
 
-Removes delegated listeners and cloned rows, unsubscribes from `Rows`, clears drafts and Select ownership, and restores the untouched row template and authored sort state. It does not dispose the caller-owned store. Repeated disposal is safe; other methods then raise `GRID_DISPOSED`.[^grid]
+Removes delegated listeners and visible cloned rows, unsubscribes from `Rows`, clears drafts, cached issue text, and Select ownership, and restores the untouched row template and authored sort state. It does not dispose the caller-owned store. Repeated disposal is safe; other methods then raise `GRID_DISPOSED`.[^grid]
 
 # Behavior
 
 Text formatting is one-way: rules transform displayed text while the row snapshot and save payload retain the raw value. Validation invokes the shared UI rule runner on raw values. A Select option's DOM `value` is a string, but its row-local mapping preserves a raw string, finite number, boolean, or `null`. Authored empty options map to `null`; nonempty authored options remain strings. A missing selected raw value shows no selected option and yields `select-option`.[^grid][^rules]
 
-When a user types in a supported input, the Grid retains the entered draft and validates it; a native `change` commits valid text, checkbox, number, or Select candidates. A parser receives the entered string and one snapshot of all unparsed row drafts, independent of parser order; declared validators receive each parsed field value as a string, with the combined typed candidate in `RuleContext.values`. A throw or `undefined` creates a `parse` issue and preserves the draft. The Grid checks all fields against the row value plus every draft for that row. A choice that fails stays visible as a draft under that row ID and field path, while `Rows` remains unchanged. A later field change can make cross-field drafts valid and commit them. Changing another row field does not clear the draft. Programmatic `Rows` updates refresh the display and clear stale error text without invoking user validators; call `validate()` before saving. An external replacement of a drafted field, `replace`, `remove`, `revert`, or `dispose` clears the affected drafts. Filtering, sorting, and paging keep them. `validate(id)` checks drafts even without a rendered row.[^grid]
+When a user types in a supported input, the Grid retains the entered draft and validates it; a native `change` commits valid text, checkbox, number, or Select candidates. A parser receives the entered string and one snapshot of all unparsed row drafts, independent of parser order; declared validators receive each parsed field value as a string, with the combined typed candidate in `RuleContext.values`. A throw or `undefined` creates a `parse` issue and preserves the draft. The Grid checks all fields against the row value plus every draft for that row. A choice that fails stays visible as a draft under that row ID and field path, while `Rows` remains unchanged. A later field change can make cross-field drafts valid and commit them. Changing another row field does not clear the draft. Programmatic `Rows` updates refresh the display and clear stale error text without invoking user validators; call `validate()` before saving. Validation message text is kept by `RowId` without DOM references, so a failing off-page row shows its issue again when it returns. An external replacement of a drafted field, `replace`, `remove`, `revert`, or `dispose` clears the affected drafts. Filtering, sorting, and paging keep them. `validate(id)` checks drafts even without a rendered row.[^grid]
 
 Each cloned `data-error-for` region receives a document-unique ID and `aria-live="polite"` if not authored. The matching field control includes that ID in `aria-describedby`; failed validation sets `aria-invalid="true"` and writes issue text. A pass restores the control's authored `aria-invalid` state. The table retains native semantics and does not acquire `role="grid"`. When the focused row leaves the visible slice, focus moves to another available control, header button, or the table root. Authors still provide labels and table headings.[^grid]
 
@@ -145,11 +145,11 @@ Each cloned `data-error-for` region receives a document-unique ID and `aria-live
 | `RULE_DECLARATION`, `RULE_UNKNOWN`, `RULE_ARGUMENT`, `RULE_FAILED` | Invalid, unavailable, malformed, or failed rule. |
 | `FIELD_PATH` | Unsafe path or nested write through a non-object. |
 
-`RowId` is neither a DOM ID nor a display index. Grid edits text-like inputs, textareas, checkboxes, and number inputs with an application parser. It rejects radio, file, unsupported input types, and multiple Selects; use Form for those. A plain `data-field` text element displays data without editing it. `data-format` is only for text-like inputs, textareas, and text elements. An error region and field must use the same exact path. A Select's `data-options` names its row-local option array; `data-field` names its selected scalar. A Select owned by Grid cannot also be bound with `bindSelect`.[^grid][^owner]
+`RowId` is neither a DOM ID nor a display index. Grid edits text-like inputs, textareas, checkboxes, and number inputs with an application parser. It rejects radio, file, unsupported input types, and multiple Selects; use Form for those. A plain `data-field` text element displays data without editing it. `data-format` is only for text-like inputs, textareas, and text elements. An error region and field must use the same exact path. A Select's `data-options` names its row-local option array; `data-field` names its selected scalar. A Select owned by Grid cannot also be bound with `bindSelect`. `bindGrid` creates all initial row clones before the caller can set a local page; later paging releases offscreen clones but does not remove the initial large-store DOM peak. Measure that peak for large tables or use application-owned server pages.[^grid][^owner]
 
 # Related
 
-[Rows](data.md) owns identity and changes. [UI contracts](ui.md) defines `RuleSet`, handles, and results. [Form](form.md) shares the private rule runner. [Pagination](pagination.md) can use `grid.page()`. [The M6 plan](../implementation/m6-plan.md) records this milestone's migration scope. [The advanced Grid example](advanced-grid-example.md) shows grouped headings and sticky positioning with authored HTML/CSS and no new API.
+[Rows](data.md) owns identity and changes. [UI contracts](ui.md) defines `RuleSet`, handles, and results. [Form](form.md) shares the private rule runner. [Pagination](pagination.md) can use `grid.page()`. [The M6 plan](../implementation/m6-plan.md) records this milestone's migration scope. [The interactive Grid demo](grid-demo.md) exercises every implemented option, method, and declarative marker. [The two-layout example](advanced-grid-example.md) shows grouped headings and sticky positioning with authored HTML/CSS and no new API.
 
 [^grid]: Grid binding and validation runtime
 [^rules]: Shared Form/Grid rule runner

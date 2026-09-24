@@ -219,6 +219,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
   template.replaceWith(anchor);
   const records = new Map<RowId, RenderedRow<T>>();
   const drafts = new Map<RowId, Map<string, FieldDraft>>();
+  const issueText = new Map<RowId, Map<string, string[]>>();
   let reconciling = false;
   const rowIds = new WeakMap<HTMLTableRowElement, RowId>();
   const selects = new WeakMap<HTMLSelectElement, { id: RowId; binding: BoundSelect }>();
@@ -445,32 +446,36 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       issues.push(...runner.validate(descriptor.validate, value,
         ruleContext(row, descriptor.name, values, element)));
     }
-    if (record) {
-      const byField = new Map<string, ValidationIssue[]>();
-      for (const issue of issues) {
-        const group = byField.get(issue.field) ?? [];
-        group.push(issue);
-        byField.set(issue.field, group);
-      }
-      for (const bound of record.texts) {
-        const invalid = byField.has(bound.descriptor.name);
-        if (invalid) bound.element.setAttribute("aria-invalid", "true");
-        else if (bound.invalid === null) bound.element.removeAttribute("aria-invalid");
-        else bound.element.setAttribute("aria-invalid", bound.invalid);
-      }
-      for (const bound of record.selects) {
-        if (!bound.descriptor.name) continue;
-        const invalid = byField.has(bound.descriptor.name);
-        if (invalid) bound.element.setAttribute("aria-invalid", "true");
-        else if (bound.invalid === null) bound.element.removeAttribute("aria-invalid");
-        else bound.element.setAttribute("aria-invalid", bound.invalid);
-      }
-      for (const [field, region] of record.errors) {
-        region.textContent = (byField.get(field) ?? []).map(issue => issue.message).join(" ");
-      }
-      record.hasIssues = issues.length > 0;
+    const byField = new Map<string, string[]>();
+    for (const issue of issues) {
+      const messages = byField.get(issue.field) ?? [];
+      messages.push(issue.message);
+      byField.set(issue.field, messages);
     }
+    if (issues.length) issueText.set(row.id, byField);
+    else issueText.delete(row.id);
+    if (record) showIssues(record, byField);
     return issues;
+  }
+
+  function showIssues(record: RenderedRow<T>, byField: ReadonlyMap<string, readonly string[]>): void {
+    for (const bound of record.texts) {
+      const invalid = byField.has(bound.descriptor.name);
+      if (invalid) bound.element.setAttribute("aria-invalid", "true");
+      else if (bound.invalid === null) bound.element.removeAttribute("aria-invalid");
+      else bound.element.setAttribute("aria-invalid", bound.invalid);
+    }
+    for (const bound of record.selects) {
+      if (!bound.descriptor.name) continue;
+      const invalid = byField.has(bound.descriptor.name);
+      if (invalid) bound.element.setAttribute("aria-invalid", "true");
+      else if (bound.invalid === null) bound.element.removeAttribute("aria-invalid");
+      else bound.element.setAttribute("aria-invalid", bound.invalid);
+    }
+    for (const [field, region] of record.errors) {
+      region.textContent = (byField.get(field) ?? []).join(" ");
+    }
+    record.hasIssues = byField.size > 0;
   }
 
   function resetRecord(record: RenderedRow<T>): void {
@@ -544,6 +549,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
   function onRows(event: RowsEvent): void {
     if (event.type === "replace" || (event.type === "revert" && event.id === undefined)) {
       drafts.clear();
+      issueText.clear();
       for (const record of records.values()) {
         resetRecord(record);
         clearIssues(record);
@@ -551,6 +557,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     } else if (event.type === "remove" || event.type === "revert") {
       if (event.id !== undefined) {
         drafts.delete(event.id);
+        issueText.delete(event.id);
         const record = records.get(event.id);
         if (record) {
           resetRecord(record);
@@ -567,6 +574,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
         if (!pending.size) drafts.delete(event.id);
       }
       const record = records.get(event.id);
+      if (!reconciling) issueText.delete(event.id);
       if (record) {
         if (pending) resetRecord(record);
         if (!reconciling) clearIssues(record);
@@ -593,15 +601,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     const focusedRow = focused instanceof Element ? focused.closest("tr") : null;
     const focusedId = focusedRow && rowIds.get(focusedRow);
     const entries = options.rows.entries();
-    const live = new Set(entries.map(row => row.id));
-    for (const [id, record] of records) {
-      if (!live.has(id)) {
-        record.element.remove();
-        for (const select of record.selects) select.release();
-        records.delete(id);
-      }
-    }
-    if (selected !== null && !live.has(selected)) updateSelection(null, null);
+    if (selected !== null && !entries.some(row => row.id === selected)) updateSelection(null, null);
     if (disposed) return;
     const filtered = filter ? entries.filter(row => filter!(row.value)) : [...entries];
     if (sort) filtered.sort((left, right) => sort!(left.value, right.value));
@@ -616,8 +616,12 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       if (!record) {
         record = createRecord(snapshot.id);
         records.set(snapshot.id, record);
+        renderRecord(record, snapshot);
+        const issues = issueText.get(snapshot.id);
+        if (issues) showIssues(record, issues);
+      } else {
+        renderRecord(record, snapshot);
       }
-      renderRecord(record, snapshot);
     }
     if (nextIds.length !== visibleIds.length || nextIds.some((id, index) => id !== visibleIds[index])) {
       const nextSet = new Set(nextIds);
@@ -651,6 +655,12 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
         next.focus({ preventScroll: true });
       }
       visibleIds = nextIds;
+      for (const [id, record] of records) {
+        if (nextSet.has(id)) continue;
+        record.element.remove();
+        for (const select of record.selects) select.release();
+        records.delete(id);
+      }
     }
   }
 
@@ -805,6 +815,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       for (const release of templateReleases) release();
       records.clear();
       drafts.clear();
+      issueText.clear();
       visibleIds = [];
       for (const [column, original] of headerOriginals) {
         if (original === null) column.removeAttribute("aria-sort");

@@ -35,12 +35,12 @@ sources:
   - id: wai-multi
     resource: https://www.w3.org/WAI/tutorials/tables/multi-level/
     title: W3C WAI multi-level table headers
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T22:13:24Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T23:26:30Z }
 verified:
-  - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
+  - { by: codex/gpt-6-sol, at: 2026-09-24T23:31:17Z }
 ---
 
-The M10 reference screen keeps a native table, authored HTML and CSS, and the existing `bindGrid` contract. It demonstrates grouped headings and fixed positioning as markup and styling concerns; the framework still owns row binding and row-keyed state.
+This completed M10.1 structural regression screen keeps a native table, authored HTML and CSS, and the existing `bindGrid` contract. It demonstrates grouped headings and fixed positioning as markup and styling concerns; the framework still owns row binding and row-keyed state.
 
 # Scenario
 
@@ -129,4 +129,4 @@ Do not copy the `<thead>` into a second table or put a static `id` in `data-row-
 
 # Related
 
-[Basic Grid](grid.md) defines `bindGrid` and row identity. [M10 plan](../implementation/m10-plan.md) records the staged capability decisions. [Employee example](employee-example.md) remains the basic CVC screen.
+[Basic Grid](grid.md) defines `bindGrid` and row identity. [Interactive Grid demo](grid-demo.md) exercises the complete current Grid contract. [M10 plan](../implementation/m10-plan.md) records the staged capability decisions. [Employee example](employee-example.md) remains the basic CVC screen.

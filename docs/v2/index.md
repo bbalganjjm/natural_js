@@ -1,5 +1,6 @@
 # Concepts
 
+* [Interactive Grid contract demo](grid-demo.md) - Exercise every implemented Grid option, method, and declarative marker on one authored native table while inspecting raw Rows state. (draft)
 * [Authored advanced Grid in two layouts](advanced-grid-example.md) - Grouped native table headings and sticky rows and columns in two authored MDI layouts with no new Grid API. (draft)
 
 * [Natural-JS 2.0 module boundaries](architecture.md) - Small role modules, one-way imports, and evidence-based sharing keep 2.0 easy to navigate. (draft)

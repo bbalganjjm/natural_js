@@ -1,5 +1,13 @@
 ## 2026-09-25
 
+* **Creation** The M10 plan proposes one optional `initialPage` constructor option, reusing the existing page-request shape to avoid the measured first-bind 5,000-row DOM peak. It defines validation, unchanged defaults, performance and browser gates; the public API is not implemented pending review.
+
+* **Verification** The Grid contract demo passed five focused cases each in Chromium, Firefox, and WebKit, including nested inputs, locale messages, Rows changes, rebind, axe-tagged A/AA, and 320px text spacing. Build, typecheck, Vitest 81/81, installed JS/TS and exact-tarball three-engine consumers, Grid lifetime regressions, M4 CVC and two-layout cases (23/23 per engine), and fixed 1,000-row speed budgets passed. Independent source audit found no severe lifetime regression and prompted a visible locale-rebind warning plus textarea/checkbox coverage.
+
+* **Update** M10's Grid now releases offscreen row DOM and Select ownership after view/focus reconciliation, while retaining draft and issue text by RowId. A 5,000-row/10-field, 198-transition same-process Chromium comparison reduced forced-GC DOM nodes from 105,238 to 1,288 after paging, with traversal about 27–30% slower and initial full-render peak unchanged. Forward and reverse raw JSON evidence is in the M10 plan; no public Grid option was added.
+
+* **Decision** The user replaced M10's inferred 40-row reference with an interactive demo page for every supported Grid option and behavior. The two authored layouts remain structural regression fixtures; unimplemented 1.x-style advanced operations are tracked separately and must not appear as working demo features.
+
 * **Creation** M10's inferred 40-row advanced Grid reference screen now runs as two authored MDI layouts with native grouped headings, sticky header/first column, nested row-local choices, and the existing CVC/Grid API. Chromium, Firefox, and WebKit focused tests pass 4/4 each, using the repository-local Playwright browser cache for Firefox after the default cache failed to launch.
 * **Update** A read-only M10.2 audit identified offscreen Grid clone retention, DOM-owned validation error state, and initial full-render peak cost. The M10 plan records a narrow internal release proposal and provisional 5,000-row workload without changing runtime or public API.
 * **Correction** Independent source/package checks tightened the M8 API call-site wording, M7 shared Rows and Tabs example scope, Popup focus exception, UI parser-failure candidate wording, and M9 next-action/List scope. Nine previously stale concepts were re-audited; two Grid concepts were also independently checked. All 11 now have refreshed `verified` fields and the changed/full OKF checks have no warnings.

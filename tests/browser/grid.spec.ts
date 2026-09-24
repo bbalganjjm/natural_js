@@ -44,8 +44,10 @@ test("nested row options keep raw values, row identity, and native table markup"
     const filtered = [...table.tBodies[0].rows].map(row => row.querySelector("button")?.textContent);
     const stillSelected = handle.selected() === first.id;
     handle.setFilter(null);
-    const sameButton = [...table.querySelectorAll("button")].includes(firstButton);
-    const firstSelect = firstButton.closest("tr")!.querySelector("select")!;
+    const returnedButton = [...table.querySelectorAll("button")].find(button => button.textContent === "2")!;
+    const recreated = returnedButton !== firstButton;
+    const returnedPressed = returnedButton.getAttribute("aria-pressed");
+    const firstSelect = returnedButton.closest("tr")!.querySelector("select")!;
     firstSelect.focus();
     rows.set(first.id, "b", 3);
     const focusKept = document.activeElement === firstSelect;
@@ -68,7 +70,7 @@ test("nested row options keep raw values, row identity, and native table markup"
     rows.dispose();
     host.remove();
     return {
-      initial, pressed, sorted, focusAfterSort, filtered, stillSelected, sameButton, focusKept,
+      initial, pressed, sorted, focusAfterSort, filtered, stillSelected, recreated, returnedPressed, focusKept,
       emptyValue, rawValue, invalid: invalid.issues.map((issue: { rule: string }) => issue.rule),
       missingSelection, restored: restored.valid, noIds, templateRestored, noLateRender, selections
     };
@@ -83,7 +85,8 @@ test("nested row options keep raw values, row identity, and native table markup"
     focusAfterSort: true,
     filtered: ["1"],
     stillSelected: true,
-    sameButton: true,
+    recreated: true,
+    returnedPressed: "true",
     focusKept: true,
     emptyValue: null,
     rawValue: 22,

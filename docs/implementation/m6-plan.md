@@ -28,7 +28,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current Grid behavior
-    git_blob: dedeca30ef8f10a78172748d8cb9911a68b7da03
+    git_blob: 5599945bf62763fd645074c3475c8eef1a16a371
   - id: list
     resource: ../../src/ui/list.ts
     title: M6 List implementation
@@ -65,7 +65,9 @@ sources:
     resource: ../../v1/docs/ui/list.md
     title: Preserved 1.x List contract
     git_blob: 1e93437c791acfc6b3f024c9d9f10c25349997cd
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T15:19:35Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T23:26:30Z }
+verified:
+  - { by: codex/gpt-6-sol, at: 2026-09-24T23:31:17Z }
 ---
 
 The user approved M6 on 2026-09-24 after the M5 data and rule gate. This plan governs the first-release data UI on authored HTML and CSS while keeping the public surface small. The usage contract below records the public decisions before integration.
@@ -207,7 +209,7 @@ Verification favors focused tests for high-risk behavior over copying every lega
 
 # Open questions
 
-- List/Grid cache row elements for revisited pages. At 1,000 rows/10 fields, the fixed List fixture creates all 1,000 rows before `setPage(25)` (12.3 ms, 12,008 connected elements); later page switches reuse those records. This meets M6 budgets but is not virtualized. If larger data sets need lower peak memory, review a focused M10 strategy rather than adding a generic data engine now.
+- At M6 completion, List and Grid cached row elements for revisited pages. The fixed 1,000-row/10-field List fixture created all 1,000 rows before `setPage(25)` (12.3 ms, 12,008 connected elements); later page switches reused those records. This met M6 budgets but was not virtualized. M10 later changed Grid's offscreen record lifetime; List's measured behavior remains as recorded here.
 - Browser heap samples lack controlled garbage collection and are diagnostic only. Another host needs its own baseline before absolute performance comparisons.
 - The system-installed Firefox does not expose the Playwright protocol, but a fresh Playwright Firefox build passed the M6 suite on this Windows host. Keep the browser cache path explicit when reproducing this result.
 - M6 agent tasks passed accurately with no code retries, but their read output is larger and counted differently from M5. M8 must use one output-byte method for the fixed tasks and trim broad history/test reads before claiming agent token efficiency.
